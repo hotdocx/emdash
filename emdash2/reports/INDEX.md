@@ -286,8 +286,9 @@ both computation laws. Focused checks and the exact inherited `1020 + 159`
 warning footprint are green, with no changed-file warning. Synchronized
 health passes all 100 exact-content targets at
 `sha256:70228c029d8c2844ae9d1259cfd056ba855481f39c53c66f074d408b5e33b25d`;
-the local checkpoint remains pending. A HIT remains conditional on a consumer
-needing induction over generation steps or executable cover normal forms.
+the synchronized generic tranche is included in local checkpoint `d826526`.
+A HIT remains conditional on a consumer needing induction over generation
+steps or executable cover normal forms.
 The affine audit has now instantiated this generic internal
 construction with whole lifted chart presentations. Split rule-free probes
 construct every literal localization chart arrow internally, eliminate an

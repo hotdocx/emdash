@@ -4104,10 +4104,10 @@ would require more than this opaque capability.
 
 Status: the rule-free generic source and nine-assertion reviewer are promoted.
 Focused checks, exact full-import warning comparison, strict audit/catalog,
-and synchronized 100-target health are green; the local checkpoint is
-pending. The earlier expectation that internal generation necessarily
-requires a saturation HIT is therefore superseded for the universal-property
-interface.
+and synchronized 100-target health are green; the synchronized tranche is
+included in local checkpoint `d826526`. The earlier expectation that internal
+generation necessarily requires a saturation HIT is therefore superseded for
+the universal-property interface.
 
 There is a direct internal construction available in the present logical
 framework. For witness-rich `G`, define
@@ -5551,7 +5551,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-09c0 | Compare supplied, extensional-direct, and propositionally reflected Zariski coverhood | Research gate | PSSS-09b1; PSSS-09b2 only if its convenience API is consumed |
 | PSSS-09cT | Genuine propositional-truncation HIT/reflector | Conditional sub-plan; not required by the internal intersection construction | A consumer requires retained-generation induction/normalization or another genuinely truncated quotient |
 | PSSS-09cGP | Primitive generated-topology capability with generator inclusion and leastness | Coverage-indexed rule-free representation/warning probe green; witness-rich presentation-indexed refinement selected for the affine audit; promotion remains consumer-gated | Concrete affine presentation relation or honest base coverage plus consumer |
-| PSSS-09cGI | Internal generated-topology construction | Rule-free generic source and nine-assertion reviewer promoted; focused/exact-warning/audit/catalog and synchronized 100-target health green; checkpoint pending | PSSS-05c checkpoint and internal intersection construction; direct affine specialization remains PSSS-10dG |
+| PSSS-09cGI | Internal generated-topology construction | Rule-free generic source and nine-assertion reviewer green through focused/exact-warning/audit/catalog and synchronized 100-target health; local checkpoint `d826526` | PSSS-05c checkpoint and internal intersection construction; direct affine specialization remains PSSS-10dG |
 | PSSS-09cZ1 | Supplied lawful topology plus proposition-valued Zariski-basis compatibility | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 68-target health, and full CI; locally checkpointed at `d808c29` | PSSS-09b1 and `GrothTopology` |
 | PSSS-09cZ2 | Intended non-chaotic supplied Zariski topology or first sheaf consumer | Consumer/research gate | PSSS-09cZ1 |
 | PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Internal generic generation and direct affine instantiation are probe-green; promotion and subcanonicity remain separate gates | Promoted PSSS-09cGI/PSSS-10dG or one of PSSS-09cGP/PSSS-09cZ2; PSSS-05b for subcanonicity |
