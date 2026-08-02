@@ -40,8 +40,8 @@ rule exposes the selected universal factor; generic `tapp1` owns naturality,
 while the objectwise restriction equation remains a derived construction
 audit. Internal-cone research plus maintained source, reviewer, and central
 checks, exact warning comparison, strict audit, maintained aggregates, the
-fresh catalog, 70-target health, and full integration CI are green. The
-authorized local checkpoint remains pending under PSSS-D-071/PSSS-D-072.
+fresh catalog, 70-target health, and full integration CI are green. It is
+locally checkpointed at `a724638` under PSSS-D-071/PSSS-D-072.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -2395,8 +2395,7 @@ gates. PSSS-08c0C closes only the internal-cone gate below.
 
 Status: internal-cone candidate green through focused and maintained checks,
 exact warning comparison, strict audit, maintained aggregates, fresh catalog,
-70-target health, and full integration CI. The authorized local checkpoint
-remains.
+70-target health, and full integration CI; locally checkpointed at `a724638`.
 
 The first half is a theorem-level construction audit. For `f:V->U`, `g:W->V`,
 and actual support membership `m:f in D_O(s)`, the PSSS-08b restriction theorem
@@ -3393,7 +3392,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08a | CommRing-valued presheaves and arrowwise invertibility support | Green through full integration CI; locally checkpointed | PSSS-08b remains separately gated |
 | PSSS-08b | Whole ordinary invertibility-sieve assembly | Green through full integration CI; locally checkpointed | PSSS-08c and PSSS-09 remain separately gated |
 | PSSS-08c0 | Invertibility-cover observation and memberwise localization factor | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 70-target health, and full CI; locally checkpointed at `9db8307` | PSSS-08b, PSSS-07a, and PSSS-04a |
-| PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; authorized local checkpoint pending | PSSS-08c0 |
+| PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0C and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |

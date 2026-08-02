@@ -2071,7 +2071,8 @@ summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, strict kernel audit, and fresh strict catalog verification.
 Neither a limiting/descent equivalence nor sheafhood, `Spec`, or a scheme is
-claimed.
+claimed. The tranche is included in the authorized local PSSS-08c0C
+checkpoint `a724638`.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
