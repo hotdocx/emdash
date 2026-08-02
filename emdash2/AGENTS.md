@@ -37,6 +37,8 @@ ordinary-invertibility-sieve extension is
 `emdash3_2_commutative_algebra_presheaves.lp`;
 the topology-visible invertibility-cover and memberwise localization-factor
 extension is `emdash3_2_commutative_algebra_locality.lp`;
+the localization-element to coherent matching-family extension is
+`emdash3_2_commutative_algebra_matching.lp`;
 the presented finite basic-open Zariski-cover, selected containment, and
 bounded family base-change extension is
 `emdash3_2_commutative_algebra_zariski.lp`;
@@ -132,7 +134,15 @@ Use the following order:
    has a closed zero-ring computation but deliberately claims no limiting
    cone/descent equivalence, sheaf, ringed-site package, generated topology,
    `Spec`, or scheme;
-17. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
+17. `emdash3_2_commutative_algebra_matching.lp` for the Path-valued carrier
+   family over support elements, its Pi category of internally coherent
+   matching families, and the functor sending a localization element and its
+   equality paths to the corresponding matching section. Its one literal
+   component rule uses the selected full fibre-covariance carrier action;
+   generic Pi/Catd/PathLift owners retain coherence and arrow action. It
+   deliberately supplies no inverse/glue, descent equivalence, sheafhood,
+   limiting claim, generated topology, `Spec`, or scheme;
+18. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
    of universal-property localizations, presented affine basic-open arrows,
    elementwise localization base-change factors and triangles, and returned
    ordinary-sieve pullback membership. It also retains explicit containment
@@ -141,7 +151,7 @@ Use the following order:
    generic finite owner. It is rule-free and deliberately declares no global
    localization choice, specialized rigid membership facade, propositional
    truncation, generated coverage/topology, subcanonicity, `Spec`, or scheme;
-18. `emdash3_2_commutative_algebra_zariski_topology.lp` for the rule-free
+19. `emdash3_2_commutative_algebra_zariski_topology.lp` for the rule-free
    property and package saying that every sieve containing a selected finite
    Zariski basic-open presentation covers in an already supplied topology on
    `Op_cat CommRing_cat`. It retains presentation and membership data, proves
@@ -149,17 +159,17 @@ Use the following order:
    as a feasibility model; it does not construct the least/generated Zariski
    topology, choose localizations, or declare truncation, sheafification,
    subcanonicity, `Spec`, or schemes;
-19. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+20. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
    endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
    directed negative results;
-20. `emdash3_2_checks.lp` for executable regression statements;
-21. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+21. `emdash3_2_checks.lp` for executable regression statements;
+22. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
    for current architecture and development SOP;
-22. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-23. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+23. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+24. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
-24. `reports/INDEX.md` for task-specific plans and decision records.
-25. `book/book.json` and `book/evidence.json` for book source
+25. `reports/INDEX.md` for task-specific plans and decision records.
+26. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

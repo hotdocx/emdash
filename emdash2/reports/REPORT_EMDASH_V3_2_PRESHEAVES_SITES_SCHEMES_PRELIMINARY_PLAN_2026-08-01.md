@@ -42,6 +42,16 @@ audit. Internal-cone research plus maintained source, reviewer, and central
 checks, exact warning comparison, strict audit, maintained aggregates, the
 fresh catalog, 70-target health, and full integration CI are green. It is
 locally checkpointed at `a724638` under PSSS-D-071/PSSS-D-072.
+`PSSS-08c0D` is the current bounded tranche: it pulls the Path-valued
+carrier family over those support elements, forms the Pi category of coherent
+matching families, and sends a localization element and its equality paths to
+the matching section whose literal component applies the selected universal
+factor. Focused owner, reviewer, and central checks, exact warning comparison,
+strict audits, maintained aggregates, the 1,932-check catalog, synchronized
+72-target health, and full integration CI are green. Final prose is
+synchronized and the tranche is ready for the authorized local checkpoint.
+It supplies only the restriction direction, not an inverse/glue or descent
+equivalence.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -2494,9 +2504,128 @@ affine `Spec`, or overlap evaluation. The phase does not authorize generated
 topology, truncation HIT, or general sheafification work unless that consumer
 demonstrates a concrete need.
 
+##### PSSS-08c0D — Localization elements as coherent matching families
+
+Status: implementation green through focused checks, exact warning
+comparison, strict audits, maintained aggregates, catalog/health
+synchronization, and full integration CI; ready for the authorized local
+checkpoint.
+
+The first direct consumer of the internal cone is the restriction half of the
+historical Cartier locality equation. Pull the selected Path-valued ring
+carrier family back along the internal value diagram:
+
+```text
+MatchingCarrier_O(s)
+  = Pullback_catd(comm_ring_carrier_catd, valueDiagram_O(s))
+
+MatchingCarrier_O(s)[V,f,m] = Path_cat(|O(V)|)
+
+Matching_O(s) = Pi_(V,f,m in Elem(D_O(s))) MatchingCarrier_O(s)[V,f,m].
+```
+
+Because `Matching_O(s)` is the active `Pi_cat`, one of its objects is not a
+raw product of unrelated carrier elements. It is an internally coherent
+section over every arrow of the complete support-elements category, including
+membership-proof transport and higher/equality action inherited from Catd.
+
+For a chosen localization `ell : Loc_{O(U)}(s)` and
+`x : |O(U)[1/s]_ell|`, the selected stable section has the literal computation
+
+```text
+matchingSection(ell,x)[V,f,m]
+  -> factor_O(ell;f,m)(x).
+```
+
+There is a crucial normal-form qualification. Semantically postcomposing the
+ring-valued factor cone by `comm_ring_carrier_catd` forms a carrier-valued
+transformation, but generic postcomposition caps the carrier action before an
+element has been supplied. The resulting component therefore stops at the
+deliberately opaque direct capped action. This is consistent with PSSS-D-055:
+the carrier API exposes a full Path-map hom action and deliberately has no
+competing direct `fapp1_fapp0` beta.
+
+The successful component instead follows that API's intended order. It first
+passes `x` to
+
+```text
+fib_cov_tapp0_func(
+  comm_ring_carrier_catd,
+  localizationTarget,
+  O(V),
+  x)
+```
+
+and only then applies this functor to the selected structured factor map. The
+existing full-action projection reduces the result to
+`comm_ring_hom_apply(factor,x)`. No new carrier-action rule is needed.
+
+The owner-position probe also rejects a broader repair. A generic
+identity-second horizontal-cut rule intended to preserve the full action
+still normalized through the capped projection, failed to make the component
+compute, and added a new unjoinable critical pair. Likewise, the earlier
+PSSS-08b direct capped carrier rule remains rejected for decision-tree and
+generic-owner reasons. No proof-time `Const_func`/`Const_catd` bridge, generic
+projection/cut conversion, or duplicated carrier beta is promoted from these
+experiments.
+
+The selected public boundary is therefore small:
+
+```text
+comm_ring_psh_localization_matching_section(ell,x)
+  : Obj(Matching_O(s))
+
+comm_ring_psh_localization_matching_restriction_func(ell)
+  : Path_cat(|O(U)[1/s]_ell|) -> Matching_O(s).
+```
+
+One literal `tapp0_fapp0` beta exposes the factor-map application. All four
+structural slots on its LHS are anonymous: the nested Sigma support object and
+stable matching-section head recover the base, families, endpoints, and
+result fibre. `path_lift_fapp0` supplies the functor's object action and maps
+equality paths between localization elements to arrows between their coherent
+matching sections. Pi, Catd, and PathLift remain the respective owners of
+matching coherence, support-arrow action, and localization-path action; the
+public interface carries no external naturality square, identity proof, or
+composition proof.
+
+The maintained reviewer checks the literal carrier fibre, direct section
+component, PathLift object action, end-to-end functor-then-Pi evaluation, and
+the type of equality-path action. Its closed zero-ring model evaluates the
+section at the terminal support member to the actual restriction of `tt`, both
+directly and after applying the restriction functor. Thus this is executable
+matching data rather than only package formation.
+
+The maintained module has 135 lines, four symbols, one injective section
+owner, one rewrite rule, and zero unification rules. Its 243-line reviewer has
+eight assertions. Warning-enabled locality baseline, matching owner, and
+reviewer logs ending in `20260801-234652`, `20260801-234706`, and
+`20260801-234729` inherit exactly `1179 = 1020 + 159`, with no warning at the
+new owner or reviewer. The module-specific strict audit finds zero
+reconstructible slots across zero unreviewed clauses; the full audit remains
+at zero unreviewed clauses and 52 annotated slots across 32 intentional
+kernel clauses. Maintained `make check` and the complete reviewer suite pass.
+Five new central diagnostics raise the strict catalog to 1,932 checks across
+80 mapped areas with zero legacy or unclassified entries. Health passes all
+72 source/example targets in 590.748 summed check-seconds at source snapshot
+`sha256:939fd71769182759327e8aa3a759f47019d7542a1f45e6d9c08dd9c0c9504d5e`.
+Full integration CI independently passes all 72 Lambdapi targets in 528.584
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+
+This tranche deliberately stops before an inverse. A future `glue` direction
+must be justified by a concrete selected descent/basic-open/affine consumer,
+compute at a useful observation, and derive its laws without externalizing
+naturality or inserting an order-sensitive rigid alias. Only then may the two
+directions be called a descent equivalence or used to package sheafhood.
+Generated topology, propositional truncation, and general sheafification stay
+on their independent research gates unless that consumer shows they are
+actually required.
+
 ##### PSSS-08c1 — Ringed sites, selected sheaves, and localization descent
 
-Status: proposed after checkpointing PSSS-08c0C and closing the independent
+Status: proposed after checkpointing PSSS-08c0D and closing the independent
 PSSS-05b descent gate.
 
 - package a CommRing-valued presheaf together with the selected sheaf datum;
@@ -3369,6 +3498,24 @@ consumer demonstrates that nontransitive unification requires it.
   this cone computationally in selected descent, basic-open restriction,
   `Spec`, overlap, or chart evaluation; it must not drift into general
   sheafification infrastructure without such a consumer.
+- **PSSS-D-073:** construct localization-to-matching components through the
+  selected full fibre-covariance carrier action, supplying the localization
+  element before the factor map. Reject semantic postcomposition that caps
+  too early, the direct capped carrier beta, and the tested generic
+  identity-second horizontal-cut rule; the latter neither restores
+  computation nor remains warning-neutral.
+- **PSSS-D-074:** package each component family as a stable object of the
+  existing `Pi_cat`, with exactly one literal `tapp0_fapp0` beta whose four
+  structural slots remain inferred. Then use `path_lift_fapp0` to obtain the
+  functor on localization elements and equality paths. Pi/Catd/PathLift own
+  coherence and arrow action; no external naturality, identity, or
+  composition fields are propagated.
+- **PSSS-D-075:** treat PSSS-08c0D strictly as the executable restriction
+  direction from localization elements to matching families. Require a
+  consumer-justified, computing inverse/glue and derived laws before claiming
+  descent, sheafhood, a limiting comparison, or a ringed-site package. Do not
+  divert into generated topology, truncation, or general sheafification while
+  that concrete computational gate remains open.
 
 ## 19. Side-Task Ledger
 
@@ -3393,7 +3540,8 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08b | Whole ordinary invertibility-sieve assembly | Green through full integration CI; locally checkpointed | PSSS-08c and PSSS-09 remain separately gated |
 | PSSS-08c0 | Invertibility-cover observation and memberwise localization factor | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 70-target health, and full CI; locally checkpointed at `9db8307` | PSSS-08b, PSSS-07a, and PSSS-04a |
 | PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
-| PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0C and PSSS-05b |
+| PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; ready for authorized local checkpoint | PSSS-08c0C |
+| PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0D and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
 | PSSS-09b2 | Full transparent sieve-membership recursion specialization usability | Performance/research gate; rigid workaround rejected | PSSS-09b1 plus a real non-singleton consumer or bounded elaborator improvement |
@@ -3587,6 +3735,34 @@ PSSS-08b is successful when:
     warning comparison, strict audits, catalog/health synchronization,
     current-authority prose, and full integration CI are green before the
     authorized local checkpoint.
+
+PSSS-08c0D is successful when:
+
+1. the matching carrier family is the transparent pullback of
+   `comm_ring_carrier_catd` along the internal support value diagram, so its
+   literal `(V,f,m)` fibre computes to `Path_cat(|O(V)|)` and its arrow action
+   remains with Catd;
+2. `CommRingPshLocalizationMatching_cat` is the existing Pi category of that
+   family, so matching compatibility is internal rather than stored as an
+   external family of equations;
+3. one stable matching-section owner computes at a literal support element to
+   the selected localization factor applied to the source element through
+   `fib_cov_tapp0_func`, preserving the full-action carrier normal form;
+4. the component beta keeps all reconstructible structural LHS slots
+   anonymous, adds no warning, and does not introduce a direct capped carrier
+   action, generic projection/cut bridge, or proof-time constant-family
+   comparison;
+5. `path_lift_fapp0` packages the section-valued function as a genuine functor
+   and its `fapp1_fapp0` maps equality paths internally to arrows between
+   coherent matching sections;
+6. a closed zero-ring consumer evaluates both the direct section and the
+   restriction-functor result at the terminal support member to the actual
+   presheaf restriction;
+7. no inverse/glue, descent equivalence, sheafhood, limiting claim, generated
+   topology, truncation, sheafification, `Spec`, or scheme is asserted; and
+8. focused owner/reviewer/central checks, exact warning comparison, strict
+   audit, catalog/health synchronization, current-authority prose, and full
+   integration CI are green before the authorized local checkpoint.
 
 PSSS-09b1 is successful when:
 

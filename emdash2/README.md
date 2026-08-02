@@ -48,8 +48,8 @@ mathematical reading is in
 - `emdash3_2_commutative_algebra_category.lp` owns structured ring morphisms,
   their preservation/sethood theorems, transparent explicit-map observations,
   pointwise structured-map extensionality, `CommRing_cat`, and the selected
-  stable identity/composition comparisons. A carrier functor remains a later
-  consumer-gated layer.
+  stable identity/composition comparisons. The invertibility-sieve consumer
+  selects its full-action carrier functor without a competing capped rule.
 - `emdash3_2_commutative_algebra_finite.lp` owns finite ring sums and dot
   products, their structured-map preservation theorems, retained unimodular
   coefficient data, and algebraic finite Zariski-cover presentations. It does
@@ -71,7 +71,14 @@ mathematical reading is in
 - `emdash3_2_commutative_algebra_presheaves.lp` transparently presents
   CommRing-valued presheaves, their actual structured restriction maps,
   pointwise identity/composition paths, and proposition-valued invertibility
-  support along arrows. It does not yet assemble a whole sieve or ringed site.
+  support along arrows. It assembles that support as a higher and ordinary
+  sieve with literal membership computation, but no ringed site.
+- `emdash3_2_commutative_algebra_locality.lp` packages selected localization
+  factors over all elements of the invertibility sieve as one internal cone.
+- `emdash3_2_commutative_algebra_matching.lp` sends localization elements and
+  equality paths to coherent carrier-valued matching sections, with literal
+  components computing by those selected factors. It does not yet supply an
+  inverse/glue or descent equivalence.
 - `emdash3_2_walking_end_hit.lp` owns the walking HIT, Code,
   encode/decode, Nat comparison, and directed negative results.
 - `emdash3_2_checks.lp` and `examples/` contain executable
@@ -112,8 +119,13 @@ The active one-way library extensions are:
   pointwise ring-map composition plus universal-property iterated/product-
   localization comparison data, without fractions or package equality;
 - `emdash3_2_commutative_algebra_presheaves.lp` — transparent ring-valued
-  presheaves, computational restriction, and arrowwise unit support, without
-  a carrier functor, whole sieve, topology, or sheaf package;
+  presheaves, computational restriction, full-action carrier support, and the
+  whole ordinary invertibility sieve, without topology or a sheaf package;
+- `emdash3_2_commutative_algebra_locality.lp` — topology-visible support and
+  the internal localization-factor cone over its category of elements;
+- `emdash3_2_commutative_algebra_matching.lp` — coherent Pi matching families
+  and computational restriction from localization elements, without a
+  glue/inverse or descent claim;
 - `emdash3_2_eq1_hom_action.lp` — native equality-valued next-hom
   action and groupoidality;
 - `emdash3_2_eq1_evidence_property.lp` — evidence-property,

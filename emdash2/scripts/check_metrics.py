@@ -34,6 +34,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_sieves.lp"),
     Path("emdash3_2_sites.lp"),
     Path("emdash3_2_commutative_algebra_locality.lp"),
+    Path("emdash3_2_commutative_algebra_matching.lp"),
     Path("emdash3_2_commutative_algebra_zariski.lp"),
     Path("emdash3_2_commutative_algebra_zariski_topology.lp"),
     Path("emdash3_2_checks.lp"),

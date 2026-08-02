@@ -552,6 +552,23 @@ audit
 identifies the cone as a limit or implies a descent theorem, sheaf, or locally
 ringed structure.
 
+The computational matching-family consumer may be written
+
+```text
+Matching_O(s) = Pi_(V,f,m in Elem(D_O(s))) Path_cat(|O(V)|)
+restrict_ell : Path_cat(|O(U)[1/s]_ell|) -> Matching_O(s)
+restrict_ell(x)[V,f,m] = factor_O(ell;f,m)(x).
+```
+
+The literal owners are `CommRingPshLocalizationMatching_cat`,
+`comm_ring_psh_localization_matching_section`, and
+`comm_ring_psh_localization_matching_restriction_func`. `Matching_O(s)` means
+the internally coherent Pi section category, not a raw product of unrelated
+elements. `restrict_ell` includes equality-path action through PathLift. Do
+not add external naturality squares to this notation, and do not call it a
+descent equivalence until a separately selected `glue_ell` and its laws have
+been constructed from a real consumer.
+
 For the separately promoted finite-family layer, comments and examples may
 write
 

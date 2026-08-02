@@ -78,6 +78,16 @@ objectwise restriction equation as a construction audit. The zero-ring
 reviewer checks that the literal cone component reduces to the actual
 constant-presheaf restriction. The limiting/descent comparison, sheafhood,
 ringed sites, generated topology, `Spec`, and schemes remain separate gates.
+`emdash3_2_commutative_algebra_matching.lp` is the PSSS-08c0D executable
+matching-family layer. It pulls the Path-valued ring-carrier family back over
+the complete category of elements of `D(s)`, forms its Pi category of coherent
+sections, and sends every element of a chosen localization to the section
+whose literal `(V,f,m)` component is application of the selected universal
+factor. The component uses the full fibre-covariance owner so carrier
+application computes; PathLift supplies equality-path action and the Pi/Catd
+owners retain coherence internally. The module supplies only this restriction
+direction, not a glue/inverse, descent equivalence, sheaf, limiting claim,
+generated topology, `Spec`, or scheme.
 `emdash3_2_commutative_algebra_zariski.lp` is the rule-free PSSS-09a/09b1
 layer:
 it combines an algebraic unimodular presentation with a dependent family of

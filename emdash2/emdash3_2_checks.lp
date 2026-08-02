@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -21361,3 +21361,136 @@ assert [K : Cat]
         (@comm_ring_psh_localization_factor_map_at_member
           K O U s localization V f member)));
 /* End of the PSSS-08c0/PSSS-08c0C internal locality-cone diagnostics. */
+
+// catalog-area: Localization matching restriction
+// A literal matching fibre is the Path-valued carrier of O(V).
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @Fibre_cat
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    (@comm_ring_psh_localization_matching_catd K O U s)
+    (@comm_ring_psh_invertibility_element K O U s V f member)
+  ≡ Path_cat (@comm_ring_carrier (@comm_ring_psh_value K O V));
+
+// The coherent section computes pointwise by the selected localization factor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f)))
+  (x : τ (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization))) ⊢
+  @piapp0
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    (@comm_ring_psh_localization_matching_catd K O U s)
+    (@comm_ring_psh_localization_matching_section
+      K O U s localization x)
+    (@comm_ring_psh_invertibility_element K O U s V f member)
+  ≡ @comm_ring_hom_apply
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)
+      (@comm_ring_psh_value K O V)
+      (@comm_ring_psh_localization_factor_map_at_member
+        K O U s localization V f member)
+      x;
+
+// PathLift exposes the selected section as the functor's object action.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (x : τ (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization))) ⊢
+  @fapp0
+    (Path_cat (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)))
+    (@CommRingPshLocalizationMatching_cat K O U s)
+    (@comm_ring_psh_localization_matching_restriction_func
+      K O U s localization)
+    x
+  ≡ @comm_ring_psh_localization_matching_section
+      K O U s localization x;
+
+// Functor application followed by Pi evaluation preserves literal computation.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f)))
+  (x : τ (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization))) ⊢
+  @piapp0
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    (@comm_ring_psh_localization_matching_catd K O U s)
+    (@fapp0
+      (Path_cat (@comm_ring_carrier
+        (@comm_ring_localization_target
+          (@comm_ring_psh_value K O U) s localization)))
+      (@CommRingPshLocalizationMatching_cat K O U s)
+      (@comm_ring_psh_localization_matching_restriction_func
+        K O U s localization)
+      x)
+    (@comm_ring_psh_invertibility_element K O U s V f member)
+  ≡ @comm_ring_hom_apply
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)
+      (@comm_ring_psh_value K O V)
+      (@comm_ring_psh_localization_factor_map_at_member
+        K O U s localization V f member)
+      x;
+
+// Equality-path action is internal and lands between coherent Pi sections.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (x y : τ (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)))
+  (p : τ (@=
+      (@comm_ring_carrier
+        (@comm_ring_localization_target
+          (@comm_ring_psh_value K O U) s localization))
+      x y)) ⊢
+  @fapp1_fapp0
+    (Path_cat (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)))
+    (@CommRingPshLocalizationMatching_cat K O U s)
+    (@comm_ring_psh_localization_matching_restriction_func
+      K O U s localization)
+    x y p
+  : τ (Hom
+      (@CommRingPshLocalizationMatching_cat K O U s)
+      (@comm_ring_psh_localization_matching_section
+        K O U s localization x)
+      (@comm_ring_psh_localization_matching_section
+        K O U s localization y));
+/* End of the PSSS-08c0D localization-matching diagnostics. */

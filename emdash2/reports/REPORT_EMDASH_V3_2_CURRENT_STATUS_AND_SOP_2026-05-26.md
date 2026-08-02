@@ -107,6 +107,15 @@ detailed probe evidence.
   objectwise restriction equation as a construction audit. It claims no
   limiting/descent comparison, sheaf, ringed-site package, generated topology,
   `Spec`, or scheme.
+- `emdash3_2_commutative_algebra_matching.lp`: one-way computational
+  matching-family layer. It pulls the selected Path-valued carrier family over
+  the category of invertibility-support elements and forms its Pi category.
+  Every localization element selects one internally coherent section whose
+  literal component applies the corresponding universal factor. PathLift
+  supplies equality-path action. The single component rule uses the existing
+  full fibre-covariance owner and adds no external naturality field. It
+  supplies no inverse/glue, descent equivalence, sheafhood, limiting claim,
+  generated topology, `Spec`, or scheme.
 - `emdash3_2_commutative_algebra_zariski.lp`: one-way rule-free presented
   affine-Zariski layer. It retains a selected localization package for each
   generator of an algebraic cover presentation, exposes chosen basic-open
@@ -2074,6 +2083,63 @@ Neither a limiting/descent equivalence nor sheafhood, `Spec`, or a scheme is
 claimed. The tranche is included in the authorized local PSSS-08c0C
 checkpoint `a724638`.
 
+PSSS-08c0D makes the first direct computational consumer of that cone. Pulling
+`comm_ring_carrier_catd` back along the internal CommRing-valued support
+diagram gives a family whose literal `(V,f,m)` fibre is
+`Path_cat(|O(V)|)`. Its section category
+
+```text
+Matching_O(s) = Pi_(V,f,m in D_O(s)) Path_cat(|O(V)|)
+```
+
+retains compatibility under every arrow of the support-elements category.
+For `x : |O(U)[1/s]_ell|`, one stable section owner computes by
+
+```text
+restrict_ell(x)[V,f,m] = factor(ell,f,m)(x).
+```
+
+The component deliberately follows the carrier API's selected full-action
+route: `fib_cov_tapp0_func` receives `x` before the structured factor map.
+Ordinary postcomposition of the ring-valued cone would cap that action too
+early and leave element application stuck. No direct capped carrier rule and
+no generic projection/cut rewrite is added. The four structural `tapp0_fapp0`
+slots on the literal beta remain inferred; its nested Sigma object and stable
+section head recover the indices.
+
+`path_lift_fapp0` turns the section-valued function into a genuine functor
+
+```text
+Path_cat(|O(U)[1/s]_ell|) -> Matching_O(s),
+```
+
+so both localization-element action and equality-path action are internal.
+The Pi/Catd classifiers retain matching coherence; consumers do not carry
+external naturality squares, identity laws, or composition laws. The closed
+zero-ring reviewer evaluates the resulting section at the terminal support
+member to the actual constant-presheaf restriction. This is only the
+localization-to-matching direction. An inverse/glue package, its executable
+component, inverse laws justified by a concrete descent/basic-open consumer,
+and later affine overlap evaluation remain separate gates.
+
+The maintained matching module has 135 lines, four symbols, one injective
+section owner, one rewrite rule, and zero unification rules. Its 243-line
+reviewer has eight assertions. Warning-enabled locality baseline, matching
+owner, and reviewer logs ending in `20260801-234652`, `20260801-234706`, and
+`20260801-234729` inherit exactly `1179 = 1020 + 159`, with no warning at the
+new owner or reviewer. The module-specific strict audit has zero
+reconstructible slots across zero unreviewed clauses; the full audit remains
+at zero unreviewed clauses and 52 annotated slots across 32 intentional
+kernel clauses. Maintained `make check` and the complete reviewer suite pass.
+Five new central diagnostics raise the strict catalog to 1,932 checks across
+80 mapped areas with zero legacy or unclassified entries. Health passes all
+72 source/example targets in 590.748 summed check-seconds at source snapshot
+`sha256:939fd71769182759327e8aa3a759f47019d7542a1f45e6d9c08dd9c0c9504d5e`.
+Full integration CI independently passes all 72 Lambdapi targets in 528.584
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
 retains its finite unimodular generators together with a dependent finite
@@ -2799,6 +2865,10 @@ CommRingPsh_cat(K) -> Functor_cat(K^op,CommRing_cat).
 comm_ring_psh_restrict(O,f,s) -> O[f](s).
 CommRingPshInvertibleAlong(O,s,f)
     -> CommRingUnitEvidence(O(V),O[f](s)).
+Matching_O(s)
+    -> Pi_(V,f,m in D_O(s)) Path_cat(|O(V)|).
+restrict_ell : Path_cat(|O(U)[1/s]_ell|) -> Matching_O(s).
+restrict_ell(x)[V,f,m] -> factor(ell,f,m)(x).
 ```
 
 The category heads do not runtime-collapse. Restriction's object action is
@@ -2820,9 +2890,11 @@ presheaf facade. Explicit restriction applies the retained structured-map
 function. Identity and composite restriction laws are theorem-level paths
 through the selected pointwise ring-map comparisons; generic whole arrows
 retain their negative carrier-computation boundaries. Arrowwise unit support
-is a property and is closed under further restriction. It is not yet a whole
-ordinary sieve: the full action over `Into_restr_cat` and its equality/higher
-coherence remain a separately gated construction.
+is a property and is closed under further restriction. The downstream carrier
+and unit-evidence families assemble it as a whole ordinary sieve, the locality
+module packages its selected localization factors as one internal cone, and
+the matching module applies those factors to localization elements as
+internally coherent Pi sections with equality-path action.
 
 ### Section 19: PathOut, path induction, and Eckmann–Hilton
 

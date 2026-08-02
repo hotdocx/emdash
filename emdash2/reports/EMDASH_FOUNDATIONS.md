@@ -1491,6 +1491,49 @@ front of the historical Cartier comparison
 that cone as a limit, compare it with selected descent, or claim sheafhood or
 a ringed-site package.
 
+The first direct consumer applies the internal cone to actual localization
+elements without externalizing its coherence. Pull the Path-valued carrier
+family back along the value diagram:
+
+```text
+MatchingCarrier_O(s)[V,f,m] = Path_cat(|O(V)|)
+Matching_O(s) = Pi_(V,f,m in Elem(D_O(s))) MatchingCarrier_O(s)[V,f,m].
+```
+
+An object of `Matching_O(s)` is therefore one internally coherent family of
+carrier elements. For every `x : |O(U)[1/s]_ell|`, the selected section has
+literal component
+
+```text
+matchingSection(ell,x)[V,f,m] = factor(ell,f,m)(x).
+```
+
+This computation uses the full displayed carrier action: first fix `x` in the
+source fibre, then apply `fib_cov_tapp0_func` to the selected structured factor
+map. Postcomposing the ring-valued cone and capping its action first would lose
+that executable element application. No direct capped carrier rule is added;
+the existing full-action owner remains the unique route.
+
+Finally, `path_lift_fapp0` packages the assignment as
+
+```text
+restrict_ell : Path_cat(|O(U)[1/s]_ell|) -> Matching_O(s).
+```
+
+Thus an equality path between localization elements is mapped to an arrow
+between their coherent matching sections. Pi owns compatibility over arrows
+of `Elem(D_O(s))`, Catd owns the carrier-family action, and PathLift owns the
+source path action. No separate naturality square, identity proof, or
+composition proof is propagated through the public API. The closed zero-ring
+consumer evaluates the section to the actual restriction of `tt`.
+
+Only this localization-to-matching direction is active. Constructing a
+consumer-justified inverse/glue, proving its two laws, comparing the result to
+selected descent, and using it in affine restrictions and overlaps remain
+later computational gates. A general generated topology, truncation
+reflector, or sheafification construction is not a prerequisite for this
+direction and is not implied by it.
+
 ### Finite Families And Unimodular Cover Presentations
 
 A finite homogeneous family uses only the existing natural-number and Sigma
