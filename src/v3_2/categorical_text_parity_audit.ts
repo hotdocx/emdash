@@ -547,6 +547,7 @@ const capabilities = [
         id: 'displayed-natural-abstraction-and-composition',
         apiMethods: [
             'displayedTransforContextLambda',
+            'displayedTransforDependentContextLambda',
             'displayedTransforLambda',
             'identityCell',
             'composeCells',
@@ -558,14 +559,17 @@ const capabilities = [
             'composition requires adjacent indexed-transfor endpoints.',
         scopedBindings:
             'The compact contextual method hides one natural base slot and ' +
-            'exposes one natural fibre-object slot; the retained component ' +
-            'method exposes the natural base slot directly.',
+            'exposes one natural fibre-object slot; the direct dependent-' +
+            'context method exposes a finite canonical telescope over one ' +
+            'hidden final-base slot; the retained component method exposes ' +
+            'the natural base slot directly.',
         dependencyAndVariance: 'natural variation, displayed dependency',
         actionOwnership:
             'Existing displayed component owner and generic category ' +
             'composition at Functord_cat.',
         recursiveBodyGrammar:
             'compact point eta and finite factorable point identity, plus ' +
+            'the same direct factorer over a finite canonical telescope, ' +
             'retained whole-fibre component eta and finite recursive ' +
             'typed-cell composition',
         proposedText:
@@ -708,7 +712,7 @@ const rawAudit = {
     },
     capabilities,
     measuredCoverage: {
-        publicProgramMethods: 83,
+        publicProgramMethods: 84,
         capabilityRows: 14,
         classificationRows: {
             alreadyTextComplete: 1,

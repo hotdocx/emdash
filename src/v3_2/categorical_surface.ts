@@ -838,6 +838,38 @@ export type CoreCategoricalAbstractionEvidence =
             readonly contextRelation:
                 'natural-base-then-natural-fibre-binder';
         }
+    )
+    | (
+        CoreCategoricalAbstractionEvidenceBase & {
+            readonly rule:
+                'categorical.displayed-transfor-dependent-context';
+            readonly variation: 'natural';
+            readonly dependency: 'displayed';
+            readonly bindingNames: readonly string[];
+            readonly bindingModes: readonly 'natural'[];
+            readonly sourceFamilies: readonly KernelExpression[];
+            readonly liftedBindingFamilies:
+                readonly KernelExpression[];
+            readonly layers:
+                readonly CoreCategoricalDisplayedTelescopeLayerEvidence[];
+            readonly contextRootCategory: KernelExpression;
+            readonly finalBaseCategory: KernelExpression;
+            readonly sourceFamily: KernelExpression;
+            readonly targetFamily: KernelExpression;
+            readonly sourceFunctor: KernelExpression;
+            readonly targetFunctor: KernelExpression;
+            readonly bodyRule:
+                | 'categorical.displayed-transfor-context-eta'
+                | 'categorical.displayed-transfor-context-identity'
+                | 'categorical.displayed-transfor-context-composition'
+                | 'categorical.displayed-transfor-context-whiskering';
+            readonly orientation?: 'pre' | 'post';
+            readonly baseUsageCount: number;
+            readonly fibreUsageCount: number;
+            readonly contextSize: number;
+            readonly contextRelation:
+                'canonical-finite-displayed-telescope';
+        }
     );
 
 export interface CoreCategoricalTermInspection {
@@ -1156,8 +1188,14 @@ interface CoreCategoricalDirectDisplayedEndpointShape {
 
 interface CoreCategoricalDirectDisplayedEndpointCompilation
 extends CoreCategoricalDirectDisplayedEndpointShape {
+    readonly endpointKind: 'chain' | 'contextual';
+    readonly identity: boolean;
     readonly expression: KernelExpression;
+    readonly baseUsageCount: number;
+    readonly fibreUsageCount: number;
     readonly recovered: ElaboratedSurfaceTerm['recovered'];
+    readonly structuralPrerequisites:
+        readonly CoreCategoricalStructuralPrerequisiteId[];
     readonly dependentPrerequisites:
         readonly CoreCategoricalDependentApplicationPrerequisiteId[];
 }
@@ -1718,6 +1756,46 @@ interface CoreCategoricalDisplayedFamilyTree {
 type CoreCategoricalDisplayedWiring =
 ReadonlyMap<number, CoreCategoricalDisplayedContextualCompilation>;
 
+interface CoreCategoricalCanonicalDisplayedBinding {
+    readonly name: string;
+    readonly family: KernelExpression;
+    readonly baseCategory: KernelExpression;
+}
+
+interface CoreCategoricalCanonicalDisplayedLayer {
+    readonly baseCategory: KernelExpression;
+    readonly bindingIndices: readonly number[];
+    readonly tree: CoreCategoricalDisplayedFamilyTree;
+}
+
+interface CoreCategoricalCanonicalDisplayedContextNormalForm {
+    readonly contextRootCategory: KernelExpression;
+    readonly layers: readonly CoreCategoricalCanonicalDisplayedLayer[];
+    readonly finalBaseCategory: KernelExpression;
+    readonly terminalSourceFamily: KernelExpression;
+    readonly accessors: ReadonlyMap<
+        number,
+        CoreCategoricalDisplayedContextualCompilation
+    >;
+    readonly structuralPrerequisites:
+        readonly CoreCategoricalStructuralPrerequisiteId[];
+    readonly dependentPrerequisites:
+        readonly CoreCategoricalDependentApplicationPrerequisiteId[];
+}
+
+interface CoreCategoricalActiveDisplayedEndpointContext {
+    readonly baseOrdinal: number;
+    readonly fibreOrdinal: number;
+    readonly baseCategory: KernelExpression;
+    readonly sourceFamily: KernelExpression;
+    readonly wiring: CoreCategoricalDisplayedWiring;
+    readonly activeOrdinals: ReadonlySet<number>;
+    readonly structuralPrerequisites:
+        Set<CoreCategoricalStructuralPrerequisiteId>;
+    readonly dependentPrerequisites:
+        Set<CoreCategoricalDependentApplicationPrerequisiteId>;
+}
+
 const abstractionById = (
     id: CoreCategoricalAbstractionJudgment['id']
 ): CoreCategoricalAbstractionJudgment => {
@@ -1790,6 +1868,8 @@ export class CoreCategoricalScopedBuilder {
     private nextTokenOrdinal = 0;
     private readonly activeDisplayedBases =
         new Map<number, InternalCoreCategoricalTerm>();
+    private readonly activeDisplayedEndpointContexts:
+        CoreCategoricalActiveDisplayedEndpointContext[] = [];
     private readonly options:
         Readonly<CoreCategoricalScopedBuilderOptions>;
 
@@ -5227,7 +5307,7 @@ export class CoreCategoricalScopedBuilder {
                     'source family'
             );
         }
-        const sourceFunctor = compiled.chain.length === 0
+        const sourceFunctor = compiled.identity
             ? subject.type.sourceFunctor
             : this.composeDisplayedFunctorExpressions(
                 subject.type.baseCategory,
@@ -5238,7 +5318,7 @@ export class CoreCategoricalScopedBuilder {
                 compiled.expression,
                 nodeProvenance
             );
-        const targetFunctor = compiled.chain.length === 0
+        const targetFunctor = compiled.identity
             ? subject.type.targetFunctor
             : this.composeDisplayedFunctorExpressions(
                 subject.type.baseCategory,
@@ -9824,108 +9904,178 @@ export class CoreCategoricalScopedBuilder {
     ): CoreCategoricalDirectDisplayedEndpointCompilation | undefined {
         const shape = this.directDisplayedFunctorEndpointShape(term);
         if (
-            shape === undefined ||
-            usageCount(term.usage, shape.fibreOrdinal) !== 1 ||
-            usageCount(term.usage, shape.baseOrdinal) !==
+            shape !== undefined &&
+            usageCount(term.usage, shape.fibreOrdinal) === 1 &&
+            usageCount(term.usage, shape.baseOrdinal) ===
                 shape.chain.length
         ) {
-            return undefined;
-        }
-        const prerequisites:
-            CoreCategoricalDependentApplicationPrerequisiteId[] = [];
-        let expression: KernelExpression;
-        if (shape.chain.length === 0) {
-            prerequisites.push('displayed-identity');
-            expression = kernelCall(
-                kernelFree(
-                    coreCategoricalFibredStructureCoreName(
-                        'displayed-identity'
+            const prerequisites:
+                CoreCategoricalDependentApplicationPrerequisiteId[] = [];
+            let expression: KernelExpression;
+            if (shape.chain.length === 0) {
+                prerequisites.push('displayed-identity');
+                expression = kernelCall(
+                    kernelFree(
+                        coreCategoricalFibredStructureCoreName(
+                            'displayed-identity'
+                        ),
+                        nodeProvenance
                     ),
-                    nodeProvenance
-                ),
-                [
-                    {
-                        plicity: 'implicit',
-                        value: shape.baseCategory
-                    },
-                    {
-                        plicity: 'implicit',
-                        value: shape.sourceFamily
-                    }
-                ],
-                nodeProvenance
-            );
-        } else {
-            const first = shape.chain[0];
-            if (
-                first.type.tag !== 'displayed-functor' ||
-                first.closed === undefined
-            ) {
-                return undefined;
-            }
-            expression = first.closed.term;
-            let middle = first.type.targetFamily;
-            if (shape.chain.length > 1) {
-                prerequisites.push(
-                    'generic-category-composition',
-                    'displayed-hom-classifier-reduction'
-                );
-            }
-            for (const next of shape.chain.slice(1)) {
-                if (
-                    next.type.tag !== 'displayed-functor' ||
-                    next.closed === undefined ||
-                    !kernelExpressionEquals(
-                        next.type.sourceFamily,
-                        middle
-                    )
-                ) {
-                    return undefined;
-                }
-                expression = this.dependentCompositionCall(
                     [
                         {
                             plicity: 'implicit',
-                            value: this.displayedCategoryCategory(
-                                shape.baseCategory,
-                                nodeProvenance
-                            )
+                            value: shape.baseCategory
                         },
                         {
                             plicity: 'implicit',
                             value: shape.sourceFamily
-                        },
-                        {
-                            plicity: 'implicit',
-                            value: middle
-                        },
-                        {
-                            plicity: 'implicit',
-                            value: next.type.targetFamily
-                        },
-                        {
-                            plicity: 'explicit',
-                            value: next.closed.term
-                        },
-                        {
-                            plicity: 'explicit',
-                            value: expression
                         }
                     ],
                     nodeProvenance
                 );
-                middle = next.type.targetFamily;
+            } else {
+                const first = shape.chain[0];
+                if (
+                    first.type.tag !== 'displayed-functor' ||
+                    first.closed === undefined
+                ) {
+                    return undefined;
+                }
+                expression = first.closed.term;
+                let middle = first.type.targetFamily;
+                if (shape.chain.length > 1) {
+                    prerequisites.push(
+                        'generic-category-composition',
+                        'displayed-hom-classifier-reduction'
+                    );
+                }
+                for (const next of shape.chain.slice(1)) {
+                    if (
+                        next.type.tag !== 'displayed-functor' ||
+                        next.closed === undefined ||
+                        !kernelExpressionEquals(
+                            next.type.sourceFamily,
+                            middle
+                        )
+                    ) {
+                        return undefined;
+                    }
+                    expression = this.dependentCompositionCall(
+                        [
+                            {
+                                plicity: 'implicit',
+                                value: this.displayedCategoryCategory(
+                                    shape.baseCategory,
+                                    nodeProvenance
+                                )
+                            },
+                            {
+                                plicity: 'implicit',
+                                value: shape.sourceFamily
+                            },
+                            {
+                                plicity: 'implicit',
+                                value: middle
+                            },
+                            {
+                                plicity: 'implicit',
+                                value: next.type.targetFamily
+                            },
+                            {
+                                plicity: 'explicit',
+                                value: next.closed.term
+                            },
+                            {
+                                plicity: 'explicit',
+                                value: expression
+                            }
+                        ],
+                        nodeProvenance
+                    );
+                    middle = next.type.targetFamily;
+                }
             }
+            return {
+                ...shape,
+                endpointKind: 'chain',
+                identity: shape.chain.length === 0,
+                expression,
+                baseUsageCount:
+                    usageCount(term.usage, shape.baseOrdinal),
+                fibreUsageCount:
+                    usageCount(term.usage, shape.fibreOrdinal),
+                recovered: Object.freeze(shape.chain.flatMap(displayed =>
+                    displayed.closed === undefined
+                        ? []
+                        : [...displayed.closed.recovered]
+                )),
+                structuralPrerequisites: Object.freeze([]),
+                dependentPrerequisites: Object.freeze(prerequisites)
+            };
+        }
+
+        const contextual =
+            this.activeDisplayedEndpointContexts.find(candidate =>
+                term.type.tag === 'indexed-object' &&
+                term.type.indexOrdinal === candidate.baseOrdinal &&
+                kernelExpressionEquals(
+                    term.type.baseCategory,
+                    candidate.baseCategory
+                )
+            );
+        if (
+            contextual === undefined ||
+            term.type.tag !== 'indexed-object'
+        ) {
+            return undefined;
+        }
+        const compilation = this.compileDisplayedContextual(
+            term,
+            contextual.baseOrdinal,
+            contextual.baseCategory,
+            contextual.wiring,
+            contextual.activeOrdinals,
+            nodeProvenance
+        );
+        if (
+            !kernelExpressionEquals(
+                compilation.sourceFamily,
+                contextual.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                compilation.targetFamily,
+                term.type.family
+            )
+        ) {
+            return undefined;
+        }
+        for (const prerequisite of
+            compilation.structuralPrerequisites) {
+            contextual.structuralPrerequisites.add(prerequisite);
+        }
+        for (const prerequisite of
+            compilation.dependentPrerequisites) {
+            contextual.dependentPrerequisites.add(prerequisite);
         }
         return {
-            ...shape,
-            expression,
-            recovered: Object.freeze(shape.chain.flatMap(displayed =>
-                displayed.closed === undefined
-                    ? []
-                    : [...displayed.closed.recovered]
-            )),
-            dependentPrerequisites: Object.freeze(prerequisites)
+            baseOrdinal: contextual.baseOrdinal,
+            fibreOrdinal: contextual.fibreOrdinal,
+            baseCategory: contextual.baseCategory,
+            sourceFamily: contextual.sourceFamily,
+            targetFamily: compilation.targetFamily,
+            chain: Object.freeze([]),
+            endpointKind: 'contextual',
+            identity: compilation.identity,
+            expression: compilation.term,
+            baseUsageCount:
+                usageCount(term.usage, contextual.baseOrdinal),
+            fibreUsageCount:
+                usageCount(term.usage, contextual.fibreOrdinal),
+            recovered: Object.freeze([]),
+            structuralPrerequisites:
+                compilation.structuralPrerequisites,
+            dependentPrerequisites:
+                compilation.dependentPrerequisites
         };
     }
 
@@ -11408,6 +11558,166 @@ export class CoreCategoricalScopedBuilder {
         }
     }
 
+    /** Compute the shared finite canonical displayed-context normal form. */
+    private canonicalDisplayedContextNormalForm(
+        bindings: readonly CoreCategoricalCanonicalDisplayedBinding[],
+        contextRootCategory: KernelExpression,
+        nodeProvenance: Provenance
+    ): CoreCategoricalCanonicalDisplayedContextNormalForm {
+        if (
+            bindings.length === 0 ||
+            !kernelExpressionEquals(
+                bindings[0].baseCategory,
+                contextRootCategory
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Generic displayed telescope root does not match the ' +
+                    'first family base'
+            );
+        }
+
+        const layers: CoreCategoricalCanonicalDisplayedLayer[] = [];
+        let currentBaseCategory = bindings[0].baseCategory;
+        let currentBindingIndices: number[] = [];
+        for (let index = 0; index < bindings.length; index += 1) {
+            const binding = bindings[index];
+            if (kernelExpressionEquals(
+                binding.baseCategory,
+                currentBaseCategory
+            )) {
+                currentBindingIndices.push(index);
+                continue;
+            }
+            const tree = this.displayedFamilyTree(
+                currentBindingIndices.map(bindingIndex => ({
+                    ordinal: bindingIndex,
+                    family: bindings[bindingIndex].family
+                })),
+                currentBaseCategory,
+                nodeProvenance
+            );
+            const expectedNextBase = kernelCall(
+                kernelFree(
+                    CORE_DIRECTED_1A_PRIMITIVE_NAMES[
+                        'sigma-category'
+                    ],
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: currentBaseCategory
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: tree.family
+                    }
+                ],
+                nodeProvenance
+            );
+            if (!kernelExpressionEquals(
+                binding.baseCategory,
+                expectedNextBase
+            )) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    `Displayed binding '${binding.name}' is not based on ` +
+                        'the Sigma total of the preceding sibling layer'
+                );
+            }
+            layers.push(Object.freeze({
+                baseCategory: currentBaseCategory,
+                bindingIndices: Object.freeze([
+                    ...currentBindingIndices
+                ]),
+                tree
+            }));
+            currentBaseCategory = binding.baseCategory;
+            currentBindingIndices = [index];
+        }
+        const finalTree = this.displayedFamilyTree(
+            currentBindingIndices.map(bindingIndex => ({
+                ordinal: bindingIndex,
+                family: bindings[bindingIndex].family
+            })),
+            currentBaseCategory,
+            nodeProvenance
+        );
+        layers.push(Object.freeze({
+            baseCategory: currentBaseCategory,
+            bindingIndices: Object.freeze([
+                ...currentBindingIndices
+            ]),
+            tree: finalTree
+        }));
+
+        const accessors = new Map<
+            number,
+            CoreCategoricalDisplayedContextualCompilation
+        >();
+        for (
+            let layerIndex = 0;
+            layerIndex < layers.length;
+            layerIndex += 1
+        ) {
+            const layer = layers[layerIndex];
+            const projections = this.displayedProjectionWiring(
+                layer.baseCategory,
+                layer.tree,
+                nodeProvenance
+            );
+            for (const bindingIndex of layer.bindingIndices) {
+                let compilation = projections.get(bindingIndex);
+                if (compilation === undefined) {
+                    throw new Error(
+                        'Generic displayed layer lost a factor projection'
+                    );
+                }
+                let liftBaseCategory = layer.baseCategory;
+                for (
+                    let nextLayerIndex = layerIndex + 1;
+                    nextLayerIndex < layers.length;
+                    nextLayerIndex += 1
+                ) {
+                    const nextLayer = layers[nextLayerIndex];
+                    compilation =
+                        this.liftDisplayedCompilationThroughNextFamily(
+                            liftBaseCategory,
+                            compilation,
+                            nextLayer.tree.family,
+                            nodeProvenance
+                        );
+                    liftBaseCategory = nextLayer.baseCategory;
+                }
+                accessors.set(bindingIndex, compilation);
+            }
+        }
+
+        const finalLayer = layers[layers.length - 1];
+        const accessorValues = [...accessors.values()];
+        return Object.freeze({
+            contextRootCategory,
+            layers: Object.freeze([...layers]),
+            finalBaseCategory: finalLayer.baseCategory,
+            terminalSourceFamily: finalLayer.tree.family,
+            accessors,
+            structuralPrerequisites: mergePrerequisites(
+                ...accessorValues.map(accessor =>
+                    accessor.structuralPrerequisites
+                )
+            ),
+            dependentPrerequisites: mergeDependentPrerequisites(
+                ...accessorValues.map(accessor =>
+                    accessor.dependentPrerequisites
+                )
+            )
+        });
+    }
+
     /**
      * D-DTTLF-USABILITY-026 arbitrary finite canonical layer fold.
      *
@@ -11510,86 +11820,13 @@ export class CoreCategoricalScopedBuilder {
             );
         }
 
-        interface Layer {
-            readonly baseCategory: KernelExpression;
-            readonly bindingIndices: readonly number[];
-            readonly tree: CoreCategoricalDisplayedFamilyTree;
-        }
-        const layers: Layer[] = [];
-        let currentBaseCategory = bindings[0].baseCategory;
-        let currentBindingIndices: number[] = [];
-        for (let index = 0; index < bindings.length; index += 1) {
-            const binding = bindings[index];
-            if (kernelExpressionEquals(
-                binding.baseCategory,
-                currentBaseCategory
-            )) {
-                currentBindingIndices.push(index);
-                continue;
-            }
-            const tree = this.displayedFamilyTree(
-                currentBindingIndices.map(bindingIndex => ({
-                    ordinal: bindingIndex,
-                    family: bindings[bindingIndex].family
-                })),
-                currentBaseCategory,
+        const normalForm =
+            this.canonicalDisplayedContextNormalForm(
+                bindings,
+                contextRootCategory,
                 nodeProvenance
             );
-            const expectedNextBase = kernelCall(
-                kernelFree(
-                    CORE_DIRECTED_1A_PRIMITIVE_NAMES[
-                        'sigma-category'
-                    ],
-                    nodeProvenance
-                ),
-                [
-                    {
-                        plicity: 'implicit',
-                        value: currentBaseCategory
-                    },
-                    {
-                        plicity: 'explicit',
-                        value: tree.family
-                    }
-                ],
-                nodeProvenance
-            );
-            if (!kernelExpressionEquals(
-                binding.baseCategory,
-                expectedNextBase
-            )) {
-                this.fail(
-                    'CLASSIFIER_ARGUMENT_MISMATCH',
-                    nodeProvenance,
-                    `Displayed binding '${binding.name}' is not based on ` +
-                        'the Sigma total of the preceding sibling layer'
-                );
-            }
-            layers.push({
-                baseCategory: currentBaseCategory,
-                bindingIndices: Object.freeze([
-                    ...currentBindingIndices
-                ]),
-                tree
-            });
-            currentBaseCategory = binding.baseCategory;
-            currentBindingIndices = [index];
-        }
-        const finalTree = this.displayedFamilyTree(
-            currentBindingIndices.map(bindingIndex => ({
-                ordinal: bindingIndex,
-                family: bindings[bindingIndex].family
-            })),
-            currentBaseCategory,
-            nodeProvenance
-        );
-        layers.push({
-            baseCategory: currentBaseCategory,
-            bindingIndices: Object.freeze([
-                ...currentBindingIndices
-            ]),
-            tree: finalTree
-        });
+        const layers = normalForm.layers;
         if (layers.length < 2) {
             this.fail(
                 'CLASSIFIER_ARGUMENT_MISMATCH',
@@ -11598,52 +11835,9 @@ export class CoreCategoricalScopedBuilder {
                     'displayedContextLambda, not the dependent telescope'
             );
         }
-
-        const liftedCompilations = new Map<
-            number,
-            CoreCategoricalDisplayedContextualCompilation
-        >();
-        for (
-            let layerIndex = 0;
-            layerIndex < layers.length;
-            layerIndex += 1
-        ) {
-            const layer = layers[layerIndex];
-            const projections = this.displayedProjectionWiring(
-                layer.baseCategory,
-                layer.tree,
-                nodeProvenance
-            );
-            for (const bindingIndex of layer.bindingIndices) {
-                let compilation = projections.get(bindingIndex);
-                if (compilation === undefined) {
-                    throw new Error(
-                        'Generic displayed layer lost a factor projection'
-                    );
-                }
-                let liftBaseCategory = layer.baseCategory;
-                for (
-                    let nextLayerIndex = layerIndex + 1;
-                    nextLayerIndex < layers.length;
-                    nextLayerIndex += 1
-                ) {
-                    const nextLayer = layers[nextLayerIndex];
-                    compilation =
-                        this.liftDisplayedCompilationThroughNextFamily(
-                            liftBaseCategory,
-                            compilation,
-                            nextLayer.tree.family,
-                            nodeProvenance
-                        );
-                    liftBaseCategory = nextLayer.baseCategory;
-                }
-                liftedCompilations.set(bindingIndex, compilation);
-            }
-        }
-
-        const finalLayer = layers[layers.length - 1];
-        const finalBaseCategory = finalLayer.baseCategory;
-        const sourceFamily = finalLayer.tree.family;
+        const liftedCompilations = normalForm.accessors;
+        const finalBaseCategory = normalForm.finalBaseCategory;
+        const sourceFamily = normalForm.terminalSourceFamily;
         const baseToken = this.slot(
             `${bindings.map(binding => binding.name).join('')}ContextBase`,
             finalBaseCategory,
@@ -14548,7 +14742,10 @@ export class CoreCategoricalScopedBuilder {
             );
             if (
                 compiled === undefined ||
-                term.node.chainLength !== compiled.chain.length ||
+                (
+                    compiled.endpointKind === 'chain' &&
+                    term.node.chainLength !== compiled.chain.length
+                ) ||
                 compiled.baseOrdinal !== baseOrdinal ||
                 compiled.fibreOrdinal !== fibreOrdinal ||
                 !kernelExpressionEquals(
@@ -14572,8 +14769,9 @@ export class CoreCategoricalScopedBuilder {
                     compiled.expression
                 ) ||
                 usageCount(term.usage, baseOrdinal) !==
-                    compiled.chain.length ||
-                usageCount(term.usage, fibreOrdinal) !== 1
+                    compiled.baseUsageCount ||
+                usageCount(term.usage, fibreOrdinal) !==
+                    compiled.fibreUsageCount
             ) {
                 return undefined;
             }
@@ -14612,8 +14810,9 @@ export class CoreCategoricalScopedBuilder {
                 compiled.fibreOrdinal !== fibreOrdinal ||
                 usageCount(subject.usage, baseOrdinal) !== 1 ||
                 usageCount(term.usage, baseOrdinal) !==
-                    compiled.chain.length + 1 ||
-                usageCount(term.usage, fibreOrdinal) !== 1 ||
+                    compiled.baseUsageCount + 1 ||
+                usageCount(term.usage, fibreOrdinal) !==
+                    compiled.fibreUsageCount ||
                 !kernelExpressionEquals(
                     subject.type.baseCategory,
                     term.type.baseCategory
@@ -14631,7 +14830,7 @@ export class CoreCategoricalScopedBuilder {
                     subject.type.sourceFamily
                 ) ||
                 (
-                    compiled.chain.length === 0
+                    compiled.identity
                         ? (
                             !kernelExpressionEquals(
                                 subject.type.sourceFunctor,
@@ -14678,7 +14877,7 @@ export class CoreCategoricalScopedBuilder {
             );
             if (
                 transformation === undefined ||
-                compiled.chain.length === 0
+                compiled.identity
             ) {
                 return transformation;
             }
@@ -14793,6 +14992,413 @@ export class CoreCategoricalScopedBuilder {
             inner,
             term.node.provenance
         );
+    }
+
+    /**
+     * Direct natural abstraction over one finite canonical displayed
+     * telescope. Friendly variables are coherent accessor applications to a
+     * single terminal contextual slot; the body synthesizes the recovered
+     * whole `Transfd` endpoints.
+     */
+    displayedTransforDependentContextLambda(
+        bindings: readonly CoreCategoricalCanonicalDisplayedBinding[],
+        contextRootCategory: KernelExpression,
+        bodyBuilder: (
+            variables: readonly CoreCategoricalTerm[]
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions = {}
+    ): CoreCategoricalTerm {
+        kernelAssertScoped(contextRootCategory);
+        const nodeProvenance = this.nodeProvenance(
+            'displayed-transfor dependent contextual abstraction',
+            options.provenance
+        );
+        if (
+            this.options.displayedGenericTelescope !== true ||
+            this.options.displayedTransforAbstraction !== true
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Dependent contextual displayed-transfor abstraction ' +
+                    'requires the reviewed mixed displayed profile'
+            );
+        }
+        if (bindings.length < 2) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Dependent contextual displayed-transfor abstraction ' +
+                    'requires at least two bindings'
+            );
+        }
+        const names = new Set<string>();
+        for (const binding of bindings) {
+            assertSafeIdentifier(
+                binding.name,
+                'Dependent displayed-transfor telescope binder hint'
+            );
+            kernelAssertScoped(binding.family);
+            kernelAssertScoped(binding.baseCategory);
+            if (names.has(binding.name)) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    `Duplicate dependent displayed-transfor binder ` +
+                        `'${binding.name}'`
+                );
+            }
+            names.add(binding.name);
+        }
+
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'natural';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'displayed';
+        if (variation !== 'natural' || dependency !== 'displayed') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Dependent contextual displayed-transfor abstraction ' +
+                    'requires natural variation and displayed dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                'Dependent contextual displayed-transfor abstraction is ' +
+                    'covariant'
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'The dependent displayed-natural telescope abstracts ' +
+                    'fibre-object variables'
+            );
+        }
+
+        const normalForm =
+            this.canonicalDisplayedContextNormalForm(
+                bindings,
+                contextRootCategory,
+                nodeProvenance
+            );
+        const baseToken = this.slot(
+            `${bindings.map(binding => binding.name).join('')}NdBase`,
+            normalForm.finalBaseCategory,
+            nodeProvenance
+        );
+        const baseOrdinal = baseToken.node.tag === 'slot-token'
+            ? baseToken.node.ordinal
+            : -1;
+        const terminalToken = this.indexedObjectSlot(
+            `${bindings.map(binding => binding.name).join('')}Context`,
+            normalForm.finalBaseCategory,
+            normalForm.terminalSourceFamily,
+            baseOrdinal,
+            nodeProvenance
+        );
+        const fibreOrdinal = terminalToken.node.tag === 'slot-token'
+            ? terminalToken.node.ordinal
+            : -1;
+        const outerScope = [...this.activeTokenOrdinals];
+        const activeOrdinals = new Set([
+            baseOrdinal,
+            fibreOrdinal
+        ]);
+        const identityWiring = new Map([
+            [
+                fibreOrdinal,
+                this.displayedIdentityCompilation(
+                    normalForm.finalBaseCategory,
+                    normalForm.terminalSourceFamily,
+                    nodeProvenance
+                )
+            ] as const
+        ]);
+        const endpointContext:
+            CoreCategoricalActiveDisplayedEndpointContext = {
+                baseOrdinal,
+                fibreOrdinal,
+                baseCategory: normalForm.finalBaseCategory,
+                sourceFamily: normalForm.terminalSourceFamily,
+                wiring: identityWiring,
+                activeOrdinals,
+                structuralPrerequisites: new Set(
+                    normalForm.structuralPrerequisites
+                ),
+                dependentPrerequisites: new Set(
+                    normalForm.dependentPrerequisites
+                )
+            };
+
+        this.activeTokenOrdinals.unshift(baseOrdinal);
+        this.activeTokenOrdinals.unshift(fibreOrdinal);
+        this.activeDisplayedBases.set(baseOrdinal, baseToken);
+        this.activeDisplayedEndpointContexts.unshift(endpointContext);
+        try {
+            const variables = Object.freeze(bindings.map(
+                (binding, index) => {
+                    const accessor = normalForm.accessors.get(index);
+                    if (accessor === undefined) {
+                        throw new Error(
+                            'Canonical displayed context lost an accessor'
+                        );
+                    }
+                    const accessorTerm = this.recoveredDisplayedFunctor(
+                        normalForm.finalBaseCategory,
+                        normalForm.terminalSourceFamily,
+                        accessor.targetFamily,
+                        accessor.term,
+                        [],
+                        [],
+                        nodeProvenance
+                    );
+                    const variable = this.requireTerm(
+                        this.apply(
+                            accessorTerm,
+                            terminalToken,
+                            'object-value',
+                            nodeProvenance
+                        ),
+                        nodeProvenance
+                    );
+                    if (
+                        variable.type.tag !== 'indexed-object' ||
+                        variable.type.indexOrdinal !== baseOrdinal ||
+                        !kernelExpressionEquals(
+                            variable.type.family,
+                            accessor.targetFamily
+                        )
+                    ) {
+                        throw new Error(
+                            `Canonical accessor for '${binding.name}' ` +
+                                'produced the wrong friendly variable'
+                        );
+                    }
+                    return variable;
+                }
+            ));
+            // Evaluate exactly once; no callback or component is retained.
+            const body = this.requireTerm(
+                bodyBuilder(variables),
+                nodeProvenance
+            );
+            if (usageIntersects(body.usage, new Set(outerScope))) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'Dependent contextual displayed-transfor abstraction ' +
+                        'does not capture an outer context'
+                );
+            }
+            if (
+                body.type.tag !== 'indexed-hom' ||
+                body.type.baseIndexOrdinal !== baseOrdinal ||
+                body.type.fibreIndexOrdinal !== fibreOrdinal ||
+                !kernelExpressionEquals(
+                    body.type.baseCategory,
+                    normalForm.finalBaseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.sourceFamily,
+                    normalForm.terminalSourceFamily
+                )
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'The dependent displayed-natural telescope body must ' +
+                        'be a factorable indexed point Hom over the ' +
+                        'terminal context family'
+                );
+            }
+            const factored = this.factorDisplayedTransforPoint(
+                body,
+                baseOrdinal,
+                fibreOrdinal
+            );
+            if (
+                factored === undefined ||
+                factored.type.tag !== 'displayed-transfor' ||
+                factored.closed === undefined ||
+                usageCount(factored.usage, baseOrdinal) !== 0 ||
+                usageCount(factored.usage, fibreOrdinal) !== 0 ||
+                !kernelExpressionEquals(
+                    factored.type.baseCategory,
+                    normalForm.finalBaseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFamily,
+                    normalForm.terminalSourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFamily,
+                    body.type.targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFunctor,
+                    body.type.sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFunctor,
+                    body.type.targetFunctor
+                )
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'The dependent displayed-natural telescope body does ' +
+                        'not determine one closed coherent transformation'
+                );
+            }
+
+            const whiskeringOrientation:
+                'pre' | 'post' | undefined =
+                body.node.tag === 'typed-application' &&
+                body.node.judgment.target ===
+                    'indexed-fibre-functor-arrow'
+                    ? 'post'
+                    : body.node.tag === 'typed-application' &&
+                        body.node.judgment.target ===
+                            'indexed-fibre-transfor-point' &&
+                        body.node.argument[
+                            CORE_CATEGORICAL_BOUNDARY
+                        ] !== true &&
+                        (body.node.argument as
+                            InternalCoreCategoricalTerm).node.tag !==
+                                'slot-token'
+                        ? 'pre'
+                        : undefined;
+            const bodyRule:
+                | 'categorical.displayed-transfor-context-eta'
+                | 'categorical.displayed-transfor-context-identity'
+                | 'categorical.displayed-transfor-context-composition'
+                | 'categorical.displayed-transfor-context-whiskering' =
+                body.node.tag === 'typed-cell-composition'
+                ? 'categorical.displayed-transfor-context-composition'
+                : body.node.tag === 'typed-cell-identity'
+                    ? 'categorical.displayed-transfor-context-identity'
+                    : whiskeringOrientation === undefined
+                        ? 'categorical.displayed-transfor-context-eta'
+                        : 'categorical.displayed-transfor-context-whiskering';
+            const bodyIr = this.normalizeNode(
+                body,
+                [fibreOrdinal, baseOrdinal, ...outerScope]
+            );
+            const resultIr = this.normalizeNode(
+                factored,
+                outerScope
+            );
+            const liftedBindingFamilies = bindings.map(
+                (_binding, index) => {
+                    const accessor = normalForm.accessors.get(index);
+                    if (accessor === undefined) {
+                        throw new Error(
+                            'Canonical displayed evidence lost an accessor'
+                        );
+                    }
+                    return accessor.targetFamily;
+                }
+            );
+            const evidence: CoreCategoricalAbstractionEvidence =
+                deepFreeze({
+                    rule:
+                        'categorical.displayed-transfor-dependent-context' as const,
+                    name:
+                        bindings.map(binding => binding.name).join(','),
+                    plicity,
+                    variation: 'natural' as const,
+                    polarity: 'covariant' as const,
+                    cellLevel: 'object' as const,
+                    dependency: 'displayed' as const,
+                    sourceCategory: normalForm.finalBaseCategory,
+                    bindingNames:
+                        bindings.map(binding => binding.name),
+                    bindingModes:
+                        bindings.map(() => 'natural' as const),
+                    sourceFamilies:
+                        bindings.map(binding => binding.family),
+                    liftedBindingFamilies,
+                    layers: normalForm.layers.map(
+                        (layer, layerIndex) => ({
+                            layerIndex,
+                            baseCategory: layer.baseCategory,
+                            bindingNames: layer.bindingIndices.map(
+                                index => bindings[index].name
+                            ),
+                            sourceFamilies: layer.bindingIndices.map(
+                                index => bindings[index].family
+                            ),
+                            sourceFamily: layer.tree.family
+                        })
+                    ),
+                    contextRootCategory,
+                    finalBaseCategory: normalForm.finalBaseCategory,
+                    sourceFamily: factored.type.sourceFamily,
+                    targetFamily: factored.type.targetFamily,
+                    sourceFunctor: factored.type.sourceFunctor,
+                    targetFunctor: factored.type.targetFunctor,
+                    bodyRule,
+                    ...(whiskeringOrientation === undefined
+                        ? {}
+                        : { orientation: whiskeringOrientation }),
+                    baseUsageCount:
+                        usageCount(body.usage, baseOrdinal),
+                    fibreUsageCount:
+                        usageCount(body.usage, fibreOrdinal),
+                    contextSize: bindings.length + 1,
+                    contextRelation:
+                        'canonical-finite-displayed-telescope' as const,
+                    body: bodyIr,
+                    result: resultIr,
+                    structuralPrerequisites: Object.freeze([
+                        ...endpointContext.structuralPrerequisites
+                    ]),
+                    dependentPrerequisites:
+                        mergeDependentPrerequisites(
+                            [
+                                ...endpointContext
+                                    .dependentPrerequisites
+                            ],
+                            collectDependentPrerequisites(bodyIr),
+                            whiskeringOrientation === undefined
+                                ? []
+                                : [
+                                    'displayed-transfor-horizontal-action'
+                                ]
+                        ),
+                    provenance: nodeProvenance
+                });
+            const closed = deepFreeze({
+                term: factored.closed.term,
+                type: copyCoreType(factored.type),
+                sourceSpan: this.spanFor(nodeProvenance),
+                recovered: [...factored.closed.recovered]
+            });
+            return this.makeTerm(
+                factored.node,
+                factored.type,
+                factored.usage,
+                closed,
+                [...factored.abstractions, evidence]
+            );
+        } finally {
+            const activeContext =
+                this.activeDisplayedEndpointContexts.shift();
+            if (activeContext !== endpointContext) {
+                throw new Error(
+                    'Displayed endpoint context stack lost its owner'
+                );
+            }
+            this.activeDisplayedBases.delete(baseOrdinal);
+            this.activeTokenOrdinals.shift();
+            this.activeTokenOrdinals.shift();
+        }
     }
 
     /**

@@ -8119,6 +8119,74 @@ export class CoreCategoricalProgram {
     }
 
     /**
+     * Synthesize one coherent displayed transformation over a finite
+     * canonical sibling/dependency telescope. The callback receives the
+     * individually named variables as internally coherent accessor
+     * applications to one terminal contextual slot.
+     */
+    displayedTransforDependentContextLambda(
+        bindingValues:
+            readonly CoreCategoricalDisplayedContextBinding[],
+        body: (
+            variables: readonly CoreCategoricalTerm[]
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed-transfor dependent contextual abstraction',
+            options.source
+        );
+        this.requireMixedMode(nodeProvenance);
+        this.requireFibredTransfd(nodeProvenance);
+        if (bindingValues.length < 2) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'Dependent contextual displayed-transfor abstraction ' +
+                    'requires at least two bindings'
+            );
+        }
+        const names = new Set<string>();
+        const bindings = bindingValues.map(binding => {
+            if (names.has(binding.name)) {
+                throw new CoreCategoricalProgramError(
+                    'INVALID_DISPLAYED_CONTEXT',
+                    nodeProvenance,
+                    `Duplicate dependent displayed-transfor binding ` +
+                        `'${binding.name}'`
+                );
+            }
+            names.add(binding.name);
+            return Object.freeze({
+                name: binding.name,
+                family: this.requireDisplayedFamily(
+                    binding.family,
+                    nodeProvenance
+                )
+            });
+        });
+        const contextRoot = bindings[0].family.baseCategory;
+        return this.builder.displayedTransforDependentContextLambda(
+            bindings.map(binding => ({
+                name: binding.name,
+                family: binding.family.expression,
+                baseCategory:
+                    binding.family.baseCategory.expression
+            })),
+            contextRoot.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    /**
      * Direct single displayed binder `lambda^nd a : E. body(a)`.
      *
      * The callback sees the natural fibre object `a`; the elaborator creates

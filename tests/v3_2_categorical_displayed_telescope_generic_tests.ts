@@ -11,6 +11,7 @@ import {
 import {
     CORE_CATEGORICAL_TEXT_REVISION,
     CoreCategoricalDisplayedFamily,
+    CoreCategoricalFrontendError,
     CoreCategoricalProgram,
     CoreCategoricalProgramError,
     CoreCategoricalTerm,
@@ -32,6 +33,16 @@ const loweredCore = (
     }
     return serializeCoreCategoricalExpression(ir.term);
 };
+
+const point = (
+    emdash: CoreCategoricalProgram,
+    transformation: CoreCategoricalTerm,
+    argument: CoreCategoricalTerm
+): CoreCategoricalTerm => emdash.apply(
+    transformation,
+    argument,
+    { expectedShape: 'point-component' }
+);
 
 const twoLayerCore = (
     emdash: CoreCategoricalProgram
@@ -148,6 +159,111 @@ const predecessorProgram = new CoreCategoricalProgram({
 });
 const mixedDeep = deepFixture(mixedProgram);
 const predecessorDeep = deepFixture(predecessorProgram);
+
+const contextualTransforFixture = () => {
+    const emdash = mixedProgram;
+    const K = emdash.category('generic_nd_context_K');
+    const A = emdash.displayedFamily('generic_nd_context_A', K);
+    const C = emdash.displayedFamily('generic_nd_context_C', K);
+    const siblingProduct = emdash.displayedProduct(A, C);
+    const siblingTarget = emdash.displayedFamily(
+        'generic_nd_context_sibling_D',
+        K
+    );
+    const siblingF = emdash.displayedFunctor(
+        'generic_nd_context_sibling_F',
+        siblingProduct,
+        siblingTarget
+    );
+    const siblingG = emdash.displayedFunctor(
+        'generic_nd_context_sibling_G',
+        siblingProduct,
+        siblingTarget
+    );
+    const siblingEta = emdash.displayedTransfor(
+        'generic_nd_context_sibling_eta',
+        siblingF,
+        siblingG
+    );
+
+    const sigmaA = emdash.totalCategory(A);
+    const B = emdash.displayedFamily('generic_nd_context_B', sigmaA);
+    const liftedA = emdash.pullbackFamily(
+        A,
+        emdash.sigmaProjection(A)
+    );
+    const dependentProduct = emdash.displayedProduct(liftedA, B);
+    const D = emdash.displayedFamily('generic_nd_context_D', sigmaA);
+    const Q = emdash.displayedFamily('generic_nd_context_Q', sigmaA);
+    const F = emdash.displayedFunctor(
+        'generic_nd_context_F',
+        dependentProduct,
+        D
+    );
+    const G = emdash.displayedFunctor(
+        'generic_nd_context_G',
+        dependentProduct,
+        D
+    );
+    const H = emdash.displayedFunctor(
+        'generic_nd_context_H',
+        dependentProduct,
+        D
+    );
+    const postMapper = emdash.displayedFunctor(
+        'generic_nd_context_post',
+        D,
+        Q
+    );
+    const eta = emdash.displayedTransfor(
+        'generic_nd_context_eta',
+        F,
+        G
+    );
+    const theta = emdash.displayedTransfor(
+        'generic_nd_context_theta',
+        G,
+        H
+    );
+    const x = emdash.object('generic_nd_context_x', sigmaA);
+    const y = emdash.object('generic_nd_context_y', sigmaA);
+    const p = emdash.hom('generic_nd_context_p', sigmaA, x, y);
+    const u = emdash.object(
+        'generic_nd_context_u',
+        emdash.fibre(B, x)
+    );
+    const bindings = [
+        { name: 'a', family: A },
+        { name: 'b', family: B }
+    ] as const;
+    return {
+        emdash,
+        K,
+        A,
+        C,
+        siblingProduct,
+        siblingTarget,
+        siblingEta,
+        sigmaA,
+        B,
+        liftedA,
+        dependentProduct,
+        D,
+        Q,
+        F,
+        G,
+        H,
+        postMapper,
+        eta,
+        theta,
+        x,
+        p,
+        u,
+        bindings
+    };
+};
+
+const contextualTransfor = contextualTransforFixture();
 
 const textSourceFile =
     'tests/fixtures/categorical-text-mixed-generic.emdash';
@@ -642,6 +758,489 @@ describe('DISPLAYED-TELESCOPE-GENERIC-1 canonical layer fold', () => {
                 error instanceof CoreCategoricalProgramError &&
                 error.code === 'INVALID_DISPLAYED_CONTEXT'
         );
+    });
+
+    it('abstracts a paired eta over one independent sibling layer', () => {
+        const {
+            emdash,
+            A,
+            C,
+            siblingEta
+        } = contextualTransfor;
+        let callbacks = 0;
+        const abstraction =
+            emdash.displayedTransforDependentContextLambda(
+                [
+                    { name: 'a', family: A },
+                    { name: 'c', family: C }
+                ],
+                ([a, c]) => {
+                    callbacks += 1;
+                    return point(
+                        emdash,
+                        siblingEta,
+                        emdash.fibrePair(a, c)
+                    );
+                }
+            );
+        const compilation = emdash.compile(abstraction);
+        const evidence = compilation.abstractions.at(-1);
+
+        assert.equal(callbacks, 1);
+        assert.equal(compilation.surfaceType.tag, 'displayed-transfor');
+        assert.equal(
+            evidence?.rule,
+            'categorical.displayed-transfor-dependent-context'
+        );
+        if (
+            evidence?.rule !==
+                'categorical.displayed-transfor-dependent-context'
+        ) {
+            assert.fail('Missing contextual telescope evidence');
+        }
+        assert.deepEqual(evidence.bindingNames, ['a', 'c']);
+        assert.deepEqual(evidence.bindingModes, ['natural', 'natural']);
+        assert.deepEqual(
+            evidence.layers.map(layer => layer.bindingNames),
+            [['a', 'c']]
+        );
+        assert.equal(evidence.contextSize, 3);
+        assert.equal(
+            evidence.contextRelation,
+            'canonical-finite-displayed-telescope'
+        );
+        assert.equal(Object.isFrozen(evidence), true);
+        assert.equal(Object.isFrozen(evidence.layers), true);
+        assert.equal(Object.isFrozen(evidence.layers[0]), true);
+        assert.equal(Object.isFrozen(evidence.body), true);
+    });
+
+    it('uses both variables across one genuine dependency edge and retains actions',
+        () => {
+        const {
+            emdash,
+            eta,
+            x,
+            p,
+            u,
+            bindings
+        } = contextualTransfor;
+        const abstraction =
+            emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a, b]) => point(
+                    emdash,
+                    eta,
+                    emdash.fibrePair(a, b)
+                )
+            );
+        const compilation = emdash.compile(abstraction);
+        const evidence = compilation.abstractions.at(-1);
+
+        assert.equal(compilation.surfaceType.tag, 'displayed-transfor');
+        assert.match(
+            compilation.explicitCore,
+            /displayed-transfor-horizontal-action/u
+        );
+        assert.match(compilation.explicitCore, /section-pullback/u);
+        assert.match(compilation.explicitCore, /displayed-product-pair/u);
+        assert.match(compilation.explicitCore, /sigma-category/u);
+        assert.equal(
+            evidence?.rule,
+            'categorical.displayed-transfor-dependent-context'
+        );
+        if (
+            evidence?.rule !==
+                'categorical.displayed-transfor-dependent-context'
+        ) {
+            assert.fail('Missing dependent contextual-transfor evidence');
+        }
+        assert.deepEqual(
+            evidence.layers.map(layer => layer.bindingNames),
+            [['a'], ['b']]
+        );
+        assert.equal(
+            evidence.bodyRule,
+            'categorical.displayed-transfor-context-whiskering'
+        );
+        assert.equal(evidence.orientation, 'pre');
+        assert.equal(
+            evidence.dependentPrerequisites.includes(
+                'displayed-transfor-horizontal-action'
+            ),
+            true
+        );
+
+        const component = emdash.displayedTransforPoint(
+            abstraction,
+            x,
+            u
+        );
+        const higher = emdash.displayedTransforNaturality(
+            abstraction,
+            p,
+            u
+        );
+        assert.equal(emdash.compile(component).surfaceType.tag, 'hom');
+        assert.equal(emdash.compile(higher).surfaceType.tag, 'hom');
+        assert.match(
+            emdash.compile(higher).explicitCore,
+            /displayed-transfor-higher-cell/u
+        );
+    });
+
+    it('shares identity, composition, and both whiskering orientations',
+        () => {
+        const {
+            emdash,
+            bindings,
+            eta,
+            theta,
+            postMapper
+        } = contextualTransfor;
+        let callbacks = 0;
+        const contextualPair = (
+            a: CoreCategoricalTerm,
+            b: CoreCategoricalTerm
+        ): CoreCategoricalTerm => emdash.fibrePair(a, b);
+        const identity =
+            emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a, b]) => {
+                    callbacks += 1;
+                    return emdash.identityCell(contextualPair(a, b));
+                }
+            );
+        const composition =
+            emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a, b]) => {
+                    callbacks += 1;
+                    const pair = contextualPair(a, b);
+                    return emdash.composeCells(
+                        point(emdash, theta, pair),
+                        point(emdash, eta, pair)
+                    );
+                }
+            );
+        const pre = emdash.displayedTransforDependentContextLambda(
+            bindings,
+            ([a, b]) => {
+                callbacks += 1;
+                return point(emdash, eta, contextualPair(a, b));
+            }
+        );
+        const post = emdash.displayedTransforDependentContextLambda(
+            bindings,
+            ([a, b]) => {
+                callbacks += 1;
+                return point(
+                    emdash,
+                    postMapper,
+                    point(emdash, eta, contextualPair(a, b))
+                );
+            }
+        );
+
+        assert.equal(callbacks, 4);
+        const evidenceOf = (term: CoreCategoricalTerm) => {
+            const evidence = emdash.inspect(term).abstractions.at(-1);
+            if (
+                evidence?.rule !==
+                    'categorical.displayed-transfor-dependent-context'
+            ) {
+                assert.fail('Missing contextual telescope evidence');
+            }
+            return evidence;
+        };
+        assert.equal(
+            evidenceOf(identity).bodyRule,
+            'categorical.displayed-transfor-context-identity'
+        );
+        assert.equal(
+            evidenceOf(composition).bodyRule,
+            'categorical.displayed-transfor-context-composition'
+        );
+        assert.equal(evidenceOf(pre).orientation, 'pre');
+        assert.equal(evidenceOf(post).orientation, 'post');
+        assert.match(
+            emdash.compile(composition).explicitCore,
+            /generic-category-composition/u
+        );
+        assert.match(
+            emdash.compile(post).explicitCore,
+            /displayed-transfor-horizontal-action/u
+        );
+    });
+
+    it('recurses through four layers using an early accessor and final pair',
+        () => {
+        const {
+            emdash,
+            sigmaD,
+            liftedA,
+            Q,
+            bindings
+        } = mixedDeep;
+        const endpointFamily = emdash.displayedProduct(liftedA, Q);
+        const target = emdash.displayedFamily(
+            'generic_deep_nd_target',
+            sigmaD
+        );
+        const sourceEndpoint = emdash.displayedFunctor(
+            'generic_deep_nd_source',
+            endpointFamily,
+            target
+        );
+        const targetEndpoint = emdash.displayedFunctor(
+            'generic_deep_nd_target_functor',
+            endpointFamily,
+            target
+        );
+        const eta = emdash.displayedTransfor(
+            'generic_deep_nd_eta',
+            sourceEndpoint,
+            targetEndpoint
+        );
+        let callbacks = 0;
+        const abstraction =
+            emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a, , , , e, f]) => {
+                    callbacks += 1;
+                    return point(
+                        emdash,
+                        eta,
+                        emdash.fibrePair(
+                            a,
+                            emdash.fibrePair(e, f)
+                        )
+                    );
+                }
+            );
+        const inspection = emdash.inspect(abstraction);
+        const evidence = inspection.abstractions.at(-1);
+
+        assert.equal(callbacks, 1);
+        assert.equal(inspection.type.tag, 'displayed-transfor');
+        if (
+            evidence?.rule !==
+                'categorical.displayed-transfor-dependent-context'
+        ) {
+            assert.fail('Missing deep contextual telescope evidence');
+        }
+        assert.deepEqual(
+            evidence.layers.map(layer => layer.bindingNames),
+            [['a'], ['b', 'c'], ['d'], ['e', 'f']]
+        );
+        assert.equal(evidence.contextSize, 7);
+        assert.equal(evidence.orientation, 'pre');
+        assert.equal(Object.isFrozen(evidence.layers[3]), true);
+    });
+
+    it('preserves compact unary nd and the displayed-functor telescope',
+        () => {
+        const {
+            emdash,
+            dependentProduct,
+            F,
+            G,
+            eta
+        } = contextualTransfor;
+        const compact = emdash.displayedTransforContextLambda(
+            'generic_nd_compact',
+            F,
+            G,
+            a => point(emdash, eta, a)
+        );
+        assert.equal(emdash.compare(compact, eta).status, 'equal');
+        assert.equal(
+            emdash.inspect(compact).abstractions.at(-1)?.rule,
+            'categorical.displayed-transfor-context-eta'
+        );
+        const identityFunctor = emdash.displayedFunctorLambda(
+            'generic_nd_compact_identity',
+            dependentProduct,
+            dependentProduct,
+            a => a
+        );
+        assert.equal(
+            emdash.compile(identityFunctor).surfaceType.tag,
+            'displayed-functor'
+        );
+    });
+
+    it('fails closed across the dependent-context negative matrix', () => {
+        const {
+            emdash,
+            A,
+            B,
+            sigmaA,
+            eta,
+            p,
+            bindings
+        } = contextualTransfor;
+        assert.throws(
+            () => emdash.displayedTransforDependentContextLambda(
+                [
+                    { name: 'a', family: A },
+                    { name: 'a', family: B }
+                ],
+                () => p
+            ),
+            error =>
+                error instanceof CoreCategoricalProgramError &&
+                error.code === 'INVALID_DISPLAYED_CONTEXT'
+        );
+        assert.throws(
+            () => emdash.displayedTransforDependentContextLambda(
+                [{ name: 'a', family: A }],
+                () => p
+            ),
+            error =>
+                error instanceof CoreCategoricalProgramError &&
+                error.code === 'INVALID_DISPLAYED_CONTEXT'
+        );
+
+        const wrongBase = emdash.category('generic_nd_wrong_base');
+        const wrongLayer = emdash.displayedFamily(
+            'generic_nd_wrong_layer',
+            wrongBase
+        );
+        assert.throws(
+            () => emdash.displayedTransforDependentContextLambda(
+                [
+                    { name: 'a', family: A },
+                    { name: 'wrong', family: wrongLayer }
+                ],
+                () => p
+            ),
+            error =>
+                error instanceof CoreCategoricalFrontendError &&
+                error.code === 'CLASSIFIER_ARGUMENT_MISMATCH'
+        );
+
+        for (const [options, code] of [
+            [
+                { variation: 'functorial' as const },
+                'CLASSIFIER_ARGUMENT_MISMATCH'
+            ],
+            [
+                { dependency: 'ordinary' as const },
+                'CLASSIFIER_ARGUMENT_MISMATCH'
+            ],
+            [
+                { polarity: 'contravariant' as const },
+                'POLARITY_MISMATCH'
+            ],
+            [
+                { cellLevel: 'arrow' as const },
+                'CLASSIFIER_ARGUMENT_MISMATCH'
+            ]
+        ] as const) {
+            assert.throws(
+                () => emdash.displayedTransforDependentContextLambda(
+                    bindings,
+                    () => p,
+                    options
+                ),
+                error =>
+                    error instanceof CoreCategoricalFrontendError &&
+                    error.code === code
+            );
+        }
+
+        const Wrong = emdash.displayedFamily('generic_nd_Wrong', sigmaA);
+        const WrongTarget = emdash.displayedFamily(
+            'generic_nd_WrongTarget',
+            sigmaA
+        );
+        const wrongF = emdash.displayedFunctor(
+            'generic_nd_wrong_F',
+            Wrong,
+            WrongTarget
+        );
+        const wrongG = emdash.displayedFunctor(
+            'generic_nd_wrong_G',
+            Wrong,
+            WrongTarget
+        );
+        const wrongEta = emdash.displayedTransfor(
+            'generic_nd_wrong_eta',
+            wrongF,
+            wrongG
+        );
+        assert.throws(
+            () => emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a]) => point(emdash, wrongEta, a)
+            ),
+            error =>
+                error instanceof CoreCategoricalFrontendError &&
+                error.code === 'CLASSIFIER_ARGUMENT_MISMATCH'
+        );
+        assert.throws(
+            () => emdash.displayedTransforDependentContextLambda(
+                bindings,
+                () => p
+            ),
+            error =>
+                error instanceof CoreCategoricalFrontendError &&
+                error.code === 'UNAVAILABLE_DISPLAYED_ACTION'
+        );
+
+        const foreign = new CoreCategoricalProgram();
+        const foreignK = foreign.category('generic_nd_foreign_K');
+        const foreignTerm = foreign.object(
+            'generic_nd_foreign_x',
+            foreignK
+        );
+        assert.throws(
+            () => emdash.displayedTransforDependentContextLambda(
+                bindings,
+                () => foreignTerm
+            ),
+            error =>
+                error instanceof CoreCategoricalFrontendError &&
+                error.code === 'FOREIGN_TERM'
+        );
+
+        let escaped: CoreCategoricalTerm | undefined;
+        emdash.displayedTransforDependentContextLambda(
+            bindings,
+            ([a, b]) => {
+                escaped = a;
+                return point(emdash, eta, emdash.fibrePair(a, b));
+            }
+        );
+        assert.throws(
+            () => emdash.identityCell(escaped as CoreCategoricalTerm),
+            error =>
+                error instanceof CoreCategoricalFrontendError &&
+                error.code === 'ESCAPED_SLOT'
+        );
+        assert.throws(
+            () => predecessorProgram
+                .displayedTransforDependentContextLambda(
+                    predecessorDeep.bindings,
+                    () => p
+                ),
+            error =>
+                error instanceof CoreCategoricalProgramError &&
+                error.code === 'UNAVAILABLE_MIXED_MODE'
+        );
+
+        const recovered =
+            emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a, b]) => point(
+                    emdash,
+                    eta,
+                    emdash.fibrePair(a, b)
+                )
+            );
+        assert.equal(emdash.compile(recovered).surfaceType.tag,
+            'displayed-transfor');
     });
 
     it('parses deep nested mixed eta and reaches the homd_int consumer',

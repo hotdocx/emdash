@@ -50,8 +50,16 @@ describe('SYNTAX-PARITY-0A executable capability inventory', () => {
             capability => capability.apiMethods
         );
         assert.equal(CORE_CATEGORICAL_TEXT_PARITY_METHOD_COVERAGE, true);
-        assert.equal(methods.length, 83);
-        assert.equal(new Set(methods).size, 83);
+        assert.equal(methods.length, 84);
+        assert.equal(new Set(methods).size, 84);
+        assert.deepEqual(
+            audit.capabilities
+                .filter(capability => (
+                    capability.apiMethods as readonly string[]
+                ).includes('displayedTransforDependentContextLambda'))
+                .map(capability => capability.id),
+            ['displayed-natural-abstraction-and-composition']
+        );
         assert.equal(audit.capabilities.length, 14);
         assert.deepEqual(audit.measuredCoverage.classificationRows, {
             alreadyTextComplete: 1,
