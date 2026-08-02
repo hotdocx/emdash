@@ -27,8 +27,11 @@ recovery index
 
 Status: active living implementation architecture. `PSSS-00` through
 `PSSS-09a` are locally checkpointed, and the rule-free `PSSS-09b1` finite-
-containment tranche is checkpointed at `c8a81b9`. `PSSS-09cZ1` is the active
-supplied-topology compatibility tranche. `PSSS-03b` remains the named `Omega`
+containment tranche is checkpointed at `c8a81b9`. The supplied-topology
+compatibility tranche `PSSS-09cZ1` is checkpointed at `d808c29`. The active
+gate is selection of the smallest Cartier-style computational
+locality/descent consumer for `PSSS-09cZ2`/`PSSS-08c`, under PSSS-D-069.
+`PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
 nonempty semantic model; its later rigid-adapter promotion trial was rejected
@@ -38,8 +41,8 @@ valued generated coverage,
 propositional truncation, sheafification, localization inverse laws, and
 positive-variable polynomial representation remain separately
 consumer-gated. The latest checkpointed integration evidence is recorded in
-the PSSS-09b1 phase below; every PSSS-09cZ1 metric remains provisional until
-that bounded tranche is synchronized and checkpointed.
+the PSSS-09cZ1 phase below; every subsequent metric remains provisional until
+its own bounded tranche is synchronized and checkpointed.
 
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
@@ -2656,7 +2659,7 @@ consumers; neither supersedes the computational presentation layer.
 Status: rule-free implementation candidate green through focused and
 maintained owner/reviewer/central checks, exact warning comparison, strict
 audit, catalog, synchronized 68-target health, and full integration CI; it is
-ready for its authorized local checkpoint.
+included in local checkpoint `d808c29`.
 
 The selected boundary does not pretend to synthesize a topology. Given
 `T : GrothTopology(Op(CommRing_cat))`, define
@@ -3163,7 +3166,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-09c0 | Compare supplied, extensional-direct, and propositionally reflected Zariski coverhood | Research gate | PSSS-09b1; PSSS-09b2 only if its convenience API is consumed |
 | PSSS-09cT | Genuine propositional-truncation HIT/reflector | Conditional sub-plan | PSSS-09c0 selects the reflection route and specifies first consumer |
 | PSSS-09cG | Generated coverage saturation | Higher-inductive/research gate | PSSS-09c0 plus any selected closure/truncation prerequisites |
-| PSSS-09cZ1 | Supplied lawful topology plus proposition-valued Zariski-basis compatibility | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 68-target health, and full CI; authorized local checkpoint ready | PSSS-09b1 and `GrothTopology` |
+| PSSS-09cZ1 | Supplied lawful topology plus proposition-valued Zariski-basis compatibility | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 68-target health, and full CI; locally checkpointed at `d808c29` | PSSS-09b1 and `GrothTopology` |
 | PSSS-09cZ2 | Intended non-chaotic supplied Zariski topology or first sheaf consumer | Consumer/research gate | PSSS-09cZ1 |
 | PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Research gate | One of PSSS-09cG/PSSS-09cZ2; PSSS-05b for subcanonicity |
 | PSSS-10 | Slice sites and affine-basic-open comparison | Proposed | PSSS-09c at the selected scope |

@@ -2052,8 +2052,8 @@ Full integration CI independently passes all 68 Lambdapi targets in 384.425
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book
 evidence/typography/KaTeX/assembly checks, the strict kernel audit, and fresh
-strict catalog verification. PSSS-09cZ1 is ready for its authorized local
-checkpoint.
+strict catalog verification. PSSS-09cZ1 is included in local commit
+`d808c29`.
 
 The next topology/sheaf tranche remains subordinate to the computational
 Cartier path: it must consume or expose executable restriction,
