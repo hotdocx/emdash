@@ -1316,6 +1316,33 @@ contractibility supplies every factor triangle, `comm_ring_hom_ext` supplies
 uniqueness of structured factors, and proposition-valued triangle evidence
 completes the dependent Sigma path.
 
+The separate rule-free unit-localization layer gives the first parametric
+model. If `u : CommRingUnitEvidence(R,f)`, the pointwise identity map has the
+full localization universal property:
+
+```text
+comm_ring_unit_identity_localization(R,f,u) : Loc_R(f)
+target(comm_ring_unit_identity_localization(R,f,u)) = R
+map(comm_ring_unit_identity_localization(R,f,u))(x) = x.
+```
+
+For a target map `h : R -> S`, the selected factor is `h` itself. Any
+competing factor's triangle supplies pointwise equality with `h`;
+structured-map extensionality and the proposition-valued triangle fibre then
+give equality of the complete Sigma factors. Thus the factorization
+classifier is constructively contractible, rather than merely assumed. The
+multiplicative identity carries canonical unit evidence with inverse one, so
+every ring has the closed parametric computation
+
+```text
+comm_ring_identity_localization_at_one(R) : Loc_R(1)
+R[1/1] = R.
+```
+
+This closes only the identity-localization stage of the computational-scheme
+audit. A genuinely nontrivial localization representation and its first
+iterated/basic-open overlap remain required.
+
 This is a representation-independent interface. Concrete fractions,
 finite/unimodular families, powers, concrete polynomial representations, and
 Zariski constructions remain separately consumer-gated layers.
@@ -3563,6 +3590,8 @@ kernel and one-way library vocabulary.
 | factor through a localization map | `CommRingLocalizationFactor iota h` |
 | localization property/package at `f` | `IsCommRingLocalizationAt R f L iota` / `CommRingLocalizationAt R f` |
 | chosen localization target/map | `comm_ring_localization_target` / `comm_ring_localization_map` |
+| identity localization of an already-unit element | `comm_ring_unit_identity_localization R f unit` |
+| canonical computing localization at one | `comm_ring_identity_localization_at_one R` |
 | stable pointwise structured-map identity | `comm_ring_hom_id_pointwise R` |
 | stable pointwise structured-map composite | `comm_ring_hom_comp_pointwise g f` |
 | localization first at `f`, then at the image of `g` | `CommRingIteratedLocalizationAt R f g` |

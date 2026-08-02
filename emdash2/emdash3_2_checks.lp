@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -20009,6 +20009,41 @@ assertnot (R : τ CommRing)
       (@comm_ring_localization_map R f localization)
       (@comm_ring_localization_property R f localization);
 /* End of the PSSS-07a localization diagnostics. */
+
+// catalog-area: Identity localization at a unit
+// One is canonically a unit, with itself as the selected inverse.
+assert (R : τ CommRing) ⊢
+  @comm_ring_unit_inverse
+    R (@comm_ring_one R) (@comm_ring_one_unit R)
+  ≡ @comm_ring_one R;
+
+// The identity factorization space is constructively contractible.
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S)) ⊢
+  @comm_ring_unit_localization_factor_is_contr R S h
+  : τ (IsContr (@CommRingLocalizationFactor
+      R R S (@comm_ring_hom_id_pointwise R) h));
+
+// Every ring has the selected universal-property localization at one.
+assert (R : τ CommRing) ⊢
+  @comm_ring_identity_localization_at_one R
+  : τ (@CommRingLocalizationAt R (@comm_ring_one R));
+
+// Its target and carrier action compute through the pointwise identity.
+assert (R : τ CommRing) ⊢
+  @comm_ring_localization_target
+    R (@comm_ring_one R) (@comm_ring_identity_localization_at_one R)
+  ≡ R;
+
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply
+    R R
+    (@comm_ring_localization_map
+      R (@comm_ring_one R) (@comm_ring_identity_localization_at_one R))
+    x
+  ≡ x;
+/* End of the PSSS-08c0F unit-localization diagnostics. */
 
 // catalog-area: Iterated commutative-ring localization comparison
 // Stable structured composition exposes its selected carrier action.

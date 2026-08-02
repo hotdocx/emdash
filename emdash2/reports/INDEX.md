@@ -51,6 +51,13 @@ it proves explicit unit evidence proposition-valued, owns its path transport
 and preservation by structured maps, and packages localization at one element
 by contractible pointwise factorization, without selecting fractions, finite
 families, polynomials, or a Zariski presentation.
+`emdash3_2_commutative_algebra_localization_unit.lp` is the rule-free
+PSSS-08c0F parametric identity-localization layer. For an already-unit element
+`f` of any ring `R`, it proves that the pointwise identity `R -> R` has the
+full localization universal property by constructing the factorization space
+and proving it contractible. It supplies canonical unit evidence for one and
+a selected computing localization `R[1/1] = R`, without fractions, topology,
+`Spec`, or schemes.
 `emdash3_2_commutative_algebra_localization_comparison.lp` is the following
 rule-free overlap layer: it packages localization first at `f` and then at the
 image of `g`, and constructs canonical forward/reverse factors against

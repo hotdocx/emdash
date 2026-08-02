@@ -71,7 +71,13 @@ localization model, and the first affine overlap before `Spec` may consume the
 selected architecture. Its first typed audit confirms that the existing
 `OmegaEquivAlong` owner has exactly the required fixed-restriction shape, but
 also confirms that the PSSS-08c0E component fields are not directly whole
-functor cancellation laws.
+functor cancellation laws. The converse typed audit now derives both old
+component observations and the literal Cartier factor equation from the
+native whole witness. The first parametric algebra model is promoted in the
+rule-free identity-localization-at-a-unit module. Focused and maintained
+aggregates, the fresh 1,942-check catalog, and synchronized 76-target health
+are green. Full integration CI is also green; only its local checkpoint
+remains pending. A genuinely nontrivial localization and overlap remain open.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -2842,12 +2848,53 @@ latter design, the computational glue is its selected inverse functor and
 component observations become derived projections/tests rather than the
 semantic definition. Neither route may add external naturality squares.
 
+The converse owner audit selects the direction needed by the final interface.
+The ignored probe
+`tmp/probes/psss08c0f_omega_component_projections.lp` first proves, from the
+two native cancellation laws, that the selected left and right inverse
+functors agree. It therefore uses the native left inverse as one computational
+`glue_ell` satisfying both whole laws. Evaluating those functor paths at a
+localization element or matching section, and then applying `piapp0` at a
+support element, derives the PSSS-08c0E observations. Specialization to
+`(V,f,member)` still reduces through the checkpointed matching beta to the
+literal factor-map equation. The 2026-08-02 probe passes in 16.4 seconds at
+`logs/probes/psss08c0f_omega_component_projections-20260802-014701.log`.
+No external naturality or new rewrite is needed. This establishes that native
+whole evidence is sufficient for the computational observations, while the
+expected-negative probe establishes that the observations alone are not
+definitionally sufficient for the whole evidence.
+
 The second audit requires more than the closed zero ring. A useful staged
 model is a parametric identity-localization/basic-open computation for an
 arbitrary commutative ring, followed by a genuinely nontrivial selected
 localization example. The acceptance target is actual computation of the
 restriction/glue observations, not merely assuming an inhabitant of
 `CommRingPshLocalizationGlue`.
+
+The first algebraic stage is now implemented by the 190-line rule-free
+`emdash3_2_commutative_algebra_localization_unit.lp` module. Given explicit
+unit evidence for `f : |R|`, the pointwise identity `R -> R` is proved to have
+the full localization universal property. Its selected factor through any
+target map `h` is `h`; the competing triangle, structured-map extensionality,
+and property-valued agreement fibre prove the complete factorization Sigma
+contractible. The module also constructs canonical unit evidence for one and
+the selected computation `R[1/1] = R` for every commutative ring. Its 97-line
+reviewer has thirteen assertions, including target, map application, and
+contractibility checks. Focused source/reviewer/central checks pass, and
+warning-enabled checks inherit exactly `1179 = 1020 + 159` with no warning
+located in either new file. Maintained `make check` and the complete reviewer
+suite pass. Five central diagnostics raise the fresh strict catalog to 1,942
+checks across 82 mapped areas with zero unclassified entries. Health passes
+all 76 source/example targets in 347.597 summed check-seconds at source
+snapshot
+`sha256:3c425b8e9adcb68fc80d4992f09dff913863da5185ff03c5c0532192b4cbb899`.
+Full integration CI independently passes all 76 Lambdapi targets in 524.197
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. The local checkpoint remains pending. This is a genuine
+parametric identity-localization model, but not yet the required nontrivial
+localization or an `OmegaEquivAlong` model of matching descent.
 
 The third audit is the first affine overlap calculation. It must compare the
 existing universal-property localizations
@@ -3829,6 +3876,21 @@ consumer demonstrates that nontransitive unification requires it.
   internal section/transformation extensionality or require the native whole
   witness and derive its component observations; do not bridge the gap with
   external naturality fields or an ad hoc rewrite.
+- **PSSS-D-084:** the converse typed probe derives the same selected glue's
+  second whole cancellation from inverse uniqueness and derives both
+  PSSS-08c0E component paths, including the literal factor-map equation, by
+  evaluating native functor paths. Consequently native `OmegaEquivAlong`
+  evidence is sufficient and strictly stronger than the provisional
+  component record. Prefer the whole witness as the semantic locality owner;
+  retain component paths as derived computational observations unless the
+  forthcoming nontrivial model or overlap audit contradicts that selection.
+- **PSSS-D-085:** promote the universal-property identity localization at an
+  already-unit element as a separate rule-free standard-library layer. The
+  pointwise identity is the localization map, factorization through it is
+  constructively contractible, and localization at one computes for every
+  ring. This closes only the parametric identity-localization stage; it does
+  not discharge the genuinely nontrivial localization, matching-equivalence,
+  or first-overlap gates.
 
 ## 19. Side-Task Ledger
 
@@ -3855,7 +3917,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
 | PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
 | PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; locally checkpointed at `eb0c5b6` | PSSS-08c0D and historical Cartier/basic-open consumer |
-| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native owner-shape positive and direct component-to-whole expected-negative probes complete | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
+| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and parametric identity-localization implementation green through 76-target health and full CI; checkpoint pending | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |

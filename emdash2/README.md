@@ -63,6 +63,9 @@ mathematical reading is in
   evidence, unit transport/preservation, and localization at one element by
   contractible pointwise factorization. It selects no concrete fractions,
   finite families, polynomials, or Zariski presentation.
+- `emdash3_2_commutative_algebra_localization_unit.lp` constructs the
+  pointwise identity as the universal localization of any already invertible
+  element. In particular, localization at one computes to the original ring.
 - `emdash3_2_commutative_algebra_localization_comparison.lp` owns product-unit
   algebra and the universal-property comparison between localization at `f*g` and
   localization first at `f`, then at the image of `g`. It retains canonical
@@ -119,6 +122,9 @@ The active one-way library extensions are:
   separate from concrete polynomial syntax and from topology;
 - `emdash3_2_commutative_algebra_localization.lp` — explicit units and
   universal-property localization at one element, without fraction syntax;
+- `emdash3_2_commutative_algebra_localization_unit.lp` — the rule-free
+  identity localization of an already-unit element and the canonical
+  localization at one for every ring;
 - `emdash3_2_commutative_algebra_localization_comparison.lp` — stable
   pointwise ring-map composition plus universal-property iterated/product-
   localization comparison data, without fractions or package equality;

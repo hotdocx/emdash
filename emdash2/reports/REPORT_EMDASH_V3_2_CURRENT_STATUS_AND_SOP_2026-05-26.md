@@ -80,6 +80,13 @@ detailed probe evidence.
   factorization. Its universal total-element family exposes Path-valued unit
   evidence at literal ring elements, without concrete fraction, finite-family,
   polynomial, or Zariski syntax.
+- `emdash3_2_commutative_algebra_localization_unit.lp`: one-way rule-free
+  identity-localization layer. It constructs canonical unit evidence for one,
+  proves the factorization space through the pointwise identity contractible,
+  and therefore constructs the identity localization of any already-unit
+  element. In particular, every ring has a selected localization at one whose
+  target and carrier action compute to that ring and the identity. It adds no
+  fraction representation, topology, `Spec`, or scheme.
 - `emdash3_2_commutative_algebra_localization_comparison.lp`: one-way rule-free
   overlap layer. It derives unit multiplication/factor extraction, packages
   localization first at `f` and then at the image of `g`, and constructs
@@ -2205,6 +2212,44 @@ tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, strict kernel audit, and fresh strict catalog verification.
 The implementation and synchronized authority prose are locally checkpointed
 at `eb0c5b6`.
+
+PSSS-08c0F now has its first native-equivalence and algebraic-model results.
+An owner-shape probe confirms that canonical restriction has exactly the
+fixed-forward classifier
+`OmegaEquivAlong Cat_cat Path(localization-carrier) Matching restriction`.
+An expected-negative probe confirms that the earlier Pi families of component
+paths do not directly inhabit its equalities of whole composite functors. In
+the other direction, a green typed probe derives equality of the native left
+and right inverse functors, selects the left inverse as one computational
+glue, and evaluates its two whole cancellation paths to recover both earlier
+component observations and the literal Cartier factor-map equation. Thus the
+whole witness retains internal naturality and higher propagation while still
+exposing the desired computation; the component package alone remains
+provisional.
+
+The new 190-line, ten-symbol
+`emdash3_2_commutative_algebra_localization_unit.lp` module implements the
+first parametric algebra model. For any already-unit element `f` of `R`, it
+constructs the pointwise identity as a localization at `f`: every map factors
+through it by itself, and structured-map extensionality plus the
+property-valued triangle fibre proves the full factorization Sigma
+contractible. Canonical unit evidence for one therefore gives a selected
+computing localization `R[1/1]=R` for every ring. The module is rule-free; its
+97-line reviewer has thirteen assertions. Focused source, reviewer, and
+central checks pass, and warning-enabled checks inherit exactly
+`1179 = 1020 + 159` with no warning in either new file. Maintained `make check`
+and the complete reviewer suite pass. Five central diagnostics raise the fresh
+strict catalog to 1,942 checks across 82 mapped areas with zero unclassified
+entries. Health passes all 76 source/example targets in 347.597 summed
+check-seconds at source snapshot
+`sha256:3c425b8e9adcb68fc80d4992f09dff913863da5185ff03c5c0532192b4cbb899`.
+Full integration CI independently passes all 76 Lambdapi targets in 524.197
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. The local checkpoint remains pending. This does not yet provide
+a genuinely nontrivial localization, native matching equivalence model, first
+overlap, `Spec`, or scheme.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
