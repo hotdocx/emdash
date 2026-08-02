@@ -510,7 +510,7 @@ It deliberately avoids:
 | `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` | read-only audit complete; zero active semantic delta; fixed-head pre/post whiskering selected | implemented D-055 eta, D-056 recursive composition, and D-057 identity; active `comp_prod_fapp1_fapp0`, ordinary Cat projection ladder, `tdapp0_fapp0`, and `tdapp1_int_cell`; bounded owner-position probes | Fixed-head pre/post whiskering is already constructed internally by generic horizontal action at `Catd_cat K`; it does not require `Transf_catd_func`. One missing existing-owner `tdapp0_fapp0` projection was isolated, warning-measured, and made strict-LHS-clean by leaving inferred endpoints as `_`. A genuinely varying `Transf_catd` constructor remains a separate audit. |
 | `DIRECT-CONTEXTUAL-ND-WHISKERING-1Z` | separately reviewed-approved under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-WHISKERING-01 / D-DTTLF-USABILITY-058; implementation paused at a measured exact-transfer dependency | completed `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y`; immutable proposal `a910f183672cb39a83ee6f69b57e95f2519df880`; separate review under standing unattended delegation; bounded kernel/SOP gates green; `comp_prod_fapp1_fapp0` exact signature currently reaches `sigma_Fst`/`sigma_Snd` before their TypeScript transfer layer | Add one warning-neutral existing-owner fibre projection, transfer the existing generic horizontal-action signature plus its new displayed and three existing ordinary projection rules, and recursively lower `lambda^nd a. H(eta[a])` and `lambda^nd a. eta[L[a]]` through `(eta,id_H)` and `(id_L,eta)`. Check fibre object/arrow and internal base/higher action; add no new owner, external equation, curry/section route, varying `Transf_catd` constructor, parser/browser behavior, or unrestricted `:^nd`. Resume unchanged after the bounded D-059 dependency correction. |
 | `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` | separately reviewed-approved under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-PRODUCT-CORRECTION-01 / D-DTTLF-USABILITY-059; implementation dependency-ready | approved D-058 implementation experiment; exact active `comp_prod_fapp1_fapp0` signature; immutable proposal `62a8017f04af215696811a608be18d7c2dc5668e`; separate review under standing unattended delegation | Relocate and relink exactly those three existing declarations and three existing generic rules to the earlier fibred-product transfer boundary, then make displayed-chain-2A consume them without duplication. Change no kernel mathematics and add no mirror signature, new Core case, product facade, or external coherence. Resume D-058 unchanged after focused dependency/descendant checks. |
-| `CONTEXTUAL-ND-HORIZONTAL-NORMALIZATION-FOUNDATION-1ZB` | exact correcting proposal frozen under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-NORMALIZATION-CORRECTION-01 / D-DTTLF-USABILITY-060; decision pending | approved D-059 implementation experiment; exact generic Hom trace; direct 8-declaration/14-local-rule `fibred-transfd-1` compilation after the candidate relocation; later descendant contract drift expected | Relocate the exact `Hom_cat(Catd_cat)` category rule to dependent-composition and the two transparent-`Product_pair` projection betas to fibred-product; make later fragments inherit them; remove three measured-unreachable classifier mirrors. Add zero kernel mathematics and resume D-058 unchanged after focused uniqueness/descendant checks. |
+| `CONTEXTUAL-ND-HORIZONTAL-NORMALIZATION-FOUNDATION-1ZB` | separately reviewed-approved under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-NORMALIZATION-CORRECTION-01 / D-DTTLF-USABILITY-060; implementation dependency-ready | approved D-059 implementation experiment; immutable proposal `2631fcd7f0cc278feff1639dc8afbb25fa5c06ee`; exact generic Hom trace; direct 8-declaration/14-local-rule `fibred-transfd-1` compilation; separate review under standing unattended delegation | Relocate the exact `Hom_cat(Catd_cat)` category rule to dependent-composition and the two transparent-`Product_pair` projection betas to fibred-product; make later fragments inherit them; remove three measured-unreachable classifier mirrors. Add zero kernel mathematics and resume D-058 unchanged after focused uniqueness/descendant checks. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -6452,6 +6452,45 @@ later turn may approve it only after checking that the three mirrors are truly
 absent, the moved rules are exact existing computations, and D-058's
 mathematical scope has not widened.
 
+## D-DTTLF-USABILITY-060 separate review
+
+The immutable proposal checkpoint is
+`2631fcd7f0cc278feff1639dc8afbb25fa5c06ee`. A separate read-only review
+approves all and only its eleven numbered items:
+
+- the checkpoint contains only this living plan and the handoff; every kernel
+  and TypeScript experiment remains unstaged;
+- the active authority contains the exact category rule at
+  `Hom_cat (@Catd_cat K) E D`, the transparent
+  `Product_pair ≔ Struct_sigma`, and the two generic Sigma projection betas;
+  D-060 therefore relocates existing computation rather than inventing it;
+- dependent-composition already owns the corresponding stable Hom-classifier
+  image and precedes every affected consumer, so adding the category-level
+  presentation there creates no cycle and removes the later duplicate cleanly;
+- fibred-product already owns `Product_pair`, `sigma_Fst`, `sigma_Snd`, and
+  generic product-Hom normalization after D-059. The two derived pair betas
+  therefore belong at that boundary and are inherited by both
+  `fibred-transfd-1` and displayed-chain-2A;
+- the exact runtime trace proves that generic Hom delta, product-Hom,
+  product-object, functor-Hom, and displayed-fibre reductions already fire.
+  The first irreducible descendants are precisely the two literal-pair
+  projections, so a broad importer, facade, cast, or checker branch would
+  exceed the evidence;
+- removing the three diagnostic classifier mirrors still yields an exact
+  eight-declaration/fourteen-local-rule `fibred-transfd-1` compilation. The
+  inherited closure contains the category rule and both pair betas exactly
+  once, while the later dependent-target closure compiles as six prerequisite
+  plus three consumer rules; and
+- D-058 remains unchanged: one existing-owner Lambdapi projection, one exact
+  generic horizontal-action transfer, three existing ordinary projections,
+  and the fixed-head recursive frontend forms only. No varying
+  `Transf_catd`, external coherence evidence, parser/browser behavior, curry,
+  or unrestricted `:^nd` is authorized.
+
+No immediate human correction superseded the immutable proposal. Under the
+standing unattended delegation, D-DTTLF-USABILITY-060 is therefore approved
+exactly as proposed.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -6856,14 +6895,16 @@ necessary but insufficient: generic product-Hom/object normalization fires and
 stops only at projections of literal `Product_pair` endpoints. Treat the exact
 `CONTEXTUAL-ND-HORIZONTAL-NORMALIZATION-FOUNDATION-1ZB` /
 H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-NORMALIZATION-CORRECTION-01 /
-D-DTTLF-USABILITY-060 proposal as frozen and decision-pending. It relocates
-the exact `Hom_cat(Catd_cat)` category rule to dependent-composition and the
-two existing transparent-pair projection betas to fibred-product, removes
-three measured-unreachable classifier mirrors, and resumes D-058 unchanged.
-Under the standing unattended delegation it may be approved only by a
-separate review of its immutable proposal checkpoint. Add no kernel
-mathematics, broad transparent-definition importer, checker special case,
-product facade, or external coherence evidence.
+D-DTTLF-USABILITY-060 proposal at
+`2631fcd7f0cc278feff1639dc8afbb25fa5c06ee` as separately
+reviewed-approved under the standing unattended delegation, with immediate
+human supersession. Implement all and only its eleven numbered items: move the
+exact `Hom_cat(Catd_cat)` category rule to dependent-composition and the two
+existing transparent-pair projection betas to fibred-product, remove the three
+measured-unreachable classifier mirrors, prove uniqueness/descendant
+stability, and resume D-058 unchanged. Add no kernel mathematics, broad
+transparent-definition importer, checker special case, product facade, or
+external coherence evidence.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -6882,6 +6923,15 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-060 approved exactly as proposed.** A
+  separate review of immutable proposal checkpoint
+  `2631fcd7f0cc278feff1639dc8afbb25fa5c06ee` confirms that the category rule
+  and pair betas are exact existing computations at dependency-safe earlier
+  boundaries. It also confirms experimentally that all three classifier
+  mirrors are unnecessary and absent from the selected design. No immediate
+  human correction superseded the proposal. The standing unattended
+  delegation therefore authorizes only D-060's zero-kernel-math relocation,
+  focused descendant synchronization, and unchanged resumption of D-058.
 - **2026-08-02 — D-DTTLF-USABILITY-060 correction frozen for separate
   review.** The D-059 implementation experiment made the exact horizontal
   signature compile through its six approved product dependencies, then

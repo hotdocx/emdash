@@ -410,12 +410,14 @@
 > dependency. The exact
 > `CONTEXTUAL-ND-HORIZONTAL-NORMALIZATION-FOUNDATION-1ZB` /
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-NORMALIZATION-CORRECTION-01 /
-> D-DTTLF-USABILITY-060 proposal is now frozen and decision-pending in the
-> living continuation plan. Its experimental witness relocates those three
+> D-DTTLF-USABILITY-060 proposal at
+> `2631fcd7f0cc278feff1639dc8afbb25fa5c06ee` is now separately
+> reviewed-approved under the standing unattended delegation. Its
+> experimental witness relocates those three
 > existing computations to their earlier semantic transfer boundaries,
 > removes three unreachable classifier mirrors, compiles the eight-declaration/
 > fourteen-local-rule `fibred-transfd-1` closure, and changes no kernel
-> mathematics or D-058 usability scope.
+> mathematics or D-058 usability scope. D-060 is implementation-ready.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
