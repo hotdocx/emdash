@@ -308,6 +308,18 @@ const copyClassifier = (
             index: classifier.index
         };
     }
+    if (classifier.tag === 'indexed-hom') {
+        return {
+            tag: 'indexed-hom',
+            baseCategory: classifier.baseCategory,
+            sourceFamily: classifier.sourceFamily,
+            targetFamily: classifier.targetFamily,
+            sourceFunctor: classifier.sourceFunctor,
+            targetFunctor: classifier.targetFunctor,
+            baseIndex: classifier.baseIndex,
+            fibreIndex: classifier.fibreIndex
+        };
+    }
     if (classifier.tag === 'nested-indexed-object') {
         return {
             tag: 'nested-indexed-object',

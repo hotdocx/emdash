@@ -293,16 +293,24 @@
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-ETA-01 /
 > D-DTTLF-USABILITY-055 is separately reviewed-approved from immutable
 > proposal checkpoint `36e1c8dba16a8a206ace58628ba47703a2b74374` under the
-> standing unattended delegation. It adds only a compact contextual method,
+> standing unattended delegation and is now implemented/in-scope green with
+> its semantic checkpoint pending. It adds only a compact contextual method,
 > a construction-only
 > indexed point-Hom/application view, and the eta point leaf
 > `lambda^nd a. eta[a] -> eta`; it adds no kernel/transfer owner, generic
 > checker case, curry/section route, parser/browser promotion, or unrestricted
 > `:^nd` claim. Review confirms that the point view disappears before Core
 > checking, the recovered result is a genuine closed `Transfd`, and all action
-> remains internal through existing owners. The bounded active-kernel check
-> and existing `:^nd` suites are green at 14/14. Implementation is now the
-> dependency-ready operation.
+> remains internal through existing owners. Its focused suite is 7/7 and its
+> new/nearest/text-inventory run is 31/31; workspace, typecheck, lint, and
+> whitespace checks pass. The sole required aggregate adds exactly the seven
+> new passes and retains only the same three unrelated canonical-export digest
+> failures at 1,272 pass/51 skip. Do not repeat that approximately 44-minute
+> aggregate or repair the transfer pins in this tranche. After the semantic
+> checkpoint, the dependency-ready operation is the read-only
+> `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` audit of the first recursive point-body
+> constructor; it may freeze at most one successor and may not broaden
+> behavior itself.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

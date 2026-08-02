@@ -502,7 +502,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-TOWER-GRADUATE-0Q` | read-only successor audit complete; zero semantic delta; arbitrary-level source action selected | implemented D-053 tower; arbitrary positive sibling-layer compiler; existing `Hom_catd`/`Transf_catd`, `homd_int`, and displayed-`:^nd` evidence; bounded current-kernel check | The tower is genuinely depth-recursive but presently supports only eta/identity and closed target maps. Independent positive sibling depth/width is already separately generic, and mixed classifier formation/elimination plus higher action are already internalized. The first missing operation that directly stress-tests variance at arbitrary depth is a finite contravariant source chain at any tower layer, lifted through its enclosing prefix by the existing target action. |
 | `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` | implemented and in-scope green at `390d9f4561576885d5d55588402479db877028ff` under D-DTTLF-USABILITY-054 | completed `DIRECT-MIXED-TOWER-GRADUATE-0Q`; immutable proposal `107798b09081212007d4d1db80213eecc1495517`; separate review under standing unattended delegation | The tower factorer now accepts `F[c](L1(a1))...(Ln(an))`, with a finite closed coherent source chain independently at every layer. It compiles deepest-outward by reusing the existing mixed source action and target lift through the current prefix. Depth-three positions, simultaneous chains, bound-outer identity, rich `Hom_catd`, and generated depth six are checked without a kernel/transfer owner, curry, total section, sibling integration, pair/weakening/constant-middle case, or new `:^nd` constructor. |
 | `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` | read-only architecture audit complete; zero semantic delta; direct point-eta successor selected | completed D-054 arbitrary-level source action; existing `displayedTransforLambda` eta/composition; active `Transfd_cat`, `Transf_catd`, `homd_int`, and `tdapp1_int_*` owners | `:^nd`, like `:^fd`, is fundamentally a direct nested contextual binder. Its compact callback should hide `k :^n K`, expose `a :^n E[k]`, and factor supported point-arrow syntax back to a genuine `Transfd` owner in two recursive stages. The present API factors only whole fibre transformations. `Transf_catd`/Pi and Sigma-total views remain semantic comparisons, not a required curry route. The first missing slice is TypeScript-only point eta. |
-| `DIRECT-CONTEXTUAL-ND-ETA-1T` | separately reviewed-approved under D-DTTLF-USABILITY-055; implementation dependency-ready | completed `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S`; immutable proposal `36e1c8dba16a8a206ace58628ba47703a2b74374`; separate review under standing unattended delegation; green active kernel and 14/14 existing `:^nd` regression baseline | Add one opt-in compact `displayedTransforContextLambda` and one construction-only indexed point-Hom/application route. Recognize only `eta[a]` for an already-coherent closed displayed transformation, recover `eta`, and preserve its internal object/fibre-arrow/base-arrow/higher action. Add no kernel/transfer owner, external coherence evidence, curry/section route, pointwise identity/composition, parser/browser route, or unrestricted-`:^nd` claim. |
+| `DIRECT-CONTEXTUAL-ND-ETA-1T` | implemented and in-scope green under D-DTTLF-USABILITY-055; semantic checkpoint pending | completed `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S`; immutable proposal `36e1c8dba16a8a206ace58628ba47703a2b74374`; separate review under standing unattended delegation; 7/7 focused and 31/31 combined regressions; workspace/typecheck/lint; sole aggregate 1,272 pass/51 skip/same three unrelated digest-pin failures | One opt-in compact `displayedTransforContextLambda`, one construction-only indexed point-Hom/application route, and one eta point factor recover the already-coherent closed `eta`. The result preserves internal object/fibre-arrow/base-arrow/higher action. No kernel/transfer owner, external coherence evidence, curry/section route, pointwise identity/composition, parser/browser route, or unrestricted-`:^nd` claim was added. |
+| `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` | next dependency-ready read-only successor audit after the D-055 checkpoint | implemented D-055 compact point eta; retained whole-fibre recursive composition; existing generic `composeCells` and displayed identity owners | Stress the two-stage point-to-fibre-to-outer factorization and select at most one first recursive point-body constructor. Compare exact pointwise vertical composition with identity and whiskering; prefer reuse of existing typed application/composition nodes and whole-owner recovery. Add no semantic behavior during the audit and do not claim unrestricted `:^nd`. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -5403,6 +5404,54 @@ existing TypeScript or text callers. Surface notation consolidation remains
 a later parser-parity task. No immediate human correction superseded the
 proposal, so only D-055's TypeScript/test/document scope is authorized.
 
+### D-DTTLF-USABILITY-055 implementation result
+
+The approved slice is implemented exactly within its frozen boundary. The
+new `displayedTransforContextLambda` callback receives only the fibre token
+`a`; its builder owns the hidden base token, records the
+`['natural', 'natural']` telescope, and evaluates the callback exactly once.
+Applying a closed displayed transformation directly to that indexed object
+constructs the existing base component followed by one new construction-only
+point application. Its normalized result classifier records both locally
+nameless indices and the exact families/endpoints.
+
+The point factorer accepts only that exact application with the bound fibre
+token. It delegates its subject to the pre-existing whole-fibre component
+factorer and returns only the recovered closed `Transfd`. The construction
+`indexed-hom` therefore disappears before explicit Core checking. There is
+no new Core term/type former, LF checker/evaluator case, transfer declaration,
+kernel owner/rule, manual convertibility case, or external naturality field.
+
+Focused evidence is 7/7 green and covers:
+
+- callback-once and a deeply frozen two-index point-body IR;
+- exact equality of `lambda^nd a. eta[a]` with `eta`;
+- exact closed `eta[x][u]` behavior;
+- retained internal `eta[p][u]` base-arrow behavior;
+- unchanged whole-fibre eta and recursive composition;
+- wrong endpoint/family, arbitrary point data, wrong mode, escaped/foreign
+  token, and unavailable-profile failures.
+
+The combined new/nearest-regression/text-inventory run is 31/31 green.
+Workspace, typecheck, lint, and whitespace gates pass. The sole required
+`check:ts` run reported 1,272 pass, 51 skip, and three failures, all at the
+unchanged canonical-export digest pin
+`sha256:4d8473837cbdd031ad4af4e9f41e9330243fff4929db4860919a81228804de82`
+versus the current live digest
+`sha256:7fe3f4c706bea0f9fc0ae9c11865a2c464abc4aa9df1ab434d08710dbaf360fe`.
+Those are the same unrelated transfer representation, runtime, and
+acquisition pin failures recorded before D-055. The seven-pass increase from
+the previous aggregate is exactly the new focused module. The approximately
+44-minute aggregate was not repeated and no transfer pin was changed.
+
+The public method inventory increases from 81 to 82 and classifies the new
+method in the existing displayed-natural typed-resolver seam. No text grammar,
+resolver, CLI, reviewer, browser, or public capability claim changes. The
+next operation after the semantic checkpoint is the read-only
+`DIRECT-CONTEXTUAL-ND-GRADUATE-0U` audit. It must compare pointwise vertical
+composition, identity, and whiskering and freeze at most one smallest
+constructor-led successor; it may not broaden behavior itself.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -5720,12 +5769,22 @@ H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-ETA-01 /
 D-DTTLF-USABILITY-055 proposal at
 `36e1c8dba16a8a206ace58628ba47703a2b74374` as separately reviewed-approved
 under the standing unattended delegation, with immediate human supersession.
-Implement only its TypeScript-only point-eta proof slice. Add one opt-in
-compact contextual method, one construction-only indexed point-Hom/
-application route, and one eta factorization back to an already-coherent
-closed `Transfd`. Add no kernel/transfer owner, generic checker/evaluator
-case, external naturality data, curry/section route, pointwise identity/
-composition, parser/browser/publication change, or unrestricted-`:^nd` claim.
+Treat its TypeScript-only point-eta proof slice as implemented and in-scope
+green with its semantic checkpoint pending. It adds one opt-in compact
+contextual method, one construction-only indexed point-Hom/application route,
+and one eta factorization back to an already-coherent closed `Transfd`. Carry
+forward the 7/7 focused, 31/31 combined, workspace/typecheck/lint/whitespace,
+and sole aggregate evidence exactly as recorded. Do not repeat the aggregate
+or repair its three unrelated canonical-export digest pins. Add no
+kernel/transfer owner, generic checker/evaluator case, external naturality
+data, curry/section route, pointwise identity/composition, parser/browser/
+publication change, or unrestricted-`:^nd` claim.
+
+After the D-055 semantic checkpoint, run the read-only
+`DIRECT-CONTEXTUAL-ND-GRADUATE-0U` successor audit. Compare pointwise vertical
+composition, identity, and whiskering against existing typed construction and
+whole-owner factorization. Freeze at most one smallest constructor-led
+proposal. Do not edit semantic behavior during the audit.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -5744,6 +5803,22 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-055 implemented and in-scope green;
+  semantic checkpoint pending.** The compact
+  `displayedTransforContextLambda` hides the base token, exposes one natural
+  fibre token, and recognizes exactly the eta point application of an
+  already-coherent closed displayed transformation. The new normalized
+  indexed-Hom/application construction view disappears before Core checking;
+  the result is the recovered genuine `Transfd`, whose object, fibre-arrow,
+  base-arrow, and higher action remain owned internally. Focused evidence is
+  7/7 and the combined nearest/text-inventory run is 31/31; workspace,
+  typecheck, lint, and whitespace gates pass. The sole approximately
+  44-minute aggregate reports 1,272 pass, 51 skip, and only the same three
+  unrelated canonical-export digest-pin failures; it was not repeated. No
+  kernel/transfer owner, generic LF behavior, external coherence datum,
+  curry/section route, pointwise constructor, parser/browser behavior, or
+  unrestricted-`:^nd` claim was added. The next operation after checkpointing
+  is the read-only `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` audit.
 - **2026-08-01 — D-DTTLF-USABILITY-055 approved exactly as proposed.** A
   separate review of immutable proposal checkpoint
   `36e1c8dba16a8a206ace58628ba47703a2b74374` confirms that the active

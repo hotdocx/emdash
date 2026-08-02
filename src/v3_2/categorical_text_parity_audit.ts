@@ -546,6 +546,7 @@ const capabilities = [
     {
         id: 'displayed-natural-abstraction-and-composition',
         apiMethods: [
+            'displayedTransforContextLambda',
             'displayedTransforLambda',
             'composeCells',
             'composeDisplayedTransfor'
@@ -555,15 +556,19 @@ const capabilities = [
             'Expected source/target displayed functors select ^nd; component ' +
             'composition requires adjacent indexed-transfor endpoints.',
         scopedBindings:
-            'One natural base-object slot; component bodies remain indexed.',
+            'The compact contextual method hides one natural base slot and ' +
+            'exposes one natural fibre-object slot; the retained component ' +
+            'method exposes the natural base slot directly.',
         dependencyAndVariance: 'natural variation, displayed dependency',
         actionOwnership:
             'Existing displayed component owner and generic category ' +
             'composition at Functord_cat.',
         recursiveBodyGrammar:
-            'component eta and finite recursive typed-cell composition only',
+            'compact point eta, plus retained whole-fibre component eta and ' +
+            'finite recursive typed-cell composition only',
         proposedText:
-            'λ^nd k [: K]. eta k; λ^nd k. ' +
+            'λ^nd a [: E]. eta a; retained λ^nd k [: K]. eta k; ' +
+            'λ^nd k. ' +
             'composeCells (theta k) (eta k)',
         locatedSyntax: 'requires-typed-expected-contract',
         classification: 'typed-resolver-seam',
@@ -701,7 +706,7 @@ const rawAudit = {
     },
     capabilities,
     measuredCoverage: {
-        publicProgramMethods: 81,
+        publicProgramMethods: 82,
         capabilityRows: 14,
         classificationRows: {
             alreadyTextComplete: 1,

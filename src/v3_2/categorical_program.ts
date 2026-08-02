@@ -3766,6 +3766,7 @@ export class CoreCategoricalProgram {
             pointInspection.type.tag === 'indexed-object' ||
             pointInspection.type.tag === 'indexed-functor' ||
             pointInspection.type.tag === 'indexed-transfor' ||
+            pointInspection.type.tag === 'indexed-hom' ||
             pointInspection.type.tag === 'nested-indexed-object'
         ) {
             throw new CoreCategoricalProgramError(
@@ -6348,6 +6349,7 @@ export class CoreCategoricalProgram {
                 endpoint.type.tag === 'indexed-object' ||
                 endpoint.type.tag === 'indexed-functor' ||
                 endpoint.type.tag === 'indexed-transfor' ||
+                endpoint.type.tag === 'indexed-hom' ||
                 endpoint.type.tag === 'nested-indexed-object'
             ) {
                 throw new CoreCategoricalProgramError(
@@ -8090,6 +8092,79 @@ export class CoreCategoricalProgram {
                 targetObject
             },
             nodeProvenance
+        );
+    }
+
+    /**
+     * Direct compact `lambda^nd a : E. body(a)` abstraction.
+     *
+     * The callback sees the natural fibre object `a`; the natural base `k`
+     * remains hidden. D-055 accepts only the exact point-eta body of an
+     * already-coherent displayed transformation.
+     */
+    displayedTransforContextLambda(
+        name: string,
+        sourceFunctorValue: CoreCategoricalTerm,
+        targetFunctorValue: CoreCategoricalTerm,
+        body: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `displayed-transfor contextual abstraction ${name}`,
+            options.source
+        );
+        this.requireFibredTransfd(nodeProvenance);
+        const sourceFunctor = this.requireDisplayedFunctorTerm(
+            sourceFunctorValue,
+            nodeProvenance,
+            `source endpoint of contextual displayed-transfor ` +
+                `abstraction '${name}'`
+        );
+        const targetFunctor = this.requireDisplayedFunctorTerm(
+            targetFunctorValue,
+            nodeProvenance,
+            `target endpoint of contextual displayed-transfor ` +
+                `abstraction '${name}'`
+        );
+        if (
+            !kernelExpressionEquals(
+                sourceFunctor.baseCategory,
+                targetFunctor.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.sourceFamily,
+                targetFunctor.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.targetFamily,
+                targetFunctor.targetFamily
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_SOURCE_MISMATCH',
+                nodeProvenance,
+                `Contextual displayed-transfor abstraction '${name}' has ` +
+                    'incompatible displayed-functor endpoints'
+            );
+        }
+        return this.builder.displayedTransforContextLambda(
+            name,
+            sourceFunctor.baseCategory,
+            sourceFunctor.sourceFamily,
+            sourceFunctor.targetFamily,
+            sourceFunctor.expression,
+            targetFunctor.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
         );
     }
 
