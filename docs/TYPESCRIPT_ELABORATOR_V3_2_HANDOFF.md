@@ -142,10 +142,14 @@
 > eta/identity/composition/whiskering factorization and internal point/higher
 > action. The parity inventory is 84 methods in 14 unchanged rows. Typecheck,
 > lint, parity 6/6, and the corrected telescope corpus are green; no aggregate
-> or kernel rerun was needed. The next dependency-ready row is
-> the dedicated plan's read-only `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` audit:
-> freeze the exact semantic envelope and select telescope text parity unless
-> one concrete mixed-variance counterexample requires a prerequisite.
+> or kernel rerun was needed. The dedicated plan's
+> `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` audit is read-only complete with zero
+> behavior delta. Grouped text grammar and recursive body resolution already
+> exist, and no concrete mixed-variance blocker was found. It freezes exactly
+> `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` / D-DTTLF-USABILITY-069 pending a
+> separate immutable review: one grouped transformation expected contract,
+> one route to the final-green typed API, exact revision synchronization, and
+> focused direct/text evidence; no new parser, AST, or semantic factorer.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

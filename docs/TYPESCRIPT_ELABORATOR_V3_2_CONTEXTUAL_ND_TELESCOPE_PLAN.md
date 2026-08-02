@@ -27,6 +27,10 @@ separately reviewed-approved from immutable checkpoint
 delegation, with immediate human supersession. The combined D-067/D-068
 implementation is final-green at rollback-safe semantic checkpoint
 `01848adf70acbb49e2f6dbbe35b8fef90b517915`.
+`CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` is read-only complete with zero
+behavior delta. It selects the exact
+`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` / D-DTTLF-USABILITY-069 proposal
+below, frozen pending separate review.
 
 ## Objective
 
@@ -455,7 +459,141 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TELESCOPE-0AK` | read-only complete; zero behavior delta | completed 0AJ; generic displayed context fold; single-fibre point factorer | Select one shared normal form, coherent accessors applied to one terminal slot, and contextual endpoint reuse of the existing recursive object compiler. Independent siblings, genuine dependency, and finite mixed layers require no new owner or coherence algorithm. |
 | `CONTEXTUAL-ND-TELESCOPE-1AL` | final-green at `01848adf70acbb49e2f6dbbe35b8fef90b517915` | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451`; D-067 proposal `57c811fd9ab992abffa6b2388aed06dec3dae19d`; D-068 correction `dc104610c3cb8bbaf665382afe23802c12db41a2`; immutable reviews | One shared normal form now feeds a synthesis-capable direct dependent-context transformation method and the existing contextual endpoint/factorer seam. Independent siblings, genuine dependency, four-layer/six-binding access, identity, composition, both whiskerings, point/higher action, frozen evidence, and the fail-closed matrix are executable. Text/browser promotion remains later. |
 | `CONTEXTUAL-ND-TELESCOPE-AUDIT-CORRECTION-1AL1` | final-green; implementation folded into 1AL | first D-067 typecheck; exhaustive public-method inventory | The new method occurs exactly once in the existing displayed-natural capability row; the inventory is 84 methods in 14 unchanged rows and adds no text behavior. |
-| `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` | dependency-ready read-only audit; zero behavior authorized | final-green 1AL; prior alternating Hom/Transf and mixed-target evidence | Freeze the exact finite canonical `:^nd` semantic envelope, distinguish semantic depth from explicit-Core serialization performance, and select at most one next product slice: telescope text parity or one concrete prerequisite mixed-variance closure. |
+| `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` | read-only complete; zero behavior delta | final-green 1AL; prior alternating Hom/Transf and mixed-target evidence | The finite canonical semantic envelope is coherent and classifier-head-agnostic. Grouped text grammar already exists; the missing seam is one expected-contract/resolver route, not a mixed-variance construction. |
+| `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` | D-DTTLF-USABILITY-069 frozen pending separate review; zero behavior authorized before approval | completed 0AM; final-green typed method | Add one grouped displayed-transformation expected contract and resolver route to the existing typed API, preserve the body algebra and fail-closed boundary, bump the text revision, and prove direct/text parity without a second parser or semantic factorer. |
+
+## `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` Audit Result
+
+The exact finite canonical semantic envelope graduates:
+
+1. A source telescope is an arbitrary finite nonempty sequence of canonical
+   sibling layers, where every later layer is literally over the Sigma total
+   of the preceding layer's left-associated fibrewise product. The public
+   transformation method requires at least two written bindings; compact one-
+   fibre `:^nd` remains the earlier final-green method.
+2. Every written variable is a coherent accessor application to one terminal
+   contextual slot. There is no multi-ordinal coherence payload, retained
+   callback, total-context section, or external naturality equation.
+3. The body algebra is the existing factorer algebra: eta, generic identity,
+   typed recursive vertical composition, and fixed-head pre- and
+   postwhiskering over endpoint expressions already accepted by the recursive
+   displayed-context compiler.
+4. The result is one closed whole `Transfd`. Point components and base-arrow/
+   higher observations use existing internal owners. The implementation does
+   not inspect `Hom_catd` or `Transf_catd` classifier heads and adds no
+   arrow-only binder.
+5. Independent siblings, a genuine dependency edge, and a four-layer/six-
+   binding early-plus-final occurrence are executable. The deep semantic
+   witness takes about 6.8 seconds after removing redundant explicit-Core
+   serialization; worst-case serialization size remains a performance non-
+   claim rather than a semantic failure.
+
+The text audit finds a narrow mechanical seam:
+
+- `LocatedLambda` already parses arbitrary alphabetic modes and comma/
+  semicolon binding groups. No grammar or second AST is missing.
+- The existing `displayed-dependent-context-functor` resolver already owns
+  exact group-shape checking, optional displayed-family annotations, ordered
+  flattening, callback-local bindings, and canonical layer-presentation
+  validation.
+- `resolveContextLambdaBody` already resolves `fibrePair`, named eta,
+  `identityCell`, `composeCells`, and ordinary applications recursively.
+- Only `resolveRootLambda` rejects a grouped mode other than `^fd`, and the
+  public expected-contract union has no grouped displayed-transformation
+  variant. The final-green typed method already synthesizes its endpoints, so
+  the new text contract needs source groups but must not duplicate source and
+  target functors.
+
+No concrete mixed-variance prerequisite was found. Existing alternating
+`Hom_catd`/`Transf_catd` contextual evidence, the fixed mixed-target corpus,
+and the `homd_int` consumer remain internal-action evidence. Unrestricted
+variance is still a non-claim, but it is not a blocker for routing the exact
+typed mathematical constructions now implemented. Therefore 0AM selects text
+parity rather than another semantic owner or factorer.
+
+## Frozen `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` Proposal
+
+### H-DTTLF-USABILITY-CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-01 /
+### D-DTTLF-USABILITY-069
+
+Approval authorizes exactly:
+
+1. Add one `CoreCategoricalTextTermExpected` variant named
+   `displayed-dependent-context-transfor`. It contains ordered
+   `sourceGroups` and no separately supplied endpoint functors; the typed body
+   and final-green program method synthesize and recheck those endpoints.
+2. In `resolveRootLambda`, route both a multi-level grouped `^nd` lambda and a
+   one-level multi-sibling `^nd` lambda to one new resolver. Preserve the
+   existing `^fd` routes and all ungrouped `^n`, `^fd`, and compact `^nd`
+   routes. The parser and located syntax nodes do not change.
+3. Factor the existing exact source-group cardinality, annotation, flattening,
+   and callback-environment setup only as needed for reuse by the `^fd` and
+   `^nd` grouped resolvers. Do not introduce a second elaborator or duplicate
+   the canonical layer algorithm.
+4. The new resolver must call only
+   `displayedTransforDependentContextLambda`. Pass source-ordered bindings and
+   resolve the body recursively in the existing callback-local environment.
+   Do not request or construct pointwise naturality evidence.
+5. Generalize the existing post-elaboration layer-presentation check to accept
+   either the displayed-functor telescope evidence or the new displayed-
+   transformation telescope evidence. Presented comma/semicolon groups must
+   exactly equal the internally derived layers.
+6. Text may express exactly the final-green body algebra through existing term
+   syntax: paired eta, generic identity, recursive `composeCells`, and fixed-
+   head pre/post application. An unsupported body must preserve the typed
+   API's fail-closed diagnostic; no arbitrary point arrow is promoted.
+7. Advance `CORE_CATEGORICAL_TEXT_REVISION` exactly to
+   `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN-CATEGORICAL-TEXT-1`. Mechanically
+   synchronize the nine existing exact revision assertions and no unrelated
+   expected output.
+8. Update the existing displayed-natural capability-row prose in
+   `categorical_text_parity_audit.ts` to record grouped direct/text coverage.
+   Keep its `typed-resolver-seam` classification, `SYNTAX-PARITY-1A` owner,
+   the 84-method count, fourteen-row count, and classification totals.
+9. Add focused tests to the already registered generic telescope corpus. Cover
+   direct/text equality for an independent paired eta and a genuine dependent
+   pair; identity, composition, and both whiskering orientations; one deep
+   group-presentation witness without serializing its enormous Core; callback-
+   once and frozen evidence; optional annotations; and wrong expected kind,
+   group shape, annotation family, mode, predecessor profile, and unsupported
+   body failures.
+10. Edit only:
+
+    - `src/v3_2/categorical_text.ts`;
+    - `src/v3_2/categorical_text_parity_audit.ts`;
+    - `tests/v3_2_categorical_displayed_telescope_generic_tests.ts`;
+    - the eight other test files that pin the exact text revision:
+      `v3_2_categorical_text_internal_action_audit_tests.ts`,
+      `v3_2_categorical_text_recursive_mixed_tests.ts`,
+      `v3_2_categorical_text_result_constructor_audit_tests.ts`,
+      `v3_2_categorical_text_nested_ordinary_tests.ts`,
+      `v3_2_categorical_text_internal_action_tests.ts`,
+      `v3_2_categorical_text_displayed_constructor_tests.ts`,
+      `v3_2_categorical_text_constructor_tests.ts`, and
+      `v3_2_categorical_text_graduation_audit_tests.ts`;
+    - this plan, the handoff, and the mixed-continuation ledger; and
+    - one immutable D-069 review artifact before implementation.
+
+    Any additional production or test file requires a frozen correction.
+11. Run typecheck, lint, whitespace hygiene, the focused parity-audit test,
+    and one name-filtered telescope text run that covers the new cases. Verify
+    the exact revision inventory by search. Do not rerun the long aggregate,
+    full telescope corpus, browser, kernel, print, or book checks; none of
+    those boundaries changes.
+12. Synchronize the three living ledgers, then create one rollback-safe local
+    semantic checkpoint and one ledger checkpoint. Do not push, merge, rebase,
+    amend, reset, publish, deploy, remove worktrees, or clean unrelated paths.
+
+Explicit non-effects:
+
+- no new parser grammar, second AST, Core/checker/runtime case, kernel owner,
+  rewrite/unification rule, external coherence payload, curry, product facade,
+  or classifier decomposition heuristic;
+- no arbitrary dependency DAG, exchange, unrestricted variance, unrestricted
+  `:^nd`, arbitrary point-arrow synthesis, or serialization-performance claim;
+- no browser/README/book/public preset, deployment, publication, scale
+  resumption, package, barrel, or root-runner change; and
+- no claim that host-language callback control flow is reproducible as text.
 
 ## `CONTEXTUAL-ND-TELESCOPE-0AK` Audit Contract
 
@@ -575,8 +713,11 @@ delegation, with immediate human supersession. Implement only its thirteen
 numbered items plus the separately reviewed exact D-068 inventory correction.
 Treat the combined implementation as final-green at
 `01848adf70acbb49e2f6dbbe35b8fef90b517915`. Run
-`CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` next as a read-only audit and select at
-most one exact successor. Preserve direct recursive binders and internal
+`CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` as read-only complete with zero behavior
+delta. It finds no concrete mixed-variance blocker and freezes exactly
+`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` / D-DTTLF-USABILITY-069 pending a
+separate immutable review. Do not implement it before that review. Preserve
+direct recursive binders and internal
 object/arrow/higher action; add no curry, total-context section, cast,
 external coherence, parser/browser behavior, or kernel owner.
 
@@ -586,6 +727,18 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — 0AM read-only graduation complete; D-069 text-parity
+  proposal frozen.** The final-green typed method graduates finite canonical
+  sibling/Sigma telescopes, coherent named accessors, the existing recursive
+  eta/identity/composition/whiskering factorer, and internal point/higher
+  action. Arbitrary DAGs, exchange, unrestricted variance, arbitrary point
+  arrows, and worst-case serialization remain explicit non-claims. Source
+  inspection finds that grouped grammar, annotations, callback-local body
+  resolution, and canonical presentation checks already exist; only one
+  grouped transformation expected contract and resolver route are missing.
+  No executable mixed-variance counterexample requires semantic work first.
+  The exact twelve-item D-069 proposal is frozen pending separate review and
+  authorizes no behavior yet.
 - **2026-08-02 — D-067/D-068 implementation final-green at
   `01848adf70acbb49e2f6dbbe35b8fef90b517915`; 0AM selected.** One shared
   canonical normal form now serves the existing displayed-functor telescope
