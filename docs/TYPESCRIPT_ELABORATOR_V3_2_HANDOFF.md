@@ -326,7 +326,7 @@
 > D-DTTLF-USABILITY-056 proposal at
 > `ff170aa0ab8ec18e829a95689800032401c18f23` is separately reviewed-approved
 > under the standing unattended delegation and is now implemented/in-scope
-> green with its semantic checkpoint pending. The existing `composeCells`
+> green at `e125bb9aa2c734c6bee01f3eccfa28cfa1cdebc4`. The existing `composeCells`
 > node now accepts a separate homogeneous indexed point-Hom branch; the point
 > factorer recursively recovers each D-055 leaf and composes the resulting
 > closed `Transfd` owners through existing generic composition. It adds no
@@ -335,8 +335,8 @@
 > 6/6 and the combined nearest run is 37/37; workspace, typecheck, lint, and
 > whitespace checks pass. Its sole aggregate reports 1,278 pass/51 skip and
 > only the same three unrelated digest-pin failures, exactly six passes above
-> D-055. Do not repeat that approximately 39.9-minute aggregate. After the
-> semantic checkpoint, the next dependency-ready operation is the read-only
+> D-055. Do not repeat that approximately 39.9-minute aggregate. The next
+> dependency-ready operation is the read-only
 > `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` audit of point identity,
 > orientation-aware whiskering/action, and one representative mixed
 > constructor.
