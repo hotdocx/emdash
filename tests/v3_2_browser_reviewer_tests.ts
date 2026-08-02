@@ -241,6 +241,38 @@ const directCompilation = (
                 program.homCategory(cells, alpha, beta)
             ));
         }
+        case 'displayed-dependent-transformation': {
+            const program = new CoreCategoricalProgram({
+                sourceFile: '<browser-reviewer-direct>',
+                profile: 'fibred-displayed-chain-2a'
+            });
+            const K = program.category('review_K');
+            const A = program.displayedFamily('review_A', K);
+            const sigmaA = program.totalCategory(A);
+            const B = program.displayedFamily('review_B', sigmaA);
+            const liftedA = program.pullbackFamily(
+                A,
+                program.sigmaProjection(A)
+            );
+            const source = program.displayedProduct(liftedA, B);
+            const D = program.displayedFamily('review_D', sigmaA);
+            const F = program.displayedFunctor('review_F', source, D);
+            const G = program.displayedFunctor('review_G', source, D);
+            const eta = program.displayedTransfor('review_eta', F, G);
+            return program.compile(
+                program.displayedTransforDependentContextLambda(
+                    [
+                        { name: 'a', family: A },
+                        { name: 'b', family: B }
+                    ],
+                    ([a, b]) => program.apply(
+                        eta,
+                        program.fibrePair(a, b),
+                        { expectedShape: 'point-component' }
+                    )
+                )
+            );
+        }
         case 'displayed-transfor-composition': {
             const program = new CoreCategoricalProgram({
                 sourceFile: '<browser-reviewer-direct>',
@@ -408,6 +440,49 @@ const collectLocalClosure = (
 };
 
 describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
+    it('executes the dependent natural telescope preset on chain-2A', () => {
+        const result = runCoreBrowserReviewerText({
+            presetId: 'displayed-dependent-transformation',
+            source:
+                'λ^nd (a : A; b : B). eta (fibrePair a b)'
+        });
+        assert.equal(result.status, 'accepted');
+        if (result.status !== 'accepted') return;
+        const direct = directCompilation(
+            'displayed-dependent-transformation'
+        );
+        assert.equal(result.explicitCore, direct.explicitCore);
+        assert.equal(result.inferredType, direct.explicitInferredType);
+        assert.equal(result.expectedType, direct.explicitExpectedType);
+        assert.deepEqual(
+            result.structuralPrerequisites,
+            direct.structuralPrerequisites
+        );
+        assert.equal(
+            result.expectedMode.kind,
+            'displayed-dependent-context-transfor'
+        );
+        assertDeepFrozen(result);
+
+        const rejected = runCoreBrowserReviewerText({
+            presetId: 'displayed-dependent-transformation',
+            source:
+                'λ^nd (a : A; b : A). eta (fibrePair a b)',
+            sourceFile: 'dependent-reviewer-input.emdash'
+        });
+        assert.equal(rejected.status, 'rejected');
+        if (rejected.status !== 'rejected') return;
+        assert.equal(
+            rejected.diagnostic.code,
+            'INCOMPATIBLE_ABSTRACTION_EXPECTATION'
+        );
+        assert.equal(
+            rejected.diagnostic.span.file,
+            'dependent-reviewer-input.emdash'
+        );
+        assertDeepFrozen(rejected);
+    });
+
     it('checks every editable preset through the same direct program path', () => {
         assert.deepEqual(
             CORE_BROWSER_REVIEWER_PRESETS.map(preset => preset.id),
@@ -422,6 +497,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
                 'displayed-sibling-pairing',
                 'displayed-mixed-telescope',
                 'recursive-hom-functor',
+                'displayed-dependent-transformation',
                 'displayed-transfor-composition'
             ]
         );
@@ -518,7 +594,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
     it('publishes the exact deeply frozen capability boundary', () => {
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.revision,
-            'RECURSIVE-HOM-PUBLIC-1A-BROWSER-REVIEWER-1'
+            'CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP-BROWSER-REVIEWER-1'
         );
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.fullReportExecution,
@@ -531,7 +607,13 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         );
         assert.ok(
             CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
-                'eleven categorical text presets across ^f, ^n, ^fd, and ^nd'
+                'twelve categorical text presets across ^f, ^n, ^fd, and ^nd'
+            )
+        );
+        assert.ok(
+            CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
+                'finite canonical sibling/Sigma contextual ' +
+                    'displayed-natural abstraction'
             )
         );
         assert.ok(
@@ -664,12 +746,13 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         assert.match(app, /Minimal Core playground/u);
         assert.match(
             app,
-            /<strong>11<\/strong><span>reviewed examples<\/span>/u
+            /CORE_BROWSER_REVIEWER_PRESETS\.length \?\? 12/u
         );
+        assert.match(app, /reviewed examples/u);
         assert.match(app, /qualified finite/u);
         assert.match(rootReadme, /depth-generic finite/u);
         assert.match(rootReadme, /general mixed\s+introduction\/curry/u);
-        assert.match(fixtureReadme, /eleven editable/u);
+        assert.match(fixtureReadme, /twelve editable/u);
         assert.match(fixtureReadme, /unsupported variance DAGs/u);
         assert.equal(
             rootPackage.scripts['check:browser-directed'],

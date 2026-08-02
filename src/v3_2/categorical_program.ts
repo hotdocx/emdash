@@ -1279,6 +1279,8 @@ export class CoreCategoricalProgram {
                     this.displayedChainEnabled,
                 displayedGenericTelescope:
                     this.mixedModeEnabled,
+                displayedTransforGenericTelescope:
+                    this.displayedChain2aEnabled,
                 mixedNestedFactorization:
                     this.mixedModeEnabled,
                 directMixedIntroduction:
@@ -8136,7 +8138,15 @@ export class CoreCategoricalProgram {
             'displayed-transfor dependent contextual abstraction',
             options.source
         );
-        this.requireMixedMode(nodeProvenance);
+        if (!this.displayedChain2aEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_DISPLAYED_CHAIN',
+                nodeProvenance,
+                'Dependent contextual displayed-transfor abstraction ' +
+                    'is available only in the explicit ' +
+                    "'fibred-displayed-chain-2a' root profile lineage"
+            );
+        }
         this.requireFibredTransfd(nodeProvenance);
         if (bindingValues.length < 2) {
             throw new CoreCategoricalProgramError(

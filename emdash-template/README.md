@@ -82,7 +82,7 @@ Actions route. No generated `gh-pages` branch or committed `dist/` is needed.
 
 The current browser demonstrates:
 
-- eleven editable categorical examples across `^f`, `^n`, `^fd`, and `^nd`,
+- twelve editable categorical examples across `^f`, `^n`, `^fd`, and `^nd`,
   with expected-type-directed action selection and source diagnostics;
 - qualified depth-generic finite Hom-category recursion over reviewed
   categorical roots;

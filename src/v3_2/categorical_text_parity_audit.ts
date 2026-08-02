@@ -555,7 +555,7 @@ const capabilities = [
         ],
         profile:
             'fibred-transfd-1 for compact forms; ' +
-            'fibred-displayed-mixed-nest-1 for canonical telescopes',
+            'fibred-displayed-chain-2a for canonical telescopes',
         classifierContract:
             'Expected source/target displayed functors select ^nd; component ' +
             'composition requires adjacent indexed-transfor endpoints.',

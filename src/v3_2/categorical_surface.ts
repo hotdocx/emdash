@@ -960,6 +960,7 @@ export interface CoreCategoricalScopedBuilderOptions {
      * contain at least two Sigma-separated layers.
      */
     readonly displayedGenericTelescope?: boolean;
+    readonly displayedTransforGenericTelescope?: boolean;
     /**
      * Enable only MIXED-NEST-1A's exact recursive eta/factorization for an
      * already-coherent object of the canonical mixed nested Hom family.
@@ -15014,14 +15015,14 @@ export class CoreCategoricalScopedBuilder {
             options.provenance
         );
         if (
-            this.options.displayedGenericTelescope !== true ||
+            this.options.displayedTransforGenericTelescope !== true ||
             this.options.displayedTransforAbstraction !== true
         ) {
             this.fail(
                 'UNAVAILABLE_DISPLAYED_ACTION',
                 nodeProvenance,
                 'Dependent contextual displayed-transfor abstraction ' +
-                    'requires the reviewed mixed displayed profile'
+                    'requires the reviewed chain-2A telescope capability'
             );
         }
         if (bindings.length < 2) {

@@ -57,9 +57,10 @@ The reviewer brings four parts of the project into one place:
 - the mathematical book alongside the executable examples and preserved
   minimal-Core playground.
 
-The examples include nested functorial abstraction and a genuinely dependent
-displayed chain. They are intended to expose the architecture and its present
-boundary, not to simulate completion of the book's entire notation.
+The examples include nested functorial abstraction, a genuinely dependent
+displayed chain, and a displayed-natural telescope whose named variables cross
+one Sigma dependency. They are intended to expose the architecture and its
+present boundary, not to simulate completion of the book's entire notation.
 
 ## Architecture And Authority
 
@@ -80,9 +81,10 @@ external naturality evidence when no internal construction owns it.
 - The text adapter is not a parser for every notation in the book or for
   arbitrary Lambdapi source. It accepts the reviewed mathematical
   constructions and fails closed outside them.
-- Displayed contexts demonstrate independent fibrewise siblings, genuine
-  dependency, a canonical mixed telescope, and qualified depth-generic finite
-  Hom-category recursion. Arbitrary variance DAGs, general mixed
+- Displayed contexts support arbitrary finite depth in the canonical ordered
+  sibling/Sigma normal form, including displayed-functorial and displayed-
+  natural witnesses, together with qualified depth-generic finite Hom-category
+  recursion. Arbitrary dependency or variance DAGs, general mixed
   introduction/curry, exchange across dependency, and unrestricted displayed
   coherence remain open.
 - The remaining Lambdapi library has not been proven mechanically

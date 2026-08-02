@@ -76,6 +76,8 @@ const expectedModeLabel = (
         mode.target;
     case 'displayed-dependent-context-functor':
       return `λ^${mode.binderMode} : (${mode.levels}) → ${mode.target}`;
+    case 'displayed-dependent-context-transfor':
+      return `λ^${mode.binderMode} : (${mode.levels}) ⇒ Transfd`;
     case 'displayed-transfor':
       return `λ^${mode.binderMode} : ${mode.base}; ` +
         `${mode.source} ⇒ ${mode.target}`;
@@ -340,7 +342,12 @@ function App() {
         </section>
 
         <section className="proof-strip" aria-label="Reviewer facts">
-          <div><strong>11</strong><span>reviewed examples</span></div>
+          <div>
+            <strong>
+              {reviewer?.CORE_BROWSER_REVIEWER_PRESETS.length ?? 12}
+            </strong>
+            <span>reviewed examples</span>
+          </div>
           <div><strong>4</strong><span>binder modes</span></div>
           <div><strong>3</strong><span>evidence panels</span></div>
           <div><strong>199</strong><span>book pages</span></div>

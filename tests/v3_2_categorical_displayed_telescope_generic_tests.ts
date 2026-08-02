@@ -1236,15 +1236,17 @@ describe('DISPLAYED-TELESCOPE-GENERIC-1 canonical layer fold', () => {
                 error instanceof CoreCategoricalFrontendError &&
                 error.code === 'ESCAPED_SLOT'
         );
+        const preChain = new CoreCategoricalProgram({
+            profile: 'fibred-transfd-1'
+        });
         assert.throws(
-            () => predecessorProgram
-                .displayedTransforDependentContextLambda(
-                    predecessorDeep.bindings,
-                    () => p
-                ),
+            () => preChain.displayedTransforDependentContextLambda(
+                bindings,
+                () => p
+            ),
             error =>
                 error instanceof CoreCategoricalProgramError &&
-                error.code === 'UNAVAILABLE_MIXED_MODE'
+                error.code === 'UNAVAILABLE_DISPLAYED_CHAIN'
         );
 
         const recovered =
@@ -1371,6 +1373,93 @@ describe('DISPLAYED-TELESCOPE-GENERIC-1 canonical layer fold', () => {
         assert.equal(Object.isFrozen(evidence.layers), true);
         assert.equal(Object.isFrozen(evidence.layers[1]), true);
         assert.equal(Object.isFrozen(evidence.body), true);
+    });
+
+    it('runs chain-2A contextual nd text with mixed-profile Core parity',
+        () => {
+        const build = (program: CoreCategoricalProgram) => {
+            const K = program.category('generic_nd_profile_K');
+            const A = program.displayedFamily(
+                'generic_nd_profile_A',
+                K
+            );
+            const sigmaA = program.totalCategory(A);
+            const B = program.displayedFamily(
+                'generic_nd_profile_B',
+                sigmaA
+            );
+            const liftedA = program.pullbackFamily(
+                A,
+                program.sigmaProjection(A)
+            );
+            const source = program.displayedProduct(liftedA, B);
+            const D = program.displayedFamily(
+                'generic_nd_profile_D',
+                sigmaA
+            );
+            const F = program.displayedFunctor(
+                'generic_nd_profile_F',
+                source,
+                D
+            );
+            const G = program.displayedFunctor(
+                'generic_nd_profile_G',
+                source,
+                D
+            );
+            const eta = program.displayedTransfor(
+                'generic_nd_profile_eta',
+                F,
+                G
+            );
+            const parsed = elaborateCoreCategoricalText(
+                program,
+                {
+                    source:
+                        'λ^nd (a : A; b : B). ' +
+                        'eta (fibrePair a b)',
+                    sourceFile: textSourceFile,
+                    environment: [
+                        familyBinding('A', A),
+                        familyBinding('B', B),
+                        termBinding('eta', eta)
+                    ],
+                    expected: contextualNdExpected([[A], [B]])
+                }
+            );
+            return {
+                program,
+                parsed,
+                compilation: program.compile(parsed)
+            };
+        };
+        const chain = build(new CoreCategoricalProgram({
+            profile: 'fibred-displayed-chain-2a'
+        }));
+        const mixed = build(new CoreCategoricalProgram({
+            profile: 'fibred-displayed-mixed-nest-1'
+        }));
+
+        assert.equal(
+            chain.compilation.explicitCore,
+            mixed.compilation.explicitCore
+        );
+        assert.equal(
+            chain.compilation.explicitInferredType,
+            mixed.compilation.explicitInferredType
+        );
+        assert.deepEqual(
+            chain.compilation.abstractions.map(evidence => evidence.rule),
+            mixed.compilation.abstractions.map(evidence => evidence.rule)
+        );
+        assert.throws(
+            () => chain.program.oppositeCategory(
+                chain.program.category('generic_nd_profile_L')
+            ),
+            error =>
+                error instanceof CoreCategoricalProgramError &&
+                error.code === 'UNAVAILABLE_MIXED_MODE'
+        );
     });
 
     it('parses grouped nd text recursive cells and both whiskerings', () => {
@@ -1588,16 +1677,25 @@ describe('DISPLAYED-TELESCOPE-GENERIC-1 canonical layer fold', () => {
             'CATEGORICAL_REJECTION'
         );
 
-        const predecessorExpected = contextualNdExpected([
-            [predecessorDeep.A],
-            [predecessorDeep.B]
-        ]);
+        const preChainProgram = new CoreCategoricalProgram({
+            profile: 'fibred-transfd-1'
+        });
+        const preK = preChainProgram.category('generic_text_pre_nd_K');
+        const preA = preChainProgram.displayedFamily(
+            'generic_text_pre_nd_A',
+            preK
+        );
+        const preSigmaA = preChainProgram.totalCategory(preA);
+        const preB = preChainProgram.displayedFamily(
+            'generic_text_pre_nd_B',
+            preSigmaA
+        );
         reject(
             'λ^nd (a; b). identityCell (fibrePair a b)',
-            predecessorExpected,
+            contextualNdExpected([[preA], [preB]]),
             'CATEGORICAL_REJECTION',
-            deepTextEnvironment(predecessorDeep),
-            predecessorProgram
+            [familyBinding('A', preA), familyBinding('B', preB)],
+            preChainProgram
         );
     });
 

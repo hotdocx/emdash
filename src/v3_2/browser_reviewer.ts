@@ -28,7 +28,7 @@ import {
 } from './product_review_demo';
 
 export const CORE_BROWSER_REVIEWER_REVISION =
-    'RECURSIVE-HOM-PUBLIC-1A-BROWSER-REVIEWER-1' as const;
+    'CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP-BROWSER-REVIEWER-1' as const;
 
 export type CoreBrowserReviewerPresetId =
     | 'pointwise-application'
@@ -41,6 +41,7 @@ export type CoreBrowserReviewerPresetId =
     | 'displayed-sibling-pairing'
     | 'displayed-mixed-telescope'
     | 'recursive-hom-functor'
+    | 'displayed-dependent-transformation'
     | 'displayed-transfor-composition';
 
 export type CoreBrowserReviewerExpectedMode =
@@ -90,6 +91,11 @@ export type CoreBrowserReviewerExpectedMode =
         readonly base: 'K';
         readonly source: 'F0';
         readonly target: 'F2';
+    }
+    | {
+        readonly kind: 'displayed-dependent-context-transfor';
+        readonly binderMode: 'nd';
+        readonly levels: 'A; B';
     };
 
 export interface CoreBrowserReviewerPreset {
@@ -374,6 +380,28 @@ readonly CoreBrowserReviewerPreset[] = deepFreeze([
         ]
     },
     {
+        id: 'displayed-dependent-transformation',
+        label: 'Dependent natural telescope',
+        source:
+            'λ^nd (a : A; b : B). eta (fibrePair a b)',
+        description:
+            'A displayed-natural binder exposes two individually named ' +
+            'variables across one genuine Sigma dependency while the ' +
+            'existing contextual compiler owns object and higher action.',
+        expectedMode: {
+            kind: 'displayed-dependent-context-transfor',
+            binderMode: 'nd',
+            levels: 'A; B'
+        },
+        assumptions: [
+            'K : Cat',
+            'A : Catd K',
+            'B : Catd (Sigma_cat A)',
+            'F, G : Functord Productd(A↑,B) D',
+            'eta : Transfd F G'
+        ]
+    },
+    {
         id: 'displayed-transfor-composition',
         label: 'Displayed natural composition',
         source:
@@ -412,7 +440,9 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
         'optional Node-side Lambdapi conformance oracle'
     ],
     supported: [
-        'eleven categorical text presets across ^f, ^n, ^fd, and ^nd',
+        'twelve categorical text presets across ^f, ^n, ^fd, and ^nd',
+        'finite canonical sibling/Sigma contextual displayed-natural ' +
+            'abstraction',
         'qualified depth-generic finite Hom-category recursion',
         'edited categorical text with source diagnostics',
         'existing outer-LF, ordinary, and displayed three-panel report',
@@ -420,7 +450,7 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
         'preserved minimal explicit-Core playground'
     ],
     deferred: [
-        'remaining displayed context and structural-constructor syntax',
+        'surface constructions outside the reviewed text adapter',
         'arbitrary mixed introduction and unsupported variance DAGs',
         'displayed contexts outside the qualified canonical grammar',
         'browser-side source acquisition',
@@ -713,6 +743,43 @@ const createFixture = (
             ]),
             expected: {
                 kind: 'term' as const
+            }
+        });
+    }
+
+    if (presetId === 'displayed-dependent-transformation') {
+        const program = new CoreCategoricalProgram({
+            sourceFile,
+            profile: 'fibred-displayed-chain-2a'
+        });
+        const K = program.category('review_K');
+        const A = program.displayedFamily('review_A', K);
+        const sigmaA = program.totalCategory(A);
+        const B = program.displayedFamily('review_B', sigmaA);
+        const liftedA = program.pullbackFamily(
+            A,
+            program.sigmaProjection(A)
+        );
+        const source = program.displayedProduct(liftedA, B);
+        const D = program.displayedFamily('review_D', sigmaA);
+        const F = program.displayedFunctor('review_F', source, D);
+        const G = program.displayedFunctor('review_G', source, D);
+        const eta = program.displayedTransfor('review_eta', F, G);
+        return Object.freeze({
+            program,
+            environment: Object.freeze([
+                categoryBinding('K', K),
+                familyBinding('A', A),
+                familyBinding('B', B),
+                familyBinding('D', D),
+                termBinding('F', F),
+                termBinding('G', G),
+                termBinding('eta', eta)
+            ]),
+            expected: {
+                kind:
+                    'displayed-dependent-context-transfor' as const,
+                sourceGroups: [[A], [B]]
             }
         });
     }
