@@ -385,6 +385,19 @@
 > and postwhiskering with internal fibre object/arrow and base/higher action;
 > arbitrary varying `Transf_catd`, external coherence, parser/browser work,
 > and unrestricted `:^nd` remain explicit non-claims.
+> Its first exact TypeScript compilation measured one dependency-order issue,
+> not a semantic failure: the active `comp_prod_fapp1_fapp0` signature reaches
+> `sigma_Fst`/`sigma_Snd` and the generic product object/Hom closure, which are
+> already transferred only in the later displayed-chain-2A fragment. D-058 is
+> therefore paused with its kernel/SOP evidence preserved. The exact
+> `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` /
+> H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-PRODUCT-CORRECTION-01 /
+> D-DTTLF-USABILITY-059 proposal relocates and relinks only three existing
+> declarations and three existing generic rules to the earlier fibred-product
+> boundary, makes 2A reuse them, and then resumes D-058 unchanged. It adds no
+> kernel mathematics, mirror signature, product facade, Core special case, or
+> external coherence evidence. The proposal is frozen and decision-pending
+> until separately reviewed.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
