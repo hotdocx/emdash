@@ -209,7 +209,7 @@ across 89 areas. Synchronized health passes all 94 registered targets in
 793.592 summed check-seconds at source snapshot
 `sha256:8d3a5bf7c64f453b11276bbef473c0f88ae7a32faea271d153e8a83ba4171530`;
 the nonduplicative CI remainder is also green. The authorized local
-implementation checkpoint is pending.
+implementation checkpoint is `154069d`.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section

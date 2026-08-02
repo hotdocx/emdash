@@ -3895,8 +3895,8 @@ replacements for them.
 Status: PSSS-10a computational big-slice implementation is green and locally
 checkpointed at `837cfeb`; PSSS-10b is synchronized-green and locally
 checkpointed at `db91ddf`; PSSS-10c affine functor-of-points/basic-open
-representability is synchronized-green and awaiting its authorized local
-implementation checkpoint.
+representability is synchronized-green and locally checkpointed at
+`154069d`.
 
 ##### PSSS-10a — Big affine slice and computing overlap
 
@@ -4056,7 +4056,7 @@ MVP tranche.
 
 Status: rule-free implementation synchronized-green through focused checks,
 exact warning comparison, strict audit, catalog, 94-target health, and the
-nonduplicative integration remainder; authorized local checkpoint pending.
+nonduplicative integration remainder; locally checkpointed at `154069d`.
 
 This tranche is the explicit return gate from the optional whole-functor
 equality audit to the computational-schemes MVP. It does not attempt to turn
@@ -4178,7 +4178,7 @@ snapshot, Python syntax, hook JSON, 39 Python tests, five document-registry
 tests, shell syntax, whitespace, source TOC, active references, report
 headers, book evidence/typography/KaTeX/assembly, strict rule audit, and
 strict catalog all pass. The authorized local implementation checkpoint is
-pending.
+`154069d`.
 
 Generated/least Zariski topology, propositional reflection, subcanonicity,
 ordinary sheafhood, sheafification, locally ringed spaces, and a general
@@ -4854,7 +4854,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Research gate | One of PSSS-09cG/PSSS-09cZ2; PSSS-05b for subcanonicity |
 | PSSS-10a | Computational big affine slice, coordinate presheaf, charts, and two-sided localization overlap | Rule-free source/reviewer and central diagnostics green; exact inherited warnings, strict audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative integration remainder green; locally checkpointed at `837cfeb` | PSSS-08c0J, PSSS-09a, and the checkpointed localization-overlap owner |
 | PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Rule-free complementary-idempotent atlas source/reviewer/central checks, exact warnings, strict 1,987-check catalog, synchronized 92-target health, and nonduplicative integration remainder green; locally checkpointed at `db91ddf` | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
-| PSSS-10c | Affine Yoneda functor of points and localization representation of semantic basic opens | Rule-free implementation synchronized-green through exact warnings, strict 1,987-check catalog, 94-target health, and nonduplicative integration remainder; authorized local checkpoint pending; no univalence or whole-presheaf equality promoted | Shared identity CommRing presheaf, ordinary sieve membership, and universal-property localization |
+| PSSS-10c | Affine Yoneda functor of points and localization representation of semantic basic opens | Rule-free implementation synchronized-green through exact warnings, strict 1,987-check catalog, 94-target health, and nonduplicative integration remainder; locally checkpointed at `154069d`; no univalence or whole-presheaf equality promoted | Shared identity CommRing presheaf, ordinary sieve membership, and universal-property localization |
 | PSSS-10d | Induced small-slice topology and ringed-site comparison | Proposed later, not an MVP prerequisite | Concrete downstream consumer plus selected PSSS-09c/PSSS-08c1 scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |

@@ -2643,7 +2643,7 @@ traversal is followed only by the nonduplicative CI remainder: snapshot,
 tooling, 39 Python tests, five document-registry tests, shell/source/report/
 reference checks, book evidence/typography/KaTeX/assembly checks, the strict
 rule audit, and the strict catalog are green. The authorized local
-implementation checkpoint is pending.
+implementation checkpoint is `154069d`.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
