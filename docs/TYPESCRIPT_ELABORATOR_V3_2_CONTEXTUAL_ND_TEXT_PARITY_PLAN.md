@@ -13,10 +13,12 @@ and
 Status: active living syntax successor;
 `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` is read-only complete with zero
 semantic delta; `CONTEXTUAL-ND-TEXT-PARITY-0AH` is executable and read-only
-complete; the exact `CONTEXTUAL-ND-TEXT-PARITY-1AI` proposal is frozen below
+complete; the exact `CONTEXTUAL-ND-TEXT-PARITY-1AI` proposal frozen below
 under H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-PARITY-01 /
-D-DTTLF-USABILITY-065 and awaits a separate immutable review. No behavior is
-authorized yet.
+D-DTTLF-USABILITY-065 is separately reviewed-approved from immutable proposal
+checkpoint `a4ee654d8e025df6962ea92f219819430852f51a` under the standing
+unattended delegation, with immediate human supersession. The bounded
+implementation is dependency-ready.
 
 ## Objective
 
@@ -132,7 +134,7 @@ Core, checker, evaluator, or mathematical-construction gap.
 |---|---|---|---|
 | `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` | complete read-only; zero semantic delta | final-green D-062 through D-064 | Fixed alternating Hom/Transf targets and their generic action work; no `Transf_catd_func` consumer was found. |
 | `CONTEXTUAL-ND-TEXT-PARITY-0AH` | executable read-only audit complete; zero behavior delta | completed 0AG; graduated historical syntax parity; direct D-055 through D-058; one disposable focused probe | Neutral application already handles compact eta and both whiskers, `composeCells` already recurses, and the direct factorer remains the coherence gate. Current text fails at exactly the expected-contract/family-annotation distinction (`EXPECTED_CATEGORY`) and absent `identityCell` resolver head (`UNKNOWN_IDENTIFIER`). The historical base-component route remains green. |
-| `CONTEXTUAL-ND-TEXT-PARITY-1AI` | exact proposal frozen under D-DTTLF-USABILITY-065; decision pending | completed 0AH; separate immutable review still required | Add one expected-contract kind selecting the existing compact program method and one fixed `identityCell` resolver head; preserve the old route and every semantic boundary. Add focused direct/text equivalence and negatives in the existing parity corpus. |
+| `CONTEXTUAL-ND-TEXT-PARITY-1AI` | separately reviewed-approved under D-DTTLF-USABILITY-065; implementation dependency-ready | completed 0AH; immutable proposal checkpoint `a4ee654d8e025df6962ea92f219819430852f51a`; separate D-065 review | Add one expected-contract kind selecting the existing compact program method and one fixed `identityCell` resolver head; preserve the old route and every semantic boundary. Add focused direct/text equivalence and negatives in the existing parity corpus. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | deferred read-only graduation | green conditional 1AI | Re-audit the exact direct/text envelope and select the next semantic or reader-facing continuation without claiming unrestricted `:^nd`. |
 
 ## `CONTEXTUAL-ND-TEXT-PARITY-0AH` Audit Contract
@@ -327,10 +329,10 @@ consumer exists.
 Treat `CONTEXTUAL-ND-TEXT-PARITY-0AH` as executable and read-only complete.
 Treat the exact `CONTEXTUAL-ND-TEXT-PARITY-1AI` /
 H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-PARITY-01 /
-D-DTTLF-USABILITY-065 proposal as frozen but decision-pending. Create a
-separate immutable review before behavior changes. If that review approves the
-proposal under the standing unattended delegation with immediate human
-supersession, implement only its two adapter seams and exact focused evidence.
+D-DTTLF-USABILITY-065 proposal as separately reviewed-approved from immutable
+checkpoint `a4ee654d8e025df6962ea92f219819430852f51a` under the standing
+unattended delegation, with immediate human supersession. Implement only its
+two adapter seams and exact focused evidence.
 Preserve internal object-, arrow-, base-arrow-, and higher-action ownership and
 fail closed outside the direct semantic envelope.
 
@@ -341,6 +343,14 @@ unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-065 approved exactly as proposed.** A
+  separate immutable review of proposal checkpoint
+  `a4ee654d8e025df6962ea92f219819430852f51a` confirms that the delta is one
+  additive expected-contract route and one `identityCell` resolver head. The
+  endpoint terms remain semantic authority; the family field checks only the
+  optional binder annotation and cannot cast or override endpoints. Approval
+  is under the standing unattended delegation with immediate human
+  supersession. `CONTEXTUAL-ND-TEXT-PARITY-1AI` is implementation-ready.
 - **2026-08-02 — 0AH executable audit complete; D-065 frozen.** Direct compact
   eta, identity, recursive composition, prewhiskering, and postwhiskering all
   work through neutral application plus the existing factorer. Historical

@@ -90,9 +90,12 @@
 > `composeCells` recurses; and the direct factorer remains the sole coherence
 > gate. Current text fails at exactly the historical base-category versus
 > compact displayed-family expected-contract distinction and the absent
-> `identityCell` resolver head. The dedicated plan freezes the exact
-> `CONTEXTUAL-ND-TEXT-PARITY-1AI` / D-DTTLF-USABILITY-065 two-seam proposal.
-> It awaits a separate immutable review; no behavior is authorized yet.
+> `identityCell` resolver head. The dedicated plan's exact
+> `CONTEXTUAL-ND-TEXT-PARITY-1AI` / D-DTTLF-USABILITY-065 two-seam proposal is
+> separately reviewed-approved from immutable checkpoint
+> `a4ee654d8e025df6962ea92f219819430852f51a` under the standing unattended
+> delegation, with immediate human supersession. The bounded implementation is
+> dependency-ready.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
