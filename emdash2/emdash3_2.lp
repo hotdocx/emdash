@@ -17256,6 +17256,212 @@ rule @fapp1_fapp0
       (sigma_Fst $pq)
       (sigma_Snd $pq);
 
+/*
+  Stable generic action of a displayed hom-family.
+
+  The full and capped stages remain whole functors, while the consumed point
+  has a rigid head.  Its variance-sensitive semantic factorization through
+  Unit_prof is proof-time below, so runtime preserves this iterable ladder.
+*/
+injective symbol Hom_catd_fapp1_func [K : Cat]
+  [E : τ (Catd K)]
+  [X : τ (Obj (Pi_cat (Op_catd E)))]
+  [Y : τ (Obj (Pi_cat E))]
+  (x y : τ (Obj K))
+  : τ (Functor
+      (Hom_cat K x y)
+      (Functor_cat
+        (Hom_cat
+          (Fibre_cat E x)
+          (@piapp0 K (@Op_catd K E) X x)
+          (@piapp0 K E Y x))
+        (Hom_cat
+          (Fibre_cat E y)
+          (@piapp0 K (@Op_catd K E) X y)
+          (@piapp0 K E Y y))));
+
+injective symbol Hom_catd_fapp1_fapp0 [K : Cat]
+  [E : τ (Catd K)]
+  [X : τ (Obj (Pi_cat (Op_catd E)))]
+  [Y : τ (Obj (Pi_cat E))]
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Functor
+      (Hom_cat
+        (Fibre_cat E x)
+        (@piapp0 K (@Op_catd K E) X x)
+        (@piapp0 K E Y x))
+      (Hom_cat
+        (Fibre_cat E y)
+        (@piapp0 K (@Op_catd K E) X y)
+        (@piapp0 K E Y y)));
+
+injective symbol Hom_catd_fapp1_fapp0_point [K : Cat]
+  [E : τ (Catd K)]
+  [X : τ (Obj (Pi_cat (Op_catd E)))]
+  [Y : τ (Obj (Pi_cat E))]
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (h : τ (Hom
+      (Fibre_cat E x)
+      (@piapp0 K (@Op_catd K E) X x)
+      (@piapp0 K E Y x)))
+  : τ (Hom
+      (Fibre_cat E y)
+      (@piapp0 K (@Op_catd K E) X y)
+      (@piapp0 K E Y y));
+
+// Capped identity and composition preserve the global functor-action laws.
+rule @Hom_catd_fapp1_fapp0
+      $K $E $X $Y $x $x (@id $K $x)
+  ↪ @id_func
+      (Hom_cat
+        (Fibre_cat $E $x)
+        (@piapp0 $K (@Op_catd $K $E) $X $x)
+        (@piapp0 $K $E $Y $x));
+
+rule @comp_fapp0
+      Cat_cat _ _ _
+      (@Hom_catd_fapp1_fapp0 $K $E $X $Y $y $z $q)
+      (@Hom_catd_fapp1_fapp0 $K $E $X $Y $x $y $p)
+  ↪ @Hom_catd_fapp1_fapp0
+      $K $E $X $Y $x $z
+      (@comp_fapp0 $K $x $y $z $q $p);
+
+// Point-level composition accumulates before semantic expansion.
+rule @Hom_catd_fapp1_fapp0_point
+      $K $E $X $Y $y $z $q
+      (@Hom_catd_fapp1_fapp0_point $K $E $X $Y $x $y $p $h)
+  ↪ @Hom_catd_fapp1_fapp0_point
+      $K $E $X $Y $x $z
+      (@comp_fapp0 $K $x $y $z $q $p)
+      $h;
+
+// Proof-time semantic comparison. This is the exact internal normal form of
+// the typed Unit_prof(E[y]) factorization: section endpoints/actions remain
+// owned by tapp0/tapp1/fdapp1, including the opposite-fibre variance.
+unif_rule @Hom_catd_fapp1_fapp0_point $K $E $X $Y $x $y $p $h
+  ≡ @Hom_fapp0
+      (@fapp0 $K Cat_cat $E $y)
+      (@fapp0
+        (@fapp0 $K Cat_cat $E $x)
+        (@fapp0 $K Cat_cat $E $y)
+        (@fapp1_fapp0 $K Cat_cat $E $x $y $p)
+        (@fapp0
+          Terminal_cat
+          (Op_cat (@fapp0 $K Cat_cat $E $x))
+          (@tapp0_fapp0
+            $K Cat_cat
+            (Const_catd $K Terminal_cat)
+            (@Op_catd $K $E)
+            $x $X)
+          Terminal_obj))
+      (@fapp0
+        Terminal_cat
+        (Op_cat (@fapp0 $K Cat_cat $E $y))
+        (@tapp0_fapp0
+          $K Cat_cat
+          (Const_catd $K Terminal_cat)
+          (@Op_catd $K $E)
+          $y $X)
+        Terminal_obj)
+      (@fapp0
+        Terminal_cat
+        (@fapp0 $K Cat_cat $E $y)
+        (@tapp1_fapp0
+          $K Cat_cat
+          (Const_catd $K Terminal_cat)
+          $E $x $y $Y $p)
+        Terminal_obj)
+      (@fapp0
+        Terminal_cat
+        (@fapp0 $K Cat_cat $E $y)
+        (@tapp0_fapp0
+          $K Cat_cat
+          (Const_catd $K Terminal_cat)
+          $E $y $Y)
+        Terminal_obj)
+      (@fdapp1_int_cell
+        $K
+        (Const_catd $K Terminal_cat)
+        (@Op_catd $K $E)
+        $X $x $y $p Terminal_obj)
+      (@fdapp1_int_cell
+        $K
+        (Const_catd $K Terminal_cat)
+        $E
+        $Y $x $y $p Terminal_obj)
+      (@fapp1_fapp0
+        (@fapp0 $K Cat_cat $E $x)
+        (@fapp0 $K Cat_cat $E $y)
+        (@fapp1_fapp0 $K Cat_cat $E $x $y $p)
+        (@fapp0
+          Terminal_cat
+          (Op_cat (@fapp0 $K Cat_cat $E $x))
+          (@tapp0_fapp0
+            $K Cat_cat
+            (Const_catd $K Terminal_cat)
+            (@Op_catd $K $E)
+            $x $X)
+          Terminal_obj)
+        (@fapp0
+          Terminal_cat
+          (@fapp0 $K Cat_cat $E $x)
+          (@tapp0_fapp0
+            $K Cat_cat
+            (Const_catd $K Terminal_cat)
+            $E $x $Y)
+          Terminal_obj)
+        $h)
+  ↪ [ tt ≡ tt ];
+
+// Constant-Cat hom families retain Functor_catd's canonical action.
+rule @Hom_catd_fapp1_func
+      $K (@Const_catd $K Cat_cat) $X $Y $x $y
+  ↪ @fapp1_func
+      $K Cat_cat
+      (@Functor_catd $K (@Op_func $K (Op_cat Cat_cat) $X) $Y)
+      $x $y;
+
+rule @Hom_catd_fapp1_fapp0
+      $K (@Const_catd $K Cat_cat) $X $Y $x $y $p
+  ↪ @fapp1_fapp0
+      $K Cat_cat
+      (@Functor_catd $K (@Op_func $K (Op_cat Cat_cat) $X) $Y)
+      $x $y $p;
+
+// Transf_catd action is the Hom_catd action of the mixed functor family.
+rule @fapp1_func
+      $K Cat_cat (@Transf_catd $K $A $B $FF $GG) $x $y
+  ↪ @Hom_catd_fapp1_func
+      $K (@Functor_catd $K $A $B) $FF $GG $x $y;
+
+rule @fapp1_fapp0
+      $K Cat_cat (@Transf_catd $K $A $B $FF $GG) $x $y $p
+  ↪ @Hom_catd_fapp1_fapp0
+      $K (@Functor_catd $K $A $B) $FF $GG $x $y $p;
+
+// Generic full/capped/point projection ladder. These rules follow the
+// head-specific joins so competing reduction orders share the same normal
+// forms.
+rule @fapp1_func
+      $K Cat_cat (@Hom_catd $K $E $X $Y) $x $y
+  ↪ @Hom_catd_fapp1_func $K $E $X $Y $x $y;
+
+rule @fapp1_fapp0
+      $K Cat_cat (@Hom_catd $K $E $X $Y) $x $y $p
+  ↪ @Hom_catd_fapp1_fapp0 $K $E $X $Y $x $y $p;
+
+rule fapp0
+      (@Hom_catd_fapp1_func $K $E $X $Y $x $y)
+      $p
+  ↪ @Hom_catd_fapp1_fapp0 $K $E $X $Y $x $y $p;
+
+rule fapp0
+      (@Hom_catd_fapp1_fapp0 $K $E $X $Y $x $y $p)
+      $h
+  ↪ @Hom_catd_fapp1_fapp0_point $K $E $X $Y $x $y $p $h;
+
 // Binary representable hom profunctor as endpoint reindexing of Unit_prof.
 //
 // Surface/formula:

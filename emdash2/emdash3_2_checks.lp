@@ -17433,6 +17433,227 @@ assert [X : Cat]
     (Struct_sigma p q)
   ≡ @Hom_func X x x' y y' p q;
 
+// Generic displayed Hom action: full/capped/point projection ladder.
+assert [K : Cat] (E : τ (Catd K))
+  (X : τ (Obj (Pi_cat (Op_catd E))))
+  (Y : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  fapp0 (@fapp1_func K Cat_cat (@Hom_catd K E X Y) x y) p
+  ≡ @fapp1_fapp0 K Cat_cat (@Hom_catd K E X Y) x y p;
+
+assert [K : Cat] (E : τ (Catd K))
+  (X : τ (Obj (Pi_cat (Op_catd E))))
+  (Y : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (h : τ (Hom
+      (Fibre_cat E x)
+      (@piapp0 K (@Op_catd K E) X x)
+      (@piapp0 K E Y x))) ⊢
+  fapp0 (@fapp1_fapp0 K Cat_cat (@Hom_catd K E X Y) x y p) h
+  ≡ @Hom_catd_fapp1_fapp0_point K E X Y x y p h;
+
+// Identity and composition agree before and after consuming the fibre arrow.
+assert [K : Cat] (E : τ (Catd K))
+  (X : τ (Obj (Pi_cat (Op_catd E))))
+  (Y : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K)) ⊢
+  @Hom_catd_fapp1_fapp0 K E X Y x x (@id K x)
+  ≡ @id_func
+      (Hom_cat
+        (Fibre_cat E x)
+        (@piapp0 K (@Op_catd K E) X x)
+        (@piapp0 K E Y x));
+
+assert [K : Cat] (E : τ (Catd K))
+  (X : τ (Obj (Pi_cat (Op_catd E))))
+  (Y : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K))
+  (h : τ (Hom
+      (Fibre_cat E x)
+      (@piapp0 K (@Op_catd K E) X x)
+      (@piapp0 K E Y x))) ⊢
+  fapp0
+    (@Hom_catd_fapp1_fapp0 K E X Y x x (@id K x))
+    h
+  ≡ h;
+
+assert [K : Cat] (E : τ (Catd K))
+  (X : τ (Obj (Pi_cat (Op_catd E))))
+  (Y : τ (Obj (Pi_cat E)))
+  (x y z : τ (Obj K))
+  (p : τ (Hom K x y))
+  (q : τ (Hom K y z)) ⊢
+  @comp_fapp0
+    Cat_cat _ _ _
+    (@Hom_catd_fapp1_fapp0 K E X Y y z q)
+    (@Hom_catd_fapp1_fapp0 K E X Y x y p)
+  ≡ @Hom_catd_fapp1_fapp0
+      K E X Y x z (@comp_fapp0 K x y z q p);
+
+assert [K : Cat] (E : τ (Catd K))
+  (X : τ (Obj (Pi_cat (Op_catd E))))
+  (Y : τ (Obj (Pi_cat E)))
+  (x y z : τ (Obj K))
+  (p : τ (Hom K x y))
+  (q : τ (Hom K y z))
+  (h : τ (Hom
+      (Fibre_cat E x)
+      (@piapp0 K (@Op_catd K E) X x)
+      (@piapp0 K E Y x))) ⊢
+  fapp0
+    (@Hom_catd_fapp1_fapp0
+      K E X Y x z (@comp_fapp0 K x y z q p))
+    h
+  ≡ fapp0
+      (@Hom_catd_fapp1_fapp0 K E X Y y z q)
+      (fapp0 (@Hom_catd_fapp1_fapp0 K E X Y x y p) h);
+
+// Existing classifier folds share the same full and capped action.
+assert [K : Cat]
+  (X : τ (Obj (Pi_cat (Op_catd (Const_catd K Cat_cat)))))
+  (Y : τ (Obj (Pi_cat (Const_catd K Cat_cat))))
+  (x y : τ (Obj K)) ⊢
+  @fapp1_func
+    K Cat_cat
+    (@Hom_catd K (@Const_catd K Cat_cat) X Y)
+    x y
+  ≡ @fapp1_func
+      K Cat_cat
+      (@Functor_catd K (@Op_func K (Op_cat Cat_cat) X) Y)
+      x y;
+
+assert [K : Cat]
+  (X : τ (Obj (Pi_cat (Op_catd (Const_catd K Cat_cat)))))
+  (Y : τ (Obj (Pi_cat (Const_catd K Cat_cat))))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @fapp1_fapp0
+    K Cat_cat
+    (@Hom_catd K (@Const_catd K Cat_cat) X Y)
+    x y p
+  ≡ @fapp1_fapp0
+      K Cat_cat
+      (@Functor_catd K (@Op_func K (Op_cat Cat_cat) X) Y)
+      x y p;
+
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (FF : τ (Obj (Pi_cat (Op_catd (Functor_catd A B)))))
+  (GG : τ (Obj (Pi_cat (Functor_catd A B))))
+  (x y : τ (Obj K)) ⊢
+  @fapp1_func
+    K Cat_cat (@Transf_catd K A B FF GG) x y
+  ≡ @fapp1_func
+      K Cat_cat
+      (@Hom_catd K (@Functor_catd K A B) FF GG)
+      x y;
+
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (FF : τ (Obj (Pi_cat (Op_catd (Functor_catd A B)))))
+  (GG : τ (Obj (Pi_cat (Functor_catd A B))))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @fapp1_fapp0
+    K Cat_cat (@Transf_catd K A B FF GG) x y p
+  ≡ @fapp1_fapp0
+      K Cat_cat
+      (@Hom_catd K (@Functor_catd K A B) FF GG)
+      x y p;
+
+// The inline Unit_prof construction composes with the rigid point only through
+// the proof-time semantic comparison; it is not a judgmental runtime fold.
+assert [K : Cat] (E : τ (Catd K))
+  (X : τ (Obj (Pi_cat (Op_catd E))))
+  (Y : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (h : τ (Hom
+      (Fibre_cat E x)
+      (@piapp0 K (@Op_catd K E) X x)
+      (@piapp0 K E Y x))) ⊢
+  comp_fapp0
+    (@id
+      (Hom_cat
+        (Fibre_cat E y)
+        (@piapp0 K (@Op_catd K E) X y)
+        (@piapp0 K E Y y))
+      (@fapp0
+        (Hom_cat
+          (Fibre_cat E y)
+          (@fapp0
+            (Fibre_cat E x)
+            (Fibre_cat E y)
+            (@fapp1_fapp0 K Cat_cat E x y p)
+            (@piapp0 K (@Op_catd K E) X x))
+          (@fapp0
+            (Fibre_cat E x)
+            (Fibre_cat E y)
+            (@fapp1_fapp0 K Cat_cat E x y p)
+            (@piapp0 K E Y x)))
+        (Hom_cat
+          (Fibre_cat E y)
+          (@piapp0 K (@Op_catd K E) X y)
+          (@piapp0 K E Y y))
+        (@fapp1_fapp0
+          (Product_cat (Op_cat (Fibre_cat E y)) (Fibre_cat E y))
+          Cat_cat
+          (@Unit_prof (Fibre_cat E y))
+          (Struct_sigma
+            (@fapp0
+              (Fibre_cat E x)
+              (Fibre_cat E y)
+              (@fapp1_fapp0 K Cat_cat E x y p)
+              (@piapp0 K (@Op_catd K E) X x))
+            (@fapp0
+              (Fibre_cat E x)
+              (Fibre_cat E y)
+              (@fapp1_fapp0 K Cat_cat E x y p)
+              (@piapp0 K E Y x)))
+          (Struct_sigma
+            (@piapp0 K (@Op_catd K E) X y)
+            (@piapp0 K E Y y))
+          (Struct_sigma
+            (@piapp1_fapp0 K (@Op_catd K E) X x y p)
+            (@piapp1_fapp0 K E Y x y p)))
+        (@fapp1_fapp0
+          (Fibre_cat E x)
+          (Fibre_cat E y)
+          (@fapp1_fapp0 K Cat_cat E x y p)
+          (@piapp0 K (@Op_catd K E) X x)
+          (@piapp0 K E Y x)
+          h)))
+    (@id
+      (Hom_cat
+        (Fibre_cat E y)
+        (@piapp0 K (@Op_catd K E) X y)
+        (@piapp0 K E Y y))
+      (@Hom_catd_fapp1_fapp0_point K E X Y x y p h))
+  : τ (Hom
+      (Hom_cat
+        (Fibre_cat E y)
+        (@piapp0 K (@Op_catd K E) X y)
+        (@piapp0 K E Y y))
+      _
+      _);
+
+// An arbitrary base endomorphism does not collapse to identity.
+assertnot [K : Cat] (E : τ (Catd K))
+  (X : τ (Obj (Pi_cat (Op_catd E))))
+  (Y : τ (Obj (Pi_cat E)))
+  (x : τ (Obj K))
+  (p : τ (Hom K x x)) ⊢
+  @Hom_catd_fapp1_fapp0 K E X Y x x p
+  ≡ @id_func
+      (Hom_cat
+        (Fibre_cat E x)
+        (@piapp0 K (@Op_catd K E) X x)
+        (@piapp0 K E Y x));
+
 assert [A B X : Cat]
   (F : τ (Functor A X))
   (G : τ (Functor B X))

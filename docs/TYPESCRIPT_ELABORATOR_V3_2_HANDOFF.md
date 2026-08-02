@@ -38,20 +38,19 @@
 > H-DTTLF-USABILITY-HOM-CATD-ACTION-NORMAL-FORM-01 /
 > D-DTTLF-USABILITY-062. It is separately reviewed-approved from immutable
 > proposal checkpoint `68367439e4f4167c46f177ecc3d2dc8740cbe69c` under the
-> standing unattended delegation and is now being implemented. Its three
-> owners, eleven runtime rules, prerequisites, and all non-semantic focused
-> assertions typecheck. The originally frozen literal-`Unit_prof`
-> unification pattern normalizes before proof-rule matching; its exact
-> kernel-produced normal form retains existing `tapp0_fapp0`,
-> `tapp1_fapp0`, and `fdapp1_int_cell` ownership and passes a real proof-time
-> composition witness without changing the measured 1,097/159 warning
-> inventory. D-DTTLF-USABILITY-063 freezes the exact replace-one-rule,
-> replace-one-test correction and is separately reviewed-approved from
-> immutable checkpoint `11e38021d09a7663e044cdf169b85e1162614f6a`; it adds
-> no owner, rule, or scope.
-> TypeScript transfer follows only through a separate read-only boundary
-> audit. `Transf_catd_func`, curry, external coherence, and binder special
-> cases remain deferred.
+> standing unattended delegation. D-DTTLF-USABILITY-063's exact
+> replace-one-rule correction is separately reviewed-approved from immutable
+> checkpoint `11e38021d09a7663e044cdf169b85e1162614f6a`. The combined slice
+> is implemented and final-green: exactly three action owners, eleven runtime
+> joins, one proof-time comparison, and twelve focused assertions pass the
+> active kernel and 41-target CI. The proof rule retains the kernel-produced
+> `tapp0_fapp0`, `tapp1_fapp0`, and `fdapp1_int_cell` normal form, and both its
+> active composition consumer and independent typed-`eq_refl` probe pass.
+> Warning and strict-LHS inventories are the qualified 1,097/159 and 0/53/33;
+> catalog and health reports are synchronized. No TypeScript or public
+> behavior changed. The next dependency-ready operation is the read-only
+> `HOM-CATD-ACTION-TRANSFER-0AE` audit; `Transf_catd_func`, curry, external
+> coherence, binder special cases, and broader scale import remain deferred.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
