@@ -166,11 +166,14 @@
 > current mixed-profile guard costs 148.31 seconds cold on this host versus
 > 27.83 seconds for the existing chain-2A closure that already owns the
 > emitted construction. The dedicated plan freezes
-> `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` / D-DTTLF-USABILITY-070 pending
-> separate review: decouple this one transformation-telescope capability from
-> mixed classifiers, reuse chain-2A unchanged, then add one genuine-dependent
-> reviewer preset and correct the README boundary. No behavior is authorized
-> before review, and bulk scale remains deferred.
+> `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` / D-DTTLF-USABILITY-070. It is
+> separately reviewed-approved from immutable proposal
+> checkpoint `41ddef0bad65f5766634c61c994f06f581f79cd0` under the standing
+> unattended delegation, with immediate human supersession. Its exact
+> thirteen-item implementation is dependency-ready: decouple this one
+> transformation-telescope capability from mixed classifiers, reuse chain-2A
+> unchanged, then add one genuine-dependent reviewer preset and correct the
+> README boundary. Bulk scale remains deferred.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

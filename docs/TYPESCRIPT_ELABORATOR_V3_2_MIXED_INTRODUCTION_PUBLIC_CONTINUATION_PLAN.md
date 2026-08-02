@@ -7949,9 +7949,12 @@ behavior. Run the dedicated plan's read-only
 `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` audit as complete. It
 measures the current mixed-profile public route at 148.31 seconds cold versus
 27.83 seconds for the existing chain-2A closure, and freezes exactly
-`CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` / D-DTTLF-USABILITY-070 pending
-separate review. That proposal decouples only this transformation-telescope
-capability, reuses chain-2A unchanged, and then adds one reviewer preset and a
+`CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` / D-DTTLF-USABILITY-070. Treat it as
+separately reviewed-approved from immutable
+proposal checkpoint `41ddef0bad65f5766634c61c994f06f581f79cd0` under the
+standing unattended delegation, with immediate human supersession. Implement
+only its thirteen numbered items: decouple only this transformation-telescope
+capability, reuse chain-2A unchanged, and then add one reviewer preset and a
 truthful README boundary. Add no kernel/runtime owner, Core/checker case,
 second parser, classifier decomposition heuristic, external coherence
 evidence, curry, broader browser/public behavior, or scale behavior outside
@@ -7974,6 +7977,13 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-070 separately reviewed-approved.** The immutable review
+  of proposal checkpoint `41ddef0bad65f5766634c61c994f06f581f79cd0`
+  confirms that a distinct transformation-telescope capability preserves the
+  generic `:^fd` and mixed-classifier boundaries while reusing the existing
+  chain-2A runtime. Under the standing unattended delegation, with immediate
+  human supersession, the exact profile-decoupling/reviewer slice is
+  dependency-ready.
 - **2026-08-02 — 0AO product audit selects a chain-2A reviewer route.** The
   grouped contextual `:^nd` term is semantically ready for public review, but
   the current method's mixed-profile guard imposes a measured 148.31-second

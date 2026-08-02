@@ -37,7 +37,10 @@ final-green at rollback-safe semantic checkpoint
 `ba488f5a542bf5dce8fe78162a75663c313dcb26`.
 `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` is read-only complete. It
 selects the exact `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` /
-D-DTTLF-USABILITY-070 proposal below, pending separate review.
+D-DTTLF-USABILITY-070 proposal below. It is separately reviewed-approved from
+immutable proposal checkpoint `41ddef0bad65f5766634c61c994f06f581f79cd0`
+under the standing unattended delegation, with immediate human supersession;
+implementation is dependency-ready at exactly its thirteen numbered items.
 
 ## Objective
 
@@ -469,7 +472,7 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` | read-only complete; zero behavior delta | final-green 1AL; prior alternating Hom/Transf and mixed-target evidence | The finite canonical semantic envelope is coherent and classifier-head-agnostic. Grouped text grammar already exists; the missing seam is one expected-contract/resolver route, not a mixed-variance construction. |
 | `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` | final-green at `ba488f5a542bf5dce8fe78162a75663c313dcb26` | completed 0AM; final-green typed method; D-069 proposal `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2`; immutable review | One grouped displayed-transformation expected contract now routes comma/semicolon `^nd` syntax to the existing typed API. Independent and dependent direct/text equality, the full body algebra, four canonical layers, optional annotations, frozen evidence, and the fail-closed matrix are focused-green without a second parser or semantic factorer. |
 | `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` | read-only complete; zero behavior delta | final-green 1AN plus public reviewer and syntax-parity plans | The semantic/text envelope graduates. A cold reviewer-shaped probe succeeds but measures 148.31 seconds on the unnecessarily broad mixed profile versus 27.83 seconds for the existing chain-2A closure, selecting profile decoupling before public promotion. |
-| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | frozen pending separate review | completed 0AO | Decouple contextual `:^nd` telescope availability from mixed-classifier capability while reusing the exact chain-2A runtime, then add one genuine-dependent reviewer preset and truthful README boundary. |
+| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | D-DTTLF-USABILITY-070 separately reviewed-approved; implementation dependency-ready | completed 0AO; proposal `41ddef0bad65f5766634c61c994f06f581f79cd0`; immutable review | Decouple contextual `:^nd` telescope availability from mixed-classifier capability while reusing the exact chain-2A runtime, then add one genuine-dependent reviewer preset and truthful README boundary. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` Audit Result
 
@@ -904,11 +907,14 @@ body-algebra, deep-presentation, annotation, and fail-closed evidence. Run
 successful reviewer-shaped witness exposes only an unnecessarily broad mixed-
 profile guard: cold mixed initialization measured 148.31 seconds versus 27.83
 seconds for the existing chain-2A closure. It freezes exactly
-`CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` / D-DTTLF-USABILITY-070, pending
-separate review. Do not implement it before that review. Preserve direct
-recursive binders and internal object/arrow/higher action; add no curry,
-total-context section, cast, external coherence, second parser, broad mixed
-profile, browser behavior, or kernel owner outside the frozen proposal.
+`CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` / D-DTTLF-USABILITY-070. Treat it as
+separately reviewed-approved from immutable
+proposal checkpoint `41ddef0bad65f5766634c61c994f06f581f79cd0` under the
+standing unattended delegation, with immediate human supersession. Implement
+only its thirteen numbered items. Preserve direct recursive binders and
+internal object/arrow/higher action; add no curry, total-context section,
+cast, external coherence, second parser, broad mixed profile, browser
+behavior, or kernel owner outside the frozen proposal.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
@@ -916,6 +922,15 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-070 separately reviewed-approved.** The
+  immutable review of proposal checkpoint
+  `41ddef0bad65f5766634c61c994f06f581f79cd0` confirms that the contextual
+  transformation method needs the chain-2A/transfd closure but no mixed
+  classifier operation. The separate capability flag preserves generic
+  displayed-functor and mixed-profile boundaries. Under the standing
+  unattended delegation, with immediate human supersession, the thirteen-item
+  profile-decoupling/reviewer slice is dependency-ready with exact Core and
+  real-browser stop conditions.
 - **2026-08-02 — 0AO product audit complete; D-070 frozen pending separate
   review.** The final-green grouped contextual `:^nd` input succeeds as a
   reviewer-shaped two-level genuine dependency, but cold construction under
