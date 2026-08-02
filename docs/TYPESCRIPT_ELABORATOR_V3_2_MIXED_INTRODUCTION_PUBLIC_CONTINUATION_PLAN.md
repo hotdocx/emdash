@@ -501,7 +501,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-NEGATIVE-TOWER-1P` | implemented and in-scope green at `ef3ce5c4de381b044dc3bbffd55cb35bcfd2faf7` under D-DTTLF-USABILITY-053 | completed `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O`; proposal `db49240fc77f308131636181e76021858cd99829`; separate review under standing unattended delegation | The new direct TypeScript API right-folds arbitrary finite negative inner families through existing `Functor_catd`, recognizes exact coherent eta/bound identity, and recursively lifts finite closed target maps through the existing target action. Depth 2/6, depth-3 identity, and six target-action lifts into `Hom_catd` are generically checked. One-inner behavior is unchanged; no kernel/transfer owner, curry, total-context section, parser route, or unrestricted-context claim was added. |
 | `DIRECT-MIXED-TOWER-GRADUATE-0Q` | read-only successor audit complete; zero semantic delta; arbitrary-level source action selected | implemented D-053 tower; arbitrary positive sibling-layer compiler; existing `Hom_catd`/`Transf_catd`, `homd_int`, and displayed-`:^nd` evidence; bounded current-kernel check | The tower is genuinely depth-recursive but presently supports only eta/identity and closed target maps. Independent positive sibling depth/width is already separately generic, and mixed classifier formation/elimination plus higher action are already internalized. The first missing operation that directly stress-tests variance at arbitrary depth is a finite contravariant source chain at any tower layer, lifted through its enclosing prefix by the existing target action. |
 | `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` | implemented and in-scope green at `390d9f4561576885d5d55588402479db877028ff` under D-DTTLF-USABILITY-054 | completed `DIRECT-MIXED-TOWER-GRADUATE-0Q`; immutable proposal `107798b09081212007d4d1db80213eecc1495517`; separate review under standing unattended delegation | The tower factorer now accepts `F[c](L1(a1))...(Ln(an))`, with a finite closed coherent source chain independently at every layer. It compiles deepest-outward by reusing the existing mixed source action and target lift through the current prefix. Depth-three positions, simultaneous chains, bound-outer identity, rich `Hom_catd`, and generated depth six are checked without a kernel/transfer owner, curry, total section, sibling integration, pair/weakening/constant-middle case, or new `:^nd` constructor. |
-| `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` | next dependency-ready read-only architecture audit | completed D-054 arbitrary-level source action; existing `displayedTransforLambda` eta/composition; active `Transf_catd`, `homd_int`, and `tdapp1_int_*` owners | Audit `:^nd` as a fundamental direct nested contextual binder analogous to the accepted `:^fd` presentation. Derive the exact typed telescope and select at most one missing coherence-owning body constructor. Do not route through curry, ask for external naturality evidence, or confuse bounded constructor coverage with an unsolved introduction architecture. |
+| `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` | read-only architecture audit complete; zero semantic delta; direct point-eta successor selected | completed D-054 arbitrary-level source action; existing `displayedTransforLambda` eta/composition; active `Transfd_cat`, `Transf_catd`, `homd_int`, and `tdapp1_int_*` owners | `:^nd`, like `:^fd`, is fundamentally a direct nested contextual binder. Its compact callback should hide `k :^n K`, expose `a :^n E[k]`, and factor supported point-arrow syntax back to a genuine `Transfd` owner in two recursive stages. The present API factors only whole fibre transformations. `Transf_catd`/Pi and Sigma-total views remain semantic comparisons, not a required curry route. The first missing slice is TypeScript-only point eta. |
+| `DIRECT-CONTEXTUAL-ND-ETA-1T` | exact non-self-authorizing proposal frozen below as D-DTTLF-USABILITY-055; decision pending | completed `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S`; green active kernel and 14/14 existing `:^nd` regression baseline | Add one opt-in compact `displayedTransforContextLambda` and one construction-only indexed point-Hom/application route. Recognize only `eta[a]` for an already-coherent closed displayed transformation, recover `eta`, and preserve its internal object/fibre-arrow/base-arrow/higher action. Add no kernel/transfer owner, external coherence evidence, curry/section route, pointwise identity/composition, parser/browser route, or unrestricted-`:^nd` claim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -5152,6 +5153,222 @@ distinguish classifier alternation from body introduction, and freeze at most
 one smallest TypeScript or kernel gate. It makes no semantic, kernel,
 transfer, parser/browser, publication, or remote Git edit.
 
+## `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` audit result
+
+The user's analogy with the accepted direct `:^fd` construction is the right
+architectural starting point, with one important mode change. The existing
+displayed-functor abstraction has the hidden contextual telescope
+
+```text
+k :^n K; a :^f E[k] |- body(k,a) : D[k]
+```
+
+and factors supported object syntax to a genuine
+`FF : Functord_cat E D`. A displayed-natural abstraction should analogously
+have the hidden contextual telescope
+
+```text
+k :^n K; a :^n E[k]
+  |- body(k,a) : Hom_(D[k])(FF[k](a), GG[k](a))
+```
+
+and factor supported point-arrow syntax to a genuine
+`eta : Transfd_cat FF GG`. Thus the approximate expansion
+`lambda^n k. lambda^n a. body(k,a)` is the direct contextual presentation of
+compact `lambda^nd a : E. body(a)`. This notation describes the frontend
+telescope and its internally typed factorization; it does not claim that a
+raw pair of ordinary Lambdapi lambdas alone is definitionally identical to
+the stable `Transfd_cat` head.
+
+This is the exact sense in which the earlier direct-functor solution
+`lambda^n k. lambda^f c. lambda^f a. body` generalizes. The solution is not a
+total-context section supplied by the user, and it is not arbitrary
+pointwise data followed by synthesized naturality. The callback is evaluated
+once under scoped construction tokens. Each accepted body constructor must
+be inverted to an existing whole coherence-owning categorical term. A
+successful abstraction therefore returns an ordinary closed explicit Core
+term already classified by `Transfd_cat`; all fibre-arrow, base-arrow, and
+higher behavior remains owned by the active kernel.
+
+### Authority recovered
+
+The active kernel already contains the semantic owners required by this
+architecture:
+
+1. `Transfd_cat FF GG` is the stable next-Hom category of
+   `Functord_cat E D`, with surface meaning
+   `k :^n K; FF[k] => GG[k]`. Its object projection compares with the
+   corresponding ordinary iterated Hom category.
+2. A closed `eta : Transfd FF GG` projects at `k` to an ordinary fibre
+   transformation `eta[k]`, and then at `a : E[k]` to the arrow
+   `eta[k][a] : FF[k](a) -> GG[k](a)` in `D[k]` through the already active
+   generic `tapp0`/`fapp0` ladder.
+3. `Transf_catd A B FF GG` is a mixed-variance Cat-valued family with fibre
+   `FF[k^-] => GG[k]`; sections are expressed by
+   `Pi_cat (Transf_catd A B FF GG)`. It is a useful classifier and
+   comparison presentation, but it is not a requirement that the frontend
+   receive a section over pairs or lower through curry.
+4. The Sigma/Pi bridges already compare displayed functors and transfors with
+   their total-context presentations. In particular, the existing runtime
+   next-Hom rule eliminates the Sigma terminal-source presentation back to
+   `Transfd_cat K R D s t`. These bridges validate compatibility; they do not
+   replace direct contextual introduction.
+5. `homd_int`, `tdapp1_int_func_transfd`,
+   `tdapp1_int_fapp0_transfd`, `tdapp1_int_fapp1_func_transfd`, and the
+   `tdapp1_int_*` section/target/presheaf/Hom/cell projections internalize the
+   dependent Hom and its object, whole-Hom, fibre-arrow, base-arrow, and
+   higher action. In particular,
+
+   ```text
+   tdapp1_int_cell(eta,p,u) :
+     D[p](FF[x](u)) -> GG[y](E[p](u)).
+   ```
+
+   No external equation or user-provided naturality square is needed.
+6. `Const_transfd` covers a useful constant-family specialization, and
+   `Sigma_transfd_funcd` uncurries an already coherent displayed
+   transformation. Neither constructs a general varying displayed
+   transformation from arbitrary point components.
+
+The bounded authority check passed, and the existing component-level
+TypeScript suites remain green at 14/14. This audit adds no Lambdapi symbol,
+rule, transfer declaration, or TypeScript behavior.
+
+### Exact current TypeScript boundary
+
+The current `displayedTransforLambda` is sound but is not yet the compact
+direct contextual binder above. Its callback sees only
+`k : Obj K`; its body classifier is one whole indexed fibre transformation
+between `FF[k]` and `GG[k]`. It recursively recognizes:
+
+```text
+eta[k]
+theta[k] after eta[k]
+```
+
+and factors those nodes back to genuine closed outer `Transfd` owners. This
+is valuable stage-two factorization. It must remain compatible, but its
+provisional surface reading `lambda^nd k. eta[k]` should not be mistaken for
+the final compact binder over a dependent fibre variable.
+
+The missing direct path is stage one:
+
+```text
+eta[k][a]
+  -> recognize a point component of the whole fibre transfor eta[k]
+  -> reuse the existing component factorer to recover eta
+  -> return eta as a genuine Transfd term.
+```
+
+The construction IR already has locally nameless indexed-object,
+indexed-functor, and indexed-transfor classifiers. It deliberately has no
+construction-only classifier for an arrow in the open fibre `D[k]`, so the
+second application presently cannot be represented. The generic Core
+checker is not deficient: an open contextual slot must first be eliminated
+by the categorical abstraction before closed Core can be checked. The
+smallest missing frontend seam is therefore one indexed point-Hom classifier
+and one typed continuation application, not another source AST, another
+checker, a kernel owner, or manual convertibility logic.
+
+### Recursive architecture and future body grammar
+
+The scalable design is a two-stage recursive factorer:
+
+```text
+supported point arrow at (k,a)
+  -> coherent whole fibre transformation at k
+  -> coherent whole displayed transformation over K.
+```
+
+The first stage must recognize only syntax whose fibre naturality is already
+owned by a recoverable whole transformation. The second stage is the
+existing recursive component factorer and may grow by the same
+constructor-led discipline. Point eta is the smallest end-to-end witness.
+Later separately reviewed slices may add pointwise identity, vertical
+composition, whiskering, or other internally owned constructors. Failure to
+factor remains a closed error; the elaborator must never accept arbitrary
+arrows and invent naturality evidence.
+
+This architecture is recursive and is not intrinsically capped by telescope
+depth. Its *implemented body grammar* will remain intentionally bounded until
+representative constructors are qualified. Likewise, arbitrary polarity
+alternation, independent-sibling integration, general `Transf_catd`
+sections, and arbitrary dependency DAGs remain separate questions. A
+curry/total-section route remains useful as derived evidence or a possible
+fallback only if a concrete direct-context obstruction is later measured.
+
+## H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-ETA-01 /
+## D-DTTLF-USABILITY-055
+
+Approve the following bounded TypeScript-only proof of the direct contextual
+`:^nd` architecture:
+
+1. Preserve the existing `displayedTransforLambda` behavior and all current
+   component-level eta/composition callers unchanged.
+2. Add one opt-in program/builder method named
+   `displayedTransforContextLambda`. It accepts a name, two compatible closed
+   displayed-functor endpoints `FF` and `GG`, and a callback receiving only
+   `a : E[k]`. The base token `k :^n K` is hidden and recovered exactly as in
+   `displayedFunctorLambda`; the exposed token varies naturally. Evaluate the
+   callback exactly once and retain no callback.
+3. Record the direct hidden telescope as two bindings with modes
+   `['natural', 'natural']` and relation
+   `natural-base-then-natural-fibre-binder`. Do not expose a separate
+   arrow-only or cell-only binder: the natural object variable carries the
+   ordinary transformation action just as a functorial variable carries
+   functor action.
+4. Add one construction-only `indexed-hom` classifier containing the exact
+   base, source family, target family, source displayed functor, target
+   displayed functor, base-slot index, and fibre-slot index. It is not a new
+   Core type former and cannot cross into the closed Core checker.
+5. Add one typed categorical continuation application from an
+   `indexed-transfor` at `k` and the exact indexed source-family object `a` to
+   that `indexed-hom` classifier. Extend direct application of a closed
+   displayed transformation to an indexed object by recovering the hidden
+   base, first constructing `eta[k]`, and then this point application. Reuse
+   the existing hidden-base/orientation discipline; reject escaped, foreign,
+   wrong-base, wrong-family, wrong-index, and wrong-endpoint inputs.
+6. Add one point-eta factorization case only. The body
+   `apply(eta,a)` (surface reading `eta[a]`, with `k` implicit) must invert to
+   the already-coherent closed `eta` by factoring its indexed-transfor
+   subject through the existing component factorer and checking that its
+   argument is exactly the bound fibre token. Do not infer coherence from an
+   arbitrary point arrow.
+7. Return the recovered closed `Transfd` term and record deeply frozen
+   abstraction evidence containing the two binding names/modes, exact
+   families/endpoints, normalized point-body IR, normalized result IR, and
+   usage counts for the hidden base and exposed fibre token.
+8. Add a focused test module and wire it into the root runner if required.
+   Cover callback-once and deeply frozen evidence; `lambda^nd a. eta[a]`
+   comparing structurally with `eta`; a closed `eta[x][u]` observation; the
+   already active `tdapp1_int_cell(eta,p,u)` base-arrow observation; retained
+   existing component-level eta/composition behavior; and exact negative
+   cases for scope, base, family, endpoint, index, foreign terms, escaped
+   tokens, unsupported point bodies, and user-supplied arbitrary arrows.
+9. Add zero Lambdapi owner or rule, zero transfer declaration/rule, zero
+   generic LF/Core checker or evaluator branch, zero external coherence
+   field, zero curry/section route, and zero parser/browser/publication
+   change. Do not add point identity, point composition, whiskering, arbitrary
+   variance, or unrestricted `:^nd` bodies in this slice.
+10. During implementation run only the new focused test, the two existing
+    `:^nd` suites, workspace check, root typecheck, lint, and whitespace
+    hygiene. Because shared categorical surface behavior changes, run one
+    complete `check:ts` only after the bounded tranche is otherwise green and
+    before its semantic checkpoint. Carry forward the current bounded kernel
+    result; do not run Lambdapi CI or `check:all` because no kernel or
+    cross-layer boundary changes.
+11. Synchronize this ledger and the handoff, and checkpoint only the exact
+    reviewed semantic tranche after all required gates are green. Preserve
+    unrelated work and make no push, merge, publication, cleanup, or remote
+    change.
+
+This proposal is deliberately non-self-authorizing. Under the standing
+unattended delegation it may be approved only by a separate review of an
+immutable proposal checkpoint, with immediate human supersession. The review
+must confirm that the new classifier is construction-only, the point leaf
+recovers a genuine closed `Transfd`, and no external coherence datum or
+hidden curry dependency is introduced.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -5455,16 +5672,27 @@ workspace/typecheck/lint, and sole aggregate evidence exactly as recorded. Do
 not repeat the approximately 49-minute aggregate or repair its three unrelated
 canonical-export digest pins in this tranche.
 
-Proceed next with the read-only `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` audit.
-Treat `:^nd` as a fundamental direct nested contextual binder analogous to the
-accepted direct `:^fd` telescope, not as arbitrary pointwise data plus an
-externally synthesized naturality proof. Derive the exact typed telescope from
-active `Transfd`/`Transf_catd`, `displayedTransforLambda`, `homd_int`, and
-`tdapp1_int_*` authority; distinguish classifier alternation from recursive
-body-constructor coverage; and freeze at most one smallest measured semantic
-gate. Curry and total-section presentations remain alternatives only if a
-concrete direct-context obstruction is found. Make no semantic, kernel,
-transfer, parser/browser, publication, or remote Git edit during this audit.
+Treat `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` as read-only complete with zero
+semantic delta. It establishes `:^nd`, like `:^fd`, as a fundamental direct
+nested contextual binder: hide `k :^n K`, expose `a :^n E[k]`, and
+recursively factor supported point-arrow syntax first to a whole fibre
+transformation and then to a genuine outer `Transfd`. `Transf_catd`/Pi and
+Sigma-total presentations are classifier/comparison views, not a required
+curry route. The existing `displayedTransforLambda` remains the sound
+whole-fibre stage-two factorer; preserve it unchanged.
+
+Proceed next by checkpointing and separately reviewing the exact
+`DIRECT-CONTEXTUAL-ND-ETA-1T` /
+H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-ETA-01 /
+D-DTTLF-USABILITY-055 proposal. If and only if that immutable proposal is
+approved under the standing unattended delegation without an immediate human
+correction, implement its TypeScript-only point-eta proof slice. Add one
+opt-in compact contextual method, one construction-only indexed point-Hom
+classifier/application route, and one eta factorization back to an
+already-coherent closed `Transfd`. Add no kernel/transfer owner, generic
+checker/evaluator case, external naturality data, curry/section route,
+pointwise identity/composition, parser/browser/publication change, or
+unrestricted-`:^nd` claim.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -5483,6 +5711,24 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` completed read-only
+  and D-DTTLF-USABILITY-055 frozen for separate review.** Active authority
+  confirms that `Transfd_cat FF GG` owns the outer displayed transformation,
+  its fibre component is an ordinary transformation, and its point component
+  is an arrow in `D[k]`. The direct compact telescope is therefore
+  `k :^n K; a :^n E[k]`, not the current provisional one-slot
+  whole-fibre callback and not arbitrary point data plus synthesized
+  naturality. `Transf_catd`/Pi and Sigma-total views remain compatible
+  semantic presentations rather than mandatory curry paths. Existing
+  `homd_int` and `tdapp1_int_*` owners preserve object, fibre-arrow,
+  base-arrow, whole-Hom, and higher action after a body is factored back to a
+  genuine `Transfd`. The current TypeScript API already supplies the second
+  factorization stage for eta/composition at the whole-fibre level; the first
+  missing seam is a construction-only indexed point-Hom/application view.
+  D-055 freezes one TypeScript-only eta leaf proving that two-stage direct
+  architecture. The bounded active-kernel check and both existing `:^nd`
+  suites pass at 14/14. No semantic, kernel, transfer, parser/browser,
+  publication, or remote change occurred during the audit.
 - **2026-08-01 — D-DTTLF-USABILITY-054 implemented and checkpointed.**
   Checkpoint `390d9f4561576885d5d55588402479db877028ff` extends only the
   existing direct tower factorer/compiler. Every layer independently accepts

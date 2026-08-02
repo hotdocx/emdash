@@ -278,13 +278,26 @@
 > kernel/transfer owner, curry, total section, sibling integration,
 > pair/weakening/constant-middle lift, or new `lambda^nd` constructor was
 > added.
-> The next dependency-ready operation is the read-only
-> `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` audit. It treats `:^nd`, like `:^fd`,
-> as a fundamental direct nested contextual binder. It must derive the exact
-> typed telescope and select one concrete missing coherence-owning body
-> constructor from active `Transfd`/`Transf_catd`, `homd_int`, and
-> `tdapp1_int_*` authority; it must not route through curry or external
-> naturality evidence.
+> `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` is now read-only complete with zero
+> semantic delta. It confirms the user's architectural hypothesis: `:^nd`,
+> like `:^fd`, is fundamentally a direct nested contextual binder. Its compact
+> form hides `k :^n K`, exposes `a :^n E[k]`, and recursively factors a
+> supported point arrow first to a whole fibre transformation and then to a
+> genuine outer `Transfd`. The current `displayedTransforLambda` soundly owns
+> only the second, whole-fibre eta/composition stage. `Transf_catd`/Pi and
+> Sigma-total views are compatible classifier presentations, not a mandatory
+> curry or user-supplied section route. Active `homd_int` and
+> `tdapp1_int_*` owners retain object, fibre-arrow, base-arrow, whole-Hom, and
+> higher action without external naturality equations. The exact
+> TypeScript-only `DIRECT-CONTEXTUAL-ND-ETA-1T` /
+> H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-ETA-01 /
+> D-DTTLF-USABILITY-055 proposal is frozen in the living plan for separate
+> review. It adds only a compact contextual method, a construction-only
+> indexed point-Hom/application view, and the eta point leaf
+> `lambda^nd a. eta[a] -> eta`; it adds no kernel/transfer owner, generic
+> checker case, curry/section route, parser/browser promotion, or unrestricted
+> `:^nd` claim. The bounded active-kernel check and existing `:^nd` suites are
+> green at 14/14.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
