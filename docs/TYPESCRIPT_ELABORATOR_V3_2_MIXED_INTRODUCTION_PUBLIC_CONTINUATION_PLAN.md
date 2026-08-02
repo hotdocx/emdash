@@ -506,7 +506,8 @@ It deliberately avoids:
 | `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` | read-only successor audit complete; zero semantic delta; pointwise vertical composition selected | implemented D-055 point eta; retained whole-fibre recursive composition; existing generic `composeCells`, `id_transfd`, action, and whiskering-related owners; bounded active-kernel check | The single displayed binder has expanded telescope `k :^n K; a :^n E[k]`; TypeScript merely tracks `k` internally. Current `composeCells` fails exactly because it accepts `indexed-transfor`, not the new `indexed-hom`. Its typed composition tree, recursive whole-owner factorer, and generic `Functord_cat` composition are otherwise reusable. Identity needs a new point-identity construction route; whiskering needs a wider orientation audit. The smallest successor is therefore recursive pointwise vertical composition. |
 | `DIRECT-CONTEXTUAL-ND-COMPOSITION-1V` | implemented and in-scope green at `e125bb9aa2c734c6bee01f3eccfa28cfa1cdebc4` under D-DTTLF-USABILITY-056 | completed `DIRECT-CONTEXTUAL-ND-GRADUATE-0U`; immutable proposal `ff170aa0ab8ec18e829a95689800032401c18f23`; separate review under standing unattended delegation; 6/6 focused and 37/37 combined regressions; workspace/typecheck/lint; sole aggregate 1,278 pass/51 skip/same three unrelated digest-pin failures | `composeCells` now has a homogeneous construction-only indexed point-Hom branch. The recursive point factorer recovers each D-055 leaf and composes the resulting closed `Transfd` owners through existing generic composition. The whole-fibre branch remains green. One contextual-composition evidence rule records the point tree and usage counts. No method, Core/LF case, kernel/transfer owner, identity, whiskering, parser/browser route, or unrestricted-`:^nd` claim was added. |
 | `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` | read-only successor audit complete; zero semantic delta; generic point identity selected | implemented D-055 eta and D-056 recursive composition; active `id`/`id_transfd`, displayed component-identity rules, and internal base-arrow action; existing finite displayed-functor endpoint factorer | Identity is the smallest missing constructor and also tests a mixed `Functor_catd` fibre without introducing mixed coherence. Select one generic `identityCell(endpoint)` construction, finite factorable endpoint recovery, and relocation of the already-reviewed `id` signature to the earliest `Transfd` transfer layer. Whiskering needs a new indexed-Hom action node and orientation audit. A `Pi_cat(Transf_catd ...)` section remains pointwise data, not an outer-coherence constructor. |
-| `DIRECT-CONTEXTUAL-ND-IDENTITY-1X` | separately reviewed-approved under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 / D-DTTLF-USABILITY-057; implementation dependency-ready | completed `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W`; immutable proposal `a16514c00c3e7d4c16f86c5d91fbd59f202b4a0d`; separate review under standing unattended delegation; exact prior `id` representation in the later D-019 foundation; existing `directDisplayedFunctorChain`; active identity component and base-cell folds | Promote/relink one existing `id` signature without duplication, transfer exactly five existing identity clauses at their dependency-correct layers, add one generic construction-only identity node/method for a closed displayed functor or a finite factorable indexed endpoint, and recover the outer `id` at `Functord_cat`. Check bare, finite-chain, composition-adjacent, mixed-family, point-computation, and internal base-arrow cases. Add no kernel mathematics, whiskering, arbitrary point coherence, parser/browser route, or unrestricted `:^nd`. |
+| `DIRECT-CONTEXTUAL-ND-IDENTITY-1X` | implemented and in-scope green at `64684f090499debebc64f752a063979f3c2f61e3` under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 / D-DTTLF-USABILITY-057 | completed `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W`; immutable proposal `a16514c00c3e7d4c16f86c5d91fbd59f202b4a0d`; separate review under standing unattended delegation; 7/7 focused identity tests, 50/50 nearest semantic regressions, 17 pass/1 skip transfer-audit matrix, and 22/22 corrected descendant assertions | The exact existing generic `id` declaration is relocated/relinked without duplication; three existing point-component clauses close at `fibred-transfd-1` and two internal-cell folds close at displayed-chain. One construction-only `identityCell(endpoint)` and a shared recursive finite endpoint factorer recover genuine generic identity at `Functord_cat`, including finite chains and a parametric mixed `Functor_catd` fibre. No kernel mathematics, whiskering, arbitrary point coherence, parser/browser route, or unrestricted `:^nd` was added. |
+| `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` | dependency-ready read-only audit; zero semantic delta required | implemented D-055 eta, D-056 recursive composition, and D-057 identity; active `Functor_catd`/`Transf_catd`, `Unit_prof`, Hom action, and indexed-Hom infrastructure | Compare covariant target action, contravariant source action, and their exact orientation through the existing internal owners. Probe representative mapped eta/identity and source-side cases, then freeze at most one exact whiskering/action successor. Add no semantic behavior, new owner, curry/section route, external coherence evidence, parser/browser behavior, or unrestricted `:^nd` during the audit. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -5838,8 +5839,9 @@ acquire coherence merely because their point types happen to match.
 ## H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 /
 ## D-DTTLF-USABILITY-057
 
-Status: separately reviewed-approved under the standing unattended delegation;
-implementation dependency-ready. This gate is the exact
+Status: implemented and in-scope green at
+`64684f090499debebc64f752a063979f3c2f61e3` after separate review and approval
+under the standing unattended delegation. This gate is the exact
 `DIRECT-CONTEXTUAL-ND-IDENTITY-1X` slice.
 
 1. Preserve `displayedTransforContextLambda` as the single direct displayed-
@@ -5960,9 +5962,54 @@ The review finds:
   remains outside this authorization, as do arbitrary pointwise
   `Transf_catd` sections and unrestricted `:^nd`.
 
-No immediate human correction superseded the immutable proposal. The next
-operation is implementation of only this reviewed D-057 boundary, followed by
-the proportional focused and single aggregate validation recorded above.
+No immediate human correction superseded the immutable proposal. The reviewed
+D-057 boundary was subsequently implemented exactly as approved.
+
+## D-DTTLF-USABILITY-057 implementation result
+
+Semantic checkpoint
+`64684f090499debebc64f752a063979f3c2f61e3` implements the exact approved
+identity slice:
+
+- the pre-existing generic `id` declaration is relocated from the later D-019
+  local declaration set to `fibred-transfd-1`, retaining its exact qualified
+  symbol, opacity, backend name, and stable Core name. The early fragment now
+  has seven declarations, D-019 has twelve local declarations, and every
+  descendant environment contains exactly one qualified `id`;
+- the early runtime fragment now has ten local rules after acquiring the three
+  existing point-component clauses. Displayed-chain has eight local rules and
+  102 composed rules after acquiring the two dependency-correct internal-cell
+  folds;
+- `identityCell(endpoint)` has one closed displayed-functor branch and one
+  construction-only indexed endpoint branch. The latter shares the recursive
+  finite displayed-endpoint factorer with `directDisplayedFunctorChain`,
+  revalidates the exact indices, families, whole functor, and usage, and then
+  constructs generic `id` at the recovered `Functord_cat`;
+- the construction-only `typed-cell-identity` node disappears during
+  contextual `:^nd` factorization and cannot reach explicit Core or the
+  generic LF checker; and
+- bare identity, arbitrary finite endpoint chains, composition-adjacent
+  identities, a mixed `Functor_catd` root, point computation, and internally
+  owned base-arrow action all use the existing kernel owners without curry,
+  casts, classifier mirrors, or external naturality evidence.
+
+Proportional validation is complete. The new focused suite is 7/7; the nearest
+semantic regression matrix is 50/50; the corrected transfer/audit matrix is 17
+pass/1 skip; and the corrected descendant assertions are 22/22. Workspace,
+typecheck, lint, and whitespace checks pass. The sole required aggregate ran
+once and reported 1,282 pass, 51 skip, and six failures. Three were D-057-local
+stale count assertions that were corrected and rerun focused-green; the other
+three are the unchanged unrelated canonical-export digest pins. The effective
+post-correction boundary is therefore 1,285 pass/51 skip with only those three
+known pins. Do not repeat the approximately 44-minute aggregate for this
+closure or for the following read-only audit.
+
+D-057 adds no Lambdapi mathematics, owner-specific evaluator case,
+whiskering/action, arbitrary pointwise-coherence promotion, text/parser/
+browser behavior, or unrestricted `:^nd` claim. The next dependency-ready
+operation is `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y`: a read-only,
+orientation-aware audit of the existing indexed-Hom action and whiskering
+owners that may freeze at most one exact semantic successor.
 
 ## Validation And Checkpoint Policy
 
@@ -6315,15 +6362,25 @@ H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 /
 D-DTTLF-USABILITY-057 proposal at
 `a16514c00c3e7d4c16f86c5d91fbd59f202b4a0d` as separately
 reviewed-approved under the standing unattended delegation, with immediate
-human supersession. Implement only its exact generic
-`identityCell(endpoint)`, construction-only indexed identity, shared finite
-endpoint factorization, one relocated/relinked `id` declaration, five
-existing identity rules at their dependency-correct layers, evidence, and
-focused tests. Preserve generic LF checking and internally owned
-object/fibre/base/higher action. Keep orientation-aware indexed-Hom
-whiskering/action as the leading successor and keep arbitrary pointwise
-`Transf_catd` sections, parser/browser work, new kernel mathematics, and
-unrestricted `:^nd` outside D-057.
+human supersession. Treat its exact generic `identityCell(endpoint)`,
+construction-only indexed identity, shared finite endpoint factorization, one
+relocated/relinked `id` declaration, five existing dependency-correct identity
+rules, evidence, and tests as implemented and in-scope green at
+`64684f090499debebc64f752a063979f3c2f61e3`. Carry forward the 7/7 focused,
+50/50 nearest semantic, 17 pass/1 skip transfer-audit, 22/22 corrected
+descendant, workspace/typecheck/lint/whitespace, and sole aggregate evidence
+exactly as recorded. Do not repeat the aggregate or repair its three unrelated
+digest pins in this continuation.
+
+Proceed with `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` as a read-only,
+zero-semantic-delta audit. Compare the exact covariant target and
+contravariant source orientations of the active indexed-Hom, `Functor_catd`,
+`Transf_catd`, `Unit_prof`, and Hom-action owners and their existing
+TypeScript consumers. Use bounded probes where necessary and freeze at most
+one exact successor for separately reviewed implementation. During this audit
+add no kernel/TypeScript behavior, new owner, curry or total-context section,
+cast, external coherence evidence, parser/browser route, arbitrary pointwise
+`Transf_catd` promotion, or unrestricted `:^nd` claim.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -6342,6 +6399,21 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-057 implemented and in-scope green at
+  `64684f090499debebc64f752a063979f3c2f61e3`.** The exact existing generic
+  `id` declaration is relocated/relinked without duplication; the three early
+  component clauses and two later internal-cell folds run through the generic
+  transfer runtime. The construction-only `identityCell(endpoint)` shares the
+  recursive finite endpoint factorer and recovers generic identity at
+  `Functord_cat`, including a parametric mixed `Functor_catd` root. The new
+  focused suite is 7/7, nearest semantics are 50/50, the corrected
+  transfer/audit matrix is 17 pass/1 skip, and corrected descendants are
+  22/22. Workspace/typecheck/lint/whitespace gates pass. The one approximately
+  44-minute aggregate was not repeated: its three local stale assertions were
+  corrected focused-green and its other three failures remain the unrelated
+  canonical-export digest pins. The dependency-ready successor is the
+  zero-semantic-delta `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` orientation
+  audit; whiskering/action remains unimplemented until a separate exact gate.
 - **2026-08-01 — D-DTTLF-USABILITY-057 approved exactly as proposed.** A
   separate review of immutable proposal checkpoint
   `a16514c00c3e7d4c16f86c5d91fbd59f202b4a0d` confirms that relocating the

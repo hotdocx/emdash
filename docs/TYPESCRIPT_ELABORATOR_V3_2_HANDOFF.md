@@ -355,7 +355,25 @@
 > reviewed-approved under the standing unattended delegation, with immediate
 > human supersession. Its exact dependency-correct identity transfer,
 > construction-only `identityCell(endpoint)`, shared finite endpoint
-> factorization, evidence, and focused tests are now implementation-ready.
+> factorization, evidence, and focused tests are now implemented/in-scope
+> green at `64684f090499debebc64f752a063979f3c2f61e3`. The existing generic
+> `id` declaration is relocated/relinked rather than duplicated; the early
+> transfer fragment contains seven declarations and ten runtime rules, the
+> later D-019 fragment contains twelve local declarations, and
+> displayed-chain contains eight local/102 composed rules. The shared
+> recursive endpoint factorer covers the bare root and arbitrary finite closed
+> chains, including a parametric mixed `Functor_catd` fibre, while the
+> construction-only identity node disappears before Core checking. Its
+> focused suite is 7/7, nearest semantic regressions are 50/50, the corrected
+> transfer/audit matrix is 17 pass/1 skip, and corrected descendant assertions
+> are 22/22; workspace, typecheck, lint, and whitespace gates pass. The sole
+> approximately 44-minute aggregate was not repeated: three D-057-local stale
+> assertions were corrected focused-green, leaving only the same three
+> unrelated canonical-export digest pins, for an effective corrected boundary
+> of 1,285 pass/51 skip. The dependency-ready operation is the read-only
+> `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` audit of covariant target and
+> contravariant source orientation through existing internal action owners.
+> It may freeze at most one exact successor and may not change behavior.
 > Whiskering/action, arbitrary pointwise coherence, parser/browser work, new
 > kernel mathematics, and unrestricted `:^nd` remain outside D-057.
 > The completed mixed-mode telescope plan
