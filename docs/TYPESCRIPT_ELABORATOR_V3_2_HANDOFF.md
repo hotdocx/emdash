@@ -47,11 +47,16 @@
 > curry, external coherence, text/browser behavior, or second-hom behavior.
 >
 > The exact next row is the read-only
-> `COMPOSITIONAL-ND-EXPANDED-1D` audit/proposal. It must determine and freeze
-> the analogous shared-factorer bridge for literal
-> `lambda^n k. lambda^n a` before any second-hom implementation. Keep both canonical
-> covariant comparisons distinct from mixed-variance
-> `Functor_catd`/`Transf_catd` sections.
+> `COMPOSITIONAL-ND-EXPANDED-1D` audit/proposal. That audit is now complete and
+> its exact proposal is frozen under
+> `H-DTTLF-USABILITY-COMPOSITIONAL-ND-EXPANDED-01`, pending separate
+> `D-DTTLF-USABILITY-077` review. Applying closed displayed functors at the
+> active base already produces the required open `indexed-functor` endpoints;
+> the proposed literal `lambda^n k. lambda^n a` bridge therefore wraps the
+> exact compact point factorer and retains an ordinary iterated-Hom facade,
+> with no new descriptor, Core node, checker rule, kernel owner, or external
+> coherence. Keep both canonical covariant comparisons distinct from mixed-
+> variance `Functor_catd`/`Transf_catd` sections.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
