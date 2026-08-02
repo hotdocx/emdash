@@ -29,6 +29,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_localization_unit.lp"),
     Path("emdash3_2_commutative_algebra_localization_zero.lp"),
     Path("emdash3_2_commutative_algebra_localization_comparison.lp"),
+    Path("emdash3_2_commutative_algebra_localization_overlap.lp"),
     Path("emdash3_2_commutative_algebra_presheaves.lp"),
     Path("emdash3_2_walking_end_hit.lp"),
     Path("emdash3_2_eq1_hom_action.lp"),

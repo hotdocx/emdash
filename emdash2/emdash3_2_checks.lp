@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -20203,6 +20203,120 @@ assert (R : τ CommRing)
   ≡ @comm_ring_iterated_localization_reverse_factor
       R f g iterated product_localization;
 /* End of the PSSS-07b localization-comparison diagnostics. */
+
+// catalog-area: Whole internal iterated-localization overlap
+// Universal-property uniqueness gives whole cancellation on the product side.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g)))
+  (comparison : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization)) ⊢
+  @comm_ring_iterated_localization_comparison_left_law
+    R f g iterated product_localization comparison
+  : τ (@=
+      (@CommRingHom
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization)
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization))
+      (@comm_ring_hom_comp
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization)
+        (@comm_ring_iterated_localization_target R f g iterated)
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization)
+        (@comm_ring_iterated_localization_comparison_reverse_map
+          R f g iterated product_localization comparison)
+        (@comm_ring_iterated_localization_comparison_forward_map
+          R f g iterated product_localization comparison))
+      (@comm_ring_hom_id
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization)));
+
+// Sequential uniqueness through both stages gives the opposite whole law.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g)))
+  (comparison : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization)) ⊢
+  @comm_ring_iterated_localization_comparison_right_law
+    R f g iterated product_localization comparison
+  : τ (@=
+      (@CommRingHom
+        (@comm_ring_iterated_localization_target R f g iterated)
+        (@comm_ring_iterated_localization_target R f g iterated))
+      (@comm_ring_hom_comp
+        (@comm_ring_iterated_localization_target R f g iterated)
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization)
+        (@comm_ring_iterated_localization_target R f g iterated)
+        (@comm_ring_iterated_localization_comparison_forward_map
+          R f g iterated product_localization comparison)
+        (@comm_ring_iterated_localization_comparison_reverse_map
+          R f g iterated product_localization comparison))
+      (@comm_ring_hom_id
+        (@comm_ring_iterated_localization_target R f g iterated)));
+
+// The fixed-forward classifier is the semantic owner of the overlap.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g)))
+  (comparison : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization)) ⊢
+  @comm_ring_iterated_localization_comparison_omega_equiv_along
+    R f g iterated product_localization comparison
+  : τ (@OmegaEquivAlong
+      CommRing_cat
+      (@comm_ring_localization_target
+        R (@comm_ring_mul R f g) product_localization)
+      (@comm_ring_iterated_localization_target R f g iterated)
+      (@comm_ring_iterated_localization_comparison_forward_map
+        R f g iterated product_localization comparison));
+
+// Both inverse observations compute to the selected staged reverse map.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g)))
+  (comparison : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization)) ⊢
+  @omega_equiv_along_left_inv
+    CommRing_cat
+    (@comm_ring_localization_target
+      R (@comm_ring_mul R f g) product_localization)
+    (@comm_ring_iterated_localization_target R f g iterated)
+    (@comm_ring_iterated_localization_comparison_forward_map
+      R f g iterated product_localization comparison)
+    (@comm_ring_iterated_localization_comparison_omega_equiv_along
+      R f g iterated product_localization comparison)
+  ≡ @comm_ring_iterated_localization_comparison_reverse_map
+      R f g iterated product_localization comparison;
+
+// The first-class facade retains the forward comparison computation.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g)))
+  (comparison : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization)) ⊢
+  @omega_equiv_to
+    CommRing_cat
+    (@comm_ring_localization_target
+      R (@comm_ring_mul R f g) product_localization)
+    (@comm_ring_iterated_localization_target R f g iterated)
+    (@comm_ring_iterated_localization_comparison_omega_equiv
+      R f g iterated product_localization comparison)
+  ≡ @comm_ring_iterated_localization_comparison_forward_map
+      R f g iterated product_localization comparison;
+/* End of the PSSS-08c0F localization-overlap diagnostics. */
 
 // catalog-area: Finite commutative-ring cover presentations
 // Formation and visible constructor computation.

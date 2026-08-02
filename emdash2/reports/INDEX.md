@@ -70,6 +70,14 @@ rule-free overlap layer: it packages localization first at `f` and then at the
 image of `g`, and constructs canonical forward/reverse factors against
 localization at `f*g`, without equality of chosen packages or comparison
 inverse laws.
+`emdash3_2_commutative_algebra_localization_overlap.lp` is the rule-free
+PSSS-08c0F whole-overlap layer. Contractible factorization proves
+`reverse*forward=id` at the product localization; two successive uniqueness
+arguments through the first and second localization stages prove
+`forward*reverse=id` at the iterated target. It packages the canonical
+forward map as `OmegaEquivAlong CommRing_cat` and derives the first-class
+`OmegaEquiv` facade, without fractions, package equality, presheaves,
+topology, `Spec`, or schemes.
 `emdash3_2_commutative_algebra_presheaves.lp` is the PSSS-08a/08b layer: it
 transparently presents functors from `K^op` to `CommRing_cat`, exposes
 structured restriction and carrier application, supplies explicit pointwise
@@ -117,10 +125,12 @@ prose are locally checkpointed at `eb0c5b6`.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section
-audit, a native `OmegaEquivAlong Cat_cat`/internal-comparison audit, a
-nontrivial localization model, and the first iterated-localization overlap
-computation; that evidence may retain, strengthen, derive, or replace the
-present interface.
+audit, a native `OmegaEquivAlong Cat_cat`/internal-comparison audit, and a
+concrete nontrivial localization model. The whole algebraic
+iterated-localization overlap equivalence is now implemented downstream of
+the comparison layer, but its connection to matching/sheaf descent and an
+actual affine consumer remains open; that evidence may retain, strengthen,
+derive, or replace the present glue interface.
 `emdash3_2_commutative_algebra_zariski.lp` is the rule-free PSSS-09a/09b1
 layer:
 it combines an algebraic unimodular presentation with a dependent family of

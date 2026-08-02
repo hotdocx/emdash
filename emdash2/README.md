@@ -74,6 +74,10 @@ mathematical reading is in
   localization first at `f`, then at the image of `g`. It retains canonical
   maps and pointwise triangles, but no equality of chosen packages or inverse
   law for the comparison maps.
+- `emdash3_2_commutative_algebra_localization_overlap.lp` derives both whole
+  comparison-map cancellation paths by contractible factorization and
+  packages the forward comparison as an `OmegaEquivAlong CommRing_cat` plus a
+  first-class `OmegaEquiv` facade. It remains fraction-free and rule-free.
 - `emdash3_2_commutative_algebra_presheaves.lp` transparently presents
   CommRing-valued presheaves, their actual structured restriction maps,
   pointwise identity/composition paths, and proposition-valued invertibility
@@ -134,6 +138,9 @@ The active one-way library extensions are:
 - `emdash3_2_commutative_algebra_localization_comparison.lp` — stable
   pointwise ring-map composition plus universal-property iterated/product-
   localization comparison data, without fractions or package equality;
+- `emdash3_2_commutative_algebra_localization_overlap.lp` — whole internal
+  product/iterated cancellation, fixed-forward omega-equivalence evidence,
+  and its first-class facade, without new runtime rules or fraction syntax;
 - `emdash3_2_commutative_algebra_presheaves.lp` — transparent ring-valued
   presheaves, computational restriction, full-action carrier support, and the
   whole ordinary invertibility sieve, without topology or a sheaf package;

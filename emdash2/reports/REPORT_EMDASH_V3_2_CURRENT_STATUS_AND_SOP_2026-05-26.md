@@ -2284,6 +2284,47 @@ This provides the computational empty-basic-open endpoint but deliberately
 does not close the nondegenerate localization, native matching-equivalence,
 or affine-overlap gates.
 
+The following PSSS-08c0F candidate now closes the representation-independent
+algebraic overlap-equivalence construction. The 987-line, seventeen-symbol,
+rule-free
+`emdash3_2_commutative_algebra_localization_overlap.lp` module proves that
+the checkpointed canonical forward and staged reverse maps between arbitrary
+chosen packages for `R[1/(f*g)]` and `R[1/f][1/g]` are inverse as whole
+`CommRing_cat` arrows. Product-localization factor uniqueness proves the left
+law directly. For the right law, first-localization uniqueness proves the
+whole intermediate triangle; evaluating that path gives the second-stage
+triangle, and second-localization uniqueness proves the whole composite equal
+to identity. Existing pointwise composition/identity paths transport the
+result to the generic category owners, with no external naturality field and
+no new reduction or unification rule.
+
+The two laws package the canonical forward map as
+`OmegaEquivAlong CommRing_cat` with the staged reverse map in both inverse
+slots, and derive a first-class `OmegaEquiv CommRing_cat` facade. Twelve
+construction helpers are protected; five theorem/package symbols are public.
+The 226-line reviewer has eleven assertions covering generic factor-map
+uniqueness, both whole laws, both packages, inverse projections, and law
+projections. Focused and maintained source, reviewer, and central-diagnostic
+checks pass; warning-enabled checks inherit exactly `1179 = 1020 + 159` and
+locate no warning in the rule-free candidate. The strict audit remains clean,
+and five central diagnostics raise the fresh catalog to 1,953 checks across
+84 mapped areas with zero unclassified entries. Health passes all 80
+source/example targets in 539.883 summed check-seconds at source snapshot
+`sha256:8161bb12f88fd8e829c615b6ec483271bd012b0b846038718fb0300f495b0e39`.
+Full integration CI independently passes all 80 Lambdapi targets in 647.194
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. Final checkpoint recording remains pending.
+
+This result is representation-independent: it needs only the localization
+universal properties and neither assumes nor exposes fractions. It identifies
+the chosen targets by an internal equivalence, not by judgmental package
+equality. It therefore closes the first whole algebraic overlap theorem, but
+does not yet construct a concrete genuinely nondegenerate localization model,
+identify Cartier matching objects with ordinary covering-sieve descent, or
+construct `Spec`, structure sheaves, or schemes.
+
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
 retains its finite unimodular generators together with a dependent finite

@@ -1340,8 +1340,9 @@ R[1/1] = R.
 ```
 
 This closes only the identity-localization stage of the computational-scheme
-audit. A genuinely nontrivial localization representation and its first
-iterated/basic-open overlap remain required.
+audit. A genuinely nontrivial localization representation remains required;
+the representation-independent iterated/basic-open overlap theorem is now a
+separate downstream layer.
 
 The next rule-free layer computes the opposite degenerate endpoint. The ring
 axioms first derive
@@ -1368,7 +1369,7 @@ That path constructs the unique structured factor `zero_comm_ring -> S`, and
 structured-map extensionality plus the proposition-valued agreement fibre
 makes the complete factorization Sigma contractible. This is the
 computational empty-basic-open case. It is not yet a nondegenerate fraction
-model or the required first affine overlap.
+model, and by itself it does not establish the general affine-overlap law.
 
 This is a representation-independent interface. Concrete fractions,
 finite/unimodular families, powers, concrete polynomial representations, and
@@ -1407,11 +1408,51 @@ R[1/f][1/g] ->  R[1/(f*g)].
 Each factor retains a pointwise triangle over the original map from `R`.
 `CommRingIteratedLocalizationComparison` packages these forward and reverse
 factors with named map/agreement projections. It does not identify the two
-chosen localization packages and does not yet store inverse laws for the two
-maps. Nested contractible-factor uniqueness can supply those laws when a
-basic-open equivalence consumer actually needs them. The separately selected
-stable identity comparison is now justified by the empty-variable polynomial
-algebra model, not by an unneeded comparison inverse law.
+chosen localization packages, and the comparison-data module itself does not
+store inverse laws.
+
+The downstream overlap module now supplies those laws without changing either
+localization representation. First, if two inhabitants lie in the same
+contractible factorization classifier, applying the factor-map projection to
+their canonical path gives equality of the whole structured maps. On the
+product-localization side, the composite of the staged reverse and forward
+maps and the identity map are both factors of the original map
+`R -> R[1/(f*g)]`. Contractibility therefore gives
+
+```text
+reverse * forward = id_[R[1/(f*g)]].
+```
+
+The opposite law uses the two universal properties in sequence. Over the
+first localization map, `(forward*reverse)*second` and `second` are two
+factors of the original two-stage map, so first-stage uniqueness identifies
+them as whole maps. Evaluating that map equality supplies the triangle needed
+at the second localization stage. Second-stage uniqueness then gives
+
+```text
+forward * reverse = id_[R[1/f][1/g]].
+```
+
+Both paths are explicitly transported from the stable pointwise composition
+and identity witnesses to the generic `CommRing_cat` composition and identity
+owners. No new reduction rule is introduced. The canonical forward comparison
+therefore carries
+
+```text
+OmegaEquivAlong
+  CommRing_cat
+  R[1/(f*g)]
+  R[1/f][1/g]
+  forward,
+```
+
+with the staged reverse map selected in both inverse slots; a first-class
+`OmegaEquiv` facade is derived from the same evidence. This is a whole
+internal algebraic overlap equivalence, not an external pair of pointwise
+cancellation observations. It still assumes chosen universal-property
+localization packages and supplies neither fractions nor a concrete
+nondegenerate localization model. Equality of the chosen packages, presheaf
+restriction coherence, topology, `Spec`, and schemes remain separate gates.
 
 ### CommRing-Valued Presheaves And Invertibility Support
 
@@ -1636,8 +1677,10 @@ independent comparison with natural maps out of `D(s)`, an audit of whether
 the component paths assemble into inverse transfors between the two composite
 functors and identities—principally as an
 `OmegaEquivAlong Cat_cat` witness for restriction—a nontrivial localization
-model, and an iterated-localization overlap computation. The result may
-validate, strengthen, derive, or replace the present explicit classifier.
+model, and a checked connection from the now-available algebraic
+iterated-localization overlap equivalence to matching/sheaf descent. The
+result may validate, strengthen, derive, or replace the present explicit
+classifier.
 Componentwise funext is construction evidence; it is not a substitute for a
 whole internal comparison when a scheme consumer needs one. `DefIso` is a
 separate strict-computation notion and is not the default category-equivalence
@@ -3626,6 +3669,9 @@ kernel and one-way library vocabulary.
 | localization first at `f`, then at the image of `g` | `CommRingIteratedLocalizationAt R f g` |
 | comparison with localization at `f*g` | `CommRingIteratedLocalizationComparison` / `comm_ring_iterated_localization_comparison` |
 | forward/reverse localization comparison maps | `comm_ring_iterated_localization_comparison_forward_map` / `comm_ring_iterated_localization_comparison_reverse_map` |
+| whole product/iterated localization cancellation paths | `comm_ring_iterated_localization_comparison_left_law` / `comm_ring_iterated_localization_comparison_right_law` |
+| fixed-forward product/iterated localization equivalence | `comm_ring_iterated_localization_comparison_omega_equiv_along` |
+| first-class product/iterated localization equivalence | `comm_ring_iterated_localization_comparison_omega_equiv` |
 | Nat-indexed finite families | `FiniteFamily A n` / `finite_family_nil` / `finite_family_cons` |
 | finite-family pointwise map and sethood | `finite_family_map` / `finite_family_is_set` |
 | dependent evidence over a finite family | `FiniteFamilyAll P n xs` / `finite_family_all_cons` |

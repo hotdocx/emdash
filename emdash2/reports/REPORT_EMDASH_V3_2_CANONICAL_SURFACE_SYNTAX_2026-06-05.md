@@ -465,7 +465,9 @@ idLoc_R(f,u)               := comm_ring_unit_identity_localization(R,f,u)
 idLoc_R(1_R)               := comm_ring_identity_localization_at_one(R)
 zeroLoc_R                  := comm_ring_zero_localization(R)
 IterLoc_R(f,g)             := CommRingIteratedLocalizationAt(R,f,g)
-CompLoc_R(f,g,m,p)         := CommRingIteratedLocalizationComparison(m,p).
+CompLoc_R(f,g,m,p)         := CommRingIteratedLocalizationComparison(m,p)
+OverlapAlong_R(f,g,m,p,c)  := comm_ring_iterated_localization_comparison_omega_equiv_along(c)
+Overlap_R(f,g,m,p,c)       := comm_ring_iterated_localization_comparison_omega_equiv(c).
 
 O : CRingPsh(K)            := O : CommRingPsh(K)
 O(U)                       := comm_ring_psh_value(O,U)
@@ -523,8 +525,11 @@ For `m : IterLoc_R(f,g)`, the first stage is a chosen localization at `f` and
 the second is a chosen localization at the image of `g`; its stable composite
 map sends `f*g` to a unit. For
 `p : Loc_R(f*g)`, `CompLoc_R(f,g,m,p)` retains canonical forward and reverse
-factors with pointwise triangles. No notation in this section claims that the
-two maps are inverse or that the chosen targets are equal.
+factors with pointwise triangles. `OverlapAlong_R(f,g,m,p,c)` explicitly
+asserts that the forward factor has the reverse factor as both a left and
+right inverse in `CommRing_cat`; `Overlap_R(f,g,m,p,c)` is its first-class
+facade. Neither notation identifies the chosen targets or localization
+packages judgmentally.
 
 `CRingPsh(K)` is only comment/example notation for the transparent category
 `Functor_cat(Op_cat(K),CommRing_cat)`; it does not denote a new rigid kernel
