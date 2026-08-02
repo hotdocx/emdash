@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 1917
-- Mapped areas: 78
+- Total checks: 1922
+- Mapped areas: 79
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -97,6 +97,7 @@ stable mathematical-area scopes rather than source locations.
 | Presented affine Zariski basic opens and base change | 12 |
 | Finite selected Zariski containment and base change | 6 |
 | Supplied Zariski-compatible topology | 6 |
+| Invertibility-cover locality and localization factors | 5 |
 
 ## Section Details
 
@@ -2406,3 +2407,13 @@ stable mathematical-area scopes rather than source locations.
 | 1915 | 21141 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢ @c ...` |
 | 1916 | 21148 | `assert ⊢ chaotic_comm_ring_zariski_compatible_topology : τ CommRingZariskiCompatibleTopology;` |
 | 1917 | 21152 | `assert [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) (Q : τ (@Sieve (Op_cat CommRing_cat) R)) (membe ...` |
+
+### Invertibility-cover locality and localization factors
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 1918 | 21164 | `assert [K : Cat] (T : τ (@GrothTopology K)) (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O ...` |
+| 1919 | 21173 | `assert [K : Cat] (T : τ (@GrothTopology K)) (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O ...` |
+| 1920 | 21181 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @chaotic_comm_ring_p ...` |
+| 1921 | 21189 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1922 | 21206 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |

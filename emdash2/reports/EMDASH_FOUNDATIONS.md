@@ -1420,11 +1420,38 @@ The maintained zero-ring model makes this nonvacuous. The constant
 the pointwise identity path evaluates each restriction on `tt`, and the
 explicit zero-ring unit witness transports to every arrow.
 
-This is not yet an ordinary `Sieve(K,U)`. Such a package must also assemble
-the `Path_cat` fibres and their full action over `Into_restr_cat(K,U)`,
-including equality/higher-arrow coherence, through active owners. No carrier
-functor, ad hoc family rules, topology, sheafhood, or ringed-site package is
-implied by the arrowwise predicate.
+The downstream carrier/unit-family construction now assembles this predicate
+as an ordinary `Sieve(K,U)`. Its higher fibre at a literal `(V,f)` reduces to
+`Path_cat(CommRingPshInvertibleAlong(O,s,f))`, and ordinary
+`SieveMembership(D(s),(V,f))` reduces to the unit-evidence classifier above.
+The full higher action is inherited from pullback and Sigma/Catd owners; no
+ad hoc identity or composition rule is added.
+
+A first locality bridge then keeps two logically different observations
+separate. For a supplied topology `T`,
+
+```text
+CommRingPshInvertibilityCover(T,O,U,s) = Covers_T(D_O(s))
+```
+
+is proposition-valued. It says that `s` is invertible locally everywhere; it
+does not say that every section has this property, nor does it define a local
+ring. Independently, if `ell` is a chosen universal-property localization of
+`O(U)` at `s` and `(f,m)` is an actual member of `D_O(s)`, then `m` is exactly
+unit evidence for `O[f](s)`. The localization property therefore selects
+
+```text
+factor(ell,f,m) : O(U)[1/s]_ell -> O(V)
+factor(ell,f,m)(ell(x)) = O[f](x).
+```
+
+The second line is retained as a pointwise path on carrier elements. In the
+closed constant zero-ring model, the selected factor at the terminal support
+member reduces to the actual presheaf restriction map. These memberwise
+factors are the computational front of the historical Cartier comparison
+`lim_{V in D(s)} O(V) = O(U)[1/s]`; the current module does not yet prove their
+naturality, assemble the full cone, identify it as a limit, or claim sheafhood
+or a ringed-site package.
 
 ### Finite Families And Unimodular Cover Presentations
 

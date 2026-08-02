@@ -534,8 +534,14 @@ composition.
 evidence. The whole ordinary sieve is now
 `comm_ring_psh_invertibility_sieve(K,O,U,s)`, so comments may write
 `InvSieve_O(s)` or `D_O(s)` for that package and retain `D_O(s;f)` for its
-literal-arrow membership classifier. A sheaf, topology, or locally ringed
-structure is not implicit in `O : CRingPsh(K)`.
+literal-arrow membership classifier. For a supplied topology `T`, comments
+may write `Cover_T(D_O(s))` for
+`CommRingPshInvertibilityCover(T,O,U,s)`. Given a chosen localization
+`ell : Loc_{O(U)}(s)` and an actual member `m : D_O(s;f)`,
+`factor_O(ell;f,m) : O(U)[1/s]_ell -> O(V)` denotes
+`comm_ring_psh_localization_factor_map_at_member`; its canonical observation
+is `factor_O(ell;f,m)(ell(x)) = f^*_O(x)`. This does not imply natural cone
+coherence, a limiting/descent theorem, a sheaf, or a locally ringed structure.
 
 For the separately promoted finite-family layer, comments and examples may
 write

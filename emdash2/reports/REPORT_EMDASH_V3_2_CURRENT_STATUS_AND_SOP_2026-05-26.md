@@ -96,6 +96,12 @@ detailed probe evidence.
   shaped proof-time represented-family comparison crosses the variance
   presentation boundary without runtime collapse. It declares no topology,
   sheaf, or ringed-site package.
+- `emdash3_2_commutative_algebra_locality.lp`: one-way rule-free locality
+  bridge. It views the existing semantic invertibility sieve as a cover in a
+  supplied topology and uses literal membership plus a chosen localization to
+  select the universal structured factor into each presheaf value, retaining
+  the pointwise factor triangle. It declares no natural cone, descent limit,
+  sheaf, ringed-site package, generated topology, `Spec`, or scheme.
 - `emdash3_2_commutative_algebra_zariski.lp`: one-way rule-free presented
   affine-Zariski layer. It retains a selected localization package for each
   generator of an algebraic cover presentation, exposes chosen basic-open
@@ -1963,6 +1969,53 @@ followed by 39 Python tests, five document-registry tests, shell/source/header/
 reference checks, book evidence/typography/KaTeX/assembly checks, strict
 kernel audit, and fresh strict catalog verification. The tranche is included
 in the authorized local PSSS-08b checkpoint.
+
+PSSS-08c0 is the first computational locality bridge and deliberately crosses
+neither the sheaf nor generated-topology gate. The rule-free
+`emdash3_2_commutative_algebra_locality.lp` defines
+
+```text
+CommRingPshInvertibilityCover(T,O,U,s) = Covers_T(D_O(s)).
+```
+
+This is a proposition about one section, not a claim that every section is
+locally invertible or that `O` is a local-ring object. More importantly, for a
+chosen localization `ell : Loc_{O(U)}(s)` and literal support member
+`m : (f:V->U) in D_O(s)`, the membership computation supplies unit evidence
+for `O[f](s)`. The existing contractible localization-factor owner then
+selects a structured map
+
+```text
+O(U)[1/s]_ell -> O(V)
+```
+
+and exposes the carrier triangle `factor(ell,f,m)(ell(x)) = O[f](x)`. The
+maintained zero-ring reviewer is a closed executable consumer: its selected
+factor at the terminal support member reduces to the actual restriction map
+of the constant presheaf. This is the pointwise front of the historical
+Cartier condition `lim_{V in D(s)} O(V) = O(U)[1/s]`; naturality of these
+factors, full cone assembly, the limiting/descent equivalence, and sheaf/ringed
+site packaging remain explicit next gates.
+
+The candidate owner has 176 lines, seven symbols, zero rules, and zero
+unification rules. Its 145-line reviewer has eight assertions. Focused quiet
+owner, reviewer, and central-diagnostic logs are
+`logs/probes/emdash3_2_commutative_algebra_locality-20260801-205516.log`,
+`logs/probes/commutative_ring_presheaf_locality-20260801-205527.log`, and
+`logs/probes/emdash3_2_checks-20260801-205606.log`. Warning-enabled owner and
+reviewer logs at timestamp `20260801-205630` inherit exactly
+`1179 = 1020 + 159`, with no changed-module warning. The strict rule audit
+remains at zero unreviewed clauses and 52 annotated slots across 32
+intentional clauses. Five central diagnostics raise the strict catalog to
+1,922 checks across 79 mapped areas with zero unclassified entries. Maintained
+`make check` and the complete reviewer suite pass. Health passes all 70 source/
+example targets in 572.748 summed check-seconds at source snapshot
+`sha256:4ceeabad2faf2005b306f78053a3fed6a198576df2138b84d2404e8d8b7379da`.
+Full integration CI independently passes all 70 Lambdapi targets in 569.345
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+The tranche is ready for its authorized local checkpoint.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

@@ -35,6 +35,8 @@ the universal-property iterated/product-localization comparison extension is
 the CommRing-valued-presheaf, restriction, arrowwise-invertibility, and
 ordinary-invertibility-sieve extension is
 `emdash3_2_commutative_algebra_presheaves.lp`;
+the topology-visible invertibility-cover and memberwise localization-factor
+extension is `emdash3_2_commutative_algebra_locality.lp`;
 the presented finite basic-open Zariski-cover, selected containment, and
 bounded family base-change extension is
 `emdash3_2_commutative_algebra_zariski.lp`;
@@ -119,7 +121,14 @@ Use the following order:
    sieve, proposition-valued sieve coverages, Grothendieck topology laws, and
    the direct chaotic-topology model; it declares no `Omega`, generated
    coverage saturation, sheafification, or descent;
-16. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
+16. `emdash3_2_commutative_algebra_locality.lp` for the rule-free coverhood
+   view of the already-computing semantic invertibility sieve and the
+   universal-property localization factor selected at each literal support
+   member. It exposes pointwise factor triangles and a closed zero-ring
+   computation, but deliberately declares no natural localization cone,
+   descent limit, sheaf, ringed-site package, generated topology, `Spec`, or
+   scheme;
+17. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
    of universal-property localizations, presented affine basic-open arrows,
    elementwise localization base-change factors and triangles, and returned
    ordinary-sieve pullback membership. It also retains explicit containment
@@ -128,7 +137,7 @@ Use the following order:
    generic finite owner. It is rule-free and deliberately declares no global
    localization choice, specialized rigid membership facade, propositional
    truncation, generated coverage/topology, subcanonicity, `Spec`, or scheme;
-17. `emdash3_2_commutative_algebra_zariski_topology.lp` for the rule-free
+18. `emdash3_2_commutative_algebra_zariski_topology.lp` for the rule-free
    property and package saying that every sieve containing a selected finite
    Zariski basic-open presentation covers in an already supplied topology on
    `Op_cat CommRing_cat`. It retains presentation and membership data, proves
@@ -136,17 +145,17 @@ Use the following order:
    as a feasibility model; it does not construct the least/generated Zariski
    topology, choose localizations, or declare truncation, sheafification,
    subcanonicity, `Spec`, or schemes;
-18. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+19. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
    endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
    directed negative results;
-19. `emdash3_2_checks.lp` for executable regression statements;
-20. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+20. `emdash3_2_checks.lp` for executable regression statements;
+21. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
    for current architecture and development SOP;
-21. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-22. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+22. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+23. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
-23. `reports/INDEX.md` for task-specific plans and decision records.
-24. `book/book.json` and `book/evidence.json` for book source
+24. `reports/INDEX.md` for task-specific plans and decision records.
+25. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

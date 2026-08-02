@@ -28,9 +28,12 @@ recovery index
 Status: active living implementation architecture. `PSSS-00` through
 `PSSS-09a` are locally checkpointed, and the rule-free `PSSS-09b1` finite-
 containment tranche is checkpointed at `c8a81b9`. The supplied-topology
-compatibility tranche `PSSS-09cZ1` is checkpointed at `d808c29`. The active
-gate is selection of the smallest Cartier-style computational
-locality/descent consumer for `PSSS-09cZ2`/`PSSS-08c`, under PSSS-D-069.
+compatibility tranche `PSSS-09cZ1` is checkpointed at `d808c29`. The selected
+next Cartier-style consumer is the rule-free `PSSS-08c0` bridge from
+invertibility-sieve membership to a universal localization factor; its focused
+and maintained source/reviewer/central checks, warning comparison, audit,
+catalog, 70-target health, and full integration CI are green; it is ready for
+its authorized local checkpoint under PSSS-D-069/PSSS-D-070.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -2290,20 +2293,112 @@ The tranche is included in the authorized local PSSS-08b checkpoint. Topology,
 sheafhood, ringed sites, localization over the support, and any rigid
 `CommRingPsh_cat` migration remain later consumer gates.
 
-#### PSSS-08c — Ringed sites, sheaves, and locality
+#### PSSS-08c — Computational locality and later ringed sites
 
-Status: proposed after PSSS-08b and the independent PSSS-05b descent gate.
+This phase is split again so that the pointwise computational front of the
+Cartier locality condition can advance without falsely claiming the still
+gated sheaf/descent comparison.
+
+##### PSSS-08c0 — Invertibility cover and memberwise localization factor
+
+Status: rule-free implementation candidate green through focused and
+maintained source/reviewer/central checks, exact warning comparison, strict
+audit, catalog, 70-target health, and full integration CI; ready for its
+authorized local checkpoint.
+
+The historical `mod_loc` interface combined two distinct facts about a section
+`s : O(U)`: its support `D(s)` consists of arrows where `s` restricts to a
+unit, and compatible sections over that support are represented by the chosen
+localization `O(U)[1/s]`. PSSS-08b already implements the first fact more
+canonically than the historical primitive `D`: for literal `f:V->U`,
+
+```text
+SieveMembership(D_O(s),(V,f))
+  = CommRingUnitEvidence(O(V),O[f](s)).
+```
+
+The smallest honest next bridge has two rule-free parts. First, for a supplied
+topology `T`, expose only the proposition
+
+```text
+CommRingPshInvertibilityCover(T,O,U,s) = Covers_T(D_O(s)).
+```
+
+This says that one selected section is invertible locally everywhere; it does
+not quantify that property over every section and must not be mislabeled as a
+local-ring classifier. The chaotic witness is a closed feasibility model only.
+
+Second, accept a chosen universal-property localization
+`ell : CommRingLocalizationAt(O(U),s)`. An actual member
+`m : SieveMembership(D_O(s),(V,f))` is definitionally the unit evidence needed
+by the existing localization universal property for the structured restriction
+`O[f] : O(U)->O(V)`. It therefore selects
+
+```text
+factor_O(ell;f,m) : O(U)[1/s]_ell -> O(V)
+
+factor_O(ell;f,m)(ell(x)) = O[f](x).
+```
+
+The second line is an explicit pointwise path inherited from
+`CommRingLocalizationAgreement`; no new rewrite, unifier, or rigid semantic
+head is introduced. The maintained closed consumer combines the constant
+zero-ring presheaf, its terminal-arrow support witness, and the already chosen
+zero localization. In that model the selected factor map reduces to the actual
+presheaf restriction homomorphism. Thus the tranche exposes executable
+restriction/localization behavior rather than merely forming a package.
+
+This is only the pointwise front of the Cartier equation
+
+```text
+lim_{V in D(s)} O(V) = O(U)[1/s].
+```
+
+The current factor depends on a literal support member. The next local gate is
+to derive coherence under further restriction from contractible-factor
+uniqueness and the existing presheaf composition path, then determine whether
+the coherent family can be assembled by active Catd/profunctor owners without
+the rejected PSSS-05a adapter. Only after that should the full localization
+cone be compared with a nonvacuous selected descent limit.
+
+The candidate owner has 176 lines, seven symbols, zero rules, and zero
+unification rules. Its 145-line reviewer has eight assertions, including the
+closed zero-model factor reduction. Quiet owner, reviewer, and central logs are
+`logs/probes/emdash3_2_commutative_algebra_locality-20260801-205516.log`,
+`logs/probes/commutative_ring_presheaf_locality-20260801-205527.log`, and
+`logs/probes/emdash3_2_checks-20260801-205606.log`. Warning-enabled owner and
+reviewer logs at timestamp `20260801-205630` inherit exactly
+`1179 = 1020 + 159`, with no changed-module warning. The strict audit remains
+at zero unreviewed clauses and 52 annotated slots across 32 intentional
+clauses. Five central diagnostics raise the catalog to 1,922 checks across 79
+mapped areas with zero unclassified entries. Maintained `make check` and all
+reviewers pass. Health passes all 70 source/example targets in 572.748 summed
+check-seconds at source snapshot
+`sha256:4ceeabad2faf2005b306f78053a3fed6a198576df2138b84d2404e8d8b7379da`.
+Full integration CI independently passes all 70 Lambdapi targets in 569.345
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+This closes the PSSS-08c0 implementation gate without crossing the coherent-
+cone, sheaf, topology-generation, `Spec`, or scheme gates.
+
+##### PSSS-08c1 — Ringed sites, selected sheaves, and localization descent
+
+Status: proposed after PSSS-08c0 coherence and the independent PSSS-05b
+descent gate.
 
 - package a CommRing-valued presheaf together with the selected sheaf datum;
-- relate the semantic invertibility sieve to the selected/locality structure;
-- formulate the selected `D` comparison; and
-- compare localization over `D(f)` with descent only after the chosen sheaf
-  interface has a nonvacuous model.
+- retain the canonical semantic `D(s)` rather than introduce a second
+  primitive support operation;
+- compare the coherent localization cone over `D(s)` with selected descent;
+  and
+- package ringed/local-ringed sites only after this comparison has a
+  nonvacuous model.
 
 ### Phase PSSS-09 — Presented Zariski covers, stability, and topology gate
 
 PSSS-07c and PSSS-08b now close the algebraic-presentation and ordinary-sieve
-prerequisites.  The phase does not need the independent PSSS-08c
+prerequisites.  The phase does not need the independent PSSS-08c1
 sheaf/descent package in order to construct chosen basic-open cover data, but
 subcanonicity does need a genuine sheaf/descent interface and must not be
 claimed early.
@@ -3137,6 +3232,14 @@ consumer demonstrates that nontransitive unification requires it.
   evaluation needed by `Spec` and scheme examples. Abstract generated-
   topology, truncation, or sheafification work remains a research side gate
   until such a consumer demonstrates that it is required.
+- **PSSS-D-070:** split PSSS-08c at the historical Cartier equation. Promote
+  the rule-free coverhood view of the canonical `D(s)` and the universal
+  localization factor at each literal member before the full descent/sheaf
+  package. Membership must supply the actual unit evidence, the factor must
+  retain its pointwise restriction triangle, and a closed model must compute.
+  Do not call the memberwise factors a natural cone or a limit until coherence
+  under restriction and the PSSS-05a descent boundary are independently
+  closed.
 
 ## 19. Side-Task Ledger
 
@@ -3159,7 +3262,8 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-07d | Polynomial algebra universal property | Green through full integration CI; locally checkpointed | Positive-variable representation remains consumer-gated |
 | PSSS-08a | CommRing-valued presheaves and arrowwise invertibility support | Green through full integration CI; locally checkpointed | PSSS-08b remains separately gated |
 | PSSS-08b | Whole ordinary invertibility-sieve assembly | Green through full integration CI; locally checkpointed | PSSS-08c and PSSS-09 remain separately gated |
-| PSSS-08c | Ringed sites, selected sheaves, and locality | Proposed | PSSS-08b and PSSS-05b |
+| PSSS-08c0 | Invertibility-cover observation and memberwise localization factor | Rule-free candidate; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; ready for authorized local checkpoint | PSSS-08b, PSSS-07a, and PSSS-04a |
+| PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | PSSS-08c0 coherence and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
 | PSSS-09b2 | Full transparent sieve-membership recursion specialization usability | Performance/research gate; rigid workaround rejected | PSSS-09b1 plus a real non-singleton consumer or bounded elaborator improvement |
