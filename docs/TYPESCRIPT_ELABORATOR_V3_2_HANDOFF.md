@@ -98,8 +98,10 @@
 > search found nine existing revision-pin tests required by D-065 item 7 but
 > omitted from its exact file list. The dedicated plan freezes the
 > zero-behavior D-DTTLF-USABILITY-066 correction authorizing only those nine
-> literal replacements. D-065 is paused until a separate immutable D-066
-> review; no code has changed.
+> literal replacements. D-066 is separately reviewed-approved from immutable
+> proposal checkpoint `bb485375f6c843adc6c3b80755b1eb11e9cdbf0a` under the
+> same standing delegation. D-065 implementation is dependency-ready; no code
+> has changed.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
