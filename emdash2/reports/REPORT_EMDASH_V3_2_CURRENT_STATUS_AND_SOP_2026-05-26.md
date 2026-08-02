@@ -2247,9 +2247,10 @@ Full integration CI independently passes all 76 Lambdapi targets in 524.197
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, the strict kernel audit, and fresh strict catalog
-verification. The local checkpoint remains pending. This does not yet provide
-a genuinely nontrivial localization, native matching equivalence model, first
-overlap, `Spec`, or scheme.
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `4b93619`. This does not yet provide a genuinely nontrivial
+localization, native matching equivalence model, first overlap, `Spec`, or
+scheme.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
