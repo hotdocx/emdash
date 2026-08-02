@@ -24,7 +24,9 @@ dependency-ready at exactly its thirteen numbered items, subject to the exact
 D-DTTLF-USABILITY-068 audit-inventory file-list correction below. D-068 is
 separately reviewed-approved from immutable checkpoint
 `dc104610c3cb8bbaf665382afe23802c12db41a2` under the standing unattended
-delegation, with immediate human supersession; implementation may resume.
+delegation, with immediate human supersession. The combined D-067/D-068
+implementation is final-green at rollback-safe semantic checkpoint
+`01848adf70acbb49e2f6dbbe35b8fef90b517915`.
 
 ## Objective
 
@@ -451,8 +453,9 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TEXT-PARITY-1AI` | final-green at `dabe9d9827462b76a493c1dd34cc658e137f22d5` | D-065/D-066 | Single-fibre compact text exactly matches eta, identity, recursive composition, and both whiskering orientations; historical base-component text remains unchanged. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero behavior delta | final-green 1AI | Graduates only the exact single-fibre direct/text envelope and identifies canonical multi-variable context abstraction—not parser or classifier-head behavior—as the first remaining usability gap. |
 | `CONTEXTUAL-ND-TELESCOPE-0AK` | read-only complete; zero behavior delta | completed 0AJ; generic displayed context fold; single-fibre point factorer | Select one shared normal form, coherent accessors applied to one terminal slot, and contextual endpoint reuse of the existing recursive object compiler. Independent siblings, genuine dependency, and finite mixed layers require no new owner or coherence algorithm. |
-| `CONTEXTUAL-ND-TELESCOPE-1AL` | D-DTTLF-USABILITY-067 and exact D-068 correction separately reviewed-approved; implementation resumed | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451`; D-067 proposal `57c811fd9ab992abffa6b2388aed06dec3dae19d`; D-068 correction `dc104610c3cb8bbaf665382afe23802c12db41a2`; immutable reviews | Factor one reusable normal form, add one synthesis-capable direct dependent-context transformation method, extend only the contextual endpoint seam, and cover recursive body/object/base-arrow/higher evidence plus fail-closed negatives. Text/browser promotion remains later. |
-| `CONTEXTUAL-ND-TELESCOPE-AUDIT-CORRECTION-1AL1` | D-DTTLF-USABILITY-068 separately reviewed-approved; implementation folded into 1AL | first D-067 typecheck; exhaustive public-method inventory | Classify the new direct method in the existing semantic capability row and update the exact focused method-count assertion. Add no text behavior. |
+| `CONTEXTUAL-ND-TELESCOPE-1AL` | final-green at `01848adf70acbb49e2f6dbbe35b8fef90b517915` | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451`; D-067 proposal `57c811fd9ab992abffa6b2388aed06dec3dae19d`; D-068 correction `dc104610c3cb8bbaf665382afe23802c12db41a2`; immutable reviews | One shared normal form now feeds a synthesis-capable direct dependent-context transformation method and the existing contextual endpoint/factorer seam. Independent siblings, genuine dependency, four-layer/six-binding access, identity, composition, both whiskerings, point/higher action, frozen evidence, and the fail-closed matrix are executable. Text/browser promotion remains later. |
+| `CONTEXTUAL-ND-TELESCOPE-AUDIT-CORRECTION-1AL1` | final-green; implementation folded into 1AL | first D-067 typecheck; exhaustive public-method inventory | The new method occurs exactly once in the existing displayed-natural capability row; the inventory is 84 methods in 14 unchanged rows and adds no text behavior. |
+| `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` | dependency-ready read-only audit; zero behavior authorized | final-green 1AL; prior alternating Hom/Transf and mixed-target evidence | Freeze the exact finite canonical `:^nd` semantic envelope, distinguish semantic depth from explicit-Core serialization performance, and select at most one next product slice: telescope text parity or one concrete prerequisite mixed-variance closure. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-0AK` Audit Contract
 
@@ -485,6 +488,39 @@ The audit may add disposable ignored probes and edit documentation. It may not
 change TypeScript behavior, Lambdapi source, tests, browser presets, public
 claims, packages, or runners. Any implementation proposal requires its own
 immutable checkpoint and separate review.
+
+## `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` Audit Contract
+
+This is the next dependency-ready row. It is read-only and must:
+
+1. Reconcile the final-green implementation and focused evidence against all
+   thirteen D-067 items and the exact D-068 inventory correction.
+2. State the precise graduated semantic envelope: finite canonical sibling/
+   Sigma layers, coherent named accessors, terminal-slot synthesis, and the
+   existing eta/identity/composition/pre/post factorer algebra.
+3. Confirm that point components and base-arrow/higher observations continue
+   through internal kernel-owned constructions; do not introduce external
+   naturality data or a new owner.
+4. Distinguish semantic finite genericity from the explicitly non-graduated
+   cases: arbitrary dependency DAGs, exchange across dependency, unrestricted
+   polarity/variance, arbitrary point arrows, and worst-case explicit-Core
+   serialization size.
+5. Audit the existing categorical text expected-contract and resolver seams
+   for independent siblings and genuine dependency without editing them.
+   Determine whether telescope text parity is now mechanical over the typed
+   API or identify one exact semantic obstruction.
+6. Reconcile the inherited alternating `Hom_catd`/`Transf_catd`, fixed mixed
+   target, and `homd_int` evidence. Do not require a new variance feature
+   merely because unrestricted variance remains a non-claim; require one
+   executable missing end-user term before selecting semantic work.
+7. Select and freeze at most one exact next proposal. Prefer text parity if no
+   concrete semantic counterexample is found. Any behavior change requires a
+   separate immutable proposal checkpoint and review.
+
+The audit may edit the three living ledgers and use bounded disposable ignored
+probes. It may not edit TypeScript behavior, tests, parser/browser artifacts,
+Lambdapi, public claims, packages, or runners, and it must not rerun the long
+aggregate or the already-measured telescope corpus.
 
 ## Explicit Non-Claims
 
@@ -537,7 +573,10 @@ separately reviewed-approved from immutable proposal checkpoint
 `57c811fd9ab992abffa6b2388aed06dec3dae19d` under the standing unattended
 delegation, with immediate human supersession. Implement only its thirteen
 numbered items plus the separately reviewed exact D-068 inventory correction.
-Preserve direct recursive binders and internal
+Treat the combined implementation as final-green at
+`01848adf70acbb49e2f6dbbe35b8fef90b517915`. Run
+`CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` next as a read-only audit and select at
+most one exact successor. Preserve direct recursive binders and internal
 object/arrow/higher action; add no curry, total-context section, cast,
 external coherence, parser/browser behavior, or kernel owner.
 
@@ -547,6 +586,30 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-067/D-068 implementation final-green at
+  `01848adf70acbb49e2f6dbbe35b8fef90b517915`; 0AM selected.** One shared
+  canonical normal form now serves the existing displayed-functor telescope
+  and the new synthesis-capable displayed-natural telescope. The new callback
+  receives coherent accessor applications to one terminal slot; the existing
+  point factorer alone recovers eta, identity, recursive composition, and both
+  whiskering orientations. Independent siblings, a genuine Sigma/pullback
+  dependency, a four-layer/six-binding early-plus-final witness, point
+  components, internal higher action, frozen evidence, exact mode/profile/
+  family/escape failures, and unchanged compact unary behavior execute.
+  Typecheck and lint are green. The focused parity inventory passes 6/6. The
+  first telescope run completed all semantics and reported only two stale
+  `Sigma_cat` spelling assertions plus one duplicate fixture declaration;
+  after exact harness correction, the affected 3/3 rerun passes. Redundant
+  serialization of the deep explicit Core was removed because the genuine
+  dependency test already proves product/Sigma/pullback owners; this reduces
+  the deep test body from approximately sixteen minutes to 6.8 seconds
+  without weakening the four-layer evidence. The long aggregate and kernel
+  checks remain intentionally carried forward because no corresponding
+  boundary changed. The next row is the read-only 0AM graduation audit. It
+  must distinguish the proven finite canonical semantic envelope from
+  unrestricted variance and serialization-performance non-claims, then
+  select text parity unless one executable semantic counterexample requires a
+  separately reviewed prerequisite.
 - **2026-08-02 — D-DTTLF-USABILITY-068 separately reviewed-approved.** The
   immutable review of correction checkpoint
   `dc104610c3cb8bbaf665382afe23802c12db41a2` confirms that exactly one existing

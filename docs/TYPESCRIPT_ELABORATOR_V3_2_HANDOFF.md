@@ -134,7 +134,18 @@
 > two files and no parser behavior. D-068 is separately reviewed-approved from
 > immutable correction checkpoint
 > `dc104610c3cb8bbaf665382afe23802c12db41a2` under the standing unattended
-> delegation, with immediate human supersession. D-067 implementation resumes.
+> delegation, with immediate human supersession. The combined D-067/D-068
+> implementation is final-green at
+> `01848adf70acbb49e2f6dbbe35b8fef90b517915`: the shared canonical normal form
+> now supports direct displayed-natural abstraction over independent siblings,
+> genuine dependency, and a four-layer/six-binding telescope, with existing
+> eta/identity/composition/whiskering factorization and internal point/higher
+> action. The parity inventory is 84 methods in 14 unchanged rows. Typecheck,
+> lint, parity 6/6, and the corrected telescope corpus are green; no aggregate
+> or kernel rerun was needed. The next dependency-ready row is
+> the dedicated plan's read-only `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` audit:
+> freeze the exact semantic envelope and select telescope text parity unless
+> one concrete mixed-variance counterexample requires a prerequisite.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
