@@ -27,8 +27,12 @@
 > compact wrapper need not literally invoke the public expanded callback API,
 > but it should ultimately reuse the same body compiler and Core result.
 >
-> The exact next proposal is `COMPOSITIONAL-FD-EXPANDED-1C`, pending
-> D-DTTLF-USABILITY-076 review. It adds a construction-only open-fibre
+> The exact next slice is `COMPOSITIONAL-FD-EXPANDED-1C`, independently
+> approved under
+> [`D-DTTLF-USABILITY-076`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D076_REVIEW.md)
+> from immutable proposal checkpoint
+> `5929b2962ea6fe3465047556f9992bab4a827971`. It adds a construction-only
+> open-fibre
 > descriptor and literal typed
 > `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))`, reusing the existing
 > compact `:^fd` identity/eta/chain/qualified-weakening factorer and retaining
