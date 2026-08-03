@@ -270,6 +270,13 @@ overlap ring, and restriction maps already derived from a supplied global
 scheme. It introduces no disconnected overlap isomorphism, componentwise
 restriction square, general transition field, atlas-first gluing, or claim of
 a closed projective line.
+`emdash3_2_commutative_algebra_projective_line.lp` is the transparent
+rule-free supplied projective-line presentation total. It retains one already
+global binary site-relative scheme, its actual selected chart intersection,
+and the existing Laurent-coordinate package on the inherited restriction
+maps. It is an assumption-explicit end-to-end computational capability, not a
+construction of `Proj`, an atlas-first gluing theorem, a non-affineness proof,
+or a second overlap/cocycle interface.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
 derived native equality-valued hom-action/groupoidality extension. It also
 exposes the existing transparent Cat-level consequence that the selected left

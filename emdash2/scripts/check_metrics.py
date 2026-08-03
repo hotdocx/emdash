@@ -75,6 +75,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_site_relative_schemes.lp"),
     Path("emdash3_2_commutative_algebra_scheme_chart_overlaps.lp"),
     Path("emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp"),
+    Path("emdash3_2_commutative_algebra_projective_line.lp"),
     Path("emdash3_2_commutative_algebra_affine_points.lp"),
     Path("emdash3_2_commutative_algebra_affine_intersections.lp"),
     Path("emdash3_2_commutative_algebra_affine_atlas.lp"),

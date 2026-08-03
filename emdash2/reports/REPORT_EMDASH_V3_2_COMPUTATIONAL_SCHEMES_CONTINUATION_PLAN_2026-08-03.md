@@ -335,10 +335,16 @@ silent(U,R,cover,x) :
 
 The argument `m` is already an internally compatible matching family: its
 action and naturality are those of one whole presheaf morphism.  No family of
-componentwise equations is to be added.  Restriction of `glue` along
-`f:V->U` must compute through the pulled-back cover and reindexed matching
-map at whole presheaf/action owners.  It must not be retained as an external
-naturality square.  The eliminator into a `T`-local target `Y` should extend a
+componentwise equations is to be added.  In the intended fully internal
+formulation, restriction of `glue` along `f:V->U` must be carried by the
+pulled-back-cover/question action and the reindexed matching map at whole
+presheaf owners.  It must not be retained as an external componentwise
+naturality square.  The first external-site signature quantifies over
+`(U,R,covers)` by dependent Pi, however, so its whole glue functor is internal
+only in matching-family arrows; it does not yet own reindexing in the
+object/cover indices.  CS-D-048 records this boundary and prevents the
+missing action from being silently assumed.  The eliminator into a
+`T`-local target `Y` should extend a
 whole map `P->Y`, compute on `eta` and `glue`, respect `silent`, and derive
 
 ```text
@@ -1514,6 +1520,40 @@ prerequisites.
   categorical HITs: data constructors compute at exact observers, while a
   path constructor's beta need not become a broad generic `eq_ap` rewrite.
   Whole Hom uniqueness remains a separate gate.
+- **CS-D-048 — The external cover-index signature does not yet internalize
+  question naturality:** `DirectCoverAlgebra` stores, for each externally
+  quantified `(U,R,covers)`, a whole functor on matching-family arrows and the
+  whole silent law `glue o restriction = id`.  This is internal in section
+  and matching-map categories, but the dependent Pi does not itself provide
+  action under `f:V->U` and pullback of `R`.  Pédrot's compact oracle argument
+  obtains the missing amalgamation equation from naturality because its
+  question/answer family is an internal presheaf term; importing that proof
+  into the current external Pi would be circular.  There are two honest next
+  routes.  The preferred general route constructs an internal covering-
+  question classifier with whole pullback/reindexing action, after which
+  oracle naturality is inherited.  A bounded fallback may instead define an
+  explicitly two-sided external cover algebra and an eliminator restricted
+  to targets carrying its whole amalgamation law.  That fallback is a scoped
+  interface, not a proof from the current one-sided algebra.  Do not add a
+  family of component squares, an opaque right-inverse field to the existing
+  recursor, or a rewrite asserting `restriction o glue = id`.  Data-
+  constructor beta may remain judgmental at exact stable observers; path and
+  higher-coherence beta remain equality evidence unless a concrete scoped
+  eliminator observer justifies a confluent rule, as in the existing
+  WalkingEnd and direct-cover recursors.
+- **CS-D-049 — The first projective-line boundary is a supplied dependent
+  total:** `SuppliedProjectiveLinePresentation(K)` retains one already-global
+  `BinarySiteRelativeSchemePresentation(K)`, its actual selected binary chart
+  intersection, and the existing `BinarySchemeLaurentOverlapPresentation` on
+  the literal inherited structure-ring restrictions.  Ordinary Sigma
+  projection is its computation.  Because the global structure presheaf
+  already owns restrictions, compatibility is inherited; no transition,
+  cocycle, or gluing field is added.  This is the smallest end-to-end
+  projective-line-style capability and validates the computational owners,
+  but it does not construct `Proj`, prove that the supplied global object is
+  projective or non-affine, or replace the later graded construction.  Once
+  graded `Proj` exists, the standard `P^1` instance should be compared wholly
+  with this explicit boundary.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1539,12 +1579,12 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-07 | Supplied global two-chart selected-refinement consumer | Complete and locally checkpointed at `4892c33`: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green. A closed genuinely non-affine realization remains separate | CS-06a |
 | CS-07b | Selected inherited overlap for the first supplied non-affine-style consumer | Complete and locally checkpointed at `d9e036f`: two rule-free source modules, two nine-assertion reviewers, focused/exact-warning/audit/catalog/authority checks, and 134-target exact-current resumable health are green. CS-07c now attaches projective-line-style coordinate/localization data directly to this overlap | CS-D-031/032 and checkpointed overlap substrate |
 | CS-07c | Canonical Laurent transition and actual-overlap adapter | Complete and locally checkpointed at `5118fb1`: the generic rule-free layer derives both Laurent maps by polynomial/localization universality and presents two literal localization maps into one common ring; the thin scheme layer instantiates it at the actual chart rings, inherited overlap ring, and existing restriction maps. A closed global `P1` object and non-affineness theorem remain separate | CS-D-031/032/033 and CS-07b overlap substrate |
-| CS-13 | Selected projective-line/projective-space consumer and eventual `Proj` owner | Active scheme-lane continuation after the direct-cover signature checkpoint: first use an assumption-explicit global `P1` capability to validate the existing binary scheme and Laurent-overlap owners. General `Proj` then needs graded-ring, homogeneous-localization, degree-zero, and irrelevant-ideal infrastructure; once present it should derive the standard `P^n` examples, with a whole comparison to the earlier explicit `P1` boundary. No atlas-first gluing or BNat bridge is a prerequisite. | Representation/ambient-site audit for the selected global object and existing CS-07b/07c owners, followed by graded polynomial/localization infrastructure |
+| CS-13 | Selected projective-line/projective-space consumer and eventual `Proj` owner | The first assumption-explicit global `P1` capability is complete and green as the transparent dependent total of the existing binary scheme, actual inherited overlap, and Laurent owners; its synchronized local checkpoint follows the CS-13a evidence below. General `Proj` next needs graded-ring, homogeneous-localization, degree-zero, and irrelevant-ideal infrastructure; once present it should derive the standard `P^n` examples, with a whole comparison to this explicit `P1` boundary. No atlas-first gluing or BNat bridge is a prerequisite. | Audit and select the smallest graded commutative-ring and homogeneous-localization substrate |
 | CS-08 | Atlas-first two-affine gluing constructor | Out of current scope, not part of the global-first scheme interface | Reconsider only for a future consumer explicitly constructing a global object from independent affine pieces |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; and the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`. The principal-BNat bridge remains frozen. | Derive the oracle-to-restriction-equivalence bridge and locality, package the constructed sheaf, and continue with whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; and the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`. The post-recursor audit found that external Pi indexing over covers lacks the whole question/pullback action used by Pédrot's internal naturality argument. The principal-BNat bridge remains frozen. | Select and probe either the preferred internal covering-question classifier or an honestly scoped two-sided external target algebra; only then derive locality, constructed-sheaf packaging, whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -2757,12 +2797,121 @@ not yet make the completion a sheaf.  In particular it does not derive the
 other composite law
 `restriction o glue = id`, prove `IsTopologyLocalPsh` for the completion,
 establish uniqueness or the whole Hom equivalence, assemble a functor, or
-instantiate `SheafificationCapability`.  The next mathematical gate is the
-whole pulled-cover/maximality argument identified by CS-D-045.  Its success
-would upgrade the canonical direct-cover algebra from a left inverse of
-restriction to the full restriction equivalence required by topology
-locality.  Only then should the constructed sheaf package and whole Hom
-universality be promoted.
+instantiate `SheafificationCapability`.  The post-checkpoint audit in
+CS-D-048 refines CS-D-045: the required pulled-cover argument cannot be
+derived from the current external dependent Pi alone, because that signature
+does not own action in its object/cover indices.  The next mathematical gate
+is therefore to internalize the covering-question pullback action or select
+an explicitly two-sided scoped target algebra.  Only after that interface
+decision yields the other whole composite law should the constructed sheaf
+package and whole Hom universality be promoted.
+
+### 13.19 CS-12f post-recursor internality audit — 2026-08-03
+
+The attempted next proof was intentionally audited before adding a second
+inverse law.  The current `DirectCoverAlgebra(T,X)` quantifies externally over
+an object, sieve, and cover witness.  For each such index it owns a whole
+functor from matching maps to sections, so ordinary action on matching-family
+arrows and the silent equality are internal.  It does not, however, package
+the collection of covering questions itself as a presheaf/category with whole
+action under a base arrow and sieve pullback.
+
+This distinction is exactly where the compact Pédrot argument uses more than
+the current signature.  In the internal oracle formulation, naturality of
+the oracle with respect to question/answer reindexing says that restricting
+an amalgamation is the amalgamation of the restricted matching family.  The
+usual second composite law then follows from that internal naturality and the
+silent equation.  With only an external dependent Pi, invoking that equality
+would assume the missing result.  A componentwise family of pullback squares
+would make the API externally coherent rather than repair its internal
+owner, and an opaque `restriction o glue = id` field would no longer be a
+derived property of the checkpointed one-sided HIT algebra.
+
+The active CS-12 problem is therefore an interface choice, not a failed
+Lambdapi encoding:
+
+1. construct a whole internal classifier/category of covering questions and
+   answers whose action is sieve pullback and matching-family reindexing, then
+   formulate the oracle as a whole map over it; or
+2. introduce an honestly named two-sided external cover algebra as a scoped
+   target class, with a correspondingly restricted recursor and explicit
+   coherence for the additional path.
+
+The first route is the preferred reusable sheafification architecture.  The
+second may be a useful bounded bridge if a concrete consumer needs the local
+object immediately, but it must not be presented as a theorem from the
+current `DirectCoverAlgebra`.  No source change has yet selected either route.
+The existing recursor remains valid for its stated one-sided algebraic
+universal property.
+
+The audit also fixes the HIT computation policy.  HIT does not imply that
+every beta law is a rewrite.  Stable data constructors may compute
+judgmentally at exact eliminator/observer redexes: the current direct-cover
+recursor does this for the whole unit and recursive glue, and WalkingEnd uses
+the same scoped pattern.  A path constructor is represented by an equality;
+its eliminator beta is normally equality or higher-equality evidence.  It
+should become a rewrite only when a concrete observer gives a narrow,
+terminating, confluent left-hand side.  A broad equality rewrite for silent
+or amalgamation would erase the distinction between runtime normalization
+and proof-time coherence and is not authorized by the word *HIT*.
+
+### 13.20 CS-13a supplied global projective-line capability — 2026-08-03
+
+The first projective consumer is deliberately global-first and
+assumption-explicit.  The new transparent rule-free
+`SuppliedProjectiveLinePresentation(K)` is the dependent total
+
+```text
+Sigma S       : BinarySiteRelativeSchemePresentation(K),
+Sigma overlap : BinarySchemeChartOverlapPresentation(K,S),
+                BinarySchemeLaurentOverlapPresentation(K,S,overlap).
+```
+
+The retained scheme already owns its global structure presheaf, locally
+ringed capability, covering sieve, and whole affine chart realizations.  The
+selected slice product supplies the literal chart intersection and both
+restriction maps.  The Laurent package states that both chart rings are
+one-variable polynomial algebras over a common base, that those literal maps
+are localization maps at the coordinates, and that the two internally
+constructed coordinate-inversion endomorphisms of the shared ring are whole
+identities.  Consequently the new total needs no gluing, compatibility,
+cocycle, external naturality, or disconnected overlap-isomorphism field.
+
+Its seven symbols are ordinary transparent formation, constructor, and
+projection aliases.  Canonical nested Sigma projections are used in the two
+dependent endpoint types so typechecking does not search through friendly
+aliases.  The 93-line source checks in 51.158 seconds.  The 76-line reviewer
+contains five definitional assertions for the three retained presentations,
+common base ring, and exact generic Laurent package, and checks in 56.034
+seconds.  The generic Laurent reviewer already verifies the two whole
+transition-identity paths on that exact retained package; repeating their
+fully expanded dependent endpoints in the integration reviewer was measured
+and removed because it exhausted the per-target ceiling without adding a new
+boundary.
+
+This package is the promised smallest end-to-end projective-line-style
+computational capability.  It is not a closed construction of `P^1`, does not
+prove that its supplied global object is non-affine, and does not implement
+graded `Proj`.  The next CS-13 research tranche is an audit of the smallest
+graded commutative-ring, homogeneous-localization, degree-zero, and irrelevant-
+ideal substrate.  A later constructed `Proj(R[x_0,x_1])` should instantiate
+the same global capability and receive a whole comparison with this supplied
+boundary rather than create a competing scheme interface.
+
+Both warning-enabled targets retain exactly the inherited 1,179-warning
+inventory: 1,020 unjoinable critical-pair diagnostics and 159 replaceable-
+pattern diagnostics.  The new rule-free source contributes no warning.  The
+strict LHS audit, source TOC, active-reference and report-header lints,
+check-metrics/source-TOC tests, shell syntax, whitespace hygiene, and strict
+catalog are green.  Exact-current resumable health is green for all 152
+registered targets.  The refresh carried forward the 150 byte-identical
+successes from the prior exact 150-target state and ran only the two new
+targets.  Its source-metrics snapshot is
+`sha256:60999793a4b6b9187081bbe54f6a23a19e02a93541f8e250038cf593a245c6f5`
+and checked-content snapshot is
+`sha256:60dd8aa72d2e3f5dd432446757e65b1698b911cf70a79fc5f7949e65202c99b8`.
+No full kernel check, examples aggregate, full CI, root aggregate, push,
+merge, history rewrite, publication, or worktree cleanup was performed.
 
 ## 14. Validation And Checkpoint Contract
 

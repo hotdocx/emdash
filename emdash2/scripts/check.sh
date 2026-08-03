@@ -47,6 +47,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_scheme_chart_overlaps.lp)
   files+=(emdash3_2_commutative_algebra_laurent.lp)
   files+=(emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp)
+  files+=(emdash3_2_commutative_algebra_projective_line.lp)
 fi
 
 for file in "${files[@]}"; do
