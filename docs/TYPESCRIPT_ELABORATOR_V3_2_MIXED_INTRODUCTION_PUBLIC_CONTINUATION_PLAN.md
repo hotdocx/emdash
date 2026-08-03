@@ -568,7 +568,7 @@ It deliberately avoids:
 | `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` | complete; read-only; zero behavior delta | graduated compositional-natural subplan; active kernel/check examples; current public AST and reviewer | Existing reviewer/book binder bodies are covered except multi-constructor integration programs such as arrow induction. The one bounded class-(3) gap is the current checked-negative finite section chain `lambda^n k. GG[k](FF[k](s[k]))`; generic `comp_fapp0` already owns its internal action. |
 | `DEPENDENT-SECTION-CHAIN-1AR` | implemented and final-focused-green under D-081; local semantic checkpoint follows review checkpoint `485237e1eeb200b9248a1aeebf42f2755fd27403` | completed 0AQ; immutable proposal `48394a2005cd8b483ae2de56f070c14d0826d7fd`; existing `USABILITY-DEPENDENT-1A` one-layer factorer; existing displayed-functor finite-chain evidence | One structural factorer accepts a rigid section leaf under any finite nonempty chain of exact same-base displayed-functor fibre applications and folds inner-to-outer only through existing `comp_fapp0 (Catd_cat K)`. Two- and three-layer direct evidence, inherited text parity, and existing `piapp1_fapp0` action are green. One-layer Core and fail-closed boundaries remain intact; no owner, transport surface, or general section-action eliminator was added. |
 | `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` | complete; read-only; zero behavior delta; reviewer promotion selected | final-focused-green 1AR; current reviewer/book examples; active PathOut/PathInd authority; existing public Sigma/transport routes | The recursive rigid section-chain envelope is exact and internally owns point/base-arrow action. Full arrow induction remains feasible but is a multi-constructor integration program, not one missing binder. Promote the already-checked two-layer chain through the existing browser preset before opening that larger program. |
-| `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` | exact product proposal frozen; separate D-082 review required before behavior | completed 0AS; final-focused-green 1AR; existing twelve-preset browser reviewer and direct/text mirror | Replace only the existing one-layer indexed-section preset with a two-layer recursive chain, preserve the preset ID and semantic engines, synchronize the two stale public preset inventories, and validate only the focused reviewer/build boundary. Add no semantic owner, parser route, aggregate run, deployment, or arrow-induction API. |
+| `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` | reviewed-approved under D-082; implementation dependency-ready | completed 0AS; final-focused-green 1AR; immutable proposal `e82bcf77af965e09137e9ff10cb3c5c962b23283`; separate review under standing unattended delegation | Replace only the existing one-layer indexed-section preset with a two-layer recursive chain, preserve the preset ID and semantic engines, synchronize the two stale public preset inventories, and validate only the focused reviewer/build boundary. Add no semantic owner, parser route, aggregate run, deployment, or arrow-induction API. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -833,6 +833,13 @@ The rejection oracle is exact: if the existing text/direct paths disagree, if
 the edited chain requires a new semantic branch or owner, if one-layer tests
 regress, or if the public build needs a framework/deployment change, stop and
 revise the proposal instead of widening it.
+
+The proposal is independently approved by
+[`D-DTTLF-USABILITY-082`](./TYPESCRIPT_ELABORATOR_V3_2_DEPENDENT_SECTION_CHAIN_REVIEWER_D082_REVIEW.md)
+from immutable proposal checkpoint
+`e82bcf77af965e09137e9ff10cb3c5c962b23283` under the standing unattended-
+review delegation with immediate human supersession. Implementation may now
+begin within the exact eight-item gate.
 
 ## Frozen First Gate
 
@@ -8321,10 +8328,12 @@ repeat it. Treat the zero-edit `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` audit as
 complete. It retains arrow induction as a feasible separately planned
 representable-family/transport/Sigma integration demo and selects the exact
 `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` / D-DTTLF-USABILITY-082 proposal as the
-next bounded consumer slice. Require a separate immutable review before
-behavior. Change only the existing indexed-section reviewer preset, its direct
-mirror and focused tests, one revision/boundary statement, and the two stale
-public preset inventories. Add no semantic branch, owner, aggregate,
+next bounded consumer slice. Its separate immutable review approves exactly
+the proposal at checkpoint `e82bcf77af965e09137e9ff10cb3c5c962b23283`
+under the standing unattended-review delegation with immediate human
+supersession. Implement only the existing indexed-section reviewer preset, its
+direct mirror and focused tests, one revision/boundary statement, and the two
+stale public preset inventories. Add no semantic branch, owner, aggregate,
 deployment, or arrow-induction API.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
@@ -8343,6 +8352,16 @@ removal, or unrelated cleanup is authorized.
 ```
 
 ## Decision Ledger
+
+- **2026-08-03 — D-DTTLF-USABILITY-082 separately reviewed-approved.** The
+  immutable review of proposal checkpoint
+  `e82bcf77af965e09137e9ff10cb3c5c962b23283` confirms that D-081 already owns
+  the two-layer text/direct semantics, the reviewer mirror and expected-mode
+  UI require only classifier data, and the preset count remains twelve. Under
+  the standing unattended-review delegation with immediate human
+  supersession, approve exactly the eight-item
+  `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` gate. Add no semantic branch, owner,
+  arrow-induction API, aggregate, deployment, push, or merge.
 
 - **2026-08-03 — `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` complete; exact
   reviewer proposal frozen.** The 1AR recursion is a qualified arbitrary-

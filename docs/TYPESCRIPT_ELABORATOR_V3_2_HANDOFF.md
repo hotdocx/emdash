@@ -2,9 +2,10 @@
 
 > **Current continuation (2026-08-03):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
-> owns the next work through the frozen
-> `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` / D-DTTLF-USABILITY-082 proposal,
-> which requires a separate immutable review before behavior. The preceding
+> owns the next work through the reviewed-approved
+> `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` / D-DTTLF-USABILITY-082 product
+> slice. Its immutable review approves only the exact proposal checkpoint
+> `e82bcf77af965e09137e9ff10cb3c5c962b23283`. The preceding
 > `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` audit is complete with zero behavior
 > delta. Its completed semantic chain
 > includes
@@ -182,8 +183,10 @@
 > preset from one layer to the already-checked two-layer recursive chain,
 > retain all twelve preset IDs, and repair only the two stale public preset
 > inventories. The exact `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` /
-> D-DTTLF-USABILITY-082 gate is frozen and awaits a separate immutable review
-> before behavior. Exact earlier
+> D-DTTLF-USABILITY-082 gate is independently approved by
+> [`D-DTTLF-USABILITY-082`](./TYPESCRIPT_ELABORATOR_V3_2_DEPENDENT_SECTION_CHAIN_REVIEWER_D082_REVIEW.md)
+> under the standing unattended-review delegation with immediate human
+> supersession. Implementation is dependency-ready. Exact earlier
 > proposal checkpoint:
 > `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; exact 1G rollback-safe
 > semantic checkpoint: `f1993c2852b91173858bc2ecdf1d00998517dcaf`.
