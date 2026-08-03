@@ -53,8 +53,10 @@ located grammar already represents both expanded nested forms and the neutral
 body resolver already covers their reviewed operations. The only missing seam
 is expected-classifier-directed routing into the checkpointed typed methods.
 The exact adapter-only proposal below is frozen under
-`H-DTTLF-USABILITY-COMPOSITIONAL-TEXT-PARITY-01`; separate D-078 review is
-pending.
+`H-DTTLF-USABILITY-COMPOSITIONAL-TEXT-PARITY-01` at
+`19ec1adb1bd2ee3288338e7069759549c1f282a8` and independently approved by
+[`D-DTTLF-USABILITY-078`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D078_REVIEW.md).
+Its exact adapter implementation is dependency-ready.
 
 ## Objective
 
@@ -1113,8 +1115,10 @@ open-fibre abstraction share one universal top-level compiler.
 
 Gate: `H-DTTLF-USABILITY-COMPOSITIONAL-TEXT-PARITY-01`
 
-Decision: `D-DTTLF-USABILITY-078` pending separate review of the immutable
-proposal checkpoint.
+Decision:
+[`D-DTTLF-USABILITY-078`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D078_REVIEW.md)
+approved from immutable proposal checkpoint
+`19ec1adb1bd2ee3288338e7069759549c1f282a8`.
 
 Add exactly two public text expected contracts:
 
@@ -1222,7 +1226,7 @@ aggregate is authorized.
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | complete; read-only architecture audit | completed 1B/1B2 | Both compact terms recheck unchanged under their expanded facades. Select shared scoped contextual factorization with thin expanded/compact wrappers; literal current-method reuse is blocked only by the absent open-fibre representation. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
 | `COMPOSITIONAL-FD-EXPANDED-1C` | final-focused-green at `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1` | completed 0C; D-076; existing first-hom runtime bridge | Construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))` share the compact `:^fd` factorer, preserve byte-identical Core, expose closed fibre object/arrow action, and retain the ordinary `Transf_cat` facade. |
 | `COMPOSITIONAL-ND-EXPANDED-1D` | final-focused-green at `b89420d442536544185e8ab5dbe6876bd9980b96` | green 1C; completed audit; D-077 | The existing open `indexed-functor` endpoints and compact point factorer implement literal expanded `lambda^n k. lambda^n a`; the result retains the ordinary iterated-Hom facade, byte-identical compact Core, and internally owned component/base/higher action. |
-| `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | read-only audit complete; exact proposal frozen; D-078 review pending | graduated direct typed API; D-077 checkpoint | Add exactly two expected contracts and thin resolver routes for expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a`. Reuse the existing located grammar, neutral body resolver, public typed methods, and compact `^fd/^nd` factorers; add no parser/checker/Core/kernel semantics. |
+| `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | independently approved; implementation dependency-ready | graduated direct typed API; D-077 checkpoint; D-078 | Add exactly two expected contracts and thin resolver routes for expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a`. Reuse the existing located grammar, neutral body resolver, public typed methods, and compact `^fd/^nd` factorers; add no parser/checker/Core/kernel semantics. |
 
 ## Explicit Non-Claims
 
@@ -1322,18 +1326,26 @@ remain distinct and all action delegates to the recovered coherent owner.
 Natural transformation bodies must be recursively constructed from internal
 owners and fail closed without them. Treat the read-only
 `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` audit as complete and its exact adapter-
-only proposal as frozen. Do not implement it until a separate D-078 review
-approves the immutable proposal checkpoint. If approved, add only the two
-expected contracts, thin resolver routes, focused tests, and mechanical
-revision synchronization described above. Add no curry, cast, total-context
-section, external coherence, new kernel owner, browser behavior, or scale work
-without a separate reviewed gate.
+only proposal at `19ec1adb1bd2ee3288338e7069759549c1f282a8` as
+independently approved under D-078. Implement only the two expected contracts,
+thin resolver routes, focused tests, and mechanical revision synchronization
+described above. Add no curry, cast, total-context section, external coherence,
+new kernel owner, browser behavior, or scale work without a separate reviewed
+gate.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-02 — D-DTTLF-USABILITY-078 approved.** A separate review of exact
+  proposal checkpoint `19ec1adb1bd2ee3288338e7069759549c1f282a8`
+  confirms that the existing grammar and neutral resolver are sufficient and
+  that expected-classifier dispatch is the correct disambiguator for the
+  three outer-`^n` meanings. The two routes must invoke the public typed
+  methods literally and preserve the recorded fixed/open-fibre compiler
+  distinction. No parser/Core/checker/kernel/browser expansion is approved.
 
 - **2026-08-02 — H-DTTLF-USABILITY-COMPOSITIONAL-TEXT-PARITY-01 proposal
   frozen.** The located grammar and neutral body resolver already cover both

@@ -71,8 +71,11 @@
 > cover both forms, so the exact
 > `H-DTTLF-USABILITY-COMPOSITIONAL-TEXT-PARITY-01` proposal adds only two
 > expected contracts, two routes into the public typed methods, focused tests,
-> and mechanical text-revision synchronization. Separate D-078 review of the
-> immutable proposal checkpoint is pending; no text behavior is yet changed.
+> and mechanical text-revision synchronization. The immutable proposal at
+> `19ec1adb1bd2ee3288338e7069759549c1f282a8` is independently approved by
+> [`D-DTTLF-USABILITY-078`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D078_REVIEW.md).
+> Its exact adapter implementation is dependency-ready; no text behavior is
+> yet changed.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
