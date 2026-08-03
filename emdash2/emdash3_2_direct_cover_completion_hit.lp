@@ -43,16 +43,8 @@ constant symbol direct_cover_completion_unit
       P
       (@DirectCoverCompletionPsh K T P));
 
-// Canonical whole direct-cover algebra carried by the primitive completion.
-constant symbol direct_cover_completion_algebra
-  [K : Cat]
-  (T : τ (@GrothTopology K))
-  (P : τ (@Psh K))
-  : τ (@DirectCoverAlgebra
-      K T (@DirectCoverCompletionPsh K T P));
-
-// Whole recursive cover constructor, including matching-arrow action.
-symbol direct_cover_completion_glue_func
+// Primitive whole recursive cover constructor, including matching-arrow action.
+injective symbol direct_cover_completion_glue_func
   [K : Cat]
   (T : τ (@GrothTopology K))
   (P : τ (@Psh K))
@@ -63,12 +55,7 @@ symbol direct_cover_completion_glue_func
       (@DirectCoverMatching_cat
         K U R (@DirectCoverCompletionPsh K T P))
       (@DirectCoverSection_cat
-        K U (@DirectCoverCompletionPsh K T P)))
-≔ @direct_cover_algebra_glue_func
-    K T
-    (@DirectCoverCompletionPsh K T P)
-    (@direct_cover_completion_algebra K T P)
-    U R covers;
+        K U (@DirectCoverCompletionPsh K T P)));
 
 // Pointwise glue observation, derived from the whole glue functor.
 symbol direct_cover_completion_glue
@@ -118,8 +105,8 @@ symbol direct_cover_completion_restrict
       K U R (@DirectCoverCompletionPsh K T P))
     section;
 
-// Whole silent quotient: glue after restriction is the identity functor.
-symbol direct_cover_completion_silent
+// Primitive whole silent quotient: glue after restriction is identity.
+constant symbol direct_cover_completion_silent
   [K : Cat]
   (T : τ (@GrothTopology K))
   (P : τ (@Psh K))
@@ -146,12 +133,26 @@ symbol direct_cover_completion_silent
           K U R (@DirectCoverCompletionPsh K T P)))
       (@id Cat_cat
         (@DirectCoverSection_cat
-          K U (@DirectCoverCompletionPsh K T P))))
-≔ @direct_cover_algebra_silent
-    K T
-    (@DirectCoverCompletionPsh K T P)
-    (@direct_cover_completion_algebra K T P)
-    U R covers;
+          K U (@DirectCoverCompletionPsh K T P))));
+
+/*
+  Canonical whole algebra assembled from the primitive whole glue and silent
+  constructors.  This keeps the recursive glue as a stable HIT head while
+  preserving all matching-arrow action at the Functor owner.
+*/
+symbol direct_cover_completion_algebra
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  : τ (@DirectCoverAlgebra
+      K T (@DirectCoverCompletionPsh K T P))
+≔ λ U : τ (Obj K),
+    λ R : τ (@Sieve K U),
+      λ covers : τ (@groth_topology_covers K T U R),
+        @direct_cover_at_intro
+          K U R (@DirectCoverCompletionPsh K T P)
+          (@direct_cover_completion_glue_func K T P U R covers)
+          (@direct_cover_completion_silent K T P U R covers);
 
 // Pointwise silent observation, derived from the whole functor equality.
 symbol direct_cover_completion_silent_at

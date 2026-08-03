@@ -49,6 +49,20 @@ assert [K : Cat]
       (@DirectCoverSection_cat
         K U (@DirectCoverCompletionPsh K T P)));
 
+// The canonical algebra projects exactly to the primitive whole glue head.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  (U : τ (Obj K))
+  (R : τ (@Sieve K U))
+  (covers : τ (@groth_topology_covers K T U R)) ⊢
+  @direct_cover_algebra_glue_func
+    K T
+    (@DirectCoverCompletionPsh K T P)
+    (@direct_cover_completion_algebra K T P)
+    U R covers
+  ≡ @direct_cover_completion_glue_func K T P U R covers;
+
 // Cover glue consumes one internally compatible whole matching map.
 assert [K : Cat]
   (T : τ (@GrothTopology K))
@@ -115,6 +129,20 @@ assert [K : Cat]
       (@id Cat_cat
         (@DirectCoverSection_cat
           K U (@DirectCoverCompletionPsh K T P))));
+
+// Its silent projection is exactly the primitive whole silent path.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  (U : τ (Obj K))
+  (R : τ (@Sieve K U))
+  (covers : τ (@groth_topology_covers K T U R)) ⊢
+  @direct_cover_algebra_silent
+    K T
+    (@DirectCoverCompletionPsh K T P)
+    (@direct_cover_completion_algebra K T P)
+    U R covers
+  ≡ @direct_cover_completion_silent K T P U R covers;
 
 // The former pointwise silent path is derived from that whole equality.
 assert [K : Cat]

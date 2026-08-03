@@ -43,6 +43,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_finite_limits.lp)
   files+=(emdash3_2_direct_cover_algebras.lp)
   files+=(emdash3_2_direct_cover_completion_hit.lp)
+  files+=(emdash3_2_direct_cover_completion_eliminator.lp)
   files+=(emdash3_2_commutative_algebra_scheme_chart_overlaps.lp)
   files+=(emdash3_2_commutative_algebra_laurent.lp)
   files+=(emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp)

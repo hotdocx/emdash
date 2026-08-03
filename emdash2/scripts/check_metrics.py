@@ -47,6 +47,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_sieve_extensions.lp"),
     Path("emdash3_2_direct_cover_algebras.lp"),
     Path("emdash3_2_direct_cover_completion_hit.lp"),
+    Path("emdash3_2_direct_cover_completion_eliminator.lp"),
     Path("emdash3_2_generated_topologies.lp"),
     Path("emdash3_2_ringed_sites.lp"),
     Path("emdash3_2_site_basis.lp"),

@@ -96,14 +96,24 @@ inverse and left law; it does not assert the converse/right law, an
 eliminator, or sheafification.
 `emdash3_2_direct_cover_completion_hit.lp` is the first direct
 whole-presheaf return/cover/silent categorical-HIT signature.  Its unit is a
-whole presheaf map; its recursive glue functor and whole silent equality are
-projections of one canonical direct-cover algebra, with pointwise glue/silent
+whole presheaf map, recursive glue is a stable whole-functor constructor, and
+silent is one primitive whole path.  The canonical direct-cover algebra is
+assembled transparently from these constructors, with pointwise glue/silent
 derived.  Formation initially returns the underlying presheaf.  An honest
 unit/glue/silent-coherent eliminator and the oracle-to-restriction-equivalence
 bridge must derive `IsTopologyLocalPsh` before syntactic constructed-sheaf or
 rigid-`Sheaf_cat` packaging.  It does not yet claim that bridge, pulled-cover
 glue computation, a reflector, CommRing lift, or left exactness.  A
 dialogue/lax completion remains separately consumer-gated.
+`emdash3_2_direct_cover_completion_eliminator.lp` is the first nondependent
+recursor boundary.  It defines whole direct-cover algebra maps, including
+glue-functor preservation and higher silent-path coherence.  Its primitive
+extension has narrow runtime beta on the whole unit and pointwise recursive
+glue constructors; whole glue preservation and silent beta remain internal
+equality evidence.  Topology-local targets enter through the existing
+locality-to-algebra conversion.  It does not yet derive the missing
+restriction-after-glue law, locality of the completion, whole Hom uniqueness,
+a constructed sheaf, functorial reflector, or `SheafificationCapability`.
 `emdash3_2_telescope_localization_hit.lp` is the first explicit per-object
 categorical-HIT localization boundary. For an endomap `s:A->A`, it constructs
 the set-truncated sequential telescope with computing point induction,

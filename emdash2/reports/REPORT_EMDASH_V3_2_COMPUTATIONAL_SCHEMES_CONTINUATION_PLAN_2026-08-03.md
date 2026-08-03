@@ -1498,6 +1498,22 @@ prerequisites.
   primitive map with only endpoint typings is not the promised HIT
   eliminator.  Topology-local targets enter through the canonical
   locality-to-algebra conversion.
+- **CS-D-047 — The first recursor combines judgmental data beta with whole
+  algebra-map coherence:** a map of direct-cover algebras stores, at each
+  cover, one equality
+  between whole glue functors plus one higher equality comparing the two
+  induced silent paths.  Restriction/postcomposition naturality is derived
+  at the existing rigid `Hom_func` owner and is not repeated as a component
+  field.  Recursive glue is a stable primitive whole-functor constructor, and
+  the canonical algebra is assembled transparently from whole glue and
+  silent.  The primitive nondependent recursor has narrow runtime beta for
+  the whole unit and for pointwise evaluation of recursive glue; the latter
+  still consumes and returns whole presheaf maps.  Whole glue-functor
+  preservation and silent/path beta remain internal equality and higher-
+  equality evidence.  This is the same selected split used by the existing
+  categorical HITs: data constructors compute at exact observers, while a
+  path constructor's beta need not become a broad generic `eq_ap` rewrite.
+  Whole Hom uniqueness remains a separate gate.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1528,7 +1544,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; and its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`. The principal-BNat bridge remains frozen. | Implement the unit/glue/silent-coherent eliminator, derive the oracle-to-restriction-equivalence bridge and locality, package the constructed sheaf, and continue with whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; and its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`. The whole unit/glue/silent-coherent recursor and its judgmental data betas are now bounded-green and ready for a local checkpoint. The principal-BNat bridge remains frozen. | Derive the oracle-to-restriction-equivalence bridge and locality, package the constructed sheaf, and continue with whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -2646,6 +2662,105 @@ No full CI, examples aggregate, root aggregate, push, merge, history rewrite,
 publication, or worktree cleanup was performed.
 The bounded implementation and synchronized-plan checkpoint is `1b6a468`
 (`feat: internalize direct cover algebra`).
+
+### 13.18 CS-12e whole direct-cover completion recursor — 2026-08-03
+
+The next bounded tranche promotes the recursor contract required by
+CS-D-046.  For a whole presheaf map `h:X->Y`, postcomposition gives whole
+functors on both section and matching hom-categories.  Their compatibility
+with restriction is derived at the existing rigid simultaneous Hom action
+`Hom(i_R,h)`: it is proof-time comparison between the two factorizations, not
+a new runtime fold and not an externally stored naturality square.
+
+At each cover, a `DirectCoverAlgebraMapAt` consists of one whole equality
+
+```text
+postcompose_sections(h) o glue_X
+  = glue_Y o postcompose_matching(h)
+```
+
+and one higher equality between the two resulting silent paths.  The source
+route whisks the source algebra's `glue_X o restriction_X = id` law by `h`.
+The target route uses the whole glue-preservation square, the derived
+restriction/postcomposition comparison, and the target silent law.  A
+`DirectCoverAlgebraMap` quantifies this package over every covering sieve.
+Thus action on matching arrows, ordinary naturality, and path coherence all
+remain inside the existing functor/equality calculus; no objectwise family of
+squares or component laws is added.
+
+The runtime-beta audit refined the representation before checkpointing.
+`direct_cover_completion_glue_func` is now the stable primitive whole-functor
+constructor and `direct_cover_completion_silent` is its primitive whole path;
+`direct_cover_completion_algebra` is assembled transparently from those two
+constructors.  This preserves the whole internal algebra while avoiding a
+fragile recursor rule against a nested Sigma projection.
+
+The new `emdash3_2_direct_cover_completion_eliminator.lp` selects one
+primitive whole recursor and one primitive whole algebra-map/coherence witness
+for every target algebra and seed `P->Y`.  Its transparent result package and
+typed observations expose:
+
+1. the whole extension `DirectCoverCompletionPsh(T,P)->Y`;
+2. judgmental beta for the whole unit map;
+3. judgmental beta when that whole map is composed with a recursively glued
+   section;
+4. one whole glue-preservation equality at every cover; and
+5. higher beta/coherence for the silent path constructor.
+
+The unit rule is restricted to composition of the literal recursor with the
+literal unit.  The recursive-glue rule is restricted to composition of that
+recursor with `fapp0` of the literal primitive whole glue functor.  It sends
+the whole matching map through the recursor and evaluates the target's whole
+glue functor.  Thus the computational beta is not an object-only substitute
+for the algebra-map law: matching-arrow action remains at the two whole glue
+functors, and their preservation plus silent coherence remain first-class
+internal evidence.
+
+A transparent adapter feeds any `IsTopologyLocalPsh(T,Y)` target through the
+already checkpointed `topology_local_direct_cover_algebra`; it adds no new
+locality fields.  The reviewer checks both runtime betas directly, alongside
+the whole glue-preservation and silent-coherence types.  An owner-position
+warning-enabled probe found no new critical pair or replaceable-pattern
+warning from the two rules: the warning inventory remains the inherited
+1,179 total, split as 1,020 unjoinable critical pairs and 159 replaceable
+pattern variables.
+
+The migrated HIT signature is 204 lines and eight symbols.  Its 188-line
+reviewer contains twelve positive/negative checks, including exact projection
+of the canonical algebra back to the primitive whole glue and silent
+constructors.  The eliminator is 767 lines with 21 symbols and two rules; its
+204-line reviewer contains twelve checks covering the algebra-map projections,
+unit/glue runtime beta, whole glue preservation, silent coherence, and the
+topology-local target adapter.  Focused current health checks completed in
+5.032, 5.789, 5.544, and 5.450 seconds respectively.
+
+Strict LHS audit, source TOC, active-reference and report-header lints,
+check-metrics tests, shell syntax, whitespace hygiene, and the strict
+1,992-check catalog with zero unclassified checks are green.  Exact-current
+resumable health is green for all 150 registered targets.  The prior tracked
+148-target report was verified at checked-content digest
+`sha256:a9ed8f77040f2cd712d09c67dc7b832e6d6555eb96ff9006dbecc8d8faa53c7a`;
+the only changed old targets are the completion source and reviewer, while
+the eliminator source and reviewer are new.  The refresh therefore carried
+forward 146 byte-identical successes and ran exactly those four targets.  Its
+source-metrics snapshot is
+`sha256:fded4e97764696225ce62be25f1551cff831f2cbd5b3304fbb023f27d2d212c3`
+and checked-content snapshot is
+`sha256:b7902aa39944103d6e25fa78c7eb3a85ec0a95f65f76bf9ef99758d67976542c`.
+No full CI, examples aggregate, root aggregate, push, merge, history rewrite,
+publication, or worktree cleanup was performed.
+
+This tranche completes the first integration grade from Section 3.2 but does
+not yet make the completion a sheaf.  In particular it does not derive the
+other composite law
+`restriction o glue = id`, prove `IsTopologyLocalPsh` for the completion,
+establish uniqueness or the whole Hom equivalence, assemble a functor, or
+instantiate `SheafificationCapability`.  The next mathematical gate is the
+whole pulled-cover/maximality argument identified by CS-D-045.  Its success
+would upgrade the canonical direct-cover algebra from a left inverse of
+restriction to the full restriction equivalence required by topology
+locality.  Only then should the constructed sheaf package and whole Hom
+universality be promoted.
 
 ## 14. Validation And Checkpoint Contract
 
