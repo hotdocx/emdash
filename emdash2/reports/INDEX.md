@@ -23,6 +23,12 @@ categorical-HIT reflector construction separate from induced topology and
 slice base change. Local exactness is the semantic construction criterion;
 the prospective computational interface retains whole functors and one whole
 invertible mate, never a family of external commutative-square equations.
+CS-05b then selects the smaller contract consumed by the first affine chart:
+a whole sheaf-category basis equivalence plus one direct whole computational
+`DefIso`; generic glue base change remains separately consumer-gated. The
+deferred categorical HIT is the PSSS-05d/PSSS-D-114 free localization of a
+whole presheaf category at descent maps, not Tabareau's auxiliary HoTT
+coequalizer and not a monolithic sheafification HIT.
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_presheaves.lp` is the one-way
@@ -51,6 +57,15 @@ CommRing-valued presheaf; the qualifier records that an ordinary ringed site
 need not carry a chosen reflector.
 It constructs no canonical sheafification, double-plus, generated topology,
 descent theorem, left exactness, local-ring condition, or scheme.
+`emdash3_2_site_basis.lp` is the transparent rule-free whole sheaf-basis
+contract. Opposite precomposition restricts arbitrary value-category-valued
+presheaves; a supplied sheaf restriction is joined to that operation by one
+whole `IsoEvidence`, and comparison-lemma strength is retained as
+`OmegaEquivAlong Cat_cat`. A proof-time path and derived `IsoEvidence` compare
+generic precomposition's cut normal form with direct composition without a
+runtime fold. It stores no local-exactness proof or component
+square and constructs no topology, continuity, reflector, slice theory,
+base-change mate, or raw base-category equivalence.
 `emdash3_2_commutative_algebra_ringed_space_covers.lp` is the rule-free CS-01
 global-first cover substrate. It retains one reflective CommRinged site, one
 distinguished base object, one ordinary covering sieve there, and the cover
@@ -90,6 +105,14 @@ the ring still determines the generated big-Zariski site and selected finite
 atlases remain consumer data. It constructs neither supplied capability nor
 general non-affine gluing, small-site comparison, stalks, or a
 stalk-local-ring theorem.
+`emdash3_2_commutative_algebra_affine_basis.lp` is the transparent rule-free
+CS-05b consumer. A selected functor from the big affine slice into the actual
+ambient slice carries the whole sheaf-basis comparison, while direct whole
+presheaf restriction preserves computation and one `DefIso` joins it to the
+existing affine scheme's underlying presheaf. Generic `DefIso` composition
+then compares with affine coordinates. It does not construct those inputs,
+assert a raw category equivalence, transport generic glue, store external
+coherence, define a general scheme, or impose a stalk-local-ring condition.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
 derived native equality-valued hom-action/groupoidality extension. It also
 exposes the existing transparent Cat-level consequence that the selected left

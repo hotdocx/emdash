@@ -742,6 +742,30 @@ at the whole-functor evaluation endpoint rather than assuming package eta.
 notation does not assert that either was induced from the ambient site and
 does not imply affineness, locally-ringed support, or a scheme.
 
+For whole sheaf restriction and comparison along a selected basis functor,
+comments may write
+
+```text
+i^*                            : whole presheaf restriction along i:A->B
+i^*(P) = P o Op(i)             : proof-time path, not a runtime fold
+SheafRestr(i;P)                : selected whole sheaf restriction
+include_A o SheafRestr(i;P)
+  ~= include_B o i^*           : whole IsoEvidence comparison
+SheafBasis(i;Q)                : OmegaEquivAlong Cat_cat on SheafRestr(i;Q)
+```
+
+The literal owners are `psh_restriction_func`,
+`psh_restriction_value_path`, `psh_restriction_value_iso`,
+`SuppliedSheafRestrictionAlong`,
+`supplied_sheaf_restriction_underlying_iso`, and
+`SuppliedSheafBasisEquivalenceAlong`. The comparison sign denotes the whole
+`IsoEvidence`; it is not a family of objectwise commutative squares. The
+displayed value equation is the proof-time bridge from generic
+precomposition's stable cut normal form to direct functor composition; it
+does not install a runtime rewrite.
+`SheafBasis` does not assert equivalence of `A` and `B`, construct a topology
+or reflector, or retain a locally-exactness proof or Beck--Chevalley mate.
+
 For a supplied affine reflective structure-sheaf presentation, comments and
 examples may write
 
@@ -798,6 +822,26 @@ capabilities. The base ring owns the generated topology and selected atlases
 remain consumer data; do not read the notation as a second site, duplicated
 cover/overlap structure, constructed sheafification/locality, general
 non-affine gluing, small-site comparison, or a stalk-local-ring theorem.
+
+For realization of an ambient chart by an existing affine presentation,
+comments may write
+
+```text
+i : AffBig(R) -> K/U             : selected whole affine-basis functor
+O_A|_i                           : ambient structure presheaf restricted by i
+AffBasis(A,U,P,R,X,i;Q,b)        : sheaf-basis semantics Q and whole bridge b
+b : O_A|_i ~=def O_X             : whole computational DefIso
+O_A|_i ~=def O_coord(R)          : derived whole coordinate DefIso
+```
+
+The literal owners are `ambient_affine_basis_psh`,
+`AffineBasisRealizationAlong`, `affine_basis_realization_semantics`,
+`affine_basis_realization_bridge`, and
+`affine_basis_realization_coordinate_defiso`. The sheaf-basis field and
+presheaf bridge are whole internal objects; the notation supplies neither
+component coherence nor a raw category equivalence. It does not construct
+the basis, transport generic glue, define a general scheme, or assert a
+stalk-local-ring condition.
 
 For the universal-property polynomial layer, comments and examples may write
 

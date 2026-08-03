@@ -56,6 +56,17 @@ detailed probe evidence.
   inclusion. It does not construct canonical sheafification, generated
   saturation, descent or left exactness, impose a local-ring condition, or
   define a scheme.
+- `emdash3_2_site_basis.lp`: downstream transparent, rule-free whole
+  sheaf-basis layer. Opposite precomposition supplies restriction of
+  `V`-valued presheaves along a selected base functor. A supplied sheaf
+  restriction is tied to it by one `IsoEvidence` between whole composites,
+  and comparison-lemma strength is retained as `OmegaEquivAlong Cat_cat`.
+  Generic functor/transformation owners retain action and naturality. A
+  proof-time path and derived `IsoEvidence` compare generic precomposition's
+  cut normal form with direct composition without adding a runtime rule. It
+  does not construct topology, continuity, sheafification, an induced slice, a
+  Beck--Chevalley mate, a local-exactness witness, component squares, or a raw
+  base-category equivalence.
 - `emdash3_2_commutative_algebra_ringed_space_covers.lp`: downstream one-way,
   rule-free global-cover substrate. It retains a reflective CommRinged site,
   a distinguished object of its base category, and an ordinary sieve covering
@@ -256,6 +267,16 @@ detailed probe evidence.
   It does not construct either capability, duplicate chart/cover/overlap
   action, define general non-affine gluing, compare with the small site,
   construct stalks, or assert a stalk-local-ring theorem.
+- `emdash3_2_commutative_algebra_affine_basis.lp`: downstream transparent,
+  rule-free whole affine-chart realization layer. A selected whole functor
+  from the big affine slice into the actual ambient slice carries the generic
+  sheaf-basis equivalence, while direct presheaf restriction retains the
+  computing ambient structure presheaf and one whole `DefIso` identifies it
+  with an existing affine-scheme presentation. Generic `DefIso` composition
+  yields the coordinate comparison. It does not construct those inputs,
+  assert raw category equivalence, store local-exact/component coherence,
+  transport generic glue, define a general scheme, or impose a stalk-local
+  ring condition.
 - `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
   functor-of-points/basic-open layer. The existing Yoneda presheaf represents
   `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and

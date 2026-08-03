@@ -168,6 +168,33 @@ commutative-square equations in a scheme or site record.
 
 ### 3.2 What a categorical-HIT sheafification would and would not solve
 
+The phrase *categorical HIT* in this plan has the precise research meaning
+recorded by PSSS-05d and PSSS-D-114.  For a site `(K,T)`, select a whole class
+`W_T` of covering-sieve, Cech, or higher-descent maps in the whole presheaf
+category and freely localize that category at `W_T`.  The categorical
+construction adds the required fillers, equalities, and higher coherences and
+has an internal eliminator/universal property against local targets.  Its
+whole reflector, object and arrow action, unit, and naturality are then owned
+by existing categorical owners.  It does **not** mean a direct transcription
+of a HoTT HIT into Lambdapi, nor does it commit the stable consumer interface
+to external point/path constructors or naturality equations.
+
+Three notions must therefore remain distinct:
+
+| Phrase | Role in this program | Non-claim |
+| --- | --- | --- |
+| HoTT HIT | General object/type presentation by point, path, and higher constructors. | It is not by itself a sheafification construction or the selected emdash interface. |
+| Tabareau's `OT` HIT | One auxiliary higher-inductive coequalizer used inside the iterated-kernel-pair proof of separated reflection. | It is neither the whole Tabareau sheafification nor a declaration template for v3.2. |
+| Emdash categorical HIT | Free localization of the **whole presheaf category** at selected descent maps, characterized by an internal eliminator/universal property into local targets. | It does not expose object-level point/path constructors, external naturality fields, or component coherence to scheme consumers. |
+
+The adjective *categorical* thus names the level and universal property of the
+construction, not a direct categorical spelling of Tabareau's `OT`. The
+PSSS-05d observation is specifically that functorial type theory may formulate
+the desired localization directly at whole category/functor owners. The
+existing `WalkingEnd_cat` demonstrates one contextual categorical eliminator,
+but it is not yet generic localization, coequalizer, telescope-colimit, or
+higher-coherence infrastructure.
+
 Quirin--Tabareau construct Lawvere--Tierney sheafification from a left-exact
 modality on propositions by an h-level induction. Their construction has two
 steps:
@@ -178,7 +205,10 @@ steps:
    reflective universality, modal closure, compatibility across h-levels, and
    left exactness.
 
-This is important design evidence: a genuine constructed sheafification is
+Tabareau's HIT is therefore an auxiliary higher-inductive coequalizer inside
+the separated-reflection proof, not one monolithic *sheafification HIT* and
+not the proposed emdash categorical localization.  This is important design
+evidence: a genuine constructed sheafification is
 not merely a primitive object former with one beta rule. Its public contract
 includes a local/sheaf classifier, a whole reflector and unit, a universal
 mapping property, functoriality, idempotence/reflection, and the finite-limit
@@ -198,12 +228,15 @@ presheaves. A usable construction therefore also needs:
 - a separate base-change theorem for the slice projection and its induced
   topology.
 
-Accordingly, a categorical-HIT construction can eventually *instantiate* and
-strengthen `SheafificationCapability` for a fixed selected site. It does not
-by itself select the slice topology, establish continuity of the slice/base
-functors, or prove the required sheafification base-change comparison. Those
-remain separate geometric-morphism/Beck--Chevalley obligations even when the
-reflector is constructed.
+Accordingly, the PSSS-05d free categorical-localization construction can
+eventually *instantiate* and strengthen `SheafificationCapability` for a fixed
+selected site. It does not by itself select the slice topology, establish
+continuity of the slice/base functors, or prove the required sheafification
+base-change comparison. Those remain separate
+geometric-morphism/Beck--Chevalley obligations even when the reflector is
+constructed. Tabareau's `OT`, h-level induction, and modal-closure staging
+remain semantic comparison points, not the chosen emdash syntax or reduction
+architecture.
 
 The historical comment that the Lawvere--Tierney development is merely
 semantic, or that its density definition is flawed, is not adopted as a v3.2
@@ -650,12 +683,20 @@ restriction/sheaf comparison or smuggling it into an opaque name.
   `glue` constructs a slice theory. A v3.2 successor must retain this
   separation and express the comparison at whole owners rather than porting
   its rewrites.
-- **CS-D-015 — HIT sequencing:** a categorical-HIT/double-plus construction
-  may instantiate a fixed-site `SheafificationCapability`, preferably with a
-  stronger left-exact localization contract. It neither chooses the induced
-  slice topology nor proves the sheafified Beck--Chevalley law. Bring its
-  implementation forward only when a concrete CS-05/CS-07 consumer is
-  blocked specifically on reflector construction.
+- **CS-D-015 — Native categorical-HIT sequencing:** a native emdash
+  categorical HIT means the PSSS-05d/PSSS-D-114 free localization of the
+  whole presheaf category at a selected class of covering-sieve, Cech, or
+  higher-descent maps, with an internal eliminator into local targets.  Such a
+  construction may instantiate a fixed-site `SheafificationCapability`,
+  preferably with a separately stated left-exact localization contract. Its
+  whole object action, arrow action, eliminator, and computation belong to
+  categorical owners. Tabareau's HoTT HIT is an auxiliary coequalizer in one
+  separated-reflection proof and is semantic evidence rather than an
+  implementation template or a monolithic sheafification HIT. The categorical
+  localization neither chooses the induced slice topology nor proves the
+  sheafified Beck--Chevalley law. Bring its implementation forward only when a
+  concrete CS-05/CS-07 consumer is blocked specifically on reflector
+  construction.
 - **CS-D-016 — Site-comparison vocabulary:** use
   morphism/comorphism/locally-exact-square language during CS-05a. A
   distributor is consumer-gated for a comparison that cannot be represented
@@ -668,6 +709,15 @@ restriction/sheaf comparison or smuggling it into an opaque name.
   selected whole functors and that one whole invertible transformation or
   comparison. Generic transfor action owns its naturality; ordinary scheme
   records do not retain local-exactness derivations or component equations.
+- **CS-D-018 — First affine-basis consumer strength:** CS-05b selects a whole
+  sheaf-restriction functor whose inclusion comparison is one whole
+  `IsoEvidence`, a category-level `OmegaEquivAlong Cat_cat` witnessing the
+  basis comparison, and one direct whole presheaf `DefIso` joining the actual
+  ambient restriction to the existing computing affine presentation.  The
+  sheafification/glue Beck--Chevalley mate from the CS-05a probe remains a
+  separate later capability because no first chart consumer transports
+  generic glue through it.  Local exactness may prove such a mate later, but
+  neither it nor component square equations are fields of CS-05b.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -682,15 +732,16 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-02 | Point-free invertibility-support/local-ring capability audit | Proposed | Concrete scheme consumer or theorem statement |
 | CS-03 | Generic finite-cover presentation audit | Proposed | Non-affine finite-atlas consumer |
 | CS-04 | Whole ambient chart-slice restriction and supplied reflective-slice presentation | Complete and locally checkpointed at `7d63a90`; induced topology/reflector transport remains a separate CS-05 input question | CS-01 plus existing Sigma, opposite, functor-composition, and reflective-site owners |
-| CS-05 | Honest affine chart realization over an ambient restriction | Next design gate; actual ambient slice presheaf is available, while base/site and topology comparison remain open | CS-04 and affine checkpoint |
-| CS-05a | Historical site-morphism and modern morphism/comorphism/locally-exact contract audit | Positive whole-owner type probe complete; semantic strength and public capability selection remain consumer-gated | CS-04 plus a concrete affine-chart target |
+| CS-05 | Honest affine chart realization over an ambient restriction | Complete through CS-05b's whole semantic/computational package and proportional validation; stronger sheafification base change remains separately consumer-gated | CS-04 and affine checkpoint |
+| CS-05a | Historical site-morphism and modern morphism/comorphism/locally-exact contract audit | Complete as a contract audit; stronger sheafification base change remains separately consumer-gated | CS-04 plus a concrete affine-chart target |
+| CS-05b | Whole sheaf-basis comparison plus computational ambient-affine realization | Promoted as two transparent rule-free modules; focused/exact-warning/audit/catalog green, 115/116 exact-content health targets current-green, unchanged central aggregate carried forward under the proportional-validation policy; local checkpoint ready | CS-D-018 and CS-04 |
 | CS-06 | Global-first finite-qcqs `SchemePresentation(X)` | Proposed | CS-02/CS-03/CS-05 contracts |
 | CS-07 | Supplied global two-chart non-affine reviewer | Proposed first non-affine consumer | CS-06 |
 | CS-08 | Atlas-first two-affine gluing constructor | Later | Whole open-overlap input plus realization/universal property |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, and presented-scheme realization | Research continuation | Stable object/morphism interfaces and CS-06 |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed categorical-HIT/double-plus sheafification | Factorized independent research; contract may move earlier, implementation remains consumer-gated | Topology-to-local-object bridge, categorical localization, rigid-facade realization, CommRing lift, and left-exactness |
+| CS-12 | Constructed native categorical-HIT/localization sheafification | Factorized PSSS-05d/PSSS-D-114 research; free localization at whole descent maps is the emdash candidate, while Tabareau's auxiliary HoTT HIT is semantic evidence and implementation remains consumer-gated | Topology-to-local-object bridge, categorical localization, rigid-facade realization, CommRing lift, and left-exactness |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
 ## 13. CS-01 Success Criteria
@@ -939,11 +990,101 @@ ambient affine-only presentations. The future interface should support the
 basis functor plus a sheaf/topos comparison and allow the identity/equivalence
 special case to reduce through it.
 
-No public symbol is promoted from this probe yet. The remaining selection is
-whether the first consumer needs only the direct whole computational `DefIso`,
-also a sheaf-category basis equivalence, or the stronger sheafification
-base-change mate used to transport generic glue. This is a semantic-strength
-choice, not a typing or internal-naturality blocker.
+No public symbol was promoted from that first probe. Its remaining
+semantic-strength choice is resolved by CS-D-018 and the second probe below.
+
+### 13.5 CS-05b affine-basis realization selection — 2026-08-03
+
+The first concrete consumer does not yet transport generic glue or
+sheafification across the chart comparison.  Its smallest honest contract is
+therefore the conjunction of two complementary whole statements:
+
+1. semantic basis comparison: a selected sheaf-restriction functor is
+   compatible with ordinary presheaf restriction by one whole
+   `IsoEvidence`, and that functor carries `OmegaEquivAlong Cat_cat`; and
+2. computational realization: the actual ambient structure presheaf,
+   restricted along the selected affine-basis functor, has one whole
+   `DefIso` to the existing affine scheme's computing underlying presheaf.
+
+The first statement prevents an unrelated affine label: it ties the selected
+base functor to the two sheaf theories and asserts comparison-lemma strength.
+The second preserves the desired executable coordinate normal forms. They do
+not duplicate naturality: both comparisons live at whole functor-category
+owners, and readable components remain derived observations.
+
+The focused candidate
+`tmp/probes/cs05b_affine_basis_realization.lp` passed under the 60-second limit
+with zero warnings. It is now split into the promoted generic rule-free
+`emdash3_2_site_basis.lp` and the CommRing-specific rule-free
+`emdash3_2_commutative_algebra_affine_basis.lp`, with focused reviewers
+`examples/site_basis.lp` and `examples/commutative_ring_affine_basis.lp`.
+The promoted sources contain no rewrite rule, unification rule, continuity
+field, induced topology, constructed reflector, locally-exactness derivation,
+component square family, or sheafification/glue Beck--Chevalley mate.
+
+The normal-form audit found one deliberate distinction. Generic
+`fapp0(psh_restriction_func(i),P)` retains the generic precomposition owner's
+stable cut-oriented runtime form; it is not judgmentally folded to the direct
+`comp_cat_fapp0(P,Op(i))` spelling. Existing Cat-specialized unification does,
+however, prove that comparison by `eq_refl`. The generic module therefore
+exposes `psh_restriction_value_path` and the derived
+`psh_restriction_value_iso` as proof-time presentation bridges. It adds no
+runtime rule and does not duplicate generic functor action. The
+CommRing-specific ambient restriction is written directly by composition, so
+its scheme-facing value computation remains judgmental.
+
+A larger ignored experiment attempted to derive immediately an isomorphism
+between the restricted selected sheaf object and the affine selected sheaf
+object. Its helper endpoints check, but the assembled candidate did not finish
+under the unchanged 60-second import budget on the loaded host. Nothing from
+that experiment is promoted or claimed. CS-05b therefore remains honest: it
+retains a whole sheaf-category equivalence and a whole underlying-presheaf
+`DefIso`, not a new sheaf-object comparison.
+
+The stronger mate from CS-05a remains a valid later capability if a concrete
+CS-07/CS-08 consumer must transport generic glue. At that later boundary,
+local exactness is a mathematical route for constructing the one whole
+invertible mate; it is not additional runtime record payload. Likewise, the
+PSSS-05d free categorical localization may construct the fixed-site reflector
+through emdash-owned whole action and its eliminator into local targets, but
+Tabareau's auxiliary HoTT coequalizer does not prescribe its declarations or
+reductions.
+
+### 13.6 CS-05b promotion evidence — 2026-08-03
+
+The promoted source and reviewer quartet is focused-green under the mandatory
+60-second bound. Warning-enabled checks of all four targets report exactly the
+inherited 1,179 warnings: 1,020 unjoinable-critical-pair diagnostics and 159
+replaceable-pattern-variable diagnostics, with no warning at either new
+source. The strict inferred-slot audit reports zero rules and zero candidates
+in both new modules; the unchanged kernel audit remains zero unreviewed
+candidates with 52 annotated slots across 32 intentional clauses. The strict
+check catalog, report-header lint, active-reference lint, source TOC,
+shell/Python syntax checks, and diff hygiene are green.
+
+The exact-content health identity is
+`sha256:45836a25af8bced8ed321a708026feb79bc8fc686995b573743fa1551580cfb5`
+with source-metrics identity
+`sha256:6565c58890f8556f2f745ef843fabffa13f824e42285e782a9bc52e6e4ff2a10`.
+The resumable pass has persisted 115 of 116 targets green, including both new
+sources, both new reviewers, the affine-glue source, and its reviewer. The
+sole remaining target is unchanged `emdash3_2_checks.lp`. It imports neither
+new module and the current tracked health report records recent green
+58.519-second evidence for that exact unchanged central target. Repeated
+bounded runs under concurrent load, after the load ended, and with only the
+validator pinned to performance CPUs all reached the fixed 60-second cap
+between 60.24 and 60.76 seconds; none emitted an assertion, rule, or source
+error before interruption.
+
+Under this plan's proportional-validation rule and the root SOP's explicit
+instruction to carry forward recent green aggregate evidence for unchanged
+boundaries, the central result is carried forward rather than rerun again.
+The generated health report therefore remains at its previous exact snapshot;
+the current 115-target resumable state plus that tracked central evidence is
+the recorded combined boundary. This is not claimed as a fresh 116-target
+generated report. No full CI, weakened timeout, modified central assertion,
+or redundant repository aggregate is scheduled. The bounded CS-05b tranche
+is ready for its authorized local checkpoint.
 
 ## 14. Validation And Checkpoint Contract
 

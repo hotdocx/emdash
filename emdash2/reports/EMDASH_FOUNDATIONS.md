@@ -1899,6 +1899,38 @@ functor, and the supplied `Sheaf_cat` facade has no pullback-reflector theorem.
 An honest continuity/induced-topology capability remains separate from this
 computational presentation and from later affine-chart realization.
 
+### Whole Sheaf-Basis Comparisons
+
+For a selected functor `i : A -> B`, ordinary opposite precomposition gives
+the whole restriction functor
+
+```text
+i^* : Functor(B^op,V) -> Functor(A^op,V).
+```
+
+The generic precomposition owner's runtime object action remains in its
+cut-oriented normal form. `psh_restriction_value_path(i,P)` proves at proof
+time that this value equals the direct composition spelling `P o Op(i)`, and
+`psh_restriction_value_iso(i,P)` turns that path into ordinary
+`IsoEvidence`. These are presentation bridges, not a new runtime fold; whole
+arrow action remains owned by generic precomposition. Scheme-facing
+specializations may use direct composition when judgmental value computation
+is part of their public contract.
+
+Given supplied sheafification capabilities on `(A,T_A)` and `(B,T_B)`, a
+`SuppliedSheafRestrictionAlong(i)` retains a whole functor between their sheaf
+categories and one `IsoEvidence` comparing the two whole composites into
+`Functor(A^op,V)`: include after sheaf restriction versus presheaf
+restriction after include. A `SuppliedSheafBasisEquivalenceAlong(i)` adds
+`OmegaEquivAlong Cat_cat` for that exact selected restriction functor.
+
+This is comparison-lemma strength, not an equivalence of the raw base
+categories. The `IsoEvidence` and `OmegaEquivAlong` objects own their complete
+transformation/functor action, so no family of component naturality or
+commutative-square equations is retained. A locally exact site square is one
+possible semantic route to a stronger sheafification Beck--Chevalley mate;
+it is neither a field of this basis package nor yet consumed here.
+
 ### Computational Big Affine Spec Slice
 
 The first scheme-facing facade is the conventional big affine slice
@@ -2100,6 +2132,35 @@ schemes, general non-affine gluing, a small-site comparison, stalks, or a
 stalk-local-ring theorem. The later TypeScript structure macro may generate
 its Sigma constructor/projection boilerplate, but that authoring convenience
 does not alter the kernel contract.
+
+### Whole Ambient Affine-Basis Realizations
+
+For an ambient reflective ringed site `A` on `K`, an object `U`, a supplied
+reflective presentation of the actual slice `K/U`, and an affine presentation
+`X_R`, select a whole basis functor
+
+```text
+i : AffineSpecBigSlice_cat(R) -> Slice_cat(K,U).
+```
+
+The ambient structure presheaf restricted along `i` is ordinary whole
+precomposition, so its value at an affine basis object computes by evaluating
+the ambient slice presheaf at `i(q)`. The realization package is
+
+```text
+AffineBasisRealizationAlong(A,U,P,R,X_R,i)
+  = Sigma basis : SuppliedSheafBasisEquivalenceAlong(i),
+      DefIso(ambient_O|_i, affine_scheme_underlying_psh(X_R)).
+```
+
+Composing the retained `DefIso` with the affine presentation's existing
+coordinate `DefIso` gives one whole comparison from the actual ambient
+restriction to `affine_spec_coordinate_psh(R)`. The semantic basis
+equivalence and computational presheaf bridge are complementary: the first
+prevents an unrelated affine label; the second preserves executable
+coordinate normal forms. Neither duplicates naturality, asserts equivalence
+of the raw slice categories, or transports generic glue. A sheafification
+Beck--Chevalley mate remains a separately consumer-gated capability.
 
 ### Complementary-Idempotent Affine Atlas
 

@@ -6125,6 +6125,19 @@ consumer demonstrates that nontransitive unification requires it.
   coordinate-localization locality distinct from sheaf descent and
   locally-ringed support, and replace the old small/big equivalence wording by
   scoped restriction and affine-basis comparisons.
+- **PSSS-D-118:** the dedicated continuation's first affine-basis consumer
+  selects `SuppliedSheafBasisEquivalenceAlong(i)` plus one direct whole
+  presheaf `DefIso` from the actual ambient restriction to the existing
+  affine presentation. This is enough to prevent an unrelated affine label
+  while preserving computing coordinates. Keep the stronger
+  sheafification/glue Beck--Chevalley mate separately consumer-gated and treat
+  local exactness only as a semantic construction criterion, never a family
+  of component-square fields. For the deferred reflector, retain the exact
+  PSSS-05d/PSSS-D-114 meaning: the emdash categorical-HIT candidate is free
+  localization of the whole presheaf category at selected descent maps with
+  an internal eliminator into local targets. Tabareau's HoTT HIT is an
+  auxiliary coequalizer inside one separated-reflection proof, not that
+  categorical localization and not a monolithic sheafification HIT.
 
 ## 19. Side-Task Ledger
 
@@ -6179,7 +6192,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-11b | Whole affine localization locality | Promoted source/reviewers, exact warning comparison, strict audit, 1,992-check catalog, 106-target exact-content health, and proportional integration green; local checkpoint `8216f28` | PSSS-11a checkpoint, existing localization restriction/matching owners, and the generic Cat-level selected-left-inverse right law |
 | PSSS-11c | Thin affine-scheme presentation and concrete computing example | Promoted 101-line/8-symbol rule-free source and 194-line/14-assertion `F2 x F2` reviewer; focused/exact-warning/audit/catalog, exact 108-target health, and proportional nonduplicative integration green; local checkpoint `68578be` | PSSS-11a and PSSS-11b checkpoints plus the PSSS-10b concrete atlas |
 | PSSS-11 | Scheme atlas | Affine MVP complete: PSSS-11c checkpointed and historical/feasibility retrospective recorded; general non-affine implementation remains separately gated by PSSS-D-117 | PSSS-11c |
-| PSSS-11d | Global-first non-affine continuation and later atlas-first gluing | Routed to the dedicated 2026-08-03 computational-schemes plan; CS-01 is checkpointed and CS-04 whole ambient slice-presheaf restriction plus supplied reflective-slice presentation is checkpointed at `7d63a90` without overclaiming induced topology. CS-05a now audits the historical assumed slice-site/site-morphism/sheaf-pullback/glue comparison through whole morphism/comorphism and sheafified-mate owners; local exactness is only the semantic construction criterion, not a family of record equations. Categorical-HIT reflection remains separate from induced topology/base change, and explicit two-affine gluing remains later. | Checkpointed PSSS-11c, CS-01, and CS-04, then honest CS-05 affine realization |
+| PSSS-11d | Global-first non-affine continuation and later atlas-first gluing | Routed to the dedicated 2026-08-03 computational-schemes plan; CS-01 and CS-04 are checkpointed. CS-05a's contract audit is complete, and CS-05b is promoted as two rule-free whole sheaf-basis/computational-realization modules with focused/exact-warning/audit/catalog evidence green, 115 current exact-content health targets, and recent green evidence carried for the unchanged central aggregate under the proportional-validation policy. It adds no glue/base-change mate or component coherence. The categorical-HIT clarification remains exactly PSSS-05d/PSSS-D-114/PSSS-D-118, and explicit two-affine gluing remains later. | Checkpointed PSSS-11c, CS-01, and CS-04, then CS-05b checkpoint and honest global chart realization |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 
 ## 20. Success Criteria For The Foundation Tranches
