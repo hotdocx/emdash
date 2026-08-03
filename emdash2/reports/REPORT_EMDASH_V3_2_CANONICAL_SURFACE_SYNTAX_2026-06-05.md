@@ -865,6 +865,23 @@ naturality remain at existing owners. `BinAffCover` supplies neither a
 point-free locally-ringed certificate, open-immersion classifier, semantic
 scheme, nor atlas-first gluing constructor.
 
+For the derived CS-07 consumer, comments may write
+
+```text
+refine_Q(q) = (b,h,triangle)   : q factors through selected generator c_b
+chart_Q(q)                     : the selected affine generator
+realization_Q(q)               : its retained whole affine realization
+coord_Q(q)                     : its coordinate ring
+```
+
+The literal owners are `binary_affine_cover_refinement_at`,
+`binary_affine_cover_refinement_chart`,
+`binary_affine_cover_refinement_realization`, and
+`binary_affine_cover_refinement_ring`. The latter observations are derived
+from the Boolean side; they are not fields of another refinement record.
+`realization_Q(q)` keeps its canonical branch-indexed type for an open side,
+and the notation does not claim that `q` itself is affine.
+
 For the universal-property polynomial layer, comments and examples may write
 
 ```text

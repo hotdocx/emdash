@@ -300,6 +300,13 @@ detailed probe evidence.
   derived at the global and generic composition owners. It is a computational
   cover presentation, not a locally-ringed scheme certificate or atlas-first
   gluing constructor.
+- `emdash3_2_commutative_algebra_affine_cover_refinements.lp`: downstream
+  transparent, rule-free CS-07 usability consumer. For any retained sieve
+  member, generation returns the existing Boolean-selected factorization;
+  its side derives the selected affine generator, already-owned whole affine
+  realization, and coordinate ring. It deliberately adds no duplicate
+  refinement package, rule, unifier, external coherence, claim that the
+  refinement itself is affine, global realization, or scheme classifier.
 - `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
   functor-of-points/basic-open layer. The existing Yoneda presheaf represents
   `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and

@@ -30,8 +30,11 @@ separately consumer-gated. CS-06a now supplies two selected chart arrows that
 constructively generate the retained covering sieve, with whole
 ambient-to-affine realizations on those two generators. This is a global-first
 binary affine-cover presentation, not yet a locally-ringed scheme certificate;
-it is checkpointed at `0f3b379`, and the next bounded consumer is a supplied
-global two-chart presentation. The
+it is checkpointed at `0f3b379`. CS-07 now consumes a supplied presentation
+at an arbitrary sieve member, computing the selected generator, whole affine
+realization, and coordinate ring without duplicating a refinement record. A
+closed non-affine realization and locally-ringed scheme certificate remain
+separate gates. The
 deferred categorical HIT is the PSSS-05d/PSSS-D-114 free localization of a
 whole presheaf category at descent maps, not Tabareau's auxiliary HoTT
 coequalizer and not a monolithic sheafification HIT.
@@ -140,6 +143,13 @@ covering sieve with two whole affine realizations. It deliberately does not
 assert that every refinement in the sieve is affine, add external
 overlap/cocycle data, supply a point-free local-ring certificate, define a
 general scheme, or construct atlas-first gluing.
+`emdash3_2_commutative_algebra_affine_cover_refinements.lp` is the
+transparent rule-free CS-07 selected-generator consumer. For an arbitrary
+member of the retained covering sieve, it evaluates the presentation's
+generation function and uses the resulting Boolean side to select the affine
+generator, its whole realization, and its coordinate ring. The refinement
+itself is not asserted affine; no second Sigma package, coherence field,
+global construction, or scheme claim is introduced.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
 derived native equality-valued hom-action/groupoidality extension. It also
 exposes the existing transparent Cat-level consequence that the selected left

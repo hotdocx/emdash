@@ -93,6 +93,8 @@ the whole affine realization of selected global cover charts is
 `emdash3_2_commutative_algebra_affine_cover_charts.lp`;
 the global-first binary affine-cover presentation extension is
 `emdash3_2_commutative_algebra_affine_cover_presentations.lp`;
+the executable selected-generator refinement extension is
+`emdash3_2_commutative_algebra_affine_cover_refinements.lp`;
 the affine Yoneda functor-of-points, semantic basic-open, and
 localization-representability extension is
 `emdash3_2_commutative_algebra_affine_points.lp`;
@@ -420,17 +422,24 @@ Use the following order:
     the global cover and generic composition owners; the package stores no
     external coherence and is not yet a locally-ringed scheme certificate or
     an atlas-first gluing constructor;
-46. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+46. `emdash3_2_commutative_algebra_affine_cover_refinements.lp` for the
+    transparent rule-free CS-07 consumer. Membership of an arbitrary retained
+    sieve arrow computes its existing Boolean-selected factorization; that
+    side then selects the retained affine generator, its already-owned whole
+    realization, and its coordinate ring. It adds no duplicate refinement
+    record and does not assert that the arbitrary refinement itself is affine,
+    construct a global object, add coherence fields, or define a scheme;
+47. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-47. `emdash3_2_checks.lp` for executable regression statements;
-48. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+48. `emdash3_2_checks.lp` for executable regression statements;
+49. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-49. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-50. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+50. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+51. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-51. `reports/INDEX.md` for task-specific plans and decision records.
-52. `book/book.json` and `book/evidence.json` for book source
+52. `reports/INDEX.md` for task-specific plans and decision records.
+53. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

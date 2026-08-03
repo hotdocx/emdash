@@ -652,6 +652,23 @@ Two possible consumers are deliberately separated:
 The first is the nearer MVP. The second requires a realization/universal
 property and should not block the first.
 
+The parameterized first consumer is now concrete. Given a supplied
+`Q : BinaryAffineCoverPresentation(P)`, an arbitrary retained sieve member
+`q`, and its membership witness, evaluate
+`binary_affine_cover_refinement_at(Q,q,member)`. The result is the existing
+Boolean-selected `BinaryCoverChartFactorization`; its side derives the
+selected chart generator, that generator's already-owned whole affine
+realization, and its coordinate ring. No new Sigma package stores those
+derived values. For an open Boolean side, the realization deliberately stays
+in the canonical branch-indexed family instead of adding a dependent fusion
+rule through the readable selected-chart observation.
+
+This closes the supplied computational consumer: every retained arrow is
+constructively routed through one of the two affine generators. It still does
+not provide a closed genuinely non-affine global object, assert that an
+arbitrary refinement is itself affine, supply the missing locally-ringed
+support condition, or perform atlas-first gluing.
+
 ### CS-08 and later — Construction and semantic comparisons
 
 Later, independently gated work includes:
@@ -686,7 +703,8 @@ close CS-05.
 | Global-first assumption-explicit affine atlas | Good | Honest whole restriction/pullback comparison to each affine chart. |
 | Binary global-first affine-cover presentation | Implemented, exact-current through the bounded 122-target health boundary, and locally checkpointed at `0f3b379` | Retain constructive generation of the covering sieve by the two charts; mere sieve membership is insufficient. |
 | General finite-qcqs presentation | Good after the binary consumer | Generalize the Boolean choice to Nat-indexed finite factorization without duplicating the algebraic family owner. |
-| Supplied global non-affine example | Good | Selecting a mathematically meaningful ambient object before `Scheme_cat` exists. |
+| Supplied global two-chart refinement consumer | Implemented and exact-current through the bounded 124-target health boundary; local checkpoint pending | It consumes an assumption-explicit global presentation and does not construct a closed non-affine object. |
+| Closed global non-affine example | Good but separate | Selecting or constructing a mathematically meaningful ambient object before `Scheme_cat` exists. |
 | Constructive two-affine gluing | Moderate | Global realization and universal property, not overlap algebra itself. |
 | Point-free locally-ringed support interface | Moderate and separately gated | `D(s)` exists, but bottom/finite joins or equivalent topology-local forcing are absent; pointwise disjunction is not a correct shortcut. |
 | Stalk-local-ring comparison | Moderate/research | Stalk/point infrastructure and constructive hypotheses. |
@@ -698,10 +716,13 @@ close CS-05.
 The original computational-schemes direction remains feasible. The main risk
 is no longer basic opens, localization, topology, affine glue, the whole
 ambient-to-affine chart comparison, or the constructively generated two-chart
-atlas; those now have working internal owners. The next bounded task is a
-supplied global two-chart consumer of that atlas. The main remaining semantic
-risk is the exact point-free locally-ringed support layer, which is isolated
-from the computational atlas rather than hidden inside it.
+atlas; those now have working internal owners, and the parameterized
+selected-generator consumer is implemented. The next design gate is an
+explicit choice between completing the point-free locally-ringed certificate,
+selecting a closed global non-affine example, and beginning atlas-first
+realization. The main remaining semantic risk is the exact point-free
+locally-ringed support layer, which is isolated from the computational atlas
+rather than hidden inside it.
 
 ## 11. Decision Ledger
 
@@ -820,6 +841,14 @@ from the computational atlas rather than hidden inside it.
   affine-chart probe to exceed both 90 and 120 seconds; the canonical form
   passes without package eta, a rewrite, or a unification rule. This measured
   elaboration boundary is not evidence for increasing the timeout.
+- **CS-D-024 — Refinement observations are derived, not stored:** a
+  `BinaryCoverChartFactorization` already owns the executable side and factor
+  map, while `BinaryAffineCoverPresentation` already owns both whole affine
+  realizations. CS-07 therefore adds no second refinement Sigma. It evaluates
+  generation once and derives the selected generator, branch-indexed whole
+  realization, and coordinate ring by Boolean elimination. The open-side
+  realization is not forced through a new dependent fusion rule, and the
+  arbitrary refinement is not reclassified as affine.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -840,7 +869,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-06 | Global-first finite-qcqs `SchemePresentation(X)` | Split into CS-06a computational atlas and CS-06b locally-ringed scheme certificate | CS-02/CS-03/CS-05 contracts |
 | CS-06a | Global-first `BinaryAffineCoverPresentation` with constructive cover generation and whole affine realizations | Complete and locally checkpointed at `0f3b379`: three rule-free source layers, three reviewers, exact warning comparison, audit/catalog/authority synchronization, and 122-target resumable health are green | CS-03 binary contract plus CS-05b |
 | CS-06b | Add correct locally-ringed support and, when consumed, generic finite arity | Deferred; must not overclaim the CS-06a package | CS-02 support owner plus arity-generic consumer |
-| CS-07 | Supplied global two-chart reviewer | Ready as a parameterized computational-atlas consumer; a closed genuinely non-affine realization remains separate | CS-06a |
+| CS-07 | Supplied global two-chart selected-refinement consumer | Complete and exact-current: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green; local checkpoint pending. A closed genuinely non-affine realization remains separate | CS-06a |
 | CS-08 | Atlas-first two-affine gluing constructor | Later | Whole open-overlap input plus realization/universal property |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, and presented-scheme realization | Research continuation | Stable object/morphism interfaces and CS-06 |
@@ -1309,6 +1338,67 @@ is locally checkpointed as `0f3b379` (`feat: add binary affine-cover
 presentations`). CS-07 may now consume the package as a supplied global
 two-chart computational atlas; a closed non-affine construction and the
 semantic locally-ringed scheme classifier remain separately gated.
+
+### 13.9 CS-07 selected-generator refinement consumer — 2026-08-03
+
+The first parameterized consumer begins with a supplied
+`Q : BinaryAffineCoverPresentation(P)` and an arbitrary member `q` of its
+retained covering sieve. Evaluating
+`binary_affine_cover_refinement_at(Q,q,member)` reuses the presentation's
+constructive generation function and returns its existing
+`BinaryCoverChartFactorization`. The factorization's Boolean side then
+computes the selected generator, its retained whole affine realization, and
+its coordinate ring.
+
+The first owner probe packaged the factorization and selected realization in
+a new dependent Sigma and passed. Retrospective SOP review rejected that
+shape because it duplicated data: the factorization already owns its side and
+the presentation already owns both realizations. The promoted module instead
+contains only six transparent derived observations:
+
+- `binary_affine_cover_chart_at_side` and
+  `binary_affine_cover_realization_at_side` perform literal Boolean selection;
+- `binary_affine_cover_refinement_at` evaluates the retained generation
+  function at a membership witness; and
+- `binary_affine_cover_refinement_chart`,
+  `binary_affine_cover_refinement_realization`, and
+  `binary_affine_cover_refinement_ring` derive the selected public data from
+  the computed factorization.
+
+The source
+`emdash3_2_commutative_algebra_affine_cover_refinements.lp` is 157 lines with
+six symbols, zero rewrite rules, and zero unification rules. Its realization
+observation deliberately keeps the canonical branch-indexed `bool_elim`
+family for an open side; it does not add a dependent fusion between that
+family and the readable selected-chart observation. The 98-line reviewer
+`examples/commutative_ring_affine_cover_refinements.lp` has six assertions
+covering both literal branches, generation evaluation, selected chart,
+selected whole realization, and selected coordinate ring.
+
+Proportional validation is green:
+
+- focused health timings are 56.557 seconds for the source and 38.288 seconds
+  for the reviewer under the uniform 90-second ceiling;
+- warning-enabled checks of both targets inherit exactly 1,179 warnings
+  (1,020 unjoinable critical pairs and 159 replaceable pattern variables),
+  with no warning located in either new file;
+- the strict rule audit remains at zero unreviewed clauses with 52 annotated
+  slots across 32 intentional clauses;
+- strict catalog, source-TOC, report-header, active-reference, check-metrics,
+  Python/shell syntax, health-staleness, and whitespace checks pass; and
+- the exact-current health report contains 124 successful targets. A
+  one-time ignored-cache migration proved that all 122 previous files still
+  reproduced their exact content hash under the unchanged environment, then
+  executed only the two new targets. Its source-metrics snapshot is
+  `sha256:e2822b73c06bc463b8a182195ac885346178d708c4dc62c00f0aaa5fadbeca4d`
+  and its check-content snapshot is
+  `sha256:82a4a49e1ccd8f53e53944a600a1acce9c5fb115ab0000850db9730140e62ede`.
+
+No full CI, kernel-wide replay, root aggregate, push, merge, history rewrite,
+publication, or worktree cleanup was performed. CS-07 is ready for its
+authorized local checkpoint. It completes the supplied global two-chart
+refinement consumer, not a closed non-affine example, locally-ringed scheme
+certificate, or atlas-first gluing construction.
 
 ## 14. Validation And Checkpoint Contract
 

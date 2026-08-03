@@ -2228,6 +2228,27 @@ package is deliberately called an affine-cover presentation: point-free
 locally-ringed support, an explicit open-immersion classifier, a semantic
 scheme category, and atlas-first gluing realization remain separate gates.
 
+### Computing The Affine Generator Of A Sieve Refinement
+
+For `q : V -> X` in the retained covering sieve, evaluating
+`binary_affine_cover_refinement_at(Q,q,member)` returns the existing
+`BinaryCoverChartFactorization`. Its Boolean side selects `c0` or `c1`, and
+the factorization supplies `h : V -> U_b` with `q = c_b o h`. The same side
+then computes:
+
+```text
+binary_affine_cover_refinement_chart       : the selected generator c_b
+binary_affine_cover_refinement_realization : its whole affine realization
+binary_affine_cover_refinement_ring        : its coordinate ring
+```
+
+These observations do not form another record. The presentation already owns
+both realizations, so Boolean elimination derives the matching one without
+duplicating data. For an open Boolean side the realization stays in its
+canonical branch-indexed family; the readable selected-chart observation is
+not promoted to a dependent fusion rule. Most importantly, `q` is a
+refinement through an affine chart, not necessarily another affine chart.
+
 ### Complementary-Idempotent Affine Atlas
 
 The first finite atlas consumer uses product rings rather than postulating a
@@ -4288,6 +4309,7 @@ kernel and one-way library vocabulary.
 | two selected arrows generate the retained covering sieve | `BinarySelectedCoverGeneration P chart0 chart1` |
 | whole affine realization of one selected chart generator | `AffineCoverChartRealization P chart` |
 | global-first two-generator affine-cover presentation | `BinaryAffineCoverPresentation P` |
+| selected affine generator/realization/ring for a retained refinement | `binary_affine_cover_refinement_chart` / `binary_affine_cover_refinement_realization` / `binary_affine_cover_refinement_ring` |
 | set-carrier commutative rings | `CommRing` |
 | carrier and retained sethood of `R` | `comm_ring_carrier R` / `comm_ring_carrier_is_set R` |
 | operation/law packages on `A` | `CommRingOps A` / `IsCommRing A ops` |
