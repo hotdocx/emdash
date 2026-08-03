@@ -54,6 +54,7 @@ presheaf `eta/glue/silent` cover completion.  Whole maps from extended sieves
 carry matching compatibility internally; the silent path enforces the
 separated quotient.  Its local-target eliminator and whole Hom universal
 property must be implemented before it is called a sheafification reflector.
+The constructor/reviewer boundary is locally checkpointed at `ce982e3`.
 Dialogue branching without that quotient, or with only a directed silent
 cell, is a separately named lax/effect completion.  The direct HIT constructor,
 the supplied-reflector adjunction mate `sheafification_glue`, and computational

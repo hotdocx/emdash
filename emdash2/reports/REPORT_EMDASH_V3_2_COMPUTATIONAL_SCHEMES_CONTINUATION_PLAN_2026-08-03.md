@@ -1461,7 +1461,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`. The Pédrot-directed whole `eta/glue/silent` cover-completion signature and reviewer are now implemented and green at the underlying-presheaf boundary. The principal-BNat ordinary-sieve bridge is frozen and unpromoted. | Derive the eliminator into local targets and topology-locality before syntactic sheaf packaging; then whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; and the Pédrot-directed whole `eta/glue/silent` cover-completion signature/reviewer are checkpointed at `ce982e3` at the underlying-presheaf boundary. The principal-BNat ordinary-sieve bridge is frozen and unpromoted. | Derive the eliminator into local targets and topology-locality before syntactic sheaf packaging; then whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -2477,7 +2477,9 @@ metrics snapshot is
 and checked-content snapshot is
 `sha256:e88a256d67fd9ab5e2afae2e827e8df7f94f98f1084a1cbd92f5d09eadd44104`.
 No full CI, examples aggregate, root aggregate, push, merge, history rewrite,
-publication, or worktree cleanup was performed.
+publication, or worktree cleanup was performed.  The bounded implementation
+and synchronized-plan checkpoint is `ce982e3` (`feat: add direct cover
+completion HIT`).
 
 ## 14. Validation And Checkpoint Contract
 
