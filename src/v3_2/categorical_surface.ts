@@ -588,6 +588,19 @@ export type CoreCategoricalAbstractionEvidence =
     | (
         CoreCategoricalAbstractionEvidenceBase & {
             readonly rule:
+                'categorical.ordinary-transfor-contextual-transfor';
+            readonly variation: 'natural';
+            readonly dependency: 'ordinary';
+            readonly sourceFamily: KernelExpression;
+            readonly targetFamily: KernelExpression;
+            readonly sourceFunctor: KernelExpression;
+            readonly targetFunctor: KernelExpression;
+            readonly bodyUsageCount: number;
+        }
+    )
+    | (
+        CoreCategoricalAbstractionEvidenceBase & {
+            readonly rule:
                 | 'categorical.dependent-eta'
                 | 'categorical.dependent-section-composition';
             readonly variation: 'natural';
@@ -1173,6 +1186,15 @@ interface InternalCoreCategoricalTerm extends CoreCategoricalTerm {
     readonly contextualDisplayedFunctor?: {
         readonly factored: InternalCoreCategoricalTerm;
     };
+    /**
+     * Closed displayed transformation recovered by an open-fibre
+     * `lambda^n` nested directly inside the expanded second-hom binder.
+     * The wrapper is construction-only; component and higher-action
+     * elimination delegate to this internally coherent owner.
+     */
+    readonly contextualDisplayedTransfor?: {
+        readonly factored: InternalCoreCategoricalTerm;
+    };
 }
 
 interface InternalCoreCategoricalTermMetadata {
@@ -1184,6 +1206,9 @@ interface InternalCoreCategoricalTermMetadata {
         readonly basePoint: InternalCoreCategoricalTerm;
     };
     readonly contextualDisplayedFunctor?: {
+        readonly factored: InternalCoreCategoricalTerm;
+    };
+    readonly contextualDisplayedTransfor?: {
         readonly factored: InternalCoreCategoricalTerm;
     };
 }
@@ -1263,6 +1288,16 @@ interface CoreCategoricalOrdinaryNaturalContext {
     readonly ordinal: number;
     readonly sourceCategory: KernelExpression;
     readonly targetCategory: KernelExpression;
+    readonly sourceFunctor: KernelExpression;
+    readonly targetFunctor: KernelExpression;
+}
+
+interface CoreCategoricalExpandedDisplayedTransforContext {
+    readonly ordinal: number;
+    readonly baseToken: InternalCoreCategoricalTerm;
+    readonly baseCategory: KernelExpression;
+    readonly sourceFamily: KernelExpression;
+    readonly targetFamily: KernelExpression;
     readonly sourceFunctor: KernelExpression;
     readonly targetFunctor: KernelExpression;
 }
@@ -1976,6 +2011,8 @@ export class CoreCategoricalScopedBuilder {
         CoreCategoricalActiveDisplayedEndpointContext[] = [];
     private readonly activeOrdinaryNaturalContexts:
         CoreCategoricalOrdinaryNaturalContext[] = [];
+    private readonly activeExpandedDisplayedTransforContexts:
+        CoreCategoricalExpandedDisplayedTransforContext[] = [];
     private readonly options:
         Readonly<CoreCategoricalScopedBuilderOptions>;
 
@@ -2067,6 +2104,14 @@ export class CoreCategoricalScopedBuilder {
                     contextualDisplayedFunctor: Object.freeze({
                         factored:
                             metadata.contextualDisplayedFunctor.factored
+                    })
+                }),
+            ...(metadata.contextualDisplayedTransfor === undefined
+                ? {}
+                : {
+                    contextualDisplayedTransfor: Object.freeze({
+                        factored:
+                            metadata.contextualDisplayedTransfor.factored
                     })
                 })
         };
@@ -6153,6 +6198,27 @@ export class CoreCategoricalScopedBuilder {
             subjectValue,
             nodeProvenance
         );
+        if (subject.contextualDisplayedTransfor !== undefined) {
+            const factored =
+                subject.contextualDisplayedTransfor.factored;
+            if (
+                factored.type.tag !== 'displayed-transfor' ||
+                factored.closed === undefined
+            ) {
+                this.fail(
+                    'MISSING_STRUCTURAL_OWNER',
+                    nodeProvenance,
+                    'Expanded second-hom presentation lost its coherent ' +
+                        'displayed-transfor owner'
+                );
+            }
+            return this.applyDisplayedTransfor(
+                factored,
+                argumentValue,
+                expectedShape,
+                nodeProvenance
+            );
+        }
         if (
             subject.type.tag === 'functor' &&
             typeof argumentValue === 'object' &&
@@ -16342,6 +16408,203 @@ export class CoreCategoricalScopedBuilder {
     }
 
     /**
+     * Shared two-token `lambda^nd` body compiler.
+     *
+     * Both the compact displayed facade and the expanded
+     * `lambda^n k. lambda^n a` facade call this exact factorer. It accepts
+     * only the reviewed point algebra and eliminates both locally nameless
+     * ordinals into one existing coherence-owning displayed transformation.
+     */
+    private factorContextualDisplayedTransforBody(
+        name: string,
+        hiddenBaseName: string,
+        body: InternalCoreCategoricalTerm,
+        baseOrdinal: number,
+        fibreOrdinal: number,
+        outerScope: readonly number[],
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        sourceFunctor: KernelExpression,
+        targetFunctor: KernelExpression,
+        plicity: Plicity,
+        nodeProvenance: Provenance
+    ): {
+        readonly factored: InternalCoreCategoricalTerm;
+        readonly evidence: CoreCategoricalAbstractionEvidence;
+    } {
+        if (
+            body.type.tag !== 'indexed-hom' ||
+            body.type.baseIndexOrdinal !== baseOrdinal ||
+            body.type.fibreIndexOrdinal !== fibreOrdinal ||
+            !kernelExpressionEquals(
+                body.type.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                body.type.sourceFamily,
+                sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                body.type.targetFamily,
+                targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                body.type.sourceFunctor,
+                sourceFunctor
+            ) ||
+            !kernelExpressionEquals(
+                body.type.targetFunctor,
+                targetFunctor
+            )
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'The contextual displayed-natural body must be the ' +
+                    'requested indexed point component'
+            );
+        }
+        const factored = this.factorDisplayedTransforPoint(
+            body,
+            baseOrdinal,
+            fibreOrdinal
+        );
+        if (
+            factored === undefined ||
+            factored.type.tag !== 'displayed-transfor' ||
+            factored.closed === undefined ||
+            usageCount(factored.usage, baseOrdinal) !== 0 ||
+            usageCount(factored.usage, fibreOrdinal) !== 0 ||
+            !kernelExpressionEquals(
+                factored.type.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                factored.type.sourceFamily,
+                sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                factored.type.targetFamily,
+                targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                factored.type.sourceFunctor,
+                sourceFunctor
+            ) ||
+            !kernelExpressionEquals(
+                factored.type.targetFunctor,
+                targetFunctor
+            )
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'The contextual displayed-natural binder accepts point ' +
+                    'components, factorable point identities, their typed ' +
+                    'recursive vertical compositions, and reviewed fixed-' +
+                    'head pre/postwhiskering'
+            );
+        }
+        const bodyIr = this.normalizeNode(
+            body,
+            [fibreOrdinal, baseOrdinal, ...outerScope]
+        );
+        const resultIr = this.normalizeNode(
+            factored,
+            outerScope
+        );
+        const whiskeringOrientation:
+            'pre' | 'post' | undefined =
+            body.node.tag === 'typed-application' &&
+            body.node.judgment.target ===
+                'indexed-fibre-functor-arrow'
+                ? 'post'
+                : body.node.tag === 'typed-application' &&
+                    body.node.judgment.target ===
+                        'indexed-fibre-transfor-point' &&
+                    body.node.argument[
+                        CORE_CATEGORICAL_BOUNDARY
+                    ] !== true &&
+                    (body.node.argument as
+                        InternalCoreCategoricalTerm).node.tag !==
+                            'slot-token'
+                    ? 'pre'
+                    : undefined;
+        const evidenceBase = {
+            name,
+            plicity,
+            variation: 'natural' as const,
+            polarity: 'covariant' as const,
+            cellLevel: 'object' as const,
+            dependency: 'displayed' as const,
+            sourceCategory: baseCategory,
+            bindingNames:
+                [hiddenBaseName, name] as const,
+            bindingModes:
+                ['natural', 'natural'] as const,
+            sourceFamily,
+            targetFamily,
+            sourceFunctor,
+            targetFunctor,
+            contextSize: 2 as const,
+            contextRelation:
+                'natural-base-then-natural-fibre-binder' as const,
+            body: bodyIr,
+            result: resultIr,
+            structuralPrerequisites: Object.freeze([]),
+            dependentPrerequisites:
+                whiskeringOrientation === undefined
+                    ? collectDependentPrerequisites(bodyIr)
+                    : mergeDependentPrerequisites(
+                        collectDependentPrerequisites(bodyIr),
+                        ['displayed-transfor-horizontal-action']
+                    ),
+            provenance: nodeProvenance
+        };
+        const evidence: CoreCategoricalAbstractionEvidence =
+            body.node.tag === 'typed-cell-composition'
+                ? deepFreeze({
+                    ...evidenceBase,
+                    rule:
+                        'categorical.displayed-transfor-context-composition' as const,
+                    baseUsageCount:
+                        usageCount(body.usage, baseOrdinal),
+                    fibreUsageCount:
+                        usageCount(body.usage, fibreOrdinal)
+                })
+                : body.node.tag === 'typed-cell-identity'
+                    ? deepFreeze({
+                        ...evidenceBase,
+                        rule:
+                            'categorical.displayed-transfor-context-identity' as const,
+                        chainLength: body.node.chainLength,
+                        baseUsageCount:
+                            usageCount(body.usage, baseOrdinal),
+                        fibreUsageCount: 1 as const
+                    })
+                    : whiskeringOrientation !== undefined
+                        ? deepFreeze({
+                            ...evidenceBase,
+                            rule:
+                                'categorical.displayed-transfor-context-whiskering' as const,
+                            orientation: whiskeringOrientation,
+                            baseUsageCount:
+                                usageCount(body.usage, baseOrdinal),
+                            fibreUsageCount:
+                                usageCount(body.usage, fibreOrdinal)
+                        })
+                        : deepFreeze({
+                            ...evidenceBase,
+                            rule:
+                                'categorical.displayed-transfor-context-eta' as const,
+                            baseUsageCount: 1 as const,
+                            fibreUsageCount: 1 as const
+                        });
+        return Object.freeze({ factored, evidence });
+    }
+
+    /**
      * Direct natural abstraction over one finite canonical displayed
      * telescope. Friendly variables are coherent accessor applications to a
      * single terminal contextual slot; the body synthesizes the recovered
@@ -16853,191 +17116,285 @@ export class CoreCategoricalScopedBuilder {
                 ),
                 nodeProvenance
             );
-            if (
-                body.type.tag !== 'indexed-hom' ||
-                body.type.baseIndexOrdinal !== baseOrdinal ||
-                body.type.fibreIndexOrdinal !== fibreOrdinal ||
-                !kernelExpressionEquals(
-                    body.type.baseCategory,
-                    baseCategory
-                ) ||
-                !kernelExpressionEquals(
-                    body.type.sourceFamily,
-                    sourceFamily
-                ) ||
-                !kernelExpressionEquals(
-                    body.type.targetFamily,
-                    targetFamily
-                ) ||
-                !kernelExpressionEquals(
-                    body.type.sourceFunctor,
-                    sourceFunctor
-                ) ||
-                !kernelExpressionEquals(
-                    body.type.targetFunctor,
-                    targetFunctor
-                )
-            ) {
-                this.fail(
-                    'UNAVAILABLE_DISPLAYED_ACTION',
-                    nodeProvenance,
-                    'The direct displayed-transfor contextual body must ' +
-                        'be the requested indexed point component'
+            const factorization =
+                this.factorContextualDisplayedTransforBody(
+                    name,
+                    hiddenBaseName,
+                    body,
+                    baseOrdinal,
+                    fibreOrdinal,
+                    outerScope,
+                    baseCategory,
+                    sourceFamily,
+                    targetFamily,
+                    sourceFunctor,
+                    targetFunctor,
+                    plicity,
+                    nodeProvenance
                 );
-            }
-            const factored = this.factorDisplayedTransforPoint(
-                body,
-                baseOrdinal,
-                fibreOrdinal
-            );
-            if (
-                factored === undefined ||
-                factored.type.tag !== 'displayed-transfor' ||
-                factored.closed === undefined ||
-                usageCount(factored.usage, baseOrdinal) !== 0 ||
-                usageCount(factored.usage, fibreOrdinal) !== 0 ||
-                !kernelExpressionEquals(
-                    factored.type.baseCategory,
-                    baseCategory
-                ) ||
-                !kernelExpressionEquals(
-                    factored.type.sourceFamily,
-                    sourceFamily
-                ) ||
-                !kernelExpressionEquals(
-                    factored.type.targetFamily,
-                    targetFamily
-                ) ||
-                !kernelExpressionEquals(
-                    factored.type.sourceFunctor,
-                    sourceFunctor
-                ) ||
-                !kernelExpressionEquals(
-                    factored.type.targetFunctor,
-                    targetFunctor
-                )
-            ) {
-                this.fail(
-                    'UNAVAILABLE_DISPLAYED_ACTION',
-                    nodeProvenance,
-                    'The direct displayed-natural binder accepts point ' +
-                        'components, factorable point identities, and their ' +
-                        'typed recursive vertical compositions, including ' +
-                        'reviewed fixed-head pre/postwhiskering'
-                );
-            }
-            const bodyIr = this.normalizeNode(
-                body,
-                [fibreOrdinal, baseOrdinal, ...outerScope]
-            );
-            const resultIr = this.normalizeNode(
-                factored,
-                outerScope
-            );
-            const whiskeringOrientation:
-                'pre' | 'post' | undefined =
-                body.node.tag === 'typed-application' &&
-                body.node.judgment.target ===
-                    'indexed-fibre-functor-arrow'
-                    ? 'post'
-                    : body.node.tag === 'typed-application' &&
-                        body.node.judgment.target ===
-                            'indexed-fibre-transfor-point' &&
-                        body.node.argument[
-                            CORE_CATEGORICAL_BOUNDARY
-                        ] !== true &&
-                        (body.node.argument as
-                            InternalCoreCategoricalTerm).node.tag !==
-                                'slot-token'
-                        ? 'pre'
-                        : undefined;
-            const evidenceBase = {
-                name,
-                plicity,
-                variation: 'natural' as const,
-                polarity: 'covariant' as const,
-                cellLevel: 'object' as const,
-                dependency: 'displayed' as const,
-                sourceCategory: baseCategory,
-                bindingNames:
-                    [hiddenBaseName, name] as const,
-                bindingModes:
-                    ['natural', 'natural'] as const,
-                sourceFamily,
-                targetFamily,
-                sourceFunctor,
-                targetFunctor,
-                contextSize: 2 as const,
-                contextRelation:
-                    'natural-base-then-natural-fibre-binder' as const,
-                body: bodyIr,
-                result: resultIr,
-                structuralPrerequisites: Object.freeze([]),
-                dependentPrerequisites:
-                    whiskeringOrientation === undefined
-                        ? collectDependentPrerequisites(bodyIr)
-                        : mergeDependentPrerequisites(
-                            collectDependentPrerequisites(bodyIr),
-                            ['displayed-transfor-horizontal-action']
-                        ),
-                provenance: nodeProvenance
-            };
-            const evidence: CoreCategoricalAbstractionEvidence =
-                body.node.tag === 'typed-cell-composition'
-                    ? deepFreeze({
-                        ...evidenceBase,
-                        rule:
-                            'categorical.displayed-transfor-context-composition' as const,
-                        baseUsageCount:
-                            usageCount(body.usage, baseOrdinal),
-                        fibreUsageCount:
-                            usageCount(body.usage, fibreOrdinal)
-                    })
-                    : body.node.tag === 'typed-cell-identity'
-                        ? deepFreeze({
-                            ...evidenceBase,
-                            rule:
-                                'categorical.displayed-transfor-context-identity' as const,
-                            chainLength: body.node.chainLength,
-                            baseUsageCount:
-                                usageCount(body.usage, baseOrdinal),
-                            fibreUsageCount: 1 as const
-                        })
-                    : whiskeringOrientation !== undefined
-                        ? deepFreeze({
-                            ...evidenceBase,
-                            rule:
-                                'categorical.displayed-transfor-context-whiskering' as const,
-                            orientation: whiskeringOrientation,
-                            baseUsageCount:
-                                usageCount(body.usage, baseOrdinal),
-                            fibreUsageCount:
-                                usageCount(body.usage, fibreOrdinal)
-                        })
-                    : deepFreeze({
-                        ...evidenceBase,
-                        rule: (
-                            'categorical.displayed-transfor-context-eta'
-                        ) as const,
-                        baseUsageCount: 1 as const,
-                        fibreUsageCount: 1 as const
-                    });
+            const factored = factorization.factored;
             const closed = deepFreeze({
-                term: factored.closed.term,
-                type: copyCoreType(factored.type),
+                term: factored.closed!.term,
+                type: copyCoreType(factored.closed!.type),
                 sourceSpan: this.spanFor(nodeProvenance),
-                recovered: [...factored.closed.recovered]
+                recovered: [...factored.closed!.recovered]
             });
             return this.makeTerm(
                 factored.node,
                 factored.type,
                 factored.usage,
                 closed,
-                [...factored.abstractions, evidence]
+                [
+                    ...factored.abstractions,
+                    factorization.evidence
+                ]
             );
         } finally {
             this.activeDisplayedBases.delete(baseOrdinal);
             this.activeTokenOrdinals.shift();
+            this.activeTokenOrdinals.shift();
+        }
+    }
+
+    /**
+     * Open-fibre `lambda^n` nested in the active expanded second-hom binder.
+     *
+     * The indexed endpoint terms are construction-only projections `FF[k]`
+     * and `GG[k]`. This method adds the fibre token, invokes the exact compact
+     * point factorer, and returns an open whole-fibre component whose private
+     * owner is the recovered coherent `Transfd` term.
+     */
+    contextualDisplayedTransforLambda(
+        name: string,
+        sourceFunctorValue: CoreCategoricalTerm,
+        targetFunctorValue: CoreCategoricalTerm,
+        bodyBuilder: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions = {}
+    ): CoreCategoricalTerm {
+        assertSafeIdentifier(name, 'Contextual fibre-natural binder hint');
+        const nodeProvenance = this.nodeProvenance(
+            `contextual fibre-natural abstraction ${name}`,
+            options.provenance
+        );
+        if (
+            this.options.displayedTransforAbstraction !== true ||
+            this.options.ordinaryNaturalAbstraction !== true
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Expanded lambda^n/lambda^n composition requires both ' +
+                    'reviewed ordinary-natural and displayed-transfor ' +
+                    'abstraction capabilities'
+            );
+        }
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'natural';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'ordinary';
+        if (variation !== 'natural' || dependency !== 'ordinary') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Contextual fibre-natural binder '${name}' requires ` +
+                    'natural variation and ordinary dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                `Contextual fibre-natural binder '${name}' is covariant`
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Expanded lambda^n/lambda^n abstracts one fibre object'
+            );
+        }
+
+        const sourceEndpoint = this.requireTerm(
+            sourceFunctorValue,
+            nodeProvenance
+        );
+        const targetEndpoint = this.requireTerm(
+            targetFunctorValue,
+            nodeProvenance
+        );
+        if (
+            sourceEndpoint.type.tag !== 'indexed-functor' ||
+            targetEndpoint.type.tag !== 'indexed-functor' ||
+            sourceEndpoint.type.indexOrdinal !==
+                targetEndpoint.type.indexOrdinal ||
+            !kernelExpressionEquals(
+                sourceEndpoint.type.baseCategory,
+                targetEndpoint.type.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                sourceEndpoint.type.sourceFamily,
+                targetEndpoint.type.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                sourceEndpoint.type.targetFamily,
+                targetEndpoint.type.targetFamily
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Contextual fibre-natural abstraction requires parallel ' +
+                    'indexed fibre-functor endpoints at one active base'
+            );
+        }
+        const baseOrdinal = sourceEndpoint.type.indexOrdinal;
+        const context =
+            this.activeExpandedDisplayedTransforContexts[0];
+        const sourceOwner = this.closedDisplayedFunctorForIndexedFibre(
+            sourceEndpoint,
+            baseOrdinal
+        );
+        const targetOwner = this.closedDisplayedFunctorForIndexedFibre(
+            targetEndpoint,
+            baseOrdinal
+        );
+        if (
+            context === undefined ||
+            this.activeTokenOrdinals[0] !== baseOrdinal ||
+            context.ordinal !== baseOrdinal ||
+            sourceOwner?.type.tag !== 'displayed-functor' ||
+            targetOwner?.type.tag !== 'displayed-functor' ||
+            sourceOwner.closed === undefined ||
+            targetOwner.closed === undefined ||
+            !kernelExpressionEquals(
+                context.baseCategory,
+                sourceEndpoint.type.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                context.sourceFamily,
+                sourceEndpoint.type.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                context.targetFamily,
+                sourceEndpoint.type.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                context.sourceFunctor,
+                sourceOwner.closed.term
+            ) ||
+            !kernelExpressionEquals(
+                context.targetFunctor,
+                targetOwner.closed.term
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Open fibre-natural abstraction must be nested immediately ' +
+                    'under its matching expanded second-hom base binder'
+            );
+        }
+
+        const fibreToken = this.indexedObjectSlot(
+            name,
+            context.baseCategory,
+            context.sourceFamily,
+            baseOrdinal,
+            nodeProvenance
+        );
+        const fibreOrdinal = fibreToken.node.tag === 'slot-token'
+            ? fibreToken.node.ordinal
+            : -1;
+        const outerScope = this.activeTokenOrdinals.slice(1);
+        const previousBase = this.activeDisplayedBases.get(baseOrdinal);
+        if (
+            previousBase !== undefined &&
+            previousBase !== context.baseToken
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Active displayed base is owned by a different token'
+            );
+        }
+        this.activeTokenOrdinals.unshift(fibreOrdinal);
+        this.activeDisplayedBases.set(baseOrdinal, context.baseToken);
+        try {
+            const body = this.requireTerm(
+                bodyBuilder(
+                    fibreToken as CoreCategoricalSlotToken
+                ),
+                nodeProvenance
+            );
+            const factorization =
+                this.factorContextualDisplayedTransforBody(
+                    name,
+                    context.baseToken.node.tag === 'slot-token'
+                        ? context.baseToken.node.hint
+                        : `${name}Base`,
+                    body,
+                    baseOrdinal,
+                    fibreOrdinal,
+                    outerScope,
+                    context.baseCategory,
+                    context.sourceFamily,
+                    context.targetFamily,
+                    context.sourceFunctor,
+                    context.targetFunctor,
+                    plicity,
+                    nodeProvenance
+                );
+            const factored = this.makeTerm(
+                factorization.factored.node,
+                factorization.factored.type,
+                factorization.factored.usage,
+                factorization.factored.closed,
+                [
+                    ...factorization.factored.abstractions,
+                    factorization.evidence
+                ]
+            );
+            const componentType:
+                InternalCoreCategoricalIndexedTransforClassifier = {
+                    tag: 'indexed-transfor',
+                    baseCategory: context.baseCategory,
+                    sourceFamily: context.sourceFamily,
+                    targetFamily: context.targetFamily,
+                    sourceFunctor: context.sourceFunctor,
+                    targetFunctor: context.targetFunctor,
+                    indexOrdinal: baseOrdinal
+                };
+            return this.makeTerm(
+                {
+                    tag: 'explicit-core-term',
+                    term: factored.closed!.term,
+                    provenance: nodeProvenance
+                },
+                componentType,
+                mergeUsage(
+                    factored.usage,
+                    [[baseOrdinal, 1]]
+                ),
+                undefined,
+                factored.abstractions,
+                false,
+                {
+                    contextualDisplayedTransfor: { factored }
+                }
+            );
+        } finally {
+            if (previousBase === undefined) {
+                this.activeDisplayedBases.delete(baseOrdinal);
+            } else {
+                this.activeDisplayedBases.set(
+                    baseOrdinal,
+                    previousBase
+                );
+            }
             this.activeTokenOrdinals.shift();
         }
     }
@@ -17061,6 +17418,40 @@ export class CoreCategoricalScopedBuilder {
             term.type.indexOrdinal !== ordinal
         ) {
             return undefined;
+        }
+
+        if (term.contextualDisplayedTransfor !== undefined) {
+            const factored =
+                term.contextualDisplayedTransfor.factored;
+            if (
+                factored.type.tag !== 'displayed-transfor' ||
+                factored.closed === undefined ||
+                usageCount(term.usage, ordinal) !== 1 ||
+                usageCount(factored.usage, ordinal) !== 0 ||
+                !kernelExpressionEquals(
+                    factored.type.baseCategory,
+                    term.type.baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFamily,
+                    term.type.sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFamily,
+                    term.type.targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFunctor,
+                    term.type.sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFunctor,
+                    term.type.targetFunctor
+                )
+            ) {
+                return undefined;
+            }
+            return factored;
         }
 
         if (
@@ -17417,6 +17808,279 @@ export class CoreCategoricalScopedBuilder {
             if (activeContext !== context) {
                 throw new Error(
                     'Ordinary natural context stack lost its owner'
+                );
+            }
+            this.activeTokenOrdinals.shift();
+        }
+    }
+
+    /**
+     * Expanded second-hom `lambda^n k. lambda^n a` presentation.
+     *
+     * The callback must return the construction-only whole-fibre component
+     * produced by `contextualDisplayedTransforLambda`. Its retained coherent
+     * owner is wrapped at the ordinary iterated-Hom classifier; no pointwise
+     * family is promoted to naturality here.
+     */
+    expandedDisplayedTransforLambda(
+        name: string,
+        sourceFunctorValue: CoreCategoricalTerm,
+        targetFunctorValue: CoreCategoricalTerm,
+        bodyBuilder: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions = {}
+    ): CoreCategoricalTerm {
+        assertSafeIdentifier(name, 'Expanded second-hom binder hint');
+        const nodeProvenance = this.nodeProvenance(
+            `expanded second-hom abstraction ${name}`,
+            options.provenance
+        );
+        if (
+            this.options.displayedTransforAbstraction !== true ||
+            this.options.ordinaryNaturalAbstraction !== true
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Expanded lambda^n/lambda^n composition requires both ' +
+                    'reviewed ordinary-natural and displayed-transfor ' +
+                    'abstraction capabilities'
+            );
+        }
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'natural';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'ordinary';
+        if (variation !== 'natural' || dependency !== 'ordinary') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Expanded second-hom binder '${name}' requires natural ` +
+                    'variation and ordinary dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                `Expanded second-hom binder '${name}' is covariant`
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Expanded second-hom binder '${name}' abstracts one base ` +
+                    'object index'
+            );
+        }
+        if (this.activeTokenOrdinals.length !== 0) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'The first expanded second-hom binder does not capture an ' +
+                    'additional outer contextual slot'
+            );
+        }
+
+        const sourceFunctor = this.requireTerm(
+            sourceFunctorValue,
+            nodeProvenance
+        );
+        const targetFunctor = this.requireTerm(
+            targetFunctorValue,
+            nodeProvenance
+        );
+        if (
+            sourceFunctor.type.tag !== 'displayed-functor' ||
+            targetFunctor.type.tag !== 'displayed-functor' ||
+            sourceFunctor.closed === undefined ||
+            targetFunctor.closed === undefined ||
+            sourceFunctor.usage.length !== 0 ||
+            targetFunctor.usage.length !== 0 ||
+            !kernelExpressionEquals(
+                sourceFunctor.type.baseCategory,
+                targetFunctor.type.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.type.sourceFamily,
+                targetFunctor.type.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.type.targetFamily,
+                targetFunctor.type.targetFamily
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Expanded second-hom abstraction requires two closed ' +
+                    'parallel displayed-functor endpoints'
+            );
+        }
+        const baseCategory = sourceFunctor.type.baseCategory;
+        const sourceFamily = sourceFunctor.type.sourceFamily;
+        const targetFamily = sourceFunctor.type.targetFamily;
+        const sourceExpression = sourceFunctor.closed.term;
+        const targetExpression = targetFunctor.closed.term;
+        const baseToken = this.slot(
+            name,
+            baseCategory,
+            nodeProvenance
+        );
+        const ordinal = baseToken.node.tag === 'slot-token'
+            ? baseToken.node.ordinal
+            : -1;
+        const context: CoreCategoricalExpandedDisplayedTransforContext = {
+            ordinal,
+            baseToken,
+            baseCategory,
+            sourceFamily,
+            targetFamily,
+            sourceFunctor: sourceExpression,
+            targetFunctor: targetExpression
+        };
+        this.activeTokenOrdinals.unshift(ordinal);
+        this.activeExpandedDisplayedTransforContexts.unshift(context);
+        try {
+            const body = this.requireTerm(
+                bodyBuilder(
+                    baseToken as CoreCategoricalSlotToken
+                ),
+                nodeProvenance
+            );
+            if (
+                body.contextualDisplayedTransfor === undefined ||
+                body.type.tag !== 'indexed-transfor' ||
+                body.type.indexOrdinal !== ordinal ||
+                !kernelExpressionEquals(
+                    body.type.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.sourceFamily,
+                    sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.targetFamily,
+                    targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.sourceFunctor,
+                    sourceExpression
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.targetFunctor,
+                    targetExpression
+                )
+            ) {
+                this.fail(
+                    'MISSING_STRUCTURAL_OWNER',
+                    nodeProvenance,
+                    'Expanded second-hom body must be the immediately ' +
+                        'nested, recursively factorable fibre-natural ' +
+                        'abstraction for the requested endpoints'
+                );
+            }
+            const factored = this.factorDisplayedTransforComponent(
+                body,
+                ordinal
+            );
+            if (
+                factored === undefined ||
+                factored.type.tag !== 'displayed-transfor' ||
+                factored.closed === undefined ||
+                factored.usage.length !== 0 ||
+                !kernelExpressionEquals(
+                    factored.type.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFamily,
+                    sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFamily,
+                    targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFunctor,
+                    sourceExpression
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFunctor,
+                    targetExpression
+                )
+            ) {
+                this.fail(
+                    'MISSING_STRUCTURAL_OWNER',
+                    nodeProvenance,
+                    'Expanded second-hom body did not recover one closed ' +
+                        'coherence-owning displayed transformation'
+                );
+            }
+            const ambientCategory = this.transforCategory(
+                baseCategory,
+                this.categoryOfCategories(nodeProvenance),
+                sourceFamily,
+                targetFamily,
+                nodeProvenance
+            );
+            const resultType: CoreType = {
+                tag: 'hom',
+                category: ambientCategory,
+                sourceObject: sourceExpression,
+                targetObject: targetExpression
+            };
+            const bodyIr = this.normalizeNode(body, [ordinal]);
+            const evidence: CoreCategoricalAbstractionEvidence =
+                deepFreeze({
+                    rule:
+                        'categorical.ordinary-transfor-contextual-transfor' as const,
+                    name,
+                    plicity,
+                    variation: 'natural' as const,
+                    polarity: 'covariant' as const,
+                    cellLevel: 'object' as const,
+                    dependency: 'ordinary' as const,
+                    sourceCategory: baseCategory,
+                    sourceFamily,
+                    targetFamily,
+                    sourceFunctor: sourceExpression,
+                    targetFunctor: targetExpression,
+                    bodyUsageCount: usageCount(body.usage, ordinal),
+                    body: bodyIr,
+                    result: this.normalizeNode(factored, []),
+                    structuralPrerequisites: Object.freeze([]),
+                    dependentPrerequisites:
+                        collectDependentPrerequisites(bodyIr),
+                    provenance: nodeProvenance
+                });
+            const closed = deepFreeze({
+                term: factored.closed.term,
+                type: copyCoreType(resultType),
+                sourceSpan: this.spanFor(nodeProvenance),
+                recovered: [...factored.closed.recovered]
+            });
+            return this.makeTerm(
+                factored.node,
+                resultType,
+                factored.usage,
+                closed,
+                [...factored.abstractions, evidence],
+                false,
+                {
+                    contextualDisplayedTransfor: { factored }
+                }
+            );
+        } finally {
+            const activeContext =
+                this.activeExpandedDisplayedTransforContexts.shift();
+            if (activeContext !== context) {
+                throw new Error(
+                    'Expanded displayed-transfor context stack lost its owner'
                 );
             }
             this.activeTokenOrdinals.shift();
@@ -18074,6 +18738,35 @@ export class CoreCategoricalScopedBuilder {
         } finally {
             this.activeTokenOrdinals.shift();
         }
+    }
+
+    /** Resolve an expanded second-hom facade to its coherent displayed owner. */
+    coherentDisplayedTransforOwner(
+        termValue: CoreCategoricalTerm,
+        suppliedProvenance?: Provenance
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.nodeProvenance(
+            'coherent displayed-transfor owner',
+            suppliedProvenance
+        );
+        const term = this.requireTerm(termValue, nodeProvenance);
+        if (term.contextualDisplayedTransfor === undefined) {
+            return term;
+        }
+        const factored = term.contextualDisplayedTransfor.factored;
+        if (
+            factored.type.tag !== 'displayed-transfor' ||
+            factored.closed === undefined ||
+            factored.usage.length !== 0
+        ) {
+            this.fail(
+                'MISSING_STRUCTURAL_OWNER',
+                nodeProvenance,
+                'Expanded second-hom presentation lost its coherent ' +
+                    'displayed-transfor owner'
+            );
+        }
+        return factored;
     }
 
     compile(termValue: CoreCategoricalTerm): ElaboratedSurfaceTerm {

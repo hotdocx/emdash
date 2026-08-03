@@ -2583,7 +2583,11 @@ export class CoreCategoricalProgram {
         readonly sourceFunctor: KernelExpression;
         readonly targetFunctor: KernelExpression;
     } {
-        const inspection = this.builder.inspect(value);
+        const owner = this.builder.coherentDisplayedTransforOwner(
+            value,
+            nodeProvenance
+        );
+        const inspection = this.builder.inspect(owner);
         if (inspection.type.tag !== 'displayed-transfor') {
             throw new CoreCategoricalProgramError(
                 'EXPECTED_DISPLAYED_TRANSFOR',
@@ -2592,7 +2596,7 @@ export class CoreCategoricalProgram {
             );
         }
         return {
-            expression: this.builder.compile(value).term,
+            expression: this.builder.compile(owner).term,
             category: inspection.type.category,
             baseCategory: inspection.type.baseCategory,
             sourceFamily: inspection.type.sourceFamily,
@@ -6951,6 +6955,70 @@ export class CoreCategoricalProgram {
                     dependency: options.dependency,
                     provenance: nodeProvenance
                 }
+            );
+        }
+        const sourceInspection = this.builder.inspect(
+            sourceFunctorValue
+        );
+        const targetInspection = this.builder.inspect(
+            targetFunctorValue
+        );
+        const sourceIsClosedDisplayedFunctor =
+            sourceInspection.type.tag === 'displayed-functor';
+        const targetIsClosedDisplayedFunctor =
+            targetInspection.type.tag === 'displayed-functor';
+        const sourceIsIndexedFunctor =
+            sourceInspection.type.tag === 'indexed-functor';
+        const targetIsIndexedFunctor =
+            targetInspection.type.tag === 'indexed-functor';
+        if (
+            sourceIsClosedDisplayedFunctor ||
+            targetIsClosedDisplayedFunctor ||
+            sourceIsIndexedFunctor ||
+            targetIsIndexedFunctor
+        ) {
+            this.requireFibredTransfd(nodeProvenance);
+            if (
+                sourceIsClosedDisplayedFunctor &&
+                targetIsClosedDisplayedFunctor
+            ) {
+                return this.builder.expandedDisplayedTransforLambda(
+                    name,
+                    sourceFunctorValue,
+                    targetFunctorValue,
+                    body,
+                    {
+                        plicity: options.plicity,
+                        variation: options.variation,
+                        polarity: options.polarity,
+                        cellLevel: options.cellLevel,
+                        dependency: options.dependency,
+                        provenance: nodeProvenance
+                    }
+                );
+            }
+            if (sourceIsIndexedFunctor && targetIsIndexedFunctor) {
+                return this.builder.contextualDisplayedTransforLambda(
+                    name,
+                    sourceFunctorValue,
+                    targetFunctorValue,
+                    body,
+                    {
+                        plicity: options.plicity,
+                        variation: options.variation,
+                        polarity: options.polarity,
+                        cellLevel: options.cellLevel,
+                        dependency: options.dependency,
+                        provenance: nodeProvenance
+                    }
+                );
+            }
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_FUNCTOR',
+                nodeProvenance,
+                `Ordinary natural abstraction '${name}' requires two ` +
+                    'parallel ordinary functors, closed displayed functors, ' +
+                    'or active indexed fibre functors'
             );
         }
         const sourceFunctor = this.requireFunctorTerm(

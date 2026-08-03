@@ -46,21 +46,26 @@
 > owner, cast,
 > curry, external coherence, text/browser behavior, or second-hom behavior.
 >
-> The exact next row is the read-only
-> `COMPOSITIONAL-ND-EXPANDED-1D` audit/proposal. That audit is now complete and
-> its exact proposal is frozen at
+> `COMPOSITIONAL-ND-EXPANDED-1D` is implemented and final-focused-green. Its
+> audit selected the existing open `indexed-functor` endpoints, and its exact
+> proposal was frozen at
 > `f176d08b9aa831b05241ef301475379d78e32939` under
 > `H-DTTLF-USABILITY-COMPOSITIONAL-ND-EXPANDED-01` and independently approved
 > by
 > [`D-DTTLF-USABILITY-077`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D077_REVIEW.md).
-> Its bounded implementation is dependency-ready. Applying closed displayed
-> functors at the
-> active base already produces the required open `indexed-functor` endpoints;
-> the proposed literal `lambda^n k. lambda^n a` bridge therefore wraps the
-> exact compact point factorer and retains an ordinary iterated-Hom facade,
-> with no new descriptor, Core node, checker rule, kernel owner, or external
-> coherence. Keep both canonical covariant comparisons distinct from mixed-
-> variance `Functor_catd`/`Transf_catd` sections.
+> Literal typed `lambda^n k. lambda^n a` now wraps the exact compact contextual
+> point factorer and retains an ordinary iterated-Hom facade over byte-identical
+> `:^nd` Core. Component, fibre-point, base-arrow, and higher action delegate
+> to the recovered coherent owner; arbitrary point arrows and scoped endpoint
+> escape fail closed. The new focused suite passes 5/5, the nearest predecessor
+> matrix passes 35/35 concurrently, the selected four-layer telescope case
+> passes 1/1, and workspace/typecheck/changed-file lint/diff hygiene pass. The
+> required root aggregate was run exactly once and remains non-green only on
+> the already recorded kernel-pin/count family and README-wrap assertion; do
+> not repeat it. The semantic checkpoint is pending. The next dependency-ready
+> row is a read-only audit of expanded `lambda^n/lambda^f` and
+> `lambda^n/lambda^n` text parity; compact `^fd/^nd` text already exists, and
+> no parser/checker redesign or text behavior is yet authorized.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.

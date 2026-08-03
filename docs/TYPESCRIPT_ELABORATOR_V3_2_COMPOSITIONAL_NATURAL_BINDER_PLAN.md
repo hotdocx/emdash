@@ -42,7 +42,11 @@ the compact point factorer as the second-hom seam. The exact bounded proposal
 below is frozen at `f176d08b9aa831b05241ef301475379d78e32939` under
 `H-DTTLF-USABILITY-COMPOSITIONAL-ND-EXPANDED-01` and independently approved by
 [`D-DTTLF-USABILITY-077`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D077_REVIEW.md).
-Its bounded implementation is dependency-ready.
+Its bounded implementation is final-focused-green; its rollback-safe semantic
+checkpoint is pending. Literal typed `lambda^n k. lambda^n a` now shares the
+compact `:^nd` point factorer and byte-identical Core while retaining the
+ordinary iterated-Hom facade and delegating component, point, base-arrow, and
+higher action to the recovered coherent `Transfd` owner.
 
 ## Objective
 
@@ -1013,6 +1017,60 @@ descriptor, curry, cast, coercion, total-context section, external coherence
 payload, mixed `Functor_catd`/`Transf_catd` section claim, arbitrary body
 synthesis, text syntax, browser behavior, or scale work.
 
+## `COMPOSITIONAL-ND-EXPANDED-1D` Implementation Result
+
+The reviewed second-hom bridge is implemented without a kernel, explicit-Core,
+or transfer delta:
+
+1. Applying the closed displayed endpoints `FF` and `GG` at the active outer
+   base produces the existing construction-only `indexed-functor` endpoints.
+   No fake open `KernelExpression` or new scoped category descriptor is added.
+2. The immediately nested ordinary-natural abstraction creates the fibre
+   token and calls the exact shared contextual point factorer used by compact
+   `displayedTransforContextLambda`. Eta, identity, recursive vertical
+   composition, and both fixed whiskering orientations therefore compile by
+   the same recursive algorithm.
+3. The inner wrapper may escape neither callback nor endpoint context. It
+   privately retains only the already recovered coherent `Transfd` owner; an
+   arbitrary point arrow still fails closed.
+4. The outer abstraction eliminates the base token and presents that same
+   Core term at
+   `Hom_cat (Transf_cat K Cat_cat E D) FF GG`. Component, fibre-point, and
+   `tdapp1_int_cell`-backed higher action delegate to the retained owner.
+5. Compact and expanded facades share one internal recursive compiler and one
+   Core result. Neither facade literally invokes the other's public callback
+   API. Ordinary closed `lambda^n` remains independently reusable, while the
+   particular open-fibre inner `lambda^n a` is necessarily scoped beneath its
+   matching outer `lambda^n k`.
+
+The corresponding first-hom sharing claim is deliberately narrower than a
+universal open/closed functorial bracket. A fixed-category `lambda^f`—closed or
+merely nested under an unrelated outer scope—uses `categoricalLambda` and its
+`directDiagonal`/`compileContextual` lowering. A genuinely indexed
+`lambda^f a : E[k]` dispatches instead to
+`contextualDisplayedFunctorLambda`, because both its source and target
+classifiers depend on `k`; that path shares `factorDisplayedFunctorBody` with
+compact `lambda^fd`. The implementations share lower-level typed terms,
+usage/scoping, application, and Core owners, but not one classifier-parametric
+top-level functorial body compiler. This is a recorded architectural
+non-uniformity, not an external-coherence or soundness defect. A future audit
+may determine whether a common classifier-directed bracket engine would
+improve scalability; it is not part of the present graduation claim.
+
+The new focused suite passes 5/5. The nearest ordinary-natural, expanded
+first-hom, and compact contextual eta/identity/composition/whiskering matrix
+passes 35/35 under bounded six-worker concurrency. The selected canonical
+four-layer contextual-telescope preservation case passes 1/1. Workspace
+topology, root typecheck, complete changed-file lint, and exact diff hygiene
+pass.
+
+The required root `check:ts` was run exactly once after that bounded matrix was
+green. Workspace, typecheck, and full lint pass. The aggregate exercised the
+registered D-077 suite without an observed feature failure and remains
+non-green on the already recorded active-kernel source-digest/source-position/
+declaration-count pin family and README line-wrap assertion. This aggregate
+must not be repeated for the unchanged boundary.
+
 ## Work Ledger
 
 | Slice | Status | Dependency | Exact boundary |
@@ -1023,8 +1081,8 @@ synthesis, text syntax, browser behavior, or scale work.
 | `COMPOSITIONAL-NATURAL-ACTION-CORRECTION-1B2` | final-focused-green at `a0c8c7a77a310ded8c972d2308e47f27c3a8c25d` | focused 1B failure; D-075; existing `comp_cat_con_fapp1_func` and `comp_cat_cov_fapp1_func` | Imports exactly two existing classifier-exact action signatures and uses them for pre/postwhiskering. Adds zero rules, kernel owners, Core nodes, checker branches, or external coherence fields. |
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | complete; read-only architecture audit | completed 1B/1B2 | Both compact terms recheck unchanged under their expanded facades. Select shared scoped contextual factorization with thin expanded/compact wrappers; literal current-method reuse is blocked only by the absent open-fibre representation. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
 | `COMPOSITIONAL-FD-EXPANDED-1C` | final-focused-green at `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1` | completed 0C; D-076; existing first-hom runtime bridge | Construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))` share the compact `:^fd` factorer, preserve byte-identical Core, expose closed fibre object/arrow action, and retain the ordinary `Transf_cat` facade. |
-| `COMPOSITIONAL-ND-EXPANDED-1D` | independently approved; implementation dependency-ready | green 1C; completed audit; D-077 | Reuse the existing open `indexed-functor` endpoints and compact point factorer for literal expanded `lambda^n k. lambda^n a`; retain the ordinary iterated-Hom facade, byte-identical compact Core, and internally owned component/base/higher action. |
-| `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | deferred | graduated direct typed API | Add text syntax only after the target mathematical AST/API is settled. |
+| `COMPOSITIONAL-ND-EXPANDED-1D` | final-focused-green; semantic checkpoint pending | green 1C; completed audit; D-077 | The existing open `indexed-functor` endpoints and compact point factorer implement literal expanded `lambda^n k. lambda^n a`; the result retains the ordinary iterated-Hom facade, byte-identical compact Core, and internally owned component/base/higher action. |
+| `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | dependency-ready read-only audit after the D-077 checkpoint | graduated direct typed API | Inventory only the missing expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a` text routes against the settled typed API. Reuse the existing parser/resolver and compact `^fd`/`^nd` contracts; freeze a separate proposal before behavior. |
 
 ## Explicit Non-Claims
 
@@ -1073,6 +1131,18 @@ evidence:
   contracts are not repaired in this semantic tranche, and the aggregate must
   not be repeated for this unchanged boundary.
 
+The D-077 implementation has the following final proportional evidence:
+
+- its focused same-Core/action/negative/predecessor suite passes 5/5;
+- the six nearest predecessor suites pass 35/35 concurrently, and the selected
+  canonical four-layer telescope preservation case passes 1/1;
+- workspace topology, root typecheck, complete changed-file lint, and exact
+  diff hygiene pass; and
+- the single root `check:ts` was run once. Its static phases pass and no D-077
+  feature failure was observed; its aggregate remains non-green on the
+  already recorded kernel-pin/count family and README-wrap assertion. It must
+  not be repeated for this unchanged boundary.
+
 Use rollback-safe local checkpoints under
 [`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./PERSISTENT_GOAL_GIT_EXPERIMENTATION.md).
 Preserve unrelated work.
@@ -1105,20 +1175,34 @@ rollback-safe semantic checkpoint
 `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1`. Treat the read-only
 `COMPOSITIONAL-ND-EXPANDED-1D` audit as complete and its exact proposal at
 `f176d08b9aa831b05241ef301475379d78e32939` as independently approved under
-D-077. Implement only that bounded second-hom bridge. Natural transformation
-bodies
-must be recursively constructed from internal owners and fail closed without
-them. Keep the existing compact factorers as rollback evidence until exact
-same-Core/action parity supports delegation. Preserve object, arrow,
-base-arrow, and higher action; add no curry, cast, total-context section,
-external coherence, new kernel owner, text/browser behavior, or scale work
-without a separate reviewed gate.
+D-077. Treat that bounded second-hom bridge as final-focused-green after its
+rollback-safe semantic checkpoint: literal `lambda^n k. lambda^n a` and compact
+`:^nd` share the contextual point factorer and exact Core, while their facades
+remain distinct and all action delegates to the recovered coherent owner.
+Natural transformation bodies must be recursively constructed from internal
+owners and fail closed without them. Then conduct only the read-only
+`COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` audit, inventorying the two expanded
+nested binder presentations against the existing compact text routes; freeze
+and review any exact behavior proposal separately. Add no curry, cast,
+total-context section, external coherence, new kernel owner, browser behavior,
+or scale work without a separate reviewed gate.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-03 — COMPOSITIONAL-ND-EXPANDED-1D final-focused-green.** Literal
+  typed `lambda^n k. lambda^n a` uses the existing indexed endpoints and the
+  exact compact contextual point factorer, retaining an ordinary iterated-Hom
+  facade over byte-identical compact Core. Component, point, and internal
+  higher action delegate to the recovered coherent `Transfd` owner; arbitrary
+  point data and scoped-endpoint escape fail closed. Focused 5/5, nearest
+  predecessor 35/35, canonical four-layer preservation 1/1, and all static
+  gates pass. The single root aggregate was run once and remains non-green on
+  the pre-existing kernel-pin/count and README-wrap contracts; it must not be
+  repeated. The rollback-safe semantic checkpoint is pending.
 
 - **2026-08-02 — D-DTTLF-USABILITY-077 approved.** A separate review of exact
   proposal checkpoint `f176d08b9aa831b05241ef301475379d78e32939` confirms
