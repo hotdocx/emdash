@@ -15,9 +15,10 @@ require open emdash.emdash3_2;
   half-adjoint triangle to prove the two hom-functor cancellation laws.
 
   Proof-engineering lemmas are protected module implementation details. The
-  hom-action proof core exposes omega_equiv_along_fapp1 as its sole
-  ordinary public owner; its projections and the complete protected proof
-  chain remain computational. Public groupoidality consumers follow below.
+  hom-action proof core exposes omega_equiv_along_fapp1 as its ordinary
+  action owner; its projections and the complete protected proof chain remain
+  computational. One reusable selected-left-inverse law and public
+  groupoidality consumers follow below.
 */
 
 // -----------------------------------------------------------------------------------------------
@@ -2492,7 +2493,21 @@ protected symbol eq1_fapp1_left_left_law
     x y;
 
 // -----------------------------------------------------------------------------------------------
-// Public owner
+// Public owners
+
+// The selected left inverse of a Cat-level equivalence also cancels on the right.
+symbol omega_equiv_along_cat_left_inv_right_law
+  [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
+  : τ (@=
+      (Obj (Functor_cat B B))
+      (@comp_cat_fapp0
+        B A B
+        F
+        (@omega_equiv_along_left_inv Cat_cat A B F u))
+      (@id_func B))
+≔ eq1_left_functor_right_law u;
 
 // An equality-valued omega-equivalence acts by equivalences on every next hom.
 symbol omega_equiv_along_fapp1

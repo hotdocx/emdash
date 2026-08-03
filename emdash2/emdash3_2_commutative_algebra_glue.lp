@@ -1,5 +1,6 @@
 /*
-  Selected computational glue for localization matching families.
+  Whole and component-view computational glue for localization matching
+  families.
 
   For a chosen localization O(U)[1/s], the preceding matching layer sends
   localization elements to coherent sections over the complete category of
@@ -8,7 +9,8 @@
   category of the localization carrier, so its action on matching arrows is
   internal rather than supplied by external naturality equations.
 
-  Two retained laws expose the computational Cartier boundary:
+  The original selected package retains two observations of the
+  computational Cartier boundary:
 
     glue(restrict(x)) = x
 
@@ -16,14 +18,20 @@
 
     restrict(glue(m))[e] = m[e].
 
-  At a literal e=(V,f,member), the second left endpoint computes to the
-  selected localization factor applied to glue(m).  This is selected
+  The stronger fixed-forward locality classifier makes canonical restriction
+  itself an OmegaEquivAlong in Cat_cat. Its selected left inverse is a whole
+  glue functor, and both composite-functor paths are internal. Evaluating
+  those paths derives the original observations and package.
+
+  At a literal e=(V,f,member), the second component endpoint computes to the
+  selected localization factor applied to glue(m). This is selected
   basic-open locality data, not ordinary sheaf descent over a covering sieve:
-  D(s) need not cover U.  The module is rule-free and claims no whole
-  categorical DefIso, sheafhood, generated topology, Spec, or scheme.
+  D(s) need not cover U. The module is rule-free and claims no categorical
+  DefIso, sheafhood, generated topology, Spec, or scheme.
 */
 
 require open emdash.emdash3_2_commutative_algebra_matching;
+require open emdash.emdash3_2_eq1_hom_action;
 
 // Carrier of the selected localization target.
 symbol CommRingPshLocalizationCarrier
@@ -299,3 +307,219 @@ symbol comm_ring_psh_localization_glue_at_member_path
 ≔ @comm_ring_psh_localization_restrict_glue_component_path
     K O U s localization glue matching
     (@comm_ring_psh_invertibility_element K O U s V f member);
+
+// Fixed-forward whole equivalence between localization paths and matching families.
+symbol CommRingPshLocalizationLocality
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  : Grpd
+≔ @OmegaEquivAlong
+    Cat_cat
+    (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+    (@CommRingPshLocalizationMatching_cat K O U s)
+    (@comm_ring_psh_localization_matching_restriction_func
+      K O U s localization);
+
+// The whole glue functor is the selected left inverse of restriction.
+symbol comm_ring_psh_localization_locality_glue_func
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization))
+  : τ (@CommRingPshLocalizationGlueFunctor K O U s localization)
+≔ @omega_equiv_along_left_inv
+    Cat_cat
+    (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+    (@CommRingPshLocalizationMatching_cat K O U s)
+    (@comm_ring_psh_localization_matching_restriction_func
+      K O U s localization)
+    locality;
+
+// Whole left cancellation: glue after restriction is identity.
+symbol comm_ring_psh_localization_locality_glue_restrict_functor_path
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization))
+  : τ (@=
+      (Obj (Functor_cat
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))))
+      (@comp_cat_fapp0
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@comm_ring_psh_localization_locality_glue_func
+          K O U s localization locality)
+        (@comm_ring_psh_localization_matching_restriction_func
+          K O U s localization))
+      (@id_func
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))))
+≔ @omega_equiv_along_left_law
+    Cat_cat
+    (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+    (@CommRingPshLocalizationMatching_cat K O U s)
+    (@comm_ring_psh_localization_matching_restriction_func
+      K O U s localization)
+    locality;
+
+// Whole right cancellation: restriction after the same glue is identity.
+symbol comm_ring_psh_localization_locality_restrict_glue_functor_path
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization))
+  : τ (@=
+      (Obj (Functor_cat
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (@CommRingPshLocalizationMatching_cat K O U s)))
+      (@comp_cat_fapp0
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (@comm_ring_psh_localization_matching_restriction_func
+          K O U s localization)
+        (@comm_ring_psh_localization_locality_glue_func
+          K O U s localization locality))
+      (@id_func (@CommRingPshLocalizationMatching_cat K O U s)))
+≔ @omega_equiv_along_cat_left_inv_right_law
+    (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+    (@CommRingPshLocalizationMatching_cat K O U s)
+    (@comm_ring_psh_localization_matching_restriction_func
+      K O U s localization)
+    locality;
+
+// Object evaluation of the whole left cancellation path.
+symbol comm_ring_psh_localization_locality_glue_restrict_path
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization))
+  (x : τ (@CommRingPshLocalizationCarrier K O U s localization))
+  : τ (@=
+      (@CommRingPshLocalizationCarrier K O U s localization)
+      (@fapp0
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@comm_ring_psh_localization_locality_glue_func
+          K O U s localization locality)
+        (@comm_ring_psh_localization_matching_section
+          K O U s localization x))
+      x)
+≔ @eq_ap
+    (Obj (Functor_cat
+      (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+      (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))))
+    (@CommRingPshLocalizationCarrier K O U s localization)
+    (λ F : τ (Functor
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))),
+      @fapp0
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        F x)
+    _ _
+    (@comm_ring_psh_localization_locality_glue_restrict_functor_path
+      K O U s localization locality);
+
+// Component evaluation of the whole right cancellation path.
+symbol comm_ring_psh_localization_locality_restrict_glue_component_path
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization))
+  (matching : τ (Obj (@CommRingPshLocalizationMatching_cat K O U s)))
+  (element : τ (Obj (@CommRingPshInvertibilityElements_cat K O U s)))
+  : τ (@=
+      (Obj (@Fibre_cat
+        (@CommRingPshInvertibilityElements_cat K O U s)
+        (@comm_ring_psh_localization_matching_catd K O U s)
+        element))
+      (@piapp0
+        (@CommRingPshInvertibilityElements_cat K O U s)
+        (@comm_ring_psh_localization_matching_catd K O U s)
+        (@comm_ring_psh_localization_matching_section
+          K O U s localization
+          (@fapp0
+            (@CommRingPshLocalizationMatching_cat K O U s)
+            (Path_cat (@CommRingPshLocalizationCarrier
+              K O U s localization))
+            (@comm_ring_psh_localization_locality_glue_func
+              K O U s localization locality)
+            matching))
+        element)
+      (@piapp0
+        (@CommRingPshInvertibilityElements_cat K O U s)
+        (@comm_ring_psh_localization_matching_catd K O U s)
+        matching element))
+≔ @eq_ap
+    (Obj (@CommRingPshLocalizationMatching_cat K O U s))
+    (Obj (@Fibre_cat
+      (@CommRingPshInvertibilityElements_cat K O U s)
+      (@comm_ring_psh_localization_matching_catd K O U s)
+      element))
+    (λ m : τ (Obj (@CommRingPshLocalizationMatching_cat K O U s)),
+      @piapp0
+        (@CommRingPshInvertibilityElements_cat K O U s)
+        (@comm_ring_psh_localization_matching_catd K O U s)
+        m element)
+    _ _
+    (@eq_ap
+      (Obj (Functor_cat
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (@CommRingPshLocalizationMatching_cat K O U s)))
+      (Obj (@CommRingPshLocalizationMatching_cat K O U s))
+      (λ F : τ (Functor
+          (@CommRingPshLocalizationMatching_cat K O U s)
+          (@CommRingPshLocalizationMatching_cat K O U s)),
+        @fapp0
+          (@CommRingPshLocalizationMatching_cat K O U s)
+          (@CommRingPshLocalizationMatching_cat K O U s)
+          F matching)
+      _ _
+      (@comm_ring_psh_localization_locality_restrict_glue_functor_path
+        K O U s localization locality));
+
+// Compatibility view: evaluate whole locality into the earlier glue package.
+symbol comm_ring_psh_localization_locality_legacy_glue
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization))
+  : τ (@CommRingPshLocalizationGlue K O U s localization)
+≔ @comm_ring_psh_localization_glue_intro
+    K O U s localization
+    (@comm_ring_psh_localization_locality_glue_func
+      K O U s localization locality)
+    (@comm_ring_psh_localization_locality_glue_restrict_path
+      K O U s localization locality)
+    (@comm_ring_psh_localization_locality_restrict_glue_component_path
+      K O U s localization locality);

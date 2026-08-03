@@ -4975,6 +4975,125 @@ tranche should separately name the historical computational `D(f)`
 localization/glue behavior as a localization-locality capability. Calling
 that capability “stalk local rings” would overstate its current semantics.
 
+#### PSSS-11b — Whole affine localization locality
+
+The earlier `CommRingPshLocalizationGlue` package is useful computational
+evidence, but it is not yet the right final scheme-facing boundary. Its glue
+map is a genuine whole functor, so generic functor action already owns its
+action on matching arrows. Its retained inverse observations are nevertheless
+asymmetric: `glue(restrict(x)) = x` is stated pointwise on localization
+elements, while `restrict(glue(m))[e] = m[e]` is stated only after evaluating
+at one internal support element. Those observations should remain available,
+but a final locality field must first state equality of the two whole
+composite functors. Otherwise the package would still stop short of the
+internal equivalence required by the project SOP.
+
+The selected generic capability is therefore the transparent classifier
+
+```text
+CommRingPshLocalizationLocality(K,O,U,s,ell)
+  := OmegaEquivAlong Cat_cat
+       Path(O(U)[1/s]_ell)
+       Matching_O(s)
+       restrict_ell.
+```
+
+Here `restrict_ell` is the existing
+`comm_ring_psh_localization_matching_restriction_func`; no second restriction
+construction is introduced. Fixing it as the forward functor is important:
+the capability says that the already-computing restriction operation is an
+internal categorical equivalence, rather than merely asserting that the two
+endpoint categories happen to be equivalent. The selected left inverse of
+that `OmegaEquivAlong` witness is the glue functor. Its left cancellation law
+is exactly the whole-functor equation
+
+```text
+glue_ell o restrict_ell = id.
+```
+
+The active equality-valued `OmegaEquivAlong` record stores separate left and
+right inverse functors. The existing equality/hom-action extension already
+proves internally that they agree and that the selected left inverse also
+satisfies
+
+```text
+restrict_ell o glue_ell = id.
+```
+
+That theorem remains protected proof infrastructure. PSSS-11b exposes one
+transparent public Cat-level adapter at
+`emdash3_2_eq1_hom_action.lp`, routed through the existing proof, rather than
+duplicate its semantic body in the commutative-algebra module. This is a
+reusable consequence of any `OmegaEquivAlong Cat_cat`, not a Cartier-specific
+law. It adds no rewrite, unification rule, univalence principle, or new
+functor-equality axiom.
+
+Evaluating the two whole paths at an object, and then evaluating the matching
+path at an internal support element, derives the two observations retained by
+the old glue package. A transparent adapter constructs
+`CommRingPshLocalizationGlue` from the stronger whole capability. The old
+package is retained as a compatibility and computation view; it is not
+silently redefined and its previously validated consumers need not migrate in
+this tranche.
+
+The affine specialization is deliberately narrow:
+
+```text
+AffineCoordinateLocalizationLocality(R)
+  := Pi U : AffineSpecBigSlice_cat(R),
+     Pi s : O_coord(U),
+     Pi ell : CommRingLocalizationAt(O_coord(U),s),
+       CommRingPshLocalizationLocality(O_coord,U,s,ell).
+```
+
+For a literal chart `h : R -> S`, the existing affine-coordinate owners reduce
+the value and section endpoints to `S` and `s : S`, so the selected
+localization endpoint is the supplied `CommRingLocalizationAt(S,s)`. The
+capability remains stated on the coordinate presheaf because that is where
+restriction, localization, and overlap computation already live. The final
+affine-scheme package may pair it with the PSSS-11a whole `DefIso` presentation
+of the chosen structure sheaf; it must not replace that whole comparison with
+object-only transport fields.
+
+This capability is assumption-explicit. It does not yet construct locality
+for every affine coordinate presheaf, prove that `D(s)` covers `U`, or identify
+the big affine site with the small Zariski site. Because `D(s)` need not cover
+`U`, the name “localization locality” is intentional: this is the
+Cartier/Zeuner computation identifying sections on the selected basic-open
+support with the chosen localization, not ordinary covering-sieve sheaf
+descent and not a stalk-local-ring theorem. `OmegaEquivAlong` is appropriate
+because its inverse laws are propositional equalities of whole functors;
+`DefIso` would incorrectly demand judgmental cancellation.
+
+The full-import probe
+`tmp/probes/psss11b_whole_localization_descent.lp` first validated the complete
+shape. Promotion now supplies the generic fixed-forward classifier, selected
+whole glue functor, both whole composite laws, their point/component
+evaluations, the legacy adapter, the affine dependent-product capability, and
+literal-chart endpoints. Focused quiet and warning-enabled checks are green
+with exactly the inherited `1179 = 1020 + 159` warning inventory and no
+changed-file warning. The strict rule audit has zero unreviewed owners, and
+the synchronized catalog contains 1,992 checks in 90 areas with zero
+unclassified assertions.
+
+Exact-content health passes all 106 registered targets in 1059.644 summed
+check-seconds at source-metrics snapshot
+`sha256:5eed2e7250fc1b3aad8dcc4a66a150b7e69ef0ae069d06d000eab3309a23e8e3`
+and check-content snapshot
+`sha256:77f8c28fe6639ebb548093f63827f63afe64a1f982d2d10754b9f751ca5c20f2`.
+The generic equality owner, generic whole-locality owner, affine-locality
+source, equality reviewer, generic glue reviewer, and affine-locality reviewer
+pass in 5.429, 19.778, 7.831, 3.060, 7.437, and 31.558 seconds respectively.
+The central checks and final inherited affine-glue source/reviewer pass in
+57.890, 38.838, and 48.300 seconds under the ordinary 60-second limit. The
+resumable health run reused exact-snapshot successes after transient
+concurrent-load timeouts; no object priming or special Lambdapi flags were
+used. The proportional nonduplicative integration remainder is green through
+42 Python tests, five document-registry tests, health-snapshot verification,
+source TOC and active-reference/header lints, strict audit/catalog, and book
+evidence/typography/KaTeX/assembly checks. The authorized local checkpoint is
+the only remaining promotion gate.
+
 - consume the internally generated affine-Zariski topology and its derived
   selected-basic-open inclusion/leastness; retain supplied or primitive
   topology packages only as explicit alternative interfaces;
@@ -5756,6 +5875,21 @@ consumer demonstrates that nontransitive unification requires it.
   `affine_spec_coordinate_psh(R)` until computational descent proves that
   presheaf fixed, so PSSS-11 locality/subcanonicity remains independently
   necessary.
+- **PSSS-D-115:** represent the PSSS-11b computational Cartier boundary by a
+  fixed-forward whole `OmegaEquivAlong Cat_cat`. Its forward functor is the
+  existing localization-to-matching restriction functor, and its selected
+  left inverse is the whole glue functor. Expose the already-derived generic
+  theorem that this selected left inverse also satisfies the right whole-
+  functor cancellation law at the equality/hom-action owner; downstream
+  commutative-algebra code must not duplicate that proof. Derive the earlier
+  point/component glue laws and legacy package by evaluation of the two whole
+  paths. Specialize assumption-explicit locality to every chart, section, and
+  chosen localization of the computing affine coordinate presheaf, and join
+  it to the chosen structure sheaf later through the PSSS-11a whole `DefIso`.
+  Do not call this stalk-local-ring structure or ordinary sheaf descent:
+  `D(s)` need not cover the ambient chart. Do not strengthen the capability to
+  judgmental `DefIso`, add univalence, store external naturality fields, or
+  introduce a new rewrite/unification owner.
 
 ## 19. Side-Task Ledger
 
@@ -5807,7 +5941,8 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-10dG | Direct internally generated big-affine Zariski topology | Promoted 178-line/7-symbol rule-free source and 120-line/9-assertion reviewer; focused and exact inherited `1020 + 159` warnings, strict audit/catalog, tooling/authority sync, and exact 102-target health green; local checkpoint `a30f6dc` | Generic PSSS-09cGI intersection plus selected finite localization families and exact-endpoint affine chart arrows |
 | PSSS-10dS | Small-site topology and ringed-site comparison | Proposed later; not required by direct big-site MVP | Concrete small-site consumer plus PSSS-10dG/PSSS-08c1 comparison scope |
 | PSSS-11a | Whole assumption-explicit affine structure-sheaf presentation | Promoted 230-line/9-symbol rule-free source and 166-line/9-assertion reviewer; focused quiet/exact-warning/audit/catalog, 104-target exact-content health, and nonduplicative integration gates green; local checkpoint `5ead41c` | Checkpointed PSSS-10dG plus checkpointed PSSS-05c |
-| PSSS-11 | Scheme atlas | Active: PSSS-11a whole presentation, then narrowly named localization-locality capability and concrete records/examples | PSSS-11a checkpoint plus existing computational localization/glue owners |
+| PSSS-11b | Whole affine localization locality | Promoted source/reviewers, exact warning comparison, strict audit, 1,992-check catalog, 106-target exact-content health, and proportional integration green; local checkpoint pending | PSSS-11a checkpoint, existing localization restriction/matching owners, and the generic Cat-level selected-left-inverse right law |
+| PSSS-11 | Scheme atlas | Active: promote PSSS-11b, then package a concrete assumption-explicit affine scheme record/example | PSSS-11a checkpoint plus PSSS-11b |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 
 ## 20. Success Criteria For The Foundation Tranches
@@ -6286,6 +6421,35 @@ PSSS-11a is successful when:
    localization descent, a stalk-local-ring condition, small-site comparison,
    or a scheme; and
 7. focused source/reviewer checks, exact warning comparison, strict audit,
+   catalog/health synchronization, current authority prose, and the
+   proportional nonduplicative integration remainder are green before the
+   authorized local checkpoint.
+
+PSSS-11b is successful when:
+
+1. `CommRingPshLocalizationLocality(K,O,U,s,ell)` is exactly a transparent
+   `OmegaEquivAlong Cat_cat` whose fixed forward functor is the existing
+   localization matching-restriction functor;
+2. one public generic theorem at the equality/hom-action owner derives the
+   selected left inverse's right whole-functor law from existing
+   `OmegaEquivAlong` data, with no Cartier-specific duplicate proof;
+3. the selected glue is a whole functor and both
+   `glue o restrict = id` and `restrict o glue = id` are paths in the
+   appropriate whole functor categories;
+4. the earlier localization-element and support-component paths, and the
+   legacy `CommRingPshLocalizationGlue` package, are derived by evaluating
+   those whole paths rather than retained as substitute naturality fields;
+5. `AffineCoordinateLocalizationLocality(R)` quantifies over every big-affine
+   site object, coordinate section, and chosen localization, while literal
+   chart endpoints reduce to the retained ring and its chosen localization;
+6. comments and authorities distinguish selected `D(s)` localization
+   locality from covering-sieve sheaf descent, stalk-local-ring structure,
+   subcanonicity, small-site comparison, and an internally constructed
+   locality theorem;
+7. the tranche adds no rewrite, unification rule, univalence principle,
+   judgmental `DefIso`, duplicate identity/composition/naturality owner, or
+   external coherence field; and
+8. focused source/reviewer checks, exact warning comparison, strict audit,
    catalog/health synchronization, current authority prose, and the
    proportional nonduplicative integration remainder are green before the
    authorized local checkpoint.

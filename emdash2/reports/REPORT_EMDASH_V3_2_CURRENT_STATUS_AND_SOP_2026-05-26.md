@@ -171,16 +171,18 @@ detailed probe evidence.
   full fibre-covariance owner and adds no external naturality field. It
   supplies no inverse/glue, descent equivalence, sheafhood, limiting claim,
   generated topology, `Spec`, or scheme.
-- `emdash3_2_commutative_algebra_glue.lp`: one-way rule-free selected
-  Cartier-locality layer. It packages a genuine functor from internally
-  coherent matching families to the Path category of the chosen localization
-  carrier, together with a left-inverse path on localization elements and a
-  componentwise right-inverse path. At a literal support member, the latter
-  observes the selected localization factor applied to the glued element.
-  Generic functor action owns matching-arrow action; no external naturality
-  family is stored. The sieve `D(s)` need not cover, so this is not ordinary
-  sheaf descent or a native `OmegaEquivAlong`/whole internal equivalence;
-  generated topology, `Spec`, and schemes remain downstream.
+- `emdash3_2_commutative_algebra_glue.lp`: one-way rule-free whole
+  Cartier-locality layer. It retains the earlier genuine glue functor and its
+  point/component observations, then fixes the already-computing restriction
+  functor as an `OmegaEquivAlong Cat_cat`. The selected left inverse is one
+  whole glue functor with both whole composite-functor paths; evaluating those
+  paths derives the earlier compatibility package. At a literal support
+  member, the component endpoint observes the selected localization factor
+  applied to the glued element. Generic functor action owns matching-arrow
+  action; no external naturality family is stored. The sieve `D(s)` need not
+  cover, so this is not ordinary covering-sieve sheaf descent or a
+  stalk-local-ring theorem; generated topology, `Spec`, and schemes remain
+  downstream.
 - `emdash3_2_commutative_algebra_affine_glue.lp`: one-way rule-free derived
   affine consumer. For the identity CommRing presheaf on
   `Op_cat CommRing_cat`, it evaluates coherent matching sections at the
@@ -219,6 +221,16 @@ detailed probe evidence.
   naturality with object-only fields. The module does not construct
   sheafification, prove localization locality or a stalk-local-ring theorem,
   compare with the small site, or package a scheme.
+- `emdash3_2_commutative_algebra_affine_locality.lp`: one-way rule-free,
+  assumption-explicit affine coordinate-locality layer. It requires the
+  generic fixed-forward whole localization locality for every object of the
+  big affine slice, every coordinate section, and every supplied localization
+  package. Literal chart endpoints reduce to the retained ring and chosen
+  localization, and a transparent compatibility projection serves the
+  earlier component-view glue consumers. It makes no global localization
+  choice, does not construct locality, and does not claim covering-sieve
+  sheaf descent, stalk-local-ring structure, small-site comparison, or a
+  scheme.
 - `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
   functor-of-points/basic-open layer. The existing Yoneda presheaf represents
   `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and
@@ -2883,6 +2895,38 @@ synchronized implementation is included in local checkpoint `5ead41c`.
 Localization locality, any stalk-local-ring interpretation, small-site
 comparison, and the first scheme record remain PSSS-11 follow-ons rather than
 claims of this layer.
+
+PSSS-11b supplies the next whole computational boundary without converting
+the earlier component observations into an axiom. The strengthened
+`emdash3_2_commutative_algebra_glue.lp` defines
+`CommRingPshLocalizationLocality` as `OmegaEquivAlong Cat_cat` for the exact
+existing localization matching-restriction functor. Its selected left inverse
+is one whole glue functor. The existing transparent half-adjoint proof at the
+equality/hom-action owner now exposes the generic fact that this selected left
+inverse also satisfies the right whole-functor law; the commutative-algebra
+module therefore stores both whole paths without duplicating that proof.
+Their object/support evaluations derive the earlier glue package. The new
+rule-free `emdash3_2_commutative_algebra_affine_locality.lp` specializes this
+supplied capability over every big-affine coordinate section and chosen
+localization, with literal chart endpoints reducing to the retained ring and
+localization. Focused quiet and warning-enabled checks are green with exactly
+the inherited `1179 = 1020 + 159` warning inventory and no changed-file
+warning; the strict rule audit and 1,992-check/90-area catalog are synchronized.
+Exact-content health passes all 106 registered targets in 1059.644 summed
+check-seconds at source-metrics snapshot
+`sha256:5eed2e7250fc1b3aad8dcc4a66a150b7e69ef0ae069d06d000eab3309a23e8e3`
+and check-content snapshot
+`sha256:77f8c28fe6639ebb548093f63827f63afe64a1f982d2d10754b9f751ca5c20f2`.
+The new source/reviewer pass in 7.831/31.558 seconds; the central checks and
+final inherited affine-glue source/reviewer pass in 57.890/38.838/48.300
+seconds under the ordinary 60-second limit, with no object priming or special
+flags. The proportional nonduplicative integration remainder is green through
+42 Python tests, five document-registry tests, health-snapshot verification,
+source/report lints, strict audit/catalog, and book
+evidence/typography/KaTeX/assembly checks. The authorized local checkpoint is
+the final promotion gate. This is localization locality over `D(s)`, which
+need not cover, not ordinary sheaf descent, stalk-local-ring structure, or the
+final scheme package.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.

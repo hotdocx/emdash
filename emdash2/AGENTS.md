@@ -75,6 +75,8 @@ the direct internally generated big-affine Zariski-topology extension is
 the assumption-explicit affine reflective structure-sheaf presentation and
 whole coordinate-presheaf comparison extension is
 `emdash3_2_commutative_algebra_affine_ringed_sites.lp`;
+the whole affine coordinate localization-locality capability extension is
+`emdash3_2_commutative_algebra_affine_locality.lp`;
 the affine Yoneda functor-of-points, semantic basic-open, and
 localization-representability extension is
 `emdash3_2_commutative_algebra_affine_points.lp`;
@@ -98,7 +100,9 @@ Use the following order:
    presentations, and explicitly Cat-valued higher sieves;
 3. `emdash3_2_eq1_hom_action.lp` for the transparent derived native
    equality-valued
-   next-hom and groupoidality layer;
+   next-hom and groupoidality layer, including the reusable Cat-level theorem
+   that the selected left inverse of `OmegaEquivAlong` also satisfies the
+   right whole-functor law;
 4. `emdash3_2_eq1_evidence_property.lp` for transparent native equality-valued
    evidence-property, retract-truncation, and finite-`NCat` object-truncation
    theorems;
@@ -222,16 +226,19 @@ Use the following order:
    generic Pi/Catd/PathLift owners retain coherence and arrow action. It
    deliberately supplies no inverse/glue, descent equivalence, sheafhood,
    limiting claim, generated topology, `Spec`, or scheme;
-25. `emdash3_2_commutative_algebra_glue.lp` for selected computational
-   localization glue. It retains a genuine functor from the coherent matching
-   category to the localization's Path-valued carrier, a left-inverse law on
-   localization elements, and the componentwise Cartier law saying that
-   restriction after glue recovers every matching component. The module is
-   rule-free; generic functor action owns matching-arrow action. This is
-   basic-open locality over `D(s)`, which need not cover, not an ordinary
-   sheaf/descent claim or a native `OmegaEquivAlong`/whole internal
-   equivalence; the stricter computational `DefIso` is absent too. It
-   deliberately declares no generated topology, `Spec`, or scheme;
+25. `emdash3_2_commutative_algebra_glue.lp` for computational localization
+   glue. Its earlier compatibility package retains a genuine functor from the
+   coherent matching category to the localization's Path-valued carrier, a
+   left-inverse observation on localization elements, and the componentwise
+   Cartier observation. Its stronger fixed-forward
+   `CommRingPshLocalizationLocality` makes the existing restriction functor an
+   `OmegaEquivAlong Cat_cat`; the selected left inverse is one whole glue
+   functor with both whole composite-functor paths. Evaluating those paths
+   derives the compatibility package. The module is rule-free and generic
+   functor action owns matching-arrow action. This is basic-open locality over
+   `D(s)`, which need not cover, not ordinary covering-sieve sheaf descent or
+   a stalk-local-ring theorem; the stricter computational `DefIso` is absent.
+   It deliberately declares no generated topology, `Spec`, or scheme;
 26. `emdash3_2_commutative_algebra_affine_glue.lp` for the identity
    CommRing-valued presheaf on `Op_cat CommRing_cat` and the derived affine
    Cartier glue attached to every chosen localization. Evaluation at the
@@ -327,17 +334,26 @@ Use the following order:
     action or naturality. The module does not construct sheafification, prove
     localization locality or a stalk-local-ring condition, compare with the
     small site, or package a scheme;
-37. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+37. `emdash3_2_commutative_algebra_affine_locality.lp` for the rule-free,
+    assumption-explicit whole coordinate-locality capability on the
+    computational big affine slice. For every chart, coordinate section, and
+    supplied universal-property localization, it retains the generic
+    fixed-forward `CommRingPshLocalizationLocality`; literal chart endpoints
+    reduce to the retained ring and chosen localization. It makes no global
+    localization choice and does not call `D(s)` ordinary covering-sieve
+    descent, construct locality, impose a stalk-local-ring condition, compare
+    with the small site, or package a scheme;
+38. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-38. `emdash3_2_checks.lp` for executable regression statements;
-39. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+39. `emdash3_2_checks.lp` for executable regression statements;
+40. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-40. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-41. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+41. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+42. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-42. `reports/INDEX.md` for task-specific plans and decision records.
-43. `book/book.json` and `book/evidence.json` for book source
+43. `reports/INDEX.md` for task-specific plans and decision records.
+44. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

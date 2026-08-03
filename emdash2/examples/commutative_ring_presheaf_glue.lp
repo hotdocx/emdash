@@ -2,10 +2,12 @@
   Reviewer for selected computational localization glue.
 
   The generic checks exercise the selected functor, its internal arrow action,
-  both inverse observations, and the literal Cartier component equation.  The
-  zero-ring model derives actual glue data: its glue functor is constant at
-  tt, and Unit contractibility supplies both laws without a rewrite rule or a
-  postulated descent certificate.
+  both inverse observations, and the literal Cartier component equation. They
+  then assume the stronger fixed-forward locality witness and inspect both
+  whole composite-functor paths and its derived compatibility package. The
+  zero-ring model derives actual component-view glue data: its glue functor is
+  constant at tt, and Unit contractibility supplies both observed laws without
+  a rewrite rule. It does not claim the stronger whole locality witness.
 
   This is locality over D(s), which need not cover U.  The reviewer does not
   claim ordinary sheaf descent, a categorical DefIso, generated topology,
@@ -108,6 +110,85 @@ assert [K : Cat]
         (@comm_ring_psh_localization_matching_catd K O U s)
         matching
         (@comm_ring_psh_invertibility_element K O U s V f member)));
+
+// The stronger capability fixes the existing restriction as its forward functor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s)) ⊢
+  @CommRingPshLocalizationLocality K O U s localization
+  ≡ @OmegaEquivAlong
+      Cat_cat
+      (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+      (@CommRingPshLocalizationMatching_cat K O U s)
+      (@comm_ring_psh_localization_matching_restriction_func
+        K O U s localization);
+
+// Glue after restriction is equality of whole endofunctors.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization)) ⊢
+  @comm_ring_psh_localization_locality_glue_restrict_functor_path
+    K O U s localization locality
+  : τ (@=
+      (Obj (Functor_cat
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))))
+      (@comp_cat_fapp0
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@comm_ring_psh_localization_locality_glue_func
+          K O U s localization locality)
+        (@comm_ring_psh_localization_matching_restriction_func
+          K O U s localization))
+      (@id_func
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))));
+
+// Restriction after the same selected glue is also equality of whole functors.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization)) ⊢
+  @comm_ring_psh_localization_locality_restrict_glue_functor_path
+    K O U s localization locality
+  : τ (@=
+      (Obj (Functor_cat
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (@CommRingPshLocalizationMatching_cat K O U s)))
+      (@comp_cat_fapp0
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (@comm_ring_psh_localization_matching_restriction_func
+          K O U s localization)
+        (@comm_ring_psh_localization_locality_glue_func
+          K O U s localization locality))
+      (@id_func (@CommRingPshLocalizationMatching_cat K O U s)));
+
+// Whole locality derives the earlier component-view glue package.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization)) ⊢
+  @comm_ring_psh_localization_locality_legacy_glue
+    K O U s localization locality
+  : τ (@CommRingPshLocalizationGlue K O U s localization);
 
 // --------------------------------------------------------------------------
 // Derived nonempty zero-ring model.

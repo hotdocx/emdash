@@ -22032,6 +22032,100 @@ assert [K : Cat]
         (@comm_ring_psh_invertibility_element K O U s V f member)));
 /* End of the PSSS-08c0E localization-glue diagnostics. */
 
+// catalog-area: Whole localization locality
+// The generic selected left inverse has a whole right cancellation law.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F)) ⊢
+  @omega_equiv_along_cat_left_inv_right_law A B F u
+  : τ (@=
+      (Obj (Functor_cat B B))
+      (@comp_cat_fapp0
+        B A B
+        F
+        (@omega_equiv_along_left_inv Cat_cat A B F u))
+      (@id_func B));
+
+// The stronger capability fixes the existing restriction functor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s)) ⊢
+  @CommRingPshLocalizationLocality K O U s localization
+  ≡ @OmegaEquivAlong
+      Cat_cat
+      (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+      (@CommRingPshLocalizationMatching_cat K O U s)
+      (@comm_ring_psh_localization_matching_restriction_func
+        K O U s localization);
+
+// Glue after restriction is equality of whole endofunctors.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization)) ⊢
+  @comm_ring_psh_localization_locality_glue_restrict_functor_path
+    K O U s localization locality
+  : τ (@=
+      (Obj (Functor_cat
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))))
+      (@comp_cat_fapp0
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@comm_ring_psh_localization_locality_glue_func
+          K O U s localization locality)
+        (@comm_ring_psh_localization_matching_restriction_func
+          K O U s localization))
+      (@id_func
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))));
+
+// Restriction after the same selected glue is equality of whole endofunctors.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization)) ⊢
+  @comm_ring_psh_localization_locality_restrict_glue_functor_path
+    K O U s localization locality
+  : τ (@=
+      (Obj (Functor_cat
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (@CommRingPshLocalizationMatching_cat K O U s)))
+      (@comp_cat_fapp0
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (@comm_ring_psh_localization_matching_restriction_func
+          K O U s localization)
+        (@comm_ring_psh_localization_locality_glue_func
+          K O U s localization locality))
+      (@id_func (@CommRingPshLocalizationMatching_cat K O U s)));
+
+// Evaluating whole locality reconstructs the earlier component-view package.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization)) ⊢
+  @comm_ring_psh_localization_locality_legacy_glue
+    K O U s localization locality
+  : τ (@CommRingPshLocalizationGlue K O U s localization);
+/* End of the PSSS-11b generic whole-locality diagnostics. */
+
 // catalog-area: Computational affine Spec slice
 // Coordinate rings are an actual presheaf on the conventional big slice.
 assert (R : τ CommRing) ⊢

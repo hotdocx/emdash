@@ -1736,12 +1736,11 @@ source path action. No separate naturality square, identity proof, or
 composition proof is propagated through the public API. The closed zero-ring
 consumer evaluates the section to the actual restriction of `tt`.
 
-Only this localization-to-matching direction is active. Constructing a
-consumer-justified inverse/glue, proving its two laws, comparing the result to
-selected descent, and using it in affine restrictions and overlaps remain
-later computational gates. A general generated topology, truncation
-reflector, or sheafification construction is not a prerequisite for this
-direction and is not implied by it.
+This matching module itself owns only the localization-to-matching direction.
+The downstream glue/locality layer may accept a selected whole inverse and
+its laws without changing this construction. A general generated topology,
+truncation reflector, or sheafification construction is not a prerequisite
+for this direction and is not implied by it.
 
 The selected glue layer closes the next, specifically Cartier-locality,
 boundary. It is important not to confuse this with ordinary sheaf descent:
@@ -1754,8 +1753,8 @@ glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|).
 ```
 
 Thus every arrow between coherent matching families is mapped internally to
-an equality path between their glued localization elements. The selected data
-also retains
+an equality path between their glued localization elements. The earlier
+compatibility package also retains
 
 ```text
 glue_ell(restrict_ell(x)) = x
@@ -1775,24 +1774,44 @@ This is the computational content of the historical Cartier
 expressed entirely through active functor, Pi, and localization owners. The
 package and all its observations are transparent and rule-free. The derived
 zero-ring model takes glue to the constant functor at `tt`; Unit
-contractibility proves both laws, while the closed component theorem reaches
-the actual zero-presheaf restriction.
+contractibility proves both observed laws, while the closed component theorem
+reaches the actual zero-presheaf restriction. That model is intentionally not
+advertised as constructing the stronger whole capability below.
 
-The interface does not yet assert whole functor cancellation or a native
-`OmegaEquivAlong`; the stricter computational `DefIso` is absent too. Such a
-strengthening requires a consumer that needs full
-categorical inverse data rather than the current functorial glue and
-computational component observations. The bounded whole-comparison audit
-derives a genuine internal left cancellation transformation through
-`PiFunext`, `PathLift`, and the existing core-inclusion comparison. Turning
-that transformation into identity-type equality of whole functor objects—the
-input demanded by `OmegaEquivAlong Cat_cat`—is instead a functor-
-extensionality/univalence principle. On the right, coherent matching sections
-are internal `Pi_cat` objects, not decoded functions handled by the existing
-`PiFunext`; Path-valued section extensionality remains a named optional
-prerequisite. Neither boundary is hidden by an external naturality family or
-an equality rule, and neither is required merely to expose computing affine
-charts. `DefIso` remains a separate strict-computation notion.
+For a scheme-facing consumer, the stronger supplied boundary is
+
+```text
+CommRingPshLocalizationLocality(K,O,U,s,ell)
+  = OmegaEquivAlong Cat_cat
+      Path_cat(|O(U)[1/s]_ell|)
+      Matching_O(s)
+      restrict_ell.
+```
+
+The forward functor is fixed to the already-computing `restrict_ell`. The
+selected left inverse is `glue_ell`, and the two retained paths are equality
+of whole functor objects:
+
+```text
+glue_ell o restrict_ell = id
+restrict_ell o glue_ell = id.
+```
+
+The native `OmegaEquivAlong` data initially carries separate left and right
+inverse functors. The transparent equality/hom-action extension proves that
+they agree and publicly exposes the consequence that the selected left
+inverse also satisfies the right whole-functor law. Thus the commutative-
+algebra layer does not duplicate a half-adjoint proof. Evaluating the first
+whole path at a localization element and the second at a matching object and
+support element derives the earlier two observations; a transparent adapter
+reconstructs `CommRingPshLocalizationGlue` for its existing consumers.
+
+This whole locality is supplied capability data, not a theorem derived from
+the earlier component observations. The bounded whole-comparison audit
+correctly found that promoting those observations alone to equality of whole
+functor objects would require additional section/functor extensionality. No
+such extensionality, univalence, or equality rule is added here. Conversely,
+`DefIso` would demand judgmental cancellation and is therefore too strict.
 
 ### Computational Big Affine Spec Slice
 
@@ -1933,6 +1952,35 @@ constructs it. It also does not yet supply the historical `D(f)`
 localization/glue capability on the relative big site, a stalk-local-ring
 condition, a small-site comparison, or a scheme record. Those distinctions
 keep the next computational-locality tranche honest.
+
+### Assumption-Explicit Affine Coordinate Locality
+
+The next capability retains the whole locality above uniformly over the
+computing coordinate presheaf:
+
+```text
+AffineCoordinateLocalizationLocality(R)
+  = Pi U : AffineSpecBigSlice_cat(R),
+    Pi s : O_coord(U),
+    Pi ell : CommRingLocalizationAt(O_coord(U),s),
+      CommRingPshLocalizationLocality(O_coord,U,s,ell).
+```
+
+At a literal chart `h : R -> S`, `O_coord(h)` reduces to `S`, so the endpoint
+is the supplied localization `S[1/s]_ell` and the existing whole restriction
+functor. `affine_coordinate_localization_locality_at` exposes that selected
+whole equivalence. The compatibility operation
+`affine_coordinate_localization_legacy_glue` derives the earlier
+point/component glue package rather than postulating a second glue map.
+
+This is deliberately independent of the chosen PSSS-11a structure-sheaf
+presentation: the final scheme record can pair the computing coordinate
+locality with the whole `DefIso` relating that coordinate presheaf to its
+selected included sheaf. The capability quantifies over every localization
+package that is supplied; it does not make a global localization choice or
+construct an inhabitant. Since `D(s)` need not cover the ambient chart, this
+is Cartier/Zeuner localization locality, not ordinary covering-sieve descent,
+subcanonicity, or a stalk-local-ring theorem.
 
 ### Complementary-Idempotent Affine Atlas
 
@@ -4003,6 +4051,10 @@ kernel and one-way library vocabulary.
 | factor through a localization map | `CommRingLocalizationFactor iota h` |
 | localization property/package at `f` | `IsCommRingLocalizationAt R f L iota` / `CommRingLocalizationAt R f` |
 | chosen localization target/map | `comm_ring_localization_target` / `comm_ring_localization_map` |
+| internally coherent localization matching category/restriction | `CommRingPshLocalizationMatching_cat` / `comm_ring_psh_localization_matching_restriction_func` |
+| fixed-forward whole localization locality | `CommRingPshLocalizationLocality` |
+| selected whole glue and composite-functor paths | `comm_ring_psh_localization_locality_glue_func` / `comm_ring_psh_localization_locality_glue_restrict_functor_path` / `comm_ring_psh_localization_locality_restrict_glue_functor_path` |
+| compatibility view of whole locality | `comm_ring_psh_localization_locality_legacy_glue` |
 | identity localization of an already-unit element | `comm_ring_unit_identity_localization R f unit` |
 | canonical computing localization at one | `comm_ring_identity_localization_at_one R` |
 | canonical computing localization at zero | `comm_ring_zero_localization R` |
@@ -4033,6 +4085,8 @@ kernel and one-way library vocabulary.
 | exact generated-topology ringed site | `affine_structure_sheaf_ringed_site P` |
 | whole structure/coordinate comparison | `affine_structure_sheaf_coordinate_defiso P` |
 | chart components of that whole comparison | `affine_structure_sheaf_to_coordinate_at P U` / `affine_structure_sheaf_from_coordinate_at P U` |
+| whole affine coordinate localization locality | `AffineCoordinateLocalizationLocality R` / `affine_coordinate_localization_locality_at` |
+| affine compatibility glue view | `affine_coordinate_localization_legacy_glue` |
 | chosen affine basic-open arrow | `comm_ring_basic_open_arrow localization` |
 | basic-open base-change factor and triangle | `comm_ring_basic_open_base_change_factor_map` / `comm_ring_basic_open_base_change_triangle` |
 | elementwise basic-open pullback membership | `comm_ring_basic_open_pullback_membership` |

@@ -37,8 +37,17 @@ included structure presheaf to the computing coordinate presheaf. Its chart
 maps are components of those whole transformations, not external object-only
 comparison data. It constructs neither sheafification nor localization
 locality, a stalk-local-ring condition, a small-site comparison, or a scheme.
+`emdash3_2_commutative_algebra_affine_locality.lp` is the rule-free
+assumption-explicit whole coordinate-locality layer. For every big-affine
+chart, coordinate section, and supplied localization package, it retains the
+generic fixed-forward `CommRingPshLocalizationLocality`; literal chart
+endpoints reduce to the retained ring and chosen localization. It neither
+constructs locality nor claims covering-sieve descent, stalk-local-ring
+structure, small-site comparison, or a scheme.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
-derived native equality-valued hom-action/groupoidality extension, and
+derived native equality-valued hom-action/groupoidality extension. It also
+exposes the existing transparent Cat-level consequence that the selected left
+inverse of `OmegaEquivAlong` satisfies the right whole-functor law. The
 `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
 evidence-property and finite-`NCat` object-truncation extension.
 `emdash3_2_nat_arithmetic.lp` owns reusable Nat addition, associativity, and
@@ -159,18 +168,18 @@ application computes; PathLift supplies equality-path action and the Pi/Catd
 owners retain coherence internally. The module supplies only this restriction
 direction, not a glue/inverse, descent equivalence, sheaf, limiting claim,
 generated topology, `Spec`, or scheme.
-`emdash3_2_commutative_algebra_glue.lp` is the rule-free PSSS-08c0E selected
-Cartier-locality layer. It packages glue as a genuine functor from coherent
-matching families to the Path category of the chosen localization carrier,
-so matching-arrow action stays with the generic functor owner. One retained
-law computes glue after canonical restriction back to the localization
-element; the other says at every support element that restriction after glue
-recovers the matching component. At a literal `(V,f,m)` this is exactly the
-selected localization factor applied to the glued element. `D(s)` need not be
-covering, so this is not ordinary sheaf descent. A whole categorical
-`OmegaEquivAlong`/internal equivalence, generated topology, `Spec`, and
-schemes remain separate gates. The implementation and synchronized authority
-prose are locally checkpointed at `eb0c5b6`.
+`emdash3_2_commutative_algebra_glue.lp` began as the rule-free PSSS-08c0E
+selected Cartier-locality layer checkpointed at `eb0c5b6`. It retains glue as
+a genuine functor and the two point/component observations used by earlier
+consumers. PSSS-11b strengthens the same owner with
+`CommRingPshLocalizationLocality`: the existing restriction functor is fixed
+as the forward map of `OmegaEquivAlong Cat_cat`, its selected left inverse is
+one whole glue functor, and both whole composite-functor paths are retained.
+Evaluating those paths derives the earlier package; matching-arrow action
+stays with the generic functor owner. `D(s)` need not cover, so this remains
+Cartier/Zeuner localization locality rather than ordinary covering-sieve
+descent or stalk-local-ring structure. Generated topology, `Spec`, and schemes
+remain downstream.
 `emdash3_2_commutative_algebra_affine_glue.lp` is the PSSS-08c0I derived
 affine consumer. For the identity CommRing-valued presheaf on
 `Op_cat CommRing_cat`, it evaluates matching sections at the chosen
@@ -242,6 +251,32 @@ object priming or special flags. The synchronized implementation is included
 in local checkpoint `5ead41c`. The module does not construct sheafification,
 prove localization locality or a stalk-local-ring condition, compare with the
 small site, or package a scheme.
+`emdash3_2_commutative_algebra_affine_locality.lp` is the PSSS-11b affine
+specialization of whole computational localization locality. Its transparent
+dependent product ranges over every object of `AffineSpecBigSlice_cat(R)`,
+every section of `affine_spec_coordinate_psh(R)` there, and every supplied
+universal-property localization. The projected value is the generic
+fixed-forward `OmegaEquivAlong Cat_cat`, and literal chart endpoints reduce to
+`S` and `S[1/s]`. A compatibility projection derives the older glue package;
+no second glue operation, external naturality field, rule, or unifier is
+introduced. The capability is supplied rather than constructed and does not
+assert ordinary covering-sieve descent, a stalk-local-ring theorem, small-site
+comparison, or a scheme.
+Focused quiet and exact-warning checks are green with the inherited
+`1179 = 1020 + 159` inventory and no changed-file warning; the strict audit
+and 1,992-check/90-area catalog are synchronized. Exact-content health passes
+all 106 registered targets in 1059.644 summed check-seconds at source-metrics
+snapshot
+`sha256:5eed2e7250fc1b3aad8dcc4a66a150b7e69ef0ae069d06d000eab3309a23e8e3`
+and check-content snapshot
+`sha256:77f8c28fe6639ebb548093f63827f63afe64a1f982d2d10754b9f751ca5c20f2`.
+The new source/reviewer pass in 7.831/31.558 seconds and the final inherited
+affine-glue source/reviewer in 38.838/48.300 seconds under the ordinary
+60-second bound, without object priming or special flags. The proportional
+nonduplicative integration remainder is green through 42 Python tests, five
+document-registry tests, health-snapshot verification, source/report lints,
+strict audit/catalog, and book evidence/typography/KaTeX/assembly checks; only
+the local checkpoint remains pending.
 `emdash3_2_commutative_algebra_affine_atlas.lp` is the rule-free PSSS-10b
 concrete atlas consumer. In every product ring it uses the already-selected
 finite Zariski-cover package for `(1,0)` and `(0,1)`, derives their

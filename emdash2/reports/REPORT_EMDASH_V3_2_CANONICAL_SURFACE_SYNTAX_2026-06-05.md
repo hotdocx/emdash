@@ -593,7 +593,7 @@ not add external naturality squares to this notation, and do not call it a
 descent equivalence until a separately selected `glue_ell` and its laws have
 been constructed from a real consumer.
 
-The selected Cartier-locality glue may now be written
+The compatibility view of selected Cartier-locality glue may be written
 
 ```text
 glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|)
@@ -610,8 +610,28 @@ ordinary functor, so its action on arrows between matching families remains
 with generic `fapp1`; the displayed equalities are retained paths, not new
 rewrite rules or external naturality fields. This notation expresses selected
 locality over the basic-open sieve `D_O(s)`, which need not cover `U`. It does
-not by itself name ordinary sheaf descent, a native `OmegaEquivAlong`/whole
-internal equivalence, a generated topology, `Spec`, or a scheme.
+not by itself name ordinary sheaf descent, a generated topology, `Spec`, or a
+scheme.
+
+The stronger whole locality capability may be written
+
+```text
+LocLocal_O(s;ell)         : restrict_ell is a fixed-forward whole equivalence
+glue^Loc_ell              : selected whole inverse functor
+glue^Loc_ell o restrict_ell = id
+restrict_ell o glue^Loc_ell = id.
+```
+
+The literal owners are `CommRingPshLocalizationLocality`,
+`comm_ring_psh_localization_locality_glue_func`,
+`comm_ring_psh_localization_locality_glue_restrict_functor_path`, and
+`comm_ring_psh_localization_locality_restrict_glue_functor_path`. The
+classifier is exactly `OmegaEquivAlong Cat_cat` with the existing restriction
+functor fixed as its forward map. The transparent
+`comm_ring_psh_localization_locality_legacy_glue` adapter derives the earlier
+point/component package by evaluating the whole paths. Do not read
+`LocLocal` as judgmental `DefIso`, ordinary covering-sieve descent, or a
+stalk-local-ring condition; `D_O(s)` need not cover `U`.
 
 For the separately promoted finite-family layer, comments and examples may
 write
@@ -707,6 +727,23 @@ components projected from whole transformations, so their action and
 naturality remain at the generic owners. This notation supplies neither a
 construction of sheafification nor localization locality, a stalk-local-ring
 condition, a small-site comparison, or a complete scheme.
+
+For supplied whole locality of the computing affine coordinate presheaf,
+comments and examples may write
+
+```text
+AffCoordLocal(R;L)        : whole coordinate-locality capability
+L[U,s,ell]                : fixed-forward LocLocal at one selected localization
+```
+
+The literal owners are `AffineCoordinateLocalizationLocality` and
+`affine_coordinate_localization_locality_at`. At a literal chart `R -> S`,
+the value endpoint computes to `S` and the selected target to `S[1/s]_ell`.
+`affine_coordinate_localization_legacy_glue` is only the compatibility view
+for earlier component-glue consumers. This notation assumes the whole
+locality capability; it does not construct one, choose localizations globally,
+assert that `D(s)` covers the chart, impose stalk locality, identify the small
+site, or package a scheme.
 
 For the universal-property polynomial layer, comments and examples may write
 
