@@ -1304,7 +1304,7 @@ rollback and equivalence oracles.
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | complete; read-only architecture audit | completed 1B/1B2 | Both compact terms recheck unchanged under their expanded facades. Select shared scoped contextual factorization with thin expanded/compact wrappers; literal current-method reuse is blocked only by the absent open-fibre representation. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
 | `COMPOSITIONAL-FD-EXPANDED-1C` | final-focused-green at `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1` | completed 0C; D-076; existing first-hom runtime bridge | Construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))` share the compact `:^fd` factorer, preserve byte-identical Core, expose closed fibre object/arrow action, and retain the ordinary `Transf_cat` facade. |
 | `COMPOSITIONAL-ND-EXPANDED-1D` | final-focused-green at `b89420d442536544185e8ab5dbe6876bd9980b96` | green 1C; completed audit; D-077 | The existing open `indexed-functor` endpoints and compact point factorer implement literal expanded `lambda^n k. lambda^n a`; the result retains the ordinary iterated-Hom facade, byte-identical compact Core, and internally owned component/base/higher action. |
-| `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | implemented and final-focused-green; rollback-safe checkpoint pending | graduated direct typed API; D-077 checkpoint; D-078 | Exactly two expected contracts and thin resolver routes now expose expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a` text. Existing grammar, neutral resolution, typed methods, and compact factorers are reused; no parser/checker/Core/kernel semantics changed. |
+| `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | final-focused-green at `7f7d201948e5f035e516f6fb15554a1aea26029d` | graduated direct typed API; D-077 checkpoint; D-078 | Exactly two expected contracts and thin resolver routes now expose expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a` text. Existing grammar, neutral resolution, typed methods, and compact factorers are reused; no parser/checker/Core/kernel semantics changed. |
 | `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` | candidate read-only successor after D-078 checkpoint | final-green fixed/open compilers and exact compact/expanded Core parity | Compare the two recursive body algebras and select only sound classifier-indexed sharing. Preserve distinct target classifiers and authorize no refactor until an exact proposal is frozen and reviewed. |
 
 ## Explicit Non-Claims
@@ -1449,8 +1449,10 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
   6/6, nearest predecessors pass 24/24 in parallel, and all static gates pass.
   The one required root aggregate was run once; its non-green result remains
   confined to the pre-existing kernel pin/count and README-wrap families and
-  must not be repeated. The next candidate is a read-only classifier-directed
-  functorial bracket audit, not an authorized behavior refactor.
+  must not be repeated. Exact rollback-safe semantic checkpoint:
+  `7f7d201948e5f035e516f6fb15554a1aea26029d`. The next candidate is a read-only
+  classifier-directed functorial bracket audit, not an authorized behavior
+  refactor.
 
 - **2026-08-02 — D-DTTLF-USABILITY-078 approved.** A separate review of exact
   proposal checkpoint `19ec1adb1bd2ee3288338e7069759549c1f282a8`

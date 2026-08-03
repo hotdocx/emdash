@@ -87,8 +87,8 @@
 > `lambda^f` retain distinct target classifiers and wrappers. The next
 > candidate is therefore a read-only classifier-directed bracket audit to
 > identify sound recursive code sharing—not a standalone functorial-type-
-> theory kernel or an authorized behavior refactor. A rollback-safe semantic
-> checkpoint is pending.
+> theory kernel or an authorized behavior refactor. Exact rollback-safe
+> semantic checkpoint: `7f7d201948e5f035e516f6fb15554a1aea26029d`.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
