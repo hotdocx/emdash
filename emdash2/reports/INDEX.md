@@ -48,7 +48,8 @@ set-truncated sequential telescope for one endomap, with dependent induction,
 derived whole cocone universality, and a computing shift inverse. This is the
 selected successor-localization model for a future principal-BNat sieve
 consumer; it is not yet an ordinary-sieve proof, whole presheaf reflector,
-sheafification, or CommRing lift. The eventual reflector remains the
+sheafification, or CommRing lift. This per-object tranche is checkpointed at
+`451db48`. The eventual reflector remains the
 PSSS-05d/PSSS-D-114 uniform free localization of the whole presheaf category
 at descent maps, not Tabareau's auxiliary HoTT coequalizer and not one
 monolithic sheafification HIT.

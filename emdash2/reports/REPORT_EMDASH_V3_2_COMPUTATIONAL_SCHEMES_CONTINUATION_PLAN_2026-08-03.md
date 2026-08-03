@@ -1246,7 +1246,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/localization sheafification | The topology-to-local-object tranche is checkpointed at `5e7505e`. The first genuine per-object HIT is now implemented by the sequential telescope: point/path constructors, dependent induction, point beta, derived path beta, derived whole cocone universal property, and a computing shift inverse for the localized transition. Principal-BNat ordinary-sieve evidence and whole-presheaf/unit assembly remain next; no reflector or sheafification claim is made yet. | Ordinary principal-sieve proof, whole BNat presheaf and unit, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
+| CS-12 | Constructed native categorical-HIT/localization sheafification | The topology-to-local-object tranche is checkpointed at `5e7505e`; the first genuine per-object sequential-HIT localization is checkpointed at `451db48`, with point/path constructors, dependent induction, point beta, derived path beta, derived whole cocone universal property, and a computing shift inverse. Principal-BNat ordinary-sieve evidence and whole-presheaf/unit assembly remain next; no reflector or sheafification claim is made yet. | Ordinary principal-sieve proof, whole BNat presheaf and unit, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
 ## 13. CS-01 Success Criteria
@@ -2178,7 +2178,8 @@ metrics snapshot is
 and checked-content snapshot is
 `sha256:d74dbbbb5f7546d70d0720ffaa3524bbdb185784709662962a65ade0dbcfdac4`.
 No full CI, examples aggregate, root aggregate, push, merge, publication,
-history rewrite, or worktree cleanup was performed.
+history rewrite, or worktree cleanup was performed.  The local implementation
+checkpoint is `451db48` (`feat: add telescope localization HIT`).
 
 The next CS-12 gate is not another generic HIT.  It is the bridge from this
 one-map localization to the selected small site: prove the principal BNat
