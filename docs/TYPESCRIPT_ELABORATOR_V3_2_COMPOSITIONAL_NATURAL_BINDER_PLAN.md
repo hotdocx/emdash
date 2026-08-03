@@ -71,6 +71,11 @@ qualified weakening. The selected next candidate is therefore a bounded
 read-only scope audit for reusing that existing displayed backend from the
 compact and open-displayed wrappers. No behavior refactor is yet authorized.
 
+The exact 1F proposal is now frozen at
+`69b285b033a7da1458ff04788d39d7a2231a9e35` and independently approved under
+[`D-DTTLF-USABILITY-079`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D079_REVIEW.md).
+Its ten-item implementation is dependency-ready.
+
 ## Objective
 
 Determine and qualify a reusable ordinary-natural abstraction architecture:
@@ -1456,7 +1461,7 @@ delegation with immediate human supersession before editing behavior.
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | final-focused-green at `7f7d201948e5f035e516f6fb15554a1aea26029d` | graduated direct typed API; D-077 checkpoint; D-078 | Exactly two expected contracts and thin resolver routes now expose expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a` text. Existing grammar, neutral resolution, typed methods, and compact factorers are reused; no parser/checker/Core/kernel semantics changed. |
 | `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` | complete; read-only | final-green fixed/open compilers and exact compact/expanded Core parity | Fixed and displayed recursive algebras are distinct. One-binding `displayedContextLambda` nevertheless proves exact four-case Core/type parity with the narrow compact factorer, selecting displayed-only consolidation rather than an erased universal compiler. |
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` | complete; read-only; exact 1F proposal frozen below | completed 0E; existing `compileDisplayedContextual`; 4/4 exact one-binding parity; fixed-evaluation consumer/action probe | `compileDisplayedContextual` is the smallest existing engine. The sole gap is profile-gated routing from compact/open wrappers; no kernel owner or universal fixed/displayed traversal is needed. |
-| `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` | exact proposal frozen; D-079 review pending | completed 0F; historical base-profile preservation | Reuse the existing recursive displayed compiler only in contextual-enabled profiles, preserve all old fast paths, and graduate fixed evaluation plus a fibre diagonal with exact compact/expanded parity and internal action. |
+| `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` | approved under D-079; implementation dependency-ready | completed 0F; proposal `69b285b033a7da1458ff04788d39d7a2231a9e35`; historical base-profile preservation | Reuse the existing recursive displayed compiler only in contextual-enabled profiles, preserve all old fast paths, and graduate fixed evaluation plus a fibre diagonal with exact compact/expanded parity and internal action. |
 
 ## Explicit Non-Claims
 
@@ -1604,11 +1609,29 @@ behavior edit, independently review exact gate
 immediate human supersession. Implement only the ten numbered items if that
 review approves them.
 
+Treat exact proposal checkpoint
+`69b285b033a7da1458ff04788d39d7a2231a9e35` as independently approved by
+D-079 under the standing unattended delegation, with immediate human
+supersession. Implement only its ten numbered items, beginning with the
+profile-gated recursive fallback and focused parity matrix. Do not broaden the
+historical contract or any text/browser/kernel boundary.
+
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-02 — D-DTTLF-USABILITY-079 approved.** Independent review of
+  proposal checkpoint `69b285b033a7da1458ff04788d39d7a2231a9e35` confirms
+  that `compileDisplayedContextual` is the existing internally coherent
+  engine, the contextual profile gate preserves the frozen base contract, the
+  old fast-path ordering preserves exact historical evidence, and explicit
+  nonlocal-usage rejection protects scope. The fixed-evaluation and diagonal
+  consumers exercise application and contraction already owned by that
+  engine. Under the standing unattended delegation with immediate human
+  supersession, approve exactly the ten-item 1F implementation and no
+  text/browser/kernel/transfer expansion.
 
 - **2026-08-02 — H-DTTLF-USABILITY-DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-01
   proposal frozen.** The completed 0F audit selects the existing
