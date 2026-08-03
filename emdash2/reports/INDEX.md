@@ -1,6 +1,17 @@
 # EMDASH Reports Index
 
-Date: 2026-08-01
+Date: 2026-08-03
+
+`REPORT_EMDASH_V3_2_COMPUTATIONAL_SCHEMES_CONTINUATION_PLAN_2026-08-03.md`
+is the active living continuation after the checkpointed affine MVP. It
+separates Zariski sheaf locality, locally-ringed invertibility support, and
+basic-open coordinate-localization locality; selects a global-first
+finite-qcqs presentation direction whose overlaps are derived internally;
+keeps atlas-first gluing separate; corrects small/big-site equivalence to
+scoped restriction/basis comparisons; and stages semantic schemes separately
+from their computational presentations. Its CS-01 first tranche is a
+rule-free global reflective ringed-object cover substrate, not yet an affine
+atlas or scheme.
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_presheaves.lp` is the one-way
@@ -29,6 +40,15 @@ CommRing-valued presheaf; the qualifier records that an ordinary ringed site
 need not carry a chosen reflector.
 It constructs no canonical sheafification, double-plus, generated topology,
 descent theorem, left exactness, local-ring condition, or scheme.
+`emdash3_2_commutative_algebra_ringed_space_covers.lp` is the rule-free CS-01
+global-first cover substrate. It retains one reflective CommRinged site, one
+distinguished base object, one ordinary covering sieve there, and the cover
+evidence in the site's selected topology. Cover pullback along any arrow is
+derived directly by Grothendieck stability. A selected member exposes its
+restriction-total object, domain, arrow, and pulled-back covering sieve; it is
+called a cover chart without asserting affineness. The module stores no
+component naturality, overlap, or cocycle field and claims neither finiteness,
+locally-ringed support, a scheme, nor effective gluing.
 `emdash3_2_commutative_algebra_affine_ringed_sites.lp` is the rule-free first
 affine consumer of that supplied-reflector layer and of the internally
 generated big-affine Zariski topology. It retains one supplied reflective

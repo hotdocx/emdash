@@ -1813,6 +1813,42 @@ functor objects would require additional section/functor extensionality. No
 such extensionality, univalence, or equality rule is added here. Conversely,
 `DefIso` would demand judgmental cancellation and is therefore too strict.
 
+### Global Reflective CommRinged Objects And Covers
+
+The first non-affine continuation deliberately stops before affineness or a
+scheme record. On a fixed base category `K`, it packages
+
+```text
+ReflectiveCommRingedSpaceCover(K)
+  = Sigma A : ReflectiveCommRingedSite(K),
+    Sigma X : Obj(K),
+    Sigma R : Sieve_K(X),
+      Covers(topology(A),R).
+```
+
+The distinguished `X` supplies a global-first object and `R` supplies a
+selected covering atlas in sieve form. The included structure presheaf is
+routed through `A`; it is not copied into the package. For every arrow
+`f : V -> X`, the existing Grothendieck-stability theorem constructs
+
+```text
+Covers(topology(A),f^*R).
+```
+
+An actual selected cover chart is the dependent pair of a restriction-total
+object `(V,f)` and evidence that it belongs to `R`. Its domain and arrow are
+the existing `into_restr_domain` and `into_restr_arrow` projections. Pulling
+the global cover back along that arrow gives the chart's internally derived
+overlap cover; later pairwise overlap candidates are members of this
+pullback. No external overlap square or cocycle family is stored.
+
+This package does not say that the cover is finite or that any member is
+affine. A later affine-realization capability must compare the ambient chart
+restriction honestly with an affine presentation; merely attaching an
+unrelated ring would not establish affineness. Locally-ringed support,
+finite-qcqs selection, gluing realization, and a scheme category remain
+separate downstream gates.
+
 ### Computational Big Affine Spec Slice
 
 The first scheme-facing facade is the conventional big affine slice

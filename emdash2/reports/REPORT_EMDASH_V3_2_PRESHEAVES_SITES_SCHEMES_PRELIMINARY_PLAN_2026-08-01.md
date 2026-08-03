@@ -5198,6 +5198,19 @@ at `68578be`.
 
 ##### Scope clarification, historical comparison, and non-affine continuation
 
+**2026-08-03 continuation correction.** The dedicated living
+`REPORT_EMDASH_V3_2_COMPUTATIONAL_SCHEMES_CONTINUATION_PLAN_2026-08-03.md`
+supersedes this subsection's former proposal to store overlap/cocycle
+witnesses in the ordinary non-affine presentation and its phrase
+*small/big-site equivalence*. The selected direction is global-first: begin
+with a global reflective ringed object and selected cover, derive pullback
+overlap covers internally, and require an honest whole affine comparison for
+each chart before calling the result a scheme presentation. Explicit overlap
+and cocycle data belong to the separate atlas-first gluing constructor. Site
+work is now scoped as small/big restriction and affine/principal-open basis
+comparison, while the three distinct locality notions remain separately
+named. The affine checkpoint and the historical analysis below remain valid.
+
 The two supplied fields of `AffineSchemePresentation(R)` have deliberately
 narrow contracts.
 
@@ -6090,16 +6103,18 @@ consumer demonstrates that nontransitive unification requires it.
   stalk-local-ring theorem. Treat the TypeScript structure macro only as a
   later authoring convenience.
 - **PSSS-D-117:** keep the non-affine continuation separate from
-  `AffineSchemePresentation`. The first candidate is assumption-explicit: an
-  ambient reflective CommRing-ringed site, a selected covering atlas,
-  pullback/slice ringed presentations carrying affine chart presentations,
-  and whole overlap/cocycle witnesses. Probe whether the existing slice and
-  sheafification owners construct the required pullback capability before
-  fixing the record. Use gluing of two explicit affine charts along a
-  computing localization equivalence as the first consumer. Treat canonical
-  effective gluing, a category of schemes, stalk-local-ring theorems,
-  constructed sheafification, and small/big-site equivalence as later
-  research boundaries rather than opaque MVP fields.
+  `AffineSchemePresentation`. This historical decision is refined and
+  superseded by CS-D-001 through CS-D-012 in
+  `REPORT_EMDASH_V3_2_COMPUTATIONAL_SCHEMES_CONTINUATION_PLAN_2026-08-03.md`.
+  The first implementation is the rule-free global reflective ringed-object
+  plus selected-cover substrate and its internally derived pullback cover.
+  Only after a pullback/restriction owner probe may a global-first finite-qcqs
+  presentation attach honest whole affine chart comparisons. Its overlaps and
+  cocycles are derived from the global object; explicit overlap/cocycle data
+  are reserved for a separate atlas-first gluing constructor. Keep
+  coordinate-localization locality distinct from sheaf descent and
+  locally-ringed support, and replace the old small/big equivalence wording by
+  scoped restriction and affine-basis comparisons.
 
 ## 19. Side-Task Ledger
 
@@ -6154,7 +6169,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-11b | Whole affine localization locality | Promoted source/reviewers, exact warning comparison, strict audit, 1,992-check catalog, 106-target exact-content health, and proportional integration green; local checkpoint `8216f28` | PSSS-11a checkpoint, existing localization restriction/matching owners, and the generic Cat-level selected-left-inverse right law |
 | PSSS-11c | Thin affine-scheme presentation and concrete computing example | Promoted 101-line/8-symbol rule-free source and 194-line/14-assertion `F2 x F2` reviewer; focused/exact-warning/audit/catalog, exact 108-target health, and proportional nonduplicative integration green; local checkpoint `68578be` | PSSS-11a and PSSS-11b checkpoints plus the PSSS-10b concrete atlas |
 | PSSS-11 | Scheme atlas | Affine MVP complete: PSSS-11c checkpointed and historical/feasibility retrospective recorded; general non-affine implementation remains separately gated by PSSS-D-117 | PSSS-11c |
-| PSSS-11d | Assumption-explicit non-affine presentation and first explicit two-affine gluing consumer | Proposed next gate; architectural feasibility high, canonical construction explicitly out of scope | Pullback/slice reflective-ringed-site owner probe plus checkpointed PSSS-11c |
+| PSSS-11d | Global-first non-affine continuation and later atlas-first gluing | Routed to the dedicated 2026-08-03 computational-schemes plan; CS-01 global selected-cover substrate is the first gate, while explicit two-affine gluing is later | Checkpointed PSSS-11c, then CS-01 and the pullback/restriction affine-chart owner probe |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 
 ## 20. Success Criteria For The Foundation Tranches

@@ -56,6 +56,14 @@ detailed probe evidence.
   inclusion. It does not construct canonical sheafification, generated
   saturation, descent or left exactness, impose a local-ring condition, or
   define a scheme.
+- `emdash3_2_commutative_algebra_ringed_space_covers.lp`: downstream one-way,
+  rule-free global-cover substrate. It retains a reflective CommRinged site,
+  a distinguished object of its base category, and an ordinary sieve covering
+  that object in the retained topology. The existing Grothendieck-stability
+  owner derives covering pullbacks along every arrow, while selected sieve
+  members expose their actual restriction arrows. It does not assert that a
+  cover is finite or affine, impose locally-ringed support, store overlap or
+  cocycle fields, define a scheme, or construct gluing.
 - `emdash3_2_nat_arithmetic.lp`: one-way reusable Nat arithmetic/sethood
   module. It owns `nat_add`, the canonical `NatSucc_func`, the associativity
   theorem, the Unit/Empty proposition witnesses, and `nat_is_set` without

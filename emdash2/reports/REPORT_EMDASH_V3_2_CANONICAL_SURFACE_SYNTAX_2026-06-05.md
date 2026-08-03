@@ -706,6 +706,25 @@ whole localization map. `BigZar` names the promoted big-site topology; it
 does not identify that site with the small poset of opens, construct a
 reflector/sheafification, or denote a complete scheme.
 
+For a global reflective CommRinged object with a selected cover, comments may
+write
+
+```text
+RingedCover_K(A;X,R,c)    : reflective ringed object X with covering sieve R
+Chart(P;V,f,m)            : selected member (V,f) of the covering sieve
+f^*R                      : pulled-back cover on V
+Cover(f^*R)               : coverhood derived by Grothendieck stability
+```
+
+The literal owners are `ReflectiveCommRingedSpaceCover`,
+`reflective_comm_ringed_space_cover_intro`,
+`ReflectiveCommRingedSpaceCoverChart`, and
+`reflective_comm_ringed_space_cover_chart_pullback_covers`. A `Chart` here is
+only an actual member of the selected covering sieve; the notation does not
+assert affineness. Members of `f^*R` are the global-first overlap candidates,
+so no independent overlap or cocycle field is implied. The package also does
+not imply finiteness, locally-ringed support, a scheme, or effective gluing.
+
 For a supplied affine reflective structure-sheaf presentation, comments and
 examples may write
 
