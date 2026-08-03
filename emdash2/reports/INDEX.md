@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-08-02
+Date: 2026-08-03
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
@@ -75,6 +75,17 @@ validation ledger is
 `../../docs/TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`.
 Varying `Transf_catd` classifiers and unrestricted `lambda^nd` synthesis
 remain separate consumer-led work.
+
+The 2026-08-03 mixed-curry retirement removes the unused contextual-curry and
+specialized mixed-curry packages formerly in active sections 17f/17g, their
+dedicated diagnostics, and one vacuous cross-area assertion. Direct nested
+binders and every independently consumed generic Sigma/Pi, pullback,
+section-action, product/action, `Unit_prof`, and displayed-Hom prerequisite
+remain active. Git checkpoints preserve the experiment as recoverable
+evidence; the retirement narrows the trusted rewrite surface and does not
+claim mathematical impossibility. See the retirement plan under Audits And
+Retirements and the living mixed-introduction ledger for the supersession
+record.
 
 ## Recently Completed Plan Ledgers
 
@@ -721,6 +732,10 @@ but their promoted phases are not open implementation plans.
 
 ## Audits And Retirements
 
+- `../../docs/TYPESCRIPT_ELABORATOR_V3_2_MIXED_CURRY_RETIREMENT_PLAN.md`:
+  completed D-DTTLF-USABILITY-083 audit and bounded implementation record for
+  retiring the unused active contextual/mixed-curry experiment while
+  preserving generic foundations, direct binders, and Git recovery evidence.
 - `REPORT_EMDASH_V2_RETIREMENT_AUDIT_2026-06-16.md`: audit for retiring the
   obsolete v2 baseline and consolidated v2 report.
 

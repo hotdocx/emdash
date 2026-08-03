@@ -512,9 +512,10 @@ of `X` use opposite constant-family bases because `Functor_catd` is
 contravariant in its source and covariant in its target; their fibres are
 definitionally the same ordinary category. This notation is qualified to a
 constant middle. It neither coerces a general positive family into a negative
-one nor denotes mixed curry. The nested binders themselves remain the
-fundamental introduction form, and the generic `fapp`/`tapp` calculus owns
-the resulting object, arrow, base-arrow, and higher action.
+one nor denotes the retired mixed-curry experiment. The nested binders
+themselves remain the fundamental introduction form, and the generic
+`fapp`/`tapp` calculus owns the resulting object, arrow, base-arrow, and higher
+action.
 
 ## Transformations
 

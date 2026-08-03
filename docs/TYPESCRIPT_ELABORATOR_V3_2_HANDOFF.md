@@ -7,6 +7,16 @@
 > PathOut/PathInd work to the separately deferred trusted-profile and derived-
 > library plan:
 > [`TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md).
+> The bounded post-completion
+> [`MIXED-CURRY-RETIREMENT`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_CURRY_RETIREMENT_PLAN.md)
+> cleanup under D-DTTLF-USABILITY-083 is final-green. It removes the unused
+> active 17f/17g contextual/mixed-curry experiment and its dedicated
+> diagnostics. It retains
+> the generic Sigma/Pi, pullback, section-action, product/action, and direct
+> binder foundations. The direct nested `lambda^n`/`lambda^f`, compact
+> `lambda^fd`, and compact/expanded `lambda^nd` architecture and public
+> behavior are unchanged; the retired experiment remains recoverable from its
+> recorded Git checkpoints and plan history.
 > The
 > preceding `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` /
 > D-DTTLF-USABILITY-082 product slice is implemented and final-green at the
@@ -437,6 +447,12 @@
 > end-user target remains direct recursive
 > `lambda^n k. lambda^f c. lambda^f a. t`; a total-context section may be an
 > internal compilation form but is not a required user argument.
+> D-DTTLF-USABILITY-083 subsequently retires this auxiliary experiment and
+> D-040's specialized mixed-curry facade from the active trusted kernel because
+> neither acquired a selected TypeScript, book, or public-surface consumer.
+> That retirement supersedes their active status, not their historical
+> feasibility evidence or mathematical meaning. Direct binder introduction
+> and every independently consumed generic prerequisite remain active.
 > `DIRECT-MIXED-INTRODUCTION-0C` is now audit-complete: exact eta bypasses
 > curry, and the genuinely recursive mapped body
 > `G[k](F[k](c)(a))` factors through the existing coherent action of

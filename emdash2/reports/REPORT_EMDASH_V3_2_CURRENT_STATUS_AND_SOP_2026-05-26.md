@@ -1952,6 +1952,19 @@ pullback, and internal Pi action. Ordinary weakening `Const_func_func` is a
 stable ordinary owner separate from the proof-time-only displayed
 `const_section_func` facade.
 
+On 2026-08-03 the unused contextual/mixed-curry experiment formerly in
+sections 17f/17g was retired under D-DTTLF-USABILITY-083. No TypeScript,
+book, or public-surface consumer selected those opaque packages after direct
+nested `lambda^n`/`lambda^f`, compact `lambda^fd`, and compact/expanded
+`lambda^nd` introduction graduated. Generic Sigma/Pi, pullback,
+totalization, product/action, section-action, `Unit_prof`, `Hom_catd`,
+`Functor_catd`, `Transf_catd`, and direct-binder owners remain active. The
+retired code and checks remain recoverable at their recorded Git checkpoints;
+retirement is a trusted-surface cleanup, not a mathematical impossibility
+claim. Warning comparison decreases only retired-rule interactions, from
+1,097 to 1,086 unjoinable critical pairs, while replaceable-pattern warnings
+remain 159 and the strict LHS audit remains zero unreviewed clauses.
+
 ### Section 18: Cat-valued profunctors and computational comparison
 
 `Prof_cat(A,B)` is the primitive fixed-endpoint category of Cat-valued
