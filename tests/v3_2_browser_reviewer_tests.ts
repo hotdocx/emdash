@@ -118,14 +118,19 @@ const directCompilation = (
             const K = program.category('review_K');
             const E = program.displayedFamily('review_E', K);
             const D = program.displayedFamily('review_D', K);
+            const Q = program.displayedFamily('review_Q', K);
             const FF = program.displayedFunctor('review_FF', E, D);
+            const GG = program.displayedFunctor('review_GG', D, Q);
             const s = program.section('review_s', E);
             return program.compile(program.dependentLambda(
                 'k',
-                D,
+                Q,
                 k => program.apply(
-                    program.apply(FF, k),
-                    program.apply(s, k)
+                    program.apply(GG, k),
+                    program.apply(
+                        program.apply(FF, k),
+                        program.apply(s, k)
+                    )
                 )
             ));
         }
@@ -440,6 +445,52 @@ const collectLocalClosure = (
 };
 
 describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
+    it('promotes the recursive indexed-section chain without widening semantics', () => {
+        const preset = CORE_BROWSER_REVIEWER_PRESETS.find(
+            candidate => candidate.id === 'indexed-section-composition'
+        );
+        assert.notEqual(preset, undefined);
+        assert.equal(preset?.label, 'Recursive indexed composition');
+        assert.equal(
+            preset?.source,
+            'λ^n k : K. (GG k) ((FF k) (s k))'
+        );
+
+        const result = runCoreBrowserReviewerText({
+            presetId: 'indexed-section-composition',
+            source: preset?.source as string
+        });
+        assert.equal(result.status, 'accepted');
+        if (result.status !== 'accepted') return;
+        const direct = directCompilation('indexed-section-composition');
+        assert.equal(result.explicitCore, direct.explicitCore);
+        assert.equal(result.inferredType, direct.explicitInferredType);
+        assert.equal(result.expectedType, direct.explicitExpectedType);
+        assert.deepEqual(
+            result.structuralPrerequisites,
+            direct.structuralPrerequisites
+        );
+        assert.equal(result.expectedMode.kind, 'dependent-section');
+        if (result.expectedMode.kind === 'dependent-section') {
+            assert.equal(result.expectedMode.target, 'Q');
+        }
+        assertDeepFrozen(result);
+
+        const rejected = runCoreBrowserReviewerText({
+            presetId: 'indexed-section-composition',
+            source: 'λ^n k : K. (GG k) (s k)',
+            sourceFile: 'section-chain-reviewer-input.emdash'
+        });
+        assert.equal(rejected.status, 'rejected');
+        if (rejected.status !== 'rejected') return;
+        assert.equal(rejected.diagnostic.phase, 'resolution');
+        assert.equal(
+            rejected.diagnostic.span.file,
+            'section-chain-reviewer-input.emdash'
+        );
+        assertDeepFrozen(rejected);
+    });
+
     it('executes the dependent natural telescope preset on chain-2A', () => {
         const result = runCoreBrowserReviewerText({
             presetId: 'displayed-dependent-transformation',
@@ -594,7 +645,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
     it('publishes the exact deeply frozen capability boundary', () => {
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.revision,
-            'CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP-BROWSER-REVIEWER-1'
+            'DEPENDENT-SECTION-CHAIN-REVIEWER-1AT-BROWSER-REVIEWER-1'
         );
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.fullReportExecution,
@@ -619,6 +670,11 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         assert.ok(
             CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
                 'qualified depth-generic finite Hom-category recursion'
+            )
+        );
+        assert.ok(
+            CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
+                'arbitrary finite rigid indexed-section action chains'
             )
         );
         assert.ok(
@@ -720,6 +776,10 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
             'emdash-template/README.md',
             'utf8'
         );
+        const externalReview = readFileSync(
+            'docs/TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md',
+            'utf8'
+        );
         const rootPackage = JSON.parse(
             readFileSync('package.json', 'utf8')
         ) as { readonly scripts: Readonly<Record<string, string>> };
@@ -753,6 +813,14 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         assert.match(rootReadme, /depth-generic finite/u);
         assert.match(rootReadme, /general mixed\s+introduction\/curry/u);
         assert.match(fixtureReadme, /twelve editable/u);
+        assert.doesNotMatch(fixtureReadme, /ten editable/u);
+        assert.match(
+            fixtureReadme,
+            /λ\^n k : K\. \(GG k\) \(\(FF k\) \(s k\)\)/u
+        );
+        assert.match(externalReview, /twelve reviewed presets/u);
+        assert.match(externalReview, /Recursive Hom over functors/u);
+        assert.match(externalReview, /Dependent natural telescope/u);
         assert.match(fixtureReadme, /unsupported variance DAGs/u);
         assert.equal(
             rootPackage.scripts['check:browser-directed'],

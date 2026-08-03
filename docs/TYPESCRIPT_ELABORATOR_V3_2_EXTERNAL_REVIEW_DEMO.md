@@ -49,7 +49,7 @@ mathematical authority and an optional development-time conformance oracle.
 
 ## What Is Executable
 
-The browser's editable categorical view exposes these ten reviewed presets:
+The browser's editable categorical view exposes these twelve reviewed presets:
 
 | Preset | Source |
 | --- | --- |
@@ -57,11 +57,13 @@ The browser's editable categorical view exposes these ten reviewed presets:
 | Nested functorial exchange | `λ^f x : A. λ^f y : B. E y x` |
 | Fixed inner evaluation | `λ^f x. F x y0` |
 | Whole Hom action | `G pA` |
-| Natural indexed composition | `λ^n k : K. (FF k) (s k)` |
+| Recursive indexed composition | `λ^n k : K. (GG k) ((FF k) (s k))` |
 | Displayed functor composition | `λ^fd a : E. GG (FF a)` |
 | Displayed weakening | `λ^fd a : E. s (indexOf a)` |
 | Displayed sibling pairing | `λ^fd (b : B, c : C). fibrePair (FF b) (GG c)` |
 | Displayed mixed telescope | `λ^fd (a : A; b : B, c : C; d : D). fibrePair b c` |
+| Recursive Hom over functors | `id (hom (hom (functor A B) F G) alpha beta)` |
+| Dependent natural telescope | `λ^nd (a : A; b : B). eta (fibrePair a b)` |
 | Displayed natural composition | `λ^nd k : K. composeCells (theta k) (eta k)` |
 
 Each successful request reports readable source, explicit emdash Core,

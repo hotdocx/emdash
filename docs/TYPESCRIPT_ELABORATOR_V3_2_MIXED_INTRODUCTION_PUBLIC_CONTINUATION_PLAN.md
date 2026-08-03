@@ -568,7 +568,8 @@ It deliberately avoids:
 | `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` | complete; read-only; zero behavior delta | graduated compositional-natural subplan; active kernel/check examples; current public AST and reviewer | Existing reviewer/book binder bodies are covered except multi-constructor integration programs such as arrow induction. The one bounded class-(3) gap is the current checked-negative finite section chain `lambda^n k. GG[k](FF[k](s[k]))`; generic `comp_fapp0` already owns its internal action. |
 | `DEPENDENT-SECTION-CHAIN-1AR` | implemented and final-focused-green under D-081; local semantic checkpoint follows review checkpoint `485237e1eeb200b9248a1aeebf42f2755fd27403` | completed 0AQ; immutable proposal `48394a2005cd8b483ae2de56f070c14d0826d7fd`; existing `USABILITY-DEPENDENT-1A` one-layer factorer; existing displayed-functor finite-chain evidence | One structural factorer accepts a rigid section leaf under any finite nonempty chain of exact same-base displayed-functor fibre applications and folds inner-to-outer only through existing `comp_fapp0 (Catd_cat K)`. Two- and three-layer direct evidence, inherited text parity, and existing `piapp1_fapp0` action are green. One-layer Core and fail-closed boundaries remain intact; no owner, transport surface, or general section-action eliminator was added. |
 | `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` | complete; read-only; zero behavior delta; reviewer promotion selected | final-focused-green 1AR; current reviewer/book examples; active PathOut/PathInd authority; existing public Sigma/transport routes | The recursive rigid section-chain envelope is exact and internally owns point/base-arrow action. Full arrow induction remains feasible but is a multi-constructor integration program, not one missing binder. Promote the already-checked two-layer chain through the existing browser preset before opening that larger program. |
-| `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` | reviewed-approved under D-082; implementation dependency-ready | completed 0AS; final-focused-green 1AR; immutable proposal `e82bcf77af965e09137e9ff10cb3c5c962b23283`; separate review under standing unattended delegation | Replace only the existing one-layer indexed-section preset with a two-layer recursive chain, preserve the preset ID and semantic engines, synchronize the two stale public preset inventories, and validate only the focused reviewer/build boundary. Add no semantic owner, parser route, aggregate run, deployment, or arrow-induction API. |
+| `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` | implemented and final-green under D-082; local product checkpoint follows review checkpoint `f6ac84eabb5bcfb6f47c13985e0d293fd8c04521` | completed 0AS; final-focused-green 1AR; immutable proposal `e82bcf77af965e09137e9ff10cb3c5c962b23283`; separate review; 10/10 focused reviewer tests; typecheck/lint/build | The existing indexed-section preset now demonstrates the two-layer recursive chain with exact direct/text Core and classifier parity. All twelve IDs and semantic engines remain unchanged; the two stale ten-preset inventories are synchronized. No semantic owner, parser route, aggregate, kernel check, deployment, or arrow-induction API was added. |
+| `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` | dependency-ready read-only architecture/consumer audit | final-green 1AT; active PathOut/PathInd implementation and checks; existing TypeScript Sigma/transport/section APIs and transfer profiles | Draw the exact authority-to-public-construction dependency graph for one fixed-source path-induction witness. Distinguish reusable public routes, transfer-only declarations, and genuinely absent compositional facades; select at most one vertical successor or a dedicated integration plan. Change no behavior and run no aggregate. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -840,6 +841,55 @@ from immutable proposal checkpoint
 `e82bcf77af965e09137e9ff10cb3c5c962b23283` under the standing unattended-
 review delegation with immediate human supersession. Implementation may now
 begin within the exact eight-item gate.
+
+## `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` Implementation Result
+
+The approved product promotion is complete without a semantic widening:
+
+1. The existing `indexed-section-composition` ID now presents
+   `lambda^n k : K. (GG k) ((FF k) (s k))`, with `E`, `D`, `Q`, `FF`, `GG`,
+   and `s` in the same expected-type-directed fixture. Its expected target is
+   exactly `Q`.
+2. The direct mirror constructs the same nested typed applications under the
+   existing `dependentLambda`. The reviewer reports exact direct/text Core,
+   inferred and expected classifiers, structural prerequisites, and checked
+   computation. Applying `GG[k]` directly to `s[k]` is rejected as an
+   incompatible intermediate family.
+3. The deeply frozen revision now records the qualified arbitrary-finite
+   rigid indexed-section action-chain boundary. All twelve preset IDs, the UI
+   route, lazy-load boundary, Core/checker/runtime, and active-kernel semantics
+   are unchanged.
+4. The external-review guide and standalone fixture README now truthfully say
+   twelve presets, show the recursive indexed example, and include the two
+   already-existing presets omitted by the stale ten-row inventory. The
+   book's intentional one-layer base example remains untouched.
+
+Proportional evidence is green: 10/10 in the focused browser-reviewer suite,
+root typecheck, changed-file lint, standalone Vite production build, and diff
+hygiene. The build retains its existing advisory large-lazy-chunk warning. No
+root aggregate or kernel check was run, as neither affected boundary changed.
+
+## `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU`
+
+Perform one zero-edit consumer architecture audit:
+
+1. Start from the active `PathOut_cat`/`PathInd` symbols and their fixed-source,
+   component, displayed, and transitivity checks; do not reconstruct the
+   mathematics from the TypeScript prototype.
+2. Map one smallest fixed-source path-induction witness onto current public
+   TypeScript constructions: category/family formation, representable family,
+   section, substitution/transport, Sigma pairing/arrows, and required generic
+   action.
+3. Mark each dependency as already public and compositional, available only in
+   a transfer/runtime profile, or absent from the public categorical program.
+   Treat a missing convenience facade differently from a missing semantic
+   owner.
+4. Select at most one vertical implementation slice whose output is visible
+   in a reviewer or executable demo, or freeze a dedicated integration plan if
+   the minimal honest witness crosses several independent gates.
+
+This audit changes no behavior, runs no aggregate, promotes no owner by naming
+symmetry, and does not resume whole-library scale qualification.
 
 ## Frozen First Gate
 
@@ -8331,10 +8381,17 @@ representable-family/transport/Sigma integration demo and selects the exact
 next bounded consumer slice. Its separate immutable review approves exactly
 the proposal at checkpoint `e82bcf77af965e09137e9ff10cb3c5c962b23283`
 under the standing unattended-review delegation with immediate human
-supersession. Implement only the existing indexed-section reviewer preset, its
-direct mirror and focused tests, one revision/boundary statement, and the two
-stale public preset inventories. Add no semantic branch, owner, aggregate,
-deployment, or arrow-induction API.
+supersession. Treat its implementation as final-green at the local product
+checkpoint following review checkpoint
+`f6ac84eabb5bcfb6f47c13985e0d293fd8c04521`: the existing preset now presents
+the two-layer recursive chain, all twelve IDs and semantic engines remain
+unchanged, the two stale public inventories are synchronized, and the focused
+reviewer/typecheck/lint/build gates pass. No aggregate or kernel check was
+rerun. Continue with the zero-edit
+`PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` consumer architecture audit. Select
+at most one reviewer-visible vertical successor or freeze a dedicated
+integration plan; add no behavior during the audit and do not resume bulk
+scale qualification.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -8352,6 +8409,18 @@ removal, or unrelated cleanup is authorized.
 ```
 
 ## Decision Ledger
+
+- **2026-08-03 — `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` implemented and final-
+  green.** The existing indexed-section preset now presents the checked two-
+  layer `GG[k](FF[k](s[k]))` chain and compares exactly with its direct
+  `CoreCategoricalProgram` mirror at target `Q`. One wrong intermediate family
+  is rejected. All twelve preset IDs and semantic engines remain unchanged;
+  the deeply frozen boundary records only the qualified finite rigid section-
+  action claim; and the external-review guide plus fixture README now carry a
+  truthful twelve-preset inventory. Focused reviewer 10/10, root typecheck,
+  changed-file lint, production build, and diff hygiene are green. No
+  aggregate, kernel check, deployment, push, or merge was performed. The next
+  row is the zero-edit `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` audit.
 
 - **2026-08-03 — D-DTTLF-USABILITY-082 separately reviewed-approved.** The
   immutable review of proposal checkpoint

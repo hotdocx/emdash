@@ -2,10 +2,12 @@
 
 > **Current continuation (2026-08-03):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
-> owns the next work through the reviewed-approved
-> `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` / D-DTTLF-USABILITY-082 product
-> slice. Its immutable review approves only the exact proposal checkpoint
-> `e82bcf77af965e09137e9ff10cb3c5c962b23283`. The preceding
+> owns the next work through the zero-edit
+> `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` consumer architecture audit. The
+> preceding `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` /
+> D-DTTLF-USABILITY-082 product slice is implemented and final-green at the
+> local checkpoint following immutable review checkpoint
+> `f6ac84eabb5bcfb6f47c13985e0d293fd8c04521`. The preceding
 > `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` audit is complete with zero behavior
 > delta. Its completed semantic chain
 > includes
@@ -186,7 +188,15 @@
 > D-DTTLF-USABILITY-082 gate is independently approved by
 > [`D-DTTLF-USABILITY-082`](./TYPESCRIPT_ELABORATOR_V3_2_DEPENDENT_SECTION_CHAIN_REVIEWER_D082_REVIEW.md)
 > under the standing unattended-review delegation with immediate human
-> supersession. Implementation is dependency-ready. Exact earlier
+> supersession. Implementation is complete: the existing browser preset now
+> presents the two-layer recursive section chain with exact direct/text parity,
+> all twelve preset IDs and semantic engines remain unchanged, the two stale
+> public inventories are repaired, and the focused reviewer/typecheck/lint/
+> build gates are green. No aggregate, kernel check, or deployment was run.
+> The dependency-ready continuation is the zero-edit
+> `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` audit, which must select at most one
+> reviewer-visible vertical successor or freeze a dedicated integration plan
+> before behavior. Exact earlier
 > proposal checkpoint:
 > `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; exact 1G rollback-safe
 > semantic checkpoint: `f1993c2852b91173858bc2ecdf1d00998517dcaf`.

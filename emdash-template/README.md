@@ -4,7 +4,7 @@ This directory contains the static React/Vite reviewer interface for the
 TypeScript emdash v3.2 implementation. It consolidates four existing
 ingredients into one client-side journey:
 
-1. ten editable categorical examples across the reviewed `^f`, `^n`, `^fd`,
+1. twelve editable categorical examples across the reviewed `^f`, `^n`, `^fd`,
    and `^nd` modes;
 2. the checked outer-LF, ordinary-functorial, and genuinely displayed
    three-panel research report;
@@ -17,7 +17,7 @@ Representative expression presets include:
 λ^f x. (H x) (K x)
 λ^f x. F x y0
 G pA
-λ^n k : K. (FF k) (s k)
+λ^n k : K. (GG k) ((FF k) (s k))
 λ^fd (a : A; b : B, c : C; d : D). fibrePair b c
 λ^nd k : K. composeCells (theta k) (eta k)
 ```

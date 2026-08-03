@@ -28,7 +28,7 @@ import {
 } from './product_review_demo';
 
 export const CORE_BROWSER_REVIEWER_REVISION =
-    'CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP-BROWSER-REVIEWER-1' as const;
+    'DEPENDENT-SECTION-CHAIN-REVIEWER-1AT-BROWSER-REVIEWER-1' as const;
 
 export type CoreBrowserReviewerPresetId =
     | 'pointwise-application'
@@ -65,7 +65,7 @@ export type CoreBrowserReviewerExpectedMode =
         readonly kind: 'dependent-section';
         readonly binderMode: 'n';
         readonly base: 'K';
-        readonly target: 'D';
+        readonly target: 'Q';
     }
     | {
         readonly kind: 'displayed-functor';
@@ -256,21 +256,22 @@ readonly CoreBrowserReviewerPreset[] = deepFreeze([
     },
     {
         id: 'indexed-section-composition',
-        label: 'Natural indexed composition',
-        source: 'λ^n k : K. (FF k) (s k)',
+        label: 'Recursive indexed composition',
+        source: 'λ^n k : K. (GG k) ((FF k) (s k))',
         description:
-            'A natural base binder recursively composes a displayed ' +
-            'functor action with an indexed section.',
+            'A natural base binder recursively composes a finite rigid ' +
+            'displayed-functor chain with an indexed section.',
         expectedMode: {
             kind: 'dependent-section',
             binderMode: 'n',
             base: 'K',
-            target: 'D'
+            target: 'Q'
         },
         assumptions: [
             'K : Cat',
-            'E, D : Catd K',
+            'E, D, Q : Catd K',
             'FF : Functord E D',
+            'GG : Functord D Q',
             's : Π k :^n K, E[k]'
         ]
     },
@@ -444,6 +445,7 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
         'finite canonical sibling/Sigma contextual displayed-natural ' +
             'abstraction',
         'qualified depth-generic finite Hom-category recursion',
+        'arbitrary finite rigid indexed-section action chains',
         'edited categorical text with source diagnostics',
         'existing outer-LF, ordinary, and displayed three-panel report',
         'generated emdash book',
@@ -581,7 +583,9 @@ const createFixture = (
         const K = program.category('review_K');
         const E = program.displayedFamily('review_E', K);
         const D = program.displayedFamily('review_D', K);
+        const Q = program.displayedFamily('review_Q', K);
         const FF = program.displayedFunctor('review_FF', E, D);
+        const GG = program.displayedFunctor('review_GG', D, Q);
         const s = program.section('review_s', E);
         return Object.freeze({
             program,
@@ -589,13 +593,15 @@ const createFixture = (
                 categoryBinding('K', K),
                 familyBinding('E', E),
                 familyBinding('D', D),
+                familyBinding('Q', Q),
                 termBinding('FF', FF),
+                termBinding('GG', GG),
                 termBinding('s', s)
             ]),
             expected: {
                 kind: 'dependent-section' as const,
                 base: K,
-                target: D
+                target: Q
             }
         });
     }
