@@ -20,7 +20,9 @@ itself assumed a slice site, an adjoint site morphism/comorphism, sheaf
 pullback, and a sheafification/glue base-change comparison. It routes the next
 whole contract through locally exact/Beck--Chevalley site squares and keeps a
 categorical-HIT reflector construction separate from induced topology and
-slice base change.
+slice base change. Local exactness is the semantic construction criterion;
+the prospective computational interface retains whole functors and one whole
+invertible mate, never a family of external commutative-square equations.
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_presheaves.lp` is the one-way

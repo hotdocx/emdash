@@ -162,7 +162,9 @@ cocontinuity/adjoint hypotheses. Its v3.2 analogue should be a whole
 functorial comparison or mate/Beck--Chevalley capability, not a global rewrite
 between opaque sheaf objects. The precise `DefIso` versus
 `OmegaEquivAlong`/whole-transformation representation remains consumer- and
-normal-form-gated.
+normal-form-gated. *Locally exact square* is a semantic criterion for proving
+that this whole mate is invertible; it is not a proposal to store explicit
+commutative-square equations in a scheme or site record.
 
 ### 3.2 What a categorical-HIT sheafification would and would not solve
 
@@ -227,9 +229,13 @@ treated as one undifferentiated prerequisite list:
 The initial inspection of the first paper changes one architectural emphasis:
 the sought comparison should not be called generic *naturality of glue*.
 It is more precisely a sheafified Beck--Chevalley or locally-exact-square
-condition between extension/restriction operations. That condition belongs to
-one whole double-cell/mate owner. It must not be expanded into a family of
-external component squares.
+condition between extension/restriction operations. The semantic development
+may formulate and prove local exactness of a site square, but the computational
+interface should expose the resulting whole sheaf-restriction functor and
+invertible whole mate. A natural transformation is already a whole internal
+emdash object, so its naturality and all evaluated component squares remain at
+the generic transformation owners. Neither the site record nor each scheme
+presentation should carry a family of external component equations.
 
 ## 4. Three Locality Notions
 
@@ -503,8 +509,9 @@ against the morphism/comorphism distinction and locally exact squares. It
 must determine whether the slice projection and its right adjoint form:
 
 - an ordinary site morphism/comorphism pair sufficient for the consumer;
-- a whole locally exact square whose sheafified Beck--Chevalley comparison is
-  the required glue/base-change law; or
+- a whole sheafified Beck--Chevalley/mate capability, semantically justified
+  by a locally exact site square, that supplies the required glue/base-change
+  law without storing component square equations; or
 - only in a genuinely nonrepresentable case, a distributor of sites.
 
 CS-05a is a contract and owner-position audit, not authorization to port the
@@ -655,6 +662,12 @@ restriction/sheaf comparison or smuggling it into an opaque name.
   adequately by whole functors. No new external component naturality or
   commutative-square family follows from adopting the double-categorical
   view.
+- **CS-D-017 — Semantic criterion versus computational interface:** local
+  exactness is a metatheoretic or construction-time condition showing that a
+  sheafified mate is invertible. The public kernel capability retains the
+  selected whole functors and that one whole invertible transformation or
+  comparison. Generic transfor action owns its naturality; ordinary scheme
+  records do not retain local-exactness derivations or component equations.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -670,7 +683,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-03 | Generic finite-cover presentation audit | Proposed | Non-affine finite-atlas consumer |
 | CS-04 | Whole ambient chart-slice restriction and supplied reflective-slice presentation | Complete and locally checkpointed at `7d63a90`; induced topology/reflector transport remains a separate CS-05 input question | CS-01 plus existing Sigma, opposite, functor-composition, and reflective-site owners |
 | CS-05 | Honest affine chart realization over an ambient restriction | Next design gate; actual ambient slice presheaf is available, while base/site and topology comparison remain open | CS-04 and affine checkpoint |
-| CS-05a | Historical site-morphism and modern morphism/comorphism/locally-exact contract audit | In progress; historical four-layer factorization and first literature routing recorded, with no kernel API selected yet | CS-04 plus a concrete affine-chart target |
+| CS-05a | Historical site-morphism and modern morphism/comorphism/locally-exact contract audit | Positive whole-owner type probe complete; semantic strength and public capability selection remain consumer-gated | CS-04 plus a concrete affine-chart target |
 | CS-06 | Global-first finite-qcqs `SchemePresentation(X)` | Proposed | CS-02/CS-03/CS-05 contracts |
 | CS-07 | Supplied global two-chart non-affine reviewer | Proposed first non-affine consumer | CS-06 |
 | CS-08 | Atlas-first two-affine gluing constructor | Later | Whole open-overlap input plus realization/universal property |
@@ -884,6 +897,53 @@ Even in the fourth case, induced slice topology and the sheafified
 Beck--Chevalley/base-change theorem remain independent obligations. This audit
 changes plan architecture and literature routing only; it adds no Lambdapi
 symbol, rule, unifier, external naturality field, or new semantic claim.
+
+### 13.4 CS-05a whole-interface probe — 2026-08-03
+
+The focused probe `tmp/probes/cs05a_site_basis_contract.lp` passes under the
+ordinary 60-second limit; its recorded log is
+`logs/probes/cs05a_site_basis_contract-20260803-023839.log`. It establishes the
+following typed architecture without promoting source:
+
+1. the honest general orientation is a selected whole affine-basis functor
+   `i : AffineSpecBigSlice_cat(R) -> Slice_cat(K,U)`, not an asserted
+   equivalence of those underlying categories;
+2. ordinary opposite-precomposition supplies a whole presheaf restriction
+   functor between the corresponding functor categories;
+3. a supplied sheaf-restriction functor can be related to presheaf
+   restriction by one `IsoEvidence` between **whole composite functors**;
+4. the historical sheafification-pullback rule has a well-typed successor as
+   one `IsoEvidence` between the two whole sheafification/base-change
+   composites;
+5. comparison-lemma strength, when justified, is separately expressible as
+   `OmegaEquivAlong Cat_cat` for the selected whole sheaf-restriction functor;
+   and
+6. independently of those semantic strengths, the actual ambient structure
+   presheaf restricted along `i` keeps computing values and can be joined by
+   one whole `DefIso` to an existing `AffineSchemePresentation(R)`. Composing
+   with the affine scheme's existing `DefIso` yields a whole computational
+   comparison directly to `affine_spec_coordinate_psh(R)`.
+
+Items 3 and 4 contain transformations and inverse laws at the functor-category
+owner. They are not a list of objectwise commutative squares. Evaluating them
+at an object is a derived observation, while naturality and higher action stay
+inside the generic emdash calculus. The phrase *locally exact square* remains
+the semantic theorem that can construct item 4 for a concrete site square; it
+is not a proposed field family in the computational interface.
+
+The probe also reveals why an equivalence of the raw slice category with the
+big affine slice would overstate the general case. For a site of all schemes
+over `U`, the affine objects form a basis or dense subsite rather than every
+object. A strict category equivalence is available only in specially chosen
+ambient affine-only presentations. The future interface should support the
+basis functor plus a sheaf/topos comparison and allow the identity/equivalence
+special case to reduce through it.
+
+No public symbol is promoted from this probe yet. The remaining selection is
+whether the first consumer needs only the direct whole computational `DefIso`,
+also a sheaf-category basis equivalence, or the stronger sheafification
+base-change mate used to transport generic glue. This is a semantic-strength
+choice, not a typing or internal-naturality blocker.
 
 ## 14. Validation And Checkpoint Contract
 
