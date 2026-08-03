@@ -43,16 +43,27 @@ restriction on the supplied slice `K/X` and pairs it with the binary affine
 atlas as a conservative locally-ringed affine-cover presentation. Public
 `SchemePresentation` naming remains gated by an admissible-open or relative-
 geometry contract for the selected cover arrows. The
-CS-12 now supplies the first concrete per-object categorical HIT: a
-set-truncated sequential telescope for one endomap, with dependent induction,
-derived whole cocone universality, and a computing shift inverse. This is the
-selected successor-localization model for a future principal-BNat sieve
-consumer; it is not yet an ordinary-sieve proof, whole presheaf reflector,
-sheafification, or CommRing lift. This per-object tranche is checkpointed at
-`451db48`. The eventual reflector remains the
-PSSS-05d/PSSS-D-114 uniform free localization of the whole presheaf category
-at descent maps, not Tabareau's auxiliary HoTT coequalizer and not one
-monolithic sheafification HIT.
+CS-12 supplies two distinct boundaries.  Its checkpointed set-truncated
+sequential telescope for one endomap has dependent induction, derived whole
+cocone universality, and a computing shift inverse; it remains valid reusable
+one-map localization evidence at `451db48`.  A subsequent visual review of
+Pédrot's *Pursuing Shtuck* and *Debunking Sheaves* corrected the active
+sequencing: the principal-BNat ordinary-sieve bridge is frozen and unpromoted,
+while the direct constructed-sheaf route now starts with a recursive whole-
+presheaf `eta/glue/silent` cover completion.  Whole maps from extended sieves
+carry matching compatibility internally; the silent path enforces the
+separated quotient.  Its local-target eliminator and whole Hom universal
+property must be implemented before it is called a sheafification reflector.
+Dialogue branching without that quotient, or with only a directed silent
+cell, is a separately named lax/effect completion.  The direct HIT constructor,
+the supplied-reflector adjunction mate `sheafification_glue`, and computational
+Cartier localization glue remain distinct construction, mate, and algebraic
+consumer layers.  The active scheme lane returns independently to an explicit
+supplied `P1` consumer as the smallest end-to-end validation of the existing
+binary/Laurent owners, followed by graded `Proj` infrastructure from which
+standard `P^n` should ultimately be derived.  These are staged validation and
+general construction, not competing public definitions; neither lane is
+blocked by BNat.
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_presheaves.lp` is the one-way
@@ -71,6 +82,16 @@ sieve to the ambient Cat-valued presheaf category and derives its whole
 inclusion into Yoneda. It defines topology-locality by the exact resulting
 whole Hom equivalence; it does not construct a reflector or identify that
 condition with the separately probed weighted-limit descent package.
+`emdash3_2_direct_cover_completion_hit.lp` is the first direct
+whole-presheaf return/cover/silent categorical-HIT signature.  It keeps the
+unit, recursive matching-family glue, and silent quotient at whole internal
+presheaf maps and paths over the exact ordinary-sieve extension.  Its
+formation initially returns the underlying presheaf; an eliminator must derive
+`IsTopologyLocalPsh` before the result is packaged syntactically as a
+constructed sheaf or compared with the independent rigid `Sheaf_cat` facade.
+It does not yet claim pulled-cover glue computation, a reflector, CommRing
+lift, or left exactness.  A dialogue/lax completion without an invertible
+silent quotient remains a separately consumer-gated notion.
 `emdash3_2_telescope_localization_hit.lp` is the first explicit per-object
 categorical-HIT localization boundary. For an endomap `s:A->A`, it constructs
 the set-truncated sequential telescope with computing point induction,

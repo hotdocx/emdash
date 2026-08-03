@@ -34,6 +34,8 @@ the transparent native equality-valued evidence-property and finite-dimension tr
 extension is `emdash3_2_eq1_evidence_property.lp`;
 the set-truncated sequential telescope categorical-HIT localization extension
 is `emdash3_2_telescope_localization_hit.lp`;
+the direct whole-presheaf return/cover/silent categorical-HIT signature
+extension is `emdash3_2_direct_cover_completion_hit.lp`;
 the reusable Nat arithmetic/sethood extension is
 `emdash3_2_nat_arithmetic.lp`;
 the reusable Nat-indexed finite-family extension is
@@ -515,14 +517,21 @@ Use the following order:
     one-map categorical-HIT localization, not an ordinary-sieve topology,
     presheaf reflector, sheafification, arbitrary-site constructor, or
     CommRing-valued lift;
-58. `emdash3_2_checks.lp` for executable regression statements;
-59. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+58. `emdash3_2_direct_cover_completion_hit.lp` for the first direct
+    whole-presheaf return/cover/silent categorical-HIT signature. Its unit,
+    recursive matching-family glue, and silent quotient are whole internal
+    maps/paths over the existing ordinary-sieve extension. It deliberately
+    does not yet claim an eliminator, pulled-cover glue computation,
+    topology-locality, whole Hom universality, reflector, rigid-sheaf-facade
+    realization, CommRing lift, or left exactness;
+59. `emdash3_2_checks.lp` for executable regression statements;
+60. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-60. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-61. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+61. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+62. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-62. `reports/INDEX.md` for task-specific plans and decision records.
-63. `book/book.json` and `book/evidence.json` for book source
+63. `reports/INDEX.md` for task-specific plans and decision records.
+64. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

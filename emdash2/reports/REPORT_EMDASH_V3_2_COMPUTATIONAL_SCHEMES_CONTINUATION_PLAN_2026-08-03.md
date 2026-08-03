@@ -280,7 +280,171 @@ from the definitional and category-valued computation sought here. Any
 relative-density refinement must be justified by a concrete v3.2 consumer
 rather than inherited from the historical comment.
 
-#### First nontrivial selected model: successor localization
+#### Direct free-sheaf correction: return, cover branching, and silent quotient
+
+A subsequent review of Pierre-Marie Pédrot's *Pursuing Shtuck* and the earlier
+*Debunking Sheaves* changes the active CS-12 sequencing.  The relevant PDF
+pages were visually inspected alongside the supplied layout extractions:
+
+- *Pursuing Shtuck*, PDF pages 5--7 and 10, for `isSh`, the free `X(A)`
+  quotient-inductive construction, its recursor, and the computational
+  dialogue-tree reading; and
+- *Debunking Sheaves*, PDF pages 3, 13--14, and 21, for the `S_J(A)`
+  return/ask/silent signature, the identification of compatible matching
+  families with whole internal maps, and the distinction between dialogue
+  algebras and their sheaf quotient.
+
+For a proposition-valued modality represented by questions `I` and
+proof-irrelevant answers `O:I->Prop`, Pédrot's direct free sheaf has the
+generator-and-relation shape
+
+```text
+X(A)
+  eta    : A -> X(A)
+  ask    : Pi i:I. (O(i) -> X(A)) -> X(A)
+  silent : Pi i x. ask(i, constant(x)) = x.
+```
+
+The family in `ask` is recursive in `X(A)`, not merely a family in the input
+`A`; otherwise the constructor performs only one round of gluing.  The
+`silent` equation is also not an arbitrary quotient.  It says that gluing the
+restrictions of an already global element returns that element.  Together
+with function/whole-map extensionality, it derives separatedness: if `x` and
+`y` have the same restrictions on a cover, then both are equal to the glue of
+that common matching family.
+
+The direct external-site translation should use the whole ordinary-sieve
+extension already implemented by CS-12a.  For a site `(K,T)`, input presheaf
+`P`, object `U`, covering sieve `R`, and
+
+```text
+i_R : R_hat -> y(U),
+```
+
+the candidate is one whole presheaf `FreeSheaf_T(P)` with
+
+```text
+eta_P : P -> FreeSheaf_T(P),
+
+glue(U,R,cover,m) : Hom_Psh(y(U), FreeSheaf_T(P))
+  where m : Hom_Psh(R_hat, FreeSheaf_T(P)),
+
+silent(U,R,cover,x) :
+  glue(U,R,cover,x o i_R) = x.
+```
+
+The argument `m` is already an internally compatible matching family: its
+action and naturality are those of one whole presheaf morphism.  No family of
+componentwise equations is to be added.  Restriction of `glue` along
+`f:V->U` must compute through the pulled-back cover and reindexed matching
+map at whole presheaf/action owners.  It must not be retained as an external
+naturality square.  The eliminator into a `T`-local target `Y` should extend a
+whole map `P->Y`, compute on `eta` and `glue`, respect `silent`, and derive
+
+```text
+Hom(FreeSheaf_T(P),Y) ~= Hom(P,Y).
+```
+
+Only after that per-input construction is uniform on presheaf arrows should
+it be assembled into the whole reflector and compared with the rigid
+`Sheaf_cat` facade and supplied `SheafificationCapability`.  A first bounded
+implementation may expose the whole formation, unit, recursive cover-glue,
+and silent quotient before claiming the eliminator or sheafification theorem,
+but its name and comments must say that it is a direct free-cover HIT
+boundary rather than a completed reflector.
+
+The underlying formation initially lands in `Psh(K)` deliberately.  This is
+not a decision that the final object is merely a presheaf.  Pédrot likewise
+first forms `X(A):Type`, proves that `X(A)` is a sheaf, and can then package
+the type with that evidence.  In v3.2 the corresponding staged endpoint is
+
+```text
+DirectCoverCompletionPsh(T,P) : Psh(K),
+
+direct_cover_completion_is_local :
+  IsTopologyLocalPsh(T,DirectCoverCompletionPsh(T,P)),
+
+ConstructedSheaf(T,P)
+  := (DirectCoverCompletionPsh(T,P),is_local).
+```
+
+Directly declaring the first primitive as an object of the existing rigid
+`Sheaf_cat(K,T,Cat)` would be circular: that facade presently acquires its
+underlying-presheaf interpretation only through the supplied inclusion and
+reflector capability which this program is intended eventually to construct.
+The local-target eliminator should derive `is_local`; a constructed local-
+object category can then package the result syntactically as a sheaf and be
+related to the rigid facade by a scoped whole realization/equivalence, never
+by a broad definitional identification.
+
+The earlier supplied `SheafificationCapability` is the integration contract
+for this construction, not an obsolete parallel API.  Integration proceeds
+in explicit grades:
+
+1. derive the local-target eliminator, including its `eta`, `glue`, and
+   `silent` computation/coherence laws;
+2. derive `IsTopologyLocalPsh` for every completed presheaf and package the
+   result in the constructed local-object/sheaf category;
+3. derive the fixed-forward whole universal property
+   `Hom(completion(P),X) ~= Hom(P,X)` for every local target `X`;
+4. assemble formation and unit functorially on presheaf morphisms and obtain
+   the whole left-adjoint/inclusion pair;
+5. instantiate the existing `SheafificationCapability`, including its
+   fixed-counit `OmegaEquivAlong` reflector evidence; and
+6. compare that constructed capability scopefully with any independently
+   supplied reflector and prove, propositionally/wholly where appropriate,
+   that its derived `sheafification_glue` mate agrees with the direct
+   recursive construction on their common interface.
+
+The fixed-site Cat-valued HIT is considered integrated with the existing core
+at step 5 because existing consumers can then switch from supplied to
+constructed evidence without an API rewrite.  CommRing lifting, left
+exactness, induced-slice topology, and base-change are later integration
+grades required before assumption-explicit ringed-site and scheme clients can
+be reconstructed from it.  They do not block validation of the core
+reflector.  No step installs a conversion rule between constructed and
+supplied reflectors or conflates direct HIT glue with the adjunction mate.
+
+Pédrot also clarifies a meaningful intermediate *lax/effectful* notion.  If
+the recursive cover operation is retained without the silent quotient, one
+gets a dialogue/free-effect algebra rather than an ordinary sheaf.  Replacing
+the equality by a merely directed arrow similarly suggests a lax completion.
+This may be useful for Cat-valued lax descent or a future higher/stack-like
+theory, but it does not by itself enforce ordinary separatedness.  The active
+first construction therefore uses an internal path (or invertible groupoid
+cell).  A directed `LaxCoverCompletion` may be probed separately and must not
+be named `Sheafification` until an appropriate lax universal property and
+consumer justify that terminology.  For higher-valued descent, invertible
+cells and their higher coherences may replace literal set-level proof
+irrelevance; a one-way cell changes the semantics and is not a cosmetic
+presentation choice.
+
+This direct constructor must also remain distinct from two existing uses of
+the word *glue*:
+
+1. `sheafification_glue` in `emdash3_2_ringed_sites.lp` is an adjunction-mate
+   operation derived from an already supplied whole reflector.  A successful
+   direct HIT may eventually construct the capability from which this mate is
+   derived; the mate is not one of the HIT constructors.
+2. `comm_ring_psh_localization_glue` and its affine Cartier specialization
+   map coherent matching data on one basic open `D(s)` to the selected
+   localization carrier `O(U)[1/s]`.  They are computing local-algebraic
+   consumers/models of sheaf-like amalgamation.  Since `D(s)` need not cover
+   `U`, they are neither general covering-sieve descent nor the recursive
+   constructor of a reflector.  After a constructed structure sheaf exists,
+   a scoped comparison may show that Cartier glue is the corresponding
+   algebra/computation on principal opens; no global rewrite should identify
+   the two operations.
+
+Thus the historical `cartierSolution16.lp.txt` glue intuition and the direct
+HIT constructor are related by *consumer versus constructor*: the former
+expresses computational amalgamation for already selected local algebra and
+the latter freely constructs an object supporting amalgamation over every
+selected cover.  This distinction preserves the computational motivation of
+the historical experiment without claiming that its primitive glue already
+constructed sheafification.
+
+#### Completed independent model: successor localization
 
 The first concrete CS-12 model is the one-object free-monoid category
 `BNat_cat` and the principal higher sieve generated by `bnat_generator`.  The
@@ -320,14 +484,21 @@ cancellations.  These assemble at the existing proof-time `Grpd_cat`
 composition/identity views into a whole `OmegaEquivAlong Grpd_cat` without a
 new composition rewrite or external naturality field.
 
-This closes the small explicit *per-object localization* gate, not the whole
-sheafification goal.  Still required are: ordinary-sieve evidence for the
-principal BNat family; assembly of the localized values and invertible
-generator action into one whole presheaf plus unit; comparison of that unit's
-mapping property with `IsTopologyLocalPsh`; and only then uniform functorial
-assembly into a reflector.  Arbitrary sites, stronger Cech/hyperdescent,
-comparison with rigid `Sheaf_cat`, CommRing lift, left exactness, and slice
-base change remain explicitly separate later gates.
+This closes one reusable *per-object one-map localization* experiment, not the
+whole sheafification goal.  The telescope is retained as valid categorical-HIT
+infrastructure and evidence about eliminators and internally derived whole
+universal properties.  It is no longer the active route to direct
+sheafification.  The ignored principal-BNat ordinary-sieve/factorization probe
+is frozen and must not be promoted merely to connect this special model to a
+Grothendieck topology.  Such a bridge remains legitimate deferred generic-
+localization research if a later consumer specifically needs it.
+
+The active scheme lane returns to a selected projective-line/projective-space
+consumer.  The independent constructed-sheaf lane starts from the direct
+`eta/glue/silent` cover-indexed signature above.  Neither lane is blocked by
+the BNat factor predicate.  Arbitrary higher descent, comparison with rigid
+`Sheaf_cat`, CommRing lift, left exactness, and slice base change remain later
+gates after the direct per-presheaf eliminator exists.
 
 ### 3.3 Site-morphism literature route
 
@@ -943,7 +1114,7 @@ close CS-05.
 | Small-site restriction/basis comparison | Moderate | Exact basis and topology transport owners. |
 | Representation-independent category of schemes | Research-grade but plausible | Morphism representation, locally-ringed structure, and comparison with presentations. |
 | Ordinary-sieve extension and topology-local-object classifier | Implemented at the whole Cat-valued boundary | Fibrewise dependent-Sigma values and inclusion components compute; explicit base-arrow beta and equivalence with the separate weighted-limit descent presentation remain consumer-gated. |
-| Fixed-site categorical-HIT sheafification construction | Research-grade but factorable | Per-presheaf categorical constructors/eliminator, functorial assembly, rigid `Sheaf_cat` realization, CommRing lift, and left exactness. The ordinary-sieve topology-to-local-object interface is no longer missing. |
+| Fixed-site categorical-HIT sheafification construction | First direct constructor boundary implemented; remaining reflector is research-grade but factorable | The whole-presheaf formation/unit/glue/silent signature is green. The next gate is an eliminator into topology-local targets, from which locality must be derived before syntactic sheaf packaging; functorial assembly, rigid `Sheaf_cat` realization, CommRing lift, and left exactness follow separately. |
 | Unrestricted atlas effectivity | Research-grade | Descent/localization infrastructure and scope. |
 
 The original computational-schemes direction remains feasible. The main risk
@@ -1199,12 +1370,15 @@ prerequisites.
   Explicit base-arrow beta, total-category Fubini, weighted-descent
   comparison, and categorical-HIT localization remain separate gates; no
   sieve-specific opaque action or external coherence package is promoted.
-- **CS-D-037 — Successor sieve is the first nontrivial model:** use the
-  principal higher sieve generated by `bnat_generator`, represented internally
-  on its restriction slice.  Prove its ordinary subterminal status from
-  uniqueness of Nat factorization; do not install fibre rewrites to literal
-  `Empty`/`Unit` or pretend that the higher sieve is already an ordinary
-  covering sieve.
+- **CS-D-037 — Successor localization is retained but no longer the active
+  sheafification model:** the principal higher sieve generated by
+  `bnat_generator` and its Nat-factorization semantics remain a legitimate
+  one-map localization example.  The checkpointed telescope is reusable
+  categorical-HIT evidence.  The ignored ordinary/subterminal bridge is
+  frozen: do not install fibre rewrites to literal `Empty`/`Unit`, pretend the
+  higher sieve is already an ordinary covering sieve, or let this special
+  representation theorem block direct cover-indexed sheafification or the
+  projective consumer.
 - **CS-D-038 — Minimal sequential-HIT primitive boundary:** the telescope
   localization primitive signature contains formation, point/path
   constructors, set truncation, dependent induction into set-valued fibres,
@@ -1217,6 +1391,46 @@ prerequisites.
   are packaged through the existing `Grpd_cat` proof-time comparison heads as
   one whole `OmegaEquivAlong Grpd_cat`.  This proves one-map localization, not
   yet whole-presheaf sheafification.
+- **CS-D-040 — Direct Shtuck/free-sheaf route:** for one `(K,T,P)`, construct
+  a whole recursive cover completion with a whole unit `P->X`, a cover-indexed
+  constructor from matching maps `R_hat->X` to sections `y(U)->X`, and an
+  internal silent path saying that gluing the restriction of a section returns
+  it.  Matching compatibility and restriction action remain at whole
+  presheaf owners.  An eliminator into topology-local targets and its whole
+  Hom equivalence are required before calling the object a constructed
+  sheafification; functorial reflector assembly comes afterwards.
+- **CS-D-041 — Lax completion is a distinct intermediate:** recursive cover
+  branching without the silent quotient is a dialogue/effect completion.  A
+  directed rather than invertible silent cell may support a future lax or
+  higher descent semantics, but it does not establish ordinary separatedness.
+  Probe it under an explicitly lax name only after a concrete consumer; the
+  first ordinary Set/discrete-groupoid route retains an internal path.
+- **CS-D-042 — Three glue owners remain distinct:** the direct HIT glue is a
+  recursive constructor; `sheafification_glue` is an adjunction mate derived
+  from a supplied or later constructed reflector; Cartier localization glue
+  is a computing algebraic amalgamation on one principal open.  Later scoped
+  comparison may relate their computations, but no rewrite or public alias
+  identifies them.
+- **CS-D-043 — Projective consumers return to the active scheme lane:** the
+  current library already owns a supplied global scheme presentation, two
+  affine realizations, their actual inherited overlap, and the Laurent
+  inversion computation.  The next bounded projective consumer should first
+  select an assumption-explicit global `P1` capability over a base ring and
+  instantiate those owners; it must state whether the global object is a
+  primitive/supplied presentation rather than claim atlas-first construction.
+  Generalize next to the finite standard cover of `P^n`, with polynomial chart
+  rings and computing pairwise localizations.  A genuine `Proj(S)` constructor
+  is a subsequent algebraic tranche requiring graded commutative rings,
+  homogeneous localizations, degree-zero parts `(S_f)_0`, and the irrelevant-
+  ideal cover.  Neither direct sheafification nor BNat is a prerequisite for
+  the assumption-explicit `P1` consumer; constructed `Proj` remains a larger
+  but now explicitly active standard-library direction.  Mathematically a
+  sufficiently computational `Proj` subsumes the standard examples through
+  `P^n_R = Proj(R[x_0,...,x_n])`; the explicit `P1`-first order is therefore a
+  validation strategy, not three independent definitions.  Once the graded
+  infrastructure exists, standard `P^n` should be derived by instantiating
+  `Proj`, and the earlier explicit `P1` capability should receive a whole
+  comparison rather than remain a competing public construction.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1242,11 +1456,13 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-07 | Supplied global two-chart selected-refinement consumer | Complete and locally checkpointed at `4892c33`: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green. A closed genuinely non-affine realization remains separate | CS-06a |
 | CS-07b | Selected inherited overlap for the first supplied non-affine-style consumer | Complete and locally checkpointed at `d9e036f`: two rule-free source modules, two nine-assertion reviewers, focused/exact-warning/audit/catalog/authority checks, and 134-target exact-current resumable health are green. CS-07c now attaches projective-line-style coordinate/localization data directly to this overlap | CS-D-031/032 and checkpointed overlap substrate |
 | CS-07c | Canonical Laurent transition and actual-overlap adapter | Complete and locally checkpointed at `5118fb1`: the generic rule-free layer derives both Laurent maps by polynomial/localization universality and presents two literal localization maps into one common ring; the thin scheme layer instantiates it at the actual chart rings, inherited overlap ring, and existing restriction maps. A closed global `P1` object and non-affineness theorem remain separate | CS-D-031/032/033 and CS-07b overlap substrate |
+| CS-13 | Selected projective-line/projective-space consumer and eventual `Proj` owner | Active scheme-lane continuation after the direct-cover signature checkpoint: first use an assumption-explicit global `P1` capability to validate the existing binary scheme and Laurent-overlap owners. General `Proj` then needs graded-ring, homogeneous-localization, degree-zero, and irrelevant-ideal infrastructure; once present it should derive the standard `P^n` examples, with a whole comparison to the earlier explicit `P1` boundary. No atlas-first gluing or BNat bridge is a prerequisite. | Representation/ambient-site audit for the selected global object and existing CS-07b/07c owners, followed by graded polynomial/localization infrastructure |
 | CS-08 | Atlas-first two-affine gluing constructor | Out of current scope, not part of the global-first scheme interface | Reconsider only for a future consumer explicitly constructing a global object from independent affine pieces |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/localization sheafification | The topology-to-local-object tranche is checkpointed at `5e7505e`; the first genuine per-object sequential-HIT localization is checkpointed at `451db48`, with point/path constructors, dependent induction, point beta, derived path beta, derived whole cocone universal property, and a computing shift inverse. Principal-BNat ordinary-sieve evidence and whole-presheaf/unit assembly remain next; no reflector or sheafification claim is made yet. | Ordinary principal-sieve proof, whole BNat presheaf and unit, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`. The Pédrot-directed whole `eta/glue/silent` cover-completion signature and reviewer are now implemented and green at the underlying-presheaf boundary. The principal-BNat ordinary-sieve bridge is frozen and unpromoted. | Derive the eliminator into local targets and topology-locality before syntactic sheaf packaging; then whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
+| CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
 ## 13. CS-01 Success Criteria
@@ -2181,14 +2397,87 @@ No full CI, examples aggregate, root aggregate, push, merge, publication,
 history rewrite, or worktree cleanup was performed.  The local implementation
 checkpoint is `451db48` (`feat: add telescope localization HIT`).
 
-The next CS-12 gate is not another generic HIT.  It is the bridge from this
-one-map localization to the selected small site: prove the principal BNat
-family ordinary/subterminal, assemble telescope values and the invertible
-generator action into one whole presheaf with a computing unit, and compare
-its whole mapping property with `IsTopologyLocalPsh`.  Only after that bridge
-should functorial reflector assembly be promoted; arbitrary-site
-sheafification, rigid-`Sheaf_cat` realization, CommRing lift, left exactness,
-and slice base change remain later gates.
+This checkpoint remains valid, but it is no longer the next CS-12 dependency.
+The Pédrot review recorded below freezes the principal-BNat bridge and starts a
+direct recursive cover-completion boundary instead.  The telescope may later
+be compared with that construction as an independent one-map model; no such
+comparison blocks schemes, projective consumers, or direct sheafification.
+
+### 13.16 CS-12 course correction: direct free-cover HIT — 2026-08-03
+
+The post-checkpoint review of *Pursuing Shtuck* and *Debunking Sheaves*
+identified a sequencing error rather than a defect in the promoted telescope.
+Localizing one endomap by a sequential colimit is a sound generic-localization
+test, but it is not the direct generator-and-relation construction of a free
+sheaf.  Continuing through the principal-BNat factor predicate would prove a
+representation theorem for that special model while postponing the actual
+cover-indexed constructor and the projective consumer.
+
+The revised active design is the whole-presheaf translation of Pédrot's
+`ret/ask/silent` quotient-inductive construction.  A matching family is one
+whole map from `ordinary_sieve_extension_psh(R)` into the recursively
+constructed completion; its compatibility is therefore internal.  Glue
+returns one whole map from Yoneda, and the silent path identifies glue of a
+section's restriction with that section.  The first promoted boundary must
+remain honest about its strength: formation/unit/glue/silent constructors are
+a direct free-cover HIT signature, not yet a sheafification reflector.  The
+local-target eliminator and whole Hom universal property close the next gate.
+
+The earlier Pédrot paper also records the intentional lax alternative.
+Removing the quotient yields dialogue/free-effect branching; replacing its
+path by a directed cell yields a candidate lax completion.  Either may become
+useful for Cat-valued or higher descent, but ordinary sheafness requires
+separatedness and therefore retains an invertible/path-level silent law in the
+first model.
+
+The relationship to the historical Cartier glue is now explicit.  Cartier
+glue computes amalgamation into one localization carrier over `D(s)`; direct
+HIT glue recursively creates sections over every selected cover; and the
+existing generic `sheafification_glue` transports maps through the adjunction
+after the reflector is available.  These are related construction, algebra,
+and mate layers, not interchangeable symbols.
+
+The tracked worktree was clean at `dd793b3` before this correction.  The
+ignored `cs12_bnat_principal_higher_sieve` experiment remains unpromoted.  The
+nearest baseline source and reviewer for `emdash3_2_sieve_extensions.lp` were
+green under the uniform 90-second ceiling; recent 144-target exact-current
+health remained applicable to the otherwise unchanged boundary.
+
+The promoted `emdash3_2_direct_cover_completion_hit.lp` now realizes the
+smallest honest signature selected by that review.  Its 103 lines contain five
+symbols and no rewrite or unification rule: one rigid whole-presheaf former,
+one whole unit, one recursive covering-sieve glue constructor, one transparent
+restriction alias through the exact sieve inclusion, and one whole silent
+path.  The 105-line reviewer checks five positive formation/computation
+contracts and two intentional negative boundaries: the carrier does not
+definitionally collapse to its generator, and silent does not become a
+runtime glue reduction.  The formation deliberately lands in `Psh(K)`; no
+opaque locality witness is supplied.  The next eliminator must derive
+`IsTopologyLocalPsh`, after which the underlying presheaf and derived evidence
+can be packaged as a constructed sheaf and compared scopefully with the rigid
+`Sheaf_cat` facade.
+
+Focused source and reviewer checks are green.  Warning-enabled checks of the
+immediate dependency, source, and reviewer each reproduce exactly the inherited
+1,179 warnings (`1,020` unjoinable critical pairs and `159` replaceable pattern
+variables), with no warning located in either new file.  The strict LHS audit
+reports zero unreviewed clauses and zero reconstructible compound slots; the
+strict 1,992-check catalog, source TOC, plan-header/reference lints,
+check-metrics tests, shell syntax, whitespace hygiene, and registered focused
+wrapper are green.
+
+Exact-current resumable health is green for all 146 registered targets.  The
+144-target state was carried forward only after mechanically confirming the
+exact old file list and byte digest
+`sha256:d74dbbbb5f7546d70d0720ffaa3524bbdb185784709662962a65ade0dbcfdac4`
+and unchanged Lambdapi version, timeout, warning mode, and flags.  The refresh
+then ran only the new source (`5.825s`) and reviewer (`6.276s`).  Its source-
+metrics snapshot is
+`sha256:fc6c51ea40f4315074e5623c841d0e1945d343669f0e2dbc400f8db61bd1daeb`
+and checked-content snapshot is
+`sha256:e88a256d67fd9ab5e2afae2e827e8df7f94f98f1084a1cbd92f5d09eadd44104`.
+No full CI, examples aggregate, root aggregate, push, merge, history rewrite,
+publication, or worktree cleanup was performed.
 
 ## 14. Validation And Checkpoint Contract
 
