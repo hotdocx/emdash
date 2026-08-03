@@ -614,7 +614,8 @@ export type CoreCategoricalAbstractionEvidence =
                 | 'categorical.displayed-functor-identity'
                 | 'categorical.displayed-functor-eta'
                 | 'categorical.displayed-functor-composition'
-                | 'categorical.displayed-functor-weakening';
+                | 'categorical.displayed-functor-weakening'
+                | 'categorical.displayed-functor-contextual';
             readonly variation: 'functorial';
             readonly dependency: 'displayed';
             readonly sourceFamily: KernelExpression;
@@ -1307,9 +1308,12 @@ interface CoreCategoricalDisplayedFunctorFactorization {
         | 'categorical.displayed-functor-identity'
         | 'categorical.displayed-functor-eta'
         | 'categorical.displayed-functor-composition'
-        | 'categorical.displayed-functor-weakening';
+        | 'categorical.displayed-functor-weakening'
+        | 'categorical.displayed-functor-contextual';
     readonly chainLength: number;
     readonly result: InternalCoreCategoricalTerm;
+    readonly structuralPrerequisites:
+        readonly CoreCategoricalStructuralPrerequisiteId[];
     readonly dependentPrerequisites:
         readonly CoreCategoricalDependentApplicationPrerequisiteId[];
 }
@@ -14597,12 +14601,10 @@ export class CoreCategoricalScopedBuilder {
         let endpointCompilation:
             CoreCategoricalDirectDisplayedEndpointCompilation |
             undefined;
+        let contextualCompilation:
+            CoreCategoricalDisplayedContextualCompilation |
+            undefined;
         if (weakeningSection === undefined) {
-            endpointCompilation =
-                this.compileDirectDisplayedFunctorEndpoint(
-                    body,
-                    nodeProvenance
-                );
             const candidate = this.directDisplayedFunctorChain(
                 body,
                 fibreOrdinal,
@@ -14610,14 +14612,77 @@ export class CoreCategoricalScopedBuilder {
                 baseCategory,
                 sourceFamily
             );
-            if (
-                candidate === undefined ||
-                endpointCompilation === undefined ||
-                !kernelExpressionEquals(
-                    endpointCompilation.targetFamily,
-                    targetFamily
-                )
+            if (candidate !== undefined) {
+                endpointCompilation =
+                    this.compileDirectDisplayedFunctorEndpoint(
+                        body,
+                        nodeProvenance
+                    );
+                if (
+                    endpointCompilation === undefined ||
+                    !kernelExpressionEquals(
+                        endpointCompilation.targetFamily,
+                        targetFamily
+                    )
+                ) {
+                    this.fail(
+                        'UNAVAILABLE_DISPLAYED_ACTION',
+                        nodeProvenance,
+                        'The displayed binder direct chain did not produce ' +
+                            'the requested target family'
+                    );
+                }
+                chain = candidate;
+            } else if (
+                this.options.displayedContextualAbstraction === true
             ) {
+                const remainingUsage = removeUsage(
+                    removeUsage(body.usage, fibreOrdinal),
+                    baseOrdinal
+                );
+                if (remainingUsage.length !== 0) {
+                    this.fail(
+                        'UNAVAILABLE_DISPLAYED_ACTION',
+                        nodeProvenance,
+                        'The displayed binder recursive body cannot capture ' +
+                            'an outer contextual token'
+                    );
+                }
+                contextualCompilation = this.compileDisplayedContextual(
+                    body,
+                    baseOrdinal,
+                    baseCategory,
+                    new Map([
+                        [
+                            fibreOrdinal,
+                            this.displayedIdentityCompilation(
+                                baseCategory,
+                                sourceFamily,
+                                nodeProvenance
+                            )
+                        ]
+                    ]),
+                    new Set([baseOrdinal, fibreOrdinal]),
+                    nodeProvenance
+                );
+                if (
+                    !kernelExpressionEquals(
+                        contextualCompilation.sourceFamily,
+                        sourceFamily
+                    ) ||
+                    !kernelExpressionEquals(
+                        contextualCompilation.targetFamily,
+                        targetFamily
+                    )
+                ) {
+                    this.fail(
+                        'CLASSIFIER_ARGUMENT_MISMATCH',
+                        nodeProvenance,
+                        'The displayed binder recursive body compiled to ' +
+                            'the wrong source or target family'
+                    );
+                }
+            } else {
                 this.fail(
                     'UNAVAILABLE_DISPLAYED_ACTION',
                     nodeProvenance,
@@ -14626,23 +14691,29 @@ export class CoreCategoricalScopedBuilder {
                         'exact qualified section weakening'
                 );
             }
-            chain = candidate;
         }
 
         let rule:
             CoreCategoricalDisplayedFunctorFactorization['rule'];
         let resultExpression: KernelExpression;
-        const prerequisites:
-            CoreCategoricalDependentApplicationPrerequisiteId[] = [
-                'sigma-projection-pullback',
-                'sigma-pi-uncurrying-proof'
-            ];
+        let structuralPrerequisites:
+            readonly CoreCategoricalStructuralPrerequisiteId[] =
+                Object.freeze([]);
+        let dependentPrerequisites:
+            readonly CoreCategoricalDependentApplicationPrerequisiteId[] =
+                Object.freeze([
+                    'sigma-projection-pullback',
+                    'sigma-pi-uncurrying-proof'
+                ]);
         if (weakeningSection !== undefined) {
             rule = 'categorical.displayed-functor-weakening';
-            prerequisites.push(
-                'sigma-first-projection',
-                'section-pullback-functor',
-                'constant-displayed-family-object'
+            dependentPrerequisites = mergeDependentPrerequisites(
+                dependentPrerequisites,
+                [
+                    'sigma-first-projection',
+                    'section-pullback-functor',
+                    'constant-displayed-family-object'
+                ]
             );
             resultExpression = this.lowerDisplayedSectionWeakening(
                 weakeningSection,
@@ -14651,21 +14722,33 @@ export class CoreCategoricalScopedBuilder {
                 targetFamily,
                 nodeProvenance
             );
-        } else {
-            if (endpointCompilation === undefined) {
-                throw new Error(
-                    'Displayed endpoint compilation disappeared'
-                );
-            }
+        } else if (endpointCompilation !== undefined) {
             rule = chain.length === 0
                 ? 'categorical.displayed-functor-identity'
                 : chain.length === 1
                     ? 'categorical.displayed-functor-eta'
                     : 'categorical.displayed-functor-composition';
-            prerequisites.push(
-                ...endpointCompilation.dependentPrerequisites
+            structuralPrerequisites =
+                endpointCompilation.structuralPrerequisites;
+            dependentPrerequisites = mergeDependentPrerequisites(
+                dependentPrerequisites,
+                endpointCompilation.dependentPrerequisites
             );
             resultExpression = endpointCompilation.expression;
+        } else {
+            if (contextualCompilation === undefined) {
+                throw new Error(
+                    'Displayed contextual compilation disappeared'
+                );
+            }
+            rule = 'categorical.displayed-functor-contextual';
+            structuralPrerequisites =
+                contextualCompilation.structuralPrerequisites;
+            dependentPrerequisites = mergeDependentPrerequisites(
+                dependentPrerequisites,
+                contextualCompilation.dependentPrerequisites
+            );
+            resultExpression = contextualCompilation.term;
         }
 
         const resultType: CoreType = {
@@ -14689,11 +14772,13 @@ export class CoreCategoricalScopedBuilder {
             removeUsage(body.usage, fibreOrdinal),
             baseOrdinal
         );
-        const recovered = weakeningSection === undefined &&
-            endpointCompilation !== undefined
-            ? [...endpointCompilation.recovered]
-            : [...(weakeningSection as InternalCoreCategoricalTerm)
-                .closed!.recovered];
+        const recovered = weakeningSection !== undefined
+            ? [...weakeningSection.closed!.recovered]
+            : endpointCompilation !== undefined
+                ? [...endpointCompilation.recovered]
+                : body.closed === undefined
+                    ? []
+                    : [...body.closed.recovered];
         const closed = deepFreeze({
             term: resultExpression,
             type: copyCoreType(resultType),
@@ -14719,7 +14804,8 @@ export class CoreCategoricalScopedBuilder {
             rule,
             chainLength: chain.length,
             result,
-            dependentPrerequisites: Object.freeze(prerequisites)
+            structuralPrerequisites,
+            dependentPrerequisites
         };
     }
 
@@ -14853,7 +14939,8 @@ export class CoreCategoricalScopedBuilder {
                     provisional,
                     outerScope
                 ),
-                structuralPrerequisites: Object.freeze([]),
+                structuralPrerequisites:
+                    factorization.structuralPrerequisites,
                 dependentPrerequisites:
                     factorization.dependentPrerequisites,
                 provenance: nodeProvenance
@@ -15068,7 +15155,8 @@ export class CoreCategoricalScopedBuilder {
                     provisional,
                     outerScope
                 ),
-                structuralPrerequisites: Object.freeze([]),
+                structuralPrerequisites:
+                    factorization.structuralPrerequisites,
                 dependentPrerequisites:
                     factorization.dependentPrerequisites,
                 provenance: nodeProvenance

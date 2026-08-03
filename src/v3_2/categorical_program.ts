@@ -8329,8 +8329,9 @@ export class CoreCategoricalProgram {
      * Direct `λ a :^fd E. body`-equivalent abstraction.
      *
      * The builder hides a natural base slot, records the body as the nested
-     * `k :^n K; a :^f E[k]` contextual presentation, and lowers only the
-     * FIBRED-BINDER-1 identity/eta/composition contract.
+     * `k :^n K; a :^f E[k]` contextual presentation. The base
+     * FIBRED-BINDER-1 profile lowers only identity/eta/composition; later
+     * displayed-context profiles reuse their reviewed recursive body engine.
      */
     displayedFunctorLambda(
         name: string,

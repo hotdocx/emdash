@@ -100,12 +100,25 @@
 > the richer displayed compiler and matches compact
 > `displayedFunctorLambda` byte-for-byte in Core and inferred type for
 > identity, eta, composition, and qualified weakening (4/4; semantic
-> comparisons equal). Continue with the read-only
-> `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` scope audit in the active plan. It
-> should freeze a displayed-only helper extraction and one representative
-> fixed-argument evaluation case before any behavior refactor; no new kernel
-> owner, cast, curry, external coherence, or standalone functorial-type-
-> theory kernel is indicated.
+> comparisons equal). Its selected
+> `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` continuation is independently
+> approved by
+> [`D-DTTLF-USABILITY-079`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D079_REVIEW.md)
+> and final-focused-green. Compact `lambda^fd`, expanded
+> `lambda^n k. lambda^f a`, and one-binding displayed brackets now reuse
+> `compileDisplayedContextual` after unchanged historical fast paths. Fixed
+> evaluation and a fibre diagonal have exact three-presentation Core parity;
+> object and consumed base-arrow action remain internally owned. Focused 5/5,
+> nearest predecessors 24/24, static gates, and the bounded active-kernel
+> check pass. The required root aggregate was run once and remains non-green
+> only on the already-recorded source-digest pins and README line-wrap regex;
+> do not repeat it. No kernel/Core/checker/text/browser semantics, cast, curry,
+> or external coherence field was added. The next dependency-ready row is the
+> read-only `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` audit in the
+> active plan. It must require a concrete end-user consumer before proposing
+> further fixed/open recursion sharing; otherwise it routes to the smallest
+> newly enabled text-parity slice. Exact rollback-safe semantic checkpoint:
+> pending local checkpoint.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.

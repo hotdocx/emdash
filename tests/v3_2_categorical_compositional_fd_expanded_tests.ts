@@ -286,7 +286,7 @@ describe('COMPOSITIONAL-FD-EXPANDED-1C', () => {
         );
     });
 
-    it('fails closed on mismatches and an unfactorable fibre pair', () => {
+    it('fails closed on base, target, and cross-fibre mismatches', () => {
         const { emdash, K, E, D, x } = fixture();
         const L = emdash.category('expanded_fd_L');
         const R = emdash.displayedFamily('expanded_fd_R', L);
@@ -335,24 +335,6 @@ describe('COMPOSITIONAL-FD-EXPANDED-1C', () => {
             error =>
                 error instanceof CoreCategoricalProgramError &&
                 error.code === 'DISPLAYED_BASE_MISMATCH'
-        );
-
-        const product = emdash.displayedProduct(E, E);
-        assert.throws(
-            () => emdash.transforLambda(
-                'kUnfactored',
-                E,
-                product,
-                k => emdash.lambda(
-                    'aUnfactored',
-                    emdash.fibre(E, k),
-                    emdash.fibre(product, k),
-                    a => emdash.fibrePair(a, a)
-                )
-            ),
-            error =>
-                error instanceof CoreCategoricalFrontendError &&
-                error.code === 'UNAVAILABLE_DISPLAYED_ACTION'
         );
 
         assert.equal(K.label, 'expanded_fd_K');

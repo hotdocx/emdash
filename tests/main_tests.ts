@@ -140,6 +140,7 @@ import './v3_2_categorical_direct_contextual_nd_identity_tests';
 import './v3_2_categorical_direct_contextual_nd_whiskering_tests';
 import './v3_2_categorical_compositional_natural_binder_tests';
 import './v3_2_categorical_compositional_fd_expanded_tests';
+import './v3_2_categorical_displayed_functor_contextual_engine_tests';
 import './v3_2_categorical_compositional_nd_expanded_tests';
 import './v3_2_categorical_compositional_text_parity_tests';
 import './v3_2_categorical_displayed_nd_higher_audit_tests';
