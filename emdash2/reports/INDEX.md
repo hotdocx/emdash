@@ -29,6 +29,14 @@ CommRing-valued presheaf; the qualifier records that an ordinary ringed site
 need not carry a chosen reflector.
 It constructs no canonical sheafification, double-plus, generated topology,
 descent theorem, left exactness, local-ring condition, or scheme.
+`emdash3_2_commutative_algebra_affine_ringed_sites.lp` is the rule-free first
+affine consumer of that supplied-reflector layer and of the internally
+generated big-affine Zariski topology. It retains one supplied reflective
+CommRing-valued sheaf theory, one sheaf object, and a whole `DefIso` from its
+included structure presheaf to the computing coordinate presheaf. Its chart
+maps are components of those whole transformations, not external object-only
+comparison data. It constructs neither sheafification nor localization
+locality, a stalk-local-ring condition, a small-site comparison, or a scheme.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
 derived native equality-valued hom-action/groupoidality extension, and
 `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
@@ -213,6 +221,27 @@ check-content snapshot
 Two unchanged near-timeout aggregates passed same-limit source retries; no
 object priming was used. The synchronized implementation is included in local
 checkpoint `a30f6dc`.
+`emdash3_2_commutative_algebra_affine_ringed_sites.lp` is the rule-free
+PSSS-11a structure-sheaf presentation. It combines the exact generated
+big-affine Zariski topology with a supplied reflective CommRing-valued sheaf
+theory, one sheaf object, and a whole `DefIso` from the included structure
+presheaf to `affine_spec_coordinate_psh(R)`. The latter retains the existing
+computing chart restrictions; readable forward and inverse chart maps merely
+project the whole transformations through `tapp0_fapp0`. The 230-line source
+has nine symbols and no rules or unifiers, while the 166-line reviewer has
+nine assertions covering package beta, exact topology, whole cancellation,
+and literal-chart endpoints. Focused quiet and warning-enabled checks are
+green with exactly the inherited `1179 = 1020 + 159` warnings and no
+changed-file location. Exact-content health passes all 104 registered targets
+in 1187.079 summed check-seconds at source-metrics snapshot
+`sha256:c0ba7fc45f04780f9bb149d1a1dc6bf5dd50196c6f949423417ce0066e62d10b`
+and check-content snapshot
+`sha256:e9d102a79c9d824f40cb0bc6e9f829d3adeaf521becdde1fa3e830ea8b04f02d`;
+the final inherited affine-glue reviewer passed in 39.504 seconds without
+object priming or special flags. Final checkpoint evidence remains pending.
+The module does not construct sheafification, prove localization locality or
+a stalk-local-ring condition, compare with the small site, or package a
+scheme.
 `emdash3_2_commutative_algebra_affine_atlas.lp` is the rule-free PSSS-10b
 concrete atlas consumer. In every product ring it uses the already-selected
 finite Zariski-cover package for `(1,0)` and `(0,1)`, derives their

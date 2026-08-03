@@ -209,6 +209,16 @@ detailed probe evidence.
   computes to the existing whole localization map. It introduces no Sigma
   eta, external naturality or triangle field, coverhood rule, localization
   choice, sheafification, small-site comparison, or scheme.
+- `emdash3_2_commutative_algebra_affine_ringed_sites.lp`: one-way rule-free,
+  assumption-explicit affine structure-sheaf layer. It consumes the exact
+  internally generated big-affine Zariski topology, retains a supplied
+  reflective CommRing-valued sheafification capability and one sheaf object,
+  and requires a whole `DefIso` from the included structure presheaf to the
+  computing affine coordinate presheaf. Readable chart components project
+  the two whole transformations; they do not replace internal action or
+  naturality with object-only fields. The module does not construct
+  sheafification, prove localization locality or a stalk-local-ring theorem,
+  compare with the small site, or package a scheme.
 - `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
   functor-of-points/basic-open layer. The existing Yoneda presheaf represents
   `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and
@@ -2847,6 +2857,32 @@ source limit once and then passed same-limit source retries in 54.587 and
 Zariski topology for the computational MVP, not the small site and not yet a
 sheaf or scheme. The synchronized implementation is included in local
 checkpoint `a30f6dc`.
+
+PSSS-11a is the first structure-sheaf consumer of that topology. The promoted
+`emdash3_2_commutative_algebra_affine_ringed_sites.lp` packages a supplied
+`SheafificationCapability`, one object of the corresponding rigid
+CommRing-valued sheaf category, and a whole `DefIso` from its included
+presheaf to `affine_spec_coordinate_psh(R)`. The resulting
+`ReflectiveCommRingedSite` therefore carries exactly
+`affine_spec_big_zariski_topology(R)`, while the already-computing coordinate
+restrictions remain available through the whole comparison. Its two readable
+chart maps use `tapp0_fapp0` to observe the forward and inverse
+transformations at a site object; they are not object-only substitute data.
+The 230-line source has nine symbols and no rules or unifiers, and its
+166-line reviewer has nine assertions. Focused quiet checks and
+warning-enabled checks are green with the exact inherited
+`1179 = 1020 + 159` inventory and no changed-file warning. Exact-content
+health passes all 104 registered targets in 1187.079 summed check-seconds at
+source-metrics snapshot
+`sha256:c0ba7fc45f04780f9bb149d1a1dc6bf5dd50196c6f949423417ce0066e62d10b`
+and check-content snapshot
+`sha256:e9d102a79c9d824f40cb0bc6e9f829d3adeaf521becdde1fa3e830ea8b04f02d`.
+The final inherited affine-glue reviewer passed in 39.504 seconds with the
+ordinary 60-second limit, no object priming, and no special flags. The
+authorized local checkpoint is the remaining completion gate. Localization
+locality, any stalk-local-ring interpretation, small-site comparison, and the
+first scheme record remain PSSS-11 follow-ons rather than claims of this
+layer.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.

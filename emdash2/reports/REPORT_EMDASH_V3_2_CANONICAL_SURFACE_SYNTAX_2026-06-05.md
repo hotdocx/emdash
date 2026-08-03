@@ -686,6 +686,28 @@ whole localization map. `BigZar` names the promoted big-site topology; it
 does not identify that site with the small poset of opens, construct a
 reflector/sheafification, or denote a complete scheme.
 
+For a supplied affine reflective structure-sheaf presentation, comments and
+examples may write
+
+```text
+AffStruct(R;P)            : supplied reflective structure-sheaf presentation
+O_P                       : included whole CommRing-valued structure presheaf
+i_P : O_P ~=def O_coord   : whole DefIso to the computing coordinate presheaf
+i_P[U]                    : component of either whole comparison at U
+```
+
+The literal owners are `AffineStructureSheafPresentation`,
+`affine_structure_sheaf_underlying_psh`,
+`affine_structure_sheaf_coordinate_defiso`,
+`affine_structure_sheaf_to_coordinate_at`, and
+`affine_structure_sheaf_from_coordinate_at`. Here `~=def` is only display
+notation for the existing `DefIso` classifier; it does not denote equality of
+functor objects or invoke univalence. The two `i_P[U]` directions are
+components projected from whole transformations, so their action and
+naturality remain at the generic owners. This notation supplies neither a
+construction of sheafification nor localization locality, a stalk-local-ring
+condition, a small-site comparison, or a complete scheme.
+
 For the universal-property polynomial layer, comments and examples may write
 
 ```text

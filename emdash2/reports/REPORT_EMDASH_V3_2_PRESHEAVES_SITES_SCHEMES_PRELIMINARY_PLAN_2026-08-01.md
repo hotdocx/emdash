@@ -229,9 +229,15 @@ localization families become whole chart-arrow generators on
 intended least big-Zariski topology. Focused quiet checks, exact inherited
 warnings, strict audit, catalog/tooling registration, and exact 102-target
 health are green, and the synchronized implementation is checkpointed at
-`a30f6dc`. The active semantic step is therefore the affine structure-sheaf
-comparison and first concrete scheme record, not construction of general
-sheafification or generated topology.
+`a30f6dc`. `PSSS-11a` now promotes the first assumption-explicit affine
+structure-sheaf presentation: a supplied reflector, one sheaf object over
+that exact topology, and a whole `DefIso` from its included presheaf to the
+computing coordinate presheaf. Its 230-line rule-free source and 166-line
+reviewer are focused quiet-, exact-warning-, strict-audit/catalog-, and exact
+104-target-health-green. The authorized local checkpoint remains active. The
+next semantic step is then the narrowly named localization-locality capability
+and first concrete affine-scheme presentation, not construction of general
+sheafification, generated topology, or stalk theory.
 
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
@@ -928,9 +934,10 @@ emdash3_2_commutative_algebra.lp
 emdash3_2_commutative_algebra_presheaves.lp
 emdash3_2_commutative_algebra_affine_spec.lp
 emdash3_2_commutative_algebra_affine_zariski.lp
+emdash3_2_ringed_sites.lp
+emdash3_2_commutative_algebra_affine_ringed_sites.lp
 emdash3_2_commutative_algebra_affine_points.lp
 emdash3_2_commutative_algebra_affine_atlas.lp
-emdash3_2_ringed_sites.lp
 emdash3_2_schemes.lp
 ```
 
@@ -952,6 +959,9 @@ sites
 
 generated topologies + affine Spec + selected finite Zariski families
   -> direct big-affine generated Zariski topology
+
+direct big-affine topology + supplied reflective CommRing sheaf theory
+  -> whole affine structure-sheaf presentation
 
 kernel + presheaves + structured algebra + localization units
   -> commutative-algebra presheaves
@@ -1690,6 +1700,96 @@ and the exact-content snapshot above. No timeout, assertion, rule, or semantic
 interface was weakened. The nonduplicative report/tooling gates are also
 green. The synchronized tranche is included in authorized local checkpoint
 `647b6cc`.
+
+### Phase PSSS-05d — Constructed sheafification and categorical-HIT localization
+
+Status: later research gate, explicitly not an affine-scheme MVP blocker.
+The checkpointed PSSS-05c capability remains the consumer-facing contract.
+
+A renewed review of Quirin--Tabareau's *Lawvere--Tierney sheafification in
+Homotopy Type Theory* used the layout extraction at
+`/home/user1/algebraic-geometry/nicolas-tabareau-Lawvere-Tierney-sheafification-in-Homotopy-Type-Theory-sheaf_jfr.txt`
+and visually checked PDF pages 21--27. The construction is HIT-assisted, but
+it is not one monolithic “sheafification HIT”:
+
+1. starting with a left-exact modality on `Type_n`, it first sends an
+   `(n+1)`-type to the image of its modal singleton map, producing a separated
+   object;
+2. universality of that separated reflection is proved with an iterated
+   kernel-pair telescope. Definition 5.13 supplies a higher-inductive
+   coequalizer with a point constructor, modal path constructor, and coherence
+   constructor, followed by an `(n+1)`-truncated colimit;
+3. the actual sheaf object is then the closure of the separated object in a
+   modal-family space; and
+4. separate propositions establish the reflective subuniverse, modality,
+   compatibility across h-levels, and finally left exactness via the path
+   behavior of the unit.
+
+The construction therefore depends on images, truncation, colimits,
+univalence, modal closure, and delicate universe growth. It is strong evidence
+that h-level-stratified sheafification can be constructed synthetically, but
+it is not directly a construction of `V`-valued sheaves on an arbitrary
+external Grothendieck site. Passing from a Grothendieck topology to the
+corresponding Lawvere--Tierney modality in a presheaf topos is itself part of
+the bridge.
+
+Functorial type theory suggests a potentially more direct *categorical*
+formulation. For a site `(K,T)`, select a whole internal class `W_T` of
+cover/descent maps in `Functor_cat(Op_cat(K),V)`. In the ordinary set-valued
+case these may begin with covering-sieve inclusions `R -> y(U)`; a presheaf
+`X` is local when precomposition gives an equivalence
+
+```text
+Hom(y(U),X) ~= Hom(R,X)
+```
+
+for every selected cover. Higher-valued descent may instead require Čech or
+hypercover maps. A categorical HIT/free-localization construction would add
+the required fillers, equalities, and higher coherences at the level of the
+whole presheaf category, with an eliminator expressing the universal property
+against local targets. If successful, it would directly provide a whole
+reflector functor and unit; functor action and naturality would then remain at
+the existing generic owners rather than being restated as external squares.
+
+This route is plausible but not yet available infrastructure. The current
+bespoke `WalkingEnd_cat` HIT demonstrates a contextual `Functord` eliminator
+and constructor betas for one one-dimensional signature; it is not a generic
+categorical-HIT, coequalizer, telescope-colimit, accessible-localization, or
+higher-coherence mechanism. Moreover, a construction uniformly parameterized
+by arbitrary `V` is too strong without explicit completeness, cocompleteness,
+exactness, and algebraic-structure-preservation capabilities. The first honest
+construction probe should be Set/path-valued on a small explicit site. A
+CommRing-valued lift should separately show that the structured operations and
+laws are created by the underlying sheafification rather than assume that fact
+for every value category.
+
+The relationship with the active PSSS-05c interface should be one-way:
+
+```text
+categorical-HIT/localization construction
+  -> whole reflector + inclusion + adjunction + fixed-counit equivalences
+  -> SheafificationCapability(K,T,V)
+  -> existing ringed-site and affine consumers.
+```
+
+Because the active `Sheaf_cat(K,T,V)` is a rigid public facade, an explicit
+constructed local-object category must not be identified with it by a broad
+rewrite or unification rule. Before implementation, audit either a generic
+category-parametric `ReflectiveLocalizationCapability(P,S)`/`SheafTheory`
+whose specialization yields PSSS-05c, or a whole categorical equivalence that
+transports the constructed theory to the facade. Left exactness should be a
+separate extension of the present capability, not silently inferred from a
+bare adjunction plus reflector counits.
+
+Finally, general sheafification alone does not discharge the computational
+affine obligation. Taking `a_T(O_coord)` always gives a sheafified object and
+a unit `O_coord -> include(a_T(O_coord))`; it gives the PSSS-11a whole
+`DefIso(include(O),O_coord)` only after proving that `O_coord` is already
+local/fixed. That is precisely where localization descent, subcanonicity, and
+the concrete Cartier computations must meet the abstract reflector. Thus a
+future HIT construction can instantiate and strengthen the present supplied
+interface, while the current assumption-explicit MVP remains mathematically
+honest and computationally useful in advance of that research programme.
 
 ### Phase PSSS-06a — Set-carrier commutative-ring objects
 
@@ -4277,22 +4377,28 @@ reflection/HIT it actually requires.
 
 ##### Later h-level-stratified sheafification-construction gate
 
-The Tabareau paper is baseline evidence, not the selected implementation.
-Its relevant architecture starts with a left-exact modality on `HProp`, lifts
-the construction inductively to `HSet` and higher truncated types, defines an
-`(n+1)`-sheaf using dense proposition-valued subobjects plus `n`-level
-separation, and constructs sheafification in separate “make separated” and
-“make sheaf” steps. This supports keeping proposition-level topology,
-set-/Cat-/groupoid-valued sheaves, and a sheafification reflector separate.
-It also exposes universe, coherence, and non-finitely-truncated limitations,
-so it must not be transplanted wholesale as the scheme interface.
+The Tabareau paper is baseline evidence, not the selected implementation; the
+detailed renewed review is PSSS-05d. Its architecture starts with a left-exact
+modality on `HProp`, lifts the construction inductively to `HSet` and higher
+truncated types, and separates the separated reflection from the final modal
+closure. The first universality proof uses an explicit higher-inductive
+coequalizer plus a truncated iterated-kernel-pair colimit; reflection,
+modality, h-level compatibility, and left exactness are then separate results.
+This supports keeping proposition-level topology, set-/Cat-/groupoid-valued
+sheaves, and a sheafification reflector separate. It also exposes image,
+truncation, colimit, univalence, universe, coherence, and
+non-finitely-truncated limitations, so it must not be transplanted wholesale
+as the scheme interface.
 
 This gate concerns deriving a reflector and its laws. It does not prohibit
 the PSSS-05c MVP from accepting a reflector/adjunction as supplied primitive
 data, just as the historical experiment accepted `mod_smod`. Conversely,
-postulating that capability does not establish a canonical double-plus
-construction, least generated topology, or left exactness unless those are
-separately supplied or proved.
+postulating that capability does not establish a canonical double-plus or
+categorical-HIT construction, least generated topology, or left exactness
+unless those are separately supplied or proved. Conversely, a future
+categorical localization should instantiate the supplied capability and then
+add its construction/left-exactness evidence, not replace the stable consumer
+boundary.
 
 For emdash, the computational Cartier/Zeuner acceptance criterion remains
 primary: `D : O ->` sieve must expose restriction and invertibility membership
@@ -4809,8 +4915,63 @@ assumed.
 
 ### Phase PSSS-11 — Scheme atlases
 
-Status: proposed after promotion of the internally generated affine-Zariski
-site and checkpointed PSSS-05c reflector boundary.
+Status: active. PSSS-11a is promoted and synchronized-green; its authorized
+local checkpoint remains pending. The next bounded gate is the
+localization-locality capability actually needed by the first scheme-facing
+consumer.
+
+#### PSSS-11a — Whole affine structure-sheaf presentation
+
+The promoted rule-free
+`emdash3_2_commutative_algebra_affine_ringed_sites.lp` consumes both completed
+prerequisites without changing either one. For every base ring `R`,
+`AffineStructureSheafPresentation(R)` retains:
+
+```text
+S : SheafificationCapability(AffineSpecBigSlice_cat(R), BigZar(R), CommRing)
+O : Obj(Sheaf_cat(AffineSpecBigSlice_cat(R), BigZar(R), CommRing))
+i : DefIso(CommRingPsh_cat(AffineSpecBigSlice_cat(R)), include_S(O), O_coord).
+```
+
+Here `O_coord` is the existing whole `affine_spec_coordinate_psh(R)`. The
+resulting `ReflectiveCommRingedSite` therefore has definitionally the exact
+internally generated big-Zariski topology, while its underlying included
+presheaf is related to the already-computing coordinate presheaf by a whole
+forward transformation, a whole inverse transformation, and the existing
+`DefIso` cancellation laws. The readable
+`affine_structure_sheaf_to_coordinate_at` and
+`affine_structure_sheaf_from_coordinate_at` symbols use `tapp0_fapp0` to
+project those transformations at one site object. They are observations of
+the whole internal comparison, not object-only fields and not external
+naturality equations.
+
+The source has 230 lines, nine symbols, and no rewrite or unification rules.
+Its 166-line reviewer has nine assertions: constructor formation, both Sigma
+projection betas, exact generated topology, underlying whole-presheaf
+formation, whole `DefIso` formation, generic whole cancellation, and the two
+literal-chart endpoint computations. Focused source/reviewer checks pass
+quietly. Warning-enabled checks inherit exactly
+`1179 = 1020 critical pairs + 159 replaceable variables`, with no warning at a
+changed-file location. Strict audit, catalog, exact health, documentation
+gates, and the nonduplicative integration remainder are green. Exact-content
+health passes all 104 registered targets in 1187.079 summed check-seconds at
+source-metrics snapshot
+`sha256:c0ba7fc45f04780f9bb149d1a1dc6bf5dd50196c6f949423417ce0066e62d10b`
+and check-content snapshot
+`sha256:e9d102a79c9d824f40cb0bc6e9f829d3adeaf521becdde1fa3e830ea8b04f02d`.
+The new owner/reviewer retain successful 56.934/45.522-second source evidence;
+the final inherited affine-glue reviewer passed in 39.504 seconds under the
+ordinary 60-second limit. No object priming or special Lambdapi flags were
+used. The authorized local checkpoint completes this tranche.
+
+This is deliberately assumption-explicit in two places: both the reflector
+and the whole presentation comparison are supplied. It does not assert that
+the coordinate presheaf is already an object of `Sheaf_cat`, construct a
+double-plus reflector, prove localization descent, impose a stalk-local-ring
+condition, compare with the small Zariski site, or package a scheme. The next
+tranche should separately name the historical computational `D(f)`
+localization/glue behavior as a localization-locality capability. Calling
+that capability “stalk local rings” would overstate its current semantics.
 
 - consume the internally generated affine-Zariski topology and its derived
   selected-basic-open inclusion/leastness; retain supplied or primitive
@@ -5568,6 +5729,31 @@ consumer demonstrates that nontransitive unification requires it.
   Preserve chart/restriction computation at the existing whole functor and
   CommRing owners; add no topology rewrite, external naturality/triangle
   field, global localization choice, or small-site identification.
+- **PSSS-D-113:** make the first affine structure-sheaf boundary an explicit
+  presentation rather than a claim that sheafification has been constructed.
+  Retain a supplied reflective CommRing-valued sheaf theory over the exact
+  internally generated big-Zariski topology, one sheaf object, and a whole
+  `DefIso` from its included presheaf to
+  `affine_spec_coordinate_psh(R)`. Route the resulting ringed-site and
+  underlying-presheaf observations through the general reflective-ringed-site
+  owners. Component helpers may project the forward and inverse whole
+  transformations at a chart, but must not replace their internal action or
+  naturality with object-only data. Keep localization locality, any
+  stalk-local-ring interpretation, small-site comparison, and the scheme
+  package as separately named downstream capabilities.
+- **PSSS-D-114:** retain PSSS-05c as the stable observable output of any future
+  constructed sheafification. Tabareau's construction is HIT-assisted in its
+  separated-reflection proof and then uses modal closure; it does not justify
+  describing sheafification as one undifferentiated HIT. The emdash research
+  candidate is instead a categorical localization of a whole presheaf
+  category at covering-sieve/Čech maps, with an internal eliminator into local
+  targets. Audit a category-parametric reflective-localization capability or
+  whole equivalence to the rigid `Sheaf_cat` facade; add left exactness as a
+  separate extension and do not introduce a global category-head rewrite.
+  Even a successful construction supplies only the unit on
+  `affine_spec_coordinate_psh(R)` until computational descent proves that
+  presheaf fixed, so PSSS-11 locality/subcanonicity remains independently
+  necessary.
 
 ## 19. Side-Task Ledger
 
@@ -5583,6 +5769,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-05a | Canonical sieve-descent diagram and anchored restriction agreement | Research probes green; rigid-adapter promotion trial rejected and removed | Terminal-map uniqueness/contractibility or another derived nonempty semantic consumer, then source/SOP gate |
 | PSSS-05b | Sheaf object package and natural-map category | Proposed | PSSS-05a semantic and SOP gate |
 | PSSS-05c | Supplied topology-/value-indexed sheaf classifier and whole reflector/adjunction capability | Rule-free source/reviewer green through focused checks, exact warnings, strict audit/catalog, exact-content 98-target health, and nonduplicative final gates; local checkpoint `647b6cc` | Concrete `ReflectiveCommRingedSite` consumer closes the promotion gate; affine whole-presheaf presentation next |
+| PSSS-05d | Constructed sheafification via h-level modality or categorical-HIT localization | Later research gate; Tabareau/HIT review and one-way relation to PSSS-05c recorded in PSSS-D-114; not an MVP blocker | Generic categorical localization/HIT infrastructure, local-object/descent classifier, value-category hypotheses, and left-exactness audit |
 | PSSS-06a | Set-carrier commutative-ring operations, laws, package, and zero-ring model | Green through full integration CI; locally checkpointed | PSSS-06b consumer gate closed |
 | PSSS-06b | Ring morphisms, `CommRing_cat`, and transparent explicit-map carrier observation | Green through full integration CI; locally checkpointed | Carrier functor separately consumer-gated |
 | PSSS-07a | One-element localization universal property and zero-ring model | Green through full integration CI; locally checkpointed | Later PSSS-07 consumers remain gated |
@@ -5617,7 +5804,8 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-10c1 | Pointwise basic-open intersection and representation by localization at `f*g` | Rule-free source/reviewer synchronized-green through exact warnings, strict 1,987-check catalog, 96-target health, and nonduplicative integration remainder; local checkpoint `4436a23` | PSSS-10c plus product-unit and structured-map multiplication laws |
 | PSSS-10dG | Direct internally generated big-affine Zariski topology | Promoted 178-line/7-symbol rule-free source and 120-line/9-assertion reviewer; focused and exact inherited `1020 + 159` warnings, strict audit/catalog, tooling/authority sync, and exact 102-target health green; local checkpoint `a30f6dc` | Generic PSSS-09cGI intersection plus selected finite localization families and exact-endpoint affine chart arrows |
 | PSSS-10dS | Small-site topology and ringed-site comparison | Proposed later; not required by direct big-site MVP | Concrete small-site consumer plus PSSS-10dG/PSSS-08c1 comparison scope |
-| PSSS-11 | Scheme atlas | Active: internally generated affine-Zariski site, whole structure-presheaf `DefIso`, narrow locality field, then concrete records/examples | Checkpointed PSSS-10dG plus checkpointed PSSS-05c |
+| PSSS-11a | Whole assumption-explicit affine structure-sheaf presentation | Promoted 230-line/9-symbol rule-free source and 166-line/9-assertion reviewer; focused quiet/exact-warning/audit/catalog, 104-target exact-content health, and nonduplicative integration gates green; authorized checkpoint pending | Checkpointed PSSS-10dG plus checkpointed PSSS-05c |
+| PSSS-11 | Scheme atlas | Active: PSSS-11a whole presentation, then narrowly named localization-locality capability and concrete records/examples | PSSS-11a checkpoint plus existing computational localization/glue owners |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 
 ## 20. Success Criteria For The Foundation Tranches
@@ -6071,3 +6259,31 @@ PSSS-10c1 is successful when:
    are green before an authorized local checkpoint, with the recent long
    aggregate evidence reused until this becomes a substantial promoted
    boundary.
+
+PSSS-11a is successful when:
+
+1. `AffineStructureSheafPresentation(R)` retains exactly a supplied
+   CommRing-valued sheafification capability over
+   `affine_spec_big_zariski_topology(R)`, one object of that sheaf category,
+   and a whole `DefIso` from its included presheaf to the existing coordinate
+   presheaf;
+2. the resulting reflective ringed site is routed through the general
+   `ReflectiveCommRingedSite` constructor and projects definitionally to the
+   exact internally generated big-Zariski topology;
+3. the underlying structure presheaf is a whole functor-category object and
+   the comparison uses whole forward and inverse transformations with generic
+   `DefIso` cancellation, rather than functor-object equality or univalence;
+4. readable chart comparisons are only `tapp0_fapp0` observations of those
+   whole transformations, and literal charts compute on the coordinate side
+   to their retained rings without an object-only naturality substitute;
+5. the module remains transparent and rule-free, with no duplicated
+   functoriality, naturality, identity, composition, Sigma eta, rewrite, or
+   unification owner;
+6. the documentation states that both the reflector and computational
+   comparison are supplied and does not claim canonical sheafification,
+   localization descent, a stalk-local-ring condition, small-site comparison,
+   or a scheme; and
+7. focused source/reviewer checks, exact warning comparison, strict audit,
+   catalog/health synchronization, current authority prose, and the
+   proportional nonduplicative integration remainder are green before the
+   authorized local checkpoint.

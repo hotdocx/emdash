@@ -1899,6 +1899,41 @@ opens, prove subcanonicity, construct sheafification, or package a scheme.
 Those are later consumers of this topology and of the already-computing chart,
 restriction, overlap, and Cartier-locality maps.
 
+### Assumption-Explicit Affine Reflective Structure Sheaves
+
+The first structure-sheaf layer consumes the exact big-affine topology above
+without pretending to construct sheafification. For a base ring `R`, an
+`AffineStructureSheafPresentation(R)` retains:
+
+```text
+S : SheafificationCapability(AffineSpecBigSlice_cat(R), BigZar(R), CommRing)
+O : Obj(Sheaf_cat(AffineSpecBigSlice_cat(R), BigZar(R), CommRing))
+i : DefIso(CommRingPsh_cat(AffineSpecBigSlice_cat(R)), include_S(O), O_coord).
+```
+
+Here `O_coord` is the existing whole `affine_spec_coordinate_psh(R)`. Thus the
+presentation determines a `ReflectiveCommRingedSite` whose topology is
+definitionally the internally generated `BigZar(R)`, while
+`affine_structure_sheaf_coordinate_defiso` relates its included structure
+sheaf to the presheaf whose chart restrictions already compute.
+
+The comparison is deliberately a whole `DefIso` in the functor category.
+Its forward and inverse arrows are transformations, so ordinary action and
+naturality remain at the generic transformation owners. The readable
+`affine_structure_sheaf_to_coordinate_at` and
+`affine_structure_sheaf_from_coordinate_at` operations only project those
+transformations at one site object. At a literal chart `R -> S`, their
+coordinate endpoint computes to the whole ring `S`; they are not an
+object-only substitute for the comparison.
+
+This layer is assumption-explicit in two independent ways: the reflector is
+supplied, and the computational comparison is supplied. It proves neither
+that the coordinate presheaf is a sheaf nor that arbitrary sheafification
+constructs it. It also does not yet supply the historical `D(f)`
+localization/glue capability on the relative big site, a stalk-local-ring
+condition, a small-site comparison, or a scheme record. Those distinctions
+keep the next computational-locality tranche honest.
+
 ### Complementary-Idempotent Affine Atlas
 
 The first finite atlas consumer uses product rings rather than postulating a
@@ -3994,6 +4029,10 @@ kernel and one-way library vocabulary.
 | big-affine Zariski generator family | `AffineSpecBigZariskiGenerators R` |
 | least generated big-affine Zariski topology | `affine_spec_big_zariski_topology R` |
 | selected-family coverhood and leastness | `affine_spec_big_zariski_topology_covers` / `affine_spec_big_zariski_topology_least` |
+| supplied affine reflective structure sheaf | `AffineStructureSheafPresentation R` |
+| exact generated-topology ringed site | `affine_structure_sheaf_ringed_site P` |
+| whole structure/coordinate comparison | `affine_structure_sheaf_coordinate_defiso P` |
+| chart components of that whole comparison | `affine_structure_sheaf_to_coordinate_at P U` / `affine_structure_sheaf_from_coordinate_at P U` |
 | chosen affine basic-open arrow | `comm_ring_basic_open_arrow localization` |
 | basic-open base-change factor and triangle | `comm_ring_basic_open_base_change_factor_map` / `comm_ring_basic_open_base_change_triangle` |
 | elementwise basic-open pullback membership | `comm_ring_basic_open_pullback_membership` |
