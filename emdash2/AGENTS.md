@@ -10,10 +10,14 @@ The active kernel is `emdash3_2.lp`. The one-way derived native equality-valued
 hom-action/groupoidality extension is `emdash3_2_eq1_hom_action.lp`;
 the Cat-valued presheaf, Yoneda, slice, and higher-sieve library is
 `emdash3_2_presheaves.lp`;
+the generic fibrewise dependent-Sigma extension is
+`emdash3_2_fibrewise_sigma.lp`;
 the native subterminal-category and ordinary-sieve specialization is
 `emdash3_2_sieves.lp`;
 the direct ordinary-sieve Grothendieck-topology library is
 `emdash3_2_sites.lp`;
+the whole ordinary-sieve extension and topology-local-object library is
+`emdash3_2_sieve_extensions.lp`;
 the witness-rich internally generated Grothendieck-topology library is
 `emdash3_2_generated_topologies.lp`;
 the supplied reflective-sheafification and commutative-ringed-site library is
@@ -130,30 +134,34 @@ Use the following order:
 2. `emdash3_2_presheaves.lp` for the rigid Cat-valued presheaf facade,
    restriction along opposite functors, transparent Yoneda and slice
    presentations, and explicitly Cat-valued higher sieves;
-3. `emdash3_2_eq1_hom_action.lp` for the transparent derived native
+3. `emdash3_2_fibrewise_sigma.lp` for the stable composite of a Cat-valued
+   family `E : K -> Cat` and a second family over `Sigma(E)`, with computing
+   fibres and one whole internally natural first projection. Explicit
+   base-arrow beta and total-category Fubini comparison remain consumer-gated;
+4. `emdash3_2_eq1_hom_action.lp` for the transparent derived native
    equality-valued
    next-hom and groupoidality layer, including the reusable Cat-level theorem
    that the selected left inverse of `OmegaEquivAlong` also satisfies the
    right whole-functor law;
-4. `emdash3_2_eq1_evidence_property.lp` for transparent native equality-valued
+5. `emdash3_2_eq1_evidence_property.lp` for transparent native equality-valued
    evidence-property, retract-truncation, and finite-`NCat` object-truncation
    theorems;
-5. `emdash3_2_sieves.lp` for native subterminal categories, ordinary sieves
+6. `emdash3_2_sieves.lp` for native subterminal categories, ordinary sieves
    as the pointwise-subterminal specialization of higher sieves, and ordinary
    pullback; it deliberately does not declare `Omega` or topology;
-6. `emdash3_2_nat_arithmetic.lp` for reusable Nat addition, associativity,
+7. `emdash3_2_nat_arithmetic.lp` for reusable Nat addition, associativity,
    Unit/Empty proposition evidence, and Nat sethood;
-7. `emdash3_2_finite_families.lp` for Nat-indexed right-associated finite
+8. `emdash3_2_finite_families.lp` for Nat-indexed right-associated finite
    families, constructors/projections, pointwise map, dependent pointwise
    evidence, evidence over already-selected dependent evidence, its generic
    pointwise map, and retained sethood;
    it deliberately declares no `Fin`, lookup, list/Sum/inductive interface,
    append, permutation quotient, or package eta;
-8. `emdash3_2_commutative_algebra.lp` for set-carrier commutative-ring
+9. `emdash3_2_commutative_algebra.lp` for set-carrier commutative-ring
    operations and laws, readable projections, and the one-element zero-ring
    model; this object module deliberately declares no morphism/category,
    localization, finite-family, power, or polynomial interface;
-9. `emdash3_2_commutative_algebra_category.lp` for structured ring morphisms,
+10. `emdash3_2_commutative_algebra_category.lp` for structured ring morphisms,
    proposition/sethood proofs, transparent explicit-map observations,
    consumer-justified pointwise extensionality, the `CommRing_cat` facade, and
    the narrowly selected stable pointwise identity/composition comparisons;
@@ -161,56 +169,56 @@ Use the following order:
    Path-valued carrier family without a competing direct capped-action rule;
    it deliberately declares no localization, finite-family, power, or
    polynomial package;
-10. `emdash3_2_commutative_algebra_product.lp` for the componentwise product
+11. `emdash3_2_commutative_algebra_product.lp` for the componentwise product
     ring, its componentwise structured-map action, and whole identity and
     composition paths. It is rule-free and deliberately leaves a primitive
     binary-product functor facade consumer-gated;
-11. `emdash3_2_commutative_algebra_f2.lp` for the closed Boolean-carrier
+12. `emdash3_2_commutative_algebra_f2.lp` for the closed Boolean-carrier
     two-element ring, with XOR addition, conjunction multiplication, retained
     sethood, and all ring laws proved by internal finite elimination;
-12. `emdash3_2_commutative_algebra_finite.lp` for finite ring sums/dot
+13. `emdash3_2_commutative_algebra_finite.lp` for finite ring sums/dot
     products, structured-map preservation, retained unimodular coefficient
     presentations, and algebraic Zariski-cover presentation data; it
     deliberately declares no `Spec`, localization family, coverage/topology,
     power/radical, fraction, polynomial, quotient, or mere-existence claim;
-13. `emdash3_2_commutative_algebra_polynomial.lp` for free commutative
+14. `emdash3_2_commutative_algebra_polynomial.lp` for free commutative
    `R`-algebras on a variable classifier, expressed by contractible
    structured extensions of base maps and valuations; it deliberately
    declares no monomial/coefficient/quotient syntax, positive-variable
    representation, finite-index facade, runtime rule, unifier, or package
    eta;
-14. `emdash3_2_commutative_algebra_localization.lp` for proposition-valued
+15. `emdash3_2_commutative_algebra_localization.lp` for proposition-valued
    unit evidence, unit path transport and structured-map preservation,
    pointwise factor triangles, contractible-factorization localization
    packages, the Path-valued unit-evidence family over total ring elements,
    and named transparent observations; it deliberately declares no concrete
    fractions, iterated comparison, finite-family, power, polynomial, or
    Zariski interface;
-15. `emdash3_2_commutative_algebra_localization_unit.lp` for the canonical
+16. `emdash3_2_commutative_algebra_localization_unit.lp` for the canonical
     unit evidence of one and the universal-property proof that the pointwise
     identity localizes any already invertible element. It constructs the
     identity localization at one for every ring and is rule-free; it declares
     no fraction representation, presheaf, topology, `Spec`, or scheme;
-16. `emdash3_2_commutative_algebra_localization_zero.lp` for derived
+17. `emdash3_2_commutative_algebra_localization_zero.lp` for derived
     multiplication/negation-at-zero laws, the structured point maps to and
     from the zero ring, and the universal-property proof that `R[1/0]` is the
     zero ring. It is the rule-free computational empty-basic-open case, not a
     nondegenerate fraction model; it declares no presheaf, topology, `Spec`,
     overlap, or scheme;
-17. `emdash3_2_commutative_algebra_localization_idempotent.lp` for the
+18. `emdash3_2_commutative_algebra_localization_idempotent.lp` for the
     set-valued fixed-image ring `eR={x | e*x=x}`, its inherited computing
     operations, the scaling map `x |-> e*x`, and the universal-property proof
     that this is localization at a supplied idempotent. It is quotient-free
     and rule-free, but constructs neither a product ring nor a closed
     nontrivial idempotent, presheaf, topology, `Spec`, or scheme;
-18. `emdash3_2_commutative_algebra_localization_comparison.lp` for unit
+19. `emdash3_2_commutative_algebra_localization_comparison.lp` for unit
     multiplication lemmas, the selected stable pointwise ring-map composite
     consumer, two-stage localization packages, and canonical forward/reverse
     comparison factors with pointwise triangles; it
     deliberately declares no fraction syntax, equality of chosen localization
     packages, comparison inverse laws, finite-family, polynomial, or Zariski
     interface;
-19. `emdash3_2_commutative_algebra_localization_overlap.lp` for
+20. `emdash3_2_commutative_algebra_localization_overlap.lp` for
     contractible-factor uniqueness, the whole left and right cancellation
     paths of the product/iterated localization comparison, the native
     fixed-forward `OmegaEquivAlong CommRing_cat`, and its derived
@@ -218,7 +226,7 @@ Use the following order:
     composition/identity at the generic category owners; it declares no
     concrete fraction model, chosen-localization equality, presheaf,
     topology, `Spec`, or scheme;
-20. `emdash3_2_commutative_algebra_presheaves.lp` for the transparent
+21. `emdash3_2_commutative_algebra_presheaves.lp` for the transparent
    CommRing-valued presheaf classifier, actual structured restriction maps,
    pointwise identity/composition paths, and proposition-valued arrowwise
    invertibility support closed under restriction; it assembles the
@@ -228,18 +236,23 @@ Use the following order:
    transparent affine identity presheaf consumed by affine glue and affine
    points. It deliberately declares no topology, sheaf, or ringed-site
    package;
-21. `emdash3_2_sites.lp` for ordinary-sieve membership, the canonical maximal
+22. `emdash3_2_sites.lp` for ordinary-sieve membership, the canonical maximal
    sieve, proposition-valued sieve coverages, Grothendieck topology laws, and
    the direct chaotic-topology model; it declares no `Omega`, generated
    coverage saturation, sheafification, or descent;
-22. `emdash3_2_generated_topologies.lp` for witness-rich type-valued sieve
+23. `emdash3_2_sieve_extensions.lp` for the transparent extension of an
+   ordinary sieve to the ambient Cat-valued presheaf by fibrewise dependent
+   Sigma, its whole inclusion into Yoneda, and the resulting fixed-forward
+   topology-local-object predicate. It constructs no reflector or
+   sheafification and does not identify this condition with weighted descent;
+24. `emdash3_2_generated_topologies.lp` for witness-rich type-valued sieve
     generators and the rule-free impredicative intersection of every
     Grothendieck topology accepting them. It constructs a proposition-valued
     least topology internally, with computing generator inclusion, leastness,
     and a chaotic upper bound. It deliberately adds no inductive derivation
     syntax, truncation/HIT, coverhood normalizer, decision procedure,
     sheafification, affine specialization, or scheme;
-23. `emdash3_2_commutative_algebra_locality.lp` for the coverhood view of the
+25. `emdash3_2_commutative_algebra_locality.lp` for the coverhood view of the
    already-computing semantic invertibility sieve and the universal-property
    localization factor selected at each literal support member. It packages
    the factors as one internal ordinary transformation from the constant
@@ -250,7 +263,7 @@ Use the following order:
    has a closed zero-ring computation but deliberately claims no limiting
    cone/descent equivalence, sheaf, ringed-site package, generated topology,
    `Spec`, or scheme;
-24. `emdash3_2_commutative_algebra_matching.lp` for the Path-valued carrier
+26. `emdash3_2_commutative_algebra_matching.lp` for the Path-valued carrier
    family over support elements, its Pi category of internally coherent
    matching families, and the functor sending a localization element and its
    equality paths to the corresponding matching section. Its one literal
@@ -258,7 +271,7 @@ Use the following order:
    generic Pi/Catd/PathLift owners retain coherence and arrow action. It
    deliberately supplies no inverse/glue, descent equivalence, sheafhood,
    limiting claim, generated topology, `Spec`, or scheme;
-25. `emdash3_2_commutative_algebra_glue.lp` for computational localization
+27. `emdash3_2_commutative_algebra_glue.lp` for computational localization
    glue. Its earlier compatibility package retains a genuine functor from the
    coherent matching category to the localization's Path-valued carrier, a
    left-inverse observation on localization elements, and the componentwise
@@ -271,7 +284,7 @@ Use the following order:
    `D(s)`, which need not cover, not ordinary covering-sieve sheaf descent or
    a stalk-local-ring theorem; the stricter computational `DefIso` is absent.
    It deliberately declares no generated topology, `Spec`, or scheme;
-26. `emdash3_2_commutative_algebra_affine_glue.lp` for the identity
+28. `emdash3_2_commutative_algebra_affine_glue.lp` for the identity
    CommRing-valued presheaf on `Op_cat CommRing_cat` and the derived affine
    Cartier glue attached to every chosen localization. Evaluation at the
    localization-map support centre is a genuine functor; localization-factor
@@ -281,7 +294,7 @@ Use the following order:
    does not promote those component laws to equality of whole functors or
    claim `OmegaEquivAlong Cat_cat`, covering-sieve descent, sheafhood,
    topology, `Spec`, or schemes;
-27. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
+29. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
    of universal-property localizations, presented affine basic-open arrows,
    elementwise localization base-change factors and triangles, and returned
    ordinary-sieve pullback membership. It also retains explicit containment
@@ -290,12 +303,12 @@ Use the following order:
    generic finite owner. It is rule-free and deliberately declares no global
    localization choice, specialized rigid membership facade, propositional
    truncation, generated coverage/topology, subcanonicity, `Spec`, or scheme;
-28. `emdash3_2_commutative_algebra_localization_split.lp` for the generic
+30. `emdash3_2_commutative_algebra_localization_split.lp` for the generic
     product idempotent `(1,0)`, its fixed-image localization and affine arrow,
     and the closed `F2 x F2` witness that the idempotent is neither endpoint.
     Its restriction computes as `(x,y) |-> (x,0)`; it is rule-free and claims
     no matching equivalence, sheafhood, topology, `Spec`, or scheme;
-29. `emdash3_2_commutative_algebra_zariski_topology.lp` for the rule-free
+31. `emdash3_2_commutative_algebra_zariski_topology.lp` for the rule-free
    property and package saying that every sieve containing a selected finite
    Zariski basic-open presentation covers in an already supplied topology on
    `Op_cat CommRing_cat`. It retains presentation and membership data, proves
@@ -303,7 +316,7 @@ Use the following order:
    as a feasibility model; it does not construct the least/generated Zariski
    topology, choose localizations, or declare truncation, sheafification,
    subcanonicity, `Spec`, or schemes;
-30. `emdash3_2_commutative_algebra_affine_spec.lp` for the conventional big
+32. `emdash3_2_commutative_algebra_affine_spec.lp` for the conventional big
     affine slice over `Spec(R)`, its CommRing-valued coordinate presheaf,
     generic internally carried chart arrows, selected localization and
     iterated-localization charts, and the two geometric overlap directions.
@@ -312,7 +325,7 @@ Use the following order:
     module is rule-free and deliberately does not identify the big slice with
     a selected small Zariski site or claim topology, sheafhood, locally ringed
     structure, or a complete scheme;
-31. `emdash3_2_commutative_algebra_affine_zariski.lp` for the rule-free
+33. `emdash3_2_commutative_algebra_affine_zariski.lp` for the rule-free
     internally generated Zariski topology on the big affine slice. It lifts
     each selected localization in a finite Zariski presentation to a whole
     chart arrow, retains literal family containment as witness-rich generator
@@ -322,7 +335,7 @@ Use the following order:
     coordinate restriction computes to the existing whole localization map.
     It adds no Sigma eta, external naturality/triangle field, coverhood rule,
     localization choice, sheafification, small-site comparison, or scheme;
-32. `emdash3_2_commutative_algebra_affine_points.lp` for the rule-free affine
+34. `emdash3_2_commutative_algebra_affine_points.lp` for the rule-free affine
     Yoneda functor of points, the already-internal semantic basic-open sieve
     `D(f)`, and the constructive `TypeEquiv` between its points at each test
     ring and maps out of a selected localization `R[1/f]`. Both inverse laws
@@ -331,14 +344,14 @@ Use the following order:
     sides retain their object/arrow action at generic owners; the module adds
     no external naturality field, whole-presheaf equality, univalence
     principle, topology, sheafhood, or general scheme;
-33. `emdash3_2_commutative_algebra_affine_intersections.lp` for the rule-free
+35. `emdash3_2_commutative_algebra_affine_intersections.lp` for the rule-free
     pointwise equivalence between `D(f*g)` and the explicit intersection of
     `D(f)` and `D(g)`, together with its selected two-step representation by
     localization at `f*g`. It exposes executable forward/inverse maps and
     both component laws while the existing sieve and presheaf owners retain
     whole action; it adds no external naturality, whole-presheaf equality,
     univalence principle, topology, sheafhood, or general scheme;
-34. `emdash3_2_commutative_algebra_affine_atlas.lp` for the rule-free
+36. `emdash3_2_commutative_algebra_affine_atlas.lp` for the rule-free
     complementary-idempotent atlas of every product ring `R x S`. It retains
     the existing selected binary Zariski-cover family, constructs both
     internal affine chart arrows from the orthogonal overlap, and makes their
@@ -346,7 +359,7 @@ Use the following order:
     closed `F2 x F2` instance is a concrete non-endpoint atlas/glue
     presentation, not a universal gluing theorem, sheaf, locally ringed space,
     or general scheme record;
-35. `emdash3_2_ringed_sites.lp` for an assumption-explicit, rule-free
+37. `emdash3_2_ringed_sites.lp` for an assumption-explicit, rule-free
     topology- and value-category-indexed sheaf classifier, supplied whole
     inclusion/reflector adjunction, fixed-counit `OmegaEquivAlong` reflector
     evidence, and its derived whole internal mate/glue operations. It also
@@ -356,7 +369,7 @@ Use the following order:
     a chosen reflector. The module does not
     construct canonical sheafification, generated saturation, descent or left
     exactness, assert a local-ring condition, or define a scheme;
-36. `emdash3_2_site_basis.lp` for the transparent rule-free whole restriction
+38. `emdash3_2_site_basis.lp` for the transparent rule-free whole restriction
     of value-category-valued presheaves along a base functor, a supplied
     sheaf-restriction functor connected to that operation by one whole
     `IsoEvidence`, and comparison-lemma strength as
@@ -366,27 +379,27 @@ Use the following order:
     adding a runtime fold. The module does not construct topology, continuity,
     sheafification, induced slices, a Beck--Chevalley mate, local-exactness
     evidence, component squares, or an equivalence of raw base categories;
-37. `emdash3_2_commutative_algebra_ringed_space_covers.lp` for the rule-free
+39. `emdash3_2_commutative_algebra_ringed_space_covers.lp` for the rule-free
     global-first cover substrate. It retains one reflective CommRinged site,
     one distinguished object, and one ordinary covering sieve, while
     Grothendieck stability derives the pulled-back cover of each selected
     member. It stores no component naturality, overlap, or cocycle fields and
     claims neither affineness, finiteness, effective gluing, local rings, nor a
     scheme;
-38. `emdash3_2_commutative_algebra_binary_covers.lp` for the transparent
+40. `emdash3_2_commutative_algebra_binary_covers.lp` for the transparent
     rule-free binary cover-generation layer. Two selected members generate
     the retained covering sieve when every retained arrow carries a
     Boolean-selected factor map and triangle through one chart. The module is
     witness-rich and computational, constructs no second generated-sieve
     object, and stores no external restriction, overlap, or cocycle field. It
     asserts neither affineness, locally-ringed support, a scheme, nor gluing;
-39. `emdash3_2_commutative_algebra_ringed_space_restrictions.lp` for the
+41. `emdash3_2_commutative_algebra_ringed_space_restrictions.lp` for the
     rule-free whole slice-domain functor, whole ambient structure-presheaf
     restriction, and visibly supplied reflective CommRinged slice carrying
     one whole `DefIso` to that restriction. It does not claim induced
     topology/sheafification, add site-morphism continuity, assert affineness or
     local rings, or define a scheme;
-40. `emdash3_2_commutative_algebra_affine_ringed_sites.lp` for the rule-free
+42. `emdash3_2_commutative_algebra_affine_ringed_sites.lp` for the rule-free
     assumption-explicit affine structure-sheaf presentation on the internally
     generated big Zariski site. It retains a supplied reflective
     CommRing-valued sheaf theory, one sheaf object, and a whole `DefIso` from
@@ -396,7 +409,7 @@ Use the following order:
     action or naturality. The module does not construct sheafification, prove
     localization locality or a stalk-local-ring condition, compare with the
     small site, or package a scheme;
-41. `emdash3_2_commutative_algebra_affine_locality.lp` for the rule-free,
+43. `emdash3_2_commutative_algebra_affine_locality.lp` for the rule-free,
     assumption-explicit whole coordinate-locality capability on the
     computational big affine slice. For every chart, coordinate section, and
     supplied universal-property localization, it retains the generic
@@ -405,14 +418,14 @@ Use the following order:
     localization choice and does not call `D(s)` ordinary covering-sieve
     descent, construct locality, impose a stalk-local-ring condition, compare
     with the small site, or package a scheme;
-42. `emdash3_2_commutative_algebra_affine_schemes.lp` for the rule-free thin
+44. `emdash3_2_commutative_algebra_affine_schemes.lp` for the rule-free thin
     computational affine-scheme presentation. It pairs the whole reflective
     structure-sheaf presentation with whole coordinate-localization locality;
     the base ring determines the big-Zariski site, and selected atlases remain
     consumer data. It does not construct either capability, duplicate
     chart/cover/overlap action, define general non-affine gluing, compare with
     the small site, construct stalks, or assert a stalk-local-ring theorem;
-43. `emdash3_2_commutative_algebra_affine_basis.lp` for the transparent
+45. `emdash3_2_commutative_algebra_affine_basis.lp` for the transparent
     rule-free CS-05b realization package. A selected functor from the big
     affine slice into the actual ambient slice carries whole sheaf-basis
     semantics, while one independent whole presheaf `DefIso` joins the
@@ -421,7 +434,7 @@ Use the following order:
     not construct any input, assert a raw base-category equivalence, store
     local-exactness/component squares, transport generic glue, define a
     general scheme, or impose a stalk-local-ring condition;
-44. `emdash3_2_commutative_algebra_affine_cover_charts.lp` for the
+46. `emdash3_2_commutative_algebra_affine_cover_charts.lp` for the
     transparent rule-free affine realization of an actual selected cover
     chart. It retains a supplied reflective slice, coordinate ring, existing
     affine-scheme presentation, whole basis functor, and whole
@@ -429,21 +442,21 @@ Use the following order:
     that existing owner. Dependent projections retain canonical nested-Sigma
     endpoints without package eta, a rule, or a unifier. It adds no overlap,
     cocycle, locally-ringed, or scheme claim;
-45. `emdash3_2_commutative_algebra_affine_cover_presentations.lp` for the
+47. `emdash3_2_commutative_algebra_affine_cover_presentations.lp` for the
     transparent rule-free global-first binary affine-cover package. Two
     selected charts generate the retained covering sieve and each carries a
     whole affine realization. Overlaps and repeated restrictions remain at
     the global cover and generic composition owners; the package stores no
     external coherence and is not yet a locally-ringed scheme certificate or
     an atlas-first gluing constructor;
-46. `emdash3_2_commutative_algebra_affine_cover_refinements.lp` for the
+48. `emdash3_2_commutative_algebra_affine_cover_refinements.lp` for the
     transparent rule-free CS-07 consumer. Membership of an arbitrary retained
     sieve arrow computes its existing Boolean-selected factorization; that
     side then selects the retained affine generator, its already-owned whole
     realization, and its coordinate ring. It adds no duplicate refinement
     record and does not assert that the arbitrary refinement itself is affine,
     construct a global object, add coherence fields, or define a scheme;
-47. `emdash3_2_commutative_algebra_local_ringed_sites.lp` for the transparent
+49. `emdash3_2_commutative_algebra_local_ringed_sites.lp` for the transparent
     rule-free topology-local local-ring presentation. Invertible zero makes
     the literal empty sieve cover, while an invertible sum selects a covering
     sieve and one Boolean unit branch at every retained member. This is a
@@ -451,7 +464,7 @@ Use the following order:
     propositional truncation. It does not assert sheafhood, construct the
     automatic support laws, compare with stalks, classify open immersions, or
     define a scheme;
-48. `emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp` for
+50. `emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp` for
     the transparent rule-free whole-object consumer. A supplied reflective
     slice owns topology, sheaf semantics, and one whole `DefIso`; topology-
     local computation runs on its computing ambient-restriction target. The
@@ -459,48 +472,48 @@ Use the following order:
     existing generated binary affine atlas as the fibrewise site-relative
     certificate. It adds no gluing, open-classifier, or
     representation-independent scheme claim;
-49. `emdash3_2_commutative_algebra_site_relative_schemes.lp` for the
+51. `emdash3_2_commutative_algebra_site_relative_schemes.lp` for the
     transparent rule-free dependent total of one global reflective ringed
     cover and its existing locally-ringed binary affine-atlas certificate.
     Whole restriction, overlap compatibility, and chart realizations remain
     at existing owners; it adds no transition/cocycle data, gluing theorem,
     classical-open comparison, or semantic category of schemes;
-50. `emdash3_2_finite_limits.lp` for the transparent rule-free selected
+52. `emdash3_2_finite_limits.lp` for the transparent rule-free selected
     binary product of two objects, expressed as a Boolean path-discrete
     diagram and a whole terminal-weighted limit comparison. Its universal
     cone and both projections are derived through existing profunctor owners;
     it asserts no global existence of products, categorical pullback
     constructor, or componentwise cone/naturality interface;
-51. `emdash3_2_commutative_algebra_scheme_chart_overlaps.lp` for the
+53. `emdash3_2_commutative_algebra_scheme_chart_overlaps.lp` for the
     transparent rule-free selected product of two retained scheme charts in
     the conventional slice. Existing whole slice-domain and structure-
     presheaf action derive the two base arrows and ring restrictions. It adds
     no overlap/cocycle field to a scheme, atlas-first gluing, projective-space
     claim, or assertion that arbitrary chart pairs admit pullbacks;
-52. `emdash3_2_commutative_algebra_laurent.lp` for the transparent rule-free
+54. `emdash3_2_commutative_algebra_laurent.lp` for the transparent rule-free
     universal-property construction of the canonical maps
     `A[t,1/t] -> A[u,1/u]` and back, sending each coordinate to the inverse of
     the other. Its common-overlap package uses two literal localization maps
     into one ring and whole identity paths for the two constructed coordinate
     changes. It adds no polynomial syntax, fraction normalizer, runtime rule,
     projective object, or scheme declaration;
-53. `emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp` for the thin
+55. `emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp` for the thin
     transparent rule-free application of that generic package to the actual
     structure rings, inherited overlap ring, and two restriction maps of a
     supplied binary site-relative scheme. It adds no disconnected overlap
     isomorphism, external restriction square, general scheme field,
     atlas-first gluing, non-affineness theorem, or closed projective line;
-54. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+56. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-55. `emdash3_2_checks.lp` for executable regression statements;
-56. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+57. `emdash3_2_checks.lp` for executable regression statements;
+58. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-57. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-58. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+59. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+60. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-59. `reports/INDEX.md` for task-specific plans and decision records.
-60. `book/book.json` and `book/evidence.json` for book source
+61. `reports/INDEX.md` for task-specific plans and decision records.
+62. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

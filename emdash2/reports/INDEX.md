@@ -50,11 +50,20 @@ coequalizer and not a monolithic sheafification HIT.
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_presheaves.lp` is the one-way
 Cat-valued presheaf, restriction, Yoneda, slice, and higher-sieve library, and
+`emdash3_2_fibrewise_sigma.lp` is the stable dependent-Sigma composition of a
+Cat-valued family with a second family over its total category. Its fibres
+and whole first-projection components compute; explicit base-arrow beta and a
+total-category Fubini comparison remain consumer-gated.
 `emdash3_2_sieves.lp` is the downstream native subterminal-category and
 ordinary-sieve specialization without `Omega` or topology.
 `emdash3_2_sites.lp` is the direct ordinary-sieve Grothendieck-topology layer,
 with membership, maximal sieve, the three topology laws, and the chaotic
 model, but no `Omega`, generated saturation, sheafification, or descent.
+`emdash3_2_sieve_extensions.lp` uses fibrewise Sigma to extend an ordinary
+sieve to the ambient Cat-valued presheaf category and derives its whole
+inclusion into Yoneda. It defines topology-locality by the exact resulting
+whole Hom equivalence; it does not construct a reflector or identify that
+condition with the separately probed weighted-limit descent package.
 `emdash3_2_generated_topologies.lp` is the rule-free universal-property
 generated-topology layer immediately downstream of sites. Type-valued sieve
 generators retain presentation witnesses; generated coverhood is the

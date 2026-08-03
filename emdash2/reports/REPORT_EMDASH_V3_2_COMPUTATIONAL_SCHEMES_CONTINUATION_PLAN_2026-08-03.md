@@ -192,6 +192,26 @@ categorical owners.  This does **not** mean a direct transcription of a HoTT
 HIT into Lambdapi, nor does it commit the stable consumer interface to
 external point/path constructors or naturality equations.
 
+The first CS-12 implementation tranche now makes the ordinary-covering-sieve
+choice of `W_T` literal.  `FibrewiseSigma_catd(E,D)` composes a family
+`E : K -> Cat` with a family over `Sigma(E)`.  Consequently an ordinary sieve
+`R` on `U`, natively stored over `K/U`, extends to the ambient presheaf
+
+```text
+R_hat[V] = Sigma(f : Hom_K(V,U)), R(f),
+i_R       : R_hat -> y(U).
+```
+
+The fibres and components of the whole first projection `i_R` compute.  Its
+base-arrow action and naturality are carried internally by one displayed
+functor; the first boundary deliberately adds no external equations or
+separate action fields.  `IsTopologyLocalPsh(T,X)` now quantifies, for every
+covering `R`, the exact whole equivalence induced by precomposition with
+`i_R`.  This closes the topology-to-local-object *interface* for Cat-valued
+ordinary-sieve descent.  It does not yet construct a local replacement,
+prove equivalence with the PSSS-05a weighted-limit presentation, or select the
+Cech/hypercover maps needed by stronger higher-descent semantics.
+
 Three notions must therefore remain distinct:
 
 | Phrase | Role in this program | Non-claim |
@@ -873,7 +893,8 @@ close CS-05.
 | Stalk-local-ring comparison | Moderate/research | Stalk/point infrastructure and constructive hypotheses. |
 | Small-site restriction/basis comparison | Moderate | Exact basis and topology transport owners. |
 | Representation-independent category of schemes | Research-grade but plausible | Morphism representation, locally-ringed structure, and comparison with presentations. |
-| Fixed-site categorical-HIT sheafification construction | Research-grade but factorable | Per-presheaf categorical constructors/eliminator, topology-to-local-equivalence bridge, functorial assembly, rigid `Sheaf_cat` realization, CommRing lift, and left exactness. |
+| Ordinary-sieve extension and topology-local-object classifier | Implemented at the whole Cat-valued boundary | Fibrewise dependent-Sigma values and inclusion components compute; explicit base-arrow beta and equivalence with the separate weighted-limit descent presentation remain consumer-gated. |
+| Fixed-site categorical-HIT sheafification construction | Research-grade but factorable | Per-presheaf categorical constructors/eliminator, functorial assembly, rigid `Sheaf_cat` realization, CommRing lift, and left exactness. The ordinary-sieve topology-to-local-object interface is no longer missing. |
 | Unrestricted atlas effectivity | Research-grade | Descent/localization infrastructure and scope. |
 
 The original computational-schemes direction remains feasible. The main risk
@@ -890,12 +911,14 @@ currently available; it may instantiate the presentation as supplied data
 without requiring a gluing/effectivity construction.
 
 A native categorical-HIT experiment is also ready as an independent research
-tranche, but not as the next dependency of that consumer. Its first honest
+tranche, but not as the next dependency of that consumer. Its topology-local
+target predicate is now concrete: ordinary covering sieves extend to whole
+maps into Yoneda and induce fixed-forward Hom equivalences. The next honest
 probe is Set/path-valued on a small explicit site: for one selected presheaf
 `P`, construct `sheafify_T(P)` by adjoining the chosen descent fillers and
-test its internal eliminator against local targets. Only after that objectwise
-probe should the construction be made uniform on presheaf objects and arrows
-to produce a whole reflector and unit instantiating
+test its internal eliminator against those local targets. Only after that
+objectwise probe should the construction be made uniform on presheaf objects
+and arrows to produce a whole reflector and unit instantiating
 `SheafificationCapability`. A CommRing-valued lift, left exactness, and slice
 base change remain separate later gates. Raw support-lattice, compact-open,
 and stalk comparisons likewise remain later theorems rather than hidden
@@ -1104,6 +1127,29 @@ prerequisites.
   `BinarySiteRelativeSchemePresentation`. The thin scheme adapter adds only
   the common base ring around that generic package. It neither constructs the
   supplied global object nor proves that it is non-affine or projective line.
+- **CS-D-034 — Objectwise localization is a whole-Hom contract:** for one
+  localizing arrow `w:A->B` in an ambient category, `X` is local when
+  precomposition `Hom(B,X)->Hom(A,X)` is an `OmegaEquivAlong Cat_cat`. A
+  proposed unit `eta:P->L` is an objectwise localization when `L` is local and
+  precomposition `Hom(L,X)->Hom(P,X)` is the same fixed-forward whole
+  equivalence for every local `X`. The selected left inverse is the internal
+  eliminator; existing equality-valued owners derive both whole beta/eta
+  composite-functor paths. The green ignored identity model validates this
+  output contract but is not a nontrivial sheafification construction.
+- **CS-D-035 — Ordinary sieves localize through fibrewise dependent Sigma:**
+  an ordinary sieve over `K/U` is extended to `K` as
+  `V |-> Sigma(f:V->U),R(f)`. The generic whole first projection is its exact
+  inclusion into `y(U)`, so topology-locality can quantify whole Hom
+  equivalences without an external cone, component naturality, or a supplied
+  unrelated presheaf map. This construction, rather than a propositional
+  truncation, is the missing bridge found by the first CS-12 audit.
+- **CS-D-036 — Fibrewise Sigma is the only new primitive boundary:**
+  `FibrewiseSigma_catd` and its whole displayed first projection are stable
+  constructor owners with computing fibres/components. The ordinary-sieve
+  extension and local-object classifier are transparent specializations.
+  Explicit base-arrow beta, total-category Fubini, weighted-descent
+  comparison, and categorical-HIT localization remain separate gates; no
+  sieve-specific opaque action or external coherence package is promoted.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1133,7 +1179,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/localization sheafification | Factorized PSSS-05d/PSSS-D-114 research: construct `sheafify_T(P)` objectwise by a categorical HIT and assemble it functorially into the reflector/free localization; Tabareau's auxiliary HoTT HIT remains semantic evidence | Topology-to-local-object bridge, categorical HIT and eliminator, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
+| CS-12 | Constructed native categorical-HIT/localization sheafification | First whole local-object tranche implemented: generic fibrewise dependent Sigma, ordinary-sieve extension/inclusion, and `IsTopologyLocalPsh`; the whole-Hom objectwise localization contract and identity model are green in an ignored probe. The categorical-HIT object former remains research | Small explicit-site categorical HIT and eliminator, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
 ## 13. CS-01 Success Criteria
@@ -1942,6 +1988,69 @@ was discovered to ignore a supplied filename and began the aggregate; it was
 interrupted immediately and contributes no validation evidence. The bounded
 CS-07c source boundary is locally checkpointed as `5118fb1`
 (`feat: add Laurent scheme overlap presentations`).
+
+### 13.14 CS-12a sieve extension and topology-local objects — 2026-08-03
+
+The first CS-12 audit separated two questions that had previously been
+conflated.  The universal output contract for localizing one object is already
+expressible with existing whole owners: precomposition by the proposed unit
+is an `OmegaEquivAlong Cat_cat`, its selected left inverse is the eliminator,
+and the equality-valued hom-action extension supplies both whole cancellation
+paths.  The ignored probe
+`tmp/probes/cs12_single_map_localization_contract.lp` checks this contract and
+a closed identity-localization model without adding a rule or pretending that
+the identity model is sheafification.
+
+The nontrivial missing bridge was representational.  An ordinary sieve is a
+subterminal family over `Into_restr_cat(U)`, whereas local-object semantics
+uses a whole map in `Psh_cat(K)`.  The rejected shortcut would have supplied
+an unrelated presheaf and arrow annotated only by the same cover witness.
+Instead, the promoted generic constructor
+`FibrewiseSigma_catd(E,D)` composes `E : K -> Cat` with
+`D : Sigma(E) -> Cat`.  Its fibre computes to
+
+```text
+Sigma(e : E[k]), D[(k,e)],
+```
+
+and `fibrewise_sigma_proj1_funcd` is one whole displayed first projection
+whose component computes to the existing `Sigma_proj1_func`.  The family and
+projection carry base action, naturality, and higher action internally.  The
+first boundary intentionally leaves explicit base-arrow beta and the total
+Fubini comparison deferred rather than adding an incomplete component action
+calculus.
+
+`emdash3_2_sieve_extensions.lp` is then transparent.  It specializes
+fibrewise Sigma to `yoneda_psh(U)` and `sieve_higher(R)`, obtaining the whole
+extension `ordinary_sieve_extension_psh(R)` and exact inclusion into `y(U)`.
+`PshLocalAtOrdinarySieve(R,X)` fixes precomposition by that inclusion as the
+forward arrow of one whole equivalence; `IsTopologyLocalPsh(T,X)` quantifies
+the condition over every selected covering sieve.  This is Cat-valued
+ordinary-sieve local-object semantics.  Equivalence with the separately
+probed anchored weighted-limit descent boundary, a Set/path-valued closed
+nontrivial model, the categorical-HIT object former, and functorial reflector
+assembly remain later gates.
+
+The owner-position probes and promoted focused checks are green.  The final
+warning-enabled downstream reviewer inherits exactly 1,179 warnings
+(`1,020` unjoinable critical pairs plus `159` replaceable pattern variables),
+with none located in either new source or reviewer.  Both new sources report
+zero reconstructible/unreviewed inferred LHS slots.  Source TOC, current-plan
+header and active-reference lint, the strict unchanged 1,992-check catalog,
+the focused source/reviewer checks, check-metrics/source-TOC/warning-summary
+tests, Python/shell syntax, and whitespace hygiene pass.  Exact-current health
+is green for all 142 registered targets.  The refresh first recomputed the
+old 138-file content identity and reused those exact successes under the
+unchanged Lambdapi `3.0.0-90-gdb4f780`, 90-second, warnings-disabled
+environment; only the four new source/reviewer targets ran.  Their current
+times are `5.607s`, `6.248s`, `5.973s`, and `6.187s`, respectively.  The
+source-metrics snapshot is
+`sha256:17837cd60e5440a34f77f052396cbe2f1f6de252a1ce7a372a1121316b4d3672`
+and the exact checked-content snapshot is
+`sha256:bf6327a019ad7865e67d3225096bb53c4664a171847c1607af18087587f7bd6b`.
+No full CI, examples aggregate, root aggregate, push, merge, publication,
+history rewrite, or worktree cleanup was performed.  The local checkpoint
+identifier is recorded after the bounded source commit.
 
 ## 14. Validation And Checkpoint Contract
 

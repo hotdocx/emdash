@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CORE_CHECK_FILES = [
     Path("emdash3_2.lp"),
     Path("emdash3_2_presheaves.lp"),
+    Path("emdash3_2_fibrewise_sigma.lp"),
     Path("emdash3_2_nat_arithmetic.lp"),
     Path("emdash3_2_finite_families.lp"),
     Path("emdash3_2_finite_limits.lp"),
@@ -42,6 +43,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_eq1_evidence_property.lp"),
     Path("emdash3_2_sieves.lp"),
     Path("emdash3_2_sites.lp"),
+    Path("emdash3_2_sieve_extensions.lp"),
     Path("emdash3_2_generated_topologies.lp"),
     Path("emdash3_2_ringed_sites.lp"),
     Path("emdash3_2_site_basis.lp"),
