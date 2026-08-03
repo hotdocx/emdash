@@ -1086,6 +1086,42 @@ generated report. No full CI, weakened timeout, modified central assertion,
 or redundant repository aggregate is scheduled. The bounded CS-05b tranche
 is included in authorized local checkpoint `b4fca9c`.
 
+### 13.7 Validation timeout recalibration — 2026-08-03
+
+The former 60-second ceiling was adopted as an early-development hang guard
+before the current diagnostic and computational-schemes layers existed. At
+the `cea2605c` comparison checkpoint, `emdash3_2_checks.lp` had 19,425 lines;
+it now has 22,265. More importantly, recent exact green health observations
+for the central target include 54.033, 57.730, 57.890, and 58.519 seconds,
+while repeated checks of the same unchanged target reached the old cutoff
+between 60.24 and 60.76 seconds without emitting a semantic error. Current
+focused affine-basis and affine-glue targets also have valid observations near
+55 and 56 seconds. The old split between a 30-second probe, 60-second focused
+check, and 60-second registered check therefore classified the same valid
+dependency path differently according to its wrapper and ordinary host load.
+
+The active SOP and all emdash2 Lambdapi wrappers now use one uniform
+90-second per-target ceiling. This is a ceiling, not an expected duration and
+not authorization for a broad aggregate: a successful focused check still
+returns immediately, owner-position probes remain the first validation step,
+and recent exact aggregate evidence is still carried forward whenever the
+checked boundary is unchanged. The unrelated TypeScript test watchdogs are
+outside this kernel-policy change.
+
+For the one-time local timeout migration, a focused uncommitted helper reused
+the 115 exact-current exit-zero observations obtained under 60 seconds and
+executed only the missing central target under 90 seconds. That target passed
+in 67.884 seconds, directly confirming that the previous limit was rejecting
+a valid check. The helper and its migration-only tests were then removed
+before checkpointing. Durable resumable-health behavior remains strict in
+checked file paths and bytes, Lambdapi version, warning mode, extra flags, and
+timeout. The refreshed tracked health report is exact-current for all 116
+targets, records 115 resumed observations and the one current central
+observation, and has source-metrics snapshot
+`sha256:6565c58890f8556f2f745ef843fabffa13f824e42285e782a9bc52e6e4ff2a10`
+and check-content snapshot
+`sha256:45836a25af8bced8ed321a708026feb79bc8fc686995b573743fa1551580cfb5`.
+
 ## 14. Validation And Checkpoint Contract
 
 For every bounded source tranche:
@@ -1093,7 +1129,8 @@ For every bounded source tranche:
 1. inspect all worktrees and exact staged/unstaged state;
 2. relocate owners and consumers with `rg`;
 3. state the mathematical normal form and non-claims in the living plan;
-4. probe the candidate under the 60-second Lambdapi limit;
+4. probe the candidate under the uniform 90-second per-target Lambdapi
+   ceiling; this larger ceiling does not authorize a broad or aggregate rerun;
 5. use typed assertions for every new public projection/comparison;
 6. compare warning output exactly for changed targets;
 7. run strict rule audit for any source change, even when the intended module

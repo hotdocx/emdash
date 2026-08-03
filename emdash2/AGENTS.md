@@ -465,14 +465,24 @@ the iterated-hom architecture to the omega setting.
 
 ## Avoid Hung Typechecks
 
-Early-development hangs usually signal rewrite/unification trouble. Use a
-timeout no longer than 60 seconds:
+Early-development hangs usually signal rewrite/unification trouble. Keep
+every Lambdapi invocation bounded by the uniform 90-second per-target ceiling.
+The central diagnostics and several focused consumers now have measured green
+runs near 60 seconds, so the former 60-second distinction between probes and
+registered checks can produce false failures. A healthy focused check still
+returns immediately; the larger ceiling does not authorize unnecessary broad
+or aggregate runs.
 
 ```bash
-EMDASH_TYPECHECK_TIMEOUT=60s make check
-timeout 20s lambdapi check emdash3_2.lp
-EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=20s make check
+EMDASH_TYPECHECK_TIMEOUT=90s make check
+timeout 90s lambdapi check emdash3_2.lp
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=90s make check
 ```
+
+`scripts/check.sh`, `scripts/check_examples.sh`, `scripts/probe.sh`,
+`scripts/check_warning_summary.sh`, and `scripts/check_metrics.py` all default
+to 90 seconds per Lambdapi target. Resumable health evidence still requires
+exact checked-content and environment identity, including the timeout.
 
 All check/probe/metrics scripts append `EMDASH_LAMBDAPI_FLAGS`, for example:
 

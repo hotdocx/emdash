@@ -4008,13 +4008,20 @@ do not erase the decision trail.
 ### Bounded checks
 
 ```bash
-EMDASH_TYPECHECK_TIMEOUT=60s make check
-timeout 20s lambdapi check emdash3_2.lp
+EMDASH_TYPECHECK_TIMEOUT=90s make check
+timeout 90s lambdapi check emdash3_2.lp
 make check-warnings
 ```
 
-If a quiet check times out or hides the interaction, rerun the smallest target
-with warnings enabled before changing the architecture.
+The 90-second value is a uniform per-file ceiling for focused probes, warning
+checks, registered aggregates, and health traversals. The central diagnostics
+and several focused consumers now have measured green runs near 60 seconds, so
+the older split limits could classify the same valid import path differently.
+This is a timeout ceiling, not permission to run broad aggregates for
+reassurance. If a quiet check times out or hides the interaction, rerun the
+smallest target with warnings enabled before changing the architecture.
+Resumable health evidence continues to require exact checked-content and
+environment identity, including the timeout.
 
 ### Focused probes
 

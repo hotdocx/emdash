@@ -14,7 +14,7 @@ if [[ ! -f "$probe_file" ]]; then
   exit 2
 fi
 
-: "${EMDASH_PROBE_TIMEOUT:=${EMDASH_TYPECHECK_TIMEOUT:-30s}}"
+: "${EMDASH_PROBE_TIMEOUT:=${EMDASH_TYPECHECK_TIMEOUT:-90s}}"
 : "${EMDASH_LAMBDAPI_WARNINGS:=0}"
 
 warning_flags=(-w)

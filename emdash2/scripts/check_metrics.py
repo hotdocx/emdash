@@ -80,6 +80,7 @@ SOURCE_METRICS_SNAPSHOT_RE = re.compile(
 CHECK_CONTENT_SNAPSHOT_RE = re.compile(
     r"^- Check-content snapshot: `sha256:(?P<digest>[0-9a-f]{64})`$", re.MULTILINE
 )
+DEFAULT_REGISTERED_TIMEOUT = "90s"
 
 
 @dataclass
@@ -349,7 +350,9 @@ def run_checks(
 
 
 def build_payload(args: argparse.Namespace) -> tuple[dict, int]:
-    timeout_value = os.environ.get("EMDASH_TYPECHECK_TIMEOUT", "60s")
+    timeout_value = os.environ.get(
+        "EMDASH_TYPECHECK_TIMEOUT", DEFAULT_REGISTERED_TIMEOUT
+    )
     files_to_check = check_files()
     files = {str(path): count_lines(ROOT / path) for path in files_to_check}
     content_snapshot = check_content_snapshot(files_to_check)

@@ -3,9 +3,10 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-# During early development, a “hung” typecheck usually indicates a rewrite/unification issue.
-# Default to a short timeout to avoid editor/CI lockups; override via EMDASH_TYPECHECK_TIMEOUT.
-: "${EMDASH_TYPECHECK_TIMEOUT:=60s}"
+# During early development, a “hung” typecheck usually indicates a
+# rewrite/unification issue. Use one measured per-target ceiling for focused
+# and registered checks so near-boundary valid terms are classified uniformly.
+: "${EMDASH_TYPECHECK_TIMEOUT:=90s}"
 : "${EMDASH_LAMBDAPI_WARNINGS:=0}"
 
 warning_flags=(-w)
