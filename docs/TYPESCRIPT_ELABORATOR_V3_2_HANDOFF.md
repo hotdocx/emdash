@@ -143,11 +143,18 @@
 > nested displayed eta. A single no-edit probe confirms that fixed evaluation
 > and nested eta identities each have exact compact/expanded/closed Core and
 > inferred type plus existing internal higher action. No concrete blocked
-> consumer remains inside this subplan, which is now graduated. The next
-> dependency-ready operation is the higher-level read-only
-> `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ`: select at most one real blocked
-> recursive binder expression from active emdash development/book examples
-> before proposing more behavior. Exact proposal checkpoint:
+> consumer remains inside this subplan, which is now graduated. The subsequent
+> read-only `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` is complete with zero
+> behavior delta. It confirms that current reviewer/book fixed, displayed, and
+> grouped binder examples are already public. It retains the transport-heavy
+> arrow-induction body as a later multi-constructor integration benchmark and
+> selects one exact smaller gap: `lambda^n k. GG[k](FF[k](s[k]))` is already a
+> checked negative even though generic `comp_fapp0` at `Catd_cat K` owns every
+> layer and its action. The frozen `DEPENDENT-SECTION-CHAIN-1AR` proposal
+> recursively factors only rigid closed displayed-functor layers above one
+> rigid closed section leaf, preserves one-layer Core exactly, and adds no
+> kernel/Core/transfer/parser owner. It awaits a separate immutable
+> D-DTTLF-USABILITY-081 review before behavior. Exact earlier proposal checkpoint:
 > `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; exact 1G rollback-safe
 > semantic checkpoint: `f1993c2852b91173858bc2ecdf1d00998517dcaf`.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are

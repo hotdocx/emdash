@@ -228,6 +228,26 @@ read-only `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` below; it must select any
 next semantic slice from an actual end-user expression rather than from
 owner/API symmetry.
 
+That audit is now complete. The book-facing ordinary, displayed-functorial,
+displayed-natural, and canonical grouped-telescope examples all lie inside
+the current public recursive algebras. The full arrow-induction component
+`E[rho(q)](u)` is not a one-constructor omission: although its kernel owners
+exist, authoring it compositionally requires several still-unexposed public
+transport, Sigma-projection, and displayed-action routes. It is retained as a
+later integration demo rather than disguised as a small binder patch. The
+one exact missing recursive constructor is the already-checked negative
+section chain
+
+```text
+lambda^n k. GG[k](FF[k](s[k]))
+```
+
+The active kernel already owns every layer through generic `comp_fapp0` at
+`Catd_cat K`, and `displayedFunctorLambda` already demonstrates the analogous
+finite recursive chain. The exact `DEPENDENT-SECTION-CHAIN-1AR` proposal below
+therefore extends only the existing section-composition factorer, adds no
+kernel/Core/parser owner, and awaits a separate D-081 review before behavior.
+
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
 That predecessor completed:
@@ -536,7 +556,8 @@ It deliberately avoids:
 | `CONTEXTUAL-ND-TEXT-PARITY-1AI` | implemented and focused-green at `dabe9d9827462b76a493c1dd34cc658e137f22d5` under D-DTTLF-USABILITY-065/066 | completed `CONTEXTUAL-ND-TEXT-PARITY-0AH`; immutable D-065 proposal `a4ee654d8e025df6962ea92f219819430852f51a`; immutable D-066 proposal `bb485375f6c843adc6c3b80755b1eb11e9cdbf0a`; 14/14 affected parity; 24/24 nearest direct; typecheck/lint | One additive expected-contract route selects the existing compact `displayedTransforContextLambda`, and one fixed `identityCell` head delegates to the existing program operation. Neutral eta/whiskering, `composeCells`, the direct factorer, and the historical base-component route remain unchanged. The fixed alternating target uses the same resolver path. Nine existing revision pins received only the approved literal replacement. Read-only 0AJ graduation is next. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero semantic delta; canonical contextual-telescope audit selected | final-green 1AI; direct point factorer; generic displayed context fold | Direct/text parity is exact for the single hidden-base/fibre-slot context, while the first remaining semantic usability gap is multiple individually exposed variables over canonical sibling/dependency layers. The dedicated telescope plan owns the read-only context-normal-form versus multi-ordinal architecture audit; parser/browser promotion remains downstream. |
 | `COMPOSITIONAL-NATURAL-BINDER-THROUGH-0H` | complete; scoped subplan graduated with zero 0H behavior delta | final-green contextual telescope/reviewer at `607a026f88bc6d3b9f305ecb21f6630ce7c94950`; dedicated D-074 through D-080 evidence; 1G semantic checkpoint `f1993c2852b91173858bc2ecdf1d00998517dcaf` | Ordinary `lambda^n`, expanded open `lambda^f`/`lambda^n`, compact `lambda^fd`/`lambda^nd`, and grouped displayed brackets now share their exact classifier-appropriate recursive engines. The final audit proves evaluation/nested endpoint identity and higher action without another behavior slice. |
-| `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` | dependency-ready; read-only | graduated compositional-natural subplan; active kernel/check examples; current public AST and reviewer | Inventory representative binder bodies from active emdash development and book-facing examples, map them to the existing fixed/open functorial and natural algebras, and select at most one expression blocked by a missing recursive surface constructor despite existing internal kernel ownership. Add no behavior, transfer, parser/browser, scale, curry, facade, or owner by analogy. |
+| `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` | complete; read-only; zero behavior delta | graduated compositional-natural subplan; active kernel/check examples; current public AST and reviewer | Existing reviewer/book binder bodies are covered except multi-constructor integration programs such as arrow induction. The one bounded class-(3) gap is the current checked-negative finite section chain `lambda^n k. GG[k](FF[k](s[k]))`; generic `comp_fapp0` already owns its internal action. |
+| `DEPENDENT-SECTION-CHAIN-1AR` | exact proposal frozen; separate D-081 review pending | completed 0AQ; existing `USABILITY-DEPENDENT-1A` one-layer factorer; existing displayed-functor finite-chain evidence | Recursively factor one rigid closed section leaf under an arbitrary finite nonempty chain of rigid closed displayed-functor fibre applications at the same base index, then fold only through existing `comp_fapp0 (Catd_cat K)`. Preserve the one-layer Core and all fail-closed boundaries; add no owner, transport surface, or general section-action eliminator. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -567,6 +588,91 @@ inventory, parser/text route, browser/public update, book rewrite, scale
 resumption, product facade, curry, cast, external coherence evidence, or long
 aggregate. Any selected behavior must be frozen as a separate exact proposal
 and reviewed before implementation.
+
+### Result
+
+The audit classifies the representative corpus as follows.
+
+| Expression or construction | Classification | Reason |
+| --- | --- | --- |
+| `lambda^f x. (H x)(K x)`, fixed evaluation after a constant argument, and independent nested exchange | already public | The ordinary contextual compiler recursively owns pairing, contraction, evaluation, composition, and exchange. |
+| `lambda^n a. identityCell(F a)`, recursive vertical composition, and fixed pre/postwhiskering | already public | The ordinary natural factorer reconstructs these terms through internal identity, composition, and whiskering owners. |
+| `lambda^n k. FF[k](s[k])` | already public | `dependentLambda` lowers the exact one-layer component to generic composition at `Catd_cat K`. |
+| compact/expanded `lambda^fd`, compact/expanded `lambda^nd`, and finite grouped displayed telescopes | already public | Their classifier-appropriate recursive contextual compilers are final-focused-green through the graduated compositional-natural subplan. |
+| `Ind_x(E,u)[q] = E[rho(q)](u)` and the surrounding `path_ind_sec`/`homd_int` developments | existing kernel semantics, but not one missing recursive surface constructor | The public workbench would need a compositional Sigma second-component/projection route, canonical transport-arrow construction at an open object, and displayed-family arrow application before the section body itself could be abstracted. Selecting only the final bracket would hide those prerequisites. |
+| `lambda^n k. GG[k](FF[k](s[k]))` | blocked only by one missing recursive surface constructor | The current regression intentionally rejects the second displayed-functor layer. Both functors and the section are already typed, each application is already represented in contextual IR, and repeated generic `comp_fapp0` at `Catd_cat K` owns the whole section and its base-arrow action. |
+
+The final row is selected. It is not API symmetry: it is the first ordinary-
+DTT-style recursive occurrence of the bound base index under more than one
+displayed action, and it is the smallest useful precursor to later transport-
+heavy examples. Arrow induction remains the stronger future integration
+benchmark, not part of this gate.
+
+## Frozen Next Gate
+
+### H-DTTLF-USABILITY-DEPENDENT-SECTION-CHAIN-01 /
+### D-DTTLF-USABILITY-081
+
+Approve exactly `DEPENDENT-SECTION-CHAIN-1AR`:
+
+1. Replace the one-layer pattern inside
+   `lowerDependentSectionComposition` with one recursive finite-chain
+   factorer. Its leaf must be the existing exact `s[k]` section evaluation at
+   the active locally nameless base token. Every enclosing node must be the
+   existing indexed object application of `FF[k]` at that same token.
+2. Require a nonempty chain. The leaf section and every displayed functor must
+   be rigid closed terms from the same construction environment; adjacent
+   source/target families and the common base category must match exactly.
+   Reject outer-token capture, foreign terms, open functor heads, mismatched
+   bases/families, arbitrary point data, and any other application shape.
+3. Fold from the closed section through the collected inner-to-outer functors
+   using only the existing generic `comp_fapp0` owner at `Catd_cat K`. Reuse
+   the existing terminal displayed source. Add no chain owner, Core node,
+   checker/runtime rule, transfer declaration, kernel symbol, rewrite,
+   `unif_rule`, cast, curry, or external naturality payload.
+4. Preserve the current one-layer explicit Core byte-for-byte. Retain the
+   existing `categorical.dependent-section-composition` evidence rule and
+   frozen prerequisite vocabulary; record the recursively normalized body
+   without adding a second public evidence schema merely to expose a length.
+5. Evaluate the callback once, erase every occurrence of the bound token from
+   the closed result, preserve alpha/provenance invariance, and retain all
+   current escape and foreign-program checks.
+6. Add focused direct-TypeScript evidence for two and at least three functor
+   layers, proving that the implementation follows structural recursion rather
+   than a new depth-two table. Compare a closed component with the equivalent
+   nested fibre applications and require inferred/expected whole-section type
+   equality.
+7. Account for arrow action internally: the result must remain the iterated
+   `comp_fapp0 (Catd_cat K)` term, and one bounded Lambdapi oracle must show
+   that its existing `piapp1_fapp0` section action is well typed. Do not expose
+   a new public section-arrow eliminator in this slice.
+8. Preserve the `reviewed-usability-2a1` eta-only profile and the historical
+   one-layer behavior. Add focused wrong-adjacency, wrong-base, unsupported-
+   leaf, outer-capture, and escaped-token negatives.
+9. Check whether the existing neutral-application text route inherits the
+   two-layer expression without parser or resolver edits. If it does, record
+   direct/text Core and type parity; if it does not, leave text parity for a
+   later gate rather than editing syntax here.
+10. Run only proportional gates while iterating: the focused dependent-
+    composition suite, the displayed-functor-chain predecessor, root
+    typecheck, changed-file lint, exact diff hygiene, and one bounded active-
+    kernel check. Because this changes shared categorical-surface behavior,
+    run the root `check:ts` aggregate at most once, only after every bounded
+    gate is green and immediately before the semantic checkpoint; never rerun
+    it for reassurance.
+11. Synchronize this plan and the handoff, then create one path-scoped local
+    rollback-safe checkpoint. Do not change browser, reviewer presets, book,
+    transfer/scale inventories, Lambdapi, public Pages, product/curry facades,
+    or the broader arrow-induction API.
+
+The rejection oracle is exact. If a layer cannot be represented as the
+existing typed indexed-functor application, if adjacent families do not match,
+if one-layer Core changes, or if the result requires a pointwise equation or
+new semantic owner, reject or revise this proposal instead of adding a special
+case.
+
+No behavior is authorized until a separate immutable D-081 review approves
+this exact gate.
 
 ## Frozen First Gate
 
@@ -8036,11 +8142,13 @@ not be repeated. Treat
 `docs/TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md` as
 complete through its read-only 0H graduation. Carry forward the 1G semantic
 checkpoint and exact compact/expanded/grouped evidence without another
-aggregate. Continue with the read-only
-`CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ`: require one concrete active
-emdash/book expression that is blocked only by a missing recursive surface
-constructor before freezing any behavior proposal. Otherwise record the
-qualified usability boundary and stop.
+aggregate. Treat `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` as complete with
+zero behavior delta. It selects exactly the finite rigid section chain as the
+one missing recursive surface constructor and rejects arrow induction as a
+multi-constructor integration task. Continue only from the frozen
+`DEPENDENT-SECTION-CHAIN-1AR` / D-DTTLF-USABILITY-081 proposal. Require a
+separate immutable review before behavior; do not infer approval merely from
+the audit.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -8058,6 +8166,21 @@ removal, or unrelated cleanup is authorized.
 ```
 
 ## Decision Ledger
+
+- **2026-08-03 — CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ complete; exact
+  dependent-section chain proposal frozen.** The public AST already covers the
+  reviewed fixed functorial/natural, compact/expanded displayed, and grouped-
+  telescope binder examples. The arrow-induction body `E[rho(q)](u)` remains
+  a valuable later integration demo but needs several public transport/Sigma
+  routes, so it is not misrepresented as one binder constructor. The current
+  checked-negative `lambda^n k. GG[k](FF[k](s[k]))` is the unique bounded
+  class-(3) gap: contextual IR and all generic `Catd_cat` composition/action
+  owners already exist, while `dependentLambda` alone stops after one layer.
+  The eleven-item `DEPENDENT-SECTION-CHAIN-1AR` proposal freezes recursive
+  factoring, exact one-layer preservation, internal action, inherited text
+  only when automatic, strict negatives, proportional validation, and no
+  kernel/Core/transfer/browser/book expansion. It awaits a separate immutable
+  D-081 review before behavior.
 
 - **2026-08-03 — compositional-natural subplan graduated; consumer-led audit
   selected.** The dedicated 0H audit freezes the shared displayed-natural
