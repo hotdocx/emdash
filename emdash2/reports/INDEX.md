@@ -43,9 +43,15 @@ restriction on the supplied slice `K/X` and pairs it with the binary affine
 atlas as a conservative locally-ringed affine-cover presentation. Public
 `SchemePresentation` naming remains gated by an admissible-open or relative-
 geometry contract for the selected cover arrows. The
-deferred categorical HIT is the PSSS-05d/PSSS-D-114 free localization of a
-whole presheaf category at descent maps, not Tabareau's auxiliary HoTT
-coequalizer and not a monolithic sheafification HIT.
+CS-12 now supplies the first concrete per-object categorical HIT: a
+set-truncated sequential telescope for one endomap, with dependent induction,
+derived whole cocone universality, and a computing shift inverse. This is the
+selected successor-localization model for a future principal-BNat sieve
+consumer; it is not yet an ordinary-sieve proof, whole presheaf reflector,
+sheafification, or CommRing lift. The eventual reflector remains the
+PSSS-05d/PSSS-D-114 uniform free localization of the whole presheaf category
+at descent maps, not Tabareau's auxiliary HoTT coequalizer and not one
+monolithic sheafification HIT.
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_presheaves.lp` is the one-way
@@ -64,6 +70,14 @@ sieve to the ambient Cat-valued presheaf category and derives its whole
 inclusion into Yoneda. It defines topology-locality by the exact resulting
 whole Hom equivalence; it does not construct a reflector or identify that
 condition with the separately probed weighted-limit descent package.
+`emdash3_2_telescope_localization_hit.lp` is the first explicit per-object
+categorical-HIT localization boundary. For an endomap `s:A->A`, it constructs
+the set-truncated sequential telescope with computing point induction,
+derives the whole equivalence between maps out and compatible cocones, and
+derives a computing shift inverse showing that the localized transition is an
+`OmegaEquivAlong Grpd_cat`. It is not yet a BNat presheaf, an ordinary-sieve
+locality theorem, a whole sheafification reflector, an arbitrary-site
+construction, or a CommRing lift.
 `emdash3_2_generated_topologies.lp` is the rule-free universal-property
 generated-topology layer immediately downstream of sites. Type-valued sieve
 generators retain presentation witnesses; generated coverhood is the
