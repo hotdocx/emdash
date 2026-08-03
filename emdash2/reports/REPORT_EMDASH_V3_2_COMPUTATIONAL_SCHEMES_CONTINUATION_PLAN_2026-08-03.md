@@ -1528,7 +1528,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; and the initial Pédrot-directed `eta/glue/silent` signature/reviewer are checkpointed at `ce982e3`. The eliminator audit found that checkpoint's glue/silent representation object-level; CS-D-044 selects a whole direct-cover algebra migration before recursor promotion. The principal-BNat bridge remains frozen. | Promote the whole glue-functor/silent algebra and locality-to-algebra conversion; then implement the unit/glue/silent-coherent eliminator, derive the oracle-to-restriction-equivalence bridge and locality, package the constructed sheaf, and continue with whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; and its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`. The principal-BNat bridge remains frozen. | Implement the unit/glue/silent-coherent eliminator, derive the oracle-to-restriction-equivalence bridge and locality, package the constructed sheaf, and continue with whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -2644,6 +2644,8 @@ and checked-content snapshot is
 `sha256:a9ed8f77040f2cd712d09c67dc7b832e6d6555eb96ff9006dbecc8d8faa53c7a`.
 No full CI, examples aggregate, root aggregate, push, merge, history rewrite,
 publication, or worktree cleanup was performed.
+The bounded implementation and synchronized-plan checkpoint is `1b6a468`
+(`feat: internalize direct cover algebra`).
 
 ## 14. Validation And Checkpoint Contract
 

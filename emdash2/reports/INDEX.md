@@ -59,6 +59,7 @@ through its selected left inverse, while the converse/right law remains a
 named pulled-cover proof rather than an opaque axiom.  The local-target
 eliminator, silent-constructor coherence, and whole Hom universal property
 must be implemented before it is called a sheafification reflector.
+The whole-algebra correction is locally checkpointed at `1b6a468`.
 Dialogue branching without that quotient, or with only a directed silent
 cell, is a separately named lax/effect completion.  The direct HIT constructor,
 the supplied-reflector adjunction mate `sheafification_glue`, and computational
