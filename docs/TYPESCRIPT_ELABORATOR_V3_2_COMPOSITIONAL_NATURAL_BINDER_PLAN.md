@@ -48,6 +48,13 @@ checkpoint `b89420d442536544185e8ab5dbe6876bd9980b96`. Literal typed
 compact `:^nd` point factorer and byte-identical Core while retaining the
 ordinary iterated-Hom facade and delegating component, point, base-arrow, and
 higher action to the recovered coherent `Transfd` owner.
+The read-only `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` audit is complete. The
+located grammar already represents both expanded nested forms and the neutral
+body resolver already covers their reviewed operations. The only missing seam
+is expected-classifier-directed routing into the checkpointed typed methods.
+The exact adapter-only proposal below is frozen under
+`H-DTTLF-USABILITY-COMPOSITIONAL-TEXT-PARITY-01`; separate D-078 review is
+pending.
 
 ## Objective
 
@@ -1072,6 +1079,138 @@ non-green on the already recorded active-kernel source-digest/source-position/
 declaration-count pin family and README line-wrap assertion. This aggregate
 must not be repeated for the unchanged boundary.
 
+## `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` Audit Result
+
+The remaining direct/text gap is resolver routing, not parsing, elaboration,
+or categorical semantics:
+
+1. The existing located grammar accepts alphabetic binder modes and nested
+   lambda nodes, so both `lambda^n k. lambda^f a. body` and
+   `lambda^n k. lambda^n a. body` already have an unambiguous syntax tree.
+2. Root mode `^n` currently routes only to the dependent-section expected
+   contract. A nested lambda without an explicit recursive expected contract
+   deliberately fails as `UNSUPPORTED_NESTED_ABSTRACTION`.
+3. The neutral term resolver already supports application, identity,
+   `composeCells`, and fixed mapper applications. Compact `^fd` and `^nd`
+   tests already exercise those exact body forms.
+4. The first expanded typed method needs source/target displayed families so
+   it can construct scoped `E[k]` and `D[k]` categories inside its callback.
+   The second expanded typed method needs closed displayed-functor endpoints;
+   applying them at `k` already produces the indexed functor endpoints for the
+   inner natural binder.
+5. Therefore no new text AST, parser, application heuristic, Core node,
+   checker branch, action table, or kernel owner is needed. Two exact expected
+   contracts can select two thin resolver routes which call the public typed
+   API literally.
+
+This audit also preserves the clarified implementation boundary: the expanded
+first-hom text route targets the specialized open-fibre
+`contextualDisplayedFunctorLambda` dispatch and its compact-`:^fd` factorer.
+It does not claim that fixed-category `categoricalLambda` and indexed
+open-fibre abstraction share one universal top-level compiler.
+
+## Frozen `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` Proposal
+
+Gate: `H-DTTLF-USABILITY-COMPOSITIONAL-TEXT-PARITY-01`
+
+Decision: `D-DTTLF-USABILITY-078` pending separate review of the immutable
+proposal checkpoint.
+
+Add exactly two public text expected contracts:
+
+```typescript
+{
+    kind: 'expanded-displayed-functor',
+    base: K,
+    source: E,
+    target: D
+}
+
+{
+    kind: 'expanded-displayed-transfor',
+    base: K,
+    sourceFamily: E,
+    source: FF,
+    target: GG
+}
+```
+
+Under those contracts, qualify exactly these presentations, with both shown
+annotations independently optional:
+
+```text
+lambda^n k : K. lambda^f a : E. body(k,a)
+lambda^n k : K. lambda^n a : E. body(k,a)
+```
+
+Implement the first route by calling:
+
+```typescript
+program.transforLambda(kName, E, D, k =>
+    program.lambda(
+        aName,
+        program.fibre(E, k),
+        program.fibre(D, k),
+        a => resolveBody(k, a)
+    )
+)
+```
+
+Implement the second route by calling:
+
+```typescript
+program.transforLambda(kName, FF, GG, k =>
+    program.transforLambda(
+        aName,
+        program.apply(FF, k, { expectedShape: 'fibre-functor' }),
+        program.apply(GG, k, { expectedShape: 'fibre-functor' }),
+        a => resolveBody(k, a)
+    )
+)
+```
+
+The resolver must:
+
+1. dispatch root `^n` by the exact expected-contract kind;
+2. require one immediately nested single-binding `^f` or `^n` lambda as
+   appropriate;
+3. check an optional outer category annotation and optional inner displayed-
+   family annotation through the existing comparison helpers;
+4. extend the callback-local environment at each binder and resolve the final
+   body recursively through the existing neutral term resolver;
+5. preserve the existing error phases, source spans, callback-once behavior,
+   scope rejection, and compact/ordinary routes; and
+6. advance `CORE_CATEGORICAL_TEXT_REVISION` to
+   `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D-CATEGORICAL-TEXT-1`, synchronizing
+   every exact revision assertion mechanically.
+
+One focused suite must prove:
+
+- first-hom eta, identity, finite composition, optional annotations, and exact
+  Core parity with both direct typed and compact `:^fd` construction;
+- second-hom eta, identity, recursive vertical composition, both fixed
+  whiskers, optional annotations, and exact Core parity with both direct typed
+  and compact `:^nd` construction;
+- component, fibre-point, and internal higher-action observations remain
+  available on the parsed second-hom facade;
+- wrong outer/inner modes, missing immediate nesting, wrong annotation kinds
+  and classifiers, endpoint mismatch, arbitrary point data, unsupported
+  profiles, and further unqualified nested lambdas fail closed at their
+  located spans; and
+- existing ordinary `^f`, dependent-section `^n`, compact `^fd/^nd`, grouped
+  contextual text, and revision contracts remain unchanged apart from the
+  intentional revision value.
+
+Behavior edits are limited to `src/v3_2/categorical_text.ts`, one focused
+`tests/v3_2_categorical_compositional_text_parity_tests.ts`, runner
+registration, the mechanically synchronized revision assertions, this plan,
+and the handoff. Run the focused suite and nearest text/compositional
+regressions, then workspace, typecheck, complete changed-file lint, and exact
+diff hygiene. Because this changes shared text behavior, run one root
+`check:ts` only after the bounded matrix is green and do not repeat it. No
+Lambdapi, kernel CI, browser, reviewer, print, book, release, or repository
+aggregate is authorized.
+
 ## Work Ledger
 
 | Slice | Status | Dependency | Exact boundary |
@@ -1083,7 +1222,7 @@ must not be repeated for the unchanged boundary.
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | complete; read-only architecture audit | completed 1B/1B2 | Both compact terms recheck unchanged under their expanded facades. Select shared scoped contextual factorization with thin expanded/compact wrappers; literal current-method reuse is blocked only by the absent open-fibre representation. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
 | `COMPOSITIONAL-FD-EXPANDED-1C` | final-focused-green at `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1` | completed 0C; D-076; existing first-hom runtime bridge | Construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))` share the compact `:^fd` factorer, preserve byte-identical Core, expose closed fibre object/arrow action, and retain the ordinary `Transf_cat` facade. |
 | `COMPOSITIONAL-ND-EXPANDED-1D` | final-focused-green at `b89420d442536544185e8ab5dbe6876bd9980b96` | green 1C; completed audit; D-077 | The existing open `indexed-functor` endpoints and compact point factorer implement literal expanded `lambda^n k. lambda^n a`; the result retains the ordinary iterated-Hom facade, byte-identical compact Core, and internally owned component/base/higher action. |
-| `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | dependency-ready read-only audit after the D-077 checkpoint | graduated direct typed API | Inventory only the missing expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a` text routes against the settled typed API. Reuse the existing parser/resolver and compact `^fd`/`^nd` contracts; freeze a separate proposal before behavior. |
+| `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | read-only audit complete; exact proposal frozen; D-078 review pending | graduated direct typed API; D-077 checkpoint | Add exactly two expected contracts and thin resolver routes for expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a`. Reuse the existing located grammar, neutral body resolver, public typed methods, and compact `^fd/^nd` factorers; add no parser/checker/Core/kernel semantics. |
 
 ## Explicit Non-Claims
 
@@ -1181,12 +1320,14 @@ rollback-safe semantic checkpoint: literal `lambda^n k. lambda^n a` and compact
 `:^nd` share the contextual point factorer and exact Core, while their facades
 remain distinct and all action delegates to the recovered coherent owner.
 Natural transformation bodies must be recursively constructed from internal
-owners and fail closed without them. Then conduct only the read-only
-`COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` audit, inventorying the two expanded
-nested binder presentations against the existing compact text routes; freeze
-and review any exact behavior proposal separately. Add no curry, cast,
-total-context section, external coherence, new kernel owner, browser behavior,
-or scale work without a separate reviewed gate.
+owners and fail closed without them. Treat the read-only
+`COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` audit as complete and its exact adapter-
+only proposal as frozen. Do not implement it until a separate D-078 review
+approves the immutable proposal checkpoint. If approved, add only the two
+expected contracts, thin resolver routes, focused tests, and mechanical
+revision synchronization described above. Add no curry, cast, total-context
+section, external coherence, new kernel owner, browser behavior, or scale work
+without a separate reviewed gate.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
@@ -1194,7 +1335,14 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
-- **2026-08-03 — COMPOSITIONAL-ND-EXPANDED-1D final-focused-green.** Literal
+- **2026-08-02 — H-DTTLF-USABILITY-COMPOSITIONAL-TEXT-PARITY-01 proposal
+  frozen.** The located grammar and neutral body resolver already cover both
+  expanded nested forms. The exact proposed delta is two expected contracts,
+  two public-API resolver routes, one focused suite, and mechanical text-
+  revision synchronization. It adds no parser, Core, checker, action, kernel,
+  browser, or release behavior and awaits separate D-078 review.
+
+- **2026-08-02 — COMPOSITIONAL-ND-EXPANDED-1D final-focused-green.** Literal
   typed `lambda^n k. lambda^n a` uses the existing indexed endpoints and the
   exact compact contextual point factorer, retaining an ordinary iterated-Hom
   facade over byte-identical compact Core. Component, point, and internal

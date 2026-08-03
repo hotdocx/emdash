@@ -66,7 +66,13 @@
 > `b89420d442536544185e8ab5dbe6876bd9980b96`. The next dependency-ready row is
 > a read-only audit of expanded `lambda^n/lambda^f` and
 > `lambda^n/lambda^n` text parity; compact `^fd/^nd` text already exists, and
-> no parser/checker redesign or text behavior is yet authorized.
+> no parser/checker redesign or text behavior is yet authorized. That read-only
+> audit is now complete: the located grammar and neutral body resolver already
+> cover both forms, so the exact
+> `H-DTTLF-USABILITY-COMPOSITIONAL-TEXT-PARITY-01` proposal adds only two
+> expected contracts, two routes into the public typed methods, focused tests,
+> and mechanical text-revision synchronization. Separate D-078 review of the
+> immutable proposal checkpoint is pending; no text behavior is yet changed.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
