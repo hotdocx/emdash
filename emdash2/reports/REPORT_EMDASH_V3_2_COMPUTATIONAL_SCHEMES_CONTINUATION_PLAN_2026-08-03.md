@@ -478,6 +478,22 @@ locally-ringed condition, and stalk construction remains a later comparison
 layer. Promote only the narrow internal support capability consumed by the
 first scheme presentation.
 
+The CS-06 owner audit sharpens this gate. The existing
+`comm_ring_psh_invertibility_sieve(O,U,s)` already constructs the whole
+ordinary sieve `D_U(s)` and its restriction action. Max Zeuner's support
+condition, however, is not merely the pointwise predicate that a restricted
+section is a unit. It requires `D(0)=bottom`, `D(1)=top`,
+`D(st)=D(s) meet D(t)`, and `D(s+t) <= D(s) join D(t)` in the relevant
+point-free open algebra, or an equivalent topology-local forcing statement
+for a local ring object. The active site library has ordinary sieves and
+pullback but no selected bottom/finite-join algebra or internal local-ring
+forcing interface. Replacing the join law by a pointwise choice of one unit
+branch would be too strong, while objectwise nontriviality would mishandle the
+empty-open stage. Therefore CS-02 is a genuine later prerequisite for the
+public name `SchemePresentation`, not a field to guess during the atlas
+tranche. The binary affine-cover substrate below is intentionally not called a
+scheme.
+
 ### CS-03 — Finite selected-cover presentation
 
 Audit whether `FiniteFamily` plus a supplied covering sieve can express a
@@ -487,6 +503,41 @@ current affine consumer should continue to use
 interface is promoted only with a non-affine consumer and a precise statement
 that the selected finite family generates or covers, not merely that its
 members lie in a covering sieve.
+
+The first consumer resolves the immediate binary case without a second sieve
+constructor. For selected covering sieve `R` and charts `c0,c1 : R`, define
+
+```text
+CoverChartFactorization(c,q)
+  = Sigma h : Hom(domain(q),domain(c)), q = c o h
+
+BinarySelectedCoverGeneration(R,c0,c1)
+  = Pi q, q in R ->
+      Sigma b : Bool,
+        if b=false then CoverChartFactorization(c0,q)
+        else CoverChartFactorization(c1,q).
+```
+
+Together with retained coverhood of `R`, this is constructive evidence that
+the two selected arrows generate `R`: their retained membership makes their
+generated branches a subsieve of `R`, while the displayed factorization gives
+the reverse inclusion. It is strictly stronger than listing two members and
+retains executable chart selection and factor maps. Closure under further
+restriction is derived by composition and is not stored as an external
+naturality field. The first tranche need not construct or name the generated
+sieve itself. A generic
+Nat-indexed finite choice/factorization family remains consumer-gated until a
+consumer needs arity beyond two; the existing algebraic
+`CommRingZariskiCoverFamily` remains unchanged.
+
+The two selected arrows are the affine **generators** of the atlas. The
+covering sieve also contains all their precompositions, and those arbitrary
+refinements are not required or claimed to be affine. This matches the usual
+finite affine-cover condition: the selected domains are affine and their
+generated sieve covers. It would be unnecessarily strong to equip every
+member of that sieve with a separate affine realization. The later semantic
+`Scheme_cat` remains presentation-independent; only a chosen computational
+`SchemePresentation(X)` carries such generators and their realizations.
 
 ### CS-04 — Whole ambient chart-slice restriction
 
@@ -572,6 +623,23 @@ pullback/restriction, whole chart comparisons, and generic composition. Named
 adapters may expose them for consumers, but the record must not store a second
 componentwise coherence calculus.
 
+The audit splits this phase rather than overclaiming the first promoted type:
+
+- **CS-06a — binary affine-cover presentation:** package two selected charts,
+  the explicit generation witness above, and for each chart the already
+  supplied reflective slice, coordinate ring, affine presentation, affine
+  basis functor, and whole `AffineBasisRealizationAlong`. This is an honest
+  global-first computational atlas over an existing ringed object, but it is
+  named `BinaryAffineCoverPresentation`, not `SchemePresentation`;
+- **CS-06b — locally-ringed scheme certificate:** after CS-02 supplies the
+  correct point-free support/local-ring capability, combine it with CS-06a
+  and generalize the binary choice to a finite atlas only when an arity-generic
+  consumer requires it.
+
+This sequencing preserves the computational center while preventing either a
+mere cover-member list or coordinate-localization locality from masquerading
+as a semantic scheme condition.
+
 ### CS-07 — First non-affine computational consumer
 
 Two possible consumers are deliberately separated:
@@ -616,10 +684,11 @@ close CS-05.
 | Induced slice topology and reflective-sheaf transport | Moderate and consumer-gated | Honest site-functor/topology compatibility and a sheaf/reflector transport theorem are absent; the historical file supplied both. |
 | Whole sheafified Beck--Chevalley/locally-exact comparison | Moderate, with strong semantic guidance | Exact v3.2 owner and orientation must be selected by the affine-chart consumer; no component-square encoding is acceptable. |
 | Global-first assumption-explicit affine atlas | Good | Honest whole restriction/pullback comparison to each affine chart. |
-| Finite-qcqs presentation | Good with a consumer | Generic finite-cover generation must not duplicate the existing algebraic family owner. |
+| Binary global-first affine-cover presentation | Implemented and exact-current through the bounded 122-target health boundary; local checkpoint pending | Retain constructive generation of the covering sieve by the two charts; mere sieve membership is insufficient. |
+| General finite-qcqs presentation | Good after the binary consumer | Generalize the Boolean choice to Nat-indexed finite factorization without duplicating the algebraic family owner. |
 | Supplied global non-affine example | Good | Selecting a mathematically meaningful ambient object before `Scheme_cat` exists. |
 | Constructive two-affine gluing | Moderate | Global realization and universal property, not overlap algebra itself. |
-| Point-free locally-ringed support interface | Good | Correct support laws in the present ordinary-sieve/site representation. |
+| Point-free locally-ringed support interface | Moderate and separately gated | `D(s)` exists, but bottom/finite joins or equivalent topology-local forcing are absent; pointwise disjunction is not a correct shortcut. |
 | Stalk-local-ring comparison | Moderate/research | Stalk/point infrastructure and constructive hypotheses. |
 | Small-site restriction/basis comparison | Moderate | Exact basis and topology transport owners. |
 | Representation-independent category of schemes | Research-grade but plausible | Morphism representation, locally-ringed structure, and comparison with presentations. |
@@ -627,10 +696,12 @@ close CS-05.
 | Unrestricted atlas effectivity | Research-grade | Descent/localization infrastructure and scope. |
 
 The original computational-schemes direction remains feasible. The main risk
-is no longer basic opens, localization, topology, or affine glue; those have
-working internal owners. The immediate architectural risk is attaching an
-affine presentation to an ambient chart without losing the whole
-restriction/sheaf comparison or smuggling it into an opaque name.
+is no longer basic opens, localization, topology, affine glue, the whole
+ambient-to-affine chart comparison, or the constructively generated two-chart
+atlas; those now have working internal owners. The next bounded task is a
+supplied global two-chart consumer of that atlas. The main remaining semantic
+risk is the exact point-free locally-ringed support layer, which is isolated
+from the computational atlas rather than hidden inside it.
 
 ## 11. Decision Ledger
 
@@ -718,6 +789,37 @@ restriction/sheaf comparison or smuggling it into an opaque name.
   separate later capability because no first chart consumer transports
   generic glue through it.  Local exactness may prove such a mate later, but
   neither it nor component square equations are fields of CS-05b.
+- **CS-D-019 — Uniform bounded validation:** all emdash2 Lambdapi wrappers use
+  a 90-second per-target ceiling. A measured unchanged central check passed at
+  67.884 seconds after repeatedly crossing the former 60-second ceiling.
+  Proportional validation and carry-forward of exact unchanged evidence still
+  prohibit broad aggregate reruns for reassurance.
+- **CS-D-020 — Binary cover generation first:** two selected members of a
+  covering sieve do not constitute a binary cover. The first honest atlas
+  retains, for every arrow in the selected covering sieve, a Boolean-selected
+  chart, an actual factor arrow, and its triangle path. This witness-rich
+  generation contract precedes any generic Nat-indexed generated-sieve API.
+- **CS-D-021 — Scheme naming waits for support:** the whole invertibility
+  sieve is not by itself Max Zeuner's support law. Until bottom/finite joins or
+  an equivalent topology-local internal local-ring condition is available,
+  the promoted global-first package is named an affine-cover presentation,
+  not `SchemePresentation`. Coordinate-localization locality is not reused as
+  a substitute.
+- **CS-D-022 — Generators are not arbitrary sieve members:** the two affine
+  charts are distinguished arrows in one selected covering sieve and the
+  constructive factorization capability says that they generate it. Other
+  members are refinements/precompositions of those generators; the package
+  does not attach a separate affine realization to every such refinement.
+  This is the binary instance of the intended chosen computational
+  `SchemePresentation(X)`, while a later semantic `Scheme_cat` remains
+  independent of any selected cover.
+- **CS-D-023 — Canonical dependent package endpoints:** readable projection
+  aliases remain available as observations, but types of later dependent
+  projections use the literal nested-`Sigma` endpoints retained by the
+  package. Restating those endpoints through readable aliases caused the
+  affine-chart probe to exceed both 90 and 120 seconds; the canonical form
+  passes without package eta, a rewrite, or a unification rule. This measured
+  elaboration boundary is not evidence for increasing the timeout.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -729,14 +831,16 @@ global-first record and its phrase *small/big-site equivalence*.
 | --- | --- | --- | --- |
 | CS-00 | Consolidate affine checkpoint and corrected architecture | Complete; dedicated plan, parent supersession note, and index route added | This report and index routing |
 | CS-01 | Global reflective ringed object, covering sieve, and internally derived pullback cover | Complete and locally checkpointed at `a5aebcf` | Checkpointed PSSS-11c and existing site pullback owner |
-| CS-02 | Point-free invertibility-support/local-ring capability audit | Proposed | Concrete scheme consumer or theorem statement |
-| CS-03 | Generic finite-cover presentation audit | Proposed | Non-affine finite-atlas consumer |
+| CS-02 | Point-free invertibility-support/local-ring capability audit | Audit complete; promotion deferred because bottom/finite-join or equivalent topology-local forcing owners are absent | Full semantic scheme certificate |
+| CS-03 | Generic finite-cover presentation audit | Binary contract selected: explicit witness that two charts generate the retained covering sieve; generic Nat arity remains consumer-gated | CS-06a first two-chart consumer |
 | CS-04 | Whole ambient chart-slice restriction and supplied reflective-slice presentation | Complete and locally checkpointed at `7d63a90`; induced topology/reflector transport remains a separate CS-05 input question | CS-01 plus existing Sigma, opposite, functor-composition, and reflective-site owners |
 | CS-05 | Honest affine chart realization over an ambient restriction | Complete through CS-05b's whole semantic/computational package; locally checkpointed at `b4fca9c`; stronger sheafification base change remains separately consumer-gated | CS-04 and affine checkpoint |
 | CS-05a | Historical site-morphism and modern morphism/comorphism/locally-exact contract audit | Complete as a contract audit; stronger sheafification base change remains separately consumer-gated | CS-04 plus a concrete affine-chart target |
-| CS-05b | Whole sheaf-basis comparison plus computational ambient-affine realization | Promoted as two transparent rule-free modules; focused/exact-warning/audit/catalog green, 115/116 exact-content health targets current-green, unchanged central aggregate carried forward under the proportional-validation policy; local checkpoint `b4fca9c` | CS-D-018 and CS-04 |
-| CS-06 | Global-first finite-qcqs `SchemePresentation(X)` | Proposed | CS-02/CS-03/CS-05 contracts |
-| CS-07 | Supplied global two-chart non-affine reviewer | Proposed first non-affine consumer | CS-06 |
+| CS-05b | Whole sheaf-basis comparison plus computational ambient-affine realization | Promoted as two transparent rule-free modules; focused/exact-warning/audit/catalog green; exact-current 116-target health completed under the uniform timeout policy; local checkpoints `b4fca9c`, `82d93b5`, and validation-policy checkpoint `023ffbf` | CS-D-018 and CS-04 |
+| CS-06 | Global-first finite-qcqs `SchemePresentation(X)` | Split into CS-06a computational atlas and CS-06b locally-ringed scheme certificate | CS-02/CS-03/CS-05 contracts |
+| CS-06a | Global-first `BinaryAffineCoverPresentation` with constructive cover generation and whole affine realizations | Complete and exact-current: three rule-free source layers, three reviewers, exact warning comparison, audit/catalog/authority synchronization, and 122-target resumable health are green; local checkpoint pending | CS-03 binary contract plus CS-05b |
+| CS-06b | Add correct locally-ringed support and, when consumed, generic finite arity | Deferred; must not overclaim the CS-06a package | CS-02 support owner plus arity-generic consumer |
+| CS-07 | Supplied global two-chart reviewer | Ready as a parameterized computational-atlas consumer; a closed genuinely non-affine realization remains separate | CS-06a |
 | CS-08 | Atlas-first two-affine gluing constructor | Later | Whole open-overlap input plus realization/universal property |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, and presented-scheme realization | Research continuation | Stable object/morphism interfaces and CS-06 |
@@ -1121,6 +1225,89 @@ observation, and has source-metrics snapshot
 `sha256:6565c58890f8556f2f745ef843fabffa13f824e42285e782a9bc52e6e4ff2a10`
 and check-content snapshot
 `sha256:45836a25af8bced8ed321a708026feb79bc8fc686995b573743fa1551580cfb5`.
+
+### 13.8 CS-06a binary affine-cover presentation — 2026-08-03
+
+The promoted design distinguishes a selected affine generating family from
+the full covering sieve it generates. For one retained global object `X` and
+one retained covering sieve `R` on `X`, the two selected chart arrows
+`c0 : U0 -> X` and `c1 : U1 -> X` are members of `R`. For every other member
+`q : V -> X`, `BinarySelectedCoverGeneration` returns an executable Boolean,
+a factor map from `V` to the selected chart domain, and the path identifying
+`q` with the corresponding composite. Membership plus sieve closure gives
+the generated subsieve's inclusion in `R`; factorization gives the reverse
+inclusion. Arbitrary members of `R` are refinements, not additional selected
+affine charts, and no affine realization is required for every refinement.
+
+Three transparent rule-free modules implement that boundary:
+
+- `emdash3_2_commutative_algebra_binary_covers.lp` has 275 lines and 11
+  symbols. It defines one-chart factorization, the witness-rich Boolean
+  choice, and generation of the retained sieve without constructing a second
+  generated-sieve object or using propositional truncation.
+- `emdash3_2_commutative_algebra_affine_cover_charts.lp` has 199 lines and 10
+  symbols. It packages the actual supplied reflective chart slice, a
+  coordinate ring and existing `AffineSchemePresentation`, a whole affine
+  basis functor, and the existing whole `AffineBasisRealizationAlong`; its
+  coordinate `DefIso` is derived from that owner.
+- `emdash3_2_commutative_algebra_affine_cover_presentations.lp` has 112 lines
+  and seven symbols. It combines two selected charts, their constructive
+  generation capability, and their two whole affine realizations as
+  `BinaryAffineCoverPresentation`.
+
+All three modules contain zero rewrite rules and zero unification rules.
+Generic composition, restriction, functor action, transformation naturality,
+and the retained whole `DefIso`/`OmegaEquivAlong` owners continue to propagate
+the internal structure. No external restriction square, overlap comparison,
+or cocycle family is stored. The package is deliberately not named
+`SchemePresentation`: the correct point-free locally-ringed support condition
+remains CS-06b, and an atlas-first gluing constructor remains CS-08.
+
+The focused reviewers are
+`examples/commutative_ring_binary_covers.lp` (138 lines, six assertions),
+`examples/commutative_ring_affine_cover_charts.lp` (85 lines, six assertions),
+and `examples/commutative_ring_affine_cover_presentations.lp` (61 lines, four
+assertions). They check the factor triangle and both Boolean branches,
+generation application, constructor/projection computation, both whole affine
+realizations, and the derived coordinate `DefIso`.
+
+The normal-form probe rejected one superficially readable dependent-package
+spelling. Restating later projection types through
+`affine_cover_chart_ring(Q)` caused the chart candidate to exceed both the
+90-second registered ceiling and a diagnostic 120-second run. Keeping the
+literal nested `sigma_Fst`/`sigma_Snd` endpoints selected by the package made
+the same whole interface pass. The promoted API therefore exposes readable
+aliases for ordinary observations while using canonical nested-Sigma
+endpoints in dependent types. It adds no package eta, rewrite, unifier, or
+timeout increase.
+
+Proportional validation is green:
+
+- quiet health timings for the three sources are 3.429, 16.615, and 16.373
+  seconds; the three reviewers take 9.831, 31.085, and 41.287 seconds;
+- warning-enabled checks of all six targets inherit exactly 1,179 warnings
+  (1,020 unjoinable critical pairs and 159 replaceable pattern variables),
+  with no warning located in a new source or reviewer;
+- the strict rule-LHS audit remains at zero unreviewed rules with 52
+  annotations across 32 intentional clauses;
+- strict catalog generation/checking, source TOC, report-header and active
+  reference lint, check-metrics tests, Python/shell syntax, and whitespace
+  hygiene pass; and
+- the exact-current health report contains 122 successful targets. A
+  one-time ignored-cache migration first proved that the previous 116 files
+  still reproduced their exact recorded content hash and that their
+  Lambdapi/environment identity was unchanged. The health refresh then reused
+  those 116 successes and executed only the six new targets. Its
+  source-metrics snapshot is
+  `sha256:723fdd5ce992da7d8f6f53ce12c072452ede915d75947fb779d483b04c7c1fd1`
+  and its check-content snapshot is
+  `sha256:ef903fa031ffeaa6a541ff48abe6e013244ff9c027bc2b1a093b9e0c461a4605`.
+
+No full CI, kernel-wide replay, root aggregate, push, merge, history rewrite,
+publication, or worktree cleanup was performed. CS-06a is ready for its
+authorized local checkpoint. CS-07 may now consume the package as a supplied
+global two-chart computational atlas; a closed non-affine construction and
+the semantic locally-ringed scheme classifier remain separately gated.
 
 ## 14. Validation And Checkpoint Contract
 

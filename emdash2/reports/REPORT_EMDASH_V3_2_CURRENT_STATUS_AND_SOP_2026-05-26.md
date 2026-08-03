@@ -75,6 +75,14 @@ detailed probe evidence.
   members expose their actual restriction arrows. It does not assert that a
   cover is finite or affine, impose locally-ringed support, store overlap or
   cocycle fields, define a scheme, or construct gluing.
+- `emdash3_2_commutative_algebra_binary_covers.lp`: downstream transparent,
+  rule-free binary cover-generation layer. Every arrow of the retained
+  covering sieve carries an executable Boolean-selected chart, an actual
+  factor map, and its triangle. Since both charts are already sieve members,
+  these witnesses say that the two selected charts generate the retained
+  covering sieve. The module constructs no second sieve, rule, unifier,
+  external restriction/coherence field, affine label, locally-ringed
+  condition, scheme, or gluing operation.
 - `emdash3_2_commutative_algebra_ringed_space_restrictions.lp`: downstream
   one-way, rule-free whole chart-slice restriction substrate. It exposes the
   whole conventional slice-domain functor, restricts CommRing-valued
@@ -277,6 +285,21 @@ detailed probe evidence.
   assert raw category equivalence, store local-exact/component coherence,
   transport generic glue, define a general scheme, or impose a stalk-local
   ring condition.
+- `emdash3_2_commutative_algebra_affine_cover_charts.lp`: downstream
+  transparent, rule-free realization of an actual global cover chart. It
+  retains a supplied reflective slice, coordinate ring, existing affine
+  presentation, whole affine-basis functor, and the existing whole
+  `AffineBasisRealizationAlong`; the coordinate `DefIso` is derived. Readable
+  observations are exposed, while dependent projection types stay at literal
+  nested-Sigma endpoints and require no package eta, rule, or unifier. It
+  stores no overlap/cocycle family and claims no locally-ringed scheme.
+- `emdash3_2_commutative_algebra_affine_cover_presentations.lp`: downstream
+  transparent, rule-free global-first binary affine-cover layer. It combines
+  two charts generating the retained covering sieve with their two whole
+  affine realizations. Pullbacks, overlaps, and repeated restrictions remain
+  derived at the global and generic composition owners. It is a computational
+  cover presentation, not a locally-ringed scheme certificate or atlas-first
+  gluing constructor.
 - `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
   functor-of-points/basic-open layer. The existing Yoneda presheaf represents
   `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and

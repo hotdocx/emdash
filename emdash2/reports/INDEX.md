@@ -26,7 +26,11 @@ invertible mate, never a family of external commutative-square equations.
 CS-05b then selects the smaller contract consumed by the first affine chart:
 a whole sheaf-category basis equivalence plus one direct whole computational
 `DefIso`, checkpointed at `b4fca9c`; generic glue base change remains
-separately consumer-gated. The
+separately consumer-gated. CS-06a now supplies two selected chart arrows that
+constructively generate the retained covering sieve, with whole
+ambient-to-affine realizations on those two generators. This is a global-first
+binary affine-cover presentation, not yet a locally-ringed scheme certificate;
+the next bounded consumer is a supplied global two-chart presentation. The
 deferred categorical HIT is the PSSS-05d/PSSS-D-114 free localization of a
 whole presheaf category at descent maps, not Tabareau's auxiliary HoTT
 coequalizer and not a monolithic sheafification HIT.
@@ -76,6 +80,14 @@ restriction-total object, domain, arrow, and pulled-back covering sieve; it is
 called a cover chart without asserting affineness. The module stores no
 component naturality, overlap, or cocycle field and claims neither finiteness,
 locally-ringed support, a scheme, nor effective gluing.
+`emdash3_2_commutative_algebra_binary_covers.lp` is the transparent rule-free
+CS-03 binary generation layer. For every arrow of the retained covering
+sieve it keeps a Boolean-selected chart, factor map, and triangle; together
+with selected chart membership, this says that the two selected arrows
+generate that sieve. Arbitrary sieve members are refinements of those
+generators and are not themselves asserted affine. The module constructs no
+second sieve and adds no restriction, overlap, cocycle, affine,
+locally-ringed, scheme, or gluing claim.
 `emdash3_2_commutative_algebra_ringed_space_restrictions.lp` is the rule-free
 CS-04 whole ambient-slice substrate. It constructs the conventional whole
 slice-domain functor and restricts the ambient structure presheaf by ordinary
@@ -114,6 +126,19 @@ existing affine scheme's underlying presheaf. Generic `DefIso` composition
 then compares with affine coordinates. It does not construct those inputs,
 assert a raw category equivalence, transport generic glue, store external
 coherence, define a general scheme, or impose a stalk-local-ring condition.
+`emdash3_2_commutative_algebra_affine_cover_charts.lp` is the transparent
+rule-free whole realization of one selected chart generator. It retains the
+supplied reflective slice, coordinate ring, affine presentation, whole basis
+functor, and existing `AffineBasisRealizationAlong`, deriving the whole
+coordinate `DefIso`. Canonical dependent Sigma endpoints avoid package eta or
+new comparison authority.
+`emdash3_2_commutative_algebra_affine_cover_presentations.lp` is the
+transparent rule-free CS-06a composition layer. A
+`BinaryAffineCoverPresentation` combines two generators of the retained
+covering sieve with two whole affine realizations. It deliberately does not
+assert that every refinement in the sieve is affine, add external
+overlap/cocycle data, supply a point-free local-ring certificate, define a
+general scheme, or construct atlas-first gluing.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
 derived native equality-valued hom-action/groupoidality extension. It also
 exposes the existing transparent Cat-level consequence that the selected left
