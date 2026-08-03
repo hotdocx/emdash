@@ -857,7 +857,8 @@ close CS-05.
 | Binary global-first affine-cover presentation | Implemented, exact-current through the bounded 122-target health boundary, and locally checkpointed at `0f3b379` | Retain constructive generation of the covering sieve by the two charts; mere sieve membership is insufficient. |
 | General finite-qcqs presentation | Good after the binary consumer | Generalize the Boolean choice to Nat-indexed finite factorization without duplicating the algebraic family owner. |
 | Supplied global two-chart refinement consumer | Implemented, exact-current through the bounded 124-target health boundary, and locally checkpointed at `4892c33` | It consumes an assumption-explicit global presentation and does not construct a closed non-affine object. |
-| Closed global non-affine example | Good but separate | Selecting or constructing a mathematically meaningful ambient object before `Scheme_cat` exists. |
+| Selected actual intersection of two retained charts | Implemented and green through focused checks, exact warnings, strict audit/catalog, and 134-target exact-current resumable health; local checkpoint pending | The intersection is a selected binary product in the conventional slice, not an atlas-first gluing payload. |
+| Closed global non-affine example | Good but separate | Attach meaningful projective-line-style coordinate/localization data to the supplied global object and its actual inherited chart intersection. |
 | Constructive two-affine gluing | Out of current scope | It is needed only to construct a global object from independent charts, not to present or compute with an already supplied scheme. |
 | Topology-local locally-ringed presentation | Implemented assumption-explicitly, exact-current through the bounded 128-target health boundary, and locally checkpointed at `c2b53bf` | It avoids raw joins: invertible zero yields empty coverhood, while an invertible sum returns a selected cover and memberwise Boolean unit branches. Raw support-lattice comparison remains later. |
 | Total site-relative scheme presentation | Implemented, exact-current through the bounded 130-target health boundary | The rule-free dependent total retains the global cover and its binary locally-ringed affine certificate; the base site supplies relative chart geometry. |
@@ -865,7 +866,7 @@ close CS-05.
 | Stalk-local-ring comparison | Moderate/research | Stalk/point infrastructure and constructive hypotheses. |
 | Small-site restriction/basis comparison | Moderate | Exact basis and topology transport owners. |
 | Representation-independent category of schemes | Research-grade but plausible | Morphism representation, locally-ringed structure, and comparison with presentations. |
-| Fixed-site categorical-HIT sheafification construction | Research-grade but factorable | Topology-to-local-equivalence bridge, categorical localization/HIT, rigid `Sheaf_cat` realization, CommRing lift, and left exactness. |
+| Fixed-site categorical-HIT sheafification construction | Research-grade but factorable | Per-presheaf categorical constructors/eliminator, topology-to-local-equivalence bridge, functorial assembly, rigid `Sheaf_cat` realization, CommRing lift, and left exactness. |
 | Unrestricted atlas effectivity | Research-grade | Descent/localization infrastructure and scope. |
 
 The original computational-schemes direction remains feasible. The main risk
@@ -882,9 +883,11 @@ gluing/effectivity construction.
 
 A native categorical-HIT experiment is also ready as an independent research
 tranche, but not as the next dependency of that consumer. Its first honest
-probe is Set/path-valued on a small explicit site: select whole descent maps,
-define their local objects, and test whether free categorical localization
-produces a whole reflector and unit that instantiate
+probe is Set/path-valued on a small explicit site: for one selected presheaf
+`P`, construct `sheafify_T(P)` by adjoining the chosen descent fillers and
+test its internal eliminator against local targets. Only after that objectwise
+probe should the construction be made uniform on presheaf objects and arrows
+to produce a whole reflector and unit instantiating
 `SheafificationCapability`. A CommRing-valued lift, left exactness, and slice
 base change remain separate later gates. Raw support-lattice, compact-open,
 and stalk comparisons likewise remain later theorems rather than hidden
@@ -1067,6 +1070,17 @@ prerequisites.
   remains outside `BinarySiteRelativeSchemePresentation`: the global object
   continues to own restriction and compatibility, and the example merely
   identifies the derived overlap with its chosen computing presentation.
+- **CS-D-032 — Chart intersections are selected slice products:** the
+  smallest honest inherited overlap is a supplied binary product of the two
+  chart arrows in the conventional slice over the global object. The generic
+  product contract is the existing whole terminal-weighted limit comparison
+  for the Boolean path-discrete diagram. Its universal cone derives both
+  projections internally; applying the existing slice-domain functor and
+  structure-presheaf action derives the base arrows and restriction maps. No
+  primitive pullback rule, componentwise cone/naturality fields, overlap or
+  cocycle field on a scheme, or atlas-first gluing constructor is added.
+  `Pullback_catd` remains family reindexing and is not reused as a categorical
+  pullback object.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1090,7 +1104,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-06c | Separate site-relative presentation from functor-of-points compact-open semantics | Complete as an architecture audit: retain the descriptive site-relative name, add no empty open label/alias, and route compact-open comparison to CS-10 | CS-D-028 |
 | CS-06d | Total binary site-relative scheme presentation | Complete and locally checkpointed at `4b178ee`: a 141-line/14-symbol rule-free source, 107-line/12-assertion reviewer, exact warnings, audit, registries, authority prose, and 130-target resumable health are green | CS-D-028/029/030 plus CS-06b |
 | CS-07 | Supplied global two-chart selected-refinement consumer | Complete and locally checkpointed at `4892c33`: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green. A closed genuinely non-affine realization remains separate | CS-06a |
-| CS-07b | First supplied genuinely non-affine global consumer | Contract audit in progress: no active projective/graded object exists, and a projective-line-style presentation must connect its localization transition to the actual inherited chart intersection rather than merely label two chart rings | CS-D-031; smallest honest selected-overlap/pullback probe |
+| CS-07b | First supplied genuinely non-affine global consumer | Its selected-overlap substrate is promoted as two rule-free source modules plus two nine-assertion reviewers; focused/exact-warning/audit/catalog/authority checks and 134-target exact-current resumable health are green, with a local checkpoint pending. The remaining consumer must attach projective-line-style coordinate/localization data to this actual inherited intersection rather than merely label two chart rings | CS-D-031/032; checkpoint the overlap substrate, then select a supplied global projective-line-style presentation |
 | CS-08 | Atlas-first two-affine gluing constructor | Out of current scope, not part of the global-first scheme interface | Reconsider only for a future consumer explicitly constructing a global object from independent affine pieces |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
@@ -1754,6 +1768,73 @@ bounded CS-06c/06d feature boundary is locally checkpointed as `4b178ee`
 computational consumer is a supplied genuinely non-affine global presentation;
 the first small-site categorical-HIT localization probe is an independent
 CS-12 research option, not its blocker.
+
+### 13.12 CS-07b inherited binary chart-overlap substrate — 2026-08-03
+
+The first non-affine consumer audit established that two affine labels are
+not enough: any projective-line-style coordinate transition must be attached
+to the actual common restriction inherited from the supplied global scheme.
+The smallest reusable contract is a selected binary product of the two chart
+arrows in the conventional slice over that global object. This is an
+intersection presentation, not a construction of the global object by
+gluing.
+
+The 288-line transparent rule-free generic candidate
+`emdash3_2_finite_limits.lp` adds 15 symbols. It presents the pair `x,y : C`
+as the Boolean path-discrete diagram, defines `IsBinaryProduct_comp` by the
+existing `IsWeightedLimit_cov_comp` terminal-weighted comparison, and retains
+one selected product object plus its whole universal comparison. Applying the
+comparison to the representable identity derives a whole universal cone;
+existing profunctor tensor, evaluation, and cell owners derive its two closed
+endpoint projections. No componentwise naturality equations or new rewrite
+or unification rules are introduced.
+
+The 297-line transparent rule-free scheme adapter
+`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp` adds 14 symbols. A
+`BinarySchemeChartOverlapPresentation(S)` is exactly a selected binary product
+of the two retained chart objects in
+`Slice_cat(K,binary_site_relative_scheme_whole_object(S))`. The generic
+comparison supplies both whole slice projections. Existing arrow action of
+`slice_domain_func` supplies their arrows in `K`, and existing arrow action of
+the global commutative-ring presheaf supplies both restriction homomorphisms
+from the chart rings to the overlap ring.
+
+The 91-line generic reviewer and 134-line scheme reviewer contain nine typed
+assertions each. Focused checks are green for both sources and both reviewers.
+Each warning-enabled target inherits exactly 1,020 unjoinable critical pairs
+and 159 replaceable pattern variables from existing dependencies, with no
+warning located in either new source. The strict rule-LHS audit remains at
+zero unreviewed clauses with 52 annotated slots across 32 intentional clauses.
+The unchanged strict catalog remains fully classified at 1,992 kernel checks;
+source TOC, report-header and active-reference lint, check-metrics tests,
+Python/shell syntax, health staleness, and diff hygiene are green.
+
+The exact-current health set now contains 134 successful targets. A one-time
+ignored-cache migration verified all 130 prior targets byte-for-byte against
+the recorded `sha256:34b7318f842b5e8c76a08ac3ab1aacbf866b97a5b330e0b804606d993231590b`
+snapshot under the unchanged Lambdapi, flags, and 90-second identity, then ran
+only the four new targets. Their source/reviewer timings are 2.149/2.153
+seconds for the generic product and 16.214/16.107 seconds for the scheme
+overlap. The new source-metrics snapshot is
+`sha256:381fae406ca61c0c68b3ed5cdca74bb43e9cc7959c064cae93a4c08ce7e354e5`
+and the exact checked-content snapshot is
+`sha256:062ca9392127f68c4c55a5625f940880943ef00d9a0a9450f0c2d26e2c36513d`.
+An initial exact-identity resume miss began replaying unchanged targets and was
+stopped after 22 successes without writing a report; the verified migration
+then produced the proportional exact-current report above.
+
+The tranche deliberately asserts neither that every category has products nor
+that arbitrary chart pairs have pullbacks. It does not reinterpret
+`Pullback_catd`, add an overlap/transition/cocycle field to the scheme, require
+atlas-first gluing, or claim to have constructed projective line. The next
+consumer must identify this inherited overlap with a selected localization or
+inversion-coordinate presentation belonging to a supplied global
+projective-line-style object.
+
+No full CI, completed kernel-wide replay, root aggregate, push, merge, history
+rewrite, publication, atlas-first gluing, or worktree cleanup was performed.
+The bounded standard-library checkpoint is pending the exact staged-diff
+review.
 
 ## 14. Validation And Checkpoint Contract
 

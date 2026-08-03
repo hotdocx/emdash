@@ -32,6 +32,8 @@ the reusable Nat arithmetic/sethood extension is
 `emdash3_2_nat_arithmetic.lp`;
 the reusable Nat-indexed finite-family extension is
 `emdash3_2_finite_families.lp`;
+the selected rule-free binary-product/finite-limit extension is
+`emdash3_2_finite_limits.lp`;
 the set-carrier commutative-ring object extension is
 `emdash3_2_commutative_algebra.lp`;
 the structured commutative-ring morphism/category extension is
@@ -101,6 +103,8 @@ the whole-object locally-ringed affine-cover presentation extension is
 `emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp`;
 the total binary site-relative computational-scheme presentation extension is
 `emdash3_2_commutative_algebra_site_relative_schemes.lp`;
+the selected actual binary chart-overlap extension is
+`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp`;
 the affine Yoneda functor-of-points, semantic basic-open, and
 localization-representability extension is
 `emdash3_2_commutative_algebra_affine_points.lp`;
@@ -457,17 +461,29 @@ Use the following order:
     Whole restriction, overlap compatibility, and chart realizations remain
     at existing owners; it adds no transition/cocycle data, gluing theorem,
     classical-open comparison, or semantic category of schemes;
-50. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+50. `emdash3_2_finite_limits.lp` for the transparent rule-free selected
+    binary product of two objects, expressed as a Boolean path-discrete
+    diagram and a whole terminal-weighted limit comparison. Its universal
+    cone and both projections are derived through existing profunctor owners;
+    it asserts no global existence of products, categorical pullback
+    constructor, or componentwise cone/naturality interface;
+51. `emdash3_2_commutative_algebra_scheme_chart_overlaps.lp` for the
+    transparent rule-free selected product of two retained scheme charts in
+    the conventional slice. Existing whole slice-domain and structure-
+    presheaf action derive the two base arrows and ring restrictions. It adds
+    no overlap/cocycle field to a scheme, atlas-first gluing, projective-space
+    claim, or assertion that arbitrary chart pairs admit pullbacks;
+52. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-51. `emdash3_2_checks.lp` for executable regression statements;
-52. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+53. `emdash3_2_checks.lp` for executable regression statements;
+54. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-53. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-54. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+55. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+56. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-55. `reports/INDEX.md` for task-specific plans and decision records.
-56. `book/book.json` and `book/evidence.json` for book source
+57. `reports/INDEX.md` for task-specific plans and decision records.
+58. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
