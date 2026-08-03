@@ -810,16 +810,22 @@ charts.  That connection is consumer data or a derived adapter for the
 example; it is not a new overlap/coherence field in the general scheme
 presentation.
 
-No active v3.2 module currently supplies a projective/graded/`Proj` object, a
-principal-sieve facade for an arbitrary chart arrow, or a ready ordinary
-categorical-pullback object.  `Pullback_catd` is family reindexing, explicitly
-not a pullback constructor.  General weighted-limit infrastructure may later
-present a pullback, but no such finite diagram/weight consumer has yet been
-selected.  The next bounded probe must therefore test the smallest honest
-selected-overlap contract in the slice category before promoting a named
-projective-line presentation.  It must not attach a disconnected localization
-isomorphism to an opaque `P1` label, store external component naturality, or
-move atlas-first gluing back into the active path.
+The bounded CS-07b/07c implementation now supplies that honest connection.
+A selected Boolean weighted-limit comparison presents the two chart objects'
+product in the conventional slice; whole slice-domain and structure-presheaf
+action derive the actual overlap ring and its two restrictions.  The generic
+Laurent layer then makes each literal restriction map a one-variable
+localization and derives both coordinate-inversion maps by polynomial and
+localization universality.  A thin dependent adapter applies that package to
+the actual rings and maps.  No disconnected localization `DefIso`, external
+component naturality, or atlas-first gluing is introduced.
+
+No active v3.2 module yet constructs a projective/graded/`Proj` object or a
+closed `P1` term, and `Pullback_catd` remains family reindexing rather than a
+categorical pullback constructor.  The completed adapter is therefore an
+assumption-explicit projective-line-style computational presentation of a
+supplied global object, not a construction or non-affineness theorem for that
+object.
 
 ### CS-08 and later — Out-of-scope construction and semantic comparisons
 
@@ -858,7 +864,8 @@ close CS-05.
 | General finite-qcqs presentation | Good after the binary consumer | Generalize the Boolean choice to Nat-indexed finite factorization without duplicating the algebraic family owner. |
 | Supplied global two-chart refinement consumer | Implemented, exact-current through the bounded 124-target health boundary, and locally checkpointed at `4892c33` | It consumes an assumption-explicit global presentation and does not construct a closed non-affine object. |
 | Selected actual intersection of two retained charts | Implemented and locally checkpointed at `d9e036f` after focused checks, exact warnings, strict audit/catalog, and 134-target exact-current resumable health | The intersection is a selected binary product in the conventional slice, not an atlas-first gluing payload. |
-| Closed global non-affine example | Good but separate | Attach meaningful projective-line-style coordinate/localization data to the supplied global object and its actual inherited chart intersection. |
+| Projective-line-style actual-overlap coordinates | Implemented and proportional validation green, pending local checkpoint | Both chart rings and the actual structure-sheaf restrictions are the polynomial/localization inputs; both Laurent maps are internally constructed and compared wholly with identity on the literal overlap. |
+| Closed global non-affine object | Good but separate | Supply or later construct a genuine global `P1`/`Proj` object instantiating the now-available site-relative and Laurent-overlap presentations; this tranche does not prove non-affineness. |
 | Constructive two-affine gluing | Out of current scope | It is needed only to construct a global object from independent charts, not to present or compute with an already supplied scheme. |
 | Topology-local locally-ringed presentation | Implemented assumption-explicitly, exact-current through the bounded 128-target health boundary, and locally checkpointed at `c2b53bf` | It avoids raw joins: invertible zero yields empty coverhood, while an invertible sum returns a selected cover and memberwise Boolean unit branches. Raw support-lattice comparison remains later. |
 | Total site-relative scheme presentation | Implemented, exact-current through the bounded 130-target health boundary | The rule-free dependent total retains the global cover and its binary locally-ringed affine certificate; the base site supplies relative chart geometry. |
@@ -875,11 +882,12 @@ ambient-to-affine chart comparison, the constructively generated two-chart
 atlas, or the topology-local local-ring presentation; those now have working
 internal owners. CS-06c now makes the semantic scope explicit: this is a
 Cartier-style site-relative presentation, while a Zeuner compact-open or
-classical open-immersion comparison remains separate. CS-06d now supplies the
-total global package. The next direct computational-scheme consumer is a
-supplied, genuinely non-affine global presentation with a mathematically
-meaningful structure sheaf and selected affine cover. It does not require a
-gluing/effectivity construction.
+classical open-immersion comparison remains separate. CS-06d supplies the
+total global package, and CS-07b/07c now supply its selected actual overlap
+and a direct polynomial/localization coordinate presentation there. A closed
+global `P1` term remains separate because no projective/graded object is
+currently available; it may instantiate the presentation as supplied data
+without requiring a gluing/effectivity construction.
 
 A native categorical-HIT experiment is also ready as an independent research
 tranche, but not as the next dependency of that consumer. Its first honest
@@ -1081,6 +1089,21 @@ prerequisites.
   cocycle field on a scheme, or atlas-first gluing constructor is added.
   `Pullback_catd` remains family reindexing and is not reused as a categorical
   pullback object.
+- **CS-D-033 — Laurent coordinates use the actual restriction maps:** the
+  first projective-line-style adapter does not identify an unrelated Laurent
+  ring with the inherited overlap by a disconnected `DefIso`.  Each literal
+  chart structure ring is instead supplied as a one-variable polynomial
+  algebra over one common base, and its already-derived structure-sheaf map
+  into the literal overlap ring is supplied as localization at that
+  coordinate. Polynomial universality constructs the map sending `t` to
+  `u^{-1}`; localization universality extends it to the whole Laurent map.
+  The shared-overlap presentation retains one whole identity path for each of
+  the two constructed overlap endomorphisms. These paths are concrete
+  coordinate-presentation evidence, not componentwise restriction squares,
+  generic naturality fields, or transition/cocycle fields on
+  `BinarySiteRelativeSchemePresentation`. The thin scheme adapter adds only
+  the common base ring around that generic package. It neither constructs the
+  supplied global object nor proves that it is non-affine or projective line.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1104,7 +1127,8 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-06c | Separate site-relative presentation from functor-of-points compact-open semantics | Complete as an architecture audit: retain the descriptive site-relative name, add no empty open label/alias, and route compact-open comparison to CS-10 | CS-D-028 |
 | CS-06d | Total binary site-relative scheme presentation | Complete and locally checkpointed at `4b178ee`: a 141-line/14-symbol rule-free source, 107-line/12-assertion reviewer, exact warnings, audit, registries, authority prose, and 130-target resumable health are green | CS-D-028/029/030 plus CS-06b |
 | CS-07 | Supplied global two-chart selected-refinement consumer | Complete and locally checkpointed at `4892c33`: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green. A closed genuinely non-affine realization remains separate | CS-06a |
-| CS-07b | First supplied genuinely non-affine global consumer | Its selected-overlap substrate is locally checkpointed at `d9e036f`: two rule-free source modules, two nine-assertion reviewers, focused/exact-warning/audit/catalog/authority checks, and 134-target exact-current resumable health are green. The remaining consumer must attach projective-line-style coordinate/localization data to this actual inherited intersection rather than merely label two chart rings | CS-D-031/032 and checkpointed overlap substrate; select a supplied global projective-line-style presentation |
+| CS-07b | Selected inherited overlap for the first supplied non-affine-style consumer | Complete and locally checkpointed at `d9e036f`: two rule-free source modules, two nine-assertion reviewers, focused/exact-warning/audit/catalog/authority checks, and 134-target exact-current resumable health are green. CS-07c now attaches projective-line-style coordinate/localization data directly to this overlap | CS-D-031/032 and checkpointed overlap substrate |
+| CS-07c | Canonical Laurent transition and actual-overlap adapter | Implemented and proportional validation green pending local checkpoint: the generic rule-free layer derives both Laurent maps by polynomial/localization universality and presents two literal localization maps into one common ring; the thin scheme layer instantiates it at the actual chart rings, inherited overlap ring, and existing restriction maps. A closed global `P1` object and non-affineness theorem remain separate | CS-D-031/032/033 and CS-07b overlap substrate |
 | CS-08 | Atlas-first two-affine gluing constructor | Out of current scope, not part of the global-first scheme interface | Reconsider only for a future consumer explicitly constructing a global object from independent affine pieces |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
@@ -1835,6 +1859,88 @@ No full CI, completed kernel-wide replay, root aggregate, push, merge, history
 rewrite, publication, atlas-first gluing, or worktree cleanup was performed.
 The bounded standard-library boundary is locally checkpointed as `d9e036f`
 (`feat: add selected scheme chart overlaps`).
+
+### 13.13 CS-07c canonical Laurent and actual-overlap presentation — 2026-08-03
+
+The first algebra probe reconstructed a one-variable polynomial structure
+around an arbitrary target ring. That shape was rejected before promotion:
+the existing `CommRingPolynomialAlgebra(A,Unit)` already owns the target,
+base map, variable family, and universal property. The promoted 729-line
+transparent rule-free module
+`emdash3_2_commutative_algebra_laurent.lp` instead consumes that canonical
+package directly. Polynomial universality selects the structured map
+`A[t] -> A[u,1/u]` with `t |-> u^{-1}`; localization universality selects its
+extension `A[t,1/t] -> A[u,1/u]`. Reversing the two packages constructs the
+opposite map. Named observations expose the polynomial coordinate equation
+and the whole localization-factor triangle without any new rule or unifier.
+
+The same module adds
+`CommRingOneVariableLocalizationPresentation(A,R,L,h)`, in which the literal
+map `h:R->L` is simultaneously presented as localization at the selected
+coordinate of a one-variable polynomial algebra. Two such literal maps into
+one target ring form `CommRingLaurentOverlapPresentation`; its two retained
+paths state that the internally constructed coordinate changes are the
+identity endomorphism of that exact target. These are whole structured-map
+paths. They replace the rejected alternative of independently choosing two
+localized rings, joining each to the inherited overlap by a disconnected
+`DefIso`, and then adding a separate comparison square.
+
+The 78-line transparent rule-free scheme adapter
+`emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp` is intentionally
+thin. `BinarySchemeLaurentOverlapPresentation(S,overlap)` adds one common
+base ring and instantiates the generic package at the literal chart structure
+rings, `binary_scheme_chart_overlap_ring`, and the already-derived
+`binary_scheme_chart_overlap_restriction0/1`. It therefore does not duplicate
+the overlap, restriction maps, transition, or cocycle data and adds nothing
+to the general scheme record. The adapter is a projective-line-style
+coordinate presentation of supplied global data, not a closed `P1`
+construction or a non-affineness theorem.
+
+An early convenience version repeated both full Laurent transition types as
+scheme-level projection aliases. Although well typed in isolation, the
+combined source exceeded the uniform per-target ceiling after expanding the
+full site-relative dependency chain. Those redundant aliases were removed;
+the four-symbol adapter exposes only its base ring and the generic coordinate
+package. The 154-line algebra reviewer checks eleven generic observations,
+including both transition directions and both whole common-overlap identity
+paths. The 44-line scheme reviewer checks the constructor/projection beta
+laws at the actual ring and restriction endpoints. Together these layers
+exercise the full contract without re-expanding the same whole identities at
+the heaviest dependency boundary.
+
+Proportional validation is green:
+
+- exact-current health timings are 4.381 seconds for the Laurent source,
+  4.789 seconds for its reviewer, 16.022 seconds for the scheme adapter, and
+  16.151 seconds for its reviewer;
+- warning-enabled checks of all four targets inherit exactly 1,179 warnings
+  (1,020 unjoinable critical pairs and 159 replaceable pattern variables),
+  with no warning located in either new source or reviewer;
+- the strict rule-LHS audit remains at zero unreviewed clauses with 52
+  annotated slots across 32 intentional clauses;
+- the unchanged strict central catalog remains fully classified at 1,992
+  checks; source TOC, report-header and active-reference lint,
+  check-metrics/source-TOC/warning-summary tests, Python/shell syntax, and
+  whitespace hygiene pass; and
+- the exact-current health report contains 138 successful targets. Before
+  migrating the ignored resume identity, all 134 prior files recomputed to
+  the recorded checked-content snapshot
+  `sha256:062ca9392127f68c4c55a5625f940880943ef00d9a0a9450f0c2d26e2c36513d`
+  under the unchanged Lambdapi, flags, and 90-second environment. The first
+  health refresh reused those exact successes and executed only the four new
+  targets. After removing two trailing blank lines, the final exact-identity
+  refresh reused 136 successful targets and reran only the two byte-changed
+  targets. The source-metrics snapshot is
+  `sha256:d3e267fb0a76f504d21f74440a571a068324a054b1ca89fe4aeeed2b255d734e`
+  and the exact checked-content snapshot is
+  `sha256:495981dc77a2330a8b774c1e4808a5bf1977944c6b1e0c907fcbfbcc32b455fd`.
+
+No full CI, examples aggregate, completed kernel-wide replay, root aggregate,
+push, merge, history rewrite, publication, closed projective construction,
+atlas-first gluing, or worktree cleanup was performed. One examples wrapper
+was discovered to ignore a supplied filename and began the aggregate; it was
+interrupted immediately and contributes no validation evidence. The bounded
+CS-07c source boundary is ready for its authorized local checkpoint.
 
 ## 14. Validation And Checkpoint Contract
 

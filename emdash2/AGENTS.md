@@ -105,6 +105,10 @@ the total binary site-relative computational-scheme presentation extension is
 `emdash3_2_commutative_algebra_site_relative_schemes.lp`;
 the selected actual binary chart-overlap extension is
 `emdash3_2_commutative_algebra_scheme_chart_overlaps.lp`;
+the universal-property Laurent-coordinate and literal common-overlap
+extension is `emdash3_2_commutative_algebra_laurent.lp`;
+the thin actual-scheme-overlap Laurent adapter is
+`emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`;
 the affine Yoneda functor-of-points, semantic basic-open, and
 localization-representability extension is
 `emdash3_2_commutative_algebra_affine_points.lp`;
@@ -473,17 +477,30 @@ Use the following order:
     presheaf action derive the two base arrows and ring restrictions. It adds
     no overlap/cocycle field to a scheme, atlas-first gluing, projective-space
     claim, or assertion that arbitrary chart pairs admit pullbacks;
-52. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+52. `emdash3_2_commutative_algebra_laurent.lp` for the transparent rule-free
+    universal-property construction of the canonical maps
+    `A[t,1/t] -> A[u,1/u]` and back, sending each coordinate to the inverse of
+    the other. Its common-overlap package uses two literal localization maps
+    into one ring and whole identity paths for the two constructed coordinate
+    changes. It adds no polynomial syntax, fraction normalizer, runtime rule,
+    projective object, or scheme declaration;
+53. `emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp` for the thin
+    transparent rule-free application of that generic package to the actual
+    structure rings, inherited overlap ring, and two restriction maps of a
+    supplied binary site-relative scheme. It adds no disconnected overlap
+    isomorphism, external restriction square, general scheme field,
+    atlas-first gluing, non-affineness theorem, or closed projective line;
+54. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-53. `emdash3_2_checks.lp` for executable regression statements;
-54. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+55. `emdash3_2_checks.lp` for executable regression statements;
+56. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-55. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-56. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+57. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+58. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-57. `reports/INDEX.md` for task-specific plans and decision records.
-58. `book/book.json` and `book/evidence.json` for book source
+59. `reports/INDEX.md` for task-specific plans and decision records.
+60. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

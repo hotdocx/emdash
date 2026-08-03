@@ -181,6 +181,28 @@ realizations without duplicating restriction or compatibility data. The site
 determines admissible chart geometry; classical Zariski/Zeuner comparison,
 atlas-first construction, and a representation-independent `Scheme_cat`
 remain separate.
+`emdash3_2_finite_limits.lp` presents a selected binary product through the
+existing whole weighted-limit owner. Its universal cone and projections are
+derived internally, and it claims neither global products nor a primitive
+categorical pullback operation.
+`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp` applies that selected
+product in the conventional slice of a supplied binary site-relative scheme.
+The existing whole slice-domain and structure-presheaf actions derive the
+actual overlap domain, both base arrows, its structure ring, and both
+restriction homomorphisms without adding overlap or cocycle fields.
+`emdash3_2_commutative_algebra_laurent.lp` is the transparent rule-free
+universal-property Laurent layer. Polynomial universality constructs the map
+sending `t` to `u^{-1}`, localization universality extends it to
+`A[t,1/t] -> A[u,1/u]`, and reversed inputs give the opposite map. Its literal
+common-overlap presentation retains whole identity paths for those two
+internally constructed transitions; it supplies no polynomial syntax,
+fraction normalizer, runtime fold, projective object, or scheme.
+`emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp` is the thin
+dependent adapter from that generic construction to the actual chart rings,
+overlap ring, and restriction maps already derived from a supplied global
+scheme. It introduces no disconnected overlap isomorphism, componentwise
+restriction square, general transition field, atlas-first gluing, or claim of
+a closed projective line.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
 derived native equality-valued hom-action/groupoidality extension. It also
 exposes the existing transparent Cat-level consequence that the selected left
