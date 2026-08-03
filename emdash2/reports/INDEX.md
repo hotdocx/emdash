@@ -12,6 +12,15 @@ scoped restriction/basis comparisons; and stages semantic schemes separately
 from their computational presentations. Its CS-01 first tranche is a
 rule-free global reflective ringed-object cover substrate, not yet an affine
 atlas or scheme. That bounded tranche is locally checkpointed at `a5aebcf`.
+Its CS-04 continuation constructs the whole ambient chart-slice presheaf and
+an explicitly supplied reflective-slice presentation, checkpointed at
+`7d63a90`; induced topology and reflector transport remain separate claims.
+The subsequent CS-05a audit records that the historical slice construction
+itself assumed a slice site, an adjoint site morphism/comorphism, sheaf
+pullback, and a sheafification/glue base-change comparison. It routes the next
+whole contract through locally exact/Beck--Chevalley site squares and keeps a
+categorical-HIT reflector construction separate from induced topology and
+slice base change.
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_presheaves.lp` is the one-way
