@@ -5211,6 +5211,16 @@ work is now scoped as small/big restriction and affine/principal-open basis
 comparison, while the three distinct locality notions remain separately
 named. The affine checkpoint and the historical analysis below remain valid.
 
+**2026-08-03 CS-04 refinement.** The continuation owner probe now constructs
+the whole conventional slice-domain functor and the ambient structure
+presheaf restricted to that actual slice. It also selects an
+assumption-explicit reflective slice presentation with a whole `DefIso` to
+the computing ambient restriction. This does not construct or claim an
+induced topology or reflector: topology/site-functor compatibility and
+reflective-sheaf transport are now the precise remaining semantic gate before
+honest affine chart realization. No arbitrary encoded-Sigma eta or
+object-only restriction law was added.
+
 The two supplied fields of `AffineSchemePresentation(R)` have deliberately
 narrow contracts.
 
@@ -6169,7 +6179,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-11b | Whole affine localization locality | Promoted source/reviewers, exact warning comparison, strict audit, 1,992-check catalog, 106-target exact-content health, and proportional integration green; local checkpoint `8216f28` | PSSS-11a checkpoint, existing localization restriction/matching owners, and the generic Cat-level selected-left-inverse right law |
 | PSSS-11c | Thin affine-scheme presentation and concrete computing example | Promoted 101-line/8-symbol rule-free source and 194-line/14-assertion `F2 x F2` reviewer; focused/exact-warning/audit/catalog, exact 108-target health, and proportional nonduplicative integration green; local checkpoint `68578be` | PSSS-11a and PSSS-11b checkpoints plus the PSSS-10b concrete atlas |
 | PSSS-11 | Scheme atlas | Affine MVP complete: PSSS-11c checkpointed and historical/feasibility retrospective recorded; general non-affine implementation remains separately gated by PSSS-D-117 | PSSS-11c |
-| PSSS-11d | Global-first non-affine continuation and later atlas-first gluing | Routed to the dedicated 2026-08-03 computational-schemes plan; CS-01 global selected-cover substrate is the first gate, while explicit two-affine gluing is later | Checkpointed PSSS-11c, then CS-01 and the pullback/restriction affine-chart owner probe |
+| PSSS-11d | Global-first non-affine continuation and later atlas-first gluing | Routed to the dedicated 2026-08-03 computational-schemes plan; CS-01 is checkpointed and CS-04 now constructs whole ambient slice-presheaf restriction plus a supplied reflective-slice presentation without overclaiming induced topology; explicit two-affine gluing remains later | Checkpointed PSSS-11c and CS-01, then CS-04 validation and honest CS-05 affine realization |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 
 ## 20. Success Criteria For The Foundation Tranches

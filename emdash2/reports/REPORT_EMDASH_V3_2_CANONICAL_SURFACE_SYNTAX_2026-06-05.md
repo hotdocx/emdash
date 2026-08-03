@@ -725,6 +725,23 @@ assert affineness. Members of `f^*R` are the global-first overlap candidates,
 so no independent overlap or cocycle field is implied. The package also does
 not imply finiteness, locally-ringed support, a scheme, or effective gluing.
 
+For whole restriction to a selected chart, comments may write
+
+```text
+pi_U : K/U -> K                    = slice_domain_func(U)
+F^*O                               = comm_ring_psh_pullback(F,O)
+O_X|_U                             = O_X o Op(pi_U)
+SuppliedRingedSlice(A,U;B,i)       = B with i : include(O_B) ~=def O_A|_U
+```
+
+Here `~=_def` abbreviates the literal whole `DefIso` owner; it is not an
+objectwise family of ring isomorphisms. At a literal slice arrow `(V,f)`,
+`pi_U(V,f)` computes to `V`, while an arbitrary encoded-Sigma object remains
+at the whole-functor evaluation endpoint rather than assuming package eta.
+`SuppliedRingedSlice` visibly supplies the slice topology and reflector: the
+notation does not assert that either was induced from the ambient site and
+does not imply affineness, locally-ringed support, or a scheme.
+
 For a supplied affine reflective structure-sheaf presentation, comments and
 examples may write
 

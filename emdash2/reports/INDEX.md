@@ -49,6 +49,14 @@ restriction-total object, domain, arrow, and pulled-back covering sieve; it is
 called a cover chart without asserting affineness. The module stores no
 component naturality, overlap, or cocycle field and claims neither finiteness,
 locally-ringed support, a scheme, nor effective gluing.
+`emdash3_2_commutative_algebra_ringed_space_restrictions.lp` is the rule-free
+CS-04 whole ambient-slice substrate. It constructs the conventional whole
+slice-domain functor and restricts the ambient structure presheaf by ordinary
+whole functor composition. It also packages a visibly supplied reflective
+CommRinged site on the actual slice with a whole `DefIso` to that computing
+ambient restriction. It does not claim that topology or sheafification was
+induced, add a continuity/site-morphism calculus, assert affineness or local
+rings, or define a scheme.
 `emdash3_2_commutative_algebra_affine_ringed_sites.lp` is the rule-free first
 affine consumer of that supplied-reflector layer and of the internally
 generated big-affine Zariski topology. It retains one supplied reflective

@@ -64,6 +64,14 @@ detailed probe evidence.
   members expose their actual restriction arrows. It does not assert that a
   cover is finite or affine, impose locally-ringed support, store overlap or
   cocycle fields, define a scheme, or construct gluing.
+- `emdash3_2_commutative_algebra_ringed_space_restrictions.lp`: downstream
+  one-way, rule-free whole chart-slice restriction substrate. It exposes the
+  whole conventional slice-domain functor, restricts CommRing-valued
+  presheaves by generic composition, and retains a supplied reflective site
+  on the actual slice with one whole computational `DefIso` to the ambient
+  restriction. It does not derive an induced topology or reflector, add a
+  site-morphism/continuity calculus, assert affineness or locally-ringed
+  support, define a scheme, or construct gluing.
 - `emdash3_2_nat_arithmetic.lp`: one-way reusable Nat arithmetic/sethood
   module. It owns `nat_add`, the canonical `NatSucc_func`, the associativity
   theorem, the Unit/Empty proposition witnesses, and `nat_is_set` without

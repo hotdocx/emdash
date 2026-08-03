@@ -324,7 +324,16 @@ This first source must:
 - include a focused reviewer showing constructor/projection computation and
   pulled-back coverhood.
 
-### CS-02 — Finite selected-cover presentation
+### CS-02 — Point-free locally-ringed-support audit
+
+Audit the exact support laws needed beyond the existing proposition-valued
+invertibility sieve. This remains consumer-gated: coordinate-localization
+locality is already implemented but is not silently reclassified as a
+locally-ringed condition, and stalk construction remains a later comparison
+layer. Promote only the narrow internal support capability consumed by the
+first scheme presentation.
+
+### CS-03 — Finite selected-cover presentation
 
 Audit whether `FiniteFamily` plus a supplied covering sieve can express a
 finite subcover without inventing a second sieve-generation calculus. The
@@ -334,27 +343,62 @@ interface is promoted only with a non-affine consumer and a precise statement
 that the selected finite family generates or covers, not merely that its
 members lie in a covering sieve.
 
-### CS-03 — Affine chart realization owner probe
+### CS-04 — Whole ambient chart-slice restriction
 
-For an actual member `f : U -> X`, determine the correct whole comparison
-between the ambient restriction/slice at `U` and an affine presentation
-associated to a ring `R_U`. Required questions include:
+For an actual member `f : U -> X`, the owner probe separates three layers
+that the earlier wording had conflated:
 
-1. whether `Slice_cat(K,U)` and the existing pullback owners supply the right
-   ambient restriction category;
-2. how the topology and reflective structure sheaf restrict;
-3. whether a reusable pullback of `ReflectiveCommRingedSite` is needed;
-4. whether chart affineness should be a whole `DefIso`, a category-level
-   `OmegaEquivAlong`, or a structured bundle of both; and
-5. which small/big-site comparison is genuinely consumed.
+1. the conventional whole domain functor `Slice_cat(K,U) -> K`;
+2. the whole ambient structure presheaf restricted along that functor; and
+3. transport or supply of topology, sheaf category, reflector, and selected
+   sheaf object on the slice.
+
+The first two layers are constructible now. `Into_restr_cat(K,U)` is the Sigma
+total over `K^op`, so `Sigma_proj1_func` supplies its whole projection and
+opposite gives the conventional slice-domain functor. Ordinary whole functor
+composition then constructs
+
+```text
+O_X|_U = O_X o Op(slice_domain_U)
+        : CommRingPsh(Slice_cat(K,U)).
+```
+
+Generic composition owns both object and arrow action. At an arbitrary
+encoded-Sigma object, the stable endpoint remains evaluation of the whole
+domain functor; at a literal `(V -> U)` it computes to `V`. No global Sigma
+eta/projection rewrite is justified merely to identify those presentations.
+
+The third layer is not constructible from the current public owners:
+`GrothTopology(K)` has no site-functor transport operation, and `Sheaf_cat`
+is intentionally opaque with no pullback theorem for its supplied reflector.
+The bounded assumption-explicit interface therefore retains a supplied
+`ReflectiveCommRingedSite(Slice_cat(K,U))` and one whole `DefIso` from its
+included structure presheaf to `O_X|_U`. This is a computational presentation
+of a reflective slice, not a theorem that its topology or reflector was
+induced from the ambient site. A future induced-topology/continuous-site
+capability must state that relation honestly if a consumer requires it.
+
+### CS-05 — Honest affine chart realization
+
+With the actual ambient slice presheaf available, determine the remaining
+whole comparison with an affine presentation associated to a ring `R_U`.
+Required questions now sharpen to:
+
+1. which base-category/site functor or equivalence compares
+   `Slice_cat(K,U)` with `AffineSpecBigSlice_cat(R_U)`;
+2. which topology-compatibility contract is genuinely needed;
+3. whether affineness should combine a base/site equivalence with a whole
+   `DefIso`, a category-level `OmegaEquivAlong`, or a structured bundle of
+   both; and
+4. which small/big-site comparison is actually consumed.
 
 Do not promote a chart record that merely labels `U` with an unrelated ring
-and `AffineSchemePresentation(R_U)`. The comparison with the ambient
+and `AffineSchemePresentation(R_U)`. The comparison with the actual ambient
 restriction is the semantic content of affineness.
 
-### CS-04 — Global-first finite-qcqs `SchemePresentation`
+### CS-06 — Global-first finite-qcqs `SchemePresentation`
 
-After CS-02/CS-03 are concrete, package an existing global object with:
+After CS-02/CS-03/CS-05 are concrete, package an existing global object with:
 
 - a reflective CommRinged global presentation;
 - the narrow point-free locally-ringed/support capability actually required;
@@ -366,7 +410,7 @@ pullback/restriction, whole chart comparisons, and generic composition. Named
 adapters may expose them for consumers, but the record must not store a second
 componentwise coherence calculus.
 
-### CS-05 — First non-affine computational consumer
+### CS-07 — First non-affine computational consumer
 
 Two possible consumers are deliberately separated:
 
@@ -378,10 +422,11 @@ Two possible consumers are deliberately separated:
 The first is the nearer MVP. The second requires a realization/universal
 property and should not block the first.
 
-### CS-06 — Later semantic comparisons
+### CS-08 and later — Construction and semantic comparisons
 
 Later, independently gated work includes:
 
+- atlas-first two-affine gluing and its realization/universal property;
 - point-free invertibility-support versus ordinary local-stalk comparison;
 - small-site restriction and principal-open basis comparison;
 - a representation-independent `Scheme_cat` and `Spec_func`;
@@ -399,6 +444,9 @@ interface keeps the assumption explicit.
 | Boundary | Feasibility | Principal uncertainty |
 | --- | --- | --- |
 | Global ringed object plus selected covering sieve and pulled-back covers | High | Only exact ergonomic shape and naming. |
+| Whole ambient presheaf on the actual chart slice | Implemented | No remaining object/arrow-action gap; arbitrary Sigma endpoints stay at the whole domain functor. |
+| Supplied reflective slice with a computing ambient comparison | Implemented assumption-explicitly | It deliberately supplies, rather than derives, slice topology and reflection. |
+| Induced slice topology and reflective-sheaf transport | Moderate and consumer-gated | Honest site-functor/topology compatibility and a sheaf/reflector transport theorem are absent. |
 | Global-first assumption-explicit affine atlas | Good | Honest whole restriction/pullback comparison to each affine chart. |
 | Finite-qcqs presentation | Good with a consumer | Generic finite-cover generation must not duplicate the existing algebraic family owner. |
 | Supplied global non-affine example | Good | Selecting a mathematically meaningful ambient object before `Scheme_cat` exists. |
@@ -450,6 +498,15 @@ restriction/sheaf comparison or smuggling it into an opaque name.
   the dedicated goal branch after proportional SOP validation and ledger
   synchronization. Push, merge, rebase, amend, reset, publication, cleanup,
   branch deletion, and worktree removal are not authorized.
+- **CS-D-013 — Restriction split:** the whole slice-domain functor and ambient
+  CommRing-presheaf restriction are internally constructible and should
+  compute through generic Sigma/functor owners. Topology and reflective-sheaf
+  transport are separate capabilities; until they are constructed, a
+  `SuppliedReflectiveCommRingedSlicePresentation` visibly supplies one slice
+  site and a whole computational `DefIso` without claiming induced topology.
+  Arbitrary encoded-Sigma objects remain aligned with whole functor
+  evaluation; only literal restriction arrows are promised to reduce to
+  their first projection.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -463,8 +520,8 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-01 | Global reflective ringed object, covering sieve, and internally derived pullback cover | Complete and locally checkpointed at `a5aebcf` | Checkpointed PSSS-11c and existing site pullback owner |
 | CS-02 | Point-free invertibility-support/local-ring capability audit | Proposed | Concrete scheme consumer or theorem statement |
 | CS-03 | Generic finite-cover presentation audit | Proposed | Non-affine finite-atlas consumer |
-| CS-04 | Pullback/restriction of reflective ringed sites | Required owner probe | CS-01 plus existing slice, pullback, topology, and sheaf owners |
-| CS-05 | Honest affine chart realization over an ambient restriction | Blocked on design probe, not implementation difficulty | CS-04 and affine checkpoint |
+| CS-04 | Whole ambient chart-slice restriction and supplied reflective-slice presentation | Implementation complete and proportionally green; local checkpoint pending | CS-01 plus existing Sigma, opposite, functor-composition, and reflective-site owners |
+| CS-05 | Honest affine chart realization over an ambient restriction | Next design gate; actual ambient slice presheaf is available, while base/site and topology comparison remain open | CS-04 and affine checkpoint |
 | CS-06 | Global-first finite-qcqs `SchemePresentation(X)` | Proposed | CS-02/CS-03/CS-05 contracts |
 | CS-07 | Supplied global two-chart non-affine reviewer | Proposed first non-affine consumer | CS-06 |
 | CS-08 | Atlas-first two-affine gluing constructor | Later | Whole open-overlap input plus realization/universal property |
@@ -553,6 +610,80 @@ The complete bounded source, reviewer, authority, registry, health, and plan
 boundary is locally checkpointed as `a5aebcf` (`feat: add global ringed-space
 covers`). No push, merge, history rewrite, publication, or worktree cleanup
 was performed.
+
+### 13.2 CS-04a implementation and validation record — 2026-08-03
+
+The owner-position probe first established that the whole restriction total
+projects by `Sigma_proj1_func` and its opposite is a well-typed conventional
+slice-domain functor. It also measured two normal-form boundaries:
+
+1. the object action of the functor-between-functor-categories
+   `comp_cat_con_func` deliberately retains its stable
+   `hom_precomp_along_fapp0` cut, so it is not the selected runtime endpoint
+   for computing values of one concrete restricted presheaf; and
+2. at an arbitrary encoded-Sigma object, whole `slice_domain_func` evaluation
+   does not reduce to the separately defined `sigma_Fst` observation because
+   the kernel intentionally has no global package eta. At a literal
+   `Struct_sigma(V,f)`, both presentations compute to `V`.
+
+The promoted design therefore defines `comm_ring_psh_pullback(F,O)` as the
+whole ordinary composite `O o Op(F)`. This remains a full functor—generic
+composition owns its values, structured arrow action, functoriality, and
+naturality—while exposing the computational endpoint required by chart
+consumers without a new rule or a duplicate component calculus.
+
+The rule-free module
+`emdash3_2_commutative_algebra_ringed_space_restrictions.lp` is 225 lines and
+declares 13 symbols, zero rewrite rules, and zero unification rules. It adds:
+
+- `into_restr_domain_func` and its opposite `slice_domain_func`;
+- generic whole `comm_ring_psh_pullback`;
+- the actual ambient structure presheaf on `Slice_cat(K,U)` and its selected
+  cover-chart specialization; and
+- `SuppliedReflectiveCommRingedSlicePresentation(A,U)`, retaining one supplied
+  reflective CommRinged site on the actual slice and a whole `DefIso` from
+  its included structure presheaf to the computing ambient restriction.
+
+The last classifier is explicitly a computational presentation. It does not
+assert that its selected topology, sheaf category, reflector, or sheaf object
+was induced from the ambient site. The source adds no site continuity law,
+topology transport, sheaf pullback theorem, affine label, locally-ringed
+support, overlap/cocycle field, scheme record, or gluing constructor.
+
+The reviewer `examples/commutative_ring_ringed_space_restrictions.lp` is 155
+lines with 11 typed assertions. It checks literal restriction-total and slice
+domain beta, whole CommRing-presheaf value and arrow action, the ambient-slice
+value route, cover-chart specialization, supplied-package projections, and
+both readable components of the whole `DefIso`.
+
+The final owner probe is
+`logs/probes/cs04_slice_ambient_psh-20260803-015049.log`. Quiet promoted
+source/reviewer evidence is recorded at timestamp `20260803-015357`, and the
+warning-enabled pair at `20260803-015437`.
+
+Focused and proportional validation is green:
+
+- quiet source and reviewer probes pass;
+- warning-enabled source and reviewer probes inherit exactly the unchanged
+  1,179 warnings (1,020 unjoinable-rule and 159 pattern warnings), with no
+  warning location in either new file;
+- strict rule-LHS audit reports zero unreviewed rules and 52 annotations over
+  32 intentional rule groups;
+- strict catalog generation/checking, report-header and active-reference
+  lint, source-TOC validation, check-metrics unit tests, and whitespace checks
+  pass; and
+- the fresh 60-second health integration snapshot passes all 112 registered
+  targets. The new source takes 9.336 seconds, its reviewer 12.255 seconds,
+  and central `emdash3_2_checks.lp` 35.961 seconds. The recorded source-metrics
+  snapshot is
+  `sha256:dd89720090fd2867b550478b293fc27ee04d78c7715f3d94622addfac86137af`
+  and the check-content snapshot is
+  `sha256:4bd2f81e0d775e44b99f31cb97e37c0f8571279c95ece9c106a231679bd85631`.
+
+No full CI or duplicate aggregate was run. The fresh health snapshot was the
+single integration boundary required by registering one new source and one
+new reviewer; subsequent work should carry it forward while those checked
+contents remain unchanged.
 
 ## 14. Validation And Checkpoint Contract
 

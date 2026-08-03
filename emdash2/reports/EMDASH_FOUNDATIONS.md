@@ -1849,6 +1849,56 @@ unrelated ring would not establish affineness. Locally-ringed support,
 finite-qcqs selection, gluing realization, and a scheme category remain
 separate downstream gates.
 
+### Whole Ambient Chart Slices And Supplied Reflective Presentations
+
+For an object `U : Obj(K)`, the restriction-oriented arrow total has the
+whole generic Sigma projection
+
+```text
+into_restr_domain_func(U) : Into_restr_cat(K,U) -> K^op.
+```
+
+Taking opposites gives the conventional whole slice-domain functor
+
+```text
+slice_domain_func(U) : Slice_cat(K,U) -> K.
+```
+
+Consequently a CommRing-valued presheaf restricts without a new action
+calculus:
+
+```text
+comm_ring_psh_pullback(F,O) = O o Op(F),
+O_X|_U = comm_ring_psh_pullback(slice_domain_func(U),O_X).
+```
+
+These are whole functors. Generic composition owns their object action,
+structured restriction maps, functoriality, and naturality. At an arbitrary
+encoded-Sigma slice object the stable value endpoint remains evaluation of
+`slice_domain_func`; no package eta identifies that term with a separately
+projected `sigma_Fst`. At a literal arrow `(V,f)` the whole domain functor and
+therefore the ambient presheaf value compute to `V` and `O_X(V)`.
+
+The assumption-explicit classifier
+
+```text
+SuppliedReflectiveCommRingedSlicePresentation(A,U)
+  = Sigma B : ReflectiveCommRingedSite(Slice_cat(K,U)),
+      DefIso(include(O_B), O_A|_U)
+```
+
+retains a supplied reflective CommRinged site on the actual slice and a whole
+computational presentation of its included structure presheaf. The `DefIso`
+owns both whole transformations and their strict cancellation, so readable
+components are observations rather than external naturality laws.
+
+This package deliberately does **not** claim that the topology, sheaf
+category, reflector, or structure-sheaf object of `B` was induced from `A`.
+The active site library has no general topology transport along a site
+functor, and the supplied `Sheaf_cat` facade has no pullback-reflector theorem.
+An honest continuity/induced-topology capability remains separate from this
+computational presentation and from later affine-chart realization.
+
 ### Computational Big Affine Spec Slice
 
 The first scheme-facing facade is the conventional big affine slice

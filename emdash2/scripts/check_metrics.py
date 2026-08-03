@@ -43,6 +43,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_generated_topologies.lp"),
     Path("emdash3_2_ringed_sites.lp"),
     Path("emdash3_2_commutative_algebra_ringed_space_covers.lp"),
+    Path("emdash3_2_commutative_algebra_ringed_space_restrictions.lp"),
     Path("emdash3_2_commutative_algebra_locality.lp"),
     Path("emdash3_2_commutative_algebra_matching.lp"),
     Path("emdash3_2_commutative_algebra_glue.lp"),
