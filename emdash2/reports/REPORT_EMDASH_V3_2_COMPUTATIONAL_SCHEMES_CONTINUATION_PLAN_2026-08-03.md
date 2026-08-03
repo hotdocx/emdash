@@ -1179,7 +1179,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/localization sheafification | First whole local-object tranche implemented: generic fibrewise dependent Sigma, ordinary-sieve extension/inclusion, and `IsTopologyLocalPsh`; the whole-Hom objectwise localization contract and identity model are green in an ignored probe. The categorical-HIT object former remains research | Small explicit-site categorical HIT and eliminator, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
+| CS-12 | Constructed native categorical-HIT/localization sheafification | First whole local-object tranche implemented and locally checkpointed at `5e7505e`: generic fibrewise dependent Sigma, ordinary-sieve extension/inclusion, and `IsTopologyLocalPsh`; the whole-Hom objectwise localization contract and identity model are green in an ignored probe, and exact-current 142-target health is green. The categorical-HIT object former remains research | Small explicit-site categorical HIT and eliminator, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
 ## 13. CS-01 Success Criteria
@@ -2050,7 +2050,7 @@ and the exact checked-content snapshot is
 `sha256:bf6327a019ad7865e67d3225096bb53c4664a171847c1607af18087587f7bd6b`.
 No full CI, examples aggregate, root aggregate, push, merge, publication,
 history rewrite, or worktree cleanup was performed.  The local checkpoint
-identifier is recorded after the bounded source commit.
+is `5e7505e` (`feat: add ordinary sieve local-object maps`).
 
 ## 14. Validation And Checkpoint Contract
 
