@@ -687,7 +687,7 @@ classical locally-ringed-space scheme, or a representation-independent
 semantic scheme. Conversely, construction of a compact-open classifier must
 not block the intended Cartier-style non-affine computational consumer. The
 functor-of-points/open-classifier comparison is routed to CS-10, while CS-06d
-may total the completed site-relative package without adding overlap data.
+totals the completed site-relative package without adding overlap data.
 
 This relative reading agrees with the Stacks Project's site distinctions. A
 big Zariski covering is specifically a jointly covering family of open
@@ -1043,7 +1043,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-06a | Global-first `BinaryAffineCoverPresentation` with constructive cover generation and whole affine realizations | Complete and locally checkpointed at `0f3b379`: three rule-free source layers, three reviewers, exact warning comparison, audit/catalog/authority synchronization, and 122-target resumable health are green | CS-03 binary contract plus CS-05b |
 | CS-06b | Add correct locally-ringed support and, when consumed, generic finite arity | Binary whole-object locally-ringed atlas complete and locally checkpointed at `c2b53bf`: two rule-free sources, two reviewers, exact warning comparison, audit/catalog/authority synchronization, and 128-target resumable health are green. Generic finite arity remains consumer-gated; CS-06c resolved the scheme-name scope | CS-D-025/026 plus CS-06a |
 | CS-06c | Separate site-relative presentation from functor-of-points compact-open semantics | Complete as an architecture audit: retain the descriptive site-relative name, add no empty open label/alias, and route compact-open comparison to CS-10 | CS-D-028 |
-| CS-06d | Total binary site-relative scheme presentation | Promoted as a 141-line/14-symbol rule-free source with a 107-line/12-assertion reviewer; exact warnings, audit, registries, authority prose, and 130-target resumable health are green; local checkpoint pending | CS-D-028/029/030 plus CS-06b |
+| CS-06d | Total binary site-relative scheme presentation | Complete and locally checkpointed at `4b178ee`: a 141-line/14-symbol rule-free source, 107-line/12-assertion reviewer, exact warnings, audit, registries, authority prose, and 130-target resumable health are green | CS-D-028/029/030 plus CS-06b |
 | CS-07 | Supplied global two-chart selected-refinement consumer | Complete and locally checkpointed at `4892c33`: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green. A closed genuinely non-affine realization remains separate | CS-06a |
 | CS-08 | Atlas-first two-affine gluing constructor | Out of current scope, not part of the global-first scheme interface | Reconsider only for a future consumer explicitly constructing a global object from independent affine pieces |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
@@ -1703,10 +1703,11 @@ Proportional validation is green:
 
 No full CI, kernel-wide replay, root aggregate, push, merge, history rewrite,
 publication, atlas-first gluing, or worktree cleanup was performed. The
-bounded CS-06c/06d feature boundary is green and awaiting its authorized local
-checkpoint. The next direct computational consumer is a supplied genuinely
-non-affine global presentation; the first small-site categorical-HIT
-localization probe is an independent CS-12 research option, not its blocker.
+bounded CS-06c/06d feature boundary is locally checkpointed as `4b178ee`
+(`feat: add site-relative scheme presentations`). The next direct
+computational consumer is a supplied genuinely non-affine global presentation;
+the first small-site categorical-HIT localization probe is an independent
+CS-12 research option, not its blocker.
 
 ## 14. Validation And Checkpoint Contract
 
