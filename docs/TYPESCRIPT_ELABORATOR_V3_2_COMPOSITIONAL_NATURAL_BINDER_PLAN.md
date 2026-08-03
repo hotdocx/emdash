@@ -1620,7 +1620,8 @@ Final proportional evidence is:
   kernel source-digest pin family and README line-wrap regex; no 1G failure was
   observed. Do not repeat that aggregate for this boundary.
 
-Exact rollback-safe semantic checkpoint: pending this synchronized commit.
+Exact rollback-safe semantic checkpoint:
+`f1993c2852b91173858bc2ecdf1d00998517dcaf`.
 
 ### Selected next candidate:
 `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H`
@@ -1659,7 +1660,7 @@ aggregate.
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` | complete; read-only; exact 1F proposal frozen below | completed 0E; existing `compileDisplayedContextual`; 4/4 exact one-binding parity; fixed-evaluation consumer/action probe | `compileDisplayedContextual` is the smallest existing engine. The sole gap is profile-gated routing from compact/open wrappers; no kernel owner or universal fixed/displayed traversal is needed. |
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` | final-focused-green at `c55a8d873b7abd49e221c122831ac6a90928b06f` | completed 0F; D-079; exact focused and predecessor matrices | Compact/open displayed-functor wrappers now use the existing recursive displayed compiler after their historical fast paths. Fixed evaluation and a fibre diagonal have exact three-presentation Core parity and internal object/base-arrow action; no kernel/Core/text/browser semantics changed. |
 | `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` | complete; read-only | final-focused-green 1F; clarified ordinary/displayed algebra distinction | A universal operation table has no current consumer. The concrete gap is narrower: unary compact/expanded `:^nd` omit the existing displayed endpoint context already used by grouped telescopes. |
-| `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` | final-focused-green; semantic checkpoint pending | completed 0G; D-080; effective 35/35 focused/predecessor matrix | Existing one-slot endpoint wiring now surrounds compact/expanded callbacks in contextual profiles. Diagonal identity has exact Core/type/action/text parity; historical direct behavior and diagnostics remain stable. No new owner, parser route, Core, or universal compiler. |
+| `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` | final-focused-green at `f1993c2852b91173858bc2ecdf1d00998517dcaf` | completed 0G; D-080; effective 35/35 focused/predecessor matrix | Existing one-slot endpoint wiring now surrounds compact/expanded callbacks in contextual profiles. Diagonal identity has exact Core/type/action/text parity; historical direct behavior and diagnostics remain stable. No new owner, parser route, Core, or universal compiler. |
 | `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` | dependency-ready; read-only | final-focused-green 1G; compact/expanded/grouped displayed-natural evidence | Freeze the exact shared body algebra, probe evaluation/nested endpoints, and require one concrete consumer before any further behavior. Otherwise graduate this subplan. |
 
 ## Explicit Non-Claims
@@ -1839,8 +1840,9 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
   35/35, static gates, diff hygiene, and bounded kernel check pass. The one
   required root aggregate was run once and remains non-green only on the known
   source-digest pins and README-wrap regex; it must not be repeated. Exact
-  rollback-safe semantic checkpoint is pending this synchronized commit. The
-  next row is the read-only 0H graduation audit, not another assumed refactor.
+  rollback-safe semantic checkpoint:
+  `f1993c2852b91173858bc2ecdf1d00998517dcaf`. The next row is the read-only 0H
+  graduation audit, not another assumed refactor.
 
 - **2026-08-02 — D-DTTLF-USABILITY-080 approved.** Independent review of
   proposal checkpoint `998f4e4e6977cabdeff5011b6c2e866a09cd8139` confirms

@@ -138,8 +138,8 @@
 > `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` audit; it must find one concrete
 > blocked consumer before proposing more behavior, otherwise graduate the
 > subplan. Exact proposal checkpoint:
-> `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; exact prior rollback-safe
-> semantic checkpoint: `c55a8d873b7abd49e221c122831ac6a90928b06f`.
+> `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; exact 1G rollback-safe
+> semantic checkpoint: `f1993c2852b91173858bc2ecdf1d00998517dcaf`.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
