@@ -56,7 +56,20 @@ The exact adapter-only proposal below is frozen under
 `H-DTTLF-USABILITY-COMPOSITIONAL-TEXT-PARITY-01` at
 `19ec1adb1bd2ee3288338e7069759549c1f282a8` and independently approved by
 [`D-DTTLF-USABILITY-078`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D078_REVIEW.md).
-Its exact adapter implementation is dependency-ready.
+Its exact adapter implementation is final-focused-green at rollback-safe
+semantic checkpoint `7f7d201948e5f035e516f6fb15554a1aea26029d`.
+
+The read-only `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` audit is complete. It
+finds that the desired consolidation is feasible, but at a more precise
+boundary than a universal fixed/open compiler. The fixed-category
+`compileContextual` and displayed `compileDisplayedContextual` backends are
+both recursive and internally action-owning, but accept materially different
+body algebras. Meanwhile, the existing one-binding `displayedContextLambda`
+already uses the richer displayed backend and produces byte-identical Core and
+types to compact `displayedFunctorLambda` for identity, eta, composition, and
+qualified weakening. The selected next candidate is therefore a bounded
+read-only scope audit for reusing that existing displayed backend from the
+compact and open-displayed wrappers. No behavior refactor is yet authorized.
 
 ## Objective
 
@@ -1272,10 +1285,9 @@ observed. Its middle TAP output was elided by the terminal capture, so no exact
 aggregate count is invented here. Do not repeat that aggregate for this
 boundary.
 
-## Candidate Successor: Classifier-Directed Functorial Bracket Audit
+## Completed Classifier-Directed Functorial Bracket Audit
 
-After the rollback-safe D-078 checkpoint, the highest-yield architectural
-qualification is a read-only comparison of fixed-category
+After the rollback-safe D-078 checkpoint, the audit compared fixed-category
 `categoricalLambda`/`compileContextual` with open-fibre
 `contextualDisplayedFunctorLambda`/`factorDisplayedFunctorBody`.
 
@@ -1287,11 +1299,67 @@ The audit should classify:
 - the smallest possible classifier-indexed internal engine, if one is
   justified by exact parity evidence.
 
-The desired architecture is shared recursive algebra with thin
-presentation-specific wrappers, not a single erased classifier and not a new
-standalone functorial-type-theory kernel. This candidate authorizes no behavior
-refactor yet; preserve the final-green fixed and displayed compilers as
-rollback and equivalence oracles.
+The audit establishes the following actual implementation map:
+
+| Body operation | Fixed `compileContextual` | Displayed `compileDisplayedContextual` | Narrow compact/open displayed factorer |
+|---|---|---|---|
+| bound variable / identity | yes | yes, through projection wiring | yes |
+| closed unary composition | yes | yes | yes |
+| constant body / weakening | any supported closed object | qualified displayed section weakening in its wrapper | qualified displayed section weakening |
+| duplicated input / pairing | product pairing plus evaluation | typed fibre pair plus displayed product owners | no |
+| general application | recursively varying subject and argument | closed displayed subject plus recursive argument; reviewed fixed/varying displayed evaluation | no |
+| nested abstraction | product wiring, exchange, and ordinary curry | only the reviewed exact mixed displayed abstraction | no |
+| result packaging | `Functor_cat A B` | `Functord_cat E D` over a hidden base | compact `Functord_cat` or an open ordinary-natural component |
+
+This means that two distinct conclusions must not be conflated:
+
+1. A single erased fixed/open compiler is neither necessary nor currently a
+   mechanical refactor. The fixed and displayed classifiers select different
+   structural owners, application judgments, scope conditions, and result
+   wrappers. A future classifier-indexed traversal remains feasible, but it
+   should have separate fixed and displayed algebras rather than pretending
+   that an open fibre is a closed category.
+2. Consolidation **within the displayed classifier** is already strongly
+   qualified. With one binding, `displayedContextLambda` has source family
+   exactly that binding's family and recursively invokes
+   `compileDisplayedContextual`. A bounded in-memory probe compared it with
+   `displayedFunctorLambda` for identity, eta, two-step composition, and exact
+   section weakening. All four cases have byte-identical explicit Core,
+   byte-identical inferred types, and semantic comparison status `equal`.
+
+The current sharing boundary is therefore historically narrower than the
+available semantics: compact `lambda^fd` and expanded
+`lambda^n k. lambda^f a` share `factorDisplayedFunctorBody`, while the richer
+one- and many-binding displayed bracket already exists beside it. The
+high-yield redesign is to extract or parameterize the existing displayed body
+driver so that compact and open-displayed wrappers can reuse it while keeping
+their distinct scope checks, abstraction evidence, and outer result facades.
+This needs no new Lambdapi owner, cast, curry construction, external
+coherence field, or standalone functorial-type-theory kernel.
+
+### Selected next candidate: `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F`
+
+Before changing behavior, perform one bounded exact-scope audit that:
+
+1. locates the smallest internal helper shared by one-binding
+   `displayedContextLambda`, compact `displayedFunctorLambda`, and open
+   `contextualDisplayedFunctorLambda`;
+2. preserves byte-identical Core, inferred types, evidence classifications,
+   and failure behavior for the existing identity/eta/composition/weakening
+   corpus;
+3. selects one representative body already owned by
+   `compileDisplayedContextual` but absent from the narrow factorer—prefer the
+   fixed-argument displayed evaluation corresponding to the useful form
+   `lambda^f F. F(a0)`—and proves compact/expanded parity plus object and arrow
+   action;
+4. inventories exact source, test, revision-pin, and public-contract impact;
+   and
+5. freezes and separately reviews an exact implementation proposal before any
+   semantic or public behavior edit.
+
+This candidate is a qualification of existing internalized semantics, not an
+authorization to accept arbitrary pointwise functions, erase dependency, or
+make fixed and displayed classifiers definitionally identical.
 
 ## Work Ledger
 
@@ -1305,7 +1373,8 @@ rollback and equivalence oracles.
 | `COMPOSITIONAL-FD-EXPANDED-1C` | final-focused-green at `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1` | completed 0C; D-076; existing first-hom runtime bridge | Construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))` share the compact `:^fd` factorer, preserve byte-identical Core, expose closed fibre object/arrow action, and retain the ordinary `Transf_cat` facade. |
 | `COMPOSITIONAL-ND-EXPANDED-1D` | final-focused-green at `b89420d442536544185e8ab5dbe6876bd9980b96` | green 1C; completed audit; D-077 | The existing open `indexed-functor` endpoints and compact point factorer implement literal expanded `lambda^n k. lambda^n a`; the result retains the ordinary iterated-Hom facade, byte-identical compact Core, and internally owned component/base/higher action. |
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | final-focused-green at `7f7d201948e5f035e516f6fb15554a1aea26029d` | graduated direct typed API; D-077 checkpoint; D-078 | Exactly two expected contracts and thin resolver routes now expose expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a` text. Existing grammar, neutral resolution, typed methods, and compact factorers are reused; no parser/checker/Core/kernel semantics changed. |
-| `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` | candidate read-only successor after D-078 checkpoint | final-green fixed/open compilers and exact compact/expanded Core parity | Compare the two recursive body algebras and select only sound classifier-indexed sharing. Preserve distinct target classifiers and authorize no refactor until an exact proposal is frozen and reviewed. |
+| `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` | complete; read-only | final-green fixed/open compilers and exact compact/expanded Core parity | Fixed and displayed recursive algebras are distinct. One-binding `displayedContextLambda` nevertheless proves exact four-case Core/type parity with the narrow compact factorer, selecting displayed-only consolidation rather than an erased universal compiler. |
+| `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` | candidate read-only successor | completed 0E; existing `compileDisplayedContextual`; 4/4 exact one-binding parity | Freeze the smallest displayed-only helper extraction and one representative fixed-argument evaluation graduation. Preserve wrappers/classifiers and authorize no behavior until exact review. |
 
 ## Explicit Non-Claims
 
@@ -1426,20 +1495,43 @@ final-focused-green after their rollback-safe checkpoint. They preserve the
 fixed/open classifier distinction and add no parser, Core, checker, kernel, or
 external-coherence semantics.
 
-After that checkpoint, route next to the read-only
-`CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` audit. Compare
-`categoricalLambda`/`compileContextual` with
-`contextualDisplayedFunctorLambda`/`factorDisplayedFunctorBody`; identify
-soundly shareable recursive algebra while preserving presentation-specific
-classifiers and wrappers. Freeze and independently review an exact proposal
-before any refactor. Do not invent a standalone functorial-type-theory kernel,
-erase open-fibre dependency, or add behavior under the read-only audit.
+Treat the read-only `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` audit as complete.
+It establishes that fixed `compileContextual` and displayed
+`compileDisplayedContextual` are recursive but classifier-specific algebras,
+while one-binding `displayedContextLambda` already has exact Core/type parity
+with the narrow compact displayed factorer on identity, eta, composition, and
+weakening. Do not force a universal fixed/displayed compiler.
+
+Route next to the read-only
+`DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` scope audit. Select the smallest
+displayed-only body-driver extraction that can serve one-binding contextual,
+compact, and open-displayed wrappers while preserving their scope checks,
+evidence, and result facades. Include one representative existing displayed
+evaluation body in the proposed parity matrix. Freeze and independently
+review an exact proposal before any refactor. Do not invent a standalone
+functorial-type-theory kernel, erase open-fibre dependency, or add behavior
+under the read-only audit.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-02 — CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E read-only complete.**
+  Source comparison finds two recursive, internally coherent but materially
+  different algebras: fixed `compileContextual` owns ordinary constants,
+  evaluation/duplication, exchange, and curry; displayed
+  `compileDisplayedContextual` owns fibre projections/pairs, closed displayed
+  application, and reviewed displayed evaluation/nesting. The compact and
+  open-displayed wrappers still share the older narrow
+  `factorDisplayedFunctorBody`. A bounded one-binding probe proves that the
+  richer displayed compiler emits byte-identical Core and inferred types for
+  identity, eta, composition, and qualified weakening (4/4; all semantic
+  comparisons equal). The selected continuation is therefore displayed-only
+  compiler consolidation, not classifier erasure or a universal compiler.
+  `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` remains read-only until an exact
+  proposal is frozen and independently reviewed.
 
 - **2026-08-03 — COMPOSITIONAL-NATURAL-TEXT-PARITY-1D final-focused-green.**
   Exactly two expected contracts route expanded `lambda^n/lambda^f` and

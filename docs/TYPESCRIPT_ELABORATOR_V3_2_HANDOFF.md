@@ -89,6 +89,23 @@
 > identify sound recursive code sharing—not a standalone functorial-type-
 > theory kernel or an authorized behavior refactor. Exact rollback-safe
 > semantic checkpoint: `7f7d201948e5f035e516f6fb15554a1aea26029d`.
+>
+> The subsequent read-only
+> `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` audit is complete. Fixed
+> `compileContextual` and displayed `compileDisplayedContextual` are both
+> recursive and internally action-owning, but their accepted operations and
+> result classifiers are materially different; a single erased compiler is
+> not the right immediate refactor. The higher-yield seam already exists
+> within the displayed classifier: one-binding `displayedContextLambda` uses
+> the richer displayed compiler and matches compact
+> `displayedFunctorLambda` byte-for-byte in Core and inferred type for
+> identity, eta, composition, and qualified weakening (4/4; semantic
+> comparisons equal). Continue with the read-only
+> `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` scope audit in the active plan. It
+> should freeze a displayed-only helper extraction and one representative
+> fixed-argument evaluation case before any behavior refactor; no new kernel
+> owner, cast, curry, external coherence, or standalone functorial-type-
+> theory kernel is indicated.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
