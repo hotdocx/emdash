@@ -570,7 +570,7 @@ It deliberately avoids:
 | `DEPENDENT-SECTION-CHAIN-1AR` | implemented and final-focused-green under D-081; local semantic checkpoint follows review checkpoint `485237e1eeb200b9248a1aeebf42f2755fd27403` | completed 0AQ; immutable proposal `48394a2005cd8b483ae2de56f070c14d0826d7fd`; existing `USABILITY-DEPENDENT-1A` one-layer factorer; existing displayed-functor finite-chain evidence | One structural factorer accepts a rigid section leaf under any finite nonempty chain of exact same-base displayed-functor fibre applications and folds inner-to-outer only through existing `comp_fapp0 (Catd_cat K)`. Two- and three-layer direct evidence, inherited text parity, and existing `piapp1_fapp0` action are green. One-layer Core and fail-closed boundaries remain intact; no owner, transport surface, or general section-action eliminator was added. |
 | `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` | complete; read-only; zero behavior delta; reviewer promotion selected | final-focused-green 1AR; current reviewer/book examples; active PathOut/PathInd authority; existing public Sigma/transport routes | The recursive rigid section-chain envelope is exact and internally owns point/base-arrow action. Full arrow induction remains feasible but is a multi-constructor integration program, not one missing binder. Promote the already-checked two-layer chain through the existing browser preset before opening that larger program. |
 | `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` | implemented and final-green under D-082; local product checkpoint follows review checkpoint `f6ac84eabb5bcfb6f47c13985e0d293fd8c04521` | completed 0AS; final-focused-green 1AR; immutable proposal `e82bcf77af965e09137e9ff10cb3c5c962b23283`; separate review; 10/10 focused reviewer tests; typecheck/lint/build | The existing indexed-section preset now demonstrates the two-layer recursive chain with exact direct/text Core and classifier parity. All twelve IDs and semantic engines remain unchanged; the two stale ten-preset inventories are synchronized. No semantic owner, parser route, aggregate, kernel check, deployment, or arrow-induction API was added. |
-| `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` | complete; read-only; zero behavior delta; dedicated future standard-library plan frozen | final-green 1AT; active PathOut/PathInd implementation and checks; existing TypeScript LF, Sigma/transport/section APIs, and transfer profiles | PathOut's transparent layer is a TypeScript standard library over existing owners. Existing opaque PathInd owners/rules require faithful library declaration, not a new Core/checker primitive. Defer all implementation to the dedicated future PathOut plan. |
+| `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` | complete; read-only; zero behavior delta; dedicated future trusted-profile/library plan frozen | final-green 1AT; active PathOut/PathInd implementation and checks; existing TypeScript LF, Sigma/transport/section APIs, and transfer profiles | PathOut's transparent layer is a TypeScript standard library over existing owners. Existing opaque PathInd owners/rules require faithful installation in a sealed trusted emdash profile, not an end-user library declaration or a new Core/checker primitive. Defer all implementation to the dedicated future PathOut plan. |
 | `CURRENT-PERSISTENT-GOAL-COMPLETION-0AV` | completion boundary reached; current goal may close | completed 0AU; final-green binder/reviewer chain; dedicated deferred PathOut plan | The current goal has settled and implemented the reviewed dependent-LF/categorical-binder usability architecture and product demonstration. Remaining PathOut, arbitrary-variance/DAG, whole-library transfer, and wider presentation work are explicitly routed to future goals rather than left as hidden active requirements. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
@@ -895,7 +895,7 @@ symmetry, and does not resume whole-library scale qualification.
 
 ## `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` Result
 
-The read-only audit closes at a standard-library boundary:
+The read-only audit closes at a trusted-theory/library boundary:
 
 1. `Rep_catd*`, fixed and varying `PathOut*`, path objects, motive/Pi/Sigma
    packaging, and the transitivity presentation are transparent compositions
@@ -904,21 +904,23 @@ The read-only audit closes at a standard-library boundary:
 2. `path_ind_sec` and coherent packages such as `PathOutReflEval_funcd`,
    `PathInd_func`, and `PathInd_transfd` are existing active semantic owners.
    The selected TypeScript design imports/transfers their exact interfaces and
-   computation rules as checked standard-library declarations; it must not
-   synthesize induction from arbitrary pointwise data.
+   computation rules into a sealed, provenance-pinned trusted emdash v3.2
+   theory profile; they are not end-user standard-library declarations, and
+   the library must not synthesize induction from arbitrary pointwise data.
 3. The generic TypeScript dependent LF already has the declaration, transparent
    body, runtime-rule, proof-comparison, checking, and evaluation mechanisms
-   needed for that library. Existing categorical transfer descendants already
-   contain most generic Sigma, Pi, pullback, section, `hom_int`, fibre-
+   needed for that trusted profile and derived library. Existing categorical
+   transfer descendants already contain most generic Sigma, Pi, pullback,
+   section, `hom_int`, fibre-
    covariance, and higher-action prerequisites.
 4. The public categorical program lacks several ergonomic facades and all
    named PathOut/PathInd library entries. Those are future library/presentation
    tasks, not evidence that the recursive binder architecture remains open.
 5. The separately proposed
    [`TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md)
-   owns that future work. It starts with an exact owner/profile audit, then
-   separates transparent PathOut foundation, fixed-source induction,
-   internalized source action, transitivity, and presentation.
+   owns that future work. It starts with an exact owner/profile and sealing
+   audit, then separates trusted PathInd installation from transparent PathOut
+   foundation, internalized source action, transitivity, and presentation.
 
 No behavior changed and no aggregate or kernel check was run. The current
 persistent categorical-binder usability goal reaches its completion boundary
@@ -8463,8 +8465,9 @@ reviewer/typecheck/lint/build gates pass. No aggregate or kernel check was
 rerun. Treat the zero-edit `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` audit as
 complete. It establishes that transparent representable/PathOut constructions
 belong in a TypeScript standard library over existing owners, while
-`path_ind_sec` and its coherent packages are existing active semantic owners
-to import/transfer as checked library declarations with their exact rules.
+`path_ind_sec` and its opaque coherent packages are existing active semantic
+owners to import/transfer with their exact rules into a sealed trusted emdash
+v3.2 theory profile—not into the end-user library.
 Route all such implementation to the separately deferred
 `TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`; do not silently
 start it under this goal. Treat `CURRENT-PERSISTENT-GOAL-COMPLETION-0AV` as the
@@ -8494,19 +8497,21 @@ removal, or unrelated cleanup is authorized.
   grammar, and executable reviewer are implemented at the recorded green
   checkpoints. The user explicitly permits PathOut, arbitrary variance/DAG,
   wider theorem/library transfer, and further presentation breadth to be
-  deferred. The dedicated PathOut standard-library plan records that future
-  program without reopening this goal. No merge, push, publication,
+  deferred. The dedicated PathInd trusted-profile and PathOut derived-library
+  plan records that future program without reopening this goal. No merge,
+  push, publication,
   deployment, or cleanup is implied by completion.
 
 - **2026-08-03 — `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` complete; future
-  standard-library architecture selected.** Active representable and PathOut
-  definitions are transparent composites of existing generic categorical
+  trusted-profile/library architecture selected.** Active representable and
+  PathOut definitions are transparent composites of existing generic categorical
   owners. Fixed-source induction and internally coherent packaging use
   existing active semantic owners such as `path_ind_sec`, `PathInd_func`, and
   `PathInd_transfd`; the selected TypeScript design imports/transfers those
-  owners and exact rules as checked standard-library declarations, without a
-  new Core/checker primitive or runtime Lambdapi dependency. Current public
-  gaps are library entries and ergonomic facades. Freeze the dedicated
+  owners and exact rules into a sealed, provenance-pinned trusted emdash v3.2
+  theory profile, without exposing them as end-user library rules and without
+  a new Core/checker primitive or runtime Lambdapi dependency. Current public
+  gaps are derived library entries and ergonomic facades. Freeze the dedicated
   deferred `TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`; run
   no behavior gate, aggregate, or kernel check under the current goal.
 

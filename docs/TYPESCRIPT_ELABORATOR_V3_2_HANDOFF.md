@@ -4,7 +4,8 @@
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
 > is complete through `CURRENT-PERSISTENT-GOAL-COMPLETION-0AV`. The zero-edit
 > `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` audit routes the remaining
-> PathOut/PathInd work to the separately deferred
+> PathOut/PathInd work to the separately deferred trusted-profile and derived-
+> library plan:
 > [`TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md).
 > The
 > preceding `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` /
@@ -199,9 +200,10 @@
 > The zero-edit `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` audit is complete.
 > Transparent representable/PathOut constructions are future TypeScript
 > standard-library definitions over existing owners; `path_ind_sec` and its
-> coherent packages are existing active owners to import/transfer as checked
-> library declarations with their exact rules, not new Core/checker
-> primitives. That implementation is explicitly
+> opaque coherent packages are existing active owners to import/transfer with
+> their exact rules into a sealed trusted emdash v3.2 theory profile, not into
+> the end-user library and not as new Core/checker primitives. That
+> implementation is explicitly
 > deferred to the dedicated PathOut plan and does not reopen the completed
 > binder architecture. The current persistent goal may close. Exact earlier
 > proposal checkpoint:
