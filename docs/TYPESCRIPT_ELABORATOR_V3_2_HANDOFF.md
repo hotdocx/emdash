@@ -62,8 +62,9 @@
 > passes 1/1, and workspace/typecheck/changed-file lint/diff hygiene pass. The
 > required root aggregate was run exactly once and remains non-green only on
 > the already recorded kernel-pin/count family and README-wrap assertion; do
-> not repeat it. The semantic checkpoint is pending. The next dependency-ready
-> row is a read-only audit of expanded `lambda^n/lambda^f` and
+> not repeat it. Exact rollback-safe semantic checkpoint:
+> `b89420d442536544185e8ab5dbe6876bd9980b96`. The next dependency-ready row is
+> a read-only audit of expanded `lambda^n/lambda^f` and
 > `lambda^n/lambda^n` text parity; compact `^fd/^nd` text already exists, and
 > no parser/checker redesign or text behavior is yet authorized.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
