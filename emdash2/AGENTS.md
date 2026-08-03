@@ -34,6 +34,8 @@ the transparent native equality-valued evidence-property and finite-dimension tr
 extension is `emdash3_2_eq1_evidence_property.lp`;
 the set-truncated sequential telescope categorical-HIT localization extension
 is `emdash3_2_telescope_localization_hit.lp`;
+the whole internal covering-question and proposition-valued eligibility
+extension is `emdash3_2_direct_cover_questions.lp`;
 the whole direct-cover oracle-algebra and locality-forgetful extension is
 `emdash3_2_direct_cover_algebras.lp`;
 the direct whole-presheaf return/cover/silent categorical-HIT signature
@@ -530,13 +532,22 @@ Use the following order:
     one-map categorical-HIT localization, not an ordinary-sieve topology,
     presheaf reflector, sheafification, arbitrary-site constructor, or
     CommRing-valued lift;
-59. `emdash3_2_direct_cover_algebras.lp` for the transparent rule-free whole
+59. `emdash3_2_direct_cover_questions.lp` for the whole internal category of
+    higher-sieve questions and its proposition-valued ordinary-and-covering
+    eligibility family.  Higher-sieve pullback retains the strict existing
+    action; canonical eligibility transport agrees propositionally with the
+    explicit topology pullback, without reconstructing proof fields at
+    runtime.  Its object-level extension and inclusion specialize exactly to
+    the existing ordinary-sieve owners.  It does not yet construct a whole
+    varying-extension functor, matching/section families, glue naturality,
+    locality, or sheafification;
+60. `emdash3_2_direct_cover_algebras.lp` for the transparent rule-free whole
     oracle structure at covering ordinary sieves: glue is a functor between
     matching and section hom-categories, silent is one whole endofunctor
     equality, and topology-locality forgets to this structure through its
     selected left inverse. It does not assert the converse, a second inverse,
     sheafification, or an eliminator;
-60. `emdash3_2_direct_cover_completion_hit.lp` for the first direct
+61. `emdash3_2_direct_cover_completion_hit.lp` for the first direct
     whole-presheaf return/cover/silent categorical-HIT signature. Its unit is
     a whole presheaf map, recursive glue is a stable whole-functor constructor,
     silent is one primitive whole path, and the canonical direct-cover algebra
@@ -544,7 +555,7 @@ Use the following order:
     It deliberately does not yet claim an eliminator, pulled-cover glue
     computation, topology-locality, whole Hom universality, reflector,
     rigid-sheaf-facade realization, CommRing lift, or left exactness;
-61. `emdash3_2_direct_cover_completion_eliminator.lp` for whole maps between
+62. `emdash3_2_direct_cover_completion_eliminator.lp` for whole maps between
     direct-cover algebras and the first nondependent completion recursor.  An
     algebra map preserves each whole glue functor and carries higher
     coherence between the source and target silent paths.  The selected
@@ -555,14 +566,14 @@ Use the following order:
     does not yet prove the missing restriction-after-glue law, locality of
     the completion, uniqueness/whole Hom universality, a sheaf object,
     reflector, rigid-facade realization, CommRing lift, or left exactness;
-62. `emdash3_2_checks.lp` for executable regression statements;
-63. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+63. `emdash3_2_checks.lp` for executable regression statements;
+64. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-64. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-65. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+65. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+66. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-66. `reports/INDEX.md` for task-specific plans and decision records.
-67. `book/book.json` and `book/evidence.json` for book source
+67. `reports/INDEX.md` for task-specific plans and decision records.
+68. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

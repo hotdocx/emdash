@@ -88,6 +88,15 @@ sieve to the ambient Cat-valued presheaf category and derives its whole
 inclusion into Yoneda. It defines topology-locality by the exact resulting
 whole Hom equivalence; it does not construct a reflector or identify that
 condition with the separately probed weighted-limit descent package.
+`emdash3_2_direct_cover_questions.lp` internalizes a descent question as an
+object `(U,S)` of the total of the strict higher-sieve classifier over
+`Op_cat(K)`.  Ordinary-sieve and coverhood eligibility is one proposition-
+valued displayed family; its canonical action agrees at proof time with
+Grothendieck-topology pullback, while higher-sieve data computes at the
+existing owner.  Its extension and inclusion specialize definitionally to
+the deployed ordinary-sieve owners.  It does not yet construct the whole
+varying-extension/matching family, glue naturality, locality, or
+sheafification.
 `emdash3_2_direct_cover_algebras.lp` is the transparent rule-free whole
 oracle layer.  At each cover its glue is a functor from matching families to
 sections and its silent law is the whole equality `glue o restriction = id`.

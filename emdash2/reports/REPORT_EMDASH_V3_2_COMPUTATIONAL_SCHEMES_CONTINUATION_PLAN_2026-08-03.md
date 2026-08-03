@@ -1554,6 +1554,25 @@ prerequisites.
   projective or non-affine, or replace the later graded construction.  Once
   graded `Proj` exists, the standard `P^1` instance should be compared wholly
   with this explicit boundary.
+- **CS-D-050 — Cover questions compute through higher sieves; eligibility is
+  proposition-valued:** the preferred CS-D-048 route represents a question as
+  `(U,S)` in
+  `Sigma_cat(Op_cat(K),HigherSieveClassifier(K))`.  A base arrow carries the
+  question to the strict existing higher-sieve pullback, so identity,
+  composition, and higher action remain at that whole owner.  The additional
+  assertion that `S` is an ordinary sieve covered by `T` is a proposition-
+  valued displayed family over the question total.  Its arbitrary action and
+  coherence are therefore internal; on the canonical pullback arrow its
+  action agrees by proposition uniqueness with the explicit ordinary-sieve
+  and Grothendieck-topology pullback operation.  This agreement is proof-time
+  evidence, not a runtime rule that reconstructs dependent proof fields.
+  The ambient extension `Sigma(f:y(U),S(f))` and its first projection
+  specialize definitionally to the existing ordinary-sieve extension and
+  inclusion.  This tranche internalizes question pullback only.  It does not
+  yet provide a whole functor from varying questions to extensions, matching
+  and section families, or an internally natural glue map; those are the next
+  CS-12 gate.  Do not replace that gate with external component squares or
+  claim the missing `restriction o glue = id` law prematurely.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1584,7 +1603,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; and the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`. The post-recursor audit found that external Pi indexing over covers lacks the whole question/pullback action used by Pédrot's internal naturality argument. The principal-BNat bridge remains frozen. | Select and probe either the preferred internal covering-question classifier or an honestly scoped two-sided external target algebra; only then derive locality, constructed-sheaf packaging, whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; and the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`. CS-D-050 has now validated the preferred internal covering-question representation: higher-sieve pullback computes strictly, while ordinary-and-covering eligibility is a whole proposition-valued family whose canonical action agrees proof-time with topology pullback. The principal-BNat bridge remains frozen. | Construct the whole varying-extension owner and derive matching/section reindexing and glue naturality over eligible questions; only then derive locality, constructed-sheaf packaging, whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -2914,6 +2933,75 @@ No full kernel check, examples aggregate, full CI, root aggregate, push,
 merge, history rewrite, publication, or worktree cleanup was performed.
 The bounded implementation and synchronized-plan checkpoint is `7241b00`
 (`feat: add supplied projective line presentation`).
+
+### 13.21 CS-12g whole internal covering questions — 2026-08-03
+
+The preferred CS-D-048 representation has a green first implementation
+boundary.  `DirectCoverQuestion_cat(K)` is the transparent total
+
+```text
+Sigma_cat(Op_cat(K), HigherSieveClassifier(K)).
+```
+
+Thus a question is a pair `(U,S)` and the canonical total arrow over
+`p:V->U` carries it to `(V,p^*S)`.  The base arrow remains literally visible
+through the generic Sigma projection, while higher-sieve pullback, identity,
+composition, and higher action remain at the already deployed strict
+classifier.  No second sieve action is introduced.
+
+`DirectCoverQuestionEvidence(T,U,S)` retains both a proof that `S` is
+ordinary and a proof that the resulting ordinary sieve is covered by `T`.
+Both fields are propositions, so their dependent total is proposition-valued.
+The primitive `DirectCoverQuestionEvidence_catd(T)` is one whole displayed
+family over the question category.  Its only new runtime rule exposes the
+fibre at a literal pair `(U,S)`.  Arbitrary arrow action and its coherence are
+owned by the generic displayed-family calculus.  At a canonical pullback
+arrow, `direct_cover_question_evidence_action_agrees` compares that internal
+action with the explicit ordinary-sieve/topology pullback.  The comparison is
+derived by uniqueness in the proposition-valued target; there is deliberately
+no runtime rule that attempts to reconstruct the dependent proof fields.
+
+The same module defines the object-level ambient extension
+`FibrewiseSigma_catd(Op_cat(K),yoneda_psh(U),S)` and its whole first
+projection.  At `S=sieve_higher(R)` these are definitionally the existing
+`ordinary_sieve_extension_psh(R)` and
+`ordinary_sieve_extension_inclusion(R)`.  This exact specialization prevents
+the internal-question route from creating a competing matching-family or
+restriction representation.
+
+The 195-line source has nine public symbols and one narrowly typed fibre rule.
+The 83-line reviewer has seven assertions covering proposition-valued
+eligibility, explicit pullback, exact ordinary-extension specialization, the
+retained base arrow, fibre computation, and proof-time action agreement.
+Warning-enabled focused checks complete in 8.463 and 7.844 seconds and retain
+exactly the inherited 1,179-warning inventory: 1,020 unjoinable critical-pair
+diagnostics and 159 replaceable-pattern diagnostics.  The remaining audit,
+catalog, source TOC, active-reference and report-header lints, focused script
+tests, shell syntax, and whitespace hygiene are green.  Exact-current
+resumable health is green for all 154 registered targets.  The prior
+152-target content digest still matched every old target byte-for-byte, so the
+refresh carried forward those 152 successes and ran only the new source and
+reviewer, which completed in 5.023 and 5.201 seconds.  Its source-metrics
+snapshot is
+`sha256:a88e7e8906d1b1eec69537785795f8a51eee84dfc2cb385a66dea6a71e57334d`
+and checked-content snapshot is
+`sha256:99ac3499ba961ff52fafff818e5d28fa6d7206a9bdbf3c10a19a93ee0a44d40d`.
+No full kernel check, examples aggregate, full CI, root aggregate, push,
+merge, history rewrite, publication, or worktree cleanup was performed.
+
+This tranche resolves only the question/pullback part of CS-D-048.  The next
+gate is a whole functorial owner for the varying extension
+
+```text
+(U,S) |-> FibrewiseSigma_catd(Op_cat(K),yoneda_psh(U),S),
+```
+
+or a generic fibrewise-Sigma map construction sufficient to derive it.
+Matching families, sections, restriction, and glue must then be lifted as
+whole internal families/maps over eligible questions.  Until that succeeds,
+the direct completion still has only `glue o restriction = id`; neither
+`restriction o glue = id`, `IsTopologyLocalPsh`, constructed-sheaf packaging,
+nor sheafification universality has been established.
 
 ## 14. Validation And Checkpoint Contract
 
