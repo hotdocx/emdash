@@ -11,7 +11,7 @@ keeps atlas-first gluing separate; corrects small/big-site equivalence to
 scoped restriction/basis comparisons; and stages semantic schemes separately
 from their computational presentations. Its CS-01 first tranche is a
 rule-free global reflective ringed-object cover substrate, not yet an affine
-atlas or scheme.
+atlas or scheme. That bounded tranche is locally checkpointed at `a5aebcf`.
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_presheaves.lp` is the one-way

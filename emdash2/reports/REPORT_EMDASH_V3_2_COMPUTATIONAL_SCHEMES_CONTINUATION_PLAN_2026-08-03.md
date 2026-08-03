@@ -460,7 +460,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | ID | Task | Status | Gate |
 | --- | --- | --- | --- |
 | CS-00 | Consolidate affine checkpoint and corrected architecture | Complete; dedicated plan, parent supersession note, and index route added | This report and index routing |
-| CS-01 | Global reflective ringed object, covering sieve, and internally derived pullback cover | Implementation complete and proportionally green; local checkpoint pending | Checkpointed PSSS-11c and existing site pullback owner |
+| CS-01 | Global reflective ringed object, covering sieve, and internally derived pullback cover | Complete and locally checkpointed at `a5aebcf` | Checkpointed PSSS-11c and existing site pullback owner |
 | CS-02 | Point-free invertibility-support/local-ring capability audit | Proposed | Concrete scheme consumer or theorem statement |
 | CS-03 | Generic finite-cover presentation audit | Proposed | Non-affine finite-atlas consumer |
 | CS-04 | Pullback/restriction of reflective ringed sites | Required owner probe | CS-01 plus existing slice, pullback, topology, and sheaf owners |
@@ -549,6 +549,10 @@ No full CI or duplicate aggregate was run: registering a new checked source
 and reviewer required one health-snapshot integration boundary, and its saved
 resume state prevented replay of the 109 unchanged successful targets after
 the central diagnostics target first narrowly exceeded its fixed timeout.
+The complete bounded source, reviewer, authority, registry, health, and plan
+boundary is locally checkpointed as `a5aebcf` (`feat: add global ringed-space
+covers`). No push, merge, history rewrite, publication, or worktree cleanup
+was performed.
 
 ## 14. Validation And Checkpoint Contract
 
@@ -600,5 +604,6 @@ specificity:
 > push, merge, publish, rebase, amend, reset, rewrite history, clean up
 > worktrees, or interfere with concurrent branches.
 
-The plan, not the launch sentence, owns the evolving task order and detailed
-acceptance gates.
+The successor persistent goal was started on 2026-08-03 with this objective
+and remains active after the CS-01 checkpoint. The plan, not the launch
+sentence, owns the evolving task order and detailed acceptance gates.
