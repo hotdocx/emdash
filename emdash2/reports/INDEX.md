@@ -25,7 +25,8 @@ the prospective computational interface retains whole functors and one whole
 invertible mate, never a family of external commutative-square equations.
 CS-05b then selects the smaller contract consumed by the first affine chart:
 a whole sheaf-category basis equivalence plus one direct whole computational
-`DefIso`; generic glue base change remains separately consumer-gated. The
+`DefIso`, checkpointed at `b4fca9c`; generic glue base change remains
+separately consumer-gated. The
 deferred categorical HIT is the PSSS-05d/PSSS-D-114 free localization of a
 whole presheaf category at descent maps, not Tabareau's auxiliary HoTT
 coequalizer and not a monolithic sheafification HIT.

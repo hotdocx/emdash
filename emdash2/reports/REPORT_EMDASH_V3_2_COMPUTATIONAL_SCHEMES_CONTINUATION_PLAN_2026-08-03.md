@@ -732,9 +732,9 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-02 | Point-free invertibility-support/local-ring capability audit | Proposed | Concrete scheme consumer or theorem statement |
 | CS-03 | Generic finite-cover presentation audit | Proposed | Non-affine finite-atlas consumer |
 | CS-04 | Whole ambient chart-slice restriction and supplied reflective-slice presentation | Complete and locally checkpointed at `7d63a90`; induced topology/reflector transport remains a separate CS-05 input question | CS-01 plus existing Sigma, opposite, functor-composition, and reflective-site owners |
-| CS-05 | Honest affine chart realization over an ambient restriction | Complete through CS-05b's whole semantic/computational package and proportional validation; stronger sheafification base change remains separately consumer-gated | CS-04 and affine checkpoint |
+| CS-05 | Honest affine chart realization over an ambient restriction | Complete through CS-05b's whole semantic/computational package; locally checkpointed at `b4fca9c`; stronger sheafification base change remains separately consumer-gated | CS-04 and affine checkpoint |
 | CS-05a | Historical site-morphism and modern morphism/comorphism/locally-exact contract audit | Complete as a contract audit; stronger sheafification base change remains separately consumer-gated | CS-04 plus a concrete affine-chart target |
-| CS-05b | Whole sheaf-basis comparison plus computational ambient-affine realization | Promoted as two transparent rule-free modules; focused/exact-warning/audit/catalog green, 115/116 exact-content health targets current-green, unchanged central aggregate carried forward under the proportional-validation policy; local checkpoint ready | CS-D-018 and CS-04 |
+| CS-05b | Whole sheaf-basis comparison plus computational ambient-affine realization | Promoted as two transparent rule-free modules; focused/exact-warning/audit/catalog green, 115/116 exact-content health targets current-green, unchanged central aggregate carried forward under the proportional-validation policy; local checkpoint `b4fca9c` | CS-D-018 and CS-04 |
 | CS-06 | Global-first finite-qcqs `SchemePresentation(X)` | Proposed | CS-02/CS-03/CS-05 contracts |
 | CS-07 | Supplied global two-chart non-affine reviewer | Proposed first non-affine consumer | CS-06 |
 | CS-08 | Atlas-first two-affine gluing constructor | Later | Whole open-overlap input plus realization/universal property |
@@ -1084,7 +1084,7 @@ the current 115-target resumable state plus that tracked central evidence is
 the recorded combined boundary. This is not claimed as a fresh 116-target
 generated report. No full CI, weakened timeout, modified central assertion,
 or redundant repository aggregate is scheduled. The bounded CS-05b tranche
-is ready for its authorized local checkpoint.
+is included in authorized local checkpoint `b4fca9c`.
 
 ## 14. Validation And Checkpoint Contract
 
