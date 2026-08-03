@@ -231,6 +231,15 @@ detailed probe evidence.
   choice, does not construct locality, and does not claim covering-sieve
   sheaf descent, stalk-local-ring structure, small-site comparison, or a
   scheme.
+- `emdash3_2_commutative_algebra_affine_schemes.lp`: one-way rule-free thin
+  computational affine-scheme presentation. It pairs the whole reflective
+  structure-sheaf presentation with whole coordinate-localization locality;
+  the base ring continues to own the big affine slice and generated topology,
+  while finite atlases remain consumer data. Transparent projections expose
+  the existing ringed site, whole coordinate `DefIso`, and selected locality.
+  It does not construct either capability, duplicate chart/cover/overlap
+  action, define general non-affine gluing, compare with the small site,
+  construct stalks, or assert a stalk-local-ring theorem.
 - `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
   functor-of-points/basic-open layer. The existing Yoneda presheaf represents
   `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and

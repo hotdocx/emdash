@@ -1982,6 +1982,39 @@ construct an inhabitant. Since `D(s)` need not cover the ambient chart, this
 is Cartier/Zeuner localization locality, not ordinary covering-sieve descent,
 subcanonicity, or a stalk-local-ring theorem.
 
+### Thin Computational Affine-Scheme Presentations
+
+Once the whole structure-sheaf presentation and whole coordinate locality are
+available, an affine scheme needs no second copy of their derived operations:
+
+```text
+AffineSchemePresentation(R)
+  = Sigma P : AffineStructureSheafPresentation(R),
+      AffineCoordinateLocalizationLocality(R).
+```
+
+The first projection determines the reflective CommRinged site on the exact
+internally generated big-Zariski topology and supplies a whole `DefIso` from
+the included structure sheaf to the computing coordinate presheaf. The second
+projection fixes canonical localization restriction as a whole equivalence at
+every chart and selected localization. Thus the record is small because its
+fields are already internal, functorial structures—not because action or
+coherence has been discarded.
+
+The ring remains an index and continues to determine the affine slice,
+coordinate presheaf, whole chart, and unit cover. A nontrivial finite atlas is
+consumer data. In the first closed-base example, `R = F2 x F2`; the two
+structure/locality capabilities are visibly supplied, while the generated
+topology, complementary-idempotent cover, fixed-image chart rings, whole
+restrictions, and zero overlap compute from existing owners.
+
+This is an assumption-explicit computational affine presentation. It does not
+construct sheafification or locality, and it does not yet supply a category of
+schemes, general non-affine gluing, a small-site comparison, stalks, or a
+stalk-local-ring theorem. The later TypeScript structure macro may generate
+its Sigma constructor/projection boilerplate, but that authoring convenience
+does not alter the kernel contract.
+
 ### Complementary-Idempotent Affine Atlas
 
 The first finite atlas consumer uses product rings rather than postulating a
@@ -4087,6 +4120,9 @@ kernel and one-way library vocabulary.
 | chart components of that whole comparison | `affine_structure_sheaf_to_coordinate_at P U` / `affine_structure_sheaf_from_coordinate_at P U` |
 | whole affine coordinate localization locality | `AffineCoordinateLocalizationLocality R` / `affine_coordinate_localization_locality_at` |
 | affine compatibility glue view | `affine_coordinate_localization_legacy_glue` |
+| thin computational affine-scheme presentation | `AffineSchemePresentation R` / `affine_scheme_intro` |
+| affine-scheme structure/locality projections | `affine_scheme_structure` / `affine_scheme_locality` |
+| affine-scheme whole ringed-site/computation views | `affine_scheme_ringed_site` / `affine_scheme_coordinate_defiso` / `affine_scheme_locality_at` |
 | chosen affine basic-open arrow | `comm_ring_basic_open_arrow localization` |
 | basic-open base-change factor and triangle | `comm_ring_basic_open_base_change_factor_map` / `comm_ring_basic_open_base_change_triangle` |
 | elementwise basic-open pullback membership | `comm_ring_basic_open_pullback_membership` |

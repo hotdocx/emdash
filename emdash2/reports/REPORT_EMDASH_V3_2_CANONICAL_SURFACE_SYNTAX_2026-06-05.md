@@ -745,6 +745,24 @@ locality capability; it does not construct one, choose localizations globally,
 assert that `D(s)` covers the chart, impose stalk locality, identify the small
 site, or package a scheme.
 
+For the thin assumption-explicit affine-scheme presentation, comments and
+examples may write
+
+```text
+AffScheme(R;P,L)          : affine presentation with structure P and locality L
+O_AffScheme               : included whole structure presheaf
+O_AffScheme ~= O_coord    : whole computational DefIso
+L[U,s,ell]                : selected whole localization locality
+```
+
+The literal owners are `AffineSchemePresentation`, `affine_scheme_intro`,
+`affine_scheme_underlying_psh`, `affine_scheme_coordinate_defiso`, and
+`affine_scheme_locality_at`. `P` and `L` remain explicit supplied
+capabilities. The base ring owns the generated topology and selected atlases
+remain consumer data; do not read the notation as a second site, duplicated
+cover/overlap structure, constructed sheafification/locality, general
+non-affine gluing, small-site comparison, or a stalk-local-ring theorem.
+
 For the universal-property polynomial layer, comments and examples may write
 
 ```text

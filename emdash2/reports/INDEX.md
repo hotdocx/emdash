@@ -44,6 +44,13 @@ generic fixed-forward `CommRingPshLocalizationLocality`; literal chart
 endpoints reduce to the retained ring and chosen localization. It neither
 constructs locality nor claims covering-sieve descent, stalk-local-ring
 structure, small-site comparison, or a scheme.
+`emdash3_2_commutative_algebra_affine_schemes.lp` is the rule-free thin
+computational affine-scheme presentation. It pairs the whole reflective
+structure-sheaf presentation with whole coordinate-localization locality;
+the ring still determines the generated big-Zariski site and selected finite
+atlases remain consumer data. It constructs neither supplied capability nor
+general non-affine gluing, small-site comparison, stalks, or a
+stalk-local-ring theorem.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
 derived native equality-valued hom-action/groupoidality extension. It also
 exposes the existing transparent Cat-level consequence that the selected left
@@ -277,6 +284,19 @@ nonduplicative integration remainder is green through 42 Python tests, five
 document-registry tests, health-snapshot verification, source/report lints,
 strict audit/catalog, and book evidence/typography/KaTeX/assembly checks. The
 synchronized implementation is included in local checkpoint `8216f28`.
+`emdash3_2_commutative_algebra_affine_schemes.lp` is the PSSS-11c thin
+assumption-explicit affine-scheme package. Its transparent Sigma retains only
+`AffineStructureSheafPresentation(R)` and
+`AffineCoordinateLocalizationLocality(R)`; ergonomic projections route to the
+existing reflective ringed site, whole coordinate `DefIso`, and selected
+whole locality. The reviewer instantiates the base ring at `F2 x F2`, keeps
+the two substantive capabilities visibly supplied, and computes the exact
+generated topology, complementary-idempotent two-chart cover, selected chart
+rings and restrictions, and zero overlap from existing owners. No site,
+presheaf, cover, localization, action, or overlap field is duplicated. This
+is a computational affine MVP, not constructed sheafification/locality,
+general non-affine gluing, small-site comparison, or a stalk-local-ring
+theorem.
 `emdash3_2_commutative_algebra_affine_atlas.lp` is the rule-free PSSS-10b
 concrete atlas consumer. In every product ring it uses the already-selected
 finite Zariski-cover package for `(1,0)` and `(0,1)`, derives their

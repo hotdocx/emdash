@@ -235,10 +235,16 @@ that exact topology, and a whole `DefIso` from its included presheaf to the
 computing coordinate presheaf. Its 230-line rule-free source and 166-line
 reviewer are focused quiet-, exact-warning-, strict-audit/catalog-, and exact
 104-target-health-green, and the synchronized implementation is checkpointed
-at `5ead41c`. The active semantic step is now the narrowly named
-localization-locality capability and first concrete affine-scheme
-presentation, not construction of general sheafification, generated topology,
-or stalk theory.
+at `5ead41c`. `PSSS-11b` then promotes the narrowly named whole affine
+coordinate-localization-locality capability and is checkpointed at `8216f28`,
+with its evidence follow-up at `fca814e`. `PSSS-11c` now implements the thin
+assumption-explicit affine-scheme presentation and a concrete `F2 x F2`
+reviewer. Its 101-line/8-symbol rule-free source and 194-line/14-assertion
+reviewer are focused-, warning-, audit-, catalog-, and exact 108-target
+health-green. The proportional nonduplicative integration remainder is also
+green; the authorized local checkpoint is the active boundary. This is not
+construction of general sheafification, a stalk theory, or general non-affine
+schemes.
 
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
@@ -5094,6 +5100,186 @@ source TOC and active-reference/header lints, strict audit/catalog, and book
 evidence/typography/KaTeX/assembly checks. The synchronized implementation is
 included in authorized local checkpoint `8216f28`.
 
+#### PSSS-11c — Thin affine-scheme presentation and concrete computing example
+
+The final MVP package should be small because the semantic work is already
+distributed among reviewed whole owners. The historical
+`cartierSolution16.lp.txt` experiment placed a site, sheaf-like object, ring
+structure, locality, basic-open operation, slice operation, and affine-cover
+behavior behind comparatively monolithic records. In v3.2 the internally
+generated topology, reflective structure sheaf, computing coordinate
+presheaf, basic-open charts, localization overlaps, finite covers, and whole
+locality already have independent owners. Repeating those fields in a scheme
+record would create competing sources of truth and external coherence
+obligations.
+
+The selected family is therefore the transparent record
+
+```text
+AffineSchemePresentation(R)
+  := Sigma P : AffineStructureSheafPresentation(R),
+       AffineCoordinateLocalizationLocality(R).
+```
+
+The base ring remains an explicit parameter rather than a duplicated field.
+The first projection supplies the exact internally generated big-affine
+Zariski topology, selected reflective CommRing-valued sheaf object, and whole
+`DefIso` to the computing coordinate presheaf. The second projection supplies
+the fixed-forward whole localization equivalence at every chart, coordinate
+section, and chosen localization. Transparent ergonomic projections may
+expose the reflective ringed site, whole coordinate `DefIso`, and locality at
+one selected localization; they must route to the existing owners and add no
+new rule, action, or coherence field.
+
+No atlas belongs in this record. An affine scheme already has its whole chart
+and unit cover from the base ring, while a selected nontrivial finite atlas is
+consumer data. The first concrete reviewer should therefore instantiate the
+record at the existing ring `F2 x F2`, with the structure-sheaf presentation
+and whole locality left as visibly supplied parameters, and then combine it
+with the existing complementary-idempotent atlas. The following facts are
+concrete rather than assumed:
+
+- the ring and conventional big affine slice;
+- the internally generated big-Zariski topology selected by the ringed-site
+  projection;
+- the `(1,0)`/`(0,1)` two-chart Zariski-cover family;
+- both selected fixed-image localization targets and their whole structured
+  restriction maps;
+- localization locality at the whole chart and either chosen generator,
+  obtained by projecting the supplied whole locality field; and
+- the zero-ring value and two whole restriction maps on the orthogonal chart
+  overlap.
+
+This is an assumption-explicit computational affine-scheme presentation, not
+an internal construction of the two supplied capabilities. It is nevertheless
+more than an object-only formalization: the sheaf comparison is a whole
+`DefIso`, localization locality is a fixed-forward `OmegaEquivAlong Cat_cat`,
+and chart/overlap action remains with whole functors and structured maps. It
+does not yet define a category of schemes, general non-affine gluing, a small
+Zariski site comparison, stalks, or a stalk-local-ring theorem. Those are
+separate consumers/research boundaries, not hidden fields of this MVP.
+
+The TypeScript structure-declaration macro can eventually generate the
+transparent Sigma constructor/projection boilerplate for this record. That is
+an authoring convenience, not a kernel semantic dependency, and this branch
+must not import or merge the concurrent TypeScript worktree to obtain it.
+
+The ignored full-import probe
+`tmp/probes/psss11c_affine_scheme_mvp.lp` validates the proposed record,
+constructor/projections, exact topology projection, whole coordinate
+comparison, locality at the `F2 x F2` whole chart and split idempotent, the
+existing two-chart cover, and the computational zero overlap under the
+ordinary 60-second bound. The promoted public source has 101 lines, eight
+transparent symbols, and no rule or unification clause. Its 194-line reviewer
+contains 14 closed assertions and leaves only the structure-sheaf presentation
+and whole locality visibly supplied. Focused quiet checks pass; warning-enabled
+source and reviewer checks inherit exactly `1179 = 1020 + 159` warnings with no
+warning located in either new file. The strict audit remains at zero unreviewed
+clauses and 52 annotated slots across 32 intentional kernel clauses. The strict
+catalog remains at 1,992 checks because this tranche adds a dedicated reviewer
+rather than increasing the already-near-limit central file.
+
+Exact resumable health passes all 108 registered source/example targets in
+1,203.013 summed check-seconds at source-metrics snapshot
+`sha256:550d66b94806c85ce61b035ee75691f11c91674a63b26e176f43d90acc6d0df4`
+and check-content snapshot
+`sha256:1928166adcec01b62f963517ee733bcd201e1e231bc147258d20dfca78f9ad28`.
+The new source and reviewer take 48.425 and 33.262 seconds. The unchanged
+central diagnostic and inherited affine-glue source/reviewer take 54.033,
+55.177, and 49.463 seconds. Exact-snapshot successes were retained across
+transient concurrent-load timeouts; the final resume reused 107 successes and
+needed no object priming, timeout widening, or special Lambdapi flags. The
+proportional nonduplicative integration remainder is green through 42 Python
+tests, five document-registry tests, health-snapshot verification,
+shell/source/header/reference checks, book
+evidence/typography/KaTeX/assembly, the zero-unreviewed-clause strict audit,
+and strict catalog verification. The authorized local checkpoint remains
+pending.
+
+##### Scope clarification, historical comparison, and non-affine continuation
+
+The two supplied fields of `AffineSchemePresentation(R)` have deliberately
+narrow contracts.
+
+`AffineStructureSheafPresentation(R)` supplies a reflective sheafification
+capability for the exact internally generated big-affine Zariski topology, a
+chosen CommRing-valued sheaf object, and a whole `DefIso` from the presheaf
+obtained by including that sheaf to `affine_spec_coordinate_psh(R)`. Thus the
+presentation does not merely assert that the coordinate rings happen to be
+sheaf values object by object. The included sheaf and the computing coordinate
+presheaf are distinct whole objects of `CommRingPsh_cat`; `DefIso` supplies
+whole forward and inverse transformations with strict cancellation, so generic
+transformation action owns restriction compatibility and naturality. This is
+the bridge by which semantic sheafhood can be retained while consumers compute
+with the already-established coordinate-presheaf normal form. An objectwise
+family of ring isomorphisms would lose exactly that internal compatibility and
+is not an acceptable replacement.
+
+`AffineCoordinateLocalizationLocality(R)` supplies, for every big-affine chart
+`U`, coordinate section `s`, and chosen universal-property localization, the
+fixed-forward
+
+```text
+OmegaEquivAlong Cat_cat
+  Path_cat(O_coord(U)[1/s])
+  Matching_O_coord(U)(s)
+  restrict.
+```
+
+Its selected inverse is one whole glue functor and its two laws are paths of
+whole composite functors. This is the Cartier/Zeuner basic-open assertion that
+localizing sections at `s` computes the coherent sections on `D(s)`. It is not
+ordinary descent for a covering sieve—`D(s)` need not cover `U`—and it is not a
+stalk-local-ring predicate. The word “locality” must therefore remain qualified
+as *coordinate localization locality* until a separate local-ring interface has
+an actual consumer.
+
+The resulting relation to the experimental `cartierSolution16.lp.txt` is a
+selective adaptation, not a claim that the old file was mathematically
+complete:
+
+| Historical owner or intention | v3.2 replacement | Current status |
+| --- | --- | --- |
+| `site`, `smod`, primitive `mod_smod`, `eta_smod_transf`, and `glue` | `GrothTopology`, `Sheaf_cat`, supplied `SheafificationCapability`, its whole adjunction/reflector data, and internal whole glue/locality owners | The assumption-explicit sheafification idea is retained, but functorial action and cancellation are now whole internal data rather than ad hoc component rules. |
+| `struct_mod_loc` | `ReflectiveCommRingedSite` plus `AffineStructureSheafPresentation` | The site, sheaf object, and ring-valued presheaf are represented. The historical name suggested a locally ringed space, but no stalk-local-ring theorem is currently claimed. |
+| `ascheme_inv_func`, `ascheme_mod_ring_loc`, and the basic-open support sieve | the big affine slice, `affine_spec_coordinate_psh`, universal-property localization, structured basic-open arrows, and invertibility sieves | Constructed computationally, with selected localization packages where non-canonical choices must stay explicit. |
+| the concrete restriction formula along products of basic opens | structured localization factors, iterated/product-localization comparisons, and whole overlap equivalences | Its universal-property content is recovered without committing the public interface to the old fraction syntax. Closed unit, zero, idempotent, and split-idempotent models provide executable cases. |
+| `ascheme_join_*` and `ascheme_unimodular_*` covering operations | finite unimodular presentations, selected Zariski families, the internally generated least topology, base change, and the complementary-idempotent atlas | The finite-cover/topology boundary is substantially stronger and more explicit. A general formal-join syntax is not required by the present MVP. |
+| `ascheme_slice_ascheme` | a future pullback/slice of a reflective ringed presentation carrying an affine chart presentation | Not yet implemented. The present affine record describes the conventional whole affine scheme determined by one ring, not an arbitrary affine slice of an ambient scheme. |
+| `scheme`, `struct_cov_sieve`, and `scheme_slice_ascheme` | a future non-affine scheme presentation over an ambient reflective ringed site with a selected covering atlas and affine presentations on pulled-back/slice charts | Not yet implemented. The existing `F2 x F2` atlas is a nontrivial cover of an already-affine scheme, not a construction of a general non-affine scheme. |
+
+The first non-affine interface should remain assumption-explicit. Its likely
+shape is an ambient reflective CommRing-ringed site, a selected ordinary
+covering atlas, a pullback/slice ringed presentation at each atlas member, and
+an `AffineSchemePresentation`-style comparison for each such chart. Overlap
+restrictions and cocycle compatibility must be stated through whole functors,
+structured ring maps, and whole equality/`DefIso` owners; they must not be
+external objectwise naturality squares. Before fixing a public record, an
+ignored owner-position probe must determine whether the current slice and
+sheafification owners already construct the required pullback reflective
+ringed site or whether one reusable pullback capability is needed first.
+
+This continuation has three distinct feasibility levels:
+
+1. An assumption-explicit non-affine record with supplied ambient site, cover,
+   affine chart presentations, and whole overlap/cocycle witnesses is highly
+   feasible with the current kernel architecture and does not require changing
+   `AffineSchemePresentation`.
+2. A concrete non-affine example obtained by gluing two explicit affine charts
+   along a computing localization equivalence appears feasible, but is the
+   necessary consumer test for pullback/sheaf comparison and effective overlap
+   ownership.
+3. Canonical effective gluing for arbitrary atlases, a category of schemes,
+   stalk-local-ring theorems, constructed sheafification, and small/big-site
+   equivalence remain research boundaries. They must not be smuggled into the
+   MVP as opaque fields with names that overstate their contract.
+
+This scope preserves the original computational motivation: concrete chart
+values, restrictions, localization comparisons, overlap maps, and glue should
+reduce through selected public owners. The semantic packages certify those
+computations internally; they do not replace them with a merely
+proposition-valued textbook definition.
+
 - consume the internally generated affine-Zariski topology and its derived
   selected-basic-open inclusion/leastness; retain supplied or primitive
   topology packages only as explicit alternative interfaces;
@@ -5890,6 +6076,19 @@ consumer demonstrates that nontransitive unification requires it.
   `D(s)` need not cover the ambient chart. Do not strengthen the capability to
   judgmental `DefIso`, add univalence, store external naturality fields, or
   introduce a new rewrite/unification owner.
+- **PSSS-D-116:** make the PSSS-11c affine-scheme MVP a thin transparent
+  `Sigma` pairing `AffineStructureSheafPresentation(R)` with
+  `AffineCoordinateLocalizationLocality(R)`. Keep `R` as an explicit
+  parameter, route ergonomic projections to the existing whole owners, and
+  keep finite atlases outside the record as consumer data. Close the first
+  example at `F2 x F2`: its sheaf presentation and whole locality remain
+  visibly supplied, while the generated topology, complementary-idempotent
+  cover, selected localization charts, whole restrictions, and zero overlap
+  compute from existing owners. Do not duplicate the site, coordinate
+  presheaf, cover, localization, naturality, or overlap data; do not claim a
+  general scheme category, non-affine gluing, small-site comparison, or
+  stalk-local-ring theorem. Treat the TypeScript structure macro only as a
+  later authoring convenience.
 
 ## 19. Side-Task Ledger
 
@@ -5942,7 +6141,8 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-10dS | Small-site topology and ringed-site comparison | Proposed later; not required by direct big-site MVP | Concrete small-site consumer plus PSSS-10dG/PSSS-08c1 comparison scope |
 | PSSS-11a | Whole assumption-explicit affine structure-sheaf presentation | Promoted 230-line/9-symbol rule-free source and 166-line/9-assertion reviewer; focused quiet/exact-warning/audit/catalog, 104-target exact-content health, and nonduplicative integration gates green; local checkpoint `5ead41c` | Checkpointed PSSS-10dG plus checkpointed PSSS-05c |
 | PSSS-11b | Whole affine localization locality | Promoted source/reviewers, exact warning comparison, strict audit, 1,992-check catalog, 106-target exact-content health, and proportional integration green; local checkpoint `8216f28` | PSSS-11a checkpoint, existing localization restriction/matching owners, and the generic Cat-level selected-left-inverse right law |
-| PSSS-11 | Scheme atlas | Active: package a concrete assumption-explicit affine scheme record/example over the checkpointed whole structure-sheaf presentation and localization locality | PSSS-11a checkpoint plus PSSS-11b checkpoint `8216f28` |
+| PSSS-11c | Thin affine-scheme presentation and concrete computing example | Promoted 101-line/8-symbol rule-free source and 194-line/14-assertion `F2 x F2` reviewer; focused/exact-warning/audit/catalog, exact 108-target health, and proportional nonduplicative integration green; local checkpoint pending | PSSS-11a and PSSS-11b checkpoints plus the PSSS-10b concrete atlas |
+| PSSS-11 | Scheme atlas | Active: checkpoint PSSS-11c, then close the recorded historical/feasibility retrospective without expanding implementation into general non-affine gluing | PSSS-11c |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 
 ## 20. Success Criteria For The Foundation Tranches
@@ -6451,5 +6651,32 @@ PSSS-11b is successful when:
    external coherence field; and
 8. focused source/reviewer checks, exact warning comparison, strict audit,
    catalog/health synchronization, current authority prose, and the
+   proportional nonduplicative integration remainder are green before the
+   authorized local checkpoint.
+
+PSSS-11c is successful when:
+
+1. `AffineSchemePresentation(R)` is exactly a transparent Sigma of the
+   checkpointed whole structure-sheaf presentation and whole affine
+   coordinate-locality capability, with no duplicated ring, site, topology,
+   presheaf, cover, localization, or overlap field;
+2. constructor and projections compute through the existing Sigma owners, and
+   ergonomic ringed-site, coordinate-`DefIso`, and selected-locality adapters
+   route transparently to their existing public owners;
+3. the public module remains rule-free and introduces no external
+   functoriality, naturality, chart-coherence, identity, composition,
+   sheafification, or gluing law;
+4. the `F2 x F2` reviewer keeps the structure-sheaf presentation and whole
+   locality visibly supplied while computing the exact generated topology,
+   existing two-chart cover, selected localization charts, structured
+   restrictions, and zero overlap;
+5. documentation calls the result an assumption-explicit computational affine
+   presentation and does not claim constructed sheafification/locality,
+   general non-affine schemes, small-site comparison, stalks, or a
+   stalk-local-ring theorem;
+6. the TypeScript structure macro is recorded only as a later authoring aid
+   and no concurrent-worktree merge or dependency is introduced; and
+7. focused source/reviewer and central checks, exact warning comparison,
+   strict audit, catalog/health synchronization, authority prose, and the
    proportional nonduplicative integration remainder are green before the
    authorized local checkpoint.
