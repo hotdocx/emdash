@@ -251,7 +251,11 @@ kernel/Core/parser owner, and is independently approved by
 from immutable proposal checkpoint
 `48394a2005cd8b483ae2de56f070c14d0826d7fd` under the standing unattended-
 review delegation with immediate human supersession. Implementation is now
-dependency-ready.
+complete and focused-green. The resulting `dependentLambda` compiler accepts
+an arbitrary finite nonempty rigid chain, preserves the historical one-layer
+Core exactly, and inherits the existing neutral text route without a parser
+branch. The next dependency-ready row is the read-only
+`DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` audit below.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -562,7 +566,8 @@ It deliberately avoids:
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero semantic delta; canonical contextual-telescope audit selected | final-green 1AI; direct point factorer; generic displayed context fold | Direct/text parity is exact for the single hidden-base/fibre-slot context, while the first remaining semantic usability gap is multiple individually exposed variables over canonical sibling/dependency layers. The dedicated telescope plan owns the read-only context-normal-form versus multi-ordinal architecture audit; parser/browser promotion remains downstream. |
 | `COMPOSITIONAL-NATURAL-BINDER-THROUGH-0H` | complete; scoped subplan graduated with zero 0H behavior delta | final-green contextual telescope/reviewer at `607a026f88bc6d3b9f305ecb21f6630ce7c94950`; dedicated D-074 through D-080 evidence; 1G semantic checkpoint `f1993c2852b91173858bc2ecdf1d00998517dcaf` | Ordinary `lambda^n`, expanded open `lambda^f`/`lambda^n`, compact `lambda^fd`/`lambda^nd`, and grouped displayed brackets now share their exact classifier-appropriate recursive engines. The final audit proves evaluation/nested endpoint identity and higher action without another behavior slice. |
 | `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` | complete; read-only; zero behavior delta | graduated compositional-natural subplan; active kernel/check examples; current public AST and reviewer | Existing reviewer/book binder bodies are covered except multi-constructor integration programs such as arrow induction. The one bounded class-(3) gap is the current checked-negative finite section chain `lambda^n k. GG[k](FF[k](s[k]))`; generic `comp_fapp0` already owns its internal action. |
-| `DEPENDENT-SECTION-CHAIN-1AR` | separately reviewed-approved under D-081; implementation dependency-ready | completed 0AQ; immutable proposal `48394a2005cd8b483ae2de56f070c14d0826d7fd`; existing `USABILITY-DEPENDENT-1A` one-layer factorer; existing displayed-functor finite-chain evidence | Recursively factor one rigid closed section leaf under an arbitrary finite nonempty chain of rigid closed displayed-functor fibre applications at the same base index, then fold only through existing `comp_fapp0 (Catd_cat K)`. Preserve the one-layer Core and all fail-closed boundaries; add no owner, transport surface, or general section-action eliminator. |
+| `DEPENDENT-SECTION-CHAIN-1AR` | implemented and final-focused-green under D-081; local semantic checkpoint follows review checkpoint `485237e1eeb200b9248a1aeebf42f2755fd27403` | completed 0AQ; immutable proposal `48394a2005cd8b483ae2de56f070c14d0826d7fd`; existing `USABILITY-DEPENDENT-1A` one-layer factorer; existing displayed-functor finite-chain evidence | One structural factorer accepts a rigid section leaf under any finite nonempty chain of exact same-base displayed-functor fibre applications and folds inner-to-outer only through existing `comp_fapp0 (Catd_cat K)`. Two- and three-layer direct evidence, inherited text parity, and existing `piapp1_fapp0` action are green. One-layer Core and fail-closed boundaries remain intact; no owner, transport surface, or general section-action eliminator was added. |
+| `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` | dependency-ready read-only graduation audit | final-focused-green 1AR; current reviewer/book examples; retained arrow-induction integration benchmark | Freeze the exact finite-chain envelope and select at most one next consumer-led usability gap. Reassess the transport-heavy `E[rho(q)](u)` benchmark as an integration program rather than presuming a binder defect. Make no behavior change and run no aggregate in this audit. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -679,6 +684,70 @@ case.
 The proposal is independently approved by
 [`D-DTTLF-USABILITY-081`](./TYPESCRIPT_ELABORATOR_V3_2_DEPENDENT_SECTION_CHAIN_D081_REVIEW.md).
 Its rejection oracle remains exact throughout implementation.
+
+## `DEPENDENT-SECTION-CHAIN-1AR` Implementation Result
+
+The approved recursion is implemented without widening the semantic
+boundary:
+
+1. `factorDependentSectionChain` recognizes exactly one rigid closed section
+   evaluation `s[k]` and recursively collects rigid closed displayed-functor
+   fibre applications at the same locally nameless index. Every adjacent
+   source/target family and base category is checked exactly.
+2. `lowerDependentSectionComposition` folds the collected chain from the leaf
+   outwards through the existing generic `comp_fapp0` owner at `Catd_cat K`.
+   It introduces no Core node, checker/runtime rule, transfer declaration,
+   kernel owner, cast, curry, or external naturality datum.
+3. The existing one-layer explicit Core assertion remains byte-for-byte green.
+   The callback is still evaluated once, the bound token is erased, and the
+   existing abstraction rule and prerequisite vocabulary remain unchanged.
+4. Direct TypeScript tests cover two and three layers, stable alpha/provenance
+   behavior, wrong base/source, foreign terms, escaped tokens, and the
+   historical eta-only profile. The checked whole-section judgment is equal
+   by existing conversion: the diagnostic serializer intentionally retains
+   the inferred `Hom_catd(Const 1,Q)` presentation separately from the expected
+   `Obj(Pi_cat Q)` presentation. Item 6's equality requirement is semantic
+   checker equality, not a request to erase that useful presentation
+   distinction or add a cast.
+5. The neutral text route automatically accepts
+   `lambda^n k : K. (GG k) ((FF k) (s k))` with exact direct/text Core and type
+   parity; no parser or resolver code changed.
+6. A bounded Lambdapi oracle checks the two-layer point equation and types the
+   existing `piapp1_fapp0` action. Thus object and base-arrow behavior remain
+   internally owned by the active kernel.
+
+Proportional evidence is green: 8 pass/1 opt-in skip in the affected direct
+suite, 1/1 new text parity, 6/6 displayed-functor-chain predecessor, 1/1
+opt-in Lambdapi oracle, workspace contract, root typecheck, changed-file lint,
+diff hygiene, and bounded active-kernel `make check`. The one repository-
+required `check:ts` run was executed once after those gates and was not
+repeated. After roughly 77 minutes it reported only the already-known active-
+kernel whole-source SHA-pin drift plus the unrelated README presentation
+assertion; neither class overlaps this slice's three implementation/test
+files, and every affected semantic test is focused-green.
+
+This result graduates arbitrary finite *rigid section-action chains*. It does
+not claim arbitrary pointwise section synthesis, transport/Sigma elimination,
+arbitrary variance or dependency DAGs, a public section-arrow eliminator, or
+the full arrow-induction program.
+
+## `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS`
+
+Perform one read-only graduation audit:
+
+1. freeze the exact 1AR positive and negative envelope, including its internal
+   point and arrow-action evidence;
+2. compare the remaining book/reviewer variable-bearing examples with the
+   now-graduated ordinary, compact/expanded displayed, grouped-telescope, and
+   dependent-section recursive algebras;
+3. treat `E[rho(q)](u)` as a multi-constructor transport/Sigma integration
+   benchmark and inventory its missing public routes before selecting any
+   edit; and
+4. select at most one bounded consumer-led successor, or record that the next
+   useful step requires a separately planned integration demo.
+
+This audit changes no behavior, runs no aggregate, and promotes no owner by
+API symmetry.
 
 ## Frozen First Gate
 
@@ -8156,8 +8225,18 @@ multi-constructor integration task. Continue only from the frozen
 separate immutable review before behavior. That review now approves the exact
 gate from proposal checkpoint
 `48394a2005cd8b483ae2de56f070c14d0826d7fd` under the standing unattended-
-review delegation with immediate human supersession. Implement only its
-eleven numbered items.
+review delegation with immediate human supersession. Its eleven numbered
+items are now implemented and final-focused-green at the local semantic
+checkpoint following review checkpoint
+`485237e1eeb200b9248a1aeebf42f2755fd27403`. Carry forward its direct/text,
+predecessor, bounded-kernel, and internal `piapp1_fapp0` evidence. The sole
+post-slice `check:ts` run reported only pre-existing whole-source SHA pins and
+the unrelated README presentation assertion after roughly 77 minutes; do not
+repeat it. Continue with the zero-edit
+`DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` audit, then select at most one concrete
+consumer-led successor. Do not treat the retained arrow-induction benchmark
+as one missing binder constructor without first inventorying its transport,
+Sigma, and displayed-action routes.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -8175,6 +8254,19 @@ removal, or unrelated cleanup is authorized.
 ```
 
 ## Decision Ledger
+
+- **2026-08-03 — `DEPENDENT-SECTION-CHAIN-1AR` implemented and final-focused-
+  green; read-only graduation selected.** One structural factorer now lowers
+  any finite nonempty rigid `Fn[k](...F1[k](s[k])...)` chain through repeated
+  existing `comp_fapp0 (Catd_cat K)`. Two and three layers, one-layer Core
+  preservation, alpha/provenance, fail-closed negatives, automatic text
+  inheritance, and the existing `piapp1_fapp0` action are green. The checker
+  confirms semantic inferred/expected equality while preserving their useful
+  distinct serialized classifier presentations. No kernel/Core/transfer/
+  parser owner or external coherence was added. The one mandated aggregate
+  was run once and exposed only pre-existing kernel SHA pins and the unrelated
+  README presentation assertion; it must not be repeated. The next row is the
+  zero-edit `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` consumer-led audit.
 
 - **2026-08-03 — D-DTTLF-USABILITY-081 separately reviewed-approved.** The
   immutable review of proposal checkpoint

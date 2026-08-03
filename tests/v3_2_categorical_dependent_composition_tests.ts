@@ -258,6 +258,118 @@ describe(
             assert.equal(compiled.productionLambdapiDependency, false);
         });
 
+        it('recursively lowers two and three rigid displayed layers', () => {
+            const emdash = program('composition-chain.ts');
+            const K = emdash.category('K');
+            const E = emdash.displayedFamily('E', K);
+            const D = emdash.displayedFamily('D', K);
+            const Q = emdash.displayedFamily('Q', K);
+            const R = emdash.displayedFamily('R', K);
+            const FF = emdash.displayedFunctor('FF', E, D);
+            const GG = emdash.displayedFunctor('GG', D, Q);
+            const HH = emdash.displayedFunctor('HH', Q, R);
+            const s = emdash.section('s', E);
+            let twoCallbacks = 0;
+            let threeCallbacks = 0;
+
+            const two = emdash.dependentLambda(
+                'k',
+                Q,
+                k => {
+                    twoCallbacks += 1;
+                    const sk = emdash.apply(s, k, {
+                        expectedShape: 'dependent-object'
+                    });
+                    const FFsk = emdash.apply(
+                        emdash.apply(FF, k, {
+                            expectedShape: 'fibre-functor'
+                        }),
+                        sk,
+                        { expectedShape: 'object-value' }
+                    );
+                    return emdash.apply(
+                        emdash.apply(GG, k, {
+                            expectedShape: 'fibre-functor'
+                        }),
+                        FFsk,
+                        { expectedShape: 'object-value' }
+                    );
+                }
+            );
+            const three = emdash.dependentLambda(
+                'k',
+                R,
+                k => {
+                    threeCallbacks += 1;
+                    const sk = emdash.apply(s, k);
+                    const FFsk = emdash.apply(
+                        emdash.apply(FF, k),
+                        sk
+                    );
+                    const GGFFsk = emdash.apply(
+                        emdash.apply(GG, k),
+                        FFsk
+                    );
+                    return emdash.apply(
+                        emdash.apply(HH, k),
+                        GGFFsk
+                    );
+                }
+            );
+
+            assert.equal(twoCallbacks, 1);
+            assert.equal(threeCallbacks, 1);
+            const twoCompiled = emdash.compile(two);
+            const threeCompiled = emdash.compile(three);
+            assert.equal(
+                twoCompiled.explicitCore.split(
+                    'generic-category-composition'
+                ).length - 1,
+                2
+            );
+            assert.equal(
+                threeCompiled.explicitCore.split(
+                    'generic-category-composition'
+                ).length - 1,
+                3
+            );
+            assert.equal(
+                twoCompiled.surfaceType.tag,
+                'dependent-section'
+            );
+            assert.equal(
+                threeCompiled.surfaceType.tag,
+                'dependent-section'
+            );
+            assert.match(
+                twoCompiled.explicitInferredType,
+                /hom-classifier/u
+            );
+            assert.match(
+                twoCompiled.explicitExpectedType,
+                /section-category/u
+            );
+            assert.equal(
+                emdash.inspect(two).abstractions.at(-1)?.rule,
+                'categorical.dependent-section-composition'
+            );
+            assert.equal(emdash.inspect(two).usage.length, 0);
+
+            const k0 = emdash.object('k0', K);
+            const actual = emdash.apply(two, k0);
+            const expected = emdash.apply(
+                emdash.apply(GG, k0),
+                emdash.apply(
+                    emdash.apply(FF, k0),
+                    emdash.apply(s, k0)
+                )
+            );
+            assert.equal(
+                emdash.compile(actual).explicitExpectedType,
+                emdash.compile(expected).explicitExpectedType
+            );
+        });
+
         it('is alpha- and provenance-invariant after binder elimination', () => {
             const first = program('composition-a.ts');
             const second = program('composition-b.ts');
@@ -359,9 +471,7 @@ describe(
             const K = emdash.category('K');
             const E = emdash.displayedFamily('E', K);
             const D = emdash.displayedFamily('D', K);
-            const Q = emdash.displayedFamily('Q', K);
             const FF = emdash.displayedFunctor('FF', E, D);
-            const GG = emdash.displayedFunctor('GG', D, Q);
             const s = emdash.section('s', E);
             const foreignK = foreign.category('ForeignK');
             const foreignE = foreign.displayedFamily(
@@ -406,39 +516,10 @@ describe(
                     error instanceof CoreCategoricalFrontendError &&
                     error.code === 'ESCAPED_SLOT'
             );
-
-            assert.throws(
-                () => emdash.dependentLambda(
-                    'k',
-                    Q,
-                    k => {
-                        const FFsk = emdash.apply(
-                            emdash.apply(FF, k, {
-                                expectedShape: 'fibre-functor'
-                            }),
-                            emdash.apply(s, k, {
-                                expectedShape: 'dependent-object'
-                            })
-                        );
-                        return emdash.apply(
-                            emdash.apply(GG, k, {
-                                expectedShape: 'fibre-functor'
-                            }),
-                            FFsk
-                        );
-                    }
-                ),
-                error =>
-                    error instanceof CoreCategoricalFrontendError &&
-                    error.code === 'UNAVAILABLE_DISPLAYED_ACTION' &&
-                    /exact scoped section-composition body/u.test(
-                        error.message
-                    )
-            );
         });
 
         it(
-            'agrees with Lambdapi on whole-section typing and pointwise computation',
+            'agrees with Lambdapi on chain components and section action',
             {
                 skip:
                     process.env
@@ -453,11 +534,17 @@ describe(
                             'symbol comp_K : Cat;',
                             'symbol comp_E : τ (Catd comp_K);',
                             'symbol comp_D : τ (Catd comp_K);',
+                            'symbol comp_Q : τ (Catd comp_K);',
                             'symbol comp_FF : τ ' +
                                 '(Functord comp_E comp_D);',
+                            'symbol comp_GG : τ ' +
+                                '(Functord comp_D comp_Q);',
                             'symbol comp_s : τ ' +
                                 '(Obj (Pi_cat comp_E));',
-                            'symbol comp_k : τ (Obj comp_K);',
+                            'symbol comp_x : τ (Obj comp_K);',
+                            'symbol comp_y : τ (Obj comp_K);',
+                            'symbol comp_p : τ ' +
+                                '(Hom comp_K comp_x comp_y);',
                             'symbol comp_result : τ ' +
                                 '(Obj (Pi_cat comp_D)) ≔',
                             '  @comp_fapp0',
@@ -467,14 +554,38 @@ describe(
                             '    comp_D',
                             '    comp_FF',
                             '    comp_s;',
+                            'symbol comp_chain_result : τ ' +
+                                '(Obj (Pi_cat comp_Q)) ≔',
+                            '  @comp_fapp0',
+                            '    (@Catd_cat comp_K)',
+                            '    (@Const_catd comp_K Terminal_cat)',
+                            '    comp_D',
+                            '    comp_Q',
+                            '    comp_GG',
+                            '    comp_result;',
                             'assert ⊢',
-                            '  @piapp0 comp_K comp_D comp_result comp_k',
+                            '  @piapp0 comp_K comp_Q ' +
+                                'comp_chain_result comp_x',
                             '  ≡ @fapp0',
-                            '      (Fibre_cat comp_E comp_k)',
-                            '      (Fibre_cat comp_D comp_k)',
-                            '      (@Fibre_func comp_K comp_E comp_D ' +
-                                'comp_FF comp_k)',
-                            '      (@piapp0 comp_K comp_E comp_s comp_k);'
+                            '      (Fibre_cat comp_D comp_x)',
+                            '      (Fibre_cat comp_Q comp_x)',
+                            '      (@Fibre_func comp_K comp_D comp_Q ' +
+                                'comp_GG comp_x)',
+                            '      (@fapp0',
+                            '        (Fibre_cat comp_E comp_x)',
+                            '        (Fibre_cat comp_D comp_x)',
+                            '        (@Fibre_func comp_K comp_E comp_D ' +
+                                'comp_FF comp_x)',
+                            '        (@piapp0 comp_K comp_E ' +
+                                'comp_s comp_x));',
+                            'symbol comp_chain_action : τ (Hom',
+                            '  (Fibre_cat comp_Q comp_y)',
+                            '  (@piapp1_src_obj comp_K comp_Q',
+                            '    comp_chain_result comp_x comp_y comp_p)',
+                            '  (@piapp0 comp_K comp_Q ' +
+                                'comp_chain_result comp_y)) ≔',
+                            '  @piapp1_fapp0 comp_K comp_Q',
+                            '    comp_chain_result comp_x comp_y comp_p;'
                         ].join('\n'),
                         sourceMap: []
                     },

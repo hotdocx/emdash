@@ -1318,6 +1318,14 @@ interface CoreCategoricalDisplayedFunctorFactorization {
         readonly CoreCategoricalDependentApplicationPrerequisiteId[];
 }
 
+interface CoreCategoricalDependentSectionChainFactorization {
+    readonly section: InternalCoreCategoricalTerm;
+    /** Rigid displayed functors ordered from the section leaf outwards. */
+    readonly functors: readonly InternalCoreCategoricalTerm[];
+    readonly sourceFamily: KernelExpression;
+    readonly targetFamily: KernelExpression;
+}
+
 interface CoreCategoricalDirectDisplayedEndpointCompilation
 extends CoreCategoricalDirectDisplayedEndpointShape {
     readonly endpointKind: 'chain' | 'contextual';
@@ -7822,6 +7830,150 @@ export class CoreCategoricalScopedBuilder {
         }
     }
 
+    /**
+     * Recognize
+     *
+     *   Fn[k](...F1[k](s[k])...)
+     *
+     * as one rigid section leaf followed by a finite chain of rigid
+     * displayed functors. The returned order is `F1, ..., Fn` so lowering can
+     * fold from the section outwards without reassociating the one-layer
+     * normal form.
+     */
+    private factorDependentSectionChain(
+        term: InternalCoreCategoricalTerm,
+        ordinal: number,
+        baseCategory: KernelExpression
+    ): CoreCategoricalDependentSectionChainFactorization | undefined {
+        const sectionApplication =
+            term.node.tag === 'typed-application' &&
+            term.node.judgment.target ===
+                'section-object-evaluation' &&
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] !== true
+                ? term.node
+                : undefined;
+        if (sectionApplication !== undefined) {
+            const index = sectionApplication.argument as
+                InternalCoreCategoricalTerm;
+            const section = sectionApplication.subject;
+            if (
+                index.node.tag !== 'slot-token' ||
+                index.node.ordinal !== ordinal ||
+                term.type.tag !== 'indexed-object' ||
+                term.type.indexOrdinal !== ordinal ||
+                !kernelExpressionEquals(
+                    term.type.baseCategory,
+                    baseCategory
+                ) ||
+                section.type.tag !== 'dependent-section' ||
+                section.closed === undefined ||
+                !kernelExpressionEquals(
+                    section.type.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    term.type.family,
+                    section.type.family
+                ) ||
+                usageCount(section.usage, ordinal) !== 0 ||
+                usageCount(term.usage, ordinal) !== 1
+            ) {
+                return undefined;
+            }
+            return Object.freeze({
+                section,
+                functors: Object.freeze([]),
+                sourceFamily: section.type.family,
+                targetFamily: section.type.family
+            });
+        }
+
+        if (
+            term.node.tag !== 'typed-application' ||
+            term.node.judgment.target !==
+                'indexed-fibre-functor-object' ||
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] === true
+        ) {
+            return undefined;
+        }
+        const indexedFunctor = term.node.subject;
+        const indexedObject = term.node.argument as
+            InternalCoreCategoricalTerm;
+        const fibreApplication =
+            indexedFunctor.node.tag === 'typed-application' &&
+            indexedFunctor.node.judgment.target ===
+                'displayed-functor-fibre' &&
+            indexedFunctor.node.argument[
+                CORE_CATEGORICAL_BOUNDARY
+            ] !== true
+                ? indexedFunctor.node
+                : undefined;
+        const fibreIndex = fibreApplication?.argument as
+            InternalCoreCategoricalTerm | undefined;
+        const displayedFunctor = fibreApplication?.subject;
+        const inner = this.factorDependentSectionChain(
+            indexedObject,
+            ordinal,
+            baseCategory
+        );
+
+        if (
+            inner === undefined ||
+            term.type.tag !== 'indexed-object' ||
+            term.type.indexOrdinal !== ordinal ||
+            !kernelExpressionEquals(
+                term.type.baseCategory,
+                baseCategory
+            ) ||
+            indexedFunctor.type.tag !== 'indexed-functor' ||
+            indexedFunctor.type.indexOrdinal !== ordinal ||
+            !kernelExpressionEquals(
+                indexedFunctor.type.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                indexedFunctor.type.sourceFamily,
+                inner.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                indexedFunctor.type.targetFamily,
+                term.type.family
+            ) ||
+            fibreIndex?.node.tag !== 'slot-token' ||
+            fibreIndex.node.ordinal !== ordinal ||
+            displayedFunctor === undefined ||
+            displayedFunctor.type.tag !== 'displayed-functor' ||
+            displayedFunctor.closed === undefined ||
+            !kernelExpressionEquals(
+                displayedFunctor.type.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                displayedFunctor.type.sourceFamily,
+                inner.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                displayedFunctor.type.targetFamily,
+                term.type.family
+            ) ||
+            usageCount(displayedFunctor.usage, ordinal) !== 0 ||
+            usageCount(indexedFunctor.usage, ordinal) !== 1 ||
+            usageCount(term.usage, ordinal) !==
+                usageCount(indexedObject.usage, ordinal) + 1
+        ) {
+            return undefined;
+        }
+        return Object.freeze({
+            section: inner.section,
+            functors: Object.freeze([
+                ...inner.functors,
+                displayedFunctor
+            ]),
+            sourceFamily: inner.sourceFamily,
+            targetFamily: term.type.family
+        });
+    }
+
     private lowerDependentSectionComposition(
         body: InternalCoreCategoricalTerm,
         name: string,
@@ -7839,9 +7991,7 @@ export class CoreCategoricalScopedBuilder {
         ) {
             return undefined;
         }
-        if (
-            body.node.argument[CORE_CATEGORICAL_BOUNDARY] === true
-        ) {
+        if (body.node.argument[CORE_CATEGORICAL_BOUNDARY] === true) {
             this.fail(
                 'CLASSIFIER_ARGUMENT_MISMATCH',
                 nodeProvenance,
@@ -7849,132 +7999,83 @@ export class CoreCategoricalScopedBuilder {
                 'boundary as its indexed object'
             );
         }
-        const indexedFunctor = body.node.subject;
-        const indexedObject = body.node.argument as
-            InternalCoreCategoricalTerm;
-        const fibreApplication =
-            indexedFunctor.node.tag === 'typed-application' &&
-            indexedFunctor.node.judgment.target ===
-                'displayed-functor-fibre' &&
-            indexedFunctor.node.argument[
-                CORE_CATEGORICAL_BOUNDARY
-            ] !== true
-                ? indexedFunctor.node
-                : undefined;
-        const sectionApplication =
-            indexedObject.node.tag === 'typed-application' &&
-            indexedObject.node.judgment.target ===
-                'section-object-evaluation' &&
-            indexedObject.node.argument[
-                CORE_CATEGORICAL_BOUNDARY
-            ] !== true
-                ? indexedObject.node
-                : undefined;
-        const fibreIndex = fibreApplication?.argument as
-            InternalCoreCategoricalTerm | undefined;
-        const sectionIndex = sectionApplication?.argument as
-            InternalCoreCategoricalTerm | undefined;
-        const displayedFunctor = fibreApplication?.subject;
-        const section = sectionApplication?.subject;
+        const chain = this.factorDependentSectionChain(
+            body,
+            ordinal,
+            baseCategory
+        );
 
         if (
             this.options.dependentSectionComposition !== true ||
-            indexedFunctor.type.tag !== 'indexed-functor' ||
-            indexedObject.type.tag !== 'indexed-object' ||
-            fibreIndex?.node.tag !== 'slot-token' ||
-            sectionIndex?.node.tag !== 'slot-token' ||
-            fibreIndex.node.ordinal !== ordinal ||
-            sectionIndex.node.ordinal !== ordinal ||
-            displayedFunctor === undefined ||
-            displayedFunctor.type.tag !== 'displayed-functor' ||
-            section === undefined ||
-            section.type.tag !== 'dependent-section' ||
-            displayedFunctor.closed === undefined ||
-            section.closed === undefined ||
-            usageCount(displayedFunctor.usage, ordinal) !== 0 ||
-            usageCount(section.usage, ordinal) !== 0 ||
-            usageCount(body.usage, ordinal) !== 2 ||
-            !kernelExpressionEquals(
-                indexedFunctor.type.baseCategory,
-                baseCategory
-            ) ||
-            !kernelExpressionEquals(
-                indexedFunctor.type.sourceFamily,
-                section.type.family
-            ) ||
-            !kernelExpressionEquals(
-                indexedFunctor.type.targetFamily,
-                targetFamily
-            ) ||
-            !kernelExpressionEquals(
-                indexedObject.type.family,
-                section.type.family
-            ) ||
-            !kernelExpressionEquals(
-                displayedFunctor.type.baseCategory,
-                baseCategory
-            ) ||
-            !kernelExpressionEquals(
-                displayedFunctor.type.sourceFamily,
-                section.type.family
-            ) ||
-            !kernelExpressionEquals(
-                displayedFunctor.type.targetFamily,
-                targetFamily
-            ) ||
-            !kernelExpressionEquals(
-                section.type.baseCategory,
-                baseCategory
-            )
+            chain === undefined ||
+            chain.functors.length === 0 ||
+            !kernelExpressionEquals(chain.targetFamily, targetFamily)
         ) {
             this.fail(
                 'UNAVAILABLE_DISPLAYED_ACTION',
                 nodeProvenance,
-                'USABILITY-DEPENDENT-1A accepts only the exact scoped ' +
-                'section-composition body FF[k](s[k]) with a rigid ' +
-                'displayed functor and section'
+                'USABILITY-DEPENDENT-1A accepts only an exact scoped ' +
+                'section-composition body formed by a finite chain of ' +
+                'rigid displayed functors above one rigid section'
             );
         }
 
-        const sourceFamily = section.type.family;
         const terminal = this.terminalCategory(nodeProvenance);
         const terminalFamily = this.constantDisplayedFamily(
             baseCategory,
             terminal,
             nodeProvenance
         );
-        const resultExpression = this.dependentCompositionCall(
-            [
-                {
-                    plicity: 'implicit',
-                    value: this.displayedCategoryCategory(
-                        baseCategory,
-                        nodeProvenance
-                    )
-                },
-                {
-                    plicity: 'implicit',
-                    value: terminalFamily
-                },
-                {
-                    plicity: 'implicit',
-                    value: sourceFamily
-                },
-                {
-                    plicity: 'implicit',
-                    value: targetFamily
-                },
-                {
-                    plicity: 'explicit',
-                    value: displayedFunctor.closed.term
-                },
-                {
-                    plicity: 'explicit',
-                    value: section.closed.term
-                }
-            ],
-            nodeProvenance
-        );
+        if (chain.section.closed === undefined) {
+            throw new Error('Dependent section chain lost its closed leaf');
+        }
+        let currentFamily = chain.sourceFamily;
+        let resultExpression = chain.section.closed.term;
+        const recovered = [...chain.section.closed.recovered];
+        for (const displayedFunctor of chain.functors) {
+            if (
+                displayedFunctor.type.tag !== 'displayed-functor' ||
+                displayedFunctor.closed === undefined
+            ) {
+                throw new Error(
+                    'Dependent section chain lost a rigid displayed functor'
+                );
+            }
+            resultExpression = this.dependentCompositionCall(
+                [
+                    {
+                        plicity: 'implicit',
+                        value: this.displayedCategoryCategory(
+                            baseCategory,
+                            nodeProvenance
+                        )
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: terminalFamily
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: currentFamily
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: displayedFunctor.type.targetFamily
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: displayedFunctor.closed.term
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: resultExpression
+                    }
+                ],
+                nodeProvenance
+            );
+            currentFamily = displayedFunctor.type.targetFamily;
+            recovered.unshift(...displayedFunctor.closed.recovered);
+        }
         const resultType: CoreType = {
             tag: 'dependent-section',
             category: this.sectionCategory(
@@ -7995,10 +8096,7 @@ export class CoreCategoricalScopedBuilder {
             term: resultExpression,
             type: copyCoreType(resultType),
             sourceSpan: this.spanFor(nodeProvenance),
-            recovered: [
-                ...displayedFunctor.closed.recovered,
-                ...section.closed.recovered
-            ]
+            recovered
         });
         const provisional = this.makeTerm(
             resultNode,
@@ -18605,8 +18703,9 @@ export class CoreCategoricalScopedBuilder {
                     'UNAVAILABLE_DISPLAYED_ACTION',
                     nodeProvenance,
                     'The active dependent frontend qualifies direct section ' +
-                    'eta and the exact approved FF[k](s[k]) composition; ' +
-                    'this body needs another displayed structural operation'
+                    'eta and a finite approved displayed-functor chain ' +
+                    'above one section evaluation; this body needs another ' +
+                    'displayed structural operation'
                 );
             }
 

@@ -1,8 +1,12 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-> **Current continuation (2026-08-02):**
+> **Current continuation (2026-08-03):**
+> [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
+> owns the next work through the read-only
+> `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` audit. Its completed semantic chain
+> includes
 > [`TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md)
-> owns the next work. Its final-green semantic predecessor is
+> and
 > [`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md).
 > `COMPOSITIONAL-NATURAL-BINDER-1B` and its D-075 classifier-exact action
 > correction are implemented and final-focused-green. The root-only reusable
@@ -158,7 +162,19 @@
 > from immutable proposal checkpoint
 > `48394a2005cd8b483ae2de56f070c14d0826d7fd` under the standing unattended-
 > review delegation with immediate human supersession. Implementation is now
-> dependency-ready. Exact earlier proposal checkpoint:
+> complete and final-focused-green: one structural factorer accepts arbitrary
+> finite nonempty rigid section-action chains and folds them only through
+> existing `comp_fapp0 (Catd_cat K)`. Two and three layers, exact one-layer
+> Core preservation, fail-closed scope/classifier checks, automatic direct/
+> text parity, and bounded `piapp1_fapp0` action conformance are green. The
+> checker preserves distinct inferred `Hom_catd` and expected `Obj(Pi_cat)`
+> serialized presentations while accepting their existing conversion; no
+> cast or classifier collapse was added. No kernel/Core/transfer/parser owner
+> changed. The sole post-slice aggregate was run once and found only existing
+> kernel whole-source SHA pins plus the unrelated README presentation
+> assertion; do not repeat it. The next dependency-ready step is the zero-edit
+> `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` consumer-led audit. Exact earlier
+> proposal checkpoint:
 > `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; exact 1G rollback-safe
 > semantic checkpoint: `f1993c2852b91173858bc2ecdf1d00998517dcaf`.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are

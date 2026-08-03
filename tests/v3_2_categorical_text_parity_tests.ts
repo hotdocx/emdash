@@ -271,6 +271,39 @@ describe('SYNTAX-PARITY-1A categorical binder modes', () => {
         );
     });
 
+    it('inherits recursive indexed-section chains without a text branch', () => {
+        const parsed = elaborate(
+            'λ^n k : K. (GG k) ((FF k) (s k))',
+            {
+                kind: 'dependent-section',
+                base: data.K,
+                target: data.Q
+            }
+        );
+        const direct = data.program.dependentLambda(
+            'k',
+            data.Q,
+            k => data.program.apply(
+                data.program.apply(data.GG, k),
+                data.program.apply(
+                    data.program.apply(data.FF, k),
+                    data.program.apply(data.s, k)
+                )
+            )
+        );
+        assertDirectEquality(
+            parsed,
+            direct,
+            'categorical.dependent-section-composition'
+        );
+        assert.equal(
+            data.program.compile(parsed).explicitCore.split(
+                'generic-category-composition'
+            ).length - 1,
+            2
+        );
+    });
+
     it('matches direct displayed-functor composition for ^fd', () => {
         const parsed = elaborate(
             'λ^fd a : E. GG (FF a)',
