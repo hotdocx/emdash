@@ -882,6 +882,28 @@ from the Boolean side; they are not fields of another refinement record.
 `realization_Q(q)` keeps its canonical branch-indexed type for an open side,
 and the notation does not claim that `q` itself is affine.
 
+For topology-local local-ring computation, comments may write
+
+```text
+⊥_U                              : literal empty sieve on U
+LocalBranch_O(s,t;q)              : selected Boolean unit branch at q
+LocalCover_T,O(s,t)               : covering sieve with branches
+LocalRing_T(O)                    : local nontriviality and unit splitting
+WholeLocal(P)                     : local presentation on the supplied K/X
+BinLocAffCover(P;L,Q)             : locally-ringed binary affine atlas
+```
+
+The literal owners are `empty_sieve`, `CommRingPshLocalUnitBranch`,
+`CommRingPshLocalUnitCover`, `CommRingPshTopologyLocalRingPresentation`,
+`ReflectiveCommRingedWholeObjectLocalPresentation`, and
+`BinaryLocallyRingedAffineCoverPresentation`. An invertible sum returns an
+actual covering sieve and an executable Boolean branch at every member; no
+raw sieve join or propositional truncation is implied. `WholeLocal` uses the
+whole computing ambient restriction on `K/X`, while the supplied reflective
+slice retains sheaf semantics and its whole `DefIso`. `BinLocAffCover` is not
+yet written `SchemePresentation`, because a generic site cover does not by
+itself classify its arrows as open immersions.
+
 For the universal-property polynomial layer, comments and examples may write
 
 ```text

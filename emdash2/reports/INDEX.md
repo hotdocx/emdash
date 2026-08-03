@@ -35,7 +35,14 @@ at an arbitrary sieve member, computing the selected generator, whole affine
 realization, and coordinate ring without duplicating a refinement record. A
 closed non-affine realization and locally-ringed scheme certificate remain
 separate gates; the selected-refinement consumer is checkpointed at
-`4892c33`. The
+`4892c33`. The subsequent CS-06b support tranche uses topology-local forcing
+instead of a raw sieve join: invertible zero forces the empty sieve to cover,
+and an invertible sum returns a selected cover with an executable Boolean unit
+branch at every member. It applies this computation to the whole ambient
+restriction on the supplied slice `K/X` and pairs it with the binary affine
+atlas as a conservative locally-ringed affine-cover presentation. Public
+`SchemePresentation` naming remains gated by an admissible-open or relative-
+geometry contract for the selected cover arrows. The
 deferred categorical HIT is the PSSS-05d/PSSS-D-114 free localization of a
 whole presheaf category at descent maps, not Tabareau's auxiliary HoTT
 coequalizer and not a monolithic sheafification HIT.
@@ -151,6 +158,19 @@ generation function and uses the resulting Boolean side to select the affine
 generator, its whole realization, and its coordinate ring. The refinement
 itself is not asserted affine; no second Sigma package, coherence field,
 global construction, or scheme claim is introduced.
+`emdash3_2_commutative_algebra_local_ringed_sites.lp` is the transparent
+rule-free topology-local local-ring capability. It constructs the literal
+empty sieve, makes invertible zero imply its coverhood, and makes an
+invertible sum select a covering sieve with an executable Boolean unit branch
+for every member. This is computational presentation data, not a raw join of
+sieves, truncation, stalk theorem, sheafhood assertion, or scheme classifier.
+`emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp` is the
+transparent rule-free whole-object consumer. The supplied reflective slice
+owns topology, sheaf semantics, and a whole `DefIso`; local-ring computation
+runs on the computing ambient restriction. Pairing that boundary with the
+existing binary affine atlas yields
+`BinaryLocallyRingedAffineCoverPresentation`, deliberately not yet a semantic
+scheme because arbitrary site-cover arrows are not classified as open.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
 derived native equality-valued hom-action/groupoidality extension. It also
 exposes the existing transparent Cat-level consequence that the selected left

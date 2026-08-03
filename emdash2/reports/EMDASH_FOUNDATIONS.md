@@ -2249,6 +2249,61 @@ canonical branch-indexed family; the readable selected-chart observation is
 not promoted to a dependent fusion rule. Most importantly, `q` is a
 refinement through an affine chart, not necessarily another affine chart.
 
+### Topology-Local Local-Ring Presentations
+
+For a CommRing-valued presheaf `O` on `(K,T)`, the two nonautomatic local-ring
+support laws can be expressed without first constructing finite joins of raw
+sieves. The literal empty sieve is
+
+```text
+empty_sieve(U) = const_{Into(U)} Path(Empty).
+```
+
+Its membership computes to `Empty`. A topology-local presentation supplies:
+
+```text
+zero_local(U) : Unit_O(U)(0) -> Covers_T(empty_sieve(U))
+
+sum_local(U,s,t) : Unit_O(U)(s+t) ->
+  Sigma R : Sieve(U),
+    Covers_T(R) *
+    Pi q in R,
+      Sigma b : Bool,
+        if b=false then Unit(O(q)(s)) else Unit(O(q)(t)).
+```
+
+This is the Kripke--Joyal computational reading of `D(0)=bottom` and
+`D(s+t)<=D(s) join D(t)`: if a sum is a unit, a selected cover exposes where
+one summand is a unit. The selected sieve, member, and Boolean branch are
+presentation data rather than a propositionally truncated existence claim.
+The whole sieve owns restriction closure, so no external naturality family is
+stored. The laws `D(1)=top` and `D(st)=D(s) meet D(t)` are algebraically
+automatic and remain a later derived comparison; no duplicate runtime owner
+is introduced merely to restate them.
+
+For a distinguished object `X` of an ambient reflective ringed site, locality
+belongs on the actual slice `K/X`. A
+`ReflectiveCommRingedWholeObjectLocalPresentation(P)` therefore retains a
+`SuppliedReflectiveCommRingedSlicePresentation(A,X)` and applies
+`CommRingPshTopologyLocalRingPresentation` to the whole computing ambient
+restriction, using the supplied slice topology. The slice package continues
+to own sheaf semantics and one whole `DefIso` from its included sheaf to that
+computing target.
+
+Finally,
+
+```text
+BinaryLocallyRingedAffineCoverPresentation(P)
+  = Sigma local : ReflectiveCommRingedWholeObjectLocalPresentation(P),
+      BinaryAffineCoverPresentation(P).
+```
+
+This completes the locally-ringed plus computational-atlas package without
+overclaiming a scheme. In a generic Grothendieck site, cover membership alone
+does not classify a chart arrow as an open immersion. A later admissible-open
+or relative-geometry contract must settle that semantic boundary before the
+public name `SchemePresentation` is selected.
+
 ### Complementary-Idempotent Affine Atlas
 
 The first finite atlas consumer uses product rings rather than postulating a
@@ -4310,6 +4365,10 @@ kernel and one-way library vocabulary.
 | whole affine realization of one selected chart generator | `AffineCoverChartRealization P chart` |
 | global-first two-generator affine-cover presentation | `BinaryAffineCoverPresentation P` |
 | selected affine generator/realization/ring for a retained refinement | `binary_affine_cover_refinement_chart` / `binary_affine_cover_refinement_realization` / `binary_affine_cover_refinement_ring` |
+| literal bottom ordinary sieve | `empty_sieve U` |
+| selected local unit branch and covering refinement | `CommRingPshLocalUnitBranch O s t q` / `CommRingPshLocalUnitCover T O s t` |
+| topology-local local-ring presentation | `CommRingPshTopologyLocalRingPresentation T O` |
+| locally-ringed whole object and binary affine atlas | `ReflectiveCommRingedWholeObjectLocalPresentation P` / `BinaryLocallyRingedAffineCoverPresentation P` |
 | set-carrier commutative rings | `CommRing` |
 | carrier and retained sethood of `R` | `comm_ring_carrier R` / `comm_ring_carrier_is_set R` |
 | operation/law packages on `A` | `CommRingOps A` / `IsCommRing A ops` |

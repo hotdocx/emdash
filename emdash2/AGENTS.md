@@ -61,6 +61,8 @@ ordinary-invertibility-sieve extension is
 `emdash3_2_commutative_algebra_presheaves.lp`;
 the topology-visible invertibility-cover and memberwise localization-factor
 extension is `emdash3_2_commutative_algebra_locality.lp`;
+the topology-local computational local-ring presentation extension is
+`emdash3_2_commutative_algebra_local_ringed_sites.lp`;
 the localization-element to coherent matching-family extension is
 `emdash3_2_commutative_algebra_matching.lp`;
 the selected computational localization-glue extension is
@@ -95,6 +97,8 @@ the global-first binary affine-cover presentation extension is
 `emdash3_2_commutative_algebra_affine_cover_presentations.lp`;
 the executable selected-generator refinement extension is
 `emdash3_2_commutative_algebra_affine_cover_refinements.lp`;
+the whole-object locally-ringed affine-cover presentation extension is
+`emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp`;
 the affine Yoneda functor-of-points, semantic basic-open, and
 localization-representability extension is
 `emdash3_2_commutative_algebra_affine_points.lp`;
@@ -429,17 +433,33 @@ Use the following order:
     realization, and its coordinate ring. It adds no duplicate refinement
     record and does not assert that the arbitrary refinement itself is affine,
     construct a global object, add coherence fields, or define a scheme;
-47. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+47. `emdash3_2_commutative_algebra_local_ringed_sites.lp` for the transparent
+    rule-free topology-local local-ring presentation. Invertible zero makes
+    the literal empty sieve cover, while an invertible sum selects a covering
+    sieve and one Boolean unit branch at every retained member. This is a
+    witness-rich computational alternative to constructing raw sieve joins or
+    propositional truncation. It does not assert sheafhood, construct the
+    automatic support laws, compare with stalks, classify open immersions, or
+    define a scheme;
+48. `emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp` for
+    the transparent rule-free whole-object consumer. A supplied reflective
+    slice owns topology, sheaf semantics, and one whole `DefIso`; topology-
+    local computation runs on its computing ambient-restriction target. The
+    resulting `BinaryLocallyRingedAffineCoverPresentation` pairs this with the
+    existing generated binary affine atlas but deliberately stops short of a
+    scheme claim until an admissible-open or relative-geometry contract is
+    selected;
+49. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-48. `emdash3_2_checks.lp` for executable regression statements;
-49. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+50. `emdash3_2_checks.lp` for executable regression statements;
+51. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-50. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-51. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+52. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+53. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-52. `reports/INDEX.md` for task-specific plans and decision records.
-53. `book/book.json` and `book/evidence.json` for book source
+54. `reports/INDEX.md` for task-specific plans and decision records.
+55. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

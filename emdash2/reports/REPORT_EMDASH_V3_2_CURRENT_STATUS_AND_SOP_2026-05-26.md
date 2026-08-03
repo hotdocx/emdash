@@ -197,6 +197,14 @@ detailed probe evidence.
   objectwise restriction equation as a construction audit. It claims no
   limiting/descent comparison, sheaf, ringed-site package, generated topology,
   `Spec`, or scheme.
+- `emdash3_2_commutative_algebra_local_ringed_sites.lp`: downstream
+  transparent, rule-free topology-local local-ring presentation. The literal
+  empty sieve computes to `Empty` membership; invertible zero makes it cover.
+  An invertible sum selects a covering sieve and a Boolean unit branch for
+  every retained member. This witness-rich interface avoids both a raw sieve
+  union and propositional truncation while retaining executable choices. It
+  does not assert sheafhood, construct the automatic support laws, compare
+  with stalks, classify open immersions, or define schemes.
 - `emdash3_2_commutative_algebra_matching.lp`: one-way computational
   matching-family layer. It pulls the selected Path-valued carrier family over
   the category of invertibility-support elements and forms its Pi category.
@@ -307,6 +315,15 @@ detailed probe evidence.
   realization, and coordinate ring. It deliberately adds no duplicate
   refinement package, rule, unifier, external coherence, claim that the
   refinement itself is affine, global realization, or scheme classifier.
+- `emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp`:
+  downstream transparent, rule-free whole-object consumer. A supplied
+  reflective slice on `K/X` retains topology, sheaf semantics, and one whole
+  `DefIso` to the computing ambient restriction; topology-local ring
+  computation is attached to that target. Pairing it with the existing binary
+  affine atlas produces `BinaryLocallyRingedAffineCoverPresentation`. The
+  conservative name records that arbitrary cover arrows in a generic site
+  are not yet an admissible-open class; no overlap/cocycle field, gluing
+  constructor, or semantic scheme category is added.
 - `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
   functor-of-points/basic-open layer. The existing Yoneda presheaf represents
   `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and
