@@ -1,9 +1,12 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-> **Current continuation (2026-08-03):**
+> **Current completion boundary (2026-08-03):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
-> owns the next work through the zero-edit
-> `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` consumer architecture audit. The
+> is complete through `CURRENT-PERSISTENT-GOAL-COMPLETION-0AV`. The zero-edit
+> `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` audit routes the remaining
+> PathOut/PathInd work to the separately deferred
+> [`TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md).
+> The
 > preceding `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` /
 > D-DTTLF-USABILITY-082 product slice is implemented and final-green at the
 > local checkpoint following immutable review checkpoint
@@ -193,10 +196,14 @@
 > all twelve preset IDs and semantic engines remain unchanged, the two stale
 > public inventories are repaired, and the focused reviewer/typecheck/lint/
 > build gates are green. No aggregate, kernel check, or deployment was run.
-> The dependency-ready continuation is the zero-edit
-> `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` audit, which must select at most one
-> reviewer-visible vertical successor or freeze a dedicated integration plan
-> before behavior. Exact earlier
+> The zero-edit `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` audit is complete.
+> Transparent representable/PathOut constructions are future TypeScript
+> standard-library definitions over existing owners; `path_ind_sec` and its
+> coherent packages are existing active owners to import/transfer as checked
+> library declarations with their exact rules, not new Core/checker
+> primitives. That implementation is explicitly
+> deferred to the dedicated PathOut plan and does not reopen the completed
+> binder architecture. The current persistent goal may close. Exact earlier
 > proposal checkpoint:
 > `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; exact 1G rollback-safe
 > semantic checkpoint: `f1993c2852b91173858bc2ecdf1d00998517dcaf`.
