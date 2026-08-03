@@ -113,12 +113,20 @@
 > check pass. The required root aggregate was run once and remains non-green
 > only on the already-recorded source-digest pins and README line-wrap regex;
 > do not repeat it. No kernel/Core/checker/text/browser semantics, cast, curry,
-> or external coherence field was added. The next dependency-ready row is the
-> read-only `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` audit in the
-> active plan. It must require a concrete end-user consumer before proposing
-> further fixed/open recursion sharing; otherwise it routes to the smallest
-> newly enabled text-parity slice. Exact rollback-safe semantic checkpoint:
-> `c55a8d873b7abd49e221c122831ac6a90928b06f`.
+> or external coherence field was added. The subsequent read-only
+> `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` audit is complete: fixed and
+> open compilers share recursive control shape but not one interchangeable
+> owner algebra, so no universal compiler refactor is selected. Its one
+> concrete consumer exposes a narrower facade gap. Grouped `:^nd` telescopes
+> activate the existing contextual displayed-endpoint compiler, but compact
+> unary and expanded `lambda^n k. lambda^n a` callbacks do not; consequently
+> identity over the already-working fibre diagonal rejects in both forms. The
+> exact `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` proposal is frozen in the
+> active plan and awaits an independent D-080 review before behavior. It adds
+> only contextual-profile endpoint wiring, prerequisite propagation, and
+> focused Core/type/action/inherited-text parity—no owner, Core, parser route,
+> cast, curry, or universal operation table. Exact prior rollback-safe semantic
+> checkpoint: `c55a8d873b7abd49e221c122831ac6a90928b06f`.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.

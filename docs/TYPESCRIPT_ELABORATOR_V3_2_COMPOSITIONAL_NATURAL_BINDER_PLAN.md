@@ -1496,25 +1496,89 @@ Final proportional evidence is:
 Exact rollback-safe semantic checkpoint:
 `c55a8d873b7abd49e221c122831ac6a90928b06f`.
 
-### Selected next candidate: `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G`
+### `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` result
 
-Perform a read-only graduation audit before another refactor or syntax change:
+The read-only graduation audit is complete. It does not select a universal
+fixed/open recursion refactor:
 
-1. compare the recursion skeletons and accepted operation tables of ordinary
-   fixed `compileContextual`, displayed/open `compileDisplayedContextual`, the
-   ordinary-natural compiler, and the displayed-natural point factorer;
-2. distinguish reusable traversal/control structure from classifier-specific
-   product, evaluation, scope, action, and result-packaging owners;
-3. locate at most one concrete end-user expression that is blocked by the
-   absence of a classifier-indexed shared skeleton; and
-4. if no such consumer exists, defer internal refactoring and select the
-   smallest typed-to-text parity slice for the newly graduated evaluation or
-   diagonal behavior instead.
+1. ordinary fixed `compileContextual` and displayed/open
+   `compileDisplayedContextual` share a recursive
+   wire/recurse/combine/package shape, but their constants, products,
+   evaluation judgments, abstraction owners, scope, and result classifiers
+   are genuinely classifier-specific;
+2. ordinary-natural body compilation and displayed-natural point
+   factorization likewise share structural recursion but operate on different
+   component and action classifiers;
+3. no end-user consumer requires erasing those distinctions or introducing a
+   new generic operation table; and
+4. one concrete displayed-only consumer is blocked at a smaller existing
+   seam. The endpoint compiler already has a contextual route through
+   `compileDisplayedContextual`, and the finite grouped `:^nd` telescope
+   activates it. The compact unary and expanded open-fibre `:^nd` facades
+   share the same point factorer but do not activate that endpoint context
+   while constructing their callbacks.
 
-The audit may recommend a common recursive signature with ordinary and
-displayed instances. It must not claim identical emitted Core, erase the
-`Cat`/`Catd K` distinction, change behavior, or freeze an implementation
-proposal without exact consumer and parity evidence.
+A bounded current-profile probe confirms the exact symptom. Both
+
+```text
+lambda^nd a. identityCell(fibrePair(a,a))
+lambda^n k. lambda^n a. identityCell(fibrePair(a,a))
+```
+
+reject with `CLASSIFIER_ARGUMENT_MISMATCH`, while the diagonal displayed
+functor itself is already accepted by the final-green 1F compiler and grouped
+contextual `:^nd` already accepts identity over fibre pairs. This is a facade-
+wiring omission, not a missing categorical construction, Core owner,
+naturality proof, or parser production.
+
+### Frozen proposal:
+`DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G`
+
+Gate:
+`H-DTTLF-USABILITY-DISPLAYED-NATURAL-ENDPOINT-CONTEXT-01`.
+
+Implement exactly this bounded displayed-only bridge after a separate review:
+
+1. Preserve the ordinary/displayed algebra distinction and all existing
+   direct endpoint-chain behavior.
+2. In profiles that already enable displayed contextual abstraction, create
+   the existing one-slot displayed endpoint context from the active base,
+   active fibre, source family, and displayed-identity wiring.
+3. Activate that context only while evaluating the compact
+   `displayedTransforContextLambda` callback and the immediately nested open
+   `contextualDisplayedTransforLambda` callback used by expanded
+   `lambda^n k. lambda^n a`.
+4. Pop and owner-check the exact context in `finally`; do not retain callbacks,
+   tokens, endpoint contexts, or new public metadata.
+5. Reuse the existing `identityCell` ->
+   `compileDirectDisplayedFunctorEndpoint` -> `compileDisplayedContextual`
+   path literally. Add no new endpoint switch, naturality equation, cast,
+   total-context encoding, curry, Core node, checker branch, runtime rule, or
+   kernel owner.
+6. Propagate structural and dependent prerequisites discovered by the
+   contextual endpoint compiler into the existing compact/expanded
+   abstraction evidence. Preserve the old evidence and exact Core for bare
+   slots and finite closed displayed-functor chains.
+7. Prove byte-identical explicit Core and inferred type among the compact
+   unary form, the expanded `lambda^n k. lambda^n a` form, and generic closed
+   identity at the already-final-green one-variable fibre diagonal.
+8. Consume the resulting point and internal base-arrow/higher action through
+   existing displayed-transformation eliminators and compare them with the
+   closed identity owner.
+9. Confirm that the existing text grammar/resolver inherits
+   `lambda^nd a. identityCell(fibrePair a a)` without parser or resolver code,
+   and that the base profile, mismatched endpoints, outer capture, escaped
+   tokens, and arbitrary point arrows remain rejected.
+10. Add one focused suite, run nearest predecessor suites and the proportional
+    static/kernel gates, synchronize the plan/handoff, and create a local
+    rollback-safe checkpoint. Do not change browser, book, transfer, kernel,
+    or public method contracts.
+
+The proposal is frozen but not yet authorized for behavior. Its rejection
+oracle is exact: if the contextual endpoint compilation does not reproduce the
+already-checked diagonal displayed functor, or if its action cannot be
+consumed through the existing coherent owner, do not add a coercion or special
+identity implementation; reject or revise the proposal.
 
 ## Work Ledger
 
@@ -1531,7 +1595,8 @@ proposal without exact consumer and parity evidence.
 | `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` | complete; read-only | final-green fixed/open compilers and exact compact/expanded Core parity | Fixed and displayed recursive algebras are distinct. One-binding `displayedContextLambda` nevertheless proves exact four-case Core/type parity with the narrow compact factorer, selecting displayed-only consolidation rather than an erased universal compiler. |
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` | complete; read-only; exact 1F proposal frozen below | completed 0E; existing `compileDisplayedContextual`; 4/4 exact one-binding parity; fixed-evaluation consumer/action probe | `compileDisplayedContextual` is the smallest existing engine. The sole gap is profile-gated routing from compact/open wrappers; no kernel owner or universal fixed/displayed traversal is needed. |
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` | final-focused-green at `c55a8d873b7abd49e221c122831ac6a90928b06f` | completed 0F; D-079; exact focused and predecessor matrices | Compact/open displayed-functor wrappers now use the existing recursive displayed compiler after their historical fast paths. Fixed evaluation and a fibre diagonal have exact three-presentation Core parity and internal object/base-arrow action; no kernel/Core/text/browser semantics changed. |
-| `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` | dependency-ready; read-only | final-focused-green 1F; clarified ordinary/displayed algebra distinction | Audit whether a classifier-indexed recursion skeleton has a concrete end-user consumer. Preserve separate ordinary/displayed owner algebras; otherwise route to the smallest newly enabled text-parity slice. |
+| `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` | complete; read-only | final-focused-green 1F; clarified ordinary/displayed algebra distinction | A universal operation table has no current consumer. The concrete gap is narrower: unary compact/expanded `:^nd` omit the existing displayed endpoint context already used by grouped telescopes. |
+| `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` | exact proposal frozen; review pending | completed 0G; existing contextual endpoint compiler; bounded compact/expanded rejection probe | Activate existing one-slot endpoint wiring around compact/expanded callbacks, preserve direct chains, propagate prerequisites, and prove diagonal identity Core/type/action/text parity. No new owner, parser route, Core, or universal compiler. |
 
 ## Explicit Non-Claims
 
@@ -1674,19 +1739,49 @@ rollback-safe semantic checkpoint. Compact `lambda^fd`, expanded open
 ordinary fixed `lambda^f` in its classifier-specific algebra; do not describe
 the displayed consolidation as a universal compiler.
 
-Route next to the read-only
-`CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` audit. Compare common
-recursion structure with classifier-specific owners and require one concrete
-end-user consumer before proposing another internal refactor. If none exists,
-defer the refactor and select the smallest text-parity slice for the newly
-graduated displayed evaluation or diagonal. Freeze and independently review
-any exact behavior proposal before editing behavior.
+Treat the read-only
+`CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` audit as complete. It rejects
+a universal fixed/open operation-table refactor: the recursive control shape
+is shared, but the concrete algebras and owners remain classifier-specific.
+Its one concrete end-user gap is the missing activation of the already-
+existing displayed endpoint context around compact unary and expanded open-
+fibre `:^nd` callbacks. The exact
+`DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` proposal is frozen under
+`H-DTTLF-USABILITY-DISPLAYED-NATURAL-ENDPOINT-CONTEXT-01`; independently
+review that immutable proposal before editing behavior. If approved, implement
+only the existing-context facade bridge, prerequisite propagation, and focused
+diagonal identity parity/action/text evidence. Add no universal compiler,
+owner, Core/checker/runtime rule, parser route, cast, curry, or external
+coherence field.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-02 — H-DTTLF-USABILITY-DISPLAYED-NATURAL-ENDPOINT-CONTEXT-01
+  proposal frozen.** The completed 0G audit finds no consumer for a universal
+  fixed/open compiler refactor. It instead identifies one exact displayed-
+  only facade gap: grouped natural telescopes activate the existing contextual
+  endpoint compiler, while compact unary and expanded open-fibre natural
+  callbacks do not. A bounded probe shows both diagonal-identity forms reject
+  at that seam even though the diagonal functor and grouped identity already
+  work. The ten-item 1G proposal activates existing identity wiring only in
+  contextual profiles, propagates its prerequisites, requires compact/
+  expanded/closed Core-type-action parity and inherited text behavior, and
+  adds no owner, Core, parser route, or universal operation table. It awaits a
+  separate immutable D-080 review before behavior.
+
+- **2026-08-02 — CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G read-only
+  complete.** Fixed and open functor/natural compilers share recursive control
+  structure but not one interchangeable operation algebra. The existing
+  displayed endpoint compiler already supports either finite direct chains or
+  a scoped call to `compileDisplayedContextual`; only the finite grouped
+  `:^nd` telescope installs the latter context. The selected continuation is
+  therefore a two-facade context activation around the shared point factorer,
+  not a generic compiler refactor. Current text grammar already parses the
+  target expression, so no acquisition or parser work is selected.
 
 - **2026-08-02 — DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F final-focused-green.**
   The profile-gated fallback reuses `compileDisplayedContextual` only after
