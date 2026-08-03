@@ -74,8 +74,8 @@ compact and open-displayed wrappers. No behavior refactor is yet authorized.
 The exact 1F proposal is now frozen at
 `69b285b033a7da1458ff04788d39d7a2231a9e35` and independently approved under
 [`D-DTTLF-USABILITY-079`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D079_REVIEW.md).
-Its ten-item implementation is final-focused-green, with its rollback-safe
-semantic checkpoint pending below. Compact `lambda^fd`, expanded
+Its ten-item implementation is final-focused-green at rollback-safe semantic
+checkpoint `c55a8d873b7abd49e221c122831ac6a90928b06f`. Compact `lambda^fd`, expanded
 `lambda^n k. lambda^f a`, and one-binding displayed brackets now reuse the
 same recursive displayed body engine for reviewed contextual bodies while
 retaining their distinct facades. The next row is a read-only graduation audit
@@ -1493,7 +1493,8 @@ Final proportional evidence is:
   source-digest pin family and README line-wrap regex; no 1F feature failure
   was observed. Do not repeat that aggregate for this boundary.
 
-Exact rollback-safe semantic checkpoint: pending local checkpoint.
+Exact rollback-safe semantic checkpoint:
+`c55a8d873b7abd49e221c122831ac6a90928b06f`.
 
 ### Selected next candidate: `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G`
 
@@ -1529,7 +1530,7 @@ proposal without exact consumer and parity evidence.
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | final-focused-green at `7f7d201948e5f035e516f6fb15554a1aea26029d` | graduated direct typed API; D-077 checkpoint; D-078 | Exactly two expected contracts and thin resolver routes now expose expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a` text. Existing grammar, neutral resolution, typed methods, and compact factorers are reused; no parser/checker/Core/kernel semantics changed. |
 | `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` | complete; read-only | final-green fixed/open compilers and exact compact/expanded Core parity | Fixed and displayed recursive algebras are distinct. One-binding `displayedContextLambda` nevertheless proves exact four-case Core/type parity with the narrow compact factorer, selecting displayed-only consolidation rather than an erased universal compiler. |
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` | complete; read-only; exact 1F proposal frozen below | completed 0E; existing `compileDisplayedContextual`; 4/4 exact one-binding parity; fixed-evaluation consumer/action probe | `compileDisplayedContextual` is the smallest existing engine. The sole gap is profile-gated routing from compact/open wrappers; no kernel owner or universal fixed/displayed traversal is needed. |
-| `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` | final-focused-green; rollback-safe semantic checkpoint pending | completed 0F; D-079; exact focused and predecessor matrices | Compact/open displayed-functor wrappers now use the existing recursive displayed compiler after their historical fast paths. Fixed evaluation and a fibre diagonal have exact three-presentation Core parity and internal object/base-arrow action; no kernel/Core/text/browser semantics changed. |
+| `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` | final-focused-green at `c55a8d873b7abd49e221c122831ac6a90928b06f` | completed 0F; D-079; exact focused and predecessor matrices | Compact/open displayed-functor wrappers now use the existing recursive displayed compiler after their historical fast paths. Fixed evaluation and a fibre diagonal have exact three-presentation Core parity and internal object/base-arrow action; no kernel/Core/text/browser semantics changed. |
 | `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` | dependency-ready; read-only | final-focused-green 1F; clarified ordinary/displayed algebra distinction | Audit whether a classifier-indexed recursion skeleton has a concrete end-user consumer. Preserve separate ordinary/displayed owner algebras; otherwise route to the smallest newly enabled text-parity slice. |
 
 ## Explicit Non-Claims
@@ -1695,9 +1696,9 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
   static gates, diff hygiene, and bounded kernel check pass. The required root
   aggregate was run once and remains non-green only on the recorded source-
   digest pins and README-wrap regex; it must not be repeated. Exact rollback-
-  safe semantic checkpoint: pending local checkpoint. The next row is the
-  read-only classifier-indexed graduation audit, not a universal compiler
-  refactor.
+  safe semantic checkpoint:
+  `c55a8d873b7abd49e221c122831ac6a90928b06f`. The next row is the read-only
+  classifier-indexed graduation audit, not a universal compiler refactor.
 
 - **2026-08-02 — D-DTTLF-USABILITY-079 approved.** Independent review of
   proposal checkpoint `69b285b033a7da1458ff04788d39d7a2231a9e35` confirms

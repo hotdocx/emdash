@@ -118,7 +118,7 @@
 > active plan. It must require a concrete end-user consumer before proposing
 > further fixed/open recursion sharing; otherwise it routes to the smallest
 > newly enabled text-parity slice. Exact rollback-safe semantic checkpoint:
-> pending local checkpoint.
+> `c55a8d873b7abd49e221c122831ac6a90928b06f`.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
