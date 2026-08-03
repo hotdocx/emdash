@@ -703,7 +703,7 @@ close CS-05.
 | Global-first assumption-explicit affine atlas | Good | Honest whole restriction/pullback comparison to each affine chart. |
 | Binary global-first affine-cover presentation | Implemented, exact-current through the bounded 122-target health boundary, and locally checkpointed at `0f3b379` | Retain constructive generation of the covering sieve by the two charts; mere sieve membership is insufficient. |
 | General finite-qcqs presentation | Good after the binary consumer | Generalize the Boolean choice to Nat-indexed finite factorization without duplicating the algebraic family owner. |
-| Supplied global two-chart refinement consumer | Implemented and exact-current through the bounded 124-target health boundary; local checkpoint pending | It consumes an assumption-explicit global presentation and does not construct a closed non-affine object. |
+| Supplied global two-chart refinement consumer | Implemented, exact-current through the bounded 124-target health boundary, and locally checkpointed at `4892c33` | It consumes an assumption-explicit global presentation and does not construct a closed non-affine object. |
 | Closed global non-affine example | Good but separate | Selecting or constructing a mathematically meaningful ambient object before `Scheme_cat` exists. |
 | Constructive two-affine gluing | Moderate | Global realization and universal property, not overlap algebra itself. |
 | Point-free locally-ringed support interface | Moderate and separately gated | `D(s)` exists, but bottom/finite joins or equivalent topology-local forcing are absent; pointwise disjunction is not a correct shortcut. |
@@ -869,7 +869,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-06 | Global-first finite-qcqs `SchemePresentation(X)` | Split into CS-06a computational atlas and CS-06b locally-ringed scheme certificate | CS-02/CS-03/CS-05 contracts |
 | CS-06a | Global-first `BinaryAffineCoverPresentation` with constructive cover generation and whole affine realizations | Complete and locally checkpointed at `0f3b379`: three rule-free source layers, three reviewers, exact warning comparison, audit/catalog/authority synchronization, and 122-target resumable health are green | CS-03 binary contract plus CS-05b |
 | CS-06b | Add correct locally-ringed support and, when consumed, generic finite arity | Deferred; must not overclaim the CS-06a package | CS-02 support owner plus arity-generic consumer |
-| CS-07 | Supplied global two-chart selected-refinement consumer | Complete and exact-current: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green; local checkpoint pending. A closed genuinely non-affine realization remains separate | CS-06a |
+| CS-07 | Supplied global two-chart selected-refinement consumer | Complete and locally checkpointed at `4892c33`: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green. A closed genuinely non-affine realization remains separate | CS-06a |
 | CS-08 | Atlas-first two-affine gluing constructor | Later | Whole open-overlap input plus realization/universal property |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, and presented-scheme realization | Research continuation | Stable object/morphism interfaces and CS-06 |
@@ -1395,10 +1395,11 @@ Proportional validation is green:
   `sha256:82a4a49e1ccd8f53e53944a600a1acce9c5fb115ab0000850db9730140e62ede`.
 
 No full CI, kernel-wide replay, root aggregate, push, merge, history rewrite,
-publication, or worktree cleanup was performed. CS-07 is ready for its
-authorized local checkpoint. It completes the supplied global two-chart
-refinement consumer, not a closed non-affine example, locally-ringed scheme
-certificate, or atlas-first gluing construction.
+publication, or worktree cleanup was performed. The complete CS-07 boundary
+is locally checkpointed as `4892c33` (`feat: add affine-cover refinement
+consumers`). It completes the supplied global two-chart refinement consumer,
+not a closed non-affine example, locally-ringed scheme certificate, or
+atlas-first gluing construction.
 
 ## 14. Validation And Checkpoint Contract
 

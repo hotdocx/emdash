@@ -34,7 +34,8 @@ it is checkpointed at `0f3b379`. CS-07 now consumes a supplied presentation
 at an arbitrary sieve member, computing the selected generator, whole affine
 realization, and coordinate ring without duplicating a refinement record. A
 closed non-affine realization and locally-ringed scheme certificate remain
-separate gates. The
+separate gates; the selected-refinement consumer is checkpointed at
+`4892c33`. The
 deferred categorical HIT is the PSSS-05d/PSSS-D-114 free localization of a
 whole presheaf category at descent maps, not Tabareau's auxiliary HoTT
 coequalizer and not a monolithic sheafification HIT.
