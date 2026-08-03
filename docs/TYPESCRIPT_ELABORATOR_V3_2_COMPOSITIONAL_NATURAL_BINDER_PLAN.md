@@ -1581,6 +1581,68 @@ reproduce the already-checked diagonal displayed functor, or if its action
 cannot be consumed through the existing coherent owner, do not add a coercion
 or special identity implementation; reject or revise the proposal.
 
+### `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` result
+
+The approved bridge is final-focused-green:
+
+1. `unaryDisplayedEndpointContext` constructs exactly the existing one-slot
+   identity wiring and remains unavailable outside profiles that already own
+   displayed contextual abstraction.
+2. Compact `displayedTransforContextLambda` and expanded open-fibre
+   `contextualDisplayedTransforLambda` activate and owner-check that context
+   only around their once-evaluated callbacks. Both still share
+   `factorContextualDisplayedTransforBody` and
+   `factorDisplayedTransforPoint`.
+3. `identityCell`, `compileDirectDisplayedFunctorEndpoint`, and
+   `compileDisplayedContextual` are reused unchanged. No special diagonal or
+   identity case, Core/checker/runtime branch, kernel owner, or external
+   coherence payload was added.
+4. Structural and dependent prerequisites discovered by the endpoint compiler
+   now reach compact/expanded evidence. Existing direct bare-slot and finite-
+   chain behavior remains exact, including its historical diagnostic classes.
+5. Compact unary, expanded `lambda^n k. lambda^n a`, current text, and generic
+   closed identity at the fibre diagonal have byte-identical Core and inferred
+   type. Point and internal base-arrow/higher action compare equal through the
+   existing coherent owner.
+
+Final proportional evidence is:
+
+- the new focused suite passes 4/4;
+- the historical direct contextual identity suite passes 7/7 after preserving
+  its exact mismatch diagnostic;
+- the compositional-ND, displayed-functor contextual, and text predecessors
+  contribute the remaining 24/24 green cases, for an effective 35/35 nearest-
+  predecessor matrix;
+- workspace topology, root typecheck, complete changed-file lint, exact diff
+  hygiene, and the bounded active-kernel check pass; and
+- the required root `check:ts` was run exactly once. Its static phases pass.
+  The test phase is terminal non-green only on the already-recorded active-
+  kernel source-digest pin family and README line-wrap regex; no 1G failure was
+  observed. Do not repeat that aggregate for this boundary.
+
+Exact rollback-safe semantic checkpoint: pending this synchronized commit.
+
+### Selected next candidate:
+`DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H`
+
+Perform one read-only graduation audit before another semantic or syntax
+change:
+
+1. compare compact unary, expanded open-fibre, and finite grouped natural
+   presentations across eta, identity, recursive composition, both whiskers,
+   and the newly shared contextual endpoint route;
+2. probe whether fixed displayed evaluation and one nested displayed endpoint
+   already work as identity/whiskering endpoints without further behavior;
+3. freeze the exact present recursive displayed-natural body algebra and its
+   object/base-arrow/higher-action envelope; and
+4. select at most one concrete blocked end-user expression. If none exists,
+   graduate this subplan and route to the next higher-level usability plan
+   rather than refactoring for hypothetical uniformity.
+
+The audit is read-only. It must not add an operation table, parser branch,
+owner, cast, curry, arbitrary pointwise-naturalization rule, or new validation
+aggregate.
+
 ## Work Ledger
 
 | Slice | Status | Dependency | Exact boundary |
@@ -1597,7 +1659,8 @@ or special identity implementation; reject or revise the proposal.
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` | complete; read-only; exact 1F proposal frozen below | completed 0E; existing `compileDisplayedContextual`; 4/4 exact one-binding parity; fixed-evaluation consumer/action probe | `compileDisplayedContextual` is the smallest existing engine. The sole gap is profile-gated routing from compact/open wrappers; no kernel owner or universal fixed/displayed traversal is needed. |
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` | final-focused-green at `c55a8d873b7abd49e221c122831ac6a90928b06f` | completed 0F; D-079; exact focused and predecessor matrices | Compact/open displayed-functor wrappers now use the existing recursive displayed compiler after their historical fast paths. Fixed evaluation and a fibre diagonal have exact three-presentation Core parity and internal object/base-arrow action; no kernel/Core/text/browser semantics changed. |
 | `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` | complete; read-only | final-focused-green 1F; clarified ordinary/displayed algebra distinction | A universal operation table has no current consumer. The concrete gap is narrower: unary compact/expanded `:^nd` omit the existing displayed endpoint context already used by grouped telescopes. |
-| `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` | independently approved under D-080; implementation dependency-ready | completed 0G; proposal checkpoint `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; existing contextual endpoint compiler | Activate existing one-slot endpoint wiring around compact/expanded callbacks, preserve direct chains, propagate prerequisites, and prove diagonal identity Core/type/action/text parity. No new owner, parser route, Core, or universal compiler. |
+| `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` | final-focused-green; semantic checkpoint pending | completed 0G; D-080; effective 35/35 focused/predecessor matrix | Existing one-slot endpoint wiring now surrounds compact/expanded callbacks in contextual profiles. Diagonal identity has exact Core/type/action/text parity; historical direct behavior and diagnostics remain stable. No new owner, parser route, Core, or universal compiler. |
+| `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` | dependency-ready; read-only | final-focused-green 1G; compact/expanded/grouped displayed-natural evidence | Freeze the exact shared body algebra, probe evaluation/nested endpoints, and require one concrete consumer before any further behavior. Otherwise graduate this subplan. |
 
 ## Explicit Non-Claims
 
@@ -1749,16 +1812,35 @@ existing displayed endpoint context around compact unary and expanded open-
 fibre `:^nd` callbacks. The exact
 `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` proposal frozen at
 `998f4e4e6977cabdeff5011b6c2e866a09cd8139` is independently approved under
-D-080. Implement only the existing-context facade bridge, prerequisite
-propagation, and focused diagonal identity parity/action/text evidence. Add no
-universal compiler, owner, Core/checker/runtime rule, parser route, cast,
-curry, or external coherence field.
+D-080 and final-focused-green. Compact and expanded natural callbacks activate
+the existing scoped endpoint compiler only in contextual profiles; diagonal
+identity has exact compact/expanded/closed Core-type parity, inherited text,
+and internal point/base-arrow/higher action. Historical direct behavior and
+diagnostics remain exact. Route next to the read-only
+`DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` audit. Require one concrete blocked
+consumer before another behavior slice; otherwise graduate this subplan. Add
+no universal compiler, owner, Core/checker/runtime rule, parser route, cast,
+curry, external coherence field, or repeat aggregate.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-02 — DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G final-focused-green.**
+  Compact unary and expanded open-fibre natural callbacks now activate the
+  existing one-slot displayed endpoint compiler in contextual profiles. The
+  unchanged identity constructor therefore accepts the already-owned fibre
+  diagonal; the shared point factorer recovers generic closed identity with
+  exact compact/expanded/closed Core and type. Text inherits the behavior
+  without resolver code, and point plus base-arrow/higher action remain
+  internal. Focused 4/4, historical identity 7/7, effective nearest matrix
+  35/35, static gates, diff hygiene, and bounded kernel check pass. The one
+  required root aggregate was run once and remains non-green only on the known
+  source-digest pins and README-wrap regex; it must not be repeated. Exact
+  rollback-safe semantic checkpoint is pending this synchronized commit. The
+  next row is the read-only 0H graduation audit, not another assumed refactor.
 
 - **2026-08-02 — D-DTTLF-USABILITY-080 approved.** Independent review of
   proposal checkpoint `998f4e4e6977cabdeff5011b6c2e866a09cd8139` confirms

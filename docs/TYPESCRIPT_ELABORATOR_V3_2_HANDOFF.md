@@ -121,13 +121,23 @@
 > activate the existing contextual displayed-endpoint compiler, but compact
 > unary and expanded `lambda^n k. lambda^n a` callbacks do not; consequently
 > identity over the already-working fibre diagonal rejects in both forms. The
-> exact `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` proposal is independently
+> exact `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` proposal was independently
 > approved by
 > [`D-DTTLF-USABILITY-080`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D080_REVIEW.md)
-> and implementation-ready. It adds only contextual-profile endpoint wiring,
-> prerequisite propagation, and focused Core/type/action/inherited-text
-> parity—no owner, Core, parser route, cast, curry, or universal operation
-> table. Exact proposal checkpoint:
+> and is now final-focused-green. Compact unary and expanded open-fibre
+> natural callbacks activate the same one-slot displayed endpoint compiler
+> already used by grouped telescopes. Identity at a fibre diagonal has exact
+> compact/expanded/closed Core and inferred type, inherited text syntax, and
+> internally owned point/base-arrow/higher action. Historical direct behavior
+> and diagnostics remain exact. Focused 4/4, historical identity 7/7,
+> effective nearest matrix 35/35, static gates, and the bounded kernel check
+> pass. The one required root aggregate was run once and remains non-green
+> only on the known source-digest pins and README-wrap regex; do not repeat it.
+> No owner, Core, parser route, cast, curry, or universal operation table was
+> added. The next dependency-ready row is the read-only
+> `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` audit; it must find one concrete
+> blocked consumer before proposing more behavior, otherwise graduate the
+> subplan. Exact proposal checkpoint:
 > `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; exact prior rollback-safe
 > semantic checkpoint: `c55a8d873b7abd49e221c122831ac6a90928b06f`.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are

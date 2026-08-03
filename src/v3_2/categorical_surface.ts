@@ -10715,6 +10715,42 @@ export class CoreCategoricalScopedBuilder {
         };
     }
 
+    /**
+     * Existing one-slot displayed endpoint wiring used by contextual
+     * abstraction profiles. Direct-chain-only profiles deliberately receive
+     * no context and retain their historical rejection boundary.
+     */
+    private unaryDisplayedEndpointContext(
+        baseOrdinal: number,
+        fibreOrdinal: number,
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): CoreCategoricalActiveDisplayedEndpointContext | undefined {
+        if (this.options.displayedContextualAbstraction !== true) {
+            return undefined;
+        }
+        return {
+            baseOrdinal,
+            fibreOrdinal,
+            baseCategory,
+            sourceFamily,
+            wiring: new Map([
+                [
+                    fibreOrdinal,
+                    this.displayedIdentityCompilation(
+                        baseCategory,
+                        sourceFamily,
+                        nodeProvenance
+                    )
+                ]
+            ]),
+            activeOrdinals: new Set([baseOrdinal, fibreOrdinal]),
+            structuralPrerequisites: new Set(),
+            dependentPrerequisites: new Set()
+        };
+    }
+
     private directDisplayedFunctorChain(
         term: InternalCoreCategoricalTerm,
         fibreOrdinal: number,
@@ -16516,12 +16552,13 @@ export class CoreCategoricalScopedBuilder {
         sourceFunctor: KernelExpression,
         targetFunctor: KernelExpression,
         plicity: Plicity,
-        nodeProvenance: Provenance
+        nodeProvenance: Provenance,
+        endpointContext?: CoreCategoricalActiveDisplayedEndpointContext
     ): {
         readonly factored: InternalCoreCategoricalTerm;
         readonly evidence: CoreCategoricalAbstractionEvidence;
     } {
-        if (
+        const bodyMismatchesRequestedComponent =
             body.type.tag !== 'indexed-hom' ||
             body.type.baseIndexOrdinal !== baseOrdinal ||
             body.type.fibreIndexOrdinal !== fibreOrdinal ||
@@ -16544,8 +16581,24 @@ export class CoreCategoricalScopedBuilder {
             !kernelExpressionEquals(
                 body.type.targetFunctor,
                 targetFunctor
-            )
-        ) {
+            );
+        if (bodyMismatchesRequestedComponent) {
+            const contextualIdentityEndpoint =
+                endpointContext !== undefined &&
+                body.node.tag === 'typed-cell-identity'
+                    ? this.compileDirectDisplayedFunctorEndpoint(
+                        body.node.endpoint,
+                        nodeProvenance
+                    )
+                    : undefined;
+            if (contextualIdentityEndpoint?.endpointKind === 'contextual') {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'The contextual displayed-natural identity endpoint ' +
+                        'does not match the requested displayed functor'
+                );
+            }
             this.fail(
                 'UNAVAILABLE_DISPLAYED_ACTION',
                 nodeProvenance,
@@ -16640,14 +16693,16 @@ export class CoreCategoricalScopedBuilder {
                 'natural-base-then-natural-fibre-binder' as const,
             body: bodyIr,
             result: resultIr,
-            structuralPrerequisites: Object.freeze([]),
-            dependentPrerequisites:
+            structuralPrerequisites: Object.freeze([
+                ...(endpointContext?.structuralPrerequisites ?? [])
+            ]),
+            dependentPrerequisites: mergeDependentPrerequisites(
+                [...(endpointContext?.dependentPrerequisites ?? [])],
+                collectDependentPrerequisites(bodyIr),
                 whiskeringOrientation === undefined
-                    ? collectDependentPrerequisites(bodyIr)
-                    : mergeDependentPrerequisites(
-                        collectDependentPrerequisites(bodyIr),
-                        ['displayed-transfor-horizontal-action']
-                    ),
+                    ? []
+                    : ['displayed-transfor-horizontal-action']
+            ),
             provenance: nodeProvenance
         };
         const evidence: CoreCategoricalAbstractionEvidence =
@@ -17193,9 +17248,19 @@ export class CoreCategoricalScopedBuilder {
                 ? fibreToken.node.ordinal
                 : -1;
         const outerScope = [...this.activeTokenOrdinals];
+        const endpointContext = this.unaryDisplayedEndpointContext(
+            baseOrdinal,
+            fibreOrdinal,
+            baseCategory,
+            sourceFamily,
+            nodeProvenance
+        );
         this.activeTokenOrdinals.unshift(baseOrdinal);
         this.activeTokenOrdinals.unshift(fibreOrdinal);
         this.activeDisplayedBases.set(baseOrdinal, baseToken);
+        if (endpointContext !== undefined) {
+            this.activeDisplayedEndpointContexts.unshift(endpointContext);
+        }
         try {
             // Evaluate exactly once; no callback is retained.
             const body = this.requireTerm(
@@ -17218,7 +17283,8 @@ export class CoreCategoricalScopedBuilder {
                     sourceFunctor,
                     targetFunctor,
                     plicity,
-                    nodeProvenance
+                    nodeProvenance,
+                    endpointContext
                 );
             const factored = factorization.factored;
             const closed = deepFreeze({
@@ -17238,6 +17304,15 @@ export class CoreCategoricalScopedBuilder {
                 ]
             );
         } finally {
+            if (
+                endpointContext !== undefined &&
+                this.activeDisplayedEndpointContexts.shift() !==
+                    endpointContext
+            ) {
+                throw new Error(
+                    'Unary displayed endpoint context stack lost its owner'
+                );
+            }
             this.activeDisplayedBases.delete(baseOrdinal);
             this.activeTokenOrdinals.shift();
             this.activeTokenOrdinals.shift();
@@ -17399,6 +17474,13 @@ export class CoreCategoricalScopedBuilder {
             : -1;
         const outerScope = this.activeTokenOrdinals.slice(1);
         const previousBase = this.activeDisplayedBases.get(baseOrdinal);
+        const endpointContext = this.unaryDisplayedEndpointContext(
+            baseOrdinal,
+            fibreOrdinal,
+            context.baseCategory,
+            context.sourceFamily,
+            nodeProvenance
+        );
         if (
             previousBase !== undefined &&
             previousBase !== context.baseToken
@@ -17411,6 +17493,9 @@ export class CoreCategoricalScopedBuilder {
         }
         this.activeTokenOrdinals.unshift(fibreOrdinal);
         this.activeDisplayedBases.set(baseOrdinal, context.baseToken);
+        if (endpointContext !== undefined) {
+            this.activeDisplayedEndpointContexts.unshift(endpointContext);
+        }
         try {
             const body = this.requireTerm(
                 bodyBuilder(
@@ -17434,7 +17519,8 @@ export class CoreCategoricalScopedBuilder {
                     context.sourceFunctor,
                     context.targetFunctor,
                     plicity,
-                    nodeProvenance
+                    nodeProvenance,
+                    endpointContext
                 );
             const factored = this.makeTerm(
                 factorization.factored.node,
@@ -17475,6 +17561,15 @@ export class CoreCategoricalScopedBuilder {
                 }
             );
         } finally {
+            if (
+                endpointContext !== undefined &&
+                this.activeDisplayedEndpointContexts.shift() !==
+                    endpointContext
+            ) {
+                throw new Error(
+                    'Open displayed endpoint context stack lost its owner'
+                );
+            }
             if (previousBase === undefined) {
                 this.activeDisplayedBases.delete(baseOrdinal);
             } else {
