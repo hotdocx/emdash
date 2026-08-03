@@ -246,7 +246,12 @@ The active kernel already owns every layer through generic `comp_fapp0` at
 `Catd_cat K`, and `displayedFunctorLambda` already demonstrates the analogous
 finite recursive chain. The exact `DEPENDENT-SECTION-CHAIN-1AR` proposal below
 therefore extends only the existing section-composition factorer, adds no
-kernel/Core/parser owner, and awaits a separate D-081 review before behavior.
+kernel/Core/parser owner, and is independently approved by
+[`D-DTTLF-USABILITY-081`](./TYPESCRIPT_ELABORATOR_V3_2_DEPENDENT_SECTION_CHAIN_D081_REVIEW.md)
+from immutable proposal checkpoint
+`48394a2005cd8b483ae2de56f070c14d0826d7fd` under the standing unattended-
+review delegation with immediate human supersession. Implementation is now
+dependency-ready.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -557,7 +562,7 @@ It deliberately avoids:
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero semantic delta; canonical contextual-telescope audit selected | final-green 1AI; direct point factorer; generic displayed context fold | Direct/text parity is exact for the single hidden-base/fibre-slot context, while the first remaining semantic usability gap is multiple individually exposed variables over canonical sibling/dependency layers. The dedicated telescope plan owns the read-only context-normal-form versus multi-ordinal architecture audit; parser/browser promotion remains downstream. |
 | `COMPOSITIONAL-NATURAL-BINDER-THROUGH-0H` | complete; scoped subplan graduated with zero 0H behavior delta | final-green contextual telescope/reviewer at `607a026f88bc6d3b9f305ecb21f6630ce7c94950`; dedicated D-074 through D-080 evidence; 1G semantic checkpoint `f1993c2852b91173858bc2ecdf1d00998517dcaf` | Ordinary `lambda^n`, expanded open `lambda^f`/`lambda^n`, compact `lambda^fd`/`lambda^nd`, and grouped displayed brackets now share their exact classifier-appropriate recursive engines. The final audit proves evaluation/nested endpoint identity and higher action without another behavior slice. |
 | `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` | complete; read-only; zero behavior delta | graduated compositional-natural subplan; active kernel/check examples; current public AST and reviewer | Existing reviewer/book binder bodies are covered except multi-constructor integration programs such as arrow induction. The one bounded class-(3) gap is the current checked-negative finite section chain `lambda^n k. GG[k](FF[k](s[k]))`; generic `comp_fapp0` already owns its internal action. |
-| `DEPENDENT-SECTION-CHAIN-1AR` | exact proposal frozen; separate D-081 review pending | completed 0AQ; existing `USABILITY-DEPENDENT-1A` one-layer factorer; existing displayed-functor finite-chain evidence | Recursively factor one rigid closed section leaf under an arbitrary finite nonempty chain of rigid closed displayed-functor fibre applications at the same base index, then fold only through existing `comp_fapp0 (Catd_cat K)`. Preserve the one-layer Core and all fail-closed boundaries; add no owner, transport surface, or general section-action eliminator. |
+| `DEPENDENT-SECTION-CHAIN-1AR` | separately reviewed-approved under D-081; implementation dependency-ready | completed 0AQ; immutable proposal `48394a2005cd8b483ae2de56f070c14d0826d7fd`; existing `USABILITY-DEPENDENT-1A` one-layer factorer; existing displayed-functor finite-chain evidence | Recursively factor one rigid closed section leaf under an arbitrary finite nonempty chain of rigid closed displayed-functor fibre applications at the same base index, then fold only through existing `comp_fapp0 (Catd_cat K)`. Preserve the one-layer Core and all fail-closed boundaries; add no owner, transport surface, or general section-action eliminator. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -671,8 +676,9 @@ if one-layer Core changes, or if the result requires a pointwise equation or
 new semantic owner, reject or revise this proposal instead of adding a special
 case.
 
-No behavior is authorized until a separate immutable D-081 review approves
-this exact gate.
+The proposal is independently approved by
+[`D-DTTLF-USABILITY-081`](./TYPESCRIPT_ELABORATOR_V3_2_DEPENDENT_SECTION_CHAIN_D081_REVIEW.md).
+Its rejection oracle remains exact throughout implementation.
 
 ## Frozen First Gate
 
@@ -8147,8 +8153,11 @@ zero behavior delta. It selects exactly the finite rigid section chain as the
 one missing recursive surface constructor and rejects arrow induction as a
 multi-constructor integration task. Continue only from the frozen
 `DEPENDENT-SECTION-CHAIN-1AR` / D-DTTLF-USABILITY-081 proposal. Require a
-separate immutable review before behavior; do not infer approval merely from
-the audit.
+separate immutable review before behavior. That review now approves the exact
+gate from proposal checkpoint
+`48394a2005cd8b483ae2de56f070c14d0826d7fd` under the standing unattended-
+review delegation with immediate human supersession. Implement only its
+eleven numbered items.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -8166,6 +8175,16 @@ removal, or unrelated cleanup is authorized.
 ```
 
 ## Decision Ledger
+
+- **2026-08-03 — D-DTTLF-USABILITY-081 separately reviewed-approved.** The
+  immutable review of proposal checkpoint
+  `48394a2005cd8b483ae2de56f070c14d0826d7fd` confirms that the nested typed
+  application IR already exists, inner-to-outer generic composition preserves
+  the one-layer Core, exact adjacent classifiers make the recursion sound,
+  and active section action remains internal. Under the standing unattended-
+  review delegation with immediate human supersession, approve exactly the
+  eleven-item `DEPENDENT-SECTION-CHAIN-1AR` gate and no transport, general
+  section-action, parser, kernel/Core, browser/book, or scale expansion.
 
 - **2026-08-03 — CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ complete; exact
   dependent-section chain proposal frozen.** The public AST already covers the
