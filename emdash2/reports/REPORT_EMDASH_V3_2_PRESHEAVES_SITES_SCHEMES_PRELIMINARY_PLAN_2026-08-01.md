@@ -242,9 +242,9 @@ assumption-explicit affine-scheme presentation and a concrete `F2 x F2`
 reviewer. Its 101-line/8-symbol rule-free source and 194-line/14-assertion
 reviewer are focused-, warning-, audit-, catalog-, and exact 108-target
 health-green. The proportional nonduplicative integration remainder is also
-green; the authorized local checkpoint is the active boundary. This is not
-construction of general sheafification, a stalk theory, or general non-affine
-schemes.
+green, and the synchronized implementation is locally checkpointed at
+`68578be`. This is not construction of general sheafification, a stalk theory,
+or general non-affine schemes.
 
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
@@ -5193,8 +5193,8 @@ proportional nonduplicative integration remainder is green through 42 Python
 tests, five document-registry tests, health-snapshot verification,
 shell/source/header/reference checks, book
 evidence/typography/KaTeX/assembly, the zero-unreviewed-clause strict audit,
-and strict catalog verification. The authorized local checkpoint remains
-pending.
+and strict catalog verification. The authorized local checkpoint is recorded
+at `68578be`.
 
 ##### Scope clarification, historical comparison, and non-affine continuation
 
@@ -6089,6 +6089,17 @@ consumer demonstrates that nontransitive unification requires it.
   general scheme category, non-affine gluing, small-site comparison, or
   stalk-local-ring theorem. Treat the TypeScript structure macro only as a
   later authoring convenience.
+- **PSSS-D-117:** keep the non-affine continuation separate from
+  `AffineSchemePresentation`. The first candidate is assumption-explicit: an
+  ambient reflective CommRing-ringed site, a selected covering atlas,
+  pullback/slice ringed presentations carrying affine chart presentations,
+  and whole overlap/cocycle witnesses. Probe whether the existing slice and
+  sheafification owners construct the required pullback capability before
+  fixing the record. Use gluing of two explicit affine charts along a
+  computing localization equivalence as the first consumer. Treat canonical
+  effective gluing, a category of schemes, stalk-local-ring theorems,
+  constructed sheafification, and small/big-site equivalence as later
+  research boundaries rather than opaque MVP fields.
 
 ## 19. Side-Task Ledger
 
@@ -6141,8 +6152,9 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-10dS | Small-site topology and ringed-site comparison | Proposed later; not required by direct big-site MVP | Concrete small-site consumer plus PSSS-10dG/PSSS-08c1 comparison scope |
 | PSSS-11a | Whole assumption-explicit affine structure-sheaf presentation | Promoted 230-line/9-symbol rule-free source and 166-line/9-assertion reviewer; focused quiet/exact-warning/audit/catalog, 104-target exact-content health, and nonduplicative integration gates green; local checkpoint `5ead41c` | Checkpointed PSSS-10dG plus checkpointed PSSS-05c |
 | PSSS-11b | Whole affine localization locality | Promoted source/reviewers, exact warning comparison, strict audit, 1,992-check catalog, 106-target exact-content health, and proportional integration green; local checkpoint `8216f28` | PSSS-11a checkpoint, existing localization restriction/matching owners, and the generic Cat-level selected-left-inverse right law |
-| PSSS-11c | Thin affine-scheme presentation and concrete computing example | Promoted 101-line/8-symbol rule-free source and 194-line/14-assertion `F2 x F2` reviewer; focused/exact-warning/audit/catalog, exact 108-target health, and proportional nonduplicative integration green; local checkpoint pending | PSSS-11a and PSSS-11b checkpoints plus the PSSS-10b concrete atlas |
-| PSSS-11 | Scheme atlas | Active: checkpoint PSSS-11c, then close the recorded historical/feasibility retrospective without expanding implementation into general non-affine gluing | PSSS-11c |
+| PSSS-11c | Thin affine-scheme presentation and concrete computing example | Promoted 101-line/8-symbol rule-free source and 194-line/14-assertion `F2 x F2` reviewer; focused/exact-warning/audit/catalog, exact 108-target health, and proportional nonduplicative integration green; local checkpoint `68578be` | PSSS-11a and PSSS-11b checkpoints plus the PSSS-10b concrete atlas |
+| PSSS-11 | Scheme atlas | Affine MVP complete: PSSS-11c checkpointed and historical/feasibility retrospective recorded; general non-affine implementation remains separately gated by PSSS-D-117 | PSSS-11c |
+| PSSS-11d | Assumption-explicit non-affine presentation and first explicit two-affine gluing consumer | Proposed next gate; architectural feasibility high, canonical construction explicitly out of scope | Pullback/slice reflective-ringed-site owner probe plus checkpointed PSSS-11c |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 
 ## 20. Success Criteria For The Foundation Tranches
