@@ -737,7 +737,7 @@ close CS-05.
 | Supplied global two-chart refinement consumer | Implemented, exact-current through the bounded 124-target health boundary, and locally checkpointed at `4892c33` | It consumes an assumption-explicit global presentation and does not construct a closed non-affine object. |
 | Closed global non-affine example | Good but separate | Selecting or constructing a mathematically meaningful ambient object before `Scheme_cat` exists. |
 | Constructive two-affine gluing | Moderate | Global realization and universal property, not overlap algebra itself. |
-| Topology-local locally-ringed presentation | Implemented assumption-explicitly | It avoids raw joins: invertible zero yields empty coverhood, while an invertible sum returns a selected cover and memberwise Boolean unit branches. Raw support-lattice comparison remains later. |
+| Topology-local locally-ringed presentation | Implemented assumption-explicitly, exact-current through the bounded 128-target health boundary, and locally checkpointed at `c2b53bf` | It avoids raw joins: invertible zero yields empty coverhood, while an invertible sum returns a selected cover and memberwise Boolean unit branches. Raw support-lattice comparison remains later. |
 | Admissible-open or relative-geometry chart contract | Moderate and now explicit | A generic Grothendieck cover does not itself classify chart arrows as open immersions; the narrow internal contract must be selected before public `SchemePresentation` naming. |
 | Stalk-local-ring comparison | Moderate/research | Stalk/point infrastructure and constructive hypotheses. |
 | Small-site restriction/basis comparison | Moderate | Exact basis and topology transport owners. |
@@ -916,7 +916,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-05b | Whole sheaf-basis comparison plus computational ambient-affine realization | Promoted as two transparent rule-free modules; focused/exact-warning/audit/catalog green; exact-current 116-target health completed under the uniform timeout policy; local checkpoints `b4fca9c`, `82d93b5`, and validation-policy checkpoint `023ffbf` | CS-D-018 and CS-04 |
 | CS-06 | Global-first finite-qcqs `SchemePresentation(X)` | Split into CS-06a computational atlas and CS-06b locally-ringed scheme certificate | CS-02/CS-03/CS-05 contracts |
 | CS-06a | Global-first `BinaryAffineCoverPresentation` with constructive cover generation and whole affine realizations | Complete and locally checkpointed at `0f3b379`: three rule-free source layers, three reviewers, exact warning comparison, audit/catalog/authority synchronization, and 122-target resumable health are green | CS-03 binary contract plus CS-05b |
-| CS-06b | Add correct locally-ringed support and, when consumed, generic finite arity | Binary whole-object locally-ringed atlas promoted conservatively; generic finite arity remains consumer-gated and public scheme naming waits for CS-06c | CS-D-025/026 plus CS-06a |
+| CS-06b | Add correct locally-ringed support and, when consumed, generic finite arity | Binary whole-object locally-ringed atlas complete and locally checkpointed at `c2b53bf`: two rule-free sources, two reviewers, exact warning comparison, audit/catalog/authority synchronization, and 128-target resumable health are green. Generic finite arity remains consumer-gated and public scheme naming waits for CS-06c | CS-D-025/026 plus CS-06a |
 | CS-06c | Select admissible-open or relative-geometry chart contract | Active next semantic audit; do not encode an opaque open label or infer openness from sieve membership alone | Public `SchemePresentation` naming |
 | CS-07 | Supplied global two-chart selected-refinement consumer | Complete and locally checkpointed at `4892c33`: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green. A closed genuinely non-affine realization remains separate | CS-06a |
 | CS-08 | Atlas-first two-affine gluing constructor | Later | Whole open-overlap input plus realization/universal property |
@@ -1507,8 +1507,8 @@ Proportional validation is green:
 No full CI, kernel-wide replay, root aggregate, push, merge, history rewrite,
 publication, or worktree cleanup was performed. This completes the bounded
 CS-06b promotion and makes CS-06c's admissible-open or relative-geometry
-contract the next semantic audit. The local feature-checkpoint hash will be
-recorded immediately after exact staged-diff review.
+contract the next semantic audit. The complete feature boundary is locally
+checkpointed as `c2b53bf` (`feat: add topology-local ringed affine covers`).
 
 ## 14. Validation And Checkpoint Contract
 
