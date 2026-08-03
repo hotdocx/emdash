@@ -1554,8 +1554,8 @@ prerequisites.
   projective or non-affine, or replace the later graded construction.  Once
   graded `Proj` exists, the standard `P^1` instance should be compared wholly
   with this explicit boundary.
-- **CS-D-050 — Cover questions compute through higher sieves; eligibility is
-  proposition-valued:** the preferred CS-D-048 route represents a question as
+- **CS-D-050 — Superseded checkpoint: cover questions over unrestricted
+  higher-sieve transformations:** the first CS-D-048 route represented a question as
   `(U,S)` in
   `Sigma_cat(Op_cat(K),HigherSieveClassifier(K))`.  A base arrow carries the
   question to the strict existing higher-sieve pullback, so identity,
@@ -1573,6 +1573,29 @@ prerequisites.
   and section families, or an internally natural glue map; those are the next
   CS-12 gate.  Do not replace that gate with external component squares or
   claim the missing `restriction o glue = id` law prematurely.
+  The implementation checkpoint remains useful evidence, but this semantic
+  conclusion is superseded by CS-D-051: ordinariness and coverhood are not
+  preserved by an arbitrary higher-sieve transformation, and proposition-
+  valuedness proves uniqueness only after target evidence exists.
+- **CS-D-051 — Eligible cover questions are Path-valued object data:** a
+  descent question at `U` is
+  `Sigma(R:Sieve(K,U),groth_topology_covers(T,U,R))`.  This retains the
+  Cat-valued higher sieve inside `R`, but fibre arrows are paths between
+  eligible questions rather than arbitrary transformations between higher
+  sieves.  A primitive whole classifier over `Op_cat(K)` owns identity,
+  composition, path action, and coherence.  Its selected stable sieve
+  observer computes under base transport to `sieve_pullback(p,R)`; the cover
+  proof is obtained from the internally transported pair and agrees, by
+  proposition uniqueness, with `groth_topology_pullback`.  Stable sieve and
+  cover observers are internally compared with the underlying Sigma
+  projections, so the runtime owner does not introduce a disconnected record
+  semantics.  This narrow observer produces no new critical-pair or inferred-
+  slot diagnostic; a rejected direct `fapp1_fapp0` action rule produced ten
+  new diagnostics, and a rejected raw `sigma_Fst` commuting bridge produced
+  one product-projection overlap.  The extension and inclusion route through
+  the existing ordinary-sieve owners.  The next gate remains a whole varying-
+  extension/matching/section construction and a whole internal glue map; no
+  external component naturality fields or premature locality claim is added.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1603,7 +1626,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`; and the preferred internal covering-question/evidence layer is checkpointed at `c091856`. Higher-sieve pullback computes strictly, while ordinary-and-covering eligibility is a whole proposition-valued family whose canonical action agrees proof-time with topology pullback. The principal-BNat bridge remains frozen. | Construct the whole varying-extension owner and derive matching/section reindexing and glue naturality over eligible questions; only then derive locality, constructed-sheaf packaging, whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`; and the first internal covering-question experiment is checkpointed at `c091856`. Its unrestricted higher-sieve eligibility family is superseded by the green CS-D-051 corrective tranche: eligible ordinary covering sieves are object data in a Path-valued family, and selected sieve pullback computes without new warnings. The principal-BNat bridge remains frozen. | Checkpoint CS-D-051, then construct the whole varying-extension owner and derive matching/section reindexing and glue naturality over eligible questions; only then derive locality, constructed-sheaf packaging, whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -3004,6 +3027,103 @@ whole internal families/maps over eligible questions.  Until that succeeds,
 the direct completion still has only `glue o restriction = id`; neither
 `restriction o glue = id`, `IsTopologyLocalPsh`, constructed-sheaf packaging,
 nor sheafification universality has been established.
+
+### 13.22 CS-12g1 eligible-question semantic correction — 2026-08-03
+
+The post-checkpoint audit found that the first CS-12g total was too broad.
+`DirectCoverQuestionEvidence_catd(T)` was postulated over the total of every
+higher sieve and every higher-sieve transformation.  An arbitrary such
+transformation need not preserve pointwise subterminality or target
+coverhood.  Consequently the source evidence may be inhabited while the
+target evidence is empty.  Proposition-valuedness then supplies uniqueness
+of two target witnesses, but it cannot manufacture the missing target
+witness.  The old module typechecked because its primitive displayed family
+asserted that action; that was not sufficient mathematical justification.
+
+The corrective representation makes eligibility object data:
+
+```text
+DirectCoverQuestionData(T,U)
+  = Sigma(R : Sieve(K,U), Covers_T(U,R)),
+
+DirectCoverQuestionClassifier(T)[U]
+  = Path_cat(DirectCoverQuestionData(T,U)).
+```
+
+Ordinary `Sieve` remains the pointwise-subterminal specialization of the
+existing Cat-valued higher-sieve carrier.  Thus this correction does not
+discard the higher representation.  It says only that ordinary
+sheafification quantifies over the ordinary covered fragment and that arrows
+inside its question fibres are paths, not arbitrary higher-sieve
+transformations.  A future higher/lax sheaf theory may quantify over a
+different higher-descent classifier and weighted cones; it should not be
+obtained by silently renaming this ordinary topology interface.
+
+One primitive whole family over `Op_cat(K)` owns the contravariant action and
+all functorial/higher coherence.  Two selected semantic projections expose
+the sieve and cover witness of an eligible question.  Constructor beta is
+narrow, and internal Sigma-elimination/pathover theorems compare both
+projections with the literal dependent-pair view.  Under base transport only
+the sieve observer computes:
+
+```text
+question_sieve(p^*q)  -->  sieve_pullback(p, question_sieve(q)).
+```
+
+The cover observer of `p^*q` is already well typed at that computed sieve;
+proposition uniqueness compares it with the explicit
+`groth_topology_pullback` witness.  No runtime rule rebuilds dependent proof
+fields.  The question extension and inclusion now route directly through the
+existing ordinary-sieve extension and inclusion, so there is still one
+matching/restriction representation.
+
+Three probes determined the selected normal form:
+
+1. a direct rule exposing the whole classifier action as `path_map_func`
+   typechecked but added ten critical-pair diagnostics around generic
+   functorial action;
+2. a raw `sigma_Fst(fapp0(...))` commuting bridge reduced the footprint to
+   one new unjoinable overlap with generic product-valued functor projection,
+   but violated the preferred projection-owner boundary; and
+3. the dedicated eligible-question sieve observer typechecks with the exact
+   inherited warning inventory: 1,020 unjoinable critical-pair diagnostics
+   and 159 replaceable-pattern diagnostics, with zero new warnings.
+
+The corrected 237-line source has twelve public symbols and four narrow
+rules.  Its 118-line reviewer has ten assertions covering literal projection
+beta, internal agreement with Sigma projection, fibre computation, computing
+sieve pullback, proof-time cover comparison, exact reuse of ordinary-sieve
+extension/inclusion, and retention of the literal base arrow.  Focused quiet
+and warning-enabled checks pass under the uniform 90-second ceiling.  Both
+warning-enabled targets retain exactly the inherited 1,179-warning inventory:
+1,020 unjoinable critical-pair diagnostics and 159 replaceable-pattern
+diagnostics, with zero new warning.
+
+The strict LHS audit, default kernel audit, source TOC, active-reference and
+report-header lints, strict catalog check, and whitespace hygiene are green;
+catalog regeneration produced no tracked change.  Exact-current registered
+health is green for all 154 targets.  Because this correction replaces an
+existing registered source, the exact resumable-health identity changed and
+the refresh honestly reran all 154 targets rather than reusing an incompatible
+state.  The corrected source and reviewer completed in 5.546 and 4.725
+seconds.  The resulting source-metrics snapshot is
+`sha256:6ce14e6a1deff724bf56bb009ced0bb9084dbbb4deabdaeb8f5c51170b465376`
+and checked-content snapshot is
+`sha256:64a2b30c14575dc2c7f768314b5a2a510c7f73fb7ff79ebcba1e6428c5fb081b`.
+No separate full kernel check, examples aggregate, full CI, root aggregate,
+push, merge, history rewrite, publication, or worktree cleanup was performed.
+The bounded corrective tranche is green and ready for its authorized local
+checkpoint.
+
+This correction strengthens rather than lengthens the sheafification road.
+The next semantic owner is the whole varying extension over this eligible
+question category, followed by internally reindexed matching and section
+families and one whole glue transformation.  The decisive locality law is
+still `restriction o glue = id`; after that, completion locality, constructed-
+sheaf packaging, whole Hom uniqueness, and functorial reflector assembly
+remain the ordered gates.  Left exactness, CommRing lifting, and higher/lax
+descent are later strength, not hidden prerequisites for the first ordinary-
+sieve reflector.
 
 ## 14. Validation And Checkpoint Contract
 

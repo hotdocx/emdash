@@ -34,7 +34,7 @@ the transparent native equality-valued evidence-property and finite-dimension tr
 extension is `emdash3_2_eq1_evidence_property.lp`;
 the set-truncated sequential telescope categorical-HIT localization extension
 is `emdash3_2_telescope_localization_hit.lp`;
-the whole internal covering-question and proposition-valued eligibility
+the whole Path-valued eligible-cover-question and computing pullback
 extension is `emdash3_2_direct_cover_questions.lp`;
 the whole direct-cover oracle-algebra and locality-forgetful extension is
 `emdash3_2_direct_cover_algebras.lp`;
@@ -532,15 +532,16 @@ Use the following order:
     one-map categorical-HIT localization, not an ordinary-sieve topology,
     presheaf reflector, sheafification, arbitrary-site constructor, or
     CommRing-valued lift;
-59. `emdash3_2_direct_cover_questions.lp` for the whole internal category of
-    higher-sieve questions and its proposition-valued ordinary-and-covering
-    eligibility family.  Higher-sieve pullback retains the strict existing
-    action; canonical eligibility transport agrees propositionally with the
-    explicit topology pullback, without reconstructing proof fields at
-    runtime.  Its object-level extension and inclusion specialize exactly to
-    the existing ordinary-sieve owners.  It does not yet construct a whole
-    varying-extension functor, matching/section families, glue naturality,
-    locality, or sheafification;
+59. `emdash3_2_direct_cover_questions.lp` for the whole Path-valued family of
+    eligible ordinary covering sieves over `Op_cat(K)`. Ordinary sieves retain
+    their Cat-valued higher-sieve carrier, while fibre arrows are paths rather
+    than arbitrary higher-sieve transformations. The selected sieve observer
+    computes under base pullback; the internal cover proof agrees
+    propositionally with explicit topology pullback, without reconstructing
+    proof fields at runtime. Its object-level extension and inclusion reuse
+    exactly the existing ordinary-sieve owners. It does not yet construct a
+    whole varying-extension functor, matching/section families, glue
+    naturality, locality, or sheafification;
 60. `emdash3_2_direct_cover_algebras.lp` for the transparent rule-free whole
     oracle structure at covering ordinary sieves: glue is a functor between
     matching and section hom-categories, silent is one whole endofunctor

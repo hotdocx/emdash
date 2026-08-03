@@ -1,195 +1,237 @@
 /*
   Whole internal questions for ordinary covering-sieve descent.
 
-  The computational question at U is a higher sieve S.  These questions
-  already form the strict presheaf `HigherSieveClassifier(K)`, so pullback,
-  identity, composition, and higher action stay at one existing whole owner.
-  The statement that S is ordinary and covering is proposition-valued
-  eligibility evidence over that question.
+  A question at U is an ordinary sieve R together with evidence that R covers
+  U.  Ordinary sieves retain their Cat-valued higher-sieve carrier, but the
+  question fibre is Path-valued: arbitrary higher-sieve transformations do
+  not incorrectly transport ordinary-and-covering evidence.
 
-  Pullback computes on the higher-sieve data.  The eligibility family owns
-  arbitrary action and coherence internally; at the canonical pullback arrow
-  its action agrees propositionally with the explicit topology operation.
-  No runtime proof reconstruction, external naturality square, ordinary-
-  sieve package eta, glue operation, or sheafification claim is introduced.
+  One whole family over Op(K) owns pullback, identity, composition, and all
+  higher coherence.  Its stable sieve projection computes to ordinary-sieve
+  pullback.  The transported cover proof stays internal and agrees by proof
+  irrelevance with explicit Grothendieck pullback.  No external naturality
+  square, runtime proof reconstruction, glue operation, or sheafification
+  claim is introduced.
 */
 
 require open emdash.emdash3_2_sieve_extensions;
 
-// Proposition-valued eligibility of one internal higher-sieve question.
-symbol DirectCoverQuestionEvidence
+// Eligible descent question at U: an ordinary covering sieve.
+symbol DirectCoverQuestionData
   [K : Cat]
   (T : τ (@GrothTopology K))
-  [U : τ (Obj K)]
-  (S : τ (@HigherSieve K U))
+  (U : τ (Obj K))
   : Grpd
-≔ `Σ_ ordinary : τ (@IsOrdinarySieve K U S),
-    @groth_topology_covers
-      K T U (@sieve_intro K U S ordinary);
-
-// Both retained eligibility witnesses are properties.
-symbol direct_cover_question_evidence_is_prop
-  [K : Cat]
-  (T : τ (@GrothTopology K))
-  [U : τ (Obj K)]
-  (S : τ (@HigherSieve K U))
-  : τ (IsPropGrpd (@DirectCoverQuestionEvidence K T U S))
-≔ @is_trunc_sigma
-    trunc_minus_one
-    (@IsOrdinarySieve K U S)
-    (λ ordinary : τ (@IsOrdinarySieve K U S),
-      @groth_topology_covers
-        K T U (@sieve_intro K U S ordinary))
-    (@is_ordinary_sieve_evidence_is_prop K U S)
-    (λ ordinary : τ (@IsOrdinarySieve K U S),
-      @covers_is_prop
-        K
-        (@groth_topology_cover_predicate K T)
-        U
-        (@sieve_intro K U S ordinary));
-
-// Explicit pullback of eligibility through ordinary-sieve stability.
-symbol direct_cover_question_evidence_pullback
-  [K : Cat]
-  (T : τ (@GrothTopology K))
-  [V U : τ (Obj K)]
-  (p : τ (Hom K V U))
-  (S : τ (@HigherSieve K U))
-  (e : τ (@DirectCoverQuestionEvidence K T U S))
-  : τ (@DirectCoverQuestionEvidence
-      K T V (@higher_sieve_pullback K V U p S))
-≔ @Struct_sigma
-    (@IsOrdinarySieve
-      K V (@higher_sieve_pullback K V U p S))
-    (λ ordinary : τ (@IsOrdinarySieve
-        K V (@higher_sieve_pullback K V U p S)),
-      @groth_topology_covers
-        K T V
-        (@sieve_intro
-          K V (@higher_sieve_pullback K V U p S) ordinary))
-    (@ordinary_sieve_pullback_evidence
-      K V U p S (sigma_Fst e))
-    (@groth_topology_pullback
-      K T U V p
-      (@sieve_intro K U S (sigma_Fst e))
-      (sigma_Snd e));
-
-// Ambient dependent-sum extension of the higher-sieve question.
-symbol direct_cover_question_extension_psh
-  [K : Cat]
-  [U : τ (Obj K)]
-  (S : τ (@HigherSieve K U))
-  : τ (@Psh K)
-≔ @FibrewiseSigma_catd
-    (Op_cat K)
-    (@yoneda_psh K U)
-    S;
-
-// Whole inclusion of that extension into the represented question object.
-symbol direct_cover_question_extension_inclusion
-  [K : Cat]
-  [U : τ (Obj K)]
-  (S : τ (@HigherSieve K U))
-  : τ (Hom
-      (@Psh_cat K)
-      (@direct_cover_question_extension_psh K U S)
-      (@yoneda_psh K U))
-≔ @fibrewise_sigma_proj1_funcd
-    (Op_cat K)
-    (@yoneda_psh K U)
-    S;
-
-// Whole base of questions: dependent pairs (U,S) over the strict classifier.
-symbol DirectCoverQuestion_cat
-  (K : Cat)
-  : Cat
-≔ @Sigma_cat (Op_cat K) (@HigherSieveClassifier K);
-
-// Canonical question arrow carrying S to its strict higher-sieve pullback.
-symbol direct_cover_question_pullback_arrow
-  [K : Cat]
-  [V U : τ (Obj K)]
-  (p : τ (Hom K V U))
-  (S : τ (@HigherSieve K U))
-  : τ (Hom
-      (@DirectCoverQuestion_cat K)
-      (Struct_sigma U S)
-      (Struct_sigma V (@higher_sieve_pullback K V U p S)))
-≔ @sigma_transport_arrow
-    (Op_cat K)
-    (@HigherSieveClassifier K)
-    U V p S;
+≔ `Σ_ R : τ (@Sieve K U),
+    @groth_topology_covers K T U R;
 
 /*
-  Whole eligibility family over all internal questions.  Its arbitrary arrow
-  action and all higher coherence are owned here.  Only fibres compute; the
-  proof-valued action is compared propositionally below.
+  Stable projections are selected runtime observers for the question record.
+  The paths below identify them internally with the underlying Sigma view.
 */
-injective symbol DirectCoverQuestionEvidence_catd
+injective symbol direct_cover_question_sieve
   [K : Cat]
   (T : τ (@GrothTopology K))
-  : τ (Catd (@DirectCoverQuestion_cat K));
+  (U : τ (Obj K))
+  (q : τ (@DirectCoverQuestionData K T U))
+  : τ (@Sieve K U);
 
-rule @fapp0
-      _ Cat_cat
-      (@DirectCoverQuestionEvidence_catd $K $T)
-      (Struct_sigma $U $S)
-  ↪ Path_cat (@DirectCoverQuestionEvidence $K $T $U $S);
+rule @direct_cover_question_sieve _ _ _ (Struct_sigma $R _)
+  ↪ $R;
 
-/*
-  At a canonical question pullback, internal evidence action agrees with the
-  explicit topology operation.  The target is a proposition, so uniqueness
-  derives the comparison without a runtime proof-reconstruction rule.
-*/
-symbol direct_cover_question_evidence_action_agrees
+injective symbol direct_cover_question_cover
   [K : Cat]
   (T : τ (@GrothTopology K))
-  [V U : τ (Obj K)]
-  (p : τ (Hom K V U))
-  (S : τ (@HigherSieve K U))
-  (e : τ (@DirectCoverQuestionEvidence K T U S))
+  (U : τ (Obj K))
+  (q : τ (@DirectCoverQuestionData K T U))
+  : τ (@groth_topology_covers
+      K T U (@direct_cover_question_sieve K T U q));
+
+rule @direct_cover_question_cover _ _ _ (Struct_sigma _ $cover)
+  ↪ $cover;
+
+// The selected sieve observer agrees with ordinary Sigma projection.
+symbol direct_cover_question_sieve_sigma_agrees
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  (U : τ (Obj K))
+  (q : τ (@DirectCoverQuestionData K T U))
   : τ (@=
-      (@DirectCoverQuestionEvidence
-        K T V (@higher_sieve_pullback K V U p S))
+      (@Sieve K U)
+      (@direct_cover_question_sieve K T U q)
+      (sigma_Fst q))
+≔ @sigma_ind
+    (@Sieve K U)
+    (λ R : τ (@Sieve K U), @groth_topology_covers K T U R)
+    (λ q : τ (@DirectCoverQuestionData K T U),
+      @= (@Sieve K U)
+        (@direct_cover_question_sieve K T U q)
+        (sigma_Fst q))
+    (λ R : τ (@Sieve K U),
+      λ _ : τ (@groth_topology_covers K T U R),
+        @eq_refl (@Sieve K U) R)
+    q;
+
+// The selected cover observer agrees dependently with Sigma projection.
+symbol direct_cover_question_cover_sigma_agrees
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  (U : τ (Obj K))
+  (q : τ (@DirectCoverQuestionData K T U))
+  : τ (@PathOver
+      (@Sieve K U)
+      (λ R : τ (@Sieve K U), @groth_topology_covers K T U R)
+      (@direct_cover_question_sieve K T U q)
+      (sigma_Fst q)
+      (@direct_cover_question_sieve_sigma_agrees K T U q)
+      (@direct_cover_question_cover K T U q)
+      (sigma_Snd q))
+≔ @prop_family_pathover
+    (@Sieve K U)
+    (λ R : τ (@Sieve K U), @groth_topology_covers K T U R)
+    (λ R : τ (@Sieve K U),
+      @covers_is_prop K (@groth_topology_cover_predicate K T) U R)
+    (@direct_cover_question_sieve K T U q)
+    (sigma_Fst q)
+    (@direct_cover_question_sieve_sigma_agrees K T U q)
+    (@direct_cover_question_cover K T U q)
+    (sigma_Snd q);
+
+/*
+  Path-valued presheaf of eligible questions.  The primitive whole owner is
+  justified by Grothendieck pullback stability; generic functor action owns
+  its coherence.  Only its computational sieve observation is selected.
+*/
+injective symbol DirectCoverQuestionClassifier
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  : τ (Catd (Op_cat K));
+
+rule @fapp0 _ Cat_cat (@DirectCoverQuestionClassifier $K $T) $U
+  ↪ Path_cat (@DirectCoverQuestionData $K $T $U);
+
+// Pullback computes on the ordinary-sieve part of an eligible question.
+rule @direct_cover_question_sieve
+      $K $T $V
       (@fapp0
-        (Path_cat (@DirectCoverQuestionEvidence K T U S))
-        (Path_cat (@DirectCoverQuestionEvidence
-          K T V (@higher_sieve_pullback K V U p S)))
-        (@catd_transport_func
-          (@DirectCoverQuestion_cat K)
-          (@DirectCoverQuestionEvidence_catd K T)
-          (Struct_sigma U S)
-          (Struct_sigma V (@higher_sieve_pullback K V U p S))
-          (@direct_cover_question_pullback_arrow K V U p S))
-        e)
-      (@direct_cover_question_evidence_pullback K T V U p S e))
+        _
+        _
+        (@fapp1_fapp0
+          (Op_cat $K)
+          Cat_cat
+          (@DirectCoverQuestionClassifier $K $T)
+          $U $V $p)
+        $q)
+  ↪ @sieve_pullback
+      $K $V $U $p (@direct_cover_question_sieve $K $T $U $q);
+
+// The actual coherent pullback question selected by the whole family.
+symbol direct_cover_question_internal_pullback
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (q : τ (@DirectCoverQuestionData K T U))
+  : τ (@DirectCoverQuestionData K T V)
+≔ @fapp0
+    (Path_cat (@DirectCoverQuestionData K T U))
+    (Path_cat (@DirectCoverQuestionData K T V))
+    (@catd_transport_func
+      (Op_cat K)
+      (@DirectCoverQuestionClassifier K T)
+      U V p)
+    q;
+
+/*
+  The internally transported proof agrees with explicit topology pullback.
+  This is equality evidence in a proposition, not a runtime proof-field rule.
+*/
+symbol direct_cover_question_cover_action_agrees
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (q : τ (@DirectCoverQuestionData K T U))
+  : τ (@=
+      (@groth_topology_covers
+        K T V (@sieve_pullback K V U p
+          (@direct_cover_question_sieve K T U q)))
+      (@direct_cover_question_cover
+        K T V
+        (@direct_cover_question_internal_pullback K T V U p q))
+      (@groth_topology_pullback
+        K T U V p
+        (@direct_cover_question_sieve K T U q)
+        (@direct_cover_question_cover K T U q)))
 ≔ @is_contr_center
     (@=
-      (@DirectCoverQuestionEvidence
-        K T V (@higher_sieve_pullback K V U p S))
-      (@fapp0
-        (Path_cat (@DirectCoverQuestionEvidence K T U S))
-        (Path_cat (@DirectCoverQuestionEvidence
-          K T V (@higher_sieve_pullback K V U p S)))
-        (@catd_transport_func
-          (@DirectCoverQuestion_cat K)
-          (@DirectCoverQuestionEvidence_catd K T)
-          (Struct_sigma U S)
-          (Struct_sigma V (@higher_sieve_pullback K V U p S))
-          (@direct_cover_question_pullback_arrow K V U p S))
-        e)
-      (@direct_cover_question_evidence_pullback K T V U p S e))
-    ((@direct_cover_question_evidence_is_prop
-      K T V (@higher_sieve_pullback K V U p S))
-      (@fapp0
-        (Path_cat (@DirectCoverQuestionEvidence K T U S))
-        (Path_cat (@DirectCoverQuestionEvidence
-          K T V (@higher_sieve_pullback K V U p S)))
-        (@catd_transport_func
-          (@DirectCoverQuestion_cat K)
-          (@DirectCoverQuestionEvidence_catd K T)
-          (Struct_sigma U S)
-          (Struct_sigma V (@higher_sieve_pullback K V U p S))
-          (@direct_cover_question_pullback_arrow K V U p S))
-        e)
-      (@direct_cover_question_evidence_pullback K T V U p S e));
+      (@groth_topology_covers
+        K T V (@sieve_pullback K V U p
+          (@direct_cover_question_sieve K T U q)))
+      (@direct_cover_question_cover
+        K T V
+        (@direct_cover_question_internal_pullback K T V U p q))
+      (@groth_topology_pullback
+        K T U V p
+        (@direct_cover_question_sieve K T U q)
+        (@direct_cover_question_cover K T U q)))
+    ((@covers_is_prop
+      K
+      (@groth_topology_cover_predicate K T)
+      V
+      (@sieve_pullback K V U p
+        (@direct_cover_question_sieve K T U q)))
+      (@direct_cover_question_cover
+        K T V
+        (@direct_cover_question_internal_pullback K T V U p q))
+      (@groth_topology_pullback
+        K T U V p
+        (@direct_cover_question_sieve K T U q)
+        (@direct_cover_question_cover K T U q)));
+
+// Ambient extension of the ordinary sieve selected by an eligible question.
+symbol direct_cover_question_extension_psh
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  [U : τ (Obj K)]
+  (q : τ (@DirectCoverQuestionData K T U))
+  : τ (@Psh K)
+≔ @ordinary_sieve_extension_psh
+    K U (@direct_cover_question_sieve K T U q);
+
+// Whole inclusion of the selected extension into its representable object.
+symbol direct_cover_question_extension_inclusion
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  [U : τ (Obj K)]
+  (q : τ (@DirectCoverQuestionData K T U))
+  : τ (Hom
+      (@Psh_cat K)
+      (@direct_cover_question_extension_psh K T U q)
+      (@yoneda_psh K U))
+≔ @ordinary_sieve_extension_inclusion
+    K U (@direct_cover_question_sieve K T U q);
+
+// Whole category of eligible questions varying contravariantly in the base.
+symbol DirectCoverQuestion_cat
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  : Cat
+≔ @Sigma_cat (Op_cat K) (@DirectCoverQuestionClassifier K T);
+
+// Canonical total arrow over p, using the family's actual pullback question.
+symbol direct_cover_question_pullback_arrow
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (q : τ (@DirectCoverQuestionData K T U))
+  : τ (Hom
+      (@DirectCoverQuestion_cat K T)
+      (Struct_sigma U q)
+      (Struct_sigma V
+        (@direct_cover_question_internal_pullback K T V U p q)))
+≔ @sigma_transport_arrow
+    (Op_cat K)
+    (@DirectCoverQuestionClassifier K T)
+    U V p q;
