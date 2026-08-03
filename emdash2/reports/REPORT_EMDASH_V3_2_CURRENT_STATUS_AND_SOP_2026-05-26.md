@@ -320,10 +320,19 @@ detailed probe evidence.
   reflective slice on `K/X` retains topology, sheaf semantics, and one whole
   `DefIso` to the computing ambient restriction; topology-local ring
   computation is attached to that target. Pairing it with the existing binary
-  affine atlas produces `BinaryLocallyRingedAffineCoverPresentation`. The
-  conservative name records that arbitrary cover arrows in a generic site
-  are not yet an admissible-open class; no overlap/cocycle field, gluing
-  constructor, or semantic scheme category is added.
+  affine atlas produces the fibrewise
+  `BinaryLocallyRingedAffineCoverPresentation` certificate. The supplied site
+  determines admissible chart geometry; the layer adds no overlap/cocycle
+  field, gluing constructor, classical-open comparison, or semantic scheme
+  category.
+- `emdash3_2_commutative_algebra_site_relative_schemes.lp`: downstream
+  transparent, rule-free global usability layer. Its dependent total retains
+  one `ReflectiveCommRingedSpaceCover` and the existing locally-ringed binary
+  affine-cover certificate. Structure presheaf, restriction, selected cover,
+  chart realizations, overlap compatibility, and cocycle behavior remain at
+  existing whole owners. This is a site-relative computational scheme
+  presentation, not atlas-first gluing, an unqualified classical or Zeuner
+  scheme, or a representation-independent `Scheme_cat`.
 - `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
   functor-of-points/basic-open layer. The existing Yoneda presheaf represents
   `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and

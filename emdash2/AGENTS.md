@@ -99,6 +99,8 @@ the executable selected-generator refinement extension is
 `emdash3_2_commutative_algebra_affine_cover_refinements.lp`;
 the whole-object locally-ringed affine-cover presentation extension is
 `emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp`;
+the total binary site-relative computational-scheme presentation extension is
+`emdash3_2_commutative_algebra_site_relative_schemes.lp`;
 the affine Yoneda functor-of-points, semantic basic-open, and
 localization-representability extension is
 `emdash3_2_commutative_algebra_affine_points.lp`;
@@ -446,20 +448,26 @@ Use the following order:
     slice owns topology, sheaf semantics, and one whole `DefIso`; topology-
     local computation runs on its computing ambient-restriction target. The
     resulting `BinaryLocallyRingedAffineCoverPresentation` pairs this with the
-    existing generated binary affine atlas but deliberately stops short of a
-    scheme claim until an admissible-open or relative-geometry contract is
-    selected;
-49. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+    existing generated binary affine atlas as the fibrewise site-relative
+    certificate. It adds no gluing, open-classifier, or
+    representation-independent scheme claim;
+49. `emdash3_2_commutative_algebra_site_relative_schemes.lp` for the
+    transparent rule-free dependent total of one global reflective ringed
+    cover and its existing locally-ringed binary affine-atlas certificate.
+    Whole restriction, overlap compatibility, and chart realizations remain
+    at existing owners; it adds no transition/cocycle data, gluing theorem,
+    classical-open comparison, or semantic category of schemes;
+50. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-50. `emdash3_2_checks.lp` for executable regression statements;
-51. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+51. `emdash3_2_checks.lp` for executable regression statements;
+52. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-52. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-53. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+53. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+54. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-54. `reports/INDEX.md` for task-specific plans and decision records.
-55. `book/book.json` and `book/evidence.json` for book source
+55. `reports/INDEX.md` for task-specific plans and decision records.
+56. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

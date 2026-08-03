@@ -10,12 +10,13 @@
   branches retain their existing executable owners.
 
   Pairing this whole-object presentation with the existing globally generated
-  binary affine cover yields a locally-ringed affine-cover presentation.  The
-  name deliberately stops short of `SchemePresentation`: on an arbitrary
-  Grothendieck site a covering-sieve member need not be an open immersion, and
-  no admissible-open or relative-geometry class is currently retained.  This
-  transparent module adds no rule, unifier, external coherence field, overlap
-  field, cocycle field, gluing constructor, or category of schemes.
+  binary affine cover yields the fibrewise certificate for a site-relative
+  computational scheme presentation.  The supplied site determines its
+  admissible chart geometry; this layer does not claim a classical Zariski or
+  Zeuner compact-open comparison.  The downstream dependent total retains the
+  global object and this certificate together.  This transparent module adds
+  no rule, unifier, external coherence field, overlap field, cocycle field,
+  gluing constructor, or representation-independent category of schemes.
 */
 
 require open emdash.emdash3_2_commutative_algebra_local_ringed_sites;
@@ -171,10 +172,12 @@ symbol reflective_comm_ringed_whole_object_local_ring
 ≔ sigma_Snd L;
 
 /*
-  Locally-ringed binary affine-cover presentation.
+  Fibrewise locally-ringed binary affine-cover certificate.
 
-  This is the completed local-support plus atlas package, but it is not yet
-  promoted to the representation-independent semantic name `Scheme`.
+  This is the completed local-support plus atlas package over a retained
+  global cover P.  It is totaled downstream as a site-relative computational
+  scheme presentation, without claiming the representation-independent
+  semantic name `Scheme`.
 */
 symbol BinaryLocallyRingedAffineCoverPresentation
   [K : Cat]

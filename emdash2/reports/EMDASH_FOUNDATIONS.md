@@ -2298,11 +2298,31 @@ BinaryLocallyRingedAffineCoverPresentation(P)
       BinaryAffineCoverPresentation(P).
 ```
 
-This completes the locally-ringed plus computational-atlas package without
-overclaiming a scheme. In a generic Grothendieck site, cover membership alone
-does not classify a chart arrow as an open immersion. A later admissible-open
-or relative-geometry contract must settle that semantic boundary before the
-public name `SchemePresentation` is selected.
+This is the fibrewise locally-ringed plus computational-atlas certificate over
+the retained global object. Its site-relative semantics do not require a
+second generic `IsOpen` field: the supplied site and topology already select
+the admissible chart geometry. In particular, only the two selected cover
+generators are required to carry affine realizations. Arbitrary arrows in the
+sieve they generate are refinements and need not themselves have affine
+domains.
+
+The end-user total is
+
+```text
+BinarySiteRelativeSchemePresentation(K)
+  = Sigma P : ReflectiveCommRingedSpaceCover(K),
+      BinaryLocallyRingedAffineCoverPresentation(P).
+```
+
+It retains the global object and its structure presheaf once, together with
+the topology-local capability, constructively generated binary cover, and the
+two whole affine chart realizations. Restriction, overlap, and cocycle
+compatibility are inherited from the already-global object and whole generic
+composition; they are not record fields. This is a computational scheme
+presentation relative to the selected site. It does not by itself identify
+that site with the classical Zariski site, supply Zeuner's compact-open
+classifier, construct the global object by atlas gluing, or define a
+representation-independent category of schemes.
 
 ### Complementary-Idempotent Affine Atlas
 

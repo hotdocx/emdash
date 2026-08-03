@@ -64,6 +64,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_affine_cover_presentations.lp"),
     Path("emdash3_2_commutative_algebra_affine_cover_refinements.lp"),
     Path("emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp"),
+    Path("emdash3_2_commutative_algebra_site_relative_schemes.lp"),
     Path("emdash3_2_commutative_algebra_affine_points.lp"),
     Path("emdash3_2_commutative_algebra_affine_intersections.lp"),
     Path("emdash3_2_commutative_algebra_affine_atlas.lp"),

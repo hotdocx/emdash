@@ -169,8 +169,18 @@ transparent rule-free whole-object consumer. The supplied reflective slice
 owns topology, sheaf semantics, and a whole `DefIso`; local-ring computation
 runs on the computing ambient restriction. Pairing that boundary with the
 existing binary affine atlas yields
-`BinaryLocallyRingedAffineCoverPresentation`, deliberately not yet a semantic
-scheme because arbitrary site-cover arrows are not classified as open.
+`BinaryLocallyRingedAffineCoverPresentation`, the fibrewise certificate for a
+site-relative computational scheme presentation. It adds no independent open
+label, overlap/cocycle payload, gluing constructor, or semantic scheme
+category.
+`emdash3_2_commutative_algebra_site_relative_schemes.lp` is the transparent
+rule-free dependent total of one global reflective CommRinged cover and that
+locally-ringed binary affine-cover certificate. It exposes the existing whole
+structure presheaf, local capability, selected cover, charts, and affine
+realizations without duplicating restriction or compatibility data. The site
+determines admissible chart geometry; classical Zariski/Zeuner comparison,
+atlas-first construction, and a representation-independent `Scheme_cat`
+remain separate.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
 derived native equality-valued hom-action/groupoidality extension. It also
 exposes the existing transparent Cat-level consequence that the selected left

@@ -891,18 +891,22 @@ LocalCover_T,O(s,t)               : covering sieve with branches
 LocalRing_T(O)                    : local nontriviality and unit splitting
 WholeLocal(P)                     : local presentation on the supplied K/X
 BinLocAffCover(P;L,Q)             : locally-ringed binary affine atlas
+BinRelScheme_K(P;L,Q)             : total site-relative scheme presentation
 ```
 
 The literal owners are `empty_sieve`, `CommRingPshLocalUnitBranch`,
 `CommRingPshLocalUnitCover`, `CommRingPshTopologyLocalRingPresentation`,
 `ReflectiveCommRingedWholeObjectLocalPresentation`, and
-`BinaryLocallyRingedAffineCoverPresentation`. An invertible sum returns an
-actual covering sieve and an executable Boolean branch at every member; no
-raw sieve join or propositional truncation is implied. `WholeLocal` uses the
-whole computing ambient restriction on `K/X`, while the supplied reflective
-slice retains sheaf semantics and its whole `DefIso`. `BinLocAffCover` is not
-yet written `SchemePresentation`, because a generic site cover does not by
-itself classify its arrows as open immersions.
+`BinaryLocallyRingedAffineCoverPresentation`. The final notation's literal
+owner is `BinarySiteRelativeSchemePresentation`. An invertible sum returns an
+actual covering sieve and an executable Boolean branch at every member; no raw
+sieve join or propositional truncation is implied. `WholeLocal` uses the whole
+computing ambient restriction on `K/X`, while the supplied reflective slice
+retains sheaf semantics and its whole `DefIso`. `BinRelScheme` totals the
+already-global cover with its dependent certificate. The supplied site
+determines admissible chart geometry, and no overlap, transition, cocycle, or
+gluing input is added. The notation does not claim a classical Zariski or
+Zeuner compact-open comparison or a representation-independent `Scheme_cat`.
 
 For the universal-property polynomial layer, comments and examples may write
 
