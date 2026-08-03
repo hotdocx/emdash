@@ -1574,11 +1574,12 @@ Implement exactly this bounded displayed-only bridge after a separate review:
     rollback-safe checkpoint. Do not change browser, book, transfer, kernel,
     or public method contracts.
 
-The proposal is frozen but not yet authorized for behavior. Its rejection
-oracle is exact: if the contextual endpoint compilation does not reproduce the
-already-checked diagonal displayed functor, or if its action cannot be
-consumed through the existing coherent owner, do not add a coercion or special
-identity implementation; reject or revise the proposal.
+The proposal is independently approved by
+[`D-DTTLF-USABILITY-080`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D080_REVIEW.md).
+Its rejection oracle is exact: if the contextual endpoint compilation does not
+reproduce the already-checked diagonal displayed functor, or if its action
+cannot be consumed through the existing coherent owner, do not add a coercion
+or special identity implementation; reject or revise the proposal.
 
 ## Work Ledger
 
@@ -1596,7 +1597,7 @@ identity implementation; reject or revise the proposal.
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` | complete; read-only; exact 1F proposal frozen below | completed 0E; existing `compileDisplayedContextual`; 4/4 exact one-binding parity; fixed-evaluation consumer/action probe | `compileDisplayedContextual` is the smallest existing engine. The sole gap is profile-gated routing from compact/open wrappers; no kernel owner or universal fixed/displayed traversal is needed. |
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` | final-focused-green at `c55a8d873b7abd49e221c122831ac6a90928b06f` | completed 0F; D-079; exact focused and predecessor matrices | Compact/open displayed-functor wrappers now use the existing recursive displayed compiler after their historical fast paths. Fixed evaluation and a fibre diagonal have exact three-presentation Core parity and internal object/base-arrow action; no kernel/Core/text/browser semantics changed. |
 | `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` | complete; read-only | final-focused-green 1F; clarified ordinary/displayed algebra distinction | A universal operation table has no current consumer. The concrete gap is narrower: unary compact/expanded `:^nd` omit the existing displayed endpoint context already used by grouped telescopes. |
-| `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` | exact proposal frozen; review pending | completed 0G; existing contextual endpoint compiler; bounded compact/expanded rejection probe | Activate existing one-slot endpoint wiring around compact/expanded callbacks, preserve direct chains, propagate prerequisites, and prove diagonal identity Core/type/action/text parity. No new owner, parser route, Core, or universal compiler. |
+| `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` | independently approved under D-080; implementation dependency-ready | completed 0G; proposal checkpoint `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; existing contextual endpoint compiler | Activate existing one-slot endpoint wiring around compact/expanded callbacks, preserve direct chains, propagate prerequisites, and prove diagonal identity Core/type/action/text parity. No new owner, parser route, Core, or universal compiler. |
 
 ## Explicit Non-Claims
 
@@ -1746,19 +1747,29 @@ is shared, but the concrete algebras and owners remain classifier-specific.
 Its one concrete end-user gap is the missing activation of the already-
 existing displayed endpoint context around compact unary and expanded open-
 fibre `:^nd` callbacks. The exact
-`DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` proposal is frozen under
-`H-DTTLF-USABILITY-DISPLAYED-NATURAL-ENDPOINT-CONTEXT-01`; independently
-review that immutable proposal before editing behavior. If approved, implement
-only the existing-context facade bridge, prerequisite propagation, and focused
-diagonal identity parity/action/text evidence. Add no universal compiler,
-owner, Core/checker/runtime rule, parser route, cast, curry, or external
-coherence field.
+`DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` proposal frozen at
+`998f4e4e6977cabdeff5011b6c2e866a09cd8139` is independently approved under
+D-080. Implement only the existing-context facade bridge, prerequisite
+propagation, and focused diagonal identity parity/action/text evidence. Add no
+universal compiler, owner, Core/checker/runtime rule, parser route, cast,
+curry, or external coherence field.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-02 — D-DTTLF-USABILITY-080 approved.** Independent review of
+  proposal checkpoint `998f4e4e6977cabdeff5011b6c2e866a09cd8139` confirms
+  that callback-time context activation is the necessary seam because open
+  identity validates its endpoint before outer point factorization. The one-
+  slot identity wiring is classifier-exact; declared endpoint checks continue
+  to reject arbitrary point data; contextual-profile gating preserves the
+  base contract; and stack-owner cleanup prevents scope leakage. Under the
+  standing unattended delegation with immediate human supersession, approve
+  exactly the ten-item 1G implementation and no universal compiler, special
+  identity case, parser route, or kernel/Core expansion.
 
 - **2026-08-02 — H-DTTLF-USABILITY-DISPLAYED-NATURAL-ENDPOINT-CONTEXT-01
   proposal frozen.** The completed 0G audit finds no consumer for a universal

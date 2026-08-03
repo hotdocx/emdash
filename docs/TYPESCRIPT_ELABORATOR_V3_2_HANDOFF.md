@@ -121,12 +121,15 @@
 > activate the existing contextual displayed-endpoint compiler, but compact
 > unary and expanded `lambda^n k. lambda^n a` callbacks do not; consequently
 > identity over the already-working fibre diagonal rejects in both forms. The
-> exact `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` proposal is frozen in the
-> active plan and awaits an independent D-080 review before behavior. It adds
-> only contextual-profile endpoint wiring, prerequisite propagation, and
-> focused Core/type/action/inherited-text parity—no owner, Core, parser route,
-> cast, curry, or universal operation table. Exact prior rollback-safe semantic
-> checkpoint: `c55a8d873b7abd49e221c122831ac6a90928b06f`.
+> exact `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` proposal is independently
+> approved by
+> [`D-DTTLF-USABILITY-080`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D080_REVIEW.md)
+> and implementation-ready. It adds only contextual-profile endpoint wiring,
+> prerequisite propagation, and focused Core/type/action/inherited-text
+> parity—no owner, Core, parser route, cast, curry, or universal operation
+> table. Exact proposal checkpoint:
+> `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; exact prior rollback-safe
+> semantic checkpoint: `c55a8d873b7abd49e221c122831ac6a90928b06f`.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
