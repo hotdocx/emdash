@@ -567,7 +567,8 @@ It deliberately avoids:
 | `COMPOSITIONAL-NATURAL-BINDER-THROUGH-0H` | complete; scoped subplan graduated with zero 0H behavior delta | final-green contextual telescope/reviewer at `607a026f88bc6d3b9f305ecb21f6630ce7c94950`; dedicated D-074 through D-080 evidence; 1G semantic checkpoint `f1993c2852b91173858bc2ecdf1d00998517dcaf` | Ordinary `lambda^n`, expanded open `lambda^f`/`lambda^n`, compact `lambda^fd`/`lambda^nd`, and grouped displayed brackets now share their exact classifier-appropriate recursive engines. The final audit proves evaluation/nested endpoint identity and higher action without another behavior slice. |
 | `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` | complete; read-only; zero behavior delta | graduated compositional-natural subplan; active kernel/check examples; current public AST and reviewer | Existing reviewer/book binder bodies are covered except multi-constructor integration programs such as arrow induction. The one bounded class-(3) gap is the current checked-negative finite section chain `lambda^n k. GG[k](FF[k](s[k]))`; generic `comp_fapp0` already owns its internal action. |
 | `DEPENDENT-SECTION-CHAIN-1AR` | implemented and final-focused-green under D-081; local semantic checkpoint follows review checkpoint `485237e1eeb200b9248a1aeebf42f2755fd27403` | completed 0AQ; immutable proposal `48394a2005cd8b483ae2de56f070c14d0826d7fd`; existing `USABILITY-DEPENDENT-1A` one-layer factorer; existing displayed-functor finite-chain evidence | One structural factorer accepts a rigid section leaf under any finite nonempty chain of exact same-base displayed-functor fibre applications and folds inner-to-outer only through existing `comp_fapp0 (Catd_cat K)`. Two- and three-layer direct evidence, inherited text parity, and existing `piapp1_fapp0` action are green. One-layer Core and fail-closed boundaries remain intact; no owner, transport surface, or general section-action eliminator was added. |
-| `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` | dependency-ready read-only graduation audit | final-focused-green 1AR; current reviewer/book examples; retained arrow-induction integration benchmark | Freeze the exact finite-chain envelope and select at most one next consumer-led usability gap. Reassess the transport-heavy `E[rho(q)](u)` benchmark as an integration program rather than presuming a binder defect. Make no behavior change and run no aggregate in this audit. |
+| `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` | complete; read-only; zero behavior delta; reviewer promotion selected | final-focused-green 1AR; current reviewer/book examples; active PathOut/PathInd authority; existing public Sigma/transport routes | The recursive rigid section-chain envelope is exact and internally owns point/base-arrow action. Full arrow induction remains feasible but is a multi-constructor integration program, not one missing binder. Promote the already-checked two-layer chain through the existing browser preset before opening that larger program. |
+| `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` | exact product proposal frozen; separate D-082 review required before behavior | completed 0AS; final-focused-green 1AR; existing twelve-preset browser reviewer and direct/text mirror | Replace only the existing one-layer indexed-section preset with a two-layer recursive chain, preserve the preset ID and semantic engines, synchronize the two stale public preset inventories, and validate only the focused reviewer/build boundary. Add no semantic owner, parser route, aggregate run, deployment, or arrow-induction API. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -748,6 +749,90 @@ Perform one read-only graduation audit:
 
 This audit changes no behavior, runs no aggregate, and promotes no owner by
 API symmetry.
+
+## `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` Result
+
+The consumer audit is complete with zero behavior delta:
+
+1. The 1AR envelope is an arbitrary finite nonempty chain of rigid closed
+   displayed-functor fibre applications over one rigid closed section leaf,
+   all at one exact locally nameless base index and with exact adjacent
+   families. Repeated existing `comp_fapp0 (Catd_cat K)` owns the point
+   computation, and existing `piapp1_fapp0` owns the base-arrow action. This
+   is recursion over a qualified grammar, not a fixed-depth table and not a
+   claim about arbitrary pointwise section synthesis.
+2. The current twelve-preset browser reviewer still presents only the
+   historical one-layer source `lambda^n k : K. (FF k) (s k)`. Its direct
+   fixture already uses the same `CoreCategoricalProgram` path as 1AR, so a
+   two-layer source is a consumer promotion of completed behavior rather than
+   a new elaboration route. The book may retain its one-layer expression as a
+   pedagogical base case.
+3. The active Lambdapi authority already contains the synthetic arrow-
+   induction program (`PathOut_cat`, `PathOutMotives_catd`,
+   `pathout_motive_transport_obj`, `path_ind_sec`, `PathInd_func`,
+   `PathInd_funcd`, and the `path_comp_sec` benchmark) with extensive checks.
+   TypeScript already exposes useful generic Sigma, substitution, transport,
+   totalization, and section operations. It does not yet expose the entire
+   representable-family/open-transport/theorem closure as one compositional
+   public development. Therefore `E[rho(q)](u)` is feasible and valuable, but
+   it is a separately planned integration demo rather than evidence that the
+   recursive binder architecture failed.
+4. The smallest high-yield successor is to make the completed recursion
+   visible in the existing reviewer journey. No new preset ID, parser branch,
+   Core owner, checker/runtime case, transfer fragment, or Lambdapi rule is
+   needed.
+
+## `DEPENDENT-SECTION-CHAIN-REVIEWER-1AT`
+
+### H-DTTLF-USABILITY-DEPENDENT-SECTION-CHAIN-REVIEWER-01 /
+### D-DTTLF-USABILITY-082
+
+Approve exactly this bounded product-facing promotion:
+
+1. Keep the existing `indexed-section-composition` preset ID. Change its
+   label to **Recursive indexed composition** and its source to:
+
+   ```text
+   lambda^n k : K. (GG k) ((FF k) (s k))
+   ```
+
+   The source is the ASCII plan spelling of the public `lambda` glyph form;
+   implementation keeps the existing public glyph notation.
+2. Extend only that preset's existing fixture and direct mirror with
+   `Q : Catd K` and `GG : Functord D Q`; check the result against `Q`. Preserve
+   the existing environment, expected-mode, compilation, and diagnostic
+   architecture.
+3. Require exact text/direct equality of explicit Core, inferred and expected
+   classifiers, structural prerequisites, and checked computation. Add one
+   focused incompatible-chain edited-source rejection. Preserve the existing
+   all-presets equality and deep-freeze checks.
+4. Bump `CORE_BROWSER_REVIEWER_REVISION` once and add one exact supported-
+   boundary statement for arbitrary finite rigid indexed-section action
+   chains. Do not broaden the claim to arbitrary section bodies, transport,
+   variance DAGs, or unrestricted displayed coherence.
+5. Synchronize only the stale consumer-facing inventory in
+   `TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md` and
+   `emdash-template/README.md`: both must say twelve presets, show the new
+   two-layer indexed source, and include the two already-existing presets
+   omitted by the old ten-row inventory. Do not rewrite the book or historical
+   architecture plans merely to replace their intentional one-layer base
+   examples.
+6. Add no categorical-surface/parser/Core/checker/evaluator/runtime/transfer
+   behavior, Lambdapi source, semantic owner, external coherence evidence,
+   curry/total-context encoding, new browser framework, or deployment change.
+7. Validate proportionally with the focused browser-reviewer suite, root
+   typecheck, changed-file lint, the standalone `emdash-template` production
+   build, exact diff/whitespace hygiene, and no root aggregate. Carry forward
+   D-081's focused semantic and bounded-kernel evidence.
+8. Synchronize this plan and the handoff and create one path-scoped local
+   rollback-safe semantic/product checkpoint only after the bounded gates are
+   green. Do not push, merge, publish, deploy, or clean unrelated temporary
+   directories.
+
+The rejection oracle is exact: if the existing text/direct paths disagree, if
+the edited chain requires a new semantic branch or owner, if one-layer tests
+regress, or if the public build needs a framework/deployment change, stop and
+revise the proposal instead of widening it.
 
 ## Frozen First Gate
 
@@ -8232,11 +8317,15 @@ checkpoint following review checkpoint
 predecessor, bounded-kernel, and internal `piapp1_fapp0` evidence. The sole
 post-slice `check:ts` run reported only pre-existing whole-source SHA pins and
 the unrelated README presentation assertion after roughly 77 minutes; do not
-repeat it. Continue with the zero-edit
-`DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` audit, then select at most one concrete
-consumer-led successor. Do not treat the retained arrow-induction benchmark
-as one missing binder constructor without first inventorying its transport,
-Sigma, and displayed-action routes.
+repeat it. Treat the zero-edit `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` audit as
+complete. It retains arrow induction as a feasible separately planned
+representable-family/transport/Sigma integration demo and selects the exact
+`DEPENDENT-SECTION-CHAIN-REVIEWER-1AT` / D-DTTLF-USABILITY-082 proposal as the
+next bounded consumer slice. Require a separate immutable review before
+behavior. Change only the existing indexed-section reviewer preset, its direct
+mirror and focused tests, one revision/boundary statement, and the two stale
+public preset inventories. Add no semantic branch, owner, aggregate,
+deployment, or arrow-induction API.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -8254,6 +8343,21 @@ removal, or unrelated cleanup is authorized.
 ```
 
 ## Decision Ledger
+
+- **2026-08-03 — `DEPENDENT-SECTION-CHAIN-GRADUATE-0AS` complete; exact
+  reviewer proposal frozen.** The 1AR recursion is a qualified arbitrary-
+  finite rigid section-action grammar with point and base-arrow behavior owned
+  by existing generic constructions. The active PathOut/PathInd development
+  establishes that arrow induction is mathematically mature, while its public
+  TypeScript realization remains a multi-constructor representable-family,
+  transport, Sigma, section, and theorem integration program rather than one
+  missing binder case. The existing twelve-preset reviewer still shows only
+  the historical one-layer section composition and two public inventories
+  still say ten. Freeze D-DTTLF-USABILITY-082 to replace only that existing
+  preset with the already-checked two-layer chain, preserve all preset IDs and
+  semantic engines, synchronize those inventories, run focused reviewer/build
+  gates, and perform no aggregate, deployment, or arrow-induction expansion.
+  A separate immutable review is required before behavior.
 
 - **2026-08-03 — `DEPENDENT-SECTION-CHAIN-1AR` implemented and final-focused-
   green; read-only graduation selected.** One structural factorer now lowers
