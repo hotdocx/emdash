@@ -1751,12 +1751,29 @@ Hom(y(U),X) ~= Hom(R,X)
 ```
 
 for every selected cover. Higher-valued descent may instead require Čech or
-hypercover maps. A categorical HIT/free-localization construction would add
-the required fillers, equalities, and higher coherences at the level of the
-whole presheaf category, with an eliminator expressing the universal property
-against local targets. If successful, it would directly provide a whole
-reflector functor and unit; functor action and naturality would then remain at
-the existing generic owners rather than being restated as external squares.
+hypercover maps. For each presheaf `P`, a categorical HIT would add the
+required descent fillers, equalities, and higher coherences to construct
+`sheafify_T(P)`, with an eliminator expressing its universal property against
+local targets. If this construction is uniform in `P` and presheaf arrows, it
+provides a whole reflector functor and unit; functor action and naturality then
+remain at the existing generic owners rather than being restated as external
+squares.
+
+More explicitly, the intended constructor is objectwise. Given one presheaf
+`P`, construct a new presheaf/sheaf object `sheafify_T(P)` by a categorical
+HIT freely adjoining the selected descent fillers and their higher
+coherences. Its eliminator should compute the universal comparison
+
+```text
+Hom(sheafify_T(P), X) ~= Hom(P, X)
+```
+
+for every local target `X`. Performing that construction uniformly in `P`
+and on arrows assembles the whole reflector and exhibits the reflective/free
+localization of the presheaf category. The phrase *localization of the whole
+presheaf category* is therefore the functorial and universal packaging of
+these per-presheaf categorical HITs, not a replacement for the construction
+of `sheafify_T(P)` itself.
 
 This route is plausible but not yet available infrastructure. The current
 bespoke `WalkingEnd_cat` HIT demonstrates a contextual `Functord` eliminator
@@ -6075,9 +6092,11 @@ consumer demonstrates that nontransitive unification requires it.
   constructed sheafification. Tabareau's construction is HIT-assisted in its
   separated-reflection proof and then uses modal closure; it does not justify
   describing sheafification as one undifferentiated HIT. The emdash research
-  candidate is instead a categorical localization of a whole presheaf
-  category at covering-sieve/Čech maps, with an internal eliminator into local
-  targets. Audit a category-parametric reflective-localization capability or
+  candidate first constructs `sheafify_T(P)` for each presheaf `P` by a
+  categorical HIT with an internal eliminator into local targets; uniformly
+  on objects and arrows, those constructions assemble the categorical
+  localization of the whole presheaf category at covering-sieve/Čech maps.
+  Audit a category-parametric reflective-localization capability or
   whole equivalence to the rigid `Sheaf_cat` facade; add left exactness as a
   separate extension and do not introduce a global category-head rewrite.
   Even a successful construction supplies only the unit on
@@ -6133,11 +6152,13 @@ consumer demonstrates that nontransitive unification requires it.
   sheafification/glue Beck--Chevalley mate separately consumer-gated and treat
   local exactness only as a semantic construction criterion, never a family
   of component-square fields. For the deferred reflector, retain the exact
-  PSSS-05d/PSSS-D-114 meaning: the emdash categorical-HIT candidate is free
-  localization of the whole presheaf category at selected descent maps with
-  an internal eliminator into local targets. Tabareau's HoTT HIT is an
-  auxiliary coequalizer inside one separated-reflection proof, not that
-  categorical localization and not a monolithic sheafification HIT.
+  PSSS-05d/PSSS-D-114 meaning: the emdash categorical-HIT candidate constructs
+  `sheafify_T(P)` for each presheaf `P` by freely adjoining selected descent
+  data, with an internal eliminator into local targets. Uniform object and
+  arrow constructions then assemble the free localization of the whole
+  presheaf category. Tabareau's HoTT HIT is an auxiliary coequalizer inside
+  one separated-reflection proof, not this per-presheaf categorical HIT and
+  not a monolithic substitute for the full sheafification construction.
 
 ## 19. Side-Task Ledger
 

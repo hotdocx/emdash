@@ -170,15 +170,27 @@ commutative-square equations in a scheme or site record.
 ### 3.2 What a categorical-HIT sheafification would and would not solve
 
 The phrase *categorical HIT* in this plan has the precise research meaning
-recorded by PSSS-05d and PSSS-D-114.  For a site `(K,T)`, select a whole class
-`W_T` of covering-sieve, Cech, or higher-descent maps in the whole presheaf
-category and freely localize that category at `W_T`.  The categorical
-construction adds the required fillers, equalities, and higher coherences and
-has an internal eliminator/universal property against local targets.  Its
-whole reflector, object and arrow action, unit, and naturality are then owned
-by existing categorical owners.  It does **not** mean a direct transcription
-of a HoTT HIT into Lambdapi, nor does it commit the stable consumer interface
-to external point/path constructors or naturality equations.
+recorded by PSSS-05d and PSSS-D-114.  For a site `(K,T)` and one presheaf
+`P`, the primary construction sought is a new object `sheafify_T(P)`,
+presented by a categorical HIT that freely adjoins the selected descent
+fillers, equalities, and higher coherences required to make `P` local.  Its
+internal eliminator expresses the objectwise universal property
+
+```text
+Hom(sheafify_T(P), X) ~= Hom(P, X)    for every T-local X.
+```
+
+Choosing the covering-sieve, Cech, or higher-descent maps `W_T` uniformly and
+making this construction functorial in `P` then assembles the objectwise HITs
+into the whole reflector `sheafify_T`.  Equivalently, that assembled result is
+the reflective/free localization of the whole presheaf category at `W_T`.
+Thus *whole-category localization* describes the uniform semantics and
+functorial packaging of the per-presheaf construction; it is not a proposal
+to replace `sheafify_T(P)` by one unrelated category-level object.  Object and
+arrow action, unit, naturality, and the eliminator must remain at whole
+categorical owners.  This does **not** mean a direct transcription of a HoTT
+HIT into Lambdapi, nor does it commit the stable consumer interface to
+external point/path constructors or naturality equations.
 
 Three notions must therefore remain distinct:
 
@@ -186,15 +198,16 @@ Three notions must therefore remain distinct:
 | --- | --- | --- |
 | HoTT HIT | General object/type presentation by point, path, and higher constructors. | It is not by itself a sheafification construction or the selected emdash interface. |
 | Tabareau's `OT` HIT | One auxiliary higher-inductive coequalizer used inside the iterated-kernel-pair proof of separated reflection. | It is neither the whole Tabareau sheafification nor a declaration template for v3.2. |
-| Emdash categorical HIT | Free localization of the **whole presheaf category** at selected descent maps, characterized by an internal eliminator/universal property into local targets. | It does not expose object-level point/path constructors, external naturality fields, or component coherence to scheme consumers. |
+| Emdash categorical HIT | For each presheaf `P`, construct `sheafify_T(P)` by freely adjoining categorical descent data, with an eliminator into local targets; uniformly these objects and maps assemble the reflective localization of the whole presheaf category. | The whole-category formulation does not erase the per-presheaf constructor, nor expose external naturality fields or component coherence to scheme consumers. |
 
-The adjective *categorical* thus names the level and universal property of the
-construction, not a direct categorical spelling of Tabareau's `OT`. The
-PSSS-05d observation is specifically that functorial type theory may formulate
-the desired localization directly at whole category/functor owners. The
+The adjective *categorical* thus names the constructors, coherence, and
+eliminator used to build each localized presheaf, not a direct categorical
+spelling of Tabareau's `OT`.  The PSSS-05d observation is that functorial type
+theory may make that objectwise construction uniform at whole functor owners,
+rather than asking every consumer to carry its action and naturality.  The
 existing `WalkingEnd_cat` demonstrates one contextual categorical eliminator,
-but it is not yet generic localization, coequalizer, telescope-colimit, or
-higher-coherence infrastructure.
+but it is not yet a generic local-object constructor, localization,
+coequalizer, telescope-colimit, or higher-coherence infrastructure.
 
 Quirin--Tabareau construct Lawvere--Tierney sheafification from a left-exact
 modality on propositions by an h-level induction. Their construction has two
@@ -929,10 +942,12 @@ prerequisites.
   separation and express the comparison at whole owners rather than porting
   its rewrites.
 - **CS-D-015 — Native categorical-HIT sequencing:** a native emdash
-  categorical HIT means the PSSS-05d/PSSS-D-114 free localization of the
-  whole presheaf category at a selected class of covering-sieve, Cech, or
-  higher-descent maps, with an internal eliminator into local targets.  Such a
-  construction may instantiate a fixed-site `SheafificationCapability`,
+  categorical HIT first constructs `sheafify_T(P)` from each presheaf `P` by
+  freely adjoining descent fillers and coherences, with an internal eliminator
+  into local targets.  Uniformity in `P` assembles those objectwise HITs into
+  the PSSS-05d/PSSS-D-114 reflective localization of the whole presheaf
+  category at the selected covering-sieve, Cech, or higher-descent maps. Such
+  a construction may instantiate a fixed-site `SheafificationCapability`,
   preferably with a separately stated left-exact localization contract. Its
   whole object action, arrow action, eliminator, and computation belong to
   categorical owners. Tabareau's HoTT HIT is an auxiliary coequalizer in one
@@ -1080,7 +1095,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/localization sheafification | Factorized PSSS-05d/PSSS-D-114 research; free localization at whole descent maps is the emdash candidate, while Tabareau's auxiliary HoTT HIT is semantic evidence and implementation remains consumer-gated | Topology-to-local-object bridge, categorical localization, rigid-facade realization, CommRing lift, and left-exactness |
+| CS-12 | Constructed native categorical-HIT/localization sheafification | Factorized PSSS-05d/PSSS-D-114 research: construct `sheafify_T(P)` objectwise by a categorical HIT and assemble it functorially into the reflector/free localization; Tabareau's auxiliary HoTT HIT remains semantic evidence | Topology-to-local-object bridge, categorical HIT and eliminator, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
 ## 13. CS-01 Success Criteria
