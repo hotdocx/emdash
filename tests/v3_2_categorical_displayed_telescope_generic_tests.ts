@@ -1790,7 +1790,7 @@ describe('DISPLAYED-TELESCOPE-GENERIC-1 canonical layer fold', () => {
         );
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN-CATEGORICAL-TEXT-1'
+            'COMPOSITIONAL-NATURAL-TEXT-PARITY-1D-CATEGORICAL-TEXT-1'
         );
 
         const x = data.emdash.object(

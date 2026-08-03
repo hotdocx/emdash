@@ -182,7 +182,7 @@ describe('SYNTAX-PARITY-1C2B internal-action audit', () => {
         );
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN-CATEGORICAL-TEXT-1'
+            'COMPOSITIONAL-NATURAL-TEXT-PARITY-1D-CATEGORICAL-TEXT-1'
         );
         assert.deepEqual(
             CORE_CATEGORICAL_TEXT_INTERNAL_ACTION_AUDIT

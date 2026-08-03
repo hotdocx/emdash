@@ -74,8 +74,21 @@
 > and mechanical text-revision synchronization. The immutable proposal at
 > `19ec1adb1bd2ee3288338e7069759549c1f282a8` is independently approved by
 > [`D-DTTLF-USABILITY-078`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D078_REVIEW.md).
-> Its exact adapter implementation is dependency-ready; no text behavior is
-> yet changed.
+> Its exact adapter implementation is now final-focused-green: expanded
+> `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a` text route through the
+> already-final typed APIs and produce exact direct/compact Core for the
+> reviewed body algebra. The adapter adds only two expected contracts, two
+> resolver routes, focused tests, and the mechanical revision update; it adds
+> no parser/Core/checker/kernel semantics. Focused evidence is effectively
+> 6/6, closest predecessors pass 24/24 in bounded parallel execution, and all
+> static gates pass. The required root aggregate was run once and remains
+> non-green only on the pre-existing kernel pin/count and README-wrap families;
+> do not repeat it. A fixed-category `lambda^f` and a genuinely open-fibre
+> `lambda^f` retain distinct target classifiers and wrappers. The next
+> candidate is therefore a read-only classifier-directed bracket audit to
+> identify sound recursive code sharing—not a standalone functorial-type-
+> theory kernel or an authorized behavior refactor. A rollback-safe semantic
+> checkpoint is pending.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.

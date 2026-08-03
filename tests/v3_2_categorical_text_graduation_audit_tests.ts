@@ -132,7 +132,7 @@ describe('SYNTAX-PARITY-GRADUATE-0A audit', () => {
         );
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN-CATEGORICAL-TEXT-1'
+            'COMPOSITIONAL-NATURAL-TEXT-PARITY-1D-CATEGORICAL-TEXT-1'
         );
         assert.equal(
             CORE_CATEGORICAL_TEXT_GRADUATION_AUDIT

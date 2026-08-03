@@ -294,7 +294,7 @@ describe('D-033 recursive-mixed text parity', () => {
     it('publishes the reviewed recursive-mixed adapter revision', () => {
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN-CATEGORICAL-TEXT-1'
+            'COMPOSITIONAL-NATURAL-TEXT-PARITY-1D-CATEGORICAL-TEXT-1'
         );
     });
 });

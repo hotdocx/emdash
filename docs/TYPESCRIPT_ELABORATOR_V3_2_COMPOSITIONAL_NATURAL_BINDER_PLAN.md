@@ -1067,6 +1067,20 @@ non-uniformity, not an external-coherence or soundness defect. A future audit
 may determine whether a common classifier-directed bracket engine would
 improve scalability; it is not part of the present graduation claim.
 
+That distinction reflects the selected product boundary. The TypeScript layer
+is compiling faithfully into the active categorical semantics, where a fixed
+`Functor_cat A B` classifier and an open displayed fibre classifier genuinely
+have different contextual formation, action, and packaging. It is not trying
+to invent a second standalone functorial type theory whose native judgments
+erase that distinction. This semantic split does **not** imply that permanent
+top-level implementation duplication is desirable or necessary: a future
+classifier-indexed recursive engine may share identity, composition,
+application chains, occurrence/usage analysis, scoping, and explicit-Core
+construction while retaining thin fixed/open validation and result wrappers.
+Any such refactor must preserve the presently exact Core and action evidence;
+it must not cast an open fibre to a closed category or replace internal action
+with external coherence data.
+
 The new focused suite passes 5/5. The nearest ordinary-natural, expanded
 first-hom, and compact contextual eta/identity/composition/whiskering matrix
 passes 35/35 under bounded six-worker concurrency. The selected canonical
@@ -1215,6 +1229,70 @@ diff hygiene. Because this changes shared text behavior, run one root
 Lambdapi, kernel CI, browser, reviewer, print, book, release, or repository
 aggregate is authorized.
 
+## `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` Implementation Result
+
+The approved adapter-only slice is implemented:
+
+1. Two public expected contracts distinguish the expanded first and second
+   displayed Hom presentations. Root `^n` dispatches by those contracts while
+   every existing ordinary, dependent-section, compact, and grouped route is
+   unchanged.
+2. The first route requires one immediate inner `^f`, checks the optional base
+   and displayed-family annotations, and calls literal typed
+   `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))`.
+3. The second route requires one immediate inner `^n`, applies the two closed
+   displayed-functor endpoints at the active base, and calls literal nested
+   `transforLambda`. Both routes extend only callback-local environments and
+   resolve the final body through the existing neutral resolver.
+4. The adapter adds no parser node, Core node, checker branch, action table,
+   kernel owner, runtime/proof rule, cast, curry, or external coherence field.
+   Open first-Hom text reaches `contextualDisplayedFunctorLambda` and the
+   compact-`:^fd` factorer; it does not claim a universal fixed/open `^f`
+   compiler.
+5. The text revision is exactly
+   `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D-CATEGORICAL-TEXT-1`, with every exact
+   assertion synchronized mechanically.
+
+Focused evidence is effectively 6/6. The heavyweight run exercised first-Hom
+identity/eta/chains, second-Hom eta/identity/composition/both whiskers,
+component/point/higher action, the complete annotation/mode/endpoint/body
+fail-closed matrix, and predecessor routes. Its only successive diagnostic
+failures were stale expected column/capability-code literals after all semantic
+assertions had executed; the corrected unsupported-profile leaf then passes
+independently 1/1 without rebuilding the expensive profile. The closest prior
+text and expanded direct suites pass 24/24 under bounded four-worker
+parallelism. Workspace topology, root typecheck, complete changed-file lint,
+exact revision search, and diff hygiene pass.
+
+The required root `check:ts` was run once. Workspace, typecheck, and full lint
+pass. The monolithic test runner reaches terminal non-green only in the
+already-recorded stale active-kernel digest/source-position/declaration-count
+pin family and README line-wrap assertion; no D-078 feature failure was
+observed. Its middle TAP output was elided by the terminal capture, so no exact
+aggregate count is invented here. Do not repeat that aggregate for this
+boundary.
+
+## Candidate Successor: Classifier-Directed Functorial Bracket Audit
+
+After the rollback-safe D-078 checkpoint, the highest-yield architectural
+qualification is a read-only comparison of fixed-category
+`categoricalLambda`/`compileContextual` with open-fibre
+`contextualDisplayedFunctorLambda`/`factorDisplayedFunctorBody`.
+
+The audit should classify:
+
+- recursive cases already common in semantics and Core construction;
+- cases necessarily specialized by fixed versus open classifiers;
+- cases present in only one accepted body algebra; and
+- the smallest possible classifier-indexed internal engine, if one is
+  justified by exact parity evidence.
+
+The desired architecture is shared recursive algebra with thin
+presentation-specific wrappers, not a single erased classifier and not a new
+standalone functorial-type-theory kernel. This candidate authorizes no behavior
+refactor yet; preserve the final-green fixed and displayed compilers as
+rollback and equivalence oracles.
+
 ## Work Ledger
 
 | Slice | Status | Dependency | Exact boundary |
@@ -1226,7 +1304,8 @@ aggregate is authorized.
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | complete; read-only architecture audit | completed 1B/1B2 | Both compact terms recheck unchanged under their expanded facades. Select shared scoped contextual factorization with thin expanded/compact wrappers; literal current-method reuse is blocked only by the absent open-fibre representation. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
 | `COMPOSITIONAL-FD-EXPANDED-1C` | final-focused-green at `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1` | completed 0C; D-076; existing first-hom runtime bridge | Construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))` share the compact `:^fd` factorer, preserve byte-identical Core, expose closed fibre object/arrow action, and retain the ordinary `Transf_cat` facade. |
 | `COMPOSITIONAL-ND-EXPANDED-1D` | final-focused-green at `b89420d442536544185e8ab5dbe6876bd9980b96` | green 1C; completed audit; D-077 | The existing open `indexed-functor` endpoints and compact point factorer implement literal expanded `lambda^n k. lambda^n a`; the result retains the ordinary iterated-Hom facade, byte-identical compact Core, and internally owned component/base/higher action. |
-| `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | independently approved; implementation dependency-ready | graduated direct typed API; D-077 checkpoint; D-078 | Add exactly two expected contracts and thin resolver routes for expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a`. Reuse the existing located grammar, neutral body resolver, public typed methods, and compact `^fd/^nd` factorers; add no parser/checker/Core/kernel semantics. |
+| `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | implemented and final-focused-green; rollback-safe checkpoint pending | graduated direct typed API; D-077 checkpoint; D-078 | Exactly two expected contracts and thin resolver routes now expose expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a` text. Existing grammar, neutral resolution, typed methods, and compact factorers are reused; no parser/checker/Core/kernel semantics changed. |
+| `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` | candidate read-only successor after D-078 checkpoint | final-green fixed/open compilers and exact compact/expanded Core parity | Compare the two recursive body algebras and select only sound classifier-indexed sharing. Preserve distinct target classifiers and authorize no refactor until an exact proposal is frozen and reviewed. |
 
 ## Explicit Non-Claims
 
@@ -1242,6 +1321,8 @@ This plan does not yet claim or authorize:
 - a new Lambdapi owner, rewrite rule, or unification rule;
 - a second parser, text behavior, browser preset, book change, scale resumption,
   or whole-library transfer graduation; or
+- a universal fixed/open functorial compiler, standalone functorial-type-
+  theory kernel, or behavior refactor under the candidate 0E audit; or
 - push, merge, rebase, amend, reset, publication, deployment, worktree
   removal, or unrelated cleanup.
 
@@ -1287,6 +1368,18 @@ The D-077 implementation has the following final proportional evidence:
   already recorded kernel-pin/count family and README-wrap assertion. It must
   not be repeated for this unchanged boundary.
 
+The D-078 implementation has the following final proportional evidence:
+
+- its focused construction/action/negative/predecessor matrix is effectively
+  6/6, including the separately green lightweight unsupported-profile leaf;
+- the closest prior text and expanded direct suites pass 24/24 concurrently;
+- workspace topology, root typecheck, complete changed-file lint, exact
+  revision search, and diff hygiene pass; and
+- the single root `check:ts` was run once. Its static phases pass and no D-078
+  feature failure was observed; its test phase remains non-green only on the
+  already recorded kernel pin/count and README-wrap families. It must not be
+  repeated for this boundary.
+
 Use rollback-safe local checkpoints under
 [`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./PERSISTENT_GOAL_GIT_EXPERIMENTATION.md).
 Preserve unrelated work.
@@ -1327,17 +1420,37 @@ Natural transformation bodies must be recursively constructed from internal
 owners and fail closed without them. Treat the read-only
 `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` audit as complete and its exact adapter-
 only proposal at `19ec1adb1bd2ee3288338e7069759549c1f282a8` as
-independently approved under D-078. Implement only the two expected contracts,
-thin resolver routes, focused tests, and mechanical revision synchronization
-described above. Add no curry, cast, total-context section, external coherence,
-new kernel owner, browser behavior, or scale work without a separate reviewed
-gate.
+independently approved under D-078. Treat its two expected contracts, thin
+resolver routes, focused tests, and mechanical revision synchronization as
+final-focused-green after their rollback-safe checkpoint. They preserve the
+fixed/open classifier distinction and add no parser, Core, checker, kernel, or
+external-coherence semantics.
+
+After that checkpoint, route next to the read-only
+`CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` audit. Compare
+`categoricalLambda`/`compileContextual` with
+`contextualDisplayedFunctorLambda`/`factorDisplayedFunctorBody`; identify
+soundly shareable recursive algebra while preserving presentation-specific
+classifiers and wrappers. Freeze and independently review an exact proposal
+before any refactor. Do not invent a standalone functorial-type-theory kernel,
+erase open-fibre dependency, or add behavior under the read-only audit.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-03 — COMPOSITIONAL-NATURAL-TEXT-PARITY-1D final-focused-green.**
+  Exactly two expected contracts route expanded `lambda^n/lambda^f` and
+  `lambda^n/lambda^n` text into the final-green typed APIs. The first route
+  preserves the specialized open-fibre/compact-`:^fd` factorer rather than
+  claiming a universal fixed/open compiler. Focused evidence is effectively
+  6/6, nearest predecessors pass 24/24 in parallel, and all static gates pass.
+  The one required root aggregate was run once; its non-green result remains
+  confined to the pre-existing kernel pin/count and README-wrap families and
+  must not be repeated. The next candidate is a read-only classifier-directed
+  functorial bracket audit, not an authorized behavior refactor.
 
 - **2026-08-02 — D-DTTLF-USABILITY-078 approved.** A separate review of exact
   proposal checkpoint `19ec1adb1bd2ee3288338e7069759549c1f282a8`

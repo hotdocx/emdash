@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN-CATEGORICAL-TEXT-1' as const;
+    'COMPOSITIONAL-NATURAL-TEXT-PARITY-1D-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -63,6 +63,35 @@ export interface CoreCategoricalTextOrdinaryFunctorExpected {
     readonly bodyExpected?: CoreCategoricalTextOrdinaryFunctorExpected;
 }
 
+/**
+ * Expanded first displayed Hom presentation.
+ *
+ * The outer ordinary-natural binder ranges over the base while the
+ * immediately nested functorial binder ranges over the corresponding open
+ * source fibre. Resolution delegates both binders to the typed program API;
+ * this contract owns no separate categorical semantics.
+ */
+export interface CoreCategoricalTextExpandedDisplayedFunctorExpected {
+    readonly kind: 'expanded-displayed-functor';
+    readonly base: CoreCategoricalCategory;
+    readonly source: CoreCategoricalDisplayedFamily;
+    readonly target: CoreCategoricalDisplayedFamily;
+}
+
+/**
+ * Expanded second displayed Hom presentation.
+ *
+ * The inner ordinary-natural binder is checked between the active fibre
+ * functors obtained from the two closed displayed-functor endpoints.
+ */
+export interface CoreCategoricalTextExpandedDisplayedTransforExpected {
+    readonly kind: 'expanded-displayed-transfor';
+    readonly base: CoreCategoricalCategory;
+    readonly sourceFamily: CoreCategoricalDisplayedFamily;
+    readonly source: CoreCategoricalTerm;
+    readonly target: CoreCategoricalTerm;
+}
+
 export interface CoreCategoricalTextMixedNestedEtaExpected {
     /**
      * Select only exact construction-time eta of an already-coherent object
@@ -77,6 +106,8 @@ export type CoreCategoricalTextTermExpected =
         readonly applicationShape?: CoreCategoricalExpectedShape;
     }
     | CoreCategoricalTextOrdinaryFunctorExpected
+    | CoreCategoricalTextExpandedDisplayedFunctorExpected
+    | CoreCategoricalTextExpandedDisplayedTransforExpected
     | {
         readonly kind: 'dependent-section';
         readonly base: CoreCategoricalCategory;
@@ -2075,6 +2106,20 @@ class CoreCategoricalTextResolver {
                     )
                 );
             case 'n':
+                if (expected.kind === 'expanded-displayed-functor') {
+                    return this.resolveExpandedDisplayedFunctorLambda(
+                        expression,
+                        environment,
+                        expected
+                    );
+                }
+                if (expected.kind === 'expanded-displayed-transfor') {
+                    return this.resolveExpandedDisplayedTransforLambda(
+                        expression,
+                        environment,
+                        expected
+                    );
+                }
                 return this.resolveDependentLambda(
                     expression,
                     environment,
@@ -2302,6 +2347,179 @@ class CoreCategoricalTextResolver {
                 {
                     source: this.lambdaSource(expression)
                 }
+            )
+        );
+    }
+
+    private requireImmediateNestedLambda(
+        expression: LocatedLambda,
+        mode: 'f' | 'n',
+        description: string
+    ): LocatedLambda {
+        if (expression.body.tag !== 'lambda') {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                expression.body.range,
+                `${description} requires one immediately nested ^${mode} ` +
+                    'abstraction'
+            );
+        }
+        const nested = expression.body;
+        if (
+            nested.bindingGroups.length !== 1 ||
+            nested.bindingGroups[0].length !== 1
+        ) {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                nested.range,
+                `${description} requires exactly one inner binding`
+            );
+        }
+        if (nested.mode !== mode) {
+            throw resolutionError(
+                'UNSUPPORTED_BINDER_MODE',
+                this.sourceFile,
+                nested.modeRange,
+                `${description} requires inner binder mode ^${mode}, not ` +
+                    `^${nested.mode}`
+            );
+        }
+        return nested;
+    }
+
+    private environmentWithToken(
+        environment: InternalEnvironment,
+        binding: LocatedLambdaBinding,
+        token: CoreCategoricalSlotToken
+    ): InternalEnvironment {
+        const nested = new Map(environment);
+        nested.set(binding.name, Object.freeze({
+            name: binding.name,
+            kind: 'term' as const,
+            value: token,
+            callbackLocal: true
+        }));
+        return nested;
+    }
+
+    private resolveExpandedDisplayedFunctorLambda(
+        expression: LocatedLambda,
+        environment: InternalEnvironment,
+        expected: CoreCategoricalTextExpandedDisplayedFunctorExpected
+    ): CoreCategoricalTerm {
+        const outerBinding = expression.bindingGroups[0][0];
+        const inner = this.requireImmediateNestedLambda(
+            expression,
+            'f',
+            'Expanded displayed-functor abstraction'
+        );
+        const innerBinding = inner.bindingGroups[0][0];
+        this.requireCategoryAnnotation(
+            outerBinding,
+            environment,
+            expected.base,
+            'expanded displayed-functor base'
+        );
+        return invokeProgram(
+            this.sourceFile,
+            expression.range,
+            'Expanded displayed-functor abstraction was rejected',
+            () => this.program.transforLambda(
+                outerBinding.name,
+                expected.source,
+                expected.target,
+                base => {
+                    const outerEnvironment = this.environmentWithToken(
+                        environment,
+                        outerBinding,
+                        base
+                    );
+                    this.requireDisplayedFamilyAnnotation(
+                        innerBinding,
+                        outerEnvironment,
+                        expected.source,
+                        'expanded displayed-functor source'
+                    );
+                    return this.program.lambda(
+                        innerBinding.name,
+                        this.program.fibre(expected.source, base),
+                        this.program.fibre(expected.target, base),
+                        fibre => this.resolveLambdaBody(
+                            inner,
+                            innerBinding,
+                            fibre,
+                            outerEnvironment
+                        ),
+                        { source: this.lambdaSource(inner) }
+                    );
+                },
+                { source: this.lambdaSource(expression) }
+            )
+        );
+    }
+
+    private resolveExpandedDisplayedTransforLambda(
+        expression: LocatedLambda,
+        environment: InternalEnvironment,
+        expected: CoreCategoricalTextExpandedDisplayedTransforExpected
+    ): CoreCategoricalTerm {
+        const outerBinding = expression.bindingGroups[0][0];
+        const inner = this.requireImmediateNestedLambda(
+            expression,
+            'n',
+            'Expanded displayed-transfor abstraction'
+        );
+        const innerBinding = inner.bindingGroups[0][0];
+        this.requireCategoryAnnotation(
+            outerBinding,
+            environment,
+            expected.base,
+            'expanded displayed-transfor base'
+        );
+        return invokeProgram(
+            this.sourceFile,
+            expression.range,
+            'Expanded displayed-transfor abstraction was rejected',
+            () => this.program.transforLambda(
+                outerBinding.name,
+                expected.source,
+                expected.target,
+                base => {
+                    const outerEnvironment = this.environmentWithToken(
+                        environment,
+                        outerBinding,
+                        base
+                    );
+                    this.requireDisplayedFamilyAnnotation(
+                        innerBinding,
+                        outerEnvironment,
+                        expected.sourceFamily,
+                        'expanded displayed-transfor source'
+                    );
+                    return this.program.transforLambda(
+                        innerBinding.name,
+                        this.program.apply(
+                            expected.source,
+                            base,
+                            { expectedShape: 'fibre-functor' }
+                        ),
+                        this.program.apply(
+                            expected.target,
+                            base,
+                            { expectedShape: 'fibre-functor' }
+                        ),
+                        fibre => this.resolveLambdaBody(
+                            inner,
+                            innerBinding,
+                            fibre,
+                            outerEnvironment
+                        ),
+                        { source: this.lambdaSource(inner) }
+                    );
+                },
+                { source: this.lambdaSource(expression) }
             )
         );
     }
