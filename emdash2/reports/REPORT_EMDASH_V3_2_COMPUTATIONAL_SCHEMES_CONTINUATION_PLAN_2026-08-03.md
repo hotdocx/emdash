@@ -857,7 +857,7 @@ close CS-05.
 | Binary global-first affine-cover presentation | Implemented, exact-current through the bounded 122-target health boundary, and locally checkpointed at `0f3b379` | Retain constructive generation of the covering sieve by the two charts; mere sieve membership is insufficient. |
 | General finite-qcqs presentation | Good after the binary consumer | Generalize the Boolean choice to Nat-indexed finite factorization without duplicating the algebraic family owner. |
 | Supplied global two-chart refinement consumer | Implemented, exact-current through the bounded 124-target health boundary, and locally checkpointed at `4892c33` | It consumes an assumption-explicit global presentation and does not construct a closed non-affine object. |
-| Selected actual intersection of two retained charts | Implemented and green through focused checks, exact warnings, strict audit/catalog, and 134-target exact-current resumable health; local checkpoint pending | The intersection is a selected binary product in the conventional slice, not an atlas-first gluing payload. |
+| Selected actual intersection of two retained charts | Implemented and locally checkpointed at `d9e036f` after focused checks, exact warnings, strict audit/catalog, and 134-target exact-current resumable health | The intersection is a selected binary product in the conventional slice, not an atlas-first gluing payload. |
 | Closed global non-affine example | Good but separate | Attach meaningful projective-line-style coordinate/localization data to the supplied global object and its actual inherited chart intersection. |
 | Constructive two-affine gluing | Out of current scope | It is needed only to construct a global object from independent charts, not to present or compute with an already supplied scheme. |
 | Topology-local locally-ringed presentation | Implemented assumption-explicitly, exact-current through the bounded 128-target health boundary, and locally checkpointed at `c2b53bf` | It avoids raw joins: invertible zero yields empty coverhood, while an invertible sum returns a selected cover and memberwise Boolean unit branches. Raw support-lattice comparison remains later. |
@@ -1104,7 +1104,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-06c | Separate site-relative presentation from functor-of-points compact-open semantics | Complete as an architecture audit: retain the descriptive site-relative name, add no empty open label/alias, and route compact-open comparison to CS-10 | CS-D-028 |
 | CS-06d | Total binary site-relative scheme presentation | Complete and locally checkpointed at `4b178ee`: a 141-line/14-symbol rule-free source, 107-line/12-assertion reviewer, exact warnings, audit, registries, authority prose, and 130-target resumable health are green | CS-D-028/029/030 plus CS-06b |
 | CS-07 | Supplied global two-chart selected-refinement consumer | Complete and locally checkpointed at `4892c33`: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green. A closed genuinely non-affine realization remains separate | CS-06a |
-| CS-07b | First supplied genuinely non-affine global consumer | Its selected-overlap substrate is promoted as two rule-free source modules plus two nine-assertion reviewers; focused/exact-warning/audit/catalog/authority checks and 134-target exact-current resumable health are green, with a local checkpoint pending. The remaining consumer must attach projective-line-style coordinate/localization data to this actual inherited intersection rather than merely label two chart rings | CS-D-031/032; checkpoint the overlap substrate, then select a supplied global projective-line-style presentation |
+| CS-07b | First supplied genuinely non-affine global consumer | Its selected-overlap substrate is locally checkpointed at `d9e036f`: two rule-free source modules, two nine-assertion reviewers, focused/exact-warning/audit/catalog/authority checks, and 134-target exact-current resumable health are green. The remaining consumer must attach projective-line-style coordinate/localization data to this actual inherited intersection rather than merely label two chart rings | CS-D-031/032 and checkpointed overlap substrate; select a supplied global projective-line-style presentation |
 | CS-08 | Atlas-first two-affine gluing constructor | Out of current scope, not part of the global-first scheme interface | Reconsider only for a future consumer explicitly constructing a global object from independent affine pieces |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
@@ -1833,8 +1833,8 @@ projective-line-style object.
 
 No full CI, completed kernel-wide replay, root aggregate, push, merge, history
 rewrite, publication, atlas-first gluing, or worktree cleanup was performed.
-The bounded standard-library checkpoint is pending the exact staged-diff
-review.
+The bounded standard-library boundary is locally checkpointed as `d9e036f`
+(`feat: add selected scheme chart overlaps`).
 
 ## 14. Validation And Checkpoint Contract
 
