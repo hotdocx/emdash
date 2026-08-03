@@ -1,9 +1,11 @@
 /*
   Reviewer for the direct eta/glue/silent cover-completion HIT boundary.
 
-  Unit, matching data, and generated sections are whole presheaf maps.  The
-  silent law is an internal path and deliberately does not collapse glue by
-  runtime conversion.  No sheafification or reflector claim is made yet.
+  Unit, matching data, and generated sections are whole presheaf maps.  Glue
+  is a whole functor on matching families, and silent is one whole functor
+  path whose pointwise observation is derived.  It deliberately does not
+  collapse glue by runtime conversion.  No restriction-equivalence,
+  sheafification, or reflector claim is made yet.
 */
 
 require open emdash.emdash3_2_direct_cover_completion_hit;
@@ -25,6 +27,28 @@ assert [K : Cat]
       P
       (@DirectCoverCompletionPsh K T P));
 
+// The completion carries one canonical whole oracle algebra.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K)) ⊢
+  @direct_cover_completion_algebra K T P
+  : τ (@DirectCoverAlgebra
+      K T (@DirectCoverCompletionPsh K T P));
+
+// Cover glue is a whole functor, including matching-arrow action.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  (U : τ (Obj K))
+  (R : τ (@Sieve K U))
+  (covers : τ (@groth_topology_covers K T U R)) ⊢
+  @direct_cover_completion_glue_func K T P U R covers
+  : τ (@Functor
+      (@DirectCoverMatching_cat
+        K U R (@DirectCoverCompletionPsh K T P))
+      (@DirectCoverSection_cat
+        K U (@DirectCoverCompletionPsh K T P)));
+
 // Cover glue consumes one internally compatible whole matching map.
 assert [K : Cat]
   (T : τ (@GrothTopology K))
@@ -42,7 +66,7 @@ assert [K : Cat]
       (@yoneda_psh K U)
       (@DirectCoverCompletionPsh K T P));
 
-// Restriction is transparent composition with the exact sieve inclusion.
+// Restriction is the object action of the exact whole precomposition functor.
 assert [K : Cat]
   (T : τ (@GrothTopology K))
   (P : τ (@Psh K))
@@ -53,15 +77,46 @@ assert [K : Cat]
       (@yoneda_psh K U)
       (@DirectCoverCompletionPsh K T P))) ⊢
   @direct_cover_completion_restrict K T P U R section
-  ≡ @comp_fapp0
-      (@Psh_cat K)
-      (@ordinary_sieve_extension_psh K U R)
-      (@yoneda_psh K U)
-      (@DirectCoverCompletionPsh K T P)
-      section
-      (@ordinary_sieve_extension_inclusion K U R);
+  ≡ @fapp0
+      (@DirectCoverSection_cat
+        K U (@DirectCoverCompletionPsh K T P))
+      (@DirectCoverMatching_cat
+        K U R (@DirectCoverCompletionPsh K T P))
+      (@ordinary_sieve_local_precomp
+        K U R (@DirectCoverCompletionPsh K T P))
+      section;
 
-// Silent is a first-class path at the whole section classifier.
+// Silent is one first-class equality of whole section endofunctors.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  (U : τ (Obj K))
+  (R : τ (@Sieve K U))
+  (covers : τ (@groth_topology_covers K T U R)) ⊢
+  @direct_cover_completion_silent K T P U R covers
+  : τ (@=
+      (Hom
+        Cat_cat
+        (@DirectCoverSection_cat
+          K U (@DirectCoverCompletionPsh K T P))
+        (@DirectCoverSection_cat
+          K U (@DirectCoverCompletionPsh K T P)))
+      (@comp_fapp0
+        Cat_cat
+        (@DirectCoverSection_cat
+          K U (@DirectCoverCompletionPsh K T P))
+        (@DirectCoverMatching_cat
+          K U R (@DirectCoverCompletionPsh K T P))
+        (@DirectCoverSection_cat
+          K U (@DirectCoverCompletionPsh K T P))
+        (@direct_cover_completion_glue_func K T P U R covers)
+        (@ordinary_sieve_local_precomp
+          K U R (@DirectCoverCompletionPsh K T P)))
+      (@id Cat_cat
+        (@DirectCoverSection_cat
+          K U (@DirectCoverCompletionPsh K T P))));
+
+// The former pointwise silent path is derived from that whole equality.
 assert [K : Cat]
   (T : τ (@GrothTopology K))
   (P : τ (@Psh K))
@@ -72,7 +127,7 @@ assert [K : Cat]
       (@Psh_cat K)
       (@yoneda_psh K U)
       (@DirectCoverCompletionPsh K T P))) ⊢
-  @direct_cover_completion_silent K T P U R covers section
+  @direct_cover_completion_silent_at K T P U R covers section
   : τ (@=
       (Hom
         (@Psh_cat K)

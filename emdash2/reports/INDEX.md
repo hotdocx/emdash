@@ -50,11 +50,15 @@ one-map localization evidence at `451db48`.  A subsequent visual review of
 Pédrot's *Pursuing Shtuck* and *Debunking Sheaves* corrected the active
 sequencing: the principal-BNat ordinary-sieve bridge is frozen and unpromoted,
 while the direct constructed-sheaf route now starts with a recursive whole-
-presheaf `eta/glue/silent` cover completion.  Whole maps from extended sieves
-carry matching compatibility internally; the silent path enforces the
-separated quotient.  Its local-target eliminator and whole Hom universal
-property must be implemented before it is called a sheafification reflector.
-The constructor/reviewer boundary is locally checkpointed at `ce982e3`.
+presheaf `eta/glue/silent` cover completion.  Its initial checkpoint
+`ce982e3` represented glue and silent only pointwise; the subsequent
+eliminator audit selects a whole direct-cover algebra instead.  Glue is now a
+functor between matching and section hom-categories, and silent is one whole
+endofunctor equality.  Topology-locality canonically forgets to this oracle
+through its selected left inverse, while the converse/right law remains a
+named pulled-cover proof rather than an opaque axiom.  The local-target
+eliminator, silent-constructor coherence, and whole Hom universal property
+must be implemented before it is called a sheafification reflector.
 Dialogue branching without that quotient, or with only a directed silent
 cell, is a separately named lax/effect completion.  The direct HIT constructor,
 the supplied-reflector adjunction mate `sheafification_glue`, and computational
@@ -83,16 +87,22 @@ sieve to the ambient Cat-valued presheaf category and derives its whole
 inclusion into Yoneda. It defines topology-locality by the exact resulting
 whole Hom equivalence; it does not construct a reflector or identify that
 condition with the separately probed weighted-limit descent package.
+`emdash3_2_direct_cover_algebras.lp` is the transparent rule-free whole
+oracle layer.  At each cover its glue is a functor from matching families to
+sections and its silent law is the whole equality `glue o restriction = id`.
+It derives the oracle of a topology-local presheaf from the selected left
+inverse and left law; it does not assert the converse/right law, an
+eliminator, or sheafification.
 `emdash3_2_direct_cover_completion_hit.lp` is the first direct
-whole-presheaf return/cover/silent categorical-HIT signature.  It keeps the
-unit, recursive matching-family glue, and silent quotient at whole internal
-presheaf maps and paths over the exact ordinary-sieve extension.  Its
-formation initially returns the underlying presheaf; an eliminator must derive
-`IsTopologyLocalPsh` before the result is packaged syntactically as a
-constructed sheaf or compared with the independent rigid `Sheaf_cat` facade.
-It does not yet claim pulled-cover glue computation, a reflector, CommRing
-lift, or left exactness.  A dialogue/lax completion without an invertible
-silent quotient remains a separately consumer-gated notion.
+whole-presheaf return/cover/silent categorical-HIT signature.  Its unit is a
+whole presheaf map; its recursive glue functor and whole silent equality are
+projections of one canonical direct-cover algebra, with pointwise glue/silent
+derived.  Formation initially returns the underlying presheaf.  An honest
+unit/glue/silent-coherent eliminator and the oracle-to-restriction-equivalence
+bridge must derive `IsTopologyLocalPsh` before syntactic constructed-sheaf or
+rigid-`Sheaf_cat` packaging.  It does not yet claim that bridge, pulled-cover
+glue computation, a reflector, CommRing lift, or left exactness.  A
+dialogue/lax completion remains separately consumer-gated.
 `emdash3_2_telescope_localization_hit.lp` is the first explicit per-object
 categorical-HIT localization boundary. For an endomap `s:A->A`, it constructs
 the set-truncated sequential telescope with computing point induction,

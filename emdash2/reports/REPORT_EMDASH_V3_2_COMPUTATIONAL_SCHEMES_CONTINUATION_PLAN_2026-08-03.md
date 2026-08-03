@@ -405,6 +405,53 @@ be reconstructed from it.  They do not block validation of the core
 reflector.  No step installs a conversion rule between constructed and
 supplied reflectors or conflates direct HIT glue with the adjunction mate.
 
+The post-checkpoint eliminator audit exposes one necessary internality
+correction to the first signature.  Pédrot's oracle is an internal operation,
+not merely an object-level function on matching families.  For each covering
+`R` and presheaf `X`, write
+
+```text
+Match_R(X) = Hom_Psh(R_hat,X),
+Sect_U(X)  = Hom_Psh(y(U),X).
+```
+
+The computational algebra at that cover must be
+
+```text
+DirectCoverAt(R,X)
+  = Sigma (glue : Functor(Match_R(X),Sect_U(X))),
+      glue o restrict_R = id_Sect_U(X).
+```
+
+Thus glue carries its action on arrows between matching families internally,
+and silent is one whole equality of endofunctors.  The previous pointwise
+`glue(m)` and `silent(x)` remain useful projections, but they must be derived
+from this whole algebra rather than serve as its primitive representation.
+This is the external-site form of Pédrot's internal oracle and constant-family
+law.  It also answers the SOP concern: no family of component naturality or
+silent equations is stored.
+
+Every `IsTopologyLocalPsh(T,X)` canonically forgets to such a direct-cover
+algebra by selecting the left inverse of each restriction equivalence and its
+whole left-cancellation law.  The converse is deliberately **not** installed
+as a primitive right-cancellation axiom.  In Pédrot's internal presentation,
+existence on arbitrary matching families follows from internal naturality,
+proof-irrelevance of answers, and pullback of questions.  Externally, the
+corresponding v3.2 proof needs the whole pulled-cover action and the fact that
+pullback along a sieve member is maximal.  Until that comparison is derived,
+`DirectCoverAlgebra(T,X)` is the computational oracle view and
+`IsTopologyLocalPsh(T,X)` is the full restriction-equivalence view; neither is
+silently identified with the other.
+
+An honest nondependent eliminator must consequently do more than return an
+opaque map.  It consumes a target direct-cover algebra (with topology-local
+targets supplying one canonically), extends `P->Y`, preserves the whole glue
+functors, and maps the source silent path to the selected target silent path.
+The unit, glue, and silent/path beta data are the three recursor obligations
+visible in Pédrot's Figure 2.  A selected map lacking the whole glue law or
+path-constructor coherence is only an extension candidate and must not be
+promoted as the CS-12 eliminator.
+
 Pédrot also clarifies a meaningful intermediate *lax/effectful* notion.  If
 the recursive cover operation is retained without the silent quotient, one
 gets a dialogue/free-effect algebra rather than an ordinary sheaf.  Replacing
@@ -1431,6 +1478,26 @@ prerequisites.
   infrastructure exists, standard `P^n` should be derived by instantiating
   `Proj`, and the earlier explicit `P1` capability should receive a whole
   comparison rather than remain a competing public construction.
+- **CS-D-044 — Direct-cover glue is a whole functor:** at each cover, package
+  the oracle as a functor from the matching hom-category to the section
+  hom-category and package silent as the whole equality
+  `glue o restriction = id`.  Pointwise glue and silent observations are
+  projections.  The checkpointed object-only primitive is migrated before an
+  eliminator is claimed; no external matching-arrow naturality fields are
+  added.
+- **CS-D-045 — Oracle structure and restriction equivalence remain distinct
+  until proved equivalent:** topology-locality supplies a direct-cover algebra
+  through its selected left inverse.  Do not add the other inverse law as an
+  opaque constructor.  Deriving it from whole pulled-cover action, ordinary
+  sieve subterminality, and maximality after restriction along a member is a
+  named CS-12 gate and the bridge from the computational/Pédrot view to
+  `IsTopologyLocalPsh`.
+- **CS-D-046 — Eliminator acceptance includes the silent constructor:** the
+  nondependent recursor must expose whole unit and glue beta laws and the
+  path-constructor coherence mapping source silent to target silent.  A
+  primitive map with only endpoint typings is not the promised HIT
+  eliminator.  Topology-local targets enter through the canonical
+  locality-to-algebra conversion.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1461,7 +1528,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; and the Pédrot-directed whole `eta/glue/silent` cover-completion signature/reviewer are checkpointed at `ce982e3` at the underlying-presheaf boundary. The principal-BNat ordinary-sieve bridge is frozen and unpromoted. | Derive the eliminator into local targets and topology-locality before syntactic sheaf packaging; then whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left-exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; and the initial Pédrot-directed `eta/glue/silent` signature/reviewer are checkpointed at `ce982e3`. The eliminator audit found that checkpoint's glue/silent representation object-level; CS-D-044 selects a whole direct-cover algebra migration before recursor promotion. The principal-BNat bridge remains frozen. | Promote the whole glue-functor/silent algebra and locality-to-algebra conversion; then implement the unit/glue/silent-coherent eliminator, derive the oracle-to-restriction-equivalence bridge and locality, package the constructed sheaf, and continue with whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -2480,6 +2547,103 @@ No full CI, examples aggregate, root aggregate, push, merge, history rewrite,
 publication, or worktree cleanup was performed.  The bounded implementation
 and synchronized-plan checkpoint is `ce982e3` (`feat: add direct cover
 completion HIT`).
+
+### 13.17 CS-12d whole direct-cover algebra correction — 2026-08-03
+
+The first eliminator audit found a real internality prerequisite in the
+checkpointed direct-cover signature. Its matching argument and resulting
+section were whole presheaf maps, but the operation sending one matching
+family to one section was represented only at objects of the corresponding
+hom-categories. That representation did not itself own the action on arrows
+between matching families. Likewise, the earlier silent constructor was a
+pointwise path rather than one equality of whole section endofunctors.
+
+The exact oracle and recursor clauses in Pédrot's *Pursuing Shtuck* confirm
+that this is not merely a presentation preference. The oracle is an internal
+operation, its constant-family equation is part of the algebra, and the
+recursor must preserve that equation through its path-constructor coherence.
+The v3.2 external-site translation therefore uses the whole categories
+
+```text
+Match_R(X) = Hom_Psh(R_hat,X),
+Sect_U(X)  = Hom_Psh(y(U),X)
+```
+
+and packages one cover algebra as a functor
+`Match_R(X) -> Sect_U(X)` together with the whole equality
+`glue o restriction = id`. This keeps matching-arrow action, ordinary
+functoriality, and naturality at generic owners. Pointwise glue and silent
+remain derived observations rather than competing primitive data.
+
+The new transparent, rule-free
+`emdash3_2_direct_cover_algebras.lp` has 241 lines and 11 symbols. It defines
+`DirectCoverAt` and `DirectCoverAlgebra`, their whole glue/silent projections,
+and the canonical forgetful map
+
+```text
+IsTopologyLocalPsh(T,X) -> DirectCoverAlgebra(T,X)
+```
+
+by selecting the existing restriction equivalence's left inverse and whole
+left law. Its 109-line reviewer contains eight checks, including exact
+projection computations and a negative check that oracle structure is not
+definitionally identified with full topology-locality.
+
+The migrated `emdash3_2_direct_cover_completion_hit.lp` has 203 lines and
+eight symbols. The primitive completion now retains one canonical whole
+`DirectCoverAlgebra`; its public glue functor and whole silent equality are
+transparent projections, and the former pointwise glue/silent interfaces are
+derived by functor evaluation and `eq_ap`. Its 160-line reviewer contains ten
+checks, including the two existing non-collapse checks. Neither source
+introduces a rewrite or unification rule.
+
+This tranche does **not** yet cross the first sheafification integration
+grade. In particular it supplies no eliminator, no preservation law for the
+unit or glue constructors, no silent/path-constructor coherence, no proof of
+the missing `restriction o glue = id` law, no
+`IsTopologyLocalPsh` proof for the completion, no constructed sheaf object,
+and no functor or adjunction. The separately supplied
+`SheafificationCapability` therefore remains the active ringed-site consumer
+interface. The intended relationship remains the six-grade realization
+contract in Section 3.2: the categorical HIT is integrated with the fixed-site
+Cat-valued core only when its local objects, whole universal property, and
+functorial assembly instantiate that existing capability. Comparison with an
+independently supplied capability is subsequent whole/propositional evidence,
+never a conversion rule. CommRing lifting, left exactness, and
+slice/base-change remain stronger downstream grades.
+
+The next CS-12 gate is consequently the honest recursor over this whole
+algebra. It must expose unit beta, whole glue preservation, and the
+silent-constructor coherence before any primitive extension map is called an
+eliminator. Only then should the pulled-cover/maximality argument attempt to
+derive the second restriction/glue law and hence topology-locality.
+
+Focused registered source checks are green in 8.16 and 7.81 seconds, and the
+two reviewer checks are green in 7.49 and 7.48 seconds. Warning-enabled checks
+of the immediate dependency, both sources, and both reviewers reproduce
+exactly the inherited 1,179 warnings: 1,020 unjoinable critical pairs and 159
+replaceable pattern variables. No warning is located in either direct-cover
+source or reviewer. The strict LHS audit reports zero unreviewed clauses and
+zero reconstructible compound slots; the strict 1,992-check catalog has zero
+unclassified checks; source TOC, report-header/reference lints,
+check-metrics tests, shell syntax, health-snapshot freshness, and whitespace
+hygiene are green.
+
+Exact-current resumable health is green for all 148 registered targets. The
+old 146-target state was first reproduced byte-for-byte from checkpoint
+`472f0bc`, including its checked-content digest
+`sha256:e88a256d67fd9ab5e2afae2e827e8df7f94f98f1084a1cbd92f5d09eadd44104`.
+The audit found exactly two changed old targets and two new targets, with all
+144 other files and the Lambdapi/timeout/warning/flag environment unchanged.
+The refresh therefore ran only the new algebra source (5.510 seconds), the
+migrated completion source (5.577 seconds), the algebra reviewer (5.969
+seconds), and the migrated completion reviewer (5.419 seconds). The resulting
+source-metrics snapshot is
+`sha256:50a0b77ef469ac17b6aa13b5637d9ecbfb435132246eaaf192c4cfafbeb4af44`
+and checked-content snapshot is
+`sha256:a9ed8f77040f2cd712d09c67dc7b832e6d6555eb96ff9006dbecc8d8faa53c7a`.
+No full CI, examples aggregate, root aggregate, push, merge, history rewrite,
+publication, or worktree cleanup was performed.
 
 ## 14. Validation And Checkpoint Contract
 

@@ -34,6 +34,8 @@ the transparent native equality-valued evidence-property and finite-dimension tr
 extension is `emdash3_2_eq1_evidence_property.lp`;
 the set-truncated sequential telescope categorical-HIT localization extension
 is `emdash3_2_telescope_localization_hit.lp`;
+the whole direct-cover oracle-algebra and locality-forgetful extension is
+`emdash3_2_direct_cover_algebras.lp`;
 the direct whole-presheaf return/cover/silent categorical-HIT signature
 extension is `emdash3_2_direct_cover_completion_hit.lp`;
 the reusable Nat arithmetic/sethood extension is
@@ -517,21 +519,27 @@ Use the following order:
     one-map categorical-HIT localization, not an ordinary-sieve topology,
     presheaf reflector, sheafification, arbitrary-site constructor, or
     CommRing-valued lift;
-58. `emdash3_2_direct_cover_completion_hit.lp` for the first direct
-    whole-presheaf return/cover/silent categorical-HIT signature. Its unit,
-    recursive matching-family glue, and silent quotient are whole internal
-    maps/paths over the existing ordinary-sieve extension. It deliberately
-    does not yet claim an eliminator, pulled-cover glue computation,
-    topology-locality, whole Hom universality, reflector, rigid-sheaf-facade
-    realization, CommRing lift, or left exactness;
-59. `emdash3_2_checks.lp` for executable regression statements;
-60. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+58. `emdash3_2_direct_cover_algebras.lp` for the transparent rule-free whole
+    oracle structure at covering ordinary sieves: glue is a functor between
+    matching and section hom-categories, silent is one whole endofunctor
+    equality, and topology-locality forgets to this structure through its
+    selected left inverse. It does not assert the converse, a second inverse,
+    sheafification, or an eliminator;
+59. `emdash3_2_direct_cover_completion_hit.lp` for the first direct
+    whole-presheaf return/cover/silent categorical-HIT signature. Its unit is
+    a whole presheaf map, while recursive glue and silent are projections of
+    one canonical whole direct-cover algebra; pointwise observations are
+    derived. It deliberately does not yet claim an eliminator, pulled-cover
+    glue computation, topology-locality, whole Hom universality, reflector,
+    rigid-sheaf-facade realization, CommRing lift, or left exactness;
+60. `emdash3_2_checks.lp` for executable regression statements;
+61. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-61. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-62. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+62. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+63. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-63. `reports/INDEX.md` for task-specific plans and decision records.
-64. `book/book.json` and `book/evidence.json` for book source
+64. `reports/INDEX.md` for task-specific plans and decision records.
+65. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
