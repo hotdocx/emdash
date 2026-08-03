@@ -2513,25 +2513,34 @@ specificity:
 > In the dedicated
 > `/home/user1/emdash1-presheaves-sites-schemes` worktree on
 > `goal/presheaves-sites-schemes-v3.2`, continue the computational-schemes
-> program from clean checkpoint `4427b99` by treating
+> program from clean checkpoint `3dd70fd` by treating
 > `REPORT_EMDASH_V3_2_COMPUTATIONAL_SCHEMES_CONTINUATION_PLAN_2026-08-03.md`
 > as the living implementation, decision, validation, and recovery ledger.
-> Execute its next ready bounded tranche under the active nested Lambdapi SOP,
-> beginning with the global-first rule-free selected-cover substrate and its
-> internally derived pullback coverage. Update the plan whenever probes or
-> consumers refine the architecture; preserve the separation of the three
-> locality notions, global-first presentation from atlas-first gluing,
-> semantic schemes from computational presentations, and small/big site
-> restriction from affine-basis equivalence. Keep all functoriality,
-> naturality, overlap, and cocycle propagation at whole internal owners; do
-> not promote unrelated affine labels, opaque theorem names, external
-> component coherence, or overclaimed scheme/local-ring interfaces. Reuse
-> recent green evidence for unchanged boundaries and avoid long aggregates
-> unless a real integration gate requires one. Create only authorized local
-> green checkpoint commits after synchronized proportional validation. Do not
-> push, merge, publish, rebase, amend, reset, rewrite history, clean up
-> worktrees, or interfere with concurrent branches.
+> Execute only its next ready bounded tranches under the active nested
+> Lambdapi SOP.  On CS-12, continue the direct whole-presheaf
+> `eta/glue/silent` cover completion with an honest eliminator into
+> topology-local targets, derived locality and syntactic constructed-sheaf
+> packaging, whole Hom universality, functorial reflector assembly, and scoped
+> instantiation/comparison of the existing `SheafificationCapability`; do not
+> call the constructor sheafification before those gates or conflate direct
+> HIT glue, the adjunction mate, and Cartier localization glue.  Keep CS-13 as
+> an independent active scheme lane: use a supplied global `P1` capability as
+> the smallest end-to-end validation of the existing binary/Laurent owners,
+> then build graded `Proj` infrastructure from which standard `P^n` is
+> ultimately derived and compared wholly with the explicit `P1` boundary.
+> Do not revive the frozen principal-BNat bridge, require atlas-first gluing,
+> or let either research lane block the other.  Update the plan whenever
+> probes refine the architecture; keep action, naturality, and coherence at
+> whole internal owners; prefer computational definitions and scoped evidence
+> over external component fields or broad rewrites; and reuse exact recent
+> evidence rather than run long aggregates for reassurance.  Authorized local
+> green checkpoints require synchronized plan/registry/health evidence.  Do
+> not push, merge, publish, rebase, amend, reset, rewrite history, clean up
+> worktrees, delete branches, or touch another worktree or branch.
 
-The successor persistent goal was started on 2026-08-03 with this objective
-and remains active after the CS-01 checkpoint. The plan, not the launch
-sentence, owns the evolving task order and detailed acceptance gates.
+As of the `3dd70fd` checkpoint, the goal service still stores the older
+unfinished objective in `paused` state.  The attempted replacement above was
+rejected because the service exposes no resume/edit operation while an
+unfinished goal exists.  Use the quoted objective when the product resumes or
+replaces that goal.  The living plan, not the launch sentence, continues to
+own the evolving task order and detailed acceptance gates.
