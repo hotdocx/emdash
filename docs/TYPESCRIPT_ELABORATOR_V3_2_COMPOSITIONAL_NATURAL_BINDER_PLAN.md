@@ -1361,6 +1361,87 @@ This candidate is a qualification of existing internalized semantics, not an
 authorization to accept arbitrary pointwise functions, erase dependency, or
 make fixed and displayed classifiers definitionally identical.
 
+### Exact proposal: `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F`
+
+Gate:
+`H-DTTLF-USABILITY-DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-01`.
+Decision:
+`D-DTTLF-USABILITY-079`.
+
+The read-only 0F audit selects `compileDisplayedContextual` itself as the
+smallest shared recursive engine. No new generic traversal or additional
+intermediate AST is justified. The historical compact/open factorer remains
+the classifier- and presentation-specific wrapper around that engine.
+
+The exact proposed implementation is:
+
+1. In `src/v3_2/categorical_surface.ts`, extend the displayed-functor
+   factorization/evidence rule union with exactly
+   `categorical.displayed-functor-contextual` and let the factorization carry
+   structural as well as dependent prerequisites.
+2. Preserve the existing qualified section-weakening fast path and the exact
+   direct identity/eta/closed-chain path, including their current rule names,
+   chain lengths, recovered terms, Core, types, and failure behavior.
+3. Only when `displayedContextualAbstraction` is enabled and neither old path
+   applies, create a one-slot identity wiring for the bound fibre variable and
+   invoke the existing `compileDisplayedContextual` recursively. Require its
+   source family and target family to match the requested displayed binder
+   exactly.
+4. Reject every usage ordinal other than the binder's hidden base and exposed
+   fibre variable before invoking the richer path. This preserves the current
+   no-outer-capture boundary for both compact and expanded wrappers.
+5. Merge the existing Sigma/Pi bridge prerequisites with the recursive
+   compilation's structural and dependent prerequisites. Add no owner name,
+   runtime rule, proof rule, Core node, checker branch, cast, curry, or
+   external coherence payload.
+6. Route both existing wrappers through that result without changing their
+   facades: compact `displayedFunctorLambda` remains a `Functord_cat` surface
+   term, while open `contextualDisplayedFunctorLambda` remains the component
+   of the enclosing ordinary `Transf_cat` abstraction. The existing one- and
+   many-binding `displayedContextLambda` public method remains unchanged.
+7. Keep the historical `fibred-binder-1` profile and
+   `CORE_CATEGORICAL_FIBRED_BINDER_CONTRACT` unchanged. Because that profile
+   does not enable displayed contextual abstraction, its non-chain rejection
+   remains exact. The new path is available only in already-later profiles
+   that own the reviewed contextual operations.
+8. Add
+   `tests/v3_2_categorical_displayed_functor_contextual_engine_tests.ts` and
+   register it in `tests/main_tests.ts`. Its focused matrix must prove:
+   byte-identical old identity/eta/composition/weakening Core and inferred
+   types; compact/one-binding/expanded parity for fixed-argument displayed
+   evaluation `lambda^f F. F(a0)`; object and consumed base-arrow action;
+   compact/one-binding/expanded parity for the one-variable fibre diagonal;
+   callback-once/frozen evidence; preservation of the old base-profile
+   rejection; and rejection of a genuinely unsupported or escaped body.
+9. In
+   `tests/v3_2_categorical_compositional_fd_expanded_tests.ts`, remove only
+   the superseded assertion that a fibre diagonal is unfactorable; retain all
+   wrong-base, wrong-target, cross-fibre, and scope failures. Update the
+   `displayedFunctorLambda` comment in
+   `src/v3_2/categorical_program.ts` so it distinguishes the historical base
+   contract from later contextual profiles.
+10. Change no text adapter, browser preset, public method signature,
+    historical contract/review module, transfer fragment, active Lambdapi
+    file, book artifact, or scale-qualification claim.
+
+Reject the proposal if the fixed-argument evaluation needs a new kernel owner,
+if any of the four historical cases changes explicit Core or inferred type,
+if the base `fibred-binder-1` profile begins accepting a non-chain body, if an
+outer token can escape through the richer path, or if the expanded wrapper no
+longer emits the exact compact Core.
+
+Proportional validation is the new focused suite; the existing compositional
+FD-expanded, fibred-binder, displayed-bracket, and displayed-evaluation suites
+in bounded parallel execution; workspace check; root typecheck; complete
+changed-file lint; exact diff hygiene; and one bounded current-kernel check.
+Because this changes the shared categorical surface, run one root `check:ts`
+after the bounded matrix is green and before the semantic checkpoint. Carry
+forward that result and do not rerun it for documentation synchronization.
+
+This proposal is non-self-authorizing. Checkpoint it independently, then
+review exactly that immutable proposal under the standing unattended
+delegation with immediate human supersession before editing behavior.
+
 ## Work Ledger
 
 | Slice | Status | Dependency | Exact boundary |
@@ -1374,7 +1455,8 @@ make fixed and displayed classifiers definitionally identical.
 | `COMPOSITIONAL-ND-EXPANDED-1D` | final-focused-green at `b89420d442536544185e8ab5dbe6876bd9980b96` | green 1C; completed audit; D-077 | The existing open `indexed-functor` endpoints and compact point factorer implement literal expanded `lambda^n k. lambda^n a`; the result retains the ordinary iterated-Hom facade, byte-identical compact Core, and internally owned component/base/higher action. |
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | final-focused-green at `7f7d201948e5f035e516f6fb15554a1aea26029d` | graduated direct typed API; D-077 checkpoint; D-078 | Exactly two expected contracts and thin resolver routes now expose expanded `lambda^n k. lambda^f a` and `lambda^n k. lambda^n a` text. Existing grammar, neutral resolution, typed methods, and compact factorers are reused; no parser/checker/Core/kernel semantics changed. |
 | `CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E` | complete; read-only | final-green fixed/open compilers and exact compact/expanded Core parity | Fixed and displayed recursive algebras are distinct. One-binding `displayedContextLambda` nevertheless proves exact four-case Core/type parity with the narrow compact factorer, selecting displayed-only consolidation rather than an erased universal compiler. |
-| `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` | candidate read-only successor | completed 0E; existing `compileDisplayedContextual`; 4/4 exact one-binding parity | Freeze the smallest displayed-only helper extraction and one representative fixed-argument evaluation graduation. Preserve wrappers/classifiers and authorize no behavior until exact review. |
+| `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-0F` | complete; read-only; exact 1F proposal frozen below | completed 0E; existing `compileDisplayedContextual`; 4/4 exact one-binding parity; fixed-evaluation consumer/action probe | `compileDisplayedContextual` is the smallest existing engine. The sole gap is profile-gated routing from compact/open wrappers; no kernel owner or universal fixed/displayed traversal is needed. |
+| `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` | exact proposal frozen; D-079 review pending | completed 0F; historical base-profile preservation | Reuse the existing recursive displayed compiler only in contextual-enabled profiles, preserve all old fast paths, and graduate fixed evaluation plus a fibre diagonal with exact compact/expanded parity and internal action. |
 
 ## Explicit Non-Claims
 
@@ -1512,11 +1594,34 @@ review an exact proposal before any refactor. Do not invent a standalone
 functorial-type-theory kernel, erase open-fibre dependency, or add behavior
 under the read-only audit.
 
+Treat that 0F audit as complete once its exact 1F proposal has an immutable
+checkpoint. The existing recursive engine is `compileDisplayedContextual`;
+the proposed change is only a profile-gated fallback from the compact/open
+displayed factorer, preserving all historical paths and wrappers. Before any
+behavior edit, independently review exact gate
+`H-DTTLF-USABILITY-DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-01` as
+`D-DTTLF-USABILITY-079` under the standing unattended delegation with
+immediate human supersession. Implement only the ten numbered items if that
+review approves them.
+
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-02 — H-DTTLF-USABILITY-DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-01
+  proposal frozen.** The completed 0F audit selects the existing
+  `compileDisplayedContextual` recursion rather than a new universal engine.
+  A bounded current-profile probe constructs fixed-argument displayed
+  evaluation, observes its existing evaluation/constant-section owners, and
+  consumes its internally owned base-arrow action; compact and expanded
+  wrappers both currently reject at the one identified factorer seam. The
+  exact ten-item 1F proposal preserves every historical fast path and the base
+  `fibred-binder-1` contract, enables the richer path only in contextual
+  profiles, adds one evidence rule and focused tests, and changes no kernel,
+  Core, text, browser, transfer, or public-method contract. It awaits a
+  separate immutable D-079 review before behavior.
 
 - **2026-08-02 — CLASSIFIER-DIRECTED-FUNCTOR-BRACKET-0E read-only complete.**
   Source comparison finds two recursive, internally coherent but materially
