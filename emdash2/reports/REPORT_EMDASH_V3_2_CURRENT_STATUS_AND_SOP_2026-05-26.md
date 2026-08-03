@@ -2879,10 +2879,10 @@ and check-content snapshot
 `sha256:e9d102a79c9d824f40cb0bc6e9f829d3adeaf521becdde1fa3e830ea8b04f02d`.
 The final inherited affine-glue reviewer passed in 39.504 seconds with the
 ordinary 60-second limit, no object priming, and no special flags. The
-authorized local checkpoint is the remaining completion gate. Localization
-locality, any stalk-local-ring interpretation, small-site comparison, and the
-first scheme record remain PSSS-11 follow-ons rather than claims of this
-layer.
+synchronized implementation is included in local checkpoint `5ead41c`.
+Localization locality, any stalk-local-ring interpretation, small-site
+comparison, and the first scheme record remain PSSS-11 follow-ons rather than
+claims of this layer.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.

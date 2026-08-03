@@ -234,10 +234,11 @@ structure-sheaf presentation: a supplied reflector, one sheaf object over
 that exact topology, and a whole `DefIso` from its included presheaf to the
 computing coordinate presheaf. Its 230-line rule-free source and 166-line
 reviewer are focused quiet-, exact-warning-, strict-audit/catalog-, and exact
-104-target-health-green. The authorized local checkpoint remains active. The
-next semantic step is then the narrowly named localization-locality capability
-and first concrete affine-scheme presentation, not construction of general
-sheafification, generated topology, or stalk theory.
+104-target-health-green, and the synchronized implementation is checkpointed
+at `5ead41c`. The active semantic step is now the narrowly named
+localization-locality capability and first concrete affine-scheme
+presentation, not construction of general sheafification, generated topology,
+or stalk theory.
 
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
@@ -4915,8 +4916,8 @@ assumed.
 
 ### Phase PSSS-11 — Scheme atlases
 
-Status: active. PSSS-11a is promoted and synchronized-green; its authorized
-local checkpoint remains pending. The next bounded gate is the
+Status: active. PSSS-11a is promoted, synchronized-green, and locally
+checkpointed at `5ead41c`. The active bounded gate is the
 localization-locality capability actually needed by the first scheme-facing
 consumer.
 
@@ -4962,7 +4963,8 @@ and check-content snapshot
 The new owner/reviewer retain successful 56.934/45.522-second source evidence;
 the final inherited affine-glue reviewer passed in 39.504 seconds under the
 ordinary 60-second limit. No object priming or special Lambdapi flags were
-used. The authorized local checkpoint completes this tranche.
+used. The synchronized implementation is included in authorized local
+checkpoint `5ead41c`.
 
 This is deliberately assumption-explicit in two places: both the reflector
 and the whole presentation comparison are supplied. It does not assert that
@@ -5804,7 +5806,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-10c1 | Pointwise basic-open intersection and representation by localization at `f*g` | Rule-free source/reviewer synchronized-green through exact warnings, strict 1,987-check catalog, 96-target health, and nonduplicative integration remainder; local checkpoint `4436a23` | PSSS-10c plus product-unit and structured-map multiplication laws |
 | PSSS-10dG | Direct internally generated big-affine Zariski topology | Promoted 178-line/7-symbol rule-free source and 120-line/9-assertion reviewer; focused and exact inherited `1020 + 159` warnings, strict audit/catalog, tooling/authority sync, and exact 102-target health green; local checkpoint `a30f6dc` | Generic PSSS-09cGI intersection plus selected finite localization families and exact-endpoint affine chart arrows |
 | PSSS-10dS | Small-site topology and ringed-site comparison | Proposed later; not required by direct big-site MVP | Concrete small-site consumer plus PSSS-10dG/PSSS-08c1 comparison scope |
-| PSSS-11a | Whole assumption-explicit affine structure-sheaf presentation | Promoted 230-line/9-symbol rule-free source and 166-line/9-assertion reviewer; focused quiet/exact-warning/audit/catalog, 104-target exact-content health, and nonduplicative integration gates green; authorized checkpoint pending | Checkpointed PSSS-10dG plus checkpointed PSSS-05c |
+| PSSS-11a | Whole assumption-explicit affine structure-sheaf presentation | Promoted 230-line/9-symbol rule-free source and 166-line/9-assertion reviewer; focused quiet/exact-warning/audit/catalog, 104-target exact-content health, and nonduplicative integration gates green; local checkpoint `5ead41c` | Checkpointed PSSS-10dG plus checkpointed PSSS-05c |
 | PSSS-11 | Scheme atlas | Active: PSSS-11a whole presentation, then narrowly named localization-locality capability and concrete records/examples | PSSS-11a checkpoint plus existing computational localization/glue owners |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 

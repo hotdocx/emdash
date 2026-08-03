@@ -238,10 +238,10 @@ in 1187.079 summed check-seconds at source-metrics snapshot
 and check-content snapshot
 `sha256:e9d102a79c9d824f40cb0bc6e9f829d3adeaf521becdde1fa3e830ea8b04f02d`;
 the final inherited affine-glue reviewer passed in 39.504 seconds without
-object priming or special flags. Final checkpoint evidence remains pending.
-The module does not construct sheafification, prove localization locality or
-a stalk-local-ring condition, compare with the small site, or package a
-scheme.
+object priming or special flags. The synchronized implementation is included
+in local checkpoint `5ead41c`. The module does not construct sheafification,
+prove localization locality or a stalk-local-ring condition, compare with the
+small site, or package a scheme.
 `emdash3_2_commutative_algebra_affine_atlas.lp` is the rule-free PSSS-10b
 concrete atlas consumer. In every product ring it uses the already-selected
 finite Zariski-cover package for `(1,0)` and `(0,1)`, derives their
