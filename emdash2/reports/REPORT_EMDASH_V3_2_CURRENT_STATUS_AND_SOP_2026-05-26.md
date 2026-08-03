@@ -2923,10 +2923,10 @@ seconds under the ordinary 60-second limit, with no object priming or special
 flags. The proportional nonduplicative integration remainder is green through
 42 Python tests, five document-registry tests, health-snapshot verification,
 source/report lints, strict audit/catalog, and book
-evidence/typography/KaTeX/assembly checks. The authorized local checkpoint is
-the final promotion gate. This is localization locality over `D(s)`, which
-need not cover, not ordinary sheaf descent, stalk-local-ring structure, or the
-final scheme package.
+evidence/typography/KaTeX/assembly checks. The synchronized implementation is
+included in local checkpoint `8216f28`. This is localization locality over
+`D(s)`, which need not cover, not ordinary sheaf descent, stalk-local-ring
+structure, or the final scheme package.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.

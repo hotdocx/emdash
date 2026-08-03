@@ -5091,8 +5091,8 @@ concurrent-load timeouts; no object priming or special Lambdapi flags were
 used. The proportional nonduplicative integration remainder is green through
 42 Python tests, five document-registry tests, health-snapshot verification,
 source TOC and active-reference/header lints, strict audit/catalog, and book
-evidence/typography/KaTeX/assembly checks. The authorized local checkpoint is
-the only remaining promotion gate.
+evidence/typography/KaTeX/assembly checks. The synchronized implementation is
+included in authorized local checkpoint `8216f28`.
 
 - consume the internally generated affine-Zariski topology and its derived
   selected-basic-open inclusion/leastness; retain supplied or primitive
@@ -5941,8 +5941,8 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-10dG | Direct internally generated big-affine Zariski topology | Promoted 178-line/7-symbol rule-free source and 120-line/9-assertion reviewer; focused and exact inherited `1020 + 159` warnings, strict audit/catalog, tooling/authority sync, and exact 102-target health green; local checkpoint `a30f6dc` | Generic PSSS-09cGI intersection plus selected finite localization families and exact-endpoint affine chart arrows |
 | PSSS-10dS | Small-site topology and ringed-site comparison | Proposed later; not required by direct big-site MVP | Concrete small-site consumer plus PSSS-10dG/PSSS-08c1 comparison scope |
 | PSSS-11a | Whole assumption-explicit affine structure-sheaf presentation | Promoted 230-line/9-symbol rule-free source and 166-line/9-assertion reviewer; focused quiet/exact-warning/audit/catalog, 104-target exact-content health, and nonduplicative integration gates green; local checkpoint `5ead41c` | Checkpointed PSSS-10dG plus checkpointed PSSS-05c |
-| PSSS-11b | Whole affine localization locality | Promoted source/reviewers, exact warning comparison, strict audit, 1,992-check catalog, 106-target exact-content health, and proportional integration green; local checkpoint pending | PSSS-11a checkpoint, existing localization restriction/matching owners, and the generic Cat-level selected-left-inverse right law |
-| PSSS-11 | Scheme atlas | Active: promote PSSS-11b, then package a concrete assumption-explicit affine scheme record/example | PSSS-11a checkpoint plus PSSS-11b |
+| PSSS-11b | Whole affine localization locality | Promoted source/reviewers, exact warning comparison, strict audit, 1,992-check catalog, 106-target exact-content health, and proportional integration green; local checkpoint `8216f28` | PSSS-11a checkpoint, existing localization restriction/matching owners, and the generic Cat-level selected-left-inverse right law |
+| PSSS-11 | Scheme atlas | Active: package a concrete assumption-explicit affine scheme record/example over the checkpointed whole structure-sheaf presentation and localization locality | PSSS-11a checkpoint plus PSSS-11b checkpoint `8216f28` |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 
 ## 20. Success Criteria For The Foundation Tranches

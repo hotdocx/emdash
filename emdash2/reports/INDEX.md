@@ -275,8 +275,8 @@ affine-glue source/reviewer in 38.838/48.300 seconds under the ordinary
 60-second bound, without object priming or special flags. The proportional
 nonduplicative integration remainder is green through 42 Python tests, five
 document-registry tests, health-snapshot verification, source/report lints,
-strict audit/catalog, and book evidence/typography/KaTeX/assembly checks; only
-the local checkpoint remains pending.
+strict audit/catalog, and book evidence/typography/KaTeX/assembly checks. The
+synchronized implementation is included in local checkpoint `8216f28`.
 `emdash3_2_commutative_algebra_affine_atlas.lp` is the rule-free PSSS-10b
 concrete atlas consumer. In every product ring it uses the already-selected
 finite Zariski-cover package for `(1,0)` and `(0,1)`, derives their
