@@ -30,7 +30,8 @@ separately consumer-gated. CS-06a now supplies two selected chart arrows that
 constructively generate the retained covering sieve, with whole
 ambient-to-affine realizations on those two generators. This is a global-first
 binary affine-cover presentation, not yet a locally-ringed scheme certificate;
-the next bounded consumer is a supplied global two-chart presentation. The
+it is checkpointed at `0f3b379`, and the next bounded consumer is a supplied
+global two-chart presentation. The
 deferred categorical HIT is the PSSS-05d/PSSS-D-114 free localization of a
 whole presheaf category at descent maps, not Tabareau's auxiliary HoTT
 coequalizer and not a monolithic sheafification HIT.

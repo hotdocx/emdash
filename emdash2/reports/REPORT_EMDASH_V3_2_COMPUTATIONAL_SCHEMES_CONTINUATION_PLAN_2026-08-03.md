@@ -684,7 +684,7 @@ close CS-05.
 | Induced slice topology and reflective-sheaf transport | Moderate and consumer-gated | Honest site-functor/topology compatibility and a sheaf/reflector transport theorem are absent; the historical file supplied both. |
 | Whole sheafified Beck--Chevalley/locally-exact comparison | Moderate, with strong semantic guidance | Exact v3.2 owner and orientation must be selected by the affine-chart consumer; no component-square encoding is acceptable. |
 | Global-first assumption-explicit affine atlas | Good | Honest whole restriction/pullback comparison to each affine chart. |
-| Binary global-first affine-cover presentation | Implemented and exact-current through the bounded 122-target health boundary; local checkpoint pending | Retain constructive generation of the covering sieve by the two charts; mere sieve membership is insufficient. |
+| Binary global-first affine-cover presentation | Implemented, exact-current through the bounded 122-target health boundary, and locally checkpointed at `0f3b379` | Retain constructive generation of the covering sieve by the two charts; mere sieve membership is insufficient. |
 | General finite-qcqs presentation | Good after the binary consumer | Generalize the Boolean choice to Nat-indexed finite factorization without duplicating the algebraic family owner. |
 | Supplied global non-affine example | Good | Selecting a mathematically meaningful ambient object before `Scheme_cat` exists. |
 | Constructive two-affine gluing | Moderate | Global realization and universal property, not overlap algebra itself. |
@@ -838,7 +838,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-05a | Historical site-morphism and modern morphism/comorphism/locally-exact contract audit | Complete as a contract audit; stronger sheafification base change remains separately consumer-gated | CS-04 plus a concrete affine-chart target |
 | CS-05b | Whole sheaf-basis comparison plus computational ambient-affine realization | Promoted as two transparent rule-free modules; focused/exact-warning/audit/catalog green; exact-current 116-target health completed under the uniform timeout policy; local checkpoints `b4fca9c`, `82d93b5`, and validation-policy checkpoint `023ffbf` | CS-D-018 and CS-04 |
 | CS-06 | Global-first finite-qcqs `SchemePresentation(X)` | Split into CS-06a computational atlas and CS-06b locally-ringed scheme certificate | CS-02/CS-03/CS-05 contracts |
-| CS-06a | Global-first `BinaryAffineCoverPresentation` with constructive cover generation and whole affine realizations | Complete and exact-current: three rule-free source layers, three reviewers, exact warning comparison, audit/catalog/authority synchronization, and 122-target resumable health are green; local checkpoint pending | CS-03 binary contract plus CS-05b |
+| CS-06a | Global-first `BinaryAffineCoverPresentation` with constructive cover generation and whole affine realizations | Complete and locally checkpointed at `0f3b379`: three rule-free source layers, three reviewers, exact warning comparison, audit/catalog/authority synchronization, and 122-target resumable health are green | CS-03 binary contract plus CS-05b |
 | CS-06b | Add correct locally-ringed support and, when consumed, generic finite arity | Deferred; must not overclaim the CS-06a package | CS-02 support owner plus arity-generic consumer |
 | CS-07 | Supplied global two-chart reviewer | Ready as a parameterized computational-atlas consumer; a closed genuinely non-affine realization remains separate | CS-06a |
 | CS-08 | Atlas-first two-affine gluing constructor | Later | Whole open-overlap input plus realization/universal property |
@@ -1304,10 +1304,11 @@ Proportional validation is green:
   `sha256:ef903fa031ffeaa6a541ff48abe6e013244ff9c027bc2b1a093b9e0c461a4605`.
 
 No full CI, kernel-wide replay, root aggregate, push, merge, history rewrite,
-publication, or worktree cleanup was performed. CS-06a is ready for its
-authorized local checkpoint. CS-07 may now consume the package as a supplied
-global two-chart computational atlas; a closed non-affine construction and
-the semantic locally-ringed scheme classifier remain separately gated.
+publication, or worktree cleanup was performed. The complete CS-06a boundary
+is locally checkpointed as `0f3b379` (`feat: add binary affine-cover
+presentations`). CS-07 may now consume the package as a supplied global
+two-chart computational atlas; a closed non-affine construction and the
+semantic locally-ringed scheme classifier remain separately gated.
 
 ## 14. Validation And Checkpoint Contract
 
