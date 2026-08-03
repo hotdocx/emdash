@@ -1,6 +1,6 @@
 # TypeScript Elaborator v3.2 — Compositional Natural Binders
 
-Date: 2026-08-02
+Date: 2026-08-03
 
 Plan-ID: TS-ELAB-V3.2-COMPOSITIONAL-NATURAL-BINDER
 
@@ -11,7 +11,7 @@ Depends-On:
 and
 [`TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md`](./TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md)
 
-Status: active semantic successor. The predecessor's canonical finite
+Status: scoped semantic successor complete. The predecessor's canonical finite
 displayed-natural telescope, grouped text, and reviewer route are final-green
 at rollback-safe semantic/product checkpoint
 `607a026f88bc6d3b9f305ecb21f6630ce7c94950`.
@@ -78,9 +78,18 @@ Its ten-item implementation is final-focused-green at rollback-safe semantic
 checkpoint `c55a8d873b7abd49e221c122831ac6a90928b06f`. Compact `lambda^fd`, expanded
 `lambda^n k. lambda^f a`, and one-binding displayed brackets now reuse the
 same recursive displayed body engine for reviewed contextual bodies while
-retaining their distinct facades. The next row is a read-only graduation audit
-of whether further fixed/open sharing has a concrete end-user payoff; it must
-not force an erased universal algebra.
+retaining their distinct facades. The subsequent 1G endpoint-context bridge is
+final-focused-green at
+`f1993c2852b91173858bc2ecdf1d00998517dcaf`. The read-only
+`DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` audit below is now complete with zero
+behavior delta. Fixed displayed evaluation and canonical nested displayed eta
+already work as recursively compiled natural-identity endpoints in compact,
+expanded, and closed presentations, with internal higher action. No concrete
+blocked consumer remains inside this subplan's reviewed algebra, so the
+subplan graduates without an erased universal operation table or another
+semantic proposal. The higher-level continuation returns to
+[`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
+for a consumer-led binder-occurrence audit.
 
 ## Objective
 
@@ -1623,8 +1632,7 @@ Final proportional evidence is:
 Exact rollback-safe semantic checkpoint:
 `f1993c2852b91173858bc2ecdf1d00998517dcaf`.
 
-### Selected next candidate:
-`DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H`
+### `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` result
 
 Perform one read-only graduation audit before another semantic or syntax
 change:
@@ -1644,6 +1652,40 @@ The audit is read-only. It must not add an operation table, parser branch,
 owner, cast, curry, arbitrary pointwise-naturalization rule, or new validation
 aggregate.
 
+The audit is complete with zero behavior delta:
+
+1. The shared recursive natural body algebra is exactly:
+   - a point component of an already-coherent displayed transformation;
+   - generic identity at a recursively compiled displayed-functor endpoint;
+   - recursive vertical composition of accepted children;
+   - fixed-head prewhiskering, whose argument uses the same endpoint compiler;
+     and
+   - fixed-head postwhiskering, whose child is recursively factored before the
+     existing displayed-functor arrow action is applied.
+2. Endpoint compilation is itself recursive over the reviewed contextual
+   displayed algebra: projection/slot wiring, fibre pairs, closed displayed-
+   functor application, fixed and varying displayed evaluation, and exact
+   canonical nested displayed eta. Unsupported point data still fails closed.
+3. Compact unary `lambda^nd`, expanded
+   `lambda^n k. lambda^n a`, and finite grouped natural telescopes all reach
+   that algebra through presentation-specific scoped wrappers. They do not
+   erase the distinction between fixed and displayed classifiers.
+4. One combined in-memory probe, run without editing the repository, checks
+   both requested consumers:
+   - identity at fixed displayed evaluation has exact compact/expanded/closed
+     Core and inferred type; and
+   - identity at canonical nested displayed eta factors to the original
+     coherent nested functor and has the same exact three-presentation parity.
+5. Both probe cases compile the existing
+   `displayed-transfor-higher-cell` observation. Together with the carried-
+   forward point/base-arrow suites, this confirms that object, fibre-arrow,
+   base-arrow, and higher action remain internally owned by the kernel.
+6. No concrete expression inside this reviewed algebra is blocked. Therefore
+   do not add a universal operation table, new Core or kernel owner, parser
+   route, cast, curry, or speculative body rule here. Graduate this subplan
+   and require the higher-level usability plan to select its next behavior
+   from an actual end-user expression outside the present algebra.
+
 ## Work Ledger
 
 | Slice | Status | Dependency | Exact boundary |
@@ -1661,7 +1703,7 @@ aggregate.
 | `DISPLAYED-FUNCTOR-CONTEXTUAL-ENGINE-1F` | final-focused-green at `c55a8d873b7abd49e221c122831ac6a90928b06f` | completed 0F; D-079; exact focused and predecessor matrices | Compact/open displayed-functor wrappers now use the existing recursive displayed compiler after their historical fast paths. Fixed evaluation and a fibre diagonal have exact three-presentation Core parity and internal object/base-arrow action; no kernel/Core/text/browser semantics changed. |
 | `CLASSIFIER-INDEXED-FUNCTOR-ALGEBRA-GRADUATE-0G` | complete; read-only | final-focused-green 1F; clarified ordinary/displayed algebra distinction | A universal operation table has no current consumer. The concrete gap is narrower: unary compact/expanded `:^nd` omit the existing displayed endpoint context already used by grouped telescopes. |
 | `DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G` | final-focused-green at `f1993c2852b91173858bc2ecdf1d00998517dcaf` | completed 0G; D-080; effective 35/35 focused/predecessor matrix | Existing one-slot endpoint wiring now surrounds compact/expanded callbacks in contextual profiles. Diagonal identity has exact Core/type/action/text parity; historical direct behavior and diagnostics remain stable. No new owner, parser route, Core, or universal compiler. |
-| `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` | dependency-ready; read-only | final-focused-green 1G; compact/expanded/grouped displayed-natural evidence | Freeze the exact shared body algebra, probe evaluation/nested endpoints, and require one concrete consumer before any further behavior. Otherwise graduate this subplan. |
+| `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` | complete; read-only; zero behavior delta; subplan graduated | final-focused-green 1G; compact/expanded/grouped displayed-natural evidence; combined fixed-evaluation/nested-endpoint probe | The recursive body and endpoint algebras are frozen exactly. Both requested consumers already have compact/expanded/closed Core-type parity and internal higher action. No concrete blocked consumer remains in scope, so no further behavior is selected here. |
 
 ## Explicit Non-Claims
 
@@ -1817,17 +1859,35 @@ D-080 and final-focused-green. Compact and expanded natural callbacks activate
 the existing scoped endpoint compiler only in contextual profiles; diagonal
 identity has exact compact/expanded/closed Core-type parity, inherited text,
 and internal point/base-arrow/higher action. Historical direct behavior and
-diagnostics remain exact. Route next to the read-only
-`DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` audit. Require one concrete blocked
-consumer before another behavior slice; otherwise graduate this subplan. Add
-no universal compiler, owner, Core/checker/runtime rule, parser route, cast,
-curry, external coherence field, or repeat aggregate.
+diagnostics remain exact. Treat the read-only
+`DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` audit as complete with zero behavior
+delta. Its combined fixed-evaluation and canonical nested-endpoint probe has
+exact compact/expanded/closed Core-type parity and internal higher action.
+No concrete blocked consumer remains inside the reviewed algebra, so graduate
+this subplan and return to the higher-level mixed-introduction/public
+continuation plan's consumer-led binder-occurrence audit. Add no universal
+compiler, owner, Core/checker/runtime rule, parser route, cast, curry, external
+coherence field, or repeat aggregate.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-03 — DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H complete; subplan
+  graduated.** Static comparison freezes one shared recursive displayed-
+  natural body algebra across compact unary, expanded open-fibre, and finite
+  grouped presentations: coherent point components, contextual identity,
+  recursive vertical composition, and fixed-head pre/postwhiskering. Its
+  endpoint algebra recursively includes slots/projections, fibre pairs,
+  closed displayed application, fixed/varying evaluation, and exact nested
+  displayed eta. One combined no-edit probe proves compact/expanded/closed
+  Core-type parity for fixed evaluation and canonical nested eta identities;
+  both expose the existing higher-cell action. No in-scope consumer is
+  blocked, no behavior or validation aggregate changed, and this plan returns
+  selection of the next concrete expression to the higher-level usability
+  plan.
 
 - **2026-08-02 — DISPLAYED-NATURAL-ENDPOINT-CONTEXT-1G final-focused-green.**
   Compact unary and expanded open-fibre natural callbacks now activate the

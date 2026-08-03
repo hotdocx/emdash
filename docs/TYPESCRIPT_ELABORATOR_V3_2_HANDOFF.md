@@ -134,10 +134,20 @@
 > pass. The one required root aggregate was run once and remains non-green
 > only on the known source-digest pins and README-wrap regex; do not repeat it.
 > No owner, Core, parser route, cast, curry, or universal operation table was
-> added. The next dependency-ready row is the read-only
-> `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` audit; it must find one concrete
-> blocked consumer before proposing more behavior, otherwise graduate the
-> subplan. Exact proposal checkpoint:
+> added. The subsequent read-only
+> `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` audit is complete with zero behavior
+> delta. The shared body algebra is coherent point components, contextual
+> identity, recursive vertical composition, and fixed-head pre/postwhiskering;
+> its recursive endpoint compiler covers slots/projections, fibre pairs,
+> closed displayed application, fixed/varying evaluation, and canonical
+> nested displayed eta. A single no-edit probe confirms that fixed evaluation
+> and nested eta identities each have exact compact/expanded/closed Core and
+> inferred type plus existing internal higher action. No concrete blocked
+> consumer remains inside this subplan, which is now graduated. The next
+> dependency-ready operation is the higher-level read-only
+> `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ`: select at most one real blocked
+> recursive binder expression from active emdash development/book examples
+> before proposing more behavior. Exact proposal checkpoint:
 > `998f4e4e6977cabdeff5011b6c2e866a09cd8139`; exact 1G rollback-safe
 > semantic checkpoint: `f1993c2852b91173858bc2ecdf1d00998517dcaf`.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are

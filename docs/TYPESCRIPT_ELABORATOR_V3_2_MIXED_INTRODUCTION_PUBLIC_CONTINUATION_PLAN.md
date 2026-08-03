@@ -214,6 +214,20 @@ with immediate human supersession. Implementation is dependency-ready; no
 active kernel, TypeScript, transfer, or test file has yet changed under that
 decision.
 
+Current continuation (2026-08-03): the dedicated compositional-natural-binder
+successor has completed through `DISPLAYED-NATURAL-ALGEBRA-GRADUATE-0H` with
+zero behavior delta after its final 1G semantic checkpoint
+`f1993c2852b91173858bc2ecdf1d00998517dcaf`. Compact `lambda^nd`, expanded
+`lambda^n k. lambda^n a`, and grouped displayed-natural telescopes share the
+reviewed recursive point/endpoint factorers while retaining distinct surface
+classifiers. Fixed evaluation and canonical nested displayed eta already work
+as identity endpoints with exact compact/expanded/closed Core-type parity and
+internal higher action. That scoped subplan found no remaining concrete
+consumer, so it graduates. The dependency-ready continuation here is the
+read-only `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` below; it must select any
+next semantic slice from an actual end-user expression rather than from
+owner/API symmetry.
+
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
 That predecessor completed:
@@ -521,9 +535,38 @@ It deliberately avoids:
 | `CONTEXTUAL-ND-TEXT-PARITY-0AH` | executable read-only audit complete; zero semantic delta; exact two-seam successor selected | completed `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG`; graduated historical syntax-parity plan; direct compact `displayedTransforContextLambda`; disposable neutral-application/text probe | Neutral application already handles contextual eta and both whiskers; existing `composeCells` recurses; the direct factorer remains the sole coherence gate. At the audited starting boundary, compact text failed only at the base-category versus displayed-family expected-contract distinction and absent `identityCell` head, while the historical route remained green. |
 | `CONTEXTUAL-ND-TEXT-PARITY-1AI` | implemented and focused-green at `dabe9d9827462b76a493c1dd34cc658e137f22d5` under D-DTTLF-USABILITY-065/066 | completed `CONTEXTUAL-ND-TEXT-PARITY-0AH`; immutable D-065 proposal `a4ee654d8e025df6962ea92f219819430852f51a`; immutable D-066 proposal `bb485375f6c843adc6c3b80755b1eb11e9cdbf0a`; 14/14 affected parity; 24/24 nearest direct; typecheck/lint | One additive expected-contract route selects the existing compact `displayedTransforContextLambda`, and one fixed `identityCell` head delegates to the existing program operation. Neutral eta/whiskering, `composeCells`, the direct factorer, and the historical base-component route remain unchanged. The fixed alternating target uses the same resolver path. Nine existing revision pins received only the approved literal replacement. Read-only 0AJ graduation is next. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero semantic delta; canonical contextual-telescope audit selected | final-green 1AI; direct point factorer; generic displayed context fold | Direct/text parity is exact for the single hidden-base/fibre-slot context, while the first remaining semantic usability gap is multiple individually exposed variables over canonical sibling/dependency layers. The dedicated telescope plan owns the read-only context-normal-form versus multi-ordinal architecture audit; parser/browser promotion remains downstream. |
+| `COMPOSITIONAL-NATURAL-BINDER-THROUGH-0H` | complete; scoped subplan graduated with zero 0H behavior delta | final-green contextual telescope/reviewer at `607a026f88bc6d3b9f305ecb21f6630ce7c94950`; dedicated D-074 through D-080 evidence; 1G semantic checkpoint `f1993c2852b91173858bc2ecdf1d00998517dcaf` | Ordinary `lambda^n`, expanded open `lambda^f`/`lambda^n`, compact `lambda^fd`/`lambda^nd`, and grouped displayed brackets now share their exact classifier-appropriate recursive engines. The final audit proves evaluation/nested endpoint identity and higher action without another behavior slice. |
+| `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ` | dependency-ready; read-only | graduated compositional-natural subplan; active kernel/check examples; current public AST and reviewer | Inventory representative binder bodies from active emdash development and book-facing examples, map them to the existing fixed/open functorial and natural algebras, and select at most one expression blocked by a missing recursive surface constructor despite existing internal kernel ownership. Add no behavior, transfer, parser/browser, scale, curry, facade, or owner by analogy. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
+
+## `CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ`
+
+Perform one higher-level read-only usability audit:
+
+1. Sample representative variable-bearing bodies from active
+   `emdash3_2_checks.lp`, current checked demos, and book-facing examples.
+2. Classify each body against the implemented recursive algebras for ordinary
+   fixed `lambda^f`/`lambda^n`, open displayed `lambda^f`/`lambda^n`, compact
+   `lambda^fd`/`lambda^nd`, and canonical grouped displayed contexts.
+3. Distinguish three outcomes explicitly:
+   - already expressible through the public TypeScript AST;
+   - semantically unsupported because the active kernel lacks the required
+     internal owner/action; or
+   - blocked only because a recursive surface constructor is missing even
+     though its internal owner/action already exists.
+4. Select at most one case from the third class. Prefer an expression that is
+   useful in a reviewer/book example and exercises genuine recursive variable
+   occurrence rather than API symmetry.
+5. If no such case exists, record the qualified usability graduation and stop
+   instead of inventing a semantic task.
+
+This audit authorizes no TypeScript behavior, Lambdapi edit, transfer
+inventory, parser/text route, browser/public update, book rewrite, scale
+resumption, product facade, curry, cast, external coherence evidence, or long
+aggregate. Any selected behavior must be frozen as a separate exact proposal
+and reviewed before implementation.
 
 ## Frozen First Gate
 
@@ -7989,11 +8032,15 @@ Core/reviewer equality, typecheck/lint, production build, real-browser
 acceptance, zero-error console, and measured cold/warm evidence. Treat the
 sole 52.2-minute aggregate as effective all-but-one stale source assertion;
 D-073's focused 1/1 correction closes that assertion and the aggregate must
-not be repeated. Continue semantic work from
-`docs/TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md`: the
-user selects reusable ordinary-natural abstraction, followed by an exact
-compact-versus-expanded displayed comparison, as the next priority. Its first
-row is read-only and adds no behavior.
+not be repeated. Treat
+`docs/TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md` as
+complete through its read-only 0H graduation. Carry forward the 1G semantic
+checkpoint and exact compact/expanded/grouped evidence without another
+aggregate. Continue with the read-only
+`CATEGORICAL-BINDER-OCCURRENCE-AUDIT-0AQ`: require one concrete active
+emdash/book expression that is blocked only by a missing recursive surface
+constructor before freezing any behavior proposal. Otherwise record the
+qualified usability boundary and stop.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -8011,6 +8058,17 @@ removal, or unrelated cleanup is authorized.
 ```
 
 ## Decision Ledger
+
+- **2026-08-03 — compositional-natural subplan graduated; consumer-led audit
+  selected.** The dedicated 0H audit freezes the shared displayed-natural
+  body and endpoint algebras after 1G. Fixed evaluation and canonical nested
+  displayed eta identities already have compact/expanded/closed Core-type
+  parity and internal higher action, so no additional behavior is justified
+  inside that subplan. The higher-level continuation now samples actual
+  active-development/book expressions and may select at most one missing
+  recursive surface constructor. It must not promote a kernel owner, curry,
+  parser, facade, or scale task by analogy, and it must not run a long
+  aggregate.
 
 - **2026-08-02 — contextual reviewer final-green; compositional-natural
   successor selected.** D-070--D-073 are checkpointed at
