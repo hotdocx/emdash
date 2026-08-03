@@ -786,6 +786,28 @@ not provide a closed genuinely non-affine global object, assert that an
 arbitrary refinement is itself affine, supply the missing locally-ringed
 support condition, or perform atlas-first gluing.
 
+The post-CS-06d consumer audit sharpens what a first projective-line-style
+example must establish.  Merely supplying two polynomial coordinate rings and
+whole chart-coordinate `DefIso`s would be useful affine-chart data, but it
+would not distinguish the projective line from an arbitrary global object
+with two affine-line charts.  The familiar inversion comparison on the two
+localized coordinate rings is computationally meaningful only when it is
+connected to the **actual inherited intersection** of the two selected global
+charts.  That connection is consumer data or a derived adapter for the
+example; it is not a new overlap/coherence field in the general scheme
+presentation.
+
+No active v3.2 module currently supplies a projective/graded/`Proj` object, a
+principal-sieve facade for an arbitrary chart arrow, or a ready ordinary
+categorical-pullback object.  `Pullback_catd` is family reindexing, explicitly
+not a pullback constructor.  General weighted-limit infrastructure may later
+present a pullback, but no such finite diagram/weight consumer has yet been
+selected.  The next bounded probe must therefore test the smallest honest
+selected-overlap contract in the slice category before promoting a named
+projective-line presentation.  It must not attach a disconnected localization
+isomorphism to an opaque `P1` label, store external component naturality, or
+move atlas-first gluing back into the active path.
+
 ### CS-08 and later — Out-of-scope construction and semantic comparisons
 
 Possible later research, explicitly outside the current computational-scheme
@@ -1022,6 +1044,14 @@ prerequisites.
   rule-free binary successor. The historical primitive `mod_smod` remains the
   separately supplied `SheafificationCapability`; constructing it by native
   categorical localization is CS-12 and does not block this declaration.
+- **CS-D-031 — A non-affine example must connect coordinates to its inherited
+  overlap:** two affine-line chart labels alone do not characterize a
+  projective-line-style consumer.  Any selected localization/inversion
+  comparison must be related to an actual common chart restriction, using a
+  reusable slice-overlap or pullback contract if one is needed.  This adapter
+  remains outside `BinarySiteRelativeSchemePresentation`: the global object
+  continues to own restriction and compatibility, and the example merely
+  identifies the derived overlap with its chosen computing presentation.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1045,6 +1075,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-06c | Separate site-relative presentation from functor-of-points compact-open semantics | Complete as an architecture audit: retain the descriptive site-relative name, add no empty open label/alias, and route compact-open comparison to CS-10 | CS-D-028 |
 | CS-06d | Total binary site-relative scheme presentation | Complete and locally checkpointed at `4b178ee`: a 141-line/14-symbol rule-free source, 107-line/12-assertion reviewer, exact warnings, audit, registries, authority prose, and 130-target resumable health are green | CS-D-028/029/030 plus CS-06b |
 | CS-07 | Supplied global two-chart selected-refinement consumer | Complete and locally checkpointed at `4892c33`: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green. A closed genuinely non-affine realization remains separate | CS-06a |
+| CS-07b | First supplied genuinely non-affine global consumer | Contract audit in progress: no active projective/graded object exists, and a projective-line-style presentation must connect its localization transition to the actual inherited chart intersection rather than merely label two chart rings | CS-D-031; smallest honest selected-overlap/pullback probe |
 | CS-08 | Atlas-first two-affine gluing constructor | Out of current scope, not part of the global-first scheme interface | Reconsider only for a future consumer explicitly constructing a global object from independent affine pieces |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
