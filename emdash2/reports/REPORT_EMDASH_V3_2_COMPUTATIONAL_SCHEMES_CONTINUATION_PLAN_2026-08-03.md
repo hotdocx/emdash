@@ -1686,7 +1686,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the Pédrot-directed `eta/glue/silent` signature, whole glue correction, and unit/glue/silent-coherent recursor are checkpointed through `deeab6d`. Eligible questions and whole varying extension/restriction/glue are checkpointed through `98fe2c6`; CS-D-053's canonical extension-pullback comparison is checkpointed at `337a638`. The current tranche derives generic whole strict `Functord` naturality at full `tapp1_func`, specializes it to direct glue, adds the generic opposite represented-family bridge and retained-member Yoneda section, and promotes `DirectCoverSheafStructure` as one whole glue plus one whole silent path. The completion now inhabits the total syntactic `DirectCoverSheaf`, and its deployed per-cover recursor algebra is a forgetful projection. Focused checks and the prior exact warning/strict-audit evidence are green; no long aggregate is rerun. The principal-BNat bridge remains frozen. | Establish whole Hom uniqueness/universality and functorial assembly; then compare the algebraic direct-cover sheaf with conventional two-sided `IsTopologyLocalPsh`, the rigid facade, and `SheafificationCapability`. Treat `restriction o glue = id` as part of that comparison, not as a prerequisite for syntactic internal sheafhood. Follow with CommRing lift and left exactness. |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the Pédrot-directed `eta/glue/silent` signature, whole glue correction, and unit/glue/silent-coherent recursor are checkpointed through `deeab6d`. Eligible questions and whole varying extension/restriction/glue are checkpointed through `98fe2c6`; CS-D-053's canonical extension-pullback comparison is checkpointed at `337a638`; the internal Pédrot sheaf package is checkpointed at `f119391`. The active underlying tranche selects runtime represented-family reindex accumulation for ordinary `Pullback_catd`; makes generic composition/pullback along `Sigma_proj1_func` proof-time comparisons with the explicitly selected `Sigma_proj1_pullback_catd`; retains proof-time represented comparisons at that stable owner; adds whole proof-time `hom_int`/`hom_con_int` duality; and moves recursive dependent-variable computation to the internal `section_weaken_funcd` owner. The subsequent retained-member probes now derive the whole second inverse `restriction o glue = id_Matching`, lift it through strict fibre/displayed/ordinary fixed-forward `OmegaEquivAlong`, and combine it with whole `silent` to construct `IsTopologyLocalPsh(DirectCoverCompletionPsh)`. The final integration probe is green in about 3.5 seconds with zero warnings; no long aggregate was rerun. The principal-BNat bridge remains frozen. | Promote only the owner-minimal retained endpoint, whole transformation, and strict pointwise-closure surface; do not copy the exploratory ladder wholesale. Then expose the constructed topology-local sheaf through a scoped rigid-facade comparison, establish whole Hom uniqueness/universality and the fixed-site reflector/adjunction, and instantiate `SheafificationCapability`. Follow with CommRing lift and left exactness while keeping the independent `Proj` lane active. |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -3745,6 +3745,827 @@ should the implementation select the narrow comparison with
 `SheafificationCapability`. This order preserves the computational
 `eta/glue/silent` center and avoids reopening external extensionality or
 unrelated generated-topology/scheme work.
+
+### 13.27 CS-12l represented reindex accumulation and whole retained members — 2026-08-03
+
+The conventional-locality comparison supplied the first concrete consumer
+for reindexing a represented Cat-valued family.  The relevant mathematical
+cut is
+
+```text
+F^*(hom_con(W,R))  ->  hom_con(W,R o Op(F)),
+F^*(hom_(R,W))     ->  hom_(R o F,W).
+```
+
+An initial proof-time-only probe established the equality, but the subsequent
+normal-form review identified these formulas as genuine accumulation of the
+extra indexing functor into the represented diagram.  The selected kernel
+contract is therefore:
+
+1. both ordinary represented-family `Pullback_catd` formulas above are runtime
+   rewrites;
+2. repeated contravariant reindexing joins the existing generic pullback
+   accumulation route because opposite composition and ordinary cut
+   accumulation already select the same associated composite;
+3. generic semantic composition and generic `Pullback_catd` along
+   `Sigma_proj1_func` compare with `Sigma_proj1_pullback_catd` only at proof
+   time; consumers select that stable runtime owner explicitly;
+4. the stable owner's covariant and contravariant accumulated presentations
+   compare by
+   narrowly shaped rigid-head `unif_rule`s, not rewrites; and
+5. the whole iterable Yoneda presentations
+   `hom_int(A^op,B^op,F^op)` and `hom_con_int(A,B,F)` likewise compare only at
+   proof time, preserving their distinct runtime action owners.
+
+Item 3 is deliberate.  The Sigma-projection stable head owns the existing
+`Pi_cat`/`Functord_cat` uncurrying bridge, `sigma_functord_sec`, displayed-cell
+evaluation, and path-induction projections.  Rewriting it forward in the
+covariant case erased that owner and exposed eleven additional stuck
+projection peaks.  Reversing accumulated `hom_` back to the stable pullback
+would defeat the selected accumulation direction.  Retaining the stable head
+as an explicit consumer selection and comparing both generic Sigma-projection
+presentations at proof time is the scoped normal-form boundary requested by
+the review.  It removes the former competing runtime peak: a raw represented
+pullback now follows represented accumulation, while a consumer needing the
+Sigma projection ladder names `Sigma_proj1_pullback_catd` directly.
+
+That migration initially exposed exactly two later subject-reduction
+dependencies.  Both were the July displayed-dependent-chain rules that had
+overloaded
+`section_pullback_sec(Sigma_proj1_func(R),E,s)` as a displayed functor
+`R ->_K E`.  A `unif_rule` cannot justify subject reduction for those runtime
+betas.  The correction introduces the honestly typed whole owner
+
+```text
+section_weaken_funcd(R,E,s) : R ->_K E,
+section_weaken_funcd(R,E,s)[k] = const_{R[k]}(s[k]).
+```
+
+Its base-arrow action is the existing internal action of `s` and ignores only
+the new source-fibre object.  Recursive contexts now explicitly compose this
+owner with `sigma_functord_sec` when they require a section over `Sigma(R)`.
+Generic `section_pullback_sec` remains unchanged for arbitrary base functors
+and continues to compute at literal base objects.  Thus no external
+naturality field is introduced and no recursive-variable computation is
+discarded; the two semantic roles are no longer conflated under one runtime
+head.
+
+All promoted LHSs match rigid heads with variables or inferred `_` slots.
+Variance equations such as `B0 = Op(A)` and
+`B0 = Op(Sigma(E))` occur in unifier constraint lists rather than as reducible
+compound LHS patterns.  The strict inferred-slot audit reports zero
+unreviewed candidates.  The superseded interim contract had 1,025 unjoinable
+critical pairs, five above the inherited 1,020 because it retained the
+generic-versus-specialized runtime peak.  After the two generic Sigma folds
+move to proof time and displayed weakening receives its own owner, the active
+warning-enabled kernel check reports 1,016: nine below the interim candidate
+and four below the inherited checkpoint.  The two higher Cat-valued
+`tapp0`/naturality overlaps of the weakening component are the same shaped
+overlaps already present for its former `section_pullback_sec` spelling.  One
+additional projection-order peak appears when both displayed families are
+constant: the generic `tapp0` observation and the constant-family `fapp0`
+projection select convertible values but do not currently join by rewriting.
+An owner-position probe confirms that a specialized `fapp0` bridge closes
+that peak and lowers the kernel count to 1,015.  It remains deliberately
+unpromoted because the recursive-context and retained-member consumers need
+only the whole displayed owner, and no concrete consumer presently requires
+that additional compound-pattern projection.  No functionality is therefore
+lost at the selected 1,016-warning boundary; warnings remain diagnostic rather
+than an automatic veto.
+
+The active warning-enabled kernel check, strict inferred-slot audit, and the
+updated central diagnostic target are green.  The diagnostics retain typed
+`eq_refl` controls for both generic Sigma-projection comparisons, runtime
+non-collapse controls for both, generic represented accumulation controls,
+the explicit weakening component, the recursive two-variable displayed
+chain, and its internal base-arrow action.  This is proportional migration
+evidence; no examples-wide, health, CI, or repository aggregate is rerun.
+
+The triggering consumer is now green.  For one eligible covering question
+`q`, define the whole retained-member category
+
+```text
+M_q = Sigma(Op(K), extension(q)).
+```
+
+Its objects are retained arrows and membership evidence, while its arrows
+already carry postcomposition and membership transport.  One displayed map
+and its Sigma total send all retained members internally to their pulled
+questions.  Pulling matching, Section, restriction, glue, and silent along
+that one functor preserves their whole action.
+
+For a matching map `m : extension(q) -> X`, generic fibre covariance followed
+by represented-target postcomposition constructs one displayed family of
+retained-member sections.  `sigma_functord_sec` uncurries it to one section
+over `M_q`; no family of per-member naturality squares is introduced.  The
+actual pulled Section family and this construction family are then compared
+through two whole representable diagrams:
+
+```text
+representable-through-question
+  = representable-through-base-projection.
+```
+
+The equality is obtained from the already-internal total question/base path,
+opposite functoriality, composition associativity, and Yoneda.  Whole
+`hom_int`/`hom_con_int` duality is made first-class before whiskering, rather
+than relying on transitivity of a unifier under a composite head.  Applying
+`hom_con(X,-)` yields one equality of whole Cat-valued families, and a single
+`ind_eq` transports the whole retained-member section into the actual pulled
+Section family.  The focused consumer passes against the active kernel with
+all probe-local rules removed.
+
+This tranche does **not** yet prove `restriction o glue = id`.  It establishes
+the missing internally coherent member-section prerequisite from which that
+directed/right-inverse comparison can now be built.  The next tranche should
+promote the retained-member construction in a dedicated direct-cover module,
+then derive the whole comparison over `M_q`; it must not regress to external
+component packaging or generic record-style functor extensionality.
+
+### 13.28 CS-12m functorial retained-member sections and scoped univalence — 2026-08-04
+
+The fixed matching map in CS-12l has now been internalized without changing
+the semantic owner.  The generic kernel bridge
+
+```text
+sigma_functord_sec_func(R,D)
+  : Functor(Functord_cat(R,D),
+            Pi_cat(Sigma(R),Sigma_proj1_pullback_catd(R,D)))
+```
+
+has object action `FF |-> sigma_functord_sec(FF)`.  Its ordinary functor action
+owns the displayed-transformation coherence; there is intentionally no new
+component-square field and no bespoke arrow beta.  Composing this bridge with
+the full represented-target postcomposition telescope and generic
+precomposition by `fib_cov_int(extension(q))` gives one whole functor
+
+```text
+Matching_q -> Pi(M_q, pulled Section_X).
+```
+
+Thus the matching map `m` now varies internally from the start.  Literal
+matching maps and retained arrows are observations of this owner rather than
+indices of an external proof family.  The earlier fixed-`m` capped spelling
+and the new telescope spelling are deliberately not forced to share a runtime
+normal form; that projection-order comparison is proof-time evidence if a
+consumer needs it.
+
+The owner-position full-kernel candidate added no warning attributable to the
+new bridge.  After promotion, the warning-enabled active kernel remains at the
+selected 1,016 unjoinable-pair boundary, the strict inferred-slot audit reports
+zero unreviewed clauses, the central diagnostics pass, and the retained-member
+consumer passes.  The corresponding focused logs are
+`logs/probes/emdash3_2-20260804-003706.log`,
+`logs/probes/emdash3_2_checks-20260804-003744.log`, and
+`logs/probes/psss12w_retained_member_questions-20260804-003721.log`.  No
+health, examples-wide, CI, or repository aggregate was run.
+
+The univalence boundary is now separated into two orthogonal questions:
+
+1. **CS-12 comparison input.**  The final conventional comparison may take a
+   scoped `CatIsoUnivalence` capability for the exact whole functor category
+   in which `restriction o glue` and `id_Matching` are objects.  Applying
+   `isotoid_cat` once to a whole `IsoEvidence` is legitimate and does not
+   require proving a global closure theorem first.
+2. **Later closure computation.**  Deriving that capability computationally
+   from the syntactic shape of a functor category is a useful independent
+   library theorem.  Its reduction behavior may be audited by category-shape
+   cases later; it is not a prerequisite for the direct-cover comparison.
+
+Likewise, componentwise invertibility must not be confused with a whole
+functor-category isomorphism.  `IsoEvidence(Functor_cat(A,B),F,G)` already
+means two whole transformations plus their two whole cancellation paths.
+For the active v3.2 kernel, ordinary `Transf` and displayed `Functord` are
+strictly natural: their directed off-diagonal projections are internal
+computational presentations of the strict naturality owner, and the kernel
+already exposes whole strict-naturality paths.  Therefore an internally
+natural transformation with isomorphic components has a canonical natural
+inverse; inverse naturality is derived algebraically from original naturality
+and component cancellation rather than supplied as another field.  The
+retained-member route has exactly this shape because it is generated from
+whole `silent`, pullback-stability, representable/Yoneda paths, and their
+internal functor action.  If a future kernel adds genuinely lax
+transformations, that must use a distinct classifier or scope this assembly
+theorem behind explicit strict/pseudo-invertible coherence; the future lax
+case does not weaken or block the present CS-12 contract.
+
+The active stronger goal remains the conventional one.  Derive
+
+```text
+restriction o glue = id_Matching,
+```
+
+combine it with the already implemented
+`glue o restriction = id_Section`, form the existing
+`OmegaEquivAlong Cat_cat`, and only then compare the constructed completion
+with `IsTopologyLocalPsh` and the supplied sheaf facade.  The syntactic
+`DirectCoverSheaf` remains valid before this theorem, but that weaker stopping
+point is not the selected CS-12 integration boundary.
+
+### 13.29 CS-12n direct `OmegaEquivAlong` comparison; split retraction retired — 2026-08-04
+
+The post-CS-12m proof-design audit considered encoding matching maps as whole
+sections over the retained-member total
+
+```text
+M_q = Sigma(Op(K),extension(q))
+```
+
+and then reflecting equality through a global decoder.  In abstract notation
+this would have introduced an encoder `J`, a decoder `D`, and a split law
+`D o J = id`.  The encoding has the standard Grothendieck--Yoneda reading
+
+```text
+Nat(extension(q),X)
+  -> Pi((V,p,member) : M_q, Nat(y(V),X)),
+```
+
+so it is not mathematically spurious.  Nevertheless, a *full split
+retraction* is stronger than the conventional sheaf comparison requires and
+would put generic category-of-elements infrastructure on the CS-12 critical
+path.  It also creates the unacceptable temptation to hide the hard step in
+an opaque cancellation constant.
+
+That full `D/J` route is therefore **retired from the active CS-12 design**.
+No `sigma_sec_functord_func`, `fib_cov_eval_int`, decoder, or
+`groth_yoneda_retract : D o J = id` has been added to the active kernel.  A
+future generic Grothendieck--Yoneda equivalence may construct such operations
+for independent consumers, but it is neither an assumption nor a dependency
+of direct-cover sheafification.
+
+The useful one-way retained-member construction is retained.  It already
+provides, as whole internal owners:
+
+1. the category of all retained members and its functor to pulled covering
+   questions;
+2. the constant-to-pulled-question cone;
+3. the Matching and Section images of that cone;
+4. the whole strict glue square over that cone;
+5. its `Pi_func` image and its application to the internally constant matching
+   section; and
+6. one transport into the selected pulled-Section family.
+
+The focused probe
+`logs/probes/psss12w_retained_member_questions-20260804-013208.log`
+typechecks this whole cone comparison.  It introduces no external component
+naturality square.  A probe-only companion runtime cut also makes semantic
+composition by a contravariantly represented family select the same
+accumulated normal form as the already-promoted `Pullback_catd` rule.  That
+candidate and the probe-only `Const_catd`/ordinary-constant comparison remain
+unpromoted until owner-position warning, subject-reduction, strict-LHS, and
+negative-control audits are complete.
+
+The selected direct comparison now has the following target.  For the two
+endofunctors of the matching category,
+
+```text
+F = restriction_q o glue_q,
+G = id_Matching_q,
+```
+
+construct one whole strict transformation
+
+```text
+rho : Transf(F,G)
+```
+
+whose retained-member observations are derived from the whole cone equation
+and the already-primitive whole silent path.  No consumer supplies naturality
+of `rho`; its action must be inherited from whole internal owners.  Next equip
+each fixed component of that already-whole transformation with
+
+```text
+OmegaEquivAlong Matching_q (F[m]) (G[m]) rho[m].
+```
+
+The generic strict closure to probe is consequently
+
+```text
+strict_transf_pointwise_omega_along
+  (rho : Transf_A(F,G))
+  (u   : Pi x : Obj(A), OmegaEquivAlong_B(F[x],G[x],rho[x]))
+  : OmegaEquivAlong_(Functor_cat(A,B))(F,G,rho).
+```
+
+The first isolated contract probe is green at
+`logs/probes/psss12x_strict_transf_pointwise_omega-20260804-013820.log`.
+Because `Transf` has no exposed constructor, the maximally computational
+probe surface consists of two primitive whole inverse transformations (one
+for the selected left components and one for the selected right components),
+one component beta for each, and two primitive whole cancellation-path
+assemblers.  The public `strict_transf_pointwise_omega_along` result is then a
+transparent application of `omega_equiv_along_intro`.  A single opaque
+closure constant would use fewer declarations but would hide its inverse
+components and is therefore not selected.  This probe has not been promoted:
+it establishes the exact representation boundary, not yet the concrete
+direct-cover consumer or an implementation theorem in the active library.
+
+A direct univalence closure from pointwise equalities to `F = G` is not the
+selected primitive.  Bare pointwise paths do not carry coherence along the
+directed arrows of `A`; adding enough coherence would merely hide the same
+whole natural-equivalence assembly in a stronger equality-specific axiom.
+`OmegaEquivAlong` is the better owner because it retains the already-whole
+forward transformation and its computational inverse observations.  After
+the generic closure is available, a readable path-valued helper may be
+defined transparently by packaging the fixed-forward evidence as
+`OmegaEquiv` and applying the selected univalence cast.  Such a helper adds no
+new primitive and removes the final one-line cast from consumers without
+collapsing the directed interface into equality prematurely.
+
+This is a generic strict-transformation theorem, not a sheaf axiom and not an
+external family of naturality squares.  The whole forward transformation
+`rho` supplies strict naturality.  Its pointwise inverse arrows and
+cancellation laws determine the inverse components; inverse naturality is
+derived algebraically from strict naturality and cancellation.  Because
+ordinary `Transf` is presently primitive rather than an exposed record, the
+implementation audit must say explicitly whether the closure can be defined
+from existing owners or needs one new generic stable assembly owner.  If a
+primitive owner is needed, its component observations and cancellation
+contract must be exposed and tested; no opaque sheaf-specific inverse or
+whole cancellation declaration is acceptable.
+
+Finally, package the resulting fixed-forward evidence as a whole
+`OmegaEquiv` and use the selected univalence boundary once to obtain
+
+```text
+restriction_q o glue_q = id_Matching_q.
+```
+
+Together with the existing whole silent law
+`glue_q o restriction_q = id_Section_q`, this gives the conventional
+`OmegaEquivAlong Cat_cat` locality interface.  This is the public CS-12
+comparison target.  The next probe must first isolate construction of `rho`
+and the generic strict closure; it must not revive the stronger `D o J`
+retraction, pointwise record extensionality, or external commutative-square
+fields.
+
+### 13.30 CS-12o direct Sigma-section action projection — 2026-08-04
+
+The retained-member consumer exposed one precise evaluator-ladder gap.  The
+whole uncurrying owner was already present:
+
+```text
+sigma_functord_sec_func(R,D)
+  : Functor(Functord_cat(R,D),Pi_cat(Sigma(R),pi1^*D)).
+```
+
+For `eta : Transfd(FF,GG)`, its generic `fapp1_fapp0` action is already one
+whole transformation between `sigma_functord_sec(FF)` and
+`sigma_functord_sec(GG)`.  Nothing in this tranche assembles naturality from
+an external component family.  The missing operation was only the nested
+component beta after that whole action had passed behind the stable section
+facade:
+
+```text
+sigma_functord_sec_func[eta][(k,r)]
+  -> Const_transf(eta[k][r]).
+```
+
+The `Const_transf` wrapper is semantically required: a component of the
+uncurried section is represented as a transformation between terminal-indexed
+constant functors in `D[k]`.  Evaluating it at the unique terminal object
+recovers the displayed component `eta[k][r]` itself.
+
+This computation does not follow from naturality alone.  It is the beta law
+defining the component of the functorial lift.  Whole naturality of the
+generic action then says, for every internal arrow
+`a : (k,r) -> (k',r')` in `Sigma(R)`, that the two composites through
+`Const_transf(eta[k][r])` and `Const_transf(eta[k'][r'])` agree.  Fibre arrows
+specialize this to ordinary naturality of `eta[k]`; arrows changing the base
+specialize it to the already-internal displayed naturality of `eta`.
+
+Two owner designs were measured.  A named intermediate
+`sigma_functord_sec_transfd(eta)` with a whole-action fold followed by a
+component rule typechecks, but raises the active kernel warning inventory from
+1,016 to 1,026.  It adds no coherence or semantic operation: it only names the
+term already owned by generic action.  The selected design instead adds one
+direct runtime projection at the first stable nested observer.  Its full
+owner-position candidate retains exactly 1,016 warnings, zero unreviewed
+strict-LHS candidates, and a negative control showing that the whole arrow is
+not collapsed to an identity or another runtime presentation.
+
+The active kernel, central diagnostics, and actual retained-member action
+consumer are focused-green.  Evidence is recorded in:
+
+```text
+logs/probes/emdash3_2-20260804-053654.log
+logs/probes/emdash3_2-20260804-053717.log
+logs/probes/emdash3_2_checks-20260804-053735.log
+logs/probes/psss12zt_sigma_functord_sec_action_consumer-20260804-053704.log
+logs/probes/psss12z_retained_yoneda_recovery-20260804-053950.log
+```
+
+The last check is an important negative boundary.  The new beta does not make
+the two large retained matching-functor endpoints judgmentally equal, and an
+explicit whole `eq_refl` probe remains rejected.  No broader rewrite or
+transitive family of convenience unifiers is justified by that failure.
+
+The next locality step should be stated accurately.  Whole naturality data is
+already carried by the retained-member cone and its generic functor actions;
+the proof must select/project the resulting whole comparison arrow at the
+original matching endpoint, not assemble a transformation from a bare family
+of point equations.  Once that already-whole forward arrow is exposed, prove
+its fixed components are `OmegaEquivAlong`, apply the strict
+pointwise-to-whole closure, and use univalence once to obtain the conventional
+whole functor path.  The remaining task is therefore endpoint projection and
+pointwise equivalence, not reconstruction of naturality and not the retired
+global `D o J` decoder.
+
+### 13.31 CS-12p retained-member endpoint factorization — preliminary 2026-08-04
+
+The next diagnostic sharpens what “endpoint projection” means.  There is one
+important distinction between the desired comparison and the whole
+retained-member naturality transformation already constructed.  The desired
+owner is
+
+```text
+rho : restriction_q o glue_q => id_Matching_q.
+```
+
+The existing retained-member transformation is not yet `rho`.  For a fixed
+retained member `(p:V->U,member)` it lives over the entire total category of
+members of the pulled question,
+
+```text
+P_p = Sigma(W:Op(K),extension(p*q)[W]),
+```
+
+and internally compares the two sections whose literal observations are
+
+```text
+A_p,m(h,member_h) = X[h](m(p,member)),
+B_p,m(h,member_h) = m(p o h,member_h).
+```
+
+This is the strict matching-family naturality needed to identify restrictions
+of the retained value with the matching family pulled to `p*q`.  It is one
+ingredient in the eventual component of `rho`, through the semantic chain
+
+```text
+restriction_p(glue_q(m))
+  = glue_(p*q)(pull_p(m))
+  = glue_(p*q)(restriction_(p*q)(m(p,member)))
+  = m(p,member).
+```
+
+The three steps are respectively whole glue substitution, retained-member
+naturality, and the already-whole `silent` path at the pulled question.  No
+new external naturality square is required.
+
+The immediate failure is one level earlier than this chain.  The exact
+right-hand retained-member route is built by horizontally acting on the
+internally Yoneda-encoded matching map along the whole retained-member cone
+and then applying the identity evaluator.  The named semantic endpoint is
+the ordinary pulled matching section.  In schematic notation, with `J(m)` the
+internal FibCov/Yoneda encoding and `c_p` the whole cone target functor, the
+missing comparison is
+
+```text
+eval(action(J(m),c_p))
+  = pullback(eval(J(m)),c_p)
+  = pull_p(m).
+```
+
+The second equality is already established by whole Yoneda recovery followed
+by pullback.  The first is the unresolved boundary.  Lambdapi normalizes its
+left endpoint through `Functor_comp_pair_func`,
+`comp_prod_fapp1_fapp0`, and the stable identity evaluator, while its right
+endpoint is presented through `section_pullback_sec` / `sigma_functord_sec`
+and ordinary displayed-functor composition.  Even after observing one literal
+pulled member, the expected `eq_refl` diagnostic does not close because these
+stable heads expose only their local component betas and no whole theorem
+currently relates the two association/presentation routes.
+
+There is no known mathematical sheaf obstruction here.  The equation says
+that coherent evaluation commutes with reindexing/uncurrying along the whole
+cone.  A broad rewrite equating the expanded endpoints would hide that
+generic theorem and is not selected.  The next probe should instead
+specialize the already-whole `fdapp1_int_transfd(m)` through one whole
+pulled-member evaluator.  Its source and target should be obtained as
+projections of that internal owner, so that the comparison lands directly at
+`restriction_(p*q)(m(p,member))` and `pull_p(m)`.  Existing `Eval_funcd`,
+`Product_pair_funcd`, and displayed composition should be tried first; only a
+genuinely missing generic stable projection/whole-specialization owner may be
+promoted, with a narrow beta and no sheaf-specific naturality field.
+
+Current diagnostic evidence is intentionally mixed:
+
+- `psss12zy_retained_fdapp_whole.lp` is green and proves that
+  `fdapp1_int_transfd(m)` remains one whole transformation after Sigma-section
+  uncurrying;
+- `psss12zz_retained_recovery_endpoint.lp` is green and proves whole recovered
+  pullback equals the named `pull_p(m)` endpoint; and
+- `psss12zzd_retained_recovery_endpoint_refl.lp` and
+  `psss12zze_retained_recovery_component_refl.lp` are expected-negative
+  diagnostics showing that the exact evaluator route is not judgmentally the
+  recovered endpoint, even at one projected member.
+
+The first generic internalization probe is now also conclusive at the type
+boundary.  For fixed `E:B->Cat`, the intended whole operation is
+
+```text
+section_pullback_int(E)
+  : F:Functor(A,B) ; Pi_B(E) -> Pi_A(Pullback(E,F)),
+section_pullback_int(E)[F] = section_pullback_func(F,E).
+```
+
+The initial transparent target `F |-> Pi_A(E o F)` cannot own that runtime
+component beta: its fibre remains under the semantic
+`hom_postcomp_fapp0`/composition presentation, which is only proof-time
+comparable with the stable `Pullback_catd(E,F)` endpoint required by
+`section_pullback_func`.  Lambdapi therefore correctly rejects the candidate
+by subject reduction; a runtime beta must not silently consume a proof-time
+classifier comparison.
+
+The revised probe gives the codomain a stable family owner whose object
+projection is exactly `Pi_A(Pullback_catd(E,F))`.  With that honest target,
+one whole `Functord` and the narrow component rule
+
+```text
+section_pullback_int(E)[F] -> section_pullback_func(F,E)
+```
+
+typecheck, and applying the component to `s` computes through the existing
+`section_pullback_sec(F,E,s)` owner.  The focused
+`psss12zzf_section_pullback_internalization.lp` target is green in about 6.5
+seconds.  This is interface evidence only: it does not yet justify a new
+primitive, prove that the stable target is independent structure, or connect
+the owner to the retained-member consumer.
+
+The next bounded question is therefore whether this whole operation is already
+derivable from the internal action of `Pi_int_funcd`.  In particular,
+`fdapp1_int_cell(Pi_int_funcd,F,E)` already projects to
+`section_pullback_func(F,E)` at a fixed pair `(F,E)`.  The preferred result is
+to specialize an existing whole action such as `fdapp1_int_transfd` (and its
+`Eval_funcd`/`Product_pair_funcd` consumers) so that the variable `F` remains
+internal and the stable target projection is inherited.  Only if that route
+proves genuinely absent should a generic fixed-`E` pullback-family owner be
+considered; it must remain a semantic, reusable section-pullback boundary and
+not a sheaf-specific evaluator rule.
+
+No failure above licenses a convenience unifier or a componentwise
+reconstruction of naturality.  Once the endpoint bridge yields the actual
+whole `rho`, define each `rho[m]` by projection from `rho`, prove its selected
+`OmegaEquivAlong` evidence, and apply the strict pointwise-to-whole closure as
+recorded in Section 13.29.
+
+The subsequent bounded audit resolves the evaluator/reindexing part of this
+boundary and corrects the preliminary diagnosis above.  Three increasingly
+specialized whole paths now typecheck:
+
+1. for every ordinary Cat-valued transformation `eta:P=>Q`, the two full
+   naturality routes are compared to the existing `tapp1_func(eta,x,y)` owner
+   while `eta` remains abstract;
+2. specializing that theorem to `section_pullback_transf(F)` gives the whole
+   equation
+
+   ```text
+   section_pullback(F,D) o Pi_B(eta)
+     = Pi_A(F*eta) o section_pullback(F,E);
+   ```
+
+3. specializing once more to the retained-member identity evaluator gives one
+   internally indexed equation over every pulled member at once,
+
+   ```text
+   pull(eval(J(m))) = eval(pull(J(m))).
+   ```
+
+The abstract-first staging is semantically significant.  If the evaluator is
+substituted before selecting the generic naturality theorem, its diagonal
+component computes to a stable projection head and hides the generic
+`tapp1_func` pattern.  Constructing the whole generic path first and applying
+`eq_ap` afterwards preserves internal naturality and requires no specialized
+evaluator rule.  The focused probes
+`psss12zzh_generic_transf_naturality_selection.lp`,
+`psss12zzg_section_pullback_naturality.lp`, and
+`psss12zzi_retained_evaluator_pullback_naturality.lp` are green in roughly
+seven, seven, and eight seconds respectively.
+
+That generic theorem does not make the two section representations
+definitionally identical.  The remaining structural formula was isolated as
+
+```text
+pull_(Sigma(FF))(uncurry(GG)) = uncurry(GG o FF).
+```
+
+Two tempting runtime implementations are rejected.  Rewriting the pulled
+first-projection family to the selected `Sigma_proj1_pullback_catd` family
+adds two unjoinable constant-Sigma/Product critical pairs.  Rewriting
+`section_pullback_sec(...,sigma_functord_sec(GG))` directly to
+`sigma_functord_sec(GG o FF)` then fails subject reduction: the generic term
+inhabits a generic `Pullback_catd` result family, whereas the right side
+inhabits the explicitly selected stable Sigma-projection family, and those
+classifiers compare only at proof time.  A stable Sigma-section-pullback owner
+can state the desired beta honestly, but comparing its whole functor with the
+generic pullback functor exposes the corresponding term-level adapter rather
+than deriving it.  The classifier unifier is not an identity coercion on
+objects.  These failed candidates remain ignored diagnostics in
+`psss12zzj_retained_evaluator_endpoint_conversion.lp` and
+`psss12zzk_sigma_section_pullback_owner.lp`; none is promotable.
+
+The selected correction stays in one representation from the start and
+performs substitution before uncurrying.  For displayed functors
+
+```text
+FF : R ->_K S,
+GG : S ->_K E,
+eta : E ->_K D,
+```
+
+ordinary categorical associativity at `Catd_cat(K)` supplies the whole path
+
+```text
+eta o (GG o FF) = (eta o GG) o FF.
+```
+
+Applying `sigma_functord_sec` to that path yields the desired equality of
+whole stable sections without ever constructing the generic
+`section_pullback_sec` endpoint.  In the retained consumer, take `GG=J(m)`,
+`FF` to be the existing extension-pullback displayed functor, and `eta` to be
+the whole identity evaluator.  The associated endpoint is literally the
+already-green recovered-pullback owner; composing with whole Yoneda recovery
+therefore proves
+
+```text
+eval(pull_displayed(J(m))) = pull_p(m)
+```
+
+as one equality of sections over the complete pulled-member total.  The
+generic `psss12zzl_displayed_uncurry_substitution.lp` and retained
+`psss12zzm_retained_displayed_endpoint.lp` probes are green in roughly seven
+and three seconds.  They add no primitive, rewrite, unifier, external
+naturality field, term coercion, or univalence assumption.
+
+Consequently evaluator/reindexing is no longer the active CS-12p
+obstruction.  The next bounded step is to use this stable endpoint as the
+target observation of the already-internal retained-member naturality owner,
+identify its other endpoint with the restriction of the retained value, and
+then carry that whole comparison through glue substitution and `silent`.
+This should construct the actual component of `rho`; only after that owner is
+whole in both `m` and retained members should pointwise
+`OmegaEquivAlong` closure be invoked.
+
+### 13.32 CS-12q conventional locality derived from internal glue — 2026-08-04
+
+The retained-member programme has now crossed the conventional locality gate
+in focused probes.  This materially strengthens the preliminary conclusion of
+Section 13.31: the obstruction was representational and is now resolved; no
+new sheaf axiom, external naturality square, generic record extensionality, or
+`D/J` decoder-retraction principle is needed.
+
+The completed derivation has four semantic layers.
+
+1. **Retained section inverse.**  For one internal eligible question
+   `q=(R,covers)`, one retained member `(p:V->U,member:p in R)`, and one
+   matching map `m:extension(R)->X`, the whole-section theorem is
+
+   ```text
+   X[p](glue_q(m))
+     = fib_cov(X,V,m[V](p,member)).
+   ```
+
+   The proof first compares the canonical action
+   `extension(p*q)->extension(q)` with its retained-member factorization,
+   transports the matching map through that whole factorization, invokes the
+   internally varying glue-pullback computation, and finally uses the whole
+   `silent` constructor on the pulled question.  This is the content of the
+   green `psss12zzx_retained_glue_silent_inverse.lp` probe.  The selected
+   active interface `direct_cover_question_extension_pullback_retained_agrees`
+   is a proof-time path between whole presheaf maps, never a runtime collapse
+   of their two presentations.
+
+2. **Literal component endpoints.**  Identity evaluation of the two retained
+   sections yields the expected point equation
+
+   ```text
+   (restriction_q(glue_q(m)))[V](p,member)
+     = m[V](p,member).
+   ```
+
+   The large exploratory `psss12zza_restriction_glue_component.lp` probe
+   deliberately stages both endpoints through named whole owners.  On the
+   left, whole represented-arrow action transports the glued section and
+   identity evaluation recovers its value at `p`.  On the right, strict
+   naturality of the represented matching section recovers `m(p,member)`.
+   The public `Psh_cat` composition and active `Catd_cat` composition are
+   crossed only by `psh_comp_representation_agrees`; they are not made
+   runtime-identical.  Two capped proof-time action comparisons are required
+   after generic projections have reduced to rigid heads:
+
+   - `hom_int_precomp_func` versus `hom_con_int_postcomp_func`, the action
+     projection of the already selected whole opposite-represented-family
+     comparison; and
+   - `hom_precomp_along_fapp0` versus raw `comp_fapp0`, with source, target,
+     and the projected action checked in unification side conditions.
+
+   Both candidates retain rigid outer heads and select no runtime normal form.
+   Their owner-position and critical-pair audits remain mandatory before
+   promotion.  The final focused component probe is green with zero warnings.
+
+3. **Whole internal transformation and strict pointwise closure.**  Since
+   `Transf` and `Transfd` are primitive classifiers, three rigid theorem
+   owners expose one honest projection tower
+
+   ```text
+   rho
+     : restriction_q o glue_q => id_Matching(q),
+   rho[m]
+     : restriction_q(glue_q(m)) => m,
+   rho[m][V]
+     : whole transformation between fibre functors,
+   rho[m][V][(p,member)]
+     -> path_to_hom(the retained component path).
+   ```
+
+   Naturality at all three layers is carried by these whole classifier
+   inhabitants; no family of component squares is an input.  The constructor
+   projection at `(p,member)` is the only runtime observation and it points to
+   the already-derived path.  The focused
+   `psss12zzb_restriction_glue_whole_transf.lp` probe is green with zero
+   warnings.
+
+   The ordinary and displayed strict pointwise-to-whole closure probes then
+   assemble fixed-forward equivalences without assuming functor
+   extensionality.  For an already-whole transformation `eta`, pointwise
+   `OmegaEquivAlong` evidence selects inverse components.  Rigid whole inverse
+   transformation owners expose those components, and two generic whole
+   cancellation-path assemblers complete
+   `OmegaEquivAlong(Functor_cat(...),F,G,eta)` or its `Functord_cat` analogue.
+   These are generic strict-transformation boundaries: they do not accept
+   external naturality equations, and they do not identify arbitrary lax
+   transformations.  The ordinary `psss12x_strict_transf_pointwise_omega.lp`
+   and displayed `psss12zzc_strict_transfd_pointwise_omega.lp` probes are
+   green.
+
+4. **Three-level assembly and conventional locality.**  The final
+   `psss12zzd_restriction_glue_omega.lp` probe lifts the retained-member
+   equivalence successively to:
+
+   ```text
+   OmegaEquivAlong(fibre functors, rho[m][V]);
+   OmegaEquivAlong(Functord_cat(...), rho[m]);
+   OmegaEquivAlong(Functor_cat(Matching,Matching), rho).
+   ```
+
+   Casting the last whole equivalence to an object path gives exactly
+
+   ```text
+   restriction_q o glue_q = id_Matching(q).
+   ```
+
+   This is not the rejected pointwise-equality-to-whole-equality shortcut:
+   each lift consumes an already-whole transformation and constructs its
+   fixed-forward equivalence.  It is also not the retired `D/J` retraction
+   route and uses no category-of-elements decoder.
+
+   Combining that second inverse with the primitive whole HIT law
+
+   ```text
+   silent_q : glue_q o restriction_q = id_Section(q)
+   ```
+
+   produces the existing public locality classifier directly:
+
+   ```text
+   PshLocalAtOrdinarySieve
+     K U R (DirectCoverCompletionPsh K T P).
+   ```
+
+   Quantifying transparently over `U`, `R`, and `covers`, with
+   `q=(R,covers)`, then gives
+
+   ```text
+   IsTopologyLocalPsh
+     K T (DirectCoverCompletionPsh K T P).
+   ```
+
+   The complete integration probe is green under the uniform 90-second
+   ceiling in about 3.5 seconds with zero warnings
+   (`logs/probes/psss12zzd_restriction_glue_omega-20260804-094239.log`).
+
+This result settles the mathematical feasibility of the direct-cover HIT's
+comparison with conventional covering-sieve descent.  It does **not** yet
+finish the whole sheafification programme.  The next gates are:
+
+1. promote only the reusable and owner-minimal subset of the exploratory
+   proof, with strict LHS, owner-position, warning, and negative non-collapse
+   audits;
+2. expose the topology-local completion as a syntactic constructed sheaf and
+   compare it, under a scoped facade choice, with the existing rigid
+   `Sheaf_cat`/`SheafificationCapability` interface;
+3. prove whole Hom universality of `eta:P->DirectCoverCompletionPsh(P)` into
+   topology-local targets and assemble the fixed-site reflector functor and
+   adjunction; and
+4. keep the independent computational `Proj`/projective-space lane moving
+   without making it depend on reflector completion.
+
+Promotion must not copy the entire exploratory ladder wholesale.  The active
+library should retain semantic whole paths and rigid projection owners, while
+temporary endpoint aliases and failed normal-form candidates remain ignored
+diagnostics.  In particular, no giant endpoint unifier, no broad
+`tapp1_fapp0` duplicate, no automatic Sigma eta, and no external component
+coherence field is authorized by the green result.
 
 ## 14. Validation And Checkpoint Contract
 

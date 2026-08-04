@@ -3768,6 +3768,53 @@ general Pi/displayed object ladder and one measured join between ordinary
 `Obj(Transf_cat)` classifiers. A direct specialized displayed-`Obj` rule is
 redundant. The next `Transfd_cat` projection is retained for iterability.
 
+The stable projection-pullback family is now an explicit runtime selection,
+not the automatic reduct of either
+`comp_cat_fapp0(D,Sigma_proj1_func(R))` or
+`Pullback_catd(D,Sigma_proj1_func(R))`.  Both generic presentations compare
+with `Sigma_proj1_pullback_catd(R,D)` through narrowly typed `unif_rule`s.
+This keeps generic represented-family reindex accumulation as the selected
+runtime cut and removes the competing generic-versus-stable normal form.
+Consumers requiring the projection ladder name the stable family directly.
+
+Recursive dependent-variable weakening consequently uses the explicit whole
+displayed functor
+
+```text
+section_weaken_funcd(R,E,s) : R ->_K E
+section_weaken_funcd(R,E,s)[k] = const_{R[k]}(s[k]).
+```
+
+Its base-arrow action is the already-internal action of `s` and is independent
+of the new source-fibre object.  `sigma_functord_sec` then uncurries this
+displayed functor when a section over `Sigma(R)` is needed.  Generic
+`section_pullback_sec(F,E,s)` remains available and computes at literal base
+objects; it is no longer overloaded as the stable displayed weakening owner.
+
+The uncurrying operation is functorial at one whole owner:
+
+```text
+sigma_functord_sec_func(R,D)
+  : Functor(Functord_cat(R,D),Pi_cat(Sigma(R),pi1^*D)).
+```
+
+Its object action selects `sigma_functord_sec(FF)`.  Its generic arrow action
+already carries displayed-transformation naturality internally, while one
+narrow runtime projection restores the component beta hidden by the stable
+section facade:
+
+```text
+sigma_functord_sec_func[eta][(k,r)]
+  -> Const_transf(eta[k][r]).
+```
+
+Do not describe this projection beta as a theorem of naturality alone.  It is
+the defining observation of the functorial uncurrying lift; generic naturality
+states that these observations commute along arrows of `Sigma(R)`.  Do not add
+a second named transformation head merely to restate the same intermediate
+action unless an independent consumer needs that head and its warning/owner
+audit justifies it.
+
 ### One generic owner for ordinary laws
 
 The global `fapp*`/`tapp*` calculus is the sole owner of ordinary identity,

@@ -9984,61 +9984,25 @@ symbol Displayed_chain_A_after_B_check
             Displayed_chain_K_check
             Displayed_chain_A_check
             Displayed_chain_A_check))))
-≔ @fapp0
-    (@Functord_cat
+≔ @sigma_functord_sec
+    (@Sigma_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check)
+    Displayed_chain_B_check
+    (@Sigma_proj1_pullback_catd
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_A_check)
+    (@section_weaken_funcd
       (@Sigma_cat
         Displayed_chain_K_check
         Displayed_chain_A_check)
-      (@Const_catd
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Terminal_cat)
+      Displayed_chain_B_check
       (@Sigma_proj1_pullback_catd
         Displayed_chain_K_check
         Displayed_chain_A_check
-        Displayed_chain_A_check))
-    (@Functord_cat
-      (@Sigma_cat
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check)
-      (@Const_catd
-        (@Sigma_cat
-          (@Sigma_cat
-            Displayed_chain_K_check
-            Displayed_chain_A_check)
-          Displayed_chain_B_check)
-        Terminal_cat)
-      (@Sigma_proj1_pullback_catd
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check
-        (@Sigma_proj1_pullback_catd
-          Displayed_chain_K_check
-          Displayed_chain_A_check
-          Displayed_chain_A_check)))
-    (@section_pullback_func
-      (@Sigma_cat
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check)
-      (@Sigma_cat
-        Displayed_chain_K_check
         Displayed_chain_A_check)
-      (@Sigma_proj1_func
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check)
-      (@Sigma_proj1_pullback_catd
-        Displayed_chain_K_check
-        Displayed_chain_A_check
-        Displayed_chain_A_check))
-    Displayed_chain_A_var_check;
+      Displayed_chain_A_var_check);
 
 symbol Displayed_chain_B_var_check
   : τ (Obj
@@ -10346,20 +10310,11 @@ assert ⊢
       Displayed_chain_K_check
       Displayed_chain_A_check
       Displayed_chain_A_check)
-    (@section_pullback_sec
-      (@Sigma_cat
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check)
+    (@section_weaken_funcd
       (@Sigma_cat
         Displayed_chain_K_check
         Displayed_chain_A_check)
-      (@Sigma_proj1_func
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check)
+      Displayed_chain_B_check
       (@Sigma_proj1_pullback_catd
         Displayed_chain_K_check
         Displayed_chain_A_check
@@ -10415,6 +10370,87 @@ assertnot ⊢
       Displayed_chain_A_check
       Displayed_chain_D_check
       Displayed_chain_FF_check;
+
+// The stable Sigma uncurrying wrapper varies as one ordinary functor.  Its
+// generic arrow action carries displayed-transfor naturality internally.
+assert ⊢
+  @sigma_functord_sec_func
+    Displayed_chain_K_check
+    Displayed_chain_A_check
+    Displayed_chain_D_check
+  : τ (@Functor
+      (@Functord_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check
+        Displayed_chain_D_check)
+      (@Pi_cat
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        (@Sigma_proj1_pullback_catd
+          Displayed_chain_K_check
+          Displayed_chain_A_check
+          Displayed_chain_D_check)));
+
+assert ⊢
+  @fapp0
+    (@Functord_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_D_check)
+    (@Pi_cat
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      (@Sigma_proj1_pullback_catd
+        Displayed_chain_K_check
+        Displayed_chain_A_check
+        Displayed_chain_D_check))
+    (@sigma_functord_sec_func
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_D_check)
+    Displayed_chain_FF_check
+  ≡ @sigma_functord_sec
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_D_check
+      Displayed_chain_FF_check;
+
+// The existing whole functorial bridge retains its arrow; projecting that
+// arrow at (k,r) computes to the original displayed component eta[k][r].
+assert [K : Cat]
+  (R D : τ (Catd K))
+  (FF GG : τ (Functord R D))
+  (eta : τ (Transfd FF GG))
+  (k : τ (Obj K))
+  (r : τ (Obj (Fibre_cat R k))) ⊢
+  @tapp0_fapp0
+    Terminal_cat
+    (Fibre_cat D k)
+    _ _
+    Terminal_obj
+    (@tdapp0_fapp0
+      (@Sigma_cat K R)
+      (@Const_catd (@Sigma_cat K R) Terminal_cat)
+      (@Sigma_proj1_pullback_catd K R D)
+      (@sigma_functord_sec K R D FF)
+      (@sigma_functord_sec K R D GG)
+      (Struct_sigma k r)
+      (@fapp1_fapp0
+        (@Functord_cat K R D)
+        (@Pi_cat
+          (@Sigma_cat K R)
+          (@Sigma_proj1_pullback_catd K R D))
+        (@sigma_functord_sec_func K R D)
+        FF GG eta))
+  ≡ @tapp0_fapp0
+      (Fibre_cat R k)
+      (Fibre_cat D k)
+      (@Fibre_func K R D FF k)
+      (@Fibre_func K R D GG k)
+      r
+      (@tdapp0_fapp0 K R D FF GG k eta);
 
 // catalog-area: auto
 assert [A B : Cat] (F : τ (Functor A B)) (x : τ (Obj A)) ⊢
@@ -13133,6 +13169,21 @@ assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B))
     a
     ≡ @piapp0 B E s (@fapp0 A B F a);
 
+// Explicit displayed weakening replaces the former automatic Sigma-pullback
+// runtime specialization and retains literal recursive-variable computation.
+assert [K : Cat]
+  (R E : τ (Catd K))
+  (s : τ (Obj (@Pi_cat K E)))
+  (k : τ (Obj K))
+  (r : τ (Obj (Fibre_cat R k))) ⊢
+  @fapp0
+    (Fibre_cat R k)
+    (Fibre_cat E k)
+    (@tapp0_fapp0 K Cat_cat R E k
+      (@section_weaken_funcd K R E s))
+    r
+  ≡ @piapp0 K E s k;
+
 assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
   @tapp0_fapp0
     (@Catd_cat B)
@@ -13243,9 +13294,45 @@ assert [K : Cat]
 assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢
   fapp0 (Sigma_proj1_func E) (Struct_sigma k u) ≡ k;
 
+// Both generic Sigma-projection presentations compare with the explicit
+// stable owner only at proof time.
 assert [K : Cat] (R D : τ (Catd K)) ⊢
-  @Pullback_catd (@Sigma_cat K R) K D (@Sigma_proj1_func K R)
-    ≡ @Sigma_proj1_pullback_catd K R D;
+  @eq_refl
+    (Obj (@Catd_cat (@Sigma_cat K R)))
+    (@comp_cat_fapp0
+      (@Sigma_cat K R) K Cat_cat D
+      (@Sigma_proj1_func K R))
+  : τ (@=
+      (Obj (@Catd_cat (@Sigma_cat K R)))
+      (@comp_cat_fapp0
+        (@Sigma_cat K R) K Cat_cat D
+        (@Sigma_proj1_func K R))
+      (@Sigma_proj1_pullback_catd K R D));
+
+assertnot [K : Cat] (R D : τ (Catd K)) ⊢
+  @comp_cat_fapp0
+    (@Sigma_cat K R) K Cat_cat D
+    (@Sigma_proj1_func K R)
+  ≡ @Sigma_proj1_pullback_catd K R D;
+
+assert [K : Cat] (R D : τ (Catd K)) ⊢
+  @eq_refl
+    (Obj (@Catd_cat (@Sigma_cat K R)))
+    (@Pullback_catd
+      (@Sigma_cat K R) K D
+      (@Sigma_proj1_func K R))
+  : τ (@=
+      (Obj (@Catd_cat (@Sigma_cat K R)))
+      (@Pullback_catd
+        (@Sigma_cat K R) K D
+        (@Sigma_proj1_func K R))
+      (@Sigma_proj1_pullback_catd K R D));
+
+assertnot [K : Cat] (R D : τ (Catd K)) ⊢
+  @Pullback_catd
+    (@Sigma_cat K R) K D
+    (@Sigma_proj1_func K R)
+  ≡ @Sigma_proj1_pullback_catd K R D;
 
 assert [K : Cat] (R D : τ (Catd K))
   (k : τ (Obj K))
@@ -21258,6 +21345,148 @@ assertnot [K : Cat]
       U
       (Op_cat K)
       (@id Cat_cat (Op_cat K));
+
+// Contravariant represented reindexing accumulates the base functor at runtime.
+assert [C A B : Cat]
+  (W : τ (Obj C))
+  (R : τ (Functor B C))
+  (F : τ (Functor A (Op_cat B))) ⊢
+  @Pullback_catd A (Op_cat B) (@hom_con C W B R) F
+  ≡ @hom_con
+      C W (Op_cat A)
+      (@comp_cat_fapp0
+        (Op_cat A) B C R
+        (@Op_func A (Op_cat B) F));
+
+// The projection-pullback stable rung compares only at proof time.
+assert [C Z : Cat]
+  (E : τ (Catd Z))
+  (W : τ (Obj C))
+  (R : τ (Functor (Op_cat Z) C)) ⊢
+  @eq_refl
+    (Obj (@Catd_cat (@Sigma_cat Z E)))
+    (@Sigma_proj1_pullback_catd
+      Z E (@hom_con C W (Op_cat Z) R))
+  : τ (@=
+      (Obj (@Catd_cat (@Sigma_cat Z E)))
+      (@Sigma_proj1_pullback_catd
+        Z E (@hom_con C W (Op_cat Z) R))
+      (@hom_con
+        C W
+        (Op_cat (@Sigma_cat Z E))
+        (@comp_cat_fapp0
+          (Op_cat (@Sigma_cat Z E))
+          (Op_cat Z)
+          C R
+          (@Op_func
+            (@Sigma_cat Z E)
+            Z
+            (@Sigma_proj1_func Z E)))));
+
+assertnot [C Z : Cat]
+  (E : τ (Catd Z))
+  (W : τ (Obj C))
+  (R : τ (Functor (Op_cat Z) C)) ⊢
+  @Sigma_proj1_pullback_catd
+    Z E (@hom_con C W (Op_cat Z) R)
+  ≡ @hom_con
+      C W
+      (Op_cat (@Sigma_cat Z E))
+      (@comp_cat_fapp0
+        (Op_cat (@Sigma_cat Z E))
+        (Op_cat Z)
+        C R
+        (@Op_func
+          (@Sigma_cat Z E)
+          Z
+          (@Sigma_proj1_func Z E)));
+
+// Repeated represented reindexing joins with generic pullback accumulation.
+assert [C B A D : Cat]
+  (W : τ (Obj C))
+  (R : τ (Functor B C))
+  (F : τ (Functor A (Op_cat B)))
+  (H : τ (Functor D A)) ⊢
+  @hom_con
+    C W (Op_cat D)
+    (@comp_cat_fapp0
+      (Op_cat D) (Op_cat A) C
+      (@comp_cat_fapp0
+        (Op_cat A) B C
+        R
+        (@Op_func A (Op_cat B) F))
+      (@Op_func D A H))
+  ≡ @hom_con
+      C W (Op_cat D)
+      (@comp_cat_fapp0
+        (Op_cat D) B C
+        R
+        (@Op_func
+          D (Op_cat B)
+          (@comp_cat_fapp0 D A (Op_cat B) F H)));
+
+// Whole opposite represented-family owners compare only at proof time.
+assert [A B : Cat]
+  (F : τ (Functor B A)) ⊢
+  @eq_refl
+    (Hom Cat_cat A (@Catd_cat (Op_cat B)))
+    (@hom_int
+      (Op_cat A)
+      (Op_cat B)
+      (@Op_func B A F))
+  : τ (@=
+      (Hom Cat_cat A (@Catd_cat (Op_cat B)))
+      (@hom_int
+        (Op_cat A)
+        (Op_cat B)
+        (@Op_func B A F))
+      (@hom_con_int A B F));
+
+assertnot [A B : Cat]
+  (F : τ (Functor B A)) ⊢
+  @hom_int
+    (Op_cat A)
+    (Op_cat B)
+    (@Op_func B A F)
+  ≡ @hom_con_int A B F;
+
+// Covariant represented reindexing uses the companion runtime accumulator.
+assert [C A B : Cat]
+  (W : τ (Obj C))
+  (R : τ (Functor B C))
+  (F : τ (Functor A B)) ⊢
+  @Pullback_catd A B (@hom_ C B R W) F
+  ≡ @hom_ C A (@comp_cat_fapp0 A B C R F) W;
+
+// Its projection-pullback stable rung also compares only at proof time.
+assert [C Z : Cat]
+  (E : τ (Catd Z))
+  (W : τ (Obj C))
+  (R : τ (Functor Z C)) ⊢
+  @eq_refl
+    (Obj (@Catd_cat (@Sigma_cat Z E)))
+    (@Sigma_proj1_pullback_catd Z E (@hom_ C Z R W))
+  : τ (@=
+      (Obj (@Catd_cat (@Sigma_cat Z E)))
+      (@Sigma_proj1_pullback_catd Z E (@hom_ C Z R W))
+      (@hom_
+        C (@Sigma_cat Z E)
+        (@comp_cat_fapp0
+          (@Sigma_cat Z E) Z C R
+          (@Sigma_proj1_func Z E))
+        W));
+
+assertnot [C Z : Cat]
+  (E : τ (Catd Z))
+  (W : τ (Obj C))
+  (R : τ (Functor Z C)) ⊢
+  @Sigma_proj1_pullback_catd Z E (@hom_ C Z R W)
+  ≡ @hom_
+      C (@Sigma_cat Z E)
+      (@comp_cat_fapp0
+        (@Sigma_cat Z E) Z C R
+        (@Sigma_proj1_func Z E))
+      W;
 
 assert [K : Cat]
   (O : τ (@CommRingPsh K))

@@ -69,7 +69,13 @@ symbol ordinary_sieve_member_section
     V
     (Struct_sigma p member);
 
-// Whole restriction of maps into X along the selected sieve inclusion.
+/*
+  Whole restriction of maps into X along the selected sieve inclusion.  Its
+  public source is the ordinary Yoneda presheaf; transparent computation uses
+  the exact represented source selected by `FibCov`.  Those presentations are
+  proof-time comparable, while the stable precomposition action now composes
+  directly with represented sections without a second hom_/hom_con bridge.
+*/
 symbol ordinary_sieve_local_precomp
   [K : Cat]
   [U : τ (Obj K)]
@@ -87,7 +93,7 @@ symbol ordinary_sieve_local_precomp
     (@id_func (@Psh_cat K))
     X
     (@ordinary_sieve_extension_psh K U R)
-    (@yoneda_psh K U)
+    (@FibCov_source_catd (Op_cat K) U)
     (@ordinary_sieve_extension_inclusion K U R);
 
 // Locality at one ordinary sieve is one fixed-forward whole Hom equivalence.

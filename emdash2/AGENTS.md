@@ -7,8 +7,16 @@ omega-transformations (“transfors”), directed families, and related dependen
 categorical structures.
 
 The active kernel is `emdash3_2.lp`; it owns the generic proof-time duality of
-opposite represented families and the full-`tapp1_func` whole strict
-`Functord` naturality paths. The one-way derived native equality-valued
+opposite represented families and whole represented-family owners, runtime
+covariant/contravariant represented reindex accumulation through ordinary
+`Pullback_catd`, proof-time generic-composition/pullback comparisons with the
+explicit specialized `Sigma_proj1_pullback_catd` owner, the stable internal
+`section_weaken_funcd` computation used by recursively weakened displayed
+variables, the functorial `sigma_functord_sec_func` uncurrying owner and its
+direct retained-component beta, proof-time represented comparisons at that
+specialized owner, and the full-`tapp1_func` whole strict `Functord`
+naturality paths. The one-way
+derived native equality-valued
 hom-action/groupoidality extension is `emdash3_2_eq1_hom_action.lp`;
 the Cat-valued presheaf, Yoneda, slice, and higher-sieve library is
 `emdash3_2_presheaves.lp`;

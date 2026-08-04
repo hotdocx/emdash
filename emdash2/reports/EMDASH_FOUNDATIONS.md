@@ -2956,6 +2956,31 @@ Runtime object and next-hom projections supply the corresponding displayed
 functor and transfor components; the whole section category does not reduce to
 the displayed-functor category.
 
+Displayed-functor uncurrying itself varies through one whole ordinary functor:
+
+```text
+sigma_functord_sec_func(R,D)
+  : Functor(Functord_cat(R,D),Pi_cat(Sigma(R),pi1^*D)),
+sigma_functord_sec_func[FF] -> sigma_functord_sec(FF).
+```
+
+For a whole displayed transformation `eta : FF => GG`, its generic functor
+action already owns one transformation between the two uncurried sections.
+Projecting that whole arrow at an internal total object computes by the direct
+evaluator beta
+
+```text
+sigma_functord_sec_func[eta][(k,r)]
+  -> Const_transf(eta[k][r]).
+```
+
+This beta and naturality have different roles.  The beta defines the component
+of the uncurrying lift; naturality of the already-whole generic action makes
+those components coherent along every arrow of `Sigma(R)`.  Naturality alone
+would not determine the component formula.  A separately named intermediate
+`sigma_functord_sec_transfd` would merely factor this same projection through
+another runtime head, so no such owner is selected.
+
 Likewise, the hom action of `const_section_{K,A}` stays in the displayed
 transformation facade (`Const_transfd_func` / `Const_transfd`). Ordinary
 weakening has a separate stable owner `Const_func_func`; it no longer unfolds
@@ -3346,6 +3371,33 @@ Pullback of sections along a base functor is also present:
 section_pullback_F : Π_b E[b] → Π_a E[F[a]]
 section_pullback_F(s)[a] = s[F[a]]
 ```
+
+Weakening an already internal section across a new displayed variable has a
+separate whole displayed owner:
+
+```text
+section_weaken(R,E,s) : R ->_K E
+section_weaken(R,E,s)[k] = const_{R[k]}(s[k]).
+```
+
+The construction ignores the new fibre object but not the directed base: its
+action over `p : k -> k'` is inherited internally from the section `s`.
+When the weakened variable must again be presented as a section over the
+total category `Sigma_K(R)`, the existing `sigma_functord_sec` uncurries this
+displayed functor.  This explicit sequence is the computational recursive-
+context operation.
+
+Accordingly, the generic families
+
+```text
+E o Sigma_proj1_func(R)
+Pullback_catd(E,Sigma_proj1_func(R))
+```
+
+compare with the stable `Sigma_proj1_pullback_catd(R,E)` only at proof time.
+They do not runtime-reduce to it.  Code needing stable fibre/action and
+uncurrying computation names `Sigma_proj1_pullback_catd` explicitly, while
+generic section pullback remains generic.
 
 These are currently basic operations and beta laws, not a completed general
 adjunction package. They should be read as visible instances or shadows of the

@@ -36,6 +36,23 @@ unif_rule
   ≡ @Catd_cat $K0
   ↪ [ $K ≡ Op_cat $K0 ];
 
+/*
+  Whole proof-time coherence of public presheaf composition with the active
+  displayed-family representation.  The generic category comparison above
+  intentionally does not propagate through the rigid `comp_fapp0` head.
+  Consumers that cross the facade therefore use this path explicitly; neither
+  composition is selected as a runtime normal form for the other.
+*/
+constant symbol psh_comp_representation_agrees
+  [K : Cat]
+  [P Q R : τ (Obj (@Psh_cat K))]
+  (g : τ (Hom (@Psh_cat K) Q R))
+  (f : τ (Hom (@Psh_cat K) P Q))
+  : τ (@=
+      (Hom (@Psh_cat K) P R)
+      (@comp_fapp0 (@Psh_cat K) P Q R g f)
+      (@comp_catd_fapp0 (Op_cat K) P Q R g f));
+
 // Object/type classifier of Cat-valued presheaves on K.
 symbol Psh (K : Cat) : Grpd
 ≔ Obj (@Psh_cat K);

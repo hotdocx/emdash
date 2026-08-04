@@ -321,6 +321,54 @@ symbol direct_cover_question_extension_pullback_pair_agrees
     (@direct_cover_question_extension_pullback_fibre_agrees
       K T W V U p q);
 
+/*
+  Whole retained-member factorization of the canonical extension action.
+
+    extension(p^*q) -> y(V) -> extension(q)
+      = extension_pullback(p,q).
+
+  The first map is the pulled-sieve inclusion and the second is the whole
+  Yoneda section selected by `(p,member)`.  Semantically, both routes become
+  the same map after the extension inclusion into `y(U)`: this follows from
+  whole naturality of `direct_cover_question_extension_inclusion_transf` and
+  the covariant-Yoneda action triangle.  Pointwise subterminality of an
+  ordinary sieve then cancels that inclusion.
+
+  v3.2 records the result as one proof-time path between whole presheaf maps.
+  It is not a runtime fold, not a convenience unifier between expanded
+  presentations, and not an external family of component equations.  A
+  future generic strict pointwise-to-whole cancellation theorem may derive
+  this path transparently without changing its public statement.
+*/
+constant symbol direct_cover_question_extension_pullback_retained_agrees
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (q : τ (@DirectCoverQuestionData K T U))
+  (member : τ (@SieveMembership
+      K U (@direct_cover_question_sieve K T U q) (Struct_sigma V p)))
+  : τ (@=
+      (Hom
+        (@Psh_cat K)
+        (@direct_cover_question_extension_psh
+          K T V (@direct_cover_question_internal_pullback K T V U p q))
+        (@direct_cover_question_extension_psh K T U q))
+      (@comp_fapp0
+        (@Psh_cat K)
+        (@direct_cover_question_extension_psh
+          K T V (@direct_cover_question_internal_pullback K T V U p q))
+        (@FibCov_source_catd (Op_cat K) V)
+        (@direct_cover_question_extension_psh K T U q)
+        (@fib_cov_transf
+          (Op_cat K)
+          (@direct_cover_question_extension_psh K T U q)
+          V
+          (Struct_sigma p member))
+        (@direct_cover_question_extension_inclusion
+          K T V (@direct_cover_question_internal_pullback K T V U p q)))
+      (@direct_cover_question_extension_pullback_func K T V U p q));
+
 // One whole inclusion from varying extensions to varying representables.
 injective symbol direct_cover_question_extension_inclusion_transf
   [K : Cat]
