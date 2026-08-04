@@ -549,9 +549,11 @@ Use the following order:
     question total, their whole inclusion, and the resulting internally
     reindexed matching and section families. Restriction is one displayed
     functor whose literal component is the existing ordinary-sieve
-    precomposition owner. The canonical pullback action is not yet exposed by
-    a selected runtime formula, and the module declares no glue, inverse law,
-    locality, or sheafification;
+    precomposition owner. At a canonical pulled-back question, one stable
+    whole extension map computes on literal `(h,member)` pairs by retained
+    postcomposition, and one whole proof-time path compares the opaque generic
+    action with that map without a runtime fold. The module declares no strict
+    glue-pullback path, inverse law, locality, or sheafification;
 61. `emdash3_2_direct_cover_algebras.lp` for the transparent rule-free whole
     oracle structure at covering ordinary sieves: glue is a functor between
     matching and section hom-categories, silent is one whole endofunctor

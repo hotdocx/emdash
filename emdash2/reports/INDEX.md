@@ -104,9 +104,11 @@ The ordinary extension and representable are functors over the opposite
 eligible-question total, their inclusion is one transformation, and
 represented hom produces internally reindexed matching and section families.
 Restriction is one displayed functor whose literal component is the existing
-ordinary-sieve precomposition owner. Its canonical pullback action is not yet
-given a selected runtime formula, and it declares no glue, inverse law,
-locality, or sheafification.
+ordinary-sieve precomposition owner. At a canonical question pullback, a
+stable whole extension map computes on literal retained members, while one
+whole proof-time path compares the opaque generic action with that map; the
+generic action deliberately receives no runtime fold. It declares no strict
+glue-pullback path, inverse law, locality, or sheafification.
 `emdash3_2_direct_cover_algebras.lp` is the transparent rule-free whole
 oracle layer.  At each cover its glue is a functor from matching families to
 sections and its silent law is the whole equality `glue o restriction = id`.

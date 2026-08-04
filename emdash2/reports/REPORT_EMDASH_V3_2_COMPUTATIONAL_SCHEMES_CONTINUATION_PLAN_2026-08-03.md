@@ -1615,6 +1615,47 @@ prerequisites.
   `restriction o glue = id`, locality, or sheafification.  The already
   primitive `silent` path has the opposite orientation
   `glue o restriction = id`; keeping these laws distinct is essential.
+- **CS-D-053 — Canonical extension pullback is proof-time specified, while
+  internal whole strict glue substitution remains a separate gate:** the action of the
+  primitive varying-extension functor at the actual internally pulled-back
+  question is compared by one whole path with a stable presheaf map.  That
+  stable map computes at a test object and sends a literal `(h,member)` to the
+  retained postcomposition pair `(p o h,member)`.  The generic action does not
+  runtime-fold to the stable head: the owner-position fold exceeded the
+  uniform 90-second checking ceiling, whereas the proof-time whole path and
+  both narrow projection rules check promptly.  The varying representable
+  action already reduces to direct Yoneda action, so it receives no duplicate
+  primitive.  An attempted fully semantic definition through
+  `sigma_pullback_total_func` exposed the expected Fubini/base-change square
+  but did not elaborate through the current non-transitive proof-time
+  comparisons between the represented-Hom and Sigma-total presentations; no
+  broad unifier or composition fold is added for that convenience.
+
+  This tranche also corrects an overstatement in CS-D-052 and §13.23.1.
+  Ordinary v3.2 strict naturality already joins the two routes through the
+  common off-diagonal `tapp1*` owner after projection to an object.  The
+  current `Functord(E,D)` representation nevertheless retains a directed
+  higher cell between those routes and does not make the two *whole functors*
+  definitionally equal.  Therefore the displayed glue owner by itself cannot
+  yet yield the whole path needed by `OmegaEquivAlong Cat_cat` for arbitrary
+  Cat-valued presheaves.
+
+  A first probe merely postulated that whole path and used `eq_ap`; it proved
+  that the type is representable, not that the path follows from the current
+  glue constructor.  A decisive follow-up oriented both generic whole routes
+  to their common `tapp1_fapp0` owner.  That formulation typechecks and makes
+  reflexivity prove whole strict naturality, but its warning-enabled probe
+  raises the inherited 1,020 unjoinable-critical-pair inventory to 1,142 and
+  would globally collapse distinctions intentionally retained for lax/higher
+  displayed functors.  The broad rewrite is rejected.  The next design gate
+  is an internal strict displayed-functor specialization, or an equivalently
+  principled strict `tapp1*` owner, inhabited by the direct glue constructor.
+  It must not be a sheaf-specific family of external naturality squares or an
+  opaque per-question path.  A separately named lax/higher completion remains
+  possible later, but ordinary sheafification continues only through the
+  strict internal specialization.  The desired
+  `restriction o glue = id` itself remains a theorem to derive, not a
+  constructor.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1645,7 +1686,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`; and the first internal covering-question experiment is checkpointed at `c091856`. Its unrestricted higher-sieve eligibility family is superseded by the corrected eligible-question tranche checkpointed at `0257ce3`. The CS-D-052 whole varying extension/restriction/glue tranche is complete and locally checkpointed at `98fe2c6`: focused checks, exact warning comparison, strict audits, and fresh 156-target health are green. The principal-BNat bridge remains frozen. | Select the narrow canonical pullback computation needed to derive `restriction o glue = id`; only then derive locality, constructed-sheaf packaging, whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`; and the first internal covering-question experiment is checkpointed at `c091856`. Its unrestricted higher-sieve eligibility family is superseded by the corrected eligible-question tranche checkpointed at `0257ce3`. The CS-D-052 whole varying extension/restriction/glue tranche is complete and locally checkpointed at `98fe2c6`: focused checks, exact warning comparison, strict audits, and fresh 156-target health are green. The CS-D-053 canonical extension-pullback comparison is implemented and focused-green pending checkpointing. Its strictness audit rejects both an opaque per-question square and a globally broad whole-naturality rewrite; the latter typechecks but adds 122 unjoinable critical pairs and erases intentional lax/higher distinctions. The principal-BNat bridge remains frozen. | Checkpoint CS-D-053, then select and probe an internal strict displayed-functor/`tapp1*` specialization for ordinary glue. Do not add external square fields or the desired right inverse itself as an axiom. Only after that derive `restriction o glue = id`, locality, constructed-sheaf packaging, whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -3221,8 +3262,11 @@ next kernel probe.  Given `m : Match_R(X)` and a member `f:V->U` of `R`:
 
 1. pull `R` and `m` back along `f`; topology stability makes `f^*R` covering,
    and sieve closure plus `f in R` makes `f^*R` maximal;
-2. the whole displayed glue action gives
-   `(g_R(m))|f = g_(f^*R)(f^*m)` internally;
+2. the intended strict substitution law must identify the two whole routes
+   `(g_R(m))|f` and `g_(f^*R)(f^*m)`; their object projections already join
+   through the internal off-diagonal `tapp1*` owner, while the current
+   displayed glue type retains higher arrow data and does not yet expose
+   equality of the whole functors;
 3. matching-family naturality identifies `f^*m` with the restrictions of the
    single component `m_f`, since at every `h:W->V` both sides are `m_(f o h)`;
 4. `silent` at `(V,f^*R)` gives
@@ -3233,9 +3277,16 @@ next kernel probe.  Given `m : Match_R(X)` and a member `f:V->U` of `R`:
 
 The unit/`eta` constructor is not used in this locality proof; it is needed
 for the later free/universal property over `P`.  Conversely, whole variation
-of `glue` under question pullback is indispensable.  CS-D-052 places that
-naturality in the constructor's displayed-functor type instead of adding a
-fourth external component-square field.
+of `glue` under question pullback is indispensable.  CS-D-052 correctly
+places action and higher coherence in the constructor's displayed-functor
+type instead of adding a family of external component squares.  CS-D-053
+records the necessary qualification: the current `Functord` representation
+has strict object-level naturality but retains directed higher data at the
+whole-functor boundary.  Ordinary sheaf locality therefore needs the glue
+constructor to inhabit an internal strict specialization whose computation
+is still owned by `tapp1*`.  Neither an external square family nor an opaque
+whole path is the selected interface.  This substitutional structure is
+also distinct from the missing `restriction o glue = id` law itself.
 
 This also clarifies the comparison with Quirin--Tabareau's *Lawvere--Tierney
 sheafification in Homotopy Type Theory*.  Their Definition 5.5 makes the
@@ -3285,6 +3336,147 @@ opaque second inverse remain rejected alternatives.  Registry, strict audit,
 catalog, health, and plan synchronization are complete.  The bounded
 implementation and synchronized-plan checkpoint is `98fe2c6` (`feat:
 internalize direct cover glue indexing`).
+
+### 13.24 CS-12i canonical extension pullback and strictness audit — 2026-08-03
+
+The first post-CS-12h probe identified the exact semantic action needed at a
+canonical question pullback.  For `p:V->U`, an eligible question `q` at `U`,
+and a literal object `(h,member)` of the extension of the internal pullback
+question at a test object `W`, the intended image is
+
+```text
+(h,member) |-> (p o h,member).
+```
+
+The deployed normal form retains the existing represented postcomposition
+owner:
+
+```text
+Struct_sigma
+  (into_restr_arrow(into_restr_postcompose(p,Struct_sigma(W,h))))
+  member.
+```
+
+This distinction matters.  Replacing it immediately by a raw syntactic
+composite would discard the stable `into_restr_postcompose` provenance and
+reopen an already proof-time-only represented-Hom comparison.
+
+Three candidate implementations were measured:
+
+1. Folding the generic `fapp1_fapp0` action of
+   `direct_cover_question_extension_func` at the exact canonical question
+   arrow to a new stable whole map exceeded the uniform 90-second ceiling
+   before the downstream completion import finished.  With that single fold
+   disabled, the stable component and literal-pair rules pass in under ten
+   seconds.  The fold is therefore rejected rather than hidden behind a
+   larger timeout.
+2. Defining the fibre map transparently through
+   `sigma_pullback_total_func` exposed the mathematically correct construction
+   but did not elaborate through the current proof-time presentation chain.
+   The remaining obligations compare the represented-Hom fibre of Yoneda
+   with its `Sigma_cat` presentation and compare the two totalized routes
+   `postcompose o sigma_intro` and `sigma_intro o hom_postcomp`.  This is a
+   useful future generic Fubini/base-change theorem, not justification for a
+   broad runtime fold or a convenience unifier in the direct-cover module.
+3. Keeping a stable whole presheaf map with two narrow projection betas, and
+   supplying one whole equality from the opaque generic action to that map,
+   is fast and type-correct.  `eq_ap` projects the whole comparison first to
+   the fibre functor and then to the literal member formula.  The comparison
+   is proof-time evidence and the reviewer retains an `assertnot` proving
+   that the generic action has not acquired a competing runtime normal form.
+   The corresponding representable action already reduces to the direct
+   Yoneda action and therefore needs no new owner.
+
+The active source now implements option 3.  It has 384 lines, thirteen
+symbols, and five narrow rules.  The 222-line reviewer has twelve
+assertions covering the original six family boundaries plus the canonical
+whole map, fibre projection, literal pair beta, whole proof-time agreement,
+derived pair path, computing Yoneda action, and the intentional generic-action
+runtime non-collapse.  The source, reviewer, completion HIT, completion
+eliminator, and both completion reviewers pass focused quiet checks.  The two
+warning-enabled changed targets retain exactly the inherited 1,020
+unjoinable-critical-pair and 159 replaceable-pattern diagnostics, with zero
+new warning.  The changed source and the central kernel both retain zero
+unreviewed strict inferred-slot candidates.  The already completed registered
+health pass checked all 156 targets with zero failure, zero timeout, and zero
+resumed result under the uniform 90-second per-target ceiling.  Its current
+source snapshot is
+`sha256:d24737207cb97306fc24ae272cf17dd5912ab9c35381d04a61391c0509162107`
+and its checked-content snapshot is
+`sha256:4fcf1cb5f592686bf0a730a1c5096ab0a3701dfdad55e04ac6fddcbb8e879bc8`.
+No further aggregate is required before this bounded checkpoint.
+
+#### 13.24.1 Whole strictness must remain internal
+
+The audit found a more important representation distinction than the
+extension formula itself.  For
+
+```text
+F : Functord(E,D)
+```
+
+the active kernel already owns the off-diagonal whole map
+
+```text
+functord_transport_func(F,p) = tapp1_fapp0(F,p).
+```
+
+Its strict Cat-valued naturality rules make the object actions of
+
+```text
+D[p] o F[x]
+F[y] o E[p]
+```
+
+both reduce through that owner.  This is why no consumer should carry an
+external family of object-level naturality squares.  The displayed
+internal-hom layer nevertheless retains a directed cell
+`fdapp1_int_cell(F,p,u)` between those object routes, and the two *whole
+functors* are not definitionally equal.  The failed reflexivity probe prints
+exactly the expected residual normal forms: transport-after-component and
+component-after-transport.  Thus the whole
+`direct_cover_completion_glue_funcd` internalizes question action and higher
+coherence, but its current type alone does not provide the equality used in
+step 2 of the Pédrot argument.  The current `OmegaEquivAlong Cat_cat`
+locality target requires whole functor equality for both inverse laws.
+
+Two tempting repairs were tested and rejected:
+
+1. Postulating one whole path at every canonical pullback question makes
+   `eq_ap` produce the desired component equality and checks quickly.  This
+   only shows that the stronger contract is well typed.  It would still be an
+   opaque sheaf-specific naturality axiom, so it is not promoted.
+2. Adding two generic whole rewrite rules
+
+   ```text
+   D[p] o F[x]  -> tapp1_fapp0(F,p)
+   F[y] o E[p]  -> tapp1_fapp0(F,p)
+   ```
+
+   makes both generic whole equalities provable by reflexivity and checks in
+   under ten seconds.  A warning-enabled run, however, increases the inherited
+   unjoinable-critical-pair inventory from 1,020 to 1,142.  More importantly,
+   it silently forces every displayed functor to be whole-strict and erases
+   the intentionally available lax/higher interpretation.  This broad rule
+   pair is also rejected.
+
+The selected next gate is a principled *internal strict displayed-functor
+specialization* (or an equivalent strict `tapp1*` owner).  The direct glue
+constructor should inhabit that specialization, and its underlying
+`Functord` plus whole substitution computation should be obtained by generic
+projections.  Strictness then belongs to the constructor's categorical type,
+not to an external square field and not to an ad hoc rule mentioning one
+matching family.  A separately named lax/higher cover completion can retain
+the present directed semantics later when a consumer exists.
+
+After that specialization, two derived ingredients still remain: the
+internally coherent comparison of a pulled matching family with the
+restrictions of its retained member, and the whole assembly/extensionality
+step from member paths to equality of matching functors.  Pullback-along-
+member maximality supplies part of that proof but does not replace either
+ingredient.  The desired `restriction o glue = id` remains a theorem, not a
+HIT constructor or rewrite rule.  No sheafification, locality, or right
+inverse is claimed at this checkpoint.
 
 ## 14. Validation And Checkpoint Contract
 
