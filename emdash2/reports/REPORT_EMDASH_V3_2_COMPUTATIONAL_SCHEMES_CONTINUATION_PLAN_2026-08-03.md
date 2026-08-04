@@ -1167,7 +1167,7 @@ close CS-05.
 | Small-site restriction/basis comparison | Moderate | Exact basis and topology transport owners. |
 | Representation-independent category of schemes | Research-grade but plausible | Morphism representation, locally-ringed structure, and comparison with presentations. |
 | Ordinary-sieve extension and topology-local-object classifier | Implemented at the whole Cat-valued boundary | Fibrewise dependent-Sigma values and inclusion components compute; explicit base-arrow beta and equivalence with the separate weighted-limit descent presentation remain consumer-gated. |
-| Fixed-site categorical-HIT sheafification construction | Whole constructor, recursor, eligible-question, and varying-family boundaries implemented or green in the current tranche; the remaining reflector is research-grade but factorable | Formation/unit/glue/silent and the nondependent recursor are checkpointed. Eligible covers, varying extensions, matching/section families, restriction, and question-indexed glue now have whole internal owners. The next gate is the smallest canonical pullback computation needed to derive `restriction o glue = id`; locality and syntactic sheaf packaging then precede Hom universality, functorial assembly, rigid `Sheaf_cat` realization, CommRing lift, and left exactness. |
+| Fixed-site categorical-HIT sheafification construction | Whole constructor, recursor, eligible-question, varying-family, canonical-pullback, strict-substitution, and syntactic internal-sheaf boundaries implemented; the remaining reflector is research-grade but factorable | Formation/unit/glue/silent and the nondependent recursor are checkpointed. Whole strict glue substitution is derived internally at generic `tapp1_func`; one whole displayed glue plus one whole silent path now form `DirectCoverSheafStructure`, and the completion inhabits the total `DirectCoverSheaf`. Generic record-style functor extensionality is no longer an active prerequisite. Remaining gates are whole Hom universality, functorial reflector assembly, scoped comparison with conventional two-sided `IsTopologyLocalPsh` and the rigid `Sheaf_cat` facade, then CommRing lift and left exactness. |
 | Unrestricted atlas effectivity | Research-grade | Descent/localization infrastructure and scope. |
 
 The original computational-schemes direction remains feasible. The main risk
@@ -1686,7 +1686,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`; and the first internal covering-question experiment is checkpointed at `c091856`. Its unrestricted higher-sieve eligibility family is superseded by the corrected eligible-question tranche checkpointed at `0257ce3`. The CS-D-052 whole varying extension/restriction/glue tranche is complete and locally checkpointed at `98fe2c6`: focused checks, exact warning comparison, strict audits, and fresh 156-target health are green. The CS-D-053 canonical extension-pullback comparison is implemented and focused-green pending checkpointing. Its strictness audit rejects both an opaque per-question square and a globally broad whole-naturality rewrite; the latter typechecks but adds 122 unjoinable critical pairs and erases intentional lax/higher distinctions. The principal-BNat bridge remains frozen. | Checkpoint CS-D-053, then select and probe an internal strict displayed-functor/`tapp1*` specialization for ordinary glue. Do not add external square fields or the desired right inverse itself as an axiom. Only after that derive `restriction o glue = id`, locality, constructed-sheaf packaging, whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the Pédrot-directed `eta/glue/silent` signature, whole glue correction, and unit/glue/silent-coherent recursor are checkpointed through `deeab6d`. Eligible questions and whole varying extension/restriction/glue are checkpointed through `98fe2c6`; CS-D-053's canonical extension-pullback comparison is checkpointed at `337a638`. The current tranche derives generic whole strict `Functord` naturality at full `tapp1_func`, specializes it to direct glue, adds the generic opposite represented-family bridge and retained-member Yoneda section, and promotes `DirectCoverSheafStructure` as one whole glue plus one whole silent path. The completion now inhabits the total syntactic `DirectCoverSheaf`, and its deployed per-cover recursor algebra is a forgetful projection. Focused checks and the prior exact warning/strict-audit evidence are green; no long aggregate is rerun. The principal-BNat bridge remains frozen. | Establish whole Hom uniqueness/universality and functorial assembly; then compare the algebraic direct-cover sheaf with conventional two-sided `IsTopologyLocalPsh`, the rigid facade, and `SheafificationCapability`. Treat `restriction o glue = id` as part of that comparison, not as a prerequisite for syntactic internal sheafhood. Follow with CommRing lift and left exactness. |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -3478,6 +3478,274 @@ ingredient.  The desired `restriction o glue = id` remains a theorem, not a
 HIT constructor or rewrite rule.  No sheafification, locality, or right
 inverse is claimed at this checkpoint.
 
+### 13.25 CS-12j generic strict substitution and retained-member bridge — 2026-08-03
+
+CS-D-053 is locally checkpointed at `337a638` (`feat: specify canonical
+cover-extension pullback`).  The post-checkpoint strictness audit then found a
+smaller generic solution than the strict displayed-functor subtype proposed
+in Section 13.24.  The active `Functord` owner already has the complete
+off-diagonal functor
+
+```text
+tapp1_func(F,x,y) : Hom_K(x,y) -> Functor(E[x],D[y]).
+```
+
+The two ordinary strict routes can therefore be retained as transparent whole
+functors in the arrow variable,
+
+```text
+p |-> D[p] o F[x]
+p |-> F[y] o E[p],
+```
+
+and compared proof-time with that one iterable owner.  Two narrow unification
+rules now recognize the existing stable precomposition/postcomposition action
+heads and return only the trivial constraint.  They do not orient either
+route at runtime.  First-class whole paths are `eq_refl` at that proof-time
+boundary, and `eq_ap` derives the fixed-arrow paths.  Their transitive
+composite is the generic
+`functord_transport_strict_naturality(F,p)` theorem.  The direct cover
+completion specializes that theorem at the canonical internal pullback
+question, yielding
+
+```text
+Section[p] o glue_q = glue_(p*q) o Matching[p]
+```
+
+as one whole internal path.  No external component square, cover-specific
+unifier, or new runtime normal form is involved.
+
+This supersedes the strict-subtype proposal in Section 13.24.1 for the current
+ordinary `Functord` facade.  A genuinely lax displayed-functor classifier
+would still be a distinct future interface; it is not obtained by weakening
+the current strict owner.  The earlier probe that oriented both routes as
+runtime rewrites remains rejected: it added 122 unjoinable critical pairs and
+globally collapsed intentionally distinct higher presentations.
+
+The identity-specialized normal form was also audited directly.  Replacing
+
+```text
+tapp1_fapp0(eta,id_x) -> tapp0_fapp0(eta,x)
+```
+
+by a proof-time unifier exposes the generic accumulation redexes, but it
+removes real runtime computation.  Adding the two diagonal composition rules
+and stable pre/postcomposition projection rules repairs the strict-route
+probe, yet an unchanged Eckmann--Hilton consumer still requires the bare
+identity component to reduce.  Repair would therefore require a broad,
+constructor-by-constructor normal-form migration.  The established identity
+beta is retained.  No duplicate capped `tapp1_fapp0` unifier is promoted:
+evaluation of the full whole path by `eq_ap` already provides the exact capped
+comparison, in accordance with the functor-level projection SOP.
+
+The next Pédrot step needs a whole section of the sieve extension selected by
+one retained member `p:V->U`.  The generic covariant Yoneda constructor already
+provides it:
+
+```text
+ordinary_sieve_member_section(p,member) : y(V) -> R_hat.
+```
+
+At `h:W->V`, its internal action is the transported pair
+`(p o h, transported member)`.  The only missing typing bridge was between the
+two existing represented-family presentations.  An initial exact rule
+mentioning `id_(Op K)` was rejected as needlessly identity-specific.  The
+kernel now owns the generic proof-time duality
+
+```text
+hom_(A^op,B^op,F^op,W) = hom_con(A,W,B,F),
+```
+
+implemented as a rigid-head unifier whose constraints recover `A^op`, `B^op`,
+and `F^op`.  Its pattern mentions neither an identity functor nor a
+hard-coded opposite identity.  Typed reflexivity checks exercise both
+equation presentations, while a negative conversion assertion proves that
+the two public heads remain distinct runtime forms.  The retained-member
+section then routes transparently through `fib_cov_transf`; all arrow action
+and naturality remain at that generic internal owner.
+
+The candidate factor map
+
+```text
+(p^*R)_hat -> y(V) -> R_hat
+```
+
+now forms and checks.  It is not runtime-convertible to the stable canonical
+extension-pullback map.  Objectwise, the two maps differ only by the choice of
+a proof in proposition-valued sieve membership, so the required pair path is
+mathematically canonical.  The remaining formal boundary is stronger:
+assembling those internal object paths into equality of the *whole presheaf
+maps/functors*.  v3.2 has Pi funextensionality but does not presently expose a
+generic strict extensionality principle for primitive `Functor`/`Functord`
+objects.  This is also the later assembly boundary from all retained-member
+paths to the whole equation `restriction o glue = id`.
+
+The next tranche must therefore first test whether an existing internal
+equality/hom owner can perform that assembly.  If it cannot, the design choice
+is between:
+
+1. a reusable internal strict functor-extensionality capability with its
+   coherence represented by one whole owner; or
+2. an honestly enriched categorical-HIT path contract that records the
+   strict whole consequence required by ordinary locality.
+
+Neither option may turn into a family of external naturality squares, a
+consumer-supplied coherence field, a sheaf-specific runtime rewrite, or an
+opaque assertion of the final right inverse.  A weaker directed/lax locality
+notion may later use transformations rather than strict paths, but it is not a
+silent replacement for the current `OmegaEquivAlong Cat_cat` target.
+
+Focused kernel, presheaf, sieve-extension, direct-HIT, reviewer, and downstream
+eliminator checks are green.  The central diagnostics pass.  The focused
+warning snapshot remains exactly 1,179 inherited warnings: 1,020 unjoinable
+critical pairs and 159 replaceable-pattern diagnostics.  The strict kernel
+rule audit remains at zero unreviewed slots.  Catalog/health regeneration and
+the local checkpoint are deliberately deferred until this bounded
+extensionality decision is settled; no long aggregate was rerun.
+
+### 13.26 CS-12k internal Pédrot sheaf package — 2026-08-03
+
+The post-CS-12j review corrects the final paragraph of Section 13.25 without
+discarding its useful generic strict-naturality work. The active obstacle was
+phrased too strongly. A generic record-style functor extensionality principle
+
+```text
+(forall x, F(x)=G(x)) + externally supplied arrow compatibility  =>  F=G
+```
+
+is not the desired architecture and is no longer an active sheaf-formation
+gate. Besides requiring a difficult primitive-functor equality principle, it
+would encourage consumers to carry object equations and naturality squares
+outside the categorical owner. That is contrary to the internality SOP and
+unnecessary for the Pédrot-style algebraic definition.
+
+The relevant `isSh` signature is already whole. For the internal category
+
+```text
+Q = DirectCoverQuestion_cat(K,T),
+```
+
+and the displayed matching and section families of one presheaf `X`, a direct-
+cover sheaf structure consists of exactly
+
+```text
+glue_all : Functord_Q(Matching_X,Section_X),
+silent   : glue_all o restriction_all = id_Section_X.
+```
+
+Question pullback, matching-arrow action, and their coherence are therefore
+carried by `glue_all`; `silent` is one path between whole displayed functors.
+Neither is an outer-LF family indexed manually by `(U,R,covers)`. Literal
+cover glue and silent equations are obtained only by component projection,
+with `eq_ap` observing the whole path. This use of `eq_ap` does not reconstruct
+whole equality from components and introduces no external naturality square.
+
+The new rule-free module
+`emdash3_2_direct_cover_internal_sheaves.lp` implements that boundary:
+
+1. `direct_cover_sheaf_silent_source_funcd(T,X,glue)` is the whole composite
+   `glue o restriction`;
+2. `direct_cover_sheaf_silent_target_funcd(T,X)` is the whole displayed
+   identity;
+3. `DirectCoverSheafStructure(T,X)` is their dependent Sigma package of one
+   whole glue functor and one whole silent path;
+4. `direct_cover_sheaf_structure_glue_func` and
+   `direct_cover_sheaf_structure_silent` are literal-cover projections;
+5. `direct_cover_sheaf_structure_algebra` forgets the whole internal owner to
+   the older per-cover `DirectCoverAlgebra` consumed by the deployed recursor;
+   ownership is not reversed; and
+6. `DirectCoverSheaf(T)` is the transparent total of a presheaf and this
+   structure.
+
+The completion module now imports that semantic package. Its primitive whole
+`direct_cover_completion_glue_funcd` and
+`direct_cover_completion_silent_funcd` transparently construct
+
+```text
+direct_cover_completion_sheaf_structure(T,P)
+  : DirectCoverSheafStructure(T,DirectCoverCompletionPsh(T,P))
+```
+
+and hence `direct_cover_completion_sheaf(T,P) : DirectCoverSheaf(T)`. The
+existing `direct_cover_completion_algebra` is now obtained by forgetting from
+this structure, rather than by independently reassembling primitive per-cover
+fields. The completion recursor gains
+`direct_cover_completion_sheaf_recursor_data`, so an internal sheaf target
+enters through that one forgetful projection without restating its glue and
+silent cover by cover.
+
+This changes the status vocabulary precisely:
+
+- the completion **is** now a syntactic internal Pédrot-style direct-cover
+  sheaf;
+- it is **not yet** a functorial sheafification reflector;
+- it is not definitionally the supplied rigid `Sheaf_cat(K,T,Cat_cat)` facade;
+- it has not yet been compared with conventional
+  `IsTopologyLocalPsh(K,T,X)`, whose selected `OmegaEquivAlong Cat_cat`
+  contains both composite laws;
+- in particular, the opposite equation `restriction o glue = id` remains a
+  later conventional-locality comparison theorem. It is not a fourth HIT
+  constructor and is not required before the algebraic `DirectCoverSheaf`
+  name; and
+- whole Hom uniqueness/universality, functorial action on input presheaf maps,
+  comparison/instantiation of `SheafificationCapability`, CommRing-valued
+  lifting, and left exactness remain open.
+
+The generic strict `tapp1_func` comparison and retained-member Yoneda section
+from Section 13.25 remain useful for the eventual two-sided locality theorem.
+They are no longer forced to solve generic primitive-functor extensionality as
+a prerequisite for sheaf formation. The candidate retained-member factor can
+be revisited only when the conventional comparison or Hom-universality proof
+actually consumes it.
+
+#### 13.26.1 Directed/pseudo fallback and univalence boundary
+
+The current strict path presentation is working and remains selected. If a
+later coherence boundary genuinely exceeds equality-path expressivity, the
+fallback should be staged as follows:
+
+1. keep all operations and coherence as whole categorical owners;
+2. introduce a separately named pseudo/lax direct-cover completion rather than
+   silently weakening `DirectCoverSheafStructure`;
+3. where the comparison is invertible, assemble a whole natural isomorphism,
+   `IsoEvidence`, or appropriate `OmegaEquiv`;
+4. use scoped univalence only when the ambient category has the required
+   univalence capability and an actual whole equivalence/isomorphism has been
+   constructed.
+
+Univalence does not turn an arbitrary directed arrow or noninvertible lax cell
+into equality. A merely directed `silent` cell would describe a distinct
+effectful/dialogue completion and may be valuable later, but it cannot be
+substituted for the strict quotient path without changing the mathematical
+object. Conversely, an invertible pseudo presentation may be transported to a
+path at a suitably univalent boundary; this is a legitimate contingency, not
+an active dependency of the current tranche.
+
+#### 13.26.2 Validation and next gate
+
+The new internal-sheaf source, its reviewer, the migrated completion source
+and reviewer, and the downstream eliminator source and reviewer pass focused
+checks under the uniform 90-second per-target ceiling. The new semantic module
+is rule-free; completion still has its existing one narrow component rule,
+and the eliminator retains its existing two narrow computation rules. No new
+runtime rewrite, unifier, component-square field, or opaque right inverse is
+introduced by this package.
+
+Per the user's proportional-validation instruction, no kernel-wide,
+examples-wide, health, CI, or repository aggregate is rerun at this boundary.
+The prior exact 1,179-warning comparison and zero-unreviewed strict-rule audit
+for the generic strict-naturality tranche remain the relevant unchanged
+evidence; focused checks cover the new rule-free package and its direct
+consumers. Static source registries and authority prose are synchronized.
+
+The next active CS-12 gate is whole Hom uniqueness/universality for maps out of
+the completion, followed by functorial assembly on presheaf arrows. Only then
+should the implementation select the narrow comparison with
+`IsTopologyLocalPsh`, the rigid sheaf facade, and the supplied
+`SheafificationCapability`. This order preserves the computational
+`eta/glue/silent` center and avoids reopening external extensionality or
+unrelated generated-topology/scheme work.
+
 ## 14. Validation And Checkpoint Contract
 
 For every bounded source tranche:
@@ -3510,17 +3778,20 @@ specificity:
 > In the dedicated
 > `/home/user1/emdash1-presheaves-sites-schemes` worktree on
 > `goal/presheaves-sites-schemes-v3.2`, continue the computational-schemes
-> program from clean checkpoint `3dd70fd` by treating
+> program from clean checkpoint `337a638` by treating
 > `REPORT_EMDASH_V3_2_COMPUTATIONAL_SCHEMES_CONTINUATION_PLAN_2026-08-03.md`
 > as the living implementation, decision, validation, and recovery ledger.
 > Execute only its next ready bounded tranches under the active nested
 > Lambdapi SOP.  On CS-12, continue the direct whole-presheaf
-> `eta/glue/silent` cover completion with an honest eliminator into
-> topology-local targets, derived locality and syntactic constructed-sheaf
-> packaging, whole Hom universality, functorial reflector assembly, and scoped
-> instantiation/comparison of the existing `SheafificationCapability`; do not
-> call the constructor sheafification before those gates or conflate direct
-> HIT glue, the adjunction mate, and Cartier localization glue.  Keep CS-13 as
+> `eta/glue/silent` cover completion from its internal syntactic
+> `DirectCoverSheaf` package through whole Hom universality, functorial
+> reflector assembly, and scoped comparison with `IsTopologyLocalPsh`, the
+> rigid sheaf facade, and the existing `SheafificationCapability`; treat the
+> opposite restriction/glue composite as part of that conventional comparison,
+> not a prerequisite for algebraic direct-cover sheafhood. Do not call the
+> resulting endofunctor a sheafification reflector before those gates or
+> conflate direct HIT glue, the adjunction mate, and Cartier localization glue.
+> Keep CS-13 as
 > an independent active scheme lane: use a supplied global `P1` capability as
 > the smallest end-to-end validation of the existing binary/Laurent owners,
 > then build graded `Proj` infrastructure from which standard `P^n` is
@@ -3535,9 +3806,9 @@ specificity:
 > not push, merge, publish, rebase, amend, reset, rewrite history, clean up
 > worktrees, delete branches, or touch another worktree or branch.
 
-As of the `3dd70fd` checkpoint, the goal service still stores the older
-unfinished objective in `paused` state.  The attempted replacement above was
-rejected because the service exposes no resume/edit operation while an
-unfinished goal exists.  Use the quoted objective when the product resumes or
-replaces that goal.  The living plan, not the launch sentence, continues to
-own the evolving task order and detailed acceptance gates.
+The goal service currently has the older `3dd70fd`-worded objective active.
+It has no in-place objective-edit operation while that goal remains
+unfinished. The objective already delegates implementation order to this
+living plan, so the corrected quoted text above is the recovery/next-launch
+form while this plan owns the current `DirectCoverSheaf` boundary and detailed
+acceptance gates.

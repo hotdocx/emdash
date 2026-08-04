@@ -6605,6 +6605,36 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (y : τ (Obj B)) ⊢
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (x : τ (Obj (Op_cat B))) ⊢
   @fapp0 (Op_cat B) Cat_cat (@hom_con A W B F) x ≡ Hom_cat A (@fapp0 B A F x) W;
 
+// Opposite covariant and contravariant represented families compare
+// proof-time in either equation presentation; neither is a runtime fold.
+assert [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A)) ⊢
+  @eq_refl
+    (Obj (@Catd_cat (Op_cat B)))
+    (@hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W)
+  : τ (@=
+      (Obj (@Catd_cat (Op_cat B)))
+      (@hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W)
+      (@hom_con A W B F));
+
+assert [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A)) ⊢
+  @eq_refl
+    (Obj (@Catd_cat (Op_cat B)))
+    (@hom_con A W B F)
+  : τ (@=
+      (Obj (@Catd_cat (Op_cat B)))
+      (@hom_con A W B F)
+      (@hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W));
+
+assertnot [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A)) ⊢
+  @hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W
+  ≡ @hom_con A W B F;
+
 // Primitive contravariant represented-family action.
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   (X Y : τ (Obj B)) ⊢
@@ -14460,6 +14490,68 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (p : τ (Hom K x y)) ⊢
   @functord_transport_func K E D FF x y p
     ≡ @tapp1_fapp0 K Cat_cat E D x y FF p;
+
+// Whole strict naturality is proof-time comparison at full tapp1_func level.
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) ⊢
+  @functord_transport_lhs_tele_agrees K E D FF x y
+  : τ (@=
+      (Hom
+        Cat_cat
+        (@Hom_cat K x y)
+        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+      (@functord_transport_lhs_tele_func K E D FF x y)
+      (@tapp1_func K Cat_cat E D x y FF));
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) ⊢
+  @functord_transport_rhs_tele_agrees K E D FF x y
+  : τ (@=
+      (Hom
+        Cat_cat
+        (@Hom_cat K x y)
+        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+      (@functord_transport_rhs_tele_func K E D FF x y)
+      (@tapp1_func K Cat_cat E D x y FF));
+
+// Evaluation at p derives both fixed-arrow comparisons.
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @functord_transport_lhs_agrees K E D FF x y p
+  : τ (@=
+      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_func K E D FF x y p));
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @functord_transport_rhs_agrees K E D FF x y p
+  : τ (@=
+      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+      (@functord_transport_rhs_func K E D FF x y p)
+      (@functord_transport_func K E D FF x y p));
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @functord_transport_strict_naturality K E D FF x y p
+  : τ (@=
+      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_rhs_func K E D FF x y p));
+
+// Proof-time joins do not orient either full route at runtime.
+assertnot [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) ⊢
+  @functord_transport_lhs_tele_func K E D FF x y
+  ≡ @tapp1_func K Cat_cat E D x y FF;
+
+assertnot [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) ⊢
+  @functord_transport_rhs_tele_func K E D FF x y
+  ≡ @tapp1_func K Cat_cat E D x y FF;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))

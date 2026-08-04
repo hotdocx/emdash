@@ -49,16 +49,22 @@ cocone universality, and a computing shift inverse; it remains valid reusable
 one-map localization evidence at `451db48`.  A subsequent visual review of
 Pédrot's *Pursuing Shtuck* and *Debunking Sheaves* corrected the active
 sequencing: the principal-BNat ordinary-sieve bridge is frozen and unpromoted,
-while the direct constructed-sheaf route now starts with a recursive whole-
+while the direct constructed-sheaf route starts with a recursive whole-
 presheaf `eta/glue/silent` cover completion.  Its initial checkpoint
 `ce982e3` represented glue and silent only pointwise; the subsequent
 eliminator audit selects a whole direct-cover algebra instead.  Glue is now a
 functor between matching and section hom-categories, and silent is one whole
 endofunctor equality.  Topology-locality canonically forgets to this oracle
 through its selected left inverse, while the converse/right law remains a
-named pulled-cover proof rather than an opaque axiom.  The local-target
-eliminator, silent-constructor coherence, and whole Hom universal property
-must be implemented before it is called a sheafification reflector.
+named pulled-cover comparison rather than an opaque axiom. The completion's
+glue is now one displayed functor over the internal eligible-question
+category, and silent is one path between whole displayed functors there. This
+packages the output as a syntactic Pédrot-style `DirectCoverSheaf`; literal
+cover data and the older recursor algebra are forgetful projections. The
+local-target eliminator and silent-constructor coherence are implemented.
+Whole Hom universality, functorial reflector assembly, and comparison with
+the conventional two-sided locality presentation remain required before this
+is called a sheafification reflector.
 The whole-algebra correction is locally checkpointed at `1b6a468`.
 Dialogue branching without that quotient, or with only a directed silent
 cell, is a separately named lax/effect completion.  The direct HIT constructor,
@@ -115,28 +121,41 @@ sections and its silent law is the whole equality `glue o restriction = id`.
 It derives the oracle of a topology-local presheaf from the selected left
 inverse and left law; it does not assert the converse/right law, an
 eliminator, or sheafification.
+`emdash3_2_direct_cover_internal_sheaves.lp` lifts those observations to their
+semantic internal owner. A `DirectCoverSheafStructure(T,X)` consists of one
+displayed glue functor over the complete eligible-question category and one
+whole path `glue o restriction = id` between displayed section endofunctors.
+Literal-cover glue/silent and the deployed per-cover algebra are projections,
+not separately supplied families. `DirectCoverSheaf(T)` is the transparent
+total of a presheaf with that structure. This is the categorical analogue of
+Pédrot's algebraic `isSh`; it is deliberately not definitionally identified
+with the rigid `Sheaf_cat` facade or with `IsTopologyLocalPsh`. The missing
+opposite composite belongs to that later conventional-locality comparison,
+not to the formation of this syntactic internal sheaf package.
 `emdash3_2_direct_cover_completion_hit.lp` is the first direct
 whole-presheaf return/cover/silent categorical-HIT signature.  Its unit is a
 whole presheaf map. Recursive glue is a stable whole functor at one cover and
 one displayed functor over all internal eligible questions, so both matching-
 arrow and cover-pullback action are internal. Silent is one primitive whole
-path. The canonical direct-cover algebra is assembled transparently from
-these constructors, with pointwise glue/silent derived. Formation initially
-returns the underlying presheaf. An honest
-unit/glue/silent-coherent eliminator and the oracle-to-restriction-equivalence
-bridge must derive `IsTopologyLocalPsh` before syntactic constructed-sheaf or
-rigid-`Sheaf_cat` packaging.  It does not yet claim that bridge, pulled-cover
-action computation, a reflector, CommRing lift, or left exactness. A
+path. These constructors transparently inhabit `DirectCoverSheafStructure`
+and package the output as a syntactic `DirectCoverSheaf`; the canonical
+direct-cover algebra and pointwise glue/silent are derived forgetful
+observations. Generic whole strict `Functord` naturality supplies canonical
+pullback substitution internally. It does not yet claim the opposite
+restriction-after-glue comparison, `IsTopologyLocalPsh`, the rigid
+`Sheaf_cat` facade, whole Hom universality, a functorial reflector, CommRing
+lift, or left exactness. A
 dialogue/lax completion remains separately consumer-gated.
 `emdash3_2_direct_cover_completion_eliminator.lp` is the first nondependent
 recursor boundary.  It defines whole direct-cover algebra maps, including
 glue-functor preservation and higher silent-path coherence.  Its primitive
 extension has narrow runtime beta on the whole unit and pointwise recursive
 glue constructors; whole glue preservation and silent beta remain internal
-equality evidence.  Topology-local targets enter through the existing
-locality-to-algebra conversion.  It does not yet derive the missing
-restriction-after-glue law, locality of the completion, whole Hom uniqueness,
-a constructed sheaf, functorial reflector, or `SheafificationCapability`.
+equality evidence. Topology-local targets enter through the existing
+locality-to-algebra conversion; internal direct-cover sheaf targets enter
+through their single forgetful algebra projection. It does not yet derive the
+opposite restriction-after-glue comparison, locality of the completion, whole
+Hom uniqueness, a functorial reflector, or `SheafificationCapability`.
 `emdash3_2_telescope_localization_hit.lp` is the first explicit per-object
 categorical-HIT localization boundary. For an endomap `s:A->A`, it constructs
 the set-truncated sequential telescope with computing point induction,

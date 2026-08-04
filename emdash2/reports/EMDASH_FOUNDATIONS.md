@@ -1174,6 +1174,50 @@ truncated/HIT presentation is justified only if a consumer needs those
 additional interfaces; it is not required for the universal property or the
 computational affine-site MVP.
 
+### Internal Direct-Cover Sheaves And Their Completion
+
+For a fixed site `(K,T)`, the eligible ordinary covering sieves form the
+internal category `DirectCoverQuestion_cat(K,T)`. Given a Cat-valued presheaf
+`X`, the matching families and sections for all those questions are displayed
+Cat-valued families over that category, and restriction is one displayed
+functor
+
+```text
+restriction_X : Section_X ->_Q Matching_X.
+```
+
+The selected Pédrot-style algebraic sheaf structure is likewise whole:
+
+```text
+DirectCoverSheafStructure(T,X)
+  = Sigma glue : Functord_Q(Matching_X,Section_X),
+      glue o restriction_X = id_Section_X.
+```
+
+Thus question pullback, matching-arrow action, and both naturality dimensions
+are carried by `glue` itself. `silent` is one path between displayed functors,
+not a family of component equations. Evaluation and `eq_ap` merely project
+literal-cover observations from these whole owners. The older
+`DirectCoverAlgebra` is retained as a forgetful view for the deployed
+recursor; it is not the semantic owner of the sheaf structure.
+
+`DirectCoverSheaf(T)` is the transparent total of a presheaf and this
+structure. The primitive `DirectCoverCompletionPsh(T,P)` supplies its whole
+unit, recursive glue, and silent path and therefore inhabits that syntactic
+sheaf package. This does not yet identify it with the rigid supplied
+`Sheaf_cat(K,T,Cat_cat)` facade or with `IsTopologyLocalPsh`. The latter uses a
+conventional two-sided restriction equivalence; its missing opposite
+`restriction o glue = id` composite is a later comparison theorem, not an
+additional constructor required for the algebraic sheaf package.
+
+If strict equality later becomes too restrictive, a separate directed or
+pseudo/lax completion may retain whole categorical cells and coherence.
+Univalence can turn an appropriate whole equivalence or isomorphism into a
+path when the ambient category supplies that capability; it does not turn an
+arbitrary noninvertible lax cell into equality. The current direct-cover
+completion therefore retains the strict whole-path interface while the richer
+variant remains consumer-gated.
+
 ### Set-Carrier Commutative-Ring Objects
 
 The first algebra layer packages a commutative ring over an explicitly
@@ -4378,6 +4422,11 @@ kernel and one-way library vocabulary.
 | witness-rich sieve generators | `SieveGeneratorFamily K` |
 | topology acceptance / cover inclusion | `GrothTopologyAcceptsGenerators G T` / `GrothTopologyLe T U` |
 | generated coverhood and least topology | `GeneratedSieveCover G U R` / `generated_groth_topology G` |
+| internal eligible covering-question category | `DirectCoverQuestion_cat K T` |
+| whole matching/section displayed families and restriction | `DirectCoverQuestionMatching_catd K T X` / `DirectCoverQuestionSection_catd K T X` / `direct_cover_question_restriction_funcd K T X` |
+| internal Pédrot-style direct-cover sheaf structure | `DirectCoverSheafStructure K T X` |
+| total syntactic direct-cover sheaf | `DirectCoverSheaf K T` |
+| direct cover-completion presheaf and its internal sheaf package | `DirectCoverCompletionPsh K T P` / `direct_cover_completion_sheaf K T P` |
 | global reflective ringed object with selected covering sieve | `ReflectiveCommRingedSpaceCover K` |
 | actual member arrow of that selected sieve | `ReflectiveCommRingedSpaceCoverChart P` |
 | factorization of one retained arrow through a selected chart | `CoverChartFactorization chart q` |

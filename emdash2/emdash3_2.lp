@@ -7858,6 +7858,25 @@ rule @fapp0 _ Cat_cat (@hom_con $A $W $B $F) $x
   ↪ Hom_cat $A (@fapp0 $B $A $F $x) $W;
 
 /*
+  Proof-time opposite comparison of the two represented-family owners:
+
+    hom_(A^op,F^op,W) = hom_con(A,W,F).
+
+  This is the family-level counterpart of the existing post/precomposition
+  comparisons below.  Runtime keeps the covariant and contravariant heads
+  distinct; the constraint list records the variance relation without a
+  second normal form.
+*/
+unif_rule
+  @hom_ $A0 $B0 $F0 $W
+  ≡ @hom_con $A $W $B $F
+  ↪ [
+      (Op_cat $A) ≡ $A0;
+      (Op_cat $B) ≡ $B0;
+      $F0 ≡ (@Op_func $B $A $F)
+    ];
+
+/*
   Generalized precomposition along a functor, routed through the semantic
   contravariant representable.
 
@@ -14048,6 +14067,120 @@ symbol functord_transport_func [K : Cat] [E D : τ (Catd K)]
   : τ (Functor (Fibre_cat E x) (Fibre_cat D y))
 ≔ @tapp1_fapp0 K Cat_cat E D x y FF p;
 
+// Full left strict-naturality route, with the base arrow kept internal.
+//
+// Surface/formula:
+//   (p |-> D[p] o FF[x]) : Hom_K(x,y) ⊢ (E[x] ⊢ D[y]).
+symbol functord_transport_lhs_tele_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  : τ (@Functor
+      (@Hom_cat K x y)
+      (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+≔ @comp_cat_fapp0
+    (@Hom_cat K x y)
+    (@Functor_cat (@Fibre_cat K D x) (@Fibre_cat K D y))
+    (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+    (@comp_cat_con_func
+      (@Fibre_cat K E x)
+      (@Fibre_cat K D x)
+      (@Fibre_cat K D y)
+      (@Fibre_func K E D FF x))
+    (@fapp1_func K Cat_cat D x y);
+
+// Full right strict-naturality route, again internal in the base arrow.
+//
+// Surface/formula:
+//   (p |-> FF[y] o E[p]) : Hom_K(x,y) ⊢ (E[x] ⊢ D[y]).
+symbol functord_transport_rhs_tele_func [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  : τ (@Functor
+      (@Hom_cat K x y)
+      (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+≔ @comp_cat_fapp0
+    (@Hom_cat K x y)
+    (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K E y))
+    (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+    (@comp_cat_cov_func
+      (@Fibre_cat K E x)
+      (@Fibre_cat K E y)
+      (@Fibre_cat K D y)
+      (@Fibre_func K E D FF y))
+    (@fapp1_func K Cat_cat E x y);
+
+/*
+  Proof-time whole strict naturality.  These two comparisons join the
+  identity-specialized projection-order peaks without orienting a second
+  runtime normal form:
+
+    (p |-> D[p] o FF[x]) = tapp1_func(FF,x,y)
+    (p |-> FF[y] o E[p]) = tapp1_func(FF,x,y).
+
+  The raw stable hom-action heads are intentional unification discriminators;
+  the readable `*_tele_func` symbols above are transparent presentations of
+  these exact terms.  Future genuinely lax displayed transformations must use
+  a distinct classifier rather than weakening this strict `Functord` facade.
+*/
+unif_rule
+  @tapp1_func $K Cat_cat $E $D $x $y $FF
+  ≡ @comp_fapp0 Cat_cat _ _ _
+    (@hom_precomp_along_func
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      _ _ _
+      (@tapp0_fapp0 $K Cat_cat $E $D $x $FF))
+    (@fapp1_func $K Cat_cat $D $x $y)
+  ↪ [ tt ≡ tt ];
+
+unif_rule
+  @tapp1_func $K Cat_cat $E $D $x $y $FF
+  ≡ @comp_fapp0 Cat_cat _ _ _
+    (@hom_postcomp_func
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      _ _ _
+      (@tapp0_fapp0 $K Cat_cat $E $D $y $FF))
+    (@fapp1_func $K Cat_cat $E $x $y)
+  ↪ [ tt ≡ tt ];
+
+// First-class whole path for the left presentation, justified by the
+// proof-time comparison above.
+symbol functord_transport_lhs_tele_agrees
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  : τ (@=
+      (Hom
+        Cat_cat
+        (@Hom_cat K x y)
+        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+      (@functord_transport_lhs_tele_func K E D FF x y)
+      (@tapp1_func K Cat_cat E D x y FF))
+≔ @eq_refl
+    (Hom
+      Cat_cat
+      (@Hom_cat K x y)
+      (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+    (@functord_transport_lhs_tele_func K E D FF x y);
+
+// First-class whole path for the right presentation.
+symbol functord_transport_rhs_tele_agrees
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  : τ (@=
+      (Hom
+        Cat_cat
+        (@Hom_cat K x y)
+        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+      (@functord_transport_rhs_tele_func K E D FF x y)
+      (@tapp1_func K Cat_cat E D x y FF))
+≔ @eq_refl
+    (Hom
+      Cat_cat
+      (@Hom_cat K x y)
+      (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+    (@functord_transport_rhs_tele_func K E D FF x y);
+
 // Internalized-x coherence route: first apply FF at x, then transport in D.
 //
 // Surface/formula:
@@ -14079,6 +14212,85 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
     (Fibre_cat D y)
     (@Fibre_func K E D FF y)
     (@catd_transport_func K E x y p);
+
+// Evaluate the whole left strict-naturality path at p.  This derives the
+// fixed-arrow equality; it is not a separate naturality-square axiom.
+symbol functord_transport_lhs_agrees
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (@=
+      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_func K E D FF x y p))
+≔ @eq_ap
+    (Hom
+      Cat_cat
+      (@Hom_cat K x y)
+      (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+    (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+    (λ H : τ (Hom
+        Cat_cat
+        (@Hom_cat K x y)
+        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y))),
+      @fapp0
+        (@Hom_cat K x y)
+        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+        H p)
+    (@functord_transport_lhs_tele_func K E D FF x y)
+    (@tapp1_func K Cat_cat E D x y FF)
+    (@functord_transport_lhs_tele_agrees K E D FF x y);
+
+// Evaluate the whole right strict-naturality path at p.
+symbol functord_transport_rhs_agrees
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (@=
+      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+      (@functord_transport_rhs_func K E D FF x y p)
+      (@functord_transport_func K E D FF x y p))
+≔ @eq_ap
+    (Hom
+      Cat_cat
+      (@Hom_cat K x y)
+      (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+    (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+    (λ H : τ (Hom
+        Cat_cat
+        (@Hom_cat K x y)
+        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y))),
+      @fapp0
+        (@Hom_cat K x y)
+        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+        H p)
+    (@functord_transport_rhs_tele_func K E D FF x y)
+    (@tapp1_func K Cat_cat E D x y FF)
+    (@functord_transport_rhs_tele_agrees K E D FF x y);
+
+// Readable strict naturality path between the two fixed-arrow routes.
+symbol functord_transport_strict_naturality
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (@=
+      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_rhs_func K E D FF x y p))
+≔ @eq_trans
+    (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+    (@functord_transport_lhs_func K E D FF x y p)
+    (@functord_transport_func K E D FF x y p)
+    (@functord_transport_rhs_func K E D FF x y p)
+    (@functord_transport_lhs_agrees K E D FF x y p)
+    (@eq_sym
+      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+      (@functord_transport_rhs_func K E D FF x y p)
+      (@functord_transport_func K E D FF x y p)
+      (@functord_transport_rhs_agrees K E D FF x y p));
 
 // 16b. Identity-specialized displayed hom action and Sigma-map action
 /*

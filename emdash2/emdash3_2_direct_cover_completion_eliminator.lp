@@ -749,6 +749,27 @@ symbol direct_cover_completion_rec_beta_silent
     U R covers;
 
 /*
+  An internal direct-cover sheaf target enters the deployed recursor through
+  the forgetful algebra projection.  The target's glue and silent remain owned
+  once by its displayed functor and displayed-functor path; this adapter does
+  not ask the consumer to restate them cover by cover.
+*/
+symbol direct_cover_completion_sheaf_recursor_data
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Y : τ (@Psh K))
+  (sheaf : τ (@DirectCoverSheafStructure K T Y))
+  (seed : τ (Hom (@Psh_cat K) P Y))
+  : τ (@DirectCoverCompletionRecursorData
+      K T P Y
+      (@direct_cover_sheaf_structure_algebra K T Y sheaf)
+      seed)
+≔ @direct_cover_completion_recursor_data
+    K T P Y
+    (@direct_cover_sheaf_structure_algebra K T Y sheaf)
+    seed;
+
+/*
   A topology-local target supplies the required direct-cover algebra through
   the existing forgetful construction.  This is only a recursor convenience;
   it does not prove that the completion itself is topology-local.

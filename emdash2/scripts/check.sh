@@ -44,6 +44,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_direct_cover_questions.lp)
   files+=(emdash3_2_direct_cover_question_families.lp)
   files+=(emdash3_2_direct_cover_algebras.lp)
+  files+=(emdash3_2_direct_cover_internal_sheaves.lp)
   files+=(emdash3_2_direct_cover_completion_hit.lp)
   files+=(emdash3_2_direct_cover_completion_eliminator.lp)
   files+=(emdash3_2_commutative_algebra_scheme_chart_overlaps.lp)

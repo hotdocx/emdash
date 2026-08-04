@@ -144,6 +144,18 @@ assert [K : Cat]
       (@direct_cover_completion_rec_beta_glue
         K T P Y AY seed U R covers));
 
+// An internal direct-cover sheaf target enters without restating its fields.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Y : τ (@Psh K))
+  (sheaf : τ (@DirectCoverSheafStructure K T Y))
+  (seed : τ (Hom (@Psh_cat K) P Y)) ⊢
+  @direct_cover_completion_sheaf_recursor_data K T P Y sheaf seed
+  : τ (@DirectCoverCompletionRecursorData
+      K T P Y
+      (@direct_cover_sheaf_structure_algebra K T Y sheaf)
+      seed);
+
 // A topology-local target supplies the target algebra without extra fields.
 assert [K : Cat]
   (T : τ (@GrothTopology K))

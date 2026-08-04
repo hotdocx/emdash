@@ -32,6 +32,18 @@ assert [K : Cat]
       (@ordinary_sieve_extension_psh K U R)
       (@yoneda_psh K U));
 
+// A retained member selects one whole Yoneda section of the extension.
+assert [K : Cat]
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (R : τ (@Sieve K U))
+  (member : τ (@SieveMembership K U R (Struct_sigma V p))) ⊢
+  @ordinary_sieve_member_section K V U p R member
+  : τ (Hom
+      (@Psh_cat K)
+      (@yoneda_psh K V)
+      (@ordinary_sieve_extension_psh K U R));
+
 // Its component is the literal first projection from pairs `(f,member)`.
 assert [K : Cat]
   [U V : τ (Obj K)]

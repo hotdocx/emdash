@@ -6,7 +6,9 @@ proof assistant for strict/lax omega-categories, omega-functors,
 omega-transformations (“transfors”), directed families, and related dependent
 categorical structures.
 
-The active kernel is `emdash3_2.lp`. The one-way derived native equality-valued
+The active kernel is `emdash3_2.lp`; it owns the generic proof-time duality of
+opposite represented families and the full-`tapp1_func` whole strict
+`Functord` naturality paths. The one-way derived native equality-valued
 hom-action/groupoidality extension is `emdash3_2_eq1_hom_action.lp`;
 the Cat-valued presheaf, Yoneda, slice, and higher-sieve library is
 `emdash3_2_presheaves.lp`;
@@ -40,6 +42,8 @@ the whole varying cover-extension, matching, section, and restriction-family
 extension is `emdash3_2_direct_cover_question_families.lp`;
 the whole direct-cover oracle-algebra and locality-forgetful extension is
 `emdash3_2_direct_cover_algebras.lp`;
+the internal Pédrot-style direct-cover sheaf-structure and total-package
+extension is `emdash3_2_direct_cover_internal_sheaves.lp`;
 the direct whole-presheaf return/cover/silent categorical-HIT signature
 extension is `emdash3_2_direct_cover_completion_hit.lp`;
 the whole unit/glue/silent-coherent direct-cover completion recursor extension
@@ -256,9 +260,10 @@ Use the following order:
    coverage saturation, sheafification, or descent;
 23. `emdash3_2_sieve_extensions.lp` for the transparent extension of an
    ordinary sieve to the ambient Cat-valued presheaf by fibrewise dependent
-   Sigma, its whole inclusion into Yoneda, and the resulting fixed-forward
-   topology-local-object predicate. It constructs no reflector or
-   sheafification and does not identify this condition with weighted descent;
+   Sigma, its whole inclusion into Yoneda, the whole Yoneda section selected
+   by a retained member, and the resulting fixed-forward topology-local-object
+   predicate. It constructs no reflector or sheafification and does not
+   identify this condition with weighted descent;
 24. `emdash3_2_generated_topologies.lp` for witness-rich type-valued sieve
     generators and the rule-free impredicative intersection of every
     Grothendieck topology accepting them. It constructs a proposition-valued
@@ -560,35 +565,48 @@ Use the following order:
     equality, and topology-locality forgets to this structure through its
     selected left inverse. It does not assert the converse, a second inverse,
     sheafification, or an eliminator;
-62. `emdash3_2_direct_cover_completion_hit.lp` for the first direct
+62. `emdash3_2_direct_cover_internal_sheaves.lp` for the transparent rule-free
+    internal Pédrot-style sheaf structure: glue is one displayed functor over
+    the whole eligible-question category and silent is one path between whole
+    displayed endofunctors. Literal-cover glue/silent and the older per-cover
+    algebra are projections from those owners. The total `DirectCoverSheaf`
+    package is a syntactic algebraic sheaf notion; it is not definitionally
+    the rigid `Sheaf_cat` facade or the conventional two-sided
+    `IsTopologyLocalPsh` presentation;
+63. `emdash3_2_direct_cover_completion_hit.lp` for the first direct
     whole-presheaf return/cover/silent categorical-HIT signature. Its unit is
     a whole presheaf map; recursive glue is both a stable whole functor at one
     cover and one displayed functor over the internal eligible-question
     category; silent is one primitive whole path; and the canonical direct-
-    cover algebra is assembled transparently from them. Pointwise observations
-    are derived. It deliberately does not yet claim an eliminator, a selected
-    runtime formula for pullback action, the missing restriction-after-glue
-    law, topology-locality, whole Hom universality, reflector, rigid-sheaf-
-    facade realization, CommRing lift, or left exactness;
-63. `emdash3_2_direct_cover_completion_eliminator.lp` for whole maps between
+    cover algebra is assembled transparently from them. Generic whole strict
+    `Functord` naturality supplies its canonical glue-pullback substitution
+    path without an external square. Its whole glue and silent package the
+    completion as a syntactic `DirectCoverSheaf`; pointwise observations are
+    derived. It deliberately does not yet claim comparison with the missing
+    restriction-after-glue law, topology-locality, whole Hom universality,
+    reflector, rigid-sheaf-facade realization, CommRing lift, or left
+    exactness;
+64. `emdash3_2_direct_cover_completion_eliminator.lp` for whole maps between
     direct-cover algebras and the first nondependent completion recursor.  An
     algebra map preserves each whole glue functor and carries higher
     coherence between the source and target silent paths.  The selected
     primitive recursor computes on the whole unit and pointwise recursive
     glue constructors through two narrow rules, while whole glue preservation
     and silent coherence remain internal equality evidence.  Topology-local
-    targets enter through the existing locality-to-algebra conversion.  It
-    does not yet prove the missing restriction-after-glue law, locality of
-    the completion, uniqueness/whole Hom universality, a sheaf object,
-    reflector, rigid-facade realization, CommRing lift, or left exactness;
-64. `emdash3_2_checks.lp` for executable regression statements;
-65. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+    targets enter through the existing locality-to-algebra conversion, while
+    internal direct-cover sheaf targets enter through the one forgetful
+    projection to that algebra. It does not yet prove comparison with the
+    missing restriction-after-glue law, locality of the completion,
+    uniqueness/whole Hom universality, reflector, rigid-facade realization,
+    CommRing lift, or left exactness;
+65. `emdash3_2_checks.lp` for executable regression statements;
+66. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-66. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-67. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+67. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+68. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-68. `reports/INDEX.md` for task-specific plans and decision records.
-69. `book/book.json` and `book/evidence.json` for book source
+69. `reports/INDEX.md` for task-specific plans and decision records.
+70. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

@@ -15,6 +15,16 @@ assert [K : Cat] (U V : τ (Obj K)) ⊢
   Fibre_cat (@yoneda_psh K U) V
   ≡ Hom_cat K V U;
 
+// Generic opposite-base representable and public Yoneda agree proof-time.
+assert [K : Cat] (U : τ (Obj K)) ⊢
+  @eq_refl
+    (Obj (@Psh_cat K))
+    (@Rep_catd (Op_cat K) U)
+  : τ (@=
+      (Obj (@Psh_cat K))
+      (@Rep_catd (Op_cat K) U)
+      (@yoneda_psh K U));
+
 // Its arrow action is inherited from the internal-hom owner.
 assert [K : Cat]
   (V U W : τ (Obj K))

@@ -3,10 +3,11 @@
 
   Unit, matching data, and generated sections are whole presheaf maps.  Glue
   is a whole functor on matching families and one displayed functor over the
-  internal eligible-question category.  Silent is one whole functor path
-  whose pointwise observation is derived.  It deliberately does not collapse
-  glue by runtime conversion.  No restriction-equivalence, sheafification, or
-  reflector claim is made yet.
+  internal eligible-question category.  Silent is one whole displayed-functor
+  path whose literal and pointwise observations are derived.  Together they
+  package the result as a syntactic direct-cover sheaf.  It deliberately does
+  not collapse glue by runtime conversion or claim conventional restriction
+  equivalence, the rigid sheaf facade, or a sheafification reflector.
 */
 
 require open emdash.emdash3_2_direct_cover_completion_hit;
@@ -35,6 +36,21 @@ assert [K : Cat]
   @direct_cover_completion_algebra K T P
   : τ (@DirectCoverAlgebra
       K T (@DirectCoverCompletionPsh K T P));
+
+// The authoritative package is one internal glue plus one internal silent.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K)) ⊢
+  @direct_cover_completion_sheaf_structure K T P
+  : τ (@DirectCoverSheafStructure
+      K T (@DirectCoverCompletionPsh K T P));
+
+// The completion therefore lands syntactically in direct-cover sheaves.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K)) ⊢
+  @direct_cover_completion_sheaf K T P
+  : τ (@DirectCoverSheaf K T);
 
 // Cover glue is a whole functor, including matching-arrow action.
 assert [K : Cat]
@@ -81,6 +97,45 @@ assert [K : Cat]
       K T P U
       (@direct_cover_question_sieve K T U q)
       (@direct_cover_question_cover K T U q);
+
+// Canonical pullback substitution is derived from the generic whole owner.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (q : τ (@DirectCoverQuestionData K T U)) ⊢
+  @direct_cover_completion_glue_pullback_agrees K T P V U p q
+  : τ (@=
+      (Hom
+        Cat_cat
+        (@DirectCoverMatching_cat K U
+          (@direct_cover_question_sieve K T U q)
+          (@DirectCoverCompletionPsh K T P))
+        (@DirectCoverSection_cat K V
+          (@DirectCoverCompletionPsh K T P)))
+      (@functord_transport_lhs_func
+        (@DirectCoverQuestion_cat K T)
+        (@DirectCoverQuestionMatching_catd
+          K T (@DirectCoverCompletionPsh K T P))
+        (@DirectCoverQuestionSection_catd
+          K T (@DirectCoverCompletionPsh K T P))
+        (@direct_cover_completion_glue_funcd K T P)
+        (Struct_sigma U q)
+        (Struct_sigma V
+          (@direct_cover_question_internal_pullback K T V U p q))
+        (@direct_cover_question_pullback_arrow K T V U p q))
+      (@functord_transport_rhs_func
+        (@DirectCoverQuestion_cat K T)
+        (@DirectCoverQuestionMatching_catd
+          K T (@DirectCoverCompletionPsh K T P))
+        (@DirectCoverQuestionSection_catd
+          K T (@DirectCoverCompletionPsh K T P))
+        (@direct_cover_completion_glue_funcd K T P)
+        (Struct_sigma U q)
+        (Struct_sigma V
+          (@direct_cover_question_internal_pullback K T V U p q))
+        (@direct_cover_question_pullback_arrow K T V U p q)));
 
 // The canonical algebra projects exactly to the primitive whole glue head.
 assert [K : Cat]
@@ -134,6 +189,21 @@ assert [K : Cat]
       section;
 
 // Silent is one first-class equality of whole section endofunctors.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K)) ⊢
+  @direct_cover_completion_silent_funcd K T P
+  : τ (@=
+      (Obj (@Functord_cat
+        (@DirectCoverQuestion_cat K T)
+        (@DirectCoverQuestionSection_catd
+          K T (@DirectCoverCompletionPsh K T P))
+        (@DirectCoverQuestionSection_catd
+          K T (@DirectCoverCompletionPsh K T P))))
+      (@direct_cover_completion_silent_source_funcd K T P)
+      (@direct_cover_completion_silent_target_funcd K T P));
+
+// A literal silent law is a projection of that one whole path.
 assert [K : Cat]
   (T : τ (@GrothTopology K))
   (P : τ (@Psh K))

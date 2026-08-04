@@ -46,6 +46,29 @@ symbol ordinary_sieve_extension_inclusion
     (@yoneda_psh K U)
     (@sieve_higher K U R);
 
+/*
+  Whole Yoneda section selected by one retained sieve member.  For
+  `p:V->U`, its value at `h:W->V` is the existing extension transport of
+  `(p,member)`, hence the internally carried `(p o h, transported member)`.
+  The generic `fib_cov_transf` owner supplies all arrow action and naturality;
+  no component family or sieve-specific action rule is introduced here.
+*/
+symbol ordinary_sieve_member_section
+  [K : Cat]
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (R : τ (@Sieve K U))
+  (member : τ (@SieveMembership K U R (Struct_sigma V p)))
+  : τ (Hom
+      (@Psh_cat K)
+      (@yoneda_psh K V)
+      (@ordinary_sieve_extension_psh K U R))
+≔ @fib_cov_transf
+    (Op_cat K)
+    (@ordinary_sieve_extension_psh K U R)
+    V
+    (Struct_sigma p member);
+
 // Whole restriction of maps into X along the selected sieve inclusion.
 symbol ordinary_sieve_local_precomp
   [K : Cat]

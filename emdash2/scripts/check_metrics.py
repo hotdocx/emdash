@@ -48,6 +48,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_direct_cover_questions.lp"),
     Path("emdash3_2_direct_cover_question_families.lp"),
     Path("emdash3_2_direct_cover_algebras.lp"),
+    Path("emdash3_2_direct_cover_internal_sheaves.lp"),
     Path("emdash3_2_direct_cover_completion_hit.lp"),
     Path("emdash3_2_direct_cover_completion_eliminator.lp"),
     Path("emdash3_2_generated_topologies.lp"),
