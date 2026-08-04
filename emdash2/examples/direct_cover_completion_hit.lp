@@ -2,10 +2,11 @@
   Reviewer for the direct eta/glue/silent cover-completion HIT boundary.
 
   Unit, matching data, and generated sections are whole presheaf maps.  Glue
-  is a whole functor on matching families, and silent is one whole functor
-  path whose pointwise observation is derived.  It deliberately does not
-  collapse glue by runtime conversion.  No restriction-equivalence,
-  sheafification, or reflector claim is made yet.
+  is a whole functor on matching families and one displayed functor over the
+  internal eligible-question category.  Silent is one whole functor path
+  whose pointwise observation is derived.  It deliberately does not collapse
+  glue by runtime conversion.  No restriction-equivalence, sheafification, or
+  reflector claim is made yet.
 */
 
 require open emdash.emdash3_2_direct_cover_completion_hit;
@@ -48,6 +49,38 @@ assert [K : Cat]
         K U R (@DirectCoverCompletionPsh K T P))
       (@DirectCoverSection_cat
         K U (@DirectCoverCompletionPsh K T P)));
+
+// The entire cover-indexed family is one internal displayed functor.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K)) ⊢
+  @direct_cover_completion_glue_funcd K T P
+  : τ (@Functord
+      (@DirectCoverQuestion_cat K T)
+      (@DirectCoverQuestionMatching_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@DirectCoverQuestionSection_catd
+        K T (@DirectCoverCompletionPsh K T P)));
+
+// Its literal-question component is the deployed one-cover glue functor.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  [U : τ (Obj K)]
+  (q : τ (@DirectCoverQuestionData K T U)) ⊢
+  @tapp0_fapp0
+    (@DirectCoverQuestion_cat K T)
+    Cat_cat
+    (@DirectCoverQuestionMatching_catd
+      K T (@DirectCoverCompletionPsh K T P))
+    (@DirectCoverQuestionSection_catd
+      K T (@DirectCoverCompletionPsh K T P))
+    (Struct_sigma U q)
+    (@direct_cover_completion_glue_funcd K T P)
+  ≡ @direct_cover_completion_glue_func
+      K T P U
+      (@direct_cover_question_sieve K T U q)
+      (@direct_cover_question_cover K T U q);
 
 // The canonical algebra projects exactly to the primitive whole glue head.
 assert [K : Cat]

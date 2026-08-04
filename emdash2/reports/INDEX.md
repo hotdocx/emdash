@@ -99,6 +99,14 @@ Grothendieck-topology pullback. Its extension and inclusion reuse the
 deployed ordinary-sieve owners exactly. It does not yet construct the whole
 varying-extension/matching family, glue naturality, locality, or
 sheafification.
+`emdash3_2_direct_cover_question_families.lp` adds that whole varying layer.
+The ordinary extension and representable are functors over the opposite
+eligible-question total, their inclusion is one transformation, and
+represented hom produces internally reindexed matching and section families.
+Restriction is one displayed functor whose literal component is the existing
+ordinary-sieve precomposition owner. Its canonical pullback action is not yet
+given a selected runtime formula, and it declares no glue, inverse law,
+locality, or sheafification.
 `emdash3_2_direct_cover_algebras.lp` is the transparent rule-free whole
 oracle layer.  At each cover its glue is a functor from matching families to
 sections and its silent law is the whole equality `glue o restriction = id`.
@@ -107,14 +115,16 @@ inverse and left law; it does not assert the converse/right law, an
 eliminator, or sheafification.
 `emdash3_2_direct_cover_completion_hit.lp` is the first direct
 whole-presheaf return/cover/silent categorical-HIT signature.  Its unit is a
-whole presheaf map, recursive glue is a stable whole-functor constructor, and
-silent is one primitive whole path.  The canonical direct-cover algebra is
-assembled transparently from these constructors, with pointwise glue/silent
-derived.  Formation initially returns the underlying presheaf.  An honest
+whole presheaf map. Recursive glue is a stable whole functor at one cover and
+one displayed functor over all internal eligible questions, so both matching-
+arrow and cover-pullback action are internal. Silent is one primitive whole
+path. The canonical direct-cover algebra is assembled transparently from
+these constructors, with pointwise glue/silent derived. Formation initially
+returns the underlying presheaf. An honest
 unit/glue/silent-coherent eliminator and the oracle-to-restriction-equivalence
 bridge must derive `IsTopologyLocalPsh` before syntactic constructed-sheaf or
 rigid-`Sheaf_cat` packaging.  It does not yet claim that bridge, pulled-cover
-glue computation, a reflector, CommRing lift, or left exactness.  A
+action computation, a reflector, CommRing lift, or left exactness. A
 dialogue/lax completion remains separately consumer-gated.
 `emdash3_2_direct_cover_completion_eliminator.lp` is the first nondependent
 recursor boundary.  It defines whole direct-cover algebra maps, including

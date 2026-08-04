@@ -36,6 +36,8 @@ the set-truncated sequential telescope categorical-HIT localization extension
 is `emdash3_2_telescope_localization_hit.lp`;
 the whole Path-valued eligible-cover-question and computing pullback
 extension is `emdash3_2_direct_cover_questions.lp`;
+the whole varying cover-extension, matching, section, and restriction-family
+extension is `emdash3_2_direct_cover_question_families.lp`;
 the whole direct-cover oracle-algebra and locality-forgetful extension is
 `emdash3_2_direct_cover_algebras.lp`;
 the direct whole-presheaf return/cover/silent categorical-HIT signature
@@ -542,21 +544,31 @@ Use the following order:
     exactly the existing ordinary-sieve owners. It does not yet construct a
     whole varying-extension functor, matching/section families, glue
     naturality, locality, or sheafification;
-60. `emdash3_2_direct_cover_algebras.lp` for the transparent rule-free whole
+60. `emdash3_2_direct_cover_question_families.lp` for the whole varying
+    ordinary-sieve extension and representable over the opposite eligible-
+    question total, their whole inclusion, and the resulting internally
+    reindexed matching and section families. Restriction is one displayed
+    functor whose literal component is the existing ordinary-sieve
+    precomposition owner. The canonical pullback action is not yet exposed by
+    a selected runtime formula, and the module declares no glue, inverse law,
+    locality, or sheafification;
+61. `emdash3_2_direct_cover_algebras.lp` for the transparent rule-free whole
     oracle structure at covering ordinary sieves: glue is a functor between
     matching and section hom-categories, silent is one whole endofunctor
     equality, and topology-locality forgets to this structure through its
     selected left inverse. It does not assert the converse, a second inverse,
     sheafification, or an eliminator;
-61. `emdash3_2_direct_cover_completion_hit.lp` for the first direct
+62. `emdash3_2_direct_cover_completion_hit.lp` for the first direct
     whole-presheaf return/cover/silent categorical-HIT signature. Its unit is
-    a whole presheaf map, recursive glue is a stable whole-functor constructor,
-    silent is one primitive whole path, and the canonical direct-cover algebra
-    is assembled transparently from them; pointwise observations are derived.
-    It deliberately does not yet claim an eliminator, pulled-cover glue
-    computation, topology-locality, whole Hom universality, reflector,
-    rigid-sheaf-facade realization, CommRing lift, or left exactness;
-62. `emdash3_2_direct_cover_completion_eliminator.lp` for whole maps between
+    a whole presheaf map; recursive glue is both a stable whole functor at one
+    cover and one displayed functor over the internal eligible-question
+    category; silent is one primitive whole path; and the canonical direct-
+    cover algebra is assembled transparently from them. Pointwise observations
+    are derived. It deliberately does not yet claim an eliminator, a selected
+    runtime formula for pullback action, the missing restriction-after-glue
+    law, topology-locality, whole Hom universality, reflector, rigid-sheaf-
+    facade realization, CommRing lift, or left exactness;
+63. `emdash3_2_direct_cover_completion_eliminator.lp` for whole maps between
     direct-cover algebras and the first nondependent completion recursor.  An
     algebra map preserves each whole glue functor and carries higher
     coherence between the source and target silent paths.  The selected
@@ -567,14 +579,14 @@ Use the following order:
     does not yet prove the missing restriction-after-glue law, locality of
     the completion, uniqueness/whole Hom universality, a sheaf object,
     reflector, rigid-facade realization, CommRing lift, or left exactness;
-63. `emdash3_2_checks.lp` for executable regression statements;
-64. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+64. `emdash3_2_checks.lp` for executable regression statements;
+65. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-65. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-66. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+66. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+67. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-67. `reports/INDEX.md` for task-specific plans and decision records.
-68. `book/book.json` and `book/evidence.json` for book source
+68. `reports/INDEX.md` for task-specific plans and decision records.
+69. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

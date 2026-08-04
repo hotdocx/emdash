@@ -4,27 +4,32 @@
   For a site (K,T) and one Cat-valued presheaf P, this primitive whole
   presheaf is generated in the return/cover/silent shape
 
-    eta    : P -> X,
-    glue   : Functor(Hom(R_hat,X),Hom(y(U),X)),
-    silent : glue o restriction = id.
+    eta      : P -> X,
+    glue_q   : Functor(Hom(R_hat,X),Hom(y(U),X)),
+    glue_all : Functord_Q(Match_X,Sect_X),
+    silent   : glue_q o restriction_q = id.
 
   Here R is a covering ordinary sieve and i_R:R_hat->y(U) is the existing
   whole sieve-extension inclusion.  A matching family is therefore one whole
-  presheaf map, while glue is a whole functor on the matching hom-category:
-  matching-arrow action and naturality remain at generic owners.  Silent is a
-  whole functor path; its pointwise observation is derived and is not a runtime
-  glue rewrite.
+  presheaf map.  Each glue component is a whole functor on the matching
+  hom-category, while `glue_all` is one displayed functor over the internal
+  eligible-question category.  Matching-arrow action, question pullback
+  action, and both naturality dimensions therefore remain at generic owners.
+  Silent is a whole functor path; its pointwise observation is derived and is
+  not a runtime glue rewrite.
 
   This first boundary deliberately does not yet supply the dependent/non-
-  dependent eliminator, computation of glue under pullback of a cover,
-  topology-locality, the whole Hom universal property, functorial assembly on
-  presheaf arrows, comparison with the rigid Sheaf_cat facade, a CommRing
-  lift, or left exactness.  It is consequently named direct cover completion,
-  not constructed sheafification.  A directed/lax silent cell would define a
-  distinct effectful completion and is not introduced without a consumer.
+  dependent eliminator, a selected runtime formula for extension/glue action
+  under a canonical pullback question, the missing restriction-after-glue
+  law, topology-locality, the whole Hom universal property, functorial
+  assembly on presheaf arrows, comparison with the rigid Sheaf_cat facade, a
+  CommRing lift, or left exactness.  It is consequently named direct cover
+  completion, not constructed sheafification.  A directed/lax silent cell
+  would define a distinct effectful completion and is not introduced without
+  a consumer.
 */
 
-require open emdash.emdash3_2_direct_cover_algebras;
+require open emdash.emdash3_2_direct_cover_question_families;
 
 // Primitive whole presheaf generated from P by recursive covering-sieve glue.
 injective symbol DirectCoverCompletionPsh
@@ -43,7 +48,11 @@ constant symbol direct_cover_completion_unit
       P
       (@DirectCoverCompletionPsh K T P));
 
-// Primitive whole recursive cover constructor, including matching-arrow action.
+/*
+  Stable component of the recursive cover constructor at one literal eligible
+  question.  It retains the deployed head consumed by the recursor; the whole
+  displayed constructor below adds action under question pullback.
+*/
 injective symbol direct_cover_completion_glue_func
   [K : Cat]
   (T : τ (@GrothTopology K))
@@ -56,6 +65,33 @@ injective symbol direct_cover_completion_glue_func
         K U R (@DirectCoverCompletionPsh K T P))
       (@DirectCoverSection_cat
         K U (@DirectCoverCompletionPsh K T P)));
+
+/*
+  Whole recursive cover constructor over the internal eligible-question
+  category.  Its displayed action owns restriction/pullback naturality in the
+  question index, while each component remains the whole functor above on
+  matching-family arrows.  Thus neither dimension is an external equation.
+*/
+injective symbol direct_cover_completion_glue_funcd
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  : τ (@Functord
+      (@DirectCoverQuestion_cat K T)
+      (@DirectCoverQuestionMatching_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@DirectCoverQuestionSection_catd
+        K T (@DirectCoverCompletionPsh K T P)));
+
+// Literal-question component: recover the deployed one-cover glue functor.
+rule @tapp0_fapp0
+      _ Cat_cat _ _
+      (Struct_sigma $U $q)
+      (@direct_cover_completion_glue_funcd $K $T $P)
+  ↪ @direct_cover_completion_glue_func
+      $K $T $P $U
+      (@direct_cover_question_sieve $K $T $U $q)
+      (@direct_cover_question_cover $K $T $U $q);
 
 // Pointwise glue observation, derived from the whole glue functor.
 symbol direct_cover_completion_glue

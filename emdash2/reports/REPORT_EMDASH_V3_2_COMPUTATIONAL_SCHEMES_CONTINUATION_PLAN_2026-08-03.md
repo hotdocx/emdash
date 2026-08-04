@@ -1167,7 +1167,7 @@ close CS-05.
 | Small-site restriction/basis comparison | Moderate | Exact basis and topology transport owners. |
 | Representation-independent category of schemes | Research-grade but plausible | Morphism representation, locally-ringed structure, and comparison with presentations. |
 | Ordinary-sieve extension and topology-local-object classifier | Implemented at the whole Cat-valued boundary | Fibrewise dependent-Sigma values and inclusion components compute; explicit base-arrow beta and equivalence with the separate weighted-limit descent presentation remain consumer-gated. |
-| Fixed-site categorical-HIT sheafification construction | First direct constructor boundary implemented; remaining reflector is research-grade but factorable | The whole-presheaf formation/unit/glue/silent signature is green. The next gate is an eliminator into topology-local targets, from which locality must be derived before syntactic sheaf packaging; functorial assembly, rigid `Sheaf_cat` realization, CommRing lift, and left exactness follow separately. |
+| Fixed-site categorical-HIT sheafification construction | Whole constructor, recursor, eligible-question, and varying-family boundaries implemented or green in the current tranche; the remaining reflector is research-grade but factorable | Formation/unit/glue/silent and the nondependent recursor are checkpointed. Eligible covers, varying extensions, matching/section families, restriction, and question-indexed glue now have whole internal owners. The next gate is the smallest canonical pullback computation needed to derive `restriction o glue = id`; locality and syntactic sheaf packaging then precede Hom universality, functorial assembly, rigid `Sheaf_cat` realization, CommRing lift, and left exactness. |
 | Unrestricted atlas effectivity | Research-grade | Descent/localization infrastructure and scope. |
 
 The original computational-schemes direction remains feasible. The main risk
@@ -1596,6 +1596,25 @@ prerequisites.
   the existing ordinary-sieve owners.  The next gate remains a whole varying-
   extension/matching/section construction and a whole internal glue map; no
   external component naturality fields or premature locality claim is added.
+- **CS-D-052 — Extension, restriction, and glue vary as whole internal
+  families:** over the opposite eligible-question total, one whole functor
+  sends `(U,R,covers)` to the existing sieve extension and another sends it
+  to `y(U)`. Their inclusion is one whole transformation. For each fixed
+  presheaf `X`, `hom_con` then supplies Cat-valued matching and section
+  families on the question category, and restriction is one displayed
+  functor between them. The direct completion's recursive glue is likewise
+  one displayed functor from the matching family to the section family; its
+  literal component is the deployed whole glue functor, retained as a stable
+  recursor head. Thus action on matching arrows and action under question
+  pullback are both internal, with no family of external naturality squares.
+  This is an intentional strengthening of the HIT signature, not a theorem
+  extracted from the old externally indexed algebra. The first boundary does
+  not add an arbitrary base-arrow rule: canonical extension/glue pullback
+  action remains opaque until the right-inverse proof selects the smallest
+  required computing observer. It consequently does not yet establish
+  `restriction o glue = id`, locality, or sheafification.  The already
+  primitive `silent` path has the opposite orientation
+  `glue o restriction = id`; keeping these laws distinct is essential.
 
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
@@ -1626,7 +1645,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`; and the first internal covering-question experiment is checkpointed at `c091856`. Its unrestricted higher-sieve eligibility family is superseded by the corrected eligible-question tranche checkpointed at `0257ce3`: eligible ordinary covering sieves are object data in a Path-valued family, and selected sieve pullback computes without new warnings. The principal-BNat bridge remains frozen. | Construct the whole varying-extension owner and derive matching/section reindexing and glue naturality over eligible questions; only then derive locality, constructed-sheaf packaging, whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the initial Pédrot-directed `eta/glue/silent` signature is checkpointed at `ce982e3`; its whole glue-functor/silent-algebra correction plus locality-to-algebra conversion are checkpointed at `1b6a468`; the whole unit/glue/silent-coherent recursor with judgmental data betas is checkpointed at `deeab6d`; and the first internal covering-question experiment is checkpointed at `c091856`. Its unrestricted higher-sieve eligibility family is superseded by the corrected eligible-question tranche checkpointed at `0257ce3`. The CS-D-052 implementation and validation are green: whole varying extensions, representables, inclusion, matching/section families, restriction, and question-indexed glue pass focused checks, exact warning comparison, strict audits, and fresh 156-target health. Its local checkpoint is pending. The principal-BNat bridge remains frozen. | Checkpoint CS-D-052, then select the narrow canonical pullback computation needed to derive `restriction o glue = id`; only then derive locality, constructed-sheaf packaging, whole Hom universality, functorial assembly, rigid-facade realization, CommRing lift, and left exactness |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -3124,6 +3143,147 @@ sheaf packaging, whole Hom uniqueness, and functorial reflector assembly
 remain the ordered gates.  Left exactness, CommRing lifting, and higher/lax
 descent are later strength, not hidden prerequisites for the first ordinary-
 sieve reflector.
+
+### 13.23 CS-12h whole varying families and internal glue — 2026-08-03
+
+The CS-D-052 representation has a green promoted implementation.  Let
+`Q=DirectCoverQuestion_cat(K,T)`.  The new whole functors have the variance
+
+```text
+Extension_T      : Op(Q) -> Psh(K),
+Representable_T  : Op(Q) -> Psh(K),
+Inclusion_T      : Extension_T => Representable_T.
+```
+
+At a literal question `(U,q)`, their values and component are exactly the
+existing `ordinary_sieve_extension_psh(question_sieve(q))`, `y(U)`, and
+`ordinary_sieve_extension_inclusion(question_sieve(q))`.  The opposite total
+is essential: the canonical question arrow from `(U,q)` to its pullback over
+`p:V->U` reverses to the direction in which both the pulled-back extension and
+`y(V)` map into their original values.
+
+For a fixed presheaf `X`, represented hom supplies the whole Cat-valued
+families
+
+```text
+Match_X(q) = Hom_Psh(Extension_T(q),X),
+Sect_X(q)  = Hom_Psh(Representable_T(q),X).
+```
+
+One displayed functor `Restriction_X : Sect_X -> Match_X` has the exact
+ordinary-sieve precomposition functor as its literal component.  The direct
+completion now also carries
+
+```text
+Glue_X : Match_X -> Sect_X
+```
+
+as one displayed functor over `Q`.  Its literal component is the already
+deployed `direct_cover_completion_glue_func(U,R,covers)`.  Keeping that stable
+component head avoids perturbing the checkpointed recursor rules, while the
+new displayed owner asserts the intended question-pullback action for every
+such component.  This is the precise sense in which `U`, `R`, and `covers`
+have been internalized: they remain observable component data, but the
+collection varies under one categorical owner rather than an external
+dependent Pi plus separate naturality equations.
+
+#### 13.23.1 The two inverse laws and the derived-locality argument
+
+For one covering sieve `R` on `U`, write
+
+```text
+r_R : Sect_U(X)  -> Match_R(X),
+g_R : Match_R(X) -> Sect_U(X).
+```
+
+The primitive `silent` constructor is the whole path
+
+```text
+g_R o r_R = id_(Sect_U(X)).
+```
+
+It says that gluing the restrictions of an already existing generated
+section returns that section.  The missing law has the opposite orientation:
+
+```text
+r_R o g_R = id_(Match_R(X)).
+```
+
+It says that an arbitrary coherent matching family is recovered by
+restricting its glued section.  This is the actual existence half needed to
+show that the completion of an arbitrary input presheaf `P` is topology
+local.  It is not the special case in which `P` is already a sheaf; that later
+case concerns the unit being an equivalence or the reflector being idempotent
+on local objects.
+
+The Pédrot-style informal derivation is now sufficiently sharp to guide the
+next kernel probe.  Given `m : Match_R(X)` and a member `f:V->U` of `R`:
+
+1. pull `R` and `m` back along `f`; topology stability makes `f^*R` covering,
+   and sieve closure plus `f in R` makes `f^*R` maximal;
+2. the whole displayed glue action gives
+   `(g_R(m))|f = g_(f^*R)(f^*m)` internally;
+3. matching-family naturality identifies `f^*m` with the restrictions of the
+   single component `m_f`, since at every `h:W->V` both sides are `m_(f o h)`;
+4. `silent` at `(V,f^*R)` gives
+   `g_(f^*R)(r_(f^*R)(m_f)) = m_f`;
+5. the resulting paths for every retained member assemble internally into
+   `r_R(g_R(m))=m`, and whole-functor extensionality then gives the missing
+   composite-functor path.
+
+The unit/`eta` constructor is not used in this locality proof; it is needed
+for the later free/universal property over `P`.  Conversely, whole variation
+of `glue` under question pullback is indispensable.  CS-D-052 places that
+naturality in the constructor's displayed-functor type instead of adding a
+fourth external component-square field.
+
+This also clarifies the comparison with Quirin--Tabareau's *Lawvere--Tierney
+sheafification in Homotopy Type Theory*.  Their Definition 5.5 makes the
+restriction map along every dense subobject an equivalence, so both inverse
+laws occur in the sheaf predicate.  Their constructed output nevertheless
+derives that predicate: Section 5.2 first builds a separated reflection and
+then takes a closed subobject of a known sheaf, using Lemma 5.19 and
+Proposition 5.20.  The `OTid` HIT of Definition 5.13 is an ingredient in the
+universal-property proof for the separated stage, not a direct
+`eta/glue/silent` sheaf HIT and not a judgmental `restriction(glue(m))`
+rewrite.  The present categorical construction uses a different derivation
+mechanism, but follows the same discipline that locality of the constructed
+output is proved rather than silently assumed.
+
+The new `emdash3_2_direct_cover_question_families.lp` has 119 lines, six
+symbols, and three narrow component rules.  Its 85-line reviewer has six
+assertions for extension, representable, inclusion, matching, sections, and
+restriction.  `emdash3_2_direct_cover_completion_hit.lp` gains one whole-glue
+symbol and one literal-component rule; its reviewer checks both the displayed
+type and exact component.  The new source/reviewer, changed HIT
+source/reviewer, and unchanged downstream eliminator all pass focused quiet
+checks.  Warning-enabled checks for all five targets retain exactly the
+inherited 1,179-warning inventory: 1,020 unjoinable critical-pair diagnostics
+and 159 replaceable-pattern diagnostics, with zero new warning.
+
+The strict inferred-slot audits of both changed rule-owning sources report
+zero unreviewed candidates, while the default kernel audit retains zero
+unreviewed and 52 annotated slots across 32 intentional clauses.  Source-TOC,
+active-reference, report-header, shell-syntax, focused metrics-unit-test,
+diff-hygiene, and strict catalog checks are green.  The fresh registered
+health pass checks all 156 source/reviewer targets with current evidence and
+zero resumed result under the uniform 90-second per-target ceiling.  Its
+source-metrics snapshot is
+`sha256:f27342fc0b493e3562314b7f20a6c403f6b4d16219bbfcfbdda5e421b51251f1`
+and its checked-content snapshot is
+`sha256:fe25158a2e8e0f743297c63899e0b8b6481c6c72d5a8fa85b7554ce2a18bd060`.
+No additional `make check`, `make examples`, or `make ci` aggregate was run.
+
+This tranche intentionally stops before inventing an arbitrary action beta.
+The whole owners guarantee internal action and naturality, but the extension
+action on a canonical pulled-back question is still opaque.  The next proof
+must first determine the smallest stable observer needed to identify that
+action with postcomposition of a retained sieve member.  Only that scoped
+computation should be added, if required, before attempting the Pédrot-style
+derivation of `restriction o glue = id`.  External component squares or an
+opaque second inverse remain rejected alternatives.  Registry, strict audit,
+catalog, health, and plan synchronization are complete; only the authorized
+local checkpoint remains before CS-12h is called complete.
 
 ## 14. Validation And Checkpoint Contract
 
