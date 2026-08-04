@@ -4246,6 +4246,7 @@ sheafification source in 13.749 seconds, the supplied projective-line source in
 62.529 seconds, and its reviewer in 65.898 seconds.  The checked-content
 snapshot is
 `sha256:6807a3d6f75b8639e185ff06a1942e36187dcf843166b3989b35d0b0034cc334`.
+The constructed-reflector tranche is locally checkpointed at `81edde8`.
 
 ## Book And Renderer Workflow
 
