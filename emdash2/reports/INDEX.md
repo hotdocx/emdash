@@ -162,9 +162,9 @@ projection tower internalizes those components. Strict pointwise closure then
 gives `restriction o glue = id_Matching`, which combines with the HIT's whole
 `silent : glue o restriction = id_Section` to construct
 `IsTopologyLocalPsh(DirectCoverCompletionPsh)`. This settles conventional
-covering-sieve locality, but not yet whole Hom universality, the fixed-site
-reflector/adjunction, rigid-facade realization, CommRing lift, or left
-exactness.
+covering-sieve locality; whole Hom universality is supplied by the subsequent
+universality module. The fixed-site reflector/adjunction, rigid-facade
+realization, CommRing lift, and left exactness remain downstream.
 `emdash3_2_direct_cover_completion_eliminator.lp` is the first nondependent
 recursor boundary.  It defines whole direct-cover algebra maps, including
 glue-functor preservation and higher silent-path coherence.  Its primitive
@@ -176,6 +176,27 @@ through their single forgetful algebra projection. Conventional locality of
 the completion is supplied by the comparison module above. It does not yet
 derive whole Hom uniqueness, a functorial reflector, or
 `SheafificationCapability`.
+`emdash3_2_direct_cover_completion_universality.lp` supplies the next
+categorical-HIT eliminator boundary. The recursor varies as one whole functor
+in its seed and computes on objects to the deployed recursor. Whole unit beta
+and topology-local eta/uniqueness are higher equality evidence; together they
+make precomposition by the HIT unit an `OmegaEquivAlong Cat_cat` between
+`Hom(Completion(P),Y)` and `Hom(P,Y)` for every topology-local target `Y`.
+The eta law is not generalized to arbitrary maps into an independently
+selected one-sided cover algebra. The module does not yet assemble the
+fixed-site reflector/adjunction, identify the opaque `Sheaf_cat` facade, lift
+to CommRing values, or prove left exactness.
+`emdash3_2_direct_cover_sheafification.lp` supplies that fixed-site
+Cat-valued assembly. It realizes the existing `Sheaf_cat(K,T,Cat_cat)` facade
+as pairs `(P,IsTopologyLocalPsh(P))`, inherits underlying presheaf Hom
+categories and category operations, and constructs the whole inclusion and
+direct-cover-completion reflector. The indexed adjunction is stated at the
+generic raw `Functor_cat(Op_cat(K),Cat_cat)` boundary while all computation
+remains at rigid `Psh_cat(K)`. Its unit and counit compute to the HIT unit and
+identity-seeded recursor; recursor beta and topology-local eta derive both
+cancellation laws and instantiate the existing fixed-counit
+`SheafificationCapability`. Other value categories, CommRing lifting, left
+exactness, slice transport, and schemes remain outside this module.
 `emdash3_2_telescope_localization_hit.lp` is the first explicit per-object
 categorical-HIT localization boundary. For an endomap `s:A->A`, it constructs
 the set-truncated sequential telescope with computing point induction,

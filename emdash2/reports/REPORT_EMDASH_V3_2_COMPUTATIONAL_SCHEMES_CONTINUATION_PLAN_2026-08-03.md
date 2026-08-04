@@ -52,6 +52,25 @@ It is a semantic object equipped, where chosen, with presentations that expose
 executable coordinate rings, restriction maps, localization comparisons, and
 overlap computations.
 
+### 1.1 Current persistent-goal scope — 2026-08-04
+
+The broader programme above remains architectural history, but the active
+persistent goal is now deliberately narrower.  It contains only:
+
+1. the fixed-site Cat-valued topology-local presheaf category and inclusion;
+2. functorial assembly of the direct-cover completion reflector, its unit, and
+   its adjunction from the focused-green whole Hom universal property;
+3. a scoped Cat-valued realization of the existing `Sheaf_cat` facade and
+   direct instantiation of its supplied `SheafificationCapability`; and
+4. proportional validation, ledger synchronization, and a local green
+   checkpoint of that boundary.
+
+CommRing lifting and left exactness are deferred to one future dedicated
+plan/goal.  The graded `Proj`/standard `P^n` continuation is independently
+deferred to another future plan/goal; the checkpointed supplied `P1`
+presentation remains completed validation evidence.  Neither deferred lane is
+an acceptance criterion or automatic continuation of the current goal.
+
 ## 2. Completed Affine Baseline
 
 The baseline module
@@ -378,10 +397,15 @@ Directly declaring the first primitive as an object of the existing rigid
 `Sheaf_cat(K,T,Cat)` would be circular: that facade presently acquires its
 underlying-presheaf interpretation only through the supplied inclusion and
 reflector capability which this program is intended eventually to construct.
-The local-target eliminator should derive `is_local`; a constructed local-
-object category can then package the result syntactically as a sheaf and be
-related to the rigid facade by a scoped whole realization/equivalence, never
-by a broad definitional identification.
+The local-target eliminator should derive `is_local`.  Once that derivation
+and whole Hom universality exist, the circularity is gone: the existing
+`Sheaf_cat(K,T,Cat_cat)` facade itself can receive the scoped concrete
+realization whose objects are pairs `(P,is_local(P))` and whose homs,
+identities, and composites are inherited from `Psh_cat(K)`.  No second public
+local-object category is then needed.  This realization is by specialized
+object/hom/category-operation projections, not a broad runtime rewrite of the
+rigid category head and not a claim about `Sheaf_cat(K,T,V)` for arbitrary
+`V`.
 
 The earlier supplied `SheafificationCapability` is the integration contract
 for this construction, not an obsolete parallel API.  Integration proceeds
@@ -389,27 +413,29 @@ in explicit grades:
 
 1. derive the local-target eliminator, including its `eta`, `glue`, and
    `silent` computation/coherence laws;
-2. derive `IsTopologyLocalPsh` for every completed presheaf and package the
-   result in the constructed local-object/sheaf category;
+2. derive `IsTopologyLocalPsh` for every completed presheaf and give the
+   existing `Sheaf_cat(K,T,Cat_cat)` facade its scoped local-presheaf
+   realization;
 3. derive the fixed-forward whole universal property
    `Hom(completion(P),X) ~= Hom(P,X)` for every local target `X`;
 4. assemble formation and unit functorially on presheaf morphisms and obtain
    the whole left-adjoint/inclusion pair;
 5. instantiate the existing `SheafificationCapability`, including its
    fixed-counit `OmegaEquivAlong` reflector evidence; and
-6. compare that constructed capability scopefully with any independently
-   supplied reflector and prove, propositionally/wholly where appropriate,
-   that its derived `sheafification_glue` mate agrees with the direct
-   recursive construction on their common interface.
+6. if a later consumer supplies a second reflector on the same realized
+   facade, compare the two scopefully and prove, propositionally/wholly where
+   appropriate, that its derived `sheafification_glue` mate agrees with the
+   direct recursive construction on their common interface.
 
 The fixed-site Cat-valued HIT is considered integrated with the existing core
 at step 5 because existing consumers can then switch from supplied to
-constructed evidence without an API rewrite.  CommRing lifting, left
-exactness, induced-slice topology, and base-change are later integration
-grades required before assumption-explicit ringed-site and scheme clients can
-be reconstructed from it.  They do not block validation of the core
-reflector.  No step installs a conversion rule between constructed and
-supplied reflectors or conflates direct HIT glue with the adjunction mate.
+constructed evidence without an API rewrite.  CommRing lifting and left
+exactness are explicitly deferred to a future dedicated plan and persistent
+goal; induced-slice topology and base change remain separately deferred as
+well.  None is an acceptance criterion or scheduled continuation of the
+current reflector goal.  No step installs a category-head conversion between
+`Sheaf_cat` and a parallel local category, changes the arbitrary-`V` sheaf
+API, or conflates direct HIT glue with the adjunction mate.
 
 The post-checkpoint eliminator audit exposes one necessary internality
 correction to the first signature.  Pédrot's oracle is an internal operation,
@@ -546,12 +572,15 @@ is frozen and must not be promoted merely to connect this special model to a
 Grothendieck topology.  Such a bridge remains legitimate deferred generic-
 localization research if a later consumer specifically needs it.
 
-The active scheme lane returns to a selected projective-line/projective-space
-consumer.  The independent constructed-sheaf lane starts from the direct
-`eta/glue/silent` cover-indexed signature above.  Neither lane is blocked by
-the BNat factor predicate.  Arbitrary higher descent, comparison with rigid
-`Sheaf_cat`, CommRing lift, left exactness, and slice base change remain later
-gates after the direct per-presheaf eliminator exists.
+The selected assumption-explicit projective-line consumer has completed its
+bounded validation role.  Further graded `Proj` and standard `P^n` work is now
+deferred to its own future plan and persistent goal.  The only active research
+lane in the present goal is the constructed-sheaf lane from the direct
+`eta/glue/silent` cover-indexed signature through the fixed-site Cat-valued
+reflector and an honest comparison with rigid `Sheaf_cat`.  The BNat factor
+predicate remains irrelevant to that path.  Arbitrary higher descent,
+CommRing lifting, left exactness, and slice base change are also outside the
+current goal.
 
 ### 3.3 Site-morphism literature route
 
@@ -1167,7 +1196,7 @@ close CS-05.
 | Small-site restriction/basis comparison | Moderate | Exact basis and topology transport owners. |
 | Representation-independent category of schemes | Research-grade but plausible | Morphism representation, locally-ringed structure, and comparison with presentations. |
 | Ordinary-sieve extension and topology-local-object classifier | Implemented at the whole Cat-valued boundary | Fibrewise dependent-Sigma values and inclusion components compute; explicit base-arrow beta and equivalence with the separate weighted-limit descent presentation remain consumer-gated. |
-| Fixed-site categorical-HIT sheafification construction | Whole constructor, recursor, eligible-question, varying-family, canonical-pullback, strict-substitution, and syntactic internal-sheaf boundaries implemented; the remaining reflector is research-grade but factorable | Formation/unit/glue/silent and the nondependent recursor are checkpointed. Whole strict glue substitution is derived internally at generic `tapp1_func`; one whole displayed glue plus one whole silent path now form `DirectCoverSheafStructure`, and the completion inhabits the total `DirectCoverSheaf`. Generic record-style functor extensionality is no longer an active prerequisite. Remaining gates are whole Hom universality, functorial reflector assembly, scoped comparison with conventional two-sided `IsTopologyLocalPsh` and the rigid `Sheaf_cat` facade, then CommRing lift and left exactness. |
+| Fixed-site categorical-HIT sheafification construction | Whole constructor, recursor, eligible-question, varying-family, canonical-pullback, strict-substitution, syntactic internal-sheaf, locality, and focused-green whole-Hom-universality boundaries implemented; the remaining reflector is research-grade but factorable | Formation/unit/glue/silent and the nondependent recursor are checkpointed. Whole strict glue substitution is derived internally at generic `tapp1_func`; one whole displayed glue plus one whole silent path now form `DirectCoverSheafStructure`, and the completion inhabits the total `DirectCoverSheaf`. Generic record-style functor extensionality is no longer an active prerequisite. The current goal's remaining gates are functorial reflector/adjunction assembly and scoped comparison with conventional two-sided `IsTopologyLocalPsh` and the rigid `Sheaf_cat` facade. CommRing lifting and left exactness are deferred to a separate future plan/goal. |
 | Unrestricted atlas effectivity | Research-grade | Descent/localization infrastructure and scope. |
 
 The original computational-schemes direction remains feasible. The main risk
@@ -1192,10 +1221,10 @@ probe is Set/path-valued on a small explicit site: for one selected presheaf
 test its internal eliminator against those local targets. Only after that
 objectwise probe should the construction be made uniform on presheaf objects
 and arrows to produce a whole reflector and unit instantiating
-`SheafificationCapability`. A CommRing-valued lift, left exactness, and slice
-base change remain separate later gates. Raw support-lattice, compact-open,
-and stalk comparisons likewise remain later theorems rather than hidden
-prerequisites.
+`SheafificationCapability`. A CommRing-valued lift and left exactness are
+deferred to a separate future plan/goal; slice base change remains a separate
+later gate. Raw support-lattice, compact-open, and stalk comparisons likewise
+remain later theorems rather than hidden prerequisites.
 
 ## 11. Decision Ledger
 
@@ -1464,26 +1493,19 @@ prerequisites.
   is a computing algebraic amalgamation on one principal open.  Later scoped
   comparison may relate their computations, but no rewrite or public alias
   identifies them.
-- **CS-D-043 — Projective consumers return to the active scheme lane:** the
-  current library already owns a supplied global scheme presentation, two
-  affine realizations, their actual inherited overlap, and the Laurent
-  inversion computation.  The next bounded projective consumer should first
-  select an assumption-explicit global `P1` capability over a base ring and
-  instantiate those owners; it must state whether the global object is a
-  primitive/supplied presentation rather than claim atlas-first construction.
-  Generalize next to the finite standard cover of `P^n`, with polynomial chart
-  rings and computing pairwise localizations.  A genuine `Proj(S)` constructor
-  is a subsequent algebraic tranche requiring graded commutative rings,
-  homogeneous localizations, degree-zero parts `(S_f)_0`, and the irrelevant-
-  ideal cover.  Neither direct sheafification nor BNat is a prerequisite for
-  the assumption-explicit `P1` consumer; constructed `Proj` remains a larger
-  but now explicitly active standard-library direction.  Mathematically a
-  sufficiently computational `Proj` subsumes the standard examples through
-  `P^n_R = Proj(R[x_0,...,x_n])`; the explicit `P1`-first order is therefore a
-  validation strategy, not three independent definitions.  Once the graded
-  infrastructure exists, standard `P^n` should be derived by instantiating
-  `Proj`, and the earlier explicit `P1` capability should receive a whole
-  comparison rather than remain a competing public construction.
+- **CS-D-043 — Projective continuation is deferred after the supplied `P1`
+  validation:** the library owns a supplied global scheme presentation, two
+  affine realizations, their actual inherited overlap, the Laurent inversion
+  computation, and the checkpointed assumption-explicit global `P1`
+  capability that instantiates those owners.  That completed the bounded
+  validation intended for this plan.  General graded `Proj` and standard
+  `P^n` are no longer an active lane of the current persistent goal; they move
+  to a future dedicated plan/goal.  That later plan should select graded
+  commutative rings, homogeneous localizations, degree-zero parts `(S_f)_0`,
+  and the irrelevant-ideal cover.  A computational `Proj` should derive
+  `P^n_R = Proj(R[x_0,...,x_n])`, and its standard `P^1` instance should be
+  compared wholly with the existing explicit `P1` boundary rather than form
+  a competing public construction.
 - **CS-D-044 — Direct-cover glue is a whole functor:** at each cover, package
   the oracle as a functor from the matching hom-category to the section
   hom-category and package silent as the whole equality
@@ -1657,6 +1679,31 @@ prerequisites.
   `restriction o glue = id` itself remains a theorem to derive, not a
   constructor.
 
+- **CS-D-054 — The current persistent goal stops at fixed-site Cat-valued
+  reflector integration:** its remaining implementation scope is the
+  scoped topology-local realization of the existing `Sheaf_cat` category,
+  its inclusion, direct-cover completion reflector, unit/adjunction, and
+  direct instantiation of `SheafificationCapability`.  CommRing lifting and left
+  exactness are deferred together to a later dedicated plan/goal.  Graded
+  `Proj` and standard `P^n` are independently deferred under CS-D-043.  These
+  deferred lanes are not acceptance criteria, automatic continuations, or
+  checkpoint blockers for the current goal.
+
+- **CS-D-055 — The existing Cat-valued sheaf facade is the local-object
+  category; no parallel public `Loc_T` is introduced:** specialize only
+  `Sheaf_cat(K,T,Cat_cat)` so that objects project to
+  `Σ P:Psh(K), IsTopologyLocalPsh(K,T,P)`, homs project to the underlying
+  `Psh_cat(K)` homs, and identity/composition inherit the public presheaf
+  owners.  The completion reflector lands directly in that facade.  The
+  generic `SheafAdjunctionData(K,T,V)` remains phrased over
+  `Functor_cat(Op_cat(K),V)` because `K` is already an explicit parameter and
+  the formulation is correct for arbitrary `V`.  At `V=Cat_cat`, one narrow
+  proof-time comparison relates that raw representation to the rigid
+  `Psh_cat(K)` head used by the HIT; neither head becomes the other's runtime
+  normal form.  Thus the existing capability is instantiated rather than
+  duplicated, while the useful public ownership boundary of `Psh_cat(K)` is
+  preserved.
+
 These decisions supersede the conflicting portions of PSSS-D-117, especially
 its proposal to store whole overlap/cocycle witnesses in the ordinary
 global-first record and its phrase *small/big-site equivalence*.
@@ -1681,12 +1728,12 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-07 | Supplied global two-chart selected-refinement consumer | Complete and locally checkpointed at `4892c33`: rule-free source, focused reviewer, exact warning comparison, registry/authority/catalog synchronization, and 124-target resumable health are green. A closed genuinely non-affine realization remains separate | CS-06a |
 | CS-07b | Selected inherited overlap for the first supplied non-affine-style consumer | Complete and locally checkpointed at `d9e036f`: two rule-free source modules, two nine-assertion reviewers, focused/exact-warning/audit/catalog/authority checks, and 134-target exact-current resumable health are green. CS-07c now attaches projective-line-style coordinate/localization data directly to this overlap | CS-D-031/032 and checkpointed overlap substrate |
 | CS-07c | Canonical Laurent transition and actual-overlap adapter | Complete and locally checkpointed at `5118fb1`: the generic rule-free layer derives both Laurent maps by polynomial/localization universality and presents two literal localization maps into one common ring; the thin scheme layer instantiates it at the actual chart rings, inherited overlap ring, and existing restriction maps. A closed global `P1` object and non-affineness theorem remain separate | CS-D-031/032/033 and CS-07b overlap substrate |
-| CS-13 | Selected projective-line/projective-space consumer and eventual `Proj` owner | The first assumption-explicit global `P1` capability is complete and locally checkpointed at `7241b00` as the transparent dependent total of the existing binary scheme, actual inherited overlap, and Laurent owners. General `Proj` next needs graded-ring, homogeneous-localization, degree-zero, and irrelevant-ideal infrastructure; once present it should derive the standard `P^n` examples, with a whole comparison to this explicit `P1` boundary. No atlas-first gluing or BNat bridge is a prerequisite. | Audit and select the smallest graded commutative-ring and homogeneous-localization substrate |
+| CS-13 | Selected projective-line validation; projective-space/`Proj` continuation deferred | The assumption-explicit global `P1` capability is complete and locally checkpointed at `7241b00` as the transparent dependent total of the existing binary scheme, actual inherited overlap, and Laurent owners. General graded `Proj` and derived standard `P^n` examples are explicitly deferred to their own future plan/goal. | No current-goal gate; a future goal should audit the graded commutative-ring, homogeneous-localization, degree-zero, and irrelevant-ideal substrate |
 | CS-08 | Atlas-first two-affine gluing constructor | Out of current scope, not part of the global-first scheme interface | Reconsider only for a future consumer explicitly constructing a global object from independent affine pieces |
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the Pédrot-directed `eta/glue/silent` signature, whole glue correction, and unit/glue/silent-coherent recursor are checkpointed through `deeab6d`. Eligible questions and whole varying extension/restriction/glue are checkpointed through `98fe2c6`; CS-D-053's canonical extension-pullback comparison is checkpointed at `337a638`; the internal Pédrot sheaf package is checkpointed at `f119391`; the generic retained-member substitution substrate is checkpointed at `552516c`. The active owner-minimal promotion now provides generic strict ordinary/displayed pointwise-to-whole `OmegaEquivAlong`, one whole restriction/glue transformation tower, the second inverse `restriction o glue = id_Matching`, and `IsTopologyLocalPsh(DirectCoverCompletionPsh)`. New module and central diagnostic targets are focused-green with zero warnings, and strict LHS audits are clean; no long aggregate was rerun. The principal-BNat bridge remains frozen. | Audit the precise scoped comparison between the constructed topology-local total and the opaque supplied `Sheaf_cat` facade; do not invent a definitional coercion. Establish whole Hom uniqueness/universality and the fixed-site reflector/adjunction, then instantiate or compare with `SheafificationCapability`. Follow with CommRing lift and left exactness while keeping the independent `Proj` lane active. |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the Pédrot-directed `eta/glue/silent` signature, whole glue correction, and unit/glue/silent-coherent recursor are checkpointed through `deeab6d`. Eligible questions and whole varying extension/restriction/glue are checkpointed through `98fe2c6`; CS-D-053's canonical extension-pullback comparison is checkpointed at `337a638`; the internal Pédrot sheaf package is checkpointed at `f119391`; the generic retained-member substitution substrate is checkpointed at `552516c`; conventional locality is checkpointed at `389d292`. CS-12r adds the whole seed-functorial recursor, categorical-HIT unit beta and topology-local eta/uniqueness, and the resulting `OmegaEquivAlong` Hom universal property. CS-12s is now promoted as `emdash3_2_direct_cover_sheafification.lp`: it realizes `Sheaf_cat(K,T,Cat_cat)`, assembles the whole inclusion and completion reflector, derives both counit cancellation laws, and inhabits the existing `SheafificationCapability(K,T,Cat_cat)` with no opaque reflector law. Focused source/central diagnostics, exact warning comparison, strict-LHS audit, metadata gates, and the exact-current 162-target registered health run are green. The principal-BNat bridge remains frozen. | Create the authorized local checkpoint after exact staged-diff inspection. This is the end of the current CS-12 semantic scope; do not introduce a parallel public local category, a broad runtime category-head coercion, or an opaque raw-vs-rigid counit comparison. |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -2994,11 +3041,12 @@ boundary.
 This package is the promised smallest end-to-end projective-line-style
 computational capability.  It is not a closed construction of `P^1`, does not
 prove that its supplied global object is non-affine, and does not implement
-graded `Proj`.  The next CS-13 research tranche is an audit of the smallest
-graded commutative-ring, homogeneous-localization, degree-zero, and irrelevant-
-ideal substrate.  A later constructed `Proj(R[x_0,x_1])` should instantiate
-the same global capability and receive a whole comparison with this supplied
-boundary rather than create a competing scheme interface.
+graded `Proj`.  Further CS-13 work is now deferred to a separate future plan
+and persistent goal.  That future goal should audit the smallest graded
+commutative-ring, homogeneous-localization, degree-zero, and irrelevant-ideal
+substrate.  A later constructed `Proj(R[x_0,x_1])` should instantiate the same
+global capability and receive a whole comparison with this supplied boundary
+rather than create a competing scheme interface.
 
 Both warning-enabled targets retain exactly the inherited 1,179-warning
 inventory: 1,020 unjoinable critical-pair diagnostics and 159 replaceable-
@@ -4556,9 +4604,12 @@ finish the whole sheafification programme.  The next gates are:
    `Sheaf_cat`/`SheafificationCapability` interface;
 3. prove whole Hom universality of `eta:P->DirectCoverCompletionPsh(P)` into
    topology-local targets and assemble the fixed-site reflector functor and
-   adjunction; and
-4. keep the independent computational `Proj`/projective-space lane moving
-   without making it depend on reflector completion.
+   adjunction.
+
+The active sequence ends with the reflector/adjunction and scoped facade
+comparison.  CommRing lifting/left exactness and the independent computational
+`Proj`/projective-space continuation are deferred to future dedicated
+plans/goals and must not be started as an automatic continuation of this one.
 
 Promotion must not copy the entire exploratory ladder wholesale.  The active
 library should retain semantic whole paths and rigid projection owners, while
@@ -4596,6 +4647,244 @@ path, and topology locality
 zero unreviewed compound slots in either new module. No aggregate health/CI
 run is used at this stage; that remains reserved for the completed bounded
 integration checkpoint.
+
+### 13.33 CS-12r whole Hom universality and recursor-eta boundary — 2026-08-04
+
+A fresh-from-source check before the Hom-universality tranche caught one
+important regression in the preceding kernel promotion.  The generic
+proof-time comparison
+
+```text
+hom_precomp_along_fapp0(F,p,g)
+  = comp_fapp0(g,h),  provided h = F[p]
+```
+
+allowed an arbitrary raw-composition argument `h` and deferred recognition of
+the action to a side condition.  That was broader than the retained-member
+consumer required and made proof-time search fail on the older whole theorem
+
+```text
+postcomp(h) o restriction_X = restriction_Y o postcomp(h).
+```
+
+The broad comparison is retired.  Its owner-position replacement has two
+rigid heads and recognizes only the projected represented-source action:
+
+```text
+hom_precomp_along_fapp0(hom_int(F),p,g)
+  = comp_fapp0(g,hom_int_precomp_func(F,p)).
+```
+
+Variance, the `Catd_cat` target, and the `hom_int` family are recovered in
+proof-time side conditions; neither presentation becomes a runtime normal
+form.  The direct-cover section postcomposition body is also aligned with the
+exact represented source `FibCov_source_catd`, already used by restriction.
+Its public Yoneda type is unchanged.  This makes both whole routes the same
+generic `Hom(i_R,h)` action without relying on transitive comparison between
+the public Yoneda facade and the exact represented source.  The owner-position
+kernel candidate, direct theorem probe, active eliminator, and active locality
+module are quiet-green respectively at:
+
+- `logs/probes/psss12w_kernel_prooftime_candidate-20260804-140321.log`;
+- `logs/probes/psss12zzl1_restriction_postcomp_direct-20260804-140538.log`;
+- `logs/probes/emdash3_2_direct_cover_completion_eliminator-20260804-140602.log`;
+  and
+- `logs/probes/emdash3_2_direct_cover_completion_locality-20260804-140616.log`.
+
+The whole Hom-universality contract is now representable and quiet-green in
+`psss12zzl2_local_hom_universality.lp`.  The design distinguishes three
+levels deliberately.
+
+1. `direct_cover_completion_rec_func(AY)` is one whole functor in the seed
+   map.  Its object projection computes to the already deployed primitive
+   recursor; generic functor action owns action and naturality on arrows
+   between seeds.
+2. `direct_cover_completion_rec_beta_func(AY)` is the whole categorical-HIT
+   unit beta
+
+   ```text
+   precomp_unit o rec_func(AY) = id_Hom(P,Y).
+   ```
+
+   The existing narrow runtime beta remains the data-level computation; the
+   functor equality is higher computation evidence, not a new rewrite.
+3. `direct_cover_completion_rec_eta_local_func(local)` is the primitive
+   categorical-HIT uniqueness clause
+
+   ```text
+   rec_func(canonical_algebra(local)) o precomp_unit
+     = id_Hom(Completion(P),Y).
+   ```
+
+   It is scoped to topology-local targets.  It does not claim that arbitrary
+   underlying maps preserve an independently selected one-sided cover
+   algebra, and it does not smuggle a component naturality square or generic
+   functor extensionality into the interface.
+
+The new dedicated module
+`emdash3_2_direct_cover_completion_universality.lp` assembles those two whole
+laws transparently into
+
+```text
+OmegaEquivAlong
+  Cat_cat
+  Hom(Completion(P),Y)
+  Hom(P,Y)
+  precomp_unit
+```
+
+for every topology-local `Y`.  Its first quiet focused check is green at
+`logs/probes/emdash3_2_direct_cover_completion_universality-20260804-140922.log`.
+The warning-enabled kernel target remains exactly at the preceding `1,016`
+critical-pair and `159` replaceable-pattern warning baseline
+(`logs/probes/emdash3_2-20260804-141008.log`). The changed eliminator owns no
+warning, and the universality target adds no warning beyond the one already
+owned by its imported strict-pointwise module
+(`logs/probes/emdash3_2_direct_cover_completion_eliminator-20260804-141040.log`,
+`logs/probes/emdash3_2_direct_cover_completion_universality-20260804-141051.log`).
+Strict LHS audits are clean for all three changed sources; the two existing
+recursor rules now explicitly retain the public `Psh_cat` composition
+discriminator. The single central diagnostics target is green under the
+uniform ceiling at
+`logs/probes/emdash3_2_checks-20260804-141449.log`. Catalog generation, source
+TOC, active-reference and report-header lint, check-metrics unit tests,
+Python compilation, and whitespace checks pass.
+
+No health/CI aggregate is run here: the active user direction is to finish
+the sheafification/reflector boundary before another long aggregate, and the
+kernel content change invalidates the global resume identity. Consequently
+this tranche remains uncheckpointed while the next bounded semantic step
+continues; the tracked health report is not falsely rewritten from partial
+evidence. The next semantic tranche is the functorial fixed-site reflector:
+define action on an input map `f:P->Q` by the selected universal extension of
+`unit_Q o f`, retain its action at one whole functor owner, and derive the
+unit/adjunction while realizing the existing Cat-valued `Sheaf_cat` facade
+directly as the local-presheaf category.
+
+### 13.34 CS-12s existing Cat-valued sheaf-facade realization — 2026-08-04
+
+The first reflector probe initially used a private category of topology-local
+presheaves.  That is mathematically valid, but it would create a needless
+parallel public sheaf theory beside the existing `Sheaf_cat` and force an
+extra comparison before any existing ringed-site consumer could use the
+constructed reflector.  The selected design instead gives the already-rigid
+facade a concrete realization only at the value category `Cat_cat`:
+
+```text
+Obj(Sheaf_cat(K,T,Cat_cat))
+  -> Sigma P:Psh(K), IsTopologyLocalPsh(K,T,P),
+
+Hom_Sheaf((P,p),(Q,q)) -> Hom_Psh(P,Q),
+
+id_Sheaf(P,p) -> id_Psh(P),
+comp_Sheaf(g,f) -> comp_Psh(g,f).
+```
+
+This is a scoped representation selection through the category projections;
+it is not a runtime equation between the `Sheaf_cat` head and a second
+category head.  Arbitrary `Sheaf_cat(K,T,V)` remains opaque, including the
+deferred CommRing-valued case.  The inclusion is one whole primitive functor
+whose object action computes to the first projection.  Its Hom action remains
+at the generic functor owner and is compared by one whole path with the
+identity on the underlying presheaf Hom category; the rejected direct capped
+rule `include[f] -> f` failed subject reduction because its endpoint
+projections were not available at rule-preservation time.
+
+The completion reflector likewise lands directly in this existing facade:
+
+```text
+sheafify_T(P)
+  -> (DirectCoverCompletionPsh(T,P), completion_is_local(T,P)).
+```
+
+Its selected whole action on `f:P->Q` is the categorical-HIT extension of
+`unit_Q o f`.  This is retained as one whole Hom-action equality, so ordinary
+arrow action and naturality remain owned internally by the reflector functor.
+The private-local-category probe and the direct-facade probe are both focused
+green; the latter is the promoted architecture.
+
+One engineering bridge remains intentionally narrow.  The generic
+`SheafAdjunctionData(K,T,V)` is correctly phrased over
+`Functor_cat(Op_cat(K),V)`: the site base `K` is an explicit parameter of the
+package, so it remains recoverable, and the raw functor presentation is the
+uniform one for arbitrary values `V`.  The direct-cover HIT instead computes
+through the rigid public `Psh_cat(K)` owner.  At `V=Cat_cat`, a proof-time-only
+comparison
+
+```text
+Psh_cat(K) =proof-time Functor_cat(K0,Cat_cat)
+  provided Op_cat(K) = K0
+```
+
+allows those same whole functors and the derived adjunction theorem to
+instantiate the existing generic package.  It adds no runtime collapse of
+`Psh_cat`, changes no generic sheaf capability, and preserves the useful
+public owner from which `K` and the Catd representation are controlled.
+
+The focused direct-facade probe is green through:
+
+1. Cat-valued object/hom/identity/composition realization;
+2. whole inclusion and completion-reflector object projections;
+3. the selected whole reflector Hom action;
+4. the indexed adjunction theorem supplied by Hom universality; and
+5. direct construction of `SheafAdjunctionData(K,T,Cat_cat)` from those same
+   owners;
+6. exact unit projection to the categorical-HIT unit;
+7. exact counit projection to the canonical recursor extending `id_Y`;
+8. the first cancellation `counit o unit = id_Y` by the recursor beta law;
+9. the second cancellation `unit o counit = id_completion(Y)` by the whole
+   topology-local eta/uniqueness law, applied after the internally derived
+   unit-precomposition comparison; and
+10. fixed-forward `OmegaEquivAlong` at that exact counit, hence a term of the
+    existing `SheafificationCapability(K,T,Cat_cat)`.
+
+An intermediate version stated the indexed adjunction at `Psh_cat(K)` and
+then needed one opaque proof-time equality to compare its counit with the
+raw-functor presentation projected by `SheafAdjunctionData`.  That version is
+retired.  The generic package is intentionally indexed by
+`Functor_cat(Op_cat(K),Cat_cat)`, so the clean candidate states the adjunction
+at that raw boundary from the outset while all completion computation remains
+owned by rigid `Psh_cat(K)`.  The scoped proof-time category comparison makes
+the same inclusion and reflector functors well typed on both sides.  With
+this orientation, constructor projection makes the generic package counit
+definitionally identical to the direct indexed counit, and the existing
+component rule reduces it all the way to the HIT recursor.  No opaque counit
+comparison, generic functor extensionality principle, or unrelated inverse
+law remains.
+
+The semantic reflector gate was first passed in the focused probe
+(`logs/probes/psss12zzl4_cat_sheaf_facade-20260804-152024.log`) and has now
+been promoted to `emdash3_2_direct_cover_sheafification.lp`. The production
+module and the registered central diagnostics are focused green
+(`logs/probes/emdash3_2_direct_cover_sheafification-20260804-153650.log` and
+`logs/probes/emdash3_2_checks-20260804-154007.log`). Strict LHS audit reports
+zero unreviewed candidates.
+
+Owner-position warning comparison records one deliberate facade cost. The
+two-import baseline has 1,017 critical pairs and 159 replaceable-pattern
+advisories; adding the Cat-valued facade reports 1,029 and 159
+(`logs/probes/psss12zzs_import_baseline-20260804-152550.log` and
+`logs/probes/emdash3_2_direct_cover_sheafification-20260804-154140.log`). All
+twelve new blocks are headed by the inherited `Sheaf_cat` composition rule
+overlapping generic functor/transformation naturality. A proof-time-only
+stable-composition experiment was rejected: it merely moved the dependent
+endpoint comparison behind extra stable heads and could not supply the exact
+generic capability laws without recreating the same category projection.
+The direct runtime inheritance is retained as the smaller honest category
+implementation; warnings remain diagnostic rather than a veto.
+
+Source/authority/catalog registration and the proportional checkpoint gates
+are now synchronized.  The exact-current registered health run passes all 162
+targets under the uniform 90-second per-target ceiling; the central diagnostics
+pass in 78.115 seconds, the new production module in 13.749 seconds, the
+supplied projective-line module in 62.529 seconds, and its reviewer in 65.898
+seconds.  The generated health snapshots are
+`sha256:3fc8898f79a76580a663732a7f444f37415ea3750bb6f8ae6aae21a456357a76`
+for source metrics and
+`sha256:6807a3d6f75b8639e185ff06a1942e36187dcf843166b3989b35d0b0034cc334`
+for checked content.  Only exact staged-diff inspection and the authorized
+local checkpoint remain.  No further long aggregate is required for this
+unchanged snapshot, and the proof-time `Psh_cat` comparison must remain scoped.
 
 ## 14. Validation And Checkpoint Contract
 
@@ -4636,19 +4925,22 @@ specificity:
 > Lambdapi SOP.  On CS-12, continue the direct whole-presheaf
 > `eta/glue/silent` cover completion from its internal syntactic
 > `DirectCoverSheaf` package through whole Hom universality, functorial
-> reflector assembly, and scoped comparison with `IsTopologyLocalPsh`, the
-> rigid sheaf facade, and the existing `SheafificationCapability`; treat the
+> reflector assembly, scoped Cat-valued realization of the rigid sheaf
+> facade, and direct instantiation of the existing
+> `SheafificationCapability`; treat the
 > opposite restriction/glue composite as part of that conventional comparison,
 > not a prerequisite for algebraic direct-cover sheafhood. Do not call the
 > resulting endofunctor a sheafification reflector before those gates or
 > conflate direct HIT glue, the adjunction mate, and Cartier localization glue.
-> Keep CS-13 as
-> an independent active scheme lane: use a supplied global `P1` capability as
-> the smallest end-to-end validation of the existing binary/Laurent owners,
-> then build graded `Proj` infrastructure from which standard `P^n` is
-> ultimately derived and compared wholly with the explicit `P1` boundary.
-> Do not revive the frozen principal-BNat bridge, require atlas-first gluing,
-> or let either research lane block the other.  Update the plan whenever
+> End the current goal after the fixed-site Cat-valued reflector/adjunction,
+> its scoped realization in the existing rigid sheaf facade, and the resulting
+> existing capability instance are implemented and proportionally validated.
+> Explicitly
+> do not continue from there into CommRing lifting, left exactness, graded
+> `Proj`, or standard `P^n`: those are deferred to separate future plans and
+> persistent goals.  The supplied `P1` validation at `7241b00` remains valid
+> completed evidence, not an active lane.  Do not revive the frozen
+> principal-BNat bridge or require atlas-first gluing.  Update the plan whenever
 > probes refine the architecture; keep action, naturality, and coherence at
 > whole internal owners; prefer computational definitions and scoped evidence
 > over external component fields or broad rewrites; and reuse exact recent
@@ -4657,9 +4949,11 @@ specificity:
 > not push, merge, publish, rebase, amend, reset, rewrite history, clean up
 > worktrees, delete branches, or touch another worktree or branch.
 
-The goal service currently has the older `3dd70fd`-worded objective active.
-It has no in-place objective-edit operation while that goal remains
-unfinished. The objective already delegates implementation order to this
-living plan, so the corrected quoted text above is the recovery/next-launch
-form while this plan owns the current `DirectCoverSheaf` boundary and detailed
-acceptance gates.
+The goal service currently has the older `3dd70fd`-worded objective active and
+has no in-place objective-edit operation while that goal remains unfinished.
+Its clauses that kept CS-13 active or scheduled CommRing lifting/left exactness
+are superseded by the user's 2026-08-04 scope instruction and CS-D-054.  The
+objective delegates implementation order to this living plan, so the corrected
+quoted text above is both the operational scope of the current run and the
+recovery/next-launch form.  No deferred lane is an acceptance criterion or
+automatic continuation of the active goal.

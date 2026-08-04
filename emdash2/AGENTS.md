@@ -60,6 +60,12 @@ the derived conventional restriction-equivalence and topology-locality
 extension is `emdash3_2_direct_cover_completion_locality.lp`;
 the whole unit/glue/silent-coherent direct-cover completion recursor extension
 is `emdash3_2_direct_cover_completion_eliminator.lp`;
+the whole seed-functorial recursor, scoped categorical-HIT uniqueness, and
+topology-local Hom-universality extension is
+`emdash3_2_direct_cover_completion_universality.lp`;
+the constructed Cat-valued realization of the existing sheaf facade, direct
+cover-completion reflector, indexed adjunction, and instantiated supplied
+sheafification capability is `emdash3_2_direct_cover_sheafification.lp`;
 the reusable Nat arithmetic/sethood extension is
 `emdash3_2_nat_arithmetic.lp`;
 the reusable Nat-indexed finite-family extension is
@@ -628,14 +634,34 @@ Use the following order:
     supplied by the preceding comparison module. It does not yet prove
     uniqueness/whole Hom universality, reflector, rigid-facade realization,
     CommRing lift, or left exactness;
-67. `emdash3_2_checks.lp` for executable regression statements;
-68. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+67. `emdash3_2_direct_cover_completion_universality.lp` for the whole
+    seed-functorial recursor and its categorical-HIT uniqueness boundary. Its
+    object projection computes to the deployed recursor, while whole unit
+    beta and topology-local eta remain higher equality evidence. Together
+    they exhibit precomposition by the HIT unit as an
+    `OmegaEquivAlong Cat_cat` on whole Hom categories into every
+    topology-local target. The eta law is not claimed for arbitrary maps into
+    an independently selected one-sided algebra. The module does not yet
+    assemble the reflector, identify the rigid sheaf facade, lift to
+    CommRing-valued objects, or prove left exactness;
+68. `emdash3_2_direct_cover_sheafification.lp` for the fixed-site Cat-valued
+    reflector assembled from that Hom universality. It realizes
+    `Sheaf_cat(K,T,Cat_cat)` as topology-local presheaves while leaving other
+    value categories opaque, retains `Psh_cat(K)` as the computational owner,
+    and uses the raw functor-category presentation only at the generic
+    supplied-capability boundary. Its unit and counit compute to the HIT unit
+    and identity-seeded recursor; beta and local eta derive both counit
+    cancellations and instantiate the existing `SheafificationCapability`.
+    It does not lift the construction to CommRing values, prove left
+    exactness, construct an induced topology, or define a scheme;
+69. `emdash3_2_checks.lp` for executable regression statements;
+70. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-69. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-70. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+71. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+72. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-71. `reports/INDEX.md` for task-specific plans and decision records.
-72. `book/book.json` and `book/evidence.json` for book source
+73. `reports/INDEX.md` for task-specific plans and decision records.
+74. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

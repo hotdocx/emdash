@@ -13,14 +13,20 @@
   in one transparent result package.  Unit and recursive glue have narrow
   runtime betas at their exact whole-presheaf composition observers; the
   silent/path beta remains higher evidence.  This is the first eliminator
-  boundary, not yet uniqueness/whole Hom universality, topology-locality of
-  the completion, a sheaf object, functorial reflector, or
-  SheafificationCapability.
+  boundary. The subsequent locality and universality modules own the
+  conventional two-sided comparison and whole Hom uniqueness; this module
+  itself does not assemble a functorial reflector or
+  `SheafificationCapability`.
 */
 
 require open emdash.emdash3_2_direct_cover_completion_hit;
 
-// Postcompose every section with one whole presheaf map.
+/*
+  Postcompose every section with one whole presheaf map. The public section
+  category uses the Yoneda facade; the internal body uses the exact
+  `FibCov_source_catd` representation also selected by restriction. This
+  keeps the simultaneous `Hom(i_R,h)` action on one canonical source.
+*/
 symbol direct_cover_section_postcomp_func
   [K : Cat]
   [U : τ (Obj K)]
@@ -33,7 +39,7 @@ symbol direct_cover_section_postcomp_func
     (@Psh_cat K)
     (@Psh_cat K)
     (@id_func (@Psh_cat K))
-    (@yoneda_psh K U)
+    (@FibCov_source_catd (Op_cat K) U)
     X Y h;
 
 // Postcompose every matching family with the same whole presheaf map.
@@ -87,10 +93,13 @@ symbol direct_cover_restriction_postcomp
       (@DirectCoverMatching_cat K U R Y))
     (@Hom_func
       (@Psh_cat K)
-      (@yoneda_psh K U)
+      (@FibCov_source_catd (Op_cat K) U)
       (@ordinary_sieve_extension_psh K U R)
       X Y
-      (@ordinary_sieve_extension_inclusion K U R)
+      (@fibrewise_sigma_proj1_funcd
+        (Op_cat K)
+        (@yoneda_psh K U)
+        (@sieve_higher K U R))
       h);
 
 // Whole preservation square for the two selected cover oracles.
@@ -512,6 +521,7 @@ injective symbol direct_cover_completion_rec
       Y);
 
 // Runtime beta for the whole return/unit constructor.
+// lhs-audit: keep 1 -- the public Psh composition head scopes HIT recursion.
 rule @comp_fapp0
       (@Psh_cat $K) _ _ _
       (@direct_cover_completion_rec $K $T $P _ _ $seed)
@@ -523,6 +533,7 @@ rule @comp_fapp0
   matching family and result are still whole presheaf maps; the primitive
   whole glue functor retains matching-arrow action and naturality.
 */
+// lhs-audit: keep 1 -- the public Psh composition head scopes HIT recursion.
 rule @comp_fapp0
       (@Psh_cat $K) _ _ _
       (@direct_cover_completion_rec $K $T $P $Y $AY $seed)

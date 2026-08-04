@@ -61,8 +61,18 @@ detailed probe evidence.
   functor equality. Together with the HIT's whole silent law, this constructs
   `IsTopologyLocalPsh(DirectCoverCompletionPsh)`. The module does not yet
   identify the syntactic direct-cover sheaf with the rigid `Sheaf_cat` facade,
-  prove whole Hom universality, assemble the reflector/adjunction, lift to
-  CommRing values, or prove left exactness.
+  assemble the reflector/adjunction, lift to CommRing values, or prove left
+  exactness. Whole Hom universality lives in the subsequent module.
+- `emdash3_2_direct_cover_completion_universality.lp`: whole
+  seed-functoriality and categorical-HIT uniqueness for the direct-cover
+  completion recursor. Its object projection computes to the deployed
+  recursor; whole unit beta and topology-local eta are higher equality
+  evidence. These assemble precomposition by the HIT unit into an
+  `OmegaEquivAlong Cat_cat` on Hom categories into every topology-local
+  target. The eta law is not generalized to arbitrary maps into an
+  independently selected one-sided cover algebra. The module does not yet
+  assemble the fixed-site reflector/adjunction, identify the rigid
+  `Sheaf_cat` facade, lift to CommRing values, or prove left exactness.
 - `emdash3_2_ringed_sites.lp`: downstream one-way, rule-free supplied
   reflective-sheafification layer. A rigid topology- and value-category-indexed
   sheaf classifier is paired with a transparent capability carrying whole
@@ -4200,6 +4210,43 @@ scripts/lambdapi_search.sh 'type >= Prof_imply_cov'
 
 for normalization/type-aware search.
 
+## Constructed Cat-Valued Sheafification Status
+
+The direct cover-completion program now reaches the existing supplied
+fixed-site capability. `emdash3_2_direct_cover_completion_universality.lp`
+provides the whole seed-functorial recursor, higher unit beta, topology-local
+eta/uniqueness, and the resulting Hom `OmegaEquivAlong`. The subsequent
+`emdash3_2_direct_cover_sheafification.lp` realizes only
+`Sheaf_cat(K,T,Cat_cat)` as pairs `(P,IsTopologyLocalPsh(P))`; arbitrary value
+categories remain opaque.
+
+One whole inclusion forgets locality, and one whole reflector maps `P` to its
+local direct cover completion. The indexed adjunction is declared at the raw
+`Functor_cat(Op_cat(K),Cat_cat)` boundary required by the generic package,
+while a scoped proof-time comparison preserves rigid `Psh_cat(K)` as the
+computational owner. Its unit and counit compute to the HIT unit and the
+identity-seeded recursor. Recursor beta and topology-local eta derive both
+cancellation laws, giving the exact fixed-counit `OmegaEquivAlong` and a term
+of the existing `SheafificationCapability(K,T,Cat_cat)`.
+
+The facade's runtime composition projection exposes twelve additional
+`comp_fapp0`/generic-naturality warning blocks: the imported baseline is
+1,017 critical pairs plus 159 replaceable-pattern advisories, and the
+integrated module reports 1,029 plus 159. A proof-time-only stable-composition
+alternative was rejected because dependent endpoints still required the same
+category projection while adding indirection. The direct rule is retained as
+the honest inherited category operation; strict LHS audit is clean. These
+warnings remain measured diagnostic evidence, not a claim of global
+confluence.
+
+The exact-current registered health boundary is green for all 162 source and
+reviewer targets under the uniform 90-second per-target ceiling.  In
+particular, central diagnostics pass in 78.115 seconds, the constructed
+sheafification source in 13.749 seconds, the supplied projective-line source in
+62.529 seconds, and its reviewer in 65.898 seconds.  The checked-content
+snapshot is
+`sha256:6807a3d6f75b8639e185ff06a1942e36187dcf843166b3989b35d0b0034cc334`.
+
 ## Book And Renderer Workflow
 
 The book is a first-class exposition artifact under `book/`. Its
@@ -4257,10 +4304,10 @@ The following remain explicit future work rather than hidden assumptions:
 - a fully internalized general coend/coinserter semantics for profunctor tensor;
 - general tensor associativity/coherence and complete co-Yoneda equivalences;
 - dependent elimination and semantic collage construction for primitive join;
-- a canonical or descent-characterized sheafification construction,
-  left-exactness/locality theorems, and locally ringed scheme packaging
-  downstream of the supplied reflective-sheafification capability and the
-  assembled CommRing-presheaf localization interfaces;
+- CommRing lifting and left exactness of the now-constructed fixed-site
+  Cat-valued direct-cover reflector, together with slice transport and
+  locally ringed scheme packaging; the rigid Cat-valued `Sheaf_cat` facade
+  and existing `SheafificationCapability` are already instantiated;
 - an inductive/HIT presentation of generated topology with derivation
   induction or executable cover normal forms. The active impredicative
   intersection already supplies proposition-valued least generated topology,

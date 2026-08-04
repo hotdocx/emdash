@@ -8067,22 +8067,6 @@ unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
       (@fapp1_fapp0 $A $B $F $W $X $h)
   ↪ [ tt ≡ tt ];
 
-/*
-  Proof-time raw-composition reading after the functor-action projection has
-  already reduced to a rigid head.  The existing rule above owns the generic
-  presentation.  This projection-order companion verifies the source,
-  target, and selected action in side conditions; runtime retains the stable
-  precomposition owner.
-*/
-unif_rule
-  @hom_precomp_along_fapp0 $A $B $F $Z $W $X $p $g
-  ≡ @comp_fapp0 $B $FW $FX $Z $g $h
-  ↪ [
-      (@fapp0 $A $B $F $W) ≡ $FW;
-      (@fapp0 $A $B $F $X) ≡ $FX;
-      (@fapp1_fapp0 $A $B $F $W $X $p) ≡ $h
-    ];
-
 // Proof-time identity-family comparison with ordinary raw composition.
 unif_rule @hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $Z $W $X $h $g
   ≡ @comp_fapp0
@@ -8460,6 +8444,24 @@ rule @fapp1_fapp0 _ _ (@hom_int $A $B $F) $Y $X $p
 // Applying the telescope at p yields the capped represented-object action.
 rule @fapp0 _ _ (@hom_int_precomp_tele_func $A $B $F $Y $X) $p
   ↪ @hom_int_precomp_func $A $B $F $Y $X $p;
+
+/*
+  Proof-time projection-order comparison for represented-source action.
+  The generic precomposition comparison expects `fapp1_fapp0(hom_int,p)`;
+  after projection that action is the rigid `hom_int_precomp_func` owner.
+  Runtime retains both stable heads.  Keeping the second head rigid avoids
+  asking proof-time unification to compare arbitrary raw composites.
+*/
+unif_rule
+  @hom_precomp_along_fapp0 $A0 $B0 $H $Z $Y $X $p $g
+  ≡ @comp_fapp0
+      $B0 _ _ $Z $g
+      (@hom_int_precomp_func $A $B $F $Y $X $p)
+  ↪ [
+      (Op_cat $A) ≡ $A0;
+      (@Catd_cat $B) ≡ $B0;
+      (@hom_int $A $B $F) ≡ $H
+    ];
 
 // Target-internalized mirror of hom_int.
 //

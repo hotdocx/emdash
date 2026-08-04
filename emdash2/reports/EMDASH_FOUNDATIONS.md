@@ -1241,8 +1241,69 @@ but not a new runtime operation or consumer-supplied sheaf field. Its complete
 internal endpoint derivation and non-collapse controls are retained in the
 CS-12 living plan and focused probes. The computational data remain the whole
 restriction, glue, transformation projections, and selected inverse arrows.
-Comparison with the rigid supplied sheaf facade, whole Hom universality, and
-the reflector adjunction remain downstream.
+
+The categorical-HIT eliminator is also whole in its seed.  For one selected
+target algebra `A_Y`, its recursor is a functor
+
+```text
+rec_func(A_Y) : Hom(P,Y) -> Hom(Completion(P),Y),
+rec_func(A_Y)[seed] = rec(A_Y,seed).
+```
+
+The existing constructor beta is retained as a narrow runtime computation;
+its functorial form is the whole higher beta
+
+```text
+precomp_unit o rec_func(A_Y) = id_Hom(P,Y).
+```
+
+At a topology-local target, locality selects the canonical target algebra and
+the categorical-HIT uniqueness clause is
+
+```text
+rec_func(canonical_algebra(Y)) o precomp_unit
+  = id_Hom(Completion(P),Y).
+```
+
+This eta law is intentionally local-target scoped: it does not assert that an
+arbitrary underlying map preserves an independently selected one-sided cover
+algebra.  The two whole laws construct
+
+```text
+Hom(Completion(P),Y) ≃ Hom(P,Y)
+```
+
+as `OmegaEquivAlong Cat_cat` with fixed forward map `precomp_unit`. Arrow
+action and naturality are those of the whole restriction and recursor
+functors, not external component squares.
+
+The Cat-valued fixed-site reflector is now assembled into the existing rigid
+sheaf facade rather than a parallel local-object category:
+
+```text
+Obj(Sheaf_cat(K,T,Cat_cat))
+  = Sigma P:Psh(K), IsTopologyLocalPsh(K,T,P),
+
+include(P,local) = P,
+sheafify_T(P) = (Completion_T(P), completion_is_local_T(P)).
+```
+
+The Hom categories and category operations are inherited from `Psh_cat(K)`.
+The reflector's whole action sends `f:P->Q` to the unique recursive extension
+of `unit_Q o f`; its action and naturality remain at one functor owner. The
+generic supplied capability is indexed by
+`Functor_cat(Op_cat(K),Cat_cat)`, so the adjunction is declared at that raw
+boundary while the scoped proof-time comparison retains `Psh_cat(K)` as the
+computational/public owner. No runtime category-head identification is added.
+
+At a local sheaf `Y`, the adjunction counit computes to recursion from
+`id_Y`. Recursor beta gives `counit o unit = id_Y`. Applying whole local eta
+to `unit o counit`, after the internally derived unit-precomposition path,
+gives the other cancellation. These arrows and paths construct the exact
+fixed-forward `OmegaEquivAlong` required by the existing
+`SheafificationCapability(K,T,Cat_cat)`. This completes fixed-site Cat-valued
+sheafification; it does not yet lift the reflector to CommRing-valued objects,
+prove left exactness, transport it to slices, or construct schemes.
 
 If strict equality later becomes too restrictive, a separate directed or
 pseudo/lax completion may retain whole categorical cells and coherence.
@@ -4513,6 +4574,12 @@ kernel and one-way library vocabulary.
 | internal Pédrot-style direct-cover sheaf structure | `DirectCoverSheafStructure K T X` |
 | total syntactic direct-cover sheaf | `DirectCoverSheaf K T` |
 | direct cover-completion presheaf and its internal sheaf package | `DirectCoverCompletionPsh K T P` / `direct_cover_completion_sheaf K T P` |
+| conventional locality of direct cover completion | `direct_cover_completion_is_topology_local K T P` |
+| functorial completion recursor in a seed | `direct_cover_completion_rec_func K T P Y AY` |
+| Hom universality into a topology-local target | `direct_cover_completion_hom_omega K T P Y local` |
+| Cat-valued local-sheaf facade | `CatValuedSheafData K T` / `Sheaf_cat K T Cat_cat` |
+| whole completion reflector and inclusion | `direct_cover_sheafification_func K T` / `cat_valued_sheaf_include_psh_func K T` |
+| constructed fixed-site sheafification capability | `direct_cover_sheafification_capability K T` |
 | global reflective ringed object with selected covering sieve | `ReflectiveCommRingedSpaceCover K` |
 | actual member arrow of that selected sieve | `ReflectiveCommRingedSpaceCoverChart P` |
 | factorization of one retained arrow through a selected chart | `CoverChartFactorization chart q` |

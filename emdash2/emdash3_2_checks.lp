@@ -21,6 +21,8 @@ require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
 require open emdash.emdash3_2_strict_pointwise_equivalences;
 require open emdash.emdash3_2_direct_cover_completion_locality;
+require open emdash.emdash3_2_direct_cover_completion_universality;
+require open emdash.emdash3_2_direct_cover_sheafification;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
 assert ⊢ τ Empty_grpd ≡ empty;
@@ -20017,6 +20019,185 @@ assert [K : Cat]
   @direct_cover_completion_is_topology_local K T P
   : τ (@IsTopologyLocalPsh K T (@DirectCoverCompletionPsh K T P));
 /* End of the CS-12q conventional direct-cover locality diagnostics. */
+
+// catalog-area: Direct-cover completion Hom universality
+// The functorial recursor selects the existing primitive recursor on objects.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Y : τ (@Psh K))
+  (AY : τ (@DirectCoverAlgebra K T Y))
+  (seed : τ (Hom (@Psh_cat K) P Y)) ⊢
+  @fapp0
+    (Hom_cat (@Psh_cat K) P Y)
+    (Hom_cat
+      (@Psh_cat K)
+      (@DirectCoverCompletionPsh K T P)
+      Y)
+    (@direct_cover_completion_rec_func K T P Y AY)
+    seed
+  ≡ @direct_cover_completion_rec K T P Y AY seed;
+
+// Whole unit beta is higher HIT computation, not a second runtime rule.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Y : τ (@Psh K))
+  (AY : τ (@DirectCoverAlgebra K T Y)) ⊢
+  @direct_cover_completion_rec_beta_func K T P Y AY
+  : τ (@=
+      (Hom
+        Cat_cat
+        (Hom_cat (@Psh_cat K) P Y)
+        (Hom_cat (@Psh_cat K) P Y))
+      (@comp_cat_fapp0
+        (Hom_cat (@Psh_cat K) P Y)
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y)
+        (Hom_cat (@Psh_cat K) P Y)
+        (@direct_cover_completion_unit_precomp_func K T P Y)
+        (@direct_cover_completion_rec_func K T P Y AY))
+      (@id Cat_cat (Hom_cat (@Psh_cat K) P Y)));
+
+// Local eta is the scoped categorical-HIT uniqueness principle.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Y : τ (@Psh K))
+  (local : τ (@IsTopologyLocalPsh K T Y)) ⊢
+  @direct_cover_completion_rec_eta_local_func K T P Y local
+  : τ (@=
+      (Hom
+        Cat_cat
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y)
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y))
+      (@comp_cat_fapp0
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y)
+        (Hom_cat (@Psh_cat K) P Y)
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y)
+        (@direct_cover_completion_rec_func
+          K T P Y (@topology_local_direct_cover_algebra K T Y local))
+        (@direct_cover_completion_unit_precomp_func K T P Y))
+      (@id Cat_cat
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y)));
+
+// Unit precomposition is the whole Hom equivalence into every local target.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Y : τ (@Psh K))
+  (local : τ (@IsTopologyLocalPsh K T Y)) ⊢
+  @direct_cover_completion_hom_omega K T P Y local
+  : τ (@OmegaEquivAlong
+      Cat_cat
+      (Hom_cat
+        (@Psh_cat K)
+        (@DirectCoverCompletionPsh K T P)
+        Y)
+      (Hom_cat (@Psh_cat K) P Y)
+      (@direct_cover_completion_unit_precomp_func K T P Y));
+/* End of the CS-12r direct-cover Hom-universality diagnostics. */
+
+// catalog-area: Constructed Cat-valued sheafification reflector
+// The existing rigid facade selects topology-local Cat-valued presheaves.
+assert [K : Cat]
+  (T : τ (@GrothTopology K)) ⊢
+  Obj (@Sheaf_cat K T Cat_cat)
+  ≡ @CatValuedSheafData K T;
+
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Q : τ (@Psh K))
+  (localP : τ (@IsTopologyLocalPsh K T P))
+  (localQ : τ (@IsTopologyLocalPsh K T Q)) ⊢
+  Hom_cat
+    (@Sheaf_cat K T Cat_cat)
+    (@cat_valued_sheaf_intro K T P localP)
+    (@cat_valued_sheaf_intro K T Q localQ)
+  ≡ Hom_cat (@Psh_cat K) P Q;
+
+// Inclusion forgets locality and completion lands back in the same facade.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  (local : τ (@IsTopologyLocalPsh K T P)) ⊢
+  @fapp0
+    (@Sheaf_cat K T Cat_cat)
+    (@Psh_cat K)
+    (@cat_valued_sheaf_include_psh_func K T)
+    (@cat_valued_sheaf_intro K T P local)
+  ≡ P;
+
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K)) ⊢
+  @fapp0
+    (@Psh_cat K)
+    (@Sheaf_cat K T Cat_cat)
+    (@direct_cover_sheafification_func K T)
+    P
+  ≡ @cat_valued_sheaf_intro
+      K T
+      (@DirectCoverCompletionPsh K T P)
+      (@direct_cover_completion_is_topology_local K T P);
+
+// The raw generic package index compares only at proof time.
+assert [K : Cat] ⊢
+  @eq_refl (Obj Cat_cat) (@Psh_cat K)
+  : τ (@=
+      (Obj Cat_cat)
+      (@Psh_cat K)
+      (@Functor_cat (Op_cat K) Cat_cat));
+
+assertnot [K : Cat] ⊢
+  @Psh_cat K
+  ≡ @Functor_cat (Op_cat K) Cat_cat;
+
+// The selected counit computes to recursion from the identity; the final
+// capability assertion below checks its exact generic-package projection.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (Y : τ (Obj (@Sheaf_cat K T Cat_cat))) ⊢
+  @direct_cover_sheafification_counit_at K T Y
+  ≡ @direct_cover_completion_rec
+      K T
+      (@cat_valued_sheaf_carrier K T Y)
+      (@cat_valued_sheaf_carrier K T Y)
+      (@topology_local_direct_cover_algebra
+        K T
+        (@cat_valued_sheaf_carrier K T Y)
+        (@cat_valued_sheaf_local K T Y))
+      (@id (@Psh_cat K) (@cat_valued_sheaf_carrier K T Y));
+
+// Both derived cancellation laws assemble the exact fixed-counit reflector.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (Y : τ (Obj (@Sheaf_cat K T Cat_cat))) ⊢
+  @direct_cover_sheafification_reflector_at K T Y
+  : τ (@OmegaEquivAlong
+      (@Sheaf_cat K T Cat_cat)
+      (@direct_cover_sheafification_reflected_object K T Y)
+      Y
+      (@direct_cover_sheafification_counit_at K T Y));
+
+assert [K : Cat]
+  (T : τ (@GrothTopology K)) ⊢
+  @direct_cover_sheafification_capability K T
+  : τ (@SheafificationCapability K T Cat_cat);
+/* End of the CS-12s constructed Cat-valued sheafification diagnostics. */
 
 // catalog-area: Set-carrier commutative-ring objects
 // Operation constructors expose all five fields without a primitive record.
