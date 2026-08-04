@@ -4887,6 +4887,33 @@ is locally checkpointed at `81edde8` (`feat: construct Cat-valued direct-cover
 sheafification`).  No further long aggregate is required for this unchanged
 snapshot, and the proof-time `Psh_cat` comparison must remain scoped.
 
+### 13.35 Persistent-goal completion audit — 2026-08-04
+
+The completion claim has been checked requirement by requirement against the
+current branch rather than inferred from the last passing probe.
+
+| Objective requirement | Authoritative current evidence | Verdict |
+| --- | --- | --- |
+| Dedicated worktree, branch, and baseline continuity | `HEAD=1ee45e3` on `goal/presheaves-sites-schemes-v3.2`; `3dd70fd` is an ancestor; the worktree is clean; the branch history from that baseline is linear with zero merge commits | Proved |
+| Direct whole-presheaf `eta/glue/silent` completion | `emdash3_2_direct_cover_completion_hit.lp` owns `DirectCoverCompletionPsh`, the whole unit, whole cover glue, the internally varying `glue_funcd`, and whole `silent_funcd`; `direct_cover_completion_sheaf` packages the result through `DirectCoverSheafStructure` | Proved |
+| Honest elimination into topology-local targets | `emdash3_2_direct_cover_completion_eliminator.lp` owns the unit/glue/silent-coherent algebra-map recursor and `direct_cover_completion_local_recursor_data`; topology locality selects its canonical algebra through `topology_local_direct_cover_algebra` | Proved |
+| Derived conventional locality | `emdash3_2_direct_cover_completion_locality.lp` constructs the internally natural retained-member comparison, strict pointwise-to-whole `OmegaEquivAlong`, `restriction o glue = id`, and finally `direct_cover_completion_is_topology_local` | Proved |
+| Whole Hom universality | `emdash3_2_direct_cover_completion_universality.lp` makes the recursor functorial in the seed, supplies whole unit beta plus topology-local eta/uniqueness, and constructs `direct_cover_completion_hom_omega` | Proved |
+| Functorial reflector, adjunction, and existing capability integration | `emdash3_2_direct_cover_sheafification.lp` realizes only `Sheaf_cat(K,T,Cat_cat)`, constructs its whole inclusion and completion reflector, computes unit/counit, derives both cancellations, and returns `direct_cover_sheafification_capability : SheafificationCapability(K,T,Cat_cat)` | Proved |
+| Scoped raw/rigid comparison without public-owner collapse | The final module has one proof-time `Psh_cat(K)`/`Functor_cat(Op_cat(K),Cat_cat)` comparison; central diagnostics prove the typed positive use and the negative runtime non-collapse | Proved |
+| Do not name the completion a sheafification before its gates | Commit order is completion algebra/recursor, internal questions/families, internal sheaf structure, retained-member locality, then `81edde8` for Hom universality and the final sheafification facade; earlier owners retain the neutral `DirectCoverCompletionPsh` name | Proved |
+| Keep direct HIT glue, adjunction-mate glue, and Cartier localization glue distinct | The owners remain respectively `direct_cover_completion_glue*`, `sheafification_glue`/`sheafification_unglue`, and `comm_ring_psh_localization_glue*`/`affine_localization_matching_glue*` in separate modules and types | Proved |
+| Independent supplied global `P1` validation | `emdash3_2_commutative_algebra_projective_line.lp` is the transparent total of an existing global binary site-relative scheme, its inherited actual overlap, and the Laurent owner; its reviewer is green; checkpoint `7241b00` remains an ancestor | Proved |
+| Keep graded `Proj`/general `P^n`, principal-BNat comparison, and atlas-first gluing deferred | No tracked Lambdapi declaration or source file for those facilities was added; the ledger explicitly leaves them in CS-12x/future goals and CS-08, while only the supplied `P1` source exists | Proved |
+| Whole internal action/naturality/coherence and SOP rule hygiene | Glue is a whole displayed functor, silent a whole displayed-functor path, reflector action a whole Hom functor, and strict pointwise closure constructs conventional locality. Strict LHS audit is clean for every changed source; the rejected broad unifier was replaced by the narrow represented-source comparison | Proved |
+| Proportional validation, synchronized registries, and local checkpoint | The catalog contains four Hom-universality and nine reflector checks; source/authority/check registries are synchronized; exact-current health has 162/162 exit-zero targets at snapshot `6807a3d6f75b8639e185ff06a1942e36187dcf843166b3989b35d0b0034cc334`; the measured warning delta is 1,017→1,029 critical pairs with replaceable-pattern advisories unchanged at 159; feature checkpoint is `81edde8` and ledger checkpoint is `1ee45e3` | Proved |
+
+All acceptance requirements in Section 1.1 and the persistent-goal launch
+objective are therefore satisfied.  The current goal ends here.  CommRing
+lifting, reflector left exactness, slice/base-change transport, graded `Proj`,
+and general standard `P^n` remain deliberately unstarted future goals rather
+than unfinished parts of this one.
+
 ## 14. Validation And Checkpoint Contract
 
 For every bounded source tranche:
