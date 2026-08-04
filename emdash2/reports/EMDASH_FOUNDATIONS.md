@@ -1204,11 +1204,45 @@ recursor; it is not the semantic owner of the sheaf structure.
 `DirectCoverSheaf(T)` is the transparent total of a presheaf and this
 structure. The primitive `DirectCoverCompletionPsh(T,P)` supplies its whole
 unit, recursive glue, and silent path and therefore inhabits that syntactic
-sheaf package. This does not yet identify it with the rigid supplied
-`Sheaf_cat(K,T,Cat_cat)` facade or with `IsTopologyLocalPsh`. The latter uses a
-conventional two-sided restriction equivalence; its missing opposite
-`restriction o glue = id` composite is a later comparison theorem, not an
-additional constructor required for the algebraic sheaf package.
+sheaf package. This package is still not definitionally identified with the
+rigid supplied `Sheaf_cat(K,T,Cat_cat)` facade. Conventional locality is now a
+separate derived comparison rather than a missing constructor.
+
+For each eligible question `q=(R,covers)`, canonical cover pullback, internal
+matching naturality, recursive glue, and silent derive the retained-member
+calculation
+
+```text
+restriction_q(glue_q(m))[V](p,member) = m[V](p,member).
+```
+
+One whole transformation `rho : restriction o glue => id_Matching` owns these
+components through ordinary, displayed, and fibre projection. The point
+component computes to `path_to_hom` of the displayed equation above.
+Pointwise path equivalences are then lifted through a generic strict
+pointwise-to-whole `OmegaEquivAlong` closure. That closure consumes an
+already-whole transformation, so its naturality is internal; it does not
+construct a transformation from a bare component family. The resulting path
+
+```text
+restriction_q o glue_q = id_Matching(q)
+```
+
+and the primitive whole `silent_q : glue_q o restriction_q = id_Section(q)`
+make restriction the fixed-forward equivalence required by
+`PshLocalAtOrdinarySieve`. Quantifying over `U`, `R`, and `covers` gives
+
+```text
+IsTopologyLocalPsh(K,T,DirectCoverCompletionPsh(K,T,P)).
+```
+
+The retained-member equality is an opaque proof owner in the active library,
+but not a new runtime operation or consumer-supplied sheaf field. Its complete
+internal endpoint derivation and non-collapse controls are retained in the
+CS-12 living plan and focused probes. The computational data remain the whole
+restriction, glue, transformation projections, and selected inverse arrows.
+Comparison with the rigid supplied sheaf facade, whole Hom universality, and
+the reflector adjunction remain downstream.
 
 If strict equality later becomes too restrictive, a separate directed or
 pseudo/lax completion may retain whole categorical cells and coherence.

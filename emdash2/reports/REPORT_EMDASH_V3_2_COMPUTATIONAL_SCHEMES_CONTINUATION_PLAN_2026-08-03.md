@@ -1686,7 +1686,7 @@ global-first record and its phrase *small/big-site equivalence*.
 | CS-09 | Small-site restriction and affine/principal-open basis comparison | Later | Concrete small-site consumer |
 | CS-10 | Semantic `Scheme_cat`, `Spec_func`, functor-of-points compact opens, and presented-scheme realization | Research continuation | Stable object/morphism interfaces, CS-06, and a genuine open classifier/comparison |
 | CS-11 | Point-free support versus stalk-local-ring comparison | Later theorem | Support capability and suitable point/stalk infrastructure |
-| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the Pédrot-directed `eta/glue/silent` signature, whole glue correction, and unit/glue/silent-coherent recursor are checkpointed through `deeab6d`. Eligible questions and whole varying extension/restriction/glue are checkpointed through `98fe2c6`; CS-D-053's canonical extension-pullback comparison is checkpointed at `337a638`; the internal Pédrot sheaf package is checkpointed at `f119391`. The active underlying tranche selects runtime represented-family reindex accumulation for ordinary `Pullback_catd`; makes generic composition/pullback along `Sigma_proj1_func` proof-time comparisons with the explicitly selected `Sigma_proj1_pullback_catd`; retains proof-time represented comparisons at that stable owner; adds whole proof-time `hom_int`/`hom_con_int` duality; and moves recursive dependent-variable computation to the internal `section_weaken_funcd` owner. The subsequent retained-member probes now derive the whole second inverse `restriction o glue = id_Matching`, lift it through strict fibre/displayed/ordinary fixed-forward `OmegaEquivAlong`, and combine it with whole `silent` to construct `IsTopologyLocalPsh(DirectCoverCompletionPsh)`. The final integration probe is green in about 3.5 seconds with zero warnings; no long aggregate was rerun. The principal-BNat bridge remains frozen. | Promote only the owner-minimal retained endpoint, whole transformation, and strict pointwise-closure surface; do not copy the exploratory ladder wholesale. Then expose the constructed topology-local sheaf through a scoped rigid-facade comparison, establish whole Hom uniqueness/universality and the fixed-site reflector/adjunction, and instantiate `SheafificationCapability`. Follow with CommRing lift and left exactness while keeping the independent `Proj` lane active. |
+| CS-12 | Constructed native categorical-HIT/sheafification research | The topology-to-local-object tranche is checkpointed at `5e7505e`; the reusable sequential one-map HIT is checkpointed at `451db48`; the Pédrot-directed `eta/glue/silent` signature, whole glue correction, and unit/glue/silent-coherent recursor are checkpointed through `deeab6d`. Eligible questions and whole varying extension/restriction/glue are checkpointed through `98fe2c6`; CS-D-053's canonical extension-pullback comparison is checkpointed at `337a638`; the internal Pédrot sheaf package is checkpointed at `f119391`; the generic retained-member substitution substrate is checkpointed at `552516c`. The active owner-minimal promotion now provides generic strict ordinary/displayed pointwise-to-whole `OmegaEquivAlong`, one whole restriction/glue transformation tower, the second inverse `restriction o glue = id_Matching`, and `IsTopologyLocalPsh(DirectCoverCompletionPsh)`. New module and central diagnostic targets are focused-green with zero warnings, and strict LHS audits are clean; no long aggregate was rerun. The principal-BNat bridge remains frozen. | Audit the precise scoped comparison between the constructed topology-local total and the opaque supplied `Sheaf_cat` facade; do not invent a definitional coercion. Establish whole Hom uniqueness/universality and the fixed-site reflector/adjunction, then instantiate or compare with `SheafificationCapability`. Follow with CommRing lift and left exactness while keeping the independent `Proj` lane active. |
 | CS-12x | Principal-BNat/telescope comparison | Deferred independent generic-localization example. The telescope implementation remains checkpointed and valid; its ignored factor-predicate/ordinary-sieve bridge is not on the scheme or direct-sheaf critical path. | A future concrete consumer requiring comparison of higher principal sieves with ordinary topology |
 | CS-12b | Slice/base-change and sheafified Beck--Chevalley theorem | Separate from constructing the reflector | Induced slice topology plus selected site morphism/comorphism or locally exact square |
 
@@ -4566,6 +4566,36 @@ temporary endpoint aliases and failed normal-form candidates remain ignored
 diagnostics.  In particular, no giant endpoint unifier, no broad
 `tapp1_fapp0` duplicate, no automatic Sigma eta, and no external component
 coherence field is authorized by the green result.
+
+The owner-minimal promotion now implements that decision in two new modules.
+
+- `emdash3_2_strict_pointwise_equivalences.lp` contains the reusable ordinary
+  and displayed strict pointwise-to-whole closure. Its rigid inverse owners
+  compute at components; generic whole cancellation paths are the explicit
+  assembly boundary forced by primitive `Transf`/`Transfd` classifiers.
+- `emdash3_2_direct_cover_completion_locality.lp` contains the conventional
+  restriction/glue comparison. It retains the fully audited
+  retained-member equation as one opaque proof owner, projects it from one
+  whole `rho`, performs the three transparent fixed-forward equivalence lifts,
+  and constructs `IsTopologyLocalPsh(DirectCoverCompletionPsh)`.
+
+The opaque retained equation is not a new recursive constructor, rewrite, or
+consumer field. Equality proof terms do not carry the runtime section data;
+the complete derivation from canonical pullback, matching naturality, glue,
+and silent remains recorded above and executable in the ignored focused
+probes. The active computational surface is the whole transformation tower,
+its component beta, its selected inverse transformations, and the existing
+restriction/glue functors. Replacing the opaque theorem with a shorter generic
+proof term later would not change the public interface.
+
+Both active modules pass focused owner-position checks with zero warnings.
+The central diagnostics import them and verify ordinary/displayed inverse
+projection, retained-member pointwise projection, the whole second-inverse
+path, and topology locality
+(`logs/probes/emdash3_2_checks-20260804-095428.log`). Strict LHS audits report
+zero unreviewed compound slots in either new module. No aggregate health/CI
+run is used at this stage; that remains reserved for the completed bounded
+integration checkpoint.
 
 ## 14. Validation And Checkpoint Contract
 

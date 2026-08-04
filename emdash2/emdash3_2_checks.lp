@@ -19,6 +19,8 @@ require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_f
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
+require open emdash.emdash3_2_strict_pointwise_equivalences;
+require open emdash.emdash3_2_direct_cover_completion_locality;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
 assert ⊢ τ Empty_grpd ≡ empty;
@@ -19935,6 +19937,86 @@ assert ⊢
   @chaotic_groth_topology Terminal_cat
   : τ (@GrothTopology Terminal_cat);
 /* End of the PSSS-04a direct-topology diagnostics. */
+
+// catalog-area: Strict pointwise equivalences and direct-cover locality
+// The ordinary closure exposes the selected inverse component computationally.
+assert [A B : Cat]
+  [F G : τ (@Functor A B)]
+  (eta : τ (@Transf A B F G))
+  (u : τ (@StrictTransfPointwiseOmegaAlong A B F G eta))
+  (x : τ (Obj A)) ⊢
+  @tapp0_fapp0 A B G F x
+    (@strict_transf_pointwise_left_inverse A B F G eta u)
+  ≡ @omega_equiv_along_left_inv
+      B
+      (@fapp0 A B F x)
+      (@fapp0 A B G x)
+      (@tapp0_fapp0 A B F G x eta)
+      (u x);
+
+// The displayed closure exposes the selected inverse fibre transformation.
+assert [K : Cat]
+  [E D : τ (@Catd K)]
+  [FF GG : τ (@Functord K E D)]
+  (eta : τ (@Transfd K E D FF GG))
+  (u : τ (@StrictTransfdPointwiseOmegaAlong K E D FF GG eta))
+  (x : τ (Obj K)) ⊢
+  @tdapp0_fapp0 K E D GG FF x
+    (@strict_transfd_pointwise_left_inverse K E D FF GG eta u)
+  ≡ @omega_equiv_along_left_inv
+      (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D x))
+      (@Fibre_func K E D FF x)
+      (@Fibre_func K E D GG x)
+      (@tdapp0_fapp0 K E D FF GG x eta)
+      (u x);
+
+// Retained-member pointwise evidence is projected from the whole rho tower.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  [V U : τ (@Obj K)]
+  (p : τ (@Hom K V U))
+  (q : τ (@DirectCoverQuestionData K T U))
+  (member : τ (@SieveMembership
+      K U (@direct_cover_question_sieve K T U q) (Struct_sigma V p)))
+  (m : τ (Hom
+      (@Psh_cat K)
+      (@direct_cover_question_extension_psh K T U q)
+      (@DirectCoverCompletionPsh K T P))) ⊢
+  (@direct_cover_completion_restriction_glue_fibre_pointwise_omega
+    K T P V U q m)
+    (Struct_sigma p member)
+  ≡ @direct_cover_completion_restriction_glue_member_omega
+      K T P V U p q member m;
+
+// The second inverse and whole locality have their conventional public types.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  [U : τ (@Obj K)]
+  (q : τ (@DirectCoverQuestionData K T U)) ⊢
+  @direct_cover_completion_restriction_glue_path K T P U q
+  : τ (@=
+      (Obj (@Functor_cat
+        (@DirectCoverMatching_cat
+          K U (@direct_cover_question_sieve K T U q)
+          (@DirectCoverCompletionPsh K T P))
+        (@DirectCoverMatching_cat
+          K U (@direct_cover_question_sieve K T U q)
+          (@DirectCoverCompletionPsh K T P))))
+      (@direct_cover_completion_restriction_glue_func K T P U q)
+      (@id
+        Cat_cat
+        (@DirectCoverMatching_cat
+          K U (@direct_cover_question_sieve K T U q)
+          (@DirectCoverCompletionPsh K T P))));
+
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K)) ⊢
+  @direct_cover_completion_is_topology_local K T P
+  : τ (@IsTopologyLocalPsh K T (@DirectCoverCompletionPsh K T P));
+/* End of the CS-12q conventional direct-cover locality diagnostics. */
 
 // catalog-area: Set-carrier commutative-ring objects
 // Operation constructors expose all five fields without a primitive record.

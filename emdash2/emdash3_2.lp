@@ -8067,6 +8067,22 @@ unif_rule @hom_precomp_along_fapp0 $A $B $F $Z $W $X $h $g
       (@fapp1_fapp0 $A $B $F $W $X $h)
   ↪ [ tt ≡ tt ];
 
+/*
+  Proof-time raw-composition reading after the functor-action projection has
+  already reduced to a rigid head.  The existing rule above owns the generic
+  presentation.  This projection-order companion verifies the source,
+  target, and selected action in side conditions; runtime retains the stable
+  precomposition owner.
+*/
+unif_rule
+  @hom_precomp_along_fapp0 $A $B $F $Z $W $X $p $g
+  ≡ @comp_fapp0 $B $FW $FX $Z $g $h
+  ↪ [
+      (@fapp0 $A $B $F $W) ≡ $FW;
+      (@fapp0 $A $B $F $X) ≡ $FX;
+      (@fapp1_fapp0 $A $B $F $W $X $p) ≡ $h
+    ];
+
 // Proof-time identity-family comparison with ordinary raw composition.
 unif_rule @hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $Z $W $X $h $g
   ≡ @comp_fapp0
@@ -8505,6 +8521,24 @@ rule @fapp1_fapp0 _ _ (@hom_con_int $A $B $F) $W $X $f
 // Applying the target-action telescope at f yields the capped action.
 rule fapp0 (@hom_con_int_postcomp_tele_func $A $B $F $W $X) $f
   ↪ @hom_con_int_postcomp_func $A $B $F $W $X $f;
+
+/*
+  Proof-time action projection of the whole opposite comparison
+
+    hom_int(A^op,B^op,F^op) = hom_con_int(A,B,F).
+
+  The two capped action heads remain distinct runtime owners.  Variance and
+  opposite-functor recovery stay in side conditions rather than relying on
+  transitive unification through their whole parents.
+*/
+unif_rule
+  @hom_int_precomp_func $A0 $B0 $F0 $Y $X $p
+  ≡ @hom_con_int_postcomp_func $A $B $F $Y $X $p
+  ↪ [
+      (Op_cat $A) ≡ $A0;
+      (Op_cat $B) ≡ $B0;
+      $F0 ≡ (@Op_func $B $A $F)
+    ];
 
 /*
   Ordinary internal-hom computations.

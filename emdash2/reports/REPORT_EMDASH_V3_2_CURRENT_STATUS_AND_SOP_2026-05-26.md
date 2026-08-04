@@ -46,6 +46,23 @@ detailed probe evidence.
   pointwise; generator inclusion and leastness compute by application. The
   module provides no inductive cover derivations, truncation/HIT, decision
   procedure, affine specialization, sheafification, or scheme.
+- `emdash3_2_strict_pointwise_equivalences.lp`: generic strict
+  pointwise-to-whole fixed-forward equivalence assembly for ordinary and
+  displayed transformations. The forward transformation already owns
+  naturality internally. Rigid inverse transformations compute to the
+  selected pointwise inverse arrows, and whole cancellation paths complete
+  `OmegaEquivAlong` in the corresponding functor category. The module does
+  not assemble incoherent arrow families, invert arbitrary lax
+  transformations, or add generic functor extensionality.
+- `emdash3_2_direct_cover_completion_locality.lp`: downstream conventional
+  comparison for the direct whole-presheaf cover-completion HIT. A derived
+  retained-member theorem is projected through one whole transformation
+  `restriction o glue => id`; strict pointwise closure supplies the second
+  functor equality. Together with the HIT's whole silent law, this constructs
+  `IsTopologyLocalPsh(DirectCoverCompletionPsh)`. The module does not yet
+  identify the syntactic direct-cover sheaf with the rigid `Sheaf_cat` facade,
+  prove whole Hom universality, assemble the reflector/adjunction, lift to
+  CommRing values, or prove left exactness.
 - `emdash3_2_ringed_sites.lp`: downstream one-way, rule-free supplied
   reflective-sheafification layer. A rigid topology- and value-category-indexed
   sheaf classifier is paired with a transparent capability carrying whole

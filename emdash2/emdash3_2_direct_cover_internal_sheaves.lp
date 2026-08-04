@@ -17,9 +17,10 @@
   This is the categorical analogue of Pédrot's algebraic `isSh` signature and
   is sufficient to package the output of the direct cover-completion HIT as a
   syntactic direct-cover sheaf.  It is deliberately not definitionally
-  identified with the separately supplied rigid `Sheaf_cat` facade or with
-  `IsTopologyLocalPsh`, whose conventional two-sided restriction-equivalence
-  formulation remains a later comparison theorem.
+  identified with the separately supplied rigid `Sheaf_cat` facade.
+  Conventional two-sided `IsTopologyLocalPsh` for the completion is derived
+  downstream in `emdash3_2_direct_cover_completion_locality.lp`; it is not an
+  additional field of this algebraic sheaf structure.
 */
 
 require open emdash.emdash3_2_direct_cover_question_families;

@@ -141,11 +141,30 @@ path. These constructors transparently inhabit `DirectCoverSheafStructure`
 and package the output as a syntactic `DirectCoverSheaf`; the canonical
 direct-cover algebra and pointwise glue/silent are derived forgetful
 observations. Generic whole strict `Functord` naturality supplies canonical
-pullback substitution internally. It does not yet claim the opposite
-restriction-after-glue comparison, `IsTopologyLocalPsh`, the rigid
-`Sheaf_cat` facade, whole Hom universality, a functorial reflector, CommRing
-lift, or left exactness. A
-dialogue/lax completion remains separately consumer-gated.
+pullback substitution internally. The opposite restriction/glue law and
+conventional locality live in the subsequent comparison module. It does not
+itself claim the rigid `Sheaf_cat` facade, whole Hom universality, a functorial
+reflector, CommRing lift, or left exactness. A dialogue/lax completion remains
+separately consumer-gated.
+`emdash3_2_strict_pointwise_equivalences.lp` is the generic strict assembly
+boundary used by the conventional comparison. Given one already-whole
+ordinary or displayed transformation and pointwise fixed-forward
+`OmegaEquivAlong` evidence, it constructs whole inverse transformations with
+computing component projections and whole cancellation paths. Consumers do
+not supply naturality squares. The module does not add generic functor
+extensionality, assemble incoherent component families, or invert arbitrary
+lax transformations.
+`emdash3_2_direct_cover_completion_locality.lp` derives the conventional
+restriction equivalence for the direct completion. The retained-member
+calculation gives
+`restriction(glue(m))(p,member)=m(p,member)`; one rigid whole transformation
+projection tower internalizes those components. Strict pointwise closure then
+gives `restriction o glue = id_Matching`, which combines with the HIT's whole
+`silent : glue o restriction = id_Section` to construct
+`IsTopologyLocalPsh(DirectCoverCompletionPsh)`. This settles conventional
+covering-sieve locality, but not yet whole Hom universality, the fixed-site
+reflector/adjunction, rigid-facade realization, CommRing lift, or left
+exactness.
 `emdash3_2_direct_cover_completion_eliminator.lp` is the first nondependent
 recursor boundary.  It defines whole direct-cover algebra maps, including
 glue-functor preservation and higher silent-path coherence.  Its primitive
@@ -153,9 +172,10 @@ extension has narrow runtime beta on the whole unit and pointwise recursive
 glue constructors; whole glue preservation and silent beta remain internal
 equality evidence. Topology-local targets enter through the existing
 locality-to-algebra conversion; internal direct-cover sheaf targets enter
-through their single forgetful algebra projection. It does not yet derive the
-opposite restriction-after-glue comparison, locality of the completion, whole
-Hom uniqueness, a functorial reflector, or `SheafificationCapability`.
+through their single forgetful algebra projection. Conventional locality of
+the completion is supplied by the comparison module above. It does not yet
+derive whole Hom uniqueness, a functorial reflector, or
+`SheafificationCapability`.
 `emdash3_2_telescope_localization_hit.lp` is the first explicit per-object
 categorical-HIT localization boundary. For an endomap `s:A->A`, it constructs
 the set-truncated sequential telescope with computing point induction,
