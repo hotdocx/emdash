@@ -350,7 +350,7 @@ function App() {
           </div>
           <div><strong>4</strong><span>binder modes</span></div>
           <div><strong>3</strong><span>evidence panels</span></div>
-          <div><strong>199</strong><span>book pages</span></div>
+          <div><strong>299</strong><span>book pages</span></div>
           <div><strong>Client-side</strong><span>published runtime</span></div>
         </section>
 
@@ -675,12 +675,12 @@ function App() {
             >
               <span>Overview paper</span>
               <strong>Read the concise architecture and evidence story</strong>
-              <small>Approximately 16 pages · PDF ↗</small>
+              <small>17 pages · PDF ↗</small>
             </a>
             <a href={emdash.EMDASH_BOOK_URL} target="_blank" rel="noreferrer">
               <span>Development book</span>
               <strong>Follow the theorem-led mathematical programme</strong>
-              <small>199 pages · PDF ↗</small>
+              <small>299 pages · PDF ↗</small>
             </a>
             <a
               href="https://github.com/hotdocx/emdash/blob/main/emdash2/emdash3_2.lp"

@@ -809,6 +809,14 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
             /CORE_BROWSER_REVIEWER_PRESETS\.length \?\? 12/u
         );
         assert.match(app, /reviewed examples/u);
+        assert.match(
+            app,
+            /<strong>299<\/strong><span>book pages<\/span>/u
+        );
+        assert.match(app, /17 pages · PDF ↗/u);
+        assert.match(app, /299 pages · PDF ↗/u);
+        assert.doesNotMatch(app, /199 pages/u);
+        assert.doesNotMatch(app, /Approximately 16 pages/u);
         assert.match(app, /qualified finite/u);
         assert.match(rootReadme, /depth-generic finite/u);
         assert.match(rootReadme, /general mixed\s+introduction\/curry/u);
