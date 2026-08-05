@@ -15,10 +15,14 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
+require open emdash.emdash3_2_strict_pointwise_equivalences;
+require open emdash.emdash3_2_direct_cover_completion_locality;
+require open emdash.emdash3_2_direct_cover_completion_universality;
+require open emdash.emdash3_2_direct_cover_sheafification;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
 assert ⊢ τ Empty_grpd ≡ empty;
@@ -6605,6 +6609,36 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (y : τ (Obj B)) ⊢
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A)) (x : τ (Obj (Op_cat B))) ⊢
   @fapp0 (Op_cat B) Cat_cat (@hom_con A W B F) x ≡ Hom_cat A (@fapp0 B A F x) W;
 
+// Opposite covariant and contravariant represented families compare
+// proof-time in either equation presentation; neither is a runtime fold.
+assert [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A)) ⊢
+  @eq_refl
+    (Obj (@Catd_cat (Op_cat B)))
+    (@hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W)
+  : τ (@=
+      (Obj (@Catd_cat (Op_cat B)))
+      (@hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W)
+      (@hom_con A W B F));
+
+assert [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A)) ⊢
+  @eq_refl
+    (Obj (@Catd_cat (Op_cat B)))
+    (@hom_con A W B F)
+  : τ (@=
+      (Obj (@Catd_cat (Op_cat B)))
+      (@hom_con A W B F)
+      (@hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W));
+
+assertnot [A B : Cat]
+  (F : τ (Functor B A))
+  (W : τ (Obj A)) ⊢
+  @hom_ (Op_cat A) (Op_cat B) (@Op_func B A F) W
+  ≡ @hom_con A W B F;
+
 // Primitive contravariant represented-family action.
 assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   (X Y : τ (Obj B)) ⊢
@@ -9954,61 +9988,25 @@ symbol Displayed_chain_A_after_B_check
             Displayed_chain_K_check
             Displayed_chain_A_check
             Displayed_chain_A_check))))
-≔ @fapp0
-    (@Functord_cat
+≔ @sigma_functord_sec
+    (@Sigma_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check)
+    Displayed_chain_B_check
+    (@Sigma_proj1_pullback_catd
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_A_check)
+    (@section_weaken_funcd
       (@Sigma_cat
         Displayed_chain_K_check
         Displayed_chain_A_check)
-      (@Const_catd
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Terminal_cat)
+      Displayed_chain_B_check
       (@Sigma_proj1_pullback_catd
         Displayed_chain_K_check
         Displayed_chain_A_check
-        Displayed_chain_A_check))
-    (@Functord_cat
-      (@Sigma_cat
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check)
-      (@Const_catd
-        (@Sigma_cat
-          (@Sigma_cat
-            Displayed_chain_K_check
-            Displayed_chain_A_check)
-          Displayed_chain_B_check)
-        Terminal_cat)
-      (@Sigma_proj1_pullback_catd
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check
-        (@Sigma_proj1_pullback_catd
-          Displayed_chain_K_check
-          Displayed_chain_A_check
-          Displayed_chain_A_check)))
-    (@section_pullback_func
-      (@Sigma_cat
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check)
-      (@Sigma_cat
-        Displayed_chain_K_check
         Displayed_chain_A_check)
-      (@Sigma_proj1_func
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check)
-      (@Sigma_proj1_pullback_catd
-        Displayed_chain_K_check
-        Displayed_chain_A_check
-        Displayed_chain_A_check))
-    Displayed_chain_A_var_check;
+      Displayed_chain_A_var_check);
 
 symbol Displayed_chain_B_var_check
   : τ (Obj
@@ -10316,20 +10314,11 @@ assert ⊢
       Displayed_chain_K_check
       Displayed_chain_A_check
       Displayed_chain_A_check)
-    (@section_pullback_sec
-      (@Sigma_cat
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check)
+    (@section_weaken_funcd
       (@Sigma_cat
         Displayed_chain_K_check
         Displayed_chain_A_check)
-      (@Sigma_proj1_func
-        (@Sigma_cat
-          Displayed_chain_K_check
-          Displayed_chain_A_check)
-        Displayed_chain_B_check)
+      Displayed_chain_B_check
       (@Sigma_proj1_pullback_catd
         Displayed_chain_K_check
         Displayed_chain_A_check
@@ -10385,6 +10374,87 @@ assertnot ⊢
       Displayed_chain_A_check
       Displayed_chain_D_check
       Displayed_chain_FF_check;
+
+// The stable Sigma uncurrying wrapper varies as one ordinary functor.  Its
+// generic arrow action carries displayed-transfor naturality internally.
+assert ⊢
+  @sigma_functord_sec_func
+    Displayed_chain_K_check
+    Displayed_chain_A_check
+    Displayed_chain_D_check
+  : τ (@Functor
+      (@Functord_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check
+        Displayed_chain_D_check)
+      (@Pi_cat
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        (@Sigma_proj1_pullback_catd
+          Displayed_chain_K_check
+          Displayed_chain_A_check
+          Displayed_chain_D_check)));
+
+assert ⊢
+  @fapp0
+    (@Functord_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_D_check)
+    (@Pi_cat
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      (@Sigma_proj1_pullback_catd
+        Displayed_chain_K_check
+        Displayed_chain_A_check
+        Displayed_chain_D_check))
+    (@sigma_functord_sec_func
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_D_check)
+    Displayed_chain_FF_check
+  ≡ @sigma_functord_sec
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_D_check
+      Displayed_chain_FF_check;
+
+// The existing whole functorial bridge retains its arrow; projecting that
+// arrow at (k,r) computes to the original displayed component eta[k][r].
+assert [K : Cat]
+  (R D : τ (Catd K))
+  (FF GG : τ (Functord R D))
+  (eta : τ (Transfd FF GG))
+  (k : τ (Obj K))
+  (r : τ (Obj (Fibre_cat R k))) ⊢
+  @tapp0_fapp0
+    Terminal_cat
+    (Fibre_cat D k)
+    _ _
+    Terminal_obj
+    (@tdapp0_fapp0
+      (@Sigma_cat K R)
+      (@Const_catd (@Sigma_cat K R) Terminal_cat)
+      (@Sigma_proj1_pullback_catd K R D)
+      (@sigma_functord_sec K R D FF)
+      (@sigma_functord_sec K R D GG)
+      (Struct_sigma k r)
+      (@fapp1_fapp0
+        (@Functord_cat K R D)
+        (@Pi_cat
+          (@Sigma_cat K R)
+          (@Sigma_proj1_pullback_catd K R D))
+        (@sigma_functord_sec_func K R D)
+        FF GG eta))
+  ≡ @tapp0_fapp0
+      (Fibre_cat R k)
+      (Fibre_cat D k)
+      (@Fibre_func K R D FF k)
+      (@Fibre_func K R D GG k)
+      r
+      (@tdapp0_fapp0 K R D FF GG k eta);
 
 // catalog-area: auto
 assert [A B : Cat] (F : τ (Functor A B)) (x : τ (Obj A)) ⊢
@@ -13245,6 +13315,21 @@ assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B))
     a
     ≡ @piapp0 B E s (@fapp0 A B F a);
 
+// Explicit displayed weakening replaces the former automatic Sigma-pullback
+// runtime specialization and retains literal recursive-variable computation.
+assert [K : Cat]
+  (R E : τ (Catd K))
+  (s : τ (Obj (@Pi_cat K E)))
+  (k : τ (Obj K))
+  (r : τ (Obj (Fibre_cat R k))) ⊢
+  @fapp0
+    (Fibre_cat R k)
+    (Fibre_cat E k)
+    (@tapp0_fapp0 K Cat_cat R E k
+      (@section_weaken_funcd K R E s))
+    r
+  ≡ @piapp0 K E s k;
+
 assert [A B : Cat] (F : τ (Functor A B)) (E : τ (Catd B)) ⊢
   @tapp0_fapp0
     (@Catd_cat B)
@@ -13355,9 +13440,45 @@ assert [K : Cat]
 assert [K : Cat] (E : τ (Catd K)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢
   fapp0 (Sigma_proj1_func E) (Struct_sigma k u) ≡ k;
 
+// Both generic Sigma-projection presentations compare with the explicit
+// stable owner only at proof time.
 assert [K : Cat] (R D : τ (Catd K)) ⊢
-  @Pullback_catd (@Sigma_cat K R) K D (@Sigma_proj1_func K R)
-    ≡ @Sigma_proj1_pullback_catd K R D;
+  @eq_refl
+    (Obj (@Catd_cat (@Sigma_cat K R)))
+    (@comp_cat_fapp0
+      (@Sigma_cat K R) K Cat_cat D
+      (@Sigma_proj1_func K R))
+  : τ (@=
+      (Obj (@Catd_cat (@Sigma_cat K R)))
+      (@comp_cat_fapp0
+        (@Sigma_cat K R) K Cat_cat D
+        (@Sigma_proj1_func K R))
+      (@Sigma_proj1_pullback_catd K R D));
+
+assertnot [K : Cat] (R D : τ (Catd K)) ⊢
+  @comp_cat_fapp0
+    (@Sigma_cat K R) K Cat_cat D
+    (@Sigma_proj1_func K R)
+  ≡ @Sigma_proj1_pullback_catd K R D;
+
+assert [K : Cat] (R D : τ (Catd K)) ⊢
+  @eq_refl
+    (Obj (@Catd_cat (@Sigma_cat K R)))
+    (@Pullback_catd
+      (@Sigma_cat K R) K D
+      (@Sigma_proj1_func K R))
+  : τ (@=
+      (Obj (@Catd_cat (@Sigma_cat K R)))
+      (@Pullback_catd
+        (@Sigma_cat K R) K D
+        (@Sigma_proj1_func K R))
+      (@Sigma_proj1_pullback_catd K R D));
+
+assertnot [K : Cat] (R D : τ (Catd K)) ⊢
+  @Pullback_catd
+    (@Sigma_cat K R) K D
+    (@Sigma_proj1_func K R)
+  ≡ @Sigma_proj1_pullback_catd K R D;
 
 assert [K : Cat] (R D : τ (Catd K))
   (k : τ (Obj K))
@@ -15778,6 +15899,68 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (p : τ (Hom K x y)) ⊢
   @functord_transport_func K E D FF x y p
     ≡ @tapp1_fapp0 K Cat_cat E D x y FF p;
+
+// Whole strict naturality is proof-time comparison at full tapp1_func level.
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) ⊢
+  @functord_transport_lhs_tele_agrees K E D FF x y
+  : τ (@=
+      (Hom
+        Cat_cat
+        (@Hom_cat K x y)
+        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+      (@functord_transport_lhs_tele_func K E D FF x y)
+      (@tapp1_func K Cat_cat E D x y FF));
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) ⊢
+  @functord_transport_rhs_tele_agrees K E D FF x y
+  : τ (@=
+      (Hom
+        Cat_cat
+        (@Hom_cat K x y)
+        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
+      (@functord_transport_rhs_tele_func K E D FF x y)
+      (@tapp1_func K Cat_cat E D x y FF));
+
+// Evaluation at p derives both fixed-arrow comparisons.
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @functord_transport_lhs_agrees K E D FF x y p
+  : τ (@=
+      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_func K E D FF x y p));
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @functord_transport_rhs_agrees K E D FF x y p
+  : τ (@=
+      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+      (@functord_transport_rhs_func K E D FF x y p)
+      (@functord_transport_func K E D FF x y p));
+
+assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @functord_transport_strict_naturality K E D FF x y p
+  : τ (@=
+      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_rhs_func K E D FF x y p));
+
+// Proof-time joins do not orient either full route at runtime.
+assertnot [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) ⊢
+  @functord_transport_lhs_tele_func K E D FF x y
+  ≡ @tapp1_func K Cat_cat E D x y FF;
+
+assertnot [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) ⊢
+  @functord_transport_rhs_tele_func K E D FF x y
+  ≡ @tapp1_func K Cat_cat E D x y FF;
 
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
@@ -20962,3 +21145,3251 @@ assert [K : Cat] (E : τ (Catd K))
         (@piapp0 K E s x)
         y
         (@piapp0 K E s y);
+
+// catalog-area: Cat-valued presheaf facade and restriction
+// The facade computes only through Obj/Hom and compares with Catd at proof time.
+assert [K : Cat] ⊢
+  Obj (@Psh_cat K)
+  ≡ Obj (@Catd_cat (Op_cat K));
+
+assert [K : Cat] (P Q : τ (Psh K)) ⊢
+  Hom_cat (@Psh_cat K) P Q
+  ≡ @Functord_cat (Op_cat K) P Q;
+
+assert [K : Cat] ⊢
+  Psh K
+  ≡ Obj (@Catd_cat (Op_cat K));
+
+// Direct proof-time comparison at an abstract base.
+assert [K : Cat] ⊢
+  @eq_refl Cat_grpd (@Psh_cat K)
+  : τ (@= Cat_grpd
+      (@Psh_cat K)
+      (@Catd_cat (Op_cat K)));
+
+// The same direct comparison survives one visible opposite.
+assert [K : Cat] ⊢
+  @eq_refl Cat_grpd (@Psh_cat (Op_cat K))
+  : τ (@= Cat_grpd
+      (@Psh_cat (Op_cat K))
+      (@Catd_cat K));
+
+// Opposite involution does not obstruct the nested-opposite presentation.
+assert [K : Cat] ⊢
+  @eq_refl Cat_grpd (@Psh_cat (Op_cat (Op_cat K)))
+  : τ (@= Cat_grpd
+      (@Psh_cat (Op_cat (Op_cat K)))
+      (@Catd_cat (Op_cat K)));
+
+// The proof-time comparison does not erase the runtime facade.
+assertnot [K : Cat] ⊢
+  @Psh_cat K
+  ≡ @Catd_cat (Op_cat K);
+
+// Nor does it identify an abstract base with its opposite.
+assertnot [K : Cat] ⊢
+  @eq_refl Cat_grpd (@Psh_cat K)
+  : τ (@= Cat_grpd
+      (@Psh_cat K)
+      (@Catd_cat K));
+
+assert [A B : Cat] (F : τ (Functor A B)) ⊢
+  @Psh_pullback_func A B F
+  : τ (Functor (@Psh_cat B) (@Psh_cat A));
+
+// Restriction object action is the existing Catd pullback along F^op.
+assert [A B : Cat]
+  (F : τ (Functor A B))
+  (P : τ (Psh B)) ⊢
+  @fapp0
+    (@Psh_cat B)
+    (@Psh_cat A)
+    (@Psh_pullback_func A B F)
+    P
+  ≡ @Pullback_catd
+      (Op_cat A)
+      (Op_cat B)
+      P
+      (@Op_func A B F);
+
+// Its arrow action is inherited from the one generic functor-action owner.
+assert [A B : Cat]
+  (F : τ (Functor A B))
+  (P Q : τ (Psh B))
+  (eta : τ (@Functord (Op_cat B) P Q)) ⊢
+  @fapp1_fapp0
+    (@Psh_cat B)
+    (@Psh_cat A)
+    (@Psh_pullback_func A B F)
+    P Q eta
+  : τ (@Functord
+      (Op_cat A)
+      (@Pullback_catd (Op_cat A) (Op_cat B) P (@Op_func A B F))
+      (@Pullback_catd (Op_cat A) (Op_cat B) Q (@Op_func A B F)));
+/* End of the PSSS-01 presheaf diagnostics. */
+
+// catalog-area: Yoneda, slices, and Cat-valued higher sieves
+// Yoneda is the existing contravariant internal hom at the identity functor.
+assert [K : Cat] (U V : τ (Obj K)) ⊢
+  Fibre_cat (@yoneda_psh K U) V
+  ≡ Hom_cat K V U;
+
+assert [K : Cat] ⊢
+  @yoneda_psh_func K
+  : τ (Functor K (@Psh_cat K));
+
+assert [K : Cat]
+  (V U : τ (Obj K))
+  (p : τ (Hom K V U)) ⊢
+  @fapp1_fapp0
+    K
+    (@Psh_cat K)
+    (@yoneda_psh_func K)
+    V U p
+  ≡ @hom_con_int_postcomp_func K K (@id_func K) V U p;
+
+// Pointwise, the facade-level Yoneda action is ordinary postcomposition.
+assert [K : Cat]
+  (V U W : τ (Obj K))
+  (p : τ (Hom K V U)) ⊢
+  @tapp0_fapp0
+    (Op_cat K)
+    Cat_cat
+    (@yoneda_psh K V)
+    (@yoneda_psh K U)
+    W
+    (@fapp1_fapp0
+      K
+      (@Psh_cat K)
+      (@yoneda_psh_func K)
+      V U p)
+  ≡ @hom_postcomp_func
+      K K (@id_func K)
+      W V U p;
+
+// The restriction-oriented total is opposite to the conventional slice.
+assert [K : Cat] (U : τ (Obj K)) ⊢
+  @Into_restr_cat K U
+  ≡ @Sigma_cat (Op_cat K) (@yoneda_psh K U);
+
+assert [K : Cat]
+  (V U : τ (Obj K))
+  (p : τ (Hom K V U)) ⊢
+  @fapp1_fapp0
+    K
+    Cat_cat
+    (@arrow_into_catd K)
+    V U p
+  ≡ @sigma_map_func
+      (Op_cat K)
+      (@yoneda_psh K V)
+      (@yoneda_psh K U)
+      (@hom_con_int_postcomp_func K K (@id_func K) V U p);
+
+assert [K : Cat] (U : τ (Obj K)) ⊢
+  @Slice_cat K U
+  ≡ Op_cat (@Sigma_cat (Op_cat K) (@yoneda_psh K U));
+
+// Both higher-sieve presentations compare to this stable Catd intermediary.
+assert [K : Cat] (U : τ (Obj K)) ⊢
+  @eq_refl Cat_grpd (@HigherSieve_cat K U)
+  : τ (@= Cat_grpd
+      (@HigherSieve_cat K U)
+      (@Catd_cat (@Into_restr_cat K U)));
+
+assert [K : Cat] (U : τ (Obj K)) ⊢
+  @eq_refl Cat_grpd (@Psh_cat (@Slice_cat K U))
+  : τ (@= Cat_grpd
+      (@Psh_cat (@Slice_cat K U))
+      (@Catd_cat (@Into_restr_cat K U)));
+
+// Experimental unifiers are not transitively chained at runtime.
+assertnot [K : Cat] (U : τ (Obj K)) ⊢
+  @HigherSieve_cat K U
+  ≡ @Psh_cat (@Slice_cat K U);
+
+// Restriction of higher sieves reuses Catd pullback along the arrow-total map.
+assert [K : Cat]
+  (V U : τ (Obj K))
+  (p : τ (Hom K V U)) ⊢
+  @fapp1_fapp0
+    (Op_cat K)
+    Cat_cat
+    (@HigherSieveClassifier K)
+    U V p
+  ≡ @Pullback_catd_func
+      (@Into_restr_cat K V)
+      (@Into_restr_cat K U)
+      (@fapp1_fapp0 K Cat_cat (@arrow_into_catd K) V U p);
+
+assert [K : Cat] (U : τ (Obj K)) ⊢
+  @maximal_higher_sieve K U
+  ≡ @Terminal_catd (@Into_restr_cat K U);
+
+assert [K : Cat]
+  (V U : τ (Obj K))
+  (p : τ (Hom K V U)) ⊢
+  @fapp0
+    (@HigherSieve_cat K U)
+    (@HigherSieve_cat K V)
+    (@fapp1_fapp0
+      (Op_cat K)
+      Cat_cat
+      (@HigherSieveClassifier K)
+      U V p)
+    (@maximal_higher_sieve K U)
+  ≡ @maximal_higher_sieve K V;
+/* End of the PSSS-02 higher-sieve diagnostics. */
+
+// catalog-area: Ordinary subterminal sieves and pullback
+// Subterminal means proposition-valued objects plus exact groupoidality.
+assert [C : Cat] ⊢
+  IsSubterminalCat C
+  ≡ `Σ_ obj_prop : τ (IsPropGrpd (Obj C)), @IsGroupoidalCat C;
+
+assert [A : Grpd] (h : τ (IsPropGrpd A)) ⊢
+  @path_cat_is_subterminal A h
+  : τ (IsSubterminalCat (Path_cat A));
+
+assert [C : Cat] (h : τ (IsSubterminalCat C))
+  (x y : τ (Obj C)) ⊢
+  @subterminal_cat_arrow C h x y
+  : τ (Hom C x y);
+
+assert [C : Cat] (h : τ (IsSubterminalCat C)) ⊢
+  @subterminal_cat_is_discrete C h
+  : τ (IsDiscreteCat C);
+
+// Both the subterminal witness and the pointwise sieve witness are properties.
+assert [C : Cat] ⊢
+  @is_subterminal_cat_evidence_is_prop C
+  : τ (IsPropGrpd (IsSubterminalCat C));
+
+assert [K : Cat] (U : τ (Obj K))
+  (S : τ (@HigherSieve K U)) ⊢
+  @is_ordinary_sieve_evidence_is_prop K U S
+  : τ (IsPropGrpd (@IsOrdinarySieve K U S));
+
+// The named higher-sieve pullback is exactly the classifier's arrow action.
+assert [K : Cat]
+  (V U : τ (Obj K))
+  (p : τ (Hom K V U)) ⊢
+  @HigherSieve_pullback_func K V U p
+  ≡ @fapp1_fapp0
+      (Op_cat K)
+      Cat_cat
+      (@HigherSieveClassifier K)
+      U V p;
+
+// Ordinary pullback reuses that action and selects pointwise evidence.
+assert [K : Cat]
+  (V U : τ (Obj K))
+  (p : τ (Hom K V U))
+  (R : τ (@Sieve K U)) ⊢
+  @sieve_higher K V (@sieve_pullback K V U p R)
+  ≡ @higher_sieve_pullback K V U p (@sieve_higher K U R);
+
+assert [K : Cat]
+  (V U : τ (Obj K))
+  (p : τ (Hom K V U))
+  (R : τ (@Sieve K U)) ⊢
+  @sieve_subterminal K V (@sieve_pullback K V U p R)
+  : τ (@IsOrdinarySieve K V
+      (@higher_sieve_pullback K V U p (@sieve_higher K U R)));
+
+// Retained evidence is propositionally unique, but package eta is not runtime.
+assertnot [K : Cat] (U : τ (Obj K))
+  (R : τ (@Sieve K U)) ⊢
+  @sieve_pullback K U U (@id K U) R
+  ≡ R;
+/* End of the PSSS-03a ordinary-sieve diagnostics. */
+
+// catalog-area: Direct ordinary-sieve Grothendieck topologies
+// Restriction-total objects expose their domain and arrow observations.
+assert [K : Cat] (V U : τ (Obj K))
+  (p : τ (Hom K V U)) ⊢
+  @into_restr_domain K U (Struct_sigma V p)
+  ≡ V;
+
+assert [K : Cat] (V U : τ (Obj K))
+  (p : τ (Hom K V U)) ⊢
+  @into_restr_arrow K U (Struct_sigma V p)
+  ≡ p;
+
+// Ordinary-sieve membership and every selected cover predicate are properties.
+assert [K : Cat] (U : τ (Obj K))
+  (R : τ (@Sieve K U))
+  (f : τ (Obj (@Into_restr_cat K U))) ⊢
+  @sieve_membership_is_prop K U R f
+  : τ (IsPropGrpd (@SieveMembership K U R f));
+
+assert [K : Cat]
+  (J : τ (@SieveCoverage K))
+  (U : τ (Obj K))
+  (R : τ (@Sieve K U)) ⊢
+  @covers_is_prop K J U R
+  : τ (IsPropGrpd (@Covers K J U R));
+
+// The maximal ordinary sieve is pointwise true and stable under pullback.
+assert [K : Cat] (U : τ (Obj K))
+  (f : τ (Obj (@Into_restr_cat K U))) ⊢
+  @SieveMembership K U (@maximal_sieve K U) f
+  ≡ Unit_grpd;
+
+assert [K : Cat] (V U : τ (Obj K))
+  (p : τ (Hom K V U)) ⊢
+  @sieve_pullback K V U p (@maximal_sieve K U)
+  ≡ @maximal_sieve K V;
+
+// Its literal true-value presentation does not identify category heads.
+assertnot [K : Cat] (U : τ (Obj K)) ⊢
+  @sieve_higher K U (@maximal_sieve K U)
+  ≡ @maximal_higher_sieve K U;
+
+// Every sieve covers in the chaotic topology.
+assert [K : Cat] (U : τ (Obj K))
+  (R : τ (@Sieve K U)) ⊢
+  @groth_topology_covers K (@chaotic_groth_topology K) U R
+  ≡ Unit_grpd;
+
+// Pullback stability and local character compute to the unique truth witness.
+assert [K : Cat] (V U : τ (Obj K))
+  (p : τ (Hom K V U))
+  (R : τ (@Sieve K U)) ⊢
+  (@groth_topology_pullback K (@chaotic_groth_topology K))
+    U V p R tt
+  ≡ tt;
+
+assert [K : Cat] (U : τ (Obj K))
+  (R S : τ (@Sieve K U)) ⊢
+  (@groth_topology_local_character K (@chaotic_groth_topology K))
+    U R S tt
+    (λ f : τ (Obj (@Into_restr_cat K U)),
+      λ _ : τ (@SieveMembership K U R f),
+      tt)
+  ≡ tt;
+
+assert [K : Cat] ⊢
+  @chaotic_groth_topology K
+  : τ (@GrothTopology K);
+
+// Small direct combinatorial instance.
+assert ⊢
+  @chaotic_groth_topology Terminal_cat
+  : τ (@GrothTopology Terminal_cat);
+/* End of the PSSS-04a direct-topology diagnostics. */
+
+// catalog-area: Strict pointwise equivalences and direct-cover locality
+// The ordinary closure exposes the selected inverse component computationally.
+assert [A B : Cat]
+  [F G : τ (@Functor A B)]
+  (eta : τ (@Transf A B F G))
+  (u : τ (@StrictTransfPointwiseOmegaAlong A B F G eta))
+  (x : τ (Obj A)) ⊢
+  @tapp0_fapp0 A B G F x
+    (@strict_transf_pointwise_left_inverse A B F G eta u)
+  ≡ @omega_equiv_along_left_inv
+      B
+      (@fapp0 A B F x)
+      (@fapp0 A B G x)
+      (@tapp0_fapp0 A B F G x eta)
+      (u x);
+
+// The displayed closure exposes the selected inverse fibre transformation.
+assert [K : Cat]
+  [E D : τ (@Catd K)]
+  [FF GG : τ (@Functord K E D)]
+  (eta : τ (@Transfd K E D FF GG))
+  (u : τ (@StrictTransfdPointwiseOmegaAlong K E D FF GG eta))
+  (x : τ (Obj K)) ⊢
+  @tdapp0_fapp0 K E D GG FF x
+    (@strict_transfd_pointwise_left_inverse K E D FF GG eta u)
+  ≡ @omega_equiv_along_left_inv
+      (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D x))
+      (@Fibre_func K E D FF x)
+      (@Fibre_func K E D GG x)
+      (@tdapp0_fapp0 K E D FF GG x eta)
+      (u x);
+
+// Retained-member pointwise evidence is projected from the whole rho tower.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  [V U : τ (@Obj K)]
+  (p : τ (@Hom K V U))
+  (q : τ (@DirectCoverQuestionData K T U))
+  (member : τ (@SieveMembership
+      K U (@direct_cover_question_sieve K T U q) (Struct_sigma V p)))
+  (m : τ (Hom
+      (@Psh_cat K)
+      (@direct_cover_question_extension_psh K T U q)
+      (@DirectCoverCompletionPsh K T P))) ⊢
+  (@direct_cover_completion_restriction_glue_fibre_pointwise_omega
+    K T P V U q m)
+    (Struct_sigma p member)
+  ≡ @direct_cover_completion_restriction_glue_member_omega
+      K T P V U p q member m;
+
+// The second inverse and whole locality have their conventional public types.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  [U : τ (@Obj K)]
+  (q : τ (@DirectCoverQuestionData K T U)) ⊢
+  @direct_cover_completion_restriction_glue_path K T P U q
+  : τ (@=
+      (Obj (@Functor_cat
+        (@DirectCoverMatching_cat
+          K U (@direct_cover_question_sieve K T U q)
+          (@DirectCoverCompletionPsh K T P))
+        (@DirectCoverMatching_cat
+          K U (@direct_cover_question_sieve K T U q)
+          (@DirectCoverCompletionPsh K T P))))
+      (@direct_cover_completion_restriction_glue_func K T P U q)
+      (@id
+        Cat_cat
+        (@DirectCoverMatching_cat
+          K U (@direct_cover_question_sieve K T U q)
+          (@DirectCoverCompletionPsh K T P))));
+
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K)) ⊢
+  @direct_cover_completion_is_topology_local K T P
+  : τ (@IsTopologyLocalPsh K T (@DirectCoverCompletionPsh K T P));
+/* End of the CS-12q conventional direct-cover locality diagnostics. */
+
+// catalog-area: Direct-cover completion Hom universality
+// The functorial recursor selects the existing primitive recursor on objects.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Y : τ (@Psh K))
+  (AY : τ (@DirectCoverAlgebra K T Y))
+  (seed : τ (Hom (@Psh_cat K) P Y)) ⊢
+  @fapp0
+    (Hom_cat (@Psh_cat K) P Y)
+    (Hom_cat
+      (@Psh_cat K)
+      (@DirectCoverCompletionPsh K T P)
+      Y)
+    (@direct_cover_completion_rec_func K T P Y AY)
+    seed
+  ≡ @direct_cover_completion_rec K T P Y AY seed;
+
+// Whole unit beta is higher HIT computation, not a second runtime rule.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Y : τ (@Psh K))
+  (AY : τ (@DirectCoverAlgebra K T Y)) ⊢
+  @direct_cover_completion_rec_beta_func K T P Y AY
+  : τ (@=
+      (Hom
+        Cat_cat
+        (Hom_cat (@Psh_cat K) P Y)
+        (Hom_cat (@Psh_cat K) P Y))
+      (@comp_cat_fapp0
+        (Hom_cat (@Psh_cat K) P Y)
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y)
+        (Hom_cat (@Psh_cat K) P Y)
+        (@direct_cover_completion_unit_precomp_func K T P Y)
+        (@direct_cover_completion_rec_func K T P Y AY))
+      (@id Cat_cat (Hom_cat (@Psh_cat K) P Y)));
+
+// Local eta is the scoped categorical-HIT uniqueness principle.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Y : τ (@Psh K))
+  (local : τ (@IsTopologyLocalPsh K T Y)) ⊢
+  @direct_cover_completion_rec_eta_local_func K T P Y local
+  : τ (@=
+      (Hom
+        Cat_cat
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y)
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y))
+      (@comp_cat_fapp0
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y)
+        (Hom_cat (@Psh_cat K) P Y)
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y)
+        (@direct_cover_completion_rec_func
+          K T P Y (@topology_local_direct_cover_algebra K T Y local))
+        (@direct_cover_completion_unit_precomp_func K T P Y))
+      (@id Cat_cat
+        (Hom_cat
+          (@Psh_cat K)
+          (@DirectCoverCompletionPsh K T P)
+          Y)));
+
+// Unit precomposition is the whole Hom equivalence into every local target.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Y : τ (@Psh K))
+  (local : τ (@IsTopologyLocalPsh K T Y)) ⊢
+  @direct_cover_completion_hom_omega K T P Y local
+  : τ (@OmegaEquivAlong
+      Cat_cat
+      (Hom_cat
+        (@Psh_cat K)
+        (@DirectCoverCompletionPsh K T P)
+        Y)
+      (Hom_cat (@Psh_cat K) P Y)
+      (@direct_cover_completion_unit_precomp_func K T P Y));
+/* End of the CS-12r direct-cover Hom-universality diagnostics. */
+
+// catalog-area: Constructed Cat-valued sheafification reflector
+// The existing rigid facade selects topology-local Cat-valued presheaves.
+assert [K : Cat]
+  (T : τ (@GrothTopology K)) ⊢
+  Obj (@Sheaf_cat K T Cat_cat)
+  ≡ @CatValuedSheafData K T;
+
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P Q : τ (@Psh K))
+  (localP : τ (@IsTopologyLocalPsh K T P))
+  (localQ : τ (@IsTopologyLocalPsh K T Q)) ⊢
+  Hom_cat
+    (@Sheaf_cat K T Cat_cat)
+    (@cat_valued_sheaf_intro K T P localP)
+    (@cat_valued_sheaf_intro K T Q localQ)
+  ≡ Hom_cat (@Psh_cat K) P Q;
+
+// Inclusion forgets locality and completion lands back in the same facade.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  (local : τ (@IsTopologyLocalPsh K T P)) ⊢
+  @fapp0
+    (@Sheaf_cat K T Cat_cat)
+    (@Psh_cat K)
+    (@cat_valued_sheaf_include_psh_func K T)
+    (@cat_valued_sheaf_intro K T P local)
+  ≡ P;
+
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K)) ⊢
+  @fapp0
+    (@Psh_cat K)
+    (@Sheaf_cat K T Cat_cat)
+    (@direct_cover_sheafification_func K T)
+    P
+  ≡ @cat_valued_sheaf_intro
+      K T
+      (@DirectCoverCompletionPsh K T P)
+      (@direct_cover_completion_is_topology_local K T P);
+
+// The raw generic package index compares only at proof time.
+assert [K : Cat] ⊢
+  @eq_refl (Obj Cat_cat) (@Psh_cat K)
+  : τ (@=
+      (Obj Cat_cat)
+      (@Psh_cat K)
+      (@Functor_cat (Op_cat K) Cat_cat));
+
+assertnot [K : Cat] ⊢
+  @Psh_cat K
+  ≡ @Functor_cat (Op_cat K) Cat_cat;
+
+// The selected counit computes to recursion from the identity; the final
+// capability assertion below checks its exact generic-package projection.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (Y : τ (Obj (@Sheaf_cat K T Cat_cat))) ⊢
+  @direct_cover_sheafification_counit_at K T Y
+  ≡ @direct_cover_completion_rec
+      K T
+      (@cat_valued_sheaf_carrier K T Y)
+      (@cat_valued_sheaf_carrier K T Y)
+      (@topology_local_direct_cover_algebra
+        K T
+        (@cat_valued_sheaf_carrier K T Y)
+        (@cat_valued_sheaf_local K T Y))
+      (@id (@Psh_cat K) (@cat_valued_sheaf_carrier K T Y));
+
+// Both derived cancellation laws assemble the exact fixed-counit reflector.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (Y : τ (Obj (@Sheaf_cat K T Cat_cat))) ⊢
+  @direct_cover_sheafification_reflector_at K T Y
+  : τ (@OmegaEquivAlong
+      (@Sheaf_cat K T Cat_cat)
+      (@direct_cover_sheafification_reflected_object K T Y)
+      Y
+      (@direct_cover_sheafification_counit_at K T Y));
+
+assert [K : Cat]
+  (T : τ (@GrothTopology K)) ⊢
+  @direct_cover_sheafification_capability K T
+  : τ (@SheafificationCapability K T Cat_cat);
+/* End of the CS-12s constructed Cat-valued sheafification diagnostics. */
+
+// catalog-area: Set-carrier commutative-ring objects
+// Operation constructors expose all five fields without a primitive record.
+assert [A : Grpd]
+  (zero one : τ A)
+  (add : τ (@Function_grpd A (@Function_grpd A A)))
+  (neg : τ (@Function_grpd A A))
+  (mul : τ (@Function_grpd A (@Function_grpd A A))) ⊢
+  @comm_ring_ops_zero A
+    (@comm_ring_ops_intro A zero one add neg mul)
+  ≡ zero;
+
+assert [A : Grpd]
+  (zero one : τ A)
+  (add : τ (@Function_grpd A (@Function_grpd A A)))
+  (neg : τ (@Function_grpd A A))
+  (mul : τ (@Function_grpd A (@Function_grpd A A))) ⊢
+  @comm_ring_ops_one A
+    (@comm_ring_ops_intro A zero one add neg mul)
+  ≡ one;
+
+assert [A : Grpd]
+  (zero one : τ A)
+  (add : τ (@Function_grpd A (@Function_grpd A A)))
+  (neg : τ (@Function_grpd A A))
+  (mul : τ (@Function_grpd A (@Function_grpd A A)))
+  (x y : τ A) ⊢
+  @comm_ring_ops_add A
+    (@comm_ring_ops_intro A zero one add neg mul) x y
+  ≡ add x y;
+
+assert [A : Grpd]
+  (zero one : τ A)
+  (add : τ (@Function_grpd A (@Function_grpd A A)))
+  (neg : τ (@Function_grpd A A))
+  (mul : τ (@Function_grpd A (@Function_grpd A A)))
+  (x y : τ A) ⊢
+  @comm_ring_ops_mul A
+    (@comm_ring_ops_intro A zero one add neg mul) x y
+  ≡ mul x y;
+
+// Carrier sethood is retained by the SetU package.
+assert (R : τ CommRing) ⊢
+  @comm_ring_carrier_is_set R
+  : τ (IsSetGrpd (@comm_ring_carrier R));
+
+// The concrete zero ring is nonempty and all five observations compute.
+assert ⊢ @comm_ring_carrier zero_comm_ring ≡ Unit_grpd;
+
+assert ⊢ @comm_ring_zero zero_comm_ring ≡ tt;
+
+assert ⊢ @comm_ring_one zero_comm_ring ≡ tt;
+
+assert ⊢ @comm_ring_add zero_comm_ring tt tt ≡ tt;
+
+assert ⊢ @comm_ring_neg zero_comm_ring tt ≡ tt;
+
+assert ⊢ @comm_ring_mul zero_comm_ring tt tt ≡ tt;
+
+assert ⊢
+  (@comm_ring_add_zero_law zero_comm_ring) tt
+  ≡ @eq_refl Unit_grpd tt;
+
+assert ⊢
+  (@comm_ring_mul_one_law zero_comm_ring) tt
+  ≡ @eq_refl Unit_grpd tt;
+
+// Zero rings are intentionally allowed.
+assert ⊢
+  @comm_ring_zero zero_comm_ring
+  ≡ @comm_ring_one zero_comm_ring;
+
+// Retained carrier/structure packages are not hidden by a broad Sigma eta.
+assertnot (R : τ CommRing) ⊢
+  R
+  ≡ @comm_ring_intro
+      (@comm_ring_carrier_package R)
+      (@comm_ring_structure R);
+/* End of the PSSS-06a commutative-ring object diagnostics. */
+
+// catalog-area: Structured commutative-ring morphisms and category
+// The transparent observation is an ordinary carrier function.
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S)) ⊢
+  @comm_ring_hom_function R S h
+  : τ (@Function_grpd
+      (@comm_ring_carrier R)
+      (@comm_ring_carrier S));
+
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S))
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply R S h x
+  ≡ @comm_ring_hom_function R S h x;
+
+// Preservation evidence is proposition-valued and full maps form a set.
+assert (R S : τ CommRing)
+  (f : τ (@Function_grpd
+      (@comm_ring_carrier R)
+      (@comm_ring_carrier S))) ⊢
+  @comm_ring_hom_laws_is_prop R S f
+  : τ (IsPropGrpd (@CommRingHomLaws R S f));
+
+assert (R S : τ CommRing) ⊢
+  @comm_ring_hom_is_set R S
+  : τ (IsSetGrpd (@CommRingHom R S));
+
+// The category facade projects directly to the selected classifiers.
+assert ⊢ Obj CommRing_cat ≡ CommRing;
+
+assert (R S : τ CommRing) ⊢
+  Hom_cat CommRing_cat R S
+  ≡ Path_cat (@CommRingHom R S);
+
+assert ⊢ comm_ring_cat_is_one_cat
+  : τ (IsNCat (cat_succ cat_zero) CommRing_cat);
+
+// Whole-arrow identity cuts remain at the generic category owner.
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S)) ⊢
+  @comm_ring_hom_comp R R S h (@comm_ring_hom_id R)
+  ≡ h;
+
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S)) ⊢
+  @comm_ring_hom_comp R S S (@comm_ring_hom_id S) h
+  ≡ h;
+
+// Neither package eta nor projected generic identity is claimed.
+assertnot (R S : τ CommRing)
+  (h : τ (@CommRingHom R S)) ⊢
+  h
+  ≡ @comm_ring_hom_intro
+      R S
+      (@comm_ring_hom_function R S h)
+      (@comm_ring_hom_laws R S h);
+
+assertnot (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply R R (@comm_ring_hom_id R) x
+  ≡ x;
+/* End of the PSSS-06b commutative-ring morphism diagnostics. */
+
+// catalog-area: Universal-property commutative-ring localization
+// Pointwise carrier equality extends to the structured morphism package.
+assert (R S : τ CommRing)
+  (h k : τ (@CommRingHom R S))
+  (p : τ (@CommRingHomPointwisePath R S h k)) ⊢
+  @comm_ring_hom_ext R S h k p
+  : τ (h = k);
+
+// Explicit unit constructors expose the chosen inverse and its equation.
+assert (R : τ CommRing)
+  (x inverse : τ (@comm_ring_carrier R))
+  (law : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R x inverse)
+      (@comm_ring_one R))) ⊢
+  @comm_ring_unit_inverse R x
+    (@comm_ring_unit_intro R x inverse law)
+  ≡ inverse;
+
+assert (R : τ CommRing)
+  (x inverse : τ (@comm_ring_carrier R))
+  (law : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R x inverse)
+      (@comm_ring_one R))) ⊢
+  @comm_ring_unit_law R x
+    (@comm_ring_unit_intro R x inverse law)
+  ≡ law;
+
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_unit_evidence_is_prop R x
+  : τ (IsPropGrpd (@CommRingUnitEvidence R x));
+
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R))
+  (u v : τ (@CommRingUnitEvidence R x)) ⊢
+  @comm_ring_unit_inverse_unique R x u v
+  : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_unit_inverse R x u)
+      (@comm_ring_unit_inverse R x v));
+
+// Pointwise factor triangles are proposition-valued because target carriers
+// are sets.
+assert (R L S : τ CommRing)
+  (localization_map : τ (@CommRingHom R L))
+  (factor : τ (@CommRingHom L S))
+  (h : τ (@CommRingHom R S)) ⊢
+  @comm_ring_localization_agreement_is_prop
+    R L S localization_map factor h
+  : τ (IsPropGrpd
+      (@CommRingLocalizationAgreement R L S localization_map factor h));
+
+// Factor constructors expose both retained observations.
+assert (R L S : τ CommRing)
+  (localization_map : τ (@CommRingHom R L))
+  (factor : τ (@CommRingHom L S))
+  (h : τ (@CommRingHom R S))
+  (agreement : τ (@CommRingLocalizationAgreement
+      R L S localization_map factor h)) ⊢
+  @comm_ring_localization_factor_map
+    R L S localization_map h
+    (@comm_ring_localization_factor_intro
+      R L S localization_map h factor agreement)
+  ≡ factor;
+
+assert (R L S : τ CommRing)
+  (localization_map : τ (@CommRingHom R L))
+  (factor : τ (@CommRingHom L S))
+  (h : τ (@CommRingHom R S))
+  (agreement : τ (@CommRingLocalizationAgreement
+      R L S localization_map factor h)) ⊢
+  @comm_ring_localization_factor_agreement
+    R L S localization_map h
+    (@comm_ring_localization_factor_intro
+      R L S localization_map h factor agreement)
+  ≡ agreement;
+
+// Chosen localization constructors expose target, map, and universal data.
+assert (R L : τ CommRing)
+  (f : τ (@comm_ring_carrier R))
+  (localization_map : τ (@CommRingHom R L))
+  (property : τ (@IsCommRingLocalizationAt
+      R f L localization_map)) ⊢
+  @comm_ring_localization_target R f
+    (@comm_ring_localization_intro R f L localization_map property)
+  ≡ L;
+
+assert (R L : τ CommRing)
+  (f : τ (@comm_ring_carrier R))
+  (localization_map : τ (@CommRingHom R L))
+  (property : τ (@IsCommRingLocalizationAt
+      R f L localization_map)) ⊢
+  @comm_ring_localization_map R f
+    (@comm_ring_localization_intro R f L localization_map property)
+  ≡ localization_map;
+
+assert (R L : τ CommRing)
+  (f : τ (@comm_ring_carrier R))
+  (localization_map : τ (@CommRingHom R L))
+  (property : τ (@IsCommRingLocalizationAt
+      R f L localization_map)) ⊢
+  @comm_ring_localization_property R f
+    (@comm_ring_localization_intro R f L localization_map property)
+  ≡ property;
+
+// Opaque chosen localizations retain their Sigma evidence; no broad eta fold.
+assertnot (R : τ CommRing)
+  (f : τ (@comm_ring_carrier R))
+  (localization : τ (@CommRingLocalizationAt R f)) ⊢
+  localization
+  ≡ @comm_ring_localization_intro
+      R f
+      (@comm_ring_localization_target R f localization)
+      (@comm_ring_localization_map R f localization)
+      (@comm_ring_localization_property R f localization);
+/* End of the PSSS-07a localization diagnostics. */
+
+// catalog-area: Identity localization at a unit
+// One is canonically a unit, with itself as the selected inverse.
+assert (R : τ CommRing) ⊢
+  @comm_ring_unit_inverse
+    R (@comm_ring_one R) (@comm_ring_one_unit R)
+  ≡ @comm_ring_one R;
+
+// The identity factorization space is constructively contractible.
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S)) ⊢
+  @comm_ring_unit_localization_factor_is_contr R S h
+  : τ (IsContr (@CommRingLocalizationFactor
+      R R S (@comm_ring_hom_id_pointwise R) h));
+
+// Every ring has the selected universal-property localization at one.
+assert (R : τ CommRing) ⊢
+  @comm_ring_identity_localization_at_one R
+  : τ (@CommRingLocalizationAt R (@comm_ring_one R));
+
+// Its target and carrier action compute through the pointwise identity.
+assert (R : τ CommRing) ⊢
+  @comm_ring_localization_target
+    R (@comm_ring_one R) (@comm_ring_identity_localization_at_one R)
+  ≡ R;
+
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply
+    R R
+    (@comm_ring_localization_map
+      R (@comm_ring_one R) (@comm_ring_identity_localization_at_one R))
+    x
+  ≡ x;
+/* End of the PSSS-08c0F unit-localization diagnostics. */
+
+// catalog-area: Localization at zero in the zero ring
+// Multiplication by zero is derived from distributivity and additive inverses.
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_mul_zero_right R x
+  : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R x (@comm_ring_zero R))
+      (@comm_ring_zero R));
+
+// Invertible zero constructively forces zero=one in the target.
+assert (R : τ CommRing)
+  (unit : τ (@CommRingUnitEvidence R (@comm_ring_zero R))) ⊢
+  @comm_ring_zero_unit_zero_one R unit
+  : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_zero R)
+      (@comm_ring_one R));
+
+// Every admissible structured map has a contractible factorization through 0.
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S))
+  (zero_one : τ (@= (@comm_ring_carrier S)
+      (@comm_ring_zero S)
+      (@comm_ring_one S))) ⊢
+  @comm_ring_zero_localization_factor_is_contr R S h zero_one
+  : τ (IsContr (@CommRingLocalizationFactor
+      R zero_comm_ring S (@comm_ring_hom_to_zero R) h));
+
+// The selected universal-property localization at zero is always available.
+assert (R : τ CommRing) ⊢
+  @comm_ring_zero_localization R
+  : τ (@CommRingLocalizationAt R (@comm_ring_zero R));
+
+// Its target and carrier action compute to the zero ring and its unique point.
+assert (R : τ CommRing) ⊢
+  @comm_ring_localization_target
+    R (@comm_ring_zero R) (@comm_ring_zero_localization R)
+  ≡ zero_comm_ring;
+
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply
+    R zero_comm_ring
+    (@comm_ring_localization_map
+      R (@comm_ring_zero R) (@comm_ring_zero_localization R))
+    x
+  ≡ tt;
+/* End of the PSSS-08c0F zero-localization diagnostics. */
+
+// catalog-area: Localization at an idempotent through its fixed image
+// The fixed-point subtype remains a set and inherits a computing ring.
+assert (R : τ CommRing)
+  (e : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_idempotent_image_carrier_is_set R e
+  : τ (IsSetGrpd (@CommRingIdempotentImageCarrier R e));
+
+assert (R : τ CommRing)
+  (e : τ (@comm_ring_carrier R))
+  (idempotent : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R e e) e)) ⊢
+  @comm_ring_idempotent_image_element R e
+    (@comm_ring_one (@comm_ring_idempotent_image R e idempotent))
+  ≡ e;
+
+// Its structure map is the executable scaling operation x |-> e*x.
+assert (R : τ CommRing)
+  (e x : τ (@comm_ring_carrier R))
+  (idempotent : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R e e) e)) ⊢
+  @comm_ring_idempotent_image_element R e
+    (@comm_ring_hom_apply
+      R
+      (@comm_ring_idempotent_image R e idempotent)
+      (@comm_ring_idempotent_image_localization_map R e idempotent)
+      x)
+  ≡ @comm_ring_mul R e x;
+
+// Invertibility of the mapped idempotent selects a contractible factor space.
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S))
+  (e : τ (@comm_ring_carrier R))
+  (idempotent : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R e e) e))
+  (unit : τ (@CommRingUnitEvidence S
+      (@comm_ring_hom_apply R S h e))) ⊢
+  @comm_ring_idempotent_image_factor_is_contr
+    R e idempotent S h unit
+  : τ (IsContr (@CommRingLocalizationFactor
+      R
+      (@comm_ring_idempotent_image R e idempotent)
+      S
+      (@comm_ring_idempotent_image_localization_map R e idempotent)
+      h));
+
+// The selected package computes to the fixed-image target and scaling map.
+assert (R : τ CommRing)
+  (e : τ (@comm_ring_carrier R))
+  (idempotent : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R e e) e)) ⊢
+  @comm_ring_localization_target
+    R e
+    (@comm_ring_idempotent_image_localization R e idempotent)
+  ≡ @comm_ring_idempotent_image R e idempotent;
+
+assert (R : τ CommRing)
+  (e : τ (@comm_ring_carrier R))
+  (idempotent : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R e e) e)) ⊢
+  @comm_ring_localization_map
+    R e
+    (@comm_ring_idempotent_image_localization R e idempotent)
+  ≡ @comm_ring_idempotent_image_localization_map R e idempotent;
+/* End of the PSSS-08c0G idempotent-localization diagnostics. */
+
+// catalog-area: Product rings and split-idempotent affine restriction
+// The public product carrier and its structured arrow action compute by pairs.
+assert (R S : τ CommRing) ⊢
+  @comm_ring_carrier (@comm_ring_product R S)
+  ≡ @Product_grpd (@comm_ring_carrier R) (@comm_ring_carrier S);
+
+assert (R R' S S' : τ CommRing)
+  (h : τ (@CommRingHom R R'))
+  (k : τ (@CommRingHom S S'))
+  (x : τ (@comm_ring_carrier (@comm_ring_product R S))) ⊢
+  @comm_ring_hom_apply
+    (@comm_ring_product R S)
+    (@comm_ring_product R' S')
+    (@comm_ring_product_map R R' S S' h k)
+    x
+  ≡ @Product_pair_grpd
+      (@comm_ring_carrier R')
+      (@comm_ring_carrier S')
+      (@comm_ring_hom_apply R R' h (sigma_Fst x))
+      (@comm_ring_hom_apply S S' k (sigma_Snd x));
+
+// Whole structured-map composition is derived without a product-specific rule.
+assert (R0 R1 R2 S0 S1 S2 : τ CommRing)
+  (gR : τ (@CommRingHom R1 R2))
+  (fR : τ (@CommRingHom R0 R1))
+  (gS : τ (@CommRingHom S1 S2))
+  (fS : τ (@CommRingHom S0 S1)) ⊢
+  @comm_ring_product_map_comp_path
+    R0 R1 R2 S0 S1 S2 gR fR gS fS
+  : τ (@=
+      (@CommRingHom
+        (@comm_ring_product R0 S0)
+        (@comm_ring_product R2 S2))
+      (@comm_ring_product_map
+        R0 R2 S0 S2
+        (@comm_ring_hom_comp_pointwise R0 R1 R2 gR fR)
+        (@comm_ring_hom_comp_pointwise S0 S1 S2 gS fS))
+      (@comm_ring_hom_comp_pointwise
+        (@comm_ring_product R0 S0)
+        (@comm_ring_product R1 S1)
+        (@comm_ring_product R2 S2)
+        (@comm_ring_product_map R1 R2 S1 S2 gR gS)
+        (@comm_ring_product_map R0 R1 S0 S1 fR fS)));
+
+// F2 is closed reusable algebraic input for the non-endpoint witness.
+assert ⊢ f2_comm_ring : τ CommRing;
+
+assert ⊢ f2_split_idempotent_path
+  : τ (@=
+      (@comm_ring_carrier f2_split_comm_ring)
+      (@comm_ring_mul
+        f2_split_comm_ring
+        f2_split_idempotent
+        f2_split_idempotent)
+      f2_split_idempotent);
+
+// The selected idempotent is constructively distinct from both endpoints.
+assert ⊢ f2_split_idempotent_not_zero
+  : τ (@Function_grpd
+      (@= (@comm_ring_carrier f2_split_comm_ring)
+        f2_split_idempotent
+        (@comm_ring_zero f2_split_comm_ring))
+      Empty_grpd);
+
+assert ⊢ f2_split_idempotent_not_one
+  : τ (@Function_grpd
+      (@= (@comm_ring_carrier f2_split_comm_ring)
+        f2_split_idempotent
+        (@comm_ring_one f2_split_comm_ring))
+      Empty_grpd);
+
+// The affine arrow exposes the fixed-image target selected by localization.
+assert ⊢ sigma_Fst f2_split_basic_open_arrow
+  ≡ @comm_ring_idempotent_image
+      f2_split_comm_ring
+      f2_split_idempotent
+      f2_split_idempotent_path;
+
+// Its carrier restriction executes as the nontrivial projection (x,y) |-> (x,0).
+assert (x y : τ Bool_grpd) ⊢
+  @comm_ring_idempotent_image_element
+    f2_split_comm_ring
+    f2_split_idempotent
+    (@comm_ring_hom_apply
+      f2_split_comm_ring
+      (@comm_ring_idempotent_image
+        f2_split_comm_ring
+        f2_split_idempotent
+        f2_split_idempotent_path)
+      (sigma_Snd f2_split_basic_open_arrow)
+      (@Product_pair_grpd Bool_grpd Bool_grpd x y))
+  ≡ @Product_pair_grpd Bool_grpd Bool_grpd x false;
+/* End of the PSSS-08c0H split-idempotent affine diagnostics. */
+
+// catalog-area: Computational affine Cartier glue
+// The affine structure presheaf computes to the original ring and map.
+assert (R : τ CommRing) ⊢
+  @comm_ring_psh_value
+    (Op_cat CommRing_cat)
+    affine_comm_ring_psh
+    R
+  ≡ R;
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S)) ⊢
+  @comm_ring_psh_restriction_hom
+    (Op_cat CommRing_cat)
+    affine_comm_ring_psh
+    S R h
+  ≡ h;
+
+// Every selected affine localization constructively supplies the full
+// componentwise Cartier-glue package.
+assert [R : τ CommRing]
+  [s : τ (@comm_ring_carrier R)]
+  (localization : τ (@CommRingLocalizationAt R s)) ⊢
+  @affine_localization_matching_glue R s localization
+  : τ (@CommRingPshLocalizationGlue
+      (Op_cat CommRing_cat)
+      affine_comm_ring_psh
+      R s localization);
+
+// The closed non-endpoint split localization reaches that complete package.
+assert ⊢
+  @affine_localization_matching_glue
+    f2_split_comm_ring
+    f2_split_idempotent
+    f2_split_idempotent_localization
+  : τ (@CommRingPshLocalizationGlue
+      (Op_cat CommRing_cat)
+      affine_comm_ring_psh
+      f2_split_comm_ring
+      f2_split_idempotent
+      f2_split_idempotent_localization);
+/* End of the PSSS-08c0I affine Cartier-glue diagnostics. */
+
+// catalog-area: Iterated commutative-ring localization comparison
+// Stable structured composition exposes its selected carrier action.
+assert (R S T : τ CommRing)
+  (g : τ (@CommRingHom S T))
+  (f : τ (@CommRingHom R S))
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply R T
+    (@comm_ring_hom_comp_pointwise R S T g f) x
+  ≡ @comm_ring_hom_apply S T g
+      (@comm_ring_hom_apply R S f x);
+
+// Typed reflexivity exercises comparison with generic category composition.
+assert (R S T : τ CommRing)
+  (g : τ (@CommRingHom S T))
+  (f : τ (@CommRingHom R S)) ⊢
+  @comm_ring_hom_comp_pointwise_path R S T g f
+  : τ (@= (@CommRingHom R T)
+      (@comm_ring_hom_comp R S T g f)
+      (@comm_ring_hom_comp_pointwise R S T g f));
+
+// Generic whole-map application remains outside runtime reduction.
+assertnot (R S T : τ CommRing)
+  (g : τ (@CommRingHom S T))
+  (f : τ (@CommRingHom R S))
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply R T (@comm_ring_hom_comp R S T g f) x
+  ≡ @comm_ring_hom_apply S T g
+      (@comm_ring_hom_apply R S f x);
+
+// Unit evidence supports exactly the algebra needed by the overlap consumer.
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S))
+  (x : τ (@comm_ring_carrier R))
+  (u : τ (@CommRingUnitEvidence R x)) ⊢
+  @comm_ring_hom_preserves_unit R S h x u
+  : τ (@CommRingUnitEvidence S
+      (@comm_ring_hom_apply R S h x));
+
+assert (R : τ CommRing)
+  (x y : τ (@comm_ring_carrier R))
+  (u : τ (@CommRingUnitEvidence R x))
+  (v : τ (@CommRingUnitEvidence R y)) ⊢
+  @comm_ring_unit_mul R x y u v
+  : τ (@CommRingUnitEvidence R (@comm_ring_mul R x y));
+
+assert (R : τ CommRing)
+  (x y : τ (@comm_ring_carrier R))
+  (u : τ (@CommRingUnitEvidence R (@comm_ring_mul R x y))) ⊢
+  @comm_ring_unit_mul_left R x y u
+  : τ (@CommRingUnitEvidence R x);
+
+assert (R : τ CommRing)
+  (x y : τ (@comm_ring_carrier R))
+  (u : τ (@CommRingUnitEvidence R (@comm_ring_mul R x y))) ⊢
+  @comm_ring_unit_mul_right R x y u
+  : τ (@CommRingUnitEvidence R y);
+
+// Two chosen stages produce a structure map that inverts f*g.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R)) ⊢
+  @CommRingIteratedLocalizationAt R f g
+  : Grpd;
+
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g)) ⊢
+  @comm_ring_iterated_localization_inverts_product R f g iterated
+  : τ (@CommRingUnitEvidence
+      (@comm_ring_iterated_localization_target R f g iterated)
+      (@comm_ring_hom_apply
+        R
+        (@comm_ring_iterated_localization_target R f g iterated)
+        (@comm_ring_iterated_localization_map R f g iterated)
+        (@comm_ring_mul R f g)));
+
+// Universal properties construct the forward and staged reverse factors.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g))) ⊢
+  @comm_ring_iterated_localization_comparison
+    R f g iterated product_localization
+  : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization);
+
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g))) ⊢
+  @comm_ring_iterated_localization_comparison_forward_factor
+    R f g iterated product_localization
+    (@comm_ring_iterated_localization_comparison
+      R f g iterated product_localization)
+  ≡ @comm_ring_iterated_localization_forward_factor
+      R f g iterated product_localization;
+
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g))) ⊢
+  @comm_ring_iterated_localization_comparison_reverse_factor
+    R f g iterated product_localization
+    (@comm_ring_iterated_localization_comparison
+      R f g iterated product_localization)
+  ≡ @comm_ring_iterated_localization_reverse_factor
+      R f g iterated product_localization;
+/* End of the PSSS-07b localization-comparison diagnostics. */
+
+// catalog-area: Whole internal iterated-localization overlap
+// Universal-property uniqueness gives whole cancellation on the product side.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g)))
+  (comparison : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization)) ⊢
+  @comm_ring_iterated_localization_comparison_left_law
+    R f g iterated product_localization comparison
+  : τ (@=
+      (@CommRingHom
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization)
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization))
+      (@comm_ring_hom_comp
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization)
+        (@comm_ring_iterated_localization_target R f g iterated)
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization)
+        (@comm_ring_iterated_localization_comparison_reverse_map
+          R f g iterated product_localization comparison)
+        (@comm_ring_iterated_localization_comparison_forward_map
+          R f g iterated product_localization comparison))
+      (@comm_ring_hom_id
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization)));
+
+// Sequential uniqueness through both stages gives the opposite whole law.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g)))
+  (comparison : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization)) ⊢
+  @comm_ring_iterated_localization_comparison_right_law
+    R f g iterated product_localization comparison
+  : τ (@=
+      (@CommRingHom
+        (@comm_ring_iterated_localization_target R f g iterated)
+        (@comm_ring_iterated_localization_target R f g iterated))
+      (@comm_ring_hom_comp
+        (@comm_ring_iterated_localization_target R f g iterated)
+        (@comm_ring_localization_target
+          R (@comm_ring_mul R f g) product_localization)
+        (@comm_ring_iterated_localization_target R f g iterated)
+        (@comm_ring_iterated_localization_comparison_forward_map
+          R f g iterated product_localization comparison)
+        (@comm_ring_iterated_localization_comparison_reverse_map
+          R f g iterated product_localization comparison))
+      (@comm_ring_hom_id
+        (@comm_ring_iterated_localization_target R f g iterated)));
+
+// The fixed-forward classifier is the semantic owner of the overlap.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g)))
+  (comparison : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization)) ⊢
+  @comm_ring_iterated_localization_comparison_omega_equiv_along
+    R f g iterated product_localization comparison
+  : τ (@OmegaEquivAlong
+      CommRing_cat
+      (@comm_ring_localization_target
+        R (@comm_ring_mul R f g) product_localization)
+      (@comm_ring_iterated_localization_target R f g iterated)
+      (@comm_ring_iterated_localization_comparison_forward_map
+        R f g iterated product_localization comparison));
+
+// Both inverse observations compute to the selected staged reverse map.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g)))
+  (comparison : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization)) ⊢
+  @omega_equiv_along_left_inv
+    CommRing_cat
+    (@comm_ring_localization_target
+      R (@comm_ring_mul R f g) product_localization)
+    (@comm_ring_iterated_localization_target R f g iterated)
+    (@comm_ring_iterated_localization_comparison_forward_map
+      R f g iterated product_localization comparison)
+    (@comm_ring_iterated_localization_comparison_omega_equiv_along
+      R f g iterated product_localization comparison)
+  ≡ @comm_ring_iterated_localization_comparison_reverse_map
+      R f g iterated product_localization comparison;
+
+// The first-class facade retains the forward comparison computation.
+assert (R : τ CommRing)
+  (f g : τ (@comm_ring_carrier R))
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g)))
+  (comparison : τ (@CommRingIteratedLocalizationComparison
+      R f g iterated product_localization)) ⊢
+  @omega_equiv_to
+    CommRing_cat
+    (@comm_ring_localization_target
+      R (@comm_ring_mul R f g) product_localization)
+    (@comm_ring_iterated_localization_target R f g iterated)
+    (@comm_ring_iterated_localization_comparison_omega_equiv
+      R f g iterated product_localization comparison)
+  ≡ @comm_ring_iterated_localization_comparison_forward_map
+      R f g iterated product_localization comparison;
+/* End of the PSSS-08c0F localization-overlap diagnostics. */
+
+// catalog-area: Finite commutative-ring cover presentations
+// Formation and visible constructor computation.
+assert [A : Grpd] ⊢ @FiniteFamily A zero ≡ Unit_grpd;
+
+assert [A : Grpd] (n : τ Nat_grpd) ⊢
+  @FiniteFamily A (succ n)
+  ≡ @Σ_ A (λ _ : τ A, @FiniteFamily A n);
+
+assertnot [A : Grpd] (n : τ Nat_grpd) ⊢
+  @FiniteFamily A (succ n)
+  ≡ @Product_grpd A (@FiniteFamily A n);
+
+assertnot [A : Grpd]
+  (xs : τ (@FiniteFamily A zero)) ⊢
+  xs ≡ @finite_family_nil A;
+
+assert [A B : Grpd]
+  (f : τ (@Function_grpd A B))
+  (n : τ Nat_grpd)
+  (x : τ A)
+  (xs : τ (@FiniteFamily A n)) ⊢
+  @finite_family_map A B f (succ n)
+    (@finite_family_cons A n x xs)
+  ≡ @finite_family_cons B n (f x)
+      (@finite_family_map A B f n xs);
+
+assert (R : τ CommRing) ⊢
+  @comm_ring_finite_sum R zero (@finite_family_nil (@comm_ring_carrier R))
+  ≡ @comm_ring_zero R;
+
+assert (R : τ CommRing)
+  (n : τ Nat_grpd)
+  (x : τ (@comm_ring_carrier R))
+  (xs : τ (@FiniteFamily (@comm_ring_carrier R) n)) ⊢
+  @comm_ring_finite_sum R (succ n)
+    (@finite_family_cons (@comm_ring_carrier R) n x xs)
+  ≡ @comm_ring_add R x (@comm_ring_finite_sum R n xs);
+
+assert (R : τ CommRing)
+  (n : τ Nat_grpd)
+  (a f : τ (@comm_ring_carrier R))
+  (as0 fs0 : τ (@FiniteFamily (@comm_ring_carrier R) n)) ⊢
+  @comm_ring_finite_dot R (succ n)
+    (@finite_family_cons (@comm_ring_carrier R) n a as0)
+    (@finite_family_cons (@comm_ring_carrier R) n f fs0)
+  ≡ @comm_ring_add R
+      (@comm_ring_mul R a f)
+      (@comm_ring_finite_dot R n as0 fs0);
+
+assert (A : Grpd)
+  (A_is_set : τ (IsSetGrpd A))
+  (n : τ Nat_grpd) ⊢
+  @finite_family_is_set A A_is_set n
+  : τ (IsSetGrpd (@FiniteFamily A n));
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (n : τ Nat_grpd)
+  (xs : τ (@FiniteFamily (@comm_ring_carrier R) n)) ⊢
+  @comm_ring_hom_finite_sum_path R S h n xs
+  : τ (@= (@comm_ring_carrier S)
+      (@comm_ring_hom_apply R S h
+        (@comm_ring_finite_sum R n xs))
+      (@comm_ring_finite_sum S n
+        (@finite_family_map
+          (@comm_ring_carrier R)
+          (@comm_ring_carrier S)
+          (@comm_ring_hom_function R S h)
+          n xs)));
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (n : τ Nat_grpd)
+  (as0 fs0 : τ (@FiniteFamily (@comm_ring_carrier R) n)) ⊢
+  @comm_ring_hom_finite_dot_path R S h n as0 fs0
+  : τ (@= (@comm_ring_carrier S)
+      (@comm_ring_hom_apply R S h
+        (@comm_ring_finite_dot R n as0 fs0))
+      (@comm_ring_finite_dot S n
+        (@finite_family_map
+          (@comm_ring_carrier R)
+          (@comm_ring_carrier S)
+          (@comm_ring_hom_function R S h)
+          n as0)
+        (@finite_family_map
+          (@comm_ring_carrier R)
+          (@comm_ring_carrier S)
+          (@comm_ring_hom_function R S h)
+          n fs0)));
+
+assert [R : τ CommRing]
+  (n : τ Nat_grpd)
+  (generators : τ (@FiniteFamily (@comm_ring_carrier R) n)) ⊢
+  @comm_ring_unimodular_is_set R n generators
+  : τ (IsSetGrpd (@CommRingUnimodularPresentation R n generators));
+
+assert (R : τ CommRing) ⊢
+  @comm_ring_zariski_cover_is_set R
+  : τ (IsSetGrpd (@CommRingZariskiCoverPresentation R));
+
+assert (R : τ CommRing) ⊢
+  @comm_ring_zariski_cover_length R (@comm_ring_unit_zariski_cover R)
+  ≡ succ zero;
+
+assert (R : τ CommRing) ⊢
+  @comm_ring_zariski_cover_generators R (@comm_ring_unit_zariski_cover R)
+  ≡ @finite_family_singleton
+      (@comm_ring_carrier R)
+      (@comm_ring_one R);
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (cover : τ (@CommRingZariskiCoverPresentation R)) ⊢
+  @comm_ring_zariski_cover_map R S h cover
+  : τ (@CommRingZariskiCoverPresentation S);
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (cover : τ (@CommRingZariskiCoverPresentation R)) ⊢
+  @comm_ring_zariski_cover_length S
+    (@comm_ring_zariski_cover_map R S h cover)
+  ≡ @comm_ring_zariski_cover_length R cover;
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (cover : τ (@CommRingZariskiCoverPresentation R)) ⊢
+  @comm_ring_zariski_cover_generators S
+    (@comm_ring_zariski_cover_map R S h cover)
+  ≡ @finite_family_map
+      (@comm_ring_carrier R)
+      (@comm_ring_carrier S)
+      (@comm_ring_hom_function R S h)
+      (@comm_ring_zariski_cover_length R cover)
+      (@comm_ring_zariski_cover_generators R cover);
+
+// The generic singleton [1] is an actual nonempty cover presentation.
+assert (R : τ CommRing) ⊢
+  @comm_ring_unimodular_coefficients
+    R
+    (succ zero)
+    (@finite_family_singleton
+      (@comm_ring_carrier R)
+      (@comm_ring_one R))
+    (@comm_ring_unit_unimodular R)
+  ≡ @finite_family_singleton
+      (@comm_ring_carrier R)
+      (@comm_ring_one R);
+
+assert (R : τ CommRing) ⊢
+  @comm_ring_unimodular_law
+    R
+    (succ zero)
+    (@finite_family_singleton
+      (@comm_ring_carrier R)
+      (@comm_ring_one R))
+    (@comm_ring_unit_unimodular R)
+  : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_finite_dot
+        R
+        (succ zero)
+        (@finite_family_singleton
+          (@comm_ring_carrier R)
+          (@comm_ring_one R))
+        (@finite_family_singleton
+          (@comm_ring_carrier R)
+          (@comm_ring_one R)))
+      (@comm_ring_one R));
+
+assert (R : τ CommRing) ⊢
+  @comm_ring_zariski_cover_unimodular
+    R
+    (@comm_ring_unit_zariski_cover R)
+  : τ (@CommRingUnimodularPresentation
+      R
+      (succ zero)
+      (@finite_family_singleton
+        (@comm_ring_carrier R)
+        (@comm_ring_one R)));
+
+// The binary helper consumes the correct unit-ideal equation a*f+b*g=1.
+assert [R : τ CommRing]
+  (f g a b : τ (@comm_ring_carrier R))
+  (law : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_add R
+        (@comm_ring_mul R a f)
+        (@comm_ring_mul R b g))
+      (@comm_ring_one R))) ⊢
+  @comm_ring_binary_zariski_cover R f g a b law
+  : τ (@CommRingZariskiCoverPresentation R);
+/* End of the PSSS-07c finite-cover-presentation diagnostics. */
+
+// catalog-area: Polynomial-algebra universal property
+// The consumer-selected rigid identity computes on carriers.
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply R R (@comm_ring_hom_id_pointwise R) x
+  ≡ x;
+
+assert (R : τ CommRing) ⊢
+  @comm_ring_hom_id_pointwise_path R
+  : τ (@= (@CommRingHom R R)
+      (@comm_ring_hom_id R)
+      (@comm_ring_hom_id_pointwise R));
+
+// Generic whole-identity application remains outside runtime reduction.
+assertnot (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply R R (@comm_ring_hom_id R) x
+  ≡ x;
+
+assert (R P S : τ CommRing)
+  (base_map : τ (@CommRingHom R P))
+  (factor : τ (@CommRingHom P S))
+  (h : τ (@CommRingHom R S)) ⊢
+  @CommRingPolynomialBaseAgreement R P S base_map factor h
+  : Grpd;
+
+assert (R P S : τ CommRing)
+  (base_map : τ (@CommRingHom R P))
+  (factor : τ (@CommRingHom P S))
+  (h : τ (@CommRingHom R S)) ⊢
+  @comm_ring_polynomial_base_agreement_is_prop
+    R P S base_map factor h
+  : τ (IsPropGrpd
+      (@CommRingPolynomialBaseAgreement R P S base_map factor h));
+
+assert (X : Grpd)
+  (P S : τ CommRing)
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P)))
+  (factor : τ (@CommRingHom P S))
+  (valuation : τ (@Function_grpd X (@comm_ring_carrier S))) ⊢
+  @CommRingPolynomialVariableAgreement X P S variables factor valuation
+  : Grpd;
+
+assert (X : Grpd)
+  (P S : τ CommRing)
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P)))
+  (factor : τ (@CommRingHom P S))
+  (valuation : τ (@Function_grpd X (@comm_ring_carrier S))) ⊢
+  @comm_ring_polynomial_variable_agreement_is_prop
+    X P S variables factor valuation
+  : τ (IsPropGrpd
+      (@CommRingPolynomialVariableAgreement
+        X P S variables factor valuation));
+
+assert (R P S : τ CommRing)
+  (X : Grpd)
+  (base_map : τ (@CommRingHom R P))
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P)))
+  (factor : τ (@CommRingHom P S))
+  (h : τ (@CommRingHom R S))
+  (valuation : τ (@Function_grpd X (@comm_ring_carrier S))) ⊢
+  @comm_ring_polynomial_factor_agreement_is_prop
+    R P S X base_map variables factor h valuation
+  : τ (IsPropGrpd (@CommRingPolynomialFactorAgreement
+      R P S X base_map variables factor h valuation));
+
+assert (R P S : τ CommRing)
+  (X : Grpd)
+  (base_map : τ (@CommRingHom R P))
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P)))
+  (h : τ (@CommRingHom R S))
+  (valuation : τ (@Function_grpd X (@comm_ring_carrier S))) ⊢
+  @CommRingPolynomialFactor R P S X base_map variables h valuation
+  : Grpd;
+
+assert (R P S : τ CommRing)
+  (X : Grpd)
+  (base_map : τ (@CommRingHom R P))
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P)))
+  (h : τ (@CommRingHom R S))
+  (valuation : τ (@Function_grpd X (@comm_ring_carrier S)))
+  (factor : τ (@CommRingHom P S))
+  (agreement : τ (@CommRingPolynomialFactorAgreement
+      R P S X base_map variables factor h valuation)) ⊢
+  @comm_ring_polynomial_factor_map
+    R P S X base_map variables h valuation
+    (@comm_ring_polynomial_factor_intro
+      R P S X base_map variables h valuation factor agreement)
+  ≡ factor;
+
+assert (R P S : τ CommRing)
+  (X : Grpd)
+  (base_map : τ (@CommRingHom R P))
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P)))
+  (h : τ (@CommRingHom R S))
+  (valuation : τ (@Function_grpd X (@comm_ring_carrier S)))
+  (factor : τ (@CommRingPolynomialFactor
+      R P S X base_map variables h valuation)) ⊢
+  @comm_ring_polynomial_factor_base
+    R P S X base_map variables h valuation factor
+  : τ (@CommRingPolynomialBaseAgreement
+      R P S base_map
+      (@comm_ring_polynomial_factor_map
+        R P S X base_map variables h valuation factor)
+      h);
+
+assert (R P S : τ CommRing)
+  (X : Grpd)
+  (base_map : τ (@CommRingHom R P))
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P)))
+  (h : τ (@CommRingHom R S))
+  (valuation : τ (@Function_grpd X (@comm_ring_carrier S)))
+  (factor : τ (@CommRingPolynomialFactor
+      R P S X base_map variables h valuation)) ⊢
+  @comm_ring_polynomial_factor_variables
+    R P S X base_map variables h valuation factor
+  : τ (@CommRingPolynomialVariableAgreement
+      X P S variables
+      (@comm_ring_polynomial_factor_map
+        R P S X base_map variables h valuation factor)
+      valuation);
+
+assert (R P : τ CommRing)
+  (X : Grpd)
+  (base_map : τ (@CommRingHom R P))
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P))) ⊢
+  @IsCommRingPolynomialAlgebra R X P base_map variables
+  : Grpd;
+
+assert (R : τ CommRing)
+  (X : Grpd) ⊢
+  @CommRingPolynomialAlgebra R X
+  : Grpd;
+
+assert (R P : τ CommRing)
+  (X : Grpd)
+  (base_map : τ (@CommRingHom R P))
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P)))
+  (property : τ (@IsCommRingPolynomialAlgebra
+      R X P base_map variables)) ⊢
+  @comm_ring_polynomial_target R X
+    (@comm_ring_polynomial_intro
+      R X P base_map variables property)
+  ≡ P;
+
+assert (R P : τ CommRing)
+  (X : Grpd)
+  (base_map : τ (@CommRingHom R P))
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P)))
+  (property : τ (@IsCommRingPolynomialAlgebra
+      R X P base_map variables)) ⊢
+  @comm_ring_polynomial_base_map R X
+    (@comm_ring_polynomial_intro
+      R X P base_map variables property)
+  ≡ base_map;
+
+assert (R P : τ CommRing)
+  (X : Grpd)
+  (base_map : τ (@CommRingHom R P))
+  (variables : τ (@Function_grpd X (@comm_ring_carrier P)))
+  (property : τ (@IsCommRingPolynomialAlgebra
+      R X P base_map variables)) ⊢
+  @comm_ring_polynomial_variables R X
+    (@comm_ring_polynomial_intro
+      R X P base_map variables property)
+  ≡ variables;
+
+// Chosen packages retain honest Sigma structure without broad package eta.
+assertnot (R : τ CommRing)
+  (X : Grpd)
+  (polynomial : τ (@CommRingPolynomialAlgebra R X)) ⊢
+  polynomial
+  ≡ @comm_ring_polynomial_intro
+      R X
+      (@comm_ring_polynomial_target R X polynomial)
+      (@comm_ring_polynomial_base_map R X polynomial)
+      (@comm_ring_polynomial_variables R X polynomial)
+      (@comm_ring_polynomial_property R X polynomial);
+/* End of the PSSS-07d polynomial-algebra diagnostics. */
+
+// catalog-area: CommRing-valued presheaves and invertibility support
+// The generic typed identity view is stable under later source specialization.
+assert [A B : Cat]
+  (F : τ (Functor A B))
+  (X : τ (Obj A)) ⊢
+  @fapp1_id_path A B F X
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F X))
+      (@fapp1_fapp0 A B F X X (@id A X))
+      (@id B (@fapp0 A B F X)));
+
+// CommRing-valued presheaves are a transparent functor category.
+assert (K : Cat) ⊢
+  @CommRingPsh_cat K
+  ≡ @Functor_cat (Op_cat K) CommRing_cat;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K)) ⊢
+  @comm_ring_psh_value K O U
+  ≡ @fapp0 (Op_cat K) CommRing_cat O U;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  @comm_ring_psh_restriction_hom K O V U f
+  ≡ @fapp1_fapp0 (Op_cat K) CommRing_cat O U V f;
+
+// The narrow opposite-source bridge selects the generic whole identity.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K)) ⊢
+  @comm_ring_psh_restriction_hom K O U U (@id K U)
+  ≡ @comm_ring_hom_id (@comm_ring_psh_value K O U);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_restrict K O V U f s
+  ≡ @comm_ring_hom_apply
+      (@comm_ring_psh_value K O U)
+      (@comm_ring_psh_value K O V)
+      (@comm_ring_psh_restriction_hom K O V U f)
+      s;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_restrict_id_path K O U s
+  : τ (@= (@CommRingPshSection K O U)
+      (@comm_ring_psh_restrict K O U U (@id K U) s)
+      s);
+
+// That generic whole identity still stays opaque at the carrier boundary.
+assertnot [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_restrict K O U U (@id K U) s
+  ≡ s;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [W V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V)) ⊢
+  @comm_ring_psh_restriction_comp_pointwise_path K O W V U f g
+  : τ (@= (@CommRingHom
+      (@comm_ring_psh_value K O U)
+      (@comm_ring_psh_value K O W))
+      (@comm_ring_psh_restriction_hom K O W U
+        (@comp_fapp0 K W V U f g))
+      (@comm_ring_hom_comp_pointwise
+        (@comm_ring_psh_value K O U)
+        (@comm_ring_psh_value K O V)
+        (@comm_ring_psh_value K O W)
+        (@comm_ring_psh_restriction_hom K O W V g)
+        (@comm_ring_psh_restriction_hom K O V U f)));
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [W V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_restrict_comp_path K O W V U f g s
+  : τ (@= (@CommRingPshSection K O W)
+      (@comm_ring_psh_restrict K O W U
+        (@comp_fapp0 K W V U f g) s)
+      (@comm_ring_psh_restrict K O W V g
+        (@comm_ring_psh_restrict K O V U f s)));
+
+// Whole CommRing_cat composition likewise stays opaque on carrier elements.
+assertnot [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [W V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_restrict K O W U
+    (@comp_fapp0 K W V U f g) s
+  ≡ @comm_ring_psh_restrict K O W V g
+      (@comm_ring_psh_restrict K O V U f s);
+
+// Unit preservation has a concrete mapped-inverse normal form.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [x : τ (@comm_ring_carrier R)]
+  (u : τ (@CommRingUnitEvidence R x)) ⊢
+  @comm_ring_unit_inverse
+    S
+    (@comm_ring_hom_apply R S h x)
+    (@comm_ring_hom_preserves_unit R S h x u)
+  ≡ @comm_ring_hom_apply R S h
+      (@comm_ring_unit_inverse R x u);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @CommRingPshInvertibleAlong K O U s V f
+  ≡ @CommRingUnitEvidence
+      (@comm_ring_psh_value K O V)
+      (@comm_ring_psh_restrict K O V U f s);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_invertible_along_is_prop K O U s V f
+  : τ (IsPropGrpd (@CommRingPshInvertibleAlong K O U s V f));
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [W V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V))
+  (s : τ (@CommRingPshSection K O U))
+  (u : τ (@CommRingPshInvertibleAlong K O U s V f)) ⊢
+  @comm_ring_psh_invertible_along_restrict K O W V U f g s u
+  : τ (@CommRingPshInvertibleAlong K O U s W
+      (@comp_fapp0 K W V U f g));
+/* End of the PSSS-08a CommRing-presheaf diagnostics. */
+
+// catalog-area: CommRing-valued presheaf invertibility sieve
+// The selected carrier functor exposes ring carriers at objects.
+assert (R : τ CommRing) ⊢
+  @fapp0 CommRing_cat Grpd_cat comm_ring_carrier_func R
+  ≡ @comm_ring_carrier R;
+
+// Its full hom action retains the iterable path-map functor.
+assert [R S : τ CommRing] ⊢
+  @fapp1_func CommRing_cat Grpd_cat comm_ring_carrier_func R S
+  ≡ @path_map_func
+      (@CommRingHom R S)
+      (@Function_grpd
+        (@comm_ring_carrier R)
+        (@comm_ring_carrier S))
+      (λ h : τ (@CommRingHom R S),
+        @comm_ring_hom_function R S h);
+
+// No competing direct capped carrier-action beta is selected.
+assertnot [R S : τ CommRing]
+  (h : τ (@CommRingHom R S)) ⊢
+  @fapp1_fapp0 CommRing_cat Grpd_cat
+    comm_ring_carrier_func R S h
+  ≡ @comm_ring_hom_function R S h;
+
+// Capping the selected full action uses the existing path-map projection.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S)) ⊢
+  @fapp0
+    (Path_cat (@CommRingHom R S))
+    (Path_cat (@Function_grpd
+      (@comm_ring_carrier R)
+      (@comm_ring_carrier S)))
+    (@fapp1_func CommRing_cat Grpd_cat
+      comm_ring_carrier_func R S)
+    h
+  ≡ @comm_ring_hom_function R S h;
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (x : τ (@comm_ring_carrier R)) ⊢
+  (@fapp0
+    (Path_cat (@CommRingHom R S))
+    (Path_cat (@Function_grpd
+      (@comm_ring_carrier R)
+      (@comm_ring_carrier S)))
+    (@fapp1_func CommRing_cat Grpd_cat
+      comm_ring_carrier_func R S)
+    h) x
+  ≡ @comm_ring_hom_apply R S h x;
+
+assert (R : τ CommRing) ⊢
+  @Fibre_cat CommRing_cat comm_ring_carrier_catd R
+  ≡ Path_cat (@comm_ring_carrier R);
+
+// Literal total ring elements expose Path_cat-valued unit evidence.
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @Fibre_cat
+    (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+    comm_ring_unit_evidence_total_catd
+    (Struct_sigma R x)
+  ≡ Path_cat (@CommRingUnitEvidence R x);
+
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  Obj
+    (@Fibre_cat
+      (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+      comm_ring_unit_evidence_total_catd
+      (Struct_sigma R x))
+  ≡ @CommRingUnitEvidence R x;
+
+// Displayed covariance reaches the structured map's actual carrier action.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @fapp0
+    (Path_cat (@CommRingHom R S))
+    (Path_cat (@comm_ring_carrier S))
+    (@fib_cov_tapp0_func
+      CommRing_cat comm_ring_carrier_catd R S x)
+    h
+  ≡ @comm_ring_hom_apply R S h x;
+
+// The shaped represented-family comparison fires only during elaboration.
+assert [K : Cat]
+  (U : τ (Obj K)) ⊢
+  @eq_refl
+    (Functor (Op_cat K) Cat_cat)
+    (@hom_ (Op_cat K) (Op_cat K)
+      (@id Cat_cat (Op_cat K)) U)
+  : τ (@=
+      (Functor (Op_cat K) Cat_cat)
+      (@hom_ (Op_cat K) (Op_cat K)
+        (@id Cat_cat (Op_cat K)) U)
+      (@hom_con K U K (@id Cat_cat K)));
+
+assertnot [K : Cat]
+  (U : τ (Obj K)) ⊢
+  @hom_ (Op_cat K) (Op_cat K)
+    (@id Cat_cat (Op_cat K)) U
+  ≡ @hom_con K U K (@id Cat_cat K);
+
+// Owner-position probe for the normalized companion: typed reflexivity must
+// invoke proof-time unification after Op(Op(K)) has reduced to K.
+assert [K : Cat]
+  (U : τ (Obj K)) ⊢
+  @eq_refl
+    (Functor K Cat_cat)
+    (@hom_ K K (@id Cat_cat K) U)
+  : τ (@=
+      (Functor K Cat_cat)
+      (@hom_ K K (@id Cat_cat K) U)
+      (@hom_con
+        (Op_cat K)
+        U
+        (Op_cat K)
+        (@id Cat_cat (Op_cat K))));
+
+// The proof-time bridge deliberately installs no runtime conversion.
+assertnot [K : Cat]
+  (U : τ (Obj K)) ⊢
+  @hom_ K K (@id Cat_cat K) U
+  ≡ @hom_con
+      (Op_cat K)
+      U
+      (Op_cat K)
+      (@id Cat_cat (Op_cat K));
+
+// Contravariant represented reindexing accumulates the base functor at runtime.
+assert [C A B : Cat]
+  (W : τ (Obj C))
+  (R : τ (Functor B C))
+  (F : τ (Functor A (Op_cat B))) ⊢
+  @Pullback_catd A (Op_cat B) (@hom_con C W B R) F
+  ≡ @hom_con
+      C W (Op_cat A)
+      (@comp_cat_fapp0
+        (Op_cat A) B C R
+        (@Op_func A (Op_cat B) F));
+
+// The projection-pullback stable rung compares only at proof time.
+assert [C Z : Cat]
+  (E : τ (Catd Z))
+  (W : τ (Obj C))
+  (R : τ (Functor (Op_cat Z) C)) ⊢
+  @eq_refl
+    (Obj (@Catd_cat (@Sigma_cat Z E)))
+    (@Sigma_proj1_pullback_catd
+      Z E (@hom_con C W (Op_cat Z) R))
+  : τ (@=
+      (Obj (@Catd_cat (@Sigma_cat Z E)))
+      (@Sigma_proj1_pullback_catd
+        Z E (@hom_con C W (Op_cat Z) R))
+      (@hom_con
+        C W
+        (Op_cat (@Sigma_cat Z E))
+        (@comp_cat_fapp0
+          (Op_cat (@Sigma_cat Z E))
+          (Op_cat Z)
+          C R
+          (@Op_func
+            (@Sigma_cat Z E)
+            Z
+            (@Sigma_proj1_func Z E)))));
+
+assertnot [C Z : Cat]
+  (E : τ (Catd Z))
+  (W : τ (Obj C))
+  (R : τ (Functor (Op_cat Z) C)) ⊢
+  @Sigma_proj1_pullback_catd
+    Z E (@hom_con C W (Op_cat Z) R)
+  ≡ @hom_con
+      C W
+      (Op_cat (@Sigma_cat Z E))
+      (@comp_cat_fapp0
+        (Op_cat (@Sigma_cat Z E))
+        (Op_cat Z)
+        C R
+        (@Op_func
+          (@Sigma_cat Z E)
+          Z
+          (@Sigma_proj1_func Z E)));
+
+// Repeated represented reindexing joins with generic pullback accumulation.
+assert [C B A D : Cat]
+  (W : τ (Obj C))
+  (R : τ (Functor B C))
+  (F : τ (Functor A (Op_cat B)))
+  (H : τ (Functor D A)) ⊢
+  @hom_con
+    C W (Op_cat D)
+    (@comp_cat_fapp0
+      (Op_cat D) (Op_cat A) C
+      (@comp_cat_fapp0
+        (Op_cat A) B C
+        R
+        (@Op_func A (Op_cat B) F))
+      (@Op_func D A H))
+  ≡ @hom_con
+      C W (Op_cat D)
+      (@comp_cat_fapp0
+        (Op_cat D) B C
+        R
+        (@Op_func
+          D (Op_cat B)
+          (@comp_cat_fapp0 D A (Op_cat B) F H)));
+
+// Whole opposite represented-family owners compare only at proof time.
+assert [A B : Cat]
+  (F : τ (Functor B A)) ⊢
+  @eq_refl
+    (Hom Cat_cat A (@Catd_cat (Op_cat B)))
+    (@hom_int
+      (Op_cat A)
+      (Op_cat B)
+      (@Op_func B A F))
+  : τ (@=
+      (Hom Cat_cat A (@Catd_cat (Op_cat B)))
+      (@hom_int
+        (Op_cat A)
+        (Op_cat B)
+        (@Op_func B A F))
+      (@hom_con_int A B F));
+
+assertnot [A B : Cat]
+  (F : τ (Functor B A)) ⊢
+  @hom_int
+    (Op_cat A)
+    (Op_cat B)
+    (@Op_func B A F)
+  ≡ @hom_con_int A B F;
+
+// Covariant represented reindexing uses the companion runtime accumulator.
+assert [C A B : Cat]
+  (W : τ (Obj C))
+  (R : τ (Functor B C))
+  (F : τ (Functor A B)) ⊢
+  @Pullback_catd A B (@hom_ C B R W) F
+  ≡ @hom_ C A (@comp_cat_fapp0 A B C R F) W;
+
+// Its projection-pullback stable rung also compares only at proof time.
+assert [C Z : Cat]
+  (E : τ (Catd Z))
+  (W : τ (Obj C))
+  (R : τ (Functor Z C)) ⊢
+  @eq_refl
+    (Obj (@Catd_cat (@Sigma_cat Z E)))
+    (@Sigma_proj1_pullback_catd Z E (@hom_ C Z R W))
+  : τ (@=
+      (Obj (@Catd_cat (@Sigma_cat Z E)))
+      (@Sigma_proj1_pullback_catd Z E (@hom_ C Z R W))
+      (@hom_
+        C (@Sigma_cat Z E)
+        (@comp_cat_fapp0
+          (@Sigma_cat Z E) Z C R
+          (@Sigma_proj1_func Z E))
+        W));
+
+assertnot [C Z : Cat]
+  (E : τ (Catd Z))
+  (W : τ (Obj C))
+  (R : τ (Functor Z C)) ⊢
+  @Sigma_proj1_pullback_catd Z E (@hom_ C Z R W)
+  ≡ @hom_
+      C (@Sigma_cat Z E)
+      (@comp_cat_fapp0
+        (@Sigma_cat Z E) Z C R
+        (@Sigma_proj1_func Z E))
+      W;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (V : τ (Obj K)) ⊢
+  @Fibre_cat
+    (Op_cat K)
+    (@comm_ring_psh_carrier_catd K O)
+    V
+  ≡ Path_cat
+      (@comm_ring_carrier (@comm_ring_psh_value K O V));
+
+// The total map computes both the ring and restricted-section projections.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  sigma_Fst
+    (@fapp0
+      (@Into_restr_cat K U)
+      (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+      (@comm_ring_psh_restriction_total_func K O U s)
+      (Struct_sigma V f))
+  ≡ @comm_ring_psh_value K O V;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  sigma_Snd
+    (@fapp0
+      (@Into_restr_cat K U)
+      (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+      (@comm_ring_psh_restriction_total_func K O U s)
+      (Struct_sigma V f))
+  ≡ @comm_ring_psh_restrict K O V U f s;
+
+// Literal higher-sieve fibres and ordinary membership retain computation.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  @Fibre_cat
+    (@Into_restr_cat K U)
+    (@comm_ring_psh_invertibility_higher_sieve K O U s)
+    (Struct_sigma V f)
+  ≡ Path_cat (@CommRingPshInvertibleAlong K O U s V f);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  Obj
+    (@Fibre_cat
+      (@Into_restr_cat K U)
+      (@comm_ring_psh_invertibility_higher_sieve K O U s)
+      (Struct_sigma V f))
+  ≡ @CommRingPshInvertibleAlong K O U s V f;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_invertibility_ordinary_evidence K O U s
+  : τ (@IsOrdinarySieve K U
+      (@comm_ring_psh_invertibility_higher_sieve K O U s));
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_invertibility_sieve K O U s
+  : τ (@Sieve K U);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  @SieveMembership
+    K U
+    (@comm_ring_psh_invertibility_sieve K O U s)
+    (Struct_sigma V f)
+  ≡ @CommRingPshInvertibleAlong K O U s V f;
+/* End of the PSSS-08b invertibility-sieve diagnostics. */
+
+// catalog-area: Presented affine Zariski basic opens and base change
+// Dependent finite evidence computes on visible family constructors.
+assert [A : Grpd]
+  (P : τ A → Grpd)
+  (n : τ Nat_grpd)
+  (x : τ A)
+  (xs : τ (@FiniteFamily A n)) ⊢
+  @FiniteFamilyAll
+    A P (succ n) (@finite_family_cons A n x xs)
+  ≡ @Product_grpd (P x) (@FiniteFamilyAll A P n xs);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  [n : τ Nat_grpd]
+  [x : τ A]
+  [xs : τ (@FiniteFamily A n)]
+  (head : τ (P x))
+  (tail : τ (@FiniteFamilyAll A P n xs)) ⊢
+  @finite_family_all_head
+    A P n (@finite_family_cons A n x xs)
+    (@finite_family_all_cons A P n x xs head tail)
+  ≡ head;
+
+// Ordinary-sieve pullback exposes membership at canonical postcomposition.
+assert [K : Cat]
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (Q : τ (@Sieve K U))
+  (f : τ (Obj (@Into_restr_cat K V)))
+  (member : τ (@SieveMembership
+      K U Q (@into_restr_postcompose K V U p f))) ⊢
+  @sieve_pullback_membership K V U p Q f member
+  : τ (@SieveMembership
+      K V (@sieve_pullback K V U p Q) f);
+
+assert (R : τ CommRing)
+  (localization : τ (@CommRingLocalizationAt R (@comm_ring_one R))) ⊢
+  @comm_ring_zariski_cover_family_length
+    R (@comm_ring_unit_zariski_cover_family R localization)
+  ≡ succ zero;
+
+// A chosen localization computes to its affine domain and structural map.
+assert [R : τ CommRing]
+  [f : τ (@comm_ring_carrier R)]
+  (localization : τ (@CommRingLocalizationAt R f)) ⊢
+  @into_restr_domain
+    (Op_cat CommRing_cat) R
+    (@comm_ring_basic_open_arrow R f localization)
+  ≡ @comm_ring_localization_target R f localization;
+
+assert [R : τ CommRing]
+  [f : τ (@comm_ring_carrier R)]
+  (localization : τ (@CommRingLocalizationAt R f)) ⊢
+  @into_restr_arrow
+    (Op_cat CommRing_cat) R
+    (@comm_ring_basic_open_arrow R f localization)
+  ≡ @comm_ring_localization_map R f localization;
+
+// Base-change composition has a literal carrier-action normal form.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [f : τ (@comm_ring_carrier R)]
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h f)))
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply
+    R
+    (@comm_ring_localization_target
+      S
+      (@comm_ring_hom_apply R S h f)
+      target_localization)
+    (@comm_ring_basic_open_base_change_composite
+      R S h f target_localization)
+    x
+  ≡ @comm_ring_hom_apply
+      S
+      (@comm_ring_localization_target
+        S
+        (@comm_ring_hom_apply R S h f)
+        target_localization)
+      (@comm_ring_localization_map
+        S
+        (@comm_ring_hom_apply R S h f)
+        target_localization)
+      (@comm_ring_hom_apply R S h x);
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [f : τ (@comm_ring_carrier R)]
+  (source_localization : τ (@CommRingLocalizationAt R f))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h f))) ⊢
+  @comm_ring_basic_open_base_change_factor_map
+    R S h f source_localization target_localization
+  : τ (@CommRingHom
+      (@comm_ring_localization_target R f source_localization)
+      (@comm_ring_localization_target
+        S
+        (@comm_ring_hom_apply R S h f)
+        target_localization));
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [f : τ (@comm_ring_carrier R)]
+  (source_localization : τ (@CommRingLocalizationAt R f))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h f))) ⊢
+  @comm_ring_basic_open_base_change_triangle
+    R S h f source_localization target_localization
+  : τ (@=
+      (@CommRingHom
+        R
+        (@comm_ring_localization_target
+          S
+          (@comm_ring_hom_apply R S h f)
+          target_localization))
+      (@comm_ring_hom_comp
+        R
+        (@comm_ring_localization_target R f source_localization)
+        (@comm_ring_localization_target
+          S
+          (@comm_ring_hom_apply R S h f)
+          target_localization)
+        (@comm_ring_basic_open_base_change_factor_map
+          R S h f source_localization target_localization)
+        (@comm_ring_localization_map R f source_localization))
+      (@comm_ring_basic_open_base_change_composite
+        R S h f target_localization));
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [f : τ (@comm_ring_carrier R)]
+  (source_localization : τ (@CommRingLocalizationAt R f))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h f))) ⊢
+  @comm_ring_basic_open_base_change_into_arrow
+    R S h f source_localization target_localization
+  : τ (Hom
+      (@Into_restr_cat (Op_cat CommRing_cat) R)
+      (@comm_ring_basic_open_arrow R f source_localization)
+      (Struct_sigma
+        (@comm_ring_localization_target
+          S
+          (@comm_ring_hom_apply R S h f)
+          target_localization)
+        (@comm_ring_basic_open_base_change_composite
+          R S h f target_localization)));
+
+// Pointwise composition and canonical slice action meet only propositionally.
+assertnot [R S T : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (g : τ (@CommRingHom S T)) ⊢
+  @into_restr_postcompose
+    (Op_cat CommRing_cat)
+    S R h
+    (Struct_sigma T g)
+  ≡ @Struct_sigma
+      (Obj CommRing_cat)
+      (λ L : τ (Obj CommRing_cat),
+        Obj (@Fibre_cat
+          CommRing_cat
+          (@yoneda_psh (Op_cat CommRing_cat) R)
+          L))
+      T
+      (@comm_ring_hom_comp_pointwise R S T g h);
+
+// Elementwise localization-generated membership is stable under pullback.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [f : τ (@comm_ring_carrier R)]
+  (source_localization : τ (@CommRingLocalizationAt R f))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h f)))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R))
+  (member : τ (@SieveMembership
+      (Op_cat CommRing_cat)
+      R Q
+      (@comm_ring_basic_open_arrow R f source_localization))) ⊢
+  @comm_ring_basic_open_pullback_membership
+    R S h f source_localization target_localization Q member
+  : τ (@SieveMembership
+      (Op_cat CommRing_cat)
+      S
+      (@sieve_pullback
+        (Op_cat CommRing_cat)
+        S R h Q)
+      (@comm_ring_basic_open_arrow
+        S
+        (@comm_ring_hom_apply R S h f)
+        target_localization));
+/* End of the PSSS-09a presented basic-open diagnostics. */
+
+// catalog-area: Finite selected Zariski containment and base change
+// Dependent evidence over selected evidence computes by Nat/Sigma recursion.
+assert [A : Grpd]
+  (P : τ A → Grpd)
+  (Q : Π x : τ A, τ (P x) → Grpd)
+  (n : τ Nat_grpd)
+  (x : τ A)
+  (xs : τ (@FiniteFamily A n))
+  (px : τ (P x))
+  (evidence : τ (@FiniteFamilyAll A P n xs)) ⊢
+  @FiniteFamilyAllOver
+    A P Q
+    (succ n)
+    (@finite_family_cons A n x xs)
+    (@finite_family_all_cons A P n x xs px evidence)
+  ≡ @Product_grpd
+      (Q x px)
+      (@FiniteFamilyAllOver A P Q n xs evidence);
+
+assert [A B : Grpd]
+  (map : τ (@Function_grpd A B))
+  [P : τ A → Grpd]
+  [P2 : τ B → Grpd]
+  [Q : Π x : τ A, τ (P x) → Grpd]
+  [Q2 : Π y : τ B, τ (P2 y) → Grpd]
+  (step : Π x : τ A,
+    Π px : τ (P x),
+    Π py : τ (P2 (map x)),
+      τ (Q x px) → τ (Q2 (map x) py))
+  (n : τ Nat_grpd) ⊢
+  @finite_family_all_over_map
+    A B map P P2 Q Q2 step n
+  : τ (@FiniteFamilyAllOverMap
+      A B map P P2 Q Q2 n);
+
+// Cover base change retains the mapped algebra and explicit target choices.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (family : τ (@CommRingZariskiCoverFamily R))
+  (target_localizations : τ (@CommRingLocalizationFamily
+      S
+      (@comm_ring_zariski_cover_family_length R family)
+      (@finite_family_map
+        (@comm_ring_carrier R)
+        (@comm_ring_carrier S)
+        (@comm_ring_hom_function R S h)
+        (@comm_ring_zariski_cover_family_length R family)
+        (@comm_ring_zariski_cover_family_generators R family)))) ⊢
+  @comm_ring_zariski_cover_family_map
+    R S h family target_localizations
+  : τ (@CommRingZariskiCoverFamily S);
+
+// Finite containment retains literal membership at every selected basic open.
+assert [R : τ CommRing]
+  (n : τ Nat_grpd)
+  (generators : τ (@FiniteFamily (@comm_ring_carrier R) n))
+  (localizations : τ (@CommRingLocalizationFamily R n generators))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R)) ⊢
+  @CommRingBasicOpenFamilyMembership
+    R n generators localizations Q
+  : Grpd;
+
+assert [R : τ CommRing]
+  (family : τ (@CommRingZariskiCoverFamily R))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R)) ⊢
+  @CommRingZariskiCoverFamilyMembership R family Q
+  : Grpd;
+
+// The bounded nonempty consumer assembles returned pullback membership.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (source_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_one R)))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h (@comm_ring_one R))))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R))
+  (member : τ (@SieveMembership
+      (Op_cat CommRing_cat)
+      R Q
+      (@comm_ring_basic_open_arrow
+        R (@comm_ring_one R) source_localization))) ⊢
+  @comm_ring_unit_basic_open_family_pullback_membership
+    R S h source_localization target_localization Q member
+  : τ (@CommRingBasicOpenFamilyMembership
+      S
+      (succ zero)
+      (@finite_family_singleton
+        (@comm_ring_carrier S)
+        (@comm_ring_hom_apply R S h (@comm_ring_one R)))
+      (@comm_ring_localization_family_singleton
+        S
+        (@comm_ring_hom_apply R S h (@comm_ring_one R))
+        target_localization)
+      (@sieve_pullback (Op_cat CommRing_cat) S R h Q));
+/* End of the PSSS-09b1 finite-containment diagnostics. */
+
+// catalog-area: Supplied Zariski-compatible topology
+// Compatibility is proposition-valued while presentations remain explicit.
+assert [T : τ (@GrothTopology (Op_cat CommRing_cat))]
+  [R : τ CommRing]
+  (family : τ (@CommRingZariskiCoverFamily R)) ⊢
+  @comm_ring_zariski_presentation_covers_is_prop T R family
+  : τ (IsPropGrpd (@CommRingZariskiPresentationCovers T R family));
+
+assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] ⊢
+  @is_comm_ring_zariski_compatible_topology_is_prop T
+  : τ (IsPropGrpd (@IsCommRingZariskiCompatibleTopology T));
+
+// Package projections compute through the ordinary Sigma owners.
+assert [T : τ (@GrothTopology (Op_cat CommRing_cat))]
+  (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢
+  @comm_ring_zariski_compatible_topology_topology
+    (@comm_ring_zariski_compatible_topology_intro T compatible)
+  ≡ T;
+
+assert [T : τ (@GrothTopology (Op_cat CommRing_cat))]
+  (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢
+  @comm_ring_zariski_compatible_topology_compatible
+    (@comm_ring_zariski_compatible_topology_intro T compatible)
+  ≡ compatible;
+
+// The direct chaotic model is nonempty and its cover consumer computes.
+assert ⊢
+  chaotic_comm_ring_zariski_compatible_topology
+  : τ CommRingZariskiCompatibleTopology;
+
+assert [R : τ CommRing]
+  (family : τ (@CommRingZariskiCoverFamily R))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R))
+  (members : τ (@CommRingZariskiCoverFamilyMembership R family Q)) ⊢
+  @comm_ring_zariski_compatible_topology_covers
+    chaotic_comm_ring_zariski_compatible_topology
+    R family Q members
+  ≡ tt;
+/* End of the PSSS-09cZ1 supplied-topology diagnostics. */
+
+// catalog-area: Invertibility-cover locality and localization factors
+// The topology view is transparent and remains proposition-valued.
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @CommRingPshInvertibilityCover K T O U s
+  ≡ @groth_topology_covers
+      K T U (@comm_ring_psh_invertibility_sieve K O U s);
+
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_invertibility_cover_is_prop K T O U s
+  : τ (IsPropGrpd (@CommRingPshInvertibilityCover K T O U s));
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @chaotic_comm_ring_psh_invertibility_cover K O U s
+  ≡ tt;
+
+// Literal D(s) membership selects a universal localization factor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @comm_ring_psh_localization_factor_at_member
+    K O U s localization V f member
+  : τ (@CommRingPshLocalizationFactorAlong
+      K O U s localization V f);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f)))
+  (x : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_localization_factor_triangle_at
+    K O U s localization V f member x
+  : τ (@= (@CommRingPshSection K O V)
+      (@comm_ring_hom_apply
+        (@comm_ring_localization_target
+          (@comm_ring_psh_value K O U) s localization)
+        (@comm_ring_psh_value K O V)
+        (@comm_ring_psh_localization_factor_map_at_member
+          K O U s localization V f member)
+        (@comm_ring_hom_apply
+          (@comm_ring_psh_value K O U)
+          (@comm_ring_localization_target
+            (@comm_ring_psh_value K O U) s localization)
+          (@comm_ring_localization_map
+            (@comm_ring_psh_value K O U) s localization)
+          x))
+      (@comm_ring_psh_restrict K O V U f x));
+
+// The internal value diagram reaches O(V) at the readable sieve element.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U V : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @fapp0
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    CommRing_cat
+    (@comm_ring_psh_invertibility_value_diagram K O U s)
+    (@comm_ring_psh_invertibility_element K O U s V f member)
+  ≡ @comm_ring_psh_value K O V;
+
+// The internal cone component is the selected universal localization factor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U V : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @tapp0_fapp0
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    CommRing_cat
+    (@Const_func
+      (@CommRingPshInvertibilityElements_cat K O U s)
+      CommRing_cat
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization))
+    (@comm_ring_psh_invertibility_value_diagram K O U s)
+    (@comm_ring_psh_invertibility_element K O U s V f member)
+    (@comm_ring_psh_localization_factor_cone K O U s localization)
+  ≡ @comm_ring_psh_localization_factor_map_at_member
+      K O U s localization V f member;
+
+// Every total-category arrow has one internal off-diagonal cone component.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  [x y : τ (Obj (@CommRingPshInvertibilityElements_cat K O U s))]
+  (a : τ (Hom (@CommRingPshInvertibilityElements_cat K O U s) x y)) ⊢
+  @tapp1_fapp0
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    CommRing_cat
+    (@Const_func
+      (@CommRingPshInvertibilityElements_cat K O U s)
+      CommRing_cat
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization))
+    (@comm_ring_psh_invertibility_value_diagram K O U s)
+    x y
+    (@comm_ring_psh_localization_factor_cone K O U s localization)
+    a
+  : τ (Hom
+      CommRing_cat
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)
+      (@fapp0
+        (@CommRingPshInvertibilityElements_cat K O U s)
+        CommRing_cat
+        (@comm_ring_psh_invertibility_value_diagram K O U s)
+        y));
+
+// Following a factor by another restriction gives a competing direct factor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  [W V : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @comm_ring_psh_localization_factor_after_restriction
+    K O U s localization W V f g member
+  : τ (@CommRingPshLocalizationFactorAlong
+      K O U s localization W (@comp_fapp0 K W V U f g));
+
+// Contractible-factor uniqueness supplies the objectwise cone equation.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  [W V : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @comm_ring_psh_localization_factor_restriction_path
+    K O U s localization W V f g member
+  : τ (@=
+      (@CommRingHom
+        (@comm_ring_localization_target
+          (@comm_ring_psh_value K O U) s localization)
+        (@comm_ring_psh_value K O W))
+      (@comm_ring_psh_localization_factor_map_at_member
+        K O U s localization W (@comp_fapp0 K W V U f g)
+        (@comm_ring_psh_invertible_along_restrict
+          K O W V U f g s member))
+      (@comm_ring_hom_comp_pointwise
+        (@comm_ring_localization_target
+          (@comm_ring_psh_value K O U) s localization)
+        (@comm_ring_psh_value K O V)
+        (@comm_ring_psh_value K O W)
+        (@comm_ring_psh_restriction_hom K O W V g)
+        (@comm_ring_psh_localization_factor_map_at_member
+          K O U s localization V f member)));
+/* End of the PSSS-08c0/PSSS-08c0C internal locality-cone diagnostics. */
+
+// catalog-area: Localization matching restriction
+// A literal matching fibre is the Path-valued carrier of O(V).
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @Fibre_cat
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    (@comm_ring_psh_localization_matching_catd K O U s)
+    (@comm_ring_psh_invertibility_element K O U s V f member)
+  ≡ Path_cat (@comm_ring_carrier (@comm_ring_psh_value K O V));
+
+// The coherent section computes pointwise by the selected localization factor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f)))
+  (x : τ (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization))) ⊢
+  @piapp0
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    (@comm_ring_psh_localization_matching_catd K O U s)
+    (@comm_ring_psh_localization_matching_section
+      K O U s localization x)
+    (@comm_ring_psh_invertibility_element K O U s V f member)
+  ≡ @comm_ring_hom_apply
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)
+      (@comm_ring_psh_value K O V)
+      (@comm_ring_psh_localization_factor_map_at_member
+        K O U s localization V f member)
+      x;
+
+// PathLift exposes the selected section as the functor's object action.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (x : τ (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization))) ⊢
+  @fapp0
+    (Path_cat (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)))
+    (@CommRingPshLocalizationMatching_cat K O U s)
+    (@comm_ring_psh_localization_matching_restriction_func
+      K O U s localization)
+    x
+  ≡ @comm_ring_psh_localization_matching_section
+      K O U s localization x;
+
+// Functor application followed by Pi evaluation preserves literal computation.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f)))
+  (x : τ (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization))) ⊢
+  @piapp0
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    (@comm_ring_psh_localization_matching_catd K O U s)
+    (@fapp0
+      (Path_cat (@comm_ring_carrier
+        (@comm_ring_localization_target
+          (@comm_ring_psh_value K O U) s localization)))
+      (@CommRingPshLocalizationMatching_cat K O U s)
+      (@comm_ring_psh_localization_matching_restriction_func
+        K O U s localization)
+      x)
+    (@comm_ring_psh_invertibility_element K O U s V f member)
+  ≡ @comm_ring_hom_apply
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)
+      (@comm_ring_psh_value K O V)
+      (@comm_ring_psh_localization_factor_map_at_member
+        K O U s localization V f member)
+      x;
+
+// Equality-path action is internal and lands between coherent Pi sections.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (x y : τ (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)))
+  (p : τ (@=
+      (@comm_ring_carrier
+        (@comm_ring_localization_target
+          (@comm_ring_psh_value K O U) s localization))
+      x y)) ⊢
+  @fapp1_fapp0
+    (Path_cat (@comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)))
+    (@CommRingPshLocalizationMatching_cat K O U s)
+    (@comm_ring_psh_localization_matching_restriction_func
+      K O U s localization)
+    x y p
+  : τ (Hom
+      (@CommRingPshLocalizationMatching_cat K O U s)
+      (@comm_ring_psh_localization_matching_section
+        K O U s localization x)
+      (@comm_ring_psh_localization_matching_section
+        K O U s localization y));
+/* End of the PSSS-08c0D localization-matching diagnostics. */
+
+// catalog-area: Localization glue
+// The selected localization carrier remains the actual ring carrier.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s)) ⊢
+  @CommRingPshLocalizationCarrier K O U s localization
+  ≡ @comm_ring_carrier
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization);
+
+// Constructor projection preserves the complete selected glue functor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (glue_func : τ (@CommRingPshLocalizationGlueFunctor
+      K O U s localization))
+  (glue_restrict : τ (@CommRingPshLocalizationGlueRestrictLaw
+      K O U s localization glue_func))
+  (restrict_glue : τ
+      (@CommRingPshLocalizationRestrictGlueComponentLaw
+        K O U s localization glue_func)) ⊢
+  @comm_ring_psh_localization_glue_func
+    K O U s localization
+    (@comm_ring_psh_localization_glue_intro
+      K O U s localization glue_func glue_restrict restrict_glue)
+  ≡ glue_func;
+
+// Glue carries matching-arrow action internally through its functor package.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (glue : τ (@CommRingPshLocalizationGlue K O U s localization))
+  (m n : τ (Obj (@CommRingPshLocalizationMatching_cat K O U s)))
+  (eta : τ (Hom (@CommRingPshLocalizationMatching_cat K O U s) m n)) ⊢
+  @fapp1_fapp0
+    (@CommRingPshLocalizationMatching_cat K O U s)
+    (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+    (@comm_ring_psh_localization_glue_func K O U s localization glue)
+    m n eta
+  : τ (Hom
+      (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+      (@comm_ring_psh_localization_glue
+        K O U s localization glue m)
+      (@comm_ring_psh_localization_glue
+        K O U s localization glue n));
+
+// The selected left-inverse law is available at every localization element.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (glue : τ (@CommRingPshLocalizationGlue K O U s localization))
+  (x : τ (@CommRingPshLocalizationCarrier K O U s localization)) ⊢
+  @comm_ring_psh_localization_glue_restrict_path
+    K O U s localization glue x
+  : τ (@=
+      (@CommRingPshLocalizationCarrier K O U s localization)
+      (@comm_ring_psh_localization_glue
+        K O U s localization glue
+        (@comm_ring_psh_localization_matching_section
+          K O U s localization x))
+      x);
+
+// Literal member observation is the computational Cartier factor equation.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (glue : τ (@CommRingPshLocalizationGlue K O U s localization))
+  (matching : τ (Obj
+      (@CommRingPshLocalizationMatching_cat K O U s)))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @comm_ring_psh_localization_glue_at_member_path
+    K O V U s localization glue matching f member
+  : τ (@=
+      (@comm_ring_carrier (@comm_ring_psh_value K O V))
+      (@comm_ring_hom_apply
+        (@comm_ring_localization_target
+          (@comm_ring_psh_value K O U) s localization)
+        (@comm_ring_psh_value K O V)
+        (@comm_ring_psh_localization_factor_map_at_member
+          K O U s localization V f member)
+        (@comm_ring_psh_localization_glue
+          K O U s localization glue matching))
+      (@piapp0
+        (@CommRingPshInvertibilityElements_cat K O U s)
+        (@comm_ring_psh_localization_matching_catd K O U s)
+        matching
+        (@comm_ring_psh_invertibility_element K O U s V f member)));
+/* End of the PSSS-08c0E localization-glue diagnostics. */
+
+// catalog-area: Whole localization locality
+// The generic selected left inverse has a whole right cancellation law.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong Cat_cat A B F)) ⊢
+  @omega_equiv_along_cat_left_inv_right_law A B F u
+  : τ (@=
+      (Obj (Functor_cat B B))
+      (@comp_cat_fapp0
+        B A B
+        F
+        (@omega_equiv_along_left_inv Cat_cat A B F u))
+      (@id_func B));
+
+// The stronger capability fixes the existing restriction functor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s)) ⊢
+  @CommRingPshLocalizationLocality K O U s localization
+  ≡ @OmegaEquivAlong
+      Cat_cat
+      (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+      (@CommRingPshLocalizationMatching_cat K O U s)
+      (@comm_ring_psh_localization_matching_restriction_func
+        K O U s localization);
+
+// Glue after restriction is equality of whole endofunctors.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization)) ⊢
+  @comm_ring_psh_localization_locality_glue_restrict_functor_path
+    K O U s localization locality
+  : τ (@=
+      (Obj (Functor_cat
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))))
+      (@comp_cat_fapp0
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@comm_ring_psh_localization_locality_glue_func
+          K O U s localization locality)
+        (@comm_ring_psh_localization_matching_restriction_func
+          K O U s localization))
+      (@id_func
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))));
+
+// Restriction after the same selected glue is equality of whole endofunctors.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization)) ⊢
+  @comm_ring_psh_localization_locality_restrict_glue_functor_path
+    K O U s localization locality
+  : τ (@=
+      (Obj (Functor_cat
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (@CommRingPshLocalizationMatching_cat K O U s)))
+      (@comp_cat_fapp0
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (Path_cat (@CommRingPshLocalizationCarrier K O U s localization))
+        (@CommRingPshLocalizationMatching_cat K O U s)
+        (@comm_ring_psh_localization_matching_restriction_func
+          K O U s localization)
+        (@comm_ring_psh_localization_locality_glue_func
+          K O U s localization locality))
+      (@id_func (@CommRingPshLocalizationMatching_cat K O U s)));
+
+// Evaluating whole locality reconstructs the earlier component-view package.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (locality : τ (@CommRingPshLocalizationLocality
+      K O U s localization)) ⊢
+  @comm_ring_psh_localization_locality_legacy_glue
+    K O U s localization locality
+  : τ (@CommRingPshLocalizationGlue K O U s localization);
+/* End of the PSSS-11b generic whole-locality diagnostics. */
+
+// catalog-area: Computational affine Spec slice
+// Coordinate rings are an actual presheaf on the conventional big slice.
+assert (R : τ CommRing) ⊢
+  @affine_spec_coordinate_psh R
+  : τ (@CommRingPsh (@AffineSpecBigSlice_cat R));
+
+// The whole and selected basic-open chart values compute at the Sigma owner.
+assert (R : τ CommRing) ⊢
+  @comm_ring_psh_value
+    (@AffineSpecBigSlice_cat R)
+    (@affine_spec_coordinate_psh R)
+    (@affine_spec_whole_chart R)
+  ≡ R;
+
+assert [R : τ CommRing]
+  [f : τ (@comm_ring_carrier R)]
+  (localization : τ (@CommRingLocalizationAt R f)) ⊢
+  @comm_ring_psh_value
+    (@AffineSpecBigSlice_cat R)
+    (@affine_spec_coordinate_psh R)
+    (@affine_spec_basic_open_chart R f localization)
+  ≡ @comm_ring_localization_target R f localization;
+
+// Both geometric overlap arrows retain their whole coordinate-ring maps.
+assert [R : τ CommRing]
+  [f g : τ (@comm_ring_carrier R)]
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g))) ⊢
+  @comm_ring_psh_restriction_hom
+    (@AffineSpecBigSlice_cat R)
+    (@affine_spec_coordinate_psh R)
+    (@affine_spec_iterated_basic_open_chart R f g iterated)
+    (@affine_spec_basic_open_chart
+      R (@comm_ring_mul R f g) product_localization)
+    (@affine_spec_overlap_forward_chart_arrow
+      R f g iterated product_localization)
+  ≡ @comm_ring_iterated_localization_comparison_forward_map
+      R f g iterated product_localization
+      (@comm_ring_iterated_localization_comparison
+        R f g iterated product_localization);
+
+assert [R : τ CommRing]
+  [f g : τ (@comm_ring_carrier R)]
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g))) ⊢
+  @comm_ring_psh_restriction_hom
+    (@AffineSpecBigSlice_cat R)
+    (@affine_spec_coordinate_psh R)
+    (@affine_spec_basic_open_chart
+      R (@comm_ring_mul R f g) product_localization)
+    (@affine_spec_iterated_basic_open_chart R f g iterated)
+    (@affine_spec_overlap_reverse_chart_arrow
+      R f g iterated product_localization)
+  ≡ @comm_ring_iterated_localization_comparison_reverse_map
+      R f g iterated product_localization
+      (@comm_ring_iterated_localization_comparison
+        R f g iterated product_localization);
+
+// The scheme-facing overlap facade preserves the native whole CommRing
+// equivalence; it does not assert equality of functors or invoke univalence.
+assert [R : τ CommRing]
+  [f g : τ (@comm_ring_carrier R)]
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g))) ⊢
+  @affine_spec_overlap_coordinate_omega_equiv
+    R f g iterated product_localization
+  : τ (@OmegaEquiv
+      CommRing_cat
+      (@comm_ring_localization_target
+        R (@comm_ring_mul R f g) product_localization)
+      (@comm_ring_iterated_localization_target R f g iterated));
+/* End of the PSSS-10a computational affine-Spec diagnostics. */
+
+// catalog-area: Complementary-idempotent affine atlas
+// The selected cover retains both generators and localization packages.
+assert (R S : τ CommRing) ⊢
+  @comm_ring_zariski_cover_family_length
+    (@comm_ring_product R S)
+    (@comm_ring_product_split_cosplit_zariski_cover_family R S)
+  ≡ succ (succ zero);
+
+// Orthogonality supplies the computationally empty overlap.
+assert (R S : τ CommRing) ⊢
+  @comm_ring_product_split_cosplit_product_zero_path R S
+  : τ (@=
+      (@comm_ring_carrier (@comm_ring_product R S))
+      (@comm_ring_mul
+        (@comm_ring_product R S)
+        (@comm_ring_product_split_idempotent R S)
+        (@comm_ring_product_cosplit_idempotent R S))
+      (@comm_ring_zero (@comm_ring_product R S)));
+
+assert (R S : τ CommRing) ⊢
+  @comm_ring_psh_value
+    (@AffineSpecBigSlice_cat (@comm_ring_product R S))
+    (@affine_spec_coordinate_psh (@comm_ring_product R S))
+    (@affine_spec_product_split_cosplit_overlap_chart R S)
+  ≡ zero_comm_ring;
+
+// Both internally carried overlap arrows expose whole CommRing restrictions.
+assert (R S : τ CommRing) ⊢
+  @comm_ring_psh_restriction_hom
+    (@AffineSpecBigSlice_cat (@comm_ring_product R S))
+    (@affine_spec_coordinate_psh (@comm_ring_product R S))
+    (@affine_spec_product_split_cosplit_overlap_chart R S)
+    (@affine_spec_product_split_chart R S)
+    (@affine_spec_product_split_overlap_chart_arrow R S)
+  ≡ @comm_ring_hom_to_zero
+      (@comm_ring_localization_target
+        (@comm_ring_product R S)
+        (@comm_ring_product_split_idempotent R S)
+        (@comm_ring_product_split_localization R S));
+
+assert (R S : τ CommRing) ⊢
+  @comm_ring_psh_restriction_hom
+    (@AffineSpecBigSlice_cat (@comm_ring_product R S))
+    (@affine_spec_coordinate_psh (@comm_ring_product R S))
+    (@affine_spec_product_split_cosplit_overlap_chart R S)
+    (@affine_spec_product_cosplit_chart R S)
+    (@affine_spec_product_cosplit_overlap_chart_arrow R S)
+  ≡ @comm_ring_hom_to_zero
+      (@comm_ring_localization_target
+        (@comm_ring_product R S)
+        (@comm_ring_product_cosplit_idempotent R S)
+        (@comm_ring_product_cosplit_localization R S));
+
+// The closed F2 x F2 chart product reduces literally to zero.
+assert ⊢
+  @comm_ring_mul
+    f2_split_comm_ring
+    f2_split_idempotent
+    f2_split_cosplit_idempotent
+  ≡ @comm_ring_zero f2_split_comm_ring;
+/* End of the PSSS-10b complementary-idempotent atlas diagnostics. */

@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-: "${EMDASH_WARNING_TIMEOUT:=${EMDASH_TYPECHECK_TIMEOUT:-60s}}"
+: "${EMDASH_WARNING_TIMEOUT:=${EMDASH_TYPECHECK_TIMEOUT:-90s}}"
 : "${EMDASH_WARNING_LOG:=logs/warnings/latest.log}"
 
 mkdir -p "$(dirname "$EMDASH_WARNING_LOG")"

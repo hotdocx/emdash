@@ -1,7 +1,7 @@
 # emdash v3.2 Canonical Surface Syntax
 
 Date: 2026-06-05
-Last reviewed: 2026-08-01
+Last reviewed: 2026-08-04
 
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
@@ -334,6 +334,608 @@ component-evaluation projection ladder.
 Do not make an Agda-style parenthesized binder-arrow form the primary section
 syntax. The `Π` spelling should visibly signal the terminal-shape section
 category.
+
+## Cat-Valued Presheaves
+
+Canonical comment/formula notation:
+
+```text
+Psh_cat(K) = K^op ⊢ Cat
+P :^n Psh(K)
+F^* : Psh_cat(B) ⊢ Psh_cat(A)
+F^*(P) = Pullback_catd(P,Op_func(F)).
+y_K : K ⊢ Psh_cat(K)
+y_K(U)[V] = Hom_K(V,U)
+Into^-_K(U) = Sigma_(V : K^op) Hom_K(V,U)
+K/U = Op_cat(Into^-_K(U)).
+```
+
+Kernel meanings:
+
+```text
+Psh_cat K
+Psh K
+Psh_pullback_func F
+yoneda_psh_func K
+yoneda_psh U
+Into_restr_cat U
+Slice_cat U
+```
+
+`Psh_cat(K)` is the category expression; `Psh(K)` is its decoded object/type
+classifier. The equality with `K^op ⊢ Cat` is proof-time presentation
+comparison plus explicit runtime object/hom projections, not a runtime
+category-head rewrite. This notation currently means Cat-valued presheaves.
+Do not use `Psh` or `stack` to silently claim pointwise discreteness or a
+descent condition.
+
+`Into^-_K(U)` is explicitly restriction-oriented; `K/U` is the conventional
+slice and has the opposite direction. Cat-valued higher sieves use:
+
+```text
+HigherSieveClassifier(K)[U]
+  = Catd_cat(Into^-_K(U))
+  =proof-time Psh_cat(K/U)
+maximal_higher_sieve(U) = Terminal_catd(Into^-_K(U)).
+```
+
+Kernel names are `HigherSieveClassifier K`, `HigherSieve_cat U`,
+`HigherSieve U`, and `maximal_higher_sieve U`. The displayed second equality
+uses the common proof-time `Catd_cat(Into_restr_cat U)` presentation; it is
+not a direct runtime conversion. Write `higher sieve` or `Cat-valued higher
+sieve` for this object.
+
+The downstream ordinary specialization uses:
+
+```text
+Subterminal(C)
+  := IsPropGrpd(Obj(C)) and IsGroupoidalCat(C)
+OrdinarySieve(S)
+  := forall f : Into^-_K(U), Subterminal(S[f])
+Sieve_K(U)
+  := { S : HigherSieve_K(U) | OrdinarySieve(S) }
+p^*(R) := sieve_pullback(p,R).
+```
+
+Kernel names are `IsSubterminalCat C`, `IsOrdinarySieve S`, `Sieve U`, and
+`sieve_pullback p R`. In prose, unqualified “sieve” means this ordinary
+pointwise-subterminal package; say “higher sieve” explicitly for arbitrary
+Cat-valued data. Do not write `Omega_K` as though it were active: the name
+`Omega` remains reserved until sieve setness and contravariant family assembly
+are checked. Pullback along an identity is not advertised as definitional
+package eta because it reconstructs retained proposition evidence.
+
+Direct sieve-topology notation is:
+
+```text
+f ∈ R                    := SieveMembership(R,f)
+⊤_U                      := maximal_sieve(U)
+J ⊩ R                    := Covers(J,R)
+p^*R                     := sieve_pullback(p,R)
+Topology(K)              := GrothTopology(K)
+J_chaotic                := chaotic_groth_topology(K).
+```
+
+`f` denotes the full restriction-total pair `(V,f : V -> U)` where necessary;
+do not suppress its domain when the local-character formula would become
+ambiguous. The three checked topology laws may be written:
+
+```text
+J ⊩ ⊤_U
+J ⊩ R -> J ⊩ p^*R
+J ⊩ R -> (forall f ∈ R, J ⊩ f^*S) -> J ⊩ S.
+```
+
+Kernel names are `SieveCoverage K`, `Covers J R`, `GrothMaximal J`,
+`GrothStable J`, `SieveLocalityPremise J R S`, `GrothLocal J`,
+`IsGrothTopology J`, and `GrothTopology K`. Use
+`groth_topology_cover_predicate`, `groth_topology_maximal`,
+`groth_topology_pullback`, and `groth_topology_local_character` for named
+package observations. “Coverage” here means a direct proposition-valued
+predicate on sieves; a syntax/API for generating cover families is not yet
+selected. `Omega`, free saturation, sheafification, and descent remain
+separate names and gates.
+
+Set-carrier commutative-ring notation is:
+
+```text
+R : CommRing
+|R|                      := comm_ring_carrier(R)
+0_R                      := comm_ring_zero(R)
+1_R                      := comm_ring_one(R)
+x +_R y                  := comm_ring_add(R,x,y)
+-_R x                    := comm_ring_neg(R,x)
+x *_R y                  := comm_ring_mul(R,x,y).
+
+h : R ->_CRing S         := h : CommRingHom(R,S)
+|h|                      := comm_ring_hom_function(R,S,h)
+h(x)                     := comm_ring_hom_apply(R,S,h,x)
+id^CRing_R               := comm_ring_hom_id(R)
+id^pw_R                  := comm_ring_hom_id_pointwise(R)
+g ∘_CRing f              := comm_ring_hom_comp(g,f).
+g ∘_pw f                 := comm_ring_hom_comp_pointwise(g,f)
+R ×_CRing S              := comm_ring_product(R,S)
+h ×_hom k                := comm_ring_product_map(h,k)
+F2                        := f2_comm_ring
+
+u : Unit_R(x)              := u : CommRingUnitEvidence(R,x)
+u^-1                       := comm_ring_unit_inverse(R,x,u)
+Loc_R(f)                   := CommRingLocalizationAt(R,f)
+R[1/f]_ell                 := comm_ring_localization_target(R,f,ell)
+iota_ell                   := comm_ring_localization_map(R,f,ell)
+unit(1_R)                  := comm_ring_one_unit(R)
+idLoc_R(f,u)               := comm_ring_unit_identity_localization(R,f,u)
+idLoc_R(1_R)               := comm_ring_identity_localization_at_one(R)
+zeroLoc_R                  := comm_ring_zero_localization(R)
+eR                         := comm_ring_idempotent_image(R,e,e2)
+idemLoc_R(e,e2)            := comm_ring_idempotent_image_localization(R,e,e2)
+split_e(R,S)               := comm_ring_product_split_idempotent(R,S)
+splitLoc(R,S)              := comm_ring_product_split_localization(R,S)
+splitOpen(R,S)             := comm_ring_product_split_basic_open_arrow(R,S)
+IterLoc_R(f,g)             := CommRingIteratedLocalizationAt(R,f,g)
+CompLoc_R(f,g,m,p)         := CommRingIteratedLocalizationComparison(m,p)
+OverlapAlong_R(f,g,m,p,c)  := comm_ring_iterated_localization_comparison_omega_equiv_along(c)
+Overlap_R(f,g,m,p,c)       := comm_ring_iterated_localization_comparison_omega_equiv(c).
+
+O : CRingPsh(K)            := O : CommRingPsh(K)
+O(U)                       := comm_ring_psh_value(O,U)
+O[f]                       := comm_ring_psh_restriction_hom(O,f)
+f^*_O(s)                   := comm_ring_psh_restrict(O,f,s)
+D_O(s;f)                   := CommRingPshInvertibleAlong(O,s,f)
+```
+
+Subscripts may be omitted only when the ring is unambiguous.  The carrier is
+not a bare meta-level `Type`: `comm_ring_carrier_package R` retains its
+`SetU_grpd` package, and `comm_ring_carrier_is_set R` exposes its sethood
+evidence.  Kernel constructors are `comm_ring_ops_intro`,
+`comm_ring_laws_intro`, `comm_ring_structure_intro`, and `comm_ring_intro`;
+the eight readable law projections are named `comm_ring_add_assoc_law`
+through `comm_ring_left_distrib_law`.  `zero_comm_ring` denotes the checked
+one-element zero ring, so notation must not suggest an implicit `0 != 1`
+axiom.
+
+Structured-map constructors use `comm_ring_hom_intro` and
+`comm_ring_hom_laws_intro`. The retained witnesses have readable projections
+`comm_ring_hom_zero_law`, `comm_ring_hom_one_law`,
+`comm_ring_hom_add_law`, `comm_ring_hom_neg_law`, and
+`comm_ring_hom_mul_law`. `CommRing_cat` is active with objects `CommRing` and
+homs `Path_cat(CommRingHom(R,S))`; its whole identity/composition arrows retain
+the generic category owners. Thus `h(x)` computes for explicit constructors,
+but this notation must not imply an extra runtime equation reducing
+`comm_ring_hom_apply(comm_ring_hom_id(R),x)` to `x`.
+
+The selected `id^pw_R` notation is the rigid pointwise identity comparison
+used by the empty-variable polynomial model. Its carrier application computes
+to `x`, and `comm_ring_hom_id_pointwise_path` compares it at proof time with
+`id^CRing_R`. Do not silently replace generic whole-arrow identity by this
+pointwise view.
+
+The selected `g ∘_pw f` notation is reserved for the rigid pointwise
+composition comparison used by iterated localization. Its carrier application
+computes to `g(f(x))`, and `comm_ring_hom_comp_pointwise_path` compares it at
+proof time with `g ∘_CRing f`. Do not silently replace generic whole-arrow
+composition by this pointwise view in comments or future surface elaboration.
+
+`CommRingHomPointwisePath h k` is the canonical premise for
+`comm_ring_hom_ext`; notation `h = k by ext x` may be used in prose only when
+the displayed pointwise path is clear. `comm_ring_unit_evidence_is_prop`
+records that explicit inverse evidence is a property.
+
+For `ell : Loc_R(f)`, `R[1/f]_ell` and `iota_ell` always retain the chosen
+package subscript. The library does not install a global canonical term named
+`R[1/f]`, nor does it identify two chosen packages judgmentally. A factor
+through `iota` is a term of `CommRingLocalizationFactor(iota,h)`, whose second
+field is the pointwise triangle `k(iota(x)) = h(x)`. The localization property
+states that this factor classifier is contractible whenever `h(f)` has
+explicit unit evidence.
+
+For a supplied path `e2 : e*_R e = e`, `eR` denotes the fixed-image ring
+whose elements retain `(x,e*x=x)`, and `idemLoc_R(e,e2)` denotes its selected
+localization package. Its structure-map observation is
+`element(iota_e(x)) = e*x`. This notation does not assert that `e` is
+nontrivial or that every localization is a fixed-image localization; a closed
+nontrivial instance requires the separately gated product-ring consumer.
+
+For `m : IterLoc_R(f,g)`, the first stage is a chosen localization at `f` and
+the second is a chosen localization at the image of `g`; its stable composite
+map sends `f*g` to a unit. For
+`p : Loc_R(f*g)`, `CompLoc_R(f,g,m,p)` retains canonical forward and reverse
+factors with pointwise triangles. `OverlapAlong_R(f,g,m,p,c)` explicitly
+asserts that the forward factor has the reverse factor as both a left and
+right inverse in `CommRing_cat`; `Overlap_R(f,g,m,p,c)` is its first-class
+facade. Neither notation identifies the chosen targets or localization
+packages judgmentally.
+
+`CRingPsh(K)` is only comment/example notation for the transparent category
+`Functor_cat(Op_cat(K),CommRing_cat)`; it does not denote a new rigid kernel
+head. For `f : V -> U`, `O[f]` is contravariant and
+`f^*_O(s) : |O(V)|`. The library supplies explicit paths
+`id^*_O(s)=s` and `(f∘g)^*_O(s)=g^*_O(f^*_O(s))`; this notation must not be
+read as adding carrier rewrites for generic `CommRing_cat` identity or
+composition.
+
+`D_O(s;f)` names the proposition that `f^*_O(s)` has explicit unit
+evidence. The whole ordinary sieve is now
+`comm_ring_psh_invertibility_sieve(K,O,U,s)`, so comments may write
+`InvSieve_O(s)` or `D_O(s)` for that package and retain `D_O(s;f)` for its
+literal-arrow membership classifier. For a supplied topology `T`, comments
+may write `Cover_T(D_O(s))` for
+`CommRingPshInvertibilityCover(T,O,U,s)`. Given a chosen localization
+`ell : Loc_{O(U)}(s)` and an actual member `m : D_O(s;f)`,
+`factor_O(ell;f,m) : O(U)[1/s]_ell -> O(V)` denotes
+`comm_ring_psh_localization_factor_map_at_member`; its canonical observation
+is `factor_O(ell;f,m)(ell(x)) = f^*_O(x)`. Comments may write
+`Elem(D_O(s))` for `CommRingPshInvertibilityElements_cat(O,U,s)` and
+`factorCone_O(ell) : Const(O(U)[1/s]_ell) => O o dom` for
+`comm_ring_psh_localization_factor_cone`; its literal component is
+`factorCone_O(ell)[(V,f,m)] = factor_O(ell;f,m)`. This is a genuine internal
+ordinary transformation, so generic `tapp1`—not an external square field—owns
+naturality. For `g:W->V`, comments may still write the derived construction
+audit
+`factor_O(ell;f o g,g^*m) = g^*_O o factor_O(ell;f,m)`. None of this yet
+identifies the cone as a limit or implies a descent theorem, sheaf, or locally
+ringed structure.
+
+The computational matching-family consumer may be written
+
+```text
+Matching_O(s) = Pi_(V,f,m in Elem(D_O(s))) Path_cat(|O(V)|)
+restrict_ell : Path_cat(|O(U)[1/s]_ell|) -> Matching_O(s)
+restrict_ell(x)[V,f,m] = factor_O(ell;f,m)(x).
+```
+
+The literal owners are `CommRingPshLocalizationMatching_cat`,
+`comm_ring_psh_localization_matching_section`, and
+`comm_ring_psh_localization_matching_restriction_func`. `Matching_O(s)` means
+the internally coherent Pi section category, not a raw product of unrelated
+elements. `restrict_ell` includes equality-path action through PathLift. Do
+not add external naturality squares to this notation, and do not call it a
+descent equivalence until a separately selected `glue_ell` and its laws have
+been constructed from a real consumer.
+
+The compatibility view of selected Cartier-locality glue may be written
+
+```text
+glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|)
+glue_ell(restrict_ell(x)) = x
+factor_O(ell;f,m)(glue_ell(a)) = a[V,f,m].
+```
+
+The literal functor owner is
+`comm_ring_psh_localization_glue_func`; its object action is
+`comm_ring_psh_localization_glue`. The two observations are exposed by
+`comm_ring_psh_localization_glue_restrict_path` and
+`comm_ring_psh_localization_glue_at_member_path`. `glue_ell` is a complete
+ordinary functor, so its action on arrows between matching families remains
+with generic `fapp1`; the displayed equalities are retained paths, not new
+rewrite rules or external naturality fields. This notation expresses selected
+locality over the basic-open sieve `D_O(s)`, which need not cover `U`. It does
+not by itself name ordinary sheaf descent, a generated topology, `Spec`, or a
+scheme.
+
+The stronger whole locality capability may be written
+
+```text
+LocLocal_O(s;ell)         : restrict_ell is a fixed-forward whole equivalence
+glue^Loc_ell              : selected whole inverse functor
+glue^Loc_ell o restrict_ell = id
+restrict_ell o glue^Loc_ell = id.
+```
+
+The literal owners are `CommRingPshLocalizationLocality`,
+`comm_ring_psh_localization_locality_glue_func`,
+`comm_ring_psh_localization_locality_glue_restrict_functor_path`, and
+`comm_ring_psh_localization_locality_restrict_glue_functor_path`. The
+classifier is exactly `OmegaEquivAlong Cat_cat` with the existing restriction
+functor fixed as its forward map. The transparent
+`comm_ring_psh_localization_locality_legacy_glue` adapter derives the earlier
+point/component package by evaluating the whole paths. Do not read
+`LocLocal` as judgmental `DefIso`, ordinary covering-sieve descent, or a
+stalk-local-ring condition; `D_O(s)` need not cover `U`.
+
+For the separately promoted finite-family layer, comments and examples may
+write
+
+```text
+[]                       : FinFam(A,0)
+x :: xs                  : FinFam(A,succ n)
+All_P(xs)                : dependent evidence P(x_i) for every x_i
+AllOver_Q(xs;ps)         : evidence Q(x_i,p_i) over selected p_i : P(x_i)
+sum_R(xs)                : |R|
+dot_R(a,f)               : |R|
+Unimod_R(f; a, p)        : chosen data p : dot_R(a,f) = 1
+ZarCover_R(n; f; a, p)   : finite algebraic cover presentation
+LocFam_R(f; ell)         : selected localization ell_i at every f_i
+ZarFamily_R(c; ell)      : algebraic cover c plus selected localizations
+D_R(f;ell)               : affine arrow (R[1/f]_ell,iota_ell) into R
+Members_Q(c;ell)         : each selected D_R(f_i;ell_i) belongs to Q
+h_*ZarFamily(c;m)        : mapped cover with supplied target localizations m
+h^*member                : membership of D_S(h(f);m) in h^*Q
+ZarPresentationCovers_T(c): every sieve containing c covers in supplied T
+ZarCompatible(T)         : T admits every selected finite Zariski presentation
+```
+
+The literal owners are `FiniteFamily`, `finite_family_nil/cons`,
+`FiniteFamilyAll`, `FiniteFamilyAllOver`,
+`finite_family_all_over_map`, `comm_ring_finite_sum`, `comm_ring_finite_dot`,
+`CommRingUnimodularPresentation`, and
+`CommRingZariskiCoverPresentation`. Presented geometric data additionally use
+`CommRingLocalizationFamily`, `CommRingZariskiCoverFamily`,
+`CommRingBasicOpenFamilyMembership`,
+`CommRingZariskiCoverFamilyMembership`,
+`comm_ring_zariski_cover_family_map`, `comm_ring_basic_open_arrow`, and
+`comm_ring_basic_open_pullback_membership`. The supplied-topology boundary
+additionally uses `CommRingZariskiPresentationCovers`,
+`IsCommRingZariskiCompatibleTopology`, and
+`CommRingZariskiCompatibleTopology`. The semicolon-separated cover
+notation retains the coefficient family and equation; it must not be read as
+a propositionally truncated existence statement. `ZarCover` alone names the
+algebraic unit-ideal presentation; `ZarFamily` additionally retains selected
+universal-property localization packages. Neither spelling denotes an
+already constructed `Spec`, proposition-valued sieve coverage, or topology.
+The base-change membership operation also requires explicit source and target
+localization choices; no global localization choice is implicit. The generic
+finite map owns arbitrary-length recursion. A specialized expanded Zariski
+projection/recursion spelling is not canonical while it exceeds the bounded
+elaboration budget; comments should use the generic owner plus the named
+elementwise step rather than inventing a rigid membership head.
+`ZarCompatible(T)` says only that `T` contains the selected Zariski cover
+basis; it does not denote the least generated topology. The maintained
+chaotic instance is a feasibility model, not canonical `Zar` syntax.
+
+For the separately promoted direct big-affine topology, comments and examples
+may write
+
+```text
+AffBig(R)                 : conventional big affine slice over Spec(R)
+Chart_R(h)                : literal chart h : R -> S
+ChartLoc_R(h;ell)         : whole arrow Spec(S[1/f]_ell) -> Chart_R(h)
+BigZarGen(R)              : witness-rich finite chart-cover generators
+BigZar(R)                 : least topology on AffBig(R) accepting BigZarGen(R)
+family ⊆ Q => covers(Q)   : selected-family inclusion in BigZar(R)
+BigZar(R) <= T            : leastness against an accepting topology T
+```
+
+The literal owners are `AffineSpecBigSlice_cat`, `affine_spec_chart`,
+`affine_spec_chart_localization_arrow`,
+`AffineSpecBigZariskiGenerators`, `affine_spec_big_zariski_topology`,
+`affine_spec_big_zariski_topology_covers`, and
+`affine_spec_big_zariski_topology_least`. `ChartLoc` is a whole internal
+slice arrow and coordinate restriction along it computes to the selected
+whole localization map. `BigZar` names the promoted big-site topology; it
+does not identify that site with the small poset of opens, construct a
+reflector/sheafification, or denote a complete scheme.
+
+For a global reflective CommRinged object with a selected cover, comments may
+write
+
+```text
+RingedCover_K(A;X,R,c)    : reflective ringed object X with covering sieve R
+Chart(P;V,f,m)            : selected member (V,f) of the covering sieve
+f^*R                      : pulled-back cover on V
+Cover(f^*R)               : coverhood derived by Grothendieck stability
+```
+
+The literal owners are `ReflectiveCommRingedSpaceCover`,
+`reflective_comm_ringed_space_cover_intro`,
+`ReflectiveCommRingedSpaceCoverChart`, and
+`reflective_comm_ringed_space_cover_chart_pullback_covers`. A `Chart` here is
+only an actual member of the selected covering sieve; the notation does not
+assert affineness. Members of `f^*R` are the global-first overlap candidates,
+so no independent overlap or cocycle field is implied. The package also does
+not imply finiteness, locally-ringed support, a scheme, or effective gluing.
+
+For whole restriction to a selected chart, comments may write
+
+```text
+pi_U : K/U -> K                    = slice_domain_func(U)
+F^*O                               = comm_ring_psh_pullback(F,O)
+O_X|_U                             = O_X o Op(pi_U)
+SuppliedRingedSlice(A,U;B,i)       = B with i : include(O_B) ~=def O_A|_U
+```
+
+Here `~=_def` abbreviates the literal whole `DefIso` owner; it is not an
+objectwise family of ring isomorphisms. At a literal slice arrow `(V,f)`,
+`pi_U(V,f)` computes to `V`, while an arbitrary encoded-Sigma object remains
+at the whole-functor evaluation endpoint rather than assuming package eta.
+`SuppliedRingedSlice` visibly supplies the slice topology and reflector: the
+notation does not assert that either was induced from the ambient site and
+does not imply affineness, locally-ringed support, or a scheme.
+
+For whole sheaf restriction and comparison along a selected basis functor,
+comments may write
+
+```text
+i^*                            : whole presheaf restriction along i:A->B
+i^*(P) = P o Op(i)             : proof-time path, not a runtime fold
+SheafRestr(i;P)                : selected whole sheaf restriction
+include_A o SheafRestr(i;P)
+  ~= include_B o i^*           : whole IsoEvidence comparison
+SheafBasis(i;Q)                : OmegaEquivAlong Cat_cat on SheafRestr(i;Q)
+```
+
+The literal owners are `psh_restriction_func`,
+`psh_restriction_value_path`, `psh_restriction_value_iso`,
+`SuppliedSheafRestrictionAlong`,
+`supplied_sheaf_restriction_underlying_iso`, and
+`SuppliedSheafBasisEquivalenceAlong`. The comparison sign denotes the whole
+`IsoEvidence`; it is not a family of objectwise commutative squares. The
+displayed value equation is the proof-time bridge from generic
+precomposition's stable cut normal form to direct functor composition; it
+does not install a runtime rewrite.
+`SheafBasis` does not assert equivalence of `A` and `B`, construct a topology
+or reflector, or retain a locally-exactness proof or Beck--Chevalley mate.
+
+For a supplied affine reflective structure-sheaf presentation, comments and
+examples may write
+
+```text
+AffStruct(R;P)            : supplied reflective structure-sheaf presentation
+O_P                       : included whole CommRing-valued structure presheaf
+i_P : O_P ~=def O_coord   : whole DefIso to the computing coordinate presheaf
+i_P[U]                    : component of either whole comparison at U
+```
+
+The literal owners are `AffineStructureSheafPresentation`,
+`affine_structure_sheaf_underlying_psh`,
+`affine_structure_sheaf_coordinate_defiso`,
+`affine_structure_sheaf_to_coordinate_at`, and
+`affine_structure_sheaf_from_coordinate_at`. Here `~=def` is only display
+notation for the existing `DefIso` classifier; it does not denote equality of
+functor objects or invoke univalence. The two `i_P[U]` directions are
+components projected from whole transformations, so their action and
+naturality remain at the generic owners. This notation supplies neither a
+construction of sheafification nor localization locality, a stalk-local-ring
+condition, a small-site comparison, or a complete scheme.
+
+For supplied whole locality of the computing affine coordinate presheaf,
+comments and examples may write
+
+```text
+AffCoordLocal(R;L)        : whole coordinate-locality capability
+L[U,s,ell]                : fixed-forward LocLocal at one selected localization
+```
+
+The literal owners are `AffineCoordinateLocalizationLocality` and
+`affine_coordinate_localization_locality_at`. At a literal chart `R -> S`,
+the value endpoint computes to `S` and the selected target to `S[1/s]_ell`.
+`affine_coordinate_localization_legacy_glue` is only the compatibility view
+for earlier component-glue consumers. This notation assumes the whole
+locality capability; it does not construct one, choose localizations globally,
+assert that `D(s)` covers the chart, impose stalk locality, identify the small
+site, or package a scheme.
+
+For the thin assumption-explicit affine-scheme presentation, comments and
+examples may write
+
+```text
+AffScheme(R;P,L)          : affine presentation with structure P and locality L
+O_AffScheme               : included whole structure presheaf
+O_AffScheme ~= O_coord    : whole computational DefIso
+L[U,s,ell]                : selected whole localization locality
+```
+
+The literal owners are `AffineSchemePresentation`, `affine_scheme_intro`,
+`affine_scheme_underlying_psh`, `affine_scheme_coordinate_defiso`, and
+`affine_scheme_locality_at`. `P` and `L` remain explicit supplied
+capabilities. The base ring owns the generated topology and selected atlases
+remain consumer data; do not read the notation as a second site, duplicated
+cover/overlap structure, constructed sheafification/locality, general
+non-affine gluing, small-site comparison, or a stalk-local-ring theorem.
+
+For realization of an ambient chart by an existing affine presentation,
+comments may write
+
+```text
+i : AffBig(R) -> K/U             : selected whole affine-basis functor
+O_A|_i                           : ambient structure presheaf restricted by i
+AffBasis(A,U,P,R,X,i;Q,b)        : sheaf-basis semantics Q and whole bridge b
+b : O_A|_i ~=def O_X             : whole computational DefIso
+O_A|_i ~=def O_coord(R)          : derived whole coordinate DefIso
+```
+
+The literal owners are `ambient_affine_basis_psh`,
+`AffineBasisRealizationAlong`, `affine_basis_realization_semantics`,
+`affine_basis_realization_bridge`, and
+`affine_basis_realization_coordinate_defiso`. The sheaf-basis field and
+presheaf bridge are whole internal objects; the notation supplies neither
+component coherence nor a raw category equivalence. It does not construct
+the basis, transport generic glue, define a general scheme, or assert a
+stalk-local-ring condition.
+
+For a global covering sieve generated by two selected affine charts, comments
+may write
+
+```text
+q = c_b o h                    : factorization through chart b : Bool
+Gen2_R(c0,c1)                  : c0 and c1 generate the retained sieve R
+AffChart(P,c;Q)                : whole affine realization of selected chart c
+BinAffCover(P;c0,c1,g,Q0,Q1)   : binary global-first affine-cover presentation
+```
+
+The literal owners are `CoverChartFactorization`,
+`BinarySelectedCoverGeneration`, `AffineCoverChartRealization`, and
+`BinaryAffineCoverPresentation`. Generation is witness-rich: for every member
+`q` of `R`, it computes a Boolean branch, factor arrow, and triangle. Since
+`c0` and `c1` are themselves retained members, the two branches generate
+exactly `R`. Only the two selected generators carry affine realizations;
+arbitrary refinements in the sieve are not asserted affine. Each realization
+retains one whole `AffineBasisRealizationAlong`, so restriction action and
+naturality remain at existing owners. `BinAffCover` supplies neither a
+point-free locally-ringed certificate, open-immersion classifier, semantic
+scheme, nor atlas-first gluing constructor.
+
+For the derived CS-07 consumer, comments may write
+
+```text
+refine_Q(q) = (b,h,triangle)   : q factors through selected generator c_b
+chart_Q(q)                     : the selected affine generator
+realization_Q(q)               : its retained whole affine realization
+coord_Q(q)                     : its coordinate ring
+```
+
+The literal owners are `binary_affine_cover_refinement_at`,
+`binary_affine_cover_refinement_chart`,
+`binary_affine_cover_refinement_realization`, and
+`binary_affine_cover_refinement_ring`. The latter observations are derived
+from the Boolean side; they are not fields of another refinement record.
+`realization_Q(q)` keeps its canonical branch-indexed type for an open side,
+and the notation does not claim that `q` itself is affine.
+
+For topology-local local-ring computation, comments may write
+
+```text
+⊥_U                              : literal empty sieve on U
+LocalBranch_O(s,t;q)              : selected Boolean unit branch at q
+LocalCover_T,O(s,t)               : covering sieve with branches
+LocalRing_T(O)                    : local nontriviality and unit splitting
+WholeLocal(P)                     : local presentation on the supplied K/X
+BinLocAffCover(P;L,Q)             : locally-ringed binary affine atlas
+BinRelScheme_K(P;L,Q)             : total site-relative scheme presentation
+```
+
+The literal owners are `empty_sieve`, `CommRingPshLocalUnitBranch`,
+`CommRingPshLocalUnitCover`, `CommRingPshTopologyLocalRingPresentation`,
+`ReflectiveCommRingedWholeObjectLocalPresentation`, and
+`BinaryLocallyRingedAffineCoverPresentation`. The final notation's literal
+owner is `BinarySiteRelativeSchemePresentation`. An invertible sum returns an
+actual covering sieve and an executable Boolean branch at every member; no raw
+sieve join or propositional truncation is implied. `WholeLocal` uses the whole
+computing ambient restriction on `K/X`, while the supplied reflective slice
+retains sheaf semantics and its whole `DefIso`. `BinRelScheme` totals the
+already-global cover with its dependent certificate. The supplied site
+determines admissible chart geometry, and no overlap, transition, cocycle, or
+gluing input is added. The notation does not claim a classical Zariski or
+Zeuner compact-open comparison or a representation-independent `Scheme_cat`.
+
+For the universal-property polynomial layer, comments and examples may write
+
+```text
+PolyAlg_R(X)             : chosen free commutative R-algebra package
+R[X]_p                   : target ring of p : PolyAlg_R(X)
+iota_p                   : R ->_CRing R[X]_p
+var_p(x)                 : |R[X]_p|
+Ext_p(h,v)               : contractible extension classifier
+```
+
+The literal owners are `CommRingPolynomialAlgebra`,
+`comm_ring_polynomial_target`, `comm_ring_polynomial_base_map`,
+`comm_ring_polynomial_variables`, and `CommRingPolynomialFactor`. The package
+subscript `p` is mandatory: the library does not install a global chosen term
+named `R[X]`. `Ext_p(h,v)` retains both pointwise equations
+`k(iota_p(r)) = h(r)` and `k(var_p(x)) = v(x)`. The notation records only the
+free-algebra universal property. It does not select monomials, coefficient
+syntax, quotients, or a concrete positive-variable representation. The
+reviewer equation `R[Empty] = R` is the current executable model.
+
+No concrete fraction syntax, relative radical/power interface,
+positive-variable polynomial representation, small-site Zariski topology, or
+complete scheme is implied. The direct big-affine topology is named only by
+the `BigZar` block above; its sheaf and scheme consumers remain separately
+gated.
+
+No string-parser grammar is selected by this section. It records canonical
+comments, examples, and direct TypeScript-AST intent only.
 
 ## Mixed-Variance Displayed Functor Families
 

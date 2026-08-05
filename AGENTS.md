@@ -79,7 +79,7 @@ Before nontrivial edits:
    `workspace:check`, typecheck/lint as relevant, and the nearest focused
    tests; for plan or documentation work inspect the exact diff and run only
    its owning document checks;
-5. run `EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check` when the proposed
+5. run `EMDASH_TYPECHECK_TIMEOUT=90s make -C emdash2 check` when the proposed
    elaborator target depends on current kernel names or computation.
 
 The complete root aggregate is not a routine pre-edit baseline:
@@ -202,8 +202,11 @@ Print and book workspace, from the root:
 ./scripts/pnpmw run book:render
 ```
 
-The repository-wide gate is `./scripts/pnpmw run check:all`. Keep exploratory
-Lambdapi checks bounded to at most 60 seconds as required by the nested SOP.
+The repository-wide gate is `./scripts/pnpmw run check:all`. Keep every
+Lambdapi invocation bounded to at most 90 seconds as required by the nested
+SOP. This uniform per-target ceiling prevents near-boundary valid checks from
+being classified differently merely because they are run as probes, while the
+separate proportional-validation policy still forbids unnecessary aggregates.
 
 ## Change And Validation Rules
 

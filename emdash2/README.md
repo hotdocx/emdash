@@ -29,6 +29,108 @@ mathematical reading is in
 ## Where to start
 
 - `emdash3_2.lp` is the active kernel and computation authority.
+- `emdash3_2_presheaves.lp` owns the rigid Cat-valued presheaf facade,
+  restriction along ordinary functors, transparent Yoneda and slice
+  presentations, and Cat-valued higher sieves.
+- `emdash3_2_sieves.lp` owns native subterminal categories, ordinary sieves
+  as pointwise-subterminal higher sieves, and ordinary pullback. It does not
+  itself declare `Omega` or topology.
+- `emdash3_2_sites.lp` owns ordinary-sieve membership, the maximal sieve,
+  proposition-valued sieve coverages, the three Grothendieck topology laws,
+  and the direct chaotic-topology model. It does not add `Omega`, free
+  coverage saturation, sheafification, or descent.
+- `emdash3_2_finite_families.lp` owns Nat-indexed right-associated finite
+  families, their constructors/projections, pointwise map, and sethood. It
+  introduces no `Fin`, list/Sum/inductive interface, or package eta.
+- `emdash3_2_commutative_algebra.lp` owns set-carrier commutative-ring
+  operation and law packages, readable observations, and the concrete
+  one-element zero ring.
+- `emdash3_2_commutative_algebra_category.lp` owns structured ring morphisms,
+  their preservation/sethood theorems, transparent explicit-map observations,
+  pointwise structured-map extensionality, `CommRing_cat`, and the selected
+  stable identity/composition comparisons. The invertibility-sieve consumer
+  selects its full-action carrier functor without a competing capped rule.
+- `emdash3_2_commutative_algebra_product.lp` owns the rule-free componentwise
+  product ring and map action, including whole structured-map identity and
+  composition paths without installing a primitive product-functor facade.
+- `emdash3_2_commutative_algebra_f2.lp` owns the closed Boolean-carrier
+  two-element commutative ring, with all laws proved by internal elimination.
+- `emdash3_2_commutative_algebra_finite.lp` owns finite ring sums and dot
+  products, their structured-map preservation theorems, retained unimodular
+  coefficient data, and algebraic finite Zariski-cover presentations. It does
+  not yet declare `Spec`, basic opens, localization families, topology,
+  powers/radicals, fractions, polynomials, or quotients.
+- `emdash3_2_commutative_algebra_polynomial.lp` owns polynomial algebras by
+  their universal property as free commutative `R`-algebras on a variable
+  classifier. It selects no monomial/coefficient/quotient syntax or concrete
+  positive-variable representation; the reviewer proves `R[Empty] = R`.
+- `emdash3_2_commutative_algebra_localization.lp` owns proposition-valued unit
+  evidence, unit transport/preservation, and localization at one element by
+  contractible pointwise factorization. It selects no concrete fractions,
+  finite families, polynomials, or Zariski presentation.
+- `emdash3_2_commutative_algebra_localization_unit.lp` constructs the
+  pointwise identity as the universal localization of any already invertible
+  element. In particular, localization at one computes to the original ring.
+- `emdash3_2_commutative_algebra_localization_zero.lp` derives multiplication
+  and negation at zero, proves that invertible zero forces a contractible
+  carrier, and constructs the computing universal localization `R[1/0]=0`.
+- `emdash3_2_commutative_algebra_localization_idempotent.lp` constructs the
+  fixed-image ring `eR={x | e*x=x}` for `e^2=e` and proves that the computing
+  scaling map `x |-> e*x` has the full localization universal property. It is
+  quotient-free and rule-free.
+- `emdash3_2_commutative_algebra_localization_split.lp` specializes that
+  construction to `(1,0)` in a product ring. Its closed `F2 x F2` instance
+  proves the idempotent differs from zero and one, and its affine-basic-open
+  restriction computes as `(x,y) |-> (x,0)`.
+- `emdash3_2_commutative_algebra_localization_comparison.lp` owns product-unit
+  algebra and the universal-property comparison between localization at `f*g` and
+  localization first at `f`, then at the image of `g`. It retains canonical
+  maps and pointwise triangles, but no equality of chosen packages or inverse
+  law for the comparison maps.
+- `emdash3_2_commutative_algebra_localization_overlap.lp` derives both whole
+  comparison-map cancellation paths by contractible factorization and
+  packages the forward comparison as an `OmegaEquivAlong CommRing_cat` plus a
+  first-class `OmegaEquiv` facade. It remains fraction-free and rule-free.
+- `emdash3_2_commutative_algebra_presheaves.lp` transparently presents
+  CommRing-valued presheaves, their actual structured restriction maps,
+  pointwise identity/composition paths, and proposition-valued invertibility
+  support along arrows. It assembles that support as a higher and ordinary
+  sieve with literal membership computation and owns the shared transparent
+  affine identity presheaf, but no ringed site.
+- `emdash3_2_commutative_algebra_locality.lp` packages selected localization
+  factors over all elements of the invertibility sieve as one internal cone.
+- `emdash3_2_commutative_algebra_matching.lp` sends localization elements and
+  equality paths to coherent carrier-valued matching sections, with literal
+  components computing by those selected factors.
+- `emdash3_2_commutative_algebra_glue.lp` packages selected glue as a genuine
+  functor on matching families and their arrows, together with two computing
+  component observations. It is the rule-free Cartier/basic-open
+  locality interface, not ordinary sheaf descent over a covering sieve or a
+  native `OmegaEquivAlong`/whole internal equivalence.
+- `emdash3_2_commutative_algebra_affine_glue.lp` derives that selected glue
+  for the identity structure presheaf on `CommRing_cat^op`. Evaluation at the
+  localization-map support centre gives the glue functor, and internal
+  Pi-section action along universal localization factors proves component
+  recovery. It remains componentwise Cartier locality, not whole functor
+  equality or ordinary sheaf descent.
+- `emdash3_2_commutative_algebra_affine_spec.lp` exposes the conventional big
+  affine slice over `Spec(R)`, its computing coordinate-ring presheaf,
+  selected basic-open and iterated-localization charts, and internal overlap
+  arrows in both directions. Coordinate restriction computes to the existing
+  whole comparison maps. This is not yet a small Zariski site, sheaf, locally
+  ringed space, or complete scheme.
+- `emdash3_2_commutative_algebra_affine_points.lp` presents `Spec(R)` by the
+  existing Yoneda presheaf, reuses the semantic invertibility sieve as
+  `D(f)`, and constructively identifies its points at each test ring with
+  maps out of a selected localization. The resulting `TypeEquiv` needs no
+  univalence or external naturality data; it is not yet a whole natural
+  equivalence, topology, sheaf, or general scheme.
+- `emdash3_2_commutative_algebra_affine_atlas.lp` builds an explicit binary
+  cover of `Spec(R x S)` from the complementary idempotents `(1,0)` and
+  `(0,1)`. Their overlap computes as `D(0)`, and the two internal chart arrows
+  restrict coordinate rings by whole maps to the zero ring. The closed
+  `F2 x F2` case is a concrete atlas/glue presentation, not yet a sheaf or a
+  general scheme object.
 - `emdash3_2_walking_end_hit.lp` owns the walking HIT, Code,
   encode/decode, Nat comparison, and directed negative results.
 - `emdash3_2_checks.lp` and `examples/` contain executable
@@ -43,6 +145,72 @@ mathematical reading is in
 
 The active one-way library extensions are:
 
+- `emdash3_2_presheaves.lp` — Cat-valued presheaves, opposite-functor
+  restriction, Yoneda, slices, and Cat-valued higher sieves;
+- `emdash3_2_sieves.lp` — native subterminal categories, ordinary-sieve
+  property packages, and pullback preservation;
+- `emdash3_2_sites.lp` — direct ordinary-sieve Grothendieck topologies and the
+  chaotic model, separate from generated coverages and sheafification;
+- `emdash3_2_finite_families.lp` — reusable Nat/Sigma finite families,
+  pointwise mapping, and sethood without a new inductive former;
+- `emdash3_2_commutative_algebra.lp` — set-carrier commutative-ring objects,
+  their operation/law projections, and the one-element zero-ring model;
+- `emdash3_2_commutative_algebra_category.lp` — structured ring morphisms,
+  morphism sethood/extensionality, the ordinary `CommRing_cat` facade, and
+  stable pointwise identity/composition comparisons, without a carrier
+  functor;
+- `emdash3_2_commutative_algebra_product.lp` — rule-free componentwise product
+  rings and structured maps, with whole identity/composition paths;
+- `emdash3_2_commutative_algebra_f2.lp` — the closed two-element
+  commutative-ring model on `Bool_grpd`;
+- `emdash3_2_commutative_algebra_finite.lp` — finite sums/dot products and
+  base-change-stable unimodular/Zariski-cover presentation data, separate from
+  topology and polynomial syntax;
+- `emdash3_2_commutative_algebra_polynomial.lp` — contractible-extension
+  universal properties for free commutative `R`-algebras on variables,
+  separate from concrete polynomial syntax and from topology;
+- `emdash3_2_commutative_algebra_localization.lp` — explicit units and
+  universal-property localization at one element, without fraction syntax;
+- `emdash3_2_commutative_algebra_localization_unit.lp` — the rule-free
+  identity localization of an already-unit element and the canonical
+  localization at one for every ring;
+- `emdash3_2_commutative_algebra_localization_zero.lp` — the rule-free
+  universal localization at zero in the zero ring, providing the
+  computational empty-basic-open case without fraction syntax;
+- `emdash3_2_commutative_algebra_localization_idempotent.lp` — the rule-free
+  fixed-image localization `R[1/e]=eR` for a supplied idempotent, with
+  computing operations, structure map, and universal factors;
+- `emdash3_2_commutative_algebra_localization_split.lp` — the rule-free
+  `(1,0)` product localization and closed non-endpoint `F2 x F2` affine
+  restriction computation;
+- `emdash3_2_commutative_algebra_localization_comparison.lp` — stable
+  pointwise ring-map composition plus universal-property iterated/product-
+  localization comparison data, without fractions or package equality;
+- `emdash3_2_commutative_algebra_localization_overlap.lp` — whole internal
+  product/iterated cancellation, fixed-forward omega-equivalence evidence,
+  and its first-class facade, without new runtime rules or fraction syntax;
+- `emdash3_2_commutative_algebra_presheaves.lp` — transparent ring-valued
+  presheaves, computational restriction, full-action carrier support, and the
+  whole ordinary invertibility sieve, without topology or a sheaf package;
+- `emdash3_2_commutative_algebra_locality.lp` — topology-visible support and
+  the internal localization-factor cone over its category of elements;
+- `emdash3_2_commutative_algebra_matching.lp` — coherent Pi matching families
+  and computational restriction from localization elements;
+- `emdash3_2_commutative_algebra_glue.lp` — selected functorial glue plus
+  `glue(restrict(x))=x` and literal component recovery, without a whole
+  internal equivalence, sheafhood, `Spec`, or scheme;
+- `emdash3_2_commutative_algebra_affine_glue.lp` — rule-free construction of
+  that selected glue for every chosen affine localization of the identity
+  CommRing presheaf, including internally derived Cartier component recovery;
+- `emdash3_2_commutative_algebra_affine_spec.lp` — rule-free computational
+  big-affine-slice facade with coordinate presheaf, charts, and two-sided
+  product/iterated-localization overlap restrictions;
+- `emdash3_2_commutative_algebra_affine_points.lp` — rule-free affine Yoneda
+  functor of points, semantic basic-open points, and localization
+  representability as a constructive `TypeEquiv` at every test ring;
+- `emdash3_2_commutative_algebra_affine_atlas.lp` — rule-free selected
+  complementary-idempotent two-chart atlas with a computing zero overlap and
+  whole coordinate restrictions;
 - `emdash3_2_eq1_hom_action.lp` — native equality-valued next-hom
   action and groupoidality;
 - `emdash3_2_eq1_evidence_property.lp` — evidence-property,

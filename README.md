@@ -83,8 +83,8 @@ external naturality evidence when no internal construction owns it.
   constructions and fails closed outside them.
 - Displayed contexts support arbitrary finite depth in the canonical ordered
   sibling/Sigma normal form, including displayed-functorial and displayed-
-  natural witnesses, together with qualified depth-generic finite Hom-category
-  recursion. Arbitrary dependency or variance DAGs, general mixed
+  natural witnesses, together with qualified depth-generic finite
+  Hom-category recursion. Arbitrary dependency or variance DAGs, general mixed
   introduction/curry, exchange across dependency, and unrestricted displayed
   coherence remain open.
 - The remaining Lambdapi library has not been proven mechanically

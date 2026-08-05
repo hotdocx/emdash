@@ -94,7 +94,7 @@ describe(
                 CORE_LF_SCALE_STRESS_2_PI_BASE_ACTION_ACQUISITION;
             assert.deepEqual(
                 contract.commands.map(command => command.ordinal),
-                [512, 927, 1098, 1099, 1119, 1218, 1226, 1227]
+                [514, 934, 1134, 1135, 1158, 1261, 1270, 1271]
             );
             assert.deepEqual(
                 CORE_LF_SCALE_STRESS_2B2_MODULE.declarations.map(

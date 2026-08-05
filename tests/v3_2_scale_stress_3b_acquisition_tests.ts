@@ -281,7 +281,14 @@ describe(
                 protectedContract.commands.map(command =>
                     command.ordinal
                 ),
-                Array.from({ length: 58 }, (_value, index) => index + 1)
+                [
+                    ...Array.from(
+                        { length: 56 },
+                        (_value, index) => index + 1
+                    ),
+                    58,
+                    59
+                ]
             );
             assert.equal(
                 protectedContract.commands.filter(command =>

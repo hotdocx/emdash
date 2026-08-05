@@ -143,6 +143,8 @@ export * from './lf_transfer_proof';
 export * from './lf_transfer_inductive';
 export * from './lf_transfer_inductive_contract';
 export * from './lf_transfer_mixed';
+export * from './lf_adjunction_macro';
+export * from './lf_structure_macro';
 export * from './lf_transfer_acquisition';
 export * from './scale_stress_1_acquisition';
 export * from './scale_stress_1_representation';

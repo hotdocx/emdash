@@ -72,7 +72,7 @@ export const CORE_CATEGORICAL_COMPREHENSION_TRANSFER_REVISION =
     'FIBRED-COMPREHENSION-1A-BASE-CHANGE-TOTALIZATION-1' as const;
 
 export const CORE_CATEGORICAL_COMPREHENSION_SOURCE_SHA256 =
-    'sha256:bdb04532ce79e15f202025dc39babfda202567a54e15d59c03031fc8eee0531a';
+    'sha256:0a117742d326bad82fe72cc73c624a0c174e3b48dd4047ebd8f6ed6ff7837860';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');

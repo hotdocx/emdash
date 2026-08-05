@@ -1001,6 +1001,1838 @@ E^op[k] = E[k]^op
 F^*E[a] = E[F[a]]
 ```
 
+### Cat-Valued Presheaf Facade
+
+The one-way presheaf library packages the contravariant specialization of a
+directed family without adding another family calculus:
+
+```text
+Psh_cat(K) = Catd_cat(K^op)
+Psh(K)     = Obj(Psh_cat(K)).
+```
+
+The displayed equation describes the mathematical presentation, not a runtime
+rewrite between category heads. `Psh_cat(K)` is rigid and remains visible at
+runtime. Its object and hom projections compute to the existing directed-
+family hierarchy on `K^op`, while one narrow proof-time comparison relates it
+directly to `Catd_cat(K^op)`. In particular, a typed reflexivity proof can use
+the comparison, but a bare conversion does not erase the facade.
+
+For an ordinary functor `F : A -> B`, presheaf restriction is the already
+existing family pullback along the opposite functor:
+
+```text
+Psh_pullback_func(F) : Psh_cat(B) -> Psh_cat(A)
+Psh_pullback_func(F)[P]
+  = Pullback_catd(P,Op_func(F)).
+```
+
+The object action computes through `Pullback_catd_func`. The action on
+presheaf maps is the generic functor action of that same functor; the library
+does not restate identity, composition, or naturality. The current facade is
+Cat-valued. Ordinary Set-valued presheaves will be a later discrete-fibre
+specialization, and an arbitrary Cat-valued presheaf is not called a stack
+without separately selected descent data.
+
+The same library names the contravariant Yoneda functor without installing a
+second action theory:
+
+```text
+yoneda_psh_func(K) : K -> Psh_cat(K)
+yoneda_psh(U)[V]   = Hom_K(V,U).
+```
+
+It is transparently `hom_con_int(id_K)`, so an arrow `p : V -> U` acts by the
+existing represented-target postcomposition owner. In particular, its
+component at `W` computes to postcomposition by `p` in `K`.
+
+For later site constructions the direction of the arrow category is kept
+explicit:
+
+```text
+Into_restr_cat(U) = Sigma_(V : K^op) Hom_K(V,U)
+Slice_cat(U)      = Op_cat(Into_restr_cat(U)).
+```
+
+The first category points in the restriction direction; its opposite is the
+conventional slice `K/U`. A Cat-valued higher sieve is then a directed family
+on the restriction category:
+
+```text
+HigherSieveClassifier(K)[U] = Catd_cat(Into_restr_cat(U))
+HigherSieve_cat(U)           = Fibre_cat(HigherSieveClassifier(K),U)
+maximal_higher_sieve(U)      = Terminal_catd(Into_restr_cat(U)).
+```
+
+Equivalently, it is a Cat-valued presheaf on `Slice_cat(U)`. In the formal
+presentation these two descriptions each compare at proof time with the
+stable intermediary `Catd_cat(Into_restr_cat(U))`; they do not directly
+runtime-collapse, and no extra unification rule is added merely to chain the
+comparisons. Restriction of a higher sieve is the existing Catd pullback along
+the Sigma-total map, and the maximal higher sieve is stable under it.
+
+This higher notion is deliberately not an ordinary sieve. The downstream
+one-way sieve module now selects ordinary sieves by native pointwise
+subterminality:
+
+```text
+IsSubterminalCat(C)
+  = Sigma obj_prop : IsPropGrpd(Obj(C)), IsGroupoidalCat(C)
+IsOrdinarySieve(S)
+  = Pi f : Obj(Into_restr_cat(U)),
+      IsSubterminalCat(Fibre_cat(S,f))
+Sieve(U)
+  = Sigma S : HigherSieve(U), IsOrdinarySieve(S).
+```
+
+Proposition-valued objects alone would be too weak: a one-object directed
+category may retain nontrivial endomorphisms. Native `IsGroupoidalCat` says
+that every retained categorical cell comes from object equality. The selected
+pair therefore derives the existing exact `IsDiscreteCat` contract, while a
+literal `Path_cat(A)` for proposition-valued `A` supplies a canonical
+subterminal example.
+
+Both retained evidence layers are themselves propositions. Nevertheless,
+ordinary-sieve pullback keeps the Sigma evidence explicitly. It reuses the
+existing higher-sieve/Catd pullback action and selects the old witness at each
+postcomposed arrow; no new action rule is needed. Consequently pullback along
+an identity has the correct mathematical value but does not judgmentally
+reduce the reconstructed package to the original package.
+
+The public name `Sieve` now belongs to this ordinary property subtype. The
+name `Omega` remains reserved and unbound: a true classifier still needs
+setness of `Sieve(U)` plus an owner-aligned contravariant family assembly.
+Neither topology nor descent follows merely from forming ordinary sieves.
+
+### Direct Grothendieck Topologies On Ordinary Sieves
+
+The downstream sites module defines membership without adding a Boolean
+classifier. An object of `Into_restr_cat(U)` is a pair `(V,f)` with
+`f : V -> U`, and
+
+```text
+SieveMembership(R,(V,f)) = Obj(R(V,f)).
+```
+
+This classifier is proposition-valued because `R(V,f)` is a native
+subterminal category. The maximal ordinary sieve is the constant family at
+the literal path category `Path_cat(Unit_grpd)`. It is pointwise true, and its
+pullback computes to the maximal sieve on the source through ordinary
+constant-family pullback. This presentation intentionally does not identify
+`Path_cat(Unit_grpd)` with `Terminal_cat`; consequently its underlying higher
+sieve does not definitionally equal `maximal_higher_sieve`.
+
+A direct sieve coverage is first-class proposition-valued data:
+
+```text
+SieveCoverage(K)
+  = Pi U : Obj(K), Sieve(U) -> PropU_grpd
+Covers(J,R)
+  = trunc_grpd_carrier(J(U,R)).
+```
+
+The `PropU_grpd` evidence projection proves each `Covers(J,R)` a proposition.
+The selected Grothendieck topology laws are exactly:
+
+```text
+maximal:  Covers(J,maximal_sieve(U))
+stable:   Covers(J,R) -> Covers(J,p^*R)
+local:    Covers(J,R)
+       -> (forall f in R, Covers(J,f^*S))
+       -> Covers(J,S).
+```
+
+Here “`f in R`” is `SieveMembership(R,f)`, and every pullback is the existing
+ordinary-sieve pullback. `GrothTopology(K)` retains the selected coverage and
+these three laws, with named projections for each observation. The chaotic
+topology sends every sieve to the true Unit proposition; all three laws then
+compute to `tt`, giving a direct model on every category and in particular on
+`Terminal_cat`.
+
+This is a direct topology presentation, not a cover-family generator. The
+sites module itself has no `Omega`, free saturation, sheafification, descent,
+or assertion that every concrete family coverage automatically generates a
+topology. The separate downstream generated-topology module supplies the
+universal-property construction described next.
+
+### Internally Generated Grothendieck Topologies
+
+A generator family may retain arbitrary presentation witnesses rather than
+first erasing them into a proposition:
+
+```text
+SieveGeneratorFamily(K)
+  = Pi U : Obj(K), Sieve(U) -> Grpd.
+```
+
+A topology `T` accepts `G` when every `g : G(U,R)` produces a covering
+witness for `R` in `T`. Generated coverhood is the impredicative intersection
+
+```text
+GeneratedSieveCover(G,U,R)
+  = Pi T : GrothTopology(K),
+      GrothTopologyAcceptsGenerators(G,T)
+      -> groth_topology_covers(T,R).
+```
+
+Every target coverhood is proposition-valued, so the existing dependent-Pi
+proposition theorem makes this whole intersection proposition-valued without
+truncating `G`. Maximality, pullback stability, and local character are
+inherited by applying the corresponding law in every accepting topology.
+The resulting `generated_groth_topology(G)` accepts every generator and is
+below every other accepting topology under pointwise inclusion of cover
+predicates. Both observations compute: inclusion applies the competing
+topology's acceptance witness, and leastness evaluates a generated-cover
+witness at that topology. The chaotic topology is a closed accepting upper
+bound, so the intersection is nonvacuous.
+
+This is a Church-/intersection-style least topology, not an inductive syntax
+of cover-generation steps. It deliberately provides no induction principle,
+normal form, or decision procedure for arbitrary coverhood. A future
+truncated/HIT presentation is justified only if a consumer needs those
+additional interfaces; it is not required for the universal property or the
+computational affine-site MVP.
+
+### Internal Direct-Cover Sheaves And Their Completion
+
+For a fixed site `(K,T)`, the eligible ordinary covering sieves form the
+internal category `DirectCoverQuestion_cat(K,T)`. Given a Cat-valued presheaf
+`X`, the matching families and sections for all those questions are displayed
+Cat-valued families over that category, and restriction is one displayed
+functor
+
+```text
+restriction_X : Section_X ->_Q Matching_X.
+```
+
+The selected Pédrot-style algebraic sheaf structure is likewise whole:
+
+```text
+DirectCoverSheafStructure(T,X)
+  = Sigma glue : Functord_Q(Matching_X,Section_X),
+      glue o restriction_X = id_Section_X.
+```
+
+Thus question pullback, matching-arrow action, and both naturality dimensions
+are carried by `glue` itself. `silent` is one path between displayed functors,
+not a family of component equations. Evaluation and `eq_ap` merely project
+literal-cover observations from these whole owners. The older
+`DirectCoverAlgebra` is retained as a forgetful view for the deployed
+recursor; it is not the semantic owner of the sheaf structure.
+
+`DirectCoverSheaf(T)` is the transparent total of a presheaf and this
+structure. The primitive `DirectCoverCompletionPsh(T,P)` supplies its whole
+unit, recursive glue, and silent path and therefore inhabits that syntactic
+sheaf package. This package is still not definitionally identified with the
+rigid supplied `Sheaf_cat(K,T,Cat_cat)` facade. Conventional locality is now a
+separate derived comparison rather than a missing constructor.
+
+For each eligible question `q=(R,covers)`, canonical cover pullback, internal
+matching naturality, recursive glue, and silent derive the retained-member
+calculation
+
+```text
+restriction_q(glue_q(m))[V](p,member) = m[V](p,member).
+```
+
+One whole transformation `rho : restriction o glue => id_Matching` owns these
+components through ordinary, displayed, and fibre projection. The point
+component computes to `path_to_hom` of the displayed equation above.
+Pointwise path equivalences are then lifted through a generic strict
+pointwise-to-whole `OmegaEquivAlong` closure. That closure consumes an
+already-whole transformation, so its naturality is internal; it does not
+construct a transformation from a bare component family. The resulting path
+
+```text
+restriction_q o glue_q = id_Matching(q)
+```
+
+and the primitive whole `silent_q : glue_q o restriction_q = id_Section(q)`
+make restriction the fixed-forward equivalence required by
+`PshLocalAtOrdinarySieve`. Quantifying over `U`, `R`, and `covers` gives
+
+```text
+IsTopologyLocalPsh(K,T,DirectCoverCompletionPsh(K,T,P)).
+```
+
+The retained-member equality is an opaque proof owner in the active library,
+but not a new runtime operation or consumer-supplied sheaf field. Its complete
+internal endpoint derivation and non-collapse controls are retained in the
+CS-12 living plan and focused probes. The computational data remain the whole
+restriction, glue, transformation projections, and selected inverse arrows.
+
+The categorical-HIT eliminator is also whole in its seed.  For one selected
+target algebra `A_Y`, its recursor is a functor
+
+```text
+rec_func(A_Y) : Hom(P,Y) -> Hom(Completion(P),Y),
+rec_func(A_Y)[seed] = rec(A_Y,seed).
+```
+
+The existing constructor beta is retained as a narrow runtime computation;
+its functorial form is the whole higher beta
+
+```text
+precomp_unit o rec_func(A_Y) = id_Hom(P,Y).
+```
+
+At a topology-local target, locality selects the canonical target algebra and
+the categorical-HIT uniqueness clause is
+
+```text
+rec_func(canonical_algebra(Y)) o precomp_unit
+  = id_Hom(Completion(P),Y).
+```
+
+This eta law is intentionally local-target scoped: it does not assert that an
+arbitrary underlying map preserves an independently selected one-sided cover
+algebra.  The two whole laws construct
+
+```text
+Hom(Completion(P),Y) ≃ Hom(P,Y)
+```
+
+as `OmegaEquivAlong Cat_cat` with fixed forward map `precomp_unit`. Arrow
+action and naturality are those of the whole restriction and recursor
+functors, not external component squares.
+
+The Cat-valued fixed-site reflector is now assembled into the existing rigid
+sheaf facade rather than a parallel local-object category:
+
+```text
+Obj(Sheaf_cat(K,T,Cat_cat))
+  = Sigma P:Psh(K), IsTopologyLocalPsh(K,T,P),
+
+include(P,local) = P,
+sheafify_T(P) = (Completion_T(P), completion_is_local_T(P)).
+```
+
+The Hom categories and category operations are inherited from `Psh_cat(K)`.
+The reflector's whole action sends `f:P->Q` to the unique recursive extension
+of `unit_Q o f`; its action and naturality remain at one functor owner. The
+generic supplied capability is indexed by
+`Functor_cat(Op_cat(K),Cat_cat)`, so the adjunction is declared at that raw
+boundary while the scoped proof-time comparison retains `Psh_cat(K)` as the
+computational/public owner. No runtime category-head identification is added.
+
+At a local sheaf `Y`, the adjunction counit computes to recursion from
+`id_Y`. Recursor beta gives `counit o unit = id_Y`. Applying whole local eta
+to `unit o counit`, after the internally derived unit-precomposition path,
+gives the other cancellation. These arrows and paths construct the exact
+fixed-forward `OmegaEquivAlong` required by the existing
+`SheafificationCapability(K,T,Cat_cat)`. This completes fixed-site Cat-valued
+sheafification; it does not yet lift the reflector to CommRing-valued objects,
+prove left exactness, transport it to slices, or construct schemes.
+
+If strict equality later becomes too restrictive, a separate directed or
+pseudo/lax completion may retain whole categorical cells and coherence.
+Univalence can turn an appropriate whole equivalence or isomorphism into a
+path when the ambient category supplies that capability; it does not turn an
+arbitrary noninvertible lax cell into equality. The current direct-cover
+completion therefore retains the strict whole-path interface while the richer
+variant remains consumer-gated.
+
+### Set-Carrier Commutative-Ring Objects
+
+The first algebra layer packages a commutative ring over an explicitly
+set-valued carrier.  Its operation data are separate from its law evidence:
+
+```text
+CommRingOps(A) = (0, 1, add, neg, mul)
+
+IsCommRing(A,ops)
+  = AddAssoc x AddComm x AddZero x AddInv
+      x MulAssoc x MulComm x MulOne x LeftDistrib
+
+CommRingStructure(A)
+  = Sigma ops : CommRingOps(A), IsCommRing(A,ops)
+
+CommRing
+  = Sigma A : SetU_grpd,
+      CommRingStructure(trunc_grpd_carrier(A)).
+```
+
+The retained additive unit and inverse laws are right-handed, as are the
+multiplicative unit law and the selected left-distributivity orientation.
+Commutativity derives their omitted mirror equations, so storing both sides
+would duplicate evidence rather than strengthen the algebraic structure.
+Nothing requires `0` and `1` to be distinct; the one-element zero ring is a
+checked inhabitant.
+
+For `R : CommRing`, `comm_ring_carrier R` is its decoded carrier,
+`comm_ring_carrier_is_set R` retains sethood, and the named operations
+`comm_ring_zero`, `comm_ring_one`, `comm_ring_add`, `comm_ring_neg`, and
+`comm_ring_mul` are transparent observations of the operation package.  The
+eight `comm_ring_*_law` projections expose the corresponding equality
+witnesses.  Constructors and observations reduce through the existing Sigma,
+function, and equality owners; this module adds no rewrite or unification
+rule.
+
+The concrete `zero_comm_ring` uses `Unit_grpd`.  Because an open Unit variable
+does not judgmentally eta-reduce to `tt`, its open additive-zero and
+multiplicative-one laws use the existing contraction witness rather than an
+invalid reflexivity proof.  This object layer deliberately declares no
+morphism/category, carrier functor, exponentiation, localization, finite
+family, or polynomial interface.  The first two of those are considered in a
+separate downstream module so the rule-free object package remains reusable.
+
+### Structured Commutative-Ring Morphisms
+
+For commutative rings `R` and `S`, a structured morphism retains an ordinary
+carrier function and five preservation witnesses:
+
+```text
+CommRingHomLaws(R,S,f)
+  = PreservesZero(f)
+      x PreservesOne(f)
+      x PreservesAdd(f)
+      x PreservesNeg(f)
+      x PreservesMul(f)
+
+CommRingHom(R,S)
+  = Sigma f : (|R| -> |S|), CommRingHomLaws(R,S,f).
+```
+
+Negation and zero preservation are stored explicitly. They are derivable in
+ordinary algebra from smaller sets of axioms, but retaining them avoids making
+the first morphism API depend on a not-yet-selected cancellation theorem
+library. `comm_ring_hom_intro` constructs a map;
+`comm_ring_hom_function`, `comm_ring_hom_laws`, and the five named
+`comm_ring_hom_*_law` observations expose its fields.
+`comm_ring_hom_apply(h,x)` is the transparent application of the retained
+function and computes on explicit constructors.
+
+Pointwise equality of those retained functions extends to equality of the
+full structured maps. `comm_ring_hom_ext` first uses `PiFunext` on carrier
+functions, then fills the dependent law path from proposition-valued
+`CommRingHomLaws`. This is a theorem about Sigma packages, not a global
+package-eta reduction.
+
+Every preservation classifier is proposition-valued because its equations
+live in the set-valued target carrier. Dependent-Pi and dependent-Sigma
+truncation closure therefore prove `CommRingHomLaws(R,S,f)` a proposition and
+`CommRingHom(R,S)` a set. The ordinary category facade is then:
+
+```text
+Obj(CommRing_cat) = CommRing
+Hom_cat(CommRing_cat,R,S) = Path_cat(CommRingHom(R,S)).
+```
+
+The sethood theorem makes `CommRing_cat` a checked `OneCat`. Whole identities
+and composites remain the generic `id` and `comp_fapp0` category owners;
+`comm_ring_hom_id` and `comm_ring_hom_comp` are readable aliases. The library
+does not reconstruct those opaque whole arrows as Sigma packages: retained
+proof fields have no judgmental package eta, so doing so would compete with
+the generic category unit rules. Consequently, application of an explicitly
+constructed map computes, while `comm_ring_hom_apply(comm_ring_hom_id(R),x)`
+is deliberately not advertised as a runtime reduction to `x`.
+
+Two later consumers select rigid pointwise comparisons without changing those
+whole-arrow owners. Iterated localization selects
+`comm_ring_hom_comp_pointwise(g,f)`, whose carrier projection computes to
+`x |-> g(f(x))`. The empty-variable polynomial-algebra model selects
+`comm_ring_hom_id_pointwise(R)`, whose carrier projection computes to
+`x |-> x`. Each rigid head compares with its generic category arrow only at
+proof time. Generic identity and composite applications remain deliberately
+non-computational.
+
+There is not yet a carrier functor from `CommRing_cat` to `Grpd_cat`.
+`Grpd_cat` compares whole identity/composition functions only at proof time
+and computes their stable point observations separately; a direct carrier
+action rule would otherwise create a competing runtime presentation at the
+generic functoriality owner. The two selected identity/composition heads are
+not themselves a functor action. The first ring-valued-presheaf consumer now
+selects element-level identity/composition paths through those heads, but it
+does not supply the complete object/arrow/higher action needed by a carrier
+functor. Whole invertibility-sieve assembly remains the next concrete gate.
+
+### Universal-Property Localization At One Element
+
+For `x : |R|`, explicit unit evidence is
+
+```text
+CommRingUnitEvidence(R,x)
+  = Sigma inverse : |R|, x * inverse = 1.
+```
+
+This evidence is proposition-valued. If `y` and `z` are two selected
+inverses, commutative-monoid laws give
+
+```text
+y = y*1 = y*(x*z) = (y*x)*z = (x*y)*z = 1*z = z.
+```
+
+The carrier is a set, so the resulting inverse path is contractible. The
+dependent path between the two multiplication-law witnesses is likewise an
+equality between proofs in a proposition-valued carrier equality. The Sigma
+path view therefore makes the whole unit-witness identity space contractible.
+
+Unit evidence transports along an element path and is preserved by every
+structured ring map. If `u^-1` is the inverse stored by `u`, the preserved
+witness stores `h(u^-1)` as the inverse of `h(x)`; multiplication and one
+preservation prove its law. This is computational data, not merely a
+proposition that some inverse exists. These generic operations live with the
+unit classifier because both localization comparison and ring-valued
+presheaves consume them.
+
+For a structure map `iota : R -> L` and a target map `h : R -> S`, the
+factorization classifier is
+
+```text
+CommRingLocalizationFactor(iota,h)
+  = Sigma factor : CommRingHom(L,S),
+      Pi a : |R|, factor(iota(a)) = h(a).
+```
+
+The triangle is pointwise on carrier applications. This is intentional:
+whole `CommRing_cat` identity and composition arrows retain generic category
+owners, and their carrier projections do not have extra runtime equations.
+The universal property does not require such projected computation.
+
+Localization at `f : |R|` is then expressed by
+
+```text
+IsCommRingLocalizationAt(R,f,L,iota)
+  = UnitEvidence_L(iota(f))
+      x Pi S h,
+          UnitEvidence_S(h(f)) ->
+            IsContr(CommRingLocalizationFactor(iota,h))
+
+CommRingLocalizationAt(R,f)
+  = Sigma L : CommRing,
+      Sigma iota : CommRingHom(R,L),
+        IsCommRingLocalizationAt(R,f,L,iota).
+```
+
+Named constructors and projections expose the chosen target, structure map,
+unit, and contractible factorization evidence. The module introduces no
+rewrite or unification rule and no eta reduction for opaque chosen
+localizations. A concrete reviewer proves that localizing the one-element
+zero ring at its unique element yields the zero ring itself: Unit
+contractibility supplies every factor triangle, `comm_ring_hom_ext` supplies
+uniqueness of structured factors, and proposition-valued triangle evidence
+completes the dependent Sigma path.
+
+The separate rule-free unit-localization layer gives the first parametric
+model. If `u : CommRingUnitEvidence(R,f)`, the pointwise identity map has the
+full localization universal property:
+
+```text
+comm_ring_unit_identity_localization(R,f,u) : Loc_R(f)
+target(comm_ring_unit_identity_localization(R,f,u)) = R
+map(comm_ring_unit_identity_localization(R,f,u))(x) = x.
+```
+
+For a target map `h : R -> S`, the selected factor is `h` itself. Any
+competing factor's triangle supplies pointwise equality with `h`;
+structured-map extensionality and the proposition-valued triangle fibre then
+give equality of the complete Sigma factors. Thus the factorization
+classifier is constructively contractible, rather than merely assumed. The
+multiplicative identity carries canonical unit evidence with inverse one, so
+every ring has the closed parametric computation
+
+```text
+comm_ring_identity_localization_at_one(R) : Loc_R(1)
+R[1/1] = R.
+```
+
+This closes only the identity-localization stage of the computational-scheme
+audit. The fixed-image construction below supplies the next potentially
+nontrivial representation; the representation-independent iterated/basic-
+open overlap theorem is a separate downstream layer.
+
+The next rule-free layer computes the opposite degenerate endpoint. The ring
+axioms first derive
+
+```text
+x * 0 = 0,
+0 * x = 0,
+-0 = 0.
+```
+
+Consequently explicit unit evidence for zero gives `0=1`, after which every
+carrier element equals zero. The unique point map from `R` to the zero ring
+therefore satisfies the full localization universal property:
+
+```text
+comm_ring_zero_localization(R) : Loc_R(0)
+target(comm_ring_zero_localization(R)) = zero_comm_ring
+map(comm_ring_zero_localization(R))(x) = tt.
+```
+
+An admissible map `h:R->S` sends zero to an invertible element; transport along
+its zero-preservation path makes `0_S` invertible and hence proves `0_S=1_S`.
+That path constructs the unique structured factor `zero_comm_ring -> S`, and
+structured-map extensionality plus the proposition-valued agreement fibre
+makes the complete factorization Sigma contractible. This is the
+computational empty-basic-open case. It is not yet a nondegenerate fraction
+model, and by itself it does not establish the general affine-overlap law.
+
+The next rule-free model handles every supplied multiplicative idempotent
+`e^2=e` without fractions or quotients. Its carrier is the fixed image
+
+```text
+eR = Sigma x : |R|, e*x=x,
+```
+
+which is a set because `|R|` is a set and each fixed-point equation is a
+proposition. It inherits zero, addition, negation, and multiplication from
+`R`; its multiplicative unit is `e`. Equality of fixed-image elements is
+therefore controlled by equality of their underlying elements, with the
+equation fibre filled uniquely. The scaling map
+
+```text
+iota_e : R -> eR,
+iota_e(x) = e*x
+```
+
+is a structured ring map. Idempotence supplies closure and multiplicativity;
+the latter is the ordinary calculation `(e*x)*(e*y)=e*(x*y)`.
+
+If `h:R->S` makes `h(e)` a unit, structured-map preservation makes `h(e)`
+idempotent as well. An invertible idempotent equals one: for inverse `u`,
+
+```text
+a = a*1 = a*(a*u) = (a*a)*u = a*u = 1.
+```
+
+Consequently the selected factor sends `(x,e*x=x)` to `h(x)`. Its triangle
+computes from `h(e*x)=h(e)*h(x)=h(x)`. For uniqueness, every fixed point `x`
+is literally recovered propositionally by scaling its underlying element;
+the competing factor triangle and structured-map extensionality then identify
+the whole factor map, and the proposition-valued agreement fibre identifies
+the complete factor package. Thus
+
+```text
+comm_ring_idempotent_image_localization(R,e,e2) : Loc_R(e)
+target(...) = eR
+element(map(...)(x)) = e*x.
+```
+
+This is an explicit computing localization representation and is genuinely
+nondegenerate whenever `R` comes with a nontrivial idempotent. The separate
+product layer now constructs `R x S` componentwise, including structured-map
+action and whole identity/composition paths. It does not introduce a new
+primitive functor head or duplicate generic functoriality. The closed Boolean
+ring `F2` supplies a concrete factor, with its complete ring laws established
+internally by finite elimination.
+
+In `F2 x F2`, take
+
+```text
+e = (1,0),
+e*e = e,
+e != 0,
+e != 1.
+```
+
+The last two statements are constructive maps from the corresponding path
+types to `Empty`, obtained by projecting a hypothetical product path to the
+Boolean component where `true=false`. The fixed-image localization therefore
+gives a closed non-endpoint model. Its affine-basic-open arrow has target
+`e(F2 x F2)`, and its carrier map executes as
+
+```text
+(x,y) |-> (x,0).
+```
+
+Thus the computation is observably neither the identity-localization example
+nor the zero-localization example. This closes the concrete nondegenerate
+localization/basic-open representation gate. It does not prove that arbitrary
+localizations admit a fixed-image representation, and it does not by itself
+identify Cartier matching sections with a whole internal descent equivalence,
+construct the intended Zariski topology, or define `Spec` and schemes.
+
+This is a representation-independent interface. Concrete fractions,
+finite/unimodular families, powers, concrete polynomial representations, and
+Zariski constructions remain separately consumer-gated layers.
+
+### Iterated Localization And The Product Comparison
+
+For `f,g : |R|`, the selected two-stage package is
+
+```text
+CommRingIteratedLocalizationAt(R,f,g)
+  = Sigma Lf : CommRingLocalizationAt(R,f),
+      CommRingLocalizationAt(target(Lf), map(Lf)(g)).
+```
+
+Its structure map is the stable pointwise composite of the two chosen maps.
+The first-stage image of `f` remains a unit after applying the second map, and
+the second stage makes the first-stage image of `g` a unit. Products of units
+are units, so the composite sends `f*g` to a unit after transport across the
+structured-map multiplication law.
+
+Conversely, a localization map at `f*g` sends both `f` and `g` to units. If
+`x*y` has inverse `u`, then `y*u` is an inverse for `x`, while `x*u` is an
+inverse for `y` (with commutativity used for the latter equation). These
+explicit witnesses let the map factor through localization at `f`; its factor
+triangle transports the unit evidence for `g` to the intermediate map, which
+then factors through the second localization.
+
+Thus the universal properties supply two comparison factors:
+
+```text
+R[1/(f*g)]  ->  R[1/f][1/g]
+R[1/f][1/g] ->  R[1/(f*g)].
+```
+
+Each factor retains a pointwise triangle over the original map from `R`.
+`CommRingIteratedLocalizationComparison` packages these forward and reverse
+factors with named map/agreement projections. It does not identify the two
+chosen localization packages, and the comparison-data module itself does not
+store inverse laws.
+
+The downstream overlap module now supplies those laws without changing either
+localization representation. First, if two inhabitants lie in the same
+contractible factorization classifier, applying the factor-map projection to
+their canonical path gives equality of the whole structured maps. On the
+product-localization side, the composite of the staged reverse and forward
+maps and the identity map are both factors of the original map
+`R -> R[1/(f*g)]`. Contractibility therefore gives
+
+```text
+reverse * forward = id_[R[1/(f*g)]].
+```
+
+The opposite law uses the two universal properties in sequence. Over the
+first localization map, `(forward*reverse)*second` and `second` are two
+factors of the original two-stage map, so first-stage uniqueness identifies
+them as whole maps. Evaluating that map equality supplies the triangle needed
+at the second localization stage. Second-stage uniqueness then gives
+
+```text
+forward * reverse = id_[R[1/f][1/g]].
+```
+
+Both paths are explicitly transported from the stable pointwise composition
+and identity witnesses to the generic `CommRing_cat` composition and identity
+owners. No new reduction rule is introduced. The canonical forward comparison
+therefore carries
+
+```text
+OmegaEquivAlong
+  CommRing_cat
+  R[1/(f*g)]
+  R[1/f][1/g]
+  forward,
+```
+
+with the staged reverse map selected in both inverse slots; a first-class
+`OmegaEquiv` facade is derived from the same evidence. This is a whole
+internal algebraic overlap equivalence, not an external pair of pointwise
+cancellation observations. It still assumes chosen universal-property
+localization packages and supplies neither fractions nor a concrete
+nondegenerate localization model. Equality of the chosen packages, presheaf
+restriction coherence, topology, `Spec`, and schemes remain separate gates.
+
+### CommRing-Valued Presheaves And Invertibility Support
+
+A commutative-ring-valued presheaf uses the direct ordinary functor
+presentation
+
+```text
+CommRingPsh_cat(K) = Functor_cat(Op_cat(K), CommRing_cat)
+CommRingPsh(K)     = Obj(CommRingPsh_cat(K)).
+```
+
+This classifier is a transparent definition rather than a rigid facade at the
+current boundary. Cat-valued `Psh_cat(K)` has a useful separate head because
+it mediates the public presheaf category and the distinct active
+`Catd_cat(Op(K))` representation, with controlled recovery of the base. Here
+the ordinary functor category is the sole selected representation, and current
+consumers retain `K` explicitly. A later whole-sieve or ringed-site consumer
+could justify an audited rigid-facade migration if it needs stable head
+recognition, base recovery, or representation independence. For
+`O : CommRingPsh(K)`, `f : V -> U`, and `s : |O(U)|`, the current observations are
+
+```text
+comm_ring_psh_value(O,U)           = O[U]
+comm_ring_psh_restriction_hom(O,f) = O[f] : O(U) -> O(V)
+comm_ring_psh_restrict(O,f,s)      = O[f](s).
+```
+
+The last term applies the actual retained carrier function of the structured
+ring map, so an explicit restriction map remains computational. Generic
+identity and composition in `CommRing_cat` still do not reduce on carrier
+elements. The library instead proves
+
+```text
+O[id_U](s)     = s
+O[f ∘ g](s) = O[g](O[f](s))
+```
+
+through the selected pointwise identity/composition maps. After specializing
+to `Op_cat(K)`, opposite identity has already normalized to the identity of
+`K`, so the generic projection-order bridge makes the whole restriction arrow
+reduce to the generic `CommRing_cat` identity. The rule-free
+`fapp1_id_path` theorem retains the same boundary as typed proof evidence,
+while the selected pointwise identity path crosses from that generic whole
+identity to a carrier-computing map. No presheaf-specific rule is installed,
+and application of the generic whole identity remains deliberately opaque on
+carrier elements.
+
+The semantic support of a section is currently exposed arrowwise:
+
+```text
+CommRingPshInvertibleAlong(O,s,f)
+  = CommRingUnitEvidence(O(V), O[f](s)).
+```
+
+It is a proposition because explicit unit evidence is a proposition. If the
+predicate holds for `f : V -> U` and `g : W -> V`, preservation of units by
+`O[g]` gives a unit witness for the nested restriction; the composite path
+transports it to `O[f ∘ g](s)`. Thus the expected downward-closure
+calculation is present at ordinary arrows.
+
+The maintained zero-ring model makes this nonvacuous. The constant
+`zero_comm_ring` presheaf has generic structured identities as restrictions;
+the pointwise identity path evaluates each restriction on `tt`, and the
+explicit zero-ring unit witness transports to every arrow.
+
+The downstream carrier/unit-family construction now assembles this predicate
+as an ordinary `Sieve(K,U)`. Its higher fibre at a literal `(V,f)` reduces to
+`Path_cat(CommRingPshInvertibleAlong(O,s,f))`, and ordinary
+`SieveMembership(D(s),(V,f))` reduces to the unit-evidence classifier above.
+The full higher action is inherited from pullback and Sigma/Catd owners; no
+ad hoc identity or composition rule is added.
+
+A first locality bridge then keeps two logically different observations
+separate. For a supplied topology `T`,
+
+```text
+CommRingPshInvertibilityCover(T,O,U,s) = Covers_T(D_O(s))
+```
+
+is proposition-valued. It says that `s` is invertible locally everywhere; it
+does not say that every section has this property, nor does it define a local
+ring. Independently, if `ell` is a chosen universal-property localization of
+`O(U)` at `s` and `(f,m)` is an actual member of `D_O(s)`, then `m` is exactly
+unit evidence for `O[f](s)`. The localization property therefore selects
+
+```text
+factor(ell,f,m) : O(U)[1/s]_ell -> O(V)
+factor(ell,f,m)(ell(x)) = O[f](x).
+```
+
+The second line is retained as a pointwise path on carrier elements. The
+category
+
+```text
+Elem(D_O(s)) = Sigma_cat(sieve_higher(D_O(s)))
+```
+
+has literal objects `(V,f,m)`. Its two Sigma projections give a functor
+`dom:Elem(D_O(s))->Op(K)`, and `O o dom` is the CommRing-valued value diagram.
+The selected factors are packaged as the internal cone
+
+```text
+factorCone(ell) : Const(O(U)[1/s]_ell) => O o dom
+factorCone(ell)[(V,f,m)] = factor(ell,f,m).
+```
+
+The cone is an ordinary `Transf`, so its full off-diagonal action and
+naturality are inherited from the generic `tapp1` calculus. Downstream
+consumers do not carry an external family of commutative squares. In the
+closed constant zero-ring model, the literal cone component reduces to the
+actual presheaf restriction map.
+
+This typed owner is supported by the universal-property proof rather than an
+independent naturality axiom: factorization is contractible, ordinary-sieve
+membership fibres are subterminal, and `CommRing_cat` homs are equality
+categories on a set of structured maps. The restriction comparison below is
+the explicit construction audit; the remaining proof-fibre/higher coherence
+is propositionally unique and is packaged by the primitive `Transf` boundary.
+
+There is also a theorem-level construction audit. If `g:W->V`, the unit
+witness at `f` restricts to one at `f o g`. Mapping the factor triangle by
+`O[g]` and composing with presheaf functoriality makes
+`O[g] o factor(ell,f,m)` another localization factor over `O[f o g]`.
+Contractibility of that factorization space therefore supplies
+
+```text
+factor(ell,f o g,g^*m) = O[g] o factor(ell,f,m).
+```
+
+This external equation validates the literal component presentation; it is
+not a second public naturality field. The internal cone is the computational
+front of the historical Cartier comparison
+`lim_{V in D(s)} O(V) = O(U)[1/s]`. The current module does not yet identify
+that cone as a limit, compare it with selected descent, or claim sheafhood or
+a ringed-site package.
+
+The first direct consumer applies the internal cone to actual localization
+elements without externalizing its coherence. Pull the Path-valued carrier
+family back along the value diagram:
+
+```text
+MatchingCarrier_O(s)[V,f,m] = Path_cat(|O(V)|)
+Matching_O(s) = Pi_(V,f,m in Elem(D_O(s))) MatchingCarrier_O(s)[V,f,m].
+```
+
+An object of `Matching_O(s)` is therefore one internally coherent family of
+carrier elements. For every `x : |O(U)[1/s]_ell|`, the selected section has
+literal component
+
+```text
+matchingSection(ell,x)[V,f,m] = factor(ell,f,m)(x).
+```
+
+This computation uses the full displayed carrier action: first fix `x` in the
+source fibre, then apply `fib_cov_tapp0_func` to the selected structured factor
+map. Postcomposing the ring-valued cone and capping its action first would lose
+that executable element application. No direct capped carrier rule is added;
+the existing full-action owner remains the unique route.
+
+Finally, `path_lift_fapp0` packages the assignment as
+
+```text
+restrict_ell : Path_cat(|O(U)[1/s]_ell|) -> Matching_O(s).
+```
+
+Thus an equality path between localization elements is mapped to an arrow
+between their coherent matching sections. Pi owns compatibility over arrows
+of `Elem(D_O(s))`, Catd owns the carrier-family action, and PathLift owns the
+source path action. No separate naturality square, identity proof, or
+composition proof is propagated through the public API. The closed zero-ring
+consumer evaluates the section to the actual restriction of `tt`.
+
+This matching module itself owns only the localization-to-matching direction.
+The downstream glue/locality layer may accept a selected whole inverse and
+its laws without changing this construction. A general generated topology,
+truncation reflector, or sheafification construction is not a prerequisite
+for this direction and is not implied by it.
+
+The selected glue layer closes the next, specifically Cartier-locality,
+boundary. It is important not to confuse this with ordinary sheaf descent:
+the invertibility sieve `D(s)` describes the basic open where `s` is
+invertible and need not cover `U`. For a chosen localization, selected glue is
+a genuine functor
+
+```text
+glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|).
+```
+
+Thus every arrow between coherent matching families is mapped internally to
+an equality path between their glued localization elements. The earlier
+compatibility package also retains
+
+```text
+glue_ell(restrict_ell(x)) = x
+restrict_ell(glue_ell(m))[V,f,r] = m[V,f,r].
+```
+
+The second equation is stored as a component observation of already coherent
+Pi objects, not as an external naturality family. Its literal left endpoint
+computes further to
+
+```text
+factor_O(ell;f,r)(glue_ell(m)).
+```
+
+This is the computational content of the historical Cartier
+`mod_loc_elim` rule, now separated from the old global sheafification fold and
+expressed entirely through active functor, Pi, and localization owners. The
+package and all its observations are transparent and rule-free. The derived
+zero-ring model takes glue to the constant functor at `tt`; Unit
+contractibility proves both observed laws, while the closed component theorem
+reaches the actual zero-presheaf restriction. That model is intentionally not
+advertised as constructing the stronger whole capability below.
+
+For a scheme-facing consumer, the stronger supplied boundary is
+
+```text
+CommRingPshLocalizationLocality(K,O,U,s,ell)
+  = OmegaEquivAlong Cat_cat
+      Path_cat(|O(U)[1/s]_ell|)
+      Matching_O(s)
+      restrict_ell.
+```
+
+The forward functor is fixed to the already-computing `restrict_ell`. The
+selected left inverse is `glue_ell`, and the two retained paths are equality
+of whole functor objects:
+
+```text
+glue_ell o restrict_ell = id
+restrict_ell o glue_ell = id.
+```
+
+The native `OmegaEquivAlong` data initially carries separate left and right
+inverse functors. The transparent equality/hom-action extension proves that
+they agree and publicly exposes the consequence that the selected left
+inverse also satisfies the right whole-functor law. Thus the commutative-
+algebra layer does not duplicate a half-adjoint proof. Evaluating the first
+whole path at a localization element and the second at a matching object and
+support element derives the earlier two observations; a transparent adapter
+reconstructs `CommRingPshLocalizationGlue` for its existing consumers.
+
+This whole locality is supplied capability data, not a theorem derived from
+the earlier component observations. The bounded whole-comparison audit
+correctly found that promoting those observations alone to equality of whole
+functor objects would require additional section/functor extensionality. No
+such extensionality, univalence, or equality rule is added here. Conversely,
+`DefIso` would demand judgmental cancellation and is therefore too strict.
+
+### Global Reflective CommRinged Objects And Covers
+
+The first non-affine continuation deliberately stops before affineness or a
+scheme record. On a fixed base category `K`, it packages
+
+```text
+ReflectiveCommRingedSpaceCover(K)
+  = Sigma A : ReflectiveCommRingedSite(K),
+    Sigma X : Obj(K),
+    Sigma R : Sieve_K(X),
+      Covers(topology(A),R).
+```
+
+The distinguished `X` supplies a global-first object and `R` supplies a
+selected covering atlas in sieve form. The included structure presheaf is
+routed through `A`; it is not copied into the package. For every arrow
+`f : V -> X`, the existing Grothendieck-stability theorem constructs
+
+```text
+Covers(topology(A),f^*R).
+```
+
+An actual selected cover chart is the dependent pair of a restriction-total
+object `(V,f)` and evidence that it belongs to `R`. Its domain and arrow are
+the existing `into_restr_domain` and `into_restr_arrow` projections. Pulling
+the global cover back along that arrow gives the chart's internally derived
+overlap cover; later pairwise overlap candidates are members of this
+pullback. No external overlap square or cocycle family is stored.
+
+This package does not say that the cover is finite or that any member is
+affine. A later affine-realization capability must compare the ambient chart
+restriction honestly with an affine presentation; merely attaching an
+unrelated ring would not establish affineness. Locally-ringed support,
+finite-qcqs selection, gluing realization, and a scheme category remain
+separate downstream gates.
+
+### Binary Generation Of A Selected Covering Sieve
+
+Two arrows that merely belong to a covering sieve need not themselves cover.
+For selected members `c0 : U0 -> X` and `c1 : U1 -> X`, the binary generation
+capability therefore retains, for every `q : V -> X` in the selected sieve
+`R`, constructive data
+
+```text
+b : Bool,
+h : V -> U_b,
+q = c_b o h.
+```
+
+This is `BinarySelectedCoverGeneration`. It is witness-rich rather than
+propositionally truncated: chart selection and the factor map remain
+executable. The factorization says that `R` is contained in the sieve
+generated by `c0,c1`; their already-retained membership and sieve closure give
+the reverse containment. Hence the two selected arrows generate the known
+covering sieve without constructing a second sieve object or a new coverage
+law.
+
+The selected arrows are atlas generators. Arbitrary members of `R` are their
+further restrictions and are not asserted affine. Closure under still further
+restriction follows by generic composition; it is not stored as a naturality
+or coherence field. This binary interface is the first finite arity and can
+later generalize to Nat-indexed choice when a higher-arity consumer requires
+it.
+
+### Whole Ambient Chart Slices And Supplied Reflective Presentations
+
+For an object `U : Obj(K)`, the restriction-oriented arrow total has the
+whole generic Sigma projection
+
+```text
+into_restr_domain_func(U) : Into_restr_cat(K,U) -> K^op.
+```
+
+Taking opposites gives the conventional whole slice-domain functor
+
+```text
+slice_domain_func(U) : Slice_cat(K,U) -> K.
+```
+
+Consequently a CommRing-valued presheaf restricts without a new action
+calculus:
+
+```text
+comm_ring_psh_pullback(F,O) = O o Op(F),
+O_X|_U = comm_ring_psh_pullback(slice_domain_func(U),O_X).
+```
+
+These are whole functors. Generic composition owns their object action,
+structured restriction maps, functoriality, and naturality. At an arbitrary
+encoded-Sigma slice object the stable value endpoint remains evaluation of
+`slice_domain_func`; no package eta identifies that term with a separately
+projected `sigma_Fst`. At a literal arrow `(V,f)` the whole domain functor and
+therefore the ambient presheaf value compute to `V` and `O_X(V)`.
+
+The assumption-explicit classifier
+
+```text
+SuppliedReflectiveCommRingedSlicePresentation(A,U)
+  = Sigma B : ReflectiveCommRingedSite(Slice_cat(K,U)),
+      DefIso(include(O_B), O_A|_U)
+```
+
+retains a supplied reflective CommRinged site on the actual slice and a whole
+computational presentation of its included structure presheaf. The `DefIso`
+owns both whole transformations and their strict cancellation, so readable
+components are observations rather than external naturality laws.
+
+This package deliberately does **not** claim that the topology, sheaf
+category, reflector, or structure-sheaf object of `B` was induced from `A`.
+The active site library has no general topology transport along a site
+functor, and the supplied `Sheaf_cat` facade has no pullback-reflector theorem.
+An honest continuity/induced-topology capability remains separate from this
+computational presentation and from later affine-chart realization.
+
+### Whole Sheaf-Basis Comparisons
+
+For a selected functor `i : A -> B`, ordinary opposite precomposition gives
+the whole restriction functor
+
+```text
+i^* : Functor(B^op,V) -> Functor(A^op,V).
+```
+
+The generic precomposition owner's runtime object action remains in its
+cut-oriented normal form. `psh_restriction_value_path(i,P)` proves at proof
+time that this value equals the direct composition spelling `P o Op(i)`, and
+`psh_restriction_value_iso(i,P)` turns that path into ordinary
+`IsoEvidence`. These are presentation bridges, not a new runtime fold; whole
+arrow action remains owned by generic precomposition. Scheme-facing
+specializations may use direct composition when judgmental value computation
+is part of their public contract.
+
+Given supplied sheafification capabilities on `(A,T_A)` and `(B,T_B)`, a
+`SuppliedSheafRestrictionAlong(i)` retains a whole functor between their sheaf
+categories and one `IsoEvidence` comparing the two whole composites into
+`Functor(A^op,V)`: include after sheaf restriction versus presheaf
+restriction after include. A `SuppliedSheafBasisEquivalenceAlong(i)` adds
+`OmegaEquivAlong Cat_cat` for that exact selected restriction functor.
+
+This is comparison-lemma strength, not an equivalence of the raw base
+categories. The `IsoEvidence` and `OmegaEquivAlong` objects own their complete
+transformation/functor action, so no family of component naturality or
+commutative-square equations is retained. A locally exact site square is one
+possible semantic route to a stronger sheafification Beck--Chevalley mate;
+it is neither a field of this basis package nor yet consumed here.
+
+### Computational Big Affine Spec Slice
+
+The first scheme-facing facade is the conventional big affine slice
+
+```text
+AffineSpecBigSlice_cat(R) = Slice_cat(Op(CommRing_cat),R).
+```
+
+Its objects are structured maps `R -> S`, while arrows point geometrically
+from `Spec(T)` to `Spec(S)`. The opposite slice is definitionally the existing
+Sigma total of the represented presheaf, so the coordinate-ring presheaf is
+simply
+
+```text
+affine_spec_coordinate_psh(R)
+  = Sigma_proj1_func(CommRing_cat, yoneda_psh(Op(CommRing_cat),R)).
+```
+
+This is a whole CommRing-valued functor, not an object-only assignment. At the
+identity chart its value computes to `R`; at a selected basic-open chart
+`D(f)` it computes to the chosen localization target `R[1/f]`. A commuting
+structured triangle `R -> S -> T` constructs an actual internal slice arrow
+`Spec(T) -> Spec(S)` through the generic Sigma-arrow owner, and coordinate
+restriction along it computes to the supplied whole structured map `S -> T`.
+
+For the first overlap, the universal-property comparison between
+`R[1/(f*g)]` and `R[1/f][1/g]` already supplies forward and reverse structured
+maps, their triangles over `R`, and whole cancellation paths. The affine Spec
+facade lifts the two maps to geometric chart arrows in opposite directions.
+The coordinate presheaf restricts along them to exactly those maps and reuses
+their existing `OmegaEquiv CommRing_cat`. No fraction representation,
+localization-package equality, new naturality data, functor equality, or
+univalence principle is added. The split idempotent in `F2 x F2` supplies a
+closed non-endpoint basic-open chart.
+
+This big slice is a computational precursor, not the selected small Zariski
+site and not yet a locally ringed space or complete scheme. The finite
+basic-open atlas, chart restriction, and overlap computations are separate
+downstream consumers. The direct topology on this same big slice is supplied
+by the next layer; sheaf descent, subcanonicity, comparison with the small
+site, and canonical sheafification remain independent theorem/interface
+layers.
+
+### Direct Big-Affine Zariski Topology
+
+Fix a base ring `R` and a literal chart `h : R -> S`. For a selected
+localization package `ell : CommRingLocalizationAt(S,f)`, the exact internal
+base map of the localized chart is the existing opposite-precomposition
+endpoint
+
+```text
+R --h--> S --iota_ell--> S[1/f]_ell.
+```
+
+Using this endpoint, `affine_spec_chart_localization_arrow` is a whole arrow
+
+```text
+Spec(S[1/f]_ell) -> Spec(S)
+```
+
+inside `AffineSpecBigSlice_cat(R)`. Its slice triangle is reflexive by
+construction, and applying the whole coordinate presheaf computes to the
+existing structured localization map `iota_ell : S -> S[1/f]_ell`. No
+external commutative triangle, point-only restriction field, or
+constructor-specific naturality law is stored.
+
+For a selected finite Zariski family on `S`,
+`AffineSpecChartZariskiCoverFamilyMembership` says that each of these whole
+localization-chart arrows belongs to a sieve `Q` on the literal chart. The
+arbitrary-object generator
+
+```text
+AffineSpecBigZariskiGenerators(R)
+  : SieveGeneratorFamily(AffineSpecBigSlice_cat(R))
+```
+
+uses one outer `sigma_ind` to expose the retained coordinate ring and
+structure map of a general slice object. This eliminator is semantically
+important: encoded Sigma packages have no global eta rule, so rebuilding an
+arbitrary chart from projections is not assumed convertible to the original
+object. The branch then retains a selected
+`CommRingZariskiCoverFamily(S)` together with literal containment of all its
+lifted arrows in `Q`.
+
+Applying the generic intersection construction gives
+
+```text
+affine_spec_big_zariski_topology(R)
+  : GrothTopology(AffineSpecBigSlice_cat(R)).
+```
+
+Every selected finite chart family covers, and
+`affine_spec_big_zariski_topology_least` maps its coverhood into any other
+topology accepting the same generators. The presentation witnesses remain
+available; only generated coverhood is proposition-valued. This is the least
+topology in the public inclusion order, without a cover-derivation syntax,
+decision procedure, truncation/HIT, coverhood rewrite, or global localization
+choice.
+
+The construction is the selected topology route for the first computational
+affine MVP. It does not identify the big affine site with the small site of
+opens, prove subcanonicity, construct sheafification, or package a scheme.
+Those are later consumers of this topology and of the already-computing chart,
+restriction, overlap, and Cartier-locality maps.
+
+### Assumption-Explicit Affine Reflective Structure Sheaves
+
+The first structure-sheaf layer consumes the exact big-affine topology above
+without pretending to construct sheafification. For a base ring `R`, an
+`AffineStructureSheafPresentation(R)` retains:
+
+```text
+S : SheafificationCapability(AffineSpecBigSlice_cat(R), BigZar(R), CommRing)
+O : Obj(Sheaf_cat(AffineSpecBigSlice_cat(R), BigZar(R), CommRing))
+i : DefIso(CommRingPsh_cat(AffineSpecBigSlice_cat(R)), include_S(O), O_coord).
+```
+
+Here `O_coord` is the existing whole `affine_spec_coordinate_psh(R)`. Thus the
+presentation determines a `ReflectiveCommRingedSite` whose topology is
+definitionally the internally generated `BigZar(R)`, while
+`affine_structure_sheaf_coordinate_defiso` relates its included structure
+sheaf to the presheaf whose chart restrictions already compute.
+
+The comparison is deliberately a whole `DefIso` in the functor category.
+Its forward and inverse arrows are transformations, so ordinary action and
+naturality remain at the generic transformation owners. The readable
+`affine_structure_sheaf_to_coordinate_at` and
+`affine_structure_sheaf_from_coordinate_at` operations only project those
+transformations at one site object. At a literal chart `R -> S`, their
+coordinate endpoint computes to the whole ring `S`; they are not an
+object-only substitute for the comparison.
+
+This layer is assumption-explicit in two independent ways: the reflector is
+supplied, and the computational comparison is supplied. It proves neither
+that the coordinate presheaf is a sheaf nor that arbitrary sheafification
+constructs it. It also does not yet supply the historical `D(f)`
+localization/glue capability on the relative big site, a stalk-local-ring
+condition, a small-site comparison, or a scheme record. Those distinctions
+keep the next computational-locality tranche honest.
+
+### Assumption-Explicit Affine Coordinate Locality
+
+The next capability retains the whole locality above uniformly over the
+computing coordinate presheaf:
+
+```text
+AffineCoordinateLocalizationLocality(R)
+  = Pi U : AffineSpecBigSlice_cat(R),
+    Pi s : O_coord(U),
+    Pi ell : CommRingLocalizationAt(O_coord(U),s),
+      CommRingPshLocalizationLocality(O_coord,U,s,ell).
+```
+
+At a literal chart `h : R -> S`, `O_coord(h)` reduces to `S`, so the endpoint
+is the supplied localization `S[1/s]_ell` and the existing whole restriction
+functor. `affine_coordinate_localization_locality_at` exposes that selected
+whole equivalence. The compatibility operation
+`affine_coordinate_localization_legacy_glue` derives the earlier
+point/component glue package rather than postulating a second glue map.
+
+This is deliberately independent of the chosen PSSS-11a structure-sheaf
+presentation: the final scheme record can pair the computing coordinate
+locality with the whole `DefIso` relating that coordinate presheaf to its
+selected included sheaf. The capability quantifies over every localization
+package that is supplied; it does not make a global localization choice or
+construct an inhabitant. Since `D(s)` need not cover the ambient chart, this
+is Cartier/Zeuner localization locality, not ordinary covering-sieve descent,
+subcanonicity, or a stalk-local-ring theorem.
+
+### Thin Computational Affine-Scheme Presentations
+
+Once the whole structure-sheaf presentation and whole coordinate locality are
+available, an affine scheme needs no second copy of their derived operations:
+
+```text
+AffineSchemePresentation(R)
+  = Sigma P : AffineStructureSheafPresentation(R),
+      AffineCoordinateLocalizationLocality(R).
+```
+
+The first projection determines the reflective CommRinged site on the exact
+internally generated big-Zariski topology and supplies a whole `DefIso` from
+the included structure sheaf to the computing coordinate presheaf. The second
+projection fixes canonical localization restriction as a whole equivalence at
+every chart and selected localization. Thus the record is small because its
+fields are already internal, functorial structures—not because action or
+coherence has been discarded.
+
+The ring remains an index and continues to determine the affine slice,
+coordinate presheaf, whole chart, and unit cover. A nontrivial finite atlas is
+consumer data. In the first closed-base example, `R = F2 x F2`; the two
+structure/locality capabilities are visibly supplied, while the generated
+topology, complementary-idempotent cover, fixed-image chart rings, whole
+restrictions, and zero overlap compute from existing owners.
+
+This is an assumption-explicit computational affine presentation. It does not
+construct sheafification or locality, and it does not yet supply a category of
+schemes, general non-affine gluing, a small-site comparison, stalks, or a
+stalk-local-ring theorem. The later TypeScript structure macro may generate
+its Sigma constructor/projection boilerplate, but that authoring convenience
+does not alter the kernel contract.
+
+### Whole Ambient Affine-Basis Realizations
+
+For an ambient reflective ringed site `A` on `K`, an object `U`, a supplied
+reflective presentation of the actual slice `K/U`, and an affine presentation
+`X_R`, select a whole basis functor
+
+```text
+i : AffineSpecBigSlice_cat(R) -> Slice_cat(K,U).
+```
+
+The ambient structure presheaf restricted along `i` is ordinary whole
+precomposition, so its value at an affine basis object computes by evaluating
+the ambient slice presheaf at `i(q)`. The realization package is
+
+```text
+AffineBasisRealizationAlong(A,U,P,R,X_R,i)
+  = Sigma basis : SuppliedSheafBasisEquivalenceAlong(i),
+      DefIso(ambient_O|_i, affine_scheme_underlying_psh(X_R)).
+```
+
+Composing the retained `DefIso` with the affine presentation's existing
+coordinate `DefIso` gives one whole comparison from the actual ambient
+restriction to `affine_spec_coordinate_psh(R)`. The semantic basis
+equivalence and computational presheaf bridge are complementary: the first
+prevents an unrelated affine label; the second preserves executable
+coordinate normal forms. Neither duplicates naturality, asserts equivalence
+of the raw slice categories, or transports generic glue. A sheafification
+Beck--Chevalley mate remains a separately consumer-gated capability.
+
+### Global-First Binary Affine-Cover Presentations
+
+For one selected generator `c : U -> X`, an
+`AffineCoverChartRealization(P,c)` retains exactly the data needed to make its
+domain honestly affine relative to the ambient structure:
+
+```text
+Sigma slice : SuppliedReflectiveCommRingedSlicePresentation(A,U),
+Sigma R : CommRing,
+Sigma affine : AffineSchemePresentation(R),
+Sigma i : Functor(AffineSpecBigSlice_cat(R), Slice_cat(K,U)),
+  AffineBasisRealizationAlong(A,U,slice,R,affine,i).
+```
+
+The existing basis owner carries whole sheaf semantics and the whole
+computational presheaf bridge. Its composed coordinate `DefIso` is derived,
+so the chart package stores no objectwise naturality or restriction squares.
+Readable observations are exposed, while dependent projection types retain
+literal nested-Sigma endpoints; no package eta, rewrite, or unifier is needed.
+
+The global-first binary package is then
+
+```text
+BinaryAffineCoverPresentation(P)
+  = Sigma c0,c1,
+    Sigma generation : BinarySelectedCoverGeneration(P,c0,c1),
+      AffineCoverChartRealization(P,c0)
+      * AffineCoverChartRealization(P,c1).
+```
+
+Thus the two selected generators cover and each generator has a whole affine
+realization. Other sieve members remain refinements, not additional affine
+fields. Pairwise overlaps and repeated restrictions continue to be derived
+from the existing global object, sieve pullback, and generic composition. The
+package is deliberately called an affine-cover presentation: point-free
+locally-ringed support, an explicit open-immersion classifier, a semantic
+scheme category, and atlas-first gluing realization remain separate gates.
+
+### Computing The Affine Generator Of A Sieve Refinement
+
+For `q : V -> X` in the retained covering sieve, evaluating
+`binary_affine_cover_refinement_at(Q,q,member)` returns the existing
+`BinaryCoverChartFactorization`. Its Boolean side selects `c0` or `c1`, and
+the factorization supplies `h : V -> U_b` with `q = c_b o h`. The same side
+then computes:
+
+```text
+binary_affine_cover_refinement_chart       : the selected generator c_b
+binary_affine_cover_refinement_realization : its whole affine realization
+binary_affine_cover_refinement_ring        : its coordinate ring
+```
+
+These observations do not form another record. The presentation already owns
+both realizations, so Boolean elimination derives the matching one without
+duplicating data. For an open Boolean side the realization stays in its
+canonical branch-indexed family; the readable selected-chart observation is
+not promoted to a dependent fusion rule. Most importantly, `q` is a
+refinement through an affine chart, not necessarily another affine chart.
+
+### Topology-Local Local-Ring Presentations
+
+For a CommRing-valued presheaf `O` on `(K,T)`, the two nonautomatic local-ring
+support laws can be expressed without first constructing finite joins of raw
+sieves. The literal empty sieve is
+
+```text
+empty_sieve(U) = const_{Into(U)} Path(Empty).
+```
+
+Its membership computes to `Empty`. A topology-local presentation supplies:
+
+```text
+zero_local(U) : Unit_O(U)(0) -> Covers_T(empty_sieve(U))
+
+sum_local(U,s,t) : Unit_O(U)(s+t) ->
+  Sigma R : Sieve(U),
+    Covers_T(R) *
+    Pi q in R,
+      Sigma b : Bool,
+        if b=false then Unit(O(q)(s)) else Unit(O(q)(t)).
+```
+
+This is the Kripke--Joyal computational reading of `D(0)=bottom` and
+`D(s+t)<=D(s) join D(t)`: if a sum is a unit, a selected cover exposes where
+one summand is a unit. The selected sieve, member, and Boolean branch are
+presentation data rather than a propositionally truncated existence claim.
+The whole sieve owns restriction closure, so no external naturality family is
+stored. The laws `D(1)=top` and `D(st)=D(s) meet D(t)` are algebraically
+automatic and remain a later derived comparison; no duplicate runtime owner
+is introduced merely to restate them.
+
+For a distinguished object `X` of an ambient reflective ringed site, locality
+belongs on the actual slice `K/X`. A
+`ReflectiveCommRingedWholeObjectLocalPresentation(P)` therefore retains a
+`SuppliedReflectiveCommRingedSlicePresentation(A,X)` and applies
+`CommRingPshTopologyLocalRingPresentation` to the whole computing ambient
+restriction, using the supplied slice topology. The slice package continues
+to own sheaf semantics and one whole `DefIso` from its included sheaf to that
+computing target.
+
+Finally,
+
+```text
+BinaryLocallyRingedAffineCoverPresentation(P)
+  = Sigma local : ReflectiveCommRingedWholeObjectLocalPresentation(P),
+      BinaryAffineCoverPresentation(P).
+```
+
+This is the fibrewise locally-ringed plus computational-atlas certificate over
+the retained global object. Its site-relative semantics do not require a
+second generic `IsOpen` field: the supplied site and topology already select
+the admissible chart geometry. In particular, only the two selected cover
+generators are required to carry affine realizations. Arbitrary arrows in the
+sieve they generate are refinements and need not themselves have affine
+domains.
+
+The end-user total is
+
+```text
+BinarySiteRelativeSchemePresentation(K)
+  = Sigma P : ReflectiveCommRingedSpaceCover(K),
+      BinaryLocallyRingedAffineCoverPresentation(P).
+```
+
+It retains the global object and its structure presheaf once, together with
+the topology-local capability, constructively generated binary cover, and the
+two whole affine chart realizations. Restriction, overlap, and cocycle
+compatibility are inherited from the already-global object and whole generic
+composition; they are not record fields. This is a computational scheme
+presentation relative to the selected site. It does not by itself identify
+that site with the classical Zariski site, supply Zeuner's compact-open
+classifier, construct the global object by atlas gluing, or define a
+representation-independent category of schemes.
+
+### Complementary-Idempotent Affine Atlas
+
+The first finite atlas consumer uses product rings rather than postulating a
+general chart-family abstraction. In `R x S`, let
+
+```text
+e  = (1,0),
+e' = (0,1).
+```
+
+Both are idempotent, `e+e'=1`, and `e*e'=0`. The existing fixed-image
+localizations at `e` and `e'`, together with unit coefficients, therefore
+inhabit the existing `CommRingZariskiCoverFamily(R x S)`. That package remains
+the source of truth for the finite presentation and its selected localization
+data; there is no parallel record of charts and no global choice operation.
+
+The two charts are the internal affine-slice objects `D(e)` and `D(e')`.
+Their overlap is selected as the already-computing `D(0)`, whose coordinate
+ring is `zero_comm_ring`. The canonical point maps into the zero ring satisfy
+the required triangles over `R x S`, so the generic Sigma-arrow constructor
+produces genuine geometric arrows
+
+```text
+D(0) -> D(e),
+D(0) -> D(e').
+```
+
+The coordinate presheaf restricts along these arrows to the corresponding
+whole structured ring maps from the chart rings to the zero ring. Thus both
+object values and arrow action remain internal and computational at existing
+functor, Sigma, localization, and CommRing owners; no external naturality
+square is added. In the closed `F2 x F2` instance, `e*e'` reduces literally
+to zero, giving a concrete non-endpoint two-chart affine atlas with empty
+overlap.
+
+This is an atlas/glue *presentation*, not yet a universal gluing theorem or a
+scheme object. It does not construct a colimit, prove sheaf descent, package a
+locally ringed space, or supply a general affine-atlas record. A recursive
+facade tabulating every dependent affine chart from an arbitrary finite cover
+was tested but crossed the bounded elaboration-performance threshold; the
+existing cover family plus directly consumed chart observations is the
+smaller and more stable interface. The optional whole-functor
+extensionality/univalence boundary is unrelated to this computation.
+
+### Affine Functor Of Points And Represented Basic Opens
+
+The scheme-facing functor of points does not require a new primitive `Spec`
+head. For a commutative ring `R`, use the existing Yoneda construction
+
+```text
+affine_spec_functor_of_points(R)
+  = yoneda_psh(Op(CommRing_cat),R).
+```
+
+At a test ring `S`, its fibre computes to the whole structured-map classifier
+`CommRingHom(R,S)`. This is not an object-only assignment: Yoneda already
+supplies restriction along every map of test rings, and generic functor/hom
+owners carry the corresponding arrow action and naturality.
+
+For `f:R`, the semantic basic open is the existing invertibility sieve of the
+shared identity CommRing-valued presheaf. Its `S`-points compute as
+
+```text
+D(f)(S) = Sigma(h : CommRingHom(R,S), UnitEvidence_S(h(f))).
+```
+
+Given a selected localization `i:R->R[1/f]`, precomposition sends a map
+`k:R[1/f]->S` to the point `(k o i, k(i(f)) is a unit)`. Conversely, the
+localization universal property selects a factor for every point of `D(f)(S)`.
+Contractibility of the factorization classifier identifies a selected factor
+with any supplied `k`; CommRing-map extensionality proves the whole-map
+triangle, and proposition-valued unit evidence supplies the dependent Sigma
+path in the other direction. These data construct directly
+
+```text
+TypeEquiv(CommRingHom(R[1/f],S), D(f)(S)).
+```
+
+No univalence principle is used: the equivalence is explicit data, not a
+reflection of equivalence into equality. It is componentwise in the test ring
+`S`, but both compared objects already retain their whole functorial action
+internally. A natural equivalence of presheaves would additionally require
+assembling the components with the relevant internal transformation data; it
+is not silently replaced by external naturality fields or an ad hoc equality
+rule. Generated topology, sheafhood, subcanonicity, locally ringed structure,
+and a general scheme record remain separate gates.
+
+This is the first direct functor-of-points bridge back to the computational
+scheme MVP: basic-open membership is executable data and localization is shown
+to represent it constructively. The later qcqs/spectral or Zeuner-style
+comparison remains a different, substantially broader research problem.
+
+### Finite Families And Unimodular Cover Presentations
+
+A finite homogeneous family uses only the existing natural-number and Sigma
+calculus:
+
+```text
+FiniteFamily(A,0)       = Unit
+FiniteFamily(A,succ n)  = Sigma(x : A), FiniteFamily(A,n).
+```
+
+Thus a visible successor family is a head followed by a shorter tail, and a
+visible zero family is the terminal record. `finite_family_map` acts
+pointwise by Nat recursion. If `A` is a set, repeated Sigma truncation closure
+proves `FiniteFamily(A,n)` a set. The successor is intentionally the literal
+constant-family Sigma rather than the rigid `Product_grpd` head: the finite-
+family consumer needs generic Sigma sethood and no independent product
+identity or comparison rule. This representation introduces no `Fin`, lookup,
+list append, permutation quotient, or new inductive declaration.
+
+The same Nat recursion also defines dependent pointwise evidence:
+
+```text
+FiniteFamilyAll(P, [], ())          = Unit
+FiniteFamilyAll(P, x::xs, (u,us))   = P(x) x FiniteFamilyAll(P,xs,us).
+```
+
+Its nil/cons and head/tail observations preserve the alignment between each
+element and its evidence. This is a transparent fold over the selected tuple
+representation, not another inductive family or a hidden lookup operation.
+
+The downstream finite-containment consumer also needs evidence indexed by an
+already-selected evidence family:
+
+```text
+FiniteFamilyAllOver(P,Q,[],(),()) = Unit
+FiniteFamilyAllOver(P,Q,x::xs,px::ps,qx::qs)
+  = Q(x,px) x FiniteFamilyAllOver(P,Q,xs,ps,qs).
+```
+
+Its generic map accepts both source and target `FiniteFamilyAll` witnesses
+explicitly and maps every `Q(x,px)` to `Q'(f(x),py)`. It therefore does not
+choose dependent target data and does not identify different choices. This
+is still transparent Nat/Sigma recursion, with no new inductive family or
+rewrite owner.
+
+For a commutative ring `R`, the selected ordered folds are
+
+```text
+sum_R([])          = 0
+sum_R(x :: xs)     = x + sum_R(xs)
+
+dot_R([],[])       = 0
+dot_R(a::as,f::fs) = a*f + dot_R(as,fs).
+```
+
+The ring laws can later compare alternative parenthesizations; computation
+has only this right-associated owner. Nat induction proves that every
+structured map `h : R -> S` preserves both folds. These are theorem-level
+paths assembled from the stored zero, addition, multiplication, and unit
+preservation fields, not new rewrite rules.
+
+A finite family `f=(f_i)` is supplied as Zariski generating data together
+with explicit coefficients:
+
+```text
+CommRingUnimodularPresentation(R,n,f)
+  = Sigma(a : FiniteFamily(|R|,n)), dot_R(a,f) = 1.
+
+CommRingZariskiCoverPresentation(R)
+  = Sigma(n : Nat),
+      Sigma(f : FiniteFamily(|R|,n)),
+        CommRingUnimodularPresentation(R,n,f).
+```
+
+The first classifier is intentionally presentation data rather than a mere
+existence proposition: different coefficient choices need not coincide, and
+no propositional-truncation reflector has been selected. It is nevertheless
+set-valued because coefficient families are sets and the equation fibre is a
+property. The complete cover presentation is set-valued as well.
+
+Applying `h` pointwise to generators and coefficients preserves the dot
+equation and transports `1` through `h(1)=1`. Therefore
+`comm_ring_zariski_cover_map` constructs a presentation over `S`. The derived
+singleton `[1]` is a nonempty presentation over every ring; the binary helper
+accepts the familiar correct unit-ideal equation `a*f+b*g=1`. For an affine
+scheme, this is exactly the algebraic criterion that the basic opens
+`D(f_i)` cover the whole spectrum.
+
+This module stops before geometric interpretation. It does not yet build the
+chosen localization maps `R -> R[1/f_i]`, `Spec`, basic-open objects, a sieve
+coverage, or a Grothendieck topology. A cover of a relative basic open
+`D(s)` additionally needs radical data such as
+`s^N = sum_i a_i*f_i`; powers and that relative interface remain downstream
+consumer gates.
+
+### Presented Affine Basic Opens And Elementwise Base Change
+
+The downstream Zariski module supplies geometric presentation data without
+prematurely asserting a topology.  A selected localization family is
+
+```text
+CommRingLocalizationFamily(R,n,f)
+  = FiniteFamilyAll(lambda f_i. CommRingLocalizationAt(R,f_i),n,f),
+
+CommRingZariskiCoverFamily(R)
+  = Sigma cover : CommRingZariskiCoverPresentation(R),
+      CommRingLocalizationFamily(R,length(cover),generators(cover)).
+```
+
+Thus every generator retains a chosen universal-property localization. The
+package makes no global choice and does not identify different chosen
+localizations. In particular, the `[1]` family constructor accepts a selected
+localization at `1` as input.
+
+For `ell : CommRingLocalizationAt(R,f)`, the affine basic-open arrow is the
+literal restriction-total object
+
+```text
+(R[1/f]_ell, iota_ell)
+  : Into_restr_cat(Op(CommRing_cat),R).
+```
+
+Given `h : R -> S` and a target choice `m : Loc_S(h(f))`, the pointwise
+composite `R -> S -> S[1/h(f)]_m` sends `f` to a unit. The universal property
+of `ell` supplies a factor
+
+```text
+R[1/f]_ell -> S[1/h(f)]_m
+```
+
+and a pointwise triangle. Ring-map extensionality makes the triangle a path of
+structured maps; the existing Sigma-arrow constructor then realizes the
+comparison inside `Into_restr_cat(Op(CommRing_cat),R)`.
+
+For an ordinary sieve `Q` containing the source basic-open arrow, Catd
+transport along that Sigma arrow gives membership at the pointwise composite.
+A theorem-level comparison moves from the pointwise composite to the stable
+postcomposition object selected by `arrow_into_catd`; the transparent generic
+observation `sieve_pullback_membership` finally returns membership of the
+target basic open in `h^*Q`. The carrier action of the pointwise composite
+computes literally as `x |-> iota_m(h(x))`.
+
+No new rewrite or unification rule is needed. Runtime computation remains
+owned by finite Nat recursion, the selected pointwise ring-map projection,
+localization factorization, Sigma action, and Catd transport. The variance
+crossings are named equality paths through existing post/precomposition
+owners. This is selected elementwise base-change data, not yet a
+proposition-valued coverage: the active library has no propositional-
+truncation reflector that could erase coefficient, localization, and
+containment choices honestly.
+
+The bounded finite-containment layer now defines
+
+```text
+BasicOpenMembers_R(n,f,ell,Q)
+  = FiniteFamilyAllOver(
+      lambda f_i. Loc_R(f_i),
+      lambda f_i ell_i. SieveMembership(Q,D_R(f_i;ell_i)),
+      n,f,ell).
+```
+
+`comm_ring_zariski_cover_family_map(h,c,m)` maps the algebraic presentation
+and accepts the entire target localization family `m` explicitly.
+`comm_ring_unit_basic_open_family_pullback_membership` is the maintained
+nonempty singleton consumer: it applies the elementwise theorem to the head
+and the generic nil/cons recursion to return actual membership for the mapped
+singleton. Arbitrary-length recursion remains owned by
+`finite_family_all_over_map`.
+
+The fully expanded specialization of that recursive map to ordinary-sieve
+membership, and even a convenience specialized head projection, exceed the
+60-second Lambdapi elaboration budget. A diagnostic rigid membership facade
+did not improve this and is rejected. The active API therefore keeps
+membership transparent, promotes no new rule, and treats only those expanded
+convenience spellings as a performance gate. Generated or supplied Zariski
+topology, propositionally reflected coverhood, subcanonicity, `Spec`, and
+schemes remain later gates.
+
+The first supplied-topology boundary can nevertheless be stated without any
+truncation constructor. For an already lawful topology `T` on
+`CommRing^op`, define
+
+```text
+PresentationCovers_T(c)
+  = forall Q : Sieve(R), BasicOpenMembers_R(c,Q) -> Covers_T(Q),
+
+IsZariskiCompatible(T)
+  = forall R c, PresentationCovers_T(c).
+```
+
+Both classifiers are proposition-valued by dependent-Pi closure and the
+existing proposition evidence for `Covers_T(Q)`. The package
+`CommRingZariskiCompatibleTopology` retains `T` and this compatibility proof;
+its consumer maps explicit family-containment terms to coverhood. It does not
+truncate `c`, choose localizations, or construct the least topology generated
+by these presentations. The checked chaotic instance establishes nonempty
+feasibility only: it is generally finer than the intended Zariski topology
+and proves neither exactness nor subcanonicity.
+
+### Polynomial Algebras By Universal Property
+
+For a base ring `R` and a variable classifier `X`, candidate polynomial data
+are a commutative ring `P`, a structured base map, and a variable map:
+
+```text
+iota : CommRingHom(R,P)
+vars : X -> |P|.
+```
+
+For another ring `S`, a base map `h : CommRingHom(R,S)`, and a valuation
+`v : X -> |S|`, an extension is
+
+```text
+CommRingPolynomialFactor(iota,vars,h,v)
+  = Sigma k : CommRingHom(P,S),
+      (Pi r : |R|, k(iota(r)) = h(r))
+      x
+      (Pi x : X, k(vars(x)) = v(x)).
+```
+
+The classifier `IsCommRingPolynomialAlgebra(R,X,P,iota,vars)` requires this
+extension space to be contractible for every `S`, `h`, and `v`.
+`CommRingPolynomialAlgebra(R,X)` packages a chosen `P`, `iota`, `vars`, and
+that universal property. This is precisely the free commutative `R`-algebra
+interface: existence provides evaluation at every valuation, while
+contractibility provides uniqueness together with both displayed triangles.
+
+Both agreement fields are proposition-valued because their equations live in
+the set-valued carrier of `S`; their dependent Sigma is therefore a property.
+Consequently a path between two structured extension maps lifts uniquely to a
+path between complete factor packages. The module uses this theorem-level
+transport but adds no runtime rule, unification rule, or package eta.
+
+The variable classifier is intentionally independent of `FiniteFamily`.
+Finite families own ordered tuples, finite folds, and retained cover
+presentations; polynomial freeness is naturally parameterized by the
+classifier of variables itself. Since every valuation lands in a set-valued
+ring carrier, paths in `X` are respected automatically. No `Fin`, list,
+monomial, coefficient, quotient, or new inductive interface is selected.
+
+The reviewer proves the generic zero-variable equation
+
+```text
+R[Empty] = R.
+```
+
+The base map is `comm_ring_hom_id_pointwise(R)`, the variable map is empty,
+and the centre extension of `h : R -> S` is `h` itself. Its base agreement is
+reflexive and its variable agreement follows by empty elimination. A
+competitor's base triangle gives pointwise equality with `h`;
+`comm_ring_hom_ext` and proposition-valued agreement transport complete the
+contractibility proof. This is an executable model for every base ring, but
+it does not pretend to be a concrete positive-variable representation. Such
+a representation may later inhabit the same universal interface without
+changing it.
+
 Two independent families over the same base have a fibrewise product without
 introducing a new primitive family former:
 
@@ -1240,6 +3072,31 @@ direct proof-time comparison:
 Runtime object and next-hom projections supply the corresponding displayed
 functor and transfor components; the whole section category does not reduce to
 the displayed-functor category.
+
+Displayed-functor uncurrying itself varies through one whole ordinary functor:
+
+```text
+sigma_functord_sec_func(R,D)
+  : Functor(Functord_cat(R,D),Pi_cat(Sigma(R),pi1^*D)),
+sigma_functord_sec_func[FF] -> sigma_functord_sec(FF).
+```
+
+For a whole displayed transformation `eta : FF => GG`, its generic functor
+action already owns one transformation between the two uncurried sections.
+Projecting that whole arrow at an internal total object computes by the direct
+evaluator beta
+
+```text
+sigma_functord_sec_func[eta][(k,r)]
+  -> Const_transf(eta[k][r]).
+```
+
+This beta and naturality have different roles.  The beta defines the component
+of the uncurrying lift; naturality of the already-whole generic action makes
+those components coherent along every arrow of `Sigma(R)`.  Naturality alone
+would not determine the component formula.  A separately named intermediate
+`sigma_functord_sec_transfd` would merely factor this same projection through
+another runtime head, so no such owner is selected.
 
 Likewise, the hom action of `const_section_{K,A}` stays in the displayed
 transformation facade (`Const_transfd_func` / `Const_transfd`). Ordinary
@@ -1665,6 +3522,33 @@ Pullback of sections along a base functor is also present:
 section_pullback_F : Π_b E[b] → Π_a E[F[a]]
 section_pullback_F(s)[a] = s[F[a]]
 ```
+
+Weakening an already internal section across a new displayed variable has a
+separate whole displayed owner:
+
+```text
+section_weaken(R,E,s) : R ->_K E
+section_weaken(R,E,s)[k] = const_{R[k]}(s[k]).
+```
+
+The construction ignores the new fibre object but not the directed base: its
+action over `p : k -> k'` is inherited internally from the section `s`.
+When the weakened variable must again be presented as a section over the
+total category `Sigma_K(R)`, the existing `sigma_functord_sec` uncurries this
+displayed functor.  This explicit sequence is the computational recursive-
+context operation.
+
+Accordingly, the generic families
+
+```text
+E o Sigma_proj1_func(R)
+Pullback_catd(E,Sigma_proj1_func(R))
+```
+
+compare with the stable `Sigma_proj1_pullback_catd(R,E)` only at proof time.
+They do not runtime-reduce to it.  Code needing stable fibre/action and
+uncurrying computation names `Sigma_proj1_pullback_catd` explicitly, while
+generic section pullback remains generic.
 
 These are currently basic operations and beta laws, not a completed general
 adjunction package. They should be read as visible instances or shadows of the
@@ -2698,8 +4582,8 @@ application.
 
 ## 18. Implementation Glossary
 
-This table maps the mathematical notation above to the current `emdash3_2.lp`
-vocabulary.
+This table maps the mathematical notation above to the current active v3.2
+kernel and one-way library vocabulary.
 
 | Mathematical notation | Current implementation name |
 | --- | --- |
@@ -2722,6 +4606,111 @@ vocabulary.
 | restricted Core-inclusion κ square | `core_incl_transf_kappa F` |
 | `PathLift(h) o κₗ` (with judgmental-identity `κᵣ` omitted) | `path_lift_non_strict_spiral S p s h` |
 | `Catd(K)` | `Catd_cat K` / `Catd K` |
+| Cat-valued presheaves on `K` | `Psh_cat K` / `Psh K` |
+| presheaf restriction `F^*` | `Psh_pullback_func F` |
+| contravariant Yoneda functor/object | `yoneda_psh_func K` / `yoneda_psh U` |
+| restriction-oriented arrows into `U` | `Into_restr_cat U` |
+| conventional slice `K/U` | `Slice_cat U` |
+| Cat-valued higher sieves on `U` | `HigherSieve_cat U` / `HigherSieve U` |
+| maximal Cat-valued higher sieve | `maximal_higher_sieve U` |
+| native subterminal category | `IsSubterminalCat C` |
+| pointwise ordinary-sieve property | `IsOrdinarySieve S` |
+| ordinary sieves on `U` | `Sieve U` |
+| ordinary-sieve pullback along `p` | `sieve_pullback p` / `sieve_pullback_function p` |
+| membership of `(V,f)` in `R` | `SieveMembership R (V,f)` |
+| maximal ordinary sieve | `maximal_sieve U` |
+| proposition-valued sieve coverage | `SieveCoverage K` / `Covers J R` |
+| Grothendieck topology laws/package | `IsGrothTopology J` / `GrothTopology K` |
+| chaotic topology | `chaotic_groth_topology K` |
+| witness-rich sieve generators | `SieveGeneratorFamily K` |
+| topology acceptance / cover inclusion | `GrothTopologyAcceptsGenerators G T` / `GrothTopologyLe T U` |
+| generated coverhood and least topology | `GeneratedSieveCover G U R` / `generated_groth_topology G` |
+| internal eligible covering-question category | `DirectCoverQuestion_cat K T` |
+| whole matching/section displayed families and restriction | `DirectCoverQuestionMatching_catd K T X` / `DirectCoverQuestionSection_catd K T X` / `direct_cover_question_restriction_funcd K T X` |
+| internal Pédrot-style direct-cover sheaf structure | `DirectCoverSheafStructure K T X` |
+| total syntactic direct-cover sheaf | `DirectCoverSheaf K T` |
+| direct cover-completion presheaf and its internal sheaf package | `DirectCoverCompletionPsh K T P` / `direct_cover_completion_sheaf K T P` |
+| conventional locality of direct cover completion | `direct_cover_completion_is_topology_local K T P` |
+| functorial completion recursor in a seed | `direct_cover_completion_rec_func K T P Y AY` |
+| Hom universality into a topology-local target | `direct_cover_completion_hom_omega K T P Y local` |
+| Cat-valued local-sheaf facade | `CatValuedSheafData K T` / `Sheaf_cat K T Cat_cat` |
+| whole completion reflector and inclusion | `direct_cover_sheafification_func K T` / `cat_valued_sheaf_include_psh_func K T` |
+| constructed fixed-site sheafification capability | `direct_cover_sheafification_capability K T` |
+| global reflective ringed object with selected covering sieve | `ReflectiveCommRingedSpaceCover K` |
+| actual member arrow of that selected sieve | `ReflectiveCommRingedSpaceCoverChart P` |
+| factorization of one retained arrow through a selected chart | `CoverChartFactorization chart q` |
+| two selected arrows generate the retained covering sieve | `BinarySelectedCoverGeneration P chart0 chart1` |
+| whole affine realization of one selected chart generator | `AffineCoverChartRealization P chart` |
+| global-first two-generator affine-cover presentation | `BinaryAffineCoverPresentation P` |
+| selected affine generator/realization/ring for a retained refinement | `binary_affine_cover_refinement_chart` / `binary_affine_cover_refinement_realization` / `binary_affine_cover_refinement_ring` |
+| literal bottom ordinary sieve | `empty_sieve U` |
+| selected local unit branch and covering refinement | `CommRingPshLocalUnitBranch O s t q` / `CommRingPshLocalUnitCover T O s t` |
+| topology-local local-ring presentation | `CommRingPshTopologyLocalRingPresentation T O` |
+| locally-ringed whole object and binary affine atlas | `ReflectiveCommRingedWholeObjectLocalPresentation P` / `BinaryLocallyRingedAffineCoverPresentation P` |
+| set-carrier commutative rings | `CommRing` |
+| carrier and retained sethood of `R` | `comm_ring_carrier R` / `comm_ring_carrier_is_set R` |
+| operation/law packages on `A` | `CommRingOps A` / `IsCommRing A ops` |
+| ring operations `0`, `1`, `+`, unary `-`, `*` | `comm_ring_zero`, `comm_ring_one`, `comm_ring_add`, `comm_ring_neg`, `comm_ring_mul` |
+| one-element zero ring | `zero_comm_ring` |
+| structured ring morphisms `R -> S` | `CommRingHom R S` |
+| carrier function/application of `h` | `comm_ring_hom_function h` / `comm_ring_hom_apply h x` |
+| ring-morphism preservation evidence | `CommRingHomLaws` / `comm_ring_hom_zero_law` through `comm_ring_hom_mul_law` |
+| ordinary category of commutative rings | `CommRing_cat` |
+| pointwise equality/extensionality of ring maps | `CommRingHomPointwisePath` / `comm_ring_hom_ext` |
+| explicit unit evidence and inverse | `CommRingUnitEvidence R x` / `comm_ring_unit_inverse` |
+| proposition-valued unit theorem | `comm_ring_unit_evidence_is_prop R x` |
+| factor through a localization map | `CommRingLocalizationFactor iota h` |
+| localization property/package at `f` | `IsCommRingLocalizationAt R f L iota` / `CommRingLocalizationAt R f` |
+| chosen localization target/map | `comm_ring_localization_target` / `comm_ring_localization_map` |
+| internally coherent localization matching category/restriction | `CommRingPshLocalizationMatching_cat` / `comm_ring_psh_localization_matching_restriction_func` |
+| fixed-forward whole localization locality | `CommRingPshLocalizationLocality` |
+| selected whole glue and composite-functor paths | `comm_ring_psh_localization_locality_glue_func` / `comm_ring_psh_localization_locality_glue_restrict_functor_path` / `comm_ring_psh_localization_locality_restrict_glue_functor_path` |
+| compatibility view of whole locality | `comm_ring_psh_localization_locality_legacy_glue` |
+| identity localization of an already-unit element | `comm_ring_unit_identity_localization R f unit` |
+| canonical computing localization at one | `comm_ring_identity_localization_at_one R` |
+| canonical computing localization at zero | `comm_ring_zero_localization R` |
+| structured point map to the zero ring | `comm_ring_hom_to_zero R` |
+| stable pointwise structured-map identity | `comm_ring_hom_id_pointwise R` |
+| stable pointwise structured-map composite | `comm_ring_hom_comp_pointwise g f` |
+| localization first at `f`, then at the image of `g` | `CommRingIteratedLocalizationAt R f g` |
+| comparison with localization at `f*g` | `CommRingIteratedLocalizationComparison` / `comm_ring_iterated_localization_comparison` |
+| forward/reverse localization comparison maps | `comm_ring_iterated_localization_comparison_forward_map` / `comm_ring_iterated_localization_comparison_reverse_map` |
+| whole product/iterated localization cancellation paths | `comm_ring_iterated_localization_comparison_left_law` / `comm_ring_iterated_localization_comparison_right_law` |
+| fixed-forward product/iterated localization equivalence | `comm_ring_iterated_localization_comparison_omega_equiv_along` |
+| first-class product/iterated localization equivalence | `comm_ring_iterated_localization_comparison_omega_equiv` |
+| Nat-indexed finite families | `FiniteFamily A n` / `finite_family_nil` / `finite_family_cons` |
+| finite-family pointwise map and sethood | `finite_family_map` / `finite_family_is_set` |
+| dependent evidence over a finite family | `FiniteFamilyAll P n xs` / `finite_family_all_cons` |
+| selected finite ring sum and dot product | `comm_ring_finite_sum` / `comm_ring_finite_dot` |
+| retained unit-ideal coefficient data | `CommRingUnimodularPresentation` / `comm_ring_unimodular_intro` |
+| finite affine Zariski-cover presentation | `CommRingZariskiCoverPresentation` / `comm_ring_zariski_cover_map` |
+| singleton and binary cover presentations | `comm_ring_unit_zariski_cover` / `comm_ring_binary_zariski_cover` |
+| selected localization family over generators | `CommRingLocalizationFamily R n generators` |
+| presented finite basic-open cover family | `CommRingZariskiCoverFamily R` |
+| big affine slice and coordinate presheaf | `AffineSpecBigSlice_cat R` / `affine_spec_coordinate_psh R` |
+| localized chart as a whole big-slice arrow | `affine_spec_chart_localization_arrow h localization` |
+| big-affine Zariski generator family | `AffineSpecBigZariskiGenerators R` |
+| least generated big-affine Zariski topology | `affine_spec_big_zariski_topology R` |
+| selected-family coverhood and leastness | `affine_spec_big_zariski_topology_covers` / `affine_spec_big_zariski_topology_least` |
+| supplied affine reflective structure sheaf | `AffineStructureSheafPresentation R` |
+| exact generated-topology ringed site | `affine_structure_sheaf_ringed_site P` |
+| whole structure/coordinate comparison | `affine_structure_sheaf_coordinate_defiso P` |
+| chart components of that whole comparison | `affine_structure_sheaf_to_coordinate_at P U` / `affine_structure_sheaf_from_coordinate_at P U` |
+| whole affine coordinate localization locality | `AffineCoordinateLocalizationLocality R` / `affine_coordinate_localization_locality_at` |
+| affine compatibility glue view | `affine_coordinate_localization_legacy_glue` |
+| thin computational affine-scheme presentation | `AffineSchemePresentation R` / `affine_scheme_intro` |
+| affine-scheme structure/locality projections | `affine_scheme_structure` / `affine_scheme_locality` |
+| affine-scheme whole ringed-site/computation views | `affine_scheme_ringed_site` / `affine_scheme_coordinate_defiso` / `affine_scheme_locality_at` |
+| chosen affine basic-open arrow | `comm_ring_basic_open_arrow localization` |
+| basic-open base-change factor and triangle | `comm_ring_basic_open_base_change_factor_map` / `comm_ring_basic_open_base_change_triangle` |
+| elementwise basic-open pullback membership | `comm_ring_basic_open_pullback_membership` |
+| affine Yoneda functor of points | `affine_spec_functor_of_points R` |
+| affine point classifier at a test ring | `AffineSpecPoint R S` |
+| semantic basic-open point classifier | `AffineSpecBasicOpenPoint R f S` |
+| represented-basic-open equivalence | `affine_spec_basic_open_point_type_equiv localization S` |
+| polynomial extension factor | `CommRingPolynomialFactor iota vars h valuation` |
+| polynomial-algebra universal property | `IsCommRingPolynomialAlgebra R X P iota vars` |
+| chosen polynomial algebra | `CommRingPolynomialAlgebra R X` / `comm_ring_polynomial_target` |
 | `E[k]` | `Fibre_cat E k` |
 | `F^*E` | `Pullback_catd E F` |
 | `Const_K(A)` | `Const_catd K A` |

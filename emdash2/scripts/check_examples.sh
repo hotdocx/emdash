@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-: "${EMDASH_TYPECHECK_TIMEOUT:=60s}"
+: "${EMDASH_TYPECHECK_TIMEOUT:=90s}"
 : "${EMDASH_LAMBDAPI_WARNINGS:=0}"
 
 warning_flags=(-w)

@@ -17,7 +17,6 @@ import {
     compileCoreCategoricalDisplayedChain2aClosureTransfer
 } from './categorical_displayed_chain_2a_closure_transfer';
 import {
-    CORE_CATEGORICAL_FIBRED_TRANSFD_SOURCE_SHA256,
     CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_BOUNDARY
 } from './categorical_fibred_transfd_transfer';
 import {
@@ -42,11 +41,11 @@ CoreLfCanonicalSelectionContract =
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            CORE_CATEGORICAL_FIBRED_TRANSFD_SOURCE_SHA256,
+            'sha256:0a117742d326bad82fe72cc73c624a0c174e3b48dd4047ebd8f6ed6ff7837860',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:91f0deb710b93acc55aa3a6f947505de973b9deaa94d68e1a213037dfcc9c3d3',
+                'sha256:b16839b44dfec845fdc007884f82fea63156a273759fba4e9a8842c0c0312ccb',
             imports: []
         },
         commands: [
@@ -62,7 +61,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.displayed-composition',
-                ordinal: 398,
+                ordinal: 400,
                 kind: 'symbol',
                 textSha256:
                     'sha256:927b801444c819dd3987e462b74ecbd4e2493c203c2c1746bd9343aabc0546b9',
@@ -72,7 +71,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.opposite-functor',
-                ordinal: 505,
+                ordinal: 507,
                 kind: 'symbol',
                 textSha256:
                     'sha256:239195b97b5ce2811e40a3024b0af50eb629f65f51f06e664b4163723fb5af3d',
@@ -82,7 +81,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.displayed-opposite-functor-owner',
-                ordinal: 540,
+                ordinal: 542,
                 kind: 'symbol',
                 textSha256:
                     'sha256:d7164cf2bc96a0750db89f5656d6b746e1e0457d235745bf87e84fb6669e9f19',
@@ -92,7 +91,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.ordinary-internal-hom',
-                ordinal: 648,
+                ordinal: 651,
                 kind: 'symbol',
                 textSha256:
                     'sha256:257855a6283f267a2aebe4acc2a51c37dc53c65f098680c85021b967f60336ea',
@@ -102,7 +101,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.displayed-opposite',
-                ordinal: 951,
+                ordinal: 960,
                 kind: 'symbol',
                 textSha256:
                     'sha256:e52e9e71ece11fada758191d0ed5e5362ca9de40358a8d82ed7bd98b1b9acff8',
@@ -112,7 +111,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.displayed-opposite-action',
-                ordinal: 958,
+                ordinal: 969,
                 kind: 'symbol',
                 textSha256:
                     'sha256:12ca623cfa3d86ac006eae9508a484de237e356675f121f14b97518f51e70385',
@@ -122,7 +121,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.mixed-functor-family-owner',
-                ordinal: 1036,
+                ordinal: 1053,
                 kind: 'symbol',
                 textSha256:
                     'sha256:0907a4af9d06dff2b358b2e95637651892cbd466b6f346fa0fccc73a619b3f35',
@@ -132,7 +131,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.edge-family',
-                ordinal: 1049,
+                ordinal: 1076,
                 kind: 'symbol',
                 textSha256:
                     'sha256:9febc6c848a9ae650fb0769eeef348e9b96e0d93f9cd68c1a2f8d89635fa77d3',
@@ -142,7 +141,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.presheaf-family',
-                ordinal: 1050,
+                ordinal: 1077,
                 kind: 'symbol',
                 textSha256:
                     'sha256:4d0883c45a5c4d89d195092012d0c9a8a8fc34bc4ff3af0fa90f4cbcd81e65fc',
@@ -152,7 +151,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.hom-presheaf-family',
-                ordinal: 1051,
+                ordinal: 1078,
                 kind: 'symbol',
                 textSha256:
                     'sha256:086d5ba63cf9fa898d47193019d44cbf8f45056ba2e41a86bd734fa605802edb',
@@ -162,7 +161,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.displayed-hom-target',
-                ordinal: 1053,
+                ordinal: 1080,
                 kind: 'symbol',
                 textSha256:
                     'sha256:bc764c8b2c1dce013d2ab99060a34c496f3ec8ec3120681d0693bf5b4036a23c',
@@ -172,7 +171,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-foundation.displayed-internal-hom',
-                ordinal: 1054,
+                ordinal: 1081,
                 kind: 'symbol',
                 textSha256:
                     'sha256:a02629baea19025f05a63806291386ef22ed29adcbf814ed34fd7d0f2e20e34f',
@@ -182,7 +181,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-action.full-object-action',
-                ordinal: 1073,
+                ordinal: 1101,
                 kind: 'symbol',
                 textSha256:
                     'sha256:7d30d4f679316291a9cc962e04af3f10177438320c4b260d16795d25b336a0d9',
@@ -192,7 +191,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-action.capped-object-action',
-                ordinal: 1074,
+                ordinal: 1102,
                 kind: 'symbol',
                 textSha256:
                     'sha256:0e091f3f5a10689e6b85fc09e53c77fa8aaf142559441ddef47f08d07ad9e3d9',
@@ -202,7 +201,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-action.object-projection',
-                ordinal: 1075,
+                ordinal: 1103,
                 kind: 'rule',
                 textSha256:
                     'sha256:a56a0ce8741c72dc54989c2597c2ec4475cb1fa9e4efffe1063da8aa14dded57',
@@ -210,7 +209,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-action.full-next-hom-action',
-                ordinal: 1076,
+                ordinal: 1104,
                 kind: 'symbol',
                 textSha256:
                     'sha256:6d4755675603c1fa8ac95161f00232f818d97eba1eb2fe1613e033eb79bb97cc',
@@ -220,7 +219,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'higher-action.next-hom-projection',
-                ordinal: 1077,
+                ordinal: 1105,
                 kind: 'rule',
                 textSha256:
                     'sha256:b40ff3bd15e12348652fc5199d2ec0a2c647110b7987bba807651264cb7dffe1',

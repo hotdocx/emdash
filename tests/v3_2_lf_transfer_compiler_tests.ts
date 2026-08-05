@@ -814,7 +814,7 @@ describe('SCALE-0C reviewed continuation migration', () => {
         assert.equal(
             CORE_DIRECTED_CONTINUATION_TRANSFER_MODULE.canonicalExport
                 ?.sha256,
-            'sha256:91f0deb710b93acc55aa3a6f947505de973b9deaa94d68e1a213037dfcc9c3d3'
+            'sha256:b16839b44dfec845fdc007884f82fea63156a273759fba4e9a8842c0c0312ccb'
         );
     });
 

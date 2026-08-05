@@ -79,7 +79,7 @@ describe(
                 CORE_LF_SCALE_STRESS_3_PROFUNCTOR_BOUNDARY_ACQUISITION;
             assert.deepEqual(
                 contract.commands.map(command => command.ordinal),
-                [578, 1229, 1233, 1263, 1293]
+                [580, 1273, 1277, 1322, 1352]
             );
             assert.deepEqual(
                 CORE_LF_SCALE_STRESS_3A1_MODULE.declarations.map(

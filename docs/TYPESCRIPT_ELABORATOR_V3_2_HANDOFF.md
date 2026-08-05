@@ -1,6 +1,27 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-> **Current completion boundary (2026-08-03):**
+> **Current cross-layer integration boundary (2026-08-04):**
+> The completed elaborator tip `e7352ba` is being joined with the completed
+> presheaves/sites/schemes tip `1281efe` under
+> [`PARALLEL_GOAL_V3_2_INTEGRATION_PLAN_2026-08-04.md`](./PARALLEL_GOAL_V3_2_INTEGRATION_PLAN_2026-08-04.md).
+> The integration requalifies exact Lambdapi-source acquisition contracts and
+> generated evidence; it does not reopen the completed elaborator continuation
+> or make the older TypeScript category prototype authoritative.
+>
+> **Completed outer-LF usability results now carried by the combined history:**
+> [`ADJUNCTION_USABILITY_V3_2_PLAN.md`](./ADJUNCTION_USABILITY_V3_2_PLAN.md)
+> records the direct-TypeScript `assumeAdjunction` macro and its evidence-gated
+> triangular-presentation audit at `dd8a82e`. Its mate-owner audit required no
+> new Lambdapi rule. [`RECORD_STRUCTURE_USABILITY_V3_2_PLAN.md`](./RECORD_STRUCTURE_USABILITY_V3_2_PLAN.md)
+> records the unparameterized, nonrecursive, single-constructor dependent
+> structure macro at `ba4fe3c`, with named primitive projections and ordered
+> subject-reducing beta rules. It adds no record eta, eliminator, recursion,
+> positivity claim, general inductive facade, trusted-Core node, string parser,
+> browser profile, or Lambdapi kernel change. These results are no longer
+> isolated future work; broader parameterized/inductive designs remain
+> separately consumer-gated.
+>
+> **Completed elaborator continuation (2026-08-03):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
 > is complete through `CURRENT-PERSISTENT-GOAL-COMPLETION-0AV`. The zero-edit
 > `PATHOUT-ARROW-INDUCTION-INTEGRATION-0AU` audit routes the remaining

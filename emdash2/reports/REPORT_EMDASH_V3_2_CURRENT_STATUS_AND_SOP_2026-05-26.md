@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-02
+Last consolidated: 2026-08-04
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -15,6 +15,12 @@ detailed probe evidence.
 - `emdash3_2.lp`: active kernel definitions and runtime/proof-time behavior,
   including the reusable equality-local skeleton, restricted `Core₁`, and
   computational `CoreInclTransf` infrastructure.
+- `emdash3_2_presheaves.lp`: one-way Cat-valued presheaf standard-library
+  facade. It imports the kernel, exposes runtime object/hom projections to
+  `Catd_cat(K^op)`, compares the two category heads only at proof time, and
+  derives restriction from `Pullback_catd_func(Op_func(F))`. Transparent
+  aliases additionally expose Yoneda, restriction-oriented arrow totals,
+  conventional slices, and Cat-valued higher sieves through existing owners.
 - `emdash3_2_eq1_hom_action.lp`: one-way derived native equality-valued
   hom-action, groupoidality, and structured-transport layer; it imports the
   kernel and is imported by diagnostics/examples, never by the kernel.
@@ -22,10 +28,359 @@ detailed probe evidence.
   equality-valued evidence-property, retract-truncation, and finite-`NCat`
   object-truncation layer; it imports the kernel and hom-action extension,
   never conversely.
+- `emdash3_2_sieves.lp`: downstream one-way native subterminal-category and
+  ordinary-sieve layer. It imports the presheaf and equality-evidence modules,
+  packages ordinary sieves as pointwise-subterminal higher sieves, and
+  preserves them under the existing pullback action. It declares neither
+  `Omega` nor topology.
+- `emdash3_2_sites.lp`: downstream one-way direct ordinary-sieve topology
+  layer. It exposes membership, a canonical maximal sieve, proposition-valued
+  sieve coverages, maximality/pullback/local-character laws, named topology
+  projections, and the chaotic topology. It declares no `Omega`, generated
+  coverage saturation, sheafification, or descent.
+- `emdash3_2_generated_topologies.lp`: downstream one-way, rule-free
+  generated-topology layer. Type-valued sieve generators retain their
+  presentation witnesses, while generated coverhood is the
+  proposition-valued intersection of every Grothendieck topology accepting
+  them. Maximality, pullback stability, and local character are inherited
+  pointwise; generator inclusion and leastness compute by application. The
+  module provides no inductive cover derivations, truncation/HIT, decision
+  procedure, affine specialization, sheafification, or scheme.
+- `emdash3_2_strict_pointwise_equivalences.lp`: generic strict
+  pointwise-to-whole fixed-forward equivalence assembly for ordinary and
+  displayed transformations. The forward transformation already owns
+  naturality internally. Rigid inverse transformations compute to the
+  selected pointwise inverse arrows, and whole cancellation paths complete
+  `OmegaEquivAlong` in the corresponding functor category. The module does
+  not assemble incoherent arrow families, invert arbitrary lax
+  transformations, or add generic functor extensionality.
+- `emdash3_2_direct_cover_completion_locality.lp`: downstream conventional
+  comparison for the direct whole-presheaf cover-completion HIT. A derived
+  retained-member theorem is projected through one whole transformation
+  `restriction o glue => id`; strict pointwise closure supplies the second
+  functor equality. Together with the HIT's whole silent law, this constructs
+  `IsTopologyLocalPsh(DirectCoverCompletionPsh)`. The module does not yet
+  identify the syntactic direct-cover sheaf with the rigid `Sheaf_cat` facade,
+  assemble the reflector/adjunction, lift to CommRing values, or prove left
+  exactness. Whole Hom universality lives in the subsequent module.
+- `emdash3_2_direct_cover_completion_universality.lp`: whole
+  seed-functoriality and categorical-HIT uniqueness for the direct-cover
+  completion recursor. Its object projection computes to the deployed
+  recursor; whole unit beta and topology-local eta are higher equality
+  evidence. These assemble precomposition by the HIT unit into an
+  `OmegaEquivAlong Cat_cat` on Hom categories into every topology-local
+  target. The eta law is not generalized to arbitrary maps into an
+  independently selected one-sided cover algebra. The module does not yet
+  assemble the fixed-site reflector/adjunction, identify the rigid
+  `Sheaf_cat` facade, lift to CommRing values, or prove left exactness.
+- `emdash3_2_ringed_sites.lp`: downstream one-way, rule-free supplied
+  reflective-sheafification layer. A rigid topology- and value-category-indexed
+  sheaf classifier is paired with a transparent capability carrying whole
+  inclusion and reflector functors, their adjunction, and fixed-counit
+  `OmegaEquivAlong` evidence. Generic adjunction owners derive whole internal
+  mate/glue maps. Its `ReflectiveCommRingedSite` specialization exposes the
+  selected structure sheaf as a whole CommRing-valued presheaf through the
+  inclusion. It does not construct canonical sheafification, generated
+  saturation, descent or left exactness, impose a local-ring condition, or
+  define a scheme.
+- `emdash3_2_site_basis.lp`: downstream transparent, rule-free whole
+  sheaf-basis layer. Opposite precomposition supplies restriction of
+  `V`-valued presheaves along a selected base functor. A supplied sheaf
+  restriction is tied to it by one `IsoEvidence` between whole composites,
+  and comparison-lemma strength is retained as `OmegaEquivAlong Cat_cat`.
+  Generic functor/transformation owners retain action and naturality. A
+  proof-time path and derived `IsoEvidence` compare generic precomposition's
+  cut normal form with direct composition without adding a runtime rule. It
+  does not construct topology, continuity, sheafification, an induced slice, a
+  Beck--Chevalley mate, a local-exactness witness, component squares, or a raw
+  base-category equivalence.
+- `emdash3_2_commutative_algebra_ringed_space_covers.lp`: downstream one-way,
+  rule-free global-cover substrate. It retains a reflective CommRinged site,
+  a distinguished object of its base category, and an ordinary sieve covering
+  that object in the retained topology. The existing Grothendieck-stability
+  owner derives covering pullbacks along every arrow, while selected sieve
+  members expose their actual restriction arrows. It does not assert that a
+  cover is finite or affine, impose locally-ringed support, store overlap or
+  cocycle fields, define a scheme, or construct gluing.
+- `emdash3_2_commutative_algebra_binary_covers.lp`: downstream transparent,
+  rule-free binary cover-generation layer. Every arrow of the retained
+  covering sieve carries an executable Boolean-selected chart, an actual
+  factor map, and its triangle. Since both charts are already sieve members,
+  these witnesses say that the two selected charts generate the retained
+  covering sieve. The module constructs no second sieve, rule, unifier,
+  external restriction/coherence field, affine label, locally-ringed
+  condition, scheme, or gluing operation.
+- `emdash3_2_commutative_algebra_ringed_space_restrictions.lp`: downstream
+  one-way, rule-free whole chart-slice restriction substrate. It exposes the
+  whole conventional slice-domain functor, restricts CommRing-valued
+  presheaves by generic composition, and retains a supplied reflective site
+  on the actual slice with one whole computational `DefIso` to the ambient
+  restriction. It does not derive an induced topology or reflector, add a
+  site-morphism/continuity calculus, assert affineness or locally-ringed
+  support, define a scheme, or construct gluing.
 - `emdash3_2_nat_arithmetic.lp`: one-way reusable Nat arithmetic/sethood
   module. It owns `nat_add`, the canonical `NatSucc_func`, the associativity
   theorem, the Unit/Empty proposition witnesses, and `nat_is_set` without
   importing the walking-HIT surface.
+- `emdash3_2_finite_families.lp`: one-way reusable Nat/Sigma finite-family
+  layer. It owns the right-associated length-indexed classifier,
+  nil/cons/head/tail and singleton/pair observations, pointwise map, dependent
+  pointwise evidence, and sethood. It declares no `Fin`, lookup,
+  list/Sum/inductive interface, append, permutation quotient, rule, unifier,
+  or package eta.
+- `emdash3_2_commutative_algebra.lp`: one-way set-carrier commutative-ring
+  object module. It separates operation data from eight sufficient law
+  fields, exposes readable carrier/operation/law projections, and constructs
+  the one-element zero ring. It adds no rewrite/unification rule and declares
+  no ring morphism category, localization, finite-family, power, or polynomial
+  interface.
+- `emdash3_2_commutative_algebra_category.lp`: one-way structured morphism and
+  ordinary-category layer. It proves morphism laws proposition-valued,
+  morphisms set-valued, and pointwise carrier equality sufficient for full
+  structured-map equality; `CommRing_cat` retains generic whole-arrow owners,
+  while localization and empty-variable polynomial consumers select stable
+  pointwise composition and identity comparisons. The whole invertibility-
+  sieve consumer selects a carrier functor with a full Path-map hom action and
+  no competing direct capped-action rule.
+- `emdash3_2_commutative_algebra_finite.lp`: one-way rule-free finite-algebra
+  layer. It owns finite sums/dot products, their structured-map preservation
+  theorems, retained coefficient presentations of the unit ideal, and
+  base-change-stable algebraic Zariski-cover presentations. It declares no
+  `Spec`, localization family, coverage/topology, powers/radicals, fraction,
+  polynomial, quotient, or propositional-truncation interface.
+- `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
+  universal-property layer for free commutative `R`-algebras on a variable
+  classifier. It packages contractible structured extensions of base maps and
+  valuations, without monomial/coefficient/quotient syntax, a concrete
+  positive-variable representation, finite-index facade, unifier, or eta.
+- `emdash3_2_commutative_algebra_localization.lp`: one-way localization/unit
+  layer. It proves explicit inverse evidence
+  proposition-valued, owns path transport and preservation by structured
+  maps, and packages localization at one element by contractible pointwise
+  factorization. Its universal total-element family exposes Path-valued unit
+  evidence at literal ring elements, without concrete fraction, finite-family,
+  polynomial, or Zariski syntax.
+- `emdash3_2_commutative_algebra_localization_unit.lp`: one-way rule-free
+  identity-localization layer. It constructs canonical unit evidence for one,
+  proves the factorization space through the pointwise identity contractible,
+  and therefore constructs the identity localization of any already-unit
+  element. In particular, every ring has a selected localization at one whose
+  target and carrier action compute to that ring and the identity. It adds no
+  fraction representation, topology, `Spec`, or scheme.
+- `emdash3_2_commutative_algebra_localization_zero.lp`: one-way rule-free
+  empty-basic-open layer. It derives multiplication and negation at zero,
+  proves that invertible zero forces `0=1` and contracts the carrier, and
+  constructs the zero ring as the universal localization `R[1/0]`. This is a
+  degenerate but computing non-identity-shaped model, not a nondegenerate
+  fraction, presheaf, topology, overlap, `Spec`, or scheme interface.
+- `emdash3_2_commutative_algebra_localization_idempotent.lp`: one-way
+  rule-free fixed-image layer. For `e^2=e`, it constructs the set-valued ring
+  `eR={x:R | e*x=x}`, makes its zero/one/addition/negation/multiplication
+  compute through the subtype, and proves that `x |-> e*x` has the full
+  localization universal property. The selected factor applies the original
+  map to the retained underlying fixed point. This is quotient-free and may
+  be nondegenerate for a supplied nontrivial idempotent.
+- `emdash3_2_commutative_algebra_product.lp`: one-way rule-free componentwise
+  product layer. It constructs product rings and componentwise structured maps
+  with whole identity/composition paths, while leaving a primitive product
+  functor facade consumer-gated.
+- `emdash3_2_commutative_algebra_f2.lp`: one-way rule-free closed
+  two-element-ring layer on `Bool_grpd`, with all laws proved by internal
+  Boolean elimination.
+- `emdash3_2_commutative_algebra_localization_split.lp`: one-way rule-free
+  split-idempotent consumer. It selects `(1,0)` in a product, builds its
+  fixed-image localization and affine arrow, and proves the closed `F2 x F2`
+  idempotent differs from zero and one while restriction computes as
+  `(x,y) |-> (x,0)`. Matching/descent, `Spec`, and schemes remain downstream.
+- `emdash3_2_commutative_algebra_localization_comparison.lp`: one-way rule-free
+  overlap layer. It derives unit multiplication/factor extraction, packages
+  localization first at `f` and then at the image of `g`, and constructs
+  canonical forward/reverse factors against localization at `f*g`. It asserts
+  neither equality of chosen localization packages nor inverse laws for the
+  comparison maps.
+- `emdash3_2_commutative_algebra_localization_overlap.lp`: one-way rule-free
+  whole-comparison layer. Contractible localization-factor uniqueness proves
+  both cancellation paths for the product/iterated comparison and packages
+  the forward map as `OmegaEquivAlong CommRing_cat` and `OmegaEquiv
+  CommRing_cat`, without fraction syntax or package equality.
+- `emdash3_2_commutative_algebra_presheaves.lp`: one-way CommRing-presheaf
+  layer. It exposes transparent values, structured
+  restriction maps, carrier application, explicit pointwise
+  identity/composition paths, and proposition-valued invertibility support
+  closed under further restriction. Pullback and Sigma-totalization through
+  the selected carrier/unit families assemble that support as both a higher
+  sieve and an ordinary sieve whose literal-arrow membership computes. One
+  shaped proof-time represented-family comparison crosses the variance
+  presentation boundary without runtime collapse. It declares no topology,
+  sheaf, or ringed-site package.
+- `emdash3_2_commutative_algebra_locality.lp`: one-way locality
+  bridge. It views the existing semantic invertibility sieve as a cover in a
+  supplied topology and uses literal membership plus a chosen localization to
+  select the universal structured factor into each presheaf value, retaining
+  the pointwise factor triangle. PSSS-08c0C packages those factors as one
+  internal ordinary transformation over the category of support elements;
+  its single component rule exposes the selected factor and generic `tapp1`
+  owns naturality. Contractible-factor uniqueness separately derives the
+  objectwise restriction equation as a construction audit. It claims no
+  limiting/descent comparison, sheaf, ringed-site package, generated topology,
+  `Spec`, or scheme.
+- `emdash3_2_commutative_algebra_local_ringed_sites.lp`: downstream
+  transparent, rule-free topology-local local-ring presentation. The literal
+  empty sieve computes to `Empty` membership; invertible zero makes it cover.
+  An invertible sum selects a covering sieve and a Boolean unit branch for
+  every retained member. This witness-rich interface avoids both a raw sieve
+  union and propositional truncation while retaining executable choices. It
+  does not assert sheafhood, construct the automatic support laws, compare
+  with stalks, classify open immersions, or define schemes.
+- `emdash3_2_commutative_algebra_matching.lp`: one-way computational
+  matching-family layer. It pulls the selected Path-valued carrier family over
+  the category of invertibility-support elements and forms its Pi category.
+  Every localization element selects one internally coherent section whose
+  literal component applies the corresponding universal factor. PathLift
+  supplies equality-path action. The single component rule uses the existing
+  full fibre-covariance owner and adds no external naturality field. It
+  supplies no inverse/glue, descent equivalence, sheafhood, limiting claim,
+  generated topology, `Spec`, or scheme.
+- `emdash3_2_commutative_algebra_glue.lp`: one-way rule-free whole
+  Cartier-locality layer. It retains the earlier genuine glue functor and its
+  point/component observations, then fixes the already-computing restriction
+  functor as an `OmegaEquivAlong Cat_cat`. The selected left inverse is one
+  whole glue functor with both whole composite-functor paths; evaluating those
+  paths derives the earlier compatibility package. At a literal support
+  member, the component endpoint observes the selected localization factor
+  applied to the glued element. Generic functor action owns matching-arrow
+  action; no external naturality family is stored. The sieve `D(s)` need not
+  cover, so this is not ordinary covering-sieve sheaf descent or a
+  stalk-local-ring theorem; generated topology, `Spec`, and schemes remain
+  downstream.
+- `emdash3_2_commutative_algebra_affine_glue.lp`: one-way rule-free derived
+  affine consumer. For the identity CommRing presheaf on
+  `Op_cat CommRing_cat`, it evaluates coherent matching sections at the
+  localization-map support centre. Contractible factor uniqueness derives
+  the left component law, while the universal factor to each support member
+  supplies a whole Sigma arrow whose internal Pi-section action derives the
+  Cartier component law. The complete selected-glue package is constructed
+  for every chosen affine localization, including the closed split-idempotent
+  model; equality of whole functors and ordinary sheaf descent remain open.
+- `emdash3_2_commutative_algebra_affine_spec.lp`: one-way rule-free
+  computational affine-chart facade. It exposes the conventional big slice
+  over `Spec(R)`, its CommRing-valued coordinate presheaf, arbitrary
+  structured charts and internal chart arrows, selected basic opens, and the
+  product/iterated-localization overlap in both geometric directions.
+  Coordinate restriction computes through the generic Sigma projection to
+  the existing whole ring maps. This is not yet a small Zariski site, sheaf,
+  locally ringed space, or complete scheme.
+- `emdash3_2_commutative_algebra_affine_zariski.lp`: one-way rule-free
+  generated-topology specialization on the big affine slice. For every
+  literal chart `R -> S`, it lifts each selected localization in a finite
+  Zariski presentation to a whole slice arrow, retains containment of those
+  arrows as witness-rich generator data, and applies the generic
+  impredicative-intersection owner. The resulting topology is lawful and least
+  among topologies accepting those generators. Its exact internal composite
+  endpoint makes the chart triangle reflexive, and coordinate restriction
+  computes to the existing whole localization map. It introduces no Sigma
+  eta, external naturality or triangle field, coverhood rule, localization
+  choice, sheafification, small-site comparison, or scheme.
+- `emdash3_2_commutative_algebra_affine_ringed_sites.lp`: one-way rule-free,
+  assumption-explicit affine structure-sheaf layer. It consumes the exact
+  internally generated big-affine Zariski topology, retains a supplied
+  reflective CommRing-valued sheafification capability and one sheaf object,
+  and requires a whole `DefIso` from the included structure presheaf to the
+  computing affine coordinate presheaf. Readable chart components project
+  the two whole transformations; they do not replace internal action or
+  naturality with object-only fields. The module does not construct
+  sheafification, prove localization locality or a stalk-local-ring theorem,
+  compare with the small site, or package a scheme.
+- `emdash3_2_commutative_algebra_affine_locality.lp`: one-way rule-free,
+  assumption-explicit affine coordinate-locality layer. It requires the
+  generic fixed-forward whole localization locality for every object of the
+  big affine slice, every coordinate section, and every supplied localization
+  package. Literal chart endpoints reduce to the retained ring and chosen
+  localization, and a transparent compatibility projection serves the
+  earlier component-view glue consumers. It makes no global localization
+  choice, does not construct locality, and does not claim covering-sieve
+  sheaf descent, stalk-local-ring structure, small-site comparison, or a
+  scheme.
+- `emdash3_2_commutative_algebra_affine_schemes.lp`: one-way rule-free thin
+  computational affine-scheme presentation. It pairs the whole reflective
+  structure-sheaf presentation with whole coordinate-localization locality;
+  the base ring continues to own the big affine slice and generated topology,
+  while finite atlases remain consumer data. Transparent projections expose
+  the existing ringed site, whole coordinate `DefIso`, and selected locality.
+  It does not construct either capability, duplicate chart/cover/overlap
+  action, define general non-affine gluing, compare with the small site,
+  construct stalks, or assert a stalk-local-ring theorem.
+- `emdash3_2_commutative_algebra_affine_basis.lp`: downstream transparent,
+  rule-free whole affine-chart realization layer. A selected whole functor
+  from the big affine slice into the actual ambient slice carries the generic
+  sheaf-basis equivalence, while direct presheaf restriction retains the
+  computing ambient structure presheaf and one whole `DefIso` identifies it
+  with an existing affine-scheme presentation. Generic `DefIso` composition
+  yields the coordinate comparison. It does not construct those inputs,
+  assert raw category equivalence, store local-exact/component coherence,
+  transport generic glue, define a general scheme, or impose a stalk-local
+  ring condition.
+- `emdash3_2_commutative_algebra_affine_cover_charts.lp`: downstream
+  transparent, rule-free realization of an actual global cover chart. It
+  retains a supplied reflective slice, coordinate ring, existing affine
+  presentation, whole affine-basis functor, and the existing whole
+  `AffineBasisRealizationAlong`; the coordinate `DefIso` is derived. Readable
+  observations are exposed, while dependent projection types stay at literal
+  nested-Sigma endpoints and require no package eta, rule, or unifier. It
+  stores no overlap/cocycle family and claims no locally-ringed scheme.
+- `emdash3_2_commutative_algebra_affine_cover_presentations.lp`: downstream
+  transparent, rule-free global-first binary affine-cover layer. It combines
+  two charts generating the retained covering sieve with their two whole
+  affine realizations. Pullbacks, overlaps, and repeated restrictions remain
+  derived at the global and generic composition owners. It is a computational
+  cover presentation, not a locally-ringed scheme certificate or atlas-first
+  gluing constructor.
+- `emdash3_2_commutative_algebra_affine_cover_refinements.lp`: downstream
+  transparent, rule-free CS-07 usability consumer. For any retained sieve
+  member, generation returns the existing Boolean-selected factorization;
+  its side derives the selected affine generator, already-owned whole affine
+  realization, and coordinate ring. It deliberately adds no duplicate
+  refinement package, rule, unifier, external coherence, claim that the
+  refinement itself is affine, global realization, or scheme classifier.
+- `emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp`:
+  downstream transparent, rule-free whole-object consumer. A supplied
+  reflective slice on `K/X` retains topology, sheaf semantics, and one whole
+  `DefIso` to the computing ambient restriction; topology-local ring
+  computation is attached to that target. Pairing it with the existing binary
+  affine atlas produces the fibrewise
+  `BinaryLocallyRingedAffineCoverPresentation` certificate. The supplied site
+  determines admissible chart geometry; the layer adds no overlap/cocycle
+  field, gluing constructor, classical-open comparison, or semantic scheme
+  category.
+- `emdash3_2_commutative_algebra_site_relative_schemes.lp`: downstream
+  transparent, rule-free global usability layer. Its dependent total retains
+  one `ReflectiveCommRingedSpaceCover` and the existing locally-ringed binary
+  affine-cover certificate. Structure presheaf, restriction, selected cover,
+  chart realizations, overlap compatibility, and cocycle behavior remain at
+  existing whole owners. This is a site-relative computational scheme
+  presentation, not atlas-first gluing, an unqualified classical or Zeuner
+  scheme, or a representation-independent `Scheme_cat`.
+- `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
+  functor-of-points/basic-open layer. The existing Yoneda presheaf represents
+  `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and
+  localization contractibility constructs a `TypeEquiv` between maps
+  `R[1/f]->S` and `D(f)`-points at every test ring. Both presheaf actions stay
+  at generic owners; there is no external naturality family, whole-presheaf
+  equality, univalence principle, topology, sheafhood, or general scheme.
+- `emdash3_2_commutative_algebra_affine_atlas.lp`: one-way rule-free concrete
+  atlas layer. Complementary idempotents in `R x S` retain their selected
+  binary Zariski-cover family, and their orthogonal overlap is represented by
+  the computing zero localization. Internal affine chart arrows expose whole
+  coordinate restrictions to the zero ring. The closed `F2 x F2` consumer is
+  an atlas/glue presentation, not a sheaf theorem, locally ringed space, or
+  general scheme record.
+- `emdash3_2_commutative_algebra_zariski.lp`: one-way rule-free presented
+  affine-Zariski layer. It retains a selected localization package for each
+  generator of an algebraic cover presentation, exposes chosen basic-open
+  arrows, and derives elementwise base-change factors, pointwise triangles,
+  Sigma arrows, and returned pulled-back sieve membership. It makes no global
+  localization choice and declares no propositional coverage/topology,
+  subcanonicity, `Spec`, or scheme.
 - `emdash3_2_walking_end_hit.lp`: one-way opaque one-dimensional walking-
   endomorphism directed-HIT module. It owns the opaque category/base/loop,
   explicit dimension evidence, contextual `Functord` eliminator, derived
@@ -95,30 +450,139 @@ reverse alias, partial suffixed namespace, semantic rule change, or module
 rename was introduced. Bounded `make check` passes after both deletion and
 rename.
 
-The 2026-07-22 synchronized baseline is:
+The 2026-08-01 synchronized PSSS-06b candidate baseline is:
 
 ```text
 make check                         pass
-make health                        pass (41 measured targets)
-diagnostic checks                1,707 (1,526 assert + 181 assertnot)
-catalog areas                       61
+make examples                      pass
+make health                        pass (52 measured targets, 281.632s)
+make ci                            pass (52 Lambdapi targets, 241.466s)
+diagnostic checks                1,796 (1,604 assert + 192 assertnot)
+catalog areas                       69
 legacy/unclassified checks          0 / 0
 strict LHS audit                    0 unreviewed candidates
-intentional LHS annotations        47 slots across 29 clauses
-warning inventory               1,169
-  unjoinable critical pairs       1,010
+intentional LHS annotations        52 slots across 32 clauses
+warning inventory               1,179
+  unjoinable critical pairs       1,020
   replaceable pattern variables     159
 source TOC                          86 parent-correct/sequential headings
 ```
 
-The kernel source is 19,530 lines with 762 source-level symbol declarations,
-617 source-level rewrite-rule commands, and 61 unification-rule commands.
-The canonical export contains 761 symbols, 612 runtime-rule commands, and
-648 runtime clauses. The source/example portion of the generated health
-report is fresh at
-`sha256:3307a7f29930e2d3bef42b69803fb97cd7902c7f7ef94aef4a701274016b5f74`;
-the fingerprint intentionally excludes volatile timings. P10–P12 are closed,
-and current maintenance is owned by the July 22 autonomous plan.
+The unchanged kernel source is 19,736 lines with 765 source-level symbol
+declarations, 626 source-level rewrite-rule commands, and 61 unification-rule
+commands. `emdash3_2_presheaves.lp` is 174 lines with 14 symbol declarations,
+two runtime projection rules, and one unification rule;
+`emdash3_2_sieves.lp` is 201 lines with 16 symbol declarations and no rewrite
+or unification rule; and `emdash3_2_sites.lp` is 303 lines with 25 symbol
+declarations and no rewrite or unification rule. The sites module packages
+ordinary-sieve membership, maximality, pullback stability, local character,
+and the generic chaotic topology without binding `Omega` or adding generated
+coverage saturation.
+`emdash3_2_commutative_algebra.lp` is 453 lines with 48 symbol declarations
+and no rewrite or unification rule. It packages a `SetU_grpd` carrier, five
+operations, eight sufficient commutative-ring laws, readable observations,
+and the concrete one-element zero ring. The downstream
+`emdash3_2_commutative_algebra_category.lp` is now 502 lines with 32 symbol
+declarations, two category projection rules, and no unification rule. It
+packages five-field structured ring morphisms, proves their law evidence a
+property and their total classifier a set, adds the localization-consumer-
+justified pointwise extensionality theorem, and exposes `CommRing_cat` without
+a carrier functor or localization package. The downstream rule-free
+`emdash3_2_commutative_algebra_localization.lp` is 626 lines with 31 symbol
+declarations and no rewrite or unification rule. It owns proposition-valued
+unit evidence and contractible pointwise factorization at one selected
+element.
+The source/example portion of the generated health report is fresh at
+`sha256:7344886d649c97bd34312ee60a11632a9502149c860d6093d4a855a9471ed880`;
+the fingerprint intentionally excludes volatile timings. P10–P12 remain
+closed, and current PSSS work is owned by the living presheaves/sites/schemes
+plan indexed below. PSSS-01 through PSSS-04a are green and included in the
+authorized local foundation checkpoint. The subsequent PSSS-05a
+sieve-descent research
+probe is not active source. It now avoids the mixed
+pullback-family/`Functor_catd` cast: a profunctor-native canonical cell reduces
+at `(V,f,r)` to `P[f]`, is curried to the matching-data boundary, and anchors
+the selected weighted comparison by explicit identity-restriction agreement.
+A terminal-site/maximal-sieve API consumer is nonempty but supplies its
+comparison and agreement as named assumptions. A later warning-neutral rigid-
+adapter trial was rejected and removed before checkpointing: it made a
+semantic alias rigid only to capture an order-sensitive proof-time comparison
+and then encoded the missing agreement as a rewrite. Promotion therefore
+remains gated on terminal-map uniqueness/contractibility or another derived
+nonempty semantic consumer, not on adding a broad family eta rule.
+Independent PSSS-06a is green through full integration CI. PSSS-06b now adds
+the separately measured morphism/category layer without depending on the
+parked descent probe. Its focused source/reviewer, maintained aggregate,
+warning, audit, catalog, 52-target health, and full integration CI gates are
+green. PSSS-07a now has its focused source/reviewer/central checks, inherited
+warning comparison, zero-clause strict audit, 1,808-check catalog, and
+54-target health plus full integration CI green. PSSS-07b is green through
+full integration CI. PSSS-07c now has promoted candidate finite-family and
+finite-algebra sources, a focused reviewer and central diagnostics, inherited
+warnings, zero-clause module audits, maintained `make check`/`make examples`,
+and a fresh strict 1,842-check catalog. All 59 health targets pass in 202.751
+seconds at source snapshot
+`sha256:4127068d1fa2e3dd43f22c8ca1f607d07bb8645ba1467ee22c96425c23ee5f76`;
+authority routing is synchronized, and full integration CI passes all 59
+Lambdapi targets in 216.912 seconds plus the complete repository-level tail.
+The tranche is included in the authorized local foundation checkpoint.
+PSSS-07d now adds the stable pointwise identity selected by the generic
+`R[Empty]=R` consumer, a 432-line/24-symbol rule-free polynomial universal-
+property module, and a 429-line reviewer with 16 positive and two negative
+checks. Focused source/reviewer/central, warning/audit, maintained aggregate,
+strict 1,860-check/73-area catalog, and authority-synchronization gates are
+green. Health passes all 61 source/example targets in 314.231 seconds at
+source snapshot
+`sha256:35a1d735feeea679e12e62b3bc14690783758c0da59ed1e8f20522f898f075df`;
+full integration CI passes all 61 Lambdapi targets in 389.345 seconds. The
+final combined checkpoint gate, after the rejected descent adapter was
+removed, passes all 61 targets in 342.266 seconds plus 39 Python tests, five
+document-registry tests, and the complete repository-integrity tail. The carrier
+functor, comparison inverse laws, concrete positive-variable polynomial
+representations, relative radical/basic-open data, and geometric Zariski
+topology remain separately gated.
+
+PSSS-08a is now an implementation candidate green through maintained
+aggregates, exact warning comparison, strict audits, catalog, health, and full
+integration CI. The
+283-line rule-free
+`emdash3_2_commutative_algebra_presheaves.lp` module transparently presents
+functors from `K^op` to `CommRing_cat`, applies their actual structured
+restriction maps to sections, proves identity/composite restriction paths
+through the selected pointwise ring-map views, and exposes proposition-valued
+unit support along arrows with downward closure. The generic narrow
+opposite-source projection-order bridge selects the whole
+`CommRing_cat` identity after opposite identity canonicalizes, while the
+rule-free theorem `fapp1_id_path` preserves the same boundary as typed proof
+evidence. Carrier application of that generic identity remains opaque; the
+selected pointwise identity path supplies the explicit carrier observation.
+Generic unit path transport and
+structured-map preservation have moved unchanged from the comparison module
+to the base localization/unit owner. A 217-line reviewer constructs
+invertibility evidence at every arrow of the constant zero-ring presheaf.
+Whole-sieve assembly, a carrier functor, topology, sheafhood, and ringed-site
+packaging remain separately gated. The strict catalog has 1,874 checks across
+74 areas; all 63 health targets pass in 410.967 seconds at source snapshot
+`sha256:63b1c75554b4360f042aabc955243ddc96bad42a9df1848be3fd42c61cd40b03`.
+Full integration CI passes all 63 Lambdapi targets in 548.573 seconds plus the
+complete repository-integrity tail. The tranche is included in the authorized
+local PSSS-08a checkpoint.
+
+PSSS-08b selects the full-action ring-carrier functor and assembles the
+ordinary invertibility sieve without a direct capped carrier rule or Sigma
+eta. Literal `SieveMembership` computes to
+the PSSS-08a arrowwise unit predicate, and the constant zero-ring presheaf
+supplies an inhabitant at every arrow. Focused and maintained source/reviewer
+aggregates are green; the owning-position warning log inherits exactly
+`1179 = 1020 + 159` with no changed-module warning location; strict audits
+have zero unreviewed candidates. The catalog has 1,893 checks across 75 areas,
+including 19 PSSS-08b checks. Health passes all 63 targets in 437.026 seconds
+at source snapshot
+`sha256:5a969bf2de9ebccd9ff02739dae4964f5314312e1199eb7fba9983ba21c294e3`.
+Full integration CI passes all 63 Lambdapi targets in 355.987 seconds,
+followed by 39 Python tests, five document-registry tests, and the complete
+repository-integrity tail. The tranche is included in the authorized local
+PSSS-08b checkpoint.
 
 The old two-sided OneCat theorem was meaningful but had no selected practical
 consumer and depended on the retired representation. It was deleted rather
@@ -1324,6 +1788,1283 @@ component-projection normal form and its minimal LHS also fails subject
 reduction. A proof-time comparison is not a substitute for the selected
 runtime projection beta.
 
+The 2026-08-01 PSSS-01 tranche adds the first algebraic-geometry-facing
+one-way standard-library module without changing `emdash3_2.lp`.
+`Psh_cat(K)` is a rigid Cat-valued presheaf category over `K^op`; `Obj` and
+`Hom_cat` project to the active Catd hierarchy, while one direct proof-time
+comparison recovers the opposite base. `Psh_pullback_func(F)` is transparent
+restriction through `Pullback_catd_func(Op_func(F))`. Its object action
+computes through the existing pullback owner and its map action is the generic
+functor action; no presheaf-specific identity, composition, naturality, or
+point-component rule is installed. Abstract/opposite/nested-opposite typed
+comparisons, variance and runtime non-collapse, restriction, and map-action
+typing have central and reviewer diagnostics. The owner-position probe is
+warning-neutral at `1179 = 1020 + 159`, and strict LHS audits report zero
+unreviewed candidates in both the kernel and the new module. The measured
+Psh-headed point-component projection remains consumer-gated for PSSS-02.
+The regenerated catalog has `1736` checks across `64` mapped areas, health
+passes `43` targets, and full CI's Lambdapi sweep checks those targets in
+`118.511s` before the repository, book, audit, and catalog gates pass.
+
+The PSSS-02 tranche keeps that boundary rather than adding a facade bridge.
+`yoneda_psh_func(K)` is transparently `hom_con_int(id_K)`, so its object,
+arrow, and point-component computations are already owned by the active
+represented-hom calculus. `arrow_into_catd(K)` Sigma-totalizes those
+representables; `Into_restr_cat(U)` names its restriction-oriented fibre and
+`Slice_cat(U)` its conventional opposite. `HigherSieveClassifier(K)` applies
+the existing contravariant Catd classifier to that total, and
+`maximal_higher_sieve(U)` is the existing terminal family. No new rewrite or
+unification rule is introduced. The higher-sieve category and presheaves on
+the slice compare through the shared proof-time intermediary
+`Catd_cat(Into_restr_cat(U))`; their heads deliberately do not directly
+convert because experimental unification rules are not transitively chained.
+Ordinary subterminal sieves remain absent from the basic presheaf module;
+at the PSSS-02 checkpoint, `Omega`, topology, and descent were still absent.
+The downstream PSSS-03a/PSSS-04a paragraphs record the later ordinary-sieve
+and direct-topology layers without changing this module boundary.
+The synchronized PSSS-02 catalog has `1749` checks across `65` mapped areas;
+health passes all `44` source/example targets in `177.462s` at source snapshot
+`sha256:ed32de14c4750aac2dd92b537a24983ee471697c2d0f4379ecad482e0284936e`.
+The strict kernel/module audits and inherited `1179 = 1020 + 159` warning
+inventory remain unchanged. Full integration CI passes with a fresh `44`-target
+Lambdapi sweep in `191.463s`, `39` Python tests, `5` registry tests, all
+document/book gates, strict audit, and strict catalog freshness.
+
+The bounded PSSS-03a tranche adds a separate one-way ordinary-sieve module,
+again without editing the kernel. `IsSubterminalCat(C)` combines
+`IsPropGrpd(Obj(C))` with native `IsGroupoidalCat(C)`: the first field alone
+would not exclude nontrivial directed endomorphisms. The selected contract
+derives `IsDiscreteCat(C)`, has canonical proposition-valued `Path_cat`
+examples, and has proposition-valued evidence. `Sieve(U)` retains a
+`HigherSieve(U)` plus pointwise subterminal evidence, whose dependent function
+space is also a proposition. `sieve_pullback(p)` delegates to the existing
+higher-sieve classifier action and preserves evidence by selection at the
+postcomposed arrow. No new runtime or unification rule is installed.
+
+This tranche deliberately does not bind `Omega`. The ordinary-sieve carrier
+has not yet been proved a set, and pulling a retained-evidence package back
+along an identity does not judgmentally reconstruct the original package.
+An ephemeral primitive-family candidate was warning-neutral only after using
+an inferred source but still failed that identity observation. Setness plus an
+owner-aligned contravariant family assembly are therefore explicit PSSS-03b
+gates, not details hidden by a placeholder. The focused module, reviewer
+example, and nine central diagnostics pass. The synchronized catalog has
+`1758` checks across `66` areas with zero legacy or unclassified checks, and
+health passes all `46` source/example targets in `245.978s` at source snapshot
+`sha256:60e1b0a1b2bb2a7d2ada8b87bb333dba1aeb3bcd2cdfa3bd3d4c8f046114dbe2`.
+Full integration CI passes with a fresh `46`-target Lambdapi sweep in
+`169.931s`, `39` Python tests, `5` registry tests, all document/book gates,
+strict audit, and strict catalog freshness.
+
+The focused PSSS-04a tranche adds the rule-free direct-topology module.
+`SieveMembership(R,(V,f))` is the object classifier of the subterminal sieve
+value and is proposition-valued. `maximal_sieve(U)` is the constant
+`Path_cat(Unit_grpd)` family; pullback computes to the maximal sieve on the
+source without identifying that literal path category with `Terminal_cat`.
+`SieveCoverage(K)` assigns a packaged proposition to every ordinary sieve,
+and `IsGrothTopology` stores exactly maximality, pullback stability, and local
+character. Local character quantifies genuine restriction-total arrows,
+membership evidence, and the existing `sieve_pullback` operation.
+
+The generic `chaotic_groth_topology(K)` makes every sieve covering, so all
+three laws compute to `tt`; its `Terminal_cat` instance is the first small
+direct combinatorial site. The final quiet and warning-enabled probes pass at
+the inherited `1179 = 1020 + 159` warning inventory, the new module has zero
+strict-LHS candidates, and focused module/example/central checks pass. Catalog,
+health, prose, and final integration CI synchronization subsequently pass at
+the exact PSSS-04a baseline recorded in the active living plan.
+
+The independent PSSS-06a tranche adds the rule-free
+`emdash3_2_commutative_algebra.lp` object layer. `CommRingOps(A)` stores zero,
+one, addition, negation, and multiplication; `IsCommRing(A,ops)` separately
+stores additive associativity/commutativity/right-unit/right-inverse,
+multiplicative associativity/commutativity/right-unit, and left
+distributivity. Commutativity derives the omitted mirror laws. `CommRing`
+retains the carrier as a `SetU_grpd` package, so
+`comm_ring_carrier_is_set(R)` is available to later morphism-equality work.
+The API exposes readable constructors, all eight law projections, and
+element-level operations without adding computation beyond the existing
+Sigma/function/equality owners.
+
+The checked `zero_comm_ring` is carried by `Unit_grpd`; its open unit laws use
+`unit_is_contr` because open Unit variables do not eta-reduce to `tt`. The
+module has 453 lines, 48 declarations, and no rule. Its 77-line reviewer has
+16 assertions, including a negative package-eta boundary. Fifteen central
+checks raise the synchronized catalog to 1,785 checks across 68 areas, with
+zero unclassified entries. Health passes all 50 source/example targets in
+289.311 seconds at source snapshot
+`sha256:32360746ed53dcfb3c2d82bdd1db811151449897b68092217e242a40b2b7217f`.
+The owner warning stream remains inherited at `1179 = 1020 + 159`, and the
+module-specific strict audit has no clause to report. The downstream
+ring-morphism/category tranche is recorded next; localization, finite
+families, powers, polynomials, and Zariski constructions remain separate
+consumer-gated tranches. Full
+integration CI passes a fresh 50-target Lambdapi sweep in 255.698 seconds,
+then 39 Python tests, 5 document-registry tests, shell/source/header/reference
+lints, book evidence/typography/KaTeX/assembly checks, strict kernel audit,
+and strict catalog freshness. The tranche is included in the authorized local
+foundation checkpoint.
+
+The subsequent PSSS-06b tranche adds
+`emdash3_2_commutative_algebra_category.lp`. A `CommRingHom(R,S)` is a carrier
+function paired with explicit zero, one, addition, negation, and
+multiplication preservation. Target-carrier sethood makes every preservation
+classifier and their combined law package proposition-valued; dependent-Pi
+and dependent-Sigma truncation closure then make the full morphism classifier
+set-valued. `CommRing_cat` projects directly to `CommRing` objects and
+`Path_cat(CommRingHom(R,S))` hom categories, yielding the checked
+`comm_ring_cat_is_one_cat` witness without an extra object-classifier facade.
+
+The public API exposes constructors, the transparent carrier function and
+point application, all five readable preservation projections, morphism
+sethood, pointwise structured-map extensionality, and generic
+identity/composition aliases. Whole category identity and composition remain
+the existing generic owners. No whole Sigma package is
+reconstructed and no broad `sigma_Fst(id/comp_fapp0)` bridge is installed:
+the measured broad projection experiment exceeded the 60-second bound, and a
+transparent defined wrapper cannot legally own additional rewrite clauses.
+The reviewer records both the absence of package eta and the deliberate lack
+of projected generic-identity computation. A carrier functor remains gated on
+a ring-valued-presheaf consumer and a stable action normal form.
+
+The category module has 394 lines, 29 declarations, two rules, and no
+unification rule. Its 134-line reviewer contains two local constructor symbols
+and 18 checks, including the two negative boundaries. Eleven central checks
+raise the catalog to 1,796 checks across 69 areas with zero unclassified
+entries. The final owner warning log
+`logs/probes/emdash3_2_commutative_algebra_category-20260801-100906.log`
+inherits exactly `1179 = 1020 + 159`; module and full strict audits report zero
+unreviewed candidates. Health passes all 52 source/example targets in 281.632
+seconds at source snapshot
+`sha256:81a135d9add2e80359523e36507998daf854b65cdae37c29dfa2a9728c548bec`.
+Focused source, central diagnostics, the reviewer, `make check`, and
+`make examples` are green. Full integration CI passes all 52 Lambdapi targets
+in 241.466 seconds, followed by 39 Python tests, 5 document-registry tests,
+shell/source/header/reference lints, book evidence/typography/KaTeX/assembly
+checks, strict kernel audit, and fresh strict catalog verification.
+
+The subsequent PSSS-07a tranche adds
+`emdash3_2_commutative_algebra_localization.lp` and uses its first uniqueness
+consumer to justify `CommRingHomPointwisePath` and `comm_ring_hom_ext` in the
+upstream morphism module. The extensionality proof uses `PiFunext` for carrier
+functions and proposition-valued law fibres for the dependent Sigma path; it
+does not install package eta.
+
+`CommRingUnitEvidence(R,x)` retains an inverse and the equation `x*y=1`.
+Commutativity, associativity, and unit laws prove any two retained inverses
+equal by the standard six-step multiplication chain. Carrier sethood then
+makes the inverse path and dependent law `PathOver` contractible, so the full
+unit-evidence classifier is proposition-valued. A factor through
+`iota : R -> L` retains `k : L -> S` plus the pointwise triangle
+`k(iota(x))=h(x)`. `IsCommRingLocalizationAt` asks that `iota(f)` be a unit and
+that this factor classifier be contractible for every map `h` sending `f` to
+a unit; `CommRingLocalizationAt` packages a chosen target, map, and property.
+Named projections expose each field without an eta rule.
+
+The reviewer supplies a derived nonempty model: the one-element zero ring
+localized at its unique element is itself. Unit contractibility constructs
+the centre triangle; a competing triangle yields pointwise map equality;
+structured-map extensionality and property-valued triangle evidence complete
+the contractible Sigma factor space. This exercises the complete universal
+property without numerator/exponent or quotient syntax and without projected
+generic-category computation.
+
+The localization module has 626 lines, 31 declarations, and no rewrite or
+unification rule. Its 324-line reviewer has 11 local theorem/constructor
+symbols, 14 positive checks, and one negative package-eta boundary. Twelve
+central diagnostics raise the catalog to `1808 = 1615 + 193` checks across 70
+areas with zero unclassified entries. The final owner warning log
+`logs/probes/emdash3_2_commutative_algebra_localization-20260801-105911.log`
+inherits exactly `1179 = 1020 + 159`; its strict module audit reports zero
+candidates across zero clauses. Health passes all 54 source/example targets
+in 260.697 seconds at source snapshot
+`sha256:7344886d649c97bd34312ee60a11632a9502149c860d6093d4a855a9471ed880`.
+Focused source, central diagnostics, the reviewer, `make check`, and
+`make examples` are green. Full integration CI passes all 54 Lambdapi targets
+in 245.809 seconds, followed by 39 Python tests, 5 document-registry tests,
+shell/source/header/reference lints, book evidence/typography/KaTeX/assembly
+checks, strict kernel audit, and fresh strict catalog verification. The
+tranche is included in the authorized local foundation checkpoint.
+
+The subsequent PSSS-07b tranche adds
+`emdash3_2_commutative_algebra_localization_comparison.lp`. Its first overlap
+consumer needs pointwise application of a composite structured ring map. The
+upstream category module therefore gains the rigid
+`comm_ring_hom_comp_pointwise(g,f)` head, whose first Sigma projection computes
+to `x |-> g(f(x))`, plus a proof-time comparison with generic
+`CommRing_cat` composition and the named theorem view
+`comm_ring_hom_comp_pointwise_path`. Generic `comp_fapp0` remains the
+whole-arrow runtime owner, and application of that generic composite still
+does not reduce pointwise. The green research probe also tested a stable
+identity head, but no current PSSS-07b construction consumes it, so it was not
+promoted. No carrier functor is added.
+
+The downstream rule-free module proves that unit evidence transports along
+paths, is preserved by structured ring maps, is closed under multiplication,
+and can be extracted for each factor of a unit product. It packages a chosen
+localization at `f` followed by a chosen localization at the image of `g`, and
+uses the selected stable composite as its structure map. The two-stage unit
+laws prove that this map sends `f*g` to a unit.
+
+Given a chosen localization at `f*g`, its universal property supplies the
+forward comparison factor. For the reverse direction, its map first factors
+through localization at `f`; the resulting pointwise triangle transports the
+unit image of `g`; and the intermediate map then factors through the second
+localization. The two staged triangles compose to a triangle over `R`.
+`CommRingIteratedLocalizationComparison` packages these forward and reverse
+factors and exposes named map/agreement projections. It does not identify the
+chosen packages or yet prove the maps inverse; nested factor uniqueness and a
+stable identity comparison remain gated on a basic-open equivalence consumer.
+
+The updated category module has 543 lines, 34 declarations, three rules, and
+one unification rule. The new comparison module has 1,201 lines, 38
+declarations, and no rewrite or unification rule. The 197-line reviewer has 16
+positive checks and one negative generic-composite application boundary;
+eleven positive and one negative central diagnostics cover the same API.
+Focused source, reviewer, and central checks, maintained `make check`, and the
+complete reviewer suite are green. The warning-enabled promoted source log
+`logs/probes/emdash3_2_commutative_algebra_localization_comparison-20260801-114944.log`
+inherits exactly `1179 = 1020 + 159`; strict module audits report zero
+unreviewed candidates. The catalog has `1820 = 1626 + 194` checks across 71
+areas with zero legacy or unclassified entries. Health passes all 56 targets
+in 342.143 seconds at source snapshot
+`sha256:ca42854edb4bdbfb75fb2c1efde198708a9fb5099b3e1f70627777a1518004c1`.
+The active authority texts and formal-presentation module map are synchronized.
+Full integration CI passes all 56 Lambdapi targets in 331.672 seconds,
+followed by 39 Python tests, 5 document-registry tests,
+shell/source/header/reference lints, book evidence/typography/KaTeX/assembly
+checks, strict kernel audit, and fresh strict catalog verification. The tranche
+is included in the authorized local foundation checkpoint.
+
+The subsequent PSSS-07c tranche separates a 107-line reusable
+`emdash3_2_finite_families.lp` module from the 735-line
+`emdash3_2_commutative_algebra_finite.lp` consumer. `FiniteFamily(A,n)` is
+Nat recursion into a right-associated constant-family Sigma ending in Unit;
+the generic module exposes nine transparent symbols for constructors,
+observations, pointwise map, and sethood. A probed `Product_grpd` successor
+presentation was rejected: although its carrier computations passed, its
+rigid classifier head did not directly consume generic Sigma truncation, and
+this consumer does not justify a Product/Sigma comparison rule.
+
+The algebra module has 21 transparent symbols and no rule or unification
+rule. It defines right-associated finite sums and dot products and proves by
+Nat induction that structured ring maps preserve both. An unimodular
+presentation retains coefficients and `sum_i a_i*f_i=1`; it is deliberately
+set-valued data rather than a falsely proposition-valued mere-existence
+claim. `CommRingZariskiCoverPresentation` retains the length, generators, and
+that presentation, is set-valued, and maps along every structured ring map.
+The generic singleton `[1]` is a nonempty model, while a binary helper accepts
+the correct `a*f+b*g=1` unit-ideal hypothesis.
+
+The 201-line reviewer has 20 positive and two negative checks. The negatives
+retain the constant-Sigma/Product non-collapse and the absence of zero-length
+Unit package eta. The central suite adds the same 22 diagnostics under one
+new mapped area, yielding a fresh strict catalog of 1,842 checks across 72
+areas with zero legacy or unclassified entries. Focused source, reviewer, and
+central checks, maintained `make check`, and the complete reviewer suite pass.
+Warning-enabled source logs
+`logs/probes/emdash3_2_finite_families-20260801-123553.log` and
+`logs/probes/emdash3_2_commutative_algebra_finite-20260801-123553.log` each
+inherit exactly `1179 = 1020 + 159`; both strict module audits report zero
+candidates across zero clauses. Health passes all 59 source/example targets
+in 202.751 seconds at source snapshot
+`sha256:4127068d1fa2e3dd43f22c8ca1f607d07bb8645ba1467ee22c96425c23ee5f76`,
+and the active authority routing is synchronized. Full integration CI is
+green: all 59 Lambdapi targets pass in 216.912 seconds, followed by 39 Python
+tests, 5 document-registry tests, shell/source/header/reference lints, book
+evidence/typography/KaTeX/assembly checks, strict kernel audit, and fresh
+strict catalog verification. The tranche is included in the authorized local
+foundation checkpoint.
+
+This is algebraic cover-presentation data only. It does not yet construct
+localizations indexed by the tuple, `Spec`, basic opens, a sieve coverage, or
+a topology. Covers of a relative basic open require power/radical data such as
+`s^N=sum_i a_i*f_i`, which remains consumer-gated.
+
+The subsequent PSSS-07d tranche defines a polynomial algebra over `R` on a
+variable classifier `X` only by its free-algebra universal property. For a
+candidate target `P`, base map `iota : R -> P`, and variable map
+`vars : X -> |P|`, a factor against `h : R -> S` and valuation
+`v : X -> |S|` is a structured map `k : P -> S` retaining the pointwise base
+triangle `k(iota(r))=h(r)` and variable triangle `k(vars(x))=v(x)`. The
+classifier `IsCommRingPolynomialAlgebra` requires this factor space to be
+contractible for every target, base map, and valuation; the chosen
+`CommRingPolynomialAlgebra` package exposes target, base map, variables, and
+property through transparent named observations.
+
+The two triangle classifiers are proposition-valued by target-carrier
+sethood, as is their dependent Sigma. A theorem-level PathOver helper lifts a
+path between structured factor maps to a path between complete factors. The
+432-line `emdash3_2_commutative_algebra_polynomial.lp` module contains 24
+symbols and no rule or unification rule. It is deliberately independent of
+the finite-family representation and introduces no monomial, coefficient,
+quotient, `Fin`, list, ordinary-inductive, or positive-variable representation
+surface.
+
+The first executable model is generic but honestly zero-variable:
+`R[Empty]=R` for every commutative ring. It uses `P=R`, the empty variable map,
+and the newly justified `comm_ring_hom_id_pointwise(R)` as base map. The centre
+extension is `h` itself; empty elimination supplies variable agreement, and a
+competitor's base triangle plus `comm_ring_hom_ext` supplies uniqueness. This
+consumer promotes one narrow `sigma_Fst` beta and one proof-time comparison at
+the ring-category owner. Generic category identity remains the whole-arrow
+runtime owner, and its carrier application remains a checked negative.
+
+The category module is now 573 lines with 36 symbols, four rules, and two
+unification rules. The polynomial module is 432 lines/24 symbols and rule-free.
+The 429-line reviewer has 16 positive and two negative checks; the central
+suite has the same 18-check boundary in one mapped area. Focused quiet logs are
+`logs/probes/emdash3_2_commutative_algebra_category-20260801-131200.log`,
+`logs/probes/emdash3_2_commutative_algebra_polynomial-20260801-131349.log`,
+`logs/probes/commutative_ring_polynomial_algebra-20260801-132119.log`, and
+`logs/probes/emdash3_2_checks-20260801-132329.log`. Warning-enabled category
+and polynomial logs at
+`logs/probes/emdash3_2_commutative_algebra_category-20260801-132146.log` and
+`logs/probes/emdash3_2_commutative_algebra_polynomial-20260801-132145.log`
+each inherit exactly `1179 = 1020 + 159`; strict audits report zero candidates
+across zero unreviewed clauses. Maintained `make check`, the complete reviewer
+suite, and the strict catalog of 1,860 checks across 73 areas are green.
+Authority routing and mathematical/surface documentation are synchronized.
+Health passes all 61 source/example targets in 314.231 seconds at source
+snapshot
+`sha256:35a1d735feeea679e12e62b3bc14690783758c0da59ed1e8f20522f898f075df`.
+Full integration CI passes all 61 Lambdapi targets in 389.345 seconds. The
+final combined checkpoint gate passes the same 61 targets in 342.266 seconds,
+followed by 39 Python tests, five document-registry tests,
+shell/source/header/reference lints, book evidence/typography/KaTeX/assembly
+checks, strict kernel audit, and fresh strict catalog verification. The
+tranche is included in the authorized local foundation checkpoint.
+
+The subsequent PSSS-08a candidate adds the transparent classifier
+`CommRingPsh_cat(K)=Functor_cat(Op_cat(K),CommRing_cat)`, named ring values,
+structured restriction maps, and point application. It introduces no rigid
+facade at this boundary: the ordinary functor category is the only selected
+representation and current consumers carry `K` explicitly. This differs from
+rigid `Psh_cat`, which usefully mediates its public head and the distinct
+`Catd_cat(Op(K))` representation; a future stable-head/base-recovery consumer
+may still justify an audited `CommRingPsh_cat` normal-form migration.
+Generic whole `CommRing_cat` identities and composites remain opaque on
+carrier elements. Named paths instead cross through the selected pointwise
+identity/composition maps, so `O[id](s)=s` and
+`O[f∘g](s)=O[g](O[f](s))` are available without competing runtime rules.
+
+The first probe failed precisely at specialization of the strict identity
+action: `id(Op_cat(K))` had normalized to `id(K)` before the literal generic
+redex could be observed. The rule-free generic theorem `fapp1_id_path`, proved
+while its source category remains abstract, is the identity analogue of the
+existing `fapp1_comp_path` and closes that boundary without a
+presheaf-specific rewrite. In the combined elaborator/PSSS history, the
+independently validated narrow generic `Op_cat` projection-order bridge is
+also retained: it selects the generic whole identity at runtime, but does not
+make that whole `CommRing_cat` identity compute on carrier elements. The final
+probe
+`logs/probes/psss08a_comm_ring_presheaf_invertibility-20260801-151336.log` is
+green and retains negative direct carrier computations for both laws.
+
+For `s : |O(U)|`, `CommRingPshInvertibleAlong(O,s,f)` is explicit unit
+evidence for `O[f](s)`. It is proposition-valued, and preservation by the
+restriction map along `g` plus the composite-restriction path yields evidence
+at `f∘g`. The preserved inverse computes to the image of the original
+inverse. Because this generic unit operation now has both localization and
+presheaf consumers, its path-transport/preservation declarations move
+unchanged into the base localization/unit module. The maintained reviewer
+constructs support at every arrow of the constant zero-ring presheaf.
+
+The source has 283 lines and 14 rule-free declarations; the reviewer has 217
+lines and 17 checks, including two intentional negative generic-carrier
+boundaries. Focused source, reviewer, central, and maintained aggregate checks
+are green. The warning-enabled source inherits exactly
+`1179 = 1020 + 159`; strict audits report zero unreviewed candidates; the
+catalog has 1,874 checks across 74 areas; and all 63 health targets pass in
+410.967 seconds at source snapshot
+`sha256:63b1c75554b4360f042aabc955243ddc96bad42a9df1848be3fd42c61cd40b03`.
+Full integration CI passes all 63 Lambdapi targets in 548.573 seconds,
+followed by 39 Python tests, five document-registry tests, shell/source/header/
+reference lints, book evidence/typography/KaTeX/assembly checks, strict kernel
+audit, and fresh strict catalog verification. The authorized checkpoint
+includes this tranche. This tranche does not assemble `Sieve(K,U)`: full action and
+equality/higher-arrow coherence over `Into_restr_cat(K,U)` remain the PSSS-08b
+consumer gate.
+
+The subsequent PSSS-08b implementation closes that gate through existing
+family owners rather than an ad hoc sieve action. The selected
+`comm_ring_carrier_func : CommRing_cat -> Grpd_cat` computes at ring objects
+and exposes its **full** hom action as `path_map_func` on structured carrier
+functions. There is intentionally no direct capped `fapp1_fapp0` rule; capping
+after the full action computes through the existing Path-map owner, including
+the `fib_cov` consumer used by restriction totals. Its transparent
+`comm_ring_carrier_catd` composite is therefore iterable at higher cells.
+
+Over the total category of ring elements,
+`comm_ring_unit_evidence_total_catd` has the literal fibre
+`Path_cat(CommRingUnitEvidence(R,x))`. The family retains generic Catd action;
+structured-map preservation of units supplies its semantic action, and the
+already proved proposition theorem makes every fibre subterminal. Only the
+literal constructor fibre is selected as a runtime rule; no local identity,
+composition, or capped-action rule is added.
+
+For `O : CommRingPsh(K)` and `s : |O(U)|`, the total restriction map is the
+composite
+
+```text
+Into_restr_cat(K,U)
+  -> Sigma_{V:K^op} |O(V)|
+  -> Sigma_{R:CommRing_cat} |R|,
+
+(V,f) |-> (V,O[f](s)) |-> (O(V),O[f](s)).
+```
+
+The first leg is the Sigma total of `fib_cov_transf`; the second is
+`sigma_pullback_total_func`. Their source comparison needs one narrow
+proof-time bridge between the rigid heads `hom_(K^op,id,U)` and
+`hom_con(K,U,id)`. A typed `eq_refl` diagnostic proves that the unifier fires,
+while a negative conversion diagnostic proves the two heads remain distinct
+at runtime.
+
+Pulling the universal unit family back along this total map gives
+`comm_ring_psh_invertibility_higher_sieve`. At a literal `(V,f)`, its fibre
+reduces to
+
+```text
+Path_cat(CommRingPshInvertibleAlong(O,s,f)),
+```
+
+and its object classifier reduces to the PSSS-08a unit-evidence predicate.
+`sigma_ind`—rather than a false Sigma package eta—lifts the existing
+proposition theorem to `IsOrdinarySieve`; `sieve_intro` then packages
+`comm_ring_psh_invertibility_sieve`. The maintained zero-ring consumer's
+explicit arrowwise witness inhabits `SieveMembership` in this assembled sieve,
+so the result retains the original computational motivation. Focused source,
+central-diagnostic, reviewer, and maintained aggregate checks are green. The
+warning-enabled owning-position source log
+`logs/probes/emdash3_2_commutative_algebra_presheaves-20260801-163403.log`
+inherits exactly `1179 = 1020 + 159`, with no changed-module warning location;
+strict audits report zero unreviewed candidates. The strict catalog has 1,893
+checks across 75 areas, including 19 checks in the dedicated PSSS-08b area,
+and zero unclassified entries. Health passes all 63 targets in 437.026 seconds
+at source snapshot
+`sha256:5a969bf2de9ebccd9ff02739dae4964f5314312e1199eb7fba9983ba21c294e3`.
+Full integration CI passes all 63 Lambdapi targets in 355.987 seconds,
+followed by 39 Python tests, five document-registry tests, shell/source/header/
+reference checks, book evidence/typography/KaTeX/assembly checks, strict
+kernel audit, and fresh strict catalog verification. The tranche is included
+in the authorized local PSSS-08b checkpoint.
+
+PSSS-08c0 is the first computational locality bridge and deliberately crosses
+neither the sheaf nor generated-topology gate. The rule-free
+`emdash3_2_commutative_algebra_locality.lp` defines
+
+```text
+CommRingPshInvertibilityCover(T,O,U,s) = Covers_T(D_O(s)).
+```
+
+This is a proposition about one section, not a claim that every section is
+locally invertible or that `O` is a local-ring object. More importantly, for a
+chosen localization `ell : Loc_{O(U)}(s)` and literal support member
+`m : (f:V->U) in D_O(s)`, the membership computation supplies unit evidence
+for `O[f](s)`. The existing contractible localization-factor owner then
+selects a structured map
+
+```text
+O(U)[1/s]_ell -> O(V)
+```
+
+and exposes the carrier triangle `factor(ell,f,m)(ell(x)) = O[f](x)`. The
+maintained zero-ring reviewer is a closed executable consumer: its selected
+factor at the terminal support member reduces to the actual restriction map
+of the constant presheaf. This is the pointwise front of the historical
+Cartier condition `lim_{V in D(s)} O(V) = O(U)[1/s]`. At the PSSS-08c0
+checkpoint, internal cone assembly, the limiting/descent equivalence, and
+sheaf/ringed-site packaging remained explicit next gates; PSSS-08c0C below
+closes the first of those gates without crossing the latter two.
+
+The candidate owner has 176 lines, seven symbols, zero rules, and zero
+unification rules. Its 145-line reviewer has eight assertions. Focused quiet
+owner, reviewer, and central-diagnostic logs are
+`logs/probes/emdash3_2_commutative_algebra_locality-20260801-205516.log`,
+`logs/probes/commutative_ring_presheaf_locality-20260801-205527.log`, and
+`logs/probes/emdash3_2_checks-20260801-205606.log`. Warning-enabled owner and
+reviewer logs at timestamp `20260801-205630` inherit exactly
+`1179 = 1020 + 159`, with no changed-module warning. The strict rule audit
+remains at zero unreviewed clauses and 52 annotated slots across 32
+intentional clauses. Five central diagnostics raise the strict catalog to
+1,922 checks across 79 mapped areas with zero unclassified entries. Maintained
+`make check` and the complete reviewer suite pass. Health passes all 70 source/
+example targets in 572.748 summed check-seconds at source snapshot
+`sha256:4ceeabad2faf2005b306f78053a3fed6a198576df2138b84d2404e8d8b7379da`.
+Full integration CI independently passes all 70 Lambdapi targets in 569.345
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+The tranche is included in the authorized local PSSS-08c0 checkpoint
+`9db8307`.
+
+PSSS-08c0C closes internal localization-cone assembly. It forms
+`Elem(D_O(s))` as the Sigma total of the invertibility sieve, composes its two
+existing Sigma projections with `O`, and obtains the diagram
+`(V,f,m) |-> O(V)`. One injective transformation owner has type
+
+```text
+factorCone(ell) : Const(O(U)[1/s]_ell) => O o dom
+```
+
+and its sole component rule computes at the literal element `(V,f,m)` to the
+PSSS-08c0 selected universal factor. The ordinary `Transf` classifier provides
+the full off-diagonal action; generic `tapp1` cut elimination, rather than a
+new family of external squares, owns naturality.
+
+The theorem-level construction audit remains useful. For `f:V->U`, `g:W->V`,
+and `m:f in D_O(s)`, mapping the factor triangle at `f` by `O[g]`, followed by
+the existing presheaf composition path, packages
+`O[g] o factor(ell,f,m)` as a competing factor over `O[f o g]`. Existing
+contractibility then gives
+
+```text
+factor(ell,f o g,g^*m) = O[g] o factor(ell,f,m).
+```
+
+This equality validates the exposed literal components; downstream descent
+uses the internal cone and does not retain the equality as an extra
+naturality field. The maintained candidate now has 537 lines, fifteen
+transparent symbols, one injective transformation owner, one component rule,
+and zero unification rules. Its 341-line reviewer has fifteen assertions,
+including a closed computation from the literal cone component to the actual
+zero-presheaf restriction. Ten central diagnostics cover the PSSS-08c0/08c0C
+area. Focused owner, reviewer, and central quiet logs end in `220202`, `220227`,
+and `220335`. Warning-enabled maintained owner and reviewer logs end in
+`220948` and each inherits exactly `1179 = 1020 + 159`, with no warning at the
+changed owner or reviewer. Strict audit reports zero unreviewed locality
+clauses and the unchanged kernel total of 52 annotated slots across 32
+intentional clauses. Maintained `make check` and the complete reviewer suite
+pass. Five new central diagnostics raise the fresh strict catalog to 1,927
+checks across 79 mapped areas with zero unclassified entries. Health passes
+all 70 source/example targets in 653.252 summed check-seconds at source
+snapshot
+`sha256:28a8c142d1a0f469349b6af5204ae0270e55a3cb6343c116b3458e8727e1c2e5`.
+Full integration CI independently passes all 70 Lambdapi targets in 534.210
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+Neither a limiting/descent equivalence nor sheafhood, `Spec`, or a scheme is
+claimed. The tranche is included in the authorized local PSSS-08c0C
+checkpoint `a724638`.
+
+PSSS-08c0D makes the first direct computational consumer of that cone. Pulling
+`comm_ring_carrier_catd` back along the internal CommRing-valued support
+diagram gives a family whose literal `(V,f,m)` fibre is
+`Path_cat(|O(V)|)`. Its section category
+
+```text
+Matching_O(s) = Pi_(V,f,m in D_O(s)) Path_cat(|O(V)|)
+```
+
+retains compatibility under every arrow of the support-elements category.
+For `x : |O(U)[1/s]_ell|`, one stable section owner computes by
+
+```text
+restrict_ell(x)[V,f,m] = factor(ell,f,m)(x).
+```
+
+The component deliberately follows the carrier API's selected full-action
+route: `fib_cov_tapp0_func` receives `x` before the structured factor map.
+Ordinary postcomposition of the ring-valued cone would cap that action too
+early and leave element application stuck. No direct capped carrier rule and
+no generic projection/cut rewrite is added. The four structural `tapp0_fapp0`
+slots on the literal beta remain inferred; its nested Sigma object and stable
+section head recover the indices.
+
+`path_lift_fapp0` turns the section-valued function into a genuine functor
+
+```text
+Path_cat(|O(U)[1/s]_ell|) -> Matching_O(s),
+```
+
+so both localization-element action and equality-path action are internal.
+The Pi/Catd classifiers retain matching coherence; consumers do not carry
+external naturality squares, identity laws, or composition laws. The closed
+zero-ring reviewer evaluates the resulting section at the terminal support
+member to the actual constant-presheaf restriction. This is only the
+localization-to-matching direction. An inverse/glue package, its executable
+component, inverse laws justified by a concrete descent/basic-open consumer,
+and later affine overlap evaluation remain separate gates.
+
+The maintained matching module has 135 lines, four symbols, one injective
+section owner, one rewrite rule, and zero unification rules. Its 243-line
+reviewer has eight assertions. Warning-enabled locality baseline, matching
+owner, and reviewer logs ending in `20260801-234652`, `20260801-234706`, and
+`20260801-234729` inherit exactly `1179 = 1020 + 159`, with no warning at the
+new owner or reviewer. The module-specific strict audit has zero
+reconstructible slots across zero unreviewed clauses; the full audit remains
+at zero unreviewed clauses and 52 annotated slots across 32 intentional
+kernel clauses. Maintained `make check` and the complete reviewer suite pass.
+Five new central diagnostics raise the strict catalog to 1,932 checks across
+80 mapped areas with zero legacy or unclassified entries. Health passes all
+72 source/example targets in 590.748 summed check-seconds at source snapshot
+`sha256:939fd71769182759327e8aa3a759f47019d7542a1f45e6d9c08dd9c0c9504d5e`.
+Full integration CI independently passes all 72 Lambdapi targets in 528.584
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+The tranche is included in the authorized local PSSS-08c0D checkpoint
+`28cd0fc`.
+
+PSSS-08c0E selects the converse needed by the computational Cartier
+interface without conflating it with ordinary sheaf descent. For a chosen
+localization, its public datum begins with a genuine functor
+
+```text
+glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|).
+```
+
+Consequently arrows between coherent matching families are mapped internally
+to equality paths between glued localization elements by ordinary functor
+action. The package retains two component observations:
+
+```text
+glue_ell(restrict_ell(x)) = x
+restrict_ell(glue_ell(m))[e] = m[e].
+```
+
+At a literal support element `e=(V,f,r)`, the second left endpoint computes
+through the checkpointed matching beta to
+`factor_O(ell;f,r)(glue_ell(m))`. These laws are Path-valued fields of a
+transparent Sigma package, not rewrite rules and not an external family of
+naturality squares. They do not yet constitute inverse transfors between the
+composite functors and identities; the mandatory PSSS-08c0F audit must
+internalize them or revise the interface before `Spec`. The zero-ring reviewer
+constructs the datum rather than
+postulating it: the functor is constant at `tt`, and Unit contractibility
+proves both observations, including a closed component path to the actual
+zero-presheaf restriction.
+
+This is selected basic-open locality over `D(s)`, and `D(s)` need not cover
+`U`. The candidate therefore does not claim a sheaf condition, a limiting
+comparison, or a native `OmegaEquivAlong`/whole internal equivalence. It is
+the direct computational
+successor to the historical Cartier `mod_loc_elim` behavior and is intended
+to feed a mandatory independent matching/section semantics audit, nontrivial
+localization model, and first affine overlap calculation before it is allowed
+to orient `Spec`. The historical source is experimental consumer evidence,
+not semantic authority. Abstract generated-topology or construction-of-
+sheafification work remains off this critical path; a supplied whole
+sheafification reflector/adjunction remains a feasible separate MVP
+capability. The maintained source, reviewer, and
+central focused checks pass; warning-enabled source and reviewer checks
+inherit exactly `1179 = 1020 + 159`, with no warning located in either new
+file, and strict audits remain unchanged. Maintained `make check` and the
+complete reviewer suite pass. Five central diagnostics raise the strict
+catalog to 1,937 checks across 81 mapped areas with zero legacy or
+unclassified entries. Health passes all 74 source/example targets in 535.569
+summed check-seconds at source snapshot
+`sha256:88e8dca37f182b8df944a54739a2cc01fb1f499f6f8e4ed7066ea7457b057e19`.
+Full integration CI independently passes all 74 Lambdapi targets in 575.487
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+The implementation and synchronized authority prose are locally checkpointed
+at `eb0c5b6`.
+
+PSSS-08c0F now has its first native-equivalence and algebraic-model results.
+An owner-shape probe confirms that canonical restriction has exactly the
+fixed-forward classifier
+`OmegaEquivAlong Cat_cat Path(localization-carrier) Matching restriction`.
+An expected-negative probe confirms that the earlier Pi families of component
+paths do not directly inhabit its equalities of whole composite functors. In
+the other direction, a green typed probe derives equality of the native left
+and right inverse functors, selects the left inverse as one computational
+glue, and evaluates its two whole cancellation paths to recover both earlier
+component observations and the literal Cartier factor-map equation. Thus the
+whole witness retains internal naturality and higher propagation while still
+exposing the desired computation; the component package alone remains
+provisional.
+
+The new 190-line, ten-symbol
+`emdash3_2_commutative_algebra_localization_unit.lp` module implements the
+first parametric algebra model. For any already-unit element `f` of `R`, it
+constructs the pointwise identity as a localization at `f`: every map factors
+through it by itself, and structured-map extensionality plus the
+property-valued triangle fibre proves the full factorization Sigma
+contractible. Canonical unit evidence for one therefore gives a selected
+computing localization `R[1/1]=R` for every ring. The module is rule-free; its
+97-line reviewer has thirteen assertions. Focused source, reviewer, and
+central checks pass, and warning-enabled checks inherit exactly
+`1179 = 1020 + 159` with no warning in either new file. Maintained `make check`
+and the complete reviewer suite pass. Five central diagnostics raise the fresh
+strict catalog to 1,942 checks across 82 mapped areas with zero unclassified
+entries. Health passes all 76 source/example targets in 347.597 summed
+check-seconds at source snapshot
+`sha256:3c425b8e9adcb68fc80d4992f09dff913863da5185ff03c5c0532192b4cbb899`.
+Full integration CI independently passes all 76 Lambdapi targets in 524.197
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `4b93619`. This does not yet provide a genuinely nontrivial
+localization, native matching equivalence model, first overlap, `Spec`, or
+scheme.
+
+The subsequent PSSS-08c0F empty-open candidate is the 504-line, 21-symbol
+rule-free `emdash3_2_commutative_algebra_localization_zero.lp` module. It
+derives `x*0=0`, `0*x=0`, and `-0=0`; transports admissible unit evidence to
+zero in the target; proves that invertible zero forces `0=1` and hence every
+carrier element equals zero; and uses the resulting structured point map to
+prove the complete localization-factor Sigma contractible. Thus every ring
+has a selected universal-property localization `R[1/0]` whose target is the
+zero ring and whose carrier action computes to `tt`. Its 124-line reviewer has
+sixteen assertions. Focused source, reviewer, and central checks pass; the
+warning-enabled research probe inherits exactly `1179 = 1020 + 159` with no
+candidate rule or unifier. Maintained `make check` and the complete reviewer
+suite pass. Six central diagnostics raise the fresh strict catalog to 1,948
+checks across 83 mapped areas with zero unclassified entries. Health passes
+all 78 source/example targets in 510.118 summed check-seconds at source
+snapshot
+`sha256:b7b459ffd7f1e003cfca1bda95097fe44b3f592e5aea0c9cbb9b46c6dfba5ee2`.
+Full integration CI independently passes all 78 Lambdapi targets in 528.561
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `7013915`.
+This provides the computational empty-basic-open endpoint but deliberately
+does not close the nondegenerate localization, native matching-equivalence,
+or affine-overlap gates.
+
+The following PSSS-08c0F candidate now closes the representation-independent
+algebraic overlap-equivalence construction. The 987-line, seventeen-symbol,
+rule-free
+`emdash3_2_commutative_algebra_localization_overlap.lp` module proves that
+the checkpointed canonical forward and staged reverse maps between arbitrary
+chosen packages for `R[1/(f*g)]` and `R[1/f][1/g]` are inverse as whole
+`CommRing_cat` arrows. Product-localization factor uniqueness proves the left
+law directly. For the right law, first-localization uniqueness proves the
+whole intermediate triangle; evaluating that path gives the second-stage
+triangle, and second-localization uniqueness proves the whole composite equal
+to identity. Existing pointwise composition/identity paths transport the
+result to the generic category owners, with no external naturality field and
+no new reduction or unification rule.
+
+The two laws package the canonical forward map as
+`OmegaEquivAlong CommRing_cat` with the staged reverse map in both inverse
+slots, and derive a first-class `OmegaEquiv CommRing_cat` facade. Twelve
+construction helpers are protected; five theorem/package symbols are public.
+The 226-line reviewer has eleven assertions covering generic factor-map
+uniqueness, both whole laws, both packages, inverse projections, and law
+projections. Focused and maintained source, reviewer, and central-diagnostic
+checks pass; warning-enabled checks inherit exactly `1179 = 1020 + 159` and
+locate no warning in the rule-free candidate. The strict audit remains clean,
+and five central diagnostics raise the fresh catalog to 1,953 checks across
+84 mapped areas with zero unclassified entries. Health passes all 80
+source/example targets in 539.883 summed check-seconds at source snapshot
+`sha256:8161bb12f88fd8e829c615b6ec483271bd012b0b846038718fb0300f495b0e39`.
+Full integration CI independently passes all 80 Lambdapi targets in 647.194
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `362922d`.
+
+This result is representation-independent: it needs only the localization
+universal properties and neither assumes nor exposes fractions. It identifies
+the chosen targets by an internal equivalence, not by judgmental package
+equality. It therefore closes the first whole algebraic overlap theorem, but
+does not yet construct a concrete genuinely nondegenerate localization model,
+identify Cartier matching objects with ordinary covering-sieve descent, or
+construct `Spec`, structure sheaves, or schemes.
+
+PSSS-08c0G adds the first explicit potentially nondegenerate representation.
+For a supplied idempotent `e^2=e`, the rule-free
+`emdash3_2_commutative_algebra_localization_idempotent.lp` module constructs
+the set-valued fixed-image ring `eR={x:R | e*x=x}` with one equal to `e` and
+all five operations inherited computationally from `R`. The structured
+scaling map sends `x` to `e*x`. If `h:R->S` makes `h(e)` invertible, then the
+preserved idempotence and the elementary invertible-idempotent calculation
+force `h(e)=1`; the selected factor sends a fixed point to its underlying
+element followed by `h`. Its triangle computes, and every competing factor is
+identified first pointwise, then as a whole structured map, then as a complete
+factor Sigma using the proposition-valued agreement fibre. Thus the selected
+package has the full existing `CommRingLocalizationAt R e` universal
+property, with no fraction/quotient syntax, external naturality field,
+rewrite rule, or unification rule.
+
+Focused source, reviewer, and central diagnostics plus the maintained
+`make check` and `make examples` aggregates are green. Warning-enabled source
+and reviewer checks each inherit exactly `1179 = 1020 + 159` warnings, with no
+warning located in either new file; the strict LHS audit remains at zero
+unreviewed clauses. The generated catalog contains 1,959 checks in 85 mapped
+areas with zero legacy or unclassified entries. Health passes all 82
+source/example targets in 637.936 summed check-seconds at source snapshot
+`sha256:b87e97a3c6a6b62e06dfd5d0c3421c73d2af627baab7c370d9bc14c4d6e9857b`.
+Full integration CI independently passes all 82 Lambdapi targets in 591.033
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `1211e06`. The representation can be genuinely nondegenerate
+for a nontrivial idempotent, but this tranche does not itself construct one. A
+product ring with the witnessed idempotent `(1,0)` and its affine-basic-open
+restriction consumer remain the next bounded gate; general fraction models,
+matching/sheaf descent, `Spec`, and schemes remain downstream.
+
+PSSS-08c0H closes that bounded concrete-model gate with three rule-free
+modules. `emdash3_2_commutative_algebra_product.lp` constructs the product
+carrier as the stable `Product_grpd`, transports sethood from the equivalent
+constant-family Sigma, builds all ring operations/laws componentwise, and
+maps structured morphisms componentwise. It derives equality of the whole
+structured maps for identity and composition using `comm_ring_hom_ext`; no
+product-specific identity/composition rule or external functoriality field is
+added. A first-class binary product functor remains consumer-gated because no
+current consumer needs another rigid runtime owner.
+
+`emdash3_2_commutative_algebra_f2.lp` constructs the two-element ring on
+`Bool_grpd`: addition is XOR, multiplication is conjunction, negation is the
+identity, and every ring law is proved by internal Boolean elimination.
+`emdash3_2_commutative_algebra_localization_split.lp` then takes
+`e=(1,0):R x S`, proves `e^2=e`, selects the checkpointed fixed-image
+localization, and exposes its existing affine-basic-open arrow. The closed
+specialization to `F2 x F2` constructs maps from `e=0` and `e=1` to `Empty` by
+projecting the contradictory Boolean component. Its carrier restriction
+computes transparently as `(x,y) |-> (x,0)`.
+
+This is the first closed localization/basic-open representation that is
+neither the identity endpoint nor the empty-open endpoint. It materially
+supports the feasibility of computational schemes, but it is not yet a
+sheaf/descent theorem: the next semantic gate must exercise the full internal
+Cartier matching comparison on this model, preferably as
+`OmegaEquivAlong Cat_cat`, before `Spec` consumes the provisional glue API.
+The intended non-chaotic Zariski topology, any required propositional
+reflection, structure sheaf, and concrete schemes remain separate later
+gates.
+
+The three source modules have 506, 254, and 169 lines, 22, 18, and 12 symbols,
+and no rewrite or unification rules. The 169-line reviewer has nineteen
+assertions, while nine central diagnostics bring the fresh strict catalog to
+1,968 checks across 86 mapped areas with zero unclassified entries. Focused
+and maintained checks, the exact inherited warning comparison
+`1179 = 1020 + 159`, and the strict inferred-slot audit are green. Health
+passes all 86 registered source/example targets in 419.730 summed
+check-seconds at source snapshot
+`sha256:49e571bee9c63afac0e25120e5271816feece3eb969fb0ed17c0893772e4b024`;
+full integration CI independently passes the same 86 targets in 450.152
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `e68b6b9`.
+
+PSSS-08c0I now exercises that closed localization against the full internal
+matching layer. On `K=Op_cat CommRing_cat`, the identity functor is the affine
+CommRing-valued presheaf. Every selected localization `i:R->L` supplies a
+canonical member `(L,i)` of `D(s)`, and section evaluation there is a genuine
+glue functor. The selected centre factor is propositionally the whole
+structured identity by localization-factor contractibility, giving
+`glue(restrict(x))=x`.
+
+For any support member `(V,h,member)`, the universal factor `k:L->V` and its
+whole structured triangle form a Sigma arrow from the centre to that member.
+The sieve-evidence component is selected from the retained subterminal fibre.
+Applying the matching section's `piapp1_fapp0` action along this arrow gives
+the Cartier equation `k(glue(m))=m(V,h,member)` inside the Pi family; two
+Sigma eliminations extend it to every encoded support object. No external
+naturality square, object-only functor input, or affine-specific runtime rule
+is introduced.
+
+Nested elimination required the normalized proof-time form of the existing
+Yoneda represented-family comparison. It remains in the owning presheaf
+module, is exercised by typed reflexivity, remains explicitly non-convertible
+at runtime, and leaves the owning warning closure unchanged at 1,020
+pre-existing warnings. The new 852-line affine module has eighteen symbols
+and no rewrite/unification rules; its 135-line reviewer includes a closed
+`F2 x F2` package check. Focused source/reviewer/central checks and the strict
+audit are green. Maintained source and reviewer aggregates also pass. Seven
+central diagnostics raise the fresh strict catalog to 1,975 checks across 87
+mapped areas with zero legacy or unclassified entries. Health passes all 88
+registered source/example targets in 476.967 summed check-seconds at source
+snapshot
+`sha256:2edc4569b7b62a6f1600dc622d91857765343944141f4c94ff1f9638d75bdf9d`;
+the new source takes 46.527 seconds and its reviewer 25.946 seconds. Full
+integration CI independently passes all 88 Lambdapi targets in 546.923 summed
+check-seconds, followed by 39 Python tests, five document-registry tests,
+shell/source/header/reference checks, book evidence/typography/KaTeX/assembly
+checks, the strict kernel audit, and fresh strict catalog verification. The
+implementation and synchronized authority prose are locally checkpointed at
+`4ed74b0`.
+
+This result establishes that the provisional componentwise glue interface is
+constructively meaningful and sufficient for the intended Cartier
+computation on a non-endpoint affine open. It does not yet prove equality of
+the whole restriction/glue composites. The bounded PSSS-08c0J audit derives a
+whole internal left cancellation *transformation*: ordinary `PiFunext`,
+`PathLift`, and the existing core-inclusion comparison carry the pointwise
+left law without external naturality. It also establishes the exact remaining
+boundary. `OmegaEquivAlong Cat_cat` asks for identity-type equality of whole
+functor objects, so reflecting that transformation to equality is a functor-
+extensionality/univalence principle. On the right, coherent matching sections
+are objects of an internal `Pi_cat`, not decoded functions accepted by the
+existing `PiFunext`; a Path-valued section-extensionality/initial-centre owner
+is absent. No broad equality rule or univalence axiom is added, and this
+optional strengthening is no longer a prerequisite for the computational
+scheme MVP.
+
+PSSS-10a therefore returns directly to that MVP in
+`emdash3_2_commutative_algebra_affine_spec.lp`. For every ring `R`,
+`AffineSpecBigSlice_cat(R)` is the conventional geometric opposite of the
+existing restriction-oriented total of maps `R -> S`. Its coordinate
+presheaf is the first Sigma projection, so values and restriction maps remain
+whole structured CommRing data with generic object/arrow action. A structured
+triangle produces an internal slice arrow. In particular, the canonical maps
+between `R[1/(f*g)]` and `R[1/f][1/g]` lift to chart arrows in both directions,
+and coordinate restriction computes to those same maps. Their existing
+`OmegaEquiv CommRing_cat` is re-exposed without functor equality or
+univalence. The closed split-idempotent localization supplies a non-endpoint
+basic-open chart. This is deliberately a big-affine computational precursor,
+not yet the small Zariski site or the claimed scheme object; the next MVP gate
+is a minimal supplied-cover/atlas package and a concrete chart-gluing
+consumer.
+
+The PSSS-10a source has 242 lines and eleven symbols with no rewrite or
+unification rules; its 154-line reviewer has ten assertions and the central
+suite adds six diagnostics. The strict catalog contains 1,981 checks across
+88 areas with no legacy or unclassified entries. Synchronized health passes
+all 90 registered targets in 712.925 summed check-seconds; the source,
+reviewer, and central checks take 8.438, 24.270, and 28.157 seconds. Both
+warning-enabled changed targets inherit exactly `1179 = 1020 + 159` warnings
+with zero changed-file locations. The strict audit and the nonduplicative
+integration remainder are green, and the implementation plus authority prose
+are locally checkpointed at `837cfeb`.
+
+PSSS-10b adds the concrete complementary-idempotent atlas in
+`emdash3_2_commutative_algebra_affine_atlas.lp`. For every `R x S`, the
+existing algebraic binary-cover constructor records `(1,0)` and `(0,1)` with
+unit coefficients, while the existing dependent localization family records
+their two fixed-image localization packages. No second chart-family record or
+global localization choice is introduced. Orthogonality proves that the
+chart intersection is `D(0)`; the existing zero localization makes its
+coordinate ring compute to `zero_comm_ring`. Two structured triangles lift
+to actual arrows of `AffineSpecBigSlice_cat(R x S)`, and restriction of the
+coordinate presheaf along them computes to the whole structured maps from
+each chart ring to the zero ring. Generic functor and Sigma owners carry
+arrow action and naturality internally.
+
+The closed `F2 x F2` specialization makes the product of the two generators
+reduce literally to zero, supplying the first finite non-endpoint affine
+atlas/glue presentation. This phrase is intentionally narrower than a
+universal gluing theorem: the tranche does not construct a colimit, sheaf,
+locally ringed space, or general scheme record. A generic finite-family
+tabulation probe is viable, but specializing a recursive chart-family facade
+to the full dependent affine chart data exceeded the 60-second target budget
+in both producer and split-consumer probes. That convenience facade is not
+promoted; `CommRingZariskiCoverFamily` remains the presentation authority and
+concrete chart/overlap observations are exposed only where consumed. The
+whole-functor equality/univalence boundary from PSSS-08c0J remains optional
+and does not enter this construction.
+
+The PSSS-10b source has 402 lines and 20 symbols with no rewrite or
+unification rules; its 135-line reviewer has 13 assertions and the central
+suite adds six diagnostics. Both warning-enabled changed targets inherit
+exactly `1179 = 1020 + 159` warnings with zero changed-file locations. The
+strict audit remains at zero unreviewed clauses, and the strict catalog has
+1,987 checks across 89 areas with no legacy or unclassified entries.
+Synchronized health passes all 92 registered targets in 663.006 summed
+check-seconds at source snapshot
+`sha256:6ff71dd1ca9dae89e444926ebaab28710a89fddbe8d24484d1a245ec114eb152`;
+the new source and reviewer take 9.006 and 9.287 seconds there. The fresh
+health traversal is followed by the nonduplicative CI remainder rather than
+another long traversal; snapshot/tooling/test/document/book/audit/catalog
+gates are green. The implementation and synchronized authority prose are
+locally checkpointed at `db91ddf`.
+
+PSSS-10c adds the direct affine functor-of-points/basic-open bridge in
+`emdash3_2_commutative_algebra_affine_points.lp`. For each ring `R`,
+`affine_spec_functor_of_points(R)` is transparently the existing Yoneda
+presheaf on `Op_cat CommRing_cat`; its value at `S` is the whole structured-map
+classifier `CommRingHom(R,S)`. The basic open `D(f)` is not a new predicate or
+rigid facade: it is the existing ordinary invertibility sieve of the shared
+identity CommRing-valued presheaf. Its point classifier computes to the Sigma
+of `h:R->S` with actual proposition-valued unit evidence for `h(f)`.
+
+For a selected universal-property localization `i:R->R[1/f]`, precomposition
+constructs a `D(f)`-point from every map `R[1/f]->S`. Conversely,
+factorization contractibility selects the inverse map. CommRing extensionality
+turns its pointwise agreement into equality of whole structured maps;
+proposition-valued unit evidence supplies the dependent path required for the
+Sigma point; and contractible-factor uniqueness proves the other inverse law.
+The two laws assemble directly into
+
+```text
+TypeEquiv(CommRingHom(R[1/f],S), AffineSpecBasicOpenPoint(R,f,S)).
+```
+
+This construction does not invoke univalence: it produces explicit
+equivalence data rather than reflecting equivalence into equality. It is
+componentwise in the test ring `S`, while the Yoneda presheaf and semantic
+sieve already retain their full object/arrow actions internally. A whole
+natural equivalence of presheaves remains a possible downstream theorem, not
+an external naturality field or an MVP prerequisite. Generated topology,
+sheafhood, subcanonicity, locally ringed structure, and a general scheme remain
+separate gates.
+
+The shared transparent identity-presheaf definition moves from the affine
+glue consumer to the earlier CommRing-presheaf owner, so both glue and
+functor-of-points use one semantic definition. The new 558-line source has 17
+symbols and no rewrite or unification rules. Its 209-line reviewer has 15
+assertions, including a closed split-idempotent `F2 x F2` instance. Focused
+checks of the owner relocation, the existing affine-glue consumer, the new
+source, and the reviewer pass within the 60-second target bound. The source
+imports only the CommRing-presheaf and ordinary-site vocabulary it actually
+uses; removing an unnecessary affine-slice/Zariski/overlap dependency reduced
+its focused time from 25.67 to 4.45 seconds and its reviewer to 6.33 seconds
+without changing any public declaration. A trial
+extension of the already-large central monolith by this import and six
+diagnostics reached the 60-second bound without a semantic error; the central
+delta was therefore removed rather than increasing the timeout or adding a
+rigid shortcut. The dedicated reviewer is the executable diagnostic owner for
+this tranche.
+
+Warning-enabled owner and reviewer checks inherit exactly
+`1179 = 1020 + 159`, with no warning located in a changed file. The strict
+rule audit remains at zero unreviewed clauses, and the unchanged strict
+catalog has 1,987 checks across 89 areas with no legacy or unclassified
+entries. Synchronized health passes all 94 registered source/example targets
+in 793.592 summed check-seconds at source snapshot
+`sha256:8d3a5bf7c64f453b11276bbef473c0f88ae7a32faea271d153e8a83ba4171530`.
+There the new source takes 4.599 seconds, its reviewer takes 17.733 seconds,
+and the unchanged central diagnostics take 31.689 seconds. The fresh health
+traversal is followed only by the nonduplicative CI remainder: snapshot,
+tooling, 39 Python tests, five document-registry tests, shell/source/report/
+reference checks, book evidence/typography/KaTeX/assembly checks, the strict
+rule audit, and the strict catalog are green. The authorized local
+implementation checkpoint is `154069d`.
+
+PSSS-10c1 adds the rule-free represented-basic-open-intersection bridge in
+`emdash3_2_commutative_algebra_affine_intersections.lp`.  At a test ring `S`,
+its explicit intersection point is a whole structured map `h:R->S` together
+with the transparent Sigma pair of unit evidence for `h(f)` and `h(g)`.
+Transport along the CommRing homomorphism multiplication law and the existing
+product-unit maps gives functions in both directions between unit evidence
+for `h(f*g)` and that pair.  Since both classifiers are propositions, the
+map is proved equivalent directly by contractibility of its homotopy fibres;
+the same-base Sigma equivalence then yields the pointwise
+
+```text
+D(f*g)(S) ~= D(f)(S) intersect D(g)(S).
+```
+
+For a selected localization at `f*g`, the public PSSS-10c representation and
+the explicit intersection equivalence are retained as a transparent
+two-`TypeEquiv` capability.  Their forward and inverse maps compose on the
+decoded point carriers, and both composite laws are derived from the two
+component equivalence laws.  This is the selected executable representation
+normal form: coercing the whole public `TypeEquiv` package through the
+sieve-membership alias, or eagerly constructing its generic composite,
+exceeds the 60-second elaboration boundary without a semantic error.  No
+timeout increase, rigid facade, rewrite, unifier, or duplicate predicate is
+introduced.
+
+The 521-line source has 15 symbols and zero rewrite or unification rules.  Its
+195-line reviewer has 12 assertions, including the closed `F2 x F2`
+complementary-idempotent atlas: the generators multiply definitionally to
+zero, so the selected zero localization represents their computationally
+empty intersection.  Focused quiet source and reviewer checks pass, and
+warning-enabled checks inherit exactly `1179 = 1020 + 159` warnings with no
+changed-file location.  The strict LHS audit remains at zero unreviewed
+clauses and 52 annotated slots across 32 intentional clauses. The strict
+catalog remains at 1,987 checks across 89 areas. Synchronized health passes
+all 96 registered targets in 788.439 summed check-seconds at source snapshot
+`sha256:8491ed696767a463bb3f3aebe6ea0adfab402432bd04aae0c0efc23d00e1974e`;
+the new source/reviewer take 4.595/28.261 seconds and central diagnostics pass
+at 57.730 seconds. The nonduplicative integration remainder—snapshot,
+tooling/tests, document registry, source/report/reference lints, book checks,
+strict audit, and strict catalog—is green. Two earlier traversals under
+concurrent elaborator `check:ts` load timed out on different unchanged large
+targets; the uncontended traversal passes without raising the 60-second bound
+or changing unrelated source. The tranche is included in local checkpoint
+`4436a23`.
+
+PSSS-09a now adds the separate rule-free
+`emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
+retains its finite unimodular generators together with a dependent finite
+family of explicitly selected universal-property localization packages; no
+global localization choice is postulated.  Every selected localization is an
+actual arrow in the affine restriction total.  Given `h : R -> S` and chosen
+localizations at `f` and `h(f)`, the source universal property constructs the
+base-change factor, its pointwise triangle, the corresponding Sigma arrow,
+and ultimately a returned membership term in the pulled-back ordinary sieve.
+The carrier application of the pointwise composite computes to the target
+localization map applied to `h(x)`.  Its intentional runtime distinction from
+the canonical slice-postcomposition object is crossed by named theorem paths
+and Catd transport rather than a new rewrite or unification rule.
+
+The promoted source has 892 lines and 27 symbols, with zero rules and zero
+unification rules.  The 246-line reviewer has 15 assertions and includes a
+closed zero-ring localization witness for the final pullback-membership term;
+12 central diagnostics occupy a dedicated catalog area.  Focused source,
+reviewer, central, maintained `make check`, and complete example-suite gates
+pass.  Warning-enabled owner and reviewer probes inherit exactly
+`1179 = 1020 + 159`, with no changed-module warning location; the strict LHS
+audit has zero unreviewed clauses and the unchanged 52 annotated slots across
+32 intentional clauses.  The fresh strict catalog has 1,905 checks across 76
+areas and zero unclassified entries.  Health passes all 65 source/example
+targets in 555.881 summed check-seconds at source snapshot
+`sha256:a2b313bcfec0123f399364fd395b5e533917767ef14d16b12da768da81a3a6a8`.
+Full integration CI passes all 65 Lambdapi targets in 597.453 summed
+check-seconds, followed by 39 Python tests, five document-registry tests,
+shell/source/header/reference checks, book evidence/typography/KaTeX/assembly
+checks, the strict kernel audit, and fresh strict catalog verification.  The
+tranche is ready for its authorized local checkpoint.  Finite family-wide
+containment/base-change assembly is PSSS-09b.  Proposition-valued coverage,
+generated topology, subcanonicity, `Spec`, and schemes remain honest later
+gates; chosen coefficient/localization data is not treated as a proposition.
+
+PSSS-09b1 extends the same rule-free module with selected finite containment
+and bounded family base change. The reusable finite-family owner now has
+`FiniteFamilyAllOver`: a Nat-recursive family of `Q(x,p)` evidence over an
+already-selected `FiniteFamilyAll(P)` witness, plus a generic pointwise map
+that accepts source and target evidence families independently. The Zariski
+specialization retains one literal `SieveMembership` term per chosen
+generator/localization, maps the algebraic cover presentation while accepting
+all target localization packages explicitly, and provides a closed zero-ring
+singleton whose returned pullback membership is computational data.
+
+The active delta adds no rewrite or unification rule. Direct specialization
+of the full generic recursion and a specialized head projection to the
+expanded ordinary-sieve membership family exceed the 60-second elaboration
+budget. A diagnostic injective membership facade with a beta rule also timed
+out and is rejected under the stable-head SOP. Arbitrary-length recursion
+stays with `finite_family_all_over_map`; the promoted bounded consumer uses
+its ordinary nil/cons observations and the existing elementwise pullback
+theorem. The expanded convenience wrapper remains a performance/usability
+gate rather than a semantic blocker or justification for rigidity.
+
+The fresh strict catalog has 1,911 checks across 77 mapped areas and zero
+unclassified entries. Health passes all 66 source/example targets in 638.261
+summed check-seconds at source snapshot
+`sha256:271c634e06aaa3ab038b1733f053b4647464e4b5ad623b751c3839e6ca157154`.
+Full integration CI independently passes all 66 Lambdapi targets in 627.693
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book
+evidence/typography/KaTeX/assembly checks, the strict kernel audit, and fresh
+strict catalog verification. PSSS-09b1 is included in local commit
+`c8a81b9`.
+
+PSSS-09cZ1 is the bounded supplied-topology boundary. The rule-free
+`emdash3_2_commutative_algebra_zariski_topology.lp` candidate defines the
+property that every sieve containing all basic-open arrows of a selected
+finite Zariski family covers in an already lawful topology on
+`Op_cat CommRing_cat`. Both presentation coverhood and whole-topology
+compatibility have explicit `IsPropGrpd` witnesses, while generators,
+coefficients, localizations, and membership evidence remain untruncated. Its
+consumer maps family containment to `groth_topology_covers`; the chaotic
+instance is a checked nonempty feasibility model, not an exact or least
+Zariski topology. The 144-line owner has 11 symbols and no rules; the 56-line
+reviewer has eight assertions. Focused and maintained checks pass. Warning-
+enabled owner and reviewer probes inherit exactly `1179 = 1020 + 159`, with
+no changed-module warning; the strict audit remains at zero unreviewed clauses
+and 52 annotated slots across 32 intentional clauses. Six central diagnostics
+raise the catalog to 1,917 checks across 78 mapped areas with zero unclassified
+entries. Health passes all 68 source/example targets in 530.846 summed
+check-seconds at source snapshot
+`sha256:fabcd518cd2f529dbfd79485577412999aa477db290fe4af61465c97bfca242e`.
+Full integration CI independently passes all 68 Lambdapi targets in 384.425
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book
+evidence/typography/KaTeX/assembly checks, the strict kernel audit, and fresh
+strict catalog verification. PSSS-09cZ1 is included in local commit
+`d808c29`.
+
+PSSS-09cGI now supplies the generic generated-topology boundary internally.
+`GeneratedSieveCover(G,U,R)` quantifies over every Grothendieck topology
+accepting the witness-rich generator family `G`; dependent-Pi proposition
+closure makes this intersection proposition-valued without truncating the
+presentation witnesses. The three topology laws hold pointwise, while
+generator inclusion and leastness compute by application. The rule-free
+source and nine-assertion reviewer are synchronized through exact inherited
+warnings, strict audit/catalog, and 100-target exact-content health in local
+checkpoint `d826526`. A truncation/HIT remains conditional on a consumer
+needing induction over cover derivations or executable cover normal forms.
+
+PSSS-10dG is the direct affine consumer of that generic owner.
+`emdash3_2_commutative_algebra_affine_zariski.lp` constructs a selected
+localization chart as a whole arrow of
+`AffineSpecBigSlice_cat(R)`. The target structure map is exactly the
+existing opposite-precomposition composite `R -> S -> S[1/f]`, so its
+triangle proof is reflexive and coordinate restriction computes to the
+supplied whole localization map. One outer `sigma_ind` exposes an arbitrary
+big-slice chart without adding package eta; selected finite-family containment
+then supplies the witness-rich generators. The promoted 178-line source has
+seven symbols and no rules or unifiers, and its 120-line reviewer has nine
+assertions. Focused quiet checks and warning-enabled checks are green with the
+exact inherited `1179 = 1020 + 159` inventory and no changed-file warning;
+the strict audit/catalog and exact 102-target health are green. The latter
+uses source-metrics snapshot
+`sha256:8e19f00c96f37c16449d5f851107a9ca5b722f47657b2d01b224692504b1ab7e`
+and check-content snapshot
+`sha256:01c61b02268c84c0c334b3fa3f0012c26f68ce52def9959e44a940a1bc7b300c`.
+The new source and reviewer passed from source in 24.042 and 23.915 seconds.
+The unchanged central aggregate and affine-glue reviewer reached the cold
+source limit once and then passed same-limit source retries in 54.587 and
+44.889 seconds. No object priming was used. This is the intended big-affine
+Zariski topology for the computational MVP, not the small site and not yet a
+sheaf or scheme. The synchronized implementation is included in local
+checkpoint `a30f6dc`.
+
+PSSS-11a is the first structure-sheaf consumer of that topology. The promoted
+`emdash3_2_commutative_algebra_affine_ringed_sites.lp` packages a supplied
+`SheafificationCapability`, one object of the corresponding rigid
+CommRing-valued sheaf category, and a whole `DefIso` from its included
+presheaf to `affine_spec_coordinate_psh(R)`. The resulting
+`ReflectiveCommRingedSite` therefore carries exactly
+`affine_spec_big_zariski_topology(R)`, while the already-computing coordinate
+restrictions remain available through the whole comparison. Its two readable
+chart maps use `tapp0_fapp0` to observe the forward and inverse
+transformations at a site object; they are not object-only substitute data.
+The 230-line source has nine symbols and no rules or unifiers, and its
+166-line reviewer has nine assertions. Focused quiet checks and
+warning-enabled checks are green with the exact inherited
+`1179 = 1020 + 159` inventory and no changed-file warning. Exact-content
+health passes all 104 registered targets in 1187.079 summed check-seconds at
+source-metrics snapshot
+`sha256:c0ba7fc45f04780f9bb149d1a1dc6bf5dd50196c6f949423417ce0066e62d10b`
+and check-content snapshot
+`sha256:e9d102a79c9d824f40cb0bc6e9f829d3adeaf521becdde1fa3e830ea8b04f02d`.
+The final inherited affine-glue reviewer passed in 39.504 seconds with the
+ordinary 60-second limit, no object priming, and no special flags. The
+synchronized implementation is included in local checkpoint `5ead41c`.
+Localization locality, any stalk-local-ring interpretation, small-site
+comparison, and the first scheme record remain PSSS-11 follow-ons rather than
+claims of this layer.
+
+PSSS-11b supplies the next whole computational boundary without converting
+the earlier component observations into an axiom. The strengthened
+`emdash3_2_commutative_algebra_glue.lp` defines
+`CommRingPshLocalizationLocality` as `OmegaEquivAlong Cat_cat` for the exact
+existing localization matching-restriction functor. Its selected left inverse
+is one whole glue functor. The existing transparent half-adjoint proof at the
+equality/hom-action owner now exposes the generic fact that this selected left
+inverse also satisfies the right whole-functor law; the commutative-algebra
+module therefore stores both whole paths without duplicating that proof.
+Their object/support evaluations derive the earlier glue package. The new
+rule-free `emdash3_2_commutative_algebra_affine_locality.lp` specializes this
+supplied capability over every big-affine coordinate section and chosen
+localization, with literal chart endpoints reducing to the retained ring and
+localization. Focused quiet and warning-enabled checks are green with exactly
+the inherited `1179 = 1020 + 159` warning inventory and no changed-file
+warning; the strict rule audit and 1,992-check/90-area catalog are synchronized.
+Exact-content health passes all 106 registered targets in 1059.644 summed
+check-seconds at source-metrics snapshot
+`sha256:5eed2e7250fc1b3aad8dcc4a66a150b7e69ef0ae069d06d000eab3309a23e8e3`
+and check-content snapshot
+`sha256:77f8c28fe6639ebb548093f63827f63afe64a1f982d2d10754b9f751ca5c20f2`.
+The new source/reviewer pass in 7.831/31.558 seconds; the central checks and
+final inherited affine-glue source/reviewer pass in 57.890/38.838/48.300
+seconds under the ordinary 60-second limit, with no object priming or special
+flags. The proportional nonduplicative integration remainder is green through
+42 Python tests, five document-registry tests, health-snapshot verification,
+source/report lints, strict audit/catalog, and book
+evidence/typography/KaTeX/assembly checks. The synchronized implementation is
+included in local checkpoint `8216f28`. This is localization locality over
+`D(s)`, which need not cover, not ordinary sheaf descent, stalk-local-ring
+structure, or the final scheme package.
+
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.
 
@@ -1876,11 +3617,12 @@ the auxiliary curry packages are prerequisites.
 The durable diagnostic area contains seven checks covering the owner point,
 constant-family fibre conversion, direct paired object and inner-arrow
 computation, capped base action, generic internal cell/next-cell iteration,
-and source/target non-collapse. Warning comparison remains exactly 1,079
-critical pairs and 159 replaceable pattern variables, strict LHS audit is
-zero/53/33, the catalog contains 1,801 classified checks across 69 areas with
-zero unclassified checks, and the one semantic-promotion CI passes all 41
-kernel/example targets and repository-integrity gates.
+and source/target non-collapse. At that owner's recorded checkpoint, warning
+comparison was exactly 1,079 critical pairs and 159 replaceable pattern
+variables, strict LHS audit was zero/53/33, the catalog contained 1,801
+classified checks across 69 areas with zero unclassified checks, and the one
+semantic-promotion CI passed all 41 kernel/example targets and
+repository-integrity gates. The current combined boundary is recorded below.
 
 The constant-domain displayed-evaluation closure is now active. For
 `A : Cat`, `B : Catd K`, and
@@ -1961,9 +3703,10 @@ totalization, product/action, section-action, `Unit_prof`, `Hom_catd`,
 `Functor_catd`, `Transf_catd`, and direct-binder owners remain active. The
 retired code and checks remain recoverable at their recorded Git checkpoints;
 retirement is a trusted-surface cleanup, not a mathematical impossibility
-claim. Warning comparison decreases only retired-rule interactions, from
-1,097 to 1,086 unjoinable critical pairs, while replaceable-pattern warnings
-remain 159 and the strict LHS audit remains zero unreviewed clauses.
+claim. At that retirement checkpoint, warning comparison decreased only
+retired-rule interactions, from 1,097 to 1,086 unjoinable critical pairs,
+while replaceable-pattern warnings remained 159 and the strict LHS audit
+remained zero unreviewed clauses.
 
 ### Section 18: Cat-valued profunctors and computational comparison
 
@@ -1993,6 +3736,72 @@ theory.
 `Prof_tensor` and implication objects are symbolic primitives where the
 current kernel lacks a general coend/coinserter quotient. Their checked beta,
 reindexing, and closed-core interfaces state the active computational scope.
+
+### One-way presheaf, sieve, topology, and CommRing-presheaf libraries
+
+The kernel's Catd machinery now has a one-way standard-library facade:
+
+```text
+Psh_cat(K) =proof-time Catd_cat(K^op)
+Obj(Psh_cat(K)) -> Obj(Catd_cat(K^op))
+Hom_Psh(K)(P,Q) -> Functord_cat(K^op,P,Q)
+F^* = Psh_pullback_func(F)
+    : Psh_cat(B) -> Psh_cat(A).
+y_K = yoneda_psh_func(K) : K -> Psh_cat(K)
+y_K(U)[V] -> Hom_K(V,U)
+Into_restr_cat(U) -> Sigma_(V:K^op) Hom_K(V,U)
+Slice_cat(U) -> Op_cat(Into_restr_cat(U))
+HigherSieveClassifier(K)[U]
+    -> Catd_cat(Into_restr_cat(U)).
+IsSubterminalCat(C)
+    = Sigma(IsPropGrpd(Obj(C)), IsGroupoidalCat(C)).
+Sieve(U)
+    = Sigma(S : HigherSieve(U), IsOrdinarySieve(S)).
+sieve_pullback(p) : Sieve(U) -> Sieve(V).
+SieveMembership(R,(V,f)) -> Obj(R(V,f)).
+SieveCoverage(K) -> Pi U, Sieve(U) -> PropU.
+GrothTopology(K)
+    -> coverage plus maximality, pullback stability, and local character.
+CommRingPsh_cat(K) -> Functor_cat(K^op,CommRing_cat).
+comm_ring_psh_restrict(O,f,s) -> O[f](s).
+CommRingPshInvertibleAlong(O,s,f)
+    -> CommRingUnitEvidence(O(V),O[f](s)).
+Matching_O(s)
+    -> Pi_(V,f,m in D_O(s)) Path_cat(|O(V)|).
+restrict_ell : Path_cat(|O(U)[1/s]_ell|) -> Matching_O(s).
+restrict_ell(x)[V,f,m] -> factor(ell,f,m)(x).
+glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|).
+glue_ell(restrict_ell(x)) = x.
+factor(ell,f,m)(glue_ell(a)) = a[V,f,m].
+```
+
+The category heads do not runtime-collapse. Restriction's object action is
+the existing `Pullback_catd(P,Op_func(F))`; ordinary map action and laws remain
+generic. Yoneda action is existing represented-hom postcomposition, slice
+construction is existing Sigma totalization plus opposite, and higher-sieve
+restriction is existing Catd pullback. The higher name is literal. A separate
+downstream module selects ordinary sieves by pointwise native subterminality
+and preserves that evidence under the same pullback action. It does not prove
+the ordinary-sieve carrier set-valued and does not declare `Omega`, descent,
+or topology. A further rule-free module packages direct proposition-valued
+sieve topologies and the chaotic model without binding `Omega`, generating a
+coverage saturation, or adding sheafification/descent. Those gates and the
+measured point-component observation boundary are maintained in the living
+PSSS plan.
+
+The CommRing-valued classifier is transparent rather than a second rigid
+presheaf facade. Explicit restriction applies the retained structured-map
+function. Identity and composite restriction laws are theorem-level paths
+through the selected pointwise ring-map comparisons; generic whole arrows
+retain their negative carrier-computation boundaries. Arrowwise unit support
+is a property and is closed under further restriction. The downstream carrier
+and unit-evidence families assemble it as a whole ordinary sieve, the locality
+module packages its selected localization factors as one internal cone, and
+the matching module applies those factors to localization elements as
+internally coherent Pi sections with equality-path action. The selected glue
+module supplies the converse as a genuine functor plus both Path-valued
+component observations. It is computational basic-open locality over `D(s)`,
+not ordinary sheaf descent; no native whole equivalence is asserted.
 
 ### Section 19: PathOut, path induction, and Eckmann–Hilton
 
@@ -2066,6 +3875,53 @@ Runtime subject reduction for `path_ind_sec -> fib_cov_transf` crosses the
 general Pi/displayed object ladder and one measured join between ordinary
 `Obj(Transf_cat)` classifiers. A direct specialized displayed-`Obj` rule is
 redundant. The next `Transfd_cat` projection is retained for iterability.
+
+The stable projection-pullback family is now an explicit runtime selection,
+not the automatic reduct of either
+`comp_cat_fapp0(D,Sigma_proj1_func(R))` or
+`Pullback_catd(D,Sigma_proj1_func(R))`.  Both generic presentations compare
+with `Sigma_proj1_pullback_catd(R,D)` through narrowly typed `unif_rule`s.
+This keeps generic represented-family reindex accumulation as the selected
+runtime cut and removes the competing generic-versus-stable normal form.
+Consumers requiring the projection ladder name the stable family directly.
+
+Recursive dependent-variable weakening consequently uses the explicit whole
+displayed functor
+
+```text
+section_weaken_funcd(R,E,s) : R ->_K E
+section_weaken_funcd(R,E,s)[k] = const_{R[k]}(s[k]).
+```
+
+Its base-arrow action is the already-internal action of `s` and is independent
+of the new source-fibre object.  `sigma_functord_sec` then uncurries this
+displayed functor when a section over `Sigma(R)` is needed.  Generic
+`section_pullback_sec(F,E,s)` remains available and computes at literal base
+objects; it is no longer overloaded as the stable displayed weakening owner.
+
+The uncurrying operation is functorial at one whole owner:
+
+```text
+sigma_functord_sec_func(R,D)
+  : Functor(Functord_cat(R,D),Pi_cat(Sigma(R),pi1^*D)).
+```
+
+Its object action selects `sigma_functord_sec(FF)`.  Its generic arrow action
+already carries displayed-transformation naturality internally, while one
+narrow runtime projection restores the component beta hidden by the stable
+section facade:
+
+```text
+sigma_functord_sec_func[eta][(k,r)]
+  -> Const_transf(eta[k][r]).
+```
+
+Do not describe this projection beta as a theorem of naturality alone.  It is
+the defining observation of the functorial uncurrying lift; generic naturality
+states that these observations commute along arrows of `Sigma(R)`.  Do not add
+a second named transformation head merely to restate the same intermediate
+action unless an independent consumer needs that head and its warning/owner
+audit justifies it.
 
 ### One generic owner for ordinary laws
 
@@ -2363,13 +4219,20 @@ do not erase the decision trail.
 ### Bounded checks
 
 ```bash
-EMDASH_TYPECHECK_TIMEOUT=60s make check
-timeout 20s lambdapi check emdash3_2.lp
+EMDASH_TYPECHECK_TIMEOUT=90s make check
+timeout 90s lambdapi check emdash3_2.lp
 make check-warnings
 ```
 
-If a quiet check times out or hides the interaction, rerun the smallest target
-with warnings enabled before changing the architecture.
+The 90-second value is a uniform per-file ceiling for focused probes, warning
+checks, registered aggregates, and health traversals. The central diagnostics
+and several focused consumers now have measured green runs near 60 seconds, so
+the older split limits could classify the same valid import path differently.
+This is a timeout ceiling, not permission to run broad aggregates for
+reassurance. If a quiet check times out or hides the interaction, rerun the
+smallest target with warnings enabled before changing the architecture.
+Resumable health evidence continues to require exact checked-content and
+environment identity, including the timeout.
 
 ### Focused probes
 
@@ -2428,6 +4291,53 @@ scripts/lambdapi_search.sh 'type >= Prof_imply_cov'
 
 for normalization/type-aware search.
 
+## Constructed Cat-Valued Sheafification Status
+
+The direct cover-completion program now reaches the existing supplied
+fixed-site capability. `emdash3_2_direct_cover_completion_universality.lp`
+provides the whole seed-functorial recursor, higher unit beta, topology-local
+eta/uniqueness, and the resulting Hom `OmegaEquivAlong`. The subsequent
+`emdash3_2_direct_cover_sheafification.lp` realizes only
+`Sheaf_cat(K,T,Cat_cat)` as pairs `(P,IsTopologyLocalPsh(P))`; arbitrary value
+categories remain opaque.
+
+One whole inclusion forgets locality, and one whole reflector maps `P` to its
+local direct cover completion. The indexed adjunction is declared at the raw
+`Functor_cat(Op_cat(K),Cat_cat)` boundary required by the generic package,
+while a scoped proof-time comparison preserves rigid `Psh_cat(K)` as the
+computational owner. Its unit and counit compute to the HIT unit and the
+identity-seeded recursor. Recursor beta and topology-local eta derive both
+cancellation laws, giving the exact fixed-counit `OmegaEquivAlong` and a term
+of the existing `SheafificationCapability(K,T,Cat_cat)`.
+
+The facade's runtime composition projection exposes twelve additional
+`comp_fapp0`/generic-naturality warning blocks: the imported baseline is
+1,017 critical pairs plus 159 replaceable-pattern advisories, and the
+integrated module reports 1,029 plus 159. A proof-time-only stable-composition
+alternative was rejected because dependent endpoints still required the same
+category projection while adding indirection. The direct rule is retained as
+the honest inherited category operation; strict LHS audit is clean. These
+warnings remain measured diagnostic evidence, not a claim of global
+confluence.
+
+After integration of the completed TypeScript-elaborator and PSSS histories,
+the exact-current global warning boundary is 1,241 diagnostics: 1,082
+unjoinable critical pairs and 159 replaceable-pattern advisories. The strict
+LHS audit is zero unreviewed clauses, 58 annotated slots, and 34 intentional
+clauses. The generated catalog contains 2,091 classified checks across 98
+areas with zero legacy or unclassified entries.
+
+The exact-current registered health boundary is green for all 162 source and
+reviewer targets under the uniform 90-second per-target ceiling. In
+particular, central diagnostics pass in 66.584 seconds, the constructed
+sheafification source in 11.723 seconds, the supplied projective-line source
+in 30.739 seconds, and its reviewer in 31.604 seconds. The source-metrics
+snapshot is
+`sha256:4cd8c818ee88e92dc5feaa2b8a3cc52d8c0d31ddef560b6be0ba88cb79fbced3`
+and the checked-content snapshot is
+`sha256:728c7d812c1e49d08f8fa9ae51c66e3465bf13e1fd8cd98bb35389038134369c`.
+The constructed-reflector tranche is locally checkpointed at `81edde8`.
+
 ## Book And Renderer Workflow
 
 The book is a first-class exposition artifact under `book/`. Its
@@ -2485,6 +4395,15 @@ The following remain explicit future work rather than hidden assumptions:
 - a fully internalized general coend/coinserter semantics for profunctor tensor;
 - general tensor associativity/coherence and complete co-Yoneda equivalences;
 - dependent elimination and semantic collage construction for primitive join;
+- CommRing lifting and left exactness of the now-constructed fixed-site
+  Cat-valued direct-cover reflector, together with slice transport and
+  locally ringed scheme packaging; the rigid Cat-valued `Sheaf_cat` facade
+  and existing `SheafificationCapability` are already instantiated;
+- an inductive/HIT presentation of generated topology with derivation
+  induction or executable cover normal forms. The active impredicative
+  intersection already supplies proposition-valued least generated topology,
+  including the direct big-affine Zariski specialization, without truncating
+  witness-rich presentations;
 - specialized higher `fapp1*` projections of `Hom_tele_func` beyond current
   demand;
 - raw unreified-path observer computation, reverse pointwise-to-coherent-core

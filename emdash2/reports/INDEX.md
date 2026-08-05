@@ -1,10 +1,376 @@
 # EMDASH Reports Index
 
-Date: 2026-08-03
+Date: 2026-08-04
+
+`../../docs/PARALLEL_GOAL_V3_2_INTEGRATION_PLAN_2026-08-04.md` is the active
+cross-layer ledger joining the completed TypeScript-elaborator and
+presheaves/sites/schemes histories. It owns conflict decisions, exact-source
+contract requalification, regenerated evidence, and the validated local-main
+handoff; it adds no independent mathematical authority.
+
+`REPORT_EMDASH_V3_2_COMPUTATIONAL_SCHEMES_CONTINUATION_PLAN_2026-08-03.md`
+records the completed computational-schemes continuation through the PSSS tip
+`1281efe`. It
+separates Zariski sheaf locality, locally-ringed invertibility support, and
+basic-open coordinate-localization locality; selects a global-first
+finite-qcqs presentation direction whose overlaps are derived internally;
+keeps atlas-first gluing separate; corrects small/big-site equivalence to
+scoped restriction/basis comparisons; and stages semantic schemes separately
+from their computational presentations. Its CS-01 first tranche is a
+rule-free global reflective ringed-object cover substrate, not yet an affine
+atlas or scheme. That bounded tranche is locally checkpointed at `a5aebcf`.
+Its CS-04 continuation constructs the whole ambient chart-slice presheaf and
+an explicitly supplied reflective-slice presentation, checkpointed at
+`7d63a90`; induced topology and reflector transport remain separate claims.
+The subsequent CS-05a audit records that the historical slice construction
+itself assumed a slice site, an adjoint site morphism/comorphism, sheaf
+pullback, and a sheafification/glue base-change comparison. It routes the next
+whole contract through locally exact/Beck--Chevalley site squares and keeps a
+categorical-HIT reflector construction separate from induced topology and
+slice base change. Local exactness is the semantic construction criterion;
+the prospective computational interface retains whole functors and one whole
+invertible mate, never a family of external commutative-square equations.
+CS-05b then selects the smaller contract consumed by the first affine chart:
+a whole sheaf-category basis equivalence plus one direct whole computational
+`DefIso`, checkpointed at `b4fca9c`; generic glue base change remains
+separately consumer-gated. CS-06a now supplies two selected chart arrows that
+constructively generate the retained covering sieve, with whole
+ambient-to-affine realizations on those two generators. This is a global-first
+binary affine-cover presentation, not yet a locally-ringed scheme certificate;
+it is checkpointed at `0f3b379`. CS-07 now consumes a supplied presentation
+at an arbitrary sieve member, computing the selected generator, whole affine
+realization, and coordinate ring without duplicating a refinement record. A
+closed non-affine realization and locally-ringed scheme certificate remain
+separate gates; the selected-refinement consumer is checkpointed at
+`4892c33`. The subsequent CS-06b support tranche uses topology-local forcing
+instead of a raw sieve join: invertible zero forces the empty sieve to cover,
+and an invertible sum returns a selected cover with an executable Boolean unit
+branch at every member. It applies this computation to the whole ambient
+restriction on the supplied slice `K/X` and pairs it with the binary affine
+atlas as a conservative locally-ringed affine-cover presentation. Public
+`SchemePresentation` naming remains gated by an admissible-open or relative-
+geometry contract for the selected cover arrows. The
+CS-12 supplies two distinct boundaries.  Its checkpointed set-truncated
+sequential telescope for one endomap has dependent induction, derived whole
+cocone universality, and a computing shift inverse; it remains valid reusable
+one-map localization evidence at `451db48`.  A subsequent visual review of
+Pédrot's *Pursuing Shtuck* and *Debunking Sheaves* corrected the active
+sequencing: the principal-BNat ordinary-sieve bridge is frozen and unpromoted,
+while the direct constructed-sheaf route starts with a recursive whole-
+presheaf `eta/glue/silent` cover completion.  Its initial checkpoint
+`ce982e3` represented glue and silent only pointwise; the subsequent
+eliminator audit selects a whole direct-cover algebra instead.  Glue is now a
+functor between matching and section hom-categories, and silent is one whole
+endofunctor equality.  Topology-locality canonically forgets to this oracle
+through its selected left inverse, while the converse/right law remains a
+named pulled-cover comparison rather than an opaque axiom. The completion's
+glue is now one displayed functor over the internal eligible-question
+category, and silent is one path between whole displayed functors there. This
+packages the output as a syntactic Pédrot-style `DirectCoverSheaf`; literal
+cover data and the older recursor algebra are forgetful projections. The
+local-target eliminator and silent-constructor coherence are implemented.
+Whole Hom universality, functorial reflector assembly, and comparison with
+the conventional two-sided locality presentation remain required before this
+is called a sheafification reflector.
+The whole-algebra correction is locally checkpointed at `1b6a468`.
+Dialogue branching without that quotient, or with only a directed silent
+cell, is a separately named lax/effect completion.  The direct HIT constructor,
+the supplied-reflector adjunction mate `sheafification_glue`, and computational
+Cartier localization glue remain distinct construction, mate, and algebraic
+consumer layers.  The active scheme lane returns independently to an explicit
+supplied `P1` consumer as the smallest end-to-end validation of the existing
+binary/Laurent owners, followed by graded `Proj` infrastructure from which
+standard `P^n` should ultimately be derived.  These are staged validation and
+general construction, not competing public definitions; neither lane is
+blocked by BNat.
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
-the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
-derived native equality-valued hom-action/groupoidality extension, and
+the active kernel authority; `emdash3_2_presheaves.lp` is the one-way
+Cat-valued presheaf, restriction, Yoneda, slice, and higher-sieve library, and
+`emdash3_2_fibrewise_sigma.lp` is the stable dependent-Sigma composition of a
+Cat-valued family with a second family over its total category. Its fibres
+and whole first-projection components compute; explicit base-arrow beta and a
+total-category Fubini comparison remain consumer-gated.
+`emdash3_2_sieves.lp` is the downstream native subterminal-category and
+ordinary-sieve specialization without `Omega` or topology.
+`emdash3_2_sites.lp` is the direct ordinary-sieve Grothendieck-topology layer,
+with membership, maximal sieve, the three topology laws, and the chaotic
+model, but no `Omega`, generated saturation, sheafification, or descent.
+`emdash3_2_sieve_extensions.lp` uses fibrewise Sigma to extend an ordinary
+sieve to the ambient Cat-valued presheaf category and derives its whole
+inclusion into Yoneda. It defines topology-locality by the exact resulting
+whole Hom equivalence; it does not construct a reflector or identify that
+condition with the separately probed weighted-limit descent package.
+`emdash3_2_direct_cover_questions.lp` internalizes an eligible descent
+question at `U` as an ordinary sieve together with evidence that it covers.
+These data form one Path-valued family over `Op_cat(K)`; arbitrary
+higher-sieve transformations are not treated as eligibility-preserving.
+Ordinary sieves still retain their Cat-valued higher-sieve carrier. The
+selected sieve observer computes under whole base pullback, while its
+internally transported cover proof agrees propositionally with explicit
+Grothendieck-topology pullback. Its extension and inclusion reuse the
+deployed ordinary-sieve owners exactly. It does not yet construct the whole
+varying-extension/matching family, glue naturality, locality, or
+sheafification.
+`emdash3_2_direct_cover_question_families.lp` adds that whole varying layer.
+The ordinary extension and representable are functors over the opposite
+eligible-question total, their inclusion is one transformation, and
+represented hom produces internally reindexed matching and section families.
+Restriction is one displayed functor whose literal component is the existing
+ordinary-sieve precomposition owner. At a canonical question pullback, a
+stable whole extension map computes on literal retained members, while one
+whole proof-time path compares the opaque generic action with that map; the
+generic action deliberately receives no runtime fold. It declares no strict
+glue-pullback path, inverse law, locality, or sheafification.
+`emdash3_2_direct_cover_algebras.lp` is the transparent rule-free whole
+oracle layer.  At each cover its glue is a functor from matching families to
+sections and its silent law is the whole equality `glue o restriction = id`.
+It derives the oracle of a topology-local presheaf from the selected left
+inverse and left law; it does not assert the converse/right law, an
+eliminator, or sheafification.
+`emdash3_2_direct_cover_internal_sheaves.lp` lifts those observations to their
+semantic internal owner. A `DirectCoverSheafStructure(T,X)` consists of one
+displayed glue functor over the complete eligible-question category and one
+whole path `glue o restriction = id` between displayed section endofunctors.
+Literal-cover glue/silent and the deployed per-cover algebra are projections,
+not separately supplied families. `DirectCoverSheaf(T)` is the transparent
+total of a presheaf with that structure. This is the categorical analogue of
+Pédrot's algebraic `isSh`; it is deliberately not definitionally identified
+with the rigid `Sheaf_cat` facade or with `IsTopologyLocalPsh`. The missing
+opposite composite belongs to that later conventional-locality comparison,
+not to the formation of this syntactic internal sheaf package.
+`emdash3_2_direct_cover_completion_hit.lp` is the first direct
+whole-presheaf return/cover/silent categorical-HIT signature.  Its unit is a
+whole presheaf map. Recursive glue is a stable whole functor at one cover and
+one displayed functor over all internal eligible questions, so both matching-
+arrow and cover-pullback action are internal. Silent is one primitive whole
+path. These constructors transparently inhabit `DirectCoverSheafStructure`
+and package the output as a syntactic `DirectCoverSheaf`; the canonical
+direct-cover algebra and pointwise glue/silent are derived forgetful
+observations. Generic whole strict `Functord` naturality supplies canonical
+pullback substitution internally. The opposite restriction/glue law and
+conventional locality live in the subsequent comparison module. It does not
+itself claim the rigid `Sheaf_cat` facade, whole Hom universality, a functorial
+reflector, CommRing lift, or left exactness. A dialogue/lax completion remains
+separately consumer-gated.
+`emdash3_2_strict_pointwise_equivalences.lp` is the generic strict assembly
+boundary used by the conventional comparison. Given one already-whole
+ordinary or displayed transformation and pointwise fixed-forward
+`OmegaEquivAlong` evidence, it constructs whole inverse transformations with
+computing component projections and whole cancellation paths. Consumers do
+not supply naturality squares. The module does not add generic functor
+extensionality, assemble incoherent component families, or invert arbitrary
+lax transformations.
+`emdash3_2_direct_cover_completion_locality.lp` derives the conventional
+restriction equivalence for the direct completion. The retained-member
+calculation gives
+`restriction(glue(m))(p,member)=m(p,member)`; one rigid whole transformation
+projection tower internalizes those components. Strict pointwise closure then
+gives `restriction o glue = id_Matching`, which combines with the HIT's whole
+`silent : glue o restriction = id_Section` to construct
+`IsTopologyLocalPsh(DirectCoverCompletionPsh)`. This settles conventional
+covering-sieve locality; whole Hom universality is supplied by the subsequent
+universality module. The fixed-site reflector/adjunction, rigid-facade
+realization, CommRing lift, and left exactness remain downstream.
+`emdash3_2_direct_cover_completion_eliminator.lp` is the first nondependent
+recursor boundary.  It defines whole direct-cover algebra maps, including
+glue-functor preservation and higher silent-path coherence.  Its primitive
+extension has narrow runtime beta on the whole unit and pointwise recursive
+glue constructors; whole glue preservation and silent beta remain internal
+equality evidence. Topology-local targets enter through the existing
+locality-to-algebra conversion; internal direct-cover sheaf targets enter
+through their single forgetful algebra projection. Conventional locality of
+the completion is supplied by the comparison module above. It does not yet
+derive whole Hom uniqueness, a functorial reflector, or
+`SheafificationCapability`.
+`emdash3_2_direct_cover_completion_universality.lp` supplies the next
+categorical-HIT eliminator boundary. The recursor varies as one whole functor
+in its seed and computes on objects to the deployed recursor. Whole unit beta
+and topology-local eta/uniqueness are higher equality evidence; together they
+make precomposition by the HIT unit an `OmegaEquivAlong Cat_cat` between
+`Hom(Completion(P),Y)` and `Hom(P,Y)` for every topology-local target `Y`.
+The eta law is not generalized to arbitrary maps into an independently
+selected one-sided cover algebra. The module does not yet assemble the
+fixed-site reflector/adjunction, identify the opaque `Sheaf_cat` facade, lift
+to CommRing values, or prove left exactness.
+`emdash3_2_direct_cover_sheafification.lp` supplies that fixed-site
+Cat-valued assembly. It realizes the existing `Sheaf_cat(K,T,Cat_cat)` facade
+as pairs `(P,IsTopologyLocalPsh(P))`, inherits underlying presheaf Hom
+categories and category operations, and constructs the whole inclusion and
+direct-cover-completion reflector. The indexed adjunction is stated at the
+generic raw `Functor_cat(Op_cat(K),Cat_cat)` boundary while all computation
+remains at rigid `Psh_cat(K)`. Its unit and counit compute to the HIT unit and
+identity-seeded recursor; recursor beta and topology-local eta derive both
+cancellation laws and instantiate the existing fixed-counit
+`SheafificationCapability`. Other value categories, CommRing lifting, left
+exactness, slice transport, and schemes remain outside this module.
+`emdash3_2_telescope_localization_hit.lp` is the first explicit per-object
+categorical-HIT localization boundary. For an endomap `s:A->A`, it constructs
+the set-truncated sequential telescope with computing point induction,
+derives the whole equivalence between maps out and compatible cocones, and
+derives a computing shift inverse showing that the localized transition is an
+`OmegaEquivAlong Grpd_cat`. It is not yet a BNat presheaf, an ordinary-sieve
+locality theorem, a whole sheafification reflector, an arbitrary-site
+construction, or a CommRing lift.
+`emdash3_2_generated_topologies.lp` is the rule-free universal-property
+generated-topology layer immediately downstream of sites. Type-valued sieve
+generators retain presentation witnesses; generated coverhood is the
+proposition-valued intersection of all Grothendieck topologies accepting
+them. The three topology laws hold pointwise, while generator inclusion and
+leastness compute by application. This is an internal Church-style least
+topology, not an inductive derivation syntax, truncation/HIT, coverhood
+normalizer, affine specialization, sheafification, or scheme.
+`emdash3_2_ringed_sites.lp` is the rule-free supplied-reflector layer. It
+retains a rigid `Sheaf_cat(K,T,V)`, packages whole inclusion/sheafification
+functors and their generic adjunction, and requires fixed-forward
+`OmegaEquivAlong` evidence at the actual counit components. The generic
+adjunction hom-profunctor comparison derives whole internal glue/unglue and
+both cancellation laws. Its first consumer packages a reflective
+commutative-ringed site and exposes the included structure sheaf as a whole
+CommRing-valued presheaf; the qualifier records that an ordinary ringed site
+need not carry a chosen reflector.
+It constructs no canonical sheafification, double-plus, generated topology,
+descent theorem, left exactness, local-ring condition, or scheme.
+`emdash3_2_site_basis.lp` is the transparent rule-free whole sheaf-basis
+contract. Opposite precomposition restricts arbitrary value-category-valued
+presheaves; a supplied sheaf restriction is joined to that operation by one
+whole `IsoEvidence`, and comparison-lemma strength is retained as
+`OmegaEquivAlong Cat_cat`. A proof-time path and derived `IsoEvidence` compare
+generic precomposition's cut normal form with direct composition without a
+runtime fold. It stores no local-exactness proof or component
+square and constructs no topology, continuity, reflector, slice theory,
+base-change mate, or raw base-category equivalence.
+`emdash3_2_commutative_algebra_ringed_space_covers.lp` is the rule-free CS-01
+global-first cover substrate. It retains one reflective CommRinged site, one
+distinguished base object, one ordinary covering sieve there, and the cover
+evidence in the site's selected topology. Cover pullback along any arrow is
+derived directly by Grothendieck stability. A selected member exposes its
+restriction-total object, domain, arrow, and pulled-back covering sieve; it is
+called a cover chart without asserting affineness. The module stores no
+component naturality, overlap, or cocycle field and claims neither finiteness,
+locally-ringed support, a scheme, nor effective gluing.
+`emdash3_2_commutative_algebra_binary_covers.lp` is the transparent rule-free
+CS-03 binary generation layer. For every arrow of the retained covering
+sieve it keeps a Boolean-selected chart, factor map, and triangle; together
+with selected chart membership, this says that the two selected arrows
+generate that sieve. Arbitrary sieve members are refinements of those
+generators and are not themselves asserted affine. The module constructs no
+second sieve and adds no restriction, overlap, cocycle, affine,
+locally-ringed, scheme, or gluing claim.
+`emdash3_2_commutative_algebra_ringed_space_restrictions.lp` is the rule-free
+CS-04 whole ambient-slice substrate. It constructs the conventional whole
+slice-domain functor and restricts the ambient structure presheaf by ordinary
+whole functor composition. It also packages a visibly supplied reflective
+CommRinged site on the actual slice with a whole `DefIso` to that computing
+ambient restriction. It does not claim that topology or sheafification was
+induced, add a continuity/site-morphism calculus, assert affineness or local
+rings, or define a scheme.
+`emdash3_2_commutative_algebra_affine_ringed_sites.lp` is the rule-free first
+affine consumer of that supplied-reflector layer and of the internally
+generated big-affine Zariski topology. It retains one supplied reflective
+CommRing-valued sheaf theory, one sheaf object, and a whole `DefIso` from its
+included structure presheaf to the computing coordinate presheaf. Its chart
+maps are components of those whole transformations, not external object-only
+comparison data. It constructs neither sheafification nor localization
+locality, a stalk-local-ring condition, a small-site comparison, or a scheme.
+`emdash3_2_commutative_algebra_affine_locality.lp` is the rule-free
+assumption-explicit whole coordinate-locality layer. For every big-affine
+chart, coordinate section, and supplied localization package, it retains the
+generic fixed-forward `CommRingPshLocalizationLocality`; literal chart
+endpoints reduce to the retained ring and chosen localization. It neither
+constructs locality nor claims covering-sieve descent, stalk-local-ring
+structure, small-site comparison, or a scheme.
+`emdash3_2_commutative_algebra_affine_schemes.lp` is the rule-free thin
+computational affine-scheme presentation. It pairs the whole reflective
+structure-sheaf presentation with whole coordinate-localization locality;
+the ring still determines the generated big-Zariski site and selected finite
+atlases remain consumer data. It constructs neither supplied capability nor
+general non-affine gluing, small-site comparison, stalks, or a
+stalk-local-ring theorem.
+`emdash3_2_commutative_algebra_affine_basis.lp` is the transparent rule-free
+CS-05b consumer. A selected functor from the big affine slice into the actual
+ambient slice carries the whole sheaf-basis comparison, while direct whole
+presheaf restriction preserves computation and one `DefIso` joins it to the
+existing affine scheme's underlying presheaf. Generic `DefIso` composition
+then compares with affine coordinates. It does not construct those inputs,
+assert a raw category equivalence, transport generic glue, store external
+coherence, define a general scheme, or impose a stalk-local-ring condition.
+`emdash3_2_commutative_algebra_affine_cover_charts.lp` is the transparent
+rule-free whole realization of one selected chart generator. It retains the
+supplied reflective slice, coordinate ring, affine presentation, whole basis
+functor, and existing `AffineBasisRealizationAlong`, deriving the whole
+coordinate `DefIso`. Canonical dependent Sigma endpoints avoid package eta or
+new comparison authority.
+`emdash3_2_commutative_algebra_affine_cover_presentations.lp` is the
+transparent rule-free CS-06a composition layer. A
+`BinaryAffineCoverPresentation` combines two generators of the retained
+covering sieve with two whole affine realizations. It deliberately does not
+assert that every refinement in the sieve is affine, add external
+overlap/cocycle data, supply a point-free local-ring certificate, define a
+general scheme, or construct atlas-first gluing.
+`emdash3_2_commutative_algebra_affine_cover_refinements.lp` is the
+transparent rule-free CS-07 selected-generator consumer. For an arbitrary
+member of the retained covering sieve, it evaluates the presentation's
+generation function and uses the resulting Boolean side to select the affine
+generator, its whole realization, and its coordinate ring. The refinement
+itself is not asserted affine; no second Sigma package, coherence field,
+global construction, or scheme claim is introduced.
+`emdash3_2_commutative_algebra_local_ringed_sites.lp` is the transparent
+rule-free topology-local local-ring capability. It constructs the literal
+empty sieve, makes invertible zero imply its coverhood, and makes an
+invertible sum select a covering sieve with an executable Boolean unit branch
+for every member. This is computational presentation data, not a raw join of
+sieves, truncation, stalk theorem, sheafhood assertion, or scheme classifier.
+`emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp` is the
+transparent rule-free whole-object consumer. The supplied reflective slice
+owns topology, sheaf semantics, and a whole `DefIso`; local-ring computation
+runs on the computing ambient restriction. Pairing that boundary with the
+existing binary affine atlas yields
+`BinaryLocallyRingedAffineCoverPresentation`, the fibrewise certificate for a
+site-relative computational scheme presentation. It adds no independent open
+label, overlap/cocycle payload, gluing constructor, or semantic scheme
+category.
+`emdash3_2_commutative_algebra_site_relative_schemes.lp` is the transparent
+rule-free dependent total of one global reflective CommRinged cover and that
+locally-ringed binary affine-cover certificate. It exposes the existing whole
+structure presheaf, local capability, selected cover, charts, and affine
+realizations without duplicating restriction or compatibility data. The site
+determines admissible chart geometry; classical Zariski/Zeuner comparison,
+atlas-first construction, and a representation-independent `Scheme_cat`
+remain separate.
+`emdash3_2_finite_limits.lp` presents a selected binary product through the
+existing whole weighted-limit owner. Its universal cone and projections are
+derived internally, and it claims neither global products nor a primitive
+categorical pullback operation.
+`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp` applies that selected
+product in the conventional slice of a supplied binary site-relative scheme.
+The existing whole slice-domain and structure-presheaf actions derive the
+actual overlap domain, both base arrows, its structure ring, and both
+restriction homomorphisms without adding overlap or cocycle fields.
+`emdash3_2_commutative_algebra_laurent.lp` is the transparent rule-free
+universal-property Laurent layer. Polynomial universality constructs the map
+sending `t` to `u^{-1}`, localization universality extends it to
+`A[t,1/t] -> A[u,1/u]`, and reversed inputs give the opposite map. Its literal
+common-overlap presentation retains whole identity paths for those two
+internally constructed transitions; it supplies no polynomial syntax,
+fraction normalizer, runtime fold, projective object, or scheme.
+`emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp` is the thin
+dependent adapter from that generic construction to the actual chart rings,
+overlap ring, and restriction maps already derived from a supplied global
+scheme. It introduces no disconnected overlap isomorphism, componentwise
+restriction square, general transition field, atlas-first gluing, or claim of
+a closed projective line.
+`emdash3_2_commutative_algebra_projective_line.lp` is the transparent
+rule-free supplied projective-line presentation total. It retains one already
+global binary site-relative scheme, its actual selected chart intersection,
+and the existing Laurent-coordinate package on the inherited restriction
+maps. It is an assumption-explicit end-to-end computational capability, not a
+construction of `Proj`, an atlas-first gluing theorem, a non-affineness proof,
+or a second overlap/cocycle interface.
+`emdash3_2_eq1_hom_action.lp` is the kernel's one-way
+derived native equality-valued hom-action/groupoidality extension. It also
+exposes the existing transparent Cat-level consequence that the selected left
+inverse of `OmegaEquivAlong` satisfies the right whole-functor law. The
 `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
 evidence-property and finite-`NCat` object-truncation extension.
 `emdash3_2_nat_arithmetic.lp` owns reusable Nat addition, associativity, and
@@ -12,6 +378,398 @@ sethood, together with the canonical `NatSucc_func`, independently of the
 walking construction. The isolated Sum former/action experiment was retired
 on 2026-07-20 pending a future consumer-led redesign; there is no active Sum
 module or compatibility facade.
+`emdash3_2_finite_families.lp` owns the rule-free Nat-indexed,
+right-associated constant-family Sigma used by finite algebraic consumers,
+with constructors, projections, mapping, dependent pointwise evidence, and
+dependent evidence over independently selected evidence families, together
+with its generic pointwise map and sethood but no `Fin`, lookup, append, list
+facade, or general inductive declaration mechanism.
+`emdash3_2_commutative_algebra.lp` is the downstream rule-free set-carrier
+commutative-ring object layer: it separates operation data from law evidence,
+retains carrier sethood, and supplies the one-element zero ring.
+`emdash3_2_commutative_algebra_category.lp` is its downstream structured-map
+layer: it proves morphism laws proposition-valued and morphisms set-valued,
+proves consumer-justified pointwise extensionality, then exposes
+`CommRing_cat`. Localization and empty-variable polynomial consumers select
+rigid pointwise composition and identity comparisons; the whole-sieve consumer
+selects the full-action carrier functor and Path-valued carrier family without
+a direct capped-action beta. Generic whole arrows remain runtime owners.
+`emdash3_2_commutative_algebra_product.lp` is the rule-free componentwise
+product layer. It constructs the set-carrier ring `R x S`, applies structured
+maps componentwise, and proves whole identity and composition paths. A
+primitive binary product-functor facade remains consumer-gated.
+`emdash3_2_commutative_algebra_f2.lp` is the closed Boolean-carrier
+two-element commutative ring. XOR addition, conjunction multiplication,
+sethood, and all ring laws are constructed internally by finite elimination.
+`emdash3_2_commutative_algebra_finite.lp` is the rule-free finite algebraic
+cover-presentation layer: it supplies finite sums and dot products,
+coefficient-bearing unimodularity data, algebraic Zariski cover
+presentations, structured-map base change, and singleton/binary constructors.
+It does not yet define basic opens, localization families, covering sieves,
+topology generation, powers/radicals, fractions, or polynomials.
+`emdash3_2_commutative_algebra_polynomial.lp` is the rule-free free-algebra
+interface: a polynomial algebra over `R` on variables `X` has contractible
+structured extensions of every base map and valuation. It selects no
+monomial/coefficient/quotient syntax or concrete positive-variable
+representation; the reviewer proves the generic equation `R[Empty]=R`.
+`emdash3_2_commutative_algebra_localization.lp` is the next rule-free layer:
+it proves explicit unit evidence proposition-valued, owns its path transport
+and preservation by structured maps, and packages localization at one element
+by contractible pointwise factorization, without selecting fractions, finite
+families, polynomials, or a Zariski presentation.
+`emdash3_2_commutative_algebra_localization_unit.lp` is the rule-free
+PSSS-08c0F parametric identity-localization layer. For an already-unit element
+`f` of any ring `R`, it proves that the pointwise identity `R -> R` has the
+full localization universal property by constructing the factorization space
+and proving it contractible. It supplies canonical unit evidence for one and
+a selected computing localization `R[1/1] = R`, without fractions, topology,
+`Spec`, or schemes.
+`emdash3_2_commutative_algebra_localization_zero.lp` is the following
+rule-free PSSS-08c0F empty-basic-open layer. It derives multiplication and
+negation at zero from the retained ring laws, constructs structured maps to
+the zero ring and back from any ring with `0=1`, and proves that the zero ring
+has the full universal property of `R[1/0]`. It is a degenerate but genuinely
+computing non-identity-shaped localization, not the still-required
+nondegenerate localization or affine-overlap model.
+`emdash3_2_commutative_algebra_localization_idempotent.lp` is the rule-free
+PSSS-08c0G fixed-image layer. For `e^2=e`, it constructs the set-valued ring
+`eR={x:R | e*x=x}` with unit `e`, the computing scaling map `x |-> e*x`, and
+the full contractible-factorization proof that this map localizes `R` at
+`e`. Its selected factor applies the original map to the retained underlying
+element. The construction is quotient-free and can be nondegenerate for a
+nontrivial idempotent; its downstream closed instance is provided by the
+split-localization module.
+`emdash3_2_commutative_algebra_localization_split.lp` is the rule-free
+PSSS-08c0H consumer. In every product it selects `e=(1,0)`, its fixed-image
+localization, and the corresponding affine-basic-open arrow. In `F2 x F2` it
+constructively proves `e` differs from both zero and one, while restriction on
+carrier points computes as `(x,y) |-> (x,0)`. This closes the concrete
+nondegenerate-model gate, not the whole matching/descent, topology, `Spec`, or
+scheme gates.
+`emdash3_2_commutative_algebra_localization_comparison.lp` is the following
+rule-free overlap layer: it packages localization first at `f` and then at the
+image of `g`, and constructs canonical forward/reverse factors against
+localization at `f*g`, without equality of chosen packages or comparison
+inverse laws.
+`emdash3_2_commutative_algebra_localization_overlap.lp` is the rule-free
+PSSS-08c0F whole-overlap layer. Contractible factorization proves
+`reverse*forward=id` at the product localization; two successive uniqueness
+arguments through the first and second localization stages prove
+`forward*reverse=id` at the iterated target. It packages the canonical
+forward map as `OmegaEquivAlong CommRing_cat` and derives the first-class
+`OmegaEquiv` facade, without fractions, package equality, presheaves,
+topology, `Spec`, or schemes.
+`emdash3_2_commutative_algebra_presheaves.lp` is the PSSS-08a/08b layer: it
+transparently presents functors from `K^op` to `CommRing_cat`, exposes
+structured restriction and carrier application, supplies explicit pointwise
+identity/composition paths, and proves the unit-support predicate along an
+arrow proposition-valued and closed under further restriction. It then
+assembles the support as a Path-valued higher sieve and an ordinary sieve with
+literal-arrow membership computation. One shaped proof-time comparison joins
+the two rigid represented-family variance presentations; it claims no
+topology, sheafhood, or ringed site.
+`emdash3_2_commutative_algebra_locality.lp` is the PSSS-08c0/08c0C bridge from
+that semantic support to topology and localization. It names coverhood of
+`D(s)` in a supplied topology and, for each literal member `f:V->U`, uses a
+chosen localization of `O(U)` at `s` to select the universal structured factor
+into `O(V)` with its pointwise triangle. It then forms the category of support
+elements and packages all factors as one internal ordinary transformation
+from the constant localization ring to the induced CommRing-valued diagram.
+Its single component rule computes at `(V,f,m)` to the selected factor; generic
+`tapp1` owns naturality. Contractible-factor uniqueness separately proves the
+objectwise restriction equation as a construction audit. The zero-ring
+reviewer checks that the literal cone component reduces to the actual
+constant-presheaf restriction. The limiting/descent comparison, sheafhood,
+ringed sites, generated topology, `Spec`, and schemes remain separate gates.
+`emdash3_2_commutative_algebra_matching.lp` is the PSSS-08c0D executable
+matching-family layer. It pulls the Path-valued ring-carrier family back over
+the complete category of elements of `D(s)`, forms its Pi category of coherent
+sections, and sends every element of a chosen localization to the section
+whose literal `(V,f,m)` component is application of the selected universal
+factor. The component uses the full fibre-covariance owner so carrier
+application computes; PathLift supplies equality-path action and the Pi/Catd
+owners retain coherence internally. The module supplies only this restriction
+direction, not a glue/inverse, descent equivalence, sheaf, limiting claim,
+generated topology, `Spec`, or scheme.
+`emdash3_2_commutative_algebra_glue.lp` began as the rule-free PSSS-08c0E
+selected Cartier-locality layer checkpointed at `eb0c5b6`. It retains glue as
+a genuine functor and the two point/component observations used by earlier
+consumers. PSSS-11b strengthens the same owner with
+`CommRingPshLocalizationLocality`: the existing restriction functor is fixed
+as the forward map of `OmegaEquivAlong Cat_cat`, its selected left inverse is
+one whole glue functor, and both whole composite-functor paths are retained.
+Evaluating those paths derives the earlier package; matching-arrow action
+stays with the generic functor owner. `D(s)` need not cover, so this remains
+Cartier/Zeuner localization locality rather than ordinary covering-sieve
+descent or stalk-local-ring structure. Generated topology, `Spec`, and schemes
+remain downstream.
+`emdash3_2_commutative_algebra_affine_glue.lp` is the PSSS-08c0I derived
+affine consumer. For the identity CommRing-valued presheaf on
+`Op_cat CommRing_cat`, it evaluates matching sections at the chosen
+localization-map support centre, derives the left law from contractible factor
+uniqueness, and derives literal and arbitrary-element Cartier component
+recovery from internal Pi-section action along universal-factor arrows. The
+module is rule-free; its one prerequisite adjustment is a normalized
+proof-time companion of the existing Yoneda represented-family comparison.
+The closed split-idempotent localization inhabits the complete selected-glue
+package. Focused and maintained aggregates, exact warning comparison, strict
+audit, the fresh 1,975-check catalog, and synchronized 88-target health are
+green; full integration CI independently passes all 88 targets, and the
+implementation is locally checkpointed at `4ed74b0`. Equality of whole
+functors, `OmegaEquivAlong Cat_cat`, covering-sieve descent, sheafhood, `Spec`,
+and schemes remain open gates.
+`emdash3_2_commutative_algebra_affine_spec.lp` is the rule-free PSSS-10a
+scheme-facing computational slice. It presents the conventional big affine
+slice over `Spec(R)` as the opposite of the existing restriction-oriented
+R-algebra total, equips it with the Sigma-projection coordinate presheaf, and
+lifts the product/iterated-localization comparison maps to internal chart
+arrows in both geometric directions. Coordinate restriction computes to the
+same whole structured maps and reuses their existing `OmegaEquiv
+CommRing_cat`; no new naturality field, rewrite rule, functor equality, or
+univalence principle is introduced. The facade is explicitly not yet a
+selected small Zariski site, a sheaf, a locally ringed space, or a complete
+scheme.
+Its focused and central checks, exact inherited-warning audit, strict rule
+audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative
+integration remainder are green; the implementation and authority prose are
+locally checkpointed at `837cfeb`.
+`emdash3_2_commutative_algebra_affine_zariski.lp` is the rule-free
+PSSS-10dG direct big-site topology. For every literal chart `R -> S`, a
+selected localization becomes a whole arrow in
+`AffineSpecBigSlice_cat(R)`; its exact opposite-precomposition structure
+map makes the slice triangle reflexive, and coordinate restriction computes
+to the selected whole localization map. One outer `sigma_ind` exposes an
+arbitrary retained chart, and selected finite-family containment supplies the
+witness-rich generator family. The generic intersection owner then gives the
+least lawful topology accepting those generators, with explicit selected-
+cover inclusion and leastness. The module adds no Sigma eta, external
+naturality/triangle field, topology rule, localization choice,
+sheafification, small-site identification, or scheme. Its focused
+source/reviewer checks, exact inherited-warning comparison, strict audit, and
+tooling/catalog registration are green. Exact health passes all 102 targets;
+the new source/reviewer pass from source in 24.042/23.915 seconds at
+check-content snapshot
+`sha256:01c61b02268c84c0c334b3fa3f0012c26f68ce52def9959e44a940a1bc7b300c`.
+Two unchanged near-timeout aggregates passed same-limit source retries; no
+object priming was used. The synchronized implementation is included in local
+checkpoint `a30f6dc`.
+`emdash3_2_commutative_algebra_affine_ringed_sites.lp` is the rule-free
+PSSS-11a structure-sheaf presentation. It combines the exact generated
+big-affine Zariski topology with a supplied reflective CommRing-valued sheaf
+theory, one sheaf object, and a whole `DefIso` from the included structure
+presheaf to `affine_spec_coordinate_psh(R)`. The latter retains the existing
+computing chart restrictions; readable forward and inverse chart maps merely
+project the whole transformations through `tapp0_fapp0`. The 230-line source
+has nine symbols and no rules or unifiers, while the 166-line reviewer has
+nine assertions covering package beta, exact topology, whole cancellation,
+and literal-chart endpoints. Focused quiet and warning-enabled checks are
+green with exactly the inherited `1179 = 1020 + 159` warnings and no
+changed-file location. Exact-content health passes all 104 registered targets
+in 1187.079 summed check-seconds at source-metrics snapshot
+`sha256:c0ba7fc45f04780f9bb149d1a1dc6bf5dd50196c6f949423417ce0066e62d10b`
+and check-content snapshot
+`sha256:e9d102a79c9d824f40cb0bc6e9f829d3adeaf521becdde1fa3e830ea8b04f02d`;
+the final inherited affine-glue reviewer passed in 39.504 seconds without
+object priming or special flags. The synchronized implementation is included
+in local checkpoint `5ead41c`. The module does not construct sheafification,
+prove localization locality or a stalk-local-ring condition, compare with the
+small site, or package a scheme.
+`emdash3_2_commutative_algebra_affine_locality.lp` is the PSSS-11b affine
+specialization of whole computational localization locality. Its transparent
+dependent product ranges over every object of `AffineSpecBigSlice_cat(R)`,
+every section of `affine_spec_coordinate_psh(R)` there, and every supplied
+universal-property localization. The projected value is the generic
+fixed-forward `OmegaEquivAlong Cat_cat`, and literal chart endpoints reduce to
+`S` and `S[1/s]`. A compatibility projection derives the older glue package;
+no second glue operation, external naturality field, rule, or unifier is
+introduced. The capability is supplied rather than constructed and does not
+assert ordinary covering-sieve descent, a stalk-local-ring theorem, small-site
+comparison, or a scheme.
+Focused quiet and exact-warning checks are green with the inherited
+`1179 = 1020 + 159` inventory and no changed-file warning; the strict audit
+and 1,992-check/90-area catalog are synchronized. Exact-content health passes
+all 106 registered targets in 1059.644 summed check-seconds at source-metrics
+snapshot
+`sha256:5eed2e7250fc1b3aad8dcc4a66a150b7e69ef0ae069d06d000eab3309a23e8e3`
+and check-content snapshot
+`sha256:77f8c28fe6639ebb548093f63827f63afe64a1f982d2d10754b9f751ca5c20f2`.
+The new source/reviewer pass in 7.831/31.558 seconds and the final inherited
+affine-glue source/reviewer in 38.838/48.300 seconds under the ordinary
+60-second bound, without object priming or special flags. The proportional
+nonduplicative integration remainder is green through 42 Python tests, five
+document-registry tests, health-snapshot verification, source/report lints,
+strict audit/catalog, and book evidence/typography/KaTeX/assembly checks. The
+synchronized implementation is included in local checkpoint `8216f28`.
+`emdash3_2_commutative_algebra_affine_schemes.lp` is the PSSS-11c thin
+assumption-explicit affine-scheme package. Its transparent Sigma retains only
+`AffineStructureSheafPresentation(R)` and
+`AffineCoordinateLocalizationLocality(R)`; ergonomic projections route to the
+existing reflective ringed site, whole coordinate `DefIso`, and selected
+whole locality. The reviewer instantiates the base ring at `F2 x F2`, keeps
+the two substantive capabilities visibly supplied, and computes the exact
+generated topology, complementary-idempotent two-chart cover, selected chart
+rings and restrictions, and zero overlap from existing owners. No site,
+presheaf, cover, localization, action, or overlap field is duplicated. This
+is a computational affine MVP, not constructed sheafification/locality,
+general non-affine gluing, small-site comparison, or a stalk-local-ring
+theorem. The synchronized implementation, concrete reviewer, exact 108-target
+health evidence, and living historical/feasibility retrospective are included
+in local checkpoint `68578be`.
+`emdash3_2_commutative_algebra_affine_atlas.lp` is the rule-free PSSS-10b
+concrete atlas consumer. In every product ring it uses the already-selected
+finite Zariski-cover package for `(1,0)` and `(0,1)`, derives their
+orthogonality, selects the existing zero localization for the overlap, and
+constructs actual internal arrows from that overlap into both affine charts.
+The coordinate presheaf restricts along those arrows by whole structured maps
+to the zero ring; the closed `F2 x F2` instance therefore supplies a
+non-endpoint two-chart atlas with computationally empty overlap. This is an
+atlas/glue presentation, not a universal gluing theorem, sheafhood, a locally
+ringed space, or a general scheme record. An attempted specialized recursive
+chart-family facade exceeded the bounded elaboration budget, so the existing
+`CommRingZariskiCoverFamily` remains authoritative and concrete chart
+observations are exposed directly.
+Its source/reviewer/central checks, exact inherited-warning comparison, strict
+1,987-check catalog, synchronized 92-target health, and nonduplicative
+integration remainder are green; the implementation and synchronized
+authority prose are locally checkpointed at `db91ddf`.
+`emdash3_2_commutative_algebra_affine_points.lp` is the rule-free PSSS-10c
+functor-of-points/basic-open bridge. It presents `Spec(R)` by the existing
+Yoneda presheaf on `Op_cat CommRing_cat`, identifies the semantic basic-open
+fibre at a test ring `S` with maps `h:R->S` for which `h(f)` is a unit, and
+uses the universal property of a selected localization to construct a
+`TypeEquiv(CommRingHom(R[1/f],S),D(f)(S))`. Both inverse laws are derived from
+contractible factorization, whole structured-map extensionality, and
+proposition-valued unit evidence. The Yoneda and sieve sides already carry
+their object and arrow action internally; no external naturality family,
+whole-presheaf equality, univalence principle, topology, sheafhood, or general
+scheme is asserted. The promoted source, shared identity-presheaf owner, and
+reviewer are focused-green. Warning-enabled changed targets inherit exactly
+`1179 = 1020 + 159` warnings with no changed-file location, the strict audit
+has zero unreviewed clauses, and the unchanged strict catalog has 1,987 checks
+across 89 areas. Synchronized health passes all 94 registered targets in
+793.592 summed check-seconds at source snapshot
+`sha256:8d3a5bf7c64f453b11276bbef473c0f88ae7a32faea271d153e8a83ba4171530`;
+the nonduplicative CI remainder is also green. The authorized local
+implementation checkpoint is `154069d`.
+`emdash3_2_commutative_algebra_affine_intersections.lp` is the rule-free
+PSSS-10c1 bridge from represented basic-open points to computational affine
+overlaps.  It proves at each test ring that `D(f*g)` is equivalent to the
+explicit intersection of `D(f)` and `D(g)` by structured-map multiplication,
+product-unit operations, proposition-valued evidence, and the existing
+same-base Sigma equivalence.  A selected localization at `f*g` represents the
+intersection through a transparent two-`TypeEquiv` chain with executable
+forward/inverse maps and both laws.  This selected representation avoids a
+measured whole-package normalization timeout at the public sieve-membership
+alias; it adds no rigid facade, rule, unifier, external naturality, whole-
+presheaf equality, univalence, topology, or sheafification.  Its focused
+source/reviewer checks, exact inherited-warning comparison, and strict rule
+audit are green. The strict catalog remains at 1,987 checks across 89 areas;
+synchronized health passes all 96 registered targets in 788.439 summed
+check-seconds at source snapshot
+`sha256:8491ed696767a463bb3f3aebe6ea0adfab402432bd04aae0c0efc23d00e1974e`,
+and the nonduplicative integration remainder is green. The tranche is
+included in local checkpoint `4436a23`.
+The living plan distinguishes construction of sheafification from the
+MVP-feasible PSSS-05c supplied reflector capability. The promoted candidate
+does not stop at a bare adjunction: it requires that every actual counit
+component is an internal equivalence, which captures the valid fixed-sheaf
+content of the historical primitive `mod_smod`. Its CommRinged-site consumer
+closes the earlier promotion gate, while concrete affine
+restriction/localization/glue computation remains a separate requirement.
+Focused source/reviewer checks, the exact inherited warning inventory, strict
+rule audit/catalog checks, and synchronized exact-content health are green.
+The health report covers all 98 registered targets at
+`sha256:4065c00eddb9e3a9de8c0e8fede09e1fb2b88c8a2bb7b7f8c1aaafa18e975742`;
+97 exact exit-zero results were resumed and the final unchanged affine-glue
+reviewer was checked from source against freshly typechecked, current-source
+Lambdapi objects. No timeout, assertion, rule, or semantic interface was
+weakened. The nonduplicative report/tooling gates are also green, and the
+synchronized tranche is included in authorized local checkpoint `647b6cc`.
+The next scheme-facing layer should relate the included structure sheaf to
+the existing computing affine coordinate presheaf by a whole `DefIso`; no
+double-plus/generated-topology construction or PSSS-05b descent
+characterization is required merely to consume the supplied capability. An
+affine MVP nevertheless needs an intended Zariski topology and selected-cover
+compatibility; the chaotic model is not substituted for it. The initial
+fallback allowed that topology to be supplied. A primitive
+`generated_topology` is another viable assumption-explicit route
+provided its public capability includes generator inclusion and leastness;
+without those laws it is only an arbitrarily supplied topology under a new
+name. The primitive may be indexed directly by witness-rich cover
+presentations: inclusion maps every retained presentation witness into the
+topology's proposition-valued coverhood, and leastness compares against every
+topology accepting all those witnesses. This does not identify presentations
+or require truncation merely to state the capability. The promoted rule-free
+`emdash3_2_generated_topologies.lp` now constructs that capability internally:
+generated coverhood is coverhood in every topology accepting the generators,
+the intersection is proposition-valued, all topology laws hold pointwise, and
+inclusion/leastness compute by application. Its nine-assertion reviewer checks
+both computation laws. Focused checks and the exact inherited `1020 + 159`
+warning footprint are green, with no changed-file warning. Synchronized
+health passes all 100 exact-content targets at
+`sha256:70228c029d8c2844ae9d1259cfd056ba855481f39c53c66f074d408b5e33b25d`;
+the synchronized generic tranche is included in local checkpoint `d826526`.
+A HIT remains conditional on a consumer needing induction over generation
+steps or executable cover normal forms.
+The affine specialization is now promoted as the rule-free
+`emdash3_2_commutative_algebra_affine_zariski.lp`. It constructs every
+literal localization chart arrow internally, eliminates an arbitrary slice
+package once with `sigma_ind`, retains selected finite-family containment as
+witness-rich generators, and derives a least lawful topology directly on
+`AffineSpecBigSlice_cat(R)`. The exact existing
+opposite-precomposition endpoint is the localized chart structure map, making
+the triangle reflexive; generic coordinate-presheaf projection still computes
+to the supplied whole localization map. This avoids exposing a protected
+helper, duplicating its extensionality proof, or adding an external triangle
+field. The 178-line source has seven symbols and no rules or unifiers; its
+120-line reviewer has nine assertions. Focused quiet checks, exact inherited
+`1020 + 159` warning comparisons with no changed-file warning, strict audit,
+and catalog/tooling registration are green. Synchronized health passes all
+102 exact-content targets at
+`sha256:01c61b02268c84c0c334b3fa3f0012c26f68ce52def9959e44a940a1bc7b300c`;
+the new source/reviewer pass from source in 24.042/23.915 seconds. Two
+unchanged near-timeout aggregates passed same-limit source retries, and no
+object priming was used. The synchronized implementation is included in local
+checkpoint `a30f6dc`.
+The first affine target remains explicitly the big affine site over `R`, not
+the small site of open subsets: the internally generated big-Zariski topology,
+reflective structure sheaf, whole comparison with the computing coordinate
+presheaf, and localization-locality data can form the computational MVP,
+while a small-site comparison remains separate.
+The historical Cartier file is experimental requirements evidence rather
+than semantic authority. Before this selected glue may determine the affine
+architecture, PSSS-08c0F requires an independent matching-versus-section
+audit, a native `OmegaEquivAlong Cat_cat`/internal-comparison audit, and a
+concrete nontrivial localization model. The fixed-image construction now
+supplies a computing parametric representation for every idempotent, and the
+split-localization module supplies its closed nontrivial `F2 x F2` instance.
+The whole algebraic iterated-localization overlap equivalence is now
+implemented downstream of
+the comparison layer, but its connection to matching/sheaf descent and an
+internal affine matching consumer remains open; that evidence may retain,
+strengthen, derive, or replace the present glue interface.
+`emdash3_2_commutative_algebra_zariski.lp` is the rule-free PSSS-09a/09b1
+layer:
+it combines an algebraic unimodular presentation with a dependent family of
+selected universal-property localization packages, exposes each chosen
+localization as an affine restriction-total arrow, and derives elementwise
+base-change factors, triangles, Sigma arrows, and actual pulled-back
+ordinary-sieve membership. It now also retains one literal membership term per
+selected generator/localization, maps the algebraic cover while accepting the
+target localization family explicitly, and exercises a closed singleton
+assembly through the generic finite recursion. It makes no global
+localization choice, rigid membership facade, propositional coverage,
+generated topology, subcanonicity, `Spec`, or scheme. The fully expanded
+specialized projection/recursive convenience wrapper remains a measured
+elaboration-performance gate, not a reason for a new runtime rule.
+`emdash3_2_commutative_algebra_zariski_topology.lp` is the rule-free
+PSSS-09cZ1 supplied-topology boundary. It packages an already lawful topology
+on `Op_cat CommRing_cat` with the proposition-valued property that every sieve
+containing each basic-open arrow of a selected finite Zariski presentation
+covers. Presentation, localization, and membership terms stay explicit; the
+module neither constructs a least/generated topology nor adds truncation,
+sheafification, subcanonicity, `Spec`, or schemes. Its chaotic instance is a
+nonempty feasibility model, not the intended exact Zariski topology.
 The former D0/D1/decoder compatibility module and its seven self-only reviewer
 examples are retired. Unsuffixed omega-equivalence names now denote only the
 native equality-valued API; no compatibility aliases remain.
@@ -290,6 +1048,202 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`:
+  active living Lambdapi-first standard-library architecture for Cat-valued
+  presheaves, ordinary versus higher sieves, coverage/topology/modality
+  separation, descent/sheaves, commutative algebra and localization, ringed
+  sites, affine charts, schemes, and the later functor-of-points comparison.
+  Its completed `PSSS-00` review includes a bounded green type probe showing
+  that a rigid `Psh_cat` facade, opposite reindexing, contravariant Yoneda,
+  Sigma-built slices, the higher-sieve classifier, and maximal higher sieves
+  compose from existing v3.2 owners without a kernel edit. The authorized
+  `PSSS-01` implementation now has its one-way presheaf module, central
+  diagnostics, and reviewer example green through full integration CI. Its
+  catalog has 1,736 checks across 64 areas and health covers 43 targets.
+  `PSSS-01` is included in the authorized local foundation checkpoint.
+  `PSSS-02` now transparently promotes Yoneda, the
+  restriction-oriented arrow total, the conventional slice, and the
+  Cat-valued higher-sieve classifier and is green through full integration
+  CI. Its synchronized catalog has 1,749 checks across 65 areas and health
+  covers all 44 targets. It keeps the stable
+  Catd intermediary instead of adding a direct comparison unifier. The measured generic
+  Psh-pullback point-component observation remains consumer-gated.
+  `PSSS-03a` now has a focused-green one-way sieve module and reviewer example:
+  native subterminal categories combine proposition-valued objects with exact
+  groupoidality, ordinary sieves retain higher-sieve functoriality plus
+  proposition-valued pointwise evidence, and pullback reuses the classifier
+  action. Its catalog has 1,758 checks across 66 areas, health passes all 46
+  source/example targets, and full integration CI passes. The name `Omega`
+  remains unbound pending sieve setness and owner-aligned contravariant family
+  assembly. `PSSS-04a` is green with a separate rule-free sites
+  module, central diagnostics, and reviewer example: it packages direct
+  proposition-valued sieve coverages with maximality, pullback stability, and
+  local character, and validates the generic chaotic topology plus its
+  `Terminal_cat` instance. Its synchronized catalog has 1,770 checks across
+  67 areas, health passes all 48 source/example targets in 197.788 seconds at
+  source snapshot
+  `9681de378d85eaca33fe79d6ebf13682e3c26f0488a54cc9bc49b1c1281c09c9`,
+  and full integration CI passes all 48 targets in 190.427 seconds followed
+  by the complete repository-level test/lint/book/audit/catalog suite and is
+  included in the same local checkpoint. `PSSS-05a` now has a warning-neutral
+  anchored-descent
+  research probe. It constructs the canonical cone directly as a profunctor
+  cell whose literal `(V,f,r)` component is `P[f]`, curries that cell through
+  existing co-Yoneda/implication owners, and pairs each selected weighted
+  comparison with equality between its identity restriction and that
+  canonical matching map. A terminal-site/maximal-sieve consumer exercises a
+  real cover, sieve element, constructor, projections, and identity-functor
+  component; its comparison and agreement remain explicitly assumed because
+  the active opaque implication calculus has no terminal-diagram
+  weighted-limit theorem. A later warning-neutral rigid-adapter trial was
+  rejected before checkpointing because it made a semantic alias rigid solely
+  to capture an order-sensitive proof-time comparison and then encoded the
+  missing agreement as a rewrite. Source promotion is therefore still gated
+  on terminal-map uniqueness/contractibility or another derived nonempty
+  semantic consumer. Independent `PSSS-06a` now has a
+  rule-free set-carrier commutative-ring source, 15 central diagnostics, and a
+  16-check reviewer green. The catalog has 1,785 checks across 68 areas with
+  zero unclassified entries; health passes all 50 source/example targets in
+  289.311 seconds at source snapshot
+  `32360746ed53dcfb3c2d82bdd1db811151449897b68092217e242a40b2b7217f`.
+  The warning inventory remains `1179 = 1020 + 159`, and the new module's
+  strict audit is empty. Full integration CI passes all 50 Lambdapi targets in
+  255.698 seconds followed by the complete repository-level
+  test/lint/book/audit/catalog suite. PSSS-06a is green and included in the
+  authorized local foundation checkpoint. `PSSS-06b` now adds
+  a separate 394-line structured-morphism/category module with 29
+  declarations and exactly two category projection rules, plus a 134-line,
+  18-check reviewer. The five preservation fields are proposition-valued,
+  `CommRingHom` is set-valued, and `CommRing_cat` is checked as a `OneCat`.
+  Explicit constructor projection/application computes; whole generic
+  identity/composition remains opaque to that projection, and the negative
+  boundary is checked. The inherited warning inventory and full LHS audit are
+  unchanged. Catalog now has 1,796 checks across 69 areas, and health passes
+  all 52 targets in 281.632 seconds at source snapshot
+  `81a135d9add2e80359523e36507998daf854b65cdae37c29dfa2a9728c548bec`.
+  Full integration CI passes all 52 Lambdapi targets in 241.466 seconds and
+  the complete repository-level test/lint/book/audit/catalog tail. PSSS-06b
+  is green and included in the authorized local foundation checkpoint.
+  `PSSS-07a` now adds consumer-justified pointwise `CommRingHom`
+  extensionality to that upstream module and a separate 626-line, 31-symbol,
+  rule-free localization module. Explicit unit evidence is proved
+  proposition-valued; localization factors retain pointwise triangles; and a
+  chosen localization requires their classifier to be contractible for every
+  map that inverts the selected element. The 324-line reviewer gives the
+  genuine zero-ring localization model, with 14 positive and one negative
+  check. Focused source/reviewer/central checks, the inherited
+  `1179 = 1020 + 159` warning inventory, and zero-clause strict module audit
+  are green. The catalog now has 1,808 checks across 70 areas with zero
+  unclassified entries; health passes all 54 targets in 260.697 seconds at
+  source snapshot
+  `7344886d649c97bd34312ee60a11632a9502149c860d6093d4a855a9471ed880`.
+  Full integration CI passes all 54 Lambdapi targets in 245.809 seconds and
+  the complete repository-level test/lint/book/audit/catalog tail. PSSS-07a
+  is green and included in the authorized local foundation checkpoint.
+  `PSSS-07b` now adds one consumer-justified stable pointwise structured-map
+  composite to the category module and a separate 1,201-line, 38-symbol,
+  rule-free iterated/product-localization comparison module. Unit transport,
+  preservation, multiplication, and factor extraction build a two-stage
+  localization map which inverts `f*g`; universal properties then construct
+  canonical forward and staged reverse factors with pointwise triangles. The
+  197-line reviewer has 16 positive checks and one negative generic-composite
+  application boundary. Focused source/reviewer/central checks, the inherited
+  `1179 = 1020 + 159` warning inventory, zero-candidate strict audits,
+  maintained `make check`, and the complete reviewer suite are green. The
+  catalog has `1820 = 1626 + 194` checks across 71 areas with zero legacy or
+  unclassified entries; health passes all 56 targets in 342.143 seconds at
+  source snapshot
+  `ca42854edb4bdbfb75fb2c1efde198708a9fb5099b3e1f70627777a1518004c1`,
+  and the active authority texts are synchronized. Full integration CI passes
+  all 56 Lambdapi targets in 331.672 seconds, followed by 39 Python tests,
+  5 document-registry tests, and the complete lint/book/audit/catalog tail.
+  The tranche is included in the authorized local foundation checkpoint.
+  `PSSS-07c` now adds a 107-line, 9-symbol generic finite-family module and a
+  separate 735-line, 21-symbol finite commutative-algebra module, both
+  rule-free. Nat-indexed right-associated constant-family Sigma supplies
+  finite mapping and sethood without reviving the retired Sum experiment or
+  introducing `Fin`, lookup, append, lists, or a general inductive macro.
+  Retained coefficient data witnesses finite dot product equal to one;
+  algebraic Zariski cover presentations carry that data and admit
+  structured-map base change, a canonical singleton presentation at `1`, and
+  a binary constructor from `a*f + b*g = 1`. The 201-line reviewer and
+  central diagnostics each have 20 positive and two negative checks. Focused
+  source/reviewer/central checks, the inherited `1179 = 1020 + 159` warning
+  inventory, zero-clause strict audits, maintained `make check`, and the full
+  example suite are green. The catalog has 1,842 checks across 72 areas with
+  zero legacy or unclassified entries. Health passes all 59 source/example
+  targets in 202.751 seconds at source snapshot
+  `sha256:4127068d1fa2e3dd43f22c8ca1f607d07bb8645ba1467ee22c96425c23ee5f76`;
+  full integration CI passes all 59 Lambdapi targets in 216.912 seconds,
+  followed by 39 Python tests, 5 document-registry tests, and the complete
+  lint/book/audit/catalog tail. The tranche is included in the authorized
+  local foundation checkpoint.
+  `PSSS-07d` now promotes that previously deferred stable pointwise identity
+  for its generic `R[Empty]=R` consumer, together with a separate 432-line,
+  24-symbol, rule-free polynomial universal-property module. Polynomial
+  factors retain pointwise base and variable triangles, and their classifier
+  is contractible for every target base map and valuation. The 429-line
+  reviewer and central mapped area each contain 16 positive and two negative
+  checks; the negatives preserve generic identity opacity and chosen-package
+  non-eta. Focused source/reviewer/central checks, the inherited
+  `1179 = 1020 + 159` warnings, empty strict audits, maintained `make check`,
+  and the complete example suite are green. The catalog has 1,860 checks
+  across 73 areas with zero legacy or unclassified entries. Health passes all
+  61 source/example targets in 314.231 seconds at source snapshot
+  `sha256:35a1d735feeea679e12e62b3bc14690783758c0da59ed1e8f20522f898f075df`;
+  full integration CI passes all 61 Lambdapi targets in 389.345 seconds. The
+  final combined checkpoint gate, after removing the rejected descent
+  adapter, passes all 61 targets in 342.266 seconds, followed by 39 Python
+  tests, five document-registry tests, and the complete repository-integrity
+  tail. The tranche is included in the authorized local foundation
+  checkpoint. Comparison inverse laws, a carrier functor,
+  generic coverage saturation, sheafification, relative basic-open covers,
+  powers/radicals, fractions, concrete positive-variable polynomial
+  representations, geometric Zariski topology, and schemes remain explicitly
+  gated.  `PSSS-08a/08b` subsequently promotes the transparent
+  CommRing-valued-presheaf layer, restriction/unit support, and its assembled
+  ordinary invertibility sieve with literal-arrow membership computation.
+  `PSSS-09a` now promotes the separate 892-line, 27-symbol, rule-free Zariski
+  layer: a finite unimodular presentation carries a dependent family of
+  selected localization packages, each package yields an affine
+  restriction-total arrow, and one-generator base change returns a factor,
+  pointwise triangle, Sigma arrow, and actual pulled-back sieve membership.
+  The 246-line reviewer has 15 assertions, including a closed zero-ring
+  membership witness; 12 central checks bring the catalog to 1,905 checks
+  across 76 areas with zero unclassified entries.  Owner warnings remain
+  `1179 = 1020 + 159`, the strict audit has zero unreviewed clauses, and all
+  65 health targets pass in 555.881 summed check-seconds at source snapshot
+  `sha256:a2b313bcfec0123f399364fd395b5e533917767ef14d16b12da768da81a3a6a8`.
+  Full integration CI passes all 65 Lambdapi targets in 597.453 summed
+  check-seconds followed by the complete repository/book/audit/catalog tail;
+  the authorized local checkpoint is ready.  Finite family-wide containment/
+  base change is PSSS-09b; proposition-valued topology and subcanonicity
+  remain PSSS-09c rather than treating chosen presentation data as a
+  proposition.
+- `../../docs/RECORD_STRUCTURE_USABILITY_V3_2_PLAN.md`:
+  active isolated TypeScript outer-LF usability plan for an
+  unparameterized, nonrecursive, single-constructor dependent structure with
+  named primitive projections and field-ordered subject-reducing beta rules.
+  It reuses the completed adjunction macro architecture while keeping the
+  macro private to the host layer and emitting only ordinary declarations and
+  runtime rules. Record eta, decoded classifiers, eliminators, parameters,
+  native-inductive attachment, recursion/positivity, parser work, browser
+  promotion, and Lambdapi source changes remain separate gated rows. An
+  ordinary general-inductive declaration macro is explicitly postponed: the
+  intended future declaration problem is higher inductive categories/types,
+  such as the walking endomorphism, and requires a separate dimensional and
+  coherence-aware design.
+- `../../docs/ADJUNCTION_USABILITY_V3_2_PLAN.md`:
+  completed isolated cross-layer adjunction-usability plan. Its implemented
+  first tranche is a focused/live-conformance-green direct-TypeScript
+  outer-LF trusted `assumeAdjunction` macro that expands to one canonical
+  `Adjunction(F,G)` witness and two proof-time unit/counit agreements without
+  adding a parser or trusted-Core macro node. A second focused/live-green
+  facade accepts a whole counit and coherent forward `ProfMap`, then reuses
+  the existing selected Hom-profunctor comparison with proof-time agreement.
+  The completed owner audit justifies no Lambdapi edit or parallel
+  full-functor classifier; runtime mate projection and the faithful
+  object-only `G^o` triangular junction/adjunction remain consumer-gated.
 - `../../docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`:
   active living cross-layer plan for stress-testing a systematic,
   data/policy-driven transfer architecture against representative groupoidal,

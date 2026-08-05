@@ -97,8 +97,8 @@ const PROTECTED_HOM_ACTION_CLOSURE = [
     [54, 'eq1_fapp1_left_right_raw_adjusted_path', 'sha256:c09159e2dc8cdd8eb397ab28fe94fc48b68a942c8468aa8c2344c265ec1d570d', true],
     [55, 'eq1_fapp1_left_right_law', 'sha256:ead8e1c5731b68a4475517be23d49fa7032f14dfc0d6a3d6be2dfe79592e20d9', true],
     [56, 'eq1_fapp1_left_left_law', 'sha256:af51ca929b1a60f890ecf53c1f2451eedcbc1ee51a8cab2044b557aea812de5f', true],
-    [57, 'omega_equiv_along_fapp1', 'sha256:65035d42a79957970101219fab3077070aeade22adcbae7897ff1aec8f4fbd65', false],
-    [58, 'groupoidal_core_homwise', 'sha256:9f164499bcb66561c8dc20bc1e4e0ed8b5957b3843cc1db56683886f055ee184', false]
+    [58, 'omega_equiv_along_fapp1', 'sha256:65035d42a79957970101219fab3077070aeade22adcbae7897ff1aec8f4fbd65', false],
+    [59, 'groupoidal_core_homwise', 'sha256:9f164499bcb66561c8dc20bc1e4e0ed8b5957b3843cc1db56683886f055ee184', false]
 ] as const satisfies readonly SymbolExpectationTuple[];
 
 const EVIDENCE_PROPERTY_CLOSURE = [
@@ -138,11 +138,11 @@ CoreLfCanonicalSelectionContract =
         authorityPath:
             'emdash2/emdash3_2_eq1_hom_action.lp',
         sourceSha256:
-            'sha256:d6e5e9cade4d756a413a813d35a54024e1d6e9388215803ca267e242b70624d3',
+            'sha256:e5ff82d49d26d60fa20f28cc3eea5915c70a0379768076912f617d4ae5da5356',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:a1d73d0aac76ca1c5b57c6dd1e9407b3f3eb431839d88484f278fc0ac109c0e2',
+                'sha256:000dd93e025ebb9e6efe2621fa74257a2ffe547107f353f590c31088aa9b0be0',
             imports: ['emdash.emdash3_2']
         },
         commands: symbolExpectations(
