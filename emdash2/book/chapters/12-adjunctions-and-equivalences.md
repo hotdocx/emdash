@@ -45,6 +45,13 @@ computational heads. This matters: triangle computation is attached to the
 selected adjunction witness, not to every pair of transformations having the
 same displayed types.
 
+The direct-TypeScript authoring layer can package already declared
+$F$, $G$, $\eta$, and $\varepsilon$—or a counit and whole natural hom
+transpose—as an indexed witness with proof-time agreements. It expands into
+ordinary logical-framework declarations: no new adjunction notion and no
+runtime alias. [Appendix G.5](#appendix-formal-presentation-g5) places this
+convenience at its precise trust boundary.
+
 ## 12.2 The Triangle Cuts
 
 The checked equations are stronger than the diagonal component formulas.

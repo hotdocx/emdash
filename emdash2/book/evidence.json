@@ -2128,7 +2128,7 @@
     },
     "FORMAL-ELABORATION-BOUNDARY": {
       "status": "research-boundary",
-      "statement": "The renewed TypeScript product implements a bounded direct-TypeScript and categorical-text path through scoped contextual elaboration, backend-neutral explicit Core, and a generic checker/evaluator, with optional Lambdapi conformance. A complete compiler for the book's canonical surface, arbitrary displayed coherence, and whole-library transfer are not claimed.",
+      "statement": "The renewed TypeScript product implements a bounded direct-TypeScript and categorical-text path through scoped contextual elaboration, backend-neutral explicit Core, and a generic checker/evaluator, together with bounded outer-LF adjunction and dependent-structure declarations, a client-side reviewer, and optional Lambdapi conformance. A complete compiler for the book's canonical surface, arbitrary displayed coherence, a general record or inductive facility, and whole-library transfer are not claimed.",
       "owners": [],
       "reviewers": []
     },
@@ -2137,6 +2137,1362 @@
       "statement": "Local source acceptance, diagnostics, warning inventories, and model examples do not establish global confluence, strong normalization, canonicity, decidability, consistency, or semantic soundness for the whole emdash rewrite and unification theory.",
       "owners": [],
       "reviewers": []
+    },
+    "GROTH-TOPOLOGY-SIEVE-LAWS": {
+      "status": "checked",
+      "statement": "An ordinary-sieve Grothendieck topology packages proposition-valued coverhood with maximality, pullback stability, and local character; the maximal sieve and the topology in which every sieve covers have checked direct models.",
+      "owners": [
+        {
+          "file": "emdash3_2_sites.lp",
+          "symbol": "GrothTopology"
+        },
+        {
+          "file": "emdash3_2_sites.lp",
+          "symbol": "groth_topology_maximal"
+        },
+        {
+          "file": "emdash3_2_sites.lp",
+          "symbol": "groth_topology_pullback"
+        },
+        {
+          "file": "emdash3_2_sites.lp",
+          "symbol": "groth_topology_local_character"
+        },
+        {
+          "file": "emdash3_2_sites.lp",
+          "symbol": "chaotic_groth_topology"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/grothendieck_topology.lp",
+          "symbol": "GrothTopology"
+        },
+        {
+          "file": "examples/grothendieck_topology.lp",
+          "symbol": "groth_topology_local_character"
+        }
+      ]
+    },
+    "GENERATED-GROTH-TOPOLOGY": {
+      "status": "checked",
+      "statement": "Every type-valued family of generating ordinary sieves determines an internally constructed least Grothendieck topology that accepts each retained generator and lies below every topology accepting them.",
+      "owners": [
+        {
+          "file": "emdash3_2_generated_topologies.lp",
+          "symbol": "generated_sieve_cover_is_prop"
+        },
+        {
+          "file": "emdash3_2_generated_topologies.lp",
+          "symbol": "generated_groth_topology"
+        },
+        {
+          "file": "emdash3_2_generated_topologies.lp",
+          "symbol": "generated_groth_topology_accepts_generators"
+        },
+        {
+          "file": "emdash3_2_generated_topologies.lp",
+          "symbol": "generated_groth_topology_least"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/generated_grothendieck_topologies.lp",
+          "symbol": "generated_groth_topology"
+        },
+        {
+          "file": "examples/generated_grothendieck_topologies.lp",
+          "symbol": "generated_groth_topology_least"
+        }
+      ]
+    },
+    "SIEVE-MATCHING-LOCALITY": {
+      "status": "checked",
+      "statement": "An ordinary sieve extends to a whole presheaf with a whole inclusion into Yoneda; precomposition defines the section-to-matching restriction functor, locality is its fixed-forward Hom equivalence, and matching, section, and restriction families vary internally over eligible cover questions.",
+      "owners": [
+        {
+          "file": "emdash3_2_sieve_extensions.lp",
+          "symbol": "ordinary_sieve_extension_inclusion"
+        },
+        {
+          "file": "emdash3_2_sieve_extensions.lp",
+          "symbol": "ordinary_sieve_local_precomp"
+        },
+        {
+          "file": "emdash3_2_sieve_extensions.lp",
+          "symbol": "PshLocalAtOrdinarySieve"
+        },
+        {
+          "file": "emdash3_2_sieve_extensions.lp",
+          "symbol": "IsTopologyLocalPsh"
+        },
+        {
+          "file": "emdash3_2_direct_cover_question_families.lp",
+          "symbol": "DirectCoverQuestionMatching_catd"
+        },
+        {
+          "file": "emdash3_2_direct_cover_question_families.lp",
+          "symbol": "DirectCoverQuestionSection_catd"
+        },
+        {
+          "file": "emdash3_2_direct_cover_question_families.lp",
+          "symbol": "direct_cover_question_restriction_funcd"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/sieve_extensions.lp",
+          "symbol": "ordinary_sieve_local_precomp"
+        },
+        {
+          "file": "examples/direct_cover_question_families.lp",
+          "symbol": "DirectCoverQuestionMatching_catd"
+        },
+        {
+          "file": "examples/direct_cover_question_families.lp",
+          "symbol": "direct_cover_question_restriction_funcd"
+        }
+      ]
+    },
+    "PSH-YONEDA-HIGHER-SIEVE": {
+      "status": "checked",
+      "statement": "Cat-valued presheaves reuse whole directed-family restriction; the Yoneda presheaf evaluates to the represented hom category; the conventional slice is the opposite restriction total; and the maximal Cat-valued higher sieve is stable under pullback.",
+      "owners": [
+        {
+          "file": "emdash3_2_presheaves.lp",
+          "symbol": "Psh_cat"
+        },
+        {
+          "file": "emdash3_2_presheaves.lp",
+          "symbol": "Psh_pullback_func"
+        },
+        {
+          "file": "emdash3_2_presheaves.lp",
+          "symbol": "yoneda_psh_func"
+        },
+        {
+          "file": "emdash3_2_presheaves.lp",
+          "symbol": "Slice_cat"
+        },
+        {
+          "file": "emdash3_2_presheaves.lp",
+          "symbol": "HigherSieveClassifier"
+        },
+        {
+          "file": "emdash3_2_presheaves.lp",
+          "symbol": "maximal_higher_sieve"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/presheaf_facade.lp",
+          "symbol": "Psh_pullback_func"
+        },
+        {
+          "file": "examples/higher_sieve_classifier.lp",
+          "symbol": "HigherSieveClassifier"
+        }
+      ]
+    },
+    "ORDINARY-SIEVE-PULLBACK": {
+      "status": "checked",
+      "statement": "An ordinary sieve is a Cat-valued higher sieve with pointwise subterminal evidence; pullback reuses the higher-sieve action, preserves that evidence, and computes membership at a probe as old membership at its postcomposition image.",
+      "owners": [
+        {
+          "file": "emdash3_2_sieves.lp",
+          "symbol": "Sieve"
+        },
+        {
+          "file": "emdash3_2_sieves.lp",
+          "symbol": "ordinary_sieve_pullback_evidence"
+        },
+        {
+          "file": "emdash3_2_sieves.lp",
+          "symbol": "sieve_pullback"
+        },
+        {
+          "file": "emdash3_2_sites.lp",
+          "symbol": "SieveMembership"
+        },
+        {
+          "file": "emdash3_2_sites.lp",
+          "symbol": "sieve_pullback_membership"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/ordinary_sieves.lp",
+          "symbol": "sieve_pullback"
+        },
+        {
+          "file": "examples/grothendieck_topology.lp",
+          "symbol": "SieveMembership"
+        }
+      ]
+    },
+    "COMM-RING-INVERTIBILITY-SIEVE": {
+      "status": "checked",
+      "statement": "For a commutative-ring-valued presheaf and a section over U, the invertibility construction produces an ordinary sieve whose membership at a probe computes to unit evidence for the restricted section.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_presheaves.lp",
+          "symbol": "CommRingPshInvertibleAlong"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_presheaves.lp",
+          "symbol": "comm_ring_psh_invertibility_sieve"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_presheaf_invertibility.lp",
+          "symbol": "comm_ring_psh_invertibility_sieve"
+        },
+        {
+          "file": "examples/commutative_ring_presheaf_invertibility.lp",
+          "symbol": "CommRingPshInvertibleAlong"
+        }
+      ]
+    },
+    "DIRECT-COVER-COMPLETION-HIT": {
+      "status": "checked",
+      "statement": "For every site and Cat-valued presheaf, the direct cover-completion categorical-HIT boundary provides a whole unit, one cover-question-indexed glue functor, and one whole silent path, with pullback compatibility inherited from displayed functoriality and a packaged internal direct-cover sheaf structure.",
+      "owners": [
+        {
+          "file": "emdash3_2_direct_cover_internal_sheaves.lp",
+          "symbol": "DirectCoverSheafStructure"
+        },
+        {
+          "file": "emdash3_2_direct_cover_internal_sheaves.lp",
+          "symbol": "direct_cover_sheaf_structure_glue_funcd"
+        },
+        {
+          "file": "emdash3_2_direct_cover_internal_sheaves.lp",
+          "symbol": "direct_cover_sheaf_structure_silent_funcd"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_hit.lp",
+          "symbol": "DirectCoverCompletionPsh"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_hit.lp",
+          "symbol": "direct_cover_completion_unit"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_hit.lp",
+          "symbol": "direct_cover_completion_glue_funcd"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_hit.lp",
+          "symbol": "direct_cover_completion_silent_funcd"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/direct_cover_internal_sheaves.lp",
+          "symbol": "DirectCoverSheafStructure"
+        },
+        {
+          "file": "examples/direct_cover_completion_hit.lp",
+          "symbol": "direct_cover_completion_glue_funcd"
+        },
+        {
+          "file": "examples/direct_cover_completion_hit.lp",
+          "symbol": "direct_cover_completion_silent_funcd"
+        }
+      ]
+    },
+    "DIRECT-COVER-COMPLETION-LOCALITY": {
+      "status": "checked",
+      "statement": "Canonical cover pullback, retained-member calculation, whole glue naturality, and silent derive restriction after glue as the second inverse law; the direct cover completion is consequently local at every eligible question and over the whole topology.",
+      "owners": [
+        {
+          "file": "emdash3_2_direct_cover_completion_locality.lp",
+          "symbol": "direct_cover_completion_restriction_glue_path"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_locality.lp",
+          "symbol": "direct_cover_completion_local_at_question"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_locality.lp",
+          "symbol": "direct_cover_completion_is_topology_local"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "direct_cover_completion_restriction_glue_path"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "direct_cover_completion_is_topology_local"
+        }
+      ]
+    },
+    "DIRECT-COVER-COMPLETION-UNIVERSALITY": {
+      "status": "checked",
+      "statement": "The completion recursor extends a whole seed map with return, glue, and silent coherence; it varies functorially in the seed, and at a topology-local target its whole beta and eta laws make unit precomposition an omega-equivalence of complete Hom categories.",
+      "owners": [
+        {
+          "file": "emdash3_2_direct_cover_completion_eliminator.lp",
+          "symbol": "direct_cover_completion_rec"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_eliminator.lp",
+          "symbol": "direct_cover_completion_rec_beta_unit"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_eliminator.lp",
+          "symbol": "direct_cover_completion_rec_beta_glue"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_eliminator.lp",
+          "symbol": "direct_cover_completion_rec_beta_silent"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_universality.lp",
+          "symbol": "direct_cover_completion_rec_func"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_universality.lp",
+          "symbol": "direct_cover_completion_rec_eta_local_func"
+        },
+        {
+          "file": "emdash3_2_direct_cover_completion_universality.lp",
+          "symbol": "direct_cover_completion_hom_omega"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/direct_cover_completion_eliminator.lp",
+          "symbol": "direct_cover_completion_rec_beta_glue"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "direct_cover_completion_rec_eta_local_func"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "direct_cover_completion_hom_omega"
+        }
+      ]
+    },
+    "CAT-VALUED-SHEAFIFICATION-REFLECTOR": {
+      "status": "checked",
+      "statement": "At Cat-valued coefficients, direct cover completion forms a functor into topology-local presheaves left adjoint to inclusion; its unit is return, its counit is local recursion from the identity seed, and the two counit cancellations make the adjunction reflective and instantiate the sheafification capability.",
+      "owners": [
+        {
+          "file": "emdash3_2_direct_cover_sheafification.lp",
+          "symbol": "CatValuedSheafData"
+        },
+        {
+          "file": "emdash3_2_direct_cover_sheafification.lp",
+          "symbol": "cat_valued_sheaf_include_psh_func"
+        },
+        {
+          "file": "emdash3_2_direct_cover_sheafification.lp",
+          "symbol": "direct_cover_sheafification_func"
+        },
+        {
+          "file": "emdash3_2_direct_cover_sheafification.lp",
+          "symbol": "direct_cover_sheafification_adjunction"
+        },
+        {
+          "file": "emdash3_2_direct_cover_sheafification.lp",
+          "symbol": "direct_cover_sheafification_reflector"
+        },
+        {
+          "file": "emdash3_2_direct_cover_sheafification.lp",
+          "symbol": "direct_cover_sheafification_capability"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "direct_cover_sheafification_func"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "direct_cover_sheafification_reflector_at"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "direct_cover_sheafification_capability"
+        }
+      ]
+    },
+    "COMM-RING-STRUCTURED-CATEGORY": {
+      "status": "checked",
+      "statement": "Commutative rings have set-valued carriers and retained operations and laws, including the zero ring; operation-preserving carrier maps are extensional structured homs and form the one-category CommRing_cat, while componentwise products and the Boolean-carrier F2 ring supply closed models without a claimed categorical-product universal property.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra.lp",
+          "symbol": "comm_ring_carrier_is_set"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra.lp",
+          "symbol": "zero_comm_ring"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_category.lp",
+          "symbol": "CommRingHom"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_category.lp",
+          "symbol": "comm_ring_hom_ext"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_category.lp",
+          "symbol": "CommRing_cat"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_category.lp",
+          "symbol": "comm_ring_cat_is_one_cat"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_product.lp",
+          "symbol": "comm_ring_product"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_f2.lp",
+          "symbol": "f2_comm_ring"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_objects.lp",
+          "symbol": "zero_comm_ring"
+        },
+        {
+          "file": "examples/commutative_ring_morphisms.lp",
+          "symbol": "CommRing_cat"
+        },
+        {
+          "file": "examples/commutative_ring_split_idempotent_localization.lp",
+          "symbol": "f2_comm_ring"
+        }
+      ]
+    },
+    "FINITE-UNIMODULAR-COVER-DATA": {
+      "status": "checked",
+      "statement": "Finite sums and dot products compute on finite-family constructors and are preserved by structured ring maps; unimodular presentations retain coefficients witnessing that the generators span one, assemble into set-valued finite Zariski presentations, transport under ring maps, and include singleton and binary constructors.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_finite.lp",
+          "symbol": "comm_ring_finite_sum"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_finite.lp",
+          "symbol": "comm_ring_finite_dot"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_finite.lp",
+          "symbol": "CommRingUnimodularPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_finite.lp",
+          "symbol": "comm_ring_unimodular_map"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_finite.lp",
+          "symbol": "CommRingZariskiCoverPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_finite.lp",
+          "symbol": "comm_ring_zariski_cover_map"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_finite.lp",
+          "symbol": "comm_ring_binary_zariski_cover"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_finite_covers.lp",
+          "symbol": "CommRingUnimodularPresentation"
+        },
+        {
+          "file": "examples/commutative_ring_finite_covers.lp",
+          "symbol": "comm_ring_unit_zariski_cover"
+        },
+        {
+          "file": "examples/commutative_ring_finite_covers.lp",
+          "symbol": "comm_ring_binary_zariski_cover"
+        }
+      ]
+    },
+    "COMM-RING-POLYNOMIAL-UNIVERSALITY": {
+      "status": "checked",
+      "statement": "A supplied commutative-ring polynomial algebra retains a base map and variables and makes the structured extension space contractible for every target base map and valuation; the identity ring is a complete checked model for the empty variable classifier.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_polynomial.lp",
+          "symbol": "CommRingPolynomialFactor"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_polynomial.lp",
+          "symbol": "IsCommRingPolynomialAlgebra"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_polynomial.lp",
+          "symbol": "comm_ring_polynomial_factorization_is_contr"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_polynomial.lp",
+          "symbol": "CommRingPolynomialAlgebra"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_polynomial_algebra.lp",
+          "symbol": "empty_is_polynomial"
+        },
+        {
+          "file": "examples/commutative_ring_polynomial_algebra.lp",
+          "symbol": "empty_polynomial"
+        },
+        {
+          "file": "examples/commutative_ring_polynomial_algebra.lp",
+          "symbol": "comm_ring_polynomial_factorization_is_contr"
+        }
+      ]
+    },
+    "COMM-RING-LOCALIZATION-UNIVERSALITY": {
+      "status": "checked",
+      "statement": "Unit evidence in a commutative ring is proposition-valued, and a supplied localization at one element retains an inverting structure map and a contractible classifier of whole structured factors with their pointwise triangles through every admissible target map.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_localization.lp",
+          "symbol": "CommRingUnitEvidence"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization.lp",
+          "symbol": "comm_ring_unit_evidence_is_prop"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization.lp",
+          "symbol": "CommRingLocalizationFactor"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization.lp",
+          "symbol": "IsCommRingLocalizationAt"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization.lp",
+          "symbol": "comm_ring_localization_factorization_is_contr"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization.lp",
+          "symbol": "CommRingLocalizationAt"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_localization.lp",
+          "symbol": "zero_is_localization_at_point"
+        },
+        {
+          "file": "examples/commutative_ring_localization.lp",
+          "symbol": "zero_localization_factor_is_contr"
+        }
+      ]
+    },
+    "COMM-RING-LOCALIZATION-MODELS": {
+      "status": "checked",
+      "statement": "Identity is a localization at an already invertible element, the zero ring is a localization at zero, and the fixed image of an idempotent is a quotient-free localization at that idempotent; the split element (1,0) in F2 times F2 gives a closed idempotent distinct from zero and one.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_localization_unit.lp",
+          "symbol": "comm_ring_unit_is_identity_localization"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_unit.lp",
+          "symbol": "comm_ring_identity_localization_at_one"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_zero.lp",
+          "symbol": "comm_ring_zero_is_zero_localization"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_zero.lp",
+          "symbol": "comm_ring_zero_localization"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_idempotent.lp",
+          "symbol": "comm_ring_idempotent_image_is_localization"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_idempotent.lp",
+          "symbol": "comm_ring_idempotent_image_localization"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_split.lp",
+          "symbol": "f2_split_idempotent_not_zero"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_split.lp",
+          "symbol": "f2_split_idempotent_not_one"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_split.lp",
+          "symbol": "f2_split_idempotent_localization"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_unit_localization.lp",
+          "symbol": "comm_ring_identity_localization_at_one"
+        },
+        {
+          "file": "examples/commutative_ring_zero_localization.lp",
+          "symbol": "comm_ring_zero_localization"
+        },
+        {
+          "file": "examples/commutative_ring_idempotent_localization.lp",
+          "symbol": "comm_ring_idempotent_image_localization"
+        },
+        {
+          "file": "examples/commutative_ring_split_idempotent_localization.lp",
+          "symbol": "f2_split_idempotent_not_zero"
+        }
+      ]
+    },
+    "COMM-RING-ITERATED-LOCALIZATION-EQUIV": {
+      "status": "checked",
+      "statement": "For supplied localizations at f, at the image of g, and at fg, the universal properties construct canonical product-to-iterated and iterated-to-product comparison maps whose two whole structured cancellation laws exhibit the selected forward map as an omega-equivalence in CommRing_cat.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_localization_comparison.lp",
+          "symbol": "CommRingIteratedLocalizationComparison"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_comparison.lp",
+          "symbol": "comm_ring_iterated_localization_comparison"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_overlap.lp",
+          "symbol": "comm_ring_iterated_localization_comparison_left_law"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_overlap.lp",
+          "symbol": "comm_ring_iterated_localization_comparison_right_law"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_overlap.lp",
+          "symbol": "comm_ring_iterated_localization_comparison_omega_equiv_along"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_localization_overlap.lp",
+          "symbol": "comm_ring_iterated_localization_comparison_omega_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_localization_overlap.lp",
+          "symbol": "comm_ring_iterated_localization_comparison_left_law"
+        },
+        {
+          "file": "examples/commutative_ring_localization_overlap.lp",
+          "symbol": "comm_ring_iterated_localization_comparison_right_law"
+        },
+        {
+          "file": "examples/commutative_ring_localization_overlap.lp",
+          "symbol": "comm_ring_iterated_localization_comparison_omega_equiv"
+        }
+      ]
+    },
+    "AFFINE-BASIC-OPEN-POINT-REPRESENTATION": {
+      "status": "checked",
+      "statement": "The affine Yoneda presheaf has S-points CommRingHom(R,S), its semantic basic open D(f) is the ordinary invertibility sieve, and every supplied localization R to R[1/f] gives, at each test ring S, an explicit TypeEquiv from whole structured maps R[1/f] to S to D(f)-points, with both inverse laws derived from localization contractibility and proposition-valued unit evidence.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_affine_points.lp",
+          "symbol": "affine_spec_functor_of_points"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_points.lp",
+          "symbol": "affine_spec_basic_open_sieve"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_points.lp",
+          "symbol": "affine_spec_basic_open_point_left_law"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_points.lp",
+          "symbol": "affine_spec_basic_open_point_right_law"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_points.lp",
+          "symbol": "affine_spec_basic_open_point_type_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_affine_points.lp",
+          "symbol": "AffineSpecPoint"
+        },
+        {
+          "file": "examples/commutative_ring_affine_points.lp",
+          "symbol": "affine_spec_basic_open_point_left_law"
+        },
+        {
+          "file": "examples/commutative_ring_affine_points.lp",
+          "symbol": "affine_spec_basic_open_point_right_law"
+        },
+        {
+          "file": "examples/commutative_ring_affine_points.lp",
+          "symbol": "affine_spec_basic_open_point_type_equiv"
+        }
+      ]
+    },
+    "AFFINE-BASIC-OPEN-INTERSECTION": {
+      "status": "checked",
+      "statement": "At each test ring S, unit evidence for h(fg) is equivalent to paired unit evidence for h(f) and h(g), yielding an explicit pointwise TypeEquiv from D(fg)(S) to the same-map intersection of D(f)(S) and D(g)(S); a supplied localization at fg represents that intersection through executable maps with both component laws.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_affine_intersections.lp",
+          "symbol": "affine_spec_basic_open_product_unit_type_equiv"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_intersections.lp",
+          "symbol": "affine_spec_basic_open_product_point_type_equiv"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_intersections.lp",
+          "symbol": "affine_spec_basic_open_intersection_representation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_intersections.lp",
+          "symbol": "affine_spec_basic_open_intersection_representation_left"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_intersections.lp",
+          "symbol": "affine_spec_basic_open_intersection_representation_right"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_affine_intersections.lp",
+          "symbol": "affine_spec_basic_open_product_point_type_equiv"
+        },
+        {
+          "file": "examples/commutative_ring_affine_intersections.lp",
+          "symbol": "affine_spec_basic_open_intersection_representation_left"
+        },
+        {
+          "file": "examples/commutative_ring_affine_intersections.lp",
+          "symbol": "affine_spec_basic_open_intersection_representation_right"
+        }
+      ]
+    },
+    "AFFINE-BIG-SLICE-COORDINATES": {
+      "status": "checked",
+      "statement": "The conventional big affine slice over Sp(R) has objects R-algebras and geometric arrows given by commuting structured triangles; its whole CommRing-valued coordinate presheaf evaluates a chart at its ring and restriction at the supplied structured map, includes selected localization charts, and internalizes both product/iterated-localization overlap directions with the existing whole coordinate equivalence.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_affine_spec.lp",
+          "symbol": "AffineSpecBigSlice_cat"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_spec.lp",
+          "symbol": "affine_spec_coordinate_psh"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_spec.lp",
+          "symbol": "affine_spec_chart_arrow"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_spec.lp",
+          "symbol": "affine_spec_overlap_forward_chart_arrow"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_spec.lp",
+          "symbol": "affine_spec_overlap_reverse_chart_arrow"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_spec.lp",
+          "symbol": "affine_spec_overlap_coordinate_omega_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_affine_spec.lp",
+          "symbol": "affine_spec_coordinate_psh"
+        },
+        {
+          "file": "examples/commutative_ring_affine_spec.lp",
+          "symbol": "affine_spec_chart_arrow"
+        },
+        {
+          "file": "examples/commutative_ring_affine_spec.lp",
+          "symbol": "affine_spec_overlap_coordinate_omega_equiv"
+        }
+      ]
+    },
+    "AFFINE-BIG-ZARISKI-TOPOLOGY": {
+      "status": "checked",
+      "statement": "At every chart R to S, each supplied localization in a selected finite unimodular family lifts to a whole chart arrow whose coordinate restriction computes to the localization map; literal finite containment forms witness-rich generators, and their generic intersection constructs the lawful least big-affine Zariski topology with generator coverhood and leastness.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_affine_zariski.lp",
+          "symbol": "affine_spec_chart_localization_arrow"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_zariski.lp",
+          "symbol": "AffineSpecBigZariskiGenerators"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_zariski.lp",
+          "symbol": "affine_spec_big_zariski_topology"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_zariski.lp",
+          "symbol": "affine_spec_big_zariski_topology_covers"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_zariski.lp",
+          "symbol": "affine_spec_big_zariski_topology_least"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_affine_zariski.lp",
+          "symbol": "affine_spec_chart_localization_restriction_review"
+        },
+        {
+          "file": "examples/commutative_ring_affine_zariski.lp",
+          "symbol": "affine_spec_big_zariski_topology_covers"
+        },
+        {
+          "file": "examples/commutative_ring_affine_zariski.lp",
+          "symbol": "affine_spec_big_zariski_topology_least"
+        }
+      ]
+    },
+    "AFFINE-STRUCTURE-SHEAF-PRESENTATION": {
+      "status": "checked",
+      "statement": "Given a supplied reflective CommRing-valued sheafification capability on the exact generated big-affine Zariski topology, a selected sheaf object, and a whole DefIso from its included presheaf to the computing coordinate presheaf, the affine structure-sheaf presentation determines a reflective commutative-ringed site and retains the whole coordinate comparison and its chart components.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_affine_ringed_sites.lp",
+          "symbol": "AffineStructureSheafPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_ringed_sites.lp",
+          "symbol": "affine_structure_sheaf_ringed_site"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_ringed_sites.lp",
+          "symbol": "affine_structure_sheaf_coordinate_defiso"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_ringed_sites.lp",
+          "symbol": "affine_structure_sheaf_to_coordinate_at"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_affine_ringed_sites.lp",
+          "symbol": "affine_structure_sheaf_ringed_site"
+        },
+        {
+          "file": "examples/commutative_ring_affine_ringed_sites.lp",
+          "symbol": "affine_structure_sheaf_coordinate_defiso"
+        },
+        {
+          "file": "examples/commutative_ring_affine_ringed_sites.lp",
+          "symbol": "affine_structure_sheaf_to_coordinate_at"
+        }
+      ]
+    },
+    "AFFINE-THIN-SCHEME-PRESENTATION": {
+      "status": "checked",
+      "statement": "The thin affine-scheme presentation pairs a supplied whole reflective structure-sheaf presentation with supplied whole coordinate-localization locality; it inherits the exact generated big-Zariski ringed site, a whole coordinate DefIso, and fixed-forward localization matching equivalences, while the F2 times F2 reviewer keeps both capabilities explicit and computes its complementary-idempotent cover, chart rings, restrictions, and zero overlap.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_affine_locality.lp",
+          "symbol": "AffineCoordinateLocalizationLocality"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_locality.lp",
+          "symbol": "affine_coordinate_localization_locality_at"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_schemes.lp",
+          "symbol": "AffineSchemePresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_schemes.lp",
+          "symbol": "affine_scheme_ringed_site"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_schemes.lp",
+          "symbol": "affine_scheme_coordinate_defiso"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_schemes.lp",
+          "symbol": "affine_scheme_locality_at"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_affine_locality.lp",
+          "symbol": "affine_coordinate_localization_locality_at"
+        },
+        {
+          "file": "examples/commutative_ring_affine_schemes.lp",
+          "symbol": "f2_split_affine_scheme"
+        },
+        {
+          "file": "examples/commutative_ring_affine_schemes.lp",
+          "symbol": "affine_scheme_coordinate_defiso"
+        },
+        {
+          "file": "examples/commutative_ring_affine_schemes.lp",
+          "symbol": "affine_scheme_locality_at"
+        }
+      ]
+    },
+    "GLOBAL-RINGED-COVER-BINARY-GENERATION": {
+      "status": "checked",
+      "statement": "A global reflective CommRinged cover retains one site, whole object, ordinary covering sieve, and whole structure presheaf; Grothendieck stability derives every pullback cover, while witness-rich binary generation computes, for each retained sieve member, a Boolean-selected chart factorization and triangle, and the affine refinement route exposes the selected generator without asserting the arbitrary member affine.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_ringed_space_covers.lp",
+          "symbol": "ReflectiveCommRingedSpaceCover"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_ringed_space_covers.lp",
+          "symbol": "reflective_comm_ringed_space_cover_underlying_psh"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_ringed_space_covers.lp",
+          "symbol": "reflective_comm_ringed_space_cover_pullback_covers"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_binary_covers.lp",
+          "symbol": "BinarySelectedCoverGeneration"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_binary_covers.lp",
+          "symbol": "binary_selected_cover_generation_at"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_cover_refinements.lp",
+          "symbol": "binary_affine_cover_refinement_at"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_ringed_space_covers.lp",
+          "symbol": "reflective_comm_ringed_space_cover_pullback_covers"
+        },
+        {
+          "file": "examples/commutative_ring_binary_covers.lp",
+          "symbol": "BinarySelectedCoverGeneration"
+        },
+        {
+          "file": "examples/commutative_ring_binary_covers.lp",
+          "symbol": "binary_selected_cover_generation_at"
+        },
+        {
+          "file": "examples/commutative_ring_affine_cover_refinements.lp",
+          "symbol": "binary_affine_cover_refinement_at"
+        }
+      ]
+    },
+    "WHOLE-SLICE-AFFINE-REALIZATION": {
+      "status": "checked",
+      "statement": "Precomposition with the whole slice-domain functor constructs the ambient CommRing presheaf on K/U; a supplied reflective slice retains a whole DefIso to that target, and supplied sheaf-basis semantics plus an ambient-to-affine-underlying bridge and the affine presentation's retained coordinate bridge derive one whole ambient-to-coordinate DefIso for a selected cover chart.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_ringed_space_restrictions.lp",
+          "symbol": "slice_domain_func"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_ringed_space_restrictions.lp",
+          "symbol": "reflective_comm_ringed_site_slice_ambient_psh"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_ringed_space_restrictions.lp",
+          "symbol": "SuppliedReflectiveCommRingedSlicePresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_ringed_space_restrictions.lp",
+          "symbol": "supplied_reflective_comm_ringed_slice_ambient_defiso"
+        },
+        {
+          "file": "emdash3_2_site_basis.lp",
+          "symbol": "SuppliedSheafBasisEquivalenceAlong"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_basis.lp",
+          "symbol": "AffineBasisRealizationAlong"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_basis.lp",
+          "symbol": "affine_basis_realization_coordinate_defiso"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_cover_charts.lp",
+          "symbol": "AffineCoverChartRealization"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_affine_cover_charts.lp",
+          "symbol": "affine_cover_chart_coordinate_defiso"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_ringed_space_restrictions.lp",
+          "symbol": "supplied_reflective_comm_ringed_slice_ambient_defiso"
+        },
+        {
+          "file": "examples/commutative_ring_affine_basis.lp",
+          "symbol": "affine_basis_realization_coordinate_defiso"
+        },
+        {
+          "file": "examples/commutative_ring_affine_cover_charts.lp",
+          "symbol": "AffineCoverChartRealization"
+        },
+        {
+          "file": "examples/commutative_ring_affine_cover_charts.lp",
+          "symbol": "affine_cover_chart_coordinate_defiso"
+        }
+      ]
+    },
+    "TOPOLOGY-LOCAL-RING-CERTIFICATE": {
+      "status": "checked",
+      "statement": "A topology-local CommRing presheaf presentation makes a zero-unit stage empty-covering and turns every invertible sum into a selected covering sieve whose members compute a Boolean branch with unit evidence for one restricted summand; the whole-object package attaches that capability to the computing ambient presheaf on the supplied actual slice K/X.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_local_ringed_sites.lp",
+          "symbol": "CommRingPshTopologyLocalRingPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_local_ringed_sites.lp",
+          "symbol": "comm_ring_psh_topology_local_ring_empty_covers"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_local_ringed_sites.lp",
+          "symbol": "comm_ring_psh_topology_local_ring_split"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp",
+          "symbol": "ReflectiveCommRingedWholeObjectLocalPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp",
+          "symbol": "reflective_comm_ringed_whole_object_local_ambient_defiso"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp",
+          "symbol": "reflective_comm_ringed_whole_object_local_ring"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_local_ringed_sites.lp",
+          "symbol": "comm_ring_psh_topology_local_ring_nontriviality"
+        },
+        {
+          "file": "examples/commutative_ring_local_ringed_sites.lp",
+          "symbol": "comm_ring_psh_topology_local_ring_split"
+        },
+        {
+          "file": "examples/commutative_ring_locally_ringed_space_presentations.lp",
+          "symbol": "ReflectiveCommRingedWholeObjectLocalPresentation"
+        },
+        {
+          "file": "examples/commutative_ring_locally_ringed_space_presentations.lp",
+          "symbol": "reflective_comm_ringed_whole_object_local_ambient_defiso"
+        }
+      ]
+    },
+    "BINARY-SITE-RELATIVE-SCHEME": {
+      "status": "checked",
+      "statement": "A BinarySiteRelativeSchemePresentation totals one existing global reflective CommRinged cover with its whole-object topology-local certificate and a constructively generated binary affine cover; the global structure presheaf, covering sieve, local package, selected charts, and both whole affine realizations remain exact existing owners rather than duplicated overlap, cocycle, transition, or gluing fields.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_affine_cover_presentations.lp",
+          "symbol": "BinaryAffineCoverPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp",
+          "symbol": "BinaryLocallyRingedAffineCoverPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_site_relative_schemes.lp",
+          "symbol": "BinarySiteRelativeSchemePresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_site_relative_schemes.lp",
+          "symbol": "binary_site_relative_scheme_underlying_psh"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_site_relative_schemes.lp",
+          "symbol": "binary_site_relative_scheme_local"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_site_relative_schemes.lp",
+          "symbol": "binary_site_relative_scheme_atlas"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_site_relative_schemes.lp",
+          "symbol": "binary_site_relative_scheme_realization0"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_site_relative_schemes.lp",
+          "symbol": "binary_site_relative_scheme_realization1"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_affine_cover_presentations.lp",
+          "symbol": "binary_affine_cover_generation"
+        },
+        {
+          "file": "examples/commutative_ring_locally_ringed_space_presentations.lp",
+          "symbol": "binary_locally_ringed_affine_cover_atlas"
+        },
+        {
+          "file": "examples/commutative_ring_site_relative_schemes.lp",
+          "symbol": "BinarySiteRelativeSchemePresentation"
+        },
+        {
+          "file": "examples/commutative_ring_site_relative_schemes.lp",
+          "symbol": "binary_site_relative_scheme_underlying_psh"
+        },
+        {
+          "file": "examples/commutative_ring_site_relative_schemes.lp",
+          "symbol": "binary_site_relative_scheme_realization0"
+        },
+        {
+          "file": "examples/commutative_ring_site_relative_schemes.lp",
+          "symbol": "binary_site_relative_scheme_realization1"
+        }
+      ]
+    },
+    "ACTUAL-BINARY-CHART-OVERLAP": {
+      "status": "checked",
+      "statement": "Given a selected binary product of the two chart objects in the conventional slice K/X, its whole universal property derives both slice projections and their base arrows; evaluating the single global structure presheaf derives the overlap ring and both restriction homomorphisms, without adding an overlap field to the scheme total or constructing arbitrary pullbacks.",
+      "owners": [
+        {
+          "file": "emdash3_2_finite_limits.lp",
+          "symbol": "BinaryProductPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_scheme_chart_overlaps.lp",
+          "symbol": "BinarySchemeChartOverlapPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_to_chart0"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_to_chart1"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_domain"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_ring"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_restriction0"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_restriction1"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_scheme_chart_overlaps.lp",
+          "symbol": "BinarySchemeChartOverlapPresentation"
+        },
+        {
+          "file": "examples/commutative_ring_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_to_chart0"
+        },
+        {
+          "file": "examples/commutative_ring_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_to_chart1"
+        },
+        {
+          "file": "examples/commutative_ring_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_ring"
+        },
+        {
+          "file": "examples/commutative_ring_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_restriction0"
+        },
+        {
+          "file": "examples/commutative_ring_scheme_chart_overlaps.lp",
+          "symbol": "binary_scheme_chart_overlap_restriction1"
+        }
+      ]
+    },
+    "LAURENT-TRANSITIONS-BY-UNIVERSALITY": {
+      "status": "checked",
+      "statement": "For supplied one-variable polynomial algebras over A and selected localizations at their coordinates, polynomial universality constructs A[t] to A[u,1/u] with t sent to the chosen inverse of u, localization universality extends it to A[t,1/t] to A[u,1/u], reversing the inputs constructs the opposite orientation, and the retained factor agreement is a whole pointwise triangle.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_laurent.lp",
+          "symbol": "CommRingLaurentLocalization"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_laurent.lp",
+          "symbol": "comm_ring_laurent_polynomial_coordinate_path"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_laurent.lp",
+          "symbol": "comm_ring_laurent_transition_map"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_laurent.lp",
+          "symbol": "comm_ring_laurent_transition_agreement"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_laurent.lp",
+          "symbol": "comm_ring_laurent_polynomial_coordinate_path"
+        },
+        {
+          "file": "examples/commutative_ring_laurent.lp",
+          "symbol": "comm_ring_laurent_transition_map"
+        },
+        {
+          "file": "examples/commutative_ring_laurent.lp",
+          "symbol": "comm_ring_laurent_transition_agreement"
+        }
+      ]
+    },
+    "LAURENT-COMMON-OVERLAP": {
+      "status": "checked",
+      "statement": "Given two literal restriction maps R to L and T to L, each supplied simultaneously as a one-variable polynomial chart over one base ring and a localization at its coordinate, the Laurent owner constructs both coordinate-inversion endomorphisms of that exact L; a Laurent overlap presentation then supplies whole paths identifying both constructed endomorphisms with the identity, rather than a disconnected overlap isomorphism or componentwise square.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_laurent.lp",
+          "symbol": "CommRingOneVariableLocalizationPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_laurent.lp",
+          "symbol": "comm_ring_laurent_common_overlap_transition"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_laurent.lp",
+          "symbol": "CommRingLaurentOverlapPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_laurent.lp",
+          "symbol": "comm_ring_laurent_overlap_forward_identity"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_laurent.lp",
+          "symbol": "comm_ring_laurent_overlap_reverse_identity"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_laurent.lp",
+          "symbol": "CommRingOneVariableLocalizationPresentation"
+        },
+        {
+          "file": "examples/commutative_ring_laurent.lp",
+          "symbol": "comm_ring_laurent_common_overlap_transition"
+        },
+        {
+          "file": "examples/commutative_ring_laurent.lp",
+          "symbol": "CommRingLaurentOverlapPresentation"
+        },
+        {
+          "file": "examples/commutative_ring_laurent.lp",
+          "symbol": "comm_ring_laurent_overlap_forward_identity"
+        },
+        {
+          "file": "examples/commutative_ring_laurent.lp",
+          "symbol": "comm_ring_laurent_overlap_reverse_identity"
+        }
+      ]
+    },
+    "ACTUAL-SCHEME-LAURENT-OVERLAP": {
+      "status": "checked",
+      "statement": "For a supplied binary site-relative scheme and selected actual chart intersection, the thin Laurent adapter adds one common base ring and retains a generic Laurent overlap presentation at the literal two chart structure rings, inherited overlap ring, and already-derived restriction homomorphisms; it neither duplicates those global owners nor constructs the coordinate presentation from no data.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp",
+          "symbol": "BinarySchemeLaurentOverlapPresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp",
+          "symbol": "binary_scheme_laurent_overlap_base_ring"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp",
+          "symbol": "binary_scheme_laurent_overlap_coordinates"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_scheme_laurent_overlaps.lp",
+          "symbol": "binary_scheme_laurent_overlap_base_ring"
+        },
+        {
+          "file": "examples/commutative_ring_scheme_laurent_overlaps.lp",
+          "symbol": "binary_scheme_laurent_overlap_coordinates"
+        }
+      ]
+    },
+    "SUPPLIED-P1": {
+      "status": "checked",
+      "statement": "A SuppliedProjectiveLinePresentation is the transparent dependent total of one already-global binary site-relative scheme, its selected actual chart intersection, and a Laurent-coordinate presentation on the literal inherited restriction maps; its scheme, overlap, base ring, and coordinate package compute by projection, while no closed projective object, Proj construction, gluing theorem, projectivity proof, or non-affineness proof is produced.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_projective_line.lp",
+          "symbol": "SuppliedProjectiveLinePresentation"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_projective_line.lp",
+          "symbol": "supplied_projective_line_scheme"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_projective_line.lp",
+          "symbol": "supplied_projective_line_overlap"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_projective_line.lp",
+          "symbol": "supplied_projective_line_base_ring"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_projective_line.lp",
+          "symbol": "supplied_projective_line_coordinates"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_projective_line.lp",
+          "symbol": "supplied_projective_line_scheme"
+        },
+        {
+          "file": "examples/commutative_ring_projective_line.lp",
+          "symbol": "supplied_projective_line_overlap"
+        },
+        {
+          "file": "examples/commutative_ring_projective_line.lp",
+          "symbol": "supplied_projective_line_base_ring"
+        },
+        {
+          "file": "examples/commutative_ring_projective_line.lp",
+          "symbol": "supplied_projective_line_coordinates"
+        }
+      ]
     },
     "EH-COMMUTATIVITY": {
       "status": "checked",

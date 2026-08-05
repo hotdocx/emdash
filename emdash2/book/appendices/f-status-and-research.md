@@ -12,7 +12,7 @@ claim-by-claim authority.
 | --- | --- | --- |
 | Equality-local type theory | Equality induction, path action, Sigma/Pi path interfaces, elementary inductives | No claim of a complete standalone HoTT implementation |
 | Directed categories | Iterated homs, identities, composition, functors, transfors, opposites, products | No complete weak omega-category metatheory or model theorem |
-| Directed families | Fibres, transport, family morphisms, Sigma totals, Pi sections, displayed hom action, fixed-base fibrewise products, asymmetric pullback totalization, and constant-domain displayed evaluation | Arbitrary displayed telescope depth, mixed-domain evaluation, and exchange across genuine dependency remain open |
+| Directed families | Fibres, transport, family morphisms, Sigma totals, Pi sections, displayed hom action, fibrewise products, pullback totalization, displayed evaluation, and finite canonical sibling/Sigma telescopes | Arbitrary dependency or variance graphs, unrestricted mixed introduction/evaluation, and exchange across genuine dependency remain open |
 | Cut and transfor calculus | Lower-star postcomposition, upper-star precomposition, off-diagonal `tapp1`, horizontal composition, selected universal beta/eta cuts | No unrestricted runtime associativity rewrite or claim that all higher coherence is judgmental |
 | Equivalence and univalence | `TypeEquiv`, groupoid univalence, truncated-universe univalence, native recursive omega-equivalence facade and one-way hom action | No full general object-equality/ordinary-isomorphism equivalence for arbitrary categories |
 | Induction | Nat and equality induction, fixed/varying-source `PathOut` induction, composition benchmark | No general equivalence with homotopy-initial categorical algebras |
@@ -23,11 +23,18 @@ claim-by-claim authority.
 | Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
 | Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
+| Presheaves and sieves | Cat-valued presheaves, Yoneda and slices, higher sieves, ordinary pointwise-subterminal sieves, pullback membership, and commutative-ring invertibility sieves | No global ordinary-sieve classifier, automatic representation by one open, topology, descent, or sheafification follows from this layer |
+| Sites and descent | Ordinary-sieve Grothendieck topology laws, chaotic model, internally generated least topology, whole sieve extensions, matching and section Hom families, and topology-locality | No inductive cover derivations, coverhood decision procedure, automatic subcanonicity, sheafification reflector, or identification with a separate rigid sheaf facade follows from locality alone |
+| Direct cover sheafification | Cat-valued categorical-HIT completion with whole return/glue/silent data, derived topology-locality, recursor, whole Hom universality, adjunction, and reflective counit | Fixed-site and Cat-valued only; no arbitrary coefficients, commutative-ring lift, left exactness, site base-change theorem, or classical plus-construction comparison |
+| Commutative algebra | Set-carrier rings and structured maps, finite unimodular presentations, polynomial and localization universal-property interfaces, selected unit/zero/idempotent models, and whole iterated/product-localization equivalence | No arbitrary polynomial/localization existence, monomial or fraction representation, categorical product theorem, global ring-package identity, or affine geometry follows from this layer alone |
+| Affine geometry | Yoneda functor of points; ordinary basic-open sieve; pointwise localization representation and multiplicative intersection; big affine slice, coordinate presheaf, and least generated Zariski topology; assumption-explicit reflective structure sheaf, localization locality, and thin affine presentation | No whole natural basic-open equivalence, global localization choice, CommRing-valued sheafification construction, small-site comparison, subcanonicity, stalk-local theorem, qcqs comparison, or representation-independent category of affine schemes |
+| Site-relative schemes | One global reflective ringed object and covering sieve; witness-rich binary generation; whole actual-slice restriction; supplied affine-basis realizations; topology-local ring forcing; dependent binary scheme total; selected actual overlap with derived ring restrictions | Binary and relative to the supplied site; no atlas-first gluing, induced slice topology, arbitrary pullback construction, overlap-affineness theorem, scheme-morphism category, compact-open/classical comparison, or representation-independent scheme theorem |
+| Supplied projective-line boundary | Universal-property Laurent transition maps; literal common-overlap identity package; thin adapter to actual inherited chart restrictions; dependent total of one already-global scheme, its actual overlap, and Laurent coordinates | The global object and Laurent identity paths remain supplied; no atlas-first gluing, projectivity or non-affineness proof, graded ring, homogeneous localization, degree-zero construction, `Proj`, or general projective space |
 | Opposite, duality, and dagger | Opposite category action and selected opposite-duality comparisons | Dagger, unitary structure, and dagger univalence are mathematical development pending a native involutive interface |
 | Structure identity and saturation | Truncation/evidence-property footholds and ordinary-isomorphism lift | Generic native structure identity and Rezk completion, including their higher universal properties, are research boundaries |
 | Weighted limits and Kan interfaces | Weighted representability, beta/eta comparison, right-adjoint preservation, terminal/conjoint specializations | Standard end formulas, pointwise Kan semantics, existence, and general dependent adjunctions are not globally packaged |
 | Weighted colimits and join | Opposite-dual colimit preservation, terminal/companion specializations, primitive join recursor and three beta observations | General coend semantics and join-as-collage mapping, hom-decomposition, opposite, and dependent-elimination theorems remain open |
-| Formal presentation | Checked categorical owners; a bounded TypeScript outer LF, explicit Core, contextual elaborator, checker/runtime, and reviewed text subset | No compiler for the complete book surface, arbitrary displayed coherence, or whole-library transfer; readable notation is not a second kernel |
+| Formal presentation | Checked categorical owners; a bounded TypeScript outer LF, explicit Core, contextual elaborator, checker/runtime, reviewed text subset, adjunction/structure declaration conveniences, and client-side reviewer | No compiler for the complete book surface, arbitrary displayed coherence, general record/inductive facility, or whole-library transfer; readable notation is not a second kernel |
 | Metatheory and models | Bounded typechecking, subject-reduction checks performed by Lambdapi, focused diagnostics, and the concrete BNat model | No global confluence, normalization, canonicity, decidability, consistency, or semantic-soundness theorem for the full combined calculus |
 | Production artifact | Manifest assembly, provenance/evidence checks, local assets, bounded browser validation, and deterministic PDF export | External mathematical peer review and a non-draft public edition remain future release work |
 
@@ -97,23 +104,38 @@ The renewed TypeScript product now elaborates a bounded direct-TypeScript and
 categorical-text surface into backend-neutral explicit Core, then checks and
 reduces that Core with a small dependent logical framework. Its contextual
 categorical layer covers reviewed ordinary, natural, displayed-functorial,
-and displayed-natural binders, including one mixed dependent telescope. An
-optional deterministic Lambdapi path remains a conformance oracle; it is not
-a production dependency, and the active Lambdapi development remains the
-mathematical authority.
+and displayed-natural binders. Within the canonical sibling/Sigma normal form
+it supports finite dependency depth and sibling groups; qualified finite
+Hom-category recursion and finite rigid indexed-section chains are also
+executable. An optional deterministic Lambdapi path remains a conformance
+oracle. It is not a production dependency, and the active Lambdapi
+development remains the mathematical authority.
 
-This is a real executable bridge, but not completion of the canonical
-mathematical surface. Arbitrary displayed coherence, unrestricted telescope
-depth and variance, a compiler for the whole book notation, and systematic
-transfer of the remaining library are still engineering boundaries. The
-older TypeScript prototype remains historical feasibility evidence; its
-stale category-specific layer is neither an authority nor the architecture
-of the renewed product.
+The same outer LF has two bounded authoring conveniences. One declares an
+adjunction from already typed rectangular data, or from a counit and whole
+hom transpose, while retaining proof-time rather than runtime agreement with
+the stable observations. The other declares an unparameterized,
+nonrecursive, single-constructor dependent structure with named projections
+and projection beta rules. Both expand to ordinary declarations; neither adds
+a trusted Core form, categorical owner, general record eta, eliminator,
+recursion, or positivity principle.
 
-On the engineering side, a physical split of `emdash3_2.lp` remains
-optional. It should begin only when a measured dependency or evidence-ownership
-problem justifies the migration, and it must preserve declaration/rule order
-and all current checks one boundary at a time.
+This is a real executable bridge, visible in the client-side integrated
+reviewer, but not completion of the canonical mathematical surface. Arbitrary
+dependency and variance graphs, coherence outside the qualified grammar, a
+compiler for the whole book notation, a general record or inductive facility,
+and systematic transfer of the remaining library are still engineering
+boundaries. The older TypeScript prototype remains historical feasibility
+evidence; its stale category-specific layer is neither an authority nor the
+architecture of the renewed product.
+
+Ordinary DevOps makes checks, assembly, and release repeatable. The project's
+MathOps discipline additionally separates mathematical owners, independent
+reviewers, generated evidence and health views, authored sources, and
+deterministic release artifacts. That separation makes drift and provenance
+auditable. It does not convert a passing build, warning inventory, browser
+run, or reproducible PDF into a confluence, normalization, consistency, or
+soundness theorem.
 
 ## F.6 Reading Claims Across Editions
 

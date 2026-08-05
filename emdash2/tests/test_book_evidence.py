@@ -8,6 +8,21 @@ from scripts.check_book_evidence import main, reference_role_issue
 class BookEvidenceTests(unittest.TestCase):
     def test_active_owner_module_is_allowed(self) -> None:
         self.assertIsNone(reference_role_issue("emdash3_2.lp", owner=True))
+        self.assertIsNone(
+            reference_role_issue("emdash3_2_presheaves.lp", owner=True)
+        )
+        self.assertIsNone(
+            reference_role_issue(
+                "emdash3_2_commutative_algebra_presheaves.lp", owner=True
+            )
+        )
+
+    def test_unregistered_kernel_like_file_is_not_an_owner(self) -> None:
+        self.assertEqual(
+            reference_role_issue("emdash3_2_not_active.lp", owner=True),
+            "owner must be an active Lambdapi module, got "
+            "emdash3_2_not_active.lp",
+        )
 
     def test_report_cannot_be_an_implementation_owner(self) -> None:
         self.assertEqual(

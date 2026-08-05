@@ -9,8 +9,8 @@
         "The emdash contributors"
       ],
       "edition": "overview research article",
-      "editionVersion": "0.1.0-dev",
-      "publicationDate": "2026-07-30",
+      "editionVersion": "0.2.0-dev",
+      "publicationDate": "2026-08-05",
       "status": "draft",
       "keywords": [
         "functorial type theory",
@@ -20,7 +20,7 @@
         "proof assistants",
         "emdash"
       ],
-      "artifact": "emdash2/output/pdf/emdash-v3.2-overview-0.1.0-dev.pdf",
+      "artifact": "emdash2/output/pdf/emdash-v3.2-overview-0.2.0-dev.pdf",
       "distribution": {
         "markdown": "docs/emdash3_2.md",
         "pdf": "docs/emdash3_2.pdf"

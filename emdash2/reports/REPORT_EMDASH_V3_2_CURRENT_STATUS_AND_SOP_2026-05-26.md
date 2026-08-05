@@ -3784,10 +3784,13 @@ downstream module selects ordinary sieves by pointwise native subterminality
 and preserves that evidence under the same pullback action. It does not prove
 the ordinary-sieve carrier set-valued and does not declare `Omega`, descent,
 or topology. A further rule-free module packages direct proposition-valued
-sieve topologies and the chaotic model without binding `Omega`, generating a
-coverage saturation, or adding sheafification/descent. Those gates and the
-measured point-component observation boundary are maintained in the living
-PSSS plan.
+sieve topologies and the chaotic model without binding `Omega` or itself
+adding generated coverhood or sheafification. Downstream one-way modules now
+construct the least topology accepting witness-rich generators and the
+fixed-site Cat-valued direct-cover reflector described under “Constructed
+Cat-Valued Sheafification Status” below. The later CommRing-valued affine and
+scheme packages retain supplied structure-sheaf/locality capabilities; they
+are not derived silently from that Cat-valued reflector.
 
 The CommRing-valued classifier is transparent rather than a second rigid
 presheaf facade. Explicit restriction applies the retained structured-map

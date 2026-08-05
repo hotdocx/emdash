@@ -2,11 +2,20 @@
 
 Date: 2026-08-04
 
-`../../docs/PARALLEL_GOAL_V3_2_INTEGRATION_PLAN_2026-08-04.md` is the active
-cross-layer ledger joining the completed TypeScript-elaborator and
-presheaves/sites/schemes histories. It owns conflict decisions, exact-source
-contract requalification, regenerated evidence, and the validated local-main
-handoff; it adds no independent mathematical authority.
+`../../docs/EMDASH_BOOK_V3_2_POST_INTEGRATION_EXPANSION_PLAN_2026-08-04.md`
+is the active cross-layer editorial and implementation ledger for the
+post-integration book, concise article, and narrowly supporting documentation
+work. It routes the new local-to-global spiral from presheaves and sieves
+through direct sheafification, constructive algebraic geometry, site-relative
+schemes, and the supplied projective-line boundary. It adds no mathematical
+authority: active owners and checked examples remain authoritative for every
+formal claim.
+
+`../../docs/PARALLEL_GOAL_V3_2_INTEGRATION_PLAN_2026-08-04.md` records the
+completed cross-layer integration joining the TypeScript-elaborator and
+presheaves/sites/schemes histories. It owns the historical conflict decisions,
+exact-source contract requalification, regenerated evidence, and validated
+local-main handoff; it adds no independent mathematical authority.
 
 `REPORT_EMDASH_V3_2_COMPUTATIONAL_SCHEMES_CONTINUATION_PLAN_2026-08-03.md`
 records the completed computational-schemes continuation through the PSSS tip

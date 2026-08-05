@@ -7,9 +7,10 @@ Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
 
 Notation in this report is immediately authoritative for mathematical comments
-and examples. It becomes parser syntax only after a separate elaboration and
-grammar implementation; no notation below should be read as an already active
-Lambdapi parser extension.
+and examples. Most of it becomes parser syntax only after a separate
+elaboration and grammar implementation. The bounded TypeScript categorical
+binder profile identified below is already implemented; no notation here
+should be read as an active Lambdapi parser extension.
 
 Supersedes the older v3 faithful surface-syntax plan, which is no longer an
 active report after the 2026-06-05 reports consolidation.
@@ -49,6 +50,47 @@ The operators are intentionally different:
 
 Subscripts carry displayed indices or future substitutions. Superscripts carry
 ambient category or displayed-family annotations.
+
+## Implemented Bounded Categorical Binder Text
+
+The root TypeScript text adapter implements one reviewed, first-order subset
+of this mathematical surface. Intrinsic categorical variation is written on
+the lambda, while the domain or family annotation is separate and may be
+omitted when the expected type determines it:
+
+```text
+λ^f  x [: A]. body       ordinary functorial abstraction
+λ^n  k [: K]. body       natural or indexed abstraction
+λ^fd a [: E]. body       displayed-functorial abstraction
+λ^nd a [: E]. body       displayed-natural abstraction
+```
+
+Whitespace application is neutral. The resolver uses inferred classifiers,
+variation, and the expected result to select an existing object, arrow,
+section, displayed, or higher-action owner; the parser does not attach an
+owner-specific meaning to application punctuation.
+
+Displayed contextual binders may group a canonical telescope:
+
+```text
+λ^fd (a : A; b : B, c : C; d : D). body
+λ^nd (a : A; b : B, c : C; d : D). body
+```
+
+A semicolon advances one genuine dependency level. Commas group independent
+siblings over the same preceding base. The implemented contextual compiler
+accepts finite sequences of these canonical levels with finite sibling groups
+for its reviewed displayed-functorial and displayed-natural constructions.
+It also supports reviewed nested ordinary binders, qualified finite
+Hom-category recursion, and finite rigid indexed-section chains. It does not
+license arbitrary dependency or variance graphs, exchange across a dependency
+edge, unrestricted mixed introduction/currying, or invented coherence.
+
+The browser exposes twelve presets across the four modes, but the preset list
+is evidence, not the grammar definition. Direct typed TypeScript construction
+remains broader than the text adapter. Both routes lower to the same explicit
+Core and generic checker, and unsupported routes fail with source-located
+diagnostics.
 
 ## Ordinary Homs
 
@@ -432,9 +474,48 @@ Kernel names are `SieveCoverage K`, `Covers J R`, `GrothMaximal J`,
 `groth_topology_cover_predicate`, `groth_topology_maximal`,
 `groth_topology_pullback`, and `groth_topology_local_character` for named
 package observations. “Coverage” here means a direct proposition-valued
-predicate on sieves; a syntax/API for generating cover families is not yet
-selected. `Omega`, free saturation, sheafification, and descent remain
-separate names and gates.
+predicate on sieves. The direct sites module does not itself generate
+coverhood or perform sheafification; the downstream generated-topology and
+direct-cover constructions use the separate notation below. `Omega` remains
+reserved and unbound.
+
+For witness-rich generators and the constructed fixed-site Cat-valued
+reflector, comments and examples may write:
+
+```text
+Gen_K(U,R)                 : retained presentations generating R on U
+J_G                        : least Grothendieck topology accepting Gen
+Gen ⊆ J_G                  : generator acceptance
+J_G <= T                   : leastness against every accepting topology T
+
+Match_P(R)                 : whole matching-family hom-category
+Sect_P(U)                  : whole section hom-category
+res_(P,R) : Sect_P(U) -> Match_P(R)
+a_T(P)                     : direct cover completion of P
+eta_P : P -> a_T(P)        : whole return/unit
+glue                       : whole cover-indexed recursive glue
+silent                     : glue o restriction = id on sections
+a_T : Psh_Cat(K) ⇄ Sh_Cat(K,T) : i_T
+a_T ⊣ i_T.
+```
+
+The literal generated-topology owners are `SieveGeneratorFamily`,
+`GeneratedSieveCover`, `generated_groth_topology`,
+`generated_groth_topology_accepts_generators`, and
+`generated_groth_topology_least`. This is an impredicative/intersection
+presentation of the least topology. It supplies no inductive derivation
+syntax, cover normal form, or decision procedure.
+
+The direct-cover owners include `DirectCoverMatching_cat`,
+`DirectCoverSection_cat`, `DirectCoverSheafStructure`,
+`DirectCoverCompletionPsh`, `direct_cover_completion_unit`,
+`direct_cover_completion_glue_func`,
+`direct_cover_sheafification_func`, and
+`cat_valued_sheaf_include_psh_func`. The completion constructors are the
+categorical-HIT boundary; locality, Hom universality, and the adjunction are
+derived downstream. This notation is fixed-site and Cat-valued. It does not
+name a CommRing-valued lift, left exactness, slice/base-change semantics, or a
+constructed scheme structure sheaf.
 
 Set-carrier commutative-ring notation is:
 
@@ -934,8 +1015,9 @@ complete scheme is implied. The direct big-affine topology is named only by
 the `BigZar` block above; its sheaf and scheme consumers remain separately
 gated.
 
-No string-parser grammar is selected by this section. It records canonical
-comments, examples, and direct TypeScript-AST intent only.
+This algebraic section adds no further parser tokens. It records canonical
+comments, examples, and direct TypeScript-AST intent; the implemented textual
+subset remains the bounded categorical binder profile stated above.
 
 ## Mixed-Variance Displayed Functor Families
 
@@ -1083,7 +1165,7 @@ Core selection only: the raw kernel term `Pullback_catd(P(B,C),F)` is not
 currently definitionally equal to it, and no generic total-category pullback
 is intended.
 
-The bounded direct-TypeScript mixed telescope is:
+The TypeScript mixed-telescope surface is:
 
 ```text
 k : K;
@@ -1092,11 +1174,13 @@ b : B[(k,a)], c : C[(k,a)];
 d : D[((k,a),(b,c))].
 ```
 
-It is constructed with `displayedDependentContextLambda` in the root-only
-`fibred-displayed-chain-2a` profile. The middle sibling block is inferred from
-the typed family bases; explicit `apply` and `fibrePair` nodes remain valid
-direct-TypeScript syntax. This is not a string-parser grammar or a claim of
-arbitrary `:^nd` telescope depth.
+It is constructed through `displayedDependentContextLambda` and the generic
+contextual compiler. The middle sibling block is inferred from the typed
+family bases; explicit `apply` and `fibrePair` nodes remain valid direct-
+TypeScript syntax. The bounded text adapter implements the corresponding
+semicolon/comma punctuation and finite canonical dependency levels for the
+reviewed displayed modes. Neither surface licenses arbitrary dependency or
+variance graphs.
 
 Constant-middle direct application may be written:
 

@@ -27,7 +27,7 @@
     "article:pdf:check": "node scripts/check_article_pdf.mjs emdash-v3-2-overview",
     "article:release": "../../scripts/pnpmw --dir emdash2/print run article:check && ../../scripts/pnpmw --dir emdash2/print run build && node scripts/check_console.mjs --document=emdash-v3-2-overview && node scripts/export_article_pdf.mjs emdash-v3-2-overview && node scripts/check_article_pdf.mjs emdash-v3-2-overview",
     "prevalidate:paper": "../../scripts/pnpmw --dir emdash2/print run book:assemble",
-    "test:registry": "node --test scripts/document_registry.test.mjs scripts/article_manifest.test.mjs",
+    "test:registry": "node --test scripts/document_registry.test.mjs scripts/article_manifest.test.mjs scripts/book_architecture.test.mjs",
     "validate:paper": "../../scripts/pnpmw --dir emdash2/print run test:registry && node scripts/validate_paper.mjs",
     "check:console": "node scripts/check_console.mjs",
     "check:render": "../../scripts/pnpmw --dir emdash2/print run validate:paper && ../../scripts/pnpmw --dir emdash2/print run build && ../../scripts/pnpmw --dir emdash2/print run check:console"

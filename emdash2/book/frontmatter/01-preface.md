@@ -68,10 +68,40 @@ organizes functorial computation as a calculus of cuts. Chapters
 [10](#chapter-10)–[15](#chapter-15) develop categories, functors, adjunctions,
 Yoneda, duality, structure identity, and saturation. Chapters
 [16](#chapter-16)–[17](#chapter-17) treat weighted limits and colimits before
-returning to directed geometry through join. [Appendix G](#appendix-formal-presentation)
-then states how the mathematical surface, checked categorical kernel, bounded
-TypeScript elaborator through explicit Core, and external models fit together,
-with the Lambdapi kernel remaining the mathematical authority.
+returning to directed geometry through join.
+
+A third spiral begins in Chapters [18](#chapter-18)–[24](#chapter-24). It turns
+Yoneda's field of probes toward local-to-global geometry: presheaves organize
+changing views, higher sieves retain categories of witnesses, and ordinary
+sieves record stable local questions. Sites select which sieves cover, while
+matching families state descent as one restriction-of-Hom problem. Direct
+cover completion then freely adjoins coherent solutions and assembles the
+Cat-valued sheaf reflector from its whole Hom universal property. Commutative
+algebra then supplies set-carrier rings, finite unit-ideal certificates, free
+extension interfaces, and localizations characterized by contractible factor
+spaces. The recurring geometric example is the sieve $D_U(s)$ of every probe
+along which a section becomes invertible. A localization may represent this
+question on affine points, but the sieve is meaningful before
+representability is known. The affine functor of points then turns selected
+localizations into basic charts, multiplication into pointwise intersection,
+and finite unit-ideal certificates into the generated big Zariski topology,
+while keeping structure-sheaf and localization-locality assumptions explicit.
+Starting from one supplied global ringed object, a covering sieve, and two
+constructively generating affine realizations, the spiral then reaches a
+binary site-relative scheme presentation. Whole slice restrictions and a
+selected actual chart intersection inherit their maps from the single global
+structure presheaf; atlas-first gluing and comparison with classical or
+functorial qcqs schemes remain visible boundaries. On that actual
+intersection, polynomial and localization universality construct the Laurent
+coordinate changes of two supplied affine-line charts. The spiral ends with
+an assumption-explicit projective-line presentation: the overlap calculation
+is checked, while construction of the global object, graded `Proj`, general
+projective space, and non-affineness remain visible boundaries.
+
+[Appendix G](#appendix-formal-presentation) then states how the mathematical
+surface, checked categorical kernel, bounded TypeScript elaborator through
+explicit Core, and external models fit together, with the Lambdapi kernel
+remaining the mathematical authority.
 
 The book is evidence-aware without being a source-code catalogue. Checked
 claims name their evidence in compact notes. Free mathematical development is

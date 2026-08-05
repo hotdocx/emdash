@@ -196,6 +196,152 @@
       },
       "secondaryEvidence": ["OP-DUALITY", "JOIN-RECURSOR"],
       "boundary": "terminal and companion weights are active interface specializations; join-as-collage semantics, hom decomposition, opposite comparison, and dependent elimination remain research infrastructure"
+    },
+    {
+      "id": "chapter-18",
+      "number": 18,
+      "path": "book/chapters/18-presheaves-and-sieves.md",
+      "title": "Presheaves And Sieves",
+      "conceptualOwner": "presheaf probes and sieve-valued local questions",
+      "spiralFrom": ["chapter-2", "chapter-13"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "ORDINARY-SIEVE-PULLBACK"
+      },
+      "secondaryEvidence": [
+        "PSH-YONEDA-HIGHER-SIEVE",
+        "COMM-RING-INVERTIBILITY-SIEVE"
+      ],
+      "boundary": "the active pullback and invertibility sieves do not imply a global ordinary-sieve classifier, representability by one open, a topology, descent, sheafification, or a comparison with Zeuner's qcqs schemes"
+    },
+    {
+      "id": "chapter-19",
+      "number": 19,
+      "path": "book/chapters/19-sites-covers-and-descent.md",
+      "title": "Sites, Covers, And Descent",
+      "conceptualOwner": "Grothendieck coverage and matching-family descent",
+      "spiralFrom": ["chapter-13", "chapter-18"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "GENERATED-GROTH-TOPOLOGY"
+      },
+      "secondaryEvidence": [
+        "GROTH-TOPOLOGY-SIEVE-LAWS",
+        "SIEVE-MATCHING-LOCALITY"
+      ],
+      "boundary": "topology-locality is an equivalence property of an existing presheaf; the site and generated-topology layers do not themselves construct a sheafification reflector, derivation syntax, coverhood decision procedure, or general subcanonicity theorem"
+    },
+    {
+      "id": "chapter-20",
+      "number": 20,
+      "path": "book/chapters/20-sheafification-by-cover-completion.md",
+      "title": "Sheafification By Cover Completion",
+      "conceptualOwner": "free coherent cover completion and the Cat-valued sheaf reflector",
+      "spiralFrom": ["chapter-6", "chapter-12", "chapter-19"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "CAT-VALUED-SHEAFIFICATION-REFLECTOR"
+      },
+      "secondaryEvidence": [
+        "DIRECT-COVER-COMPLETION-HIT",
+        "DIRECT-COVER-COMPLETION-LOCALITY",
+        "DIRECT-COVER-COMPLETION-UNIVERSALITY"
+      ],
+      "boundary": "the constructed reflector is fixed-site and Cat-valued; no arbitrary coefficient category, commutative-ring lift, left exactness, site base-change comparison, classical plus-construction comparison, coverhood decision procedure, or global normalization theorem is claimed"
+    },
+    {
+      "id": "chapter-21",
+      "number": 21,
+      "path": "book/chapters/21-commutative-algebra-by-universal-property.md",
+      "title": "Commutative Algebra By Universal Property",
+      "conceptualOwner": "representation-free polynomial extension, one-element localization, and finite cover certificates",
+      "spiralFrom": [
+        "chapter-3",
+        "chapter-12",
+        "chapter-18"
+      ],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "COMM-RING-ITERATED-LOCALIZATION-EQUIV"
+      },
+      "secondaryEvidence": [
+        "COMM-RING-STRUCTURED-CATEGORY",
+        "FINITE-UNIMODULAR-COVER-DATA",
+        "COMM-RING-POLYNOMIAL-UNIVERSALITY",
+        "COMM-RING-LOCALIZATION-UNIVERSALITY",
+        "COMM-RING-LOCALIZATION-MODELS"
+      ],
+      "boundary": "the active algebra gives universal-property interfaces and selected empty-variable, unit, zero, idempotent, and split-idempotent models; it does not construct polynomial algebras or localizations for arbitrary inputs, choose fraction or monomial syntax, prove a categorical product universal property, identify arbitrary ring packages, or yet construct affine geometry"
+    },
+    {
+      "id": "chapter-22",
+      "number": 22,
+      "path": "book/chapters/22-affine-geometry-and-the-sieve-df.md",
+      "title": "Affine Geometry And The Sieve $D(f)$",
+      "conceptualOwner": "functor-of-points affine geometry with invertibility sieves, localization charts, and the generated big Zariski site",
+      "spiralFrom": [
+        "chapter-13",
+        "chapter-18",
+        "chapter-21"
+      ],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "AFFINE-BASIC-OPEN-POINT-REPRESENTATION"
+      },
+      "secondaryEvidence": [
+        "AFFINE-BASIC-OPEN-INTERSECTION",
+        "AFFINE-BIG-SLICE-COORDINATES",
+        "AFFINE-BIG-ZARISKI-TOPOLOGY",
+        "AFFINE-STRUCTURE-SHEAF-PRESENTATION",
+        "AFFINE-THIN-SCHEME-PRESENTATION"
+      ],
+      "boundary": "basic-open representation and intersection are checked pointwise rather than as whole natural equivalences; the big affine slice and least generated topology are constructed, while commutative-ring sheafification, coordinate locality, and the thin affine-scheme presentation remain assumption-explicit, with no small-site, stalk, qcqs-comparison, or representation-independent scheme theorem"
+    },
+    {
+      "id": "chapter-23",
+      "number": 23,
+      "path": "book/chapters/23-schemes-from-covering-charts.md",
+      "title": "Schemes From Covering Charts",
+      "conceptualOwner": "global-first site-relative schemes with constructively generated affine covers and inherited actual overlaps",
+      "spiralFrom": [
+        "chapter-18",
+        "chapter-19",
+        "chapter-22"
+      ],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "BINARY-SITE-RELATIVE-SCHEME"
+      },
+      "secondaryEvidence": [
+        "GLOBAL-RINGED-COVER-BINARY-GENERATION",
+        "TOPOLOGY-LOCAL-RING-CERTIFICATE",
+        "WHOLE-SLICE-AFFINE-REALIZATION",
+        "ACTUAL-BINARY-CHART-OVERLAP"
+      ],
+      "boundary": "the global object, reflective slice sites, topology-local certificate, affine presentations, basis comparisons, and selected slice product are assumption-explicit; the package is binary and site-relative, with no atlas-first gluing, arbitrary pullback construction, compact-open or classical comparison, scheme-morphism category, or representation-independent scheme theorem"
+    },
+    {
+      "id": "chapter-24",
+      "number": 24,
+      "path": "book/chapters/24-projective-line-and-boundary.md",
+      "title": "The Projective Line And The Boundary Of Construction",
+      "conceptualOwner": "universal-property Laurent coordinates on an actual inherited overlap and the assumption-explicit supplied projective-line boundary",
+      "spiralFrom": [
+        "chapter-21",
+        "chapter-22",
+        "chapter-23"
+      ],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "SUPPLIED-P1"
+      },
+      "secondaryEvidence": [
+        "LAURENT-TRANSITIONS-BY-UNIVERSALITY",
+        "LAURENT-COMMON-OVERLAP",
+        "ACTUAL-SCHEME-LAURENT-OVERLAP",
+        "ACTUAL-BINARY-CHART-OVERLAP"
+      ],
+      "boundary": "the global site-relative scheme, selected actual intersection, common base, polynomial and localization presentations, and whole transition-identity paths are supplied at their stated boundaries; Laurent transition maps are constructed by universal properties, but no atlas-first gluing, closed projective object, projectivity or non-affineness proof, graded ring, homogeneous localization, degree-zero construction, Proj, or general projective space is constructed"
     }
   ],
   "appendix": {
@@ -217,7 +363,7 @@
       "FORMAL-ELABORATION-BOUNDARY",
       "FORMAL-METATHEORY-BOUNDARY"
     ],
-    "boundary": "the active categorical kernel and representative rule families are checked; the renewed TypeScript product covers a bounded direct and text surface through explicit Core, while a complete canonical-surface compiler, arbitrary displayed coherence, whole-library transfer, and global confluence, normalization, canonicity, decidability, consistency, or semantic-soundness metatheorems are not claimed"
+    "boundary": "the active categorical kernel and representative rule families are checked; the renewed TypeScript product covers a bounded direct and text surface through explicit Core, bounded adjunction and dependent-structure declaration conveniences, and a client-side reviewer, while a complete canonical-surface compiler, arbitrary displayed coherence, a general record or inductive facility, whole-library transfer, and global confluence, normalization, canonicity, decidability, consistency, or semantic-soundness metatheorems are not claimed"
   },
   "categoryTranslation": [
     {

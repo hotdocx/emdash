@@ -26,44 +26,43 @@ emdash Core and a small dependent logical framework. That route makes a
 reviewed fragment directly usable; it does not become a second categorical
 kernel or define the mathematics retroactively.
 
-The architecture therefore distinguishes these roles:
+The architecture therefore distinguishes these roles before its two
+executable paths meet in the operational diagram that follows:
 
 | Layer or role | Responsibility | Present status |
 | --- | --- | --- |
 | canonical mathematical surface | the notation and rule presentation used by this book | active for prose, comments, and examples; not a parser grammar |
 | scoped contextual elaboration | recursively interprets reviewed categorical variables, binders, neutral applications, and structural forms against typed expectations | active for the bounded direct-TypeScript and text profiles |
+| typed outer-LF declarations | validate selected higher-level declarations and expand them into ordinary LF declarations and rules | active for adjunction assumptions and one bounded dependent-structure form; no new trusted Core node |
 | backend-neutral explicit emdash Core | records the selected logical and categorical owners without committing to one runtime backend | active TypeScript intermediate representation |
 | generic TypeScript dependent LF | checks Core terms, performs conversion and bounded reduction, and runs the reviewed proof-time rules | active for the recorded product boundary |
 | active Lambdapi v3.2 kernel | authors the categorical declarations, computation, and proof-time comparisons used as mathematical authority | active and checked in the cited modules; also the conformance oracle |
 | external semantic models | interpret a stated kernel fragment in mathematical categories or other structures | separate mathematical work; available only in selected examples |
 
-The operational direction is
-
 ```text
 canonical mathematical surface (broader than implemented text)
-               |
-               | reviewed direct TypeScript / text subset
-               v
-scoped contextual elaboration
-               |
-               v
-backend-neutral explicit emdash Core
-               |
-               v
+  -> reviewed direct TypeScript / text expressions
+  -> scoped contextual elaboration
+  -> explicit Core terms ------------------------------------------+
+                                                                  |
+typed host declarations                                           |
+  -> deterministic expansion                                      |
+  -> ordinary LF declarations and rules --------------------------+
+                                                                  |
+                                                                  v
 generic TypeScript LF checker / conversion / bounded runtime
-               |
-               +---- optional deterministic Lambdapi emission/conformance
+  -> optional deterministic Lambdapi emission / conformance
 
 active authored Lambdapi v3.2 kernel = mathematical authority
 external models                    = separate mathematical work
 ```
 
-The text adapter is not the checker, the TypeScript checker is not the active
-mathematical authority, and the implemented text subset is not the whole
-canonical surface. External interpretation is separate again. Keeping these
-roles distinct lets us say exactly which claims are checked computation,
-which are executable presentation, which are mathematical exposition, and
-which remain research.
+The text adapter is not the checker, an authoring macro is not a new term
+former, the TypeScript checker is not the active mathematical authority, and
+the implemented text subset is not the whole canonical surface. External
+interpretation is separate again. Keeping these roles distinct lets us say
+exactly which claims are checked computation, which are executable
+presentation, which are mathematical exposition, and which remain research.
 
 <a id="appendix-formal-presentation-g1"></a>
 
@@ -524,32 +523,30 @@ evidence register connects book claims to both declarations and reviewers.
 
 ### Modules And Ownership
 
-The current organization is:
+The source graph is larger than a useful reading list. The following map
+groups adjacent modules by mathematical responsibility; the evidence
+register supplies the exact owner and reviewer for each cited claim.
 
-| Module | Formal role |
+| Module family | Formal role |
 | --- | --- |
-| `emdash3_2.lp` | active categorical kernel and universal-construction owners |
-| `emdash3_2_presheaves.lp` | Cat-valued presheaf facade, restriction, Yoneda, slices, and Cat-valued higher sieves |
-| `emdash3_2_sieves.lp` | native subterminal categories, ordinary-sieve property packages, and pullback preservation; no `Omega` or topology |
-| `emdash3_2_sites.lp` | ordinary-sieve membership, maximal sieve, direct Grothendieck topology laws, and chaotic model; no `Omega`, generated saturation, or sheafification |
-| `emdash3_2_finite_families.lp` | Nat-indexed right-associated finite families, pointwise map, dependent pointwise evidence, and sethood; no `Fin`, list/Sum/inductive interface, or package eta |
-| `emdash3_2_commutative_algebra.lp` | set-carrier commutative-ring operation/law packages and the one-element zero-ring model; no morphism category, localization, or polynomials |
-| `emdash3_2_commutative_algebra_category.lp` | structured ring morphisms, property/sethood/extensionality proofs, `CommRing_cat`, stable pointwise identity/composition comparisons, and the full-action Path-valued carrier functor |
-| `emdash3_2_commutative_algebra_finite.lp` | finite sums/dot products, structured-map preservation, and retained unimodular/Zariski-cover presentations; no `Spec`, localization family, topology, powers/radicals, fractions, or polynomials |
-| `emdash3_2_commutative_algebra_polynomial.lp` | free commutative `R`-algebras on a variable classifier by contractible structured extension; no monomial/coefficient/quotient syntax or positive-variable representation |
-| `emdash3_2_commutative_algebra_localization.lp` | proposition-valued unit evidence, its total-element Path family, and universal-property localization at one element; no fraction, finite-family, polynomial, or Zariski representation |
-| `emdash3_2_commutative_algebra_localization_comparison.lp` | unit algebra and universal-property comparison of localization at `f*g` with localization first at `f`, then at the image of `g`; no package equality or inverse laws |
-| `emdash3_2_commutative_algebra_presheaves.lp` | CommRing-valued presheaves, computational restriction, arrowwise unit support, and its higher/ordinary invertibility sieve; no topology, sheaf, or ringed-site package |
-| `emdash3_2_commutative_algebra_zariski.lp` | selected localization families, affine basic-open arrows, elementwise universal-property base change, and pulled-back sieve membership; no global choice, proposition-valued topology, subcanonicity, `Spec`, or scheme |
-| `emdash3_2_eq1_hom_action.lp` | derived native equality-valued next-hom and groupoidality layer |
-| `emdash3_2_eq1_evidence_property.lp` | evidence-property and finite-height consequences |
-| `emdash3_2_nat_arithmetic.lp` | reusable Nat operations and sethood |
-| `emdash3_2_walking_end_hit.lp` | selected WalkingEnd signature, eliminator, computation, and comparison |
-| `emdash3_2_checks.lp` | executable diagnostics |
+| `emdash3_2.lp` | categorical nucleus: classifiers, iterated homs, functors, transfors, directed families, cuts, and universal-construction interfaces |
+| `emdash3_2_presheaves.lp`, `emdash3_2_sieves.lp`, `emdash3_2_sites.lp` | presheaves, higher and ordinary sieves, pullback, and the direct Grothendieck-topology laws |
+| `emdash3_2_generated_topologies.lp`, `emdash3_2_sieve_extensions.lp`, `emdash3_2_site_basis.lp`, `emdash3_2_ringed_sites.lp` | least generated topology, whole matching/section families, basis comparison, and ringed-site presentations |
+| `emdash3_2_direct_cover_*.lp` | return/glue/silent cover completion, recursion, topology-locality, whole Hom universality, and the resulting Cat-valued reflector |
 
-Imports use `require`; `open` brings imported public names into scope.
-The file split expresses dependency and evidence ownership. It is not a claim
-that every conceptual chapter already has its own kernel module.
+| Module family | Formal role |
+| --- | --- |
+| `emdash3_2_commutative_algebra.lp` through the polynomial and localization modules | set-carrier rings and structured maps, finite unit-ideal data, free extension, universal localization, and whole localization comparisons without polynomial or fraction syntax |
+| the commutative-algebra presheaf, affine-points, affine-Zariski, ringed-site, and affine-scheme modules | the invertibility sieve $D(f)$, localization representation, generated big Zariski topology, coordinate presheaf, and assumption-explicit affine presentations |
+| the ringed-space cover, affine-chart, site-relative-scheme, and chart-overlap modules | one supplied global ringed object, constructively generated covers, whole actual-slice restrictions, affine realizations, topology-local rings, and inherited overlaps |
+| `emdash3_2_commutative_algebra_laurent.lp`, `emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`, `emdash3_2_commutative_algebra_projective_line.lp` | universal-property coordinate inversion on one literal overlap and the supplied projective-line boundary; no graded `Proj` construction |
+| `emdash3_2_eq1_*.lp`, `emdash3_2_nat_arithmetic.lp`, `emdash3_2_walking_end_hit.lp` | equality-valued higher action, reusable arithmetic, and the WalkingEnd encode-decode development |
+| `emdash3_2_checks.lp` and `examples/` | executable diagnostics and independent reviewer-facing witnesses rather than mathematical owners |
+
+Imports use `require`; `open` brings imported public names into scope. The
+file split records dependency and evidence ownership. A conceptual chapter
+may use several owners, and one source family may support several chapters;
+neither direction is forced to mirror the table of contents.
 
 Three source policies are essential for reading rules correctly.
 
@@ -805,7 +802,7 @@ explicit owners described above:
 
 | Stage | Implemented bounded profile | Retained boundary |
 | --- | --- | --- |
-| parse | located `^f`, `^n`, `^fd`, and `^nd` binders, neutral application, and reviewed constructors and contexts | not the complete book or Lambdapi grammar |
+| parse | located `^f`, `^n`, `^fd`, and `^nd` binders, neutral application, selected constructors, and grouped displayed contexts | not the complete book or Lambdapi grammar |
 | elaborate | typed expected classifiers route recursively through the existing contextual categorical program | no arbitrary pointwise-to-coherent synthesis |
 | select owner | reviewed operation families lower to internal categorical and structural owners | no whole-library owner-acquisition claim |
 | check and reduce | the generic TypeScript LF checks explicit Core, compares terms, and executes the bounded runtime | no global metatheory |
@@ -819,7 +816,7 @@ type must disambiguate them.
 
 ### Surface Forms And Explicit Targets
 
-The current canonical notation includes:
+The canonical notation includes:
 
 | Surface | Explicit target |
 | --- | --- |
@@ -834,19 +831,15 @@ The current canonical notation includes:
 
 For example, if $\eta:F\Rightarrow G$ and $f:x\to_Ay$, the readable term
 $\eta[f]:F[x]\to_BG[y]$ elaborates toward the fully explicit owner
-
-```lambdapi
-@tapp1_fapp0 A B F G x y eta f
-```
+`@tapp1_fapp0 A B F G x y eta f`.
 
 The source notation does not have to expose all seven parameters, but the
 result must typecheck as that operation or an explicitly documented
-equivalent owner.
+equivalent owner. Readability changes what the author writes, not what the
+checker trusts.
 
-### Executable Binders And Structural Lowering
-
-Binder modes express how variables may vary. The reviewed executable forms
-are
+**One compositional motif, four binder modes.** Binder modes say how a
+variable is allowed to vary. The reviewed executable forms are
 
 ```text
 λ^f  x : A. ...
@@ -863,44 +856,55 @@ notation $k:^{n}K$ therefore records the same natural/indexed role as
 executable binders are literally the same grammar. Ordinary object binding
 in the outer LF uses its ordinary dependent lambda.
 
-For example, assume
+The four modes are easiest to compare around one compositional motif. Let
+$H:A\to B$ be an ordinary functor. Let $E,D,Q:K\to\mathsf{Cat}$ be directed
+families, $FF:E\to D$ and $GG:D\to Q$ displayed functors, and $s$ a coherent
+section of $E$. Finally, let
+$\eta:F_0\Rightarrow F_1$ and $\theta:F_1\Rightarrow F_2$ be displayed
+transfors. At successive categorical levels the same idea appears as:
 
-```text
-A, B, C : Cat
-E : Functor B (Functor_cat A C)
-```
+| Mode | Representative expression | Mathematical reading |
+| --- | --- | --- |
+| `^f` | `λ^f x : A. H x` | an ordinary functorial variable inside one category |
+| `^n` | `λ^n k : K. (GG k) ((FF k) (s k))` | a base variable whose result is a coherent section of $Q$ |
+| `^fd` | `λ^fd a : E. GG (FF a)` | an object varying in a displayed family, retaining its hidden base index |
+| `^nd` | `λ^nd k : K. composeCells (theta k) (eta k)` | a coherent family of cells between displayed functors, one hom level higher |
 
-The reviewed expression
+These are not four spellings for an ordinary lambda. The `^n` form must
+respect transport in the base; the `^fd` form must retain displayed object and
+arrow action; the `^nd` form must construct a transfor rather than a bare
+pointwise family. In each case the expected classifier selects a reviewed
+internal construction. If that construction is absent, elaboration fails
+instead of accepting a JavaScript callback with an external naturality
+promise.
+
+Ordinary nesting already shows why recursive scope matters. Assume
+`A, B, C : Cat` and `E : Functor B (Functor_cat A C)`. The reviewed
+expression is:
 
 ```text
 λ^f x : A. λ^f y : B. E y x
 ```
 
-has classifier `Functor A (Functor_cat B C)`. Neutral application first
+This term has classifier `Functor A (Functor_cat B C)`. Neutral application first
 selects the action of `E` on `y` and then its action on `x`. Recursive
-abstraction lowers the result through the existing exchange/currying
-construction; a compact rendering of the selected structural term is
-
-```text
-fapp0
-  (Functor_cat B (Functor_cat A C))
-  (Functor_cat A (Functor_cat B C))
-  exchange-functor-abstraction
-  E
-```
+abstraction lowers the result through the existing
+`exchange-functor-abstraction` owner before explicit Core is checked.
 
 No external functoriality equation accompanies the source expression. The
 selected owner already carries object and arrow action, and the resulting
 explicit Core is checked by the same generic LF as other terms.
 
+### Dependency Levels And Independent Siblings
+
 Displayed contexts make the distinction between dependency and independence
-visible. The bounded mixed telescope
+visible. A representative mixed telescope is
 
 ```text
 λ^fd (a : A; b : B, c : C; d : D). fibrePair b c
 ```
 
-has dependency levels `A; B,C; D`. A semicolon advances to a family over the
+It has dependency levels `A; B,C; D`. A semicolon advances to a family over the
 preceding total context, while a comma groups independent siblings over the
 same prefix. The middle pair lowers through the transparent fibrewise product,
 displayed pairing, Sigma projections, and reindexing owners. Thus `b` and `c`
@@ -908,6 +912,73 @@ may be paired, weakened, contracted, or exchanged fibrewise; no exchange of
 `a` across a classifier depending on `a` is implied. Object and base-arrow
 behavior remain internal to those owners rather than being supplied as
 external coherence evidence.
+
+The implemented normal form is not limited to the displayed four-variable
+example. It supports any finite sequence of these canonical dependency
+levels, with finite sibling groups at a level, for the reviewed displayed
+functorial and displayed-natural constructions. Separately, the category
+resolver can descend through any finite number of qualified Hom-category
+levels over its supported roots, and the indexed-section route can compose a
+finite rigid chain of displayed functors on a section. These depth results do
+not amount to arbitrary dependency or variance graphs. Exchange
+across a dependency edge, unrestricted mixed introduction and currying, and
+coherence synthesis outside the qualified grammar remain open.
+
+### Declaration Convenience Without New Mathematics
+
+Some repetition belongs to the surrounding logical framework rather than to
+categorical terms. Two direct-TypeScript declaration forms remove that
+repetition before explicit Core is checked.
+
+For an adjunction, `assumeAdjunction` receives already declared functors,
+unit, and counit. It expands to an ordinary `Adjunction(F,G)` assumption and
+two proof-time agreements identifying the declared transformations with the
+kernel's stable unit and counit observations. A second form accepts a counit
+and a coherent whole hom-profunctor transpose. In both cases the declaration
+preserves the distinction between proof-time agreement and runtime
+conversion: independently named maps do not silently become new reduction
+rules for the categorical kernel.
+
+For a finite dependent package, `declareStructure` expands one
+unparameterized, nonrecursive, single-constructor structure into an opaque
+carrier, an injective constructor, named primitive projections, and one
+ordered, subject-reducing beta rule for each projection. Later field types may
+depend on earlier fields, which is the essential convenience for mathematical
+presentations. The form generates no record eta, eliminator, recursion,
+positivity theorem, general inductive declaration, or browser/text syntax.
+
+Both conveniences are conservative in the practical architectural sense:
+their output consists of the same ordinary LF declarations and rules that
+could have been written explicitly. Neither adds a trusted Core node or a
+Lambdapi mathematical owner. The elaborator improves the act of stating a
+presentation; it cannot turn missing structure or coherence into a theorem.
+
+### Located Text And The Browser Reviewer
+
+The text adapter accepts a small, located language rather than a string that
+is later treated as trusted code. It records source spans, parses the reviewed
+binders, grouped contexts, neutral whitespace application, and selected term,
+category, and displayed-family constructors, then delegates typing and owner
+selection to the same contextual program used by direct TypeScript. A failure
+therefore reports its parsing, resolution, or elaboration phase together with
+the source location. It is not a second action table or checker.
+
+The integrated browser reviewer makes this path inspectable without a server.
+Its twelve editable examples span the four binder modes, the canonical
+sibling/Sigma context, qualified recursive Hom categories, and finite rigid
+section chains. The current natural-binder example is the two-step section
+
+```text
+λ^n k : K. (GG k) ((FF k) (s k))
+```
+
+from the running motif above. For an accepted expression the client displays
+the explicit backend-neutral Core, inferred and expected classifiers, and the
+structural owners used in lowering. For a rejected edit it displays the
+source-located diagnostic. The same page can run the outer-LF/ordinary/
+displayed research report, retain the minimal explicit-Core playground, and
+open the generated book. All of this execution is client-side; Lambdapi is an
+optional development oracle, not a browser or production dependency.
 
 ### Historical Prototype And Retained Boundary
 
@@ -918,21 +989,23 @@ stale category-specific layer is not an authority for v3.2. The renewed
 product instead targets backend-neutral explicit Core aligned with active
 owners and uses Lambdapi only as an optional conformance oracle.
 
-The current path is deliberately bounded. It does not parse every notation
-used in this book, lower arbitrary displayed telescope depth or variance,
-synthesize coherence from a pointwise function, or establish mechanical
-transfer of the whole Lambdapi library. These are explicit continuation
-boundaries, not hidden assumptions of the implemented examples.
+The current path is deliberately bounded: it does not parse every notation
+in the book, accept arbitrary dependency or variance graphs, synthesize
+coherence from an unstructured pointwise function, or mechanically transfer
+the whole Lambdapi library. Its qualified finite-depth results are neither
+one hard-coded example nor a complete surface language. They are explicit
+continuation boundaries, not hidden assumptions of the examples that run.
 
 <!-- evidence:FORMAL-ELABORATION-BOUNDARY -->
 
 > **Formal status — research boundary.** Evidence
 > `FORMAL-ELABORATION-BOUNDARY`. The direct-TypeScript and categorical-text
-> paths, explicit Core, generic checker/evaluator, and optional conformance
-> route are executable for the reviewed profile. A complete compiler for the
-> canonical surface, arbitrary displayed coherence, and whole-library
-> transfer are not claimed. The active Lambdapi sources remain the
-> mathematical authority.
+> paths, explicit Core, generic checker/evaluator, bounded adjunction and
+> dependent-structure declarations, client-side reviewer, and optional
+> conformance route are executable for the reviewed profile. A complete
+> compiler for the canonical surface, arbitrary displayed coherence, a
+> general record or inductive facility, and whole-library transfer are not
+> claimed. The active Lambdapi sources remain the mathematical authority.
 
 <a id="appendix-formal-presentation-g6"></a>
 

@@ -5,8 +5,8 @@
   "subtitle": "Univalent Foundations for Mathematics",
   "displayTitle": "Functorial Type Theory: Univalent Foundations for Mathematics",
   "edition": "expanded development edition",
-  "editionVersion": "0.3.0-dev",
-  "publicationDate": "2026-07-30",
+  "editionVersion": "0.4.0-dev",
+  "publicationDate": "2026-08-05",
   "status": "draft",
   "authors": [
     "The emdash contributors"
@@ -32,7 +32,7 @@
     "layout": "single-column"
   },
   "artifacts": {
-    "pdf": "output/pdf/functorial-type-theory-0.3.0-dev.pdf"
+    "pdf": "output/pdf/functorial-type-theory-0.4.0-dev.pdf"
   },
   "sources": [
     {
@@ -144,6 +144,41 @@
       "id": "chapter-17",
       "kind": "chapter",
       "path": "book/chapters/17-weighted-colimits-duality-and-join.md"
+    },
+    {
+      "id": "chapter-18",
+      "kind": "chapter",
+      "path": "book/chapters/18-presheaves-and-sieves.md"
+    },
+    {
+      "id": "chapter-19",
+      "kind": "chapter",
+      "path": "book/chapters/19-sites-covers-and-descent.md"
+    },
+    {
+      "id": "chapter-20",
+      "kind": "chapter",
+      "path": "book/chapters/20-sheafification-by-cover-completion.md"
+    },
+    {
+      "id": "chapter-21",
+      "kind": "chapter",
+      "path": "book/chapters/21-commutative-algebra-by-universal-property.md"
+    },
+    {
+      "id": "chapter-22",
+      "kind": "chapter",
+      "path": "book/chapters/22-affine-geometry-and-the-sieve-df.md"
+    },
+    {
+      "id": "chapter-23",
+      "kind": "chapter",
+      "path": "book/chapters/23-schemes-from-covering-charts.md"
+    },
+    {
+      "id": "chapter-24",
+      "kind": "chapter",
+      "path": "book/chapters/24-projective-line-and-boundary.md"
     },
     {
       "id": "appendix-notation",

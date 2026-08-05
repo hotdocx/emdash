@@ -480,7 +480,7 @@
             "sec:syntax-informally"
           ],
           "adaptationType": "architectural",
-          "description": "Replaces a raw type-term first presentation by a readable categorical signature while keeping it distinct from a future end-user parser."
+          "description": "Replaces a raw type-term first presentation by a readable categorical signature while keeping the full mathematical surface distinct from the bounded executable text subset."
         },
         {
           "id": "HOTT-FORMAL-A-2",
@@ -518,6 +518,129 @@
           ],
           "adaptationType": "boundary",
           "description": "Retains the metatheory taxonomy while explicitly declining to transfer HoTT's conversion, normalization, canonicity, decidability, or consistency results to the emdash rewrite system without proof."
+        }
+      ]
+    },
+    {
+      "id": "max-zeuner-constructive-algebraic-geometry",
+      "title": "Univalent Foundations of Constructive Algebraic Geometry",
+      "authors": "Max Zeuner",
+      "arxiv": "2407.17362",
+      "version": "v1",
+      "versionDate": "2024-07-24",
+      "canonicalUrl": "https://arxiv.org/abs/2407.17362",
+      "license": {
+        "spdx": "CC-BY-4.0",
+        "name": "Creative Commons Attribution 4.0 International",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "use": "Attributed conceptual, structural, and selective textual adaptation for the constructive algebraic-geometry spiral; emdash changes the primary invertibility-locus presentation from a largest compact open to an ordinary sieve and asks representability as a separate comparison theorem.",
+      "sourceMap": [
+        {
+          "section": "2.2",
+          "title": "The Zariski lattice",
+          "use": "constructive basic-open algebra and the distinction between a point-set spectrum and a functorial presentation"
+        },
+        {
+          "section": "3.1",
+          "title": "From ringed lattices to locally ringed lattices",
+          "use": "largest compact-open invertibility support and locally ringed motivation"
+        },
+        {
+          "section": "3.3",
+          "title": "Spectral schemes",
+          "use": "finite affine-cover architecture and the distinction between recovering an already-global object and constructing it by gluing"
+        },
+        {
+          "section": "4.1",
+          "title": "Zariski coverage",
+          "use": "constructive coverage and locality background"
+        },
+        {
+          "section": "4.2",
+          "title": "Compact opens",
+          "use": "compact-open representation and basic-open comparison"
+        },
+        {
+          "section": "5.1",
+          "title": "Functor of points of a locally ringed lattice",
+          "use": "comparison between open-based and functorial presentations"
+        },
+        {
+          "section": "5.3",
+          "title": "Comparison theorem",
+          "use": "explicit boundary around the equivalence between functorial and locally ringed-lattice qcqs schemes"
+        }
+      ],
+      "adaptations": [
+        {
+          "id": "ZEUNER-CH18-INVERTIBILITY-SIEVE",
+          "target": "book/chapters/18-presheaves-and-sieves.md",
+          "sourceSections": ["3.1", "4.2", "5.1"],
+          "adaptationType": "comparative",
+          "description": "Recasts the largest compact-open invertibility support as the representability question for the ordinary invertibility sieve D_U(s). The compact-open definition is retained as the correct coherent or qcqs specialization when a representing compact open exists; no emdash implementation of Zeuner's comparison theorem is claimed."
+        },
+        {
+          "id": "ZEUNER-CH22-AFFINE-BASIC-OPEN",
+          "target": "book/chapters/22-affine-geometry-and-the-sieve-df.md",
+          "sourceSections": ["2.2", "4.1", "4.2", "5.1"],
+          "adaptationType": "structural",
+          "description": "Adapts the functor-of-points, finite Zariski coverage, and localization-represented basic-open narrative while taking the ordinary sieve of invertibility probes as primary. A selected localization represents that sieve pointwise; a compact open or Zariski-lattice element is a further representation when available. The chapter does not import Zeuner's qcqs comparison theorem, compact-open classification, or general scheme theorem as an emdash result."
+        },
+        {
+          "id": "ZEUNER-CH23-SITE-RELATIVE-SCHEMES",
+          "target": "book/chapters/23-schemes-from-covering-charts.md",
+          "sourceSections": ["3.3", "4.2", "5.1", "5.3"],
+          "adaptationType": "comparative",
+          "description": "Adapts the finite affine-cover and global-versus-functorial scheme architecture to a global-first, site-relative presentation. Emdash starts with a supplied reflective ringed object and one covering sieve, selects two constructively generating affine realizations, and derives restrictions and a selected actual overlap from the single global structure presheaf. The chapter does not import an atlas-gluing theorem, a compact-open classifier, the functorial/local-ringed-lattice qcqs comparison, or a representation-independent category of schemes."
+        },
+        {
+          "id": "ZEUNER-CH24-PROJECTIVE-BOUNDARY",
+          "target": "book/chapters/24-projective-line-and-boundary.md",
+          "sourceSections": ["2.2", "3.3", "4.2", "5.3"],
+          "adaptationType": "comparative",
+          "description": "Carries the finite-affine-cover rhythm and explicit representation boundary into the supplied projective-line case. The Laurent-coordinate construction is read through actual principal-open restrictions and the sieve-first viewpoint, while the chapter states explicitly that Zeuner does not supply its projective-line or Proj construction. No atlas-gluing theorem, qcqs comparison, graded Proj, projective-space object, or non-affineness theorem is imported as an emdash result."
+        }
+      ]
+    },
+    {
+      "id": "pedrot-pursuing-shtuck",
+      "title": "Pursuing Shtuck",
+      "authors": "Pierre-Marie Pédrot",
+      "hal": "hal-04251754",
+      "version": "v1",
+      "versionDate": "2023-10-20",
+      "canonicalUrl": "https://inria.hal.science/hal-04251754v1",
+      "license": {
+        "spdx": "CC-BY-4.0",
+        "name": "Creative Commons Attribution 4.0 International",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "use": "Attributed conceptual and structural adaptation for the computational return/glue/silent presentation of direct sheaf completion. Emdash applies that intuition directly to varying categorical cover questions and Cat-valued presheaves inside the outer logical framework, rather than importing Pédrot's internal modal type theory or its metatheory.",
+      "sourceMap": [
+        {
+          "section": "2",
+          "title": "The Standard Way",
+          "use": "presheaves, covering sieves, matching families, sheaves, and the reflector benchmark"
+        },
+        {
+          "section": "5.3",
+          "title": "Free Sheaves",
+          "use": "free completion by return, glue, and a silent quotient constructor"
+        },
+        {
+          "section": "7",
+          "title": "A Computational Interpretation of ShTT",
+          "use": "tree-like and operational intuition for proof-irrelevant branching and silent transitions"
+        }
+      ],
+      "adaptations": [
+        {
+          "id": "PEDROT-CH20-RETURN-GLUE-SILENT",
+          "target": "book/chapters/20-sheafification-by-cover-completion.md",
+          "sourceSections": ["2", "5.3", "7"],
+          "adaptationType": "conceptual",
+          "description": "Adapts the free-sheaf constructor pattern and silent-transition intuition to the active emdash construction over the category of eligible covering-sieve questions. The chapter uses fresh prose, Cat-valued whole presheaf maps, and the checked Hom-category universal property; it does not transfer Pédrot's internal type theory, monad results, dependent elimination, canonicity analysis, or universe claims."
         }
       ]
     },

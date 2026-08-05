@@ -36,6 +36,60 @@ four parts of `formal.tex`. The resulting prose is newly written for the
 directed categorical setting; the ledger records the source labels,
 adaptation kind, and target under this attribution and ShareAlike notice.
 
+## Max Zeuner's constructive algebraic geometry
+
+The local-to-global geometry spiral takes mathematical and expository
+inspiration from:
+
+> Max Zeuner, *Univalent Foundations of Constructive Algebraic Geometry*,
+> arXiv:2407.17362v1, 2024.
+
+The reviewed [arXiv version](https://arxiv.org/abs/2407.17362) is licensed
+under the [Creative Commons Attribution 4.0 International
+License](https://creativecommons.org/licenses/by/4.0/). Chapter 18 adapts the
+locally ringed lattice's largest compact-open invertibility support into a
+comparison with the sieve $D_U(s)$ of all invertibility probes. This is a
+change of organizing viewpoint: the compact open remains the appropriate
+representative in Zeuner's coherent or qcqs setting when it exists, while the
+sieve is defined on a general site before representability is known. Chapter
+22 structurally adapts the Zariski-lattice, coverage, compact-open, and
+functor-of-points narrative to this sieve-first organization: a supplied
+localization represents $D_R(f)$ pointwise, and the big-site topology is
+generated from selected finite localization charts. Neither chapter imports
+Zeuner's qcqs comparison theorem or general scheme theorem as an emdash
+result. Chapter 23 comparatively adapts the finite affine-cover architecture,
+but reverses the direction of construction: its global ringed object is
+supplied first, two charts constructively generate one retained covering
+sieve, and restrictions and a selected intersection are inherited from that
+single object. It does not import Zeuner's gluing theorem, compact-open
+classifier, or equivalence between functorial and locally ringed-lattice qcqs
+schemes. Chapter 24 carries that finite-cover rhythm and comparison boundary
+into a supplied projective-line presentation, but its Laurent calculation and
+explicit `Proj` horizon are an emdash synthesis rather than a construction
+drawn from Zeuner's thesis. The source sections, targets, adaptation kinds,
+and mathematical changes are recorded in
+`references/third-party-sources.json`.
+
+## Pierre-Marie Pédrot's computational sheafification
+
+The return/glue/silent presentation in Chapter 20 takes conceptual and
+structural inspiration from:
+
+> Pierre-Marie Pédrot, “Pursuing Shtuck,” preprint, 2023.
+
+The reviewed [HAL version](https://inria.hal.science/hal-04251754v1) is
+licensed under the [Creative Commons Attribution 4.0 International
+License](https://creativecommons.org/licenses/by/4.0/). Pédrot presents free
+sheaves by a return constructor, a branching glue constructor, and an equation
+that erases a branch whose result is ignored, then explains the last as a
+silent transition. Emdash adapts that computational picture to actual varying
+cover questions in categorical semantics: the branches are matching objects
+of Cat-valued presheaves, and the checked endpoint is a whole Hom-category
+universal property and reflector. The book does not import the paper's
+internal type theory, metatheory, universe claims, or dependent-elimination
+results. Exact source sections and adaptation boundaries are recorded in
+`references/third-party-sources.json`.
+
 ## Došen's cut-elimination perspective
 
 The four-level cut calculus in Chapter 9 takes conceptual inspiration from

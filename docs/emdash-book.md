@@ -2,8 +2,8 @@
 title: "Functorial Type Theory: Univalent Foundations for Mathematics"
 authors: "The emdash contributors"
 edition: "expanded development edition"
-editionVersion: "0.3.0-dev"
-publicationDate: "2026-07-30"
+editionVersion: "0.4.0-dev"
+publicationDate: "2026-08-05"
 status: "draft"
 license: "CC-BY-SA-3.0"
 ---
@@ -14,11 +14,14 @@ license: "CC-BY-SA-3.0"
 
 This is a working edition of *Functorial Type Theory: Univalent Foundations
 for Mathematics*. The WalkingEnd/Nat encode-decode argument remains its
-mathematical centre. Around it, the edition develops a second spiral through
-cut elimination, category theory, weighted universal constructions, directed
-duality, and a categorical-kernel-first formal presentation. Chapter details,
-notation, and cross-references may still change. The active implementation
-remains authoritative whenever prose and code disagree.
+mathematical centre. Around it, a second spiral develops cut elimination,
+category theory, weighted universal constructions, directed duality, and a
+categorical-kernel-first formal presentation. A third follows Yoneda's probes
+through presheaves, sieves, sites, and sheafification into constructive
+algebraic geometry, taking the invertibility sieve $D_R(f)$ as prior to any
+representing open. Chapter details, notation, and cross-references may still
+change. The active implementation remains authoritative whenever prose and
+code disagree.
 
 Copyright © 2026 the emdash contributors. Except where separately identified,
 the book text is licensed under CC BY-SA 3.0. See
@@ -103,10 +106,40 @@ organizes functorial computation as a calculus of cuts. Chapters
 [10](#chapter-10)–[15](#chapter-15) develop categories, functors, adjunctions,
 Yoneda, duality, structure identity, and saturation. Chapters
 [16](#chapter-16)–[17](#chapter-17) treat weighted limits and colimits before
-returning to directed geometry through join. [Appendix G](#appendix-formal-presentation)
-then states how the mathematical surface, checked categorical kernel, bounded
-TypeScript elaborator through explicit Core, and external models fit together,
-with the Lambdapi kernel remaining the mathematical authority.
+returning to directed geometry through join.
+
+A third spiral begins in Chapters [18](#chapter-18)–[24](#chapter-24). It turns
+Yoneda's field of probes toward local-to-global geometry: presheaves organize
+changing views, higher sieves retain categories of witnesses, and ordinary
+sieves record stable local questions. Sites select which sieves cover, while
+matching families state descent as one restriction-of-Hom problem. Direct
+cover completion then freely adjoins coherent solutions and assembles the
+Cat-valued sheaf reflector from its whole Hom universal property. Commutative
+algebra then supplies set-carrier rings, finite unit-ideal certificates, free
+extension interfaces, and localizations characterized by contractible factor
+spaces. The recurring geometric example is the sieve $D_U(s)$ of every probe
+along which a section becomes invertible. A localization may represent this
+question on affine points, but the sieve is meaningful before
+representability is known. The affine functor of points then turns selected
+localizations into basic charts, multiplication into pointwise intersection,
+and finite unit-ideal certificates into the generated big Zariski topology,
+while keeping structure-sheaf and localization-locality assumptions explicit.
+Starting from one supplied global ringed object, a covering sieve, and two
+constructively generating affine realizations, the spiral then reaches a
+binary site-relative scheme presentation. Whole slice restrictions and a
+selected actual chart intersection inherit their maps from the single global
+structure presheaf; atlas-first gluing and comparison with classical or
+functorial qcqs schemes remain visible boundaries. On that actual
+intersection, polynomial and localization universality construct the Laurent
+coordinate changes of two supplied affine-line charts. The spiral ends with
+an assumption-explicit projective-line presentation: the overlap calculation
+is checked, while construction of the global object, graded `Proj`, general
+projective space, and non-affineness remain visible boundaries.
+
+[Appendix G](#appendix-formal-presentation) then states how the mathematical
+surface, checked categorical kernel, bounded TypeScript elaborator through
+explicit Core, and external models fit together, with the Lambdapi kernel
+remaining the mathematical authority.
 
 The book is evidence-aware without being a source-code catalogue. Checked
 claims name their evidence in compact notes. Free mathematical development is
@@ -133,29 +166,47 @@ the same calculation with every interface available. The second spiral begins
 with the cut calculus in [Chapter 9](#chapter-9), develops ordinary and native
 category theory through [Chapter 15](#chapter-15), and culminates in weighted
 universals, duality, and join in Chapters [16](#chapter-16)–[17](#chapter-17).
-The [contents](#contents) and [glossary/index](#appendix-glossary) provide
-stable anchor-based navigation.
+The local-to-global spiral begins with presheaves and sieves in
+[Chapter 18](#chapter-18), then selects covers and formulates descent in
+[Chapter 19](#chapter-19), and constructs Cat-valued sheafification by direct
+cover completion in [Chapter 20](#chapter-20). [Chapter 21](#chapter-21) adds
+the representation-free commutative algebra that turns invertibility into
+computational affine charts, and [Chapter 22](#chapter-22) constructs the
+functor-of-points bridge from $D(f)$ and localization to the generated big
+Zariski site. [Chapter 23](#chapter-23) begins with a supplied global ringed
+object, recognizes two constructively generating regions as affine, imposes
+topology-local ring behaviour on the actual slice, and derives a selected
+chart intersection from the global structure presheaf.
+[Chapter 24](#chapter-24) constructs Laurent coordinate changes on that
+literal overlap, packages the resulting supplied projective-line capability,
+and separates it from the still-unconstructed graded `Proj` route. The
+[contents](#contents) and
+[glossary/index](#appendix-glossary) provide stable anchor-based navigation.
 
-Four reading paths make the dependencies explicit:
+Five reading paths make the dependencies explicit:
 
 | Reader | Main path | Consult when needed |
 | --- | --- | --- |
 | type theorist | Prologue; Chapters 1, 3–8, 10, and 15 | Chapters 2 and 9 for directed action; Appendix G for the formal presentation |
-| category theorist | Prologue; Chapters 2, 5, and 8–17 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
+| category theorist | Prologue; Chapters 2, 5, and 8–24 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
+| algebraic geometer | Chapters 13, 16, and 18–24 | Chapters 2, 3, 5, 6, and 12 for the directed, logical, inductive, universal, and adjoint foundations |
 | implementer | Chapters 1, 2, 6, 8, and 9; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
-| external reviewer | Chapters 2.6, 8, and 9; then the integrated reviewer | Appendices A, B, F, and G for notation, evidence, status, and architecture |
+| external reviewer | Chapters 2.6, 8, and 9; then the integrated reviewer, live or local | Appendices A, B, F, and G for notation, evidence, status, and architecture |
 
 These are paths through one dependency graph, not separate foundations. In
 particular, the category-theory route still uses equality-local reasoning, and
 the type-theory route still needs directed functor action.
 
-For the executable-review path, run
-`./scripts/pnpmw run reviewer:dev` from the repository root. The client lets
-the reader edit a reviewed categorical expression, inspect its explicit Core
-and checked classifier, run the three-part research report, and open this
-book. Its text notation is a bounded executable subset. The mathematical
-notation used throughout the book is intentionally broader and should not be
-read as a complete parser grammar.
+For the executable-review path, open the
+[integrated reviewer](https://hotdocx.github.io/emdash/) or run
+`./scripts/pnpmw run reviewer:dev` from the repository root. The wholly
+client-side workbench offers editable examples across the four binder modes.
+It lets the reader inspect explicit Core, inferred and expected classifiers,
+structural lowering, computation, and source-located failures; the same page
+runs the three-part research report and opens this book. Its text notation is
+a bounded executable subset. The mathematical notation used throughout the
+book is intentionally broader and should not be read as a complete parser
+grammar.
 
 Composition is written in categorical order:
 
@@ -194,15 +245,16 @@ replacement for the proof in the prose.
 
 The active Lambdapi sources outrank the book. The current implementation and
 safe-development procedure are described in the repository’s current-status
-report; canonical comment and future parser notation live in the canonical
-surface-syntax report. Dated reports preserve design history but do not
-silently revive retired interfaces.
+report; the canonical-syntax report owns the mathematical notation, which is
+broader than the reviewed executable text subset. Dated reports preserve
+design history but do not silently revive retired interfaces.
 
 Passages structurally or conceptually adapted from the *Homotopy Type Theory*
-book are revision-pinned in
-`book/references/third-party-sources.json`. The book is licensed to
-permit that adaptation, and the directed changes are stated rather than hidden
-behind a change of symbols.
+book, Zeuner's constructive algebraic geometry, and Pédrot's computational
+sheafification work are versioned and section-mapped in
+`book/references/third-party-sources.json`. The relevant licenses and kinds of
+adaptation are recorded there, and emdash's mathematical changes are stated
+rather than hidden behind a change of symbols.
 <!-- /book-source:how-to-read -->
 <div class="book-source-end" aria-hidden="true"></div>
 
@@ -210,9 +262,6 @@ behind a change of symbols.
 <a id="contents"></a>
 
 # Contents
-
-This contents list is generated from the ordered source manifest. Its links
-use the explicit stable anchors owned by the chapter files.
 
 ## Front matter
 
@@ -239,6 +288,13 @@ use the explicit stable anchors owned by the chapter files.
 - [15. Structure Identity And Saturation](#chapter-15)
 - [16. Weighted Universal Constructions](#chapter-16)
 - [17. Weighted Colimits, Duality, And Join](#chapter-17)
+- [18. Presheaves And Sieves](#chapter-18)
+- [19. Sites, Covers, And Descent](#chapter-19)
+- [20. Sheafification By Cover Completion](#chapter-20)
+- [21. Commutative Algebra By Universal Property](#chapter-21)
+- [22. Affine Geometry And The Sieve $D(f)$](#chapter-22)
+- [23. Schemes From Covering Charts](#chapter-23)
+- [24. The Projective Line And The Boundary Of Construction](#chapter-24)
 
 ## Appendices
 
@@ -486,6 +542,14 @@ categories, adjunctions, Yoneda, duality, and saturation; and Chapters
 [16](#chapter-16)–[17](#chapter-17) organize limits, colimits, and join by
 representability and opposite duality. [Appendix G](#appendix-formal-presentation)
 collects the formal rule schemas and states the metatheoretic boundary.
+
+The third spiral asks how local questions become geometry. Chapters
+[18](#chapter-18)–[20](#chapter-20) pass from presheaves and sieves through
+sites and descent to direct Cat-valued sheafification. Chapters
+[21](#chapter-21)–[24](#chapter-24) develop universal-property algebra and
+affine localization, place the invertibility sieve before any representing
+open, and assemble site-relative scheme and supplied projective-line
+presentations without concealing their hypotheses.
 
 The larger aim is not merely to calculate one hom. It is to show how a type
 theory can let groupoidal equality and noninvertible arrows coexist, interact,
@@ -5168,6 +5232,13 @@ computational heads. This matters: triangle computation is attached to the
 selected adjunction witness, not to every pair of transformations having the
 same displayed types.
 
+The direct-TypeScript authoring layer can package already declared
+$F$, $G$, $\eta$, and $\varepsilon$—or a counit and whole natural hom
+transpose—as an indexed witness with proof-time agreements. It expands into
+ordinary logical-framework declarations: no new adjunction notion and no
+runtime alias. [Appendix G.5](#appendix-formal-presentation-g5) places this
+convenience at its precise trust boundary.
+
 ## 12.2 The Triangle Cuts
 
 The checked equations are stronger than the diagonal component formulas.
@@ -5556,6 +5627,29 @@ $$
 y:\mathcal A\longrightarrow
 [\mathcal A^{\mathrm{op}},\mathsf{Set}].
 $$
+
+The active formal development also lifts this picture from sets to
+Cat-valued presheaves. Its Yoneda presheaf evaluates to the represented hom,
+and restriction reuses the existing pullback of directed families. Gathering
+all arrows into $a$ produces the restriction-oriented total
+
+$$
+\operatorname{Into}^{-}_{\mathcal A}(a)
+  :=\sum_{x:\mathcal A^{\mathrm{op}}}
+       \operatorname{Hom}_{\mathcal A}(x,a)
+$$
+
+whose opposite is the conventional slice $\mathcal A/a$. A Cat-valued family
+on this total is a higher sieve; requiring its values to be subterminal gives
+an ordinary sieve. [Chapter 18](#chapter-18) begins the local-to-global spiral
+by developing these constructions as mathematics, separating witness-bearing
+higher sieves from proposition-valued membership, and explaining why sieve
+pullback is the natural language of a changing probe.
+
+This bridge does not strengthen the Yoneda theorem claimed in the present
+chapter. A general Cat-valued Yoneda equivalence and full-faithfulness theorem
+remain separate from the checked representable action and shaped co-Yoneda
+calculation below.
 
 There is a covariant mirror
 
@@ -8169,6 +8263,3724 @@ surface mathematics into the same computational core.
 <!-- /book-source:chapter-17 -->
 <div class="book-source-end" aria-hidden="true"></div>
 
+<!-- book-source:chapter-18 book/chapters/18-presheaves-and-sieves.md -->
+<a id="chapter-18"></a>
+
+# 18. Presheaves And Sieves
+
+An object rarely reveals its geometry all at once. We learn about it by
+probing it from other objects, by changing the probe, and by asking which
+properties survive that change. For an object $U$ of a category
+$\mathcal K$, the probes are simply the arrows
+
+$$
+p:V\longrightarrow U.
+$$
+
+The domain $V$ is a stage of observation. A further arrow $q:W\to V$
+refines the observation, and the composite $p\circ q:W\to U$ is the same
+probe viewed at the finer stage. This elementary picture contains the
+beginning of presheaf semantics, the definition of a sieve, and eventually
+the local-to-global language of schemes.
+
+The decisive shift is from asking for *the* region where a property holds to
+recording *every probe along which it holds*. The latter collection is
+automatically adapted to change of stage. It is a sieve. An open subobject may
+represent that sieve, but representation is an additional theorem, not part
+of the initial definition.
+
+This chapter develops that distinction in three steps. A presheaf gives a
+coherent field of views. A higher sieve may retain a category of witnesses at
+each probe. An ordinary sieve remembers only a proposition: whether the probe
+belongs. The recurring example is the invertibility sieve $D_U(s)$ of a
+section $s$ over $U$.
+
+## 18.1 A Coherent Field Of Views
+
+Let $\mathcal K$ be a category. A set-valued presheaf is a functor
+
+$$
+X:\mathcal K^{\mathrm{op}}\longrightarrow\mathsf{Set}.
+$$
+
+Thus every object $U$ has a set $X(U)$ of observations, and every arrow
+$p:V\to U$ has a restriction map
+
+$$
+p^*=X(p):X(U)\longrightarrow X(V).
+$$
+
+Restriction along an identity does nothing, and restriction along a composite
+is successive restriction:
+
+$$
+(\mathrm{id}_U)^*=\mathrm{id}_{X(U)},
+\qquad
+(p\circ q)^*=q^*\circ p^*.
+$$
+
+These equations say more than “data vary with $U$.” They say exactly how one
+view becomes another. A section at a large stage can be inspected at every
+smaller stage, and two routes to the same refined view agree.
+
+Two familiar examples give the variance its geometric meaning. On a
+topological space, one may assign to every open $U$ the continuous
+real-valued functions on $U$. An inclusion $V\subseteq U$ restricts a
+function on $U$ to one on $V$. On the opposite of a category of commutative
+rings, the functor of points of a ring $R$ assigns to a test ring $S$ the
+maps $R\to S$. A map of test rings changes the point by composition. In both
+cases, the presheaf is not merely a table indexed by objects. Its restriction
+maps are the mathematical content that lets observations move.
+
+The examples also warn against reading “smaller stage” as literal spatial
+inclusion. A probe can be an open subset, an étale map, a ring map viewed in
+the opposite category, or some other morphism selected by the geometry. The
+categorical definition uses only arrows. Spatial language becomes justified
+when a later representation theorem supplies it.
+
+Functorial type theory keeps the same idea but permits each $X(U)$ to be a
+category rather than merely a set:
+
+$$
+X:\mathcal K^{\mathrm{op}}\longrightarrow\mathsf{Cat}.
+$$
+
+Now a stage may contain objects, arrows between observations, and higher
+coherence inherited from the ambient categorical structure. Restriction is a
+functor. It transports both observations and their comparisons. Presheaf maps
+are natural family maps, so they too act coherently at every stage.
+
+There is also a useful change-of-base operation. Given
+$F:\mathcal A\to\mathcal B$ and a presheaf $X$ on $\mathcal B$, precomposition
+produces a presheaf on $\mathcal A$:
+
+$$
+F^*X:=X\circ F^{\mathrm{op}}.
+$$
+
+The active construction realizes this whole operation by reusing the existing
+pullback of directed Cat-valued families. It does not invent a second calculus
+for presheaves. That economy will matter repeatedly: local geometry should
+inherit functoriality from the categorical structure already present.
+
+## 18.2 The Representable Field Of Probes
+
+Every object $U$ supplies a canonical presheaf
+
+$$
+yU:=\operatorname{Hom}_{\mathcal K}(-,U).
+$$
+
+At a stage $V$, its objects are precisely the probes $p:V\to U$. If
+$q:W\to V$, restriction sends $p$ to $p\circ q$. Nothing has been added to
+the category: the presheaf merely organizes all arrows into $U$ as one
+coherent field.
+
+This is the contravariant Yoneda construction from
+[Chapter 13](#chapter-13), now read geometrically. There it served as a
+universal coordinate system. Here its elements are stages of observation.
+The two readings are the same mathematics: a map out of a representable is
+controlled by what happens at the identity probe
+$\mathrm{id}_U:U\to U$.
+
+The total category of the family $yU$ has objects $(V,p)$ with $p:V\to U$.
+For restriction it is convenient to orient its arrows in the direction in
+which data are reindexed. Taking the opposite recovers the conventional slice
+category $\mathcal K/U$. Keeping both orientations visible prevents a common
+mistake: a refinement of a probe and a map in the displayed family carry the
+same information, but variance determines which way the corresponding arrow
+points.
+
+A **higher sieve** on $U$ is a Cat-valued coefficient system over this
+restriction-oriented category of probes. Equivalently, it may be read as a
+Cat-valued presheaf on the conventional slice. At each $p:V\to U$ it assigns
+a category $S(p)$, and a refinement $q:W\to V$ induces a functor
+
+$$
+S(p)\longrightarrow S(p\circ q).
+$$
+
+The category $S(p)$ can retain choices of witnesses and arrows between them.
+This is why “higher sieve” does not yet mean ordinary sieve. The maximal
+higher sieve assigns the terminal coefficient category to every probe. If the
+base probe $V\to U$ is changed, the entire coefficient system pulls back by
+postcomposing probes, and the maximal higher sieve remains maximal.
+
+<!-- evidence:PSH-YONEDA-HIGHER-SIEVE -->
+
+> **Formal status — checked.** Evidence `PSH-YONEDA-HIGHER-SIEVE`. The active
+> construction has a visible category of Cat-valued presheaves, restriction
+> along a functor, the Yoneda presheaf with value
+> $\operatorname{Hom}_{\mathcal K}(V,U)$, the restriction-oriented arrow
+> total and opposite slice, and a higher-sieve classifier whose maximal
+> object is stable under pullback. The slice and higher-sieve presentations
+> compare through a shared family representation; they are not declared to
+> be definitionally identical.
+
+## 18.3 From Witnesses To Membership
+
+An ordinary sieve is what remains when each coefficient category answers only
+a yes-or-no question. Constructively, “yes or no” does not mean that a Boolean
+decision has been chosen. It means that the space of answers is a
+proposition: if it is inhabited, all of its inhabitants agree.
+
+Classically, a sieve $R$ on $U$ is a collection of arrows into $U$ such that
+
+$$
+p\in R, q:W\longrightarrow V
+\quad\Longrightarrow\quad
+p\circ q\in R.
+$$
+
+The presheaf formulation replaces the collection by a subterminal value at
+every probe. Write $R(p)$ for the coefficient at $p:V\to U$. Its object
+classifier is the proposition
+
+$$
+p\in R.
+$$
+
+The action of the underlying higher sieve carries a witness of $p\in R$ to a
+witness of $p\circ q\in R$. Closure under refinement is therefore not an
+extra law written beside the data. It is the functorial action of the data.
+
+Why require a *subterminal category* rather than merely proposition-valued
+objects? Because a category with a unique object can still have many directed
+endomorphisms. Ordinary membership is intended to retain no such hidden
+motion. The active condition combines proposition-valued objects with exact
+groupoidality, leaving the categorical analogues of the empty and terminal
+possibilities. The evidence that a coefficient is subterminal is itself a
+proposition, so it does not create competing ways for one arrow to belong.
+
+Two examples orient the definition.
+
+1. The maximal sieve contains every arrow into $U$. Its membership proposition
+   is always inhabited.
+2. If a monomorphism $j:W\to U$ is regarded as a subobject, it determines the
+   sieve of arrows $p:V\to U$ that factor through $j$. Monicity makes the
+   factorization proposition-valued. Refining a factorization gives another
+   factorization automatically.
+
+The second example is important but not exhaustive. A sieve need not be
+represented by one monomorphism. It can be a genuinely distributed local
+question whose answer is stable under refinement without having a single
+object that names all affirmative probes.
+
+## 18.4 Pulling Back A Local Question
+
+Suppose $R$ is a sieve on $U$ and $p:V\to U$. To ask the same question over
+$V$, test every $q:W\to V$ after postcomposition with $p$:
+
+$$
+q\in p^*R
+\quad:\!\!\Longleftrightarrow\quad
+p\circ q\in R.
+$$
+
+This defines a sieve $p^*R$ on $V$. Indeed, if $q$ belongs and
+$r:Z\to W$, then
+
+$$
+p\circ(q\circ r)=(p\circ q)\circ r
+$$
+
+belongs by closure of $R$. More conceptually, the higher-sieve action already
+postcomposes every probe with $p$. Pointwise subterminality is preserved by
+selecting the old witness at that postcomposed probe. Ordinary pullback is
+therefore inherited structure, not a separately engineered operation.
+
+**Theorem 18.1 (pullback of ordinary sieves).** For every sieve $R$ on $U$
+and arrow $p:V\to U$, there is an ordinary sieve $p^*R$ on $V$. Its
+underlying higher sieve is the higher pullback of the underlying higher sieve
+of $R$, and membership at $q:W\to V$ is old membership at
+$p\circ q:W\to U$.
+
+<!-- evidence:ORDINARY-SIEVE-PULLBACK -->
+
+> **Formal status — checked.** Evidence `ORDINARY-SIEVE-PULLBACK`. The active
+> construction supplies the pullback sieve, reuses the whole higher-sieve action,
+> preserves subterminal evidence, and exposes the membership computation.
+> Because an ordinary sieve retains proof fields, identity pullback is not
+> claimed to reconstruct the entire package by raw definitional reduction;
+> this does not change the membership formula above.
+
+Pullback is the reason sieves are the right language for locality. A property
+stated only at $U$ can be accidental. A sieve records in advance how the
+property appears after every change of stage. A topology will later decide
+which such stable questions count as *covering* questions, but the variance
+has already been settled.
+
+Represented sieves make this calculation visible as ordinary base change.
+Suppose the sieve $R$ is represented by a monomorphism $j:A\to U$, and
+suppose the pullback square
+
+$$
+\begin{array}{ccc}
+A\times_U V & \longrightarrow & A\\
+\downarrow & & \downarrow j\\
+V & \xrightarrow{p} & U
+\end{array}
+$$
+
+exists. A probe $q:W\to V$ belongs to $p^*R$ exactly when
+$p\circ q$ factors through $j$. By the universal property of the pullback,
+this is exactly when $q$ factors through $A\times_U V\to V$. Hence $p^*R$
+is represented by the base-changed monomorphism.
+
+This is the bridge between sieve pullback and the usual restriction of an
+open. The sieve calculation requires only postcomposition and membership. The
+spatial calculation additionally requires a representing monomorphism and
+the relevant pullback. When those hypotheses are available, the two
+descriptions agree; when they are not, the sieve calculation still makes
+sense.
+
+## 18.5 Invertibility Before Opens
+
+Let $\mathcal O$ be a presheaf of commutative rings on $\mathcal K$, let
+$U$ be a stage, and let $s\in\mathcal O(U)$ be a section. For a probe
+$p:V\to U$, restriction produces
+
+$$
+p^*s\in\mathcal O(V).
+$$
+
+Define the **invertibility sieve** of $s$ by
+
+$$
+D_U(s)(p)
+\;:=\;
+\text{“$p^*s$ is a unit in $\mathcal O(V)$.”}
+$$
+
+This is a sieve because ring homomorphisms preserve units. If $p^*s$ has an
+inverse and $q:W\to V$, applying the restriction homomorphism along $q$
+gives an inverse for $(p\circ q)^*s$. Thus invertibility propagates toward
+finer probes.
+
+<!-- evidence:COMM-RING-INVERTIBILITY-SIEVE -->
+
+> **Formal status — checked.** Evidence
+> `COMM-RING-INVERTIBILITY-SIEVE`. For a selected commutative-ring-valued
+> presheaf and section, the active construction supplies an ordinary sieve, and
+> membership at $p:V\to U$ computes to unit evidence for the restricted
+> section $p^*s$.
+
+The notation $D_U(s)$ is familiar from algebraic geometry, but the order of
+ideas matters. We have not first constructed an open object and then asked
+which probes land in it. We first have the stable family of all invertibility
+probes. The question whether that family is represented by an open object is
+asked afterward.
+
+This reverses a habitual abbreviation. In settings where basic opens are
+already known to exist, one says “the open on which $s$ is invertible.” The
+sieve formulation separates two claims hidden in that phrase:
+
+1. invertibility is stable under change of stage, so it defines $D_U(s)$; and
+2. the sieve $D_U(s)$ is represented by a suitable open object over $U$.
+
+The first statement is formal and functorial. The second depends on the
+geometry of the site. In affine geometry, localization will supply the
+representing object for a basic invertibility sieve. On a more general site,
+there may be no single representative, while the sieve itself remains
+perfectly meaningful.
+
+This point also clarifies the relation with Max Zeuner's constructive account
+of algebraic geometry. In the locally ringed lattices of
+[Zeuner](#ref-zeuner), the invertibility support of a section is presented as
+the largest compact open below $U$ on which that section is invertible. In a
+posetal site, such a largest open represents the sieve $D_U(s)$: a probe lies
+in the sieve exactly when it factors through that open. Conversely, a compact
+open representing $D_U(s)$ has the required largest-property interpretation.
+
+The sieve-centered formulation is therefore a generalization, not a
+rejection, of the compact-open one. It asks the useful comparison question:
+
+> When is the invertibility sieve $D_U(s)$ representable by a compact open?
+
+On a coherent or qcqs presentation, representability can recover the compact
+geometry emphasized by Zeuner. On an arbitrary site, the sieve remains the
+primary object even when that recovery is unavailable. In a higher setting,
+one may go further and retain a category of invertibility witnesses before
+subterminality is imposed.
+
+The posetal case makes the comparison exact. Regard a lattice of opens below
+$U$ as a category, with one arrow $V\to W$ when $V\leq W$. If an open
+$A\leq U$ represents $D_U(s)$, then for every $V\leq U$,
+
+$$
+s|_V\text{ is invertible}
+\quad\Longleftrightarrow\quad
+V\leq A.
+$$
+
+Taking $V=A$ shows that $s|_A$ is invertible. Taking any $V$ on which $s$
+is invertible shows $V\leq A$. Thus $A$ is the largest invertibility open.
+Conversely, if a largest such $A$ exists, invertibility is preserved by
+restriction, so precisely the opens below $A$ belong to $D_U(s)$. The largest
+open represents the sieve. Compactness is a further finiteness property of
+that representative, important in coherent algebraic geometry but not needed
+to define membership.
+
+The distinction separates existence from use. One can calculate with
+$D_U(s)$, pull it back, and ask whether it covers before finding a representing
+open. Once a compact representative is constructed, the same sieve acquires
+the economical lattice presentation. The two layers reinforce rather than
+compete with one another.
+
+> **Formal status — mathematical development.** The comparison with Zeuner's
+> compact-open support is an attributed reformulation of the representation
+> problem, principally adapted from his definition of locally ringed lattices
+> and his functor-of-points development. The active emdash result in this
+> chapter is the ordinary invertibility sieve. No theorem identifying the
+> general emdash site-relative scheme interface with Zeuner's qcqs schemes is
+> claimed here.
+
+## 18.6 Categorical Semantics As Executable Mathematics
+
+Presheaves, slices, and sieves are often introduced as an external semantics
+for some other formal language. That is not the only way to make them
+computational. In the emdash architecture, the categories and functors just
+described are themselves expressed in an inner functorial type theory. They
+are ordinary mathematical objects of that theory: a presheaf is a functor, a
+slice is a category, and pullback is functorial reindexing.
+
+The inner theory is hosted in an outer dependent logical framework. Lambdapi,
+or the bounded TypeScript emdash Core, supplies explicit binders, checking,
+rewrite computation, comparison, and unification. Consequently, categorical
+semantics can be internal enough to calculate with while remaining
+recognizably the traditional semantics of presheaves and sites.
+
+This is a claim about relative internality, not about replacing every modal
+or internal language. A modal type theory may provide elegant syntax for
+local reasoning. Here the chosen route is to make the categorical objects
+themselves executable and then state locality directly in them. The advantage
+for the present development is transparency: the probe, its refinement, the
+sieve pullback, and later the matching family remain visible mathematical
+data.
+
+Nor does executability settle the metatheory. Local computations accepted by
+the outer framework do not by themselves prove global normalization,
+confluence, consistency, or semantic soundness for the combined rewrite
+system. The categorical constructions and their checked observations are the
+evidence used here; the larger metatheorems retain their separate boundary.
+
+## 18.7 From Sieves To Covers
+
+A sieve answers a local question. It does not yet say that the affirmative
+probes are sufficient to recover information on $U$. For that, one must
+select the sieves that count as covers and demand three kinds of stability:
+the maximal sieve covers, a covering sieve remains covering after pullback,
+and covers may be refined locally.
+
+Those laws turn a category into a site. They also prepare a more delicate
+question. Given compatible observations on every probe in a covering sieve,
+when do they determine one observation on $U$? That is descent, and its
+objects are matching families and their amalgamations.
+
+The next step in the local-to-global spiral therefore does not abandon the
+sieve for an open. [Chapter 19](#chapter-19) asks which sieves cover, and what
+it means for a presheaf to solve every covering question. Geometry will emerge
+from the answers, but the questions already have their correct functorial
+shape.
+<!-- /book-source:chapter-18 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-19 book/chapters/19-sites-covers-and-descent.md -->
+<a id="chapter-19"></a>
+
+# 19. Sites, Covers, And Descent
+
+A sieve is a question stable under refinement. It does not yet say that its
+affirmative probes see enough of the object. The maximal sieve certainly does:
+it contains every probe. A smaller sieve may also be sufficient, but that is
+new structure. One must decide which local views are jointly adequate for
+recovering information at their common target.
+
+A **Grothendieck topology** makes that decision. It selects covering sieves in
+a way compatible with identities, change of stage, and local refinement. A
+category equipped with such a topology is a **site**. The word “topology” is
+appropriate even when the objects are not open subsets of a space. Its role is
+to identify which families of probes count as local descriptions.
+
+Once a cover has been selected, a presheaf faces a test. Compatible data on
+the probes of the cover form a matching family. Does that family come from
+one global datum, and is the global datum determined by it? This is descent.
+The chapter separates three layers that are often compressed into one phrase:
+
+1. a family or sieve proposed as a cover;
+2. a topology generated by chosen proposals; and
+3. the locality of a presheaf with respect to the resulting covers.
+
+Sheafification is a fourth layer. It constructs a local object from an
+arbitrary presheaf and therefore belongs to the next chapter.
+
+## 19.1 Covering Families And Covering Sieves
+
+Suppose a family of arrows has common codomain $U$:
+
+$$
+u_i:U_i\longrightarrow U.
+$$
+
+It generates a sieve by admitting every probe that factors through one of the
+$u_i$. Refinement closure then admits all further composites automatically.
+The family is a useful presentation of local pieces; the generated sieve is
+the complete local question determined by that presentation.
+
+More explicitly, a probe $p:V\to U$ belongs when there are an index $i$ and
+an arrow $h:V\to U_i$ such that
+
+$$
+p=u_i\circ h.
+$$
+
+Ordinary sieve membership remembers this existential claim only as a
+proposition. A computational presentation may separately retain the index,
+the factorization, or algebraic evidence that the family has the desired
+covering property. Keeping those layers separate prevents two opposite
+errors: discarding useful witnesses too early, and making the topology depend
+on accidental choices of witnesses.
+
+Different families can generate the same sieve. Repeating a member changes
+the list but not the question. Replacing one member by a family that covers it
+may refine the presentation without changing its eventual force. A sieve
+also makes arbitrary change of stage immediate: pull it back as in
+[Chapter 18](#chapter-18), rather than choosing a new list and proving afresh
+that the list behaves correctly.
+
+This does not make cover families dispensable. In constructive algebraic
+geometry, a finite unimodular family or a pair of affine charts can carry
+valuable computational witnesses. The point is to distinguish the witness
+from the invariant it presents. One may retain the particular generators for
+calculation while allowing the topology to speak in terms of the sieve they
+force to cover.
+
+For an ordinary topological space, a family of open inclusions
+$U_i\hookrightarrow U$ is covering when their union is $U$. The associated
+sieve contains every open $V\hookrightarrow U$ that lies inside some $U_i$,
+and then all smaller opens as well. In affine geometry, a finite family of
+basic opens will later be presented by ring elements satisfying an algebraic
+cover certificate. Again, the certificate explains why the generated sieve
+covers; it is not identical to the sieve.
+
+Notice that generation alone says nothing about sufficiency. Any family of
+arrows generates a sieve. Only the topology declares whether that sieve
+covers. The separation is what allows the same category of probes to carry
+different geometries.
+
+At the opposite extreme lies the maximal sieve $\top_U$. Every arrow into
+$U$ belongs to it. It is generated by the identity probe
+$\mathrm{id}_U:U\to U$, since every $p:V\to U$ factors through the identity.
+Any reasonable notion of locality must regard this as a cover: observing all
+of $U$ at once is sufficient to observe $U$.
+
+## 19.2 The Three Laws Of A Site
+
+Let $J(U,R)$ be the proposition that the sieve $R$ covers $U$. To make $J$ a
+Grothendieck topology, require three laws.
+
+**Maximality.** The maximal sieve covers:
+
+$$
+J(U,\top_U).
+$$
+
+**Pullback stability.** If $R$ covers $U$ and $p:V\to U$, then the pulled-back
+sieve covers $V$:
+
+$$
+J(U,R)\quad\Longrightarrow\quad J(V,p^*R).
+$$
+
+This is the formal expression of “covers remain covers after changing the
+stage of observation.” If $R$ is represented by an open $A\to U$, then under
+the hypotheses of Chapter 18 the new cover is represented by
+$A\times_U V\to V$.
+
+**Local character.** Suppose $R$ covers $U$. Let $S$ be another sieve on
+$U$. If, for every $p:V\to U$ belonging to $R$, the pullback $p^*S$ covers
+$V$, then $S$ covers $U$:
+
+$$
+J(U,R)
+\quad\text{and}\quad
+\prod_{p\in R}J(V,p^*S)
+\quad\Longrightarrow\quad
+J(U,S).
+$$
+
+Local character is the transitivity of coverage. The sieve $R$ says that its
+probes see all of $U$. Each of those probes says that $S$ sees all of its
+domain. Together they say that $S$ sees all of $U$. The law avoids choosing a
+single flattened family and consequently works equally well for finite,
+infinite, or witness-rich presentations.
+
+In family language, suppose the $u_i:U_i\to U$ cover and, for every $i$, the
+arrows $v_{ij}:V_{ij}\to U_i$ cover $U_i$. The composites
+$u_i\circ v_{ij}:V_{ij}\to U$ should cover $U$. Let $R$ be the sieve
+generated by the $u_i$ and $S$ the sieve generated by the composites. The
+pullback of $S$ to $U_i$ contains the locally covering $v_{ij}$, while $R$
+covers $U$. Local character is the invariant sieve statement behind this
+flattening argument. It also covers situations in which there is no preferred
+single index set of composites.
+
+The three laws are deliberately asymmetric in purpose. Maximality supplies a
+unit, pullback stability transports a cover, and local character composes
+local sufficiency. None says that membership in a cover is decidable. Cover
+evidence remains proposition-valued.
+
+Nor does a Grothendieck topology add new objects or arrows to $\mathcal K$.
+It changes which existing sieves are treated as sufficient. Two topologies on
+the same category can therefore encode different notions of locality. A
+covering sieve need not be represented by an open subobject; and when it is
+represented, the representing open is geometry derived from the site rather
+than a replacement for the cover predicate. This is the same sieve-before-open
+discipline that governed $D_U(s)$ in Chapter 18.
+
+There is always a degenerate but useful model: declare every sieve covering.
+Then all three laws have their unique truth witness. This **chaotic topology**
+is usually too coarse for geometry, but it proves that the direct definition
+is inhabited on every category and provides an upper bound for generated
+topologies.
+
+The opposite extreme declares only maximal sieves covering. Mathematically,
+every presheaf satisfies the resulting sheaf condition because restriction to
+the maximal local question loses no data. Enlarging a topology adds covering
+questions and therefore removes presheaves that fail them. The chaotic
+topology asks every sieve to be sufficient and is correspondingly severe.
+These extremes make the variance of the order clear: more covers mean fewer
+sheaves, even though the topology itself is larger as a cover predicate.
+
+<!-- evidence:GROTH-TOPOLOGY-SIEVE-LAWS -->
+
+> **Formal status — checked.** Evidence `GROTH-TOPOLOGY-SIEVE-LAWS`. The
+> active topology package contains a proposition-valued coverage together
+> with maximality, pullback stability, and local character over ordinary
+> sieves. The maximal sieve and the chaotic topology have direct checked
+> models. This layer neither assumes a global classifier of all sieves nor
+> constructs sheafification.
+
+## 19.3 Generating The Least Topology
+
+In practice one rarely declares every covering sieve independently. One gives
+basic covers and closes them under the topology laws. The phrase “the topology
+generated by these covers” should include two statements:
+
+1. every proposed cover is covering; and
+2. no additional covers are accepted except those forced by the three laws.
+
+The active construction makes both statements precise without choosing a
+syntax of derivation trees. Let
+
+$$
+G(U,R)
+$$
+
+be the type of witnesses that $R$ is one of the proposed generating sieves on
+$U$. This type need not be a proposition. It may remember which finite
+family, algebraic certificate, or chart presentation produced the same
+underlying sieve.
+
+A Grothendieck topology $T$ **accepts** $G$ when every witness in $G(U,R)$
+produces evidence that $R$ covers in $T$. Now define $R$ to cover in the
+generated topology when it covers in *every* topology accepting $G$:
+
+$$
+J_G(U,R)
+:=\prod_{T:\operatorname{GrothTopology}(\mathcal K)}
+  \bigl(T\text{ accepts }G\bigr)\longrightarrow T(U,R).
+$$
+
+This is the intersection of all acceptable topologies. Intersections inherit
+the three topology laws pointwise. Every generator belongs because every
+topology under consideration accepts it. And if $T$ accepts the generators,
+then $J_G$ is below $T$: a $J_G$-cover is, by definition, a cover in $T$.
+
+The order here is an order of consequences. Write $J\leq T$ when every
+$J$-cover is a $T$-cover. A smaller topology makes fewer local families
+covering and therefore imposes fewer sheaf conditions. The generated topology
+is the least element among those that accept the proposals. The chaotic
+topology accepts every proposal, so the class being intersected is never
+empty.
+
+Witness-rich generation and proposition-valued coverhood now play distinct
+roles. Several inhabitants of $G(U,R)$ may explain the same proposed cover in
+different ways. Acceptance must handle each explanation. Once $R$ belongs to
+$J_G$, however, its coverhood is a proposition: downstream sheaf reasoning
+cannot branch on which derivation happened to be supplied. The construction
+retains evidence where computation may need it and erases choice where
+geometry should be invariant.
+
+**Theorem 19.1 (least generated topology).** Every type-valued family of
+generating sieves determines a Grothendieck topology $J_G$. The topology
+accepts every retained generator and is contained in every Grothendieck
+topology that accepts them.
+
+<!-- evidence:GENERATED-GROTH-TOPOLOGY -->
+
+> **Formal status — checked.** Evidence `GENERATED-GROTH-TOPOLOGY`. The
+> generated cover predicate is proved proposition-valued, its three topology
+> laws are constructed, generator inclusion computes, and leastness is a
+> whole pointwise comparison of topologies. The construction is
+> impredicative: it provides no inductive derivation syntax, induction
+> principle for generation steps, coverhood normalizer, or decision
+> procedure.
+
+The boundary in that note is mathematically significant. An inductive
+presentation can explain *how* a cover was derived. The intersection
+presentation proves exactly *which universal property* the generated
+topology has. For the book's current purpose, leastness is the invariant
+needed by later geometry. A derivation calculus may still be valuable for
+automation, but it would be another presentation of the same intended
+closure, not the definition of a site.
+
+There is no circularity in the universal characterization. One first knows
+what a Grothendieck topology is from the three laws. One then ranges over all
+such structures that accept the generators and intersects their cover
+predicates. The result is certified to satisfy the same laws. This resembles
+defining a generated algebraic congruence as the intersection of all
+congruences containing the proposed relations: closure is characterized by
+leastness before any normal-form algorithm is chosen.
+
+## 19.4 A Sieve As A Domain Of Local Data
+
+Let $R$ be a sieve on $U$. The representable presheaf $yU$ contains every
+probe into $U$. The sieve selects some of those probes, together with their
+refinements. To turn that selection into a domain on which a presheaf can be
+evaluated, form the extension
+
+$$
+\widehat R(V)
+:=\sum_{p:V\to U} R(p).
+$$
+
+An object of $\widehat R(V)$ is a probe $p:V\to U$ together with evidence
+that it belongs to $R$. Forgetting the evidence gives a whole presheaf map
+
+$$
+i_R:\widehat R\longrightarrow yU.
+$$
+
+For a Cat-valued presheaf $X$, define the category of sections over $U$ in
+representable form as
+
+$$
+\operatorname{Sect}_X(U)
+:=\operatorname{Hom}_{\operatorname{Psh}(\mathcal K)}(yU,X).
+$$
+
+The ordinary Yoneda lemma identifies this with $X(U)$. Retaining the Hom form
+has an advantage here: it expresses the local-to-global map without assuming
+the full Cat-valued Yoneda equivalence as an active theorem.
+
+The category of matching families on $R$ is
+
+$$
+\operatorname{Match}_X(R)
+:=\operatorname{Hom}_{\operatorname{Psh}(\mathcal K)}(\widehat R,X).
+$$
+
+Concretely, a matching family assigns an observation in $X(V)$ to every
+member $p:V\to U$ of the sieve, compatibly with every refinement and with the
+arrows retained by the Cat-valued coefficients. Compatibility is not a list
+of equations added afterward. It is the naturality of one presheaf map.
+
+For a cover presented by arrows $u_i:U_i\to U$, this recovers the usual
+picture. A matching family begins with local elements
+
+$$
+x_i\in X(U_i).
+$$
+
+If the pullbacks $U_i\times_U U_j$ exist, the two restrictions of $x_i$ and
+$x_j$ to the overlap must agree. But pairwise overlap equations are only a
+presentation of the deeper condition. A sieve also contains longer
+refinements, morphisms between probes, and covers in categories without the
+chosen pullbacks. A map $\widehat R\to X$ packages compatibility with all of
+them at once.
+
+In the Cat-valued case, the word “agree” may itself have categorical content.
+A matching object can carry coherent comparison arrows, and a map between
+matching objects must respect them. This is why the Hom target above is a
+category rather than merely a set of families.
+
+Precomposition with $i_R$ restricts a global section to its matching family:
+
+$$
+\rho_{R,X}:
+\operatorname{Sect}_X(U)
+\longrightarrow
+\operatorname{Match}_X(R),
+\qquad
+\rho_{R,X}(x)=x\circ i_R.
+$$
+
+This formula is the categorical core of descent. It names both the data to be
+glued and the direction in which global information becomes local.
+
+## 19.5 Locality And The Sheaf Condition
+
+The presheaf $X$ is **local at $R$** when the restriction functor
+$\rho_{R,X}$ is an equivalence. Every matching family then has an
+amalgamation, and that amalgamation is unique at the appropriate categorical
+level.
+
+For a set-valued presheaf, the statement specializes to the familiar pair:
+
+- compatible local elements have a global amalgamation; and
+- two global elements with the same local restrictions are equal.
+
+The second clause is often called **separatedness**, while the first is the
+existence part of gluing. Their conjunction says that restriction is a
+bijection. For Cat-valued presheaves, a categorical equivalence replaces that
+bijection: it controls objects, maps, and their inverse laws together. Merely
+asking for essential surjectivity would give amalgamations without the full
+uniqueness and functoriality required here.
+
+For a Cat-valued presheaf, the equivalence also retains maps between local
+families and the higher coherence carried by the Hom categories. Replacing
+the equivalence by a mere objectwise existence statement would lose this
+structure.
+
+Given a topology $J$, say that $X$ is **topology-local** when it is local at
+every $J$-covering sieve. This is the sheaf condition in the form used by the
+current categorical development:
+
+$$
+\prod_{U}\prod_{R}\prod_{c:J(U,R)}
+  \operatorname{IsEquiv}(\rho_{R,X}).
+$$
+
+The cover witness $c$ indexes the condition but does not become computational
+data: coverhood is a proposition. What matters computationally is the fixed
+forward map $\rho_{R,X}$ and its selected inverse behavior.
+
+A topology for which every representable presheaf is local is called
+**subcanonical**. This is a property of the topology, not part of the
+definition of a site. It says that the original category embeds into its
+sheaf semantics without changing the representable probes. The Zariski
+coverage used later is intended to have this geometric behavior, but no
+arbitrary Grothendieck topology is subcanonical merely because its three laws
+hold.
+
+<!-- evidence:SIEVE-MATCHING-LOCALITY -->
+
+> **Formal status — checked.** Evidence `SIEVE-MATCHING-LOCALITY`. The active
+> construction extends an ordinary sieve to a whole presheaf, includes it in
+> the representable, defines matching and section Hom categories, and makes
+> restriction exact precomposition by that inclusion. Locality at one sieve
+> and simultaneous locality over a topology are active fixed-forward
+> equivalence predicates. No reflector or identification with a separate
+> rigid sheaf category follows at this layer.
+
+This formulation makes the categorical-semantics point particularly direct.
+There is no need to hide the site behind an abstract
+modal operator before locality can compute. The actual sieve extension,
+representable, Hom categories, and restriction functor are objects of the
+inner functorial type theory. The outer logical framework checks and reduces
+their selected observations. An internal modal language could summarize this
+behavior, but the categorical semantics already supplies an executable
+statement of descent.
+
+## 19.6 Varying The Cover Question
+
+A single cover is not enough for sheafification. Covers change when their base
+object is pulled back, and a construction that glues only after all choices
+have been externalized will carry a growing burden of naturality equations.
+
+It is therefore useful to package an **eligible cover question** as
+
+$$
+q=(U,R,c),
+$$
+
+where $R$ is a sieve on $U$ and $c$ says that $R$ covers. These questions
+themselves form a category. For a fixed presheaf $X$, matching categories and
+section categories then vary as Cat-valued families over the whole question
+category, and restriction becomes one displayed functor between them.
+
+An arrow between questions includes a change of base $p:V\to U$ and the
+pulled-back covering question over $V$. The topology's stability law supplies
+its eligibility. On local data, the arrow acts by reindexing along the
+canonical map from the pulled-back sieve extension to the original one. Thus
+the same base change that transported membership in Chapter 18 now transports
+the entire descent problem.
+
+The gain is conceptual as well as formal. Pulling back a cover question moves
+its sieve extension, representable, matching data, sections, and restriction
+map together. Naturality belongs to the single varying construction. It is
+not reintroduced as a separate square for every cover chosen later.
+
+The active development realizes this whole varying layer and checks that, at
+a literal question, the displayed restriction is exactly the precomposition
+map $\rho_{R,X}$ above. It deliberately stops before supplying glue. A
+matching family is a well-formed local answer; it is not yet an amalgamation.
+
+## 19.7 The Construction Still Missing
+
+A sheaf is a presheaf that already solves every covering question. A
+sheafification must start with an arbitrary presheaf $P$ and construct a new
+one $aP$ together with a unit
+
+$$
+\eta_P:P\longrightarrow aP
+$$
+
+that is universal among maps from $P$ to local presheaves. Merely restating
+the sheaf condition does not build $aP$. Nor does choosing an inverse to
+$\rho_{R,X}$ for an already-local $X$ explain how to add missing
+amalgamations coherently.
+
+Universality asks for more than a local output. For every topology-local
+$X$, precomposition with the unit should give an equivalence
+
+$$
+\operatorname{Hom}(aP,X)
+\simeq
+\operatorname{Hom}(P,X).
+$$
+
+Thus a map out of $P$ into a local target extends across the completion, and
+the extension is unique at the whole Hom-category level. This property is
+what makes sheafification a reflector rather than one arbitrary repair of
+local data.
+
+The direct construction pursued next treats covers as questions whose
+solutions may be freely adjoined. It needs a return constructor for old data,
+a whole glue operation for matching families, a silent law saying that
+gluing the restriction of an existing section changes nothing, and a recursor
+expressing the universal property. The varying-cover architecture of this
+chapter is what lets those constructors be stated once over all eligible
+questions.
+
+Thus the progression is exact:
+
+$$
+\text{sieve}
+\longrightarrow
+\text{covering sieve}
+\longrightarrow
+\text{matching family}
+\longrightarrow
+\text{amalgamation}
+\longrightarrow
+\text{sheafification}.
+$$
+
+The first three stages are now in view. The next chapter constructs the last
+two for the selected Cat-valued setting and then asks for their whole
+universal property.
+<!-- /book-source:chapter-19 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-20 book/chapters/20-sheafification-by-cover-completion.md -->
+<a id="chapter-20"></a>
+
+# 20. Sheafification By Cover Completion
+
+A sheaf knows how to answer every covering question. An arbitrary presheaf
+may answer some and fail others. Sheafification is the passage from the latter
+to the former, but that phrase conceals two different demands. We must add the
+missing global sections, and we must add no information beyond what every
+sheaf is already forced to accept.
+
+The first demand is constructive. Given a matching family on a covering
+sieve, adjoin an amalgamation. Repeat, because the newly adjoined data may
+itself occur in another matching family. The second demand is universal. A map
+from the original presheaf to a sheaf must extend uniquely across the
+completion. Together they characterize a reflector from presheaves to
+sheaves.
+
+This chapter carries out that program directly in categorical semantics. The
+site, covering sieves, representables, matching categories, and restriction
+functors of Chapters 18 and 19 remain visible. They are not first encoded into
+a modal object language. The construction instead gives a categorical
+higher-inductive signature with three memorable operations:
+
+$$
+\text{return},\qquad \text{glue},\qquad \text{silent}.
+$$
+
+Return preserves old data. Glue supplies answers to covering questions.
+Silent says that asking a question whose answer is already known has no
+observable effect. A recursor then proves that this is the free such
+completion, and the free completion assembles into the desired Cat-valued
+sheafification functor.
+
+## 20.1 From A Condition To A Construction
+
+Fix a category $\mathcal K$, a Grothendieck topology $J$, and a Cat-valued
+presheaf $P$. Write $a_JP$, or simply $aP$, for the presheaf to be completed.
+There must first be a whole presheaf map
+
+$$
+\eta_P:P\longrightarrow aP.
+$$
+
+This is **return**. It does not assert that $P$ was already local. It embeds
+the observations we began with among the observations generated by the
+completion.
+
+Now take an eligible covering question $q=(U,R,c)$. Recall the categories
+
+$$
+\operatorname{Match}_{aP}(R)
+=\operatorname{Hom}(\widehat R,aP),
+\qquad
+\operatorname{Sect}_{aP}(U)
+=\operatorname{Hom}(yU,aP).
+$$
+
+The second constructor is a functor
+
+$$
+\operatorname{glue}_q:
+\operatorname{Match}_{aP}(R)
+\longrightarrow
+\operatorname{Sect}_{aP}(U).
+$$
+
+It turns compatible local data into a global section. Notice the recursion:
+the matching family already takes values in $aP$, not merely in $P$. A newly
+glued section can therefore participate in a later matching family. This is
+why one application of a nonrecursive repair operation would not express the
+construction being made here.
+
+The functorial type is equally important. In a set-valued account, glue may
+look like a function between sets. With Cat-valued coefficients, matching
+families have arrows between them, and amalgamation must transport those
+arrows coherently. The constructor acts on the entire matching category. It
+does not merely select an object-level amalgamation and leave its behavior on
+maps to be reconstructed later.
+
+Finally let
+
+$$
+\rho_q:
+\operatorname{Sect}_{aP}(U)
+\longrightarrow
+\operatorname{Match}_{aP}(R)
+$$
+
+be restriction. The **silent** constructor is the path
+
+$$
+\operatorname{glue}_q\circ\rho_q
+=\operatorname{id}_{\operatorname{Sect}_{aP}(U)}.
+\tag{20.1}
+$$
+
+If a global section is restricted to a cover and then glued again, nothing
+changes. The cover was consulted, but its answer was ignored because the
+global section was already present.
+
+This return/glue/silent pattern is conceptually adapted from Pierre-Marie
+Pédrot's computational account of free sheaves in
+[*Pursuing Shtuck*](#ref-pedrot-shtuck). Pédrot describes the last equation
+as the erasure of a silent transition: a branching computation that does not
+depend on its returned witness should be indistinguishable from the
+unbranched computation. Here the pattern is placed directly over actual
+covering-sieve questions. Its branches are whole matching maps
+$\widehat R\to aP$, and its output is a whole section $yU\to aP$.
+
+For a concrete picture, suppose a cover of $U$ is presented by two probes
+
+$$
+u_0:U_0\longrightarrow U,
+\qquad
+u_1:U_1\longrightarrow U.
+$$
+
+A matching family contains local observations $x_0$ and $x_1$ whose
+restrictions agree wherever the two probes meet, together with compatibility
+under every further refinement in the generated sieve. Glue adjoins a section
+$x$ over $U$ with those local observations. If $x_0$ or $x_1$ was itself
+produced by gluing a finer cover, the recursive constructor accepts it without
+flattening the history into a chosen list of basic pieces. If the entire
+matching family came by restricting an old $x$, silent identifies the newly
+adjoined amalgamation with $x$.
+
+That last clause is what prevents completion from accumulating duplicate
+global answers. Without silent, one could glue the same restricted section
+again and again, building formally distinct trees that encode no new local
+information. With an indiscriminate equation saying that every two gluings
+are equal, on the other hand, one would destroy genuine distinctions between
+matching families. Equation (20.1) is narrow: it removes precisely the detour
+that starts from an existing global section, passes through its restrictions,
+and returns by glue.
+
+Classical accounts often construct associated sheaves by a plus operation on
+matching families and then iterate that operation. Such a presentation is
+valuable, especially when quotient objects and their exactness properties are
+already available. The direct completion takes a different route. It exposes
+the free generators and their necessary path at the outset, so recursion can
+observe return and glue computationally. No comparison theorem with the
+classical plus construction is claimed here; the point is that the universal
+property can be reached without choosing equivalence-class representatives as
+the operational presentation.
+
+The signature should not be mistaken for an algorithm that searches the site
+for covers. A glue constructor is available after an eligible question and
+its cover evidence have been supplied. Coverhood itself may be undecidable,
+and the generated topology of Chapter 19 provides a universal predicate, not
+an enumeration. Completion says coherently what to do with every admitted
+question; it does not promise to discover those questions by normalization.
+
+Nor does the construction privilege the basic generators from which a
+topology may have arisen. Once the least topology has been formed, a derived
+cover is as eligible as a generating one. This is essential for locality:
+pullbacks and composites of covers enter the proof even when they were not in
+the original presentation. The witness-rich layer may still help a program
+produce cover evidence, but the free object depends on the invariant
+covering-sieve predicate.
+
+The terminology “higher-inductive” refers to the shape of this presentation.
+There is a point-like return constructor, a recursive glue constructor, and a
+path constructor imposing the silent equation. It does not mean that the
+entire surrounding theory has been replaced by ordinary HoTT syntax. The
+objects remain categories and presheaves in functorial type theory, while the
+outer logical framework supplies the primitive signature, rewrite behavior,
+and checked equality evidence.
+
+## 20.2 One Glue Operation Over All Questions
+
+Writing $\operatorname{glue}_q$ separately for each cover is useful on paper,
+but it hides the hardest coherence. A cover can be pulled back along a probe
+$p:V\to U$. The matching family moves to the pulled-back sieve, the proposed
+amalgamation moves to $V$, and the two orders of those operations must agree.
+
+Chapter 19 packaged all eligible questions into a category $\mathcal Q_J$.
+Over it, matching categories and section categories form two Cat-valued
+families,
+
+$$
+\operatorname{Match}_{aP},\operatorname{Sect}_{aP}:
+\mathcal Q_J\longrightarrow\mathbf{Cat}.
+$$
+
+The collection of glue operations is retained as one displayed functor
+
+$$
+\operatorname{glue}_{\mathrm{all}}:
+\operatorname{Match}_{aP}\longrightarrow
+\operatorname{Sect}_{aP}
+\quad\text{over }\mathcal Q_J.
+$$
+
+Its component at $q$ is $\operatorname{glue}_q$. Its action along arrows of
+$\mathcal Q_J$ is precisely the compatibility of glue with change of cover
+question. For the canonical pullback of $q$ along $p$, naturality gives the
+square summarized by
+
+$$
+\operatorname{Sect}[p]\circ\operatorname{glue}_q
+=
+\operatorname{glue}_{p^*q}\circ\operatorname{Match}[p].
+\tag{20.2}
+$$
+
+Likewise, silent is not stored as an unrelated equation for every $U$, $R$,
+and cover witness. It is one path of displayed endofunctors:
+
+$$
+\operatorname{glue}_{\mathrm{all}}
+\circ\rho_{\mathrm{all}}
+=\operatorname{id}_{\operatorname{Sect}_{aP}}.
+\tag{20.3}
+$$
+
+Equation (20.1) is its component at a literal cover. The one whole path also
+controls arrows between sections and reindexing between cover questions. This
+is a mathematical economy: coherence is owned at the level where the varying
+construction lives, rather than repeated as a growing list of component
+squares.
+
+<!-- evidence:DIRECT-COVER-COMPLETION-HIT -->
+
+> **Formal status — checked categorical-HIT boundary.** Evidence
+> `DIRECT-COVER-COMPLETION-HIT`. For every site and Cat-valued presheaf, the
+> active signature provides the completion presheaf, whole unit, whole
+> cover-indexed glue functor, and whole silent path. Pullback compatibility is
+> obtained from displayed-functor naturality, and the result is packaged as an
+> internal direct-cover sheaf structure. The completion and path constructors
+> are primitive at this boundary; locality and the reflector are consequences
+> proved in the following stages, not fields silently included here.
+
+The silent law has an intentional direction. It says that gluing the
+restriction of a section recovers the section. It does not initially say that
+restricting the glue of a matching family recovers the family. Supplying both
+directions as constructors would make locality true by declaration. Supplying
+only (20.3) leaves room for the geometry of sieves and pullback to prove the
+opposite composite.
+
+Nor is silent installed as a runtime simplification that erases every visible
+glue term. It is internal equality evidence between whole functors. Return and
+recursive glue have selected computational rules under the recursor, while
+the higher silent coherence remains a path. This distinction avoids choosing
+one side of every sheaf equation as a universal normal form.
+
+## 20.3 Why The Completion Is Local
+
+To prove that $aP$ is a sheaf, fix a covering sieve $R$ on $U$. Equation
+(20.1) already gives
+
+$$
+\operatorname{glue}_R\circ\rho_R
+=\operatorname{id}_{\operatorname{Sect}_{aP}(U)}.
+$$
+
+The missing law is
+
+$$
+\rho_R\circ\operatorname{glue}_R
+=\operatorname{id}_{\operatorname{Match}_{aP}(R)}.
+\tag{20.4}
+$$
+
+Take a matching family $m:\widehat R\to aP$ and inspect it at a member
+$p:V\to U$ of $R$. Because $R$ is a sieve, every refinement of $p$ still
+belongs to $R$. Consequently the pullback $p^*R$ is maximal on $V$: its
+identity belongs, and then so does every probe into $V$.
+
+The glue operation is natural under this pullback. Thus the restriction to
+$V$ of the global section $\operatorname{glue}_R(m)$ agrees with gluing the
+matching data transported to $p^*R$. But a matching family on the maximal
+sieve is already the restriction of the section visible at $V$. The silent
+law on that pulled-back question removes the redundant glue. At the retained
+member $p$, the result is exactly the original component of $m$.
+
+This calculation works at every member of the sieve and respects every arrow
+between members. The pointwise paths therefore assemble into a whole
+transformation
+
+$$
+\rho_R\circ\operatorname{glue}_R
+\Longrightarrow
+\operatorname{id}_{\operatorname{Match}_{aP}(R)},
+$$
+
+and the strict pointwise-to-whole principle closes it to (20.4). No new
+naturality square is assumed at this stage. The necessary compatibility came
+from the one displayed glue functor in the categorical-HIT signature.
+
+**Theorem 20.1 (locality of cover completion).** For every Cat-valued
+presheaf $P$ on the site $(\mathcal K,J)$, the direct cover completion $aP$ is
+local at every $J$-covering sieve. Hence $aP$ is a Cat-valued sheaf.
+
+<!-- evidence:DIRECT-COVER-COMPLETION-LOCALITY -->
+
+> **Formal status — checked.** Evidence
+> `DIRECT-COVER-COMPLETION-LOCALITY`. The active derivation constructs the
+> restriction-after-glue path from cover membership, canonical pullback,
+> whole glue naturality, and silent; combines it with the primitive
+> glue-after-restriction path; and produces the existing two-sided
+> fixed-forward locality interface at every eligible question and over the
+> whole topology. It assumes neither generic functor extensionality nor a
+> category-of-elements retraction.
+
+This proof explains why the chosen constructor set is not merely mnemonic.
+Return begins the free object. Glue supplies a candidate inverse to
+restriction. Silent gives one inverse law. Sieve stability and change of
+stage force the other. The sheaf condition emerges from the interaction of
+the constructors with the site, not from attaching the word “sheaf” to the
+result.
+
+Existence and uniqueness are therefore not two unrelated postulates. Glue is
+the existence mechanism. The two inverse laws say that its output is exactly
+the global datum classified by the matching family and that an already-global
+datum is unchanged. In the Cat-valued setting those laws also control arrows
+between families, so “unique” means unique with the categorical coherence
+visible to the Hom categories, rather than merely unique after forgetting all
+maps.
+That coherence is part of the theorem, not expository shorthand.
+
+## 20.4 The Recursor
+
+Locality shows that $aP$ lands in the right class of objects. Freeness asks
+whether it lands there in the right way.
+
+First consider a Cat-valued presheaf $Y$ equipped with its own coherent glue
+and silent operations. Given a seed map
+
+$$
+f:P\longrightarrow Y,
+$$
+
+the recursor produces
+
+$$
+\operatorname{rec}_Y(f):aP\longrightarrow Y.
+$$
+
+It is determined by three clauses. On returned data it extends the seed:
+
+$$
+\operatorname{rec}_Y(f)\circ\eta_P=f.
+\tag{20.5}
+$$
+
+On a recursive glue, it first maps the local family into $Y$ and then uses
+$Y$'s glue. On the silent path, those two ways of passing through glue agree
+with the silent path already carried by $Y$. The first two clauses describe
+objects and recursive computation; the third is the higher coherence that
+makes the result a map of the complete algebraic structures.
+
+A topology-local presheaf has canonical such structure. Its restriction
+functor is an equivalence, so its chosen inverse supplies glue, and one inverse
+law supplies silent. Thus every sheaf $Y$ is a legitimate target of the
+recursor without asking a reader to choose fresh gluing operations cover by
+cover.
+
+The objectwise statement “every seed extends” is still weaker than a
+reflective universal property. Maps between seed maps must extend too, and
+the extension must be inverse to restriction on the whole Hom category. For a
+local target $Y$, precomposition with the unit is a functor
+
+$$
+\eta_P^*:
+\operatorname{Hom}(aP,Y)
+\longrightarrow
+\operatorname{Hom}(P,Y),
+\qquad h\longmapsto h\circ\eta_P.
+$$
+
+Recursion varies functorially in the seed and gives a functor in the opposite
+direction. Equation (20.5) is the beta law
+
+$$
+\eta_P^*\circ\operatorname{rec}_Y
+=\operatorname{id}_{\operatorname{Hom}(P,Y)}.
+$$
+
+The categorical-HIT uniqueness law gives the eta law
+
+$$
+\operatorname{rec}_Y\circ\eta_P^*
+=\operatorname{id}_{\operatorname{Hom}(aP,Y)}.
+$$
+
+These are equalities of whole functors between Hom categories. They include
+the action on arrows between presheaf maps, not only a bijection between
+object-level maps.
+
+**Theorem 20.2 (free local completion).** If $Y$ is topology-local, then
+precomposition with $\eta_P$ is an omega-equivalence
+
+$$
+\operatorname{Hom}(aP,Y)
+\simeq
+\operatorname{Hom}(P,Y).
+\tag{20.6}
+$$
+
+<!-- evidence:DIRECT-COVER-COMPLETION-UNIVERSALITY -->
+
+> **Formal status — checked.** Evidence
+> `DIRECT-COVER-COMPLETION-UNIVERSALITY`. The recursor extends a whole seed
+> map, computes on return and recursive glue, and carries explicit coherence
+> for the silent path. It varies functorially in the seed. At a
+> topology-local target, whole beta and eta laws exhibit unit precomposition
+> as an omega-equivalence of complete Hom categories. The eta law is scoped to
+> local targets; no uniqueness theorem is asserted for an arbitrary,
+> independently chosen one-sided glue algebra.
+
+Equation (20.6) is the point at which completion becomes sheafification. Many
+objects might be made local by adding arbitrary data. Only a free local object
+has this mapping property. The unit remembers how the input enters, and every
+map to a local target factors through it in the uniquely coherent way.
+
+## 20.5 From The Universal Property To A Reflector
+
+Let $\operatorname{Sh}_{\mathbf{Cat}}(\mathcal K,J)$ denote the category whose
+objects are Cat-valued presheaves equipped with topology-locality evidence and
+whose maps are their underlying presheaf maps. There is an inclusion
+
+$$
+i:\operatorname{Sh}_{\mathbf{Cat}}(\mathcal K,J)
+\longrightarrow
+\operatorname{Psh}_{\mathbf{Cat}}(\mathcal K).
+$$
+
+Theorem 20.1 lets $P\mapsto aP$ land in the sheaf category. The recursor makes
+this assignment functorial on presheaf maps: given $f:P\to Q$, compose it with
+$\eta_Q$ and extend the resulting seed $P\to aQ$ across $aP$. Thus there is a
+functor
+
+$$
+a:\operatorname{Psh}_{\mathbf{Cat}}(\mathcal K)
+\longrightarrow
+\operatorname{Sh}_{\mathbf{Cat}}(\mathcal K,J).
+$$
+
+The Hom equivalence (20.6), now read with $Y=iS$ for a sheaf $S$, is exactly
+the adjunction
+
+$$
+a\dashv i.
+$$
+
+Its unit at $P$ is the return map $\eta_P$. Its counit at a sheaf $S$ is the
+recursor from the identity seed on the underlying presheaf:
+
+$$
+\varepsilon_S:a(iS)\longrightarrow S.
+$$
+
+The return beta law shows
+
+$$
+\varepsilon_S\circ\eta_{iS}=\operatorname{id}_{iS},
+$$
+
+and the local-target uniqueness law gives the other cancellation. Hence the
+counit is an equivalence. Sheafification does not alter a sheaf except up to
+the native categorical equivalence appropriate to this development.
+
+This also explains the familiar idempotent flavor of sheafification. Applying
+$a$ to an arbitrary $P$ produces a local object. Applying $a$ again therefore
+meets an object already in the reflective subcategory, and the counit compares
+$a(aP)$ back to $aP$ by an equivalence. The statement is not that the two
+presheaves collapse by raw syntax. Reflective idempotence is expressed by the
+adjunction and its invertible counit, at the same categorical strength as the
+rest of the theory.
+
+**Theorem 20.3 (Cat-valued sheafification reflector).** For every site
+$(\mathcal K,J)$, direct cover completion defines a left adjoint to the
+inclusion of topology-local Cat-valued presheaves. The counit on every sheaf
+is an omega-equivalence, so this adjunction is reflective.
+
+<!-- evidence:CAT-VALUED-SHEAFIFICATION-REFLECTOR -->
+
+> **Formal status — checked.** Evidence
+> `CAT-VALUED-SHEAFIFICATION-REFLECTOR`. The active construction realizes the
+> Cat-valued sheaf facade as topology-local presheaves, constructs the
+> inclusion and completion functors, supplies their whole adjunction, reduces
+> its unit to return and its counit to recursion from the identity seed, and
+> proves the two counit cancellations and reflector capability. This is a
+> fixed-site Cat-valued result. It does not yet supply arbitrary coefficient
+> categories, a commutative-ring lift, left exactness, or base-change
+> comparison.
+
+## 20.6 Categorical Semantics As An Executable Language
+
+There are two legitimate ways to speak about sheafification in type theory.
+One may design an internal language with a modality whose semantics is a
+sheaf reflector. Or one may express the categorical semantics itself in a
+formal language rich enough to compute with categories, presheaves, sieves,
+and universal properties. This book follows the second route.
+
+The distinction is about where the formalization lives, not about whether it
+is internal. Within functorial type theory, $\widehat R$, $yU$, matching
+categories, section categories, glue, and the adjunction are genuine objects
+and arrows. They are manipulated from inside the categorical theory. That
+theory in turn lives inside an outer logical framework—Lambdapi in the active
+oracle, and increasingly the explicit emdash Core checked by TypeScript. The
+outer layer supplies binders, conversion, rewrite rules, unification, and
+proof checking. Selected categorical observations can therefore reduce and
+be compared without inventing a second modal surface language first.
+
+The division of labor can be read from one glued section. Its matching family
+and section are inner categorical objects. The fact that glue is natural in a
+change of covering question is inner functorial structure. The rule saying how
+a recursor acts on return or on recursive glue belongs to the outer
+computation theory. The equality witnessing silent is again an inner path,
+whose formation and use are certified by the outer checker. Neither level is
+dispensable, but neither needs to masquerade as the other.
+
+This is **relative internality**. The sheaf construction is internal to the
+categorical semantics and executable relative to the surrounding logical
+framework. It is neither an informal metatheoretic diagram nor a claim that
+all categorical equalities are definitional. Return has a narrow computation
+rule under recursion; recursive glue has another; silent remains first-class
+equality evidence; the Hom equivalence packages explicit inverse data.
+
+An internal modal language may still be desirable. It can hide repeated site
+parameters, support concise local reasoning, or make sheaf semantics available
+to a different class of programs. What the direct construction shows is that
+such a language is not a prerequisite for computational sheafification. The
+ordinary site can remain ordinary, the sieves can remain actual sieves, and
+the categorical universal property can itself be checked.
+
+This viewpoint also clarifies the comparison with Pédrot. His
+return/glue/silent pattern reveals the computational content that a purely
+reflective statement can conceal. Emdash preserves that pattern but moves its
+indices outward to the category of covering questions and its values upward
+to categories. The result is not a transcription of his type theory. It is a
+categorical realization of the same free-construction idea, with whole
+naturality and whole Hom universality made explicit.
+
+## 20.7 What Has And Has Not Been Completed
+
+At this point the word *sheafification* is justified for Cat-valued
+presheaves on a fixed site. The result is local, functorial, left adjoint to
+inclusion, and reflective. None of those adjectives should be silently moved
+to a different coefficient category.
+
+In particular, a commutative-ring-valued presheaf carries operations that
+must survive completion and continue to satisfy their equations. A reflector
+on underlying Cat-valued presheaves does not by itself construct those lifted
+operations. Nor has the present theorem established left exactness,
+preservation of finite limits, compatibility with change of site, or a
+general comparison with classical plus-construction sheafification. Those are
+separate mathematical obligations.
+
+There is also no claim here about sheafifying every universe of coefficients
+uniformly. The value category has been fixed to $\mathbf{Cat}$, and the sheaf
+facade has been realized concretely as a presheaf paired with locality
+evidence. Moving to sets, groupoids with a different equality policy,
+commutative rings, or a universe of small categories requires a corresponding
+lifting theorem. The fixed-site theorem is substantial precisely because it
+keeps that quantification honest.
+
+The next chapter therefore steps sideways before moving further into
+geometry. It develops commutative algebra by universal property: products,
+localizations, and the evidence that a ring map sends a chosen element to a
+unit. That language will let the invertibility sieve $D_U(s)$ of Chapter 18
+control affine charts without pretending that Cat-valued sheafification has
+already manufactured a structure sheaf of rings.
+
+The local-to-global spiral now has its completion step:
+
+$$
+\text{probe}
+\longrightarrow
+\text{sieve}
+\longrightarrow
+\text{cover}
+\longrightarrow
+\text{matching family}
+\longrightarrow
+\text{free glue}
+\longrightarrow
+\text{reflective sheaf}.
+$$
+
+What comes next is the algebra that turns these local questions into affine
+geometry.
+<!-- /book-source:chapter-20 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-21 book/chapters/21-commutative-algebra-by-universal-property.md -->
+<a id="chapter-21"></a>
+
+# 21. Commutative Algebra By Universal Property
+
+Algebraic geometry begins with rings, but it rarely cares how a ring was
+manufactured. A polynomial algebra may be presented by finite expressions; a
+localization may be presented by fractions; a quotient may be presented by
+equivalence classes. These descriptions are indispensable for hand
+calculation. They are not, however, the invariant meaning of the objects they
+describe. Change the representation and the same algebra survives.
+
+This matters acutely in a computational foundation. A convenient syntax can
+make examples reduce, yet it can also make every later construction depend on
+accidental choices of normal form. Conversely, a universal property can be
+stated so weakly that it says merely that a map exists, leaving no usable
+factor and no uniqueness with which to compare two constructions. The middle
+course taken here is to make the universal property itself data of the
+theory. The space of admissible factors is not merely inhabited: it is
+contractible. It therefore has a selected center and a path from every
+competitor to that center.
+
+That principle gives a representation-free but still computational account
+of the algebra needed by the geometry ahead. Commutative rings have
+set-valued carriers and structured maps. Finite unit-ideal certificates carry
+the algebraic content of basic-open covers. Polynomial algebras are free
+extensions, and localizations are initial ways of making a chosen element
+invertible. Unit, zero, and idempotent localizations then show that the
+interface is not empty formalism. Finally, uniqueness alone constructs the
+comparison between localization at a product and localization in two stages.
+
+## 21.1 Rings As Structured Set-Carriers
+
+A commutative ring $R$ consists first of a set $|R|$, with operations
+
+$$
+0_R,1_R:|R|,
+\qquad
++_R,\cdot_R:|R|\times |R|\longrightarrow |R|,
+\qquad
+-_R:|R|\longrightarrow |R|,
+$$
+
+and then the usual associativity, commutativity, unit, inverse, and
+distributivity laws. Calling the carrier a set is not decorative. It says
+that equality proofs between ring elements carry no higher ambiguity. The
+algebraic laws are consequently properties of the selected operations rather
+than new layers of structure that can vary above a fixed equality.
+
+The definition does **not** require $0_R\ne1_R$. This convention retains the
+zero ring, whose carrier has one element and whose two distinguished constants
+coincide. Excluding it would make some later universal statements awkward or
+false. Localization at zero, for example, naturally lands in the zero ring:
+forcing zero to be a unit forces every element to coincide.
+
+A map $h:R\to S$ is more than a function of carriers. It comes with the five
+preservation laws
+
+$$
+h(0)=0,
+\quad h(1)=1,
+\quad h(x+y)=h(x)+h(y),
+\quad h(-x)=-h(x),
+\quad h(xy)=h(x)h(y).
+$$
+
+Because the target carrier is a set, this preservation evidence is
+proposition-valued. Two structured maps are equal once their carrier
+functions agree pointwise. Identities and composites again preserve all five
+operations, so commutative rings and their structured maps form a
+one-category, written $\mathbf{CRing}$.
+
+This choice of morphism is part of the mathematics. A bare function between
+carriers forgets the equations that make substitution legitimate. A
+structured map carries those equations once, after which every derived finite
+sum, product, unit witness, and factorization can be transported through it.
+Later base-change arguments therefore do not reopen the ring laws term by
+term. They use the fact that the arrow already lives in $\mathbf{CRing}$.
+
+Sethood plays a second role here. A structured map contains both a function
+and proofs that it respects the operations. If those proofs carried
+independent higher data, pointwise equality of the functions would not settle
+equality of the complete maps. Since equality in the target ring is
+proposition-valued, preservation proofs create no such ambiguity. This is why
+the ordinary-looking extensionality principle is available without flattening
+the ambient functorial type theory.
+
+There is a useful restraint here. Extensionality for maps is not a global
+principle saying that any two ring packages with equivalent carriers are
+equal. No structure identity principle for arbitrary rings is being smuggled
+in. The objects remain chosen carrier-operation-law packages; the homs have
+the extensionality required to calculate with them.
+
+<!-- evidence:COMM-RING-STRUCTURED-CATEGORY -->
+
+> **Formal status — checked.** Evidence
+> `COMM-RING-STRUCTURED-CATEGORY`. The active algebra packages a set-valued
+> carrier, operations, and ring laws; admits the zero ring; packages
+> operation-preserving carrier functions as structured maps; proves their
+> extensionality; and assembles them into the one-category
+> $\mathbf{CRing}$. No inequality $0\ne1$, global equality of ring packages,
+> or general structure identity theorem is assumed.
+
+Several small models keep this abstraction honest. The zero ring computes on
+the one-point carrier. The two-element ring $\mathbb F_2$ computes on the
+booleans, with exclusive-or as addition and conjunction as multiplication.
+If $R$ and $S$ are rings, their cartesian carrier $|R|\times|S|$ has
+componentwise operations and hence a ring structure $R\times S$. A pair of
+maps induces a componentwise map between such products, and these maps obey
+whole identity and composition paths.
+
+This last construction should not be overread. We have constructed a product
+ring and functorial action on paired maps. We have not yet selected projections
+and proved the entire categorical product universal property inside
+$\mathbf{CRing}$. The componentwise model is exactly what the later
+split-idempotent calculation needs, and no stronger theorem is required for
+that calculation.
+
+## 21.2 Finite Certificates For Covering
+
+The first geometric-looking datum is still entirely algebraic. Let
+$f_1,\ldots,f_n$ be elements of a ring $R$. They are **unimodular** when one
+retains coefficients $a_1,\ldots,a_n$ and an equality
+
+$$
+a_1f_1+\cdots+a_nf_n=1.
+\tag{21.1}
+$$
+
+The coefficients are important. The bare proposition that the $f_i$ generate
+the unit ideal forgets how that fact was witnessed. Equation (21.1), by
+contrast, is finite input that can be transported, inspected, and used in a
+construction. The family together with its coefficients and equality is a
+**unimodular presentation**.
+
+For two generators the picture is especially sharp. From $af+bg=1$, any map
+out of $R$ that makes both $f$ and $g$ vanish would also make $1$ vanish.
+Unless the target has collapsed to the zero ring, that is impossible.
+Geometrically, no nontrivial affine point can lie outside both regions of
+invertibility at once. The equation is already the finite algebraic shadow of
+a covering statement, even though the regions and their topology remain to
+be constructed.
+
+Every ring map $h:R\to S$ transports such a presentation. Preservation of
+finite sums and products turns (21.1) into
+
+$$
+h(a_1)h(f_1)+\cdots+h(a_n)h(f_n)=1
+$$
+
+in $S$. Thus a certificate does not merely remain true after base change; its
+chosen witnesses move pointwise with the generators. The singleton family
+$[1]$ has the canonical certificate $1\cdot1=1$, and a two-element helper
+packages the familiar equation $af+bg=1$.
+
+Why call this cover data? In ordinary affine geometry, (21.1) says that the
+basic opens $D(f_i)$ cover the whole spectrum. But that geometric conclusion
+uses meanings that have not yet been introduced in this spiral: a spectrum,
+basic opens, a topology, and the relationship between unit-ideal generation
+and coverage. The present layer records precisely the algebraic premise from
+which those notions will be built. It does not call a finite family a cover by
+fiat.
+
+There is a second reason to retain the presentation rather than immediately
+truncate it to a proposition. Different coefficient families may witness the
+same unit-ideal equation. The classifier of presentations is set-valued, not
+claimed proposition-valued. Later invariant constructions may forget that
+choice; earlier computational constructions are allowed to consume it. This
+separation between witness-rich input and invariant output is the same
+pattern used for generated topologies in Chapter 19.
+
+<!-- evidence:FINITE-UNIMODULAR-COVER-DATA -->
+
+> **Formal status — checked algebraic boundary.** Evidence
+> `FINITE-UNIMODULAR-COVER-DATA`. Finite sums and dot products compute on
+> visible families, structured ring maps preserve them, and a finite Zariski
+> presentation retains generators, coefficients, and their unit-ideal law.
+> Such presentations are stable under structured base change and include the
+> singleton $[1]$ and binary $af+bg=1$ cases. At this layer they are not yet
+> basic opens, covering sieves, localization families, or a Grothendieck
+> topology.
+
+## 21.3 Free Variables Without A Syntax Of Polynomials
+
+Fix a ring $R$ and a set or groupoid $X$ of variable names. A polynomial
+algebra on $X$ should contain a base map
+
+$$
+\iota:R\longrightarrow P
+$$
+
+and a valuation $v:X\to |P|$. Its meaning is determined by what happens when
+the variables are interpreted elsewhere. Given a ring $S$, a base map
+$h:R\to S$, and a valuation $u:X\to|S|$, consider structured maps
+$k:P\to S$ satisfying
+
+$$
+k\circ\iota=h,
+\qquad
+k(v(x))=u(x)\quad(x:X).
+\tag{21.2}
+$$
+
+Both equations are retained pointwise, and the complete factor consists of
+$k$ together with those agreements. The universal property says that the
+classifier of such factors is contractible for every $S$, $h$, and $u$.
+There is therefore one coherently selected extension, and every rival
+extension is equal to it as a structured map with its agreement evidence.
+
+Contractibility is stronger than the phrase “there exists a unique map” when
+that phrase is read externally. It gives a center of the complete factor
+classifier and, internally, a path from every other inhabitant to that
+center. The center can be projected whenever an actual extension is needed;
+the contraction can be invoked whenever two independently constructed
+extensions must agree. Because the classifier retains the equations in
+(21.2), uniqueness does not forget that the comparison lies over $R$ and has
+the prescribed values on variables.
+
+This is the familiar freeness of $R[X]$, but it does not select a
+representation of its elements. There is no list of monomials, finitely
+supported coefficient function, inductive expression grammar, quotient by
+the ring laws, or preferred normalization order. Those are possible models
+of the universal property, not fields of the property itself.
+
+The omission is not hostility to syntax. A concrete evaluator might sensibly
+represent a polynomial by normalized coefficient data, and a parser might let
+a reader write $x^2+2x+1$. What matters is the direction of dependence. Such
+a representation should prove that it satisfies (21.2); the geometry should
+then consume the universal property. The later theory is insulated from
+whether one implementation uses Horner forms, sparse monomials, or an
+external computer-algebra package.
+
+For a single variable $t$, this says that a map out of a supplied $R[t]$ is
+determined by two observations: what it does to coefficients and where it
+sends $t$. Familiar evaluation is recovered by choosing the target value of
+$t$. For many variables the same sentence is indexed by $X$, with no need to
+choose an ordering at the universal boundary. The interface states exactly
+what symbolic substitution is meant to accomplish while declining to
+legislate how symbols are stored.
+
+There is already a closed sanity check. When $X$ is empty, there is no variable
+data to choose. The ring $R$ itself, with the identity base map, satisfies the
+polynomial universal property: every $h:R\to S$ is its own unique extension.
+This case exercises the complete factor classifier and its contractibility,
+not merely the formation of a record.
+
+**Theorem 21.1 (universal polynomial extension).** A supplied polynomial
+algebra package on $(R,X)$ classifies extensions of every base map and
+valuation by a contractible factor space. For the empty variable classifier,
+the identity extension on $R$ supplies a checked model.
+
+<!-- evidence:COMM-RING-POLYNOMIAL-UNIVERSALITY -->
+
+> **Formal status — checked interface and closed model.** Evidence
+> `COMM-RING-POLYNOMIAL-UNIVERSALITY`. The active universal property retains
+> base and variable agreements and proves the complete extension space
+> contractible. The empty-variable identity model is checked. No construction
+> of a polynomial algebra for every $R$ and $X$, concrete monomial syntax,
+> quotient presentation, normalization theorem, runtime rule, or package
+> uniqueness theorem is claimed.
+
+## 21.4 Making One Element Invertible
+
+Let $f\in R$. A localization of $R$ at $f$ begins with a ring $L$ and a map
+
+$$
+\ell:R\longrightarrow L
+$$
+
+for which $\ell(f)$ is a unit. Unit evidence is explicit: it consists of an
+inverse $y$ and an equality $\ell(f)y=1$. Commutativity proves that the inverse
+is unique, and sethood of the carrier proves that the entire evidence is a
+proposition. Asking for a unit therefore does not introduce a meaningful
+choice of inverse into the geometry.
+
+The uniqueness calculation is elementary but instructive. If $y$ and $z$ are
+both inverses to $x$, then
+
+$$
+y=y\cdot1=y(xz)=(yx)z=(xy)z=1\cdot z=z.
+$$
+
+Associativity and commutativity do the algebraic work; sethood then says that
+the displayed equality has no further choices. The predicate “$x$ is
+invertible” may consequently be used as the fibre of an ordinary sieve, as in
+Chapter 18, rather than as a higher coefficient carrying distinct inverse
+witnesses.
+
+The universal property considers any map $h:R\to S$ for which $h(f)$ is a
+unit. A factor is a structured map $k:L\to S$ together with the pointwise
+triangle
+
+$$
+k(\ell(x))=h(x)\qquad(x\in R).
+\tag{21.3}
+$$
+
+The localization property says that this factor space is contractible. We may
+write the selected target suggestively as $R[1/f]$, while remembering that the
+notation names the role of $L$, not a fraction grammar inside its carrier.
+Then (21.3) is the invariant content of the usual substitution
+
+$$
+\frac{x}{f^n}\longmapsto h(x)h(f)^{-n}.
+$$
+
+The displayed fraction explains the classical formula; it is not used to
+define the map. Contractibility supplies the map and all comparisons between
+maps satisfying the same triangle without choosing numerators, denominators,
+or exponents.
+
+Admissibility belongs to the target map $h$. The localization package does not
+choose, for every ring in the universe, whether the image of $f$ is a unit.
+Rather, when a caller supplies unit evidence, the universal property returns
+the unique factor. This keeps constructive content visible: testing
+invertibility may be undecidable, but using an explicit proof of invertibility
+is computationally straightforward.
+
+This stronger uniqueness is what makes the interface computationally useful.
+From a contractible factor space one projects a center, hence an actual map
+$R[1/f]\to S$. Given another construction with the same universal property,
+one obtains maps in both directions. Their composites and the identities are
+competitors in suitable factor spaces, so uniqueness produces the inverse
+laws. The universal property is thus a source of programs and equations, not
+an after-the-fact slogan attached to an opaque object.
+
+It also separates existence from characterization. A **localization package**
+contains a chosen $L$, a chosen structure map, its unit evidence, and the
+contractible factorization theorem. The general interface says what any such
+package does. It does not yet construct a package for every pair $(R,f)$.
+That remaining existence problem can be solved by a fraction model, by a
+quotient, by a suitable higher-inductive construction, or by importing a
+certified algebra library, without changing the consumers of localization.
+
+<!-- evidence:COMM-RING-LOCALIZATION-UNIVERSALITY -->
+
+> **Formal status — checked interface.** Evidence
+> `COMM-RING-LOCALIZATION-UNIVERSALITY`. Unit evidence is proposition-valued,
+> and a supplied localization package inverts the chosen element and gives a
+> contractible space of structured factors through every admissible target
+> map. The factor retains a whole ring map and its pointwise triangle. No
+> general existence theorem for arbitrary $(R,f)$, fraction or power
+> representation, quotient syntax, or equality of arbitrary localization
+> packages is asserted.
+
+## 21.5 Three Localizations One Can See
+
+The abstract interface has concrete edges where no fraction construction is
+needed.
+
+First suppose $f$ is already a unit in $R$. The identity map
+$R\to R$ is a localization at $f$. Every admissible map $h:R\to S$ factors
+through the identity by $h$ itself, and extensionality makes that factor
+unique. In particular, every ring has a canonical identity localization at
+$1$.
+
+At the opposite extreme, localize at $0$. If $h:R\to S$ sends zero to a unit,
+then $0_S$ is invertible. Since a ring map preserves zero, one obtains
+$0_S=1_S$, and hence every element of $S$ equals zero. The target is
+contractible as a carrier. It follows that the unique map from $R$ to the zero
+ring has the localization property at $0$. The zero ring is not a nuisance
+case patched into the theory; it is the correct universal endpoint.
+
+The third case is more revealing. Let $e\in R$ be idempotent, so $e^2=e$.
+Consider the fixed-image carrier
+
+$$
+eR=\{x\in R\mid ex=x\}.
+$$
+
+It is closed under the inherited additive operations and multiplication. Its
+zero is $0_R$, while its multiplicative unit is $e$. Scaling defines a ring
+map
+
+$$
+R\longrightarrow eR,
+\qquad x\longmapsto ex.
+\tag{21.4}
+$$
+
+The image of $e$ under (21.4) is the unit of $eR$, and any map that makes $e$
+invertible factors contractibly through this fixed image. Thus $eR$ is a
+localization at $e$, constructed without a quotient and without fractions.
+
+The factor has a simple formula. If $h:R\to S$ makes the idempotent $e$
+invertible, then idempotence of $h(e)$ and cancellation by its inverse force
+$h(e)=1$. On an element $x$ fixed by multiplication by $e$, the factor sends
+$x$ to $h(x)$. Conversely, the original element $r$ reaches the fixed image as
+$er$, and then
+
+$$
+h(er)=h(e)h(r)=h(r),
+$$
+
+which is the required triangle. The fixed-point equation retained in the
+carrier supplies exactly the coherence needed for this formula to define a
+structured map.
+
+Take now $R=\mathbb F_2\times\mathbb F_2$ and $e=(1,0)$. Componentwise
+multiplication makes $e$ idempotent, yet boolean discrimination proves
+$e\ne(0,0)$ and $e\ne(1,1)$. Its fixed image consists of the first component
+with the second forced to zero. This is a closed, genuinely non-endpoint
+localization: neither the identity localization nor the zero localization is
+being disguised by notation.
+
+<!-- evidence:COMM-RING-LOCALIZATION-MODELS -->
+
+> **Formal status — checked models.** Evidence
+> `COMM-RING-LOCALIZATION-MODELS`. The identity ring localizes at any supplied
+> unit and canonically at $1$; the zero ring localizes every ring at $0$; and
+> the fixed image $eR$ localizes at an idempotent $e$. The product ring
+> $\mathbb F_2\times\mathbb F_2$ supplies a checked idempotent $(1,0)$ distinct
+> from both endpoints, so the fixed-image construction has a concrete
+> nondegenerate instance. These models do not amount to arbitrary
+> localization existence.
+
+## 21.6 Localizing Once Or Twice
+
+Universal properties earn their keep when two descriptions must be compared.
+Choose a localization of $R$ at $f$, and then localize its target at the image
+of $g$. Also choose a localization of $R$ at the product $fg$. In customary
+notation the two targets are
+
+$$
+R[1/f][1/g]
+\qquad\text{and}\qquad
+R[1/(fg)].
+$$
+
+No fraction calculation is needed to compare them. In the iterated target,
+the images of both $f$ and $g$ are units, so their product is a unit. The
+universal property of $R[1/(fg)]$ therefore gives a forward map
+
+$$
+\Phi:R[1/(fg)]\longrightarrow R[1/f][1/g].
+$$
+
+Conversely, if $fg$ is invertible in a commutative ring, then both $f$ and
+$g$ are invertible: an inverse to $f$ is $g(fg)^{-1}$, and symmetrically for
+$g$. The product localization consequently admits first a factor through
+$R[1/f]$ and then a factor through the localization at the image of $g$. This
+gives
+
+$$
+\Psi:R[1/f][1/g]\longrightarrow R[1/(fg)].
+$$
+
+This elementary implication is the hinge of the comparison. If $w$ is an
+inverse to $fg$, then
+
+$$
+f(gw)=(fg)w=1,
+\qquad
+g(fw)=(fg)w=1.
+$$
+
+It converts one unit witness into the two witnesses demanded by the staged
+universal properties. No appeal to prime ideals, open subsets, or a spectrum
+is involved; the overlap theorem is already present in commutative algebra.
+
+The two composites are not reduced by a hidden fraction normalizer. Instead,
+$\Psi\Phi$ and the identity are factors of the same map through the product
+localization, so contractibility identifies them. The other direction needs
+one additional step: uniqueness at the first localization aligns the maps on
+the intermediate ring, after which uniqueness at the second localization
+identifies $\Phi\Psi$ with the identity. Both results are equalities of whole
+structured ring maps.
+
+**Theorem 21.2 (product and iterated localization).** For any supplied
+localizations in the preceding configuration, the canonical comparison maps
+satisfy both whole cancellation laws and exhibit an omega-equivalence in
+$\mathbf{CRing}$,
+
+$$
+R[1/(fg)]\simeq R[1/f][1/g].
+\tag{21.5}
+$$
+
+<!-- evidence:COMM-RING-ITERATED-LOCALIZATION-EQUIV -->
+
+> **Formal status — checked.** Evidence
+> `COMM-RING-ITERATED-LOCALIZATION-EQUIV`. The active comparison constructs
+> canonical forward and reverse structured maps from the supplied universal
+> properties. Contractibility proves their left and right whole-map laws and
+> packages the selected forward map as an omega-equivalence in
+> $\mathbf{CRing}$. Equation (21.5) does not identify the carrier packages by
+> raw equality, provide fraction computation, or choose either localization
+> globally.
+
+This proof displays the intended style of computation. A representation-first
+development might multiply fractions and cancel powers until both composites
+normalize. Here the observable computation is composition of structured maps,
+and the universal property closes the comparison. Concrete models remain free
+to normalize fractions internally; nothing downstream is allowed to depend
+on that choice.
+
+## 21.7 From Localization To The Sieve $D(f)$
+
+Localization answers a transformational question: what is the universal ring
+under $R$ in which $f$ has become invertible? The sieve of Chapter 18 answers
+a relational question: along which probes is the image of $f$ already
+invertible? These are two faces of the same algebraic event.
+
+Given a ring map $u:R\to S$, membership in the sieve $D_R(f)$ is unit evidence
+for $u(f)$. Whenever a localization $R\to R[1/f]$ has been supplied, the
+factorization theorem turns that membership into a structured map
+
+$$
+R[1/f]\longrightarrow S
+$$
+
+over $R$, and contractibility makes all choices of such a factor coherently
+unique. Conversely, any map over $R$ carries the selected inverse of the
+localized image of $f$ to an inverse of $u(f)$. The localization therefore
+represents the question posed by the invertibility sieve when a representing
+object is available.
+
+The order of ideas is deliberate. The sieve $D_R(f)$ exists from the
+invertibility predicate alone; it need not wait for a chosen fraction object.
+A supplied localization then represents that sieve on affine points. Thus the
+geometry can be organized around **invertibility's sieve**, while
+localization supplies a computational chart rather than defining openness by
+decree.
+
+The next chapter makes this bridge precise. It constructs the affine functor
+of points, reads $D(f)$ as an ordinary sieve on an affine, and shows how
+unimodular families become finite basic-open covers. The algebra developed
+here will reappear there not as an internal manual of ring operations, but as
+the universal language in which affine geometry recognizes its charts.
+<!-- /book-source:chapter-21 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-22 book/chapters/22-affine-geometry-and-the-sieve-df.md -->
+<a id="chapter-22"></a>
+
+# 22. Affine Geometry And The Sieve $D(f)$
+
+An affine scheme is often introduced as a set of prime ideals equipped with a
+topology and a sheaf. That description is powerful, but it begins at the end
+of several constructions. Constructively, even the set of prime ideals can be
+difficult to use: the familiar argument that a proper ideal lies in a prime
+ideal invokes a choice principle that one may have deliberately declined.
+More importantly for the present book, a point-set spectrum hides the
+functorial action that makes geometry computational.
+
+There is another beginning. Instead of asking first which ideal-valued points
+a ring has, ask how the ring can be mapped into every test ring. Instead of
+declaring a subset on which an element is nonzero, ask along which of those
+maps its image becomes invertible. The answers are already organized by
+composition. They form a functor of points and, inside it, an ordinary sieve
+
+$$
+D_R(f)=\{h:R\longrightarrow S\mid h(f)\text{ is invertible in }S\}.
+$$
+
+This sieve is the geometric form of localization. A chosen localization
+$R\to R[1/f]$ represents its points: maps out of $R[1/f]$ are exactly maps out
+of $R$ along which $f$ is a unit. Products encode intersections,
+$D_R(fg)=D_R(f)\cap D_R(g)$, and finite unit-ideal presentations generate the
+Zariski topology on the big affine slice. Only after those constructions are
+in place do we ask for a structure sheaf and its locality.
+
+The order matters. The sieve exists before it is represented by one chart;
+the topology exists before a sheafification for commutative-ring values has
+been constructed; and the computing coordinate presheaf exists before it is
+equipped with supplied sheaf and locality witnesses. Affine geometry becomes
+executable without pretending that each of its classical existence theorems
+has already been rebuilt.
+
+## 22.1 Affines As Questions Of Points
+
+Let $\mathbf{Aff}=\mathbf{CRing}^{\mathrm{op}}$. A ring map
+$h:R\to S$ is read geometrically in the opposite direction,
+
+$$
+\operatorname{Sp}(S)\longrightarrow\operatorname{Sp}(R).
+$$
+
+The notation $\operatorname{Sp}(R)$ is deliberately functorial. At a test ring
+$S$, define
+
+$$
+\operatorname{Sp}(R)(S)
+  =\operatorname{Hom}_{\mathbf{CRing}}(R,S).
+\tag{22.1}
+$$
+
+If $\alpha:S\to T$, composition sends a point $h:R\to S$ to
+$\alpha\circ h:R\to T$. Thus (22.1) is not a disconnected family of sets. It
+is the representable presheaf on $\mathbf{Aff}$, with all change-of-test-ring
+maps supplied by Yoneda.
+
+This definition changes the meaning of “point” in a useful way. A point is
+not required to land in a field, an algebraic closure, or a two-valued truth
+object. Every ring $S$ is an admissible stage of observation. Nilpotents,
+idempotents, infinitesimal extensions, and degenerate rings are visible when
+the chosen tests can detect them. A classical prime ideal may later be
+recovered through a suitable field-like test, but it does not monopolize the
+notion of observation.
+
+Generalized points can distinguish phenomena that field-valued points erase.
+For example, a nilpotent element must map to zero in every reduced field, but
+it may remain visible under a map to a ring with nilpotents. Likewise, an
+idempotent can reveal a decomposition through product test rings even when a
+single ordinary point sees only one side. The functor of points does not force
+one preferred class of tests to carry the entire geometry. It records the
+response at all stages and lets later hypotheses specify which stages are
+sufficient for a particular theorem.
+
+There is a useful logical economy in this approach. To compare two candidate
+affine constructions, one may compare how maps into every test ring are
+classified rather than inspect a chosen point-set representation. Conversely,
+an explicit test ring can refute an overstrong identification by exhibiting a
+point seen on one side and not the other. The functor is therefore both an
+extensional language and an experimental instrument. The representation
+theorem below uses the second role directly: it constructs and compares actual
+maps at an arbitrary supplied test ring.
+
+The functor of points also remembers direction for free. Suppose
+$R\to S\to T$ is a commuting triangle of ring maps. The corresponding
+geometric arrows compose in the reverse order, and evaluating
+$\operatorname{Sp}(R)$ simply composes the ring maps. No separate substitution
+operation has to be appended to the set of points, and no proof is needed
+that this operation respects identity and composition: those laws are the
+ordinary Yoneda action already developed in Chapters 13 and 18.
+
+One should not confuse this representable with the completed geometric object
+traditionally denoted $\operatorname{Spec}(R)$. At this stage we have a functor
+of affine tests. We have not yet selected a Zariski topology, a structure
+sheaf, a local-ring condition, or a comparison with a prime-ideal spectrum.
+The notation records the intended geometry while leaving each additional
+layer visible.
+
+## 22.2 Invertibility Is A Sieve
+
+Fix $f\in R$. For every test ring $S$, let
+
+$$
+D_R(f)(S)
+  =\sum_{h:R\to S}\mathsf{Unit}_S(h(f)),
+\tag{22.2}
+$$
+
+where $\mathsf{Unit}_S(x)$ is the proposition that $x$ has a multiplicative
+inverse. An element of (22.2) is therefore a point $h$ together with actual
+evidence that the image of $f$ is invertible.
+
+The construction is stable under refinement of the test. If
+$\alpha:S\to T$, a unit witness for $h(f)$ is carried by $\alpha$ to a unit
+witness for $\alpha(h(f))=(\alpha\circ h)(f)$. Hence every further probe of a
+$D_R(f)$-point is again a $D_R(f)$-point. In the geometric category
+$\mathbf{Aff}$, this downward closure says precisely that $D_R(f)$ is a sieve
+on $\operatorname{Sp}(R)$.
+
+Unit evidence is proposition-valued, so the sieve is ordinary rather than a
+higher sieve with a nontrivial category of witnesses. The selected inverse is
+retained during a calculation, but any two inverse witnesses agree. The
+predicate can therefore be used as a subterminal fibre of the representable
+without erasing computational access to the inverse when it is needed.
+
+This definition avoids two premature decisions. It does not ask whether
+invertibility is decidable, and it does not ask whether all the successful
+probes factor through one previously chosen open object. A caller may supply a
+unit witness even when no decision procedure exists. The resulting collection
+of successful probes is meaningful even when no single object represents it.
+
+Invertibility is stronger than nonvanishing. Over a field the two conditions
+coincide away from zero, which can make the distinction disappear in a
+point-set picture. Over a general test ring an element may be nonzero without
+being a unit. The basic open $D_R(f)$ therefore does not classify probes on
+which $f$ merely survives; it classifies probes on which $f$ has become
+reversibly usable. That is precisely the condition needed for a map out of a
+localization.
+
+Two endpoint examples calibrate the definition. Every ring map preserves one,
+and one has a canonical inverse, so $D_R(1)$ is the maximal sieve. By contrast,
+membership in $D_R(0)$ forces zero to be a unit in the test ring and hence
+forces that ring to collapse. The latter sieve is not literally empty when
+the zero ring is admitted, but it is geometrically empty relative to
+nondegenerate tests. The convention from Chapter 21 makes this boundary exact
+rather than exceptional.
+
+In a posetal presentation of geometry, a sieve represented by an open
+$V\le U$ consists of precisely the probes that factor through $V$. Max Zeuner's
+constructive development organizes affine geometry through the Zariski
+lattice of compact opens and, in a locally ringed lattice, assigns a section
+its largest compact-open invertibility support. From the present viewpoint,
+that compact open is a particularly economical representative of the sieve
+$D_U(s)$ when such a representative exists. The sieve is primary on a general
+site; the compact open is the coherent or qcqs form in which all of its probes
+can be summarized by one lattice element.
+
+This chapter is structurally adapted from the Zariski-lattice, coverage,
+compact-open, and functor-of-points development in
+[Zeuner](#ref-zeuner). The change of viewpoint is substantial: rather than
+define invertibility's locus first as a compact open, we define the ordinary
+sieve of all invertibility probes and ask for representability afterward.
+Nothing in that change invalidates the compact-open account in its intended
+scope.
+
+> **Formal status — mathematical development and attribution boundary.** The
+> comparison with compact opens is an attributed reformulation of Zeuner's
+> presentation. The active construction at this point is the ordinary sieve
+> (22.2). No general theorem that $D_U(s)$ is compactly representable, no
+> comparison with Zeuner's qcqs schemes, and no point-set spectrum theorem is
+> claimed.
+
+## 22.3 Localization Represents The Basic Open
+
+Now suppose a localization has been selected,
+
+$$
+\iota_f:R\longrightarrow R[1/f].
+$$
+
+The notation again names a universal role rather than a fraction syntax. By
+definition, $\iota_f(f)$ is a unit, and every map $h:R\to S$ for which $h(f)$
+is a unit factors contractibly through $\iota_f$.
+
+There are two immediate constructions at every test ring $S$. A map
+$k:R[1/f]\to S$ gives
+
+$$
+\Phi_S(k)
+ =\bigl(k\circ\iota_f,
+        \text{$k(\iota_f(f))$ is a unit}\bigr)
+ \in D_R(f)(S).
+\tag{22.3}
+$$
+
+Conversely, a point $(h,u)\in D_R(f)(S)$ is exactly an admissible target for
+the localization property. The center of its contractible factor space gives
+a structured map
+
+$$
+\Psi_S(h,u):R[1/f]\longrightarrow S
+\quad\text{with}\quad
+\Psi_S(h,u)\circ\iota_f=h.
+\tag{22.4}
+$$
+
+The inverse laws require no calculation with fractions. Starting with $k$,
+the map $k$ itself is a competitor in the factor space used to select
+$\Psi_S\Phi_S(k)$. Contractibility identifies the selected factor with $k$ as
+a whole structured map. Starting with $(h,u)$, the factor triangle identifies
+the map component of $\Phi_S\Psi_S(h,u)$ with $h$; proposition-valued unit
+evidence then completes the equality of the dependent pairs.
+
+**Theorem 22.1 (pointwise representation of the basic open).** For every test
+ring $S$ and every supplied localization of $R$ at $f$, the maps (22.3) and
+(22.4) form an explicit equivalence
+
+$$
+\operatorname{Hom}_{\mathbf{CRing}}(R[1/f],S)
+  \simeq D_R(f)(S).
+\tag{22.5}
+$$
+
+<!-- evidence:AFFINE-BASIC-OPEN-POINT-REPRESENTATION -->
+
+> **Formal status — checked, pointwise.** Evidence
+> `AFFINE-BASIC-OPEN-POINT-REPRESENTATION`. Both maps and both inverse laws in
+> (22.5) are constructed from the localization universal property, whole
+> ring-map extensionality, and proposition-valued unit evidence. The
+> equivalence is available for each test ring. Both sides retain their
+> functorial action through existing owners, but the active result does not
+> package these components as a whole natural equivalence or equality of
+> presheaves.
+
+That last qualification is not a defect in the mathematical idea. Formula
+(22.5) is exactly the component expected from representability, and its maps
+are defined canonically from composition and factorization. A complete
+presheaf-level equivalence would additionally assemble the components as
+internal transformations and prove their whole inverse laws in the relevant
+functor category. The current theorem records the strength that has actually
+been checked rather than replacing that missing assembly by an external
+assertion of naturality.
+
+Representability also separates invariance from choice. Two constructions of
+a ring called $R[1/f]$ need not be definitionally equal as carrier packages.
+Each nevertheless classifies the same factorization problem, so their
+universal properties construct comparison maps and the relevant inverse laws.
+Geometry may consequently use “the chart $D(f)$” without requiring every
+implementation to share one fraction representation or normal form. What is
+invariant is the question asked by the sieve; a selected localization is a
+computational coordinate presentation of it.
+
+This reverses a common expository dependency. If one defines $D(f)$ to be the
+spectrum of a fraction ring, openness is tied immediately to the chosen
+construction of fractions. If one begins with (22.2), closure under refinement
+follows from preservation of units alone. The universal property then proves
+that a fraction model, quotient model, idempotent fixed-image model, or any
+other certified localization presents the same geometric question.
+Representation becomes a theorem with executable maps.
+
+The case $f=1$ recovers the whole affine: the identity localization at an
+already invertible element represents the maximal invertibility question. The
+case $f=0$ reaches the opposite boundary. Localization at zero is the zero
+ring, so maps out of it represent precisely those test maps under which zero
+has become a unit—that is, the degenerate stages where the target ring has
+collapsed. These endpoints arise from the same universal statement as every
+other basic open.
+
+## 22.4 Multiplication Computes Intersection
+
+The elementary algebra of units already knows how basic opens intersect. For
+a fixed point $h:R\to S$, if $h(fg)$ is invertible with inverse $w$, then
+
+$$
+h(f)\bigl(h(g)w\bigr)=1,
+\qquad
+h(g)\bigl(h(f)w\bigr)=1.
+$$
+
+Thus $h(f)$ and $h(g)$ are both units. Conversely, the product of two units is
+a unit. Since all three unit predicates are propositions, these operations
+give an equivalence between unit evidence for $h(fg)$ and paired unit evidence
+for $h(f)$ and $h(g)$.
+
+Holding the underlying point $h$ fixed and summing over all points yields
+
+$$
+D_R(fg)(S)
+ \simeq
+ \sum_{h:R\to S}
+   \bigl(\mathsf{Unit}_S(h(f))\times
+         \mathsf{Unit}_S(h(g))\bigr).
+\tag{22.6}
+$$
+
+The right side is the explicit pointwise intersection of $D_R(f)$ and
+$D_R(g)$: one point of the whole affine carrying membership in both sieves.
+No equality of chosen localization packages is needed. If a localization at
+$fg$ is supplied, Theorem 22.1 represents the left side, and composition with
+(22.6) represents the intersection by maps out of $R[1/(fg)]$.
+
+This is the geometric face of Theorem 21.2. The algebraic equivalence
+
+$$
+R[1/(fg)]\simeq R[1/f][1/g]
+$$
+
+says that entering $D(f)$ and then $D(g)$ has the same coordinate ring as
+entering their product open at once. In the functor-of-points picture,
+equation (22.6) says that the two procedures admit the same tests. The first
+statement compares coordinate rings by whole structured maps; the second
+compares membership types at every test ring. Together they explain why
+multiplication is the algebra of intersection.
+
+<!-- evidence:AFFINE-BASIC-OPEN-INTERSECTION -->
+
+> **Formal status — checked, pointwise.** Evidence
+> `AFFINE-BASIC-OPEN-INTERSECTION`. The active maps give the equivalence
+> (22.6), and a supplied localization at $fg$ gives an executable two-step
+> representation of its right side with both component inverse laws. This is
+> not yet a whole-presheaf intersection theorem, an external naturality
+> family, a topology, or an appeal to univalence.
+
+The formula is already the meet law of the Zariski lattice. Zeuner writes the
+standard compact-open support as $D(fg)=D(f)\wedge D(g)$. Here the same law is
+seen one probe at a time before a compact-open classifier is assumed. When a
+compact open represents each sieve, pointwise intersection descends to the
+lattice meet. When no such representative is known, equation (22.6) still
+calculates the intersection of the sieves themselves.
+
+Multiplication governs finite meets, but covering uses addition as well. A
+certificate $a_1f_1+\cdots+a_nf_n=1$ says that the chosen basic regions are
+jointly sufficient. The robust geometric form of that sufficiency is obtained
+by declaring their arrows to generate a cover and then closing under the
+Grothendieck laws. The equation supplies finite algebraic evidence; the
+topology below supplies invariant coverhood. This keeps the meet calculation
+(22.6) distinct from the join-like operation of generating a covering sieve.
+
+## 22.5 The Big Affine Slice And Its Coordinates
+
+To pass from one affine to its charts, fix $R$ and consider every ring map
+$h:R\to S$. Geometrically it is a chart
+
+$$
+\operatorname{Sp}(S)\longrightarrow\operatorname{Sp}(R).
+$$
+
+These charts form the **big affine slice over** $\operatorname{Sp}(R)$. A
+morphism from the chart $R\to T$ to the chart $R\to S$ is a ring map
+$\beta:S\to T$ whose triangle over $R$ commutes. Its geometric direction is
+
+$$
+\operatorname{Sp}(T)\longrightarrow\operatorname{Sp}(S),
+$$
+
+and it carries the whole structured restriction map $S\to T$ that coordinates
+must follow.
+
+There is consequently a tautological commutative-ring-valued coordinate
+presheaf $\mathcal O_{\mathrm{coord}}$. It sends the chart $R\to S$ to $S$ and
+the geometric arrow represented by $\beta:S\to T$ to the same structured ring
+map $\beta$. At the whole chart $R\to R$ its value is $R$. At the basic-open
+chart $R\to R[1/f]$ its value is the chosen localization ring. Nothing is
+defined only on objects: the restriction maps and their identity and
+composition laws are part of the existing whole functorial structure.
+
+Theorem 22.1 now receives its geometric reading. The chart
+
+$$
+\operatorname{Sp}(R[1/f])\longrightarrow\operatorname{Sp}(R)
+$$
+
+has, at every test ring $S$, exactly the points of the sieve $D_R(f)$. The
+active theorem proves this statement componentwise; the big slice supplies
+the chart object and its coordinate restriction. Representation is therefore
+not used to define the sieve, but once a localization is selected it produces
+the expected geometric chart.
+
+The overlap comparison from Chapter 21 also lifts into the slice. The two
+whole ring maps between $R[1/(fg)]$ and $R[1/f][1/g]$ become chart arrows in
+opposite geometric directions. Applying $\mathcal O_{\mathrm{coord}}$ to
+those arrows computes back to the same structured comparison maps, and their
+already-proved cancellation laws give an equivalence of the coordinate rings.
+No new overlap equation is copied into the chart record; it is inherited from
+the algebra that owns it.
+
+Why use the big slice rather than immediately restrict to the small category
+of basic opens of $\operatorname{Sp}(R)$? The big slice accepts every
+$R$-algebra as a chart. Base change, comparison maps, degenerate targets, and
+future affine realizations can therefore be expressed without first proving
+that each object belongs to a chosen basis. A small site is often more
+economical for compactness or cohomological arguments, but equivalence between
+the two presentations is a theorem. Starting big keeps the functor-of-points
+semantics literal and postpones that theorem rather than assuming it.
+
+The price is controlled redundancy. Many big-slice objects describe regions
+already covered by smaller basic charts, and equivalent localizations may
+appear as distinct packages. The coordinate presheaf handles this without
+quotienting the objects: it follows every whole ring map, while universal
+properties supply comparisons where needed. A later basis theorem may show
+that suitable redundancies are invisible to local data. They are not erased
+at the computational boundary.
+
+<!-- evidence:AFFINE-BIG-SLICE-COORDINATES -->
+
+> **Formal status — checked.** Evidence `AFFINE-BIG-SLICE-COORDINATES`. The
+> conventional big affine slice, the whole coordinate presheaf, literal
+> charts, localization charts, commuting chart arrows, and the two
+> product/iterated-localization overlap directions are active. Coordinate
+> restriction along a chart arrow computes to its supplied whole ring map.
+> The big slice is not identified with a small site of opens and does not by
+> itself provide a topology, sheaf, locally ringed space, or complete scheme.
+
+## 22.6 Finite Families Generate The Big Zariski Topology
+
+The algebraic certificate from Chapter 21 becomes geometric on every chart.
+Let $h:R\to S$ be an object of the big affine slice, and choose a finite family
+$f_1,\ldots,f_n\in S$ together with coefficients satisfying
+
+$$
+\sum_i a_if_i=1.
+\tag{22.7}
+$$
+
+For each $f_i$, also choose a universal-property localization of $S$ at
+$f_i$. It determines a whole chart arrow
+
+$$
+\operatorname{Sp}(S[1/f_i])
+  \longrightarrow\operatorname{Sp}(S)
+  \longrightarrow\operatorname{Sp}(R).
+\tag{22.8}
+$$
+
+Equation (22.7) is the finite certificate that these basic charts cover. To
+turn that statement into a topology without discarding its computational
+input, first call a sieve on the chart a **generator** when it contains every
+arrow in one selected family (22.8). The generators remember the family,
+coefficients, localization packages, and literal containments. They are
+witness-rich data, not merely truth values.
+
+Now intersect all Grothendieck topologies on the big affine slice that accept
+those generators. The result is a lawful topology, denoted
+$J_{\mathrm{Zar}}^{\mathrm{big}}(R)$. Every selected finite family covers in
+it by construction, and it is least in the precise sense that
+
+$$
+J_{\mathrm{Zar}}^{\mathrm{big}}(R)\le J
+$$
+
+for every other Grothendieck topology $J$ accepting the same generators. The
+presentation witnesses remain available at the generating boundary, while
+the statement that a sieve covers is proposition-valued. This is the same
+useful separation encountered in Chapter 19: rich evidence enters the
+generator; invariant coverhood leaves it.
+
+**Theorem 22.2 (the generated big Zariski topology).** The selected finite
+unimodular localization families on all charts of the big affine slice
+generate a Grothendieck topology with computing generator inclusion and the
+leastness property above.
+
+<!-- evidence:AFFINE-BIG-ZARISKI-TOPOLOGY -->
+
+> **Formal status — checked.** Evidence `AFFINE-BIG-ZARISKI-TOPOLOGY`. Each
+> chosen localization is a whole internal chart arrow whose coordinate
+> restriction is the localization map. The generator retains finite
+> containment, and the generic generated-topology construction supplies a
+> lawful least topology. No global choice of localization packages,
+> cover-derivation syntax, coverhood decision procedure, subcanonicity theorem,
+> sheafification, or comparison with the small Zariski site is asserted.
+
+This construction parallels the finite Zariski coverage in Zeuner's
+functorial account, but the bookkeeping is arranged around sieves. A finite
+family presents probes that must cover; Grothendieck closure then adds all
+maximal, pulled-back, and locally implied covers. In a coherent setting the
+same information may be summarized by joins in the Zariski lattice. The big
+site keeps the probes and their restriction maps explicit, which is exactly
+what the later computational structure presheaf consumes.
+
+The Grothendieck closure is doing real work. A displayed family such as
+(22.8) is only one cover presentation on one chart. Pulling a covering sieve
+back along a chart arrow must again cover, and a sieve covered locally by
+covering pullbacks must cover globally. Stability and local character come
+from the generated topology, not from repeatedly manipulating the
+coefficients in (22.7). When an explicit mapped family is desired, structured
+ring maps transport the unimodular coefficients, while target localization
+packages are supplied rather than chosen globally. The topology can therefore
+be invariant even though computational presentations retain choices.
+
+Leastness is equally important. One could declare every sieve to cover and
+satisfy the Grothendieck axioms vacuously. The chaotic topology is a useful
+feasibility model, but it forgets Zariski geometry. Intersecting all accepting
+topologies includes exactly the consequences forced by the selected finite
+families and the topology laws. The construction is impredicative rather than
+an inductive syntax of derivations, so it proves the universal property of
+generated coverhood without claiming a normalizer or decision procedure.
+
+A small but concrete example comes from
+$R=\mathbb F_2\times\mathbb F_2$. The complementary idempotents
+$e=(1,0)$ and $1-e=(0,1)$ satisfy $e+(1-e)=1$. Their fixed-image
+localizations therefore give two selected basic charts in a finite Zariski
+cover. Since $e(1-e)=0$, their algebraic intersection is represented by the
+zero localization. The corresponding overlap coordinate ring computes to the
+zero ring. Even this degenerate overlap is informative: the two charts are
+disjoint pieces of the product affine, and that fact is witnessed by
+restriction maps rather than inferred from an external picture of points.
+
+## 22.7 The Structure Sheaf Is A Separate Commitment
+
+The coordinate presheaf $\mathcal O_{\mathrm{coord}}$ computes, but
+computation alone does not prove descent. To call it a structure sheaf on the
+generated big site, one needs commutative-ring-valued sheaf semantics and a
+comparison identifying the selected sheaf with these coordinates.
+
+The Cat-valued reflector constructed in Chapter 20 does not automatically
+supply that result. Lifting it to commutative-ring values would require the
+ring operations and laws to survive the completion coherently, and the active
+development has not claimed such a lift. The affine interface therefore
+makes the missing theorem an explicit input. An **affine structure-sheaf
+presentation** first supplies a reflective sheaf theory for
+commutative-ring-valued presheaves on the exact topology
+$J_{\mathrm{Zar}}^{\mathrm{big}}(R)$. It then selects a sheaf object
+$\mathcal O$ and a whole computational isomorphism from its included
+presheaf to $\mathcal O_{\mathrm{coord}}$.
+
+The comparison is whole functorial data, not a list of unrelated
+object-by-object ring isomorphisms. Its component at a chart compares the
+selected structure sheaf with the chart ring, while its internal
+transformation action retains compatibility with every restriction. This is
+strong enough for downstream computation, but it is supplied evidence. The
+package does not construct the reflector or prove from first principles that
+the coordinate presheaf satisfies descent.
+
+The whole comparison matters whenever a section is transported before it is
+inspected. An objectwise list of ring isomorphisms could identify
+$\mathcal O(U)$ with the coordinate ring of each chart and still fail to
+commute with restriction. A transformation in the presheaf category carries
+that compatibility internally. Its cancellation laws let a calculation move
+to the transparent coordinate presheaf, compute there, and return to the
+selected sheaf without adding a new naturality square at every use.
+
+<!-- evidence:AFFINE-STRUCTURE-SHEAF-PRESENTATION -->
+
+> **Formal status — checked, assumption-explicit.** Evidence
+> `AFFINE-STRUCTURE-SHEAF-PRESENTATION`. Given a reflective
+> commutative-ring-valued sheafification capability, a sheaf object, and a
+> whole computational isomorphism to the coordinate presheaf, the active
+> presentation constructs the corresponding reflective ringed big site and
+> exposes the comparison at every chart. Neither the capability nor the
+> comparison is constructed by this affine layer.
+
+There is a second locality condition that should not be confused with sheaf
+descent. Let $U$ be a chart, let $s\in\mathcal O_{\mathrm{coord}}(U)$, and
+choose a localization of the chart ring at $s$. Restricting a localization
+element along every member of the sieve $D_U(s)$ gives a coherent matching
+family. Cartier locality says that this restriction functor is an
+equivalence: every coherent family on the invertibility sieve glues uniquely
+to an element of the localized ring.
+
+The active affine locality capability supplies this whole equivalence for
+every chart, section, and supplied localization package. Its inverse is a
+whole glue functor, and both composite-functor laws are retained. Yet
+$D_U(s)$ need not cover $U$. Cartier locality describes the coordinate ring
+of a basic-open region; ordinary sheaf descent describes reconstruction from
+a covering sieve. A stalk-local-ring theorem is different again. Keeping
+these three statements separate prevents the word “local” from doing more
+work than the mathematics.
+
+This distinction mirrors the sieve-first viewpoint. Sheaf descent starts with
+a sieve certified to cover $U$ and asks whether compatible data on that cover
+have a unique global amalgamation. Cartier locality starts with an arbitrary
+section $s$ and studies the possibly noncovering region where $s$ is
+invertible. Its global object is not a section over all of $U$ but an element
+of the localized coordinate ring. A local-ring condition, finally, controls
+how unit evidence can be found locally from algebraic alternatives such as
+the invertibility of a sum. The three interfaces cooperate in scheme theory,
+but none is a synonym for either of the others.
+
+## 22.8 A Thin Computational Affine Presentation
+
+Once the preceding commitments have been named, the affine package itself can
+be small. For a ring $R$, an affine-scheme presentation consists of
+
+$$
+\begin{aligned}
+\mathsf{AffPres}(R)=\bigl(&\text{structure-sheaf presentation on }
+  J_{\mathrm{Zar}}^{\mathrm{big}}(R),\\
+  &\text{coordinate localization locality}\bigr).
+\end{aligned}
+\tag{22.9}
+$$
+
+The ring $R$ already determines the big affine slice, its coordinate
+presheaf, the whole chart, and the generated topology. The first entry of
+(22.9) relates a supplied reflective structure sheaf to those computing
+coordinates. The second supplies the whole restriction-and-glue equivalence
+on every basic invertibility sieve. There is no benefit in copying chart
+actions, overlap maps, or coherence equations into a larger record: they are
+already inherited from the functors and universal properties that own them.
+
+<!-- evidence:AFFINE-THIN-SCHEME-PRESENTATION -->
+
+> **Formal status — checked, assumption-explicit.** Evidence
+> `AFFINE-THIN-SCHEME-PRESENTATION`. The active affine presentation pairs the
+> supplied whole structure-sheaf presentation with supplied whole coordinate
+> localization locality. It projects the exact generated big-Zariski ringed
+> site, the whole coordinate comparison, and locality at each selected chart
+> and localization. The product ring
+> $\mathbb F_2\times\mathbb F_2$ supplies a closed reviewer in which the two
+> capabilities remain explicit inputs while the complementary-idempotent
+> cover, chart rings, restriction maps, and zero overlap compute.
+
+The smallness of (22.9) is evidence of internal organization, not of missing
+coherence being ignored. The topology owns pullback stability and local
+character. The coordinate presheaf owns restriction. Localization owns basic
+charts, and the whole locality equivalence owns glue over $D(s)$. An affine
+presentation selects only the capabilities that cannot yet be derived.
+Duplicating their component operations would create new obligations to prove
+that the copies agree with these established owners.
+
+Calling (22.9) an affine scheme is therefore a qualified statement. It is a
+computational presentation whose assumptions are visible. The active work
+does not construct commutative-ring-valued sheafification, prove coordinate
+locality, compare the big site with the small Zariski site, construct stalks,
+establish a stalk-local-ring theorem, or build a representation-independent
+category of affine schemes. Nor does it prove Zeuner's comparison between
+locally ringed lattices and functorial qcqs schemes.
+
+What it does construct is already a coherent geometric chain:
+
+$$
+\text{ring map}
+\longrightarrow
+\text{affine probe}
+\longrightarrow
+D(f)
+\longrightarrow
+R[1/f]
+\longrightarrow
+\text{basic chart}
+\longrightarrow
+J_{\mathrm{Zar}}^{\mathrm{big}}.
+$$
+
+Every arrow in that chain carries computation. Composition changes probes;
+unit preservation restricts the sieve; localization selects factors;
+multiplication computes intersections; the coordinate presheaf computes chart
+restriction; and generated topology turns finite algebraic certificates into
+coverhood. The supplied sheaf and locality capabilities begin exactly where
+the constructed chain ends.
+
+The next chapter starts from the complementary direction. Instead of fixing a
+ring and generating its affine world, it assumes a global ringed object and a
+covering sieve, selects affine charts inside that cover, and asks which
+restrictions and overlaps can be inherited from the global object. That
+global-first viewpoint is the bridge from one affine presentation to
+site-relative schemes.
+<!-- /book-source:chapter-22 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-23 book/chapters/23-schemes-from-covering-charts.md -->
+<a id="chapter-23"></a>
+
+# 23. Schemes From Covering Charts
+
+An atlas is persuasive because its pieces are familiar. If a space can be
+covered by affine charts, one is tempted to say that the scheme is simply the
+charts plus instructions for gluing them. But this description suppresses an
+important choice of direction. We may begin with charts and try to construct a
+global object, or we may begin with a global object and recognize some of its
+regions as affine. The two directions ask for different theorems.
+
+This chapter follows the second, **global-first** direction. A global object
+$X$ is already present in a ringed site, with one structure presheaf
+$\mathcal O$ and one covering sieve $\mathcal R$ on $X$. Two selected members
+$u_0:U_0\to X$ and $u_1:U_1\to X$ will generate that sieve constructively.
+Each chart is then compared, as a whole functorial restriction, with affine
+coordinates. Local-ring behaviour is imposed on the actual slice over $X$.
+The result is a binary, site-relative computational scheme presentation.
+
+Starting globally pays a coherence dividend. Restriction maps already belong
+to $\mathcal O$; their identity and composition laws are already functor laws.
+An intersection, once selected as an actual product in the slice over $X$,
+inherits its two projections and both maps on rings. There is no reason to
+copy those maps into an atlas record and then ask whether the copies agree.
+The global object is the common source from which they are computed.
+
+The price is equally clear. This chapter does not construct $X$ from an
+abstract atlas. Its slice sites, affine-basis comparisons, and one selected
+chart intersection are assumption-explicit. “Scheme” here means a scheme
+presentation relative to those supplied categorical semantics, not yet a
+representation-independent category identified with every classical or
+functorial definition of schemes.
+
+## 23.1 Two Directions Through An Atlas
+
+Suppose first that two affine objects $U_0$ and $U_1$ have been given, along
+with a candidate overlap $U_{01}$, maps to the charts, and a transition
+between coordinate descriptions. The atlas-first problem is to construct an
+object $X$ for which the diagram is effective: $U_0$ and $U_1$ should cover
+$X$, $U_{01}$ should be their intersection, and functions agreeing on the
+overlap should glue uniquely. Even for two charts, that is a colimit and
+descent theorem. For more charts one must also control triple overlaps and
+cocycles. Merely storing the expected diagrams does not prove that a global
+object exists.
+
+Now reverse the situation. Let $X$ already be an object of a category
+$\mathcal K$, and let $u_i:U_i\to X$ be actual arrows. Their intersection, if
+the needed product exists in the slice $\mathcal K/X$, is no longer an
+invented compatibility object. It is the categorical object
+
+$$
+U_{01}=U_0\times_X U_1.
+\tag{23.1}
+$$
+
+If a single presheaf $\mathcal O$ is already defined on $\mathcal K$, then its
+values $\mathcal O(U_i)$ and $\mathcal O(U_{01})$ and its two restriction maps
+are forced by (23.1). Repeated restriction agrees because $\mathcal O$ is a
+functor. Global-first geometry therefore shifts the hard question. We no
+longer ask whether chart data can be glued to create $X$; we ask whether
+selected regions of $X$ really are affine and whether they cover in the
+chosen topology.
+
+Max Zeuner develops two constructive architectures for qcqs schemes: finite
+affine covers of locally ringed lattices and affine compact-open covers of
+functors of points, followed by a comparison theorem between them. The
+finite-cover rhythm is an important model for the present exposition, but the
+emdash construction changes both its starting point and its classifier of
+locality. The global object and its ringed categorical semantics are supplied
+first; coverhood is carried by an ordinary sieve; and the locus where a
+section is invertible is the sieve $D_U(s)$ of all successful probes. A compact
+open can represent that sieve in a coherent setting, but such a
+representability theorem is not assumed merely in order to speak about the
+sieve.
+
+The distinction is not a contest between definitions. A global-first package
+is useful when a semantic object has already been built and one wants a
+computational account of its charts. An atlas-first theorem is indispensable
+when the charts are the input from which the object must be created. Zeuner's
+comparison explains why two mature theories of qcqs schemes agree. Here the
+more modest task is to identify exactly how far one can travel on the first
+route with the current owners.
+
+> **Attribution and comparison boundary.** This chapter comparatively adapts
+> the finite affine-cover and functor-of-points architecture of
+> [Zeuner](#ref-zeuner), especially Sections 3.3, 4.2, 5.1, and 5.3. It does
+> not import the theorem that affine charts glue to a qcqs scheme, the compact
+> open classifier, or the equivalence between functorial and locally
+> ringed-lattice schemes. The site-relative global-first presentation below
+> is the active emdash result.
+
+## 23.2 One Covering Sieve, Two Generators
+
+Let $\mathcal A$ be a reflective commutative-ringed site with base category
+$\mathcal K$. Its included structure presheaf will be written
+
+$$
+\mathcal O:\mathcal K^{\mathrm{op}}\longrightarrow\mathbf{CRing}.
+$$
+
+Choose an object $X\in\mathcal K$, an ordinary sieve $\mathcal R$ on $X$,
+and evidence that $\mathcal R$ covers $X$ in the selected Grothendieck
+topology. This is already global geometric data. Every arrow $q:V\to X$ in
+$\mathcal R$ is a region of $X$, and every further restriction of $q$ remains
+in $\mathcal R$. Grothendieck stability also says that pulling $\mathcal R$
+back along any arrow into $X$ produces a covering sieve on its domain.
+
+A selected chart is initially nothing more than a selected member of this
+sieve. Thus an arrow $u:U\to X$ becomes a chart when accompanied by
+$u\in\mathcal R$. The name does not make $U$ affine. It records that $u$ is
+one of the regions accepted by the global cover; affineness requires the
+separate comparison developed in Section 23.5.
+
+Select two such members $u_0:U_0\to X$ and $u_1:U_1\to X$. Their membership
+alone does not say that they cover. A sieve can contain two arrows while also
+containing regions that factor through neither one. The computational
+generation condition supplies the missing direction: for every
+$q:V\to X$ in $\mathcal R$, it returns a Boolean side $b$, a map
+$h:V\to U_b$, and the triangle
+
+$$
+q=u_b\circ h.
+\tag{23.2}
+$$
+
+In dependent notation, the content is
+
+$$
+\prod_{q:V\to X}
+\bigl(q\in\mathcal R\bigr)\longrightarrow
+\sum_{b:\mathbf 2}\sum_{h:V\to U_b}(q=u_bh).
+\tag{23.3}
+$$
+
+Equation (23.3) is stronger computationally than the mere assertion that
+some chart contains every covered region. Given a membership witness, one can
+execute the selection, inspect which chart was chosen, and use the actual
+factor map. No propositional truncation hides the branch. Conversely, because
+both $u_0$ and $u_1$ are themselves members and a sieve is closed under
+precomposition, every arrow factoring through either chart belongs to
+$\mathcal R$. The retained sieve is therefore exactly generated, in this
+witness-rich sense, by the two selected arrows.
+
+There are two cautions. First, (23.3) does not construct a second sieve: it
+explains the already-selected covering sieve $\mathcal R$. Its coverhood comes
+from the global package, not from the unsupported observation that two arrows
+have been named. Second, a general member $q$ need not itself be affine. It is
+a refinement of one affine generator once the relevant Boolean branch is
+computed. Affineness belongs to the generator's whole realization and does
+not automatically descend to every arbitrary arrow without another theorem.
+
+<!-- evidence:GLOBAL-RINGED-COVER-BINARY-GENERATION -->
+
+> **Formal status — checked.** Evidence
+> `GLOBAL-RINGED-COVER-BINARY-GENERATION`. The global package retains the
+> reflective ringed site, object, ordinary covering sieve, structure
+> presheaf, and Grothendieck-stable pullbacks. Binary generation computes a
+> selected chart, factor map, and triangle for every sieve member. The active
+> result does not infer affineness from sieve membership, construct an
+> atlas-first object, or turn arbitrary refinements into affine charts.
+
+The choice to retain a sieve rather than just a two-element family has a
+further advantage. Pulling the cover back along a region does not require a
+new ad hoc list of chart fragments. The sieve pullback contains exactly the
+arrows whose composites lie in $\mathcal R$, and Grothendieck stability makes
+it covering. When an explicit generator is needed, (23.3) still computes a
+factor through $U_0$ or $U_1$. Invariant coverhood and executable chart
+selection coexist without being collapsed into the same representation.
+
+## 23.3 Local Rings Without Stalks
+
+A sheaf of rings is not automatically a sheaf of local rings. Descent says
+that compatible sections glue; locality says, roughly, that algebraic
+alternatives can be resolved after passing to a cover. Classically the latter
+is often phrased by requiring every stalk to be a local ring. A computational
+site can express the needed alternatives directly, before stalks have been
+constructed.
+
+Let $T$ be a Grothendieck topology on a category and let $\mathcal O$ be a
+commutative-ring-valued presheaf. For $s\in\mathcal O(U)$, recall the ordinary
+sieve $D_U(s)$ of arrows $q:V\to U$ along which $s|_q$ is invertible. Two
+support laws are automatic in the ordinary algebraic account: one is
+invertible everywhere, and a product becomes invertible precisely where both
+factors do. In sieve notation these give the expected equations
+
+$$
+\begin{aligned}
+D_U(1)&=\top,\\
+D_U(st)&=D_U(s)\cap D_U(t).
+\end{aligned}
+\tag{23.4}
+$$
+
+Equation (23.4) is mathematical orientation here; the local-ring interface
+below packages the two nonautomatic topology laws, not new whole sieve
+equalities for one and products.
+
+The local-ring content lies in the two remaining directions. If zero becomes
+invertible at $U$, then $U$ is locally void: the literal empty sieve must cover
+$U$. And if $s+t$ is invertible, there must be a covering sieve $\mathcal S$
+such that every $q:V\to U$ in $\mathcal S$ comes with a selected alternative
+
+$$
+s|_q\text{ is invertible}
+\quad\text{or}\quad
+t|_q\text{ is invertible}.
+\tag{23.5}
+$$
+
+The disjunction in (23.5) is a Boolean-indexed dependent pair. It remembers
+which summand is usable and retains its unit evidence. Thus the condition is
+the executable Kripke--Joyal form of
+
+$$
+D_U(0)=\bot,
+\qquad
+D_U(s+t)\le D_U(s)\vee D_U(t).
+\tag{23.6}
+$$
+
+No raw union of sieves has to be constructed for (23.6). The right side is
+presented by a chosen cover subordinate to the two alternatives, and a branch
+is requested only after an actual member of that cover is supplied. Nor is
+the choice erased into a mere proposition. This is exactly the kind of local
+information a later calculation can consume: restrict to a cover member,
+inspect the side, and use the selected inverse.
+
+The formulation is categorical semantics, not an auxiliary modal object
+language. Objects, arrows, sieves, restrictions, unit witnesses, covers, and
+branches all live inside the functorial theory represented in the outer
+logical framework. Lambdapi's conversion and unification rules execute the
+transparent projections and functor actions; the same interfaces can be
+targeted by an explicit TypeScript core. Computation therefore does not
+require replacing the site by a primitive modality. It comes from making the
+categorical data sufficiently internal and functorial.
+
+<!-- evidence:TOPOLOGY-LOCAL-RING-CERTIFICATE -->
+
+> **Formal status — checked, topology-local.** Evidence
+> `TOPOLOGY-LOCAL-RING-CERTIFICATE`. The presentation executes empty-cover
+> nontriviality and coverwise Boolean splitting of an invertible sum. It is a
+> site-level local-ring certificate for a whole commutative-ring presheaf. It
+> does not construct stalks, prove equivalence with stalk-local rings, form a
+> raw sieve join, decide unit evidence, or identify the chosen topology with
+> the classical Zariski topology.
+
+This condition must be attached to the correct object. Our global structure
+presheaf lives on $\mathcal K$, whereas the local geometry of $X$ lives on the
+slice $\mathcal K/X$. The next section constructs the presheaf restriction to
+that whole slice and makes its sheaf boundary explicit. Only then can (23.5)
+be read as local-ring behaviour of the global object $X$ rather than of an
+unrelated family of rings.
+
+## 23.4 Restricting The Whole Structure
+
+For any $U\in\mathcal K$, the conventional slice $\mathcal K/U$ has a domain
+functor
+
+$$
+\operatorname{dom}_U:\mathcal K/U\longrightarrow\mathcal K,
+\qquad
+(q:V\to U)\longmapsto V.
+\tag{23.7}
+$$
+
+Precomposition with its opposite constructs the ambient restriction
+
+$$
+\mathcal O|_U
+  =\mathcal O\circ\operatorname{dom}_U^{\mathrm{op}}
+  :(\mathcal K/U)^{\mathrm{op}}\longrightarrow\mathbf{CRing}.
+\tag{23.8}
+$$
+
+At a slice object $q:V\to U$, formula (23.8) computes to
+$\mathcal O(V)$. At a triangle over $U$, it computes the corresponding
+restriction homomorphism. Identity, composition, and naturality are inherited
+from ordinary functor composition. Thus the whole presheaf needed on a chart
+slice is constructed, not copied object by object.
+
+What (23.8) does **not** construct is a topology and sheaf theory on
+$\mathcal K/U$. The active interface asks for a reflective commutative-ringed
+site on that actual slice and a whole isomorphism
+
+$$
+\iota_U\mathcal O_U\;\cong\;\mathcal O|_U
+\tag{23.9}
+$$
+
+in the commutative-ring presheaf category. Here $\mathcal O_U$ is the selected
+structure sheaf of the supplied slice site and $\iota_U$ includes it as a
+presheaf. The topology, reflector, and sheaf object on the left of (23.9) are
+hypotheses. The right side and its restriction action are the computing
+ambient object.
+
+The word “whole” in (23.9) matters. A separate ring isomorphism at every
+slice object would not ensure compatibility with restriction. A functor-level
+isomorphism carries that compatibility internally and supplies inverse laws
+in the presheaf category. One may compute using the transparent right side,
+then pass back to the selected sheaf semantics without introducing a new
+naturality square for each calculation.
+
+For the whole object $X$, the topology-local ring certificate of Section 23.3
+is attached to the computing presheaf $\mathcal O|_X$ using the topology of
+the supplied slice site. The resulting local presentation combines supplied
+reflective semantics on $\mathcal K/X$, a whole bridge to ambient
+restriction, and executable local-ring forcing on that bridge's target. It
+does not claim that the slice topology was induced from the ambient topology
+or that a general sheaf-pullback theorem has been proved.
+
+## 23.5 When A Selected Region Is Affine
+
+Return to one selected cover member $u:U\to X$. To call it affine, it is not
+enough to attach a ring name $R$ to $U$. We must compare the actual global
+structure restricted over $U$ with the affine coordinates developed in
+Chapter 22.
+
+Begin with the supplied reflective slice presentation (23.9). Choose a ring
+$R$ and a thin affine-scheme presentation for $R$. Its big affine slice has
+the generated Zariski topology and coordinate presheaf
+$\mathcal O_{\mathrm{coord},R}$. Next choose a whole basis functor
+
+$$
+i:\mathbf{Aff}/\operatorname{Sp}(R)\longrightarrow\mathcal K/U.
+\tag{23.10}
+$$
+
+The direction of (23.10) says that affine coordinate probes are realized as
+actual regions over $U$. It is accompanied by two supplied comparisons. The
+first is a sheaf-basis equivalence along $i$: restriction relates the selected
+sheaf categories on the affine basis and on the actual slice. This is an
+equivalence of sheaf semantics along the displayed functor, not an assertion
+that the two base categories are themselves equivalent. The second is a
+direct whole isomorphism from the ambient restriction to the included
+presheaf of the selected affine presentation. That affine presentation
+already retains its own whole coordinate comparison. Together they form the
+chain
+
+$$
+i^*(\mathcal O|_U)
+  \;\cong\;\iota_R\mathcal O_R^{\mathrm{aff}}
+  \;\cong\;\mathcal O_{\mathrm{coord},R}.
+\tag{23.11}
+$$
+
+Equation (23.11) is the computational heart of the affine label. On every
+affine probe, the structure inherited from the global object agrees with the
+coordinate ring; on every arrow between probes, the agreement respects the
+restriction homomorphism. Composing the supplied first bridge with the
+affine scheme's retained coordinate bridge derives the displayed
+ambient-to-coordinate comparison.
+Nothing has to be postulated separately for individual chart arrows.
+
+An **affine realization** of $u$ retains exactly these inputs: the supplied
+reflective site on $\mathcal K/U$, the coordinate ring $R$, its thin affine
+presentation, the basis functor (23.10), and the whole basis realization.
+The region $u$ is now affine in the precise, site-relative sense that its
+actual restricted structure is realized by affine coordinates along the
+selected basis.
+
+<!-- evidence:WHOLE-SLICE-AFFINE-REALIZATION -->
+
+> **Formal status — checked, assumption-explicit.** Evidence
+> `WHOLE-SLICE-AFFINE-REALIZATION`. Whole ambient restriction is constructed
+> by precomposition with the slice-domain functor. The reflective slice,
+> sheaf-basis equivalence, affine scheme presentation, basis functor, and
+> direct ambient-to-affine-underlying comparison are supplied; composition
+> with the affine presentation's retained bridge derives a whole coordinate
+> isomorphism. No induced slice topology, raw
+> base-category equivalence, arbitrary basis theorem, or general transport of
+> local exactness is claimed.
+
+Applying this package to both $u_0$ and $u_1$, and adjoining the generation
+witness (23.3), gives a binary affine-cover presentation. It retains two
+actual regions of the one global object, two coordinate rings, and two whole
+affine realizations. For an arbitrary $q\in\mathcal R$, the Boolean generator
+computes which affine chart it refines and exposes that chart's already-owned
+realization and coordinate ring. It still does not declare $q$ itself affine.
+
+## 23.6 The Site-Relative Scheme Total
+
+The pieces can now be gathered without enlarging their claims. A binary
+site-relative scheme presentation consists of the following dependent data:
+
+$$
+\begin{aligned}
+\mathsf{Scheme}_{\mathcal K}^{(2)}=\sum_{(\mathcal A,X,\mathcal R)}
+  \bigl(&\text{whole-slice local presentation of }X,\\
+        &u_0,u_1\in\mathcal R,\\
+        &\text{constructive generation as in (23.3)},\\
+        &\text{whole affine realizations of }u_0,u_1\bigr).
+\end{aligned}
+\tag{23.12}
+$$
+
+The first summation variable includes the global reflective ringed site,
+distinguished object, covering sieve, and proof of coverhood. The dependent
+certificate then adds local-ring forcing on the actual slice and the binary
+affine atlas. Because each later field is indexed by the object selected
+before it, malformed combinations are not representable: an affine
+realization cannot silently refer to a different chart, site, or global
+object.
+
+**Theorem 23.1 (global-first binary scheme presentation).** Given the data in
+(23.12), there is one transparent site-relative scheme total that retains the
+global ringed object exactly once and exposes its structure presheaf, whole
+object, covering sieve, local-ring certificate, two selected generators, and
+two whole affine realizations through their existing owners.
+
+<!-- evidence:BINARY-SITE-RELATIVE-SCHEME -->
+
+> **Formal status — checked, site-relative.** Evidence
+> `BINARY-SITE-RELATIVE-SCHEME`. The constructor and all named observations
+> compute through the dependent total. The global structure presheaf is
+> inherited rather than stored again; the local and atlas halves remain their
+> exact existing packages. No overlap, transition, cocycle, gluing field,
+> scheme morphism, effectivity theorem, or representation-independent
+> category of schemes is added.
+
+The absence of overlap and cocycle fields is deliberate. Suppose a section is
+restricted from $X$ to $U_0$, from $U_0$ to an overlap region, and perhaps
+farther to another refinement. These maps are all values of the same
+contravariant functor $\mathcal O$. Their agreement with direct restriction is
+the functor's composition law. Adding parallel restriction maps to (23.12)
+would create a second source of truth and an obligation to compare it with
+the first.
+
+The theorem is nevertheless conditional in meaningful ways. It does not
+construct the global object, the reflective slice sites, or the affine-basis
+equivalences. It packages them at endpoints where every downstream action can
+compute. Nor does it say that all finite atlases reduce to two charts. The
+binary case is the active vertical slice: rich enough to expose genuine
+covering, local forcing, affineness, refinement, and intersection, but narrow
+enough that the supplied boundary remains visible.
+
+The qualifier **site-relative** prevents a more subtle overstatement. The
+chosen topology decides which sieves cover and the supplied basis semantics
+decides what counts as an affine chart. Another site may present equivalent
+geometry, but (23.12) alone does not construct that equivalence. In
+particular, it does not identify this presentation with Zeuner's compact-open
+qcqs schemes, with classical locally ringed spaces, or with all local
+functors on the big Zariski site.
+
+## 23.7 The Intersection Belongs To The Global Object
+
+Although an overlap should not be copied into the scheme total, a consumer
+may still need an explicit one. For the two slice objects
+$u_0,u_1\in\mathcal K/X$, supply a selected binary product with its whole
+universal property,
+
+$$
+u_{01}=u_0\times u_1
+\quad\text{in }\mathcal K/X.
+\tag{23.13}
+$$
+
+Its domain in $\mathcal K$ is an actual object $U_{01}$ equipped with arrows
+$p_i:U_{01}\to U_i$ whose composites to $X$ agree. Applying the whole domain
+functor to the product projections derives these arrows; no base-level
+projections are supplied separately.
+
+The global structure presheaf then computes three rings and two homomorphisms:
+
+$$
+\mathcal O(U_0)
+  \xrightarrow{\,p_0^*\,}
+\mathcal O(U_{01})
+  \xleftarrow{\,p_1^*\,}
+\mathcal O(U_1).
+\tag{23.14}
+$$
+
+The variance in (23.14) is the familiar geometric one: an arrow from the
+intersection to a chart restricts functions from the chart to the
+intersection. Every term is evaluated from an existing whole owner. The
+overlap ring is not a new coordinate choice, and the homomorphisms are not
+transition fields. They are the value and arrow action of $\mathcal O$ on the
+selected categorical intersection.
+
+<!-- evidence:ACTUAL-BINARY-CHART-OVERLAP -->
+
+> **Formal status — checked after a supplied product.** Evidence
+> `ACTUAL-BINARY-CHART-OVERLAP`. A selected binary product in the conventional
+> slice retains its whole universal property. Its two slice projections,
+> underlying arrows, overlap ring, and both restriction homomorphisms are
+> derived. The active owner does not construct arbitrary pullbacks, prove
+> every pair of charts has an intersection, identify the overlap as affine or
+> as a localization, or add an atlas-gluing theorem.
+
+This is the exact sense in which coherence is inherited. If another selected
+restriction $W\to U_{01}$ is introduced, the maps from the chart rings to
+$\mathcal O(W)$ agree with the composites through $\mathcal O(U_{01})$
+because presheaf action respects composition. If triple intersections are
+later supplied, the same principle handles their restriction diagrams.
+Existence of the needed limits remains a separate categorical hypothesis;
+compatibility of the resulting restriction maps does not.
+
+One should also resist a plausible but invalid inference: because $U_0$ and
+$U_1$ have affine realizations, $U_{01}$ has not thereby been proved affine.
+In familiar schemes the intersection of two affine opens is often
+quasi-affine and, under additional separatedness or basic-open hypotheses,
+admits more precise affine presentations. None of those theorems is smuggled
+into (23.13). Chapter 24 supplies a much narrower Laurent-coordinate adapter
+for the selected overlap used in the projective-line presentation.
+
+## 23.8 What Has Been Built, And What Has Not
+
+The global-first construction has now crossed a genuine threshold. It starts
+with one ringed object and proves that a selected binary covering sieve is
+generated by two regions whose whole restrictions have affine coordinate
+realizations. It attaches an executable local-ring condition to the actual
+slice over the object. It packages those data in one dependent total. And,
+when a product is supplied in that slice, it computes the chart intersection,
+its ring, and both restriction maps from the global presheaf.
+
+The resulting chain is worth reading from left to right:
+
+$$
+\begin{aligned}
+\text{global ringed object}
+&\longrightarrow \text{covering sieve}\\
+&\longrightarrow \text{two constructive generators}\\
+&\longrightarrow \text{whole affine realizations}\\
+&\longrightarrow \text{site-relative scheme total}\\
+&\longrightarrow \text{inherited intersection}.
+\end{aligned}
+\tag{23.15}
+$$
+
+At each arrow, either a new hypothesis is named or a new construction is
+performed. The global object, reflective slice semantics, affine presentations,
+basis equivalences, local-ring certificate, and selected slice product are
+supplied. Sieve pullbacks, whole ambient restrictions, generator refinements,
+coordinate comparisons, total projections, overlap arrows, and ring
+restrictions are derived. This ledger is mathematical content: it says which
+theorems a future construction must prove before an input can disappear.
+
+Several larger results remain outside (23.15). There is no constructor taking
+two abstract affine schemes and transition data to their glued global object.
+There is no effectivity or independence-of-atlas theorem, no arbitrary finite
+atlas interface, no category of scheme morphisms, and no proof that changing
+the selected site preserves the notion. There is no comparison with a
+prime-spectrum locally ringed space, with Zeuner's locally ringed lattices, or
+with functorial qcqs schemes. There is also no general theorem representing
+every invertibility sieve by a compact open.
+
+Those absences locate the work rather than diminish it. Classical definitions
+often bundle the results of several deep comparison theorems into one word.
+The site-relative presentation instead exposes a computational semantic
+boundary: once the global object and its honest affine comparisons are
+available, restrictions and overlaps should be inherited, not restated.
+Conversely, when only charts are available, one still owes a gluing theorem.
+
+The next chapter tests this boundary on the first non-affine object one wants
+to draw: the projective line. Two affine-line charts should meet where their
+coordinates are invertible, and the transition should send one coordinate to
+the inverse of the other. The current library can package that Laurent
+calculation on an inherited actual overlap once the global projective-line
+presentation has been supplied. It does not yet construct that global object
+from the two charts, nor does it build $\operatorname{Proj}$ or general
+projective space. That precise mixture of calculation and boundary is where
+the global-first method is most revealing.
+<!-- /book-source:chapter-23 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-24 book/chapters/24-projective-line-and-boundary.md -->
+<a id="chapter-24"></a>
+
+# 24. The Projective Line And The Boundary Of Construction
+
+The projective line is the first scheme whose picture seems to demand gluing.
+One affine coordinate sees every finite point and misses infinity; a second
+coordinate sees infinity and misses a different point. Where both coordinates
+are visible, each is the inverse of the other. The whole geometry is contained
+in that short sentence, but its formal meaning divides into several tasks that
+are easy to conflate.
+
+One may construct the two affine lines, construct their principal regions,
+identify those regions by inversion, and then prove that the identification is
+effective. That is the atlas-first route. Or one may begin with a global object
+already carrying two affine-line charts, take their actual intersection, and
+check that its two inherited coordinate descriptions are Laurent coordinates.
+That is the global-first route. The present development reaches the second
+route exactly. It does not silently acquire the first.
+
+This distinction makes the projective line an unusually revealing example.
+The coordinate calculation is not deferred: it is constructed from polynomial
+and localization universal properties. The common region is not an invented
+overlap: it is an actual selected intersection of charts in the global slice.
+Yet the global object itself remains supplied. The calculation is complete at
+its stated boundary, and the boundary says precisely what a later construction
+must add.
+
+## 24.1 Two Affine Views Of One Line
+
+Let $A$ be a commutative ring. The familiar projective-line atlas has two
+charts
+
+$$
+U_0\simeq \operatorname{Spec} A[t],
+\qquad
+U_1\simeq \operatorname{Spec} A[u].
+\tag{24.1}
+$$
+
+In homogeneous coordinates $[x_0:x_1]$, the first coordinate is
+$t=x_1/x_0$ where $x_0$ is invertible, and the second is $u=x_0/x_1$ where
+$x_1$ is invertible. Both descriptions apply precisely where neither
+homogeneous coordinate vanishes. Thus the expected intersection has the two
+coordinate presentations
+
+$$
+U_{01}\simeq D(t)\subseteq U_0,
+\qquad
+U_{01}\simeq D(u)\subseteq U_1,
+\qquad
+u=t^{-1}.
+\tag{24.2}
+$$
+
+In ordinary algebraic notation its ring is therefore written
+
+$$
+A[t,t^{-1}]\simeq A[u,u^{-1}].
+\tag{24.3}
+$$
+
+These formulas are a specification, not yet a construction. The symbols
+$D(t)$ and $D(u)$ can name open subspaces only after one knows what represents
+the corresponding invertibility conditions. The isomorphism in (24.3) can be
+written down informally, but a computational account should explain why its
+maps exist and which equations they satisfy. Finally, even perfect overlap
+data do not by themselves produce the union $U_0\cup U_1$.
+
+The finite-cover rhythm here follows the constructive scheme architecture
+developed by [Zeuner](#ref-zeuner): global schemes are recognized through
+finite affine covers, and open or functorial presentations are compared only
+by an explicit theorem. The present chapter borrows that rhythm and its
+careful separation of presentation from comparison. Its projective-line and
+Laurent constructions are not taken from Zeuner's thesis, and no part of
+Zeuner's qcqs comparison theorem is claimed below.
+
+> **Status of (24.1)--(24.3).** These are the standard mathematical model for
+> the chapter. The checked artifact has no closed term denoting
+> $\mathbf P^1_A$, no general `Proj`, and no polynomial or Laurent expression
+> syntax whose normal forms are the displayed rings. Its owners instead work
+> with rings, structured maps, and their universal properties directly.
+
+## 24.2 Laurent Maps Without Fractions
+
+Begin with two supplied one-variable polynomial algebras over $A$. Write them
+conventionally as $A[t]$ and $A[u]$, although what is retained formally is a
+base map, a distinguished variable, and the universal property of a
+one-variable polynomial algebra. Select a localization of each algebra at its
+distinguished variable:
+
+$$
+\iota_t:A[t]\longrightarrow L_t,
+\qquad
+\iota_u:A[u]\longrightarrow L_u.
+\tag{24.4}
+$$
+
+The element $\iota_u(u)$ is a unit in $L_u$. Its chosen inverse therefore
+defines a valuation of the one-variable family in $L_u$. Polynomial
+universality selects the unique structured map
+
+$$
+\varphi_{tu}:A[t]\longrightarrow L_u,
+\qquad
+\varphi_{tu}(t)=\iota_u(u)^{-1},
+\tag{24.5}
+$$
+
+with the prescribed action on $A$. The image of $t$ is again a unit. The
+localization universal property now extends (24.5) to a whole ring map
+
+$$
+\Phi_{tu}:L_t\longrightarrow L_u.
+\tag{24.6}
+$$
+
+Reversing the two polynomial and localization presentations constructs
+$\Phi_{ut}:L_u\to L_t$. Nothing in this construction parses a Laurent
+polynomial, reduces a fraction, or chooses representatives. The inverse
+coordinate is selected as an element of the target ring; polynomial
+universality constructs the first map; localization universality constructs
+the extension. The factor triangle records, for every element of $A[t]$, that
+the extension after $\iota_t$ agrees with $\varphi_{tu}$.
+
+This order matters. If one began with a formula on fractions, one would still
+have to prove that it respects the localization relation and the ring
+operations. The universal property performs exactly that proof while also
+choosing the map. The formula $t\mapsto u^{-1}$ is not discarded; it appears
+as the named coordinate equation (24.5), now attached to a whole structured
+map.
+
+**Theorem 24.1 (canonical Laurent transition).** For two supplied
+one-variable polynomial algebras over $A$ and supplied localizations at their
+coordinates, there is a canonical whole map from the first localization to
+the second sending the first coordinate to the inverse of the second.
+Reversing the inputs gives the opposite orientation, and each map carries its
+whole localization-factor agreement.
+
+<!-- evidence:LAURENT-TRANSITIONS-BY-UNIVERSALITY -->
+
+> **Formal status — checked.** Evidence
+> `LAURENT-TRANSITIONS-BY-UNIVERSALITY`. The construction is transparent and
+> rule-free. It supplies neither a global projective object nor a theorem that
+> the two maps in (24.6) are inverse for arbitrary polynomial and localization
+> presentations.
+
+## 24.3 One Overlap Ring, Not Two Isomorphic Copies
+
+The generic construction still has two target rings, $L_t$ and $L_u$. A
+global scheme supplies something stronger. Let $U_0$ and $U_1$ be its selected
+charts, let $U_{01}$ be their selected actual intersection, and evaluate the
+single global structure presheaf:
+
+$$
+R_0=\mathcal O(U_0),
+\qquad
+R_1=\mathcal O(U_1),
+\qquad
+L=\mathcal O(U_{01}).
+\tag{24.7}
+$$
+
+Contravariance gives the two inherited restrictions
+
+$$
+\rho_0:R_0\longrightarrow L,
+\qquad
+\rho_1:R_1\longrightarrow L.
+\tag{24.8}
+$$
+
+Suppose now that $R_0$ and $R_1$ are supplied as one-variable polynomial
+algebras over the same base ring $A$, with coordinates $t$ and $u$, and that
+the literal maps $\rho_0$ and $\rho_1$ are supplied as their localizations at
+those coordinates. The Laurent construction no longer produces maps between
+two disconnected candidates for the overlap. Both of its endpoints reduce to
+the exact ring $L$. It constructs two endomorphisms
+
+$$
+\Theta_{tu}:L\longrightarrow L,
+\qquad
+\Theta_{ut}:L\longrightarrow L,
+\tag{24.9}
+$$
+
+each expressing one coordinate in terms of the inverse of the other.
+
+The final comparison is deliberately assumption-explicit. A Laurent overlap
+presentation retains whole paths
+
+$$
+\Theta_{tu}=\operatorname{id}_L,
+\qquad
+\Theta_{ut}=\operatorname{id}_L.
+\tag{24.10}
+$$
+
+The maps in (24.9) are constructed; the paths in (24.10) are supplied. This
+is the exact honest boundary. Polynomial and localization universality tell us
+how to extend prescribed coordinate values, but arbitrary supplied
+presentations of two maps into one ring need not automatically assert that
+the resulting endomorphisms are its identity. Retaining the whole paths says
+that these two coordinate descriptions really are the two Laurent views of
+the same inherited ring.
+
+**Theorem 24.2 (literal common-overlap coordinates).** Two literal maps into
+one ring, each presented as a one-variable polynomial chart followed by
+localization at its coordinate, determine canonical coordinate-inversion
+endomorphisms of that ring. A supplied Laurent overlap presentation identifies
+both endomorphisms wholly with its identity.
+
+<!-- evidence:LAURENT-COMMON-OVERLAP -->
+
+> **Formal status — checked and assumption-explicit.** Evidence
+> `LAURENT-COMMON-OVERLAP`. The identity paths are whole paths of
+> structured maps, not elementwise equations gathered into an external
+> compatibility square. No claim is made that every pair of localization
+> presentations admits those paths.
+
+## 24.4 The Sieve Beneath The Principal Region
+
+The notation $D(t)$ in (24.2) is best read through the principle developed in
+Chapters 18 and 22. Before it is an open, invertibility is an ordinary sieve.
+On the chart $U_0$, the sieve $D_{U_0}(t)$ asks of a probe $v:V\to U_0$ whether
+the restricted coordinate $t|_V$ is a unit. It is defined whether or not the
+site possesses a chosen open object representing that question.
+
+Localization is the algebraic representation theorem. A map out of
+$A[t,t^{-1}]$ is the same data as a map out of $A[t]$ for which $t$ becomes
+invertible. Thus the selected restriction $\rho_0:R_0\to L$, when supplied as
+localization at $t$, gives the overlap ring the universal property expected of
+the region $D(t)$. The second restriction gives the same actual ring the
+universal property expected of $D(u)$.
+
+This is the projective-line instance of the sieve-first insight:
+
+$$
+\begin{aligned}
+\text{invertibility question}
+&\longrightarrow \text{ordinary sieve}\\
+&\longrightarrow \text{represented principal region}.
+\end{aligned}
+\tag{24.11}
+$$
+
+The first arrow is definitional; the second is a theorem or supplied
+presentation. In the present package, the actual geometric intersection is
+already selected, and its two ring restrictions are presented as the relevant
+localizations. The Laurent identities then say that the two coordinate
+answers agree on that one region.
+
+There is a useful restraint here. The package does not prove a general
+site-level equality between every selected chart intersection and an abstract
+sieve classifier. It connects the actual overlap to the principal-open story
+at the literal coordinate-ring and restriction-map endpoints. Chapter 22's
+pointwise representability theorem explains why those localization endpoints
+have the intended invertibility meaning. A whole comparison between arbitrary
+site presentations would be additional geometry.
+
+## 24.5 Laurent Coordinates On The Actual Scheme Overlap
+
+Return to a binary site-relative scheme $S$. Its global object and structure
+presheaf are already retained once. Its two chart realizations are already
+affine. After a selected product in the slice supplies the actual intersection
+$\Omega$, the ring $L$ and both maps (24.8) are derived by evaluating that
+single presheaf. The Laurent adapter adds only a common base ring $A$ and a
+coordinate presentation of those exact endpoints:
+
+$$
+\mathsf{Laurent}(S,\Omega)
+=
+\sum_{A:\mathsf{CommRing}}
+\mathsf{LaurentOverlap}
+\bigl(A,R_0,R_1,L,\rho_0,\rho_1\bigr).
+\tag{24.12}
+$$
+
+The dependency in (24.12) is the point. One cannot quietly substitute an
+isomorphic overlap ring, replace a restriction map, or attach the coordinates
+to a different pair of charts. The types refer to the rings and maps already
+computed from $S$ and $\Omega$. Conversely, the adapter does not pretend to
+discover a common base ring or polynomial structures automatically. Those are
+the mathematical coordinate data being supplied.
+
+**Theorem 24.3 (actual-overlap Laurent adapter).** Given a supplied binary
+site-relative scheme and its selected actual chart intersection, a common base
+ring and Laurent coordinate presentation can be attached directly to the
+literal chart rings, overlap ring, and inherited restriction maps, without
+duplicating any of those global owners.
+
+<!-- evidence:ACTUAL-SCHEME-LAURENT-OVERLAP -->
+
+> **Formal status — checked.** Evidence
+> `ACTUAL-SCHEME-LAURENT-OVERLAP`. This is a thin dependent adapter. It does
+> not add a transition or cocycle field to the general scheme presentation,
+> construct the overlap, infer Laurent coordinates from arbitrary charts, or
+> glue a global scheme from them.
+
+## 24.6 The Supplied Projective-Line Total
+
+All the pieces can now be named as one object. For an ambient category
+$\mathcal K$, define the supplied projective-line presentation by the
+dependent total
+
+$$
+\mathsf{PLine}_{\mathrm{sup}}(\mathcal K)
+=
+\sum_{S:\mathsf{Scheme}^{(2)}_{\mathcal K}}
+\left(
+  \sum_{\Omega:\mathsf{Overlap}(S)}
+  \mathsf{Laurent}(S,\Omega)
+\right).
+\tag{24.13}
+$$
+
+The first component is the already-global site-relative scheme of Chapter 23.
+It owns the ringed object, local-ring certificate, covering sieve, two
+constructively generating charts, and their whole affine realizations. The
+second component selects their actual intersection. The third says that the
+two actual structure-ring restrictions present one-variable polynomial charts
+over a common base and satisfy the Laurent identities on the shared ring.
+
+Nothing else is required because nothing else is free-floating. The overlap
+projections belong to the selected product. The ring restrictions belong to
+the structure presheaf. Their functoriality belongs to that presheaf as well.
+The coordinate-transition maps are constructed by the universal properties in
+Section 24.2. The identity comparisons are retained by the Laurent package.
+Adding another transition map or cocycle field would create a second account
+of data that the global object already owns.
+
+**Theorem 24.4 (supplied projective-line capability).** From an element of
+(24.13), the global scheme, actual overlap, common base ring, and exact Laurent
+package are recovered by projection. Its coordinate-inversion endomorphisms
+are the internally constructed maps of Theorem 24.2 and carry the supplied
+whole identity paths.
+
+<!-- evidence:SUPPLIED-P1 -->
+
+> **Formal status — checked, supplied, and conditional.** Evidence
+> `SUPPLIED-P1`. The total and its observations compute by dependent-pair
+> projection. It neither constructs a closed global object nor proves
+> projectivity or non-affineness.
+
+$$
+\begin{aligned}
+\text{supplied global scheme}
+&\longrightarrow \text{actual chart intersection}\\
+&\longrightarrow \text{two localization presentations}\\
+&\longrightarrow \text{Laurent coordinate identities}.
+\end{aligned}
+\tag{24.14}
+$$
+
+Read from top to bottom, every arrow in (24.14) has a different logical force.
+The first passage uses a
+selected limit in the slice. The second adds algebraic presentations to maps
+already inherited from the global object. The third constructs transition maps
+and retains their whole comparison with identity. None of them reverses the
+chain and constructs the global scheme from the local data.
+
+## 24.7 What A Construction Of The Line Would Require
+
+There are two natural ways to cross the remaining boundary. The first is
+atlas-first. Construct $\operatorname{Spec}A[t]$ and
+$\operatorname{Spec}A[u]$, represent the two invertibility sieves by their
+localizations, construct the inversion comparison, and prove that the diagram
+glues effectively. The result must carry a structure sheaf whose restrictions
+recover the two affine sheaves, a local-ring certificate, and a proof that the
+selected charts cover. One must then compare the constructed object, wholly,
+with the supplied presentation (24.13). Merely packaging two charts and an
+isomorphism cannot replace this effectivity theorem.
+
+The second route is graded. Give $A[x_0,x_1]$ its standard grading and form
+
+$$
+\mathbf P^1_A=\operatorname{Proj} A[x_0,x_1].
+\tag{24.15}
+$$
+
+Here ordinary localization is only an intermediate step. For a homogeneous
+element $x_i$, one localizes the graded ring and then takes its degree-zero
+part. The two standard regions should compute as
+
+$$
+\begin{aligned}
+D_+(x_0)&\simeq
+  \operatorname{Spec} A[x_1/x_0],\\
+D_+(x_1)&\simeq
+  \operatorname{Spec} A[x_0/x_1].
+\end{aligned}
+\tag{24.16}
+$$
+
+Their common region is obtained by inverting the displayed ratio, returning
+exactly the Laurent calculation of this chapter. A complete `Proj`
+construction therefore needs graded commutative rings, homogeneous
+localization, a degree-zero functor, the irrelevant ideal or its covering
+condition, a structure sheaf, and the relevant local-ring and descent
+theorems. None of these objects is hidden inside the ungraded Laurent owner.
+
+The same route explains projective $n$-space:
+
+$$
+\mathbf P^n_A
+=
+\operatorname{Proj} A[x_0,\ldots,x_n].
+\tag{24.17}
+$$
+
+Its $n+1$ standard charts have coordinates $x_j/x_i$ for $j\ne i$; on
+intersections, ratios invert and compose. The binary projective-line package
+is therefore the smallest nontrivial test of the coordinate machinery, not an
+implementation of the graded theory in disguise. A future construction
+should instantiate the existing site-relative and Laurent boundaries and
+prove a whole comparison with them, rather than introduce a competing notion
+of scheme.
+
+That comparison must recover, chart by chart and on the actual intersections,
+the same structure-presheaf restrictions and Laurent identities. Until it
+does, (24.17) describes the destination rather than a second implementation.
+
+> **Formal status — mathematical development and research boundary.**
+> Equations (24.15)--(24.17) describe the standard graded construction and the
+> intended next theorem. No active emdash owner defines graded rings,
+> homogeneous localization, degree zero, an irrelevant ideal, `Proj`, or
+> general projective space. No non-affineness theorem is claimed, even for the
+> supplied line.
+
+## 24.8 The Boundary Is Part Of The Mathematics
+
+The achievement of this chapter is not that a familiar object has been renamed
+as a dependent record. It is that the local coordinate calculation takes place
+on the actual inherited overlap of one global structure presheaf. The two
+restriction maps are not copied. The Laurent transitions are not postulated as
+unstructured functions. The equation $u=t^{-1}$ is realized by polynomial and
+localization universality and compared wholly on one literal ring.
+
+At the same time, existence remains visible. The global object, its cover, its
+affine realizations, the selected intersection, and the Laurent identity paths
+are supplied at the points where the current theory needs them. This prevents
+a computational presentation from being mistaken for an atlas-effectivity
+theorem. It also turns future work into a precise mathematical program: build
+the missing global object, then discharge the assumptions of the existing
+consumer.
+
+The larger methodological lesson reaches beyond projective geometry. Actual
+presheaves, sieves, sites, rings, and categorical limits can be computationally
+internal because they live inside a functorial type theory whose equations are
+checked by an outer logical framework. One need not replace them with an
+abstract modal object language in order to compute. But internal computation
+does not abolish mathematical hypotheses. It makes their location observable.
+
+The third spiral of the book therefore ends where a good construction should
+end: not with a vague promise that gluing will work, and not with a denial that
+gluing matters, but with a coordinate theorem on an honest overlap and a clear
+account of the global theorem still owed.
+<!-- /book-source:chapter-24 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
 <!-- book-source:appendix-notation book/appendices/a-notation.md -->
 <a id="appendix-notation"></a>
 
@@ -8207,6 +12019,31 @@ syntax.
 | $\operatorname{IsWeightedLimit}(F,W,L)$ | a chosen representation of weighted cones | `IsWeightedLimit_cov_comp F W L` |
 | $\operatorname{Cocone}_W(F)$ | the opposite-dual weighted-cocone profunctor | `WeightedCocone_prof F W` |
 | $A\star B$ | directed join with left-to-right cross arrows | `Join_cat A B` |
+| $X:\mathcal K^{\mathrm{op}}\to\mathsf{Cat}$ | a Cat-valued presheaf on $\mathcal K$ | `Psh K` |
+| $yU$ | the representable presheaf $\operatorname{Hom}_{\mathcal K}(-,U)$ | `yoneda_psh K U` |
+| $p^*R$ | pullback of the sieve $R$ by postcomposing its probes with $p$ | `sieve_pullback K V U p R` |
+| $D_U(s)$ | the sieve of probes along which the restricted section is invertible | `comm_ring_psh_invertibility_sieve K O U s` |
+| $J(U,R)$ | the proposition that $R$ covers $U$ in a Grothendieck topology | `groth_topology_covers K J U R` |
+| $\widehat R$ | the whole presheaf extension of a sieve into its representable | `ordinary_sieve_extension_psh K U R` |
+| $\rho_{R,X}$ | restriction from sections over $U$ to matching families on $R$ | `ordinary_sieve_local_precomp K U R X` |
+| $a_JP$ or $aP$ | direct Cat-valued cover completion of $P$ on the fixed site $(\mathcal K,J)$ | `DirectCoverCompletionPsh K J P` |
+| $\eta_P:P\to aP$ | return/unit of direct cover completion | `direct_cover_completion_unit K J P` |
+| $\operatorname{glue}_q$ | whole amalgamation functor for one eligible cover question | `direct_cover_completion_glue_func K J P U R covers` |
+| $\mathbf{CRing}$ | the one-category of set-carrier commutative rings and structured maps | `CommRing_cat` |
+| $\sum_i a_if_i=1$ | a finite unimodular certificate for the generators $(f_i)$ | `CommRingUnimodularPresentation R n generators` |
+| $R[X]$ | a supplied free commutative $R$-algebra on the variable classifier $X$ | `CommRingPolynomialAlgebra R X` |
+| $R[1/f]$ | the target of a supplied universal-property localization at $f$ | `comm_ring_localization_target R f localization` |
+| $R[1/(fg)]\simeq R[1/f][1/g]$ | whole product/iterated-localization comparison | `comm_ring_iterated_localization_comparison_omega_equiv` |
+| $\operatorname{Sp}(R)(S)$ | affine $S$-points, namely structured maps $R\to S$ | `AffineSpecPoint R S` |
+| $D_R(f)(S)$ | affine $S$-points at which the image of $f$ is a unit | `AffineSpecBasicOpenPoint R f S` |
+| $\mathcal O_{\mathrm{coord}}$ | the whole coordinate-ring presheaf on the big affine slice over $\operatorname{Sp}(R)$ | `affine_spec_coordinate_psh R` |
+| $J_{\mathrm{Zar}}^{\mathrm{big}}(R)$ | the least topology generated by selected finite unimodular localization charts | `affine_spec_big_zariski_topology R` |
+| $\mathcal O|_U$ | the whole ambient structure presheaf restricted along the domain functor of $\mathcal K/U$ | `reflective_comm_ringed_site_slice_ambient_psh K A U` |
+| $\mathsf{Scheme}_{\mathcal K}^{(2)}$ | a binary site-relative scheme presentation over the selected categorical semantics | `BinarySiteRelativeSchemePresentation K` |
+| $U_0\times_X U_1$ | a selected actual product of two chart objects in the conventional slice $\mathcal K/X$ | `BinarySchemeChartOverlapPresentation K S` |
+| $A[t,t^{-1}]\to A[u,u^{-1}]$ | the canonical coordinate-inversion map between supplied one-variable localizations | `comm_ring_laurent_transition_map A P Q LP LQ` |
+| $\mathsf{Laurent}(S,\Omega)$ | a common base and Laurent presentation on the literal rings and restrictions of the actual overlap $\Omega$ | `BinarySchemeLaurentOverlapPresentation K S overlap` |
+| $\mathsf{PLine}_{\mathrm{sup}}(\mathcal K)$ | an already-global binary scheme, its actual overlap, and its Laurent coordinate package | `SuppliedProjectiveLinePresentation K` |
 
 The bounded executable text bridge uses four intrinsic categorical lambda
 modes:
@@ -8274,6 +12111,18 @@ A **reviewer/check** is a separate executable occurrence or deliberately
 searched check phrase. “Formal consequence” rows name checked premises but
 also say that the displayed theorem has not yet been packaged. “Research
 boundary” rows deliberately have no purported proof owner.
+
+Here **MathOps** means the discipline of keeping formal owners, executable
+reviews, exposition, and published artifacts connected without confusing
+their authority. The chain is intentionally one-way:
+
+```text
+owner -> reviewer -> register -> prose -> artifact
+```
+
+Later stages may detect drift or preserve provenance, but they do not become
+new proof authorities. In particular, a reproducible PDF certifies the book
+artifact, not the mathematics printed inside it.
 
 > **Formal status — checked.** This appendix describes traceability; the
 > [accompanying emdash artifact](#ref-emdash-artifact) remains the proof
@@ -8389,8 +12238,39 @@ boundary” rows deliberately have no purported proof owner.
 | `JOIN-RECURSOR` | checked | The primitive directed join has two inclusion functors, an internally natural cross cell, and a nondependent recursor with beta computation on both inclusions and the cross-cell datum. | `Join_cat`<br><small>`emdash3_2.lp`</small><br>`join_cross_transf`<br><small>`emdash3_2.lp`</small><br>`join_elim_func`<br><small>`emdash3_2.lp`</small><br>`join_elim_cross_transf`<br><small>`emdash3_2.lp`</small> | `join_elim_cross_transf`<br><small>`emdash3_2_checks.lp`</small><br>`join_elim_cross_transf`<br><small>`examples/directed_join.lp`</small> |
 | `JOIN-COLLAGE-BOUNDARY` | research-boundary | The join recursor has the input shape of the collage of the terminal profunctor, but no object or hom decomposition, mapping-category equivalence, opposite comparison, or dependent collage eliminator is active. | — | — |
 | `FORMAL-KERNEL-PRESENTATION` | checked | The active v3.2 modules expose categories, iterated homs, functors, transfors, and directed families through explicit classifiers and full or capped application owners, with executable assertions checking representative typing and computation. | `Cat`<br><small>`emdash3_2.lp`</small><br>`Hom_cat`<br><small>`emdash3_2.lp`</small><br>`fapp1_func`<br><small>`emdash3_2.lp`</small><br>`tapp1_func`<br><small>`emdash3_2.lp`</small><br>`Catd`<br><small>`emdash3_2.lp`</small> | `fapp1_fapp0`<br><small>`emdash3_2_checks.lp`</small><br>`tapp1_fapp0`<br><small>`emdash3_2_checks.lp`</small> |
-| `FORMAL-ELABORATION-BOUNDARY` | research-boundary | The renewed TypeScript product implements a bounded direct-TypeScript and categorical-text path through scoped contextual elaboration, backend-neutral explicit Core, and a generic checker/evaluator, with optional Lambdapi conformance. A complete compiler for the book's canonical surface, arbitrary displayed coherence, and whole-library transfer are not claimed. | — | — |
+| `FORMAL-ELABORATION-BOUNDARY` | research-boundary | The renewed TypeScript product implements a bounded direct-TypeScript and categorical-text path through scoped contextual elaboration, backend-neutral explicit Core, and a generic checker/evaluator, together with bounded outer-LF adjunction and dependent-structure declarations, a client-side reviewer, and optional Lambdapi conformance. A complete compiler for the book's canonical surface, arbitrary displayed coherence, a general record or inductive facility, and whole-library transfer are not claimed. | — | — |
 | `FORMAL-METATHEORY-BOUNDARY` | research-boundary | Local source acceptance, diagnostics, warning inventories, and model examples do not establish global confluence, strong normalization, canonicity, decidability, consistency, or semantic soundness for the whole emdash rewrite and unification theory. | — | — |
+| `GROTH-TOPOLOGY-SIEVE-LAWS` | checked | An ordinary-sieve Grothendieck topology packages proposition-valued coverhood with maximality, pullback stability, and local character; the maximal sieve and the topology in which every sieve covers have checked direct models. | `GrothTopology`<br><small>`emdash3_2_sites.lp`</small><br>`groth_topology_maximal`<br><small>`emdash3_2_sites.lp`</small><br>`groth_topology_pullback`<br><small>`emdash3_2_sites.lp`</small><br>`groth_topology_local_character`<br><small>`emdash3_2_sites.lp`</small><br>`chaotic_groth_topology`<br><small>`emdash3_2_sites.lp`</small> | `GrothTopology`<br><small>`examples/grothendieck_topology.lp`</small><br>`groth_topology_local_character`<br><small>`examples/grothendieck_topology.lp`</small> |
+| `GENERATED-GROTH-TOPOLOGY` | checked | Every type-valued family of generating ordinary sieves determines an internally constructed least Grothendieck topology that accepts each retained generator and lies below every topology accepting them. | `generated_sieve_cover_is_prop`<br><small>`emdash3_2_generated_topologies.lp`</small><br>`generated_groth_topology`<br><small>`emdash3_2_generated_topologies.lp`</small><br>`generated_groth_topology_accepts_generators`<br><small>`emdash3_2_generated_topologies.lp`</small><br>`generated_groth_topology_least`<br><small>`emdash3_2_generated_topologies.lp`</small> | `generated_groth_topology`<br><small>`examples/generated_grothendieck_topologies.lp`</small><br>`generated_groth_topology_least`<br><small>`examples/generated_grothendieck_topologies.lp`</small> |
+| `SIEVE-MATCHING-LOCALITY` | checked | An ordinary sieve extends to a whole presheaf with a whole inclusion into Yoneda; precomposition defines the section-to-matching restriction functor, locality is its fixed-forward Hom equivalence, and matching, section, and restriction families vary internally over eligible cover questions. | `ordinary_sieve_extension_inclusion`<br><small>`emdash3_2_sieve_extensions.lp`</small><br>`ordinary_sieve_local_precomp`<br><small>`emdash3_2_sieve_extensions.lp`</small><br>`PshLocalAtOrdinarySieve`<br><small>`emdash3_2_sieve_extensions.lp`</small><br>`IsTopologyLocalPsh`<br><small>`emdash3_2_sieve_extensions.lp`</small><br>`DirectCoverQuestionMatching_catd`<br><small>`emdash3_2_direct_cover_question_families.lp`</small><br>`DirectCoverQuestionSection_catd`<br><small>`emdash3_2_direct_cover_question_families.lp`</small><br>`direct_cover_question_restriction_funcd`<br><small>`emdash3_2_direct_cover_question_families.lp`</small> | `ordinary_sieve_local_precomp`<br><small>`examples/sieve_extensions.lp`</small><br>`DirectCoverQuestionMatching_catd`<br><small>`examples/direct_cover_question_families.lp`</small><br>`direct_cover_question_restriction_funcd`<br><small>`examples/direct_cover_question_families.lp`</small> |
+| `PSH-YONEDA-HIGHER-SIEVE` | checked | Cat-valued presheaves reuse whole directed-family restriction; the Yoneda presheaf evaluates to the represented hom category; the conventional slice is the opposite restriction total; and the maximal Cat-valued higher sieve is stable under pullback. | `Psh_cat`<br><small>`emdash3_2_presheaves.lp`</small><br>`Psh_pullback_func`<br><small>`emdash3_2_presheaves.lp`</small><br>`yoneda_psh_func`<br><small>`emdash3_2_presheaves.lp`</small><br>`Slice_cat`<br><small>`emdash3_2_presheaves.lp`</small><br>`HigherSieveClassifier`<br><small>`emdash3_2_presheaves.lp`</small><br>`maximal_higher_sieve`<br><small>`emdash3_2_presheaves.lp`</small> | `Psh_pullback_func`<br><small>`examples/presheaf_facade.lp`</small><br>`HigherSieveClassifier`<br><small>`examples/higher_sieve_classifier.lp`</small> |
+| `ORDINARY-SIEVE-PULLBACK` | checked | An ordinary sieve is a Cat-valued higher sieve with pointwise subterminal evidence; pullback reuses the higher-sieve action, preserves that evidence, and computes membership at a probe as old membership at its postcomposition image. | `Sieve`<br><small>`emdash3_2_sieves.lp`</small><br>`ordinary_sieve_pullback_evidence`<br><small>`emdash3_2_sieves.lp`</small><br>`sieve_pullback`<br><small>`emdash3_2_sieves.lp`</small><br>`SieveMembership`<br><small>`emdash3_2_sites.lp`</small><br>`sieve_pullback_membership`<br><small>`emdash3_2_sites.lp`</small> | `sieve_pullback`<br><small>`examples/ordinary_sieves.lp`</small><br>`SieveMembership`<br><small>`examples/grothendieck_topology.lp`</small> |
+| `COMM-RING-INVERTIBILITY-SIEVE` | checked | For a commutative-ring-valued presheaf and a section over U, the invertibility construction produces an ordinary sieve whose membership at a probe computes to unit evidence for the restricted section. | `CommRingPshInvertibleAlong`<br><small>`emdash3_2_commutative_algebra_presheaves.lp`</small><br>`comm_ring_psh_invertibility_sieve`<br><small>`emdash3_2_commutative_algebra_presheaves.lp`</small> | `comm_ring_psh_invertibility_sieve`<br><small>`examples/commutative_ring_presheaf_invertibility.lp`</small><br>`CommRingPshInvertibleAlong`<br><small>`examples/commutative_ring_presheaf_invertibility.lp`</small> |
+| `DIRECT-COVER-COMPLETION-HIT` | checked | For every site and Cat-valued presheaf, the direct cover-completion categorical-HIT boundary provides a whole unit, one cover-question-indexed glue functor, and one whole silent path, with pullback compatibility inherited from displayed functoriality and a packaged internal direct-cover sheaf structure. | `DirectCoverSheafStructure`<br><small>`emdash3_2_direct_cover_internal_sheaves.lp`</small><br>`direct_cover_sheaf_structure_glue_funcd`<br><small>`emdash3_2_direct_cover_internal_sheaves.lp`</small><br>`direct_cover_sheaf_structure_silent_funcd`<br><small>`emdash3_2_direct_cover_internal_sheaves.lp`</small><br>`DirectCoverCompletionPsh`<br><small>`emdash3_2_direct_cover_completion_hit.lp`</small><br>`direct_cover_completion_unit`<br><small>`emdash3_2_direct_cover_completion_hit.lp`</small><br>`direct_cover_completion_glue_funcd`<br><small>`emdash3_2_direct_cover_completion_hit.lp`</small><br>`direct_cover_completion_silent_funcd`<br><small>`emdash3_2_direct_cover_completion_hit.lp`</small> | `DirectCoverSheafStructure`<br><small>`examples/direct_cover_internal_sheaves.lp`</small><br>`direct_cover_completion_glue_funcd`<br><small>`examples/direct_cover_completion_hit.lp`</small><br>`direct_cover_completion_silent_funcd`<br><small>`examples/direct_cover_completion_hit.lp`</small> |
+| `DIRECT-COVER-COMPLETION-LOCALITY` | checked | Canonical cover pullback, retained-member calculation, whole glue naturality, and silent derive restriction after glue as the second inverse law; the direct cover completion is consequently local at every eligible question and over the whole topology. | `direct_cover_completion_restriction_glue_path`<br><small>`emdash3_2_direct_cover_completion_locality.lp`</small><br>`direct_cover_completion_local_at_question`<br><small>`emdash3_2_direct_cover_completion_locality.lp`</small><br>`direct_cover_completion_is_topology_local`<br><small>`emdash3_2_direct_cover_completion_locality.lp`</small> | `direct_cover_completion_restriction_glue_path`<br><small>`emdash3_2_checks.lp`</small><br>`direct_cover_completion_is_topology_local`<br><small>`emdash3_2_checks.lp`</small> |
+| `DIRECT-COVER-COMPLETION-UNIVERSALITY` | checked | The completion recursor extends a whole seed map with return, glue, and silent coherence; it varies functorially in the seed, and at a topology-local target its whole beta and eta laws make unit precomposition an omega-equivalence of complete Hom categories. | `direct_cover_completion_rec`<br><small>`emdash3_2_direct_cover_completion_eliminator.lp`</small><br>`direct_cover_completion_rec_beta_unit`<br><small>`emdash3_2_direct_cover_completion_eliminator.lp`</small><br>`direct_cover_completion_rec_beta_glue`<br><small>`emdash3_2_direct_cover_completion_eliminator.lp`</small><br>`direct_cover_completion_rec_beta_silent`<br><small>`emdash3_2_direct_cover_completion_eliminator.lp`</small><br>`direct_cover_completion_rec_func`<br><small>`emdash3_2_direct_cover_completion_universality.lp`</small><br>`direct_cover_completion_rec_eta_local_func`<br><small>`emdash3_2_direct_cover_completion_universality.lp`</small><br>`direct_cover_completion_hom_omega`<br><small>`emdash3_2_direct_cover_completion_universality.lp`</small> | `direct_cover_completion_rec_beta_glue`<br><small>`examples/direct_cover_completion_eliminator.lp`</small><br>`direct_cover_completion_rec_eta_local_func`<br><small>`emdash3_2_checks.lp`</small><br>`direct_cover_completion_hom_omega`<br><small>`emdash3_2_checks.lp`</small> |
+| `CAT-VALUED-SHEAFIFICATION-REFLECTOR` | checked | At Cat-valued coefficients, direct cover completion forms a functor into topology-local presheaves left adjoint to inclusion; its unit is return, its counit is local recursion from the identity seed, and the two counit cancellations make the adjunction reflective and instantiate the sheafification capability. | `CatValuedSheafData`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small><br>`cat_valued_sheaf_include_psh_func`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small><br>`direct_cover_sheafification_func`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small><br>`direct_cover_sheafification_adjunction`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small><br>`direct_cover_sheafification_reflector`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small><br>`direct_cover_sheafification_capability`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small> | `direct_cover_sheafification_func`<br><small>`emdash3_2_checks.lp`</small><br>`direct_cover_sheafification_reflector_at`<br><small>`emdash3_2_checks.lp`</small><br>`direct_cover_sheafification_capability`<br><small>`emdash3_2_checks.lp`</small> |
+| `COMM-RING-STRUCTURED-CATEGORY` | checked | Commutative rings have set-valued carriers and retained operations and laws, including the zero ring; operation-preserving carrier maps are extensional structured homs and form the one-category CommRing_cat, while componentwise products and the Boolean-carrier F2 ring supply closed models without a claimed categorical-product universal property. | `comm_ring_carrier_is_set`<br><small>`emdash3_2_commutative_algebra.lp`</small><br>`zero_comm_ring`<br><small>`emdash3_2_commutative_algebra.lp`</small><br>`CommRingHom`<br><small>`emdash3_2_commutative_algebra_category.lp`</small><br>`comm_ring_hom_ext`<br><small>`emdash3_2_commutative_algebra_category.lp`</small><br>`CommRing_cat`<br><small>`emdash3_2_commutative_algebra_category.lp`</small><br>`comm_ring_cat_is_one_cat`<br><small>`emdash3_2_commutative_algebra_category.lp`</small><br>`comm_ring_product`<br><small>`emdash3_2_commutative_algebra_product.lp`</small><br>`f2_comm_ring`<br><small>`emdash3_2_commutative_algebra_f2.lp`</small> | `zero_comm_ring`<br><small>`examples/commutative_ring_objects.lp`</small><br>`CommRing_cat`<br><small>`examples/commutative_ring_morphisms.lp`</small><br>`f2_comm_ring`<br><small>`examples/commutative_ring_split_idempotent_localization.lp`</small> |
+| `FINITE-UNIMODULAR-COVER-DATA` | checked | Finite sums and dot products compute on finite-family constructors and are preserved by structured ring maps; unimodular presentations retain coefficients witnessing that the generators span one, assemble into set-valued finite Zariski presentations, transport under ring maps, and include singleton and binary constructors. | `comm_ring_finite_sum`<br><small>`emdash3_2_commutative_algebra_finite.lp`</small><br>`comm_ring_finite_dot`<br><small>`emdash3_2_commutative_algebra_finite.lp`</small><br>`CommRingUnimodularPresentation`<br><small>`emdash3_2_commutative_algebra_finite.lp`</small><br>`comm_ring_unimodular_map`<br><small>`emdash3_2_commutative_algebra_finite.lp`</small><br>`CommRingZariskiCoverPresentation`<br><small>`emdash3_2_commutative_algebra_finite.lp`</small><br>`comm_ring_zariski_cover_map`<br><small>`emdash3_2_commutative_algebra_finite.lp`</small><br>`comm_ring_binary_zariski_cover`<br><small>`emdash3_2_commutative_algebra_finite.lp`</small> | `CommRingUnimodularPresentation`<br><small>`examples/commutative_ring_finite_covers.lp`</small><br>`comm_ring_unit_zariski_cover`<br><small>`examples/commutative_ring_finite_covers.lp`</small><br>`comm_ring_binary_zariski_cover`<br><small>`examples/commutative_ring_finite_covers.lp`</small> |
+| `COMM-RING-POLYNOMIAL-UNIVERSALITY` | checked | A supplied commutative-ring polynomial algebra retains a base map and variables and makes the structured extension space contractible for every target base map and valuation; the identity ring is a complete checked model for the empty variable classifier. | `CommRingPolynomialFactor`<br><small>`emdash3_2_commutative_algebra_polynomial.lp`</small><br>`IsCommRingPolynomialAlgebra`<br><small>`emdash3_2_commutative_algebra_polynomial.lp`</small><br>`comm_ring_polynomial_factorization_is_contr`<br><small>`emdash3_2_commutative_algebra_polynomial.lp`</small><br>`CommRingPolynomialAlgebra`<br><small>`emdash3_2_commutative_algebra_polynomial.lp`</small> | `empty_is_polynomial`<br><small>`examples/commutative_ring_polynomial_algebra.lp`</small><br>`empty_polynomial`<br><small>`examples/commutative_ring_polynomial_algebra.lp`</small><br>`comm_ring_polynomial_factorization_is_contr`<br><small>`examples/commutative_ring_polynomial_algebra.lp`</small> |
+| `COMM-RING-LOCALIZATION-UNIVERSALITY` | checked | Unit evidence in a commutative ring is proposition-valued, and a supplied localization at one element retains an inverting structure map and a contractible classifier of whole structured factors with their pointwise triangles through every admissible target map. | `CommRingUnitEvidence`<br><small>`emdash3_2_commutative_algebra_localization.lp`</small><br>`comm_ring_unit_evidence_is_prop`<br><small>`emdash3_2_commutative_algebra_localization.lp`</small><br>`CommRingLocalizationFactor`<br><small>`emdash3_2_commutative_algebra_localization.lp`</small><br>`IsCommRingLocalizationAt`<br><small>`emdash3_2_commutative_algebra_localization.lp`</small><br>`comm_ring_localization_factorization_is_contr`<br><small>`emdash3_2_commutative_algebra_localization.lp`</small><br>`CommRingLocalizationAt`<br><small>`emdash3_2_commutative_algebra_localization.lp`</small> | `zero_is_localization_at_point`<br><small>`examples/commutative_ring_localization.lp`</small><br>`zero_localization_factor_is_contr`<br><small>`examples/commutative_ring_localization.lp`</small> |
+| `COMM-RING-LOCALIZATION-MODELS` | checked | Identity is a localization at an already invertible element, the zero ring is a localization at zero, and the fixed image of an idempotent is a quotient-free localization at that idempotent; the split element (1,0) in F2 times F2 gives a closed idempotent distinct from zero and one. | `comm_ring_unit_is_identity_localization`<br><small>`emdash3_2_commutative_algebra_localization_unit.lp`</small><br>`comm_ring_identity_localization_at_one`<br><small>`emdash3_2_commutative_algebra_localization_unit.lp`</small><br>`comm_ring_zero_is_zero_localization`<br><small>`emdash3_2_commutative_algebra_localization_zero.lp`</small><br>`comm_ring_zero_localization`<br><small>`emdash3_2_commutative_algebra_localization_zero.lp`</small><br>`comm_ring_idempotent_image_is_localization`<br><small>`emdash3_2_commutative_algebra_localization_idempotent.lp`</small><br>`comm_ring_idempotent_image_localization`<br><small>`emdash3_2_commutative_algebra_localization_idempotent.lp`</small><br>`f2_split_idempotent_not_zero`<br><small>`emdash3_2_commutative_algebra_localization_split.lp`</small><br>`f2_split_idempotent_not_one`<br><small>`emdash3_2_commutative_algebra_localization_split.lp`</small><br>`f2_split_idempotent_localization`<br><small>`emdash3_2_commutative_algebra_localization_split.lp`</small> | `comm_ring_identity_localization_at_one`<br><small>`examples/commutative_ring_unit_localization.lp`</small><br>`comm_ring_zero_localization`<br><small>`examples/commutative_ring_zero_localization.lp`</small><br>`comm_ring_idempotent_image_localization`<br><small>`examples/commutative_ring_idempotent_localization.lp`</small><br>`f2_split_idempotent_not_zero`<br><small>`examples/commutative_ring_split_idempotent_localization.lp`</small> |
+| `COMM-RING-ITERATED-LOCALIZATION-EQUIV` | checked | For supplied localizations at f, at the image of g, and at fg, the universal properties construct canonical product-to-iterated and iterated-to-product comparison maps whose two whole structured cancellation laws exhibit the selected forward map as an omega-equivalence in CommRing_cat. | `CommRingIteratedLocalizationComparison`<br><small>`emdash3_2_commutative_algebra_localization_comparison.lp`</small><br>`comm_ring_iterated_localization_comparison`<br><small>`emdash3_2_commutative_algebra_localization_comparison.lp`</small><br>`comm_ring_iterated_localization_comparison_left_law`<br><small>`emdash3_2_commutative_algebra_localization_overlap.lp`</small><br>`comm_ring_iterated_localization_comparison_right_law`<br><small>`emdash3_2_commutative_algebra_localization_overlap.lp`</small><br>`comm_ring_iterated_localization_comparison_omega_equiv_along`<br><small>`emdash3_2_commutative_algebra_localization_overlap.lp`</small><br>`comm_ring_iterated_localization_comparison_omega_equiv`<br><small>`emdash3_2_commutative_algebra_localization_overlap.lp`</small> | `comm_ring_iterated_localization_comparison_left_law`<br><small>`examples/commutative_ring_localization_overlap.lp`</small><br>`comm_ring_iterated_localization_comparison_right_law`<br><small>`examples/commutative_ring_localization_overlap.lp`</small><br>`comm_ring_iterated_localization_comparison_omega_equiv`<br><small>`examples/commutative_ring_localization_overlap.lp`</small> |
+| `AFFINE-BASIC-OPEN-POINT-REPRESENTATION` | checked | The affine Yoneda presheaf has S-points CommRingHom(R,S), its semantic basic open D(f) is the ordinary invertibility sieve, and every supplied localization R to R[1/f] gives, at each test ring S, an explicit TypeEquiv from whole structured maps R[1/f] to S to D(f)-points, with both inverse laws derived from localization contractibility and proposition-valued unit evidence. | `affine_spec_functor_of_points`<br><small>`emdash3_2_commutative_algebra_affine_points.lp`</small><br>`affine_spec_basic_open_sieve`<br><small>`emdash3_2_commutative_algebra_affine_points.lp`</small><br>`affine_spec_basic_open_point_left_law`<br><small>`emdash3_2_commutative_algebra_affine_points.lp`</small><br>`affine_spec_basic_open_point_right_law`<br><small>`emdash3_2_commutative_algebra_affine_points.lp`</small><br>`affine_spec_basic_open_point_type_equiv`<br><small>`emdash3_2_commutative_algebra_affine_points.lp`</small> | `AffineSpecPoint`<br><small>`examples/commutative_ring_affine_points.lp`</small><br>`affine_spec_basic_open_point_left_law`<br><small>`examples/commutative_ring_affine_points.lp`</small><br>`affine_spec_basic_open_point_right_law`<br><small>`examples/commutative_ring_affine_points.lp`</small><br>`affine_spec_basic_open_point_type_equiv`<br><small>`examples/commutative_ring_affine_points.lp`</small> |
+| `AFFINE-BASIC-OPEN-INTERSECTION` | checked | At each test ring S, unit evidence for h(fg) is equivalent to paired unit evidence for h(f) and h(g), yielding an explicit pointwise TypeEquiv from D(fg)(S) to the same-map intersection of D(f)(S) and D(g)(S); a supplied localization at fg represents that intersection through executable maps with both component laws. | `affine_spec_basic_open_product_unit_type_equiv`<br><small>`emdash3_2_commutative_algebra_affine_intersections.lp`</small><br>`affine_spec_basic_open_product_point_type_equiv`<br><small>`emdash3_2_commutative_algebra_affine_intersections.lp`</small><br>`affine_spec_basic_open_intersection_representation`<br><small>`emdash3_2_commutative_algebra_affine_intersections.lp`</small><br>`affine_spec_basic_open_intersection_representation_left`<br><small>`emdash3_2_commutative_algebra_affine_intersections.lp`</small><br>`affine_spec_basic_open_intersection_representation_right`<br><small>`emdash3_2_commutative_algebra_affine_intersections.lp`</small> | `affine_spec_basic_open_product_point_type_equiv`<br><small>`examples/commutative_ring_affine_intersections.lp`</small><br>`affine_spec_basic_open_intersection_representation_left`<br><small>`examples/commutative_ring_affine_intersections.lp`</small><br>`affine_spec_basic_open_intersection_representation_right`<br><small>`examples/commutative_ring_affine_intersections.lp`</small> |
+| `AFFINE-BIG-SLICE-COORDINATES` | checked | The conventional big affine slice over Sp(R) has objects R-algebras and geometric arrows given by commuting structured triangles; its whole CommRing-valued coordinate presheaf evaluates a chart at its ring and restriction at the supplied structured map, includes selected localization charts, and internalizes both product/iterated-localization overlap directions with the existing whole coordinate equivalence. | `AffineSpecBigSlice_cat`<br><small>`emdash3_2_commutative_algebra_affine_spec.lp`</small><br>`affine_spec_coordinate_psh`<br><small>`emdash3_2_commutative_algebra_affine_spec.lp`</small><br>`affine_spec_chart_arrow`<br><small>`emdash3_2_commutative_algebra_affine_spec.lp`</small><br>`affine_spec_overlap_forward_chart_arrow`<br><small>`emdash3_2_commutative_algebra_affine_spec.lp`</small><br>`affine_spec_overlap_reverse_chart_arrow`<br><small>`emdash3_2_commutative_algebra_affine_spec.lp`</small><br>`affine_spec_overlap_coordinate_omega_equiv`<br><small>`emdash3_2_commutative_algebra_affine_spec.lp`</small> | `affine_spec_coordinate_psh`<br><small>`examples/commutative_ring_affine_spec.lp`</small><br>`affine_spec_chart_arrow`<br><small>`examples/commutative_ring_affine_spec.lp`</small><br>`affine_spec_overlap_coordinate_omega_equiv`<br><small>`examples/commutative_ring_affine_spec.lp`</small> |
+| `AFFINE-BIG-ZARISKI-TOPOLOGY` | checked | At every chart R to S, each supplied localization in a selected finite unimodular family lifts to a whole chart arrow whose coordinate restriction computes to the localization map; literal finite containment forms witness-rich generators, and their generic intersection constructs the lawful least big-affine Zariski topology with generator coverhood and leastness. | `affine_spec_chart_localization_arrow`<br><small>`emdash3_2_commutative_algebra_affine_zariski.lp`</small><br>`AffineSpecBigZariskiGenerators`<br><small>`emdash3_2_commutative_algebra_affine_zariski.lp`</small><br>`affine_spec_big_zariski_topology`<br><small>`emdash3_2_commutative_algebra_affine_zariski.lp`</small><br>`affine_spec_big_zariski_topology_covers`<br><small>`emdash3_2_commutative_algebra_affine_zariski.lp`</small><br>`affine_spec_big_zariski_topology_least`<br><small>`emdash3_2_commutative_algebra_affine_zariski.lp`</small> | `affine_spec_chart_localization_restriction_review`<br><small>`examples/commutative_ring_affine_zariski.lp`</small><br>`affine_spec_big_zariski_topology_covers`<br><small>`examples/commutative_ring_affine_zariski.lp`</small><br>`affine_spec_big_zariski_topology_least`<br><small>`examples/commutative_ring_affine_zariski.lp`</small> |
+| `AFFINE-STRUCTURE-SHEAF-PRESENTATION` | checked | Given a supplied reflective CommRing-valued sheafification capability on the exact generated big-affine Zariski topology, a selected sheaf object, and a whole DefIso from its included presheaf to the computing coordinate presheaf, the affine structure-sheaf presentation determines a reflective commutative-ringed site and retains the whole coordinate comparison and its chart components. | `AffineStructureSheafPresentation`<br><small>`emdash3_2_commutative_algebra_affine_ringed_sites.lp`</small><br>`affine_structure_sheaf_ringed_site`<br><small>`emdash3_2_commutative_algebra_affine_ringed_sites.lp`</small><br>`affine_structure_sheaf_coordinate_defiso`<br><small>`emdash3_2_commutative_algebra_affine_ringed_sites.lp`</small><br>`affine_structure_sheaf_to_coordinate_at`<br><small>`emdash3_2_commutative_algebra_affine_ringed_sites.lp`</small> | `affine_structure_sheaf_ringed_site`<br><small>`examples/commutative_ring_affine_ringed_sites.lp`</small><br>`affine_structure_sheaf_coordinate_defiso`<br><small>`examples/commutative_ring_affine_ringed_sites.lp`</small><br>`affine_structure_sheaf_to_coordinate_at`<br><small>`examples/commutative_ring_affine_ringed_sites.lp`</small> |
+| `AFFINE-THIN-SCHEME-PRESENTATION` | checked | The thin affine-scheme presentation pairs a supplied whole reflective structure-sheaf presentation with supplied whole coordinate-localization locality; it inherits the exact generated big-Zariski ringed site, a whole coordinate DefIso, and fixed-forward localization matching equivalences, while the F2 times F2 reviewer keeps both capabilities explicit and computes its complementary-idempotent cover, chart rings, restrictions, and zero overlap. | `AffineCoordinateLocalizationLocality`<br><small>`emdash3_2_commutative_algebra_affine_locality.lp`</small><br>`affine_coordinate_localization_locality_at`<br><small>`emdash3_2_commutative_algebra_affine_locality.lp`</small><br>`AffineSchemePresentation`<br><small>`emdash3_2_commutative_algebra_affine_schemes.lp`</small><br>`affine_scheme_ringed_site`<br><small>`emdash3_2_commutative_algebra_affine_schemes.lp`</small><br>`affine_scheme_coordinate_defiso`<br><small>`emdash3_2_commutative_algebra_affine_schemes.lp`</small><br>`affine_scheme_locality_at`<br><small>`emdash3_2_commutative_algebra_affine_schemes.lp`</small> | `affine_coordinate_localization_locality_at`<br><small>`examples/commutative_ring_affine_locality.lp`</small><br>`f2_split_affine_scheme`<br><small>`examples/commutative_ring_affine_schemes.lp`</small><br>`affine_scheme_coordinate_defiso`<br><small>`examples/commutative_ring_affine_schemes.lp`</small><br>`affine_scheme_locality_at`<br><small>`examples/commutative_ring_affine_schemes.lp`</small> |
+| `GLOBAL-RINGED-COVER-BINARY-GENERATION` | checked | A global reflective CommRinged cover retains one site, whole object, ordinary covering sieve, and whole structure presheaf; Grothendieck stability derives every pullback cover, while witness-rich binary generation computes, for each retained sieve member, a Boolean-selected chart factorization and triangle, and the affine refinement route exposes the selected generator without asserting the arbitrary member affine. | `ReflectiveCommRingedSpaceCover`<br><small>`emdash3_2_commutative_algebra_ringed_space_covers.lp`</small><br>`reflective_comm_ringed_space_cover_underlying_psh`<br><small>`emdash3_2_commutative_algebra_ringed_space_covers.lp`</small><br>`reflective_comm_ringed_space_cover_pullback_covers`<br><small>`emdash3_2_commutative_algebra_ringed_space_covers.lp`</small><br>`BinarySelectedCoverGeneration`<br><small>`emdash3_2_commutative_algebra_binary_covers.lp`</small><br>`binary_selected_cover_generation_at`<br><small>`emdash3_2_commutative_algebra_binary_covers.lp`</small><br>`binary_affine_cover_refinement_at`<br><small>`emdash3_2_commutative_algebra_affine_cover_refinements.lp`</small> | `reflective_comm_ringed_space_cover_pullback_covers`<br><small>`examples/commutative_ring_ringed_space_covers.lp`</small><br>`BinarySelectedCoverGeneration`<br><small>`examples/commutative_ring_binary_covers.lp`</small><br>`binary_selected_cover_generation_at`<br><small>`examples/commutative_ring_binary_covers.lp`</small><br>`binary_affine_cover_refinement_at`<br><small>`examples/commutative_ring_affine_cover_refinements.lp`</small> |
+| `WHOLE-SLICE-AFFINE-REALIZATION` | checked | Precomposition with the whole slice-domain functor constructs the ambient CommRing presheaf on K/U; a supplied reflective slice retains a whole DefIso to that target, and supplied sheaf-basis semantics plus an ambient-to-affine-underlying bridge and the affine presentation's retained coordinate bridge derive one whole ambient-to-coordinate DefIso for a selected cover chart. | `slice_domain_func`<br><small>`emdash3_2_commutative_algebra_ringed_space_restrictions.lp`</small><br>`reflective_comm_ringed_site_slice_ambient_psh`<br><small>`emdash3_2_commutative_algebra_ringed_space_restrictions.lp`</small><br>`SuppliedReflectiveCommRingedSlicePresentation`<br><small>`emdash3_2_commutative_algebra_ringed_space_restrictions.lp`</small><br>`supplied_reflective_comm_ringed_slice_ambient_defiso`<br><small>`emdash3_2_commutative_algebra_ringed_space_restrictions.lp`</small><br>`SuppliedSheafBasisEquivalenceAlong`<br><small>`emdash3_2_site_basis.lp`</small><br>`AffineBasisRealizationAlong`<br><small>`emdash3_2_commutative_algebra_affine_basis.lp`</small><br>`affine_basis_realization_coordinate_defiso`<br><small>`emdash3_2_commutative_algebra_affine_basis.lp`</small><br>`AffineCoverChartRealization`<br><small>`emdash3_2_commutative_algebra_affine_cover_charts.lp`</small><br>`affine_cover_chart_coordinate_defiso`<br><small>`emdash3_2_commutative_algebra_affine_cover_charts.lp`</small> | `supplied_reflective_comm_ringed_slice_ambient_defiso`<br><small>`examples/commutative_ring_ringed_space_restrictions.lp`</small><br>`affine_basis_realization_coordinate_defiso`<br><small>`examples/commutative_ring_affine_basis.lp`</small><br>`AffineCoverChartRealization`<br><small>`examples/commutative_ring_affine_cover_charts.lp`</small><br>`affine_cover_chart_coordinate_defiso`<br><small>`examples/commutative_ring_affine_cover_charts.lp`</small> |
+| `TOPOLOGY-LOCAL-RING-CERTIFICATE` | checked | A topology-local CommRing presheaf presentation makes a zero-unit stage empty-covering and turns every invertible sum into a selected covering sieve whose members compute a Boolean branch with unit evidence for one restricted summand; the whole-object package attaches that capability to the computing ambient presheaf on the supplied actual slice K/X. | `CommRingPshTopologyLocalRingPresentation`<br><small>`emdash3_2_commutative_algebra_local_ringed_sites.lp`</small><br>`comm_ring_psh_topology_local_ring_empty_covers`<br><small>`emdash3_2_commutative_algebra_local_ringed_sites.lp`</small><br>`comm_ring_psh_topology_local_ring_split`<br><small>`emdash3_2_commutative_algebra_local_ringed_sites.lp`</small><br>`ReflectiveCommRingedWholeObjectLocalPresentation`<br><small>`emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp`</small><br>`reflective_comm_ringed_whole_object_local_ambient_defiso`<br><small>`emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp`</small><br>`reflective_comm_ringed_whole_object_local_ring`<br><small>`emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp`</small> | `comm_ring_psh_topology_local_ring_nontriviality`<br><small>`examples/commutative_ring_local_ringed_sites.lp`</small><br>`comm_ring_psh_topology_local_ring_split`<br><small>`examples/commutative_ring_local_ringed_sites.lp`</small><br>`ReflectiveCommRingedWholeObjectLocalPresentation`<br><small>`examples/commutative_ring_locally_ringed_space_presentations.lp`</small><br>`reflective_comm_ringed_whole_object_local_ambient_defiso`<br><small>`examples/commutative_ring_locally_ringed_space_presentations.lp`</small> |
+| `BINARY-SITE-RELATIVE-SCHEME` | checked | A BinarySiteRelativeSchemePresentation totals one existing global reflective CommRinged cover with its whole-object topology-local certificate and a constructively generated binary affine cover; the global structure presheaf, covering sieve, local package, selected charts, and both whole affine realizations remain exact existing owners rather than duplicated overlap, cocycle, transition, or gluing fields. | `BinaryAffineCoverPresentation`<br><small>`emdash3_2_commutative_algebra_affine_cover_presentations.lp`</small><br>`BinaryLocallyRingedAffineCoverPresentation`<br><small>`emdash3_2_commutative_algebra_locally_ringed_space_presentations.lp`</small><br>`BinarySiteRelativeSchemePresentation`<br><small>`emdash3_2_commutative_algebra_site_relative_schemes.lp`</small><br>`binary_site_relative_scheme_underlying_psh`<br><small>`emdash3_2_commutative_algebra_site_relative_schemes.lp`</small><br>`binary_site_relative_scheme_local`<br><small>`emdash3_2_commutative_algebra_site_relative_schemes.lp`</small><br>`binary_site_relative_scheme_atlas`<br><small>`emdash3_2_commutative_algebra_site_relative_schemes.lp`</small><br>`binary_site_relative_scheme_realization0`<br><small>`emdash3_2_commutative_algebra_site_relative_schemes.lp`</small><br>`binary_site_relative_scheme_realization1`<br><small>`emdash3_2_commutative_algebra_site_relative_schemes.lp`</small> | `binary_affine_cover_generation`<br><small>`examples/commutative_ring_affine_cover_presentations.lp`</small><br>`binary_locally_ringed_affine_cover_atlas`<br><small>`examples/commutative_ring_locally_ringed_space_presentations.lp`</small><br>`BinarySiteRelativeSchemePresentation`<br><small>`examples/commutative_ring_site_relative_schemes.lp`</small><br>`binary_site_relative_scheme_underlying_psh`<br><small>`examples/commutative_ring_site_relative_schemes.lp`</small><br>`binary_site_relative_scheme_realization0`<br><small>`examples/commutative_ring_site_relative_schemes.lp`</small><br>`binary_site_relative_scheme_realization1`<br><small>`examples/commutative_ring_site_relative_schemes.lp`</small> |
+| `ACTUAL-BINARY-CHART-OVERLAP` | checked | Given a selected binary product of the two chart objects in the conventional slice K/X, its whole universal property derives both slice projections and their base arrows; evaluating the single global structure presheaf derives the overlap ring and both restriction homomorphisms, without adding an overlap field to the scheme total or constructing arbitrary pullbacks. | `BinaryProductPresentation`<br><small>`emdash3_2_finite_limits.lp`</small><br>`BinarySchemeChartOverlapPresentation`<br><small>`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_to_chart0`<br><small>`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_to_chart1`<br><small>`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_domain`<br><small>`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_ring`<br><small>`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_restriction0`<br><small>`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_restriction1`<br><small>`emdash3_2_commutative_algebra_scheme_chart_overlaps.lp`</small> | `BinarySchemeChartOverlapPresentation`<br><small>`examples/commutative_ring_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_to_chart0`<br><small>`examples/commutative_ring_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_to_chart1`<br><small>`examples/commutative_ring_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_ring`<br><small>`examples/commutative_ring_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_restriction0`<br><small>`examples/commutative_ring_scheme_chart_overlaps.lp`</small><br>`binary_scheme_chart_overlap_restriction1`<br><small>`examples/commutative_ring_scheme_chart_overlaps.lp`</small> |
+| `LAURENT-TRANSITIONS-BY-UNIVERSALITY` | checked | For supplied one-variable polynomial algebras over A and selected localizations at their coordinates, polynomial universality constructs A[t] to A[u,1/u] with t sent to the chosen inverse of u, localization universality extends it to A[t,1/t] to A[u,1/u], reversing the inputs constructs the opposite orientation, and the retained factor agreement is a whole pointwise triangle. | `CommRingLaurentLocalization`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`comm_ring_laurent_polynomial_coordinate_path`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`comm_ring_laurent_transition_map`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`comm_ring_laurent_transition_agreement`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small> | `comm_ring_laurent_polynomial_coordinate_path`<br><small>`examples/commutative_ring_laurent.lp`</small><br>`comm_ring_laurent_transition_map`<br><small>`examples/commutative_ring_laurent.lp`</small><br>`comm_ring_laurent_transition_agreement`<br><small>`examples/commutative_ring_laurent.lp`</small> |
+| `LAURENT-COMMON-OVERLAP` | checked | Given two literal restriction maps R to L and T to L, each supplied simultaneously as a one-variable polynomial chart over one base ring and a localization at its coordinate, the Laurent owner constructs both coordinate-inversion endomorphisms of that exact L; a Laurent overlap presentation then supplies whole paths identifying both constructed endomorphisms with the identity, rather than a disconnected overlap isomorphism or componentwise square. | `CommRingOneVariableLocalizationPresentation`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`comm_ring_laurent_common_overlap_transition`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`CommRingLaurentOverlapPresentation`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`comm_ring_laurent_overlap_forward_identity`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`comm_ring_laurent_overlap_reverse_identity`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small> | `CommRingOneVariableLocalizationPresentation`<br><small>`examples/commutative_ring_laurent.lp`</small><br>`comm_ring_laurent_common_overlap_transition`<br><small>`examples/commutative_ring_laurent.lp`</small><br>`CommRingLaurentOverlapPresentation`<br><small>`examples/commutative_ring_laurent.lp`</small><br>`comm_ring_laurent_overlap_forward_identity`<br><small>`examples/commutative_ring_laurent.lp`</small><br>`comm_ring_laurent_overlap_reverse_identity`<br><small>`examples/commutative_ring_laurent.lp`</small> |
+| `ACTUAL-SCHEME-LAURENT-OVERLAP` | checked | For a supplied binary site-relative scheme and selected actual chart intersection, the thin Laurent adapter adds one common base ring and retains a generic Laurent overlap presentation at the literal two chart structure rings, inherited overlap ring, and already-derived restriction homomorphisms; it neither duplicates those global owners nor constructs the coordinate presentation from no data. | `BinarySchemeLaurentOverlapPresentation`<br><small>`emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`</small><br>`binary_scheme_laurent_overlap_base_ring`<br><small>`emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`</small><br>`binary_scheme_laurent_overlap_coordinates`<br><small>`emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`</small> | `binary_scheme_laurent_overlap_base_ring`<br><small>`examples/commutative_ring_scheme_laurent_overlaps.lp`</small><br>`binary_scheme_laurent_overlap_coordinates`<br><small>`examples/commutative_ring_scheme_laurent_overlaps.lp`</small> |
+| `SUPPLIED-P1` | checked | A SuppliedProjectiveLinePresentation is the transparent dependent total of one already-global binary site-relative scheme, its selected actual chart intersection, and a Laurent-coordinate presentation on the literal inherited restriction maps; its scheme, overlap, base ring, and coordinate package compute by projection, while no closed projective object, Proj construction, gluing theorem, projectivity proof, or non-affineness proof is produced. | `SuppliedProjectiveLinePresentation`<br><small>`emdash3_2_commutative_algebra_projective_line.lp`</small><br>`supplied_projective_line_scheme`<br><small>`emdash3_2_commutative_algebra_projective_line.lp`</small><br>`supplied_projective_line_overlap`<br><small>`emdash3_2_commutative_algebra_projective_line.lp`</small><br>`supplied_projective_line_base_ring`<br><small>`emdash3_2_commutative_algebra_projective_line.lp`</small><br>`supplied_projective_line_coordinates`<br><small>`emdash3_2_commutative_algebra_projective_line.lp`</small> | `supplied_projective_line_scheme`<br><small>`examples/commutative_ring_projective_line.lp`</small><br>`supplied_projective_line_overlap`<br><small>`examples/commutative_ring_projective_line.lp`</small><br>`supplied_projective_line_base_ring`<br><small>`examples/commutative_ring_projective_line.lp`</small><br>`supplied_projective_line_coordinates`<br><small>`examples/commutative_ring_projective_line.lp`</small> |
 | `EH-COMMUTATIVITY` | checked | Two 2-endomorphisms of an identity 1-cell commute in the selected Eckmann-Hilton slice. | `EH_comm`<br><small>`emdash3_2.lp`</small> | text `Eckmann-Hilton specialization`<br><small>`emdash3_2_checks.lp`</small> |
 <!-- /book-source:appendix-evidence -->
 <div class="book-source-end" aria-hidden="true"></div>
@@ -8561,6 +12441,33 @@ than to a page number that would change with paper size and typography.
 
 ## D.1 Glossary
 
+<a id="glossary-affine-chart-realization"></a>
+
+**Affine chart realization.** A selected region $U\to X$ together with a
+supplied reflective presentation of the actual slice $\mathcal K/U$, a
+coordinate ring and thin affine presentation, a whole affine-basis functor,
+and a whole comparison from ambient restriction to affine coordinates. The
+label is site-relative and is not inferred from cover membership alone. See
+[Chapter 23](#chapter-23).
+
+<a id="glossary-affine-scheme"></a>
+
+**Affine scheme, computational presentation.** A base ring together with a
+supplied reflective structure-sheaf presentation on its generated big
+Zariski site and supplied whole localization locality for the coordinate
+presheaf. The current interface is assumption-explicit and does not construct
+sheafification, stalks, or a representation-independent category of affine
+schemes. See [Chapter 22](#chapter-22).
+
+<a id="glossary-binary-site-relative-scheme"></a>
+
+**Binary site-relative scheme presentation.** One supplied global reflective
+ringed object with topology-local ring behaviour and a covering sieve
+constructively generated by two whole affine chart realizations. The global
+structure presheaf is retained once, so restrictions and selected overlaps
+are inherited rather than duplicated as atlas fields. See
+[Chapter 23](#chapter-23).
+
 <a id="glossary-adjunction"></a>
 
 **Adjunction.** Functors $F:A\to B$ and $G:B\to A$ equipped either with a
@@ -8573,6 +12480,13 @@ cuts with selected computational owners. See [Chapter 12](#chapter-12).
 **Arrow induction.** Extension of data at the reflexive outgoing arrow to a
 section over $\mathsf{PathOut}$. Unlike equality induction, its base category may
 contain noninvertible arrows. See [Chapter 5](#chapter-5).
+
+<a id="glossary-basic-open"></a>
+
+**Basic open.** Primarily, the ordinary sieve $D_R(f)$ of maps $R\to S$ that
+make $f$ invertible. A supplied localization $R\to R[1/f]$ represents its
+points at every test ring; a compact open is a further representation when
+available. See [Chapters 18](#chapter-18) and [22](#chapter-22).
 
 <a id="glossary-based-hom"></a>
 
@@ -8591,7 +12505,8 @@ signature, not the definition of WalkingEnd. See
 
 **Canonical mathematical surface.** The readable notation in which the book
 states categorical judgments and rule schemas. It maps to stable kernel
-owners but is not itself a currently implemented parser language. See
+owners and has a bounded executable subset, but the full notation is broader
+than the implemented text grammar. See
 [Appendix G.5](#appendix-formal-presentation-g5).
 
 <a id="glossary-carrier-equivalence"></a>
@@ -8619,17 +12534,45 @@ preceding dimension. See [Chapter 7](#chapter-7).
 It is not definitionally an ordinary HoTT precategory. See
 [Chapters 2](#chapter-2) and [10](#chapter-10).
 
+<a id="glossary-commutative-ring"></a>
+
+**Commutative ring.** A set-valued carrier with zero, one, addition,
+negation, multiplication, and the usual commutative-ring laws. The zero ring
+is retained; structured maps preserve all five operations and form
+$\mathbf{CRing}$. See [Chapter 21](#chapter-21).
+
 <a id="glossary-code"></a>
 
 **Code.** The Cat-valued family over WalkingEnd whose base fibre is
 $\mathsf{Path}(\mathbb N)$ and whose generator action is successor. See
 [§8.1.3](#chapter-8-1-3).
 
+<a id="glossary-contractible-factor"></a>
+
+**Contractible factor space.** The classifier of structure-preserving maps
+and their required triangles, equipped with a center and a path from every
+competitor to it. It turns a universal property into both a selected factor
+and coherent uniqueness. See [Chapter 21](#chapter-21).
+
 <a id="glossary-coyoneda"></a>
 
 **Co-Yoneda cut.** Elimination of a representable leg from a profunctor
 composite. The checked theorem is a shaped, fixed-middle beta/fusion law; a
 general coend theorem remains separate. See [Chapter 13](#chapter-13).
+
+<a id="glossary-cover"></a>
+
+**Cover.** An ordinary sieve selected as locally sufficient by a Grothendieck
+topology. A family of arrows can present or generate a covering sieve while
+retaining separate computational witnesses. See [Chapter 19](#chapter-19).
+
+<a id="glossary-cover-generation"></a>
+
+**Cover generation, binary and witness-rich.** For every member
+$q:V\to X$ of one retained covering sieve, an executable Boolean branch,
+factor map $V\to U_b$, and triangle $q=u_bh$ through one of two selected
+members. It explains the retained sieve without asserting that every member
+is itself affine. See [Chapter 23](#chapter-23).
 
 <a id="glossary-contextual-eliminator"></a>
 
@@ -8682,10 +12625,11 @@ opposite. It never licenses an unannounced variance reversal. See
 
 <a id="glossary-elaborator"></a>
 
-**Elaborator.** A future, optional compilation layer that would parse surface
-notation, infer omitted categorical data, select stable owners, and emit
-explicit Lambdapi terms. The historical parent TypeScript prototype is
-feasibility evidence, not that compiler. See
+**Elaborator.** The implemented bounded TypeScript layer that interprets
+directly constructed or parsed categorical surface terms against expected
+classifiers, selects stable owners, and emits backend-neutral explicit Core.
+It fails closed when a required coherent construction is absent. It is not a
+compiler for the whole book surface or a second mathematical kernel. See
 [Appendix G.5](#appendix-formal-presentation-g5).
 
 <a id="glossary-evidence-status"></a>
@@ -8695,19 +12639,44 @@ development, or research boundary. The status describes the relation between
 prose and the active artifact. See [How to Read](#how-to-read) and
 [Appendix B](#appendix-evidence).
 
+<a id="glossary-explicit-core"></a>
+
+**Explicit emdash Core.** The backend-neutral representation produced after
+elaboration has selected logical and categorical owners and made their
+arguments explicit. The generic TypeScript LF checks and reduces it; optional
+deterministic Lambdapi emission is a conformance route, not its definition.
+See [Appendix G.5](#appendix-formal-presentation-g5).
+
 <a id="glossary-formal-presentation"></a>
 
-**Formal presentation.** The four-layer account consisting of the
-computational categorical kernel, the canonical mathematical surface, an
-optional future elaborator, and external semantic models. The kernel comes
-first; it is not post-hoc semantics for an unspecified traditional syntax.
-See [Appendix G](#appendix-formal-presentation).
+**Formal presentation.** The layered account relating the canonical
+mathematical surface, bounded contextual elaboration and outer-LF declaration
+conveniences, backend-neutral explicit Core, the generic TypeScript LF, the
+active Lambdapi authority, and separately stated semantic models. The
+categorical kernel comes first; it is not post-hoc semantics for an
+unspecified traditional syntax. See
+[Appendix G](#appendix-formal-presentation).
 
 <a id="glossary-functor"></a>
 
 **Functor.** A map with object and iterated-hom action. Generic functoriality,
 not constructor-specific laws, owns identity and composition preservation.
 See [Chapter 2](#chapter-2).
+
+<a id="glossary-generated-topology"></a>
+
+**Generated topology.** The least Grothendieck topology accepting a selected
+type-valued family of generating sieves. The active presentation is the
+intersection of all accepting topologies, not an inductive derivation syntax.
+See [Chapter 19](#chapter-19).
+
+<a id="glossary-global-first-scheme"></a>
+
+**Global-first scheme architecture.** An approach that begins with one
+already-existing global ringed object and recognizes selected regions as
+covering affine charts. Restriction and overlap coherence are inherited from
+the global presheaf; constructing the object from abstract chart data remains
+a separate gluing theorem. See [Chapter 23](#chapter-23).
 
 <a id="glossary-group-completion"></a>
 
@@ -8721,6 +12690,21 @@ toward integers or a circle comparison. See [§8.1.5](#chapter-8-1-5).
 covariant postcomposition, contravariant precomposition, and simultaneous
 two-endpoint action as distinct computational owners. See
 [Chapters 2](#chapter-2), [9](#chapter-9), and [13](#chapter-13).
+
+<a id="glossary-higher-sieve"></a>
+
+**Higher sieve.** A Cat-valued coefficient system on the
+restriction-oriented category of probes into a fixed object; equivalently, a
+Cat-valued presheaf on the conventional slice. Its values may retain witnesses
+and arrows between them; it is not automatically an ordinary sieve. See
+[Chapter 18](#chapter-18).
+
+<a id="glossary-invertibility-sieve"></a>
+
+**Invertibility sieve.** For a section $s$ over $U$, the sieve $D_U(s)$ of
+all probes $p:V\to U$ for which $p^*s$ is a unit. An open may represent this
+sieve, but representability is a further claim. See
+[Chapter 18](#chapter-18).
 
 <a id="glossary-join"></a>
 
@@ -8743,6 +12727,29 @@ pointwise semantics remains mathematical development. See Chapters
 **Lower-star action.** Postcomposition: if $g:w\to x$ and $u:x\to y$, then
 $u_*(g)=u\circ g:w\to y$. Its active owners are `hom_postcomp_func` and
 `hom_postcomp_fapp0`. See [§9.2](#chapter-9).
+
+<a id="glossary-localization"></a>
+
+**Localization at an element.** A structured map $R\to R[1/f]$ that makes
+$f$ invertible and has a contractible factor space through every map in which
+the image of $f$ is already invertible. The notation names a universal role,
+not a required fraction representation. See [Chapter 21](#chapter-21).
+
+<a id="glossary-laurent-overlap"></a>
+
+**Laurent overlap.** Two literal chart restrictions into one actual overlap
+ring, each supplied as localization of a one-variable polynomial algebra over
+one common base, together with whole paths identifying both internally
+constructed coordinate-inversion endomorphisms with the overlap identity.
+The transition maps are constructed; the identity paths are supplied. See
+[Chapter 24](#chapter-24).
+
+<a id="glossary-matching-family"></a>
+
+**Matching family.** A whole presheaf map $\widehat R\to X$ assigning local
+data to every member of a sieve $R$, compatibly with refinement. A global
+section restricts to a matching family by precomposition. See
+[Chapter 19](#chapter-19).
 
 <a id="glossary-natural-transformation"></a>
 
@@ -8773,6 +12780,22 @@ $C\mapsto C^{\mathrm{op}}$. Opposite duality exchanges selected limit and
 colimit interfaces while preserving a visible variance ledger. See
 [Chapter 14](#chapter-14).
 
+<a id="glossary-ordinary-sieve"></a>
+
+**Ordinary sieve.** A refinement-closed, proposition-valued family of probes
+into one object. In the active categorical presentation it is a higher sieve
+whose every coefficient category is subterminal. See
+[Chapter 18](#chapter-18).
+
+<a id="glossary-outer-lf-declaration"></a>
+
+**Outer-LF declaration convenience.** A typed host operation that validates
+selected higher-level input and expands it into ordinary dependent-LF
+declarations and rules before explicit Core is checked. The current
+adjunction and bounded dependent-structure forms add no trusted term node or
+new categorical semantics. See
+[Appendix G.5](#appendix-formal-presentation-g5).
+
 <a id="glossary-path-category"></a>
 
 **Path category.** $\mathsf{Path}(A)$, the equality-local groupoidal category
@@ -8794,6 +12817,38 @@ identities, composition, and category laws. It is used as a readable
 one-categorical specialization of the native iterated-hom architecture. See
 [Chapter 10](#chapter-10).
 
+<a id="glossary-polynomial-algebra"></a>
+
+**Polynomial algebra.** A free commutative $R$-algebra on a variable
+classifier $X$, characterized by contractible structured extension spaces for
+every base map and valuation. The universal interface does not select a
+monomial representation. See [Chapter 21](#chapter-21).
+
+<a id="glossary-proj"></a>
+
+**Proj.** The standard construction of a projective scheme from a graded
+ring, using homogeneous localization and degree-zero parts on standard
+regions. It is mathematical development and a research boundary in this
+edition; the active artifact has no graded `Proj` owner. See
+[Chapter 24](#chapter-24).
+
+<a id="glossary-supplied-projective-line"></a>
+
+**Projective-line presentation, supplied.** One already-global binary
+site-relative scheme, its selected actual chart intersection, and a Laurent
+coordinate presentation on the literal inherited restriction maps. It is an
+end-to-end computational capability, not a construction of $\mathbf P^1$, a
+projectivity or non-affineness proof, or a substitute for `Proj`. See
+[Chapter 24](#chapter-24).
+
+<a id="glossary-presheaf"></a>
+
+**Presheaf.** A contravariant functor
+$X:\mathcal K^{\mathrm{op}}\to\mathsf{Set}$ or, in the active higher
+presentation, to $\mathsf{Cat}$. It assigns observations to stages and
+functorial restriction to probes. See [Chapters 13](#chapter-13) and
+[18](#chapter-18).
+
 <a id="glossary-profunctor"></a>
 
 **Profunctor.** A Cat-valued functor
@@ -8807,6 +12862,13 @@ and covariant in its second. See
 action is composition, which makes it the computational bridge between
 universal properties and cut elimination. See
 [Chapters 5](#chapter-5) and [13](#chapter-13).
+
+<a id="glossary-reflector"></a>
+
+**Reflector.** A left adjoint to the inclusion of a full subcategory whose
+counit on objects already in that subcategory is an equivalence. Direct cover
+completion is a reflector from Cat-valued presheaves to topology-local ones
+at the fixed site. See [Chapter 20](#chapter-20).
 
 <a id="glossary-rezk-completion"></a>
 
@@ -8828,6 +12890,35 @@ equality. See [Appendix E](#appendix-computation).
 itself an equivalence, or the result of freely enforcing that property by a
 completion. Saturation is not finite categorical height. See
 [Chapter 15](#chapter-15).
+
+<a id="glossary-sheaf"></a>
+
+**Sheaf.** A presheaf local at every covering sieve: restriction from global
+sections to matching families is an equivalence. This condition on an
+existing presheaf is distinct from a sheafification construction. See
+[Chapters 19](#chapter-19) and [20](#chapter-20).
+
+<a id="glossary-sheafification"></a>
+
+**Sheafification.** A reflective free-local completion of a presheaf. In the
+active Cat-valued construction, return preserves old data, whole glue adjoins
+amalgamations over eligible cover questions, silent removes redundant
+restrict-and-glue detours, and the recursor gives the whole Hom universal
+property. See [Chapter 20](#chapter-20).
+
+<a id="glossary-site"></a>
+
+**Site.** A category equipped with a Grothendieck topology, whose covering
+sieves satisfy maximality, pullback stability, and local character. A site
+need not be a poset of open subsets. See [Chapter 19](#chapter-19).
+
+<a id="glossary-topology-local-ring"></a>
+
+**Topology-local ring presentation.** A commutative-ring presheaf capability
+making a zero-unit stage empty-covering and splitting an invertible sum over
+a selected cover into an executable branch where one restricted summand is a
+unit. It is a direct site-level forcing condition, not a constructed stalk or
+a theorem comparing with stalk-local rings. See [Chapter 23](#chapter-23).
 
 <a id="glossary-strict-category"></a>
 
@@ -8863,6 +12954,13 @@ transformation through off-diagonal and higher hom action. See
 the base level it is contractibility, and at successor levels it truncates
 all identity classifiers one step lower. It is not a truncation reflector.
 See [Chapter 7](#chapter-7).
+
+<a id="glossary-unimodular-presentation"></a>
+
+**Unimodular presentation.** A finite family $(f_i)$ together with
+coefficients $(a_i)$ and a retained equation $\sum_i a_if_i=1$. It is the
+witness-rich algebraic input for a finite basic-open cover, not by itself a
+covering sieve or topology. See [Chapter 21](#chapter-21).
 
 <a id="glossary-univalence"></a>
 
@@ -9047,7 +13145,7 @@ claim-by-claim authority.
 | --- | --- | --- |
 | Equality-local type theory | Equality induction, path action, Sigma/Pi path interfaces, elementary inductives | No claim of a complete standalone HoTT implementation |
 | Directed categories | Iterated homs, identities, composition, functors, transfors, opposites, products | No complete weak omega-category metatheory or model theorem |
-| Directed families | Fibres, transport, family morphisms, Sigma totals, Pi sections, displayed hom action, fixed-base fibrewise products, asymmetric pullback totalization, and constant-domain displayed evaluation | Arbitrary displayed telescope depth, mixed-domain evaluation, and exchange across genuine dependency remain open |
+| Directed families | Fibres, transport, family morphisms, Sigma totals, Pi sections, displayed hom action, fibrewise products, pullback totalization, displayed evaluation, and finite canonical sibling/Sigma telescopes | Arbitrary dependency or variance graphs, unrestricted mixed introduction/evaluation, and exchange across genuine dependency remain open |
 | Cut and transfor calculus | Lower-star postcomposition, upper-star precomposition, off-diagonal `tapp1`, horizontal composition, selected universal beta/eta cuts | No unrestricted runtime associativity rewrite or claim that all higher coherence is judgmental |
 | Equivalence and univalence | `TypeEquiv`, groupoid univalence, truncated-universe univalence, native recursive omega-equivalence facade and one-way hom action | No full general object-equality/ordinary-isomorphism equivalence for arbitrary categories |
 | Induction | Nat and equality induction, fixed/varying-source `PathOut` induction, composition benchmark | No general equivalence with homotopy-initial categorical algebras |
@@ -9058,11 +13156,18 @@ claim-by-claim authority.
 | Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
 | Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
+| Presheaves and sieves | Cat-valued presheaves, Yoneda and slices, higher sieves, ordinary pointwise-subterminal sieves, pullback membership, and commutative-ring invertibility sieves | No global ordinary-sieve classifier, automatic representation by one open, topology, descent, or sheafification follows from this layer |
+| Sites and descent | Ordinary-sieve Grothendieck topology laws, chaotic model, internally generated least topology, whole sieve extensions, matching and section Hom families, and topology-locality | No inductive cover derivations, coverhood decision procedure, automatic subcanonicity, sheafification reflector, or identification with a separate rigid sheaf facade follows from locality alone |
+| Direct cover sheafification | Cat-valued categorical-HIT completion with whole return/glue/silent data, derived topology-locality, recursor, whole Hom universality, adjunction, and reflective counit | Fixed-site and Cat-valued only; no arbitrary coefficients, commutative-ring lift, left exactness, site base-change theorem, or classical plus-construction comparison |
+| Commutative algebra | Set-carrier rings and structured maps, finite unimodular presentations, polynomial and localization universal-property interfaces, selected unit/zero/idempotent models, and whole iterated/product-localization equivalence | No arbitrary polynomial/localization existence, monomial or fraction representation, categorical product theorem, global ring-package identity, or affine geometry follows from this layer alone |
+| Affine geometry | Yoneda functor of points; ordinary basic-open sieve; pointwise localization representation and multiplicative intersection; big affine slice, coordinate presheaf, and least generated Zariski topology; assumption-explicit reflective structure sheaf, localization locality, and thin affine presentation | No whole natural basic-open equivalence, global localization choice, CommRing-valued sheafification construction, small-site comparison, subcanonicity, stalk-local theorem, qcqs comparison, or representation-independent category of affine schemes |
+| Site-relative schemes | One global reflective ringed object and covering sieve; witness-rich binary generation; whole actual-slice restriction; supplied affine-basis realizations; topology-local ring forcing; dependent binary scheme total; selected actual overlap with derived ring restrictions | Binary and relative to the supplied site; no atlas-first gluing, induced slice topology, arbitrary pullback construction, overlap-affineness theorem, scheme-morphism category, compact-open/classical comparison, or representation-independent scheme theorem |
+| Supplied projective-line boundary | Universal-property Laurent transition maps; literal common-overlap identity package; thin adapter to actual inherited chart restrictions; dependent total of one already-global scheme, its actual overlap, and Laurent coordinates | The global object and Laurent identity paths remain supplied; no atlas-first gluing, projectivity or non-affineness proof, graded ring, homogeneous localization, degree-zero construction, `Proj`, or general projective space |
 | Opposite, duality, and dagger | Opposite category action and selected opposite-duality comparisons | Dagger, unitary structure, and dagger univalence are mathematical development pending a native involutive interface |
 | Structure identity and saturation | Truncation/evidence-property footholds and ordinary-isomorphism lift | Generic native structure identity and Rezk completion, including their higher universal properties, are research boundaries |
 | Weighted limits and Kan interfaces | Weighted representability, beta/eta comparison, right-adjoint preservation, terminal/conjoint specializations | Standard end formulas, pointwise Kan semantics, existence, and general dependent adjunctions are not globally packaged |
 | Weighted colimits and join | Opposite-dual colimit preservation, terminal/companion specializations, primitive join recursor and three beta observations | General coend semantics and join-as-collage mapping, hom-decomposition, opposite, and dependent-elimination theorems remain open |
-| Formal presentation | Checked categorical owners; a bounded TypeScript outer LF, explicit Core, contextual elaborator, checker/runtime, and reviewed text subset | No compiler for the complete book surface, arbitrary displayed coherence, or whole-library transfer; readable notation is not a second kernel |
+| Formal presentation | Checked categorical owners; a bounded TypeScript outer LF, explicit Core, contextual elaborator, checker/runtime, reviewed text subset, adjunction/structure declaration conveniences, and client-side reviewer | No compiler for the complete book surface, arbitrary displayed coherence, general record/inductive facility, or whole-library transfer; readable notation is not a second kernel |
 | Metatheory and models | Bounded typechecking, subject-reduction checks performed by Lambdapi, focused diagnostics, and the concrete BNat model | No global confluence, normalization, canonicity, decidability, consistency, or semantic-soundness theorem for the full combined calculus |
 | Production artifact | Manifest assembly, provenance/evidence checks, local assets, bounded browser validation, and deterministic PDF export | External mathematical peer review and a non-draft public edition remain future release work |
 
@@ -9132,23 +13237,38 @@ The renewed TypeScript product now elaborates a bounded direct-TypeScript and
 categorical-text surface into backend-neutral explicit Core, then checks and
 reduces that Core with a small dependent logical framework. Its contextual
 categorical layer covers reviewed ordinary, natural, displayed-functorial,
-and displayed-natural binders, including one mixed dependent telescope. An
-optional deterministic Lambdapi path remains a conformance oracle; it is not
-a production dependency, and the active Lambdapi development remains the
-mathematical authority.
+and displayed-natural binders. Within the canonical sibling/Sigma normal form
+it supports finite dependency depth and sibling groups; qualified finite
+Hom-category recursion and finite rigid indexed-section chains are also
+executable. An optional deterministic Lambdapi path remains a conformance
+oracle. It is not a production dependency, and the active Lambdapi
+development remains the mathematical authority.
 
-This is a real executable bridge, but not completion of the canonical
-mathematical surface. Arbitrary displayed coherence, unrestricted telescope
-depth and variance, a compiler for the whole book notation, and systematic
-transfer of the remaining library are still engineering boundaries. The
-older TypeScript prototype remains historical feasibility evidence; its
-stale category-specific layer is neither an authority nor the architecture
-of the renewed product.
+The same outer LF has two bounded authoring conveniences. One declares an
+adjunction from already typed rectangular data, or from a counit and whole
+hom transpose, while retaining proof-time rather than runtime agreement with
+the stable observations. The other declares an unparameterized,
+nonrecursive, single-constructor dependent structure with named projections
+and projection beta rules. Both expand to ordinary declarations; neither adds
+a trusted Core form, categorical owner, general record eta, eliminator,
+recursion, or positivity principle.
 
-On the engineering side, a physical split of `emdash3_2.lp` remains
-optional. It should begin only when a measured dependency or evidence-ownership
-problem justifies the migration, and it must preserve declaration/rule order
-and all current checks one boundary at a time.
+This is a real executable bridge, visible in the client-side integrated
+reviewer, but not completion of the canonical mathematical surface. Arbitrary
+dependency and variance graphs, coherence outside the qualified grammar, a
+compiler for the whole book notation, a general record or inductive facility,
+and systematic transfer of the remaining library are still engineering
+boundaries. The older TypeScript prototype remains historical feasibility
+evidence; its stale category-specific layer is neither an authority nor the
+architecture of the renewed product.
+
+Ordinary DevOps makes checks, assembly, and release repeatable. The project's
+MathOps discipline additionally separates mathematical owners, independent
+reviewers, generated evidence and health views, authored sources, and
+deterministic release artifacts. That separation makes drift and provenance
+auditable. It does not convert a passing build, warning inventory, browser
+run, or reproducible PDF into a confluence, normalization, consistency, or
+soundness theorem.
 
 ## F.6 Reading Claims Across Editions
 
@@ -9190,44 +13310,43 @@ emdash Core and a small dependent logical framework. That route makes a
 reviewed fragment directly usable; it does not become a second categorical
 kernel or define the mathematics retroactively.
 
-The architecture therefore distinguishes these roles:
+The architecture therefore distinguishes these roles before its two
+executable paths meet in the operational diagram that follows:
 
 | Layer or role | Responsibility | Present status |
 | --- | --- | --- |
 | canonical mathematical surface | the notation and rule presentation used by this book | active for prose, comments, and examples; not a parser grammar |
 | scoped contextual elaboration | recursively interprets reviewed categorical variables, binders, neutral applications, and structural forms against typed expectations | active for the bounded direct-TypeScript and text profiles |
+| typed outer-LF declarations | validate selected higher-level declarations and expand them into ordinary LF declarations and rules | active for adjunction assumptions and one bounded dependent-structure form; no new trusted Core node |
 | backend-neutral explicit emdash Core | records the selected logical and categorical owners without committing to one runtime backend | active TypeScript intermediate representation |
 | generic TypeScript dependent LF | checks Core terms, performs conversion and bounded reduction, and runs the reviewed proof-time rules | active for the recorded product boundary |
 | active Lambdapi v3.2 kernel | authors the categorical declarations, computation, and proof-time comparisons used as mathematical authority | active and checked in the cited modules; also the conformance oracle |
 | external semantic models | interpret a stated kernel fragment in mathematical categories or other structures | separate mathematical work; available only in selected examples |
 
-The operational direction is
-
 ```text
 canonical mathematical surface (broader than implemented text)
-               |
-               | reviewed direct TypeScript / text subset
-               v
-scoped contextual elaboration
-               |
-               v
-backend-neutral explicit emdash Core
-               |
-               v
+  -> reviewed direct TypeScript / text expressions
+  -> scoped contextual elaboration
+  -> explicit Core terms ------------------------------------------+
+                                                                  |
+typed host declarations                                           |
+  -> deterministic expansion                                      |
+  -> ordinary LF declarations and rules --------------------------+
+                                                                  |
+                                                                  v
 generic TypeScript LF checker / conversion / bounded runtime
-               |
-               +---- optional deterministic Lambdapi emission/conformance
+  -> optional deterministic Lambdapi emission / conformance
 
 active authored Lambdapi v3.2 kernel = mathematical authority
 external models                    = separate mathematical work
 ```
 
-The text adapter is not the checker, the TypeScript checker is not the active
-mathematical authority, and the implemented text subset is not the whole
-canonical surface. External interpretation is separate again. Keeping these
-roles distinct lets us say exactly which claims are checked computation,
-which are executable presentation, which are mathematical exposition, and
-which remain research.
+The text adapter is not the checker, an authoring macro is not a new term
+former, the TypeScript checker is not the active mathematical authority, and
+the implemented text subset is not the whole canonical surface. External
+interpretation is separate again. Keeping these roles distinct lets us say
+exactly which claims are checked computation, which are executable
+presentation, which are mathematical exposition, and which remain research.
 
 <a id="appendix-formal-presentation-g1"></a>
 
@@ -9688,20 +13807,30 @@ evidence register connects book claims to both declarations and reviewers.
 
 ### Modules And Ownership
 
-The current organization is:
+The source graph is larger than a useful reading list. The following map
+groups adjacent modules by mathematical responsibility; the evidence
+register supplies the exact owner and reviewer for each cited claim.
 
-| Module | Formal role |
+| Module family | Formal role |
 | --- | --- |
-| `emdash3_2.lp` | active categorical kernel and universal-construction owners |
-| `emdash3_2_eq1_hom_action.lp` | derived native equality-valued next-hom and groupoidality layer |
-| `emdash3_2_eq1_evidence_property.lp` | evidence-property and finite-height consequences |
-| `emdash3_2_nat_arithmetic.lp` | reusable Nat operations and sethood |
-| `emdash3_2_walking_end_hit.lp` | selected WalkingEnd signature, eliminator, computation, and comparison |
-| `emdash3_2_checks.lp` | executable diagnostics |
+| `emdash3_2.lp` | categorical nucleus: classifiers, iterated homs, functors, transfors, directed families, cuts, and universal-construction interfaces |
+| `emdash3_2_presheaves.lp`, `emdash3_2_sieves.lp`, `emdash3_2_sites.lp` | presheaves, higher and ordinary sieves, pullback, and the direct Grothendieck-topology laws |
+| `emdash3_2_generated_topologies.lp`, `emdash3_2_sieve_extensions.lp`, `emdash3_2_site_basis.lp`, `emdash3_2_ringed_sites.lp` | least generated topology, whole matching/section families, basis comparison, and ringed-site presentations |
+| `emdash3_2_direct_cover_*.lp` | return/glue/silent cover completion, recursion, topology-locality, whole Hom universality, and the resulting Cat-valued reflector |
 
-Imports use `require`; `open` brings imported public names into scope.
-The file split expresses dependency and evidence ownership. It is not a claim
-that every conceptual chapter already has its own kernel module.
+| Module family | Formal role |
+| --- | --- |
+| `emdash3_2_commutative_algebra.lp` through the polynomial and localization modules | set-carrier rings and structured maps, finite unit-ideal data, free extension, universal localization, and whole localization comparisons without polynomial or fraction syntax |
+| the commutative-algebra presheaf, affine-points, affine-Zariski, ringed-site, and affine-scheme modules | the invertibility sieve $D(f)$, localization representation, generated big Zariski topology, coordinate presheaf, and assumption-explicit affine presentations |
+| the ringed-space cover, affine-chart, site-relative-scheme, and chart-overlap modules | one supplied global ringed object, constructively generated covers, whole actual-slice restrictions, affine realizations, topology-local rings, and inherited overlaps |
+| `emdash3_2_commutative_algebra_laurent.lp`, `emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`, `emdash3_2_commutative_algebra_projective_line.lp` | universal-property coordinate inversion on one literal overlap and the supplied projective-line boundary; no graded `Proj` construction |
+| `emdash3_2_eq1_*.lp`, `emdash3_2_nat_arithmetic.lp`, `emdash3_2_walking_end_hit.lp` | equality-valued higher action, reusable arithmetic, and the WalkingEnd encode-decode development |
+| `emdash3_2_checks.lp` and `examples/` | executable diagnostics and independent reviewer-facing witnesses rather than mathematical owners |
+
+Imports use `require`; `open` brings imported public names into scope. The
+file split records dependency and evidence ownership. A conceptual chapter
+may use several owners, and one source family may support several chapters;
+neither direction is forced to mirror the table of contents.
 
 Three source policies are essential for reading rules correctly.
 
@@ -9957,7 +14086,7 @@ explicit owners described above:
 
 | Stage | Implemented bounded profile | Retained boundary |
 | --- | --- | --- |
-| parse | located `^f`, `^n`, `^fd`, and `^nd` binders, neutral application, and reviewed constructors and contexts | not the complete book or Lambdapi grammar |
+| parse | located `^f`, `^n`, `^fd`, and `^nd` binders, neutral application, selected constructors, and grouped displayed contexts | not the complete book or Lambdapi grammar |
 | elaborate | typed expected classifiers route recursively through the existing contextual categorical program | no arbitrary pointwise-to-coherent synthesis |
 | select owner | reviewed operation families lower to internal categorical and structural owners | no whole-library owner-acquisition claim |
 | check and reduce | the generic TypeScript LF checks explicit Core, compares terms, and executes the bounded runtime | no global metatheory |
@@ -9971,7 +14100,7 @@ type must disambiguate them.
 
 ### Surface Forms And Explicit Targets
 
-The current canonical notation includes:
+The canonical notation includes:
 
 | Surface | Explicit target |
 | --- | --- |
@@ -9986,19 +14115,15 @@ The current canonical notation includes:
 
 For example, if $\eta:F\Rightarrow G$ and $f:x\to_Ay$, the readable term
 $\eta[f]:F[x]\to_BG[y]$ elaborates toward the fully explicit owner
-
-```lambdapi
-@tapp1_fapp0 A B F G x y eta f
-```
+`@tapp1_fapp0 A B F G x y eta f`.
 
 The source notation does not have to expose all seven parameters, but the
 result must typecheck as that operation or an explicitly documented
-equivalent owner.
+equivalent owner. Readability changes what the author writes, not what the
+checker trusts.
 
-### Executable Binders And Structural Lowering
-
-Binder modes express how variables may vary. The reviewed executable forms
-are
+**One compositional motif, four binder modes.** Binder modes say how a
+variable is allowed to vary. The reviewed executable forms are
 
 ```text
 λ^f  x : A. ...
@@ -10015,44 +14140,55 @@ notation $k:^{n}K$ therefore records the same natural/indexed role as
 executable binders are literally the same grammar. Ordinary object binding
 in the outer LF uses its ordinary dependent lambda.
 
-For example, assume
+The four modes are easiest to compare around one compositional motif. Let
+$H:A\to B$ be an ordinary functor. Let $E,D,Q:K\to\mathsf{Cat}$ be directed
+families, $FF:E\to D$ and $GG:D\to Q$ displayed functors, and $s$ a coherent
+section of $E$. Finally, let
+$\eta:F_0\Rightarrow F_1$ and $\theta:F_1\Rightarrow F_2$ be displayed
+transfors. At successive categorical levels the same idea appears as:
 
-```text
-A, B, C : Cat
-E : Functor B (Functor_cat A C)
-```
+| Mode | Representative expression | Mathematical reading |
+| --- | --- | --- |
+| `^f` | `λ^f x : A. H x` | an ordinary functorial variable inside one category |
+| `^n` | `λ^n k : K. (GG k) ((FF k) (s k))` | a base variable whose result is a coherent section of $Q$ |
+| `^fd` | `λ^fd a : E. GG (FF a)` | an object varying in a displayed family, retaining its hidden base index |
+| `^nd` | `λ^nd k : K. composeCells (theta k) (eta k)` | a coherent family of cells between displayed functors, one hom level higher |
 
-The reviewed expression
+These are not four spellings for an ordinary lambda. The `^n` form must
+respect transport in the base; the `^fd` form must retain displayed object and
+arrow action; the `^nd` form must construct a transfor rather than a bare
+pointwise family. In each case the expected classifier selects a reviewed
+internal construction. If that construction is absent, elaboration fails
+instead of accepting a JavaScript callback with an external naturality
+promise.
+
+Ordinary nesting already shows why recursive scope matters. Assume
+`A, B, C : Cat` and `E : Functor B (Functor_cat A C)`. The reviewed
+expression is:
 
 ```text
 λ^f x : A. λ^f y : B. E y x
 ```
 
-has classifier `Functor A (Functor_cat B C)`. Neutral application first
+This term has classifier `Functor A (Functor_cat B C)`. Neutral application first
 selects the action of `E` on `y` and then its action on `x`. Recursive
-abstraction lowers the result through the existing exchange/currying
-construction; a compact rendering of the selected structural term is
-
-```text
-fapp0
-  (Functor_cat B (Functor_cat A C))
-  (Functor_cat A (Functor_cat B C))
-  exchange-functor-abstraction
-  E
-```
+abstraction lowers the result through the existing
+`exchange-functor-abstraction` owner before explicit Core is checked.
 
 No external functoriality equation accompanies the source expression. The
 selected owner already carries object and arrow action, and the resulting
 explicit Core is checked by the same generic LF as other terms.
 
+### Dependency Levels And Independent Siblings
+
 Displayed contexts make the distinction between dependency and independence
-visible. The bounded mixed telescope
+visible. A representative mixed telescope is
 
 ```text
 λ^fd (a : A; b : B, c : C; d : D). fibrePair b c
 ```
 
-has dependency levels `A; B,C; D`. A semicolon advances to a family over the
+It has dependency levels `A; B,C; D`. A semicolon advances to a family over the
 preceding total context, while a comma groups independent siblings over the
 same prefix. The middle pair lowers through the transparent fibrewise product,
 displayed pairing, Sigma projections, and reindexing owners. Thus `b` and `c`
@@ -10060,6 +14196,73 @@ may be paired, weakened, contracted, or exchanged fibrewise; no exchange of
 `a` across a classifier depending on `a` is implied. Object and base-arrow
 behavior remain internal to those owners rather than being supplied as
 external coherence evidence.
+
+The implemented normal form is not limited to the displayed four-variable
+example. It supports any finite sequence of these canonical dependency
+levels, with finite sibling groups at a level, for the reviewed displayed
+functorial and displayed-natural constructions. Separately, the category
+resolver can descend through any finite number of qualified Hom-category
+levels over its supported roots, and the indexed-section route can compose a
+finite rigid chain of displayed functors on a section. These depth results do
+not amount to arbitrary dependency or variance graphs. Exchange
+across a dependency edge, unrestricted mixed introduction and currying, and
+coherence synthesis outside the qualified grammar remain open.
+
+### Declaration Convenience Without New Mathematics
+
+Some repetition belongs to the surrounding logical framework rather than to
+categorical terms. Two direct-TypeScript declaration forms remove that
+repetition before explicit Core is checked.
+
+For an adjunction, `assumeAdjunction` receives already declared functors,
+unit, and counit. It expands to an ordinary `Adjunction(F,G)` assumption and
+two proof-time agreements identifying the declared transformations with the
+kernel's stable unit and counit observations. A second form accepts a counit
+and a coherent whole hom-profunctor transpose. In both cases the declaration
+preserves the distinction between proof-time agreement and runtime
+conversion: independently named maps do not silently become new reduction
+rules for the categorical kernel.
+
+For a finite dependent package, `declareStructure` expands one
+unparameterized, nonrecursive, single-constructor structure into an opaque
+carrier, an injective constructor, named primitive projections, and one
+ordered, subject-reducing beta rule for each projection. Later field types may
+depend on earlier fields, which is the essential convenience for mathematical
+presentations. The form generates no record eta, eliminator, recursion,
+positivity theorem, general inductive declaration, or browser/text syntax.
+
+Both conveniences are conservative in the practical architectural sense:
+their output consists of the same ordinary LF declarations and rules that
+could have been written explicitly. Neither adds a trusted Core node or a
+Lambdapi mathematical owner. The elaborator improves the act of stating a
+presentation; it cannot turn missing structure or coherence into a theorem.
+
+### Located Text And The Browser Reviewer
+
+The text adapter accepts a small, located language rather than a string that
+is later treated as trusted code. It records source spans, parses the reviewed
+binders, grouped contexts, neutral whitespace application, and selected term,
+category, and displayed-family constructors, then delegates typing and owner
+selection to the same contextual program used by direct TypeScript. A failure
+therefore reports its parsing, resolution, or elaboration phase together with
+the source location. It is not a second action table or checker.
+
+The integrated browser reviewer makes this path inspectable without a server.
+Its twelve editable examples span the four binder modes, the canonical
+sibling/Sigma context, qualified recursive Hom categories, and finite rigid
+section chains. The current natural-binder example is the two-step section
+
+```text
+λ^n k : K. (GG k) ((FF k) (s k))
+```
+
+from the running motif above. For an accepted expression the client displays
+the explicit backend-neutral Core, inferred and expected classifiers, and the
+structural owners used in lowering. For a rejected edit it displays the
+source-located diagnostic. The same page can run the outer-LF/ordinary/
+displayed research report, retain the minimal explicit-Core playground, and
+open the generated book. All of this execution is client-side; Lambdapi is an
+optional development oracle, not a browser or production dependency.
 
 ### Historical Prototype And Retained Boundary
 
@@ -10070,21 +14273,23 @@ stale category-specific layer is not an authority for v3.2. The renewed
 product instead targets backend-neutral explicit Core aligned with active
 owners and uses Lambdapi only as an optional conformance oracle.
 
-The current path is deliberately bounded. It does not parse every notation
-used in this book, lower arbitrary displayed telescope depth or variance,
-synthesize coherence from a pointwise function, or establish mechanical
-transfer of the whole Lambdapi library. These are explicit continuation
-boundaries, not hidden assumptions of the implemented examples.
+The current path is deliberately bounded: it does not parse every notation
+in the book, accept arbitrary dependency or variance graphs, synthesize
+coherence from an unstructured pointwise function, or mechanically transfer
+the whole Lambdapi library. Its qualified finite-depth results are neither
+one hard-coded example nor a complete surface language. They are explicit
+continuation boundaries, not hidden assumptions of the examples that run.
 
 <!-- evidence:FORMAL-ELABORATION-BOUNDARY -->
 
 > **Formal status — research boundary.** Evidence
 > `FORMAL-ELABORATION-BOUNDARY`. The direct-TypeScript and categorical-text
-> paths, explicit Core, generic checker/evaluator, and optional conformance
-> route are executable for the reviewed profile. A complete compiler for the
-> canonical surface, arbitrary displayed coherence, and whole-library
-> transfer are not claimed. The active Lambdapi sources remain the
-> mathematical authority.
+> paths, explicit Core, generic checker/evaluator, bounded adjunction and
+> dependent-structure declarations, client-side reviewer, and optional
+> conformance route are executable for the reviewed profile. A complete
+> compiler for the canonical surface, arbitrary displayed coherence, a
+> general record or inductive facility, and whole-library transfer are not
+> claimed. The active Lambdapi sources remain the mathematical authority.
 
 <a id="appendix-formal-presentation-g6"></a>
 
@@ -10307,11 +14512,18 @@ begins from categorical computation.
    Categories*. Trends in Logic 6. Kluwer Academic Publishers, Dordrecht,
    1999; [DOI 10.1007/978-94-017-1207-1](https://doi.org/10.1007/978-94-017-1207-1).
 
-Items 1–5 and 8 situate the mathematical development; items 6–7 identify the
-proof infrastructure and checked artifact. Citation does not by itself confer
-the book's formal-status label. The exact HoTT source revision, section
-labels, adaptation targets, and license metadata, together with the
-reference-only policy for Došen's book, are recorded in
+9. <a id="ref-zeuner"></a>Max Zeuner. *Univalent Foundations of Constructive
+   Algebraic Geometry*. arXiv:2407.17362v1, 2024.
+   [arXiv record](https://arxiv.org/abs/2407.17362).
+
+10. <a id="ref-pedrot-shtuck"></a>Pierre-Marie Pédrot. “Pursuing
+    Shtuck.” Preprint, 2023. [HAL record](https://inria.hal.science/hal-04251754v1).
+
+Items 1–5 and 8–10 situate the mathematical development; items 6–7 identify
+the proof infrastructure and checked artifact. Citation does not by itself
+confer the book's formal-status label. The exact HoTT source revision and
+Zeuner and Pédrot versions, section maps, adaptation targets, and license metadata,
+together with the reference-only policy for Došen's book, are recorded in
 `book/references/third-party-sources.json`.
 <!-- /book-source:bibliography -->
 <div class="book-source-end" aria-hidden="true"></div>
@@ -10354,6 +14566,60 @@ structural and conceptual adaptations from the pinned source, while Chapters
 four parts of `formal.tex`. The resulting prose is newly written for the
 directed categorical setting; the ledger records the source labels,
 adaptation kind, and target under this attribution and ShareAlike notice.
+
+## Max Zeuner's constructive algebraic geometry
+
+The local-to-global geometry spiral takes mathematical and expository
+inspiration from:
+
+> Max Zeuner, *Univalent Foundations of Constructive Algebraic Geometry*,
+> arXiv:2407.17362v1, 2024.
+
+The reviewed [arXiv version](https://arxiv.org/abs/2407.17362) is licensed
+under the [Creative Commons Attribution 4.0 International
+License](https://creativecommons.org/licenses/by/4.0/). Chapter 18 adapts the
+locally ringed lattice's largest compact-open invertibility support into a
+comparison with the sieve $D_U(s)$ of all invertibility probes. This is a
+change of organizing viewpoint: the compact open remains the appropriate
+representative in Zeuner's coherent or qcqs setting when it exists, while the
+sieve is defined on a general site before representability is known. Chapter
+22 structurally adapts the Zariski-lattice, coverage, compact-open, and
+functor-of-points narrative to this sieve-first organization: a supplied
+localization represents $D_R(f)$ pointwise, and the big-site topology is
+generated from selected finite localization charts. Neither chapter imports
+Zeuner's qcqs comparison theorem or general scheme theorem as an emdash
+result. Chapter 23 comparatively adapts the finite affine-cover architecture,
+but reverses the direction of construction: its global ringed object is
+supplied first, two charts constructively generate one retained covering
+sieve, and restrictions and a selected intersection are inherited from that
+single object. It does not import Zeuner's gluing theorem, compact-open
+classifier, or equivalence between functorial and locally ringed-lattice qcqs
+schemes. Chapter 24 carries that finite-cover rhythm and comparison boundary
+into a supplied projective-line presentation, but its Laurent calculation and
+explicit `Proj` horizon are an emdash synthesis rather than a construction
+drawn from Zeuner's thesis. The source sections, targets, adaptation kinds,
+and mathematical changes are recorded in
+`references/third-party-sources.json`.
+
+## Pierre-Marie Pédrot's computational sheafification
+
+The return/glue/silent presentation in Chapter 20 takes conceptual and
+structural inspiration from:
+
+> Pierre-Marie Pédrot, “Pursuing Shtuck,” preprint, 2023.
+
+The reviewed [HAL version](https://inria.hal.science/hal-04251754v1) is
+licensed under the [Creative Commons Attribution 4.0 International
+License](https://creativecommons.org/licenses/by/4.0/). Pédrot presents free
+sheaves by a return constructor, a branching glue constructor, and an equation
+that erases a branch whose result is ignored, then explains the last as a
+silent transition. Emdash adapts that computational picture to actual varying
+cover questions in categorical semantics: the branches are matching objects
+of Cat-valued presheaves, and the checked endpoint is a whole Hom-category
+universal property and reflector. The book does not import the paper's
+internal type theory, metatheory, universe claims, or dependent-elimination
+results. Exact source sections and adaptation boundaries are recorded in
+`references/third-party-sources.json`.
 
 ## Došen's cut-elimination perspective
 

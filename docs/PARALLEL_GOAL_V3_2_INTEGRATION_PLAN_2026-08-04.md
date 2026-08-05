@@ -1,8 +1,8 @@
 # Parallel v3.2 Goal Integration Plan
 
 Date: 2026-08-04
-Status: active; final qualification complete; commit, integration archive, and
-local-main fast-forward pending
+Status: complete; merge commit, integration archive, and local-main
+fast-forward verified
 Branch: `integration/v3.2-parallel-goals`
 Worktree: `/home/user1/emdash1-integration-v3.2`
 
@@ -367,7 +367,7 @@ any original artifact or worktree under this goal.
 | --- | --- | --- | --- | --- |
 | Elaborator worktree | `e7352ba...` | `backups/parallel-v3.2-artifacts-2026-08-04/typescript-elaborator-v3.2_e7352ba..._artifacts.tar.gz`; adjacent provenance and SHA-256 manifests | 15,489,319 bytes; 378 entries; `gzip -t`, full TOC read, SHA-256 `c5299dcc...` | pass |
 | PSSS worktree | `1281efe...` | `backups/parallel-v3.2-artifacts-2026-08-04/presheaves-sites-schemes-v3.2_1281efe..._artifacts.tar.gz`; adjacent provenance and SHA-256 manifests | 46,645,412 bytes; 1,276 entries; `gzip -t`, full TOC read, SHA-256 `e02b3436...` | pass |
-| Integration worktree | final merge | — | — | pending |
+| Integration worktree | `62e9e10...` | `backups/parallel-v3.2-artifacts-2026-08-04/integration-v3.2_62e9e10..._artifacts.tar.gz`; adjacent provenance and SHA-256 manifests | 106,536 bytes; 5 entries; `gzip -t`, full TOC read, SHA-256 `9ee2eb6b...` | pass |
 
 Additional reachability facts to preserve:
 
@@ -388,8 +388,8 @@ Additional reachability facts to preserve:
 | INT-005 | Regenerate catalog and health with owners. | implemented: catalog and fresh 162-target health report generated, reviewed, and staged |
 | INT-006 | Requalify exact TypeScript contracts through owners. | implemented: exact identities, inventories, ordinals, derivative ledgers, and live probes green |
 | INT-007 | Focused gates first, one final repository aggregate. | implemented: focused kernel and TypeScript gates green; one clean final `check:all` exited 0 |
-| INT-008 | Fast-forward local main only after green merge commit. | accepted; pending |
-| INT-009 | Preserve ignored evidence by provenance and manifests. | accepted; pending |
+| INT-008 | Fast-forward local main only after green merge commit. | implemented: direct-parent merge `62e9e10...`; clean local `main` fast-forwarded to the same commit |
+| INT-009 | Preserve ignored evidence by provenance and manifests. | implemented: all three source archives and adjacent provenance/SHA-256 manifests verified; no source worktree removed |
 | INT-010 | No push, publication, rewrite, cleanup, deletion, or worktree removal. | active constraint |
 
 ## Progress Ledger
@@ -402,26 +402,25 @@ Additional reachability facts to preserve:
 | 3. Reports and overlap review | complete | Handoff/index resolved; catalog, TOC, and fresh health green; all automatic overlap paths audited quantitatively; living SOP synchronized to combined evidence. |
 | 4. TypeScript contract requalification | complete | All active core/eq1 hashes, inventories, exact acquisitions, derivative ordinal ledgers, and module-spec evidence requalified; all focused owners and live probes green. |
 | 5. Final qualification | complete | Kernel/examples/health/browser/focused TS green; two full-TS integration contracts corrected and focused 9/9; one clean final `check:all` exited 0; exact staged review passed in phase 6. |
-| 6. Commit and fast-forward local main | ready | Exact staged review passed; local `main` is clean at `cea2605...`; create the authorized direct-parent merge commit, then recheck and fast-forward local `main` only. |
-| 7. Preserve ignored evidence | in progress | Elaborator and PSSS archives/manifests verified; integration archive waits for the exact merge-commit identity; all sources remain intact. |
+| 6. Commit and fast-forward local main | complete | Merge commit `62e9e10...` has direct parents `e7352ba...` and `1281efe...`; clean local `main` and the integration branch both resolve to it. |
+| 7. Preserve ignored evidence | complete | Elaborator, PSSS, and integration archives/manifests verified; the integration archive records commit `62e9e10...`; all source worktrees remain intact. |
 
 ## Final Commit And Main Advancement
 
-Before committing, inspect status, unstaged diff, staged diff, both-parent merge
-diff, generated ownership, and `git diff --cached --check`. Ensure no ignored
-logs, probes, dependency trees, caches, or assembled output are staged.
+Completed on 2026-08-04. Commit
+`62e9e1009b8f3ccb25c8e8cbf39a1ec68433a363` is the direct-parent merge of
+`e7352ba2493825453d08292fd162121121590dda` and
+`1281efeb4da70b011e7b51846909dba638fa2d84`. Local `main` was cleanly
+fast-forwarded to that commit; the integration branch and worktree remain in
+place. No push, publication, history rewrite, branch deletion, or worktree
+removal occurred.
 
-The final merge commit's direct parents must be exactly `e7352ba...` and
-`1281efe...`. Recheck `/home/user1/emdash1` is clean and still at its expected
-baseline, then run only:
-
-```bash
-git -C /home/user1/emdash1 merge \
-  --ff-only integration/v3.2-parallel-goals
-```
-
-Verify both tips are ancestors of main and both worktree trees match. Do not
-push and do not remove the integration worktree.
+The final pre-commit review covered status, unstaged and staged diffs, the
+both-parent merge diff, generated ownership, and `git diff --cached --check`.
+No ignored logs, probes, dependency trees, caches, or assembled output entered
+the merge commit. The post-fast-forward review confirmed both source tips are
+ancestors of local `main` and that the local-main and integration-worktree
+trees match. The integration worktree was retained, and nothing was pushed.
 
 ## Completion Definition
 

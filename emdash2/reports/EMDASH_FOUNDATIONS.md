@@ -31,6 +31,16 @@ The central idea is to treat categories, functors, transformations, functorial
 families of categories, dependent sums, dependent products, and dependent homs
 as one computational theory.
 
+The current one-way libraries carry that theory into local geometry. They
+develop Cat-valued presheaves, ordinary sieves and sites, least generated
+topologies, and a direct fixed-site Cat-valued sheafification reflector. A
+separate universal-property algebraic route constructs rings, localizations,
+polynomials, and affine chart computations, then packages assumption-explicit
+affine and site-relative schemes and a supplied projective line. Constructed
+Cat-valued sheafification must not be conflated with the supplied
+commutative-ring structure-sheaf and locality capabilities used in those later
+packages.
+
 The notation is intentionally close to dependent type theory:
 
 ```text

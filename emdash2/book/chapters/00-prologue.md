@@ -226,6 +226,14 @@ categories, adjunctions, Yoneda, duality, and saturation; and Chapters
 representability and opposite duality. [Appendix G](#appendix-formal-presentation)
 collects the formal rule schemas and states the metatheoretic boundary.
 
+The third spiral asks how local questions become geometry. Chapters
+[18](#chapter-18)–[20](#chapter-20) pass from presheaves and sieves through
+sites and descent to direct Cat-valued sheafification. Chapters
+[21](#chapter-21)–[24](#chapter-24) develop universal-property algebra and
+affine localization, place the invertibility sieve before any representing
+open, and assemble site-relative scheme and supplied projective-line
+presentations without concealing their hypotheses.
+
 The larger aim is not merely to calculate one hom. It is to show how a type
 theory can let groupoidal equality and noninvertible arrows coexist, interact,
 and compute—without quietly turning one into the other.

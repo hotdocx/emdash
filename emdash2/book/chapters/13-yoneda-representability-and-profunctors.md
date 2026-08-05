@@ -51,18 +51,10 @@ y:\mathcal A\longrightarrow
 [\mathcal A^{\mathrm{op}},\mathsf{Set}].
 $$
 
-The active one-way library now exposes the Cat-valued ambient facade
-`Psh_cat(A)` and its object classifier `Psh(A)`. Runtime objects and maps use
-the existing directed-family hierarchy over $\mathcal A^{\mathrm{op}}$, and
-restriction along $F:\mathcal A\to\mathcal B$ is the existing family
-pullback along $F^{\mathrm{op}}$. The transparent `yoneda_psh_func(A)` now
-names `hom_con_int(id_A)`, so its value at $a$ computes to the Cat-valued
-representable $\operatorname{Hom}_{\mathcal A}(-,a)$ and its action computes
-pointwise by postcomposition. This names the embedding functor and its checked
-action; it does not yet assert pointwise discreteness or package the general
-Cat-valued Yoneda equivalence or full-faithfulness theorem.
-
-The same one-way module constructs the restriction-oriented arrow total
+The active formal development also lifts this picture from sets to
+Cat-valued presheaves. Its Yoneda presheaf evaluates to the represented hom,
+and restriction reuses the existing pullback of directed families. Gathering
+all arrows into $a$ produces the restriction-oriented total
 
 $$
 \operatorname{Into}^{-}_{\mathcal A}(a)
@@ -70,34 +62,17 @@ $$
        \operatorname{Hom}_{\mathcal A}(x,a)
 $$
 
-and defines the conventional slice $\mathcal A/a$ as its opposite. A
-`HigherSieve` on $a$ is a Cat-valued family on this restriction total,
-equivalently a Cat-valued presheaf on the conventional slice. This is not yet
-an ordinary sieve. The downstream one-way sieve module defines a native
-subterminal category by proposition-valued objects together with exact
-groupoidality, and defines `Sieve(a)` by requiring every value of a
-`HigherSieve(a)` to be subterminal. This retains the existing higher-sieve
-action and merely adds proposition-valued evidence; pullback is the existing
-classifier action with that evidence selected at the postcomposed arrow.
+whose opposite is the conventional slice $\mathcal A/a$. A Cat-valued family
+on this total is a higher sieve; requiring its values to be subterminal gives
+an ordinary sieve. [Chapter 18](#chapter-18) begins the local-to-global spiral
+by developing these constructions as mathematics, separating witness-bearing
+higher sieves from proposition-valued membership, and explaining why sieve
+pullback is the natural language of a changing probe.
 
-The ordinary-sieve classifier `Omega` is still not active. Its fibres have not
-yet been proved set-valued, and reconstructing retained evidence prevents
-identity pullback from being package eta by raw reduction. Topology and stack
-descent remain further, independent boundaries.
-
-The next one-way layer now crosses only the direct topology boundary. Sieve
-membership is the proposition-valued object classifier of a subterminal
-value. A direct coverage assigns a packaged proposition to each ordinary
-sieve, and a `GrothTopology` stores maximality, pullback stability, and local
-character. The maximal ordinary sieve is the constant literal
-`Path_cat(Unit)` family; its pullback computes without identifying that
-category with the distinct `Terminal_cat` head. The generic chaotic topology,
-in which every sieve covers, supplies a checked model on every category and on
-the terminal category in particular.
-
-This does not construct `Omega`, freely saturate generating cover families,
-or supply sheafification/descent. Those remain separate classification,
-higher-inductive closure, and universal-property boundaries.
+This bridge does not strengthen the Yoneda theorem claimed in the present
+chapter. A general Cat-valued Yoneda equivalence and full-faithfulness theorem
+remain separate from the checked representable action and shaped co-Yoneda
+calculation below.
 
 There is a covariant mirror
 

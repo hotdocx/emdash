@@ -7,6 +7,13 @@ dependent type theory with categories, directed families, functors,
 transfors, and higher cells, using cut-elimination-inspired operations so
 that functoriality and naturality can compute.
 
+The active development now carries that calculus into local geometry:
+Cat-valued presheaves, ordinary sieves and sites, a direct fixed-site
+sheafification construction, universal-property commutative algebra, affine
+geometry organized by the invertibility sieve $D_R(f)$, site-relative
+schemes, and a supplied projective-line presentation. These layers keep
+representability, locality, and construction hypotheses explicit.
+
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
 of global metatheory.
@@ -90,6 +97,13 @@ external naturality evidence when no internal construction owns it.
 - The remaining Lambdapi library has not been proven mechanically
   transferable as one batch. Bulk transfer qualification is deliberately
   deferred to a future goal.
+- Direct cover completion constructs a fixed-site Cat-valued sheafification
+  reflector. A commutative-ring lift, left exactness, and base-change
+  semantics are not yet derived from it.
+- The affine and site-relative scheme layers retain supplied structure-sheaf
+  and locality capabilities. The projective-line package retains its global
+  object and actual overlap; representation-independent schemes, graded
+  `Proj`, and general projective space remain open.
 - Groupoidal specialization/closure and general normalization, confluence,
   canonicity, consistency, and semantic soundness for the combined calculus
   are not claimed.

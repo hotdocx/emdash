@@ -3,7 +3,7 @@ title: Functorial Type Theory: An Executable Architecture for Directed Dependenc
 authors: The emdash contributors
 edition: overview research article
 status: research draft
-date: 2026-07-30
+date: 2026-08-05
 ---
 
 > **Research-draft status.** This article describes the checked emdash v3.2
@@ -28,9 +28,10 @@ dependent $\\lambda\\Pi$ framework supplies a complementary outer logical
 layer. A small TypeScript implementation mirrors this separation: an explicit
 locally nameless dependent Core checks and evaluates terms, while a typed
 categorical frontend compiles usable binder notation to existing internal
-categorical owners.
+categorical owners, and bounded typed declarations expand into ordinary
+logical-framework declarations and rules.
 
-Two computations summarize the architecture. First, for
+Three computations summarize the architecture. First, for
 $p:x\\to y$ and $q:y\\to z$, emdash forms the outgoing-arrow category
 
 $$
@@ -42,19 +43,27 @@ and a canonical arrow
 $\\rho_{x,y,p}:(x,\\mathrm{id}_x)\\to(y,p)$. Transporting a motive along
 $\\rho$ gives a synthetic arrow-induction principle. Applied to the
 representable composition motive, its checked normal form is $q\\circ p$.
-Second, the TypeScript frontend accepts representative ordinary, natural,
-displayed-functorial, and displayed-natural abstractions. It recursively
-factors variable occurrences through weakening, pairing, evaluation,
-reindexing, totalization, and internal action owners, then emits
-backend-neutral explicit Core. The same checker accepts the result at object
-and arrow level; unsupported factorizations fail closed.
+Second, for a ring map out of $R$, the condition that $f\\in R$ becomes
+invertible defines an ordinary sieve $D_R(f)$ before any representing open is
+chosen. A supplied localization represents that sieve pointwise, finite
+unit-ideal families generate the big Zariski topology, and a separate direct
+cover completion constructs a Cat-valued sheafification reflector from
+return, cover-indexed glue, and silent coherence. Third, the TypeScript
+frontend accepts ordinary, natural, displayed-functorial, and
+displayed-natural abstractions. It recursively factors variable occurrences
+through weakening, pairing, evaluation, reindexing, totalization, and
+internal action owners, then emits backend-neutral explicit Core. The same
+checker accepts the result at object and arrow level; unsupported
+factorizations fail closed.
 
 The result is a working research artifact rather than a completed proof
 assistant. It demonstrates a coherent design across mathematical kernel,
 dependent logical framework, elaboration, checked computation, and a
-client-side reviewer. Arbitrary displayed depth, whole-library transfer,
-complete groupoidal closure, and global metatheory remain explicit research
-boundaries.
+client-side reviewer. Arbitrary dependency and variance graphs,
+whole-library transfer, complete groupoidal closure, a commutative-ring lift
+and left-exactness theorem for constructed sheafification,
+representation-independent schemes, and global metatheory remain explicit
+research boundaries.
 
 # 1. Why Categorical Variables Should Compute
 
@@ -103,19 +112,33 @@ universe supplies equality, J, dependent pairs, and dependent products as
 well, but systematically relating every directed construction to its
 groupoidal specialization is a later programme.
 
+The same order of construction extends beyond binder syntax. A local
+condition should first be stable under every change of stage; only afterward
+should one ask whether one object represents all successful probes. Thus the
+condition that a section becomes invertible is first an ordinary sieve. In
+affine geometry a localization may represent it, and finite families of such
+charts may generate a topology. Likewise, sheafhood is first a property of
+restriction from whole sections to whole matching families; a sheafification
+reflector is a further construction. These distinctions let categorical
+semantics carry computation without importing an abstract modal layer or
+silently assuming the classical existence theorems suggested by familiar
+notation.
+
 The central claim of this overview is deliberately narrower than a
 foundational completeness theorem:
 
-> A substantial directed dependent calculus, a minimal outer dependent
-> framework, and a recursive categorical-binder frontend already compose into
-> one executable architecture.
+> A substantial directed dependent calculus, a sieve-to-sheafification
+> application, a minimal outer dependent framework, and a recursive
+> categorical-binder frontend already compose into one executable
+> architecture.
 
 The rest of the paper makes that claim concrete. Sections 2 and 3 describe the
 two layers and the directed dependent constructors. Sections 4 and 5 derive
 synthetic arrow induction and its composition normal form. Section 6 explains
 how ordinary and displayed categorical binders compile. Section 7 follows the
 result through explicit Core to the browser artifact. Sections 8 and 9 state
-the broader research programme and its present limits.
+the local-to-global geometric application and the broader programme's present
+limits.
 
 # 2. A Two-Layer Executable Architecture
 
@@ -133,22 +156,17 @@ variation metadata are retained, and terms can be traversed, frozen,
 serialized, and compared structurally. A one-shot scoped builder restores
 HOAS-like authoring ergonomics without storing JavaScript closures in Core.
 
-The architecture is:
+The two input paths meet at one generic checker:
 
-```text
-text or typed TypeScript surface
-        ↓
-scope, expected types, and contextual occurrence analysis
-        ↓
-typed categorical wiring / abstraction
-        ↓
-backend-neutral explicit emdash Core
-        ↓
-small TypeScript dependent-LF checker and evaluator
-        └──────── optional deterministic Lambdapi conformance oracle
+| Input | Deterministic expansion before checking |
+| --- | --- |
+| text or typed TypeScript terms | contextual occurrence analysis, typed categorical wiring, and backend-neutral explicit emdash Core |
+| typed host declarations | validated expansion to ordinary LF declarations and rules |
 
-active Lambdapi v3.2 source = mathematical authority
-```
+Both paths are consumed by the small TypeScript dependent-LF checker and
+bounded evaluator. Selected judgments may then be emitted to Lambdapi as a
+deterministic conformance oracle; the active Lambdapi v3.2 source remains the
+mathematical authority.
 
 The outer TypeScript LF includes dependent $\\Pi$, annotated
 $\\lambda$-terms, application, contextual metavariables, transparent
@@ -158,6 +176,16 @@ Lambdapi development. The categorical layer does not add a new checker for
 each owner. Reviewed declarations and runtime or proof-time rules are compiled
 into the generic environment, after which ordinary LF inference, checking,
 conversion, and rewriting process the term.
+
+The declaration branch removes repetition in the outer framework rather than
+adding categorical semantics. One convenience packages already typed
+adjunction data, or a counit and whole hom transpose, as an indexed assumption
+with proof-time agreements. A second expands one unparameterized,
+nonrecursive, single-constructor dependent structure into an opaque carrier,
+constructor, primitive projections, and ordered projection beta rules. Both
+forms disappear before ordinary Core checking. Neither adds a trusted term
+node, a runtime alias, general record eta or elimination, or a new Lambdapi
+owner.
 
 ## 2.1 The outer dependent LF
 
@@ -697,13 +725,11 @@ expected type determines it. This is why `λ^f x. ...`, rather than
 the binder, while the domain annotation is ordinary bidirectional typing
 information.
 
-## 6.1 Application is type-directed
-
-Whitespace application is intentionally neutral in the source. The expression
-`F x` does not itself say whether to use an object component, a capped arrow
-component, a whole hom action, a section evaluation, or a displayed
-component. The resolver combines the inferred type of `F`, the classifier and
-variation of `x`, and the expected result.
+**Type-directed application.** Whitespace application is intentionally neutral
+in the source. The expression `F x` does not itself say whether to use an
+object component, a capped arrow component, a whole hom action, a section
+evaluation, or a displayed component. The resolver combines the inferred type
+of `F`, the classifier and variation of `x`, and the expected result.
 
 | Typed situation | Selected internal reading |
 | --- | --- |
@@ -766,14 +792,13 @@ abstracts after evaluation at a fixed inner object. The third exchanges
 independent variables before evaluation. Each compiles to existing product,
 pairing, evaluation, composition, and exchange owners.
 
-## 6.2 Dependency-aware structural compilation
-
-The compiler treats a context as ordered typed slots plus dependency edges.
-For each abstraction it first lowers the body recursively, then computes how
-the selected slot occurs in the resulting typed tree. Zero, one, or multiple
-uses select weakening, identity-like routing, or contraction/pairing.
-Independent nested slots may be exchanged. A slot that occurs in the type of a
-later slot cannot be exchanged across that dependency.
+**Dependency-aware structural compilation.** The compiler treats a context as
+ordered typed slots plus dependency edges. For each abstraction it first
+lowers the body recursively, then computes how the selected slot occurs in the
+resulting typed tree. Zero, one, or multiple uses select weakening,
+identity-like routing, or contraction/pairing. Independent nested slots may be
+exchanged. A slot that occurs in the type of a later slot cannot be exchanged
+across that dependency.
 
 Displayed contexts add a base classifier to every slot. Extending by
 $a:A[k]$ changes the base from $K$ to $\\Sigma_KA$. A later family must name
@@ -796,13 +821,14 @@ Natural and displayed binders require indexed classifiers rather than an
 external naturality proof. A section component example is:
 
 ```text
-λ^n k : K. (FF k) (s k)
+λ^n k : K. (GG k) ((FF k) (s k))
 ```
 
 Here `s k` is a section value in a fibre and `FF k` is the component of a
-displayed functor. Recursive application elaborates the body through generic
-composition at `Catd_cat K`. Both the object component and the action over a
-base arrow are already owned by the internal displayed construction.
+displayed functor; `GG k` continues the section through a second displayed
+functor. Recursive application elaborates this finite rigid chain through
+generic composition at `Catd_cat K`. Both the object component and the action
+over a base arrow are already owned by the internal displayed construction.
 
 A displayed functorial example composes internal displayed functors:
 
@@ -835,10 +861,18 @@ the total containing their pair. The contextual compiler derives the
 necessary pullbacks and totalizations, while the user writes the variables
 in the same dependency order as an ordinary DTT telescope.
 
-## 6.3 A worked mixed telescope
+The implemented normal form is not limited to the displayed four-slot
+example. It accepts any finite sequence of these canonical dependency levels,
+with finite sibling groups at a level, for the reviewed displayed-functorial
+and displayed-natural constructions. The category resolver also descends
+through any finite number of qualified Hom-category levels over its supported
+roots, and the indexed-section route composes finite rigid chains such as the
+one above. These results do not license arbitrary dependency or variance
+graphs, exchange across a dependency edge, or coherence synthesis outside the
+qualified grammar.
 
-The mixed example is small enough to run in the reviewer but rich enough to
-show the dependency algorithm:
+**A worked mixed telescope.** The mixed example is small enough to run in the
+reviewer but rich enough to show the dependency algorithm:
 
 ```text
 λ^fd (a : A; b : B, c : C; d : D). fibrePair b c
@@ -935,7 +969,7 @@ category-theory implementation.
 
 The string syntax is correspondingly bounded. The adapter parses neutral
 application, annotations, the four binder modes, and the reviewed constructors
-needed by ten examples. It does not parse arbitrary Lambdapi source or every
+needed by twelve source presets. It does not parse arbitrary Lambdapi source or every
 notation in the book. Direct typed TypeScript remains the more complete
 construction surface; both routes converge before checking.
 
@@ -1004,8 +1038,8 @@ compiled runtime data; it neither reads source files nor computes an authority
 digest.
 
 The browser reviewer packages this architecture without adding semantic
-machinery. Its expression panel offers ten checked presets across
-`^f`, `^n`, `^fd`, and `^nd`, editable text, explicit Core, inferred type,
+machinery. Its expression panel offers twelve presets across `^f`, `^n`,
+`^fd`, and `^nd`, with editable text, explicit Core, inferred type,
 structural prerequisites, and source-located rejection. Its evidence panel
 runs the existing outer-LF, ordinary bracket, and genuinely displayed
 dependent witnesses on request. Its Core panel exposes a minimal editable
@@ -1022,51 +1056,213 @@ The artifact boundary is worth stating precisely.
 | Categorical frontend | Recursive compilation of the demonstrated binders to internal owners |
 | Browser reviewer | Reproducible access to the same TypeScript paths, with no server or production Lambdapi process |
 
-This is not a claim that the browser contains the entire Lambdapi
-development. It is a claim that the demonstrated end-to-end path is real:
-surface syntax reaches explicit internal structure, generic checking, and
-computation in the same client an external reviewer can run.
+The browser does not contain the entire Lambdapi development. It establishes
+one real end-to-end path: surface syntax reaches explicit internal structure,
+generic checking, and computation in a client an external reviewer can run.
 
-# 8. A Wider Computational Programme
+# 8. From Invertibility Sieves To Local Geometry
 
-Synthetic arrow induction and binder elaboration are representative
-computations, not the full scope of the kernel. The active categorical
-development also contains a broader calculus built with the same ownership
-discipline.
+Arrow induction began with a family stable under change of endpoint and only
+then extracted a familiar operation from its total category. The same order
+organizes local geometry. A condition is first allowed to vary along every
+probe. Representability by one chart, coverage by a topology, and reflection
+into sheaves are separate constructions. Keeping those stages apart is what
+makes the resulting claims executable rather than mnemonic.
 
-Cat-valued profunctors are represented as directed families over
-$A^{\\mathrm{op}}\\times B$. Representables act by the internal two-sided hom
-action. Endpoint reindexing, fixed-endpoint tensor, co-Yoneda maps, and
-covariant and contravariant implication expose selected computational
-interfaces. Weighted limits are formulated as computational comparisons
-between a weighted-cone profunctor and a representable. Their push and pull
-maps cancel on arbitrary probes; right-adjoint preservation is assembled from
-adjunction mates and comparison composition. Weighted colimits and
-left-adjoint preservation are obtained by opposite normalization rather than
-a duplicate cut calculus.
+## 8.1 The sieve comes before the open
 
-The strict comparison object `DefIso` is characteristic of this style. It
-packages forward and backward categorical maps whose selected cuts compute.
-Public profunctor comparisons reuse it, so theorem-specific push/pull rules do
-not proliferate. A primitive directed join category supplies a further stress
-test: its cross arrows are one internally natural profunctor cell, and its
-recursor computes on both inclusions and the cross cell.
+Let $\\mathcal O$ be a presheaf of commutative rings on a category
+$\\mathcal K$, let $U$ be an object, and let $s\\in\\mathcal O(U)$. Every
+probe $p:V\\to U$ restricts the section to $p^*s\\in\\mathcal O(V)$. Define
 
-At the groupoidal end, the development includes decoded type codes, equality
-and J, dependent pairs and products, path actions, truncation levels, and
-staged equivalence/univalence interfaces. A walking-endomorphism development
-adds a concrete directed normalization cell before extracting equality by
-hom-discreteness. These results make the project more than a collection of
-frontend examples, while also showing why the overview should not pretend to
-finish the theory: several bridges among groupoidal, categorical, and weak
-higher-categorical structure remain research problems.
+$$
+D_U(s)(p)
+  := \\mathsf{Unit}_{\\mathcal O(V)}(p^*s).
+$$
 
-The architectural conjecture is that one internal language can support these
-constructions without a separate coherence mechanism for each feature.
-Generic action owns functoriality and naturality; semantic constructors own
-their projections and computation; elaboration reconstructs structural wiring;
-and normalization exposes observable results. The present artifact supplies
-nontrivial evidence for that conjecture, not its final proof.
+Ring maps preserve units. Hence a witness at $p$ restricts along every
+$q:W\\to V$ to a witness at $p\\circ q$. The successful probes form an
+ordinary sieve on $U$. No decision procedure for invertibility and no
+representing open were needed. Unit evidence is proposition-valued, so the
+sieve is subterminal, while a selected inverse remains available during the
+calculation.
+
+This is the article's organizing geometric reversal: the primary object is
+invertibility's sieve, not invertibility's open. The familiar phrase “the open
+on which $s$ is invertible” silently combines two claims. The first is the
+functorial stability just proved. The second is that all successful probes are
+represented by one object over $U$. The first makes sense on an arbitrary
+site; the second depends on additional geometry.
+
+In a posetal site, a representing open $A\\le U$ satisfies
+
+$$
+p\\in D_U(s) \\quad\\Longleftrightarrow\\quad p\\text{ factors through }A.
+$$
+
+It is therefore the largest open on which $s$ is invertible. Zeuner's
+constructive algebraic geometry [5] organizes the coherent or qcqs case by
+such compact-open supports. The sieve-centered formulation retains that
+account when a compact representative exists, while making the
+representability question explicit when it does not.
+
+For affine geometry take $\\mathbf{Aff}=\\mathbf{CRing}^{\\mathrm{op}}$.
+The generalized points of a ring $R$ at a test ring $S$ are maps $R\\to S$.
+For $f\\in R$ the affine invertibility sieve has components
+
+$$
+D_R(f)(S)
+  =\\sum_{h:R\\to S}\\mathsf{Unit}_S(h(f)).
+$$
+
+Now suppose a localization $\\iota_f:R\\to R[1/f]$ has been supplied by its
+universal property. Composition with $\\iota_f$ sends a map
+$R[1/f]\\to S$ to a $D_R(f)$-point. Conversely, a map $h:R\\to S$ carrying
+$f$ to a unit has a contractible space of factors through $\\iota_f$.
+Selecting its center and using contractibility for uniqueness gives an
+explicit pointwise equivalence
+
+$$
+\\operatorname{Hom}_{\\mathbf{CRing}}(R[1/f],S)
+  \\simeq D_R(f)(S).
+$$
+
+This statement needs no fraction normal form. A quotient, fraction, or
+fixed-image construction may serve as coordinates once it satisfies the same
+factorization problem. The checked result is presently pointwise at every
+test ring; its components retain existing functorial action, but they have not
+been assembled into a new whole presheaf equivalence.
+
+Multiplication computes intersection at the same semantic level. An image of
+$fg$ is a unit exactly when the images of both $f$ and $g$ are units, giving
+$D_R(fg)(S)\\simeq D_R(f)(S)\\cap D_R(g)(S)$ pointwise. A supplied
+localization at $fg$ presents the same question without equating independently
+chosen packages.
+
+## 8.2 From finite covers to a Cat-valued reflector
+
+The next step is coverage. Suppose a chart ring $S$ carries a finite family
+$f_1,\\ldots,f_n$ and coefficients with
+
+$$
+\\sum_i a_i f_i=1.
+$$
+
+After selecting localizations at the $f_i$, the resulting basic chart arrows
+form a witness-rich proposed cover. The witness retains the family,
+coefficients, localization packages, and literal containment in the proposed
+sieve. Coverhood itself should not depend on which presentation was supplied.
+Emdash therefore defines the generated topology as the intersection of all
+Grothendieck topologies accepting the generators. It accepts every retained
+finite presentation, satisfies maximality, pullback stability, and local
+character, and is least among accepting topologies. The construction proves a
+universal property; it does not provide an inductive derivation language or a
+decision procedure for coverhood.
+
+Fix now any site $(\\mathcal K,J)$ and a Cat-valued presheaf $P$. For a sieve
+$R$ on $U$, whole matching families and whole sections are hom-categories
+
+$$
+\\operatorname{Match}_P(R)=\\operatorname{Hom}(\\widehat R,P),
+\\qquad
+\\operatorname{Sect}_P(U)=\\operatorname{Hom}(yU,P).
+$$
+
+Restriction is precomposition with the inclusion
+$\\widehat R\\to yU$. Locality says that this restriction is an equivalence
+for every covering sieve. Sheafification asks for more: construct a local
+presheaf from an arbitrary one, functorially and universally.
+
+The direct cover completion $aP$ is presented by three pieces of categorical
+structure. **Return** is a whole map $\\eta_P:P\\to aP$. **Glue** is a whole
+functor from matching families in $aP$ to sections in $aP$, varying
+functorially over the category of eligible covering questions. **Silent** is
+one path saying that gluing the restriction of a section recovers that
+section. Newly glued data may enter later matching families, so glue is
+recursive; because coefficients are Cat-valued, it must act on arrows between
+matching families as well as on their objects.
+
+This return/glue/silent pattern is conceptually adapted from Pédrot's free
+sheaf construction [6], but it is installed directly in categorical
+semantics. Cover questions, matching and section categories, displayed
+functoriality, and whole paths live inside the functorial calculus hosted by
+the outer logical framework. No separate modal type theory is assumed. The
+constructors are primitive at this categorical-HIT boundary; their
+consequences are proved afterward.
+
+Naturality of the one whole glue functor supplies compatibility with pullback
+of covers. From that compatibility and silent coherence, the opposite
+restriction-after-glue law is derived rather than postulated. A recursor then
+extends every seed $P\\to Y$ into a topology-local target $Y$ across $aP$,
+and categorical-HIT uniqueness gives the whole equivalence
+
+$$
+\\operatorname{Hom}(aP,Y)
+  \\simeq \\operatorname{Hom}(P,Y).
+$$
+
+Consequently direct cover completion assembles a left adjoint
+
+$$
+a:\\operatorname{Psh}_{\\mathbf{Cat}}(\\mathcal K)
+  \\rightleftarrows
+  \\operatorname{Sh}_{\\mathbf{Cat}}(\\mathcal K,J):i,
+\\qquad a\\dashv i,
+$$
+
+whose counit on every sheaf is an omega-equivalence. This is a fixed-site,
+Cat-valued reflector. It does not yet lift the construction to
+commutative-ring-valued presheaves, prove left exactness, or supply a
+base-change theorem.
+
+## 8.3 The precise boundary of the geometric application
+
+The affine chain now has a constructed computational spine. Ring maps give
+generalized probes; unit preservation gives $D_R(f)$; localization represents
+that question pointwise; products compute intersections; finite unimodular
+families generate a big Zariski topology; and the coordinate presheaf computes
+restriction along its charts. The Cat-valued reflector demonstrates that
+sheafification itself can be expressed directly at the layer of categorical
+semantics.
+
+The remaining commitments are deliberately visible. The active affine
+presentation supplies a reflective commutative-ring-valued structure sheaf
+and whole localization locality rather than deriving them from the Cat-valued
+reflector. A global-first, site-relative scheme presentation begins with one
+supplied global ringed object, a covering sieve constructively generated by
+two selected affine charts, and topology-local ring behavior. Whole
+restrictions and a selected chart intersection are inherited from the global
+presheaf instead of copied into an atlas record.
+
+On that literal overlap, polynomial and localization universal properties
+construct the Laurent coordinate changes $t\\mapsto u^{-1}$ and
+$u\\mapsto t^{-1}$. A supplied projective-line package retains the global
+site-relative scheme, its actual selected overlap, and the whole Laurent
+comparison. It is an end-to-end computational capability, not a construction
+of a global object from abstract charts. There is no graded ring interface,
+homogeneous localization, degree-zero construction, `Proj`, general
+projective space, or non-affineness theorem in the active artifact.
+
+## 8.4 The wider programme
+
+Local geometry is one application of a larger normalization discipline.
+Cat-valued profunctors are directed families over
+$A^{\\mathrm{op}}\\times B$; representables act by the internal two-sided hom
+action. Selected tensor, co-Yoneda, implication, and weighted-universal
+interfaces reuse strict comparison objects whose forward and backward cuts
+compute. Right-adjoint preservation of weighted limits is assembled from
+mates and comparison composition, while the colimit theorem is obtained by
+opposite normalization rather than a duplicate calculus.
+
+At the groupoidal end, decoded type codes, equality and J, dependent sums and
+products, truncation levels, staged equivalence interfaces, and the
+walking-endomorphism normalization proof test how directed structure meets
+equality-local reasoning. Together these examples support the architectural
+conjecture: generic action should own functoriality and naturality, semantic
+constructors should own computation, and elaboration should reconstruct
+structural wiring. They are substantial evidence, not a proof that every
+categorical or geometric construction already belongs to one completed
+foundation.
 
 # 9. Research Boundaries
 
@@ -1079,11 +1275,14 @@ formalized.
 The principal open boundaries are:
 
 - **Surface generality.** The categorical text language covers the reviewed
-  examples, not arbitrary book notation, Lambdapi syntax, or every direct
-  TypeScript constructor.
+  twelve-preset profile, not arbitrary book notation, Lambdapi syntax, or
+  every direct TypeScript constructor. The full canonical mathematical
+  surface is intentionally broader.
 - **Displayed depth and variance.** Independent siblings, genuine dependency,
-  a mixed `a; b,c; d` telescope, and selected higher action are implemented.
-  Arbitrary telescope depth, all dependency-aware structural operations,
+  finite canonical dependency levels and sibling groups, qualified finite
+  Hom-category recursion, finite rigid section chains, and selected higher
+  action are implemented. Arbitrary dependency or variance graphs,
+  dependency-edge exchange, unrestricted mixed introduction and currying,
   polarity-directed contravariant lowering, and general displayed-transfor
   coherence are not.
 - **Transfer scale.** Generic transfer engines and varied representative
@@ -1091,6 +1290,12 @@ The principal open boundaries are:
   library has not graduated. Mathematical rules will continue to require
   owner and interaction review even if their representation becomes
   mechanical.
+- **Sheafification and geometry.** Direct cover completion constructs a
+  fixed-site Cat-valued reflector, not a commutative-ring lift, a
+  left-exactness theorem, or base-change semantics. Affine structure-sheaf
+  and locality capabilities remain supplied; schemes are site-relative; the
+  projective-line package is supplied rather than glued from charts; and
+  graded `Proj` and projective space remain future work.
 - **Categorical closure.** General dependent adjunctions
   $\\Sigma_F\\dashv F^*\\dashv\\Pi_F$, full profunctor tensor/coend semantics,
   complete equipment coherence, and semantic collage or dependent elimination
@@ -1127,11 +1332,19 @@ ordinary and displayed variable occurrences compile to explicit internal
 owners and are checked by one generic TypeScript LF, including object and
 arrow behavior.
 
+Sieve-centered geometry exhibits the local-to-global payoff. Invertibility is
+first the stable sieve $D_R(f)$, a localization represents that question
+pointwise, finite certified charts generate a topology, and direct cover
+completion constructs a Cat-valued reflector through whole return, glue,
+silent coherence, recursion, and uniqueness. The boundaries beyond that
+reflector remain as explicit as the construction itself.
+
 The current system is bounded, but the design question has a concrete answer:
 readable binders, explicit Core, checked categorical computation, an
-authoritative Lambdapi kernel, and a client-side reviewer fit into one
-architecture. The remaining work is to extend its mathematical and transfer
-coverage without losing that internalized, normalization-first discipline.
+authoritative Lambdapi kernel, sieve-based local geometry, and a client-side
+reviewer fit into one architecture. The remaining work is to extend its
+mathematical and transfer coverage without losing that internalized,
+normalization-first discipline.
 
 # References
 
@@ -1143,3 +1356,7 @@ coverage without losing that internalized, normalization-first discipline.
    [lambdapi.readthedocs.io](https://lambdapi.readthedocs.io/).
 4. The emdash contributors. *emdash v3.2 Lambdapi and TypeScript Sources*.
    Accompanying computational artifact.
+5. Max Zeuner. *Univalent Foundations of Constructive Algebraic Geometry*.
+   arXiv:2407.17362v1, 2024.
+6. Pierre-Marie Pédrot. “Pursuing Shtuck.” Preprint, 2023. HAL:
+   hal-04251754v1.

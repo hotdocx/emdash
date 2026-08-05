@@ -13,21 +13,34 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parent.parent
 BOOK_MANIFEST = REPO_ROOT / "book" / "book.json"
 EVIDENCE_PATH = REPO_ROOT / "book" / "evidence.json"
+ACTIVE_SOURCE_REGISTRY = REPO_ROOT / "scripts" / "check_metrics.py"
 CLAIM_ID_RE = re.compile(r"^[A-Z][A-Z0-9-]*$")
 EVIDENCE_MARKER_RE = re.compile(r"<!--\s*evidence:([A-Z][A-Z0-9-]*)\s*-->")
+REGISTERED_OWNER_RE = re.compile(
+    r'Path\("(emdash3_2(?:_[A-Za-z0-9_]+)?\.lp)"\)'
+)
 ALLOWED_STATUSES = {
     "checked",
     "formal-consequence",
     "mathematical-development",
     "research-boundary",
 }
-ACTIVE_OWNER_FILES = {
-    "emdash3_2.lp",
-    "emdash3_2_eq1_hom_action.lp",
-    "emdash3_2_eq1_evidence_property.lp",
-    "emdash3_2_nat_arithmetic.lp",
-    "emdash3_2_walking_end_hit.lp",
-}
+
+
+def load_active_owner_files() -> frozenset[str]:
+    """Read the active Lambdapi module registry used by kernel health checks."""
+    registry = ACTIVE_SOURCE_REGISTRY.read_text(encoding="utf-8")
+    owners = set(REGISTERED_OWNER_RE.findall(registry))
+    owners.discard("emdash3_2_checks.lp")
+    if "emdash3_2.lp" not in owners:
+        raise RuntimeError("active source registry does not contain emdash3_2.lp")
+    missing = sorted(owner for owner in owners if not (REPO_ROOT / owner).is_file())
+    if missing:
+        raise RuntimeError(f"active source registry names missing modules: {missing}")
+    return frozenset(owners)
+
+
+ACTIVE_OWNER_FILES = load_active_owner_files()
 
 
 def load_json(path: Path) -> Any:

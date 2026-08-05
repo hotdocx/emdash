@@ -7,6 +7,7 @@ import {
   readJsonFile,
   resolveRepoPath,
 } from './book_manifest.mjs';
+import { deriveNumberedChapterContract } from './book_architecture.mjs';
 import { loadDocumentRegistry } from './document_registry.mjs';
 
 const ANCHOR_RE = /<a\s+id=["']([A-Za-z0-9][A-Za-z0-9_.:-]*)["']\s*><\/a>/g;
@@ -322,11 +323,27 @@ function checkExpansionContract(manifest, issues) {
     issue(issues, manifest.architecture + ': retainedChapterRange must be [1, 8]');
   }
 
-  const numberedSources = manifest.sources.filter((source) => /^chapter-\d+$/.test(source.id));
-  const expectedIds = Array.from({ length: 17 }, (_, index) => 'chapter-' + (index + 1));
-  const actualIds = numberedSources.map((source) => source.id);
-  if (actualIds.join('\n') !== expectedIds.join('\n')) {
-    issue(issues, 'book manifest numbered chapters must be contiguous chapter-1 through chapter-17');
+  const retainedChapterEnd = 8;
+  const chapterContract = deriveNumberedChapterContract(
+    manifest.sources,
+    retainedChapterEnd
+  );
+  if (chapterContract.finalChapterNumber < retainedChapterEnd) {
+    issue(
+      issues,
+      'book manifest numbered chapters must include the retained chapter-1 through chapter-' +
+      retainedChapterEnd + ' range'
+    );
+  }
+  if (!chapterContract.isContiguous) {
+    const finalLabel = chapterContract.finalChapterNumber > 0
+      ? 'chapter-' + chapterContract.finalChapterNumber
+      : 'at least chapter-' + retainedChapterEnd;
+    issue(
+      issues,
+      'book manifest numbered chapters must be ordered and contiguous chapter-1 through ' +
+      finalLabel
+    );
   }
   const manifestById = new Map(manifest.sources.map((source) => [source.id, source]));
   const manifestByPath = new Map(manifest.sources.map((source) => [source.path, source]));
@@ -335,7 +352,8 @@ function checkExpansionContract(manifest, issues) {
     : {};
 
   const retainedTheorems = contract.retainedChapterCentralTheorems;
-  if (!Array.isArray(retainedTheorems) || retainedTheorems.length !== 8) {
+  if (!Array.isArray(retainedTheorems) ||
+      retainedTheorems.length !== retainedChapterEnd) {
     issue(issues, manifest.architecture + ': retainedChapterCentralTheorems must cover Chapters 1-8');
   } else {
     for (const [index, theorem] of retainedTheorems.entries()) {
@@ -357,12 +375,17 @@ function checkExpansionContract(manifest, issues) {
     }
   }
 
-  if (!Array.isArray(contract.chapters) || contract.chapters.length !== 9) {
-    issue(issues, manifest.architecture + ': chapters must contain exactly Chapters 9-17');
+  if (!Array.isArray(contract.chapters) ||
+      contract.chapters.length !== chapterContract.expansionCount) {
+    issue(
+      issues,
+      manifest.architecture + ': chapters must contain exactly Chapters ' +
+      chapterContract.expansionStart + '-' + chapterContract.finalChapterNumber
+    );
   } else {
     const owners = new Set();
     for (const [index, chapter] of contract.chapters.entries()) {
-      const number = index + 9;
+      const number = index + chapterContract.expansionStart;
       const context = manifest.architecture + ':chapters[' + index + ']';
       if (!chapter || typeof chapter !== 'object') {
         issue(issues, context + ': expected an object');

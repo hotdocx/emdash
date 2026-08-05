@@ -38,9 +38,16 @@
    Categories*. Trends in Logic 6. Kluwer Academic Publishers, Dordrecht,
    1999; [DOI 10.1007/978-94-017-1207-1](https://doi.org/10.1007/978-94-017-1207-1).
 
-Items 1–5 and 8 situate the mathematical development; items 6–7 identify the
-proof infrastructure and checked artifact. Citation does not by itself confer
-the book's formal-status label. The exact HoTT source revision, section
-labels, adaptation targets, and license metadata, together with the
-reference-only policy for Došen's book, are recorded in
+9. <a id="ref-zeuner"></a>Max Zeuner. *Univalent Foundations of Constructive
+   Algebraic Geometry*. arXiv:2407.17362v1, 2024.
+   [arXiv record](https://arxiv.org/abs/2407.17362).
+
+10. <a id="ref-pedrot-shtuck"></a>Pierre-Marie Pédrot. “Pursuing
+    Shtuck.” Preprint, 2023. [HAL record](https://inria.hal.science/hal-04251754v1).
+
+Items 1–5 and 8–10 situate the mathematical development; items 6–7 identify
+the proof infrastructure and checked artifact. Citation does not by itself
+confer the book's formal-status label. The exact HoTT source revision and
+Zeuner and Pédrot versions, section maps, adaptation targets, and license metadata,
+together with the reference-only policy for Došen's book, are recorded in
 `book/references/third-party-sources.json`.
