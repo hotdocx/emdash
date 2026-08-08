@@ -1,5 +1,25 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
+> **AI-native workspace/proof continuation (2026-08-08):**
+> [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)
+> is the active living plan for serializable proof plans, stable named goals,
+> deterministic proof-state artifacts, local/remote workspace management, and
+> later explicit dictionary synthesis. It preserves the completed elaborator
+> Core/checker/refiner and treats text syntax and MCP as optional acquisition
+> or transport adapters rather than semantic prerequisites. AI-PROOF-1 and
+> AI-PROOF-2, AI-WORKSPACE-0, the browser-safe AI-WORKSPACE-1A declaration
+> graph, AI-WORKSPACE-1B1 exact-closure proof attachment, and the
+> AI-WORKSPACE-1B2A pinned same-module fragment chain are final-green, as is
+> the AI-WORKSPACE-1B2B exact cross-module fragment graph. AI-REMOTE-1A is now
+> also final-green: canonical graph-source locks, supplied-text SHA-256
+> materialization, exact local reconstruction/compilation, compiled-snapshot
+> verification, and immutable fully revalidated offline cache data passed
+> 1,486 tests across 224 suites with zero failures. AI-REMOTE-1B's read-only
+> exact-consumer audit is the active continuation; real transport, credentials,
+> and persistent cache stores remain separately gated. Recent aggregate
+> evidence must be reused unless an exact changed shared boundary strictly
+> requires another long run.
+>
 > **Current cross-layer integration boundary (2026-08-04):**
 > The completed elaborator tip `e7352ba` is being joined with the completed
 > presheaves/sites/schemes tip `1281efe` under

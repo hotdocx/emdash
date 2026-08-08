@@ -23,6 +23,23 @@ Status: preserved living architecture-qualification plan; detailed
 synchronized status and implementation ledger follow below, but remaining
 bulk rows are deferred/out of scope for the current reader-facing persistent
 goal and require a future explicit goal
+AI-Native-Continuation:
+[`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)
+governs the 2026-08-08 source/workspace/proof-document continuation above the
+completed explicit-Core/checker/refiner boundary. It does not resume the
+deferred bulk-transfer rows or change this plan's mathematical qualification
+claims. AI-PROOF-1, AI-PROOF-2, AI-WORKSPACE-0, AI-WORKSPACE-1A, and
+AI-WORKSPACE-1B1 exact-closure proof attachment are final-green there, as is
+the AI-WORKSPACE-1B2A pinned same-module fragment chain. The exact
+AI-WORKSPACE-1B2B cross-module fragment graph is also final-green after a
+1,476-test, 223-suite zero-failure aggregate. AI-REMOTE-1A is final-green as
+well: locked canonical graph-source materialization, expected compiled-
+snapshot verification, and immutable revalidated offline cache data passed
+the required 1,486-test, 224-suite zero-failure shared-boundary aggregate.
+AI-REMOTE-1B's exact-consumer audit is the active continuation; real transport,
+credentials, and persistent cache stores remain separately gated. Carry
+forward these aggregate results for unchanged boundaries rather than rerunning
+them for reassurance.
 Human-Direction: after approving H-DTTLF-03/D-DTTLF-001, the user requested a
 careful clarification of whether the final architecture was already settled.
 On 2026-07-24 the user then directed that we gather a varied set of

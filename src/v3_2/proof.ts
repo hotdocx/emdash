@@ -68,7 +68,8 @@ const formatMode = (
  * to that backend.
  */
 export function formatCoreProofExpression(
-    expression: KernelExpression
+    expression: KernelExpression,
+    metaName?: (identity: KernelMetaIdentity) => string | undefined
 ): string {
     switch (expression.tag) {
         case 'universe':
@@ -78,35 +79,45 @@ export function formatCoreProofExpression(
         case 'bound':
             return `#${expression.index}`;
         case 'meta':
-            return `?m${expression.identity.index}[` +
+            return `?${metaName?.(expression.identity) ??
+                `m${expression.identity.index}`}[` +
                 expression.spine
-                    .map(formatCoreProofExpression)
+                    .map(item => formatCoreProofExpression(item, metaName))
                     .join(', ') +
                 ']';
         case 'application':
             return `${expression.owner}(` +
                 expression.arguments.map(argument =>
                     `${argument.plicity}:` +
-                    formatCoreProofExpression(argument.value)
+                    formatCoreProofExpression(argument.value, metaName)
                 ).join(', ') +
                 ')';
         case 'call':
-            return `${formatCoreProofExpression(expression.callee)}(` +
+            return `${formatCoreProofExpression(
+                expression.callee,
+                metaName
+            )}(` +
                 expression.arguments.map(argument =>
                     `${argument.plicity}:` +
-                    formatCoreProofExpression(argument.value)
+                    formatCoreProofExpression(argument.value, metaName)
                 ).join(', ') +
                 ')';
         case 'pi':
             return `Pi ${expression.binder.name}` +
                 `[${formatMode(expression.binder.mode)}] : ` +
-                `${formatCoreProofExpression(expression.binder.type)}. ` +
-                formatCoreProofExpression(expression.body);
+                `${formatCoreProofExpression(
+                    expression.binder.type,
+                    metaName
+                )}. ` +
+                formatCoreProofExpression(expression.body, metaName);
         case 'lambda':
             return `lambda ${expression.binder.name}` +
                 `[${formatMode(expression.binder.mode)}] : ` +
-                `${formatCoreProofExpression(expression.binder.type)}. ` +
-                formatCoreProofExpression(expression.body);
+                `${formatCoreProofExpression(
+                    expression.binder.type,
+                    metaName
+                )}. ` +
+                formatCoreProofExpression(expression.body, metaName);
         default: {
             const exhaustive: never = expression;
             return exhaustive;

@@ -242,6 +242,178 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
         assert.equal(closure.size >= 30, true);
     });
 
+    it('keeps AI proof documents Node-free and the CLI outside', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/ai_proof_demo.ts'
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_demo.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/proof_document.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/proof_plan.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/checker.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+    });
+
+    it('keeps the declaration workspace graph Node-free', () => {
+        const closure = collectLocalClosure('src/v3_2/lf_workspace.ts');
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_workspace.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_compiler.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_visibility.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_declarations.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_acquisition.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+    });
+
+    it('keeps exact-closure proof attachment Node-free', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/lf_workspace_proof.ts'
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_workspace_proof.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_workspace.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/proof_document.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/checker.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_acquisition.ts')),
+            false
+        );
+    });
+
+    it('keeps exact same-module fragment workspaces Node-free', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/lf_fragment_workspace.ts'
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_fragment_workspace.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_mixed.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_runtime.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_proof.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_acquisition.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+    });
+
+    it('keeps exact cross-module fragment graphs Node-free', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/lf_fragment_module_workspace.ts'
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_fragment_module_workspace.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_fragment_workspace.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_visibility.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_acquisition.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+    });
+
+    it('keeps remote lock reconstruction browser-safe and hashing outside', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/lf_remote_workspace_contract.ts'
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_remote_workspace_contract.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_fragment_module_workspace.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_remote_workspace.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_acquisition.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+    });
+
     it('targets a portable static project-subpath build', () => {
         const viteConfig = readFileSync(
             'emdash-template/vite.config.ts',
