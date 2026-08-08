@@ -5,8 +5,10 @@ Plan-ID: TS-EMDASH-AI-NATIVE
 Status: active living proposal and implementation ledger; AI-PROOF-1,
 AI-PROOF-2, AI-WORKSPACE-0, AI-WORKSPACE-1A, and AI-WORKSPACE-1B1 are
 complete; AI-WORKSPACE-1B2A and AI-WORKSPACE-1B2B are final-green;
-AI-REMOTE-1A is final-green; the exact-consumer audit for AI-REMOTE-1B is the
-only in-progress slice
+AI-REMOTE-1A is final-green; AI-REMOTE-1B0's exact-consumer audit is complete;
+the TypeScript-only mounted-workspace/cache adapter AI-REMOTE-1B1 is
+final-green; AI-REMOTE-1B2's command/template exact-consumer audit is the only
+in-progress slice
 Baseline: `5027d5aabca191c088dfd9757a0bb8df4cb04a34` on local `main`
 Depends-On:
 [`TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md),
@@ -18,23 +20,16 @@ or product surface; this plan adds an AI-native source/workspace/proof layer
 above them
 Persistent-Goal-Workflow:
 [`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./PERSISTENT_GOAL_GIT_EXPERIMENTATION.md)
-Git-Boundary: the initial tranches were authorized only as uncommitted
-plan-scoped changes and therefore remain in the current `main` worktree. On
-2026-08-08 the user granted standing authority, for later unattended
-continuations of this persistent goal, to self-approve a frozen proposed
-tranche and to create rollback-safe local checkpoints under the persistent-
-goal Git SOP. Before using that authority, establish and audit the dedicated
-goal branch/worktree required by the SOP without discarding or absorbing
-current changes; do not retroactively checkpoint this dirty `main` worktree.
-The standing authority includes only the local branch/worktree and validated
-checkpoint commits required by that workflow. It does not authorize push,
-merge, PR, publication, release, deployment, history rewriting, cleanup, or
-repurposing the designated `~/emdash1` main worktree without a clean topology
-transition. Existing history and every other worktree must be preserved.
-For the completed AI-PROOF/AI-WORKSPACE/AI-REMOTE-1A tranche specifically,
-the user then authorized one reviewed local checkpoint on the dedicated goal
-branch and a fast-forward merge of that checkpoint into local `main`. This is
-not standing authority to push or to merge later checkpoints automatically.
+Git-Boundary: completed AI-PROOF/AI-WORKSPACE/AI-REMOTE-1A work is preserved
+at local checkpoint `a3ba93a0fcc95434f411d94deca042f47b735c3a` on
+`goal/typescript-emdash-ai-native`; the user-authorized one-time fast-forward
+placed the same checkpoint on local `main`. Continuation work is again on the
+clean dedicated goal branch in the `~/emdash1` worktree. The user's standing
+unattended authority includes self-approval of a frozen plan tranche and
+rollback-safe local checkpoint commits after the persistent-goal Git SOP is
+satisfied. It does not authorize another merge, push, PR, publication,
+release, deployment, history rewriting, cleanup, branch deletion, or worktree
+removal. Existing history and every other worktree must be preserved.
 
 ## Executive Decision
 
@@ -694,10 +689,11 @@ AI-WORKSPACE-1B2B is final-green. It:
 
 The audit partitions AI-REMOTE-1. AI-REMOTE-1A is final-green: it owns locked
 canonical graph-source materialization and an immutable offline cache-entry
-format without performing transport or storage. The only in-progress work is
-AI-REMOTE-1B's read-only exact-consumer audit; real fetch and filesystem/
-platform cache adapters remain separately gated until that audit freezes a
-bounded contract.
+format without performing transport or storage. AI-REMOTE-1B0's platform
+consumer audit and AI-REMOTE-1B1's TypeScript-only mounted-file/immutable-
+cache adapter are final-green. The only in-progress work is AI-REMOTE-1B2's
+read-only command/template consumer audit. Real network fetch, authentication,
+and platform HTTP/MCP adapters remain separately gated.
 
 - define remote identity separately from content location;
 - fetch outside checking;
@@ -742,7 +738,11 @@ Only one row may be in progress in this worktree.
 | AI-WORKSPACE-1B2B | complete | AI-WORKSPACE-1B2A | Fragment chains compose through exact source-node identities, multi-provider dependency interfaces, explicit dependency runtimes, stable topological order, and portable local snapshots. |
 | AI-REMOTE-1 | partitioned | AI-WORKSPACE-1B2B | Separate pure locked materialization/offline cache data from real transport and persistent cache ownership. |
 | AI-REMOTE-1A | complete | AI-WORKSPACE-1B2B | Exact content lock plus canonical graph-source reconstruction, local compilation, compiled-snapshot verification, and immutable offline cache entry; no fetch or store. |
-| AI-REMOTE-1B | in progress (exact-consumer audit only) | AI-REMOTE-1A plus exact hosted/local consumer | Select and measure one real local/hosted workspace consumer, then freeze the smallest transport/cache-store adapter contract without granting locations, credentials, or mutable cache entries proof authority. No adapter implementation is yet approved. |
+| AI-REMOTE-1B | partitioned | AI-REMOTE-1A plus exact hosted/local consumer | Separate the measured platform boundary, a TypeScript-only mounted-file/cache-store adapter, and any later authenticated network adapter. |
+| AI-REMOTE-1B0 | complete | AI-REMOTE-1A plus `~/closerfans` workspace runtime | The exact GetPaidX/LastRevision/CloserFans consumer and its mounted-project, persistent-data, Git-snapshot, browser/MCP, and authentication boundaries are measured without changing either repository. |
+| AI-REMOTE-1B1 | complete | AI-REMOTE-1B0 | Fixed canonical lock/source files under explicit mounted roots are verified by TypeScript, installed under an identity-derived atomic no-replace cache key, and fully reverified offline. |
+| AI-REMOTE-1B2 | in progress (exact-consumer audit only) | AI-REMOTE-1B1 plus exact command/template consumer | Measure the existing command seam and one mounted-template workflow, then freeze only the smallest agent-facing command/file contract; no implementation is yet approved. |
+| AI-REMOTE-1B3 | pending | stable authenticated/public transport consumer | If a real consumer requires it, freeze a separate supplied-byte HTTPS/platform adapter with explicit timeout, redirect, authentication, and retry policy; signed URLs remain ephemeral acquisition inputs. |
 | AI-SYNTH-0 | pending | exact user-facing consumer | Unification, proof rules, structure metadata, and candidate instance semantics are audited and an exact resolver contract proposed. |
 | AI-SYNTH-1 | pending | AI-SYNTH-0 plus review | Bounded scoped synthesis produces explicit checked Core dictionaries with traces and ambiguity errors. |
 | AI-PAPER-1 | pending | AI-PROOF-2, AI-WORKSPACE-1B2B | One canonical paper/diagram/proof workspace supports agent/browser editing and checked snapshots. |
@@ -802,6 +802,12 @@ Only one row may be in progress in this worktree.
 | D-AI-NATIVE-048 | accepted by direct user direction | Reuse recent green aggregate evidence for every unchanged boundary. Run another long repository aggregate only when the exact diff changes a shared boundary and the repository SOP strictly requires it; focused and nearest tests are the normal loop. |
 | D-AI-NATIVE-049 | accepted by direct user direction | In an unattended continuation, the agent may approve a frozen proposed tranche itself and continue. It may make local rollback-safe checkpoint commits only after a clean transition to the dedicated goal branch/worktree and every checkpoint condition in the Git SOP; no external Git or publication mutation is implied. |
 | D-AI-NATIVE-050 | accepted by direct user direction for this checkpoint only | Commit the completed current AI-native tranche on its dedicated local goal branch, then fast-forward local `main` to the exact reviewed checkpoint while retaining the branch as recovery evidence. Do not infer push or later merge authority. |
+| D-AI-NATIVE-051 | accepted after exact-consumer audit | CloserFans, GetPaidX, and LastRevision are surfaces of the single `~/closerfans` platform repository. That platform owns sessions, authentication, mounted workspace transport, attachment transport, source authorization, Git snapshots, and publication; emdash must not duplicate those concerns inside proof semantics. |
+| D-AI-NATIVE-052 | accepted after exact-consumer audit | The first real consumer is an in-container AI agent with persistent `/work/project` and `/work/data` mounts. Its first emdash adapter consumes fixed files below caller-supplied absolute roots; platform HTTP/MCP APIs are not the semantic or storage interface. |
+| D-AI-NATIVE-053 | accepted and qualified by AI-REMOTE-1B1 after direct user clarification | AI-REMOTE-1B1 uses only the self-contained TypeScript backend. It reconstructs, checks, compiles, and revalidates backend-neutral explicit Core locally and neither invokes nor requires Lambdapi. The architecture continues to admit Lambdapi/emdash as a separately gated optional backend and conformance oracle; the present focus does not remove that route. |
+| D-AI-NATIVE-054 | accepted and qualified by AI-REMOTE-1B1 | The persistent cache key is SHA-256 of the canonical artifact-identity serialization. The store never accepts a caller-selected cache key, never stores compiled process objects, and never treats a path, mirror, timestamp, ETag, or observed digest as authority. |
+| D-AI-NATIVE-055 | accepted and qualified by AI-REMOTE-1B1 | Cache population uses a same-directory, fsynced temporary file and an atomic no-replace hard-link installation. Existing entries are fully reverified and byte-compared, never overwritten; concurrent identical population converges, while conflicts and symlinks fail closed. |
+| D-AI-NATIVE-056 | accepted and qualified as an AI-REMOTE-1B1 non-effect | AI-REMOTE-1B1 has no fetch, redirect, retry, credential, environment, current-working-directory, Git, MCP, platform API, eviction, mutable cache, background daemon, Lambdapi, or publication behavior. Those concerns remain outer or separately consumer-gated. |
 
 ## AI-PROOF-2 Inventory And Exact Contract
 
@@ -1884,15 +1890,237 @@ Qualification:
   failures, in 1,645,729.955054 ms.
 
 The complete aggregate is durable evidence for this unchanged shared
-boundary and must not be rerun for reassurance. Subsequent AI-REMOTE-1B audit
-and adapter work should use focused and nearest checks unless its exact final
+boundary and must not be rerun for reassurance. The subsequent AI-REMOTE-1B
+audit and adapter rows use focused and nearest checks unless an exact final
 diff independently triggers the repository's strict shared-boundary rule.
 
 No Lambdapi source, kernel/trusted-Core owner, mathematical policy, browser
 product entry, package/dependency/lockfile, filesystem, HTTP client, credential
 path, persistent cache store, platform API, publication surface, or remote
-resource changed. AI-REMOTE-1B begins only as a read-only exact-consumer audit;
-this completion does not itself authorize transport or persistent storage.
+resource changed. At this AI-REMOTE-1A boundary, AI-REMOTE-1B was authorized
+only as a read-only exact-consumer audit; this completion did not itself
+authorize transport or persistent storage.
+
+## AI-REMOTE-1B0 Exact-Consumer Audit And Frozen 1B1 Contract
+
+Date: 2026-08-08
+
+The read-only consumer audit covered the current code and operational reports
+in the single `~/closerfans` platform repository, whose product surfaces
+include CloserFans, GetPaidX, and LastRevision. It found:
+
+- a running GetPaidX workspace already supplies persistent mounted roots:
+  `/work/project` for project source, `/work/data` for non-project persistent
+  data, and `/work/artifact` for hydrated post attachments. Codex runs inside
+  the controller and can use those files directly;
+- the controller's snapshot operation initializes the project Git repository,
+  stages the complete project with `git add -A`, commits a snapshot when dirty,
+  and reports the resulting revision. Emdash therefore need not own hosted Git
+  transport or snapshot lifecycle;
+- current browser and curated MCP source-file operations deliberately admit
+  only the four Arrowgram files `arrowgram.workspace.json`, `paper.md`,
+  `paper.css`, and `diagram.json`. The platform plan explicitly defers moving
+  that allowlist into a generic validated template capability contract;
+- source read/write, diff, build, snapshot, attachment, signed-URL, and publish
+  routes are authenticated platform services. Persisting their bearer tokens,
+  cookies, controller tokens, or ephemeral signed URLs in an emdash lock would
+  cross both the platform security boundary and the AI-REMOTE-1A identity
+  boundary;
+- Arrowgram's accepted file-first precedent is still directly useful: agent
+  and browser edit canonical project files, Git snapshots establish review
+  baselines, and generated publication artifacts remain distinct from editable
+  source; and
+- no current generic GetPaidX source API can yet name emdash files. An emdash
+  template or generic source-capability extension is therefore a later
+  integration consumer, not a prerequisite for an in-container agent that
+  already sees the mounted files.
+
+The selected first consumer is consequently the TypeScript/emdash process run
+by an AI agent inside a mounted workspace. The platform transports and
+snapshots bytes; emdash validates what those bytes mean. This avoids an MCP
+server in the proof loop and also avoids coupling the checker to one hosted
+platform. Local development can exercise the identical adapter by supplying
+ordinary absolute project and data roots.
+
+AI-REMOTE-1B is partitioned as follows:
+
+1. AI-REMOTE-1B0, this audit, is complete and behavior-free.
+2. AI-REMOTE-1B1 owns one mounted-filesystem and immutable-cache-store adapter.
+   It is the only approved implementation row.
+3. AI-REMOTE-1B2 may add an agent command and/or template integration only
+   after 1B1 exposes an executable consumer and the exact command/file surface
+   can be measured.
+4. AI-REMOTE-1B3 reserves authenticated or public network acquisition. It is
+   pending a stable real consumer and does not inherit approval from 1B1.
+
+AI-REMOTE-1B1 freezes this contract:
+
+1. The caller supplies two absolute existing directory roots: a project root
+   and a persistent-data root. They must be canonical, disjoint, and
+   non-overlapping so generated cache state cannot enter the Git-snapshotted
+   project. The adapter never consults the current working directory, `HOME`,
+   environment variables, platform metadata, or a discovery walk. For the
+   first profile it reads exactly
+   `emdash.workspace.lock.json` and `emdash.workspace.source.json` directly
+   below the project root. The first filesystem profile targets the Node/POSIX
+   mounted roots used by the Linux GetPaidX controller and makes no untested
+   cross-platform atomicity claim.
+2. Roots and fixed files are inspected without following symbolic links.
+   Roots must be real directories; lock, source, and cache entries must be
+   regular files. Fixed derived cache components are containment-checked and
+   any symlink, special file, traversal, or non-absolute root fails closed.
+3. The lock file is bounded to 256 KiB, parsed as plain JSON, validated by the
+   existing AI-REMOTE-1A lock constructor, and required to equal the exact
+   canonical lock serialization byte for byte. The canonical source file is
+   bounded to 64 MiB and must have the exact byte size pinned by the lock
+   before it crosses the existing 1A materializer.
+4. The adapter invokes only the TypeScript 1B2B reconstruction/compiler and
+   existing explicit-Core checker/runtime path. It verifies source bytes and
+   SHA-256, reconstructs every graph constructor, compiles locally, and checks
+   the expected canonical compiled-snapshot SHA-256. It does not invoke a
+   Lambdapi executable or emit Lambdapi as a condition of acceptance. This
+   does not retire deterministic Lambdapi/emdash emission or checking as a
+   future optional backend/conformance adapter.
+5. The cache namespace is the fixed
+   `.emdash/cache/lf-remote-workspace-v1` subtree below the supplied data root.
+   The filename is `artifact-<hex>.json`, where `<hex>` is SHA-256 of the exact
+   canonical artifact-identity serialization. No caller or store chooses a
+   semantic key.
+6. A cache file is the exact canonical AI-REMOTE-1A cache-entry serialization.
+   It contains the artifact identity and canonical source text, never compiled
+   classes, callbacks, a trusted observed digest, a location, credentials, or
+   platform state. Its read bound is derived from the locked source bound and
+   the maximum JSON-string expansion plus bounded metadata.
+7. A missing entry is populated through a mode-`0600` temporary regular file
+   in the final cache directory. The adapter writes and fsyncs the complete
+   canonical bytes, then uses an atomic hard-link create to install the final
+   name without replacement. It unlinks the temporary name after success or
+   failure and syncs the containing directory after installation where the
+   filesystem supports it.
+8. If another process wins installation, or an entry already exists, the
+   adapter reads that entry without following symlinks, requires exact
+   canonical encoding, fully re-runs offline 1A verification, and requires its
+   bytes to equal the entry just materialized from project source. It never
+   overwrites, repairs, truncates, or silently quarantines a conflicting cache
+   entry.
+9. Offline checking requires only the canonical project lock plus the derived
+   cache entry. Every offline use repeats lock, cache shape, identity, byte,
+   source-hash, graph reconstruction, TypeScript compilation, and compiled-hash
+   verification. The source project file may be absent. A changed mirror list
+   remains irrelevant because mirrors are not part of artifact identity.
+10. The store returns the verified materialization, canonical resolved paths,
+    derived cache key/path, mode (`source` or `offline`), and cache disposition
+    (`installed` or `verified-existing`) as immutable result data. Errors
+    distinguish roots/paths, bounds, noncanonical lock/cache text, missing
+    offline cache, unsafe file type, install failure, and cache conflict while
+    preserving the existing semantic integrity errors.
+11. Focused tests must prove source-to-cache-to-source-absent offline parity,
+    exact existing-entry reuse, poisoned-entry non-overwrite, concurrent
+    identical population, noncanonical lock rejection, fixed-file symlink
+    rejection, missing offline cache, and absence of fetch/credentials/
+    Lambdapi/ambient-root behavior.
+12. This row adds no public barrel export, main test-runner import, package,
+    dependency, browser closure, kernel file, or platform-repository edit. Its
+    tests extend the already registered remote-workspace suite. Focused tests,
+    workspace setup, typecheck, changed-file lint, source-boundary scans, and
+    diff hygiene are proportional; the recorded 1,486-test aggregate is reused
+    because its shared boundary is unchanged.
+
+Rejection conditions are concrete. Revise or stop 1B1 if the TypeScript
+materializer cannot rebuild from the fixed mounted files; if correct atomic
+no-replace behavior requires mutable cache authority; if the platform in fact
+requires emdash to retain credentials; if cache validation would trust stored
+compiled state; or if a proposed implementation needs current-directory,
+environment, network, Git, MCP, Lambdapi, or background-service state.
+
+This exact contract is self-approved under D-AI-NATIVE-049 after the clean
+`a3ba93a` checkpoint and topology audit. Approval is limited to AI-REMOTE-1B1
+source, focused tests, living-plan synchronization, proportional validation,
+and a rollback-safe local goal-branch checkpoint after all gates pass. It does
+not approve AI-REMOTE-1B2/1B3, changes in `~/closerfans`, another merge to
+`main`, a push, or deployment.
+
+## AI-REMOTE-1B1 Completion Record
+
+Date: 2026-08-08
+
+Hypothesis: an AI agent in a GetPaidX-style mounted workspace can verify one
+locked emdash graph, populate a persistent immutable cache safely under
+concurrency, and rebuild offline using only TypeScript/emdash, without moving
+platform authentication, transport, Git, or publication into proof authority.
+
+Result: accepted for the bounded Node/POSIX mounted-file and immutable-cache
+adapter. The optional Lambdapi/emdash backend route remains available but is
+not invoked or required by this profile.
+
+Implementation:
+
+- added Node-owned `src/v3_2/lf_remote_workspace_store.ts` with profile
+  `emdash-lf-mounted-remote-workspace-store-v1`. Its only input is an exact
+  plain record containing canonical absolute, disjoint project and data roots;
+  it accepts no extra ambient state;
+- the adapter reads only `emdash.workspace.lock.json` and
+  `emdash.workspace.source.json` immediately below the project root. It opens
+  fixed files without following final symlinks, rejects non-regular files and
+  noncanonical roots, checks exact UTF-8, bounds lock/source bytes, and requires
+  exact canonical lock text;
+- the source path feeds the existing AI-REMOTE-1A TypeScript materializer. The
+  materializer repeats source byte/SHA-256 checks, canonical graph
+  reconstruction, explicit-Core TypeScript compilation/checking, and expected
+  compiled-snapshot SHA-256 verification;
+- the store key is SHA-256 of canonical artifact identity and the fixed cache
+  path is `.emdash/cache/lf-remote-workspace-v1/artifact-<hex>.json` below the
+  supplied data root. Mirrors and lock revisions do not perturb this key;
+- cache text is the existing canonical immutable cache-entry format. A missing
+  entry is written to a mode-`0600` same-directory temporary regular file,
+  fsynced, then exposed through an atomic hard-link create that cannot replace
+  an existing name. Cooperative concurrent writers converge on the exact same
+  bytes;
+- every existing or concurrently installed entry is opened without following
+  its final symlink, bounded, canonically parsed, fully recompiled/reverified,
+  and byte-compared with current verified source. Invalid or different entries
+  produce a cache conflict and remain untouched;
+- offline materialization reads the canonical lock and derived cache only. It
+  does not create a missing directory or entry and succeeds after the project
+  source file is removed; changing only mirror hints preserves the same cache
+  key and result; and
+- the adapter exports no browser API and was deliberately not added to the
+  public v3.2 barrel or the main test-runner imports. It imports Node crypto,
+  path, and filesystem primitives only; there is no network, process launch,
+  credential/environment lookup, current-directory discovery, Git, MCP,
+  Lambdapi, eviction, background service, or platform-repository behavior.
+
+Durable tests extend the already registered
+`tests/v3_2_lf_remote_workspace_tests.ts` suite. They cover first install,
+source-absent offline parity, mirror-independent key reuse, exact existing
+entry reuse, poisoned-entry non-overwrite, concurrent identical population
+with no temporary debris, noncanonical lock and source-size rejection, source
+and cache symlinks, read-only offline miss, explicit/disjoint roots, extra
+ambient-field rejection, immutable result data, and the exact non-effect
+profile.
+
+Qualification:
+
+- the focused AI-REMOTE-1A/1B1 file passed 15 tests across two suites with zero
+  failures;
+- the nearest TypeScript workspace/fragment/visibility/runtime/proof/mixed/
+  acquisition/browser matrix passed 108 tests across 13 suites: 106 active
+  passes, two intentional Lambdapi opt-in skips, and zero failures;
+- workspace setup, root TypeScript typecheck, changed-file ESLint, forbidden
+  network/process/environment/current-directory scan, and diff hygiene passed;
+  and
+- no public barrel, main runner, package/workspace setup, browser closure,
+  generic LF compiler/checker/runtime, kernel, or publication boundary changed.
+  Under D-AI-NATIVE-048 and the repository's proportional-validation rule, the
+  recorded 1,486-test aggregate is carried forward and was not repeated.
+
+No file in `~/closerfans` changed. No Lambdapi check was required because the
+row neither changes nor depends on current kernel names and executes only the
+already qualified TypeScript backend. AI-REMOTE-1B2 now begins as a read-only
+audit of the existing `./scripts/emdash` command seam, management-code shape,
+and one mounted template/agent consumer. It must freeze a separate exact
+contract before any command, public export, template, platform, or backend
+adapter implementation.
 
 ## AI-PROOF-2 Completion Record
 
@@ -2115,18 +2343,19 @@ Decision consequences:
 | Stable serialization | repeat-run byte equality, no `symbol`, no raw session object/meta identity, stable named cross-goal references |
 | Public barrel/test runner | one complete `./scripts/pnpmw run check:ts` only after a bounded tranche actually changes this shared behavior; carry the result forward for unchanged boundaries |
 | Module/workspace manager | focused graph/snapshot/invalidation tests plus nearest transfer/module suites; complete `check:ts` only at a newly changed shared boundary |
+| Mounted remote store | focused canonical-file, offline, poison, concurrency, symlink, and root-boundary tests; workspace/typecheck/changed-file lint; nearest TypeScript workspace matrix; no Lambdapi or aggregate unless another exact boundary changes |
 | Lambdapi/kernel-dependent target | `EMDASH_TYPECHECK_TIMEOUT=90s make -C emdash2 check` plus every nested-SOP gate actually triggered |
 | Cross-layer release/publication | affected browser/print/kernel gates and eventually `check:all`; never run merely for reassurance |
 
-AI-PROOF-1, AI-PROOF-2, AI-WORKSPACE-1A, and AI-WORKSPACE-1B1 change only
-generic TypeScript proof/workspace source, artifact, command-adapter,
-public-barrel, and test-runner behavior. Their final proportional boundary is
-focused tests, typecheck/lint, diff/link and shell hygiene, and one complete
-shared TypeScript gate per actually changed shared-boundary tranche. Recent
-green aggregate evidence is carried forward and must not be repeated merely
-for reassurance. No kernel,
-browser-product build, print, book, or `check:all` gate is required unless the
-exact diff expands into those layers.
+AI-PROOF-1, AI-PROOF-2, AI-WORKSPACE-1A, AI-WORKSPACE-1B1, and
+AI-REMOTE-1B1 change only generic TypeScript proof/workspace source, artifact,
+command-adapter, or Node-edge behavior. Their proportional boundary is focused
+tests, typecheck/lint, diff/link and shell hygiene, a nearest matrix where
+appropriate, and one complete shared TypeScript gate only when a tranche
+actually changes that shared boundary. Recent green aggregate evidence is
+carried forward and must not be repeated merely for reassurance. No kernel,
+Lambdapi, browser-product build, print, book, or `check:all` gate is required
+unless the exact diff expands into those layers.
 
 ## Recovery Checklist
 
@@ -2135,16 +2364,16 @@ On every persistent continuation:
 1. read root `AGENTS.md`, this plan, the handoff, and the persistent-goal Git
    workflow;
 2. inspect every worktree and staged/unstaged state separately;
-3. verify current `HEAD` and its relationship to the baseline above;
+3. verify current `HEAD` and its relationship to the recorded checkpoint and
+   baseline;
 4. preserve all unrelated changes and completed elaborator history;
 5. relocate current definitions and consumers with `rg`;
 6. recover the one in-progress row and its exact diff;
 7. run only its required bounded baseline/gates;
 8. update this Work and Decision Ledger with evidence or a rejected
    hypothesis; and
-9. before the first newly authorized checkpoint, establish the dedicated goal
-   branch/worktree without discarding current changes; then self-approve only
-   a frozen bounded proposal and checkpoint only under every condition in the
+9. continue on the established dedicated goal branch, self-approve only a
+   frozen bounded proposal, and checkpoint only under every condition in the
    persistent-goal Git SOP; and
 10. never infer push, merge, PR, publication, release, deployment, history
     rewriting, or cleanup authority from local checkpoint authority.
@@ -2163,14 +2392,17 @@ Treat AI-PROOF-1, AI-PROOF-2, AI-WORKSPACE-0, AI-WORKSPACE-1A, and the
 exact-closure AI-WORKSPACE-1B1 proof attachment and AI-WORKSPACE-1B2A
 same-module fragment chain and AI-WORKSPACE-1B2B cross-module fragment graph
 and AI-REMOTE-1A locked supplied-text materialization/offline-cache-data slice
-as complete. Preserve AI-REMOTE-1A's recorded 1,486-test, 224-suite aggregate
-and do not repeat an unchanged long gate for reassurance. Continue with the
-one in-progress AI-REMOTE-1B exact-consumer audit. Measure one real local and/
-or hosted GetPaidX/LastRevision/Arrowgram-style workspace seam before freezing
-any transport, persistent-cache, concurrency, or credential policy. Keep
-actual fetch, filesystem/platform cache stores, credentials, retries,
-redirects, and signed URLs unimplemented until the audit selects the smallest
-consumer-backed contract. Never treat a URL, mutable branch, observed digest,
+and AI-REMOTE-1B0 platform audit and AI-REMOTE-1B1 TypeScript mounted-file/
+immutable-cache slice as complete. Preserve AI-REMOTE-1A's recorded
+1,486-test, 224-suite aggregate and AI-REMOTE-1B1's 108-test nearest matrix;
+do not repeat an unchanged long gate for reassurance. Continue with the one
+in-progress AI-REMOTE-1B2 exact-consumer audit. Measure the existing
+`./scripts/emdash` command seam, management-code shape, and one real mounted
+GetPaidX template/agent workflow before freezing an agent-facing command or
+file contract. Keep public command/export/template changes and actual fetch,
+platform HTTP/MCP integration, credentials, retries, redirects, and signed
+URLs unimplemented until their distinct audits select the smallest
+consumer-backed contracts. Never treat a URL, mutable branch, observed digest,
 or cached compiled object as authority.
 Do not infer a provider from fragment order, symbol spelling, or a current
 compiled object. Preserve explicit backend-neutral Core and all existing
@@ -2185,25 +2417,26 @@ After each bounded result, synchronize the plan's Work/Decision Ledgers and
 run its proportional gates. Prefer focused and nearest checks and reuse recent
 green aggregate evidence; run another long aggregate only when an exact new
 shared-boundary diff and repository SOP strictly require it. Review and freeze
-the consumer-gated AI-REMOTE-1B boundary before implementing an adapter or
-considering explicit dictionary synthesis or paper/browser integration.
+the consumer-gated AI-REMOTE-1B2 command/template boundary before implementing
+that adapter or considering explicit dictionary synthesis or paper/browser
+integration.
 Revise or reject a plan row when implementation evidence contradicts it; do
 not preserve a failed architecture for narrative continuity.
 
 On every continuation recover current authorities, plans, code, tests,
-worktrees, staged/unstaged diffs, baseline ancestry, and validation evidence.
+worktrees, staged/unstaged diffs, checkpoint ancestry, and validation evidence.
 Follow root AGENTS.md and docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md; follow
 emdash2/AGENTS.md for every action under emdash2. Preserve unrelated work.
 This objective authorizes plan-scoped source/test/document edits and bounded
 validation. By direct user direction on 2026-08-08, an unattended continuation
-may self-approve a frozen proposed tranche and may create the dedicated local
-goal branch/worktree and validated local checkpoint commits required by
-docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md. First make a clean audited
-topology transition; never checkpoint unrelated or partial work. This does
-not authorize pushes, merges, PRs, publication, release, deployment, history
-rewriting, cleanup, or removal of any existing worktree, except that direct
-user decision D-AI-NATIVE-050 separately authorizes the one current fast-
-forward merge into local `main` after its exact checkpoint review.
+may self-approve a frozen proposed tranche and may create validated local
+checkpoint commits on the established dedicated goal branch as required by
+docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md. Never checkpoint unrelated or
+partial work. This does not authorize pushes, merges, PRs, publication,
+release, deployment, history rewriting, cleanup, or removal of any existing
+worktree. Direct user decision D-AI-NATIVE-050 authorized only the already
+completed fast-forward of checkpoint `a3ba93a` into local `main`; it grants no
+future merge authority.
 
 Continue safe dependency-ready work until every scoped row is implemented,
 rejected with durable evidence, or explicitly deferred behind a concrete

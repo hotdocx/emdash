@@ -1,7 +1,20 @@
-/** Focused AI-REMOTE-1A immutable lock and offline reconstruction tests. */
+/** Focused AI-REMOTE-1A/1B1 lock, reconstruction, and mounted-store tests. */
 
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import {
+    mkdir,
+    mkdtemp,
+    readFile,
+    readdir,
+    rm,
+    stat,
+    symlink,
+    unlink,
+    writeFile
+} from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { describe, it } from 'node:test';
 import {
     CORE_LF_FRAGMENT_MODULE_WORKSPACE_PROFILE,
@@ -36,6 +49,15 @@ import {
     serializeCoreLfRemoteWorkspaceLock,
     serializeCoreLfWorkspaceCanonicalJson
 } from '../src/v3_2';
+import {
+    CORE_LF_MOUNTED_REMOTE_WORKSPACE_STORE_PROFILE,
+    CoreLfMountedRemoteWorkspaceRoots,
+    CoreLfMountedRemoteWorkspaceStoreError,
+    CoreLfMountedRemoteWorkspaceStoreErrorCode,
+    createCoreLfMountedRemoteWorkspaceCacheKey,
+    materializeCoreLfMountedRemoteWorkspace,
+    materializeCoreLfMountedRemoteWorkspaceOffline
+} from '../src/v3_2/lf_remote_workspace_store';
 
 const providerId = 'fixture.remote_provider';
 const consumerId = 'fixture.remote_consumer';
@@ -261,6 +283,75 @@ const assertDeepFrozen = (value: unknown): void => {
     if (value === null || typeof value !== 'object') return;
     assert.equal(Object.isFrozen(value), true);
     Object.values(value as Record<string, unknown>).forEach(assertDeepFrozen);
+};
+
+interface MountedFixture {
+    readonly root: string;
+    readonly roots: CoreLfMountedRemoteWorkspaceRoots;
+    readonly fixture: ReturnType<typeof graphFixture>;
+    readonly lock: CoreLfRemoteWorkspaceLockInput;
+    readonly lockPath: string;
+    readonly sourcePath: string;
+}
+
+const createMountedFixture = async (): Promise<MountedFixture> => {
+    const root = await mkdtemp(path.join(
+        tmpdir(),
+        'emdash-remote-workspace-store-'
+    ));
+    const projectRoot = path.join(root, 'project');
+    const dataRoot = path.join(root, 'data');
+    await Promise.all([
+        mkdir(projectRoot, { mode: 0o700 }),
+        mkdir(dataRoot, { mode: 0o700 })
+    ]);
+    const fixture = graphFixture();
+    const lock = lockFor(fixture);
+    const lockPath = path.join(
+        projectRoot,
+        CORE_LF_MOUNTED_REMOTE_WORKSPACE_STORE_PROFILE.lockFileName
+    );
+    const sourcePath = path.join(
+        projectRoot,
+        CORE_LF_MOUNTED_REMOTE_WORKSPACE_STORE_PROFILE.sourceFileName
+    );
+    await Promise.all([
+        writeFile(lockPath, serializeCoreLfRemoteWorkspaceLock(lock)),
+        writeFile(sourcePath, fixture.sourceText)
+    ]);
+    return {
+        root,
+        roots: { projectRoot, dataRoot },
+        fixture,
+        lock,
+        lockPath,
+        sourcePath
+    };
+};
+
+const withMountedFixture = async <T>(
+    action: (mounted: MountedFixture) => Promise<T>
+): Promise<T> => {
+    const mounted = await createMountedFixture();
+    try {
+        return await action(mounted);
+    } finally {
+        await rm(mounted.root, { recursive: true, force: true });
+    }
+};
+
+const expectStoreError = async (
+    action: () => Promise<unknown>,
+    code: CoreLfMountedRemoteWorkspaceStoreErrorCode
+): Promise<CoreLfMountedRemoteWorkspaceStoreError> => {
+    let observed: unknown;
+    await assert.rejects(action, error => {
+        observed = error;
+        return error instanceof CoreLfMountedRemoteWorkspaceStoreError &&
+            error.code === code &&
+            error.path.length > 0;
+    });
+    return observed as CoreLfMountedRemoteWorkspaceStoreError;
 };
 
 describe('AI-REMOTE-1A immutable lock and offline reconstruction', () => {
@@ -583,5 +674,248 @@ describe('AI-REMOTE-1A immutable lock and offline reconstruction', () => {
         assert.equal('cacheKey' in lock, false);
         assert.equal('environment' in lock, false);
         assertDeepFrozen(lock);
+    });
+});
+
+describe('AI-REMOTE-1B1 TypeScript mounted workspace store', () => {
+    it('installs canonical cache and rebuilds offline without project source', async () => {
+        await withMountedFixture(async mounted => {
+            const online = await materializeCoreLfMountedRemoteWorkspace(
+                mounted.roots
+            );
+            assert.equal(online.mode, 'source');
+            assert.equal(online.cacheDisposition, 'installed');
+            assert.equal(
+                online.cacheKey,
+                createCoreLfMountedRemoteWorkspaceCacheKey(
+                    mounted.lock.artifact
+                )
+            );
+            assert.equal(
+                online.paths.cachePath.startsWith(
+                    `${mounted.roots.dataRoot}${path.sep}`
+                ),
+                true
+            );
+            assert.equal(
+                await readFile(online.paths.cachePath, 'utf8'),
+                serializeCoreLfRemoteWorkspaceCacheEntry(
+                    online.materialized.cacheEntry
+                )
+            );
+
+            await unlink(mounted.sourcePath);
+            await writeFile(
+                mounted.lockPath,
+                serializeCoreLfRemoteWorkspaceLock({
+                    ...mounted.lock,
+                    mirrors: [{
+                        kind: 'https',
+                        uri: 'https://mirror.example.test/graph.json'
+                    }]
+                })
+            );
+            const offline =
+                await materializeCoreLfMountedRemoteWorkspaceOffline(
+                    mounted.roots
+                );
+            assert.equal(offline.mode, 'offline');
+            assert.equal(offline.cacheDisposition, 'verified-existing');
+            assert.equal(offline.cacheKey, online.cacheKey);
+            assert.equal(
+                offline.materialized.compiledText,
+                online.materialized.compiledText
+            );
+            assert.equal(
+                offline.materialized.source.sourceText,
+                mounted.fixture.sourceText
+            );
+            assert.equal(Object.isFrozen(offline), true);
+            assert.equal(Object.isFrozen(offline.paths), true);
+        });
+    });
+
+    it('reuses exact bytes and never overwrites a poisoned cache entry', async () => {
+        await withMountedFixture(async mounted => {
+            const first = await materializeCoreLfMountedRemoteWorkspace(
+                mounted.roots
+            );
+            const before = await stat(first.paths.cachePath);
+            const second = await materializeCoreLfMountedRemoteWorkspace(
+                mounted.roots
+            );
+            const after = await stat(first.paths.cachePath);
+            assert.equal(second.cacheDisposition, 'verified-existing');
+            assert.equal(after.ino, before.ino);
+            assert.equal(after.mtimeMs, before.mtimeMs);
+
+            const poisoned = '{"poisoned":true}\n';
+            await writeFile(first.paths.cachePath, poisoned);
+            const error = await expectStoreError(
+                () => materializeCoreLfMountedRemoteWorkspace(mounted.roots),
+                'CACHE_CONFLICT'
+            );
+            assert.ok(error.cause);
+            assert.equal(
+                await readFile(first.paths.cachePath, 'utf8'),
+                poisoned
+            );
+        });
+    });
+
+    it('converges concurrent identical population without temporary debris', async () => {
+        await withMountedFixture(async mounted => {
+            const results = await Promise.all([
+                materializeCoreLfMountedRemoteWorkspace(mounted.roots),
+                materializeCoreLfMountedRemoteWorkspace(mounted.roots)
+            ]);
+            assert.deepEqual(
+                results.map(result => result.cacheDisposition).sort(),
+                ['installed', 'verified-existing']
+            );
+            assert.equal(results[0].cacheKey, results[1].cacheKey);
+            assert.equal(
+                results[0].materialized.compiledText,
+                results[1].materialized.compiledText
+            );
+            assert.deepEqual(
+                await readdir(results[0].paths.cacheDirectory),
+                [`artifact-${results[0].cacheKey}.json`]
+            );
+        });
+    });
+
+    it('rejects noncanonical lock text and fixed-file symbolic links', async () => {
+        await withMountedFixture(async mounted => {
+            const prettyLock = `${JSON.stringify(
+                JSON.parse(serializeCoreLfRemoteWorkspaceLock(mounted.lock)),
+                null,
+                4
+            )}\n`;
+            await writeFile(mounted.lockPath, prettyLock);
+            await expectStoreError(
+                () => materializeCoreLfMountedRemoteWorkspace(mounted.roots),
+                'NONCANONICAL_LOCK_TEXT'
+            );
+
+            await writeFile(
+                mounted.lockPath,
+                serializeCoreLfRemoteWorkspaceLock(mounted.lock)
+            );
+            await writeFile(
+                mounted.sourcePath,
+                `${mounted.fixture.sourceText}\n`
+            );
+            await expectStoreError(
+                () => materializeCoreLfMountedRemoteWorkspace(mounted.roots),
+                'SOURCE_SIZE_MISMATCH'
+            );
+
+            const linkedSource = path.join(mounted.root, 'linked-source.json');
+            await writeFile(linkedSource, mounted.fixture.sourceText);
+            await unlink(mounted.sourcePath);
+            await symlink(linkedSource, mounted.sourcePath);
+            await expectStoreError(
+                () => materializeCoreLfMountedRemoteWorkspace(mounted.roots),
+                'UNSAFE_FILE'
+            );
+        });
+    });
+
+    it('rejects cache-entry symbolic links without modifying their targets', async () => {
+        await withMountedFixture(async mounted => {
+            const first = await materializeCoreLfMountedRemoteWorkspace(
+                mounted.roots
+            );
+            const externalCache = path.join(
+                mounted.root,
+                'external-cache.json'
+            );
+            const externalText = await readFile(
+                first.paths.cachePath,
+                'utf8'
+            );
+            await writeFile(externalCache, externalText);
+            await unlink(first.paths.cachePath);
+            await symlink(externalCache, first.paths.cachePath);
+
+            const error = await expectStoreError(
+                () => materializeCoreLfMountedRemoteWorkspace(mounted.roots),
+                'CACHE_CONFLICT'
+            );
+            assert.ok(
+                error.cause instanceof
+                    CoreLfMountedRemoteWorkspaceStoreError
+            );
+            assert.equal(
+                (error.cause as CoreLfMountedRemoteWorkspaceStoreError).code,
+                'UNSAFE_FILE'
+            );
+            assert.equal(await readFile(externalCache, 'utf8'), externalText);
+        });
+    });
+
+    it('keeps offline checks read-only and roots explicit and disjoint', async () => {
+        await withMountedFixture(async mounted => {
+            await expectStoreError(
+                () => materializeCoreLfMountedRemoteWorkspaceOffline(
+                    mounted.roots
+                ),
+                'OFFLINE_CACHE_MISSING'
+            );
+            assert.deepEqual(await readdir(mounted.roots.dataRoot), []);
+
+            await expectStoreError(
+                () => materializeCoreLfMountedRemoteWorkspace({
+                    projectRoot: '.',
+                    dataRoot: mounted.roots.dataRoot
+                }),
+                'INVALID_ROOTS'
+            );
+            await expectStoreError(
+                () => materializeCoreLfMountedRemoteWorkspace({
+                    projectRoot: mounted.roots.projectRoot,
+                    dataRoot: mounted.roots.projectRoot
+                }),
+                'INVALID_ROOTS'
+            );
+            await expectStoreError(
+                () => materializeCoreLfMountedRemoteWorkspace({
+                    ...mounted.roots,
+                    credential: 'must-not-be-accepted'
+                } as unknown as CoreLfMountedRemoteWorkspaceRoots),
+                'INVALID_ROOTS'
+            );
+
+            assert.deepEqual(
+                CORE_LF_MOUNTED_REMOTE_WORKSPACE_STORE_PROFILE,
+                {
+                    revision:
+                        'emdash-lf-mounted-remote-workspace-store-v1',
+                    filesystemProfile: 'node-posix-mounted-roots-v1',
+                    backend: 'typescript-emdash-explicit-core',
+                    lockFileName: 'emdash.workspace.lock.json',
+                    sourceFileName: 'emdash.workspace.source.json',
+                    cacheRelativeDirectory:
+                        '.emdash/cache/lf-remote-workspace-v1',
+                    cacheKeyProfile:
+                        'sha256-canonical-remote-artifact-identity',
+                    cacheFileProfile: 'artifact-<sha256-hex>.json',
+                    installProfile:
+                        'fsynced-temporary-file-atomic-hard-link-no-replace',
+                    maximumLockBytes: 256 * 1024,
+                    maximumSourceBytes: 64 * 1024 * 1024,
+                    cacheMetadataAllowanceBytes: 1024 * 1024,
+                    performsFetch: false,
+                    readsCredentials: false,
+                    readsEnvironment: false,
+                    readsCurrentWorkingDirectory: false,
+                    invokesGit: false,
+                    invokesLambdapi: false,
+                    mutatesExistingCacheEntries: false,
+                    evictsCacheEntries: false
+                }
+            );
+        });
     });
 });

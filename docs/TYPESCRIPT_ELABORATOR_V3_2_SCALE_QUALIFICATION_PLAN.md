@@ -36,10 +36,15 @@ AI-WORKSPACE-1B2B cross-module fragment graph is also final-green after a
 well: locked canonical graph-source materialization, expected compiled-
 snapshot verification, and immutable revalidated offline cache data passed
 the required 1,486-test, 224-suite zero-failure shared-boundary aggregate.
-AI-REMOTE-1B's exact-consumer audit is the active continuation; real transport,
-credentials, and persistent cache stores remain separately gated. Carry
-forward these aggregate results for unchanged boundaries rather than rerunning
-them for reassurance.
+AI-REMOTE-1B0's `~/closerfans` platform audit and AI-REMOTE-1B1's TypeScript-
+only mounted project/data adapter are final-green too. The latter atomically
+installs an identity-derived no-replace cache entry and fully revalidates it
+offline; its nearest matrix passed 108 tests across 13 suites with zero
+failures and two opt-in skips. AI-REMOTE-1B2's exact command/template consumer
+audit is the active continuation. Optional Lambdapi/emdash backend work and
+real network/platform authentication remain separately gated. Carry forward
+the aggregate results for unchanged boundaries rather than rerunning them for
+reassurance.
 Human-Direction: after approving H-DTTLF-03/D-DTTLF-001, the user requested a
 careful clarification of whether the final architecture was already settled.
 On 2026-07-24 the user then directed that we gather a varied set of

@@ -14,11 +14,17 @@
 > also final-green: canonical graph-source locks, supplied-text SHA-256
 > materialization, exact local reconstruction/compilation, compiled-snapshot
 > verification, and immutable fully revalidated offline cache data passed
-> 1,486 tests across 224 suites with zero failures. AI-REMOTE-1B's read-only
-> exact-consumer audit is the active continuation; real transport, credentials,
-> and persistent cache stores remain separately gated. Recent aggregate
-> evidence must be reused unless an exact changed shared boundary strictly
-> requires another long run.
+> 1,486 tests across 224 suites with zero failures. AI-REMOTE-1B0 then measured
+> the single `~/closerfans` platform boundary, and AI-REMOTE-1B1 is final-green:
+> fixed mounted project/data roots, canonical lock/source files, TypeScript-only
+> reconstruction/checking, identity-derived atomic no-replace cache install,
+> and fully revalidated source-absent offline reuse passed 108 nearest tests
+> across 13 suites with zero failures (two opt-in skips). Lambdapi/emdash remains
+> an optional later backend/conformance route, but this profile neither invokes
+> nor requires it. AI-REMOTE-1B2's read-only command/template consumer audit is
+> the active continuation; no command, template, authenticated network, or
+> platform adapter is yet approved. Recent aggregate evidence must be reused
+> unless an exact changed shared boundary strictly requires another long run.
 >
 > **Current cross-layer integration boundary (2026-08-04):**
 > The completed elaborator tip `e7352ba` is being joined with the completed
