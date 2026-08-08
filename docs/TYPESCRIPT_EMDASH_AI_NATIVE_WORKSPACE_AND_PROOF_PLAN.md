@@ -13,7 +13,10 @@ prerequisite-gated; AI-SYNTH-0's exact-consumer inventory is complete and its
 frozen, pure-TypeScript AI-SYNTH-1A global-dictionary slice is final-green;
 AI-SYNTH-1B0's authoring-consumer audit is complete and its frozen
 AI-SYNTH-1B1 leading-implicit host macro is final-green; reusable scopes and
-recursive synthesis remain consumer-gated
+recursive synthesis remain consumer-gated; AI-PAPER-0's exact-consumer audit
+is complete, AI-PAPER-1 is partitioned at the browser-safe binding,
+file/hash materialization, and renderer/platform boundaries, and the frozen
+AI-PAPER-1A semantic binding is final-green
 Baseline: `5027d5aabca191c088dfd9757a0bb8df4cb04a34` on local `main`
 Depends-On:
 [`TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md),
@@ -30,7 +33,8 @@ at local checkpoint `a3ba93a0fcc95434f411d94deca042f47b735c3a` on
 `goal/typescript-emdash-ai-native`; the user-authorized one-time fast-forward
 placed the same checkpoint on local `main`. Continuation work is again on the
 dedicated goal branch in the `~/emdash1` worktree; the final-green
-AI-SYNTH-1A resolver is preserved there at local checkpoint `e8c27e2`.
+AI-SYNTH-1A resolver is preserved there at local checkpoint `e8c27e2`, and
+the final-green AI-SYNTH-1B1 authoring adapter is preserved at `4a390b1`.
 The user's standing
 unattended authority includes self-approval of a frozen plan tranche and
 rollback-safe local checkpoint commits after the persistent-goal Git SOP is
@@ -734,12 +738,38 @@ fuel, and any external Elpi provider remain AI-SYNTH-2.
 
 ### AI-PAPER-1: research-workspace integration
 
-- bind paper/diagram blocks to stable declaration IDs and artifact digests;
-- render checked and incomplete states intentionally;
-- synchronize agent and browser edits through canonical files;
-- keep snapshot, build, publication, and deployment explicit; and
-- exercise one local and one hosted-style workspace without changing proof
-  authority.
+The completed AI-PAPER-0 audit selects the authored overview source
+`emdash2/print/public/emdash-v3-2-overview.md` and registered document ID
+`emdash-v3-2-overview` as the first real document consumer. The tracked
+`docs/emdash3_2.md` file is a promoted copy and is never edited as source.
+The print pipeline's date/counter-derived DOM IDs are render-local and cannot
+be semantic block identities.
+
+AI-PAPER-1 is therefore partitioned as follows:
+
+1. AI-PAPER-1A is a browser-safe semantic binding. It validates one stable
+   document identity and supplied source digest, stable block identities,
+   diagram-to-declaration references, and proof blocks whose exact expected
+   module/declaration identity and current proof fingerprint agree with an
+   ordinary proof artifact. It derives complete versus incomplete display
+   state from the artifact. It accepts SHA-256 stamps as data but does not
+   compute or claim to verify their bytes.
+2. AI-PAPER-1B is the Node/file adapter. It must select explicit canonical
+   source markers and sidecar paths, compute and verify document, diagram, and
+   proof-artifact hashes from exact bytes, and produce one checked portable
+   snapshot. It may not write, promote, publish, or discover arbitrary paths.
+3. AI-PAPER-1C is the print/browser projection. It may render the already
+   checked snapshot into intentional checked/incomplete states, but it cannot
+   create proof authority, replace stable source IDs with transient DOM IDs,
+   or mutate article prose.
+4. Hosted synchronization, snapshots, builds, and publication remain a
+   separately gated platform adapter owned by `~/closerfans`. The local file
+   contract must be qualified before that repository changes.
+
+Reject or split 1A if it imports Node builtins, parses Markdown, hashes bytes,
+stores a checker/session, accepts a caller-asserted proof status, silently
+rewrites duplicate block IDs, or treats a digest alone as evidence that an
+artifact is current.
 
 ## Work Ledger
 
@@ -775,7 +805,12 @@ Only one row may be in progress in this worktree.
 | AI-SYNTH-1B1 | complete | AI-SYNTH-1B0 plus same-module fragment consumer | Derive one leading implicit target from a checked global callee, select from an explicit finite call-site scope, and emit one frozen ordinary transfer argument plus the 1A trace before canonical module creation. |
 | AI-SYNTH-1B2 | pending | AI-SYNTH-1B1 plus reusable-scope consumer | Only if demanded, freeze portable instance annotations and lexical/imported/local scope semantics in workspace source. |
 | AI-SYNTH-2 | pending | AI-SYNTH-1B plus recursive indexed consumer | Only if demanded, design recursive premise search, tiers/priorities/fuel, and a separately identified external-provider interface. |
-| AI-PAPER-1 | pending | AI-PROOF-2, AI-WORKSPACE-1B2B | One canonical paper/diagram/proof workspace supports agent/browser editing and checked snapshots. |
+| AI-PAPER-0 | complete | AI-PROOF-2, AI-WORKSPACE-1B2B plus the authored article and `~/closerfans` templates | The canonical article owner, transient-render-ID non-seam, proof-artifact freshness boundary, and platform ownership are measured without changing prose, print, or platform code. |
+| AI-PAPER-1 | partitioned | AI-PAPER-0 | Separate browser-safe semantic binding, exact-byte file materialization, print/browser presentation, and hosted platform synchronization. |
+| AI-PAPER-1A | complete | AI-PAPER-0 plus current proof artifacts | Stable document/block/declaration identities and supplied digests bind to current complete or incomplete proof artifacts without I/O, hashing, parsing, rendering, or a new proof authority. |
+| AI-PAPER-1B | pending | AI-PAPER-1A plus canonical source-marker and sidecar consumer | Verify exact document/diagram/proof bytes and materialize one portable checked snapshot under fixed paths. |
+| AI-PAPER-1C | pending | AI-PAPER-1B plus print/browser consumer | Render checked and incomplete projections from the checked snapshot while retaining source identity and ordinary prose ownership. |
+| AI-PAPER-1D | pending | AI-PAPER-1B plus distributable hosted runtime | Exercise the same canonical files in `~/closerfans`; leave Git snapshots, build, publication, deployment, auth, and transport platform-owned. |
 | AI-NATIVE-GRADUATE-1 | pending | all accepted rows | Trust, determinism, stale-state, offline, browser, and conformance claims are synchronized and accurately documented. |
 
 ## Decision Ledger
@@ -855,6 +890,11 @@ Only one row may be in progress in this worktree.
 | D-AI-NATIVE-071 | accepted and frozen for AI-SYNTH-1B1 | Success returns a deeply frozen ordinary `CoreLfTransferArgument` whose implicit value is the selected qualified global, together with the complete 1A result. Missing and ambiguous selection remain 1A structured errors; the caller never supplies the binder target or selected value. |
 | D-AI-NATIVE-072 | accepted and frozen for AI-SYNTH-1B1 | The positive consumer compiles a checked prefix, authors a later same-module declaration using the generated argument, then recompiles the canonical two-fragment plan. The later source must still name exact earlier-fragment externals and providers; the macro cannot grant visibility or provider authority. |
 | D-AI-NATIVE-073 | accepted and frozen as an AI-SYNTH-1B1 non-effect | Add no canonical workspace field, reusable/global registry, instance priority, local binder search, recursive premise, parser syntax, Core/checker/compiler/runtime/proof change, I/O, MCP, Lambdapi execution, or platform behavior. The final portable source contains only the expanded explicit global argument. |
+| D-AI-NATIVE-074 | accepted after AI-PAPER-0 audit | The first document consumer is the authored `emdash-v3-2-overview` source under `emdash2/print/public`; `docs/emdash3_2.md` is its checked promoted copy, not an editable authority. High-quality prose and machine binding data remain separate. |
+| D-AI-NATIVE-075 | accepted after AI-PAPER-0 audit | Stable paper/diagram/proof block IDs belong to canonical source markers and a sidecar contract. Renderer-generated Arrowgram/Mermaid DOM IDs, array ordinals, line numbers, and headings inferred by a particular Markdown runtime are not semantic identities. |
+| D-AI-NATIVE-076 | accepted split after AI-PAPER-0 audit | AI-PAPER-1A owns a browser-safe semantic projection; AI-PAPER-1B owns exact-byte hashing and fixed-file materialization; AI-PAPER-1C owns print/browser display; hosted synchronization and publication remain a separate CloserFans-owned adapter. |
+| D-AI-NATIVE-077 | accepted and frozen for AI-PAPER-1A | A proof block names the exact expected module/declaration, carries an ordinary artifact and its current fingerprint, and derives status, checked Core, and named goals from that artifact. A separately supplied artifact digest is a binding label until an outer adapter verifies exact bytes; the semantic layer never treats the digest alone as proof freshness. |
+| D-AI-NATIVE-078 | accepted and frozen as an AI-PAPER-1A non-effect | Add no Markdown parser, filesystem/hash operation, HTML renderer, print registry field, source mutation, artifact writer, browser state, hosted transport, Git snapshot, build, publication, deployment, backend flag, Lambdapi execution, or platform change. |
 
 ## AI-PROOF-2 Inventory And Exact Contract
 
@@ -2683,6 +2723,83 @@ D-AI-NATIVE-068 through D-AI-NATIVE-073 now have direct implementation and
 test evidence. AI-SYNTH-1B2 remains gated on repeated source-level scope use;
 AI-SYNTH-2 remains gated on a genuinely recursive indexed consumer.
 
+## AI-PAPER-0 Audit And AI-PAPER-1A Completion Record
+
+Date: 2026-08-08
+
+The exact-consumer audit found:
+
+- `emdash2/print/public/emdash-v3-2-overview.md` is the authored source for
+  registered document `emdash-v3-2-overview`; `docs/emdash3_2.md` is its
+  byte-identical promoted distribution copy;
+- the current print pipeline extracts inline Arrowgram JSON but assigns
+  render-local date/counter-derived DOM IDs, so neither those IDs nor diagram
+  ordinals can be stable semantic references;
+- `CoreProofArtifact` already owns exact module/declaration identity,
+  complete versus incomplete state, named goals, checked Core only on
+  completion, and source/profile/dependency fingerprints, while
+  `assertCoreProofArtifactCurrent` owns freshness revalidation;
+- Arrowgram's file-first `paper.md`/`diagram.json` convention is useful for a
+  later local adapter, but `~/closerfans` already owns hosted workspace mounts,
+  synchronization, Git snapshots, builds, authentication, and publication;
+  and
+- high-quality article prose should not acquire inline developer status data
+  merely to support machine linkage. Stable source markers and a sidecar are
+  the appropriate later file-level join.
+
+Result: AI-PAPER-1A is accepted and final-green as the browser-safe semantic
+binding, while exact-byte materialization and rendering remain separate.
+
+Implementation:
+
+- added `src/v3_2/research_document.ts` with profile
+  `emdash-research-document-binding-v1`;
+- validates stable document and block IDs, a canonical document revision,
+  exact content references with syntactically valid supplied SHA-256 stamps,
+  and a nonempty document-order block list;
+- binds one Arrowgram block to a nonempty, duplicate-free canonical list of
+  exact module/declaration references;
+- binds one proof block to an exact expected module/declaration pair, an
+  ordinary proof artifact, its newly supplied current fingerprint, and a
+  stable external artifact reference;
+- reuses `assertCoreProofArtifactCurrent`, independently preserves tuple
+  identity rather than concatenated-name identity, and derives status,
+  checked Core, and cloned stable named goals solely from the artifact;
+- projects complete artifacts with checked Core and no goals, and incomplete
+  artifacts with named goals and no checked Core; and
+- returns a deeply frozen deterministic snapshot explicitly labelled
+  `digestVerification: not-performed`, because hash computation and exact-byte
+  verification remain AI-PAPER-1B.
+
+The already registered proof-document suite uses the real article document
+ID/path and its PathOut diagram declaration owners, then binds the existing
+complete and intentionally incomplete TypeScript proof artifacts as Section 7
+supplement identities. It confirms byte-stable serialization, canonical
+diagram references, intentional complete/incomplete projections, deep
+freezing, exact tuple identity, and rejection of duplicate blocks, malformed
+digests, identity mismatch, and stale fingerprints. These test identities do
+not yet claim that source markers or sidecar files exist; that is precisely
+AI-PAPER-1B's consumer gate.
+
+Qualification:
+
+- the focused proof-document suite passed 8/8 tests with zero failures;
+- the nearest proof-plan, proof-document, local proof-command, and exact-
+  closure workspace-proof matrix passed 26 tests across four suites with zero
+  failures or skips;
+- workspace contract, root TypeScript typecheck, changed-file ESLint,
+  browser-safety/forbidden-effect scan, and diff hygiene passed; and
+- no public barrel, main test-runner, checker, compiler, runtime, package,
+  print, book, or kernel boundary changed. The recent 1,486-test aggregate
+  remains valid under D-AI-NATIVE-048 and was not rerun.
+
+No authored or promoted article, print registry/pipeline, file below
+`emdash2/`, or file in `~/closerfans` changed. Decisions D-AI-NATIVE-074
+through D-AI-NATIVE-078 now have direct audit or implementation evidence.
+AI-PAPER-1B remains gated on explicit source markers, fixed sidecar/artifact
+paths, and exact-byte verification; AI-PAPER-1C and hosted integration cannot
+move ahead of that local contract.
+
 ## AI-PROOF-2 Completion Record
 
 Date: 2026-08-08
@@ -2991,6 +3108,19 @@ schema revision, local binder search, or reusable scope annotation by analogy.
 AI-SYNTH-1B2 requires a repeated source-level scope consumer, and AI-SYNTH-2
 requires a genuinely recursive indexed consumer; leave either gated when that
 evidence is absent.
+
+Treat AI-PAPER-0 and final-green AI-PAPER-1A as complete. Preserve the authored
+`emdash-v3-2-overview` source versus promoted-copy distinction, stable tuple
+document/block/declaration identities, current ordinary proof-artifact
+revalidation, intentional complete/incomplete projections, and the explicit
+`digestVerification: not-performed` boundary. Preserve its focused 8/8 suite
+and nearest 26-test/four-suite matrix; do not repeat the unchanged 1,486-test
+aggregate. AI-PAPER-1B must first select explicit source markers and fixed
+sidecar/artifact paths and verify exact bytes in a Node/file adapter. Do not
+change article prose, print rendering, or `~/closerfans` merely to simulate
+that consumer. AI-PAPER-1C and hosted platform synchronization remain gated
+behind the checked local file contract.
+
 Do not infer a provider from fragment order, symbol spelling, or a current
 compiled object. Preserve explicit backend-neutral Core and all existing
 checker, session, compiler, runtime, proof, visibility, and
@@ -3010,8 +3140,9 @@ emission/checking as an optional later adapter and conformance route; do not
 add a backend flag or claim Lambdapi execution until that separate path exists.
 After AI-SYNTH-1B1, continue with AI-SYNTH-1B2 only when repeated source-level
 use can freeze portable annotations and local/imported scope. Recursive
-indexed search remains AI-SYNTH-2 and requires its own consumer. Paper/browser
-integration remains separately consumer-gated.
+indexed search remains AI-SYNTH-2 and requires its own consumer. Continue
+paper integration only through AI-PAPER-1B's exact local file consumer; do not
+jump directly from the semantic binding to renderer or hosted behavior.
 Revise or reject a plan row when implementation evidence contradicts it; do
 not preserve a failed architecture for narrative continuity.
 

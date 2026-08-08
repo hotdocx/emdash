@@ -20,6 +20,12 @@ import {
     serializeCoreProofDocumentProfile,
     validateCoreProofArtifactFingerprint
 } from '../src/v3_2';
+import {
+    CORE_RESEARCH_DOCUMENT_PROFILE,
+    CoreResearchDocumentError,
+    createCoreResearchDocumentSnapshot,
+    serializeCoreResearchDocumentSnapshot
+} from '../src/v3_2/research_document';
 
 const hash = (digit: string): string =>
     `sha256:${digit.repeat(64)}`;
@@ -238,6 +244,210 @@ describe('TypeScript v3.2 AI-PROOF-2 proof documents', () => {
         );
     });
 
+    it('binds real article identities to diagram and proof states', () => {
+        const current = fingerprint();
+        const complete = compileCoreAiProofDemo(
+            'complete_identity',
+            current
+        ).artifact;
+        const incomplete = compileCoreAiProofDemo(
+            'open_identity',
+            current
+        ).artifact;
+        const input = {
+            documentId: 'emdash-v3-2-overview',
+            documentRevision: '0.2.0-dev+ai-paper-1a',
+            source: {
+                id: 'emdash2/print/public/emdash-v3-2-overview.md',
+                sha256: hash('c')
+            },
+            blocks: [
+                {
+                    kind: 'diagram' as const,
+                    blockId: 'section-4.pathout-canonical-arrow',
+                    format: 'arrowgram' as const,
+                    source: {
+                        id: 'emdash2/print/public/' +
+                            'emdash-v3-2-overview.md#' +
+                            'section-4.pathout-canonical-arrow',
+                        sha256: hash('d')
+                    },
+                    declarations: [
+                        {
+                            moduleId: 'emdash.emdash3_2',
+                            declarationId: 'sigma_transport_arrow'
+                        },
+                        {
+                            moduleId: 'emdash.emdash3_2',
+                            declarationId: 'PathInd_transfd'
+                        }
+                    ]
+                },
+                {
+                    kind: 'proof' as const,
+                    blockId: 'section-7.proof.complete-identity',
+                    declaration: {
+                        moduleId: complete.moduleId,
+                        declarationId: complete.declarationId
+                    },
+                    artifactSource: {
+                        id: 'artifacts/complete-identity.proof.json',
+                        sha256: hash('e')
+                    },
+                    artifact: complete,
+                    currentFingerprint: current
+                },
+                {
+                    kind: 'proof' as const,
+                    blockId: 'section-7.proof.open-identity',
+                    declaration: {
+                        moduleId: incomplete.moduleId,
+                        declarationId: incomplete.declarationId
+                    },
+                    artifactSource: {
+                        id: 'artifacts/open-identity.proof.json',
+                        sha256: hash('f')
+                    },
+                    artifact: incomplete,
+                    currentFingerprint: current
+                }
+            ]
+        };
+
+        const first = createCoreResearchDocumentSnapshot(input);
+        const second = createCoreResearchDocumentSnapshot(input);
+        assert.equal(
+            serializeCoreResearchDocumentSnapshot(first),
+            serializeCoreResearchDocumentSnapshot(second)
+        );
+        assert.equal(first.digestVerification, 'not-performed');
+        assert.deepEqual(
+            first.blocks.map(block => block.blockId),
+            [
+                'section-4.pathout-canonical-arrow',
+                'section-7.proof.complete-identity',
+                'section-7.proof.open-identity'
+            ]
+        );
+
+        const diagram = first.blocks[0];
+        if (diagram.kind !== 'diagram') throw new Error('expected diagram');
+        assert.deepEqual(
+            diagram.declarations.map(value => value.declarationId),
+            ['PathInd_transfd', 'sigma_transport_arrow']
+        );
+
+        const completeBlock = first.blocks[1];
+        if (completeBlock.kind !== 'proof') {
+            throw new Error('expected complete proof');
+        }
+        assert.equal(completeBlock.status, 'complete');
+        assert.equal(completeBlock.checkedCore, complete.checkedCore);
+        assert.deepEqual(completeBlock.goals, []);
+
+        const incompleteBlock = first.blocks[2];
+        if (incompleteBlock.kind !== 'proof') {
+            throw new Error('expected incomplete proof');
+        }
+        assert.equal(incompleteBlock.status, 'incomplete');
+        assert.equal(incompleteBlock.checkedCore, undefined);
+        assert.deepEqual(
+            incompleteBlock.goals.map(goal => goal.id),
+            ['body']
+        );
+        assert.equal(Object.isFrozen(first), true);
+        assert.equal(Object.isFrozen(first.blocks), true);
+        assert.equal(Object.isFrozen(incompleteBlock.goals[0].context), true);
+    });
+
+    it('rejects stale, mismatched, duplicate, or malformed bindings', () => {
+        const current = fingerprint();
+        const artifact = compileCoreAiProofDemo(
+            'complete_identity',
+            current
+        ).artifact;
+        const proofBlock = {
+            kind: 'proof' as const,
+            blockId: 'section-7.proof.complete-identity',
+            declaration: {
+                moduleId: artifact.moduleId,
+                declarationId: artifact.declarationId
+            },
+            artifactSource: {
+                id: 'artifacts/complete-identity.proof.json',
+                sha256: hash('e')
+            },
+            artifact,
+            currentFingerprint: current
+        };
+        const base = {
+            documentId: 'emdash-v3-2-overview',
+            documentRevision: '0.2.0-dev+ai-paper-1a',
+            source: {
+                id: 'emdash2/print/public/emdash-v3-2-overview.md',
+                sha256: hash('c')
+            },
+            blocks: [proofBlock]
+        };
+
+        assert.throws(
+            () => createCoreResearchDocumentSnapshot({
+                ...base,
+                blocks: [proofBlock, proofBlock]
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreResearchDocumentError);
+                assert.equal(error.code, 'DUPLICATE_BLOCK');
+                return true;
+            }
+        );
+        assert.throws(
+            () => createCoreResearchDocumentSnapshot({
+                ...base,
+                blocks: [{
+                    ...proofBlock,
+                    declaration: {
+                        moduleId: 'ai_native',
+                        declarationId: 'local.complete_identity'
+                    }
+                }]
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreResearchDocumentError);
+                assert.equal(error.code, 'PROOF_IDENTITY_MISMATCH');
+                return true;
+            }
+        );
+        assert.throws(
+            () => createCoreResearchDocumentSnapshot({
+                ...base,
+                source: { ...base.source, sha256: 'sha256:bad' }
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreResearchDocumentError);
+                assert.equal(error.code, 'INVALID_DIGEST');
+                return true;
+            }
+        );
+        assert.throws(
+            () => createCoreResearchDocumentSnapshot({
+                ...base,
+                blocks: [{
+                    ...proofBlock,
+                    currentFingerprint: createCoreAiProofDemoFingerprint(
+                        hash('9'),
+                        hash('b')
+                    )
+                }]
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreProofArtifactError);
+                assert.equal(error.code, 'STALE_ARTIFACT');
+                return true;
+            }
+        );
+    });
+
     it('keeps profile and proof-document sources browser-safe', () => {
         assert.equal(
             CORE_PROOF_DOCUMENT_PROFILE.nodeBuiltinDependency,
@@ -247,7 +457,8 @@ describe('TypeScript v3.2 AI-PROOF-2 proof documents', () => {
         for (const relative of [
             'src/v3_2/proof_plan.ts',
             'src/v3_2/proof_document.ts',
-            'src/v3_2/ai_proof_demo.ts'
+            'src/v3_2/ai_proof_demo.ts',
+            'src/v3_2/research_document.ts'
         ]) {
             const source = readFileSync(
                 path.join(repositoryRoot, relative),
@@ -259,5 +470,12 @@ describe('TypeScript v3.2 AI-PROOF-2 proof documents', () => {
             serializeCoreProofDocumentProfile(),
             /emdash-proof-document-compiler-v1/u
         );
+        assert.equal(CORE_RESEARCH_DOCUMENT_PROFILE.nodeBuiltinDependency, false);
+        assert.equal(
+            CORE_RESEARCH_DOCUMENT_PROFILE.computesCryptographicHashes,
+            false
+        );
+        assert.equal(CORE_RESEARCH_DOCUMENT_PROFILE.parsesMarkdown, false);
+        assert.equal(CORE_RESEARCH_DOCUMENT_PROFILE.rendersHtml, false);
     });
 });
