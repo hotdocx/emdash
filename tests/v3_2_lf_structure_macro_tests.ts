@@ -9,6 +9,7 @@ import {
     CoreLfStructureExpression,
     CoreLfStructureMacroError,
     CoreLfStructureMacroScope,
+    CoreLfStructureParameterModes,
     CoreLfTransferDeclaration,
     CoreLfTransferExpression,
     CoreLfTransferPolicyEntry,
@@ -184,6 +185,134 @@ const expandFixture = (
         },
         provenance: source('structure Record with primitive projections')
     });
+};
+
+const expandParameterizedFixture = (
+    scope = new CoreLfStructureMacroScope(
+        moduleId,
+        availableFixture()
+    ),
+    firstModes: CoreLfStructureParameterModes = {
+        carrier: implicitMode,
+        constructor: explicitMode,
+        projection: implicitMode
+    },
+    secondModes: CoreLfStructureParameterModes = {
+        carrier: explicitMode,
+        constructor: implicitMode,
+        projection: explicitMode
+    }
+): CoreLfStructureDeclarationExpansion => {
+    const resolvedCode = scope.resolve(code);
+    const resolvedEl = scope.resolve(el);
+    const resolvedCodeFor = scope.resolve(codeFor);
+    return scope.declareStructure({
+        order: 3,
+        carrierName: 'ParameterizedRecord',
+        constructorName: 'MkParameterizedRecord',
+        fields(builder) {
+            const A = builder.parameter({
+                binderName: 'A',
+                modes: firstModes,
+                type: builder.global(resolvedCode)
+            });
+            const a = builder.parameter({
+                binderName: 'a',
+                modes: secondModes,
+                type: builder.apply(builder.global(resolvedEl), A)
+            });
+            builder.field({
+                binderName: 'x',
+                projectionName: 'parameterized_x',
+                mode: explicitMode,
+                type: builder.apply(builder.global(resolvedEl), A)
+            });
+            builder.field({
+                binderName: 'u',
+                projectionName: 'parameterized_u',
+                mode: explicitMode,
+                type: builder.apply(
+                    builder.global(resolvedEl),
+                    builder.call(builder.global(resolvedCodeFor), [
+                        { plicity: 'implicit', value: A },
+                        { plicity: 'explicit', value: a }
+                    ])
+                )
+            });
+        },
+        provenance: source(
+            'parameterized structure with distinct generated binder modes'
+        )
+    });
+};
+
+const expectedParameterizedCarrierType = (): CoreLfTransferExpression => pi(
+    'A',
+    implicitMode,
+    global(code),
+    pi(
+        'a',
+        explicitMode,
+        call(global(el), [explicit(bound(0))]),
+        { tag: 'type' }
+    )
+);
+
+const expectedParameterizedConstructorType = ():
+CoreLfTransferExpression => pi(
+    'A',
+    explicitMode,
+    global(code),
+    pi(
+        'a',
+        implicitMode,
+        call(global(el), [explicit(bound(0))]),
+        pi(
+            'x',
+            explicitMode,
+            call(global(el), [explicit(bound(1))]),
+            pi(
+                'u',
+                explicitMode,
+                call(global(el), [explicit(call(global(codeFor), [
+                    implicit(bound(2)),
+                    explicit(bound(1))
+                ]))]),
+                call(global(symbol('ParameterizedRecord')), [
+                    implicit(bound(3)),
+                    explicit(bound(2))
+                ])
+            )
+        )
+    )
+);
+
+const expectedParameterizedProjectionTypes = ():
+readonly CoreLfTransferExpression[] => {
+    const recordType = call(global(symbol('ParameterizedRecord')), [
+        implicit(bound(1)),
+        explicit(bound(0))
+    ]);
+    const wrapProjection = (
+        body: CoreLfTransferExpression
+    ): CoreLfTransferExpression => pi(
+        'A',
+        implicitMode,
+        global(code),
+        pi(
+            'a',
+            explicitMode,
+            call(global(el), [explicit(bound(0))]),
+            pi('record', explicitMode, recordType, body)
+        )
+    );
+    return [
+        wrapProjection(call(global(el), [explicit(bound(2))])),
+        wrapProjection(call(global(el), [explicit(call(
+            global(codeFor),
+            [implicit(bound(2)), explicit(bound(1))]
+        ))]))
+    ];
 };
 
 const projectionCall = (
@@ -528,6 +657,29 @@ const fixtureEmission = [
     ''
 ].join('\n');
 
+const parameterizedFixtureEmission = [
+    'constant symbol ParameterizedRecord : ' +
+        'Π [A : Code], Π (a : El A), TYPE;',
+    '',
+    'injective symbol MkParameterizedRecord : ' +
+        'Π (A : Code), Π [a : El A], Π (x : El A), ' +
+        'Π (u : El (@CodeFor A a)), @ParameterizedRecord A a;',
+    '',
+    'symbol parameterized_x : Π [A : Code], Π (a : El A), ' +
+        'Π (record : @ParameterizedRecord A a), El A;',
+    '',
+    'symbol parameterized_u : Π [A : Code], Π (a : El A), ' +
+        'Π (record : @ParameterizedRecord A a), ' +
+        'El (@CodeFor A a);',
+    '',
+    'rule @parameterized_x $A $a ' +
+        '(@MkParameterizedRecord $A $a $x $u) ↪ $x;',
+    '',
+    'rule @parameterized_u $A $a ' +
+        '(@MkParameterizedRecord $A $a $x $u) ↪ $u;',
+    ''
+].join('\n');
+
 const liveExpansion = (): CoreLfStructureDeclarationExpansion => {
     const Grpd = symbol('Grpd', kernelModule);
     const tau = symbol('τ', kernelModule);
@@ -641,6 +793,31 @@ const liveSource = (): string => {
     ].join('\n');
 };
 
+const parameterizedLiveSource = (): string => [
+    'constant symbol Code : TYPE;',
+    '',
+    'constant symbol El (code : Code) : TYPE;',
+    '',
+    'constant symbol CodeFor [A : Code] (a : El A) : Code;',
+    '',
+    parameterizedFixtureEmission.trimEnd(),
+    '',
+    'assert (A : Code)',
+    '  (a : El A)',
+    '  (x : El A)',
+    '  (u : El (@CodeFor A a))',
+    '  ⊢ @parameterized_x A a',
+    '      (@MkParameterizedRecord A a x u) ≡ x;',
+    '',
+    'assert (A : Code)',
+    '  (a : El A)',
+    '  (x : El A)',
+    '  (u : El (@CodeFor A a))',
+    '  ⊢ @parameterized_u A a',
+    '      (@MkParameterizedRecord A a x u) ≡ u;',
+    ''
+].join('\n');
+
 describe('outer LF dependent structure declaration macro', () => {
     it('expands atomically in source order and invokes its callback once', () => {
         let callbackCount = 0;
@@ -650,6 +827,7 @@ describe('outer LF dependent structure declaration macro', () => {
         );
 
         assert.equal(callbackCount, 1);
+        assert.deepEqual(expansion.handle.parameters, []);
         assert.deepEqual(expansion.sourceOrders, [
             3, 4, 5, 6, 7, 8, 9, 10, 11, 12
         ]);
@@ -721,6 +899,172 @@ describe('outer LF dependent structure declaration macro', () => {
             ),
             expectedProjectionTypes()
         );
+    });
+
+    it('lowers dependent parameters with owner-specific binder modes', () => {
+        const firstModes: CoreLfStructureParameterModes = {
+            carrier: implicitMode,
+            constructor: explicitMode,
+            projection: implicitMode
+        };
+        const secondModes: CoreLfStructureParameterModes = {
+            carrier: explicitMode,
+            constructor: implicitMode,
+            projection: explicitMode
+        };
+        const firstBefore = structuredClone(firstModes);
+        const secondBefore = structuredClone(secondModes);
+        const expansion = expandParameterizedFixture(
+            undefined,
+            firstModes,
+            secondModes
+        );
+        assert.deepEqual(firstModes, firstBefore);
+        assert.deepEqual(secondModes, secondBefore);
+        assert.equal(Object.isFrozen(firstModes), false);
+        assert.equal(Object.isFrozen(secondModes), false);
+        assert.deepEqual(
+            expansion.declarations[0].type,
+            expectedParameterizedCarrierType()
+        );
+        assert.deepEqual(
+            expansion.declarations[1].type,
+            expectedParameterizedConstructorType()
+        );
+        assert.deepEqual(
+            expansion.declarations.slice(2).map(
+                declaration => declaration.type
+            ),
+            expectedParameterizedProjectionTypes()
+        );
+        assert.deepEqual(
+            expansion.handle.parameters.map(parameter => ({
+                ordinal: parameter.ordinal,
+                binderName: parameter.binderName,
+                modes: parameter.modes
+            })),
+            [{
+                ordinal: 0,
+                binderName: 'A',
+                modes: {
+                    carrier: implicitMode,
+                    constructor: explicitMode,
+                    projection: implicitMode
+                }
+            }, {
+                ordinal: 1,
+                binderName: 'a',
+                modes: {
+                    carrier: explicitMode,
+                    constructor: implicitMode,
+                    projection: explicitMode
+                }
+            }]
+        );
+        assert.equal(
+            emitCoreLfStructureLambdapiFragment(
+                expansion,
+                { backendName: value => value.name }
+            ),
+            parameterizedFixtureEmission
+        );
+        assertDeepFrozen(expansion);
+    });
+
+    it('checks parameterized projection betas and their captures', () => {
+        const expansion = expandParameterizedFixture();
+        const variableNames = ['A', 'a', 'x', 'u'];
+        const capture = (name: string): CoreLfTransferExpression => ({
+            tag: 'capture',
+            name
+        });
+        const expectedVariableTypes: readonly CoreLfTransferExpression[] = [
+            global(code),
+            call(global(el), [explicit(capture('A'))]),
+            call(global(el), [explicit(capture('A'))]),
+            call(global(el), [explicit(call(global(codeFor), [
+                implicit(capture('A')),
+                explicit(capture('a'))
+            ]))])
+        ];
+        expansion.runtimeRules.forEach((rule, fieldIndex) => {
+            assert.deepEqual(
+                rule.variables.map(variable => variable.name),
+                variableNames
+            );
+            assert.deepEqual(
+                rule.variables.map(variable => variable.type),
+                expectedVariableTypes
+            );
+            assert.deepEqual(rule.right, capture(variableNames[fieldIndex + 2]));
+            assert.deepEqual(rule.left, call(
+                global(symbol([
+                    'parameterized_x', 'parameterized_u'
+                ][fieldIndex])),
+                [
+                    implicit(capture('A')),
+                    explicit(capture('a')),
+                    explicit(call(
+                        global(symbol('MkParameterizedRecord')),
+                        [
+                            explicit(capture('A')),
+                            implicit(capture('a')),
+                            explicit(capture('x')),
+                            explicit(capture('u'))
+                        ]
+                    ))
+                ]
+            ));
+        });
+
+        const module = fixtureModule(expansion);
+        const policy = fixturePolicy(module);
+        const plan = planCoreLfMixedPhases(module, policy);
+        const linkage = createCoreLfMixedDeclarationLinkage(plan, {
+            revision: 'parameterized-structure-macro-linkage-1',
+            moduleRevision: module.revision,
+            entries: [...module.declarations]
+                .sort((left, right) => left.order - right.order)
+                .map((declaration, order) => ({
+                    order,
+                    symbol: declaration.symbol,
+                    kind: 'free-declaration' as const,
+                    coreName: `parameterized_${declaration.symbol.name}`,
+                    backendName: declaration.symbol.name
+                }))
+        });
+        const compiled = compileCoreLfMixedPhases(plan, linkage);
+        const witnessSource = provenance(
+            'derived',
+            'generated parameterized structure runtime witness'
+        );
+        const bindings = variableNames.map(name =>
+            kernelFree(`parameterized_witness_${name}`, witnessSource)
+        );
+        const runtimePhases = compiled.phases.filter(
+            phase => phase.kind === 'runtime'
+        );
+        assert.equal(runtimePhases.length, 2);
+        runtimePhases.forEach((phase, fieldIndex) => {
+            if (phase.kind !== 'runtime') return;
+            const rule = phase.runtime.localProgram.rules[0];
+            assert.equal(rule.subjectValidation.kind, 'typescript-checked');
+            const redex = phase.runtime.localProgram.instantiateRuleLeft(
+                rule,
+                bindings,
+                witnessSource
+            );
+            const rewritten = phase.runtime.runtime.rewriteHead(redex);
+            assert.equal(rewritten.status, 'rewritten');
+            if (rewritten.status !== 'rewritten') return;
+            assert.equal(
+                kernelExpressionEquals(
+                    rewritten.after,
+                    bindings[fieldIndex + expansion.handle.parameters.length]
+                ),
+                true
+            );
+        });
     });
 
     it('lowers each beta to typed captures and the selected field', () => {
@@ -1154,6 +1498,150 @@ describe('outer LF dependent structure declaration macro', () => {
         );
     });
 
+    it('rejects invalid parameter order, identity, and modes', () => {
+        const scope = new CoreLfStructureMacroScope(
+            moduleId,
+            availableFixture()
+        );
+        const resolvedCode = scope.resolve(code);
+        const modes = {
+            carrier: implicitMode,
+            constructor: explicitMode,
+            projection: implicitMode
+        };
+        const modesBefore = structuredClone(modes);
+
+        throwsMacro(
+            () => scope.declareStructure({
+                order: 3,
+                carrierName: 'LateParameter',
+                constructorName: 'MkLateParameter',
+                fields(builder) {
+                    builder.field({
+                        binderName: 'x',
+                        projectionName: 'late_parameter_x',
+                        mode: explicitMode,
+                        type: builder.type()
+                    });
+                    builder.parameter({
+                        binderName: 'A',
+                        modes,
+                        type: builder.global(resolvedCode)
+                    });
+                },
+                provenance: source('late parameter fixture')
+            }),
+            'INVALID_PARAMETER',
+            'command.parameters[0]'
+        );
+        assert.deepEqual(modes, modesBefore);
+        assert.equal(Object.isFrozen(modes), false);
+        assert.equal(Object.isFrozen(modes.carrier), false);
+
+        throwsMacro(
+            () => scope.declareStructure({
+                order: 3,
+                carrierName: 'DuplicateParameter',
+                constructorName: 'MkDuplicateParameter',
+                fields(builder) {
+                    builder.parameter({
+                        binderName: 'A',
+                        modes,
+                        type: builder.global(resolvedCode)
+                    });
+                    builder.parameter({
+                        binderName: 'A',
+                        modes,
+                        type: builder.global(resolvedCode)
+                    });
+                    builder.field({
+                        binderName: 'x',
+                        projectionName: 'duplicate_parameter_x',
+                        mode: explicitMode,
+                        type: builder.type()
+                    });
+                },
+                provenance: source('duplicate parameter fixture')
+            }),
+            'INVALID_PARAMETER',
+            'command.parameters[1].binderName'
+        );
+
+        throwsMacro(
+            () => scope.declareStructure({
+                order: 3,
+                carrierName: 'InvalidParameterMode',
+                constructorName: 'MkInvalidParameterMode',
+                fields(builder) {
+                    builder.parameter({
+                        binderName: 'A',
+                        modes: {
+                            ...modes,
+                            carrier: {
+                                plicity: 'invalid',
+                                variation: 'functorial'
+                            } as never
+                        },
+                        type: builder.global(resolvedCode)
+                    });
+                    builder.field({
+                        binderName: 'x',
+                        projectionName: 'invalid_parameter_mode_x',
+                        mode: explicitMode,
+                        type: builder.type()
+                    });
+                },
+                provenance: source('invalid parameter mode fixture')
+            }),
+            'INVALID_PARAMETER',
+            'command.parameters[0].modes.carrier'
+        );
+
+        let foreignParameter: CoreLfStructureExpression | undefined;
+        scope.declareStructure({
+            order: 3,
+            carrierName: 'ParameterSource',
+            constructorName: 'MkParameterSource',
+            fields(builder) {
+                foreignParameter = builder.parameter({
+                    binderName: 'A',
+                    modes,
+                    type: builder.global(resolvedCode)
+                });
+                builder.field({
+                    binderName: 'x',
+                    projectionName: 'parameter_source_x',
+                    mode: explicitMode,
+                    type: foreignParameter
+                });
+            },
+            provenance: source('foreign parameter source')
+        });
+        throwsMacro(
+            () => scope.declareStructure({
+                order: 3,
+                carrierName: 'ParameterTarget',
+                constructorName: 'MkParameterTarget',
+                fields(builder) {
+                    builder.parameter({
+                        binderName: 'A',
+                        modes,
+                        type: foreignParameter as CoreLfStructureExpression
+                    });
+                    builder.field({
+                        binderName: 'x',
+                        projectionName: 'parameter_target_x',
+                        mode: explicitMode,
+                        type: builder.type()
+                    });
+                },
+                provenance: source('foreign parameter target')
+            }),
+            'FOREIGN_EXPRESSION',
+            'command.parameters[0].type'
+        );
+    });
+
     it('rejects foreign, forward, and binder-escaping references', () => {
         const scope = new CoreLfStructureMacroScope(
             moduleId,
@@ -1347,6 +1835,31 @@ describe('outer LF dependent structure declaration macro', () => {
                 result.accepted,
                 true,
                 `Generated structure consumer was rejected:\n` +
+                    `${result.diagnostics}\n${generated}`
+            );
+        }
+    );
+
+    it(
+        'has parameterized generated beta accepted by Lambdapi',
+        {
+            skip:
+                process.env.EMDASH_RUN_LAMBDAPI_STRUCTURE_PROBES !== '1'
+        },
+        () => {
+            const generated = parameterizedLiveSource();
+            const result = checkLambdapiProbe(
+                { source: generated, sourceMap: [] },
+                {
+                    packageRoot: resolve(__dirname, '../emdash2'),
+                    timeoutMs: 55_000
+                }
+            );
+            assert.equal(result.timedOut, false, result.diagnostics);
+            assert.equal(
+                result.accepted,
+                true,
+                `Generated parameterized structure was rejected:\n` +
                     `${result.diagnostics}\n${generated}`
             );
         }

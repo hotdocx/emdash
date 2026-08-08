@@ -1,10 +1,11 @@
 /**
- * Direct-TypeScript outer-LF dependent structure declaration macro.
+ * Direct-TypeScript outer-LF parameterized dependent structure macro.
  *
  * The host-only declaration expands before explicit Core to an opaque
- * carrier, one injective constructor, ordinary named projections, and one
- * subject-reducing runtime beta per projection. It deliberately generates no
- * eliminator, eta law, recursive occurrence, or source-level inductive node.
+ * parameterized carrier, one injective constructor, ordinary named
+ * projections, and one subject-reducing runtime beta per projection. It
+ * deliberately generates no eliminator, eta law, recursive occurrence, or
+ * source-level inductive node.
  */
 
 import { BinderMode } from './kernel';
@@ -21,6 +22,7 @@ import {
 const RESOLVED_GLOBAL = Symbol('CoreLfStructureResolvedGlobal');
 const STRUCTURE_EXPRESSION = Symbol('CoreLfStructureExpression');
 const STRUCTURE_BINDER_TOKEN = Symbol('CoreLfStructureBinderToken');
+const STRUCTURE_PARAMETER_TOKEN = Symbol('CoreLfStructureParameterToken');
 const STRUCTURE_FIELD_TOKEN = Symbol('CoreLfStructureFieldToken');
 
 const MODULE_ID =
@@ -37,6 +39,7 @@ export type CoreLfStructureMacroErrorCode =
     | 'ESCAPED_BINDER'
     | 'DUPLICATE_SYMBOL'
     | 'INVALID_COMMAND'
+    | 'INVALID_PARAMETER'
     | 'INVALID_FIELD'
     | 'UNSUPPORTED_EMISSION';
 
@@ -81,6 +84,13 @@ extends CoreLfStructureExpression {
     readonly [STRUCTURE_BINDER_TOKEN]: true;
 }
 
+export interface CoreLfStructureParameterToken
+extends CoreLfStructureExpression {
+    readonly [STRUCTURE_PARAMETER_TOKEN]: true;
+    readonly ordinal: number;
+    readonly binderName: string;
+}
+
 export interface CoreLfStructureFieldToken
 extends CoreLfStructureExpression {
     readonly [STRUCTURE_FIELD_TOKEN]: true;
@@ -102,9 +112,23 @@ export interface CoreLfStructureFieldInput {
     readonly type: CoreLfStructureExpression;
 }
 
+export interface CoreLfStructureParameterModes {
+    readonly carrier: BinderMode;
+    readonly constructor: BinderMode;
+    readonly projection: BinderMode;
+}
+
+export interface CoreLfStructureParameterInput {
+    readonly binderName: string;
+    readonly modes: CoreLfStructureParameterModes;
+    /** May reference only parameters declared earlier in this callback. */
+    readonly type: CoreLfStructureExpression;
+}
+
 /**
- * Callback-once macro builder. Field handles are expressions only inside the
- * current declaration and can be referenced solely by later field types.
+ * Callback-once macro builder. Parameter and field handles are expressions
+ * only inside the current declaration. Parameters may occur in later
+ * parameter and field types; fields may occur solely in later field types.
  */
 export interface CoreLfStructureFieldBuilder {
     type(): CoreLfStructureExpression;
@@ -142,6 +166,11 @@ export interface CoreLfStructureFieldBuilder {
         mode?: BinderMode
     ): CoreLfStructureExpression;
 
+    /** Declare one parameter before all fields in this structure. */
+    parameter(
+        input: CoreLfStructureParameterInput
+    ): CoreLfStructureParameterToken;
+
     field(input: CoreLfStructureFieldInput): CoreLfStructureFieldToken;
 }
 
@@ -167,11 +196,18 @@ export interface CoreLfStructureProjectionHandle {
     readonly betaRuleId: string;
 }
 
+export interface CoreLfStructureParameterHandle {
+    readonly ordinal: number;
+    readonly binderName: string;
+    readonly modes: CoreLfStructureParameterModes;
+}
+
 export interface CoreLfStructureHandle {
     readonly carrier: CoreLfQualifiedSymbol;
     readonly carrierTerm: CoreLfTransferExpression;
     readonly constructor: CoreLfQualifiedSymbol;
     readonly constructorTerm: CoreLfTransferExpression;
+    readonly parameters: readonly CoreLfStructureParameterHandle[];
     readonly projections: readonly CoreLfStructureProjectionHandle[];
 }
 
@@ -203,6 +239,11 @@ type StructureNode =
         readonly projectionName: string;
     }
     | {
+        readonly tag: 'parameter';
+        readonly ordinal: number;
+        readonly binderName: string;
+    }
+    | {
         readonly tag: 'token';
         readonly ordinal: number;
         readonly hint: string;
@@ -228,10 +269,18 @@ interface InternalStructureExpression extends CoreLfStructureExpression {
     readonly builderIdentity: symbol;
     readonly node: StructureNode;
     readonly [STRUCTURE_BINDER_TOKEN]?: true;
+    readonly [STRUCTURE_PARAMETER_TOKEN]?: true;
     readonly [STRUCTURE_FIELD_TOKEN]?: true;
     readonly ordinal?: number;
     readonly binderName?: string;
     readonly projectionName?: string;
+}
+
+interface InternalStructureParameter {
+    readonly ordinal: number;
+    readonly binderName: string;
+    readonly modes: CoreLfStructureParameterModes;
+    readonly type: InternalStructureExpression;
 }
 
 interface InternalStructureField {
@@ -244,17 +293,22 @@ interface InternalStructureField {
 
 type StructureLowering =
     | {
-        readonly kind: 'constructor';
-        readonly fieldIndex: number;
+        readonly kind: 'binder';
+        readonly subject: 'parameter' | 'field';
+        readonly subjectIndex: number;
+        readonly parameters: readonly InternalStructureParameter[];
     }
     | {
         readonly kind: 'projection';
-        readonly fieldIndex: number;
+        readonly subjectIndex: number;
+        readonly parameters: readonly InternalStructureParameter[];
         readonly projections: readonly CoreLfQualifiedSymbol[];
     }
     | {
         readonly kind: 'capture';
-        readonly fieldIndex: number;
+        readonly subject: 'parameter' | 'field';
+        readonly subjectIndex: number;
+        readonly parameters: readonly InternalStructureParameter[];
         readonly fields: readonly InternalStructureField[];
     };
 
@@ -348,6 +402,29 @@ const validateMode = (mode: BinderMode, path: string): void => {
             path,
             'Structure binder mode is invalid'
         );
+    }
+};
+
+const validateParameterModes = (
+    modes: CoreLfStructureParameterModes,
+    path: string
+): void => {
+    if (typeof modes !== 'object' || modes === null) {
+        fail(
+            'INVALID_PARAMETER',
+            path,
+            'Structure parameter modes must be an object'
+        );
+    }
+    for (const owner of ['carrier', 'constructor', 'projection'] as const) {
+        try {
+            validateMode(modes[owner], `${path}.${owner}`);
+        } catch (error) {
+            if (error instanceof CoreLfStructureMacroError) {
+                fail('INVALID_PARAMETER', error.path, error.message);
+            }
+            throw error;
+        }
     }
 };
 
@@ -519,10 +596,12 @@ class InternalFieldBuilder implements CoreLfStructureFieldBuilder {
     private readonly builderIdentity = Symbol(
         'CoreLfStructureFieldBuilder'
     );
+    private readonly parameters: InternalStructureParameter[] = [];
     private readonly fields: InternalStructureField[] = [];
     private readonly binderNames = new Set<string>();
     private readonly projectionNames = new Set<string>();
     private nextTokenOrdinal = 0;
+    private fieldsStarted = false;
     private sealed = false;
 
     constructor(
@@ -544,23 +623,28 @@ class InternalFieldBuilder implements CoreLfStructureFieldBuilder {
 
     private makeExpression(
         node: StructureNode,
-        kind?: 'binder' | 'field'
+        kind?: 'binder' | 'parameter' | 'field'
     ): InternalStructureExpression {
         return Object.freeze({
             [STRUCTURE_EXPRESSION]: true as const,
             ...(kind === 'binder'
                 ? { [STRUCTURE_BINDER_TOKEN]: true as const }
                 : {}),
+            ...(kind === 'parameter'
+                ? { [STRUCTURE_PARAMETER_TOKEN]: true as const }
+                : {}),
             ...(kind === 'field'
                 ? { [STRUCTURE_FIELD_TOKEN]: true as const }
                 : {}),
             builderIdentity: this.builderIdentity,
             node: deepFreeze(node),
-            ...(node.tag === 'field'
+            ...(node.tag === 'parameter' || node.tag === 'field'
                 ? {
                     ordinal: node.ordinal,
                     binderName: node.binderName,
-                    projectionName: node.projectionName
+                    ...(node.tag === 'field'
+                        ? { projectionName: node.projectionName }
+                        : {})
                 }
                 : {})
         });
@@ -727,8 +811,68 @@ class InternalFieldBuilder implements CoreLfStructureFieldBuilder {
         return this.bind('lambda', hint, type, body, mode);
     }
 
+    parameter(
+        input: CoreLfStructureParameterInput
+    ): CoreLfStructureParameterToken {
+        this.requireOpen('parameter');
+        const index = this.parameters.length;
+        const path = `command.parameters[${index}]`;
+        if (this.fieldsStarted) {
+            return fail(
+                'INVALID_PARAMETER',
+                path,
+                'Structure parameters must be declared before every field'
+            );
+        }
+        if (typeof input !== 'object' || input === null) {
+            return fail(
+                'INVALID_PARAMETER',
+                path,
+                'Structure parameter must be an object'
+            );
+        }
+        if (
+            typeof input.binderName !== 'string' ||
+            !OUTPUT_NAME.test(input.binderName)
+        ) {
+            return fail(
+                'INVALID_PARAMETER',
+                `${path}.binderName`,
+                `Invalid structure parameter binder ` +
+                    `'${String(input.binderName)}'`
+            );
+        }
+        validateParameterModes(input.modes, `${path}.modes`);
+        if (this.binderNames.has(input.binderName)) {
+            return fail(
+                'INVALID_PARAMETER',
+                `${path}.binderName`,
+                `Duplicate structure binder '${input.binderName}'`
+            );
+        }
+        const type = this.requireExpression(input.type, `${path}.type`);
+        this.binderNames.add(input.binderName);
+        const parameter: InternalStructureParameter = deepFreeze({
+            ordinal: index,
+            binderName: input.binderName,
+            modes: {
+                carrier: { ...input.modes.carrier },
+                constructor: { ...input.modes.constructor },
+                projection: { ...input.modes.projection }
+            },
+            type
+        });
+        this.parameters.push(parameter);
+        return this.makeExpression({
+            tag: 'parameter',
+            ordinal: parameter.ordinal,
+            binderName: parameter.binderName
+        }, 'parameter') as CoreLfStructureParameterToken;
+    }
+
     field(input: CoreLfStructureFieldInput): CoreLfStructureFieldToken {
         this.requireOpen('field');
+        this.fieldsStarted = true;
         const index = this.fields.length;
         const path = `command.fields[${index}]`;
         if (typeof input !== 'object' || input === null) {
@@ -778,7 +922,10 @@ class InternalFieldBuilder implements CoreLfStructureFieldBuilder {
         }, 'field') as CoreLfStructureFieldToken;
     }
 
-    finish(): readonly InternalStructureField[] {
+    finish(): {
+        readonly parameters: readonly InternalStructureParameter[];
+        readonly fields: readonly InternalStructureField[];
+    } {
         this.sealed = true;
         if (this.fields.length === 0) {
             return fail(
@@ -787,7 +934,10 @@ class InternalFieldBuilder implements CoreLfStructureFieldBuilder {
                 'First structure slice requires at least one field'
             );
         }
-        return deepFreeze([...this.fields]);
+        return deepFreeze({
+            parameters: [...this.parameters],
+            fields: [...this.fields]
+        });
     }
 }
 
@@ -795,6 +945,14 @@ const lowerStructureExpression = (
     expression: InternalStructureExpression,
     lowering: StructureLowering
 ): CoreLfTransferExpression => {
+    const subjectPath = (): string => {
+        if (lowering.kind === 'projection') {
+            return `command.fields[${lowering.subjectIndex}].type`;
+        }
+        return lowering.subject === 'parameter'
+            ? `command.parameters[${lowering.subjectIndex}].type`
+            : `command.fields[${lowering.subjectIndex}].type`;
+    };
     const visit = (
         current: InternalStructureExpression,
         scope: readonly InternalStructureExpression[]
@@ -804,34 +962,107 @@ const lowerStructureExpression = (
                 return { tag: 'type' };
             case 'global':
                 return globalExpression(current.node.symbol);
+            case 'parameter': {
+                const ordinal = current.node.ordinal;
+                if (
+                    lowering.kind !== 'projection' &&
+                    lowering.subject === 'parameter' &&
+                    ordinal >= lowering.subjectIndex
+                ) {
+                    return fail(
+                        'INVALID_PARAMETER',
+                        subjectPath(),
+                        `Parameter '${current.node.binderName}' is not ` +
+                            'earlier than the parameter whose type ' +
+                            'references it'
+                    );
+                }
+                switch (lowering.kind) {
+                    case 'binder':
+                        return {
+                            tag: 'bound',
+                            index:
+                                scope.length +
+                                (lowering.subject === 'parameter'
+                                    ? lowering.subjectIndex
+                                    : lowering.subjectIndex +
+                                        lowering.parameters.length) -
+                                ordinal -
+                                1
+                        };
+                    case 'projection':
+                        return {
+                            tag: 'bound',
+                            index:
+                                scope.length +
+                                lowering.parameters.length -
+                                ordinal
+                        };
+                    case 'capture':
+                        return {
+                            tag: 'capture',
+                            name:
+                                lowering.parameters[ordinal].binderName
+                        };
+                    default: {
+                        const exhaustive: never = lowering;
+                        return exhaustive;
+                    }
+                }
+            }
             case 'field': {
                 const ordinal = current.node.ordinal;
-                if (ordinal >= lowering.fieldIndex) {
+                if (
+                    lowering.kind !== 'projection' &&
+                    lowering.subject === 'parameter'
+                ) {
+                    return fail(
+                        'INVALID_PARAMETER',
+                        subjectPath(),
+                        'A structure parameter type cannot reference a field'
+                    );
+                }
+                const fieldIndex = lowering.subjectIndex;
+                if (ordinal >= fieldIndex) {
                     return fail(
                         'INVALID_FIELD',
-                        `command.fields[${lowering.fieldIndex}].type`,
+                        subjectPath(),
                         `Field '${current.node.binderName}' is not earlier ` +
                             'than the field whose type references it'
                     );
                 }
                 switch (lowering.kind) {
-                    case 'constructor':
+                    case 'binder':
                         return {
                             tag: 'bound',
                             index:
                                 scope.length +
-                                lowering.fieldIndex -
+                                fieldIndex -
                                 ordinal -
                                 1
                         };
-                    case 'projection':
+                    case 'projection': {
+                        const parameterArguments = lowering.parameters.map(
+                            parameter => ({
+                                plicity:
+                                    parameter.modes.projection.plicity,
+                                value: {
+                                    tag: 'bound' as const,
+                                    index:
+                                        scope.length +
+                                        lowering.parameters.length -
+                                        parameter.ordinal
+                                }
+                            })
+                        );
                         return callGlobal(
                             lowering.projections[ordinal],
-                            [explicit({
+                            [...parameterArguments, explicit({
                                 tag: 'bound',
                                 index: scope.length
                             })]
                         );
+                    }
                     case 'capture':
                         return {
                             tag: 'capture',
@@ -848,7 +1079,7 @@ const lowerStructureExpression = (
                 if (position < 0) {
                     return fail(
                         'ESCAPED_BINDER',
-                        `command.fields[${lowering.fieldIndex}].type`,
+                        subjectPath(),
                         `Structure binder token '${current.node.hint}' ` +
                             'escaped its binder body'
                     );
@@ -907,6 +1138,60 @@ const wrapFields = (
         }),
         result
     );
+
+type StructureParameterModeOwner = keyof CoreLfStructureParameterModes;
+
+const wrapParameters = (
+    parameters: readonly InternalStructureParameter[],
+    types: readonly CoreLfTransferExpression[],
+    owner: StructureParameterModeOwner,
+    result: CoreLfTransferExpression
+): CoreLfTransferExpression =>
+    parameters.reduceRight<CoreLfTransferExpression>(
+        (body, parameter, index) => ({
+            tag: 'pi',
+            binder: {
+                hint: parameter.binderName,
+                mode: { ...parameter.modes[owner] },
+                type: types[index]
+            },
+            body
+        }),
+        result
+    );
+
+const applyBoundParameters = (
+    symbol: CoreLfQualifiedSymbol,
+    parameters: readonly InternalStructureParameter[],
+    owner: StructureParameterModeOwner,
+    innerBinderCount: number
+): CoreLfTransferExpression => parameters.length === 0
+    ? globalExpression(symbol)
+    : callGlobal(
+        symbol,
+        parameters.map(parameter => ({
+            plicity: parameter.modes[owner].plicity,
+            value: {
+                tag: 'bound' as const,
+                index:
+                    innerBinderCount +
+                    parameters.length -
+                    parameter.ordinal -
+                    1
+            }
+        }))
+    );
+
+const captureParameters = (
+    parameters: readonly InternalStructureParameter[],
+    owner: StructureParameterModeOwner
+) => parameters.map(parameter => ({
+    plicity: parameter.modes[owner].plicity,
+    value: {
+        tag: 'capture' as const,
+        name: parameter.binderName
+    }
+}));
 
 /** Immutable resolution scope for one direct-TypeScript outer LF module. */
 export class CoreLfStructureMacroScope {
@@ -1102,7 +1387,7 @@ export class CoreLfStructureMacroScope {
                 'Structure field callback must be synchronous'
             );
         }
-        const fields = builder.finish();
+        const { parameters, fields } = builder.finish();
         const commandCount = 2 + fields.length * 2;
         if (command.order > MAX_ORDER - commandCount) {
             return fail(
@@ -1143,10 +1428,20 @@ export class CoreLfStructureMacroScope {
         });
 
         const provenance = { ...command.provenance };
+        const parameterTypes = parameters.map((parameter, parameterIndex) =>
+            lowerStructureExpression(parameter.type, {
+                kind: 'binder',
+                subject: 'parameter',
+                subjectIndex: parameterIndex,
+                parameters
+            })
+        );
         const constructorFieldTypes = fields.map((field, fieldIndex) =>
             lowerStructureExpression(field.type, {
-                kind: 'constructor',
-                fieldIndex
+                kind: 'binder',
+                subject: 'field',
+                subjectIndex: fieldIndex,
+                parameters
             })
         );
         const carrierTerm = globalExpression(carrier);
@@ -1155,7 +1450,12 @@ export class CoreLfStructureMacroScope {
             {
                 order: command.order,
                 symbol: carrier,
-                type: { tag: 'type' },
+                type: wrapParameters(
+                    parameters,
+                    parameterTypes,
+                    'carrier',
+                    { tag: 'type' }
+                ),
                 body: coreLfTransferAbsentBody(),
                 modifiers: {
                     visibility: 'public',
@@ -1167,10 +1467,20 @@ export class CoreLfStructureMacroScope {
             {
                 order: command.order + 1,
                 symbol: constructor,
-                type: wrapFields(
-                    fields,
-                    constructorFieldTypes,
-                    carrierTerm
+                type: wrapParameters(
+                    parameters,
+                    parameterTypes,
+                    'constructor',
+                    wrapFields(
+                        fields,
+                        constructorFieldTypes,
+                        applyBoundParameters(
+                            carrier,
+                            parameters,
+                            'carrier',
+                            fields.length
+                        )
+                    )
                 ),
                 body: coreLfTransferAbsentBody(),
                 modifiers: {
@@ -1183,22 +1493,33 @@ export class CoreLfStructureMacroScope {
             ...fields.map((field, fieldIndex) => ({
                 order: command.order + 2 + fieldIndex,
                 symbol: projections[fieldIndex],
-                type: {
-                    tag: 'pi' as const,
-                    binder: {
-                        hint: 'record',
-                        mode: {
-                            plicity: 'explicit' as const,
-                            variation: 'functorial' as const
+                type: wrapParameters(
+                    parameters,
+                    parameterTypes,
+                    'projection',
+                    {
+                        tag: 'pi' as const,
+                        binder: {
+                            hint: 'record',
+                            mode: {
+                                plicity: 'explicit' as const,
+                                variation: 'functorial' as const
+                            },
+                            type: applyBoundParameters(
+                                carrier,
+                                parameters,
+                                'carrier',
+                                0
+                            )
                         },
-                        type: carrierTerm
-                    },
-                    body: lowerStructureExpression(field.type, {
-                        kind: 'projection' as const,
-                        fieldIndex,
-                        projections
-                    })
-                },
+                        body: lowerStructureExpression(field.type, {
+                            kind: 'projection' as const,
+                            subjectIndex: fieldIndex,
+                            parameters,
+                            projections
+                        })
+                    }
+                ),
                 body: coreLfTransferAbsentBody(),
                 modifiers: {
                     visibility: 'public' as const,
@@ -1211,13 +1532,16 @@ export class CoreLfStructureMacroScope {
 
         const constructorPattern = callGlobal(
             constructor,
-            fields.map(field => ({
-                plicity: field.mode.plicity,
-                value: {
-                    tag: 'capture' as const,
-                    name: field.binderName
-                }
-            }))
+            [
+                ...captureParameters(parameters, 'constructor'),
+                ...fields.map(field => ({
+                    plicity: field.mode.plicity,
+                    value: {
+                        tag: 'capture' as const,
+                        name: field.binderName
+                    }
+                }))
+            ]
         );
         const runtimeRules = fields.map((field, fieldIndex) => {
             const id =
@@ -1230,17 +1554,34 @@ export class CoreLfStructureMacroScope {
                 groupId: id,
                 clauseOrder: 0,
                 sourceOwner: projections[fieldIndex],
-                variables: fields.map((variable, variableIndex) => ({
-                    name: variable.binderName,
-                    type: lowerStructureExpression(variable.type, {
-                        kind: 'capture' as const,
-                        fieldIndex: variableIndex,
-                        fields
-                    })
-                })),
+                variables: [
+                    ...parameters.map((parameter, parameterIndex) => ({
+                        name: parameter.binderName,
+                        type: lowerStructureExpression(parameter.type, {
+                            kind: 'capture' as const,
+                            subject: 'parameter' as const,
+                            subjectIndex: parameterIndex,
+                            parameters,
+                            fields
+                        })
+                    })),
+                    ...fields.map((variable, variableIndex) => ({
+                        name: variable.binderName,
+                        type: lowerStructureExpression(variable.type, {
+                            kind: 'capture' as const,
+                            subject: 'field' as const,
+                            subjectIndex: variableIndex,
+                            parameters,
+                            fields
+                        })
+                    }))
+                ],
                 left: callGlobal(
                     projections[fieldIndex],
-                    [explicit(constructorPattern)]
+                    [
+                        ...captureParameters(parameters, 'projection'),
+                        explicit(constructorPattern)
+                    ]
                 ),
                 right: {
                     tag: 'capture' as const,
@@ -1259,6 +1600,15 @@ export class CoreLfStructureMacroScope {
             symbol: projections[index],
             betaRuleId: runtimeRules[index].id
         }));
+        const handleParameters = parameters.map(parameter => ({
+            ordinal: parameter.ordinal,
+            binderName: parameter.binderName,
+            modes: {
+                carrier: { ...parameter.modes.carrier },
+                constructor: { ...parameter.modes.constructor },
+                projection: { ...parameter.modes.projection }
+            }
+        }));
 
         return deepFreeze({
             kind: 'expanded-structure-declaration' as const,
@@ -1270,6 +1620,7 @@ export class CoreLfStructureMacroScope {
                 carrierTerm,
                 constructor,
                 constructorTerm,
+                parameters: handleParameters,
                 projections: handleProjections
             },
             nextOrder: command.order + commandCount

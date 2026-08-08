@@ -1,5 +1,15 @@
 # Emdash v3.2 Record/Structure Declaration Usability Plan
 
+> **Active parameterized/class continuation (2026-08-08):**
+> The completed unparameterized structure slice recorded here is the baseline
+> for
+> [`TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md`](./TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md).
+> That living plan owns parameter telescopes, named construction,
+> classes/typeclasses, inheritance and ancestor sharing, scoped recursive
+> instance synthesis, and their Lean-comparable acceptance corpus. This
+> historical plan remains authoritative for the original no-eta,
+> no-eliminator, no-general-inductive boundary.
+
 Date: 2026-08-01 (America/Toronto)
 
 Status: implemented, validated, and locally checkpointed

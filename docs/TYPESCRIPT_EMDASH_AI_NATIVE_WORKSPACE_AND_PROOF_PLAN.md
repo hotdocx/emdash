@@ -1,5 +1,13 @@
 # TypeScript/emdash AI-Native Workspace And Proof Plan
 
+> **Forward synthesis continuation (2026-08-08):**
+> [`TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md`](./TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md)
+> now governs the consumer-justified continuation from finite global
+> dictionary selection toward parameterized structures, classes, inheritance,
+> immutable scopes, recursive bounded search, and general class-implicit call
+> elaboration. The explicit checked-Core boundary and all qualified local
+> workspace/proof contracts recorded here remain unchanged.
+
 Date: 2026-08-08
 Plan-ID: TS-EMDASH-AI-NATIVE
 Status: qualified local-foundation architecture and implementation ledger;
