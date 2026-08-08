@@ -2,7 +2,8 @@
 
 Date: 2026-08-08
 Plan-ID: TS-EMDASH-AI-NATIVE
-Status: active living proposal and implementation ledger; AI-PROOF-1,
+Status: qualified local-foundation architecture and implementation ledger;
+AI-PROOF-1,
 AI-PROOF-2, AI-WORKSPACE-0, AI-WORKSPACE-1A, and AI-WORKSPACE-1B1 are
 complete; AI-WORKSPACE-1B2A and AI-WORKSPACE-1B2B are final-green;
 AI-REMOTE-1A is final-green; AI-REMOTE-1B0's exact-consumer audit is complete;
@@ -21,7 +22,9 @@ audit is complete and its read-only typed-sidecar materializer AI-PAPER-1B1 is
 final-green; artifact writing/inline placement and rendering remain separately
 consumer-gated; AI-PAPER-1C0 selects the existing external-reviewer webpage,
 and its release-pinned client recheck AI-PAPER-1C1 is final-green; inline
-print placement and hosted delivery remain separately consumer-gated
+print placement and hosted delivery remain separately consumer-gated;
+AI-NATIVE-GRADUATE-1 is final-green for the qualified local foundation, and
+all wider rows remain explicitly consumer-, platform-, or research-gated.
 Baseline: `5027d5aabca191c088dfd9757a0bb8df4cb04a34` on local `main`
 Depends-On:
 [`TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md),
@@ -43,7 +46,8 @@ the final-green AI-SYNTH-1B1 authoring adapter is preserved at `4a390b1`.
 The final-green AI-PAPER-1A semantic binding is preserved at `645dccb`.
 The final-green AI-PAPER-1B1 exact-file materializer is preserved at
 `8e1ca90`; the final-green AI-PAPER-1C1 browser tranche immediately follows
-that checkpoint on the same dedicated branch.
+that checkpoint at `92243ba` on the same dedicated branch. The final-green
+AI-NATIVE-GRADUATE-1 capability/claim tranche immediately follows it there.
 The user's standing
 unattended authority includes self-approval of a frozen plan tranche and
 rollback-safe local checkpoint commits after the persistent-goal Git SOP is
@@ -788,6 +792,87 @@ stores a checker/session, accepts a caller-asserted proof status, silently
 rewrites duplicate block IDs, or treats a digest alone as evidence that an
 artifact is current.
 
+## AI-NATIVE-GRADUATE-1 Audit And Frozen Contract
+
+Date: 2026-08-08
+
+The bounded graduation audit finds that every accepted implementation row is
+now final-green. The remaining implementation rows are not missing steps in a
+known local algorithm:
+
+- reusable dictionary scopes and recursive indexed search require new source-
+  level consumers;
+- persisted paper artifacts and inline print placement require an owning
+  renderer/source-placement consumer;
+- network acquisition requires a real authenticated or public transport
+  consumer; and
+- hosted GetPaidX/LastRevision delivery requires a distributable emdash
+  runtime, compatible Node/template contract, and platform source capability.
+
+Forcing any of those rows would invent authority or a consumer. The local
+foundation can nevertheless be graduated honestly: stable proof plans and
+goals, checked artifacts, declaration/fragment workspace graphs, locked
+mounted verification and offline cache reuse, finite explicit-dictionary
+selection, typed paper bindings, and the browser recheck all have direct
+implementation evidence over backend-neutral explicit Core and the small
+TypeScript checker.
+
+The audit also finds one concrete reader/agent gap before graduation:
+
+- `./scripts/emdash check|goals` is intentionally scoped to the fixed proof
+  demo, and `workspace check` is intentionally scoped to two canonical locked
+  files under explicit roots;
+- those limitations are durable in the living ledger but are not available
+  from one compact, source-visible machine record;
+- the handoff and scale-plan routing stop at earlier AI-native rows; and
+- the root and reviewer guides do not yet mention the checked/open paper panel
+  or local proof/workspace command seam.
+
+AI-NATIVE-GRADUATE-1 therefore freezes this final bounded tranche:
+
+1. Add browser-safe `src/v3_2/ai_native_capabilities.ts` containing one deeply
+   frozen deterministic capability record. Its status is exactly
+   `qualified-local-foundation`, its backend is exactly
+   `typescript-emdash-explicit-core`, and it says that Lambdapi is an optional
+   development conformance route rather than a production dependency.
+2. The record lists the implemented proof, workspace, mounted/offline,
+   dictionary, and research-document/browser profiles. It separately lists
+   current commands and their exact fixed-demo or fixed-file scopes. It also
+   lists the consumer-, platform-, or research-gated features above; absence
+   is never encoded as an implemented capability.
+3. Add a stateless `./scripts/emdash capabilities [--format jsonl|text]`
+   projection. Default JSONL is one newline-terminated record; text is a
+   compact rendering of the same record. The operation performs no semantic
+   check, path discovery, application-level workspace file read/write,
+   hashing, network access, backend selection, or Lambdapi invocation.
+4. Preserve `check|goals` and `workspace check` dispatch exactly. Unknown,
+   duplicate, positional, or unsupported format arguments to `capabilities`
+   fail closed with exit two and no stdout.
+5. Synchronize only the living plan, handoff, scale-plan routing, root review
+   route, external-review guide, and standalone reviewer README. Describe the
+   delivered foundation and withheld product breadth; do not claim a complete
+   proof assistant, whole-library transfer, hosted runtime, or general source
+   sandbox.
+6. Use the already registered proof-CLI test file for manifest, serialization,
+   parser, and actual shell-route evidence. Do not widen the public v3.2
+   barrel or main test runner merely to manufacture an aggregate obligation.
+7. Proportional gates are the focused CLI/capability suite, its nearest proof/
+   workspace matrix, actual shell JSONL/text smoke, `sh -n`, workspace,
+   typecheck, changed-file lint, link/diff hygiene, and static no-effect scan.
+   The 1,486-test aggregate and existing Lambdapi conformance evidence are
+   reused because no generic semantic or shared runner/barrel boundary changes.
+
+Reject or revise graduation if the record hides a fixed-demo/file limitation,
+if it imports Node or owns live state, if the CLI executes a proof merely to
+report availability, if documentation presents a deferred capability as
+current, or if synchronization requires book/print/kernel/platform changes.
+
+This contract is self-approved under the user's standing unattended authority
+with immediate human supersession. Approval is limited to the exact manifest,
+stateless CLI projection, synchronized reader claims, focused tests, bounded
+validation, and rollback-safe local checkpoint. It authorizes no merge, push,
+publication, deployment, release, platform edit, or history rewrite.
+
 ## Work Ledger
 
 Only one row may be in progress in this worktree.
@@ -834,7 +919,7 @@ Only one row may be in progress in this worktree.
 | AI-PAPER-1C1 | complete | AI-PAPER-1C0 plus browser reviewer | Recheck the two proof plans from release pins in a browser-safe module, prove parity with 1B1, and expose a lazy intentional checked/open panel. |
 | AI-PAPER-1C2 | pending | AI-PAPER-1B2 plus explicit inline print consumer | Only if demanded, project verified blocks into authored Markdown/PDF through the owning print workflow. |
 | AI-PAPER-1D | pending | AI-PAPER-1B plus distributable hosted runtime | Exercise the same canonical files in `~/closerfans`; leave Git snapshots, build, publication, deployment, auth, and transport platform-owned. |
-| AI-NATIVE-GRADUATE-1 | pending | all accepted rows | Trust, determinism, stale-state, offline, browser, and conformance claims are synchronized and accurately documented. |
+| AI-NATIVE-GRADUATE-1 | complete | all accepted rows | Publish one truthful source-visible local-foundation capability record and synchronize trust, determinism, stale-state, offline, browser, conformance, and explicit deferral claims. |
 
 ## Decision Ledger
 
@@ -928,6 +1013,11 @@ Only one row may be in progress in this worktree.
 | D-AI-NATIVE-086 | accepted and qualified by AI-PAPER-1C1 | A browser-safe module uses the pinned inputs to freshly compile both existing proof plans and construct an ordinary 1A binding without hashing or I/O. Focused release evidence requires its canonical binding serialization to equal 1B1's exact-byte-verified binding. |
 | D-AI-NATIVE-087 | accepted and qualified by AI-PAPER-1C1 | The webpage loads the research-proof module only on explicit user action and intentionally displays both the checked proof and the open proof's stable goal. It labels client recheck versus Node release verification and does not present an incomplete artifact as a theorem. |
 | D-AI-NATIVE-088 | accepted and qualified as an AI-PAPER-1C1 non-effect | Add no generated asset, artifact write, article/print edit, minimal-browser API change, eager initial bundle dependency, second checker, browser hashing/filesystem, arbitrary code/path loading, MCP, network proof service, Lambdapi execution, publication, deployment, or platform change. |
+| D-AI-NATIVE-089 | accepted after AI-NATIVE-GRADUATE-1 audit | Graduate exactly the qualified local foundation, not the full envisioned proof assistant or hosted product. Every remaining implementation row stays explicitly consumer- or platform-gated. |
+| D-AI-NATIVE-090 | accepted and qualified by AI-NATIVE-GRADUATE-1 | One browser-safe, deeply frozen capability record is the source-visible agent contract. It separates implemented profiles, exact command scopes, and deferred capabilities, and names only the pure TypeScript/emdash backend actually available. |
+| D-AI-NATIVE-091 | accepted and qualified by AI-NATIVE-GRADUATE-1 | Add exact stateless `capabilities [--format jsonl|text]` shell dispatch. It projects the record without checking proofs, reading paths, hashing, networking, selecting a backend, or retaining state. |
+| D-AI-NATIVE-092 | accepted and qualified by AI-NATIVE-GRADUATE-1 | Synchronize active routing and reviewer documentation to the final implemented foundation and its limitations; do not edit generated book/article artifacts or imply hosted availability. |
+| D-AI-NATIVE-093 | accepted and qualified as an AI-NATIVE-GRADUATE-1 non-effect | Add no public barrel/main-runner change, new checker/Core/compiler/runtime behavior, arbitrary source loader, cache/network/platform behavior, MCP server, Lambdapi execution, print pipeline, publication, deployment, package, dependency, or lockfile change. |
 
 ## AI-PROOF-2 Inventory And Exact Contract
 
@@ -2996,6 +3086,76 @@ AI-PAPER-1B2/1C2 remain gated on a real persistence or inline-placement
 consumer; AI-PAPER-1D remains gated on a distributable hosted runtime and its
 separate platform-owned delivery contract.
 
+## AI-NATIVE-GRADUATE-1 Completion Record
+
+Date: 2026-08-08
+
+Hypothesis: the implemented TypeScript/emdash source, proof, workspace,
+synthesis, and research-document layers can be graduated as one accurately
+bounded local foundation if an AI agent can inspect the exact capability
+envelope without running a checker and every larger non-result stays explicit.
+
+Result: accepted and final-green as `qualified-local-foundation`. This is not
+a graduation of a complete general proof assistant, unrestricted TypeScript
+source acquisition, hosted workspace delivery, whole-library mechanical
+transfer, or global metatheory.
+
+Implementation:
+
+- added browser-safe `src/v3_2/ai_native_capabilities.ts` with capability
+  profile `emdash-ai-native-capabilities-v1` and record revision
+  `emdash-ai-native-capability-record-v1`;
+- the deeply frozen record names only actual proof-document, declaration-
+  workspace, exact-closure proof, same-module/cross-module fragment,
+  mounted-store, dictionary synthesis/authoring, research-document, and
+  browser-recheck profiles. Focused tests compare every recorded revision to
+  its implementation owner;
+- its trust record identifies checked backend-neutral explicit Core as the
+  semantic result, rejects arbitrary TypeScript and cached artifacts as proof
+  authority, names `typescript-emdash-explicit-core` as the implemented
+  backend, and retains Lambdapi only as optional development conformance;
+- command entries expose the exact fixed proof-demo and canonical fixed-file
+  workspace scopes. Separate consumer-, platform-, and research-gated entries
+  retain general acquisition/CLI, recursive instance search, paper
+  persistence/inline placement, network transport, hosted delivery, whole-
+  library transfer, and global-metatheory non-claims;
+- added stateless `src/v3_2/ai_native_capabilities_cli.ts`, a thin launcher,
+  and exact shell dispatch for
+  `./scripts/emdash capabilities [--format jsonl|text]`. Default JSONL is one
+  deterministic record; text is a readable projection. Neither path checks a
+  proof, acquires a workspace/source file, hashes content, selects a backend,
+  or retains state;
+  existing proof and workspace dispatch remain unchanged; and
+- synchronized the living plan, TypeScript handoff, scale-plan route, root
+  review path, external-review guide, and standalone reviewer README. These
+  documents present the checked/open browser panel and local command seam
+  while repeating the fixed-scope and hosted/whole-library limitations.
+
+Qualification:
+
+- the focused proof/research/capability file passed 15 tests across three
+  suites with zero failures or skips;
+- the mounted lock/store/workspace-command file passed 19 tests across three
+  suites. Together the exact CLI/capability/workspace matrix passed 34 tests
+  across six suites, including actual shell capability, proof, and workspace
+  routes plus source-absent offline verification;
+- root workspace contract, TypeScript typecheck, changed-file ESLint, `sh -n`,
+  actual one-line JSONL and human-text smoke, source-visible profile-revision
+  parity, browser-safe no-Node scan, relative Markdown links, and diff hygiene
+  passed; and
+- no public barrel, main test runner, generic checker/Core/compiler/runtime,
+  browser source/bundle, package, dependency, lockfile, authored/generated
+  book or article, print pipeline, kernel, Lambdapi source, platform, network,
+  publication, or deployment boundary changed. The 1,486-test aggregate and
+  existing bounded Lambdapi conformance evidence remain valid and were not
+  rerun for reassurance.
+
+No file below `emdash2/` or in `~/closerfans` changed. Decisions
+D-AI-NATIVE-089 through D-AI-NATIVE-093 now have direct audit or
+implementation evidence. Every remaining row is durably deferred behind the
+specific consumer, distribution/platform, transport, scale, or mathematical-
+review prerequisite recorded above; none is silently treated as implemented.
+
 ## AI-PROOF-2 Completion Record
 
 Date: 2026-08-08
@@ -3220,6 +3380,7 @@ Decision consequences:
 | Mounted remote store | focused canonical-file, offline, poison, concurrency, symlink, and root-boundary tests; workspace/typecheck/changed-file lint; nearest TypeScript workspace matrix; no Lambdapi or aggregate unless another exact boundary changes |
 | Local workspace CLI | exact JSONL/text and parser tests, actual shell online route, unchanged proof route, shell syntax/mode, workspace/typecheck/changed-file lint, nearest local matrix; no aggregate for an unchanged barrel/runner/package/compiler boundary |
 | Paper/browser client recheck | exact parity with the Node byte-verified binding, checked/open projection, Node-free closure, lazy-shell contract, standalone fixture typecheck/build, unchanged fixture lock, workspace/typecheck/changed-file lint; no print or root aggregate for unchanged boundaries |
+| Capability/claim graduation | frozen source-visible record, exact owner-revision parity, fixed-scope and deferral assertions, JSONL/text/parser and actual shell routes, synchronized active/reviewer docs, link/shell/workspace/typecheck/lint/diff hygiene; no semantic aggregate or Lambdapi rerun for unchanged boundaries |
 | Lambdapi/kernel-dependent target | `EMDASH_TYPECHECK_TIMEOUT=90s make -C emdash2 check` plus every nested-SOP gate actually triggered |
 | Cross-layer release/publication | affected browser/print/kernel gates and eventually `check:all`; never run merely for reassurance |
 
@@ -3245,7 +3406,8 @@ On every persistent continuation:
    baseline;
 4. preserve all unrelated changes and completed elaborator history;
 5. relocate current definitions and consumers with `rg`;
-6. recover the one in-progress row and its exact diff;
+6. recover the one in-progress row and its exact diff, or confirm that no
+   dependency-ready row remains after local-foundation graduation;
 7. run only its required bounded baseline/gates;
 8. update this Work and Decision Ledger with evidence or a rejected
    hypothesis; and
@@ -3323,6 +3485,15 @@ artifact or inline-placement consumer. Do not change article prose, print
 rendering, or `~/closerfans` merely to simulate one. Hosted synchronization
 remains gated behind a distributable runtime and the checked local contract.
 
+Treat final-green AI-NATIVE-GRADUATE-1 as complete for the qualified local
+foundation. Preserve its deeply frozen source-visible capability record,
+exact owner-revision parity, fixed proof-demo and fixed workspace-file command
+scopes, explicit consumer/platform/research deferrals, 15-test focused suite,
+34-test/six-suite command/workspace matrix, and synchronized reader claims.
+Do not relabel the result as a complete general proof assistant or hosted
+product, and do not reopen a gated row without its recorded concrete
+prerequisite.
+
 Do not infer a provider from fragment order, symbol spelling, or a current
 compiled object. Preserve explicit backend-neutral Core and all existing
 checker, session, compiler, runtime, proof, visibility, and
@@ -3364,8 +3535,10 @@ worktree. Direct user decision D-AI-NATIVE-050 authorized only the already
 completed fast-forward of checkpoint `a3ba93a` into local `main`; it grants no
 future merge authority.
 
-Continue safe dependency-ready work until every scoped row is implemented,
-rejected with durable evidence, or explicitly deferred behind a concrete
-prerequisite or human decision. Do not mark the goal complete merely because
-the two proof slices are green.
+Every scoped row is now implemented, rejected with durable evidence, or
+explicitly deferred behind a concrete prerequisite. After the final plan-
+synchronized local checkpoint and clean-tree verification, the persistent
+goal may be marked complete for the qualified local foundation. Future work
+requires a concrete new consumer/prerequisite or direct human direction; do
+not manufacture an ungated follow-up merely to keep the goal active.
 ```

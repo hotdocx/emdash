@@ -69,6 +69,39 @@ displayed chain, and a displayed-natural telescope whose named variables cross
 one Sigma dependency. They are intended to expose the architecture and its
 present boundary, not to simulate completion of the book's entire notation.
 
+## AI-Native Proof And Workspace Foundation
+
+The local TypeScript/emdash layer now also provides a source-first foundation
+for AI-authored developments: immutable proof plans, stable named goals,
+fingerprinted checked artifacts, exact module/fragment workspace graphs,
+locked mounted-file verification with offline cache reuse, finite explicit-
+dictionary selection, and stable paper/diagram/proof bindings. These features
+lower to backend-neutral explicit Core and use the TypeScript checker; they do
+not require a resident proof server, MCP round trip, or Lambdapi process.
+
+Ask the repository itself for the exact implemented and deferred envelope:
+
+```bash
+./scripts/emdash capabilities --format text
+./scripts/emdash check --format text
+./scripts/emdash goals --format text
+./scripts/emdash workspace check \
+  --project-root /absolute/project \
+  --data-root /absolute/data
+```
+
+The current proof commands deliberately exercise a fixed checked proof module,
+and `workspace check` deliberately accepts only the canonical locked workspace
+files under explicit roots. The capability record states those scopes rather
+than presenting this qualified local foundation as a complete general proof
+assistant. In the browser reviewer's evidence view, **Check paper proof
+states** replays the release-pinned examples and keeps the named open goal
+visibly incomplete.
+
+The detailed trust boundary, validation history, and consumer-gated next work
+are in the
+[`AI-native workspace and proof plan`](./docs/TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md).
+
 ## Architecture And Authority
 
 | Layer | Present role |

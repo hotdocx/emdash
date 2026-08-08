@@ -2,36 +2,35 @@
 
 > **AI-native workspace/proof continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)
-> is the active living plan for serializable proof plans, stable named goals,
-> deterministic proof-state artifacts, local/remote workspace management, and
-> later explicit dictionary synthesis. It preserves the completed elaborator
-> Core/checker/refiner and treats text syntax and MCP as optional acquisition
-> or transport adapters rather than semantic prerequisites. AI-PROOF-1 and
-> AI-PROOF-2, AI-WORKSPACE-0, the browser-safe AI-WORKSPACE-1A declaration
-> graph, AI-WORKSPACE-1B1 exact-closure proof attachment, and the
-> AI-WORKSPACE-1B2A pinned same-module fragment chain are final-green, as is
-> the AI-WORKSPACE-1B2B exact cross-module fragment graph. AI-REMOTE-1A is now
-> also final-green: canonical graph-source locks, supplied-text SHA-256
-> materialization, exact local reconstruction/compilation, compiled-snapshot
-> verification, and immutable fully revalidated offline cache data passed
-> 1,486 tests across 224 suites with zero failures. AI-REMOTE-1B0 then measured
-> the single `~/closerfans` platform boundary, and AI-REMOTE-1B1 is final-green:
-> fixed mounted project/data roots, canonical lock/source files, TypeScript-only
-> reconstruction/checking, identity-derived atomic no-replace cache install,
-> and fully revalidated source-absent offline reuse passed 108 nearest tests
-> across 13 suites with zero failures (two opt-in skips). Lambdapi/emdash remains
-> an optional later backend/conformance route, but this profile neither invokes
-> nor requires it. AI-REMOTE-1B2A is now final-green too:
-> `./scripts/emdash workspace check` takes explicit mounted roots, supports
-> source and offline modes, and emits compact path-free JSONL/text while the
-> existing proof commands remain unchanged. Its nearest matrix passed 117
-> tests across 15 suites with zero failures and two opt-in skips. Hosted
-> delivery is separately deferred: emdash has no distributable package/bin and
-> requires Node 22.13+, while current GetPaidX controllers use Node 20. No
-> `~/closerfans` file changed. AI-SYNTH-0's read-only exact-dictionary-consumer
-> inventory is the active continuation. Recent aggregate evidence must be
-> reused unless an exact changed shared boundary strictly requires another
-> long run.
+> is the governing ledger for serializable proof plans, stable named goals,
+> deterministic proof-state artifacts, local/remote workspace management,
+> explicit dictionary synthesis, and research-document bindings. It preserves
+> the completed explicit-Core/checker/refiner boundary and treats text syntax,
+> MCP, networking, and Lambdapi execution as optional outer adapters rather
+> than semantic prerequisites.
+>
+> The qualified local foundation is final-green through proof documents,
+> declaration and exact fragment graphs, exact-closure proof attachment,
+> locked supplied-text reconstruction, mounted fixed-file verification,
+> immutable source-absent offline cache reuse, the explicit-root
+> `workspace check` command, finite global dictionary selection, the direct
+> leading-implicit authoring adapter, stable paper/diagram/proof bindings, and
+> the lazy browser checked/open recheck. The shared-boundary aggregate remains
+> 1,486 tests across 224 suites with zero failures; later bounded matrices
+> qualified mounted/workspace, synthesis, and paper/browser consumers without
+> changing that shared boundary.
+>
+> `./scripts/emdash capabilities --format text` is the compact source-visible
+> contract. It labels the result `qualified-local-foundation`, names the pure
+> `typescript-emdash-explicit-core` backend, and states that current proof
+> commands target a fixed demo while `workspace check` targets canonical
+> locked files under explicit roots. General source acquisition and CLI
+> targeting, reusable/recursive instance search, persisted or inline paper
+> artifacts, live transport, hosted runtime delivery, whole-library transfer,
+> and global metatheory remain explicitly gated. Lambdapi/emdash remains an
+> optional development conformance route, not a production dependency. No
+> `~/closerfans` file changed. Reuse recent aggregate evidence unless an exact
+> changed shared boundary strictly requires another long run.
 >
 > **Current cross-layer integration boundary (2026-08-04):**
 > The completed elaborator tip `e7352ba` is being joined with the completed

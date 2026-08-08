@@ -1,6 +1,7 @@
-/** Focused AI-PROOF-2 and AI-PAPER-1B1 Node-adapter tests. */
+/** Focused AI proof, research-file, and capability-command tests. */
 
 import assert from 'node:assert';
+import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, it } from 'node:test';
@@ -13,6 +14,16 @@ import {
     runCoreAiResearchOverviewBrowser
 } from '../src/v3_2/ai_research_overview_browser';
 import {
+    CORE_AI_NATIVE_CAPABILITIES,
+    CORE_AI_NATIVE_CAPABILITIES_PROFILE,
+    serializeCoreAiNativeCapabilities
+} from '../src/v3_2/ai_native_capabilities';
+import {
+    CORE_AI_NATIVE_CAPABILITIES_CLI_PROFILE,
+    formatCoreAiNativeCapabilities,
+    runCoreAiNativeCapabilitiesCli
+} from '../src/v3_2/ai_native_capabilities_cli';
+import {
     CORE_AI_RESEARCH_OVERVIEW_FILES_PROFILE,
     CoreAiResearchOverviewFilesError,
     materializeCoreAiResearchOverviewFiles,
@@ -22,6 +33,31 @@ import {
     runCoreAiProofCli
 } from '../src/v3_2/ai_proof_cli';
 import {
+    CORE_LF_DICTIONARY_AUTHORING_PROFILE
+} from '../src/v3_2/lf_dictionary_authoring';
+import {
+    CORE_LF_DICTIONARY_SYNTHESIS_PROFILE
+} from '../src/v3_2/lf_dictionary_synthesis';
+import {
+    CORE_LF_FRAGMENT_MODULE_WORKSPACE_PROFILE
+} from '../src/v3_2/lf_fragment_module_workspace';
+import {
+    CORE_LF_SAME_MODULE_FRAGMENT_WORKSPACE_PROFILE
+} from '../src/v3_2/lf_fragment_workspace';
+import {
+    CORE_LF_MOUNTED_REMOTE_WORKSPACE_STORE_PROFILE
+} from '../src/v3_2/lf_remote_workspace_store';
+import {
+    CORE_PROOF_DOCUMENT_PROFILE
+} from '../src/v3_2/proof_document';
+import {
+    CORE_LF_DECLARATION_WORKSPACE_PROFILE
+} from '../src/v3_2/lf_workspace';
+import {
+    CORE_LF_WORKSPACE_PROOF_PROFILE
+} from '../src/v3_2/lf_workspace_proof';
+import {
+    CORE_RESEARCH_DOCUMENT_PROFILE,
     serializeCoreResearchDocumentSnapshot
 } from '../src/v3_2/research_document';
 
@@ -40,6 +76,23 @@ const run = (argv: readonly string[]): CliResult => {
         stderr: text => { stderr += text; }
     });
     return { exitCode, stdout, stderr };
+};
+
+const runCapabilities = (argv: readonly string[]): CliResult => {
+    let stdout = '';
+    let stderr = '';
+    const exitCode = runCoreAiNativeCapabilitiesCli(argv, {
+        stdout: text => { stdout += text; },
+        stderr: text => { stderr += text; }
+    });
+    return { exitCode, stdout, stderr };
+};
+
+const assertDeepFrozen = (value: unknown): void => {
+    if (value === null || typeof value !== 'object') return;
+    assert.equal(Object.isFrozen(value), true);
+    Object.values(value as Record<string, unknown>)
+        .forEach(assertDeepFrozen);
 };
 
 describe('TypeScript v3.2 AI-PROOF-2 local CLI', () => {
@@ -340,5 +393,199 @@ describe('TypeScript v3.2 AI-PAPER-1B1 research files', () => {
                 return true;
             }
         );
+    });
+});
+
+describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
+    it('publishes one honest immutable local-foundation record', () => {
+        assertDeepFrozen(CORE_AI_NATIVE_CAPABILITIES);
+        assert.equal(
+            CORE_AI_NATIVE_CAPABILITIES.status,
+            'qualified-local-foundation'
+        );
+        assert.equal(
+            CORE_AI_NATIVE_CAPABILITIES.backend,
+            'typescript-emdash-explicit-core'
+        );
+        assert.equal(
+            CORE_AI_NATIVE_CAPABILITIES.trust
+                .productionLambdapiDependency,
+            false
+        );
+        assert.equal(
+            serializeCoreAiNativeCapabilities(),
+            serializeCoreAiNativeCapabilities()
+        );
+
+        const revisions = new Map(
+            CORE_AI_NATIVE_CAPABILITIES.implementedProfiles.map(profile =>
+                [profile.id, profile.revision]
+            )
+        );
+        assert.equal(
+            revisions.get('proof-document'),
+            CORE_PROOF_DOCUMENT_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('fragment-module-workspace'),
+            CORE_LF_FRAGMENT_MODULE_WORKSPACE_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('declaration-workspace'),
+            CORE_LF_DECLARATION_WORKSPACE_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('workspace-proof'),
+            CORE_LF_WORKSPACE_PROOF_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('same-module-fragment-workspace'),
+            CORE_LF_SAME_MODULE_FRAGMENT_WORKSPACE_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('mounted-workspace-store'),
+            CORE_LF_MOUNTED_REMOTE_WORKSPACE_STORE_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('dictionary-synthesis'),
+            CORE_LF_DICTIONARY_SYNTHESIS_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('dictionary-authoring'),
+            CORE_LF_DICTIONARY_AUTHORING_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('research-document-binding'),
+            CORE_RESEARCH_DOCUMENT_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('research-browser-recheck'),
+            CORE_AI_RESEARCH_OVERVIEW_BROWSER_PROFILE.revision
+        );
+        assert.deepEqual(
+            CORE_AI_NATIVE_CAPABILITIES.commands.map(command => command.id),
+            ['capabilities', 'proof-check', 'proof-goals', 'workspace-check']
+        );
+        assert.match(
+            CORE_AI_NATIVE_CAPABILITIES.commands[1].scope,
+            /fixed .* proof demo/u
+        );
+        assert.match(
+            CORE_AI_NATIVE_CAPABILITIES.commands[3].scope,
+            /canonical emdash\.workspace\.lock\.json/u
+        );
+        assert.deepEqual(
+            CORE_AI_NATIVE_CAPABILITIES.deferred.map(item => item.id),
+            [
+                'general-source-acquisition',
+                'general-development-cli',
+                'reusable-recursive-dictionary-search',
+                'persisted-or-inline-paper-artifacts',
+                'network-acquisition',
+                'hosted-workspace-delivery',
+                'whole-library-transfer-and-global-metatheory'
+            ]
+        );
+        assert.equal(
+            CORE_AI_NATIVE_CAPABILITIES.deferred[
+                CORE_AI_NATIVE_CAPABILITIES.deferred.length - 1
+            ].state,
+            'research-gated'
+        );
+
+        const source = readFileSync(
+            path.join(repositoryRoot, 'src/v3_2/ai_native_capabilities.ts'),
+            'utf8'
+        );
+        assert.doesNotMatch(source, /from ['"]node:|process\./u);
+        assert.deepEqual(
+            [...source.matchAll(/from ['"]([^'"]+)['"]/gu)]
+                .map(match => match[1]),
+            []
+        );
+        const cliSource = readFileSync(
+            path.join(
+                repositoryRoot,
+                'src/v3_2/ai_native_capabilities_cli.ts'
+            ),
+            'utf8'
+        );
+        assert.deepEqual(
+            [...cliSource.matchAll(/from ['"]([^'"]+)['"]/gu)]
+                .map(match => match[1]),
+            ['./ai_native_capabilities']
+        );
+        assert.equal(
+            CORE_AI_NATIVE_CAPABILITIES_PROFILE.performsSemanticChecks,
+            false
+        );
+        assert.doesNotMatch(
+            serializeCoreAiNativeCapabilities(),
+            /\/home\/|timestamp|processId|session|Symbol/u
+        );
+    });
+
+    it('renders deterministic JSONL and text without checking', () => {
+        const jsonl = runCapabilities([]);
+        assert.equal(jsonl.exitCode, 0);
+        assert.equal(jsonl.stderr, '');
+        assert.equal(jsonl.stdout, serializeCoreAiNativeCapabilities());
+        assert.equal(jsonl.stdout.trimEnd().includes('\n'), false);
+        const record = JSON.parse(jsonl.stdout) as Record<string, unknown>;
+        assert.deepEqual(Object.keys(record), [
+            'revision',
+            'status',
+            'backend',
+            'trust',
+            'implementedProfiles',
+            'commands',
+            'deferred'
+        ]);
+
+        const text = runCapabilities(['--format=text']);
+        assert.equal(text.exitCode, 0);
+        assert.equal(text.stderr, '');
+        assert.equal(text.stdout, formatCoreAiNativeCapabilities());
+        assert.match(text.stdout, /qualified-local-foundation/u);
+        assert.match(text.stdout, /fixed ai_native\.local proof demo/u);
+        assert.match(text.stdout, /hosted-workspace-delivery/u);
+        assert.equal(
+            CORE_AI_NATIVE_CAPABILITIES_CLI_PROFILE
+                .performsSemanticChecks,
+            false
+        );
+
+        for (const argv of [
+            ['extra'],
+            ['--format'],
+            ['--format', 'yaml'],
+            ['--format=text', '--format=jsonl']
+        ]) {
+            const invalid = runCapabilities(argv);
+            assert.equal(invalid.exitCode, 2);
+            assert.equal(invalid.stdout, '');
+            assert.match(invalid.stderr, /^emdash:/u);
+        }
+    });
+
+    it('routes the actual capability command without changing proof dispatch', () => {
+        const script = path.join(repositoryRoot, 'scripts', 'emdash');
+        const capabilities = spawnSync(
+            script,
+            ['capabilities', '--format', 'text'],
+            { cwd: repositoryRoot, encoding: 'utf8' }
+        );
+        assert.equal(capabilities.status, 0, capabilities.stderr);
+        assert.equal(capabilities.stderr, '');
+        assert.match(capabilities.stdout, /qualified-local-foundation/u);
+
+        const proof = spawnSync(
+            script,
+            ['check', '--format', 'text'],
+            { cwd: repositoryRoot, encoding: 'utf8' }
+        );
+        assert.equal(proof.status, 0, proof.stderr);
+        assert.equal(proof.stderr, '');
+        assert.match(proof.stdout, /complete_identity: complete/u);
     });
 });

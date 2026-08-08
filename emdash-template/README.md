@@ -1,15 +1,17 @@
 # emdash v3.2 External-Review Workbench
 
 This directory contains the static React/Vite reviewer interface for the
-TypeScript emdash v3.2 implementation. It consolidates four existing
+TypeScript emdash v3.2 implementation. It consolidates five existing
 ingredients into one client-side journey:
 
 1. twelve editable categorical examples across the reviewed `^f`, `^n`, `^fd`,
    and `^nd` modes;
 2. the checked outer-LF, ordinary-functorial, and genuinely displayed
    three-panel research report;
-3. the concise overview paper and generated current emdash book; and
-4. the preserved editable minimal explicit-Core playground.
+3. the concise overview paper and generated current emdash book;
+4. a release-pinned paper/workspace recheck that displays one checked proof
+   and one stable named open goal; and
+5. the preserved editable minimal explicit-Core playground.
 
 Representative expression presets include:
 
@@ -37,6 +39,13 @@ boundary; the interface labels that provenance rather than rewriting the
 historical component report. Vite fingerprints and emits
 `../docs/emdash3_2.pdf` and `../docs/emdash-book.pdf` as distinct static
 assets.
+
+The paper/workspace proof module is another lazy chunk and runs only after
+**Check paper proof states**. It freshly replays the two managed proof plans
+from source-visible release pins. Exact file/hash verification and canonical
+browser parity are release gates outside the browser; the client does not read
+repository files or compute cryptographic hashes, and it never promotes the
+open proof to a theorem.
 
 The minimal playground still reaches the exact content-pinned
 `emdash-v3.2-mvp-1` browser API and frozen `CORE_MVP_MANIFEST` through
@@ -88,11 +97,14 @@ The current browser demonstrates:
   categorical roots;
 - the unchanged outer dependent-LF, ordinary binder, and displayed-chain
   report;
+- the release-pinned checked/open paper proof projection, including stable
+  goal `body`;
 - the overview paper and generated book assets; and
 - the frozen minimal Core checker example.
 
 It does not provide arbitrary mixed introduction, unsupported variance DAGs,
 displayed contexts outside the qualified canonical grammar, the remaining
 displayed structural-constructor syntax, browser-side source acquisition,
-systematic groupoidal closure, or whole-library transfer graduation. Direct
-typed TypeScript remains the most complete construction surface.
+browser-side digest authority, systematic groupoidal closure, or whole-library
+transfer graduation. Direct typed TypeScript remains the most complete
+construction surface.

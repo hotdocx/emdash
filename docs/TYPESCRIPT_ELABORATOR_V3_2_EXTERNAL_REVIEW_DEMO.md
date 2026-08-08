@@ -34,8 +34,10 @@ Open the URL printed by Vite. A useful first review is:
    construction;
 4. open **Research evidence**, run the three-panel report, and inspect the
    outer dependent LF, ordinary categorical, and genuine displayed-chain
-   witnesses; and
-5. open the book from the same workbench and compare its formal-presentation
+   witnesses;
+5. select **Check paper proof states** and compare the checked identity with
+   the deliberately open proof and stable goal `body`; and
+6. open the book from the same workbench and compare its formal-presentation
    appendix with the executable results.
 
 For a noninteractive terminal account of the same architecture:
@@ -84,6 +86,13 @@ The explicitly started report adds three direct-TypeScript witnesses:
 The workbench also retains the small editable minimal-Core playground. The
 categorical/report implementation is a lazy browser chunk, and the full
 report runs only when requested.
+
+The paper/workspace panel is a separate lazy client recheck. Its typed
+management sidecar binds stable paper, diagram, declaration, and proof IDs;
+the release gate verifies exact article/proof/profile/artifact bytes in Node
+and requires canonical equality with the browser binding. The client itself
+does no file access or hashing. It derives `complete` versus `incomplete` from
+fresh proof replay, so the open block remains a goal rather than a theorem.
 
 ## Input Envelope
 
@@ -180,6 +189,9 @@ action.
 | `./scripts/pnpmw run reviewer:dev` | Start the integrated local reviewer | Development server only; no deployment |
 | `./scripts/pnpmw run demo:external-review` | Print the curated direct-TypeScript three-panel report | Fixed report, not editable text |
 | `./scripts/pnpmw run demo:categorical-text` | Run compact categorical text examples | Uses the same adapter as the browser |
+| `./scripts/emdash capabilities --format text` | List the implemented local AI-native foundation and explicit deferrals | Static source-visible record; performs no check or acquisition |
+| `./scripts/emdash check\|goals --format text` | Check the fixed proof demo or display its stable open goal | Fresh TypeScript/emdash proof session; no daemon or Lambdapi runtime |
+| `./scripts/emdash workspace check --project-root … --data-root …` | Verify canonical locked workspace files and populate/reuse immutable cache data | Explicit roots; local/offline TypeScript backend only |
 | `./scripts/pnpmw run check:browser-reviewer` | Typecheck, lint, and build the static workbench | Product check; relative client assets |
 | `./scripts/pnpmw run check:ts` | Check the root TypeScript workbench | Development validation |
 | `./scripts/pnpmw run kernel:check` | Check the active Lambdapi kernel | Requires Lambdapi |
@@ -200,6 +212,11 @@ This reader profile does not claim:
 - a parser for all notation in the book or arbitrary Lambdapi source;
 - textual outer-LF terms, arbitrary holes, or arbitrary host-language
   callbacks;
+- a general module/declaration CLI or unrestricted TypeScript source loader;
+- browser-side digest verification, live network acquisition, or a hosted
+  emdash runtime;
+- reusable instance scopes or recursive typeclass search beyond the qualified
+  finite explicit-dictionary slices;
 - arbitrary displayed telescope depth, variance, exchange across dependency,
   or pointwise-to-coherent synthesis;
 - mixed nested `^n`/`^fd`/`^nd` classifiers without an existing reviewed
@@ -228,6 +245,8 @@ The detailed implementation evidence is recorded in:
   [`syntax-parity plan`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md);
 - the
   [`book and repository graduation plan`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md);
+- the
+  [`AI-native workspace and proof plan`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md);
   and
 - the
   [`v3.2 elaborator handoff`](./TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md).
