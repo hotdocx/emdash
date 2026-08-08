@@ -2,5 +2,10 @@
 set -eu
 
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+if [ "${1-}" = "workspace" ]; then
+    shift
+    exec node --require ts-node/register \
+        "$script_dir/../examples/v3_2_remote_workspace_cli.ts" "$@"
+fi
 exec node --require ts-node/register \
     "$script_dir/../examples/v3_2_ai_native_proof_cli.ts" "$@"

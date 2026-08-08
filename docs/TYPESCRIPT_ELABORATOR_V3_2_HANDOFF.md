@@ -21,10 +21,17 @@
 > and fully revalidated source-absent offline reuse passed 108 nearest tests
 > across 13 suites with zero failures (two opt-in skips). Lambdapi/emdash remains
 > an optional later backend/conformance route, but this profile neither invokes
-> nor requires it. AI-REMOTE-1B2's read-only command/template consumer audit is
-> the active continuation; no command, template, authenticated network, or
-> platform adapter is yet approved. Recent aggregate evidence must be reused
-> unless an exact changed shared boundary strictly requires another long run.
+> nor requires it. AI-REMOTE-1B2A is now final-green too:
+> `./scripts/emdash workspace check` takes explicit mounted roots, supports
+> source and offline modes, and emits compact path-free JSONL/text while the
+> existing proof commands remain unchanged. Its nearest matrix passed 117
+> tests across 15 suites with zero failures and two opt-in skips. Hosted
+> delivery is separately deferred: emdash has no distributable package/bin and
+> requires Node 22.13+, while current GetPaidX controllers use Node 20. No
+> `~/closerfans` file changed. AI-SYNTH-0's read-only exact-dictionary-consumer
+> inventory is the active continuation. Recent aggregate evidence must be
+> reused unless an exact changed shared boundary strictly requires another
+> long run.
 >
 > **Current cross-layer integration boundary (2026-08-04):**
 > The completed elaborator tip `e7352ba` is being joined with the completed

@@ -7,7 +7,9 @@ AI-PROOF-2, AI-WORKSPACE-0, AI-WORKSPACE-1A, and AI-WORKSPACE-1B1 are
 complete; AI-WORKSPACE-1B2A and AI-WORKSPACE-1B2B are final-green;
 AI-REMOTE-1A is final-green; AI-REMOTE-1B0's exact-consumer audit is complete;
 the TypeScript-only mounted-workspace/cache adapter AI-REMOTE-1B1 is
-final-green; AI-REMOTE-1B2's command/template exact-consumer audit is the only
+final-green; AI-REMOTE-1B2's audit is complete and partitioned; its frozen
+local agent command AI-REMOTE-1B2A is final-green; hosted delivery remains
+prerequisite-gated; AI-SYNTH-0's exact-consumer inventory is the only
 in-progress slice
 Baseline: `5027d5aabca191c088dfd9757a0bb8df4cb04a34` on local `main`
 Depends-On:
@@ -691,9 +693,9 @@ The audit partitions AI-REMOTE-1. AI-REMOTE-1A is final-green: it owns locked
 canonical graph-source materialization and an immutable offline cache-entry
 format without performing transport or storage. AI-REMOTE-1B0's platform
 consumer audit and AI-REMOTE-1B1's TypeScript-only mounted-file/immutable-
-cache adapter are final-green. The only in-progress work is AI-REMOTE-1B2's
-read-only command/template consumer audit. Real network fetch, authentication,
-and platform HTTP/MCP adapters remain separately gated.
+cache adapter and AI-REMOTE-1B2A's explicit-root local command are final-green.
+Hosted packaging/template delivery, real network fetch, authentication, and
+platform HTTP/MCP adapters remain separately prerequisite-gated.
 
 - define remote identity separately from content location;
 - fetch outside checking;
@@ -741,9 +743,11 @@ Only one row may be in progress in this worktree.
 | AI-REMOTE-1B | partitioned | AI-REMOTE-1A plus exact hosted/local consumer | Separate the measured platform boundary, a TypeScript-only mounted-file/cache-store adapter, and any later authenticated network adapter. |
 | AI-REMOTE-1B0 | complete | AI-REMOTE-1A plus `~/closerfans` workspace runtime | The exact GetPaidX/LastRevision/CloserFans consumer and its mounted-project, persistent-data, Git-snapshot, browser/MCP, and authentication boundaries are measured without changing either repository. |
 | AI-REMOTE-1B1 | complete | AI-REMOTE-1B0 | Fixed canonical lock/source files under explicit mounted roots are verified by TypeScript, installed under an identity-derived atomic no-replace cache key, and fully reverified offline. |
-| AI-REMOTE-1B2 | in progress (exact-consumer audit only) | AI-REMOTE-1B1 plus exact command/template consumer | Measure the existing command seam and one mounted-template workflow, then freeze only the smallest agent-facing command/file contract; no implementation is yet approved. |
+| AI-REMOTE-1B2 | partitioned | AI-REMOTE-1B1 plus command and hosted consumers | Separate the runnable local agent command from hosted package/template delivery, whose runtime and distribution prerequisites are not yet met. |
+| AI-REMOTE-1B2A | complete | AI-REMOTE-1B1 plus existing `./scripts/emdash` seam | The explicit-root `workspace check` namespace emits compact JSONL/text reports over the TypeScript mounted store while preserving existing proof commands exactly. |
+| AI-REMOTE-1B2B | pending | distributable emdash runtime plus compatible hosted Node/template contract | Select package/source delivery, supported Node version, template-owned install, agent skill, and generic platform source capability before changing `~/closerfans` or claiming hosted availability. |
 | AI-REMOTE-1B3 | pending | stable authenticated/public transport consumer | If a real consumer requires it, freeze a separate supplied-byte HTTPS/platform adapter with explicit timeout, redirect, authentication, and retry policy; signed URLs remain ephemeral acquisition inputs. |
-| AI-SYNTH-0 | pending | exact user-facing consumer | Unification, proof rules, structure metadata, and candidate instance semantics are audited and an exact resolver contract proposed. |
+| AI-SYNTH-0 | in progress (exact-consumer inventory only) | AI-REMOTE-1B2A plus exact user-facing consumer | Audit unification, proof rules, structure metadata, candidate dictionary semantics, and one real elaboration consumer before proposing a resolver; no synthesis implementation is approved. |
 | AI-SYNTH-1 | pending | AI-SYNTH-0 plus review | Bounded scoped synthesis produces explicit checked Core dictionaries with traces and ambiguity errors. |
 | AI-PAPER-1 | pending | AI-PROOF-2, AI-WORKSPACE-1B2B | One canonical paper/diagram/proof workspace supports agent/browser editing and checked snapshots. |
 | AI-NATIVE-GRADUATE-1 | pending | all accepted rows | Trust, determinism, stale-state, offline, browser, and conformance claims are synchronized and accurately documented. |
@@ -808,6 +812,11 @@ Only one row may be in progress in this worktree.
 | D-AI-NATIVE-054 | accepted and qualified by AI-REMOTE-1B1 | The persistent cache key is SHA-256 of the canonical artifact-identity serialization. The store never accepts a caller-selected cache key, never stores compiled process objects, and never treats a path, mirror, timestamp, ETag, or observed digest as authority. |
 | D-AI-NATIVE-055 | accepted and qualified by AI-REMOTE-1B1 | Cache population uses a same-directory, fsynced temporary file and an atomic no-replace hard-link installation. Existing entries are fully reverified and byte-compared, never overwritten; concurrent identical population converges, while conflicts and symlinks fail closed. |
 | D-AI-NATIVE-056 | accepted and qualified as an AI-REMOTE-1B1 non-effect | AI-REMOTE-1B1 has no fetch, redirect, retry, credential, environment, current-working-directory, Git, MCP, platform API, eviction, mutable cache, background daemon, Lambdapi, or publication behavior. Those concerns remain outer or separately consumer-gated. |
+| D-AI-NATIVE-057 | accepted and qualified by AI-REMOTE-1B2A | Preserve `./scripts/emdash check|goals` by byte-compatible argument forwarding. The shell wrapper dispatches only an exact leading `workspace` namespace to a separate asynchronous Node adapter; no unified stateful command server is introduced. |
+| D-AI-NATIVE-058 | accepted and qualified by AI-REMOTE-1B2A | `workspace check` requires explicit absolute project/data roots, defaults to one compact deterministic JSONL verification record, supports optional human text and explicit offline mode, and exposes no source text, compiled object, absolute path, credential, or platform token. |
+| D-AI-NATIVE-059 | accepted and qualified as an AI-REMOTE-1B2A non-effect | The command is a projection of AI-REMOTE-1B1 verified results. It performs no discovery, lock regeneration, source authoring, fetch, authentication, Git snapshot, MCP call, daemon state, Lambdapi invocation, backend selection, cache mutation beyond 1B1, or publication. |
+| D-AI-NATIVE-060 | accepted deferral after hosted-template audit | Hosted emdash template delivery is not yet a truthful executable consumer: the root package is private, has no `bin`/published files contract, depends on development-time `ts-node`, and declares Node 22.13+, while current GetPaidX workspace-controller variants use Node 20 and generic source capabilities remain deferred. AI-REMOTE-1B2B must select a distributable runtime and compatible template contract before cross-repository implementation. |
+| D-AI-NATIVE-061 | accepted and qualified by AI-REMOTE-1B2A after direct user clarification | AI-REMOTE-1B2A reports the TypeScript/emdash backend actually executed. A future Lambdapi/emdash backend can implement a separately identified command/backend adapter over the same backend-neutral locked source; no current CLI flag may claim an unimplemented backend. |
 
 ## AI-PROOF-2 Inventory And Exact Contract
 
@@ -2122,6 +2131,185 @@ and one mounted template/agent consumer. It must freeze a separate exact
 contract before any command, public export, template, platform, or backend
 adapter implementation.
 
+## AI-REMOTE-1B2 Audit And Frozen 1B2A Command Contract
+
+Date: 2026-08-08
+
+The read-only command and hosted-template audit found:
+
+- `./scripts/emdash` is already an executable, fail-fast shell edge. It
+  forwards all arguments unchanged to the synchronous Node-owned AI proof CLI,
+  whose accepted public forms are `check|goals`, optional declaration, and
+  `--format jsonl|text`;
+- the proof CLI is deliberately a fixed local demo consumer. It computes
+  fingerprints, creates fresh TypeScript proof state, writes only stdout/
+  stderr, and retains no session. It should not absorb asynchronous workspace
+  filesystem behavior or become a daemon;
+- a leading shell namespace can route `workspace ...` to a separate process
+  launcher while leaving every existing proof invocation and usage string
+  unchanged. This is smaller and easier to test than a new async dispatcher
+  wrapping the synchronous proof CLI;
+- AI-REMOTE-1B1 already supplies the exact command operation: online
+  verification/cache install and source-absent offline verification from two
+  explicit roots. The command needs no new semantic/checker API and should
+  summarize rather than serialize process-local compiled objects;
+- the repository root package is private, has no `bin`, `files`, pack, or
+  publication contract, and runs TypeScript through the development dependency
+  `ts-node`. Its declared engine is Node 22.13 or newer;
+- current GetPaidX controller images, including the LambdaPi variant, are based
+  on Node 20. Existing hosted precedents either preinstall a runtime in a
+  specialized pool (`lambdapi_cli`) or let a template install published
+  template-owned packages (`arrowgram_web`);
+- `emdash-template` is the standalone browser-reviewer fixture, not a hosted
+  contributor/runtime package and not a GetPaidX workspace template; and
+- the platform's curated browser/MCP source file allowlist is still
+  Arrowgram-specific. Direct terminal/Codex access to mounted files is enough
+  for a future packaged emdash template, but it does not solve runtime delivery
+  or authorize cross-repository edits.
+
+The audit therefore partitions AI-REMOTE-1B2:
+
+1. AI-REMOTE-1B2A is one local agent-facing command over the already qualified
+   TypeScript store. It is frozen and approved below.
+2. AI-REMOTE-1B2B owns hosted runtime packaging and the GetPaidX template/
+   skill/source-capability integration. It remains pending a deliberate choice
+   among a published package, a versioned precompiled artifact, or reviewed
+   template-owned source, plus a Node-version contract. It authorizes no change
+   in `~/closerfans`.
+
+AI-REMOTE-1B2A freezes this command contract:
+
+1. `./scripts/emdash` recognizes only the exact first argument `workspace` as
+   a namespace, removes it, and execs a separate thin TypeScript launcher. All
+   other argument vectors continue to exec the existing proof launcher
+   unchanged.
+2. The sole first command is:
+
+   ```text
+   ./scripts/emdash workspace check \
+     --project-root ABSOLUTE_PATH \
+     --data-root ABSOLUTE_PATH \
+     [--offline] [--format jsonl|text]
+   ```
+
+   Both roots are mandatory and may appear as `--name value` or
+   `--name=value`. Missing values, duplicates, unknown flags, positional
+   arguments, unknown commands, and repeated `--offline` fail closed. Root
+   canonicality, existence, disjointness, and containment remain owned by
+   AI-REMOTE-1B1.
+3. There is no current-directory, environment, `HOME`, platform-path, or
+   `/work/*` default. A GetPaidX agent will pass `/work/project` and
+   `/work/data` explicitly after a compatible runtime exists; a local agent can
+   pass any qualified roots.
+4. Online mode calls `materializeCoreLfMountedRemoteWorkspace`; `--offline`
+   calls `materializeCoreLfMountedRemoteWorkspaceOffline`. No command callback
+   can replace these operations, and no backend selector is accepted.
+5. The default format is JSONL and contains exactly one newline-terminated
+   record with ordered fields: record revision, `kind=workspace-check`,
+   `status=verified`, executed backend, mode, cache disposition, logical
+   workspace ID, workspace revision, ordered module IDs, locked source SHA-256,
+   locked compiled SHA-256, and identity-derived cache key. It contains no
+   source text, compiled text/object, mirror, lock path, source path, cache
+   path, project/data root, timestamp, process ID, or credential.
+6. `--format text` is a compact projection of the same record: verified
+   workspace/revision, executed backend, ordered module count/IDs, and cache
+   mode/disposition/key. It does not trigger a second check.
+7. Success writes only the selected report to stdout and exits zero. Parse,
+   I/O, and semantic failure write `emdash: <message>` to stderr, write no
+   stdout, and exit two. The command has no incomplete-proof exit state.
+8. The launcher owns only `process.argv` and `process.exitCode`. The reusable
+   CLI function is asynchronous and accepts stdout/stderr sinks solely for
+   deterministic tests; it exposes no filesystem, checker, materializer,
+   credential, or transport injection hook.
+9. Focused tests cover online JSONL, offline text after source removal, exact
+   field/privacy shape, parser failures and duplicate rejection, underlying
+   verification failure, the actual shell-wrapper route, and unchanged legacy
+   `check|goals` behavior.
+10. This row adds no public barrel or main-runner import, package manifest,
+    dependency/lockfile, generic checker/compiler/runtime, browser closure,
+    kernel file, hosted template, platform source allowlist, Lambdapi backend,
+    or `~/closerfans` change. Focused CLI/remote tests, shell syntax and process
+    smoke, workspace setup, typecheck, changed-file lint, a nearest local
+    matrix, and diff hygiene are proportional. The prior aggregate is reused.
+
+Reject or revise 1B2A if shell namespacing changes an existing proof argv; if a
+useful report requires process-local compiled state or paths; if the command
+needs ambient root discovery, backend guessing, lock regeneration, or
+credentials; or if it cannot exercise the exact 1B1 verifier without a new
+semantic API.
+
+This contract is self-approved under D-AI-NATIVE-049. Approval is limited to
+the local CLI module, thin launcher, additive shell dispatch, focused tests,
+living-plan synchronization, proportional validation, and a rollback-safe
+goal-branch checkpoint. It does not approve packaging, a hosted template,
+Node/controller changes, platform APIs, Lambdapi execution, another merge,
+push, or deployment.
+
+## AI-REMOTE-1B2A Completion Record
+
+Date: 2026-08-08
+
+Hypothesis: the existing stateless `./scripts/emdash` edge can expose the
+qualified mounted-workspace verifier to an AI agent through one additive
+namespace and compact report, without changing proof commands, discovering
+ambient roots, or pretending a hosted or Lambdapi backend already exists.
+
+Result: accepted for the bounded local TypeScript/emdash workspace-check
+command. Hosted package/template delivery remains deferred under
+D-AI-NATIVE-060.
+
+Implementation:
+
+- added Node-owned `src/v3_2/lf_remote_workspace_cli.ts` with command profile
+  `emdash-lf-remote-workspace-cli-v1` and record profile
+  `emdash-lf-workspace-check-record-v1`;
+- exact parsing accepts only `check`, mandatory explicit project/data roots,
+  optional `--offline`, and `--format jsonl|text`, including the two standard
+  option-value forms. Missing, duplicate, positional, unknown, relative-root,
+  and unimplemented backend arguments fail closed;
+- online and offline commands directly call the two qualified AI-REMOTE-1B1
+  operations. The CLI exposes no materializer/checker/filesystem callback and
+  does not regenerate locks or source;
+- the immutable path-free check record reports only its profile, verified
+  status, actually executed `typescript-emdash-explicit-core` backend, source/
+  offline mode, cache disposition, logical workspace/revision, ordered module
+  IDs, locked source/compiled SHA-256, and identity-derived cache key;
+- default JSONL emits exactly one ordered newline-terminated record. Optional
+  text is a single projection of that record and triggers no second check;
+- added thin `examples/v3_2_remote_workspace_cli.ts`, which owns only argv and
+  exit-code plumbing; and
+- `scripts/emdash` now dispatches an exact leading `workspace` argument to the
+  new launcher. Every other argument vector is still passed unchanged to the
+  existing proof launcher. Executable mode remains `0775`.
+
+The existing remote-workspace test file now also covers online JSONL exact
+field order/privacy, offline text after source removal, parser and duplicate
+failures, relative/ambient roots, rejection of a premature `--backend
+lambdapi`, propagation of source verification failure, the actual executable
+shell route, and an actual legacy `check --format text` proof process.
+
+Qualification:
+
+- the focused AI-REMOTE-1A/1B1/1B2A file passed 19 tests across three suites
+  with zero failures;
+- the nearest proof-CLI/workspace/fragment/visibility/runtime/proof/mixed/
+  acquisition/browser matrix passed 117 tests across 15 suites: 115 active
+  passes, two intentional Lambdapi opt-in skips, and zero failures;
+- workspace setup, TypeScript typecheck, changed-file ESLint, `sh -n`, actual
+  process smoke, executable-mode check, forbidden network/process/environment/
+  current-directory scan, and diff hygiene passed; and
+- no public barrel, main test runner, package/workspace setup, dependency,
+  generic checker/compiler/runtime, browser closure, kernel, hosted template,
+  platform, or publication boundary changed. The 1,486-test aggregate is
+  therefore reused under D-AI-NATIVE-048 rather than repeated.
+
+No `~/closerfans` file changed, and the command invokes no Lambdapi process.
+The backend-neutral lock remains compatible with a future separately profiled
+Lambdapi/emdash adapter. AI-REMOTE-1B2B cannot start until runtime distribution
+and Node compatibility are selected; AI-REMOTE-1B3 remains gated on a real
+network consumer. The next dependency-ready work is AI-SYNTH-0's read-only
+inventory and selection of one exact explicit-dictionary elaboration consumer.
+
 ## AI-PROOF-2 Completion Record
 
 Date: 2026-08-08
@@ -2344,18 +2532,20 @@ Decision consequences:
 | Public barrel/test runner | one complete `./scripts/pnpmw run check:ts` only after a bounded tranche actually changes this shared behavior; carry the result forward for unchanged boundaries |
 | Module/workspace manager | focused graph/snapshot/invalidation tests plus nearest transfer/module suites; complete `check:ts` only at a newly changed shared boundary |
 | Mounted remote store | focused canonical-file, offline, poison, concurrency, symlink, and root-boundary tests; workspace/typecheck/changed-file lint; nearest TypeScript workspace matrix; no Lambdapi or aggregate unless another exact boundary changes |
+| Local workspace CLI | exact JSONL/text and parser tests, actual shell online route, unchanged proof route, shell syntax/mode, workspace/typecheck/changed-file lint, nearest local matrix; no aggregate for an unchanged barrel/runner/package/compiler boundary |
 | Lambdapi/kernel-dependent target | `EMDASH_TYPECHECK_TIMEOUT=90s make -C emdash2 check` plus every nested-SOP gate actually triggered |
 | Cross-layer release/publication | affected browser/print/kernel gates and eventually `check:all`; never run merely for reassurance |
 
-AI-PROOF-1, AI-PROOF-2, AI-WORKSPACE-1A, AI-WORKSPACE-1B1, and
-AI-REMOTE-1B1 change only generic TypeScript proof/workspace source, artifact,
-command-adapter, or Node-edge behavior. Their proportional boundary is focused
-tests, typecheck/lint, diff/link and shell hygiene, a nearest matrix where
-appropriate, and one complete shared TypeScript gate only when a tranche
-actually changes that shared boundary. Recent green aggregate evidence is
-carried forward and must not be repeated merely for reassurance. No kernel,
-Lambdapi, browser-product build, print, book, or `check:all` gate is required
-unless the exact diff expands into those layers.
+AI-PROOF-1, AI-PROOF-2, AI-WORKSPACE-1A, AI-WORKSPACE-1B1,
+AI-REMOTE-1B1, and AI-REMOTE-1B2A change only generic TypeScript
+proof/workspace source, artifact, command-adapter, or Node-edge behavior. Their
+proportional boundary is focused tests, typecheck/lint, diff/link and shell
+hygiene, a nearest matrix where appropriate, and one complete shared
+TypeScript gate only when a tranche actually changes that shared boundary.
+Recent green aggregate evidence is carried forward and must not be repeated
+merely for reassurance. No kernel, Lambdapi, browser-product build, print,
+book, or `check:all` gate is required unless the exact diff expands into those
+layers.
 
 ## Recovery Checklist
 
@@ -2393,17 +2583,30 @@ exact-closure AI-WORKSPACE-1B1 proof attachment and AI-WORKSPACE-1B2A
 same-module fragment chain and AI-WORKSPACE-1B2B cross-module fragment graph
 and AI-REMOTE-1A locked supplied-text materialization/offline-cache-data slice
 and AI-REMOTE-1B0 platform audit and AI-REMOTE-1B1 TypeScript mounted-file/
-immutable-cache slice as complete. Preserve AI-REMOTE-1A's recorded
-1,486-test, 224-suite aggregate and AI-REMOTE-1B1's 108-test nearest matrix;
-do not repeat an unchanged long gate for reassurance. Continue with the one
-in-progress AI-REMOTE-1B2 exact-consumer audit. Measure the existing
-`./scripts/emdash` command seam, management-code shape, and one real mounted
-GetPaidX template/agent workflow before freezing an agent-facing command or
-file contract. Keep public command/export/template changes and actual fetch,
-platform HTTP/MCP integration, credentials, retries, redirects, and signed
-URLs unimplemented until their distinct audits select the smallest
+immutable-cache slice and AI-REMOTE-1B2A explicit-root local `workspace check`
+command as complete. Preserve AI-REMOTE-1A's recorded 1,486-test, 224-suite
+aggregate, AI-REMOTE-1B1's 108-test nearest matrix, and AI-REMOTE-1B2A's
+117-test nearest matrix; do not repeat an unchanged long gate for reassurance.
+
+Treat AI-REMOTE-1B2B hosted packaging/template delivery as deferred until a
+distributable emdash runtime, compatible Node version, template-owned install
+contract, agent skill, and generic platform source capability are selected.
+Do not change `~/closerfans` merely to simulate those prerequisites.
+AI-REMOTE-1B3 remains pending one real network consumer. Keep actual fetch,
+platform HTTP/MCP integration, credentials, retries, redirects, signed URLs,
+and publication unimplemented until their distinct audits select the smallest
 consumer-backed contracts. Never treat a URL, mutable branch, observed digest,
 or cached compiled object as authority.
+
+Continue with the one in-progress AI-SYNTH-0 exact-consumer inventory. Audit
+the existing unification hooks and rule semantics, proof-rule/refiner
+boundary, record/structure macro and metadata surfaces, implicit-hole behavior,
+and candidate explicit-dictionary encodings. Select and record one real
+user-facing elaboration consumer before proposing any resolver. Do not
+implement typeclass or dictionary synthesis during the inventory row. If one
+consumer supports a bounded proposal, freeze its candidate scope, termination
+measure, ambiguity/failure behavior, deterministic trace, and explicit checked
+Core output before implementing AI-SYNTH-1.
 Do not infer a provider from fragment order, symbol spelling, or a current
 compiled object. Preserve explicit backend-neutral Core and all existing
 checker, session, compiler, runtime, proof, visibility, and
@@ -2416,10 +2619,14 @@ filesystem/hash authority.
 After each bounded result, synchronize the plan's Work/Decision Ledgers and
 run its proportional gates. Prefer focused and nearest checks and reuse recent
 green aggregate evidence; run another long aggregate only when an exact new
-shared-boundary diff and repository SOP strictly require it. Review and freeze
-the consumer-gated AI-REMOTE-1B2 command/template boundary before implementing
-that adapter or considering explicit dictionary synthesis or paper/browser
-integration.
+shared-boundary diff and repository SOP strictly require it. Keep the
+implemented backend focused on the small TypeScript/emdash checker/evaluator.
+Retain backend-neutral explicit Core and deterministic Lambdapi/emdash
+emission/checking as an optional later adapter and conformance route; do not
+add a backend flag or claim Lambdapi execution until that separate path exists.
+After AI-SYNTH-0, continue only with its selected consumer-backed synthesis
+row or another dependency-ready local TypeScript row. Paper/browser integration
+remains separately consumer-gated.
 Revise or reject a plan row when implementation evidence contradicts it; do
 not preserve a failed architecture for narrative continuity.
 

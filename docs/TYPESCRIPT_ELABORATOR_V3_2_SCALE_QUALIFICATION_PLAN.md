@@ -40,11 +40,14 @@ AI-REMOTE-1B0's `~/closerfans` platform audit and AI-REMOTE-1B1's TypeScript-
 only mounted project/data adapter are final-green too. The latter atomically
 installs an identity-derived no-replace cache entry and fully revalidates it
 offline; its nearest matrix passed 108 tests across 13 suites with zero
-failures and two opt-in skips. AI-REMOTE-1B2's exact command/template consumer
-audit is the active continuation. Optional Lambdapi/emdash backend work and
-real network/platform authentication remain separately gated. Carry forward
-the aggregate results for unchanged boundaries rather than rerunning them for
-reassurance.
+failures and two opt-in skips. AI-REMOTE-1B2A's explicit-root local
+`workspace check` command is final-green after a 117-test, 15-suite nearest
+matrix with zero failures and two opt-in skips. Hosted packaging/template
+delivery is deferred behind a distributable emdash runtime and Node-version
+decision; optional Lambdapi/emdash backend work and real network/platform
+authentication remain separately gated. AI-SYNTH-0's exact-consumer inventory
+is the active continuation. Carry forward the aggregate results for unchanged
+boundaries rather than rerunning them for reassurance.
 Human-Direction: after approving H-DTTLF-03/D-DTTLF-001, the user requested a
 careful clarification of whether the final architecture was already settled.
 On 2026-07-24 the user then directed that we gather a varied set of

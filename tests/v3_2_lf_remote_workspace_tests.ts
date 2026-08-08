@@ -1,6 +1,7 @@
 /** Focused AI-REMOTE-1A/1B1 lock, reconstruction, and mounted-store tests. */
 
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import {
     mkdir,
@@ -58,6 +59,10 @@ import {
     materializeCoreLfMountedRemoteWorkspace,
     materializeCoreLfMountedRemoteWorkspaceOffline
 } from '../src/v3_2/lf_remote_workspace_store';
+import {
+    CORE_LF_REMOTE_WORKSPACE_CLI_PROFILE,
+    runCoreLfRemoteWorkspaceCli
+} from '../src/v3_2/lf_remote_workspace_cli';
 
 const providerId = 'fixture.remote_provider';
 const consumerId = 'fixture.remote_consumer';
@@ -353,6 +358,24 @@ const expectStoreError = async (
     });
     return observed as CoreLfMountedRemoteWorkspaceStoreError;
 };
+
+const runWorkspaceCli = async (
+    argv: readonly string[]
+): Promise<CliResult> => {
+    let stdout = '';
+    let stderr = '';
+    const exitCode = await runCoreLfRemoteWorkspaceCli(argv, {
+        stdout: text => { stdout += text; },
+        stderr: text => { stderr += text; }
+    });
+    return { exitCode, stdout, stderr };
+};
+
+interface CliResult {
+    readonly exitCode: number;
+    readonly stdout: string;
+    readonly stderr: string;
+}
 
 describe('AI-REMOTE-1A immutable lock and offline reconstruction', () => {
     it('materializes exact source and compiled snapshots into portable cache', () => {
@@ -916,6 +939,217 @@ describe('AI-REMOTE-1B1 TypeScript mounted workspace store', () => {
                     evictsCacheEntries: false
                 }
             );
+        });
+    });
+});
+
+describe('AI-REMOTE-1B2A local workspace command', () => {
+    it('emits one compact path-free TypeScript verification record', async () => {
+        await withMountedFixture(async mounted => {
+            const result = await runWorkspaceCli([
+                'check',
+                '--project-root',
+                mounted.roots.projectRoot,
+                `--data-root=${mounted.roots.dataRoot}`
+            ]);
+            assert.equal(result.exitCode, 0);
+            assert.equal(result.stderr, '');
+            assert.equal(result.stdout.endsWith('\n'), true);
+            assert.equal(result.stdout.trimEnd().includes('\n'), false);
+            const record = JSON.parse(result.stdout) as
+                Record<string, unknown>;
+            assert.deepEqual(Object.keys(record), [
+                'revision',
+                'kind',
+                'status',
+                'backend',
+                'mode',
+                'cacheDisposition',
+                'logicalWorkspaceId',
+                'workspaceRevision',
+                'moduleIds',
+                'sourceSha256',
+                'compiledSha256',
+                'cacheKey'
+            ]);
+            assert.equal(
+                record.revision,
+                'emdash-lf-workspace-check-record-v1'
+            );
+            assert.equal(record.kind, 'workspace-check');
+            assert.equal(record.status, 'verified');
+            assert.equal(record.backend, 'typescript-emdash-explicit-core');
+            assert.equal(record.mode, 'source');
+            assert.equal(record.cacheDisposition, 'installed');
+            assert.deepEqual(record.moduleIds, [providerId, consumerId]);
+            assert.doesNotMatch(result.stdout, new RegExp(
+                mounted.root.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&'),
+                'u'
+            ));
+            assert.doesNotMatch(
+                result.stdout,
+                /sourceText|compiledText|mirror|credential|processId/iu
+            );
+            assert.deepEqual(CORE_LF_REMOTE_WORKSPACE_CLI_PROFILE, {
+                revision: 'emdash-lf-remote-workspace-cli-v1',
+                recordRevision: 'emdash-lf-workspace-check-record-v1',
+                command: 'workspace check',
+                backend: 'typescript-emdash-explicit-core',
+                defaultFormat: 'jsonl',
+                requiresExplicitRoots: true,
+                supportsOffline: true,
+                supportsBackendSelection: false,
+                performsRootDiscovery: false,
+                regeneratesLocks: false,
+                performsTransport: false,
+                invokesLambdapi: false
+            });
+        });
+    });
+
+    it('renders offline text from the same cache after source removal', async () => {
+        await withMountedFixture(async mounted => {
+            const online = await runWorkspaceCli([
+                'check',
+                `--project-root=${mounted.roots.projectRoot}`,
+                `--data-root=${mounted.roots.dataRoot}`
+            ]);
+            assert.equal(online.exitCode, 0);
+            await unlink(mounted.sourcePath);
+
+            const offline = await runWorkspaceCli([
+                'check',
+                '--offline',
+                '--format',
+                'text',
+                '--project-root',
+                mounted.roots.projectRoot,
+                '--data-root',
+                mounted.roots.dataRoot
+            ]);
+            assert.equal(offline.exitCode, 0);
+            assert.equal(offline.stderr, '');
+            assert.match(
+                offline.stdout,
+                /emdash:\/\/fixture\/remote-workspace@/u
+            );
+            assert.match(
+                offline.stdout,
+                /backend typescript-emdash-explicit-core/u
+            );
+            assert.match(
+                offline.stdout,
+                /modules 2: fixture\.remote_provider, fixture\.remote_consumer/u
+            );
+            assert.match(
+                offline.stdout,
+                /cache offline\/verified-existing: [0-9a-f]{64}/u
+            );
+        });
+    });
+
+    it('fails closed on missing, duplicate, ambient, and backend options', async () => {
+        await withMountedFixture(async mounted => {
+            const invalidArguments: readonly (readonly string[])[] = [
+                [],
+                ['verify'],
+                ['check'],
+                [
+                    'check',
+                    '--project-root',
+                    mounted.roots.projectRoot,
+                    '--project-root',
+                    mounted.roots.projectRoot,
+                    '--data-root',
+                    mounted.roots.dataRoot
+                ],
+                [
+                    'check',
+                    '--project-root',
+                    mounted.roots.projectRoot,
+                    '--data-root',
+                    mounted.roots.dataRoot,
+                    '--offline',
+                    '--offline'
+                ],
+                [
+                    'check',
+                    '--project-root',
+                    '.',
+                    '--data-root',
+                    mounted.roots.dataRoot
+                ],
+                [
+                    'check',
+                    '--project-root',
+                    mounted.roots.projectRoot,
+                    '--data-root',
+                    mounted.roots.dataRoot,
+                    '--backend',
+                    'lambdapi'
+                ]
+            ];
+            for (const argv of invalidArguments) {
+                const result = await runWorkspaceCli(argv);
+                assert.equal(result.exitCode, 2);
+                assert.equal(result.stdout, '');
+                assert.match(result.stderr, /^emdash:/u);
+            }
+
+            await writeFile(
+                mounted.sourcePath,
+                `${mounted.fixture.sourceText}\n`
+            );
+            const invalidSource = await runWorkspaceCli([
+                'check',
+                '--project-root',
+                mounted.roots.projectRoot,
+                '--data-root',
+                mounted.roots.dataRoot
+            ]);
+            assert.equal(invalidSource.exitCode, 2);
+            assert.equal(invalidSource.stdout, '');
+            assert.match(invalidSource.stderr, /byte length differs/u);
+        });
+    });
+
+    it('routes the actual shell command and preserves legacy proof dispatch', async () => {
+        await withMountedFixture(async mounted => {
+            const repositoryRoot = path.resolve(__dirname, '..');
+            const script = path.join(repositoryRoot, 'scripts', 'emdash');
+            const workspace = spawnSync(script, [
+                'workspace',
+                'check',
+                '--project-root',
+                mounted.roots.projectRoot,
+                '--data-root',
+                mounted.roots.dataRoot
+            ], {
+                cwd: repositoryRoot,
+                encoding: 'utf8',
+                timeout: 30_000
+            });
+            assert.equal(workspace.error, undefined);
+            assert.equal(workspace.status, 0, workspace.stderr);
+            assert.equal(workspace.stderr, '');
+            assert.equal(
+                (JSON.parse(workspace.stdout) as { kind: string }).kind,
+                'workspace-check'
+            );
+
+            const proof = spawnSync(script, [
+                'check',
+                '--format',
+                'text'
+            ], {
+                cwd: repositoryRoot,
+                encoding: 'utf8',
+                timeout: 30_000
+            });
+            assert.equal(proof.error, undefined);
+            assert.equal(proof.status, 0, proof.stderr);
+            assert.equal(proof.stderr, '');
+            assert.match(proof.stdout, /complete_identity: complete/u);
         });
     });
 });
