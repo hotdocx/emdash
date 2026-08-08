@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
     CORE_LF_SAME_MODULE_FRAGMENT_WORKSPACE_PROFILE,
+    CoreLfMixedDeclarationContext,
     CoreLfMixedDeclarationLinkage,
     CoreLfModuleSpec,
     CoreLfSameModuleFragmentSource,
@@ -13,9 +14,11 @@ import {
     CoreLfTransferScopedBuilder,
     KernelExpression,
     binderMode,
+    compileCoreLfDeclarations,
     compileCoreLfSameModuleFragmentWorkspace,
     coreLfQualifiedSymbol,
     coreLfTransferAbsentBody,
+    coreLfTransferExplicitBody,
     createCoreLfMixedDeclarationLinkage,
     createCoreLfModuleSpec,
     createCoreLfSameModuleFragmentWorkspace,
@@ -34,6 +37,13 @@ import {
     serializeCoreLfSameModuleFragmentWorkspaceSourceSnapshot,
     serializeCoreLfSameModuleFragmentWorkspaceSnapshot
 } from '../src/v3_2';
+import {
+    CoreLfDictionaryAuthoringError,
+    synthesizeCoreLfLeadingDictionaryArgument
+} from '../src/v3_2/lf_dictionary_authoring';
+import {
+    CoreLfDictionarySynthesisError
+} from '../src/v3_2/lf_dictionary_synthesis';
 
 const moduleId = 'fixture.fragment_workspace';
 const authorityPath = 'tests/fixtures/fragment_workspace.lp';
@@ -540,6 +550,258 @@ describe('AI-WORKSPACE-1B2A same-module fragment workspace', () => {
             false
         );
         assertDeepFrozen(compiled.plan);
+    });
+
+    it('authors one leading dictionary into exact later-fragment source', () => {
+        const dictionaryCarrier = coreLfQualifiedSymbol(
+            moduleId,
+            'Dictionary'
+        );
+        const primaryDictionary = coreLfQualifiedSymbol(
+            moduleId,
+            'primaryDictionary'
+        );
+        const secondaryDictionary = coreLfQualifiedSymbol(
+            moduleId,
+            'secondaryDictionary'
+        );
+        const useDictionary = coreLfQualifiedSymbol(
+            moduleId,
+            'useDictionary'
+        );
+        const selectedDictionary = coreLfQualifiedSymbol(
+            moduleId,
+            'selectedDictionary'
+        );
+        const dictionarySymbols = [
+            dictionaryCarrier,
+            primaryDictionary,
+            secondaryDictionary,
+            useDictionary,
+            selectedDictionary
+        ];
+        const dictionaryCoreName = (symbol: typeof dictionaryCarrier) =>
+            `dictionary_${symbol.name}`;
+        const dictionaryLinks = (
+            selected: readonly typeof dictionaryCarrier[]
+        ) => selected.map((symbol, order) => ({
+            order,
+            symbol,
+            kind: 'free-declaration' as const,
+            coreName: dictionaryCoreName(symbol),
+            backendName: symbol.name
+        }));
+        const implicitMode = binderMode('implicit', 'functorial');
+        const prefixModule = createCoreLfModuleSpec({
+            revision: 'dictionary-authoring-prefix-1',
+            moduleId,
+            fragmentId: 'dictionary-authoring-prefix',
+            authorityPath,
+            sourceSha256: sourceSha,
+            dependencies: [],
+            externalSymbols: [],
+            declarations: [
+                declaration(0, dictionaryCarrier, { tag: 'type' }),
+                declaration(
+                    1,
+                    primaryDictionary,
+                    global(dictionaryCarrier)
+                ),
+                declaration(
+                    2,
+                    secondaryDictionary,
+                    global(dictionaryCarrier)
+                ),
+                declaration(3, useDictionary, {
+                    tag: 'pi',
+                    binder: {
+                        hint: 'dictionary',
+                        mode: implicitMode,
+                        type: global(dictionaryCarrier)
+                    },
+                    body: global(dictionaryCarrier)
+                })
+            ],
+            inductives: [],
+            runtimeRules: [],
+            proofRules: []
+        });
+        const prefixPolicy = policyFor(
+            prefixModule,
+            'dictionary-authoring-prefix-policy-1'
+        );
+        const prefixLinkage = createCoreLfTransferDeclarationLinkage(
+            prefixModule,
+            {
+                revision: 'dictionary-authoring-prefix-linkage-1',
+                moduleRevision: prefixModule.revision,
+                entries: dictionaryLinks(dictionarySymbols.slice(0, 4))
+            }
+        );
+        const prefix = defineCoreLfSameModuleDeclarationFragment({
+            module: prefixModule,
+            policy: prefixPolicy,
+            linkage: prefixLinkage
+        });
+        const checkedPrefix = new CoreLfMixedDeclarationContext().extend(
+            compileCoreLfDeclarations(
+                prefix.module,
+                prefix.policy,
+                prefix.linkage
+            )
+        );
+        const suppliedCallee = { ...useDictionary };
+        const suppliedCandidates = [{ ...primaryDictionary }];
+        const candidatesBefore = structuredClone(suppliedCandidates);
+        const authored = synthesizeCoreLfLeadingDictionaryArgument({
+            declarations: checkedPrefix,
+            callee: suppliedCallee,
+            candidates: suppliedCandidates
+        });
+
+        assert.equal(authored.binderName, 'dictionary');
+        assert.deepEqual(authored.argument, {
+            plicity: 'implicit',
+            value: {
+                tag: 'global',
+                symbol: primaryDictionary
+            }
+        });
+        assert.deepEqual(authored.synthesis.selected, primaryDictionary);
+        assert.deepEqual(suppliedCandidates, candidatesBefore);
+        assert.equal(Object.isFrozen(suppliedCallee), false);
+        assert.equal(Object.isFrozen(suppliedCandidates), false);
+        assert.equal(Object.isFrozen(suppliedCandidates[0]), false);
+        assertDeepFrozen(authored);
+
+        const laterModule = createCoreLfModuleSpec({
+            revision: 'dictionary-authoring-later-1',
+            moduleId,
+            fragmentId: 'dictionary-authoring-later',
+            authorityPath,
+            sourceSha256: sourceSha,
+            dependencies: [],
+            externalSymbols: [
+                dictionaryCarrier,
+                primaryDictionary,
+                useDictionary
+            ].map(symbol => ({
+                symbol,
+                availability: 'earlier-fragment' as const
+            })),
+            declarations: [{
+                order: 4,
+                symbol: selectedDictionary,
+                type: global(dictionaryCarrier),
+                body: coreLfTransferExplicitBody({
+                    tag: 'call',
+                    callee: global(useDictionary),
+                    arguments: [authored.argument]
+                }),
+                modifiers: {
+                    visibility: 'public',
+                    rigidity: 'ordinary',
+                    sourceOpacity: 'transparent'
+                },
+                provenance: source(
+                    'symbol selectedDictionary ≔ useDictionary;'
+                )
+            }],
+            inductives: [],
+            runtimeRules: [],
+            proofRules: []
+        });
+        const laterPolicy = createCoreLfTransferPolicyOverlay(laterModule, {
+            revision: 'dictionary-authoring-later-policy-1',
+            moduleRevision: laterModule.revision,
+            entries: [{
+                order: 0,
+                target: {
+                    kind: 'declaration',
+                    symbol: selectedDictionary
+                },
+                policy: 'checked-transparent-definition',
+                evidence: 'explicit dictionary authoring consumer'
+            }]
+        });
+        const laterLinkage = createCoreLfTransferDeclarationLinkage(
+            laterModule,
+            {
+                revision: 'dictionary-authoring-later-linkage-1',
+                moduleRevision: laterModule.revision,
+                entries: dictionaryLinks([
+                    dictionaryCarrier,
+                    primaryDictionary,
+                    useDictionary,
+                    selectedDictionary
+                ])
+            }
+        );
+        const later = defineCoreLfSameModuleDeclarationFragment({
+            module: laterModule,
+            policy: laterPolicy,
+            linkage: laterLinkage,
+            externalProviders: laterModule.externalSymbols.map(external => ({
+                symbol: external.symbol,
+                provider: prefix.identity
+            }))
+        });
+        const compiled = compileCoreLfSameModuleFragmentWorkspace(
+            createCoreLfSameModuleFragmentWorkspace({
+                revision: 'dictionary-authoring-workspace-1',
+                fragments: [later, prefix]
+            })
+        );
+        const selected = compiled.declarations.declaration(
+            selectedDictionary
+        );
+        assert.equal(selected?.status, 'installed-transparent');
+        assert.equal(selected?.body?.tag, 'call');
+        if (selected?.body?.tag === 'call') {
+            assert.equal(
+                selected.body.arguments[0].value.tag,
+                'reference'
+            );
+            assert.deepEqual(
+                selected.body.arguments[0].value.tag === 'reference'
+                    ? selected.body.arguments[0].value.name
+                    : undefined,
+                dictionaryCoreName(primaryDictionary)
+            );
+        }
+        const sourceText =
+            serializeCoreLfSameModuleFragmentWorkspaceSourceSnapshot(
+                createCoreLfSameModuleFragmentWorkspaceSourceSnapshot(
+                    compiled.plan
+                )
+            );
+        assert.match(sourceText, /primaryDictionary/);
+        assert.doesNotMatch(
+            sourceText,
+            /emdash-lf-dictionary-(?:authoring|synthesis)/
+        );
+
+        assert.throws(
+            () => synthesizeCoreLfLeadingDictionaryArgument({
+                declarations: checkedPrefix,
+                callee: useDictionary,
+                candidates: [secondaryDictionary, primaryDictionary]
+            }),
+            error =>
+                error instanceof CoreLfDictionarySynthesisError &&
+                error.code === 'AMBIGUOUS_DICTIONARY' &&
+                error.report?.matches.length === 2
+        );
+        assert.throws(
+            () => synthesizeCoreLfLeadingDictionaryArgument({
+                declarations: checkedPrefix,
+                callee: dictionaryCarrier,
+                candidates: [primaryDictionary]
+            }),
+            error =>
+                error instanceof CoreLfDictionaryAuthoringError &&
+                error.code === 'EXPECTED_LEADING_IMPLICIT_BINDER'
+        );
     });
 
     it('is byte-stable across input permutations and excludes process state', () => {
