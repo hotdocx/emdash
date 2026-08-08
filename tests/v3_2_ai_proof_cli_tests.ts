@@ -1,7 +1,18 @@
-/** Focused AI-PROOF-2 tests for the Node-owned local command seam. */
+/** Focused AI-PROOF-2 and AI-PAPER-1B1 Node-adapter tests. */
 
 import assert from 'node:assert';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { describe, it } from 'node:test';
+import {
+    CORE_AI_RESEARCH_OVERVIEW_PROFILE
+} from '../src/v3_2/ai_research_overview';
+import {
+    CORE_AI_RESEARCH_OVERVIEW_FILES_PROFILE,
+    CoreAiResearchOverviewFilesError,
+    materializeCoreAiResearchOverviewFiles,
+    serializeCoreAiResearchOverviewFilesSnapshot
+} from '../src/v3_2/ai_research_overview_files';
 import {
     runCoreAiProofCli
 } from '../src/v3_2/ai_proof_cli';
@@ -94,5 +105,192 @@ describe('TypeScript v3.2 AI-PROOF-2 local CLI', () => {
             assert.equal(result.stdout, '');
             assert.match(result.stderr, /^emdash:/u);
         }
+    });
+});
+
+const repositoryRoot = path.resolve(__dirname, '..');
+const articleSuffix = path.join(
+    'emdash2',
+    'print',
+    'public',
+    'emdash-v3-2-overview.md'
+);
+
+const replaceArticle = (
+    transform: (source: string) => string
+): ((absolutePath: string) => Uint8Array) => absolutePath => {
+    const bytes = readFileSync(absolutePath);
+    if (!absolutePath.endsWith(articleSuffix)) return bytes;
+    return Buffer.from(transform(bytes.toString('utf8')), 'utf8');
+};
+
+describe('TypeScript v3.2 AI-PAPER-1B1 research files', () => {
+    it('materializes both article diagrams and both proof states', () => {
+        const first = materializeCoreAiResearchOverviewFiles();
+        const second = materializeCoreAiResearchOverviewFiles();
+        assert.equal(
+            serializeCoreAiResearchOverviewFilesSnapshot(first),
+            serializeCoreAiResearchOverviewFilesSnapshot(second)
+        );
+        assert.equal(first.digestVerification, 'performed-exact-utf8');
+        assert.equal(first.binding.digestVerification, 'not-performed');
+        assert.equal(
+            first.documentSource.id,
+            CORE_AI_RESEARCH_OVERVIEW_PROFILE.documentSourcePath
+        );
+        assert.equal(
+            first.binding.source.sha256,
+            first.documentSource.sha256
+        );
+        assert.deepEqual(
+            first.binding.blocks.map(block => block.blockId),
+            [
+                'section-4.pathout-canonical-arrow',
+                'section-4.pathout-motive-transport',
+                'section-7.proof.complete-identity',
+                'section-7.proof.open-identity'
+            ]
+        );
+        assert.deepEqual(
+            first.binding.blocks
+                .filter(block => block.kind === 'proof')
+                .map(block => block.status),
+            ['complete', 'incomplete']
+        );
+        assert.deepEqual(
+            first.proofArtifacts.map(item => item.artifact.state.status),
+            ['complete', 'incomplete']
+        );
+        first.proofArtifacts.forEach(item => {
+            const binding = first.binding.blocks.find(block =>
+                block.blockId === item.blockId
+            );
+            assert.ok(binding && binding.kind === 'proof');
+            assert.equal(binding.artifactSource.sha256, item.source.sha256);
+        });
+        assert.equal(Object.isFrozen(first), true);
+        assert.equal(Object.isFrozen(first.proofArtifacts), true);
+        assert.doesNotMatch(
+            serializeCoreAiResearchOverviewFilesSnapshot(first),
+            /\/home\/|session|Symbol/u
+        );
+
+        const managementSource = readFileSync(
+            path.join(
+                repositoryRoot,
+                CORE_AI_RESEARCH_OVERVIEW_PROFILE.managementSourcePath
+            ),
+            'utf8'
+        );
+        assert.doesNotMatch(managementSource, /from ['"]node:/u);
+        assert.equal(
+            CORE_AI_RESEARCH_OVERVIEW_PROFILE.nodeBuiltinDependency,
+            false
+        );
+        assert.equal(
+            CORE_AI_RESEARCH_OVERVIEW_FILES_PROFILE.performsWrites,
+            false
+        );
+        assert.equal(
+            CORE_AI_RESEARCH_OVERVIEW_FILES_PROFILE.invokesLambdapi,
+            false
+        );
+    });
+
+    it('rejects a managed diagram whose exact content drifts', () => {
+        assert.throws(
+            () => materializeCoreAiResearchOverviewFiles({
+                readBytes: replaceArticle(source => source.replace(
+                    '"label": "$x$"',
+                    '"label": "$x^{\\prime}$"'
+                ))
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreAiResearchOverviewFilesError);
+                assert.equal(error.code, 'MISSING_DIAGRAM');
+                return true;
+            }
+        );
+    });
+
+    it('rejects drift in the imported management or proof source pins', () => {
+        for (const relativePath of [
+            CORE_AI_RESEARCH_OVERVIEW_PROFILE.managementSourcePath,
+            CORE_AI_RESEARCH_OVERVIEW_PROFILE.proofSourcePath
+        ]) {
+            const suffix = relativePath.split('/').join(path.sep);
+            assert.throws(
+                () => materializeCoreAiResearchOverviewFiles({
+                    readBytes: absolutePath => {
+                        const bytes = readFileSync(absolutePath);
+                        return absolutePath.endsWith(suffix)
+                            ? Buffer.concat([bytes, Buffer.from('\n')])
+                            : bytes;
+                    }
+                }),
+                (error: unknown) => {
+                    assert.ok(
+                        error instanceof CoreAiResearchOverviewFilesError
+                    );
+                    assert.equal(error.code, 'SOURCE_PIN_MISMATCH');
+                    assert.equal(error.target, relativePath);
+                    return true;
+                }
+            );
+        }
+    });
+
+    it('rejects a content selector that matches two diagram bodies', () => {
+        assert.throws(
+            () => materializeCoreAiResearchOverviewFiles({
+                readBytes: replaceArticle(source => {
+                    const bodies = [...source.matchAll(
+                        /<div class="arrowgram"[^>]*>([\s\S]*?)<\/div>/gu
+                    )];
+                    assert.equal(bodies.length, 2);
+                    return source.replace(bodies[1][1], bodies[0][1]);
+                })
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreAiResearchOverviewFilesError);
+                assert.equal(error.code, 'AMBIGUOUS_DIAGRAM');
+                return true;
+            }
+        );
+    });
+
+    it('rejects an unbound diagram or invalid article UTF-8', () => {
+        assert.throws(
+            () => materializeCoreAiResearchOverviewFiles({
+                readBytes: replaceArticle(source => {
+                    const first = source.match(
+                        /<div class="arrowgram"[^>]*>[\s\S]*?<\/div>/u
+                    );
+                    assert.ok(first);
+                    return `${source}\n${first[0]}\n`;
+                })
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreAiResearchOverviewFilesError);
+                assert.equal(error.code, 'UNBOUND_DIAGRAM');
+                return true;
+            }
+        );
+        assert.throws(
+            () => materializeCoreAiResearchOverviewFiles({
+                readBytes: absolutePath => absolutePath.endsWith(articleSuffix)
+                    ? Uint8Array.from([0xff])
+                    : readFileSync(absolutePath)
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreAiResearchOverviewFilesError);
+                assert.equal(error.code, 'INVALID_UTF8');
+                assert.equal(
+                    error.target,
+                    CORE_AI_RESEARCH_OVERVIEW_PROFILE.documentSourcePath
+                );
+                return true;
+            }
+        );
     });
 });
