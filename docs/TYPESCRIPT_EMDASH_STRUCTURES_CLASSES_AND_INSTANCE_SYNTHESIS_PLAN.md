@@ -5,7 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-is final-green and STRUCT-NAMED-2 is the next dependency-ready tranche
+is final-green; the exact STRUCT-NAMED-2 contract is frozen and approved for
+implementation
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -506,7 +507,7 @@ make explicit local scope discipline especially important.
 | --- | --- | --- |
 | ARCH-0 | complete | Architecture, comparison target, trust boundary, non-goals, and acceptance corpus recorded here. |
 | STRUCT-PARAM-1 | complete | The existing macro now has dependent parameter telescopes and explicit carrier/constructor/projection modes while preserving unparameterized declarations, rules, order, and emission. |
-| STRUCT-NAMED-2 | dependency-ready | Add stable named construction over the private generated constructor layout. |
+| STRUCT-NAMED-2 | in progress | The audited named-construction contract is frozen and approved; implement order-independent parameter/field assignments over stable handles. |
 | CLASS-SCHEMA-3 | pending | Add class/field/parent metadata and parameter roles without search. |
 | CLASS-INHERIT-4 | pending | Add strict C3 lookup, canonical field identities, explicit sharing, and algebraic-diamond conversions. |
 | SYNTH-SCOPE-5 | pending | Add immutable provider declarations and local/named/imported scope snapshots. |
@@ -600,6 +601,85 @@ The next dependency-ready row is `STRUCT-NAMED-2`. It should first audit the
 existing Core-call builder and structure handle consumers, then freeze the
 smallest named-field construction contract without beginning class metadata
 or inheritance in the same checkpoint.
+
+## STRUCT-NAMED-2 Audit And Frozen Contract
+
+The 2026-08-08 continuation audit found:
+
+- `CoreLfStructureHandle` is consumed only by the focused structure suite;
+  no production source currently relies on its exact nested shape;
+- `constructorTerm` is a transfer-IR global head, while `kernelCall` operates
+  only after compilation and would place this authoring helper on the wrong
+  side of the explicit-Core boundary;
+- named construction values may legitimately be open locally nameless
+  transfer expressions, so the helper cannot require closed terms or invent
+  a checking context;
+- field constructor plicity is not currently retained by projection handles,
+  while parameter handles already retain their three owner-specific modes;
+  and
+- the existing declaration compiler/checker is the right authority for value
+  types after the helper has assembled an ordinary transfer expression.
+
+The selected additive API is:
+
+```ts
+constructCoreLfNamedStructure({
+  structure: expansion.handle,
+  parameters: [
+    { parameter: expansion.handle.parameters[0], value: A },
+  ],
+  fields: [
+    { field: expansion.handle.projections[1], value: proof },
+    { field: expansion.handle.projections[0], value: operation },
+  ],
+})
+```
+
+Its exact contract is:
+
+1. Parameter and projection handles carry the stable declaring-carrier
+   symbol. Projection handles additionally carry the original field binder
+   mode.
+2. The input contains explicit arrays of parameter and field assignments.
+   Their source order is irrelevant.
+3. A supplied handle is matched structurally against the selected structure's
+   canonical handle at its ordinal. This accepts deterministic copied data but
+   rejects a handle from another structure.
+4. Every parameter and every field must occur exactly once. Missing,
+   duplicate, foreign, malformed, and non-term assignments fail at stable
+   source-like paths.
+5. Canonical constructor argument order is all parameters by ordinal followed
+   by all fields by ordinal.
+6. Parameter argument plicity comes from each parameter's constructor mode;
+   field argument plicity comes from the recorded field mode. The caller never
+   supplies either plicity.
+7. Ordinary `type`, `bound`, `global`, `call`, `pi`, and `lambda` transfer
+   expressions are cloned without mutating or freezing caller data. Runtime
+   `capture` and `wildcard` syntax is rejected.
+8. The result is one deeply frozen ordinary `CoreLfTransferExpression` whose
+   head is the generated constructor. It contains no named-construction node
+   and crosses no trusted boundary.
+9. Correct value types are checked only when the returned term is installed
+   or checked in its actual context. The helper claims completeness and
+   deterministic ordering, not independent dependent typechecking.
+10. The focused corpus covers unparameterized and parameterized structures,
+    deliberately reversed input order, distinct plicities, open-term cloning,
+    caller immutability, ordinary LF compilation, and every fail-closed
+    assignment class.
+
+The frozen error classes are `INVALID_CONSTRUCTION`, `FOREIGN_ARGUMENT`,
+`DUPLICATE_ARGUMENT`, and `MISSING_ARGUMENT`, with exact paths distinguishing
+parameters from fields. This tranche adds no class/schema metadata,
+inheritance, defaults, updates, synthesis, parser route, Core node, kernel
+rule, browser export, or sibling-repository change.
+
+The proposal gate `H-TS-EMDASH-CLASSES-NAMED-001` is approved under the
+user-authorized unattended-review delegation, with immediate human
+supersession. The proposal checkpoint records the pre-implementation
+backtracking boundary. Because the exported structure authoring surface
+changes, one root `check:ts` is required only after the focused tranche is
+otherwise green; the resulting aggregate is then carried forward. No
+repository-wide `check:all` or unchanged active-kernel aggregate is required.
 
 ## Decision Ledger
 
