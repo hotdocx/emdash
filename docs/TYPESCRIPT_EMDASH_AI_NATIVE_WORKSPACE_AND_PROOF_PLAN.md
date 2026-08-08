@@ -9,8 +9,9 @@ AI-REMOTE-1A is final-green; AI-REMOTE-1B0's exact-consumer audit is complete;
 the TypeScript-only mounted-workspace/cache adapter AI-REMOTE-1B1 is
 final-green; AI-REMOTE-1B2's audit is complete and partitioned; its frozen
 local agent command AI-REMOTE-1B2A is final-green; hosted delivery remains
-prerequisite-gated; AI-SYNTH-0's exact-consumer inventory is the only
-in-progress slice
+prerequisite-gated; AI-SYNTH-0's exact-consumer inventory is complete and its
+frozen, pure-TypeScript AI-SYNTH-1A global-dictionary slice is final-green;
+AI-SYNTH-1B remains consumer-gated
 Baseline: `5027d5aabca191c088dfd9757a0bb8df4cb04a34` on local `main`
 Depends-On:
 [`TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md),
@@ -26,7 +27,9 @@ Git-Boundary: completed AI-PROOF/AI-WORKSPACE/AI-REMOTE-1A work is preserved
 at local checkpoint `a3ba93a0fcc95434f411d94deca042f47b735c3a` on
 `goal/typescript-emdash-ai-native`; the user-authorized one-time fast-forward
 placed the same checkpoint on local `main`. Continuation work is again on the
-clean dedicated goal branch in the `~/emdash1` worktree. The user's standing
+dedicated goal branch in the `~/emdash1` worktree; the final-green
+AI-REMOTE-1B2A command is preserved there at local checkpoint `a176ccc`.
+The user's standing
 unattended authority includes self-approval of a frozen plan tranche and
 rollback-safe local checkpoint commits after the persistent-goal Git SOP is
 satisfied. It does not authorize another merge, push, PR, publication,
@@ -706,11 +709,19 @@ platform HTTP/MCP adapters remain separately prerequisite-gated.
 
 ### AI-SYNTH-1: explicit dictionary synthesis
 
-This remains gated behind an exact usability consumer and a separate design
-review. First inventory existing implicit solving, structure macros,
-unification-rule behavior, and the likely class/instance representation. Then
-implement the smallest deterministic indexed resolver whose output is an
-ordinary explicit Core term.
+The completed AI-SYNTH-0 inventory partitions this row. AI-SYNTH-1A is a
+closed global-dictionary selection primitive over an explicit finite list of
+qualified, already checked declarations. It has one structure-generated
+capability consumer and returns an ordinary checked Core reference. It does
+not scan an environment, execute `unif_rule`, recurse through premises, assign
+priorities, retain callbacks, or know about source syntax.
+
+AI-SYNTH-1B remains the authoring/workspace integration row: it must decide
+how source declarations opt into candidate scopes, how local binders and
+implicit synthesis requests are represented, and how those choices enter a
+portable workspace snapshot. Indexed recursive premises, search tiers,
+priorities, fuel beyond the finite-candidate measure, and any external Elpi
+provider remain AI-SYNTH-2 and require another real consumer.
 
 ### AI-PAPER-1: research-workspace integration
 
@@ -747,8 +758,11 @@ Only one row may be in progress in this worktree.
 | AI-REMOTE-1B2A | complete | AI-REMOTE-1B1 plus existing `./scripts/emdash` seam | The explicit-root `workspace check` namespace emits compact JSONL/text reports over the TypeScript mounted store while preserving existing proof commands exactly. |
 | AI-REMOTE-1B2B | pending | distributable emdash runtime plus compatible hosted Node/template contract | Select package/source delivery, supported Node version, template-owned install, agent skill, and generic platform source capability before changing `~/closerfans` or claiming hosted availability. |
 | AI-REMOTE-1B3 | pending | stable authenticated/public transport consumer | If a real consumer requires it, freeze a separate supplied-byte HTTPS/platform adapter with explicit timeout, redirect, authentication, and retry policy; signed URLs remain ephemeral acquisition inputs. |
-| AI-SYNTH-0 | in progress (exact-consumer inventory only) | AI-REMOTE-1B2A plus exact user-facing consumer | Audit unification, proof rules, structure metadata, candidate dictionary semantics, and one real elaboration consumer before proposing a resolver; no synthesis implementation is approved. |
-| AI-SYNTH-1 | pending | AI-SYNTH-0 plus review | Bounded scoped synthesis produces explicit checked Core dictionaries with traces and ambiguity errors. |
+| AI-SYNTH-0 | complete | AI-REMOTE-1B2A plus exact user-facing consumer | The checker/session, proof `unif_rule`, structure/adjunction metadata, active explicit-witness mathematics, and candidate authority were audited; the first executable consumer and resolver boundary are frozen below. |
+| AI-SYNTH-1 | partitioned | AI-SYNTH-0 | Separate closed checked global selection from source/workspace integration and any later recursive indexed search. |
+| AI-SYNTH-1A | complete | AI-SYNTH-0 plus structure-generated capability consumer | An explicit finite qualified-symbol scope selects zero, one, or multiple checked global dictionaries deterministically and emits only a rechecked explicit Core reference plus a complete trace. |
+| AI-SYNTH-1B | pending | AI-SYNTH-1A plus source/workspace consumer | Freeze portable instance annotations, local scopes/binders, and an implicit-synthesis surface request without teaching Core or the checker about typeclasses. |
+| AI-SYNTH-2 | pending | AI-SYNTH-1B plus recursive indexed consumer | Only if demanded, design recursive premise search, tiers/priorities/fuel, and a separately identified external-provider interface. |
 | AI-PAPER-1 | pending | AI-PROOF-2, AI-WORKSPACE-1B2B | One canonical paper/diagram/proof workspace supports agent/browser editing and checked snapshots. |
 | AI-NATIVE-GRADUATE-1 | pending | all accepted rows | Trust, determinism, stale-state, offline, browser, and conformance claims are synchronized and accurately documented. |
 
@@ -817,6 +831,12 @@ Only one row may be in progress in this worktree.
 | D-AI-NATIVE-059 | accepted and qualified as an AI-REMOTE-1B2A non-effect | The command is a projection of AI-REMOTE-1B1 verified results. It performs no discovery, lock regeneration, source authoring, fetch, authentication, Git snapshot, MCP call, daemon state, Lambdapi invocation, backend selection, cache mutation beyond 1B1, or publication. |
 | D-AI-NATIVE-060 | accepted deferral after hosted-template audit | Hosted emdash template delivery is not yet a truthful executable consumer: the root package is private, has no `bin`/published files contract, depends on development-time `ts-node`, and declares Node 22.13+, while current GetPaidX workspace-controller variants use Node 20 and generic source capabilities remain deferred. AI-REMOTE-1B2B must select a distributable runtime and compatible template contract before cross-repository implementation. |
 | D-AI-NATIVE-061 | accepted and qualified by AI-REMOTE-1B2A after direct user clarification | AI-REMOTE-1B2A reports the TypeScript/emdash backend actually executed. A future Lambdapi/emdash backend can implement a separately identified command/backend adapter over the same backend-neutral locked source; no current CLI flag may claim an unimplemented backend. |
+| D-AI-NATIVE-062 | accepted after AI-SYNTH-0 audit | Ordinary flex-rigid/metavariable solving, ordered proof-time `unif_rule` transformation, and dictionary synthesis solve different problems. A synthesis resolver must not enumerate proof rules or reinterpret first-match equality transformation as instance choice. |
+| D-AI-NATIVE-063 | accepted after AI-SYNTH-0 audit | The first candidate scope is the caller's complete explicit finite list of exact qualified symbols. Candidate terms and types come only from the checked `CoreLfMixedDeclarationBaseContext`; spelling, environment iteration, fragment order, callbacks, and caller-asserted types provide no authority. |
+| D-AI-NATIVE-064 | accepted after AI-SYNTH-0 audit | The first executable consumer is a structure-macro-generated capability carrier with checked global capability values passed explicitly to an ordinary implicit binder. An `Adjunction R L F G` witness is the first mathematical follow-up once its pure-TypeScript dependency graph is available; existing duplicate adjunction witnesses already establish that ambiguity must be an error. |
+| D-AI-NATIVE-065 | accepted and frozen for AI-SYNTH-1A | AI-SYNTH-1A accepts one closed meta-free target and only installed free declarations, canonicalizes exact candidate identity, validates each candidate independently with a fresh bounded `CoreLfChecker`, and terminates after the finite candidate list. It has no local binders, recursive premises, priorities, backtracking, runtime/proof program, ambient registry, or source/workspace annotation. |
+| D-AI-NATIVE-066 | accepted and frozen for AI-SYNTH-1A | Zero matching candidates is a structured missing error, one returns a deeply frozen explicit checked Core reference and complete deterministic trace, and multiple matches are a structured ambiguity error listing every match. Input order and duplicates cannot silently choose a winner. Core, the checker, and backend semantics remain typeclass-unaware. |
+| D-AI-NATIVE-067 | accepted and frozen for AI-SYNTH-1A | The present resolver executes only the pure TypeScript/emdash backend. Its result is backend-neutral explicit Core, so a future separately profiled Lambdapi/emdash conformance or execution adapter remains possible without entering the current trusted path. |
 
 ## AI-PROOF-2 Inventory And Exact Contract
 
@@ -2308,7 +2328,181 @@ The backend-neutral lock remains compatible with a future separately profiled
 Lambdapi/emdash adapter. AI-REMOTE-1B2B cannot start until runtime distribution
 and Node compatibility are selected; AI-REMOTE-1B3 remains gated on a real
 network consumer. The next dependency-ready work is AI-SYNTH-0's read-only
-inventory and selection of one exact explicit-dictionary elaboration consumer.
+inventory and selection of one exact explicit-dictionary elaboration consumer;
+that subsequent inventory is now recorded below.
+
+## AI-SYNTH-0 Inventory And AI-SYNTH-1A Exact Contract
+
+Date: 2026-08-08
+
+AI-SYNTH-0 reviewed the current pure-TypeScript elaboration path before
+approving any new search mechanism:
+
+- `CoreChecker` and `CoreElaborationSession` insert and solve ordinary
+  elaboration metavariables. Their structural flex-rigid solver and bounded
+  Miller-pattern inversion solve equations created by checking one term; they
+  do not enumerate declarations, rank alternatives, or establish an instance
+  scope.
+- `CoreLfElaborationSession` extends rigid comparison with bounded outer-LF
+  beta/delta and runtime conversion. `CoreLfCompiledProofProgram` instead
+  rewrites a stuck equality problem into ordered generated equality problems.
+  Its source-ordered first-match rule semantics are proof evidence, not a
+  coherent dictionary-selection policy, and synthesis must never execute it.
+- Compiled declarations already contain the required authority. A
+  `CoreLfMixedDeclarationBaseContext` exposes one exact checked environment
+  plus qualified-symbol lookup. A checked ordinary declaration carries its
+  installed status, checked type, and `free-declaration` link, so synthesis can
+  derive the candidate term itself rather than trust a caller-supplied term or
+  type.
+- The record/structure macro expands to ordinary carrier, constructor,
+  projection, and runtime-beta declarations. Its host handle is deliberately
+  transient and no instance annotation survives into Core. A generated
+  capability carrier with ordinary global inhabitants is therefore a real
+  current consumer without adding a class node to the kernel.
+- The adjunction macro already produces explicit `Adjunction R L F G`
+  witnesses, and its tests intentionally admit two witnesses with identical
+  endpoints. It is a strong subsequent mathematical consumer and proves that
+  silent first-match selection would be unsound usability. It is not the first
+  executable consumer because the complete active adjunction dependency graph
+  has not yet graduated to the self-contained TypeScript backend.
+- Active commutative-algebra, sheafification, affine-scheme, and scheme layers
+  likewise use explicit Sigma records, presentations, and capability
+  witnesses. Multiple structures on one carrier are meaningful. This rules
+  out an ambient global-canonical-instance assumption and favors explicit
+  scopes with hard ambiguity errors.
+
+The selected first consumer is a direct-TypeScript outer-LF module whose
+existing structure-macro-generated `Record` carrier is used as a capability
+dictionary. The module has ordinary checked global values
+`primaryCapability` and `secondaryCapability`, and an ordinary declaration
+with an implicit `Record` binder. AI-SYNTH-1A must select an explicitly
+enumerated unique value and then demonstrate that the returned Core reference
+can be supplied to that binder and checked by the existing TypeScript/LF
+checker. Enumerating both values must demonstrate ambiguity; a checked
+declaration of a different carrier must demonstrate a complete rejected-
+candidate trace.
+
+### Frozen AI-SYNTH-1A API and trust boundary
+
+The browser-safe module is
+`src/v3_2/lf_dictionary_synthesis.ts`, with report revision
+`emdash-lf-dictionary-synthesis-v1`. Its single operation accepts:
+
+1. one `CoreLfMixedDeclarationBaseContext`, which is the complete checked
+   declaration/environment authority;
+2. one closed, meta-free `KernelExpression` target that checks as a type in
+   that environment; and
+3. one finite list of exact `CoreLfQualifiedSymbol` candidates, which is the
+   complete candidate scope for this request.
+
+It has no discovery operation. It does not iterate an environment, infer a
+provider from spelling/order, query a global registry, retain a callback,
+read a workspace, invoke a parser, perform I/O, consult MCP, or acquire remote
+content. Before checking alternatives it canonicalizes candidate identities
+by module ID and local name. A repeated identity is an input error rather than
+two instances, and an unresolved, excluded, intrinsic/core-owner, or otherwise
+non-installed candidate makes the supplied scope invalid. Every admissible
+term is reconstructed from the checked `free-declaration` link; the caller
+cannot forge its Core name, type, or body.
+
+The target is first checked against `TYPE`. Each candidate is then tested
+independently with a fresh `CoreLfChecker` over the exact supplied environment
+and the existing fixed 256-step LF comparison bound. This admits checked
+delta conversion but supplies no catalog runtime and executes no proof-time
+program. An ordinary type mismatch is a traced rejection. A conversion limit
+or another unexpected checking failure aborts rather than being mislabeled as
+evidence that no dictionary exists.
+
+Termination is the length of the finite canonical candidate list: there is
+one bounded target check and at most one bounded candidate check per identity.
+There are no recursive premises, local candidate binders, priorities, tiers,
+backtracking trees, generated metavariables, or configurable search fuel in
+this profile.
+
+The deterministic report contains the revision, canonical explicit-Core
+target text, fixed comparison bound, and every candidate in canonical order
+with its exact identity and either `matched` or a stable rejected-checker code
+and diagnostic. Outcomes are:
+
+- no matches: `NO_MATCHING_DICTIONARY`, carrying the complete report;
+- exactly one match: a deeply frozen result containing the report, selected
+  qualified identity, checked target, and checked explicit Core reference; or
+- more than one match: `AMBIGUOUS_DICTIONARY`, carrying the complete report
+  and all matching identities.
+
+Input order never chooses a winner. The successful explicit term is rechecked
+at the public checker boundary and contains no residual metavariable. Core,
+the checker, session unification, proof rules, runtime rules, declaration
+compilation, and the mathematical owners remain unchanged and typeclass-
+unaware. The result is backend-neutral Core produced and checked by the pure
+TypeScript backend; optional later Lambdapi emission/conformance remains a
+separate adapter.
+
+### Explicit deferrals
+
+AI-SYNTH-1B must use a real authoring/workspace consumer to decide portable
+instance annotations, lexical/imported scope, local dictionary binders, and
+the exact surface request that asks elaboration to synthesize an omitted
+argument. AI-SYNTH-2 must use a genuinely recursive indexed consumer before
+adding premise search, priority/tier coherence, independent fuel, or an Elpi
+provider. Neither row may weaken 1A's explicit candidate authority or turn a
+proof-time equality rule into an instance declaration.
+
+This contract is self-approved under D-AI-NATIVE-049. Approval covers only the
+new browser-safe resolver module, focused tests inside the already registered
+structure-macro test file, this ledger, and proportional TypeScript checks. It
+does not authorize a public barrel or test-runner change, a string parser,
+workspace schema change, kernel/Lambdapi edit, platform integration, long
+unchanged aggregate, external Git mutation, or publication.
+
+### AI-SYNTH-1A Completion Record
+
+Result: accepted and final-green for the closed global-dictionary profile.
+
+Implementation:
+
+- added browser-safe `src/v3_2/lf_dictionary_synthesis.ts` with the frozen
+  `emdash-lf-dictionary-synthesis-v1` profile;
+- validated the target as a closed meta-free type, canonicalized the caller's
+  complete exact candidate list without mutating it, and rejected duplicate,
+  unavailable, excluded, intrinsic/core-owner, or otherwise unsupported
+  candidate identities;
+- derived every candidate reference and declared type solely from the checked
+  mixed-declaration context, then used a fresh bounded `CoreLfChecker` for
+  every independent match attempt;
+- returned one deeply frozen explicit checked Core reference and full trace,
+  or structured missing/ambiguity errors carrying every canonical match and
+  ordinary mismatch; and
+- changed no Core node, checker/session algorithm, runtime/proof rule,
+  declaration compiler, module/workspace snapshot, parser, public barrel,
+  browser barrel, CLI, backend selector, kernel, or platform surface.
+
+The already registered structure-macro suite now compiles a real generated
+`Record` carrier, two ordinary global capability dictionaries, a wrong-carrier
+dictionary, and an ordinary consumer with an implicit dictionary binder. It
+checks successful explicit insertion, frozen output, nonmutation, input-order
+independence, a complete rejected-candidate trace, empty and missing scopes,
+duplicate rejection, ambiguity containing both matches, invalid target
+rejection, and the final consumer call through the existing TypeScript/LF
+checker.
+
+Qualification:
+
+- the focused structure-macro suite passed 11 tests: 10 active passes, one
+  intentional Lambdapi opt-in skip, and zero failures;
+- the nearest LF builder/conversion, structure, and mixed-phase matrix passed
+  44 tests across four suites: 41 active passes, three intentional Lambdapi
+  opt-in skips, and zero failures;
+- workspace contract, root TypeScript typecheck, changed-file ESLint,
+  browser-safety/forbidden-effect scan, and diff hygiene passed; and
+- no shared aggregate boundary changed. The recent 1,486-test root aggregate
+  is therefore reused under D-AI-NATIVE-048 instead of rerun.
+
+No file below `emdash2/` or in `~/closerfans` changed, and no Lambdapi process,
+network operation, MCP service, or external backend was invoked. Decisions
+D-AI-NATIVE-062 through D-AI-NATIVE-067 now have direct implementation and
+test evidence. AI-SYNTH-1B remains gated on an exact authoring/workspace
+consumer; AI-SYNTH-2 remains gated on a genuinely recursive indexed consumer.
 
 ## AI-PROOF-2 Completion Record
 
@@ -2598,15 +2792,23 @@ and publication unimplemented until their distinct audits select the smallest
 consumer-backed contracts. Never treat a URL, mutable branch, observed digest,
 or cached compiled object as authority.
 
-Continue with the one in-progress AI-SYNTH-0 exact-consumer inventory. Audit
-the existing unification hooks and rule semantics, proof-rule/refiner
-boundary, record/structure macro and metadata surfaces, implicit-hole behavior,
-and candidate explicit-dictionary encodings. Select and record one real
-user-facing elaboration consumer before proposing any resolver. Do not
-implement typeclass or dictionary synthesis during the inventory row. If one
-consumer supports a bounded proposal, freeze its candidate scope, termination
-measure, ambiguity/failure behavior, deterministic trace, and explicit checked
-Core output before implementing AI-SYNTH-1.
+Treat AI-SYNTH-0 and the final-green AI-SYNTH-1A finite global-dictionary
+selection as complete. Preserve its explicit qualified candidate scope,
+finite-list termination, missing/success/ambiguity behavior, fresh bounded
+checking, deterministic complete trace, and rechecked explicit Core result.
+Preserve its focused 11-test suite and nearest 44-test/four-suite matrix; do
+not repeat the unchanged 1,486-test aggregate for reassurance. Ordinary
+metavariable solving, proof-time `unif_rule`, and dictionary synthesis remain
+separate, and the adjunction witness remains the first mathematical follow-up
+after its pure-TypeScript dependency graph exists.
+
+The next synthesis action is a read-only AI-SYNTH-1B exact-consumer audit of
+the current TypeScript surface elaborator and workspace-source contracts. It
+must identify one real omitted-implicit authoring path before freezing any
+portable instance annotation, local/imported scope, or synthesis-request node.
+Do not implement AI-SYNTH-1B merely by exposing 1A through a global registry or
+string-parser special case. If no exact consumer is dependency-ready, leave it
+explicitly gated and select another local row.
 Do not infer a provider from fragment order, symbol spelling, or a current
 compiled object. Preserve explicit backend-neutral Core and all existing
 checker, session, compiler, runtime, proof, visibility, and
@@ -2624,9 +2826,10 @@ implemented backend focused on the small TypeScript/emdash checker/evaluator.
 Retain backend-neutral explicit Core and deterministic Lambdapi/emdash
 emission/checking as an optional later adapter and conformance route; do not
 add a backend flag or claim Lambdapi execution until that separate path exists.
-After AI-SYNTH-0, continue only with its selected consumer-backed synthesis
-row or another dependency-ready local TypeScript row. Paper/browser integration
-remains separately consumer-gated.
+After AI-SYNTH-1A, continue with AI-SYNTH-1B only when an exact authoring/
+workspace consumer can freeze portable annotations and local/implicit scope.
+Recursive indexed search remains AI-SYNTH-2 and requires its own consumer.
+Paper/browser integration remains separately consumer-gated.
 Revise or reject a plan row when implementation evidence contradicts it; do
 not preserve a failed architecture for narrative continuity.
 

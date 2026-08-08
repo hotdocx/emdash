@@ -9,11 +9,13 @@ import {
     CoreLfStructureExpression,
     CoreLfStructureMacroError,
     CoreLfStructureMacroScope,
+    CoreLfTransferDeclaration,
     CoreLfTransferExpression,
     CoreLfTransferPolicyEntry,
     CoreLfTransferPolicyOverlay,
     binderMode,
     checkLambdapiProbe,
+    createCoreLfChecker,
     compileCoreLfMixedPhases,
     coreLfTransferAbsentBody,
     createCoreLfMixedDeclarationLinkage,
@@ -21,11 +23,17 @@ import {
     createCoreLfTransferPolicyOverlay,
     emitCoreLfStructureLambdapiFragment,
     kernelExpressionEquals,
+    kernelCall,
     kernelFree,
+    kernelUniverse,
     planCoreLfMixedPhases,
     provenance
 } from '../src/v3_2';
 import * as browser from '../src/v3_2/browser';
+import {
+    CoreLfDictionarySynthesisError,
+    synthesizeCoreLfGlobalDictionary
+} from '../src/v3_2/lf_dictionary_synthesis';
 
 const moduleId = 'fixture.structure_macro';
 const authorityPath = 'tests/fixtures/structure_macro.lp';
@@ -314,6 +322,102 @@ const fixtureModule = (
     proofRules: []
 });
 
+const dictionaryDeclaration = (
+    order: number,
+    name: string,
+    type: CoreLfTransferExpression
+): CoreLfTransferDeclaration => ({
+    order,
+    symbol: symbol(name),
+    type,
+    body: coreLfTransferAbsentBody(),
+    modifiers: {
+        visibility: 'public',
+        rigidity: 'constant',
+        sourceOpacity: 'opaque'
+    },
+    provenance: source(`constant symbol ${name};`)
+});
+
+const compileDictionaryConsumerFixture = () => {
+    const expansion = expandFixture();
+    const primary = symbol('primaryCapability');
+    const secondary = symbol('secondaryCapability');
+    const other = symbol('OtherCapability');
+    const wrong = symbol('wrongCapability');
+    const consumer = symbol('useCapability');
+    const module = createCoreLfModuleSpec({
+        revision: 'structure-dictionary-consumer-1',
+        moduleId,
+        fragmentId: 'structure-dictionary-consumer',
+        authorityPath,
+        sourceSha256:
+            'sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+        dependencies: [],
+        externalSymbols: [],
+        declarations: [
+            ...initialDeclarations(),
+            ...expansion.declarations,
+            dictionaryDeclaration(
+                expansion.nextOrder,
+                primary.name,
+                global(expansion.handle.carrier)
+            ),
+            dictionaryDeclaration(
+                expansion.nextOrder + 1,
+                secondary.name,
+                global(expansion.handle.carrier)
+            ),
+            dictionaryDeclaration(
+                expansion.nextOrder + 2,
+                other.name,
+                { tag: 'type' }
+            ),
+            dictionaryDeclaration(
+                expansion.nextOrder + 3,
+                wrong.name,
+                global(other)
+            ),
+            dictionaryDeclaration(
+                expansion.nextOrder + 4,
+                consumer.name,
+                pi(
+                    'capability',
+                    implicitMode,
+                    global(expansion.handle.carrier),
+                    global(expansion.handle.carrier)
+                )
+            )
+        ],
+        inductives: [],
+        runtimeRules: expansion.runtimeRules,
+        proofRules: []
+    });
+    const policy = fixturePolicy(module);
+    const plan = planCoreLfMixedPhases(module, policy);
+    const linkage = createCoreLfMixedDeclarationLinkage(plan, {
+        revision: 'structure-dictionary-linkage-1',
+        moduleRevision: module.revision,
+        entries: [...module.declarations]
+            .sort((left, right) => left.order - right.order)
+            .map((declaration, order) => ({
+                order,
+                symbol: declaration.symbol,
+                kind: 'free-declaration' as const,
+                coreName: `structure_${declaration.symbol.name}`,
+                backendName: declaration.symbol.name
+            }))
+    });
+    return {
+        compiled: compileCoreLfMixedPhases(plan, linkage),
+        carrier: expansion.handle.carrier,
+        primary,
+        secondary,
+        wrong,
+        consumer
+    };
+};
+
 interface PolicySource {
     readonly sourceOrder: number;
     readonly entry: Omit<CoreLfTransferPolicyEntry, 'order'>;
@@ -377,6 +481,24 @@ const throwsMacro = (
             error.code === code_ &&
             (path === undefined || error.path === path)
     );
+};
+
+const captureSynthesisError = (
+    action: () => unknown,
+    code_: CoreLfDictionarySynthesisError['code']
+): CoreLfDictionarySynthesisError => {
+    let captured: CoreLfDictionarySynthesisError | undefined;
+    assert.throws(action, error => {
+        if (
+            error instanceof CoreLfDictionarySynthesisError &&
+            error.code === code_
+        ) {
+            captured = error;
+            return true;
+        }
+        return false;
+    });
+    return captured!;
 };
 
 const fixtureEmission = [
@@ -768,6 +890,175 @@ describe('outer LF dependent structure declaration macro', () => {
                 true
             );
         });
+    });
+
+    it('selects a checked structure capability for an implicit binder', () => {
+        const fixture = compileDictionaryConsumerFixture();
+        const witnessSource = provenance(
+            'derived',
+            'structure dictionary synthesis consumer'
+        );
+        const carrier = fixture.compiled.declarations.declaration(
+            fixture.carrier
+        );
+        const consumer = fixture.compiled.declarations.declaration(
+            fixture.consumer
+        );
+        assert.equal(carrier?.link.kind, 'free-declaration');
+        assert.equal(consumer?.link.kind, 'free-declaration');
+        if (
+            carrier?.link.kind !== 'free-declaration' ||
+            consumer?.link.kind !== 'free-declaration'
+        ) {
+            return;
+        }
+        const target = kernelFree(carrier.link.coreName, witnessSource);
+        const result = synthesizeCoreLfGlobalDictionary({
+            declarations: fixture.compiled.declarations,
+            target,
+            candidates: [fixture.primary]
+        });
+
+        assert.deepEqual(result.selected, fixture.primary);
+        assert.equal(result.term.tag, 'reference');
+        assert.equal(result.term.namespace, 'free');
+        assert.equal(result.term.name, 'structure_primaryCapability');
+        assert.equal(kernelExpressionEquals(result.type, target), true);
+        assert.deepEqual(
+            result.report.candidates.map(candidate => [
+                candidate.candidate.name,
+                candidate.outcome
+            ]),
+            [['primaryCapability', 'matched']]
+        );
+        assertDeepFrozen(result);
+        assert.equal(Object.isFrozen(fixture.primary), false);
+        assert.equal(Object.isFrozen(target), false);
+
+        const checker = createCoreLfChecker(
+            fixture.compiled.declarations.environment
+        );
+        const checkedUse = checker.check(
+            checker.rootContext,
+            kernelCall(
+                kernelFree(consumer.link.coreName, witnessSource),
+                [{ plicity: 'implicit', value: result.term }],
+                witnessSource
+            ),
+            target
+        );
+        assert.equal(
+            kernelExpressionEquals(checkedUse.type, target),
+            true
+        );
+    });
+
+    it('reports deterministic rejection, absence, and ambiguity', () => {
+        const fixture = compileDictionaryConsumerFixture();
+        const witnessSource = provenance(
+            'derived',
+            'structure dictionary synthesis diagnostics'
+        );
+        const carrier = fixture.compiled.declarations.declaration(
+            fixture.carrier
+        );
+        assert.equal(carrier?.link.kind, 'free-declaration');
+        if (carrier?.link.kind !== 'free-declaration') return;
+        const target = kernelFree(carrier.link.coreName, witnessSource);
+        const supplied = [fixture.wrong, fixture.primary];
+        const before = structuredClone(supplied);
+        const first = synthesizeCoreLfGlobalDictionary({
+            declarations: fixture.compiled.declarations,
+            target,
+            candidates: supplied
+        });
+        const second = synthesizeCoreLfGlobalDictionary({
+            declarations: fixture.compiled.declarations,
+            target,
+            candidates: [...supplied].reverse()
+        });
+
+        assert.deepEqual(first.report, second.report);
+        assert.deepEqual(supplied, before);
+        assert.equal(Object.isFrozen(supplied), false);
+        assert.equal(Object.isFrozen(supplied[0]), false);
+        assert.deepEqual(
+            first.report.candidates.map(candidate => [
+                candidate.candidate.name,
+                candidate.outcome,
+                candidate.rejection?.checkerCode
+            ]),
+            [
+                ['primaryCapability', 'matched', undefined],
+                ['wrongCapability', 'rejected', 'TYPE_MISMATCH']
+            ]
+        );
+
+        const missing = captureSynthesisError(
+            () => synthesizeCoreLfGlobalDictionary({
+                declarations: fixture.compiled.declarations,
+                target,
+                candidates: [fixture.wrong]
+            }),
+            'NO_MATCHING_DICTIONARY'
+        );
+        assert.deepEqual(
+            missing.report?.candidates.map(candidate => [
+                candidate.candidate.name,
+                candidate.outcome
+            ]),
+            [['wrongCapability', 'rejected']]
+        );
+        assertDeepFrozen(missing.report);
+
+        const empty = captureSynthesisError(
+            () => synthesizeCoreLfGlobalDictionary({
+                declarations: fixture.compiled.declarations,
+                target,
+                candidates: []
+            }),
+            'NO_MATCHING_DICTIONARY'
+        );
+        assert.deepEqual(empty.report?.candidates, []);
+
+        const ambiguous = captureSynthesisError(
+            () => synthesizeCoreLfGlobalDictionary({
+                declarations: fixture.compiled.declarations,
+                target,
+                candidates: [fixture.secondary, fixture.primary]
+            }),
+            'AMBIGUOUS_DICTIONARY'
+        );
+        assert.deepEqual(
+            ambiguous.report?.matches.map(candidate => candidate.name),
+            ['primaryCapability', 'secondaryCapability']
+        );
+        assertDeepFrozen(ambiguous.report);
+
+        captureSynthesisError(
+            () => synthesizeCoreLfGlobalDictionary({
+                declarations: fixture.compiled.declarations,
+                target,
+                candidates: [fixture.primary, fixture.primary]
+            }),
+            'DUPLICATE_CANDIDATE'
+        );
+        captureSynthesisError(
+            () => synthesizeCoreLfGlobalDictionary({
+                declarations: fixture.compiled.declarations,
+                target,
+                candidates: [symbol('missingCapability')]
+            }),
+            'UNAVAILABLE_CANDIDATE'
+        );
+        captureSynthesisError(
+            () => synthesizeCoreLfGlobalDictionary({
+                declarations: fixture.compiled.declarations,
+                target: kernelUniverse(witnessSource),
+                candidates: [fixture.primary]
+            }),
+            'INVALID_TARGET'
+        );
     });
 
     it('rejects empty, duplicate, and colliding generated packages', () => {
