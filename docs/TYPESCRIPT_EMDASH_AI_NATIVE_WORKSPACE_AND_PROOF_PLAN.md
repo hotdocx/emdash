@@ -19,7 +19,9 @@ file/hash materialization, and renderer/platform boundaries, and the frozen
 AI-PAPER-1A semantic binding is final-green; AI-PAPER-1B0's file-consumer
 audit is complete and its read-only typed-sidecar materializer AI-PAPER-1B1 is
 final-green; artifact writing/inline placement and rendering remain separately
-consumer-gated
+consumer-gated; AI-PAPER-1C0 selects the existing external-reviewer webpage,
+and its release-pinned client recheck AI-PAPER-1C1 is final-green; inline
+print placement and hosted delivery remain separately consumer-gated
 Baseline: `5027d5aabca191c088dfd9757a0bb8df4cb04a34` on local `main`
 Depends-On:
 [`TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md),
@@ -39,6 +41,9 @@ dedicated goal branch in the `~/emdash1` worktree; the final-green
 AI-SYNTH-1A resolver is preserved there at local checkpoint `e8c27e2`, and
 the final-green AI-SYNTH-1B1 authoring adapter is preserved at `4a390b1`.
 The final-green AI-PAPER-1A semantic binding is preserved at `645dccb`.
+The final-green AI-PAPER-1B1 exact-file materializer is preserved at
+`8e1ca90`; the final-green AI-PAPER-1C1 browser tranche immediately follows
+that checkpoint on the same dedicated branch.
 The user's standing
 unattended authority includes self-approval of a frozen plan tranche and
 rollback-safe local checkpoint commits after the persistent-goal Git SOP is
@@ -767,10 +772,13 @@ AI-PAPER-1 is therefore partitioned as follows:
    portable verified wrapper around 1A. It does not write or promote files.
    A generated/tracked artifact writer or inline source marker, if a real
    consumer needs either, is AI-PAPER-1B2 rather than an implicit side effect.
-3. AI-PAPER-1C is the print/browser projection. It may render the already
-   checked snapshot into intentional checked/incomplete states, but it cannot
-   create proof authority, replace stable source IDs with transient DOM IDs,
-   or mutate article prose.
+3. AI-PAPER-1C is partitioned after exact-consumer audit. AI-PAPER-1C1 adds a
+   browser-safe replay from release pins in the typed management sidecar and a
+   lazy explicit-action panel in the existing external-reviewer webpage. Its
+   release test requires byte equality with the Node-verified 1B1 binding.
+   Inline PDF/Markdown placement is separately consumer-gated as 1C2. Neither
+   route may create proof authority, replace stable source IDs with transient
+   DOM IDs, or mutate article prose by implication.
 4. Hosted synchronization, snapshots, builds, and publication remain a
    separately gated platform adapter owned by `~/closerfans`. The local file
    contract must be qualified before that repository changes.
@@ -821,7 +829,10 @@ Only one row may be in progress in this worktree.
 | AI-PAPER-1B0 | complete | AI-PAPER-1A plus article promotion and Arrowgram extraction owners | Unique content selectors, typed management ownership, exact fixed files, and the no-write/no-promotion boundary are measured. |
 | AI-PAPER-1B1 | complete | AI-PAPER-1B0 plus the fixed article and proof demo | Exact pinned management/proof bytes and the authored article bind both diagrams and both proof states in a portable verified wrapper without writing artifacts. |
 | AI-PAPER-1B2 | pending | AI-PAPER-1B1 plus a real persisted-artifact or inline-placement consumer | Only if demanded, add an owning generator/promotion route for a tracked snapshot or explicit source markers. |
-| AI-PAPER-1C | pending | AI-PAPER-1B plus print/browser consumer | Render checked and incomplete projections from the checked snapshot while retaining source identity and ordinary prose ownership. |
+| AI-PAPER-1C | partitioned | AI-PAPER-1B1 plus exact browser/print consumers | Separate a release-pinned browser recheck/panel from any inline print projection. |
+| AI-PAPER-1C0 | complete | AI-PAPER-1B1 plus browser reviewer and print pipeline | The existing lazy browser bridge is the smallest real supplement consumer; print/PDF insertion lacks an inline-placement consumer and remains deferred. |
+| AI-PAPER-1C1 | complete | AI-PAPER-1C0 plus browser reviewer | Recheck the two proof plans from release pins in a browser-safe module, prove parity with 1B1, and expose a lazy intentional checked/open panel. |
+| AI-PAPER-1C2 | pending | AI-PAPER-1B2 plus explicit inline print consumer | Only if demanded, project verified blocks into authored Markdown/PDF through the owning print workflow. |
 | AI-PAPER-1D | pending | AI-PAPER-1B plus distributable hosted runtime | Exercise the same canonical files in `~/closerfans`; leave Git snapshots, build, publication, deployment, auth, and transport platform-owned. |
 | AI-NATIVE-GRADUATE-1 | pending | all accepted rows | Trust, determinism, stale-state, offline, browser, and conformance claims are synchronized and accurately documented. |
 
@@ -912,6 +923,11 @@ Only one row may be in progress in this worktree.
 | D-AI-NATIVE-081 | accepted and qualified by AI-PAPER-1B1 | A Node-owned fixed consumer reads exact bytes only for the management sidecar, authored article, and existing proof-demo source; requires audited management/proof source pins, hashes the proof profile and canonical serialized artifacts, freshly compiles both fixed proof declarations, then delegates semantic state projection to 1A. It loads no caller-selected TypeScript path. |
 | D-AI-NATIVE-082 | accepted and frozen for AI-PAPER-1B1 | The verified wrapper separately records outer exact-byte verification while retaining 1A's truthful `digestVerification: not-performed` label for its inner browser-safe operation. It carries ordinary proof artifacts and no checker, session, checked term object, callback, or mutable browser state. |
 | D-AI-NATIVE-083 | accepted and frozen as an AI-PAPER-1B1 non-effect | Add no file write, generated/tracked snapshot, article or promoted-copy edit, source marker, print registry/pipeline change, renderer, browser barrel, command namespace, arbitrary path, network, MCP, Git, build, publication, deployment, platform change, or Lambdapi execution. |
+| D-AI-NATIVE-084 | accepted after AI-PAPER-1C0 audit | The first presentation consumer is the existing `emdash-template` external-reviewer webpage, through a new lazy additive bridge. The frozen minimal `browser.ts` entry remains byte-identical. The print/PDF pipeline remains untouched until inline placement is actually requested. |
+| D-AI-NATIVE-085 | accepted and qualified by AI-PAPER-1C1 | Extend the typed management sidecar with exact release pins for the whole authored article, proof profile, and each canonical proof artifact. AI-PAPER-1B1 must verify every pin from bytes before a browser release can claim parity. Status and goals remain derived rather than pinned. |
+| D-AI-NATIVE-086 | accepted and qualified by AI-PAPER-1C1 | A browser-safe module uses the pinned inputs to freshly compile both existing proof plans and construct an ordinary 1A binding without hashing or I/O. Focused release evidence requires its canonical binding serialization to equal 1B1's exact-byte-verified binding. |
+| D-AI-NATIVE-087 | accepted and qualified by AI-PAPER-1C1 | The webpage loads the research-proof module only on explicit user action and intentionally displays both the checked proof and the open proof's stable goal. It labels client recheck versus Node release verification and does not present an incomplete artifact as a theorem. |
+| D-AI-NATIVE-088 | accepted and qualified as an AI-PAPER-1C1 non-effect | Add no generated asset, artifact write, article/print edit, minimal-browser API change, eager initial bundle dependency, second checker, browser hashing/filesystem, arbitrary code/path loading, MCP, network proof service, Lambdapi execution, publication, deployment, or platform change. |
 
 ## AI-PROOF-2 Inventory And Exact Contract
 
@@ -2905,6 +2921,81 @@ persisted-artifact or inline-placement consumer; AI-PAPER-1C may next audit a
 real browser/print projection of the verified wrapper without acquiring proof
 authority or forcing 1B2 by analogy.
 
+## AI-PAPER-1C0 Audit And AI-PAPER-1C1 Completion Record
+
+Date: 2026-08-08
+
+The exact presentation-consumer audit found:
+
+- `emdash-template` is the existing external-reviewer product and already
+  owns a deliberately lazy bridge into reviewed root TypeScript modules. It
+  is therefore the smallest real consumer of a checked/open paper supplement;
+- the frozen minimal `src/v3_2/browser.ts` entry is a separate public evidence
+  boundary and does not need to widen for this additive reviewer feature;
+- a browser cannot perform the Node-owned fixed-file acquisition and hashing
+  from AI-PAPER-1B1, but it can freshly replay the same inert proof plans from
+  source-visible release pins; and
+- the authored Markdown and PDF renderer currently have no explicit inline
+  placement consumer for these supplemental proof states. Editing article
+  prose or inventing a generated asset would therefore widen ownership rather
+  than satisfy a measured requirement.
+
+Result: AI-PAPER-1C0's consumer selection and AI-PAPER-1C1's release-pinned
+client recheck are accepted and final-green. Inline print placement remains
+AI-PAPER-1C2 and hosted synchronization remains AI-PAPER-1D.
+
+Implementation:
+
+- strengthened the typed management sidecar with exact whole-article,
+  proof-source, proof-profile, and canonical proof-artifact SHA-256 pins;
+- strengthened the existing Node materializer to verify all of those pins
+  from exact UTF-8 bytes. It still diagnoses malformed diagram selection
+  before the final whole-article pin, then fails closed on any remaining
+  article drift before constructing a verified wrapper;
+- added browser-safe `src/v3_2/ai_research_overview_browser.ts` with profile
+  `emdash-ai-research-overview-browser-v1`. It performs no hashing, file I/O,
+  network access, or retained checker/session work: it freshly compiles the
+  two fixed proof plans from the pinned fingerprint and constructs the same
+  ordinary AI-PAPER-1A document binding;
+- made exact canonical binding equality between that browser recheck and the
+  Node byte-verified AI-PAPER-1B1 materialization a focused release contract;
+  neither proof status nor goal text is copied into the management sidecar;
+- added one lazy `emdash-template` bridge and an explicit reviewer action. Its
+  projection labels client recheck versus external Node verification, reports
+  `complete_identity` as checked, and keeps `open_identity` visibly
+  incomplete with stable goal `body`; and
+- retained ordinary HTML prose and source IDs. No renderer-generated DOM ID
+  becomes semantic identity, and no incomplete artifact is presented as a
+  theorem.
+
+Qualification:
+
+- the focused proof-command/materializer file passed 12 tests across two
+  suites, including exact browser/Node binding parity;
+- the focused browser-reviewer file passed 11 tests in one suite, including
+  a transitive Node-free closure check and lazy-shell source contract;
+- together with proof plans, proof documents, and exact-closure workspace
+  proof attachment, the proportional nearest matrix passed 44 tests across
+  six suites with zero failures or skips;
+- root workspace contract, TypeScript typecheck, changed-file ESLint, exact
+  source-pin comparison, and diff hygiene passed;
+- a fresh standalone fixture `npm ci` used the retained lock without changing
+  its SHA-256, and the fixture TypeScript check plus Vite production build
+  passed with 154 transformed modules. The new proof supplement remained its
+  own lazy 24.45 kB chunk before gzip; the pre-existing large-chunk advisory
+  and npm audit report were recorded rather than auto-fixed; and
+- no public barrel, main test runner, generic checker/compiler/runtime,
+  package manifest, lockfile, authored/promoted article, PDF, print pipeline,
+  kernel, or hosted platform boundary changed. The recent 1,486-test root
+  aggregate remains valid under D-AI-NATIVE-048 and was not rerun.
+
+No file below `emdash2/`, generated `dist`, promoted publication artifact, or
+file in `~/closerfans` changed. Decisions D-AI-NATIVE-084 through
+D-AI-NATIVE-088 now have direct audit or implementation evidence.
+AI-PAPER-1B2/1C2 remain gated on a real persistence or inline-placement
+consumer; AI-PAPER-1D remains gated on a distributable hosted runtime and its
+separate platform-owned delivery contract.
+
 ## AI-PROOF-2 Completion Record
 
 Date: 2026-08-08
@@ -3128,6 +3219,7 @@ Decision consequences:
 | Module/workspace manager | focused graph/snapshot/invalidation tests plus nearest transfer/module suites; complete `check:ts` only at a newly changed shared boundary |
 | Mounted remote store | focused canonical-file, offline, poison, concurrency, symlink, and root-boundary tests; workspace/typecheck/changed-file lint; nearest TypeScript workspace matrix; no Lambdapi or aggregate unless another exact boundary changes |
 | Local workspace CLI | exact JSONL/text and parser tests, actual shell online route, unchanged proof route, shell syntax/mode, workspace/typecheck/changed-file lint, nearest local matrix; no aggregate for an unchanged barrel/runner/package/compiler boundary |
+| Paper/browser client recheck | exact parity with the Node byte-verified binding, checked/open projection, Node-free closure, lazy-shell contract, standalone fixture typecheck/build, unchanged fixture lock, workspace/typecheck/changed-file lint; no print or root aggregate for unchanged boundaries |
 | Lambdapi/kernel-dependent target | `EMDASH_TYPECHECK_TIMEOUT=90s make -C emdash2 check` plus every nested-SOP gate actually triggered |
 | Cross-layer release/publication | affected browser/print/kernel gates and eventually `check:all`; never run merely for reassurance |
 
@@ -3214,20 +3306,22 @@ AI-SYNTH-1B2 requires a repeated source-level scope consumer, and AI-SYNTH-2
 requires a genuinely recursive indexed consumer; leave either gated when that
 evidence is absent.
 
-Treat AI-PAPER-0, final-green AI-PAPER-1A, AI-PAPER-1B0, and final-green
-AI-PAPER-1B1 as complete. Preserve the authored overview versus promoted-copy
-distinction; stable tuple document/block/declaration identities; current
-ordinary proof-artifact revalidation; intentional complete/incomplete
-projections; the typed source-visible management plan; unique content-hash
-diagram selection; audited management/proof source pins; and the explicit
-inner `not-performed` versus outer `performed-exact-utf8` digest boundary.
-Preserve 1A's focused 8/8 and nearest 26-test matrices and 1B1's focused
-10-test/two-suite and nearest 31-test/five-suite matrices; do not repeat the
-unchanged 1,486-test aggregate. AI-PAPER-1B2 requires a real persisted-artifact
-or inline-placement consumer. Do not change article prose, print rendering, or
-`~/closerfans` merely to simulate one. AI-PAPER-1C may audit the smallest real
-browser/print projection of 1B1, while hosted synchronization remains gated
-behind a distributable runtime and the checked local contract.
+Treat AI-PAPER-0, final-green AI-PAPER-1A, AI-PAPER-1B0, final-green
+AI-PAPER-1B1, AI-PAPER-1C0, and final-green AI-PAPER-1C1 as complete. Preserve
+the authored overview versus promoted-copy distinction; stable tuple
+document/block/declaration identities; current ordinary proof-artifact
+revalidation; intentional complete/incomplete projections; the typed source-
+visible management plan; unique content-hash diagram selection; exact whole-
+article/proof/profile/artifact release pins; the explicit inner
+`not-performed` versus outer `performed-exact-utf8` digest boundary; and exact
+canonical parity between Node verification and the lazy browser recheck.
+Preserve 1A's focused 8/8 and nearest 26-test matrices, 1B1's prior focused
+10-test/two-suite and nearest 31-test/five-suite matrices, and 1C1's final
+44-test/six-suite nearest matrix plus standalone reviewer build; do not repeat
+the unchanged 1,486-test aggregate. AI-PAPER-1B2/1C2 require a real persisted-
+artifact or inline-placement consumer. Do not change article prose, print
+rendering, or `~/closerfans` merely to simulate one. Hosted synchronization
+remains gated behind a distributable runtime and the checked local contract.
 
 Do not infer a provider from fragment order, symbol spelling, or a current
 compiled object. Preserve explicit backend-neutral Core and all existing
@@ -3248,10 +3342,10 @@ emission/checking as an optional later adapter and conformance route; do not
 add a backend flag or claim Lambdapi execution until that separate path exists.
 After AI-SYNTH-1B1, continue with AI-SYNTH-1B2 only when repeated source-level
 use can freeze portable annotations and local/imported scope. Recursive
-indexed search remains AI-SYNTH-2 and requires its own consumer. Continue
-paper integration with an AI-PAPER-1C exact renderer/browser consumer of the
-verified 1B1 wrapper, or 1B2 only when persistence/inline placement is actually
-demanded; do not jump directly to hosted behavior.
+indexed search remains AI-SYNTH-2 and requires its own consumer. Treat the
+AI-PAPER-1C1 browser consumer as complete. Continue with AI-PAPER-1B2/1C2 only
+when persistence or inline placement is actually demanded, and do not jump
+directly to hosted behavior.
 Revise or reject a plan row when implementation evidence contradicts it; do
 not preserve a failed architecture for narrative continuity.
 

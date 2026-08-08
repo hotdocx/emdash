@@ -8,6 +8,11 @@ import {
     CORE_AI_RESEARCH_OVERVIEW_PROFILE
 } from '../src/v3_2/ai_research_overview';
 import {
+    CORE_AI_RESEARCH_OVERVIEW_BROWSER_PROFILE,
+    formatCoreAiResearchOverviewBrowser,
+    runCoreAiResearchOverviewBrowser
+} from '../src/v3_2/ai_research_overview_browser';
+import {
     CORE_AI_RESEARCH_OVERVIEW_FILES_PROFILE,
     CoreAiResearchOverviewFilesError,
     materializeCoreAiResearchOverviewFiles,
@@ -16,6 +21,9 @@ import {
 import {
     runCoreAiProofCli
 } from '../src/v3_2/ai_proof_cli';
+import {
+    serializeCoreResearchDocumentSnapshot
+} from '../src/v3_2/research_document';
 
 interface CliResult {
     readonly exitCode: number;
@@ -197,6 +205,29 @@ describe('TypeScript v3.2 AI-PAPER-1B1 research files', () => {
         );
     });
 
+    it('matches the browser recheck to the byte-verified binding', () => {
+        const verified = materializeCoreAiResearchOverviewFiles();
+        const browser = runCoreAiResearchOverviewBrowser();
+        assert.equal(
+            serializeCoreResearchDocumentSnapshot(browser.binding),
+            serializeCoreResearchDocumentSnapshot(verified.binding)
+        );
+        assert.equal(
+            browser.digestVerification,
+            'not-performed-in-browser'
+        );
+        assert.equal(
+            CORE_AI_RESEARCH_OVERVIEW_BROWSER_PROFILE
+                .computesCryptographicHashes,
+            false
+        );
+        const formatted = formatCoreAiResearchOverviewBrowser(browser);
+        assert.match(formatted, /CHECKED .*complete-identity/u);
+        assert.match(formatted, /OPEN .*open-identity/u);
+        assert.match(formatted, /Goal body/u);
+        assert.match(formatted, /Node-verified workspace/u);
+    });
+
     it('rejects a managed diagram whose exact content drifts', () => {
         assert.throws(
             () => materializeCoreAiResearchOverviewFiles({
@@ -238,6 +269,23 @@ describe('TypeScript v3.2 AI-PAPER-1B1 research files', () => {
                 }
             );
         }
+    });
+
+    it('rejects whole-article prose drift after diagram selection', () => {
+        assert.throws(
+            () => materializeCoreAiResearchOverviewFiles({
+                readBytes: replaceArticle(source => `${source}\n`)
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreAiResearchOverviewFilesError);
+                assert.equal(error.code, 'SOURCE_PIN_MISMATCH');
+                assert.equal(
+                    error.target,
+                    CORE_AI_RESEARCH_OVERVIEW_PROFILE.documentSourcePath
+                );
+                return true;
+            }
+        );
     });
 
     it('rejects a content selector that matches two diagram bodies', () => {

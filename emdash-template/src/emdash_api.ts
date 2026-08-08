@@ -9,6 +9,14 @@ export const loadCoreBrowserReviewer = () =>
     import('../../src/v3_2/browser_reviewer.js');
 
 /**
+ * Load the release-pinned paper/proof recheck only on reviewer request.
+ * The browser module performs no hashing or file access; release parity is
+ * established separately by the Node-owned exact-file gate.
+ */
+export const loadCoreAiResearchOverview = () =>
+    import('../../src/v3_2/ai_research_overview_browser.js');
+
+/**
  * Vite fingerprints and emits the generated current book as a static asset.
  */
 export const EMDASH_BOOK_URL = new URL(

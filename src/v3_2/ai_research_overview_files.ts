@@ -49,11 +49,10 @@ export const CORE_AI_RESEARCH_OVERVIEW_FILES_PROFILE = Object.freeze({
     maximumDocumentSourceBytes: 4 * MIB,
     maximumProofSourceBytes: 2 * MIB,
     managementSourceSha256:
-        'sha256:863c1838c53a8d859f147cafdcb50f30' +
-        '0e33d59ab101ea6f92bbdc0e54c4c431',
+        'sha256:b970948a097b6d9ff50e0fe290c6cc05' +
+        '454e83c8f7d576039d7a2ec9828134d3',
     proofSourceSha256:
-        'sha256:1465956c04dc3e413034cbe697ead1618' +
-        'c9898b33132919533f6967ecd8af2dd',
+        CORE_AI_RESEARCH_OVERVIEW_PROFILE.proofSourceSha256,
     readsFixedFiles: true as const,
     performsWrites: false as const,
     discoversPaths: false as const,
@@ -73,6 +72,7 @@ export type CoreAiResearchOverviewFilesErrorCode =
     | 'MISSING_DIAGRAM'
     | 'AMBIGUOUS_DIAGRAM'
     | 'UNBOUND_DIAGRAM'
+    | 'ARTIFACT_PIN_MISMATCH'
     | 'UNSUPPORTED_PROOF';
 
 export class CoreAiResearchOverviewFilesError extends Error {
@@ -322,6 +322,14 @@ const proofBlock = (
         fingerprint
     ).artifact;
     const snapshot = artifactSource(plan.blockId, artifact);
+    if (snapshot.source.sha256 !== plan.artifactSha256) {
+        return fail(
+            'ARTIFACT_PIN_MISMATCH',
+            plan.blockId,
+            `Canonical proof artifact has digest ${snapshot.source.sha256}, ` +
+                `expected ${plan.artifactSha256}`
+        );
+    }
     return Object.freeze({
         input: Object.freeze({
             kind: 'proof' as const,
@@ -373,7 +381,15 @@ export function materializeCoreAiResearchOverviewFiles(
         id: 'emdash-proof-document-profile.json',
         sha256: sha256(textBytes(proofProfileText))
     });
+    assertSourcePin(
+        proofProfile,
+        CORE_AI_RESEARCH_OVERVIEW_PROFILE.proofProfileSha256
+    );
     const diagrams = selectedDiagrams(document.text);
+    assertSourcePin(
+        document.source,
+        CORE_AI_RESEARCH_OVERVIEW_PROFILE.documentSourceSha256
+    );
     const proofArtifacts:
         CoreAiResearchOverviewProofArtifactSnapshot[] = [];
     const blocks = CORE_AI_RESEARCH_OVERVIEW_PLAN.blocks.map(block => {

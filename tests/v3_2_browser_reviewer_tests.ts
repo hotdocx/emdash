@@ -31,6 +31,11 @@ import {
     runCoreBrowserReviewerFullReport,
     runCoreBrowserReviewerText
 } from '../src/v3_2/browser_reviewer';
+import {
+    CORE_AI_RESEARCH_OVERVIEW_BROWSER_PROFILE,
+    formatCoreAiResearchOverviewBrowser,
+    runCoreAiResearchOverviewBrowser
+} from '../src/v3_2/ai_research_overview_browser';
 import * as acquisition from '../src/v3_2/lf_transfer_acquisition';
 import * as contract from
     '../src/v3_2/lf_transfer_acquisition_contract';
@@ -762,6 +767,49 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         );
     });
 
+    it('rechecks paper proof blocks through a Node-free lazy closure', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/ai_research_overview_browser.ts'
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/ai_research_overview_browser.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/research_document.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_demo.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/ai_research_overview_files.ts'
+            )),
+            false
+        );
+        const snapshot = runCoreAiResearchOverviewBrowser();
+        assertDeepFrozen(snapshot);
+        assert.deepEqual(
+            snapshot.binding.blocks
+                .filter(block => block.kind === 'proof')
+                .map(block => block.status),
+            ['complete', 'incomplete']
+        );
+        const formatted = formatCoreAiResearchOverviewBrowser(snapshot);
+        assert.match(formatted, /CHECKED .*complete-identity/u);
+        assert.match(formatted, /OPEN .*open-identity/u);
+        assert.match(formatted, /Goal body/u);
+        assert.equal(
+            CORE_AI_RESEARCH_OVERVIEW_BROWSER_PROFILE
+                .nodeBuiltinDependency,
+            false
+        );
+    });
+
     it('wires one lazy reviewer shell, generated book, and frozen Core', () => {
         const bridge = readFileSync(
             'emdash-template/src/emdash_api.ts',
@@ -794,6 +842,10 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         );
         assert.match(
             bridge,
+            /import\(['"]\.\.\/\.\.\/src\/v3_2\/ai_research_overview_browser\.js['"]\)/u
+        );
+        assert.match(
+            bridge,
             /new URL\(\s*['"]\.\.\/\.\.\/docs\/emdash-book\.pdf['"]/u
         );
         assert.doesNotMatch(
@@ -802,6 +854,9 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         );
         assert.match(app, /Categorical expression/u);
         assert.match(app, /Run full research report/u);
+        assert.match(app, /Check paper proof states/u);
+        assert.match(app, /paper-proof-output/u);
+        assert.match(app, /open goal\s+remains visibly open/u);
         assert.match(app, /Open the emdash book/u);
         assert.match(app, /Minimal Core playground/u);
         assert.match(

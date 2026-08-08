@@ -24,6 +24,15 @@ export const CORE_AI_RESEARCH_OVERVIEW_PROFILE = Object.freeze({
     documentSourcePath:
         'emdash2/print/public/emdash-v3-2-overview.md' as const,
     proofSourcePath: CORE_AI_PROOF_DEMO_SOURCE_PATH,
+    documentSourceSha256:
+        'sha256:06ba39df979f58aa91a1bc8b9ff09f90' +
+        '3fc966d6cfbb79f1d310c62e24cb6183',
+    proofSourceSha256:
+        'sha256:1465956c04dc3e413034cbe697ead1618' +
+        'c9898b33132919533f6967ecd8af2dd',
+    proofProfileSha256:
+        'sha256:07cfc3cae978d2add44148582502a16b4' +
+        'e5b55e61814ada6b57ba4394223646c',
     diagramSelectorRevision:
         'trimmed-arrowgram-body-sha256-v1' as const,
     proofModuleId: CORE_AI_PROOF_DEMO_MODULE_ID,
@@ -50,6 +59,8 @@ export interface CoreAiResearchOverviewProofBlockPlan {
         readonly moduleId: typeof CORE_AI_PROOF_DEMO_MODULE_ID;
         readonly declarationId: CoreAiProofDemoDeclarationId;
     };
+    /** SHA-256 of canonical standalone proof-artifact JSON bytes. */
+    readonly artifactSha256: string;
 }
 
 export type CoreAiResearchOverviewBlockPlan =
@@ -88,14 +99,16 @@ const diagram = (
 
 const proof = (
     blockId: string,
-    declarationId: CoreAiProofDemoDeclarationId
+    declarationId: CoreAiProofDemoDeclarationId,
+    artifactSha256: string
 ): CoreAiResearchOverviewProofBlockPlan => Object.freeze({
     kind: 'proof',
     blockId,
     declaration: Object.freeze({
         moduleId: CORE_AI_PROOF_DEMO_MODULE_ID,
         declarationId
-    })
+    }),
+    artifactSha256
 });
 
 /**
@@ -124,11 +137,15 @@ export const CORE_AI_RESEARCH_OVERVIEW_PLAN:
         ),
         proof(
             'section-7.proof.complete-identity',
-            'complete_identity'
+            'complete_identity',
+            'sha256:477ac1e6bbbf912fb0e9a38d8260c5bd' +
+                '6fd35779599cbd71257340000215be2c'
         ),
         proof(
             'section-7.proof.open-identity',
-            'open_identity'
+            'open_identity',
+            'sha256:83b39e97ea0a5e24f86bc29e4ecb890e' +
+                'a4f2828cb2d57e2c6b4a1ece0bbae373'
         )
     ])
 });

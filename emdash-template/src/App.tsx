@@ -7,6 +7,8 @@ import './styles.css';
 
 type ReviewerModule =
   Awaited<ReturnType<typeof emdash.loadCoreBrowserReviewer>>;
+type ResearchOverviewModule =
+  Awaited<ReturnType<typeof emdash.loadCoreAiResearchOverview>>;
 type ReviewerPresetId =
   ReviewerModule['CORE_BROWSER_REVIEWER_PRESETS'][number]['id'];
 type ReviewerExpectedMode =
@@ -14,6 +16,7 @@ type ReviewerExpectedMode =
 type ReviewerTextResult =
   ReturnType<ReviewerModule['runCoreBrowserReviewerText']>;
 type View = 'categorical' | 'evidence' | 'core';
+type RunningTask = View | 'paper-proof';
 
 const exampleScript = `// Minimal explicit-Core implementation evidence.
 // Build and check a category-polymorphic identity in emdash-v3.2-mvp-1.
@@ -139,9 +142,10 @@ function App() {
   const [categoricalInput, setCategoricalInput] = useState('');
   const [categoricalOutput, setCategoricalOutput] = useState('');
   const [researchOutput, setResearchOutput] = useState('');
+  const [paperProofOutput, setPaperProofOutput] = useState('');
   const [coreInput, setCoreInput] = useState(exampleScript);
   const [coreOutput, setCoreOutput] = useState('');
-  const [runningView, setRunningView] = useState<View>();
+  const [runningView, setRunningView] = useState<RunningTask>();
 
   useEffect(() => {
     let active = true;
@@ -223,6 +227,26 @@ function App() {
         setRunningView(undefined);
       }
     }, 0);
+  };
+
+  const runPaperProofState = () => {
+    setRunningView('paper-proof');
+    setPaperProofOutput(
+      'Loading the release-pinned client-side proof recheck...'
+    );
+    void emdash.loadCoreAiResearchOverview().then(
+      (module: ResearchOverviewModule) => {
+        const snapshot = module.runCoreAiResearchOverviewBrowser();
+        setPaperProofOutput(
+          module.formatCoreAiResearchOverviewBrowser(snapshot)
+        );
+      }
+    ).catch((error: unknown) => {
+      const message = error instanceof Error ? error.message : String(error);
+      setPaperProofOutput(`EXECUTION ERROR: ${message}`);
+    }).finally(() => {
+      setRunningView(undefined);
+    });
   };
 
   const runCoreCode = () => {
@@ -558,6 +582,12 @@ function App() {
                     categorical text adapter are separately reviewed product
                     layers.
                   </p>
+                  <p className="report-boundary-note">
+                    The paper/workspace check is a separate lazy client replay
+                    from typed release pins. The release gate verifies those
+                    pins against exact files outside the browser; an open goal
+                    remains visibly open here rather than becoming a theorem.
+                  </p>
 
                   <div className="evidence-actions">
                     <button
@@ -572,6 +602,16 @@ function App() {
                       {runningView === 'evidence'
                         ? 'Running full research report...'
                         : 'Run full research report'}
+                    </button>
+                    <button
+                      className="action"
+                      type="button"
+                      onClick={runPaperProofState}
+                      disabled={runningView !== undefined}
+                    >
+                      {runningView === 'paper-proof'
+                        ? 'Checking paper proof states...'
+                        : 'Check paper proof states'}
                     </button>
                     <a
                       className="book-link"
@@ -604,6 +644,16 @@ function App() {
                       </article>
                     </div>
                   )}
+
+                  <h3>Paper/workspace proof state</h3>
+                  <pre
+                    className="output report-output"
+                    id="paper-proof-output"
+                    aria-live="polite"
+                  >
+                    {paperProofOutput ||
+                      'Run the paper check to inspect checked and open blocks.'}
+                  </pre>
 
                   <h3>Full report output</h3>
                   <pre
