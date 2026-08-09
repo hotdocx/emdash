@@ -5,11 +5,12 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through ALGEBRA-GRADUATE-8 are final-green; MATH-CONSUMER-9 is retired without
-implementation after its stale consumer was reconciled with the existing
-acceptance evidence; remaining call ergonomics, parameter-role inference, and
-standard-library rows stay consumer-gated; PACKAGE-12A is the next approved
-local implementation tranche
+through ALGEBRA-GRADUATE-8 and PACKAGE-12A are final-green; MATH-CONSUMER-9 is
+retired without implementation after its stale consumer was reconciled with
+the existing acceptance evidence; remaining call ergonomics, parameter-role
+inference, and standard-library rows stay consumer-gated; registry ownership,
+release automation, publication, and hosted integration remain gated behind
+PACKAGE-12B/HOSTED-13 and separate authorization
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -527,7 +528,7 @@ discipline important, but they are not a prerequisite for this qualification.
 | MATH-CONSUMER-9 | retired without implementation | The historical `struct_cov_sieve` name was only a parameter-plicity shape inherited from the Cartier review, not an active owner or missing kernel feature. STRUCT-PARAM-1 already qualifies the distinct dependent parameter modes, and ALGEBRA-GRADUATE-8 already supplies the representative Lean-style class consumer. No replacement proxy or mathematical-source edit is justified. |
 | PARAM-ROLES-10 | gated | Add output/semi-output and stuck/resume only after an exact consumer audit. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
-| PACKAGE-12A | approved | Add the local publishable `@hotdocx/emdash` package with strict root/authoring/workspace exports, dual browser-safe JavaScript, declarations, and a packed-install consumer. No registry mutation occurs in this row. |
+| PACKAGE-12A | complete | The local publishable `@hotdocx/emdash@0.1.0` package now has strict root/authoring/workspace exports, dual browser-safe JavaScript, complete declarations/maps, and a packed-install consumer. No registry mutation occurred. |
 | PACKAGE-12B | gated | Verify npm ownership/authentication and add a provenance-bearing release workflow only after 12A is final-green; actual publication remains a separate release action. |
 | HOSTED-13 | gated | Add compatible GetPaidX template/API adapters and Arrowgram consumption after the required PACKAGE-12A/12B distribution boundary. |
 
@@ -2332,6 +2333,69 @@ supersession. The documentation checkpoint message is
 `docs: freeze core package contract`; the implementation checkpoint message is
 `package: add distributable emdash core`.
 
+## PACKAGE-12A Completion Record
+
+`PACKAGE-12A` is final-green on 2026-08-09. The private root workbench remains
+private, while the new contributor package `packages/emdash` owns the local
+publishable manifest `@hotdocx/emdash@0.1.0`. Its source remains canonical in
+`src/v3_2`; three new curated source barrels expose:
+
+- root: backend-neutral schema/Core syntax, serialization, contexts,
+  structural maps, sessions, checking, reviewed runtime/evaluation/conversion,
+  and the frozen v3.2 manifest;
+- `./authoring`: the root plus generic scoped outer-LF building/checking,
+  transfer/compiler/runtime/proof infrastructure, structure and adjunction
+  macros, class schemas/inheritance lowering, immutable providers, recursive
+  synthesis, and saturated class calls; and
+- `./workspace`: authoring plus explicit proof plans/documents, exact
+  declaration and fragment workspaces, proof attachment, and research-document
+  bindings.
+
+The contributor-wide `index.ts`, retired category-specific `surface.ts` and
+`elaborator.ts`, remote/acquisition/store modules, CLIs, demos, proposals,
+filesystem/process adapters, and Lambdapi execution are not public package
+entries. The strict export map contains only `.`, `./authoring`, `./workspace`,
+and `./package.json`.
+
+The deterministic package build emits browser-platform ES2020 ESM with shared
+chunks and CommonJS bundles, source maps with sources, and a complete
+declaration/declaration-map closure. A declaration-local CommonJS module
+marker preserves the canonical extensionless internal type graph for strict
+NodeNext consumers while the public runtime continues to expose explicit ESM
+and CommonJS conditions. The package has no runtime dependency, targets Node
+`>=20`, is side-effect-free, and carries package-local ISC/README material.
+Contributor build/check orchestration remains in the private root manifest;
+the packed public manifest deliberately contains no broken contributor or
+publication scripts.
+
+The packed-install verifier creates and removes an isolated temporary
+consumer. It installs only the locally produced tarball with pinned pnpm in
+offline/ignore-scripts mode, checks the exact manifest and export boundary,
+loads representative root/authoring/workspace capabilities through both ESM
+and CommonJS, typechecks the installed declarations under strict NodeNext,
+and bundles the installed ESM package for a browser target. The audited
+tarball contained 116 files: runtime bundles/maps, the complete internal
+declaration closure/maps, its local type marker, README, ISC license, and
+manifest. It contained no contributor `src`/`scripts`, npm lock, retired
+surface/elaborator, remote workspace, acquisition, or CLI declaration.
+
+Final qualification evidence:
+
+- `./scripts/pnpmw run workspace:check`: passed for the four-package
+  contributor workspace;
+- `./scripts/pnpmw run package:check`: passed, including ESM, CommonJS,
+  strict NodeNext declarations, browser bundling, and packed-content checks;
+- root typecheck, changed-source ESLint, exact diff, and whitespace review:
+  passed; and
+- the single required `./scripts/pnpmw run check:ts`: 1,560 tests across 235
+  suites, 1,506 active passes, 54 intentional optional-probe skips, zero
+  failures/cancellations/todos, in 1,471,949 ms.
+
+No `check:all`, kernel, print, browser-demo, sibling-repository, registry,
+authentication, publication, release, deployment, or hosted-template action
+was run. PACKAGE-12B remains the explicit ownership/provenance/release gate;
+even its future completion will not implicitly authorize an npm publication.
+
 ## Decision Ledger
 
 | ID | Decision | Rationale |
@@ -2376,6 +2440,8 @@ supersession. The documentation checkpoint message is
 | C-038 | Retire `struct_cov_sieve` as a stale consumer mnemonic; do not replace it with a proxy or edit active mathematics. | STRUCT-PARAM-1 already proves the parameter-mode mechanism and ALGEBRA-GRADUATE-8 already proves the representative Lean-style class workflow. The historical Cartier record and current site/scheme Sigma owners are separate designs, so another example would not qualify a new boundary. |
 | C-039 | Package the qualified browser-safe closure as `@hotdocx/emdash` with strict subpaths; keep registry publication separate. | The established sibling scope is available as an organizational target, the unscoped name is occupied, and a packed local boundary can be qualified without exposing the private root barrel or trusting npm credentials. |
 | C-040 | Keep the package root backend-neutral and expose the generic scoped outer-LF builder through `./authoring`; exclude the retired category-specific surface/elaborator. | The root repository guidance identifies those category-specific modules as feasibility-era evidence rather than active v3.2 authority, whereas the scoped outer-LF builder is the current direct-TypeScript authoring boundary. |
+| C-041 | Ship one complete CommonJS-shaped declaration closure for both explicit ESM and CommonJS runtime conditions. | The canonical source graph uses extensionless internal imports; a declaration-local module marker passes strict NodeNext consumption without rewriting canonical sources or weakening the dual browser runtime. |
+| C-042 | Keep build/check orchestration in the private root manifest and publish no package scripts in 12A. | The build sources and TypeScript inputs are intentionally not tarball content, so retaining contributor commands in the public manifest would create broken consumer scripts and an accidental publication hook surface. |
 
 ## Validation And Checkpoint Policy
 

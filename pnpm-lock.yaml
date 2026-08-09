@@ -102,6 +102,15 @@ importers:
         specifier: ^5.1.4
         version: 5.4.21(@types/node@20.19.43)
 
+  packages/emdash:
+    devDependencies:
+      esbuild:
+        specifier: 0.21.5
+        version: 0.21.5
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
 packages:
 
   '@babel/code-frame@7.29.7':

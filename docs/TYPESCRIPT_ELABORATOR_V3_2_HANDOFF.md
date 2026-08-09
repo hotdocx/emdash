@@ -67,15 +67,20 @@
 > geometry-shaped or adjunction-shaped proxy was added and no mathematical
 > source was changed. The remaining-row audit leaves partial/named/default
 > calls, non-ground output/semi-output search, and curated stdlib artifacts
-> consumer-gated. `PACKAGE-12A` is the next approved tranche: a local
-> `@hotdocx/emdash` package with strict root/authoring/workspace exports, dual
-> browser-safe JavaScript, declarations, and a packed-install consumer.
+> consumer-gated. `PACKAGE-12A` is now final-green: the local
+> `@hotdocx/emdash@0.1.0` package has strict root/authoring/workspace exports,
+> dual browser-safe JavaScript, complete declarations/maps, and a
+> packed-install consumer.
 > Its root export is the generic Core/checker/evaluator/session boundary; the
 > generic scoped outer-LF builder and class/structure facilities enter through
 > `./authoring`. The retired category-specific `surface.ts` and
 > `elaborator.ts` are deliberately not package API.
-> Registry authentication, publication, CLI, stdlib, hosted templates, and
-> sibling-repository integration remain later gates.
+> The packed package loads through ESM and CommonJS, typechecks under strict
+> NodeNext, bundles for a browser, has no runtime dependency or public scripts,
+> and passed the sole required 1,560-test shared TypeScript gate with zero
+> failures. Registry authentication/ownership, provenance automation,
+> publication, CLI, stdlib, hosted templates, and sibling-repository
+> integration remain later gates and separate actions.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)

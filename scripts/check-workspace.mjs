@@ -21,6 +21,7 @@ function assertNoNpmScripts(label, manifest) {
 }
 
 const rootPackage = readJson('package.json');
+const emdashPackage = readJson('packages/emdash/package.json');
 const specPackage = readJson('emdash2/package.json');
 const printPackage = readJson('emdash2/print/package.json');
 const workspace = readFileSync(join(root, 'pnpm-workspace.yaml'), 'utf8');
@@ -38,7 +39,7 @@ assert.equal(
   'the root package must not depend on or link to itself',
 );
 
-for (const entry of ['emdash2', 'emdash2/print']) {
+for (const entry of ['packages/emdash', 'emdash2', 'emdash2/print']) {
   assert.match(workspace, new RegExp(`^\\s*- ${entry.replace('/', '\\/')}$`, 'm'));
 }
 assert.doesNotMatch(
@@ -63,6 +64,11 @@ assert.equal(
   false,
   'remove the obsolete print npm lock',
 );
+assert.equal(
+  existsSync(join(root, 'packages/emdash/package-lock.json')),
+  false,
+  'the emdash distribution must use the shared pnpm lock',
+);
 assert.equal(existsSync(join(root, 'pnpm-lock.yaml')), true, 'commit the shared pnpm lock');
 assert.equal(
   existsSync(join(root, 'emdash-template/package-lock.json')),
@@ -78,8 +84,31 @@ assert.equal(
 );
 
 assertNoNpmScripts('root', rootPackage);
+assertNoNpmScripts('@hotdocx/emdash', emdashPackage);
 assertNoNpmScripts('emdash2', specPackage);
 assertNoNpmScripts('print', printPackage);
+
+assert.equal(emdashPackage.name, '@hotdocx/emdash');
+assert.equal(emdashPackage.version, '0.1.0');
+assert.notEqual(
+  emdashPackage.private,
+  true,
+  'the bounded emdash distribution must remain packable',
+);
+assert.equal(emdashPackage.license, rootPackage.license);
+assert.equal(emdashPackage.sideEffects, false);
+assert.equal(emdashPackage.engines?.node, '>=20');
+assert.equal(
+  emdashPackage.dependencies,
+  undefined,
+  'the browser-safe emdash core must have no runtime package dependency',
+);
+assert.equal(emdashPackage.publishConfig?.access, 'public');
+assert.deepEqual(
+  Object.keys(emdashPackage.exports),
+  ['.', './authoring', './workspace', './package.json'],
+  'the emdash package must expose only its reviewed entry points',
+);
 
 const [nodeMajor, nodeMinor] = process.versions.node.split('.').map(Number);
 assert.equal(
@@ -89,5 +118,5 @@ assert.equal(
 );
 
 console.log(
-  `workspace contract passed: ${expectedPackageManager}; root + emdash2 + print; Node ${process.versions.node}`,
+  `workspace contract passed: ${expectedPackageManager}; root + emdash + emdash2 + print; Node ${process.versions.node}`,
 );

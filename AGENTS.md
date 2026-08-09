@@ -3,9 +3,10 @@
 ## Scope And Authority
 
 This is one Git repository rooted at `emdash1`. Its contributor workspace has
-three packages: the root TypeScript workbench, `emdash2`, and
-`emdash2/print`. The `emdash-template` directory is a standalone distributable
-fixture, not a contributor workspace package.
+four packages: the private root TypeScript workbench, the distributable
+`packages/emdash` core, `emdash2`, and `emdash2/print`. The `emdash-template`
+directory is a standalone distributable fixture, not a contributor workspace
+package.
 
 The active mathematical authority is the Lambdapi v3.2 development under
 `emdash2/`, in the order specified by `emdash2/AGENTS.md`. The root `src/` and
@@ -175,6 +176,13 @@ Root TypeScript workbench:
 ./scripts/pnpmw run typecheck
 ./scripts/pnpmw run lint
 ./scripts/pnpmw run check:ts
+```
+
+Distributable TypeScript/emdash package:
+
+```bash
+./scripts/pnpmw run package:build
+./scripts/pnpmw run package:check
 ```
 
 Active Lambdapi workspace, from the Git root:

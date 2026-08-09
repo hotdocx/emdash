@@ -1,0 +1,63 @@
+{
+  "name": "@hotdocx/emdash",
+  "version": "0.1.0",
+  "description": "AI-native TypeScript authoring over backend-neutral checked emdash Core",
+  "keywords": [
+    "proof-assistant",
+    "type-theory",
+    "logical-framework",
+    "category-theory",
+    "ai-native"
+  ],
+  "license": "ISC",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/types/package_core.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/package_core.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./authoring": {
+      "types": "./dist/types/package_authoring.d.ts",
+      "import": "./dist/authoring.js",
+      "require": "./dist/authoring.cjs",
+      "default": "./dist/authoring.js"
+    },
+    "./workspace": {
+      "types": "./dist/types/package_workspace.d.ts",
+      "import": "./dist/workspace.js",
+      "require": "./dist/workspace.cjs",
+      "default": "./dist/workspace.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "homepage": "https://github.com/hotdocx/emdash",
+  "bugs": {
+    "url": "https://github.com/hotdocx/emdash/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hotdocx/emdash.git",
+    "directory": "packages/emdash"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "esbuild": "0.21.5",
+    "typescript": "^5.8.3"
+  }
+}
