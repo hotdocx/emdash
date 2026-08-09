@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-and STRUCT-NAMED-2 are final-green; the exact CLASS-SCHEMA-3 contract is
-frozen and approved for implementation
+through CLASS-SCHEMA-3 are final-green; CLASS-INHERIT-4 is the next
+dependency-ready row
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -508,8 +508,8 @@ make explicit local scope discipline especially important.
 | ARCH-0 | complete | Architecture, comparison target, trust boundary, non-goals, and acceptance corpus recorded here. |
 | STRUCT-PARAM-1 | complete | The existing macro now has dependent parameter telescopes and explicit carrier/constructor/projection modes while preserving unparameterized declarations, rules, order, and emission. |
 | STRUCT-NAMED-2 | complete | Stable owner-aware handles and order-independent named parameter/field assignments now lower to one deeply frozen ordinary constructor call. |
-| CLASS-SCHEMA-3 | in progress | The audited schema-only contract is frozen and approved; implement serializable class/parameter/method/ordered-parent metadata while parentful layouts remain explicitly unlowered. |
-| CLASS-INHERIT-4 | pending | Add strict C3 lookup, canonical field identities, explicit sharing, and algebraic-diamond conversions. |
+| CLASS-SCHEMA-3 | complete | Serializable class, parameter-role, declared-method, and ordered-parent metadata is public; every parentful schema is explicitly marked unlowered. |
+| CLASS-INHERIT-4 | dependency-ready | Audit and freeze strict C3 lookup, canonical inherited-field identities, explicit sharing, private flattening, and algebraic-diamond conversions. |
 | SYNTH-SCOPE-5 | pending | Add immutable provider declarations and local/named/imported scope snapshots. |
 | SYNTH-RECURSE-6 | pending | Add exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces. |
 | CALL-SYNTH-7 | pending | Generalize call elaboration to arbitrary class-marked implicit binders. |
@@ -862,6 +862,69 @@ surface is ready. That shared-surface checkpoint requires one final
 `check:ts`; until then, no long aggregate is run. No Lambdapi or active-kernel
 gate is relevant because the frozen row changes metadata only.
 
+## CLASS-SCHEMA-3 Completion Record
+
+`CLASS-SCHEMA-3` is final-green on 2026-08-08. The implementation adds the
+public `lf_class_schema` authoring module and:
+
+- classifies one complete generated structure expansion without changing or
+  re-emitting any declaration or rule;
+- derives the qualified class ID, stable parameter/method identities,
+  parameter and method declared types, modes, names, and projection handles
+  from the generated expansion rather than caller duplication;
+- defaults sparse parameter-role metadata to `input` while preserving
+  explicit `output` and `semi-output` roles for later search scheduling;
+- records every method receiver as authoring-level `class-evidence` over its
+  unchanged ordinary explicit Core record argument;
+- validates copied class and handle data structurally, preserving
+  serialization/replay rather than relying on JavaScript object identity;
+- builds canonical ordered parent applications from complete named parameter
+  assignments, deriving carrier plicity and validating open terms at exactly
+  the child-parameter depth;
+- supplies `coreLfClassParameterTerm(...)` for compact, safe child-parameter
+  references in common parent substitutions;
+- stores finite parent references rather than nested object graphs, so class
+  schemas remain JSON-serializable; and
+- distinguishes `parent-free` from `parents-unlowered`, preventing metadata
+  from being mistaken for implemented superclass evidence.
+
+The focused suite exercises copied expansion/handle data, default/input,
+output, and semi-output roles, stable locally nameless declared types,
+class-evidence receivers, full-telescope parameter references, ordered
+multiple parents, reversed named parent arguments, canonical plicity, caller
+immutability, deep freeze, JSON round trips, and all ten frozen diagnostic
+classes.
+
+Exact validation:
+
+- `node --require ts-node/register --test
+  tests/v3_2_lf_class_schema_tests.ts`: 6/6 passed;
+- `./scripts/pnpmw run workspace:check`: passed;
+- `./scripts/pnpmw run typecheck`: passed;
+- changed-file ESLint for the module, public barrel, focused suite, and root
+  test runner: passed;
+- `git diff --check`: passed; and
+- the one required shared-boundary `./scripts/pnpmw run check:ts`: 1,526 tests
+  across 229 suites, 1,472 passed, 54 intentionally skipped, zero failures,
+  exit code 0. It took approximately 25.9 minutes and must be carried forward
+  rather than rerun for unchanged boundaries.
+
+No structure declaration/rule output, dictionary resolver, Core/checker
+branch, parser, browser entry, package boundary, Lambdapi fragment,
+`emdash2/` source, active kernel owner, or sibling repository changed. No
+Lambdapi or active-kernel aggregate was therefore relevant. The proposal
+backtracking checkpoint is `388535a`; the rollback-safe implementation
+checkpoint is the local commit with message
+`elaborator: add class schema metadata`.
+
+The next dependency-ready row is `CLASS-INHERIT-4`. It begins with a
+read-only audit of the schema metadata, structure lowering seam, Lean's strict
+C3/parent representation behavior, and the algebraic diamond. The next
+proposal must decide the private flattened layout, explicit field-sharing
+proof obligation, parent-conversion terms, and canonical ancestor criterion
+before adding behavior. It must not begin instance registry/search or general
+call elaboration.
+
 ## Decision Ledger
 
 | ID | Decision | Rationale |
@@ -880,6 +943,8 @@ gate is relevant because the frozen row changes metadata only.
 | C-012 | TypeScript backend is the initial production focus. | Lambdapi remains specification/conformance evidence, not a runtime dependency. |
 | C-013 | Publish curated packages, not the private root workbench. | Provides stable consumer contracts and avoids exposing internal development barrels. |
 | C-014 | GetPaidX integration is additive and follows local package qualification. | Protects the published/in-review plugin and keeps platform state non-authoritative. |
+| C-015 | Parentful class schemas are explicitly unlowered until inheritance qualification. | Prevents metadata from claiming superclass evidence before C3, sharing, layout, and conversion checks exist. |
+| C-016 | Class roles default to input; output and semi-output are recorded but not interpreted yet. | Keeps ordinary declarations compact while deferring metavariable scheduling to its consumer-gated row. |
 
 ## Validation And Checkpoint Policy
 

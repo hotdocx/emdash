@@ -9,10 +9,12 @@
 > authoring semantics while preserving direct TypeScript declarations and the
 > existing explicit-Core/checker boundary. Parameter support and stable,
 > owner-aware named construction in the outer-LF structure macro are now
-> final-green. The audited `CLASS-SCHEMA-3` contract is now frozen for a
-> bounded serializable metadata layer; parentful schemas remain explicitly
-> unlowered until the later inheritance tranche. The continuation adds no
-> declaration parser, general inductive frontend, class/Core node, or
+> final-green. The public `CLASS-SCHEMA-3` metadata layer is also final-green:
+> it records stable parameter/method identities, roles, declared types, and
+> ordered parent applications while marking every parentful schema explicitly
+> unlowered. Strict C3 ordering, canonical field sharing, and generated parent
+> conversions are the next dependency-ready tranche. The continuation adds
+> no declaration parser, general inductive frontend, class/Core node, or
 > production Lambdapi dependency.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**
