@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through SYNTH-SCOPE-5 are final-green; the SYNTH-RECURSE-6 bounded resolver
-contract is frozen and approved for implementation
+through SYNTH-RECURSE-6 are final-green; CALL-SYNTH-7 is the next row awaiting
+a fresh read-only audit and bounded proposal
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -512,7 +512,7 @@ make explicit local scope discipline especially important.
 | CLASS-INHERIT-4A | complete | Strict C3, canonical inherited identity classes, explicit physical-slot binding/sharing, and conflict-free lookup are implemented as finite frozen metadata, without conversion terms. |
 | CLASS-INHERIT-4B | complete | Transparent direct-parent reconstruction definitions are public and checked; both explicit algebraic diamond routes normalize to one canonical constructor term. |
 | SYNTH-SCOPE-5 | complete | Checked providers and immutable explicit scope ranks are public, focused-green, and qualified by the complete shared TypeScript gate. |
-| SYNTH-RECURSE-6 | proposal-approved | Implement the frozen ground-goal, exact-head, tabled resolver with explicit rank/priority groups, bounds, ambiguity, and portable traces. |
+| SYNTH-RECURSE-6 | complete | The bounded exact-head resolver is public and final-green with recursive premises, tables, explicit bounds, ambiguity, runtime-backed definitional equality, and portable traces. |
 | CALL-SYNTH-7 | pending | Generalize call elaboration to arbitrary class-marked implicit binders. |
 | ALGEBRA-GRADUATE-8 | pending | Qualify the complete algebraic diamond and one recursive provider. |
 | MATH-CONSUMER-9 | pending | Qualify `struct_cov_sieve`, then select one category/Functor/Adjunction consumer. |
@@ -1660,11 +1660,12 @@ The selected additive implementation module is
 `src/v3_2/lf_instance_synthesis.ts`. Its exact contract is:
 
 1. `synthesizeCoreLfInstance(...)` accepts one checked mixed-declaration base,
-   an exact `CoreContext` over that base, one completed target-class layout,
+   an exact `CoreContext` over that base, an optional exact reviewed catalog
+   runtime used by ordinary LF conversion, one completed target-class layout,
    one target Core type, one immutable provider registry, its exact immutable
    scope snapshot, and optional explicit limits. There is no environment
-   enumeration, process registry, callback, filesystem read, network request,
-   parser case, workspace mutation, or Lambdapi execution.
+   enumeration, process registry, search callback, filesystem read, network
+   request, parser case, workspace mutation, or Lambdapi execution.
 2. The resolver reconstructs the registry and scope through their public
    validators and requires byte-identical canonical serialization, exact
    registry revision/provider inventory, and `scope.contextDepth ===
@@ -1690,11 +1691,12 @@ The selected additive implementation module is
    numeric priority, then stable provider ID for deterministic traversal and
    diagnostics. Provider ID never resolves an ambiguity.
 6. Each candidate attempt gets a fresh `CoreLfChecker` and session with the
-   requested comparison limit. The resolver creates one contextual meta for
-   every provider Pi binder, builds one ordinary explicit Core application,
-   and calls the existing public `checkRefinement(...)` boundary to constrain
-   the provider result against the ground goal while retaining premise metas.
-   No generic checker/session API or trusted Core rule changes.
+   requested comparison limit and exact supplied catalog runtime. The resolver
+   creates one contextual meta for every provider Pi binder, builds one
+   ordinary explicit Core application, and calls the existing public
+   `checkRefinement(...)` boundary to constrain the provider result against
+   the ground goal while retaining premise metas. No generic checker/session
+   API or trusted Core rule changes.
 7. After result matching, every ordinary-parameter meta must already be
    solved by the ground goal. Instance-premise metas must remain unsolved, and
    the provider result class application must not depend on instance-evidence
@@ -1715,11 +1717,11 @@ The selected additive implementation module is
    boundary is invalid provider evidence and never becomes a synthesis
    answer.
 10. The table key is the stable class reference plus canonical serialization
-    of the fully combined-normalized, meta-free goal and the exact canonical
-    registry/scope serialization material. No collision-prone ad hoc or
-    caller-asserted hash is used. Goal records receive stable first-discovery
-    ordinals, and table hits and active-stack cycle edges are explicit in the
-    trace.
+    of the fully combined-normalized, meta-free goal, exact canonical
+    registry/scope serialization, and supplied runtime revision/rule
+    inventory. No collision-prone ad hoc or caller-asserted hash is used. Goal
+    records receive stable first-discovery ordinals, and table hits and
+    active-stack cycle edges are explicit in the trace.
 11. A cycle is finite failure for that candidate edge, not coinductive
     evidence and not a process exception. Alternative acyclic candidates at
     the same or later precedence groups are still explored. A goal with only
@@ -1732,12 +1734,13 @@ The selected additive implementation module is
     groups; limit-exceeded takes precedence over ambiguity, which takes
     precedence over stuck.
 13. Multiple successful terms in the first decisive group are compared with
-    the same bounded combined LF definitional equality. Definitionally equal
-    answers form one evidence class; this is how the already qualified
-    algebraic diamond may collapse to one canonical answer. Stable provider
-    order chooses only the representative of that equal class. Two
-    non-definitionally-equal classes are `ambiguous`. A comparison that
-    exhausts its bound is `limit-exceeded`, never a silent choice.
+    the same bounded combined LF definitional equality and supplied reviewed
+    runtime. Definitionally equal answers form one evidence class; this is
+    how the already qualified algebraic diamond collapses through its ordinary
+    structure-projection betas. Stable provider order chooses only the
+    representative of that equal class. Two non-definitionally-equal classes
+    are `ambiguous`. A comparison that exhausts its bound is
+    `limit-exceeded`, never a silent choice.
 14. Normal successful results are tabled with their explicit term and
     provider-application size. The default complete limits are `maxDepth: 32`,
     `maxTableEntries: 256`, `maxResultSize: 128`, `maxFuel: 4096`, and the
@@ -1755,13 +1758,14 @@ The selected additive implementation module is
     `INVALID_SCOPE`, `INVALID_PROVIDER`, `INVALID_CLASS_HEAD`,
     `NON_PORTABLE_DATA`, or `INTERNAL_INVARIANT`.
 16. The report contains the normalized target, complete limits and usage,
-    exact registry/scope fingerprint material, stable goal-table records,
-    every exact-head candidate attempt, ordinary-argument solutions, premise
-    edges with expanded/table-hit/cycle disposition, rank/priority decisions,
-    equivalent-success classes, skipped lower groups, and the final outcome.
+    exact registry/scope fingerprint material, supplied runtime revision/rule
+    inventory, stable goal-table records, every exact-head candidate attempt,
+    ordinary-argument solutions, premise edges with expanded/table-hit/cycle
+    disposition, rank/priority decisions, equivalent-success classes, skipped
+    lower groups, and the final outcome.
     `serializeCoreLfInstanceSynthesisReport(...)` uses the existing canonical
     browser-safe JSON encoder. The report contains strings and immutable data,
-    never checker/session/table objects or unresolved metas.
+    never live checker/session/table/metavariable objects.
 17. The existing `synthesizeCoreLfGlobalDictionary(...)` remains unchanged as
     the qualified finite exact-global helper. The new resolver does not yet
     walk arbitrary call binders, persist synthesis requests in workspace
@@ -1769,7 +1773,8 @@ The selected additive implementation module is
     Elpi engine, or change Core, runtime/proof rules, class layouts,
     Lambdapi/emdash, `emdash2/`, or sibling repositories. Those remain
     `CALL-SYNTH-7`, AI-SYNTH-1B2B, later optional adapters, or explicit
-    cross-repository rows.
+    cross-repository rows. The optional catalog runtime reuses an already
+    reviewed conversion artifact; this row adds or changes no runtime rule.
 
 The focused corpus will use the checked algebraic fixture and cover direct
 local/global selection, exact rank and priority preemption, recursive direct-
@@ -1796,6 +1801,67 @@ the final recursive-synthesis boundary.
 The proposed checkpoint message is
 `docs: freeze bounded instance resolver contract`. The implementation
 checkpoint message is `elaborator: add bounded recursive instance synthesis`.
+
+## SYNTH-RECURSE-6 Implementation And Qualification Record
+
+Implementation began from proposal checkpoint `e63c555` and preserves the
+frozen search boundary. The additive
+`src/v3_2/lf_instance_synthesis.ts` module now:
+
+- reconstructs and byte-compares canonical registry/scope snapshots, checks
+  the exact Core context, rechecks every activated provider, and rejects a
+  non-ground root target;
+- indexes exact checked class heads, creates one isolated LF checker session
+  per candidate, constrains its full Pi telescope with public
+  `checkRefinement(...)`, and recursively fills only recorded instance
+  premises before an ordinary final `check(...)`;
+- tables combined-normalized goals, exposes cycle and table-hit edges, honors
+  independent depth/table/result-size/fuel/conversion bounds, and preserves
+  rank/priority decision groups without ID-based choice;
+- compares every successful term in the first decisive group by bounded LF
+  definitional equality, collapsing the algebraic superclass diamond only
+  through its exact compiled projection runtime while retaining genuine
+  ambiguity; and
+- returns deeply frozen solved/missing/stuck/ambiguous/limit data with
+  canonical browser-safe reports, including exact registry, scope, and
+  runtime revision/rule fingerprint material.
+
+The runtime input is a measured correction to the proposal rather than a new
+semantic rule. The two qualified `MonoidClass -> MulClass` conversion terms
+require the already compiled structure-projection betas to reach their shared
+constructor normal form. Omitting that exact catalog artifact caused a real
+same-group ambiguity; threading it through the ordinary checker,
+normalization, recursive premise checks, and equality comparison recovered the
+previously proved definitional equality. No diamond special case, mutable
+registration surface, or new runtime rule was introduced.
+
+The public v3.2 barrel exports the resolver. The source-visible AI-native
+capability record now reports
+`recursive-instance-synthesis@emdash-lf-instance-synthesis-v1` and no longer
+lists reusable recursive dictionary search as deferred. The existing finite
+global dictionary selector remains independently public and unchanged.
+
+Final proportional qualification evidence:
+
+- the combined provider/scope/synthesis suite: 12/12 passed;
+- the structure, class-schema, inheritance-layout, parent-lowering,
+  provider/synthesis, and AI-native capability matrix: 64 active passes and
+  two intentional Lambdapi skips across 66 tests and nine suites;
+- `./scripts/pnpmw run workspace:check`: passed;
+- `./scripts/pnpmw run typecheck`: passed;
+- changed-file ESLint: passed; and
+- forbidden-effect and `git diff --check` scans: passed.
+
+The one required `./scripts/pnpmw run check:ts` passed against the stabilized
+public TypeScript boundary: workspace validation, full typecheck, full ESLint,
+and 1,552 tests across 233 suites completed with 1,498 active passes, 54
+intentional skips, and zero failures. The directly observed root-test duration
+was 2,497,864.674849 ms. Its durable log and exit markers are
+`/tmp/emdash-classes-v1-check-ts-synth-recurse6-run1.{log,status}`. No second
+aggregate was run for documentation synchronization. No Lambdapi/emdash
+source, active owner, Core/checker/session API, runtime/proof rule, parser,
+workspace schema, sibling repository, package, hosted service, or deployment
+changed.
 
 ## Decision Ledger
 
@@ -1829,6 +1895,7 @@ checkpoint message is `elaborator: add bounded recursive instance synthesis`.
 | C-026 | Ground normalized goals are tabled against exact canonical registry/scope material under depth, table, result-size, fuel, and conversion bounds. | Gives deterministic termination and portable recovery without process heartbeats or fake hashes. |
 | C-027 | The first resolver requires goal-determined ordinary parameters and premise-independent results; output/semi-output scheduling remains later. | Delivers useful recursive synthesis while making every unsupported inference dependency an explicit stuck state. |
 | C-028 | Expected search outcomes are frozen data; only malformed inputs or violated checked-artifact invariants throw. | AI agents can inspect and revise stable proof-state evidence without parsing exception text. |
+| C-029 | Resolver conversion accepts and fingerprints one explicit reviewed catalog runtime. | Definitional equality of inherited record evidence depends on already checked projection betas; explicit runtime identity keeps this computational evidence reproducible without special cases or hidden global state. |
 
 ## Validation And Checkpoint Policy
 

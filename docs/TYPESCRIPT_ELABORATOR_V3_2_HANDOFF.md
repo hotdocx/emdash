@@ -23,15 +23,21 @@
 > resolving a goal. Lexical nesting is explicit precedence; same-rank equal-
 > priority candidates remain visible for later ambiguity analysis. Its one
 > required shared-boundary aggregate passed 1,546 tests across 232 suites:
-> 1,492 active passes, 54 intentional skips, and zero failures. Recursive
-> resolution remains a separate row. The `SYNTH-RECURSE-6` audit is complete
-> and its bounded ground-goal resolver contract is approved: fresh isolated
-> checker sessions will reuse `checkRefinement`, recursively fill premise
-> metas under an immutable table, compare same-group successes by checked
-> definitional equality, and end at ordinary explicit-Core checking. The
-> resolver has explicit depth/table/result-size/fuel/conversion bounds and
-> portable solved/missing/stuck/ambiguous/limit traces. The continuation
-> adds no declaration parser, general
+> 1,492 active passes, 54 intentional skips, and zero failures.
+> `SYNTH-RECURSE-6` is now implemented and focused-green: fresh isolated
+> checker sessions reuse `checkRefinement`, recursively fill premise metas
+> under an immutable table, compare complete first-group successes by checked
+> definitional equality, and end at ordinary explicit-Core checking. Its
+> optional explicit reviewed catalog runtime makes the already qualified
+> superclass diamond reduce via ordinary structure-projection betas and is
+> recorded by revision/rule inventory in portable reports. The resolver has
+> independent depth/table/result-size/fuel/conversion bounds and deeply frozen
+> solved/missing/stuck/ambiguous/limit traces; the source-visible capability
+> record exposes
+> `recursive-instance-synthesis@emdash-lf-instance-synthesis-v1`. The final
+> shared TypeScript gate passed 1,552 tests across 233 suites: 1,498 active
+> passes, 54 intentional skips, and zero failures. The continuation adds no
+> declaration parser, general
 > inductive frontend, class/Core node, or production Lambdapi dependency.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**

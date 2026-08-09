@@ -149,6 +149,7 @@ export * from './lf_class_schema';
 export * from './lf_class_inheritance';
 export * from './lf_class_inheritance_lowering';
 export * from './lf_instance_scope';
+export * from './lf_instance_synthesis';
 export * from './lf_transfer_acquisition';
 export * from './scale_stress_1_acquisition';
 export * from './scale_stress_1_representation';

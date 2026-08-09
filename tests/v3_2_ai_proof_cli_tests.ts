@@ -39,6 +39,9 @@ import {
     CORE_LF_INSTANCE_SCOPE_PROFILE
 } from '../src/v3_2/lf_instance_scope';
 import {
+    CORE_LF_INSTANCE_SYNTHESIS_PROFILE
+} from '../src/v3_2/lf_instance_synthesis';
+import {
     CORE_LF_DICTIONARY_SYNTHESIS_PROFILE
 } from '../src/v3_2/lf_dictionary_synthesis';
 import {
@@ -462,6 +465,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
             CORE_LF_INSTANCE_SCOPE_PROFILE.scopeRevision
         );
         assert.equal(
+            revisions.get('recursive-instance-synthesis'),
+            CORE_LF_INSTANCE_SYNTHESIS_PROFILE.revision
+        );
+        assert.equal(
             revisions.get('research-document-binding'),
             CORE_RESEARCH_DOCUMENT_PROFILE.revision
         );
@@ -486,7 +493,6 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
             [
                 'general-source-acquisition',
                 'general-development-cli',
-                'reusable-recursive-dictionary-search',
                 'persisted-or-inline-paper-artifacts',
                 'network-acquisition',
                 'hosted-workspace-delivery',

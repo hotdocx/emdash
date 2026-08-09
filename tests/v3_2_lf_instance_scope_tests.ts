@@ -2,12 +2,15 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
     CORE_LF_INSTANCE_SCOPE_PROFILE,
+    CORE_LF_INSTANCE_SYNTHESIS_PROFILE,
     CoreLfClassInheritanceLayout,
     CoreLfClassInheritanceLoweringExpansion,
     CoreLfClassMethodIdentity,
     CoreLfClassSchema,
     CoreLfModuleSpec,
     CoreLfInstanceProviderDeclaration,
+    CoreLfInstanceSynthesisError,
+    CoreLfInstanceSynthesisErrorCode,
     CoreLfInstanceScopeError,
     CoreLfInstanceScopeErrorCode,
     CoreLfQualifiedSymbol,
@@ -35,13 +38,16 @@ import {
     declareCoreLfSuperclassInstanceProvider,
     kernelBound,
     kernelCall,
+    kernelExpressionEquals,
     kernelFree,
     lowerCoreLfClassInheritance,
     planCoreLfClassInheritance,
     planCoreLfMixedPhases,
     provenance,
     serializeCoreLfInstanceRegistrySnapshot,
-    serializeCoreLfInstanceScopeSnapshot
+    serializeCoreLfInstanceScopeSnapshot,
+    serializeCoreLfInstanceSynthesisReport,
+    synthesizeCoreLfInstance
 } from '../src/v3_2';
 
 const implicitMode = binderMode('implicit', 'functorial');
@@ -103,6 +109,24 @@ const capture = (
     return captured!;
 };
 
+const captureSynthesis = (
+    thunk: () => unknown,
+    code: CoreLfInstanceSynthesisErrorCode
+): CoreLfInstanceSynthesisError => {
+    let captured: CoreLfInstanceSynthesisError | undefined;
+    assert.throws(thunk, error => {
+        if (
+            error instanceof CoreLfInstanceSynthesisError &&
+            error.code === code
+        ) {
+            captured = error;
+            return true;
+        }
+        return false;
+    });
+    return captured!;
+};
+
 interface ClassEntry {
     readonly expansion: CoreLfStructureDeclarationExpansion;
     readonly schema: CoreLfClassSchema;
@@ -127,6 +151,10 @@ interface AlgebraicFixture {
         readonly primary: CoreLfQualifiedSymbol;
         readonly secondary: CoreLfQualifiedSymbol;
         readonly named: CoreLfQualifiedSymbol;
+    };
+    readonly recursiveSymbols: {
+        readonly cycle: CoreLfQualifiedSymbol;
+        readonly underconstrained: CoreLfQualifiedSymbol;
     };
 }
 
@@ -428,13 +456,75 @@ const buildAlgebraicFixture = (
         },
         provenance: source(`instance declaration ${entry.name}`)
     }));
+    const recursiveSymbols = {
+        cycle: symbol('cycleMonoid'),
+        underconstrained: symbol('underconstrainedMonoid')
+    };
+    const cycleType: CoreLfTransferExpression = {
+        tag: 'pi',
+        binder: {
+            hint: 'A',
+            mode: implicitMode,
+            type: global(code)
+        },
+        body: {
+            tag: 'pi',
+            binder: {
+                hint: 'inst',
+                mode: implicitMode,
+                type: monoidAt(bound(0))
+            },
+            body: monoidAt(bound(1))
+        }
+    };
+    const underconstrainedType: CoreLfTransferExpression = {
+        tag: 'pi',
+        binder: {
+            hint: 'A',
+            mode: implicitMode,
+            type: global(code)
+        },
+        body: {
+            tag: 'pi',
+            binder: {
+                hint: 'B',
+                mode: implicitMode,
+                type: global(code)
+            },
+            body: monoidAt(bound(1))
+        }
+    };
+    const recursiveDeclarations = [{
+        order: order + instances.length,
+        symbol: recursiveSymbols.cycle,
+        type: cycleType,
+        body: coreLfTransferAbsentBody(),
+        modifiers: {
+            visibility: 'public' as const,
+            rigidity: 'constant' as const,
+            sourceOpacity: 'opaque' as const
+        },
+        provenance: source('recursive cycle instance declaration')
+    }, {
+        order: order + instances.length + 1,
+        symbol: recursiveSymbols.underconstrained,
+        type: underconstrainedType,
+        body: coreLfTransferAbsentBody(),
+        modifiers: {
+            visibility: 'public' as const,
+            rigidity: 'constant' as const,
+            sourceOpacity: 'opaque' as const
+        },
+        provenance: source('underconstrained instance declaration')
+    }];
 
     const structures = [mul, one, semigroup, mulOne, monoid];
     const declarations = [
         codeDeclaration,
         ...structures.flatMap(entry => entry.expansion.declarations),
         ...lowerings.flatMap(entry => entry.declarations),
-        ...instances
+        ...instances,
+        ...recursiveDeclarations
     ];
     const runtimeRules = structures.flatMap(entry =>
         entry.expansion.runtimeRules
@@ -513,7 +603,8 @@ const buildAlgebraicFixture = (
         compiled,
         classes: { mul, one, semigroup, mulOne, monoid },
         lowerings,
-        instanceSymbols
+        instanceSymbols,
+        recursiveSymbols
     };
 };
 
@@ -548,6 +639,27 @@ const declareOrdinaryProviders = (
         scope
     };
 };
+
+const declareRecursiveProviders = (
+    fixture: AlgebraicFixture
+) => ({
+    cycle: declareCoreLfGlobalInstanceProvider({
+        declarations: fixture.compiled.declarations,
+        module: fixture.module,
+        provider: fixture.recursiveSymbols.cycle,
+        resultClass: fixture.classes.monoid.layout,
+        instancePremises: [{
+            binderOrdinal: 1,
+            classLayout: fixture.classes.monoid.layout
+        }]
+    }),
+    underconstrained: declareCoreLfGlobalInstanceProvider({
+        declarations: fixture.compiled.declarations,
+        module: fixture.module,
+        provider: fixture.recursiveSymbols.underconstrained,
+        resultClass: fixture.classes.monoid.layout
+    })
+});
 
 const classById = (
     fixture: AlgebraicFixture,
@@ -676,6 +788,543 @@ describe('v3.2 immutable instance providers and scopes', () => {
     const currentOrdinary = declareOrdinaryProviders(current);
     const importedOrdinary = declareOrdinaryProviders(imported);
     const currentLocals = declareLocalProviders(current);
+    const currentRecursive = declareRecursiveProviders(current);
+    const currentSuperclasses = declareSuperclassProviders(current);
+    const currentRuntime = current.compiled.latestRuntime?.runtime;
+    assert.notEqual(currentRuntime, undefined);
+    if (currentRuntime === undefined) {
+        throw new Error('synthesis fixture did not compile its runtime');
+    }
+    const synthesisWitness = provenance(
+        'derived',
+        'bounded recursive instance-synthesis fixture'
+    );
+
+    const classTarget = (
+        entry: ClassEntry,
+        parameterIndex = 2
+    ) => {
+        const declaration = current.compiled.declarations.declaration(
+            entry.schema.classId
+        );
+        assert.equal(declaration?.link.kind, 'free-declaration');
+        if (declaration?.link.kind !== 'free-declaration') {
+            throw new Error('synthesis target class did not compile');
+        }
+        return kernelCall(
+            kernelFree(declaration.link.coreName, synthesisWitness),
+            [{
+                plicity: 'implicit',
+                value: kernelBound(parameterIndex, synthesisWitness)
+            }],
+            synthesisWitness
+        );
+    };
+
+    const synthesisArtifacts = (
+        providers: readonly CoreLfInstanceProviderDeclaration[],
+        local: 'none' | 'outer' | 'inner' | 'both' = 'none'
+    ) => {
+        const registry = createCoreLfInstanceRegistrySnapshot({
+            revision: 'recursive-synthesis-registry-1',
+            providers
+        });
+        const localFrames = [
+            ...local === 'outer' || local === 'both' ? [{
+                frameId: 'section.outer',
+                kind: 'section' as const,
+                providers: [currentLocals.outer.providerId]
+            }] : [],
+            ...local === 'inner' || local === 'both' ? [{
+                frameId: 'proof.inner',
+                kind: 'local' as const,
+                providers: [currentLocals.inner.providerId]
+            }] : []
+        ];
+        const scope = createCoreLfInstanceScopeSnapshot({
+            revision: 'recursive-synthesis-scope-1',
+            registry,
+            moduleId: current.moduleId,
+            contextDepth: currentLocals.context.depth,
+            localFrames
+        });
+        return { registry, scope, runtimeProgram: currentRuntime };
+    };
+
+    const synthesize = (
+        entry: ClassEntry,
+        providers: readonly CoreLfInstanceProviderDeclaration[],
+        local: 'none' | 'outer' | 'inner' | 'both' = 'none',
+        limits: Parameters<typeof synthesizeCoreLfInstance>[0]['limits'] =
+            undefined
+    ) => {
+        const artifacts = synthesisArtifacts(providers, local);
+        return synthesizeCoreLfInstance({
+            declarations: current.compiled.declarations,
+            context: currentLocals.context,
+            targetClass: entry.layout,
+            target: classTarget(entry),
+            ...artifacts,
+            limits
+        });
+    };
+
+    describe('bounded recursive instance synthesis', () => {
+        it('selects exact lexical evidence before lower scope ranks', () => {
+            const outcome = synthesize(
+                current.classes.monoid,
+                [
+                    currentLocals.outer,
+                    currentLocals.inner,
+                    currentOrdinary.primary
+                ],
+                'both'
+            );
+            assert.equal(outcome.status, 'solved');
+            if (outcome.status !== 'solved') return;
+            assert.deepEqual(
+                outcome.selected,
+                currentLocals.inner.providerId
+            );
+            assert.equal(outcome.resultSize, 1);
+            assert.equal(
+                kernelExpressionEquals(
+                    outcome.term,
+                    kernelBound(0, synthesisWitness)
+                ),
+                true
+            );
+            assert.equal(
+                outcome.report.revision,
+                CORE_LF_INSTANCE_SYNTHESIS_PROFILE.revision
+            );
+            assert.deepEqual(
+                outcome.report.runtimeFingerprintMaterial,
+                {
+                    revision: currentRuntime.revision,
+                    ruleIds: currentRuntime.ruleIds
+                }
+            );
+            assert.equal(outcome.report.goals.length, 1);
+            assert.deepEqual(
+                outcome.report.goals[0].candidates.map(candidate => [
+                    candidate.providerId.name,
+                    candidate.outcome
+                ]),
+                [
+                    ['localInnerMonoid', 'success'],
+                    ['localOuterMonoid', 'skipped'],
+                    ['primaryMonoid', 'skipped']
+                ]
+            );
+            assertDeepFrozen(outcome);
+        });
+
+        it('tables recursive superclass goals and collapses the diamond', () => {
+            const outcome = synthesize(
+                current.classes.mul,
+                [
+                    currentLocals.inner,
+                    ...currentSuperclasses
+                ],
+                'inner'
+            );
+            assert.equal(outcome.status, 'solved');
+            if (outcome.status !== 'solved') return;
+            assert.equal(outcome.resultSize, 3);
+            const root = outcome.report.goals[0];
+            assert.equal(root.outcome, 'solved');
+            assert.equal(root.equivalentProviders?.length, 2);
+            assert.deepEqual(
+                [...root.equivalentProviders!]
+                    .map(provider => provider.name)
+                    .sort(),
+                ['mul_one_to_mul', 'semigroup_to_mul']
+            );
+            assert.equal(
+                outcome.report.goals.flatMap(goal =>
+                    goal.candidates.flatMap(candidate => candidate.premises)
+                ).some(premise => premise.disposition === 'table-hit'),
+                true
+            );
+            assert.equal(
+                root.candidates.filter(candidate =>
+                    candidate.outcome === 'success' ||
+                    candidate.outcome === 'equivalent-success'
+                ).length,
+                2
+            );
+
+            const outputRole = synthesize(
+                current.classes.one,
+                [currentLocals.inner, ...currentSuperclasses],
+                'inner'
+            );
+            assert.equal(outputRole.status, 'solved');
+            assert.equal(
+                outputRole.report.goals[0].target.arguments[0].role,
+                'output'
+            );
+        });
+
+        it('uses priority intentionally and reports genuine ambiguity', () => {
+            const ambiguous = synthesize(
+                current.classes.monoid,
+                [currentOrdinary.primary, currentOrdinary.secondary]
+            );
+            assert.equal(ambiguous.status, 'ambiguous');
+            assert.deepEqual(
+                ambiguous.report.goals[0].candidates.map(candidate =>
+                    candidate.outcome
+                ),
+                ['ambiguous-success', 'ambiguous-success']
+            );
+
+            const preferred = declareCoreLfGlobalInstanceProvider({
+                declarations: current.compiled.declarations,
+                module: current.module,
+                provider: current.instanceSymbols.primary,
+                resultClass: current.classes.monoid.layout,
+                priority: 2000
+            });
+            const fallback = declareCoreLfGlobalInstanceProvider({
+                declarations: current.compiled.declarations,
+                module: current.module,
+                provider: current.instanceSymbols.secondary,
+                resultClass: current.classes.monoid.layout,
+                priority: 1000
+            });
+            const selected = synthesize(
+                current.classes.monoid,
+                [fallback, preferred]
+            );
+            assert.equal(selected.status, 'solved');
+            if (selected.status !== 'solved') return;
+            assert.deepEqual(selected.selected, preferred.providerId);
+            assert.deepEqual(
+                selected.report.goals[0].candidates.map(candidate => [
+                    candidate.providerId.name,
+                    candidate.outcome
+                ]),
+                [
+                    ['primaryMonoid', 'success'],
+                    ['secondaryMonoid', 'skipped']
+                ]
+            );
+        });
+
+        it('distinguishes finite missing, cycles, and stuck providers', () => {
+            const empty = synthesize(current.classes.monoid, []);
+            assert.equal(empty.status, 'missing');
+
+            const cyclic = synthesize(
+                current.classes.monoid,
+                [currentRecursive.cycle]
+            );
+            assert.equal(cyclic.status, 'missing');
+            assert.equal(
+                cyclic.report.goals.flatMap(goal =>
+                    goal.candidates.flatMap(candidate => candidate.premises)
+                ).some(premise => premise.disposition === 'cycle'),
+                true
+            );
+
+            const withBase = synthesize(
+                current.classes.monoid,
+                [currentRecursive.cycle, currentOrdinary.primary]
+            );
+            assert.equal(withBase.status, 'solved');
+
+            const stuck = synthesize(
+                current.classes.monoid,
+                [currentRecursive.underconstrained]
+            );
+            assert.equal(stuck.status, 'stuck');
+            assert.equal(
+                stuck.report.goals[0].candidates[0].reason,
+                'ordinary-parameter-not-goal-determined'
+            );
+        });
+
+        it('propagates nested ambiguity and every independent search bound', () => {
+            const toSemigroup = currentSuperclasses.find(provider =>
+                provider.providerId.name === 'monoid_to_semigroup'
+            )!;
+            const providers = [
+                currentOrdinary.primary,
+                currentOrdinary.secondary,
+                toSemigroup
+            ];
+            const nested = synthesize(current.classes.semigroup, providers);
+            assert.equal(nested.status, 'ambiguous');
+            assert.equal(
+                nested.report.goals[0].candidates[0].reason,
+                'instance-premise-ambiguous'
+            );
+
+            const recursive = [currentOrdinary.primary, toSemigroup];
+            assert.equal(
+                synthesize(
+                    current.classes.semigroup,
+                    recursive,
+                    'none',
+                    { maxDepth: 0 }
+                ).status,
+                'limit-exceeded'
+            );
+            assert.equal(
+                synthesize(
+                    current.classes.semigroup,
+                    recursive,
+                    'none',
+                    { maxTableEntries: 1 }
+                ).status,
+                'limit-exceeded'
+            );
+            assert.equal(
+                synthesize(
+                    current.classes.semigroup,
+                    recursive,
+                    'none',
+                    { maxResultSize: 1 }
+                ).status,
+                'limit-exceeded'
+            );
+            assert.equal(
+                synthesize(
+                    current.classes.monoid,
+                    [currentOrdinary.primary],
+                    'none',
+                    { maxFuel: 0 }
+                ).status,
+                'limit-exceeded'
+            );
+            assert.equal(
+                synthesize(
+                    current.classes.mul,
+                    [currentLocals.inner, ...currentSuperclasses],
+                    'inner',
+                    { comparisonStepLimit: 0 }
+                ).status,
+                'limit-exceeded'
+            );
+        });
+
+        it('is canonical across replay and fails closed on invalid inputs', () => {
+            const providers = [
+                currentLocals.inner,
+                ...currentSuperclasses
+            ];
+            const artifacts = synthesisArtifacts(providers, 'inner');
+            const first = synthesizeCoreLfInstance({
+                declarations: current.compiled.declarations,
+                context: currentLocals.context,
+                targetClass: current.classes.mul.layout,
+                target: classTarget(current.classes.mul),
+                ...artifacts
+            });
+            const registry = createCoreLfInstanceRegistrySnapshot(
+                JSON.parse(JSON.stringify({
+                    revision: artifacts.registry.registryRevision,
+                    providers: [...artifacts.registry.providers].reverse()
+                }))
+            );
+            const scope = createCoreLfInstanceScopeSnapshot({
+                revision: artifacts.scope.scopeRevision,
+                registry,
+                moduleId: artifacts.scope.moduleId,
+                contextDepth: artifacts.scope.contextDepth,
+                localFrames: artifacts.scope.localFrames.map(frame => ({
+                    frameId: frame.frameId,
+                    kind: frame.kind,
+                    providers: [...frame.providers].reverse()
+                }))
+            });
+            const replay = synthesizeCoreLfInstance({
+                declarations: current.compiled.declarations,
+                context: currentLocals.context,
+                runtimeProgram: currentRuntime,
+                targetClass: current.classes.mul.layout,
+                target: classTarget(current.classes.mul),
+                registry,
+                scope
+            });
+            assert.equal(
+                serializeCoreLfInstanceSynthesisReport(first.report),
+                serializeCoreLfInstanceSynthesisReport(replay.report)
+            );
+            assertDeepFrozen(first);
+
+            captureSynthesis(
+                () => synthesizeCoreLfInstance(null as never),
+                'INVALID_INPUT'
+            );
+            captureSynthesis(
+                () => synthesizeCoreLfInstance({
+                    declarations: current.compiled.declarations,
+                    context: createCoreLfChecker(
+                        imported.compiled.declarations.environment
+                    ).rootContext,
+                    targetClass: current.classes.mul.layout,
+                    target: classTarget(current.classes.mul),
+                    ...artifacts
+                }),
+                'INVALID_CONTEXT'
+            );
+            captureSynthesis(
+                () => synthesizeCoreLfInstance({
+                    declarations: current.compiled.declarations,
+                    context: currentLocals.context,
+                    targetClass: current.classes.one.layout,
+                    target: classTarget(current.classes.mul),
+                    ...artifacts
+                }),
+                'INVALID_CLASS_HEAD'
+            );
+            const metaSession = createCoreLfChecker(
+                current.compiled.declarations.environment,
+                undefined,
+                currentRuntime
+            ).lfSession;
+            const targetWithMeta = classTarget(current.classes.mul);
+            assert.equal(targetWithMeta.tag, 'call');
+            if (targetWithMeta.tag !== 'call') return;
+            captureSynthesis(
+                () => synthesizeCoreLfInstance({
+                    declarations: current.compiled.declarations,
+                    context: currentLocals.context,
+                    targetClass: current.classes.mul.layout,
+                    target: kernelCall(
+                        targetWithMeta.callee,
+                        [{
+                            plicity: 'implicit',
+                            value: metaSession.freshMeta(
+                                currentLocals.context,
+                                currentLocals.context.lookupIndex(2)!.type,
+                                synthesisWitness
+                            )
+                        }],
+                        synthesisWitness
+                    ),
+                    ...artifacts
+                }),
+                'INVALID_TARGET'
+            );
+            captureSynthesis(
+                () => synthesizeCoreLfInstance({
+                    declarations: current.compiled.declarations,
+                    context: currentLocals.context,
+                    targetClass: current.classes.mul.layout,
+                    target: classTarget(current.classes.mul),
+                    ...artifacts,
+                    limits: { maxFuel: -1 }
+                }),
+                'INVALID_LIMITS'
+            );
+            captureSynthesis(
+                () => synthesizeCoreLfInstance({
+                    declarations: current.compiled.declarations,
+                    context: currentLocals.context,
+                    targetClass: current.classes.mul.layout,
+                    target: classTarget(current.classes.mul),
+                    ...artifacts,
+                    runtimeProgram: {
+                        revision: 'malformed-runtime',
+                        ruleIds: ['duplicate', 'duplicate'],
+                        rewriteHead: currentRuntime.rewriteHead.bind(
+                            currentRuntime
+                        )
+                    }
+                }),
+                'INVALID_INPUT'
+            );
+            captureSynthesis(
+                () => synthesizeCoreLfInstance({
+                    declarations: current.compiled.declarations,
+                    context: currentLocals.context,
+                    targetClass: current.classes.mul.layout,
+                    target: classTarget(current.classes.mul),
+                    ...artifacts,
+                    registry: {
+                        ...artifacts.registry,
+                        providers: artifacts.registry.providers.map(
+                            (provider, index) => index === 0
+                                ? {
+                                    ...provider,
+                                    revision: 'wrong-provider-profile' as never
+                                }
+                                : provider
+                        )
+                    }
+                }),
+                'INVALID_REGISTRY'
+            );
+            captureSynthesis(
+                () => synthesizeCoreLfInstance({
+                    declarations: current.compiled.declarations,
+                    context: currentLocals.context,
+                    targetClass: current.classes.mul.layout,
+                    target: classTarget(current.classes.mul),
+                    ...artifacts,
+                    scope: {
+                        ...artifacts.scope,
+                        candidates: artifacts.scope.candidates.map(
+                            (candidate, index) => index === 0
+                                ? { ...candidate, priority: 99 }
+                                : candidate
+                        )
+                    }
+                }),
+                'INVALID_SCOPE'
+            );
+
+            const codeDeclaration =
+                current.compiled.declarations.declaration(current.code)!;
+            assert.equal(codeDeclaration.link.kind, 'free-declaration');
+            if (codeDeclaration.link.kind !== 'free-declaration') return;
+            const wrongContext = createCoreLfChecker(
+                current.compiled.declarations.environment
+            ).rootContext.extend({
+                name: 'A',
+                type: kernelFree(
+                    codeDeclaration.link.coreName,
+                    synthesisWitness
+                ),
+                mode: explicitMode,
+                provenance: synthesisWitness
+            }).extend({
+                name: 'outerMonoid',
+                type: classTarget(current.classes.monoid, 0),
+                mode: explicitMode,
+                provenance: synthesisWitness
+            }).extend({
+                name: 'notMonoid',
+                type: kernelFree(
+                    codeDeclaration.link.coreName,
+                    synthesisWitness
+                ),
+                mode: explicitMode,
+                provenance: synthesisWitness
+            });
+            captureSynthesis(
+                () => synthesizeCoreLfInstance({
+                    declarations: current.compiled.declarations,
+                    context: wrongContext,
+                    targetClass: current.classes.mul.layout,
+                    target: classTarget(current.classes.mul),
+                    ...artifacts
+                }),
+                'INVALID_PROVIDER'
+            );
+            captureSynthesis(
+                () => serializeCoreLfInstanceSynthesisReport({
+                    ...first.report,
+                    invalid: () => undefined
+                } as never),
+                'NON_PORTABLE_DATA'
+            );
+        });
+    });
 
     it('derives exact checked global and local provider metadata', () => {
         const globalProvider = currentOrdinary.primary;

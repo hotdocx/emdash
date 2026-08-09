@@ -131,6 +131,13 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                     'imported, and global precedence'
             },
             {
+                id: 'recursive-instance-synthesis',
+                revision: 'emdash-lf-instance-synthesis-v1',
+                scope:
+                    'bounded ground-goal search with recursion, tables, ' +
+                    'priorities, ambiguity, and explicit checked evidence'
+            },
+            {
                 id: 'research-document-binding',
                 revision: 'emdash-research-document-binding-v1',
                 scope: 'stable diagram/declaration/proof block identities'
@@ -191,12 +198,6 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 prerequisite:
                     'arbitrary module/declaration targeting plus measured ' +
                     'build, graph, and snapshot consumers'
-            },
-            {
-                id: 'reusable-recursive-dictionary-search',
-                state: 'consumer-gated',
-                prerequisite:
-                    'one qualified recursive indexed use'
             },
             {
                 id: 'persisted-or-inline-paper-artifacts',
