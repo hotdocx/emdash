@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through CLASS-INHERIT-4A are final-green; CLASS-INHERIT-4B is dependency-ready
-for its read-only conversion-term audit and frozen proposal
+through CLASS-INHERIT-4A are final-green; the exact CLASS-INHERIT-4B ordinary
+LF parent-conversion contract is frozen and approved for implementation
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -510,7 +510,7 @@ make explicit local scope discipline especially important.
 | STRUCT-NAMED-2 | complete | Stable owner-aware handles and order-independent named parameter/field assignments now lower to one deeply frozen ordinary constructor call. |
 | CLASS-SCHEMA-3 | complete | Serializable class, parameter-role, declared-method, and ordered-parent metadata is public; every parentful schema is explicitly marked unlowered. |
 | CLASS-INHERIT-4A | complete | Strict C3, canonical inherited identity classes, explicit physical-slot binding/sharing, and conflict-free lookup are implemented as finite frozen metadata, without conversion terms. |
-| CLASS-INHERIT-4B | dependency-ready | Audit and freeze direct-parent conversion types/terms, then check the manual private flattening through ordinary LF and qualify the algebraic diamond. |
+| CLASS-INHERIT-4B | in progress | The audited contract is frozen: generate transparent direct-parent reconstruction definitions and qualify both explicit diamond routes by ordinary delta/beta/runtime conversion. |
 | SYNTH-SCOPE-5 | pending | Add immutable provider declarations and local/named/imported scope snapshots. |
 | SYNTH-RECURSE-6 | pending | Add exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces. |
 | CALL-SYNTH-7 | pending | Generalize call elaboration to arbitrary class-marked implicit binders. |
@@ -1130,8 +1130,8 @@ instance registry/search, parser, browser entry, package boundary, Lambdapi
 fragment, `emdash2/` source, active kernel owner, or sibling repository
 changed. No Lambdapi or active-kernel aggregate was therefore relevant. The
 proposal backtracking checkpoint is `38f39cb`; the rollback-safe
-implementation checkpoint is the local commit with message
-`elaborator: plan class inheritance identities`.
+implementation checkpoint is `9764657`
+(`elaborator: plan class inheritance identities`).
 
 The next dependency-ready row is `CLASS-INHERIT-4B`. It begins with a
 read-only audit and frozen proposal for direct-parent conversion types and
@@ -1139,6 +1139,173 @@ terms, including dependent parameter substitution, reconstruction from the
 planned physical slots, ordinary LF checking, and the exact canonical
 diamond criterion. It must not begin provider scopes, recursive instance
 search, or general implicit-call elaboration.
+
+## CLASS-INHERIT-4B Audit And Frozen Contract
+
+The 2026-08-08 read-only audit inspected the completed structure expansion,
+named construction, class-schema and identity-layout boundaries, the existing
+mixed-phase LF compiler/checker and combined converter, and Lean's copied
+parent projections. The useful conclusions are:
+
+- an emdash parent conversion should be an ordinary transparent definition,
+  not a structure field, Core constructor, runtime rule, unification hook, or
+  privileged coercion;
+- the child class parameter telescope uses each parameter's existing
+  projection mode, while the final child-evidence receiver remains an
+  ordinary explicit Core binder carrying authoring-level `class-evidence`
+  metadata;
+- the parent carrier application stored by `CLASS-SCHEMA-3` is already the
+  exact result type open under the complete child parameter telescope;
+- each parent physical field can be recovered by locating any identity in
+  its parent-layout slot inside the child's 4A slot and applying that child's
+  existing physical projection to the evidence;
+- applying the parent's existing named constructor to its substituted
+  parameters and recovered fields makes the ordinary LF checker the sole
+  authority for dependent-field compatibility and explicit 4A sharing;
+- transparent conversion bodies plus the existing structure projection-beta
+  runtime rules are sufficient to compare two diamond paths; and
+- generating only direct edges preserves a small declaration surface.
+  Transitive evidence is explicit composition of those handles. Later
+  synthesis may select one canonical C3 path per ancestor, while 4B checks
+  that the nonselected algebraic route computes to the same evidence.
+
+This follows the semantic content of Lean's auxiliary copied-parent
+projections without copying Lean's inductive/structure environment machinery.
+Lean emits a reducible definition which reconstructs a non-subobject parent;
+emdash emits the corresponding backend-neutral transfer declaration and
+checks it in the small TypeScript LF.
+
+The selected additive module is
+`src/v3_2/lf_class_inheritance_lowering.ts`. Its principal shape is:
+
+```ts
+const monoidInheritance = lowerCoreLfClassInheritance({
+  layout: monoidLayout,
+  order: monoidExpansion.nextOrder,
+  directParents: [
+    { layout: mulOneLayout, conversionName: 'monoid_to_mul_one' },
+    { layout: semigroupLayout, conversionName: 'monoid_to_semigroup' },
+  ],
+  provenance,
+})
+
+const semigroupEvidence = applyCoreLfClassParentConversion({
+  conversion: monoidInheritance.directParentConversions[0],
+  parameters: [{
+    parameter: monoidSchema.structure.parameters[0],
+    value: alpha,
+  }],
+  evidence: monoidEvidence,
+})
+```
+
+The exact contract is:
+
+1. `lowerCoreLfClassInheritance(...)` accepts one complete 4A child layout,
+   a first source order, source provenance, and one named parent-layout entry
+   for every direct parent. Entries are keyed structurally by parent class ID
+   and may arrive in any order; output is canonicalized to the schema's
+   source-significant direct-parent order.
+2. A parent-free layout accepts no entries and expands to no declarations.
+   A parentful layout requires each direct parent exactly once. Each supplied
+   parent layout must match the direct-parent class ID and parameter count and
+   must expose every identity needed by that parent constructor.
+3. Each conversion symbol is placed in the child's module under its explicit
+   caller-supplied `conversionName`. Names must be valid and pairwise distinct
+   and may not collide with the child's carrier, constructor, or physical
+   projection symbols. The ordinary module planner remains responsible for
+   collisions with other surrounding declarations.
+4. For a child with parameters `p_1 ... p_n` and direct-parent application
+   `P(args)`, the generated conversion type is exactly
+   `Π p_1 ... p_n, Π (self : Child(p_1,...,p_n)), P(args)`. Parameter binders
+   use their structure projection modes. The `self` binder is explicit and
+   functorial, matching existing structure projection Core rather than adding
+   a third trusted plicity.
+5. Locally nameless parent arguments are shifted once beneath `self`. The
+   conversion body is the corresponding sequence of lambdas followed by the
+   existing parent constructor. Constructor parameter plicities come from the
+   parent structure handle, not from caller array position.
+6. For every parent-layout physical slot, lowering finds the unique child
+   physical slot containing that inherited identity class and supplies the
+   child projection applied to all child parameters and `self`. It never
+   matches by field spelling. A missing or multiply mapped identity fails
+   before a declaration is returned.
+7. Parent construction is named-handle-directed and canonical. Consequently
+   dependent parent fields and explicitly shared but differently declared
+   fields are accepted only if the unchanged LF compiler/checker verifies the
+   generated constructor application.
+8. Every generated declaration is public, ordinary, transparent, carries an
+   explicit transfer term, and is intended for the existing
+   `checked-transparent-definition` policy. Lowering emits no runtime or proof
+   rule. Existing structure projection-beta rules remain the only new-term
+   computation used by the acceptance corpus.
+9. Each direct-parent handle records its ordinal, child and parent references,
+   symbol/global term, exact generated type, and the explicit class-evidence
+   receiver contract. `applyCoreLfClassParentConversion(...)` accepts complete
+   order-independent named child-parameter assignments plus one evidence term
+   and returns the ordinary fully explicit call. The helper assembles only;
+   the LF checker remains responsible for argument types.
+10. The expansion has profile revision
+    `emdash-lf-class-inheritance-lowering-v1`, status
+    `parent-conversions-expanded`, canonical consecutive source orders,
+    declarations, handles, and `nextOrder`. It is finite, caller-independent,
+    deeply frozen, and JSON-serializable.
+11. A lowering expansion is source IR, not a hidden certificate. It becomes
+    usable superclass evidence only in an exact module whose structure
+    declarations, structure runtime betas, and transparent conversion bodies
+    all pass the ordinary TypeScript LF pipeline.
+12. No dedicated direct-to-transitive-ancestor declaration is generated in
+    4B. A transitive path is an explicit composition of direct handles. This
+    prevents redundant global providers; `SYNTH-SCOPE-5` and
+    `SYNTH-RECURSE-6` will separately freeze canonical provider registration
+    and C3-path selection.
+
+The canonical algebraic criterion is computational and exact. With an open
+`m : MonoidClass A`, the focused test constructs:
+
+```text
+semigroup_to_mul A (monoid_to_semigroup A m)
+mul_one_to_mul A (monoid_to_mul_one A m)
+```
+
+Both terms must check at `MulClass A` and normalize, using only transparent
+delta, ordinary beta, and the generated structure projection betas, to the
+same `MkMulClass A (monoid_mul A m)` Core expression. This witnesses diamond
+sharing without proof irrelevance, an equality axiom, a special coherence
+rule, or resolver heuristics.
+
+The frozen lowering error classes are `INVALID_INHERITANCE_LOWERING`,
+`LAYOUT_MISMATCH`, `PARENT_LAYOUT_MISMATCH`,
+`INVALID_PARENT_CONVERSION`, `DUPLICATE_PARENT_CONVERSION`,
+`MISSING_PARENT_CONVERSION`, `DUPLICATE_SYMBOL`,
+`UNMAPPED_PARENT_FIELD`, `INVALID_APPLICATION`, `FOREIGN_ARGUMENT`,
+`DUPLICATE_ARGUMENT`, and `MISSING_ARGUMENT`. Paths distinguish child layout,
+direct-parent entry, conversion name, parent slot, named parameter, and
+evidence term.
+
+The focused corpus will cover parent-free expansion, input-order-independent
+direct-parent declarations, exact parameter shifting and plicities,
+copied/JSON layouts, caller immutability/deep freeze, named conversion
+application, ordinary LF checking of every generated body, the exact five
+direct edges of the algebraic diamond, byte-identical normalization of its
+two `MulClass` routes, a definitionally compatible explicit share, rejection
+of an incompatible share by the ordinary LF checker, and every frozen
+lowering/application failure family.
+
+The proposal gate `H-TS-EMDASH-CLASSES-INHERIT-4B-004` is approved under the
+user-authorized unattended-review delegation, with immediate human
+supersession. The documentation-only proposal checkpoint is the backtracking
+boundary. Implementation first remains an isolated direct-import module and
+focused suite. Root guidance requires the behavioral suite in
+`tests/main_tests.ts`; once the bounded surface, public v3.2 barrel, focused
+tests, typecheck, and changed-file lint are green, 4B owns exactly one final
+`check:ts`. No repeated aggregate and no Lambdapi/kernel check are planned,
+because the row depends only on the already-qualified TypeScript LF names and
+computation.
+
+The proposed checkpoint message is
+`docs: freeze class inheritance lowering contract`. The implementation
+checkpoint message is `elaborator: lower class parent conversions`.
 
 ## Decision Ledger
 

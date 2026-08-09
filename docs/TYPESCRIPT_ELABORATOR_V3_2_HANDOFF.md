@@ -13,10 +13,13 @@
 > `4A` implements strict C3, canonical inherited identity classes, explicit
 > identity-to-physical-slot sharing, and deterministic conflict-free lookup as
 > finite frozen metadata. It deliberately provides no superclass evidence and
-> remains off the public v3.2 barrel. The dependency-ready `4B` continuation
-> must first audit and freeze ordinary direct-parent conversion terms, then
-> check the private flattened algebraic diamond through the existing LF
-> compiler/checker before exposing a usable inheritance boundary. The
+> remains off the public v3.2 barrel. The `4B` contract is now audited, frozen,
+> and approved: transparent ordinary LF definitions reconstruct each direct
+> parent from those physical slots, while the unchanged compiler/checker owns
+> dependent compatibility. Its algebraic acceptance criterion requires the
+> two explicit `MonoidClass -> MulClass` paths to delta/beta/runtime-normalize
+> to the same constructor expression before the inheritance modules enter the
+> public barrel. The
 > continuation adds no declaration parser, general
 > inductive frontend, class/Core node, or production Lambdapi dependency.
 >
