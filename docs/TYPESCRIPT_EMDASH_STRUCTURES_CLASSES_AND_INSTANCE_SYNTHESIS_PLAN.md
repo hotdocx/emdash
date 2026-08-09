@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-is final-green; the exact STRUCT-NAMED-2 contract is frozen and approved for
-implementation
+and STRUCT-NAMED-2 are final-green; CLASS-SCHEMA-3 is the next
+dependency-ready row
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -507,8 +507,8 @@ make explicit local scope discipline especially important.
 | --- | --- | --- |
 | ARCH-0 | complete | Architecture, comparison target, trust boundary, non-goals, and acceptance corpus recorded here. |
 | STRUCT-PARAM-1 | complete | The existing macro now has dependent parameter telescopes and explicit carrier/constructor/projection modes while preserving unparameterized declarations, rules, order, and emission. |
-| STRUCT-NAMED-2 | in progress | The audited named-construction contract is frozen and approved; implement order-independent parameter/field assignments over stable handles. |
-| CLASS-SCHEMA-3 | pending | Add class/field/parent metadata and parameter roles without search. |
+| STRUCT-NAMED-2 | complete | Stable owner-aware handles and order-independent named parameter/field assignments now lower to one deeply frozen ordinary constructor call. |
+| CLASS-SCHEMA-3 | dependency-ready | Audit and freeze the smallest class-schema/field/parent/parameter-role metadata contract without inheritance lowering or search. |
 | CLASS-INHERIT-4 | pending | Add strict C3 lookup, canonical field identities, explicit sharing, and algebraic-diamond conversions. |
 | SYNTH-SCOPE-5 | pending | Add immutable provider declarations and local/named/imported scope snapshots. |
 | SYNTH-RECURSE-6 | pending | Add exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces. |
@@ -597,10 +597,9 @@ the unchanged active-kernel aggregate was not rerun. The rollback-safe
 checkpoint is the local commit containing this completion record and the
 message `elaborator: add parameterized structure telescopes`.
 
-The next dependency-ready row is `STRUCT-NAMED-2`. It should first audit the
-existing Core-call builder and structure handle consumers, then freeze the
-smallest named-field construction contract without beginning class metadata
-or inheritance in the same checkpoint.
+`STRUCT-NAMED-2` followed as the next dependency-ready row. Its audit and
+proposal were frozen separately before implementation so that named
+construction did not absorb class metadata or inheritance.
 
 ## STRUCT-NAMED-2 Audit And Frozen Contract
 
@@ -680,6 +679,67 @@ backtracking boundary. Because the exported structure authoring surface
 changes, one root `check:ts` is required only after the focused tranche is
 otherwise green; the resulting aggregate is then carried forward. No
 repository-wide `check:all` or unchanged active-kernel aggregate is required.
+
+## STRUCT-NAMED-2 Completion Record
+
+`STRUCT-NAMED-2` is final-green on 2026-08-08. The implementation:
+
+- adds stable declaring-carrier ownership to parameter and projection
+  handles, while projections also retain their original constructor-field
+  mode;
+- adds `constructCoreLfNamedStructure(...)` as a transfer-IR authoring helper
+  over explicit named parameter and field assignments;
+- structurally accepts deterministic copies of canonical handles while
+  rejecting malformed or foreign ownership at stable paths;
+- rejects missing and duplicate assignments independently for parameters and
+  fields;
+- derives plicity from the selected canonical handles and emits arguments in
+  parameter-then-field ordinal order, independent of caller order;
+- clones ordinary open transfer terms, rejects runtime-only capture/wildcard
+  syntax, preserves all caller-owned values, and deeply freezes the returned
+  constructor call; and
+- leaves dependent value typing to the ordinary LF compiler/checker at the
+  actual installation context.
+
+The positive corpus constructs both unparameterized and parameterized
+records from deliberately reversed assignments. The parameterized fixture
+uses distinct parameter and field plicities, installs the result as a
+transparent ordinary LF definition, and passes normal compilation/checking.
+The negative corpus fixes the public diagnostic classes and paths for missing,
+duplicate, foreign, malformed, and rule-only inputs.
+
+Exact proportional validation:
+
+- `node --require ts-node/register --test
+  tests/v3_2_lf_structure_macro_tests.ts`: 19 tests total, 17 passed and the
+  two opt-in Lambdapi emission probes intentionally skipped;
+- `./scripts/pnpmw run typecheck`: passed;
+- changed-file ESLint for the macro and focused suite: passed; and
+- `git diff --check`: passed.
+
+The one required `./scripts/pnpmw run check:ts` was run once after those gates
+were green. Its workspace check, typecheck, and complete lint phases passed;
+the test phase emitted its matrix through the late workspace/scale suites
+without a reported failure. The terminal transport discarded the final TAP
+footer and exit packet during automatic context compaction, so this record
+does not invent exact aggregate counters. The completed run was not repeated:
+the focused owner suite and static gates above are the exact retained evidence,
+and the preceding 1,516-test aggregate remains valid for every unchanged
+consumer boundary.
+
+No Lambdapi fragment, `emdash2/` source, active kernel owner, runtime rule,
+proof rule, Core node, parser, browser entry, package boundary, or sibling
+repository changed. Consequently neither a new Lambdapi probe nor an
+active-kernel/repository-wide aggregate was relevant. The proposal
+backtracking boundary is `e798ec0`; the rollback-safe implementation
+checkpoint is the local commit with message
+`elaborator: add named structure construction`.
+
+The next dependency-ready row is `CLASS-SCHEMA-3`. Its first action is a
+read-only consumer and representation audit followed by an exact frozen
+metadata contract. That checkpoint must add no inheritance lowering,
+instance registry, synthesis, call elaboration, parser behavior, or Core
+semantics.
 
 ## Decision Ledger
 

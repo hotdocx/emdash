@@ -7,11 +7,12 @@
 > immutable instance scopes, recursive bounded evidence synthesis, and
 > general class-implicit call elaboration. It targets Lean-comparable
 > authoring semantics while preserving direct TypeScript declarations and the
-> existing explicit-Core/checker boundary. Parameter support in the completed
-> outer-LF structure macro is now final-green; stable named-field construction
-> is the next dependency-ready tranche. The continuation adds no declaration
-> parser, general inductive frontend, class/Core node, or production Lambdapi
-> dependency.
+> existing explicit-Core/checker boundary. Parameter support and stable,
+> owner-aware named construction in the outer-LF structure macro are now
+> final-green; the next dependency-ready tranche is a bounded class-schema
+> metadata audit and contract, without inheritance lowering or search. The
+> continuation adds no declaration parser, general inductive frontend,
+> class/Core node, or production Lambdapi dependency.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)

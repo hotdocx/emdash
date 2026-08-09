@@ -41,6 +41,10 @@ export type CoreLfStructureMacroErrorCode =
     | 'INVALID_COMMAND'
     | 'INVALID_PARAMETER'
     | 'INVALID_FIELD'
+    | 'INVALID_CONSTRUCTION'
+    | 'FOREIGN_ARGUMENT'
+    | 'DUPLICATE_ARGUMENT'
+    | 'MISSING_ARGUMENT'
     | 'UNSUPPORTED_EMISSION';
 
 export class CoreLfStructureMacroError extends Error {
@@ -192,13 +196,16 @@ export type CoreLfDeclareStructureInput = Omit<
 export interface CoreLfStructureProjectionHandle {
     readonly ordinal: number;
     readonly binderName: string;
+    readonly structure: CoreLfQualifiedSymbol;
     readonly symbol: CoreLfQualifiedSymbol;
+    readonly fieldMode: BinderMode;
     readonly betaRuleId: string;
 }
 
 export interface CoreLfStructureParameterHandle {
     readonly ordinal: number;
     readonly binderName: string;
+    readonly structure: CoreLfQualifiedSymbol;
     readonly modes: CoreLfStructureParameterModes;
 }
 
@@ -209,6 +216,23 @@ export interface CoreLfStructureHandle {
     readonly constructorTerm: CoreLfTransferExpression;
     readonly parameters: readonly CoreLfStructureParameterHandle[];
     readonly projections: readonly CoreLfStructureProjectionHandle[];
+}
+
+export interface CoreLfStructureNamedParameterArgument {
+    readonly parameter: CoreLfStructureParameterHandle;
+    readonly value: CoreLfTransferExpression;
+}
+
+export interface CoreLfStructureNamedFieldArgument {
+    readonly field: CoreLfStructureProjectionHandle;
+    readonly value: CoreLfTransferExpression;
+}
+
+export interface CoreLfNamedStructureConstructionInput {
+    readonly structure: CoreLfStructureHandle;
+    readonly parameters:
+        readonly CoreLfStructureNamedParameterArgument[];
+    readonly fields: readonly CoreLfStructureNamedFieldArgument[];
 }
 
 export interface CoreLfStructureDeclarationExpansion {
@@ -1193,6 +1217,384 @@ const captureParameters = (
     }
 }));
 
+const isQualifiedSymbol = (
+    value: unknown
+): value is CoreLfQualifiedSymbol =>
+    typeof value === 'object' &&
+    value !== null &&
+    MODULE_ID.test((value as CoreLfQualifiedSymbol).moduleId) &&
+    typeof (value as CoreLfQualifiedSymbol).name === 'string' &&
+    (value as CoreLfQualifiedSymbol).name.length > 0 &&
+    (value as CoreLfQualifiedSymbol).name.trim() ===
+        (value as CoreLfQualifiedSymbol).name &&
+    !/[\s\u0000-\u001f\u007f]/u.test(
+        (value as CoreLfQualifiedSymbol).name
+    );
+
+const sameSymbol = (
+    left: unknown,
+    right: unknown
+): boolean =>
+    isQualifiedSymbol(left) &&
+    isQualifiedSymbol(right) &&
+    symbolKey(left) === symbolKey(right);
+
+const isBinderMode = (value: unknown): value is BinderMode =>
+    typeof value === 'object' &&
+    value !== null &&
+    (
+        (value as BinderMode).plicity === 'explicit' ||
+        (value as BinderMode).plicity === 'implicit'
+    ) &&
+    (
+        (value as BinderMode).variation === 'functorial' ||
+        (value as BinderMode).variation === 'natural' ||
+        (value as BinderMode).variation === 'object-only'
+    );
+
+const sameMode = (left: unknown, right: unknown): boolean =>
+    isBinderMode(left) &&
+    isBinderMode(right) &&
+    left.plicity === right.plicity &&
+    left.variation === right.variation;
+
+const validateConstructionHandle = (
+    structure: CoreLfStructureHandle
+): void => {
+    const invalid = (path: string, message: string): never => fail(
+        'INVALID_CONSTRUCTION',
+        path,
+        message
+    );
+    if (
+        typeof structure !== 'object' ||
+        structure === null ||
+        !Array.isArray(structure.parameters) ||
+        !Array.isArray(structure.projections)
+    ) {
+        return invalid(
+            'input.structure',
+            'Named construction requires one complete structure handle'
+        );
+    }
+    try {
+        validateSymbol(structure.carrier, 'input.structure.carrier');
+        validateSymbol(structure.constructor, 'input.structure.constructor');
+    } catch (error) {
+        if (error instanceof CoreLfStructureMacroError) {
+            return invalid(error.path, error.message);
+        }
+        throw error;
+    }
+    if (
+        structure.carrierTerm?.tag !== 'global' ||
+        !isQualifiedSymbol(structure.carrierTerm.symbol) ||
+        !sameSymbol(structure.carrierTerm.symbol, structure.carrier) ||
+        structure.constructorTerm?.tag !== 'global' ||
+        !isQualifiedSymbol(structure.constructorTerm.symbol) ||
+        !sameSymbol(
+            structure.constructorTerm.symbol,
+            structure.constructor
+        )
+    ) {
+        return invalid(
+            'input.structure',
+            'Structure handle heads do not match its carrier and constructor'
+        );
+    }
+    const parameterNames = new Set<string>();
+    structure.parameters.forEach((parameter, index) => {
+        const path = `input.structure.parameters[${index}]`;
+        if (
+            typeof parameter !== 'object' ||
+            parameter === null ||
+            parameter.ordinal !== index ||
+            typeof parameter.binderName !== 'string' ||
+            !OUTPUT_NAME.test(parameter.binderName) ||
+            !isQualifiedSymbol(parameter.structure) ||
+            !sameSymbol(parameter.structure, structure.carrier)
+        ) {
+            return invalid(path, 'Malformed structure parameter handle');
+        }
+        if (parameterNames.has(parameter.binderName)) {
+            return invalid(path, 'Duplicate structure parameter handle');
+        }
+        parameterNames.add(parameter.binderName);
+        try {
+            validateParameterModes(parameter.modes, `${path}.modes`);
+        } catch (error) {
+            if (error instanceof CoreLfStructureMacroError) {
+                return invalid(error.path, error.message);
+            }
+            throw error;
+        }
+    });
+    if (structure.projections.length === 0) {
+        return invalid(
+            'input.structure.projections',
+            'Named construction requires at least one structure field'
+        );
+    }
+    const fieldNames = new Set<string>();
+    const projectionSymbols = new Set<string>();
+    structure.projections.forEach((field, index) => {
+        const path = `input.structure.projections[${index}]`;
+        if (
+            typeof field !== 'object' ||
+            field === null ||
+            field.ordinal !== index ||
+            typeof field.binderName !== 'string' ||
+            !OUTPUT_NAME.test(field.binderName) ||
+            !isQualifiedSymbol(field.structure) ||
+            !sameSymbol(field.structure, structure.carrier) ||
+            typeof field.betaRuleId !== 'string' ||
+            field.betaRuleId.length === 0
+        ) {
+            return invalid(path, 'Malformed structure field handle');
+        }
+        try {
+            validateSymbol(field.symbol, `${path}.symbol`);
+            validateMode(field.fieldMode, `${path}.fieldMode`);
+        } catch (error) {
+            if (error instanceof CoreLfStructureMacroError) {
+                return invalid(error.path, error.message);
+            }
+            throw error;
+        }
+        if (
+            fieldNames.has(field.binderName) ||
+            projectionSymbols.has(symbolKey(field.symbol))
+        ) {
+            return invalid(path, 'Duplicate structure field handle');
+        }
+        fieldNames.add(field.binderName);
+        projectionSymbols.add(symbolKey(field.symbol));
+    });
+};
+
+const sameParameterHandle = (
+    left: CoreLfStructureParameterHandle,
+    right: unknown
+): boolean => {
+    if (
+        typeof right !== 'object' ||
+        right === null ||
+        typeof (right as CoreLfStructureParameterHandle).modes !== 'object' ||
+        (right as CoreLfStructureParameterHandle).modes === null
+    ) return false;
+    const candidate = right as CoreLfStructureParameterHandle;
+    return (
+        left.ordinal === candidate.ordinal &&
+        left.binderName === candidate.binderName &&
+        sameSymbol(left.structure, candidate.structure) &&
+        sameMode(left.modes.carrier, candidate.modes.carrier) &&
+        sameMode(left.modes.constructor, candidate.modes.constructor) &&
+        sameMode(left.modes.projection, candidate.modes.projection)
+    );
+};
+
+const sameFieldHandle = (
+    left: CoreLfStructureProjectionHandle,
+    right: unknown
+): boolean => {
+    if (typeof right !== 'object' || right === null) return false;
+    const candidate = right as CoreLfStructureProjectionHandle;
+    return (
+        left.ordinal === candidate.ordinal &&
+        left.binderName === candidate.binderName &&
+        sameSymbol(left.structure, candidate.structure) &&
+        sameSymbol(left.symbol, candidate.symbol) &&
+        sameMode(left.fieldMode, candidate.fieldMode) &&
+        left.betaRuleId === candidate.betaRuleId
+    );
+};
+
+const cloneConstructionValue = (
+    value: CoreLfTransferExpression,
+    path: string
+): CoreLfTransferExpression => {
+    if (typeof value !== 'object' || value === null) {
+        return fail(
+            'INVALID_CONSTRUCTION',
+            path,
+            'Named structure argument must be a transfer term'
+        );
+    }
+    try {
+        return cloneExpression(value, path, MAX_ORDER);
+    } catch (error) {
+        if (error instanceof CoreLfStructureMacroError) {
+            return fail(
+                'INVALID_CONSTRUCTION',
+                error.path,
+                error.message
+            );
+        }
+        return fail(
+            'INVALID_CONSTRUCTION',
+            path,
+            'Named structure argument is not a valid transfer term'
+        );
+    }
+};
+
+/**
+ * Assemble one constructor call from order-independent named assignments.
+ * The ordinary LF compiler/checker remains responsible for argument types.
+ */
+export function constructCoreLfNamedStructure(
+    input: CoreLfNamedStructureConstructionInput
+): CoreLfTransferExpression {
+    if (typeof input !== 'object' || input === null) {
+        return fail(
+            'INVALID_CONSTRUCTION',
+            'input',
+            'Named structure construction input must be an object'
+        );
+    }
+    validateConstructionHandle(input.structure);
+    if (!Array.isArray(input.parameters)) {
+        return fail(
+            'INVALID_CONSTRUCTION',
+            'input.parameters',
+            'Named structure parameters must be an array'
+        );
+    }
+    if (!Array.isArray(input.fields)) {
+        return fail(
+            'INVALID_CONSTRUCTION',
+            'input.fields',
+            'Named structure fields must be an array'
+        );
+    }
+
+    const parameterValues: Array<CoreLfTransferExpression | undefined> =
+        new Array(input.structure.parameters.length);
+    for (let index = 0; index < input.parameters.length; index++) {
+        const path = `input.parameters[${index}]`;
+        const argument = input.parameters[index];
+        if (typeof argument !== 'object' || argument === null) {
+            return fail(
+                'INVALID_CONSTRUCTION',
+                path,
+                'Named structure parameter assignment must be an object'
+            );
+        }
+        const supplied = argument.parameter;
+        if (typeof supplied !== 'object' || supplied === null) {
+            return fail(
+                'FOREIGN_ARGUMENT',
+                `${path}.parameter`,
+                'Parameter handle does not belong to the selected structure'
+            );
+        }
+        const ordinal = supplied.ordinal;
+        const canonical = Number.isSafeInteger(ordinal)
+            ? input.structure.parameters[ordinal]
+            : undefined;
+        if (
+            canonical === undefined ||
+            !sameParameterHandle(canonical, supplied)
+        ) {
+            return fail(
+                'FOREIGN_ARGUMENT',
+                `${path}.parameter`,
+                'Parameter handle does not belong to the selected structure'
+            );
+        }
+        if (parameterValues[canonical.ordinal] !== undefined) {
+            return fail(
+                'DUPLICATE_ARGUMENT',
+                `${path}.parameter`,
+                `Parameter '${canonical.binderName}' was supplied twice`
+            );
+        }
+        parameterValues[canonical.ordinal] = cloneConstructionValue(
+            argument.value,
+            `${path}.value`
+        );
+    }
+    input.structure.parameters.forEach(parameter => {
+        if (parameterValues[parameter.ordinal] === undefined) {
+            fail(
+                'MISSING_ARGUMENT',
+                'input.parameters',
+                `Missing parameter '${parameter.binderName}'`
+            );
+        }
+    });
+
+    const fieldValues: Array<CoreLfTransferExpression | undefined> =
+        new Array(input.structure.projections.length);
+    for (let index = 0; index < input.fields.length; index++) {
+        const path = `input.fields[${index}]`;
+        const argument = input.fields[index];
+        if (typeof argument !== 'object' || argument === null) {
+            return fail(
+                'INVALID_CONSTRUCTION',
+                path,
+                'Named structure field assignment must be an object'
+            );
+        }
+        const supplied = argument.field;
+        if (typeof supplied !== 'object' || supplied === null) {
+            return fail(
+                'FOREIGN_ARGUMENT',
+                `${path}.field`,
+                'Field handle does not belong to the selected structure'
+            );
+        }
+        const ordinal = supplied.ordinal;
+        const canonical = Number.isSafeInteger(ordinal)
+            ? input.structure.projections[ordinal]
+            : undefined;
+        if (
+            canonical === undefined ||
+            !sameFieldHandle(canonical, supplied)
+        ) {
+            return fail(
+                'FOREIGN_ARGUMENT',
+                `${path}.field`,
+                'Field handle does not belong to the selected structure'
+            );
+        }
+        if (fieldValues[canonical.ordinal] !== undefined) {
+            return fail(
+                'DUPLICATE_ARGUMENT',
+                `${path}.field`,
+                `Field '${canonical.binderName}' was supplied twice`
+            );
+        }
+        fieldValues[canonical.ordinal] = cloneConstructionValue(
+            argument.value,
+            `${path}.value`
+        );
+    }
+    input.structure.projections.forEach(field => {
+        if (fieldValues[field.ordinal] === undefined) {
+            fail(
+                'MISSING_ARGUMENT',
+                'input.fields',
+                `Missing field '${field.binderName}'`
+            );
+        }
+    });
+
+    return deepFreeze(callGlobal(
+        input.structure.constructor,
+        [
+            ...input.structure.parameters.map(parameter => ({
+                plicity: parameter.modes.constructor.plicity,
+                value: parameterValues[parameter.ordinal]!
+            })),
+            ...input.structure.projections.map(field => ({
+                plicity: field.fieldMode.plicity,
+                value: fieldValues[field.ordinal]!
+            }))
+        ]
+    ));
+}
+
 /** Immutable resolution scope for one direct-TypeScript outer LF module. */
 export class CoreLfStructureMacroScope {
     private readonly scopeIdentity = Symbol('CoreLfStructureMacroScope');
@@ -1597,12 +1999,15 @@ export class CoreLfStructureMacroScope {
         const handleProjections = fields.map((field, index) => ({
             ordinal: field.ordinal,
             binderName: field.binderName,
+            structure: { ...carrier },
             symbol: projections[index],
+            fieldMode: { ...field.mode },
             betaRuleId: runtimeRules[index].id
         }));
         const handleParameters = parameters.map(parameter => ({
             ordinal: parameter.ordinal,
             binderName: parameter.binderName,
+            structure: { ...carrier },
             modes: {
                 carrier: { ...parameter.modes.carrier },
                 constructor: { ...parameter.modes.constructor },

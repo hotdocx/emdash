@@ -18,7 +18,9 @@ import {
     checkLambdapiProbe,
     createCoreLfChecker,
     compileCoreLfMixedPhases,
+    constructCoreLfNamedStructure,
     coreLfTransferAbsentBody,
+    coreLfTransferExplicitBody,
     createCoreLfMixedDeclarationLinkage,
     createCoreLfModuleSpec,
     createCoreLfTransferPolicyOverlay,
@@ -468,6 +470,118 @@ const dictionaryDeclaration = (
     provenance: source(`constant symbol ${name};`)
 });
 
+const compileNamedConstructionFixture = () => {
+    const expansion = expandParameterizedFixture();
+    const A0 = symbol('A0');
+    const a0 = symbol('a0');
+    const x0 = symbol('x0');
+    const u0 = symbol('u0');
+    const named = symbol('namedParameterizedRecord');
+    const carrierType = call(global(expansion.handle.carrier), [
+        implicit(global(A0)),
+        explicit(global(a0))
+    ]);
+    const term = constructCoreLfNamedStructure({
+        structure: expansion.handle,
+        parameters: [
+            {
+                parameter: expansion.handle.parameters[1],
+                value: global(a0)
+            },
+            {
+                parameter: expansion.handle.parameters[0],
+                value: global(A0)
+            }
+        ],
+        fields: [
+            {
+                field: expansion.handle.projections[1],
+                value: global(u0)
+            },
+            {
+                field: expansion.handle.projections[0],
+                value: global(x0)
+            }
+        ]
+    });
+    const declarations: CoreLfTransferDeclaration[] = [
+        ...initialDeclarations(),
+        ...expansion.declarations,
+        dictionaryDeclaration(
+            expansion.nextOrder,
+            A0.name,
+            global(code)
+        ),
+        dictionaryDeclaration(
+            expansion.nextOrder + 1,
+            a0.name,
+            call(global(el), [explicit(global(A0))])
+        ),
+        dictionaryDeclaration(
+            expansion.nextOrder + 2,
+            x0.name,
+            call(global(el), [explicit(global(A0))])
+        ),
+        dictionaryDeclaration(
+            expansion.nextOrder + 3,
+            u0.name,
+            call(global(el), [explicit(call(global(codeFor), [
+                implicit(global(A0)),
+                explicit(global(a0))
+            ]))])
+        ),
+        {
+            order: expansion.nextOrder + 4,
+            symbol: named,
+            type: carrierType,
+            body: coreLfTransferExplicitBody(term),
+            modifiers: {
+                visibility: 'public',
+                rigidity: 'ordinary',
+                sourceOpacity: 'transparent'
+            },
+            provenance: source('checked named structure construction')
+        }
+    ];
+    const module = createCoreLfModuleSpec({
+        revision: 'named-structure-construction-1',
+        moduleId,
+        fragmentId: 'named-structure-construction',
+        authorityPath,
+        sourceSha256:
+            'sha256:abababababababababababababababababababababababababababababababab',
+        dependencies: [],
+        externalSymbols: [],
+        declarations,
+        inductives: [],
+        runtimeRules: expansion.runtimeRules,
+        proofRules: []
+    });
+    const policy = fixturePolicy(module);
+    const plan = planCoreLfMixedPhases(module, policy);
+    const linkage = createCoreLfMixedDeclarationLinkage(plan, {
+        revision: 'named-structure-construction-linkage-1',
+        moduleRevision: module.revision,
+        entries: [...declarations]
+            .sort((left, right) => left.order - right.order)
+            .map((declaration, order) => ({
+                order,
+                symbol: declaration.symbol,
+                kind: 'free-declaration' as const,
+                coreName: `named_${declaration.symbol.name}`,
+                backendName: declaration.symbol.name
+            }))
+    });
+    return {
+        compiled: compileCoreLfMixedPhases(plan, linkage),
+        expansion,
+        named,
+        term,
+        carrierType,
+        values: { A0, a0, x0, u0 }
+    };
+};
+
 const compileDictionaryConsumerFixture = () => {
     const expansion = expandFixture();
     const primary = symbol('primaryCapability');
@@ -563,8 +677,12 @@ const fixturePolicy = (
                     kind: 'declaration' as const,
                     symbol: declaration.symbol
                 },
-                policy: 'opaque-signature' as const,
-                evidence: 'generated structure declaration fixture'
+                policy: declaration.body.kind === 'explicit-term'
+                    ? 'checked-transparent-definition' as const
+                    : 'opaque-signature' as const,
+                evidence: declaration.body.kind === 'explicit-term'
+                    ? 'checked named structure construction fixture'
+                    : 'generated structure declaration fixture'
             }
         })),
         ...module.runtimeRules.map(rule => ({
@@ -870,17 +988,19 @@ describe('outer LF dependent structure declaration macro', () => {
             expansion.handle.projections.map(projection => [
                 projection.ordinal,
                 projection.binderName,
+                projection.structure.name,
                 projection.symbol.name,
+                projection.fieldMode,
                 projection.betaRuleId
             ]),
             [
-                [0, 'A', 'record_A',
+                [0, 'A', 'Record', 'record_A', implicitMode,
                     'structure.Record.record_A.beta'],
-                [1, 'x', 'record_x',
+                [1, 'x', 'Record', 'record_x', explicitMode,
                     'structure.Record.record_x.beta'],
-                [2, 'P', 'record_P',
+                [2, 'P', 'Record', 'record_P', implicitMode,
                     'structure.Record.record_P.beta'],
-                [3, 'u', 'record_u',
+                [3, 'u', 'Record', 'record_u', explicitMode,
                     'structure.Record.record_u.beta']
             ]
         );
@@ -941,11 +1061,13 @@ describe('outer LF dependent structure declaration macro', () => {
             expansion.handle.parameters.map(parameter => ({
                 ordinal: parameter.ordinal,
                 binderName: parameter.binderName,
+                structure: parameter.structure.name,
                 modes: parameter.modes
             })),
             [{
                 ordinal: 0,
                 binderName: 'A',
+                structure: 'ParameterizedRecord',
                 modes: {
                     carrier: implicitMode,
                     constructor: explicitMode,
@@ -954,6 +1076,7 @@ describe('outer LF dependent structure declaration macro', () => {
             }, {
                 ordinal: 1,
                 binderName: 'a',
+                structure: 'ParameterizedRecord',
                 modes: {
                     carrier: explicitMode,
                     constructor: implicitMode,
@@ -1065,6 +1188,192 @@ describe('outer LF dependent structure declaration macro', () => {
                 true
             );
         });
+    });
+
+    it('constructs an unparameterized record from reversed named fields', () => {
+        const expansion = expandFixture();
+        const values = [bound(3), bound(2), bound(1), bound(0)];
+        const fields = [...expansion.handle.projections]
+            .reverse()
+            .map(field => ({
+                field: structuredClone(field),
+                value: values[field.ordinal]
+            }));
+        const input = {
+            structure: expansion.handle,
+            parameters: [],
+            fields
+        };
+        const beforeValues = structuredClone(values);
+        const term = constructCoreLfNamedStructure(input);
+
+        assert.deepEqual(term, call(
+            global(expansion.handle.constructor),
+            [
+                implicit(bound(3)),
+                explicit(bound(2)),
+                implicit(bound(1)),
+                explicit(bound(0))
+            ]
+        ));
+        assert.deepEqual(values, beforeValues);
+        assert.equal(Object.isFrozen(input.fields), false);
+        assert.equal(Object.isFrozen(values[0]), false);
+        assertDeepFrozen(term);
+    });
+
+    it('checks a parameterized named construction in ordinary LF', () => {
+        const fixture = compileNamedConstructionFixture();
+        assert.deepEqual(fixture.term, call(
+            global(fixture.expansion.handle.constructor),
+            [
+                explicit(global(fixture.values.A0)),
+                implicit(global(fixture.values.a0)),
+                explicit(global(fixture.values.x0)),
+                explicit(global(fixture.values.u0))
+            ]
+        ));
+        const declaration = fixture.compiled.declarations.declaration(
+            fixture.named
+        );
+        assert.equal(declaration?.link.kind, 'free-declaration');
+        assertDeepFrozen(fixture.term);
+    });
+
+    it('rejects incomplete and duplicate named assignments', () => {
+        const expansion = expandParameterizedFixture();
+        const parameter = (ordinal: number) => ({
+            parameter: expansion.handle.parameters[ordinal],
+            value: bound(ordinal)
+        });
+        const field = (ordinal: number) => ({
+            field: expansion.handle.projections[ordinal],
+            value: bound(ordinal + 2)
+        });
+
+        throwsMacro(
+            () => constructCoreLfNamedStructure({
+                structure: expansion.handle,
+                parameters: [parameter(0)],
+                fields: [field(0), field(1)]
+            }),
+            'MISSING_ARGUMENT',
+            'input.parameters'
+        );
+        throwsMacro(
+            () => constructCoreLfNamedStructure({
+                structure: expansion.handle,
+                parameters: [parameter(0), parameter(0), parameter(1)],
+                fields: [field(0), field(1)]
+            }),
+            'DUPLICATE_ARGUMENT',
+            'input.parameters[1].parameter'
+        );
+        throwsMacro(
+            () => constructCoreLfNamedStructure({
+                structure: expansion.handle,
+                parameters: [parameter(0), parameter(1)],
+                fields: [field(0)]
+            }),
+            'MISSING_ARGUMENT',
+            'input.fields'
+        );
+        throwsMacro(
+            () => constructCoreLfNamedStructure({
+                structure: expansion.handle,
+                parameters: [parameter(0), parameter(1)],
+                fields: [field(0), field(0), field(1)]
+            }),
+            'DUPLICATE_ARGUMENT',
+            'input.fields[1].field'
+        );
+    });
+
+    it('rejects foreign handles and rule-only named values', () => {
+        const expansion = expandParameterizedFixture();
+        const scope = new CoreLfStructureMacroScope(
+            moduleId,
+            availableFixture()
+        );
+        const resolvedCode = scope.resolve(code);
+        const other = scope.declareStructure({
+            order: 3,
+            carrierName: 'OtherParameterizedRecord',
+            constructorName: 'MkOtherParameterizedRecord',
+            fields(builder) {
+                const A = builder.parameter({
+                    binderName: 'A',
+                    modes: {
+                        carrier: implicitMode,
+                        constructor: explicitMode,
+                        projection: implicitMode
+                    },
+                    type: builder.global(resolvedCode)
+                });
+                builder.field({
+                    binderName: 'x',
+                    projectionName: 'other_parameterized_x',
+                    mode: explicitMode,
+                    type: A
+                });
+            },
+            provenance: source('foreign named handle fixture')
+        });
+        const parameters = expansion.handle.parameters.map(
+            (parameter, ordinal) => ({ parameter, value: bound(ordinal) })
+        );
+        const fields = expansion.handle.projections.map(
+            (field, ordinal) => ({ field, value: bound(ordinal + 2) })
+        );
+
+        throwsMacro(
+            () => constructCoreLfNamedStructure({
+                structure: expansion.handle,
+                parameters: [{
+                    parameter: other.handle.parameters[0],
+                    value: bound(0)
+                }, parameters[1]],
+                fields
+            }),
+            'FOREIGN_ARGUMENT',
+            'input.parameters[0].parameter'
+        );
+        throwsMacro(
+            () => constructCoreLfNamedStructure({
+                structure: expansion.handle,
+                parameters,
+                fields: [{
+                    field: other.handle.projections[0],
+                    value: bound(2)
+                }, fields[1]]
+            }),
+            'FOREIGN_ARGUMENT',
+            'input.fields[0].field'
+        );
+        throwsMacro(
+            () => constructCoreLfNamedStructure({
+                structure: expansion.handle,
+                parameters,
+                fields: [{
+                    field: expansion.handle.projections[0],
+                    value: { tag: 'capture', name: 'x' }
+                }, fields[1]]
+            }),
+            'INVALID_CONSTRUCTION',
+            'input.fields[0].value'
+        );
+        throwsMacro(
+            () => constructCoreLfNamedStructure({
+                structure: {
+                    ...expansion.handle,
+                    projections: []
+                },
+                parameters,
+                fields
+            }),
+            'INVALID_CONSTRUCTION',
+            'input.structure.projections'
+        );
     });
 
     it('lowers each beta to typed captures and the selected field', () => {
