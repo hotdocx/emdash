@@ -12,10 +12,11 @@
 > final-green. The public `CLASS-SCHEMA-3` metadata layer is also final-green:
 > it records stable parameter/method identities, roles, declared types, and
 > ordered parent applications while marking every parentful schema explicitly
-> unlowered. Strict C3 ordering, canonical field sharing, and generated parent
-> conversions are the next dependency-ready tranche. The continuation adds
-> no declaration parser, general inductive frontend, class/Core node, or
-> production Lambdapi dependency.
+> unlowered. The next inheritance row is partitioned into a frozen
+> schema-only `4A` contract for strict C3 and canonical identity-to-slot
+> sharing, followed by `4B` ordinary parent-conversion terms and algebraic
+> diamond checking. The continuation adds no declaration parser, general
+> inductive frontend, class/Core node, or production Lambdapi dependency.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)

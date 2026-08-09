@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through CLASS-SCHEMA-3 are final-green; CLASS-INHERIT-4 is the next
-dependency-ready row
+through CLASS-SCHEMA-3 are final-green; the exact CLASS-INHERIT-4A identity
+layout contract is frozen and approved for implementation
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -509,7 +509,8 @@ make explicit local scope discipline especially important.
 | STRUCT-PARAM-1 | complete | The existing macro now has dependent parameter telescopes and explicit carrier/constructor/projection modes while preserving unparameterized declarations, rules, order, and emission. |
 | STRUCT-NAMED-2 | complete | Stable owner-aware handles and order-independent named parameter/field assignments now lower to one deeply frozen ordinary constructor call. |
 | CLASS-SCHEMA-3 | complete | Serializable class, parameter-role, declared-method, and ordered-parent metadata is public; every parentful schema is explicitly marked unlowered. |
-| CLASS-INHERIT-4 | dependency-ready | Audit and freeze strict C3 lookup, canonical inherited-field identities, explicit sharing, private flattening, and algebraic-diamond conversions. |
+| CLASS-INHERIT-4A | in progress | The audited identity-layout contract is frozen and approved: strict C3, canonical inherited identity classes, explicit physical-slot bindings/sharing, and conflict-free lookup, without conversion terms. |
+| CLASS-INHERIT-4B | pending | Generate direct-parent conversion types/terms, check the manual private flattening through ordinary LF, and qualify the algebraic diamond. |
 | SYNTH-SCOPE-5 | pending | Add immutable provider declarations and local/named/imported scope snapshots. |
 | SYNTH-RECURSE-6 | pending | Add exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces. |
 | CALL-SYNTH-7 | pending | Generalize call elaboration to arbitrary class-marked implicit binders. |
@@ -924,6 +925,152 @@ proposal must decide the private flattened layout, explicit field-sharing
 proof obligation, parent-conversion terms, and canonical ancestor criterion
 before adding behavior. It must not begin instance registry/search or general
 call elaboration.
+
+## CLASS-INHERIT-4 Audit And Repartition
+
+The 2026-08-08 audit inspected the completed schema boundary, the structure
+macro's generated constructor/projection telescopes, and Lean's
+`StructFieldKind`, copied-parent coercions, and C3 implementation. The useful
+comparison is semantic rather than representational:
+
+- Lean may embed a parent subobject when fields do not overlap and otherwise
+  copies/reuses fields, while recording parent projections separately;
+- Lean's C3 order is a management cache used for resolution/defaults, not a
+  kernel constructor;
+- Lean currently identifies repeated inherited fields primarily by field
+  name and then checks definitional equality; emdash keeps the stronger plan
+  decision that stable declaring-class identities come first and spelling
+  alone never authorizes sharing; and
+- a copied-parent projection is ultimately an ordinary function rebuilding
+  the parent from child fields, which maps directly to explicit transfer IR
+  and the existing checker.
+
+The completed `CLASS-SCHEMA-3` representation deliberately classifies an
+already generated child structure. Its `declaredMethods` are therefore the
+physical constructor/projection slots available for a first flattened
+layout. Replacing that structure under the same symbols would be unsound and
+would discard a reviewed checkpoint. The selected first inheritance path is
+instead:
+
+```text
+parent schemas + parent layouts
+              |
+      strict C3 + identity union
+              |
+explicit inherited identities -> existing child physical slots
+              |
+  finite identity-layout plan (4A)
+              |
+ordinary parent-conversion terms checked by LF (4B)
+```
+
+For this first path, an author declares the child's private flattened storage
+fields explicitly with the existing structure macro and assigns inherited
+identities to those slots. Named construction means source does not depend on
+their positional order. A later ergonomic class builder may synthesize the
+same private storage declaration, but no such callback/parser facade is part
+of `CLASS-INHERIT-4`.
+
+The audit partitions the row so each checkpoint has one claim:
+
+- `CLASS-INHERIT-4A` computes and validates identity/layout metadata only;
+- `CLASS-INHERIT-4B` generates direct-parent conversion types and terms,
+  submits representative declarations to the ordinary LF compiler/checker,
+  and qualifies the algebraic diamond.
+
+Neither subrow creates a Core class/record node, instance registry, search
+engine, or declaration parser.
+
+## CLASS-INHERIT-4A Frozen Contract
+
+The selected additive module is `src/v3_2/lf_class_inheritance.ts`, initially
+kept off the public barrel/root runner until `4B` completes. Its principal
+shape is:
+
+```ts
+planCoreLfClassInheritance({
+  schema: monoidSchema,
+  directParentLayouts: [semigroupLayout, mulOneLayout],
+  fieldBindings: [
+    {
+      field: monoidSchema.declaredMethods[0].projection,
+      inherited: [mulLayout.slots[0].canonicalIdentity],
+    },
+  ],
+})
+```
+
+Its exact contract is:
+
+1. A parent-free schema is bootstrapped with no parent layouts/bindings. A
+   parentful schema requires exactly one previously planned layout for every
+   direct parent, in the schema's source-significant parent order.
+2. Parent layouts are matched structurally by stable class ID and parameter
+   count, never JavaScript identity. Each parent resolution order must begin
+   with that parent and contain no duplicate class ID.
+3. The child resolution order is strict C3:
+   `[child] ++ merge(L(parent_1), ..., L(parent_n), [parent_1,...,parent_n])`.
+   There is no relaxed fallback. An inconsistent hierarchy fails with stable
+   conflicting-head/tail evidence.
+4. Every parent slot contributes its complete field-identity equivalence
+   class. Classes that overlap on any stable identity are unioned, so a
+   repeated ancestor in a diamond is one inherited obligation before any
+   child binding is considered.
+5. `fieldBindings` is a sparse, order-independent array keyed by the child's
+   structural projection handles. Every unmentioned child field remains a
+   local-only physical slot.
+6. A binding's `inherited` entries may name any member of an inherited
+   equivalence class. Naming one assigns the whole class. The same inherited
+   class cannot be assigned twice, and every inherited class must be assigned
+   exactly once.
+7. Assigning several otherwise distinct inherited classes to one child field
+   is the explicit `share`/`identify` operation. Merely repeating a binder
+   spelling performs no union. Type compatibility is intentionally not
+   claimed by `4A`; `4B` validates it when all generated parent conversions
+   pass the ordinary dependent LF checker.
+8. Every output slot contains its child physical projection, the child's
+   local alias identity, every inherited identity in the assigned union, and
+   one deterministic canonical identity. A slot with inherited members picks
+   the lexicographically least inherited canonical representative, excluding
+   the new child alias; a local-only slot uses its child identity. Adding a
+   subclass therefore cannot rename an ancestor's canonical field.
+9. The output carries all qualified `(declaring class, binder name)` aliases.
+   An unqualified spelling is accepted only when every occurrence maps to the
+   same physical slot after explicit sharing; otherwise planning fails with a
+   name conflict. C3 selects the recorded provenance among aliases that do
+   share a slot and remains available for later default lookup.
+10. The result has profile revision
+    `emdash-lf-class-inheritance-layout-v1`, status
+    `identity-layout-planned`, the finite class-schema snapshot, direct-parent
+    references, strict resolution order, physical slots, qualified aliases,
+    and deterministic unqualified lookup. It embeds no parent layout, callback,
+    checker, or process state and is deeply frozen/JSON-serializable.
+11. `identity-layout-planned` is not superclass evidence. Only `4B` may add
+    parent conversion plans and mark the algebraic layout usable by later
+    provider/search rows.
+
+The frozen error classes are `INVALID_INHERITANCE_LAYOUT`,
+`PARENT_LAYOUT_MISMATCH`, `INCONSISTENT_C3`, `FOREIGN_FIELD`,
+`DUPLICATE_FIELD_BINDING`, `FOREIGN_INHERITED_IDENTITY`,
+`DUPLICATE_INHERITED_IDENTITY`, `MISSING_INHERITED_IDENTITY`, and
+`FIELD_NAME_CONFLICT`, with paths distinguishing schemas, parent layout
+ordinals, physical fields, and inherited identity entries.
+
+The focused `4A` corpus will cover parent-free bootstrapping, copied/JSON
+layouts, field-binding permutation determinism, the `Mul`/`One`/
+`Semigroup`/`MulOneClass`/`Monoid` diamond, the exact strict C3 order, one
+shared `Mul` identity class/slot, explicit unrelated-field sharing,
+conflict-free qualified/unqualified lookup, caller immutability/deep freeze,
+and every frozen failure family including a classic inconsistent-C3 graph.
+
+The proposal gate `H-TS-EMDASH-CLASSES-INHERIT-4A-003` is approved under the
+user-authorized unattended-review delegation, with immediate human
+supersession. The documentation-only checkpoint is the backtracking boundary.
+`4A` uses focused tests, typecheck, changed-file lint, and diff hygiene; it
+does not enter the public barrel/root runner and therefore carries forward
+the 1,526-test aggregate without another long run. `4B` will audit/freeze its
+term contract after `4A` is stable and will own the single aggregate for the
+complete public inheritance boundary.
 
 ## Decision Ledger
 
