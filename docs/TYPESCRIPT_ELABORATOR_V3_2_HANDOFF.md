@@ -43,8 +43,9 @@
 > elaborator walks one dependent Pi telescope, distinguishes arbitrary
 > instance positions through explicit management metadata, infers omitted
 > ordinary implicits from later supplied evidence or an optional expected
-> result, and sends only ground requests to the immutable resolver in binder
-> order. Explicit evidence bypasses search; expected missing, stuck,
+> result. Its original v1 scheduler sends only ground requests to the
+> immutable resolver in binder order. Explicit evidence bypasses search;
+> expected missing, stuck,
 > ambiguity, and limit results remain deeply frozen call data. Success ends at
 > an independently rechecked, saturated, meta-free explicit Core call. The
 > shared ambient-depth serializer supports portable open-context reports, and
@@ -70,10 +71,24 @@
 > clean Lean baseline found the exact missing role consumers: core `HAdd` and
 > `Membership` require an instance to determine an `outParam`, while `Coe` and
 > the recursive `HasCoerce` test exercise semi-output scheduling.
-> `PARAM-ROLES-10A` is consequently approved for a separate bounded
-> role-pattern layer over the unchanged ground resolver and integration into
-> saturated calls; 10B is sequenced afterward for semi-output/premise
-> scheduling. Neither is implemented at this handoff checkpoint.
+> `PARAM-ROLES-10A` is now final-green. A separate browser-safe role-pattern
+> layer infers output arguments in isolated sessions, delegates every inferred
+> ground target to the unchanged exact resolver, and returns only explicit
+> checked Core plus canonical frozen evidence. Class schemas reject any
+> input/semi-output domain depending on an earlier output. Saturated calls now
+> solve whole distinct output metas before inserting the checked dictionary;
+> nested, repeated, input, semi-output, and otherwise underconstrained metas
+> remain pending. The capability record exposes
+> `role-aware-instance-synthesis@emdash-lf-instance-role-synthesis-v1`, and
+> class calls advance to `emdash-lf-class-call-elaboration-v2`. The standalone
+> `HAdd A B ?C` fixture qualifies direct and call integration, precedence,
+> strict ambiguity, equivalent replay, bounded failures, serialization, and
+> independent final checking. Its curated authoring export is verified through
+> packed ESM/CommonJS, strict NodeNext, and browser consumers. The one required
+> shared TypeScript gate passed 1,566 tests across 236 suites: 1,512 active
+> passes, 54 intentional skips, and zero failures. `PARAM-ROLES-10B` is now the
+> next dependency-ready local design row for exact `Coe`/`HasCoerce`
+> semi-output and premise scheduling.
 > `PACKAGE-12A` is final-green: the local
 > `@hotdocx/emdash@0.1.0` package has strict root/authoring/workspace exports,
 > dual browser-safe JavaScript, complete declarations/maps, and a

@@ -3,6 +3,7 @@ import { describe, it } from 'node:test';
 import {
     CORE_LF_INSTANCE_SCOPE_PROFILE,
     CORE_LF_INSTANCE_SYNTHESIS_PROFILE,
+    CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE,
     CORE_LF_CLASS_CALL_ELABORATION_PROFILE,
     CoreLfClassCallElaborationError,
     CoreLfClassCallElaborationErrorCode,
@@ -14,6 +15,8 @@ import {
     CoreLfInstanceProviderDeclaration,
     CoreLfInstanceSynthesisError,
     CoreLfInstanceSynthesisErrorCode,
+    CoreLfInstanceRoleSynthesisError,
+    CoreLfInstanceRoleSynthesisErrorCode,
     CoreLfInstanceScopeError,
     CoreLfInstanceScopeErrorCode,
     CoreLfQualifiedSymbol,
@@ -29,6 +32,7 @@ import {
     compileCoreLfMixedPhases,
     coreLfClassParameterTerm,
     coreLfTransferAbsentBody,
+    coreLfTransferExplicitBody,
     createCoreLfChecker,
     createCoreLfInstanceRegistrySnapshot,
     createCoreLfInstanceScopeSnapshot,
@@ -52,8 +56,10 @@ import {
     serializeCoreLfInstanceRegistrySnapshot,
     serializeCoreLfInstanceScopeSnapshot,
     serializeCoreLfInstanceSynthesisReport,
+    serializeCoreLfInstanceRoleSynthesisReport,
     serializeCoreLfClassCallElaborationReport,
-    synthesizeCoreLfInstance
+    synthesizeCoreLfInstance,
+    synthesizeCoreLfInstanceByRoles
 } from '../src/v3_2';
 
 const implicitMode = binderMode('implicit', 'functorial');
@@ -133,6 +139,24 @@ const captureSynthesis = (
     return captured!;
 };
 
+const captureRoleSynthesis = (
+    thunk: () => unknown,
+    code: CoreLfInstanceRoleSynthesisErrorCode
+): CoreLfInstanceRoleSynthesisError => {
+    let captured: CoreLfInstanceRoleSynthesisError | undefined;
+    assert.throws(thunk, error => {
+        if (
+            error instanceof CoreLfInstanceRoleSynthesisError &&
+            error.code === code
+        ) {
+            captured = error;
+            return true;
+        }
+        return false;
+    });
+    return captured!;
+};
+
 const captureClassCall = (
     thunk: () => unknown,
     code: CoreLfClassCallElaborationErrorCode
@@ -161,6 +185,12 @@ interface AlgebraicFixture {
     readonly moduleId: string;
     readonly authorityPath: string;
     readonly code: CoreLfQualifiedSymbol;
+    readonly values: {
+        readonly a: CoreLfQualifiedSymbol;
+        readonly b: CoreLfQualifiedSymbol;
+        readonly c: CoreLfQualifiedSymbol;
+        readonly d: CoreLfQualifiedSymbol;
+    };
     readonly module: CoreLfModuleSpec;
     readonly compiled: ReturnType<typeof compileCoreLfMixedPhases>;
     readonly classes: {
@@ -169,6 +199,7 @@ interface AlgebraicFixture {
         readonly semigroup: ClassEntry;
         readonly mulOne: ClassEntry;
         readonly monoid: ClassEntry;
+        readonly hAdd: ClassEntry;
     };
     readonly lowerings: readonly CoreLfClassInheritanceLoweringExpansion[];
     readonly instanceSymbols: {
@@ -181,6 +212,13 @@ interface AlgebraicFixture {
         readonly underconstrained: CoreLfQualifiedSymbol;
     };
     readonly classCallSymbol: CoreLfQualifiedSymbol;
+    readonly roleInstanceSymbols: {
+        readonly outputC: CoreLfQualifiedSymbol;
+        readonly outputCAlias: CoreLfQualifiedSymbol;
+        readonly outputD: CoreLfQualifiedSymbol;
+        readonly underconstrained: CoreLfQualifiedSymbol;
+    };
+    readonly roleCallSymbol: CoreLfQualifiedSymbol;
 }
 
 const buildAlgebraicFixture = (
@@ -209,6 +247,25 @@ const buildAlgebraicFixture = (
         },
         provenance: source('constant symbol Code : TYPE;')
     };
+    const values = {
+        a: symbol('typeA'),
+        b: symbol('typeB'),
+        c: symbol('typeC'),
+        d: symbol('typeD')
+    };
+    const valueDeclarations: readonly CoreLfTransferDeclaration[] =
+        Object.values(values).map((value, index) => ({
+            order: index + 1,
+            symbol: value,
+            type: global(code),
+            body: coreLfTransferAbsentBody(),
+            modifiers: {
+                visibility: 'public' as const,
+                rigidity: 'constant' as const,
+                sourceOpacity: 'opaque' as const
+            },
+            provenance: source(`role-synthesis value ${value.name}`)
+        }));
     const available: readonly CoreLfStructureAvailableGlobalInput[] = [{
         symbol: code,
         type: { tag: 'type' },
@@ -217,11 +274,12 @@ const buildAlgebraicFixture = (
     }];
     const scope = new CoreLfStructureMacroScope(moduleId, available);
     const resolvedCode = scope.resolve(code);
-    let order = 1;
+    let order = 1 + valueDeclarations.length;
 
     const expand = (
         name: string,
-        fields: readonly string[]
+        fields: readonly string[],
+        parameterNames: readonly string[] = ['A']
     ): CoreLfStructureDeclarationExpansion => {
         const prefix = name.replace(/Class$/u, '').toLowerCase();
         const expansion = scope.declareStructure({
@@ -229,15 +287,15 @@ const buildAlgebraicFixture = (
             carrierName: name,
             constructorName: `Mk${name}`,
             fields(builder) {
-                builder.parameter({
-                    binderName: 'A',
+                parameterNames.forEach(parameterName => builder.parameter({
+                    binderName: parameterName,
                     modes: {
                         carrier: implicitMode,
                         constructor: implicitMode,
                         projection: implicitMode
                     },
                     type: builder.global(resolvedCode)
-                });
+                }));
                 fields.forEach(field => builder.field({
                     binderName: field,
                     projectionName: `${prefix}_${field}`,
@@ -403,6 +461,28 @@ const buildAlgebraicFixture = (
             ]
         })
     };
+    const hAddExpansion = expand(
+        'HAddClass',
+        ['marker'],
+        ['A', 'B', 'C']
+    );
+    const hAddSchema = declareCoreLfClassSchema({
+        expansion: hAddExpansion,
+        parameterRoles: hAddExpansion.handle.parameters.map(
+            (parameter, index) => ({
+                parameter,
+                role: index === 2 ? 'output' as const : 'input' as const
+            })
+        )
+    });
+    const hAdd: ClassEntry = {
+        expansion: hAddExpansion,
+        schema: hAddSchema,
+        layout: planCoreLfClassInheritance({
+            schema: hAddSchema,
+            directParentLayouts: []
+        })
+    };
 
     const lower = (
         child: ClassEntry,
@@ -443,12 +523,14 @@ const buildAlgebraicFixture = (
         entry: mulOne,
         name: 'monoid_to_mul_one'
     }]);
+    const hAddLowering = lower(hAdd, []);
     const lowerings = [
         mulLowering,
         oneLowering,
         semigroupLowering,
         mulOneLowering,
-        monoidLowering
+        monoidLowering,
+        hAddLowering
     ];
 
     const instanceSymbols = {
@@ -547,6 +629,88 @@ const buildAlgebraicFixture = (
         provenance: source('underconstrained instance declaration')
     }];
 
+    const hAddAt = (
+        left: CoreLfTransferExpression,
+        right: CoreLfTransferExpression,
+        output: CoreLfTransferExpression
+    ) => call(global(hAdd.schema.structure.carrier), [
+        implicit(left),
+        implicit(right),
+        implicit(output)
+    ]);
+    const roleInstanceSymbols = {
+        outputC: symbol('hAddABToC'),
+        outputCAlias: symbol('hAddABToCAlias'),
+        outputD: symbol('hAddABToD'),
+        underconstrained: symbol('hAddABToCUnderconstrained')
+    };
+    const hAddABC = hAddAt(
+        global(values.a),
+        global(values.b),
+        global(values.c)
+    );
+    const roleDeclarationOrder =
+        order + instances.length + recursiveDeclarations.length;
+    const roleDeclarations: readonly CoreLfTransferDeclaration[] = [{
+        order: roleDeclarationOrder,
+        symbol: roleInstanceSymbols.outputC,
+        type: hAddABC,
+        body: coreLfTransferAbsentBody(),
+        modifiers: {
+            visibility: 'public',
+            rigidity: 'constant',
+            sourceOpacity: 'opaque'
+        },
+        provenance: source('HAdd-style output-C instance')
+    }, {
+        order: roleDeclarationOrder + 1,
+        symbol: roleInstanceSymbols.outputCAlias,
+        type: hAddABC,
+        body: coreLfTransferExplicitBody(
+            global(roleInstanceSymbols.outputC)
+        ),
+        modifiers: {
+            visibility: 'public',
+            rigidity: 'constant',
+            sourceOpacity: 'transparent'
+        },
+        provenance: source('transparent output-C instance replay')
+    }, {
+        order: roleDeclarationOrder + 2,
+        symbol: roleInstanceSymbols.outputD,
+        type: hAddAt(
+            global(values.a),
+            global(values.b),
+            global(values.d)
+        ),
+        body: coreLfTransferAbsentBody(),
+        modifiers: {
+            visibility: 'public',
+            rigidity: 'constant',
+            sourceOpacity: 'opaque'
+        },
+        provenance: source('HAdd-style output-D instance')
+    }, {
+        order: roleDeclarationOrder + 3,
+        symbol: roleInstanceSymbols.underconstrained,
+        type: {
+            tag: 'pi',
+            binder: {
+                hint: 'unused',
+                mode: implicitMode,
+                type: global(code)
+            },
+            body: hAddABC
+        },
+        body: coreLfTransferAbsentBody(),
+        modifiers: {
+            visibility: 'public',
+            rigidity: 'constant',
+            sourceOpacity: 'opaque'
+        },
+        provenance: source('underconstrained HAdd-style instance')
+    }];
+
     const classCallSymbol = symbol('useClasses');
     const classCallType: CoreLfTransferExpression = {
         tag: 'pi',
@@ -590,7 +754,7 @@ const buildAlgebraicFixture = (
         }
     };
     const classCallDeclaration: CoreLfTransferDeclaration = {
-        order: order + instances.length + recursiveDeclarations.length,
+        order: roleDeclarationOrder + roleDeclarations.length,
         symbol: classCallSymbol,
         type: classCallType,
         body: coreLfTransferAbsentBody(),
@@ -601,15 +765,63 @@ const buildAlgebraicFixture = (
         },
         provenance: source('saturated class-call elaboration fixture')
     };
+    const roleCallSymbol = symbol('useHAdd');
+    const roleCallDeclaration: CoreLfTransferDeclaration = {
+        order: classCallDeclaration.order + 1,
+        symbol: roleCallSymbol,
+        type: {
+            tag: 'pi',
+            binder: {
+                hint: 'A',
+                mode: implicitMode,
+                type: global(code)
+            },
+            body: {
+                tag: 'pi',
+                binder: {
+                    hint: 'B',
+                    mode: implicitMode,
+                    type: global(code)
+                },
+                body: {
+                    tag: 'pi',
+                    binder: {
+                        hint: 'C',
+                        mode: implicitMode,
+                        type: global(code)
+                    },
+                    body: {
+                        tag: 'pi',
+                        binder: {
+                            hint: 'instHAdd',
+                            mode: implicitMode,
+                            type: hAddAt(bound(2), bound(1), bound(0))
+                        },
+                        body: global(code)
+                    }
+                }
+            }
+        },
+        body: coreLfTransferAbsentBody(),
+        modifiers: {
+            visibility: 'public',
+            rigidity: 'constant',
+            sourceOpacity: 'opaque'
+        },
+        provenance: source('HAdd-style saturated role call')
+    };
 
-    const structures = [mul, one, semigroup, mulOne, monoid];
+    const structures = [mul, one, semigroup, mulOne, monoid, hAdd];
     const declarations = [
         codeDeclaration,
+        ...valueDeclarations,
         ...structures.flatMap(entry => entry.expansion.declarations),
         ...lowerings.flatMap(entry => entry.declarations),
         ...instances,
         ...recursiveDeclarations,
-        classCallDeclaration
+        ...roleDeclarations,
+        classCallDeclaration,
+        roleCallDeclaration
     ];
     const runtimeRules = structures.flatMap(entry =>
         entry.expansion.runtimeRules
@@ -684,13 +896,16 @@ const buildAlgebraicFixture = (
         moduleId,
         authorityPath,
         code,
+        values,
         module,
         compiled,
-        classes: { mul, one, semigroup, mulOne, monoid },
+        classes: { mul, one, semigroup, mulOne, monoid, hAdd },
         lowerings,
         instanceSymbols,
         recursiveSymbols,
-        classCallSymbol
+        classCallSymbol,
+        roleInstanceSymbols,
+        roleCallSymbol
     };
 };
 
@@ -724,6 +939,36 @@ const declareOrdinaryProviders = (
         }),
         scope
     };
+};
+
+const declareRoleProviders = (
+    fixture: AlgebraicFixture,
+    priorities: Partial<Record<
+        keyof AlgebraicFixture['roleInstanceSymbols'],
+        number
+    >> = {}
+) => Object.fromEntries(
+    Object.entries(fixture.roleInstanceSymbols).map(([key, provider]) => [
+        key,
+        declareCoreLfGlobalInstanceProvider({
+            declarations: fixture.compiled.declarations,
+            module: fixture.module,
+            provider,
+            resultClass: fixture.classes.hAdd.layout,
+            ...(priorities[
+                key as keyof AlgebraicFixture['roleInstanceSymbols']
+            ] === undefined
+                ? {}
+                : {
+                    priority: priorities[
+                        key as keyof AlgebraicFixture['roleInstanceSymbols']
+                    ]
+                })
+        })
+    ])
+) as {
+    readonly [K in keyof AlgebraicFixture['roleInstanceSymbols']]:
+        CoreLfInstanceProviderDeclaration;
 };
 
 const declareRecursiveProviders = (
@@ -875,6 +1120,7 @@ describe('v3.2 immutable instance providers and scopes', () => {
     const importedOrdinary = declareOrdinaryProviders(imported);
     const currentLocals = declareLocalProviders(current);
     const currentRecursive = declareRecursiveProviders(current);
+    const currentRoles = declareRoleProviders(current);
     const currentSuperclasses = declareSuperclassProviders(current);
     const currentRuntime = current.compiled.latestRuntime?.runtime;
     assert.notEqual(currentRuntime, undefined);
@@ -885,6 +1131,15 @@ describe('v3.2 immutable instance providers and scopes', () => {
         'derived',
         'bounded recursive instance-synthesis fixture'
     );
+
+    const compiledFree = (symbol: CoreLfQualifiedSymbol) => {
+        const declaration = current.compiled.declarations.declaration(symbol);
+        assert.equal(declaration?.link.kind, 'free-declaration');
+        if (declaration?.link.kind !== 'free-declaration') {
+            throw new Error(`Fixture symbol ${symbol.name} did not compile`);
+        }
+        return kernelFree(declaration.link.coreName, synthesisWitness);
+    };
 
     const classTarget = (
         entry: ClassEntry,
@@ -937,6 +1192,46 @@ describe('v3.2 immutable instance providers and scopes', () => {
         return { registry, scope, runtimeProgram: currentRuntime };
     };
 
+    const roleArtifacts = (
+        providers: readonly CoreLfInstanceProviderDeclaration[]
+    ) => {
+        const registry = createCoreLfInstanceRegistrySnapshot({
+            revision: 'role-synthesis-registry-1',
+            providers
+        });
+        const scope = createCoreLfInstanceScopeSnapshot({
+            revision: 'role-synthesis-scope-1',
+            registry,
+            moduleId: current.moduleId,
+            contextDepth: currentLocals.context.depth
+        });
+        return { registry, scope, runtimeProgram: currentRuntime };
+    };
+
+    const rolePattern = () => [{
+        kind: 'known' as const,
+        value: compiledFree(current.values.a)
+    }, {
+        kind: 'known' as const,
+        value: compiledFree(current.values.b)
+    }, {
+        kind: 'infer-output' as const
+    }];
+
+    const synthesizeByRoles = (
+        providers: readonly CoreLfInstanceProviderDeclaration[],
+        limits: Parameters<
+            typeof synthesizeCoreLfInstanceByRoles
+        >[0]['limits'] = undefined
+    ) => synthesizeCoreLfInstanceByRoles({
+        declarations: current.compiled.declarations,
+        context: currentLocals.context,
+        targetClass: current.classes.hAdd.layout,
+        targetArguments: rolePattern(),
+        ...roleArtifacts(providers),
+        limits
+    });
+
     const synthesize = (
         entry: ClassEntry,
         providers: readonly CoreLfInstanceProviderDeclaration[],
@@ -974,6 +1269,16 @@ describe('v3.2 immutable instance providers and scopes', () => {
         requestId: 'call.instMul',
         classLayout: current.classes.mul.layout
     }] as const;
+    const roleCallDeclaration =
+        current.compiled.declarations.declaration(current.roleCallSymbol);
+    assert.equal(roleCallDeclaration?.link.kind, 'free-declaration');
+    if (roleCallDeclaration?.link.kind !== 'free-declaration') {
+        throw new Error('role-aware class-call fixture did not compile');
+    }
+    const roleCallCallee = kernelFree(
+        roleCallDeclaration.link.coreName,
+        synthesisWitness
+    );
     type ClassCallInput = Parameters<
         typeof elaborateCoreLfSaturatedClassCall
     >[0];
@@ -1002,6 +1307,30 @@ describe('v3.2 immutable instance providers and scopes', () => {
             ...overrides
         };
     };
+
+    const roleCallInput = (
+        overrides: Partial<ClassCallInput> = {}
+    ): ClassCallInput => ({
+        declarations: current.compiled.declarations,
+        context: currentLocals.context,
+        callee: roleCallCallee,
+        arguments: [{
+            plicity: 'implicit',
+            value: compiledFree(current.values.a)
+        }, {
+            plicity: 'implicit',
+            value: compiledFree(current.values.b)
+        }],
+        instanceBinders: [{
+            binderOrdinal: 3,
+            requestId: 'call.instHAdd',
+            classLayout: current.classes.hAdd.layout
+        }],
+        expectedType: compiledFree(current.code),
+        provenance: synthesisWitness,
+        ...roleArtifacts([currentRoles.outputC]),
+        ...overrides
+    });
 
     describe('bounded recursive instance synthesis', () => {
         it('selects exact lexical evidence before lower scope ranks', () => {
@@ -1460,6 +1789,239 @@ describe('v3.2 immutable instance providers and scopes', () => {
         });
     });
 
+    describe('bounded role-aware instance synthesis', () => {
+        it('infers an HAdd-style output and returns independently checked evidence', () => {
+            const outcome = synthesizeByRoles([currentRoles.outputC]);
+            assert.equal(outcome.status, 'solved');
+            if (outcome.status !== 'solved') return;
+            assert.equal(
+                outcome.report.revision,
+                CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE.revision
+            );
+            assert.deepEqual(outcome.selected, currentRoles.outputC.providerId);
+            assert.equal(outcome.inferredOutputs.length, 1);
+            assert.equal(outcome.inferredOutputs[0].ordinal, 2);
+            assert.equal(
+                kernelExpressionEquals(
+                    outcome.inferredOutputs[0].value,
+                    compiledFree(current.values.c)
+                ),
+                true
+            );
+            assert.equal(outcome.report.searches.length, 1);
+            assert.equal(outcome.report.searches[0].outcome, 'solved');
+            assert.doesNotMatch(
+                outcome.report.selectedTarget ?? '',
+                /\(meta /u
+            );
+            const checker = createCoreLfChecker(
+                current.compiled.declarations.environment,
+                undefined,
+                currentRuntime
+            );
+            checker.check(currentLocals.context, outcome.term, outcome.type);
+            assertDeepFrozen(outcome);
+        });
+
+        it('uses priority and rejects distinct same-group outputs as ambiguous', () => {
+            const prioritized = declareRoleProviders(current, {
+                outputC: 1000,
+                outputD: 2000
+            });
+            const selected = synthesizeByRoles([
+                prioritized.outputC,
+                prioritized.outputD
+            ]);
+            assert.equal(selected.status, 'solved');
+            if (selected.status !== 'solved') return;
+            assert.deepEqual(selected.selected, prioritized.outputD.providerId);
+            assert.equal(
+                kernelExpressionEquals(
+                    selected.inferredOutputs[0].value,
+                    compiledFree(current.values.d)
+                ),
+                true
+            );
+            assert.deepEqual(
+                selected.report.candidates.map(candidate => [
+                    candidate.providerId.name,
+                    candidate.outcome
+                ]),
+                [
+                    ['hAddABToD', 'inferred-target'],
+                    ['hAddABToC', 'skipped']
+                ]
+            );
+
+            const ambiguous = synthesizeByRoles([
+                currentRoles.outputC,
+                currentRoles.outputD
+            ]);
+            assert.equal(ambiguous.status, 'ambiguous');
+            assert.equal(
+                ambiguous.report.reason,
+                'distinct-output-or-evidence-equivalence-class'
+            );
+            assert.deepEqual(
+                ambiguous.report.searches.map(search => search.outcome),
+                ['solved', 'solved']
+            );
+            assertDeepFrozen(ambiguous);
+        });
+
+        it('canonicalizes a definitionally equal provider replay', () => {
+            const outcome = synthesizeByRoles([
+                currentRoles.outputCAlias,
+                currentRoles.outputC
+            ]);
+            assert.equal(outcome.status, 'solved');
+            if (outcome.status !== 'solved') return;
+            assert.equal(outcome.report.usage.inferredTargets, 1);
+            assert.equal(outcome.report.usage.delegatedSearches, 1);
+            assert.equal(
+                outcome.synthesis.goals[0].equivalentProviders?.length,
+                2
+            );
+            assertDeepFrozen(outcome);
+        });
+
+        it('keeps missing, stuck, and resource exhaustion distinct', () => {
+            assert.equal(synthesizeByRoles([]).status, 'missing');
+            const stuck = synthesizeByRoles([
+                currentRoles.underconstrained
+            ]);
+            assert.equal(stuck.status, 'stuck');
+            assert.equal(
+                stuck.report.candidates[0].reason,
+                'ordinary-parameter-not-result-determined'
+            );
+            assert.equal(
+                synthesizeByRoles(
+                    [currentRoles.outputC],
+                    { maxFuel: 0 }
+                ).status,
+                'limit-exceeded'
+            );
+            assert.equal(
+                synthesizeByRoles(
+                    [currentRoles.outputC],
+                    { maxTableEntries: 0 }
+                ).status,
+                'limit-exceeded'
+            );
+            assert.equal(
+                synthesizeByRoles(
+                    [currentRoles.outputC],
+                    { maxTableEntries: 1 }
+                ).status,
+                'limit-exceeded'
+            );
+        });
+
+        it('replays canonically and rejects malformed role patterns', () => {
+            const providers = [
+                currentRoles.outputCAlias,
+                currentRoles.outputC
+            ];
+            const first = synthesizeByRoles(providers);
+            const artifacts = roleArtifacts([...providers].reverse());
+            const replay = synthesizeCoreLfInstanceByRoles({
+                declarations: current.compiled.declarations,
+                context: currentLocals.context,
+                targetClass: current.classes.hAdd.layout,
+                targetArguments: rolePattern(),
+                ...artifacts
+            });
+            assert.equal(
+                serializeCoreLfInstanceRoleSynthesisReport(first.report),
+                serializeCoreLfInstanceRoleSynthesisReport(replay.report)
+            );
+
+            const validArtifacts = roleArtifacts([currentRoles.outputC]);
+            const base = {
+                declarations: current.compiled.declarations,
+                context: currentLocals.context,
+                targetClass: current.classes.hAdd.layout,
+                ...validArtifacts
+            };
+            captureRoleSynthesis(
+                () => synthesizeCoreLfInstanceByRoles({
+                    ...base,
+                    targetArguments: [{ kind: 'infer-output' }, {
+                        kind: 'known',
+                        value: compiledFree(current.values.b)
+                    }, {
+                        kind: 'known',
+                        value: compiledFree(current.values.c)
+                    }]
+                }),
+                'INVALID_TARGET_PATTERN'
+            );
+            captureRoleSynthesis(
+                () => synthesizeCoreLfInstanceByRoles({
+                    ...base,
+                    targetClass: current.classes.semigroup.layout,
+                    targetArguments: [{ kind: 'infer-output' }]
+                }),
+                'INVALID_TARGET_PATTERN'
+            );
+            captureRoleSynthesis(
+                () => synthesizeCoreLfInstanceByRoles({
+                    ...base,
+                    targetArguments: rolePattern().map(argument =>
+                        argument.kind === 'infer-output'
+                            ? {
+                                kind: 'known' as const,
+                                value: compiledFree(current.values.c)
+                            }
+                            : argument
+                    )
+                }),
+                'INVALID_TARGET_PATTERN'
+            );
+            const metaChecker = createCoreLfChecker(
+                current.compiled.declarations.environment,
+                undefined,
+                currentRuntime
+            );
+            const meta = metaChecker.lfSession.freshMeta(
+                currentLocals.context,
+                compiledFree(current.code),
+                synthesisWitness
+            );
+            captureRoleSynthesis(
+                () => synthesizeCoreLfInstanceByRoles({
+                    ...base,
+                    targetArguments: [{ kind: 'known', value: meta },
+                        ...rolePattern().slice(1)]
+                }),
+                'INVALID_TARGET_PATTERN'
+            );
+            captureRoleSynthesis(
+                () => serializeCoreLfInstanceRoleSynthesisReport({
+                    ...first.report,
+                    invalid: () => undefined
+                } as never),
+                'NON_PORTABLE_DATA'
+            );
+            captureRoleSynthesis(
+                () => synthesizeCoreLfInstanceByRoles({
+                    ...base,
+                    targetArguments: rolePattern(),
+                    runtimeProgram: {
+                        revision: 'malformed-role-runtime',
+                        ruleIds: ['duplicate', 'duplicate'],
+                        rewriteHead: currentRuntime.rewriteHead.bind(
+                            currentRuntime
+                        )
+                    }
+                }),
+                'INVALID_INPUT'
+            );
+            assertDeepFrozen(replay);
+        });
+    });
+
     describe('saturated class-call synthesis', () => {
         it('infers an ordinary implicit and fills arbitrary class positions', () => {
             const outcome = elaborateCoreLfSaturatedClassCall(
@@ -1527,6 +2089,49 @@ describe('v3.2 immutable instance providers and scopes', () => {
                 ),
                 true
             );
+            assertDeepFrozen(outcome);
+        });
+
+        it('infers an output parameter while inserting HAdd-style evidence', () => {
+            const outcome = elaborateCoreLfSaturatedClassCall(roleCallInput());
+            assert.equal(outcome.status, 'elaborated');
+            if (outcome.status !== 'elaborated') return;
+            assert.equal(
+                outcome.report.revision,
+                CORE_LF_CLASS_CALL_ELABORATION_PROFILE.revision
+            );
+            assert.equal(outcome.term.tag, 'call');
+            if (outcome.term.tag !== 'call') return;
+            assert.equal(outcome.term.arguments.length, 4);
+            assert.deepEqual(
+                outcome.report.binders.map(binder => binder.disposition),
+                ['provided', 'provided', 'inferred-implicit', 'synthesized']
+            );
+            assert.equal(
+                kernelExpressionEquals(
+                    outcome.term.arguments[2].value,
+                    compiledFree(current.values.c)
+                ),
+                true
+            );
+            assert.equal(
+                outcome.report.binders[3].roleSynthesis?.status,
+                'solved'
+            );
+            assert.equal(
+                outcome.report.binders[3].synthesis?.outcome,
+                'solved'
+            );
+            assert.equal(
+                outcome.report.binders[3].reason,
+                'checked-role-inferred-instance-evidence-inserted'
+            );
+            const checker = createCoreLfChecker(
+                current.compiled.declarations.environment,
+                undefined,
+                currentRuntime
+            );
+            checker.check(currentLocals.context, outcome.term, outcome.type);
             assertDeepFrozen(outcome);
         });
 

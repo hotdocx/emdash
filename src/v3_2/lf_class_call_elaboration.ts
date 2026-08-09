@@ -37,6 +37,11 @@ import {
     CoreLfInstanceSynthesisStatus,
     synthesizeCoreLfInstance
 } from './lf_instance_synthesis';
+import {
+    CoreLfInstanceRoleSynthesisReport,
+    CoreLfInstanceRoleTargetArgumentInput,
+    synthesizeCoreLfInstanceByRoles
+} from './lf_instance_role_synthesis';
 import { CoreLfCatalogRuntime } from './lf_conversion';
 import { CoreLfMixedDeclarationBaseContext } from './lf_transfer_mixed';
 import { serializeCoreLfWorkspaceCanonicalJson } from './lf_workspace';
@@ -53,10 +58,11 @@ import {
 } from './kernel';
 
 export const CORE_LF_CLASS_CALL_ELABORATION_PROFILE = Object.freeze({
-    revision: 'emdash-lf-class-call-elaboration-v1' as const,
+    revision: 'emdash-lf-class-call-elaboration-v2' as const,
     callShape: 'saturated-dependent-pi' as const,
     defaultMaxBinders: 128,
-    instanceScheduling: 'binder-order-ground-after-ordinary-inference' as const,
+    instanceScheduling:
+        'binder-order-ground-or-whole-output-meta-after-ordinary-inference' as const,
     expectedOutcomes: Object.freeze([
         'elaborated',
         'missing',
@@ -143,6 +149,7 @@ export interface CoreLfClassCallBinderTrace {
     readonly requestId?: string;
     readonly class?: CoreLfClassReference;
     readonly synthesis?: CoreLfInstanceSynthesisReport;
+    readonly roleSynthesis?: CoreLfInstanceRoleSynthesisReport;
 }
 
 export interface CoreLfClassCallRuntimeFingerprintMaterial {
@@ -226,6 +233,7 @@ interface MutableBinderTrace {
     requestId?: string;
     class?: CoreLfClassReference;
     synthesis?: CoreLfInstanceSynthesisReport;
+    roleSynthesis?: CoreLfInstanceRoleSynthesisReport;
 }
 
 interface PlannedBinder {
@@ -623,6 +631,36 @@ const validateClassTarget = (
     };
 };
 
+const rolePatternFromTarget = (
+    target: KernelExpression,
+    instance: ValidatedInstanceBinder
+): readonly CoreLfInstanceRoleTargetArgumentInput[] | undefined => {
+    const arguments_ = target.tag === 'call' ? target.arguments : [];
+    const parameters = instance.layout.schema.parameters;
+    if (arguments_.length !== parameters.length) return undefined;
+    let hasOutputHole = false;
+    const outputMetaIndices = new Set<number>();
+    const pattern: CoreLfInstanceRoleTargetArgumentInput[] = [];
+    for (let ordinal = 0; ordinal < arguments_.length; ordinal++) {
+        const value = arguments_[ordinal].value;
+        if (!containsMeta(value)) {
+            pattern.push({ kind: 'known', value });
+            continue;
+        }
+        if (
+            value.tag !== 'meta' ||
+            parameters[ordinal].role !== 'output' ||
+            outputMetaIndices.has(value.identity.index)
+        ) {
+            return undefined;
+        }
+        outputMetaIndices.add(value.identity.index);
+        hasOutputHole = true;
+        pattern.push({ kind: 'infer-output' });
+    }
+    return hasOutputHole ? pattern : undefined;
+};
+
 const validateProvenance = (value: Provenance): void => {
     if (
         !record(value) ||
@@ -988,7 +1026,10 @@ export function elaborateCoreLfSaturatedClassCall(
                     : { class: cloneClass(plan.trace.class) }),
                 ...(plan.trace.synthesis === undefined
                     ? {}
-                    : { synthesis: plan.trace.synthesis })
+                    : { synthesis: plan.trace.synthesis }),
+                ...(plan.trace.roleSynthesis === undefined
+                    ? {}
+                    : { roleSynthesis: plan.trace.roleSynthesis })
             };
         }),
         ...(term === undefined
@@ -1028,61 +1069,123 @@ export function elaborateCoreLfSaturatedClassCall(
                 session.metavariable(request.meta).type
             );
             request.plan.trace.type = target;
+            let evidence: KernelExpression;
             if (containsMeta(target)) {
-                request.plan.trace.disposition = 'pending';
-                request.plan.trace.reason =
-                    'instance-target-blocked-by-ordinary-meta';
-                return { progress };
-            }
-            let synthesis: ReturnType<typeof synthesizeCoreLfInstance>;
-            try {
-                synthesis = synthesizeCoreLfInstance({
-                    declarations: input.declarations,
-                    context: input.context,
-                    runtimeProgram: input.runtimeProgram,
-                    targetClass: request.instance.layout,
+                const rolePattern = rolePatternFromTarget(
                     target,
-                    registry: snapshots.registry,
-                    scope: snapshots.scope,
-                    limits: input.synthesisLimits
-                });
-            } catch (error: unknown) {
-                return fail(
-                    'INVALID_SYNTHESIS_ARTIFACT',
-                    `instanceRequests.${request.instance.requestId}`,
-                    'Nested instance synthesis rejected a call artifact',
-                    error instanceof Error ? error : undefined
+                    request.instance
                 );
+                if (rolePattern === undefined) {
+                    request.plan.trace.disposition = 'pending';
+                    request.plan.trace.reason =
+                        'instance-target-blocked-by-ordinary-meta';
+                    return { progress };
+                }
+                let synthesis: ReturnType<
+                    typeof synthesizeCoreLfInstanceByRoles
+                >;
+                try {
+                    synthesis = synthesizeCoreLfInstanceByRoles({
+                        declarations: input.declarations,
+                        context: input.context,
+                        runtimeProgram: input.runtimeProgram,
+                        targetClass: request.instance.layout,
+                        targetArguments: rolePattern,
+                        registry: snapshots.registry,
+                        scope: snapshots.scope,
+                        limits: input.synthesisLimits
+                    });
+                } catch (error: unknown) {
+                    return fail(
+                        'INVALID_SYNTHESIS_ARTIFACT',
+                        `instanceRequests.${request.instance.requestId}`,
+                        'Role-aware instance synthesis rejected a call artifact',
+                        error instanceof Error ? error : undefined
+                    );
+                }
+                request.plan.trace.roleSynthesis = synthesis.report;
+                if (synthesis.status !== 'solved') {
+                    request.plan.trace.disposition = 'pending';
+                    request.plan.trace.reason =
+                        `instance-role-synthesis-${synthesis.status}`;
+                    let sawFailure = false;
+                    pending.forEach(later => {
+                        if (later === request) {
+                            sawFailure = true;
+                        } else if (sawFailure && !later.resolved) {
+                            later.plan.trace.disposition = 'skipped';
+                            later.plan.trace.reason =
+                                'earlier-instance-request-blocked-call';
+                        }
+                    });
+                    return {
+                        progress,
+                        failure: synthesis.status,
+                        reason: request.plan.trace.reason,
+                        failedRequest: request
+                    };
+                }
+                request.plan.trace.synthesis = synthesis.synthesis;
+                evidence = synthesis.term;
+            } else {
+                let synthesis: ReturnType<typeof synthesizeCoreLfInstance>;
+                try {
+                    synthesis = synthesizeCoreLfInstance({
+                        declarations: input.declarations,
+                        context: input.context,
+                        runtimeProgram: input.runtimeProgram,
+                        targetClass: request.instance.layout,
+                        target,
+                        registry: snapshots.registry,
+                        scope: snapshots.scope,
+                        limits: input.synthesisLimits
+                    });
+                } catch (error: unknown) {
+                    return fail(
+                        'INVALID_SYNTHESIS_ARTIFACT',
+                        `instanceRequests.${request.instance.requestId}`,
+                        'Nested instance synthesis rejected a call artifact',
+                        error instanceof Error ? error : undefined
+                    );
+                }
+                request.plan.trace.synthesis = synthesis.report;
+                if (synthesis.status !== 'solved') {
+                    request.plan.trace.disposition = 'pending';
+                    request.plan.trace.reason =
+                        `instance-synthesis-${synthesis.status}`;
+                    let sawFailure = false;
+                    pending.forEach(later => {
+                        if (later === request) {
+                            sawFailure = true;
+                        } else if (sawFailure && !later.resolved) {
+                            later.plan.trace.disposition = 'skipped';
+                            later.plan.trace.reason =
+                                'earlier-instance-request-blocked-call';
+                        }
+                    });
+                    return {
+                        progress,
+                        failure: synthesis.status,
+                        reason: request.plan.trace.reason,
+                        failedRequest: request
+                    };
+                }
+                evidence = synthesis.term;
             }
-            request.plan.trace.synthesis = synthesis.report;
-            if (synthesis.status !== 'solved') {
-                request.plan.trace.disposition = 'pending';
-                request.plan.trace.reason =
-                    `instance-synthesis-${synthesis.status}`;
-                let sawFailure = false;
-                pending.forEach(later => {
-                    if (later === request) {
-                        sawFailure = true;
-                    } else if (sawFailure && !later.resolved) {
-                        later.plan.trace.disposition = 'skipped';
-                        later.plan.trace.reason =
-                            'earlier-instance-request-blocked-call';
-                    }
-                });
-                return {
-                    progress,
-                    failure: synthesis.status,
-                    reason: request.plan.trace.reason,
-                    failedRequest: request
-                };
+            if (evidence === undefined) {
+                return fail(
+                    'INTERNAL_INVARIANT',
+                    `instanceRequests.${request.instance.requestId}`,
+                    'Successful instance synthesis did not return evidence'
+                );
             }
             try {
                 checker.checkRefinement(
                     input.context,
-                    synthesis.term,
+                    evidence,
                     target
                 );
-                session.solve(request.meta, synthesis.term);
+                session.solve(request.meta, evidence);
             } catch (error: unknown) {
                 return fail(
                     'INTERNAL_INVARIANT',
@@ -1092,10 +1195,12 @@ export function elaborateCoreLfSaturatedClassCall(
                 );
             }
             request.resolved = true;
-            request.plan.checkedValue = synthesis.term;
-            request.plan.trace.value = synthesis.term;
+            request.plan.checkedValue = evidence;
+            request.plan.trace.value = evidence;
             request.plan.trace.disposition = 'synthesized';
-            request.plan.trace.reason = 'checked-instance-evidence-inserted';
+            request.plan.trace.reason = request.plan.trace.roleSynthesis === undefined
+                ? 'checked-instance-evidence-inserted'
+                : 'checked-role-inferred-instance-evidence-inserted';
             progress = true;
         }
         return { progress };

@@ -35,6 +35,7 @@ export type CoreLfClassLayoutStatus =
 export type CoreLfClassSchemaErrorCode =
     | 'INVALID_CLASS_SCHEMA'
     | 'INVALID_PARAMETER_ROLE'
+    | 'INVALID_PARAMETER_ROLE_DEPENDENCY'
     | 'FOREIGN_PARAMETER'
     | 'DUPLICATE_PARAMETER_ROLE'
     | 'INVALID_PARENT'
@@ -860,6 +861,128 @@ const classRole = (
     return value;
 };
 
+const referencesAmbientIndex = (
+    expression: CoreLfTransferExpression,
+    ambientIndex: number,
+    localDepth = 0
+): boolean => {
+    switch (expression.tag) {
+        case 'type':
+        case 'global':
+        case 'capture':
+            return false;
+        case 'bound':
+            return expression.index === ambientIndex + localDepth;
+        case 'call':
+            return referencesAmbientIndex(
+                expression.callee,
+                ambientIndex,
+                localDepth
+            ) || expression.arguments.some(argument =>
+                referencesAmbientIndex(
+                    argument.value,
+                    ambientIndex,
+                    localDepth
+                )
+            );
+        case 'pi':
+        case 'lambda':
+            return referencesAmbientIndex(
+                expression.binder.type,
+                ambientIndex,
+                localDepth
+            ) || referencesAmbientIndex(
+                expression.body,
+                ambientIndex,
+                localDepth + 1
+            );
+        case 'wildcard':
+            return expression.checking !== undefined &&
+                referencesAmbientIndex(
+                    expression.checking,
+                    ambientIndex,
+                    localDepth
+                );
+        default: {
+            const exhaustive: never = expression;
+            return exhaustive;
+        }
+    }
+};
+
+const assertParameterRoleDependencies = (
+    roles: readonly CoreLfClassParameterRole[],
+    types: readonly CoreLfTransferExpression[],
+    path: string
+): void => {
+    if (roles.length !== types.length) {
+        return fail(
+            'INVALID_PARAMETER_ROLE_DEPENDENCY',
+            path,
+            'Class parameter roles and declared types have different lengths'
+        );
+    }
+    roles.forEach((role, ordinal) => {
+        if (role === 'output') return;
+        for (let earlier = 0; earlier < ordinal; earlier++) {
+            if (
+                roles[earlier] === 'output' &&
+                referencesAmbientIndex(
+                    types[ordinal],
+                    ordinal - earlier - 1
+                )
+            ) {
+                return fail(
+                    'INVALID_PARAMETER_ROLE_DEPENDENCY',
+                    `${path}[${ordinal}].declaredType`,
+                    `Non-output parameter ${ordinal} depends on earlier ` +
+                        `output parameter ${earlier}`
+                );
+            }
+        }
+    });
+};
+
+/**
+ * Validate the dependency discipline required to substitute output arguments
+ * during instance search. The returned schema is the original checked value.
+ */
+export function validateCoreLfClassParameterRoleDependencies(
+    schema: CoreLfClassSchema,
+    path = 'classSchema'
+): CoreLfClassSchema {
+    if (!record(schema) || !Array.isArray(schema.parameters)) {
+        return fail(
+            'INVALID_PARAMETER_ROLE_DEPENDENCY',
+            path,
+            'Expected one complete class schema with parameter metadata'
+        );
+    }
+    const roles: CoreLfClassParameterRole[] = [];
+    const types: CoreLfTransferExpression[] = [];
+    schema.parameters.forEach((parameter, ordinal) => {
+        if (!record(parameter)) {
+            return fail(
+                'INVALID_PARAMETER_ROLE_DEPENDENCY',
+                `${path}.parameters[${ordinal}]`,
+                'Class parameter metadata must be an object'
+            );
+        }
+        roles.push(classRole(
+            parameter.role,
+            `${path}.parameters[${ordinal}].role`
+        ));
+        types.push(cloneExpression(
+            parameter.declaredType,
+            `${path}.parameters[${ordinal}].declaredType`,
+            ordinal,
+            'INVALID_PARAMETER_ROLE_DEPENDENCY'
+        ));
+    });
+    assertParameterRoleDependencies(roles, types, `${path}.parameters`);
+    return schema;
+}
+
 interface ClassSchemaReferenceView {
     readonly classId: CoreLfQualifiedSymbol;
     readonly structure: CoreLfStructureHandle;
@@ -915,6 +1038,8 @@ const classSchemaReference = (
                 'Direct parent class-schema snapshot is inconsistent'
             );
         }
+        const replayRoles: CoreLfClassParameterRole[] = [];
+        const replayTypes: CoreLfTransferExpression[] = [];
         value.parameters.forEach((parameter, index) => {
             if (
                 !record(parameter) ||
@@ -943,17 +1068,22 @@ const classSchemaReference = (
                     'Direct parent parameter identity is foreign'
                 );
             }
-            classRole(
+            replayRoles.push(classRole(
                 parameter.role,
                 `${path}.parameters[${index}].role`
-            );
-            cloneExpression(
+            ));
+            replayTypes.push(cloneExpression(
                 parameter.declaredType,
                 `${path}.parameters[${index}].declaredType`,
                 index,
                 'INVALID_PARENT'
-            );
+            ));
         });
+        assertParameterRoleDependencies(
+            replayRoles,
+            replayTypes,
+            `${path}.parameters`
+        );
         value.declaredMethods.forEach((method, index) => {
             if (
                 !record(method) ||
@@ -995,7 +1125,12 @@ const classSchemaReference = (
         return { classId, structure };
     } catch (error) {
         if (error instanceof CoreLfClassSchemaError) {
-            if (error.code === 'INVALID_PARENT') throw error;
+            if (
+                error.code === 'INVALID_PARENT' ||
+                error.code === 'INVALID_PARAMETER_ROLE_DEPENDENCY'
+            ) {
+                throw error;
+            }
             return fail('INVALID_PARENT', error.path, error.message);
         }
         throw error;
@@ -1097,6 +1232,11 @@ export function declareCoreLfClassSchema(
             `${path}.role`
         );
     });
+    assertParameterRoleDependencies(
+        roles,
+        seam.parameterTypes,
+        'input.expansion.parameters'
+    );
 
     const parentInputs = input.directParents ?? [];
     if (!Array.isArray(parentInputs)) {

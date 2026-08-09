@@ -5,14 +5,14 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through ALGEBRA-GRADUATE-8 and PACKAGE-12A/12B1 are final-green;
+through PARAM-ROLES-10A and PACKAGE-12A/12B1 are final-green;
 MATH-CONSUMER-9 is retired without implementation after its stale consumer
-was reconciled with the existing acceptance evidence; PARAM-ROLES-10A is the
-next approved local semantic tranche after a primary-source Lean consumer
-audit, PARAM-ROLES-10B is dependency-ready after 10A, and remaining call
-ergonomics and standard-library rows stay consumer-gated; registry ownership,
-bootstrap publication, and hosted integration remain gated; PACKAGE-12B2 and
-HOSTED-13 are external-action gates requiring separate authorization
+was reconciled with the existing acceptance evidence; PARAM-ROLES-10B is the
+next dependency-ready local design tranche after output inference, and
+remaining call ergonomics and standard-library rows stay consumer-gated;
+registry ownership, bootstrap publication, and hosted integration remain
+gated; PACKAGE-12B2 and HOSTED-13 are external-action gates requiring separate
+authorization
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -376,9 +376,9 @@ definitionally equal or are canonical projections of the same shared
 ancestor. Higher priority may intentionally select one provider. Explicit
 arguments and explicit scope control remain the escape hatch.
 
-Implement all-input matching first. Design parameter-role metadata from the
-start, but defer output/semi-output inference and stuck/resume behavior until
-an exact consumer requires them.
+The v1 ground resolver retains all-input matching. Parameter-role metadata was
+designed from the start; PARAM-ROLES-10A now activates output inference in a
+separate layer, while semi-output and premise rescheduling remain 10B.
 
 ### G. General call elaboration
 
@@ -528,8 +528,8 @@ discipline important, but they are not a prerequisite for this qualification.
 | CALL-SYNTH-7B | gated | Add partial application, named arguments, defaults, and stronger retry/postponement only after 7A and an exact ergonomic consumer. |
 | ALGEBRA-GRADUATE-8 | complete | One exact local `Monoid A` scope now qualifies every direct/transitive parent, positive recursive provider expansion, coherent `Mul` diamond, and the saturated class-aware call under the same immutable artifacts. |
 | MATH-CONSUMER-9 | retired without implementation | The historical `struct_cov_sieve` name was only a parameter-plicity shape inherited from the Cartier review, not an active owner or missing kernel feature. STRUCT-PARAM-1 already qualifies the distinct dependent parameter modes, and ALGEBRA-GRADUATE-8 already supplies the representative Lean-style class consumer. No replacement proxy or mathematical-source edit is justified. |
-| PARAM-ROLES-10A | approved | Add explicit role-pattern synthesis for ground input and semi-output arguments with one or more inferred output arguments, then use it to finish saturated class calls such as Lean's `HAdd α β ?γ`. |
-| PARAM-ROLES-10B | queued after 10A | Add semi-output and premise-driven scheduling over the exact `Coe`/`HasCoerce` consumer, preserving bounded deterministic retry and explicit final Core. |
+| PARAM-ROLES-10A | complete | A separate bounded role-pattern layer now infers output arguments over the unchanged exact ground resolver; saturated calls solve whole distinct output metas, and the HAdd-style direct/call/package acceptance boundary is final-green. |
+| PARAM-ROLES-10B | dependency-ready design | Freeze and implement semi-output and premise-driven scheduling over the exact `Coe`/`HasCoerce` consumer, preserving bounded deterministic retry and explicit final Core. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
 | PACKAGE-12A | complete | The local publishable `@hotdocx/emdash@0.1.0` package now has strict root/authoring/workspace exports, dual browser-safe JavaScript, complete declarations/maps, and a packed-install consumer. No registry mutation occurred. |
 | PACKAGE-12B1 | complete | A token-free two-job GitHub Release workflow now builds and verifies one exact tarball before protected OIDC publication; deterministic release preflight freezes tag/version/repository/package invariants. All local checks are green and no GitHub or npm mutation occurred. |
@@ -2692,12 +2692,68 @@ supersession. The proposal checkpoint is
 `docs: freeze output-parameter synthesis contract`; the implementation
 checkpoint is `feat: infer typeclass output parameters`.
 
+## PARAM-ROLES-10A Completion Record
+
+`PARAM-ROLES-10A` is final-green on 2026-08-09. The implementation preserves
+the v1 all-ground resolver and adds the browser-safe
+`lf_instance_role_synthesis.ts` management layer with profile
+`emdash-lf-instance-role-synthesis-v1`. Its explicit ordered target patterns
+accept meta-free known arguments and holes only at output parameters. Fresh
+candidate-local LF sessions may discover ground outputs, but every selected
+target is delegated back to `synthesizeCoreLfInstance(...)`; seed matching is
+never proof authority. Rank and priority remain explicit, same-group distinct
+output/evidence classes remain ambiguous, stuck and limit evidence blocks
+lower precedence, total fuel/table use is bounded, and reports are canonical,
+portable, deeply frozen, and complete through explicit skipped dispositions.
+
+Class schemas now enforce the Lean-compatible dependency invariant directly
+over the locally nameless parameter telescope: an input or semi-output
+parameter domain cannot depend on an earlier output parameter. The same
+`INVALID_PARAMETER_ROLE_DEPENDENCY` diagnostic is preserved when completed
+parent schema evidence is replayed. This is transfer/management validation;
+it adds no class, role, placeholder, or search node to Core.
+
+The saturated-call profile advances to
+`emdash-lf-class-call-elaboration-v2`. A pending class request is role-ready
+only when every unresolved target occurrence is one whole, distinct session
+meta at an output argument and all input/semi-output arguments are ground.
+The role result is checked against the original call-session target, assigning
+the ordinary output meta before the explicit dictionary meta is solved.
+Nested, repeated, input, semi-output, or otherwise underconstrained metas keep
+the prior inspectable pending/stuck boundary. The static capability record now
+exposes `role-aware-instance-synthesis@emdash-lf-instance-role-synthesis-v1`
+and the v2 class-call profile.
+
+The checked standalone acceptance fixture is deliberately unrelated to the
+active mathematical development. It models Lean's `HAdd A B C` with roles
+`input`, `input`, and `output`; qualifies direct output inference and a
+saturated call, priority-selected distinct outputs, same-group output
+ambiguity, a definitionally equal transparent replay, missing/stuck/limit
+outcomes, malformed input/semi-output holes, dependency rejection, canonical
+replay, deep freeze, and an independent final Core check. No Lambdapi source,
+presheaf/site/scheme mathematics, declaration parser, inductive frontend,
+checker semantics, process-global state, network adapter, or sibling
+repository changed.
+
+Public/package evidence is also exact: the contributor and curated authoring
+barrels export the role layer; the packed `@hotdocx/emdash/authoring` consumer
+loads it through ESM and CommonJS, typechecks it under strict NodeNext, and
+bundles it for a browser. The focused class-schema, synthesis/call, and
+capability run passed 46/46 tests; workspace check, root typecheck, changed-file
+lint, package build, and packed-consumer verification passed. The single
+required shared TypeScript gate then passed 1,566 tests across 236 suites:
+1,512 active passes, 54 intentional skips, and zero failures. It took about
+23.5 minutes and must be carried forward rather than rerun for unchanged
+boundaries. No `check:all`, kernel, print, browser-demo, sibling, publication,
+or deployment gate was run.
+
 ### PARAM-ROLES-10B: semi-output and premise scheduling
 
 The clean Lean baseline has also supplied an exact `Coe`/`HasCoerce` consumer,
-so 10B is no longer consumer-gated. It remains sequenced after 10A because it
-changes provider-telescope scheduling rather than root output matching. Its
-later proposal must specify readiness from non-(semi-)output arguments,
+so 10B is no longer consumer-gated. With 10A complete, 10B is now the next
+dependency-ready local design row; it changes provider-telescope scheduling
+rather than root output matching. Its proposal must specify readiness from
+non-(semi-)output arguments,
 provider-result coverage, premise reordering, retry bounds, cycles, and the
 stable distinction between `output` wildcard matching and `semi-output`
 known-when-available filtering. It may reuse 10A reports and target patterns,
@@ -2722,7 +2778,7 @@ but cannot weaken 10A's explicit checked-Core completion boundary.
 | C-013 | Publish curated packages, not the private root workbench. | Provides stable consumer contracts and avoids exposing internal development barrels. |
 | C-014 | GetPaidX integration is additive and follows local package qualification. | Protects the published/in-review plugin and keeps platform state non-authoritative. |
 | C-015 | Parentful class schemas are explicitly unlowered until inheritance qualification. | Prevents metadata from claiming superclass evidence before C3, sharing, layout, and conversion checks exist. |
-| C-016 | Class roles default to input; output and semi-output are recorded but not interpreted yet. | Keeps ordinary declarations compact while deferring metavariable scheduling to its consumer-gated row. |
+| C-016 | Class roles default to input; output and semi-output activation is partitioned. | Ordinary declarations stay compact; 10A now interprets output holes, while semi-output scheduling remains the distinct 10B row. |
 | C-017 | Direct parent conversions are ordinary transparent definitions; transitive evidence composes direct handles. | Gives computational diamond coherence without extra Core semantics or redundant global providers. |
 | C-018 | Parent-conversion receivers are authoring-level class evidence over explicit Core binders. | Preserves one trusted plicity model while allowing later synthesis to insert dictionaries. |
 | C-019 | Provider registration derives exact telescopes and class heads from checked globals or checked local binders. | Prevents metadata from asserting evidence or types that the explicit-Core checker has not established. |
@@ -2733,14 +2789,14 @@ but cannot weaken 10A's explicit checked-Core completion boundary.
 | C-024 | Search receives and validates the exact Core context, registry, and scope; depth alone never authorizes local evidence. | Makes local dictionaries replay-safe and keeps all accepted evidence independently checkable. |
 | C-025 | Rank and priority form explicit decision groups; all successes in the first decisive group are checked for definitional equivalence. | Provides intentional precedence while retaining strict ambiguity rather than Lean's morally-canonical first-answer heuristic. |
 | C-026 | Ground normalized goals are tabled against exact canonical registry/scope material under depth, table, result-size, fuel, and conversion bounds. | Gives deterministic termination and portable recovery without process heartbeats or fake hashes. |
-| C-027 | The first resolver requires goal-determined ordinary parameters and premise-independent results; output/semi-output scheduling remains later. | Delivers useful recursive synthesis while making every unsupported inference dependency an explicit stuck state. |
+| C-027 | The ground resolver requires goal-determined ordinary parameters and premise-independent results; role scheduling is layered around it. | Output inference now delegates ground targets through that unchanged boundary, while premise-driven and semi-output cases remain explicit 10B work. |
 | C-028 | Expected search outcomes are frozen data; only malformed inputs or violated checked-artifact invariants throw. | AI agents can inspect and revise stable proof-state evidence without parsing exception text. |
 | C-029 | Resolver conversion accepts and fingerprints one explicit reviewed catalog runtime. | Definitional equality of inherited record evidence depends on already checked projection betas; explicit runtime identity keeps this computational evidence reproducible without special cases or hidden global state. |
 | C-030 | Instance-implicit status is explicit binder metadata outside Core plicity. | The checker must preserve one explicit/implicit semantic plicity while management distinguishes ordinary inference from class search. |
 | C-031 | CALL-SYNTH-7A saturates the whole telescope; partial/named/default application is a separate 7B row. | Arbitrary-position evidence insertion and application ergonomics can be reviewed independently, while eta expansion preserves the first semantic envelope. |
-| C-032 | One isolated call session infers ordinary implicits before invoking isolated ground-goal resolvers. | Matches the useful Lean scheduling shape without a hidden mutable synthetic-metavariable service. |
+| C-032 | One isolated call session infers ordinary implicits before invoking isolated ground or role-aware resolvers. | Output metas may now be returned through the explicit 10A bridge without a hidden mutable synthetic-metavariable service. |
 | C-033 | Explicit evidence at an annotated binder bypasses synthesis. | Preserves the standard escape hatch and makes translation/debugging predictable. |
-| C-034 | Expected result refinement may determine ordinary implicits, but synthesis never does. | Supports the common `{A} -> [C A] -> ...` call while retaining the all-arguments-ground resolver boundary. |
+| C-034 | Expected result refinement determines ordinary implicits generally; role synthesis may additionally determine only eligible output-position metas. | Supports both `{A} -> [C A] -> ...` and `HAdd A B ?C` while retaining the exact ground resolver boundary. |
 | C-035 | Call-level search failure is frozen data; malformed application data still throws stable diagnostics. | AI agents need inspectable proof-state transitions without concealing actual source/type errors. |
 | C-036 | Ambient-depth Core serialization is one additive shared inspection utility. | Resolver and call traces need canonical open contextual terms without duplicating the closed serializer or weakening scope validation. |
 | C-037 | Algebraic graduation is an end-to-end assertion over the exact checked fixture, not another runtime wrapper or profile. | The implementation mechanisms were already qualified; one integrated acceptance witness closes the evidence gap without expanding the public or trusted boundary. |
@@ -2758,6 +2814,9 @@ but cannot weaken 10A's explicit checked-Core completion boundary.
 | C-049 | Layer output inference over the unchanged exact ground resolver through explicit role patterns. | Candidate matching may discover a ground target, but only the existing bounded resolver and final checker may establish evidence; no session-local meta becomes portable Core. |
 | C-050 | Preserve rank/priority blockers and strict ambiguity across inferred output targets. | Output inference must not introduce Lean-style first-answer declaration recency into emdash's stronger deterministic evidence policy. |
 | C-051 | Reject non-output parameter types which depend on earlier output parameters. | Replacing output arguments during search is type-correct only when ordinary and semi-output parameter domains do not depend on them. |
+| C-052 | Share fuel and table bounds across seed discovery and all delegated ground searches. | A role report must bound the complete output-discovery operation rather than giving every inferred target a fresh nominal search budget. |
+| C-053 | Integrate only whole, distinct output metas into saturated calls in 10A. | The explicit v1 role pattern carries independent holes, so nested occurrences and repeated-meta equality constraints must remain pending until a later pattern contract represents them honestly. |
+| C-054 | Publish role synthesis through the curated authoring subpath and prove it in the packed consumer. | A source export alone would not establish the AI-workspace distribution boundary across ESM, CommonJS, strict declarations, and browsers. |
 
 ## Validation And Checkpoint Policy
 

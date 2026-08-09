@@ -138,11 +138,18 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                     'priorities, ambiguity, and explicit checked evidence'
             },
             {
+                id: 'role-aware-instance-synthesis',
+                revision: 'emdash-lf-instance-role-synthesis-v1',
+                scope:
+                    'bounded output-parameter inference over exact checked ' +
+                    'ground instance synthesis'
+            },
+            {
                 id: 'class-call-elaboration',
-                revision: 'emdash-lf-class-call-elaboration-v1',
+                revision: 'emdash-lf-class-call-elaboration-v2',
                 scope:
                     'saturated dependent calls with ordinary implicit ' +
-                    'inference and checked instance insertion'
+                    'and output inference plus checked instance insertion'
             },
             {
                 id: 'research-document-binding',

@@ -150,6 +150,7 @@ export * from './lf_class_inheritance';
 export * from './lf_class_inheritance_lowering';
 export * from './lf_instance_scope';
 export * from './lf_instance_synthesis';
+export * from './lf_instance_role_synthesis';
 export * from './lf_class_call_elaboration';
 export * from './lf_transfer_acquisition';
 export * from './scale_stress_1_acquisition';

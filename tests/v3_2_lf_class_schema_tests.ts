@@ -12,7 +12,8 @@ import {
     CoreLfTransferExpression,
     binderMode,
     coreLfClassParameterTerm,
-    declareCoreLfClassSchema
+    declareCoreLfClassSchema,
+    validateCoreLfClassParameterRoleDependencies
 } from '../src/v3_2';
 
 const moduleId = 'fixture.class_schema';
@@ -232,13 +233,17 @@ describe('outer LF class schema metadata', () => {
         const outputRole = declareCoreLfClassSchema({
             expansion,
             parameterRoles: [{
-                parameter: expansion.handle.parameters[0],
+                parameter: expansion.handle.parameters[1],
                 role: 'output'
             }]
         });
         assert.deepEqual(
             outputRole.parameters.map(parameter => parameter.role),
-            ['output', 'input']
+            ['input', 'output']
+        );
+        assert.equal(
+            validateCoreLfClassParameterRoleDependencies(outputRole),
+            outputRole
         );
     });
 
@@ -379,6 +384,17 @@ describe('outer LF class schema metadata', () => {
             'input.parameterRoles[1].parameter'
         );
         throwsSchema(
+            () => declareCoreLfClassSchema({
+                expansion,
+                parameterRoles: [{
+                    parameter: expansion.handle.parameters[0],
+                    role: 'output'
+                }]
+            }),
+            'INVALID_PARAMETER_ROLE_DEPENDENCY',
+            'input.expansion.parameters[1].declaredType'
+        );
+        throwsSchema(
             () => coreLfClassParameterTerm(
                 expansion,
                 foreign.handle.parameters[0]
@@ -427,6 +443,24 @@ describe('outer LF class schema metadata', () => {
             }),
             'DUPLICATE_PARENT',
             'input.directParents[1].parent'
+        );
+        const invalidReplay: CoreLfClassSchema = {
+            ...structuredClone(parent),
+            parameters: parent.parameters.map((parameter, index) => ({
+                ...structuredClone(parameter),
+                role: index === 0 ? 'output' : parameter.role
+            }))
+        };
+        throwsSchema(
+            () => declareCoreLfClassSchema({
+                expansion: childExpansion,
+                directParents: [{
+                    parent: invalidReplay,
+                    arguments: args
+                }]
+            }),
+            'INVALID_PARAMETER_ROLE_DEPENDENCY',
+            'input.directParents[0].parent.parameters[1].declaredType'
         );
     });
 
