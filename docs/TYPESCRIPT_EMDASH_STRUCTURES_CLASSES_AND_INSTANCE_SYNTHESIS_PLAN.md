@@ -5,7 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through SYNTH-SCOPE-5 are final-green; SYNTH-RECURSE-6 is dependency-ready
+through SYNTH-SCOPE-5 are final-green; the SYNTH-RECURSE-6 bounded resolver
+contract is frozen and approved for implementation
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -511,7 +512,7 @@ make explicit local scope discipline especially important.
 | CLASS-INHERIT-4A | complete | Strict C3, canonical inherited identity classes, explicit physical-slot binding/sharing, and conflict-free lookup are implemented as finite frozen metadata, without conversion terms. |
 | CLASS-INHERIT-4B | complete | Transparent direct-parent reconstruction definitions are public and checked; both explicit algebraic diamond routes normalize to one canonical constructor term. |
 | SYNTH-SCOPE-5 | complete | Checked providers and immutable explicit scope ranks are public, focused-green, and qualified by the complete shared TypeScript gate. |
-| SYNTH-RECURSE-6 | dependency-ready | Audit and freeze exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces before implementation. |
+| SYNTH-RECURSE-6 | proposal-approved | Implement the frozen ground-goal, exact-head, tabled resolver with explicit rank/priority groups, bounds, ambiguity, and portable traces. |
 | CALL-SYNTH-7 | pending | Generalize call elaboration to arbitrary class-marked implicit binders. |
 | ALGEBRA-GRADUATE-8 | pending | Qualify the complete algebraic diamond and one recursive provider. |
 | MATH-CONSUMER-9 | pending | Qualify `struct_cov_sieve`, then select one category/Functor/Adjunction consumer. |
@@ -1634,6 +1635,168 @@ changed. No Lambdapi or active-kernel gate is relevant. The immutable proposal
 checkpoint is `1a6d591`; the qualified implementation checkpoint uses the
 frozen message `elaborator: add immutable instance scopes`.
 
+## SYNTH-RECURSE-6 Audit And Frozen Contract
+
+The read-only audit began from qualified scope checkpoint `e8d38be` on
+2026-08-09. It compared the completed provider/scope artifacts with the
+existing finite selector in `lf_dictionary_synthesis.ts`, contextual
+metavariables and transactions in `session.ts`, the public
+`CoreChecker.checkRefinement(...)` boundary used by proof application, the
+combined LF normalization/comparison engine, and Lean's local
+`Meta/SynthInstance.lean` and `Meta/Instances.lean` implementations.
+
+Lean confirms the useful architectural shape: index by class head, instantiate
+one provider telescope with fresh metavariables, unify its result with the
+goal, recursively discharge instance binders, table normalized goals, and use
+explicit resource bounds. Emdash deliberately does not copy Lean's mutable
+environment extension, heartbeat counter, continuation/waiter scheduler,
+metavariable-bearing root goals, output-parameter heuristics, or
+"morally canonical" first-answer optimization. The first emdash resolver has
+ground goals and immutable inputs, so a deterministic depth-first table is
+sufficient, and distinct evidence remains ambiguous unless checked
+definitionally equal.
+
+The selected additive implementation module is
+`src/v3_2/lf_instance_synthesis.ts`. Its exact contract is:
+
+1. `synthesizeCoreLfInstance(...)` accepts one checked mixed-declaration base,
+   an exact `CoreContext` over that base, one completed target-class layout,
+   one target Core type, one immutable provider registry, its exact immutable
+   scope snapshot, and optional explicit limits. There is no environment
+   enumeration, process registry, callback, filesystem read, network request,
+   parser case, workspace mutation, or Lambdapi execution.
+2. The resolver reconstructs the registry and scope through their public
+   validators and requires byte-identical canonical serialization, exact
+   registry revision/provider inventory, and `scope.contextDepth ===
+   context.depth`. It rejects a context from another Core declaration
+   environment. Every activated provider term is rechecked against its stored
+   type in that exact context before search; local evidence therefore cannot
+   be replayed merely because another context has the same depth.
+3. The root target is checked as a meta-free type in the supplied context.
+   Its completed layout supplies the stable class identity, parameter count,
+   roles, and expected carrier declaration. Recursive goals use the already
+   checked premise-class metadata. Every goal must have the exact installed
+   free Core head linked to its stable class ID and the exact parameter count
+   and plicities. A transparent alias is not silently treated as a second
+   class identity.
+4. This is the all-arguments-ground profile. Input, output, and semi-output
+   role labels remain in goal/provider evidence, but every goal argument must
+   already be meta-free. The resolver assigns no caller metavariable and does
+   not interpret output or semi-output scheduling; that remains
+   `PARAM-ROLES-10`.
+5. Scope candidates are indexed only by the exact stable result-class
+   reference and checked Core head. The existing scope order remains
+   authoritative: ascending lexical/named/ambient rank, then descending
+   numeric priority, then stable provider ID for deterministic traversal and
+   diagnostics. Provider ID never resolves an ambiguity.
+6. Each candidate attempt gets a fresh `CoreLfChecker` and session with the
+   requested comparison limit. The resolver creates one contextual meta for
+   every provider Pi binder, builds one ordinary explicit Core application,
+   and calls the existing public `checkRefinement(...)` boundary to constrain
+   the provider result against the ground goal while retaining premise metas.
+   No generic checker/session API or trusted Core rule changes.
+7. After result matching, every ordinary-parameter meta must already be
+   solved by the ground goal. Instance-premise metas must remain unsolved, and
+   the provider result class application must not depend on instance-evidence
+   binders. A premise is then resolved in its recorded telescope order after
+   zonking prior ordinary and premise solutions. An underconstrained ordinary
+   parameter, a premise target that is not ground when scheduled, or a result
+   that depends on premise evidence is a stable `stuck` candidate, not a
+   heuristic assignment.
+8. Provider binders may be interleaved: later ordinary parameters are allowed
+   when the result match already determines them. This row does not infer an
+   ordinary parameter from a recursively synthesized premise and does not
+   reorder premises using output/semi-output roles. Those stronger Lean-style
+   scheduling cases remain consumer-gated with `PARAM-ROLES-10`.
+9. A recursively solved premise is checked against its exact zonked meta type
+   before assignment. Once every premise is filled, the candidate application
+   is zonked to meta-free explicit Core and passes an ordinary final
+   `checker.check(context, term, goal)` boundary. A term that cannot pass this
+   boundary is invalid provider evidence and never becomes a synthesis
+   answer.
+10. The table key is the stable class reference plus canonical serialization
+    of the fully combined-normalized, meta-free goal and the exact canonical
+    registry/scope serialization material. No collision-prone ad hoc or
+    caller-asserted hash is used. Goal records receive stable first-discovery
+    ordinals, and table hits and active-stack cycle edges are explicit in the
+    trace.
+11. A cycle is finite failure for that candidate edge, not coinductive
+    evidence and not a process exception. Alternative acyclic candidates at
+    the same or later precedence groups are still explored. A goal with only
+    finitely failed/cyclic branches is `missing`; its trace retains every
+    cycle edge.
+12. Candidate decisions are made by exact `(rank, priority)` groups. A group
+    is examined completely before a success is accepted. Finite failures
+    permit the next group. A stuck, nested-ambiguous, or limit-exceeded branch
+    in a group that could still affect the choice blocks all lower-precedence
+    groups; limit-exceeded takes precedence over ambiguity, which takes
+    precedence over stuck.
+13. Multiple successful terms in the first decisive group are compared with
+    the same bounded combined LF definitional equality. Definitionally equal
+    answers form one evidence class; this is how the already qualified
+    algebraic diamond may collapse to one canonical answer. Stable provider
+    order chooses only the representative of that equal class. Two
+    non-definitionally-equal classes are `ambiguous`. A comparison that
+    exhausts its bound is `limit-exceeded`, never a silent choice.
+14. Normal successful results are tabled with their explicit term and
+    provider-application size. The default complete limits are `maxDepth: 32`,
+    `maxTableEntries: 256`, `maxResultSize: 128`, `maxFuel: 4096`, and the
+    existing LF comparison limit `256`. All are caller-overridable
+    nonnegative safe integers. Root depth is zero; each recursive premise adds
+    one. Result size counts provider applications, and one fuel unit is spent
+    per candidate attempt. There is no wall-clock or host-heartbeat oracle.
+15. Public search is a deeply frozen discriminated outcome:
+    `solved | missing | stuck | ambiguous | limit-exceeded`. `solved` carries
+    the meta-free checked term, exact target type, selected provider, result
+    size, and report. Expected search failure is data rather than an exception.
+    Invalid inputs and broken checked-artifact invariants throw
+    `CoreLfInstanceSynthesisError` with one of `INVALID_INPUT`,
+    `INVALID_CONTEXT`, `INVALID_TARGET`, `INVALID_LIMITS`, `INVALID_REGISTRY`,
+    `INVALID_SCOPE`, `INVALID_PROVIDER`, `INVALID_CLASS_HEAD`,
+    `NON_PORTABLE_DATA`, or `INTERNAL_INVARIANT`.
+16. The report contains the normalized target, complete limits and usage,
+    exact registry/scope fingerprint material, stable goal-table records,
+    every exact-head candidate attempt, ordinary-argument solutions, premise
+    edges with expanded/table-hit/cycle disposition, rank/priority decisions,
+    equivalent-success classes, skipped lower groups, and the final outcome.
+    `serializeCoreLfInstanceSynthesisReport(...)` uses the existing canonical
+    browser-safe JSON encoder. The report contains strings and immutable data,
+    never checker/session/table objects or unresolved metas.
+17. The existing `synthesizeCoreLfGlobalDictionary(...)` remains unchanged as
+    the qualified finite exact-global helper. The new resolver does not yet
+    walk arbitrary call binders, persist synthesis requests in workspace
+    source, synthesize omitted arguments from text syntax, expose an external
+    Elpi engine, or change Core, runtime/proof rules, class layouts,
+    Lambdapi/emdash, `emdash2/`, or sibling repositories. Those remain
+    `CALL-SYNTH-7`, AI-SYNTH-1B2B, later optional adapters, or explicit
+    cross-repository rows.
+
+The focused corpus will use the checked algebraic fixture and cover direct
+local/global selection, exact rank and priority preemption, recursive direct-
+superclass search, table reuse, both `Monoid -> Mul` diamond routes collapsing
+by definitional equality, genuinely distinct same-group ambiguity, missing
+evidence, self/mutual cycles with and without an acyclic base, underconstrained
+ordinary parameters, interleaved but goal-determined ordinary binders, nested
+ambiguity/stuck propagation, every independent limit, JSON-replayed registry
+and scope determinism, final explicit-Core rechecking, input immutability, deep
+freeze, canonical report serialization, and every frozen invalid-input family.
+
+The proposal gate `H-TS-EMDASH-CLASSES-SYNTH-RECURSE-6-006` is approved under
+the user-authorized unattended-review delegation, with immediate human
+supersession. Implementation begins only after a documentation-only proposal
+checkpoint. The new module and focused suite enter the public v3.2 barrel and
+root runner only with their final bounded surface. Proportional qualification
+is the dedicated suite, the nearest class/scope/dictionary/capability matrix,
+workspace check, TypeScript typecheck, changed-file lint, canonical diff and
+forbidden-effect checks, plus one final `check:ts` because the public barrel and
+runner are shared boundaries. The 1,546-test SYNTH-SCOPE-5 aggregate is not
+rerun during implementation; another complete run occurs only once against
+the final recursive-synthesis boundary.
+
+The proposed checkpoint message is
+`docs: freeze bounded instance resolver contract`. The implementation
+checkpoint message is `elaborator: add bounded recursive instance synthesis`.
+
 ## Decision Ledger
 
 | ID | Decision | Rationale |
@@ -1660,6 +1823,12 @@ frozen message `elaborator: add immutable instance scopes`.
 | C-020 | Lexical frames are explicit precedence ranks; opened named scopes share one rank; imported and current globals share one ambient rank. | Preserves meaningful lexical shadowing while rejecting hidden import/open/declaration-recency choice. |
 | C-021 | Equal-priority candidates at one rank remain distinct and visible. | Stable IDs order evidence and diagnostics but never turn a real ambiguity into an implicit choice. |
 | C-022 | Provider registries and scopes use canonical JSON as fingerprint material and preserve exact import pins without computing hashes. | Keeps the first scope layer browser-safe, portable, and honest about its acquisition boundary. |
+| C-023 | Recursive candidate matching reuses fresh isolated LF checker sessions and public `checkRefinement`, then ends at ordinary `check`. | Reuses qualified generic metavariable machinery without changing the trusted checker or leaking branch assignments. |
+| C-024 | Search receives and validates the exact Core context, registry, and scope; depth alone never authorizes local evidence. | Makes local dictionaries replay-safe and keeps all accepted evidence independently checkable. |
+| C-025 | Rank and priority form explicit decision groups; all successes in the first decisive group are checked for definitional equivalence. | Provides intentional precedence while retaining strict ambiguity rather than Lean's morally-canonical first-answer heuristic. |
+| C-026 | Ground normalized goals are tabled against exact canonical registry/scope material under depth, table, result-size, fuel, and conversion bounds. | Gives deterministic termination and portable recovery without process heartbeats or fake hashes. |
+| C-027 | The first resolver requires goal-determined ordinary parameters and premise-independent results; output/semi-output scheduling remains later. | Delivers useful recursive synthesis while making every unsupported inference dependency an explicit stuck state. |
+| C-028 | Expected search outcomes are frozen data; only malformed inputs or violated checked-artifact invariants throw. | AI agents can inspect and revise stable proof-state evidence without parsing exception text. |
 
 ## Validation And Checkpoint Policy
 

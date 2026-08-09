@@ -24,8 +24,13 @@
 > priority candidates remain visible for later ambiguity analysis. Its one
 > required shared-boundary aggregate passed 1,546 tests across 232 suites:
 > 1,492 active passes, 54 intentional skips, and zero failures. Recursive
-> resolution remains a separate row; `SYNTH-RECURSE-6` is dependency-ready
-> and begins with a read-only audit and frozen proposal. The continuation
+> resolution remains a separate row. The `SYNTH-RECURSE-6` audit is complete
+> and its bounded ground-goal resolver contract is approved: fresh isolated
+> checker sessions will reuse `checkRefinement`, recursively fill premise
+> metas under an immutable table, compare same-group successes by checked
+> definitional equality, and end at ordinary explicit-Core checking. The
+> resolver has explicit depth/table/result-size/fuel/conversion bounds and
+> portable solved/missing/stuck/ambiguous/limit traces. The continuation
 > adds no declaration parser, general
 > inductive frontend, class/Core node, or production Lambdapi dependency.
 >
