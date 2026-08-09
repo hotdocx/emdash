@@ -5,13 +5,13 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through ALGEBRA-GRADUATE-8 and PACKAGE-12A are final-green; MATH-CONSUMER-9 is
-retired without implementation after its stale consumer was reconciled with
-the existing acceptance evidence; remaining call ergonomics, parameter-role
-inference, and standard-library rows stay consumer-gated; registry ownership,
-bootstrap publication, and hosted integration remain gated; PACKAGE-12B1 is
-the next approved local release-engineering tranche, while PACKAGE-12B2 and
-HOSTED-13 remain external-action gates requiring separate authorization
+through ALGEBRA-GRADUATE-8 and PACKAGE-12A/12B1 are final-green;
+MATH-CONSUMER-9 is retired without implementation after its stale consumer
+was reconciled with the existing acceptance evidence; remaining call
+ergonomics, parameter-role inference, and standard-library rows stay
+consumer-gated; registry ownership, bootstrap publication, and hosted
+integration remain gated; PACKAGE-12B2 and HOSTED-13 are external-action
+gates requiring separate authorization
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -530,7 +530,7 @@ discipline important, but they are not a prerequisite for this qualification.
 | PARAM-ROLES-10 | gated | Add output/semi-output and stuck/resume only after an exact consumer audit. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
 | PACKAGE-12A | complete | The local publishable `@hotdocx/emdash@0.1.0` package now has strict root/authoring/workspace exports, dual browser-safe JavaScript, complete declarations/maps, and a packed-install consumer. No registry mutation occurred. |
-| PACKAGE-12B1 | approved | Add a token-free, provenance-ready GitHub release workflow, exact-tarball handoff, and deterministic tag/version/repository preflight. It must be locally reviewable and must not mutate GitHub or npm. |
+| PACKAGE-12B1 | complete | A token-free two-job GitHub Release workflow now builds and verifies one exact tarball before protected OIDC publication; deterministic release preflight freezes tag/version/repository/package invariants. All local checks are green and no GitHub or npm mutation occurred. |
 | PACKAGE-12B2 | external action gated | After explicit authorization, perform one provenance-bearing first publish from a GitHub-hosted runner, configure exact-workflow npm trust, remove/revoke bootstrap credentials, disallow token publication, and verify the public artifact. |
 | HOSTED-13 | gated | Add compatible GetPaidX template/API adapters and Arrowgram consumption only after the required package version is public and its npm trust boundary is recorded. |
 
@@ -2528,6 +2528,66 @@ Official references used for this time-sensitive audit:
 - <https://docs.npmjs.com/staged-publishing/>
 - <https://docs.github.com/en/actions/reference/security/oidc>
 
+## PACKAGE-12B1 Completion Record
+
+`PACKAGE-12B1` is final-green on 2026-08-09. The stable
+`.github/workflows/npm-publish.yml` reacts only to a published GitHub Release
+whose tag begins `emdash-v`. Its unprivileged build job checks out that exact
+tag, proves the tagged commit is on public `main`, validates the exact
+tag/package/repository identity, installs the frozen contributor workspace,
+and builds, packs, and verifies one tarball. The job records that artifact's
+filename, package version, and SHA-256 before transferring it through
+immutable pinned GitHub artifact actions.
+
+The separate publish job alone enters the protected `npm-release` environment
+and receives `id-token: write`. It downloads the already verified artifact,
+checks the recorded digest, installs the reviewed npm 11.19.0 client, rejects
+an already published version, and publishes those exact bytes with public
+access and provenance. The stable workflow contains no npm token, secret
+reference, push trigger, pull-request trigger, manual trigger, version
+mutation, or publish-time repack. All four third-party actions use the exact
+commits frozen by the PACKAGE-12B audit.
+
+The package manifest now records public provenance. The packed-install
+verifier retains its ordinary temporary-pack mode and adds an explicit
+`--tarball` mode so the build and publish jobs do not qualify different
+artifacts. Both paths inventory the actually installed package and run the
+same ESM, CommonJS, strict NodeNext, and browser consumers. The new release
+preflight freezes the exact public name/version/tag relation, repository,
+license, engine, runtime and declaration entries, export conditions, file
+roots, public/provenance settings, and absence of scripts, `bin`, or any npm
+runtime/optional/peer/bundled dependency surface. Expected drift fails with a
+stable coded diagnostic; the CLI emits a compact immutable release record.
+
+Final proportional qualification evidence:
+
+- workflow YAML syntax and structural audit: passed; the focused static test
+  proves the two-job order, single publish-job OIDC authority, exact action
+  pins, same-tarball handoff, ancestry/preflight checks, pinned npm client,
+  provenance publish command, and absence of token/secret or broad triggers;
+- `./scripts/pnpmw run package:release:check`: three tests passed, covering
+  the exact accepted identity, manifest/tag/repository drift, and workflow
+  authority/transport invariants;
+- `./scripts/pnpmw run workspace:check`, root typecheck, direct Node syntax
+  checks, changed-tool ESLint, exact diff, and whitespace checks: passed;
+- `./scripts/pnpmw run package:check`: passed through the ordinary temporary
+  pack, installed ESM/CommonJS, strict NodeNext declarations, and browser
+  bundle; and
+- a separate workflow-shaped explicit-file pack verified the same tarball in
+  `--tarball` mode, inspected the public/provenance manifest, returned the
+  exact `emdash-v0.1.0` preflight record, and contained the same 116 reviewed
+  package entries.
+
+PACKAGE-12A's sole required 1,560-test shared TypeScript aggregate is carried
+forward: 12B1 changes release-only scripts, checks, manifest publication
+metadata, and workflow configuration, not a public source entry, declaration,
+runtime/checker behavior, workspace member, or TypeScript test. No
+`check:ts`, `check:all`, kernel, print, browser-demo, sibling-repository,
+registry-authentication, merge, push, tag, GitHub Release/environment/secret,
+npm publication/trust/access, deployment, or hosted-template action was run.
+The first publish and trust hardening therefore remain PACKAGE-12B2, exactly
+as frozen above.
+
 ## Decision Ledger
 
 | ID | Decision | Rationale |
@@ -2578,6 +2638,7 @@ Official references used for this time-sensitive audit:
 | C-044 | Build and verify one tarball in an unprivileged job, then publish those exact bytes from a separate protected OIDC job. | This minimizes token/OIDC authority, permits an environment review after build evidence exists, and prevents publish-time repacking drift. |
 | C-045 | Use exact `emdash-v<version>` GitHub Releases and immutable action pins; never mutate package versions in CI. | The repository has unrelated book/site release concerns, while deterministic tag/package/repository checks make provenance and rollback evidence unambiguous. |
 | C-046 | Permit a provenance-bearing hosted token fallback only for the first version, then remove/revoke it and disallow token publishing. | A first package must be bootstrapped before npm trust can exist; subsequent versions should use short-lived exact-workflow OIDC only. |
+| C-047 | Make the release preflight fail closed over exact entries/exports and every npm install-time dependency, script, and CLI field. | Publication metadata is executable consumer behavior; a locally green build must not silently acquire a peer, optional, bundled, hook, or binary surface at release time. |
 
 ## Validation And Checkpoint Policy
 

@@ -81,14 +81,22 @@
 > failures. Registry authentication/ownership, provenance automation,
 > publication, CLI, stdlib, hosted templates, and sibling-repository
 > integration remain later gates and separate actions.
-> The subsequent registry audit partitions the next boundary. PACKAGE-12B1 is
-> an approved local-only release-engineering tranche: exact release
-> tag/version preflight, one verified tarball, and a token-free protected OIDC
-> workflow. PACKAGE-12B2 remains an external-action gate because npm requires
-> a brand-new package to exist before trusted-publisher configuration or
-> staged publishing; its provenance-bearing first publish, trust setup,
-> credential hardening, merge/push/tag/release, and npm/GitHub mutations all
-> require separate authorization.
+> `PACKAGE-12B1` is now final-green. The token-free two-job GitHub Release
+> workflow validates the exact `emdash-v<version>` tag and public-main
+> ancestry, builds and consumer-checks one tarball without OIDC authority,
+> transfers its filename/version/SHA-256 through pinned artifact actions, and
+> gives only the protected publish job `id-token: write`. Deterministic
+> preflight freezes the repository and public package/export boundary and
+> rejects scripts, CLI metadata, and every runtime/optional/peer/bundled
+> dependency surface. The ordinary and explicit-tarball package consumers,
+> workflow audit, workspace check, typecheck, and changed-tool lint all pass;
+> the prior 1,560-test aggregate is carried forward because no shared
+> TypeScript boundary changed. No remote mutation occurred. `PACKAGE-12B2`
+> remains an external-action gate because npm requires a brand-new package to
+> exist before trusted-publisher configuration or staged publishing; its
+> provenance-bearing first publish, trust setup, credential hardening,
+> merge/push/tag/release, and npm/GitHub mutations all require separate
+> authorization.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)

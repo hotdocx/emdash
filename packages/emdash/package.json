@@ -54,7 +54,8 @@
     "directory": "packages/emdash"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "devDependencies": {
     "esbuild": "0.21.5",

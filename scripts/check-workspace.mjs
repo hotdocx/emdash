@@ -103,7 +103,11 @@ assert.equal(
   undefined,
   'the browser-safe emdash core must have no runtime package dependency',
 );
-assert.equal(emdashPackage.publishConfig?.access, 'public');
+assert.deepEqual(
+  emdashPackage.publishConfig,
+  { access: 'public', provenance: true },
+  'the public package must retain its exact reviewed publication policy',
+);
 assert.deepEqual(
   Object.keys(emdashPackage.exports),
   ['.', './authoring', './workspace', './package.json'],

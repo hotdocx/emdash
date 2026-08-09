@@ -1,0 +1,125 @@
+name: Publish emdash package to npm
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-emdash-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: startsWith(github.event.release.tag_name, 'emdash-v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      artifact_name: ${{ steps.package.outputs.artifact_name }}
+      filename: ${{ steps.package.outputs.filename }}
+      sha256: ${{ steps.package.outputs.sha256 }}
+      version: ${{ steps.package.outputs.version }}
+    steps:
+      - name: Checkout exact release tag
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Verify tag ancestry and release identity
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$(git rev-parse "${RELEASE_TAG}^{commit}")"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          git merge-base --is-ancestor HEAD refs/remotes/origin/main
+          node packages/emdash/scripts/release-preflight.mjs \
+            --tag "$RELEASE_TAG" \
+            --repository "$GITHUB_REPOSITORY"
+
+      - name: Install frozen contributor workspace
+        run: ./scripts/pnpmw install --frozen-lockfile
+
+      - name: Check and build package
+        run: |
+          set -euo pipefail
+          ./scripts/pnpmw run workspace:check
+          ./scripts/pnpmw run typecheck
+          ./scripts/pnpmw run package:release:check
+          ./scripts/pnpmw run package:build
+
+      - name: Pack and verify exact release tarball
+        id: package
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          set -euo pipefail
+          version="${RELEASE_TAG#emdash-v}"
+          filename="hotdocx-emdash-${version}.tgz"
+          artifact_name="emdash-npm-${version}"
+          tarball="$RUNNER_TEMP/$filename"
+          ./scripts/pnpmw --dir packages/emdash pack --out "$tarball"
+          node packages/emdash/scripts/verify-packed-install.mjs \
+            --tarball "$tarball"
+          sha256="$(sha256sum "$tarball" | cut -d ' ' -f 1)"
+          echo "artifact_name=$artifact_name" >> "$GITHUB_OUTPUT"
+          echo "filename=$filename" >> "$GITHUB_OUTPUT"
+          echo "sha256=$sha256" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          git diff --exit-code
+
+      - name: Upload exact package artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ steps.package.outputs.artifact_name }}
+          path: ${{ runner.temp }}/${{ steps.package.outputs.filename }}
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: npm-release
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Download verified package artifact
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
+        with:
+          name: ${{ needs.build.outputs.artifact_name }}
+          path: ${{ runner.temp }}/emdash-package
+
+      - name: Set up Node and npm registry
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+          registry-url: https://registry.npmjs.org
+
+      - name: Verify and publish exact artifact
+        env:
+          EXPECTED_SHA256: ${{ needs.build.outputs.sha256 }}
+          PACKAGE_FILENAME: ${{ needs.build.outputs.filename }}
+          PACKAGE_VERSION: ${{ needs.build.outputs.version }}
+        run: |
+          set -euo pipefail
+          tarball="$RUNNER_TEMP/emdash-package/$PACKAGE_FILENAME"
+          test "$EXPECTED_SHA256" = "$(sha256sum "$tarball" | cut -d ' ' -f 1)"
+          npm install --global npm@11.19.0 --ignore-scripts
+          test "$(npm --version)" = "11.19.0"
+          if npm view "@hotdocx/emdash@$PACKAGE_VERSION" version >/dev/null 2>&1; then
+            echo "Refusing to republish @hotdocx/emdash@$PACKAGE_VERSION" >&2
+            exit 1
+          fi
+          npm publish "$tarball" --access public --provenance

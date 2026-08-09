@@ -3,13 +3,17 @@ import { execFileSync } from 'node:child_process';
 import {
   mkdir,
   mkdtemp,
+  readdir,
   readFile,
   rm,
+  stat,
   writeFile,
 } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { validateEmdashNpmReleasePreflight } from './release-preflight.mjs';
 
 const packageRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -17,6 +21,25 @@ const packageRoot = path.resolve(
 );
 const repositoryRoot = path.resolve(packageRoot, '..', '..');
 const pnpmWrapper = path.join(repositoryRoot, 'scripts', 'pnpmw');
+
+const arguments_ = process.argv.slice(2);
+let suppliedTarball;
+if (arguments_.length > 0) {
+  if (
+    arguments_.length !== 2 ||
+    arguments_[0] !== '--tarball' ||
+    arguments_[1].length === 0
+  ) {
+    throw new Error(
+      'Usage: verify-packed-install.mjs [--tarball /absolute/package.tgz]',
+    );
+  }
+  suppliedTarball = path.resolve(arguments_[1]);
+  const tarballStat = await stat(suppliedTarball);
+  if (!tarballStat.isFile()) {
+    throw new Error(`Supplied tarball is not a file: ${suppliedTarball}`);
+  }
+}
 
 const run = (command, args, cwd, capture = false) => execFileSync(
   command,
@@ -34,28 +57,91 @@ const temporaryRoot = await mkdtemp(
 const tarballDirectory = path.join(temporaryRoot, 'tarballs');
 const consumerDirectory = path.join(temporaryRoot, 'consumer');
 
+const collectPackageFiles = async (root, relative = '') => {
+  const files = [];
+  const entries = await readdir(path.join(root, relative), {
+    withFileTypes: true,
+  });
+  for (const entry of entries) {
+    const entryRelative = relative
+      ? path.posix.join(relative, entry.name)
+      : entry.name;
+    if (entry.isDirectory()) {
+      files.push(...await collectPackageFiles(root, entryRelative));
+    } else if (entry.isFile()) {
+      files.push(entryRelative);
+    } else {
+      throw new Error(
+        `Packed package contains unsupported entry ${entryRelative}`,
+      );
+    }
+  }
+  return files;
+};
+
 try {
-  await mkdir(tarballDirectory);
   await mkdir(consumerDirectory);
 
-  const packOutput = run(
+  let tarball = suppliedTarball;
+  if (!tarball) {
+    await mkdir(tarballDirectory);
+    const packOutput = run(
+      pnpmWrapper,
+      [
+        '--dir',
+        packageRoot,
+        'pack',
+        '--json',
+        '--pack-destination',
+        tarballDirectory,
+      ],
+      repositoryRoot,
+      true,
+    );
+    const packed = JSON.parse(packOutput);
+    const packedRecord = Array.isArray(packed) ? packed[0] : packed;
+    tarball = path.resolve(
+      tarballDirectory,
+      packedRecord.filename ?? packedRecord.path,
+    );
+  }
+
+  await writeFile(
+    path.join(consumerDirectory, 'package.json'),
+    `${JSON.stringify({
+      name: 'emdash-packed-install-smoke',
+      private: true,
+      type: 'module',
+    }, null, 2)}\n`,
+  );
+  run(
     pnpmWrapper,
     [
       '--dir',
-      packageRoot,
-      'pack',
-      '--json',
-      '--pack-destination',
-      tarballDirectory,
+      consumerDirectory,
+      'add',
+      '--ignore-scripts',
+      '--offline',
+      tarball,
     ],
     repositoryRoot,
-    true,
   );
-  const packed = JSON.parse(packOutput);
-  const packedRecord = Array.isArray(packed) ? packed[0] : packed;
-  const packedFiles = new Set(
-    packedRecord.files.map((file) => file.path),
+
+  const installedRoot = path.join(
+    consumerDirectory,
+    'node_modules',
+    '@hotdocx',
+    'emdash',
   );
+  const installedManifest = JSON.parse(
+    await readFile(path.join(installedRoot, 'package.json'), 'utf8'),
+  );
+  const packedFiles = new Set(await collectPackageFiles(installedRoot));
+  validateEmdashNpmReleasePreflight({
+    manifest: installedManifest,
+    repository: 'hotdocx/emdash',
+    tag: `emdash-v${installedManifest.version}`,
+  });
   for (const requiredFile of [
     'dist/index.js',
     'dist/index.cjs',
@@ -97,41 +183,6 @@ try {
       `packed package leaked forbidden declaration ${file}`,
     );
   }
-  const tarball = path.resolve(
-    tarballDirectory,
-    packedRecord.filename ?? packedRecord.path,
-  );
-
-  await writeFile(
-    path.join(consumerDirectory, 'package.json'),
-    `${JSON.stringify({
-      name: 'emdash-packed-install-smoke',
-      private: true,
-      type: 'module',
-    }, null, 2)}\n`,
-  );
-  run(
-    pnpmWrapper,
-    [
-      '--dir',
-      consumerDirectory,
-      'add',
-      '--ignore-scripts',
-      '--offline',
-      tarball,
-    ],
-    repositoryRoot,
-  );
-
-  const installedRoot = path.join(
-    consumerDirectory,
-    'node_modules',
-    '@hotdocx',
-    'emdash',
-  );
-  const installedManifest = JSON.parse(
-    await readFile(path.join(installedRoot, 'package.json'), 'utf8'),
-  );
   assert.equal(installedManifest.name, '@hotdocx/emdash');
   assert.equal(installedManifest.version, '0.1.0');
   assert.equal(

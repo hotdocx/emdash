@@ -17,6 +17,7 @@
     "workspace:check": "node scripts/check-workspace.mjs",
     "package:build": "node packages/emdash/scripts/build-js.mjs && ./node_modules/.bin/tsc -p packages/emdash/tsconfig.build.json",
     "package:check": "./scripts/pnpmw run package:build && node packages/emdash/scripts/verify-packed-install.mjs",
+    "package:release:check": "node --test packages/emdash/scripts/release-preflight-tests.mjs",
     "check:ts": "./scripts/pnpmw run workspace:check && ./scripts/pnpmw run typecheck && ./scripts/pnpmw run lint && ./scripts/pnpmw test",
     "check:conformance": "timeout 60s env EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test tests/v3_2_differential_owner_tests.ts tests/v3_2_differential_rule_tests.ts tests/v3_2_differential_higher_cell_tests.ts",
     "check:directed-conformance": "timeout 60s env EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test tests/v3_2_directed_1c_tests.ts",

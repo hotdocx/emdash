@@ -183,6 +183,7 @@ Distributable TypeScript/emdash package:
 ```bash
 ./scripts/pnpmw run package:build
 ./scripts/pnpmw run package:check
+./scripts/pnpmw run package:release:check
 ```
 
 Active Lambdapi workspace, from the Git root:
