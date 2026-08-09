@@ -1,18 +1,16 @@
 # TypeScript/emdash Structures, Classes, And Instance Synthesis Plan
 
-Date: 2026-08-08
+Date: 2026-08-09
 
 Plan-ID: TS-EMDASH-CLASSES
 
-Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through PARAM-ROLES-10B and PACKAGE-12A/12B1 are final-green;
+Status: local structures/classes/synthesis implementation envelope complete;
+STRUCT-PARAM-1 through PARAM-ROLES-10B and PACKAGE-12A/12B1 are final-green;
 MATH-CONSUMER-9 is retired without implementation after its stale consumer
-was reconciled with the existing acceptance evidence; no further local row is
-currently dependency-ready because remaining call ergonomics and
-standard-library rows stay consumer-gated;
-registry ownership, bootstrap publication, and hosted integration remain
-gated; PACKAGE-12B2 and HOSTED-13 are external-action gates requiring separate
-authorization
+was reconciled with the existing acceptance evidence; the post-10B closure
+audit found no further dependency-ready local row and records exact consumer,
+semantic-profile, publication, and authorization prerequisites for every
+remaining item; PACKAGE-12B2 and HOSTED-13 remain external-action gates
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -519,18 +517,21 @@ discipline important, but they are not a prerequisite for this qualification.
 | ARCH-0 | complete | Architecture, comparison target, trust boundary, non-goals, and acceptance corpus recorded here. |
 | STRUCT-PARAM-1 | complete | The existing macro now has dependent parameter telescopes and explicit carrier/constructor/projection modes while preserving unparameterized declarations, rules, order, and emission. |
 | STRUCT-NAMED-2 | complete | Stable owner-aware handles and order-independent named parameter/field assignments now lower to one deeply frozen ordinary constructor call. |
+| STRUCT-ERGONOMICS-2B | deferred behind an exact record consumer | Add field defaults or record-update lowering only when a checked source needs them; the result must remain an explicit named-construction/constructor term and must not change Core. |
 | CLASS-SCHEMA-3 | complete | Serializable class, parameter-role, declared-method, and ordered-parent metadata is public; every parentful schema is explicitly marked unlowered. |
 | CLASS-INHERIT-4A | complete | Strict C3, canonical inherited identity classes, explicit physical-slot binding/sharing, and conflict-free lookup are implemented as finite frozen metadata, without conversion terms. |
 | CLASS-INHERIT-4B | complete | Transparent direct-parent reconstruction definitions are public and checked; both explicit algebraic diamond routes normalize to one canonical constructor term. |
 | SYNTH-SCOPE-5 | complete | Checked providers and immutable explicit scope ranks are public, focused-green, and qualified by the complete shared TypeScript gate. |
 | SYNTH-RECURSE-6 | complete | The bounded exact-head resolver is public and final-green with recursive premises, tables, explicit bounds, ambiguity, runtime-backed definitional equality, and portable traces. |
 | CALL-SYNTH-7A | complete | Saturated binder walking, ordinary implicit inference, arbitrary annotated instance positions, delayed ground synthesis, stable failure data, and final explicit-Core checking are public and final-green. |
-| CALL-SYNTH-7B | gated | Add partial application, named arguments, defaults, and stronger retry/postponement only after 7A and an exact ergonomic consumer. |
+| CALL-SYNTH-7B | deferred behind an exact call consumer | Add only the demonstrated subset of partial application, named arguments, call defaults, or stronger retry/postponement after a checked consumer exposes a limitation of saturated calls and explicit eta expansion. |
+| DEFAULT-INSTANCE-7C | deferred behind an exact defaulting consumer | Define a separate finalization-time fallback policy only when an underconstrained checked call genuinely requires a Lean-style default instance; ordinary providers and priorities must not acquire hidden default semantics. |
+| COERCION-INSERTION-7D | deferred behind an exact term consumer | Define expected-type-driven insertion of an explicit checked coercion application only when a real term consumer requires it; the 10B `HasCoerce` fixture establishes premise scheduling, not automatic coercion insertion. |
 | ALGEBRA-GRADUATE-8 | complete | One exact local `Monoid A` scope now qualifies every direct/transitive parent, positive recursive provider expansion, coherent `Mul` diamond, and the saturated class-aware call under the same immutable artifacts. |
 | MATH-CONSUMER-9 | retired without implementation | The historical `struct_cov_sieve` name was only a parameter-plicity shape inherited from the Cartier review, not an active owner or missing kernel feature. STRUCT-PARAM-1 already qualifies the distinct dependent parameter modes, and ALGEBRA-GRADUATE-8 already supplies the representative Lean-style class consumer. No replacement proxy or mathematical-source edit is justified. |
 | PARAM-ROLES-10A | complete | A separate bounded role-pattern layer now infers output arguments over the unchanged exact ground resolver; saturated calls solve whole distinct output metas, and the HAdd-style direct/call/package acceptance boundary is final-green. |
 | PARAM-ROLES-10B | complete | The exact ground resolver now schedules provider premises by input readiness, uses output-wildcard/semi-output-filter role patterns under shared bounds, and qualifies normal and textually reversed standalone `HasCoerce` chains with explicit final Core. |
-| STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
+| STDLIB-11 | deferred behind exact semantic/profile and package prerequisites | Select and approve the first active curated artifact profile before packaging it; resolve the recorded generated-owner/stress-profile decisions, choose a source- and digest-pinned corpus, and establish the public base-package trust boundary before a separate stdlib release. |
 | PACKAGE-12A | complete | The local publishable `@hotdocx/emdash@0.1.0` package now has strict root/authoring/workspace exports, dual browser-safe JavaScript, complete declarations/maps, and a packed-install consumer. No registry mutation occurred. |
 | PACKAGE-12B1 | complete | A token-free two-job GitHub Release workflow now builds and verifies one exact tarball before protected OIDC publication; deterministic release preflight freezes tag/version/repository/package invariants. All local checks are green and no GitHub or npm mutation occurred. |
 | PACKAGE-12B2 | external action gated | After explicit authorization, perform one provenance-bearing first publish from a GitHub-hosted runner, configure exact-workflow npm trust, remove/revoke bootstrap credentials, disallow token publication, and verify the public artifact. |
@@ -2254,18 +2255,20 @@ example automatically.
 
 ## Remaining-Row Audit And PACKAGE-12A Frozen Contract
 
-The post-MATH-CONSUMER audit compared the remaining rows against an ordinary
-AI-authored Lean-style translation rather than treating ledger order as an
-implementation mandate.
+The post-MATH-CONSUMER audit compared the then-remaining rows against an
+ordinary AI-authored Lean-style translation rather than treating ledger order
+as an implementation mandate. The bullets below record that checkpoint;
+PARAM-ROLES-10 was subsequently activated by the exact Lean `HAdd`/`Coe`
+consumer audit and completed as 10A/10B.
 
 - CALL-SYNTH-7B remains consumer-gated. Explicit lambdas and the existing
   named structure constructor cover present developments; no checked source
   currently requires partial class-aware application, declaration defaults,
   or named call arguments.
-- PARAM-ROLES-10 remains consumer-gated. Output and semi-output roles are
-  already retained and reported, but every current goal is ground before
-  search. Adding non-ground candidate-driven inference or stuck/resume
-  scheduling without a real consumer would broaden the resolver materially.
+- PARAM-ROLES-10 was consumer-gated at this checkpoint. Output and
+  semi-output roles were retained and reported, but every then-current goal
+  was ground before search; its later primary-source consumers justified the
+  completed bounded role-synthesis rows.
 - STDLIB-11 remains a separate library/trust-profile design. The core package
   does not need to wait for a curated inductive/HIT release, and it must not
   silently turn the repository's active mathematical sources into npm-owned
@@ -2947,9 +2950,129 @@ Final proportional evidence:
 No `check:all`, kernel, print, browser-demo, sibling-repository, release,
 registry, authentication, publication, deployment, push, or merge action was
 run. This aggregate evidence must be carried forward for every unchanged
-boundary. CALL-SYNTH-7B and STDLIB-11 remain consumer-gated; PACKAGE-12B2 and
-HOSTED-13 remain external-action gates requiring their recorded prerequisites
-and separate authorization.
+boundary. The exact post-10B disposition of every remaining row is recorded
+below.
+
+## Post-10B Goal Closure And Exact Deferral Record
+
+The read-only closure audit began from clean checkpoint `53851bc` on
+2026-08-09. All ten registered worktrees were clean, this branch remained a
+descendant of baseline `66a61ed`, and the persistent goal retained authority
+only for local rollback-safe checkpoints. The audit inspected the current
+call elaborator, authoring/workspace package barrels, packed consumer,
+structure and instance tests, generic inductive-transfer machinery, the scale
+qualification ledger, and the supplied clean Lean source tree. It changed no
+TypeScript, test, package, kernel, mathematical, sibling-repository, or remote
+state.
+
+The executable consumer inventory is decisive:
+
+- `elaborateCoreLfSaturatedClassCall(...)` is used only by
+  `tests/v3_2_lf_instance_scope_tests.ts`; no source module, example,
+  workspace artifact, packed-install consumer, browser application, or active
+  mathematical development requests a partial, named, or defaulted class
+  call;
+- no executable consumer requests a structure field default, record update,
+  default instance, or automatic term coercion; explicit lambdas, the named
+  structure constructor, supplied evidence, and saturated calls cover the
+  current checked corpus; and
+- the standalone `HasCoerce Source Target` fixture qualifies role-sensitive
+  provider discovery and dependency-ordered premise synthesis. It does not
+  insert a coercion into a term whose inferred type differs from its expected
+  type.
+
+Lean's own implementation confirms that these are separate policies rather
+than missing modes of one resolver. `Lean/Elab/App.lean` distinguishes partial
+application and suppresses default-instance finalization in a relevant
+partial-result case. `Lean/Elab/SyntheticMVars.lean` runs default instances as
+a prioritized, backtracking finalization fallback and documents why combining
+all pending metavariables would be expensive and diagnostically unstable.
+`Lean/Meta/Coe.lean` instead constructs `CoeT` evidence from the inferred and
+expected term types and expands an explicit coercion application. Finally,
+`Lean/Elab/StructInst.lean` schedules field defaults only after ordinary and
+default-instance inference. Emdash should preserve these mechanism
+boundaries while continuing to emit explicit checked Core.
+
+The residual Lean-comparability boundary is therefore deferred by exact
+trigger, not by an open-ended promise:
+
+| Residual row | Exact prerequisite for reactivation | Required boundary |
+| --- | --- | --- |
+| STRUCT-ERGONOMICS-2B | A checked record consumer needs an omitted field default or update from an existing value, and ordinary named construction is materially inadequate. | Lower order-independent source data to one explicit constructor term; defaults are explicit terms with declared dependencies, and no Core/checker node is added. |
+| CALL-SYNTH-7B | A checked call consumer needs partial class-aware application, named arguments, a call default, or a retry that the current saturated fixed-point cannot perform. The reproducer must identify which one of these four mechanisms is required. | Implement only the demonstrated subset. Eta expansion remains the accepted representation of partial calls until it loses required semantics or source-level compactness in that consumer. |
+| DEFAULT-INSTANCE-7C | A checked underconstrained call—typically a literal or heterogeneous operator analogue—needs a designated fallback after ordinary inference/search is exhausted. | Use a separate explicit immutable default registry and finalization trace. Do not reinterpret normal provider priority or declaration order as defaulting. Preserve hard ambiguity and explicit evidence. |
+| COERCION-INSERTION-7D | A checked term has distinct inferred and expected types and an exact selected coercion class/evidence path must bridge them. | Search under a separate expected-type-driven policy and emit the explicit checked coercion application. Do not add coercion conversion to Core and do not treat `HasCoerce` synthesis alone as insertion. |
+
+A qualifying consumer is a committed emdash source/artifact or a pinned
+upstream translation case with an expected explicit-Core result. A synthetic
+test invented solely to unlock a row is not sufficient. Its proposal must
+freeze positive, ambiguity/failure, bound, replay, and final-checker evidence
+before behavior changes.
+
+STDLIB-11 is also not currently an implementation-ready packaging task. The
+repository has reusable owner-free machinery—`CoreLfTransferInductiveBlock`,
+signature lowering, explicit generated-owner contracts, mixed-phase
+compilation, source authority paths, canonical export digests, and portable
+fragment identities—but its representative inductive artifacts deliberately
+remain qualification evidence:
+
+- `SCALE-INDUCTIVE-1B2` is a deeply frozen proposal awaiting
+  `H-DTTLF-SCALE-INDUCTIVE-02`/`D-DTTLF-SCALE-INDUCTIVE-002`; its explicit
+  expanded `ind_nat` and computation rules are not an automatically trusted
+  source-inductive facility;
+- `SCALE-STRESS-1B` awaits
+  `H-DTTLF-SCALE-STRESS-01`/`D-DTTLF-SCALE-STRESS-001`; its equality, J,
+  Nat, Sigma, Pi, and grouped-recursion closure is isolated and explicitly
+  not installed in the product or browser API; and
+- selected categorical HIT packaging depends on the separately deferred
+  `SCALE-STRESS-3C` qualification. Active Lambdapi mathematics cannot be
+  relabelled as npm-owned stdlib content merely because TypeScript can
+  represent or conformance-check it.
+
+The exact STDLIB-11 dependency chain is:
+
+1. resolve the two recorded inductive/generated-owner and first-stress
+   semantic decisions in their governing scale plan, or record an explicit
+   successor decision that supersedes them;
+2. freeze `H-TS-EMDASH-STDLIB-01` around one minimal, source- and
+   digest-pinned first consumer corpus, its constructors/eliminators/rules,
+   version, provenance, license, runtime budget, and exact metatheoretic
+   claims; a Nat/equality prelude may be considered, while categorical HITs
+   remain a later independently qualified tranche;
+3. define three non-confusable trust dispositions in that proposal:
+   `curated-reviewed` for exact package-owned artifacts and decision IDs,
+   `trusted-extension` for user-supplied declarations/rules backed by stated
+   external authority, and `unsafe-extension` for explicit experimental use.
+   Successful Core/rule checking alone must never claim consistency,
+   confluence, normalization, positivity, or semantic justification; and
+4. complete or explicitly supersede PACKAGE-12B2 so a verified public
+   `@hotdocx/emdash` version and trust boundary exist before publishing a
+   separate `@hotdocx/emdash-stdlib` dependency. The future stdlib package
+   must then pass its own packed ESM/CommonJS, strict NodeNext, browser,
+   canonical-replay, and no-production-Lambdapi checks.
+
+These prerequisites permit a future contract-only STDLIB-11A tranche once
+the semantic content is selected, followed by a separate package/release
+STDLIB-11B tranche. They do not authorize this classes branch to approve a
+different goal's pending semantic profile, publish the base package, or
+create a content-free trust API in anticipation of an unknown corpus.
+
+PACKAGE-12B2 remains gated by separate authorization for GitHub/npm
+authentication, push/merge/tag/release, first publication, trusted-publisher
+configuration, credential retirement, and public verification. HOSTED-13
+remains gated by that verified public package version plus fresh SOP/status
+audits and isolated branches in `closerfans` and `arrowgram`; its public MCP
+surface must remain additive/versioned.
+
+This closes the current persistent goal's local implementation envelope:
+every scoped row is complete, retired with evidence, or deferred behind the
+concrete consumer, semantic decision, public-package, or authorization event
+listed above. It does not claim that future Lean ergonomics, stdlib content,
+publication, or hosted integration have been implemented. Because this is a
+documentation-only closure record over unchanged code and package
+boundaries, the 1,570-test PARAM-ROLES-10B aggregate is carried forward and no
+long aggregate, kernel, browser, print, sibling, release, or remote command is
+required.
 
 ## Decision Ledger
 
@@ -3015,6 +3138,12 @@ and separate authorization.
 | C-058 | Table role patterns separately but charge them and their delegated exact goals to the resolver's existing limits. | Cycles and resource use must be finite and reportable across the whole scheduled search, not reset by recursive helper calls. |
 | C-059 | Preserve v1 provider snapshots and report ill-moded dynamic schedules as `stuck` in 10B. | Registration-time rejection would retroactively narrow already canonical provider artifacts; a later additive validator can enforce Lean's declaration-time discipline without disguising a snapshot migration. |
 | C-060 | Use explicit priority to place generic transitive evidence below concrete coercion edges. | Emdash retains strict ambiguity rather than copying Lean's first-answer declaration order, while ordinary finite coercion chains remain directly expressible. |
+| C-061 | Reactivate residual structure/call ergonomics only from an exact checked consumer and split the demonstrated mechanism. | Partial application, named/default arguments, record defaults/updates, and stronger retry have different schedules and should not become one speculative API. |
+| C-062 | Treat default instances as an explicit finalization fallback, distinct from normal instance providers and priority. | Lean's own scheduler separates defaulting and documents its global backtracking tradeoffs; emdash should retain deterministic scopes, hard ambiguity, and portable traces. |
+| C-063 | Treat automatic coercion insertion as expected-type-driven explicit term elaboration, distinct from `HasCoerce` evidence synthesis. | PARAM-ROLES-10B proves semi-output premise scheduling but does not justify a conversion rule or implicit rewrite in Core. |
+| C-064 | Do not promote transfer-qualified inductives or active Lambdapi mathematics into a stdlib before exact semantic and product-profile decisions. | Current Nat/Sigma/equality artifacts intentionally remain isolated or proposal-only, and categorical HIT qualification is a separate future scale row. |
+| C-065 | Publish a separate stdlib only after the base package has a verified public version and trust boundary. | The dependent package needs an unambiguous runtime/API version, provenance chain, packed consumer, and rollback target. |
+| C-066 | Close this local goal when every remaining row has a concrete external or consumer prerequisite, without pretending deferred functionality is implemented. | The persistent objective explicitly accepts durable deferral; continuing with proxy consumers would reduce rather than improve the evidence quality. |
 
 ## Validation And Checkpoint Policy
 

@@ -102,6 +102,22 @@
 > verifies the v2 exact API through ESM/CommonJS, strict NodeNext, and browser
 > consumption. Its single shared TypeScript gate passed 1,570 tests across 237
 > suites: 1,516 active passes, 54 intentional skips, and zero failures.
+> The post-10B closure audit found no further dependency-ready local row.
+> Executable use of saturated class calls remains confined to the dedicated
+> acceptance suite; no checked source currently requires partial/named/default
+> calls, structure defaults/updates, default-instance finalization, or
+> expected-type-driven coercion insertion. Those mechanisms now have separate
+> exact-consumer triggers in the living plan; in particular, `HasCoerce`
+> synthesis is not recorded as automatic term coercion. STDLIB-11 is deferred
+> behind the pending generated-owner and isolated stress-profile decisions,
+> one source/digest-pinned product-profile review, and the verified public
+> base-package boundary. Current transfer-qualified Nat/Sigma/equality
+> artifacts are not silently promoted to browser/npm authority, and selected
+> categorical HITs remain behind their separate scale qualification. Thus the
+> local structures/classes/synthesis envelope is complete while future
+> ergonomics, stdlib, publication, and hosted work remain explicitly
+> unimplemented at concrete gates. The 1,570-test evidence carries forward;
+> the closure record itself changes documentation only.
 > `PACKAGE-12A` is final-green: the local
 > `@hotdocx/emdash@0.1.0` package has strict root/authoring/workspace exports,
 > dual browser-safe JavaScript, complete declarations/maps, and a
