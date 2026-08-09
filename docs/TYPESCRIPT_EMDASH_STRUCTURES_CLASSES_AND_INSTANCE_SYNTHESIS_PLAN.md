@@ -7,8 +7,9 @@ Plan-ID: TS-EMDASH-CLASSES
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
 through ALGEBRA-GRADUATE-8 are final-green; MATH-CONSUMER-9 is retired without
 implementation after its stale consumer was reconciled with the existing
-acceptance evidence; remaining ergonomics, parameter-role inference, standard
-library, package, and hosted rows stay separately gated
+acceptance evidence; remaining call ergonomics, parameter-role inference, and
+standard-library rows stay consumer-gated; PACKAGE-12A is the next approved
+local implementation tranche
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -412,13 +413,13 @@ confluence, normalization, positivity, or semantic justification.
 ### I. Package boundary
 
 Do not publish the private repository-root workbench. The unscoped npm name
-`emdash` is already occupied by an unrelated package. Subject to npm scope
-ownership, the first distributable boundary should be:
+`emdash` is already occupied by an unrelated package. The established sibling
+scope is `@hotdocx`; the first distributable boundary is therefore:
 
-- `@emdash/core`: browser-safe Core, checker/evaluator, and curated public
-  subpath exports such as `./authoring` and `./workspace`;
-- `@emdash/cli`: Node workspace/check/artifact commands; and
-- later `@emdash/stdlib`: versioned curated inductive/HIT/algebra/category
+- `@hotdocx/emdash`: browser-safe Core, checker/evaluator, and curated public
+  subpath exports `./authoring` and `./workspace`;
+- later `@hotdocx/emdash-cli`: Node workspace/check/artifact commands; and
+- later `@hotdocx/emdash-stdlib`: versioned curated inductive/HIT/algebra/category
   artifacts.
 
 Packages contain built JavaScript and `.d.ts` files, use a strict public
@@ -526,8 +527,9 @@ discipline important, but they are not a prerequisite for this qualification.
 | MATH-CONSUMER-9 | retired without implementation | The historical `struct_cov_sieve` name was only a parameter-plicity shape inherited from the Cartier review, not an active owner or missing kernel feature. STRUCT-PARAM-1 already qualifies the distinct dependent parameter modes, and ALGEBRA-GRADUATE-8 already supplies the representative Lean-style class consumer. No replacement proxy or mathematical-source edit is justified. |
 | PARAM-ROLES-10 | gated | Add output/semi-output and stuck/resume only after an exact consumer audit. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
-| PACKAGE-12 | gated | Publishable `@emdash/*` package boundaries and packed-consumer evidence. |
-| HOSTED-13 | gated | Add compatible GetPaidX template/API adapters and Arrowgram consumption after PACKAGE-12. |
+| PACKAGE-12A | approved | Add the local publishable `@hotdocx/emdash` package with strict root/authoring/workspace exports, dual browser-safe JavaScript, declarations, and a packed-install consumer. No registry mutation occurs in this row. |
+| PACKAGE-12B | gated | Verify npm ownership/authentication and add a provenance-bearing release workflow only after 12A is final-green; actual publication remains a separate release action. |
+| HOSTED-13 | gated | Add compatible GetPaidX template/API adapters and Arrowgram consumption after the required PACKAGE-12A/12B distribution boundary. |
 
 Only one row is implemented at a time. A later row may be repartitioned by a
 recorded audit, but must not silently broaden an earlier checkpoint.
@@ -2245,6 +2247,89 @@ must not be rerun. The next implementation must be chosen by auditing a
 genuine remaining usability or distribution gap, not by replacing this stale
 example automatically.
 
+## Remaining-Row Audit And PACKAGE-12A Frozen Contract
+
+The post-MATH-CONSUMER audit compared the remaining rows against an ordinary
+AI-authored Lean-style translation rather than treating ledger order as an
+implementation mandate.
+
+- CALL-SYNTH-7B remains consumer-gated. Explicit lambdas and the existing
+  named structure constructor cover present developments; no checked source
+  currently requires partial class-aware application, declaration defaults,
+  or named call arguments.
+- PARAM-ROLES-10 remains consumer-gated. Output and semi-output roles are
+  already retained and reported, but every current goal is ground before
+  search. Adding non-ground candidate-driven inference or stuck/resume
+  scheduling without a real consumer would broaden the resolver materially.
+- STDLIB-11 remains a separate library/trust-profile design. The core package
+  does not need to wait for a curated inductive/HIT release, and it must not
+  silently turn the repository's active mathematical sources into npm-owned
+  standard-library artifacts.
+
+The genuine next gap is distribution. The complete qualified implementation
+still lives behind a private root `package.json`, a repository-wide barrel,
+`ts-node`, and contributor-only scripts. A read-only build probe compiled the
+Core/checker, outer-LF compiler/runtime, structure/class, provider/resolver,
+and class-call closure to JavaScript, source maps, declarations, and
+declaration maps in about eighteen seconds. The result was approximately
+2.2 MB uncompressed across 140 emitted files and contained no Node builtin or
+process dependency. This is sufficient evidence to freeze a small packaging
+tranche; it does not authorize publishing the private root workbench.
+
+Registry inspection on 2026-08-09 found unscoped `emdash@0.32.0`, while
+`@hotdocx/emdash` had no public package. An npm 404 establishes only public
+absence, not write ownership. The repository already consumes the published
+`@hotdocx/arrowgram`, so `@hotdocx/emdash` is the selected local package name;
+authentication and ownership verification belong to PACKAGE-12B. The earlier
+hypothetical `@emdash/core` name is retired from the active package design.
+
+PACKAGE-12A is frozen as follows:
+
+1. Add one contributor-workspace package at `packages/emdash`, without making
+   the private root package publishable or moving the canonical implementation
+   out of `src/v3_2`.
+2. Add three deliberately curated source entry points. The package root owns
+   the generic Core/checker/evaluator/session and term surface; `./authoring`
+   adds explicit outer-LF transfer, structures, classes, providers, recursive
+   synthesis, and saturated calls; `./workspace` adds the browser-safe proof
+   plan/document and declaration/fragment workspace contracts. The existing
+   repository-wide `src/v3_2/index.ts` is never a package entry.
+3. Bundle each entry for both ESM and CommonJS with browser platform and
+   ES2020 targets, emit source maps and declaration maps, and ship complete
+   `.d.ts` closure data. The export map exposes only `.`, `./authoring`,
+   `./workspace`, and `./package.json`. No `ts-node`, Lambdapi executable,
+   filesystem, process, acquisition, remote-store, CLI, or private source-tree
+   path may be a runtime dependency.
+4. Use `@hotdocx/emdash@0.1.0`, ISC (matching the root's recorded code
+   license), public-access package metadata, repository links, side-effect-free
+   declarations, and a Node `>=20` runtime floor. The contributor build still
+   uses the repository's pinned pnpm/Node boundary; the emitted ES2020 core is
+   intentionally compatible with the existing Node 20 hosted controller.
+5. Add a deterministic package-local build and a temporary packed-install
+   consumer. The consumer must typecheck against shipped declarations, load
+   both ESM and CommonJS exports, bundle the installed ESM package for a
+   browser target, and observe representative root, authoring, and workspace
+   capabilities. It must install only the produced tarball outside the
+   repository and clean its temporary directory.
+6. Extend the root workspace contract, pinned lock, root scripts, and root
+   contributor guidance exactly for the new package. Do not add an npm lock,
+   publish hook, registry token, npm login, GitHub release workflow, CLI,
+   stdlib, GetPaidX template, Arrowgram integration, or sibling-repository
+   change in 12A.
+7. Qualification consists of workspace validation, the package build and
+   packed consumer, root typecheck, changed-file lint, exact package-content
+   and diff/whitespace review, and one complete `check:ts` after every bounded
+   package change is otherwise green. This one aggregate is required because
+   workspace membership, package setup, and new public source entries change
+   a shared TypeScript boundary. No kernel, print, browser-demo, sibling, or
+   repository-wide `check:all` gate is affected.
+
+The proposal gate `H-TS-EMDASH-CLASSES-PACKAGE-12A-009` is approved under the
+user-authorized unattended-review delegation, with immediate human
+supersession. The documentation checkpoint message is
+`docs: freeze core package contract`; the implementation checkpoint message is
+`package: add distributable emdash core`.
+
 ## Decision Ledger
 
 | ID | Decision | Rationale |
@@ -2287,6 +2372,7 @@ example automatically.
 | C-036 | Ambient-depth Core serialization is one additive shared inspection utility. | Resolver and call traces need canonical open contextual terms without duplicating the closed serializer or weakening scope validation. |
 | C-037 | Algebraic graduation is an end-to-end assertion over the exact checked fixture, not another runtime wrapper or profile. | The implementation mechanisms were already qualified; one integrated acceptance witness closes the evidence gap without expanding the public or trusted boundary. |
 | C-038 | Retire `struct_cov_sieve` as a stale consumer mnemonic; do not replace it with a proxy or edit active mathematics. | STRUCT-PARAM-1 already proves the parameter-mode mechanism and ALGEBRA-GRADUATE-8 already proves the representative Lean-style class workflow. The historical Cartier record and current site/scheme Sigma owners are separate designs, so another example would not qualify a new boundary. |
+| C-039 | Package the qualified browser-safe closure as `@hotdocx/emdash` with strict subpaths; keep registry publication separate. | The established sibling scope is available as an organizational target, the unscoped name is occupied, and a packed local boundary can be qualified without exposing the private root barrel or trusting npm credentials. |
 
 ## Validation And Checkpoint Policy
 
