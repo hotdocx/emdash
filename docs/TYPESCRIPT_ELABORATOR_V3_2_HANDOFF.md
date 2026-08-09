@@ -70,6 +70,10 @@
 > consumer-gated. `PACKAGE-12A` is the next approved tranche: a local
 > `@hotdocx/emdash` package with strict root/authoring/workspace exports, dual
 > browser-safe JavaScript, declarations, and a packed-install consumer.
+> Its root export is the generic Core/checker/evaluator/session boundary; the
+> generic scoped outer-LF builder and class/structure facilities enter through
+> `./authoring`. The retired category-specific `surface.ts` and
+> `elaborator.ts` are deliberately not package API.
 > Registry authentication, publication, CLI, stdlib, hosted templates, and
 > sibling-repository integration remain later gates.
 >

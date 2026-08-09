@@ -2289,11 +2289,13 @@ PACKAGE-12A is frozen as follows:
    the private root package publishable or moving the canonical implementation
    out of `src/v3_2`.
 2. Add three deliberately curated source entry points. The package root owns
-   the generic Core/checker/evaluator/session and term surface; `./authoring`
-   adds explicit outer-LF transfer, structures, classes, providers, recursive
-   synthesis, and saturated calls; `./workspace` adds the browser-safe proof
-   plan/document and declaration/fragment workspace contracts. The existing
-   repository-wide `src/v3_2/index.ts` is never a package entry.
+   the generic Core/checker/evaluator/session boundary; `./authoring` adds the
+   generic scoped outer-LF term builder, explicit transfer, structures,
+   classes, providers, recursive synthesis, and saturated calls;
+   `./workspace` adds the browser-safe proof plan/document and
+   declaration/fragment workspace contracts. The retired category-specific
+   `surface.ts` and `elaborator.ts` and the existing repository-wide
+   `src/v3_2/index.ts` are never package entries.
 3. Bundle each entry for both ESM and CommonJS with browser platform and
    ES2020 targets, emit source maps and declaration maps, and ship complete
    `.d.ts` closure data. The export map exposes only `.`, `./authoring`,
@@ -2373,6 +2375,7 @@ supersession. The documentation checkpoint message is
 | C-037 | Algebraic graduation is an end-to-end assertion over the exact checked fixture, not another runtime wrapper or profile. | The implementation mechanisms were already qualified; one integrated acceptance witness closes the evidence gap without expanding the public or trusted boundary. |
 | C-038 | Retire `struct_cov_sieve` as a stale consumer mnemonic; do not replace it with a proxy or edit active mathematics. | STRUCT-PARAM-1 already proves the parameter-mode mechanism and ALGEBRA-GRADUATE-8 already proves the representative Lean-style class workflow. The historical Cartier record and current site/scheme Sigma owners are separate designs, so another example would not qualify a new boundary. |
 | C-039 | Package the qualified browser-safe closure as `@hotdocx/emdash` with strict subpaths; keep registry publication separate. | The established sibling scope is available as an organizational target, the unscoped name is occupied, and a packed local boundary can be qualified without exposing the private root barrel or trusting npm credentials. |
+| C-040 | Keep the package root backend-neutral and expose the generic scoped outer-LF builder through `./authoring`; exclude the retired category-specific surface/elaborator. | The root repository guidance identifies those category-specific modules as feasibility-era evidence rather than active v3.2 authority, whereas the scoped outer-LF builder is the current direct-TypeScript authoring boundary. |
 
 ## Validation And Checkpoint Policy
 
