@@ -7,15 +7,17 @@
 > immutable instance scopes, recursive bounded evidence synthesis, and
 > general class-implicit call elaboration. It targets Lean-comparable
 > authoring semantics while preserving direct TypeScript declarations and the
-> existing explicit-Core/checker boundary. Parameter support and stable,
-> owner-aware named construction in the outer-LF structure macro are now
-> final-green. The public `CLASS-SCHEMA-3` metadata layer is also final-green:
-> it records stable parameter/method identities, roles, declared types, and
-> ordered parent applications while marking every parentful schema explicitly
-> unlowered. The next inheritance row is partitioned into a frozen
-> schema-only `4A` contract for strict C3 and canonical identity-to-slot
-> sharing, followed by `4B` ordinary parent-conversion terms and algebraic
-> diamond checking. The continuation adds no declaration parser, general
+> existing explicit-Core/checker boundary. Parameter support, stable
+> owner-aware named construction, public class-schema metadata, and the
+> isolated `CLASS-INHERIT-4A` identity-layout planner are now final-green.
+> `4A` implements strict C3, canonical inherited identity classes, explicit
+> identity-to-physical-slot sharing, and deterministic conflict-free lookup as
+> finite frozen metadata. It deliberately provides no superclass evidence and
+> remains off the public v3.2 barrel. The dependency-ready `4B` continuation
+> must first audit and freeze ordinary direct-parent conversion terms, then
+> check the private flattened algebraic diamond through the existing LF
+> compiler/checker before exposing a usable inheritance boundary. The
+> continuation adds no declaration parser, general
 > inductive frontend, class/Core node, or production Lambdapi dependency.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**

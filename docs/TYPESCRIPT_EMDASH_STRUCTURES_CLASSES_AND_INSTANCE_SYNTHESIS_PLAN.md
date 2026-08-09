@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through CLASS-SCHEMA-3 are final-green; the exact CLASS-INHERIT-4A identity
-layout contract is frozen and approved for implementation
+through CLASS-INHERIT-4A are final-green; CLASS-INHERIT-4B is dependency-ready
+for its read-only conversion-term audit and frozen proposal
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -509,8 +509,8 @@ make explicit local scope discipline especially important.
 | STRUCT-PARAM-1 | complete | The existing macro now has dependent parameter telescopes and explicit carrier/constructor/projection modes while preserving unparameterized declarations, rules, order, and emission. |
 | STRUCT-NAMED-2 | complete | Stable owner-aware handles and order-independent named parameter/field assignments now lower to one deeply frozen ordinary constructor call. |
 | CLASS-SCHEMA-3 | complete | Serializable class, parameter-role, declared-method, and ordered-parent metadata is public; every parentful schema is explicitly marked unlowered. |
-| CLASS-INHERIT-4A | in progress | The audited identity-layout contract is frozen and approved: strict C3, canonical inherited identity classes, explicit physical-slot bindings/sharing, and conflict-free lookup, without conversion terms. |
-| CLASS-INHERIT-4B | pending | Generate direct-parent conversion types/terms, check the manual private flattening through ordinary LF, and qualify the algebraic diamond. |
+| CLASS-INHERIT-4A | complete | Strict C3, canonical inherited identity classes, explicit physical-slot binding/sharing, and conflict-free lookup are implemented as finite frozen metadata, without conversion terms. |
+| CLASS-INHERIT-4B | dependency-ready | Audit and freeze direct-parent conversion types/terms, then check the manual private flattening through ordinary LF and qualify the algebraic diamond. |
 | SYNTH-SCOPE-5 | pending | Add immutable provider declarations and local/named/imported scope snapshots. |
 | SYNTH-RECURSE-6 | pending | Add exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces. |
 | CALL-SYNTH-7 | pending | Generalize call elaboration to arbitrary class-marked implicit binders. |
@@ -1071,6 +1071,74 @@ does not enter the public barrel/root runner and therefore carries forward
 the 1,526-test aggregate without another long run. `4B` will audit/freeze its
 term contract after `4A` is stable and will own the single aggregate for the
 complete public inheritance boundary.
+
+## CLASS-INHERIT-4A Completion Record
+
+`CLASS-INHERIT-4A` is final-green on 2026-08-08. The implementation adds the
+isolated `lf_class_inheritance` planning module and:
+
+- validates parent-free bootstraps and exact, structurally copied direct-parent
+  layout snapshots without relying on JavaScript object identity;
+- computes the strict C3 resolution order with no relaxed fallback and reports
+  stable conflicting-head/tail evidence for an inconsistent hierarchy;
+- unions complete inherited field-identity equivalence classes before child
+  binding, so a repeated ancestor in a diamond creates one obligation;
+- assigns every inherited identity class exactly once to an existing private
+  physical projection while leaving unmentioned child fields local-only;
+- permits unrelated inherited classes to share storage only through an
+  explicit multi-identity field binding, never by repeated spelling;
+- preserves ancestor canonical representatives when a subclass introduces a
+  new local alias;
+- emits complete qualified aliases and accepts an unqualified spelling only
+  when all occurrences resolve to the same physical slot;
+- returns a finite, caller-independent, deeply frozen, JSON-serializable
+  `identity-layout-planned` snapshot; and
+- adds no declaration, term, rule, search state, process state, or hidden
+  conversion claim.
+
+The focused algebraic corpus exercises the exact
+`MonoidClass -> (SemigroupClass, MulOneClass)` diamond, obtains resolution
+order `[MonoidClass, SemigroupClass, MulOneClass, MulClass, OneClass]`, and
+proves at the metadata boundary that the repeated `MulClass` ancestor has one
+canonical identity and one physical slot. It also covers parent-free layout,
+copied JSON layouts, input permutation/caller immutability, explicit sharing
+of unrelated same-named fields, same-name conflict without sharing, every
+frozen validation family, and a classic inconsistent-C3 graph.
+
+Exact validation:
+
+- `node --require ts-node/register --test
+  tests/v3_2_lf_class_inheritance_tests.ts`: 6/6 passed;
+- `./scripts/pnpmw run typecheck`: passed;
+- changed-file ESLint: passed;
+- diff hygiene: passed; and
+- the one required shared-boundary `./scripts/pnpmw run check:ts`: 1,532 tests
+  across 230 suites, 1,478 passed, 54 intentionally skipped, zero failures,
+  exit code 0, in `1,377,221.819576 ms` (approximately 22m57s). Its
+  workspace, typecheck, and full-lint stages also passed.
+
+The frozen proposal initially planned to keep this isolated module outside
+the root runner and carry forward the preceding aggregate. Root repository
+guidance instead requires every behavioral `src/` test to be registered in
+`tests/main_tests.ts` and every changed shared TypeScript boundary to pass one
+complete `check:ts`. The implementation follows that stronger governing rule;
+the module remains absent from the public v3.2 barrel until `4B` can expose a
+usable conversion boundary.
+
+No parent-conversion term, structure declaration/rule, Core/checker branch,
+instance registry/search, parser, browser entry, package boundary, Lambdapi
+fragment, `emdash2/` source, active kernel owner, or sibling repository
+changed. No Lambdapi or active-kernel aggregate was therefore relevant. The
+proposal backtracking checkpoint is `38f39cb`; the rollback-safe
+implementation checkpoint is the local commit with message
+`elaborator: plan class inheritance identities`.
+
+The next dependency-ready row is `CLASS-INHERIT-4B`. It begins with a
+read-only audit and frozen proposal for direct-parent conversion types and
+terms, including dependent parameter substitution, reconstruction from the
+planned physical slots, ordinary LF checking, and the exact canonical
+diamond criterion. It must not begin provider scopes, recursive instance
+search, or general implicit-call elaboration.
 
 ## Decision Ledger
 
