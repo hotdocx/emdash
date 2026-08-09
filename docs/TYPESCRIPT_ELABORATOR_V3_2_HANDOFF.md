@@ -16,15 +16,17 @@
 > finite authoring/transfer metadata over unchanged explicit Core. The exact
 > five-edge algebraic module checks, and its two explicit
 > `MonoidClass -> MulClass` paths delta/beta/runtime-normalize to the same
-> `MkMulClass A (monoid_mul A m)` expression. The `SYNTH-SCOPE-5` read-only
-> audit is now complete and its proposal is approved: checked global/local
-> provider metadata, direct superclass-provider records, canonical immutable
-> registries, explicit lexical frames, opened named scopes, and pinned import
-> interfaces will be implemented without resolving a goal. Lexical nesting is
-> explicit precedence; same-rank equal-priority candidates remain visible for
-> later ambiguity analysis. Recursive resolution remains a separate later
-> row. The
-> continuation adds no declaration parser, general
+> `MkMulClass A (monoid_mul A m)` expression. `SYNTH-SCOPE-5` is implemented
+> and final-green: checked global/local providers, the five direct
+> superclass-provider records, canonical immutable registries, explicit
+> lexical frames, opened named scopes, and pinned imports are public without
+> resolving a goal. Lexical nesting is explicit precedence; same-rank equal-
+> priority candidates remain visible for later ambiguity analysis. Its one
+> required shared-boundary aggregate passed 1,546 tests across 232 suites:
+> 1,492 active passes, 54 intentional skips, and zero failures. Recursive
+> resolution remains a separate row; `SYNTH-RECURSE-6` is dependency-ready
+> and begins with a read-only audit and frozen proposal. The continuation
+> adds no declaration parser, general
 > inductive frontend, class/Core node, or production Lambdapi dependency.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**

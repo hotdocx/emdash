@@ -206,6 +206,7 @@ import './v3_2_lf_structure_macro_tests';
 import './v3_2_lf_class_schema_tests';
 import './v3_2_lf_class_inheritance_tests';
 import './v3_2_lf_class_inheritance_lowering_tests';
+import './v3_2_lf_instance_scope_tests';
 import './v3_2_lf_runtime_fragment_tests';
 import './v3_2_lf_transfer_acquisition_tests';
 import './v3_2_scale_stress_1_representation_tests';

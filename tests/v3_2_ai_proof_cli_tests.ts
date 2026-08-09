@@ -36,6 +36,9 @@ import {
     CORE_LF_DICTIONARY_AUTHORING_PROFILE
 } from '../src/v3_2/lf_dictionary_authoring';
 import {
+    CORE_LF_INSTANCE_SCOPE_PROFILE
+} from '../src/v3_2/lf_instance_scope';
+import {
     CORE_LF_DICTIONARY_SYNTHESIS_PROFILE
 } from '../src/v3_2/lf_dictionary_synthesis';
 import {
@@ -453,6 +456,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assert.equal(
             revisions.get('dictionary-authoring'),
             CORE_LF_DICTIONARY_AUTHORING_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('instance-provider-scope'),
+            CORE_LF_INSTANCE_SCOPE_PROFILE.scopeRevision
         );
         assert.equal(
             revisions.get('research-document-binding'),

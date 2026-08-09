@@ -124,6 +124,13 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 scope: 'one direct leading implicit global argument'
             },
             {
+                id: 'instance-provider-scope',
+                revision: 'emdash-lf-instance-scope-v1',
+                scope:
+                    'checked providers and immutable local, named, ' +
+                    'imported, and global precedence'
+            },
+            {
                 id: 'research-document-binding',
                 revision: 'emdash-research-document-binding-v1',
                 scope: 'stable diagram/declaration/proof block identities'
@@ -189,7 +196,7 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 id: 'reusable-recursive-dictionary-search',
                 state: 'consumer-gated',
                 prerequisite:
-                    'portable instance scopes and a recursive indexed use'
+                    'one qualified recursive indexed use'
             },
             {
                 id: 'persisted-or-inline-paper-artifacts',

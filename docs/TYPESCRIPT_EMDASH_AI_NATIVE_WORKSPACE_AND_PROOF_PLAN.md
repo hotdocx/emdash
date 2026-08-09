@@ -751,11 +751,16 @@ explicit transfer argument. The macro and its trace erase before the final
 `CoreLfModuleSpec`; canonical workspace source therefore remains ordinary
 explicit transfer data with exact fragment providers.
 
-AI-SYNTH-1B2 remains the reusable-scope row: it must use another real consumer
-before adding portable instance declarations, lexical/imported scope IDs,
-local dictionary binders, or a synthesis request to a canonical workspace
-schema. Indexed recursive premises, search tiers, priorities, independent
-fuel, and any external Elpi provider remain AI-SYNTH-2.
+AI-SYNTH-1B2 is now partitioned by the repeated algebraic-class consumer in
+[`TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md`](./TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md).
+AI-SYNTH-1B2A is complete there: checked global/local provider declarations,
+direct-superclass metadata, and immutable lexical, named, pinned-import, and
+current-global scope snapshots are portable direct-TypeScript artifacts.
+AI-SYNTH-1B2B remains consumer-gated for placing provider registries or a
+synthesis request in canonical workspace source; 1B2A deliberately changes no
+workspace schema. Indexed recursive premise resolution, interpretation of
+scope ranks/priorities, independent fuel, and any external Elpi provider
+remain AI-SYNTH-2.
 
 ### AI-PAPER-1: research-workspace integration
 
@@ -913,7 +918,9 @@ Only one row may be in progress in this worktree.
 | AI-SYNTH-1B | partitioned | AI-SYNTH-1A plus source/workspace consumer | Separate an erased direct-TypeScript leading-implicit authoring macro from any later portable reusable scope/annotation design. |
 | AI-SYNTH-1B0 | complete | AI-SYNTH-1A plus current transfer/compiler/workspace contracts | The actual omitted-implicit seam, text-parser non-seam, prefix authority, and exact same-module fragment consumer are measured without behavior change. |
 | AI-SYNTH-1B1 | complete | AI-SYNTH-1B0 plus same-module fragment consumer | Derive one leading implicit target from a checked global callee, select from an explicit finite call-site scope, and emit one frozen ordinary transfer argument plus the 1A trace before canonical module creation. |
-| AI-SYNTH-1B2 | pending | AI-SYNTH-1B1 plus reusable-scope consumer | Only if demanded, freeze portable instance annotations and lexical/imported/local scope semantics in workspace source. |
+| AI-SYNTH-1B2 | partitioned | AI-SYNTH-1B1 plus reusable-scope consumer | Separate portable checked provider/scope artifacts from any later persistence in canonical workspace source. |
+| AI-SYNTH-1B2A | complete | algebraic class hierarchy plus local/global/named/imported consumers | Checked provider metadata and immutable explicit precedence snapshots are public without search or workspace-schema change; the governing completion evidence is in the structures/classes plan. |
+| AI-SYNTH-1B2B | pending | AI-SYNTH-1B2A plus exact persisted-source consumer | Only if demanded, freeze how provider registries or synthesis requests appear in canonical workspace source. |
 | AI-SYNTH-2 | pending | AI-SYNTH-1B plus recursive indexed consumer | Only if demanded, design recursive premise search, tiers/priorities/fuel, and a separately identified external-provider interface. |
 | AI-PAPER-0 | complete | AI-PROOF-2, AI-WORKSPACE-1B2B plus the authored article and `~/closerfans` templates | The canonical article owner, transient-render-ID non-seam, proof-artifact freshness boundary, and platform ownership are measured without changing prose, print, or platform code. |
 | AI-PAPER-1 | partitioned | AI-PAPER-0 | Separate browser-safe semantic binding, exact-byte file materialization, print/browser presentation, and hosted platform synchronization. |
@@ -2789,13 +2796,15 @@ derived-state distinction.
 
 ### Explicit deferrals
 
-AI-SYNTH-1B2 requires a repeated real consumer before replacing call-site
-candidate lists with portable named scopes or declaration annotations. It owns
-lexical/imported precedence, local dictionary binders, scope shadowing, and
-whether any synthesis request belongs in canonical workspace source.
-AI-SYNTH-2 continues to own recursive indexed premises, priorities/tiers,
-independent fuel, and external providers such as Elpi. Neither row may derive
-an instance scope from environment enumeration or fragment-provider metadata.
+At this 1B1 checkpoint, AI-SYNTH-1B2 still required a repeated real consumer.
+The subsequent algebraic-class continuation supplies that consumer and
+completes 1B2A's portable checked providers, lexical/imported precedence,
+local dictionary binders, named scopes, and shadowing-versus-ambiguity data.
+AI-SYNTH-1B2B still owns any synthesis request or provider registry persisted
+in canonical workspace source. AI-SYNTH-2 continues to own recursive indexed
+premise resolution, interpretation of priorities/tiers, independent fuel, and
+external providers such as Elpi. No row may derive an instance scope from
+environment enumeration or fragment-provider metadata.
 
 This contract is self-approved under D-AI-NATIVE-049. Approval covers one new
 browser-safe host-authoring module, focused tests in the already registered
@@ -2851,8 +2860,10 @@ Qualification:
 No file below `emdash2/` or in `~/closerfans` changed, and no Lambdapi process,
 network operation, MCP service, or external backend was invoked. Decisions
 D-AI-NATIVE-068 through D-AI-NATIVE-073 now have direct implementation and
-test evidence. AI-SYNTH-1B2 remains gated on repeated source-level scope use;
-AI-SYNTH-2 remains gated on a genuinely recursive indexed consumer.
+test evidence. At this checkpoint AI-SYNTH-1B2 still awaited repeated
+source-level scope use; the subsequent structures/classes continuation
+completes its artifact-only 1B2A partition. AI-SYNTH-2 remains gated on a
+genuinely recursive indexed consumer.
 
 ## AI-PAPER-0 Audit And AI-PAPER-1A Completion Record
 
@@ -3470,11 +3481,13 @@ direct leading-binder target derivation, call-site-complete finite scope,
 ordinary explicit transfer argument, exact two-fragment provider check, and
 complete 1A evidence. Preserve its focused 8/8 suite and nearest 39-test/five-
 suite matrix; do not repeat the unchanged 1,486-test aggregate. Do not add a
-global registry, string-parser case, canonical synthesis node, workspace
-schema revision, local binder search, or reusable scope annotation by analogy.
-AI-SYNTH-1B2 requires a repeated source-level scope consumer, and AI-SYNTH-2
-requires a genuinely recursive indexed consumer; leave either gated when that
-evidence is absent.
+string-parser case, canonical synthesis node, or workspace schema revision by
+analogy. The subsequent algebraic-class consumer completes AI-SYNTH-1B2A's
+explicit immutable provider registry, local binder metadata, and reusable
+scope snapshots without changing this 1B1 call-site contract.
+AI-SYNTH-1B2B still requires an exact persisted-source consumer, and
+AI-SYNTH-2 requires a genuinely recursive indexed consumer; leave either
+gated when that evidence is absent.
 
 Treat AI-PAPER-0, final-green AI-PAPER-1A, AI-PAPER-1B0, final-green
 AI-PAPER-1B1, AI-PAPER-1C0, and final-green AI-PAPER-1C1 as complete. Preserve
@@ -3519,8 +3532,9 @@ implemented backend focused on the small TypeScript/emdash checker/evaluator.
 Retain backend-neutral explicit Core and deterministic Lambdapi/emdash
 emission/checking as an optional later adapter and conformance route; do not
 add a backend flag or claim Lambdapi execution until that separate path exists.
-After AI-SYNTH-1B1, continue with AI-SYNTH-1B2 only when repeated source-level
-use can freeze portable annotations and local/imported scope. Recursive
+After AI-SYNTH-1B1, preserve the completed cross-plan AI-SYNTH-1B2A portable
+provider/scope artifacts. Continue with AI-SYNTH-1B2B only when an exact
+consumer needs those artifacts in canonical workspace source. Recursive
 indexed search remains AI-SYNTH-2 and requires its own consumer. Treat the
 AI-PAPER-1C1 browser consumer as complete. Continue with AI-PAPER-1B2/1C2 only
 when persistence or inline placement is actually demanded, and do not jump

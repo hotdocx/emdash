@@ -5,8 +5,7 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through CLASS-INHERIT-4B are final-green; the SYNTH-SCOPE-5 checked-provider
-and immutable-scope contract is frozen and approved for implementation
+through SYNTH-SCOPE-5 are final-green; SYNTH-RECURSE-6 is dependency-ready
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -511,8 +510,8 @@ make explicit local scope discipline especially important.
 | CLASS-SCHEMA-3 | complete | Serializable class, parameter-role, declared-method, and ordered-parent metadata is public; every parentful schema is explicitly marked unlowered. |
 | CLASS-INHERIT-4A | complete | Strict C3, canonical inherited identity classes, explicit physical-slot binding/sharing, and conflict-free lookup are implemented as finite frozen metadata, without conversion terms. |
 | CLASS-INHERIT-4B | complete | Transparent direct-parent reconstruction definitions are public and checked; both explicit algebraic diamond routes normalize to one canonical constructor term. |
-| SYNTH-SCOPE-5 | proposal-approved | Implement the frozen checked-provider registry plus explicit local-frame, opened-named, pinned-import, and current-global scope snapshots without resolving a goal. |
-| SYNTH-RECURSE-6 | pending | Add exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces. |
+| SYNTH-SCOPE-5 | complete | Checked providers and immutable explicit scope ranks are public, focused-green, and qualified by the complete shared TypeScript gate. |
+| SYNTH-RECURSE-6 | dependency-ready | Audit and freeze exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces before implementation. |
 | CALL-SYNTH-7 | pending | Generalize call elaboration to arbitrary class-marked implicit binders. |
 | ALGEBRA-GRADUATE-8 | pending | Qualify the complete algebraic diamond and one recursive provider. |
 | MATH-CONSUMER-9 | pending | Qualify `struct_cov_sieve`, then select one category/Functor/Adjunction consumer. |
@@ -1570,6 +1569,70 @@ and types.
 The proposed checkpoint message is
 `docs: freeze instance provider scope contract`. The implementation checkpoint
 message is `elaborator: add immutable instance scopes`.
+
+## SYNTH-SCOPE-5 Implementation And Qualification Record
+
+Implementation and final qualification are complete on 2026-08-09. The
+additive public module `src/v3_2/lf_instance_scope.ts` now:
+
+- derives ordinary global providers from exact installed declarations and
+  checks their references against the compiled type with a fresh LF checker;
+- derives local providers from exact `CoreContext` bound-variable lookups at a
+  recorded ambient depth and rechecks the evidence against its derived type;
+- decomposes complete Pi telescopes, classifies explicit premise annotations,
+  rejects Core metavariables, and records exact unreduced class heads,
+  parameter roles, plicities, and arguments;
+- turns each completed direct-parent conversion into an ordinary superclass
+  provider with exactly one child-evidence premise, while retaining direct
+  child/parent/ordinal provenance;
+- revalidates JSON-replayed provider data into a canonical deeply frozen
+  registry ordered only by stable qualified provider ID;
+- builds immutable scopes from source-significant outer-to-inner lexical
+  frames plus order-insensitive named openings and exact imported-interface
+  pins, activating no provider outside those explicit inputs;
+- ranks inner lexical frames before outer frames, opened named scopes next,
+  and imported/current globals together last, sorting priority then stable ID
+  inside a rank without selecting or discarding equal-ranked evidence; and
+- serializes registry and scope artifacts through the existing browser-safe
+  canonical workspace JSON encoder without hashing, I/O, callbacks, or hidden
+  process state.
+
+The v3.2 barrel exports the module, the root runner registers its focused
+suite, and the source-visible AI-native capability record now reports
+`instance-provider-scope@emdash-lf-instance-scope-v1`. The earlier
+AI-SYNTH-1B2 row is correspondingly partitioned: artifact-only 1B2A is this
+result, while canonical-workspace persistence remains 1B2B and recursive
+resolution remains AI-SYNTH-2/SYNTH-RECURSE-6.
+
+Qualification records:
+
+- the dedicated provider/scope suite: 6/6 passed;
+- the combined class schema, identity layout, parent lowering, provider/scope,
+  and AI-native capability matrix: 41 tests across seven suites, all passed;
+- `./scripts/pnpmw run workspace:check`: passed;
+- `./scripts/pnpmw run typecheck`: passed;
+- changed-file ESLint: passed;
+- direct capability text rendering and the browser-safety/forbidden-effect
+  scan: passed; and
+- `git diff --check`: passed.
+
+The one required `./scripts/pnpmw run check:ts` passed against the unchanged
+final TypeScript boundary: workspace validation, full typecheck, full ESLint,
+and 1,546 tests across 232 suites completed with 1,492 active passes, 54
+intentional skips, and zero failures. The directly observed root-test duration
+was 2,939,372.205378 ms. Its durable log and exit markers are
+`/tmp/emdash-classes-v1-check-ts-scope5-run1.{log,status}`. No second aggregate
+was run for documentation synchronization. `SYNTH-RECURSE-6` is now
+dependency-ready and begins with a read-only audit and frozen proposal, not
+recursive implementation by analogy.
+
+No parser, transfer-expression variant, Core/checker branch, runtime/proof
+rule, recursive resolver, metavariable scheduler, synthesis result, call-site
+elaborator, workspace schema, package boundary, browser command, Lambdapi
+fragment, `emdash2/` source, active kernel owner, or sibling repository
+changed. No Lambdapi or active-kernel gate is relevant. The immutable proposal
+checkpoint is `1a6d591`; the qualified implementation checkpoint uses the
+frozen message `elaborator: add immutable instance scopes`.
 
 ## Decision Ledger
 
