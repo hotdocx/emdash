@@ -42,6 +42,9 @@ import {
     CORE_LF_INSTANCE_SYNTHESIS_PROFILE
 } from '../src/v3_2/lf_instance_synthesis';
 import {
+    CORE_LF_CLASS_CALL_ELABORATION_PROFILE
+} from '../src/v3_2/lf_class_call_elaboration';
+import {
     CORE_LF_DICTIONARY_SYNTHESIS_PROFILE
 } from '../src/v3_2/lf_dictionary_synthesis';
 import {
@@ -467,6 +470,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assert.equal(
             revisions.get('recursive-instance-synthesis'),
             CORE_LF_INSTANCE_SYNTHESIS_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('class-call-elaboration'),
+            CORE_LF_CLASS_CALL_ELABORATION_PROFILE.revision
         );
         assert.equal(
             revisions.get('research-document-binding'),

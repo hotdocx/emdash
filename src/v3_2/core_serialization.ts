@@ -118,14 +118,13 @@ const serializeExpression = (
     }
 };
 
-/**
- * Produce the canonical one-line `EMDASH-CORE-SEXP-1` inspection form.
- */
-export function serializeCoreExpression(
+/** Serialize one expression scoped under an explicit ambient telescope. */
+export function serializeCoreExpressionAtDepth(
     expression: KernelExpression,
+    ambientDepth: number,
     options: CoreExplicitSerializationOptions = {}
 ): string {
-    kernelAssertScoped(expression);
+    kernelAssertScoped(expression, ambientDepth);
     const labels = new Map<string, string>();
     for (const [name, label] of Object.entries(
         options.freeReferenceLabels ?? {}
@@ -141,4 +140,15 @@ export function serializeCoreExpression(
         freeReferenceLabels: labels,
         metaSessions: new Map()
     });
+}
+
+/**
+ * Produce the canonical one-line `EMDASH-CORE-SEXP-1` inspection form for a
+ * closed expression.
+ */
+export function serializeCoreExpression(
+    expression: KernelExpression,
+    options: CoreExplicitSerializationOptions = {}
+): string {
+    return serializeCoreExpressionAtDepth(expression, 0, options);
 }

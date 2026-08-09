@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through SYNTH-RECURSE-6 are final-green; the bounded CALL-SYNTH-7A saturated-
-call contract is frozen and approved for implementation
+through CALL-SYNTH-7A are final-green; partial/named/default application
+remains the consumer-gated CALL-SYNTH-7B row
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -513,7 +513,7 @@ make explicit local scope discipline especially important.
 | CLASS-INHERIT-4B | complete | Transparent direct-parent reconstruction definitions are public and checked; both explicit algebraic diamond routes normalize to one canonical constructor term. |
 | SYNTH-SCOPE-5 | complete | Checked providers and immutable explicit scope ranks are public, focused-green, and qualified by the complete shared TypeScript gate. |
 | SYNTH-RECURSE-6 | complete | The bounded exact-head resolver is public and final-green with recursive premises, tables, explicit bounds, ambiguity, runtime-backed definitional equality, and portable traces. |
-| CALL-SYNTH-7A | proposal-approved | Implement saturated binder walking, ordinary implicit inference, arbitrary annotated instance positions, delayed ground synthesis, and final explicit-Core checking. |
+| CALL-SYNTH-7A | complete | Saturated binder walking, ordinary implicit inference, arbitrary annotated instance positions, delayed ground synthesis, stable failure data, and final explicit-Core checking are public and final-green. |
 | CALL-SYNTH-7B | gated | Add partial application, named arguments, defaults, and stronger retry/postponement only after 7A and an exact ergonomic consumer. |
 | ALGEBRA-GRADUATE-8 | pending | Qualify the complete algebraic diamond and one recursive provider. |
 | MATH-CONSUMER-9 | pending | Qualify `struct_cov_sieve`, then select one category/Functor/Adjunction consumer. |
@@ -2008,6 +2008,74 @@ supersession. Implementation begins only after a documentation-only proposal
 checkpoint. The frozen proposal message is
 `docs: freeze class-call elaboration contract`; the implementation checkpoint
 message is `elaborator: add saturated class-call synthesis`.
+
+## CALL-SYNTH-7A Implementation And Qualification Record
+
+Implementation began from proposal checkpoint `c3c6beb` and preserves the
+frozen saturated-call boundary. The additive
+`src/v3_2/lf_class_call_elaboration.ts` module now:
+
+- reconstructs and byte-compares the exact immutable registry/scope
+  snapshots, checks their exact contextual depth and declaration environment,
+  and fingerprints the explicit reviewed runtime used by nested synthesis;
+- validates stable instance-request IDs and arbitrary Pi-binder ordinals
+  against completed class layouts and exact installed class heads, without a
+  class node or third Core plicity;
+- walks one complete dependent Pi telescope, checks supplied arguments in
+  order, inserts isolated ordinary or instance metas for omitted implicits,
+  and rejects missing explicit, extra, plicity-mismatched, or malformed calls
+  with stable code/path diagnostics;
+- lets later supplied evidence or an optional expected result constrain
+  ordinary implicits, then invokes the completed immutable resolver only for
+  binder-ordered meta-free class targets and rechecks every synthesized term
+  against its exact request type;
+- propagates the first ready `missing | stuck | ambiguous | limit-exceeded`
+  search result as deeply frozen call data while retaining later pending or
+  skipped request traces; and
+- zonks to one saturated, meta-free, fully explicit call and sends it through
+  an ordinary final Core infer/check boundary before returning a portable
+  canonical report.
+
+`core_serialization.ts` now exposes the additive
+`serializeCoreExpressionAtDepth(...)` inspection helper. The previous
+`serializeCoreExpression(...)` is its depth-zero wrapper and retains its
+closed-term behavior. The recursive resolver now reuses that shared utility
+instead of carrying a private duplicate; its search and choice rules are
+unchanged.
+
+The public v3.2 barrel exports the call elaborator. The source-visible
+AI-native capability record reports
+`class-call-elaboration@emdash-lf-class-call-elaboration-v1`. The checked
+algebraic fixture has one opaque five-binder callee interleaving an ordinary
+implicit carrier, two explicit values, `Monoid` evidence, and later `Mul`
+evidence. It demonstrates inference both from a supplied later dictionary and
+from an expected result, explicit-evidence bypass, local recursive search, and
+the runtime-coherent `Monoid -> Mul` diamond.
+
+Final proportional qualification evidence:
+
+- the combined provider/scope/resolver/call suite: 18/18 passed, including six
+  saturated-call cases;
+- the serializer, structure, class-schema, inheritance-layout,
+  parent-lowering, provider/resolver/call, and AI-native capability matrix:
+  76 active passes and two intentional Lambdapi skips across 78 tests and 11
+  suites;
+- `./scripts/pnpmw run workspace:check`: passed;
+- `./scripts/pnpmw run typecheck`: passed;
+- changed-file ESLint: passed; and
+- forbidden-effect, tracked/untracked whitespace, and canonical diff scans:
+  passed.
+
+The one required `./scripts/pnpmw run check:ts` passed against the stabilized
+shared TypeScript boundary: workspace validation, full typecheck, full ESLint,
+and 1,559 tests across 234 suites completed with 1,505 active passes, 54
+intentional skips, and zero failures. The directly observed root-test duration
+was 2,715,709.559982 ms. Its durable log and exit markers are
+`/tmp/emdash-classes-v1-check-ts-call-synth7a-run1.{log,status}`. No second
+aggregate was run for documentation synchronization. No Lambdapi/emdash
+source, active owner, Core node, checker/session API, runtime/proof rule,
+parser, workspace schema, sibling repository, package, hosted service, or
+deployment changed.
 
 ## Decision Ledger
 

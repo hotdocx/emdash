@@ -9,6 +9,7 @@
 
 import { CoreCheckerError } from './checker';
 import { CoreContext } from './context';
+import { serializeCoreExpressionAtDepth } from './core_serialization';
 import {
     CoreLfClassInheritanceLayout,
     validateCoreLfClassInheritanceLayout
@@ -45,7 +46,6 @@ import {
     KernelMetaVariable,
     Plicity,
     kernelAmbientDependencies,
-    kernelAssertScoped,
     kernelCall,
     kernelInstantiate,
     kernelUniverse,
@@ -475,62 +475,6 @@ const containsMeta = (expression: KernelExpression): boolean => {
     }
 };
 
-const serializeScopedExpression = (
-    expression: KernelExpression,
-    ambientDepth: number
-): string => {
-    kernelAssertScoped(expression, ambientDepth);
-    const metaSessions = new Map<symbol, number>();
-    const serialize = (current: KernelExpression): string => {
-        switch (current.tag) {
-            case 'universe':
-                return '(universe)';
-            case 'reference':
-                return `(free ${JSON.stringify(current.name)})`;
-            case 'bound':
-                return `(bound ${current.index})`;
-            case 'meta': {
-                let session = metaSessions.get(current.identity.session);
-                if (session === undefined) {
-                    session = metaSessions.size;
-                    metaSessions.set(current.identity.session, session);
-                }
-                const spine = current.spine.map(serialize).join(' ');
-                return spine.length === 0
-                    ? `(meta ${session} ${current.identity.index})`
-                    : `(meta ${session} ${current.identity.index} ` +
-                        `(spine ${spine}))`;
-            }
-            case 'application': {
-                const arguments_ = current.arguments.map(argument =>
-                    `(${argument.plicity} ${serialize(argument.value)})`
-                ).join(' ');
-                return arguments_.length === 0
-                    ? `(owner ${JSON.stringify(current.owner)})`
-                    : `(owner ${JSON.stringify(current.owner)} ${arguments_})`;
-            }
-            case 'call': {
-                const arguments_ = current.arguments.map(argument =>
-                    `(${argument.plicity} ${serialize(argument.value)})`
-                ).join(' ');
-                return `(call ${serialize(current.callee)} ${arguments_})`;
-            }
-            case 'pi':
-            case 'lambda':
-                return `(${current.tag} ` +
-                    `(binder ${current.binder.mode.plicity} ` +
-                    `${current.binder.mode.variation} ` +
-                    `${serialize(current.binder.type)}) ` +
-                    `${serialize(current.body)})`;
-            default: {
-                const exhaustive: never = current;
-                return exhaustive;
-            }
-        }
-    };
-    return serialize(expression);
-};
-
 const checkedLimit = (
     value: unknown,
     path: string
@@ -677,13 +621,16 @@ const targetTrace = (
 ): CoreLfInstanceSynthesisTargetTrace => ({
     class: cloneClass(template.class),
     coreHeadName: template.coreHeadName,
-    type: serializeScopedExpression(type, ambientDepth),
-    normalizedType: serializeScopedExpression(normalizedType, ambientDepth),
+    type: serializeCoreExpressionAtDepth(type, ambientDepth),
+    normalizedType: serializeCoreExpressionAtDepth(
+        normalizedType,
+        ambientDepth
+    ),
     arguments: arguments_.map((argument, ordinal) => ({
         ordinal,
         role: template.roles[ordinal],
         plicity: template.plicities[ordinal],
-        value: serializeScopedExpression(argument, ambientDepth)
+        value: serializeCoreExpressionAtDepth(argument, ambientDepth)
     }))
 });
 
@@ -975,7 +922,7 @@ class CoreLfInstanceResolver {
         );
         if (containsMeta(type)) {
             const goalKey = `${displaySymbol(template.class.classId)}::` +
-                serializeScopedExpression(type, this.context.depth);
+                serializeCoreExpressionAtDepth(type, this.context.depth);
             return {
                 status: 'stuck',
                 reason: 'goal-contains-unresolved-metavariable',
@@ -994,7 +941,7 @@ class CoreLfInstanceResolver {
         if (normalization.status !== 'normal') {
             const partial = normalization.expression;
             const goalKey = `${displaySymbol(template.class.classId)}::` +
-                serializeScopedExpression(partial, this.context.depth);
+                serializeCoreExpressionAtDepth(partial, this.context.depth);
             return {
                 status: normalization.status === 'step-limit-exceeded'
                     ? 'limit-exceeded'
@@ -1019,7 +966,7 @@ class CoreLfInstanceResolver {
             'normalizedInstanceGoal'
         );
         const goalKey = `${displaySymbol(template.class.classId)}::` +
-            serializeScopedExpression(
+            serializeCoreExpressionAtDepth(
                 normalization.expression,
                 this.context.depth
             );
@@ -1238,7 +1185,7 @@ class CoreLfInstanceResolver {
                 trace.ordinaryArguments.push({
                     binderOrdinal: entry.binder.ordinal,
                     binderName: entry.binder.binderName,
-                    value: serializeScopedExpression(
+                    value: serializeCoreExpressionAtDepth(
                         value,
                         this.context.depth
                     )
@@ -1266,7 +1213,7 @@ class CoreLfInstanceResolver {
                     binderOrdinal: entry.binder.ordinal,
                     binderName: entry.binder.binderName,
                     class: cloneClass(entry.binder.target.class),
-                    target: serializeScopedExpression(
+                    target: serializeCoreExpressionAtDepth(
                         premiseType,
                         this.context.depth
                     ),
@@ -1311,7 +1258,7 @@ class CoreLfInstanceResolver {
                 binderOrdinal: entry.binder.ordinal,
                 binderName: entry.binder.binderName,
                 class: cloneClass(entry.binder.target.class),
-                target: serializeScopedExpression(
+                target: serializeCoreExpressionAtDepth(
                     premiseType,
                     this.context.depth
                 ),
@@ -1396,7 +1343,7 @@ class CoreLfInstanceResolver {
         }
         trace.outcome = 'success';
         trace.reason = 'checked-explicit-evidence';
-        trace.term = serializeScopedExpression(
+        trace.term = serializeCoreExpressionAtDepth(
             checkedTerm,
             this.context.depth
         );

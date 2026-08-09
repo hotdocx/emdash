@@ -3,6 +3,9 @@ import { describe, it } from 'node:test';
 import {
     CORE_LF_INSTANCE_SCOPE_PROFILE,
     CORE_LF_INSTANCE_SYNTHESIS_PROFILE,
+    CORE_LF_CLASS_CALL_ELABORATION_PROFILE,
+    CoreLfClassCallElaborationError,
+    CoreLfClassCallElaborationErrorCode,
     CoreLfClassInheritanceLayout,
     CoreLfClassInheritanceLoweringExpansion,
     CoreLfClassMethodIdentity,
@@ -36,6 +39,8 @@ import {
     declareCoreLfGlobalInstanceProvider,
     declareCoreLfLocalInstanceProvider,
     declareCoreLfSuperclassInstanceProvider,
+    elaborateCoreLfSaturatedClassCall,
+    isCoreKind,
     kernelBound,
     kernelCall,
     kernelExpressionEquals,
@@ -47,6 +52,7 @@ import {
     serializeCoreLfInstanceRegistrySnapshot,
     serializeCoreLfInstanceScopeSnapshot,
     serializeCoreLfInstanceSynthesisReport,
+    serializeCoreLfClassCallElaborationReport,
     synthesizeCoreLfInstance
 } from '../src/v3_2';
 
@@ -127,6 +133,24 @@ const captureSynthesis = (
     return captured!;
 };
 
+const captureClassCall = (
+    thunk: () => unknown,
+    code: CoreLfClassCallElaborationErrorCode
+): CoreLfClassCallElaborationError => {
+    let captured: CoreLfClassCallElaborationError | undefined;
+    assert.throws(thunk, error => {
+        if (
+            error instanceof CoreLfClassCallElaborationError &&
+            error.code === code
+        ) {
+            captured = error;
+            return true;
+        }
+        return false;
+    });
+    return captured!;
+};
+
 interface ClassEntry {
     readonly expansion: CoreLfStructureDeclarationExpansion;
     readonly schema: CoreLfClassSchema;
@@ -156,6 +180,7 @@ interface AlgebraicFixture {
         readonly cycle: CoreLfQualifiedSymbol;
         readonly underconstrained: CoreLfQualifiedSymbol;
     };
+    readonly classCallSymbol: CoreLfQualifiedSymbol;
 }
 
 const buildAlgebraicFixture = (
@@ -435,6 +460,10 @@ const buildAlgebraicFixture = (
         global(monoid.schema.structure.carrier),
         [implicit(parameter)]
     );
+    const mulAt = (parameter: CoreLfTransferExpression) => call(
+        global(mul.schema.structure.carrier),
+        [implicit(parameter)]
+    );
     const instanceType: CoreLfTransferExpression = {
         tag: 'pi',
         binder: {
@@ -518,13 +547,69 @@ const buildAlgebraicFixture = (
         provenance: source('underconstrained instance declaration')
     }];
 
+    const classCallSymbol = symbol('useClasses');
+    const classCallType: CoreLfTransferExpression = {
+        tag: 'pi',
+        binder: {
+            hint: 'A',
+            mode: implicitMode,
+            type: global(code)
+        },
+        body: {
+            tag: 'pi',
+            binder: {
+                hint: 'tag',
+                mode: explicitMode,
+                type: global(code)
+            },
+            body: {
+                tag: 'pi',
+                binder: {
+                    hint: 'instMonoid',
+                    mode: implicitMode,
+                    type: monoidAt(bound(1))
+                },
+                body: {
+                    tag: 'pi',
+                    binder: {
+                        hint: 'payload',
+                        mode: explicitMode,
+                        type: global(code)
+                    },
+                    body: {
+                        tag: 'pi',
+                        binder: {
+                            hint: 'instMul',
+                            mode: implicitMode,
+                            type: mulAt(bound(3))
+                        },
+                        body: monoidAt(bound(4))
+                    }
+                }
+            }
+        }
+    };
+    const classCallDeclaration: CoreLfTransferDeclaration = {
+        order: order + instances.length + recursiveDeclarations.length,
+        symbol: classCallSymbol,
+        type: classCallType,
+        body: coreLfTransferAbsentBody(),
+        modifiers: {
+            visibility: 'public',
+            rigidity: 'constant',
+            sourceOpacity: 'opaque'
+        },
+        provenance: source('saturated class-call elaboration fixture')
+    };
+
     const structures = [mul, one, semigroup, mulOne, monoid];
     const declarations = [
         codeDeclaration,
         ...structures.flatMap(entry => entry.expansion.declarations),
         ...lowerings.flatMap(entry => entry.declarations),
         ...instances,
-        ...recursiveDeclarations
+        ...recursiveDeclarations,
+        classCallDeclaration
     ];
     const runtimeRules = structures.flatMap(entry =>
         entry.expansion.runtimeRules
@@ -604,7 +689,8 @@ const buildAlgebraicFixture = (
         classes: { mul, one, semigroup, mulOne, monoid },
         lowerings,
         instanceSymbols,
-        recursiveSymbols
+        recursiveSymbols,
+        classCallSymbol
     };
 };
 
@@ -867,6 +953,54 @@ describe('v3.2 immutable instance providers and scopes', () => {
             ...artifacts,
             limits
         });
+    };
+
+    const classCallDeclaration =
+        current.compiled.declarations.declaration(current.classCallSymbol);
+    assert.equal(classCallDeclaration?.link.kind, 'free-declaration');
+    if (classCallDeclaration?.link.kind !== 'free-declaration') {
+        throw new Error('class-call fixture did not compile its callee');
+    }
+    const classCallCallee = kernelFree(
+        classCallDeclaration.link.coreName,
+        synthesisWitness
+    );
+    const classCallInstanceBinders = [{
+        binderOrdinal: 2,
+        requestId: 'call.instMonoid',
+        classLayout: current.classes.monoid.layout
+    }, {
+        binderOrdinal: 4,
+        requestId: 'call.instMul',
+        classLayout: current.classes.mul.layout
+    }] as const;
+    type ClassCallInput = Parameters<
+        typeof elaborateCoreLfSaturatedClassCall
+    >[0];
+    const classCallInput = (
+        overrides: Partial<ClassCallInput> = {}
+    ): ClassCallInput => {
+        const artifacts = synthesisArtifacts(
+            [currentLocals.inner, ...currentSuperclasses],
+            'inner'
+        );
+        return {
+            declarations: current.compiled.declarations,
+            context: currentLocals.context,
+            callee: classCallCallee,
+            arguments: [{
+                plicity: 'explicit',
+                value: kernelBound(2, synthesisWitness)
+            }, {
+                plicity: 'explicit',
+                value: kernelBound(2, synthesisWitness)
+            }],
+            instanceBinders: classCallInstanceBinders,
+            expectedType: classTarget(current.classes.monoid),
+            provenance: synthesisWitness,
+            ...artifacts,
+            ...overrides
+        };
     };
 
     describe('bounded recursive instance synthesis', () => {
@@ -1322,6 +1456,453 @@ describe('v3.2 immutable instance providers and scopes', () => {
                     invalid: () => undefined
                 } as never),
                 'NON_PORTABLE_DATA'
+            );
+        });
+    });
+
+    describe('saturated class-call synthesis', () => {
+        it('infers an ordinary implicit and fills arbitrary class positions', () => {
+            const outcome = elaborateCoreLfSaturatedClassCall(
+                classCallInput()
+            );
+            assert.equal(outcome.status, 'elaborated');
+            if (outcome.status !== 'elaborated') return;
+            assert.equal(
+                outcome.report.revision,
+                CORE_LF_CLASS_CALL_ELABORATION_PROFILE.revision
+            );
+            assert.equal(outcome.term.tag, 'call');
+            if (outcome.term.tag !== 'call') return;
+            assert.deepEqual(
+                outcome.term.arguments.map(argument => argument.plicity),
+                ['implicit', 'explicit', 'implicit', 'explicit', 'implicit']
+            );
+            assert.equal(outcome.term.arguments.length, 5);
+            assert.equal(
+                kernelExpressionEquals(
+                    outcome.term.arguments[0].value,
+                    kernelBound(2, synthesisWitness)
+                ),
+                true
+            );
+            assert.equal(
+                kernelExpressionEquals(
+                    outcome.term.arguments[2].value,
+                    kernelBound(0, synthesisWitness)
+                ),
+                true
+            );
+            assert.deepEqual(
+                outcome.report.binders.map(binder => binder.disposition),
+                [
+                    'inferred-implicit',
+                    'provided',
+                    'synthesized',
+                    'provided',
+                    'synthesized'
+                ]
+            );
+            assert.equal(
+                outcome.report.binders[4].synthesis?.goals[0]
+                    .equivalentProviders?.length,
+                2
+            );
+            assert.doesNotMatch(outcome.report.term ?? '', /\(meta /u);
+
+            const checker = createCoreLfChecker(
+                current.compiled.declarations.environment,
+                undefined,
+                currentRuntime
+            );
+            const inferred = checker.infer(
+                currentLocals.context,
+                outcome.term
+            );
+            assert.equal(isCoreKind(inferred.type), false);
+            if (isCoreKind(inferred.type)) return;
+            assert.equal(
+                kernelExpressionEquals(
+                    inferred.type,
+                    classTarget(current.classes.monoid)
+                ),
+                true
+            );
+            assertDeepFrozen(outcome);
+        });
+
+        it('accepts explicit dictionaries without invoking search', () => {
+            const inferredFromEvidence =
+                elaborateCoreLfSaturatedClassCall(classCallInput({
+                    arguments: [{
+                        plicity: 'explicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }, {
+                        plicity: 'implicit',
+                        value: kernelBound(0, synthesisWitness)
+                    }, {
+                        plicity: 'explicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }],
+                    expectedType: undefined
+                }));
+            assert.equal(inferredFromEvidence.status, 'elaborated');
+            assert.deepEqual(
+                inferredFromEvidence.report.binders.map(binder =>
+                    binder.disposition
+                ),
+                [
+                    'inferred-implicit',
+                    'provided',
+                    'provided',
+                    'provided',
+                    'synthesized'
+                ]
+            );
+
+            const mul = synthesize(
+                current.classes.mul,
+                [currentLocals.inner, ...currentSuperclasses],
+                'inner'
+            );
+            assert.equal(mul.status, 'solved');
+            if (mul.status !== 'solved') return;
+            const outcome = elaborateCoreLfSaturatedClassCall(
+                classCallInput({
+                    arguments: [{
+                        plicity: 'implicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }, {
+                        plicity: 'explicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }, {
+                        plicity: 'implicit',
+                        value: kernelBound(0, synthesisWitness)
+                    }, {
+                        plicity: 'explicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }, {
+                        plicity: 'implicit',
+                        value: mul.term
+                    }],
+                    expectedType: undefined
+                })
+            );
+            assert.equal(outcome.status, 'elaborated');
+            if (outcome.status !== 'elaborated') return;
+            assert.deepEqual(
+                outcome.report.binders.map(binder => binder.disposition),
+                ['provided', 'provided', 'provided', 'provided', 'provided']
+            );
+            assert.equal(
+                outcome.report.binders.some(binder =>
+                    binder.synthesis !== undefined
+                ),
+                false
+            );
+            assert.equal(outcome.expectedType, undefined);
+        });
+
+        it('leaves an underconstrained ordinary parameter inspectably stuck', () => {
+            const outcome = elaborateCoreLfSaturatedClassCall(
+                classCallInput({ expectedType: undefined })
+            );
+            assert.equal(outcome.status, 'stuck');
+            assert.equal(outcome.report.reason, 'ordinary-implicit-unresolved');
+            assert.equal(outcome.report.term, undefined);
+            assert.equal(outcome.report.binders[0].disposition,
+                'inferred-implicit');
+            assert.equal(outcome.report.binders[2].disposition, 'pending');
+            assert.equal(outcome.report.binders[2].synthesis, undefined);
+            assertDeepFrozen(outcome);
+        });
+
+        it('propagates the first ready search failure and skips later requests', () => {
+            const cases = [{
+                expected: 'missing' as const,
+                artifacts: synthesisArtifacts([], 'none'),
+                limits: undefined
+            }, {
+                expected: 'ambiguous' as const,
+                artifacts: synthesisArtifacts([
+                    currentOrdinary.primary,
+                    currentOrdinary.secondary
+                ], 'none'),
+                limits: undefined
+            }, {
+                expected: 'limit-exceeded' as const,
+                artifacts: synthesisArtifacts(
+                    [currentLocals.inner, ...currentSuperclasses],
+                    'inner'
+                ),
+                limits: { maxFuel: 0 }
+            }];
+            for (const entry of cases) {
+                const outcome = elaborateCoreLfSaturatedClassCall(
+                    classCallInput({
+                        ...entry.artifacts,
+                        synthesisLimits: entry.limits
+                    })
+                );
+                assert.equal(outcome.status, entry.expected);
+                assert.equal(
+                    outcome.report.binders[2].reason,
+                    `instance-synthesis-${entry.expected}`
+                );
+                assert.equal(
+                    outcome.report.binders[4].disposition,
+                    'skipped'
+                );
+                assert.equal(
+                    outcome.report.binders[4].synthesis,
+                    undefined
+                );
+                assertDeepFrozen(outcome);
+            }
+        });
+
+        it('replays canonically without mutating source call artifacts', () => {
+            const firstInput = classCallInput();
+            const sourceSnapshot = JSON.stringify({
+                arguments: firstInput.arguments,
+                annotations: firstInput.instanceBinders
+            });
+            const first = elaborateCoreLfSaturatedClassCall(firstInput);
+            assert.equal(first.status, 'elaborated');
+            assert.equal(
+                JSON.stringify({
+                    arguments: firstInput.arguments,
+                    annotations: firstInput.instanceBinders
+                }),
+                sourceSnapshot
+            );
+
+            const registry = createCoreLfInstanceRegistrySnapshot({
+                revision: firstInput.registry.registryRevision,
+                providers: [...firstInput.registry.providers].reverse()
+            });
+            const scope = createCoreLfInstanceScopeSnapshot({
+                revision: firstInput.scope.scopeRevision,
+                registry,
+                moduleId: firstInput.scope.moduleId,
+                contextDepth: firstInput.scope.contextDepth,
+                localFrames: firstInput.scope.localFrames.map(frame => ({
+                    frameId: frame.frameId,
+                    kind: frame.kind,
+                    providers: [...frame.providers].reverse()
+                })),
+                openedNamedScopes: firstInput.scope.openedNamedScopes,
+                imports: firstInput.scope.imports.map(importEntry => ({
+                    moduleId: importEntry.moduleId,
+                    moduleRevision: importEntry.moduleRevision,
+                    interfaceRevision: importEntry.interfaceRevision,
+                    interfaceSha256: importEntry.interfaceSha256,
+                    providers: [...importEntry.providers].reverse()
+                }))
+            });
+            const replay = elaborateCoreLfSaturatedClassCall(
+                classCallInput({ registry, scope })
+            );
+            assert.equal(replay.status, 'elaborated');
+            assert.equal(
+                serializeCoreLfClassCallElaborationReport(first.report),
+                serializeCoreLfClassCallElaborationReport(replay.report)
+            );
+            assert.match(first.report.term ?? '', /\(bound 2\)/u);
+            assert.equal(
+                serializeCoreLfClassCallElaborationReport(first.report),
+                serializeCoreLfClassCallElaborationReport(first.report)
+            );
+            captureClassCall(
+                () => serializeCoreLfClassCallElaborationReport({
+                    ...first.report,
+                    invalid: () => undefined
+                } as never),
+                'NON_PORTABLE_DATA'
+            );
+        });
+
+        it('fails closed on malformed annotations, calls, and artifacts', () => {
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(null as never),
+                'INVALID_INPUT'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    callee: kernelBound(2, synthesisWitness)
+                })),
+                'INVALID_CALLEE'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    instanceBinders: [
+                        ...classCallInstanceBinders,
+                        {
+                            binderOrdinal: 2,
+                            requestId: 'call.duplicateOrdinal',
+                            classLayout: current.classes.monoid.layout
+                        }
+                    ]
+                })),
+                'DUPLICATE_INSTANCE_BINDER'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    instanceBinders: [{
+                        binderOrdinal: 1,
+                        requestId: 'call.explicitBinder',
+                        classLayout: current.classes.monoid.layout
+                    }]
+                })),
+                'INVALID_INSTANCE_BINDER'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    instanceBinders: [{
+                        binderOrdinal: 2,
+                        requestId: 'call.wrongHead',
+                        classLayout: current.classes.mul.layout
+                    }, classCallInstanceBinders[1]]
+                })),
+                'INVALID_CLASS_HEAD'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    instanceBinders: [
+                        ...classCallInstanceBinders,
+                        {
+                            binderOrdinal: 8,
+                            requestId: 'call.pastTelescope',
+                            classLayout: current.classes.monoid.layout
+                        }
+                    ]
+                })),
+                'INVALID_INSTANCE_BINDER'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    arguments: []
+                })),
+                'MISSING_EXPLICIT_ARGUMENT'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    arguments: [{
+                        plicity: 'explicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }, {
+                        plicity: 'explicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }, {
+                        plicity: 'explicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }]
+                })),
+                'TOO_MANY_ARGUMENTS'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    arguments: [{
+                        plicity: 'implicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }, {
+                        plicity: 'implicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }]
+                })),
+                'INVALID_ARGUMENT'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    arguments: [{
+                        plicity: 'explicit',
+                        value: kernelBound(0, synthesisWitness)
+                    }, {
+                        plicity: 'explicit',
+                        value: kernelBound(2, synthesisWitness)
+                    }]
+                })),
+                'INVALID_ARGUMENT'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    expectedType: kernelBound(0, synthesisWitness)
+                })),
+                'INVALID_EXPECTED_TYPE'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    expectedType: classTarget(current.classes.mul)
+                })),
+                'RESULT_TYPE_MISMATCH'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    maxBinders: 4
+                })),
+                'INVALID_LIMITS'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    runtimeProgram: {
+                        revision: 'malformed-class-call-runtime',
+                        ruleIds: ['duplicate', 'duplicate'],
+                        rewriteHead: currentRuntime.rewriteHead.bind(
+                            currentRuntime
+                        )
+                    }
+                })),
+                'INVALID_INPUT'
+            );
+
+            const wrongDepthRegistry =
+                createCoreLfInstanceRegistrySnapshot({
+                    revision: 'class-call-wrong-depth-registry',
+                    providers: []
+                });
+            const wrongDepthScope = createCoreLfInstanceScopeSnapshot({
+                revision: 'class-call-wrong-depth-scope',
+                registry: wrongDepthRegistry,
+                moduleId: current.moduleId,
+                contextDepth: currentLocals.context.depth - 1
+            });
+            const wrongContext = captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    registry: wrongDepthRegistry,
+                    scope: wrongDepthScope
+                })),
+                'INVALID_CONTEXT'
+            );
+            assert.equal(wrongContext.path, 'input.scope.contextDepth');
+
+            const valid = classCallInput();
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    registry: {
+                        ...valid.registry,
+                        providers: valid.registry.providers.map(
+                            (provider, index) => index === 0
+                                ? {
+                                    ...provider,
+                                    revision: 'wrong-provider-profile' as never
+                                }
+                                : provider
+                        )
+                    }
+                })),
+                'INVALID_REGISTRY'
+            );
+            captureClassCall(
+                () => elaborateCoreLfSaturatedClassCall(classCallInput({
+                    scope: {
+                        ...valid.scope,
+                        candidates: valid.scope.candidates.map(
+                            (candidate, index) => index === 0
+                                ? { ...candidate, priority: 99 }
+                                : candidate
+                        )
+                    }
+                })),
+                'INVALID_SCOPE'
             );
         });
     });

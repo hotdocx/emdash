@@ -39,13 +39,22 @@
 > passes, 54 intentional skips, and zero failures. The continuation adds no
 > declaration parser, general
 > inductive frontend, class/Core node, or production Lambdapi dependency.
-> `CALL-SYNTH-7` has now been audited and repartitioned. The approved 7A
-> contract walks one saturated dependent Pi telescope, distinguishes instance
-> binders by explicit management metadata, infers omitted ordinary implicits
-> from later arguments/an optional expected result, delays only ground class
-> requests into the immutable resolver, and ends at a meta-free ordinary Core
-> call. Partial/named/default application remains the separate consumer-gated
-> 7B row. Implementation has not begun at this documentation checkpoint.
+> `CALL-SYNTH-7A` is now implemented and final-green. The public saturated-call
+> elaborator walks one dependent Pi telescope, distinguishes arbitrary
+> instance positions through explicit management metadata, infers omitted
+> ordinary implicits from later supplied evidence or an optional expected
+> result, and sends only ground requests to the immutable resolver in binder
+> order. Explicit evidence bypasses search; expected missing, stuck,
+> ambiguity, and limit results remain deeply frozen call data. Success ends at
+> an independently rechecked, saturated, meta-free explicit Core call. The
+> shared ambient-depth serializer supports portable open-context reports, and
+> the capability record exposes
+> `class-call-elaboration@emdash-lf-class-call-elaboration-v1`. The one required
+> shared TypeScript gate passed 1,559 tests across 234 suites: 1,505 active
+> passes, 54 intentional skips, and zero failures. Partial/named/default
+> application remains the consumer-gated 7B row; no declaration parser,
+> class/Core node, checker semantic change, or production Lambdapi dependency
+> was introduced.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)

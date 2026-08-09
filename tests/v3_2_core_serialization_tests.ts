@@ -18,6 +18,7 @@ import {
     kernelMeta,
     provenance,
     serializeCoreExpression,
+    serializeCoreExpressionAtDepth,
     sourceSpan
 } from '../src/v3_2';
 
@@ -121,6 +122,23 @@ describe('TypeScript v3.2 deterministic explicit-Core serialization', () => {
         assert.equal(
             serializeCoreExpression(second),
             '(meta 0 7)'
+        );
+    });
+
+    it('serializes open terms only under their explicit ambient depth', () => {
+        const nodeProvenance = at('open.ts', 4, 'open');
+        const expression = kernelBound(1, nodeProvenance);
+        assert.equal(
+            serializeCoreExpressionAtDepth(expression, 2),
+            '(bound 1)'
+        );
+        assert.throws(
+            () => serializeCoreExpressionAtDepth(expression, 1),
+            /dangling at binder depth 1/u
+        );
+        assert.throws(
+            () => serializeCoreExpressionAtDepth(expression, -1),
+            /ambient depth must be a nonnegative safe integer/u
         );
     });
 

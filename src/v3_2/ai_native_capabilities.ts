@@ -138,6 +138,13 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                     'priorities, ambiguity, and explicit checked evidence'
             },
             {
+                id: 'class-call-elaboration',
+                revision: 'emdash-lf-class-call-elaboration-v1',
+                scope:
+                    'saturated dependent calls with ordinary implicit ' +
+                    'inference and checked instance insertion'
+            },
+            {
                 id: 'research-document-binding',
                 revision: 'emdash-research-document-binding-v1',
                 scope: 'stable diagram/declaration/proof block identities'
