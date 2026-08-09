@@ -39,6 +39,13 @@
 > passes, 54 intentional skips, and zero failures. The continuation adds no
 > declaration parser, general
 > inductive frontend, class/Core node, or production Lambdapi dependency.
+> `CALL-SYNTH-7` has now been audited and repartitioned. The approved 7A
+> contract walks one saturated dependent Pi telescope, distinguishes instance
+> binders by explicit management metadata, infers omitted ordinary implicits
+> from later arguments/an optional expected result, delays only ground class
+> requests into the immutable resolver, and ends at a meta-free ordinary Core
+> call. Partial/named/default application remains the separate consumer-gated
+> 7B row. Implementation has not begun at this documentation checkpoint.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)

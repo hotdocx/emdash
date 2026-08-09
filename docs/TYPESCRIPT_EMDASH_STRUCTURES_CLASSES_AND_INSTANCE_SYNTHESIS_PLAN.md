@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through SYNTH-RECURSE-6 are final-green; CALL-SYNTH-7 is the next row awaiting
-a fresh read-only audit and bounded proposal
+through SYNTH-RECURSE-6 are final-green; the bounded CALL-SYNTH-7A saturated-
+call contract is frozen and approved for implementation
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -513,7 +513,8 @@ make explicit local scope discipline especially important.
 | CLASS-INHERIT-4B | complete | Transparent direct-parent reconstruction definitions are public and checked; both explicit algebraic diamond routes normalize to one canonical constructor term. |
 | SYNTH-SCOPE-5 | complete | Checked providers and immutable explicit scope ranks are public, focused-green, and qualified by the complete shared TypeScript gate. |
 | SYNTH-RECURSE-6 | complete | The bounded exact-head resolver is public and final-green with recursive premises, tables, explicit bounds, ambiguity, runtime-backed definitional equality, and portable traces. |
-| CALL-SYNTH-7 | pending | Generalize call elaboration to arbitrary class-marked implicit binders. |
+| CALL-SYNTH-7A | proposal-approved | Implement saturated binder walking, ordinary implicit inference, arbitrary annotated instance positions, delayed ground synthesis, and final explicit-Core checking. |
+| CALL-SYNTH-7B | gated | Add partial application, named arguments, defaults, and stronger retry/postponement only after 7A and an exact ergonomic consumer. |
 | ALGEBRA-GRADUATE-8 | pending | Qualify the complete algebraic diamond and one recursive provider. |
 | MATH-CONSUMER-9 | pending | Qualify `struct_cov_sieve`, then select one category/Functor/Adjunction consumer. |
 | PARAM-ROLES-10 | gated | Add output/semi-output and stuck/resume only after an exact consumer audit. |
@@ -1863,6 +1864,151 @@ source, active owner, Core/checker/session API, runtime/proof rule, parser,
 workspace schema, sibling repository, package, hosted service, or deployment
 changed.
 
+## CALL-SYNTH-7 Audit, Repartition, And Frozen 7A Contract
+
+The read-only audit began from final-green resolver checkpoint `168b751` on
+2026-08-09. It compared the leading-only
+`lf_dictionary_authoring.ts` adapter, generic Core call inference in
+`checker.ts`, public meta-retaining `checkRefinement(...)`, proof application,
+the completed class/provider/scope/resolver artifacts, and Lean's
+`Elab/App.lean`, `Term/TermElabM.lean`, and `SyntheticMVars.lean` scheduling.
+
+The existing Core checker already supplies the essential mechanism: while
+walking a generic Pi type it inserts fresh ordinary implicit metas, checks
+later explicit arguments against substituted binder types, and can solve
+those metas through ordinary constraints. What it intentionally cannot know
+is whether an implicit Pi binder is an instance request, because Core plicity
+does not encode Lean's separate `instImplicit` management annotation. Lean's
+useful lesson is correspondingly outside its kernel: application elaboration
+records instance-implicit metavariables, processes later arguments and the
+expected result, and repeatedly attempts only requests no longer blocked by
+ordinary metavariables.
+
+Emdash should reuse that schedule without importing Lean's syntax object,
+global environment extensions, coercion/default machinery, opaque synthetic
+metavariable kinds, error-recovery heuristics, or process-local queue. One
+direct-TypeScript call artifact can carry exact binder annotations and stable
+request IDs, use one isolated checker session for ordinary inference, invoke
+the already qualified immutable resolver only on ground class targets, and
+then erase to a fully explicit checked Core call.
+
+The row is repartitioned because saturated semantic calls and all of Lean's
+application ergonomics are different claims:
+
+- `CALL-SYNTH-7A` handles one completely saturated dependent call, arbitrary
+  instance-binder positions, omitted ordinary implicits, supplied implicit or
+  explicit arguments, an optional expected type, and stable search traces;
+- `CALL-SYNTH-7B` later covers partial application/eta expansion, named
+  arguments, defaults, and stronger postponement/retry behavior after an exact
+  consumer demonstrates which of those features is necessary.
+
+A Lean term using a partial application can be eta-expanded for the 7A
+semantic envelope. This is an explicit temporary authoring limitation, not a
+Core limitation or a claim that partial applications are unnecessary.
+
+The selected additive implementation module is
+`src/v3_2/lf_class_call_elaboration.ts`. Its exact 7A contract is:
+
+1. `elaborateCoreLfSaturatedClassCall(...)` accepts one checked mixed-
+   declaration base, exact `CoreContext`, optional reviewed catalog runtime,
+   one inferable Core callee, a finite plicity-tagged stream of source-supplied
+   Core arguments, a finite set of instance-binder annotations, optional
+   meta-free expected result type, exact immutable registry/scope snapshots,
+   resolver limits, one explicit call provenance, and an optional nonnegative
+   safe `maxBinders` limit (default 128).
+2. A class-call instance annotation contains a nonnegative Pi-binder ordinal,
+   unique stable source request ID, and one completed class-inheritance
+   layout. The annotation is management metadata only. It neither changes
+   `BinderMode` nor adds a third Core plicity; the annotated binder must be an
+   existing implicit Pi whose instantiated type has the exact installed class
+   head, parameter count, and plicities supplied by that layout.
+3. The callee may be a global, local, or compound inferable Core term in the
+   exact context. A fresh `CoreLfChecker`/session with the requested conversion
+   limit and runtime infers it. The elaborator does not enumerate declarations
+   or infer annotations by class-shaped spelling.
+4. 7A walks the complete Pi telescope in order and produces a saturated call.
+   A matching supplied implicit or explicit argument is checked with public
+   `checkRefinement(...)` and substituted into every later binder. An omitted
+   ordinary implicit binder receives a fresh ordinary meta. A missing explicit
+   binder, extra source argument, plicity mismatch, or annotation beyond the
+   finite telescope is a stable malformed-call error.
+5. An omitted annotated instance binder receives a separate fresh instance
+   meta and source-visible request record. Explicitly supplying an argument at
+   that binder checks and substitutes the evidence normally and records a
+   `provided` disposition; it does not run search merely because the binder is
+   annotated.
+6. Pending instance requests are kept in binder order. Before and after each
+   supplied argument, and after optional expected-result refinement, the
+   elaborator retries pending requests whose zonked class target is meta-free.
+   A request blocked by an ordinary meta remains pending. Solving one request
+   may make a later request ready, so the finite queue is revisited until no
+   further progress occurs.
+7. The optional expected type is itself checked as a meta-free type in the
+   exact context. `checkRefinement(...)` against that result may determine
+   ordinary implicits before the final synthesis pass. A stuck constraint is
+   retried only when a ground instance request was actually solved; there is
+   no unbounded generic retry loop.
+8. Every ready request invokes `synthesizeCoreLfInstance(...)` with the exact
+   same declarations, context, reviewed runtime, registry, scope, class
+   layout, and caller limits. A solved term is rechecked against the exact
+   zonked request type in the call's checker session before its meta is solved.
+   Resolver assignments never leak between requests or into failed calls.
+9. Synthesis is not allowed to guess an ordinary implicit. After all supplied
+   arguments and expected-type constraints, any unresolved ordinary meta or
+   non-ground instance target yields a stable call-level `stuck` outcome.
+   Output/semi-output parameter scheduling and inference from premise evidence
+   remain `PARAM-ROLES-10`.
+10. The first unsolved ready request in binder order determines the call-level
+    `missing | stuck | ambiguous | limit-exceeded` outcome. Later requests are
+    retained as `pending`/`skipped` trace records rather than searched under a
+    branch whose call cannot become explicit. Expected search failure is data;
+    malformed input, argument/type errors, and violated checked-artifact
+    invariants throw `CoreLfClassCallElaborationError` with a stable code/path.
+11. A successful result is `status: 'elaborated'` and carries the meta-free
+    explicit Core call, its inferred exact result type, optional checked
+    expected type, ordered request reports, and a deeply frozen portable call
+    report. No synthesis request or session-owned meta crosses the ordinary
+    final `checker.infer(...)` and optional `checker.check(...)` boundary.
+12. The portable report records the callee, supplied-argument count, expected
+    type when present, every walked binder's ordinal/name/mode/type,
+    `provided | inferred-implicit | synthesized | pending | skipped`
+    disposition, stable request IDs, nested synthesis reports, final status,
+    and explicit checked term/type only on success. It contains no live
+    context, checker, session, runtime, table, symbol identity, or meta object.
+13. `core_serialization.ts` gains one additive ambient-depth serializer used
+    by both call reports and the completed resolver. The existing closed
+    `serializeCoreExpression(...)` behavior remains byte-identical as its
+    depth-zero wrapper. This is inspection-only plumbing, not a Core/checker
+    semantic change.
+14. The API performs no parser action, declaration/workspace mutation,
+    provider discovery, process registration, filesystem/network I/O,
+    Lambdapi execution, or callback-driven search. It changes no transfer
+    expression variant, Core node, checker/session API, runtime/proof rule,
+    class layout, provider/scope artifact, or resolver choice rule.
+15. The first corpus extends the checked five-class algebraic fixture with one
+    opaque callee whose telescope interleaves an ordinary implicit parameter,
+    explicit values, `Monoid` evidence, and later `Mul` evidence. Its expected
+    result determines the ordinary implicit; local `Monoid` evidence and the
+    runtime-coherent superclass diamond fill both instance slots.
+
+Focused qualification will cover ordinary inference from an expected type,
+two arbitrary instance positions, explicit evidence bypass, later-request
+readiness after earlier synthesis, exact argument plicity/order, recursive
+scope resolution, missing/ambiguity/limit propagation, underconstrained
+ordinary and class targets, malformed annotations and calls, canonical replay,
+input immutability, deep freeze, ambient-depth serialization, final explicit
+Core rechecking, the neighboring class/scope/resolver/capability matrix,
+typecheck, changed-file lint, workspace check, forbidden-effect/diff scans,
+and one final `check:ts` because the Core serializer and public v3.2 barrel are
+shared boundaries.
+
+The proposal gate `H-TS-EMDASH-CLASSES-CALL-SYNTH-7A-007` is approved under
+the user-authorized unattended-review delegation, with immediate human
+supersession. Implementation begins only after a documentation-only proposal
+checkpoint. The frozen proposal message is
+`docs: freeze class-call elaboration contract`; the implementation checkpoint
+message is `elaborator: add saturated class-call synthesis`.
+
 ## Decision Ledger
 
 | ID | Decision | Rationale |
@@ -1896,6 +2042,13 @@ changed.
 | C-027 | The first resolver requires goal-determined ordinary parameters and premise-independent results; output/semi-output scheduling remains later. | Delivers useful recursive synthesis while making every unsupported inference dependency an explicit stuck state. |
 | C-028 | Expected search outcomes are frozen data; only malformed inputs or violated checked-artifact invariants throw. | AI agents can inspect and revise stable proof-state evidence without parsing exception text. |
 | C-029 | Resolver conversion accepts and fingerprints one explicit reviewed catalog runtime. | Definitional equality of inherited record evidence depends on already checked projection betas; explicit runtime identity keeps this computational evidence reproducible without special cases or hidden global state. |
+| C-030 | Instance-implicit status is explicit binder metadata outside Core plicity. | The checker must preserve one explicit/implicit semantic plicity while management distinguishes ordinary inference from class search. |
+| C-031 | CALL-SYNTH-7A saturates the whole telescope; partial/named/default application is a separate 7B row. | Arbitrary-position evidence insertion and application ergonomics can be reviewed independently, while eta expansion preserves the first semantic envelope. |
+| C-032 | One isolated call session infers ordinary implicits before invoking isolated ground-goal resolvers. | Matches the useful Lean scheduling shape without a hidden mutable synthetic-metavariable service. |
+| C-033 | Explicit evidence at an annotated binder bypasses synthesis. | Preserves the standard escape hatch and makes translation/debugging predictable. |
+| C-034 | Expected result refinement may determine ordinary implicits, but synthesis never does. | Supports the common `{A} -> [C A] -> ...` call while retaining the all-arguments-ground resolver boundary. |
+| C-035 | Call-level search failure is frozen data; malformed application data still throws stable diagnostics. | AI agents need inspectable proof-state transitions without concealing actual source/type errors. |
+| C-036 | Ambient-depth Core serialization is one additive shared inspection utility. | Resolver and call traces need canonical open contextual terms without duplicating the closed serializer or weakening scope validation. |
 
 ## Validation And Checkpoint Policy
 
