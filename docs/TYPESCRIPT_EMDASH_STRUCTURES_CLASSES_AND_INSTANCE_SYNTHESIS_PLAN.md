@@ -7,11 +7,12 @@ Plan-ID: TS-EMDASH-CLASSES
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
 through ALGEBRA-GRADUATE-8 and PACKAGE-12A/12B1 are final-green;
 MATH-CONSUMER-9 is retired without implementation after its stale consumer
-was reconciled with the existing acceptance evidence; remaining call
-ergonomics, parameter-role inference, and standard-library rows stay
-consumer-gated; registry ownership, bootstrap publication, and hosted
-integration remain gated; PACKAGE-12B2 and HOSTED-13 are external-action
-gates requiring separate authorization
+was reconciled with the existing acceptance evidence; PARAM-ROLES-10A is the
+next approved local semantic tranche after a primary-source Lean consumer
+audit, PARAM-ROLES-10B is dependency-ready after 10A, and remaining call
+ergonomics and standard-library rows stay consumer-gated; registry ownership,
+bootstrap publication, and hosted integration remain gated; PACKAGE-12B2 and
+HOSTED-13 are external-action gates requiring separate authorization
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -527,7 +528,8 @@ discipline important, but they are not a prerequisite for this qualification.
 | CALL-SYNTH-7B | gated | Add partial application, named arguments, defaults, and stronger retry/postponement only after 7A and an exact ergonomic consumer. |
 | ALGEBRA-GRADUATE-8 | complete | One exact local `Monoid A` scope now qualifies every direct/transitive parent, positive recursive provider expansion, coherent `Mul` diamond, and the saturated class-aware call under the same immutable artifacts. |
 | MATH-CONSUMER-9 | retired without implementation | The historical `struct_cov_sieve` name was only a parameter-plicity shape inherited from the Cartier review, not an active owner or missing kernel feature. STRUCT-PARAM-1 already qualifies the distinct dependent parameter modes, and ALGEBRA-GRADUATE-8 already supplies the representative Lean-style class consumer. No replacement proxy or mathematical-source edit is justified. |
-| PARAM-ROLES-10 | gated | Add output/semi-output and stuck/resume only after an exact consumer audit. |
+| PARAM-ROLES-10A | approved | Add explicit role-pattern synthesis for ground input and semi-output arguments with one or more inferred output arguments, then use it to finish saturated class calls such as Lean's `HAdd α β ?γ`. |
+| PARAM-ROLES-10B | queued after 10A | Add semi-output and premise-driven scheduling over the exact `Coe`/`HasCoerce` consumer, preserving bounded deterministic retry and explicit final Core. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
 | PACKAGE-12A | complete | The local publishable `@hotdocx/emdash@0.1.0` package now has strict root/authoring/workspace exports, dual browser-safe JavaScript, complete declarations/maps, and a packed-install consumer. No registry mutation occurred. |
 | PACKAGE-12B1 | complete | A token-free two-job GitHub Release workflow now builds and verifies one exact tarball before protected OIDC publication; deterministic release preflight freezes tag/version/repository/package invariants. All local checks are green and no GitHub or npm mutation occurred. |
@@ -2588,6 +2590,119 @@ npm publication/trust/access, deployment, or hosted-template action was run.
 The first publish and trust hardening therefore remain PACKAGE-12B2, exactly
 as frozen above.
 
+## PARAM-ROLES-10 Consumer Audit And 10A Frozen Contract
+
+The post-PACKAGE-12B1 audit revisited the earlier consumer gate against the
+user-supplied clean Lean 4 source baseline at
+`f29e9e488ea8242c875806e4b0564820c2d553b2`. This is no longer a hypothetical
+feature:
+
+- `src/Init/Prelude.lean` defines heterogeneous arithmetic through classes
+  such as `HAdd (α) (β) (γ : outParam Type)` and explains `Membership` as the
+  canonical case where a known container determines an unknown member type;
+- the same source defines `semiOutParam` through `Coe`, requiring the source
+  type to be determined by an instance after its ordinary input is known;
+- Lean's `src/Lean/Class.lean` rejects a non-output class parameter whose type
+  depends on an earlier output parameter, because output arguments are
+  replaced during search; and
+- `tests/elab/synth1.lean` and `tests/elab_fail/synthorder.lean` provide the
+  exact recursive `HasCoerce` and invalid/valid semi-output scheduling shapes.
+
+The repository's existing class schemas already retain `input`, `output`, and
+`semi-output` roles, but `synthesizeCoreLfInstance(...)` deliberately accepts
+only a checked meta-free target. A saturated class call therefore stops when
+its otherwise ready class target is `HAdd A B ?C`. The Lean audit supplies the
+missing exact consumer and partitions PARAM-ROLES-10 rather than broadening
+the ground resolver silently.
+
+### PARAM-ROLES-10A: bounded output inference
+
+The first role-aware tranche is frozen as follows:
+
+1. Keep `synthesizeCoreLfInstance(...)` and its v1 all-ground contract
+   unchanged. Add a separate browser-safe management module and capability
+   whose target is an ordered explicit role pattern: every class argument is
+   either `{ kind: 'known', value }` or `{ kind: 'infer-output' }`.
+2. Derive argument roles and plicities only from one validated completed class
+   layout. A hole is accepted only at an `output` parameter. Every `input` and
+   `semi-output` argument must be supplied and meta-free in 10A, and at least
+   one output hole is required. No Kernel/Core placeholder node is added.
+3. Activate Lean's class dependency invariant: a non-output parameter type
+   may not depend on an earlier output parameter. Check it from the locally
+   nameless declared parameter telescope, including replayed schema evidence,
+   with one stable `INVALID_PARAMETER_ROLE_DEPENDENCY` diagnostic.
+4. Infer candidate ground targets in immutable scope rank/priority order using
+   fresh isolated LF checker sessions. Candidate result matching must
+   determine every requested output and every ordinary provider parameter;
+   result dependence on an instance premise and premise-driven output
+   assignment remain stable `stuck` evidence for 10B.
+5. Reuse `synthesizeCoreLfInstance(...)` on each inferred meta-free target.
+   The existing resolver remains the owner of recursive premises, tables,
+   checked definitional equality, evidence ambiguity, and the final ordinary
+   Core check. The role layer never trusts a seed match as proof evidence.
+6. Preserve the existing strict choice policy across output targets. A
+   `stuck`, ambiguity, or limit result in the first rank/priority group blocks
+   lower precedence; definitionally distinct successful outputs or evidence
+   at one decisive group are ambiguous. Higher priority may intentionally
+   select one output. Equal results are canonicalized without declaration
+   recency.
+7. Bound total seed attempts and delegated ground searches through the
+   existing synthesis fuel/table/step limits. Return a deeply frozen portable
+   report recording the requested pattern, every candidate disposition,
+   inferred ground targets, delegated exact reports, aggregate usage, selected
+   output values, and exact checked term/type. Add canonical JSON serialization
+   and a source-visible `role-aware-instance-synthesis` capability revision.
+8. Extend saturated class-call elaboration only at its existing pending
+   instance requests. When all metas lie as whole arguments at `output`
+   positions and every input/semi-output argument is ground, invoke the role
+   layer, check its evidence against the original session-local target, and
+   thereby solve both the dictionary meta and ordinary output metas. Nested,
+   input, semi-output, or otherwise underconstrained metas remain stable
+   pending/stuck data. Bump the class-call report/capability revision because
+   its successful scheduling envelope changes.
+9. Qualify the exact Lean-style `HAdd A B ?C` shape both through direct role
+   synthesis and through one saturated call. Cover higher-priority output
+   choice, same-group distinct-output ambiguity, definitionally equal replay,
+   missing/stuck/limit outcomes, malformed role patterns, the output-dependency
+   declaration error, deep freeze, canonical serialization, and independent
+   final Core checking.
+10. Add no text declaration parser, partial/named/default call layer, general
+    inductive frontend, class/Core node, hidden registry, process-global proof
+    state, filesystem/network adapter, production Lambdapi dependency,
+    mathematical-source edit, package publication, or sibling-repository
+    change.
+
+The implementation may add
+`src/v3_2/lf_instance_role_synthesis.ts`, export it through the contributor and
+curated authoring barrels, strengthen class-role dependency validation, and
+integrate the result at `lf_class_call_elaboration.ts`. It must not duplicate
+the ground resolver or change its existing exact-target outcomes.
+
+The focused gates are the class-schema, instance-scope/synthesis, class-call,
+capability, package-build, and packed-consumer suites plus workspace check,
+root typecheck, and changed-source lint. Because this changes a shared public
+TypeScript authoring/runtime boundary and package declaration closure, run one
+complete `./scripts/pnpmw run check:ts` only after the bounded tranche is
+otherwise green. Do not run `check:all`, kernel, print, browser-demo, sibling,
+or repository-wide release checks.
+
+The proposal gate `H-TS-EMDASH-CLASSES-PARAM-ROLES-10A-011` is approved under
+the user-authorized unattended-review delegation, with immediate human
+supersession. The proposal checkpoint is
+`docs: freeze output-parameter synthesis contract`; the implementation
+checkpoint is `feat: infer typeclass output parameters`.
+
+### PARAM-ROLES-10B: semi-output and premise scheduling
+
+The clean Lean baseline has also supplied an exact `Coe`/`HasCoerce` consumer,
+so 10B is no longer consumer-gated. It remains sequenced after 10A because it
+changes provider-telescope scheduling rather than root output matching. Its
+later proposal must specify readiness from non-(semi-)output arguments,
+provider-result coverage, premise reordering, retry bounds, cycles, and the
+stable distinction between `output` wildcard matching and `semi-output`
+known-when-available filtering. It may reuse 10A reports and target patterns,
+but cannot weaken 10A's explicit checked-Core completion boundary.
+
 ## Decision Ledger
 
 | ID | Decision | Rationale |
@@ -2639,6 +2754,10 @@ as frozen above.
 | C-045 | Use exact `emdash-v<version>` GitHub Releases and immutable action pins; never mutate package versions in CI. | The repository has unrelated book/site release concerns, while deterministic tag/package/repository checks make provenance and rollback evidence unambiguous. |
 | C-046 | Permit a provenance-bearing hosted token fallback only for the first version, then remove/revoke it and disallow token publishing. | A first package must be bootstrapped before npm trust can exist; subsequent versions should use short-lived exact-workflow OIDC only. |
 | C-047 | Make the release preflight fail closed over exact entries/exports and every npm install-time dependency, script, and CLI field. | Publication metadata is executable consumer behavior; a locally green build must not silently acquire a peer, optional, bundled, hook, or binary surface at release time. |
+| C-048 | Treat Lean core's `HAdd`/`Membership` and `Coe`/`HasCoerce` as the exact output and semi-output consumers. | These are primary-source, ordinary Lean authoring patterns and establish that parameter-role activation is required for the stated translation target. |
+| C-049 | Layer output inference over the unchanged exact ground resolver through explicit role patterns. | Candidate matching may discover a ground target, but only the existing bounded resolver and final checker may establish evidence; no session-local meta becomes portable Core. |
+| C-050 | Preserve rank/priority blockers and strict ambiguity across inferred output targets. | Output inference must not introduce Lean-style first-answer declaration recency into emdash's stronger deterministic evidence policy. |
+| C-051 | Reject non-output parameter types which depend on earlier output parameters. | Replacing output arguments during search is type-correct only when ordinary and semi-output parameter domains do not depend on them. |
 
 ## Validation And Checkpoint Policy
 

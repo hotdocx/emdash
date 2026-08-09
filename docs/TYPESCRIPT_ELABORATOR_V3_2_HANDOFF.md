@@ -65,9 +65,16 @@
 > two-dependent-parameter fixture and ALGEBRA-GRADUATE-8's complete Lean-style
 > class consumer already provide the intended representative evidence, so no
 > geometry-shaped or adjunction-shaped proxy was added and no mathematical
-> source was changed. The remaining-row audit leaves partial/named/default
-> calls, non-ground output/semi-output search, and curated stdlib artifacts
-> consumer-gated. `PACKAGE-12A` is now final-green: the local
+> source was changed. Partial/named/default calls and curated stdlib artifacts
+> remain consumer-gated. A subsequent primary-source audit of the supplied
+> clean Lean baseline found the exact missing role consumers: core `HAdd` and
+> `Membership` require an instance to determine an `outParam`, while `Coe` and
+> the recursive `HasCoerce` test exercise semi-output scheduling.
+> `PARAM-ROLES-10A` is consequently approved for a separate bounded
+> role-pattern layer over the unchanged ground resolver and integration into
+> saturated calls; 10B is sequenced afterward for semi-output/premise
+> scheduling. Neither is implemented at this handoff checkpoint.
+> `PACKAGE-12A` is final-green: the local
 > `@hotdocx/emdash@0.1.0` package has strict root/authoring/workspace exports,
 > dual browser-safe JavaScript, complete declarations/maps, and a
 > packed-install consumer.
