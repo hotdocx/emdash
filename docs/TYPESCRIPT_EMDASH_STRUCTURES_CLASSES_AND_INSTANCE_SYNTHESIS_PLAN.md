@@ -515,7 +515,7 @@ make explicit local scope discipline especially important.
 | SYNTH-RECURSE-6 | complete | The bounded exact-head resolver is public and final-green with recursive premises, tables, explicit bounds, ambiguity, runtime-backed definitional equality, and portable traces. |
 | CALL-SYNTH-7A | complete | Saturated binder walking, ordinary implicit inference, arbitrary annotated instance positions, delayed ground synthesis, stable failure data, and final explicit-Core checking are public and final-green. |
 | CALL-SYNTH-7B | gated | Add partial application, named arguments, defaults, and stronger retry/postponement only after 7A and an exact ergonomic consumer. |
-| ALGEBRA-GRADUATE-8 | pending | Qualify the complete algebraic diamond and one recursive provider. |
+| ALGEBRA-GRADUATE-8 | proposal-approved | Add one end-to-end qualification over the existing checked fixture: one local `Monoid A` must synthesize every direct/transitive parent and complete the saturated class-aware call under the same immutable artifacts. |
 | MATH-CONSUMER-9 | pending | Qualify `struct_cov_sieve`, then select one category/Functor/Adjunction consumer. |
 | PARAM-ROLES-10 | gated | Add output/semi-output and stuck/resume only after an exact consumer audit. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
@@ -2076,6 +2076,73 @@ aggregate was run for documentation synchronization. No Lambdapi/emdash
 source, active owner, Core node, checker/session API, runtime/proof rule,
 parser, workspace schema, sibling repository, package, hosted service, or
 deployment changed.
+
+## ALGEBRA-GRADUATE-8 Audit And Frozen Qualification Contract
+
+The 2026-08-09 read-only audit began from final-green CALL-SYNTH-7A
+checkpoint `d329497`. It compared the first acceptance corpus with the exact
+checked algebraic fixture and all focused evidence accumulated through rows
+1--7A.
+
+There is no remaining algebraic implementation gap:
+
+- all five classes are parameterized structures with completed schemas,
+  strict-C3 layouts, canonical shared identities, and checked parent
+  lowerings;
+- the five direct superclass conversions are checked generic providers with
+  explicit class premises, while transitive evidence is ordinary recursive
+  composition;
+- local `Monoid A` evidence already solves representative `Mul A` and `One A`
+  goals, the two `Mul` routes compare definitionally equal through the exact
+  reviewed runtime, and missing/ambiguity/cycle/stuck/limit behavior is
+  qualified separately; and
+- the final-green saturated-call fixture already consumes both `Monoid A` and
+  later `Mul A` evidence and ends at independently checked explicit Core.
+
+The residual gap is evidence aggregation, not a new mechanism: no single test
+currently states that one exact immutable registry/scope/runtime and one local
+`Monoid A` derive **all** of `Semigroup A`, `MulOneClass A`, `Mul A`, and
+`One A`, expose a successful recursive-premise trace, retain the coherent
+diamond, and complete the class-aware call.
+
+`ALGEBRA-GRADUATE-8` is therefore frozen as a test-and-ledger tranche:
+
+1. Extend only the existing checked algebraic fixture in
+   `tests/v3_2_lf_instance_scope_tests.ts`; do not create a second fixture,
+   demo-only semantic path, or public graduation wrapper.
+2. Build one registry and one scope containing the inner local `Monoid`
+   provider and exactly the five generated direct-superclass providers.
+3. Synthesize the four parent targets in canonical acceptance order
+   `Semigroup`, `MulOneClass`, `Mul`, `One`. Every result must be solved,
+   meta-free, deeply frozen, and independently checked at its exact target by
+   an ordinary LF checker using the same reviewed runtime.
+4. Require the direct targets to select the exact generated conversion IDs,
+   require at least one positive expanded recursive premise ending at the
+   local provider, and require the `Mul` root to retain both definitionally
+   equivalent routes rather than selecting by declaration order.
+5. Reuse the same registry/scope/runtime in one
+   `elaborateCoreLfSaturatedClassCall(...)` invocation. Its five explicit Core
+   arguments must contain the local `Monoid` evidence and synthesized `Mul`
+   evidence and must pass the ordinary final check already owned by 7A.
+6. Treat the existing named construction, provider diagnostics, search
+   failures/bounds, canonical replay, immutability, and malformed-call cases
+   as carried-forward neighboring evidence. Do not duplicate them in the
+   graduation assertion.
+7. Add no source module, profile revision, capability entry, public barrel or
+   runner edit, parser production, Core/checker/runtime rule, registry/scope
+   format, workspace schema, or Lambdapi dependency.
+
+Proportional qualification is the focused provider/resolver/call file,
+TypeScript typecheck, changed-test ESLint, exact diff/whitespace review, and
+the living-ledger update. The 1,559-test/234-suite CALL-SYNTH-7A aggregate is
+recent green evidence for every unchanged shared boundary and must not be
+rerun for this test-only row. No active-kernel check is relevant.
+
+The proposal gate `H-TS-EMDASH-CLASSES-ALGEBRA-GRADUATE-8-008` is approved
+under the user-authorized unattended-review delegation, with immediate human
+supersession. The documentation-only checkpoint message is
+`docs: freeze algebraic class graduation contract`; the qualification
+checkpoint message is `tests: graduate algebraic class foundation`.
 
 ## Decision Ledger
 

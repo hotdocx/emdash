@@ -54,7 +54,10 @@
 > passes, 54 intentional skips, and zero failures. Partial/named/default
 > application remains the consumer-gated 7B row; no declaration parser,
 > class/Core node, checker semantic change, or production Lambdapi dependency
-> was introduced.
+> was introduced. The next dependency-ready row is the approved
+> `ALGEBRA-GRADUATE-8` test/evidence tranche: one exact local `Monoid` scope
+> must derive all four parent classes and complete the saturated call under
+> the existing artifacts, without another runtime API or aggregate rerun.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)
