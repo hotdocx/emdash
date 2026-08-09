@@ -7,8 +7,8 @@ Plan-ID: TS-EMDASH-CLASSES
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
 through PARAM-ROLES-10A and PACKAGE-12A/12B1 are final-green;
 MATH-CONSUMER-9 is retired without implementation after its stale consumer
-was reconciled with the existing acceptance evidence; PARAM-ROLES-10B is the
-next dependency-ready local design tranche after output inference, and
+was reconciled with the existing acceptance evidence; PARAM-ROLES-10B has an
+approved frozen contract and is the active local implementation tranche, and
 remaining call ergonomics and standard-library rows stay consumer-gated;
 registry ownership, bootstrap publication, and hosted integration remain
 gated; PACKAGE-12B2 and HOSTED-13 are external-action gates requiring separate
@@ -529,7 +529,7 @@ discipline important, but they are not a prerequisite for this qualification.
 | ALGEBRA-GRADUATE-8 | complete | One exact local `Monoid A` scope now qualifies every direct/transitive parent, positive recursive provider expansion, coherent `Mul` diamond, and the saturated class-aware call under the same immutable artifacts. |
 | MATH-CONSUMER-9 | retired without implementation | The historical `struct_cov_sieve` name was only a parameter-plicity shape inherited from the Cartier review, not an active owner or missing kernel feature. STRUCT-PARAM-1 already qualifies the distinct dependent parameter modes, and ALGEBRA-GRADUATE-8 already supplies the representative Lean-style class consumer. No replacement proxy or mathematical-source edit is justified. |
 | PARAM-ROLES-10A | complete | A separate bounded role-pattern layer now infers output arguments over the unchanged exact ground resolver; saturated calls solve whole distinct output metas, and the HAdd-style direct/call/package acceptance boundary is final-green. |
-| PARAM-ROLES-10B | dependency-ready design | Freeze and implement semi-output and premise-driven scheduling over the exact `Coe`/`HasCoerce` consumer, preserving bounded deterministic retry and explicit final Core. |
+| PARAM-ROLES-10B | frozen and implementation-ready | Implement the approved bounded semi-output/premise scheduler over the exact standalone `HasCoerce` consumer, preserving the ground root API, strict choice, shared limits, and explicit final Core. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
 | PACKAGE-12A | complete | The local publishable `@hotdocx/emdash@0.1.0` package now has strict root/authoring/workspace exports, dual browser-safe JavaScript, complete declarations/maps, and a packed-install consumer. No registry mutation occurred. |
 | PACKAGE-12B1 | complete | A token-free two-job GitHub Release workflow now builds and verifies one exact tarball before protected OIDC publication; deterministic release preflight freezes tag/version/repository/package invariants. All local checks are green and no GitHub or npm mutation occurred. |
@@ -2749,15 +2749,133 @@ or deployment gate was run.
 
 ### PARAM-ROLES-10B: semi-output and premise scheduling
 
-The clean Lean baseline has also supplied an exact `Coe`/`HasCoerce` consumer,
-so 10B is no longer consumer-gated. With 10A complete, 10B is now the next
-dependency-ready local design row; it changes provider-telescope scheduling
-rather than root output matching. Its proposal must specify readiness from
-non-(semi-)output arguments,
-provider-result coverage, premise reordering, retry bounds, cycles, and the
-stable distinction between `output` wildcard matching and `semi-output`
-known-when-available filtering. It may reuse 10A reports and target patterns,
-but cannot weaken 10A's explicit checked-Core completion boundary.
+The clean Lean baseline at
+`f29e9e488ea8242c875806e4b0564820c2d553b2` supplies both the exact
+`Coe`/`HasCoerce` consumer and the scheduling algorithm. In
+`src/Lean/Meta/Instances.lean`, Lean computes an instance's premise order by
+repeatedly choosing the first premise whose non-(semi-)output arguments no
+longer contain synthesis-created metavariables. Selecting that premise makes
+the variables in its complete class target available to later premises. The
+two instances in `tests/elab_fail/synthorder.lean` therefore synthesize
+`Foo A B` before `Foo B C` regardless of declaration order. The same file
+rejects providers whose remaining premises cannot become ready or whose
+result semi-output is not covered. `tests/elab/synth1.lean` then exercises the
+ordinary recursive shape
+
+```text
+HasCoerce B C  ->  HasCoerce A B  ->  HasCoerce A C
+```
+
+where `A` is semi-output and `C` is input. This is the exact representative
+consumer for 10B; it is independent of the Lambdapi development and does not
+justify any edit to presheaf, site, scheme, or sheafification mathematics.
+
+The bounded emdash contract is frozen as follows:
+
+1. Keep the public synthesis root meta-free. A caller of
+   `synthesizeCoreLfInstance(...)` still supplies one checked, exact class
+   target; 10B does not add a general metavariable goal API, a root
+   `infer-semi-output` surface pattern, or any placeholder to Core. The
+   resolver/report capability advances because a previously stuck exact goal
+   may now succeed through scheduled premises.
+2. Preserve provider result refinement as the first candidate-local step.
+   Do not require every ordinary provider metavariable to be ground
+   immediately after that refinement. Keep the existing bounded restriction
+   that a provider result cannot depend on an instance-evidence binder.
+3. Plan premise readiness dynamically in the candidate's isolated LF
+   session. Repeatedly scan the remaining instance premises in source-binder
+   order and select the first whose class arguments at role `input` are
+   meta-free. Arguments at roles `output` and `semi-output` do not block
+   readiness. After checked evidence fills the selected premise meta, zonk
+   every remaining premise and retry. This both preserves deterministic
+   source order among simultaneously ready premises and permits a later
+   declared premise to run first when it is the only ready one.
+4. Resolve a ready non-ground premise through one internal explicit role
+   pattern derived from its checked class metadata. An `input` argument is a
+   known meta-free value. An `output` argument is always a wildcard for
+   candidate discovery, even when the surrounding target currently contains
+   a value. A `semi-output` argument is a known filtering value when ground
+   and a discovery hole only while unknown. This is the stable semantic
+   difference: output never selects a provider, while available semi-output
+   information may select one.
+5. Infer only meta-free ground premise targets in fresh isolated seed
+   sessions. Every such target is delegated to the same resolver's ordinary
+   ground-goal path; seed matching is never evidence authority. Return the
+   selected ground target and explicit evidence to the parent candidate, then
+   use `checkRefinement` in that parent's session to assign its semi-output or
+   output metavariables and finally solve the exact evidence meta. No
+   metavariable identity crosses checker sessions or appears in portable
+   Core.
+6. Use a separate role-pattern table alongside the existing ground-goal
+   table, but account for both against one `maxTableEntries` limit. Pattern
+   keys contain the exact class head, known arguments, role-specific
+   wildcards, immutable registry/scope material, and reviewed runtime
+   fingerprint. Ground and pattern recursion share `maxDepth`, `maxFuel`,
+   conversion bounds, result-size bounds, and cycle detection. A pattern
+   cycle is a finite missing branch; resource exhaustion remains
+   `limit-exceeded`.
+7. Preserve the resolver's stronger choice policy. Rank and priority groups
+   remain explicit; a same-group `stuck`, ambiguity, or limit blocks lower
+   precedence; all successful ground targets/evidence at the decisive group
+   are compared definitionally; and distinct classes remain ambiguous. A
+   generic transitive provider may intentionally have lower priority than
+   concrete edge providers, rather than relying on Lean's declaration-order
+   first answer.
+8. Make scheduling failure inspectable rather than exceptional. If no
+   remaining premise is ready, if a seed cannot determine a ground role
+   target, if an ordinary provider parameter remains unresolved after all
+   premises, or if the assembled term retains a metavariable, return stable
+   `stuck` data. Malformed snapshots and broken checked-artifact invariants
+   continue to throw coded errors. Registration-time provider
+   well-modedness/rejection is intentionally not added in this tranche; the
+   dynamic trace is the honest boundary compatible with already accepted v1
+   provider snapshots.
+9. Advance the exact synthesis report/profile and capability additively.
+   Record the selected premise order, readiness kind, role pattern, resolved
+   ground target, table disposition, and ground-goal ID. Reports remain
+   canonical, portable, deeply frozen, and complete through skipped
+   candidates. Do not revise the provider/registry/scope snapshot format or
+   invalidate existing canonical snapshot material.
+10. Qualify one standalone `HasCoerce Source Target` class with roles
+    `semi-output,input`, concrete `Nat -> Bool` and `Bool -> Prop` providers,
+    and a lower-priority transitive provider. Prove exact synthesis of
+    `Nat -> Prop`, including the schedule `B -> Prop` before `Nat -> B`; add a
+    provider whose premise binders are textually reversed and prove the same
+    dependency-driven order. Cover known semi-output filtering, output
+    wildcard continuity with the existing `HAdd` corpus, no-ready/stuck,
+    cycle, ambiguity, and every shared bound, canonical replay/deep freeze,
+    and an independent final Core check.
+11. Keep 10A's public output-pattern and saturated-call contracts unchanged.
+    Existing calls whose class target is ground automatically benefit from
+    scheduled exact synthesis; call-level inference of an unknown
+    semi-output, nested/repeated hole patterns, partial/named/default calls,
+    and registration-time mode checking remain separately reviewable work.
+12. Add no declaration text parser, class/Core node, general inductive
+    frontend, hidden registry or process state, filesystem/network adapter,
+    production Lambdapi dependency, mathematical-source edit, sibling change,
+    package publication, release, deployment, push, or merge.
+
+Implementation should remain concentrated in
+`src/v3_2/lf_instance_synthesis.ts` and the existing standalone instance
+fixture unless a small dependency-planning helper materially improves review.
+It must reuse the checked provider metadata and ordinary final checker rather
+than duplicate a trusted resolver. The provider/scope v1 canonical artifacts
+remain accepted; the exact synthesis profile/report and static capability are
+the only intended public revision changes.
+
+The focused gates are the instance-scope/synthesis and AI-capability tests,
+root typecheck, changed-source lint, workspace check, package build, and the
+packed consumer if its exported declaration closure changes. Because this
+changes shared resolver behavior, run one complete
+`./scripts/pnpmw run check:ts` only after focused gates are green. Carry
+forward 10A's aggregate until that point; do not run `check:all`, kernel,
+print, browser-demo, sibling, or release aggregates.
+
+The proposal gate `H-TS-EMDASH-CLASSES-PARAM-ROLES-10B-012` is approved under
+the user-authorized unattended-review delegation, with immediate human
+supersession. The proposal checkpoint is
+`docs: freeze semi-output premise scheduling contract`; the implementation
+checkpoint is `feat: schedule semi-output instance premises`.
 
 ## Decision Ledger
 
@@ -2817,6 +2935,12 @@ but cannot weaken 10A's explicit checked-Core completion boundary.
 | C-052 | Share fuel and table bounds across seed discovery and all delegated ground searches. | A role report must bound the complete output-discovery operation rather than giving every inferred target a fresh nominal search budget. |
 | C-053 | Integrate only whole, distinct output metas into saturated calls in 10A. | The explicit v1 role pattern carries independent holes, so nested occurrences and repeated-meta equality constraints must remain pending until a later pattern contract represents them honestly. |
 | C-054 | Publish role synthesis through the curated authoring subpath and prove it in the packed consumer. | A source export alone would not establish the AI-workspace distribution boundary across ESM, CommonJS, strict declarations, and browsers. |
+| C-055 | Keep the 10B root target ground and schedule only provider premises. | The exact `HasCoerce Nat Prop` consumer needs dependency-driven premise search, not a process-wide metavariable goal service or another surface hole contract. |
+| C-056 | Select the first remaining premise whose input-role arguments are ground, then retry after checked refinement. | This is the deterministic dependency effect of Lean's synthesis-order algorithm while retaining emdash's isolated candidate sessions and explicit evidence boundary. |
+| C-057 | Treat output as an unconditional search wildcard and semi-output as known-when-available filtering inside premise patterns. | It preserves the semantic distinction exposed by `HAdd` versus `Coe`: outputs are chosen by evidence, whereas a known semi-output may influence provider choice. |
+| C-058 | Table role patterns separately but charge them and their delegated exact goals to the resolver's existing limits. | Cycles and resource use must be finite and reportable across the whole scheduled search, not reset by recursive helper calls. |
+| C-059 | Preserve v1 provider snapshots and report ill-moded dynamic schedules as `stuck` in 10B. | Registration-time rejection would retroactively narrow already canonical provider artifacts; a later additive validator can enforce Lean's declaration-time discipline without disguising a snapshot migration. |
+| C-060 | Use explicit priority to place generic transitive evidence below concrete coercion edges. | Emdash retains strict ambiguity rather than copying Lean's first-answer declaration order, while ordinary finite coercion chains remain directly expressible. |
 
 ## Validation And Checkpoint Policy
 
