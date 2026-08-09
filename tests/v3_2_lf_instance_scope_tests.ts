@@ -190,6 +190,9 @@ interface AlgebraicFixture {
         readonly b: CoreLfQualifiedSymbol;
         readonly c: CoreLfQualifiedSymbol;
         readonly d: CoreLfQualifiedSymbol;
+        readonly nat: CoreLfQualifiedSymbol;
+        readonly bool: CoreLfQualifiedSymbol;
+        readonly prop: CoreLfQualifiedSymbol;
     };
     readonly module: CoreLfModuleSpec;
     readonly compiled: ReturnType<typeof compileCoreLfMixedPhases>;
@@ -200,6 +203,7 @@ interface AlgebraicFixture {
         readonly mulOne: ClassEntry;
         readonly monoid: ClassEntry;
         readonly hAdd: ClassEntry;
+        readonly hasCoerce: ClassEntry;
     };
     readonly lowerings: readonly CoreLfClassInheritanceLoweringExpansion[];
     readonly instanceSymbols: {
@@ -219,6 +223,15 @@ interface AlgebraicFixture {
         readonly underconstrained: CoreLfQualifiedSymbol;
     };
     readonly roleCallSymbol: CoreLfQualifiedSymbol;
+    readonly coercionSymbols: {
+        readonly natToBool: CoreLfQualifiedSymbol;
+        readonly boolToProp: CoreLfQualifiedSymbol;
+        readonly boolToPropAlternative: CoreLfQualifiedSymbol;
+        readonly transitive: CoreLfQualifiedSymbol;
+        readonly transitiveReversed: CoreLfQualifiedSymbol;
+        readonly stalled: CoreLfQualifiedSymbol;
+        readonly cycle: CoreLfQualifiedSymbol;
+    };
 }
 
 const buildAlgebraicFixture = (
@@ -251,7 +264,10 @@ const buildAlgebraicFixture = (
         a: symbol('typeA'),
         b: symbol('typeB'),
         c: symbol('typeC'),
-        d: symbol('typeD')
+        d: symbol('typeD'),
+        nat: symbol('NatCode'),
+        bool: symbol('BoolCode'),
+        prop: symbol('PropCode')
     };
     const valueDeclarations: readonly CoreLfTransferDeclaration[] =
         Object.values(values).map((value, index) => ({
@@ -483,6 +499,30 @@ const buildAlgebraicFixture = (
             directParentLayouts: []
         })
     };
+    const hasCoerceExpansion = expand(
+        'HasCoerceClass',
+        ['marker'],
+        ['Source', 'Target']
+    );
+    const hasCoerceSchema = declareCoreLfClassSchema({
+        expansion: hasCoerceExpansion,
+        parameterRoles: hasCoerceExpansion.handle.parameters.map(
+            (parameter, index) => ({
+                parameter,
+                role: index === 0
+                    ? 'semi-output' as const
+                    : 'input' as const
+            })
+        )
+    });
+    const hasCoerce: ClassEntry = {
+        expansion: hasCoerceExpansion,
+        schema: hasCoerceSchema,
+        layout: planCoreLfClassInheritance({
+            schema: hasCoerceSchema,
+            directParentLayouts: []
+        })
+    };
 
     const lower = (
         child: ClassEntry,
@@ -524,13 +564,15 @@ const buildAlgebraicFixture = (
         name: 'monoid_to_mul_one'
     }]);
     const hAddLowering = lower(hAdd, []);
+    const hasCoerceLowering = lower(hasCoerce, []);
     const lowerings = [
         mulLowering,
         oneLowering,
         semigroupLowering,
         mulOneLowering,
         monoidLowering,
-        hAddLowering
+        hAddLowering,
+        hasCoerceLowering
     ];
 
     const instanceSymbols = {
@@ -811,7 +853,137 @@ const buildAlgebraicFixture = (
         provenance: source('HAdd-style saturated role call')
     };
 
-    const structures = [mul, one, semigroup, mulOne, monoid, hAdd];
+    const hasCoerceAt = (
+        sourceType: CoreLfTransferExpression,
+        targetType: CoreLfTransferExpression
+    ) => call(global(hasCoerce.schema.structure.carrier), [
+        implicit(sourceType),
+        implicit(targetType)
+    ]);
+    const implicitPi = (
+        hint: string,
+        type: CoreLfTransferExpression,
+        body: CoreLfTransferExpression
+    ): CoreLfTransferExpression => ({
+        tag: 'pi',
+        binder: { hint, mode: implicitMode, type },
+        body
+    });
+    const codePi = (
+        hint: string,
+        body: CoreLfTransferExpression
+    ): CoreLfTransferExpression => implicitPi(hint, global(code), body);
+    const transitiveType = codePi('A', codePi('B', codePi('C',
+        implicitPi(
+            'instBC',
+            hasCoerceAt(bound(1), bound(0)),
+            implicitPi(
+                'instAB',
+                hasCoerceAt(bound(3), bound(2)),
+                hasCoerceAt(bound(4), bound(2))
+            )
+        )
+    )));
+    const transitiveReversedType = codePi('A', codePi('B', codePi('C',
+        implicitPi(
+            'instAB',
+            hasCoerceAt(bound(2), bound(1)),
+            implicitPi(
+                'instBC',
+                hasCoerceAt(bound(2), bound(1)),
+                hasCoerceAt(bound(4), bound(2))
+            )
+        )
+    )));
+    const coercionSymbols = {
+        natToBool: symbol('coerceNatToBool'),
+        boolToProp: symbol('coerceBoolToProp'),
+        boolToPropAlternative: symbol('coerceBoolToPropAlternative'),
+        transitive: symbol('coerceTrans'),
+        transitiveReversed: symbol('coerceTransReversed'),
+        stalled: symbol('coerceStalled'),
+        cycle: symbol('coerceCycle')
+    };
+    const coercionDeclarationOrder = roleCallDeclaration.order + 1;
+    const coercionDeclaration = (
+        symbol_: CoreLfQualifiedSymbol,
+        type: CoreLfTransferExpression,
+        offset: number,
+        sourceFragment: string
+    ): CoreLfTransferDeclaration => ({
+        order: coercionDeclarationOrder + offset,
+        symbol: symbol_,
+        type,
+        body: coreLfTransferAbsentBody(),
+        modifiers: {
+            visibility: 'public',
+            rigidity: 'constant',
+            sourceOpacity: 'opaque'
+        },
+        provenance: source(sourceFragment)
+    });
+    const coercionDeclarations = [
+        coercionDeclaration(
+            coercionSymbols.natToBool,
+            hasCoerceAt(global(values.nat), global(values.bool)),
+            0,
+            'concrete HasCoerce Nat Bool provider'
+        ),
+        coercionDeclaration(
+            coercionSymbols.boolToProp,
+            hasCoerceAt(global(values.bool), global(values.prop)),
+            1,
+            'concrete HasCoerce Bool Prop provider'
+        ),
+        coercionDeclaration(
+            coercionSymbols.boolToPropAlternative,
+            hasCoerceAt(global(values.bool), global(values.prop)),
+            2,
+            'alternative HasCoerce Bool Prop provider'
+        ),
+        coercionDeclaration(
+            coercionSymbols.transitive,
+            transitiveType,
+            3,
+            'dependency-ordered transitive HasCoerce provider'
+        ),
+        coercionDeclaration(
+            coercionSymbols.transitiveReversed,
+            transitiveReversedType,
+            4,
+            'textually reversed transitive HasCoerce provider'
+        ),
+        coercionDeclaration(
+            coercionSymbols.stalled,
+            codePi('B', implicitPi(
+                'instNatB',
+                hasCoerceAt(global(values.nat), bound(0)),
+                hasCoerceAt(global(values.nat), global(values.prop))
+            )),
+            5,
+            'ill-moded no-ready HasCoerce provider'
+        ),
+        coercionDeclaration(
+            coercionSymbols.cycle,
+            implicitPi(
+                'instNatProp',
+                hasCoerceAt(global(values.nat), global(values.prop)),
+                hasCoerceAt(global(values.nat), global(values.prop))
+            ),
+            6,
+            'cyclic HasCoerce provider'
+        )
+    ];
+
+    const structures = [
+        mul,
+        one,
+        semigroup,
+        mulOne,
+        monoid,
+        hAdd,
+        hasCoerce
+    ];
     const declarations = [
         codeDeclaration,
         ...valueDeclarations,
@@ -821,7 +993,8 @@ const buildAlgebraicFixture = (
         ...recursiveDeclarations,
         ...roleDeclarations,
         classCallDeclaration,
-        roleCallDeclaration
+        roleCallDeclaration,
+        ...coercionDeclarations
     ];
     const runtimeRules = structures.flatMap(entry =>
         entry.expansion.runtimeRules
@@ -899,13 +1072,22 @@ const buildAlgebraicFixture = (
         values,
         module,
         compiled,
-        classes: { mul, one, semigroup, mulOne, monoid, hAdd },
+        classes: {
+            mul,
+            one,
+            semigroup,
+            mulOne,
+            monoid,
+            hAdd,
+            hasCoerce
+        },
         lowerings,
         instanceSymbols,
         recursiveSymbols,
         classCallSymbol,
         roleInstanceSymbols,
-        roleCallSymbol
+        roleCallSymbol,
+        coercionSymbols
     };
 };
 
@@ -969,6 +1151,54 @@ const declareRoleProviders = (
 ) as {
     readonly [K in keyof AlgebraicFixture['roleInstanceSymbols']]:
         CoreLfInstanceProviderDeclaration;
+};
+
+const declareCoercionProviders = (
+    fixture: AlgebraicFixture
+) => {
+    const declare = (
+        provider: CoreLfQualifiedSymbol,
+        priority: number,
+        premiseOrdinals: readonly number[] = []
+    ) => declareCoreLfGlobalInstanceProvider({
+        declarations: fixture.compiled.declarations,
+        module: fixture.module,
+        provider,
+        resultClass: fixture.classes.hasCoerce.layout,
+        priority,
+        instancePremises: premiseOrdinals.map(binderOrdinal => ({
+            binderOrdinal,
+            classLayout: fixture.classes.hasCoerce.layout
+        }))
+    });
+    return {
+        natToBool: declare(fixture.coercionSymbols.natToBool, 2000),
+        boolToProp: declare(fixture.coercionSymbols.boolToProp, 2000),
+        boolToPropAlternative: declare(
+            fixture.coercionSymbols.boolToPropAlternative,
+            2000
+        ),
+        transitive: declare(
+            fixture.coercionSymbols.transitive,
+            1000,
+            [3, 4]
+        ),
+        transitiveReversed: declare(
+            fixture.coercionSymbols.transitiveReversed,
+            1000,
+            [3, 4]
+        ),
+        stalled: declare(
+            fixture.coercionSymbols.stalled,
+            1000,
+            [1]
+        ),
+        cycle: declare(
+            fixture.coercionSymbols.cycle,
+            1000,
+            [0]
+        )
+    };
 };
 
 const declareRecursiveProviders = (
@@ -1121,6 +1351,7 @@ describe('v3.2 immutable instance providers and scopes', () => {
     const currentLocals = declareLocalProviders(current);
     const currentRecursive = declareRecursiveProviders(current);
     const currentRoles = declareRoleProviders(current);
+    const currentCoercions = declareCoercionProviders(current);
     const currentSuperclasses = declareSuperclassProviders(current);
     const currentRuntime = current.compiled.latestRuntime?.runtime;
     assert.notEqual(currentRuntime, undefined);
@@ -1157,6 +1388,30 @@ describe('v3.2 immutable instance providers and scopes', () => {
             [{
                 plicity: 'implicit',
                 value: kernelBound(parameterIndex, synthesisWitness)
+            }],
+            synthesisWitness
+        );
+    };
+
+    const hasCoerceTarget = (
+        sourceType: CoreLfQualifiedSymbol,
+        targetType: CoreLfQualifiedSymbol
+    ) => {
+        const declaration = current.compiled.declarations.declaration(
+            current.classes.hasCoerce.schema.classId
+        );
+        assert.equal(declaration?.link.kind, 'free-declaration');
+        if (declaration?.link.kind !== 'free-declaration') {
+            throw new Error('HasCoerce fixture class did not compile');
+        }
+        return kernelCall(
+            kernelFree(declaration.link.coreName, synthesisWitness),
+            [{
+                plicity: 'implicit',
+                value: compiledFree(sourceType)
+            }, {
+                plicity: 'implicit',
+                value: compiledFree(targetType)
             }],
             synthesisWitness
         );
@@ -1249,6 +1504,21 @@ describe('v3.2 immutable instance providers and scopes', () => {
             limits
         });
     };
+
+    const synthesizeCoercion = (
+        providers: readonly CoreLfInstanceProviderDeclaration[],
+        sourceType: CoreLfQualifiedSymbol = current.values.nat,
+        targetType: CoreLfQualifiedSymbol = current.values.prop,
+        limits: Parameters<typeof synthesizeCoreLfInstance>[0]['limits'] =
+            undefined
+    ) => synthesizeCoreLfInstance({
+        declarations: current.compiled.declarations,
+        context: currentLocals.context,
+        targetClass: current.classes.hasCoerce.layout,
+        target: hasCoerceTarget(sourceType, targetType),
+        ...synthesisArtifacts(providers),
+        limits
+    });
 
     const classCallDeclaration =
         current.compiled.declarations.declaration(current.classCallSymbol);
@@ -1785,6 +2055,173 @@ describe('v3.2 immutable instance providers and scopes', () => {
                     invalid: () => undefined
                 } as never),
                 'NON_PORTABLE_DATA'
+            );
+        });
+    });
+
+    describe('semi-output provider-premise scheduling', () => {
+        const directProviders = [
+            currentCoercions.natToBool,
+            currentCoercions.boolToProp
+        ] as const;
+
+        it('synthesizes an exact transitive HasCoerce target', () => {
+            const outcome = synthesizeCoercion([
+                ...directProviders,
+                currentCoercions.transitive
+            ]);
+            assert.equal(outcome.status, 'solved');
+            if (outcome.status !== 'solved') return;
+            assert.equal(
+                outcome.report.revision,
+                CORE_LF_INSTANCE_SYNTHESIS_PROFILE.revision
+            );
+            assert.deepEqual(
+                outcome.selected,
+                currentCoercions.transitive.providerId
+            );
+            const root = outcome.report.goals.find(goal =>
+                goal.goalId === outcome.report.rootGoalId
+            );
+            const transitive = root?.candidates.find(candidate =>
+                candidate.providerId.name === 'coerceTrans'
+            );
+            assert.deepEqual(transitive?.premiseOrder, [3, 4]);
+            assert.deepEqual(
+                transitive?.premises.map(premise => [
+                    premise.readiness,
+                    premise.pattern?.map(argument => argument.kind),
+                    premise.outcome
+                ]),
+                [[
+                    'role-pattern',
+                    ['infer-semi-output', 'known'],
+                    'solved'
+                ], [
+                    'ground',
+                    ['known', 'known'],
+                    'solved'
+                ]]
+            );
+            assert.equal(outcome.report.scheduledGoals.length, 1);
+            assert.deepEqual(
+                outcome.report.scheduledGoals[0].arguments.map(argument =>
+                    argument.kind
+                ),
+                ['infer-semi-output', 'known']
+            );
+            assert.equal(
+                outcome.report.scheduledGoals[0].selectedProvider?.name,
+                'coerceBoolToProp'
+            );
+            assert.equal(outcome.report.usage.roleTableEntries, 1);
+            assert.equal(outcome.report.usage.scheduledPremiseAttempts, 2);
+            const checker = createCoreLfChecker(
+                current.compiled.declarations.environment,
+                undefined,
+                currentRuntime
+            );
+            checker.check(
+                currentLocals.context,
+                outcome.term,
+                outcome.type
+            );
+            assert.doesNotMatch(
+                transitive?.term ?? '',
+                /\(meta /u
+            );
+            assertDeepFrozen(outcome);
+        });
+
+        it('reorders textually reversed premises by input readiness', () => {
+            const providers = [
+                ...directProviders,
+                currentCoercions.transitiveReversed
+            ];
+            const outcome = synthesizeCoercion(providers);
+            assert.equal(outcome.status, 'solved');
+            if (outcome.status !== 'solved') return;
+            const root = outcome.report.goals.find(goal =>
+                goal.goalId === outcome.report.rootGoalId
+            );
+            const transitive = root?.candidates.find(candidate =>
+                candidate.providerId.name === 'coerceTransReversed'
+            );
+            assert.deepEqual(transitive?.premiseOrder, [4, 3]);
+            assert.deepEqual(
+                transitive?.premises.map(premise => premise.binderName),
+                ['instBC', 'instAB']
+            );
+
+            const replay = synthesizeCoercion([...providers].reverse());
+            assert.equal(
+                serializeCoreLfInstanceSynthesisReport(outcome.report),
+                serializeCoreLfInstanceSynthesisReport(replay.report)
+            );
+            assertDeepFrozen(replay);
+        });
+
+        it('propagates scheduled ambiguity, no-ready evidence, and cycles', () => {
+            const ambiguous = synthesizeCoercion([
+                ...directProviders,
+                currentCoercions.boolToPropAlternative,
+                currentCoercions.transitive
+            ]);
+            assert.equal(ambiguous.status, 'ambiguous');
+            assert.equal(
+                ambiguous.report.scheduledGoals[0].outcome,
+                'ambiguous'
+            );
+
+            const stalled = synthesizeCoercion([
+                currentCoercions.stalled
+            ]);
+            assert.equal(stalled.status, 'stuck');
+            assert.equal(
+                stalled.report.goals[0].candidates[0].reason,
+                'no-input-ready-instance-premise'
+            );
+            assert.equal(
+                stalled.report.goals[0].candidates[0].premises[0].readiness,
+                'not-ready'
+            );
+
+            const cyclic = synthesizeCoercion([currentCoercions.cycle]);
+            assert.equal(cyclic.status, 'missing');
+            assert.equal(
+                cyclic.report.goals[0].candidates[0].premises[0].disposition,
+                'cycle'
+            );
+        });
+
+        it('charges scheduled search to every shared resolver bound', () => {
+            const providers = [
+                ...directProviders,
+                currentCoercions.transitive
+            ];
+            assert.equal(
+                synthesizeCoercion(providers, undefined, undefined, {
+                    maxDepth: 0
+                }).status,
+                'limit-exceeded'
+            );
+            assert.equal(
+                synthesizeCoercion(providers, undefined, undefined, {
+                    maxTableEntries: 1
+                }).status,
+                'limit-exceeded'
+            );
+            assert.equal(
+                synthesizeCoercion(providers, undefined, undefined, {
+                    maxResultSize: 2
+                }).status,
+                'limit-exceeded'
+            );
+            assert.equal(
+                synthesizeCoercion(providers, undefined, undefined, {
+                    maxFuel: 0
+                }).status,
+                'limit-exceeded'
             );
         });
     });

@@ -15,8 +15,8 @@ The package has three deliberately bounded entries:
   conversion, and the reviewed v3.2 manifest;
 - `@hotdocx/emdash/authoring` — scoped outer-LF builders and compilation,
   record/structure macros, class inheritance, explicit provider scopes,
-  bounded recursive and output-parameter instance synthesis, and saturated
-  class calls; and
+  bounded recursive instance synthesis with semi-output premise scheduling,
+  output-parameter inference, and saturated class calls; and
 - `@hotdocx/emdash/workspace` — explicit proof plans and artifacts plus
   browser-safe declaration and fragment workspaces.
 
@@ -24,8 +24,10 @@ The package has three deliberately bounded entries:
 import { CoreChecker } from '@hotdocx/emdash';
 import {
   CoreLfScopedBuilder,
+  CORE_LF_INSTANCE_SYNTHESIS_PROFILE,
   CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE,
   CORE_LF_INSTANCE_SCOPE_PROFILE,
+  synthesizeCoreLfInstance,
   synthesizeCoreLfInstanceByRoles,
 } from '@hotdocx/emdash/authoring';
 import {
@@ -33,7 +35,9 @@ import {
 } from '@hotdocx/emdash/workspace';
 
 const terms = new CoreLfScopedBuilder();
+void CORE_LF_INSTANCE_SYNTHESIS_PROFILE;
 void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
+void synthesizeCoreLfInstance;
 void synthesizeCoreLfInstanceByRoles;
 ```
 

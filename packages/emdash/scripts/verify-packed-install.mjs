@@ -210,9 +210,11 @@ try {
     `import assert from 'node:assert/strict';
 import { CoreChecker, CORE_MVP_MANIFEST } from '@hotdocx/emdash';
 import {
+  CORE_LF_INSTANCE_SYNTHESIS_PROFILE,
   CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE,
   CORE_LF_INSTANCE_SCOPE_PROFILE,
   CoreLfScopedBuilder,
+  synthesizeCoreLfInstance,
   synthesizeCoreLfInstanceByRoles,
 } from '@hotdocx/emdash/authoring';
 import {
@@ -221,11 +223,16 @@ import {
 
 assert.equal(typeof CoreChecker, 'function');
 assert.equal(typeof CoreLfScopedBuilder, 'function');
+assert.equal(typeof synthesizeCoreLfInstance, 'function');
 assert.equal(typeof synthesizeCoreLfInstanceByRoles, 'function');
 assert.equal(CORE_MVP_MANIFEST.status, 'frozen-reviewed');
 assert.equal(
   CORE_LF_INSTANCE_SCOPE_PROFILE.productionLambdapiDependency,
   false,
+);
+assert.equal(
+  CORE_LF_INSTANCE_SYNTHESIS_PROFILE.revision,
+  'emdash-lf-instance-synthesis-v2',
 );
 assert.equal(
   CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE.productionLambdapiDependency,
@@ -246,7 +253,12 @@ const workspace = require('@hotdocx/emdash/workspace');
 
 assert.equal(typeof core.CoreChecker, 'function');
 assert.equal(typeof authoring.CoreLfScopedBuilder, 'function');
+assert.equal(typeof authoring.synthesizeCoreLfInstance, 'function');
 assert.equal(typeof authoring.synthesizeCoreLfInstanceByRoles, 'function');
+assert.equal(
+  authoring.CORE_LF_INSTANCE_SYNTHESIS_PROFILE.revision,
+  'emdash-lf-instance-synthesis-v2',
+);
 assert.equal(
   authoring.CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE.performsIo,
   false,
@@ -265,9 +277,11 @@ assert.equal(
   type KernelExpression,
 } from '@hotdocx/emdash';
 import {
+  CORE_LF_INSTANCE_SYNTHESIS_PROFILE,
   CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE,
   CORE_LF_INSTANCE_SCOPE_PROFILE,
   CoreLfScopedBuilder,
+  synthesizeCoreLfInstance,
   synthesizeCoreLfInstanceByRoles,
 } from '@hotdocx/emdash/authoring';
 import {
@@ -276,15 +290,19 @@ import {
 
 const checkerConstructor: typeof CoreChecker = CoreChecker;
 const builder = new CoreLfScopedBuilder();
+const exactSynthesizer: typeof synthesizeCoreLfInstance =
+  synthesizeCoreLfInstance;
 const roleSynthesizer: typeof synthesizeCoreLfInstanceByRoles =
   synthesizeCoreLfInstanceByRoles;
 const maybeTerm: KernelExpression | undefined = undefined;
 void checkerConstructor;
 void builder;
+void exactSynthesizer;
 void roleSynthesizer;
 void maybeTerm;
 void CORE_MVP_MANIFEST;
 void CORE_LF_INSTANCE_SCOPE_PROFILE;
+void CORE_LF_INSTANCE_SYNTHESIS_PROFILE;
 void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void CORE_LF_DECLARATION_WORKSPACE_PROFILE;
 `,
@@ -293,8 +311,10 @@ void CORE_LF_DECLARATION_WORKSPACE_PROFILE;
     path.join(consumerDirectory, 'browser-entry.js'),
     `import { CoreChecker } from '@hotdocx/emdash';
 import {
+  CORE_LF_INSTANCE_SYNTHESIS_PROFILE,
   CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE,
   CoreLfScopedBuilder,
+  synthesizeCoreLfInstance,
   synthesizeCoreLfInstanceByRoles,
 } from '@hotdocx/emdash/authoring';
 import {
@@ -304,6 +324,8 @@ import {
 globalThis.emdashPackedSmoke = {
   CoreChecker,
   CoreLfScopedBuilder,
+  exactSynthesisRevision: CORE_LF_INSTANCE_SYNTHESIS_PROFILE.revision,
+  synthesizeCoreLfInstance,
   roleSynthesisRevision: CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE.revision,
   synthesizeCoreLfInstanceByRoles,
   workspaceRevision: CORE_LF_DECLARATION_WORKSPACE_PROFILE.revision,

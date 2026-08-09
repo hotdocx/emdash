@@ -132,10 +132,11 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
             },
             {
                 id: 'recursive-instance-synthesis',
-                revision: 'emdash-lf-instance-synthesis-v1',
+                revision: 'emdash-lf-instance-synthesis-v2',
                 scope:
-                    'bounded ground-goal search with recursion, tables, ' +
-                    'priorities, ambiguity, and explicit checked evidence'
+                    'bounded ground-goal search with role-scheduled ' +
+                    'premises, shared tables, strict ambiguity, and ' +
+                    'explicit checked evidence'
             },
             {
                 id: 'role-aware-instance-synthesis',

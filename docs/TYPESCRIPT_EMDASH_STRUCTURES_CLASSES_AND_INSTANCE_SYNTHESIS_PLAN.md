@@ -5,11 +5,11 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through PARAM-ROLES-10A and PACKAGE-12A/12B1 are final-green;
+through PARAM-ROLES-10B and PACKAGE-12A/12B1 are final-green;
 MATH-CONSUMER-9 is retired without implementation after its stale consumer
-was reconciled with the existing acceptance evidence; PARAM-ROLES-10B has an
-approved frozen contract and is the active local implementation tranche, and
-remaining call ergonomics and standard-library rows stay consumer-gated;
+was reconciled with the existing acceptance evidence; no further local row is
+currently dependency-ready because remaining call ergonomics and
+standard-library rows stay consumer-gated;
 registry ownership, bootstrap publication, and hosted integration remain
 gated; PACKAGE-12B2 and HOSTED-13 are external-action gates requiring separate
 authorization
@@ -529,7 +529,7 @@ discipline important, but they are not a prerequisite for this qualification.
 | ALGEBRA-GRADUATE-8 | complete | One exact local `Monoid A` scope now qualifies every direct/transitive parent, positive recursive provider expansion, coherent `Mul` diamond, and the saturated class-aware call under the same immutable artifacts. |
 | MATH-CONSUMER-9 | retired without implementation | The historical `struct_cov_sieve` name was only a parameter-plicity shape inherited from the Cartier review, not an active owner or missing kernel feature. STRUCT-PARAM-1 already qualifies the distinct dependent parameter modes, and ALGEBRA-GRADUATE-8 already supplies the representative Lean-style class consumer. No replacement proxy or mathematical-source edit is justified. |
 | PARAM-ROLES-10A | complete | A separate bounded role-pattern layer now infers output arguments over the unchanged exact ground resolver; saturated calls solve whole distinct output metas, and the HAdd-style direct/call/package acceptance boundary is final-green. |
-| PARAM-ROLES-10B | frozen and implementation-ready | Implement the approved bounded semi-output/premise scheduler over the exact standalone `HasCoerce` consumer, preserving the ground root API, strict choice, shared limits, and explicit final Core. |
+| PARAM-ROLES-10B | complete | The exact ground resolver now schedules provider premises by input readiness, uses output-wildcard/semi-output-filter role patterns under shared bounds, and qualifies normal and textually reversed standalone `HasCoerce` chains with explicit final Core. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
 | PACKAGE-12A | complete | The local publishable `@hotdocx/emdash@0.1.0` package now has strict root/authoring/workspace exports, dual browser-safe JavaScript, complete declarations/maps, and a packed-install consumer. No registry mutation occurred. |
 | PACKAGE-12B1 | complete | A token-free two-job GitHub Release workflow now builds and verifies one exact tarball before protected OIDC publication; deterministic release preflight freezes tag/version/repository/package invariants. All local checks are green and no GitHub or npm mutation occurred. |
@@ -2876,6 +2876,80 @@ the user-authorized unattended-review delegation, with immediate human
 supersession. The proposal checkpoint is
 `docs: freeze semi-output premise scheduling contract`; the implementation
 checkpoint is `feat: schedule semi-output instance premises`.
+
+## PARAM-ROLES-10B Completion Record
+
+`PARAM-ROLES-10B` is final-green on 2026-08-09. The public root request remains
+one checked meta-free class target, while the exact resolver profile advances
+to `emdash-lf-instance-synthesis-v2`. Candidate result refinement may now
+leave ordinary provider parameters temporarily unresolved. The candidate then
+repeatedly selects the first remaining instance premise whose `input` role
+arguments are ground, searches it, refines the returned ground evidence into
+the same isolated candidate session, and retries the newly zonked telescope.
+This permits dependency order to differ from binder order without creating a
+global metavariable service or changing Core.
+
+A ready premise is represented internally by checked class metadata. Output
+arguments are always wildcarded for provider discovery; a semi-output
+argument is a known filter when ground and an inference hole only while
+unknown. Fresh seed sessions may infer a meta-free target, but the seed never
+establishes evidence: the target is delegated to the resolver's ordinary
+ground-goal path, and the resulting explicit term is checked by refinement in
+the parent candidate before its evidence meta is solved. The final assembled
+application is still meta-free and passes the ordinary Core checker.
+
+The resolver now tables these role patterns separately from exact ground
+goals while charging both tables to one table limit and sharing depth, fuel,
+result-size, and conversion bounds. Ground and scheduled cycles remain finite
+missing branches. Rank, priority, definitionally equal evidence collapse,
+strict same-group ambiguity, and unresolved/ambiguous/limit blockers are
+unchanged. Provider/registry/scope snapshot v1 remains canonical and accepted;
+an ill-moded dynamic schedule is stable `stuck` evidence rather than a
+retroactive snapshot error.
+
+The v2 report additively records total/ground/role table use, scheduled
+premise attempts, each candidate's selected premise order, readiness kind,
+role pattern, inferred ground target, scheduled and ground goal IDs, and all
+candidate/delegation dispositions. It remains canonical, browser-safe, and
+deeply frozen. The AI-native capability now advertises
+`recursive-instance-synthesis@emdash-lf-instance-synthesis-v2`, and the packed
+authoring consumer verifies both the exact and output-role synthesis APIs
+through ESM, CommonJS, strict NodeNext declarations, and a browser bundle.
+
+The standalone acceptance fixture is intentionally unrelated to active
+mathematics. It defines `HasCoerce Source Target` with roles
+`semi-output,input`, concrete `Nat -> Bool` and `Bool -> Prop` providers at
+higher priority, and a generic transitive provider below them. Exact
+`HasCoerce Nat Prop` synthesis produces the checked explicit application
+
+```text
+coerceTrans Nat Bool Prop coerceBoolToProp coerceNatToBool
+```
+
+and records premise ordinals `[3,4]`. A second provider declares the premises
+in the opposite order and records `[4,3]`, still solving `B -> Prop` before
+`Nat -> B`. The same corpus qualifies known semi-output filtering, scheduled
+ambiguity, no-ready `stuck`, exact and scheduled cycles, all shared resource
+bounds, canonical replay, deep freeze, and independent final Core checking.
+The existing `HAdd` corpus continues to qualify output wildcard behavior.
+
+Final proportional evidence:
+
+- the focused instance/scope plus AI-capability run passed 44 tests across
+  nine suites with zero failures;
+- workspace validation, root typecheck, full changed-source lint, exact diff
+  whitespace review, package build, and packed ESM/CommonJS/NodeNext/browser
+  verification passed; and
+- the single required shared TypeScript gate passed 1,570 tests across 237
+  suites: 1,516 active passes, 54 intentional skips, and zero failures, in
+  2,599,236 ms (about 43.3 minutes).
+
+No `check:all`, kernel, print, browser-demo, sibling-repository, release,
+registry, authentication, publication, deployment, push, or merge action was
+run. This aggregate evidence must be carried forward for every unchanged
+boundary. CALL-SYNTH-7B and STDLIB-11 remain consumer-gated; PACKAGE-12B2 and
+HOSTED-13 remain external-action gates requiring their recorded prerequisites
+and separate authorization.
 
 ## Decision Ledger
 

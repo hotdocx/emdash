@@ -32,9 +32,10 @@
 > superclass diamond reduce via ordinary structure-projection betas and is
 > recorded by revision/rule inventory in portable reports. The resolver has
 > independent depth/table/result-size/fuel/conversion bounds and deeply frozen
-> solved/missing/stuck/ambiguous/limit traces; the source-visible capability
-> record exposes
-> `recursive-instance-synthesis@emdash-lf-instance-synthesis-v1`. The final
+> solved/missing/stuck/ambiguous/limit traces; that checkpoint's source-visible
+> capability was
+> `recursive-instance-synthesis@emdash-lf-instance-synthesis-v1`, superseded
+> by the PARAM-ROLES-10B v2 record below. The final
 > shared TypeScript gate passed 1,552 tests across 233 suites: 1,498 active
 > passes, 54 intentional skips, and zero failures. The continuation adds no
 > declaration parser, general
@@ -86,9 +87,21 @@
 > independent final checking. Its curated authoring export is verified through
 > packed ESM/CommonJS, strict NodeNext, and browser consumers. The one required
 > shared TypeScript gate passed 1,566 tests across 236 suites: 1,512 active
-> passes, 54 intentional skips, and zero failures. `PARAM-ROLES-10B` is now the
-> next dependency-ready local design row for exact `Coe`/`HasCoerce`
-> semi-output and premise scheduling.
+> passes, 54 intentional skips, and zero failures. `PARAM-ROLES-10B` is now
+> final-green. The exact ground resolver advances to
+> `emdash-lf-instance-synthesis-v2`: after result refinement it repeatedly
+> selects the first provider premise whose input-role arguments are ground,
+> treats output arguments as search wildcards, and uses known semi-output
+> arguments as filters. Scheduled role patterns and delegated exact goals
+> share tables, depth, fuel, result-size, conversion bounds, cycle handling,
+> strict precedence, ambiguity, and final ordinary Core checking. A standalone
+> `HasCoerce Nat Prop` fixture qualifies the normal `[3,4]` order and a
+> textually reversed `[4,3]` telescope, both producing explicit checked
+> transitive evidence. Reports expose the schedule and separate ground/role
+> table use; provider/scope snapshots remain v1. The packed authoring boundary
+> verifies the v2 exact API through ESM/CommonJS, strict NodeNext, and browser
+> consumption. Its single shared TypeScript gate passed 1,570 tests across 237
+> suites: 1,516 active passes, 54 intentional skips, and zero failures.
 > `PACKAGE-12A` is final-green: the local
 > `@hotdocx/emdash@0.1.0` package has strict root/authoring/workspace exports,
 > dual browser-safe JavaScript, complete declarations/maps, and a

@@ -7,7 +7,7 @@
  * invariants throw.
  */
 
-import { CoreCheckerError } from './checker';
+import { CoreCheckerError, isCoreKind } from './checker';
 import { CoreContext } from './context';
 import { serializeCoreExpressionAtDepth } from './core_serialization';
 import {
@@ -20,6 +20,7 @@ import {
 } from './lf_class_schema';
 import {
     CORE_LF_CANDIDATE_COMPARISON_STEP_LIMIT,
+    CoreLfChecker,
     createCoreLfChecker
 } from './lf_checker';
 import {
@@ -42,18 +43,20 @@ import { CoreLfMixedDeclarationBaseContext } from './lf_transfer_mixed';
 import { CoreLfQualifiedSymbol } from './lf_transfer';
 import { serializeCoreLfWorkspaceCanonicalJson } from './lf_workspace';
 import {
+    KernelCallArgumentInput,
     KernelExpression,
     KernelMetaVariable,
     Plicity,
     kernelAmbientDependencies,
     kernelCall,
+    kernelFree,
     kernelInstantiate,
     kernelUniverse,
     provenance
 } from './kernel';
 
 export const CORE_LF_INSTANCE_SYNTHESIS_PROFILE = Object.freeze({
-    revision: 'emdash-lf-instance-synthesis-v1' as const,
+    revision: 'emdash-lf-instance-synthesis-v2' as const,
     defaultLimits: Object.freeze({
         maxDepth: 32,
         maxTableEntries: 256,
@@ -61,7 +64,10 @@ export const CORE_LF_INSTANCE_SYNTHESIS_PROFILE = Object.freeze({
         maxFuel: 4096,
         comparisonStepLimit: CORE_LF_CANDIDATE_COMPARISON_STEP_LIMIT
     }),
-    goalReadiness: 'all-arguments-ground' as const,
+    goalReadiness:
+        'meta-free-root-with-role-scheduled-provider-premises' as const,
+    premiseScheduling:
+        'first-ground-input-with-output-wildcard-and-known-semi-output-filter' as const,
     providerChoice:
         'rank-then-priority-then-definitional-equivalence' as const,
     expectedOutcomes: Object.freeze([
@@ -153,14 +159,32 @@ export type CoreLfInstancePremiseDisposition =
     | 'cycle'
     | 'not-ready';
 
+export type CoreLfInstanceScheduledArgumentKind =
+    | 'known'
+    | 'infer-output'
+    | 'infer-semi-output';
+
+export interface CoreLfInstanceScheduledArgumentTrace {
+    readonly ordinal: number;
+    readonly role: CoreLfClassParameterRole;
+    readonly plicity: Plicity;
+    readonly kind: CoreLfInstanceScheduledArgumentKind;
+    readonly value?: string;
+}
+
 export interface CoreLfInstancePremiseTrace {
     readonly binderOrdinal: number;
     readonly binderName: string;
     readonly class: CoreLfClassReference;
     readonly target: string;
+    readonly scheduleRound?: number;
+    readonly readiness: 'ground' | 'role-pattern' | 'not-ready';
+    readonly pattern?: readonly CoreLfInstanceScheduledArgumentTrace[];
+    readonly resolvedTarget?: string;
     readonly disposition: CoreLfInstancePremiseDisposition;
     readonly outcome: CoreLfInstanceSynthesisStatus;
     readonly goalId?: string;
+    readonly scheduledGoalId?: string;
 }
 
 export interface CoreLfInstanceOrdinaryArgumentTrace {
@@ -187,6 +211,7 @@ export interface CoreLfInstanceCandidateTrace {
     readonly ordinaryArguments:
         readonly CoreLfInstanceOrdinaryArgumentTrace[];
     readonly premises: readonly CoreLfInstancePremiseTrace[];
+    readonly premiseOrder: readonly number[];
     readonly term?: string;
     readonly resultSize?: number;
     readonly equivalenceClass?: number;
@@ -210,7 +235,53 @@ export interface CoreLfInstanceSynthesisUsage {
     readonly fuelUsed: number;
     readonly candidateAttempts: number;
     readonly tableEntries: number;
+    readonly groundTableEntries: number;
+    readonly roleTableEntries: number;
+    readonly scheduledPremiseAttempts: number;
     readonly maxDepthReached: number;
+}
+
+export type CoreLfInstanceScheduledCandidateOutcome =
+    | 'rejected'
+    | 'stuck'
+    | 'limit-exceeded'
+    | 'inferred-target'
+    | 'duplicate-target'
+    | 'skipped';
+
+export interface CoreLfInstanceScheduledCandidateTrace {
+    readonly providerId: CoreLfQualifiedSymbol;
+    readonly rank: number;
+    readonly priority: number;
+    readonly outcome: CoreLfInstanceScheduledCandidateOutcome;
+    readonly reason: string;
+    readonly inferredTarget?: string;
+}
+
+export interface CoreLfInstanceScheduledDelegationTrace {
+    readonly target: string;
+    readonly outcome: CoreLfInstanceSynthesisStatus;
+    readonly disposition: Exclude<
+        CoreLfInstancePremiseDisposition,
+        'not-ready'
+    >;
+    readonly goalId: string;
+}
+
+export interface CoreLfInstanceScheduledGoalTrace {
+    readonly goalId: string;
+    readonly key: string;
+    readonly depth: number;
+    readonly class: CoreLfClassReference;
+    readonly coreHeadName: string;
+    readonly arguments: readonly CoreLfInstanceScheduledArgumentTrace[];
+    readonly outcome: CoreLfInstanceSynthesisStatus;
+    readonly decisionRank?: number;
+    readonly decisionPriority?: number;
+    readonly selectedTarget?: string;
+    readonly selectedProvider?: CoreLfQualifiedSymbol;
+    readonly candidates: readonly CoreLfInstanceScheduledCandidateTrace[];
+    readonly delegations: readonly CoreLfInstanceScheduledDelegationTrace[];
 }
 
 export interface CoreLfInstanceSynthesisScopeFingerprintMaterial {
@@ -238,6 +309,7 @@ export interface CoreLfInstanceSynthesisReport {
     readonly target: CoreLfInstanceSynthesisTargetTrace;
     readonly outcome: CoreLfInstanceSynthesisStatus;
     readonly goals: readonly CoreLfInstanceGoalTrace[];
+    readonly scheduledGoals: readonly CoreLfInstanceScheduledGoalTrace[];
 }
 
 interface CoreLfInstanceSynthesisOutcomeBase {
@@ -302,6 +374,7 @@ interface MutableCandidateTrace {
     reason: string;
     ordinaryArguments: CoreLfInstanceOrdinaryArgumentTrace[];
     premises: CoreLfInstancePremiseTrace[];
+    premiseOrder: number[];
     term?: string;
     resultSize?: number;
     equivalenceClass?: number;
@@ -325,6 +398,7 @@ interface InternalSolved {
     readonly status: 'solved';
     readonly selected: CoreLfQualifiedSymbol;
     readonly term: KernelExpression;
+    readonly type: KernelExpression;
     readonly size: number;
     readonly goalId: string;
 }
@@ -354,6 +428,104 @@ interface TableEntry {
     state: 'visiting' | 'done';
     resolution?: InternalResolution;
 }
+
+type ScheduledArgument =
+    | {
+        readonly kind: 'known';
+        readonly role: CoreLfClassParameterRole;
+        readonly plicity: Plicity;
+        readonly value: KernelExpression;
+    }
+    | {
+        readonly kind: 'infer-output' | 'infer-semi-output';
+        readonly role: CoreLfClassParameterRole;
+        readonly plicity: Plicity;
+    };
+
+interface ScheduledPattern {
+    readonly template: GoalTemplate;
+    readonly arguments: readonly ScheduledArgument[];
+    readonly key: string;
+    readonly tableKey: string;
+}
+
+interface PatternTarget {
+    readonly target: KernelExpression;
+    readonly holes: readonly KernelMetaVariable[];
+}
+
+interface MutableScheduledCandidateTrace {
+    providerId: CoreLfQualifiedSymbol;
+    rank: number;
+    priority: number;
+    outcome: CoreLfInstanceScheduledCandidateOutcome;
+    reason: string;
+    inferredTarget?: string;
+}
+
+interface MutableScheduledGoalTrace {
+    goalId: string;
+    key: string;
+    depth: number;
+    class: CoreLfClassReference;
+    coreHeadName: string;
+    arguments: CoreLfInstanceScheduledArgumentTrace[];
+    outcome: CoreLfInstanceSynthesisStatus;
+    decisionRank?: number;
+    decisionPriority?: number;
+    selectedTarget?: string;
+    selectedProvider?: CoreLfQualifiedSymbol;
+    candidates: MutableScheduledCandidateTrace[];
+    delegations: CoreLfInstanceScheduledDelegationTrace[];
+}
+
+interface InternalScheduledSolved extends InternalSolved {
+    readonly scheduledGoalId: string;
+}
+
+interface InternalScheduledUnsolved {
+    readonly status:
+        | 'missing'
+        | 'stuck'
+        | 'ambiguous'
+        | 'limit-exceeded';
+    readonly scheduledGoalId: string;
+    readonly cycle?: boolean;
+}
+
+type InternalScheduledResolution =
+    | InternalScheduledSolved
+    | InternalScheduledUnsolved;
+
+interface ScheduledResolutionEdge {
+    readonly resolution: InternalScheduledResolution;
+    readonly disposition: Exclude<
+        CoreLfInstancePremiseDisposition,
+        'not-ready'
+    >;
+}
+
+interface ScheduledTableEntry {
+    readonly goalId: string;
+    state: 'visiting' | 'done';
+    resolution?: InternalScheduledResolution;
+}
+
+interface ScheduledSeedSuccess {
+    readonly status: 'success';
+    readonly trace: MutableScheduledCandidateTrace;
+    readonly target: KernelExpression;
+    readonly targetKey: string;
+}
+
+interface ScheduledSeedUnsolved {
+    readonly status: 'rejected' | 'stuck' | 'limit-exceeded';
+    readonly trace: MutableScheduledCandidateTrace;
+}
+
+type ScheduledSeedResolution =
+    | ScheduledSeedSuccess
+    | ScheduledSeedUnsolved;
 
 interface CandidateSuccess {
     readonly status: 'success';
@@ -856,7 +1028,20 @@ const candidateTrace = (
     outcome,
     reason,
     ordinaryArguments: [],
-    premises: []
+    premises: [],
+    premiseOrder: []
+});
+
+const scheduledCandidateTrace = (
+    candidate: CoreLfInstanceScopeCandidate,
+    outcome: CoreLfInstanceScheduledCandidateOutcome = 'rejected',
+    reason = 'not-attempted'
+): MutableScheduledCandidateTrace => ({
+    providerId: cloneSymbol(candidate.providerId),
+    rank: candidate.rank,
+    priority: candidate.priority,
+    outcome,
+    reason
 });
 
 const unresolvedPriority = (
@@ -876,10 +1061,14 @@ class CoreLfInstanceResolver {
     private readonly providerById:
         ReadonlyMap<string, CoreLfInstanceProviderDeclaration>;
     private readonly table = new Map<string, TableEntry>();
+    private readonly scheduledTable = new Map<string, ScheduledTableEntry>();
     private readonly goalTraces: MutableGoalTrace[] = [];
+    private readonly scheduledGoalTraces: MutableScheduledGoalTrace[] = [];
     private nextGoalOrdinal = 0;
+    private nextScheduledGoalOrdinal = 0;
     private fuelUsed = 0;
     private candidateAttempts = 0;
+    private scheduledPremiseAttempts = 0;
     private maxDepthReached = 0;
 
     constructor(
@@ -997,6 +1186,179 @@ class CoreLfInstanceResolver {
             `\u0000${JSON.stringify(this.runtimeFingerprint)}`;
     }
 
+    private totalTableEntries(): number {
+        return this.table.size + this.scheduledTable.size;
+    }
+
+    private scheduledArguments(
+        template: GoalTemplate,
+        type: KernelExpression
+    ): readonly ScheduledArgument[] | undefined {
+        const arguments_ = expressionArguments(
+            type,
+            template,
+            'scheduledInstancePremise'
+        );
+        const scheduled: ScheduledArgument[] = [];
+        for (let ordinal = 0; ordinal < arguments_.length; ordinal++) {
+            const role = template.roles[ordinal];
+            const plicity = template.plicities[ordinal];
+            const value = arguments_[ordinal];
+            if (role === 'input') {
+                if (containsMeta(value)) return undefined;
+                scheduled.push({ kind: 'known', role, plicity, value });
+            } else if (role === 'output') {
+                scheduled.push({ kind: 'infer-output', role, plicity });
+            } else if (containsMeta(value)) {
+                scheduled.push({
+                    kind: 'infer-semi-output',
+                    role,
+                    plicity
+                });
+            } else {
+                scheduled.push({ kind: 'known', role, plicity, value });
+            }
+        }
+        return scheduled;
+    }
+
+    private scheduledPattern(
+        template: GoalTemplate,
+        arguments_: readonly ScheduledArgument[]
+    ): ScheduledPattern {
+        const key = `${displaySymbol(template.class.classId)}::${arguments_
+            .map((argument, ordinal) => argument.kind === 'known'
+                ? `${ordinal}:known:${serializeCoreExpressionAtDepth(
+                    argument.value,
+                    this.context.depth
+                )}`
+                : `${ordinal}:${argument.kind}:*`)
+            .join('|')}`;
+        return {
+            template,
+            arguments: arguments_,
+            key,
+            tableKey: this.tableKey(
+                template.class,
+                `scheduled\u0000${key}`
+            )
+        };
+    }
+
+    private scheduledArgumentTraces(
+        arguments_: readonly ScheduledArgument[]
+    ): CoreLfInstanceScheduledArgumentTrace[] {
+        return arguments_.map((argument, ordinal) => ({
+            ordinal,
+            role: argument.role,
+            plicity: argument.plicity,
+            kind: argument.kind,
+            ...(argument.kind === 'known'
+                ? {
+                    value: serializeCoreExpressionAtDepth(
+                        argument.value,
+                        this.context.depth
+                    )
+                }
+                : {})
+        }));
+    }
+
+    private newScheduledGoalTrace(
+        pattern: ScheduledPattern,
+        depth: number
+    ): MutableScheduledGoalTrace {
+        const trace: MutableScheduledGoalTrace = {
+            goalId: `s${this.nextScheduledGoalOrdinal++}`,
+            key: pattern.key,
+            depth,
+            class: cloneClass(pattern.template.class),
+            coreHeadName: pattern.template.coreHeadName,
+            arguments: this.scheduledArgumentTraces(pattern.arguments),
+            outcome: 'stuck',
+            candidates: [],
+            delegations: []
+        };
+        this.scheduledGoalTraces.push(trace);
+        return trace;
+    }
+
+    private buildScheduledPatternTarget(
+        checker: CoreLfChecker,
+        pattern: ScheduledPattern,
+        source: string
+    ): PatternTarget {
+        const nodeProvenance = provenance('derived', source);
+        const callee = kernelFree(
+            pattern.template.coreHeadName,
+            nodeProvenance
+        );
+        const inferred = checker.infer(this.context, callee);
+        if (isCoreKind(inferred.type)) {
+            return fail(
+                'INVALID_PROVIDER',
+                'scheduledPattern.class',
+                'Installed scheduled class head inferred checker KIND'
+            );
+        }
+        let currentType = inferred.type;
+        const callArguments: KernelCallArgumentInput[] = [];
+        const holes: KernelMetaVariable[] = [];
+        pattern.arguments.forEach((argument, ordinal) => {
+            currentType = checker.lfSession.zonk(currentType);
+            if (
+                currentType.tag !== 'pi' ||
+                currentType.binder.mode.plicity !== argument.plicity
+            ) {
+                return fail(
+                    'INVALID_PROVIDER',
+                    `scheduledPattern.arguments[${ordinal}]`,
+                    'Scheduled class metadata differs from its carrier telescope'
+                );
+            }
+            let value: KernelExpression;
+            if (argument.kind === 'known') {
+                try {
+                    value = checker.checkRefinement(
+                        this.context,
+                        argument.value,
+                        currentType.binder.type
+                    ).term;
+                } catch (error: unknown) {
+                    return fail(
+                        'INVALID_PROVIDER',
+                        `scheduledPattern.arguments[${ordinal}]`,
+                        'Known scheduled argument no longer checks',
+                        error instanceof Error ? error : undefined
+                    );
+                }
+            } else {
+                const meta = checker.lfSession.freshMeta(
+                    this.context,
+                    currentType.binder.type,
+                    provenance('derived', `${source} hole ${ordinal}`)
+                );
+                value = meta;
+                holes.push(meta);
+            }
+            callArguments.push({
+                plicity: argument.plicity,
+                value,
+                provenance: nodeProvenance
+            });
+            currentType = checker.lfSession.zonk(kernelInstantiate(
+                currentType.body,
+                value
+            ));
+        });
+        return {
+            target: callArguments.length === 0
+                ? callee
+                : kernelCall(callee, callArguments, nodeProvenance),
+            holes
+        };
+    }
+
     private newGoalTrace(
         preparation: GoalPreparation,
         depth: number
@@ -1026,13 +1388,19 @@ class CoreLfInstanceResolver {
     private headCandidates(
         goal: PreparedGoal
     ): readonly CoreLfInstanceScopeCandidate[] {
+        return this.headCandidatesForTemplate(goal.template);
+    }
+
+    private headCandidatesForTemplate(
+        template: GoalTemplate
+    ): readonly CoreLfInstanceScopeCandidate[] {
         return this.scope.candidates.filter(candidate => {
             const provider = this.providerById.get(
                 symbolKey(candidate.providerId)
             );
             return provider !== undefined &&
-                sameClass(provider.result.class, goal.template.class) &&
-                provider.result.coreHeadName === goal.template.coreHeadName;
+                sameClass(provider.result.class, template.class) &&
+                provider.result.coreHeadName === template.coreHeadName;
         });
     }
 
@@ -1051,7 +1419,9 @@ class CoreLfInstanceResolver {
         ).some(dependency => premiseIndices.has(dependency.index));
     }
 
-    private spendFuel(trace: MutableCandidateTrace): boolean {
+    private spendFuel(
+        trace: MutableCandidateTrace | MutableScheduledCandidateTrace
+    ): boolean {
         if (this.fuelUsed >= this.limits.maxFuel) {
             trace.outcome = 'limit-exceeded';
             trace.reason = 'candidate-fuel-exhausted';
@@ -1060,6 +1430,417 @@ class CoreLfInstanceResolver {
         this.fuelUsed++;
         this.candidateAttempts++;
         return true;
+    }
+
+    private attemptScheduledSeed(
+        pattern: ScheduledPattern,
+        candidate: CoreLfInstanceScopeCandidate
+    ): ScheduledSeedResolution {
+        const trace = scheduledCandidateTrace(candidate);
+        if (!this.spendFuel(trace)) {
+            return { status: 'limit-exceeded', trace };
+        }
+        const provider = this.providerById.get(symbolKey(candidate.providerId));
+        if (provider === undefined) {
+            return fail(
+                'INTERNAL_INVARIANT',
+                `scope.candidates.${displaySymbol(candidate.providerId)}`,
+                'Validated scheduled candidate lost its provider declaration'
+            );
+        }
+        if (this.providerResultDependsOnPremise(provider)) {
+            trace.outcome = 'stuck';
+            trace.reason = 'provider-result-depends-on-instance-premise';
+            return { status: 'stuck', trace };
+        }
+
+        const checker = createCoreLfChecker(
+            this.declarations.environment,
+            this.limits.comparisonStepLimit,
+            this.runtimeProgram
+        );
+        const session = checker.lfSession;
+        let currentType = provider.type;
+        const metas: Array<{
+            readonly binder:
+                CoreLfInstanceProviderDeclaration['telescope'][number];
+            readonly meta: KernelMetaVariable;
+        }> = [];
+        const arguments_: KernelCallArgumentInput[] = [];
+        for (const binder of provider.telescope) {
+            if (currentType.tag !== 'pi') {
+                return fail(
+                    'INVALID_PROVIDER',
+                    `providers.${displaySymbol(provider.providerId)}.type`,
+                    'Scheduled provider telescope ended before its checked Pi type'
+                );
+            }
+            const meta = session.freshMeta(
+                this.context,
+                currentType.binder.type,
+                provenance(
+                    'derived',
+                    `scheduled seed ${displaySymbol(provider.providerId)} ` +
+                        `binder ${binder.ordinal}`
+                )
+            );
+            metas.push({ binder, meta });
+            arguments_.push({
+                plicity: currentType.binder.mode.plicity,
+                value: meta,
+                provenance: meta.provenance
+            });
+            currentType = session.zonk(kernelInstantiate(
+                currentType.body,
+                meta
+            ));
+        }
+        const application = arguments_.length === 0
+            ? provider.term
+            : kernelCall(
+                provider.term,
+                arguments_,
+                provenance(
+                    'derived',
+                    `scheduled seed candidate ${displaySymbol(
+                        provider.providerId
+                    )}`
+                )
+            );
+        const built = this.buildScheduledPatternTarget(
+            checker,
+            pattern,
+            `scheduled seed target ${displaySymbol(provider.providerId)}`
+        );
+        try {
+            checker.checkRefinement(this.context, application, built.target);
+        } catch (error: unknown) {
+            if (error instanceof CoreCheckerError) {
+                if (error.code === 'CONVERSION_STEP_LIMIT') {
+                    trace.outcome = 'limit-exceeded';
+                    trace.reason = 'scheduled-result-comparison-step-limit';
+                    return { status: 'limit-exceeded', trace };
+                }
+                if (
+                    error.code === 'UNRESOLVED_CONSTRAINTS' ||
+                    error.code === 'UNRESOLVED_METAVARIABLE'
+                ) {
+                    trace.outcome = 'stuck';
+                    trace.reason = 'scheduled-result-unification-stuck';
+                    return { status: 'stuck', trace };
+                }
+                if (
+                    error.code === 'TYPE_MISMATCH' ||
+                    error.code === 'PLICITY_MISMATCH' ||
+                    error.code === 'BINDER_MODE_MISMATCH' ||
+                    error.code === 'CONSTRAINT_REJECTED'
+                ) {
+                    trace.outcome = 'rejected';
+                    trace.reason = 'scheduled-known-argument-mismatch';
+                    return { status: 'rejected', trace };
+                }
+            }
+            return fail(
+                'INVALID_PROVIDER',
+                `providers.${displaySymbol(provider.providerId)}`,
+                'Provider could not be matched at the scheduled refinement boundary',
+                error instanceof Error ? error : undefined
+            );
+        }
+        for (const entry of metas) {
+            const value = session.zonk(entry.meta);
+            if (entry.binder.kind === 'ordinary' && containsMeta(value)) {
+                trace.outcome = 'stuck';
+                trace.reason =
+                    'ordinary-parameter-not-scheduled-result-determined';
+                return { status: 'stuck', trace };
+            }
+            if (
+                entry.binder.kind === 'instance-premise' &&
+                value.tag !== 'meta'
+            ) {
+                trace.outcome = 'stuck';
+                trace.reason = 'scheduled-result-assigned-instance-premise';
+                return { status: 'stuck', trace };
+            }
+        }
+        if (built.holes.some(hole => containsMeta(session.zonk(hole)))) {
+            trace.outcome = 'stuck';
+            trace.reason = 'candidate-did-not-determine-scheduled-hole';
+            return { status: 'stuck', trace };
+        }
+        const target = session.zonk(built.target);
+        if (containsMeta(target)) {
+            trace.outcome = 'stuck';
+            trace.reason = 'scheduled-target-retains-metavariable';
+            return { status: 'stuck', trace };
+        }
+        try {
+            checker.check(
+                this.context,
+                target,
+                kernelUniverse(provenance(
+                    'derived',
+                    'scheduled premise target must inhabit TYPE'
+                ))
+            );
+        } catch (error: unknown) {
+            return fail(
+                'INVALID_PROVIDER',
+                `providers.${displaySymbol(provider.providerId)}.result`,
+                'Inferred scheduled target is not a checked class type',
+                error instanceof Error ? error : undefined
+            );
+        }
+        const targetKey = serializeCoreExpressionAtDepth(
+            target,
+            this.context.depth
+        );
+        trace.outcome = 'inferred-target';
+        trace.reason = 'candidate-result-determined-ground-scheduled-target';
+        trace.inferredTarget = targetKey;
+        return { status: 'success', trace, target, targetKey };
+    }
+
+    private resolveScheduledPattern(
+        pattern: ScheduledPattern,
+        depth: number
+    ): ScheduledResolutionEdge {
+        this.maxDepthReached = Math.max(this.maxDepthReached, depth);
+        const existing = this.scheduledTable.get(pattern.tableKey);
+        if (existing?.state === 'visiting') {
+            return {
+                disposition: 'cycle',
+                resolution: {
+                    status: 'missing',
+                    scheduledGoalId: existing.goalId,
+                    cycle: true
+                }
+            };
+        }
+        if (existing?.state === 'done' && existing.resolution !== undefined) {
+            return {
+                disposition: 'table-hit',
+                resolution: existing.resolution
+            };
+        }
+
+        const trace = this.newScheduledGoalTrace(pattern, depth);
+        if (
+            depth > this.limits.maxDepth ||
+            this.totalTableEntries() >= this.limits.maxTableEntries
+        ) {
+            trace.outcome = 'limit-exceeded';
+            return {
+                disposition: 'expanded',
+                resolution: {
+                    status: 'limit-exceeded',
+                    scheduledGoalId: trace.goalId
+                }
+            };
+        }
+        const tableEntry: ScheduledTableEntry = {
+            goalId: trace.goalId,
+            state: 'visiting'
+        };
+        this.scheduledTable.set(pattern.tableKey, tableEntry);
+        const finish = (
+            resolution: InternalScheduledResolution
+        ): ScheduledResolutionEdge => {
+            trace.outcome = resolution.status;
+            tableEntry.state = 'done';
+            tableEntry.resolution = resolution;
+            return { disposition: 'expanded', resolution };
+        };
+
+        const candidates = this.headCandidatesForTemplate(pattern.template);
+        if (candidates.length === 0) {
+            return finish({
+                status: 'missing',
+                scheduledGoalId: trace.goalId
+            });
+        }
+        let index = 0;
+        while (index < candidates.length) {
+            const first = candidates[index];
+            let end = index + 1;
+            while (
+                end < candidates.length &&
+                candidates[end].rank === first.rank &&
+                candidates[end].priority === first.priority
+            ) {
+                end++;
+            }
+            const group = candidates.slice(index, end);
+            const seeds = group.map(candidate =>
+                this.attemptScheduledSeed(pattern, candidate)
+            );
+            trace.candidates.push(...seeds.map(seed => seed.trace));
+            const seedBlocker = seeds.some(seed =>
+                seed.status === 'limit-exceeded'
+            )
+                ? 'limit-exceeded' as const
+                : seeds.some(seed => seed.status === 'stuck')
+                    ? 'stuck' as const
+                    : undefined;
+            if (seedBlocker !== undefined) {
+                trace.decisionRank = first.rank;
+                trace.decisionPriority = first.priority;
+                candidates.slice(end).forEach(candidate =>
+                    trace.candidates.push(scheduledCandidateTrace(
+                        candidate,
+                        'skipped',
+                        `${seedBlocker}-blocks-lower-precedence`
+                    ))
+                );
+                return finish({
+                    status: seedBlocker,
+                    scheduledGoalId: trace.goalId
+                });
+            }
+
+            const uniqueTargets = new Map<string, ScheduledSeedSuccess>();
+            for (const seed of seeds) {
+                if (seed.status !== 'success') continue;
+                if (uniqueTargets.has(seed.targetKey)) {
+                    seed.trace.outcome = 'duplicate-target';
+                    seed.trace.reason = 'same-canonical-ground-target';
+                } else {
+                    uniqueTargets.set(seed.targetKey, seed);
+                }
+            }
+            const successes: Array<{
+                readonly seed: ScheduledSeedSuccess;
+                readonly edge: ResolutionEdge;
+                readonly resolution: InternalSolved;
+            }> = [];
+            const delegatedStatuses: CoreLfInstanceSynthesisStatus[] = [];
+            for (const seed of uniqueTargets.values()) {
+                const edge = this.resolveGoal(
+                    pattern.template,
+                    seed.target,
+                    depth
+                );
+                delegatedStatuses.push(edge.resolution.status);
+                trace.delegations.push({
+                    target: seed.targetKey,
+                    outcome: edge.resolution.status,
+                    disposition: edge.disposition,
+                    goalId: edge.resolution.goalId
+                });
+                if (edge.resolution.status === 'solved') {
+                    successes.push({
+                        seed,
+                        edge,
+                        resolution: edge.resolution
+                    });
+                }
+            }
+            const delegatedBlocker = delegatedStatuses.includes(
+                'limit-exceeded'
+            )
+                ? 'limit-exceeded' as const
+                : delegatedStatuses.includes('ambiguous')
+                    ? 'ambiguous' as const
+                    : delegatedStatuses.includes('stuck')
+                        ? 'stuck' as const
+                        : undefined;
+            if (delegatedBlocker !== undefined) {
+                trace.decisionRank = first.rank;
+                trace.decisionPriority = first.priority;
+                candidates.slice(end).forEach(candidate =>
+                    trace.candidates.push(scheduledCandidateTrace(
+                        candidate,
+                        'skipped',
+                        `${delegatedBlocker}-blocks-lower-precedence`
+                    ))
+                );
+                return finish({
+                    status: delegatedBlocker,
+                    scheduledGoalId: trace.goalId
+                });
+            }
+            if (successes.length > 0) {
+                trace.decisionRank = first.rank;
+                trace.decisionPriority = first.priority;
+                const classes: typeof successes[] = [];
+                for (const success of successes) {
+                    let equivalent: typeof successes | undefined;
+                    for (const existingClass of classes) {
+                        const typeComparison = coreLfDefinitionalCompare(
+                            this.declarations.environment,
+                            success.resolution.type,
+                            existingClass[0].resolution.type,
+                            this.limits.comparisonStepLimit,
+                            undefined,
+                            this.runtimeProgram
+                        );
+                        if (typeComparison.status === 'step-limit-exceeded') {
+                            return finish({
+                                status: 'limit-exceeded',
+                                scheduledGoalId: trace.goalId
+                            });
+                        }
+                        if (typeComparison.status !== 'equal') continue;
+                        const termComparison = coreLfDefinitionalCompare(
+                            this.declarations.environment,
+                            success.resolution.term,
+                            existingClass[0].resolution.term,
+                            this.limits.comparisonStepLimit,
+                            undefined,
+                            this.runtimeProgram
+                        );
+                        if (termComparison.status === 'step-limit-exceeded') {
+                            return finish({
+                                status: 'limit-exceeded',
+                                scheduledGoalId: trace.goalId
+                            });
+                        }
+                        if (termComparison.status === 'equal') {
+                            equivalent = existingClass;
+                            break;
+                        }
+                    }
+                    if (equivalent === undefined) classes.push([success]);
+                    else equivalent.push(success);
+                }
+                if (classes.length !== 1) {
+                    candidates.slice(end).forEach(candidate =>
+                        trace.candidates.push(scheduledCandidateTrace(
+                            candidate,
+                            'skipped',
+                            'ambiguity-blocks-lower-precedence'
+                        ))
+                    );
+                    return finish({
+                        status: 'ambiguous',
+                        scheduledGoalId: trace.goalId
+                    });
+                }
+                const selected = classes[0][0].resolution;
+                trace.selectedTarget = serializeCoreExpressionAtDepth(
+                    selected.type,
+                    this.context.depth
+                );
+                trace.selectedProvider = cloneSymbol(selected.selected);
+                candidates.slice(end).forEach(candidate =>
+                    trace.candidates.push(scheduledCandidateTrace(
+                        candidate,
+                        'skipped',
+                        'higher-precedence-evidence-solved'
+                    ))
+                );
+                return finish({
+                    ...selected,
+                    scheduledGoalId: trace.goalId
+                });
+            }
+            index = end;
+        }
+        return finish({
+            status: 'missing',
+            scheduledGoalId: trace.goalId
+        });
     }
 
     private attemptCandidate(
@@ -1176,21 +1957,10 @@ class CoreLfInstanceResolver {
 
         for (const entry of metas) {
             const value = session.zonk(entry.meta);
-            if (entry.binder.kind === 'ordinary') {
-                if (containsMeta(value)) {
-                    trace.outcome = 'stuck';
-                    trace.reason = 'ordinary-parameter-not-goal-determined';
-                    return { status: 'stuck', trace };
-                }
-                trace.ordinaryArguments.push({
-                    binderOrdinal: entry.binder.ordinal,
-                    binderName: entry.binder.binderName,
-                    value: serializeCoreExpressionAtDepth(
-                        value,
-                        this.context.depth
-                    )
-                });
-            } else if (value.tag !== 'meta') {
+            if (
+                entry.binder.kind === 'instance-premise' &&
+                value.tag !== 'meta'
+            ) {
                 trace.outcome = 'stuck';
                 trace.reason = 'result-match-assigned-instance-premise';
                 return { status: 'stuck', trace };
@@ -1198,118 +1968,215 @@ class CoreLfInstanceResolver {
         }
 
         let resultSize = 1;
-        for (const entry of metas) {
-            if (entry.binder.kind !== 'instance-premise') continue;
-            const metaEntry = session.metavariable(entry.meta);
-            const premiseType = session.zonk(metaEntry.type);
-            const premiseTemplate = templateFromApplication(
-                this.declarations,
-                entry.binder.target,
-                `providers.${displaySymbol(provider.providerId)}.` +
-                    `telescope[${entry.binder.ordinal}].target`
-            );
-            if (containsMeta(premiseType)) {
-                trace.premises.push({
-                    binderOrdinal: entry.binder.ordinal,
-                    binderName: entry.binder.binderName,
-                    class: cloneClass(entry.binder.target.class),
-                    target: serializeCoreExpressionAtDepth(
-                        premiseType,
-                        this.context.depth
-                    ),
-                    disposition: 'not-ready',
-                    outcome: 'stuck'
+        let scheduleRound = 0;
+        let remaining = metas.filter(entry =>
+            entry.binder.kind === 'instance-premise'
+        );
+        while (remaining.length > 0) {
+            const states = remaining.map(entry => {
+                const binder = entry.binder;
+                if (binder.kind !== 'instance-premise') {
+                    return fail(
+                        'INTERNAL_INVARIANT',
+                        `providers.${displaySymbol(provider.providerId)}`,
+                        'Scheduled premise list retained an ordinary binder'
+                    );
+                }
+                const metaEntry = session.metavariable(entry.meta);
+                const premiseType = session.zonk(metaEntry.type);
+                const template = templateFromApplication(
+                    this.declarations,
+                    binder.target,
+                    `providers.${displaySymbol(provider.providerId)}.` +
+                        `telescope[${binder.ordinal}].target`
+                );
+                return {
+                    entry,
+                    binder,
+                    premiseType,
+                    template,
+                    arguments: this.scheduledArguments(template, premiseType)
+                };
+            });
+            const next = states.find(state => state.arguments !== undefined);
+            if (next === undefined) {
+                states.forEach(state => {
+                    trace.premises.push({
+                        binderOrdinal: state.entry.binder.ordinal,
+                        binderName: state.entry.binder.binderName,
+                        class: cloneClass(state.binder.target.class),
+                        target: serializeCoreExpressionAtDepth(
+                            state.premiseType,
+                            this.context.depth
+                        ),
+                        readiness: 'not-ready',
+                        disposition: 'not-ready',
+                        outcome: 'stuck'
+                    });
                 });
                 trace.outcome = 'stuck';
-                trace.reason = 'instance-premise-not-ground';
+                trace.reason = 'no-input-ready-instance-premise';
                 return { status: 'stuck', trace };
             }
-            let edge: ResolutionEdge;
-            try {
-                const premiseChecker = createCoreLfChecker(
-                    this.declarations.environment,
-                    this.limits.comparisonStepLimit,
-                    this.runtimeProgram
-                );
-                premiseChecker.check(
-                    this.context,
-                    premiseType,
-                    kernelUniverse(provenance(
-                        'derived',
-                        'instance premise must inhabit TYPE'
-                    ))
-                );
-                edge = this.resolveGoal(
-                    premiseTemplate,
-                    premiseType,
-                    depth + 1
-                );
-            } catch (error: unknown) {
-                if (error instanceof CoreLfInstanceSynthesisError) throw error;
+            const scheduledArguments = next.arguments;
+            if (scheduledArguments === undefined) {
                 return fail(
-                    'INVALID_PROVIDER',
-                    `providers.${displaySymbol(provider.providerId)}.` +
-                        `telescope[${entry.binder.ordinal}]`,
-                    'Instantiated instance premise is not a checked class type',
-                    error instanceof Error ? error : undefined
+                    'INTERNAL_INVARIANT',
+                    `providers.${displaySymbol(provider.providerId)}`,
+                    'Selected scheduled premise lost its readiness evidence'
                 );
             }
-            trace.premises.push({
-                binderOrdinal: entry.binder.ordinal,
-                binderName: entry.binder.binderName,
-                class: cloneClass(entry.binder.target.class),
+            this.scheduledPremiseAttempts++;
+            const hasRoleHole = scheduledArguments.some(argument =>
+                argument.kind !== 'known'
+            );
+            let resolution: InternalResolution | InternalScheduledResolution;
+            let disposition: Exclude<
+                CoreLfInstancePremiseDisposition,
+                'not-ready'
+            >;
+            let scheduledGoalId: string | undefined;
+            if (hasRoleHole) {
+                const edge = this.resolveScheduledPattern(
+                    this.scheduledPattern(next.template, scheduledArguments),
+                    depth + 1
+                );
+                resolution = edge.resolution;
+                disposition = edge.disposition;
+                scheduledGoalId = edge.resolution.scheduledGoalId;
+            } else {
+                const edge = this.resolveGoal(
+                    next.template,
+                    next.premiseType,
+                    depth + 1
+                );
+                resolution = edge.resolution;
+                disposition = edge.disposition;
+            }
+            const premiseTrace: CoreLfInstancePremiseTrace = {
+                binderOrdinal: next.entry.binder.ordinal,
+                binderName: next.entry.binder.binderName,
+                class: cloneClass(next.binder.target.class),
                 target: serializeCoreExpressionAtDepth(
-                    premiseType,
+                    next.premiseType,
                     this.context.depth
                 ),
-                disposition: edge.disposition,
-                outcome: edge.resolution.status,
-                goalId: edge.resolution.goalId
-            });
-            if (edge.resolution.status !== 'solved') {
-                if (edge.resolution.status === 'limit-exceeded') {
+                scheduleRound,
+                readiness: hasRoleHole ? 'role-pattern' : 'ground',
+                pattern: this.scheduledArgumentTraces(scheduledArguments),
+                ...(resolution.status === 'solved'
+                    ? {
+                        resolvedTarget: serializeCoreExpressionAtDepth(
+                            resolution.type,
+                            this.context.depth
+                        )
+                    }
+                    : {}),
+                disposition,
+                outcome: resolution.status,
+                ...('goalId' in resolution
+                    ? { goalId: resolution.goalId }
+                    : {}),
+                ...(scheduledGoalId === undefined
+                    ? {}
+                    : { scheduledGoalId })
+            };
+            trace.premises.push(premiseTrace);
+            trace.premiseOrder.push(next.entry.binder.ordinal);
+            if (resolution.status !== 'solved') {
+                if (resolution.status === 'limit-exceeded') {
                     trace.outcome = 'limit-exceeded';
                     trace.reason = 'instance-premise-limit-exceeded';
                     return { status: 'limit-exceeded', trace };
                 }
-                if (edge.resolution.status === 'ambiguous') {
+                if (resolution.status === 'ambiguous') {
                     trace.outcome = 'ambiguous-success';
                     trace.reason = 'instance-premise-ambiguous';
                     return { status: 'ambiguous', trace };
                 }
-                if (edge.resolution.status === 'stuck') {
+                if (resolution.status === 'stuck') {
                     trace.outcome = 'stuck';
                     trace.reason = 'instance-premise-stuck';
                     return { status: 'stuck', trace };
                 }
                 trace.outcome = 'rejected';
-                trace.reason = edge.resolution.cycle
+                trace.reason = resolution.cycle
                     ? 'instance-premise-cycle'
                     : 'instance-premise-missing';
                 return { status: 'rejected', trace };
             }
             try {
-                checker.check(
+                const refined = checker.checkRefinement(
                     this.context,
-                    edge.resolution.term,
-                    premiseType
-                );
-                session.solve(entry.meta, edge.resolution.term);
+                    resolution.term,
+                    next.premiseType
+                ).term;
+                session.solve(next.entry.meta, refined);
             } catch (error: unknown) {
+                if (error instanceof CoreCheckerError) {
+                    if (error.code === 'CONVERSION_STEP_LIMIT') {
+                        trace.outcome = 'limit-exceeded';
+                        trace.reason =
+                            'scheduled-premise-refinement-step-limit';
+                        return { status: 'limit-exceeded', trace };
+                    }
+                    if (
+                        error.code === 'UNRESOLVED_CONSTRAINTS' ||
+                        error.code === 'UNRESOLVED_METAVARIABLE'
+                    ) {
+                        trace.outcome = 'stuck';
+                        trace.reason = 'scheduled-premise-refinement-stuck';
+                        return { status: 'stuck', trace };
+                    }
+                    if (
+                        error.code === 'TYPE_MISMATCH' ||
+                        error.code === 'PLICITY_MISMATCH' ||
+                        error.code === 'BINDER_MODE_MISMATCH' ||
+                        error.code === 'CONSTRAINT_REJECTED'
+                    ) {
+                        trace.outcome = 'rejected';
+                        trace.reason = 'scheduled-premise-refinement-mismatch';
+                        return { status: 'rejected', trace };
+                    }
+                }
                 return fail(
                     'INTERNAL_INVARIANT',
                     `providers.${displaySymbol(provider.providerId)}.` +
-                        `telescope[${entry.binder.ordinal}]`,
-                    'Recursively checked premise could not fill its exact meta',
+                        `telescope[${next.entry.binder.ordinal}]`,
+                    'Scheduled checked premise could not fill its evidence meta',
                     error instanceof Error ? error : undefined
                 );
             }
-            resultSize += edge.resolution.size;
+            resultSize += resolution.size;
             if (resultSize > this.limits.maxResultSize) {
                 trace.outcome = 'limit-exceeded';
                 trace.reason = 'candidate-result-size-limit';
                 return { status: 'limit-exceeded', trace };
             }
+            remaining = remaining.filter(entry =>
+                entry !== next.entry
+            );
+            scheduleRound++;
+        }
+
+        for (const entry of metas) {
+            if (entry.binder.kind !== 'ordinary') continue;
+            const value = session.zonk(entry.meta);
+            if (containsMeta(value)) {
+                trace.outcome = 'stuck';
+                trace.reason = trace.premiseOrder.length === 0
+                    ? 'ordinary-parameter-not-goal-determined'
+                    : 'ordinary-parameter-not-premise-determined';
+                return { status: 'stuck', trace };
+            }
+            trace.ordinaryArguments.push({
+                binderOrdinal: entry.binder.ordinal,
+                binderName: entry.binder.binderName,
+                value: serializeCoreExpressionAtDepth(
+                    value,
+                    this.context.depth
+                )
+            });
         }
 
         const term = session.zonk(application);
@@ -1502,6 +2369,7 @@ class CoreLfInstanceResolver {
                     status: 'solved',
                     selected: cloneSymbol(selected.provider.providerId),
                     term: selected.term,
+                    type: goal.type,
                     size: selected.size,
                     goalId: trace.goalId
                 };
@@ -1548,7 +2416,7 @@ class CoreLfInstanceResolver {
                 }
             };
         }
-        if (this.table.size >= this.limits.maxTableEntries) {
+        if (this.totalTableEntries() >= this.limits.maxTableEntries) {
             trace.outcome = 'limit-exceeded';
             return {
                 disposition: 'expanded',
@@ -1604,7 +2472,10 @@ class CoreLfInstanceResolver {
             usage: {
                 fuelUsed: this.fuelUsed,
                 candidateAttempts: this.candidateAttempts,
-                tableEntries: this.table.size,
+                tableEntries: this.totalTableEntries(),
+                groundTableEntries: this.table.size,
+                roleTableEntries: this.scheduledTable.size,
+                scheduledPremiseAttempts: this.scheduledPremiseAttempts,
                 maxDepthReached: this.maxDepthReached
             },
             registryRevision: this.registry.registryRevision,
@@ -1617,7 +2488,8 @@ class CoreLfInstanceResolver {
             rootGoalId: root.goalId,
             target: rootTrace.target,
             outcome: root.status,
-            goals: this.goalTraces
+            goals: this.goalTraces,
+            scheduledGoals: this.scheduledGoalTraces
         });
     }
 }
