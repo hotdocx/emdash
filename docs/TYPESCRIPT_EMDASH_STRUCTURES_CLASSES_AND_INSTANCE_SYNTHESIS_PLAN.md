@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through CLASS-INHERIT-4B are final-green; SYNTH-SCOPE-5 is dependency-ready
-for its read-only provider and immutable-scope audit
+through CLASS-INHERIT-4B are final-green; the SYNTH-SCOPE-5 checked-provider
+and immutable-scope contract is frozen and approved for implementation
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -511,7 +511,7 @@ make explicit local scope discipline especially important.
 | CLASS-SCHEMA-3 | complete | Serializable class, parameter-role, declared-method, and ordered-parent metadata is public; every parentful schema is explicitly marked unlowered. |
 | CLASS-INHERIT-4A | complete | Strict C3, canonical inherited identity classes, explicit physical-slot binding/sharing, and conflict-free lookup are implemented as finite frozen metadata, without conversion terms. |
 | CLASS-INHERIT-4B | complete | Transparent direct-parent reconstruction definitions are public and checked; both explicit algebraic diamond routes normalize to one canonical constructor term. |
-| SYNTH-SCOPE-5 | dependency-ready | Audit and freeze immutable provider declarations plus local, named, imported, and global scope snapshots without recursive search. |
+| SYNTH-SCOPE-5 | proposal-approved | Implement the frozen checked-provider registry plus explicit local-frame, opened-named, pinned-import, and current-global scope snapshots without resolving a goal. |
 | SYNTH-RECURSE-6 | pending | Add exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces. |
 | CALL-SYNTH-7 | pending | Generalize call elaboration to arbitrary class-marked implicit binders. |
 | ALGEBRA-GRADUATE-8 | pending | Qualify the complete algebraic diamond and one recursive provider. |
@@ -1392,13 +1392,184 @@ proposal backtracking checkpoint is `27f22d2`; the rollback-safe
 implementation checkpoint is the local commit with message
 `elaborator: lower class parent conversions`.
 
-The next dependency-ready row is `SYNTH-SCOPE-5`. It starts with a read-only
-audit and frozen proposal for finite provider declarations and immutable
-local, named, imported, and global scope snapshots. That audit must decide
-stable provider identity, exact class-head representation, precedence,
-shadowing versus ambiguity, import provenance, superclass-provider metadata,
-and serialization. It must not begin recursive search, metavariable
-scheduling, general call elaboration, or hidden process-global registration.
+The next row is `SYNTH-SCOPE-5`. Its completed read-only audit and frozen
+proposal below decide stable provider identity, exact class-head
+representation, precedence, shadowing versus ambiguity, import provenance,
+superclass-provider metadata, and serialization. Its implementation must not
+begin recursive search, metavariable scheduling, general call elaboration, or
+hidden process-global registration.
+
+## SYNTH-SCOPE-5 Audit And Frozen Contract
+
+The 2026-08-08 read-only audit inspected the final-green global dictionary
+selector and leading-implicit authoring adapter, the declaration and fragment
+workspace identity/snapshot machinery, completed class layouts and direct
+parent conversions, and the relevant local Lean 4 implementation sources
+(`Lean.Meta.Instances`, `Lean.ScopedEnvExtension`, local-instance context
+management, and instance candidate collection). The selected design retains
+the useful behavioral distinctions without importing Lean's environment
+extension, parser, recency, or mutable metacontext architecture:
+
+- the existing dictionary selector remains a deliberately small compatibility
+  primitive over one caller-supplied list; it is not renamed into or silently
+  used as recursive typeclass search;
+- a provider is derived from an exact checked global declaration or an exact
+  checked local binder, so registration cannot invent the provider type,
+  result head, Core name, or evidence term;
+- provider telescopes retain source order and explicitly classify ordinary
+  binders versus later-synthesized class premises, but no premise is solved in
+  this row;
+- class applications record stable class identity, the checked Core head,
+  parameter roles and plicities, and exact Core arguments. This makes the
+  future all-input index portable without adding a class node to Core;
+- direct superclass conversions are ordinary global providers with one
+  explicitly classified child-evidence premise. Only the five direct edges of
+  the accepted algebraic hierarchy are registered; transitive evidence still
+  composes direct providers;
+- local evidence is an explicit locally nameless Core reference checked in a
+  supplied immutable `CoreContext`, never a name lookup or process-global
+  registration;
+- scopes are immutable snapshots over one immutable registry. They contain
+  explicit lexical frames, opened named-scope IDs, exact imported-interface
+  pins, and the current module ID; and
+- canonical JSON is the fingerprint material. This browser-safe row computes
+  no cryptographic digest and trusts no claimed hash beyond preserving and
+  validating its portable spelling.
+
+This is also the repeated real consumer required by the earlier
+`AI-SYNTH-1B2` gate: the first consumer selected one structure capability,
+while this row must represent ordinary class instances, a local class
+dictionary, and generated superclass providers for the five-edge algebraic
+hierarchy. It therefore graduates reusable scopes without changing canonical
+workspace schemas or weakening the existing call-site-explicit helper.
+
+The selected additive module is `src/v3_2/lf_instance_scope.ts`. Its exact
+contract is:
+
+1. `declareCoreLfGlobalInstanceProvider(...)` accepts one compiled declaration
+   base, its exact `CoreLfModuleSpec`, one installed ordinary free declaration,
+   one completed result-class layout, zero or more binder-ordinal/class-layout
+   premise annotations, an optional nonnegative safe-integer priority, and
+   either global or one qualified named-scope visibility. Provider identity is
+   the declaration's exact qualified symbol; aliases cannot register the same
+   declaration under a second identity.
+2. Registration checks the global reference against its already compiled type
+   with a fresh TypeScript LF checker, decomposes the complete Pi telescope,
+   and validates the unreduced final target as an exact application of the
+   supplied completed class layout. Each premise annotation must identify one
+   Pi binder whose exact checked type is an application of its supplied class
+   layout. All unannotated binders are ordinary parameters. Duplicate,
+   out-of-range, or non-class premise annotations fail closed.
+3. `declareCoreLfLocalInstanceProvider(...)` accepts the same declaration base,
+   an exact `CoreContext` over that environment, module identity, a stable
+   qualified provider ID, one bound-variable index, a stable lexical-frame ID,
+   and result/premise class layouts. It derives both evidence and type from
+   `context.lookupIndex`, checks them, and records the current ambient depth.
+   Local evidence is never exportable and must later appear in its declared
+   frame at exactly that resolution depth.
+4. `declareCoreLfSuperclassInstanceProvider(...)` accepts one completed direct
+   conversion handle plus matching child and parent layouts. It delegates to
+   checked global registration, classifies the conversion's final child-
+   evidence binder as the only instance premise, and records a
+   `superclass-conversion` origin containing the exact direct child, parent,
+   ordinal, symbol, and Core name. It rejects a transitive or mismatched
+   synthetic handle.
+5. Every provider snapshot has profile revision
+   `emdash-lf-instance-provider-v1`, stable provider ID, exact module/fragment
+   provenance, nonnegative priority (default `1000`), visibility, ambient
+   depth, checked provider term and type, ordered classified telescope, exact
+   result class application, and a discriminated ordinary-global,
+   local-bound, or superclass source. It contains no function, callback,
+   checker, declaration context, environment, unresolved metavariable, or
+   search request.
+6. A class application contains the stable `CoreLfClassReference`, checked
+   free Core head name, complete exact type, and one ordered argument entry per
+   class parameter. Each entry records ordinal, input/output/semi-output role,
+   Core plicity, and exact argument. Parameter roles are data only in this row;
+   output and semi-output scheduling remains `PARAM-ROLES-10`.
+7. `createCoreLfInstanceRegistrySnapshot(...)` accepts a caller revision and a
+   finite array of provider snapshots, revalidates replayed/JSON data, rejects
+   duplicate provider IDs, canonicalizes providers by qualified ID, and
+   returns a detached deeply frozen registry. It does not enumerate a
+   declaration environment, class layout, module graph, filesystem, or host
+   registry.
+8. `createCoreLfInstanceScopeSnapshot(...)` accepts the registry, a caller
+   revision, current module ID, resolution-context depth, ordered outer-to-
+   inner local/section frames, an order-insensitive set of opened qualified
+   named scopes, and order-insensitive pinned imports. Each import explicitly
+   records module ID, interface revision, `sha256:` interface pin, and the
+   complete available provider-ID list. Import order and provider-list order
+   are canonicalized; no provider is inferred from workspace externals,
+   dependency declarations, or an environment scan.
+9. A provider is eligible in exactly one activation class: a declared local
+   provider in its exact frame; a named provider from the current module or an
+   explicitly pinned import when its exact scope is opened; a current-module
+   global; or a pinned imported global. Unknown, repeated, wrong-module,
+   local-in-import, wrong-frame, wrong-depth, unopened, or otherwise
+   ineligible references fail closed. Registry entries not activated by the
+   snapshot remain inert.
+10. Candidate precedence is frozen as explicit ranks, not implied array
+    order. Inner lexical frames precede outer frames; each lexical frame is a
+    separate rank. All opened named scopes share the next rank. Current and
+    imported globals share the final ambient rank. Within one rank, higher
+    provider priority sorts first; equal-priority provider IDs sort only for
+    stable diagnostics. Distinct equal-ranked providers are retained, never
+    shadowed by ID or declaration recency. `SYNTH-RECURSE-6` will test actual
+    success and ambiguity.
+11. Local-frame order is semantically significant and preserved. Provider
+    arrays, opened named scopes, imports, and import provider lists are
+    semantically unordered and canonicalized. Reversing those inputs must
+    produce byte-identical registry/scope serialization; reversing nested
+    local frames must deliberately change ranks.
+12. `serializeCoreLfInstanceRegistrySnapshot(...)` and
+    `serializeCoreLfInstanceScopeSnapshot(...)` reuse the qualified browser-
+    safe canonical workspace JSON encoder. The scope records the exact
+    registry revision and provider-ID inventory so the future resolver can
+    reject a mismatched registry. The serialized registry plus scope are the
+    future table-key fingerprint material; no collision-prone ad hoc hash is
+    introduced.
+13. This module performs no goal matching, candidate selection, recursive
+    premise resolution, unification/metavariable assignment, cycle detection,
+    fuel accounting, ambiguity decision, call elaboration, or Core checking of
+    a newly assembled application. Those all remain `SYNTH-RECURSE-6` or
+    `CALL-SYNTH-7`.
+
+The frozen provider/scope error families are `INVALID_PROVIDER`,
+`UNAVAILABLE_PROVIDER`, `UNSUPPORTED_PROVIDER`, `INVALID_PROVIDER_TYPE`,
+`INVALID_CLASS_HEAD`, `INVALID_PREMISE`, `DUPLICATE_PREMISE`,
+`INVALID_SUPERCLASS_PROVIDER`, `INVALID_REGISTRY`, `DUPLICATE_PROVIDER`,
+`INVALID_SCOPE`, `UNKNOWN_PROVIDER`, `INVALID_LOCAL_FRAME`,
+`DUPLICATE_LOCAL_FRAME`, `INVALID_NAMED_SCOPE`, `DUPLICATE_NAMED_SCOPE`,
+`INVALID_IMPORT`, `DUPLICATE_IMPORT`, `INELIGIBLE_PROVIDER`, and
+`NON_PORTABLE_DATA`. Structured paths distinguish the provider declaration,
+Pi binder, class argument, registry entry, local frame, named opening, import,
+and derived candidate.
+
+The focused corpus will cover checked opaque and transparent global
+providers, a checked local binder, generic ordinary parameters, one explicit
+instance premise, exact input/output/semi-output role retention, all five
+direct algebraic superclass providers, replay from JSON, input immutability
+and deep freeze, canonical provider/import/named permutations, significant
+lexical-frame nesting, the exact local/named/imported/global rank matrix,
+equal-ranked retention, canonical serialization, and every frozen failure
+family. It will explicitly show that no synthesis result or selected evidence
+is produced.
+
+The proposal gate `H-TS-EMDASH-CLASSES-SYNTH-SCOPE-5-005` is approved under
+the user-authorized unattended-review delegation, with immediate human
+supersession. The documentation-only proposal checkpoint is the backtracking
+boundary. Implementation begins as a direct-import module and focused suite,
+then enters the public v3.2 barrel and root runner only with its final bounded
+surface. Workspace check, focused tests, TypeScript typecheck, changed-file
+lint, canonical diff hygiene, and one final `check:ts` are required because
+the public barrel and runner are shared boundaries. The final aggregate must
+not be repeated for unchanged documentation, and no Lambdapi/kernel check is
+planned because this row derives only already-checked TypeScript Core names
+and types.
+
+The proposed checkpoint message is
+`docs: freeze instance provider scope contract`. The implementation checkpoint
+message is `elaborator: add immutable instance scopes`.
 
 ## Decision Ledger
 
@@ -1422,6 +1593,10 @@ scheduling, general call elaboration, or hidden process-global registration.
 | C-016 | Class roles default to input; output and semi-output are recorded but not interpreted yet. | Keeps ordinary declarations compact while deferring metavariable scheduling to its consumer-gated row. |
 | C-017 | Direct parent conversions are ordinary transparent definitions; transitive evidence composes direct handles. | Gives computational diamond coherence without extra Core semantics or redundant global providers. |
 | C-018 | Parent-conversion receivers are authoring-level class evidence over explicit Core binders. | Preserves one trusted plicity model while allowing later synthesis to insert dictionaries. |
+| C-019 | Provider registration derives exact telescopes and class heads from checked globals or checked local binders. | Prevents metadata from asserting evidence or types that the explicit-Core checker has not established. |
+| C-020 | Lexical frames are explicit precedence ranks; opened named scopes share one rank; imported and current globals share one ambient rank. | Preserves meaningful lexical shadowing while rejecting hidden import/open/declaration-recency choice. |
+| C-021 | Equal-priority candidates at one rank remain distinct and visible. | Stable IDs order evidence and diagnostics but never turn a real ambiguity into an implicit choice. |
+| C-022 | Provider registries and scopes use canonical JSON as fingerprint material and preserve exact import pins without computing hashes. | Keeps the first scope layer browser-safe, portable, and honest about its acquisition boundary. |
 
 ## Validation And Checkpoint Policy
 

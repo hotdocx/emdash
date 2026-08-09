@@ -16,10 +16,14 @@
 > finite authoring/transfer metadata over unchanged explicit Core. The exact
 > five-edge algebraic module checks, and its two explicit
 > `MonoidClass -> MulClass` paths delta/beta/runtime-normalize to the same
-> `MkMulClass A (monoid_mul A m)` expression. The next dependency-ready row is
-> the read-only `SYNTH-SCOPE-5` audit for finite providers and immutable local,
-> named, imported, and global scope snapshots; recursive resolution remains a
-> separate later row. The
+> `MkMulClass A (monoid_mul A m)` expression. The `SYNTH-SCOPE-5` read-only
+> audit is now complete and its proposal is approved: checked global/local
+> provider metadata, direct superclass-provider records, canonical immutable
+> registries, explicit lexical frames, opened named scopes, and pinned import
+> interfaces will be implemented without resolving a goal. Lexical nesting is
+> explicit precedence; same-rank equal-priority candidates remain visible for
+> later ambiguity analysis. Recursive resolution remains a separate later
+> row. The
 > continuation adds no declaration parser, general
 > inductive frontend, class/Core node, or production Lambdapi dependency.
 >
