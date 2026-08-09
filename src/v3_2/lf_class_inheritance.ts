@@ -639,6 +639,13 @@ const layoutSnapshot = (
     return value as unknown as CoreLfClassInheritanceLayout;
 };
 
+/** Validate and detach one finite identity-layout snapshot for later phases. */
+export function validateCoreLfClassInheritanceLayout(
+    value: unknown
+): CoreLfClassInheritanceLayout {
+    return deepFreeze(cloneData(layoutSnapshot(value, 'input.layout')));
+}
+
 const mergeC3 = (
     child: CoreLfClassReference,
     parentLayouts: readonly CoreLfClassInheritanceLayout[],

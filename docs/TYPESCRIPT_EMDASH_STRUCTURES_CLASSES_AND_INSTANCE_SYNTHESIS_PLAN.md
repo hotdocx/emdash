@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through CLASS-INHERIT-4A are final-green; the exact CLASS-INHERIT-4B ordinary
-LF parent-conversion contract is frozen and approved for implementation
+through CLASS-INHERIT-4B are final-green; SYNTH-SCOPE-5 is dependency-ready
+for its read-only provider and immutable-scope audit
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -510,8 +510,8 @@ make explicit local scope discipline especially important.
 | STRUCT-NAMED-2 | complete | Stable owner-aware handles and order-independent named parameter/field assignments now lower to one deeply frozen ordinary constructor call. |
 | CLASS-SCHEMA-3 | complete | Serializable class, parameter-role, declared-method, and ordered-parent metadata is public; every parentful schema is explicitly marked unlowered. |
 | CLASS-INHERIT-4A | complete | Strict C3, canonical inherited identity classes, explicit physical-slot binding/sharing, and conflict-free lookup are implemented as finite frozen metadata, without conversion terms. |
-| CLASS-INHERIT-4B | in progress | The audited contract is frozen: generate transparent direct-parent reconstruction definitions and qualify both explicit diamond routes by ordinary delta/beta/runtime conversion. |
-| SYNTH-SCOPE-5 | pending | Add immutable provider declarations and local/named/imported scope snapshots. |
+| CLASS-INHERIT-4B | complete | Transparent direct-parent reconstruction definitions are public and checked; both explicit algebraic diamond routes normalize to one canonical constructor term. |
+| SYNTH-SCOPE-5 | dependency-ready | Audit and freeze immutable provider declarations plus local, named, imported, and global scope snapshots without recursive search. |
 | SYNTH-RECURSE-6 | pending | Add exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces. |
 | CALL-SYNTH-7 | pending | Generalize call elaboration to arbitrary class-marked implicit binders. |
 | ALGEBRA-GRADUATE-8 | pending | Qualify the complete algebraic diamond and one recursive provider. |
@@ -1307,6 +1307,99 @@ The proposed checkpoint message is
 `docs: freeze class inheritance lowering contract`. The implementation
 checkpoint message is `elaborator: lower class parent conversions`.
 
+## CLASS-INHERIT-4B Completion Record
+
+`CLASS-INHERIT-4B` is final-green on 2026-08-08. The implementation adds the
+public `lf_class_inheritance_lowering` module and:
+
+- exposes one frozen-copy validator for completed 4A layouts so later phases
+  accept structurally replayed JSON rather than JavaScript object identity;
+- canonicalizes complete, order-independent direct-parent inputs back to the
+  class schema's source-significant parent order;
+- emits one public ordinary transparent definition per direct parent, with no
+  runtime rule, proof rule, Core node, or privileged coercion;
+- preserves the complete child parameter telescope and each parameter's
+  projection mode, shifts parent applications exactly beneath the explicit
+  `class-evidence` receiver, and records the exact generated type;
+- reconstructs each parent through its existing named constructor, sourcing
+  fields solely through stable inherited identities and the child's existing
+  physical projections;
+- leaves dependent field compatibility and explicit sharing entirely to the
+  unchanged LF compiler/checker;
+- exposes finite direct-parent handles and an order-independent named
+  application helper which returns one ordinary fully explicit call; and
+- returns caller-independent, deeply frozen, JSON-serializable
+  `parent-conversions-expanded` source IR.
+
+The focused suite contains eight executable tests. It covers parent-free
+expansion, canonical direct-parent order, exact one- and two-parameter de
+Bruijn shifts, mixed implicit/explicit projection modes, reversed named
+parameter assignments, copied layouts/handles, caller immutability, deep
+freeze, every frozen lowering/application diagnostic family, and ordinary LF
+checking of generated bodies. A real explicit-share fixture succeeds when
+both unrelated parent fields have type `Code` and is rejected by the ordinary
+checker when the second expects `El A`.
+
+The algebraic acceptance module contains exactly five direct edges:
+
+```text
+SemigroupClass -> MulClass
+MulOneClass    -> MulClass
+MulOneClass    -> OneClass
+MonoidClass    -> SemigroupClass
+MonoidClass    -> MulOneClass
+```
+
+With `m : MonoidClass A`, both explicit transitive terms
+`semigroup_to_mul A (monoid_to_semigroup A m)` and
+`mul_one_to_mul A (monoid_to_mul_one A m)` check at `MulClass A`. Under the
+existing combined converter they both normalize, using only transparent
+delta, ordinary beta, and structure projection betas, to the same
+`MkMulClass A (monoid_mul A m)` Core expression. No proof irrelevance,
+coherence axiom, resolver heuristic, or dedicated transitive declaration is
+used.
+
+Exact validation:
+
+- `node --require ts-node/register --test
+  tests/v3_2_lf_class_inheritance_lowering_tests.ts`: 8/8 passed;
+- the preceding combined 4A/initial-4B focused pass was green, and the final
+  4B suite subsumes its lowering coverage;
+- `./scripts/pnpmw run workspace:check`: passed;
+- `./scripts/pnpmw run typecheck`: passed;
+- changed-file ESLint: passed;
+- `git diff --check`: passed; and
+- the required completed shared-boundary
+  `./scripts/pnpmw run check:ts`: 1,540 tests across 231 suites, 1,486 passed,
+  54 intentionally skipped, zero failures, exit code 0, in
+  `1,869,668.695485 ms` (approximately 31m10s). Its workspace, typecheck, and
+  full-lint stages also passed.
+
+An initial interactive aggregate invocation passed workspace, typecheck, and
+lint and entered buffered test execution, but an automatic goal continuation
+terminated its tool process before any footer or exit status existed. It is
+not treated as validation evidence. The one completed replacement was run
+detached with a durable external log and status marker; no post-green
+aggregate was or should be repeated for documentation synchronization.
+
+The public v3.2 barrel now exports both the identity-layout and lowering
+modules, and the root runner registers the focused lowering suite. The browser
+surface remains unchanged. No provider registry, scope snapshot, recursive
+search, call-site synthesis, parser, class/Core node, package boundary,
+Lambdapi fragment, `emdash2/` source, active kernel owner, or sibling
+repository changed. No Lambdapi or active-kernel gate was relevant. The
+proposal backtracking checkpoint is `27f22d2`; the rollback-safe
+implementation checkpoint is the local commit with message
+`elaborator: lower class parent conversions`.
+
+The next dependency-ready row is `SYNTH-SCOPE-5`. It starts with a read-only
+audit and frozen proposal for finite provider declarations and immutable
+local, named, imported, and global scope snapshots. That audit must decide
+stable provider identity, exact class-head representation, precedence,
+shadowing versus ambiguity, import provenance, superclass-provider metadata,
+and serialization. It must not begin recursive search, metavariable
+scheduling, general call elaboration, or hidden process-global registration.
+
 ## Decision Ledger
 
 | ID | Decision | Rationale |
@@ -1327,6 +1420,8 @@ checkpoint message is `elaborator: lower class parent conversions`.
 | C-014 | GetPaidX integration is additive and follows local package qualification. | Protects the published/in-review plugin and keeps platform state non-authoritative. |
 | C-015 | Parentful class schemas are explicitly unlowered until inheritance qualification. | Prevents metadata from claiming superclass evidence before C3, sharing, layout, and conversion checks exist. |
 | C-016 | Class roles default to input; output and semi-output are recorded but not interpreted yet. | Keeps ordinary declarations compact while deferring metavariable scheduling to its consumer-gated row. |
+| C-017 | Direct parent conversions are ordinary transparent definitions; transitive evidence composes direct handles. | Gives computational diamond coherence without extra Core semantics or redundant global providers. |
+| C-018 | Parent-conversion receivers are authoring-level class evidence over explicit Core binders. | Preserves one trusted plicity model while allowing later synthesis to insert dictionaries. |
 
 ## Validation And Checkpoint Policy
 

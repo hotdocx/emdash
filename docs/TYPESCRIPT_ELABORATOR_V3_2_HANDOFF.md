@@ -9,17 +9,17 @@
 > authoring semantics while preserving direct TypeScript declarations and the
 > existing explicit-Core/checker boundary. Parameter support, stable
 > owner-aware named construction, public class-schema metadata, and the
-> isolated `CLASS-INHERIT-4A` identity-layout planner are now final-green.
-> `4A` implements strict C3, canonical inherited identity classes, explicit
-> identity-to-physical-slot sharing, and deterministic conflict-free lookup as
-> finite frozen metadata. It deliberately provides no superclass evidence and
-> remains off the public v3.2 barrel. The `4B` contract is now audited, frozen,
-> and approved: transparent ordinary LF definitions reconstruct each direct
-> parent from those physical slots, while the unchanged compiler/checker owns
-> dependent compatibility. Its algebraic acceptance criterion requires the
-> two explicit `MonoidClass -> MulClass` paths to delta/beta/runtime-normalize
-> to the same constructor expression before the inheritance modules enter the
-> public barrel. The
+> `CLASS-INHERIT-4A` identity-layout planner and `CLASS-INHERIT-4B` transparent
+> parent-conversion lowering are now final-green and public. Strict C3,
+> canonical inherited identities, explicit identity-to-physical-slot sharing,
+> deterministic lookup, and ordinary direct-parent reconstruction remain
+> finite authoring/transfer metadata over unchanged explicit Core. The exact
+> five-edge algebraic module checks, and its two explicit
+> `MonoidClass -> MulClass` paths delta/beta/runtime-normalize to the same
+> `MkMulClass A (monoid_mul A m)` expression. The next dependency-ready row is
+> the read-only `SYNTH-SCOPE-5` audit for finite providers and immutable local,
+> named, imported, and global scope snapshots; recursive resolution remains a
+> separate later row. The
 > continuation adds no declaration parser, general
 > inductive frontend, class/Core node, or production Lambdapi dependency.
 >
