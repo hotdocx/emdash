@@ -81,6 +81,14 @@
 > failures. Registry authentication/ownership, provenance automation,
 > publication, CLI, stdlib, hosted templates, and sibling-repository
 > integration remain later gates and separate actions.
+> The subsequent registry audit partitions the next boundary. PACKAGE-12B1 is
+> an approved local-only release-engineering tranche: exact release
+> tag/version preflight, one verified tarball, and a token-free protected OIDC
+> workflow. PACKAGE-12B2 remains an external-action gate because npm requires
+> a brand-new package to exist before trusted-publisher configuration or
+> staged publishing; its provenance-bearing first publish, trust setup,
+> credential hardening, merge/push/tag/release, and npm/GitHub mutations all
+> require separate authorization.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)

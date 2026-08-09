@@ -9,8 +9,9 @@ through ALGEBRA-GRADUATE-8 and PACKAGE-12A are final-green; MATH-CONSUMER-9 is
 retired without implementation after its stale consumer was reconciled with
 the existing acceptance evidence; remaining call ergonomics, parameter-role
 inference, and standard-library rows stay consumer-gated; registry ownership,
-release automation, publication, and hosted integration remain gated behind
-PACKAGE-12B/HOSTED-13 and separate authorization
+bootstrap publication, and hosted integration remain gated; PACKAGE-12B1 is
+the next approved local release-engineering tranche, while PACKAGE-12B2 and
+HOSTED-13 remain external-action gates requiring separate authorization
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -529,8 +530,9 @@ discipline important, but they are not a prerequisite for this qualification.
 | PARAM-ROLES-10 | gated | Add output/semi-output and stuck/resume only after an exact consumer audit. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
 | PACKAGE-12A | complete | The local publishable `@hotdocx/emdash@0.1.0` package now has strict root/authoring/workspace exports, dual browser-safe JavaScript, complete declarations/maps, and a packed-install consumer. No registry mutation occurred. |
-| PACKAGE-12B | gated | Verify npm ownership/authentication and add a provenance-bearing release workflow only after 12A is final-green; actual publication remains a separate release action. |
-| HOSTED-13 | gated | Add compatible GetPaidX template/API adapters and Arrowgram consumption after the required PACKAGE-12A/12B distribution boundary. |
+| PACKAGE-12B1 | approved | Add a token-free, provenance-ready GitHub release workflow, exact-tarball handoff, and deterministic tag/version/repository preflight. It must be locally reviewable and must not mutate GitHub or npm. |
+| PACKAGE-12B2 | external action gated | After explicit authorization, perform one provenance-bearing first publish from a GitHub-hosted runner, configure exact-workflow npm trust, remove/revoke bootstrap credentials, disallow token publication, and verify the public artifact. |
+| HOSTED-13 | gated | Add compatible GetPaidX template/API adapters and Arrowgram consumption only after the required package version is public and its npm trust boundary is recorded. |
 
 Only one row is implemented at a time. A later row may be repartitioned by a
 recorded audit, but must not silently broaden an earlier checkpoint.
@@ -2281,7 +2283,8 @@ Registry inspection on 2026-08-09 found unscoped `emdash@0.32.0`, while
 `@hotdocx/emdash` had no public package. An npm 404 establishes only public
 absence, not write ownership. The repository already consumes the published
 `@hotdocx/arrowgram`, so `@hotdocx/emdash` is the selected local package name;
-authentication and ownership verification belong to PACKAGE-12B. The earlier
+authentication and ownership verification belong to the original PACKAGE-12B
+boundary, now partitioned below. The earlier
 hypothetical `@emdash/core` name is retired from the active package design.
 
 PACKAGE-12A is frozen as follows:
@@ -2393,8 +2396,137 @@ Final qualification evidence:
 
 No `check:all`, kernel, print, browser-demo, sibling-repository, registry,
 authentication, publication, release, deployment, or hosted-template action
-was run. PACKAGE-12B remains the explicit ownership/provenance/release gate;
-even its future completion will not implicitly authorize an npm publication.
+was run. PACKAGE-12B1/12B2 remain the explicit local-engineering and external
+ownership/provenance/release gates; even local workflow completion will not
+implicitly authorize an npm publication.
+
+## PACKAGE-12B Audit And Frozen Release Contract
+
+The 2026-08-09 post-package audit found no existing emdash npm-release
+workflow. `.github/workflows/pages.yml` is a separate GitHub Pages deployment
+for the standalone `emdash-template` fixture and correctly follows that
+fixture's retained npm lock; it is not a package-release precedent. The
+Arrowgram sibling has CI/build/pack coverage but no trusted-publishing
+workflow to reuse.
+
+Read-only external evidence established:
+
+- `hotdocx/emdash` is a public GitHub repository whose default branch is
+  `main`, and the package repository metadata matches that URL and case;
+- the public registry still returns 404 for `@hotdocx/emdash`, while
+  `@hotdocx/arrowgram@1.0.0` is maintained by the public npm identity
+  `hotdocx`; this supports the selected scope but does not prove that the
+  saved credential has write authority;
+- the local Node 24.11.1 runtime and pnpm 11.16.0 package manager are suitable,
+  but local npm 11.6.2 is too old for the current `npm trust` command, which
+  requires npm 11.15.0 or later; and
+- current npm trusted publishing uses OIDC only on supported hosted runners,
+  requires `id-token: write`, an exact repository/workflow filename and
+  optional exact environment, and automatically generates provenance for a
+  public package from a public repository.
+
+The decisive bootstrap constraint is external, not an emdash defect. Current
+npm trust and staged-publishing documentation both require the package to
+already exist; a brand-new package also cannot enter staged publishing. The
+first `@hotdocx/emdash` version therefore cannot be published by a pre-existing
+token-free trust relationship. Hiding that circular dependency behind a
+generic “OIDC publish” step would produce a workflow which can never perform
+its first release.
+
+The original PACKAGE-12B row is consequently partitioned:
+
+### PACKAGE-12B1: local release engineering
+
+1. Add `.github/workflows/npm-publish.yml` in a token-free stable form. It is
+   triggered only by a published GitHub Release and accepts only tags exactly
+   shaped `emdash-v<package-version>`.
+2. Use an unprivileged build job on a GitHub-hosted Ubuntu runner. Checkout
+   the exact release tag with full tag ancestry, use Node 24, the repository's
+   pinned pnpm 11.16.0, no release cache, and the frozen lock. Check the
+   workspace, build the package, pack one exact tarball, run the packed
+   consumer against that same tarball, and emit its SHA-256 and version.
+3. Transfer that immutable tarball through pinned GitHub artifact actions to
+   a separate publish job. The publish job alone uses the protected
+   `npm-release` GitHub environment and receives only `contents: read` and
+   `id-token: write`. It must verify the recorded digest before invoking a
+   pinned npm 11.19.0 CLI on the exact tarball with public access and
+   provenance.
+4. Extend the existing packed verifier with an explicit existing-tarball mode
+   rather than building a second artifact. Keep its current temp-pack mode for
+   ordinary contributor checks. Add a deterministic release preflight for
+   tag/version/repository/export/license/script/dependency invariants; do not
+   mutate a version, tag, release, registry, secret, or trust configuration.
+5. Pin third-party actions to reviewed immutable commits, retaining the major
+   version in comments. The audit resolved `actions/checkout` v6 at
+   `d23441a48e516b6c34aea4fa41551a30e30af803`, `actions/setup-node` v7 at
+   `820762786026740c76f36085b0efc47a31fe5020`,
+   `actions/upload-artifact` v4 at
+   `ea165f8d65b6e75b540449e92b4886f43607fa02`, and
+   `actions/download-artifact` v6 at
+   `018cc2cf5baa6db3ef3c5f8a56943fffe632ef53`.
+6. Carry forward PACKAGE-12A's single 1,560-test shared TypeScript aggregate.
+   This tranche changes release-only tooling, not workspace membership,
+   public entries, declarations, runtime/checker behavior, or tests. Its
+   proportional gates are workflow syntax/static audit, release-preflight
+   focused tests, workspace validation, package build/packed checks, root
+   typecheck, changed-file lint, exact package dry run, and exact diff review.
+   No `check:ts`, `check:all`, kernel, print, or sibling aggregate is repeated.
+
+The local proposal gate `H-TS-EMDASH-CLASSES-PACKAGE-12B1-010` is approved
+under the user-authorized unattended-review delegation, with immediate human
+supersession. Its proposal checkpoint is
+`docs: freeze npm release bootstrap contract`; its implementation checkpoint
+is `ci: prepare trusted emdash package publishing`.
+
+### PACKAGE-12B2: explicitly authorized external bootstrap and hardening
+
+PACKAGE-12B1 does not make the new package publishable through OIDC by itself.
+After the workflow is integrated into public `main`, an attended release
+operation must separately authorize every remote mutation below:
+
+1. Load the ignored credential only into a no-echo process environment. Record
+   only the npm username and boolean scope/package-access findings; never move,
+   print, stage, log, or persist the token. Confirm the account's 2FA and
+   `@hotdocx` publication authority through npm or an authenticated npmjs.com
+   session.
+2. Configure a protected GitHub `npm-release` environment with required
+   review. For the first version only, add a narrowly named
+   `NPM_BOOTSTRAP_TOKEN` environment secret and a separately reviewed temporary
+   fallback in the exact release workflow. A local token publish is rejected
+   because it cannot produce the desired GitHub provenance.
+3. From a clean, integrated public-main commit, create the exact
+   `emdash-v0.1.0` tag and GitHub Release. The hosted workflow must publish the
+   exact verified tarball with `--provenance --access public`; no local
+   worktree publishes bytes directly.
+4. Verify the public version, maintainers, repository link, tarball digest,
+   provenance attestation, ESM/CommonJS/NodeNext/browser consumer, and absence
+   of unexpected files before treating the bootstrap as successful.
+5. Because the package now exists, configure its one npm trusted publisher as
+   GitHub `hotdocx/emdash`, workflow `npm-publish.yml`, environment
+   `npm-release`, allow-publish only. This requires npm 11.15+ and interactive
+   2FA; an ordinary bypass-2FA granular token is not sufficient for the
+   `npm trust` operation.
+6. Immediately delete the GitHub bootstrap secret, remove the temporary token
+   fallback in a correcting checkpoint, revoke a dedicated bootstrap token
+   (but never revoke a shared user credential without separate confirmation),
+   and set npm Publishing access to require 2FA and disallow tokens.
+7. Record `npm trust list`/npmjs.com configuration evidence. Actual OIDC
+   publication can be proven only by a later new package version—npm versions
+   are immutable—so do not republish `0.1.0` or manufacture a dummy release.
+
+No part of the PACKAGE-12B1 proposal or implementation authorizes merge,
+push, tag, GitHub Release/environment/secret mutation, npm authentication,
+first publication, trust configuration, token removal/revocation, or package
+access changes. Those are PACKAGE-12B2 actions even when all local code is
+green.
+
+Official references used for this time-sensitive audit:
+
+- <https://docs.npmjs.com/trusted-publishers/>
+- <https://docs.npmjs.com/cli/v11/commands/npm-trust/>
+- <https://docs.npmjs.com/generating-provenance-statements/>
+- <https://docs.npmjs.com/staged-publishing/>
+- <https://docs.github.com/en/actions/reference/security/oidc>
 
 ## Decision Ledger
 
@@ -2442,6 +2574,10 @@ even its future completion will not implicitly authorize an npm publication.
 | C-040 | Keep the package root backend-neutral and expose the generic scoped outer-LF builder through `./authoring`; exclude the retired category-specific surface/elaborator. | The root repository guidance identifies those category-specific modules as feasibility-era evidence rather than active v3.2 authority, whereas the scoped outer-LF builder is the current direct-TypeScript authoring boundary. |
 | C-041 | Ship one complete CommonJS-shaped declaration closure for both explicit ESM and CommonJS runtime conditions. | The canonical source graph uses extensionless internal imports; a declaration-local module marker passes strict NodeNext consumption without rewriting canonical sources or weakening the dual browser runtime. |
 | C-042 | Keep build/check orchestration in the private root manifest and publish no package scripts in 12A. | The build sources and TypeScript inputs are intentionally not tarball content, so retaining contributor commands in the public manifest would create broken consumer scripts and an accidental publication hook surface. |
+| C-043 | Split local release engineering from the external first-publish/trust operation. | npm requires a package to exist before either trusted-publisher configuration or staged publishing, so a brand-new token-free OIDC release is circular. |
+| C-044 | Build and verify one tarball in an unprivileged job, then publish those exact bytes from a separate protected OIDC job. | This minimizes token/OIDC authority, permits an environment review after build evidence exists, and prevents publish-time repacking drift. |
+| C-045 | Use exact `emdash-v<version>` GitHub Releases and immutable action pins; never mutate package versions in CI. | The repository has unrelated book/site release concerns, while deterministic tag/package/repository checks make provenance and rollback evidence unambiguous. |
+| C-046 | Permit a provenance-bearing hosted token fallback only for the first version, then remove/revoke it and disallow token publishing. | A first package must be bootstrapped before npm trust can exist; subsequent versions should use short-lived exact-workflow OIDC only. |
 
 ## Validation And Checkpoint Policy
 
