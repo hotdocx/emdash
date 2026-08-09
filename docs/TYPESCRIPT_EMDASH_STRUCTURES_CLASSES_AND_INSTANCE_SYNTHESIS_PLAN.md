@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-and STRUCT-NAMED-2 are final-green; CLASS-SCHEMA-3 is the next
-dependency-ready row
+and STRUCT-NAMED-2 are final-green; the exact CLASS-SCHEMA-3 contract is
+frozen and approved for implementation
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -508,7 +508,7 @@ make explicit local scope discipline especially important.
 | ARCH-0 | complete | Architecture, comparison target, trust boundary, non-goals, and acceptance corpus recorded here. |
 | STRUCT-PARAM-1 | complete | The existing macro now has dependent parameter telescopes and explicit carrier/constructor/projection modes while preserving unparameterized declarations, rules, order, and emission. |
 | STRUCT-NAMED-2 | complete | Stable owner-aware handles and order-independent named parameter/field assignments now lower to one deeply frozen ordinary constructor call. |
-| CLASS-SCHEMA-3 | dependency-ready | Audit and freeze the smallest class-schema/field/parent/parameter-role metadata contract without inheritance lowering or search. |
+| CLASS-SCHEMA-3 | in progress | The audited schema-only contract is frozen and approved; implement serializable class/parameter/method/ordered-parent metadata while parentful layouts remain explicitly unlowered. |
 | CLASS-INHERIT-4 | pending | Add strict C3 lookup, canonical field identities, explicit sharing, and algebraic-diamond conversions. |
 | SYNTH-SCOPE-5 | pending | Add immutable provider declarations and local/named/imported scope snapshots. |
 | SYNTH-RECURSE-6 | pending | Add exact-head recursive tabled search, priorities, limits, ambiguity policy, and traces. |
@@ -740,6 +740,127 @@ read-only consumer and representation audit followed by an exact frozen
 metadata contract. That checkpoint must add no inheritance lowering,
 instance registry, synthesis, call elaboration, parser behavior, or Core
 semantics.
+
+## CLASS-SCHEMA-3 Audit And Frozen Contract
+
+The 2026-08-08 audit compared the completed structure expansion/handle and
+dictionary seams with Lean's `StructureInfo`, `StructureParentInfo`, and
+`ClassEntry` partition. It found:
+
+- Lean likewise keeps structure layout, ordered parent metadata, class
+  registration, and output-parameter positions outside its kernel terms;
+- the emdash structure expansion already contains the carrier and constructor
+  telescopes needed to recover declared parameter and method types without
+  adding those types to trusted Core or accepting caller-supplied duplicates;
+- direct-parent order must remain source-significant because the next row's
+  strict C3 calculation consumes it, while argument order within one parent
+  application should be canonical and handle-directed;
+- a parent application is a type expression open only in the complete child
+  parameter telescope, so it can be stored as ordinary locally nameless
+  transfer IR and checked when inheritance is lowered in context;
+- class parameter roles can be recorded now, but output/semi-output search
+  scheduling and dependency restrictions remain deliberately gated by
+  `PARAM-ROLES-10`; and
+- an already generated child structure with declared local fields does not
+  yet implement its parents. Any parentful schema must therefore say
+  explicitly that its layout is unlowered rather than exposing a false
+  superclass capability.
+
+The selected additive module is `src/v3_2/lf_class_schema.ts`. Its principal
+authoring shape is:
+
+```ts
+const monoid = declareCoreLfClassSchema({
+  expansion: monoidStructure,
+  parameterRoles: [
+    { parameter: monoidStructure.handle.parameters[0], role: 'input' },
+  ],
+  directParents: [
+    {
+      parent: semigroup,
+      arguments: [{
+        parameter: semigroup.structure.parameters[0],
+        value: coreLfClassParameterTerm(
+          monoidStructure,
+          monoidStructure.handle.parameters[0]
+        ),
+      }],
+    },
+  ],
+})
+```
+
+Its exact contract is:
+
+1. `declareCoreLfClassSchema(...)` accepts one complete
+   `CoreLfStructureDeclarationExpansion`. The class ID is derived from its
+   qualified carrier symbol; the caller cannot supply a competing ID.
+2. The function validates the generated carrier/constructor telescope seam
+   and copies the structure handle. It derives, rather than duplicates,
+   parameter and declared-method order, binder names, modes, projection
+   symbols, and locally nameless declared types.
+3. A parameter identity is `(declaring class ID, parameter ordinal)`. A
+   declared-method identity is `(declaring class ID, field ordinal)`. Spelling
+   is descriptive and never establishes cross-class identity.
+4. Parameter roles are `input | output | semi-output`. Sparse role
+   assignments are order-independent and keyed by stable parameter handles;
+   an unspecified parameter defaults to `input`. Duplicate, foreign, or
+   malformed assignments fail closed.
+5. Every declared method records its projection handle and an authoring
+   receiver contract saying `class-evidence` while retaining the projection's
+   ordinary explicit Core record argument. No third Core plicity is added.
+6. Direct parents preserve declaration order. Each parent input carries a
+   previously produced class schema and a complete order-independent named
+   assignment for that parent's parameters. Self-parenting and duplicate
+   direct class IDs fail closed.
+7. Parent arguments are cloned at exactly the child-parameter depth, may use
+   ordinary transfer term syntax, and may not use dangling indices,
+   `capture`, or `wildcard`. Their plicity comes from the parent's carrier
+   modes, never from the caller.
+8. Each stored parent record contains only a stable parent-class reference,
+   canonical arguments, and the ordinary `Parent ...` application. It does
+   not recursively embed a parent schema or retain callbacks/object identity,
+   keeping the result finite and JSON-serializable.
+9. `coreLfClassParameterTerm(expansion, parameter)` validates a structural
+   parameter handle and returns its deeply frozen bound reference in the full
+   class-parameter telescope. This is the compact safe path for common
+   `Parent alpha` substitutions; arbitrary ordinary terms remain possible.
+10. The returned schema is a deeply frozen caller-independent snapshot with
+    profile revision `emdash-lf-class-schema-v1`. Its layout status is
+    `parent-free` when there are no parents and `parents-unlowered` otherwise.
+11. `parents-unlowered` schemas are metadata inputs for `CLASS-INHERIT-4`, not
+    superclass evidence and not candidates for instance search. The next row
+    alone may add C3 order, canonical inherited-field slots, sharing,
+    conversions, or superclass providers.
+12. Declared types and parent applications are not independently certified by
+    this metadata function. The ordinary LF compiler/checker remains the
+    authority when generated inheritance declarations are installed.
+
+The frozen diagnostic classes are `INVALID_CLASS_SCHEMA`,
+`INVALID_PARAMETER_ROLE`, `FOREIGN_PARAMETER`,
+`DUPLICATE_PARAMETER_ROLE`, `INVALID_PARENT`, `DUPLICATE_PARENT`,
+`INVALID_PARENT_ARGUMENT`, `FOREIGN_PARENT_ARGUMENT`,
+`DUPLICATE_PARENT_ARGUMENT`, and `MISSING_PARENT_ARGUMENT`. Exact paths
+distinguish the expansion seam, role assignment, parent ordinal, parent
+parameter handle, and argument value.
+
+The focused corpus will cover default and explicit roles, stable declared
+types and field identities, copied handles, caller immutability, deep freeze,
+JSON round-trip data, ordered multiple parents, canonical parent argument
+ordering/plicity, and every frozen failure class. This tranche adds no
+inheritance declarations or rules, C3 algorithm, field sharing, superclass
+projection, instance provider/scope/search, general call elaborator, parser,
+Core/checker branch, Lambdapi emission, browser export, package split, or
+sibling-repository change.
+
+The proposal gate `H-TS-EMDASH-CLASSES-SCHEMA-002` is approved under the
+user-authorized unattended-review delegation, with immediate human
+supersession. The documentation-only proposal checkpoint is the backtracking
+boundary. Implementation should add one isolated module and focused suite,
+then wire the public v3.2 barrel and root test runner only when the bounded
+surface is ready. That shared-surface checkpoint requires one final
+`check:ts`; until then, no long aggregate is run. No Lambdapi or active-kernel
+gate is relevant because the frozen row changes metadata only.
 
 ## Decision Ledger
 
