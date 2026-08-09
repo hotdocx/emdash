@@ -1907,6 +1907,127 @@ describe('v3.2 immutable instance providers and scopes', () => {
         });
     });
 
+    describe('algebraic class foundation graduation', () => {
+        it('derives every parent and completes one class-aware call', () => {
+            assert.equal(currentSuperclasses.length, 5);
+            const artifacts = synthesisArtifacts(
+                [currentLocals.inner, ...currentSuperclasses],
+                'inner'
+            );
+            assert.equal(artifacts.registry.providers.length, 6);
+            const checker = createCoreLfChecker(
+                current.compiled.declarations.environment,
+                undefined,
+                currentRuntime
+            );
+            const solveParent = (entry: ClassEntry) => {
+                const target = classTarget(entry);
+                const outcome = synthesizeCoreLfInstance({
+                    declarations: current.compiled.declarations,
+                    context: currentLocals.context,
+                    targetClass: entry.layout,
+                    target,
+                    ...artifacts
+                });
+                assert.equal(outcome.status, 'solved');
+                if (outcome.status !== 'solved') {
+                    throw new Error(
+                        `algebraic graduation failed for ${entry.schema.classId.name}`
+                    );
+                }
+                const checked = checker.check(
+                    currentLocals.context,
+                    outcome.term,
+                    target
+                );
+                assert.equal(
+                    kernelExpressionEquals(checked.type, target),
+                    true
+                );
+                assertDeepFrozen(outcome);
+                return outcome;
+            };
+
+            const semigroup = solveParent(current.classes.semigroup);
+            const mulOne = solveParent(current.classes.mulOne);
+            const mul = solveParent(current.classes.mul);
+            const one = solveParent(current.classes.one);
+            assert.deepEqual(
+                [semigroup, mulOne, one].map(outcome =>
+                    outcome.selected.name
+                ),
+                [
+                    'monoid_to_semigroup',
+                    'monoid_to_mul_one',
+                    'mul_one_to_one'
+                ]
+            );
+
+            const recursiveCandidate = semigroup.report.goals[0]
+                .candidates.find(candidate =>
+                    candidate.providerId.name === 'monoid_to_semigroup'
+                );
+            assert.equal(recursiveCandidate?.outcome, 'success');
+            assert.equal(recursiveCandidate?.premises.length, 1);
+            assert.equal(
+                recursiveCandidate?.premises[0].disposition,
+                'expanded'
+            );
+            assert.equal(recursiveCandidate?.premises[0].outcome, 'solved');
+            const recursiveGoal = semigroup.report.goals.find(goal =>
+                goal.goalId === recursiveCandidate?.premises[0].goalId
+            );
+            assert.deepEqual(
+                recursiveGoal?.selectedProvider,
+                currentLocals.inner.providerId
+            );
+            assert.deepEqual(
+                [...(mul.report.goals[0].equivalentProviders ?? [])]
+                    .map(provider => provider.name)
+                    .sort(),
+                ['mul_one_to_mul', 'semigroup_to_mul']
+            );
+
+            const callOutcome = elaborateCoreLfSaturatedClassCall(
+                classCallInput(artifacts)
+            );
+            assert.equal(callOutcome.status, 'elaborated');
+            if (callOutcome.status !== 'elaborated') return;
+            assert.equal(callOutcome.term.tag, 'call');
+            if (callOutcome.term.tag !== 'call') return;
+            assert.equal(
+                kernelExpressionEquals(
+                    callOutcome.term.arguments[2].value,
+                    kernelBound(0, synthesisWitness)
+                ),
+                true
+            );
+            assert.equal(
+                kernelExpressionEquals(
+                    callOutcome.term.arguments[4].value,
+                    mul.term
+                ),
+                true
+            );
+            checker.check(
+                currentLocals.context,
+                callOutcome.term,
+                classTarget(current.classes.monoid)
+            );
+            assert.equal(
+                callOutcome.report.scopeFingerprintMaterial
+                    .registryCanonicalJson,
+                serializeCoreLfInstanceRegistrySnapshot(artifacts.registry)
+            );
+            assert.equal(
+                callOutcome.report.scopeFingerprintMaterial
+                    .scopeCanonicalJson,
+                serializeCoreLfInstanceScopeSnapshot(artifacts.scope)
+            );
+            assertDeepFrozen(callOutcome);
+        });
+    });
+
     it('derives exact checked global and local provider metadata', () => {
         const globalProvider = currentOrdinary.primary;
         assert.equal(

@@ -5,8 +5,8 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through CALL-SYNTH-7A are final-green; partial/named/default application
-remains the consumer-gated CALL-SYNTH-7B row
+through ALGEBRA-GRADUATE-8 are final-green; partial/named/default application
+remains consumer-gated and MATH-CONSUMER-9 is the next pending row
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -515,7 +515,7 @@ make explicit local scope discipline especially important.
 | SYNTH-RECURSE-6 | complete | The bounded exact-head resolver is public and final-green with recursive premises, tables, explicit bounds, ambiguity, runtime-backed definitional equality, and portable traces. |
 | CALL-SYNTH-7A | complete | Saturated binder walking, ordinary implicit inference, arbitrary annotated instance positions, delayed ground synthesis, stable failure data, and final explicit-Core checking are public and final-green. |
 | CALL-SYNTH-7B | gated | Add partial application, named arguments, defaults, and stronger retry/postponement only after 7A and an exact ergonomic consumer. |
-| ALGEBRA-GRADUATE-8 | proposal-approved | Add one end-to-end qualification over the existing checked fixture: one local `Monoid A` must synthesize every direct/transitive parent and complete the saturated class-aware call under the same immutable artifacts. |
+| ALGEBRA-GRADUATE-8 | complete | One exact local `Monoid A` scope now qualifies every direct/transitive parent, positive recursive provider expansion, coherent `Mul` diamond, and the saturated class-aware call under the same immutable artifacts. |
 | MATH-CONSUMER-9 | pending | Qualify `struct_cov_sieve`, then select one category/Functor/Adjunction consumer. |
 | PARAM-ROLES-10 | gated | Add output/semi-output and stuck/resume only after an exact consumer audit. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
@@ -2144,6 +2144,39 @@ supersession. The documentation-only checkpoint message is
 `docs: freeze algebraic class graduation contract`; the qualification
 checkpoint message is `tests: graduate algebraic class foundation`.
 
+## ALGEBRA-GRADUATE-8 Completion Record
+
+Qualification began from proposal checkpoint `3c64193` and added only one
+end-to-end assertion to the existing checked algebraic fixture. The assertion:
+
+- constructs one immutable six-provider registry from the inner local
+  `Monoid` evidence and exactly the five generated direct-parent conversions;
+- solves `Semigroup`, `MulOneClass`, `Mul`, and `One` in the frozen acceptance
+  order and independently checks each meta-free term against its exact target
+  using the same reviewed runtime;
+- observes the positive expanded `monoid_to_semigroup` premise ending at the
+  exact local provider, the exact direct conversion IDs, and both equivalent
+  `Monoid -> Mul` routes;
+- reuses the same registry/scope/runtime for the saturated class-aware call,
+  confirms its explicit local `Monoid` and resolver-equal `Mul` arguments,
+  and rechecks the complete result at `Monoid A`; and
+- compares the call report's canonical registry/scope material with the exact
+  supplied snapshots and verifies deep immutability throughout.
+
+Final proportional qualification evidence:
+
+- `tests/v3_2_lf_instance_scope_tests.ts`: 19/19 passed across four suites;
+- `./scripts/pnpmw run typecheck`: passed;
+- changed-test ESLint: passed; and
+- exact diff and whitespace review: passed.
+
+No source, profile, capability, barrel, runner, package, workspace, kernel, or
+sibling-repository boundary changed. The recent CALL-SYNTH-7A aggregate of
+1,559 tests across 234 suites, with 1,505 active passes, 54 intentional skips,
+and zero failures, therefore remains the governing shared-boundary evidence;
+it was not rerun for this test-only graduation row. No Lambdapi or active-
+kernel check was relevant.
+
 ## Decision Ledger
 
 | ID | Decision | Rationale |
@@ -2184,6 +2217,7 @@ checkpoint message is `tests: graduate algebraic class foundation`.
 | C-034 | Expected result refinement may determine ordinary implicits, but synthesis never does. | Supports the common `{A} -> [C A] -> ...` call while retaining the all-arguments-ground resolver boundary. |
 | C-035 | Call-level search failure is frozen data; malformed application data still throws stable diagnostics. | AI agents need inspectable proof-state transitions without concealing actual source/type errors. |
 | C-036 | Ambient-depth Core serialization is one additive shared inspection utility. | Resolver and call traces need canonical open contextual terms without duplicating the closed serializer or weakening scope validation. |
+| C-037 | Algebraic graduation is an end-to-end assertion over the exact checked fixture, not another runtime wrapper or profile. | The implementation mechanisms were already qualified; one integrated acceptance witness closes the evidence gap without expanding the public or trusted boundary. |
 
 ## Validation And Checkpoint Policy
 
