@@ -5,8 +5,10 @@ Date: 2026-08-08
 Plan-ID: TS-EMDASH-CLASSES
 
 Status: active living architecture and implementation ledger; STRUCT-PARAM-1
-through ALGEBRA-GRADUATE-8 are final-green; partial/named/default application
-remains consumer-gated and MATH-CONSUMER-9 is the next pending row
+through ALGEBRA-GRADUATE-8 are final-green; MATH-CONSUMER-9 is retired without
+implementation after its stale consumer was reconciled with the existing
+acceptance evidence; remaining ergonomics, parameter-role inference, standard
+library, package, and hosted rows stay separately gated
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -496,10 +498,15 @@ It must demonstrate:
 - stable missing, ambiguity, cycle, and bounded-search traces; and
 - explicit generated Core accepted by the TypeScript checker.
 
-After that synthetic acceptance corpus, `struct_cov_sieve` is the first
-mathematical consumer of parameter modes. Category/Functor/Adjunction class
-consumers come later because multiple legitimate structures on one carrier
-make explicit local scope discipline especially important.
+Together with the two-dependent-parameter structure fixture from
+STRUCT-PARAM-1, this corpus is representative enough to qualify the local
+parameter, class, inheritance, scope, recursive-search, and saturated-call
+mechanisms. It is not necessary to manufacture a geometry-shaped proxy before
+continuing. In particular, the historical `struct_cov_sieve` spelling is not
+an active v3.2 owner and is not a required consumer. Category/Functor/
+Adjunction integrations remain legitimate later consumers when a real
+development needs them; multiple structures on one carrier make their scope
+discipline important, but they are not a prerequisite for this qualification.
 
 ## Implementation Ledger
 
@@ -516,7 +523,7 @@ make explicit local scope discipline especially important.
 | CALL-SYNTH-7A | complete | Saturated binder walking, ordinary implicit inference, arbitrary annotated instance positions, delayed ground synthesis, stable failure data, and final explicit-Core checking are public and final-green. |
 | CALL-SYNTH-7B | gated | Add partial application, named arguments, defaults, and stronger retry/postponement only after 7A and an exact ergonomic consumer. |
 | ALGEBRA-GRADUATE-8 | complete | One exact local `Monoid A` scope now qualifies every direct/transitive parent, positive recursive provider expansion, coherent `Mul` diamond, and the saturated class-aware call under the same immutable artifacts. |
-| MATH-CONSUMER-9 | pending | Qualify `struct_cov_sieve`, then select one category/Functor/Adjunction consumer. |
+| MATH-CONSUMER-9 | retired without implementation | The historical `struct_cov_sieve` name was only a parameter-plicity shape inherited from the Cartier review, not an active owner or missing kernel feature. STRUCT-PARAM-1 already qualifies the distinct dependent parameter modes, and ALGEBRA-GRADUATE-8 already supplies the representative Lean-style class consumer. No replacement proxy or mathematical-source edit is justified. |
 | PARAM-ROLES-10 | gated | Add output/semi-output and stuck/resume only after an exact consumer audit. |
 | STDLIB-11 | gated | Define curated inductive/HIT artifact and trusted-extension profiles. |
 | PACKAGE-12 | gated | Publishable `@emdash/*` package boundaries and packed-consumer evidence. |
@@ -2177,6 +2184,67 @@ and zero failures, therefore remains the governing shared-boundary evidence;
 it was not rerun for this test-only graduation row. No Lambdapi or active-
 kernel check was relevant.
 
+## MATH-CONSUMER-9 Audit And Retirement Record
+
+The 2026-08-09 authority audit corrected a stale handoff assumption before it
+could turn into duplicate mathematics. The historical declaration recovered
+from `cartierSolution16.lp.txt` had the outer-LF shape
+
+```text
+struct_cov_sieve [Ml_cat] (Ml_site) : TYPE
+Struct_cov_sieve [Ml_cat] (Ml_site) [Cs_cat] [Cs_func] (Cs_hom)
+  : struct_cov_sieve Ml_site
+```
+
+with projections for `Cs_cat`, `Cs_func`, and `Cs_hom`. Its review value was
+the parameter surface: `Ml_cat` was implicit throughout, while `Ml_site` was
+explicit at the carrier and constructor but inferred by projections. The
+August 1 record-usability plan therefore retained it as evidence that carrier,
+constructor, and projection parameter modes cannot be conflated. It did not
+select the old declaration as a current v3.2 mathematical owner.
+
+The later class plan accidentally promoted that review mnemonic into a future
+"mathematical consumer" even though the needed mechanism had already been
+qualified and the active mathematical organization had moved on. Current
+presheaf/site/scheme sources own their explicit Sigma presentations under
+names including `GrothTopology`, `ReflectiveCommRingedSpaceCover`, and
+`BinarySiteRelativeSchemePresentation`; this audit makes no claim that those
+developments are absent. It also establishes no one-for-one replacement or
+compatibility alias for the historical structure. Their mathematical design
+and the TypeScript class-usability qualification are independent boundaries.
+
+No replacement fixture is needed:
+
+- STRUCT-PARAM-1 already has two dependent parameters whose carrier,
+  constructor, and projection modes differ independently, plus named
+  construction, checked projection betas, explicit-Core compilation, and an
+  opt-in live Lambdapi conformance consumer; and
+- ALGEBRA-GRADUATE-8 already has the representative Lean-style development:
+  parameterized classes, multiple inheritance, one shared diamond ancestor,
+  generated superclass evidence, recursive search, lexical selection, hard
+  ambiguity elsewhere, and a final saturated checked call.
+
+Accordingly MATH-CONSUMER-9 is **retired without implementation**. No
+presheaf, sieve, site, sheafification, affine-scheme, scheme, projective-space,
+or other mathematical source may be edited merely to satisfy this row. No
+geometry-shaped, category-shaped, or adjunction-shaped proxy is added for
+coverage volume. A real later development may introduce such a consumer when
+it exercises a mechanism not covered by the existing corpus.
+
+This retirement changes only the living plan and handoff. It introduces no
+source, test, profile, capability, parser, Core/checker/runtime, workspace,
+package, kernel, sibling-repository, or publication boundary and therefore
+requires only exact documentation diff/whitespace review. The recent
+CALL-SYNTH-7A shared aggregate and ALGEBRA-GRADUATE-8 focused evidence carry
+forward unchanged. The initial authority hypothesis did trigger the single
+root-mandated bounded baseline
+`EMDASH_TYPECHECK_TIMEOUT=90s make -C emdash2 check`; it completed with exit
+zero through the current site-relative scheme and projective-line modules.
+That read-only evidence is not a dependency of this documentation row and
+must not be rerun. The next implementation must be chosen by auditing a
+genuine remaining usability or distribution gap, not by replacing this stale
+example automatically.
+
 ## Decision Ledger
 
 | ID | Decision | Rationale |
@@ -2218,6 +2286,7 @@ kernel check was relevant.
 | C-035 | Call-level search failure is frozen data; malformed application data still throws stable diagnostics. | AI agents need inspectable proof-state transitions without concealing actual source/type errors. |
 | C-036 | Ambient-depth Core serialization is one additive shared inspection utility. | Resolver and call traces need canonical open contextual terms without duplicating the closed serializer or weakening scope validation. |
 | C-037 | Algebraic graduation is an end-to-end assertion over the exact checked fixture, not another runtime wrapper or profile. | The implementation mechanisms were already qualified; one integrated acceptance witness closes the evidence gap without expanding the public or trusted boundary. |
+| C-038 | Retire `struct_cov_sieve` as a stale consumer mnemonic; do not replace it with a proxy or edit active mathematics. | STRUCT-PARAM-1 already proves the parameter-mode mechanism and ALGEBRA-GRADUATE-8 already proves the representative Lean-style class workflow. The historical Cartier record and current site/scheme Sigma owners are separate designs, so another example would not qualify a new boundary. |
 
 ## Validation And Checkpoint Policy
 

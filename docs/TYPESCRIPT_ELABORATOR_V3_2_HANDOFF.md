@@ -59,7 +59,13 @@
 > `One`, exposes a positive recursive-premise trace, and completes the
 > saturated call under the same immutable artifacts. This test-only row
 > reused the 1,559-test shared-boundary evidence rather than rerunning it.
-> `MATH-CONSUMER-9` is the next pending row.
+> `MATH-CONSUMER-9` has since been retired without implementation. Its
+> historical `struct_cov_sieve` target was a parameter-plicity review shape,
+> not an active v3.2 owner or a missing schemes feature. STRUCT-PARAM-1's
+> two-dependent-parameter fixture and ALGEBRA-GRADUATE-8's complete Lean-style
+> class consumer already provide the intended representative evidence, so no
+> geometry-shaped or adjunction-shaped proxy was added and no mathematical
+> source was changed.
 >
 > **AI-native workspace/proof continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md)
