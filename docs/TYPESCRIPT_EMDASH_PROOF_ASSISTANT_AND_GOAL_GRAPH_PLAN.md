@@ -5138,9 +5138,10 @@ arrow points from the dependent back to what it requires. Node `name` is the
 canonical Emdash node ID. Its single-line label is a deterministic bounded
 display projection of title, kind (`THEOREM`, `TASK`, or `DECISION`), and
 derived status; the full title, exact IDs, evidence classifications, proof
-identity, counts, and non-authority flags remain in `goal-view.json`. Labels
-are ordinary escaped SVG text, not synthesized LaTeX. The fixed status palette
-is:
+identity, counts, and non-authority flags remain in `goal-view.json`. Every
+node or edge label is capped at 96 Unicode code points; an overlong final text
+is truncated to 95 code points plus one ellipsis. Labels are ordinary escaped
+SVG text, not synthesized LaTeX. The fixed status palette is:
 
 | Status | Color |
 | --- | --- |
