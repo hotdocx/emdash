@@ -1,13 +1,12 @@
 # TypeScript Elaborator v3.2 PathInd Trusted-Profile And PathOut Library Plan
 
 Status: active selected standard-library continuation under
-`TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is complete and the
-v2 `PATHOUT-LIBRARY-FOUNDATION-1B0` review is superseded by measured
-counterevidence; checkpointed proposal v3 selects the reviewed direct-mixed-
-source-action predecessor and is separately approved under delegated
-unattended authority with human supersession; root-only
-`PATHOUT-LIBRARY-FOUNDATION-1B` may resume, and no PathOut semantic or public
-export is yet implemented
+`TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is complete; measured
+counterevidence supersedes the v3 `PATHOUT-LIBRARY-FOUNDATION-1B0` review;
+non-authorizing proposal v4 preserves v3's reviewed predecessor and corrects
+only its omitted covariant-representable action closure;
+`PATHOUT-LIBRARY-FOUNDATION-1B` is paused pending a separate immutable v4
+review, and no PathOut semantic or public export is yet implemented
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -167,8 +166,8 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v3 separately reviewed | completed corrected 0A; superseded v1/v2 | Measured checking showed that mixed action lacks the active opposite-Hom endpoint rule needed by `Rep_transport_func`. Checkpointed v3 keeps the local 3/5/1/9 delta, selects the reviewed direct-mixed-source-action descendant, and is approved under delegated unattended authority with human supersession. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | implementation authorized; resume existing work | separately reviewed v3 proposal | Resume exactly the root-only implementation over corrected predecessor; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v4 awaiting separate review | completed corrected 0A; superseded v1/v2/v3 | V3 correctly selected the direct-mixed-source-action predecessor, but measured checking of the final `pathout_refl_arrow` left the covariant represented-Hom action at `id_x` unreduced against `p`. Proposal v4 keeps that predecessor and freezes the minimal local 4/8/1/9 closure. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | paused; implementation not authorized | requires checkpointed and separately reviewed v4 proposal | Resume only after v4's own immutable review, then retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -551,6 +550,76 @@ Its focused tests retain both superseded checkpoints, exact v3 recommendation,
 3/5/1/9 counts, corrected predecessor, human supersession, root-only status,
 and every later-layer denial. `PATHOUT-LIBRARY-FOUNDATION-1B` may therefore
 resume only on the current proof branch and only within that exact boundary.
+
+### Measured covariant-action correction and proposal v4
+
+The v3 proposal and review checkpoints, `640d5ec` and `36c368e`, remain exact
+backtracking evidence but no longer authorize implementation. With v3's
+corrected predecessor, focused semantic qualification checked all three
+opaque declarations, all five local runtime rules, the proof rule, and the
+first eight transparent definitions. The standard checker then stopped at
+the ninth and final definition, `pathout_refl_arrow`. A compact normalization
+diagnostic isolated the target pair's fibre component:
+
+```text
+left  = fapp0(fapp1_fapp0(hom_(id,x),p),id_x)
+right = p
+```
+
+Transparent `PathOut_cat`, `pathout_obj`, `pathout_refl_obj`, `Rep_catd`, and
+`Rep_catd_func` aliases and the mixed-action projections had all reduced.
+The remaining expression is the covariant represented-Hom/postcomposition
+action, not the already-imported represented-source/precomposition proof
+rule. The active authority supplies its stable closure in four exact pieces:
+
+- opaque `hom_postcomp_func` at line 7272;
+- represented-Hom capped action to that functor at line 7298;
+- its object action to existing `hom_postcomp_fapp0` at line 7302; and
+- the identity-source unit reducing that action to `p` at line 7426.
+
+Proposal v4 therefore keeps
+`compileCoreCategoricalDirectMixedSourceActionTransfer` and changes only the
+local boundary from **3/5/1/9** to **4/8/1/9**: one additional opaque
+signature and those three active runtime rules, with the same one proof rule
+and nine transparent definitions. `hom_postcomp_fapp0` is reused from the
+existing predecessor chain. No generic composition-unit rule, checker or
+proof-rule substitute, Core/evaluator branch, active Lambdapi edit, public
+export, presentation, package, integration, or release effect is authorized.
+
+The temporary diagnostic hook used to expose the normalized residue was
+removed in full; the generic LF transfer compiler is unchanged. The v3 review
+record now withdraws its earlier authorization and embeds exact
+non-authorizing proposal v4. Proposal v4 still requires its own rollback-safe
+checkpoint and separate immutable review before semantic implementation may
+resume. Focused proposal/supersession validation is required; no Lambdapi or
+long aggregate is relevant to this behavior-free correction.
+
+Proportional proposal-v4/supersession validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run workspace:check
+  passed; pnpm@11.16.0, Node 24.11.1
+
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_foundation_proposal.ts \
+  src/v3_2/pathout_foundation_review.ts \
+  tests/v3_2_pathout_foundation_proposal_tests.ts \
+  tests/v3_2_pathout_foundation_review_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathout_foundation_proposal_tests.ts \
+  tests/v3_2_pathout_foundation_review_tests.ts
+  14 tests / 2 suites: 14 passed, 0 failed
+```
+
+The checkpoint remains pending until the exact staged proposal-only diff and
+whitespace hygiene have been reviewed. No Lambdapi or long aggregate was run;
+neither is relevant to the behavior-free correction, and their omission does
+not block the checkpoint.
 
 ## Required Evidence For Implementation
 

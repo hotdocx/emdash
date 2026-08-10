@@ -1,12 +1,12 @@
 /**
  * PATHOUT-LIBRARY-FOUNDATION-1B0 non-authorizing proposal.
  *
- * The proposal freezes the exact two local prerequisite closures and nine
- * transparent definitions selected by the corrected 0A audit. Proposal v3
- * corrects only the reviewed predecessor: measured checking of
- * `Rep_transport_func` also needs the already-transferred opposite-Hom
- * endpoint rule. It compiles or installs nothing; a separate immutable
- * review must authorize 1B.
+ * The proposal freezes the exact local prerequisite closures and nine
+ * transparent definitions selected by measured implementation. Proposal v4
+ * preserves v3's corrected predecessor and adds only the active stable
+ * covariant-representable action required by `pathout_refl_arrow`. It
+ * compiles or installs nothing; a separate immutable review must authorize
+ * 1B.
  */
 
 import {
@@ -15,7 +15,7 @@ import {
 } from './pathout_trust_boundary_audit';
 
 export const CORE_PATHOUT_FOUNDATION_1B0_REVISION =
-    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-3' as const;
+    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-4' as const;
 
 const DECISION_QUESTION =
     'Approve H-TS-EMDASH-PATHOUT-FOUNDATION-01/' +
@@ -74,12 +74,45 @@ const prerequisiteDeclarations = [
         sourceKind: 'injective-symbol',
         policy: 'opaque-signature',
         coreName: 'emdash_v3_2_pathout_foundation_Sigma_func'
+    },
+    {
+        order: 3,
+        name: 'hom_postcomp_func',
+        authorityLine: 7272,
+        sourceKind: 'symbol',
+        policy: 'opaque-signature',
+        coreName:
+            'emdash_v3_2_pathout_foundation_hom_postcomp_func'
     }
 ] as const;
 
 const runtimeRules = [
     {
         order: 0,
+        id: 'pathout.foundation.represented-hom-capped-action',
+        authorityLine: 7298,
+        sourceOwner: 'fapp1_fapp0',
+        resultOwner: 'hom_postcomp_func',
+        policy: 'runtime-rewrite'
+    },
+    {
+        order: 1,
+        id: 'pathout.foundation.postcomposition-object-action',
+        authorityLine: 7302,
+        sourceOwner: 'fapp0',
+        resultOwner: 'hom_postcomp_fapp0',
+        policy: 'runtime-rewrite'
+    },
+    {
+        order: 2,
+        id: 'pathout.foundation.postcomposition-identity-source-unit',
+        authorityLine: 7426,
+        sourceOwner: 'hom_postcomp_fapp0',
+        resultOwner: 'matched-arrow',
+        policy: 'runtime-rewrite'
+    },
+    {
+        order: 3,
         id: 'pathout.foundation.hom-int-precomp-full-action',
         authorityLine: 8445,
         sourceOwner: 'fapp1_func',
@@ -87,7 +120,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 1,
+        order: 4,
         id: 'pathout.foundation.hom-int-precomp-capped-action',
         authorityLine: 8449,
         sourceOwner: 'fapp1_fapp0',
@@ -95,7 +128,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 2,
+        order: 5,
         id: 'pathout.foundation.hom-int-precomp-tele-application',
         authorityLine: 8453,
         sourceOwner: 'fapp0',
@@ -103,7 +136,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 3,
+        order: 6,
         id: 'pathout.foundation.sigma-func-object',
         authorityLine: 12803,
         sourceOwner: 'fapp0',
@@ -111,7 +144,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 4,
+        order: 7,
         id: 'pathout.foundation.sigma-func-capped-action',
         authorityLine: 13148,
         sourceOwner: 'fapp1_fapp0',
@@ -208,10 +241,13 @@ const rawProposal = {
         supersededCorrectedProposalCheckpoint: 'b3d6d71',
         supersededCorrectedReviewCheckpoint: '38ef8ae',
         preImplementationLedgerCheckpoint: '6347d5e',
+        supersededV3ProposalCheckpoint: '640d5ec',
+        supersededV3ReviewCheckpoint: '36c368e',
         correctionReason:
-            'measured-Rep_transport_func-check-found-Z-versus-Op_cat-Z-' +
-            'and-the-reviewed-opposite-Hom-endpoint-rule-only-in-the-' +
-            'direct-mixed-source-action-descendant',
+            'measured-pathout_refl_arrow-check-left-the-covariant-' +
+            'representable-action-fapp0-of-fapp1-hom_-at-id-unreduced-' +
+            'against-p;the-active-stable-postcomposition-closure-was-' +
+            'omitted-from-v3',
         authoritySourceSha256:
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256,
         authorityChecksSha256:
@@ -234,11 +270,13 @@ const rawProposal = {
         reason:
             'smallest-current-reviewed-descendant-containing-hom_int-hom_-' +
             'their-object-projections-and-the-opposite-Hom-endpoint-' +
-            'reduction-needed-to-check-Rep_transport_func',
+            'reduction-needed-to-check-Rep_transport_func;the-measured-' +
+            'covariant-representable-action-closure-is-added-locally',
         requiredExistingOwners: [
             'id',
             'hom_int',
             'hom_',
+            'hom_postcomp_fapp0',
             'hom_precomp_along_fapp0',
             'comp_fapp0',
             'comp_cat_fapp0',
@@ -263,7 +301,7 @@ const rawProposal = {
         inheritedReviewedSourceActionRuntimeRule:
             'categorical.direct-mixed-source-action.' +
             'source-composition-projection',
-        localImplementationDeltaRemainsThreeFiveOneNine: true
+        localImplementationDeltaIsFourEightOneNine: true
     },
     exactImplementation: {
         prerequisiteDeclarations,
@@ -276,7 +314,7 @@ const rawProposal = {
         })),
         phaseOrder: [
             'compile-opaque-prerequisite-declarations',
-            'compose-five-authority-runtime-rules',
+            'compose-eight-authority-runtime-rules',
             'compile-one-authority-proof-rule',
             'compile-nine-transparent-library-definitions',
             'recheck-proof-rule-against-final-declaration-context'
@@ -303,6 +341,18 @@ const rawProposal = {
             sourceProfile: 'MIXED-NEST-ACTION-0B-GENERIC-TRANSFER-1',
             duplicateTransferAuthorized: false
         },
+        representedCovariantActionCorrection: {
+            measuredDeclaration: 'pathout_refl_arrow',
+            normalizedResidue:
+                'fapp0(fapp1_fapp0(hom_(id,x),p),id_x)-versus-p',
+            localOpaqueDeclaration: 'hom_postcomp_func',
+            reusedOpaqueDeclaration: 'hom_postcomp_fapp0',
+            activeRuntimeLines: [7298, 7302, 7426],
+            stableNormalForm:
+                'hom_postcomp_fapp0(id,x,x,y,p,id_x)-reduces-to-p',
+            genericCompositionUnitImported: false,
+            checkerOrProofRuleSubstituteAuthorized: false
+        },
         oppositeHomReuse: {
             authorityLine: 3251,
             runtimeRuleId:
@@ -321,8 +371,8 @@ const rawProposal = {
     },
     profileSealing: {
         trustedProfileContains: [
-            'three-opaque-authority-declarations',
-            'five-runtime-rules',
+            'four-opaque-authority-declarations',
+            'eight-runtime-rules',
             'one-proof-unification-rule'
         ],
         derivedLibraryContains: [
@@ -461,7 +511,7 @@ export function validateCorePathoutFoundation1b0Proposal(
     validateCorePathoutTrustBoundary0aAudit();
     if (
         proposal.revision !==
-            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-3' ||
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-4' ||
         proposal.parent.auditRevision !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.revision ||
         proposal.parent.correctedAuditCheckpoint !== '5a1ea75' ||
@@ -472,6 +522,8 @@ export function validateCorePathoutFoundation1b0Proposal(
             'b3d6d71' ||
         proposal.parent.supersededCorrectedReviewCheckpoint !== '38ef8ae' ||
         proposal.parent.preImplementationLedgerCheckpoint !== '6347d5e' ||
+        proposal.parent.supersededV3ProposalCheckpoint !== '640d5ec' ||
+        proposal.parent.supersededV3ReviewCheckpoint !== '36c368e' ||
         proposal.parent.authoritySourceSha256 !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256 ||
         proposal.parent.authorityChecksSha256 !==
@@ -485,8 +537,8 @@ export function validateCorePathoutFoundation1b0Proposal(
 
     const implementation = proposal.exactImplementation;
     if (
-        implementation.prerequisiteDeclarations.length !== 3 ||
-        implementation.runtimeRules.length !== 5 ||
+        implementation.prerequisiteDeclarations.length !== 4 ||
+        implementation.runtimeRules.length !== 8 ||
         implementation.proofRules.length !== 1 ||
         implementation.libraryDefinitions.length !== 9 ||
         !sameData(
@@ -533,7 +585,7 @@ export function validateCorePathoutFoundation1b0Proposal(
             .extractOrDuplicateRepresentedHomSubset ||
         proposal.selectedPredecessor.extractOrDuplicateOppositeHomRule ||
         !proposal.selectedPredecessor
-            .localImplementationDeltaRemainsThreeFiveOneNine ||
+            .localImplementationDeltaIsFourEightOneNine ||
         proposal.dependencyClosure.representedHomReuse.owner !== 'hom_' ||
         proposal.dependencyClosure.representedHomReuse
             .duplicateTransferAuthorized ||
@@ -541,11 +593,21 @@ export function validateCorePathoutFoundation1b0Proposal(
             'categorical.direct-mixed-source-action.' +
                 'opposite-hom-endpoints' ||
         proposal.dependencyClosure.oppositeHomReuse
-            .duplicateTransferAuthorized
+            .duplicateTransferAuthorized ||
+        proposal.dependencyClosure.representedCovariantActionCorrection
+            .localOpaqueDeclaration !== 'hom_postcomp_func' ||
+        proposal.dependencyClosure.representedCovariantActionCorrection
+            .reusedOpaqueDeclaration !== 'hom_postcomp_fapp0' ||
+        proposal.dependencyClosure.representedCovariantActionCorrection
+            .activeRuntimeLines.join(',') !== '7298,7302,7426' ||
+        proposal.dependencyClosure.representedCovariantActionCorrection
+            .genericCompositionUnitImported ||
+        proposal.dependencyClosure.representedCovariantActionCorrection
+            .checkerOrProofRuleSubstituteAuthorized
     ) {
         throw new CorePathoutFoundation1b0ProposalError(
             'PATHOUT_FOUNDATION_PROPOSAL_SCOPE_DRIFT',
-            'The exact 3/5/1/9 foundation scope drifted'
+            'The exact 4/8/1/9 foundation scope drifted'
         );
     }
 

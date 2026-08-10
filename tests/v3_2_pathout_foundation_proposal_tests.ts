@@ -64,7 +64,7 @@ const assertProposalError = (
 };
 
 describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
-    it('pins both superseded proposals and remains non-self-authorizing',
+    it('pins v3 supersession and remains non-self-authorizing',
         () => {
             const proposal = validateCorePathoutFoundation1b0Proposal();
             assertDeepFrozen(proposal);
@@ -75,6 +75,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     proposal.parent.supersededProposalCheckpoint,
                     proposal.parent.supersededCorrectedProposalCheckpoint,
                     proposal.parent.supersededCorrectedReviewCheckpoint,
+                    proposal.parent.supersededV3ProposalCheckpoint,
+                    proposal.parent.supersededV3ReviewCheckpoint,
                     proposal.decision.status,
                     proposal.decision.implementationAuthorized
                 ],
@@ -84,13 +86,15 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     'dd69325',
                     'b3d6d71',
                     '38ef8ae',
+                    '640d5ec',
+                    '36c368e',
                     'proposal-only',
                     false
                 ]
             );
         });
 
-    it('freezes exactly three opaque, five runtime, one proof, nine transparent',
+    it('freezes exactly four opaque, eight runtime, one proof, nine transparent',
         () => {
             const implementation =
                 CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL
@@ -101,12 +105,13 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                 [
                     'hom_int_precomp_tele_func',
                     'hom_int_precomp_func',
-                    'Sigma_func'
+                    'Sigma_func',
+                    'hom_postcomp_func'
                 ]
             );
             assert.deepEqual(
                 implementation.runtimeRules.map(entry => entry.authorityLine),
-                [8445, 8449, 8453, 12803, 13148]
+                [7298, 7302, 7426, 8445, 8449, 8453, 12803, 13148]
             );
             assert.deepEqual(
                 implementation.proofRules.map(entry => entry.authorityLine),
@@ -193,8 +198,19 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
         );
         assert.equal(predecessor.extractOrDuplicateOppositeHomRule, false);
         assert.equal(
-            predecessor.localImplementationDeltaRemainsThreeFiveOneNine,
+            predecessor.localImplementationDeltaIsFourEightOneNine,
             true
+        );
+        assert.deepEqual(
+            CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
+                .representedCovariantActionCorrection.activeRuntimeLines,
+            [7298, 7302, 7426]
+        );
+        assert.equal(
+            CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
+                .representedCovariantActionCorrection
+                .checkerOrProofRuleSubstituteAuthorized,
+            false
         );
     });
 
