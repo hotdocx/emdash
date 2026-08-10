@@ -24,7 +24,8 @@ implemented and final-green through its focused, browser, packed-package, and
 required full-TypeScript gates; the accessible-premise index/search audit is
 complete and its first exact source-visible index is implemented and
 final-green through focused, browser, packed-package, and required full-
-TypeScript gates; bounded obvious-proof search is next; later index
+TypeScript gates; the bounded obvious-proof audit is complete and its first
+exact/one-step-apply provider contract is frozen for implementation; later index
 enrichment, library, external-automation, and general goal-graph rows remain
 dependency-gated
 
@@ -57,8 +58,9 @@ checkpoint is `7c9d8f7`; its synchronized ledger checkpoint and current clean
 published predecessor tip are `74e6de8`. The proof-simplifier contract
 checkpoint is `c08c622`, its semantic checkpoint is `828b8ff`, and its
 synchronized clean published checkpoint is `b5e974a`. The accessible-premise
-index contract checkpoint is `de3518b` and its semantic checkpoint is
-`fd371e4`.
+index contract checkpoint is `de3518b`, its semantic checkpoint is
+`fd371e4`, and its synchronized clean published ledger checkpoint is
+`c88774c`.
 
 Depends-On:
 
@@ -537,7 +539,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `SIMP-5B2` | Conditional/local/under-binder simplification extensions | deferred | concrete 5B1 consumer plus congruence and premise-discharge contract |
 | `INDEX-SEARCH-6A` | Exact source-visible premise index and symbolic search | complete | `fd371e4`; exact closure, visibility, determinism, browser, packed-package, and full-TypeScript gates green |
 | `INDEX-SEARCH-6B` | Proof-export, relationship/use enrichment, and optional ranking | deferred | theorem-export interface plus exact class/instance/coercion and use owners; one measured retrieval corpus before embeddings |
-| `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | pending | plan patches, `INDEX-SEARCH-6A`, and budget/trace contract |
+| `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | in progress | exact hole patch, accessible installed free declarations, exact/one-step-apply replay, and bounded trace contract frozen below |
 | `STDLIB-8` | Curated public library profile | gated | existing generated-owner/stress decisions, exact product profile, public base-package trust boundary |
 | `REFACTOR-9` | Semantic diff, dependency impact, and proof repair | pending | stable declaration index and two-revision corpus |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | pending | one executable consumer and explicit evidence labeling |
@@ -2644,6 +2646,154 @@ retained prover session, host adapter, or backend dependency was added.
 `INDEX-SEARCH-6B` remains deferred; `OBVIOUS-PROOF-7` is the next dependency-
 ready audit.
 
+## OBVIOUS-PROOF-7 Audit And Frozen First Contract
+
+Date: 2026-08-10
+
+The audit selects a deliberately small provider which is already useful to an
+AI author: replace one stable named proof-plan hole with either an accessible
+closed declaration which checks exactly, or one ordinary application of an
+accessible declaration followed by explicit named premise holes. It does not
+add a tactic language, recursive proof search, or a second applicability
+checker.
+
+Material findings:
+
+1. `CoreProofPlan` already gives source-level proof state a stable replacement
+   seam: every open source obligation is an inert `hole` with a unique
+   `goalId`. What is missing is a generic immutable operation which replaces
+   exactly one such hole and revalidates the resulting base-plan tree. A new
+   tactic or mutable refiner cursor is not required.
+2. `executeCoreProofPlan` and `compileCoreProofDocument` already establish the
+   authoritative replay boundary. They create a fresh checker/session over an
+   exact declaration environment, check the closed theorem target, execute
+   every source operation, require stable labels for all remaining goals, and
+   expose a deterministic public state snapshot. A provider should reuse this
+   path for both its source precondition and every returned candidate.
+3. `CoreProofRefiner.apply` is the existing owner for dependent application.
+   It infers the callee, creates arguments in source order, instantiates later
+   domains with earlier arguments, lets ordinary unification solve inferable
+   metas, and reports exactly the still-open introduced goals. Predicting
+   application arity from a premise-index binder count would duplicate and
+   disagree with that behavior. The provider must explore `apply` in a fresh
+   disposable replay and then encode only the reported unresolved goals.
+4. `INDEX-SEARCH-6A` supplies exact source accessibility, stable qualified
+   identity, exact checked type, deterministic conclusion-head retrieval, and
+   the reconstructed closure environment. It intentionally does not prove
+   applicability. The first provider can close that gap by resolving each hit
+   and replaying an explicit term or plan patch through `CoreProofChecker`.
+5. Only an installed ordinary `free-declaration` link has a canonical bare
+   Core term `kernelFree(link.coreName)`. An intrinsic `core-owner` names an
+   expression constructor/signature, not necessarily a first-class theorem
+   constant. V1 must trace and skip such hits rather than invent a saturation
+   convention.
+6. Goal snapshots are portable display data, while goal contexts and raw Core
+   targets are session-owned. The provider therefore takes the original
+   closed theorem type and complete inert source plan, replays them itself,
+   and selects the raw goal by aligning its stable `goalId` with the fresh
+   execution. It does not attempt to reconstruct dependent Core from rendered
+   goal text.
+7. The source-visible index excludes local hypotheses, proof-document leaves,
+   synthesized dictionaries, and generated theorem exports. This first
+   provider consequently searches accessible global LF declarations only.
+   Local-assumption lookup, recursive premise discharge, instance synthesis,
+   simplification, theorem-export search, and curated eliminator search remain
+   separate later contracts.
+8. A candidate must be stale-safe without requiring Node hashing. Its exact
+   precondition can record the canonical index snapshot serialization, the
+   checked closed target serialization, the complete verified base-state
+   snapshot, and the selected goal snapshot. Acceptance replays the current
+   source, compares those data exactly, applies the inert patch, and checks the
+   recorded result again. Semantically equivalent source which reproduces the
+   same checked state may accept the patch; changed checked state may not.
+
+The first executable contract is:
+
+1. Add a browser-safe immutable proof-plan patch owner. V1 has one patch kind:
+   replace exactly one `hole` selected by stable `goalId` with one ordinary
+   `CoreProofPlan`. It validates the source, rejects a missing target, rebuilds
+   only the containing path, validates the complete result for ID collisions,
+   cycles, metas, and arity-independent source invariants, and performs no
+   semantic check itself.
+2. Add one browser-safe obvious-proof provider with a versioned profile. Its
+   input is exactly a compiled accessible-premise index, a closed theorem
+   target, an inert base proof plan, one selected stable goal ID, an explicit
+   allowed-profile list, a deterministic seed label, and bounded search
+   settings. It retains no checker, session, callback, registry, or mutable
+   cache after the call.
+3. Replay the base plan in a fresh `CoreProofChecker` over the index's exact
+   reconstructed closure. Reject an invalid target/plan or a selected goal ID
+   which is not currently open. Record the checked target, complete base-state
+   snapshot, and selected goal as the exact candidate precondition.
+4. Retrieve premises by the selected raw goal's normalized conclusion head,
+   at its exact ambient context depth, using the existing index search and an
+   explicit premise-result bound. Iterate exact qualified-ID order. Search
+   truncation is visible and never described as exhaustion of the full
+   accessible scope.
+5. Resolve every hit back through the compiled index. A hit is semantically
+   attempted only when its link is an installed ordinary free declaration.
+   Unsupported intrinsic-owner or non-installed shapes receive an explicit
+   trace entry and consume no invented proof rule.
+6. For each supported premise, try `exact kernelFree(coreName)` first by
+   replacing the selected hole and replaying the complete plan in a fresh
+   checker. If that succeeds, return the checked candidate and do not also
+   manufacture a less direct `apply` branch for the same premise.
+7. If exact replay rejects, explore one ordinary `CoreProofRefiner.apply` in a
+   separate fresh replay. If it succeeds within the explicit introduced-goal
+   bound, replace the selected hole with one `apply` node and one fresh stable
+   named `hole` for each unresolved goal in the exact refiner order. Generated
+   node and goal IDs are deterministic and collision-free relative to the
+   source plan. Replay that complete patched plan once more before returning
+   it.
+8. Return all successful candidates within the explicit result bound; do not
+   silently choose among them. Each candidate records provider/profile,
+   operation (`exact` or `apply`), exact qualified premise and complete scope/
+   visibility/link evidence, the immutable patch, exact precondition, verified
+   result snapshot, generated premise IDs, cost, seed, and its complete local
+   discovery/check trace. The aggregate report records every examined hit and
+   attempt, counts, search truncation, and its exact termination reason.
+9. The v1 budget independently bounds retrieved premise hits, semantic tactic
+   attempts, returned candidates, and unresolved goals introduced by one
+   application. Zero is a valid deliberate budget. Requested values above the
+   frozen maxima or invalid/duplicate allowed profiles fail structurally. The
+   seed is recorded but v1 performs no randomization; exact-ID order is the
+   only search order.
+10. Expose a separate candidate replay/acceptance function. It requires the
+    current index, target, base plan, and exact candidate; recomputes and
+    compares the precondition, reapplies the patch, rechecks the complete plan,
+    compares the verified result snapshot, and returns the in-memory checked
+    execution only on agreement. Provider success is therefore evidence of a
+    proposal, never durable proof authority by itself.
+11. V1 performs no recursion into introduced goals, `intro`, local-context
+    premise enumeration, constructor selection, class synthesis, `simp`,
+    equality rewriting, coercion insertion, proof minimization, fuzzy search,
+    embeddings, external calls, filesystem/network access, hashing, parsing,
+    backend emission, or Lambdapi invocation. It changes no Core tag, checker
+    rule, proof-plan tag, source/artifact revision, or declaration visibility
+    rule.
+12. Exercise the provider with a standalone logical fixture, not the active
+    presheaf/site/sheafification/scheme mathematics. The fixture includes two
+    proposition-like types, exact facts, a one-premise implication, misleading
+    nonmatching declarations, and inaccessible declarations. It establishes
+    exact and apply candidates, deterministic ambiguity, explicit subgoal IDs,
+    no recursive discharge, skip/rejection traces, bounds, stale preconditions,
+    patch collision/missing-target failures, deep freezing, and byte-stable
+    public reports.
+13. Export the additive APIs from the contributor and browser-safe workspace
+    entries while leaving the narrow core-only entry unchanged. Update the
+    static capability record and installed ESM/CJS/strict-TypeScript/browser
+    consumers only after the focused semantic contract is green.
+
+Implementation validation is proportional during development: the new patch/
+provider suite, nearest plan/index/proof-checker tests, typecheck, changed-file
+lint, and browser closure first; workspace and packed consumers only when the
+public entry changes. Because the completed row changes shared public
+TypeScript barrels and the workspace package, root SOP makes one settled
+`check:ts` a checkpoint gate. It is run at most once, after every smaller gate
+is green, because omitting that exact gate would otherwise block the public
+semantic checkpoint. `check:all`, kernel/Lambdapi, print/book, npm/release,
+deployment, and sibling repositories remain out of scope.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -2696,6 +2846,12 @@ ready audit.
 | `D-PA-046` | Keep checked types/environment in a process-local compiled index and publish a separate canonical data snapshot. | Later providers need exact Core terms, while sharable index artifacts must remain deterministic and free of checker/session/object authority. |
 | `D-PA-047` | Restrict v1 search to exact IDs and bounded structural Core fingerprints with explicit scope explanations. | Symbolic retrieval is sufficient for the first obvious-proof consumer; applicability, proof construction, ranking, and correctness remain separately replayed operations. |
 | `D-PA-048` | Do not treat the source-visible index as a proof-reference visibility firewall. | Existing exact-closure proof checking receives the complete closure environment; hard reference enforcement requires an explicit policy decision and preflight/checker audit rather than an index-side claim. |
+| `D-PA-049` | Make the first provider an immutable replacement of one stable named hole, not a stateful tactic cursor. | The proof-plan tree already owns source identity and fresh replay; a minimal exact patch is inspectable, stale-checkable, and transport-neutral. |
+| `D-PA-050` | Let the existing refiner discover one-step application arguments and unresolved goals. | Binder-count prediction would duplicate dependent instantiation and unification, while transactional `apply` already owns the exact semantics. |
+| `D-PA-051` | Search only indexed installed free declarations in v1 and trace unsupported owner links. | A free-declaration link has a canonical bare Core reference; intrinsic owners do not share one theorem-constant interpretation. |
+| `D-PA-052` | Prefer exact replay, then one-step apply, and return every checked candidate within explicit bounds. | This yields deterministic useful proposals without arbitrary winner selection or disguised recursive automation. |
+| `D-PA-053` | Freeze candidate freshness as exact canonical index, checked-target, verified-state, and selected-goal data rather than a new host hash. | Browser-safe supplied-data semantics already provide canonical snapshots; acceptance can replay and compare them without Node authority. |
+| `D-PA-054` | Defer local assumptions, recursive discharge, instances, simplification, theorem exports, ranking, and eliminator search from the first obvious-proof provider. | Each has a distinct scope or proof-production owner and can be added after the explicit global exact/apply consumer is measured. |
 
 ## Validation And Checkpoint Policy
 
