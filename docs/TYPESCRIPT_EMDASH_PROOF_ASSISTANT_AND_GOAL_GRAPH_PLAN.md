@@ -13,7 +13,8 @@ constructor base-plan macro final-proportional-green;
 `PLAN-DECOMPOSE-3B1A/3B1B` complete and contextual `have` plus its coordinated
 v2 source/artifact family final-proportional-green; the general `refine` tag
 audit and root-scoped typed-term template macro are complete and final-
-proportional-green;
+proportional-green; the cross-goal coupling audit is complete and its separate
+portable direct-dependency graph tranche is frozen;
 later simplification, search, library, external-automation, and general
 goal-graph rows remain dependency-gated
 
@@ -500,14 +501,15 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `DEV-CATALOG-1` | General browser-safe multi-module/multi-proof development catalog | complete | focused/package gates green; one long aggregate directly waived after interrupted evidence became unrecoverable |
 | `DEV-CLI-2A` | Canonical supplied-data proof-development source and reconstruction | complete | `c60d09e`; focused/static/browser/packed gates green; long aggregate intentionally omitted |
 | `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | complete | `b5a4cb2`; focused semantic/static/browser gates green; long aggregate intentionally omitted |
-| `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4`; no ad hoc second graph authority |
+| `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4B`; no ad hoc second graph authority |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | complete | base-plan macro lowering selected; template and equality boundaries separated below |
 | `PLAN-DECOMPOSE-3B` | Implement selected-`constructor` base-plan macro | complete | `934bf13`; focused semantic/static/browser/packed gates green; long aggregate intentionally omitted |
 | `PLAN-DECOMPOSE-3B1A` | Audit contextual `have`, retention, and revision boundary | complete | contextual substitution plus per-refiner retained source obligations selected below |
 | `PLAN-DECOMPOSE-3B1B` | Implement versioned contextual `have` plan/refiner | complete | `b20595b`; focused semantic/static/research/packed gates green; long aggregate intentionally omitted |
 | `PLAN-DECOMPOSE-3C` | Audit versioned explicit-placeholder `refine` representation after contextual `have` | complete | a new tag/refiner is no longer justified; root-scoped templates lower exactly to base plans |
 | `PLAN-DECOMPOSE-3C1` | Implement root-scoped explicit-placeholder `refine` macro | complete | `39d9fc8`; focused semantic/static/browser/packed gates green; no source/artifact migration or long aggregate |
-| `GOAL-COUPLING-4` | Stable cross-goal dependency graph | pending | measured dependent-hole consumer and snapshot revision decision |
+| `GOAL-COUPLING-4A` | Audit stable cross-goal dependency semantics and revision boundary | complete | direct target/context dependency graph selected below; proof-state v2 remains unchanged |
+| `GOAL-COUPLING-4B` | Implement portable direct cross-goal coupling graph | in progress | frozen separate graph/compilation contract below; no source/artifact migration |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | pending | equality/transport owner inventory and termination contract |
 | `SIMP-5B` | Deterministic proof-producing simplifier | pending | approved 5A contract |
 | `INDEX-SEARCH-6` | Accessible-premise semantic index and exact-ID search | pending | general catalog and module-visibility corpus |
@@ -1607,6 +1609,118 @@ static, closure, workspace, and packed-consumer gates exercised every changed
 boundary directly. No Lambdapi/kernel, print/book, npm publication, release,
 deployment, or sibling-repository operation was run.
 
+## GOAL-COUPLING-4A Audit And Frozen 4B Graph Tranche
+
+Date: 2026-08-10
+
+Status: `GOAL-COUPLING-4A` audit complete; `GOAL-COUPLING-4B` frozen and
+approved for bounded implementation under the standing self-approval and
+checkpoint policy.
+
+### Material findings
+
+1. The v2 proof-state snapshot already replaces open process metas in terms,
+   targets, context types, and provenance details with stable source hole
+   names. The dependent fixture therefore renders a witness target as
+   `plan_P(explicit:?index[])`. Parsing that diagnostic string back into a
+   graph would make presentation syntax an accidental semantic authority.
+2. A graph can instead be derived while the fresh execution still owns both
+   structured Core and the total meta-to-hole labeling. This does not require
+   another proof-state/source/artifact migration. The graph is a separate
+   immutable portable product returned by process-local execution and proof-
+   document compilation; canonical v2 proof artifacts remain byte-stable and
+   continue to own proof status and checked Core.
+3. A direct edge means exactly that an open prerequisite meta occurs in the
+   dependent goal's zonked target or in one of its local-context binding
+   types. Root-term co-occurrence, proof-plan nesting, source order, and the
+   mere fact that two goals were introduced by the same tactic do not create
+   edges. A retained source obligation is a graph node but creates no special
+   dependency by retention alone.
+4. Edge direction is explicit: `dependentGoalId -> prerequisiteGoalId`.
+   Target and context occurrence counts are kept separately. An occurrence in
+   a meta spine counts structurally; solved metas are zonked away; unknown or
+   unrelated session metas cannot become public endpoints. Repeated
+   occurrences collapse to one edge with positive counts.
+5. The graph records direct coupling, not a materialized transitive closure.
+   Reachability, scheduling layers, strongly connected components, and
+   transitive impact are deterministic derived views over the direct graph.
+   No search or proof-order policy is smuggled into the semantic artifact.
+6. Nodes follow the existing stable proof-goal order. Edges follow dependent
+   node order and then prerequisite node order, so serialization is byte-
+   stable across fresh sessions without exposing session symbols or numeric
+   meta IDs. Complete proofs produce the same profile with empty nodes and
+   edges.
+7. The existing indexed application is the measured target-dependency
+   consumer: `witness` directly requires `index`. A second fixture introduces
+   a local binder whose type mentions `index`, establishing a context-only
+   edge. An independent two-premise fixture must produce two nodes and no
+   edge. These cases distinguish semantic dependency from mere siblinghood.
+8. Lean's local `MVarId.getMVarDependencies` implementation likewise examines
+   a metavariable's type and local declarations, but computes transitive
+   resident-state dependencies. Emdash adopts the useful structural scope
+   while publishing direct stable source-ID edges from a disposable replay.
+9. `DEV-CLI-2C` remains a separate next row. It will wrap these per-proof
+   graphs with exact module/declaration identity and expose JSONL/text without
+   recomputing dependency semantics in the Node adapter.
+
+### Frozen GOAL-COUPLING-4B contract
+
+Add one browser-safe graph profile and portable shape:
+
+```text
+CORE_PROOF_GOAL_COUPLING_PROFILE
+  revision = emdash-proof-goal-coupling-v1
+  graphRevision = emdash-proof-goal-coupling-graph-v1
+
+CoreProofGoalCouplingGraph
+  nodes[] = { id, reachability }
+  edges[] = {
+    dependentGoalId,
+    prerequisiteGoalId,
+    targetOccurrenceCount,
+    contextOccurrenceCount
+  }
+```
+
+1. Build the graph from the final freshly inspected goals, their zonked Core
+   targets and local-context types, and the complete stable hole-label map.
+   Every edge endpoint must be one of the graph's unique nodes, every edge has
+   a positive total occurrence count, self-edges are omitted, and output is
+   deeply frozen.
+2. `CoreProofPlanExecution.goalGraph` exposes the graph beside, not inside,
+   `snapshot`. `CoreProofDocumentCompilation.goalGraph` carries the same
+   portable value so exact-closure and development compilers can project it
+   without retaining the checker session. Provide deterministic JSON and text
+   renderers as the first exact views.
+3. Keep `emdash-proof-state-v2`, proof-document/artifact/JSONL v2, exact-
+   closure/development/source/store/CLI v2, and research revisions and pins
+   unchanged. The graph is additive compilation output and is not silently
+   inserted into an existing canonical envelope. Advance only the static AI-
+   native capability record to v6 and replace its graph prerequisite with the
+   remaining exact command-projection row.
+4. Publish the graph profile, types, and renderers through the curated browser-
+   safe workspace entry. The module performs no checking, I/O, hashing,
+   parsing, callback retention, graph search, Node import, or Lambdapi call.
+5. Fail closed if internal construction ever lacks a stable endpoint or sees
+   a foreign session meta. Construction happens only after proof-plan replay
+   has already required every open goal to have a unique portable hole ID.
+
+Focused acceptance covers empty complete graphs, independent siblings, one
+target-dependent edge, one context-only edge, repeated-occurrence counts,
+fresh-session byte equality, deep immutability, no raw meta/session identity,
+proof-document propagation, capability/public-barrel visibility, typecheck,
+changed-file lint, workspace check, browser closure, and packed ESM/CJS/
+strict-TypeScript/browser consumers. Under `D-PA-019`, no long root or
+repository aggregate is run unless omission becomes progress-blocking.
+
+Non-effects: no Core expression, checker/session/refiner/tactic or proof-plan
+tag, canonical plan/source decoder, proof-state/artifact/source/workspace/CLI/
+research revision or pin, graph command, graph persistence, declaration or
+term parser, proof search/scheduling, theorem import, equality/rewrite,
+Lambdapi source, mathematical owner/rule, Node acquisition, filesystem,
+network/cache/MCP/LSP, print/book, sibling repository, npm publication,
+release, or deployment change.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -1641,6 +1755,9 @@ deployment, or sibling-repository operation was run.
 | `D-PA-028` | Keep refine-template v1 placeholders term-level and keep Pi/lambda binder annotations as meta-free Core. | Type-position placeholders would require `have A : TYPE`, but the frozen contextual binding checks its declared type against `TYPE` while `TYPE : KIND`; sort-polymorphic contextual binding is a distinct design. |
 | `D-PA-029` | Keep fresh final checking authoritative when contextual substitution exposes an annotated lambda in inference position. | A plan can solve every session meta through a typed local fact yet produce a substituted lambda call which the deliberately frozen checker cannot infer; declared inferable callees work without weakening the checker. |
 | `D-PA-030` | Claim structural macro preflight and existing per-tactic failure atomicity, not whole-plan transactional replay. | The current executor validates the complete inert tree first, then commits each checked refinement separately; the template macro must not overstate a rollback guarantee it does not add. |
+| `D-PA-031` | Publish cross-goal coupling as a separate additive portable graph, not a parsed diagnostic string or silent field in proof-state v2. | Structured Core and the stable label map are available during fresh replay; a separate profile avoids making display syntax semantic or forcing an unrelated source/artifact migration. |
+| `D-PA-032` | Define direct edges from dependent goals to open prerequisites occurring in zonked targets or local-context types, with separate occurrence counts. | This captures actual type dependency, distinguishes independent sibling goals, and leaves transitive closure and scheduling as explicit derived policies. |
+| `D-PA-033` | Keep the Node `development graph` projection in `DEV-CLI-2C` after the browser-safe graph owner is qualified. | The command should wrap one semantic graph rather than reimplement meta traversal, labeling, or edge ordering at the acquisition boundary. |
 
 ## Validation And Checkpoint Policy
 
