@@ -8,8 +8,10 @@ Status: living architecture and implementation ledger; reviewed strategy
 recorded; qualified predecessor baseline integrated into public `main`;
 `DEV-CATALOG-1`, `DEV-CLI-2A`, and `DEV-CLI-2B` implemented and
 final-proportional-green under the persistent 2026-08-10 long-aggregate
-policy recorded below; later proof-plan, simplification, search, library,
-external-automation, and general goal-graph rows remain dependency-gated
+policy recorded below; `PLAN-DECOMPOSE-3A` audit complete and the bounded
+base-plan macro tranche frozen; later template refinement, simplification,
+search, library, external-automation, and general goal-graph rows remain
+dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -25,7 +27,8 @@ dedicated branch's preceding published baseline are `2484e23`; the
 `DEV-CLI-2A` architecture, semantic, and ledger checkpoints are `ee31ab9`,
 `c60d09e`, and `fa84b05`; the `DEV-CLI-2B` architecture and semantic
 checkpoints are `a6f0fbe` and `b5a4cb2`. The branch has not been merged into
-`main`, tagged, released, or published to npm.
+`main`, tagged, released, or published to npm; the `DEV-CLI-2B` synchronized
+ledger checkpoint is `238bddf`.
 
 Depends-On:
 
@@ -490,8 +493,9 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `DEV-CLI-2A` | Canonical supplied-data proof-development source and reconstruction | complete | `c60d09e`; focused/static/browser/packed gates green; long aggregate intentionally omitted |
 | `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | complete | `b5a4cb2`; focused semantic/static/browser gates green; long aggregate intentionally omitted |
 | `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4`; no ad hoc second graph authority |
-| `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | pending | catalog consumer; no embedded process metas |
-| `PLAN-DECOMPOSE-3B` | Implement the first measured decomposition nodes | pending | approved 3A contract and positive/negative corpus |
+| `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | complete | base-plan macro lowering selected; template and equality boundaries separated below |
+| `PLAN-DECOMPOSE-3B` | Implement `have`/`constructor` base-plan macros | in progress | frozen 3A contract below; no new plan tag or checker rule |
+| `PLAN-DECOMPOSE-3C` | Versioned explicit-placeholder `refine` template | pending | one consumer not expressible by base-plan macros; source/artifact revision decision |
 | `GOAL-COUPLING-4` | Stable cross-goal dependency graph | pending | measured dependent-hole consumer and snapshot revision decision |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | pending | equality/transport owner inventory and termination contract |
 | `SIMP-5B` | Deterministic proof-producing simplifier | pending | approved 5A contract |
@@ -1049,6 +1053,113 @@ changed. `DEV-CLI-2C` remains gated on `GOAL-COUPLING-4` so the command layer
 does not invent a second graph authority. `PLAN-DECOMPOSE-3A` is the next
 dependency-ready row.
 
+## PLAN-DECOMPOSE-3A Audit And Frozen 3B Macro Tranche
+
+Date: 2026-08-10
+
+Status: audit complete; `PLAN-DECOMPOSE-3B` frozen and approved for
+implementation under the direct continuation instruction and standing
+bounded self-approval authorization.
+
+### Material findings
+
+1. The current inert tree already has the correct semantic base: `exact`,
+   `intro`, `apply`, and stable `hole`. Validation rejects every source-level
+   Core meta, execution creates session metas only behind the refiner, and the
+   canonical development decoder uses closed tag dispatch.
+2. `CoreProofRefiner.apply` infers a selected term, traverses its complete Pi
+   telescope, creates ordered contextual subgoals, and checks the resulting
+   call against the current target. A selected data constructor therefore
+   needs no special proof rule: `constructor c` is precisely `apply c` with a
+   clearer direct-TypeScript authoring name.
+3. A local `have h : T` is also expressible without a new plan tag. For an
+   explicitly recorded current target `G`, construct the meta-free cut term
+
+   ```text
+   cut(T,G) = λ witness : T,
+                λ continue : (Π h : T, G),
+                  continue witness
+
+   have h : T := proof; body
+     ↦ apply cut(T,G) [proof, intro h body]
+   ```
+
+   Correct De Bruijn weakening of `T` and `G` under the generated binders is
+   ordinary `kernelShift`; checking and local-context creation remain owned
+   by existing `apply` and `intro`. The explicit `G` is not trusted as a
+   mutable goal snapshot: replay must still unify the cut result with the
+   actual selected goal.
+4. Lean's implementation confirms why general `refine` is materially
+   different: it elaborates a term containing holes, assigns the old goal to
+   that term, and promotes the newly reachable holes to goals. Emdash source
+   cannot copy that process representation because its metas carry session
+   identity. A genuine emdash `refine` therefore needs a closed, versioned
+   expression-template AST with explicit placeholder identities, scopes,
+   ordering, and types, plus a source/artifact compatibility decision. It is
+   not approved as an alias for `apply`.
+5. Propositional `rewrite` is likewise not definitional reduction. Equality,
+   reflexivity, eliminators, and transport are generic imported LF
+   declarations in the current TypeScript backend rather than built-in Core
+   owners. A sound rewrite node must select an equality profile, occurrence
+   policy, direction, transport constructor, proof-producing trace, and
+   dependent-target behavior. That work belongs to `SIMP-5A/5B`; this tranche
+   must not interfere with active Lambdapi mathematics or disguise a runtime
+   rewrite as a theorem proof.
+
+### Frozen PLAN-DECOMPOSE-3B contract
+
+Add browser-safe, source-visible authoring macros in the existing
+`proof_plan` package boundary:
+
+```text
+coreProofPlanConstructor(callee, premises, options?)
+  -> CoreProofPlanApply
+
+coreProofPlanHave(binding, target, proof, body, options?)
+  -> CoreProofPlanApply
+```
+
+1. Publish an immutable `emdash-proof-plan-macros-v1` capability profile.
+2. `constructor` delegates exactly to `coreProofPlanApply`; the caller selects
+   the constructor handle and supplies all ordered premise plans. Automatic
+   constructor search is a later index/provider feature.
+3. `have` accepts one `KernelBinder`, an explicit actual-target expectation,
+   a proof plan for its type, and a continuation plan. Revision 1 preserves
+   the binder's exact plicity and functorial/natural variation.
+4. `have` builds the typed cut term above using only `kernelBinder`,
+   `kernelPi`, `kernelLambda`, `kernelCall`, `kernelBound`, and `kernelShift`,
+   then returns ordinary `apply` with `[proof, intro(body)]`. The continuation
+   receives the named local at De Bruijn index zero.
+5. The generated root uses the caller's optional ID/provenance. Generated
+   binders and calls receive deterministic derived provenance; no callback,
+   registry, session, meta, goal lookup, environment lookup, filesystem,
+   process state, or backend selection is retained.
+6. Output is an ordinary deeply inspectable base-plan tree. Canonical source,
+   proof-state, artifact, JSONL, and CLI revisions do not change; serialized
+   plans contain only the existing `apply`, `intro`, `exact`, and `hole` tags,
+   and traces report those actual primitives.
+7. Failures remain ordinary validation/checking failures. A stale or wrong
+   target, ill-scoped type, process-local meta, non-type binding, wrong
+   constructor, premise mismatch, or malformed binder mode must fail through
+   current owners rather than a parallel macro checker.
+
+Focused acceptance covers constructor parity with direct `apply`, complete
+and named-open `have`, local-context visibility, natural/functorial variation,
+wrong-target and meta rejection, base-tag-only serialization, exact canonical
+source round-trip, browser closure, and the packed workspace consumer. Run
+the focused proof-plan/source/workspace suites, workspace check, typecheck,
+changed-file lint, browser closure, package build/packed consumers, exact diff
+review, and whitespace hygiene. Under `D-PA-019`, no long root or repository
+aggregate is run unless omitting it becomes progress-blocking.
+
+Non-effects: no new Core expression, proof-plan tag, refiner/checker/session
+method, proof/source/artifact revision, declaration or term parser,
+constructor discovery, equality/rewrite semantics, theorem import, Lambdapi
+source, mathematical owner/rule, Node adapter, CLI, cache/network, MCP/LSP,
+print/book, sibling repository, release, registry, or deployment change.
+`PLAN-DECOMPOSE-3C` retains general explicit-placeholder refinement;
+`SIMP-5A/5B` retains propositional rewriting.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -1074,6 +1185,8 @@ dependency-ready row.
 | `D-PA-019` | Treat long repository aggregates as last-resort blocking gates throughout this persistent goal. | The user explicitly directed that focused evidence be preferred and long reruns be avoided unless their omission would block overall progress; every omission remains visible and is not positive evidence. |
 | `D-PA-020` | Repartition `DEV-CLI-2` into canonical supplied-data reconstruction, Node fixed-file commands, and a later stable graph projection. | No safe general proof-development file consumer exists, and arbitrary TypeScript import is not a sandbox. The split preserves direct TypeScript authoring without confusing host execution with checked source. |
 | `D-PA-021` | Add an exact `development` command namespace over one fixed canonical file and preserve all older command vectors. | Namespacing keeps Node acquisition asynchronous and separate from the fixed proof demo; fixed-file explicit-root input avoids arbitrary host import/path authority. |
+| `D-PA-022` | Prefer source-expanded proof-plan macros whenever a convenience form lowers faithfully to the existing inert base. | It improves AI/human authoring without multiplying trusted tags, decoders, trace semantics, or process state. |
+| `D-PA-023` | Implement explicit `constructor` and cut-based `have` first; reserve general `refine` for a versioned placeholder template and `rewrite` for the equality/simplifier audit. | The first two have exact generic Core lowerings today; the latter two require contracts that cannot be recovered safely by renaming `apply` or runtime reduction. |
 
 ## Validation And Checkpoint Policy
 
