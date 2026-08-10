@@ -11,9 +11,10 @@ final-proportional-green under the persistent 2026-08-10 long-aggregate
 policy recorded below; `PLAN-DECOMPOSE-3A/3B` complete and the selected-
 constructor base-plan macro final-proportional-green;
 `PLAN-DECOMPOSE-3B1A/3B1B` complete and contextual `have` plus its coordinated
-v2 source/artifact family final-proportional-green; later template refinement,
-simplification, search, library, external-automation, and general goal-graph
-rows remain dependency-gated
+v2 source/artifact family final-proportional-green; the general `refine` tag
+audit is complete and a root-scoped pure template macro tranche is frozen;
+later simplification, search, library, external-automation, and general
+goal-graph rows remain dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -502,7 +503,8 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `PLAN-DECOMPOSE-3B` | Implement selected-`constructor` base-plan macro | complete | `934bf13`; focused semantic/static/browser/packed gates green; long aggregate intentionally omitted |
 | `PLAN-DECOMPOSE-3B1A` | Audit contextual `have`, retention, and revision boundary | complete | contextual substitution plus per-refiner retained source obligations selected below |
 | `PLAN-DECOMPOSE-3B1B` | Implement versioned contextual `have` plan/refiner | complete | `b20595b`; focused semantic/static/research/packed gates green; long aggregate intentionally omitted |
-| `PLAN-DECOMPOSE-3C` | Versioned explicit-placeholder `refine` template | pending | one consumer not expressible by base-plan macros; source/artifact revision decision |
+| `PLAN-DECOMPOSE-3C` | Audit versioned explicit-placeholder `refine` representation after contextual `have` | complete | a new tag/refiner is no longer justified; root-scoped templates lower exactly to base plans |
+| `PLAN-DECOMPOSE-3C1` | Implement root-scoped explicit-placeholder `refine` macro | in progress | frozen pure template-to-`have`/`exact` contract below; no source/artifact migration |
 | `GOAL-COUPLING-4` | Stable cross-goal dependency graph | pending | measured dependent-hole consumer and snapshot revision decision |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | pending | equality/transport owner inventory and termination contract |
 | `SIMP-5B` | Deterministic proof-producing simplifier | pending | approved 5A contract |
@@ -1158,9 +1160,10 @@ method, proof/source/artifact revision, declaration or term parser,
 constructor discovery, equality/rewrite semantics, theorem import, Lambdapi
 source, mathematical owner/rule, Node adapter, CLI, cache/network, MCP/LSP,
 print/book, sibling repository, release, registry, or deployment change.
-`PLAN-DECOMPOSE-3B1` retains contextual `have`; `PLAN-DECOMPOSE-3C` retains
-general explicit-placeholder refinement; `SIMP-5A/5B` retains propositional
-rewriting.
+At this boundary, `PLAN-DECOMPOSE-3B1` retained contextual `have`,
+`PLAN-DECOMPOSE-3C` retained general explicit-placeholder refinement, and
+`SIMP-5A/5B` retained propositional rewriting. Their later audit outcomes are
+recorded below.
 
 ### PLAN-DECOMPOSE-3B completion record
 
@@ -1344,8 +1347,9 @@ cut axiom, hidden declaration, theorem import, equality/rewrite behavior,
 constructor search, term/declaration parser, arbitrary host execution,
 filesystem policy expansion, network/cache/MCP/LSP, Lambdapi source,
 mathematical owner/rule, print/book, sibling repository, npm publication,
-GitHub Release, or hosted deployment change. General placeholder `refine`
-remains `PLAN-DECOMPOSE-3C`; propositional rewrite remains `SIMP-5A/5B`.
+GitHub Release, or hosted deployment change. At this boundary, general
+placeholder `refine` remained reserved for `PLAN-DECOMPOSE-3C`;
+propositional rewrite remains `SIMP-5A/5B`.
 
 ### PLAN-DECOMPOSE-3B1 completion record
 
@@ -1409,6 +1413,116 @@ the 74 focused tests, while the actual packed browser bundle is in
 book, npm publication, release, deployment, or sibling-repository operation
 was run.
 
+## PLAN-DECOMPOSE-3C Audit And Frozen 3C1 Macro Tranche
+
+Date: 2026-08-10
+
+Status: `PLAN-DECOMPOSE-3C` audit complete; `PLAN-DECOMPOSE-3C1` frozen and
+approved for bounded implementation under the standing self-approval and
+checkpoint policy.
+
+### Material findings
+
+1. Lean's `refine` elaborates syntax with fresh process-local metavariables,
+   assigns the main goal to the resulting term, and promotes the new metas to
+   goals. That is appropriate inside Lean's resident elaborator state, but it
+   is not a serializable emdash source contract: emdash metas deliberately
+   carry an opaque session identity and cannot appear in inert plans.
+2. Before contextual `have`, an arbitrary expression skeleton appeared to
+   require a new plan tag and refiner operation. `PLAN-DECOMPOSE-3B1B` removes
+   that necessity for placeholders declared in the selected goal context. For
+   bindings `h₁:T₁, ..., hₙ:Tₙ` and a meta-free Core-shaped template `E`, the
+   pure source expansion is
+
+   ```text
+   have h₁ : T₁ := proof₁
+   ...
+   have hₙ : Tₙ := proofₙ
+   exact E[h₁, ..., hₙ]
+   ```
+
+   Existing contextual substitution, retained-obligation reporting, and
+   final checker replay provide all semantics. A new `refine` plan tag would
+   merely duplicate those owners and force an unnecessary immediate v3
+   source/artifact migration.
+3. The useful authoring input is still not a host callback or a Core term with
+   fake names. It is a small immutable template AST with `core`, `placeholder`,
+   `application`, `call`, `pi`, and `lambda` nodes. `core` wraps an ordinary
+   meta-free Core subtree; `placeholder` refers to one explicitly declared
+   binding. The structural nodes are only enough to place placeholders among
+   the current complete Core grammar.
+4. Placeholder bindings are unique, explicitly ordered, and formed in the
+   selected goal context. Their types therefore cannot depend on binders
+   introduced inside the same template. Occurrences may appear repeatedly and
+   beneath template binders: lowering weakens root-context variables and maps
+   every repeated occurrence to the same nested-`have` bound variable. A hole
+   that genuinely depends on a newly introduced binder is authored by
+   composing `intro` and a nested refine macro at that goal, keeping scope
+   visible rather than encoding path-dependent hidden context.
+5. Explicit binding order is source goal order. Every binding must be used at
+   least once, every placeholder reference must resolve, all identifiers and
+   binder modes must be portable, and template/binding/proof data must be
+   finite, acyclic, and meta-free. Expansion returns an ordinary inspectable
+   plan immediately; it retains no template, callback, session, environment,
+   registry, or runtime goal handle.
+6. The representative ergonomic consumer is a higher-order skeleton whose
+   callee is a typed placeholder and whose argument is fixed Core, with a
+   second case sharing one placeholder at multiple positions. These would be
+   verbose manual `have` programs but need no new semantics. Complete and open
+   variants must replay identically to their direct base-plan expansion.
+
+### Frozen PLAN-DECOMPOSE-3C1 contract
+
+Add one browser-safe management-only module and profile:
+
+```text
+CORE_PROOF_REFINE_TEMPLATE_PROFILE
+  revision = emdash-proof-refine-template-v1
+
+coreProofPlanRefine(template, bindings, options?)
+  -> nested CoreProofPlanHave(... CoreProofPlanExact(...))
+```
+
+1. `bindings` contain an explicit `KernelBinder` and child proof plan; the
+   binder name is the placeholder identity. Names are unique and declaration
+   order is stable. Placeholder references may repeat, but unused or unknown
+   identities fail before returning a plan.
+2. The template has no meta node and never becomes Core or canonical source.
+   Lowering shifts ordinary root-context indices around the new `have`
+   binders, preserves indices belonging to template-local Pi/lambda binders,
+   and maps a placeholder occurrence under local depth `d` to its exact
+   shared fact index.
+3. The output contains only existing `have` and `exact` plan tags and is
+   validated through the ordinary plan validator. Execution, traces, named
+   holes, retained unused obligations, checking, artifacts, source round-trip,
+   and CLI projection remain exclusively owned by the v2 base-plan family.
+4. Publish the profile, template builders, and macro from the curated
+   browser-safe workspace package; add the exact implemented profile to an
+   AI-native capability record v5. The constructor macro remains v1. Proof
+   plan/document/state/artifact/source/workspace/research revisions and pins
+   do not change because canonical data sees only the already-versioned v2
+   expansion.
+5. Reject cycles, duplicate bindings, unknown or unused placeholders,
+   malformed plicity/variation, process-local metas, wrong proof-plan IDs,
+   and scope/type errors without checker-state mutation. No automatic
+   placeholder discovery, inference, reordering, or search is permitted.
+
+Focused acceptance covers byte/deep equality to a hand-written base-plan
+expansion, complete/open higher-order callee templates, repeated occurrence
+sharing, two-binding ordering, root-context shifting beneath a template
+binder, malformed/cyclic/meta-bearing inputs, direct source round-trip of the
+expanded output, capability and public-barrel visibility, typecheck,
+changed-file lint, workspace check, and packed ESM/CJS/strict-TypeScript/
+browser consumers. Under `D-PA-019`, no long root or repository aggregate is
+run unless omission becomes progress-blocking.
+
+Non-effects: no new Core expression, proof-plan tag, refiner/checker/session
+rule, canonical template/source decoder, proof/source/artifact/research
+revision or pin, declaration or term parser, arbitrary host execution,
+equality/rewrite behavior, theorem import, Lambdapi source, mathematical
+owner/rule, Node adapter, CLI, network/cache/MCP/LSP, print/book, sibling
+repository, npm publication, release, or deployment change.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -1439,6 +1553,7 @@ was run.
 | `D-PA-024` | Reject the proposed lambda-cut expansion of `have` after the focused checker probe. | `CoreProofRefiner.apply` must infer its callee, while the frozen `CoreChecker` intentionally rejects annotated-lambda inference; widening that checker or injecting a hidden declaration is outside the macro tranche. |
 | `D-PA-025` | Elaborate `have` by contextual meta-spine substitution and retain its fact as an explicit per-refiner source obligation until solved. | It produces ordinary finally checkable Core while preventing an unused continuation from silently erasing an open source task. |
 | `D-PA-026` | Perform one coordinated pre-release v2 source/artifact migration for contextual `have`; do not silently widen v1 or build an unused dual reader. | The new plan tag, trace operation, and reachability state affect exhaustive consumers, while npm is unpublished and no tracked canonical v1 development source exists. |
+| `D-PA-027` | Repartition general `refine` after contextual `have`: implement a pure root-scoped template macro and reject a new plan/refiner tag without a non-lowerable consumer. | Ordered typed placeholders now expand exactly to retained `have` obligations plus `exact`; keeping the template management-only avoids process metas and needless v3 artifact churn while preserving an explicit scope boundary. |
 
 ## Validation And Checkpoint Policy
 
