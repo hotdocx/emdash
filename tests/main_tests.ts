@@ -240,6 +240,7 @@ import './v3_2_pathind_fixed_source_review_tests';
 import './v3_2_pathind_fixed_source_proposal_v2_tests';
 import './v3_2_pathind_fixed_source_review_v2_tests';
 import './v3_2_pathind_fixed_source_proposal_v3_tests';
+import './v3_2_pathind_fixed_source_review_v3_tests';
 import './v3_2_product_review_demo_tests';
 import './v3_2_browser_directed_tests';
 import './v3_2_browser_reviewer_tests';

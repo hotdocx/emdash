@@ -20,9 +20,11 @@ corrected behavior-free proposal v2 at checkpoint `7413dd6` adds only active
 5/7/0/6, and is separately approved under delegated unattended authority with
 human supersession at review checkpoint `3421647`; measured faithful-signature
 compilation now supersedes that review at active displayed-functor object
-projection line 9177; corrected proposal v3 changes only the root-local
-boundary to 5/8/0/6 and awaits checkpoint plus separate review; no PathOut/
-PathInd profile or public export is yet qualified
+projection line 9177; corrected proposal v3 at checkpoint `bfe09e3` changes
+only the root-local boundary to 5/8/0/6 and is separately approved under
+delegated unattended authority with human supersession; only that root-local
+implementation is ready, and no PathOut/PathInd profile or public export is
+yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -184,7 +186,7 @@ named library presentation.
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
-| `PATHIND-TRUSTED-PROFILE-1C` | corrected proposal v3 awaiting checkpoint and separate review | completed 1B; superseded v2 checkpoints `7413dd6`/`3421647` and v1 checkpoints `cc639fc`/`2deae91` | Exact active signatures plus line 7865 reach the third FibCov projection, where missing active line 9177 leaves `Obj(Functord_cat)` versus `Transf`. V3 adds only that runtime bridge, yielding a non-authorizing root-only 5/8/0/6 boundary, one rho-section consumer, strict negatives, and nine bounded-oracle assertions. |
+| `PATHIND-TRUSTED-PROFILE-1C` | corrected proposal v3 separately reviewed; exact implementation ready | completed 1B; v3 proposal checkpoint `bfe09e3`; superseded v2 checkpoints `7413dd6`/`3421647` and v1 checkpoints `cc639fc`/`2deae91` | Exact active signatures plus line 7865 reach the third FibCov projection, where missing active line 9177 leaves `Obj(Functord_cat)` versus `Transf`. V3 adds only that runtime bridge; separate review authorizes the root-only 5/8/0/6 implementation, one rho-section consumer, strict negatives, and nine bounded-oracle assertions. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -1334,11 +1336,47 @@ git diff --check
 No Lambdapi or long repository aggregate was run for this immutable-data
 correction. Active source bytes, shared engines, package/workspace setup, and
 public surfaces are unchanged; focused drift, scope, authorization, static,
-and non-export gates directly cover it. Proposal v3 is non-authorizing, and
-semantic implementation remains paused until its rollback-safe checkpoint
-and separate immutable review under
-`H-TS-EMDASH-PATHIND-FIXED-SOURCE-03` /
-`D-TS-EMDASH-PATHIND-FIXED-SOURCE-003`.
+and non-export gates directly cover it. Proposal v3 remains non-authorizing and
+is frozen at checkpoint `bfe09e3`.
+
+The separate immutable review is
+[`src/v3_2/pathind_fixed_source_review_v3.ts`](../src/v3_2/pathind_fixed_source_review_v3.ts),
+with focused checks in
+[`tests/v3_2_pathind_fixed_source_review_v3_tests.ts`](../tests/v3_2_pathind_fixed_source_review_v3_tests.ts).
+Under `H-TS-EMDASH-PATHIND-FIXED-SOURCE-03` /
+`D-TS-EMDASH-PATHIND-FIXED-SOURCE-003`, it approves only proposal checkpoint
+`bfe09e3` through the user's standing unattended delegation, with later human
+supersession. It authorizes exact active Fibre signatures and only the
+root-local 5/8/0/6 implementation. Signature substitution, checker changes,
+alternate FibCov bodies, duplicate classifiers, internalized PathInd,
+transitivity, public presentation, active Lambdapi edits, integration, and
+release remain denied.
+
+Separate-review validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_fixed_source_review_v3.ts \
+  tests/v3_2_pathind_fixed_source_review_v3_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_fixed_source_proposal_v3_tests.ts \
+  tests/v3_2_pathind_fixed_source_review_v3_tests.ts
+  11 tests / 2 suites: 11 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi or long aggregate is relevant to this behavior-free review. Its
+review checkpoint is pending this bounded tranche. The next authorized action
+is only the corrected 5/8/0/6 root-local implementation with focused
+consumers, strict negatives, and the nine-assertion bounded oracle.
 
 ## Required Evidence For Implementation
 
