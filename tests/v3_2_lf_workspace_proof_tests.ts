@@ -22,6 +22,7 @@ import {
     coreLfQualifiedSymbol,
     coreLfTransferAbsentBody,
     coreProofPlanExact,
+    coreProofPlanHave,
     coreProofPlanHole,
     coreProofPlanIntro,
     createCoreLfDeclarationWorkspace,
@@ -294,6 +295,69 @@ const proofInput = (
     ),
     provenance: proofProvenance(9, 'AI-WORKSPACE-1B1 proof root'),
     fingerprint: fingerprint(moduleIds)
+});
+
+const contextualHaveProofInput = (
+    openFact = false
+): CoreLfWorkspaceProofDocumentInput => ({
+    ...proofInput(false),
+    plan: coreProofPlanIntro(
+        coreProofPlanHave(
+            kernelBinder(
+                'fact',
+                kernelFree(
+                    baseCoreName,
+                    proofProvenance(
+                        13,
+                        'PLAN-DECOMPOSE-3B1B source have type'
+                    )
+                ),
+                proofMode,
+                proofProvenance(
+                    13,
+                    'PLAN-DECOMPOSE-3B1B source have binder'
+                )
+            ),
+            openFact
+                ? coreProofPlanHole('source_fact', {
+                    provenance: proofProvenance(
+                        14,
+                        'PLAN-DECOMPOSE-3B1B source have proof hole'
+                    ),
+                    expectation: { contextDepth: 1 }
+                })
+                : coreProofPlanExact(kernelBound(
+                    0,
+                    proofProvenance(
+                        14,
+                        'PLAN-DECOMPOSE-3B1B source have proof'
+                    )
+                )),
+            coreProofPlanExact(kernelBound(
+                openFact ? 1 : 0,
+                proofProvenance(
+                    15,
+                    openFact
+                        ? 'PLAN-DECOMPOSE-3B1B source ignores fact'
+                        : 'PLAN-DECOMPOSE-3B1B source have body'
+                )
+            )),
+            {
+                id: 'source_contextual_have',
+                provenance: proofProvenance(
+                    13,
+                    'PLAN-DECOMPOSE-3B1B source have'
+                )
+            }
+        ),
+        {
+            name: 'value',
+            provenance: proofProvenance(
+                11,
+                'PLAN-DECOMPOSE-3B1B source intro'
+            )
+        }
+    )
 });
 
 const expectWorkspaceProofError = (
@@ -748,6 +812,55 @@ describe('DEV-CLI-2A canonical proof-development source', () => {
         assertDeepFrozen(reconstructed.plan);
     });
 
+    it('round-trips and checks the contextual have source tag', () => {
+        const completePlan = createCoreLfProofDevelopment({
+            revision: 'proof-development-have-source-fixture-1',
+            workspace: compileWorkspace().plan,
+            proofs: [contextualHaveProofInput()]
+        });
+        const sourceText = serializeCoreLfProofDevelopmentSourceSnapshot(
+            createCoreLfProofDevelopmentSourceSnapshot(completePlan)
+        );
+        const reconstructed =
+            parseCoreLfProofDevelopmentSourceText(sourceText);
+        const proofPlan = reconstructed.plan.proofs[0].plan;
+
+        assert.equal(proofPlan.tag, 'intro');
+        assert.equal(proofPlan.body.tag, 'have');
+        if (proofPlan.body.tag !== 'have') {
+            throw new Error('Expected reconstructed contextual have plan');
+        }
+        assert.equal(proofPlan.body.binding.name, 'fact');
+        assert.equal(proofPlan.body.binding.mode.variation, 'functorial');
+        assert.equal(
+            compileCoreLfProofDevelopment(reconstructed.plan)
+                .artifact.status,
+            'complete'
+        );
+
+        const openPlan = createCoreLfProofDevelopment({
+            revision: 'proof-development-have-source-fixture-2',
+            workspace: compileWorkspace().plan,
+            proofs: [contextualHaveProofInput(true)]
+        });
+        const openSourceText =
+            serializeCoreLfProofDevelopmentSourceSnapshot(
+                createCoreLfProofDevelopmentSourceSnapshot(openPlan)
+            );
+        const openCompilation = compileCoreLfProofDevelopment(
+            parseCoreLfProofDevelopmentSourceText(openSourceText).plan
+        );
+        assert.equal(openCompilation.artifact.status, 'incomplete');
+        assert.deepEqual(
+            openCompilation.goals.map(entry => [
+                entry.goal.id,
+                entry.goal.reachability,
+                entry.goal.occurrenceCount
+            ]),
+            [['source_fact', 'retained-source-obligation', 0]]
+        );
+    });
+
     it('canonicalizes module and proof input permutations byte-identically', () => {
         const first = serializeCoreLfProofDevelopmentSourceSnapshot(
             createCoreLfProofDevelopmentSourceSnapshot(sourcePlan(
@@ -772,6 +885,16 @@ describe('DEV-CLI-2A canonical proof-development source', () => {
         const sourceText =
             serializeCoreLfProofDevelopmentSourceSnapshot(snapshot);
         const clone = (): any => JSON.parse(sourceText);
+
+        const staleRevision = clone();
+        staleRevision.revision =
+            'emdash-lf-proof-development-source-v1';
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(
+                staleRevision
+            ),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
 
         expectSourceError(
             () => parseCoreLfProofDevelopmentSourceText('{'),

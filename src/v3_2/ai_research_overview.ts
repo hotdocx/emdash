@@ -16,7 +16,7 @@ import {
 } from './research_document';
 
 export const CORE_AI_RESEARCH_OVERVIEW_PROFILE = Object.freeze({
-    revision: 'emdash-ai-research-overview-v1' as const,
+    revision: 'emdash-ai-research-overview-v2' as const,
     documentId: 'emdash-v3-2-overview' as const,
     documentRevision: '0.2.0-dev' as const,
     managementSourcePath:
@@ -31,8 +31,8 @@ export const CORE_AI_RESEARCH_OVERVIEW_PROFILE = Object.freeze({
         'sha256:1465956c04dc3e413034cbe697ead1618' +
         'c9898b33132919533f6967ecd8af2dd',
     proofProfileSha256:
-        'sha256:07cfc3cae978d2add44148582502a16b4' +
-        'e5b55e61814ada6b57ba4394223646c',
+        'sha256:9d0e0b850abf2ecddd172223bbeeb8a6' +
+        '183264265ede5f153da4d72660a7d9f3',
     diagramSelectorRevision:
         'trimmed-arrowgram-body-sha256-v1' as const,
     proofModuleId: CORE_AI_PROOF_DEMO_MODULE_ID,
@@ -138,14 +138,14 @@ export const CORE_AI_RESEARCH_OVERVIEW_PLAN:
         proof(
             'section-7.proof.complete-identity',
             'complete_identity',
-            'sha256:477ac1e6bbbf912fb0e9a38d8260c5bd' +
-                '6fd35779599cbd71257340000215be2c'
+            'sha256:d40277afef2b6ab7876e0dc3724b83d7' +
+                '86bd40384854ec1d5b34e7b572c459f9'
         ),
         proof(
             'section-7.proof.open-identity',
             'open_identity',
-            'sha256:83b39e97ea0a5e24f86bc29e4ecb890e' +
-                'a4f2828cb2d57e2c6b4a1ece0bbae373'
+            'sha256:82f5fe01bff4b5e382ead0b0edc860a1' +
+                'dbd19d77a22ee0053df319f481730b4a'
         )
     ])
 });

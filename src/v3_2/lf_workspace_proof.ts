@@ -37,9 +37,9 @@ import {
 } from './proof_plan';
 
 export const CORE_LF_WORKSPACE_PROOF_PROFILE = Object.freeze({
-    revision: 'emdash-lf-workspace-proof-v1' as const,
-    compilerRevision: 'emdash-lf-workspace-proof-compiler-v1' as const,
-    artifactRevision: 'emdash-lf-workspace-proof-artifact-v1' as const,
+    revision: 'emdash-lf-workspace-proof-v2' as const,
+    compilerRevision: 'emdash-lf-workspace-proof-compiler-v2' as const,
+    artifactRevision: 'emdash-lf-workspace-proof-artifact-v2' as const,
     workspaceProfileRevision:
         CORE_LF_DECLARATION_WORKSPACE_PROFILE.revision,
     proofProfileRevision: CORE_PROOF_DOCUMENT_PROFILE.revision,

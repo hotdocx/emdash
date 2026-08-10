@@ -37,12 +37,12 @@ import {
 } from './session';
 
 export const CORE_PROOF_DOCUMENT_PROFILE = Object.freeze({
-    revision: 'emdash-v3.2-ai-proof-1' as const,
-    compilerRevision: 'emdash-proof-document-compiler-v1' as const,
+    revision: 'emdash-v3.2-ai-proof-2' as const,
+    compilerRevision: 'emdash-proof-document-compiler-v2' as const,
     explicitCoreRevision: 'EMDASH-CORE-SEXP-1' as const,
-    proofStateRevision: 'emdash-proof-state-v1' as const,
-    artifactRevision: 'emdash-proof-artifact-v1' as const,
-    jsonlRevision: 'emdash-proof-jsonl-v1' as const,
+    proofStateRevision: 'emdash-proof-state-v2' as const,
+    artifactRevision: 'emdash-proof-artifact-v2' as const,
+    jsonlRevision: 'emdash-proof-jsonl-v2' as const,
     checker: 'CoreChecker' as const,
     productionLambdapiDependency: false as const,
     nodeBuiltinDependency: false as const

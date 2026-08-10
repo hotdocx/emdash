@@ -14,12 +14,14 @@ import {
     CoreProofPlan,
     CoreProofPlanError,
     CoreProofRefiner,
+    CORE_PROOF_PLAN_PROFILE,
     CORE_PROOF_PLAN_MACRO_PROFILE,
     KernelExpression,
     binderMode,
     coreProofPlanApply,
     coreProofPlanConstructor,
     coreProofPlanExact,
+    coreProofPlanHave,
     coreProofPlanHole,
     coreProofPlanIntro,
     executeCoreProofPlan,
@@ -383,6 +385,203 @@ describe('TypeScript v3.2 AI-PROOF-1 proof plans', () => {
         );
     });
 
+    it('keeps an unused contextual have fact as a named source goal', () => {
+        const { session, checker } = proofFixture();
+        const root = freshRoot(session, typeA(39), 39);
+        const plan = coreProofPlanHave(
+            kernelBinder(
+                'fact',
+                typeB(40),
+                explicitNatural,
+                because(40, 'PLAN-DECOMPOSE-3B1B have binder')
+            ),
+            coreProofPlanHole('fact_proof', {
+                provenance: because(
+                    41,
+                    'PLAN-DECOMPOSE-3B1B retained fact hole'
+                ),
+                expectation: {
+                    contextDepth: 0,
+                    target: typeB(41)
+                }
+            }),
+            coreProofPlanExact(free(
+                'plan_z',
+                42,
+                'PLAN-DECOMPOSE-3B1B body ignores fact'
+            )),
+            { id: 'contextual_have' }
+        );
+
+        const execution = executeCoreProofPlan(
+            new CoreProofRefiner(checker, root),
+            root.identity,
+            plan
+        );
+
+        assert.equal(CORE_PROOF_PLAN_PROFILE.revision, 'emdash-proof-plan-v2');
+        assert.deepEqual(CORE_PROOF_PLAN_PROFILE.tags, [
+            'exact',
+            'intro',
+            'apply',
+            'have',
+            'hole'
+        ]);
+        assert.equal(execution.snapshot.status, 'incomplete');
+        assert.deepEqual(
+            execution.trace.map(step => step.operation),
+            ['have', 'hole', 'exact']
+        );
+        assert.equal(execution.trace[0].introducedGoalCount, 2);
+        assert.deepEqual(
+            execution.snapshot.goals.map(goal => goal.id),
+            ['fact_proof']
+        );
+        assert.equal(
+            execution.snapshot.goals[0].reachability,
+            'retained-source-obligation'
+        );
+        assert.equal(execution.snapshot.goals[0].occurrenceCount, 0);
+        assert.equal(execution.snapshot.term, 'plan_z');
+    });
+
+    it('substitutes a checked contextual have fact into its body', () => {
+        const { session, checker } = proofFixture();
+        const root = freshRoot(session, typeA(43), 43);
+        const plan = coreProofPlanHave(
+            kernelBinder(
+                'fact',
+                typeA(44),
+                explicitFunctorial,
+                because(44, 'PLAN-DECOMPOSE-3B1B used have binder')
+            ),
+            coreProofPlanExact(free(
+                'plan_z',
+                45,
+                'PLAN-DECOMPOSE-3B1B fact proof'
+            )),
+            coreProofPlanExact(bound(
+                0,
+                46,
+                'PLAN-DECOMPOSE-3B1B contextual fact use'
+            )),
+            { id: 'used_contextual_have' }
+        );
+
+        const execution = executeCoreProofPlan(
+            new CoreProofRefiner(checker, root),
+            root.identity,
+            plan
+        );
+
+        assert.equal(execution.snapshot.status, 'complete');
+        assert.deepEqual(execution.snapshot.goals, []);
+        assert.deepEqual(
+            execution.trace.map(step => step.operation),
+            ['have', 'exact', 'exact']
+        );
+        assert.equal(
+            kernelExpressionEquals(
+                execution.term,
+                free('plan_z', 47, 'PLAN-DECOMPOSE-3B1B expected term')
+            ),
+            true
+        );
+        assert.doesNotThrow(() => checker.check(
+            session.rootContext,
+            execution.term,
+            typeA(47)
+        ));
+    });
+
+    it('preserves a contextual have under dependent outer binders', () => {
+        const familyAt = (index: number, line: number) => call(
+            free('plan_P', line, 'PLAN-DECOMPOSE-3B1B family'),
+            [{
+                plicity: 'explicit',
+                value: bound(
+                    index,
+                    line,
+                    'PLAN-DECOMPOSE-3B1B family index'
+                )
+            }],
+            line,
+            'PLAN-DECOMPOSE-3B1B family application'
+        );
+        const dependentType = pi(
+            'index',
+            typeA(48),
+            explicitFunctorial,
+            pi(
+                'witness',
+                familyAt(0, 48),
+                explicitNatural,
+                familyAt(1, 48),
+                48,
+                'PLAN-DECOMPOSE-3B1B dependent witness'
+            ),
+            48,
+            'PLAN-DECOMPOSE-3B1B dependent have target'
+        );
+        const { session, checker } = proofFixture();
+        const root = freshRoot(session, dependentType, 48);
+        const plan = coreProofPlanIntro(
+            coreProofPlanIntro(
+                coreProofPlanHave(
+                    kernelBinder(
+                        'fact',
+                        familyAt(1, 51),
+                        explicitNatural,
+                        because(
+                            51,
+                            'PLAN-DECOMPOSE-3B1B dependent fact binder'
+                        )
+                    ),
+                    coreProofPlanExact(bound(
+                        0,
+                        52,
+                        'PLAN-DECOMPOSE-3B1B dependent witness proof'
+                    )),
+                    coreProofPlanExact(bound(
+                        0,
+                        53,
+                        'PLAN-DECOMPOSE-3B1B dependent fact body'
+                    ))
+                ),
+                {
+                    name: 'witness',
+                    provenance: because(
+                        50,
+                        'PLAN-DECOMPOSE-3B1B witness intro'
+                    )
+                }
+            ),
+            {
+                name: 'index',
+                provenance: because(
+                    49,
+                    'PLAN-DECOMPOSE-3B1B index intro'
+                )
+            }
+        );
+
+        const execution = executeCoreProofPlan(
+            new CoreProofRefiner(checker, root),
+            root.identity,
+            plan
+        );
+        assert.equal(execution.snapshot.status, 'complete');
+        assert.deepEqual(
+            execution.trace.map(step => step.operation),
+            ['intro', 'intro', 'have', 'exact', 'exact']
+        );
+        assert.doesNotThrow(() => checker.check(
+            session.rootContext,
+            execution.term,
+            dependentType
+        ));
+    });
+
     it('serializes dependent open goals with stable source names', () => {
         const makeExecution = () => {
             const { session, checker } = proofFixture();
@@ -613,6 +812,27 @@ describe('TypeScript v3.2 AI-PROOF-1 proof plans', () => {
             ),
             'DUPLICATE_GOAL_ID'
         );
+        checkRejectedPlan(
+            coreProofPlanHave(
+                kernelBinder(
+                    'not portable',
+                    typeA(85),
+                    explicitFunctorial,
+                    because(85, 'PLAN-DECOMPOSE-3B1B invalid have binder')
+                ),
+                coreProofPlanExact(free(
+                    'plan_z',
+                    86,
+                    'PLAN-DECOMPOSE-3B1B invalid have proof'
+                )),
+                coreProofPlanExact(free(
+                    'plan_z',
+                    87,
+                    'PLAN-DECOMPOSE-3B1B invalid have body'
+                ))
+            ),
+            'INVALID_BINDER'
+        );
     });
 
     it('rejects process-local metas in otherwise inert source plans', () => {
@@ -637,5 +857,38 @@ describe('TypeScript v3.2 AI-PROOF-1 proof plans', () => {
         assert.equal(session.metavariables.length, 2);
         assert.equal(session.metavariable(root).solution, undefined);
         assert.equal(session.metavariable(hidden).solution, undefined);
+
+        const hiddenBinderPlan = coreProofPlanHave(
+            kernelBinder(
+                'fact',
+                hidden,
+                explicitFunctorial,
+                because(92, 'PLAN-DECOMPOSE-3B1B hidden binder type')
+            ),
+            coreProofPlanExact(free(
+                'plan_z',
+                93,
+                'PLAN-DECOMPOSE-3B1B hidden binder proof'
+            )),
+            coreProofPlanExact(free(
+                'plan_z',
+                94,
+                'PLAN-DECOMPOSE-3B1B hidden binder body'
+            ))
+        );
+        assert.throws(
+            () => executeCoreProofPlan(
+                refiner,
+                root.identity,
+                hiddenBinderPlan
+            ),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreProofPlanError);
+                assert.equal(error.code, 'NON_SERIALIZABLE_EXPRESSION');
+                return true;
+            }
+        );
+        assert.equal(session.metavariables.length, 2);
+        assert.equal(session.metavariable(root).solution, undefined);
     });
 });

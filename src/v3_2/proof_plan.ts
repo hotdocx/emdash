@@ -8,6 +8,7 @@
 
 import {
     BinderMode,
+    KernelBinder,
     KernelExpression,
     KernelMetaIdentity,
     Provenance,
@@ -22,6 +23,24 @@ import {
     CoreProofTactic,
     formatCoreProofExpression
 } from './proof';
+
+export const CORE_PROOF_PLAN_PROFILE = Object.freeze({
+    revision: 'emdash-proof-plan-v2' as const,
+    tags: Object.freeze([
+        'exact',
+        'intro',
+        'apply',
+        'have',
+        'hole'
+    ] as const),
+    goalOrder: 'retained-source-first-then-term-reachable' as const,
+    retainedObligationScope: 'one-refiner-replay' as const,
+    addsCoreExpressionTags: false as const,
+    retainsCallbacks: false as const,
+    retainsMetavariables: false as const,
+    nodeBuiltinDependency: false as const,
+    productionLambdapiDependency: false as const
+});
 
 export const CORE_PROOF_PLAN_MACRO_PROFILE = Object.freeze({
     revision: 'emdash-proof-plan-macros-v1' as const,
@@ -73,6 +92,13 @@ export interface CoreProofPlanApply extends CoreProofPlanNodeBase {
     readonly premises: readonly CoreProofPlan[];
 }
 
+export interface CoreProofPlanHave extends CoreProofPlanNodeBase {
+    readonly tag: 'have';
+    readonly binding: KernelBinder;
+    readonly proof: CoreProofPlan;
+    readonly body: CoreProofPlan;
+}
+
 export interface CoreProofPlanHole extends CoreProofPlanNodeBase {
     readonly tag: 'hole';
     readonly goalId: string;
@@ -83,6 +109,7 @@ export type CoreProofPlan =
     | CoreProofPlanExact
     | CoreProofPlanIntro
     | CoreProofPlanApply
+    | CoreProofPlanHave
     | CoreProofPlanHole;
 
 export interface CoreProofPlanNodeOptions {
@@ -147,6 +174,23 @@ export const coreProofPlanHole = (
         : undefined
 });
 
+export const coreProofPlanHave = (
+    binding: KernelBinder,
+    proof: CoreProofPlan,
+    body: CoreProofPlan,
+    options: CoreProofPlanNodeOptions = {}
+): CoreProofPlanHave => Object.freeze({
+    tag: 'have',
+    id: options.id,
+    provenance: options.provenance ?? binding.provenance,
+    binding: Object.freeze({
+        ...binding,
+        mode: Object.freeze({ ...binding.mode })
+    }),
+    proof,
+    body
+});
+
 /**
  * User-facing constructor syntax with no second semantic implementation.
  * Constructor selection stays explicit; checking remains ordinary `apply`.
@@ -163,6 +207,7 @@ export type CoreProofPlanErrorCode =
     | 'DUPLICATE_GOAL_ID'
     | 'CYCLIC_PLAN'
     | 'NON_SERIALIZABLE_EXPRESSION'
+    | 'INVALID_BINDER'
     | 'INVALID_EXPECTATION'
     | 'GOAL_NOT_REACHABLE'
     | 'GOAL_ARITY_MISMATCH'
@@ -315,6 +360,30 @@ export function validateCoreProofPlan(plan: CoreProofPlan): void {
                     visit(premise, `${structuralPath}.premise.${index}`)
                 );
                 break;
+            case 'have': {
+                if (
+                    !/^[A-Za-z][A-Za-z0-9_]*$/u.test(node.binding.name) ||
+                    (node.binding.mode.plicity !== 'explicit' &&
+                        node.binding.mode.plicity !== 'implicit') ||
+                    (node.binding.mode.variation !== 'functorial' &&
+                        node.binding.mode.variation !== 'natural' &&
+                        node.binding.mode.variation !== 'object-only')
+                ) {
+                    fail(
+                        'INVALID_BINDER',
+                        node,
+                        structuralPath,
+                        `Have node '${nodeId}' has an invalid Core binder`
+                    );
+                }
+                validateExpression(
+                    node.binding.type,
+                    'Have binder type'
+                );
+                visit(node.proof, `${structuralPath}.proof`);
+                visit(node.body, `${structuralPath}.body`);
+                break;
+            }
             case 'hole': {
                 if (!SAFE_PLAN_ID.test(node.goalId)) {
                     fail(
@@ -409,12 +478,13 @@ export interface CoreProofPlanGoalSnapshot {
     readonly context: readonly CoreProofPlanContextBindingSnapshot[];
     readonly target: string;
     readonly occurrenceCount: number;
+    readonly reachability: CoreProofGoal['reachability'];
     readonly declarationProvenance: CoreProofPlanProvenanceSnapshot;
     readonly firstOccurrenceProvenance: CoreProofPlanProvenanceSnapshot;
 }
 
 export interface CoreProofPlanStateSnapshot {
-    readonly revision: 'emdash-proof-state-v1';
+    readonly revision: 'emdash-proof-state-v2';
     readonly status: CoreProofState['status'];
     readonly term: string;
     readonly goals: readonly CoreProofPlanGoalSnapshot[];
@@ -652,6 +722,47 @@ export function executeCoreProofPlan(
                 ));
                 return;
             }
+            case 'have': {
+                reachableGoal(refiner, identity, node, nodeId);
+                const result = refiner.have(
+                    identity,
+                    node.binding,
+                    node.provenance
+                );
+                if (result.introducedGoals.length !== 2) {
+                    throw new CoreProofPlanError(
+                        'GOAL_ARITY_MISMATCH',
+                        nodeId,
+                        node.provenance,
+                        `Proof have '${nodeId}' produced ` +
+                        `${result.introducedGoals.length} goals; expected ` +
+                        'exactly one fact and one continuation goal'
+                    );
+                }
+                trace.push(traceStep(
+                    nodeId,
+                    'have',
+                    result.state,
+                    result.introducedGoals.length
+                ));
+                const children = [node.proof, node.body] as const;
+                const paths = [
+                    `${structuralPath}.proof`,
+                    `${structuralPath}.body`
+                ] as const;
+                result.introducedGoals.forEach((goal, index) =>
+                    nodeNamesByMeta.set(
+                        goal.identity.index,
+                        effectiveNodeId(children[index], paths[index])
+                    )
+                );
+                children.forEach((child, index) => run(
+                    result.introducedGoals[index].identity,
+                    child,
+                    paths[index]
+                ));
+                return;
+            }
             case 'hole': {
                 const goal = reachableGoal(
                     refiner,
@@ -750,6 +861,7 @@ export function executeCoreProofPlan(
                 stableMetaName
             ),
             occurrenceCount: goal.occurrenceCount,
+            reachability: goal.reachability,
             declarationProvenance: snapshotProvenance(
                 goal.declarationProvenance,
                 stableMetaNameByIndex
@@ -763,7 +875,7 @@ export function executeCoreProofPlan(
 
     const frozenTrace = Object.freeze([...trace]);
     const snapshot: CoreProofPlanStateSnapshot = Object.freeze({
-        revision: 'emdash-proof-state-v1',
+        revision: 'emdash-proof-state-v2',
         status: state.status,
         term: formatCoreProofExpression(state.term, stableMetaName),
         goals,

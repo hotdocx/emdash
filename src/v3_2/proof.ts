@@ -15,8 +15,10 @@ import {
     isCoreKind
 } from './checker';
 import {
+    KernelBinder,
     KernelExpression,
     KernelMetaIdentity,
+    KernelMetaVariable,
     Provenance,
     formatSourceSpan,
     kernelBinder,
@@ -25,6 +27,8 @@ import {
     kernelInstantiate,
     kernelLambda,
     kernelMeta,
+    kernelShift,
+    kernelUniverse,
     provenance
 } from './kernel';
 import {
@@ -40,6 +44,8 @@ export interface CoreProofGoal {
     readonly declarationProvenance: Provenance;
     readonly firstOccurrenceProvenance: Provenance;
     readonly occurrenceCount: number;
+    readonly reachability:
+        'term-reachable' | 'retained-source-obligation';
 }
 
 export interface CoreProofState {
@@ -211,7 +217,8 @@ export function inspectCoreProofState(
             type: session.zonk(goal.entry.type),
             declarationProvenance: goal.entry.provenance,
             firstOccurrenceProvenance: goal.firstOccurrenceProvenance,
-            occurrenceCount: goal.occurrenceCount
+            occurrenceCount: goal.occurrenceCount,
+            reachability: 'term-reachable' as const
         }))
     );
 
@@ -257,7 +264,7 @@ export class CoreProofRefinementError extends Error {
     }
 }
 
-export type CoreProofTactic = 'exact' | 'intro' | 'apply';
+export type CoreProofTactic = 'exact' | 'intro' | 'apply' | 'have';
 
 export interface CoreProofRefinementResult {
     readonly tactic: CoreProofTactic;
@@ -276,12 +283,16 @@ const derived = (
 );
 
 /**
- * Checked, session-local refinement of goals reachable from one Core root.
+ * Checked, session-local refinement of one Core root and its explicit
+ * retained source obligations.
  *
  * The root stays immutable. Solutions live only in the checker's session,
  * and every tactic is failure-atomic through `withTransaction`.
  */
 export class CoreProofRefiner {
+    private readonly retainedObligations =
+        new Map<number, KernelMetaVariable>();
+
     constructor(
         public readonly checker: CoreChecker,
         public readonly root: KernelExpression
@@ -294,7 +305,58 @@ export class CoreProofRefiner {
     }
 
     inspect(): CoreProofState {
-        return inspectCoreProofState(this.session, this.root);
+        const reachable = inspectCoreProofState(this.session, this.root);
+        const reachableByIndex = new Map(reachable.goals.map(goal => [
+            goal.identity.index,
+            goal
+        ] as const));
+        const retained: CoreProofGoal[] = [];
+
+        for (const meta of this.retainedObligations.values()) {
+            const entry = this.session.metavariable(meta);
+            if (entry.solution !== undefined) continue;
+            const existing = reachableByIndex.get(entry.identity.index);
+            if (existing !== undefined) {
+                retained.push(existing);
+                reachableByIndex.delete(entry.identity.index);
+                continue;
+            }
+            retained.push(Object.freeze({
+                identity: entry.identity,
+                contextDepth: entry.creationDepth,
+                context: entry.context,
+                type: this.session.zonk(entry.type),
+                declarationProvenance: entry.provenance,
+                firstOccurrenceProvenance: meta.provenance,
+                occurrenceCount: 0,
+                reachability: 'retained-source-obligation' as const
+            }));
+        }
+
+        const goals = Object.freeze([
+            ...retained,
+            ...reachable.goals.filter(goal =>
+                reachableByIndex.has(goal.identity.index)
+            )
+        ]);
+        return Object.freeze({
+            status: goals.length === 0 ? 'complete' : 'incomplete',
+            term: reachable.term,
+            goals
+        });
+    }
+
+    private withTransaction<T>(operation: () => T): T {
+        const retained = new Map(this.retainedObligations);
+        try {
+            return this.session.withTransaction(operation);
+        } catch (error: unknown) {
+            this.retainedObligations.clear();
+            retained.forEach((meta, index) =>
+                this.retainedObligations.set(index, meta)
+            );
+            throw error;
+        }
     }
 
     private reachableGoal(
@@ -311,7 +373,7 @@ export class CoreProofRefiner {
             'GOAL_NOT_REACHABLE',
             nodeProvenance,
             `Metavariable ?m${identity.index} is not an unsolved goal ` +
-            'reachable from this proof root'
+            'tracked by this proof refiner'
         );
     }
 
@@ -335,7 +397,7 @@ export class CoreProofRefiner {
         nodeProvenance: Provenance,
         build: (goal: CoreProofGoal) => KernelExpression
     ): CoreProofRefinementResult {
-        return this.session.withTransaction(() => {
+        return this.withTransaction(() => {
             const before = this.inspect();
             const goal = this.reachableGoal(
                 before,
@@ -431,6 +493,63 @@ export class CoreProofRefiner {
                     goal.context,
                     refinement,
                     expected
+                ).term;
+            }
+        );
+    }
+
+    /**
+     * Introduce a checked local fact and a continuation goal.
+     *
+     * The old goal is solved by contextual meta-spine substitution. Retaining
+     * the fact separately ensures that an unused continuation cannot erase an
+     * explicit source obligation before that obligation has been solved.
+     */
+    have(
+        identity: KernelMetaIdentity,
+        binding: KernelBinder,
+        nodeProvenance: Provenance = binding.provenance
+    ): CoreProofRefinementResult {
+        return this.refine(
+            'have',
+            identity,
+            nodeProvenance,
+            goal => {
+                const bindingType = this.checker.check(
+                    goal.context,
+                    binding.type,
+                    kernelUniverse(derived(
+                        `have binder '${binding.name}' must inhabit TYPE`,
+                        binding.provenance
+                    ))
+                ).term;
+                const bodyContext = goal.context.extend({
+                    name: binding.name,
+                    type: bindingType,
+                    mode: binding.mode,
+                    provenance: binding.provenance
+                });
+                const fact = this.session.freshMeta(
+                    goal.context,
+                    bindingType,
+                    derived(
+                        `have fact for ?m${identity.index}`,
+                        nodeProvenance
+                    )
+                );
+                const body = this.session.freshMeta(
+                    bodyContext,
+                    kernelShift(goal.type, 1),
+                    derived(
+                        `have continuation for ?m${identity.index}`,
+                        nodeProvenance
+                    )
+                );
+                this.retainedObligations.set(fact.identity.index, fact);
+                return this.checker.checkRefinement(
+                    goal.context,
+                    kernelInstantiate(body, fact),
+                    goal.type
                 ).term;
             }
         );

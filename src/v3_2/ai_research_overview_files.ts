@@ -38,9 +38,9 @@ const KIB = 1024;
 const MIB = 1024 * KIB;
 
 export const CORE_AI_RESEARCH_OVERVIEW_FILES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-research-overview-files-v1' as const,
+    revision: 'emdash-ai-research-overview-files-v2' as const,
     snapshotRevision:
-        'emdash-ai-research-overview-files-snapshot-v1' as const,
+        'emdash-ai-research-overview-files-snapshot-v2' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     encoding: 'utf-8' as const,
     managementProfileRevision:
@@ -49,8 +49,8 @@ export const CORE_AI_RESEARCH_OVERVIEW_FILES_PROFILE = Object.freeze({
     maximumDocumentSourceBytes: 4 * MIB,
     maximumProofSourceBytes: 2 * MIB,
     managementSourceSha256:
-        'sha256:b970948a097b6d9ff50e0fe290c6cc05' +
-        '454e83c8f7d576039d7a2ec9828134d3',
+        'sha256:c53509b6a38db93fe9d00730c51fa621' +
+        'c566fdba36c877500c0848b7c2705841',
     proofSourceSha256:
         CORE_AI_RESEARCH_OVERVIEW_PROFILE.proofSourceSha256,
     readsFixedFiles: true as const,

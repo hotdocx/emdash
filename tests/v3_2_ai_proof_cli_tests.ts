@@ -75,6 +75,7 @@ import {
     CORE_PROOF_DOCUMENT_PROFILE
 } from '../src/v3_2/proof_document';
 import {
+    CORE_PROOF_PLAN_PROFILE,
     CORE_PROOF_PLAN_MACRO_PROFILE
 } from '../src/v3_2/proof_plan';
 import {
@@ -452,6 +453,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assert.equal(
             revisions.get('proof-document'),
             CORE_PROOF_DOCUMENT_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('proof-plan'),
+            CORE_PROOF_PLAN_PROFILE.revision
         );
         assert.equal(
             revisions.get('proof-plan-macros'),

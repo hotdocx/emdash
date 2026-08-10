@@ -28,6 +28,7 @@ import {
     materializeCoreLfMountedProofDevelopment
 } from '../src/v3_2/lf_proof_development_store';
 import {
+    CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
     parseCoreLfProofDevelopmentSourceText
 } from '../src/v3_2/lf_proof_development_source';
 
@@ -111,6 +112,11 @@ describe('DEV-CLI-2B mounted proof-development source', () => {
             assert.equal(
                 CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE.executesHostSource,
                 false
+            );
+            assert.equal(
+                CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE
+                    .sourceProfileRevision,
+                CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision
             );
         });
     });
@@ -253,7 +259,10 @@ describe('DEV-CLI-2B proof-development commands', () => {
                     kind: string;
                     moduleId?: string;
                     declarationId?: string;
-                    goal?: { id: string };
+                    goal?: {
+                        id: string;
+                        reachability: string;
+                    };
                 }
             );
             assert.deepEqual(
@@ -261,6 +270,10 @@ describe('DEV-CLI-2B proof-development commands', () => {
                 ['proof-development-summary', 'proof-development-goal']
             );
             assert.equal(records[1].goal?.id, 'body');
+            assert.equal(
+                records[1].goal?.reachability,
+                'term-reachable'
+            );
             assert.doesNotMatch(goals.stdout, /\?m\d|session|Symbol/u);
             assert.doesNotMatch(goals.stdout, new RegExp(
                 projectRoot.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&'),
@@ -443,6 +456,11 @@ describe('DEV-CLI-2B proof-development commands', () => {
             assert.equal(
                 CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.retainsCheckerSession,
                 false
+            );
+            assert.equal(
+                CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE
+                    .mountedProfileRevision,
+                CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE.revision
             );
         });
     });

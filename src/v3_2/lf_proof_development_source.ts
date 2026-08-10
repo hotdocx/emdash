@@ -26,6 +26,7 @@ import {
     CoreProofPlan,
     coreProofPlanApply,
     coreProofPlanExact,
+    coreProofPlanHave,
     coreProofPlanHole,
     coreProofPlanIntro,
     validateCoreProofPlan
@@ -60,7 +61,7 @@ import {
 } from './lf_proof_development';
 
 export const CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE = Object.freeze({
-    revision: 'emdash-lf-proof-development-source-v1' as const,
+    revision: 'emdash-lf-proof-development-source-v2' as const,
     developmentProfileRevision:
         CORE_LF_PROOF_DEVELOPMENT_PROFILE.revision,
     workspaceProfileRevision:
@@ -708,6 +709,39 @@ const decodePlan = (
                     ),
                     { id, provenance: nodeProvenance }
                 );
+            case 'have': {
+                assertKeys(
+                    record,
+                    ['tag', 'provenance', 'binding', 'proof', 'body'],
+                    ['id'],
+                    path
+                );
+                const bindingPath = `${path}.binding`;
+                const binding = recordAt(record.binding, bindingPath);
+                assertKeys(
+                    binding,
+                    ['name', 'type', 'mode', 'provenance'],
+                    [],
+                    bindingPath
+                );
+                return coreProofPlanHave(
+                    kernelBinder(
+                        stringAt(binding.name, `${bindingPath}.name`),
+                        decodeExpression(
+                            binding.type,
+                            `${bindingPath}.type`
+                        ),
+                        decodeMode(binding.mode, `${bindingPath}.mode`),
+                        decodeProvenance(
+                            binding.provenance,
+                            `${bindingPath}.provenance`
+                        )
+                    ),
+                    decodePlan(record.proof, `${path}.proof`, active),
+                    decodePlan(record.body, `${path}.body`, active),
+                    { id, provenance: nodeProvenance }
+                );
+            }
             case 'hole': {
                 assertKeys(
                     record,
@@ -806,6 +840,11 @@ const decodeProof = (
                 node.premises.forEach(premise =>
                     assertPlanScoped(premise, depth)
                 );
+                return;
+            case 'have':
+                kernelAssertScoped(node.binding.type, depth);
+                assertPlanScoped(node.proof, depth);
+                assertPlanScoped(node.body, depth + 1);
                 return;
             case 'hole':
                 if (node.expectation?.target !== undefined) {

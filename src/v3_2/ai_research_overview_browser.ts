@@ -15,10 +15,10 @@ import {
 } from './research_document';
 
 export const CORE_AI_RESEARCH_OVERVIEW_BROWSER_PROFILE = Object.freeze({
-    revision: 'emdash-ai-research-overview-browser-v1' as const,
+    revision: 'emdash-ai-research-overview-browser-v2' as const,
     execution: 'explicit-client-side-recheck' as const,
     inputAuthority: 'typed-release-pins' as const,
-    releaseParity: 'required-against-node-files-v1' as const,
+    releaseParity: 'required-against-node-files-v2' as const,
     digestVerification: 'not-performed-in-browser' as const,
     productionLambdapiDependency: false as const,
     nodeBuiltinDependency: false as const,

@@ -468,7 +468,7 @@ describe('TypeScript v3.2 AI-PROOF-2 proof documents', () => {
         }
         assert.match(
             serializeCoreProofDocumentProfile(),
-            /emdash-proof-document-compiler-v1/u
+            /emdash-proof-document-compiler-v2/u
         );
         assert.equal(CORE_RESEARCH_DOCUMENT_PROFILE.nodeBuiltinDependency, false);
         assert.equal(

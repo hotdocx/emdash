@@ -35,6 +35,7 @@ const because = (line: number, detail: string) =>
 
 const explicitFunctorial = binderMode('explicit', 'functorial');
 const explicitNatural = binderMode('explicit', 'natural');
+const explicitObjectOnly = binderMode('explicit', 'object-only');
 const implicitNatural = binderMode('implicit', 'natural');
 
 const universe = (line: number, detail = 'MIGRATE-1C universe') =>
@@ -334,6 +335,154 @@ describe('TypeScript v3.2 MIGRATE-1C proof refinement', () => {
             complete.state.term,
             identityType
         ));
+    });
+
+    it('retains an unused have fact until its source obligation is solved', () => {
+        const { session, checker } = proofFixture();
+        const goal = session.freshMeta(
+            session.rootContext,
+            typeA(35),
+            because(35, 'PLAN-DECOMPOSE-3B1B have goal')
+        );
+        const proof = new CoreProofRefiner(checker, goal);
+        const introduced = proof.have(
+            goal.identity,
+            kernelBinder(
+                'fact',
+                typeB(36),
+                explicitNatural,
+                because(36, 'PLAN-DECOMPOSE-3B1B have binder')
+            )
+        );
+
+        assert.equal(introduced.tactic, 'have');
+        assert.deepEqual(
+            introduced.introducedGoals.map(item => item.contextDepth),
+            [0, 1]
+        );
+        assert.equal(
+            kernelExpressionEquals(
+                introduced.introducedGoals[0].type,
+                typeB(37)
+            ),
+            true
+        );
+        assert.deepEqual(
+            introduced.introducedGoals[1].context.telescope[0].mode,
+            explicitNatural
+        );
+
+        const ignored = proof.exact(
+            introduced.introducedGoals[1].identity,
+            free('proof_z', 38, 'PLAN-DECOMPOSE-3B1B ignored fact body')
+        );
+        assert.equal(ignored.state.status, 'incomplete');
+        assert.equal(ignored.state.goals.length, 1);
+        assert.equal(
+            ignored.state.goals[0].identity.index,
+            introduced.introducedGoals[0].identity.index
+        );
+        assert.equal(
+            ignored.state.goals[0].reachability,
+            'retained-source-obligation'
+        );
+        assert.equal(ignored.state.goals[0].occurrenceCount, 0);
+        assert.equal(
+            kernelExpressionEquals(
+                ignored.state.term,
+                free('proof_z', 39, 'PLAN-DECOMPOSE-3B1B ignored result')
+            ),
+            true
+        );
+
+        const complete = proof.exact(
+            introduced.introducedGoals[0].identity,
+            free('proof_b', 40, 'PLAN-DECOMPOSE-3B1B fact solution')
+        );
+        assert.equal(complete.state.status, 'complete');
+        assert.doesNotThrow(() => checker.check(
+            session.rootContext,
+            complete.state.term,
+            typeA(40)
+        ));
+    });
+
+    it('substitutes a used have fact for every binder variation', () => {
+        for (const mode of [
+            explicitFunctorial,
+            explicitNatural,
+            explicitObjectOnly,
+            implicitNatural
+        ]) {
+            const { session, checker } = proofFixture();
+            const goal = session.freshMeta(
+                session.rootContext,
+                typeA(41),
+                because(41, 'PLAN-DECOMPOSE-3B1B varied have goal')
+            );
+            const proof = new CoreProofRefiner(checker, goal);
+            const introduced = proof.have(
+                goal.identity,
+                kernelBinder(
+                    'fact',
+                    typeA(42),
+                    mode,
+                    because(42, 'PLAN-DECOMPOSE-3B1B varied binder')
+                )
+            );
+            assert.deepEqual(
+                introduced.introducedGoals[1].context.telescope[0].mode,
+                mode
+            );
+            proof.exact(
+                introduced.introducedGoals[1].identity,
+                bound(0, 43, 'PLAN-DECOMPOSE-3B1B used local fact')
+            );
+            const complete = proof.exact(
+                introduced.introducedGoals[0].identity,
+                free('proof_z', 44, 'PLAN-DECOMPOSE-3B1B varied fact')
+            );
+            assert.equal(complete.state.status, 'complete');
+            assert.equal(
+                kernelExpressionEquals(
+                    complete.state.term,
+                    free('proof_z', 44, 'PLAN-DECOMPOSE-3B1B expected fact')
+                ),
+                true
+            );
+        }
+    });
+
+    it('rolls back an ill-typed have binder and its retained metadata', () => {
+        const { session, checker } = proofFixture();
+        const goal = session.freshMeta(
+            session.rootContext,
+            typeA(45),
+            because(45, 'PLAN-DECOMPOSE-3B1B rejected have goal')
+        );
+        const proof = new CoreProofRefiner(checker, goal);
+        assert.throws(
+            () => proof.have(
+                goal.identity,
+                kernelBinder(
+                    'bad',
+                    free('proof_z', 46, 'PLAN-DECOMPOSE-3B1B non-type'),
+                    explicitFunctorial,
+                    because(46, 'PLAN-DECOMPOSE-3B1B rejected binder')
+                )
+            ),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreCheckerError);
+                assert.equal(error.code, 'TYPE_MISMATCH');
+                return true;
+            }
+        );
+        assert.equal(session.metavariables.length, 1);
+        assert.equal(session.metavariable(goal).solution, undefined);
+        assert.deepEqual(
+            proof.inspect().goals.map(item => item.identity.index),
+            [goal.identity.index]
+        );
     });
 
     it('applies a unary function and exposes its explicit premise', () => {

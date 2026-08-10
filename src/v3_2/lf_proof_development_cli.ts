@@ -18,11 +18,13 @@ import {
 } from './lf_proof_development_store';
 
 export const CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE = Object.freeze({
-    revision: 'emdash-lf-proof-development-cli-v1' as const,
+    revision: 'emdash-lf-proof-development-cli-v2' as const,
     summaryRevision:
-        'emdash-lf-proof-development-summary-v1' as const,
-    goalRevision: 'emdash-lf-proof-development-goal-v1' as const,
-    buildRevision: 'emdash-lf-proof-development-build-v1' as const,
+        'emdash-lf-proof-development-summary-v2' as const,
+    goalRevision: 'emdash-lf-proof-development-goal-v2' as const,
+    buildRevision: 'emdash-lf-proof-development-build-v2' as const,
+    mountedProfileRevision:
+        CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE.revision,
     commandNamespace: 'development' as const,
     commands: Object.freeze(['check', 'goals', 'build'] as const),
     backend: CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE.backend,

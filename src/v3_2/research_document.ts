@@ -20,9 +20,9 @@ import {
 } from './proof_plan';
 
 export const CORE_RESEARCH_DOCUMENT_PROFILE = Object.freeze({
-    revision: 'emdash-research-document-binding-v1' as const,
+    revision: 'emdash-research-document-binding-v2' as const,
     snapshotRevision:
-        'emdash-research-document-binding-snapshot-v1' as const,
+        'emdash-research-document-binding-snapshot-v2' as const,
     proofArtifactRevision:
         CORE_PROOF_DOCUMENT_PROFILE.artifactRevision,
     digestPolicy: 'caller-supplied-sha256' as const,
@@ -274,6 +274,7 @@ const cloneGoal = (
     }))),
     target: value.target,
     occurrenceCount: value.occurrenceCount,
+    reachability: value.reachability,
     declarationProvenance: cloneProvenance(value.declarationProvenance),
     firstOccurrenceProvenance: cloneProvenance(
         value.firstOccurrenceProvenance

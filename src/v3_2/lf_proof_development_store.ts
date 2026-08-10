@@ -5,6 +5,7 @@ import { constants } from 'node:fs';
 import { lstat, open, realpath } from 'node:fs/promises';
 import path from 'node:path';
 import {
+    CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
     CoreLfProofDevelopmentSourceReconstruction,
     parseCoreLfProofDevelopmentSourceText
 } from './lf_proof_development_source';
@@ -13,7 +14,9 @@ const MIB = 1024 * 1024;
 const READ_CHUNK_BYTES = 64 * 1024;
 
 export const CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE = Object.freeze({
-    revision: 'emdash-lf-mounted-proof-development-v1' as const,
+    revision: 'emdash-lf-mounted-proof-development-v2' as const,
+    sourceProfileRevision:
+        CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision,
     filesystemProfile: 'node-posix-mounted-project-root-v1' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     sourceFileName: 'emdash.proof-development.source.json' as const,
