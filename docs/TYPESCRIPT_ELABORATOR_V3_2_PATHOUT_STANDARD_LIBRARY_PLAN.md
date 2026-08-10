@@ -6,12 +6,12 @@ counterevidence supersedes the v3 `PATHOUT-LIBRARY-FOUNDATION-1B0` review;
 measured TypeScript execution counterevidence now also supersedes the v4
 review; measured source-action consumer counterevidence superseded the v5
 review; measured proof-head counterevidence superseded the v6 review;
-measured generic-format counterevidence now also supersedes the v7 review;
-checkpointed proposal v8 preserves v7 and represents line 8079's reflexive
-source discharge by one reflexive captured constraint, and is separately
-approved under delegated unattended authority with human supersession;
-root-only `PATHOUT-LIBRARY-FOUNDATION-1B` may resume, and no PathOut profile or
-public export is yet qualified
+measured generic-format counterevidence superseded the v7 review; measured
+reflexive-consumer counterevidence now also supersedes the v8 review;
+non-authorizing proposal v9 preserves v8 and adds only active line 8032's
+identity-incoming precomposition computation; root-only
+`PATHOUT-LIBRARY-FOUNDATION-1B` is paused pending v9's separate review, and no
+PathOut profile or public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -171,8 +171,8 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v8 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7 | V7 selects the exact line-8079 identity-family rule, but its zero-residual encoding violates the generic proof-transfer invariant. Checkpointed v8 preserves 5/12/2/9, represents source `tt ≡ tt` by one reflexive captured `A ≡ A` constraint, and is separately approved without adding a unit owner or changing the engine. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | implementation authorized; resume existing work | separately reviewed v8 proposal | Resume exactly the root-local 5/12/2/9 implementation; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 awaiting separate review | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Proposal v9 preserves v8 and adds only active line 8032, for an exact 5/13/2/9 boundary. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | paused pending v9 review | separate review of checkpointed v9 proposal | Resume only the exact root-local 5/13/2/9 implementation after separate review; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -923,6 +923,64 @@ git diff --check
 ```
 
 The unchanged workspace contract is carried forward from v7. No Lambdapi or
+long aggregate was run for this behavior-free correction; neither would
+validate the proposal-data boundary.
+
+### Measured reflexive identity-incoming correction and proposal v9
+
+Proposal-v8 checkpoint `6e4bb82` and review checkpoint `edda832` remain exact
+backtracking evidence but no longer authorize implementation. With the v8
+identity-family rule encoded using explicit inferred endpoints, the focused
+two-consumer replay compiles the whole profile and passes general source
+transport. Only the reflexive consumer remains:
+
+```text
+hom_precomp_along_fapp0(Z,Z,id_func(Z),y,x,y,p,id_y)
+versus
+p
+```
+
+The right side has already reduced `comp(id_y,p)` to `p`, so the line-8079
+two-sided comparison no longer applies. Active source line 8032 supplies the
+exact one-sided computation: precomposing an identity incoming arrow by `h`
+reduces to `fapp1_fapp0(F,h)`. For `F = id_func(Z)`, the existing reviewed
+structural runtime then reduces that action to `h`.
+
+Non-authorizing proposal v9 preserves every v8 entry and adds only line 8032
+as the eleventh active runtime rule; the two TypeScript-only weak-head fusions
+remain unchanged. The corrected boundary is therefore **5/13/2/9**. No new
+opaque owner, derived fusion, proof substitute, generic identity law, engine
+branch, active-source edit, or public effect is authorized.
+
+The v8 review record withdraws its authorization and embeds exact
+non-authorizing proposal v9. Implementation remains paused until v9 is
+checkpointed and separately reviewed. Its behavior-free proposal gate is
+root typecheck, focused lint, the fourteen proposal/review tests, and exact
+diff hygiene; no Lambdapi or long aggregate is relevant.
+
+Proportional proposal-v9/supersession validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_foundation_proposal.ts \
+  src/v3_2/pathout_foundation_review.ts \
+  tests/v3_2_pathout_foundation_proposal_tests.ts \
+  tests/v3_2_pathout_foundation_review_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathout_foundation_proposal_tests.ts \
+  tests/v3_2_pathout_foundation_review_tests.ts
+  14 tests / 2 suites: 14 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+The unchanged workspace contract is carried forward from v8. No Lambdapi or
 long aggregate was run for this behavior-free correction; neither would
 validate the proposal-data boundary.
 
