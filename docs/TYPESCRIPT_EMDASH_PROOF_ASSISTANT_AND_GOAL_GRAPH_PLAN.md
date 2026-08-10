@@ -5484,7 +5484,9 @@ Lambdapi invocation.
 The rollback-safe non-authorizing v1 proposal checkpoint is `dd69325`, with
 ledger checkpoint `3226a6a`. It remains review/backtracking evidence but is
 superseded and must not be approved. Implementation remains gated on a
-checkpointed corrected proposal and its separate immutable review.
+checkpointed corrected proposal and its separate immutable review. The
+corrected non-authorizing v2 proposal checkpoint is `b3d6d71`; it is the sole
+recommendation eligible for that review.
 
 ## Decision Ledger
 

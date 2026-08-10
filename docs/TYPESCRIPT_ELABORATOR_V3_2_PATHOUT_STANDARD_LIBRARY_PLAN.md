@@ -406,8 +406,10 @@ provider evidence.
 The rollback-safe non-authorizing v1 proposal checkpoint is `dd69325`, with
 ledger checkpoint `3226a6a`. It remains review/backtracking evidence but is
 superseded by the `hom_` predecessor correction and must not be approved.
-Semantic implementation remains unauthorized until corrected proposal v2 and
-its separate review are each checkpointed.
+The corrected non-authorizing v2 proposal checkpoint is `b3d6d71`; it is the
+sole recommendation a later delegated or human review may approve. Semantic
+implementation remains unauthorized until that separate review is itself
+checkpointed.
 
 ## Required Evidence For Implementation
 
