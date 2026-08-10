@@ -2,8 +2,9 @@
 
 Status: active selected standard-library continuation under
 `TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is complete and the
-next bounded row is the behavior-free `PATHOUT-LIBRARY-FOUNDATION-1B0`
-proposal; no PathOut library semantic or public export is yet implemented
+behavior-free `PATHOUT-LIBRARY-FOUNDATION-1B0` proposal is frozen awaiting a
+separate immutable review; no PathOut library semantic or public export is yet
+implemented
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -163,7 +164,7 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | next | completed corrected 0A | Freeze and independently review the exact represented-source and Sigma-totalization functor-action prerequisites plus the nine transparent foundation definitions; specify linkage, sealing, rule policy, typed consumers, negatives, and bounded oracle before behavior. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | proposal frozen; review next | completed corrected 0A | The immutable proposal freezes the exact represented-source and Sigma-totalization functor-action prerequisites plus nine transparent foundation definitions, linkage, sealing, rules, consumers, negatives, and bounded oracle. It does not authorize 1B. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | pending | reviewed 1B0 | Transfer the two sealed foundation prerequisites, then author representables, fixed-source `PathOut`, source-arrow action, path objects, reflexive object, and canonical reflexive-to-path arrow as transparent end-user library definitions. Check fibre, object, arrow, and next-action behavior. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
@@ -319,6 +320,85 @@ backtracking evidence but is not by itself the implementation predecessor.
 The corrected audit checkpoint is `5a1ea75`; it is the exact evidence
 predecessor for `1B0`. Neither checkpoint contains a semantic or package
 export.
+
+### `PATHOUT-LIBRARY-FOUNDATION-1B0` frozen proposal
+
+The non-authorizing proposal is
+[`src/v3_2/pathout_foundation_proposal.ts`](../src/v3_2/pathout_foundation_proposal.ts),
+with focused tests in
+[`tests/v3_2_pathout_foundation_proposal_tests.ts`](../tests/v3_2_pathout_foundation_proposal_tests.ts).
+It selects
+`compileCoreCategoricalDisplayedNdHigherFoundationTransfer` as the smallest
+current compiled predecessor: that descendant already contains `hom_int`,
+the displayed-chain `sigma_map_func`, directed Sigma primitives, and the
+generic composition/action owners, without importing the later mixed-action
+or scale profiles.
+
+The proposed implementation boundary is exactly **3/5/1/9**:
+
+- three opaque declarations: `hom_int_precomp_tele_func`,
+  `hom_int_precomp_func`, and injective `Sigma_func`;
+- five runtime rules: the three represented-source projections plus
+  `Sigma_func` object and capped-arrow action;
+- one proof-time projection-order comparison between
+  `hom_precomp_along_fapp0` and `hom_int_precomp_func`; and
+- nine transparent definitions: the three representables, three PathOut
+  category/functor/action names, `pathout_obj`, `pathout_refl_obj`, and
+  `pathout_refl_arrow`.
+
+The phase plan first compiles the opaque declarations, composes the five
+runtime rules, compiles the proof rule, checks the nine transparent
+definitions, and finally rechecks the proof rule against the final declaration
+context. Every phase uses the generic LF declaration/runtime/proof engines;
+there is no intrinsic Core, checker, evaluator, or active Lambdapi delta.
+
+The sealing contract distinguishes two APIs that already have different trust
+roles. The existing low-level LF authoring machinery remains explicitly
+trust-bearing and capable of describing theory profiles. The future ordinary
+safe-library facade may add checked transparent definitions, but cannot add
+opaque owners, runtime rules, or proof rules. Qualification remains root-only;
+no contributor/npm/browser export is part of `1B`.
+
+Seven positive consumers cover representable fibres/precomposition, PathOut
+totalization, functor object action, source action, reflexive action, and the
+canonical reflexive arrow. Eight negative cases cover wrong sources/endpoints,
+wrong dependent-pair fibres, foreign scoped terms, and attempts to add rules
+through the safe-library route. Six exact Lambdapi assertions, bounded to 20
+seconds, are required for implementation acceptance but not for this
+behavior-free proposal.
+
+The proposal is deliberately non-self-authorizing under gate
+`H-TS-EMDASH-PATHOUT-FOUNDATION-01` and decision
+`D-TS-EMDASH-PATHOUT-FOUNDATION-001`. A separate immutable review checkpoint
+must retain the exact proposal before `PATHOUT-LIBRARY-FOUNDATION-1B` may
+start. Human direction may supersede any delegated unattended review.
+
+Proportional proposal validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run workspace:check
+  passed; pnpm@11.16.0, Node 24.11.1
+
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_foundation_proposal.ts \
+  tests/v3_2_pathout_foundation_proposal_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathout_foundation_proposal_tests.ts
+  8 tests / 1 suite: 8 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+The proposal runs no Lambdapi or long aggregate: it installs no behavior, and
+the direct type/lint/proposal gates cover its immutable data and current
+provider evidence.
 
 ## Required Evidence For Implementation
 

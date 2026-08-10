@@ -5462,6 +5462,23 @@ not by itself the implementation predecessor. The corrected audit checkpoint
 is `5a1ea75`; it is the exact evidence predecessor for `1B0`. Neither
 checkpoint contains a semantic transfer or public-package byte.
 
+The behavior-free `PATHOUT-LIBRARY-FOUNDATION-1B0` proposal is now frozen
+awaiting separate immutable review. It selects the displayed-ND higher-
+foundation compiler as the smallest existing predecessor and fixes an exact
+3/5/1/9 continuation: three opaque prerequisite declarations, five runtime
+rules, one proof-time rule, and nine transparent PathOut foundation
+definitions. The proposal specifies seven positive consumers, eight strict
+negative cases, and six bounded Lambdapi conformance assertions for later
+implementation acceptance.
+
+The proposed public trust split is explicit: low-level LF authoring remains a
+trust-bearing theory-profile API, while the future safe-library facade may add
+transparent checked definitions but no opaque owners or runtime/proof rules.
+The proposal is root-only, absent from contributor/npm/browser barrels, and
+does not authorize implementation, release, or integration. Focused proposal
+tests, root typecheck, and focused lint pass without a long aggregate or
+Lambdapi invocation.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -5572,6 +5589,7 @@ checkpoint contains a semantic transfer or public-package byte.
 | `D-PA-104` | Complete `PATHOUT-TRUST-BOUNDARY-0A` as immutable contributor evidence, not a semantic transfer. | Exact source hashes and positions identify 34 selected declarations, five opaque PathOut/PathInd owners, six selected runtime rules, and one deferred Path-category proof rule without adding a Core owner, rule, syntax, browser API, or package export. |
 | `D-PA-105` | Repartition PathOut implementation around measured missing prerequisite closures and require a separate `1B0` foundation proposal. | The initial audit separated represented-source action, covariant fibre transport, and Sigma-total uncurrying by consumer and trust content; the same dependency-first rule makes later forward correction possible without rewriting its checkpoint. |
 | `D-PA-106` | Correct `0A` forward by adding the missing `Sigma_func` object/capped-action closure to the foundation boundary. | `PathOut_cat_func` directly names `Sigma_func`; current TypeScript transfers contain `Sigma_cat` and `sigma_map_func` but not that opaque/injective owner or its two required projection rules. The unrelated higher `sigma_map_transf` action remains deferred until an internalized consumer requires it. |
+| `D-PA-107` | Freeze `PATHOUT-LIBRARY-FOUNDATION-1B0` as a non-authorizing 3/5/1/9 proposal over the displayed-ND higher-foundation predecessor. | Exact opaque declarations, rules, transparent definitions, phase order, consumers, negatives, and oracle must be independently reviewable before semantic work; the safe-library facade and low-level trust-bearing authoring API must not be conflated. |
 
 ## Validation And Checkpoint Policy
 
