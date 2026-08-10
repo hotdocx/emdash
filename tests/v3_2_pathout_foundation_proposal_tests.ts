@@ -64,7 +64,7 @@ const assertProposalError = (
 };
 
 describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
-    it('pins v4 supersession and remains non-self-authorizing',
+    it('pins v5 supersession and remains non-self-authorizing',
         () => {
             const proposal = validateCorePathoutFoundation1b0Proposal();
             assertDeepFrozen(proposal);
@@ -79,6 +79,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     proposal.parent.supersededV3ReviewCheckpoint,
                     proposal.parent.supersededV4ProposalCheckpoint,
                     proposal.parent.supersededV4ReviewCheckpoint,
+                    proposal.parent.supersededV5ProposalCheckpoint,
+                    proposal.parent.supersededV5ReviewCheckpoint,
                     proposal.decision.status,
                     proposal.decision.implementationAuthorized
                 ],
@@ -92,13 +94,15 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     '36c368e',
                     '681d954',
                     'ab556a9',
+                    '622a496',
+                    'c4dd293',
                     'proposal-only',
                     false
                 ]
             );
         });
 
-    it('freezes exactly four opaque, nine runtime, one proof, nine transparent',
+    it('freezes exactly five opaque, twelve runtime, one proof, nine transparent',
         () => {
             const implementation =
                 CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL
@@ -110,7 +114,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     'hom_int_precomp_tele_func',
                     'hom_int_precomp_func',
                     'Sigma_func',
-                    'hom_postcomp_func'
+                    'hom_postcomp_func',
+                    'hom_precomp_along_func'
                 ]
             );
             assert.deepEqual(
@@ -120,6 +125,9 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     7302,
                     7302,
                     7426,
+                    7977,
+                    9704,
+                    9704,
                     8445,
                     8449,
                     8453,
@@ -136,6 +144,10 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                         'represented-hom-object-action-fusion',
                     'pathout.foundation.' +
                         'postcomposition-identity-source-unit',
+                    'pathout.foundation.precomposition-object-action',
+                    'pathout.foundation.hom-int-precomp-component',
+                    'pathout.foundation.' +
+                        'hom-int-precomp-component-object-fusion',
                     'pathout.foundation.hom-int-precomp-full-action',
                     'pathout.foundation.hom-int-precomp-capped-action',
                     'pathout.foundation.' +
@@ -229,7 +241,7 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
         );
         assert.equal(predecessor.extractOrDuplicateOppositeHomRule, false);
         assert.equal(
-            predecessor.localImplementationDeltaIsFourNineOneNine,
+            predecessor.localImplementationDeltaIsFiveTwelveOneNine,
             true
         );
         assert.deepEqual(
@@ -253,6 +265,23 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                 .typescriptWeakHeadFusion.newMathematicalRule,
             false
         );
+        assert.deepEqual(
+            CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
+                .representedSourceComponentCorrection.activeRuntimeLines,
+            [7977, 9704]
+        );
+        assert.deepEqual(
+            CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
+                .typescriptSourceComponentWeakHeadFusion
+                .derivedFromActiveRuntimeLines,
+            [9704, 7977]
+        );
+        assert.equal(
+            CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
+                .typescriptSourceComponentWeakHeadFusion
+                .newMathematicalRule,
+            false
+        );
     });
 
     it('confirms the new owners are absent from pre-1B transfer modules',
@@ -274,6 +303,10 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
             assert.doesNotMatch(
                 transferSources,
                 /(?:injective )?symbol Sigma_func\b/u
+            );
+            assert.doesNotMatch(
+                transferSources,
+                /symbol hom_precomp_along_func\b/u
             );
         });
 

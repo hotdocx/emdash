@@ -2,11 +2,11 @@
  * PATHOUT-LIBRARY-FOUNDATION-1B0 non-authorizing proposal.
  *
  * The proposal freezes the exact local prerequisite closures and nine
- * transparent definitions selected by measured implementation. Proposal v5
- * preserves v4's active stable covariant-representable closure and adds one
- * subject-checked head fusion of its first two rules for the TypeScript
- * runtime's deliberately weak-head execution strategy. It compiles or
- * installs nothing; a separate immutable review must authorize 1B.
+ * transparent definitions selected by measured implementation. Proposal v6
+ * preserves v5 and adds the exact active represented-source component
+ * closure plus its subject-checked head fusion for the TypeScript runtime's
+ * deliberately weak-head execution strategy. It compiles or installs
+ * nothing; a separate immutable review must authorize 1B.
  */
 
 import {
@@ -15,7 +15,7 @@ import {
 } from './pathout_trust_boundary_audit';
 
 export const CORE_PATHOUT_FOUNDATION_1B0_REVISION =
-    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-5' as const;
+    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-6' as const;
 
 const DECISION_QUESTION =
     'Approve H-TS-EMDASH-PATHOUT-FOUNDATION-01/' +
@@ -83,6 +83,15 @@ const prerequisiteDeclarations = [
         policy: 'opaque-signature',
         coreName:
             'emdash_v3_2_pathout_foundation_hom_postcomp_func'
+    },
+    {
+        order: 4,
+        name: 'hom_precomp_along_func',
+        authorityLine: 7921,
+        sourceKind: 'symbol',
+        policy: 'opaque-signature',
+        coreName:
+            'emdash_v3_2_pathout_foundation_hom_precomp_along_func'
     }
 ] as const;
 
@@ -122,6 +131,33 @@ const runtimeRules = [
     },
     {
         order: 4,
+        id: 'pathout.foundation.precomposition-object-action',
+        authorityLine: 7977,
+        sourceOwner: 'fapp0',
+        resultOwner: 'hom_precomp_along_fapp0',
+        policy: 'runtime-rewrite'
+    },
+    {
+        order: 5,
+        id: 'pathout.foundation.hom-int-precomp-component',
+        authorityLine: 9704,
+        sourceOwner: 'tapp0_fapp0',
+        resultOwner: 'hom_precomp_along_func',
+        policy: 'runtime-rewrite'
+    },
+    {
+        order: 6,
+        id:
+            'pathout.foundation.' +
+            'hom-int-precomp-component-object-fusion',
+        authorityLine: 9704,
+        derivedFromAuthorityLines: [9704, 7977],
+        sourceOwner: 'fapp0',
+        resultOwner: 'hom_precomp_along_fapp0',
+        policy: 'runtime-rewrite-derived-head-fusion'
+    },
+    {
+        order: 7,
         id: 'pathout.foundation.hom-int-precomp-full-action',
         authorityLine: 8445,
         sourceOwner: 'fapp1_func',
@@ -129,7 +165,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 5,
+        order: 8,
         id: 'pathout.foundation.hom-int-precomp-capped-action',
         authorityLine: 8449,
         sourceOwner: 'fapp1_fapp0',
@@ -137,7 +173,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 6,
+        order: 9,
         id: 'pathout.foundation.hom-int-precomp-tele-application',
         authorityLine: 8453,
         sourceOwner: 'fapp0',
@@ -145,7 +181,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 7,
+        order: 10,
         id: 'pathout.foundation.sigma-func-object',
         authorityLine: 12803,
         sourceOwner: 'fapp0',
@@ -153,7 +189,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 8,
+        order: 11,
         id: 'pathout.foundation.sigma-func-capped-action',
         authorityLine: 13148,
         sourceOwner: 'fapp1_fapp0',
@@ -254,12 +290,13 @@ const rawProposal = {
         supersededV3ReviewCheckpoint: '36c368e',
         supersededV4ProposalCheckpoint: '681d954',
         supersededV4ReviewCheckpoint: 'ab556a9',
+        supersededV5ProposalCheckpoint: '622a496',
+        supersededV5ReviewCheckpoint: 'c4dd293',
         correctionReason:
-            'measured-v4-pathout_refl_arrow-check-remained-at-the-outer-' +
-            'fapp0-because-the-head-only-TypeScript-runtime-does-not-' +
-            'normalize-the-nested-fapp1-hom_-argument-before-matching-' +
-            'the-postcomposition-object-rule;fuse-only-active-lines-' +
-            '7298-and-7302',
+            'measured-v5-source-action-consumers-remained-at-' +
+            'fapp0(tapp0_fapp0(hom_int_precomp_func),q)-versus-' +
+            'comp(q,p);import-active-lines-7921-7977-9704-and-fuse-' +
+            'only-9704-plus-7977-for-head-only-TypeScript-execution',
         authoritySourceSha256:
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256,
         authorityChecksSha256:
@@ -283,7 +320,8 @@ const rawProposal = {
             'smallest-current-reviewed-descendant-containing-hom_int-hom_-' +
             'their-object-projections-and-the-opposite-Hom-endpoint-' +
             'reduction-needed-to-check-Rep_transport_func;the-measured-' +
-            'covariant-representable-action-closure-is-added-locally',
+            'covariant-representable-and-contravariant-component-action-' +
+            'closures-are-added-locally',
         requiredExistingOwners: [
             'id',
             'hom_int',
@@ -313,7 +351,7 @@ const rawProposal = {
         inheritedReviewedSourceActionRuntimeRule:
             'categorical.direct-mixed-source-action.' +
             'source-composition-projection',
-        localImplementationDeltaIsFourNineOneNine: true
+        localImplementationDeltaIsFiveTwelveOneNine: true
     },
     exactImplementation: {
         prerequisiteDeclarations,
@@ -326,7 +364,7 @@ const rawProposal = {
         })),
         phaseOrder: [
             'compile-opaque-prerequisite-declarations',
-            'compose-eight-authority-rules-and-one-derived-head-fusion',
+            'compose-ten-authority-rules-and-two-derived-head-fusions',
             'compile-one-authority-proof-rule',
             'compile-nine-transparent-library-definitions',
             'recheck-proof-rule-against-final-declaration-context'
@@ -382,6 +420,41 @@ const rawProposal = {
             checkerBranchDelta: 0,
             evaluatorBranchDelta: 0
         },
+        representedSourceComponentCorrection: {
+            measuredConsumers: [
+                'pathout-source-action',
+                'pathout-reflexive-action'
+            ],
+            normalizedResidue:
+                'fapp0(tapp0_fapp0(hom_(id),z,' +
+                'hom_int_precomp_func(p)),q)-versus-comp(q,p)',
+            localOpaqueDeclaration: 'hom_precomp_along_func',
+            reusedOpaqueDeclaration: 'hom_precomp_along_fapp0',
+            activeRuntimeLines: [7977, 9704],
+            proofRuleMadeReachable:
+                'hom-int-precomp-projection-order',
+            stableNormalForm:
+                'hom_precomp_along_fapp0(id,F(z),x,y,p,q)',
+            genericCompositionRuleImported: false,
+            checkerOrProofRuleSubstituteAuthorized: false
+        },
+        typescriptSourceComponentWeakHeadFusion: {
+            executionStrategy:
+                'head-only-no-nested-pattern-normalization',
+            measuredOuterHead: 'fapp0',
+            ruleId:
+                'pathout.foundation.' +
+                'hom-int-precomp-component-object-fusion',
+            derivedFromActiveRuntimeLines: [9704, 7977],
+            fusedLeft:
+                'fapp0(tapp0_fapp0(hom_int_precomp_func(p)),q)',
+            fusedRight:
+                'hom_precomp_along_fapp0(id,F(z),x,y,p,q)',
+            subjectCheckedByGenericRuntimeCompiler: true,
+            newMathematicalRule: false,
+            checkerBranchDelta: 0,
+            evaluatorBranchDelta: 0
+        },
         oppositeHomReuse: {
             authorityLine: 3251,
             runtimeRuleId:
@@ -400,8 +473,8 @@ const rawProposal = {
     },
     profileSealing: {
         trustedProfileContains: [
-            'four-opaque-authority-declarations',
-            'nine-runtime-rules',
+            'five-opaque-authority-declarations',
+            'twelve-runtime-rules',
             'one-proof-unification-rule'
         ],
         derivedLibraryContains: [
@@ -438,12 +511,14 @@ const rawProposal = {
         {
             id: 'pathout-source-action',
             observation:
-                'PathOut_transport_func(p)-maps-(z,q)-to-(z,q-after-p)'
+                'PathOut_transport_func(p)[(z,q)]-proof-time-compares-' +
+                'with-(z,q-after-p)'
         },
         {
             id: 'pathout-reflexive-action',
             observation:
-                'PathOut_transport_func(p)[(y,id_y)]-reduces-to-(y,p)'
+                'PathOut_transport_func(p)[(y,id_y)]-proof-time-' +
+                'compares-with-(y,p)'
         },
         {
             id: 'canonical-reflexive-arrow',
@@ -540,7 +615,7 @@ export function validateCorePathoutFoundation1b0Proposal(
     validateCorePathoutTrustBoundary0aAudit();
     if (
         proposal.revision !==
-            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-5' ||
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-6' ||
         proposal.parent.auditRevision !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.revision ||
         proposal.parent.correctedAuditCheckpoint !== '5a1ea75' ||
@@ -555,6 +630,8 @@ export function validateCorePathoutFoundation1b0Proposal(
         proposal.parent.supersededV3ReviewCheckpoint !== '36c368e' ||
         proposal.parent.supersededV4ProposalCheckpoint !== '681d954' ||
         proposal.parent.supersededV4ReviewCheckpoint !== 'ab556a9' ||
+        proposal.parent.supersededV5ProposalCheckpoint !== '622a496' ||
+        proposal.parent.supersededV5ReviewCheckpoint !== 'c4dd293' ||
         proposal.parent.authoritySourceSha256 !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256 ||
         proposal.parent.authorityChecksSha256 !==
@@ -568,8 +645,8 @@ export function validateCorePathoutFoundation1b0Proposal(
 
     const implementation = proposal.exactImplementation;
     if (
-        implementation.prerequisiteDeclarations.length !== 4 ||
-        implementation.runtimeRules.length !== 9 ||
+        implementation.prerequisiteDeclarations.length !== 5 ||
+        implementation.runtimeRules.length !== 12 ||
         implementation.proofRules.length !== 1 ||
         implementation.libraryDefinitions.length !== 9 ||
         !sameData(
@@ -616,7 +693,7 @@ export function validateCorePathoutFoundation1b0Proposal(
             .extractOrDuplicateRepresentedHomSubset ||
         proposal.selectedPredecessor.extractOrDuplicateOppositeHomRule ||
         !proposal.selectedPredecessor
-            .localImplementationDeltaIsFourNineOneNine ||
+            .localImplementationDeltaIsFiveTwelveOneNine ||
         proposal.dependencyClosure.representedHomReuse.owner !== 'hom_' ||
         proposal.dependencyClosure.representedHomReuse
             .duplicateTransferAuthorized ||
@@ -649,10 +726,34 @@ export function validateCorePathoutFoundation1b0Proposal(
             .checkerBranchDelta !== 0 ||
         proposal.dependencyClosure.typescriptWeakHeadFusion
             .evaluatorBranchDelta !== 0
+        ||
+        proposal.dependencyClosure.representedSourceComponentCorrection
+            .localOpaqueDeclaration !== 'hom_precomp_along_func' ||
+        proposal.dependencyClosure.representedSourceComponentCorrection
+            .reusedOpaqueDeclaration !== 'hom_precomp_along_fapp0' ||
+        proposal.dependencyClosure.representedSourceComponentCorrection
+            .activeRuntimeLines.join(',') !== '7977,9704' ||
+        proposal.dependencyClosure.representedSourceComponentCorrection
+            .genericCompositionRuleImported ||
+        proposal.dependencyClosure.representedSourceComponentCorrection
+            .checkerOrProofRuleSubstituteAuthorized ||
+        proposal.dependencyClosure.typescriptSourceComponentWeakHeadFusion
+            .executionStrategy !==
+                'head-only-no-nested-pattern-normalization' ||
+        proposal.dependencyClosure.typescriptSourceComponentWeakHeadFusion
+            .derivedFromActiveRuntimeLines.join(',') !== '9704,7977' ||
+        !proposal.dependencyClosure.typescriptSourceComponentWeakHeadFusion
+            .subjectCheckedByGenericRuntimeCompiler ||
+        proposal.dependencyClosure.typescriptSourceComponentWeakHeadFusion
+            .newMathematicalRule ||
+        proposal.dependencyClosure.typescriptSourceComponentWeakHeadFusion
+            .checkerBranchDelta !== 0 ||
+        proposal.dependencyClosure.typescriptSourceComponentWeakHeadFusion
+            .evaluatorBranchDelta !== 0
     ) {
         throw new CorePathoutFoundation1b0ProposalError(
             'PATHOUT_FOUNDATION_PROPOSAL_SCOPE_DRIFT',
-            'The exact 4/9/1/9 foundation scope drifted'
+            'The exact 5/12/1/9 foundation scope drifted'
         );
     }
 

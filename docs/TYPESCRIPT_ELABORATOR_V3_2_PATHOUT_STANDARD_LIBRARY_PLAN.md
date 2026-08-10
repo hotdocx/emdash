@@ -4,11 +4,12 @@ Status: active selected standard-library continuation under
 `TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is complete; measured
 counterevidence supersedes the v3 `PATHOUT-LIBRARY-FOUNDATION-1B0` review;
 measured TypeScript execution counterevidence now also supersedes the v4
-review; checkpointed proposal v5 preserves v4's active closure, adds only one
-subject-checked weak-head fusion of active lines 7298 and 7302, and is
-separately approved under delegated unattended authority with human
-supersession; root-only `PATHOUT-LIBRARY-FOUNDATION-1B` may resume, and no
-PathOut semantic or public export is yet implemented
+review; measured source-action consumer counterevidence now supersedes the v5
+review; non-authorizing proposal v6 preserves v5 and adds only the active
+precomposition component closure plus one subject-checked weak-head fusion of
+active lines 9704 and 7977; `PATHOUT-LIBRARY-FOUNDATION-1B` is paused pending
+v6's rollback-safe checkpoint and separate review, and no PathOut profile or
+public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -168,8 +169,8 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v5 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4 | V4 freezes the exact active postcomposition closure, but measured TypeScript checking shows that its two nested steps cannot compose before an outer weak-head match. Checkpointed v5 keeps every active rule, adds one subject-checked 7298+7302 head fusion, and is approved at the local 4/9/1/9 boundary. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | implementation authorized; resume existing work | separately reviewed v5 proposal | Resume exactly the root-only implementation over the corrected profile; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v6 awaiting checkpoint and separate review | completed corrected 0A; superseded v1/v2/v3/v4/v5 | V5 closes canonical-arrow checking, but two selected source-action consumers expose the still-missing active `hom_precomp_along_func` component/object closure. Proposal v6 preserves v5 and adds one opaque owner, active lines 7977 and 9704, and their subject-checked weak-head fusion, yielding 5/12/1/9. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | paused; implementation not authorized | requires checkpointed and separately reviewed v6 proposal | Preserve the existing implementation draft, but resume semantic edits only after v6's immutable review; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -703,6 +704,88 @@ The rollback-safe non-authorizing proposal-v5/supersession checkpoint is
 under the user's standing unattended delegation, retains later human
 supersession, and preserves every v5 denial. The review itself authorizes no
 push, merge, publication, deployment, or cleanup.
+
+### Measured represented-source component correction and proposal v6
+
+Proposal-v5 checkpoint `622a496` and review checkpoint `c4dd293` remain exact
+backtracking evidence but no longer authorize implementation. With v5's
+checked-wildcard encoding of its authorized fusion, the one-shot TypeScript
+semantic compiler succeeds through all nine transparent definitions,
+including `pathout_refl_arrow`. The complete focused consumer suite then
+passes sixteen checks, skips the opt-in Lambdapi oracle, and fails only the
+two selected source-action observations.
+
+Runtime comparison and the local proof program expose the same exact
+unreduced subproblem:
+
+```text
+fapp0(
+  tapp0_fapp0(hom_(id), z, hom_int_precomp_func(p)),
+  q)
+versus
+comp(q,p)
+```
+
+The local line-8463 `hom-int-precomp-projection-order` proof rule expects the
+stable `hom_precomp_along_fapp0` head, so it cannot match this earlier raw
+component action. The active authority supplies the missing route in three
+pieces that the original lexical audit did not select:
+
+- opaque `hom_precomp_along_func` at line 7921;
+- its object action to `hom_precomp_along_fapp0` at line 7977; and
+- the `hom_int_precomp_func` component projection to that functor at line
+  9704.
+
+As with v5, TypeScript's deliberate weak-head execution cannot first reduce
+the nested `tapp0_fapp0` before matching the surrounding `fapp0`. Proposal v6
+therefore preserves every v5 entry, adds the opaque line-7921 interface and
+the two active rules, and adds exactly one subject-checked fusion:
+
+```text
+fapp0(tapp0_fapp0(hom_int_precomp_func(p)),q)
+  ↪ hom_precomp_along_fapp0(id,F(z),x,y,p,q)
+```
+
+The fusion is derived only from active lines 9704 and 7977. It makes the
+already-selected proof rule reachable and adds no mathematical rule, generic
+composition rewrite, nested-normalization engine, Core/checker/evaluator
+branch, active Lambdapi edit, or later/public effect. The corrected local
+boundary is **5/12/1/9**: five opaque interfaces, ten active runtime rules,
+two derived weak-head fusions, one proof rule, and nine transparent
+definitions.
+
+The v5 review record now withdraws its authorization and embeds exact
+non-authorizing proposal v6. The green compiler result and failing consumer
+counterevidence remain preserved in the unstaged implementation draft, but
+the new closure must not be implemented until proposal v6 has a rollback-safe
+checkpoint and separate immutable review.
+
+Proportional proposal-v6/supersession validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_foundation_proposal.ts \
+  src/v3_2/pathout_foundation_review.ts \
+  tests/v3_2_pathout_foundation_proposal_tests.ts \
+  tests/v3_2_pathout_foundation_review_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathout_foundation_proposal_tests.ts \
+  tests/v3_2_pathout_foundation_review_tests.ts
+  14 tests / 2 suites: 14 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+The unchanged workspace contract is carried forward from proposal v5. No
+Lambdapi or long aggregate was run for this behavior-free correction; neither
+would validate the proposal-data boundary, and their omission does not block
+its checkpoint.
 
 ## Required Evidence For Implementation
 
