@@ -5560,8 +5560,11 @@ represented-source component projection. Proposal v6 preserves v5, adds
 those two active rules and one subject-checked 9704+7977 weak-head fusion,
 and corrects the local boundary to 5/12/1/9. It adds no mathematical rule,
 generic engine branch, active Lambdapi edit, or public effect; implementation
-is paused pending v6's own checkpoint and separate review. V5 checkpoints
-`622a496` and `c4dd293` remain backtracking evidence.
+was paused pending v6's own checkpoint and separate review. Proposal v6 is
+checkpointed at `f006ccb`; its separate delegated review restores only the
+root-local 5/12/1/9 implementation authority, retains human supersession, and
+preserves every later/public denial. V5 checkpoints `622a496` and `c4dd293`
+remain backtracking evidence.
 
 ## Decision Ledger
 
@@ -5683,6 +5686,7 @@ is paused pending v6's own checkpoint and separate review. V5 checkpoints
 | `D-PA-114` | Supersede the v4 PathOut-foundation review and correct proposal v5 to 4/9/1/9 with one subject-checked weak-head fusion of active lines 7298 and 7302. | The TypeScript conversion engine intentionally rewrites only the current weak head, so it cannot normalize `fapp1_fapp0(hom_(F,W),f)` before matching the surrounding `fapp0`. Fusing those two already-authorized rules to the stable `hom_postcomp_fapp0` head preserves the source computation while avoiding a generic unit, nested-normalization engine, or checker/proof substitute. |
 | `D-PA-115` | Approve only checkpointed PathOut-foundation proposal v5 under delegated unattended authority, with human supersession. | Checkpoint `622a496` preserves the exact 4/9/1/9 weak-head execution closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v4 or making the proposal self-authorizing. |
 | `D-PA-116` | Supersede the v5 PathOut-foundation review and correct proposal v6 to 5/12/1/9 with the active represented-source component closure and one derived weak-head fusion. | The selected source-action consumers stop at `fapp0(tapp0_fapp0(hom_int_precomp_func(p)),q)` before the existing projection-order proof rule can match. Active `hom_precomp_along_func` and lines 7977/9704 supply the exact stable route; their 9704+7977 fusion is required only by TypeScript's head-only execution and is narrower than a generic nested-normalization or composition rewrite. |
+| `D-PA-117` | Approve only checkpointed PathOut-foundation proposal v6 under delegated unattended authority, with human supersession. | Checkpoint `f006ccb` preserves the exact 5/12/1/9 represented-source component closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v5 or making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
