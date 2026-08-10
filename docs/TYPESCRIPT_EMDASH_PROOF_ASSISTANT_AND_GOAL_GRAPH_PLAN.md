@@ -30,8 +30,9 @@ package, and required full-TypeScript gates; later index
 enrichment and library rows remain dependency-gated; the semantic-diff/proof-
 impact audit and its first two-revision report are complete and final-green
 through focused, browser, packed-package, and required full-TypeScript gates;
-replay diagnostics and repair candidates are now the next audit boundary;
-external automation and the general goal-graph rows remain later boundaries
+the replay-diagnostic audit is complete and its first open-hole-only repair
+proposal/replay contract is frozen for implementation; external automation
+and the general goal-graph rows remain later boundaries
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -549,7 +550,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | gated | existing generated-owner/stress decisions, exact product profile, public base-package trust boundary |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
-| `REFACTOR-9B` | Replay diagnostics and proof-repair candidate patches | in progress | measured 9A consumer; audit exact failing-proof diagnostic classes and patch-provider preconditions before implementation |
+| `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | in progress | audit complete; implement the frozen exact-precondition obvious-provider composition below |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | pending | one executable consumer and explicit evidence labeling |
 | `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | pending | one concrete solver/certificate consumer and independent checker |
 | `AGENT-EVAL-12` | Reproducible proof-agent benchmark harness | pending | catalog, plans, index, and at least one bounded provider |
@@ -3200,6 +3201,162 @@ obvious-proof provider, can return an ordinary stale-safe proof-plan patch.
 The 9A report itself remains impact evidence and never becomes a repair or
 acceptance oracle.
 
+## REFACTOR-9B Audit And Frozen First Contract
+
+Date: 2026-08-10
+
+The audit measured the existing replay and patch owners against the 9A
+fixture. It selects one exact proof at a time and separates portable diagnosis
+from the smaller class of states for which the current patch/provider stack is
+already semantically adequate.
+
+Material findings:
+
+1. `compileCoreLfWorkspaceProofDocument` already owns fresh proof replay in
+   one reconstructed exact module closure. A successful result is either a
+   complete artifact with independently checked explicit Core or an incomplete
+   artifact whose named goals and coupling graph are portable. Reimplementing
+   proof execution in a maintenance layer would weaken this owner boundary.
+2. Complete-development compilation stops at the first rejected proof. Repair
+   work instead needs an exact selected-proof operation, both for bounded cost
+   and so that one bad proof does not hide independent current artifacts.
+3. Current rejection classes are structured but heterogeneous:
+   `CoreLfWorkspaceProofError` and `CoreProofArtifactError` carry code/path;
+   `CoreProofPlanError` carries code/node ID/provenance; checker, refinement,
+   context, and session errors carry code/provenance; conversion errors carry
+   a code. Their human messages may contain rendering details or process-local
+   metavariable ordinals and are not canonical diagnostic data.
+4. Tactic refinement is failure-atomic, but a whole plan is not transactional.
+   On a thrown later node, earlier refinement occurred only in a fresh session
+   which the compiler discards. The maintenance report must not expose that
+   partial process-local state or claim a resumable failed cursor.
+5. `CoreProofPlanPatch` v1 replaces one stable named hole. A successfully
+   replayed incomplete plan therefore has an exact source patch target. A plan
+   rejected at `exact`, `intro`, `apply`, `have`, expectation checking, target
+   checking, or final checking may have no open stable hole at all. Inventing
+   node replacement, rollback semantics, or a new target from error provenance
+   is outside this tranche.
+6. The completed obvious-proof provider already performs the useful bounded
+   first repair search: exact accessible installed declarations, then one
+   ordinary `apply` with explicit premise holes, followed by fresh replay. Its
+   candidate precondition binds exact premise-index data, checked target,
+   complete base state, and selected goal. 9B should compose it, not fork its
+   search or checking semantics.
+7. The provider precondition intentionally does not own development identity,
+   the previous revision, or proof fingerprints. A maintenance wrapper must
+   additionally bind exact previous/current canonical source, the 9A report,
+   selected replay report, proof identity, and goal ID. Recomputing and
+   byte-comparing those data makes a fingerprint, declaration, plan, proof,
+   goal, or baseline change stale before candidate replay.
+8. Browser-safe code validates caller-supplied fingerprint shape and exact
+   closure module IDs but does not compute source/interface hashes. Cached-
+   artifact currency remains owned by `assertCoreProofArtifactCurrent` and an
+   outer hashing/acquisition layer. 9B must not describe caller-supplied hash
+   text as independently recomputed freshness.
+9. Applying a proof-plan patch changes proof source and therefore requires a
+   refreshed outer source fingerprint and usually a caller-selected
+   development revision. Since this layer neither hashes nor owns revision
+   policy, the first acceptance operation returns a freshly replayed plan and
+   patch evidence but does not silently materialize a supposedly current
+   canonical development snapshot.
+
+`REFACTOR-9B` freezes the following first executable contract:
+
+1. Extend the existing browser-safe development-diff owner with a versioned
+   proof-maintenance profile. It adds selected-proof inspection, proposal, and
+   candidate-replay revisions while retaining the 9A report/profile unchanged.
+   It performs no I/O, hashing, parsing, backend emission, Lambdapi invocation,
+   process-global registration, or proof-source persistence.
+2. `inspectCoreLfProofMaintenance` accepts exactly the previous and current
+   canonical `CoreLfProofDevelopmentSourceSnapshot`, one stable
+   `{moduleId,declarationId}`, and optional 9A expression-visit settings. It
+   recomputes 9A, reconstructs current source, compiles the current declaration
+   workspace, and locates the exact selected proof. Selection absent from both
+   revisions is a structural error; a proof present only previously returns
+   `absent-current` with its exact 9A proof diff.
+3. A current proof replays only through
+   `compileCoreLfWorkspaceProofDocument`. Return exactly one deeply frozen
+   portable outcome: `checked-complete` with the current artifact,
+   `checked-incomplete` with the current artifact and named goals, or
+   `rejected` with a stable projected diagnostic. Every outcome retains the
+   selected 9A proof-impact record and embeds the complete 9A semantic report.
+4. A projected diagnostic records the owning error family and exact code plus
+   only the stable path, node ID, and portable provenance fields that family
+   actually owns. It records no error message, stack, constraint object,
+   session error, scope object, raw meta, partial refiner state, or guessed
+   source node. An unclassified exception aborts with a structured
+   `UNSUPPORTED_REPLAY_ERROR`; it never becomes an authoritative
+   `unknown-error` report.
+5. The inspection serializer uses the canonical workspace JSON owner. All
+   report arrays and records are deeply frozen and retain no compiled
+   workspace, checker, refiner, session, map, callback, or raw checked term.
+   The existing portable proof artifact may be embedded because its complete
+   term is already a serialized Core string and incomplete artifacts expose
+   only stable proof-state data.
+6. `proposeCoreLfProofRepairs` accepts the same exact two sources and proof
+   identity, one stable current goal ID, optional premise-index settings, and
+   the existing obvious-provider seed/budget. It is defined only when fresh
+   selected replay is `checked-incomplete` and that exact goal is open. A
+   complete, absent, or rejected proof is diagnostic-only and fails with a
+   precise maintenance error rather than generating a speculative edit.
+7. Reuse `createCoreLfAccessiblePremiseIndex` over the same compiled current
+   workspace/root and delegate proposal construction exactly to
+   `proposeCoreObviousProofPlanPatches`. The maintenance layer adds no search,
+   tactic, ranking, local-hypothesis, instance, simplifier, constructor,
+   theorem-export, or recursive-discharge behavior.
+8. The portable proposal contains an exact maintenance precondition: canonical
+   previous source text, current source text, 9A report text, selected
+   inspection text, proof identity, and goal ID. It also contains the complete
+   portable obvious-provider report, whose own nested precondition remains
+   authoritative for index, target, state, and goal. Strip only absent
+   optional JavaScript fields through canonical data projection; retain every
+   trace, budget, seed, candidate, and patch field.
+9. `replayCoreLfProofRepairCandidate` accepts the same current sources, the
+   complete recorded proposal, and one bounded candidate index. It recomputes
+   the 9A report, selected inspection, current exact premise index, and wrapper
+   precondition; rejects any byte drift; selects the candidate only from the
+   recorded provider report; and delegates semantic acceptance to
+   `replayCoreObviousProofCandidate`.
+10. A successful replay returns the existing ordinary
+    `CoreProofPlanPatch`, the patched inert plan, fresh in-memory checked
+    execution, and a deeply frozen portable snapshot with proof/goal identity,
+    candidate index, resulting status/state, and provider/profile revisions.
+    This means `candidate-replayed`, not `proof accepted`, `source committed`,
+    or `artifact current`. The caller must explicitly update source, refresh
+    fingerprints through the outer owner, choose revisions, and recheck any
+    resulting development.
+11. Reject malformed profile/revision data, absent proof/goal, non-incomplete
+    bases, out-of-range candidate indices, forged provider reports, stale
+    previous/current source, changed fingerprint, changed declaration
+    baseline, changed replay state, and failed fresh candidate replay with
+    structured maintenance errors. Existing nested provider errors remain the
+    semantic underlying evidence and are never flattened into success.
+12. Extend the standalone two-revision fixture rather than touching active
+    presheaf/site/sheafification/scheme mathematics. Establish all four
+    selected outcomes: unchanged complete control, named-hole incomplete
+    edited proof, rejected alias/witness proof, and removed proof. Preserve the
+    deliberately unresolved expectation as a second stable rejection class.
+    The open control goal must yield a checked exact candidate from the
+    existing control witness; candidate replay must complete it. Demonstrate
+    zero-candidate behavior, stale fingerprint/source/baseline rejection,
+    absent/rejected proposal refusal, candidate-index bounds, diagnostic
+    projection without messages/metas, byte stability, and deep freezing.
+13. Export only additive contributor/workspace APIs, advance the static
+    capability record once, and update packed ESM/CJS/strict-TypeScript/browser
+    consumers after focused behavior is green. The core-only package entry,
+    9A profile/report, proof plan/patch/provider, proof state/artifact/source,
+    workspace invalidation, checker/refiner, and command revisions remain
+    unchanged.
+
+Validation remains proportional: extend the existing 9A suite, run the nearest
+workspace-proof, diff, premise-index, obvious-provider, plan-patch, and proof-
+checker suites, typecheck, changed-file lint, browser closure, workspace
+contract, and packed consumers. A complete `check:ts` is considered only once
+after the settled public diff and only if root SOP makes omission an exact
+checkpoint blocker; never run it iteratively. `check:all`, kernel/Lambdapi,
+print/book, npm/release, deployment, and sibling repositories remain out of
+scope.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -3264,6 +3421,12 @@ acceptance oracle.
 | `D-PA-058` | Compile both declaration workspaces but structurally inspect proof source without requiring either proof development to compile. | Checked declaration interfaces are necessary semantic evidence, whereas failing current proofs are a primary impact-analysis use case. |
 | `D-PA-059` | Resolve structural free-reference and owner uses through exact revision-local linkage and expose ambiguity or absence. | This yields reviewable direct/transitive explanations without guessing from serialized Core text or hiding intrinsic owner references. |
 | `D-PA-060` | Define v1 proof reuse conservatively as unchanged canonical proof source plus reusable exact closure and declaration dependencies. | The report is an invalidation/cache input, not an incremental compiler, proof check, or truth judgment. |
+| `D-PA-061` | Inspect and repair one exact proof at a time rather than compiling the complete development. | It bounds work and preserves independent diagnostics when another current proof is rejected. |
+| `D-PA-062` | Project only stable error-family/code/path/node/provenance fields and fail on an unclassified exception. | Human messages and partial failed-session state can contain rendering details or process-local metavariable identity and are not canonical evidence. |
+| `D-PA-063` | Offer first repair proposals only for stable named holes in a freshly replayed incomplete plan. | Patch v1 owns hole replacement; a rejected tactic node has no reviewed source replacement or resumable cursor contract. |
+| `D-PA-064` | Compose the exact premise index and obvious-proof provider under a stronger development-maintenance precondition. | Existing owners already provide checked bounded search, while exact previous/current source, 9A impact, replay, identity, and fingerprint freshness belong to the wrapper. |
+| `D-PA-065` | Return fresh candidate replay and an ordinary patch without silently materializing updated proof-development source. | Persisting a changed plan requires a caller-selected revision and an outer recomputed source fingerprint, neither of which the browser-safe layer owns. |
+| `D-PA-066` | Leave cached-artifact currency with `assertCoreProofArtifactCurrent` and outer hash acquisition. | The maintenance layer can compare supplied fingerprint data exactly but cannot truthfully claim to have recomputed its hashes. |
 
 ## Validation And Checkpoint Policy
 
@@ -3376,10 +3539,9 @@ synchronized:
 > node by analogy.
 >
 > Start from the completed `REFACTOR-9A` semantic checkpoint `bed3a9d` and
-> its immediately following synchronized completion ledger. Audit
-> `REFACTOR-9B` replay diagnostics and proof-repair patch preconditions next;
-> do not implement repair until that bounded contract is frozen unless
-> current implementation evidence forces a recorded correction.
+> its synchronized completion ledger `d245019`. Implement the frozen
+> `REFACTOR-9B` selected-proof diagnostic and open-hole repair composition
+> next unless current implementation evidence forces a recorded correction.
 > Continue through curated-library gates, proof maintenance,
 > external certificates, and agent evaluation in the dependency order
 > maintained by the living ledger. Begin `GOAL-GRAPH-14A`
