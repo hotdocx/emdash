@@ -39,7 +39,9 @@ evaluator is implemented and final-proportional-green through focused,
 nearest-owner, typecheck/lint, and browser-closure gates; its public host,
 package, and corpus layer remains gated; the first research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
-contract is frozen for implementation
+profile is implemented and final-proportional-green through focused, nearest-
+owner, typecheck/lint, and browser-closure gates; its public visual/hosted
+adapter remains gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -80,7 +82,8 @@ checkpoint is `d245019`. The selected-proof-maintenance contract checkpoint is
 `9b48c4c`, its semantic checkpoint is `53924d7`, and its synchronized ledger
 checkpoint is `b8152a0`. The proof-agent benchmark contract checkpoint is
 `1ad765f`, its semantic checkpoint is `f46ff9a`, and its synchronized clean
-published ledger checkpoint is `28a8e07`.
+published ledger checkpoint is `28a8e07`. The research goal-graph contract
+checkpoint is `75f0362` and its semantic checkpoint is `faa4c27`.
 
 Depends-On:
 
@@ -568,7 +571,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | complete | `f46ff9a`; self-contained exact cases, arbitrary inert patches, fresh selected-proof replay, stable diagnostics, integer retrieval/plan/replay metrics, and provider-reported usage |
 | `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements plus a concrete agent/host consumer and reviewed corpus/public-package boundary |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC hardening | external gate | classes-plan `PACKAGE-12B2`; public integrated commit, protected environment, bootstrap credential, verification, trust configuration, cleanup |
-| `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | in progress | audit complete; implement the frozen theorem/task/decision, exact obligation, checked-proof/human-approval/AI-advisory, and derived-status contract below |
+| `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
 | `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A, published package, sibling SOP audits, compatible controller/runtime |
 
 Only one semantic row is in progress at a time. A later row may be
@@ -3879,7 +3882,8 @@ Material findings:
     assesses evidence in canonical ID order, evaluates nodes in deterministic
     prerequisite-first order, and publishes canonical node order. Each node
     result has derived `open`, `blocked`, `satisfied`, or `rejected` status;
-    exact satisfying/rejecting/stale/advisory/inapplicable evidence IDs;
+    exact satisfying/rejecting/insufficient/stale/advisory/inapplicable
+    evidence IDs;
     unsatisfied required prerequisite IDs; and unsatisfied `oneOf` groups.
 12. The deeply frozen portable evaluation embeds the exact definition and
     normalized evidence, all assessments/results, status counts, the profile
@@ -3908,6 +3912,118 @@ Do not run `check:ts`, root tests, `check:all`, workspace/package aggregates,
 kernel/Lambdapi, print/book, npm/release, deployment, or sibling operations
 unless implementation evidence reveals an actual shared/public boundary not
 present in this frozen contract.
+
+## GOAL-GRAPH-14A Completion Record
+
+Date: 2026-08-10
+
+Result: accepted at semantic checkpoint `faa4c27` after frozen-contract
+checkpoint `75f0362`.
+
+The new internal browser-safe `src/v3_2/research_goal_graph.ts` implements one
+closed research-planning policy profile beside proof authority:
+
+- canonical graph definitions contain exactly theorem, task, and decision
+  nodes. They reject malformed, duplicate, unknown, self-referential, cyclic,
+  or vacuous dependency data and derive a deterministic prerequisite-first
+  evaluation order;
+- exact local obligations bind a subject node, its direct `requires` and
+  grouped `oneOf` edges, and the exact definitions of those prerequisites.
+  Evidence created against an edited acceptance surface is reported stale,
+  while unrelated graph additions do not invalidate it;
+- theorem evidence embeds one exact canonical proof-development source. The
+  evaluator reconstructs that supplied source, selects the exact proof
+  identity, compares its canonical explicit-Core theorem statement, compiles
+  its declaration workspace, and freshly delegates authority to the existing
+  workspace-proof compiler for that proof only;
+- complete proof replay satisfies a theorem. Incomplete replay remains
+  insufficient and exposes stable compound `{moduleId, declarationId,
+  goalId}` holes plus the existing state and coupling graph. Missing or
+  statement-mismatched proofs and known checker failures remain insufficient,
+  with only stable structured diagnostics and no checker messages;
+- named human approvals apply only to the exact task/decision policy that
+  names the caller-supplied actor. All named actors must approve, one
+  authorized rejection rejects locally, and duplicate attestations by one
+  actor for one exact obligation are refused because the evaluator owns no
+  clock, recency, signature, or identity authority; and
+- AI proposals are retained as advisory evidence and never satisfy, reject,
+  prove, authorize, or execute a goal. Status is always derived as `open`,
+  `blocked`, `satisfied`, or `rejected`; there is no authoritative mutable
+  `done` field.
+
+An exact dependency-edge identity includes the `oneOf` group. Consequently
+the same prerequisite may legitimately be an alternative in two different
+groups; only an identical edge tuple is a duplicate. This preserves the
+stated grouped-alternative logic without adding an undocumented pairwise
+restriction.
+
+The standalone ordinary-LF fixture proves one proposition, leaves one named
+hole open, rejects one wrong term, omits one selected proof, and reuses one
+proof identity with a changed statement. It also establishes all-named human
+approval, AI-only openness, direct rejection, blocked-then-satisfied
+`requires`/`oneOf` composition, stale and unauthorized evidence, duplicate
+approval refusal, canonical ordering and byte stability, structured malformed
+artifact/Core rejection, and deep freezing. It does not import or modify the
+active presheaf, site, sheafification, affine-scheme, scheme, or projective-
+space mathematics.
+
+The module remains outside `src/v3_2/index.ts`, `package_workspace.ts`, every
+public package/capability entry, installed package consumer, CLI, core-only
+entry, sibling adapter, and external-action path. It performs no I/O, model
+call, clock acquisition, hashing, identity/signature verification, action
+execution, backend emission, or Lambdapi invocation.
+
+Final validation on exact semantic checkpoint candidate `faa4c27`:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_research_goal_graph_tests.ts
+  passed: 5/5 tests, 1 suite
+
+node --require ts-node/register --test \
+  tests/v3_2_proof_plan_tests.ts
+  passed: 19/19 tests, 2 suites, including the focused 14A suite
+
+node --require ts-node/register --test \
+  tests/v3_2_proof_document_tests.ts
+  passed: 8/8 tests, 1 suite
+
+node --require ts-node/register --test \
+  tests/v3_2_lf_workspace_proof_tests.ts
+  passed: 12/12 tests, 3 suites
+
+node --require ts-node/register --test \
+  tests/v3_2_browser_directed_tests.ts
+  passed: 20/20 tests, 1 suite
+
+./scripts/pnpmw exec tsc --noEmit --pretty false
+  passed
+
+eslint over the new source/focused test and two changed owner tests
+  passed
+
+git diff --cached --check
+  passed before semantic checkpoint faa4c27
+```
+
+No `check:ts`, root-test aggregate, `check:all`, workspace/package aggregate,
+kernel/Lambdapi, print/book, npm/release, deployment, or sibling-repository
+operation ran. The internal-only boundary and focused owner coverage made none
+of those a progress-blocking gate; their omission is not positive evidence.
+
+Non-effects: no public interchange or UI, Arrowgram rendering, hosted
+collaboration, actor verification, permissions, action execution, signed
+attestation, deterministic tool receipt, observation/counterevidence class,
+general ontology, theorem export, parser, Core node, proof-plan tag,
+proof/source/artifact migration, checker/refiner/conversion rule,
+class/instance semantics, or mathematical Lambdapi development changed.
+
+`GOAL-GRAPH-14B` remains gated by its recorded package and concrete hosted/
+visual consumer prerequisites. The remaining standard-library, public
+benchmark, counterevidence, and external-certificate rows likewise remain
+behind their explicit product or solver gates. Continuation should audit
+those gates for a real consumer before adding another semantic union member
+or public contract.
 
 ## Decision Ledger
 
@@ -3992,6 +4108,8 @@ present in this frozen contract.
 | `D-PA-077` | Treat human approval attribution as caller-supplied unverified policy evidence and every AI proposal as advisory only. | The browser-safe layer owns neither signatures nor actor identity, while ordinary planning policies may still explicitly name whose attestation they accept; neither class may coerce to proof or authorization. |
 | `D-PA-078` | Bind evidence to exact canonical obligation text and derive status over a finite acyclic `requires`/grouped-`oneOf` graph. | Exact local binding exposes staleness without browser-side hashes, while a DAG gives deterministic prerequisite-first status and avoids an unreviewed fixed-point logic. |
 | `D-PA-079` | Keep the first research goal graph internal and defer Arrowgram/GetPaidX/public-package integration to 14B. | The semantic evidence and acceptance contract must be measured before freezing a public interchange, visualization, hosted action, or permission API. |
+| `D-PA-080` | Accept the narrow research-planning profile at semantic checkpoint `faa4c27`. | Exact supplied-source proof replay, explicit unverified approval policy, advisory-only AI evidence, grouped acyclic dependencies, stable diagnostics, and derived status are now executable under focused owner coverage without a new truth kernel. |
+| `D-PA-081` | Define duplicate dependencies by exact edge identity, including the `oneOf` group, rather than by dependent/prerequisite pair alone. | One prerequisite may satisfy alternatives in multiple distinct groups; rejecting that valid formula would impose an undocumented expressivity restriction. |
 
 ## Validation And Checkpoint Policy
 
@@ -4103,15 +4221,14 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from the completed `AGENT-EVAL-12A` semantic checkpoint `f46ff9a`, its
-> synchronized completion record, and the frozen `GOAL-GRAPH-14A` contract in
-> this plan. Implement that narrow internal theorem/task/decision research-
-> planning profile next unless exact evidence forces a recorded correction.
-> Keep `AGENT-EVAL-12B`, `STDLIB-8`,
-> `COUNTEREVIDENCE-10`, and `EXTERNAL-CERT-11` behind their recorded public-
-> consumer, product, or solver gates rather than inventing authority merely
-> to advance the ledger. Continue in dependency order as those gates acquire
-> concrete consumers.
+> Start from the completed `GOAL-GRAPH-14A` semantic checkpoint `faa4c27`, its
+> synchronized completion record, and the earlier checked proof-engineering
+> checkpoints in this plan. Keep `GOAL-GRAPH-14B`, `AGENT-EVAL-12B`,
+> `STDLIB-8`, `COUNTEREVIDENCE-10`, and `EXTERNAL-CERT-11` behind their
+> recorded public-consumer, product, package, or solver gates rather than
+> inventing authority merely to advance the ledger. Audit those gates for a
+> concrete consumer and select only work whose prerequisite is now genuinely
+> present; otherwise leave the row explicitly gated.
 > Preserve the hard distinction between a kernel-checked theorem and every
 > weaker task/observation/approval/AI evidence class.
 >
