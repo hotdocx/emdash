@@ -27,8 +27,10 @@ final-green through focused, browser, packed-package, and required full-
 TypeScript gates; the bounded obvious-proof audit and its first exact/one-step-
 apply provider are complete and final-green through focused, browser, packed-
 package, and required full-TypeScript gates; later index
-enrichment, library, external-automation, and general goal-graph rows remain
-dependency-gated
+enrichment and library rows remain dependency-gated; the semantic-diff/proof-
+impact audit is complete and its first two-revision reporting contract is
+frozen for implementation; repair candidates, external automation, and the
+general goal-graph rows remain later boundaries
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -62,7 +64,8 @@ synchronized clean published checkpoint is `b5e974a`. The accessible-premise
 index contract checkpoint is `de3518b`, its semantic checkpoint is
 `fd371e4`, and its synchronized clean published ledger checkpoint is
 `c88774c`. The obvious-proof contract checkpoint is `c69aa35` and its
-semantic checkpoint is `da4b63f`.
+semantic checkpoint is `da4b63f`; its synchronized clean published ledger
+checkpoint is `b57d205`.
 
 Depends-On:
 
@@ -543,7 +546,8 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `INDEX-SEARCH-6B` | Proof-export, relationship/use enrichment, and optional ranking | deferred | theorem-export interface plus exact class/instance/coercion and use owners; one measured retrieval corpus before embeddings |
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | gated | existing generated-owner/stress decisions, exact product profile, public base-package trust boundary |
-| `REFACTOR-9` | Semantic diff, dependency impact, and proof repair | pending | stable declaration index and two-revision corpus |
+| `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | in progress | canonical source snapshots, checked declaration workspaces, existing module invalidation, and frozen corpus/trace contract below |
+| `REFACTOR-9B` | Replay diagnostics and proof-repair candidate patches | deferred | measured 9A consumer, exact failing-proof diagnostic contract, and patch-provider preconditions |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | pending | one executable consumer and explicit evidence labeling |
 | `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | pending | one concrete solver/certificate consumer and independent checker |
 | `AGENT-EVAL-12` | Reproducible proof-agent benchmark harness | pending | catalog, plans, index, and at least one bounded provider |
@@ -2921,6 +2925,161 @@ two-revision corpus and exact semantic-diff/dependency-impact boundary before
 implementing repair proposals. `AGENT-EVAL-12` has gained its required first
 bounded provider but remains later in ledger order.
 
+## REFACTOR-9 Audit And Frozen 9A Contract
+
+Date: 2026-08-10
+
+The audit repartitions semantic maintenance from proof repair. A first exact
+two-revision report can be built from current checked declaration-workspace
+owners and canonical proof source without requiring the new proof to succeed.
+Generating a repair is a separate proposal operation which must consume a
+specific failing replay or open goal and return an ordinary stale-safe proof-
+plan patch.
+
+Material findings:
+
+1. `compareCoreLfDeclarationWorkspaceSnapshots` already owns conservative
+   module invalidation. It validates both canonical graph snapshots, separates
+   added/removed/source/interface-changed modules, closes changes through the
+   union dependency graph, and labels reusable modules. `REFACTOR-9` should
+   embed this exact result rather than create a second module-change policy.
+2. Checked module interface snapshots already expose every declaration's
+   exact `{moduleId,name}` identity, source order, visibility, policy, status,
+   link, canonical checked type, and optional checked transparent body. They
+   are sufficient for exact field-level declaration diffing. A rename or move
+   is not an exact fact: absent an explicit mapping, it is one removal and one
+   addition.
+3. `CoreLfProofDevelopmentSourceSnapshot` is canonical portable source. It
+   retains stable proof identity `{moduleId,declarationId}`, closed theorem
+   type, inert meta-free plan, provenance, and supplied input fingerprint. It
+   can be reconstructed without executing arbitrary TypeScript, filesystem
+   code, or a term parser.
+4. Compiling the complete current proof development is the wrong prerequisite
+   for impact analysis: a declaration edit may make the current proof fail,
+   precisely when a diff is most useful. V1 should reconstruct both canonical
+   sources and compile both declaration workspaces, but structurally inspect
+   proof source without requiring proof replay. A declaration compilation
+   failure remains a structured boundary error because no checked semantic
+   interface then exists to compare.
+5. Exact Core expressions in checked declaration types/bodies and in proof
+   types/plans expose free-reference names and semantic owner applications.
+   Revision-local linkage maps free Core names and intrinsic owner IDs back to
+   exact qualified declarations when the mapping is unique. Missing or
+   multiple providers must remain explicit unresolved/ambiguous reference
+   evidence; display names and Git paths cannot repair identity.
+6. Declaration dependencies derived this way are structural direct uses, not
+   an assertion about every conversion step. Their union graph can explain
+   direct and transitive declaration impact. The existing module invalidation
+   remains the conservative safety net for source, opaque implementation,
+   provenance, dependency-graph, or interface changes not localized by those
+   structural edges.
+7. Proof source can be compared field by field: theorem type, plan,
+   provenance, and supplied fingerprint. Exact source equality plus reusable
+   previous/current closure modules is the first sufficient condition for
+   `reusable`; any source change or affected closure requires recheck. This is
+   a cache/maintenance judgment, not a claim that an affected proof is false
+   or broken.
+8. The existing proof artifact records checked state but requires successful
+   compilation. A later `REFACTOR-9B` can attempt current replay, retain stable
+   checker diagnostics, and ask local/AI providers for patches. The 9A report
+   must explicitly say `repair-not-proposed` and contain no guessed term,
+   rename, proof, or acceptance decision.
+
+`REFACTOR-9A` freezes the following first executable contract:
+
+1. Add one browser-safe semantic-diff module whose input is exactly a previous
+   and current canonical `CoreLfProofDevelopmentSourceSnapshot`. Reconstruct
+   both snapshots through the existing canonical source owner, compile both
+   declaration workspaces with the existing compiler, and create both exact
+   workspace snapshots. It performs no proof compilation, I/O, hashing,
+   parsing beyond canonical JSON reconstruction, backend emission, or
+   Lambdapi invocation.
+2. Embed the unmodified result of
+   `compareCoreLfDeclarationWorkspaceSnapshots` as the authoritative
+   conservative module invalidation. Also record previous/current development
+   and workspace revisions plus exact module order. No Git commit/path/mtime
+   becomes semantic identity.
+3. Diff declaration interfaces by exact qualified symbol, sorted by that
+   pair. Classify each entry as `added`, `removed`, `changed`, or `reusable`.
+   A changed entry lists exact changed fields from: source order, visibility,
+   policy, compiled status, linkage, checked type, and checked body. Retain
+   previous/current entry data and never infer rename/move equivalence.
+4. Traverse checked declaration types and available checked bodies
+   structurally and finitely. Record sorted distinct free Core references and
+   semantic owner IDs, then resolve each against the exact revision-local
+   linkage. Record unique exact declaration dependencies separately from
+   unresolved and ambiguous references. The traversal has an explicit hard
+   node budget and rejects cycles or budget exhaustion structurally.
+5. Build previous and current direct declaration-dependency graphs plus their
+   union. For each changed/added/removed declaration, compute the deterministic
+   reverse transitive set of declarations which structurally depend on it.
+   Report direct and transitive impact separately; this graph supplements but
+   does not narrow module invalidation.
+6. Diff proofs by stable `{moduleId,declarationId}` identity in canonical
+   order. Classify `added`, `removed`, `source-changed`, `recheck-required`, or
+   `reusable`. For proofs present in both revisions, list exact changes to
+   theorem type, inert plan, provenance, and fingerprint using canonical data
+   comparison.
+7. Traverse every proof theorem type and every expression-bearing plan field:
+   exact solution, apply callee, contextual-have binder type, and hole target
+   expectation. Binder bodies are visited at their actual Core depth, while
+   holes themselves introduce no invented expression. Record free-reference/
+   owner evidence and revision-local exact declaration resolution as for
+   declaration dependencies.
+8. Mark an unchanged proof `recheck-required` when any module in the union of
+   its previous/current exact root closures is non-reusable under the existing
+   invalidation, or when a directly/transitively referenced declaration is
+   changed or removed. Record structured reasons and the exact affected module
+   and declaration IDs. Added/removed/source-changed proofs are already non-
+   reusable by identity/source and retain their own reasons.
+9. `reusable` means only that the canonical proof source is unchanged and its
+   exact closure plus structural declaration dependencies are reusable under
+   this v1 policy. It does not mean a cached artifact has been loaded, that an
+   incremental compiler ran, or that checking may be skipped outside a cache
+   policy which explicitly adopts this report.
+10. Return one deeply frozen portable report with profile/snapshot revisions,
+    normalized visit budget, embedded module invalidation, declaration diffs,
+    proof diffs, dependency/impact edges, exact counts, and
+    `repairPolicy: 'repair-not-proposed'`. Provide one canonical serializer;
+    retain no checker, compiled workspace, map, callback, session, or raw Core
+    in the report.
+11. Validate that every proof root module exists in its own revision and that
+    all reported exact declaration identities/link resolutions are internally
+    unique. Unknown roots, malformed canonical sources, declaration compile
+    failures, cyclic expressions, unsafe budgets, and impossible resolution
+    drift fail structurally rather than produce a partial authoritative diff.
+12. Use a standalone two-module/two-revision logical fixture. One transparent
+    type alias changes body while a witness retains its surface type and an
+    unchanged proof still names that witness; an unrelated declaration and
+    proof remain available as controls. Demonstrate exact field changes,
+    structural direct/transitive impact, conservative module closure impact,
+    unchanged-source recheck classification, reusable unrelated proof,
+    add/remove without rename inference, proof source changes, permutation
+    byte stability, unresolved reference evidence, deep freezing, visit-budget
+    failure, and current proof breakage without requiring proof compilation.
+13. Keep 9A internal to the contributor/browser-safe workspace API only after
+    focused behavior is green; update capability/package consumers once. It
+    changes no existing workspace/source/artifact revision or invalidation
+    policy. The narrow core-only package entry remains unchanged.
+
+`REFACTOR-9B` remains deferred until the 9A report is measured on its fixture.
+Its later audit must distinguish at least: a source plan which replays to named
+holes; a plan rejected at a stable checker diagnostic; a stale fingerprint;
+and an absent/changed declaration. Repair output must be an ordinary explicit
+Core term or `CoreProofPlanPatch` with exact 9A/replay preconditions, provider
+identity/budget/trace, and fresh acceptance replay. It may consume the bounded
+obvious-proof provider but cannot make an AI suggestion, rename heuristic, or
+successful search authoritative.
+
+Implementation validation is focused first: the new two-revision fixture,
+nearest workspace invalidation/source/index/proof-plan suites, typecheck,
+changed-file lint, and browser closure. Workspace/packed consumers run only at
+the public export boundary. A single settled `check:ts` is required only if
+the completed tranche changes a shared public barrel or test runner and root
+SOP still makes omission a checkpoint blocker; it is never run iteratively.
+`check:all`, kernel/Lambdapi, print/book, npm/release, deployment, and sibling
+repositories remain out of scope.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -2979,6 +3138,12 @@ bounded provider but remains later in ledger order.
 | `D-PA-052` | Prefer exact replay, then one-step apply, and return every checked candidate within explicit bounds. | This yields deterministic useful proposals without arbitrary winner selection or disguised recursive automation. |
 | `D-PA-053` | Freeze candidate freshness as exact canonical index, checked-target, verified-state, and selected-goal data rather than a new host hash. | Browser-safe supplied-data semantics already provide canonical snapshots; acceptance can replay and compare them without Node authority. |
 | `D-PA-054` | Defer local assumptions, recursive discharge, instances, simplification, theorem exports, ranking, and eliminator search from the first obvious-proof provider. | Each has a distinct scope or proof-production owner and can be added after the explicit global exact/apply consumer is measured. |
+| `D-PA-055` | Repartition refactoring into an exact source/interface impact report before replay diagnostics and repair proposals. | Impact must remain available when the current proof is broken, while repair requires a specific checked failure or open goal. |
+| `D-PA-056` | Reuse the existing conservative module invalidation unchanged inside the semantic diff. | It already owns graph validation and dependency-closure invalidation; a declaration-level explanation must supplement rather than weaken it. |
+| `D-PA-057` | Match declarations and proofs only by exact qualified/stable identity; represent unmatched rename or move candidates as remove plus add. | Names, paths, Core-link reuse, and AI similarity are not authoritative identity migrations without an explicit mapping. |
+| `D-PA-058` | Compile both declaration workspaces but structurally inspect proof source without requiring either proof development to compile. | Checked declaration interfaces are necessary semantic evidence, whereas failing current proofs are a primary impact-analysis use case. |
+| `D-PA-059` | Resolve structural free-reference and owner uses through exact revision-local linkage and expose ambiguity or absence. | This yields reviewable direct/transitive explanations without guessing from serialized Core text or hiding intrinsic owner references. |
+| `D-PA-060` | Define v1 proof reuse conservatively as unchanged canonical proof source plus reusable exact closure and declaration dependencies. | The report is an invalidation/cache input, not an incremental compiler, proof check, or truth judgment. |
 
 ## Validation And Checkpoint Policy
 
@@ -3091,9 +3256,9 @@ synchronized:
 > node by analogy.
 >
 > Start from the completed `OBVIOUS-PROOF-7` semantic checkpoint `da4b63f`
-> and its synchronized ledger checkpoint once recorded. Audit `REFACTOR-9`
-> next unless current evidence repartitions it; freeze its smallest exact two-
-> revision semantic-diff and dependency-impact corpus before implementation.
+> and its synchronized ledger checkpoint `b57d205`. Implement the frozen
+> `REFACTOR-9A` exact two-revision semantic-diff/dependency-impact contract
+> next unless current implementation evidence forces a recorded correction.
 > Continue through curated-library gates, proof maintenance,
 > external certificates, and agent evaluation in the dependency order
 > maintained by the living ledger. Begin `GOAL-GRAPH-14A`
