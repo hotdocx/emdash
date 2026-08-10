@@ -80,9 +80,13 @@ include a checked contextual `have` whose fact stays visible as a named source
 obligation even when unused, plus root-scoped typed-term `refine` templates
 which expand to ordinary `have`/`exact` plans. Fresh replay also derives a
 portable direct-dependency graph over stable named open goals without changing
-the proof artifact. These features lower to backend-neutral explicit Core and
-use the TypeScript checker; they do not require a resident proof server, MCP
-round trip, or Lambdapi process.
+the proof artifact. A browser-safe two-revision semantic diff now checks both
+declaration workspaces while leaving proof source inert, reports exact
+declaration and structural dependency impact, and conservatively identifies
+unchanged proofs which require recheck—even when the current proof no longer
+checks. These features lower to backend-neutral explicit Core and use the
+TypeScript checker; they do not require a resident proof server, MCP round
+trip, or Lambdapi process.
 
 Ask the repository itself for the exact implemented and deferred envelope:
 

@@ -40,7 +40,12 @@ The package has three deliberately bounded entries:
   exact scope and proposes immutable replacements for one named hole: checked
   global `exact` candidates or one ordinary `apply` with explicit named
   premise holes. It returns all bounded candidates and fresh replay evidence;
-  it does not recursively discharge goals or retain a tactic session.
+  it does not recursively discharge goals or retain a tactic session. The
+  semantic-development diff reconstructs and checks two declaration
+  revisions, reports exact declaration/source changes plus structural
+  dependency impact, and conservatively classifies unchanged proof source for
+  recheck without executing a possibly broken current proof or proposing a
+  repair.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -53,6 +58,7 @@ import {
   synthesizeCoreLfInstanceByRoles,
 } from '@hotdocx/emdash/authoring';
 import {
+  CORE_LF_DEVELOPMENT_DIFF_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
@@ -68,12 +74,14 @@ import {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  compareCoreLfProofDevelopmentSources,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   proposeCoreObviousProofPlanPatches,
   replayCoreObviousProofCandidate,
+  serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreProofGoalCouplingGraph,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
@@ -85,6 +93,7 @@ void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void synthesizeCoreLfInstance;
 void synthesizeCoreLfInstanceByRoles;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
+void CORE_LF_DEVELOPMENT_DIFF_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
 void CORE_OBVIOUS_PROOF_PROVIDER_PROFILE;
@@ -98,12 +107,14 @@ void coreProofPlanConstructor;
 void coreProofPlanHave;
 void coreProofPlanRefine;
 void coreProofTemplatePlaceholder;
+void compareCoreLfProofDevelopmentSources;
 void createCoreProofPlanHoleReplacement;
 void createCoreLfAccessiblePremiseIndex;
 void createCoreLfProofDevelopment;
 void parseCoreLfProofDevelopmentSourceText;
 void proposeCoreObviousProofPlanPatches;
 void replayCoreObviousProofCandidate;
+void serializeCoreLfDevelopmentSemanticDiff;
 void serializeCoreProofGoalCouplingGraph;
 void searchCoreLfAccessiblePremises;
 void simplifyCoreProofPlan;
