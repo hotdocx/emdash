@@ -54,8 +54,9 @@ certificate, or public-benchmark consumer, so those rows remain explicitly
 deferred or gated by the exact prerequisites recorded below. A subsequent
 fresh CloserFans/GetPaidX runtime audit has now selected and frozen the first
 real hosted consumer: a TypeScript-first `emdash_ts` workspace template over
-the public package and ordinary Node controller. `HOSTED-CONSUMER-13A` is the
-single bounded implementation row in progress; it does not yet constitute the
+the public package and ordinary Node controller. `HOSTED-CONSUMER-13A` is now
+implemented, locally integrated in CloserFans, and final-proportional-green.
+It establishes the hosted runtime consumer but does not constitute the
 Arrowgram/public-interchange work of `GOAL-GRAPH-14B`.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
@@ -113,7 +114,8 @@ checkpoint `65549be` incorporates its retained audit history, and the post-14A
 dependency-gate audit checkpoint is `394ad2c`. Attempt 2 subsequently
 published the exact tagged artifact; public-main documentation checkpoint
 `941bf96` records its public verification and `ccf4fed` records completion of
-the selected trust/token boundary.
+the selected trust/token boundary. The hosted-consumer contract checkpoint is
+`af87e75`; its CloserFans semantic/local-`master` checkpoint is `bd4146b`.
 
 Depends-On:
 
@@ -599,11 +601,11 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
 | `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | deferred | No solver dependency/binary/corpus or certificate checker is selected. Reactivate only for one concrete solver/certificate-format consumer plus independent reconstruction or checking. |
 | `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | complete | `f46ff9a`; self-contained exact cases, arbitrary inert patches, fresh selected-proof replay, stable diagnostics, integer retrieval/plan/replay metrics, and provider-reported usage |
-| `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements plus a concrete agent/host consumer and reviewed corpus/public-package boundary |
+| `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements and the first concrete hosted package consumer now exist; still require a reviewed representative corpus plus a separately frozen public agent-run/interchange boundary. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
-| `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | in progress | Fresh sibling/runtime audit selected `templates/emdash_ts`: public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Frozen contract and focused gates are below. |
+| `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
-| `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A and the public package/OIDC boundary are complete; 13A must first qualify the concrete hosted runtime consumer, then 14B still requires a separately frozen public interchange/view/action contract and a fresh Arrowgram edit audit. |
+| `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A, public package/OIDC, and the concrete GetPaidX runtime consumer are complete; still require a separately frozen canonical interchange/view/action contract and a fresh Arrowgram edit audit. |
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 
 Only one semantic row is in progress at a time. A later row may be
@@ -4328,6 +4330,74 @@ public agent-run interchange is introduced. It also does not implement
 need a separately frozen canonical interchange, permission model, and fresh
 edit-time sibling audit after this runtime foothold is measured.
 
+## HOSTED-CONSUMER-13A Completion Record
+
+Date: 2026-08-10
+
+Result: complete at CloserFans/GetPaidX semantic checkpoint
+`bd4146bd7447f65160d135d0d2bed55d1eb383f1`. Branch
+`goal/emdash-typescript-template-v1` was created from exact local `master`
+baseline `07899838e399124423b0f62befa2861bc055a001`; after the bounded diff was
+green, local `master` was advanced by an exact one-commit `--ff-only` merge to
+`bd4146b`. CloserFans has no configured Git remote, so no push, PR, tag,
+deployment, image build, or cloud mutation occurred. The pre-existing
+untracked `reports/GENERAL_REPOSITORY_QUALITY_REVIEW_PLAN_2026-08-09.md`
+remained uninspected and untouched.
+
+The integrated consumer adds `templates/emdash_ts` with an ordinary
+TypeScript management file, one checked identity and one visible named
+`body` hole, a stateless command adapter, exact public dependencies, and a
+lightweight preview. The outer command computes fresh SHA-256 stamps for the
+actual management source, published checker profile, and freshly compiled
+module interface before creating proof fingerprints. The template has no
+`workspacePoolName` and therefore uses the existing default Node 20
+controller.
+
+The first public-registry probe rejected the initially proposed later-branch
+catalog calls: exact `@hotdocx/emdash@0.1.0` does not export
+`createCoreLfProofDevelopment` or `compileCoreLfProofDevelopment`. This was a
+useful external boundary finding, not a test waiver. The implementation was
+corrected to compose the actually published
+`compileCoreLfDeclarationWorkspace` and
+`compileCoreLfWorkspaceProofDocument` APIs; no local package path, copied
+unpublished implementation, version change, or emergency npm release was
+introduced.
+
+Final proportional evidence:
+
+- `npm run templates:validate` passed discovery of `emdash_ts` and the
+  repository archive verifier's exclusion of locks, manifests, and generated
+  runtime files;
+- `npm run templates:verify:emdash-ts` copied the template to a disposable
+  directory, installed from the public registry, verified exact version
+  `0.1.0`, passed its strict TypeScript check, freshly checked the complete
+  proof, exposed `Goal body` for the open proof, observed expected check exit
+  status 1 plus the incomplete diagnostic, and fetched the live preview;
+- targeted ESLint over the standalone verifier passed with the repository
+  configuration forced over that normally ignored script path;
+- JSON syntax, absence of tracked `node_modules`/lockfiles, exact diff,
+  whitespace, conflict-marker, ancestry, staged-path, and post-integration
+  status checks passed; and
+- the earlier green template validation was carried forward after only proof-
+  source/provenance and runtime-adapter corrections, while the public-package
+  runtime smoke was rerun green after the final source hash/provenance edit.
+
+No CloserFans root typecheck/test/E2E aggregate, Emdash TypeScript aggregate,
+Lambdapi target, controller rebuild, Arrowgram build, or repository-wide
+aggregate was run. The frozen boundary changed only a standalone template,
+its focused executable verifier, one root script entry, and discoverability/
+current-runtime prose; those omitted aggregates would not add direct evidence
+to the public package/runtime contract.
+
+`HOSTED-CONSUMER-13A` therefore satisfies the concrete hosted-runtime
+prerequisite. The nearest architectural row is now an audit of
+`GOAL-GRAPH-14B`'s canonical interchange and view/action split. That audit
+must read current Arrowgram and CloserFans SOP/state again, decide whether the
+internal 14A research-planning profile is mature enough to export, and freeze
+one smallest real goal-graph consumer before either sibling is edited. It may
+also reject or repartition 14B; the existence of a proof template does not
+authorize a universal goal ontology, hosted mutation API, or visual protocol.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -4419,6 +4489,7 @@ edit-time sibling audit after this runtime foothold is measured.
 | `D-PA-085` | Do not activate hosted adapters merely because the package is now public; first finish OIDC/token hardening and require one concrete sibling consumer. | Distribution resolves one prerequisite, while a public interchange, permission surface, and renderer/controller contract still need exact consumers and separate authority. |
 | `D-PA-086` | Close PACKAGE-RELEASE-13 after exact authenticated npm settings and one-time credential retirement, while retaining bypass-2FA-token compatibility by explicit human supersession. | OIDC publisher identity, residual bootstrap authority, and package-wide token policy are separate. The publish-only trust is directly visible, the dedicated token/local value and GitHub secret are gone, and the unauthenticated npm 11.19.0 `trust list` result is recorded honestly as `E401` rather than a pass. |
 | `D-PA-087` | Make the first hosted consumer a TypeScript-first `emdash_ts` GetPaidX template on the default controller, before any goal-graph interchange or new host API. | The published zero-runtime-dependency package fits the existing Node 20 install/start contract and direct source-visible holes demonstrate the AI-native workflow immediately; a dedicated image, LambdaPi runtime, MCP surface, or premature Arrowgram protocol would add authority without a selected need. |
+| `D-PA-088` | Adapt the starter to 0.1.0's published single-workspace proof-document boundary and compute real outer fingerprints, rather than linking the later proof-development catalog or using fixture stamps. | A real external consumer must test public bytes and public types. The existing published workspace compiler already supplies exact closure checking; Node-owned source/profile/interface hashes preserve honest freshness without widening Emdash Core or forcing an unrelated release. |
 
 ## Validation And Checkpoint Policy
 
@@ -4530,14 +4601,17 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from the completed `GOAL-GRAPH-14A` semantic checkpoint `faa4c27`, its
-> synchronized completion record, and the earlier checked proof-engineering
-> checkpoints in this plan. Keep `GOAL-GRAPH-14B`, `AGENT-EVAL-12B`,
-> `STDLIB-8`, `COUNTEREVIDENCE-10`, and `EXTERNAL-CERT-11` behind their
-> recorded public-consumer, product, package, or solver gates rather than
-> inventing authority merely to advance the ledger. Audit those gates for a
-> concrete consumer and select only work whose prerequisite is now genuinely
-> present; otherwise leave the row explicitly gated.
+> Start from completed `GOAL-GRAPH-14A` checkpoint `faa4c27`, completed npm
+> publication/trust boundary, and completed CloserFans hosted-consumer
+> checkpoint `bd4146b`, together with their synchronized records and the
+> earlier checked proof-engineering checkpoints in this plan. Audit
+> `GOAL-GRAPH-14B` next: re-read current Arrowgram and CloserFans SOP/state,
+> determine whether the narrow 14A profile is ready for one canonical public
+> interchange plus smallest real view/action consumer, and freeze or reject
+> that bounded design before sibling edits. Keep `AGENT-EVAL-12B`, `STDLIB-8`,
+> `COUNTEREVIDENCE-10`, and `EXTERNAL-CERT-11` behind their remaining corpus,
+> product, or solver gates rather than inventing authority merely to advance
+> the ledger.
 > Preserve the hard distinction between a kernel-checked theorem and every
 > weaker task/observation/approval/AI evidence class.
 >
