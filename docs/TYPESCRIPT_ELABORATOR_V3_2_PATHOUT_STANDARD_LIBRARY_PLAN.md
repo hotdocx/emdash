@@ -18,9 +18,11 @@ but measured TypeScript rule-admission counterevidence supersedes that review;
 corrected behavior-free proposal v2 at checkpoint `7413dd6` adds only active
 `hom_con` object projection line 7865, changes the root-local boundary to
 5/7/0/6, and is separately approved under delegated unattended authority with
-human supersession at review checkpoint `3421647`; only that root-local
-implementation is ready, and no PathOut/PathInd profile or public export is
-yet qualified
+human supersession at review checkpoint `3421647`; measured faithful-signature
+compilation now supersedes that review at active displayed-functor object
+projection line 9177; corrected proposal v3 changes only the root-local
+boundary to 5/8/0/6 and awaits checkpoint plus separate review; no PathOut/
+PathInd profile or public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -182,7 +184,7 @@ named library presentation.
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
-| `PATHIND-TRUSTED-PROFILE-1C` | corrected proposal v2 separately reviewed; exact implementation ready | completed 1B; v2 proposal/review checkpoints `7413dd6`/`3421647`; superseded v1 checkpoints `cc639fc`/`2deae91` | First semantic compilation measured the missing active `hom_con` object projection at line 7865. V2 preserves v1 and adds only that runtime rule; separate review authorizes the root-only 5/7/0/6 implementation, one rho-section consumer, strict negatives, and eight bounded-oracle assertions. |
+| `PATHIND-TRUSTED-PROFILE-1C` | corrected proposal v3 awaiting checkpoint and separate review | completed 1B; superseded v2 checkpoints `7413dd6`/`3421647` and v1 checkpoints `cc639fc`/`2deae91` | Exact active signatures plus line 7865 reach the third FibCov projection, where missing active line 9177 leaves `Obj(Functord_cat)` versus `Transf`. V3 adds only that runtime bridge, yielding a non-authorizing root-only 5/8/0/6 boundary, one rho-section consumer, strict negatives, and nine bounded-oracle assertions. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -1271,9 +1273,72 @@ git diff --check
 ```
 
 No Lambdapi or long aggregate is relevant to this behavior-free review.
-Review checkpoint `3421647` freezes that decision. The next authorized action
-is only the corrected 5/7/0/6 root-local implementation with focused
-consumers, strict negatives, and the eight-assertion bounded oracle.
+Review checkpoint `3421647` freezes that decision, but its implementation
+authority is superseded by the measured counterevidence below.
+
+### `PATHIND-TRUSTED-PROFILE-1C` corrected proposal v3
+
+The v2 semantic experiment first restored the exact active Fibre-based
+signatures for `fib_cov_src_func` and `fib_cov_transf` at lines 13952–13962.
+With those faithful signatures and line 7865, the first two FibCov projections
+subject-check. The third projection then fails during left-side inference with
+`INVALID_RUNTIME_RULE_TYPE`: the transported value still has the stable
+`Obj(Functord_cat(K,Rep(x),E))` presentation while `tapp0_fapp0` expects the
+ordinary `Transf` classifier.
+
+The predecessor already declares `Functord_cat`, `Transf_cat`, and the
+transparent `Transf`-to-`Obj(Transf_cat)` runtime delta. Read-only transfer
+inspection confirms that it does not carry active source line 9177,
+
+```text
+Obj(Functord_cat(K,E,D)) = Obj(Transf_cat(K,Cat_cat,E,D)).
+```
+
+The corrected immutable proposal is
+[`src/v3_2/pathind_fixed_source_proposal_v3.ts`](../src/v3_2/pathind_fixed_source_proposal_v3.ts),
+with focused checks in
+[`tests/v3_2_pathind_fixed_source_proposal_v3_tests.ts`](../tests/v3_2_pathind_fixed_source_proposal_v3_tests.ts).
+It preserves v2, inserts only line 9177 after line 7865 and before the six
+FibCov/PathInd rules, and changes the exact local delta to **5/8/0/6**. The
+focused runtime observations rise to five and bounded oracle assertions to
+nine. No declaration, proof rule, mathematical rule, or later consumer is
+added.
+
+V3 requires the exact active Fibre signatures and explicitly denies a
+canonical-signature substitution, generic checker change, or duplicate
+classifier declaration. It preserves the rho-section consumer, eight strict
+negatives, safe-library authority denials, non-export boundary, and every
+1D/1E/1F/public/release denial. V2 checkpoints `7413dd6` and `3421647` remain
+backtracking evidence but no longer authorize implementation.
+
+Corrected-v3 proposal validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_fixed_source_proposal_v3.ts \
+  tests/v3_2_pathind_fixed_source_proposal_v3_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_fixed_source_proposal_v3_tests.ts
+  6 tests / 1 suite: 6 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi or long repository aggregate was run for this immutable-data
+correction. Active source bytes, shared engines, package/workspace setup, and
+public surfaces are unchanged; focused drift, scope, authorization, static,
+and non-export gates directly cover it. Proposal v3 is non-authorizing, and
+semantic implementation remains paused until its rollback-safe checkpoint
+and separate immutable review under
+`H-TS-EMDASH-PATHIND-FIXED-SOURCE-03` /
+`D-TS-EMDASH-PATHIND-FIXED-SOURCE-003`.
 
 ## Required Evidence For Implementation
 

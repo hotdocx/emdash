@@ -89,9 +89,12 @@ the `hom_con` object projection at authority line 7865. That evidence
 supersedes v1 implementation authority. Corrected behavior-free proposal v2
 at checkpoint `7413dd6` changes only the root-local boundary from 5/6/0/6 to
 5/7/0/6 and is separately approved under delegated unattended authority with
-human supersession at review checkpoint `3421647`; only that corrected root-
-local implementation is ready. No PathOut/PathInd public package export has
-yet been added.
+human supersession at review checkpoint `3421647`, but faithful-signature
+compilation measured the further missing `Obj(Functord_cat)` projection at
+active line 9177. That evidence supersedes v2 implementation authority.
+Corrected non-authorizing proposal v3 changes only the root-local boundary to
+5/8/0/6 and awaits its checkpoint plus separate review; implementation is
+paused. No PathOut/PathInd public package export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -646,7 +649,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. Measured line-7865 counterevidence supersedes the reviewed 5/6/0/6 PathInd proposal v1; checkpointed and separately reviewed proposal v2 authorizes only the corrected root-local 5/7/0/6 implementation. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. Line-9177 counterevidence supersedes reviewed 5/7/0/6 PathInd proposal v2; corrected non-authorizing proposal v3 freezes only the 5/8/0/6 root-local boundary and awaits checkpoint plus separate review. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -5690,6 +5693,33 @@ pass eleven focused tests in two suites together with root typecheck, focused
 lint, and diff hygiene. Review checkpoint `3421647` freezes that decision; no
 semantic byte is included in the review.
 
+That v2 authorization is now superseded by the next measured rule-admission
+boundary. Restoring the exact active Fibre-based signatures at source lines
+13952–13962 makes line 7865 admit the first two FibCov projections, but the
+third projection's left side is rejected with `INVALID_RUNTIME_RULE_TYPE`:
+`Obj(Functord_cat(K,Rep(x),E))` remains an object-classifier presentation while
+`tapp0_fapp0` expects the ordinary `Transf` classifier. The predecessor already
+declares `Functord_cat`, `Transf_cat`, and the `Transf` classifier delta, but no
+TypeScript transfer contains active source line 9177,
+
+```text
+Obj(Functord_cat(K,E,D)) = Obj(Transf_cat(K,Cat_cat,E,D)).
+```
+
+Corrected behavior-free proposal v3 preserves v2 and adds only that active
+runtime bridge after line 7865, producing the exact local boundary **5/8/0/6**,
+five selected runtime observations, and nine bounded-oracle assertions. It
+explicitly requires the active Fibre signatures and denies a canonical-
+signature substitution, generic checker change, or duplicate classifier
+owner. V2 checkpoints `7413dd6` and `3421647` remain backtracking evidence but
+no longer authorize implementation.
+
+Proposal v3 is immutable, root-only, absent from contributor/npm/browser
+barrels, and non-authorizing. Root typecheck, focused lint, six focused tests,
+and diff hygiene pass; no Lambdapi or long aggregate was run because this is
+an evidence-only correction. Semantic implementation remains paused until v3
+has a rollback-safe checkpoint and separate immutable review.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -5822,6 +5852,7 @@ semantic byte is included in the review.
 | `D-PA-126` | Approve only checkpointed fixed-source PathInd proposal v1 under delegated unattended authority, with human supersession. | Checkpoint `cc639fc` preserves the exact 5/6/0/6 boundary, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review grants local implementation authority without making the proposal self-authorizing. |
 | `D-PA-127` | Supersede the v1 PathInd review and correct proposal v2 to 5/7/0/6 with active `hom_con` object projection line 7865. | First semantic rule admission measured a functor-versus-Hom classifier residue before the FibCov package component could subject-check. The predecessor declares `hom_con` but omits its active object computation; importing exactly that rule is narrower than changing the checker, rewriting FibCov, or duplicating the owner. V1 remains backtracking evidence, and v2 still requires its own checkpoint and separate review. |
 | `D-PA-128` | Approve only checkpointed corrected PathInd proposal v2 under delegated unattended authority, with human supersession. | Proposal checkpoint `7413dd6` preserves the exact 5/7/0/6 correction, including only active line 7865 beyond v1, while retaining the completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `3421647` restores local implementation authority without making the proposal self-authorizing. |
+| `D-PA-129` | Supersede the v2 PathInd review and correct proposal v3 to 5/8/0/6 with active displayed-functor object projection line 9177. | With exact source signatures restored, line 7865 admits the first two FibCov projections, while the third reaches the active `Obj(Functord_cat)` versus `Transf` presentation boundary. The predecessor owns both classifiers and the `Transf` delta but omits line 9177; importing exactly that bridge is narrower than changing signatures, the checker, or declarations. V2 remains backtracking evidence, and v3 still requires its own checkpoint and review. |
 
 ## Validation And Checkpoint Policy
 
