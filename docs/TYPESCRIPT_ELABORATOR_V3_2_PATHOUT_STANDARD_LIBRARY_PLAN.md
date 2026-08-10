@@ -1,7 +1,9 @@
 # TypeScript Elaborator v3.2 PathInd Trusted-Profile And PathOut Library Plan
 
-Status: deferred future-goal proposal; not part of the completed categorical-
-binder usability persistent goal
+Status: active selected standard-library continuation under
+`TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is the next bounded
+behavior-free audit; no PathOut library semantic or public export is yet
+implemented
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -24,6 +26,39 @@ Core, generic declaration and rule compilers, and recursive categorical
 construction surface. The historical filename is retained so existing plan
 links remain stable; "standard library" in that filename does not place the
 opaque PathInd rules inside the end-user library.
+
+## Activation And Product Selection
+
+The 2026-08-10 `POST-14B-AUDIT-16` review in
+[`TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md`](./TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md)
+selects this as the first curated TypeScript/emdash mathematical product
+profile. This is a consumer-backed selection, not promotion by filename:
+
+- the checked Emdash book already uses PathOut, its canonical reflexive-to-
+  path arrow, fixed/varying-source arrow induction, and the transitivity
+  benchmark as a central mathematical narrative;
+- the existing research-overview artifact already identifies PathOut/PathInd
+  diagram owners; and
+- the public `@hotdocx/emdash@0.2.0` package supplies a verified distribution
+  boundary but currently exports no PathOut/PathInd library.
+
+The selection deliberately excludes the isolated Nat/generated-owner and
+scale/stress profiles. Those are valuable mechanism evidence for a later
+curated prelude, but they are not a public library and have no current product
+consumer selecting their exact authority closure.
+
+The active source inputs at selection time are pinned by byte digest:
+
+```text
+emdash2/emdash3_2.lp
+  0a117742d326bad82fe72cc73c624a0c174e3b48dd4047ebd8f6ed6ff7837860
+emdash2/emdash3_2_checks.lp
+  fbbe7ed4b7675c46ad79f65e2f6799dfc3c87b9287b593e6f1f0e1bd8e37f26a
+```
+
+These identify audit input only. Owner-position inspection, exact dependency
+closure, TypeScript checking, and a bounded Lambdapi oracle remain required
+before any trusted profile or derived definition is claimed.
 
 ## Architectural Verdict And Trust Boundary
 
@@ -119,17 +154,44 @@ missing facade is not a missing semantic owner. Likewise, a representable
 family may compile to the transparent `hom_int(id)` body while retaining the
 named library presentation.
 
-## Proposed Future Work Ledger
+## Active Work Ledger
 
-| Slice | Dependencies | Exact purpose |
-| --- | --- | --- |
-| `PATHOUT-TRUST-BOUNDARY-0A` | active source and checks; current transfer profiles | Freeze exact declaration/rule order and provenance; distinguish transparent definitions from opaque trusted owners; measure the smallest descendant profile and specify its sealing boundary. No behavior. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | completed 0A | Author representables, fixed-source `PathOut`, source-arrow action, path objects, reflexive object, and canonical reflexive-to-path arrow as transparent end-user library definitions. Check fibre, object, arrow, and next-action behavior. |
-| `PATHIND-TRUSTED-PROFILE-1C` | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
-| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
-| `PATHOUT-LIBRARY-PRESENTATION-1F` | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
-| `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
+| Slice | State | Dependencies | Exact purpose |
+| --- | --- | --- | --- |
+| `PATHOUT-TRUST-BOUNDARY-0A` | in progress | active source and checks; current transfer profiles | Freeze exact declaration/rule order and provenance; distinguish transparent definitions from opaque trusted owners; measure the smallest descendant profile and specify its sealing boundary. No behavior. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | pending | completed 0A | Author representables, fixed-source `PathOut`, source-arrow action, path objects, reflexive object, and canonical reflexive-to-path arrow as transparent end-user library definitions. Check fibre, object, arrow, and next-action behavior. |
+| `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
+| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
+| `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
+| `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
+
+### `PATHOUT-TRUST-BOUNDARY-0A` exact audit contract
+
+This first row is source/profile evidence only. It must produce a deterministic
+review record which:
+
+1. pins the active source and checks digests above and rejects drift;
+2. inventories every selected PathOut/PathInd declaration and rule in active
+   source order, with exact owner kind, opacity, body/rule status, and source
+   position;
+3. computes the lexical and typed dependency closure against existing
+   TypeScript transfer descendants and identifies every missing prerequisite
+   without duplicating it by spelling;
+4. partitions selected items into transparent derived-library definitions,
+   opaque trusted-profile owners/rules, and later presentation-only facades;
+5. measures the smallest usable fixed-source foundation separately from
+   internalized PathInd and transitivity, so later slices do not import a
+   whole-source prefix by convenience;
+6. specifies profile sealing, provenance, ordinary-library inability to add
+   runtime/proof rules, and deterministic optional Lambdapi emission; and
+7. authorizes no semantic registration, browser/public barrel, package
+   version, syntax, or release change.
+
+The audit may add one root-only immutable TypeScript review module and focused
+tests if executable structure materially improves drift detection. Such a
+module remains contributor evidence and must not enter `package_core`,
+`package_authoring`, or `package_workspace`.
 
 Each behavioral slice requires its own frozen proposal and separate review.
 The first executable slice must inventory existing transfer owners before
@@ -139,7 +201,7 @@ active rules inside the sealed profile. No owner is promoted merely for naming
 symmetry, and no trusted rule is exposed as an ordinary standard-library
 declaration capability.
 
-## Required Evidence For A Future Implementation
+## Required Evidence For Implementation
 
 1. Exact active-source signatures/bodies/rules and owning positions.
 2. A compiled, sealed TypeScript theory-profile module over the smallest
@@ -161,7 +223,7 @@ declaration capability.
 
 ## Explicit Non-Goals
 
-This future plan does not authorize:
+This active plan does not authorize:
 
 - a generic Lambdapi parser or bulk acquisition redesign;
 - a new TypeScript Core/checker/evaluator primitive for path induction;
@@ -176,10 +238,11 @@ This future plan does not authorize:
   consistency claims;
 - push, merge, publication, deployment, or worktree cleanup.
 
-## Deferred Persistent `/goal` Launch Prompt
+## Persistent `/goal` Continuation Contract
 
-Use this only when starting the separate future trusted-profile and PathOut-
-library goal:
+The active proof-assistant goal delegates this selected standard-library row
+to the present plan. A later dedicated goal may reuse the following objective
+without changing the current authority or Git boundary:
 
 ```text
 Implement the living TypeScript/emdash v3.2 PathInd trusted-profile and
@@ -208,6 +271,7 @@ The categorical-binder usability goal establishes the prerequisite
 architecture: recursive ordinary and displayed binders, canonical finite
 displayed telescopes, internally owned action, direct/text parity for the
 reviewed grammar, and an executable reviewer. Deferring this trusted-profile
-and derived-library program therefore does not reopen or weaken that
-completion claim. It records the next trusted-theory/library integration
-program for a future persistent goal.
+and derived-library program until the present selection did not reopen or
+weaken that completion claim. Activating its separate trust-boundary audit
+still does not revise the completed binder architecture; it begins the next
+trusted-theory/library integration program above that prerequisite.

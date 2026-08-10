@@ -73,7 +73,15 @@ derived-read-only CloserFans/GetPaidX artifact template composes exact public
 Emdash and Arrowgram packages without changing either public schema or adding
 a hosted action. `GOAL-GRAPH-14B3` is complete: qualified CloserFans checkpoint
 `5c0d0c1` is now also the exact local `master` tip by clean fast-forward.
-Authenticated hosted actions remain a distinct 14B4 boundary.
+The read-only post-14B readiness audit is complete. Authenticated hosted
+actions and public agent evaluation retain their separate authority/corpus
+gates; finite counterevidence and external certificates retain their concrete-
+consumer gates. The standard-library parent is repartitioned: a concrete
+PathOut/PathInd product profile is selected because it is already consumed by
+the checked book and research-overview story, while its transparent library
+definitions and opaque semantic owners remain separated by the dedicated
+trusted-profile plan. The first exact trust-boundary/closure audit is selected
+next; no library semantic or public package export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -624,7 +632,9 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `INDEX-SEARCH-6A` | Exact source-visible premise index and symbolic search | complete | `fd371e4`; exact closure, visibility, determinism, browser, packed-package, and full-TypeScript gates green |
 | `INDEX-SEARCH-6B` | Proof-export, relationship/use enrichment, and optional ranking | deferred | theorem-export interface plus exact class/instance/coercion and use owners; one measured retrieval corpus before embeddings |
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
-| `STDLIB-8` | Curated public library profile | gated | existing generated-owner/stress decisions, exact product profile, public base-package trust boundary |
+| `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
+| `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | selected | Delegate to `TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`; run `PATHOUT-TRUST-BOUNDARY-0A` before behavior, exports, syntax, or release. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -641,6 +651,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-GRAPH-14B3` | Deterministic Arrowgram projection and GetPaidX consumer | complete | CloserFans `5c0d0c1`; exact public packages, direct TypeScript authority, canonical/tamper-checked derived view, deterministic static SVG, focused host gates, and clean local-`master` fast-forward complete. No Arrowgram edit, push, deployment, or hosted action. |
 | `GOAL-GRAPH-14B4` | Authenticated hosted evidence/action adapters | deferred | Require one exact mutation consumer, actor/signature authority, idempotency/audit/permission semantics, and current host security/deployment clearance; visualization does not authorize effects. |
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
+| `POST-14B-AUDIT-16` | Re-evaluate incomplete rows after the real package and Arrowgram/GetPaidX consumer | complete | 14B4, 12B, 10, and 11 retain their exact gates; public distribution plus checked book/research consumers make only the bounded `STDLIB-8A` product-selection row ready. |
 
 Only one semantic row is in progress at a time. A later row may be
 repartitioned or rejected when evidence contradicts this plan.
@@ -5300,6 +5311,101 @@ visual consumer is not by itself a selected mutation workflow, mathematical
 library profile, benchmark corpus, agent transport, finite interpretation, or
 certificate checker.
 
+## POST-14B-AUDIT-16 Readiness And Standard-Library Selection
+
+Date: 2026-08-10
+
+Result: complete, read-only. The exact public package and real read-only
+Arrowgram/GetPaidX consumer change only one incomplete-row prerequisite. They
+make a public mathematical library distributable and independently
+installable; they do not manufacture hosted mutation authority, a benchmark
+corpus or agent transport, a finite interpretation, or a certificate checker.
+
+### Rows which remain gated
+
+`GOAL-GRAPH-14B4` remains deferred. The current GetPaidX MCP surface starts
+the editable `arrowgram_web` template and restricts source reads/writes to
+`arrowgram.workspace.json`, `paper.md`, `paper.css`, and `diagram.json`.
+The new `emdash_goal_graph` template is deliberately a static, derived,
+read-only preview. Neither generic workspace file mutation nor diagram editing
+authenticates a human approval, binds an actor/signature to an exact Emdash
+obligation, supplies goal-specific idempotency/audit/permission semantics, or
+authorizes a status transition. A future row still needs one concrete effect
+consumer and a separately reviewed additive/versioned host contract.
+
+`AGENT-EVAL-12B` remains gated. The internal 12A evaluator is a pure,
+browser-safe scorer, but it is absent from all three public package barrels
+and its focused five-case fixture is a standalone ordinary-LF test corpus.
+The two hosted Emdash templates neither run benchmark attempts nor define a
+public agent-run/interchange transport. Public package distribution and a
+generic Codex-capable workspace satisfy hosting prerequisites only; they do
+not supply the representative translated/native corpus or frozen transport
+contract required by 12B.
+
+`COUNTEREVIDENCE-10` and `EXTERNAL-CERT-11` are unchanged. No selected claim
+has a finite domain/interpretation/evaluator contract, and no solver,
+certificate format, representative problem corpus, or independent
+reconstructor/checker has been selected. A visualization or package consumer
+is not a substitute for either evidence boundary.
+
+### Standard-library product decision
+
+`STDLIB-8` is repartitioned rather than left as one vague gate. The public
+package trust prerequisite is complete. The first mathematical profile is
+selected as the existing PathOut/PathInd/transitivity story for three concrete
+reasons:
+
+1. the checked Emdash book already presents `PathOut_Z(x)`, its distinguished
+   object, the canonical `rho` arrow, fixed/varying-source arrow induction,
+   and the transitivity benchmark as a central reader-facing theorem;
+2. the existing research-overview artifact names PathOut and PathInd diagram
+   owners, so a TypeScript library closes a real source-to-paper/reviewer gap
+   rather than creating a toy API; and
+3. the dedicated PathOut plan already records the required trust split and
+   explicit non-goals against a current active Lambdapi authority.
+
+This selection does **not** promote the isolated scale profiles. In
+particular, the explicit `ind_nat`/`nat_elim` hybrid demonstrates that curated
+recursors can pass through the generic engines without an end-user inductive
+frontend, but it remains qualification evidence outside the browser/product
+barrels. A later consumer may select a compact prelude/Nat profile under its
+own provenance and trust audit; it is not silently bundled into the first
+PathOut package.
+
+The selected product remains four layers, in order:
+
+1. the generic backend-neutral LF/Core/checker, unchanged;
+2. a sealed, provenance-pinned Emdash v3.2 theory profile containing only
+   selected opaque owners and their exact checked rules;
+3. transparent PathOut/PathInd library definitions and checked proof terms;
+   and
+4. thin typed/public/reviewer presentation with no semantic engine.
+
+The current public package exposes generic Core, authoring, and workspace
+entries but no PathOut/PathInd library owner. The contributor barrel exports
+the scale inductive audit but not the proof-agent benchmark, and neither fact
+selects a public library. Accordingly `STDLIB-8A` is complete as a product and
+trust-boundary decision only. `STDLIB-8B` delegates implementation to
+[`TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md),
+starting with its behavior-free `PATHOUT-TRUST-BOUNDARY-0A` declaration/rule/
+provenance/closure audit. No source parser, new Core node, new checker case,
+Lambdapi runtime dependency, public export, package release, or mathematical
+behavior is authorized before that audit is frozen and reviewed.
+
+Authority identity for the next audit is the branch's exact
+`emdash2/emdash3_2.lp` byte digest
+`0a117742d326bad82fe72cc73c624a0c174e3b48dd4047ebd8f6ed6ff7837860` and
+checks digest
+`fbbe7ed4b7675c46ad79f65e2f6799dfc3c87b9287b593e6f1f0e1bd8e37f26a`.
+These hashes pin review input; they do not replace owner-position inspection
+or the bounded Lambdapi oracle when semantics are later implemented.
+
+No TypeScript, package, sibling, active Lambdapi, book/print, registry,
+deployment, or hosted state changed during this audit. Proportional validation
+is exact source/public-barrel/sibling-contract inspection, branch/worktree
+recovery, document-link review, and diff hygiene. No test or long aggregate
+is relevant to this documentation-only decision.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -5404,6 +5510,9 @@ certificate checker.
 | `D-PA-098` | Freeze dependency-layer/grid layout, a four-color status palette, kind/status text labels, and explicit solid `requires` versus dashed `one-of` arrows in the consumer. | Determinism and accessibility require exact policy, while the canonical companion goal view retains all semantic and non-authority data that Arrowgram's intentionally small visual schema cannot represent. |
 | `D-PA-099` | Accept CloserFans `5c0d0c1` as the qualified 14B3 consumer candidate without widening the generic Arrowgram editor or GetPaidX action surface. | Fresh public-package replay, exact derived bytes, fixed visual assertions, privacy checks, tamper rejection, static SVG, and host contract gates demonstrate the read-only consumer; mutable hosted actions still lack the separate authority required by 14B4. |
 | `D-PA-100` | Complete 14B3 by fast-forwarding only local CloserFans `master` to exact candidate `5c0d0c1`, with no sibling push or deployment. | The audited baseline was the exact ancestor, all changed bytes were already qualified, CloserFans has no configured remote, and changing a local ref is sufficient to integrate the repository-owned template without pretending it is live in production. |
+| `D-PA-101` | Keep 14B4, 12B, counterevidence, and external certificates behind their existing authority, corpus, interpretation, and checker gates after the real 14B3 consumer. | A static graph and generic workspace mutation prove distribution/rendering only; neither is authenticated Emdash evidence, a representative agent evaluation, a finite model, or a proof certificate. |
+| `D-PA-102` | Select PathOut/PathInd/transitivity as the first curated mathematical product profile, while keeping prelude/Nat transfer artifacts unpromoted. | The checked book and research-overview already consume this Emdash-specific mathematics, and its dedicated plan has a mature trust-separated design; scale fixtures demonstrate mechanisms but do not constitute a public library decision. |
+| `D-PA-103` | Require the PathOut standard library to preserve four layers: generic kernel, sealed opaque-owner theory profile, transparent derived library, and thin presentation. | Opaque `path_ind_sec`/coherent packages and their computation rules belong to the trusted calculus, while representables and PathOut constructions are transparent compositions; conflating them would misstate both derivability and the package trust boundary. |
 
 ## Validation And Checkpoint Policy
 
