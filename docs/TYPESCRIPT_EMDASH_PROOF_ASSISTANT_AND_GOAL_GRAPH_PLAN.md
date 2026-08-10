@@ -488,7 +488,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `BASELINE-INTEGRATE-0` | Fast-forward the qualified `9c633c8` predecessor into local/public `main` | complete | local and `origin/main` both exactly `9c633c8`; non-force push verified |
 | `DEV-CATALOG-1` | General browser-safe multi-module/multi-proof development catalog | complete | focused/package gates green; one long aggregate directly waived after interrupted evidence became unrecoverable |
 | `DEV-CLI-2A` | Canonical supplied-data proof-development source and reconstruction | complete | `c60d09e`; focused/static/browser/packed gates green; long aggregate intentionally omitted |
-| `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | pending | completed `DEV-CLI-2A`; exact fixed-file and size/symlink policy |
+| `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | in progress | completed `DEV-CLI-2A`; frozen contract below |
 | `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4`; no ad hoc second graph authority |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | pending | catalog consumer; no embedded process metas |
 | `PLAN-DECOMPOSE-3B` | Implement the first measured decomposition nodes | pending | approved 3A contract and positive/negative corpus |
@@ -851,6 +851,115 @@ fixed-file/explicit-root/size/symlink/output contract. `PLAN-DECOMPOSE-3A`
 remains dependency-ready as a semantic alternative after this completed
 catalog consumer.
 
+## DEV-CLI-2B Audit And Frozen Command Tranche
+
+Date: 2026-08-10
+
+Status: existing mounted-store and command compatibility audit complete;
+contract frozen and approved for implementation by direct continuation and
+the standing bounded self-approval authorization.
+
+The audit confirms that `lf_remote_workspace_store.ts` already demonstrates
+the required POSIX mounted-file discipline—canonical absolute real roots,
+fixed child names, `O_NOFOLLOW`, regular-file checks before reading, byte
+bounds, and exact UTF-8—but its lock/cache/error model belongs to the distinct
+remote fragment-workspace profile. `ai_proof_cli.ts` must also remain the
+byte-compatible fixed demo behind legacy `./scripts/emdash check|goals`.
+Therefore `DEV-CLI-2B` adds a separate read-only proof-development adapter and
+an exact shell namespace rather than widening either owner.
+
+### Fixed source acquisition
+
+1. Add a Node-only mounted proof-development store with fixed filename
+   `emdash.proof-development.source.json` and a 64 MiB maximum.
+2. Its sole input is `{ projectRoot }`. The root must be a normalized absolute
+   existing real directory whose `realpath` is byte-identical, so symbolic
+   root components are rejected. There is no current-directory, environment,
+   `HOME`, upward-search, manifest-search, URL, arbitrary source-path, or data
+   root default.
+3. Open only the fixed direct child with `O_RDONLY | O_NOFOLLOW |
+   O_NONBLOCK`; require a regular file; check the stat size and bytes actually
+   read; and require an exact UTF-8 round trip.
+4. Parse through `parseCoreLfProofDevelopmentSourceText`, then compute a
+   `sha256:` digest of those exact canonical bytes. Hashing is acquisition
+   evidence and does not replace proof fingerprints or checker replay.
+5. Return a frozen process-local result containing canonical root/source
+   paths, byte count, digest, source text, and the pure reconstruction. Paths
+   and source text never enter public command output.
+6. This row performs no writes, cache mutation, transport, credential read,
+   dynamic import, TypeScript execution, Git operation, Lambdapi invocation,
+   or backend selection.
+
+### Command contract
+
+The additive command family is:
+
+```text
+./scripts/emdash development <check|goals|build> \
+  --project-root ABSOLUTE_PATH \
+  [--module MODULE_ID --declaration DECLARATION_ID] \
+  [--format jsonl|text]
+```
+
+1. The shell wrapper recognizes only an exact leading `development`, removes
+   it, and execs a separate thin launcher. Existing exact `capabilities` and
+   `workspace` namespaces and every legacy fixed-demo argument vector remain
+   unchanged.
+2. `--project-root` is mandatory. Module and declaration selection are
+   optional but must occur together. Options accept `--name value` and
+   `--name=value`; duplicates, missing values, positional targets, unknown
+   flags/commands/formats, absent proofs, and partial selectors fail closed.
+3. Every invocation parses canonical source and freshly calls
+   `compileCoreLfProofDevelopment`; there is no retained checker session,
+   daemon, registry, source callback, filesystem injection hook, or MCP/LSP
+   authority.
+4. Without a selector the scope is the complete development. With a selector
+   it is the exact `(moduleId, declarationId)` proof already checked as part
+   of that development. Selection never changes visibility or compilation.
+5. Default JSONL for `check` emits one deterministic path-free summary record.
+   `goals` emits that summary followed by zero or more ordered goal records.
+   `build` emits one deterministic record containing the selected full
+   portable proof/development artifact. Every record includes the backend,
+   exact acquisition-source digest, development revision, scope, status, and
+   appropriate stable IDs/counts; none includes an absolute path, source text,
+   timestamp, process ID, environment value, credential, session identity, or
+   process-local checked object.
+6. `--format text` is a compact human projection: summary plus formatted
+   named goals when requested. For `build` it confirms the verified build
+   summary; full portable artifact emission is the JSONL form. Formatting
+   never triggers a second compilation.
+7. Complete `check`/`build` and every successful `goals` inspection exit zero.
+   Incomplete `check`/`build` emit their selected report, write one concise
+   incomplete diagnostic to stderr, and exit one. Parse, acquisition,
+   selection, or checking failure emits no stdout, writes
+   `emdash: <message>` to stderr, and exits two.
+8. The launcher owns only argv and exit-code plumbing. The reusable async CLI
+   accepts stdout/stderr sinks for deterministic tests but no semantic or
+   acquisition-operation replacement.
+
+### Acceptance and non-effects
+
+Focused coverage must include complete/incomplete whole-development check,
+goal inspection, exact proof selection, full build artifact, text projection,
+parser failures, missing/oversized/non-UTF-8/symlink/non-regular source,
+relative/symbolic roots, source validation failure, output privacy, actual
+shell routing, and unchanged legacy proof/workspace/capability routes.
+
+The tranche may add a direct-TypeScript multi-proof demo plus a stdout-only
+materializer example to make the authoring-to-canonical-data handoff concrete.
+That example is explicitly executed macro code, not silently trusted checker
+input.
+
+No public npm entry, browser barrel, dependency/lockfile, Core/checker/
+refiner/proof-plan semantics, source profile, mathematical rule, cache,
+network, host sandbox claim, Lambdapi source, kernel, print/book, sibling
+repository, npm registry, release, or deployment changes. Proportional gates
+are the new store/CLI tests, nearest legacy CLI/source/catalog tests, actual
+shell smoke and `sh -n`, workspace check, typecheck, changed-file lint,
+forbidden-effect/output scans, exact diff review, and whitespace hygiene. No
+long aggregate runs unless its omission becomes progress-blocking under
+`D-PA-019`.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -875,6 +984,7 @@ catalog consumer.
 | `D-PA-018` | Accept focused/static/browser/packed evidence for `DEV-CATALOG-1` without completing its long root aggregate. | The first aggregate became unverifiable after an unexpected interruption; the replacement was directly waived by the user. The waiver is tranche-specific and is not positive aggregate evidence or blanket permission to skip future exact gates. |
 | `D-PA-019` | Treat long repository aggregates as last-resort blocking gates throughout this persistent goal. | The user explicitly directed that focused evidence be preferred and long reruns be avoided unless their omission would block overall progress; every omission remains visible and is not positive evidence. |
 | `D-PA-020` | Repartition `DEV-CLI-2` into canonical supplied-data reconstruction, Node fixed-file commands, and a later stable graph projection. | No safe general proof-development file consumer exists, and arbitrary TypeScript import is not a sandbox. The split preserves direct TypeScript authoring without confusing host execution with checked source. |
+| `D-PA-021` | Add an exact `development` command namespace over one fixed canonical file and preserve all older command vectors. | Namespacing keeps Node acquisition asynchronous and separate from the fixed proof demo; fixed-file explicit-root input avoids arbitrary host import/path authority. |
 
 ## Validation And Checkpoint Policy
 
