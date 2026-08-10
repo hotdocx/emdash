@@ -57,7 +57,7 @@ Git-Boundary: the branch fork baseline remains the qualified predecessor
 `9c633c8`; local and public `main` are now exactly `9b9a773`, which retains the
 first PACKAGE-12B2 attempt record after restoring the stable token-free
 workflow at `735546d`. This proof-assistant branch incorporates that public
-baseline through the merge checkpoint recorded below but has not itself been
+baseline through merge checkpoint `65549be` but has not itself been
 merged into `main`, tagged, released, or published to npm. The frozen plan
 checkpoint is `671c56a`; the `DEV-CATALOG-1` semantic checkpoint is `fcc4547`;
 its synchronized ledger checkpoint and the dedicated branch's preceding
@@ -92,8 +92,9 @@ checkpoint is `b8152a0`. The proof-agent benchmark contract checkpoint is
 published ledger checkpoint is `28a8e07`. The research goal-graph contract
 checkpoint is `75f0362`, its semantic checkpoint is `faa4c27`, and its
 synchronized clean published ledger checkpoint is `bf23c51`. GitHub retains
-annotated tag and Release `emdash-v0.1.0` at `501a5f6`, but npm accepted no
-package version from that attempt.
+annotated tag and Release `emdash-v0.1.0` at `501a5f6`; public-baseline merge
+checkpoint `65549be` incorporates its retained audit history, but npm accepted
+no package version from that attempt.
 
 Depends-On:
 
@@ -4062,16 +4063,16 @@ published-package attestation. The authoritative hashes, job IDs, cleanup
 evidence, and exact retry procedure remain in the classes plan's
 `PACKAGE-12B2 First Hosted Attempt Record`.
 
-The public baseline is incorporated into this dedicated proof-assistant
-branch by a normal non-rewriting merge. Its one documentation conflict was
-resolved additively: the forward proof-assistant handoff remains and the
-owning plan's date/status/attempt record come from public `main`. This
-synchronization changes no proof-assistant source, test, package export,
-workflow, tag, Release, registry state, sibling repository, or mathematical
-development. Exact ancestry, staged/unstaged separation, conflict-marker
-absence, and whitespace hygiene are the proportional gates; no TypeScript,
-package, kernel, print/book, or long repository aggregate is warranted for
-this documentation-only synchronization.
+Public-baseline merge checkpoint `65549be` incorporates that history into this
+dedicated proof-assistant branch by a normal non-rewriting merge. Its one
+documentation conflict was resolved additively: the forward proof-assistant
+handoff remains and the owning plan's date/status/attempt record come from
+public `main`. This synchronization changes no proof-assistant source, test,
+package export, workflow, tag, Release, registry state, sibling repository, or
+mathematical development. Exact ancestry, staged/unstaged separation,
+conflict-marker absence, and whitespace hygiene are the proportional gates;
+no TypeScript, package, kernel, print/book, or long repository aggregate is
+warranted for this documentation-only synchronization.
 
 `PACKAGE-RELEASE-13`, `GOAL-GRAPH-14B`, and `AGENT-EVAL-12B` remain gated.
 Retry must reuse the immutable `emdash-v0.1.0` release workflow only after an
