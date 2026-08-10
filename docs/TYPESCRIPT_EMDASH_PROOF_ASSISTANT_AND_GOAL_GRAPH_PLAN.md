@@ -24,8 +24,9 @@ implemented and final-green through its focused, browser, packed-package, and
 required full-TypeScript gates; the accessible-premise index/search audit is
 complete and its first exact source-visible index is implemented and
 final-green through focused, browser, packed-package, and required full-
-TypeScript gates; the bounded obvious-proof audit is complete and its first
-exact/one-step-apply provider contract is frozen for implementation; later index
+TypeScript gates; the bounded obvious-proof audit and its first exact/one-step-
+apply provider are complete and final-green through focused, browser, packed-
+package, and required full-TypeScript gates; later index
 enrichment, library, external-automation, and general goal-graph rows remain
 dependency-gated
 
@@ -60,7 +61,8 @@ checkpoint is `c08c622`, its semantic checkpoint is `828b8ff`, and its
 synchronized clean published checkpoint is `b5e974a`. The accessible-premise
 index contract checkpoint is `de3518b`, its semantic checkpoint is
 `fd371e4`, and its synchronized clean published ledger checkpoint is
-`c88774c`.
+`c88774c`. The obvious-proof contract checkpoint is `c69aa35` and its
+semantic checkpoint is `da4b63f`.
 
 Depends-On:
 
@@ -539,7 +541,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `SIMP-5B2` | Conditional/local/under-binder simplification extensions | deferred | concrete 5B1 consumer plus congruence and premise-discharge contract |
 | `INDEX-SEARCH-6A` | Exact source-visible premise index and symbolic search | complete | `fd371e4`; exact closure, visibility, determinism, browser, packed-package, and full-TypeScript gates green |
 | `INDEX-SEARCH-6B` | Proof-export, relationship/use enrichment, and optional ranking | deferred | theorem-export interface plus exact class/instance/coercion and use owners; one measured retrieval corpus before embeddings |
-| `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | in progress | exact hole patch, accessible installed free declarations, exact/one-step-apply replay, and bounded trace contract frozen below |
+| `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | gated | existing generated-owner/stress decisions, exact product profile, public base-package trust boundary |
 | `REFACTOR-9` | Semantic diff, dependency impact, and proof repair | pending | stable declaration index and two-revision corpus |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | pending | one executable consumer and explicit evidence labeling |
@@ -2794,6 +2796,131 @@ is green, because omitting that exact gate would otherwise block the public
 semantic checkpoint. `check:all`, kernel/Lambdapi, print/book, npm/release,
 deployment, and sibling repositories remain out of scope.
 
+## OBVIOUS-PROOF-7 Completion Record
+
+Date: 2026-08-10
+
+Result: accepted at semantic checkpoint `da4b63f` after frozen contract
+checkpoint `c69aa35`.
+
+The new browser-safe `src/v3_2/proof_plan_patch.ts` provides the exact inert
+source seam selected by the audit:
+
+- `createCoreProofPlanHoleReplacement` constructs one versioned patch for one
+  stable source goal ID and one existing base proof plan;
+- `applyCoreProofPlanPatch` validates the source and replacement, rebuilds
+  only the containing path, rejects a missing target, and revalidates the
+  complete result for duplicate IDs, cycles, process-local metas, and all
+  existing proof-plan invariants; and
+- the patch profile adds no proof-plan tag, checker rule, mutable cursor, or
+  semantic claim.
+
+The new `src/v3_2/proof_obvious.ts` composes that source operation with the
+completed premise index and ordinary fresh proof replay:
+
+- `proposeCoreObviousProofPlanPatches` checks the closed target and base plan
+  in a fresh `CoreProofChecker` over the index's exact reconstructed closure,
+  selects one currently open named goal, and retrieves exact conclusion-head
+  hits in qualified-ID order;
+- only accessible installed free-declaration links become bare Core
+  candidates. Intrinsic owner links are traced as unsupported rather than
+  assigned an invented theorem-constant convention;
+- each supported declaration is first tried as checked `exact`. On rejection,
+  one fresh `CoreProofRefiner.apply` exploration owns dependent argument
+  instantiation and reports the exact unresolved goals. Successful apply
+  proposals expose those goals as deterministic collision-free named holes and
+  replay the complete explicit plan again;
+- exact, apply, and final complete-term checks all use the existing proof
+  checker. The provider returns every successful candidate within independent
+  premise, tactic-attempt, result, and introduced-goal bounds; it performs no
+  recursive discharge and makes no arbitrary winner authoritative;
+- every report records allowed profile, nonrandomized seed, normalized budget,
+  exact canonical index snapshot, checked target, complete base state,
+  selected goal, exact premise scope/link evidence, immutable patch, operation
+  trace, costs, result snapshot, counts, search truncation, and termination;
+  and
+- `replayCoreObviousProofCandidate` re-resolves the exact accessible premise,
+  verifies that the patch structurally names it, recomputes the source
+  precondition, applies the patch, performs fresh checking, and compares the
+  recorded result before returning any in-memory checked execution. A provider
+  report is therefore a stale-safe proposal, not persistent proof authority.
+
+The independent fixture uses two proposition-like types, exact facts, one-
+and two-premise implications, one provider-private fact, one root-private local
+fact, and an intrinsic object-classifier owner. Its six cases establish nested
+immutable patching; missing-target and collision rejection; deterministic
+multiple exact/apply proposals; explicit premise holes without recursive
+discharge; inaccessible-premise exclusion; intrinsic-owner skip traces;
+independent zero/small/max budget behavior; deep freezing and byte stability;
+fresh candidate replay; stale target/result rejection; and forged-reference
+rejection. It neither imports nor edits presheaf/site/sheafification/scheme
+mathematics.
+
+The contributor and browser-safe workspace entries export the additive patch
+and provider APIs; the narrow core-only package entry remains unchanged. The
+static capability family advances once to v11 and records both
+`obvious-proof-provider` and `proof-plan-patch`. The package README and packed
+ESM, CJS, strict-TypeScript, and browser-bundle consumers exercise the new
+profiles and entry points. No proof-plan tag/revision, proof-state/source/
+artifact revision, Core expression, checker/refiner rule, declaration
+workspace, command, or research-document format changed.
+
+Final validation on 2026-08-10:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_obvious_tests.ts
+  passed: 6/6 tests, 2 suites
+
+node --require ts-node/register --test \
+  tests/v3_2_proof_obvious_tests.ts \
+  tests/v3_2_proof_plan_tests.ts \
+  tests/v3_2_proof_checker_tests.ts \
+  tests/v3_2_lf_premise_index_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts \
+  tests/v3_2_browser_directed_tests.ts
+  passed: 60/60 tests, 9 suites
+
+./scripts/pnpmw run typecheck
+  passed
+
+eslint over every changed TypeScript/JavaScript file
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1
+
+./scripts/pnpmw run package:check
+  passed: build plus installed ESM, CJS, strict-TypeScript, and browser bundle
+
+./scripts/pnpmw run check:ts
+  passed: 1632 tests, 247 suites; 1578 pass, 54 skip, 0 fail
+  duration: 1623506 ms (about 27 minutes 4 seconds)
+
+git diff --cached --check
+  passed before semantic checkpoint da4b63f
+```
+
+The complete `check:ts` ran exactly once on the settled public diff, after all
+focused/static/browser/packed gates were green, because the shared public
+barrels and root test runner made that exact gate a checkpoint blocker under
+root SOP. It is not a precedent for iterative or reassurance reruns. No
+`check:all`, kernel/Lambdapi, print/book, npm publication, GitHub Release,
+deployment, or sibling-repository operation ran.
+
+Non-effects: no tactic language or server, recursive premise discharge, local-
+hypothesis search, theorem-export interface, class/instance/simplifier
+coupling, constructor/eliminator search, embedding, fuzzy ranker, global
+registry/cache, process-local identity in a report, callback, new Core or plan
+tag, checker/refiner/conversion rule, parser, host adapter, filesystem/network
+access, hashing, backend emission, or Lambdapi dependency was added.
+
+`STDLIB-8` remains gated by its recorded product/library trust prerequisites.
+The next numerical dependency-ready audit is `REFACTOR-9`: freeze a minimal
+two-revision corpus and exact semantic-diff/dependency-impact boundary before
+implementing repair proposals. `AGENT-EVAL-12` has gained its required first
+bounded provider but remains later in ledger order.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -2963,9 +3090,11 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from the completed `INDEX-SEARCH-6A` semantic checkpoint `fd371e4`
-> and its synchronized ledger checkpoint once recorded. Continue through
-> bounded explicit providers, curated-library gates, proof maintenance,
+> Start from the completed `OBVIOUS-PROOF-7` semantic checkpoint `da4b63f`
+> and its synchronized ledger checkpoint once recorded. Audit `REFACTOR-9`
+> next unless current evidence repartitions it; freeze its smallest exact two-
+> revision semantic-diff and dependency-impact corpus before implementation.
+> Continue through curated-library gates, proof maintenance,
 > external certificates, and agent evaluation in the dependency order
 > maintained by the living ledger. Begin `GOAL-GRAPH-14A`
 > only after its proof-artifact and evidence-policy prerequisites are ready.
