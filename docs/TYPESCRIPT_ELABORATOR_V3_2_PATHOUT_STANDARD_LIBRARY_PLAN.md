@@ -400,6 +400,11 @@ The proposal runs no Lambdapi or long aggregate: it installs no behavior, and
 the direct type/lint/proposal gates cover its immutable data and current
 provider evidence.
 
+The rollback-safe non-authorizing `1B0` proposal checkpoint is `dd69325`.
+This exact immutable proposal is the sole recommendation a later delegated or
+human review may approve; semantic implementation remains unauthorized until
+that separate review is itself checkpointed.
+
 ## Required Evidence For Implementation
 
 1. Exact active-source signatures/bodies/rules and owning positions.

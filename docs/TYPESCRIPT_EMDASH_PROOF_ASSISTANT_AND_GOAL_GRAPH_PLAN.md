@@ -5479,6 +5479,10 @@ does not authorize implementation, release, or integration. Focused proposal
 tests, root typecheck, and focused lint pass without a long aggregate or
 Lambdapi invocation.
 
+The rollback-safe non-authorizing `1B0` proposal checkpoint is `dd69325`.
+Implementation remains gated on a separate immutable review of that exact
+recommendation.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
