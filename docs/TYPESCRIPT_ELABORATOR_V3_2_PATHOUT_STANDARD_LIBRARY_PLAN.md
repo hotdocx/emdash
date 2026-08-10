@@ -22,9 +22,9 @@ human supersession at review checkpoint `3421647`; measured faithful-signature
 compilation now supersedes that review at active displayed-functor object
 projection line 9177; corrected proposal v3 at checkpoint `bfe09e3` changes
 only the root-local boundary to 5/8/0/6 and is separately approved under
-delegated unattended authority with human supersession; only that root-local
-implementation is ready, and no PathOut/PathInd profile or public export is
-yet qualified
+delegated unattended authority with human supersession at review checkpoint
+`880593e`; only that root-local implementation is ready, and no PathOut/
+PathInd profile or public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -186,7 +186,7 @@ named library presentation.
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
-| `PATHIND-TRUSTED-PROFILE-1C` | corrected proposal v3 separately reviewed; exact implementation ready | completed 1B; v3 proposal checkpoint `bfe09e3`; superseded v2 checkpoints `7413dd6`/`3421647` and v1 checkpoints `cc639fc`/`2deae91` | Exact active signatures plus line 7865 reach the third FibCov projection, where missing active line 9177 leaves `Obj(Functord_cat)` versus `Transf`. V3 adds only that runtime bridge; separate review authorizes the root-only 5/8/0/6 implementation, one rho-section consumer, strict negatives, and nine bounded-oracle assertions. |
+| `PATHIND-TRUSTED-PROFILE-1C` | corrected proposal v3 separately reviewed; exact implementation ready | completed 1B; v3 proposal/review checkpoints `bfe09e3`/`880593e`; superseded v2 checkpoints `7413dd6`/`3421647` and v1 checkpoints `cc639fc`/`2deae91` | Exact active signatures plus line 7865 reach the third FibCov projection, where missing active line 9177 leaves `Obj(Functord_cat)` versus `Transf`. V3 adds only that runtime bridge; separate review authorizes the root-only 5/8/0/6 implementation, one rho-section consumer, strict negatives, and nine bounded-oracle assertions. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -1374,7 +1374,7 @@ git diff --check
 ```
 
 No Lambdapi or long aggregate is relevant to this behavior-free review. Its
-review checkpoint is pending this bounded tranche. The next authorized action
+review checkpoint `880593e` freezes that decision. The next authorized action
 is only the corrected 5/8/0/6 root-local implementation with focused
 consumers, strict negatives, and the nine-assertion bounded oracle.
 

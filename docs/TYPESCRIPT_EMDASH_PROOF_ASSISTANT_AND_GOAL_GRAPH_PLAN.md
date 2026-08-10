@@ -94,9 +94,9 @@ compilation measured the further missing `Obj(Functord_cat)` projection at
 active line 9177. That evidence supersedes v2 implementation authority.
 Corrected non-authorizing proposal v3 at checkpoint `bfe09e3` changes only the
 root-local boundary to 5/8/0/6 and is separately approved under delegated
-unattended authority with human supersession; only that corrected root-local
-implementation is ready. No PathOut/PathInd public package export has yet
-been added.
+unattended authority with human supersession at review checkpoint `880593e`;
+only that corrected root-local implementation is ready. No PathOut/PathInd
+public package export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -5729,7 +5729,7 @@ including only lines 7865 and 9177 beyond v1. It denies signature substitution,
 checker/body/owner changes, and every 1D/1E/1F, public, active-kernel,
 integration, and release effect. Proposal and review pass eleven focused tests
 in two suites with root typecheck, focused lint, and diff hygiene. Its review
-checkpoint is pending this bounded tranche; no semantic byte is included.
+checkpoint `880593e` freezes that decision; no semantic byte is included.
 
 ## Decision Ledger
 
@@ -5864,7 +5864,7 @@ checkpoint is pending this bounded tranche; no semantic byte is included.
 | `D-PA-127` | Supersede the v1 PathInd review and correct proposal v2 to 5/7/0/6 with active `hom_con` object projection line 7865. | First semantic rule admission measured a functor-versus-Hom classifier residue before the FibCov package component could subject-check. The predecessor declares `hom_con` but omits its active object computation; importing exactly that rule is narrower than changing the checker, rewriting FibCov, or duplicating the owner. V1 remains backtracking evidence, and v2 still requires its own checkpoint and separate review. |
 | `D-PA-128` | Approve only checkpointed corrected PathInd proposal v2 under delegated unattended authority, with human supersession. | Proposal checkpoint `7413dd6` preserves the exact 5/7/0/6 correction, including only active line 7865 beyond v1, while retaining the completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `3421647` restores local implementation authority without making the proposal self-authorizing. |
 | `D-PA-129` | Supersede the v2 PathInd review and correct proposal v3 to 5/8/0/6 with active displayed-functor object projection line 9177. | With exact source signatures restored, line 7865 admits the first two FibCov projections, while the third reaches the active `Obj(Functord_cat)` versus `Transf` presentation boundary. The predecessor owns both classifiers and the `Transf` delta but omits line 9177; importing exactly that bridge is narrower than changing signatures, the checker, or declarations. V2 remains backtracking evidence, and v3 still requires its own checkpoint and review. |
-| `D-PA-130` | Approve only checkpointed corrected PathInd proposal v3 under delegated unattended authority, with human supersession. | Checkpoint `bfe09e3` preserves the exact active signatures and 5/8/0/6 correction, adding only line 9177 beyond v2 while retaining the completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review restores local implementation authority without making the proposal self-authorizing. |
+| `D-PA-130` | Approve only checkpointed corrected PathInd proposal v3 under delegated unattended authority, with human supersession. | Proposal checkpoint `bfe09e3` preserves the exact active signatures and 5/8/0/6 correction, adding only line 9177 beyond v2 while retaining the completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `880593e` restores local implementation authority without making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
