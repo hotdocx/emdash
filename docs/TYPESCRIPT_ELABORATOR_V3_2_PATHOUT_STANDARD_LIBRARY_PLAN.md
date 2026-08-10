@@ -27,8 +27,8 @@ delegated unattended authority with human supersession at review checkpoint
 review; corrected proposal v4 at checkpoint `f4101e2` adds only a subject-
 checked lines-5481/9177 fusion, changes the boundary to 5/9/0/6, and is
 separately approved under delegated unattended authority with human
-supersession; its review checkpoint is pending, so implementation remains
-paused; no PathOut/PathInd profile or public export is yet qualified
+supersession at review checkpoint `397472f`; semantic implementation may
+resume, but no PathOut/PathInd profile or public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -190,7 +190,7 @@ named library presentation.
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
-| `PATHIND-TRUSTED-PROFILE-1C` | corrected v4 separately reviewed; review checkpoint pending | completed 1B; proposal checkpoint `f4101e2`; superseded v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | Line 9177 is registered but cannot match before nested line 5481 under head-only execution. V4 adds only their subject-checked fusion, yielding an approved root-only 5/9/0/6 boundary with unchanged consumer, negative, and nine-assertion oracle scope. Implementation waits for the rollback-safe review checkpoint. |
+| `PATHIND-TRUSTED-PROFILE-1C` | corrected v4 separately reviewed; implementation ready | completed 1B; proposal/review checkpoints `f4101e2`/`397472f`; superseded v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | Line 9177 is registered but cannot match before nested line 5481 under head-only execution. V4 adds only their subject-checked fusion, yielding an approved root-only 5/9/0/6 boundary with unchanged consumer, negative, and nine-assertion oracle scope. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -1468,9 +1468,9 @@ git diff --check
   passed
 ```
 
-No Lambdapi or long aggregate is relevant to this behavior-free review. The
-review must receive its own rollback-safe checkpoint before semantic
-implementation resumes.
+No Lambdapi or long aggregate is relevant to this behavior-free review.
+Review checkpoint `397472f` freezes that decision. The exact v4 semantic
+implementation may now resume; the review authorizes nothing beyond it.
 
 ## Required Evidence For Implementation
 
