@@ -67,10 +67,12 @@ strict-NodeNext/browser consumers, and the one required full-TypeScript gate.
 `GOAL-GRAPH-14B2` is complete: exact `@hotdocx/emdash@0.2.0` is integrated by
 fast-forward, published through the protected OIDC workflow, byte-verified
 against the qualified candidate, provenance-linked to its tag/commit/run, and
-fresh-installed across all four package consumer modes. No semantic row is
-currently in progress. Arrowgram layout/GetPaidX delivery and authenticated
-hosted actions remain distinct later boundaries beginning with the 14B3
-consumer audit.
+fresh-installed across all four package consumer modes. The 14B3 consumer
+audit is now complete and its bounded contract is frozen below: one new
+derived-read-only CloserFans/GetPaidX artifact template will compose exact
+public Emdash and Arrowgram packages without changing either public schema or
+adding a hosted action. Authenticated hosted actions remain a distinct 14B4
+boundary.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -80,15 +82,12 @@ Baseline: `9c633c85b66efb4ac7619912e8d15f928b32d733`
 (`docs: close classes goal readiness audit`)
 
 Git-Boundary: the branch fork baseline remains the qualified predecessor
-`9c633c8`; local and public `main` are now exactly `ccf4fed`, which records the
-verified PACKAGE-12B2 attempt-2 publication, exact OIDC relationship, and
-one-time credential retirement while retaining the stable token-free workflow
-restored at `735546d`. This proof-assistant branch incorporates the earlier
-public baseline through merge checkpoint `65549be`, the publication record
-through merge checkpoint `35d9bcb`, and final trust state through merge
-checkpoint `15d8caa`, but the
-proof-assistant branch itself has not been merged into `main`, tagged,
-released, or published to npm. The frozen plan
+`9c633c8`; local and public `main` and this proof-assistant branch are now
+exactly synchronized at post-release ledger checkpoint `e35d5ae`. Annotated
+tag `emdash-v0.2.0` intentionally remains on qualified release commit
+`ab513f7`, whose exact tarball was published through the stable token-free OIDC
+workflow; the later plan-only ledger commit is not part of that package. The
+frozen plan
 checkpoint is `671c56a`; the `DEV-CATALOG-1` semantic checkpoint is `fcc4547`;
 its synchronized ledger checkpoint and the dedicated branch's preceding
 published baseline are `2484e23`; the
@@ -632,7 +631,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-GRAPH-14B0` | Public-interchange and sibling-consumer audit | complete | Emdash goal evaluation is internal-only, Arrowgram owns a generic coordinate-based `DiagramSpec`, CloserFans is the canonical GetPaidX/LastRevision host, and no current sibling imports Emdash goal semantics. Exact audit and decisions are below. |
 | `GOAL-GRAPH-14B1` | Canonical host-neutral goal-view artifact and public source barrel | complete | `0bec688`; privacy-minimized replay-gated projection, strict canonical parser/validator/serializer, explicit non-authority flags, public workspace/root exports, capability v14/docs, browser closure, and installed package consumers; one required `check:ts` passed once with 1,662 tests and zero failures. No Arrowgram dependency or layout. |
 | `GOAL-GRAPH-14B2` | Integrate and publish the next Emdash package release | complete | `ab513f7`; exact 144-entry `@hotdocx/emdash@0.2.0` tarball published by OIDC run `31414385484`, byte/provenance/registry/fresh-install verified, with the old 0.1 complete/open consumer retained. |
-| `GOAL-GRAPH-14B3` | Deterministic Arrowgram projection and GetPaidX consumer | gated | Require public package containing 14B1, current published Arrowgram packages, exact layout/color/label policy, and a thin file-backed or derived-read-only template contract. |
+| `GOAL-GRAPH-14B3` | Deterministic Arrowgram projection and GetPaidX consumer | in progress | Audit and contract frozen below: add one derived-read-only `emdash_goal_graph` artifact template in CloserFans over exact public Emdash/Arrowgram packages; no Arrowgram source/schema, MCP/API, image, database, controller-pool, or hosted-action change. |
 | `GOAL-GRAPH-14B4` | Authenticated hosted evidence/action adapters | deferred | Require one exact mutation consumer, actor/signature authority, idempotency/audit/permission semantics, and current host security/deployment clearance; visualization does not authorize effects. |
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 
@@ -5013,14 +5012,192 @@ root-test, Lambdapi/kernel, print/book, CloserFans, Arrowgram, container, E2E,
 Pages deployment, package deprecation/dist-tag rollback, trust mutation, or
 sibling edit occurred.
 
-14B2 closes only distribution. The next dependency-ready operation is the
-14B3 audit of one deterministic renderer projection and one concrete
-CloserFans/GetPaidX consumer against public `0.2.0`. That audit must first read
-the sibling repositories' current branches/worktrees/dirty state, published
-Arrowgram package contracts, and applicable SOPs. It must freeze coordinate,
-color, label, file ownership, and update policy before editing either sibling;
-the portable view remains non-authoritative and cannot execute or approve a
-goal.
+14B2 closes only distribution. Its successor audit and contract are recorded
+immediately below; the portable view remains non-authoritative and cannot
+execute or approve a goal.
+
+## GOAL-GRAPH-14B3 Audit And Frozen Consumer Contract
+
+Audit result: 14B3 is dependency-ready as one bounded sibling-consumer slice.
+The selected product is a new `emdash_goal_graph` artifact-site template in
+CloserFans/GetPaidX. It consumes the exact public `@hotdocx/emdash@0.2.0`
+goal-view boundary and current published Arrowgram packages, but introduces no
+new Emdash or Arrowgram semantic API. This plan-only contract checkpoint must
+precede every sibling edit.
+
+### Fresh Sibling And Package Evidence
+
+The read-only audit inspected the current SOPs, tracked branches, dirty state,
+template registry/runtime owners, Arrowgram specification/schema/renderer, and
+published package manifests:
+
+- Emdash proof worktree and public `main` were synchronized at clean
+  `e35d5ae`; annotated release tag `emdash-v0.2.0` remains on exact package
+  commit `ab513f7`;
+- Arrowgram `/home/user1/arrowgram` was clean except for unrelated untracked
+  user report `reports/PLAN_GENERAL_REPOSITORY_REVIEW_2026-08-09.md`, with
+  `main` and `origin/main` both at `c0567ba`; published contracts are
+  `@hotdocx/arrowgram@1.0.0`, `@hotdocx/arrowgram-agent@0.1.6`, and
+  `@hotdocx/arrowgram-web@1.1.3`;
+- CloserFans `/home/user1/closerfans` was on `master` at `bd4146b`, with the
+  completed `emdash_ts` branch at the same commit, no configured Git remote,
+  and unrelated untracked user report
+  `reports/GENERAL_REPOSITORY_QUALITY_REVIEW_PLAN_2026-08-09.md`;
+- CloserFans is the sole GetPaidX/LastRevision host for this row. Its registry
+  already discovers `templates/` and `templates_artifacts/`, its generic Node
+  controller already owns per-template dependency caching and artifact-site
+  builds, and its generic template-selection path needs no database, API, or
+  MCP extension;
+- Arrowgram's authoritative `DiagramSpec` has only node identity/label/color/
+  coordinates and arrow endpoints/label/color/geometry/style. It has no goal
+  kind, status, evidence, authority, actor, action, or arbitrary metadata
+  field. Non-mathematical labels render as escaped single-line SVG text, and
+  the editor grid convention is 40 pixels; and
+- `arrowgram-agent` already validates a diagram workspace and builds a static
+  SVG artifact without its editable bridge API. Its generic editor contract
+  intentionally treats `diagram.json` as editable source, so exposing that
+  bridge for a derived semantic view would give the browser the wrong file
+  owner.
+
+These facts reject an Arrowgram schema/package edit, an Emdash renderer export,
+a new controller image or pool, and a template-specific GetPaidX action API.
+The prior `arrowgram_web` template remains the generic editable paper/diagram
+workspace, and the prior `emdash_ts` template remains the exact public 0.1
+proof-starter compatibility consumer. Neither is silently repurposed.
+
+### Frozen Source And File Ownership
+
+Create only a new CloserFans artifact template at
+`templates_artifacts/emdash_goal_graph/`, with manifest ID
+`emdash_goal_graph`. It runs on the ordinary Node controller and pins these
+direct runtime dependencies exactly:
+
+- `@hotdocx/emdash` `0.2.0`;
+- `@hotdocx/arrowgram` `1.0.0`;
+- `@hotdocx/arrowgram-agent` `0.1.6`;
+- `@hotdocx/arrowgram-web` `1.1.3`; and
+- the existing template-compatible exact TypeScript/`tsx` toolchain.
+
+The template has three distinct ownership layers:
+
+1. a direct TypeScript goal-development file is the only semantic authoring
+   authority. It constructs a finite theorem/task/decision graph, explicit
+   dependency edges, and supplied evidence with the public Emdash API, freshly
+   evaluates it, and creates the privacy-minimized view;
+2. a small pure TypeScript projection module owns the fixed Arrowgram layout
+   policy. A renderer command writes canonical `goal-view.json` with Emdash's
+   serializer and deterministic `diagram.json` with the projection. Both are
+   tracked, reviewable derived artifacts and are regenerated rather than
+   edited; a check mode rejects stale or tampered bytes without rewriting
+   them; and
+3. `dist/` is disposable generated publication output and remains ignored and
+   excluded from template archives.
+
+`arrowgram.workspace.json` contains exactly one diagram project referencing
+the derived `diagram.json`. Live preview first renders and statically builds
+the current source, then serves `dist/` through a minimal template-local HTTP
+server. It must not expose `__arrowgram`, snapshot, approval, evidence-write,
+or any other mutable bridge/action endpoint. After source edits, `npm run
+build` refreshes the files and the already-running static server reads the new
+output. The generic cached-runtime installer may be reused unchanged.
+
+The template documents these commands and meanings:
+
+- `npm run goals` regenerates the two tracked views and prints the derived
+  counts/statuses;
+- `npm run render` regenerates them without claiming proof or task completion;
+- `npm run render:check` validates exact current bytes without mutating files;
+- `npm run validate` checks current derived bytes and the Arrowgram workspace;
+- `npm run build` regenerates, validates, and builds static publication output;
+- `npm run dev` builds and serves the read-only live preview; and
+- `npm run verify` performs template-local typecheck, derived-byte check, and
+  Arrowgram validation.
+
+### Frozen Deterministic Projection
+
+The projection accepts only a value that passes
+`validateCoreResearchGoalView`; it never consumes the full evaluation or any
+proof/evidence payload. It also asserts the already-versioned view invariants
+`edgeDirection = dependent-to-prerequisite`, `portableProjectionOnly = true`,
+`mutableDoneField = false`, `sourceHashesRecomputed = false`,
+`humanAttributionVerified = false`, and `executesExternalActions = false`.
+
+For every node, define dependency layer zero for a node with no outgoing
+prerequisite edge and otherwise one plus the maximum layer of its direct
+prerequisites. The Emdash graph is already acyclic. Sort nodes in each layer
+by canonical node ID and assign:
+
+```text
+left = 160 + 360 * layer
+top  = 120 + 160 * indexWithinLayer
+```
+
+All coordinates therefore lie on Arrowgram's 40-pixel grid. Prerequisites are
+left of dependents and the semantic edge direction remains unchanged, so an
+arrow points from the dependent back to what it requires. Node `name` is the
+canonical Emdash node ID. Its single-line label is a deterministic bounded
+display projection of title, kind (`THEOREM`, `TASK`, or `DECISION`), and
+derived status; the full title, exact IDs, evidence classifications, proof
+identity, counts, and non-authority flags remain in `goal-view.json`. Labels
+are ordinary escaped SVG text, not synthesized LaTeX. The fixed status palette
+is:
+
+| Status | Color |
+| --- | --- |
+| `open` | `#2563EB` |
+| `blocked` | `#D97706` |
+| `satisfied` | `#15803D` |
+| `rejected` | `#B91C1C` |
+
+Edges retain the canonical dependent/prerequisite endpoints. Canonically
+ordered arrows receive names `goal-edge-0001`, `goal-edge-0002`, and so on.
+`requires` is a solid arrow labeled `requires`; `one-of` is dashed and labeled
+`one-of <groupId>`. No status color, label, or position becomes semantic
+authority, and no transitive or inferred edge is added.
+
+The starter source must visibly exercise all three node kinds, all four
+statuses, a solid required dependency, a dashed one-of group, an accepted and
+a rejected human approval, AI-advisory evidence that does not discharge a
+task, and an open theorem identity. Private actor/provider statements may be
+present only in the source/evaluation and must be absent from both derived
+files and static output. The theorem remains open unless exact checked-proof
+evidence is supplied; the diagram cannot make it complete.
+
+### Implementation, Validation, And Git Boundary
+
+Before editing CloserFans, create branch
+`goal/emdash-goal-graph-arrowgram-v1` from exact `bd4146b` in its existing
+worktree. Preserve the unrelated untracked report and re-check the branch,
+index, worktree, and baseline ancestry before every checkpoint. Arrowgram stays
+read-only on `c0567ba`; do not create a branch merely to record that no change
+is needed.
+
+The bounded CloserFans change owns only the new template, one focused runtime
+smoke, its root script registration, and concise current README/runtime/testing
+documentation. The focused smoke must copy the template to a temporary
+directory; install from the public registry; assert all exact installed
+versions; typecheck; render twice and compare byte identity; validate both the
+canonical Emdash view and Arrowgram schema/workspace; assert the exact layout,
+palette, edge styles/direction, status coverage, and absence of private or
+authority payloads; prove check mode rejects tampering; build static SVG; and
+probe the read-only preview plus absence of the editable bridge. Run template
+registry/archive validation as the nearest host contract. Root typecheck and
+targeted lint are required if the host-side smoke/root script changes. The
+existing Arrowgram browser smoke, full Jest/Playwright, application build,
+Docker/controller, Azure, database, deployment, Emdash `check:ts`, kernel,
+print/book, and any repository-wide aggregate are explicitly out of scope
+unless a focused failure demonstrates that one of those unchanged boundaries
+blocks progress.
+
+After those gates are green, synchronize this plan with exact sibling commit
+and evidence. A rollback-safe local CloserFans checkpoint and fast-forward of
+local `master` are authorized only if `master` remains the exact ancestor and
+the staged diff excludes the unrelated report. CloserFans has no configured
+remote, so 14B3 performs no sibling push. This row performs no npm/GitHub
+release, cloud deployment, production workspace mutation, Arrowgram edit,
+Emdash semantic edit, or hosted action. Any production rollout is a separately
+audited deployment operation; any evidence/approval/task mutation remains
+gated behind 14B4.
 
 ## Decision Ledger
 
@@ -5121,6 +5298,9 @@ goal.
 | `D-PA-093` | Version the accumulated public-workspace boundary as `0.2.0`, retaining the byte-identical Core/authoring entries and explicitly qualifying the old 0.1 complete/open workspace-proof path. | All 257 old runtime workspace exports remain while 84 are added, but existing profile-versioned source/artifact families advance; a pre-1.0 minor release communicates that contract boundary more honestly than a patch. |
 | `D-PA-094` | Integrate 14B2 by fast-forward only and publish its one exact tarball through the protected OIDC workflow; retain bypass-2FA-token compatibility without using the ignored token routinely. | Public `main` is an exact ancestor, the stable workflow already proves least-authority publication, and package policy versus chosen release credential are independent decisions. |
 | `D-PA-095` | Accept `@hotdocx/emdash@0.2.0` as the completed 14B2 public boundary only after byte identity, fresh installed consumers, registry integrity/signature data, and SLSA source/workflow/commit/run provenance all agree. | A successful workflow is indirect evidence; matching the exact public bytes and independently replaying their promised package modes closes the distribution claim without treating npm or GitHub as proof authority. |
+| `D-PA-096` | Consume the existing public Arrowgram schema and agent unchanged for 14B3. | The schema already expresses the required coordinates, colors, labels, and solid/dashed dependency edges; adding goal authority or arbitrary metadata to a generic mathematical-diagram package would couple view data to semantics it does not own. |
+| `D-PA-097` | Add a separate derived-read-only `emdash_goal_graph` CloserFans artifact template instead of repurposing `arrowgram_web` or `emdash_ts`. | Direct TypeScript can remain semantic authority while canonical goal-view and diagram files stay reviewable; a static preview avoids granting the editable diagram bridge apparent permission to change goal status, evidence, or layout policy. |
+| `D-PA-098` | Freeze dependency-layer/grid layout, a four-color status palette, kind/status text labels, and explicit solid `requires` versus dashed `one-of` arrows in the consumer. | Determinism and accessibility require exact policy, while the canonical companion goal view retains all semantic and non-authority data that Arrowgram's intentionally small visual schema cannot represent. |
 
 ## Validation And Checkpoint Policy
 
@@ -5239,11 +5419,13 @@ synchronized:
 > checked proof-engineering checkpoints in this plan. Treat
 > `GOAL-GRAPH-14B0/14B1/14B2` as complete, including exact public
 > `@hotdocx/emdash@0.2.0`, release run `31414385484`, and the completion record
-> below. Audit only `GOAL-GRAPH-14B3` next: inspect current Arrowgram and
-> CloserFans/GetPaidX state, public package/API versions, diagram/file owners,
-> and real hosted-consumer constraints; freeze one deterministic renderer
-> projection and one thin consumer before editing either sibling. Keep hosted
-> actions behind 14B4 and its exact gates. Keep `AGENT-EVAL-12B`, `STDLIB-8`,
+> below. Treat the `GOAL-GRAPH-14B3` sibling/package audit and frozen consumer
+> contract as complete, and implement only that exact bounded contract next:
+> create the isolated CloserFans branch, add the derived-read-only
+> `emdash_goal_graph` template and focused public-package/static-preview smoke,
+> run its proportional gates, and synchronize both ledgers. Keep Arrowgram
+> source unchanged and hosted actions behind 14B4 and its exact gates. Keep
+> `AGENT-EVAL-12B`, `STDLIB-8`,
 > `COUNTEREVIDENCE-10`, and
 > `EXTERNAL-CERT-11` behind their remaining corpus, product, or solver gates
 > rather than inventing authority merely to advance the ledger.
