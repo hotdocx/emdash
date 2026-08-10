@@ -60,6 +60,10 @@ These identify audit input only. Owner-position inspection, exact dependency
 closure, TypeScript checking, and a bounded Lambdapi oracle remain required
 before any trusted profile or derived definition is claimed.
 
+The rollback-safe activation/product-selection checkpoint is `fb65a80`.
+`PATHOUT-TRUST-BOUNDARY-0A` must remain a descendant of that exact decision
+unless a later human direction supersedes the selected profile.
+
 ## Architectural Verdict And Trust Boundary
 
 The PathOut development separates into four layers.

@@ -153,6 +153,8 @@ The 14B3 audit/frozen-contract checkpoints are `0eb04a7` and `62e0cdd`; the
 qualified and locally integrated CloserFans consumer is `5c0d0c1` on both
 sibling `master` and branch `goal/emdash-goal-graph-arrowgram-v1`. CloserFans
 has no configured remote, so no sibling push occurred.
+The post-14B readiness/product-selection checkpoint is `fb65a80`; it changes
+only this living plan and the dedicated PathOut plan.
 
 Depends-On:
 
@@ -5405,6 +5407,10 @@ deployment, or hosted state changed during this audit. Proportional validation
 is exact source/public-barrel/sibling-contract inspection, branch/worktree
 recovery, document-link review, and diff hygiene. No test or long aggregate
 is relevant to this documentation-only decision.
+
+The rollback-safe audit/product-selection checkpoint is `fb65a80`. It is the
+predecessor for `PATHOUT-TRUST-BOUNDARY-0A`; no semantic or package byte is
+part of that checkpoint.
 
 ## Decision Ledger
 
