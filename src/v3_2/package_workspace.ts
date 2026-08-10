@@ -8,6 +8,7 @@
 
 export * from './package_authoring';
 export * from './proof';
+export * from './proof_checker';
 export * from './proof_goal_graph';
 export * from './proof_plan';
 export * from './proof_template';

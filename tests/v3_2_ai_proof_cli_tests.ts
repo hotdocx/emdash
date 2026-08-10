@@ -75,6 +75,9 @@ import {
     CORE_PROOF_DOCUMENT_PROFILE
 } from '../src/v3_2/proof_document';
 import {
+    CORE_PROOF_CHECKER_PROFILE
+} from '../src/v3_2/proof_checker';
+import {
     CORE_PROOF_PLAN_PROFILE,
     CORE_PROOF_PLAN_MACRO_PROFILE
 } from '../src/v3_2/proof_plan';
@@ -435,7 +438,7 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assertDeepFrozen(CORE_AI_NATIVE_CAPABILITIES);
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES_PROFILE.revision,
-            'emdash-ai-native-capabilities-v7'
+            'emdash-ai-native-capabilities-v8'
         );
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES.status,
@@ -459,6 +462,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
             CORE_AI_NATIVE_CAPABILITIES.implementedProfiles.map(profile =>
                 [profile.id, profile.revision]
             )
+        );
+        assert.equal(
+            revisions.get('proof-checker'),
+            CORE_PROOF_CHECKER_PROFILE.revision
         );
         assert.equal(
             revisions.get('proof-document'),

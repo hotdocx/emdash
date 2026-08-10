@@ -417,7 +417,7 @@ describe('DEV-CLI-2B/2C proof-development commands', () => {
             assert.match(text.stdout, /no open goals/u);
             assert.equal(
                 CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.revision,
-                'emdash-lf-proof-development-cli-v3'
+                'emdash-lf-proof-development-cli-v4'
             );
             assert.deepEqual(
                 CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.commands,

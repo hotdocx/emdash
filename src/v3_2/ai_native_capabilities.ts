@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v7' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v7' as const,
+    revision: 'emdash-ai-native-capabilities-v8' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v8' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -84,8 +84,15 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
         },
         implementedProfiles: [
             {
+                id: 'proof-checker',
+                revision: 'emdash-core-proof-checker-v1',
+                scope:
+                    'bounded beta/delta/runtime conversion without ' +
+                    'annotated-lambda inference'
+            },
+            {
                 id: 'proof-document',
-                revision: 'emdash-v3.2-ai-proof-2',
+                revision: 'emdash-v3.2-ai-proof-3',
                 scope: 'fresh checked artifacts and stable named goals'
             },
             {
@@ -123,30 +130,30 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
             },
             {
                 id: 'workspace-proof',
-                revision: 'emdash-lf-workspace-proof-v2',
+                revision: 'emdash-lf-workspace-proof-v3',
                 scope: 'fresh proof checking in one exact module closure'
             },
             {
                 id: 'proof-development',
-                revision: 'emdash-lf-proof-development-v2',
+                revision: 'emdash-lf-proof-development-v3',
                 scope:
                     'canonical multi-module and multi-proof checked catalogs'
             },
             {
                 id: 'proof-development-source',
-                revision: 'emdash-lf-proof-development-source-v2',
+                revision: 'emdash-lf-proof-development-source-v3',
                 scope:
                     'exact canonical-data reconstruction without host import'
             },
             {
                 id: 'mounted-proof-development',
-                revision: 'emdash-lf-mounted-proof-development-v2',
+                revision: 'emdash-lf-mounted-proof-development-v3',
                 scope:
                     'one bounded fixed source under an explicit real root'
             },
             {
                 id: 'proof-development-cli',
-                revision: 'emdash-lf-proof-development-cli-v3',
+                revision: 'emdash-lf-proof-development-cli-v4',
                 scope:
                     'stateless check, goals, build, and graph over canonical ' +
                     'source'
@@ -212,7 +219,7 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
             },
             {
                 id: 'research-browser-recheck',
-                revision: 'emdash-ai-research-overview-browser-v2',
+                revision: 'emdash-ai-research-overview-browser-v3',
                 scope: 'release-pinned checked/open client replay'
             }
         ],

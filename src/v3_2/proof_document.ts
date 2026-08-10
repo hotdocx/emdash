@@ -7,12 +7,6 @@
  */
 
 import {
-    CoreDeclarationEnvironment
-} from './context';
-import {
-    CoreChecker
-} from './checker';
-import {
     serializeCoreExpression
 } from './core_serialization';
 import {
@@ -33,20 +27,25 @@ import {
     CoreProofRefiner
 } from './proof';
 import {
+    CORE_PROOF_CHECKER_PROFILE,
+    createCoreProofChecker
+} from './proof_checker';
+import {
     CoreProofGoalCouplingGraph
 } from './proof_goal_graph';
 import {
-    CoreElaborationSession
-} from './session';
+    CoreLfDeclarationEnvironment
+} from './lf_declarations';
 
 export const CORE_PROOF_DOCUMENT_PROFILE = Object.freeze({
-    revision: 'emdash-v3.2-ai-proof-2' as const,
-    compilerRevision: 'emdash-proof-document-compiler-v2' as const,
+    revision: 'emdash-v3.2-ai-proof-3' as const,
+    compilerRevision: 'emdash-proof-document-compiler-v3' as const,
     explicitCoreRevision: 'EMDASH-CORE-SEXP-1' as const,
     proofStateRevision: 'emdash-proof-state-v2' as const,
     artifactRevision: 'emdash-proof-artifact-v2' as const,
     jsonlRevision: 'emdash-proof-jsonl-v2' as const,
-    checker: 'CoreChecker' as const,
+    checker: CORE_PROOF_CHECKER_PROFILE.checker,
+    checkerProfileRevision: CORE_PROOF_CHECKER_PROFILE.revision,
     productionLambdapiDependency: false as const,
     nodeBuiltinDependency: false as const
 });
@@ -244,7 +243,7 @@ export interface CoreProofArtifact {
 export interface CoreProofDocumentInput {
     readonly moduleId: string;
     readonly declarationId: string;
-    readonly environment: CoreDeclarationEnvironment;
+    readonly environment: CoreLfDeclarationEnvironment;
     readonly type: KernelExpression;
     readonly plan: CoreProofPlan;
     readonly provenance: Provenance;
@@ -279,8 +278,8 @@ export function compileCoreProofDocument(
         input.fingerprint
     );
 
-    const session = new CoreElaborationSession(input.environment);
-    const checker = new CoreChecker(session);
+    const checker = createCoreProofChecker(input.environment);
+    const session = checker.lfSession;
     checker.validateEnvironment();
 
     const targetProvenance = checkedTargetProvenance(input);

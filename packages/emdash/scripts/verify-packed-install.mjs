@@ -221,6 +221,7 @@ import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
+  CORE_PROOF_CHECKER_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
@@ -229,6 +230,7 @@ import {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  CoreProofChecker,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
@@ -284,6 +286,11 @@ assert.equal(typeof coreProofPlanHave, 'function');
 assert.equal(typeof coreProofPlanRefine, 'function');
 assert.equal(typeof coreProofTemplatePlaceholder, 'function');
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
+assert.equal(typeof CoreProofChecker, 'function');
+assert.equal(
+  CORE_PROOF_CHECKER_PROFILE.permitsAnnotatedLambdaInference,
+  false,
+);
 assert.equal(typeof parseCoreLfProofDevelopmentSourceText, 'function');
 assert.equal(typeof serializeCoreProofGoalCouplingGraph, 'function');
 `,
@@ -340,6 +347,11 @@ assert.equal(typeof workspace.coreProofPlanHave, 'function');
 assert.equal(typeof workspace.coreProofPlanRefine, 'function');
 assert.equal(typeof workspace.coreProofTemplatePlaceholder, 'function');
 assert.equal(typeof workspace.createCoreLfProofDevelopment, 'function');
+assert.equal(typeof workspace.CoreProofChecker, 'function');
+assert.equal(
+  workspace.CORE_PROOF_CHECKER_PROFILE.acceptsCatalogRuntime,
+  false,
+);
 assert.equal(
   typeof workspace.parseCoreLfProofDevelopmentSourceText,
   'function',
@@ -369,6 +381,7 @@ import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
+  CORE_PROOF_CHECKER_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
@@ -377,6 +390,7 @@ import {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  CoreProofChecker,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
@@ -391,6 +405,7 @@ const roleSynthesizer: typeof synthesizeCoreLfInstanceByRoles =
 const maybeTerm: KernelExpression | undefined = undefined;
 const developmentFactory: typeof createCoreLfProofDevelopment =
   createCoreLfProofDevelopment;
+const proofCheckerConstructor: typeof CoreProofChecker = CoreProofChecker;
 const sourceParser: typeof parseCoreLfProofDevelopmentSourceText =
   parseCoreLfProofDevelopmentSourceText;
 const constructorMacro: typeof coreProofPlanConstructor =
@@ -406,6 +421,7 @@ void builder;
 void exactSynthesizer;
 void roleSynthesizer;
 void developmentFactory;
+void proofCheckerConstructor;
 void sourceParser;
 void constructorMacro;
 void contextualHave;
@@ -420,6 +436,7 @@ void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void CORE_LF_DECLARATION_WORKSPACE_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
+void CORE_PROOF_CHECKER_PROFILE;
 void CORE_PROOF_PLAN_PROFILE;
 void CORE_PROOF_PLAN_MACRO_PROFILE;
 void CORE_PROOF_GOAL_COUPLING_PROFILE;
@@ -440,6 +457,7 @@ import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
+  CORE_PROOF_CHECKER_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
@@ -448,6 +466,7 @@ import {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  CoreProofChecker,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
@@ -463,6 +482,7 @@ globalThis.emdashPackedSmoke = {
   workspaceRevision: CORE_LF_DECLARATION_WORKSPACE_PROFILE.revision,
   proofDevelopmentRevision: CORE_LF_PROOF_DEVELOPMENT_PROFILE.revision,
   proofSourceRevision: CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision,
+  proofCheckerRevision: CORE_PROOF_CHECKER_PROFILE.revision,
   proofPlanRevision: CORE_PROOF_PLAN_PROFILE.revision,
   proofPlanMacroRevision: CORE_PROOF_PLAN_MACRO_PROFILE.revision,
   proofGoalCouplingRevision: CORE_PROOF_GOAL_COUPLING_PROFILE.revision,
@@ -471,6 +491,7 @@ globalThis.emdashPackedSmoke = {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  CoreProofChecker,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,

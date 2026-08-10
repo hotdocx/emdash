@@ -18,9 +18,10 @@ direct-dependency graph are complete and final-proportional-green;
 the stateless development-graph command audit and its exact projection are
 complete and final-proportional-green;
 the simplifier audit has separated proof-level rewriting from definitional
-computation and frozen a bounded proof-checker conversion prerequisite;
-later simplifier implementation, search, library, external-automation, and
-general goal-graph rows remain dependency-gated
+computation; its bounded proof-checker conversion prerequisite is implemented
+and final-proportional-green; the first proof-producing simplifier is next;
+later search, library, external-automation, and general goal-graph rows remain
+dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -46,6 +47,7 @@ The cross-goal coupling audit checkpoint is `48405eb` and its semantic
 checkpoint is `de971de`; its synchronized ledger checkpoint is `d90db3b`.
 The development-graph command audit checkpoint is `e0d3e4f` and its semantic
 checkpoint is `8e21afb`; its synchronized ledger checkpoint is `3628315`.
+The proof-checker conversion audit checkpoint is `3c102ec`.
 
 Depends-On:
 
@@ -519,7 +521,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-COUPLING-4A` | Audit stable cross-goal dependency semantics and revision boundary | complete | direct target/context dependency graph selected below; proof-state v2 remains unchanged |
 | `GOAL-COUPLING-4B` | Implement portable direct cross-goal coupling graph | complete | `de971de`; focused semantic/static/browser/packed gates green; no source/artifact migration or long aggregate |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | complete | mechanism separation, equality/transport inventory, deterministic trace/budget contract, and staged scope frozen below |
-| `SIMP-5B0` | Proof-checker bounded beta/conversion prerequisite | in progress | approved 5A finding; exact LF environment, no annotated-lambda inference, coordinated semantic-profile migration |
+| `SIMP-5B0` | Proof-checker bounded beta/conversion prerequisite | complete | exact LF environment, beta/delta transport replay, lambda-callee inference still closed; focused/browser/packed/full-TypeScript gates green |
 | `SIMP-5B1` | Deterministic unconditional proof-producing simplifier | pending | green 5B0 proof-document replay boundary |
 | `SIMP-5B2` | Conditional/local/under-binder simplification extensions | deferred | concrete 5B1 consumer plus congruence and premise-discharge contract |
 | `INDEX-SEARCH-6` | Accessible-premise semantic index and exact-ID search | pending | general catalog and module-visibility corpus |
@@ -2067,6 +2069,82 @@ gate is relevant. Under `D-PA-019`, long aggregates remain omitted unless a
 changed boundary cannot be validated proportionally; the root SOP's shared-
 TypeScript aggregate rule is reconciled at checkpoint time rather than used
 as a pre-edit or iterative rerun.
+
+### SIMP-5B0 completion record
+
+The browser-safe workspace product now exports
+`emdash-core-proof-checker-v1`. `CoreProofChecker` is constructed only from an
+exact `CoreLfDeclarationEnvironment`; it reuses the existing combined
+zonk/beta/delta/reviewed-runtime comparison and its 256-step global budget.
+Its constructor exposes no catalog runtime, and its protected lambda policy
+continues to reject annotated lambdas in inference position.
+
+`compileCoreProofDocument` now creates this checker in a fresh session.
+Exact-closure workspace proofs pass the reconstructed LF environment instead
+of discarding checked transparent bodies through `.coreEnvironment`. The
+direct proof demo constructs an opaque LF environment through the same public
+owner. The new decoded-groupoid transport fixture checks
+`P : τ A -> Grpd`, `u : τ(P x)`, and a path-induction-shaped transport whose
+lambda motive requires beta; its user target additionally unfolds one exact
+transparent family alias. The comparison trace contains both beta and delta,
+while a generic call with that lambda as callee still fails with
+`CANNOT_INFER_LAMBDA`.
+
+The semantic profile chain advances exactly as frozen: proof document and
+workspace proof are v3, proof development and canonical source are v3,
+mounted development is v3, development CLI is v4, pinned research overview/
+files/browser replay are v3, and the capability record is v8. Proof state,
+standalone and workspace/development artifact envelope shapes, JSONL, goal/
+build/graph record shapes, explicit Core, and research-document binding stay
+at their existing revisions. Exact proof-source, serialized-profile,
+management-source, and proof-artifact SHA-256 pins were recomputed and then
+verified by both Node materialization and browser replay.
+
+Final validation on 2026-08-10:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_checker_tests.ts \
+  tests/v3_2_proof_document_tests.ts \
+  tests/v3_2_lf_workspace_proof_tests.ts \
+  tests/v3_2_proof_development_cli_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts
+  passed: 46/46 tests, 10 suites
+
+node --require ts-node/register --test \
+  tests/v3_2_browser_directed_tests.ts
+  passed: 13/13 tests, 1 suite
+
+./scripts/pnpmw run typecheck
+  passed
+
+eslint over every changed TypeScript/JavaScript file
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1
+
+./scripts/pnpmw run package:check
+  passed: build plus installed ESM, CJS, strict-TypeScript, and browser bundle
+
+./scripts/pnpmw run check:ts
+  passed: 1607 tests, 243 suites; 1553 pass, 54 skip, 0 fail
+  duration: 1603213 ms (about 26 minutes 43 seconds)
+```
+
+The complete `check:ts` was run once only because current root `AGENTS.md`
+explicitly makes it a pre-checkpoint gate when the shared checker/compiler or
+public package barrel changes. Its high systemic cost reinforces
+`D-PA-019`; it is not a precedent for iterative or reassurance reruns. No
+`check:all`, Lambdapi/kernel, print/book, sibling-repository, npm publication,
+GitHub Release, deployment, or other long aggregate was run.
+
+Non-effects: no Core constructor, proof-plan tag, source/artifact field,
+mathematical equality/J owner, simplifier rule, typeclass behavior, theorem
+import, declaration/term parser, arbitrary host execution, callback registry,
+MCP/LSP/server, filesystem/network/cache authority, or trusted Lambdapi
+dependency was added. `SIMP-5B1` remains a management-layer proof-producing
+consumer of this checked boundary.
 
 ### Frozen SIMP-5B1 first simplifier scope
 

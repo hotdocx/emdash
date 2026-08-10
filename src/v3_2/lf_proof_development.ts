@@ -26,7 +26,7 @@ import {
 } from './lf_workspace_proof';
 
 export const CORE_LF_PROOF_DEVELOPMENT_PROFILE = Object.freeze({
-    revision: 'emdash-lf-proof-development-v2' as const,
+    revision: 'emdash-lf-proof-development-v3' as const,
     artifactRevision:
         'emdash-lf-proof-development-artifact-v2' as const,
     workspaceProfileRevision:

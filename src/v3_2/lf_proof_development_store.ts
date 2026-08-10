@@ -14,7 +14,7 @@ const MIB = 1024 * 1024;
 const READ_CHUNK_BYTES = 64 * 1024;
 
 export const CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE = Object.freeze({
-    revision: 'emdash-lf-mounted-proof-development-v2' as const,
+    revision: 'emdash-lf-mounted-proof-development-v3' as const,
     sourceProfileRevision:
         CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision,
     filesystemProfile: 'node-posix-mounted-project-root-v1' as const,

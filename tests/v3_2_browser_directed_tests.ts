@@ -255,6 +255,10 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
             true
         );
         assert.equal(
+            closure.has(resolve('src/v3_2/proof_checker.ts')),
+            true
+        );
+        assert.equal(
             closure.has(resolve('src/v3_2/proof_plan.ts')),
             true
         );
@@ -310,6 +314,10 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
         );
         assert.equal(
             closure.has(resolve('src/v3_2/proof_document.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/proof_checker.ts')),
             true
         );
         assert.equal(

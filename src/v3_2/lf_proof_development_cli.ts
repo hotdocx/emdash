@@ -23,7 +23,7 @@ import {
 } from './lf_proof_development_store';
 
 export const CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE = Object.freeze({
-    revision: 'emdash-lf-proof-development-cli-v3' as const,
+    revision: 'emdash-lf-proof-development-cli-v4' as const,
     summaryRevision:
         'emdash-lf-proof-development-summary-v3' as const,
     goalRevision: 'emdash-lf-proof-development-goal-v2' as const,

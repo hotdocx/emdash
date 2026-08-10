@@ -181,6 +181,7 @@ import './v3_2_pattern_unification_tests';
 import './v3_2_proof_refinement_tests';
 import './v3_2_proof_plan_tests';
 import './v3_2_proof_template_tests';
+import './v3_2_proof_checker_tests';
 import './v3_2_proof_document_tests';
 import './v3_2_ai_proof_cli_tests';
 import './v3_2_proof_development_cli_tests';

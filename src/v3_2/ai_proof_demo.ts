@@ -7,10 +7,6 @@
  */
 
 import {
-    CoreBindingInput,
-    CoreDeclarationEnvironment
-} from './context';
-import {
     BinderMode,
     KernelExpression,
     binderMode,
@@ -22,6 +18,9 @@ import {
     provenance,
     sourceSpan
 } from './kernel';
+import {
+    CoreLfDeclarationEnvironment
+} from './lf_declarations';
 import {
     CoreProofPlan,
     coreProofPlanExact,
@@ -66,15 +65,15 @@ const declaration = (
     type: KernelExpression,
     mode: BinderMode,
     line: number
-): CoreBindingInput => ({
+) => ({
     name,
     type,
     mode,
     provenance: because(line, `AI proof demo declaration ${name}`)
 });
 
-const createEnvironment = (): CoreDeclarationEnvironment =>
-    CoreDeclarationEnvironment.empty().extend(declaration(
+const createEnvironment = (): CoreLfDeclarationEnvironment =>
+    CoreLfDeclarationEnvironment.empty().extend(declaration(
         'AIProofA',
         kernelUniverse(because(48, 'AI proof demo universe')),
         explicitFunctorial,
