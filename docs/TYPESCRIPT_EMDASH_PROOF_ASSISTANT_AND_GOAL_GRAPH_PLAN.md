@@ -44,10 +44,12 @@ owner, typecheck/lint, and browser-closure gates; its public visual/hosted
 adapter remains gated; the first protected npm bootstrap reached a green
 hosted build but npm refused the final registry PUT under its 2FA/token policy,
 then exact attempt 2 published and verified `@hotdocx/emdash@0.1.0` with
-provenance. The GitHub secret is removed and the stable workflow is token-free;
-interactive trusted-publisher/token hardening remains at direct npm password/
-2FA confirmation, so public-adapter rows still retain that trust gate. A
-post-14A concrete-consumer audit also found no current
+provenance. PACKAGE-RELEASE-13 is complete: the exact publish-only OIDC
+relationship is installed, the dedicated bootstrap token/local value and
+GitHub secret are removed, and the stable workflow is token-free. By explicit
+human supersession, package publishing access still allows bypass-2FA granular
+tokens. Public-adapter rows no longer retain a package-trust gate, but a
+post-14A concrete-consumer audit found no current
 counterevidence, external-certificate, public-benchmark, or hosted-adapter
 consumer, so those rows are now explicitly deferred or gated by the exact
 prerequisites recorded below rather than left apparently implementation-ready
@@ -60,11 +62,13 @@ Baseline: `9c633c85b66efb4ac7619912e8d15f928b32d733`
 (`docs: close classes goal readiness audit`)
 
 Git-Boundary: the branch fork baseline remains the qualified predecessor
-`9c633c8`; local and public `main` are now exactly `941bf96`, which records the
-verified PACKAGE-12B2 attempt-2 publication while retaining the stable token-
-free workflow restored at `735546d`. This proof-assistant branch incorporates
-the earlier public baseline through merge checkpoint `65549be` and the new
-publication record through merge checkpoint `35d9bcb`, but the
+`9c633c8`; local and public `main` are now exactly `ccf4fed`, which records the
+verified PACKAGE-12B2 attempt-2 publication, exact OIDC relationship, and
+one-time credential retirement while retaining the stable token-free workflow
+restored at `735546d`. This proof-assistant branch incorporates the earlier
+public baseline through merge checkpoint `65549be`, the publication record
+through merge checkpoint `35d9bcb`, and final trust state through merge
+checkpoint `15d8caa`, but the
 proof-assistant branch itself has not been merged into `main`, tagged,
 released, or published to npm. The frozen plan
 checkpoint is `671c56a`; the `DEV-CATALOG-1` semantic checkpoint is `fcc4547`;
@@ -103,8 +107,9 @@ synchronized clean published ledger checkpoint is `bf23c51`. GitHub retains
 annotated tag and Release `emdash-v0.1.0` at `501a5f6`; public-baseline merge
 checkpoint `65549be` incorporates its retained audit history, and the post-14A
 dependency-gate audit checkpoint is `394ad2c`. Attempt 2 subsequently
-published the exact tagged artifact, and public-main documentation checkpoint
-`941bf96` records its verification and remaining interactive trust gate.
+published the exact tagged artifact; public-main documentation checkpoint
+`941bf96` records its public verification and `ccf4fed` records completion of
+the selected trust/token boundary.
 
 Depends-On:
 
@@ -591,9 +596,9 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | deferred | No solver dependency/binary/corpus or certificate checker is selected. Reactivate only for one concrete solver/certificate-format consumer plus independent reconstruction or checking. |
 | `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | complete | `f46ff9a`; self-contained exact cases, arbitrary inert patches, fresh selected-proof replay, stable diagnostics, integer retrieval/plan/replay metrics, and provider-reported usage |
 | `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements plus a concrete agent/host consumer and reviewed corpus/public-package boundary |
-| `PACKAGE-RELEASE-13` | First npm publication and OIDC hardening | public package verified; interactive trust hardening in progress | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified, GitHub has no bootstrap secret, and stable `main` is token-free. Complete the prepared password/2FA trust confirmation, restrictive token policy, dedicated-token revocation, and `npm trust list`. |
+| `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
-| `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A and the public package are present; complete npm OIDC/token hardening, then require sibling SOP audits plus a concrete compatible controller/runtime consumer |
+| `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A and the public package/OIDC boundary are complete; require fresh sibling SOP audits plus one concrete compatible controller/runtime consumer |
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 
 Only one semantic row is in progress at a time. A later row may be
@@ -4040,12 +4045,12 @@ general ontology, theorem export, parser, Core node, proof-plan tag,
 proof/source/artifact migration, checker/refiner/conversion rule,
 class/instance semantics, or mathematical Lambdapi development changed.
 
-`GOAL-GRAPH-14B` remains gated by its recorded package and concrete hosted/
-visual consumer prerequisites. The remaining standard-library, public
-benchmark, counterevidence, and external-certificate rows likewise remain
-behind their explicit product or solver gates. Continuation should audit
-those gates for a real consumer before adding another semantic union member
-or public contract.
+`GOAL-GRAPH-14B` retains its concrete hosted/visual consumer prerequisite; its
+package/OIDC prerequisite is now complete in the later record. The remaining
+standard-library, public benchmark, counterevidence, and external-certificate
+rows likewise remain behind their explicit product, consumer, or solver gates.
+Continuation should audit those gates for a real consumer before adding
+another semantic union member or public contract.
 
 ## PACKAGE-RELEASE-13 Hosted Attempt And Baseline Synchronization Record
 
@@ -4166,13 +4171,13 @@ validation is exact diff, link/heading review, whitespace hygiene, clean
 worktree preservation, and ref/ancestry verification; no test or long
 aggregate can provide relevant additional evidence for this audit.
 
-## PACKAGE-RELEASE-13 Successful Publication And Trust-Hardening Gate
+## PACKAGE-RELEASE-13 Successful Publication And Trust Completion Record
 
 Date: 2026-08-10
 
-Result: `@hotdocx/emdash@0.1.0` is public, provenance-linked, byte-verified,
-and independently installable. Interactive trusted-publisher/token hardening
-remains in progress, so PACKAGE-RELEASE-13 is not yet complete.
+Result: complete. `@hotdocx/emdash@0.1.0` is public, provenance-linked,
+byte-verified, and independently installable; its exact OIDC relationship is
+installed and all one-time bootstrap authority is retired.
 
 After the user supplied a newly created bypass-2FA bootstrap key through the
 ignored no-echo source, exact run `31391224891` was rerun against immutable tag
@@ -4194,32 +4199,55 @@ npm tarball have SHA-256
 The npm-downloaded tarball passed the existing ESM, CommonJS, strict NodeNext,
 and browser-bundle installed consumers.
 
-The authenticated package-settings form is prepared for the sole trusted
-publisher: GitHub organization `hotdocx`, repository `emdash`, workflow file
-`npm-publish.yml`, environment `npm-release`, publish allowed, staged publish
-disallowed. npm accepted the form up to direct account-password confirmation;
-the agent did not inspect or enter password or 2FA data. The preserved browser
-handoff now awaits the human. After authentication, verify the saved fields
-and npm 11.19.0 trust list, require 2FA while disallowing bypass tokens, revoke
-the dedicated bootstrap key, and remove its ignored local value without
-printing it.
+The human completed npm's password and hardware-security-key challenges
+directly in preserved browser handoffs; the agent did not inspect or enter
+either secret. Authenticated settings then directly verified exactly one
+trusted publisher: GitHub `hotdocx/emdash`, workflow `npm-publish.yml`,
+environment `npm-release`, `npm publish` allowed, and `npm stage publish`
+absent.
+
+The initial recommendation to prohibit bypass-2FA tokens was explicitly
+superseded by the user, who switched the package back and directed
+continuation. Final settings visibly show the 2FA-or-bypass-token option
+checked. The OIDC identity and package-wide token policy are therefore
+deliberately separate: the exact hosted release route is trusted, while the
+owner retains an optional granular-token route.
+
+The dedicated bootstrap token remained one-time authority and was deleted
+through npm's confirmation flow; npm returned `deleted 1 token`, and its link
+and name are absent from the resulting token list. Its ignored
+`NPMJS_API_KEY` line was removed without printing the value, leaving the local
+`.env` empty. GitHub reports zero `npm-release` environment secrets, and the
+stable workflow contains neither `NPM_BOOTSTRAP_TOKEN` nor `NODE_AUTH_TOKEN`.
+Local and remote `main` agree.
+
+Local npm has no independent authenticated account session. An exact npm
+11.19.0 `npm trust list @hotdocx/emdash --json` corroboration attempt therefore
+returned `E401` (“You must be logged in”) after credential retirement; this is
+recorded as unavailable, not as a pass. The authenticated package settings
+directly verify every saved trust field and permission. Actual OIDC execution
+will be established by a later real version rather than republishing immutable
+`0.1.0` or manufacturing a dummy release.
 
 Publication satisfies the missing distribution prerequisite but does not
 create a concrete hosted consumer by itself:
 
-- `STDLIB-8` still requires a selected mathematical product profile and the
-  completed public-package trust boundary;
+- `STDLIB-8` has its public-package trust prerequisite but still requires a
+  selected mathematical product profile;
 - `AGENT-EVAL-12B` still lacks a reviewed public corpus and concrete agent/host
   consumer; and
-- `GOAL-GRAPH-14B` still requires completed npm trust hardening followed by
-  sibling SOP audits and one concrete compatible Arrowgram/GetPaidX consumer.
+- `GOAL-GRAPH-14B` still requires fresh sibling SOP audits and one concrete
+  compatible Arrowgram/GetPaidX controller/runtime consumer.
 
-Public-main record `941bf96` is incorporated into the proof-assistant branch by
-normal non-rewriting merge checkpoint `35d9bcb`. No proof-assistant source/
-test/export, mathematical development, workflow, package bytes, sibling
-repository, or deployment changed in that merge. No long TypeScript, root,
-kernel, print, book, or sibling aggregate was run; hosted release gates and
-the focused public installed-consumer verifier are the proportional evidence.
+Public-main publication record `941bf96` is incorporated into the proof-
+assistant branch by normal non-rewriting merge checkpoint `35d9bcb`; final
+trust record `ccf4fed` is incorporated by merge checkpoint `15d8caa`. No
+proof-assistant source/test/export, mathematical development, workflow,
+package bytes, sibling repository, or deployment changed in those merges. No
+long TypeScript, root, kernel, print, book, or sibling aggregate was run;
+hosted release gates, the focused public installed-consumer verifier, exact
+authenticated settings, and document/ref hygiene are the proportional
+evidence.
 
 ## Decision Ledger
 
@@ -4310,6 +4338,7 @@ the focused public installed-consumer verifier are the proportional evidence.
 | `D-PA-083` | Explicitly defer counterevidence and external-certificate implementation until a real consumer selects the interpretation, solver/certificate boundary, and independent evidence path. | Current code, dependencies, installed tools, and sibling hosts provide no such consumer; building a toy provider or widening the closed research-goal ontology would manufacture semantics solely to advance the ledger. |
 | `D-PA-084` | Accept attempt 2 of immutable run `31391224891` as the first public emdash package only after public digest, provenance, inventory, and installed-consumer verification. | Workflow success alone is indirect evidence; the registry artifact independently matches the qualified tarball and exercises every promised package entry across its four consumer modes. |
 | `D-PA-085` | Do not activate hosted adapters merely because the package is now public; first finish OIDC/token hardening and require one concrete sibling consumer. | Distribution resolves one prerequisite, while a public interchange, permission surface, and renderer/controller contract still need exact consumers and separate authority. |
+| `D-PA-086` | Close PACKAGE-RELEASE-13 after exact authenticated npm settings and one-time credential retirement, while retaining bypass-2FA-token compatibility by explicit human supersession. | OIDC publisher identity, residual bootstrap authority, and package-wide token policy are separate. The publish-only trust is directly visible, the dedicated token/local value and GitHub secret are gone, and the unauthenticated npm 11.19.0 `trust list` result is recorded honestly as `E401` rather than a pass. |
 
 ## Validation And Checkpoint Policy
 
