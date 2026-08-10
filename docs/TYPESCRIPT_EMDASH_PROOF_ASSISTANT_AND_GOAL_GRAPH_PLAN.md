@@ -6,9 +6,9 @@ Plan-ID: `TS-EMDASH-PROOF-ASSISTANT`
 
 Status: living architecture and implementation ledger; reviewed strategy
 recorded; qualified predecessor baseline integrated into public `main`;
-`DEV-CATALOG-1` implemented and final-proportional-green under the direct
-2026-08-10 long-aggregate waiver recorded below; `DEV-CLI-2A` canonical
-supplied-data acquisition frozen and approved; later Node CLI acquisition,
+`DEV-CATALOG-1` and `DEV-CLI-2A` implemented and final-proportional-green
+under the persistent 2026-08-10 long-aggregate policy recorded below; later
+Node CLI acquisition,
 proof-plan, simplification, search, library, external-automation, and general
 goal-graph rows remain dependency-gated
 
@@ -22,8 +22,10 @@ Baseline: `9c633c85b66efb4ac7619912e8d15f928b32d733`
 Git-Boundary: local and public `main` are exactly the qualified predecessor
 `9c633c8`; the frozen plan checkpoint is `671c56a`; the `DEV-CATALOG-1`
 semantic checkpoint is `fcc4547`; its synchronized ledger checkpoint and the
-dedicated branch's current pushed tip are `2484e23`. The branch has not been
-merged into `main`, tagged, released, or published to npm.
+dedicated branch's preceding published baseline are `2484e23`; the
+`DEV-CLI-2A`
+architecture and semantic checkpoints are `ee31ab9` and `c60d09e`. The branch
+has not been merged into `main`, tagged, released, or published to npm.
 
 Depends-On:
 
@@ -485,7 +487,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | --- | --- | --- | --- |
 | `BASELINE-INTEGRATE-0` | Fast-forward the qualified `9c633c8` predecessor into local/public `main` | complete | local and `origin/main` both exactly `9c633c8`; non-force push verified |
 | `DEV-CATALOG-1` | General browser-safe multi-module/multi-proof development catalog | complete | focused/package gates green; one long aggregate directly waived after interrupted evidence became unrecoverable |
-| `DEV-CLI-2A` | Canonical supplied-data proof-development source and reconstruction | in progress | `DEV-CATALOG-1`; frozen contract below |
+| `DEV-CLI-2A` | Canonical supplied-data proof-development source and reconstruction | complete | `c60d09e`; focused/static/browser/packed gates green; long aggregate intentionally omitted |
 | `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | pending | completed `DEV-CLI-2A`; exact fixed-file and size/symlink policy |
 | `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4`; no ad hoc second graph authority |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | pending | catalog consumer; no embedded process metas |
@@ -653,9 +655,9 @@ not misreported as checking this new source.
 No Core/checker/session/refiner semantics, proof-plan/artifact revision,
 Lambdapi source, mathematical owner/rule, parser, Node acquisition, CLI,
 network/cache, print/book, sibling repository, npm registry, GitHub Release,
-or hosted deployment changed. The former `DEV-CLI-2` is repartitioned below
-after its source-consumer and sandbox audit; `DEV-CLI-2A` is the selected next
-row.
+or hosted deployment changed. At that checkpoint `DEV-CLI-2` was nominally
+next; the subsequent audit repartitioned it below and selected the now
+completed `DEV-CLI-2A` row.
 
 ## DEV-CLI-2 Acquisition Audit And Frozen 2A Tranche
 
@@ -768,6 +770,86 @@ closure assertion, packed-package consumers, exact diff review, and
 whitespace hygiene. Under the user's persistent 2026-08-10 instruction, no
 long aggregate is run unless omitting that exact aggregate would block
 overall progress; omission is recorded and is never presented as a pass.
+
+## DEV-CLI-2A Completion Record
+
+Date: 2026-08-10
+
+Result: accepted at the frozen boundary.
+
+Checkpoints: architecture `ee31ab9`; implementation `c60d09e`; this
+completion record is a separate descendant documentation checkpoint.
+
+Implementation:
+
+- added browser-safe `src/v3_2/lf_proof_development_source.ts` with the
+  source-visible `emdash-lf-proof-development-source-v1` profile;
+- separated exact canonical explicit-Core data from host-language execution,
+  declaration/term syntax, filesystem acquisition, hashing, and commands;
+- projected direct constructor output to portable plain data while omitting
+  only absent optional record fields and rejecting functions, symbols,
+  cycles, class instances, accessors, hidden fields, sparse arrays, extra
+  array properties, and non-finite numbers;
+- decoded provenance, binder modes, every current meta-free explicit-Core
+  expression tag, and every current inert proof-plan tag by closed dispatch;
+- rejected process-local metas, unsupported tags, malformed fields,
+  noncanonical source objects/bytes, and dangling Core variables before a
+  source reconstruction can be returned;
+- reran existing module, transfer-policy, declaration-linkage,
+  declaration-workspace, proof-fingerprint, proof-plan, and development
+  constructors/validators rather than duplicating their semantic ownership;
+- returned a deeply frozen source snapshot, inert development plan, and exact
+  canonical source text; checker replay remains the separate
+  `compileCoreLfProofDevelopment` call;
+- exported the contract from the contributor v3.2 barrel and the browser-safe
+  `@hotdocx/emdash/workspace` package entry, documented that boundary, and
+  extended packed ESM/CommonJS/strict NodeNext/browser consumers; and
+- added positive round-trip, permutation, checked-artifact equivalence,
+  deep-freeze, malformed JSON, noncanonical bytes/data, extra/missing field,
+  accessor non-execution, sparse array, unknown plan/expression tag,
+  dangling-bound, serialized/direct-meta, provenance, fingerprint, and
+  Node-free transitive-closure coverage.
+
+Focused evidence:
+
+```text
+./scripts/pnpmw run workspace:check
+  passed; pnpm@11.16.0, Node 24.11.1
+
+./scripts/pnpmw run typecheck
+  passed
+
+changed-file ESLint
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_lf_workspace_proof_tests.ts \
+  tests/v3_2_lf_workspace_tests.ts \
+  tests/v3_2_proof_plan_tests.ts \
+  tests/v3_2_browser_directed_tests.ts
+  40 tests / 6 suites: 40 passed, 0 failed
+
+./scripts/pnpmw run package:check
+  passed: build plus packed ESM/CommonJS/strict NodeNext/browser consumers
+
+git diff --cached --check
+  passed before semantic checkpoint c60d09e
+```
+
+Aggregate disposition: no `check:ts`, root-test, or `check:all` aggregate was
+run. Its omission does not block this row because the exact semantic,
+transitive-browser, type, lint, workspace, and packed public-consumer
+boundaries are directly green. This is an intentional omission under
+`D-PA-019`, not a pass and not evidence about unrelated suites.
+
+No Core/checker/session/refiner semantics, proof-plan/artifact revision,
+mathematical owner/rule, theorem import, filesystem/path policy, hashing,
+cache, network, dynamic import, CLI, MCP/LSP, Lambdapi source, kernel,
+print/book, sibling repository, npm registry, GitHub Release, or hosted
+deployment changed. `DEV-CLI-2B` is the next nominal row, subject to a frozen
+fixed-file/explicit-root/size/symlink/output contract. `PLAN-DECOMPOSE-3A`
+remains dependency-ready as a semantic alternative after this completed
+catalog consumer.
 
 ## Decision Ledger
 
@@ -904,8 +986,8 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from the completed `DEV-CATALOG-1` checkpoint once recorded. Continue
-> through general acquisition/commands, measured declarative proof-plan
+> Start from the completed `DEV-CLI-2A` checkpoint once recorded. Continue
+> through explicit-root Node commands, measured declarative proof-plan
 > decomposition, stable goal coupling, proof-producing simplification,
 > accessible-premise indexing, bounded providers, curated-library gates,
 > proof maintenance, external certificates, and agent evaluation in the
