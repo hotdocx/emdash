@@ -20,7 +20,9 @@ The package has three deliberately bounded entries:
 - `@hotdocx/emdash/workspace` — explicit proof plans and artifacts plus
   browser-safe declaration/fragment workspaces and canonically ordered
   multi-module proof-development catalogs, including exact canonical-data
-  reconstruction for materialized proof sources.
+  reconstruction for materialized proof sources. Selected-constructor syntax
+  expands to the ordinary checked `apply` proof plan; it adds no tactic state
+  or serialized plan tag.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -36,6 +38,8 @@ import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
+  CORE_PROOF_PLAN_MACRO_PROFILE,
+  coreProofPlanConstructor,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
 } from '@hotdocx/emdash/workspace';
@@ -47,6 +51,8 @@ void synthesizeCoreLfInstance;
 void synthesizeCoreLfInstanceByRoles;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
+void CORE_PROOF_PLAN_MACRO_PROFILE;
+void coreProofPlanConstructor;
 void createCoreLfProofDevelopment;
 void parseCoreLfProofDevelopmentSourceText;
 ```

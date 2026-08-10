@@ -8,14 +8,17 @@ import {
     BinderMode,
     CoreBindingInput,
     CoreChecker,
+    CoreCheckerError,
     CoreDeclarationEnvironment,
     CoreElaborationSession,
     CoreProofPlan,
     CoreProofPlanError,
     CoreProofRefiner,
+    CORE_PROOF_PLAN_MACRO_PROFILE,
     KernelExpression,
     binderMode,
     coreProofPlanApply,
+    coreProofPlanConstructor,
     coreProofPlanExact,
     coreProofPlanHole,
     coreProofPlanIntro,
@@ -323,11 +326,68 @@ describe('TypeScript v3.2 AI-PROOF-1 proof plans', () => {
         assert.equal(kernelExpressionEquals(execution.term, expected), true);
     });
 
+    it('lowers selected constructor syntax exactly to checked apply', () => {
+        const callee = free(
+            'plan_const',
+            35,
+            'PLAN-DECOMPOSE-3B selected constructor'
+        );
+        const premises = [
+            coreProofPlanExact(free(
+                'plan_z',
+                36,
+                'PLAN-DECOMPOSE-3B constructor left field'
+            )),
+            coreProofPlanExact(free(
+                'plan_b',
+                37,
+                'PLAN-DECOMPOSE-3B constructor right field'
+            ))
+        ];
+        const options = {
+            id: 'selected_constructor',
+            provenance: because(35, 'PLAN-DECOMPOSE-3B constructor macro')
+        };
+        const macro = coreProofPlanConstructor(
+            callee,
+            premises,
+            options
+        );
+        const direct = coreProofPlanApply(callee, premises, options);
+        assert.deepEqual(macro, direct);
+        assert.equal(macro.tag, 'apply');
+        assert.equal(
+            CORE_PROOF_PLAN_MACRO_PROFILE.addsProofPlanTags,
+            false
+        );
+        assert.equal(
+            CORE_PROOF_PLAN_MACRO_PROFILE.constructorLowering,
+            'apply'
+        );
+        assert.equal(
+            Object.isFrozen(CORE_PROOF_PLAN_MACRO_PROFILE.basePlanTags),
+            true
+        );
+
+        const { session, checker } = proofFixture();
+        const root = freshRoot(session, typeA(38), 38);
+        const execution = executeCoreProofPlan(
+            new CoreProofRefiner(checker, root),
+            root.identity,
+            macro
+        );
+        assert.equal(execution.state.status, 'complete');
+        assert.deepEqual(
+            execution.trace.map(step => step.operation),
+            ['apply', 'exact', 'exact']
+        );
+    });
+
     it('serializes dependent open goals with stable source names', () => {
         const makeExecution = () => {
             const { session, checker } = proofFixture();
             const root = freshRoot(session, typeA(40), 40);
-            const plan = coreProofPlanApply(
+            const plan = coreProofPlanConstructor(
                 free('plan_k', 41, 'AI-PROOF-1 indexed application'),
                 [
                     coreProofPlanHole('index', {
@@ -449,11 +509,48 @@ describe('TypeScript v3.2 AI-PROOF-1 proof plans', () => {
         );
     });
 
-    it('rolls back apply when the source supplies the wrong arity', () => {
+    it('rejects wrong selected constructors and arity atomically', () => {
+        const wrongFixture = proofFixture();
+        const wrongRoot = freshRoot(
+            wrongFixture.session,
+            typeB(69),
+            69
+        );
+        const wrongRefiner = new CoreProofRefiner(
+            wrongFixture.checker,
+            wrongRoot
+        );
+        const wrongConstructor = coreProofPlanConstructor(
+            free('plan_s', 69, 'PLAN-DECOMPOSE-3B wrong constructor'),
+            [coreProofPlanExact(free(
+                'plan_z',
+                69,
+                'PLAN-DECOMPOSE-3B wrong constructor premise'
+            ))],
+            { id: 'wrong_constructor' }
+        );
+        assert.throws(
+            () => executeCoreProofPlan(
+                wrongRefiner,
+                wrongRoot.identity,
+                wrongConstructor
+            ),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreCheckerError);
+                assert.equal(error.code, 'TYPE_MISMATCH');
+                return true;
+            }
+        );
+        assert.equal(wrongFixture.session.metavariables.length, 1);
+        assert.equal(
+            wrongFixture.session.metavariable(wrongRoot).solution,
+            undefined
+        );
+
         const { session, checker } = proofFixture();
         const root = freshRoot(session, typeA(70), 70);
         const refiner = new CoreProofRefiner(checker, root);
-        const plan = coreProofPlanApply(
+        const plan = coreProofPlanConstructor(
             free('plan_s', 71, 'AI-PROOF-1 arity mismatch'),
             [],
             { id: 'missing_premise' }

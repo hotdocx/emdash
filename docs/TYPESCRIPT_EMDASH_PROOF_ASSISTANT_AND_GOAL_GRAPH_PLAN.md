@@ -494,7 +494,8 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | complete | `b5a4cb2`; focused semantic/static/browser gates green; long aggregate intentionally omitted |
 | `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4`; no ad hoc second graph authority |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | complete | base-plan macro lowering selected; template and equality boundaries separated below |
-| `PLAN-DECOMPOSE-3B` | Implement `have`/`constructor` base-plan macros | in progress | frozen 3A contract below; no new plan tag or checker rule |
+| `PLAN-DECOMPOSE-3B` | Implement selected-`constructor` base-plan macro | in progress | corrected frozen contract below; exact `apply` lowering only |
+| `PLAN-DECOMPOSE-3B1` | Versioned contextual `have` plan/refiner | pending | 3B; explicit nested-profile revision and open-goal retention decision |
 | `PLAN-DECOMPOSE-3C` | Versioned explicit-placeholder `refine` template | pending | one consumer not expressible by base-plan macros; source/artifact revision decision |
 | `GOAL-COUPLING-4` | Stable cross-goal dependency graph | pending | measured dependent-hole consumer and snapshot revision decision |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | pending | equality/transport owner inventory and termination contract |
@@ -1072,8 +1073,9 @@ bounded self-approval authorization.
    call against the current target. A selected data constructor therefore
    needs no special proof rule: `constructor c` is precisely `apply c` with a
    clearer direct-TypeScript authoring name.
-3. A local `have h : T` is also expressible without a new plan tag. For an
-   explicitly recorded current target `G`, construct the meta-free cut term
+3. The initial audit hypothesis was that a local `have h : T` could also be
+   expressed without a new plan tag. For an explicitly recorded current
+   target `G`, the proposed meta-free cut term was
 
    ```text
    cut(T,G) = λ witness : T,
@@ -1084,11 +1086,16 @@ bounded self-approval authorization.
      ↦ apply cut(T,G) [proof, intro h body]
    ```
 
-   Correct De Bruijn weakening of `T` and `G` under the generated binders is
-   ordinary `kernelShift`; checking and local-context creation remain owned
-   by existing `apply` and `intro`. The explicit `G` is not trusted as a
-   mutable goal snapshot: replay must still unify the cut result with the
-   actual selected goal.
+   A focused implementation probe rejected this hypothesis before semantic
+   checkpointing. The frozen `CoreChecker` deliberately returns
+   `CANNOT_INFER_LAMBDA` when `apply` tries to infer that lambda callee;
+   annotated-lambda inference exists only in the separate candidate LF
+   checker. Enabling it globally or manufacturing a hidden cut declaration
+   would widen an unrelated trusted boundary. A real `have` therefore needs
+   an explicit inert node plus a generic contextual refiner operation that
+   creates the fact and continuation goals without serializing their session
+   metas. Its nested profile/artifact revisions and treatment of an unused
+   open fact must be frozen in `PLAN-DECOMPOSE-3B1`.
 4. Lean's implementation confirms why general `refine` is materially
    different: it elaborates a term containing holes, assigns the old goal to
    that term, and promotes the newly reachable holes to goals. Emdash source
@@ -1106,16 +1113,13 @@ bounded self-approval authorization.
    must not interfere with active Lambdapi mathematics or disguise a runtime
    rewrite as a theorem proof.
 
-### Frozen PLAN-DECOMPOSE-3B contract
+### Corrected frozen PLAN-DECOMPOSE-3B contract
 
-Add browser-safe, source-visible authoring macros in the existing
+Add one browser-safe, source-visible authoring macro in the existing
 `proof_plan` package boundary:
 
 ```text
 coreProofPlanConstructor(callee, premises, options?)
-  -> CoreProofPlanApply
-
-coreProofPlanHave(binding, target, proof, body, options?)
   -> CoreProofPlanApply
 ```
 
@@ -1123,42 +1127,34 @@ coreProofPlanHave(binding, target, proof, body, options?)
 2. `constructor` delegates exactly to `coreProofPlanApply`; the caller selects
    the constructor handle and supplies all ordered premise plans. Automatic
    constructor search is a later index/provider feature.
-3. `have` accepts one `KernelBinder`, an explicit actual-target expectation,
-   a proof plan for its type, and a continuation plan. Revision 1 preserves
-   the binder's exact plicity and functorial/natural variation.
-4. `have` builds the typed cut term above using only `kernelBinder`,
-   `kernelPi`, `kernelLambda`, `kernelCall`, `kernelBound`, and `kernelShift`,
-   then returns ordinary `apply` with `[proof, intro(body)]`. The continuation
-   receives the named local at De Bruijn index zero.
-5. The generated root uses the caller's optional ID/provenance. Generated
-   binders and calls receive deterministic derived provenance; no callback,
+3. The generated root uses the caller's optional ID/provenance; no callback,
    registry, session, meta, goal lookup, environment lookup, filesystem,
    process state, or backend selection is retained.
-6. Output is an ordinary deeply inspectable base-plan tree. Canonical source,
+4. Output is an ordinary deeply inspectable base-plan tree. Canonical source,
    proof-state, artifact, JSONL, and CLI revisions do not change; serialized
    plans contain only the existing `apply`, `intro`, `exact`, and `hole` tags,
    and traces report those actual primitives.
-7. Failures remain ordinary validation/checking failures. A stale or wrong
-   target, ill-scoped type, process-local meta, non-type binding, wrong
-   constructor, premise mismatch, or malformed binder mode must fail through
-   current owners rather than a parallel macro checker.
+5. Failures remain ordinary validation/checking failures. An ill-scoped or
+   meta-bearing callee, wrong constructor, or premise mismatch must fail
+   through current owners rather than a parallel macro checker.
 
 Focused acceptance covers constructor parity with direct `apply`, complete
-and named-open `have`, local-context visibility, natural/functorial variation,
-wrong-target and meta rejection, base-tag-only serialization, exact canonical
-source round-trip, browser closure, and the packed workspace consumer. Run
-the focused proof-plan/source/workspace suites, workspace check, typecheck,
-changed-file lint, browser closure, package build/packed consumers, exact diff
-review, and whitespace hygiene. Under `D-PA-019`, no long root or repository
-aggregate is run unless omitting it becomes progress-blocking.
+and named-open constructor premises, wrong-constructor and arity rejection,
+base-tag-only serialization, exact canonical source round-trip, browser
+closure, and the packed workspace consumer. Run the focused proof-plan/source/
+workspace suites, workspace check, typecheck, changed-file lint, browser
+closure, package build/packed consumers, exact diff review, and whitespace
+hygiene. Under `D-PA-019`, no long root or repository aggregate is run unless
+omitting it becomes progress-blocking.
 
 Non-effects: no new Core expression, proof-plan tag, refiner/checker/session
 method, proof/source/artifact revision, declaration or term parser,
 constructor discovery, equality/rewrite semantics, theorem import, Lambdapi
 source, mathematical owner/rule, Node adapter, CLI, cache/network, MCP/LSP,
 print/book, sibling repository, release, registry, or deployment change.
-`PLAN-DECOMPOSE-3C` retains general explicit-placeholder refinement;
-`SIMP-5A/5B` retains propositional rewriting.
+`PLAN-DECOMPOSE-3B1` retains contextual `have`; `PLAN-DECOMPOSE-3C` retains
+general explicit-placeholder refinement; `SIMP-5A/5B` retains propositional
+rewriting.
 
 ## Decision Ledger
 
@@ -1186,7 +1182,8 @@ print/book, sibling repository, release, registry, or deployment change.
 | `D-PA-020` | Repartition `DEV-CLI-2` into canonical supplied-data reconstruction, Node fixed-file commands, and a later stable graph projection. | No safe general proof-development file consumer exists, and arbitrary TypeScript import is not a sandbox. The split preserves direct TypeScript authoring without confusing host execution with checked source. |
 | `D-PA-021` | Add an exact `development` command namespace over one fixed canonical file and preserve all older command vectors. | Namespacing keeps Node acquisition asynchronous and separate from the fixed proof demo; fixed-file explicit-root input avoids arbitrary host import/path authority. |
 | `D-PA-022` | Prefer source-expanded proof-plan macros whenever a convenience form lowers faithfully to the existing inert base. | It improves AI/human authoring without multiplying trusted tags, decoders, trace semantics, or process state. |
-| `D-PA-023` | Implement explicit `constructor` and cut-based `have` first; reserve general `refine` for a versioned placeholder template and `rewrite` for the equality/simplifier audit. | The first two have exact generic Core lowerings today; the latter two require contracts that cannot be recovered safely by renaming `apply` or runtime reduction. |
+| `D-PA-023` | Implement explicit selected-`constructor` first; reserve contextual `have` and general `refine` for versioned plan/refiner contracts and `rewrite` for the equality/simplifier audit. | Only constructor has an exact base-plan lowering under the frozen checker; the other forms require contracts that cannot be recovered safely by renaming `apply` or runtime reduction. |
+| `D-PA-024` | Reject the proposed lambda-cut expansion of `have` after the focused checker probe. | `CoreProofRefiner.apply` must infer its callee, while the frozen `CoreChecker` intentionally rejects annotated-lambda inference; widening that checker or injecting a hidden declaration is outside the macro tranche. |
 
 ## Validation And Checkpoint Policy
 

@@ -23,6 +23,26 @@ import {
     formatCoreProofExpression
 } from './proof';
 
+export const CORE_PROOF_PLAN_MACRO_PROFILE = Object.freeze({
+    revision: 'emdash-proof-plan-macros-v1' as const,
+    selectedConstructor: 'explicit-callee' as const,
+    constructorLowering: 'apply' as const,
+    lowersToBasePlanTags: true as const,
+    basePlanTags: Object.freeze([
+        'exact',
+        'intro',
+        'apply',
+        'hole'
+    ] as const),
+    addsCoreExpressionTags: false as const,
+    addsProofPlanTags: false as const,
+    retainsCallbacks: false as const,
+    retainsMetavariables: false as const,
+    performsSemanticChecks: false as const,
+    nodeBuiltinDependency: false as const,
+    productionLambdapiDependency: false as const
+});
+
 export interface CoreProofGoalExpectation {
     /** Exact expected local-context depth. */
     readonly contextDepth?: number;
@@ -126,6 +146,16 @@ export const coreProofPlanHole = (
         ? Object.freeze({ ...options.expectation })
         : undefined
 });
+
+/**
+ * User-facing constructor syntax with no second semantic implementation.
+ * Constructor selection stays explicit; checking remains ordinary `apply`.
+ */
+export const coreProofPlanConstructor = (
+    callee: KernelExpression,
+    premises: readonly CoreProofPlan[],
+    options: CoreProofPlanNodeOptions = {}
+): CoreProofPlanApply => coreProofPlanApply(callee, premises, options);
 
 export type CoreProofPlanErrorCode =
     | 'INVALID_ID'
