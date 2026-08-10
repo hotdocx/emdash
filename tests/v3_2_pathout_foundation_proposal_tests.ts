@@ -64,7 +64,7 @@ const assertProposalError = (
 };
 
 describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
-    it('pins v6 supersession and remains non-self-authorizing',
+    it('pins v7 supersession and remains non-self-authorizing',
         () => {
             const proposal = validateCorePathoutFoundation1b0Proposal();
             assertDeepFrozen(proposal);
@@ -83,6 +83,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     proposal.parent.supersededV5ReviewCheckpoint,
                     proposal.parent.supersededV6ProposalCheckpoint,
                     proposal.parent.supersededV6ReviewCheckpoint,
+                    proposal.parent.supersededV7ProposalCheckpoint,
+                    proposal.parent.supersededV7ReviewCheckpoint,
                     proposal.decision.status,
                     proposal.decision.implementationAuthorized
                 ],
@@ -100,6 +102,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     'c4dd293',
                     'f006ccb',
                     'bdcef29',
+                    '2460ae9',
+                    '7035922',
                     'proposal-only',
                     false
                 ]
@@ -302,6 +306,9 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     .identityFamilyProofCorrection
                     .typescriptResidualConstraintCount,
                 CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
+                    .identityFamilyProofCorrection
+                    .typescriptConstraintRepresentative,
+                CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
                     .identityFamilyProofCorrection.runtimeRuleAdded,
                 CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
                     .identityFamilyProofCorrection
@@ -309,7 +316,7 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                 CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
                     .identityFamilyProofCorrection.newMathematicalRule
             ],
-            [8079, 0, false, false, false]
+            [8079, 1, 'A-equals-A', false, false, false]
         );
     });
 

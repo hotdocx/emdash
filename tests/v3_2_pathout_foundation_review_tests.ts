@@ -1,5 +1,5 @@
 /**
- * Focused delegated review tests for corrected PathOut foundation proposal.
+ * Focused v7 supersession tests for corrected PathOut foundation proposal.
  */
 
 import assert from 'node:assert/strict';
@@ -44,8 +44,8 @@ const assertReviewError = (
     );
 };
 
-describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated v7 review', () => {
-    it('approves only checkpointed v7 with human supersession', () => {
+describe('PATHOUT-LIBRARY-FOUNDATION-1B0 v7 review supersession', () => {
+    it('withdraws v7 after the nonempty proof-constraint invariant', () => {
         const approval = CORE_PATHOUT_FOUNDATION_1B0_REVIEW.approval;
         assert.deepEqual(
             [
@@ -62,12 +62,15 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated v7 review', () => {
                 approval.supersededV5ReviewCheckpoint,
                 approval.supersededV6ProposalCheckpoint,
                 approval.supersededV6ReviewCheckpoint,
-                approval.approvedProposalCheckpoint,
+                approval.supersededV7ProposalCheckpoint,
+                approval.supersededV7ReviewCheckpoint,
+                approval.replacementProposalCheckpoint,
                 approval.humanDecisionSupersedes
             ],
             [
-                'corrected-proposal-v7-approved-as-proposed',
-                'user-delegated-unattended-approval',
+                'corrected-proposal-v7-superseded-after-measured-' +
+                    'nonempty-proof-constraint-invariant',
+                'measured-implementation-forward-correction',
                 'dd69325',
                 'b3d6d71',
                 '38ef8ae',
@@ -80,12 +83,14 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated v7 review', () => {
                 'f006ccb',
                 'bdcef29',
                 '2460ae9',
+                '7035922',
+                'pending-separate-checkpoint',
                 true
             ]
         );
     });
 
-    it('retains an immutable copy of exact non-authorizing v7', () => {
+    it('retains an immutable copy of exact non-authorizing v8', () => {
         const recommendation =
             CORE_PATHOUT_FOUNDATION_1B0_REVIEW.recommendation;
         assert.notEqual(
@@ -98,11 +103,11 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated v7 review', () => {
         );
         assert.equal(
             recommendation.revision,
-            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-7'
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-8'
         );
     });
 
-    it('authorizes exact root-only 5/12/2/9 over corrected predecessor',
+    it('freezes root-only 5/12/2/9 without implementation authority',
         () => {
         const authorization =
             CORE_PATHOUT_FOUNDATION_1B0_REVIEW.authorization;
@@ -123,7 +128,7 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated v7 review', () => {
                 2,
                 9,
                 'compileCoreCategoricalDirectMixedSourceActionTransfer',
-                true
+                false
             ]
         );
     });
@@ -156,8 +161,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated v7 review', () => {
         assertReviewError(
             review => {
                 (review.approval as {
-                    approvedProposalCheckpoint: string;
-                }).approvedProposalCheckpoint = 'wrong';
+                    replacementProposalCheckpoint: string;
+                }).replacementProposalCheckpoint = 'wrong';
             },
             'PATHOUT_FOUNDATION_REVIEW_DECISION_DRIFT'
         );
