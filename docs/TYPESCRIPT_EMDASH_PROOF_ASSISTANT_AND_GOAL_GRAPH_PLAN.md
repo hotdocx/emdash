@@ -5451,6 +5451,10 @@ aggregate and Lambdapi checks were intentionally omitted because this
 behavior-free row is directly covered and their omission does not block
 progress.
 
+The rollback-safe `PATHOUT-TRUST-BOUNDARY-0A` checkpoint is `a05493b`. It is
+the exact predecessor for the delegated `PATHOUT-LIBRARY-FOUNDATION-1B0`
+proposal and contains no semantic transfer or public-package byte.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |

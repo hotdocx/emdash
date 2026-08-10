@@ -301,6 +301,11 @@ the standing instruction to avoid long aggregates unless their omission
 blocks progress; full TypeScript checking, focused lint, and every new drift
 test directly cover this read-only contributor artifact.
 
+The rollback-safe `PATHOUT-TRUST-BOUNDARY-0A` implementation checkpoint is
+`a05493b`. It is the exact predecessor for the behavior-free `1B0` proposal;
+the checkpoint contains contributor audit/test evidence and synchronized
+plans only, with no semantic or package export.
+
 ## Required Evidence For Implementation
 
 1. Exact active-source signatures/bodies/rules and owning positions.
