@@ -6,11 +6,10 @@ Plan-ID: `TS-EMDASH-PROOF-ASSISTANT`
 
 Status: living architecture and implementation ledger; reviewed strategy
 recorded; qualified predecessor baseline integrated into public `main`;
-`DEV-CATALOG-1` and `DEV-CLI-2A` implemented and final-proportional-green
-under the persistent 2026-08-10 long-aggregate policy recorded below; later
-Node CLI acquisition,
-proof-plan, simplification, search, library, external-automation, and general
-goal-graph rows remain dependency-gated
+`DEV-CATALOG-1`, `DEV-CLI-2A`, and `DEV-CLI-2B` implemented and
+final-proportional-green under the persistent 2026-08-10 long-aggregate
+policy recorded below; later proof-plan, simplification, search, library,
+external-automation, and general goal-graph rows remain dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -23,9 +22,10 @@ Git-Boundary: local and public `main` are exactly the qualified predecessor
 `9c633c8`; the frozen plan checkpoint is `671c56a`; the `DEV-CATALOG-1`
 semantic checkpoint is `fcc4547`; its synchronized ledger checkpoint and the
 dedicated branch's preceding published baseline are `2484e23`; the
-`DEV-CLI-2A`
-architecture and semantic checkpoints are `ee31ab9` and `c60d09e`. The branch
-has not been merged into `main`, tagged, released, or published to npm.
+`DEV-CLI-2A` architecture, semantic, and ledger checkpoints are `ee31ab9`,
+`c60d09e`, and `fa84b05`; the `DEV-CLI-2B` architecture and semantic
+checkpoints are `a6f0fbe` and `b5a4cb2`. The branch has not been merged into
+`main`, tagged, released, or published to npm.
 
 Depends-On:
 
@@ -488,7 +488,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `BASELINE-INTEGRATE-0` | Fast-forward the qualified `9c633c8` predecessor into local/public `main` | complete | local and `origin/main` both exactly `9c633c8`; non-force push verified |
 | `DEV-CATALOG-1` | General browser-safe multi-module/multi-proof development catalog | complete | focused/package gates green; one long aggregate directly waived after interrupted evidence became unrecoverable |
 | `DEV-CLI-2A` | Canonical supplied-data proof-development source and reconstruction | complete | `c60d09e`; focused/static/browser/packed gates green; long aggregate intentionally omitted |
-| `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | in progress | completed `DEV-CLI-2A`; frozen contract below |
+| `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | complete | `b5a4cb2`; focused semantic/static/browser gates green; long aggregate intentionally omitted |
 | `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4`; no ad hoc second graph authority |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | pending | catalog consumer; no embedded process metas |
 | `PLAN-DECOMPOSE-3B` | Implement the first measured decomposition nodes | pending | approved 3A contract and positive/negative corpus |
@@ -960,6 +960,95 @@ forbidden-effect/output scans, exact diff review, and whitespace hygiene. No
 long aggregate runs unless its omission becomes progress-blocking under
 `D-PA-019`.
 
+## DEV-CLI-2B Completion Record
+
+Date: 2026-08-10
+
+Result: accepted at the frozen boundary.
+
+Checkpoints: architecture `a6f0fbe`; implementation `b5a4cb2`; this
+completion record is a separate descendant documentation checkpoint.
+
+Implementation:
+
+- added Node-only `src/v3_2/lf_proof_development_store.ts` with the
+  source-visible `emdash-lf-mounted-proof-development-v1` profile;
+- accepted only one plain `{ projectRoot }` data record, rejected accessors
+  without invoking them, required a normalized absolute real directory, and
+  opened only its fixed `emdash.proof-development.source.json` child;
+- required `O_RDONLY | O_NOFOLLOW | O_NONBLOCK`, a regular file, a 64 MiB
+  stat and actual-byte ceiling, bounded chunked reads, and exact UTF-8 before
+  canonical source reconstruction and SHA-256 acquisition evidence;
+- added stateless `development check|goals|build` commands with an exact
+  paired module/declaration selector, strict option parsing, fresh whole-
+  development checking, stable JSONL/text projections, and distinct
+  complete, incomplete, and command/error exit statuses;
+- kept absolute paths, source text, timestamps, process identity, checked
+  objects, credentials, and environment values out of command records;
+- added a pure direct-TypeScript two-proof demo, an explicit stdout-only
+  canonical-data materializer, a thin process launcher, and exact additive
+  shell dispatch while preserving legacy proof, workspace, and capability
+  command vectors;
+- revised the source-visible capability record to v2, replacing the now-
+  completed general-source/command deferrals with the narrower optional
+  host-execution and stable graph gates; and
+- documented the authoring-to-data-to-checking handoff and added positive,
+  incomplete, selection, build, text, malformed-option, path/privacy,
+  accessor, symlink, non-file, size, UTF-8, canonical-source, shell-routing,
+  legacy-compatibility, and materializer coverage.
+
+Focused evidence:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_development_cli_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts \
+  tests/v3_2_lf_workspace_proof_tests.ts \
+  tests/v3_2_lf_remote_workspace_tests.ts
+  53 tests / 11 suites: 53 passed, 0 failed
+
+node --require ts-node/register --test \
+  tests/v3_2_browser_api_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts
+  17 tests / 4 suites: 17 passed, 0 failed
+
+./scripts/pnpmw run typecheck
+  passed
+
+changed-file ESLint
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed; pnpm@11.16.0, Node 24.11.1
+
+sh -n scripts/emdash
+  passed
+
+forbidden-effect and command-output scans
+  passed
+
+git diff --cached --check
+  passed before semantic checkpoint b5a4cb2
+```
+
+Aggregate disposition: no `check:ts`, root-test, `check:all`, package, kernel,
+print, or book aggregate was run. No public npm entry, curated browser barrel,
+package metadata, dependency, or package consumer changed, so package
+repacking was not an affected boundary. The exact Node acquisition, command,
+legacy compatibility, source/catalog/workspace, browser API, type, lint,
+workspace, shell, effect, output, and whitespace boundaries are directly
+green. Under `D-PA-019`, omitting a long aggregate does not block this row;
+the omission is intentional, is not a pass, and provides no evidence about
+unrelated suites.
+
+No Core/checker/session/refiner behavior, proof-plan or source revision,
+mathematical owner/rule, theorem import, declaration or term parser, cache,
+network, dynamic host import, MCP/LSP, Lambdapi source, kernel, print/book,
+sibling repository, npm registry, GitHub Release, or hosted deployment
+changed. `DEV-CLI-2C` remains gated on `GOAL-COUPLING-4` so the command layer
+does not invent a second graph authority. `PLAN-DECOMPOSE-3A` is the next
+dependency-ready row.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -1096,9 +1185,9 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from the completed `DEV-CLI-2A` checkpoint once recorded. Continue
-> through explicit-root Node commands, measured declarative proof-plan
-> decomposition, stable goal coupling, proof-producing simplification,
+> Start from the completed `DEV-CLI-2B` checkpoint once recorded. Continue
+> through measured declarative proof-plan decomposition, stable goal
+> coupling, proof-producing simplification,
 > accessible-premise indexing, bounded providers, curated-library gates,
 > proof maintenance, external certificates, and agent evaluation in the
 > dependency order maintained by the living ledger. Begin `GOAL-GRAPH-14A`
