@@ -12,7 +12,8 @@ policy recorded below; `PLAN-DECOMPOSE-3A/3B` complete and the selected-
 constructor base-plan macro final-proportional-green;
 `PLAN-DECOMPOSE-3B1A/3B1B` complete and contextual `have` plus its coordinated
 v2 source/artifact family final-proportional-green; the general `refine` tag
-audit is complete and a root-scoped pure template macro tranche is frozen;
+audit and root-scoped typed-term template macro are complete and final-
+proportional-green;
 later simplification, search, library, external-automation, and general
 goal-graph rows remain dependency-gated
 
@@ -34,7 +35,8 @@ checkpoints are `a6f0fbe` and `b5a4cb2`. The branch has not been merged into
 ledger checkpoint is `238bddf`; the proof-plan audit checkpoint is `144afda`
 and the corrected selected-constructor semantic checkpoint is `934bf13`; the
 contextual-`have` audit checkpoint is `d25e550` and its semantic checkpoint is
-`b20595b`.
+`b20595b`; the general-`refine` audit checkpoint is `27233be` and its
+management-only template semantic checkpoint is `39d9fc8`.
 
 Depends-On:
 
@@ -504,7 +506,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `PLAN-DECOMPOSE-3B1A` | Audit contextual `have`, retention, and revision boundary | complete | contextual substitution plus per-refiner retained source obligations selected below |
 | `PLAN-DECOMPOSE-3B1B` | Implement versioned contextual `have` plan/refiner | complete | `b20595b`; focused semantic/static/research/packed gates green; long aggregate intentionally omitted |
 | `PLAN-DECOMPOSE-3C` | Audit versioned explicit-placeholder `refine` representation after contextual `have` | complete | a new tag/refiner is no longer justified; root-scoped templates lower exactly to base plans |
-| `PLAN-DECOMPOSE-3C1` | Implement root-scoped explicit-placeholder `refine` macro | in progress | frozen pure template-to-`have`/`exact` contract below; no source/artifact migration |
+| `PLAN-DECOMPOSE-3C1` | Implement root-scoped explicit-placeholder `refine` macro | complete | `39d9fc8`; focused semantic/static/browser/packed gates green; no source/artifact migration or long aggregate |
 | `GOAL-COUPLING-4` | Stable cross-goal dependency graph | pending | measured dependent-hole consumer and snapshot revision decision |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | pending | equality/transport owner inventory and termination contract |
 | `SIMP-5B` | Deterministic proof-producing simplifier | pending | approved 5A contract |
@@ -1449,8 +1451,9 @@ checkpoint policy.
    fake names. It is a small immutable template AST with `core`, `placeholder`,
    `application`, `call`, `pi`, and `lambda` nodes. `core` wraps an ordinary
    meta-free Core subtree; `placeholder` refers to one explicitly declared
-   binding. The structural nodes are only enough to place placeholders among
-   the current complete Core grammar.
+   term binding. Structural expression children may contain placeholders,
+   including bodies beneath Pi/lambda binders; binder annotations remain
+   ordinary meta-free Core.
 4. Placeholder bindings are unique, explicitly ordered, and formed in the
    selected goal context. Their types therefore cannot depend on binders
    introduced inside the same template. Occurrences may appear repeatedly and
@@ -1470,6 +1473,13 @@ checkpoint policy.
    second case sharing one placeholder at multiple positions. These would be
    verbose manual `have` programs but need no new semantics. Complete and open
    variants must replay identically to their direct base-plan expansion.
+7. A focused type-position probe establishes a necessary v1 limit. Binding a
+   type placeholder would require `have A : TYPE`, while contextual `have`
+   deliberately checks its declared type against `TYPE` and the frozen sort
+   discipline gives `TYPE : KIND`. Template binder annotations therefore do
+   not contain placeholders. Supporting universe-level placeholders would be
+   a separate sort-polymorphic contextual-binding design, not a template-only
+   extension.
 
 ### Frozen PLAN-DECOMPOSE-3C1 contract
 
@@ -1483,10 +1493,11 @@ coreProofPlanRefine(template, bindings, options?)
   -> nested CoreProofPlanHave(... CoreProofPlanExact(...))
 ```
 
-1. `bindings` contain an explicit `KernelBinder` and child proof plan; the
-   binder name is the placeholder identity. Names are unique and declaration
-   order is stable. Placeholder references may repeat, but unused or unknown
-   identities fail before returning a plan.
+1. `bindings` contain an explicit term-level `KernelBinder` and child proof
+   plan; the binder name is the placeholder identity. Names are unique and
+   declaration order is stable. Placeholder references may repeat, but unused
+   or unknown identities fail before returning a plan. Pi/lambda binder types
+   are ordinary meta-free Core, not template expressions.
 2. The template has no meta node and never becomes Core or canonical source.
    Lowering shifts ordinary root-context indices around the new `have`
    binders, preserves indices belonging to template-local Pi/lambda binders,
@@ -1503,9 +1514,12 @@ coreProofPlanRefine(template, bindings, options?)
    do not change because canonical data sees only the already-versioned v2
    expansion.
 5. Reject cycles, duplicate bindings, unknown or unused placeholders,
-   malformed plicity/variation, process-local metas, wrong proof-plan IDs,
-   and scope/type errors without checker-state mutation. No automatic
-   placeholder discovery, inference, reordering, or search is permitted.
+   malformed owners/plicity/variation, process-local metas, and wrong proof-
+   plan IDs structurally before returning a plan. Scope and type errors remain
+   ordinary checker/refiner failures during replay with the existing per-
+   tactic transaction boundary; whole-plan rollback is not added. No
+   automatic placeholder discovery, inference, reordering, or search is
+   permitted.
 
 Focused acceptance covers byte/deep equality to a hand-written base-plan
 expansion, complete/open higher-order callee templates, repeated occurrence
@@ -1522,6 +1536,76 @@ revision or pin, declaration or term parser, arbitrary host execution,
 equality/rewrite behavior, theorem import, Lambdapi source, mathematical
 owner/rule, Node adapter, CLI, network/cache/MCP/LSP, print/book, sibling
 repository, npm publication, release, or deployment change.
+
+### PLAN-DECOMPOSE-3C1 completion record
+
+Semantic checkpoint: `39d9fc8` (`feat: add refine template proof macro`).
+
+The browser-safe workspace API now exports immutable
+`emdash-proof-refine-template-v1` data and `coreProofPlanRefine`. Explicitly
+ordered, selected-goal-context term placeholders lower immediately to nested
+contextual `have` nodes followed by one `exact`; repeated occurrences share
+the same fact. Core leaves are weakened around generated facts, and template
+bodies are weakened correctly beneath Pi/lambda binders. Valid Core owner
+applications and generic calls are rebuilt through the existing constructors.
+The result retains no template, callback, meta, environment, or new plan tag.
+
+The macro preflights duplicate, unknown, unused, cyclic, meta-bearing, wrong-
+arity, forged-owner, malformed-plicity/mode, and invalid child-plan inputs.
+Semantic scope/type checking remains owned by ordinary plan replay and its
+per-tactic transactions. The canonical v2 source round-trip sees only the
+expanded `have`/`exact` tree and contains no `placeholder` or `refine` tag.
+Accordingly no proof-plan, proof-document, source, artifact, workspace, CLI,
+or research revision/pin changed; only the static AI-native capability record
+advanced from v4 to v5.
+
+Two final-checker boundaries remain deliberate. Template placeholders are
+term facts: a type-position placeholder would need the separately unapproved
+sort-polymorphic contextual binding described above. Also, solving a callee
+placeholder with an annotated lambda can close every session meta while the
+substituted final term still fails fresh inference with
+`CANNOT_INFER_LAMBDA`. Complete positive fixtures therefore use an inferable
+declared function, and the fresh checker/artifact compiler—not absence of
+session goals—remains final authority. This tranche does not widen lambda
+inference or introduce a hidden declaration.
+
+Final proportional evidence on 2026-08-10:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_template_tests.ts \
+  tests/v3_2_lf_workspace_proof_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts
+  passed: 35/35 tests, 7 suites
+
+node --require ts-node/register --test \
+  tests/v3_2_browser_directed_tests.ts
+  passed: 13/13 tests, 1 suite; transitive local closure has no Node builtin
+
+./scripts/pnpmw run typecheck
+  passed
+
+eslint over every changed TypeScript/JavaScript file
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1
+
+./scripts/pnpmw run package:check
+  passed: package build plus packed ESM, CJS, strict-TypeScript, and browser
+  bundle consumers
+
+git diff --cached --check
+  passed before semantic checkpoint 39d9fc8
+```
+
+The standalone `emdash-template` reviewer wrapper was not retried: its known
+fixture-local dependency/Corepack self-spawn limitation is unchanged, while
+the actual packed browser bundle consumer passed. Under `D-PA-019`, no long
+`check:ts` or repository aggregate was run because the focused semantic,
+static, closure, workspace, and packed-consumer gates exercised every changed
+boundary directly. No Lambdapi/kernel, print/book, npm publication, release,
+deployment, or sibling-repository operation was run.
 
 ## Decision Ledger
 
@@ -1554,6 +1638,9 @@ repository, npm publication, release, or deployment change.
 | `D-PA-025` | Elaborate `have` by contextual meta-spine substitution and retain its fact as an explicit per-refiner source obligation until solved. | It produces ordinary finally checkable Core while preventing an unused continuation from silently erasing an open source task. |
 | `D-PA-026` | Perform one coordinated pre-release v2 source/artifact migration for contextual `have`; do not silently widen v1 or build an unused dual reader. | The new plan tag, trace operation, and reachability state affect exhaustive consumers, while npm is unpublished and no tracked canonical v1 development source exists. |
 | `D-PA-027` | Repartition general `refine` after contextual `have`: implement a pure root-scoped template macro and reject a new plan/refiner tag without a non-lowerable consumer. | Ordered typed placeholders now expand exactly to retained `have` obligations plus `exact`; keeping the template management-only avoids process metas and needless v3 artifact churn while preserving an explicit scope boundary. |
+| `D-PA-028` | Keep refine-template v1 placeholders term-level and keep Pi/lambda binder annotations as meta-free Core. | Type-position placeholders would require `have A : TYPE`, but the frozen contextual binding checks its declared type against `TYPE` while `TYPE : KIND`; sort-polymorphic contextual binding is a distinct design. |
+| `D-PA-029` | Keep fresh final checking authoritative when contextual substitution exposes an annotated lambda in inference position. | A plan can solve every session meta through a typed local fact yet produce a substituted lambda call which the deliberately frozen checker cannot infer; declared inferable callees work without weakening the checker. |
+| `D-PA-030` | Claim structural macro preflight and existing per-tactic failure atomicity, not whole-plan transactional replay. | The current executor validates the complete inert tree first, then commits each checked refinement separately; the template macro must not overstate a rollback guarantee it does not add. |
 
 ## Validation And Checkpoint Policy
 
