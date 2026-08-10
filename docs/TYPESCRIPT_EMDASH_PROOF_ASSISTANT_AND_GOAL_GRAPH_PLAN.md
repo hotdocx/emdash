@@ -13,8 +13,8 @@ constructor base-plan macro final-proportional-green;
 `PLAN-DECOMPOSE-3B1A/3B1B` complete and contextual `have` plus its coordinated
 v2 source/artifact family final-proportional-green; the general `refine` tag
 audit and root-scoped typed-term template macro are complete and final-
-proportional-green; the cross-goal coupling audit is complete and its separate
-portable direct-dependency graph tranche is frozen;
+proportional-green; the cross-goal coupling audit and its separate portable
+direct-dependency graph are complete and final-proportional-green;
 later simplification, search, library, external-automation, and general
 goal-graph rows remain dependency-gated
 
@@ -38,6 +38,8 @@ and the corrected selected-constructor semantic checkpoint is `934bf13`; the
 contextual-`have` audit checkpoint is `d25e550` and its semantic checkpoint is
 `b20595b`; the general-`refine` audit checkpoint is `27233be` and its
 management-only template semantic checkpoint is `39d9fc8`.
+The cross-goal coupling audit checkpoint is `48405eb` and its semantic
+checkpoint is `de971de`.
 
 Depends-On:
 
@@ -501,7 +503,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `DEV-CATALOG-1` | General browser-safe multi-module/multi-proof development catalog | complete | focused/package gates green; one long aggregate directly waived after interrupted evidence became unrecoverable |
 | `DEV-CLI-2A` | Canonical supplied-data proof-development source and reconstruction | complete | `c60d09e`; focused/static/browser/packed gates green; long aggregate intentionally omitted |
 | `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | complete | `b5a4cb2`; focused semantic/static/browser gates green; long aggregate intentionally omitted |
-| `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4B`; no ad hoc second graph authority |
+| `DEV-CLI-2C` | Stable `graph` command projection | pending | `GOAL-COUPLING-4B` complete; exact module/declaration wrapper and command revisions still to freeze |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | complete | base-plan macro lowering selected; template and equality boundaries separated below |
 | `PLAN-DECOMPOSE-3B` | Implement selected-`constructor` base-plan macro | complete | `934bf13`; focused semantic/static/browser/packed gates green; long aggregate intentionally omitted |
 | `PLAN-DECOMPOSE-3B1A` | Audit contextual `have`, retention, and revision boundary | complete | contextual substitution plus per-refiner retained source obligations selected below |
@@ -509,7 +511,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `PLAN-DECOMPOSE-3C` | Audit versioned explicit-placeholder `refine` representation after contextual `have` | complete | a new tag/refiner is no longer justified; root-scoped templates lower exactly to base plans |
 | `PLAN-DECOMPOSE-3C1` | Implement root-scoped explicit-placeholder `refine` macro | complete | `39d9fc8`; focused semantic/static/browser/packed gates green; no source/artifact migration or long aggregate |
 | `GOAL-COUPLING-4A` | Audit stable cross-goal dependency semantics and revision boundary | complete | direct target/context dependency graph selected below; proof-state v2 remains unchanged |
-| `GOAL-COUPLING-4B` | Implement portable direct cross-goal coupling graph | in progress | frozen separate graph/compilation contract below; no source/artifact migration |
+| `GOAL-COUPLING-4B` | Implement portable direct cross-goal coupling graph | complete | `de971de`; focused semantic/static/browser/packed gates green; no source/artifact migration or long aggregate |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | pending | equality/transport owner inventory and termination contract |
 | `SIMP-5B` | Deterministic proof-producing simplifier | pending | approved 5A contract |
 | `INDEX-SEARCH-6` | Accessible-premise semantic index and exact-ID search | pending | general catalog and module-visibility corpus |
@@ -1720,6 +1722,79 @@ term parser, proof search/scheduling, theorem import, equality/rewrite,
 Lambdapi source, mathematical owner/rule, Node acquisition, filesystem,
 network/cache/MCP/LSP, print/book, sibling repository, npm publication,
 release, or deployment change.
+
+### GOAL-COUPLING-4B completion record
+
+Semantic checkpoint: `de971de`
+(`feat: add portable proof goal coupling graphs`).
+
+The browser-safe workspace API now exports
+`emdash-proof-goal-coupling-v1`. Every proof-plan execution derives one deeply
+frozen portable graph after all open goals have stable source IDs. Nodes keep
+existing proof-goal order and reachability. Direct edges point from dependent
+goals to prerequisites and separately count occurrences in the zonked target
+and local-context binding types; solved metas disappear, repeated occurrences
+collapse into one counted edge, independent siblings remain disconnected, and
+complete proofs produce empty graphs.
+
+`CoreProofPlanExecution.goalGraph` and
+`CoreProofDocumentCompilation.goalGraph` expose the same value beside the v2
+snapshot/artifact. JSON and text views are deterministic across fresh
+sessions and contain no session symbol or numeric meta identity. Construction
+rejects missing, duplicate, or nonportable stable endpoints. The exact-
+closure and development layers can reach the graph through their existing
+proof compilation without retaining a checker session, which makes
+`DEV-CLI-2C` a projection task rather than a second dependency analysis.
+
+Canonical proof state, document/artifact/JSONL, exact-closure workspace,
+development/source/store/CLI, and research revisions and pins remain v2 and
+byte-compatible because no graph field entered those envelopes. The static
+AI-native capability record alone advances from v5 to v6 and now reports the
+implemented coupling profile while leaving the command projection deferred.
+
+Final proportional evidence on 2026-08-10:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_plan_tests.ts \
+  tests/v3_2_proof_document_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts
+  passed: 37/37 tests, 5 suites
+
+node --require ts-node/register --test \
+  tests/v3_2_proof_template_tests.ts \
+  tests/v3_2_lf_workspace_proof_tests.ts \
+  tests/v3_2_proof_development_cli_tests.ts
+  passed: 28/28 tests, 6 suites
+
+./scripts/pnpmw run typecheck
+  passed
+
+eslint over every changed TypeScript/JavaScript file
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1
+
+node --require ts-node/register --test \
+  tests/v3_2_browser_directed_tests.ts
+  passed: 13/13 tests, 1 suite; transitive local closure has no Node builtin
+
+./scripts/pnpmw run package:check
+  passed: package build plus packed ESM, CJS, strict-TypeScript, and browser
+  bundle consumers
+
+git diff --cached --check
+  passed before semantic checkpoint de971de
+```
+
+Under `D-PA-019`, no long `check:ts` or repository aggregate was run because
+the focused proof, compilation, downstream development, static, closure,
+workspace, and packed-consumer gates exercised every changed boundary
+directly. The standalone `emdash-template` reviewer wrapper was not retried;
+its known environment limitation is unchanged and the actual packed browser
+consumer passed. No Lambdapi/kernel, print/book, npm publication, release,
+deployment, or sibling-repository operation was run.
 
 ## Decision Ledger
 
