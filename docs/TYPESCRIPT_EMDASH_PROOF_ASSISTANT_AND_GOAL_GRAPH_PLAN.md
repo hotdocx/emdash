@@ -19,7 +19,8 @@ the stateless development-graph command audit and its exact projection are
 complete and final-proportional-green;
 the simplifier audit has separated proof-level rewriting from definitional
 computation; its bounded proof-checker conversion prerequisite is implemented
-and final-proportional-green; the first proof-producing simplifier is next;
+and final-proportional-green; the first proof-producing simplifier has an
+exact frozen v1 contract and is the sole semantic row in progress;
 later search, library, external-automation, and general goal-graph rows remain
 dependency-gated
 
@@ -48,7 +49,8 @@ checkpoint is `de971de`; its synchronized ledger checkpoint is `d90db3b`.
 The development-graph command audit checkpoint is `e0d3e4f` and its semantic
 checkpoint is `8e21afb`; its synchronized ledger checkpoint is `3628315`.
 The proof-checker conversion audit checkpoint is `3c102ec` and its semantic
-checkpoint is `7c9d8f7`.
+checkpoint is `7c9d8f7`; its synchronized ledger checkpoint and current clean
+published goal-branch tip are `74e6de8`.
 
 Depends-On:
 
@@ -523,7 +525,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-COUPLING-4B` | Implement portable direct cross-goal coupling graph | complete | `de971de`; focused semantic/static/browser/packed gates green; no source/artifact migration or long aggregate |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | complete | mechanism separation, equality/transport inventory, deterministic trace/budget contract, and staged scope frozen below |
 | `SIMP-5B0` | Proof-checker bounded beta/conversion prerequisite | complete | `7c9d8f7`; exact LF environment, beta/delta transport replay, lambda-callee inference still closed; focused/browser/packed/full-TypeScript gates green |
-| `SIMP-5B1` | Deterministic unconditional proof-producing simplifier | pending | green 5B0 proof-document replay boundary |
+| `SIMP-5B1` | Deterministic unconditional proof-producing simplifier | in progress | green 5B0 proof-document replay boundary; exact v1 API, matching, transport, budget, and rejection contracts frozen below |
 | `SIMP-5B2` | Conditional/local/under-binder simplification extensions | deferred | concrete 5B1 consumer plus congruence and premise-discharge contract |
 | `INDEX-SEARCH-6` | Accessible-premise semantic index and exact-ID search | pending | general catalog and module-visibility corpus |
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | pending | plan patches, index, and budget/trace contract |
@@ -2181,6 +2183,112 @@ external premise discharge remain `SIMP-5B2` or later work. This staged scope
 is deliberately useful for ordinary definitional theorem cleanup while
 keeping every dependent extension evidence-producing and reviewable.
 
+#### Frozen SIMP-5B1 API and semantic contract
+
+The first implementation owns one additive browser-safe
+`emdash-proof-simplifier-v1` management profile. Its public operation receives
+one exact `CoreLfDeclarationEnvironment`, a closed canonical root target,
+an explicit equality/backward-transport adapter, ordered theorem rules, one
+ordinary continuation `CoreProofPlan`, source provenance, an optional stable
+`have` binder name, and explicit bounded limits. It returns the original and
+simplified targets, exact counters, a complete frozen trace, the checked
+transport body when rewriting occurred, and an expanded existing base plan.
+It retains no checker, environment mutation, callback, registry, cache, or
+metavariable.
+
+The adapter consists of two globally declared free Core references and is
+validated before traversal:
+
+1. equality has canonical outer-LF shape
+   `Π [A : Grpd], τ A -> τ A -> Grpd`; and
+2. backward transport has canonical `ind_eq` shape
+   `Π [A] [x] [y], τ (Eq A x y) ->
+   Π P : (τ A -> Grpd), τ (P y) -> τ (P x)`.
+
+The structural adapter check is provenance-insensitive but plicity- and
+direction-sensitive. Definitionally aliased adapter signatures are outside
+v1: callers must select their canonical checked owners explicitly. The
+transport's motive-binder mode is retained when constructing the lambda
+motive. A malformed, missing, forward-only, or differently ordered adapter is
+rejected even when no rule would happen to fire.
+
+Each v1 rule has a unique stable ID, explicit `forward` orientation, and one
+globally declared theorem reference. The proof checker must infer a telescope
+ending syntactically in `τ (Eq A lhs rhs)`. Nested `Pi`, lambda, and meta nodes
+inside `A`, `lhs`, or `rhs` are rejected for this first-order tranche, and a
+bare telescope variable cannot be the entire left side. Every leading theorem
+binder must be recoverable by matching `A` and `lhs`; this excludes conditions
+and right-only variables while still allowing ordinary implicit classifier
+parameters. The theorem reference is applied to all recovered arguments in
+outer-to-inner binder order, and the resulting proof is freshly checked
+against the instantiated equality before it becomes trace evidence.
+
+The root target must be closed, meta-free, well-formed, and syntactically
+`τ goalClassifier`. Traversal is over `goalClassifier`, not over a serialized
+term. Owner arguments and generic-call callee/arguments are visited
+postorder, left to right. `Pi` and lambda nodes are opaque: v1 neither descends
+through their annotations/bodies nor claims dependent congruence. At each
+candidate, rules are attempted in caller order. The first checked structural
+match rewrites that occurrence, then traversal restarts from the new root.
+Provenance never affects matching.
+
+Limits are three nonnegative safe integers: maximum successful rewrites,
+maximum visited candidate nodes, and maximum rule attempts. Defaults are part
+of the profile; counters have the following exact meaning:
+
+- a visit is charged immediately before inspecting one candidate node;
+- an attempt is charged immediately before structurally trying one rule at
+  that node; and
+- a rewrite is charged only after structural matching and theorem checking
+  succeed, immediately before accepting the new root.
+
+Exhausting any needed budget rejects the whole operation with its distinct
+error code. Canonical explicit-Core serialization keys every accepted root,
+including the initial root; revisiting a root rejects with a cycle error.
+Budget or cycle rejection never returns a partially simplified plan.
+
+Every accepted trace entry contains the one-based step, rule ID, `forward`
+orientation, stable root-relative occurrence path, global theorem origin,
+whole classifier before/after, occurrence before/after, inferred element
+classifier, and freshly checked equality proof. Trace order is rewrite order.
+The trace is diagnostic and replay evidence, not a second proof authority.
+
+For an occurrence `lhs -> rhs` in classifier context `C[-]`, lowering builds
+the checked backward term
+
+```text
+ind_eq proof (lambda t : tau A, C[t]) futureProof
+    : tau (C[lhs])
+```
+
+and composes transport terms in reverse trace order. When at least one rule
+fires, the output plan is exactly one existing contextual `have` whose fact
+target is `τ finalClassifier`, whose proof child is the caller's continuation,
+and whose body is one existing `exact` node containing the checked nested
+transport. When no rule fires, the continuation is returned unchanged. This
+is why the caller may provide an ordinary stable named hole without knowing
+the simplified target in advance, while the result still exposes that target
+for the next AI/human patch.
+
+The first standalone consumer uses a generic wrapper theorem over a decoded
+classifier, demonstrates inner-first restart on a nested term, and compiles
+the generated plan to a complete proof document. Negative cases cover rule
+order, malformed or conditional rules, opaque binders, cycle detection, each
+budget, and rejection of reversed/invalid transport. The fixture is isolated
+from the active presheaf/site/scheme mathematics.
+
+This additive management row does not revise Core, proof-plan, proof-source,
+proof-state, proof-artifact, workspace, or CLI schemas. It adds its profile to
+the static capability record and exports the browser-safe API from the
+contributor and workspace package entries; the core-only package entry stays
+unchanged. Focused simplifier/proof-document tests, browser closure, packed
+ESM/CJS/strict-TypeScript/browser consumers, typecheck, changed-file lint,
+workspace integrity, exact staged-diff review, and whitespace hygiene are the
+direct gates. Because the public workspace barrel changes, current root SOP
+requires one complete `check:ts` only after those bounded gates are green and
+before checkpoint; it is not an iterative test and `check:all` remains
+irrelevant.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -2226,6 +2334,7 @@ keeping every dependent extension evidence-producing and reviewable.
 | `D-PA-039` | Reuse exact LF beta/delta/runtime conversion for proof documents but continue to reject annotated-lambda inference. | Lambda motives are checked arguments with expected Pi types; opening lambda-callee inference would revive the separately rejected `have`/`refine` semantic widening. |
 | `D-PA-040` | Advance semantic profiles while retaining unchanged v2 artifact envelopes. | Current fingerprints and enclosing profile/compiler fields reject stale checker results; JSON schema revisions should not be inflated merely because the checking policy advances. |
 | `D-PA-041` | Stage simplification as explicit unconditional root-target rewriting before conditional, local, or under-binder congruence. | The first scope yields ordinary replayable transport terms with deterministic behavior, while dependent premise and congruence evidence need separately reviewable contracts. |
+| `D-PA-042` | Freeze v1 simplification as canonical decoded equality matching plus checked backward transport, lowered to one existing contextual `have`. | This gives AI agents a compact deterministic `simp`-like source expansion while keeping theorem application and the final nested transport independently checkable, browser-safe, and outside the trusted Core syntax. |
 
 ## Validation And Checkpoint Policy
 
