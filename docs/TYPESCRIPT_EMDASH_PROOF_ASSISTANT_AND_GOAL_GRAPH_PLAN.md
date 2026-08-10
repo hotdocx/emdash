@@ -7,7 +7,8 @@ Plan-ID: `TS-EMDASH-PROOF-ASSISTANT`
 Status: living architecture and implementation ledger; reviewed strategy
 recorded; qualified predecessor baseline integrated into public `main`;
 `DEV-CATALOG-1` implemented and final-proportional-green under the direct
-2026-08-10 long-aggregate waiver recorded below; later CLI/acquisition,
+2026-08-10 long-aggregate waiver recorded below; `DEV-CLI-2A` canonical
+supplied-data acquisition frozen and approved; later Node CLI acquisition,
 proof-plan, simplification, search, library, external-automation, and general
 goal-graph rows remain dependency-gated
 
@@ -20,9 +21,9 @@ Baseline: `9c633c85b66efb4ac7619912e8d15f928b32d733`
 
 Git-Boundary: local and public `main` are exactly the qualified predecessor
 `9c633c8`; the frozen plan checkpoint is `671c56a`; the `DEV-CATALOG-1`
-semantic checkpoint is `fcc4547`; and the dedicated branch is pushed at that
-checkpoint as `origin/goal/typescript-emdash-proof-assistant-v1`. The branch
-has not been merged into `main`, tagged, released, or published to npm.
+semantic checkpoint is `fcc4547`; its synchronized ledger checkpoint and the
+dedicated branch's current pushed tip are `2484e23`. The branch has not been
+merged into `main`, tagged, released, or published to npm.
 
 Depends-On:
 
@@ -484,7 +485,9 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | --- | --- | --- | --- |
 | `BASELINE-INTEGRATE-0` | Fast-forward the qualified `9c633c8` predecessor into local/public `main` | complete | local and `origin/main` both exactly `9c633c8`; non-force push verified |
 | `DEV-CATALOG-1` | General browser-safe multi-module/multi-proof development catalog | complete | focused/package gates green; one long aggregate directly waived after interrupted evidence became unrecoverable |
-| `DEV-CLI-2` | Node acquisition and general `check/goals/build/graph` commands | pending | `DEV-CATALOG-1`; exact canonical source-file consumer and sandbox contract |
+| `DEV-CLI-2A` | Canonical supplied-data proof-development source and reconstruction | in progress | `DEV-CATALOG-1`; frozen contract below |
+| `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | pending | completed `DEV-CLI-2A`; exact fixed-file and size/symlink policy |
+| `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4`; no ad hoc second graph authority |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | pending | catalog consumer; no embedded process metas |
 | `PLAN-DECOMPOSE-3B` | Implement the first measured decomposition nodes | pending | approved 3A contract and positive/negative corpus |
 | `GOAL-COUPLING-4` | Stable cross-goal dependency graph | pending | measured dependent-hole consumer and snapshot revision decision |
@@ -650,9 +653,121 @@ not misreported as checking this new source.
 No Core/checker/session/refiner semantics, proof-plan/artifact revision,
 Lambdapi source, mathematical owner/rule, parser, Node acquisition, CLI,
 network/cache, print/book, sibling repository, npm registry, GitHub Release,
-or hosted deployment changed. `DEV-CLI-2` is now the next nominal row, subject
-to its exact source-consumer and sandbox audit; `PLAN-DECOMPOSE-3A` remains an
-independent proposal-only fallback if that consumer is absent.
+or hosted deployment changed. The former `DEV-CLI-2` is repartitioned below
+after its source-consumer and sandbox audit; `DEV-CLI-2A` is the selected next
+row.
+
+## DEV-CLI-2 Acquisition Audit And Frozen 2A Tranche
+
+Date: 2026-08-10
+
+Status: architecture audit complete; `DEV-CLI-2` repartitioned;
+`DEV-CLI-2A` frozen and approved for implementation by the user's direct
+continuation instruction and standing unattended-approval authorization.
+
+The audit found two distinct existing source paths:
+
+1. `ai_proof_cli.ts` imports and checks one fixed TypeScript demo. Reading its
+   own source bytes contributes a fingerprint, but the command does not
+   acquire an arbitrary proof development.
+2. `lf_remote_workspace_*` safely reads exact locked files under explicit
+   project/data roots and reconstructs a canonical fragment-module graph.
+   That graph is intentionally a different semantic profile from the
+   declaration-workspace plus proof-plan input consumed by
+   `DEV-CATALOG-1`.
+
+There is no current canonical file consumer for
+`CoreLfProofDevelopmentPlan`, no general `*.emdash.ts` loader, and no
+repository sandbox which would make importing an arbitrary host-language
+module safe. Same-process dynamic import would grant filesystem, network,
+environment, subprocess, clock, randomness, and ambient-package authority.
+A child process changes isolation and cancellation properties but does not by
+itself make hostile TypeScript trustworthy. The proof CLI must therefore not
+silently execute a user path and call the result checked source.
+
+The architecture separates three claims:
+
+```text
+reviewable *.emdash.ts builders       optional, explicitly authorized macro run
+                |                                      |
+                +---------- emits portable data -------+
+                                       |
+                              exact canonical source
+                                       |
+                    constructor replay + shape validation
+                                       |
+                         CoreLfProofDevelopmentPlan
+                                       |
+                         existing catalog/compiler
+```
+
+Only the reconstructed portable plan and its subsequent checker replay are
+semantic inputs. Host execution remains an acquisition effect outside the
+checker trust boundary. A future restricted TypeScript runner may improve the
+authoring workflow, but it needs an independently reviewed isolation model;
+it is not a prerequisite for checking already materialized canonical data.
+
+### DEV-CLI-2A implementation boundary
+
+Hypothesis: the missing exact catalog consumer can be added as a browser-safe
+canonical-data contract without filesystem access, hashing, host execution,
+new checker rules, or a user-language declaration/term parser.
+
+1. Add a dedicated browser-safe proof-development source module rather than
+   coupling Node policy to `lf_proof_development.ts`.
+2. Define a versioned source snapshot containing the development revision,
+   declaration-workspace revision, canonical declaration-module source
+   snapshots, and canonically ordered proof inputs.
+3. Serialize through the existing canonical workspace JSON owner. JSON is a
+   portable envelope for explicit Core data, not a textual emdash
+   declaration or expression grammar.
+4. Parse only JSON whose bytes equal the canonical serialization of a fully
+   reconstructed snapshot.
+5. Reconstruct explicit Core expressions and proof-plan nodes by a closed
+   tag dispatch. Reject unknown/missing fields, process-local Core metas,
+   invalid provenance, invalid binders/arguments, cycles, and unsupported
+   plan nodes. Never cast an arbitrary nested record directly into proof
+   authority.
+6. Re-run the existing module, transfer-policy, declaration-linkage,
+   declaration-workspace, proof-fingerprint, proof-plan, and development
+   constructors/validators. Do not duplicate their mathematical decisions.
+7. Return a deeply frozen source snapshot, canonical text, and inert
+   `CoreLfProofDevelopmentPlan`. Checking remains an explicit later call to
+   `compileCoreLfProofDevelopment`.
+8. Export the contract from the contributor v3.2 barrel and the existing
+   browser-safe `@hotdocx/emdash/workspace` entry. Add no Node builtin to its
+   transitive closure.
+
+Acceptance corpus:
+
+- a multi-module development with one complete and one named-open proof
+  round-trips byte-identically and compiles to the same artifact;
+- canonical bytes are independent of source module/proof input permutation;
+- parsed data and arrays are deeply frozen;
+- malformed JSON, noncanonical whitespace/key order, extra or missing fields,
+  unknown expression/plan tags, a serialized Core meta, malformed source
+  provenance, and invalid fingerprints fail with stable acquisition errors;
+- existing catalog, workspace-proof, proof-plan, and browser-closure tests
+  remain green; and
+- the packed ESM, CommonJS, strict NodeNext, and browser consumers can use the
+  new source contract.
+
+Non-effects:
+
+- no arbitrary TypeScript/JavaScript execution or dynamic import;
+- no filesystem, path discovery, symlink policy, hashing, cache, transport,
+  CLI, MCP/LSP, or server state;
+- no new Core node, checker/refiner behavior, proof-plan node, theorem import,
+  declaration parser, term parser, Lambdapi dependency, or mathematical rule;
+  and
+- no `graph` artifact before `GOAL-COUPLING-4` defines its stable meaning.
+
+Proportional gates are focused source-contract/catalog/workspace-proof/plan
+tests, workspace check, typecheck, changed-file lint, the Node-free browser
+closure assertion, packed-package consumers, exact diff review, and
+whitespace hygiene. Under the user's persistent 2026-08-10 instruction, no
+long aggregate is run unless omitting that exact aggregate would block
+overall progress; omission is recorded and is never presented as a pass.
 
 ## Decision Ledger
 
@@ -676,6 +791,8 @@ independent proposal-only fallback if that consumer is absent.
 | `D-PA-016` | Do not require npm publication for `DEV-CATALOG-1`. | Publication is valuable but the first bootstrap has credential, provenance, 2FA, and trust-hardening prerequisites unrelated to local semantic progress. |
 | `D-PA-017` | Fast-forward the already qualified predecessor baseline to `main` before accumulating new proof-assistant semantics. | Produces a clear public integration boundary while the new goal remains isolated on its descendant branch. |
 | `D-PA-018` | Accept focused/static/browser/packed evidence for `DEV-CATALOG-1` without completing its long root aggregate. | The first aggregate became unverifiable after an unexpected interruption; the replacement was directly waived by the user. The waiver is tranche-specific and is not positive aggregate evidence or blanket permission to skip future exact gates. |
+| `D-PA-019` | Treat long repository aggregates as last-resort blocking gates throughout this persistent goal. | The user explicitly directed that focused evidence be preferred and long reruns be avoided unless their omission would block overall progress; every omission remains visible and is not positive evidence. |
+| `D-PA-020` | Repartition `DEV-CLI-2` into canonical supplied-data reconstruction, Node fixed-file commands, and a later stable graph projection. | No safe general proof-development file consumer exists, and arbitrary TypeScript import is not a sandbox. The split preserves direct TypeScript authoring without confusing host execution with checked source. |
 
 ## Validation And Checkpoint Policy
 
@@ -695,17 +812,19 @@ For each bounded row:
 9. require `git diff --cached --check`; and
 10. create a rollback-safe checkpoint only when the coherent row is green.
 
-Run one `check:ts` only when a shared TypeScript behavior, public barrel,
-runner, compiler/runtime/checker, or package/workspace boundary actually
-changes. Carry its green evidence forward until such a boundary changes
-again. Run `check:all` only at an affected cross-layer integration or release
-boundary. Every Lambdapi invocation remains bounded to 90 seconds. Never run
-large aggregates merely for reassurance.
+Long `check:ts`, root-test, and `check:all` aggregates are last-resort gates:
+run one only when omitting that exact aggregate would block overall progress.
+For shared TypeScript or public-package changes, use the smallest focused
+semantic suites plus typecheck, lint, browser-closure, and packed-consumer
+checks which directly exercise the changed boundary, and record the omitted
+aggregate plainly. Carry prior aggregate evidence only as historical evidence
+for unchanged boundaries. Every Lambdapi invocation remains bounded to 90
+seconds. Never run large aggregates merely for reassurance.
 
-`D-PA-018` records a direct, tranche-specific exception for
-`DEV-CATALOG-1`. Its interrupted and terminated runs are not green evidence.
-Future rows return to the proportional policy above unless a later direct
-human instruction explicitly changes an exact gate.
+`D-PA-018` records the exact `DEV-CATALOG-1` history. `D-PA-019` records the
+user's subsequent persistent policy: long aggregates are eagerly avoided
+unless omission becomes progress-blocking. Interrupted, terminated, waived,
+or omitted runs are never green evidence.
 
 The user's 2026-08-10 direction authorizes this dedicated descendant branch,
 plan-scoped edits, proportional validation, rollback-safe local checkpoints,
@@ -795,11 +914,11 @@ synchronized:
 > Preserve the hard distinction between a kernel-checked theorem and every
 > weaker task/observation/approval/AI evidence class.
 >
-> Run focused and nearest checks during implementation. Reuse recent green
-> aggregate evidence for unchanged boundaries; run a long `check:ts` only
-> when a shared TypeScript/public package boundary actually changes, and run
-> `check:all` only at an affected cross-layer or release boundary. Bound every
-> Lambdapi target to 90 seconds. After each bounded result, synchronize the
+> Run focused and nearest checks during implementation. Treat long
+> `check:ts`, root-test, and `check:all` aggregates as last-resort gates and
+> run one only if omitting that exact aggregate would block overall progress;
+> record omissions without presenting them as passes. Bound every Lambdapi
+> target to 90 seconds. After each bounded result, synchronize the
 > plan, review the exact staged diff, require whitespace hygiene, and create a
 > rollback-safe local checkpoint only when green. If no immediate human
 > response follows a frozen internal proposal, the goal may approve that
