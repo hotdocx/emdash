@@ -18,7 +18,8 @@ The package has three deliberately bounded entries:
   bounded recursive instance synthesis with semi-output premise scheduling,
   output-parameter inference, and saturated class calls; and
 - `@hotdocx/emdash/workspace` — explicit proof plans and artifacts plus
-  browser-safe declaration and fragment workspaces.
+  browser-safe declaration/fragment workspaces and canonically ordered
+  multi-module proof-development catalogs.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -32,6 +33,8 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_PROOF_DEVELOPMENT_PROFILE,
+  createCoreLfProofDevelopment,
 } from '@hotdocx/emdash/workspace';
 
 const terms = new CoreLfScopedBuilder();
@@ -39,6 +42,8 @@ void CORE_LF_INSTANCE_SYNTHESIS_PROFILE;
 void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void synthesizeCoreLfInstance;
 void synthesizeCoreLfInstanceByRoles;
+void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
+void createCoreLfProofDevelopment;
 ```
 
 This package does not parse structure or class declarations, add class nodes

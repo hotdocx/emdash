@@ -3,16 +3,19 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
+    CORE_LF_PROOF_DEVELOPMENT_PROFILE,
     CORE_LF_WORKSPACE_PROOF_PROFILE,
     CoreContextError,
     CoreLfCompiledDeclarationWorkspace,
     CoreLfModuleSpec,
+    CoreLfProofDevelopmentError,
     CoreLfTransferDeclarationLinkage,
     CoreLfTransferPolicyOverlay,
     CoreLfWorkspaceProofDocumentInput,
     CoreLfWorkspaceProofError,
     binderMode,
     compileCoreLfDeclarationWorkspace,
+    compileCoreLfProofDevelopment,
     compileCoreLfWorkspaceProofDocument,
     coreLfQualifiedSymbol,
     coreLfTransferAbsentBody,
@@ -21,6 +24,7 @@ import {
     coreProofPlanIntro,
     createCoreLfDeclarationWorkspace,
     createCoreLfModuleSpec,
+    createCoreLfProofDevelopment,
     createCoreLfTransferDeclarationLinkage,
     createCoreLfTransferPolicyOverlay,
     createCoreProofArtifactFingerprint,
@@ -29,6 +33,7 @@ import {
     kernelFree,
     kernelPi,
     provenance,
+    serializeCoreLfProofDevelopmentArtifact,
     serializeCoreLfWorkspaceProofArtifact,
     sourceSpan
 } from '../src/v3_2';
@@ -472,6 +477,198 @@ describe('AI-WORKSPACE-1B1 exact-closure proof attachment', () => {
                 proofInput(false)
             ),
             'CLOSURE_DRIFT'
+        );
+    });
+});
+
+const baseProofInput = (
+    open: boolean
+): CoreLfWorkspaceProofDocumentInput => ({
+    ...proofInput(open, [baseModuleId]),
+    moduleId: baseModuleId,
+    declarationId: open ? 'open_base_identity' : 'base_identity'
+});
+
+const expectDevelopmentError = (
+    action: () => unknown,
+    code: CoreLfProofDevelopmentError['code']
+): void => {
+    assert.throws(
+        action,
+        error => error instanceof CoreLfProofDevelopmentError &&
+            error.code === code &&
+            error.path.length > 0
+    );
+};
+
+describe('DEV-CATALOG-1 proof development catalog', () => {
+    it('checks and catalogs canonically ordered independent proofs', () => {
+        const plan = createCoreLfProofDevelopment({
+            revision: 'proof-development-fixture-1',
+            workspace: compileWorkspace().plan,
+            proofs: [proofInput(false), baseProofInput(true)]
+        });
+
+        assert.deepEqual(
+            plan.proofs.map(proof => [
+                proof.moduleId,
+                proof.declarationId
+            ]),
+            [
+                [baseModuleId, 'open_base_identity'],
+                [consumerModuleId, 'complete_identity']
+            ]
+        );
+
+        const development = compileCoreLfProofDevelopment(plan);
+        assert.equal(development.artifact.status, 'incomplete');
+        assert.equal(development.artifact.openGoalCount, 1);
+        assert.deepEqual(development.goals.map(entry => ({
+            moduleId: entry.moduleId,
+            declarationId: entry.declarationId,
+            goalId: entry.goal.id
+        })), [{
+            moduleId: baseModuleId,
+            declarationId: 'open_base_identity',
+            goalId: 'body'
+        }]);
+        assert.equal(
+            development.proof(
+                consumerModuleId,
+                'complete_identity'
+            )?.proofCompilation.artifact.state.status,
+            'complete'
+        );
+        assert.equal(
+            development.proof(baseModuleId, 'absent'),
+            undefined
+        );
+        assert.deepEqual(
+            development.proof(
+                baseModuleId,
+                'open_base_identity'
+            )?.artifact.closure.order,
+            [baseModuleId]
+        );
+        assert.deepEqual(
+            development.proof(
+                consumerModuleId,
+                'complete_identity'
+            )?.artifact.closure.order,
+            [baseModuleId, consumerModuleId]
+        );
+        assert.equal(
+            development.artifact.workspace.order.includes(
+                unrelatedModuleId
+            ),
+            true
+        );
+        assert.equal(
+            development.proofs.some(proof =>
+                proof.artifact.closure.order.includes(unrelatedModuleId)
+            ),
+            false
+        );
+        assert.equal(
+            CORE_LF_PROOF_DEVELOPMENT_PROFILE.nodeBuiltinDependency,
+            false
+        );
+        assert.equal(
+            CORE_LF_PROOF_DEVELOPMENT_PROFILE
+                .theoremDependencyPolicy,
+            'independent-proof-leaves'
+        );
+        assertDeepFrozen(development.artifact);
+        assert.equal(Object.isFrozen(development.proofs), true);
+        assert.equal(Object.isFrozen(development.goals), true);
+    });
+
+    it('serializes byte-identically across source permutations', () => {
+        const compile = (
+            workspaceOrder:
+                readonly ('base' | 'consumer' | 'unrelated')[],
+            reverseProofs: boolean
+        ) => {
+            const proofs = [proofInput(false), baseProofInput(true)];
+            if (reverseProofs) proofs.reverse();
+            return compileCoreLfProofDevelopment(
+                createCoreLfProofDevelopment({
+                    revision: 'proof-development-fixture-1',
+                    workspace: compileWorkspace(workspaceOrder).plan,
+                    proofs
+                })
+            );
+        };
+        const first = compile(
+            ['consumer', 'base', 'unrelated'],
+            false
+        );
+        const second = compile(
+            ['unrelated', 'consumer', 'base'],
+            true
+        );
+
+        const firstText = serializeCoreLfProofDevelopmentArtifact(
+            first.artifact
+        );
+        assert.equal(
+            firstText,
+            serializeCoreLfProofDevelopmentArtifact(second.artifact)
+        );
+        assert.equal(firstText.endsWith('\n'), true);
+        assert.doesNotMatch(
+            firstText,
+            /\?m\d|sessionIdentity|coreEnvironment|checkedTerm|Symbol\(/u
+        );
+    });
+
+    it('rejects malformed, duplicate, and ownerless proof catalogs', () => {
+        const workspace = compileWorkspace().plan;
+        expectDevelopmentError(
+            () => createCoreLfProofDevelopment({
+                revision: 'bad revision',
+                workspace,
+                proofs: [proofInput(false)]
+            }),
+            'INVALID_DEVELOPMENT'
+        );
+        expectDevelopmentError(
+            () => createCoreLfProofDevelopment({
+                revision: 'empty-proof-development-1',
+                workspace,
+                proofs: []
+            }),
+            'INVALID_DEVELOPMENT'
+        );
+        expectDevelopmentError(
+            () => createCoreLfProofDevelopment({
+                revision: 'duplicate-proof-development-1',
+                workspace,
+                proofs: [proofInput(false), proofInput(false)]
+            }),
+            'DUPLICATE_PROOF'
+        );
+        expectDevelopmentError(
+            () => createCoreLfProofDevelopment({
+                revision: 'ownerless-proof-development-1',
+                workspace,
+                proofs: [{
+                    ...proofInput(false),
+                    moduleId: 'fixture.ai_proof_missing'
+                }]
+            }),
+            'UNKNOWN_PROOF_MODULE'
+        );
+        expectDevelopmentError(
+            () => createCoreLfProofDevelopment({
+                revision: 'invalid-proof-id-development-1',
+                workspace,
+                proofs: [{
+                    ...proofInput(false),
+                    declarationId: 'not portable'
+                }]
+            }),
+            'INVALID_PROOF_ID'
         );
     });
 });

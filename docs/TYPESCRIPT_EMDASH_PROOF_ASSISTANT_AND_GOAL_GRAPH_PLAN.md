@@ -4,11 +4,12 @@ Date: 2026-08-10
 
 Plan-ID: `TS-EMDASH-PROOF-ASSISTANT`
 
-Status: living proposed architecture and implementation ledger; reviewed
-strategy recorded; qualified predecessor baseline selected; `DEV-CATALOG-1`
-is the first frozen implementation tranche; later proof-plan, simplification,
-search, library, external-automation, and general goal-graph rows remain
-dependency-gated
+Status: living architecture and implementation ledger; reviewed strategy
+recorded; qualified predecessor baseline integrated into public `main`;
+`DEV-CATALOG-1` implemented and final-proportional-green under the direct
+2026-08-10 long-aggregate waiver recorded below; later CLI/acquisition,
+proof-plan, simplification, search, library, external-automation, and general
+goal-graph rows remain dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -475,8 +476,8 @@ GetPaidX MCP/API contracts remain additive and versioned.
 
 | Row | Scope | State | Dependency / exit gate |
 | --- | --- | --- | --- |
-| `BASELINE-INTEGRATE-0` | Fast-forward the qualified `9c633c8` predecessor into local/public `main` | ready | clean ancestry, carried-forward green evidence, exact push review |
-| `DEV-CATALOG-1` | General browser-safe multi-module/multi-proof development catalog | frozen first tranche | existing declaration workspace and exact-closure proof compiler |
+| `BASELINE-INTEGRATE-0` | Fast-forward the qualified `9c633c8` predecessor into local/public `main` | complete | local and `origin/main` both exactly `9c633c8`; non-force push verified |
+| `DEV-CATALOG-1` | General browser-safe multi-module/multi-proof development catalog | complete | focused/package gates green; one long aggregate directly waived after interrupted evidence became unrecoverable |
 | `DEV-CLI-2` | Node acquisition and general `check/goals/build/graph` commands | pending | `DEV-CATALOG-1`; exact canonical source-file consumer and sandbox contract |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | pending | catalog consumer; no embedded process metas |
 | `PLAN-DECOMPOSE-3B` | Implement the first measured decomposition nodes | pending | approved 3A contract and positive/negative corpus |
@@ -570,6 +571,79 @@ Proportional gates:
 No `check:all`, Lambdapi, kernel, print, book, or sibling-repository aggregate
 is required because this tranche adds no cross-layer semantic dependency.
 
+## DEV-CATALOG-1 Completion Record
+
+Date: 2026-08-10
+
+Result: accepted at the frozen boundary.
+
+Implementation:
+
+- added browser-safe `src/v3_2/lf_proof_development.ts`;
+- added the source-visible `emdash-lf-proof-development-v1` profile, with
+  independent proof leaves, canonical module/declaration ordering, no Node
+  builtin, no I/O or hashing, and no production Lambdapi dependency;
+- added inert plan creation with portable revision/identity checks, exact
+  owner-module validation, duplicate rejection, and canonical proof order;
+- compiled the declaration workspace once, then delegated each independent
+  theorem to the existing exact-closure workspace-proof compiler;
+- added a deeply frozen portable artifact containing the workspace snapshot,
+  ordered workspace-proof artifacts, aggregate status, and open-goal count;
+- added process-local exact theorem lookup and a stable aggregate named-goal
+  projection without serializing checker sessions or object identity;
+- exported the catalog from the contributor v3.2 barrel and the curated
+  browser-safe `@hotdocx/emdash/workspace` entry;
+- extended the packed ESM, CommonJS, strict NodeNext, and browser consumers;
+  and
+- added positive, permutation, closure-nonleakage, deep-freeze, malformed,
+  duplicate, missing-owner, and Node-free closure tests.
+
+Focused and package evidence:
+
+```text
+./scripts/pnpmw run workspace:check
+  passed
+
+./scripts/pnpmw run typecheck
+  passed
+
+changed-file ESLint and complete `eslint src tests`
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_lf_workspace_proof_tests.ts \
+  tests/v3_2_lf_workspace_tests.ts \
+  tests/v3_2_proof_plan_tests.ts \
+  tests/v3_2_browser_directed_tests.ts
+  36 tests / 5 suites: 36 passed, 0 failed
+
+./scripts/pnpmw run package:check
+  passed: build plus packed ESM/CommonJS/strict NodeNext/browser consumers
+
+git diff --check
+  passed before ledger synchronization
+```
+
+Aggregate disposition: the one attempted `check:ts` visibly passed workspace,
+typecheck, and full lint before entering the root test runner. After about 26
+minutes of CPU-active testing, an unexpected tool/session interruption made
+its eventual output and exit status unrecoverable. It is not counted as green.
+A replacement root-test run was started, then intentionally terminated after
+114 seconds when the user directly requested that this particular long
+aggregate be avoided. That termination is a validation waiver, not a test
+failure and not positive aggregate evidence. Under direct instruction, the
+focused semantic matrix, full static checks, browser closure, and packed
+consumer are the final proportional evidence for this tranche. The preceding
+1,570-test classes aggregate remains historical baseline evidence only; it is
+not misreported as checking this new source.
+
+No Core/checker/session/refiner semantics, proof-plan/artifact revision,
+Lambdapi source, mathematical owner/rule, parser, Node acquisition, CLI,
+network/cache, print/book, sibling repository, npm registry, GitHub Release,
+or hosted deployment changed. `DEV-CLI-2` is now the next nominal row, subject
+to its exact source-consumer and sandbox audit; `PLAN-DECOMPOSE-3A` remains an
+independent proposal-only fallback if that consumer is absent.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -591,6 +665,7 @@ is required because this tranche adds no cross-layer semantic dependency.
 | `D-PA-015` | Arrowgram renders canonical goal/proof graphs; GetPaidX owns hosted actions and permissions. | Separates semantic artifacts from views, collaboration transport, and external effects. |
 | `D-PA-016` | Do not require npm publication for `DEV-CATALOG-1`. | Publication is valuable but the first bootstrap has credential, provenance, 2FA, and trust-hardening prerequisites unrelated to local semantic progress. |
 | `D-PA-017` | Fast-forward the already qualified predecessor baseline to `main` before accumulating new proof-assistant semantics. | Produces a clear public integration boundary while the new goal remains isolated on its descendant branch. |
+| `D-PA-018` | Accept focused/static/browser/packed evidence for `DEV-CATALOG-1` without completing its long root aggregate. | The first aggregate became unverifiable after an unexpected interruption; the replacement was directly waived by the user. The waiver is tranche-specific and is not positive aggregate evidence or blanket permission to skip future exact gates. |
 
 ## Validation And Checkpoint Policy
 
@@ -616,6 +691,11 @@ changes. Carry its green evidence forward until such a boundary changes
 again. Run `check:all` only at an affected cross-layer integration or release
 boundary. Every Lambdapi invocation remains bounded to 90 seconds. Never run
 large aggregates merely for reassurance.
+
+`D-PA-018` records a direct, tranche-specific exception for
+`DEV-CATALOG-1`. Its interrupted and terminated runs are not green evidence.
+Future rows return to the proportional policy above unless a later direct
+human instruction explicitly changes an exact gate.
 
 The user's 2026-08-10 direction authorizes this dedicated descendant branch,
 plan-scoped edits, proportional validation, rollback-safe local checkpoints,

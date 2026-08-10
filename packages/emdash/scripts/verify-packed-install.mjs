@@ -219,6 +219,8 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_PROOF_DEVELOPMENT_PROFILE,
+  createCoreLfProofDevelopment,
 } from '@hotdocx/emdash/workspace';
 
 assert.equal(typeof CoreChecker, 'function');
@@ -242,6 +244,11 @@ assert.equal(
   CORE_LF_DECLARATION_WORKSPACE_PROFILE.nodeBuiltinDependency,
   false,
 );
+assert.equal(
+  CORE_LF_PROOF_DEVELOPMENT_PROFILE.nodeBuiltinDependency,
+  false,
+);
+assert.equal(typeof createCoreLfProofDevelopment, 'function');
 `,
   );
   await writeFile(
@@ -267,6 +274,11 @@ assert.equal(
   workspace.CORE_LF_DECLARATION_WORKSPACE_PROFILE.nodeBuiltinDependency,
   false,
 );
+assert.equal(
+  workspace.CORE_LF_PROOF_DEVELOPMENT_PROFILE.nodeBuiltinDependency,
+  false,
+);
+assert.equal(typeof workspace.createCoreLfProofDevelopment, 'function');
 `,
   );
   await writeFile(
@@ -286,6 +298,8 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_PROOF_DEVELOPMENT_PROFILE,
+  createCoreLfProofDevelopment,
 } from '@hotdocx/emdash/workspace';
 
 const checkerConstructor: typeof CoreChecker = CoreChecker;
@@ -295,16 +309,20 @@ const exactSynthesizer: typeof synthesizeCoreLfInstance =
 const roleSynthesizer: typeof synthesizeCoreLfInstanceByRoles =
   synthesizeCoreLfInstanceByRoles;
 const maybeTerm: KernelExpression | undefined = undefined;
+const developmentFactory: typeof createCoreLfProofDevelopment =
+  createCoreLfProofDevelopment;
 void checkerConstructor;
 void builder;
 void exactSynthesizer;
 void roleSynthesizer;
+void developmentFactory;
 void maybeTerm;
 void CORE_MVP_MANIFEST;
 void CORE_LF_INSTANCE_SCOPE_PROFILE;
 void CORE_LF_INSTANCE_SYNTHESIS_PROFILE;
 void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void CORE_LF_DECLARATION_WORKSPACE_PROFILE;
+void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 `,
   );
   await writeFile(
@@ -319,6 +337,8 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_PROOF_DEVELOPMENT_PROFILE,
+  createCoreLfProofDevelopment,
 } from '@hotdocx/emdash/workspace';
 
 globalThis.emdashPackedSmoke = {
@@ -329,6 +349,8 @@ globalThis.emdashPackedSmoke = {
   roleSynthesisRevision: CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE.revision,
   synthesizeCoreLfInstanceByRoles,
   workspaceRevision: CORE_LF_DECLARATION_WORKSPACE_PROFILE.revision,
+  proofDevelopmentRevision: CORE_LF_PROOF_DEVELOPMENT_PROFILE.revision,
+  createCoreLfProofDevelopment,
 };
 `,
   );
