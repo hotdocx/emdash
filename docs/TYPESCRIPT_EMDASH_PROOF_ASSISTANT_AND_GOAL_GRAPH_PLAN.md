@@ -5488,6 +5488,15 @@ checkpointed corrected proposal and its separate immutable review. The
 corrected non-authorizing v2 proposal checkpoint is `b3d6d71`; it is the sole
 recommendation eligible for that review.
 
+Corrected proposal v2 is now separately approved under the standing delegated
+unattended authority, with explicit human supersession. The immutable review
+retains the rejected v1 and exact v2 checkpoints and authorizes only root-only
+`PATHOUT-LIBRARY-FOUNDATION-1B`: the 3/5/1/9 delta, seven positive consumers,
+eight negatives, and six bounded-oracle assertions. It denies every later
+mathematical, presentation, package, active-Lambdapi, and external-integration
+layer. Proposal-plus-review tests, typecheck, and focused lint are green; the
+implementation is the next dependency-ready row.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -5600,6 +5609,7 @@ recommendation eligible for that review.
 | `D-PA-106` | Correct `0A` forward by adding the missing `Sigma_func` object/capped-action closure to the foundation boundary. | `PathOut_cat_func` directly names `Sigma_func`; current TypeScript transfers contain `Sigma_cat` and `sigma_map_func` but not that opaque/injective owner or its two required projection rules. The unrelated higher `sigma_map_transf` action remains deferred until an internalized consumer requires it. |
 | `D-PA-107` | Freeze `PATHOUT-LIBRARY-FOUNDATION-1B0` as a non-authorizing 3/5/1/9 proposal over the displayed-ND higher-foundation predecessor. | Exact opaque declarations, rules, transparent definitions, phase order, consumers, negatives, and oracle must be independently reviewable before semantic work; the safe-library facade and low-level trust-bearing authoring API must not be conflated. |
 | `D-PA-108` | Reject the v1 `1B0` predecessor during independent review and correct v2 to reuse the mixed-action descendant. | `hom_int` is present in the higher-foundation profile, but its `hom_` result owner and the two object projections needed for representable fibre computation are installed only by mixed action. Reusing that reviewed descendant avoids both an invalid environment and a duplicate extracted mini-profile. |
+| `D-PA-109` | Approve only corrected `1B0` proposal v2 under delegated unattended authority, with human supersession. | The predecessor objection is resolved, the exact 3/5/1/9 scope is immutable and non-public, all later layers remain denied, and separate review preserves proposal non-self-authorization before implementation. |
 
 ## Validation And Checkpoint Policy
 

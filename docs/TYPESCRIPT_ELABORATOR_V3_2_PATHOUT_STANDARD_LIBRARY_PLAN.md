@@ -2,9 +2,9 @@
 
 Status: active selected standard-library continuation under
 `TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is complete and the
-behavior-free `PATHOUT-LIBRARY-FOUNDATION-1B0` proposal is frozen awaiting a
-separate immutable review after one review-driven predecessor correction; no
-PathOut library semantic or public export is yet implemented
+corrected `PATHOUT-LIBRARY-FOUNDATION-1B0` proposal is separately reviewed;
+the next bounded row is root-only `PATHOUT-LIBRARY-FOUNDATION-1B`
+implementation, and no PathOut semantic or public export is yet implemented
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -164,8 +164,8 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected proposal frozen; review next | completed corrected 0A | Proposal v2 freezes the exact represented-source and Sigma-totalization functor-action prerequisites plus nine transparent foundation definitions over the mixed-action descendant, with linkage, sealing, rules, consumers, negatives, and bounded oracle. It does not authorize 1B. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | pending | reviewed 1B0 | Transfer the two sealed foundation prerequisites, then author representables, fixed-source `PathOut`, source-arrow action, path objects, reflexive object, and canonical reflexive-to-path arrow as transparent end-user library definitions. Check fibre, object, arrow, and next-action behavior. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | complete; corrected v2 reviewed | completed corrected 0A | Proposal v1's invalid predecessor was rejected; immutable v2 over the mixed-action descendant is approved under delegated unattended authority with human supersession. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | next; implementation authorized | reviewed 1B0 | Implement exactly the root-only 3/5/1/9 boundary, seven positives, eight negatives, and six bounded oracle assertions. No fixed-source induction, public export, or later layer. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -410,6 +410,50 @@ The corrected non-authorizing v2 proposal checkpoint is `b3d6d71`; it is the
 sole recommendation a later delegated or human review may approve. Semantic
 implementation remains unauthorized until that separate review is itself
 checkpointed.
+
+### `PATHOUT-LIBRARY-FOUNDATION-1B0` separate review
+
+The separate immutable review is
+[`src/v3_2/pathout_foundation_review.ts`](../src/v3_2/pathout_foundation_review.ts),
+with focused tests in
+[`tests/v3_2_pathout_foundation_review_tests.ts`](../tests/v3_2_pathout_foundation_review_tests.ts).
+It records that v1 checkpoint `dd69325` was rejected and approves only v2
+checkpoint `b3d6d71` under gate
+`H-TS-EMDASH-PATHOUT-FOUNDATION-01` / decision
+`D-TS-EMDASH-PATHOUT-FOUNDATION-001` using the user's standing unattended
+delegation. Any later human decision supersedes that approval.
+
+Authorization is exact and root-only: three opaque prerequisite declarations,
+five runtime rules, one proof rule, nine transparent definitions, seven
+positive consumers, eight negatives, and six bounded-oracle assertions over
+the mixed-action predecessor. It explicitly denies fixed-source induction,
+internalized induction, transitivity, Sigma higher action, new Core/checker
+semantics, safe-library rule registration, text/browser/package exposure,
+active Lambdapi edits, and external integration or release.
+
+Proportional review validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_foundation_review.ts \
+  tests/v3_2_pathout_foundation_review_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathout_foundation_proposal_tests.ts \
+  tests/v3_2_pathout_foundation_review_tests.ts
+  14 tests / 2 suites: 14 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi or long aggregate is relevant to the immutable review itself.
+The bounded oracle remains mandatory for the now-authorized implementation.
 
 ## Required Evidence For Implementation
 
