@@ -455,6 +455,10 @@ git diff --check
 No Lambdapi or long aggregate is relevant to the immutable review itself.
 The bounded oracle remains mandatory for the now-authorized implementation.
 
+The rollback-safe separate-review checkpoint is `38ef8ae`. It is the exact
+authorization predecessor for root-only `PATHOUT-LIBRARY-FOUNDATION-1B`;
+implementation must preserve its v2 recommendation and explicit denials.
+
 ## Required Evidence For Implementation
 
 1. Exact active-source signatures/bodies/rules and owning positions.

@@ -5497,6 +5497,9 @@ mathematical, presentation, package, active-Lambdapi, and external-integration
 layer. Proposal-plus-review tests, typecheck, and focused lint are green; the
 implementation is the next dependency-ready row.
 
+The rollback-safe separate-review checkpoint is `38ef8ae`; it is the exact
+authorization predecessor for root-only `PATHOUT-LIBRARY-FOUNDATION-1B`.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
