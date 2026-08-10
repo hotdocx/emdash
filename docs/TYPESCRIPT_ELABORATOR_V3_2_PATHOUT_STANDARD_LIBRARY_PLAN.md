@@ -3,10 +3,11 @@
 Status: active selected standard-library continuation under
 `TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is complete; measured
 counterevidence supersedes the v3 `PATHOUT-LIBRARY-FOUNDATION-1B0` review;
-non-authorizing proposal v4 preserves v3's reviewed predecessor and corrects
-only its omitted covariant-representable action closure;
-`PATHOUT-LIBRARY-FOUNDATION-1B` is paused pending a separate immutable v4
-review, and no PathOut semantic or public export is yet implemented
+checkpointed proposal v4 preserves v3's reviewed predecessor, corrects only
+its omitted covariant-representable action closure, and is separately
+approved under delegated unattended authority with human supersession;
+root-only `PATHOUT-LIBRARY-FOUNDATION-1B` may resume, and no PathOut semantic
+or public export is yet implemented
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -166,8 +167,8 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v4 awaiting separate review | completed corrected 0A; superseded v1/v2/v3 | V3 correctly selected the direct-mixed-source-action predecessor, but measured checking of the final `pathout_refl_arrow` left the covariant represented-Hom action at `id_x` unreduced against `p`. Proposal v4 keeps that predecessor and freezes the minimal local 4/8/1/9 closure. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | paused; implementation not authorized | requires checkpointed and separately reviewed v4 proposal | Resume only after v4's own immutable review, then retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v4 separately reviewed | completed corrected 0A; superseded v1/v2/v3 | V3 correctly selected the direct-mixed-source-action predecessor, but measured checking of the final `pathout_refl_arrow` left the covariant represented-Hom action at `id_x` unreduced against `p`. Checkpointed v4 keeps that predecessor, freezes the minimal local 4/8/1/9 closure, and is approved under delegated unattended authority with human supersession. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | implementation authorized; resume existing work | separately reviewed v4 proposal | Resume exactly the root-only implementation over the corrected profile; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -616,10 +617,13 @@ node --require ts-node/register --test \
   14 tests / 2 suites: 14 passed, 0 failed
 ```
 
-The checkpoint remains pending until the exact staged proposal-only diff and
-whitespace hygiene have been reviewed. No Lambdapi or long aggregate was run;
-neither is relevant to the behavior-free correction, and their omission does
-not block the checkpoint.
+The rollback-safe non-authorizing proposal-v4/supersession checkpoint is
+`681d954`. Its separate immutable review approves only that exact checkpoint
+under the user's standing unattended delegation, retains later human
+supersession, and preserves every v4 denial. The review itself authorizes no
+push, merge, publication, deployment, or cleanup. No Lambdapi or long
+aggregate was run; neither is relevant to the behavior-free correction, and
+their omission does not block the separate review checkpoint.
 
 ## Required Evidence For Implementation
 

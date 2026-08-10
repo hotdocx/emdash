@@ -5527,8 +5527,10 @@ the local boundary to 4/8/1/9: four opaque signatures, eight runtime rules,
 one proof rule, and the same nine transparent definitions. It imports no
 generic composition law, checker/proof substitute, Core/evaluator branch, or
 later/public effect. V3 proposal checkpoint `640d5ec` and review checkpoint
-`36c368e` remain backtracking evidence; implementation is paused while v4
-awaits its own checkpoint and separate immutable review.
+`36c368e` remain backtracking evidence. Proposal v4 is checkpointed at
+`681d954` and separately approved under the user's standing unattended
+delegation with human supersession. The review restores only the root-local
+4/8/1/9 implementation authority and preserves every later/public denial.
 
 ## Decision Ledger
 
@@ -5646,6 +5648,7 @@ awaits its own checkpoint and separate immutable review.
 | `D-PA-110` | Supersede the v2 PathOut-foundation review and correct proposal v3 to the direct-mixed-source-action predecessor without changing the local 3/5/1/9 delta. | Focused checking of `Rep_transport_func` exposed `Z` versus `Op_cat Z`; the exact active opposite-Hom endpoint reduction is already present only in the reviewed descendant. Reusing that predecessor is narrower and more faithful than adding a sixth local rule or widening the checker. |
 | `D-PA-111` | Approve only checkpointed PathOut-foundation proposal v3 under delegated unattended authority, with human supersession. | Checkpoint `640d5ec` preserves the measured predecessor correction, exact local 3/5/1/9 delta, root-only qualification, and all v3 denials; separate review restores implementation authority without reviving v2 or making the proposal self-authorizing. |
 | `D-PA-112` | Supersede the v3 PathOut-foundation review and correct proposal v4 to the exact local 4/8/1/9 covariant-action closure without changing its predecessor. | Focused checking of final `pathout_refl_arrow` exposed `fapp0(fapp1_fapp0(hom_(id,x),p),id_x)` versus `p`; active `hom_postcomp_func` plus source lines 7298, 7302, and 7426 provide the narrow stable postcomposition reduction. Importing that closure is faithful to the authority and narrower than a generic composition-unit or checker/proof substitute. |
+| `D-PA-113` | Approve only checkpointed PathOut-foundation proposal v4 under delegated unattended authority, with human supersession. | Checkpoint `681d954` preserves the exact measured 4/8/1/9 closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v3 or making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
