@@ -49,10 +49,14 @@ relationship is installed, the dedicated bootstrap token/local value and
 GitHub secret are removed, and the stable workflow is token-free. By explicit
 human supersession, package publishing access still allows bypass-2FA granular
 tokens. Public-adapter rows no longer retain a package-trust gate, but a
-post-14A concrete-consumer audit found no current
-counterevidence, external-certificate, public-benchmark, or hosted-adapter
-consumer, so those rows are now explicitly deferred or gated by the exact
-prerequisites recorded below rather than left apparently implementation-ready
+post-14A concrete-consumer audit found no current counterevidence, external-
+certificate, or public-benchmark consumer, so those rows remain explicitly
+deferred or gated by the exact prerequisites recorded below. A subsequent
+fresh CloserFans/GetPaidX runtime audit has now selected and frozen the first
+real hosted consumer: a TypeScript-first `emdash_ts` workspace template over
+the public package and ordinary Node controller. `HOSTED-CONSUMER-13A` is the
+single bounded implementation row in progress; it does not yet constitute the
+Arrowgram/public-interchange work of `GOAL-GRAPH-14B`.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -597,8 +601,9 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | complete | `f46ff9a`; self-contained exact cases, arbitrary inert patches, fresh selected-proof replay, stable diagnostics, integer retrieval/plan/replay metrics, and provider-reported usage |
 | `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements plus a concrete agent/host consumer and reviewed corpus/public-package boundary |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
+| `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | in progress | Fresh sibling/runtime audit selected `templates/emdash_ts`: public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Frozen contract and focused gates are below. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
-| `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A and the public package/OIDC boundary are complete; require fresh sibling SOP audits plus one concrete compatible controller/runtime consumer |
+| `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A and the public package/OIDC boundary are complete; 13A must first qualify the concrete hosted runtime consumer, then 14B still requires a separately frozen public interchange/view/action contract and a fresh Arrowgram edit audit. |
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 
 Only one semantic row is in progress at a time. A later row may be
@@ -4249,6 +4254,80 @@ hosted release gates, the focused public installed-consumer verifier, exact
 authenticated settings, and document/ref hygiene are the proportional
 evidence.
 
+## HOSTED-CONSUMER-13A Audit And Frozen First Contract
+
+Date: 2026-08-10
+
+State at freeze: implementation-ready and in progress. The preceding npm
+publication/trust boundary is complete. Fresh read-only sibling inspection
+found no current Emdash package import, goal-graph adapter, or Emdash template
+in either CloserFans/GetPaidX or Arrowgram. It did find a concrete compatible
+host contract in CloserFans at local `master` commit `0789983`: template
+manifests are auto-discovered from `templates/`, projects with `package.json`
+receive `npm install --no-audit`, and the ordinary controller is based on Node
+20. The unrelated untracked CloserFans review plan remains out of scope and
+must be preserved. CloserFans currently has no configured Git remote, so this
+tranche can make local branch/checkpoint/integration evidence but must not
+claim a push or deployment.
+
+The first hosted consumer is `templates/emdash_ts`, with the following frozen
+product contract:
+
+1. The template depends on exact public `@hotdocx/emdash@0.1.0` and exercises
+   its `/workspace` entry. It does not use a repository-relative package,
+   unpublished bytes, or the CloserFans application's dependency graph.
+2. `development.emdash.ts` is the source of authority. It directly constructs
+   a small declaration workspace and two identity proofs with the published
+   TypeScript builders: one complete proof and one deliberately open proof
+   containing visible `coreProofPlanHole('body')`. An AI agent can patch the
+   ordinary TypeScript term source; there is no structure/class/declaration
+   text parser and no hidden mutable prover session.
+3. A small outer Node/TypeScript command adapter provides `goals`, `check`, and
+   `verify`. Every command imports the source afresh, recompiles it through the
+   TypeScript checker, and formats the resulting proof artifact. `goals`
+   succeeds for an open proof, `check` exits nonzero for one, and `verify`
+   asserts the intended complete/open fixture states.
+4. The template runs in the default controller. Its manifest has no
+   `workspacePoolName`; no image, controller pool, LambdaPi binary, MCP/API
+   method, database schema, hosted permission, or deployment change is part of
+   this row. LambdaPi remains a possible later backend/conformance route, not
+   a runtime dependency of this TypeScript-first starter.
+5. A lightweight static preview explains the terminal/source workflow. It is
+   documentation and entry-point affordance, not an authoritative interactive
+   proof-state server.
+6. A repository-owned focused verifier copies the template to a temporary
+   directory, installs it from the public npm registry, checks the exact
+   installed Emdash version, runs TypeScript verification, exercises positive
+   and negative proof commands, and probes the preview. It may create a lock
+   only inside that disposable copy; no lock or `node_modules` is tracked in
+   the template.
+
+The owning CloserFans edit is isolated on a new branch created from the exact
+clean tracked baseline while leaving the unrelated untracked report in place.
+The anticipated owned paths are the new template and focused verifier plus
+minimal discoverability/current-runtime documentation and one root script
+entry. The proportional acceptance boundary is:
+
+- `npm run templates:validate` for manifest/archive ownership;
+- the new public-registry runtime verifier, including exact 0.1.0 identity,
+  fresh complete/open checks, expected exit codes, and preview response;
+- exact TypeScript/static checks only for changed host files, with a root
+  typecheck required only if host TypeScript source rather than a standalone
+  verifier/template changes;
+- exact staged-diff, whitespace, conflict-marker, branch ancestry, and
+  preservation review before checkpoints; and
+- no Emdash `check:ts`, CloserFans full test/typecheck aggregate, container
+  rebuild, LambdaPi check, Arrowgram build, cloud deployment, or repository-
+  wide aggregate unless a focused failure proves that exact boundary is
+  necessary.
+
+Successful 13A completion establishes the first real hosted package consumer.
+It does not by itself qualify `AGENT-EVAL-12B`: no reviewed benchmark corpus or
+public agent-run interchange is introduced. It also does not implement
+`GOAL-GRAPH-14B`: Arrowgram rendering and GetPaidX goal/evidence actions still
+need a separately frozen canonical interchange, permission model, and fresh
+edit-time sibling audit after this runtime foothold is measured.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -4339,6 +4418,7 @@ evidence.
 | `D-PA-084` | Accept attempt 2 of immutable run `31391224891` as the first public emdash package only after public digest, provenance, inventory, and installed-consumer verification. | Workflow success alone is indirect evidence; the registry artifact independently matches the qualified tarball and exercises every promised package entry across its four consumer modes. |
 | `D-PA-085` | Do not activate hosted adapters merely because the package is now public; first finish OIDC/token hardening and require one concrete sibling consumer. | Distribution resolves one prerequisite, while a public interchange, permission surface, and renderer/controller contract still need exact consumers and separate authority. |
 | `D-PA-086` | Close PACKAGE-RELEASE-13 after exact authenticated npm settings and one-time credential retirement, while retaining bypass-2FA-token compatibility by explicit human supersession. | OIDC publisher identity, residual bootstrap authority, and package-wide token policy are separate. The publish-only trust is directly visible, the dedicated token/local value and GitHub secret are gone, and the unauthenticated npm 11.19.0 `trust list` result is recorded honestly as `E401` rather than a pass. |
+| `D-PA-087` | Make the first hosted consumer a TypeScript-first `emdash_ts` GetPaidX template on the default controller, before any goal-graph interchange or new host API. | The published zero-runtime-dependency package fits the existing Node 20 install/start contract and direct source-visible holes demonstrate the AI-native workflow immediately; a dedicated image, LambdaPi runtime, MCP surface, or premature Arrowgram protocol would add authority without a selected need. |
 
 ## Validation And Checkpoint Policy
 
