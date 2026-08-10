@@ -112,6 +112,8 @@ jobs:
           EXPECTED_SHA256: ${{ needs.build.outputs.sha256 }}
           PACKAGE_FILENAME: ${{ needs.build.outputs.filename }}
           PACKAGE_VERSION: ${{ needs.build.outputs.version }}
+          # PACKAGE-12B2 first-publish bootstrap only; remove after v0.1.0.
+          NODE_AUTH_TOKEN: ${{ needs.build.outputs.version == '0.1.0' && secrets.NPM_BOOTSTRAP_TOKEN || '' }}
         run: |
           set -euo pipefail
           tarball="$RUNNER_TEMP/emdash-package/$PACKAGE_FILENAME"

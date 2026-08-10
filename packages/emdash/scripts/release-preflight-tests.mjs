@@ -95,7 +95,7 @@ test('rejects tag, repository, and public-manifest drift', () => {
   }
 });
 
-test('pins a token-free, least-authority two-job workflow', async () => {
+test('pins a version-locked first-publish bootstrap workflow', async () => {
   const workflow = await readFile(
     path.join(repositoryRoot, '.github', 'workflows', 'npm-publish.yml'),
     'utf8',
@@ -112,6 +112,8 @@ test('pins a token-free, least-authority two-job workflow', async () => {
     'sha256sum "$tarball"',
     'npm install --global npm@11.19.0 --ignore-scripts',
     'npm publish "$tarball" --access public --provenance',
+    "needs.build.outputs.version == '0.1.0' && " +
+      "secrets.NPM_BOOTSTRAP_TOKEN || ''",
     'd23441a48e516b6c34aea4fa41551a30e30af803',
     '820762786026740c76f36085b0efc47a31fe5020',
     'ea165f8d65b6e75b540449e92b4886f43607fa02',
@@ -119,7 +121,9 @@ test('pins a token-free, least-authority two-job workflow', async () => {
   ]) {
     assert.match(workflow, new RegExp(required.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&'), 'u'));
   }
-  assert.doesNotMatch(workflow, /secrets\.|NODE_AUTH_TOKEN|NPM_TOKEN/u);
+  assert.equal((workflow.match(/secrets\./gu) ?? []).length, 1);
+  assert.equal((workflow.match(/NODE_AUTH_TOKEN/gu) ?? []).length, 1);
+  assert.doesNotMatch(workflow, /NPM_TOKEN/u);
   assert.doesNotMatch(workflow, /pull_request:|push:|workflow_dispatch:/u);
   assert.equal((workflow.match(/id-token: write/gu) ?? []).length, 1);
   const buildStart = workflow.indexOf('\n  build:\n');
@@ -129,10 +133,14 @@ test('pins a token-free, least-authority two-job workflow', async () => {
   assert.equal(buildStart < publishStart, true);
   const buildJob = workflow.slice(buildStart, publishStart);
   const publishJob = workflow.slice(publishStart);
-  assert.doesNotMatch(buildJob, /id-token:/u);
+  assert.doesNotMatch(buildJob, /id-token:|secrets\.|NODE_AUTH_TOKEN/u);
   assert.match(
     publishJob,
     /\n    permissions:\n      contents: read\n      id-token: write\n/u,
+  );
+  assert.match(
+    publishJob,
+    /NODE_AUTH_TOKEN: \$\{\{ needs\.build\.outputs\.version == '0\.1\.0' && secrets\.NPM_BOOTSTRAP_TOKEN \|\| '' \}\}/u,
   );
   assert.match(
     workflow,
