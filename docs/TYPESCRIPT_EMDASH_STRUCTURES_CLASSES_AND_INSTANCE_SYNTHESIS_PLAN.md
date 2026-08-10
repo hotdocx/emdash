@@ -1,5 +1,13 @@
 # TypeScript/emdash Structures, Classes, And Instance Synthesis Plan
 
+> **Forward proof-assistant continuation (2026-08-10):**
+> [`TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md`](./TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md)
+> now governs the consumer-justified continuation from this completed local
+> structures/classes/synthesis envelope into general proof-development
+> management, declarative proof engineering, search/automation, and later
+> typed goal/evidence graphs. The package publication and stdlib prerequisites
+> recorded here remain active and are not bypassed by the successor plan.
+
 Date: 2026-08-09
 
 Plan-ID: TS-EMDASH-CLASSES

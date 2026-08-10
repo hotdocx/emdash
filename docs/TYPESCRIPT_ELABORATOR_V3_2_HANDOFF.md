@@ -1,5 +1,20 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
+> **Proof-assistant and typed-goal-graph continuation (2026-08-10):**
+> [`TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md`](./TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md)
+> is the governing living plan for the continuation from the qualified
+> AI-native workspace and structures/classes foundations into a general proof
+> development catalog, declarative proof decomposition, proof-producing
+> simplification, accessible-premise search, bounded automation providers,
+> proof maintenance, curated-library gates, and later evidence-typed goal
+> graphs. It preserves explicit checked Core and the small TypeScript checker
+> as authority, keeps Lambdapi optional as an emitter/conformance oracle, and
+> separates kernel-checked theorems from verification, observation, approval,
+> AI-proposal, and ordinary task evidence. `DEV-CATALOG-1` is its first frozen
+> browser-safe tranche; file acquisition, general CLI targeting, richer proof
+> nodes, npm bootstrap publication, hosted integration, and the general goal
+> plane remain separately gated.
+>
 > **Structures/classes/instance-synthesis continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md`](./TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md)
 > is the governing living plan for parameterized dependent structures, named
