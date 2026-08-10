@@ -43,8 +43,11 @@ profile is implemented and final-proportional-green through focused, nearest-
 owner, typecheck/lint, and browser-closure gates; its public visual/hosted
 adapter remains gated; the first protected npm bootstrap reached a green
 hosted build but npm refused the final registry PUT under its 2FA/token policy,
-so the stable workflow is token-free again and the package/public-adapter rows
-remain externally gated; a post-14A concrete-consumer audit found no current
+then exact attempt 2 published and verified `@hotdocx/emdash@0.1.0` with
+provenance. The GitHub secret is removed and the stable workflow is token-free;
+interactive trusted-publisher/token hardening remains at direct npm password/
+2FA confirmation, so public-adapter rows still retain that trust gate. A
+post-14A concrete-consumer audit also found no current
 counterevidence, external-certificate, public-benchmark, or hosted-adapter
 consumer, so those rows are now explicitly deferred or gated by the exact
 prerequisites recorded below rather than left apparently implementation-ready
@@ -57,11 +60,13 @@ Baseline: `9c633c85b66efb4ac7619912e8d15f928b32d733`
 (`docs: close classes goal readiness audit`)
 
 Git-Boundary: the branch fork baseline remains the qualified predecessor
-`9c633c8`; local and public `main` are now exactly `9b9a773`, which retains the
-first PACKAGE-12B2 attempt record after restoring the stable token-free
-workflow at `735546d`. This proof-assistant branch incorporates that public
-baseline through merge checkpoint `65549be` but has not itself been
-merged into `main`, tagged, released, or published to npm. The frozen plan
+`9c633c8`; local and public `main` are now exactly `941bf96`, which records the
+verified PACKAGE-12B2 attempt-2 publication while retaining the stable token-
+free workflow restored at `735546d`. This proof-assistant branch incorporates
+the earlier public baseline through merge checkpoint `65549be` and the new
+publication record through the merge checkpoint recorded below, but the
+proof-assistant branch itself has not been merged into `main`, tagged,
+released, or published to npm. The frozen plan
 checkpoint is `671c56a`; the `DEV-CATALOG-1` semantic checkpoint is `fcc4547`;
 its synchronized ledger checkpoint and the dedicated branch's preceding
 published baseline are `2484e23`; the
@@ -97,8 +102,9 @@ checkpoint is `75f0362`, its semantic checkpoint is `faa4c27`, and its
 synchronized clean published ledger checkpoint is `bf23c51`. GitHub retains
 annotated tag and Release `emdash-v0.1.0` at `501a5f6`; public-baseline merge
 checkpoint `65549be` incorporates its retained audit history, and the post-14A
-dependency-gate audit checkpoint is `394ad2c`; npm accepted no package version
-from that attempt.
+dependency-gate audit checkpoint is `394ad2c`. Attempt 2 subsequently
+published the exact tagged artifact, and public-main documentation checkpoint
+`941bf96` records its verification and remaining interactive trust gate.
 
 Depends-On:
 
@@ -585,9 +591,9 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | deferred | No solver dependency/binary/corpus or certificate checker is selected. Reactivate only for one concrete solver/certificate-format consumer plus independent reconstruction or checking. |
 | `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | complete | `f46ff9a`; self-contained exact cases, arbitrary inert patches, fresh selected-proof replay, stable diagnostics, integer retrieval/plan/replay metrics, and provider-reported usage |
 | `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements plus a concrete agent/host consumer and reviewed corpus/public-package boundary |
-| `PACKAGE-RELEASE-13` | First npm publication and OIDC hardening | external npm-authentication gate after one safe hosted attempt | classes-plan `PACKAGE-12B2`; run `31391224891` retained a green exact build/artifact handoff, but npm rejected the PUT because the bootstrap token lacked bypass-2FA authority. Registry remains absent and the temporary secret/fallback are removed; retry the same immutable tag/run only with attended 2FA and a dedicated suitable bootstrap credential, then verify and harden trust. |
+| `PACKAGE-RELEASE-13` | First npm publication and OIDC hardening | public package verified; interactive trust hardening in progress | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified, GitHub has no bootstrap secret, and stable `main` is token-free. Complete the prepared password/2FA trust confirmation, restrictive token policy, dedicated-token revocation, and `npm trust list`. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
-| `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A, published package, sibling SOP audits, compatible controller/runtime |
+| `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A and the public package are present; complete npm OIDC/token hardening, then require sibling SOP audits plus a concrete compatible controller/runtime consumer |
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 
 Only one semantic row is in progress at a time. A later row may be
@@ -4045,6 +4051,10 @@ or public contract.
 
 Date: 2026-08-10
 
+Historical scope: this records attempt 1 and the first public-baseline merge.
+Attempt-2 publication and current trust state are recorded in the later
+successful-publication section.
+
 Result: the first hosted build and protected artifact handoff succeeded, but
 the package remains unpublished behind an exact npm authentication gate.
 
@@ -4090,6 +4100,11 @@ acceptable substitute.
 ## Post-14A Dependency-Gate Audit
 
 Date: 2026-08-10
+
+Historical scope: this was accepted before the user supplied the successful
+bootstrap credential. Its solver/consumer findings remain current, while its
+package-absence findings and related 12B/14B wording are superseded by the
+successful-publication section below.
 
 Result: accepted at audit checkpoint `394ad2c`; no further semantic or hosted
 row is currently dependency-ready. The audit converts the two residual
@@ -4150,6 +4165,62 @@ print/book, deployment, or registry mutation occurred. Proportional
 validation is exact diff, link/heading review, whitespace hygiene, clean
 worktree preservation, and ref/ancestry verification; no test or long
 aggregate can provide relevant additional evidence for this audit.
+
+## PACKAGE-RELEASE-13 Successful Publication And Trust-Hardening Gate
+
+Date: 2026-08-10
+
+Result: `@hotdocx/emdash@0.1.0` is public, provenance-linked, byte-verified,
+and independently installable. Interactive trusted-publisher/token hardening
+remains in progress, so PACKAGE-RELEASE-13 is not yet complete.
+
+After the user supplied a newly created bypass-2FA bootstrap key through the
+ignored no-echo source, exact run `31391224891` was rerun against immutable tag
+`emdash-v0.1.0` and source commit `501a5f6`. Attempt-2 build job `93478007418`
+passed every frozen build/artifact gate. Its protected deployment was approved
+only afterward; publish job `93478194892` then completed successfully with
+`+ @hotdocx/emdash@0.1.0`. No alternate version/tag/Release, local publish,
+force operation, or changed package bytes were introduced.
+
+The GitHub environment secret was deleted immediately after success. Public
+`main` remains on the stable token-free workflow and now records the result at
+`941bf96`. Public registry and npmjs.com verification establishes exact
+package/version/tag, public access, maintainer `hotdocx`, repository identity,
+license/engine/zero-dependency metadata, 118-file inventory, npm SHA-1/SHA-512
+metadata, SLSA v1 provenance, npm signature, source/build links, and Sigstore
+log index `2408550173`. Both the GitHub artifact and independently downloaded
+npm tarball have SHA-256
+`44ae167a660fab9189e660aee1f0d41a07dc3ff6e8c3f4455c94f25f1a8fbcaf`.
+The npm-downloaded tarball passed the existing ESM, CommonJS, strict NodeNext,
+and browser-bundle installed consumers.
+
+The authenticated package-settings form is prepared for the sole trusted
+publisher: GitHub organization `hotdocx`, repository `emdash`, workflow file
+`npm-publish.yml`, environment `npm-release`, publish allowed, staged publish
+disallowed. npm accepted the form up to direct account-password confirmation;
+the agent did not inspect or enter password or 2FA data. The preserved browser
+handoff now awaits the human. After authentication, verify the saved fields
+and npm 11.19.0 trust list, require 2FA while disallowing bypass tokens, revoke
+the dedicated bootstrap key, and remove its ignored local value without
+printing it.
+
+Publication satisfies the missing distribution prerequisite but does not
+create a concrete hosted consumer by itself:
+
+- `STDLIB-8` still requires a selected mathematical product profile and the
+  completed public-package trust boundary;
+- `AGENT-EVAL-12B` still lacks a reviewed public corpus and concrete agent/host
+  consumer; and
+- `GOAL-GRAPH-14B` still requires completed npm trust hardening followed by
+  sibling SOP audits and one concrete compatible Arrowgram/GetPaidX consumer.
+
+This public-main record is incorporated into the proof-assistant branch by the
+normal non-rewriting merge checkpoint recorded after this documentation
+update. No proof-assistant source/test/export, mathematical development,
+workflow, package bytes, sibling repository, or deployment changed in that
+merge. No long TypeScript, root, kernel, print, book, or sibling aggregate was
+run; hosted release gates and the focused public installed-consumer verifier
+are the proportional evidence.
 
 ## Decision Ledger
 
@@ -4238,6 +4309,8 @@ aggregate can provide relevant additional evidence for this audit.
 | `D-PA-081` | Define duplicate dependencies by exact edge identity, including the `oneOf` group, rather than by dependent/prerequisite pair alone. | One prerequisite may satisfy alternatives in multiple distinct groups; rejecting that valid formula would impose an undocumented expressivity restriction. |
 | `D-PA-082` | Incorporate public `main` through a normal merge after the safe PACKAGE-12B2 attempt, while leaving every package-dependent semantic row gated. | The public history contains useful release/audit evidence and a token-free stable workflow, but npm accepted no package; synchronization must not be misreported as publication or used to bypass the concrete authentication prerequisite. |
 | `D-PA-083` | Explicitly defer counterevidence and external-certificate implementation until a real consumer selects the interpretation, solver/certificate boundary, and independent evidence path. | Current code, dependencies, installed tools, and sibling hosts provide no such consumer; building a toy provider or widening the closed research-goal ontology would manufacture semantics solely to advance the ledger. |
+| `D-PA-084` | Accept attempt 2 of immutable run `31391224891` as the first public emdash package only after public digest, provenance, inventory, and installed-consumer verification. | Workflow success alone is indirect evidence; the registry artifact independently matches the qualified tarball and exercises every promised package entry across its four consumer modes. |
+| `D-PA-085` | Do not activate hosted adapters merely because the package is now public; first finish OIDC/token hardening and require one concrete sibling consumer. | Distribution resolves one prerequisite, while a public interchange, permission surface, and renderer/controller contract still need exact consumers and separate authority. |
 
 ## Validation And Checkpoint Policy
 
