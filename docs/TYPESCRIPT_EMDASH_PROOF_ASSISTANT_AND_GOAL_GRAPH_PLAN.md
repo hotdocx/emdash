@@ -8,10 +8,11 @@ Status: living architecture and implementation ledger; reviewed strategy
 recorded; qualified predecessor baseline integrated into public `main`;
 `DEV-CATALOG-1`, `DEV-CLI-2A`, and `DEV-CLI-2B` implemented and
 final-proportional-green under the persistent 2026-08-10 long-aggregate
-policy recorded below; `PLAN-DECOMPOSE-3A` audit complete and the bounded
-base-plan macro tranche frozen; later template refinement, simplification,
-search, library, external-automation, and general goal-graph rows remain
-dependency-gated
+policy recorded below; `PLAN-DECOMPOSE-3A/3B` complete and the selected-
+constructor base-plan macro final-proportional-green; contextual `have` is the
+next versioned audit; later template refinement, simplification, search,
+library, external-automation, and general goal-graph rows remain dependency-
+gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -28,7 +29,8 @@ dedicated branch's preceding published baseline are `2484e23`; the
 `c60d09e`, and `fa84b05`; the `DEV-CLI-2B` architecture and semantic
 checkpoints are `a6f0fbe` and `b5a4cb2`. The branch has not been merged into
 `main`, tagged, released, or published to npm; the `DEV-CLI-2B` synchronized
-ledger checkpoint is `238bddf`.
+ledger checkpoint is `238bddf`; the proof-plan audit checkpoint is `144afda`
+and the corrected selected-constructor semantic checkpoint is `934bf13`.
 
 Depends-On:
 
@@ -494,8 +496,8 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | complete | `b5a4cb2`; focused semantic/static/browser gates green; long aggregate intentionally omitted |
 | `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4`; no ad hoc second graph authority |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | complete | base-plan macro lowering selected; template and equality boundaries separated below |
-| `PLAN-DECOMPOSE-3B` | Implement selected-`constructor` base-plan macro | in progress | corrected frozen contract below; exact `apply` lowering only |
-| `PLAN-DECOMPOSE-3B1` | Versioned contextual `have` plan/refiner | pending | 3B; explicit nested-profile revision and open-goal retention decision |
+| `PLAN-DECOMPOSE-3B` | Implement selected-`constructor` base-plan macro | complete | `934bf13`; focused semantic/static/browser/packed gates green; long aggregate intentionally omitted |
+| `PLAN-DECOMPOSE-3B1` | Versioned contextual `have` plan/refiner | in progress | audit explicit nested-profile revision and open-goal retention before implementation |
 | `PLAN-DECOMPOSE-3C` | Versioned explicit-placeholder `refine` template | pending | one consumer not expressible by base-plan macros; source/artifact revision decision |
 | `GOAL-COUPLING-4` | Stable cross-goal dependency graph | pending | measured dependent-hole consumer and snapshot revision decision |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | pending | equality/transport owner inventory and termination contract |
@@ -1155,6 +1157,68 @@ print/book, sibling repository, release, registry, or deployment change.
 `PLAN-DECOMPOSE-3B1` retains contextual `have`; `PLAN-DECOMPOSE-3C` retains
 general explicit-placeholder refinement; `SIMP-5A/5B` retains propositional
 rewriting.
+
+### PLAN-DECOMPOSE-3B completion record
+
+Semantic checkpoint: `934bf13` (`feat: add selected constructor proof plans`).
+
+The public browser-safe workspace entry now exports
+`coreProofPlanConstructor` and immutable
+`emdash-proof-plan-macros-v1`. The macro accepts an explicitly selected Core
+callee and ordered premise plans, then returns exactly the existing frozen
+`apply` node. Complete execution and traces therefore remain checked by the
+ordinary refiner, named dependent premises remain ordinary source holes, and
+wrong constructors or arities fail atomically through existing owners. The
+static AI-native capability record advances from v2 to v3 solely to advertise
+the implemented profile. Canonical proof-development source remains v1 and
+round-trips the lowered `apply` tree; there is no serialized `constructor`
+tag or hidden selection search.
+
+Final proportional evidence:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_plan_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts \
+  tests/v3_2_lf_workspace_proof_tests.ts
+  35 tests / 7 suites: 35 passed, 0 failed
+
+node --require ts-node/register --test \
+  tests/v3_2_browser_api_tests.ts
+  2 tests / 1 suite: 2 passed, 0 failed
+
+./scripts/pnpmw run typecheck
+  passed
+
+changed-file ESLint
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed; pnpm@11.16.0, Node 24.11.1
+
+./scripts/pnpmw run package:check
+  package build plus packed ESM, CJS, strict-TypeScript, and browser
+  consumers passed
+
+git diff --cached --check
+  passed before semantic checkpoint 934bf13
+```
+
+Aggregate disposition: no `check:ts`, root-test, `check:all`, kernel,
+Lambdapi, print, book, or publication aggregate was run. The affected proof-
+plan, capability, canonical-source, browser, and public-package boundaries are
+directly green. Under `D-PA-019`, omission of the long aggregates does not
+block this bounded row; it is intentional, is not a pass, and says nothing
+about unrelated suites.
+
+No Core expression or proof-plan tag, checker/refiner/session rule,
+proof-state/document/artifact/source revision, declaration or term parser,
+constructor discovery, theorem import, equality/rewrite behavior, Lambdapi
+source, mathematical owner/rule, Node adapter, CLI, cache/network, MCP/LSP,
+print/book, sibling repository, npm registry, GitHub Release, or hosted
+deployment changed. The rejected lambda-cut `have` probe was never
+checkpointed. `PLAN-DECOMPOSE-3B1` is now the sole semantic row in progress;
+its first action is a contract audit, not an assumed implementation.
 
 ## Decision Ledger
 
