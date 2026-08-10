@@ -15,6 +15,8 @@ v2 source/artifact family final-proportional-green; the general `refine` tag
 audit and root-scoped typed-term template macro are complete and final-
 proportional-green; the cross-goal coupling audit and its separate portable
 direct-dependency graph are complete and final-proportional-green;
+the stateless development-graph command audit is complete and its exact
+projection tranche is frozen;
 later simplification, search, library, external-automation, and general
 goal-graph rows remain dependency-gated
 
@@ -503,7 +505,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `DEV-CATALOG-1` | General browser-safe multi-module/multi-proof development catalog | complete | focused/package gates green; one long aggregate directly waived after interrupted evidence became unrecoverable |
 | `DEV-CLI-2A` | Canonical supplied-data proof-development source and reconstruction | complete | `c60d09e`; focused/static/browser/packed gates green; long aggregate intentionally omitted |
 | `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | complete | `b5a4cb2`; focused semantic/static/browser gates green; long aggregate intentionally omitted |
-| `DEV-CLI-2C` | Stable `graph` command projection | pending | `GOAL-COUPLING-4B` complete; exact module/declaration wrapper and command revisions still to freeze |
+| `DEV-CLI-2C` | Stable `graph` command projection | in progress | frozen v3 command/v1 graph-wrapper contract below over completed `GOAL-COUPLING-4B` |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | complete | base-plan macro lowering selected; template and equality boundaries separated below |
 | `PLAN-DECOMPOSE-3B` | Implement selected-`constructor` base-plan macro | complete | `934bf13`; focused semantic/static/browser/packed gates green; long aggregate intentionally omitted |
 | `PLAN-DECOMPOSE-3B1A` | Audit contextual `have`, retention, and revision boundary | complete | contextual substitution plus per-refiner retained source obligations selected below |
@@ -1796,6 +1798,100 @@ its known environment limitation is unchanged and the actual packed browser
 consumer passed. No Lambdapi/kernel, print/book, npm publication, release,
 deployment, or sibling-repository operation was run.
 
+## DEV-CLI-2C Audit And Frozen Graph-Command Tranche
+
+Date: 2026-08-10
+
+Status: audit complete; the bounded implementation below is frozen and
+approved under the standing self-approval and checkpoint policy.
+
+### Material findings
+
+1. `GOAL-COUPLING-4B` leaves no dependency semantics for the Node adapter to
+   invent. Each fresh proof compilation already carries one portable direct
+   graph with stable node IDs, exact edge direction/counts, deterministic
+   order, and its own semantic revision.
+2. The command must wrap each graph with `moduleId` and `declarationId` because
+   hole IDs are unique only within one proof. Whole-development selection
+   emits one wrapper for every proof in canonical proof order, including an
+   empty graph for a complete proof. Exact proof selection emits exactly one.
+   Omitting empty graphs would make proof membership implicit in status text
+   and prevent a complete graph view of the selected development.
+3. JSONL begins with the existing summary record and then ordered graph
+   wrappers. Text begins with the same summary view and then one explicitly
+   identified graph view per proof. Neither representation contains a project
+   root, source text, checker/session object, numeric meta identity, or parsed
+   diagnostic expression.
+4. `graph` is an inspection command like `goals`: an incomplete development
+   with a successfully derived graph exits zero. `check` and `build` retain
+   exit one for incomplete proofs, and acquisition/parse/selection failures
+   retain exit two. No mutable status or success inference is added.
+5. The CLI profile's command tuple and summary record's closed `command` union
+   gain `graph`; both therefore advance from v2 to v3. The new exact wrapper is
+   `emdash-lf-proof-development-graph-v1`. Goal and build record revisions,
+   mounted source, development/source/artifact, and coupling-graph revisions
+   remain unchanged.
+6. The static AI-native capability record advances from v6 to v7, adds the
+   exact `development-graph` command, and removes only its now-satisfied
+   deferred entry. The browser-safe npm workspace remains free of the Node
+   adapter; no package entry or proof artifact changes.
+
+### Frozen DEV-CLI-2C contract
+
+Extend the existing command namespace:
+
+```text
+./scripts/emdash development graph \
+  --project-root ABSOLUTE_PATH \
+  [--module MODULE_ID --declaration DECLARATION_ID] \
+  [--format jsonl|text]
+
+CoreLfProofDevelopmentGraphRecord
+  revision = emdash-lf-proof-development-graph-v1
+  kind = proof-development-goal-graph
+  moduleId
+  declarationId
+  graph = CoreProofGoalCouplingGraph
+```
+
+1. Reuse the current fixed canonical filename, explicit-real-root acquisition,
+   fresh development compilation, exact proof selection, and option parser.
+   Add only the literal `graph` command; no positional path, backend switch,
+   root discovery, arbitrary host source, output file, or new I/O authority.
+2. Selected-development assembly carries ordered graph wrappers alongside the
+   existing summary/goals/artifact values. It reads
+   `proof.proofCompilation.goalGraph`; the CLI never traverses Core or metas.
+3. JSONL graph output is `[summary, ...graphRecords]`. Text output is the
+   summary followed by an exact proof identity and the existing graph text
+   renderer for every record. Both formats end with one newline and are
+   deterministic across repeated fresh invocations.
+4. Advance the CLI profile and summary wrapper to v3, add graph-wrapper v1 and
+   pin `emdash-proof-goal-coupling-v1`. Keep goal/build v2 and every canonical
+   proof/source/artifact revision unchanged. Advance the static capability
+   record to v7 as described above.
+5. Preserve old `check`, `goals`, `build`, top-level proof, workspace, and
+   capability routes byte-for-byte except for the intentionally advanced
+   summary revision/profile claim. An incomplete `graph` or `goals` command
+   returns zero; incomplete `check` or `build` returns one; malformed commands
+   and unknown proof selection return two.
+
+Focused acceptance covers whole-development and exact-proof JSONL, complete
+and open graphs, canonical proof order, empty graph retention, text rendering,
+repeat-run byte equality, no root/source/session/meta leakage, incomplete exit
+semantics, malformed/unknown selection failures, actual shell routing,
+unchanged legacy routes, exact capability/profile parity, typecheck,
+changed-file lint, workspace check, shell syntax, exact diff review, and
+whitespace hygiene. Under `D-PA-019`, no long root/repository aggregate is run
+unless omission becomes progress-blocking.
+
+Non-effects: no coupling semantics or graph traversal, Core/checker/session/
+refiner/proof-plan change, canonical proof state/artifact/source/development or
+research revision/pin, browser-package entry, declaration/term parser, proof
+search/scheduling, theorem import, equality/rewrite, Lambdapi source,
+mathematical owner/rule, additional filesystem/network/cache/MCP/LSP
+authority, output write, print/book, sibling repository, npm publication,
+release, or deployment change.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -1833,6 +1929,9 @@ deployment, or sibling-repository operation was run.
 | `D-PA-031` | Publish cross-goal coupling as a separate additive portable graph, not a parsed diagnostic string or silent field in proof-state v2. | Structured Core and the stable label map are available during fresh replay; a separate profile avoids making display syntax semantic or forcing an unrelated source/artifact migration. |
 | `D-PA-032` | Define direct edges from dependent goals to open prerequisites occurring in zonked targets or local-context types, with separate occurrence counts. | This captures actual type dependency, distinguishes independent sibling goals, and leaves transitive closure and scheduling as explicit derived policies. |
 | `D-PA-033` | Keep the Node `development graph` projection in `DEV-CLI-2C` after the browser-safe graph owner is qualified. | The command should wrap one semantic graph rather than reimplement meta traversal, labeling, or edge ordering at the acquisition boundary. |
+| `D-PA-034` | Emit one module/declaration-qualified graph wrapper per selected proof, including complete proofs with empty graphs. | Hole IDs are proof-local, and omitting empty graphs would hide selected proof membership from the graph record stream. |
+| `D-PA-035` | Treat `development graph` as successful inspection for incomplete proofs, matching `goals` rather than `check` or `build`. | Deriving an explicit open-goal graph is the intended successful result; it does not claim proof completion. |
+| `D-PA-036` | Advance the development CLI/profile summary family to v3 and add graph-wrapper v1 while retaining goal/build and canonical artifact v2. | The closed command union changes, but existing goal/build payloads and every proof/source/artifact envelope do not. |
 
 ## Validation And Checkpoint Policy
 
