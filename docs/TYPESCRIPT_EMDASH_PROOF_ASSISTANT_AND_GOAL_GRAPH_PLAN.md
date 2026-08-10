@@ -28,9 +28,10 @@ TypeScript gates; the bounded obvious-proof audit and its first exact/one-step-
 apply provider are complete and final-green through focused, browser, packed-
 package, and required full-TypeScript gates; later index
 enrichment and library rows remain dependency-gated; the semantic-diff/proof-
-impact audit is complete and its first two-revision reporting contract is
-frozen for implementation; repair candidates, external automation, and the
-general goal-graph rows remain later boundaries
+impact audit and its first two-revision report are complete and final-green
+through focused, browser, packed-package, and required full-TypeScript gates;
+replay diagnostics and repair candidates are now the next audit boundary;
+external automation and the general goal-graph rows remain later boundaries
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -65,7 +66,8 @@ index contract checkpoint is `de3518b`, its semantic checkpoint is
 `fd371e4`, and its synchronized clean published ledger checkpoint is
 `c88774c`. The obvious-proof contract checkpoint is `c69aa35` and its
 semantic checkpoint is `da4b63f`; its synchronized clean published ledger
-checkpoint is `b57d205`.
+checkpoint is `b57d205`. The semantic-development-diff contract checkpoint is
+`ca67f68` and its semantic checkpoint is `bed3a9d`.
 
 Depends-On:
 
@@ -546,8 +548,8 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `INDEX-SEARCH-6B` | Proof-export, relationship/use enrichment, and optional ranking | deferred | theorem-export interface plus exact class/instance/coercion and use owners; one measured retrieval corpus before embeddings |
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | gated | existing generated-owner/stress decisions, exact product profile, public base-package trust boundary |
-| `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | in progress | canonical source snapshots, checked declaration workspaces, existing module invalidation, and frozen corpus/trace contract below |
-| `REFACTOR-9B` | Replay diagnostics and proof-repair candidate patches | deferred | measured 9A consumer, exact failing-proof diagnostic contract, and patch-provider preconditions |
+| `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
+| `REFACTOR-9B` | Replay diagnostics and proof-repair candidate patches | in progress | measured 9A consumer; audit exact failing-proof diagnostic classes and patch-provider preconditions before implementation |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | pending | one executable consumer and explicit evidence labeling |
 | `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | pending | one concrete solver/certificate consumer and independent checker |
 | `AGENT-EVAL-12` | Reproducible proof-agent benchmark harness | pending | catalog, plans, index, and at least one bounded provider |
@@ -2920,10 +2922,10 @@ tag, checker/refiner/conversion rule, parser, host adapter, filesystem/network
 access, hashing, backend emission, or Lambdapi dependency was added.
 
 `STDLIB-8` remains gated by its recorded product/library trust prerequisites.
-The next numerical dependency-ready audit is `REFACTOR-9`: freeze a minimal
-two-revision corpus and exact semantic-diff/dependency-impact boundary before
-implementing repair proposals. `AGENT-EVAL-12` has gained its required first
-bounded provider but remains later in ledger order.
+At this checkpoint the next numerical dependency-ready audit was
+`REFACTOR-9`; its exact two-revision 9A boundary is now complete below.
+`AGENT-EVAL-12` has gained its required first bounded provider but remains
+later in ledger order.
 
 ## REFACTOR-9 Audit And Frozen 9A Contract
 
@@ -3079,6 +3081,124 @@ the completed tranche changes a shared public barrel or test runner and root
 SOP still makes omission a checkpoint blocker; it is never run iteratively.
 `check:all`, kernel/Lambdapi, print/book, npm/release, deployment, and sibling
 repositories remain out of scope.
+
+## REFACTOR-9A Completion Record
+
+Date: 2026-08-10
+
+Result: accepted at semantic checkpoint `bed3a9d` after frozen contract
+checkpoint `ca67f68`.
+
+The new browser-safe `src/v3_2/lf_development_diff.ts` implements one exact
+two-revision maintenance report over canonical proof-development source:
+
+- `compareCoreLfProofDevelopmentSources` reconstructs both sources through
+  the existing canonical owner and compiles both declaration workspaces, but
+  deliberately does not compile either proof development;
+- the report embeds the existing unmodified conservative module invalidation,
+  then diffs declaration interfaces by exact qualified identity and exact
+  order, visibility, policy, status, link, checked-type, and checked-body
+  fields. An unmatched name remains an addition or removal; no rename or move
+  is guessed;
+- one shared finite node budget covers structural traversal of every checked
+  declaration type/body, proof theorem type, and expression-bearing plan
+  field. Free Core names and semantic owners resolve only through exact
+  revision-local linkage; unresolved or ambiguous references remain explicit;
+- previous, current, and union declaration-dependency graphs record exact
+  direct edges. Changed/added/removed seeds expose proper direct and
+  transitive reverse impact without narrowing module invalidation;
+- proof source is diffed by stable module/declaration identity and full
+  canonical type, plan, provenance, and fingerprint data. An otherwise
+  unchanged proof is reusable only when both exact root closures, structural
+  dependencies, and reference resolutions remain reusable under the frozen
+  policy; otherwise it is `recheck-required` with structured module,
+  declaration, or reference reasons; and
+- the deeply frozen portable report records exact revisions, orders, counts,
+  budget consumption, dependency evidence, and
+  `repairPolicy: 'repair-not-proposed'`. Its canonical serializer retains no
+  checker, compiled workspace, map, callback, raw Core object, session, Git
+  path/commit, or process-local identity.
+
+The standalone two-module fixture changes one transparent `Alias` body from
+`Q` to `R` while `witness : Alias` and the proof source `Q` by exact
+`witness` remain unchanged. The old proof checks; the current declaration
+workspace checks; the current proof does not; and the semantic diff still
+completes with exact transitive `Alias` impact and a recheck classification.
+An independent module/proof remains reusable. Additional cases establish
+proper direct versus transitive declaration impact, add/remove without rename
+inference, all four proof-source field diffs, added/removed proof identities,
+unresolved source evidence, canonical byte stability under input permutation,
+deep freezing, unsafe/expired visit budgets, cyclic malformed source,
+unknown proof roots, and a separately structured current declaration-
+compilation failure.
+
+The contributor and curated browser-safe workspace entries export the new
+profile, report, comparator, and serializer. The narrow core-only package
+entry remains unchanged. The static capability family advances once to v12
+with `semantic-development-diff`; the root/package READMEs and packed ESM,
+CJS, strict-TypeScript, and browser consumers cover the additive boundary.
+
+Final validation on 2026-08-10:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_lf_development_diff_tests.ts
+  passed: 6/6 tests, 1 suite
+
+node --require ts-node/register --test \
+  tests/v3_2_lf_development_diff_tests.ts \
+  tests/v3_2_lf_workspace_tests.ts \
+  tests/v3_2_lf_workspace_proof_tests.ts \
+  tests/v3_2_lf_premise_index_tests.ts \
+  tests/v3_2_proof_plan_tests.ts
+  passed: 47/47 tests, 7 suites
+
+node --require ts-node/register --test \
+  tests/v3_2_lf_development_diff_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts \
+  tests/v3_2_browser_directed_tests.ts
+  passed: 38/38 tests, 5 suites
+
+./scripts/pnpmw run typecheck
+  passed
+
+eslint over every changed TypeScript/JavaScript file
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1
+
+./scripts/pnpmw run package:check
+  passed: build plus installed ESM, CJS, strict-TypeScript, and browser bundle
+
+./scripts/pnpmw run check:ts
+  passed: 1639 tests, 248 suites; 1585 pass, 54 skip, 0 fail
+  duration: 1588072 ms (about 26 minutes 28 seconds)
+
+git diff --cached --check
+  passed before semantic checkpoint bed3a9d
+```
+
+The complete `check:ts` ran exactly once on the settled public diff, after all
+focused/static/browser/packed gates were green, because the shared public
+barrels and root test runner made omission an exact checkpoint blocker under
+root SOP. It is not a precedent for iterative or reassurance reruns. No
+`check:all`, kernel/Lambdapi, print/book, npm publication, GitHub Release,
+deployment, or sibling-repository operation ran.
+
+Non-effects: no proof repair or candidate patch, proof replay inside the
+report, incremental compiler/cache, theorem export, rename heuristic,
+similarity search, process-global registry, server, command, parser, I/O,
+hashing, backend emission, Core/plan tag, proof/source/artifact revision,
+checker/refiner/conversion rule, class/instance/simplifier coupling, or
+mathematical presheaf/site/sheafification/scheme development changed.
+
+`REFACTOR-9B` is now the next bounded audit. It must first classify actual
+current replay outcomes and freeze exact diagnostic/precondition ownership;
+only then may it decide whether a local provider, including the existing
+obvious-proof provider, can return an ordinary stale-safe proof-plan patch.
+The 9A report itself remains impact evidence and never becomes a repair or
+acceptance oracle.
 
 ## Decision Ledger
 
@@ -3255,10 +3375,11 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from the completed `OBVIOUS-PROOF-7` semantic checkpoint `da4b63f`
-> and its synchronized ledger checkpoint `b57d205`. Implement the frozen
-> `REFACTOR-9A` exact two-revision semantic-diff/dependency-impact contract
-> next unless current implementation evidence forces a recorded correction.
+> Start from the completed `REFACTOR-9A` semantic checkpoint `bed3a9d` and
+> its immediately following synchronized completion ledger. Audit
+> `REFACTOR-9B` replay diagnostics and proof-repair patch preconditions next;
+> do not implement repair until that bounded contract is frozen unless
+> current implementation evidence forces a recorded correction.
 > Continue through curated-library gates, proof maintenance,
 > external certificates, and agent evaluation in the dependency order
 > maintained by the living ledger. Begin `GOAL-GRAPH-14A`
