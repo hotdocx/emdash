@@ -97,9 +97,11 @@ root-local boundary to 5/8/0/6 and is separately approved under delegated
 unattended authority with human supersession at review checkpoint `880593e`;
 however, head-only execution cannot compose nested line 5481 with outer line
 9177. That evidence supersedes v3 implementation authority. Corrected non-
-authorizing proposal v4 adds only their subject-checked weak-head fusion,
-changes the root-local boundary to 5/9/0/6, and awaits checkpoint plus separate
-review; implementation is paused. No PathOut/PathInd public package export has
+authorizing proposal v4 at checkpoint `f4101e2` adds only their subject-checked
+weak-head fusion and changes the root-local boundary to 5/9/0/6. Its separate
+immutable review approves only that checkpoint under delegated unattended
+authority with human supersession; the review checkpoint is pending, so
+implementation remains paused. No PathOut/PathInd public package export has
 yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
@@ -5760,7 +5762,18 @@ backtracking evidence but no longer authorize implementation.
 Proposal v4 is immutable, root-only, non-authorizing, and absent from public
 barrels. Root typecheck, focused lint, six focused tests, and diff hygiene
 pass; no Lambdapi or long aggregate was run for this evidence-only correction.
-Implementation remains paused until v4 has its checkpoint and separate review.
+Proposal checkpoint `f4101e2` freezes those bytes.
+
+The separate immutable v4 review approves only checkpoint `f4101e2` under the
+user's standing unattended delegation, with later human supersession. It
+authorizes exactly the root-only 5/9/0/6 implementation: exact active Fibre
+signatures, lines 7865 and 9177, and one subject-checked weak-head fusion
+derived from active lines 5481 and 9177. It does not authorize generic nested
+normalization, a checker/signature/body/owner change, later 1D/1E/1F work,
+public exports, active Lambdapi changes, integration, or release. Proposal and
+review pass eleven focused tests in two suites with root typecheck, focused
+lint, and diff hygiene. Implementation remains paused until this review has
+its own rollback-safe checkpoint.
 
 ## Decision Ledger
 
@@ -5897,6 +5910,7 @@ Implementation remains paused until v4 has its checkpoint and separate review.
 | `D-PA-129` | Supersede the v2 PathInd review and correct proposal v3 to 5/8/0/6 with active displayed-functor object projection line 9177. | With exact source signatures restored, line 7865 admits the first two FibCov projections, while the third reaches the active `Obj(Functord_cat)` versus `Transf` presentation boundary. The predecessor owns both classifiers and the `Transf` delta but omits line 9177; importing exactly that bridge is narrower than changing signatures, the checker, or declarations. V2 remains backtracking evidence, and v3 still requires its own checkpoint and review. |
 | `D-PA-130` | Approve only checkpointed corrected PathInd proposal v3 under delegated unattended authority, with human supersession. | Proposal checkpoint `bfe09e3` preserves the exact active signatures and 5/8/0/6 correction, adding only line 9177 beyond v2 while retaining the completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `880593e` restores local implementation authority without making the proposal self-authorizing. |
 | `D-PA-131` | Supersede the v3 PathInd review and correct proposal v4 to 5/9/0/6 with one subject-checked weak-head fusion of active lines 5481 and 9177. | Line 9177 is registered but cannot match until nested line 5481 has reduced inside its outer `Obj`; the runtime deliberately matches only the current head. The derived `Obj(Hom_cat(Catd_cat,…))` fusion compiles the same active reduction path without adding mathematics, a checker branch, nested normalization, or a signature substitute. V3 remains backtracking evidence, and v4 still requires its own checkpoint and review. |
+| `D-PA-132` | Approve only checkpointed corrected PathInd proposal v4 under delegated unattended authority, with human supersession. | Proposal checkpoint `f4101e2` preserves the exact 5/9/0/6 weak-head execution closure, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review restores local implementation authority without making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
