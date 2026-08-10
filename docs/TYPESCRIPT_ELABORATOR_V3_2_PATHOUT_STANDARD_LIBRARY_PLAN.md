@@ -3,10 +3,11 @@
 Status: active selected standard-library continuation under
 `TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is complete and the
 v2 `PATHOUT-LIBRARY-FOUNDATION-1B0` review is superseded by measured
-counterevidence; non-authorizing proposal v3 selects the reviewed direct-
-mixed-source-action predecessor and awaits its own separate review before
-root-only `PATHOUT-LIBRARY-FOUNDATION-1B` resumes; no PathOut semantic or
-public export is yet implemented
+counterevidence; checkpointed proposal v3 selects the reviewed direct-mixed-
+source-action predecessor and is separately approved under delegated
+unattended authority with human supersession; root-only
+`PATHOUT-LIBRARY-FOUNDATION-1B` may resume, and no PathOut semantic or public
+export is yet implemented
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -166,8 +167,8 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v3 proposed; separate review pending | completed corrected 0A; superseded v1/v2 | Measured checking showed that mixed action lacks the active opposite-Hom endpoint rule needed by `Rep_transport_func`. Proposal v3 keeps the local 3/5/1/9 delta but selects the already-reviewed direct-mixed-source-action descendant. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | paused pending corrected-v3 review | separately reviewed v3 proposal | Resume the existing root-only implementation only after v3 is checkpointed and separately approved; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v3 separately reviewed | completed corrected 0A; superseded v1/v2 | Measured checking showed that mixed action lacks the active opposite-Hom endpoint rule needed by `Rep_transport_func`. Checkpointed v3 keeps the local 3/5/1/9 delta, selects the reviewed direct-mixed-source-action descendant, and is approved under delegated unattended authority with human supersession. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | implementation authorized; resume existing work | separately reviewed v3 proposal | Resume exactly the root-only implementation over corrected predecessor; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -510,10 +511,11 @@ nine transparent definitions, with the same seven positives, eight
 negatives, six oracle assertions, sealing contract, and non-effects.
 
 The former v2 review is explicitly marked superseded and cannot authorize
-further implementation. Proposal v3 remains non-self-authorizing until its
-own checkpoint is named and a later separate immutable review approves that
-exact checkpoint under the user's standing unattended delegation or a human
-decision.
+further implementation. Non-authorizing proposal v3 is checkpointed at
+`640d5ec`. Its separate immutable review approves only that exact checkpoint
+under the user's standing unattended delegation, retains later human
+supersession, and preserves every v3 denial. The review itself authorizes no
+push, merge, publication, deployment, or cleanup.
 
 Proportional correction validation on 2026-08-10 is:
 
@@ -542,6 +544,13 @@ the active source is unchanged; it remains implementation evidence, not
 evidence that the incomplete TypeScript predecessor was sufficient. No long
 aggregate was run, because focused type/lint/data gates directly cover this
 behavior-free correction and omission does not block the required checkpoint.
+
+The separate v3 review is
+[`src/v3_2/pathout_foundation_review.ts`](../src/v3_2/pathout_foundation_review.ts).
+Its focused tests retain both superseded checkpoints, exact v3 recommendation,
+3/5/1/9 counts, corrected predecessor, human supersession, root-only status,
+and every later-layer denial. `PATHOUT-LIBRARY-FOUNDATION-1B` may therefore
+resume only on the current proof branch and only within that exact boundary.
 
 ## Required Evidence For Implementation
 

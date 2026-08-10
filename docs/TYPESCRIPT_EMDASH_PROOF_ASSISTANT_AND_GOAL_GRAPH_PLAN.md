@@ -5506,7 +5506,12 @@ profile contains both the required already-active opposite-Hom rule and one
 already-reviewed source-action projection; neither is duplicated or counted
 as a new PathOut rule. The former v2 review is explicitly superseded and
 implementation is paused until v3 has its own rollback-safe proposal
-checkpoint and separate immutable review.
+checkpoint and separate immutable review. Proposal v3 is now checkpointed at
+`640d5ec` and separately approved under the user's standing unattended
+delegation with human supersession. The review authorizes resuming only the
+root-only local 3/5/1/9 implementation; it denies every later mathematical,
+checker, presentation, package, active-Lambdapi, external-integration, and
+release effect already denied by v3.
 
 ## Decision Ledger
 
@@ -5622,6 +5627,7 @@ checkpoint and separate immutable review.
 | `D-PA-108` | Reject the v1 `1B0` predecessor during independent review and correct v2 to reuse the mixed-action descendant. | `hom_int` is present in the higher-foundation profile, but its `hom_` result owner and the two object projections needed for representable fibre computation are installed only by mixed action. Reusing that reviewed descendant avoids both an invalid environment and a duplicate extracted mini-profile. |
 | `D-PA-109` | Approve only corrected `1B0` proposal v2 under delegated unattended authority, with human supersession. | The predecessor objection is resolved, the exact 3/5/1/9 scope is immutable and non-public, all later layers remain denied, and separate review preserves proposal non-self-authorization before implementation. |
 | `D-PA-110` | Supersede the v2 PathOut-foundation review and correct proposal v3 to the direct-mixed-source-action predecessor without changing the local 3/5/1/9 delta. | Focused checking of `Rep_transport_func` exposed `Z` versus `Op_cat Z`; the exact active opposite-Hom endpoint reduction is already present only in the reviewed descendant. Reusing that predecessor is narrower and more faithful than adding a sixth local rule or widening the checker. |
+| `D-PA-111` | Approve only checkpointed PathOut-foundation proposal v3 under delegated unattended authority, with human supersession. | Checkpoint `640d5ec` preserves the measured predecessor correction, exact local 3/5/1/9 delta, root-only qualification, and all v3 denials; separate review restores implementation authority without reviving v2 or making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 

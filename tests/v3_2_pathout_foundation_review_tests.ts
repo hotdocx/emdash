@@ -1,5 +1,5 @@
 /**
- * Focused supersession tests for the corrected PathOut foundation proposal.
+ * Focused delegated review tests for corrected PathOut foundation proposal.
  */
 
 import assert from 'node:assert/strict';
@@ -44,8 +44,8 @@ const assertReviewError = (
     );
 };
 
-describe('PATHOUT-LIBRARY-FOUNDATION-1B0 review supersession', () => {
-    it('withdraws corrected v2 after the measured predecessor gap', () => {
+describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated v3 review', () => {
+    it('approves only checkpointed v3 with human supersession', () => {
         const approval = CORE_PATHOUT_FOUNDATION_1B0_REVIEW.approval;
         assert.deepEqual(
             [
@@ -54,15 +54,16 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 review supersession', () => {
                 approval.rejectedProposalCheckpoint,
                 approval.supersededProposalCheckpoint,
                 approval.supersededReviewCheckpoint,
+                approval.approvedProposalCheckpoint,
                 approval.humanDecisionSupersedes
             ],
             [
-                'corrected-proposal-v2-superseded-after-measured-' +
-                    'predecessor-gap',
-                'measured-implementation-forward-correction',
+                'corrected-proposal-v3-approved-as-proposed',
+                'user-delegated-unattended-approval',
                 'dd69325',
                 'b3d6d71',
                 '38ef8ae',
+                '640d5ec',
                 true
             ]
         );
@@ -85,7 +86,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 review supersession', () => {
         );
     });
 
-    it('freezes 3/5/1/9 but does not authorize implementation', () => {
+    it('authorizes exact root-only 3/5/1/9 over corrected predecessor',
+        () => {
         const authorization =
             CORE_PATHOUT_FOUNDATION_1B0_REVIEW.authorization;
         assert.deepEqual(
@@ -105,7 +107,7 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 review supersession', () => {
                 1,
                 9,
                 'compileCoreCategoricalDirectMixedSourceActionTransfer',
-                false
+                true
             ]
         );
     });
@@ -138,8 +140,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 review supersession', () => {
         assertReviewError(
             review => {
                 (review.approval as {
-                    replacementProposalCheckpoint: string;
-                }).replacementProposalCheckpoint = 'wrong';
+                    approvedProposalCheckpoint: string;
+                }).approvedProposalCheckpoint = 'wrong';
             },
             'PATHOUT_FOUNDATION_REVIEW_DECISION_DRIFT'
         );
