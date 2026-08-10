@@ -12,8 +12,11 @@ audit found no further dependency-ready local row and records exact consumer,
 semantic-profile, publication, and authorization prerequisites for every
 remaining item; PACKAGE-12B2 executed one protected hosted attempt whose
 package build was green but whose registry PUT was refused by npm's 2FA/token
-policy, and is now gated on suitable interactive npm authority; HOSTED-13
-remains gated on a verified public package and trust boundary
+policy; exact attempt 2 then published and verified `@hotdocx/emdash@0.1.0`
+with provenance after the user supplied a suitable bootstrap credential. The
+GitHub secret is removed and the stable workflow remains token-free;
+interactive trusted-publisher/token hardening is still awaiting direct npm
+password/2FA confirmation, so HOSTED-13 remains gated on that trust boundary
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -541,7 +544,7 @@ discipline important, but they are not a prerequisite for this qualification.
 | STDLIB-11 | deferred behind exact semantic/profile and package prerequisites | Select and approve the first active curated artifact profile before packaging it; resolve the recorded generated-owner/stress-profile decisions, choose a source- and digest-pinned corpus, and establish the public base-package trust boundary before a separate stdlib release. |
 | PACKAGE-12A | complete | The local publishable `@hotdocx/emdash@0.1.0` package now has strict root/authoring/workspace exports, dual browser-safe JavaScript, complete declarations/maps, and a packed-install consumer. No registry mutation occurred. |
 | PACKAGE-12B1 | complete | A token-free two-job GitHub Release workflow now builds and verifies one exact tarball before protected OIDC publication; deterministic release preflight freezes tag/version/repository/package invariants. All local checks are green and no GitHub or npm mutation occurred. |
-| PACKAGE-12B2 | external npm-authentication gate after one safe attempt | GitHub Release/tag `emdash-v0.1.0` and run `31391224891` retain a fully green exact build/artifact handoff, but npm rejected the final PUT because the supplied granular token does not bypass 2FA. Registry remains absent; bootstrap secret/fallback are removed. Retry that exact run only after attended npm 2FA plus a dedicated suitable bootstrap credential. |
+| PACKAGE-12B2 | public package verified; interactive trust hardening in progress | Attempt 2 of immutable run `31391224891` published exact `@hotdocx/emdash@0.1.0`; registry identity, digests, SLSA provenance, inventory, and four installed consumers are verified. GitHub carries no bootstrap secret and stable `main` is token-free. Complete the already prepared trusted-publisher/password/2FA confirmation, require 2FA while disallowing bypass tokens, revoke the dedicated bootstrap token, and record `npm trust list`. |
 | HOSTED-13 | gated | Add compatible GetPaidX template/API adapters and Arrowgram consumption only after the required package version is public and its npm trust boundary is recorded. |
 
 Only one row is implemented at a time. A later row may be repartitioned by a
@@ -2744,6 +2747,92 @@ granular token cannot use the npm trust/profile endpoints. PACKAGE-12B2 and
 HOSTED-13 therefore remain explicitly gated rather than retaining a secret or
 weakening the release policy.
 
+## PACKAGE-12B2 Successful Retry And Public Verification Record
+
+Date: 2026-08-10
+
+Result: `@hotdocx/emdash@0.1.0` is public and independently installable; the
+bootstrap secret is removed and interactive npm trust hardening is the only
+unfinished PACKAGE-12B2 substep.
+
+The user replaced the ignored credential with a newly created bypass-2FA key
+for this bootstrap and directly continued the goal. A no-echo preflight
+validated its npm token shape, `hotdocx` identity, and registry connectivity.
+Every worktree was clean except the two already known unrelated sibling
+review-plan files, all release/goal/main refs matched their remotes, the
+annotated tag still resolved to `501a5f6`, the tag's workflow retained exactly
+one version-locked `NPM_BOOTSTRAP_TOKEN` fallback, and stable public `main`
+remained token-free.
+
+The credential was copied into only the protected `npm-release` environment
+secret and exact failed run `31391224891` was rerun without creating another
+tag, version, Release, artifact, or workflow definition. Attempt 2 build job
+`93478007418` passed every checkout, release-identity, frozen-install,
+workspace/typecheck/release-preflight, package-build, exact pack/install, and
+artifact-upload step. Only then was the matching protected deployment
+approved. Publish job `93478194892` verified the same artifact and completed
+successfully at 2026-08-10T14:00:47Z with
+`+ @hotdocx/emdash@0.1.0`.
+
+The environment secret was deleted immediately after success; GitHub now
+lists no secret in `npm-release`. Stable public `main` already contained
+checkpoint `735546d`, whose workflow has no bootstrap-token or
+`NODE_AUTH_TOKEN` surface. No local publish, alternate bytes, force operation,
+tag/Release replacement, sibling edit, or registry rollback occurred.
+
+Public verification establishes:
+
+- package `@hotdocx/emdash`, version and `latest` tag `0.1.0`, public access,
+  maintainer `hotdocx`, repository `hotdocx/emdash`, license `ISC`, Node
+  `>=20`, zero dependencies, and exactly one version;
+- npm shasum `45547ab13753c35b1b1ea64087162cd26c40d1df`, integrity
+  `sha512-A3RgfcXDg2WuCAHQaeTjUTp1MmHUIMq1rjRtUQ8kKPoLSgGTMGaJysQ9wkNVmqxCJwua9h7zGDq2CKaZPBcvxQ==`,
+  and independently streamed SHA-256
+  `44ae167a660fab9189e660aee1f0d41a07dc3ff6e8c3f4455c94f25f1a8fbcaf`,
+  exactly matching the qualified GitHub artifact;
+- 118 files, 1,730,279 packed bytes, and 10,069,462 unpacked bytes, with the
+  expected root, `./authoring`, `./workspace`, and `./package.json` exports;
+- a public SLSA v1 provenance attestation, npm signature, GitHub attempt-2
+  source/build links to `501a5f6` and `npm-publish.yml`, and Sigstore
+  transparency-log index `2408550173`; and
+- installation of the npm-downloaded tarball followed by successful ESM,
+  CommonJS, strict NodeNext TypeScript, and browser-bundle consumers through
+  the existing exact packed-install verifier.
+
+The first registry probes immediately after the successful PUT returned
+`E404` during propagation. Later direct public metadata and tarball requests
+returned `200`; npmjs.com displayed the public version, maintainer, README,
+provenance, source commit, build workflow, and transparency entry. The
+transient negative reads are retained as timing evidence rather than treated
+as a second failed publication.
+
+Trusted-publisher configuration was prepared in the authenticated npm package
+settings with exact GitHub organization `hotdocx`, repository `emdash`,
+workflow filename `npm-publish.yml`, environment `npm-release`, publish
+allowed, and staged publishing disallowed. Submission reached npm's account
+password confirmation. The agent did not inspect or enter a password or 2FA
+code. Until the human completes that direct authentication, the package still
+allows either 2FA or a bypass-2FA granular token; the dedicated bootstrap key
+therefore remains available only for this unfinished hardening step and is not
+claimed revoked.
+
+The exact completion sequence is now:
+
+1. the human enters the npm password and any 2FA challenge directly in the
+   preserved browser handoff, completing the already filled trusted-publisher
+   form;
+2. verify the saved trust fields and publish-only permission through package
+   settings and npm 11.19.0 `npm trust list`;
+3. select “Require two-factor authentication and disallow bypass 2fa tokens,”
+   save the package setting, and verify it visibly; and
+4. delete/revoke the newly created bootstrap token, remove its ignored local
+   value without printing it, and reverify that GitHub contains no bootstrap
+   secret and stable workflow/main remain token-free.
+
+No long TypeScript, repository, kernel, print, book, or sibling aggregate ran.
+The hosted release jobs and public installed-consumer verifier are the exact
+release gates; rerunning unrelated aggregates would add no relevant evidence.
+
 ## PARAM-ROLES-10 Consumer Audit And 10A Frozen Contract
 
 The post-PACKAGE-12B1 audit revisited the earlier consumer gate against the
@@ -3298,6 +3387,8 @@ required.
 | C-067 | Activate PACKAGE-12B2 only for exact first version `0.1.0` under the user's direct cross-repository publication/DevOps authorization. | The live registry/repository audit satisfies the frozen external gate, while a version-locked hosted fallback preserves provenance and prevents the bootstrap credential from becoming a general release mechanism. |
 | C-068 | Remove the GitHub bootstrap secret and fallback even if interactive npm trust hardening remains blocked; never revoke a possibly shared ignored credential implicitly. | Hosted long-lived authority must not outlive the first publish, while destructive revocation of a user credential with possible sibling/package consumers requires separate exact authority. |
 | C-069 | Preserve the failed `emdash-v0.1.0` Release/run and retry that exact immutable workflow only with a dedicated bypass-2FA bootstrap credential. | The package artifact/build is already qualified and npm rejected only credential policy; a replacement tag/version or local publish would discard provenance evidence without solving the authority defect. |
+| C-070 | Accept attempt 2 of run `31391224891` as the sole first publication after exact public metadata, digest, provenance, inventory, and installed-consumer verification. | The rerun reused the immutable tag and byte-identical qualified tarball, while independent registry checks now prove the public artifact rather than relying only on the workflow's success conclusion. |
+| C-071 | Keep HOSTED-13 gated until the prepared trusted-publisher form, restrictive token policy, and dedicated bootstrap-token revocation are all directly verified. | A public package satisfies the distribution prerequisite but does not by itself establish the intended long-term OIDC trust boundary or remove residual account publication authority. |
 
 ## Validation And Checkpoint Policy
 
