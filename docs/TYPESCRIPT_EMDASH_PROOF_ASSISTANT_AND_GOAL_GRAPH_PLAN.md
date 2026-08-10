@@ -22,9 +22,11 @@ computation; its bounded proof-checker conversion prerequisite is implemented
 and final-proportional-green; the first proof-producing simplifier is
 implemented and final-green through its focused, browser, packed-package, and
 required full-TypeScript gates; the accessible-premise index/search audit is
-complete and its first exact source-visible contract is frozen for
-implementation; later index enrichment, library, external-automation, and
-general goal-graph rows remain dependency-gated
+complete and its first exact source-visible index is implemented and
+final-green through focused, browser, packed-package, and required full-
+TypeScript gates; bounded obvious-proof search is next; later index
+enrichment, library, external-automation, and general goal-graph rows remain
+dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -54,7 +56,9 @@ The proof-checker conversion audit checkpoint is `3c102ec` and its semantic
 checkpoint is `7c9d8f7`; its synchronized ledger checkpoint and current clean
 published predecessor tip are `74e6de8`. The proof-simplifier contract
 checkpoint is `c08c622`, its semantic checkpoint is `828b8ff`, and its
-synchronized clean published checkpoint is `b5e974a`.
+synchronized clean published checkpoint is `b5e974a`. The accessible-premise
+index contract checkpoint is `de3518b` and its semantic checkpoint is
+`fd371e4`.
 
 Depends-On:
 
@@ -531,7 +535,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `SIMP-5B0` | Proof-checker bounded beta/conversion prerequisite | complete | `7c9d8f7`; exact LF environment, beta/delta transport replay, lambda-callee inference still closed; focused/browser/packed/full-TypeScript gates green |
 | `SIMP-5B1` | Deterministic unconditional proof-producing simplifier | complete | `828b8ff`; checked global equality evidence, backward transport, stable continuation hole, focused/browser/packed/full-TypeScript gates green |
 | `SIMP-5B2` | Conditional/local/under-binder simplification extensions | deferred | concrete 5B1 consumer plus congruence and premise-discharge contract |
-| `INDEX-SEARCH-6A` | Exact source-visible premise index and symbolic search | in progress | frozen contract below; exact closure, visibility, determinism, browser, and package gates |
+| `INDEX-SEARCH-6A` | Exact source-visible premise index and symbolic search | complete | `fd371e4`; exact closure, visibility, determinism, browser, packed-package, and full-TypeScript gates green |
 | `INDEX-SEARCH-6B` | Proof-export, relationship/use enrichment, and optional ranking | deferred | theorem-export interface plus exact class/instance/coercion and use owners; one measured retrieval corpus before embeddings |
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | pending | plan patches, `INDEX-SEARCH-6A`, and budget/trace contract |
 | `STDLIB-8` | Curated public library profile | gated | existing generated-owner/stress decisions, exact product profile, public base-package trust boundary |
@@ -2534,6 +2538,112 @@ descriptions, corpus evaluation, and optional ranking only after their data
 owners and version/fingerprint effects are frozen. `OBVIOUS-PROOF-7` may use
 the completed 6A exact result set without waiting for those enrichments.
 
+## INDEX-SEARCH-6A Completion Record
+
+Date: 2026-08-10
+
+Result: accepted at semantic checkpoint `fd371e4` after the frozen contract
+checkpoint `de3518b`.
+
+The new browser-safe `src/v3_2/lf_premise_index.ts` implements the frozen
+scope without changing the checker or declaration language:
+
+- `createCoreLfAccessiblePremiseIndex` derives and recompiles the exact
+  selected closure from an empty declaration environment, compares canonical
+  source and interface text against the supplied compiled workspace, and
+  rejects unknown roots or drift before indexing;
+- `CoreLfCompiledPremiseIndex` retains the exact checked types and
+  reconstructed closure only as process-local executable data, resolves exact
+  qualified symbols, and fingerprints supplied target types in that same
+  environment;
+- the portable snapshot contains only the root's non-excluded local
+  declarations and non-excluded public declarations of explicit direct
+  dependency modules, while its module provenance still identifies the exact
+  transitive closure needed to reconstruct checking and normalization;
+- each entry records exact symbol, source order, local/direct-public scope
+  reason, visibility, selected policy, compiled status, exact linkage,
+  canonical Core type, sorted structural node/owner/free-reference evidence,
+  and bounded normalized conclusion-head evidence;
+- Pi binders are stripped before head comparison, and combined beta/delta
+  weak-head normalization uses the exact closure with independent explicit
+  visit and reduction bounds. Exhaustion remains visible and does not become a
+  false normalized match;
+- `searchCoreLfAccessiblePremises` supports all, exact-ID, supplied-target
+  conclusion head, semantic-owner occurrence, free-reference occurrence, and
+  Core-node occurrence queries. Exact qualified-ID order, total match count,
+  result bound, truncation, and structured scope reasons are retained without
+  scoring or mutable state; and
+- canonical index and search serializers contain no checker, environment,
+  session, meta identity, callback, body, filesystem path acquisition, or
+  computed-hash authority.
+
+The independent four-module fixture contains a transitive provider, a direct
+provider with public/protected/private declarations and a transparent alias,
+an unrelated lexically earlier module, and a root with public/private/excluded
+locals. Its seven cases establish exact source eligibility, closure-only
+isolation, input-permutation byte stability, Pi stripping, beta and delta head
+normalization, exact structural searches, exact-ID hit/miss, deterministic
+truncation, explicit zero-step exhaustion, independent budget rejection, deep
+portable freezing, and source/interface drift failure. It neither imports nor
+edits the presheaf/site/sheafification/scheme development.
+
+The contributor and browser-safe workspace package entries export the
+additive API; the narrow core-only package entry is unchanged. The static
+capability family advances once to v10 and records
+`accessible-premise-index`. The package README and installed ESM, CJS,
+strict-TypeScript, and browser-bundle consumers exercise the profile and
+operations. No proof-plan, proof-state, proof source/artifact, declaration-
+workspace snapshot, command, or research-document revision changed.
+
+Final validation on 2026-08-10:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_lf_premise_index_tests.ts
+  passed: 7/7 tests, 1 suite
+
+node --require ts-node/register --test \
+  tests/v3_2_lf_premise_index_tests.ts \
+  tests/v3_2_lf_workspace_tests.ts \
+  tests/v3_2_lf_transfer_visibility_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts \
+  tests/v3_2_browser_directed_tests.ts
+  passed: 50/50 tests, 7 suites
+
+./scripts/pnpmw run typecheck
+  passed
+
+eslint over every changed TypeScript/JavaScript file
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1
+
+./scripts/pnpmw run package:check
+  passed: build plus installed ESM, CJS, strict-TypeScript, and browser bundle
+
+./scripts/pnpmw run check:ts
+  passed: 1625 tests, 245 suites; 1571 pass, 54 skip, 0 fail
+  duration: 1630267 ms (about 27 minutes 10 seconds)
+
+git diff --cached --check
+  passed before semantic checkpoint fd371e4
+```
+
+The complete `check:ts` ran exactly once, only after all focused and package
+gates were green, because both shared TypeScript public barrels and the
+workspace package boundary changed. It is not a precedent for iterative or
+reassurance reruns. No `check:all`, kernel/Lambdapi, print/book, npm
+publication, GitHub Release, deployment, or sibling-repository operation ran.
+
+Non-effects: no declaration parser, global registry, Core constructor,
+checker/refiner/conversion rule, proof-plan mutation, theorem applicability
+claim, typeclass or simplifier coupling, proof-export interface, hard proof-
+reference visibility firewall, embedding, fuzzy text search, callback,
+retained prover session, host adapter, or backend dependency was added.
+`INDEX-SEARCH-6B` remains deferred; `OBVIOUS-PROOF-7` is the next dependency-
+ready audit.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -2697,12 +2807,11 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from the completed `DEV-CLI-2B` checkpoint once recorded. Continue
-> through measured declarative proof-plan decomposition, stable goal
-> coupling, proof-producing simplification,
-> accessible-premise indexing, bounded providers, curated-library gates,
-> proof maintenance, external certificates, and agent evaluation in the
-> dependency order maintained by the living ledger. Begin `GOAL-GRAPH-14A`
+> Start from the completed `INDEX-SEARCH-6A` semantic checkpoint `fd371e4`
+> and its synchronized ledger checkpoint once recorded. Continue through
+> bounded explicit providers, curated-library gates, proof maintenance,
+> external certificates, and agent evaluation in the dependency order
+> maintained by the living ledger. Begin `GOAL-GRAPH-14A`
 > only after its proof-artifact and evidence-policy prerequisites are ready.
 > Preserve the hard distinction between a kernel-checked theorem and every
 > weaker task/observation/approval/AI evidence class.
