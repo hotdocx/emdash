@@ -27,7 +27,9 @@ The package has three deliberately bounded entries:
   does not use it. Root-scoped typed `refine` templates are management-only
   term-placeholder data which expand immediately to those `have` nodes plus
   `exact`; Pi/lambda binder annotations remain ordinary meta-free Core, and
-  no template or process-local meta enters canonical source.
+  no template or process-local meta enters canonical source. Fresh plan replay
+  separately exposes a portable direct coupling graph over stable named goals;
+  the canonical v2 proof artifact remains unchanged.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -45,6 +47,7 @@ import {
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
@@ -52,6 +55,7 @@ import {
   coreProofTemplatePlaceholder,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
+  serializeCoreProofGoalCouplingGraph,
 } from '@hotdocx/emdash/workspace';
 
 const terms = new CoreLfScopedBuilder();
@@ -63,6 +67,7 @@ void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
 void CORE_PROOF_PLAN_PROFILE;
 void CORE_PROOF_PLAN_MACRO_PROFILE;
+void CORE_PROOF_GOAL_COUPLING_PROFILE;
 void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
 void coreProofPlanConstructor;
 void coreProofPlanHave;
@@ -70,6 +75,7 @@ void coreProofPlanRefine;
 void coreProofTemplatePlaceholder;
 void createCoreLfProofDevelopment;
 void parseCoreLfProofDevelopmentSourceText;
+void serializeCoreProofGoalCouplingGraph;
 ```
 
 This package does not parse structure or class declarations, add class nodes

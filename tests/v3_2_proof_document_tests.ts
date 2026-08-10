@@ -17,6 +17,7 @@ import {
     formatCoreProofArtifact,
     serializeCoreProofArtifact,
     serializeCoreProofArtifactJsonl,
+    serializeCoreProofGoalCouplingGraph,
     serializeCoreProofDocumentProfile,
     validateCoreProofArtifactFingerprint
 } from '../src/v3_2';
@@ -55,6 +56,8 @@ describe('TypeScript v3.2 AI-PROOF-2 proof documents', () => {
             '(bound 0))'
         );
         assert.deepEqual(first.artifact.state.goals, []);
+        assert.deepEqual(first.goalGraph.nodes, []);
+        assert.deepEqual(first.goalGraph.edges, []);
         assert.equal(Object.isFrozen(first.artifact), true);
         assert.equal(Object.isFrozen(first.artifact.fingerprint), true);
         assert.equal(
@@ -83,6 +86,15 @@ describe('TypeScript v3.2 AI-PROOF-2 proof documents', () => {
         }]);
         assert.equal(first.artifact.state.goals[0].target, 'AIProofA');
         assert.match(first.artifact.state.term, /\?body\[#0\]/u);
+        assert.deepEqual(first.goalGraph.nodes, [{
+            id: 'body',
+            reachability: 'term-reachable'
+        }]);
+        assert.deepEqual(first.goalGraph.edges, []);
+        assert.equal(
+            serializeCoreProofGoalCouplingGraph(first.goalGraph),
+            serializeCoreProofGoalCouplingGraph(second.goalGraph)
+        );
 
         const serialized = serializeCoreProofArtifact(first.artifact);
         assert.equal(

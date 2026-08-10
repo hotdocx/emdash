@@ -223,6 +223,7 @@ import {
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
@@ -230,6 +231,7 @@ import {
   coreProofTemplatePlaceholder,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
+  serializeCoreProofGoalCouplingGraph,
 } from '@hotdocx/emdash/workspace';
 
 assert.equal(typeof CoreChecker, 'function');
@@ -270,6 +272,10 @@ assert.equal(
   'emdash-proof-plan-macros-v1',
 );
 assert.equal(
+  CORE_PROOF_GOAL_COUPLING_PROFILE.revision,
+  'emdash-proof-goal-coupling-v1',
+);
+assert.equal(
   CORE_PROOF_REFINE_TEMPLATE_PROFILE.revision,
   'emdash-proof-refine-template-v1',
 );
@@ -279,6 +285,7 @@ assert.equal(typeof coreProofPlanRefine, 'function');
 assert.equal(typeof coreProofTemplatePlaceholder, 'function');
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
 assert.equal(typeof parseCoreLfProofDevelopmentSourceText, 'function');
+assert.equal(typeof serializeCoreProofGoalCouplingGraph, 'function');
 `,
   );
   await writeFile(
@@ -321,6 +328,10 @@ assert.equal(
   false,
 );
 assert.equal(
+  workspace.CORE_PROOF_GOAL_COUPLING_PROFILE.addsProofStateFields,
+  false,
+);
+assert.equal(
   workspace.CORE_PROOF_REFINE_TEMPLATE_PROFILE.addsProofPlanTags,
   false,
 );
@@ -331,6 +342,10 @@ assert.equal(typeof workspace.coreProofTemplatePlaceholder, 'function');
 assert.equal(typeof workspace.createCoreLfProofDevelopment, 'function');
 assert.equal(
   typeof workspace.parseCoreLfProofDevelopmentSourceText,
+  'function',
+);
+assert.equal(
+  typeof workspace.serializeCoreProofGoalCouplingGraph,
   'function',
 );
 `,
@@ -356,6 +371,7 @@ import {
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
@@ -363,6 +379,7 @@ import {
   coreProofTemplatePlaceholder,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
+  serializeCoreProofGoalCouplingGraph,
 } from '@hotdocx/emdash/workspace';
 
 const checkerConstructor: typeof CoreChecker = CoreChecker;
@@ -382,6 +399,8 @@ const contextualHave: typeof coreProofPlanHave = coreProofPlanHave;
 const refineTemplate: typeof coreProofPlanRefine = coreProofPlanRefine;
 const placeholderBuilder: typeof coreProofTemplatePlaceholder =
   coreProofTemplatePlaceholder;
+const graphSerializer: typeof serializeCoreProofGoalCouplingGraph =
+  serializeCoreProofGoalCouplingGraph;
 void checkerConstructor;
 void builder;
 void exactSynthesizer;
@@ -392,6 +411,7 @@ void constructorMacro;
 void contextualHave;
 void refineTemplate;
 void placeholderBuilder;
+void graphSerializer;
 void maybeTerm;
 void CORE_MVP_MANIFEST;
 void CORE_LF_INSTANCE_SCOPE_PROFILE;
@@ -402,6 +422,7 @@ void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
 void CORE_PROOF_PLAN_PROFILE;
 void CORE_PROOF_PLAN_MACRO_PROFILE;
+void CORE_PROOF_GOAL_COUPLING_PROFILE;
 void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
 `,
   );
@@ -421,6 +442,7 @@ import {
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
@@ -428,6 +450,7 @@ import {
   coreProofTemplatePlaceholder,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
+  serializeCoreProofGoalCouplingGraph,
 } from '@hotdocx/emdash/workspace';
 
 globalThis.emdashPackedSmoke = {
@@ -442,6 +465,7 @@ globalThis.emdashPackedSmoke = {
   proofSourceRevision: CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision,
   proofPlanRevision: CORE_PROOF_PLAN_PROFILE.revision,
   proofPlanMacroRevision: CORE_PROOF_PLAN_MACRO_PROFILE.revision,
+  proofGoalCouplingRevision: CORE_PROOF_GOAL_COUPLING_PROFILE.revision,
   proofRefineTemplateRevision: CORE_PROOF_REFINE_TEMPLATE_PROFILE.revision,
   coreProofPlanConstructor,
   coreProofPlanHave,
@@ -449,6 +473,7 @@ globalThis.emdashPackedSmoke = {
   coreProofTemplatePlaceholder,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
+  serializeCoreProofGoalCouplingGraph,
 };
 `,
   );

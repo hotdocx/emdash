@@ -78,9 +78,11 @@ locked mounted-file verification with offline cache reuse, finite explicit-
 dictionary selection, and stable paper/diagram/proof bindings. These features
 include a checked contextual `have` whose fact stays visible as a named source
 obligation even when unused, plus root-scoped typed-term `refine` templates
-which expand to ordinary `have`/`exact` plans. They lower to backend-neutral
-explicit Core and use the TypeScript checker; they do not require a resident
-proof server, MCP round trip, or Lambdapi process.
+which expand to ordinary `have`/`exact` plans. Fresh replay also derives a
+portable direct-dependency graph over stable named open goals without changing
+the proof artifact. These features lower to backend-neutral explicit Core and
+use the TypeScript checker; they do not require a resident proof server, MCP
+round trip, or Lambdapi process.
 
 Ask the repository itself for the exact implemented and deferred envelope:
 

@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v5' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v5' as const,
+    revision: 'emdash-ai-native-capabilities-v6' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v6' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -106,8 +106,15 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 id: 'proof-refine-template',
                 revision: 'emdash-proof-refine-template-v1',
                 scope:
-                    'root-scoped typed placeholders lower to ordered ' +
+                    'root-scoped typed term placeholders lower to ordered ' +
                     'contextual have plus exact'
+            },
+            {
+                id: 'proof-goal-coupling',
+                revision: 'emdash-proof-goal-coupling-v1',
+                scope:
+                    'portable direct target and local-context dependencies ' +
+                    'between stable named open goals'
             },
             {
                 id: 'declaration-workspace',
@@ -290,7 +297,8 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 id: 'development-graph-command',
                 state: 'consumer-gated',
                 prerequisite:
-                    'the stable cross-goal coupling graph and one exact view'
+                    'DEV-CLI-2C exact Node projection over the implemented ' +
+                    'portable goal-coupling graph'
             },
             {
                 id: 'persisted-or-inline-paper-artifacts',

@@ -82,6 +82,9 @@ import {
     CORE_PROOF_REFINE_TEMPLATE_PROFILE
 } from '../src/v3_2/proof_template';
 import {
+    CORE_PROOF_GOAL_COUPLING_PROFILE
+} from '../src/v3_2/proof_goal_graph';
+import {
     CORE_LF_DECLARATION_WORKSPACE_PROFILE
 } from '../src/v3_2/lf_workspace';
 import {
@@ -468,6 +471,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assert.equal(
             revisions.get('proof-refine-template'),
             CORE_PROOF_REFINE_TEMPLATE_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('proof-goal-coupling'),
+            CORE_PROOF_GOAL_COUPLING_PROFILE.revision
         );
         assert.equal(
             revisions.get('fragment-module-workspace'),

@@ -23,6 +23,10 @@ import {
     CoreProofTactic,
     formatCoreProofExpression
 } from './proof';
+import {
+    CoreProofGoalCouplingGraph,
+    createCoreProofGoalCouplingGraph
+} from './proof_goal_graph';
 
 export const CORE_PROOF_PLAN_PROFILE = Object.freeze({
     revision: 'emdash-proof-plan-v2' as const,
@@ -497,6 +501,8 @@ export interface CoreProofPlanExecution {
     readonly term: KernelExpression;
     readonly trace: readonly CoreProofPlanTraceStep[];
     readonly snapshot: CoreProofPlanStateSnapshot;
+    /** Separate portable direct dependency graph over stable open goal IDs. */
+    readonly goalGraph: CoreProofGoalCouplingGraph;
 }
 
 interface LabeledGoal {
@@ -823,6 +829,18 @@ export function executeCoreProofPlan(
     const stableMetaNameByIndex = (index: number): string | undefined =>
         labelsByMeta.get(index)?.goalId ?? nodeNamesByMeta.get(index);
 
+    const stableGoalIdsByMetaIndex = new Map(
+        [...labelsByMeta].map(([index, label]) => [
+            index,
+            label.goalId
+        ] as const)
+    );
+    const goalGraph = createCoreProofGoalCouplingGraph(
+        refiner.session,
+        state.goals,
+        stableGoalIdsByMetaIndex
+    );
+
     const goals = Object.freeze(state.goals.map(goal => {
         const label = labelsByMeta.get(goal.identity.index)!;
         const context = Object.freeze(goal.context.telescope.map(
@@ -886,7 +904,8 @@ export function executeCoreProofPlan(
         state,
         term: state.term,
         trace: frozenTrace,
-        snapshot
+        snapshot,
+        goalGraph
     });
 }
 

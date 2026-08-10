@@ -13,7 +13,9 @@ import {
     CoreElaborationSession,
     CoreProofPlan,
     CoreProofPlanError,
+    CoreProofGoalCouplingError,
     CoreProofRefiner,
+    CORE_PROOF_GOAL_COUPLING_PROFILE,
     CORE_PROOF_PLAN_PROFILE,
     CORE_PROOF_PLAN_MACRO_PROFILE,
     KernelExpression,
@@ -24,7 +26,9 @@ import {
     coreProofPlanHave,
     coreProofPlanHole,
     coreProofPlanIntro,
+    createCoreProofGoalCouplingGraph,
     executeCoreProofPlan,
+    formatCoreProofGoalCouplingGraph,
     kernelBinder,
     kernelBound,
     kernelCall,
@@ -33,6 +37,7 @@ import {
     kernelPi,
     kernelUniverse,
     provenance,
+    serializeCoreProofGoalCouplingGraph,
     serializeCoreProofPlanState,
     sourceSpan
 } from '../src/v3_2';
@@ -86,6 +91,17 @@ const call = (
     callee,
     arguments_,
     because(line, detail)
+);
+
+const familyAt = (
+    index: KernelExpression,
+    line: number,
+    detail: string
+) => call(
+    free('plan_P', line, `${detail} family`),
+    [{ plicity: 'explicit', value: index }],
+    line,
+    detail
 );
 
 const declaration = (
@@ -190,6 +206,70 @@ const proofEnvironment = (): CoreDeclarationEnvironment => {
         ),
         8
     ));
+    environment = environment.extend(declaration(
+        'plan_contextual',
+        pi(
+            'index',
+            typeA,
+            explicitFunctorial,
+            pi(
+                'continuation',
+                pi(
+                    'evidence',
+                    familyAt(
+                        bound(0, 9, 'GOAL-COUPLING-4B context index'),
+                        9,
+                        'GOAL-COUPLING-4B context family use'
+                    ),
+                    explicitNatural,
+                    typeA,
+                    9,
+                    'GOAL-COUPLING-4B contextual evidence'
+                ),
+                explicitFunctorial,
+                typeA,
+                9,
+                'GOAL-COUPLING-4B contextual continuation'
+            ),
+            9,
+            'GOAL-COUPLING-4B contextual producer'
+        ),
+        9
+    ));
+    environment = environment.extend(declaration(
+        'plan_repeated',
+        pi(
+            'index',
+            typeA,
+            explicitFunctorial,
+            pi(
+                'witness',
+                pi(
+                    'left',
+                    familyAt(
+                        bound(0, 10, 'GOAL-COUPLING-4B repeated index type'),
+                        10,
+                        'GOAL-COUPLING-4B repeated binder family'
+                    ),
+                    explicitNatural,
+                    familyAt(
+                        bound(1, 10, 'GOAL-COUPLING-4B repeated index body'),
+                        10,
+                        'GOAL-COUPLING-4B repeated body family'
+                    ),
+                    10,
+                    'GOAL-COUPLING-4B repeated target'
+                ),
+                explicitFunctorial,
+                typeA,
+                10,
+                'GOAL-COUPLING-4B repeated witness'
+            ),
+            10,
+            'GOAL-COUPLING-4B repeated producer'
+        ),
+        10
+    ));
     return environment;
 };
 
@@ -260,6 +340,12 @@ describe('TypeScript v3.2 AI-PROOF-1 proof plans', () => {
             ['intro', 'exact']
         );
         assert.deepEqual(execution.snapshot.goals, []);
+        assert.deepEqual(execution.goalGraph, {
+            revision: 'emdash-proof-goal-coupling-graph-v1',
+            nodes: [],
+            edges: []
+        });
+        assert.equal(Object.isFrozen(execution.goalGraph), true);
         assert.match(execution.snapshot.term, /^lambda renamed/);
         assert.doesNotThrow(() => checker.check(
             session.rootContext,
@@ -626,6 +712,29 @@ describe('TypeScript v3.2 AI-PROOF-1 proof plans', () => {
             first.snapshot.term,
             'plan_k(explicit:?index[], explicit:?witness[])'
         );
+        assert.deepEqual(first.goalGraph, {
+            revision: 'emdash-proof-goal-coupling-graph-v1',
+            nodes: [
+                { id: 'index', reachability: 'term-reachable' },
+                { id: 'witness', reachability: 'term-reachable' }
+            ],
+            edges: [{
+                dependentGoalId: 'witness',
+                prerequisiteGoalId: 'index',
+                targetOccurrenceCount: 1,
+                contextOccurrenceCount: 0
+            }]
+        });
+        assert.equal(
+            CORE_PROOF_GOAL_COUPLING_PROFILE.dependencyClosure,
+            'direct'
+        );
+        assert.equal(Object.isFrozen(first.goalGraph.nodes), true);
+        assert.equal(Object.isFrozen(first.goalGraph.edges[0]), true);
+        assert.match(
+            formatCoreProofGoalCouplingGraph(first.goalGraph),
+            /Goal witness[\s\S]*requires index \[target 1; context 0\]/u
+        );
 
         const firstJson = serializeCoreProofPlanState(first.snapshot);
         const secondJson = serializeCoreProofPlanState(second.snapshot);
@@ -634,6 +743,163 @@ describe('TypeScript v3.2 AI-PROOF-1 proof plans', () => {
         assert.doesNotMatch(firstJson, /session|Symbol/);
         assert.match(firstJson, /\?indexed_application/);
         assert.equal(firstJson.endsWith('\n'), true);
+        const firstGraphJson = serializeCoreProofGoalCouplingGraph(
+            first.goalGraph
+        );
+        assert.equal(
+            firstGraphJson,
+            serializeCoreProofGoalCouplingGraph(second.goalGraph)
+        );
+        assert.doesNotMatch(firstGraphJson, /\?m\d|session|Symbol/u);
+    });
+
+    it('distinguishes independent sibling goals from dependencies', () => {
+        const { session, checker } = proofFixture();
+        const root = freshRoot(session, typeA(44), 44);
+        const plan = coreProofPlanApply(
+            free('plan_const', 45, 'GOAL-COUPLING-4B independent callee'),
+            [
+                coreProofPlanHole('left', {
+                    provenance: because(
+                        46,
+                        'GOAL-COUPLING-4B independent left'
+                    )
+                }),
+                coreProofPlanHole('right', {
+                    provenance: because(
+                        47,
+                        'GOAL-COUPLING-4B independent right'
+                    )
+                })
+            ]
+        );
+        const execution = executeCoreProofPlan(
+            new CoreProofRefiner(checker, root),
+            root.identity,
+            plan
+        );
+
+        assert.deepEqual(
+            execution.goalGraph.nodes.map(node => node.id),
+            ['left', 'right']
+        );
+        assert.deepEqual(execution.goalGraph.edges, []);
+    });
+
+    it('separates context coupling and repeated target occurrences', () => {
+        const contextualFixture = proofFixture();
+        const contextualRoot = freshRoot(
+            contextualFixture.session,
+            typeA(48),
+            48
+        );
+        const contextualPlan = coreProofPlanApply(
+            free(
+                'plan_contextual',
+                49,
+                'GOAL-COUPLING-4B contextual callee'
+            ),
+            [
+                coreProofPlanHole('context_index', {
+                    provenance: because(
+                        50,
+                        'GOAL-COUPLING-4B context index hole'
+                    )
+                }),
+                coreProofPlanIntro(
+                    coreProofPlanHole('context_body', {
+                        provenance: because(
+                            52,
+                            'GOAL-COUPLING-4B context body hole'
+                        )
+                    }),
+                    {
+                        name: 'evidence',
+                        provenance: because(
+                            51,
+                            'GOAL-COUPLING-4B context intro'
+                        )
+                    }
+                )
+            ]
+        );
+        const contextual = executeCoreProofPlan(
+            new CoreProofRefiner(
+                contextualFixture.checker,
+                contextualRoot
+            ),
+            contextualRoot.identity,
+            contextualPlan
+        );
+        assert.deepEqual(contextual.goalGraph.edges, [{
+            dependentGoalId: 'context_body',
+            prerequisiteGoalId: 'context_index',
+            targetOccurrenceCount: 0,
+            contextOccurrenceCount: 1
+        }]);
+
+        const repeatedFixture = proofFixture();
+        const repeatedRoot = freshRoot(
+            repeatedFixture.session,
+            typeA(53),
+            53
+        );
+        const repeatedPlan = coreProofPlanApply(
+            free(
+                'plan_repeated',
+                54,
+                'GOAL-COUPLING-4B repeated callee'
+            ),
+            [
+                coreProofPlanHole('repeated_index', {
+                    provenance: because(
+                        55,
+                        'GOAL-COUPLING-4B repeated index hole'
+                    )
+                }),
+                coreProofPlanHole('repeated_witness', {
+                    provenance: because(
+                        56,
+                        'GOAL-COUPLING-4B repeated witness hole'
+                    )
+                })
+            ]
+        );
+        const repeated = executeCoreProofPlan(
+            new CoreProofRefiner(repeatedFixture.checker, repeatedRoot),
+            repeatedRoot.identity,
+            repeatedPlan
+        );
+        assert.deepEqual(repeated.goalGraph.edges, [{
+            dependentGoalId: 'repeated_witness',
+            prerequisiteGoalId: 'repeated_index',
+            targetOccurrenceCount: 2,
+            contextOccurrenceCount: 0
+        }]);
+
+        assert.throws(
+            () => createCoreProofGoalCouplingGraph(
+                repeatedFixture.session,
+                repeated.state.goals,
+                new Map()
+            ),
+            (error: unknown) =>
+                error instanceof CoreProofGoalCouplingError &&
+                error.code === 'MISSING_GOAL_ID'
+        );
+        assert.throws(
+            () => createCoreProofGoalCouplingGraph(
+                repeatedFixture.session,
+                repeated.state.goals,
+                new Map(repeated.state.goals.map((goal, index) => [
+                    goal.identity.index,
+                    index === 0 ? 'not portable' : 'repeated_witness'
+                ]))
+            ),
+            (error: unknown) =>
+                error instanceof CoreProofGoalCouplingError &&
+                error.code === 'INVALID_GOAL_ID'
+        );
     });
 
     it('records an expected named goal under an introduced context', () => {

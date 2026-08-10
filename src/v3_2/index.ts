@@ -181,6 +181,7 @@ export * from './surface';
 export * from './elaborator';
 export * from './probe';
 export * from './proof';
+export * from './proof_goal_graph';
 export * from './proof_plan';
 export * from './proof_template';
 export * from './proof_document';

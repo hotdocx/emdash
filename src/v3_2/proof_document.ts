@@ -33,6 +33,9 @@ import {
     CoreProofRefiner
 } from './proof';
 import {
+    CoreProofGoalCouplingGraph
+} from './proof_goal_graph';
+import {
     CoreElaborationSession
 } from './session';
 
@@ -250,6 +253,8 @@ export interface CoreProofDocumentInput {
 
 export interface CoreProofDocumentCompilation {
     readonly artifact: CoreProofArtifact;
+    /** Portable graph derived during the same fresh replay, not artifact data. */
+    readonly goalGraph: CoreProofGoalCouplingGraph;
     /** Checked explicit Core authority, present only for a complete proof. */
     readonly checkedTerm?: KernelExpression;
 }
@@ -314,7 +319,11 @@ export function compileCoreProofDocument(
         state: execution.snapshot,
         checkedCore
     });
-    return Object.freeze({ artifact, checkedTerm });
+    return Object.freeze({
+        artifact,
+        goalGraph: execution.goalGraph,
+        checkedTerm
+    });
 }
 
 const fingerprintSerialization = (
