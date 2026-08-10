@@ -184,7 +184,7 @@ try {
     );
   }
   assert.equal(installedManifest.name, '@hotdocx/emdash');
-  assert.equal(installedManifest.version, '0.1.0');
+  assert.equal(installedManifest.version, '0.2.0');
   assert.equal(
     installedManifest.scripts,
     undefined,
@@ -234,8 +234,16 @@ import {
   CORE_PROOF_SIMPLIFIER_PROFILE,
   CORE_RESEARCH_GOAL_GRAPH_PROFILE,
   CORE_RESEARCH_GOAL_VIEW_PROFILE,
+  binderMode,
+  compileCoreLfDeclarationWorkspace,
+  compileCoreLfWorkspaceProofDocument,
+  coreLfQualifiedSymbol,
+  coreLfTransferAbsentBody,
   coreProofPlanConstructor,
+  coreProofPlanExact,
   coreProofPlanHave,
+  coreProofPlanHole,
+  coreProofPlanIntro,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
   applyCoreProofPlanPatch,
@@ -244,12 +252,22 @@ import {
   CoreProofChecker,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
+  createCoreLfDeclarationWorkspace,
+  createCoreLfModuleSpec,
   createCoreLfProofDevelopment,
+  createCoreLfTransferDeclarationLinkage,
+  createCoreLfTransferPolicyOverlay,
+  createCoreProofArtifactFingerprint,
   createCoreResearchGoalGraphDefinition,
   createCoreResearchGoalView,
   evaluateCoreResearchGoalGraph,
+  kernelBinder,
+  kernelBound,
+  kernelFree,
+  kernelPi,
   parseCoreLfProofDevelopmentSourceText,
   parseCoreResearchGoalViewText,
+  provenance,
   proposeCoreObviousProofPlanPatches,
   proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
@@ -262,6 +280,7 @@ import {
   serializeCoreResearchGoalView,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
+  sourceSpan,
   validateCoreResearchGoalView,
 } from '@hotdocx/emdash/workspace';
 
@@ -375,6 +394,131 @@ assert.equal(typeof serializeCoreResearchGoalView, 'function');
 assert.equal(typeof searchCoreLfAccessiblePremises, 'function');
 assert.equal(typeof simplifyCoreProofPlan, 'function');
 assert.equal(typeof validateCoreResearchGoalView, 'function');
+
+// Preserve the public 0.1 hosted-consumer path over direct TypeScript source.
+const compatibilityHash = (digit) => 'sha256:' + digit.repeat(64);
+const compatibilityProvenance = provenance(
+  'surface',
+  '0.1 installed-consumer compatibility',
+  sourceSpan('compatibility.emdash.ts', 1, 1, 1, 2),
+);
+const compatibilityModuleId = 'compat.identity';
+const compatibilitySymbol = coreLfQualifiedSymbol(
+  compatibilityModuleId,
+  'A',
+);
+const compatibilityModule = createCoreLfModuleSpec({
+  revision: 'compat-module-1',
+  moduleId: compatibilityModuleId,
+  fragmentId: 'declarations',
+  authorityPath: 'compatibility.emdash.ts',
+  sourceSha256: compatibilityHash('a'),
+  dependencies: [],
+  externalSymbols: [],
+  declarations: [{
+    order: 0,
+    symbol: compatibilitySymbol,
+    type: { tag: 'type' },
+    body: coreLfTransferAbsentBody(),
+    modifiers: {
+      visibility: 'public',
+      rigidity: 'ordinary',
+      sourceOpacity: 'opaque',
+    },
+    provenance: {
+      authorityPath: 'compatibility.emdash.ts',
+      sourceFragment: 'symbol A : TYPE;',
+    },
+  }],
+  inductives: [],
+  runtimeRules: [],
+  proofRules: [],
+});
+const compatibilityPolicy = createCoreLfTransferPolicyOverlay(
+  compatibilityModule,
+  {
+    revision: 'compat-policy-1',
+    moduleRevision: compatibilityModule.revision,
+    entries: [{
+      order: 0,
+      target: { kind: 'declaration', symbol: compatibilitySymbol },
+      policy: 'opaque-signature',
+      evidence: 'public 0.1 hosted-consumer compatibility',
+    }],
+  },
+);
+const compatibilityLinkage = createCoreLfTransferDeclarationLinkage(
+  compatibilityModule,
+  {
+    revision: 'compat-linkage-1',
+    moduleRevision: compatibilityModule.revision,
+    entries: [{
+      order: 0,
+      symbol: compatibilitySymbol,
+      kind: 'free-declaration',
+      coreName: 'compat_A',
+      backendName: 'A',
+    }],
+  },
+);
+const compatibilityWorkspace = compileCoreLfDeclarationWorkspace(
+  createCoreLfDeclarationWorkspace({
+    revision: 'compat-workspace-1',
+    modules: [{
+      module: compatibilityModule,
+      policy: compatibilityPolicy,
+      linkage: compatibilityLinkage,
+    }],
+  }),
+);
+const compatibilityType = kernelPi(
+  kernelBinder(
+    'value',
+    kernelFree('compat_A', compatibilityProvenance),
+    binderMode('explicit', 'functorial'),
+    compatibilityProvenance,
+  ),
+  kernelFree('compat_A', compatibilityProvenance),
+  compatibilityProvenance,
+);
+const compatibilityFingerprint = createCoreProofArtifactFingerprint({
+  source: {
+    id: 'compatibility.emdash.ts#identity',
+    sha256: compatibilityHash('b'),
+  },
+  profileSha256: compatibilityHash('c'),
+  dependencies: [{
+    moduleId: compatibilityModuleId,
+    interfaceSha256: compatibilityHash('d'),
+  }],
+});
+const compatibilityProof = (open) => ({
+  moduleId: compatibilityModuleId,
+  declarationId: open ? 'open_identity' : 'complete_identity',
+  type: compatibilityType,
+  plan: coreProofPlanIntro(
+    open
+      ? coreProofPlanHole('body', { provenance: compatibilityProvenance })
+      : coreProofPlanExact(kernelBound(0, compatibilityProvenance)),
+    { name: 'value', provenance: compatibilityProvenance },
+  ),
+  provenance: compatibilityProvenance,
+  fingerprint: compatibilityFingerprint,
+});
+const compatibilityComplete = compileCoreLfWorkspaceProofDocument(
+  compatibilityWorkspace,
+  compatibilityProof(false),
+).artifact.proofArtifact;
+const compatibilityOpen = compileCoreLfWorkspaceProofDocument(
+  compatibilityWorkspace,
+  compatibilityProof(true),
+).artifact.proofArtifact;
+assert.equal(compatibilityComplete.state.status, 'complete');
+assert.equal(compatibilityOpen.state.status, 'incomplete');
+assert.deepEqual(
+  compatibilityOpen.state.goals.map((goal) => goal.id),
+  ['body'],
+);
 `,
   );
   await writeFile(
@@ -460,6 +604,14 @@ assert.equal(typeof workspace.coreProofPlanConstructor, 'function');
 assert.equal(typeof workspace.coreProofPlanHave, 'function');
 assert.equal(typeof workspace.coreProofPlanRefine, 'function');
 assert.equal(typeof workspace.coreProofTemplatePlaceholder, 'function');
+assert.equal(
+  typeof workspace.compileCoreLfDeclarationWorkspace,
+  'function',
+);
+assert.equal(
+  typeof workspace.compileCoreLfWorkspaceProofDocument,
+  'function',
+);
 assert.equal(typeof workspace.applyCoreProofPlanPatch, 'function');
 assert.equal(
   typeof workspace.compareCoreLfProofDevelopmentSources,
@@ -565,6 +717,10 @@ import {
   CORE_PROOF_SIMPLIFIER_PROFILE,
   CORE_RESEARCH_GOAL_GRAPH_PROFILE,
   CORE_RESEARCH_GOAL_VIEW_PROFILE,
+  type CoreLfCompiledDeclarationWorkspace,
+  type CoreLfWorkspaceProofCompilation,
+  compileCoreLfDeclarationWorkspace,
+  compileCoreLfWorkspaceProofDocument,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -597,6 +753,15 @@ import {
 } from '@hotdocx/emdash/workspace';
 
 const checkerConstructor: typeof CoreChecker = CoreChecker;
+const declarationWorkspaceCompiler:
+  typeof compileCoreLfDeclarationWorkspace =
+    compileCoreLfDeclarationWorkspace;
+const workspaceProofCompiler: typeof compileCoreLfWorkspaceProofDocument =
+  compileCoreLfWorkspaceProofDocument;
+const maybeCompiledWorkspace:
+  CoreLfCompiledDeclarationWorkspace | undefined = undefined;
+const maybeWorkspaceProof:
+  CoreLfWorkspaceProofCompilation | undefined = undefined;
 const builder = new CoreLfScopedBuilder();
 const exactSynthesizer: typeof synthesizeCoreLfInstance =
   synthesizeCoreLfInstance;
@@ -661,6 +826,10 @@ const goalViewSerializer: typeof serializeCoreResearchGoalView =
 const goalViewValidator: typeof validateCoreResearchGoalView =
   validateCoreResearchGoalView;
 void checkerConstructor;
+void declarationWorkspaceCompiler;
+void workspaceProofCompiler;
+void maybeCompiledWorkspace;
+void maybeWorkspaceProof;
 void builder;
 void exactSynthesizer;
 void roleSynthesizer;
@@ -743,6 +912,8 @@ import {
   CORE_PROOF_SIMPLIFIER_PROFILE,
   CORE_RESEARCH_GOAL_GRAPH_PROFILE,
   CORE_RESEARCH_GOAL_VIEW_PROFILE,
+  compileCoreLfDeclarationWorkspace,
+  compileCoreLfWorkspaceProofDocument,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -797,6 +968,8 @@ globalThis.emdashPackedSmoke = {
   proofSimplifierRevision: CORE_PROOF_SIMPLIFIER_PROFILE.revision,
   researchGoalGraphRevision: CORE_RESEARCH_GOAL_GRAPH_PROFILE.revision,
   researchGoalViewRevision: CORE_RESEARCH_GOAL_VIEW_PROFILE.revision,
+  compileCoreLfDeclarationWorkspace,
+  compileCoreLfWorkspaceProofDocument,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,

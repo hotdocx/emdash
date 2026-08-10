@@ -64,10 +64,12 @@ host-neutral canonical goal-view artifact and additive public barrel are now
 implemented and final-green through focused evaluator/view tests, strict
 typecheck/lint, transitive browser closure, package build, installed ESM/CJS/
 strict-NodeNext/browser consumers, and the one required full-TypeScript gate.
-The `GOAL-GRAPH-14B2` package-integration audit is now complete and its
-`0.2.0` release/qualification contract is frozen below. That bounded release-
-engineering row is in progress; Arrowgram layout, GetPaidX delivery, and
-authenticated hosted actions remain distinct later boundaries.
+The `GOAL-GRAPH-14B2` package-integration audit is now complete, its `0.2.0`
+release/qualification contract is frozen below, and the exact versioned
+candidate is locally qualified. Clean checkpoint, fast-forward integration,
+OIDC publication, and independent registry verification remain in that
+bounded row; Arrowgram layout, GetPaidX delivery, and authenticated hosted
+actions remain distinct later boundaries.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -130,7 +132,7 @@ The goal-view interchange audit/frozen-contract checkpoint is `232dde3`; its
 semantic checkpoint is `0bec688`; the plan-only commit containing this exact
 hash is its synchronized clean ledger checkpoint. The 14B2 package/version/
 release audit and frozen contract are recorded below; no version, integration,
-tag, Release, or registry mutation preceded that contract.
+tag, Release, or registry mutation preceded contract checkpoint `07b1f4b`.
 
 Depends-On:
 
@@ -623,7 +625,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | repartitioned | Fresh audit split the host-neutral public view, package release, Arrowgram/GetPaidX consumer, and hosted actions into 14B1–14B4; no sibling edit or action API is justified by the parent row. |
 | `GOAL-GRAPH-14B0` | Public-interchange and sibling-consumer audit | complete | Emdash goal evaluation is internal-only, Arrowgram owns a generic coordinate-based `DiagramSpec`, CloserFans is the canonical GetPaidX/LastRevision host, and no current sibling imports Emdash goal semantics. Exact audit and decisions are below. |
 | `GOAL-GRAPH-14B1` | Canonical host-neutral goal-view artifact and public source barrel | complete | `0bec688`; privacy-minimized replay-gated projection, strict canonical parser/validator/serializer, explicit non-authority flags, public workspace/root exports, capability v14/docs, browser closure, and installed package consumers; one required `check:ts` passed once with 1,662 tests and zero failures. No Arrowgram dependency or layout. |
-| `GOAL-GRAPH-14B2` | Integrate and publish the next Emdash package release | contract frozen | Candidate `0.2.0`; 61-commit fast-forward-only integration, retained 0.1 consumer execution, exact tarball qualification, protected OIDC release, and independent public verification are frozen below. Never republish 0.1.0. |
+| `GOAL-GRAPH-14B2` | Integrate and publish the next Emdash package release | candidate qualified | Candidate `0.2.0`; retained 0.1 complete/open consumer and exact 144-entry tarball are locally green. Clean checkpoint, 61-commit fast-forward-only integration, protected OIDC release, and independent public verification remain. Never republish 0.1.0. |
 | `GOAL-GRAPH-14B3` | Deterministic Arrowgram projection and GetPaidX consumer | gated | Require public package containing 14B1, current published Arrowgram packages, exact layout/color/label policy, and a thin file-backed or derived-read-only template contract. |
 | `GOAL-GRAPH-14B4` | Authenticated hosted evidence/action adapters | deferred | Require one exact mutation consumer, actor/signature authority, idempotency/audit/permission semantics, and current host security/deployment clearance; visualization does not authorize effects. |
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
@@ -4841,6 +4843,82 @@ runtime dependency, GitHub workflow authority, npm trust configuration,
 Arrowgram diagram schema, GetPaidX template/API/MCP/controller, hosted
 permission, or authenticated evidence/action meaning. Those remaining host
 and effect boundaries stay in 14B3--14B4.
+
+## GOAL-GRAPH-14B2 Local Candidate Qualification Record
+
+Date: 2026-08-10
+
+Result: the frozen `@hotdocx/emdash@0.2.0` candidate is locally qualified.
+This is a pre-integration result, not a claim that `main`, GitHub Releases, or
+npm already contains the candidate.
+
+The implementation follows the frozen owner set exactly:
+
+- `packages/emdash/package.json`, `scripts/check-workspace.mjs`, and the
+  release-preflight expectations now agree on `0.2.0`, exact tag
+  `emdash-v0.2.0`, artifact `emdash-npm-0.2.0`, and tarball
+  `hotdocx-emdash-0.2.0.tgz`;
+- no package entry, dependency, script, binary, lifecycle hook, publication
+  policy, workflow authority, or lockfile changed; and
+- the installed-package verifier now executes the old 0.1
+  `compileCoreLfDeclarationWorkspace` /
+  `compileCoreLfWorkspaceProofDocument` path over an opaque carrier and
+  direct TypeScript proof plans. It observes a complete identity proof and an
+  incomplete identity proof with exactly the named goal `body`. CommonJS
+  retains both runtime functions, strict NodeNext resolves both functions and
+  their public result types, and the browser bundle closes over them.
+
+Changing the workspace package version made pnpm correctly reject the first
+script invocations as stale per-worktree install metadata. A single
+`./scripts/pnpmw install --frozen-lockfile` refreshed only that ignored link
+graph: the lockfile was already current, supply-chain policy passed, and no
+package was added or changed. The blocked invocations were then rerun; they
+are not reported as test failures.
+
+Exact proportional evidence:
+
+```text
+./scripts/pnpmw run package:release:check
+  passed: 3/3 release identity, negative manifest, and least-authority
+  workflow tests
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1; exact four-workspace/package contract
+
+./scripts/pnpmw run typecheck
+  passed
+
+targeted ESLint over release-preflight-tests.mjs,
+verify-packed-install.mjs, and check-workspace.mjs
+  passed
+
+./scripts/pnpmw run package:build
+  passed: ESM, CommonJS, declarations, and source maps
+
+node packages/emdash/scripts/verify-packed-install.mjs \
+  --tarball /tmp/.../hotdocx-emdash-0.2.0.tgz
+  passed: installed ESM, CommonJS, strict NodeNext, browser bundle,
+  exact export/inventory policy, and executable 0.1 complete/open path
+
+node packages/emdash/scripts/release-preflight.mjs \
+  --tag emdash-v0.2.0 --repository hotdocx/emdash
+  passed with exact version/tag/repository/artifact/tarball/provenance record
+```
+
+The exact locally packed artifact contains 144 entries and 2,057,671 bytes;
+its SHA-256 is
+`b954874ba72e0850df95bcfd72715f6c79022688a64a7cd29fe1af526af987ee`.
+The verifier independently rejects contributor sources, scripts, npm locks,
+forbidden private declarations, undeclared dependencies, and export drift.
+Immediately after qualification, the public-registry probe for exact `0.2.0`
+returned `E404`, while `0.1.0` remained the sole published/latest version.
+
+The prior 14B1 `check:ts` result is carried forward exactly as frozen; it was
+not rerun. No `check:all`, root-test, Lambdapi/kernel, print/book, CloserFans,
+Arrowgram, container, E2E, deployment, tag, Release, environment approval, or
+npm mutation ran. The next admissible action is an exact staged-diff review,
+clean candidate checkpoint/push, and a fresh public-main ancestry/registry
+audit before the frozen fast-forward sequence.
 
 ## Decision Ledger
 

@@ -89,7 +89,7 @@ assertNoNpmScripts('emdash2', specPackage);
 assertNoNpmScripts('print', printPackage);
 
 assert.equal(emdashPackage.name, '@hotdocx/emdash');
-assert.equal(emdashPackage.version, '0.1.0');
+assert.equal(emdashPackage.version, '0.2.0');
 assert.notEqual(
   emdashPackage.private,
   true,

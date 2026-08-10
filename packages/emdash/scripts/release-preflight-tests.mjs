@@ -32,11 +32,11 @@ test('accepts the exact immutable emdash release identity', () => {
   assert.deepEqual(report, {
     revision: 'emdash-npm-release-preflight-v1',
     packageName: '@hotdocx/emdash',
-    version: '0.1.0',
-    tag: 'emdash-v0.1.0',
+    version: '0.2.0',
+    tag: 'emdash-v0.2.0',
     repository: 'hotdocx/emdash',
-    artifactName: 'emdash-npm-0.1.0',
-    tarballName: 'hotdocx-emdash-0.1.0.tgz',
+    artifactName: 'emdash-npm-0.2.0',
+    tarballName: 'hotdocx-emdash-0.2.0.tgz',
     provenance: true,
   });
   assert.equal(Object.isFrozen(report), true);
@@ -44,7 +44,7 @@ test('accepts the exact immutable emdash release identity', () => {
 
 test('rejects tag, repository, and public-manifest drift', () => {
   assert.throws(
-    () => validate({ tag: 'v0.1.0' }),
+    () => validate({ tag: 'v0.2.0' }),
     (error) => error instanceof EmdashNpmReleasePreflightError &&
       error.code === 'INVALID_TAG',
   );
@@ -73,8 +73,8 @@ test('rejects tag, repository, and public-manifest drift', () => {
     },
     { ...clone(manifest), browser: './wrong-browser.js' },
     { ...clone(manifest), private: 'false' },
-    { ...clone(manifest), version: '0.1.0-01' },
-    { ...clone(manifest), version: '0.1.0-.' },
+    { ...clone(manifest), version: '0.2.0-01' },
+    { ...clone(manifest), version: '0.2.0-.' },
     {
       ...clone(manifest),
       exports: { ...clone(manifest.exports), './private': './private.js' },
