@@ -8,10 +8,11 @@ review; measured source-action consumer counterevidence superseded the v5
 review; measured proof-head counterevidence superseded the v6 review;
 measured generic-format counterevidence superseded the v7 review; measured
 reflexive-consumer counterevidence now also supersedes the v8 review;
-non-authorizing proposal v9 preserves v8 and adds only active line 8032's
-identity-incoming precomposition computation; root-only
-`PATHOUT-LIBRARY-FOUNDATION-1B` is paused pending v9's separate review, and no
-PathOut profile or public export is yet qualified
+checkpointed proposal v9 preserves v8 and adds only active line 8032's
+identity-incoming precomposition computation, and is separately approved
+under delegated unattended authority with human supersession; root-only
+`PATHOUT-LIBRARY-FOUNDATION-1B` may resume, and no PathOut profile or public
+export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -171,8 +172,8 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 awaiting separate review | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Proposal v9 preserves v8 and adds only active line 8032, for an exact 5/13/2/9 boundary. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | paused pending v9 review | separate review of checkpointed v9 proposal | Resume only the exact root-local 5/13/2/9 implementation after separate review; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | implementation authorized; resume existing work | separately reviewed v9 proposal | Resume exactly the root-local 5/13/2/9 implementation; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -953,10 +954,13 @@ opaque owner, derived fusion, proof substitute, generic identity law, engine
 branch, active-source edit, or public effect is authorized.
 
 The v8 review record withdraws its authorization and embeds exact
-non-authorizing proposal v9. Implementation remains paused until v9 is
-checkpointed and separately reviewed. Its behavior-free proposal gate is
-root typecheck, focused lint, the fourteen proposal/review tests, and exact
-diff hygiene; no Lambdapi or long aggregate is relevant.
+non-authorizing proposal v9. The rollback-safe proposal checkpoint is
+`b4277fb`. Its separate immutable review approves only that exact checkpoint
+under the user's standing unattended delegation, retains later human
+supersession, and restores only the root-local 5/13/2/9 implementation
+authority. Its behavior-free proposal/review gate is root typecheck, focused
+lint, the fourteen proposal/review tests, and exact diff hygiene; no Lambdapi
+or long aggregate is relevant.
 
 Proportional proposal-v9/supersession validation on 2026-08-10 is:
 

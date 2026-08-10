@@ -5595,8 +5595,9 @@ reduces identity-functor action to `h`. Proposal v9 preserves v8 and adds only
 that active runtime rule, changing the exact boundary to 5/13/2/9. It adds no
 fusion, proof substitute, generic engine branch, new owner, active-source edit,
 or public effect. V8 checkpoints `6e4bb82` and `edda832` remain backtracking
-evidence; implementation is paused until v9 receives its own checkpoint and
-separate review.
+evidence. Proposal v9 is checkpointed at `b4277fb`; its separate delegated
+review restores only the root-local 5/13/2/9 implementation authority,
+retains human supersession, and preserves every later/public denial.
 
 That v7 authorization is now superseded by a representation-level invariant
 found before semantic compilation. `createCoreLfModuleSpec` rejects every
@@ -5738,6 +5739,7 @@ preserves every later/public denial.
 | `D-PA-120` | Supersede the v7 PathOut-foundation review and correct proposal v8 by retaining one reflexive generated constraint for the identity-family rule. | The generic proof-transfer module rejects empty generated-constraint lists, while the predecessor has no native `tt` owner. Representing source `tt ≡ tt` as captured `A ≡ A` preserves the rule's trivial discharge and exact 5/12/2/9 semantic boundary without changing the generic engine or importing a foundational inductive. |
 | `D-PA-121` | Approve only checkpointed PathOut-foundation proposal v8 under delegated unattended authority, with human supersession. | Checkpoint `6e4bb82` preserves the exact 5/12/2/9 identity-family rule and its nonempty reflexive constraint representation, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v7 or making the proposal self-authorizing. |
 | `D-PA-122` | Supersede the v8 PathOut-foundation review and correct proposal v9 to 5/13/2/9 with active identity-incoming precomposition line 8032. | General source action now passes, but reflexive action reaches `hom_precomp_along_fapp0(id,p,id_y) ≡ p` after raw composition has already simplified. Line 8032 is the exact active computation to functorial action, and the predecessor closes identity-functor action; importing it is narrower than adding a proof substitute, derived fusion, or generic identity law. |
+| `D-PA-123` | Approve only checkpointed PathOut-foundation proposal v9 under delegated unattended authority, with human supersession. | Checkpoint `b4277fb` preserves the exact 5/13/2/9 identity-incoming closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v8 or making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
