@@ -57,7 +57,12 @@ real hosted consumer: a TypeScript-first `emdash_ts` workspace template over
 the public package and ordinary Node controller. `HOSTED-CONSUMER-13A` is now
 implemented, locally integrated in CloserFans, and final-proportional-green.
 It establishes the hosted runtime consumer but does not constitute the
-Arrowgram/public-interchange work of `GOAL-GRAPH-14B`.
+Arrowgram/public-interchange work of `GOAL-GRAPH-14B`. The fresh 14B audit is
+now complete and has repartitioned that broad row: a privacy-minimized,
+host-neutral canonical goal-view artifact and additive public barrel are the
+single bounded `GOAL-GRAPH-14B1` row in progress. Package release, Arrowgram
+layout, GetPaidX delivery, and authenticated hosted actions remain distinct
+later boundaries.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -605,7 +610,12 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
-| `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A, public package/OIDC, and the concrete GetPaidX runtime consumer are complete; still require a separately frozen canonical interchange/view/action contract and a fresh Arrowgram edit audit. |
+| `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | repartitioned | Fresh audit split the host-neutral public view, package release, Arrowgram/GetPaidX consumer, and hosted actions into 14B1–14B4; no sibling edit or action API is justified by the parent row. |
+| `GOAL-GRAPH-14B0` | Public-interchange and sibling-consumer audit | complete | Emdash goal evaluation is internal-only, Arrowgram owns a generic coordinate-based `DiagramSpec`, CloserFans is the canonical GetPaidX/LastRevision host, and no current sibling imports Emdash goal semantics. Exact audit and decisions are below. |
+| `GOAL-GRAPH-14B1` | Canonical host-neutral goal-view artifact and public source barrel | in progress | Freeze a privacy-minimized derived-status projection, canonical parser/validator/serializer, explicit non-authority flags, public workspace/root exports, capability/docs, and packed consumer. No Arrowgram dependency or layout. |
+| `GOAL-GRAPH-14B2` | Integrate and publish the next Emdash package release | gated | Complete 14B1 plus a separate 58-commit branch-integration/version/release audit and the required public-barrel qualification; never republish 0.1.0. |
+| `GOAL-GRAPH-14B3` | Deterministic Arrowgram projection and GetPaidX consumer | gated | Require public package containing 14B1, current published Arrowgram packages, exact layout/color/label policy, and a thin file-backed or derived-read-only template contract. |
+| `GOAL-GRAPH-14B4` | Authenticated hosted evidence/action adapters | deferred | Require one exact mutation consumer, actor/signature authority, idempotency/audit/permission semantics, and current host security/deployment clearance; visualization does not authorize effects. |
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 
 Only one semantic row is in progress at a time. A later row may be
@@ -4398,6 +4408,143 @@ one smallest real goal-graph consumer before either sibling is edited. It may
 also reject or repartition 14B; the existence of a proof template does not
 authorize a universal goal ontology, hosted mutation API, or visual protocol.
 
+## GOAL-GRAPH-14B0 Audit And 14B1 Frozen Contract
+
+Date: 2026-08-10
+
+Audit result: `GOAL-GRAPH-14B0` is complete and the broad 14B row is
+repartitioned. `GOAL-GRAPH-14B1` is implementation-ready and is the only
+semantic row now in progress.
+
+Fresh repository state at the audit boundary:
+
+- the Emdash proof-assistant worktree is clean and pushed at `282076e`; local
+  and public `main` remain `ccf4fed`, and the proof branch is 58 commits ahead
+  of `main` with roughly 28,000 added TypeScript/test/document lines;
+- CloserFans/GetPaidX local `master` is `bd4146b`, with the independently owned
+  untracked repository-review report preserved. It has no configured Git
+  remote. By explicit user clarification, CloserFans is also the relevant
+  GetPaidX/LastRevision host for this program; the private historical
+  `packages/lastrevision` subtree in Arrowgram is not a second host target;
+- Arrowgram is on `main` at `c0567ba`, with its independent untracked review
+  plan preserved and both private-super-repository and public-OSS remotes
+  configured; no Arrowgram edit is authorized by this audit; and
+- neither sibling contains an Emdash goal-graph import, adapter, or interchange
+  contract. The new `emdash_ts` template is the only real external Emdash
+  package consumer.
+
+The source audit identifies four boundaries which must not be collapsed:
+
+1. `research_goal_graph.ts` already owns a useful narrow semantic profile:
+   theorem/task/decision nodes, `requires` and grouped `one-of` dependencies,
+   exact evidence binding, fresh proof replay, explicit unverified human
+   attribution, advisory-only AI proposals, and derived
+   open/blocked/satisfied/rejected status.
+2. That module is intentionally internal today. Neither `src/v3_2/index.ts`
+   nor the curated `@hotdocx/emdash/workspace` barrel exports it. Public npm
+   0.1.0 therefore cannot be the source of a 14A goal consumer, just as the
+   13A public probe showed that later proof-development catalog calls were not
+   part of its published API.
+3. Arrowgram's authoritative `DiagramSpec` is a generic renderer input with
+   named nodes, manual coordinates, colors, and arrows. It has no Emdash goal
+   status, evidence, policy, automatic DAG layout, or trusted-action meaning.
+   Its agent package correctly treats `diagram.json` and paper files as
+   ordinary file-backed source. The first Emdash interchange must therefore
+   remain renderer-neutral rather than widening Arrowgram's core schema with
+   proof-assistant semantics.
+4. GetPaidX owns templates, runtime permissions, snapshots, publishing, and
+   any eventual hosted effects. A visualization artifact cannot authenticate
+   a human approval, recompute a caller's source hashes, execute a task, or
+   authorize a host mutation.
+
+### Frozen 14B1 API
+
+Add browser-safe `research_goal_view.ts` as a projection beside, not inside,
+the evaluator. It has no Node, Arrowgram, GetPaidX, network, filesystem,
+Lambdapi, callback, clock, or cryptographic dependency.
+
+The v1 portable view carries only what a renderer or lightweight host needs:
+
+- its own view/profile revisions plus the originating goal-profile,
+  evaluation, logic-profile, and graph revisions;
+- canonically ID-sorted nodes with stable node ID/revision, title, goal kind,
+  derived status, optional theorem proof identity, and the evaluator's
+  explanatory evidence/dependency ID sets;
+- canonically sorted `requires` and grouped `one-of` edges in the evaluator's
+  explicit dependent-to-prerequisite direction;
+- recomputed status counts; and
+- visible authority fields stating that this is a portable projection of
+  policy-derived supplied data, has no mutable `done`, did not recompute source
+  hashes or verify human attribution, and executes no external action.
+
+The view deliberately omits full proof-development source, expected Core
+terms, evidence statements/proposals, actor/approver identities, callbacks,
+layout coordinates, colors, URLs, host permissions, timestamps, signatures,
+and mutable UI state. This is both data minimization and an authority boundary:
+evidence payloads stay with the canonical evaluator input, while a renderer
+receives stable derived explanations without silently becoming a verifier.
+
+The public functions are frozen as:
+
+- `createCoreResearchGoalView(evaluation)`, which first freshly re-evaluates
+  the supplied definition/evidence and requires exact canonical equality
+  before projecting it;
+- `validateCoreResearchGoalView(unknown)`, which reconstructs the portable
+  artifact, checks all revision/literal/ID/text/bound constraints, unique
+  canonical ordering, node/edge references, acyclicity, explanation
+  references, status counts, and fixed authority flags, then requires exact
+  canonical equality;
+- `parseCoreResearchGoalViewText(text)`, which parses exactly one JSON value
+  and delegates to the same validator; and
+- `serializeCoreResearchGoalView(view)`, which validates and emits one
+  deterministic newline-terminated canonical JSON record.
+
+Exact naming may be corrected mechanically during implementation if it would
+otherwise conflict with an existing public symbol, but no semantic field or
+authority claim may be widened without updating this contract first.
+
+`research_goal_graph.ts` and the new view module become additive exports of
+both the contributor root barrel and `@hotdocx/emdash/workspace`. The public
+package README, AI-native capability record/profile revision, browser-closure
+guard, and installed-package verifier must expose the two profiles and core
+constructor/parser/serializer functions. No new npm subpath, Core term node,
+checker rule, declaration parser, CLI command, file format owner, or runtime
+dependency is introduced.
+
+### Acceptance And Later Rows
+
+14B1 requires:
+
+- focused positive tests for canonical projection, parsing, stable ordering,
+  all node/status/edge shapes, privacy omission, and round trips;
+- focused negative tests for a stale/tampered supplied evaluation, malformed
+  or noncanonical view, duplicate/unknown/cyclic edges, bad explanation IDs,
+  count/flag/revision drift, trailing/multiple JSON data, and prototype/
+  callback-like nonportable values;
+- browser-closure evidence that the new owner reaches no Node or host module;
+- targeted typecheck/lint plus the package build and installed ESM, CommonJS,
+  strict NodeNext, and browser consumers over the curated workspace entry;
+- because this row changes a public barrel and the root test runner, exactly
+  one complete `check:ts` after every focused gate is green. Under the user's
+  long-aggregate policy this is the exceptional strictly necessary boundary;
+  it must not be repeated for reassurance; and
+- exact staged diff, whitespace/conflict-marker, worktree/ancestry, plan, and
+  capability-ledger synchronization before a rollback-safe checkpoint.
+
+Do not run `check:all`, Lambdapi, kernel, print/book, Arrowgram, CloserFans,
+container, E2E, or deployment aggregates for 14B1. The module is a pure
+TypeScript/package boundary and changes no active mathematical owner.
+
+`GOAL-GRAPH-14B2` is a separate integration/release audit. The next package
+cannot be published until the 58-commit proof branch is reviewed as one public
+version boundary, integrated without rewriting, versioned, qualified, and
+released through the existing OIDC path. `GOAL-GRAPH-14B3` then selects one
+thin consumer that installs that public version and maps the host-neutral view
+to ordinary Arrowgram coordinates/colors/labels without changing goal
+semantics. `GOAL-GRAPH-14B4` remains deferred until one exact authenticated
+action/evidence consumer supplies identity, signature, permission,
+idempotency, audit, rollback, and deployment/security prerequisites.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -4490,6 +4637,9 @@ authorize a universal goal ontology, hosted mutation API, or visual protocol.
 | `D-PA-086` | Close PACKAGE-RELEASE-13 after exact authenticated npm settings and one-time credential retirement, while retaining bypass-2FA-token compatibility by explicit human supersession. | OIDC publisher identity, residual bootstrap authority, and package-wide token policy are separate. The publish-only trust is directly visible, the dedicated token/local value and GitHub secret are gone, and the unauthenticated npm 11.19.0 `trust list` result is recorded honestly as `E401` rather than a pass. |
 | `D-PA-087` | Make the first hosted consumer a TypeScript-first `emdash_ts` GetPaidX template on the default controller, before any goal-graph interchange or new host API. | The published zero-runtime-dependency package fits the existing Node 20 install/start contract and direct source-visible holes demonstrate the AI-native workflow immediately; a dedicated image, LambdaPi runtime, MCP surface, or premature Arrowgram protocol would add authority without a selected need. |
 | `D-PA-088` | Adapt the starter to 0.1.0's published single-workspace proof-document boundary and compute real outer fingerprints, rather than linking the later proof-development catalog or using fixture stamps. | A real external consumer must test public bytes and public types. The existing published workspace compiler already supplies exact closure checking; Node-owned source/profile/interface hashes preserve honest freshness without widening Emdash Core or forcing an unrelated release. |
+| `D-PA-089` | Repartition 14B into host-neutral view, package release, Arrowgram/GetPaidX rendering, and authenticated action rows. | The evaluator, public distribution, renderer schema, hosted runtime, and effect authority have different owners and validation gates; implementing them as one adapter would make visualization appear to confer proof or permission. |
+| `D-PA-090` | Export a privacy-minimized canonical goal-view projection before any Arrowgram-specific layout. | The full evaluation contains proof source and human/AI evidence payloads that a renderer need not receive. Stable nodes, edges, derived explanations, counts, and explicit authority flags are sufficient for multiple views without coupling Emdash to one graphics package. |
+| `D-PA-091` | Treat CloserFans as the GetPaidX/LastRevision host and Arrowgram as the generic rendering/file-workspace project for this program. | This follows the user's explicit sibling clarification, avoids parallel private-host implementations, and keeps GetPaidX permissions/effects out of Arrowgram's public diagram schema and packages. |
 
 ## Validation And Checkpoint Policy
 
@@ -4604,14 +4754,14 @@ synchronized:
 > Start from completed `GOAL-GRAPH-14A` checkpoint `faa4c27`, completed npm
 > publication/trust boundary, and completed CloserFans hosted-consumer
 > checkpoint `bd4146b`, together with their synchronized records and the
-> earlier checked proof-engineering checkpoints in this plan. Audit
-> `GOAL-GRAPH-14B` next: re-read current Arrowgram and CloserFans SOP/state,
-> determine whether the narrow 14A profile is ready for one canonical public
-> interchange plus smallest real view/action consumer, and freeze or reject
-> that bounded design before sibling edits. Keep `AGENT-EVAL-12B`, `STDLIB-8`,
-> `COUNTEREVIDENCE-10`, and `EXTERNAL-CERT-11` behind their remaining corpus,
-> product, or solver gates rather than inventing authority merely to advance
-> the ledger.
+> earlier checked proof-engineering checkpoints in this plan. Treat
+> `GOAL-GRAPH-14B0` as the completed sibling/interchange audit and implement
+> only the frozen host-neutral `GOAL-GRAPH-14B1` view artifact/public source
+> barrel next. Keep package release, Arrowgram/GetPaidX rendering, and hosted
+> actions behind 14B2–14B4 and their exact gates; do not edit either sibling
+> during 14B1. Keep `AGENT-EVAL-12B`, `STDLIB-8`, `COUNTEREVIDENCE-10`, and
+> `EXTERNAL-CERT-11` behind their remaining corpus, product, or solver gates
+> rather than inventing authority merely to advance the ledger.
 > Preserve the hard distinction between a kernel-checked theorem and every
 > weaker task/observation/approval/AI evidence class.
 >
