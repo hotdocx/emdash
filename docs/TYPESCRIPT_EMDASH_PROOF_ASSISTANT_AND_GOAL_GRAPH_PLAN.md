@@ -41,7 +41,10 @@ package, and corpus layer remains gated; the first research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
 owner, typecheck/lint, and browser-closure gates; its public visual/hosted
-adapter remains gated
+adapter remains gated; the first protected npm bootstrap reached a green
+hosted build but npm refused the final registry PUT under its 2FA/token policy,
+so the stable workflow is token-free again and the package/public-adapter rows
+remain externally gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -50,15 +53,19 @@ Worktree: `/home/user1/emdash1-classes-v1`
 Baseline: `9c633c85b66efb4ac7619912e8d15f928b32d733`
 (`docs: close classes goal readiness audit`)
 
-Git-Boundary: local and public `main` are exactly the qualified predecessor
-`9c633c8`; the frozen plan checkpoint is `671c56a`; the `DEV-CATALOG-1`
-semantic checkpoint is `fcc4547`; its synchronized ledger checkpoint and the
-dedicated branch's preceding published baseline are `2484e23`; the
+Git-Boundary: the branch fork baseline remains the qualified predecessor
+`9c633c8`; local and public `main` are now exactly `9b9a773`, which retains the
+first PACKAGE-12B2 attempt record after restoring the stable token-free
+workflow at `735546d`. This proof-assistant branch incorporates that public
+baseline through the merge checkpoint recorded below but has not itself been
+merged into `main`, tagged, released, or published to npm. The frozen plan
+checkpoint is `671c56a`; the `DEV-CATALOG-1` semantic checkpoint is `fcc4547`;
+its synchronized ledger checkpoint and the dedicated branch's preceding
+published baseline are `2484e23`; the
 `DEV-CLI-2A` architecture, semantic, and ledger checkpoints are `ee31ab9`,
 `c60d09e`, and `fa84b05`; the `DEV-CLI-2B` architecture and semantic
-checkpoints are `a6f0fbe` and `b5a4cb2`. The branch has not been merged into
-`main`, tagged, released, or published to npm; the `DEV-CLI-2B` synchronized
-ledger checkpoint is `238bddf`; the proof-plan audit checkpoint is `144afda`
+checkpoints are `a6f0fbe` and `b5a4cb2`; the `DEV-CLI-2B` synchronized ledger
+checkpoint is `238bddf`; the proof-plan audit checkpoint is `144afda`
 and the corrected selected-constructor semantic checkpoint is `934bf13`; the
 contextual-`have` audit checkpoint is `d25e550` and its semantic checkpoint is
 `b20595b`; the general-`refine` audit checkpoint is `27233be` and its
@@ -83,7 +90,10 @@ checkpoint is `d245019`. The selected-proof-maintenance contract checkpoint is
 checkpoint is `b8152a0`. The proof-agent benchmark contract checkpoint is
 `1ad765f`, its semantic checkpoint is `f46ff9a`, and its synchronized clean
 published ledger checkpoint is `28a8e07`. The research goal-graph contract
-checkpoint is `75f0362` and its semantic checkpoint is `faa4c27`.
+checkpoint is `75f0362`, its semantic checkpoint is `faa4c27`, and its
+synchronized clean published ledger checkpoint is `bf23c51`. GitHub retains
+annotated tag and Release `emdash-v0.1.0` at `501a5f6`, but npm accepted no
+package version from that attempt.
 
 Depends-On:
 
@@ -570,7 +580,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | pending | one concrete solver/certificate consumer and independent checker |
 | `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | complete | `f46ff9a`; self-contained exact cases, arbitrary inert patches, fresh selected-proof replay, stable diagnostics, integer retrieval/plan/replay metrics, and provider-reported usage |
 | `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements plus a concrete agent/host consumer and reviewed corpus/public-package boundary |
-| `PACKAGE-RELEASE-13` | First npm publication and OIDC hardening | external gate | classes-plan `PACKAGE-12B2`; public integrated commit, protected environment, bootstrap credential, verification, trust configuration, cleanup |
+| `PACKAGE-RELEASE-13` | First npm publication and OIDC hardening | external npm-authentication gate after one safe hosted attempt | classes-plan `PACKAGE-12B2`; run `31391224891` retained a green exact build/artifact handoff, but npm rejected the PUT because the bootstrap token lacked bypass-2FA authority. Registry remains absent and the temporary secret/fallback are removed; retry the same immutable tag/run only with attended 2FA and a dedicated suitable bootstrap credential, then verify and harden trust. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
 | `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A, published package, sibling SOP audits, compatible controller/runtime |
 
@@ -4025,6 +4035,52 @@ behind their explicit product or solver gates. Continuation should audit
 those gates for a real consumer before adding another semantic union member
 or public contract.
 
+## PACKAGE-RELEASE-13 Hosted Attempt And Baseline Synchronization Record
+
+Date: 2026-08-10
+
+Result: the first hosted build and protected artifact handoff succeeded, but
+the package remains unpublished behind an exact npm authentication gate.
+
+Public `main` advanced from the proof branch's original `9c633c8` fork point
+to `9b9a773`. The retained history freezes the release plan, records the
+temporary version-locked bootstrap path, removes that path and secret after
+the attempt, restores the stable workflow token-free, and records the exact
+failure. Its net tree change relative to the fork point is only the owning
+structures/classes/package plan; the temporary workflow and static-test edits
+cancel exactly.
+
+GitHub retains annotated tag and published Release `emdash-v0.1.0` at
+`501a5f6` plus Actions run `31391224891`. The unprivileged build job passed its
+tag/main identity, frozen install, workspace, typecheck, release preflight,
+build, exact pack/install, and artifact upload gates. The protected publish
+job verified the same tarball and generated a signed provenance statement,
+but npm then rejected the registry PUT with `E403`: the supplied granular
+token lacked the required bypass-2FA authority. A post-attempt registry probe
+still returned `E404`; the generated statement is therefore not claimed as a
+published-package attestation. The authoritative hashes, job IDs, cleanup
+evidence, and exact retry procedure remain in the classes plan's
+`PACKAGE-12B2 First Hosted Attempt Record`.
+
+The public baseline is incorporated into this dedicated proof-assistant
+branch by a normal non-rewriting merge. Its one documentation conflict was
+resolved additively: the forward proof-assistant handoff remains and the
+owning plan's date/status/attempt record come from public `main`. This
+synchronization changes no proof-assistant source, test, package export,
+workflow, tag, Release, registry state, sibling repository, or mathematical
+development. Exact ancestry, staged/unstaged separation, conflict-marker
+absence, and whitespace hygiene are the proportional gates; no TypeScript,
+package, kernel, print/book, or long repository aggregate is warranted for
+this documentation-only synchronization.
+
+`PACKAGE-RELEASE-13`, `GOAL-GRAPH-14B`, and `AGENT-EVAL-12B` remain gated.
+Retry must reuse the immutable `emdash-v0.1.0` release workflow only after an
+attended npm session provides a dedicated short-expiry credential with the
+required publication/2FA authority; the bootstrap secret must then be removed
+again and npm trusted-publisher hardening completed. No alternate version,
+replacement tag/Release, local publish, or weakened stable workflow is an
+acceptable substitute.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -4110,6 +4166,7 @@ or public contract.
 | `D-PA-079` | Keep the first research goal graph internal and defer Arrowgram/GetPaidX/public-package integration to 14B. | The semantic evidence and acceptance contract must be measured before freezing a public interchange, visualization, hosted action, or permission API. |
 | `D-PA-080` | Accept the narrow research-planning profile at semantic checkpoint `faa4c27`. | Exact supplied-source proof replay, explicit unverified approval policy, advisory-only AI evidence, grouped acyclic dependencies, stable diagnostics, and derived status are now executable under focused owner coverage without a new truth kernel. |
 | `D-PA-081` | Define duplicate dependencies by exact edge identity, including the `oneOf` group, rather than by dependent/prerequisite pair alone. | One prerequisite may satisfy alternatives in multiple distinct groups; rejecting that valid formula would impose an undocumented expressivity restriction. |
+| `D-PA-082` | Incorporate public `main` through a normal merge after the safe PACKAGE-12B2 attempt, while leaving every package-dependent semantic row gated. | The public history contains useful release/audit evidence and a token-free stable workflow, but npm accepted no package; synchronization must not be misreported as publication or used to bypass the concrete authentication prerequisite. |
 
 ## Validation And Checkpoint Policy
 
