@@ -15,8 +15,8 @@ v2 source/artifact family final-proportional-green; the general `refine` tag
 audit and root-scoped typed-term template macro are complete and final-
 proportional-green; the cross-goal coupling audit and its separate portable
 direct-dependency graph are complete and final-proportional-green;
-the stateless development-graph command audit is complete and its exact
-projection tranche is frozen;
+the stateless development-graph command audit and its exact projection are
+complete and final-proportional-green;
 later simplification, search, library, external-automation, and general
 goal-graph rows remain dependency-gated
 
@@ -41,7 +41,9 @@ contextual-`have` audit checkpoint is `d25e550` and its semantic checkpoint is
 `b20595b`; the general-`refine` audit checkpoint is `27233be` and its
 management-only template semantic checkpoint is `39d9fc8`.
 The cross-goal coupling audit checkpoint is `48405eb` and its semantic
-checkpoint is `de971de`.
+checkpoint is `de971de`; its synchronized ledger checkpoint is `d90db3b`.
+The development-graph command audit checkpoint is `e0d3e4f` and its semantic
+checkpoint is `8e21afb`.
 
 Depends-On:
 
@@ -505,7 +507,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `DEV-CATALOG-1` | General browser-safe multi-module/multi-proof development catalog | complete | focused/package gates green; one long aggregate directly waived after interrupted evidence became unrecoverable |
 | `DEV-CLI-2A` | Canonical supplied-data proof-development source and reconstruction | complete | `c60d09e`; focused/static/browser/packed gates green; long aggregate intentionally omitted |
 | `DEV-CLI-2B` | Explicit-root Node acquisition and general `check/goals/build` commands | complete | `b5a4cb2`; focused semantic/static/browser gates green; long aggregate intentionally omitted |
-| `DEV-CLI-2C` | Stable `graph` command projection | in progress | frozen v3 command/v1 graph-wrapper contract below over completed `GOAL-COUPLING-4B` |
+| `DEV-CLI-2C` | Stable `graph` command projection | complete | `8e21afb`; focused semantic/static/workspace/shell gates green; no browser/package or long aggregate rerun |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | complete | base-plan macro lowering selected; template and equality boundaries separated below |
 | `PLAN-DECOMPOSE-3B` | Implement selected-`constructor` base-plan macro | complete | `934bf13`; focused semantic/static/browser/packed gates green; long aggregate intentionally omitted |
 | `PLAN-DECOMPOSE-3B1A` | Audit contextual `have`, retention, and revision boundary | complete | contextual substitution plus per-refiner retained source obligations selected below |
@@ -1891,6 +1893,61 @@ search/scheduling, theorem import, equality/rewrite, Lambdapi source,
 mathematical owner/rule, additional filesystem/network/cache/MCP/LSP
 authority, output write, print/book, sibling repository, npm publication,
 release, or deployment change.
+
+### DEV-CLI-2C completion record
+
+Semantic checkpoint: `8e21afb`
+(`feat: add proof development graph command`).
+
+The explicit-root Node adapter now accepts `development graph` over the same
+fixed canonical source and fresh checked compilation as `check`, `goals`, and
+`build`. Whole-development JSONL contains the summary followed by one module/
+declaration-qualified graph wrapper for every proof in canonical order;
+exact-proof selection contains one wrapper. Complete proofs retain empty
+graphs, incomplete graph inspection exits zero, and text output delegates to
+the existing portable graph renderer. The adapter reads only
+`proof.proofCompilation.goalGraph`; it performs no second Core/meta traversal.
+
+The development CLI and summary profiles advance from v2 to v3, the new graph
+wrapper is v1, and the static capability record advances from v6 to v7. Goal
+and build records remain v2. Canonical proof state, source, development,
+artifact, coupling-graph, and research revisions remain unchanged. The
+capability record now advertises the exact command and no longer lists its
+completed projection as deferred.
+
+Final proportional evidence on 2026-08-10:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_development_cli_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts
+  passed: 24/24 tests, 5 suites; includes actual shell routing
+
+./scripts/pnpmw run typecheck
+  passed
+
+eslint over every changed TypeScript/JavaScript file
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1
+
+sh -n scripts/emdash
+  passed
+
+git diff --cached --check
+  passed before semantic checkpoint 8e21afb
+```
+
+Under `D-PA-019`, no long `check:ts` or repository aggregate was run: focused
+command semantics, exact static records, typecheck, changed-file lint,
+workspace integrity, shell routing/syntax, and exact diff review exercised the
+changed Node/static boundary directly. Browser closure and packed-package
+consumers were not rerun because this tranche adds no browser-safe package
+module or entry and does not change the already-qualified coupling graph;
+their green `GOAL-COUPLING-4B` evidence is historical unchanged-boundary
+evidence, not a current pass. No Lambdapi/kernel, print/book, npm publication,
+release, deployment, or sibling-repository operation was run.
 
 ## Decision Ledger
 
