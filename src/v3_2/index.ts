@@ -185,6 +185,8 @@ export * from './proof_checker';
 export * from './proof_simplifier';
 export * from './proof_goal_graph';
 export * from './proof_plan';
+export * from './proof_plan_patch';
+export * from './proof_obvious';
 export * from './proof_template';
 export * from './proof_document';
 export * from './ai_proof_demo';

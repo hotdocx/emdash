@@ -84,9 +84,15 @@ import {
     CORE_PROOF_SIMPLIFIER_PROFILE
 } from '../src/v3_2/proof_simplifier';
 import {
+    CORE_OBVIOUS_PROOF_PROVIDER_PROFILE
+} from '../src/v3_2/proof_obvious';
+import {
     CORE_PROOF_PLAN_PROFILE,
     CORE_PROOF_PLAN_MACRO_PROFILE
 } from '../src/v3_2/proof_plan';
+import {
+    CORE_PROOF_PLAN_PATCH_PROFILE
+} from '../src/v3_2/proof_plan_patch';
 import {
     CORE_PROOF_REFINE_TEMPLATE_PROFILE
 } from '../src/v3_2/proof_template';
@@ -444,7 +450,7 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assertDeepFrozen(CORE_AI_NATIVE_CAPABILITIES);
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES_PROFILE.revision,
-            'emdash-ai-native-capabilities-v10'
+            'emdash-ai-native-capabilities-v11'
         );
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES.status,
@@ -468,6 +474,14 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
             CORE_AI_NATIVE_CAPABILITIES.implementedProfiles.map(profile =>
                 [profile.id, profile.revision]
             )
+        );
+        assert.equal(
+            revisions.get('obvious-proof-provider'),
+            CORE_OBVIOUS_PROOF_PROVIDER_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('proof-plan-patch'),
+            CORE_PROOF_PLAN_PATCH_PROFILE.revision
         );
         assert.equal(
             revisions.get('accessible-premise-index'),

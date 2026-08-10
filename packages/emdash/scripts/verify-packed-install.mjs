@@ -222,9 +222,11 @@ import {
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
+  CORE_OBVIOUS_PROOF_PROVIDER_PROFILE,
   CORE_PROOF_CHECKER_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_PLAN_PATCH_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   CORE_PROOF_SIMPLIFIER_PROFILE,
@@ -232,10 +234,14 @@ import {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  applyCoreProofPlanPatch,
   CoreProofChecker,
+  createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
+  proposeCoreObviousProofPlanPatches,
+  replayCoreObviousProofCandidate,
   serializeCoreProofGoalCouplingGraph,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
@@ -275,12 +281,20 @@ assert.equal(
   false,
 );
 assert.equal(
+  CORE_OBVIOUS_PROOF_PROVIDER_PROFILE.revision,
+  'emdash-obvious-proof-provider-v1',
+);
+assert.equal(
   CORE_PROOF_PLAN_PROFILE.revision,
   'emdash-proof-plan-v2',
 );
 assert.equal(
   CORE_PROOF_PLAN_MACRO_PROFILE.revision,
   'emdash-proof-plan-macros-v1',
+);
+assert.equal(
+  CORE_PROOF_PLAN_PATCH_PROFILE.revision,
+  'emdash-proof-plan-patch-v1',
 );
 assert.equal(
   CORE_PROOF_GOAL_COUPLING_PROFILE.revision,
@@ -298,6 +312,8 @@ assert.equal(typeof coreProofPlanConstructor, 'function');
 assert.equal(typeof coreProofPlanHave, 'function');
 assert.equal(typeof coreProofPlanRefine, 'function');
 assert.equal(typeof coreProofTemplatePlaceholder, 'function');
+assert.equal(typeof applyCoreProofPlanPatch, 'function');
+assert.equal(typeof createCoreProofPlanHoleReplacement, 'function');
 assert.equal(typeof createCoreLfAccessiblePremiseIndex, 'function');
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
 assert.equal(typeof CoreProofChecker, 'function');
@@ -306,6 +322,8 @@ assert.equal(
   false,
 );
 assert.equal(typeof parseCoreLfProofDevelopmentSourceText, 'function');
+assert.equal(typeof proposeCoreObviousProofPlanPatches, 'function');
+assert.equal(typeof replayCoreObviousProofCandidate, 'function');
 assert.equal(typeof serializeCoreProofGoalCouplingGraph, 'function');
 assert.equal(typeof searchCoreLfAccessiblePremises, 'function');
 assert.equal(typeof simplifyCoreProofPlan, 'function');
@@ -347,11 +365,19 @@ assert.equal(
   false,
 );
 assert.equal(
+  workspace.CORE_OBVIOUS_PROOF_PROVIDER_PROFILE.randomizes,
+  false,
+);
+assert.equal(
   workspace.CORE_PROOF_PLAN_PROFILE.revision,
   'emdash-proof-plan-v2',
 );
 assert.equal(
   workspace.CORE_PROOF_PLAN_MACRO_PROFILE.addsProofPlanTags,
+  false,
+);
+assert.equal(
+  workspace.CORE_PROOF_PLAN_PATCH_PROFILE.performsSemanticChecks,
   false,
 );
 assert.equal(
@@ -370,6 +396,11 @@ assert.equal(typeof workspace.coreProofPlanConstructor, 'function');
 assert.equal(typeof workspace.coreProofPlanHave, 'function');
 assert.equal(typeof workspace.coreProofPlanRefine, 'function');
 assert.equal(typeof workspace.coreProofTemplatePlaceholder, 'function');
+assert.equal(typeof workspace.applyCoreProofPlanPatch, 'function');
+assert.equal(
+  typeof workspace.createCoreProofPlanHoleReplacement,
+  'function',
+);
 assert.equal(
   typeof workspace.createCoreLfAccessiblePremiseIndex,
   'function',
@@ -382,6 +413,14 @@ assert.equal(
 );
 assert.equal(
   typeof workspace.parseCoreLfProofDevelopmentSourceText,
+  'function',
+);
+assert.equal(
+  typeof workspace.proposeCoreObviousProofPlanPatches,
+  'function',
+);
+assert.equal(
+  typeof workspace.replayCoreObviousProofCandidate,
   'function',
 );
 assert.equal(
@@ -415,9 +454,11 @@ import {
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
+  CORE_OBVIOUS_PROOF_PROVIDER_PROFILE,
   CORE_PROOF_CHECKER_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_PLAN_PATCH_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   CORE_PROOF_SIMPLIFIER_PROFILE,
@@ -425,10 +466,14 @@ import {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  applyCoreProofPlanPatch,
   CoreProofChecker,
+  createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
+  proposeCoreObviousProofPlanPatches,
+  replayCoreObviousProofCandidate,
   serializeCoreProofGoalCouplingGraph,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
@@ -447,6 +492,13 @@ const premiseIndexFactory: typeof createCoreLfAccessiblePremiseIndex =
   createCoreLfAccessiblePremiseIndex;
 const premiseSearch: typeof searchCoreLfAccessiblePremises =
   searchCoreLfAccessiblePremises;
+const obviousProvider: typeof proposeCoreObviousProofPlanPatches =
+  proposeCoreObviousProofPlanPatches;
+const obviousReplay: typeof replayCoreObviousProofCandidate =
+  replayCoreObviousProofCandidate;
+const planPatch: typeof applyCoreProofPlanPatch = applyCoreProofPlanPatch;
+const holeReplacement: typeof createCoreProofPlanHoleReplacement =
+  createCoreProofPlanHoleReplacement;
 const proofCheckerConstructor: typeof CoreProofChecker = CoreProofChecker;
 const sourceParser: typeof parseCoreLfProofDevelopmentSourceText =
   parseCoreLfProofDevelopmentSourceText;
@@ -466,6 +518,10 @@ void roleSynthesizer;
 void developmentFactory;
 void premiseIndexFactory;
 void premiseSearch;
+void obviousProvider;
+void obviousReplay;
+void planPatch;
+void holeReplacement;
 void proofCheckerConstructor;
 void sourceParser;
 void constructorMacro;
@@ -483,9 +539,11 @@ void CORE_LF_DECLARATION_WORKSPACE_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
+void CORE_OBVIOUS_PROOF_PROVIDER_PROFILE;
 void CORE_PROOF_CHECKER_PROFILE;
 void CORE_PROOF_PLAN_PROFILE;
 void CORE_PROOF_PLAN_MACRO_PROFILE;
+void CORE_PROOF_PLAN_PATCH_PROFILE;
 void CORE_PROOF_GOAL_COUPLING_PROFILE;
 void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
 void CORE_PROOF_SIMPLIFIER_PROFILE;
@@ -506,9 +564,11 @@ import {
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
+  CORE_OBVIOUS_PROOF_PROVIDER_PROFILE,
   CORE_PROOF_CHECKER_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_PLAN_PATCH_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   CORE_PROOF_SIMPLIFIER_PROFILE,
@@ -516,10 +576,14 @@ import {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  applyCoreProofPlanPatch,
   CoreProofChecker,
+  createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
+  proposeCoreObviousProofPlanPatches,
+  replayCoreObviousProofCandidate,
   serializeCoreProofGoalCouplingGraph,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
@@ -534,11 +598,13 @@ globalThis.emdashPackedSmoke = {
   synthesizeCoreLfInstanceByRoles,
   workspaceRevision: CORE_LF_DECLARATION_WORKSPACE_PROFILE.revision,
   premiseIndexRevision: CORE_LF_PREMISE_INDEX_PROFILE.revision,
+  obviousProofRevision: CORE_OBVIOUS_PROOF_PROVIDER_PROFILE.revision,
   proofDevelopmentRevision: CORE_LF_PROOF_DEVELOPMENT_PROFILE.revision,
   proofSourceRevision: CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision,
   proofCheckerRevision: CORE_PROOF_CHECKER_PROFILE.revision,
   proofPlanRevision: CORE_PROOF_PLAN_PROFILE.revision,
   proofPlanMacroRevision: CORE_PROOF_PLAN_MACRO_PROFILE.revision,
+  proofPlanPatchRevision: CORE_PROOF_PLAN_PATCH_PROFILE.revision,
   proofGoalCouplingRevision: CORE_PROOF_GOAL_COUPLING_PROFILE.revision,
   proofRefineTemplateRevision: CORE_PROOF_REFINE_TEMPLATE_PROFILE.revision,
   proofSimplifierRevision: CORE_PROOF_SIMPLIFIER_PROFILE.revision,
@@ -546,10 +612,14 @@ globalThis.emdashPackedSmoke = {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  applyCoreProofPlanPatch,
   CoreProofChecker,
+  createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
+  proposeCoreObviousProofPlanPatches,
+  replayCoreObviousProofCandidate,
   serializeCoreProofGoalCouplingGraph,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,

@@ -36,7 +36,11 @@ The package has three deliberately bounded entries:
   accessible-premise index reconstructs one exact module closure, exposes
   root-local and direct-public declarations with structured scope reasons,
   and searches exact IDs and bounded structural Core fingerprints without
-  claiming theorem applicability.
+  claiming theorem applicability. The obvious-proof provider consumes that
+  exact scope and proposes immutable replacements for one named hole: checked
+  global `exact` candidates or one ordinary `apply` with explicit named
+  premise holes. It returns all bounded candidates and fresh replay evidence;
+  it does not recursively discharge goals or retain a tactic session.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -53,8 +57,10 @@ import {
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
+  CORE_OBVIOUS_PROOF_PROVIDER_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_PLAN_PATCH_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   CORE_PROOF_SIMPLIFIER_PROFILE,
@@ -62,9 +68,12 @@ import {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
+  proposeCoreObviousProofPlanPatches,
+  replayCoreObviousProofCandidate,
   serializeCoreProofGoalCouplingGraph,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
@@ -78,8 +87,10 @@ void synthesizeCoreLfInstanceByRoles;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
+void CORE_OBVIOUS_PROOF_PROVIDER_PROFILE;
 void CORE_PROOF_PLAN_PROFILE;
 void CORE_PROOF_PLAN_MACRO_PROFILE;
+void CORE_PROOF_PLAN_PATCH_PROFILE;
 void CORE_PROOF_GOAL_COUPLING_PROFILE;
 void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
 void CORE_PROOF_SIMPLIFIER_PROFILE;
@@ -87,9 +98,12 @@ void coreProofPlanConstructor;
 void coreProofPlanHave;
 void coreProofPlanRefine;
 void coreProofTemplatePlaceholder;
+void createCoreProofPlanHoleReplacement;
 void createCoreLfAccessiblePremiseIndex;
 void createCoreLfProofDevelopment;
 void parseCoreLfProofDevelopmentSourceText;
+void proposeCoreObviousProofPlanPatches;
+void replayCoreObviousProofCandidate;
 void serializeCoreProofGoalCouplingGraph;
 void searchCoreLfAccessiblePremises;
 void simplifyCoreProofPlan;
