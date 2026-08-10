@@ -9,10 +9,11 @@ recorded; qualified predecessor baseline integrated into public `main`;
 `DEV-CATALOG-1`, `DEV-CLI-2A`, and `DEV-CLI-2B` implemented and
 final-proportional-green under the persistent 2026-08-10 long-aggregate
 policy recorded below; `PLAN-DECOMPOSE-3A/3B` complete and the selected-
-constructor base-plan macro final-proportional-green; the contextual `have`
-audit is complete and its coordinated v2 implementation tranche is frozen;
-later template refinement, simplification, search, library, external-
-automation, and general goal-graph rows remain dependency-gated
+constructor base-plan macro final-proportional-green;
+`PLAN-DECOMPOSE-3B1A/3B1B` complete and contextual `have` plus its coordinated
+v2 source/artifact family final-proportional-green; later template refinement,
+simplification, search, library, external-automation, and general goal-graph
+rows remain dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -30,7 +31,9 @@ dedicated branch's preceding published baseline are `2484e23`; the
 checkpoints are `a6f0fbe` and `b5a4cb2`. The branch has not been merged into
 `main`, tagged, released, or published to npm; the `DEV-CLI-2B` synchronized
 ledger checkpoint is `238bddf`; the proof-plan audit checkpoint is `144afda`
-and the corrected selected-constructor semantic checkpoint is `934bf13`.
+and the corrected selected-constructor semantic checkpoint is `934bf13`; the
+contextual-`have` audit checkpoint is `d25e550` and its semantic checkpoint is
+`b20595b`.
 
 Depends-On:
 
@@ -498,7 +501,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | complete | base-plan macro lowering selected; template and equality boundaries separated below |
 | `PLAN-DECOMPOSE-3B` | Implement selected-`constructor` base-plan macro | complete | `934bf13`; focused semantic/static/browser/packed gates green; long aggregate intentionally omitted |
 | `PLAN-DECOMPOSE-3B1A` | Audit contextual `have`, retention, and revision boundary | complete | contextual substitution plus per-refiner retained source obligations selected below |
-| `PLAN-DECOMPOSE-3B1B` | Implement versioned contextual `have` plan/refiner | in progress | frozen 3B1 contract, coordinated pre-release v2 source/artifact migration |
+| `PLAN-DECOMPOSE-3B1B` | Implement versioned contextual `have` plan/refiner | complete | `b20595b`; focused semantic/static/research/packed gates green; long aggregate intentionally omitted |
 | `PLAN-DECOMPOSE-3C` | Versioned explicit-placeholder `refine` template | pending | one consumer not expressible by base-plan macros; source/artifact revision decision |
 | `GOAL-COUPLING-4` | Stable cross-goal dependency graph | pending | measured dependent-hole consumer and snapshot revision decision |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | pending | equality/transport owner inventory and termination contract |
@@ -1343,6 +1346,68 @@ filesystem policy expansion, network/cache/MCP/LSP, Lambdapi source,
 mathematical owner/rule, print/book, sibling repository, npm publication,
 GitHub Release, or hosted deployment change. General placeholder `refine`
 remains `PLAN-DECOMPOSE-3C`; propositional rewrite remains `SIMP-5A/5B`.
+
+### PLAN-DECOMPOSE-3B1 completion record
+
+Semantic checkpoint: `b20595b` (`feat: add contextual have proof plans`).
+
+The browser-safe workspace API now exports immutable
+`emdash-proof-plan-v2` and `coreProofPlanHave(binding, proof, body)`. The
+refiner checks the fact type, creates fact and continuation metas in their
+exact contexts, and solves the selected goal by contextual meta-spine
+substitution. A per-refiner ordered retention map keeps an unused open fact
+visible as `retained-source-obligation` with zero occurrences; used facts and
+all completed plans zonk to ordinary meta-free Core and pass a fresh checker
+recheck. Fact-before-body execution, dependent outer contexts, explicit and
+implicit plicity, all three binder variations, and failure atomicity are
+covered directly.
+
+Canonical proof-development data reconstructs the closed `have` tag and its
+explicit binder without host execution or term/declaration parsing. A stale
+v1 source envelope is rejected. Proof state, proof documents and artifacts,
+exact-closure workspace proofs, development catalogs and source, mounted-file
+and CLI projections, research bindings and release pins, and the static
+capability record advance together to the v2/v4 families frozen above. The
+mounted store and CLI now expose their exact lower-profile pins. The unchanged
+selected-constructor macro remains `emdash-proof-plan-macros-v1`.
+
+Final proportional evidence on 2026-08-10:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_state_tests.ts \
+  tests/v3_2_proof_refinement_tests.ts \
+  tests/v3_2_proof_plan_tests.ts \
+  tests/v3_2_proof_document_tests.ts \
+  tests/v3_2_lf_workspace_proof_tests.ts \
+  tests/v3_2_proof_development_cli_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts
+  passed: 74/74 tests, 12 suites
+
+./scripts/pnpmw run typecheck
+  passed
+
+eslint over every changed TypeScript/JavaScript file
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1
+
+./scripts/pnpmw run package:check
+  passed: package build plus packed ESM, CJS, strict-TypeScript, and browser
+  bundle consumers
+```
+
+The separate `emdash-template` wrapper could not bootstrap its standalone
+dependencies because this worktree has no fixture-local `node_modules` and
+the Corepack-launched pnpm process could not self-spawn `pnpm`; direct
+TypeScript/Vite probes consequently found the same missing dependencies. A
+broader reviewer test was stopped after 70 seconds under `D-PA-019` and is not
+reported as green evidence. Browser-safe research replay and parity are in
+the 74 focused tests, while the actual packed browser bundle is in
+`package:check`. No long root/repository aggregate, Lambdapi/kernel, print,
+book, npm publication, release, deployment, or sibling-repository operation
+was run.
 
 ## Decision Ledger
 
