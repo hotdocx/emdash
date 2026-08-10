@@ -64,7 +64,7 @@ Git-Boundary: the branch fork baseline remains the qualified predecessor
 verified PACKAGE-12B2 attempt-2 publication while retaining the stable token-
 free workflow restored at `735546d`. This proof-assistant branch incorporates
 the earlier public baseline through merge checkpoint `65549be` and the new
-publication record through the merge checkpoint recorded below, but the
+publication record through merge checkpoint `35d9bcb`, but the
 proof-assistant branch itself has not been merged into `main`, tagged,
 released, or published to npm. The frozen plan
 checkpoint is `671c56a`; the `DEV-CATALOG-1` semantic checkpoint is `fcc4547`;
@@ -4214,13 +4214,12 @@ create a concrete hosted consumer by itself:
 - `GOAL-GRAPH-14B` still requires completed npm trust hardening followed by
   sibling SOP audits and one concrete compatible Arrowgram/GetPaidX consumer.
 
-This public-main record is incorporated into the proof-assistant branch by the
-normal non-rewriting merge checkpoint recorded after this documentation
-update. No proof-assistant source/test/export, mathematical development,
-workflow, package bytes, sibling repository, or deployment changed in that
-merge. No long TypeScript, root, kernel, print, book, or sibling aggregate was
-run; hosted release gates and the focused public installed-consumer verifier
-are the proportional evidence.
+Public-main record `941bf96` is incorporated into the proof-assistant branch by
+normal non-rewriting merge checkpoint `35d9bcb`. No proof-assistant source/
+test/export, mathematical development, workflow, package bytes, sibling
+repository, or deployment changed in that merge. No long TypeScript, root,
+kernel, print, book, or sibling aggregate was run; hosted release gates and
+the focused public installed-consumer verifier are the proportional evidence.
 
 ## Decision Ledger
 
