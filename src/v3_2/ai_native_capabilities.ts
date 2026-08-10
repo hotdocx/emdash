@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v12' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v12' as const,
+    revision: 'emdash-ai-native-capabilities-v13' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v13' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -162,6 +162,13 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                     'two checked declaration revisions, exact structural ' +
                     'dependency impact, and conservative proof recheck ' +
                     'classification without proof execution or repair'
+            },
+            {
+                id: 'selected-proof-maintenance',
+                revision: 'emdash-lf-proof-maintenance-v1',
+                scope:
+                    'exact selected-proof replay diagnostics and stale-safe ' +
+                    'checked named-hole repair candidate patches'
             },
             {
                 id: 'workspace-proof',

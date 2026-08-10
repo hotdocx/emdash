@@ -219,6 +219,7 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
+  CORE_LF_PROOF_MAINTENANCE_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
@@ -237,14 +238,20 @@ import {
   coreProofTemplatePlaceholder,
   applyCoreProofPlanPatch,
   compareCoreLfProofDevelopmentSources,
+  inspectCoreLfProofMaintenance,
   CoreProofChecker,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   proposeCoreObviousProofPlanPatches,
+  proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
+  replayCoreLfProofRepairCandidate,
   serializeCoreLfDevelopmentSemanticDiff,
+  serializeCoreLfProofMaintenanceInspection,
+  serializeCoreLfProofRepairCandidateReplay,
+  serializeCoreLfProofRepairProposal,
   serializeCoreProofGoalCouplingGraph,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
@@ -270,6 +277,10 @@ assert.equal(
 assert.equal(
   CORE_LF_DEVELOPMENT_DIFF_PROFILE.revision,
   'emdash-lf-development-diff-v1',
+);
+assert.equal(
+  CORE_LF_PROOF_MAINTENANCE_PROFILE.revision,
+  'emdash-lf-proof-maintenance-v1',
 );
 assert.equal(
   CORE_LF_DECLARATION_WORKSPACE_PROFILE.nodeBuiltinDependency,
@@ -321,6 +332,7 @@ assert.equal(typeof coreProofPlanRefine, 'function');
 assert.equal(typeof coreProofTemplatePlaceholder, 'function');
 assert.equal(typeof applyCoreProofPlanPatch, 'function');
 assert.equal(typeof compareCoreLfProofDevelopmentSources, 'function');
+assert.equal(typeof inspectCoreLfProofMaintenance, 'function');
 assert.equal(typeof createCoreProofPlanHoleReplacement, 'function');
 assert.equal(typeof createCoreLfAccessiblePremiseIndex, 'function');
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
@@ -331,8 +343,13 @@ assert.equal(
 );
 assert.equal(typeof parseCoreLfProofDevelopmentSourceText, 'function');
 assert.equal(typeof proposeCoreObviousProofPlanPatches, 'function');
+assert.equal(typeof proposeCoreLfProofRepairs, 'function');
 assert.equal(typeof replayCoreObviousProofCandidate, 'function');
+assert.equal(typeof replayCoreLfProofRepairCandidate, 'function');
 assert.equal(typeof serializeCoreLfDevelopmentSemanticDiff, 'function');
+assert.equal(typeof serializeCoreLfProofMaintenanceInspection, 'function');
+assert.equal(typeof serializeCoreLfProofRepairCandidateReplay, 'function');
+assert.equal(typeof serializeCoreLfProofRepairProposal, 'function');
 assert.equal(typeof serializeCoreProofGoalCouplingGraph, 'function');
 assert.equal(typeof searchCoreLfAccessiblePremises, 'function');
 assert.equal(typeof simplifyCoreProofPlan, 'function');
@@ -359,6 +376,10 @@ assert.equal(
 );
 assert.equal(
   workspace.CORE_LF_DEVELOPMENT_DIFF_PROFILE.compilesProofs,
+  false,
+);
+assert.equal(
+  workspace.CORE_LF_PROOF_MAINTENANCE_PROFILE.retainsSessionState,
   false,
 );
 assert.equal(
@@ -414,6 +435,7 @@ assert.equal(
   typeof workspace.compareCoreLfProofDevelopmentSources,
   'function',
 );
+assert.equal(typeof workspace.inspectCoreLfProofMaintenance, 'function');
 assert.equal(
   typeof workspace.createCoreProofPlanHoleReplacement,
   'function',
@@ -436,12 +458,29 @@ assert.equal(
   typeof workspace.proposeCoreObviousProofPlanPatches,
   'function',
 );
+assert.equal(typeof workspace.proposeCoreLfProofRepairs, 'function');
 assert.equal(
   typeof workspace.replayCoreObviousProofCandidate,
   'function',
 );
 assert.equal(
+  typeof workspace.replayCoreLfProofRepairCandidate,
+  'function',
+);
+assert.equal(
   typeof workspace.serializeCoreLfDevelopmentSemanticDiff,
+  'function',
+);
+assert.equal(
+  typeof workspace.serializeCoreLfProofMaintenanceInspection,
+  'function',
+);
+assert.equal(
+  typeof workspace.serializeCoreLfProofRepairCandidateReplay,
+  'function',
+);
+assert.equal(
+  typeof workspace.serializeCoreLfProofRepairProposal,
   'function',
 );
 assert.equal(
@@ -472,6 +511,7 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
+  CORE_LF_PROOF_MAINTENANCE_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
@@ -490,14 +530,20 @@ import {
   coreProofTemplatePlaceholder,
   applyCoreProofPlanPatch,
   compareCoreLfProofDevelopmentSources,
+  inspectCoreLfProofMaintenance,
   CoreProofChecker,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   proposeCoreObviousProofPlanPatches,
+  proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
+  replayCoreLfProofRepairCandidate,
   serializeCoreLfDevelopmentSemanticDiff,
+  serializeCoreLfProofMaintenanceInspection,
+  serializeCoreLfProofRepairCandidateReplay,
+  serializeCoreLfProofRepairProposal,
   serializeCoreProofGoalCouplingGraph,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
@@ -526,6 +572,21 @@ const developmentDiff: typeof compareCoreLfProofDevelopmentSources =
 const developmentDiffSerializer:
   typeof serializeCoreLfDevelopmentSemanticDiff =
     serializeCoreLfDevelopmentSemanticDiff;
+const proofMaintenance: typeof inspectCoreLfProofMaintenance =
+  inspectCoreLfProofMaintenance;
+const proofRepairProvider: typeof proposeCoreLfProofRepairs =
+  proposeCoreLfProofRepairs;
+const proofRepairReplay: typeof replayCoreLfProofRepairCandidate =
+  replayCoreLfProofRepairCandidate;
+const proofMaintenanceSerializer:
+  typeof serializeCoreLfProofMaintenanceInspection =
+    serializeCoreLfProofMaintenanceInspection;
+const proofRepairProposalSerializer:
+  typeof serializeCoreLfProofRepairProposal =
+    serializeCoreLfProofRepairProposal;
+const proofRepairReplaySerializer:
+  typeof serializeCoreLfProofRepairCandidateReplay =
+    serializeCoreLfProofRepairCandidateReplay;
 const holeReplacement: typeof createCoreProofPlanHoleReplacement =
   createCoreProofPlanHoleReplacement;
 const proofCheckerConstructor: typeof CoreProofChecker = CoreProofChecker;
@@ -552,6 +613,12 @@ void obviousReplay;
 void planPatch;
 void developmentDiff;
 void developmentDiffSerializer;
+void proofMaintenance;
+void proofRepairProvider;
+void proofRepairReplay;
+void proofMaintenanceSerializer;
+void proofRepairProposalSerializer;
+void proofRepairReplaySerializer;
 void holeReplacement;
 void proofCheckerConstructor;
 void sourceParser;
@@ -568,6 +635,7 @@ void CORE_LF_INSTANCE_SYNTHESIS_PROFILE;
 void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void CORE_LF_DECLARATION_WORKSPACE_PROFILE;
 void CORE_LF_DEVELOPMENT_DIFF_PROFILE;
+void CORE_LF_PROOF_MAINTENANCE_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
@@ -593,6 +661,7 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
+  CORE_LF_PROOF_MAINTENANCE_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
@@ -611,14 +680,20 @@ import {
   coreProofTemplatePlaceholder,
   applyCoreProofPlanPatch,
   compareCoreLfProofDevelopmentSources,
+  inspectCoreLfProofMaintenance,
   CoreProofChecker,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   proposeCoreObviousProofPlanPatches,
+  proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
+  replayCoreLfProofRepairCandidate,
   serializeCoreLfDevelopmentSemanticDiff,
+  serializeCoreLfProofMaintenanceInspection,
+  serializeCoreLfProofRepairCandidateReplay,
+  serializeCoreLfProofRepairProposal,
   serializeCoreProofGoalCouplingGraph,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
@@ -633,6 +708,7 @@ globalThis.emdashPackedSmoke = {
   synthesizeCoreLfInstanceByRoles,
   workspaceRevision: CORE_LF_DECLARATION_WORKSPACE_PROFILE.revision,
   developmentDiffRevision: CORE_LF_DEVELOPMENT_DIFF_PROFILE.revision,
+  proofMaintenanceRevision: CORE_LF_PROOF_MAINTENANCE_PROFILE.revision,
   premiseIndexRevision: CORE_LF_PREMISE_INDEX_PROFILE.revision,
   obviousProofRevision: CORE_OBVIOUS_PROOF_PROVIDER_PROFILE.revision,
   proofDevelopmentRevision: CORE_LF_PROOF_DEVELOPMENT_PROFILE.revision,
@@ -650,14 +726,20 @@ globalThis.emdashPackedSmoke = {
   coreProofTemplatePlaceholder,
   applyCoreProofPlanPatch,
   compareCoreLfProofDevelopmentSources,
+  inspectCoreLfProofMaintenance,
   CoreProofChecker,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   proposeCoreObviousProofPlanPatches,
+  proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
+  replayCoreLfProofRepairCandidate,
   serializeCoreLfDevelopmentSemanticDiff,
+  serializeCoreLfProofMaintenanceInspection,
+  serializeCoreLfProofRepairCandidateReplay,
+  serializeCoreLfProofRepairProposal,
   serializeCoreProofGoalCouplingGraph,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,

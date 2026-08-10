@@ -84,7 +84,12 @@ the proof artifact. A browser-safe two-revision semantic diff now checks both
 declaration workspaces while leaving proof source inert, reports exact
 declaration and structural dependency impact, and conservatively identifies
 unchanged proofs which require recheck—even when the current proof no longer
-checks. These features lower to backend-neutral explicit Core and use the
+checks. Selected-proof maintenance can then replay one exact current proof,
+project stable rejection diagnostics, and propose freshly checked `exact` or
+one-step-`apply` replacements for an open named hole. Acceptance returns an
+ordinary stale-safe plan patch and fresh replay evidence; persisting the
+changed source and refreshing its outer fingerprint remain explicit caller
+actions. These features lower to backend-neutral explicit Core and use the
 TypeScript checker; they do not require a resident proof server, MCP round
 trip, or Lambdapi process.
 

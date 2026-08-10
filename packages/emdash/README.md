@@ -45,7 +45,13 @@ The package has three deliberately bounded entries:
   revisions, reports exact declaration/source changes plus structural
   dependency impact, and conservatively classifies unchanged proof source for
   recheck without executing a possibly broken current proof or proposing a
-  repair.
+  repair. The selected-proof maintenance layer composes that impact with fresh
+  replay of one exact proof. It projects stable rejection diagnostics and,
+  only for a successfully replayed named hole, delegates checked `exact` and
+  one-step-`apply` candidates to the existing bounded provider. Candidate
+  acceptance returns a stale-safe patch, patched inert plan, and fresh replay;
+  it does not silently persist source or claim to refresh caller-supplied
+  fingerprints.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';

@@ -22,6 +22,7 @@ export * from './lf_workspace_proof';
 export * from './lf_proof_development';
 export * from './lf_proof_development_source';
 export * from './lf_development_diff';
+export * from './lf_proof_maintenance';
 export * from './lf_fragment_workspace';
 export * from './lf_fragment_module_workspace';
 export * from './research_document';

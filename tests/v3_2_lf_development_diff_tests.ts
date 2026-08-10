@@ -1,9 +1,14 @@
-/** Focused REFACTOR-9A two-revision semantic-maintenance tests. */
+/** Focused REFACTOR-9A/9B two-revision maintenance tests. */
 
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
     CoreLfModuleSpec,
+    CoreLfProofDevelopmentSourceSnapshot,
+    CORE_LF_PROOF_MAINTENANCE_PROFILE,
+    CoreLfProofMaintenanceError,
+    CoreLfProofMaintenanceIdentity,
+    CoreLfProofRepairProposal,
     CoreLfTransferDeclarationLinkage,
     CoreLfTransferPolicyOverlay,
     CoreLfWorkspaceProofDocumentInput,
@@ -26,13 +31,19 @@ import {
     createCoreLfTransferDeclarationLinkage,
     createCoreLfTransferPolicyOverlay,
     createCoreProofArtifactFingerprint,
+    inspectCoreLfProofMaintenance,
     kernelBinder,
     kernelBound,
     kernelFree,
     kernelPi,
     provenance,
+    proposeCoreLfProofRepairs,
     reconstructCoreLfProofDevelopmentSourceSnapshot,
+    replayCoreLfProofRepairCandidate,
     serializeCoreLfDevelopmentSemanticDiff,
+    serializeCoreLfProofMaintenanceInspection,
+    serializeCoreLfProofRepairCandidateReplay,
+    serializeCoreLfProofRepairProposal,
     sourceSpan
 } from '../src/v3_2';
 
@@ -85,13 +96,15 @@ interface Fixture {
 
 const changedFixture = (
     version: 'previous' | 'current',
-    breakDeclarationCompilation = false
+    breakDeclarationCompilation = false,
+    revisionSuffix = ''
 ): Fixture => {
     const renamed = version === 'previous' ? gone : fresh;
     const aliasTarget = version === 'previous' ? q : r;
-    const revision = version === 'previous'
+    const baseRevision = version === 'previous'
         ? 'diff-changed-previous'
         : 'diff-changed-current';
+    const revision = `${baseRevision}${revisionSuffix}`;
     const declarations = [
         {
             order: 0,
@@ -505,10 +518,15 @@ const sourceSnapshot = (
     version: 'previous' | 'current',
     reverseModules = false,
     reverseProofs = false,
-    breakDeclarationCompilation = false
+    breakDeclarationCompilation = false,
+    changedRevisionSuffix = ''
 ) => {
     const modules = [
-        changedFixture(version, breakDeclarationCompilation),
+        changedFixture(
+            version,
+            breakDeclarationCompilation,
+            changedRevisionSuffix
+        ),
         controlFixture()
     ];
     const proofs: CoreLfWorkspaceProofDocumentInput[] = version === 'previous'
@@ -576,6 +594,60 @@ const expectDiffError = (
 ): void => assert.throws(
     action,
     error => error instanceof CoreLfDevelopmentDiffError &&
+        error.code === code &&
+        error.path.length > 0
+);
+
+const proofIdentity = (
+    moduleId: string,
+    declarationId: string
+): CoreLfProofMaintenanceIdentity => ({ moduleId, declarationId });
+
+const replaceSourceProof = (
+    source: CoreLfProofDevelopmentSourceSnapshot,
+    declarationId: string,
+    update: (
+        proof: CoreLfWorkspaceProofDocumentInput
+    ) => CoreLfWorkspaceProofDocumentInput
+): CoreLfProofDevelopmentSourceSnapshot => {
+    const reconstructed = reconstructCoreLfProofDevelopmentSourceSnapshot(
+        source
+    );
+    return createCoreLfProofDevelopmentSourceSnapshot(
+        createCoreLfProofDevelopment({
+            revision: reconstructed.plan.revision,
+            workspace: reconstructed.plan.workspace,
+            proofs: reconstructed.plan.proofs.map(proof =>
+                proof.declarationId === declarationId
+                    ? update(proof)
+                    : proof
+            )
+        })
+    );
+};
+
+const reviseSourceDevelopment = (
+    source: CoreLfProofDevelopmentSourceSnapshot,
+    revision: string
+): CoreLfProofDevelopmentSourceSnapshot => {
+    const reconstructed = reconstructCoreLfProofDevelopmentSourceSnapshot(
+        source
+    );
+    return createCoreLfProofDevelopmentSourceSnapshot(
+        createCoreLfProofDevelopment({
+            revision,
+            workspace: reconstructed.plan.workspace,
+            proofs: reconstructed.plan.proofs
+        })
+    );
+};
+
+const expectMaintenanceError = (
+    action: () => unknown,
+    code: CoreLfProofMaintenanceError['code']
+): void => assert.throws(
+    action,
+    error => error instanceof CoreLfProofMaintenanceError &&
         error.code === code &&
         error.path.length > 0
 );
@@ -771,6 +843,389 @@ describe('REFACTOR-9A semantic development diff', () => {
                 unknownRoot as unknown as typeof current
             ),
             'INVALID_CURRENT_SOURCE'
+        );
+    });
+});
+
+describe('REFACTOR-9B selected-proof maintenance', () => {
+    const controlIdentity = proofIdentity(
+        controlModuleId,
+        'control_identity'
+    );
+    const editedIdentity = proofIdentity(controlModuleId, 'edited');
+    const impactedIdentity = proofIdentity(
+        changedModuleId,
+        'aa_uses_witness'
+    );
+    const removedIdentity = proofIdentity(controlModuleId, 'rename_old');
+    const unresolvedIdentity = proofIdentity(
+        controlModuleId,
+        'zz_unresolved'
+    );
+
+    it('classifies complete, incomplete, rejected, and absent proofs', () => {
+        const previous = sourceSnapshot('previous');
+        const current = sourceSnapshot('current');
+        const complete = inspectCoreLfProofMaintenance({
+            previousSource: previous,
+            currentSource: current,
+            proof: controlIdentity
+        });
+        const incomplete = inspectCoreLfProofMaintenance({
+            previousSource: previous,
+            currentSource: current,
+            proof: editedIdentity
+        });
+        const rejected = inspectCoreLfProofMaintenance({
+            previousSource: previous,
+            currentSource: current,
+            proof: impactedIdentity
+        });
+        const absent = inspectCoreLfProofMaintenance({
+            previousSource: previous,
+            currentSource: current,
+            proof: removedIdentity
+        });
+        const unresolved = inspectCoreLfProofMaintenance({
+            previousSource: previous,
+            currentSource: current,
+            proof: unresolvedIdentity
+        });
+
+        assert.equal(complete.outcome, 'checked-complete');
+        if (complete.outcome === 'checked-complete') {
+            assert.equal(
+                complete.artifact.proofArtifact.state.status,
+                'complete'
+            );
+            assert.deepEqual(complete.goalGraph.nodes, []);
+        }
+        assert.equal(incomplete.outcome, 'checked-incomplete');
+        if (incomplete.outcome === 'checked-incomplete') {
+            assert.deepEqual(
+                incomplete.artifact.proofArtifact.state.goals.map(
+                    goal => goal.id
+                ),
+                ['edited_goal']
+            );
+            assert.deepEqual(
+                incomplete.goalGraph.nodes.map(node => node.id),
+                ['edited_goal']
+            );
+        }
+        assert.equal(rejected.outcome, 'rejected');
+        if (rejected.outcome === 'rejected') {
+            assert.equal(rejected.diagnostic.family, 'checker');
+            assert.equal(rejected.diagnostic.code, 'TYPE_MISMATCH');
+            assert.deepEqual(
+                Object.keys(rejected.diagnostic).sort(),
+                ['code', 'family', 'provenance']
+            );
+        }
+        assert.equal(absent.outcome, 'absent-current');
+        assert.equal(unresolved.outcome, 'rejected');
+        if (unresolved.outcome === 'rejected') {
+            assert.equal(unresolved.diagnostic.family, 'context');
+            assert.equal(
+                unresolved.diagnostic.code,
+                'UNBOUND_FREE_REFERENCE'
+            );
+            assert.deepEqual(
+                Object.keys(unresolved.diagnostic).sort(),
+                ['code', 'family', 'provenance']
+            );
+        }
+        assert.equal(
+            serializeCoreLfProofMaintenanceInspection(rejected)
+                .includes('"message"'),
+            false
+        );
+        assert.equal(
+            serializeCoreLfProofMaintenanceInspection(incomplete),
+            serializeCoreLfProofMaintenanceInspection(
+                inspectCoreLfProofMaintenance({
+                    previousSource: previous,
+                    currentSource: current,
+                    proof: editedIdentity
+                })
+            )
+        );
+        assert.equal(complete.compilesCompleteDevelopment, false);
+        assertDeepFrozen(complete);
+        assertDeepFrozen(incomplete);
+        assertDeepFrozen(rejected);
+        assertDeepFrozen(absent);
+    });
+
+    it('proposes and freshly replays a checked exact hole replacement', () => {
+        const previous = sourceSnapshot('previous');
+        const current = sourceSnapshot('current');
+        const input = {
+            previousSource: previous,
+            currentSource: current,
+            proof: editedIdentity,
+            goalId: 'edited_goal'
+        };
+        const proposal = proposeCoreLfProofRepairs(input);
+
+        assert.equal(proposal.provider.candidates.length, 1);
+        assert.equal(proposal.provider.candidates[0].operation, 'exact');
+        assert.deepEqual(proposal.provider.candidates[0].premise.symbol, {
+            moduleId: controlModuleId,
+            name: 'control_witness'
+        });
+        assert.equal(proposal.materializesUpdatedSource, false);
+        assert.equal(
+            serializeCoreLfProofRepairProposal(proposal),
+            serializeCoreLfProofRepairProposal(
+                proposeCoreLfProofRepairs(input)
+            )
+        );
+        assertDeepFrozen(proposal);
+
+        const replay = replayCoreLfProofRepairCandidate({
+            previousSource: previous,
+            currentSource: current,
+            proposal,
+            candidateIndex: 0
+        });
+        const repeatedReplay = replayCoreLfProofRepairCandidate({
+            previousSource: previous,
+            currentSource: current,
+            proposal,
+            candidateIndex: 0
+        });
+        assert.equal(replay.snapshot.result.status, 'complete');
+        assert.equal(replay.snapshot.meaning, 'candidate-replayed');
+        assert.equal(replay.snapshot.materializesUpdatedSource, false);
+        assert.equal(replay.plan.tag, 'exact');
+        assert.equal(
+            replay.patch.revision,
+            CORE_LF_PROOF_MAINTENANCE_PROFILE.patchRevision
+        );
+        assert.equal(
+            serializeCoreLfProofRepairCandidateReplay(replay.snapshot),
+            serializeCoreLfProofRepairCandidateReplay(
+                repeatedReplay.snapshot
+            )
+        );
+        assertDeepFrozen(replay.snapshot);
+    });
+
+    it('reports an exhausted checked search without inventing a repair', () => {
+        const previous = sourceSnapshot('previous');
+        const current = replaceSourceProof(
+            sourceSnapshot('current'),
+            'edited',
+            proof => ({
+                ...proof,
+                type: kernelPi(
+                    kernelBinder(
+                        'argument',
+                        kernelFree(
+                            controlCore,
+                            proofProvenance(61, 'no-candidate domain')
+                        ),
+                        proofMode,
+                        proofProvenance(61, 'no-candidate binder')
+                    ),
+                    kernelFree(
+                        controlCore,
+                        proofProvenance(61, 'no-candidate codomain')
+                    ),
+                    proofProvenance(61, 'no-candidate target')
+                ),
+                provenance: proofProvenance(61, 'no-candidate proof'),
+                fingerprint: fingerprint(
+                    controlModuleId,
+                    'proofs/edited-no-candidate.ts',
+                    '6'
+                )
+            })
+        );
+        const proposal = proposeCoreLfProofRepairs({
+            previousSource: previous,
+            currentSource: current,
+            proof: editedIdentity,
+            goalId: 'edited_goal'
+        });
+
+        assert.deepEqual(proposal.provider.candidates, []);
+        assert.equal(proposal.provider.termination, 'exhausted-search');
+        expectMaintenanceError(
+            () => replayCoreLfProofRepairCandidate({
+                previousSource: previous,
+                currentSource: current,
+                proposal,
+                candidateIndex: 0
+            }),
+            'INVALID_CANDIDATE_INDEX'
+        );
+    });
+
+    it('rejects stale baselines, fingerprints, and forged reports', () => {
+        const previous = sourceSnapshot('previous');
+        const current = sourceSnapshot('current');
+        const proposal = proposeCoreLfProofRepairs({
+            previousSource: previous,
+            currentSource: current,
+            proof: editedIdentity,
+            goalId: 'edited_goal'
+        });
+        const stalePrevious = reviseSourceDevelopment(
+            previous,
+            'diff-development-previous-stale'
+        );
+        const staleCurrent = reviseSourceDevelopment(
+            current,
+            'diff-development-current-stale'
+        );
+        const staleDeclarationBaseline = sourceSnapshot(
+            'current',
+            false,
+            false,
+            false,
+            '-stale'
+        );
+        const staleFingerprint = replaceSourceProof(
+            current,
+            'edited',
+            proof => ({
+                ...proof,
+                fingerprint: fingerprint(
+                    controlModuleId,
+                    'proofs/edited-current.ts',
+                    '9'
+                )
+            })
+        );
+        const changedReplay = replaceSourceProof(
+            current,
+            'edited',
+            proof => ({
+                ...proof,
+                plan: coreProofPlanExact(
+                    kernelFree(
+                        controlWitnessCore,
+                        proofProvenance(92, 'changed replay witness')
+                    ),
+                    {
+                        provenance: proofProvenance(
+                            92,
+                            'changed replay exact'
+                        )
+                    }
+                ),
+                provenance: proofProvenance(92, 'changed replay proof'),
+                fingerprint: fingerprint(
+                    controlModuleId,
+                    'proofs/edited-changed-replay.ts',
+                    '8'
+                )
+            })
+        );
+        const forged = {
+            ...proposal,
+            provider: {
+                ...proposal.provider,
+                counts: {
+                    ...proposal.provider.counts,
+                    candidates: proposal.provider.counts.candidates + 1
+                }
+            }
+        } as CoreLfProofRepairProposal;
+
+        for (const variant of [
+            { previousSource: stalePrevious, currentSource: current },
+            { previousSource: previous, currentSource: staleCurrent },
+            { previousSource: previous, currentSource: staleFingerprint },
+            { previousSource: previous, currentSource: changedReplay },
+            {
+                previousSource: previous,
+                currentSource: staleDeclarationBaseline
+            }
+        ]) {
+            expectMaintenanceError(
+                () => replayCoreLfProofRepairCandidate({
+                    ...variant,
+                    proposal,
+                    candidateIndex: 0
+                }),
+                'STALE_PROPOSAL'
+            );
+        }
+        expectMaintenanceError(
+            () => replayCoreLfProofRepairCandidate({
+                previousSource: previous,
+                currentSource: current,
+                proposal: forged,
+                candidateIndex: 0
+            }),
+            'STALE_PROPOSAL'
+        );
+    });
+
+    it('refuses non-hole states and malformed candidate requests', () => {
+        const previous = sourceSnapshot('previous');
+        const current = sourceSnapshot('current');
+        for (const proof of [
+            controlIdentity,
+            impactedIdentity,
+            removedIdentity
+        ]) {
+            expectMaintenanceError(
+                () => proposeCoreLfProofRepairs({
+                    previousSource: previous,
+                    currentSource: current,
+                    proof,
+                    goalId: 'edited_goal'
+                }),
+                'PROOF_NOT_REPAIRABLE'
+            );
+        }
+        const proposal = proposeCoreLfProofRepairs({
+            previousSource: previous,
+            currentSource: current,
+            proof: editedIdentity,
+            goalId: 'edited_goal'
+        });
+        expectMaintenanceError(
+            () => replayCoreLfProofRepairCandidate({
+                previousSource: previous,
+                currentSource: current,
+                proposal,
+                candidateIndex: -1
+            }),
+            'INVALID_CANDIDATE_INDEX'
+        );
+        expectMaintenanceError(
+            () => replayCoreLfProofRepairCandidate({
+                previousSource: previous,
+                currentSource: current,
+                proposal: {
+                    ...proposal,
+                    revision: 'forged-revision'
+                } as unknown as CoreLfProofRepairProposal,
+                candidateIndex: 0
+            }),
+            'INVALID_PROPOSAL'
+        );
+        expectMaintenanceError(
+            () => proposeCoreLfProofRepairs({
+                previousSource: previous,
+                currentSource: current,
+                proof: editedIdentity,
+                goalId: 'closed_goal'
+            }),
+            'GOAL_NOT_OPEN'
+        );
+        expectMaintenanceError(
+            () => inspectCoreLfProofMaintenance({
+                previousSource: previous,
+                currentSource: current,
+                proof: proofIdentity(controlModuleId, 'unknown_proof')
+            }),
+            'UNKNOWN_PROOF'
         );
     });
 });

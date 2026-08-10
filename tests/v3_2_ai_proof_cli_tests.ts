@@ -69,6 +69,9 @@ import {
     CORE_LF_DEVELOPMENT_DIFF_PROFILE
 } from '../src/v3_2/lf_development_diff';
 import {
+    CORE_LF_PROOF_MAINTENANCE_PROFILE
+} from '../src/v3_2/lf_proof_maintenance';
+import {
     CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE
 } from '../src/v3_2/lf_proof_development_store';
 import {
@@ -453,7 +456,7 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assertDeepFrozen(CORE_AI_NATIVE_CAPABILITIES);
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES_PROFILE.revision,
-            'emdash-ai-native-capabilities-v12'
+            'emdash-ai-native-capabilities-v13'
         );
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES.status,
@@ -529,6 +532,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assert.equal(
             revisions.get('semantic-development-diff'),
             CORE_LF_DEVELOPMENT_DIFF_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('selected-proof-maintenance'),
+            CORE_LF_PROOF_MAINTENANCE_PROFILE.revision
         );
         assert.equal(
             revisions.get('workspace-proof'),

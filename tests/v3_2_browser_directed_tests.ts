@@ -388,6 +388,36 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
         );
     });
 
+    it('keeps selected-proof maintenance browser-safe and stateless', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/lf_proof_maintenance.ts'
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_proof_maintenance.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_workspace_proof.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/proof_obvious.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_remote_workspace_store.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_proof_development_cli.ts')),
+            false
+        );
+    });
+
     it('keeps bounded obvious-proof proposals Node-free and replayable', () => {
         const closure = collectLocalClosure(
             'src/v3_2/proof_obvious.ts'
