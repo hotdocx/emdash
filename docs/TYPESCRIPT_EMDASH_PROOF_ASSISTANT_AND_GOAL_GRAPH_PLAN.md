@@ -89,8 +89,9 @@ the `hom_con` object projection at authority line 7865. That evidence
 supersedes v1 implementation authority. Corrected behavior-free proposal v2
 at checkpoint `7413dd6` changes only the root-local boundary from 5/6/0/6 to
 5/7/0/6 and is separately approved under delegated unattended authority with
-human supersession; only that corrected root-local implementation is ready.
-No PathOut/PathInd public package export has yet been added.
+human supersession at review checkpoint `3421647`; only that corrected root-
+local implementation is ready. No PathOut/PathInd public package export has
+yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -5686,8 +5687,8 @@ authorizes the exact root-only 5/7/0/6 implementation, including line 7865,
 and explicitly denies checker/body/owner substitutions plus every 1D/1E/1F,
 public, active-kernel, integration, and release effect. The review and proposal
 pass eleven focused tests in two suites together with root typecheck, focused
-lint, and diff hygiene. Its rollback-safe review checkpoint is pending this
-bounded tranche; no semantic byte is included in the review.
+lint, and diff hygiene. Review checkpoint `3421647` freezes that decision; no
+semantic byte is included in the review.
 
 ## Decision Ledger
 
@@ -5820,7 +5821,7 @@ bounded tranche; no semantic byte is included in the review.
 | `D-PA-125` | Freeze non-authorizing `PATHIND-TRUSTED-PROFILE-1C` proposal v1 at 5/6/0/6 over PathOut checkpoint `550316a`. | The full audited covariant-fibre cascade plus `path_ind_sec` and its component functor is the smallest fixed-source computation boundary. Deferring `PathInd_func` with `PathInd_transfd` keeps coherent/varying-source packaging in 1D, while the rho-section supplies one concrete transparent consumer. A separate immutable review remains mandatory before implementation. |
 | `D-PA-126` | Approve only checkpointed fixed-source PathInd proposal v1 under delegated unattended authority, with human supersession. | Checkpoint `cc639fc` preserves the exact 5/6/0/6 boundary, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review grants local implementation authority without making the proposal self-authorizing. |
 | `D-PA-127` | Supersede the v1 PathInd review and correct proposal v2 to 5/7/0/6 with active `hom_con` object projection line 7865. | First semantic rule admission measured a functor-versus-Hom classifier residue before the FibCov package component could subject-check. The predecessor declares `hom_con` but omits its active object computation; importing exactly that rule is narrower than changing the checker, rewriting FibCov, or duplicating the owner. V1 remains backtracking evidence, and v2 still requires its own checkpoint and separate review. |
-| `D-PA-128` | Approve only checkpointed corrected PathInd proposal v2 under delegated unattended authority, with human supersession. | Checkpoint `7413dd6` preserves the exact 5/7/0/6 correction, including only active line 7865 beyond v1, while retaining the completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review restores local implementation authority without making the proposal self-authorizing. |
+| `D-PA-128` | Approve only checkpointed corrected PathInd proposal v2 under delegated unattended authority, with human supersession. | Proposal checkpoint `7413dd6` preserves the exact 5/7/0/6 correction, including only active line 7865 beyond v1, while retaining the completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `3421647` restores local implementation authority without making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
