@@ -21,10 +21,13 @@ semantic-profile, publication, and authorization prerequisites for every
 remaining item; PACKAGE-12B2 executed one protected hosted attempt whose
 package build was green but whose registry PUT was refused by npm's 2FA/token
 policy; exact attempt 2 then published and verified `@hotdocx/emdash@0.1.0`
-with provenance after the user supplied a suitable bootstrap credential. The
-GitHub secret is removed and the stable workflow remains token-free;
-interactive trusted-publisher/token hardening is still awaiting direct npm
-password/2FA confirmation, so HOSTED-13 remains gated on that trust boundary
+with provenance after the user supplied a suitable bootstrap credential.
+PACKAGE-12B2 is now complete: the exact publish-only OIDC relationship is
+installed, the dedicated bootstrap token and its ignored local value are
+removed, GitHub has no bootstrap secret, and the stable workflow remains
+token-free. By explicit human supersession, package publishing access still
+allows bypass-2FA granular tokens; HOSTED-13 is gated only on fresh sibling
+SOP/status audits and one concrete compatible consumer
 
 Branch: `goal/typescript-emdash-classes-v1`
 
@@ -549,11 +552,11 @@ discipline important, but they are not a prerequisite for this qualification.
 | MATH-CONSUMER-9 | retired without implementation | The historical `struct_cov_sieve` name was only a parameter-plicity shape inherited from the Cartier review, not an active owner or missing kernel feature. STRUCT-PARAM-1 already qualifies the distinct dependent parameter modes, and ALGEBRA-GRADUATE-8 already supplies the representative Lean-style class consumer. No replacement proxy or mathematical-source edit is justified. |
 | PARAM-ROLES-10A | complete | A separate bounded role-pattern layer now infers output arguments over the unchanged exact ground resolver; saturated calls solve whole distinct output metas, and the HAdd-style direct/call/package acceptance boundary is final-green. |
 | PARAM-ROLES-10B | complete | The exact ground resolver now schedules provider premises by input readiness, uses output-wildcard/semi-output-filter role patterns under shared bounds, and qualifies normal and textually reversed standalone `HasCoerce` chains with explicit final Core. |
-| STDLIB-11 | deferred behind exact semantic/profile and package prerequisites | Select and approve the first active curated artifact profile before packaging it; resolve the recorded generated-owner/stress-profile decisions, choose a source- and digest-pinned corpus, and establish the public base-package trust boundary before a separate stdlib release. |
+| STDLIB-11 | deferred behind exact semantic/profile prerequisites | The public base-package and trust prerequisite is now satisfied. Select and approve the first active curated artifact profile before packaging it: resolve the recorded generated-owner/stress-profile decisions and choose a source- and digest-pinned corpus before a separate stdlib release. |
 | PACKAGE-12A | complete | The local publishable `@hotdocx/emdash@0.1.0` package now has strict root/authoring/workspace exports, dual browser-safe JavaScript, complete declarations/maps, and a packed-install consumer. No registry mutation occurred. |
 | PACKAGE-12B1 | complete | A token-free two-job GitHub Release workflow now builds and verifies one exact tarball before protected OIDC publication; deterministic release preflight freezes tag/version/repository/package invariants. All local checks are green and no GitHub or npm mutation occurred. |
-| PACKAGE-12B2 | public package verified; interactive trust hardening in progress | Attempt 2 of immutable run `31391224891` published exact `@hotdocx/emdash@0.1.0`; registry identity, digests, SLSA provenance, inventory, and four installed consumers are verified. GitHub carries no bootstrap secret and stable `main` is token-free. Complete the already prepared trusted-publisher/password/2FA confirmation, require 2FA while disallowing bypass tokens, revoke the dedicated bootstrap token, and record `npm trust list`. |
-| HOSTED-13 | gated | Add compatible GetPaidX template/API adapters and Arrowgram consumption only after the required package version is public and its npm trust boundary is recorded. |
+| PACKAGE-12B2 | complete | Attempt 2 of immutable run `31391224891` published exact `@hotdocx/emdash@0.1.0`; registry identity, digests, SLSA provenance, inventory, and four installed consumers are verified. The exact GitHub Actions OIDC publisher is installed with publish-only permission; the dedicated token/local value and GitHub secret are removed; stable `main` is token-free. The owner explicitly retains bypass-2FA-token compatibility. Direct npm settings are the trust evidence because unauthenticated npm 11.19.0 `trust list` correctly returned `E401`, not a pass. |
+| HOSTED-13 | gated | The public package and recorded npm trust boundary now exist. Add compatible GetPaidX template/API adapters and Arrowgram consumption only after fresh sibling SOP/status audits select one concrete compatible controller/runtime consumer. |
 
 Only one row is implemented at a time. A later row may be repartitioned by a
 recorded audit, but must not silently broaden an earlier checkpoint.
@@ -2530,9 +2533,11 @@ operation must separately authorize every remote mutation below:
    2FA; an ordinary bypass-2FA granular token is not sufficient for the
    `npm trust` operation.
 6. Immediately delete the GitHub bootstrap secret, remove the temporary token
-   fallback in a correcting checkpoint, revoke a dedicated bootstrap token
-   (but never revoke a shared user credential without separate confirmation),
-   and set npm Publishing access to require 2FA and disallow tokens.
+   fallback in a correcting checkpoint, and revoke a dedicated bootstrap token
+   (but never revoke a shared user credential without separate confirmation).
+   The initial proposal also selected package-wide token prohibition; the
+   explicit human policy recorded by `C-072` supersedes that clause and keeps
+   bypass-2FA granular-token publication available independently of OIDC.
 7. Record `npm trust list`/npmjs.com configuration evidence. Actual OIDC
    publication can be proven only by a later new package version—npm versions
    are immutable—so do not republish `0.1.0` or manufacture a dummy release.
@@ -2759,9 +2764,9 @@ weakening the release policy.
 
 Date: 2026-08-10
 
-Result: `@hotdocx/emdash@0.1.0` is public and independently installable; the
-bootstrap secret is removed and interactive npm trust hardening is the only
-unfinished PACKAGE-12B2 substep.
+Result: complete. `@hotdocx/emdash@0.1.0` is public and independently
+installable, its exact publish-only OIDC relationship is configured, and all
+one-time bootstrap authority is removed.
 
 The user replaced the ignored credential with a newly created bypass-2FA key
 for this bootstrap and directly continued the goal. A no-echo preflight
@@ -2814,28 +2819,36 @@ provenance, source commit, build workflow, and transparency entry. The
 transient negative reads are retained as timing evidence rather than treated
 as a second failed publication.
 
-Trusted-publisher configuration was prepared in the authenticated npm package
-settings with exact GitHub organization `hotdocx`, repository `emdash`,
-workflow filename `npm-publish.yml`, environment `npm-release`, publish
-allowed, and staged publishing disallowed. Submission reached npm's account
-password confirmation. The agent did not inspect or enter a password or 2FA
-code. Until the human completes that direct authentication, the package still
-allows either 2FA or a bypass-2FA granular token; the dedicated bootstrap key
-therefore remains available only for this unfinished hardening step and is not
-claimed revoked.
+The human completed npm's password and hardware-security-key challenges
+directly in the preserved browser handoffs; the agent did not inspect or enter
+either secret. Authenticated package settings then directly showed exactly one
+trusted publisher: GitHub `hotdocx/emdash`, workflow `npm-publish.yml`,
+environment `npm-release`, `npm publish` allowed, and `npm stage publish`
+absent. This is the intended stable OIDC identity and permission boundary.
 
-The exact completion sequence is now:
+The initial plan recommended disallowing bypass-2FA tokens after bootstrap.
+The user explicitly superseded that recommendation, switched publishing access
+back, and directed continuation. Final authenticated settings visibly show
+“Require two-factor authentication or a granular access token with bypass 2fa
+enabled” checked. Trusted-publisher identity and package-wide token policy are
+therefore deliberately orthogonal: later exact-workflow releases may use OIDC,
+while the owner retains an optional bypass-token route.
 
-1. the human enters the npm password and any 2FA challenge directly in the
-   preserved browser handoff, completing the already filled trusted-publisher
-   form;
-2. verify the saved trust fields and publish-only permission through package
-   settings and npm 11.19.0 `npm trust list`;
-3. select “Require two-factor authentication and disallow bypass 2fa tokens,”
-   save the package setting, and verify it visibly; and
-4. delete/revoke the newly created bootstrap token, remove its ignored local
-   value without printing it, and reverify that GitHub contains no bootstrap
-   secret and stable workflow/main remain token-free.
+The dedicated bootstrap token was nevertheless one-time authority. npm's
+confirmation flow deleted it and returned `deleted 1 token`; the resulting
+token list contains neither its link nor its name. Its ignored
+`NPMJS_API_KEY` line was removed without printing the value, leaving the local
+`.env` empty. GitHub reports zero `npm-release` environment secrets, and the
+stable workflow at identical local/remote `main` contains neither
+`NPM_BOOTSTRAP_TOKEN` nor `NODE_AUTH_TOKEN`.
+
+Local npm 11.6.2 has no independent authenticated account session. An exact
+npm 11.19.0 `npm trust list @hotdocx/emdash --json` corroboration attempt
+therefore returned `E401` (“You must be logged in”), as expected after local
+credential retirement; it is recorded as unavailable, not as a passing check.
+The authenticated npm settings evidence above directly verifies every saved
+trust field and permission. A future real version may separately prove the
+OIDC execution path; immutable `0.1.0` was not republished for that purpose.
 
 No long TypeScript, repository, kernel, print, book, or sibling aggregate ran.
 The hosted release jobs and public installed-consumer verifier are the exact
@@ -3305,12 +3318,12 @@ STDLIB-11B tranche. They do not authorize this classes branch to approve a
 different goal's pending semantic profile, publish the base package, or
 create a content-free trust API in anticipation of an unknown corpus.
 
-PACKAGE-12B2 remains gated by separate authorization for GitHub/npm
-authentication, push/merge/tag/release, first publication, trusted-publisher
-configuration, credential retirement, and public verification. HOSTED-13
-remains gated by that verified public package version plus fresh SOP/status
-audits and isolated branches in `closerfans` and `arrowgram`; its public MCP
-surface must remain additive/versioned.
+PACKAGE-12B2 is complete under the separately authorized GitHub/npm operation:
+first publication, public verification, exact OIDC configuration, and
+one-time credential retirement are all directly recorded above. HOSTED-13
+remains gated by fresh SOP/status audits and one concrete consumer selected in
+isolated branches in `closerfans` and `arrowgram`; its public MCP surface must
+remain additive/versioned.
 
 This closes the current persistent goal's local implementation envelope:
 every scoped row is complete, retired with evidence, or deferred behind the
@@ -3371,7 +3384,7 @@ required.
 | C-043 | Split local release engineering from the external first-publish/trust operation. | npm requires a package to exist before either trusted-publisher configuration or staged publishing, so a brand-new token-free OIDC release is circular. |
 | C-044 | Build and verify one tarball in an unprivileged job, then publish those exact bytes from a separate protected OIDC job. | This minimizes token/OIDC authority, permits an environment review after build evidence exists, and prevents publish-time repacking drift. |
 | C-045 | Use exact `emdash-v<version>` GitHub Releases and immutable action pins; never mutate package versions in CI. | The repository has unrelated book/site release concerns, while deterministic tag/package/repository checks make provenance and rollback evidence unambiguous. |
-| C-046 | Permit a provenance-bearing hosted token fallback only for the first version, then remove/revoke it and disallow token publishing. | A first package must be bootstrapped before npm trust can exist; subsequent versions should use short-lived exact-workflow OIDC only. |
+| C-046 | Permit a provenance-bearing hosted token fallback only for the first version, then remove/revoke that bootstrap authority; its original package-wide token-prohibition clause is superseded by `C-072`. | A first package must be bootstrapped before npm trust can exist. The dedicated fallback must not persist, while the owner may separately choose whether other bypass-2FA granular tokens remain available. |
 | C-047 | Make the release preflight fail closed over exact entries/exports and every npm install-time dependency, script, and CLI field. | Publication metadata is executable consumer behavior; a locally green build must not silently acquire a peer, optional, bundled, hook, or binary surface at release time. |
 | C-048 | Treat Lean core's `HAdd`/`Membership` and `Coe`/`HasCoerce` as the exact output and semi-output consumers. | These are primary-source, ordinary Lean authoring patterns and establish that parameter-role activation is required for the stated translation target. |
 | C-049 | Layer output inference over the unchanged exact ground resolver through explicit role patterns. | Candidate matching may discover a ground target, but only the existing bounded resolver and final checker may establish evidence; no session-local meta becomes portable Core. |
@@ -3396,7 +3409,8 @@ required.
 | C-068 | Remove the GitHub bootstrap secret and fallback even if interactive npm trust hardening remains blocked; never revoke a possibly shared ignored credential implicitly. | Hosted long-lived authority must not outlive the first publish, while destructive revocation of a user credential with possible sibling/package consumers requires separate exact authority. |
 | C-069 | Preserve the failed `emdash-v0.1.0` Release/run and retry that exact immutable workflow only with a dedicated bypass-2FA bootstrap credential. | The package artifact/build is already qualified and npm rejected only credential policy; a replacement tag/version or local publish would discard provenance evidence without solving the authority defect. |
 | C-070 | Accept attempt 2 of run `31391224891` as the sole first publication after exact public metadata, digest, provenance, inventory, and installed-consumer verification. | The rerun reused the immutable tag and byte-identical qualified tarball, while independent registry checks now prove the public artifact rather than relying only on the workflow's success conclusion. |
-| C-071 | Keep HOSTED-13 gated until the prepared trusted-publisher form, restrictive token policy, and dedicated bootstrap-token revocation are all directly verified. | A public package satisfies the distribution prerequisite but does not by itself establish the intended long-term OIDC trust boundary or remove residual account publication authority. |
+| C-071 | Keep HOSTED-13 gated until the exact trusted-publisher form and dedicated bootstrap-token revocation are directly verified; its restrictive package-policy clause is superseded by `C-072`. | A public package satisfies the distribution prerequisite but does not by itself establish the intended OIDC identity or retire one-time bootstrap authority. |
+| C-072 | Retain npm publishing access that allows bypass-2FA granular tokens, by explicit human supersession, while revoking the dedicated bootstrap token. | Trusted-publisher identity and package-wide token policy are independent. The exact OIDC route remains installed and publish-only, while the owner deliberately keeps an optional token route without preserving the one-time release credential. |
 
 ## Validation And Checkpoint Policy
 
