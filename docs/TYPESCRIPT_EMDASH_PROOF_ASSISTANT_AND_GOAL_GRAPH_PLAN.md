@@ -5458,8 +5458,9 @@ progress.
 The rollback-safe initial `PATHOUT-TRUST-BOUNDARY-0A` checkpoint is `a05493b`.
 The later `1B0` provider inspection found the omitted `Sigma_func` closure and
 corrects the evidence forward; `a05493b` remains backtracking evidence but is
-not by itself the implementation predecessor. Neither checkpoint contains a
-semantic transfer or public-package byte.
+not by itself the implementation predecessor. The corrected audit checkpoint
+is `5a1ea75`; it is the exact evidence predecessor for `1B0`. Neither
+checkpoint contains a semantic transfer or public-package byte.
 
 ## Decision Ledger
 
