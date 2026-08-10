@@ -6,9 +6,10 @@ counterevidence supersedes the v3 `PATHOUT-LIBRARY-FOUNDATION-1B0` review;
 measured TypeScript execution counterevidence now also supersedes the v4
 review; measured source-action consumer counterevidence superseded the v5
 review; measured proof-head counterevidence now also supersedes the v6 review;
-non-authorizing proposal v7 preserves v6 and adds only the active line-8079
-identity-family proof comparison reached by the selected consumers; root-only
-`PATHOUT-LIBRARY-FOUNDATION-1B` is paused pending v7's separate review, and no
+checkpointed proposal v7 preserves v6 and adds only the active line-8079
+identity-family proof comparison reached by the selected consumers, and is
+separately approved under delegated unattended authority with human
+supersession; root-only `PATHOUT-LIBRARY-FOUNDATION-1B` may resume, and no
 PathOut profile or public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
@@ -169,8 +170,8 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v7 awaiting separate review | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6 | V6 reaches the stable precomposition head, but the selected consumers compare it with raw identity-family composition, not the rigid represented-source factor required by line 8463. Proposal v7 preserves v6 and adds only active line 8079, for an exact 5/12/2/9 boundary. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | paused pending v7 review | separate review of checkpointed v7 proposal | Resume only the exact root-local 5/12/2/9 implementation after separate review; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v7 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6 | V6 reaches the stable precomposition head, but the selected consumers compare it with raw identity-family composition, not the rigid represented-source factor required by line 8463. Checkpointed v7 preserves v6, adds only active line 8079, and is approved at 5/12/2/9. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | implementation authorized; resume existing work | separately reviewed v7 proposal | Resume exactly the root-local 5/12/2/9 implementation; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -826,11 +827,13 @@ Lambdapi edit, or public/package effect is added. The corrected boundary is
 **5/12/2/9**.
 
 The v6 review record withdraws its implementation authorization and embeds
-the exact non-authorizing v7 proposal. Implementation must remain paused
-until v7 is checkpointed and separately reviewed. The proposal correction is
-behavior-free, so its proportional gate is root typecheck, focused lint, the
-proposal/review tests, and exact diff hygiene; no Lambdapi or long aggregate
-is relevant to that checkpoint.
+the exact non-authorizing v7 proposal. The rollback-safe proposal checkpoint
+is `2460ae9`. Its separate immutable review approves only that exact
+checkpoint under the user's standing unattended delegation, retains later
+human supersession, and restores only the root-local 5/12/2/9 implementation
+authority. The proposal correction and review are behavior-free, so their
+proportional gate is root typecheck, focused lint, the proposal/review tests,
+and exact diff hygiene; no Lambdapi or long aggregate is relevant.
 
 Proportional proposal-v7/supersession validation on 2026-08-10 is:
 

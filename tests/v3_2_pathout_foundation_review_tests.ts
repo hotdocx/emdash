@@ -1,5 +1,5 @@
 /**
- * Focused v6 supersession tests for corrected PathOut foundation proposal.
+ * Focused delegated review tests for corrected PathOut foundation proposal.
  */
 
 import assert from 'node:assert/strict';
@@ -44,8 +44,8 @@ const assertReviewError = (
     );
 };
 
-describe('PATHOUT-LIBRARY-FOUNDATION-1B0 v6 review supersession', () => {
-    it('withdraws v6 after the measured identity-family proof gap', () => {
+describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated v7 review', () => {
+    it('approves only checkpointed v7 with human supersession', () => {
         const approval = CORE_PATHOUT_FOUNDATION_1B0_REVIEW.approval;
         assert.deepEqual(
             [
@@ -62,13 +62,12 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 v6 review supersession', () => {
                 approval.supersededV5ReviewCheckpoint,
                 approval.supersededV6ProposalCheckpoint,
                 approval.supersededV6ReviewCheckpoint,
-                approval.replacementProposalCheckpoint,
+                approval.approvedProposalCheckpoint,
                 approval.humanDecisionSupersedes
             ],
             [
-                'corrected-proposal-v6-superseded-after-measured-' +
-                    'identity-family-proof-gap',
-                'measured-implementation-forward-correction',
+                'corrected-proposal-v7-approved-as-proposed',
+                'user-delegated-unattended-approval',
                 'dd69325',
                 'b3d6d71',
                 '38ef8ae',
@@ -80,7 +79,7 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 v6 review supersession', () => {
                 'c4dd293',
                 'f006ccb',
                 'bdcef29',
-                'pending-separate-checkpoint',
+                '2460ae9',
                 true
             ]
         );
@@ -103,7 +102,7 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 v6 review supersession', () => {
         );
     });
 
-    it('freezes root-only 5/12/2/9 without implementation authority',
+    it('authorizes exact root-only 5/12/2/9 over corrected predecessor',
         () => {
         const authorization =
             CORE_PATHOUT_FOUNDATION_1B0_REVIEW.authorization;
@@ -124,7 +123,7 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 v6 review supersession', () => {
                 2,
                 9,
                 'compileCoreCategoricalDirectMixedSourceActionTransfer',
-                false
+                true
             ]
         );
     });
@@ -157,8 +156,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 v6 review supersession', () => {
         assertReviewError(
             review => {
                 (review.approval as {
-                    replacementProposalCheckpoint: string;
-                }).replacementProposalCheckpoint = 'wrong';
+                    approvedProposalCheckpoint: string;
+                }).approvedProposalCheckpoint = 'wrong';
             },
             'PATHOUT_FOUNDATION_REVIEW_DECISION_DRIFT'
         );

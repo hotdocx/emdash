@@ -5579,8 +5579,10 @@ adding only line 8079 as a second proof rule. Lambdapi's reflexive
 `tt ≡ tt` replacement produces no residual TypeScript proof problem. The
 corrected local boundary is 5/12/2/9 with no runtime, generic matcher,
 Core/checker/evaluator, active-source, or public delta. V6 checkpoints
-`f006ccb` and `bdcef29` remain backtracking evidence; implementation is paused
-until v7 receives its own checkpoint and separate review.
+`f006ccb` and `bdcef29` remain backtracking evidence. Proposal v7 is
+checkpointed at `2460ae9`; its separate delegated review restores only the
+root-local 5/12/2/9 implementation authority, retains human supersession, and
+preserves every later/public denial.
 
 ## Decision Ledger
 
@@ -5704,6 +5706,7 @@ until v7 receives its own checkpoint and separate review.
 | `D-PA-116` | Supersede the v5 PathOut-foundation review and correct proposal v6 to 5/12/1/9 with the active represented-source component closure and one derived weak-head fusion. | The selected source-action consumers stop at `fapp0(tapp0_fapp0(hom_int_precomp_func(p)),q)` before the existing projection-order proof rule can match. Active `hom_precomp_along_func` and lines 7977/9704 supply the exact stable route; their 9704+7977 fusion is required only by TypeScript's head-only execution and is narrower than a generic nested-normalization or composition rewrite. |
 | `D-PA-117` | Approve only checkpointed PathOut-foundation proposal v6 under delegated unattended authority, with human supersession. | Checkpoint `f006ccb` preserves the exact 5/12/1/9 represented-source component closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v5 or making the proposal self-authorizing. |
 | `D-PA-118` | Supersede the v6 PathOut-foundation review and correct proposal v7 to 5/12/2/9 with the active identity-family precomposition comparison at line 8079. | The v6 runtime closure succeeds, but the selected consumers reach `hom_precomp_along_fapp0(id,p,q) ≡ comp(q,p)`, while line 8463 requires a rigid `hom_int_precomp_func` right factor. Line 8079 is the exact active specialized rule; transferring it is narrower than changing the generic proof matcher, adding another runtime fusion, or weakening the consumer. |
+| `D-PA-119` | Approve only checkpointed PathOut-foundation proposal v7 under delegated unattended authority, with human supersession. | Checkpoint `2460ae9` preserves the exact 5/12/2/9 identity-family proof closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v6 or making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
