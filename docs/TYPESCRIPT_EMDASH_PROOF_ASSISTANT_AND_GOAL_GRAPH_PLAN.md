@@ -33,7 +33,9 @@ through focused, browser, packed-package, and required full-TypeScript gates;
 the replay-diagnostic audit and its first exact selected-proof/open-hole
 repair composition are complete and final-green through focused, nearest-
 owner, browser, packed-package, and required full-TypeScript gates; external
-automation and the general goal-graph rows remain later boundaries
+automation and the general goal-graph rows remain later boundaries; the
+proof-agent benchmark audit is complete and its first pure attempt-scoring
+contract is frozen for implementation
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -556,7 +558,8 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | pending | one executable consumer and explicit evidence labeling |
 | `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | pending | one concrete solver/certificate consumer and independent checker |
-| `AGENT-EVAL-12` | Reproducible proof-agent benchmark harness | pending | catalog, plans, index, and at least one bounded provider |
+| `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | in progress | audit complete; implement the frozen self-contained case, arbitrary inert patch, fresh replay, exact retrieval, and provider-reported usage contract below |
+| `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements plus a concrete agent/host consumer and reviewed corpus/public-package boundary |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC hardening | external gate | classes-plan `PACKAGE-12B2`; public integrated commit, protected environment, bootstrap credential, verification, trust configuration, cleanup |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | pending | stable proof artifact IDs and explicit acceptance-policy design |
 | `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A, published package, sibling SOP audits, compatible controller/runtime |
@@ -3472,8 +3475,156 @@ than repair or proof authority.
 
 `STDLIB-8`, `COUNTEREVIDENCE-10`, and `EXTERNAL-CERT-11` retain their explicit
 product/consumer gates. Because catalog, plans, exact index, and a bounded
-provider are now all qualified, `AGENT-EVAL-12` is the next dependency-ready
-audit unless newer evidence identifies a narrower prerequisite first.
+provider are now all qualified, `AGENT-EVAL-12` became the next dependency-
+ready audit and is frozen below.
+
+## AGENT-EVAL-12 Audit And Frozen 12A Contract
+
+Date: 2026-08-10
+
+The first benchmark layer is an evaluator of immutable attempt data, not an
+agent runtime. This preserves the same AI-native architecture as proof
+maintenance: a model, human, deterministic provider, hosted workflow, or
+future external service may produce an ordinary source patch, while emdash
+owns exact task identity, allowed scope, fresh replay, stable diagnostics, and
+the distinction between checked results and reported operational metrics.
+
+Material findings:
+
+1. A benchmark does not need an MCP/LSP server, agent callback, OpenAI API,
+   process cursor, filesystem scan, wall-clock call, or network transport in
+   its semantic layer. Those are host adapters. Retaining any of them in a
+   benchmark case would make replay environment-dependent and would confuse
+   orchestration with proof authority.
+2. The 9B obvious-provider proposal is intentionally provider-specific. It is
+   an excellent deterministic baseline, but requiring every evaluated agent
+   to choose one of its candidates would not evaluate arbitrary AI-authored
+   proof plans. A benchmark attempt therefore needs to carry any ordinary
+   `CoreProofPlanPatch` v1 targeting the exact named hole.
+3. `applyCoreProofPlanPatch` already validates and immutably applies that
+   patch. `compileCoreLfWorkspaceProofDocument` already performs the required
+   independent final checking in the exact current module closure. The
+   benchmark should compose these owners rather than add a tactic evaluator or
+   trust a provider's success claim.
+4. Applying a patch changes source while the browser-safe layer cannot compute
+   a replacement source hash. The exact-closure compiler may still be used as
+   fresh in-memory semantic replay, but its enclosing artifact retains the
+   caller-supplied old fingerprint. The benchmark must expose only the fresh
+   checked proof state/goal graph and explicitly set `artifactCurrent: false`;
+   it must not publish that enclosing artifact as current evidence.
+5. The stable 9B replay-diagnostic projection is also the correct rejection
+   vocabulary for arbitrary attempts. It should become an exported internal
+   helper rather than be reimplemented. Patch application adds one separate
+   stable `proof-plan-patch` diagnostic family. Messages, stacks, session
+   identities, raw metas, and partial failed states remain excluded.
+6. A reproducible task must be self-contained. It should embed exact canonical
+   previous/current proof-development source, exact selected proof/goal,
+   normalized 9A and premise-index settings, the freshly verified initial
+   incomplete state/goal graph, and curator-supplied exact relevant-premise
+   IDs. Exact source text and inspection text are preconditions, not hashes.
+7. Relevant-premise labels are benchmark curation data, not theorem
+   applicability claims. Case construction must prove only that each label is
+   an accessible declaration in the exact index. An attempt's retrieved IDs
+   must likewise resolve in that scope; retrieval never grants visibility or
+   correctness.
+8. A benchmark suite canonically orders unique stable case IDs. A run records
+   a stable provider ID/revision, allowed profile IDs, a deterministic seed,
+   outer resource limits, and exactly one attempt per case. The semantic
+   evaluator invokes no provider; an adapter materializes these records before
+   scoring.
+9. Each attempt binds the exact serialized case, records ranked exact premise
+   IDs, and either abstains or supplies one patch. Optional wall-time, token,
+   and checker-call measurements are explicitly
+   `provider-reported-unverified`; the pure evaluator copies and aggregates
+   them but cannot claim to have measured or enforced them.
+10. Fresh evaluation first reconstructs and byte-compares the complete case,
+    then replays its original selected proof, rebuilds its exact premise index,
+    checks attempt scope, applies the patch, and freshly compiles the patched
+    proof. Stale case text aborts rather than becoming a scored failure.
+11. A valid attempt outcome is exactly `abstained`, `accepted-complete`,
+    `accepted-incomplete`, or `rejected`. Rejection is evidence about that
+    supplied patch. Complete acceptance is an independently checked in-memory
+    result, but it is still not persisted source, a refreshed fingerprint, a
+    current cached artifact, or a Git/publication action.
+12. Portable metrics use integer counts rather than unstable floating-point
+    scores: case outcomes, baseline and candidate replay attempts, initial,
+    replacement, and resulting plan nodes, relevant/retrieved/intersection
+    premise counts, first relevant rank, and reported-usage coverage/totals.
+    Precision, recall, rates, latency percentiles, token pricing, and composite
+    leaderboards are derived views with an explicit later policy.
+13. `AGENT-EVAL-12A` is an internal browser-safe scoring owner and standalone
+    fixture. It does not advance the package capability record or public
+    barrels. `AGENT-EVAL-12B` owns a concrete host/agent adapter, package
+    exposure, larger translated-Lean and emdash-native corpora, refactor and
+    ambiguity/staleness tracks, and any public leaderboard/report policy after
+    12A is measured.
+
+`AGENT-EVAL-12A` freezes the following first executable contract:
+
+1. Add one browser-safe module with versioned case, suite, attempt, run, result,
+   and report revisions. It performs no I/O, time acquisition, tokenization,
+   hash computation, model call, Lambdapi invocation, backend emission,
+   process-global registration, source persistence, or callback retention.
+2. `createCoreLfProofAgentBenchmarkCase` accepts a stable case ID, exact
+   previous/current canonical source, one proof identity and named goal,
+   optional 9A/index bounds, and a finite set of exact relevant-premise IDs.
+   It recomputes 9A and selected-proof inspection, requires
+   `checked-incomplete`, requires the named goal to be open, compiles the exact
+   accessible premise index, rejects inaccessible/duplicate labels, and emits
+   one canonical deeply frozen self-contained case.
+3. The case records normalized settings, exact source and inspection text,
+   initial proof state and goal graph, exact proof/goal identity, canonical
+   relevant-premise order, and the non-claims that relevance is curator data
+   and hashes are caller-supplied. Its serializer is the case identity used by
+   attempts.
+4. `createCoreLfProofAgentBenchmarkSuite` accepts a stable suite revision and
+   one or more cases, freshly revalidates each case, rejects duplicates, and
+   orders them by exact case ID. No input order becomes ranking evidence.
+5. A run descriptor has a stable provider ID/revision, nonempty unique allowed
+   profile IDs, a bounded printable seed, and outer wall-time/token/checker-
+   call limits. Limits are recorded for adapters; 12A does not claim to
+   enforce host resources.
+6. Each run supplies exactly one portable attempt for every suite case. An
+   attempt contains the exact serialized case, ranked unique exact retrieved
+   premise IDs, optional provider-reported usage, and either `abstain` or one
+   ordinary hole-replacement patch. No natural-language reasoning or hidden
+   provider state is required or interpreted.
+7. `evaluateCoreLfProofAgentBenchmarkRun` revalidates the suite and run,
+   evaluates cases in canonical order, and aborts on missing, duplicate,
+   unknown, malformed, or stale attempts. It treats out-of-scope retrieval,
+   wrong-goal patches, patch-application errors, and known checker/replay
+   errors as stable scored rejection results.
+8. Patch evaluation reconstructs the current declaration workspace and proof,
+   applies the inert patch, then delegates semantic checking exactly to
+   `compileCoreLfWorkspaceProofDocument`. It returns only the portable proof
+   state and goal graph from that fresh compilation, with
+   `artifactCurrent: false` and `materializesUpdatedSource: false`.
+9. The report embeds exact suite/run identity, ordered attempt results,
+   integer outcome/replay/plan/retrieval metrics, and provider-reported usage
+   totals plus coverage. All portable records are canonical and deeply frozen;
+   process-local execution objects and the misleading stale-fingerprint
+   enclosing artifact are excluded.
+10. Export the existing stable replay-diagnostic projector from the 9B module
+    for internal reuse without changing its profile or report shapes. Test
+    diagnostic equivalence at that owner boundary.
+11. Use a standalone ordinary LF fixture only. Establish exact success from
+    the existing obvious-provider patch, arbitrary externally authored exact
+    success, accepted-incomplete application with named premise holes, wrong-
+    term rejection, abstention, inaccessible retrieval, wrong-goal patch,
+    stale case, missing/duplicate attempts, canonical suite ordering,
+    retrieval/rank and provider-usage aggregation, byte stability, and deep
+    freezing.
+12. Keep 12A out of `src/v3_2/index.ts`, `package_workspace.ts`, the static
+    capability record, installed package consumers, CLIs, and the core-only
+    entry. Wire its focused test through the existing maintenance test owner
+    without changing the root test-runner barrel. Public exposure is 12B.
+
+Validation is proportional: focused 12A plus existing 9B/patch/workspace-proof
+owners, typecheck, changed-file lint, and a source-closure browser check. Do
+not run `check:ts`, `check:all`, root tests, kernel/Lambdapi, package, print/
+book, publication, deployment, or sibling operations unless implementation
+evidence reveals an actual shared/public boundary not present in this frozen
+contract.
 
 ## Decision Ledger
 
@@ -3546,6 +3697,11 @@ audit unless newer evidence identifies a narrower prerequisite first.
 | `D-PA-065` | Return fresh candidate replay and an ordinary patch without silently materializing updated proof-development source. | Persisting a changed plan requires a caller-selected revision and an outer recomputed source fingerprint, neither of which the browser-safe layer owns. |
 | `D-PA-066` | Leave cached-artifact currency with `assertCoreProofArtifactCurrent` and outer hash acquisition. | The maintenance layer can compare supplied fingerprint data exactly but cannot truthfully claim to have recomputed its hashes. |
 | `D-PA-067` | Audit the reproducible proof-agent benchmark next while the curated library, counterevidence, and external-certificate rows remain behind their recorded product/consumer gates. | Catalogs, inert plans, exact premise retrieval, checked candidate patches, semantic impact, and stale-safe repair replay now satisfy the benchmark row's stated prerequisites without inventing an unrequested solver or library authority. |
+| `D-PA-068` | Make the first benchmark layer a pure evaluator of immutable provider attempts, not an agent runner. | Model/API/process orchestration is a replaceable host concern; exact case identity, scope, patch replay, diagnostics, and scoring are portable emdash semantics. |
+| `D-PA-069` | Accept arbitrary inert hole-replacement patches and independently replay them, rather than restricting agents to obvious-provider candidates. | The obvious provider is a useful baseline but cannot represent a general AI-authored proof plan; ordinary patches plus fresh checking preserve the authority boundary. |
+| `D-PA-070` | Discard the patched compilation's enclosing stale-fingerprint artifact and publish only fresh proof state/goal-graph evidence with `artifactCurrent: false`. | The browser-safe evaluator cannot compute the new source hash and must not make a caller-supplied old fingerprint look current. |
+| `D-PA-071` | Treat latency, token, and checker-call figures as provider-reported unverified data and aggregate exact integer counts/coverage only. | Pure browser-safe evaluation cannot acquire or attest host resource use; derived ratios, prices, and leaderboards require separate policy. |
+| `D-PA-072` | Split internal scoring (`12A`) from public package/adapters/corpus qualification (`12B`). | Measuring the generic contract on a standalone fixture avoids prematurely freezing a public agent transport, benchmark corpus, or leaderboard contract and avoids another long public aggregate. |
 
 ## Validation And Checkpoint Policy
 
@@ -3657,10 +3813,10 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from the completed `REFACTOR-9B` semantic checkpoint `53924d7` and
-> its synchronized completion record in this plan. Audit `AGENT-EVAL-12`
-> next unless current implementation evidence exposes a narrower missing
-> prerequisite. Keep `STDLIB-8`, `COUNTEREVIDENCE-10`, and
+> Start from the completed `REFACTOR-9B` semantic checkpoint `53924d7`, its
+> synchronized completion record, and the frozen `AGENT-EVAL-12A` contract in
+> this plan. Implement `AGENT-EVAL-12A` next unless current evidence forces a
+> recorded correction. Keep `STDLIB-8`, `COUNTEREVIDENCE-10`, and
 > `EXTERNAL-CERT-11` behind their recorded product/consumer gates rather than
 > inventing authority or a solver merely to advance the ledger. Continue in
 > dependency order as those gates acquire concrete consumers. Begin
