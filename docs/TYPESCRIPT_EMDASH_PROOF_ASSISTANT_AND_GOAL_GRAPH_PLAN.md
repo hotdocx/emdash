@@ -5593,9 +5593,10 @@ Proposal v8 keeps the exact 5/12/2/9 rule set and represents source
 `tt ≡ tt` by one captured `A ≡ A` constraint. Conversion discharges it
 immediately; matching and the mathematical rule are unchanged. This needs no
 generic engine change, new owner, runtime rule, or public effect. V7
-checkpoints `2460ae9` and `7035922` remain backtracking evidence;
-implementation is paused until v8 receives its own checkpoint and separate
-review.
+checkpoints `2460ae9` and `7035922` remain backtracking evidence. Proposal v8
+is checkpointed at `6e4bb82`; its separate delegated review restores only the
+root-local 5/12/2/9 implementation authority, retains human supersession, and
+preserves every later/public denial.
 
 ## Decision Ledger
 
@@ -5721,6 +5722,7 @@ review.
 | `D-PA-118` | Supersede the v6 PathOut-foundation review and correct proposal v7 to 5/12/2/9 with the active identity-family precomposition comparison at line 8079. | The v6 runtime closure succeeds, but the selected consumers reach `hom_precomp_along_fapp0(id,p,q) ≡ comp(q,p)`, while line 8463 requires a rigid `hom_int_precomp_func` right factor. Line 8079 is the exact active specialized rule; transferring it is narrower than changing the generic proof matcher, adding another runtime fusion, or weakening the consumer. |
 | `D-PA-119` | Approve only checkpointed PathOut-foundation proposal v7 under delegated unattended authority, with human supersession. | Checkpoint `2460ae9` preserves the exact 5/12/2/9 identity-family proof closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v6 or making the proposal self-authorizing. |
 | `D-PA-120` | Supersede the v7 PathOut-foundation review and correct proposal v8 by retaining one reflexive generated constraint for the identity-family rule. | The generic proof-transfer module rejects empty generated-constraint lists, while the predecessor has no native `tt` owner. Representing source `tt ≡ tt` as captured `A ≡ A` preserves the rule's trivial discharge and exact 5/12/2/9 semantic boundary without changing the generic engine or importing a foundational inductive. |
+| `D-PA-121` | Approve only checkpointed PathOut-foundation proposal v8 under delegated unattended authority, with human supersession. | Checkpoint `6e4bb82` preserves the exact 5/12/2/9 identity-family rule and its nonempty reflexive constraint representation, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v7 or making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
