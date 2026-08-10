@@ -1,4 +1,4 @@
-/** Focused DEV-CLI-2B mounted-source and general command tests. */
+/** Focused DEV-CLI-2B source and DEV-CLI-2C command tests. */
 
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -31,6 +31,9 @@ import {
     CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
     parseCoreLfProofDevelopmentSourceText
 } from '../src/v3_2/lf_proof_development_source';
+import {
+    CORE_PROOF_GOAL_COUPLING_PROFILE
+} from '../src/v3_2/proof_goal_graph';
 
 interface CliResult {
     readonly exitCode: number;
@@ -214,7 +217,7 @@ describe('DEV-CLI-2B mounted proof-development source', () => {
     });
 });
 
-describe('DEV-CLI-2B proof-development commands', () => {
+describe('DEV-CLI-2B/2C proof-development commands', () => {
     it('distinguishes incomplete check from successful goal inspection', async () => {
         await withDirectory(async projectRoot => {
             await writeDemo(projectRoot);
@@ -324,6 +327,122 @@ describe('DEV-CLI-2B proof-development commands', () => {
         });
     });
 
+    it('projects whole and exact portable goal graphs', async () => {
+        await withDirectory(async projectRoot => {
+            await writeDemo(projectRoot);
+            const whole = await run([
+                'graph',
+                '--project-root',
+                projectRoot
+            ]);
+            assert.equal(whole.exitCode, 0);
+            assert.equal(whole.stderr, '');
+            const records = whole.stdout.trimEnd().split('\n').map(
+                line => JSON.parse(line) as any
+            );
+            assert.deepEqual(
+                records.map(record => record.kind),
+                [
+                    'proof-development-summary',
+                    'proof-development-goal-graph',
+                    'proof-development-goal-graph'
+                ]
+            );
+            assert.equal(records[0].command, 'graph');
+            assert.equal(
+                records[0].revision,
+                'emdash-lf-proof-development-summary-v3'
+            );
+            assert.deepEqual(
+                records.slice(1).map(record => record.declarationId),
+                ['complete_identity', 'open_identity']
+            );
+            assert.deepEqual(records[1].graph, {
+                revision: 'emdash-proof-goal-coupling-graph-v1',
+                nodes: [],
+                edges: []
+            });
+            assert.deepEqual(records[2].graph.nodes, [{
+                id: 'body',
+                reachability: 'term-reachable'
+            }]);
+            assert.deepEqual(records[2].graph.edges, []);
+            assert.equal(
+                records[2].revision,
+                'emdash-lf-proof-development-graph-v1'
+            );
+
+            const repeated = await run([
+                'graph',
+                `--project-root=${projectRoot}`
+            ]);
+            assert.equal(repeated.stdout, whole.stdout);
+            assert.doesNotMatch(
+                whole.stdout,
+                /\?m\d|session|Symbol|projectRoot|sourceText/u
+            );
+            assert.doesNotMatch(whole.stdout, new RegExp(
+                projectRoot.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&'),
+                'u'
+            ));
+
+            const selected = await run([
+                'graph',
+                '--project-root',
+                projectRoot,
+                '--module',
+                CORE_AI_PROOF_DEVELOPMENT_DEMO_PROFILE.moduleId,
+                '--declaration',
+                'open_identity'
+            ]);
+            assert.equal(selected.exitCode, 0);
+            const selectedRecords = selected.stdout.trimEnd().split('\n')
+                .map(line => JSON.parse(line) as any);
+            assert.equal(selectedRecords.length, 2);
+            assert.equal(selectedRecords[0].scope, 'proof');
+            assert.equal(selectedRecords[1].declarationId, 'open_identity');
+
+            const text = await run([
+                'graph',
+                '--project-root',
+                projectRoot,
+                '--module',
+                CORE_AI_PROOF_DEVELOPMENT_DEMO_PROFILE.moduleId,
+                '--declaration',
+                'complete_identity',
+                '--format=text'
+            ]);
+            assert.equal(text.exitCode, 0);
+            assert.match(text.stdout, /Graph .*\.complete_identity/u);
+            assert.match(text.stdout, /no open goals/u);
+            assert.equal(
+                CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.revision,
+                'emdash-lf-proof-development-cli-v3'
+            );
+            assert.deepEqual(
+                CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.commands,
+                ['check', 'goals', 'build', 'graph']
+            );
+            assert.equal(
+                CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.graphRevision,
+                'emdash-lf-proof-development-graph-v1'
+            );
+            assert.equal(
+                CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.goalRevision,
+                'emdash-lf-proof-development-goal-v2'
+            );
+            assert.equal(
+                CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.buildRevision,
+                'emdash-lf-proof-development-build-v2'
+            );
+            assert.equal(
+                CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE
+                    .goalCouplingProfileRevision,
+                CORE_PROOF_GOAL_COUPLING_PROFILE.revision
+            );
+        });
+    });
+
     it('emits full portable build records and fails incomplete builds', async () => {
         await withDirectory(async projectRoot => {
             await writeDemo(projectRoot);
@@ -405,7 +524,7 @@ describe('DEV-CLI-2B proof-development commands', () => {
                 './scripts/emdash',
                 [
                     'development',
-                    'goals',
+                    'graph',
                     '--project-root',
                     projectRoot,
                     '--module',
@@ -418,7 +537,8 @@ describe('DEV-CLI-2B proof-development commands', () => {
                 { cwd: path.resolve(__dirname, '..'), encoding: 'utf8' }
             );
             assert.equal(development.status, 0, development.stderr);
-            assert.match(development.stdout, /Goal .*open_identity\.body/u);
+            assert.match(development.stdout, /Graph .*open_identity/u);
+            assert.match(development.stdout, /Goal body/u);
 
             const legacy = spawnSync(
                 './scripts/emdash',
@@ -436,7 +556,7 @@ describe('DEV-CLI-2B proof-development commands', () => {
             assert.equal(capabilities.status, 0, capabilities.stderr);
             assert.match(
                 capabilities.stdout,
-                /emdash development check/u
+                /emdash development graph/u
             );
 
             const materializer = spawnSync(

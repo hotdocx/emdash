@@ -102,11 +102,14 @@ node --require ts-node/register \
 ./scripts/emdash development goals \
   --project-root /absolute/project \
   --format text
+./scripts/emdash development graph \
+  --project-root /absolute/project \
+  --format text
 ```
 
 The legacy proof commands deliberately exercise a fixed checked proof module;
 `workspace check` accepts only canonical locked workspace files; and
-`development check|goals|build` accepts only the fixed canonical
+`development check|goals|build|graph` accepts only the fixed canonical
 proof-development file under an explicit real root. It never imports the
 management module or discovers an ambient project. The capability record
 states those scopes rather than presenting this qualified local foundation as

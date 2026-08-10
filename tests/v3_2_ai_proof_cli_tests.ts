@@ -434,6 +434,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
     it('publishes one honest immutable local-foundation record', () => {
         assertDeepFrozen(CORE_AI_NATIVE_CAPABILITIES);
         assert.equal(
+            CORE_AI_NATIVE_CAPABILITIES_PROFILE.revision,
+            'emdash-ai-native-capabilities-v7'
+        );
+        assert.equal(
             CORE_AI_NATIVE_CAPABILITIES.status,
             'qualified-local-foundation'
         );
@@ -553,7 +557,8 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
                 'workspace-check',
                 'development-check',
                 'development-goals',
-                'development-build'
+                'development-build',
+                'development-graph'
             ]
         );
         assert.match(
@@ -572,7 +577,6 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
             CORE_AI_NATIVE_CAPABILITIES.deferred.map(item => item.id),
             [
                 'restricted-host-source-execution',
-                'development-graph-command',
                 'persisted-or-inline-paper-artifacts',
                 'network-acquisition',
                 'hosted-workspace-delivery',

@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v6' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v6' as const,
+    revision: 'emdash-ai-native-capabilities-v7' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v7' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -146,9 +146,10 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
             },
             {
                 id: 'proof-development-cli',
-                revision: 'emdash-lf-proof-development-cli-v2',
+                revision: 'emdash-lf-proof-development-cli-v3',
                 scope:
-                    'stateless check, goals, and build over canonical source'
+                    'stateless check, goals, build, and graph over canonical ' +
+                    'source'
             },
             {
                 id: 'same-module-fragment-workspace',
@@ -283,6 +284,18 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 scope:
                     'full portable proof/development artifact on JSONL stdout',
                 performsSemanticChecks: true
+            },
+            {
+                id: 'development-graph',
+                syntax:
+                    './scripts/emdash development graph ' +
+                    '--project-root ABSOLUTE_PATH ' +
+                    '[--module ID --declaration ID] ' +
+                    '[--format jsonl|text]',
+                scope:
+                    'portable direct coupling graphs from freshly checked ' +
+                    'proof compilations',
+                performsSemanticChecks: true
             }
         ],
         deferred: [
@@ -292,13 +305,6 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 prerequisite:
                     'an independently reviewed isolation model for optional ' +
                     'TypeScript macro execution'
-            },
-            {
-                id: 'development-graph-command',
-                state: 'consumer-gated',
-                prerequisite:
-                    'DEV-CLI-2C exact Node projection over the implemented ' +
-                    'portable goal-coupling graph'
             },
             {
                 id: 'persisted-or-inline-paper-artifacts',

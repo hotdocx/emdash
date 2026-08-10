@@ -10,10 +10,13 @@
 > graphs. It preserves explicit checked Core and the small TypeScript checker
 > as authority, keeps Lambdapi optional as an emitter/conformance oracle, and
 > separates kernel-checked theorems from verification, observation, approval,
-> AI-proposal, and ordinary task evidence. `DEV-CATALOG-1` is its first frozen
-> browser-safe tranche; file acquisition, general CLI targeting, richer proof
-> nodes, npm bootstrap publication, hosted integration, and the general goal
-> plane remain separately gated.
+> AI-proposal, and ordinary task evidence. The browser-safe catalog, canonical
+> source, explicit-root commands, selected constructor, contextual `have`,
+> typed-term refine templates, portable direct goal coupling, and
+> `development graph` projection are now bounded and final-green on the
+> dedicated goal branch. Simplification, search/automation, npm bootstrap
+> publication, hosted integration, and the general goal plane remain
+> separately gated.
 >
 > **Structures/classes/instance-synthesis continuation (2026-08-08):**
 > [`TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md`](./TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md)
@@ -178,7 +181,8 @@
 > locked supplied-text reconstruction, mounted fixed-file verification,
 > immutable source-absent offline cache reuse, the explicit-root
 > `workspace check` command, canonical multi-proof development source,
-> explicit-root `development check|goals|build`, finite global dictionary
+> explicit-root `development check|goals|build|graph`, portable direct proof-
+> goal coupling, finite global dictionary
 > selection, the direct
 > leading-implicit authoring adapter, stable paper/diagram/proof bindings, and
 > the lazy browser checked/open recheck. The most recent completed aggregate
@@ -191,11 +195,11 @@
 > contract. It labels the result `qualified-local-foundation`, names the pure
 > `typescript-emdash-explicit-core` backend, and states that current proof
 > commands target a fixed demo, `workspace check` targets canonical locked
-> files, and `development check|goals|build` freshly checks the fixed
+> files, and `development check|goals|build|graph` freshly checks the fixed
 > `emdash.proof-development.source.json` file under an explicit real root.
-> Arbitrary host-module execution, graph output, persisted or inline paper
-> artifacts, live transport, hosted runtime delivery, whole-library transfer,
-> and global metatheory remain explicitly gated. Lambdapi/emdash remains an
+> Arbitrary host-module execution, persisted or inline paper artifacts, live
+> transport, hosted runtime delivery, whole-library transfer, and global
+> metatheory remain explicitly gated. Lambdapi/emdash remains an
 > optional development conformance route, not a production dependency. No
 > `~/closerfans` file changed. Reuse recent aggregate evidence unless an exact
 > omitted focused boundary would block progress.

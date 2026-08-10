@@ -4,6 +4,11 @@ import {
     CoreProofPlanGoalSnapshot
 } from './proof_plan';
 import {
+    CORE_PROOF_GOAL_COUPLING_PROFILE,
+    CoreProofGoalCouplingGraph,
+    formatCoreProofGoalCouplingGraph
+} from './proof_goal_graph';
+import {
     CoreLfWorkspaceProofArtifact
 } from './lf_workspace_proof';
 import {
@@ -18,15 +23,18 @@ import {
 } from './lf_proof_development_store';
 
 export const CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE = Object.freeze({
-    revision: 'emdash-lf-proof-development-cli-v2' as const,
+    revision: 'emdash-lf-proof-development-cli-v3' as const,
     summaryRevision:
-        'emdash-lf-proof-development-summary-v2' as const,
+        'emdash-lf-proof-development-summary-v3' as const,
     goalRevision: 'emdash-lf-proof-development-goal-v2' as const,
     buildRevision: 'emdash-lf-proof-development-build-v2' as const,
+    graphRevision: 'emdash-lf-proof-development-graph-v1' as const,
+    goalCouplingProfileRevision:
+        CORE_PROOF_GOAL_COUPLING_PROFILE.revision,
     mountedProfileRevision:
         CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE.revision,
     commandNamespace: 'development' as const,
-    commands: Object.freeze(['check', 'goals', 'build'] as const),
+    commands: Object.freeze(['check', 'goals', 'build', 'graph'] as const),
     backend: CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE.backend,
     defaultFormat: 'jsonl' as const,
     requiresExplicitProjectRoot: true as const,
@@ -98,15 +106,25 @@ export interface CoreLfProofDevelopmentBuildRecord {
         CoreLfProofDevelopmentArtifact | CoreLfWorkspaceProofArtifact;
 }
 
+export interface CoreLfProofDevelopmentGraphRecord {
+    readonly revision:
+        typeof CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.graphRevision;
+    readonly kind: 'proof-development-goal-graph';
+    readonly moduleId: string;
+    readonly declarationId: string;
+    readonly graph: CoreProofGoalCouplingGraph;
+}
+
 interface SelectedDevelopment {
     readonly summary: CoreLfProofDevelopmentSummaryRecord;
     readonly goals: readonly CoreLfProofDevelopmentGoalRecord[];
+    readonly graphs: readonly CoreLfProofDevelopmentGraphRecord[];
     readonly artifact:
         CoreLfProofDevelopmentArtifact | CoreLfWorkspaceProofArtifact;
 }
 
 export const CORE_LF_PROOF_DEVELOPMENT_CLI_USAGE =
-    'usage: ./scripts/emdash development <check|goals|build> ' +
+    'usage: ./scripts/emdash development <check|goals|build|graph> ' +
     '--project-root ABSOLUTE_PATH ' +
     '[--module MODULE_ID --declaration DECLARATION_ID] ' +
     '[--format jsonl|text]';
@@ -136,7 +154,8 @@ const parseCommand = (argv: readonly string[]): ParsedCommand => {
     if (
         command !== 'check' &&
         command !== 'goals' &&
-        command !== 'build'
+        command !== 'build' &&
+        command !== 'graph'
     ) {
         throw new Error(CORE_LF_PROOF_DEVELOPMENT_CLI_USAGE);
     }
@@ -247,6 +266,18 @@ const goalRecord = (
     goal
 });
 
+const graphRecord = (
+    moduleId: string,
+    declarationId: string,
+    graph: CoreProofGoalCouplingGraph
+): CoreLfProofDevelopmentGraphRecord => Object.freeze({
+    revision: CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.graphRevision,
+    kind: 'proof-development-goal-graph' as const,
+    moduleId,
+    declarationId,
+    graph
+});
+
 const selectDevelopment = (
     command: CoreLfProofDevelopmentCliCommand,
     mounted: CoreLfMountedProofDevelopmentResult,
@@ -265,6 +296,13 @@ const selectDevelopment = (
         const goals = Object.freeze(proofArtifact.state.goals.map(goal =>
             goalRecord(moduleId, declarationId, goal)
         ));
+        const graphs = Object.freeze([
+            graphRecord(
+                moduleId,
+                declarationId,
+                proof.proofCompilation.goalGraph
+            )
+        ]);
         return Object.freeze({
             summary: Object.freeze({
                 revision:
@@ -283,6 +321,7 @@ const selectDevelopment = (
                 declarationId
             }),
             goals,
+            graphs,
             artifact: proof.artifact
         });
     }
@@ -292,6 +331,14 @@ const selectDevelopment = (
         entry.declarationId,
         entry.goal
     )));
+    const graphs = Object.freeze(development.proofs.map(proof => {
+        const proofArtifact = proof.artifact.proofArtifact;
+        return graphRecord(
+            proofArtifact.moduleId,
+            proofArtifact.declarationId,
+            proof.proofCompilation.goalGraph
+        );
+    }));
     return Object.freeze({
         summary: Object.freeze({
             revision:
@@ -310,6 +357,7 @@ const selectDevelopment = (
             openGoalCount: goals.length
         }),
         goals,
+        graphs,
         artifact: development.artifact
     });
 };
@@ -356,6 +404,16 @@ const formatGoal = (record: CoreLfProofDevelopmentGoalRecord): string =>
     `[depth ${record.goal.contextDepth}]\n` +
     `  |- ${record.goal.target}\n`;
 
+export const formatCoreLfProofDevelopmentGraphRecord = (
+    record: CoreLfProofDevelopmentGraphRecord
+): string => {
+    const graph = formatCoreProofGoalCouplingGraph(record.graph)
+        .split('\n')
+        .map(line => `  ${line}`)
+        .join('\n');
+    return `Graph ${record.moduleId}.${record.declarationId}\n${graph}\n`;
+};
+
 const defaultStdout = (text: string): void => {
     process.stdout.write(text);
 };
@@ -390,6 +448,8 @@ export async function runCoreLfProofDevelopmentCli(
         if (parsed.format === 'jsonl') {
             const records = parsed.command === 'build'
                 ? [createCoreLfProofDevelopmentBuildRecord(selected)]
+                : parsed.command === 'graph'
+                    ? [selected.summary, ...selected.graphs]
                 : parsed.command === 'goals'
                     ? [selected.summary, ...selected.goals]
                     : [selected.summary];
@@ -399,12 +459,17 @@ export async function runCoreLfProofDevelopmentCli(
                 formatCoreLfProofDevelopmentSummary(selected.summary) +
                 (parsed.command === 'goals'
                     ? selected.goals.map(formatGoal).join('')
-                    : '')
+                    : parsed.command === 'graph'
+                        ? selected.graphs.map(
+                            formatCoreLfProofDevelopmentGraphRecord
+                        ).join('')
+                        : '')
             );
         }
 
         if (
             parsed.command !== 'goals' &&
+            parsed.command !== 'graph' &&
             selected.summary.status === 'incomplete'
         ) {
             const identity = selected.summary.scope === 'proof'
