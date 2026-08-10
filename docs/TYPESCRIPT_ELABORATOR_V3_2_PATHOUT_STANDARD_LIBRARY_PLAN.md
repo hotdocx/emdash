@@ -12,10 +12,10 @@ checkpointed proposal v9 preserves v8 and adds only active line 8032's
 identity-incoming precomposition computation, and is separately approved
 under delegated unattended authority with human supersession; root-only
 `PATHOUT-LIBRARY-FOUNDATION-1B` is implemented and final-proportional-green at
-5/13/2/9; `PATHIND-TRUSTED-PROFILE-1C` proposal v1 is frozen as the root-only
-5/6/0/6 fixed-source boundary and awaits its required checkpoint and separate
-review; it authorizes no implementation, and no PathOut/PathInd profile or
-public export is yet qualified
+5/13/2/9; `PATHIND-TRUSTED-PROFILE-1C` proposal v1 is checkpointed at
+`cc639fc` and separately approved under delegated unattended authority with
+human supersession; only its root-only 5/6/0/6 implementation is ready, and
+no PathOut/PathInd profile or public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -177,7 +177,7 @@ named library presentation.
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
-| `PATHIND-TRUSTED-PROFILE-1C` | proposal v1 frozen; checkpoint/review pending; no implementation authority | completed 1B | The exact root-only 5/6/0/6 proposal selects the full covariant-fibre cascade, `path_ind_sec`, its fixed-source component functor, three component/specialized rules, six transparent helpers, one derived rho-section consumer, strict negatives, and seven future bounded-oracle assertions. |
+| `PATHIND-TRUSTED-PROFILE-1C` | proposal v1 separately reviewed; exact implementation ready | completed 1B; checkpoint `cc639fc` | The approved root-only 5/6/0/6 boundary selects the full covariant-fibre cascade, `path_ind_sec`, its fixed-source component functor, three component/specialized rules, six transparent helpers, one derived rho-section consumer, strict negatives, and seven bounded-oracle assertions. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -1061,6 +1061,11 @@ The behavior-free immutable proposal is
 [`src/v3_2/pathind_fixed_source_proposal.ts`](../src/v3_2/pathind_fixed_source_proposal.ts),
 with focused drift, sealing, and non-export checks in
 [`tests/v3_2_pathind_fixed_source_proposal_tests.ts`](../tests/v3_2_pathind_fixed_source_proposal_tests.ts).
+Proposal checkpoint `cc639fc` freezes those exact bytes. The separate review
+is
+[`src/v3_2/pathind_fixed_source_review.ts`](../src/v3_2/pathind_fixed_source_review.ts),
+with focused checks in
+[`tests/v3_2_pathind_fixed_source_review_tests.ts`](../tests/v3_2_pathind_fixed_source_review_tests.ts).
 It pins active-source/check digests from the completed audit, the qualified
 PathOut predecessor revision, semantic checkpoint `550316a`, and synchronized
 ledger checkpoint `349b6d4`. The source digests still match the audited bytes.
@@ -1132,7 +1137,37 @@ digests are unchanged, and direct proposal/static gates cover its only
 behavior: rejecting drift and accidental authority. The decision question is
 `H-TS-EMDASH-PATHIND-FIXED-SOURCE-01` /
 `D-TS-EMDASH-PATHIND-FIXED-SOURCE-001`. The proposal remains non-authorizing
-until separately reviewed after its rollback-safe checkpoint.
+in its own immutable data. Its separate review approves only checkpoint
+`cc639fc` under the user's standing unattended delegation, with later human
+supersession, and authorizes only the exact root-local implementation. The
+review does not authorize `PathInd_func`, `PathInd_transfd`, internalized
+induction, transitivity, the Path-category proof bridge, public export, active
+Lambdapi edits, integration, or release.
+
+Separate-review validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_fixed_source_review.ts \
+  tests/v3_2_pathind_fixed_source_review_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_fixed_source_proposal_tests.ts \
+  tests/v3_2_pathind_fixed_source_review_tests.ts
+  13 tests / 2 suites: 13 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi or long aggregate is relevant to this behavior-free review. The
+next authorized action is the exact 5/6/0/6 root-only implementation with its
+focused consumers, strict negatives, and bounded oracle.
 
 ## Required Evidence For Implementation
 

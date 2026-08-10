@@ -82,10 +82,10 @@ the checked book and research-overview story, while its transparent library
 definitions and opaque semantic owners remain separated by the dedicated
 trusted-profile plan. Its exact trust-boundary audit and root-only
 `PATHOUT-LIBRARY-FOUNDATION-1B` are complete and final-proportional-green at
-5/13/2/9. Fixed-source `PATHIND-TRUSTED-PROFILE-1C` proposal v1 is now frozen
-at the exact root-only 5/6/0/6 boundary and awaits checkpoint plus separate
-review; it authorizes no implementation. No PathOut/PathInd public package
-export has yet been added.
+5/13/2/9. Fixed-source `PATHIND-TRUSTED-PROFILE-1C` proposal v1 is checkpointed
+at `cc639fc` and separately approved under delegated unattended authority;
+only its exact root-only 5/6/0/6 implementation is ready. No PathOut/PathInd
+public package export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -640,7 +640,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. Behavior-free `PATHIND-TRUSTED-PROFILE-1C` proposal v1 freezes the next 5/6/0/6 fixed-source slice and awaits checkpoint/review. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. Checkpointed and separately reviewed `PATHIND-TRUSTED-PROFILE-1C` proposal v1 authorizes only the next root-only 5/6/0/6 fixed-source implementation. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -5628,7 +5628,7 @@ identity-family proof rule, reflexive source transport computes definitionally,
 the canonical arrow typechecks, all eight negative consumers reject, and no
 public/browser/package barrel exports the profile. No long aggregate was
 rerun under the standing policy because no shared engine or package boundary
-changed. The separately frozen 1C proposal remains review-gated.
+changed. The separately reviewed 1C proposal now gates the implementation.
 
 Behavior-free `PATHIND-TRUSTED-PROFILE-1C` proposal v1 is now frozen over
 semantic predecessor `550316a` and ledger `349b6d4`. Its exact root-only
@@ -5640,8 +5640,12 @@ canonical rho arrow. `PathInd_func`, `PathInd_transfd`, varying-source
 packaging, transitivity, the Path-category proof bridge, browser/package
 exports, and active-kernel changes remain explicitly deferred. Eight focused
 proposal tests, root typecheck, focused lint, and diff hygiene pass. The
-proposal installs no behavior and remains non-authorizing until checkpointed
-and separately reviewed.
+proposal installs no behavior and remains non-authorizing in its own data.
+Checkpoint `cc639fc` is separately approved under delegated unattended
+authority with later human supersession. The review permits only its exact
+local implementation and preserves every internalized, transitivity, public,
+active-kernel, and release denial. The combined proposal/review gate passes
+13 tests in two suites.
 
 ## Decision Ledger
 
@@ -5772,6 +5776,7 @@ and separately reviewed.
 | `D-PA-123` | Approve only checkpointed PathOut-foundation proposal v9 under delegated unattended authority, with human supersession. | Checkpoint `b4277fb` preserves the exact 5/13/2/9 identity-incoming closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v8 or making the proposal self-authorizing. |
 | `D-PA-124` | Complete root-only `PATHOUT-LIBRARY-FOUNDATION-1B` at the exact 5/13/2/9 boundary and advance only to a separately proposed `PATHIND-TRUSTED-PROFILE-1C`. | Checkpoint `550316a` compiles all entries through generic engines; seven positive and eight negative consumers, safe-library capability denials, non-export checks, and six bounded Lambdapi assertions are green. The focused evidence directly covers this non-public profile, so the standing anti-aggregate policy permits carrying forward unchanged workspace/package boundaries. |
 | `D-PA-125` | Freeze non-authorizing `PATHIND-TRUSTED-PROFILE-1C` proposal v1 at 5/6/0/6 over PathOut checkpoint `550316a`. | The full audited covariant-fibre cascade plus `path_ind_sec` and its component functor is the smallest fixed-source computation boundary. Deferring `PathInd_func` with `PathInd_transfd` keeps coherent/varying-source packaging in 1D, while the rho-section supplies one concrete transparent consumer. A separate immutable review remains mandatory before implementation. |
+| `D-PA-126` | Approve only checkpointed fixed-source PathInd proposal v1 under delegated unattended authority, with human supersession. | Checkpoint `cc639fc` preserves the exact 5/6/0/6 boundary, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review grants local implementation authority without making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
