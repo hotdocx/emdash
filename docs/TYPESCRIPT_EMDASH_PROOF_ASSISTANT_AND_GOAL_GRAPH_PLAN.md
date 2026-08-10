@@ -35,7 +35,9 @@ repair composition are complete and final-green through focused, nearest-
 owner, browser, packed-package, and required full-TypeScript gates; external
 automation and the general goal-graph rows remain later boundaries; the
 proof-agent benchmark audit is complete and its first pure attempt-scoring
-contract is frozen for implementation
+evaluator is implemented and final-proportional-green through focused,
+nearest-owner, typecheck/lint, and browser-closure gates; its public host,
+package, and corpus layer remains gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -73,7 +75,9 @@ semantic checkpoint is `da4b63f`; its synchronized clean published ledger
 checkpoint is `b57d205`. The semantic-development-diff contract checkpoint is
 `ca67f68`, its semantic checkpoint is `bed3a9d`, and its synchronized ledger
 checkpoint is `d245019`. The selected-proof-maintenance contract checkpoint is
-`9b48c4c` and its semantic checkpoint is `53924d7`.
+`9b48c4c`, its semantic checkpoint is `53924d7`, and its synchronized ledger
+checkpoint is `b8152a0`. The proof-agent benchmark contract checkpoint is
+`1ad765f` and its semantic checkpoint is `f46ff9a`.
 
 Depends-On:
 
@@ -558,7 +562,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | pending | one executable consumer and explicit evidence labeling |
 | `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | pending | one concrete solver/certificate consumer and independent checker |
-| `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | in progress | audit complete; implement the frozen self-contained case, arbitrary inert patch, fresh replay, exact retrieval, and provider-reported usage contract below |
+| `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | complete | `f46ff9a`; self-contained exact cases, arbitrary inert patches, fresh selected-proof replay, stable diagnostics, integer retrieval/plan/replay metrics, and provider-reported usage |
 | `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements plus a concrete agent/host consumer and reviewed corpus/public-package boundary |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC hardening | external gate | classes-plan `PACKAGE-12B2`; public integrated commit, protected environment, bootstrap credential, verification, trust configuration, cleanup |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | pending | stable proof artifact IDs and explicit acceptance-policy design |
@@ -3626,6 +3630,112 @@ book, publication, deployment, or sibling operations unless implementation
 evidence reveals an actual shared/public boundary not present in this frozen
 contract.
 
+## AGENT-EVAL-12A Completion Record
+
+Date: 2026-08-10
+
+Result: accepted at semantic checkpoint `f46ff9a` after frozen contract
+checkpoint `1ad765f`.
+
+The new internal browser-safe `src/v3_2/lf_proof_agent_benchmark.ts` implements
+the first reproducible proof-agent scoring layer without embedding an agent
+runtime or weakening proof authority:
+
+- versioned case construction embeds exact previous/current canonical proof-
+  development source, selected proof/goal identity, normalized semantic-diff
+  and premise-index settings, exact source/inspection preconditions, fresh
+  initial proof state and goal graph, and accessible curator-labeled relevant
+  premise IDs. Every case is freshly reconstructed and byte-compared;
+- suites reject duplicate identities and order cases canonically. Attempts
+  bind exact serialized case text, ranked unique premise IDs, optional
+  provider-reported usage, and either abstention or one ordinary arbitrary
+  hole-replacement patch. Runs record stable provider/profile/seed/outer-limit
+  data and exactly one attempt per evaluated case;
+- evaluation reconstructs the exact current declaration workspace, replays
+  the original selected proof, rebuilds its accessible premise index, checks
+  retrieval scope, applies the inert patch, and delegates candidate authority
+  to `compileCoreLfWorkspaceProofDocument`. Stale attempts abort; inaccessible
+  retrieval, wrong-goal or malformed patches, and known checker failures become
+  stable structured rejection results;
+- accepted results expose only fresh portable proof state and goal graph. The
+  enclosing artifact with its caller-supplied old fingerprint is discarded,
+  and every result/report states `artifactCurrent: false` and
+  `materializesUpdatedSource: false`;
+- reports retain canonical suite/run identity plus integer outcome, baseline/
+  candidate replay, plan-node, relevant/retrieved/rank, and reported-usage
+  coverage/total counts. Usage remains explicitly
+  `provider-reported-unverified`; the evaluator acquires no time, tokens, or
+  host-resource evidence; and
+- the existing 9B stable replay-diagnostic projector is now an exported
+  internal helper. Its checker diagnostic is tested byte-for-byte against the
+  benchmark rejection, with messages, stacks, metas, and failed sessions
+  excluded.
+
+The standalone ordinary-LF fixture declares one proposition `P`, two
+witnesses, and an endomap. Its five canonical cases measure two independently
+checked complete repairs (one existing obvious-provider patch and one
+externally authored exact patch), one accepted incomplete `f ?premise`
+repair, one checker-rejected wrong term, and one abstention. Additional cases
+establish inaccessible and duplicate relevance/retrieval refusal, wrong-goal
+and malformed-patch rejection, stale case and attempt identity, missing,
+duplicate, and unknown attempts, malformed provider/run data, canonical input
+ordering, exact first-relevant-rank and reported-usage aggregation, byte
+stability, and deep freezing. It does not import or modify the active
+presheaf, site, sheafification, affine-scheme, scheme, or projective-space
+mathematics.
+
+The evaluator deliberately remains outside `src/v3_2/index.ts`,
+`package_workspace.ts`, every package capability/public entry, installed
+package consumer, CLI, and core-only entry. Its focused suite is reached by
+the existing maintenance test owner, so neither the root test-runner barrel
+nor a public contract changed.
+
+Final validation on 2026-08-10:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_agent_benchmark_tests.ts
+  passed: 5/5 tests, 1 suite
+
+nearest development-diff/maintenance, proof-plan/patch, workspace-proof,
+premise-index, and obvious-provider command
+  passed: 55/55 tests, 10 suites
+
+node --require ts-node/register --test \
+  tests/v3_2_browser_directed_tests.ts
+  passed: 19/19 tests, 1 suite
+
+./scripts/pnpmw exec tsc --noEmit --pretty false
+  passed
+
+eslint over the two source owners and three changed test owners
+  passed
+
+git diff --cached --check
+  passed before semantic checkpoint f46ff9a
+```
+
+No `check:ts`, root-test aggregate, `check:all`, workspace/package aggregate,
+kernel/Lambdapi, print/book, npm/release, deployment, or sibling-repository
+operation ran. The internal-only boundary and focused owner coverage made none
+of those a progress-blocking gate; their omission is not recorded as positive
+evidence.
+
+Non-effects: no model/API call, agent callback, MCP/LSP server, tactic cursor,
+filesystem/network/process adapter, wall-clock or tokenizer, hash computation,
+source persistence, theorem export, public benchmark corpus, leaderboard,
+package capability, parser, backend emission, Core node, plan tag, proof/
+source/artifact revision, checker/refiner/conversion rule, class/instance
+semantics, or mathematical Lambdapi development changed.
+
+`AGENT-EVAL-12B` now has a measured generic contract but remains gated by a
+concrete host/agent consumer and reviewed public corpus/package policy.
+`STDLIB-8`, `COUNTEREVIDENCE-10`, and `EXTERNAL-CERT-11` remain behind their
+recorded product or solver gates. The next dependency-ready internal work is
+an audit-only start of `GOAL-GRAPH-14A`: inventory stable proof/evidence IDs
+and freeze an explicit acceptance-policy boundary before adding any general
+goal status semantics.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -3702,6 +3812,8 @@ contract.
 | `D-PA-070` | Discard the patched compilation's enclosing stale-fingerprint artifact and publish only fresh proof state/goal-graph evidence with `artifactCurrent: false`. | The browser-safe evaluator cannot compute the new source hash and must not make a caller-supplied old fingerprint look current. |
 | `D-PA-071` | Treat latency, token, and checker-call figures as provider-reported unverified data and aggregate exact integer counts/coverage only. | Pure browser-safe evaluation cannot acquire or attest host resource use; derived ratios, prices, and leaderboards require separate policy. |
 | `D-PA-072` | Split internal scoring (`12A`) from public package/adapters/corpus qualification (`12B`). | Measuring the generic contract on a standalone fixture avoids prematurely freezing a public agent transport, benchmark corpus, or leaderboard contract and avoids another long public aggregate. |
+| `D-PA-073` | Accept `AGENT-EVAL-12A` as an internal pure scoring owner without advancing public package/capability families. | The five-case fixture exercises arbitrary attempts, exact scope, fresh replay, stable rejection, partial success, and integer metrics; no concrete public agent transport or representative corpus yet justifies a package contract. |
+| `D-PA-074` | Audit `GOAL-GRAPH-14A` next while retaining the public benchmark, library, counterevidence, and external-certificate gates. | Stable proof identities, states, fingerprints, and coupling graphs now exist; the remaining internal prerequisite is an explicit evidence/acceptance policy, which must be designed before general goal status can be implemented. |
 
 ## Validation And Checkpoint Policy
 
@@ -3813,15 +3925,15 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from the completed `REFACTOR-9B` semantic checkpoint `53924d7`, its
-> synchronized completion record, and the frozen `AGENT-EVAL-12A` contract in
-> this plan. Implement `AGENT-EVAL-12A` next unless current evidence forces a
-> recorded correction. Keep `STDLIB-8`, `COUNTEREVIDENCE-10`, and
-> `EXTERNAL-CERT-11` behind their recorded product/consumer gates rather than
-> inventing authority or a solver merely to advance the ledger. Continue in
-> dependency order as those gates acquire concrete consumers. Begin
-> `GOAL-GRAPH-14A`
-> only after its proof-artifact and evidence-policy prerequisites are ready.
+> Start from the completed `AGENT-EVAL-12A` semantic checkpoint `f46ff9a`, its
+> synchronized completion record, and the recorded gates in this plan. Audit
+> `GOAL-GRAPH-14A` next: inventory the existing stable proof/artifact/goal IDs
+> and freeze one explicit evidence and acceptance-policy contract before any
+> implementation. Keep `AGENT-EVAL-12B`, `STDLIB-8`,
+> `COUNTEREVIDENCE-10`, and `EXTERNAL-CERT-11` behind their recorded public-
+> consumer, product, or solver gates rather than inventing authority merely
+> to advance the ledger. Continue in dependency order as those gates acquire
+> concrete consumers.
 > Preserve the hard distinction between a kernel-checked theorem and every
 > weaker task/observation/approval/AI evidence class.
 >
