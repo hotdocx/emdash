@@ -13,6 +13,9 @@ import {
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_BOUNDARY
 } from '../src/v3_2/categorical_displayed_nd_higher_foundation_transfer';
 import {
+    CORE_CATEGORICAL_MIXED_ACTION_TRANSFER_BOUNDARY
+} from '../src/v3_2/categorical_mixed_action_transfer';
+import {
     CORE_DIRECTED_1A_PRIMITIVE_NAMES
 } from '../src/v3_2/directed_1a';
 import {
@@ -64,10 +67,17 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
             [
                 proposal.parent.correctedAuditCheckpoint,
                 proposal.parent.correctedLedgerCheckpoint,
+                proposal.parent.supersededProposalCheckpoint,
                 proposal.decision.status,
                 proposal.decision.implementationAuthorized
             ],
-            ['5a1ea75', '828b0d7', 'proposal-only', false]
+            [
+                '5a1ea75',
+                '828b0d7',
+                'dd69325',
+                'proposal-only',
+                false
+            ]
         );
     });
 
@@ -113,13 +123,26 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
         const predecessor =
             CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.selectedPredecessor;
         assert.equal(
-            CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_BOUNDARY
+            CORE_CATEGORICAL_MIXED_ACTION_TRANSFER_BOUNDARY
                 .revision,
             predecessor.boundaryRevision
         );
         assert.equal(
             CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_BOUNDARY
                 .declarationNames.includes('hom_int'),
+            true
+        );
+        assert.equal(
+            CORE_CATEGORICAL_MIXED_ACTION_TRANSFER_BOUNDARY
+                .declarationNames.includes('hom_'),
+            true
+        );
+        assert.equal(
+            CORE_CATEGORICAL_MIXED_ACTION_TRANSFER_BOUNDARY.runtimeRuleIds
+                .includes(
+                    'categorical.mixed-action.' +
+                    'internal-hom-object-projection'
+                ),
             true
         );
         assert.equal(
@@ -137,7 +160,11 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
             'dttlf_sigma_transport_arrow'
         );
         assert.equal(predecessor.importWholeScaleProfile, false);
-        assert.equal(predecessor.importWholeMixedActionProfile, false);
+        assert.equal(predecessor.reuseReviewedMixedActionDescendant, true);
+        assert.equal(
+            predecessor.extractOrDuplicateRepresentedHomSubset,
+            false
+        );
     });
 
     it('confirms the new owners are absent from pre-1B transfer modules',

@@ -3,8 +3,8 @@
 Status: active selected standard-library continuation under
 `TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is complete and the
 behavior-free `PATHOUT-LIBRARY-FOUNDATION-1B0` proposal is frozen awaiting a
-separate immutable review; no PathOut library semantic or public export is yet
-implemented
+separate immutable review after one review-driven predecessor correction; no
+PathOut library semantic or public export is yet implemented
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -164,7 +164,7 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | proposal frozen; review next | completed corrected 0A | The immutable proposal freezes the exact represented-source and Sigma-totalization functor-action prerequisites plus nine transparent foundation definitions, linkage, sealing, rules, consumers, negatives, and bounded oracle. It does not authorize 1B. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected proposal frozen; review next | completed corrected 0A | Proposal v2 freezes the exact represented-source and Sigma-totalization functor-action prerequisites plus nine transparent foundation definitions over the mixed-action descendant, with linkage, sealing, rules, consumers, negatives, and bounded oracle. It does not authorize 1B. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | pending | reviewed 1B0 | Transfer the two sealed foundation prerequisites, then author representables, fixed-source `PathOut`, source-arrow action, path objects, reflexive object, and canonical reflexive-to-path arrow as transparent end-user library definitions. Check fibre, object, arrow, and next-action behavior. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
@@ -327,12 +327,15 @@ The non-authorizing proposal is
 [`src/v3_2/pathout_foundation_proposal.ts`](../src/v3_2/pathout_foundation_proposal.ts),
 with focused tests in
 [`tests/v3_2_pathout_foundation_proposal_tests.ts`](../tests/v3_2_pathout_foundation_proposal_tests.ts).
-It selects
-`compileCoreCategoricalDisplayedNdHigherFoundationTransfer` as the smallest
-current compiled predecessor: that descendant already contains `hom_int`,
-the displayed-chain `sigma_map_func`, directed Sigma primitives, and the
-generic composition/action owners, without importing the later mixed-action
-or scale profiles.
+The checkpointed v1 proposal selected
+`compileCoreCategoricalDisplayedNdHigherFoundationTransfer`. Independent
+review found that `hom_` and the two object projections needed to compute
+`Rep_catd(x)[y]` occur only in the reviewed mixed-action descendant. Proposal
+v2 therefore selects `compileCoreCategoricalMixedActionTransfer` as the
+smallest current reviewed predecessor. It reuses `hom_`, the `hom_int` object
+projection, and the represented-hom object projection already checked there;
+it neither duplicates that subset nor imports a scale profile. The proposed
+new 3/5/1/9 delta is otherwise unchanged.
 
 The proposed implementation boundary is exactly **3/5/1/9**:
 
@@ -400,10 +403,11 @@ The proposal runs no Lambdapi or long aggregate: it installs no behavior, and
 the direct type/lint/proposal gates cover its immutable data and current
 provider evidence.
 
-The rollback-safe non-authorizing `1B0` proposal checkpoint is `dd69325`.
-This exact immutable proposal is the sole recommendation a later delegated or
-human review may approve; semantic implementation remains unauthorized until
-that separate review is itself checkpointed.
+The rollback-safe non-authorizing v1 proposal checkpoint is `dd69325`, with
+ledger checkpoint `3226a6a`. It remains review/backtracking evidence but is
+superseded by the `hom_` predecessor correction and must not be approved.
+Semantic implementation remains unauthorized until corrected proposal v2 and
+its separate review are each checkpointed.
 
 ## Required Evidence For Implementation
 

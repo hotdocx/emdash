@@ -12,7 +12,7 @@ import {
 } from './pathout_trust_boundary_audit';
 
 export const CORE_PATHOUT_FOUNDATION_1B0_REVISION =
-    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-1' as const;
+    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-2' as const;
 
 const DECISION_QUESTION =
     'Approve H-TS-EMDASH-PATHOUT-FOUNDATION-01/' +
@@ -200,6 +200,11 @@ const rawProposal = {
         initialAuditCheckpoint: 'a05493b',
         correctedAuditCheckpoint: '5a1ea75',
         correctedLedgerCheckpoint: '828b0d7',
+        supersededProposalCheckpoint: 'dd69325',
+        supersededProposalLedgerCheckpoint: '3226a6a',
+        correctionReason:
+            'independent-review-found-hom_-only-in-the-reviewed-' +
+            'mixed-action-descendant',
         authoritySourceSha256:
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256,
         authorityChecksSha256:
@@ -216,12 +221,13 @@ const rawProposal = {
     },
     selectedPredecessor: {
         compileFunction:
-            'compileCoreCategoricalDisplayedNdHigherFoundationTransfer',
+            'compileCoreCategoricalMixedActionTransfer',
         boundaryRevision:
-            'DISPLAYED-ND-HIGHER-FOUNDATION-1A-BOUNDARY-1',
+            'MIXED-NEST-ACTION-0B-GENERIC-TRANSFER-1',
         reason:
-            'smallest-current-descendant-containing-hom_int-' +
-            'displayed-chain-sigma-map-and-directed-sigma-primitives',
+            'smallest-current-reviewed-descendant-containing-hom_int-' +
+            'and-hom_-with-their-object-projections-plus-displayed-chain-' +
+            'sigma-map-and-directed-sigma-primitives',
         requiredExistingOwners: [
             'id',
             'hom_int',
@@ -235,7 +241,13 @@ const rawProposal = {
             'sigma_transport_arrow'
         ],
         importWholeScaleProfile: false,
-        importWholeMixedActionProfile: false
+        reuseReviewedMixedActionDescendant: true,
+        extractOrDuplicateRepresentedHomSubset: false,
+        reusedMixedActionDeclarations: ['hom_'],
+        reusedMixedActionRuntimeRules: [
+            'categorical.mixed-action.internal-hom-object-projection',
+            'categorical.mixed-action.represented-hom-object-projection'
+        ]
     },
     exactImplementation: {
         prerequisiteDeclarations,
@@ -267,6 +279,14 @@ const rawProposal = {
             cloneData(sigmaTotalizationClosure),
         selectedFoundation:
             cloneData(foundationProfile),
+        representedHomReuse: {
+            owner: 'hom_',
+            sourceLine: 7223,
+            internalHomObjectProjectionLine: 8419,
+            representedHomObjectProjectionLine: 7226,
+            sourceProfile: 'MIXED-NEST-ACTION-0B-GENERIC-TRANSFER-1',
+            duplicateTransferAuthorized: false
+        },
         laterCovariantFibreClosureIncluded: false,
         laterSigmaTransfdUncurryingIncluded: false,
         deferredSigmaHigherActionIncluded: false,
@@ -414,11 +434,13 @@ export function validateCorePathoutFoundation1b0Proposal(
     validateCorePathoutTrustBoundary0aAudit();
     if (
         proposal.revision !==
-            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-1' ||
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-2' ||
         proposal.parent.auditRevision !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.revision ||
         proposal.parent.correctedAuditCheckpoint !== '5a1ea75' ||
         proposal.parent.correctedLedgerCheckpoint !== '828b0d7' ||
+        proposal.parent.supersededProposalCheckpoint !== 'dd69325' ||
+        proposal.parent.supersededProposalLedgerCheckpoint !== '3226a6a' ||
         proposal.parent.authoritySourceSha256 !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256 ||
         proposal.parent.authorityChecksSha256 !==
@@ -468,7 +490,17 @@ export function validateCorePathoutFoundation1b0Proposal(
         !sameData(
             proposal.dependencyClosure.selectedFoundation,
             foundationProfile
-        )
+        ) ||
+        proposal.selectedPredecessor.compileFunction !==
+            'compileCoreCategoricalMixedActionTransfer' ||
+        proposal.selectedPredecessor.boundaryRevision !==
+            'MIXED-NEST-ACTION-0B-GENERIC-TRANSFER-1' ||
+        !proposal.selectedPredecessor.reuseReviewedMixedActionDescendant ||
+        proposal.selectedPredecessor
+            .extractOrDuplicateRepresentedHomSubset ||
+        proposal.dependencyClosure.representedHomReuse.owner !== 'hom_' ||
+        proposal.dependencyClosure.representedHomReuse
+            .duplicateTransferAuthorized
     ) {
         throw new CorePathoutFoundation1b0ProposalError(
             'PATHOUT_FOUNDATION_PROPOSAL_SCOPE_DRIFT',

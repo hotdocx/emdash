@@ -5462,14 +5462,16 @@ not by itself the implementation predecessor. The corrected audit checkpoint
 is `5a1ea75`; it is the exact evidence predecessor for `1B0`. Neither
 checkpoint contains a semantic transfer or public-package byte.
 
-The behavior-free `PATHOUT-LIBRARY-FOUNDATION-1B0` proposal is now frozen
-awaiting separate immutable review. It selects the displayed-ND higher-
-foundation compiler as the smallest existing predecessor and fixes an exact
-3/5/1/9 continuation: three opaque prerequisite declarations, five runtime
-rules, one proof-time rule, and nine transparent PathOut foundation
-definitions. The proposal specifies seven positive consumers, eight strict
-negative cases, and six bounded Lambdapi conformance assertions for later
-implementation acceptance.
+The behavior-free `PATHOUT-LIBRARY-FOUNDATION-1B0` proposal is frozen awaiting
+separate immutable review. Independent review rejected v1's displayed-ND
+higher-foundation predecessor because `hom_` and its required object
+projection are introduced only by the reviewed mixed-action descendant.
+Corrected proposal v2 selects that smallest existing descendant without
+duplicating its represented-hom subset. The new delta remains exactly 3/5/1/9:
+three opaque prerequisite declarations, five runtime rules, one proof-time
+rule, and nine transparent PathOut foundation definitions. It specifies seven
+positive consumers, eight strict negative cases, and six bounded Lambdapi
+conformance assertions for later implementation acceptance.
 
 The proposed public trust split is explicit: low-level LF authoring remains a
 trust-bearing theory-profile API, while the future safe-library facade may add
@@ -5479,9 +5481,10 @@ does not authorize implementation, release, or integration. Focused proposal
 tests, root typecheck, and focused lint pass without a long aggregate or
 Lambdapi invocation.
 
-The rollback-safe non-authorizing `1B0` proposal checkpoint is `dd69325`.
-Implementation remains gated on a separate immutable review of that exact
-recommendation.
+The rollback-safe non-authorizing v1 proposal checkpoint is `dd69325`, with
+ledger checkpoint `3226a6a`. It remains review/backtracking evidence but is
+superseded and must not be approved. Implementation remains gated on a
+checkpointed corrected proposal and its separate immutable review.
 
 ## Decision Ledger
 
@@ -5594,6 +5597,7 @@ recommendation.
 | `D-PA-105` | Repartition PathOut implementation around measured missing prerequisite closures and require a separate `1B0` foundation proposal. | The initial audit separated represented-source action, covariant fibre transport, and Sigma-total uncurrying by consumer and trust content; the same dependency-first rule makes later forward correction possible without rewriting its checkpoint. |
 | `D-PA-106` | Correct `0A` forward by adding the missing `Sigma_func` object/capped-action closure to the foundation boundary. | `PathOut_cat_func` directly names `Sigma_func`; current TypeScript transfers contain `Sigma_cat` and `sigma_map_func` but not that opaque/injective owner or its two required projection rules. The unrelated higher `sigma_map_transf` action remains deferred until an internalized consumer requires it. |
 | `D-PA-107` | Freeze `PATHOUT-LIBRARY-FOUNDATION-1B0` as a non-authorizing 3/5/1/9 proposal over the displayed-ND higher-foundation predecessor. | Exact opaque declarations, rules, transparent definitions, phase order, consumers, negatives, and oracle must be independently reviewable before semantic work; the safe-library facade and low-level trust-bearing authoring API must not be conflated. |
+| `D-PA-108` | Reject the v1 `1B0` predecessor during independent review and correct v2 to reuse the mixed-action descendant. | `hom_int` is present in the higher-foundation profile, but its `hom_` result owner and the two object projections needed for representable fibre computation are installed only by mixed action. Reusing that reviewed descendant avoids both an invalid environment and a duplicate extracted mini-profile. |
 
 ## Validation And Checkpoint Policy
 
