@@ -5532,6 +5532,19 @@ later/public effect. V3 proposal checkpoint `640d5ec` and review checkpoint
 delegation with human supersession. The review restores only the root-local
 4/8/1/9 implementation authority and preserves every later/public denial.
 
+That v4 authorization is now superseded by measured TypeScript execution
+counterevidence. All v4 rules subject-check, but conversion is deliberately
+weak-head and does not normalize the nested
+`fapp1_fapp0(hom_(F,W),f)` argument before matching its outer `fapp0`.
+Therefore active lines 7298 and 7302, which compose contextually in Lambdapi,
+must be fused explicitly for this smaller execution model. Proposal v5 keeps
+the same predecessor and all v4 entries, adding one subject-checked derived
+head fusion to `hom_postcomp_fapp0`; active line 7426 then closes the identity
+source case. The corrected local boundary is 4/9/1/9 with zero new
+mathematical rule, Core/checker/evaluator branch, or public effect. V4
+checkpoints `681d954` and `ab556a9` remain backtracking evidence, and
+implementation is paused pending v5's own checkpoint and separate review.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -5649,6 +5662,7 @@ delegation with human supersession. The review restores only the root-local
 | `D-PA-111` | Approve only checkpointed PathOut-foundation proposal v3 under delegated unattended authority, with human supersession. | Checkpoint `640d5ec` preserves the measured predecessor correction, exact local 3/5/1/9 delta, root-only qualification, and all v3 denials; separate review restores implementation authority without reviving v2 or making the proposal self-authorizing. |
 | `D-PA-112` | Supersede the v3 PathOut-foundation review and correct proposal v4 to the exact local 4/8/1/9 covariant-action closure without changing its predecessor. | Focused checking of final `pathout_refl_arrow` exposed `fapp0(fapp1_fapp0(hom_(id,x),p),id_x)` versus `p`; active `hom_postcomp_func` plus source lines 7298, 7302, and 7426 provide the narrow stable postcomposition reduction. Importing that closure is faithful to the authority and narrower than a generic composition-unit or checker/proof substitute. |
 | `D-PA-113` | Approve only checkpointed PathOut-foundation proposal v4 under delegated unattended authority, with human supersession. | Checkpoint `681d954` preserves the exact measured 4/8/1/9 closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v3 or making the proposal self-authorizing. |
+| `D-PA-114` | Supersede the v4 PathOut-foundation review and correct proposal v5 to 4/9/1/9 with one subject-checked weak-head fusion of active lines 7298 and 7302. | The TypeScript conversion engine intentionally rewrites only the current weak head, so it cannot normalize `fapp1_fapp0(hom_(F,W),f)` before matching the surrounding `fapp0`. Fusing those two already-authorized rules to the stable `hom_postcomp_fapp0` head preserves the source computation while avoiding a generic unit, nested-normalization engine, or checker/proof substitute. |
 
 ## Validation And Checkpoint Policy
 

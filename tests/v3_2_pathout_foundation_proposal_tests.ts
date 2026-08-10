@@ -64,7 +64,7 @@ const assertProposalError = (
 };
 
 describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
-    it('pins v3 supersession and remains non-self-authorizing',
+    it('pins v4 supersession and remains non-self-authorizing',
         () => {
             const proposal = validateCorePathoutFoundation1b0Proposal();
             assertDeepFrozen(proposal);
@@ -77,6 +77,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     proposal.parent.supersededCorrectedReviewCheckpoint,
                     proposal.parent.supersededV3ProposalCheckpoint,
                     proposal.parent.supersededV3ReviewCheckpoint,
+                    proposal.parent.supersededV4ProposalCheckpoint,
+                    proposal.parent.supersededV4ReviewCheckpoint,
                     proposal.decision.status,
                     proposal.decision.implementationAuthorized
                 ],
@@ -88,13 +90,15 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
                     '38ef8ae',
                     '640d5ec',
                     '36c368e',
+                    '681d954',
+                    'ab556a9',
                     'proposal-only',
                     false
                 ]
             );
         });
 
-    it('freezes exactly four opaque, eight runtime, one proof, nine transparent',
+    it('freezes exactly four opaque, nine runtime, one proof, nine transparent',
         () => {
             const implementation =
                 CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL
@@ -111,7 +115,34 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
             );
             assert.deepEqual(
                 implementation.runtimeRules.map(entry => entry.authorityLine),
-                [7298, 7302, 7426, 8445, 8449, 8453, 12803, 13148]
+                [
+                    7298,
+                    7302,
+                    7302,
+                    7426,
+                    8445,
+                    8449,
+                    8453,
+                    12803,
+                    13148
+                ]
+            );
+            assert.deepEqual(
+                implementation.runtimeRules.map(entry => entry.id),
+                [
+                    'pathout.foundation.represented-hom-capped-action',
+                    'pathout.foundation.postcomposition-object-action',
+                    'pathout.foundation.' +
+                        'represented-hom-object-action-fusion',
+                    'pathout.foundation.' +
+                        'postcomposition-identity-source-unit',
+                    'pathout.foundation.hom-int-precomp-full-action',
+                    'pathout.foundation.hom-int-precomp-capped-action',
+                    'pathout.foundation.' +
+                        'hom-int-precomp-tele-application',
+                    'pathout.foundation.sigma-func-object',
+                    'pathout.foundation.sigma-func-capped-action'
+                ]
             );
             assert.deepEqual(
                 implementation.proofRules.map(entry => entry.authorityLine),
@@ -198,7 +229,7 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
         );
         assert.equal(predecessor.extractOrDuplicateOppositeHomRule, false);
         assert.equal(
-            predecessor.localImplementationDeltaIsFourEightOneNine,
+            predecessor.localImplementationDeltaIsFourNineOneNine,
             true
         );
         assert.deepEqual(
@@ -210,6 +241,16 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
             CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
                 .representedCovariantActionCorrection
                 .checkerOrProofRuleSubstituteAuthorized,
+            false
+        );
+        assert.deepEqual(
+            CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
+                .typescriptWeakHeadFusion.derivedFromActiveRuntimeLines,
+            [7298, 7302]
+        );
+        assert.equal(
+            CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.dependencyClosure
+                .typescriptWeakHeadFusion.newMathematicalRule,
             false
         );
     });

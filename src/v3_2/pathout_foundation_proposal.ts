@@ -2,11 +2,11 @@
  * PATHOUT-LIBRARY-FOUNDATION-1B0 non-authorizing proposal.
  *
  * The proposal freezes the exact local prerequisite closures and nine
- * transparent definitions selected by measured implementation. Proposal v4
- * preserves v3's corrected predecessor and adds only the active stable
- * covariant-representable action required by `pathout_refl_arrow`. It
- * compiles or installs nothing; a separate immutable review must authorize
- * 1B.
+ * transparent definitions selected by measured implementation. Proposal v5
+ * preserves v4's active stable covariant-representable closure and adds one
+ * subject-checked head fusion of its first two rules for the TypeScript
+ * runtime's deliberately weak-head execution strategy. It compiles or
+ * installs nothing; a separate immutable review must authorize 1B.
  */
 
 import {
@@ -15,7 +15,7 @@ import {
 } from './pathout_trust_boundary_audit';
 
 export const CORE_PATHOUT_FOUNDATION_1B0_REVISION =
-    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-4' as const;
+    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-5' as const;
 
 const DECISION_QUESTION =
     'Approve H-TS-EMDASH-PATHOUT-FOUNDATION-01/' +
@@ -105,6 +105,15 @@ const runtimeRules = [
     },
     {
         order: 2,
+        id: 'pathout.foundation.represented-hom-object-action-fusion',
+        authorityLine: 7302,
+        derivedFromAuthorityLines: [7298, 7302],
+        sourceOwner: 'fapp0',
+        resultOwner: 'hom_postcomp_fapp0',
+        policy: 'runtime-rewrite-derived-head-fusion'
+    },
+    {
+        order: 3,
         id: 'pathout.foundation.postcomposition-identity-source-unit',
         authorityLine: 7426,
         sourceOwner: 'hom_postcomp_fapp0',
@@ -112,7 +121,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 3,
+        order: 4,
         id: 'pathout.foundation.hom-int-precomp-full-action',
         authorityLine: 8445,
         sourceOwner: 'fapp1_func',
@@ -120,7 +129,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 4,
+        order: 5,
         id: 'pathout.foundation.hom-int-precomp-capped-action',
         authorityLine: 8449,
         sourceOwner: 'fapp1_fapp0',
@@ -128,7 +137,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 5,
+        order: 6,
         id: 'pathout.foundation.hom-int-precomp-tele-application',
         authorityLine: 8453,
         sourceOwner: 'fapp0',
@@ -136,7 +145,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 6,
+        order: 7,
         id: 'pathout.foundation.sigma-func-object',
         authorityLine: 12803,
         sourceOwner: 'fapp0',
@@ -144,7 +153,7 @@ const runtimeRules = [
         policy: 'runtime-rewrite'
     },
     {
-        order: 7,
+        order: 8,
         id: 'pathout.foundation.sigma-func-capped-action',
         authorityLine: 13148,
         sourceOwner: 'fapp1_fapp0',
@@ -243,11 +252,14 @@ const rawProposal = {
         preImplementationLedgerCheckpoint: '6347d5e',
         supersededV3ProposalCheckpoint: '640d5ec',
         supersededV3ReviewCheckpoint: '36c368e',
+        supersededV4ProposalCheckpoint: '681d954',
+        supersededV4ReviewCheckpoint: 'ab556a9',
         correctionReason:
-            'measured-pathout_refl_arrow-check-left-the-covariant-' +
-            'representable-action-fapp0-of-fapp1-hom_-at-id-unreduced-' +
-            'against-p;the-active-stable-postcomposition-closure-was-' +
-            'omitted-from-v3',
+            'measured-v4-pathout_refl_arrow-check-remained-at-the-outer-' +
+            'fapp0-because-the-head-only-TypeScript-runtime-does-not-' +
+            'normalize-the-nested-fapp1-hom_-argument-before-matching-' +
+            'the-postcomposition-object-rule;fuse-only-active-lines-' +
+            '7298-and-7302',
         authoritySourceSha256:
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256,
         authorityChecksSha256:
@@ -301,7 +313,7 @@ const rawProposal = {
         inheritedReviewedSourceActionRuntimeRule:
             'categorical.direct-mixed-source-action.' +
             'source-composition-projection',
-        localImplementationDeltaIsFourEightOneNine: true
+        localImplementationDeltaIsFourNineOneNine: true
     },
     exactImplementation: {
         prerequisiteDeclarations,
@@ -314,7 +326,7 @@ const rawProposal = {
         })),
         phaseOrder: [
             'compile-opaque-prerequisite-declarations',
-            'compose-eight-authority-runtime-rules',
+            'compose-eight-authority-rules-and-one-derived-head-fusion',
             'compile-one-authority-proof-rule',
             'compile-nine-transparent-library-definitions',
             'recheck-proof-rule-against-final-declaration-context'
@@ -353,6 +365,23 @@ const rawProposal = {
             genericCompositionUnitImported: false,
             checkerOrProofRuleSubstituteAuthorized: false
         },
+        typescriptWeakHeadFusion: {
+            executionStrategy:
+                'head-only-no-nested-pattern-normalization',
+            measuredOuterHead: 'fapp0',
+            ruleId:
+                'pathout.foundation.' +
+                'represented-hom-object-action-fusion',
+            derivedFromActiveRuntimeLines: [7298, 7302],
+            fusedLeft:
+                'fapp0(fapp1_fapp0(hom_(F,W),f),g)',
+            fusedRight:
+                'hom_postcomp_fapp0(F,W,f,g)',
+            subjectCheckedByGenericRuntimeCompiler: true,
+            newMathematicalRule: false,
+            checkerBranchDelta: 0,
+            evaluatorBranchDelta: 0
+        },
         oppositeHomReuse: {
             authorityLine: 3251,
             runtimeRuleId:
@@ -372,7 +401,7 @@ const rawProposal = {
     profileSealing: {
         trustedProfileContains: [
             'four-opaque-authority-declarations',
-            'eight-runtime-rules',
+            'nine-runtime-rules',
             'one-proof-unification-rule'
         ],
         derivedLibraryContains: [
@@ -511,7 +540,7 @@ export function validateCorePathoutFoundation1b0Proposal(
     validateCorePathoutTrustBoundary0aAudit();
     if (
         proposal.revision !==
-            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-4' ||
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-5' ||
         proposal.parent.auditRevision !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.revision ||
         proposal.parent.correctedAuditCheckpoint !== '5a1ea75' ||
@@ -524,6 +553,8 @@ export function validateCorePathoutFoundation1b0Proposal(
         proposal.parent.preImplementationLedgerCheckpoint !== '6347d5e' ||
         proposal.parent.supersededV3ProposalCheckpoint !== '640d5ec' ||
         proposal.parent.supersededV3ReviewCheckpoint !== '36c368e' ||
+        proposal.parent.supersededV4ProposalCheckpoint !== '681d954' ||
+        proposal.parent.supersededV4ReviewCheckpoint !== 'ab556a9' ||
         proposal.parent.authoritySourceSha256 !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256 ||
         proposal.parent.authorityChecksSha256 !==
@@ -538,7 +569,7 @@ export function validateCorePathoutFoundation1b0Proposal(
     const implementation = proposal.exactImplementation;
     if (
         implementation.prerequisiteDeclarations.length !== 4 ||
-        implementation.runtimeRules.length !== 8 ||
+        implementation.runtimeRules.length !== 9 ||
         implementation.proofRules.length !== 1 ||
         implementation.libraryDefinitions.length !== 9 ||
         !sameData(
@@ -585,7 +616,7 @@ export function validateCorePathoutFoundation1b0Proposal(
             .extractOrDuplicateRepresentedHomSubset ||
         proposal.selectedPredecessor.extractOrDuplicateOppositeHomRule ||
         !proposal.selectedPredecessor
-            .localImplementationDeltaIsFourEightOneNine ||
+            .localImplementationDeltaIsFourNineOneNine ||
         proposal.dependencyClosure.representedHomReuse.owner !== 'hom_' ||
         proposal.dependencyClosure.representedHomReuse
             .duplicateTransferAuthorized ||
@@ -604,10 +635,24 @@ export function validateCorePathoutFoundation1b0Proposal(
             .genericCompositionUnitImported ||
         proposal.dependencyClosure.representedCovariantActionCorrection
             .checkerOrProofRuleSubstituteAuthorized
+        ||
+        proposal.dependencyClosure.typescriptWeakHeadFusion
+            .executionStrategy !==
+                'head-only-no-nested-pattern-normalization' ||
+        proposal.dependencyClosure.typescriptWeakHeadFusion
+            .derivedFromActiveRuntimeLines.join(',') !== '7298,7302' ||
+        !proposal.dependencyClosure.typescriptWeakHeadFusion
+            .subjectCheckedByGenericRuntimeCompiler ||
+        proposal.dependencyClosure.typescriptWeakHeadFusion
+            .newMathematicalRule ||
+        proposal.dependencyClosure.typescriptWeakHeadFusion
+            .checkerBranchDelta !== 0 ||
+        proposal.dependencyClosure.typescriptWeakHeadFusion
+            .evaluatorBranchDelta !== 0
     ) {
         throw new CorePathoutFoundation1b0ProposalError(
             'PATHOUT_FOUNDATION_PROPOSAL_SCOPE_DRIFT',
-            'The exact 4/8/1/9 foundation scope drifted'
+            'The exact 4/9/1/9 foundation scope drifted'
         );
     }
 
