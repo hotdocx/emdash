@@ -24,7 +24,10 @@ The package has three deliberately bounded entries:
   expands to the ordinary checked `apply` proof plan; it adds no tactic state
   or serialized plan tag. Contextual `have` is a serialized plan node: its
   checked fact remains an explicit named obligation even when the continuation
-  does not use it.
+  does not use it. Root-scoped typed `refine` templates are management-only
+  term-placeholder data which expand immediately to those `have` nodes plus
+  `exact`; Pi/lambda binder annotations remain ordinary meta-free Core, and
+  no template or process-local meta enters canonical source.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -42,8 +45,11 @@ import {
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
+  coreProofPlanRefine,
+  coreProofTemplatePlaceholder,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
 } from '@hotdocx/emdash/workspace';
@@ -57,8 +63,11 @@ void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
 void CORE_PROOF_PLAN_PROFILE;
 void CORE_PROOF_PLAN_MACRO_PROFILE;
+void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
 void coreProofPlanConstructor;
 void coreProofPlanHave;
+void coreProofPlanRefine;
+void coreProofTemplatePlaceholder;
 void createCoreLfProofDevelopment;
 void parseCoreLfProofDevelopmentSourceText;
 ```

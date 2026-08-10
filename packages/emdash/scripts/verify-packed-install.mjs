@@ -223,8 +223,11 @@ import {
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
+  coreProofPlanRefine,
+  coreProofTemplatePlaceholder,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
 } from '@hotdocx/emdash/workspace';
@@ -266,8 +269,14 @@ assert.equal(
   CORE_PROOF_PLAN_MACRO_PROFILE.revision,
   'emdash-proof-plan-macros-v1',
 );
+assert.equal(
+  CORE_PROOF_REFINE_TEMPLATE_PROFILE.revision,
+  'emdash-proof-refine-template-v1',
+);
 assert.equal(typeof coreProofPlanConstructor, 'function');
 assert.equal(typeof coreProofPlanHave, 'function');
+assert.equal(typeof coreProofPlanRefine, 'function');
+assert.equal(typeof coreProofTemplatePlaceholder, 'function');
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
 assert.equal(typeof parseCoreLfProofDevelopmentSourceText, 'function');
 `,
@@ -311,8 +320,14 @@ assert.equal(
   workspace.CORE_PROOF_PLAN_MACRO_PROFILE.addsProofPlanTags,
   false,
 );
+assert.equal(
+  workspace.CORE_PROOF_REFINE_TEMPLATE_PROFILE.addsProofPlanTags,
+  false,
+);
 assert.equal(typeof workspace.coreProofPlanConstructor, 'function');
 assert.equal(typeof workspace.coreProofPlanHave, 'function');
+assert.equal(typeof workspace.coreProofPlanRefine, 'function');
+assert.equal(typeof workspace.coreProofTemplatePlaceholder, 'function');
 assert.equal(typeof workspace.createCoreLfProofDevelopment, 'function');
 assert.equal(
   typeof workspace.parseCoreLfProofDevelopmentSourceText,
@@ -341,8 +356,11 @@ import {
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
+  coreProofPlanRefine,
+  coreProofTemplatePlaceholder,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
 } from '@hotdocx/emdash/workspace';
@@ -361,6 +379,9 @@ const sourceParser: typeof parseCoreLfProofDevelopmentSourceText =
 const constructorMacro: typeof coreProofPlanConstructor =
   coreProofPlanConstructor;
 const contextualHave: typeof coreProofPlanHave = coreProofPlanHave;
+const refineTemplate: typeof coreProofPlanRefine = coreProofPlanRefine;
+const placeholderBuilder: typeof coreProofTemplatePlaceholder =
+  coreProofTemplatePlaceholder;
 void checkerConstructor;
 void builder;
 void exactSynthesizer;
@@ -369,6 +390,8 @@ void developmentFactory;
 void sourceParser;
 void constructorMacro;
 void contextualHave;
+void refineTemplate;
+void placeholderBuilder;
 void maybeTerm;
 void CORE_MVP_MANIFEST;
 void CORE_LF_INSTANCE_SCOPE_PROFILE;
@@ -379,6 +402,7 @@ void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
 void CORE_PROOF_PLAN_PROFILE;
 void CORE_PROOF_PLAN_MACRO_PROFILE;
+void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
 `,
   );
   await writeFile(
@@ -397,8 +421,11 @@ import {
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
   CORE_PROOF_PLAN_MACRO_PROFILE,
+  CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
+  coreProofPlanRefine,
+  coreProofTemplatePlaceholder,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
 } from '@hotdocx/emdash/workspace';
@@ -415,8 +442,11 @@ globalThis.emdashPackedSmoke = {
   proofSourceRevision: CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision,
   proofPlanRevision: CORE_PROOF_PLAN_PROFILE.revision,
   proofPlanMacroRevision: CORE_PROOF_PLAN_MACRO_PROFILE.revision,
+  proofRefineTemplateRevision: CORE_PROOF_REFINE_TEMPLATE_PROFILE.revision,
   coreProofPlanConstructor,
   coreProofPlanHave,
+  coreProofPlanRefine,
+  coreProofTemplatePlaceholder,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
 };

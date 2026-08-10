@@ -25,6 +25,9 @@ import {
     coreProofPlanHave,
     coreProofPlanHole,
     coreProofPlanIntro,
+    coreProofPlanRefine,
+    coreProofTemplateBinding,
+    coreProofTemplatePlaceholder,
     createCoreLfDeclarationWorkspace,
     createCoreLfModuleSpec,
     createCoreLfProofDevelopment,
@@ -299,66 +302,72 @@ const proofInput = (
 
 const contextualHaveProofInput = (
     openFact = false
-): CoreLfWorkspaceProofDocumentInput => ({
-    ...proofInput(false),
-    plan: coreProofPlanIntro(
-        coreProofPlanHave(
-            kernelBinder(
-                'fact',
-                kernelFree(
-                    baseCoreName,
-                    proofProvenance(
-                        13,
-                        'PLAN-DECOMPOSE-3B1B source have type'
-                    )
-                ),
-                proofMode,
-                proofProvenance(
-                    13,
-                    'PLAN-DECOMPOSE-3B1B source have binder'
-                )
+): CoreLfWorkspaceProofDocumentInput => {
+    const binder = kernelBinder(
+        'fact',
+        kernelFree(
+            baseCoreName,
+            proofProvenance(13, 'PLAN-DECOMPOSE-3C1 source refine type')
+        ),
+        proofMode,
+        proofProvenance(13, 'PLAN-DECOMPOSE-3C1 source refine binding')
+    );
+    const factProof = openFact
+        ? coreProofPlanHole('source_fact', {
+            provenance: proofProvenance(
+                14,
+                'PLAN-DECOMPOSE-3C1 source proof hole'
             ),
+            expectation: { contextDepth: 1 }
+        })
+        : coreProofPlanExact(kernelBound(
+            0,
+            proofProvenance(14, 'PLAN-DECOMPOSE-3C1 source fact proof')
+        ));
+    const options = {
+        id: 'source_contextual_have',
+        provenance: proofProvenance(
+            13,
             openFact
-                ? coreProofPlanHole('source_fact', {
-                    provenance: proofProvenance(
-                        14,
-                        'PLAN-DECOMPOSE-3B1B source have proof hole'
-                    ),
-                    expectation: { contextDepth: 1 }
-                })
-                : coreProofPlanExact(kernelBound(
-                    0,
-                    proofProvenance(
-                        14,
-                        'PLAN-DECOMPOSE-3B1B source have proof'
-                    )
-                )),
+                ? 'PLAN-DECOMPOSE-3B1B source have'
+                : 'PLAN-DECOMPOSE-3C1 source refine'
+        )
+    };
+    const body = openFact
+        ? coreProofPlanHave(
+            binder,
+            factProof,
             coreProofPlanExact(kernelBound(
-                openFact ? 1 : 0,
+                1,
                 proofProvenance(
                     15,
-                    openFact
-                        ? 'PLAN-DECOMPOSE-3B1B source ignores fact'
-                        : 'PLAN-DECOMPOSE-3B1B source have body'
+                    'PLAN-DECOMPOSE-3B1B source ignores fact'
                 )
             )),
-            {
-                id: 'source_contextual_have',
-                provenance: proofProvenance(
-                    13,
-                    'PLAN-DECOMPOSE-3B1B source have'
+            options
+        )
+        : coreProofPlanRefine(
+            coreProofTemplatePlaceholder(
+                'fact',
+                proofProvenance(
+                    15,
+                    'PLAN-DECOMPOSE-3C1 source fact use'
                 )
-            }
-        ),
-        {
+            ),
+            [coreProofTemplateBinding(binder, factProof)],
+            options
+        );
+    return {
+        ...proofInput(false),
+        plan: coreProofPlanIntro(body, {
             name: 'value',
             provenance: proofProvenance(
                 11,
                 'PLAN-DECOMPOSE-3B1B source intro'
             )
-        }
-    )
-});
+        })
+    };
+};
 
 const expectWorkspaceProofError = (
     action: () => unknown,
@@ -825,6 +834,7 @@ describe('DEV-CLI-2A canonical proof-development source', () => {
             parseCoreLfProofDevelopmentSourceText(sourceText);
         const proofPlan = reconstructed.plan.proofs[0].plan;
 
+        assert.doesNotMatch(sourceText, /"tag": "(?:placeholder|refine)"/u);
         assert.equal(proofPlan.tag, 'intro');
         assert.equal(proofPlan.body.tag, 'have');
         if (proofPlan.body.tag !== 'have') {

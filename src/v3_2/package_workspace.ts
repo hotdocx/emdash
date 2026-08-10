@@ -9,6 +9,7 @@
 export * from './package_authoring';
 export * from './proof';
 export * from './proof_plan';
+export * from './proof_template';
 export * from './proof_document';
 export * from './lf_workspace';
 export * from './lf_workspace_proof';
