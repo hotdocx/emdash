@@ -22,8 +22,9 @@ computation; its bounded proof-checker conversion prerequisite is implemented
 and final-proportional-green; the first proof-producing simplifier is
 implemented and final-green through its focused, browser, packed-package, and
 required full-TypeScript gates; the accessible-premise index/search audit is
-next; later library, external-automation, and general goal-graph rows remain
-dependency-gated
+complete and its first exact source-visible contract is frozen for
+implementation; later index enrichment, library, external-automation, and
+general goal-graph rows remain dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -52,7 +53,8 @@ checkpoint is `8e21afb`; its synchronized ledger checkpoint is `3628315`.
 The proof-checker conversion audit checkpoint is `3c102ec` and its semantic
 checkpoint is `7c9d8f7`; its synchronized ledger checkpoint and current clean
 published predecessor tip are `74e6de8`. The proof-simplifier contract
-checkpoint is `c08c622` and its semantic checkpoint is `828b8ff`.
+checkpoint is `c08c622`, its semantic checkpoint is `828b8ff`, and its
+synchronized clean published checkpoint is `b5e974a`.
 
 Depends-On:
 
@@ -529,8 +531,9 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `SIMP-5B0` | Proof-checker bounded beta/conversion prerequisite | complete | `7c9d8f7`; exact LF environment, beta/delta transport replay, lambda-callee inference still closed; focused/browser/packed/full-TypeScript gates green |
 | `SIMP-5B1` | Deterministic unconditional proof-producing simplifier | complete | `828b8ff`; checked global equality evidence, backward transport, stable continuation hole, focused/browser/packed/full-TypeScript gates green |
 | `SIMP-5B2` | Conditional/local/under-binder simplification extensions | deferred | concrete 5B1 consumer plus congruence and premise-discharge contract |
-| `INDEX-SEARCH-6` | Accessible-premise semantic index and exact-ID search | pending | general catalog and module-visibility corpus |
-| `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | pending | plan patches, index, and budget/trace contract |
+| `INDEX-SEARCH-6A` | Exact source-visible premise index and symbolic search | in progress | frozen contract below; exact closure, visibility, determinism, browser, and package gates |
+| `INDEX-SEARCH-6B` | Proof-export, relationship/use enrichment, and optional ranking | deferred | theorem-export interface plus exact class/instance/coercion and use owners; one measured retrieval corpus before embeddings |
+| `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | pending | plan patches, `INDEX-SEARCH-6A`, and budget/trace contract |
 | `STDLIB-8` | Curated public library profile | gated | existing generated-owner/stress decisions, exact product profile, public base-package trust boundary |
 | `REFACTOR-9` | Semantic diff, dependency impact, and proof repair | pending | stable declaration index and two-revision corpus |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | pending | one executable consumer and explicit evidence labeling |
@@ -2378,8 +2381,158 @@ canonical source/artifact field, mathematical equality owner, conditional or
 local rule, under-binder congruence, symmetry synthesis, global registry,
 attribute parser, callback, retained prover session, MCP/LSP service,
 filesystem/network/cache authority, or production Lambdapi dependency was
-added. `SIMP-5B2` stays deferred; `INDEX-SEARCH-6` is the next dependency-ready
-audit.
+added. `SIMP-5B2` stays deferred; the following `INDEX-SEARCH-6` audit was the
+next dependency-ready row.
+
+## INDEX-SEARCH-6 Audit And Frozen 6A Contract
+
+Date: 2026-08-10
+
+The audit repartitions the broad premise-index row. The repository already
+contains the exact declaration and visibility facts needed for a useful first
+index, but it does not yet contain one coherent owner for proof exports,
+class/instance relationships, dependency-use edges, descriptions, or
+embedding ranks. Those later facts must not be guessed from names or recovered
+from display text.
+
+Material findings:
+
+1. `CoreLfCompiledDeclarationWorkspace` owns immutable checked declarations,
+   exact qualified source symbols, checked Core types and bodies, selected
+   policies, links, statuses, and module source/interface snapshots. The
+   snapshots already carry module revision, fragment, authority path, source
+   SHA-256, optional canonical-export evidence, dependencies, visibility, and
+   canonical explicit-Core type text. A first index should derive from these
+   owners rather than introduce a process-global declaration registry.
+2. `CoreLfCompiledModuleInterface` and `CoreLfDependencyAccess` already own
+   ordinary source visibility. Code inside a module may use any of its own
+   non-excluded declarations, including locally `protected` or `private`
+   implementation declarations. An ordinary external term may use only a
+   `public` declaration of an explicitly named direct dependency. A transitive
+   dependency is not automatically re-exported; `protected` is reserved for
+   the separately checked external-runtime-pattern route; and `private` is
+   never an imported premise.
+3. The globally accumulated workspace environment is not a safe indexing
+   environment. Depending on topological order, it can contain an unrelated
+   earlier module. As in exact-closure proof attachment, the index must derive,
+   recompile, and compare the selected root's exact transitive closure before
+   using an environment for beta/delta head normalization.
+4. The current proof-development catalog deliberately models proofs as
+   independent leaves. A checked proof result is not yet a declaration in a
+   later theorem interface. `INDEX-SEARCH-6A` therefore indexes checked LF
+   declarations only; treating a proof artifact as an importable theorem
+   would require the deferred theorem-export/fingerprint contract.
+5. Class schemas, instance scopes, parent closures, coercions, and dictionary
+   synthesis are already explicit APIs, but no checked workspace artifact
+   currently links those objects to general declaration IDs. Likewise,
+   declaration-body uses and human descriptions have no one exact catalog
+   owner. `INDEX-SEARCH-6A` must not infer these relationships from spellings,
+   source fragments, recency, or TypeScript object identity.
+6. Browser-safe workspace code validates supplied SHA-256 stamps but does not
+   compute cryptographic hashes. The first snapshot may carry existing source
+   and canonical-export stamps and interface/profile revisions; it must not
+   fabricate an interface digest or claim package provenance which the input
+   does not own.
+7. Exact-closure proof checking currently gives its Core checker the complete
+   closure environment. The new index is a source-visible premise-discovery
+   authority, not a proof-reference firewall: a manually constructed Core
+   proof may still name another declaration resident in that closure. This
+   tranche neither weakens nor silently claims to strengthen that checker
+   boundary. A later, explicit audit must decide whether proof documents have
+   deliberate closure-internal privilege or need a source-reference preflight
+   before a hard visibility-enforcement claim is made.
+
+`INDEX-SEARCH-6A` freezes the following first executable contract:
+
+1. Add one browser-safe `lf_premise_index.ts` management module. Its input is
+   an already compiled declaration workspace, one exact root module ID, and
+   optional bounded index settings. It performs no filesystem access,
+   network access, hashing, parsing, cache mutation, backend emission, or
+   Lambdapi invocation.
+2. Derive the selected root's canonical transitive closure, rebuild a
+   declaration-workspace plan from exactly those frozen source triples, and
+   recompile it from an empty LF environment. The reconstructed module order,
+   source text, and interface text must agree exactly with the supplied
+   compiled workspace. Unknown roots or drift fail structurally before any
+   search result is returned.
+3. Include every non-excluded declaration owned by the root module. Include
+   from another module only a non-excluded `public` declaration whose module
+   ID occurs in the root module's explicit direct dependency list. Exclude
+   unrelated modules, merely transitive modules, and imported `protected` or
+   `private` declarations. Do not include proof-document leaves, runtime or
+   proof rules, generated-untyped names, local hypotheses, or synthetic
+   class/instance candidates.
+4. Use the exact pair `{ moduleId, name }` as declaration identity. Any joined
+   display spelling is diagnostic only. Every entry records its selected
+   policy, status, link, source visibility, source declaration order,
+   canonical checked type text, and a structured scope explanation: either
+   local ownership or direct-public-import with the root, provider, and exact
+   dependency position.
+5. Retain checked Core types and the exact recompiled closure environment only
+   in the process-local compiled index. Expose a separate deeply frozen
+   canonical snapshot and serializer which contain no checker, environment,
+   callback, session, meta identity, mutable map, or raw compiled-object
+   authority.
+6. Fingerprint each exact checked type structurally. Record sorted distinct
+   Core node tags, semantic owner IDs, and free Core declaration names. Also
+   strip leading Pi binders and compute the conclusion's combined beta/delta
+   weak-head under the exact closure environment, with no runtime program or
+   elaboration session. Record binder count, normalization status, steps, and
+   an exact structured head (`universe`, semantic owner, free declaration,
+   bound variable, lambda, or other rigid Core form). A step-limit result is
+   visible and is never mislabeled as normalized.
+7. The v1 profile caps each type walk at 16,384 nodes and each conclusion-head
+   normalization at 256 beta/delta steps. Callers may request smaller
+   nonnegative bounds, not larger ones. Exceeding the structural walk budget
+   is a structured index-construction error; exhausting normalization remains
+   a complete entry with explicit `step-limit-exceeded` status.
+8. Provide deterministic finite searches for: all entries; one exact
+   qualified ID; the normalized conclusion head derived from a supplied Core
+   target type; occurrence of one semantic owner; occurrence of one free Core
+   reference; and occurrence of one Core node tag. Filters are exact and
+   symbolic. Results are sorted by exact qualified ID, carry the entry's
+   structured scope explanation, and report total matches plus truncation.
+   The default result bound is 64 and the hard maximum is 1,024.
+9. A search hit is a candidate, not an applicability proof. Search performs no
+   theorem application, unification, typeclass synthesis, conditional-premise
+   discharge, simplification, scoring, or proof-plan mutation. A later
+   provider must resolve the exact ID, construct an explicit candidate term or
+   plan patch, and replay it through the checker.
+10. Embeddings and fuzzy text are absent from v1. A future ranker may only
+    reorder the already accessible exact result set and must retain the
+    symbolic scope explanation and exact IDs. It may not turn an inaccessible
+    declaration into a candidate or establish applicability/correctness.
+11. Export the additive API from the contributor and browser-safe workspace
+    package entries while leaving the narrow core-only entry unchanged.
+    Advance the capability record once, add installed ESM/CJS/strict-
+    TypeScript/browser consumers, and keep all existing command vectors and
+    source/artifact revisions unchanged.
+
+The independent acceptance fixture has four modules: a direct provider with
+public/protected/private declarations and a transparent type alias; a
+transitive provider; an unrelated module which sorts earlier; and a root with
+local public/private declarations. It must demonstrate exact local/direct
+eligibility, exclusion of protected/private/transitive/unrelated candidates,
+byte stability under workspace input permutation, transparent beta/delta head
+normalization, explicit normalization exhaustion, structural operator
+queries, exact-ID hit/miss, deterministic truncation, deep freezing, and
+closure drift rejection. It must not import or edit the active
+presheaf/site/sheafification/scheme mathematics.
+
+During implementation, run the new focused suite, nearest workspace/
+visibility/proof-search consumers, typecheck, changed-file lint, workspace
+contract, browser closure, and packed-package consumers. Because 6A adds a
+shared public TypeScript/workspace-package boundary, current root SOP requires
+one complete `check:ts` only after every bounded focused gate is green and
+before the semantic checkpoint. It must not be run iteratively or for
+reassurance. `check:all`, kernel/Lambdapi, print/book, npm publication,
+deployment, and sibling-repository checks remain out of scope.
+
+`INDEX-SEARCH-6B` remains deferred. It may later add importable proof exports,
+exact class/instance/parent/coercion relations, declaration use edges,
+descriptions, corpus evaluation, and optional ranking only after their data
+owners and version/fingerprint effects are frozen. `OBVIOUS-PROOF-7` may use
+the completed 6A exact result set without waiting for those enrichments.
 
 ## Decision Ledger
 
@@ -2427,6 +2580,12 @@ audit.
 | `D-PA-040` | Advance semantic profiles while retaining unchanged v2 artifact envelopes. | Current fingerprints and enclosing profile/compiler fields reject stale checker results; JSON schema revisions should not be inflated merely because the checking policy advances. |
 | `D-PA-041` | Stage simplification as explicit unconditional root-target rewriting before conditional, local, or under-binder congruence. | The first scope yields ordinary replayable transport terms with deterministic behavior, while dependent premise and congruence evidence need separately reviewable contracts. |
 | `D-PA-042` | Freeze v1 simplification as canonical decoded equality matching plus checked backward transport, lowered to one existing contextual `have`. | This gives AI agents a compact deterministic `simp`-like source expansion while keeping theorem application and the final nested transport independently checkable, browser-safe, and outside the trusted Core syntax. |
+| `D-PA-043` | Repartition premise discovery into an exact source-visible declaration index first and relationship/ranking enrichment later. | The workspace and visibility owners already provide exact declaration facts, while proof exports, class/instance links, known uses, descriptions, and embeddings do not yet share one authoritative catalog. |
+| `D-PA-044` | Define v1 premise eligibility as all non-excluded root-local declarations plus non-excluded public declarations of explicit direct imports. | This reuses ordinary module exposition, permits module-private implementation proofs locally, and does not mistake transitive closure membership for re-export. |
+| `D-PA-045` | Recompile and compare the exact selected closure before premise-head normalization. | The accumulated workspace environment can contain unrelated earlier modules or intrinsic definitions and is therefore not a stable semantic indexing environment. |
+| `D-PA-046` | Keep checked types/environment in a process-local compiled index and publish a separate canonical data snapshot. | Later providers need exact Core terms, while sharable index artifacts must remain deterministic and free of checker/session/object authority. |
+| `D-PA-047` | Restrict v1 search to exact IDs and bounded structural Core fingerprints with explicit scope explanations. | Symbolic retrieval is sufficient for the first obvious-proof consumer; applicability, proof construction, ranking, and correctness remain separately replayed operations. |
+| `D-PA-048` | Do not treat the source-visible index as a proof-reference visibility firewall. | Existing exact-closure proof checking receives the complete closure environment; hard reference enforcement requires an explicit policy decision and preflight/checker audit rather than an index-side claim. |
 
 ## Validation And Checkpoint Policy
 
