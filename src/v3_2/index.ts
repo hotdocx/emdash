@@ -182,6 +182,7 @@ export * from './elaborator';
 export * from './probe';
 export * from './proof';
 export * from './proof_checker';
+export * from './proof_simplifier';
 export * from './proof_goal_graph';
 export * from './proof_plan';
 export * from './proof_template';

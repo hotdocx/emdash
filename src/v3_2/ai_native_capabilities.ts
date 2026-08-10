@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v8' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v8' as const,
+    revision: 'emdash-ai-native-capabilities-v9' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v9' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -83,6 +83,13 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
             lambdapiRole: 'optional-development-conformance'
         },
         implementedProfiles: [
+            {
+                id: 'proof-simplifier',
+                revision: 'emdash-proof-simplifier-v1',
+                scope:
+                    'bounded unconditional global equality rewriting with ' +
+                    'checked backward transport'
+            },
             {
                 id: 'proof-checker',
                 revision: 'emdash-core-proof-checker-v1',

@@ -226,6 +226,7 @@ import {
   CORE_PROOF_PLAN_MACRO_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
+  CORE_PROOF_SIMPLIFIER_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -234,6 +235,7 @@ import {
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
+  simplifyCoreProofPlan,
 } from '@hotdocx/emdash/workspace';
 
 assert.equal(typeof CoreChecker, 'function');
@@ -281,6 +283,10 @@ assert.equal(
   CORE_PROOF_REFINE_TEMPLATE_PROFILE.revision,
   'emdash-proof-refine-template-v1',
 );
+assert.equal(
+  CORE_PROOF_SIMPLIFIER_PROFILE.revision,
+  'emdash-proof-simplifier-v1',
+);
 assert.equal(typeof coreProofPlanConstructor, 'function');
 assert.equal(typeof coreProofPlanHave, 'function');
 assert.equal(typeof coreProofPlanRefine, 'function');
@@ -293,6 +299,7 @@ assert.equal(
 );
 assert.equal(typeof parseCoreLfProofDevelopmentSourceText, 'function');
 assert.equal(typeof serializeCoreProofGoalCouplingGraph, 'function');
+assert.equal(typeof simplifyCoreProofPlan, 'function');
 `,
   );
   await writeFile(
@@ -342,6 +349,10 @@ assert.equal(
   workspace.CORE_PROOF_REFINE_TEMPLATE_PROFILE.addsProofPlanTags,
   false,
 );
+assert.equal(
+  workspace.CORE_PROOF_SIMPLIFIER_PROFILE.addsProofPlanTags,
+  false,
+);
 assert.equal(typeof workspace.coreProofPlanConstructor, 'function');
 assert.equal(typeof workspace.coreProofPlanHave, 'function');
 assert.equal(typeof workspace.coreProofPlanRefine, 'function');
@@ -360,6 +371,7 @@ assert.equal(
   typeof workspace.serializeCoreProofGoalCouplingGraph,
   'function',
 );
+assert.equal(typeof workspace.simplifyCoreProofPlan, 'function');
 `,
   );
   await writeFile(
@@ -386,6 +398,7 @@ import {
   CORE_PROOF_PLAN_MACRO_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
+  CORE_PROOF_SIMPLIFIER_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -394,6 +407,7 @@ import {
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
+  simplifyCoreProofPlan,
 } from '@hotdocx/emdash/workspace';
 
 const checkerConstructor: typeof CoreChecker = CoreChecker;
@@ -416,6 +430,7 @@ const placeholderBuilder: typeof coreProofTemplatePlaceholder =
   coreProofTemplatePlaceholder;
 const graphSerializer: typeof serializeCoreProofGoalCouplingGraph =
   serializeCoreProofGoalCouplingGraph;
+const proofSimplifier: typeof simplifyCoreProofPlan = simplifyCoreProofPlan;
 void checkerConstructor;
 void builder;
 void exactSynthesizer;
@@ -428,6 +443,7 @@ void contextualHave;
 void refineTemplate;
 void placeholderBuilder;
 void graphSerializer;
+void proofSimplifier;
 void maybeTerm;
 void CORE_MVP_MANIFEST;
 void CORE_LF_INSTANCE_SCOPE_PROFILE;
@@ -441,6 +457,7 @@ void CORE_PROOF_PLAN_PROFILE;
 void CORE_PROOF_PLAN_MACRO_PROFILE;
 void CORE_PROOF_GOAL_COUPLING_PROFILE;
 void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
+void CORE_PROOF_SIMPLIFIER_PROFILE;
 `,
   );
   await writeFile(
@@ -462,6 +479,7 @@ import {
   CORE_PROOF_PLAN_MACRO_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
+  CORE_PROOF_SIMPLIFIER_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -470,6 +488,7 @@ import {
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
+  simplifyCoreProofPlan,
 } from '@hotdocx/emdash/workspace';
 
 globalThis.emdashPackedSmoke = {
@@ -487,6 +506,7 @@ globalThis.emdashPackedSmoke = {
   proofPlanMacroRevision: CORE_PROOF_PLAN_MACRO_PROFILE.revision,
   proofGoalCouplingRevision: CORE_PROOF_GOAL_COUPLING_PROFILE.revision,
   proofRefineTemplateRevision: CORE_PROOF_REFINE_TEMPLATE_PROFILE.revision,
+  proofSimplifierRevision: CORE_PROOF_SIMPLIFIER_PROFILE.revision,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -495,6 +515,7 @@ globalThis.emdashPackedSmoke = {
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
+  simplifyCoreProofPlan,
 };
 `,
   );

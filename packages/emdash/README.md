@@ -29,7 +29,10 @@ The package has three deliberately bounded entries:
   `exact`; Pi/lambda binder annotations remain ordinary meta-free Core, and
   no template or process-local meta enters canonical source. Fresh plan replay
   separately exposes a portable direct coupling graph over stable named goals;
-  the canonical v2 proof artifact remains unchanged.
+  the canonical v2 proof artifact remains unchanged. The additive proof
+  simplifier accepts explicit ordered global equality theorems, performs
+  bounded deterministic root-target rewriting, and expands its checked
+  backward transports to the same existing `have` plus `exact` nodes.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -49,6 +52,7 @@ import {
   CORE_PROOF_PLAN_MACRO_PROFILE,
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
+  CORE_PROOF_SIMPLIFIER_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -56,6 +60,7 @@ import {
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
+  simplifyCoreProofPlan,
 } from '@hotdocx/emdash/workspace';
 
 const terms = new CoreLfScopedBuilder();
@@ -69,6 +74,7 @@ void CORE_PROOF_PLAN_PROFILE;
 void CORE_PROOF_PLAN_MACRO_PROFILE;
 void CORE_PROOF_GOAL_COUPLING_PROFILE;
 void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
+void CORE_PROOF_SIMPLIFIER_PROFILE;
 void coreProofPlanConstructor;
 void coreProofPlanHave;
 void coreProofPlanRefine;
@@ -76,6 +82,7 @@ void coreProofTemplatePlaceholder;
 void createCoreLfProofDevelopment;
 void parseCoreLfProofDevelopmentSourceText;
 void serializeCoreProofGoalCouplingGraph;
+void simplifyCoreProofPlan;
 ```
 
 This package does not parse structure or class declarations, add class nodes

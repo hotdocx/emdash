@@ -272,6 +272,32 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
         );
     });
 
+    it('keeps proof-producing simplification Node-free and explicit', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/proof_simplifier.ts'
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/proof_simplifier.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/proof_checker.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/proof_plan.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_remote_workspace_store.ts')),
+            false
+        );
+    });
+
     it('keeps the declaration workspace graph Node-free', () => {
         const closure = collectLocalClosure('src/v3_2/lf_workspace.ts');
         assert.equal(
