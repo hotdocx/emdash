@@ -126,8 +126,8 @@ published the exact tagged artifact; public-main documentation checkpoint
 the selected trust/token boundary. The hosted-consumer contract checkpoint is
 `af87e75`; its CloserFans semantic/local-`master` checkpoint is `bd4146b`.
 The goal-view interchange audit/frozen-contract checkpoint is `232dde3`; its
-semantic checkpoint is the implementation commit containing the completion
-record below and will be pinned by hash in the next clean ledger checkpoint.
+semantic checkpoint is `0bec688`; the plan-only commit containing this exact
+hash is its synchronized clean ledger checkpoint.
 
 Depends-On:
 
@@ -619,7 +619,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
 | `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | repartitioned | Fresh audit split the host-neutral public view, package release, Arrowgram/GetPaidX consumer, and hosted actions into 14B1–14B4; no sibling edit or action API is justified by the parent row. |
 | `GOAL-GRAPH-14B0` | Public-interchange and sibling-consumer audit | complete | Emdash goal evaluation is internal-only, Arrowgram owns a generic coordinate-based `DiagramSpec`, CloserFans is the canonical GetPaidX/LastRevision host, and no current sibling imports Emdash goal semantics. Exact audit and decisions are below. |
-| `GOAL-GRAPH-14B1` | Canonical host-neutral goal-view artifact and public source barrel | complete | Privacy-minimized replay-gated projection, strict canonical parser/validator/serializer, explicit non-authority flags, public workspace/root exports, capability v14/docs, browser closure, and installed package consumers; one required `check:ts` passed once with 1,662 tests and zero failures. No Arrowgram dependency or layout. |
+| `GOAL-GRAPH-14B1` | Canonical host-neutral goal-view artifact and public source barrel | complete | `0bec688`; privacy-minimized replay-gated projection, strict canonical parser/validator/serializer, explicit non-authority flags, public workspace/root exports, capability v14/docs, browser closure, and installed package consumers; one required `check:ts` passed once with 1,662 tests and zero failures. No Arrowgram dependency or layout. |
 | `GOAL-GRAPH-14B2` | Integrate and publish the next Emdash package release | gated | Complete 14B1 plus a separate 58-commit branch-integration/version/release audit and the required public-barrel qualification; never republish 0.1.0. |
 | `GOAL-GRAPH-14B3` | Deterministic Arrowgram projection and GetPaidX consumer | gated | Require public package containing 14B1, current published Arrowgram packages, exact layout/color/label policy, and a thin file-backed or derived-read-only template contract. |
 | `GOAL-GRAPH-14B4` | Authenticated hosted evidence/action adapters | deferred | Require one exact mutation consumer, actor/signature authority, idempotency/audit/permission semantics, and current host security/deployment clearance; visualization does not authorize effects. |
@@ -4557,10 +4557,10 @@ idempotency, audit, rollback, and deployment/security prerequisites.
 
 Date: 2026-08-10
 
-Result: accepted in the semantic implementation checkpoint containing this
-record, after frozen audit/contract checkpoint `232dde3`. The next clean
-ledger checkpoint pins that semantic commit by hash; this wording does not
-authorize 14B2 integration or publication.
+Result: accepted at semantic implementation checkpoint `0bec688`, after
+frozen audit/contract checkpoint `232dde3`. This plan-only follow-up is the
+synchronized clean ledger checkpoint; completion does not authorize 14B2
+integration or publication.
 
 The new browser-safe `src/v3_2/research_goal_view.ts` implements the frozen
 host-neutral interchange boundary:
@@ -4758,7 +4758,7 @@ boundaries remain exactly in 14B2--14B4 and the other gated rows.
 | `D-PA-089` | Repartition 14B into host-neutral view, package release, Arrowgram/GetPaidX rendering, and authenticated action rows. | The evaluator, public distribution, renderer schema, hosted runtime, and effect authority have different owners and validation gates; implementing them as one adapter would make visualization appear to confer proof or permission. |
 | `D-PA-090` | Export a privacy-minimized canonical goal-view projection before any Arrowgram-specific layout. | The full evaluation contains proof source and human/AI evidence payloads that a renderer need not receive. Stable nodes, edges, derived explanations, counts, and explicit authority flags are sufficient for multiple views without coupling Emdash to one graphics package. |
 | `D-PA-091` | Treat CloserFans as the GetPaidX/LastRevision host and Arrowgram as the generic rendering/file-workspace project for this program. | This follows the user's explicit sibling clarification, avoids parallel private-host implementations, and keeps GetPaidX permissions/effects out of Arrowgram's public diagram schema and packages. |
-| `D-PA-092` | Accept 14B1 as the public source-level host-neutral view boundary, without integrating or releasing the proof branch. | Fresh evaluator equality, strict canonical reconstruction, privacy-minimized fields, explicit non-authority flags, browser closure, and installed consumers now qualify the interchange itself; versioning, publication, rendering policy, and hosted effects retain separate owners. |
+| `D-PA-092` | Accept 14B1 at `0bec688` as the public source-level host-neutral view boundary, without integrating or releasing the proof branch. | Fresh evaluator equality, strict canonical reconstruction, privacy-minimized fields, explicit non-authority flags, browser closure, and installed consumers now qualify the interchange itself; versioning, publication, rendering policy, and hosted effects retain separate owners. |
 
 ## Validation And Checkpoint Policy
 
