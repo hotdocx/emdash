@@ -26,9 +26,11 @@ delegated unattended authority with human supersession at review checkpoint
 `880593e`; measured nested-head execution counterevidence now supersedes that
 review; corrected proposal v4 at checkpoint `f4101e2` adds only a subject-
 checked lines-5481/9177 fusion, changes the boundary to 5/9/0/6, and is
-separately approved under delegated unattended authority with human
-supersession at review checkpoint `397472f`; semantic implementation may
-resume, but no PathOut/PathInd profile or public export is yet qualified
+separately approved at review checkpoint `397472f`, but measured compilation
+shows that the selected predecessor runtime omits active transparent `Transf`
+delta lines 9150-9151; corrected proposal v5 adds exactly that delta, changes
+the boundary to 5/10/0/6, and awaits checkpoint plus separate review; no
+PathOut/PathInd profile or public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -190,7 +192,7 @@ named library presentation.
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
-| `PATHIND-TRUSTED-PROFILE-1C` | corrected v4 separately reviewed; implementation ready | completed 1B; proposal/review checkpoints `f4101e2`/`397472f`; superseded v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | Line 9177 is registered but cannot match before nested line 5481 under head-only execution. V4 adds only their subject-checked fusion, yielding an approved root-only 5/9/0/6 boundary with unchanged consumer, negative, and nine-assertion oracle scope. |
+| `PATHIND-TRUSTED-PROFILE-1C` | corrected proposal v5 awaiting checkpoint and separate review | completed 1B; superseded v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The v4 fusion subject-checks, but `tapp0_fapp0` expects the generic Core `Transf` alias while this predecessor runtime reaches only `Obj(Transf_cat)`. V5 adds only the active transparent delta at lines 9150-9151, yielding a non-authorizing root-only 5/10/0/6 boundary with unchanged consumer, negative, and nine-assertion oracle scope. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -1470,7 +1472,70 @@ git diff --check
 
 No Lambdapi or long aggregate is relevant to this behavior-free review.
 Review checkpoint `397472f` freezes that decision. The exact v4 semantic
-implementation may now resume; the review authorizes nothing beyond it.
+implementation was attempted, but its authorization is superseded by the
+measured counterevidence below.
+
+### `PATHIND-TRUSTED-PROFILE-1C` corrected proposal v5
+
+The v4 weak-head fusion subject-checks, but a cold semantic compile still
+stops while inferring `pathind.fixed-source.fib-cov-section-point` with
+`INVALID_RUNTIME_RULE_TYPE`: the residual heads are `object-classifier` and
+`transfor-classifier`. This is a distinct presentation boundary. The generic
+Core signature of `tapp0_fapp0` asks for `Transf(K,Cat_cat,E,D)`, whereas v4's
+active reduction path reaches `Obj(Transf_cat(K,Cat_cat,E,D))`.
+
+Active source lines 9150-9151 define exactly
+
+```text
+Transf(K,Cat_cat,E,D)
+  ↪ Obj(Transf_cat(K,Cat_cat,E,D)).
+```
+
+That transparent-definition rule already has a subject-checked transfer in
+the sibling fibred-product profile, but the selected PathOut predecessor
+imports only its declaration linkage, not that runtime fragment. Importing
+the whole sibling runtime profile would unnecessarily widen this slice, and
+reversing the equation would contradict active reduction. The corrected
+immutable proposal is
+[`src/v3_2/pathind_fixed_source_proposal_v5.ts`](../src/v3_2/pathind_fixed_source_proposal_v5.ts),
+with focused checks in
+[`tests/v3_2_pathind_fixed_source_proposal_v5_tests.ts`](../tests/v3_2_pathind_fixed_source_proposal_v5_tests.ts).
+It preserves v4 and adds only the active transparent `Transf` delta before
+the six FibCov/PathInd rules.
+
+The exact local boundary becomes **5/10/0/6**. Five runtime observations,
+nine bounded-oracle assertions, the rho-section consumer, and eight strict
+negatives remain unchanged. The correction adds no declaration owner,
+mathematics, reversed reduction, runtime engine, Core/checker/evaluator
+branch, active Lambdapi edit, or later/public effect. V4 checkpoints
+`f4101e2` and `397472f` remain backtracking evidence but no longer authorize
+implementation.
+
+Corrected-v5 proposal validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_fixed_source_proposal_v5.ts \
+  tests/v3_2_pathind_fixed_source_proposal_v5_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_fixed_source_proposal_v5_tests.ts
+  6 tests / 1 suite: 6 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi or long repository aggregate is relevant to this immutable-data
+correction. Proposal v5 is non-authorizing, and semantic implementation is
+paused until its rollback-safe checkpoint and separate immutable review under
+`H-TS-EMDASH-PATHIND-FIXED-SOURCE-05` /
+`D-TS-EMDASH-PATHIND-FIXED-SOURCE-005`.
 
 ## Required Evidence For Implementation
 
