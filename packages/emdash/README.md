@@ -19,7 +19,8 @@ The package has three deliberately bounded entries:
   output-parameter inference, and saturated class calls; and
 - `@hotdocx/emdash/workspace` — explicit proof plans and artifacts plus
   browser-safe declaration/fragment workspaces and canonically ordered
-  multi-module proof-development catalogs.
+  multi-module proof-development catalogs, including exact canonical-data
+  reconstruction for materialized proof sources.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -34,7 +35,9 @@ import {
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
+  CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   createCoreLfProofDevelopment,
+  parseCoreLfProofDevelopmentSourceText,
 } from '@hotdocx/emdash/workspace';
 
 const terms = new CoreLfScopedBuilder();
@@ -43,13 +46,18 @@ void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void synthesizeCoreLfInstance;
 void synthesizeCoreLfInstanceByRoles;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
+void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
 void createCoreLfProofDevelopment;
+void parseCoreLfProofDevelopmentSourceText;
 ```
 
 This package does not parse structure or class declarations, add class nodes
 to Core, keep process-global proof state, run Lambdapi, or provide filesystem,
-network, and CLI adapters. Lambdapi remains an optional development-time
-conformance route; the production path here is the TypeScript checker.
+network, host-module execution, and CLI adapters. Canonical proof source is a
+portable explicit-Core data envelope, not an emdash term/declaration parser or
+an implicit `*.emdash.ts` import. Lambdapi remains an optional
+development-time conformance route; the production path here is the
+TypeScript checker.
 
 The source and development documentation are in the
 [emdash repository](https://github.com/hotdocx/emdash). The accompanying book

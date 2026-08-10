@@ -187,6 +187,7 @@ export * from './ai_proof_demo';
 export * from './lf_workspace';
 export * from './lf_workspace_proof';
 export * from './lf_proof_development';
+export * from './lf_proof_development_source';
 export * from './lf_fragment_workspace';
 export * from './lf_fragment_module_workspace';
 export * from './lf_remote_workspace_contract';

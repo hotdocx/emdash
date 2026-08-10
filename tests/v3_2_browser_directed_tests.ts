@@ -356,6 +356,34 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
         );
     });
 
+    it('keeps canonical proof-development source acquisition Node-free', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/lf_proof_development_source.ts'
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_proof_development_source.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_proof_development.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_workspace.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_remote_workspace_store.ts')),
+            false
+        );
+    });
+
     it('keeps exact same-module fragment workspaces Node-free', () => {
         const closure = collectLocalClosure(
             'src/v3_2/lf_fragment_workspace.ts'

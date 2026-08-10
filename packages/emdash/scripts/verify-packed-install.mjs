@@ -220,7 +220,9 @@ import {
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
+  CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   createCoreLfProofDevelopment,
+  parseCoreLfProofDevelopmentSourceText,
 } from '@hotdocx/emdash/workspace';
 
 assert.equal(typeof CoreChecker, 'function');
@@ -248,7 +250,12 @@ assert.equal(
   CORE_LF_PROOF_DEVELOPMENT_PROFILE.nodeBuiltinDependency,
   false,
 );
+assert.equal(
+  CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.nodeBuiltinDependency,
+  false,
+);
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
+assert.equal(typeof parseCoreLfProofDevelopmentSourceText, 'function');
 `,
   );
   await writeFile(
@@ -278,7 +285,15 @@ assert.equal(
   workspace.CORE_LF_PROOF_DEVELOPMENT_PROFILE.nodeBuiltinDependency,
   false,
 );
+assert.equal(
+  workspace.CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.hostExecutionTrusted,
+  false,
+);
 assert.equal(typeof workspace.createCoreLfProofDevelopment, 'function');
+assert.equal(
+  typeof workspace.parseCoreLfProofDevelopmentSourceText,
+  'function',
+);
 `,
   );
   await writeFile(
@@ -299,7 +314,9 @@ import {
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
+  CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   createCoreLfProofDevelopment,
+  parseCoreLfProofDevelopmentSourceText,
 } from '@hotdocx/emdash/workspace';
 
 const checkerConstructor: typeof CoreChecker = CoreChecker;
@@ -311,11 +328,14 @@ const roleSynthesizer: typeof synthesizeCoreLfInstanceByRoles =
 const maybeTerm: KernelExpression | undefined = undefined;
 const developmentFactory: typeof createCoreLfProofDevelopment =
   createCoreLfProofDevelopment;
+const sourceParser: typeof parseCoreLfProofDevelopmentSourceText =
+  parseCoreLfProofDevelopmentSourceText;
 void checkerConstructor;
 void builder;
 void exactSynthesizer;
 void roleSynthesizer;
 void developmentFactory;
+void sourceParser;
 void maybeTerm;
 void CORE_MVP_MANIFEST;
 void CORE_LF_INSTANCE_SCOPE_PROFILE;
@@ -323,6 +343,7 @@ void CORE_LF_INSTANCE_SYNTHESIS_PROFILE;
 void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void CORE_LF_DECLARATION_WORKSPACE_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
+void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
 `,
   );
   await writeFile(
@@ -338,7 +359,9 @@ import {
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
+  CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   createCoreLfProofDevelopment,
+  parseCoreLfProofDevelopmentSourceText,
 } from '@hotdocx/emdash/workspace';
 
 globalThis.emdashPackedSmoke = {
@@ -350,7 +373,9 @@ globalThis.emdashPackedSmoke = {
   synthesizeCoreLfInstanceByRoles,
   workspaceRevision: CORE_LF_DECLARATION_WORKSPACE_PROFILE.revision,
   proofDevelopmentRevision: CORE_LF_PROOF_DEVELOPMENT_PROFILE.revision,
+  proofSourceRevision: CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision,
   createCoreLfProofDevelopment,
+  parseCoreLfProofDevelopmentSourceText,
 };
 `,
   );

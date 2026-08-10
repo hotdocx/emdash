@@ -4,11 +4,13 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
     CORE_LF_PROOF_DEVELOPMENT_PROFILE,
+    CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
     CORE_LF_WORKSPACE_PROOF_PROFILE,
     CoreContextError,
     CoreLfCompiledDeclarationWorkspace,
     CoreLfModuleSpec,
     CoreLfProofDevelopmentError,
+    CoreLfProofDevelopmentSourceError,
     CoreLfTransferDeclarationLinkage,
     CoreLfTransferPolicyOverlay,
     CoreLfWorkspaceProofDocumentInput,
@@ -25,6 +27,7 @@ import {
     createCoreLfDeclarationWorkspace,
     createCoreLfModuleSpec,
     createCoreLfProofDevelopment,
+    createCoreLfProofDevelopmentSourceSnapshot,
     createCoreLfTransferDeclarationLinkage,
     createCoreLfTransferPolicyOverlay,
     createCoreProofArtifactFingerprint,
@@ -33,7 +36,10 @@ import {
     kernelFree,
     kernelPi,
     provenance,
+    parseCoreLfProofDevelopmentSourceText,
+    reconstructCoreLfProofDevelopmentSourceSnapshot,
     serializeCoreLfProofDevelopmentArtifact,
+    serializeCoreLfProofDevelopmentSourceSnapshot,
     serializeCoreLfWorkspaceProofArtifact,
     sourceSpan
 } from '../src/v3_2';
@@ -669,6 +675,256 @@ describe('DEV-CATALOG-1 proof development catalog', () => {
                 }]
             }),
             'INVALID_PROOF_ID'
+        );
+    });
+});
+
+const sourcePlan = (
+    workspaceOrder:
+        readonly ('base' | 'consumer' | 'unrelated')[] = [
+            'consumer',
+            'base',
+            'unrelated'
+        ],
+    reverseProofs = false
+) => {
+    const proofs = [proofInput(false), baseProofInput(true)];
+    if (reverseProofs) proofs.reverse();
+    return createCoreLfProofDevelopment({
+        revision: 'proof-development-source-fixture-1',
+        workspace: compileWorkspace(workspaceOrder).plan,
+        proofs
+    });
+};
+
+const expectSourceError = (
+    action: () => unknown,
+    code: CoreLfProofDevelopmentSourceError['code']
+): void => {
+    assert.throws(
+        action,
+        error => error instanceof CoreLfProofDevelopmentSourceError &&
+            error.code === code &&
+            error.path.length > 0
+    );
+};
+
+describe('DEV-CLI-2A canonical proof-development source', () => {
+    it('round-trips canonical data and preserves checked artifacts', () => {
+        const plan = sourcePlan();
+        const expected = compileCoreLfProofDevelopment(plan);
+        const snapshot = createCoreLfProofDevelopmentSourceSnapshot(plan);
+        const sourceText =
+            serializeCoreLfProofDevelopmentSourceSnapshot(snapshot);
+        const reconstructed =
+            parseCoreLfProofDevelopmentSourceText(sourceText);
+        const actual = compileCoreLfProofDevelopment(reconstructed.plan);
+
+        assert.equal(
+            snapshot.revision,
+            CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision
+        );
+        assert.equal(
+            CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.hostExecutionTrusted,
+            false
+        );
+        assert.equal(
+            CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.nodeBuiltinDependency,
+            false
+        );
+        assert.equal(reconstructed.sourceText, sourceText);
+        assert.deepEqual(actual.artifact, expected.artifact);
+        assert.deepEqual(
+            reconstructed.plan.proofs.map(proof => [
+                proof.moduleId,
+                proof.declarationId
+            ]),
+            [
+                [baseModuleId, 'open_base_identity'],
+                [consumerModuleId, 'complete_identity']
+            ]
+        );
+        assertDeepFrozen(reconstructed.snapshot);
+        assertDeepFrozen(reconstructed.plan);
+    });
+
+    it('canonicalizes module and proof input permutations byte-identically', () => {
+        const first = serializeCoreLfProofDevelopmentSourceSnapshot(
+            createCoreLfProofDevelopmentSourceSnapshot(sourcePlan(
+                ['consumer', 'base', 'unrelated'],
+                false
+            ))
+        );
+        const second = serializeCoreLfProofDevelopmentSourceSnapshot(
+            createCoreLfProofDevelopmentSourceSnapshot(sourcePlan(
+                ['unrelated', 'consumer', 'base'],
+                true
+            ))
+        );
+        assert.equal(first, second);
+        assert.equal(first.endsWith('\n'), true);
+    });
+
+    it('rejects malformed, noncanonical, and unsupported source data', () => {
+        const snapshot = createCoreLfProofDevelopmentSourceSnapshot(
+            sourcePlan()
+        );
+        const sourceText =
+            serializeCoreLfProofDevelopmentSourceSnapshot(snapshot);
+        const clone = (): any => JSON.parse(sourceText);
+
+        expectSourceError(
+            () => parseCoreLfProofDevelopmentSourceText('{'),
+            'INVALID_SOURCE_TEXT'
+        );
+        expectSourceError(
+            () => parseCoreLfProofDevelopmentSourceText(
+                `${JSON.stringify(JSON.parse(sourceText), null, 2)}\n`
+            ),
+            'NONCANONICAL_SOURCE_TEXT'
+        );
+
+        const reversed = clone();
+        reversed.proofs.reverse();
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(reversed),
+            'NONCANONICAL_SOURCE_SNAPSHOT'
+        );
+
+        const extra = clone();
+        extra.ambientRegistry = 'forbidden';
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(extra),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
+
+        const accessor = clone();
+        let accessorInvoked = false;
+        Object.defineProperty(accessor, 'ambientRegistry', {
+            enumerable: true,
+            get: () => {
+                accessorInvoked = true;
+                return 'forbidden';
+            }
+        });
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(accessor),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
+        assert.equal(accessorInvoked, false);
+
+        const sparse = clone();
+        delete sparse.proofs[0];
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(sparse),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
+
+        const unknownPlan = clone();
+        unknownPlan.proofs[0].plan.tag = 'run_tactic_callback';
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(
+                unknownPlan
+            ),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
+
+        const missingType = clone();
+        delete missingType.proofs[0].type;
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(
+                missingType
+            ),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
+
+        const unknownExpression = clone();
+        const unknownExpressionProof = unknownExpression.proofs.find(
+            (proof: any) => proof.declarationId === 'complete_identity'
+        );
+        unknownExpressionProof.plan.body.solution.tag = 'host_callback';
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(
+                unknownExpression
+            ),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
+
+        const danglingBound = clone();
+        danglingBound.proofs[0].type = {
+            tag: 'bound',
+            index: 0,
+            provenance: danglingBound.proofs[0].provenance
+        };
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(
+                danglingBound
+            ),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
+
+        const withMeta = clone();
+        const complete = withMeta.proofs.find(
+            (proof: any) => proof.declarationId === 'complete_identity'
+        );
+        complete.plan.body.solution = {
+            tag: 'meta',
+            identity: { index: 0 },
+            spine: [],
+            provenance: complete.plan.body.provenance
+        };
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(withMeta),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
+
+        const directPlan = sourcePlan();
+        const directMetaPlan = {
+            ...directPlan,
+            proofs: directPlan.proofs.map(proof =>
+                proof.declarationId === 'complete_identity'
+                    ? {
+                        ...proof,
+                        plan: {
+                            tag: 'exact',
+                            provenance: proof.provenance,
+                            solution: {
+                                tag: 'meta',
+                                identity: {
+                                    session: Symbol('process-local'),
+                                    index: 0
+                                },
+                                spine: [],
+                                provenance: proof.provenance
+                            }
+                        }
+                    }
+                    : proof
+            )
+        };
+        expectSourceError(
+            () => createCoreLfProofDevelopmentSourceSnapshot(
+                directMetaPlan as any
+            ),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
+
+        const badProvenance = clone();
+        badProvenance.proofs[0].provenance.origin = 'ambient-agent';
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(
+                badProvenance
+            ),
+            'INVALID_SOURCE_SNAPSHOT'
+        );
+
+        const badFingerprint = clone();
+        badFingerprint.proofs[0].fingerprint.revision = 'future-inputs';
+        expectSourceError(
+            () => reconstructCoreLfProofDevelopmentSourceSnapshot(
+                badFingerprint
+            ),
+            'INVALID_SOURCE_SNAPSHOT'
         );
     });
 });
