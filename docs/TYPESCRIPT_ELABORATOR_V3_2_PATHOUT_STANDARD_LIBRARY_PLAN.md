@@ -997,6 +997,7 @@ with focused qualification in
 [`tests/v3_2_pathout_foundation_transfer_tests.ts`](../tests/v3_2_pathout_foundation_transfer_tests.ts)
 and contributor-runner discovery in `tests/main_tests.ts`. It remains absent
 from contributor, npm, authoring, workspace, and browser barrels.
+The complete semantic checkpoint is `550316a`.
 
 The compiled boundary is exactly **5/13/2/9**:
 

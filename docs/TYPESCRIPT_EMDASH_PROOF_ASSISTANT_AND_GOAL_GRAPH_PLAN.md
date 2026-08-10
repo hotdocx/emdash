@@ -5618,7 +5618,8 @@ retains human supersession, and preserves every later/public denial.
 `PATHOUT-LIBRARY-FOUNDATION-1B` is now complete and final-proportional-green.
 The sealed root-only transfer compiles five opaque interfaces, thirteen
 runtime rules, two proof comparisons, and nine transparent definitions through
-the generic TypeScript LF engines. Its focused suite passes eighteen checks
+the generic TypeScript LF engines. Semantic checkpoint `550316a` records that
+exact boundary. Its focused suite passes eighteen checks
 with the opt-in oracle skipped; the separately selected 20-second-bounded
 Lambdapi probe accepts all six assertions. General source transport uses the
 identity-family proof rule, reflexive source transport computes definitionally,
@@ -5754,7 +5755,7 @@ changed. `PATHIND-TRUSTED-PROFILE-1C` is the next proposal-gated row.
 | `D-PA-121` | Approve only checkpointed PathOut-foundation proposal v8 under delegated unattended authority, with human supersession. | Checkpoint `6e4bb82` preserves the exact 5/12/2/9 identity-family rule and its nonempty reflexive constraint representation, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v7 or making the proposal self-authorizing. |
 | `D-PA-122` | Supersede the v8 PathOut-foundation review and correct proposal v9 to 5/13/2/9 with active identity-incoming precomposition line 8032. | General source action now passes, but reflexive action reaches `hom_precomp_along_fapp0(id,p,id_y) ≡ p` after raw composition has already simplified. Line 8032 is the exact active computation to functorial action, and the predecessor closes identity-functor action; importing it is narrower than adding a proof substitute, derived fusion, or generic identity law. |
 | `D-PA-123` | Approve only checkpointed PathOut-foundation proposal v9 under delegated unattended authority, with human supersession. | Checkpoint `b4277fb` preserves the exact 5/13/2/9 identity-incoming closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v8 or making the proposal self-authorizing. |
-| `D-PA-124` | Complete root-only `PATHOUT-LIBRARY-FOUNDATION-1B` at the exact 5/13/2/9 boundary and advance only to a separately proposed `PATHIND-TRUSTED-PROFILE-1C`. | All entries compile through generic engines; seven positive and eight negative consumers, safe-library capability denials, non-export checks, and six bounded Lambdapi assertions are green. The focused evidence directly covers this non-public profile, so the standing anti-aggregate policy permits carrying forward unchanged workspace/package boundaries. |
+| `D-PA-124` | Complete root-only `PATHOUT-LIBRARY-FOUNDATION-1B` at the exact 5/13/2/9 boundary and advance only to a separately proposed `PATHIND-TRUSTED-PROFILE-1C`. | Checkpoint `550316a` compiles all entries through generic engines; seven positive and eight negative consumers, safe-library capability denials, non-export checks, and six bounded Lambdapi assertions are green. The focused evidence directly covers this non-public profile, so the standing anti-aggregate policy permits carrying forward unchanged workspace/package boundaries. |
 
 ## Validation And Checkpoint Policy
 
