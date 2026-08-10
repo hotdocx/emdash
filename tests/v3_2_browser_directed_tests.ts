@@ -628,6 +628,36 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
         );
     });
 
+    it('keeps proof-agent benchmark scoring browser-safe and host-free', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/lf_proof_agent_benchmark.ts'
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_proof_agent_benchmark.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_proof_maintenance.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_workspace_proof.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_remote_workspace_store.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_proof_development_cli.ts')),
+            false
+        );
+    });
+
     it('targets a portable static project-subpath build', () => {
         const viteConfig = readFileSync(
             'emdash-template/vite.config.ts',

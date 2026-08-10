@@ -295,7 +295,8 @@ export type CoreLfProofReplayDiagnostic =
     | CoreLfProofReplayProvenanceDiagnostic
     | CoreLfProofReplayConversionDiagnostic;
 
-const replayDiagnostic = (
+/** Stable portable projection shared by proof-maintenance consumers. */
+export const projectCoreLfProofReplayDiagnostic = (
     error: unknown
 ): CoreLfProofReplayDiagnostic | undefined => {
     if (error instanceof CoreLfWorkspaceProofError) {
@@ -469,7 +470,7 @@ const prepareMaintenance = (
             currentProof
         );
     } catch (error: unknown) {
-        const diagnostic = replayDiagnostic(error);
+        const diagnostic = projectCoreLfProofReplayDiagnostic(error);
         if (diagnostic === undefined) {
             return fail(
                 'UNSUPPORTED_REPLAY_ERROR',

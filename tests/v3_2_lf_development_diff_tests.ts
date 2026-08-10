@@ -46,6 +46,7 @@ import {
     serializeCoreLfProofRepairProposal,
     sourceSpan
 } from '../src/v3_2';
+import './v3_2_proof_agent_benchmark_tests';
 
 const changedModuleId = 'fixture.diff_changed';
 const controlModuleId = 'fixture.diff_control';
