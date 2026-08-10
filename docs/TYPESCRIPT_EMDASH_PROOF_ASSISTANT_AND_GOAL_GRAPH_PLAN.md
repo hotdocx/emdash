@@ -636,7 +636,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | selected | Delegate to `TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`; run `PATHOUT-TRUST-BOUNDARY-0A` before behavior, exports, syntax, or release. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` is complete; delegate the next behavior-free foundation proposal and all later slices to `TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -5412,6 +5412,45 @@ The rollback-safe audit/product-selection checkpoint is `fb65a80`. It is the
 predecessor for `PATHOUT-TRUST-BOUNDARY-0A`; no semantic or package byte is
 part of that checkpoint.
 
+### PathOut trust-boundary completion
+
+`PATHOUT-TRUST-BOUNDARY-0A` is complete as a read-only, non-self-authorizing
+audit. Its immutable contributor record pins both active authority hashes and
+the exact source positions of 34 selected declarations and seven observed
+rules. The selected PathOut/PathInd declarations partition into 29
+transparent library definitions and five opaque trusted owners:
+`PathOutReflEval_funcd`, `path_ind_sec`, `path_ind_func_fapp0`,
+`PathInd_func`, and `PathInd_transfd`. Six runtime rules are selected for the
+eventual sealed profile. The nearby proof-time Path-category reflexive join
+and equality-comparison library are recorded but excluded from the smallest
+generic product profile.
+
+The audit corrects the dependency ledger rather than opening behavior. Three
+closures remain before the corresponding library layers can be honest:
+
+- represented-source action: two opaque owners, three runtime rules, and one
+  proof-time rule absent from current selected transfer profiles;
+- covariant fibre transport: one transparent target family, three opaque
+  owners, and three runtime rules absent from current selected transfer
+  profiles; and
+- Sigma-total displayed-transformation uncurrying: one opaque owner and one
+  runtime rule represented only by isolated scale qualification, not a
+  selected product profile.
+
+Therefore the next row is the separate behavior-free
+`PATHOUT-LIBRARY-FOUNDATION-1B0` proposal. It must freeze the first closure and
+the nine-definition transparent foundation before `1B` may install anything.
+The fixed-source, internalized, and transitivity layers remain separately
+gated; no whole-source-prefix import is authorized.
+
+The audit module is absent from npm public barrels and the browser surface,
+and it changes no Core/checker/runtime/package semantics. Exact source-hash,
+owner/body/rule-position, dependency-provider, deep-freeze, and non-export
+tests pass together with root typecheck and focused lint. The long `check:ts`
+aggregate and Lambdapi checks were intentionally omitted because this
+behavior-free row is directly covered and their omission does not block
+progress.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -5519,6 +5558,8 @@ part of that checkpoint.
 | `D-PA-101` | Keep 14B4, 12B, counterevidence, and external certificates behind their existing authority, corpus, interpretation, and checker gates after the real 14B3 consumer. | A static graph and generic workspace mutation prove distribution/rendering only; neither is authenticated Emdash evidence, a representative agent evaluation, a finite model, or a proof certificate. |
 | `D-PA-102` | Select PathOut/PathInd/transitivity as the first curated mathematical product profile, while keeping prelude/Nat transfer artifacts unpromoted. | The checked book and research-overview already consume this Emdash-specific mathematics, and its dedicated plan has a mature trust-separated design; scale fixtures demonstrate mechanisms but do not constitute a public library decision. |
 | `D-PA-103` | Require the PathOut standard library to preserve four layers: generic kernel, sealed opaque-owner theory profile, transparent derived library, and thin presentation. | Opaque `path_ind_sec`/coherent packages and their computation rules belong to the trusted calculus, while representables and PathOut constructions are transparent compositions; conflating them would misstate both derivability and the package trust boundary. |
+| `D-PA-104` | Complete `PATHOUT-TRUST-BOUNDARY-0A` as immutable contributor evidence, not a semantic transfer. | Exact source hashes and positions identify 34 selected declarations, five opaque PathOut/PathInd owners, six selected runtime rules, and one deferred Path-category proof rule without adding a Core owner, rule, syntax, browser API, or package export. |
+| `D-PA-105` | Repartition PathOut implementation around three measured missing prerequisite closures and require a separate `1B0` foundation proposal. | Represented-source action, covariant fibre transport, and Sigma-total uncurrying have different consumers and trust contents; freezing the first closure plus nine transparent foundation definitions prevents a convenient whole-prefix import from becoming the product architecture. |
 
 ## Validation And Checkpoint Policy
 

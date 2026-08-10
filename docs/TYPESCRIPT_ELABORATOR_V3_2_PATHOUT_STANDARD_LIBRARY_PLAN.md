@@ -1,9 +1,9 @@
 # TypeScript Elaborator v3.2 PathInd Trusted-Profile And PathOut Library Plan
 
 Status: active selected standard-library continuation under
-`TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is the next bounded
-behavior-free audit; no PathOut library semantic or public export is yet
-implemented
+`TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is complete and the
+next bounded row is the behavior-free `PATHOUT-LIBRARY-FOUNDATION-1B0`
+proposal; no PathOut library semantic or public export is yet implemented
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -146,7 +146,7 @@ library program.
 | Layer | Current evidence | Future work |
 | --- | --- | --- |
 | Generic dependent LF | checked declarations, Pi/lambda, conversion, runtime and proof rules | no new kernel mechanism expected |
-| Categorical prerequisites | `Catd`, fibres, Sigma/Pi, pullback, section evaluation, generic action, `hom_int`, `fib_cov_tapp0_func`, `sigma_transport_arrow`, and higher action occur in reviewed transfer descendants | qualify the smallest exact profile instead of duplicating owners |
+| Categorical prerequisites | `Catd`, fibres, Sigma/Pi, pullback, section evaluation, generic action, `hom_int`, `fib_cov_tapp0_func`, `sigma_transport_arrow`, and higher action occur in reviewed transfer descendants | add only the three measured missing prerequisite closures recorded below |
 | Public typed construction API | categories, objects/arrows, displayed families, fibres, totals, dependent pairs, family transport, Sigma arrows, sections, application, and recursive binders | add thin classifier-checked identity-arrow, representable, canonical Sigma-transport, PathOut, and PathInd facades where useful |
 | Trusted PathInd profile | generic checked declaration/rule machinery exists; named PathInd package is absent from `src/v3_2` | install the smallest sealed, provenance-pinned opaque-owner/rule closure |
 | Derived PathOut/PathInd library | absent from `src/v3_2` at this completion boundary | author transparent definitions and proof terms over the trusted profile |
@@ -162,8 +162,9 @@ named library presentation.
 
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
-| `PATHOUT-TRUST-BOUNDARY-0A` | in progress | active source and checks; current transfer profiles | Freeze exact declaration/rule order and provenance; distinguish transparent definitions from opaque trusted owners; measure the smallest descendant profile and specify its sealing boundary. No behavior. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | pending | completed 0A | Author representables, fixed-source `PathOut`, source-arrow action, path objects, reflexive object, and canonical reflexive-to-path arrow as transparent end-user library definitions. Check fibre, object, arrow, and next-action behavior. |
+| `PATHOUT-TRUST-BOUNDARY-0A` | complete | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and three missing prerequisite closures. It installs no behavior or product export. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | next | completed 0A | Freeze and independently review the exact represented-source-action prerequisite plus the nine transparent foundation definitions; specify linkage, sealing, rule policy, typed consumers, negatives, and bounded oracle before behavior. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | pending | reviewed 1B0 | Transfer the sealed represented-source-action prerequisite, then author representables, fixed-source `PathOut`, source-arrow action, path objects, reflexive object, and canonical reflexive-to-path arrow as transparent end-user library definitions. Check fibre, object, arrow, and next-action behavior. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -204,6 +205,101 @@ opaque existing semantic owners should keep opaque interfaces and their exact
 active rules inside the sealed profile. No owner is promoted merely for naming
 symmetry, and no trusted rule is exposed as an ordinary standard-library
 declaration capability.
+
+### `PATHOUT-TRUST-BOUNDARY-0A` completion evidence
+
+The executable audit is
+[`src/v3_2/pathout_trust_boundary_audit.ts`](../src/v3_2/pathout_trust_boundary_audit.ts),
+with focused drift and non-export checks in
+[`tests/v3_2_pathout_trust_boundary_audit_tests.ts`](../tests/v3_2_pathout_trust_boundary_audit_tests.ts).
+It is deliberately imported by the contributor test runner only; it is not
+exported by the contributor barrel, any npm public barrel, or the browser
+surface.
+
+The measured selected authority contains 34 declarations in source order.
+Twenty-nine have bodies and therefore remain transparent derived-library
+definitions. Exactly five are opaque semantic owners:
+
+- `PathOutReflEval_funcd`;
+- `path_ind_sec`;
+- `path_ind_func_fapp0`;
+- `PathInd_func`; and
+- `PathInd_transfd`.
+
+Six selected runtime rules specify their component or specialized
+computation. The proof-time rule at source lines 19455--19475 is inventoried
+but explicitly deferred with the following Path-category comparison library;
+it is not needed by the smallest generic PathOut/PathInd/transitivity product.
+The transparent equality/Path-category comparison declarations at lines
+19488--19673 are likewise outside the selected closure. Recording those
+exclusions is narrower and more faithful than importing the entire nearby
+source interval.
+
+The prior inventory's broad phrase "categorical prerequisites" concealed
+three concrete product-profile gaps:
+
+1. **Represented-source action.** `hom_int` is transferred, but the opaque
+   `hom_int_precomp_tele_func` and `hom_int_precomp_func` owners, their three
+   runtime projections, and their one proof-time projection-order comparison
+   are not in a current selected product profile. `Rep_transport_func` depends
+   on this closure.
+2. **Covariant fibre transport.** `hom_con` and
+   `fib_cov_tapp0_func` are transferred, but transparent
+   `FibCov_target_catd`, opaque `fib_cov_int`, `fib_cov_src_func`, and
+   `fib_cov_transf`, and their three runtime projections are not. The readable
+   `FibCov_source_catd` alias is not in the selected typed or lexical closure.
+3. **Sigma-total displayed-transformation uncurrying.** The opaque
+   `Sigma_transfd_funcd` owner and its object-component rule have isolated
+   scale-stress representation evidence, but are not part of a selected
+   product profile. They are needed only by the later internalized
+   `PathInd_funcd` presentation.
+
+This repartitions the continuation without changing the generic Core or
+checker. The smallest foundation is the represented-source-action closure
+plus nine transparent definitions: `Rep_catd_func`, `Rep_catd`,
+`Rep_transport_func`, `PathOut_cat`, `PathOut_cat_func`,
+`PathOut_transport_func`, `pathout_obj`, `pathout_refl_obj`, and
+`pathout_refl_arrow`. Fixed-source induction adds its own opaque owners and
+the covariant-fibre closure; internalized induction later adds the Sigma-total
+uncurrying closure; transitivity adds only its selected transparent consumer
+definitions above inherited fixed-source computation.
+
+The audit freezes the four-layer boundary exactly: ordinary library code may
+declare checked transparent definitions but cannot install runtime or proof
+rules; only sealed profile construction may install the provenance-pinned
+rules; Lambdapi remains an optional deterministic backend and a required
+bounded conformance oracle for later behavior. The audit does not authorize
+its own continuation.
+
+Proportional validation on 2026-08-10 was:
+
+```text
+./scripts/pnpmw run workspace:check
+  passed; pnpm@11.16.0, Node 24.11.1
+
+./scripts/pnpmw exec tsc --noEmit -p tsconfig.json
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_trust_boundary_audit.ts \
+  tests/v3_2_pathout_trust_boundary_audit_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathout_trust_boundary_audit_tests.ts
+  8 tests / 1 suite: 8 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi invocation was used as audit evidence: both active checked files
+are immutable byte-pinned inputs, and this row adds no mathematical behavior
+to reconfirm. The root `check:ts` aggregate was intentionally not rerun under
+the standing instruction to avoid long aggregates unless their omission
+blocks progress; full TypeScript checking, focused lint, and every new drift
+test directly cover this read-only contributor artifact.
 
 ## Required Evidence For Implementation
 
