@@ -1,10 +1,11 @@
 /**
- * Separate immutable review of corrected
+ * Supersession record for the separate review of
  * PATHOUT-LIBRARY-FOUNDATION-1B0 proposal v6.
  *
- * Proposals v1-v5 and their reviews are retained as superseded evidence.
- * This review approves only checkpointed v6 under the user's standing
- * unattended delegation, with later human supersession.
+ * Measured implementation reached the stable precomposition head but the
+ * selected projection-order rule cannot compare it with ordinary identity-
+ * family composition. The v6 authorization is withdrawn while proposal v7
+ * awaits its own review.
  */
 
 import {
@@ -36,15 +37,19 @@ const sameData = (left: unknown, right: unknown): boolean =>
 const proposal = CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL;
 
 const rawReview = {
-    revision: 'PATHOUT-LIBRARY-FOUNDATION-1B0-REVIEWED-5',
-    status: 'reviewed-v6-approved-under-delegated-unattended-authority',
+    revision: 'PATHOUT-LIBRARY-FOUNDATION-1B0-REVIEW-SUPERSEDED-6',
+    status: 'proposal-v6-review-superseded-v7-awaiting-separate-review',
     approval: {
         gate: 'H-TS-EMDASH-PATHOUT-FOUNDATION-01',
         decisionId: 'D-TS-EMDASH-PATHOUT-FOUNDATION-001',
-        decision: 'corrected-proposal-v6-approved-as-proposed',
-        authority: 'user-delegated-unattended-approval',
+        decision:
+            'corrected-proposal-v6-superseded-after-measured-' +
+            'identity-family-proof-gap',
+        authority: 'measured-implementation-forward-correction',
         condition:
-            'no-immediate-human-objection-after-v6-proposal-checkpoint',
+            'source-action-consumers-reach-hom_precomp_along_fapp0-' +
+            'versus-ordinary-comp-but-line-8463-requires-a-rigid-' +
+            'hom_int_precomp_func-right-factor',
         recordedOn: '2026-08-10',
         humanDecisionSupersedes: true,
         rejectedProposalCheckpoint: 'dd69325',
@@ -56,13 +61,15 @@ const rawReview = {
         supersededV4ReviewCheckpoint: 'ab556a9',
         supersededV5ProposalCheckpoint: '622a496',
         supersededV5ReviewCheckpoint: 'c4dd293',
-        approvedProposalCheckpoint: 'f006ccb'
+        supersededV6ProposalCheckpoint: 'f006ccb',
+        supersededV6ReviewCheckpoint: 'bdcef29',
+        replacementProposalCheckpoint: 'pending-separate-checkpoint'
     },
     recommendation:
         cloneData(proposal) as CorePathoutFoundation1b0Proposal,
     authorization: {
         implementationRow: 'PATHOUT-LIBRARY-FOUNDATION-1B',
-        implementationAuthorized: true,
+        implementationAuthorized: false,
         exactImplementation:
             cloneData(proposal.exactImplementation),
         exactDependencyClosure:
@@ -71,7 +78,7 @@ const rawReview = {
             cloneData(proposal.selectedPredecessor),
         prerequisiteDeclarationCount: 5,
         runtimeRuleCount: 12,
-        proofRuleCount: 1,
+        proofRuleCount: 2,
         transparentLibraryDefinitionCount: 9,
         positiveConsumerCount: 7,
         negativeConsumerCount: 8,
@@ -90,28 +97,30 @@ const rawReview = {
         externalIntegrationOrReleaseAuthorized: false
     },
     validation: {
-        correctedProposalCheckpoint: 'f006ccb',
-        workspaceContract: 'carried-forward-pnpm-11.16.0-node-24.11.1',
-        rootTypecheck: 'passed',
-        focusedLint: 'passed',
-        focusedProposalAndReviewGate: '14-tests-14-pass-zero-fail',
-        LambdapiProposalGate: 'not-required-no-behavior',
-        longAggregateGate:
-            'intentionally-omitted-under-standing-proportional-policy'
+        supersededV6ProposalCheckpoint: 'f006ccb',
+        supersededV6ReviewCheckpoint: 'bdcef29',
+        measuredFailure:
+            'pathout-source-and-reflexive-action-consumers-reach-' +
+            'hom_precomp_along_fapp0-identity-family-versus-raw-comp-' +
+            'but-no-selected-proof-rule-matches',
+        replacementProposalRevision:
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-7',
+        replacementReviewGate: 'required-before-implementation-resumes'
     },
     gitBoundary: {
         rollbackEvidence:
-            'v1-v5-proposals-and-reviews-preserved-as-superseded',
-        localImplementationCheckpointAuthorized: true,
+            'v1-v6-proposals-and-reviews-preserved-as-superseded',
+        localImplementationCheckpointAuthorized: false,
         exactStagedDiffReviewRequired: true,
         pushMergePublishAuthorized: false,
         historyRewriteAuthorized: false,
         cleanupAuthorized: false
     },
     nonEffects: [
-        'does-not-mutate-the-checkpointed-v6-proposal',
-        'does-not-approve-superseded-v1-v2-v3-v4-or-v5',
+        'preserves-v6-proposal-and-review-as-Git-backtracking-evidence',
+        'does-not-approve-superseded-v1-v2-v3-v4-v5-or-v6',
         'does-not-revive-any-superseded-review',
+        'does-not-approve-replacement-v7',
         'does-not-itself-implement-foundation-1b',
         'does-not-authorize-path-induction-or-transitivity',
         'does-not-authorize-sigma-map-higher-action',
@@ -121,7 +130,8 @@ const rawReview = {
         'does-not-authorize-active-Lambdapi-source-change',
         'does-not-authorize-push-merge-publication-deployment-or-cleanup'
     ],
-    nextDependencyState: 'pathout-foundation-1b-implementation-ready'
+    nextDependencyState:
+        'pathout-foundation-1b0-v7-awaiting-separate-review'
 } as const;
 
 export type CorePathoutFoundation1b0Review = typeof rawReview;
@@ -151,15 +161,16 @@ export function validateCorePathoutFoundation1b0Review(
     validateCorePathoutFoundation1b0Proposal(proposal);
     if (
         review.revision !==
-            'PATHOUT-LIBRARY-FOUNDATION-1B0-REVIEWED-5' ||
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-REVIEW-SUPERSEDED-6' ||
         review.approval.gate !==
             'H-TS-EMDASH-PATHOUT-FOUNDATION-01' ||
         review.approval.decisionId !==
             'D-TS-EMDASH-PATHOUT-FOUNDATION-001' ||
         review.approval.decision !==
-            'corrected-proposal-v6-approved-as-proposed' ||
+            'corrected-proposal-v6-superseded-after-measured-' +
+                'identity-family-proof-gap' ||
         review.approval.authority !==
-            'user-delegated-unattended-approval' ||
+            'measured-implementation-forward-correction' ||
         review.approval.recordedOn !== '2026-08-10' ||
         !review.approval.humanDecisionSupersedes ||
         review.approval.rejectedProposalCheckpoint !== 'dd69325' ||
@@ -171,24 +182,27 @@ export function validateCorePathoutFoundation1b0Review(
         review.approval.supersededV4ReviewCheckpoint !== 'ab556a9' ||
         review.approval.supersededV5ProposalCheckpoint !== '622a496' ||
         review.approval.supersededV5ReviewCheckpoint !== 'c4dd293' ||
-        review.approval.approvedProposalCheckpoint !== 'f006ccb'
+        review.approval.supersededV6ProposalCheckpoint !== 'f006ccb' ||
+        review.approval.supersededV6ReviewCheckpoint !== 'bdcef29' ||
+        review.approval.replacementProposalCheckpoint !==
+            'pending-separate-checkpoint'
     ) {
         throw new CorePathoutFoundation1b0ReviewError(
             'PATHOUT_FOUNDATION_REVIEW_DECISION_DRIFT',
-            'The exact corrected-v6 delegated decision drifted'
+            'The exact corrected-v6 supersession decision drifted'
         );
     }
 
     if (
         !sameData(review.recommendation, proposal) ||
         review.recommendation.revision !==
-            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-6' ||
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-7' ||
         review.recommendation.decision.status !== 'proposal-only' ||
         review.recommendation.decision.implementationAuthorized
     ) {
         throw new CorePathoutFoundation1b0ReviewError(
             'PATHOUT_FOUNDATION_REVIEW_PROPOSAL_DRIFT',
-            'The review must retain exact non-authorizing proposal v6'
+            'The supersession must retain exact non-authorizing proposal v7'
         );
     }
 
@@ -196,7 +210,7 @@ export function validateCorePathoutFoundation1b0Review(
     if (
         authorization.implementationRow !==
             'PATHOUT-LIBRARY-FOUNDATION-1B' ||
-        !authorization.implementationAuthorized ||
+        authorization.implementationAuthorized ||
         !sameData(
             authorization.exactImplementation,
             proposal.exactImplementation
@@ -211,7 +225,7 @@ export function validateCorePathoutFoundation1b0Review(
         ) ||
         authorization.prerequisiteDeclarationCount !== 5 ||
         authorization.runtimeRuleCount !== 12 ||
-        authorization.proofRuleCount !== 1 ||
+        authorization.proofRuleCount !== 2 ||
         authorization.transparentLibraryDefinitionCount !== 9 ||
         authorization.positiveConsumerCount !== 7 ||
         authorization.negativeConsumerCount !== 8 ||
@@ -232,11 +246,11 @@ export function validateCorePathoutFoundation1b0Review(
         !sameData(review.gitBoundary, rawReview.gitBoundary) ||
         !sameData(review.nonEffects, rawReview.nonEffects) ||
         review.nextDependencyState !==
-            'pathout-foundation-1b-implementation-ready'
+            'pathout-foundation-1b0-v7-awaiting-separate-review'
     ) {
         throw new CorePathoutFoundation1b0ReviewError(
             'PATHOUT_FOUNDATION_REVIEW_AUTHORIZATION_DRIFT',
-            'The review exceeded the exact root-only 5/12/1/9 boundary'
+            'The superseded review reauthorized implementation or drifted'
         );
     }
 }

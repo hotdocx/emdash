@@ -2,11 +2,10 @@
  * PATHOUT-LIBRARY-FOUNDATION-1B0 non-authorizing proposal.
  *
  * The proposal freezes the exact local prerequisite closures and nine
- * transparent definitions selected by measured implementation. Proposal v6
- * preserves v5 and adds the exact active represented-source component
- * closure plus its subject-checked head fusion for the TypeScript runtime's
- * deliberately weak-head execution strategy. It compiles or installs
- * nothing; a separate immutable review must authorize 1B.
+ * transparent definitions selected by measured implementation. Proposal v7
+ * preserves v6 and adds the exact active identity-family proof comparison
+ * reached by the selected PathOut source-action consumers. It compiles or
+ * installs nothing; a separate immutable review must authorize 1B.
  */
 
 import {
@@ -15,7 +14,7 @@ import {
 } from './pathout_trust_boundary_audit';
 
 export const CORE_PATHOUT_FOUNDATION_1B0_REVISION =
-    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-6' as const;
+    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-7' as const;
 
 const DECISION_QUESTION =
     'Approve H-TS-EMDASH-PATHOUT-FOUNDATION-01/' +
@@ -201,6 +200,18 @@ const runtimeRules = [
 const proofRules = [
     {
         order: 0,
+        id: 'pathout.foundation.precomposition-identity-family',
+        authorityLine: 8079,
+        rigidHeads: [
+            'hom_precomp_along_fapp0',
+            'comp_fapp0'
+        ],
+        sourceTrivialConstraintCount: 1,
+        generatedConstraintCount: 0,
+        policy: 'proof-unification-trivial-discharge'
+    },
+    {
+        order: 1,
         id: 'pathout.foundation.hom-int-precomp-projection-order',
         authorityLine: 8463,
         rigidHeads: [
@@ -292,11 +303,14 @@ const rawProposal = {
         supersededV4ReviewCheckpoint: 'ab556a9',
         supersededV5ProposalCheckpoint: '622a496',
         supersededV5ReviewCheckpoint: 'c4dd293',
+        supersededV6ProposalCheckpoint: 'f006ccb',
+        supersededV6ReviewCheckpoint: 'bdcef29',
         correctionReason:
-            'measured-v5-source-action-consumers-remained-at-' +
-            'fapp0(tapp0_fapp0(hom_int_precomp_func),q)-versus-' +
-            'comp(q,p);import-active-lines-7921-7977-9704-and-fuse-' +
-            'only-9704-plus-7977-for-head-only-TypeScript-execution',
+            'measured-v6-source-action-consumers-now-reach-' +
+            'hom_precomp_along_fapp0(id,p,q)-versus-comp(q,p)-but-' +
+            'the-selected-line-8463-projection-rule-requires-a-rigid-' +
+            'hom_int_precomp_func-right-factor;import-the-exact-active-' +
+            'identity-family-proof-comparison-at-line-8079',
         authoritySourceSha256:
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256,
         authorityChecksSha256:
@@ -351,7 +365,7 @@ const rawProposal = {
         inheritedReviewedSourceActionRuntimeRule:
             'categorical.direct-mixed-source-action.' +
             'source-composition-projection',
-        localImplementationDeltaIsFiveTwelveOneNine: true
+        localImplementationDeltaIsFiveTwelveTwoNine: true
     },
     exactImplementation: {
         prerequisiteDeclarations,
@@ -365,9 +379,9 @@ const rawProposal = {
         phaseOrder: [
             'compile-opaque-prerequisite-declarations',
             'compose-ten-authority-rules-and-two-derived-head-fusions',
-            'compile-one-authority-proof-rule',
+            'compile-two-authority-proof-rules',
             'compile-nine-transparent-library-definitions',
-            'recheck-proof-rule-against-final-declaration-context'
+            'recheck-two-proof-rules-against-final-declaration-context'
         ],
         genericEnginesOnly: true,
         intrinsicCoreOwnerDelta: 0,
@@ -455,6 +469,30 @@ const rawProposal = {
             checkerBranchDelta: 0,
             evaluatorBranchDelta: 0
         },
+        identityFamilyProofCorrection: {
+            measuredConsumers: [
+                'pathout-source-action',
+                'pathout-reflexive-action'
+            ],
+            normalizedResidue:
+                'hom_precomp_along_fapp0(Z,Z,id_func(Z),z,x,y,p,q)-' +
+                'versus-comp_fapp0(Z,x,y,z,q,p)',
+            previouslySelectedRule:
+                'hom-int-precomp-projection-order',
+            previousRuleRightFactor:
+                'hom_int_precomp_func(A,B,F,Y,X,p)',
+            activeAuthorityLine: 8079,
+            ruleId:
+                'pathout.foundation.precomposition-identity-family',
+            activeSourceReplacement: 'one-trivial-tt-equality',
+            typescriptResidualConstraintCount: 0,
+            reasonTrivialConstraintElided:
+                'tt-equals-tt-is-reflexive-and-generates-no-residual-' +
+                'TypeScript-proof-problem',
+            runtimeRuleAdded: false,
+            genericProofMatcherChanged: false,
+            newMathematicalRule: false
+        },
         oppositeHomReuse: {
             authorityLine: 3251,
             runtimeRuleId:
@@ -475,7 +513,7 @@ const rawProposal = {
         trustedProfileContains: [
             'five-opaque-authority-declarations',
             'twelve-runtime-rules',
-            'one-proof-unification-rule'
+            'two-proof-unification-rules'
         ],
         derivedLibraryContains: [
             'nine-checked-transparent-definitions'
@@ -615,7 +653,7 @@ export function validateCorePathoutFoundation1b0Proposal(
     validateCorePathoutTrustBoundary0aAudit();
     if (
         proposal.revision !==
-            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-6' ||
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-7' ||
         proposal.parent.auditRevision !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.revision ||
         proposal.parent.correctedAuditCheckpoint !== '5a1ea75' ||
@@ -632,6 +670,8 @@ export function validateCorePathoutFoundation1b0Proposal(
         proposal.parent.supersededV4ReviewCheckpoint !== 'ab556a9' ||
         proposal.parent.supersededV5ProposalCheckpoint !== '622a496' ||
         proposal.parent.supersededV5ReviewCheckpoint !== 'c4dd293' ||
+        proposal.parent.supersededV6ProposalCheckpoint !== 'f006ccb' ||
+        proposal.parent.supersededV6ReviewCheckpoint !== 'bdcef29' ||
         proposal.parent.authoritySourceSha256 !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256 ||
         proposal.parent.authorityChecksSha256 !==
@@ -647,7 +687,7 @@ export function validateCorePathoutFoundation1b0Proposal(
     if (
         implementation.prerequisiteDeclarations.length !== 5 ||
         implementation.runtimeRules.length !== 12 ||
-        implementation.proofRules.length !== 1 ||
+        implementation.proofRules.length !== 2 ||
         implementation.libraryDefinitions.length !== 9 ||
         !sameData(
             implementation.prerequisiteDeclarations,
@@ -693,7 +733,7 @@ export function validateCorePathoutFoundation1b0Proposal(
             .extractOrDuplicateRepresentedHomSubset ||
         proposal.selectedPredecessor.extractOrDuplicateOppositeHomRule ||
         !proposal.selectedPredecessor
-            .localImplementationDeltaIsFiveTwelveOneNine ||
+            .localImplementationDeltaIsFiveTwelveTwoNine ||
         proposal.dependencyClosure.representedHomReuse.owner !== 'hom_' ||
         proposal.dependencyClosure.representedHomReuse
             .duplicateTransferAuthorized ||
@@ -750,10 +790,23 @@ export function validateCorePathoutFoundation1b0Proposal(
             .checkerBranchDelta !== 0 ||
         proposal.dependencyClosure.typescriptSourceComponentWeakHeadFusion
             .evaluatorBranchDelta !== 0
+        ||
+        proposal.dependencyClosure.identityFamilyProofCorrection
+            .activeAuthorityLine !== 8079 ||
+        proposal.dependencyClosure.identityFamilyProofCorrection.ruleId !==
+            'pathout.foundation.precomposition-identity-family' ||
+        proposal.dependencyClosure.identityFamilyProofCorrection
+            .typescriptResidualConstraintCount !== 0 ||
+        proposal.dependencyClosure.identityFamilyProofCorrection
+            .runtimeRuleAdded ||
+        proposal.dependencyClosure.identityFamilyProofCorrection
+            .genericProofMatcherChanged ||
+        proposal.dependencyClosure.identityFamilyProofCorrection
+            .newMathematicalRule
     ) {
         throw new CorePathoutFoundation1b0ProposalError(
             'PATHOUT_FOUNDATION_PROPOSAL_SCOPE_DRIFT',
-            'The exact 5/12/1/9 foundation scope drifted'
+            'The exact 5/12/2/9 foundation scope drifted'
         );
     }
 
