@@ -9,10 +9,10 @@ recorded; qualified predecessor baseline integrated into public `main`;
 `DEV-CATALOG-1`, `DEV-CLI-2A`, and `DEV-CLI-2B` implemented and
 final-proportional-green under the persistent 2026-08-10 long-aggregate
 policy recorded below; `PLAN-DECOMPOSE-3A/3B` complete and the selected-
-constructor base-plan macro final-proportional-green; contextual `have` is the
-next versioned audit; later template refinement, simplification, search,
-library, external-automation, and general goal-graph rows remain dependency-
-gated
+constructor base-plan macro final-proportional-green; the contextual `have`
+audit is complete and its coordinated v2 implementation tranche is frozen;
+later template refinement, simplification, search, library, external-
+automation, and general goal-graph rows remain dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -497,7 +497,8 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `DEV-CLI-2C` | Stable `graph` command projection | gated | `GOAL-COUPLING-4`; no ad hoc second graph authority |
 | `PLAN-DECOMPOSE-3A` | Audit inert `refine/have/constructor/rewrite` representation | complete | base-plan macro lowering selected; template and equality boundaries separated below |
 | `PLAN-DECOMPOSE-3B` | Implement selected-`constructor` base-plan macro | complete | `934bf13`; focused semantic/static/browser/packed gates green; long aggregate intentionally omitted |
-| `PLAN-DECOMPOSE-3B1` | Versioned contextual `have` plan/refiner | in progress | audit explicit nested-profile revision and open-goal retention before implementation |
+| `PLAN-DECOMPOSE-3B1A` | Audit contextual `have`, retention, and revision boundary | complete | contextual substitution plus per-refiner retained source obligations selected below |
+| `PLAN-DECOMPOSE-3B1B` | Implement versioned contextual `have` plan/refiner | in progress | frozen 3B1 contract, coordinated pre-release v2 source/artifact migration |
 | `PLAN-DECOMPOSE-3C` | Versioned explicit-placeholder `refine` template | pending | one consumer not expressible by base-plan macros; source/artifact revision decision |
 | `GOAL-COUPLING-4` | Stable cross-goal dependency graph | pending | measured dependent-hole consumer and snapshot revision decision |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | pending | equality/transport owner inventory and termination contract |
@@ -1217,8 +1218,131 @@ constructor discovery, theorem import, equality/rewrite behavior, Lambdapi
 source, mathematical owner/rule, Node adapter, CLI, cache/network, MCP/LSP,
 print/book, sibling repository, npm registry, GitHub Release, or hosted
 deployment changed. The rejected lambda-cut `have` probe was never
-checkpointed. `PLAN-DECOMPOSE-3B1` is now the sole semantic row in progress;
-its first action is a contract audit, not an assumed implementation.
+checkpointed. `PLAN-DECOMPOSE-3B1A` is the next contract audit.
+
+## PLAN-DECOMPOSE-3B1A Contextual Have Audit And Frozen 3B1B Tranche
+
+Date: 2026-08-10
+
+Status: audit complete; `PLAN-DECOMPOSE-3B1B` frozen and approved for bounded
+implementation under the standing self-approval and checkpoint policy.
+
+### Material findings
+
+1. A generic `have` does not require inferred lambdas, a hidden cut theorem,
+   or a new Core expression. For a goal `Γ ⊢ G` and source binder `h : T`, a
+   refiner can allocate contextual session metas
+
+   ```text
+   Γ       ⊢ ?fact : T
+   Γ, h:T  ⊢ ?body : shift(G, 1)
+
+   Γ ⊢ ?body[?fact/h] : G
+   ```
+
+   and solve the old goal with the final contextual occurrence. The existing
+   meta-spine substitution, scope checker, and final fresh proof-document
+   recheck remain authoritative. When both subplans close, zonking produces
+   ordinary explicit Core with no source or artifact meta.
+2. Term reachability alone is insufficient for source obligations. If the
+   continuation solves `?body` with a term that ignores `h`, substitution can
+   erase an unsolved `?fact`. The theorem term may no longer need that fact,
+   but the explicit source plan still asked the agent to prove it. Silently
+   dropping that hole would violate the existing rule that plan execution
+   cannot ignore or invent an obligation.
+3. The smallest honest correction is a per-`CoreProofRefiner` ordered retained-
+   obligation set. `have` registers the fact goal; inspection reports every
+   unsolved registered fact before other root-reachable goals and marks a
+   detached goal `retained-source-obligation` with occurrence count zero.
+   Solving the meta removes it from reported state automatically. The set is
+   session-local, transaction-aware, recreated by deterministic source replay,
+   absent from source/artifacts, and never becomes a hidden prover service or
+   global registry.
+4. Source execution visits the fact subplan before the continuation subplan.
+   This keeps source goal order stable and allows the fact to be refined while
+   it is still term-reachable. Even if later continuation refinement erases
+   its occurrence, the refiner retains it until solved. A replay with a patched
+   fact starts from a fresh session and reconstructs the same obligations.
+5. This is a real serialized-language and diagnostic change: `have` is a new
+   inert plan tag, trace operation, and goal reachability value. Reusing v1
+   revision strings would make exhaustive consumers silently stale. The npm
+   package has not yet been published and there are no tracked canonical v1
+   proof-development files, so this tranche performs one coordinated
+   pre-release v2 migration rather than carrying a dual reader with no actual
+   external consumer.
+
+### Frozen PLAN-DECOMPOSE-3B1B contract
+
+Add the inert browser-safe node and direct authoring constructor:
+
+```text
+have(binding, proof, body)
+
+coreProofPlanHave(binding, proof, body, options?)
+  -> CoreProofPlanHave
+```
+
+1. `binding` is an explicit `KernelBinder`; exact plicity and
+   functorial/natural/object-only variation are preserved. Its type and both
+   child plans must be meta-free, scoped, portable data. No callback,
+   environment lookup, declaration search, or implicit instance search is
+   retained.
+2. `CoreProofRefiner.have` checks `T : TYPE` in the selected goal context,
+   creates the fact and weakened continuation metas, solves the old goal by
+   contextual spine instantiation, registers the fact as a retained source
+   obligation, and returns `[fact, body]` in source order. All mutation is
+   failure-atomic, including retention metadata.
+3. `CoreProofRefiner.inspect` continues to derive ordinary goals from the
+   root term, then prepends unsolved retained obligations without duplicates.
+   Every goal exposes `reachability` as `term-reachable` or
+   `retained-source-obligation`; only the latter may have occurrence count
+   zero. A solved retained meta is never reported.
+4. Plan execution records one `have` trace step, maps its two exact child
+   goals, executes proof before body, and requires stable hole IDs as before.
+   A complete execution is freshly rechecked by `CoreChecker`; an unresolved
+   retained fact makes the plan and every enclosing artifact incomplete even
+   when the current term no longer mentions it.
+5. Canonical source uses closed tag dispatch for `have`, reconstructs its
+   binder through existing explicit Core decoders, and rejects old/malformed,
+   extra-field, meta-bearing, cyclic, or noncanonical data. There is no
+   declaration text parser and no serialized session identity.
+6. Advance the directly affected profile family coherently:
+
+   | Boundary | New revision family |
+   | --- | --- |
+   | proof plan | `emdash-proof-plan-v2` |
+   | proof document/compiler/state/artifact/JSONL | v2 |
+   | exact-closure workspace proof/compiler/artifact | v2 |
+   | proof development/artifact/source | v2 |
+   | mounted proof development | v2 with an explicit source-profile pin |
+   | development CLI summary/goal/build | v2 |
+   | research-document binding/snapshot | v2 |
+   | pinned research overview browser/files management | v2 with recomputed deterministic pins |
+   | AI-native capability record | v4 |
+
+   The declaration-workspace/module/runtime profiles, Core serialization,
+   constructor macro profile, and mathematical ownership revisions do not
+   change. Package version remains `0.1.0`; publication is still separately
+   gated.
+
+Focused acceptance covers direct-refiner complete and open cases, a
+continuation that both uses and ignores `h`, retained-goal ordering and zero-
+occurrence reporting, dependent outer contexts, every binder variation,
+transaction rollback, plan preflight, canonical source round-trip and stale-v1
+rejection, complete/incomplete artifact recheck, exact-closure/development/CLI
+projection, research-pin parity, browser closure, and packed ESM/CJS/strict-
+TypeScript/browser consumers. Run the affected focused suites, typecheck,
+changed-file lint, workspace check, package check, exact diff review, and
+whitespace hygiene. Under `D-PA-019`, do not run a long root or repository
+aggregate unless omitting it becomes progress-blocking.
+
+Non-effects: no new Core expression or checker rule, lambda-inference change,
+cut axiom, hidden declaration, theorem import, equality/rewrite behavior,
+constructor search, term/declaration parser, arbitrary host execution,
+filesystem policy expansion, network/cache/MCP/LSP, Lambdapi source,
+mathematical owner/rule, print/book, sibling repository, npm publication,
+GitHub Release, or hosted deployment change. General placeholder `refine`
+remains `PLAN-DECOMPOSE-3C`; propositional rewrite remains `SIMP-5A/5B`.
 
 ## Decision Ledger
 
@@ -1248,6 +1372,8 @@ its first action is a contract audit, not an assumed implementation.
 | `D-PA-022` | Prefer source-expanded proof-plan macros whenever a convenience form lowers faithfully to the existing inert base. | It improves AI/human authoring without multiplying trusted tags, decoders, trace semantics, or process state. |
 | `D-PA-023` | Implement explicit selected-`constructor` first; reserve contextual `have` and general `refine` for versioned plan/refiner contracts and `rewrite` for the equality/simplifier audit. | Only constructor has an exact base-plan lowering under the frozen checker; the other forms require contracts that cannot be recovered safely by renaming `apply` or runtime reduction. |
 | `D-PA-024` | Reject the proposed lambda-cut expansion of `have` after the focused checker probe. | `CoreProofRefiner.apply` must infer its callee, while the frozen `CoreChecker` intentionally rejects annotated-lambda inference; widening that checker or injecting a hidden declaration is outside the macro tranche. |
+| `D-PA-025` | Elaborate `have` by contextual meta-spine substitution and retain its fact as an explicit per-refiner source obligation until solved. | It produces ordinary finally checkable Core while preventing an unused continuation from silently erasing an open source task. |
+| `D-PA-026` | Perform one coordinated pre-release v2 source/artifact migration for contextual `have`; do not silently widen v1 or build an unused dual reader. | The new plan tag, trace operation, and reachability state affect exhaustive consumers, while npm is unpublished and no tracked canonical v1 development source exists. |
 
 ## Validation And Checkpoint Policy
 
