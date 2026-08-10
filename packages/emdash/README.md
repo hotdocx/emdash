@@ -32,7 +32,11 @@ The package has three deliberately bounded entries:
   the canonical v2 proof artifact remains unchanged. The additive proof
   simplifier accepts explicit ordered global equality theorems, performs
   bounded deterministic root-target rewriting, and expands its checked
-  backward transports to the same existing `have` plus `exact` nodes.
+  backward transports to the same existing `have` plus `exact` nodes. The
+  accessible-premise index reconstructs one exact module closure, exposes
+  root-local and direct-public declarations with structured scope reasons,
+  and searches exact IDs and bounded structural Core fingerprints without
+  claiming theorem applicability.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -46,6 +50,7 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_PLAN_PROFILE,
@@ -57,9 +62,11 @@ import {
   coreProofPlanHave,
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
+  createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
+  searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
 } from '@hotdocx/emdash/workspace';
 
@@ -69,6 +76,7 @@ void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void synthesizeCoreLfInstance;
 void synthesizeCoreLfInstanceByRoles;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
+void CORE_LF_PREMISE_INDEX_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
 void CORE_PROOF_PLAN_PROFILE;
 void CORE_PROOF_PLAN_MACRO_PROFILE;
@@ -79,9 +87,11 @@ void coreProofPlanConstructor;
 void coreProofPlanHave;
 void coreProofPlanRefine;
 void coreProofTemplatePlaceholder;
+void createCoreLfAccessiblePremiseIndex;
 void createCoreLfProofDevelopment;
 void parseCoreLfProofDevelopmentSourceText;
 void serializeCoreProofGoalCouplingGraph;
+void searchCoreLfAccessiblePremises;
 void simplifyCoreProofPlan;
 ```
 

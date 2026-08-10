@@ -189,6 +189,7 @@ export * from './proof_template';
 export * from './proof_document';
 export * from './ai_proof_demo';
 export * from './lf_workspace';
+export * from './lf_premise_index';
 export * from './lf_workspace_proof';
 export * from './lf_proof_development';
 export * from './lf_proof_development_source';

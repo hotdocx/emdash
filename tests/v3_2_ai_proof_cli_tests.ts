@@ -69,6 +69,9 @@ import {
     CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE
 } from '../src/v3_2/lf_proof_development_store';
 import {
+    CORE_LF_PREMISE_INDEX_PROFILE
+} from '../src/v3_2/lf_premise_index';
+import {
     CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE
 } from '../src/v3_2/lf_proof_development_cli';
 import {
@@ -441,7 +444,7 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assertDeepFrozen(CORE_AI_NATIVE_CAPABILITIES);
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES_PROFILE.revision,
-            'emdash-ai-native-capabilities-v9'
+            'emdash-ai-native-capabilities-v10'
         );
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES.status,
@@ -465,6 +468,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
             CORE_AI_NATIVE_CAPABILITIES.implementedProfiles.map(profile =>
                 [profile.id, profile.revision]
             )
+        );
+        assert.equal(
+            revisions.get('accessible-premise-index'),
+            CORE_LF_PREMISE_INDEX_PROFILE.revision
         );
         assert.equal(
             revisions.get('proof-simplifier'),

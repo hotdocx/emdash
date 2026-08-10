@@ -197,6 +197,7 @@ import './v3_2_lf_transfer_compiler_tests';
 import './v3_2_lf_transfer_runtime_tests';
 import './v3_2_lf_transfer_visibility_tests';
 import './v3_2_lf_workspace_tests';
+import './v3_2_lf_premise_index_tests';
 import './v3_2_lf_workspace_proof_tests';
 import './v3_2_lf_fragment_workspace_tests';
 import './v3_2_lf_fragment_module_workspace_tests';

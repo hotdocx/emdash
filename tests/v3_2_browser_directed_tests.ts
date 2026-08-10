@@ -326,6 +326,36 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
         );
     });
 
+    it('keeps exact premise indexing Node-free and outside host adapters', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/lf_premise_index.ts'
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_premise_index.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_workspace.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_conversion.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_acquisition.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_remote_workspace_store.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+    });
+
     it('keeps exact-closure proof attachment Node-free', () => {
         const closure = collectLocalClosure(
             'src/v3_2/lf_workspace_proof.ts'

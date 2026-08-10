@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v9' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v9' as const,
+    revision: 'emdash-ai-native-capabilities-v10' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v10' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -83,6 +83,13 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
             lambdapiRole: 'optional-development-conformance'
         },
         implementedProfiles: [
+            {
+                id: 'accessible-premise-index',
+                revision: 'emdash-lf-premise-index-v1',
+                scope:
+                    'exact root-local and direct-public declaration search ' +
+                    'with bounded structural type fingerprints'
+            },
             {
                 id: 'proof-simplifier',
                 revision: 'emdash-proof-simplifier-v1',

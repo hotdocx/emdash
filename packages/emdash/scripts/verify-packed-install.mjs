@@ -219,6 +219,7 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_CHECKER_PROFILE,
@@ -232,9 +233,11 @@ import {
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
   CoreProofChecker,
+  createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
+  searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
 } from '@hotdocx/emdash/workspace';
 
@@ -258,6 +261,10 @@ assert.equal(
 assert.equal(
   CORE_LF_DECLARATION_WORKSPACE_PROFILE.nodeBuiltinDependency,
   false,
+);
+assert.equal(
+  CORE_LF_PREMISE_INDEX_PROFILE.revision,
+  'emdash-lf-premise-index-v1',
 );
 assert.equal(
   CORE_LF_PROOF_DEVELOPMENT_PROFILE.nodeBuiltinDependency,
@@ -291,6 +298,7 @@ assert.equal(typeof coreProofPlanConstructor, 'function');
 assert.equal(typeof coreProofPlanHave, 'function');
 assert.equal(typeof coreProofPlanRefine, 'function');
 assert.equal(typeof coreProofTemplatePlaceholder, 'function');
+assert.equal(typeof createCoreLfAccessiblePremiseIndex, 'function');
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
 assert.equal(typeof CoreProofChecker, 'function');
 assert.equal(
@@ -299,6 +307,7 @@ assert.equal(
 );
 assert.equal(typeof parseCoreLfProofDevelopmentSourceText, 'function');
 assert.equal(typeof serializeCoreProofGoalCouplingGraph, 'function');
+assert.equal(typeof searchCoreLfAccessiblePremises, 'function');
 assert.equal(typeof simplifyCoreProofPlan, 'function');
 `,
   );
@@ -323,6 +332,10 @@ assert.equal(
 );
 assert.equal(
   workspace.CORE_LF_DECLARATION_WORKSPACE_PROFILE.nodeBuiltinDependency,
+  false,
+);
+assert.equal(
+  workspace.CORE_LF_PREMISE_INDEX_PROFILE.performsIo,
   false,
 );
 assert.equal(
@@ -357,6 +370,10 @@ assert.equal(typeof workspace.coreProofPlanConstructor, 'function');
 assert.equal(typeof workspace.coreProofPlanHave, 'function');
 assert.equal(typeof workspace.coreProofPlanRefine, 'function');
 assert.equal(typeof workspace.coreProofTemplatePlaceholder, 'function');
+assert.equal(
+  typeof workspace.createCoreLfAccessiblePremiseIndex,
+  'function',
+);
 assert.equal(typeof workspace.createCoreLfProofDevelopment, 'function');
 assert.equal(typeof workspace.CoreProofChecker, 'function');
 assert.equal(
@@ -369,6 +386,10 @@ assert.equal(
 );
 assert.equal(
   typeof workspace.serializeCoreProofGoalCouplingGraph,
+  'function',
+);
+assert.equal(
+  typeof workspace.searchCoreLfAccessiblePremises,
   'function',
 );
 assert.equal(typeof workspace.simplifyCoreProofPlan, 'function');
@@ -391,6 +412,7 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_CHECKER_PROFILE,
@@ -404,9 +426,11 @@ import {
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
   CoreProofChecker,
+  createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
+  searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
 } from '@hotdocx/emdash/workspace';
 
@@ -419,6 +443,10 @@ const roleSynthesizer: typeof synthesizeCoreLfInstanceByRoles =
 const maybeTerm: KernelExpression | undefined = undefined;
 const developmentFactory: typeof createCoreLfProofDevelopment =
   createCoreLfProofDevelopment;
+const premiseIndexFactory: typeof createCoreLfAccessiblePremiseIndex =
+  createCoreLfAccessiblePremiseIndex;
+const premiseSearch: typeof searchCoreLfAccessiblePremises =
+  searchCoreLfAccessiblePremises;
 const proofCheckerConstructor: typeof CoreProofChecker = CoreProofChecker;
 const sourceParser: typeof parseCoreLfProofDevelopmentSourceText =
   parseCoreLfProofDevelopmentSourceText;
@@ -436,6 +464,8 @@ void builder;
 void exactSynthesizer;
 void roleSynthesizer;
 void developmentFactory;
+void premiseIndexFactory;
+void premiseSearch;
 void proofCheckerConstructor;
 void sourceParser;
 void constructorMacro;
@@ -450,6 +480,7 @@ void CORE_LF_INSTANCE_SCOPE_PROFILE;
 void CORE_LF_INSTANCE_SYNTHESIS_PROFILE;
 void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void CORE_LF_DECLARATION_WORKSPACE_PROFILE;
+void CORE_LF_PREMISE_INDEX_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
 void CORE_PROOF_CHECKER_PROFILE;
@@ -472,6 +503,7 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
   CORE_PROOF_CHECKER_PROFILE,
@@ -485,9 +517,11 @@ import {
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
   CoreProofChecker,
+  createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
+  searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
 } from '@hotdocx/emdash/workspace';
 
@@ -499,6 +533,7 @@ globalThis.emdashPackedSmoke = {
   roleSynthesisRevision: CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE.revision,
   synthesizeCoreLfInstanceByRoles,
   workspaceRevision: CORE_LF_DECLARATION_WORKSPACE_PROFILE.revision,
+  premiseIndexRevision: CORE_LF_PREMISE_INDEX_PROFILE.revision,
   proofDevelopmentRevision: CORE_LF_PROOF_DEVELOPMENT_PROFILE.revision,
   proofSourceRevision: CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision,
   proofCheckerRevision: CORE_PROOF_CHECKER_PROFILE.revision,
@@ -512,9 +547,11 @@ globalThis.emdashPackedSmoke = {
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
   CoreProofChecker,
+  createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
   parseCoreLfProofDevelopmentSourceText,
   serializeCoreProofGoalCouplingGraph,
+  searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
 };
 `,
