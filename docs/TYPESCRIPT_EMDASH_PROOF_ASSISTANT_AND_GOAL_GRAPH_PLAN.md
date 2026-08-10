@@ -64,9 +64,10 @@ host-neutral canonical goal-view artifact and additive public barrel are now
 implemented and final-green through focused evaluator/view tests, strict
 typecheck/lint, transitive browser closure, package build, installed ESM/CJS/
 strict-NodeNext/browser consumers, and the one required full-TypeScript gate.
-No semantic row is currently in progress. Package integration/release,
-Arrowgram layout, GetPaidX delivery, and authenticated hosted actions remain
-distinct later boundaries beginning with the `GOAL-GRAPH-14B2` audit.
+The `GOAL-GRAPH-14B2` package-integration audit is now complete and its
+`0.2.0` release/qualification contract is frozen below. That bounded release-
+engineering row is in progress; Arrowgram layout, GetPaidX delivery, and
+authenticated hosted actions remain distinct later boundaries.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -127,7 +128,9 @@ the selected trust/token boundary. The hosted-consumer contract checkpoint is
 `af87e75`; its CloserFans semantic/local-`master` checkpoint is `bd4146b`.
 The goal-view interchange audit/frozen-contract checkpoint is `232dde3`; its
 semantic checkpoint is `0bec688`; the plan-only commit containing this exact
-hash is its synchronized clean ledger checkpoint.
+hash is its synchronized clean ledger checkpoint. The 14B2 package/version/
+release audit and frozen contract are recorded below; no version, integration,
+tag, Release, or registry mutation preceded that contract.
 
 Depends-On:
 
@@ -620,7 +623,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | repartitioned | Fresh audit split the host-neutral public view, package release, Arrowgram/GetPaidX consumer, and hosted actions into 14B1–14B4; no sibling edit or action API is justified by the parent row. |
 | `GOAL-GRAPH-14B0` | Public-interchange and sibling-consumer audit | complete | Emdash goal evaluation is internal-only, Arrowgram owns a generic coordinate-based `DiagramSpec`, CloserFans is the canonical GetPaidX/LastRevision host, and no current sibling imports Emdash goal semantics. Exact audit and decisions are below. |
 | `GOAL-GRAPH-14B1` | Canonical host-neutral goal-view artifact and public source barrel | complete | `0bec688`; privacy-minimized replay-gated projection, strict canonical parser/validator/serializer, explicit non-authority flags, public workspace/root exports, capability v14/docs, browser closure, and installed package consumers; one required `check:ts` passed once with 1,662 tests and zero failures. No Arrowgram dependency or layout. |
-| `GOAL-GRAPH-14B2` | Integrate and publish the next Emdash package release | gated | Complete 14B1 plus a separate 58-commit branch-integration/version/release audit and the required public-barrel qualification; never republish 0.1.0. |
+| `GOAL-GRAPH-14B2` | Integrate and publish the next Emdash package release | contract frozen | Candidate `0.2.0`; 61-commit fast-forward-only integration, retained 0.1 consumer execution, exact tarball qualification, protected OIDC release, and independent public verification are frozen below. Never republish 0.1.0. |
 | `GOAL-GRAPH-14B3` | Deterministic Arrowgram projection and GetPaidX consumer | gated | Require public package containing 14B1, current published Arrowgram packages, exact layout/color/label policy, and a thin file-backed or derived-read-only template contract. |
 | `GOAL-GRAPH-14B4` | Authenticated hosted evidence/action adapters | deferred | Require one exact mutation consumer, actor/signature authority, idempotency/audit/permission semantics, and current host security/deployment clearance; visualization does not authorize effects. |
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
@@ -4663,6 +4666,182 @@ imports nor modifies the active presheaf, site, sheafification, affine-scheme,
 scheme, or projective-space mathematics. Those authority and consumer
 boundaries remain exactly in 14B2--14B4 and the other gated rows.
 
+## GOAL-GRAPH-14B2 Audit And Frozen `0.2.0` Release Contract
+
+Date: 2026-08-10
+
+Audit result: 14B2 is dependency-ready as a bounded package release. The
+candidate is `@hotdocx/emdash@0.2.0`; this is neither an implicit continuation
+of the 14B1 source checkpoint nor permission to widen 14B3/14B4. The contract
+below was frozen before any version edit, `main` integration, tag, GitHub
+Release, environment approval, npm mutation, or sibling-repository edit.
+
+### Audited source and public state
+
+The exact audit boundary is proof branch `b8127b4` over local/public `main`
+`ccf4fed`:
+
+- `ccf4fed` is an exact ancestor; the proof branch is 61 commits ahead and zero
+  behind, so integration has one admissible history operation: fast-forward;
+- the aggregate branch delta is 56 files, 30,439 insertions, and 103 deletions.
+  This is the accumulated reviewed proof-engineering program, not a patch
+  whose risk can be represented as “only export the new view”;
+- local and remote proof-branch tips both equal `b8127b4`; local and remote
+  `main` both equal `ccf4fed`; the proof worktree is clean; and
+- GitHub has no open pull request, public `main` is not branch-protected, and
+  the immutable annotated `emdash-v0.1.0` tag and successful Release remain at
+  `501a5f6`. The lack of branch protection makes the recorded ancestry check,
+  non-force push, and post-push identity check mandatory rather than optional.
+
+The public registry exposes only `0.1.0`, with `latest` equal to `0.1.0`; a
+second `0.1.0` publication is impossible and prohibited. A fresh build from
+public `ccf4fed` and the 14B1-complete branch shows:
+
+- the ESM root entry is byte-identical at SHA-256
+  `1a2ae1ec850fc51eab4e278bb7811bd4e2f69e381651ef958f759cadc11a0acd`;
+- the ESM authoring entry is byte-identical at SHA-256
+  `95212d0be9e9caf4248e9379de1de53a09fc6b198e772a8c704f2bff4604df5e`;
+- the workspace entry changes from SHA-256
+  `f8fc04350f04488c8cb1cf2648dedce6454916251f8992bab45022648a472931`
+  to `bef32a9e66365762397da3f44159df4b3ee5fd7861051ba212a199d4dce068e5`;
+  and
+- the workspace runtime export set grows from 257 to 341 names, with all 257
+  old names retained and 84 names added.
+
+That runtime export result is additive, but the workspace is deliberately a
+profile-versioned API. The branch advances such existing public families as
+proof plans (`v1` to `v2` for contextual `have`), proof state/reachability,
+workspace proof artifacts, and research-document bindings. Raw callers pinned
+to an old profile may therefore need an explicit migration even though the
+known 0.1 authoring path remains supported. Under the pre-1.0 versioning policy
+this is a minor feature/contract boundary, not a patch. `0.2.0` is frozen;
+`0.1.1`, a reused `0.1.0`, or an unreviewed `1.0.0` is rejected.
+
+The first real public-package consumer in CloserFans/GetPaidX remains pinned
+to `0.1.0` until 14B3 owns a sibling update. Its relevant contract uses
+`compileCoreLfDeclarationWorkspace` and
+`compileCoreLfWorkspaceProofDocument` over direct TypeScript source, and
+observes one complete and one source-visible open proof. A disposable probe of
+that exact two-function path on the candidate branch produced `complete` and
+`incomplete` with the stable open goal `body`. This probe is useful evidence,
+but the release must turn the same behavior into a repository-owned installed-
+tarball regression; no sibling edit or sibling aggregate belongs to 14B2.
+
+The existing publication authority is still appropriate:
+
+- `.github/workflows/npm-publish.yml` is active and runs only for a published
+  `emdash-v*` GitHub Release. Its unprivileged build job checks tag/package/
+  repository identity, `origin/main` ancestry, workspace/type/release gates,
+  builds and packs once, verifies that exact tarball, records its digest, and
+  uploads it;
+- its separate publish job alone receives `id-token: write`, downloads the
+  qualified artifact, refuses an already published version, and invokes
+  provenance-enabled npm publication without a token or repository secret;
+- the `npm-release` environment still requires reviewer `hotdocx` and permits
+  self-review. Repository workflows otherwise default to read-only; and
+- the owner explicitly continues to allow bypass-2FA granular-token
+  publication as an independent emergency-compatible policy. That does not
+  make the ignored token the routine route: 14B2 uses the already-proven OIDC
+  workflow and does not read, copy, print, move, upload, or install the token.
+
+### Frozen version and compatibility changes
+
+The pre-integration implementation owns only:
+
+1. `packages/emdash/package.json`: advance the exact package version from
+   `0.1.0` to `0.2.0`; do not add an entry point, dependency, script, binary,
+   lifecycle hook, or publication authority;
+2. `scripts/check-workspace.mjs`: advance its reviewed package-version
+   assertion to `0.2.0` while retaining the exact workspace, export,
+   dependency-free, browser-safe, provenance, and package-manager checks;
+3. `packages/emdash/scripts/release-preflight-tests.mjs`: advance the expected
+   immutable identity to version `0.2.0`, tag `emdash-v0.2.0`, artifact
+   `emdash-npm-0.2.0`, and tarball `hotdocx-emdash-0.2.0.tgz`; retain all
+   workflow-authority and malformed-manifest negatives;
+4. `packages/emdash/scripts/verify-packed-install.mjs`: advance the installed
+   version assertion and add the 0.1 hosted-consumer compatibility probe. The
+   installed ESM consumer must construct a minimal declaration workspace and
+   compile both complete and named-hole proof documents through the two old
+   APIs, observing `complete`, `incomplete`, and goal `body`. CJS must retain
+   both runtime names, strict NodeNext must resolve both public types, and the
+   browser bundle must close over both functions; and
+5. this living plan and the eventual concise GitHub Release text. No generated
+   `dist`, tarball, dependency tree, lockfile, sibling file, kernel source,
+   book/print source, or historical plan is an owned edit.
+
+The exact Release title is `@hotdocx/emdash 0.2.0`. Its body will summarize
+the public result without claiming hosted authority:
+
+> AI-native proof engineering and portable research-goal views for the
+> browser-safe TypeScript/emdash workspace API. This release retains the
+> dependency-free Core and authoring entries, and adds source-visible proof
+> development, checked goal/refinement tools, premise search, bounded proof
+> simplification and repair, semantic maintenance reports, and the canonical
+> host-neutral goal-view artifact. Renderers and hosted actions remain
+> separate, non-authoritative consumers.
+
+### Frozen qualification and release sequence
+
+The implementation candidate must pass, in this order:
+
+1. exact unstaged/staged diff review, `git diff --check`, conflict-marker and
+   hardcoded-version inventory;
+2. the focused release-preflight tests, `workspace:check`, root typecheck, and
+   targeted ESLint for the changed JavaScript release owners;
+3. one package build followed by the packed installed ESM, CommonJS, strict
+   NodeNext, and browser consumers, including the new executable 0.1 path;
+4. an exact candidate tarball inventory, SHA-256 digest, release-preflight
+   record, and installed-package verification; and
+5. a clean version/qualification checkpoint and non-force proof-branch push.
+
+The already-green 14B1 `check:ts` result—1,662 tests, zero failures—is carried
+forward because 14B2 changes no shared TypeScript behavior, public barrel, or
+root test runner. It must not be rerun for reassurance. `check:all`, root test,
+Lambdapi/kernel, print/book, CloserFans, Arrowgram, container, E2E, and sibling
+deployment aggregates are outside this release-preparation boundary.
+
+Only after the exact candidate is clean and qualified:
+
+1. create a dedicated temporary release worktree on local `main`; require
+   local/remote `main` still to equal the audited base and fast-forward it to
+   the exact candidate—never merge-commit, rebase, squash, reset, or rewrite;
+2. verify the resulting commit/tree and push `main` non-force, then require
+   remote `main` to equal the candidate;
+3. create and push one annotated tag `emdash-v0.2.0` at that exact public-main
+   commit, verify both tag object and peeled commit remotely, and create the
+   exact non-draft, non-prerelease GitHub Release above;
+4. identify the single release-triggered workflow run, inspect the build
+   evidence, and approve only its exact pending `npm-release` deployment. The
+   standing unattended-task permission covers this plan-approved environment
+   review; it does not cover a different environment, workflow, tag, commit,
+   artifact, or permission;
+5. wait for the OIDC workflow to complete. If it fails before registry
+   mutation, preserve the tag/Release/run and diagnose or rerun the same exact
+   artifact; do not mint another version to hide evidence. Do not switch to
+   the bypass-token route without a newly recorded failure-specific plan; and
+6. independently verify npm `0.2.0`, `latest`, package identity, integrity and
+   tarball digest/inventory, provenance/source/workflow links, and a fresh
+   registry-installed consumer. Workflow success alone is insufficient.
+
+After public verification, record a completion ledger on `main`, push it, and
+fast-forward the proof branch to that same ledger commit. The immutable release
+tag intentionally remains on the versioned artifact commit; the later ledger
+records external facts that could not exist before publication. Do not delete
+the release worktree or either branch as part of 14B2 cleanup.
+
+If an already published artifact is found defective, npm immutability is
+preserved. The safe response is a separately authorized deprecation/dist-tag
+correction and forward fix, never unpublish, tag movement, force-push, or local
+history erasure. No such rollback action is pre-authorized merely by this
+contingency record.
+
+Non-effects: 14B2 changes no Emdash Core/checker semantics, v3.2 mathematics,
+proof profile, source parser, declaration frontend, package export path,
+runtime dependency, GitHub workflow authority, npm trust configuration,
+Arrowgram diagram schema, GetPaidX template/API/MCP/controller, hosted
+permission, or authenticated evidence/action meaning. Those remaining host
+and effect boundaries stay in 14B3--14B4.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -4759,6 +4938,8 @@ boundaries remain exactly in 14B2--14B4 and the other gated rows.
 | `D-PA-090` | Export a privacy-minimized canonical goal-view projection before any Arrowgram-specific layout. | The full evaluation contains proof source and human/AI evidence payloads that a renderer need not receive. Stable nodes, edges, derived explanations, counts, and explicit authority flags are sufficient for multiple views without coupling Emdash to one graphics package. |
 | `D-PA-091` | Treat CloserFans as the GetPaidX/LastRevision host and Arrowgram as the generic rendering/file-workspace project for this program. | This follows the user's explicit sibling clarification, avoids parallel private-host implementations, and keeps GetPaidX permissions/effects out of Arrowgram's public diagram schema and packages. |
 | `D-PA-092` | Accept 14B1 at `0bec688` as the public source-level host-neutral view boundary, without integrating or releasing the proof branch. | Fresh evaluator equality, strict canonical reconstruction, privacy-minimized fields, explicit non-authority flags, browser closure, and installed consumers now qualify the interchange itself; versioning, publication, rendering policy, and hosted effects retain separate owners. |
+| `D-PA-093` | Version the accumulated public-workspace boundary as `0.2.0`, retaining the byte-identical Core/authoring entries and explicitly qualifying the old 0.1 complete/open workspace-proof path. | All 257 old runtime workspace exports remain while 84 are added, but existing profile-versioned source/artifact families advance; a pre-1.0 minor release communicates that contract boundary more honestly than a patch. |
+| `D-PA-094` | Integrate 14B2 by fast-forward only and publish its one exact tarball through the protected OIDC workflow; retain bypass-2FA-token compatibility without using the ignored token routinely. | Public `main` is an exact ancestor, the stable workflow already proves least-authority publication, and package policy versus chosen release credential are independent decisions. |
 
 ## Validation And Checkpoint Policy
 
@@ -4875,11 +5056,12 @@ synchronized:
 > above, the completed npm 0.1.0 publication/trust boundary, and completed
 > CloserFans hosted-consumer checkpoint `bd4146b`, together with the earlier
 > checked proof-engineering checkpoints in this plan. Treat
-> `GOAL-GRAPH-14B0/14B1` as complete. Audit only `GOAL-GRAPH-14B2` next: inspect
-> the complete proof-branch/public-main ancestry and diff, freeze the next
-> version and integration/release qualification boundary, and do not merge,
-> version, tag, publish, or deploy merely because the source-level view is
-> green. Keep Arrowgram/GetPaidX rendering and hosted actions behind
+> `GOAL-GRAPH-14B0/14B1` as complete and the 14B2 audit/`0.2.0` contract below
+> as frozen. Execute only that release contract next: version and qualify the
+> exact package candidate, preserve the recorded 14B1 aggregate evidence,
+> checkpoint and push the proof branch, then use only the recorded fast-
+> forward/OIDC/public-verification sequence if every prerequisite remains
+> exact. Keep Arrowgram/GetPaidX rendering and hosted actions behind
 > 14B3–14B4 and their exact gates; do not edit either sibling during the 14B2
 > audit. Keep `AGENT-EVAL-12B`, `STDLIB-8`, `COUNTEREVIDENCE-10`, and
 > `EXTERNAL-CERT-11` behind their remaining corpus, product, or solver gates
