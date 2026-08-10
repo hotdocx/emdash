@@ -33,15 +33,16 @@ through focused, browser, packed-package, and required full-TypeScript gates;
 the replay-diagnostic audit and its first exact selected-proof/open-hole
 repair composition are complete and final-green through focused, nearest-
 owner, browser, packed-package, and required full-TypeScript gates; external
-automation and the general goal-graph rows remain later boundaries; the
+automation remains a later boundary; the
 proof-agent benchmark audit is complete and its first pure attempt-scoring
 evaluator is implemented and final-proportional-green through focused,
 nearest-owner, typecheck/lint, and browser-closure gates; its public host,
 package, and corpus layer remains gated; the first research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
-owner, typecheck/lint, and browser-closure gates; its public visual/hosted
-adapter remains gated; the first protected npm bootstrap reached a green
+owner, typecheck/lint, and browser-closure gates; its replay-gated public
+source-level view is now complete, while package release and visual/hosted
+adapters remain gated; the first protected npm bootstrap reached a green
 hosted build but npm refused the final registry PUT under its 2FA/token policy,
 then exact attempt 2 published and verified `@hotdocx/emdash@0.1.0` with
 provenance. PACKAGE-RELEASE-13 is complete: the exact publish-only OIDC
@@ -58,11 +59,14 @@ the public package and ordinary Node controller. `HOSTED-CONSUMER-13A` is now
 implemented, locally integrated in CloserFans, and final-proportional-green.
 It establishes the hosted runtime consumer but does not constitute the
 Arrowgram/public-interchange work of `GOAL-GRAPH-14B`. The fresh 14B audit is
-now complete and has repartitioned that broad row: a privacy-minimized,
-host-neutral canonical goal-view artifact and additive public barrel are the
-single bounded `GOAL-GRAPH-14B1` row in progress. Package release, Arrowgram
-layout, GetPaidX delivery, and authenticated hosted actions remain distinct
-later boundaries.
+complete and has repartitioned that broad row. The privacy-minimized,
+host-neutral canonical goal-view artifact and additive public barrel are now
+implemented and final-green through focused evaluator/view tests, strict
+typecheck/lint, transitive browser closure, package build, installed ESM/CJS/
+strict-NodeNext/browser consumers, and the one required full-TypeScript gate.
+No semantic row is currently in progress. Package integration/release,
+Arrowgram layout, GetPaidX delivery, and authenticated hosted actions remain
+distinct later boundaries beginning with the `GOAL-GRAPH-14B2` audit.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -121,6 +125,9 @@ published the exact tagged artifact; public-main documentation checkpoint
 `941bf96` records its public verification and `ccf4fed` records completion of
 the selected trust/token boundary. The hosted-consumer contract checkpoint is
 `af87e75`; its CloserFans semantic/local-`master` checkpoint is `bd4146b`.
+The goal-view interchange audit/frozen-contract checkpoint is `232dde3`; its
+semantic checkpoint is the implementation commit containing the completion
+record below and will be pinned by hash in the next clean ledger checkpoint.
 
 Depends-On:
 
@@ -612,7 +619,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
 | `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | repartitioned | Fresh audit split the host-neutral public view, package release, Arrowgram/GetPaidX consumer, and hosted actions into 14B1–14B4; no sibling edit or action API is justified by the parent row. |
 | `GOAL-GRAPH-14B0` | Public-interchange and sibling-consumer audit | complete | Emdash goal evaluation is internal-only, Arrowgram owns a generic coordinate-based `DiagramSpec`, CloserFans is the canonical GetPaidX/LastRevision host, and no current sibling imports Emdash goal semantics. Exact audit and decisions are below. |
-| `GOAL-GRAPH-14B1` | Canonical host-neutral goal-view artifact and public source barrel | in progress | Freeze a privacy-minimized derived-status projection, canonical parser/validator/serializer, explicit non-authority flags, public workspace/root exports, capability/docs, and packed consumer. No Arrowgram dependency or layout. |
+| `GOAL-GRAPH-14B1` | Canonical host-neutral goal-view artifact and public source barrel | complete | Privacy-minimized replay-gated projection, strict canonical parser/validator/serializer, explicit non-authority flags, public workspace/root exports, capability v14/docs, browser closure, and installed package consumers; one required `check:ts` passed once with 1,662 tests and zero failures. No Arrowgram dependency or layout. |
 | `GOAL-GRAPH-14B2` | Integrate and publish the next Emdash package release | gated | Complete 14B1 plus a separate 58-commit branch-integration/version/release audit and the required public-barrel qualification; never republish 0.1.0. |
 | `GOAL-GRAPH-14B3` | Deterministic Arrowgram projection and GetPaidX consumer | gated | Require public package containing 14B1, current published Arrowgram packages, exact layout/color/label policy, and a thin file-backed or derived-read-only template contract. |
 | `GOAL-GRAPH-14B4` | Authenticated hosted evidence/action adapters | deferred | Require one exact mutation consumer, actor/signature authority, idempotency/audit/permission semantics, and current host security/deployment clearance; visualization does not authorize effects. |
@@ -4413,8 +4420,9 @@ authorize a universal goal ontology, hosted mutation API, or visual protocol.
 Date: 2026-08-10
 
 Audit result: `GOAL-GRAPH-14B0` is complete and the broad 14B row is
-repartitioned. `GOAL-GRAPH-14B1` is implementation-ready and is the only
-semantic row now in progress.
+repartitioned. `GOAL-GRAPH-14B1` was frozen here and is now complete under the
+completion record below. No semantic row is currently in progress; 14B2 is a
+separate integration/version/release audit, not an implicit release action.
 
 Fresh repository state at the audit boundary:
 
@@ -4545,6 +4553,116 @@ semantics. `GOAL-GRAPH-14B4` remains deferred until one exact authenticated
 action/evidence consumer supplies identity, signature, permission,
 idempotency, audit, rollback, and deployment/security prerequisites.
 
+## GOAL-GRAPH-14B1 Completion Record
+
+Date: 2026-08-10
+
+Result: accepted in the semantic implementation checkpoint containing this
+record, after frozen audit/contract checkpoint `232dde3`. The next clean
+ledger checkpoint pins that semantic commit by hash; this wording does not
+authorize 14B2 integration or publication.
+
+The new browser-safe `src/v3_2/research_goal_view.ts` implements the frozen
+host-neutral interchange boundary:
+
+- `createCoreResearchGoalView` first validates portable supplied evaluation
+  data, freshly calls the existing 14A evaluator over the exact definition and
+  evidence, and requires byte-identical canonical evaluation output. A stale,
+  forged, or hand-edited result therefore cannot be projected as though it had
+  been evaluated;
+- the canonical artifact carries its own profile/artifact revisions, exact
+  originating goal-profile/evaluation/logic/graph revisions, ID-sorted
+  theorem/task/decision nodes, derived status, optional theorem proof
+  identity, all stable evidence/dependency explanation ID sets, canonically
+  sorted dependent-to-prerequisite edges, and recomputed status counts;
+- `validateCoreResearchGoalView` rejects non-plain records, accessors,
+  functions, symbols, sparse or decorated arrays, cycles, dangerous prototype
+  keys, unsupported/extra fields, invalid or unsorted identities, duplicate or
+  unknown edges, dependency cycles, explanation/status drift, count drift,
+  and any change to the fixed non-authority flags. It reconstructs and
+  canonical-compares the complete artifact before returning deeply frozen
+  data;
+- `parseCoreResearchGoalViewText` accepts only the exact deterministic,
+  newline-terminated JSON emitted by `serializeCoreResearchGoalView`; trailing
+  whitespace, a second JSON value, malformed JSON, and noncanonical artifact
+  data remain distinct failures; and
+- the view visibly says that it is only a portable projection of
+  policy-derived supplied data, has no mutable `done` field, did not recompute
+  source hashes or verify human attribution, and executes no external action.
+
+Full proof-development source, expected explicit-Core theorem terms, evidence
+statements and AI proposal bodies, actor/approver/provider identities,
+callbacks, filesystem/network data, URLs, permissions, timestamps,
+signatures, layout/color/coordinate choices, and mutable UI state are absent.
+Stable evidence IDs remain because they are the minimum derived explanation
+links frozen by 14B1; callers must therefore still choose non-sensitive
+portable IDs for data intended for wider display.
+
+Both `research_goal_graph.ts` and `research_goal_view.ts` are now additive
+exports of the contributor v3.2 barrel and curated
+`@hotdocx/emdash/workspace` entry. The immutable capability record advances to
+`emdash-ai-native-capabilities-v14` and names the exact graph/view profiles.
+The package README explains the replay and data-minimization boundary, while
+the installed-package verifier checks profile and function availability in
+ESM, CommonJS, strict NodeNext TypeScript, and a real browser bundle. No new
+npm subpath, dependency, CLI, Core node, checker/conversion rule, proof-plan
+tag, declaration/term parser, or host adapter was added.
+
+Final evidence on the exact semantic checkpoint candidate:
+
+```text
+./scripts/pnpmw run workspace:check
+  passed; pnpm@11.16.0, Node 24.11.1
+
+./scripts/pnpmw run typecheck
+  passed
+
+targeted ESLint over every changed TypeScript/JavaScript owner and test
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_research_goal_view_tests.ts
+  passed: 4/4 tests, 1 suite
+
+node --require ts-node/register --test \
+  tests/v3_2_research_goal_graph_tests.ts
+  passed: 5/5 tests, 1 suite
+
+node --require ts-node/register --test \
+  tests/v3_2_browser_directed_tests.ts
+  passed: 21/21 tests, 1 suite
+
+node --require ts-node/register --test \
+  tests/v3_2_ai_proof_cli_tests.ts
+  passed: 15/15 tests, 3 suites
+
+./scripts/pnpmw run package:check
+  passed package build and disposable installed ESM, CommonJS,
+  strict NodeNext, and browser-bundle consumers
+
+./scripts/pnpmw run check:ts
+  passed once: 1,662 tests / 252 suites; 1,608 active passes,
+  54 intentional skips, 0 failures; 3,345,130.559623 ms
+
+git diff --cached --check
+  required immediately before the semantic checkpoint
+```
+
+The complete TypeScript gate ran exactly once only after every focused and
+package boundary was green, because this row changes both a public barrel and
+the root test runner. Its roughly 55.8-minute duration reinforces the standing
+policy against routine aggregate runs; it must not be rerun for reassurance.
+No `check:all`, Lambdapi/kernel, print/book, CloserFans, Arrowgram, container,
+E2E, deployment, npm publication, tag, Release, PR, or `main` integration ran.
+
+Non-effects: 14B1 does not define a universal goal ontology, renderer layout,
+color/status presentation, hosted permission, signed attestation, human
+identity, action receipt, mutable task API, counterevidence/observation class,
+external solver certificate, agent transport, or benchmark corpus. It neither
+imports nor modifies the active presheaf, site, sheafification, affine-scheme,
+scheme, or projective-space mathematics. Those authority and consumer
+boundaries remain exactly in 14B2--14B4 and the other gated rows.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -4640,6 +4758,7 @@ idempotency, audit, rollback, and deployment/security prerequisites.
 | `D-PA-089` | Repartition 14B into host-neutral view, package release, Arrowgram/GetPaidX rendering, and authenticated action rows. | The evaluator, public distribution, renderer schema, hosted runtime, and effect authority have different owners and validation gates; implementing them as one adapter would make visualization appear to confer proof or permission. |
 | `D-PA-090` | Export a privacy-minimized canonical goal-view projection before any Arrowgram-specific layout. | The full evaluation contains proof source and human/AI evidence payloads that a renderer need not receive. Stable nodes, edges, derived explanations, counts, and explicit authority flags are sufficient for multiple views without coupling Emdash to one graphics package. |
 | `D-PA-091` | Treat CloserFans as the GetPaidX/LastRevision host and Arrowgram as the generic rendering/file-workspace project for this program. | This follows the user's explicit sibling clarification, avoids parallel private-host implementations, and keeps GetPaidX permissions/effects out of Arrowgram's public diagram schema and packages. |
+| `D-PA-092` | Accept 14B1 as the public source-level host-neutral view boundary, without integrating or releasing the proof branch. | Fresh evaluator equality, strict canonical reconstruction, privacy-minimized fields, explicit non-authority flags, browser closure, and installed consumers now qualify the interchange itself; versioning, publication, rendering policy, and hosted effects retain separate owners. |
 
 ## Validation And Checkpoint Policy
 
@@ -4751,15 +4870,18 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from completed `GOAL-GRAPH-14A` checkpoint `faa4c27`, completed npm
-> publication/trust boundary, and completed CloserFans hosted-consumer
-> checkpoint `bd4146b`, together with their synchronized records and the
-> earlier checked proof-engineering checkpoints in this plan. Treat
-> `GOAL-GRAPH-14B0` as the completed sibling/interchange audit and implement
-> only the frozen host-neutral `GOAL-GRAPH-14B1` view artifact/public source
-> barrel next. Keep package release, Arrowgram/GetPaidX rendering, and hosted
-> actions behind 14B2–14B4 and their exact gates; do not edit either sibling
-> during 14B1. Keep `AGENT-EVAL-12B`, `STDLIB-8`, `COUNTEREVIDENCE-10`, and
+> Start from completed `GOAL-GRAPH-14A` checkpoint `faa4c27`, the completed
+> `GOAL-GRAPH-14B1` host-neutral view semantic/ledger checkpoints recorded
+> above, the completed npm 0.1.0 publication/trust boundary, and completed
+> CloserFans hosted-consumer checkpoint `bd4146b`, together with the earlier
+> checked proof-engineering checkpoints in this plan. Treat
+> `GOAL-GRAPH-14B0/14B1` as complete. Audit only `GOAL-GRAPH-14B2` next: inspect
+> the complete proof-branch/public-main ancestry and diff, freeze the next
+> version and integration/release qualification boundary, and do not merge,
+> version, tag, publish, or deploy merely because the source-level view is
+> green. Keep Arrowgram/GetPaidX rendering and hosted actions behind
+> 14B3–14B4 and their exact gates; do not edit either sibling during the 14B2
+> audit. Keep `AGENT-EVAL-12B`, `STDLIB-8`, `COUNTEREVIDENCE-10`, and
 > `EXTERNAL-CERT-11` behind their remaining corpus, product, or solver gates
 > rather than inventing authority merely to advance the ledger.
 > Preserve the hard distinction between a kernel-checked theorem and every

@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v13' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v13' as const,
+    revision: 'emdash-ai-native-capabilities-v14' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v14' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -253,6 +253,20 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 scope:
                     'saturated dependent calls with ordinary implicit ' +
                     'and output inference plus checked instance insertion'
+            },
+            {
+                id: 'research-goal-graph',
+                revision: 'emdash-research-goal-graph-v1',
+                scope:
+                    'evidence-typed theorem, task, and decision status via ' +
+                    'fresh proof replay over explicit supplied policy data'
+            },
+            {
+                id: 'research-goal-view',
+                revision: 'emdash-research-goal-view-v1',
+                scope:
+                    'canonical privacy-minimized host-neutral projection ' +
+                    'with derived explanations and no action authority'
             },
             {
                 id: 'research-document-binding',

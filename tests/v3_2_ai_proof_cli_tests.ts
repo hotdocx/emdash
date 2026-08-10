@@ -115,6 +115,12 @@ import {
     CORE_RESEARCH_DOCUMENT_PROFILE,
     serializeCoreResearchDocumentSnapshot
 } from '../src/v3_2/research_document';
+import {
+    CORE_RESEARCH_GOAL_GRAPH_PROFILE
+} from '../src/v3_2/research_goal_graph';
+import {
+    CORE_RESEARCH_GOAL_VIEW_PROFILE
+} from '../src/v3_2/research_goal_view';
 
 interface CliResult {
     readonly exitCode: number;
@@ -456,7 +462,7 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assertDeepFrozen(CORE_AI_NATIVE_CAPABILITIES);
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES_PROFILE.revision,
-            'emdash-ai-native-capabilities-v13'
+            'emdash-ai-native-capabilities-v14'
         );
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES.status,
@@ -588,6 +594,14 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assert.equal(
             revisions.get('class-call-elaboration'),
             CORE_LF_CLASS_CALL_ELABORATION_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('research-goal-graph'),
+            CORE_RESEARCH_GOAL_GRAPH_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('research-goal-view'),
+            CORE_RESEARCH_GOAL_VIEW_PROFILE.revision
         );
         assert.equal(
             revisions.get('research-document-binding'),

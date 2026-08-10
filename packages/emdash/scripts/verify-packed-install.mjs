@@ -232,6 +232,8 @@ import {
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   CORE_PROOF_SIMPLIFIER_PROFILE,
+  CORE_RESEARCH_GOAL_GRAPH_PROFILE,
+  CORE_RESEARCH_GOAL_VIEW_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -243,7 +245,11 @@ import {
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
+  createCoreResearchGoalGraphDefinition,
+  createCoreResearchGoalView,
+  evaluateCoreResearchGoalGraph,
   parseCoreLfProofDevelopmentSourceText,
+  parseCoreResearchGoalViewText,
   proposeCoreObviousProofPlanPatches,
   proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
@@ -253,8 +259,10 @@ import {
   serializeCoreLfProofRepairCandidateReplay,
   serializeCoreLfProofRepairProposal,
   serializeCoreProofGoalCouplingGraph,
+  serializeCoreResearchGoalView,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
+  validateCoreResearchGoalView,
 } from '@hotdocx/emdash/workspace';
 
 assert.equal(typeof CoreChecker, 'function');
@@ -326,6 +334,14 @@ assert.equal(
   CORE_PROOF_SIMPLIFIER_PROFILE.revision,
   'emdash-proof-simplifier-v1',
 );
+assert.equal(
+  CORE_RESEARCH_GOAL_GRAPH_PROFILE.revision,
+  'emdash-research-goal-graph-v1',
+);
+assert.equal(
+  CORE_RESEARCH_GOAL_VIEW_PROFILE.revision,
+  'emdash-research-goal-view-v1',
+);
 assert.equal(typeof coreProofPlanConstructor, 'function');
 assert.equal(typeof coreProofPlanHave, 'function');
 assert.equal(typeof coreProofPlanRefine, 'function');
@@ -336,12 +352,16 @@ assert.equal(typeof inspectCoreLfProofMaintenance, 'function');
 assert.equal(typeof createCoreProofPlanHoleReplacement, 'function');
 assert.equal(typeof createCoreLfAccessiblePremiseIndex, 'function');
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
+assert.equal(typeof createCoreResearchGoalGraphDefinition, 'function');
+assert.equal(typeof createCoreResearchGoalView, 'function');
+assert.equal(typeof evaluateCoreResearchGoalGraph, 'function');
 assert.equal(typeof CoreProofChecker, 'function');
 assert.equal(
   CORE_PROOF_CHECKER_PROFILE.permitsAnnotatedLambdaInference,
   false,
 );
 assert.equal(typeof parseCoreLfProofDevelopmentSourceText, 'function');
+assert.equal(typeof parseCoreResearchGoalViewText, 'function');
 assert.equal(typeof proposeCoreObviousProofPlanPatches, 'function');
 assert.equal(typeof proposeCoreLfProofRepairs, 'function');
 assert.equal(typeof replayCoreObviousProofCandidate, 'function');
@@ -351,8 +371,10 @@ assert.equal(typeof serializeCoreLfProofMaintenanceInspection, 'function');
 assert.equal(typeof serializeCoreLfProofRepairCandidateReplay, 'function');
 assert.equal(typeof serializeCoreLfProofRepairProposal, 'function');
 assert.equal(typeof serializeCoreProofGoalCouplingGraph, 'function');
+assert.equal(typeof serializeCoreResearchGoalView, 'function');
 assert.equal(typeof searchCoreLfAccessiblePremises, 'function');
 assert.equal(typeof simplifyCoreProofPlan, 'function');
+assert.equal(typeof validateCoreResearchGoalView, 'function');
 `,
   );
   await writeFile(
@@ -426,6 +448,14 @@ assert.equal(
   workspace.CORE_PROOF_SIMPLIFIER_PROFILE.addsProofPlanTags,
   false,
 );
+assert.equal(
+  workspace.CORE_RESEARCH_GOAL_GRAPH_PROFILE.revision,
+  'emdash-research-goal-graph-v1',
+);
+assert.equal(
+  workspace.CORE_RESEARCH_GOAL_VIEW_PROFILE.portableProjectionOnly,
+  true,
+);
 assert.equal(typeof workspace.coreProofPlanConstructor, 'function');
 assert.equal(typeof workspace.coreProofPlanHave, 'function');
 assert.equal(typeof workspace.coreProofPlanRefine, 'function');
@@ -445,6 +475,12 @@ assert.equal(
   'function',
 );
 assert.equal(typeof workspace.createCoreLfProofDevelopment, 'function');
+assert.equal(
+  typeof workspace.createCoreResearchGoalGraphDefinition,
+  'function',
+);
+assert.equal(typeof workspace.createCoreResearchGoalView, 'function');
+assert.equal(typeof workspace.evaluateCoreResearchGoalGraph, 'function');
 assert.equal(typeof workspace.CoreProofChecker, 'function');
 assert.equal(
   workspace.CORE_PROOF_CHECKER_PROFILE.acceptsCatalogRuntime,
@@ -454,6 +490,7 @@ assert.equal(
   typeof workspace.parseCoreLfProofDevelopmentSourceText,
   'function',
 );
+assert.equal(typeof workspace.parseCoreResearchGoalViewText, 'function');
 assert.equal(
   typeof workspace.proposeCoreObviousProofPlanPatches,
   'function',
@@ -487,11 +524,13 @@ assert.equal(
   typeof workspace.serializeCoreProofGoalCouplingGraph,
   'function',
 );
+assert.equal(typeof workspace.serializeCoreResearchGoalView, 'function');
 assert.equal(
   typeof workspace.searchCoreLfAccessiblePremises,
   'function',
 );
 assert.equal(typeof workspace.simplifyCoreProofPlan, 'function');
+assert.equal(typeof workspace.validateCoreResearchGoalView, 'function');
 `,
   );
   await writeFile(
@@ -524,6 +563,8 @@ import {
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   CORE_PROOF_SIMPLIFIER_PROFILE,
+  CORE_RESEARCH_GOAL_GRAPH_PROFILE,
+  CORE_RESEARCH_GOAL_VIEW_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -535,7 +576,11 @@ import {
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
+  createCoreResearchGoalGraphDefinition,
+  createCoreResearchGoalView,
+  evaluateCoreResearchGoalGraph,
   parseCoreLfProofDevelopmentSourceText,
+  parseCoreResearchGoalViewText,
   proposeCoreObviousProofPlanPatches,
   proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
@@ -545,8 +590,10 @@ import {
   serializeCoreLfProofRepairCandidateReplay,
   serializeCoreLfProofRepairProposal,
   serializeCoreProofGoalCouplingGraph,
+  serializeCoreResearchGoalView,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
+  validateCoreResearchGoalView,
 } from '@hotdocx/emdash/workspace';
 
 const checkerConstructor: typeof CoreChecker = CoreChecker;
@@ -601,6 +648,18 @@ const placeholderBuilder: typeof coreProofTemplatePlaceholder =
 const graphSerializer: typeof serializeCoreProofGoalCouplingGraph =
   serializeCoreProofGoalCouplingGraph;
 const proofSimplifier: typeof simplifyCoreProofPlan = simplifyCoreProofPlan;
+const goalDefinitionFactory: typeof createCoreResearchGoalGraphDefinition =
+  createCoreResearchGoalGraphDefinition;
+const goalEvaluator: typeof evaluateCoreResearchGoalGraph =
+  evaluateCoreResearchGoalGraph;
+const goalViewFactory: typeof createCoreResearchGoalView =
+  createCoreResearchGoalView;
+const goalViewParser: typeof parseCoreResearchGoalViewText =
+  parseCoreResearchGoalViewText;
+const goalViewSerializer: typeof serializeCoreResearchGoalView =
+  serializeCoreResearchGoalView;
+const goalViewValidator: typeof validateCoreResearchGoalView =
+  validateCoreResearchGoalView;
 void checkerConstructor;
 void builder;
 void exactSynthesizer;
@@ -628,6 +687,12 @@ void refineTemplate;
 void placeholderBuilder;
 void graphSerializer;
 void proofSimplifier;
+void goalDefinitionFactory;
+void goalEvaluator;
+void goalViewFactory;
+void goalViewParser;
+void goalViewSerializer;
+void goalViewValidator;
 void maybeTerm;
 void CORE_MVP_MANIFEST;
 void CORE_LF_INSTANCE_SCOPE_PROFILE;
@@ -647,6 +712,8 @@ void CORE_PROOF_PLAN_PATCH_PROFILE;
 void CORE_PROOF_GOAL_COUPLING_PROFILE;
 void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
 void CORE_PROOF_SIMPLIFIER_PROFILE;
+void CORE_RESEARCH_GOAL_GRAPH_PROFILE;
+void CORE_RESEARCH_GOAL_VIEW_PROFILE;
 `,
   );
   await writeFile(
@@ -674,6 +741,8 @@ import {
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   CORE_PROOF_SIMPLIFIER_PROFILE,
+  CORE_RESEARCH_GOAL_GRAPH_PROFILE,
+  CORE_RESEARCH_GOAL_VIEW_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -685,7 +754,11 @@ import {
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
+  createCoreResearchGoalGraphDefinition,
+  createCoreResearchGoalView,
+  evaluateCoreResearchGoalGraph,
   parseCoreLfProofDevelopmentSourceText,
+  parseCoreResearchGoalViewText,
   proposeCoreObviousProofPlanPatches,
   proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
@@ -695,8 +768,10 @@ import {
   serializeCoreLfProofRepairCandidateReplay,
   serializeCoreLfProofRepairProposal,
   serializeCoreProofGoalCouplingGraph,
+  serializeCoreResearchGoalView,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
+  validateCoreResearchGoalView,
 } from '@hotdocx/emdash/workspace';
 
 globalThis.emdashPackedSmoke = {
@@ -720,6 +795,8 @@ globalThis.emdashPackedSmoke = {
   proofGoalCouplingRevision: CORE_PROOF_GOAL_COUPLING_PROFILE.revision,
   proofRefineTemplateRevision: CORE_PROOF_REFINE_TEMPLATE_PROFILE.revision,
   proofSimplifierRevision: CORE_PROOF_SIMPLIFIER_PROFILE.revision,
+  researchGoalGraphRevision: CORE_RESEARCH_GOAL_GRAPH_PROFILE.revision,
+  researchGoalViewRevision: CORE_RESEARCH_GOAL_VIEW_PROFILE.revision,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -731,7 +808,11 @@ globalThis.emdashPackedSmoke = {
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
+  createCoreResearchGoalGraphDefinition,
+  createCoreResearchGoalView,
+  evaluateCoreResearchGoalGraph,
   parseCoreLfProofDevelopmentSourceText,
+  parseCoreResearchGoalViewText,
   proposeCoreObviousProofPlanPatches,
   proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
@@ -741,8 +822,10 @@ globalThis.emdashPackedSmoke = {
   serializeCoreLfProofRepairCandidateReplay,
   serializeCoreLfProofRepairProposal,
   serializeCoreProofGoalCouplingGraph,
+  serializeCoreResearchGoalView,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
+  validateCoreResearchGoalView,
 };
 `,
   );

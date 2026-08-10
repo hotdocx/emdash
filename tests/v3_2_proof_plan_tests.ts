@@ -42,6 +42,7 @@ import {
     sourceSpan
 } from '../src/v3_2';
 import './v3_2_research_goal_graph_tests';
+import './v3_2_research_goal_view_tests';
 
 const fixture = 'tests/fixtures/v3_2_proof_plan.surface.ts';
 const at = (line: number, startColumn = 1, endColumn = startColumn + 1) =>

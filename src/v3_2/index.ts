@@ -189,6 +189,8 @@ export * from './proof_plan_patch';
 export * from './proof_obvious';
 export * from './proof_template';
 export * from './proof_document';
+export * from './research_goal_graph';
+export * from './research_goal_view';
 export * from './ai_proof_demo';
 export * from './lf_workspace';
 export * from './lf_premise_index';

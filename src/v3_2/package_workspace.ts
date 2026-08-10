@@ -26,3 +26,5 @@ export * from './lf_proof_maintenance';
 export * from './lf_fragment_workspace';
 export * from './lf_fragment_module_workspace';
 export * from './research_document';
+export * from './research_goal_graph';
+export * from './research_goal_view';

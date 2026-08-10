@@ -52,6 +52,15 @@ The package has three deliberately bounded entries:
   acceptance returns a stale-safe patch, patched inert plan, and fresh replay;
   it does not silently persist source or claim to refresh caller-supplied
   fingerprints.
+  The research-goal profile keeps theorem, task, and decision evidence
+  distinct, freshly replays checked-proof evidence, and derives status across
+  finite `requires` and grouped `one-of` dependencies. Its companion
+  host-neutral view exposes only stable nodes, derived explanations, edges,
+  and status counts: proof source, expected Core terms, evidence payloads,
+  actor identities, host permissions, and action authority are deliberately
+  absent. View creation replays the supplied evaluation before projection;
+  validation and parsing preserve exact canonical JSON for renderers and
+  lightweight hosts.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -76,6 +85,8 @@ import {
   CORE_PROOF_GOAL_COUPLING_PROFILE,
   CORE_PROOF_REFINE_TEMPLATE_PROFILE,
   CORE_PROOF_SIMPLIFIER_PROFILE,
+  CORE_RESEARCH_GOAL_GRAPH_PROFILE,
+  CORE_RESEARCH_GOAL_VIEW_PROFILE,
   coreProofPlanConstructor,
   coreProofPlanHave,
   coreProofPlanRefine,
@@ -84,11 +95,14 @@ import {
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfProofDevelopment,
+  createCoreResearchGoalView,
+  parseCoreResearchGoalViewText,
   parseCoreLfProofDevelopmentSourceText,
   proposeCoreObviousProofPlanPatches,
   replayCoreObviousProofCandidate,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreProofGoalCouplingGraph,
+  serializeCoreResearchGoalView,
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
 } from '@hotdocx/emdash/workspace';
@@ -109,6 +123,8 @@ void CORE_PROOF_PLAN_PATCH_PROFILE;
 void CORE_PROOF_GOAL_COUPLING_PROFILE;
 void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
 void CORE_PROOF_SIMPLIFIER_PROFILE;
+void CORE_RESEARCH_GOAL_GRAPH_PROFILE;
+void CORE_RESEARCH_GOAL_VIEW_PROFILE;
 void coreProofPlanConstructor;
 void coreProofPlanHave;
 void coreProofPlanRefine;
@@ -117,11 +133,14 @@ void compareCoreLfProofDevelopmentSources;
 void createCoreProofPlanHoleReplacement;
 void createCoreLfAccessiblePremiseIndex;
 void createCoreLfProofDevelopment;
+void createCoreResearchGoalView;
+void parseCoreResearchGoalViewText;
 void parseCoreLfProofDevelopmentSourceText;
 void proposeCoreObviousProofPlanPatches;
 void replayCoreObviousProofCandidate;
 void serializeCoreLfDevelopmentSemanticDiff;
 void serializeCoreProofGoalCouplingGraph;
+void serializeCoreResearchGoalView;
 void searchCoreLfAccessiblePremises;
 void simplifyCoreProofPlan;
 ```
