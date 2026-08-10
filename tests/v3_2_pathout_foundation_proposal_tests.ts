@@ -13,6 +13,10 @@ import {
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_BOUNDARY
 } from '../src/v3_2/categorical_displayed_nd_higher_foundation_transfer';
 import {
+    CORE_CATEGORICAL_DIRECT_MIXED_SOURCE_ACTION_BOUNDARY,
+    CORE_CATEGORICAL_DIRECT_MIXED_SOURCE_ACTION_TRANSFER_REVISION
+} from '../src/v3_2/categorical_direct_mixed_source_action_transfer';
+import {
     CORE_CATEGORICAL_MIXED_ACTION_TRANSFER_BOUNDARY
 } from '../src/v3_2/categorical_mixed_action_transfer';
 import {
@@ -60,26 +64,31 @@ const assertProposalError = (
 };
 
 describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
-    it('pins corrected 0A and remains non-self-authorizing', () => {
-        const proposal = validateCorePathoutFoundation1b0Proposal();
-        assertDeepFrozen(proposal);
-        assert.deepEqual(
-            [
-                proposal.parent.correctedAuditCheckpoint,
-                proposal.parent.correctedLedgerCheckpoint,
-                proposal.parent.supersededProposalCheckpoint,
-                proposal.decision.status,
-                proposal.decision.implementationAuthorized
-            ],
-            [
-                '5a1ea75',
-                '828b0d7',
-                'dd69325',
-                'proposal-only',
-                false
-            ]
-        );
-    });
+    it('pins both superseded proposals and remains non-self-authorizing',
+        () => {
+            const proposal = validateCorePathoutFoundation1b0Proposal();
+            assertDeepFrozen(proposal);
+            assert.deepEqual(
+                [
+                    proposal.parent.correctedAuditCheckpoint,
+                    proposal.parent.correctedLedgerCheckpoint,
+                    proposal.parent.supersededProposalCheckpoint,
+                    proposal.parent.supersededCorrectedProposalCheckpoint,
+                    proposal.parent.supersededCorrectedReviewCheckpoint,
+                    proposal.decision.status,
+                    proposal.decision.implementationAuthorized
+                ],
+                [
+                    '5a1ea75',
+                    '828b0d7',
+                    'dd69325',
+                    'b3d6d71',
+                    '38ef8ae',
+                    'proposal-only',
+                    false
+                ]
+            );
+        });
 
     it('freezes exactly three opaque, five runtime, one proof, nine transparent',
         () => {
@@ -119,12 +128,11 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
             );
         });
 
-    it('selects the smallest existing predecessor evidence', () => {
+    it('selects the smallest predecessor with opposite-Hom evidence', () => {
         const predecessor =
             CORE_PATHOUT_FOUNDATION_1B0_PROPOSAL.selectedPredecessor;
         assert.equal(
-            CORE_CATEGORICAL_MIXED_ACTION_TRANSFER_BOUNDARY
-                .revision,
+            CORE_CATEGORICAL_DIRECT_MIXED_SOURCE_ACTION_TRANSFER_REVISION,
             predecessor.boundaryRevision
         );
         assert.equal(
@@ -146,6 +154,20 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
             true
         );
         assert.equal(
+            CORE_CATEGORICAL_DIRECT_MIXED_SOURCE_ACTION_BOUNDARY
+                .existingPrerequisiteRuntimeRuleIds.includes(
+                    predecessor.reusedOppositeHomRuntimeRule
+                ),
+            true
+        );
+        assert.equal(
+            CORE_CATEGORICAL_DIRECT_MIXED_SOURCE_ACTION_BOUNDARY
+                .newMathematicalRuntimeRuleIds.includes(
+                    predecessor.inheritedReviewedSourceActionRuntimeRule
+                ),
+            true
+        );
+        assert.equal(
             CORE_CATEGORICAL_DISPLAYED_CHAIN_TRANSFER_BOUNDARY
                 .existingPrerequisiteDeclarationNames
                 .includes('sigma_map_func'),
@@ -162,8 +184,17 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
         assert.equal(predecessor.importWholeScaleProfile, false);
         assert.equal(predecessor.reuseReviewedMixedActionDescendant, true);
         assert.equal(
+            predecessor.reuseReviewedDirectMixedSourceActionDescendant,
+            true
+        );
+        assert.equal(
             predecessor.extractOrDuplicateRepresentedHomSubset,
             false
+        );
+        assert.equal(predecessor.extractOrDuplicateOppositeHomRule, false);
+        assert.equal(
+            predecessor.localImplementationDeltaRemainsThreeFiveOneNine,
+            true
         );
     });
 
@@ -172,6 +203,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 proposal', () => {
             const sourceDirectory = resolve(repositoryRoot, 'src/v3_2');
             const transferSources = readdirSync(sourceDirectory)
                 .filter(name => name.endsWith('_transfer.ts'))
+                .filter(name => name !==
+                    'pathout_foundation_transfer.ts')
                 .map(name => readFileSync(
                     resolve(sourceDirectory, name),
                     'utf8'

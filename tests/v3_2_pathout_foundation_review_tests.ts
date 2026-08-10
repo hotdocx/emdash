@@ -1,5 +1,5 @@
 /**
- * Focused delegated review tests for corrected PathOut foundation proposal.
+ * Focused supersession tests for the corrected PathOut foundation proposal.
  */
 
 import assert from 'node:assert/strict';
@@ -44,28 +44,31 @@ const assertReviewError = (
     );
 };
 
-describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated review', () => {
-    it('approves only corrected v2 with human supersession', () => {
+describe('PATHOUT-LIBRARY-FOUNDATION-1B0 review supersession', () => {
+    it('withdraws corrected v2 after the measured predecessor gap', () => {
         const approval = CORE_PATHOUT_FOUNDATION_1B0_REVIEW.approval;
         assert.deepEqual(
             [
                 approval.decision,
                 approval.authority,
                 approval.rejectedProposalCheckpoint,
-                approval.approvedProposalCheckpoint,
+                approval.supersededProposalCheckpoint,
+                approval.supersededReviewCheckpoint,
                 approval.humanDecisionSupersedes
             ],
             [
-                'corrected-proposal-v2-approved-as-proposed',
-                'user-delegated-unattended-approval',
+                'corrected-proposal-v2-superseded-after-measured-' +
+                    'predecessor-gap',
+                'measured-implementation-forward-correction',
                 'dd69325',
                 'b3d6d71',
+                '38ef8ae',
                 true
             ]
         );
     });
 
-    it('retains an immutable copy of exact non-authorizing v2', () => {
+    it('retains an immutable copy of exact non-authorizing v3', () => {
         const recommendation =
             CORE_PATHOUT_FOUNDATION_1B0_REVIEW.recommendation;
         assert.notEqual(
@@ -78,11 +81,11 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated review', () => {
         );
         assert.equal(
             recommendation.revision,
-            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-2'
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-3'
         );
     });
 
-    it('authorizes exactly root-only 3/5/1/9 implementation', () => {
+    it('freezes 3/5/1/9 but does not authorize implementation', () => {
         const authorization =
             CORE_PATHOUT_FOUNDATION_1B0_REVIEW.authorization;
         assert.deepEqual(
@@ -92,7 +95,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated review', () => {
                 authorization.runtimeRuleCount,
                 authorization.proofRuleCount,
                 authorization.transparentLibraryDefinitionCount,
-                authorization.exactSelectedPredecessor.compileFunction
+                authorization.exactSelectedPredecessor.compileFunction,
+                authorization.implementationAuthorized
             ],
             [
                 'PATHOUT-LIBRARY-FOUNDATION-1B',
@@ -100,7 +104,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated review', () => {
                 5,
                 1,
                 9,
-                'compileCoreCategoricalMixedActionTransfer'
+                'compileCoreCategoricalDirectMixedSourceActionTransfer',
+                false
             ]
         );
     });
@@ -133,8 +138,8 @@ describe('PATHOUT-LIBRARY-FOUNDATION-1B0 delegated review', () => {
         assertReviewError(
             review => {
                 (review.approval as {
-                    approvedProposalCheckpoint: string;
-                }).approvedProposalCheckpoint = 'dd69325';
+                    replacementProposalCheckpoint: string;
+                }).replacementProposalCheckpoint = 'wrong';
             },
             'PATHOUT_FOUNDATION_REVIEW_DECISION_DRIFT'
         );

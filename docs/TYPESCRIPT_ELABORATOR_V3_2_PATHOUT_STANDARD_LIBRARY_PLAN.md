@@ -2,9 +2,11 @@
 
 Status: active selected standard-library continuation under
 `TS-EMDASH-PROOF-ASSISTANT`; `PATHOUT-TRUST-BOUNDARY-0A` is complete and the
-corrected `PATHOUT-LIBRARY-FOUNDATION-1B0` proposal is separately reviewed;
-the next bounded row is root-only `PATHOUT-LIBRARY-FOUNDATION-1B`
-implementation, and no PathOut semantic or public export is yet implemented
+v2 `PATHOUT-LIBRARY-FOUNDATION-1B0` review is superseded by measured
+counterevidence; non-authorizing proposal v3 selects the reviewed direct-
+mixed-source-action predecessor and awaits its own separate review before
+root-only `PATHOUT-LIBRARY-FOUNDATION-1B` resumes; no PathOut semantic or
+public export is yet implemented
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -164,8 +166,8 @@ named library presentation.
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | complete; corrected v2 reviewed | completed corrected 0A | Proposal v1's invalid predecessor was rejected; immutable v2 over the mixed-action descendant is approved under delegated unattended authority with human supersession. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | next; implementation authorized | reviewed 1B0 | Implement exactly the root-only 3/5/1/9 boundary, seven positives, eight negatives, and six bounded oracle assertions. No fixed-source induction, public export, or later layer. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v3 proposed; separate review pending | completed corrected 0A; superseded v1/v2 | Measured checking showed that mixed action lacks the active opposite-Hom endpoint rule needed by `Rep_transport_func`. Proposal v3 keeps the local 3/5/1/9 delta but selects the already-reviewed direct-mixed-source-action descendant. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | paused pending corrected-v3 review | separately reviewed v3 proposal | Resume the existing root-only implementation only after v3 is checkpointed and separately approved; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -455,9 +457,91 @@ git diff --check
 No Lambdapi or long aggregate is relevant to the immutable review itself.
 The bounded oracle remains mandatory for the now-authorized implementation.
 
-The rollback-safe separate-review checkpoint is `38ef8ae`. It is the exact
-authorization predecessor for root-only `PATHOUT-LIBRARY-FOUNDATION-1B`;
-implementation must preserve its v2 recommendation and explicit denials.
+The rollback-safe separate-review checkpoint is `38ef8ae`. It was the exact
+authorization predecessor for the first root-only implementation attempt and
+remains historical evidence; the measured correction below supersedes its v2
+predecessor recommendation while preserving every explicit denial.
+
+### Measured predecessor correction and proposal v3
+
+The preceding v2 authorization is historical backtracking evidence, not
+current authority. The first semantic qualification attempt compiled the
+reviewed three opaque declarations, five runtime rules, and one proof rule,
+then failed while checking the third transparent definition,
+`Rep_transport_func`. A focused diagnostic run identified the final normalized
+problem exactly:
+
+```text
+left  = bound index 3                 // Z
+right = Op_cat(bound index 3)         // Op_cat Z
+reason = no-proof-rule
+```
+
+This is the type of the argument `p`: the body calls
+`hom_int_precomp_func`, whose source arrow is presented in `Op_cat Z`, while
+the transparent declaration receives `p : Hom Z x y`. The active authority
+already closes that presentation at source line 3251:
+
+```text
+rule Hom_cat (Op_cat $A) $X $Y ↪ Hom_cat $A $Y $X;
+```
+
+TypeScript already transfers the exact rule as
+`categorical.direct-mixed-source-action.opposite-hom-endpoints` in reviewed
+`DIRECT-MIXED-SOURCE-ACTION-1E2`. It is absent from the v2 mixed-action
+predecessor. The same reviewed descendant also inherits mixed action's
+`hom_` declarations/object projections and the displayed-chain/Sigma
+dependencies required by the frozen proposal. It is therefore the smallest
+current reviewed provider found by the measured check.
+
+A temporary generic proof-assisted declaration-checker experiment was used
+only to disambiguate the failure. It did not solve this runtime presentation
+gap, and the v2 contract explicitly records zero checker branches. The whole
+experiment and its diagnostic hook were removed; no Core, checker, evaluator,
+proof-engine, or active Lambdapi source change remains.
+
+Proposal v3 updates only `selectedPredecessor` to
+`compileCoreCategoricalDirectMixedSourceActionTransfer` at revision
+`DIRECT-MIXED-SOURCE-ACTION-1E2-RUNTIME-1`. The required opposite-Hom rule
+and that profile's separately reviewed source-action projection are inherited
+dependencies, not duplicated PathOut rules. The local implementation remains
+exactly three opaque declarations, five runtime rules, one proof rule, and
+nine transparent definitions, with the same seven positives, eight
+negatives, six oracle assertions, sealing contract, and non-effects.
+
+The former v2 review is explicitly marked superseded and cannot authorize
+further implementation. Proposal v3 remains non-self-authorizing until its
+own checkpoint is named and a later separate immutable review approves that
+exact checkpoint under the user's standing unattended delegation or a human
+decision.
+
+Proportional correction validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_foundation_proposal.ts \
+  src/v3_2/pathout_foundation_review.ts \
+  tests/v3_2_pathout_foundation_proposal_tests.ts \
+  tests/v3_2_pathout_foundation_review_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathout_foundation_proposal_tests.ts \
+  tests/v3_2_pathout_foundation_review_tests.ts
+  14 tests / 2 suites: 14 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+The earlier six-assertion bounded Lambdapi oracle passed in 4.47 seconds and
+the active source is unchanged; it remains implementation evidence, not
+evidence that the incomplete TypeScript predecessor was sufficient. No long
+aggregate was run, because focused type/lint/data gates directly cover this
+behavior-free correction and omission does not block the required checkpoint.
 
 ## Required Evidence For Implementation
 

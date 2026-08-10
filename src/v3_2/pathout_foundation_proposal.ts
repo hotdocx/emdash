@@ -1,9 +1,12 @@
 /**
  * PATHOUT-LIBRARY-FOUNDATION-1B0 non-authorizing proposal.
  *
- * The proposal freezes the exact two prerequisite closures and nine
- * transparent definitions selected by the corrected 0A audit. It compiles
- * or installs nothing; a separate immutable review must authorize 1B.
+ * The proposal freezes the exact two local prerequisite closures and nine
+ * transparent definitions selected by the corrected 0A audit. Proposal v3
+ * corrects only the reviewed predecessor: measured checking of
+ * `Rep_transport_func` also needs the already-transferred opposite-Hom
+ * endpoint rule. It compiles or installs nothing; a separate immutable
+ * review must authorize 1B.
  */
 
 import {
@@ -12,7 +15,7 @@ import {
 } from './pathout_trust_boundary_audit';
 
 export const CORE_PATHOUT_FOUNDATION_1B0_REVISION =
-    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-2' as const;
+    'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-3' as const;
 
 const DECISION_QUESTION =
     'Approve H-TS-EMDASH-PATHOUT-FOUNDATION-01/' +
@@ -202,9 +205,13 @@ const rawProposal = {
         correctedLedgerCheckpoint: '828b0d7',
         supersededProposalCheckpoint: 'dd69325',
         supersededProposalLedgerCheckpoint: '3226a6a',
+        supersededCorrectedProposalCheckpoint: 'b3d6d71',
+        supersededCorrectedReviewCheckpoint: '38ef8ae',
+        preImplementationLedgerCheckpoint: '6347d5e',
         correctionReason:
-            'independent-review-found-hom_-only-in-the-reviewed-' +
-            'mixed-action-descendant',
+            'measured-Rep_transport_func-check-found-Z-versus-Op_cat-Z-' +
+            'and-the-reviewed-opposite-Hom-endpoint-rule-only-in-the-' +
+            'direct-mixed-source-action-descendant',
         authoritySourceSha256:
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256,
         authorityChecksSha256:
@@ -221,13 +228,13 @@ const rawProposal = {
     },
     selectedPredecessor: {
         compileFunction:
-            'compileCoreCategoricalMixedActionTransfer',
+            'compileCoreCategoricalDirectMixedSourceActionTransfer',
         boundaryRevision:
-            'MIXED-NEST-ACTION-0B-GENERIC-TRANSFER-1',
+            'DIRECT-MIXED-SOURCE-ACTION-1E2-RUNTIME-1',
         reason:
-            'smallest-current-reviewed-descendant-containing-hom_int-' +
-            'and-hom_-with-their-object-projections-plus-displayed-chain-' +
-            'sigma-map-and-directed-sigma-primitives',
+            'smallest-current-reviewed-descendant-containing-hom_int-hom_-' +
+            'their-object-projections-and-the-opposite-Hom-endpoint-' +
+            'reduction-needed-to-check-Rep_transport_func',
         requiredExistingOwners: [
             'id',
             'hom_int',
@@ -242,12 +249,21 @@ const rawProposal = {
         ],
         importWholeScaleProfile: false,
         reuseReviewedMixedActionDescendant: true,
+        reuseReviewedDirectMixedSourceActionDescendant: true,
         extractOrDuplicateRepresentedHomSubset: false,
+        extractOrDuplicateOppositeHomRule: false,
         reusedMixedActionDeclarations: ['hom_'],
         reusedMixedActionRuntimeRules: [
             'categorical.mixed-action.internal-hom-object-projection',
             'categorical.mixed-action.represented-hom-object-projection'
-        ]
+        ],
+        reusedOppositeHomRuntimeRule:
+            'categorical.direct-mixed-source-action.' +
+            'opposite-hom-endpoints',
+        inheritedReviewedSourceActionRuntimeRule:
+            'categorical.direct-mixed-source-action.' +
+            'source-composition-projection',
+        localImplementationDeltaRemainsThreeFiveOneNine: true
     },
     exactImplementation: {
         prerequisiteDeclarations,
@@ -285,6 +301,17 @@ const rawProposal = {
             internalHomObjectProjectionLine: 8419,
             representedHomObjectProjectionLine: 7226,
             sourceProfile: 'MIXED-NEST-ACTION-0B-GENERIC-TRANSFER-1',
+            duplicateTransferAuthorized: false
+        },
+        oppositeHomReuse: {
+            authorityLine: 3251,
+            runtimeRuleId:
+                'categorical.direct-mixed-source-action.' +
+                'opposite-hom-endpoints',
+            sourceProfile:
+                'DIRECT-MIXED-SOURCE-ACTION-1E2-RUNTIME-1',
+            measuredNeed:
+                'Rep_transport_func-p-argument-compares-Z-with-Op_cat-Z',
             duplicateTransferAuthorized: false
         },
         laterCovariantFibreClosureIncluded: false,
@@ -434,13 +461,17 @@ export function validateCorePathoutFoundation1b0Proposal(
     validateCorePathoutTrustBoundary0aAudit();
     if (
         proposal.revision !==
-            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-2' ||
+            'PATHOUT-LIBRARY-FOUNDATION-1B0-PROPOSAL-3' ||
         proposal.parent.auditRevision !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.revision ||
         proposal.parent.correctedAuditCheckpoint !== '5a1ea75' ||
         proposal.parent.correctedLedgerCheckpoint !== '828b0d7' ||
         proposal.parent.supersededProposalCheckpoint !== 'dd69325' ||
         proposal.parent.supersededProposalLedgerCheckpoint !== '3226a6a' ||
+        proposal.parent.supersededCorrectedProposalCheckpoint !==
+            'b3d6d71' ||
+        proposal.parent.supersededCorrectedReviewCheckpoint !== '38ef8ae' ||
+        proposal.parent.preImplementationLedgerCheckpoint !== '6347d5e' ||
         proposal.parent.authoritySourceSha256 !==
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.sha256 ||
         proposal.parent.authorityChecksSha256 !==
@@ -492,14 +523,24 @@ export function validateCorePathoutFoundation1b0Proposal(
             foundationProfile
         ) ||
         proposal.selectedPredecessor.compileFunction !==
-            'compileCoreCategoricalMixedActionTransfer' ||
+            'compileCoreCategoricalDirectMixedSourceActionTransfer' ||
         proposal.selectedPredecessor.boundaryRevision !==
-            'MIXED-NEST-ACTION-0B-GENERIC-TRANSFER-1' ||
+            'DIRECT-MIXED-SOURCE-ACTION-1E2-RUNTIME-1' ||
         !proposal.selectedPredecessor.reuseReviewedMixedActionDescendant ||
+        !proposal.selectedPredecessor
+            .reuseReviewedDirectMixedSourceActionDescendant ||
         proposal.selectedPredecessor
             .extractOrDuplicateRepresentedHomSubset ||
+        proposal.selectedPredecessor.extractOrDuplicateOppositeHomRule ||
+        !proposal.selectedPredecessor
+            .localImplementationDeltaRemainsThreeFiveOneNine ||
         proposal.dependencyClosure.representedHomReuse.owner !== 'hom_' ||
         proposal.dependencyClosure.representedHomReuse
+            .duplicateTransferAuthorized ||
+        proposal.dependencyClosure.oppositeHomReuse.runtimeRuleId !==
+            'categorical.direct-mixed-source-action.' +
+                'opposite-hom-endpoints' ||
+        proposal.dependencyClosure.oppositeHomReuse
             .duplicateTransferAuthorized
     ) {
         throw new CorePathoutFoundation1b0ProposalError(

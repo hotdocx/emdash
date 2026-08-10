@@ -5488,17 +5488,25 @@ checkpointed corrected proposal and its separate immutable review. The
 corrected non-authorizing v2 proposal checkpoint is `b3d6d71`; it is the sole
 recommendation eligible for that review.
 
-Corrected proposal v2 is now separately approved under the standing delegated
-unattended authority, with explicit human supersession. The immutable review
-retains the rejected v1 and exact v2 checkpoints and authorizes only root-only
-`PATHOUT-LIBRARY-FOUNDATION-1B`: the 3/5/1/9 delta, seven positive consumers,
-eight negatives, and six bounded-oracle assertions. It denies every later
-mathematical, presentation, package, active-Lambdapi, and external-integration
-layer. Proposal-plus-review tests, typecheck, and focused lint are green; the
-implementation is the next dependency-ready row.
+Corrected proposal v2 was separately approved at `38ef8ae`, but measured
+implementation invalidated only its predecessor selection. Checking the
+exact `Rep_transport_func` body reduced the type of `p` to the rigid mismatch
+`Z` versus `Op_cat Z`. The active rule
+`Hom_cat (Op_cat A) X Y ↪ Hom_cat A Y X` is already transferred by reviewed
+`DIRECT-MIXED-SOURCE-ACTION-1E2`, not by the selected mixed-action
+predecessor. A temporary proof-assisted checker experiment neither solved the
+mismatch nor fit the frozen zero-checker-delta contract and was fully
+reverted.
 
-The rollback-safe separate-review checkpoint is `38ef8ae`; it is the exact
-authorization predecessor for root-only `PATHOUT-LIBRARY-FOUNDATION-1B`.
+Non-authorizing proposal v3 therefore preserves the exact local 3/5/1/9
+delta, seven positives, eight negatives, six oracle assertions, and all
+public/later-layer denials while selecting
+`compileCoreCategoricalDirectMixedSourceActionTransfer`. The inherited
+profile contains both the required already-active opposite-Hom rule and one
+already-reviewed source-action projection; neither is duplicated or counted
+as a new PathOut rule. The former v2 review is explicitly superseded and
+implementation is paused until v3 has its own rollback-safe proposal
+checkpoint and separate immutable review.
 
 ## Decision Ledger
 
@@ -5613,6 +5621,7 @@ authorization predecessor for root-only `PATHOUT-LIBRARY-FOUNDATION-1B`.
 | `D-PA-107` | Freeze `PATHOUT-LIBRARY-FOUNDATION-1B0` as a non-authorizing 3/5/1/9 proposal over the displayed-ND higher-foundation predecessor. | Exact opaque declarations, rules, transparent definitions, phase order, consumers, negatives, and oracle must be independently reviewable before semantic work; the safe-library facade and low-level trust-bearing authoring API must not be conflated. |
 | `D-PA-108` | Reject the v1 `1B0` predecessor during independent review and correct v2 to reuse the mixed-action descendant. | `hom_int` is present in the higher-foundation profile, but its `hom_` result owner and the two object projections needed for representable fibre computation are installed only by mixed action. Reusing that reviewed descendant avoids both an invalid environment and a duplicate extracted mini-profile. |
 | `D-PA-109` | Approve only corrected `1B0` proposal v2 under delegated unattended authority, with human supersession. | The predecessor objection is resolved, the exact 3/5/1/9 scope is immutable and non-public, all later layers remain denied, and separate review preserves proposal non-self-authorization before implementation. |
+| `D-PA-110` | Supersede the v2 PathOut-foundation review and correct proposal v3 to the direct-mixed-source-action predecessor without changing the local 3/5/1/9 delta. | Focused checking of `Rep_transport_func` exposed `Z` versus `Op_cat Z`; the exact active opposite-Hom endpoint reduction is already present only in the reviewed descendant. Reusing that predecessor is narrower and more faithful than adding a sixth local rule or widening the checker. |
 
 ## Validation And Checkpoint Policy
 
