@@ -44,7 +44,10 @@ owner, typecheck/lint, and browser-closure gates; its public visual/hosted
 adapter remains gated; the first protected npm bootstrap reached a green
 hosted build but npm refused the final registry PUT under its 2FA/token policy,
 so the stable workflow is token-free again and the package/public-adapter rows
-remain externally gated
+remain externally gated; a post-14A concrete-consumer audit found no current
+counterevidence, external-certificate, public-benchmark, or hosted-adapter
+consumer, so those rows are now explicitly deferred or gated by the exact
+prerequisites recorded below rather than left apparently implementation-ready
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -577,13 +580,14 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `STDLIB-8` | Curated public library profile | gated | existing generated-owner/stress decisions, exact product profile, public base-package trust boundary |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
-| `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | pending | one executable consumer and explicit evidence labeling |
-| `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | pending | one concrete solver/certificate consumer and independent checker |
+| `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
+| `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | deferred | No solver dependency/binary/corpus or certificate checker is selected. Reactivate only for one concrete solver/certificate-format consumer plus independent reconstruction or checking. |
 | `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | complete | `f46ff9a`; self-contained exact cases, arbitrary inert patches, fresh selected-proof replay, stable diagnostics, integer retrieval/plan/replay metrics, and provider-reported usage |
 | `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements plus a concrete agent/host consumer and reviewed corpus/public-package boundary |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC hardening | external npm-authentication gate after one safe hosted attempt | classes-plan `PACKAGE-12B2`; run `31391224891` retained a green exact build/artifact handoff, but npm rejected the PUT because the bootstrap token lacked bypass-2FA authority. Registry remains absent and the temporary secret/fallback are removed; retry the same immutable tag/run only with attended 2FA and a dedicated suitable bootstrap credential, then verify and harden trust. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
 | `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A, published package, sibling SOP audits, compatible controller/runtime |
+| `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | Source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 
 Only one semantic row is in progress at a time. A later row may be
 repartitioned or rejected when evidence contradicts this plan.
@@ -4082,6 +4086,70 @@ again and npm trusted-publisher hardening completed. No alternate version,
 replacement tag/Release, local publish, or weakened stable workflow is an
 acceptable substitute.
 
+## Post-14A Dependency-Gate Audit
+
+Date: 2026-08-10
+
+Result: no further semantic or hosted row is currently dependency-ready. The
+audit converts the two residual `pending` automation rows into explicit
+consumer-gated deferrals and leaves the product/package rows at their already
+concrete gates. This is a readiness result, not an implementation or rejection
+of the underlying features.
+
+Current-repository evidence:
+
+- exact source/test/script searches found no finite-model finder,
+  property-testing counterevidence provider, SMT-LIB adapter, Alethe reader,
+  proof-certificate checker, or corresponding package dependency;
+- the existing proof-maintenance, obvious-proof, benchmark, and research-goal
+  owners contain no hidden counterevidence or external-solver authority. The
+  first research profile intentionally remains the closed theorem/task/
+  decision policy recorded by `D-PA-075`;
+- of the bounded external candidates checked on `PATH`, only Lambdapi is
+  present. `z3`, `cvc5`, `cvc4`, `vampire`, `eprover`, `elpi`, `swipl`,
+  `minisat`, and `kissat` are absent; and
+- a solver executable by itself would still be insufficient: the row requires
+  a selected problem/certificate interpretation plus independent Core
+  reconstruction or a reviewed checker.
+
+Sibling-consumer evidence was read-only and preserved both repositories'
+unrelated untracked review-plan files. GetPaidX/CloserFans has generic
+LambdaPi and Lean workspace templates and an Arrowgram template/runtime, but
+no `@hotdocx/emdash` dependency, emdash template, research-goal artifact
+consumer, or emdash host adapter. Arrowgram likewise has no emdash package
+dependency, goal-graph schema/renderer, or emdash adapter. Those capable
+generic hosts are architectural candidates, not present consumers, and must
+not be used to freeze a public interchange by analogy.
+
+The public package boundary is unchanged: the registry probe still returns
+`E404` for `@hotdocx/emdash@0.1.0`, GitHub lists no `npm-release` environment
+secret, and the ignored credential file exposes only the existing
+`NPMJS_API_KEY` variable name rather than a dedicated bootstrap credential.
+No credential value was printed or copied.
+
+Ledger disposition:
+
+1. `COUNTEREVIDENCE-10` is deferred until a concrete claim supplies its finite
+   domain, interpretation, evaluator/model-finder contract, and explicit
+   counterexample-versus-no-counterexample evidence semantics.
+2. `EXTERNAL-CERT-11` is deferred until a concrete solver and problem corpus
+   select either explicit Core reconstruction or one versioned certificate
+   format with an independently reviewed checker.
+3. `STDLIB-8` stays gated by a consumer-selected mathematical profile and the
+   public base-package trust boundary; transfer/stress fixtures are not a
+   substitute.
+4. `AGENT-EVAL-12B` and `GOAL-GRAPH-14B` stay gated because neither sibling
+   consumes emdash and the npm package is absent. The internal 12A/14A
+   contracts are not widened merely to create such a consumer.
+5. `PACKAGE-RELEASE-13` remains the nearest actionable external gate and
+   requires the dedicated attended npm credential already recorded above.
+
+No TypeScript, package, workflow, sibling, kernel/Lambdapi, mathematical,
+print/book, deployment, or registry mutation occurred. Proportional
+validation is exact diff, link/heading review, whitespace hygiene, clean
+worktree preservation, and ref/ancestry verification; no test or long
+aggregate can provide relevant additional evidence for this audit.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -4168,6 +4236,7 @@ acceptable substitute.
 | `D-PA-080` | Accept the narrow research-planning profile at semantic checkpoint `faa4c27`. | Exact supplied-source proof replay, explicit unverified approval policy, advisory-only AI evidence, grouped acyclic dependencies, stable diagnostics, and derived status are now executable under focused owner coverage without a new truth kernel. |
 | `D-PA-081` | Define duplicate dependencies by exact edge identity, including the `oneOf` group, rather than by dependent/prerequisite pair alone. | One prerequisite may satisfy alternatives in multiple distinct groups; rejecting that valid formula would impose an undocumented expressivity restriction. |
 | `D-PA-082` | Incorporate public `main` through a normal merge after the safe PACKAGE-12B2 attempt, while leaving every package-dependent semantic row gated. | The public history contains useful release/audit evidence and a token-free stable workflow, but npm accepted no package; synchronization must not be misreported as publication or used to bypass the concrete authentication prerequisite. |
+| `D-PA-083` | Explicitly defer counterevidence and external-certificate implementation until a real consumer selects the interpretation, solver/certificate boundary, and independent evidence path. | Current code, dependencies, installed tools, and sibling hosts provide no such consumer; building a toy provider or widening the closed research-goal ontology would manufacture semantics solely to advance the ledger. |
 
 ## Validation And Checkpoint Policy
 
