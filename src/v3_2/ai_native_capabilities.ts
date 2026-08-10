@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v1' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v1' as const,
+    revision: 'emdash-ai-native-capabilities-v2' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v2' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -97,6 +97,30 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 id: 'workspace-proof',
                 revision: 'emdash-lf-workspace-proof-v1',
                 scope: 'fresh proof checking in one exact module closure'
+            },
+            {
+                id: 'proof-development',
+                revision: 'emdash-lf-proof-development-v1',
+                scope:
+                    'canonical multi-module and multi-proof checked catalogs'
+            },
+            {
+                id: 'proof-development-source',
+                revision: 'emdash-lf-proof-development-source-v1',
+                scope:
+                    'exact canonical-data reconstruction without host import'
+            },
+            {
+                id: 'mounted-proof-development',
+                revision: 'emdash-lf-mounted-proof-development-v1',
+                scope:
+                    'one bounded fixed source under an explicit real root'
+            },
+            {
+                id: 'proof-development-cli',
+                revision: 'emdash-lf-proof-development-cli-v1',
+                scope:
+                    'stateless check, goals, and build over canonical source'
             },
             {
                 id: 'same-module-fragment-workspace',
@@ -197,22 +221,55 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                     'canonical emdash.workspace.lock.json and ' +
                     'emdash.workspace.source.json under explicit roots',
                 performsSemanticChecks: true
+            },
+            {
+                id: 'development-check',
+                syntax:
+                    './scripts/emdash development check ' +
+                    '--project-root ABSOLUTE_PATH ' +
+                    '[--module ID --declaration ID] ' +
+                    '[--format jsonl|text]',
+                scope:
+                    'canonical emdash.proof-development.source.json under ' +
+                    'one explicit root',
+                performsSemanticChecks: true
+            },
+            {
+                id: 'development-goals',
+                syntax:
+                    './scripts/emdash development goals ' +
+                    '--project-root ABSOLUTE_PATH ' +
+                    '[--module ID --declaration ID] ' +
+                    '[--format jsonl|text]',
+                scope:
+                    'stable named goals from a freshly checked development',
+                performsSemanticChecks: true
+            },
+            {
+                id: 'development-build',
+                syntax:
+                    './scripts/emdash development build ' +
+                    '--project-root ABSOLUTE_PATH ' +
+                    '[--module ID --declaration ID] ' +
+                    '[--format jsonl|text]',
+                scope:
+                    'full portable proof/development artifact on JSONL stdout',
+                performsSemanticChecks: true
             }
         ],
         deferred: [
             {
-                id: 'general-source-acquisition',
+                id: 'restricted-host-source-execution',
                 state: 'consumer-gated',
                 prerequisite:
-                    'a real general module/theorem facade and restricted ' +
-                    'TypeScript acquisition consumer'
+                    'an independently reviewed isolation model for optional ' +
+                    'TypeScript macro execution'
             },
             {
-                id: 'general-development-cli',
+                id: 'development-graph-command',
                 state: 'consumer-gated',
                 prerequisite:
-                    'arbitrary module/declaration targeting plus measured ' +
-                    'build, graph, and snapshot consumers'
+                    'the stable cross-goal coupling graph and one exact view'
             },
             {
                 id: 'persisted-or-inline-paper-artifacts',

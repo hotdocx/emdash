@@ -192,6 +192,7 @@ action.
 | `./scripts/emdash capabilities --format text` | List the implemented local AI-native foundation and explicit deferrals | Static source-visible record; performs no check or acquisition |
 | `./scripts/emdash check\|goals --format text` | Check the fixed proof demo or display its stable open goal | Fresh TypeScript/emdash proof session; no daemon or Lambdapi runtime |
 | `./scripts/emdash workspace check --project-root … --data-root …` | Verify canonical locked workspace files and populate/reuse immutable cache data | Explicit roots; local/offline TypeScript backend only |
+| `./scripts/emdash development check\|goals\|build --project-root …` | Check a materialized multi-module/multi-proof development, inspect named goals, or emit its portable artifact | One fixed canonical file under an explicit real root; no host-module import or root discovery |
 | `./scripts/pnpmw run check:browser-reviewer` | Typecheck, lint, and build the static workbench | Product check; relative client assets |
 | `./scripts/pnpmw run check:ts` | Check the root TypeScript workbench | Development validation |
 | `./scripts/pnpmw run kernel:check` | Check the active Lambdapi kernel | Requires Lambdapi |
@@ -212,7 +213,8 @@ This reader profile does not claim:
 - a parser for all notation in the book or arbitrary Lambdapi source;
 - textual outer-LF terms, arbitrary holes, or arbitrary host-language
   callbacks;
-- a general module/declaration CLI or unrestricted TypeScript source loader;
+- unrestricted TypeScript source loading, a host-code sandbox, or a stable
+  goal-coupling `graph` command;
 - browser-side digest verification, live network acquisition, or a hosted
   emdash runtime;
 - reusable instance scopes or recursive typeclass search beyond the qualified

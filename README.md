@@ -88,19 +88,30 @@ Ask the repository itself for the exact implemented and deferred envelope:
 ./scripts/emdash workspace check \
   --project-root /absolute/project \
   --data-root /absolute/data
+
+# Explicitly execute the demo management module as a macro, then check only
+# its materialized canonical data through the general development command.
+node --require ts-node/register \
+  examples/v3_2_ai_proof_development_source.ts \
+  > /absolute/project/emdash.proof-development.source.json
+./scripts/emdash development goals \
+  --project-root /absolute/project \
+  --format text
 ```
 
-The current proof commands deliberately exercise a fixed checked proof module,
-and `workspace check` deliberately accepts only the canonical locked workspace
-files under explicit roots. The capability record states those scopes rather
-than presenting this qualified local foundation as a complete general proof
-assistant. In the browser reviewer's evidence view, **Check paper proof
-states** replays the release-pinned examples and keeps the named open goal
-visibly incomplete.
+The legacy proof commands deliberately exercise a fixed checked proof module;
+`workspace check` accepts only canonical locked workspace files; and
+`development check|goals|build` accepts only the fixed canonical
+proof-development file under an explicit real root. It never imports the
+management module or discovers an ambient project. The capability record
+states those scopes rather than presenting this qualified local foundation as
+an unrestricted host-language sandbox. In the browser reviewer's evidence
+view, **Check paper proof states** replays the release-pinned examples and
+keeps the named open goal visibly incomplete.
 
 The detailed trust boundary, validation history, and consumer-gated next work
 are in the
-[`AI-native workspace and proof plan`](./docs/TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md).
+[`proof-assistant and goal-graph plan`](./docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md).
 
 ## Architecture And Authority
 

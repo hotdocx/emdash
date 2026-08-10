@@ -182,6 +182,7 @@ import './v3_2_proof_refinement_tests';
 import './v3_2_proof_plan_tests';
 import './v3_2_proof_document_tests';
 import './v3_2_ai_proof_cli_tests';
+import './v3_2_proof_development_cli_tests';
 import './v3_2_browser_api_tests';
 import './v3_2_graduation_tests';
 import './v3_2_graduation_review_tests';

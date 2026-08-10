@@ -177,24 +177,28 @@
 > declaration and exact fragment graphs, exact-closure proof attachment,
 > locked supplied-text reconstruction, mounted fixed-file verification,
 > immutable source-absent offline cache reuse, the explicit-root
-> `workspace check` command, finite global dictionary selection, the direct
+> `workspace check` command, canonical multi-proof development source,
+> explicit-root `development check|goals|build`, finite global dictionary
+> selection, the direct
 > leading-implicit authoring adapter, stable paper/diagram/proof bindings, and
-> the lazy browser checked/open recheck. The shared-boundary aggregate remains
-> 1,486 tests across 224 suites with zero failures; later bounded matrices
-> qualified mounted/workspace, synthesis, and paper/browser consumers without
-> changing that shared boundary.
+> the lazy browser checked/open recheck. The most recent completed aggregate
+> evidence remains the predecessor's 1,486 tests across 224 suites with zero
+> failures. Later rows, including canonical development source and commands,
+> were qualified by focused semantic/static/browser matrices; no later
+> aggregate pass is claimed.
 >
 > `./scripts/emdash capabilities --format text` is the compact source-visible
 > contract. It labels the result `qualified-local-foundation`, names the pure
 > `typescript-emdash-explicit-core` backend, and states that current proof
-> commands target a fixed demo while `workspace check` targets canonical
-> locked files under explicit roots. General source acquisition and CLI
-> targeting, reusable/recursive instance search, persisted or inline paper
+> commands target a fixed demo, `workspace check` targets canonical locked
+> files, and `development check|goals|build` freshly checks the fixed
+> `emdash.proof-development.source.json` file under an explicit real root.
+> Arbitrary host-module execution, graph output, persisted or inline paper
 > artifacts, live transport, hosted runtime delivery, whole-library transfer,
 > and global metatheory remain explicitly gated. Lambdapi/emdash remains an
 > optional development conformance route, not a production dependency. No
 > `~/closerfans` file changed. Reuse recent aggregate evidence unless an exact
-> changed shared boundary strictly requires another long run.
+> omitted focused boundary would block progress.
 >
 > **Current cross-layer integration boundary (2026-08-04):**
 > The completed elaborator tip `e7352ba` is being joined with the completed

@@ -60,6 +60,18 @@ import {
     CORE_LF_MOUNTED_REMOTE_WORKSPACE_STORE_PROFILE
 } from '../src/v3_2/lf_remote_workspace_store';
 import {
+    CORE_LF_PROOF_DEVELOPMENT_PROFILE
+} from '../src/v3_2/lf_proof_development';
+import {
+    CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE
+} from '../src/v3_2/lf_proof_development_source';
+import {
+    CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE
+} from '../src/v3_2/lf_proof_development_store';
+import {
+    CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE
+} from '../src/v3_2/lf_proof_development_cli';
+import {
     CORE_PROOF_DOCUMENT_PROFILE
 } from '../src/v3_2/proof_document';
 import {
@@ -451,6 +463,22 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
             CORE_LF_WORKSPACE_PROOF_PROFILE.revision
         );
         assert.equal(
+            revisions.get('proof-development'),
+            CORE_LF_PROOF_DEVELOPMENT_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('proof-development-source'),
+            CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('mounted-proof-development'),
+            CORE_LF_MOUNTED_PROOF_DEVELOPMENT_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('proof-development-cli'),
+            CORE_LF_PROOF_DEVELOPMENT_CLI_PROFILE.revision
+        );
+        assert.equal(
             revisions.get('same-module-fragment-workspace'),
             CORE_LF_SAME_MODULE_FRAGMENT_WORKSPACE_PROFILE.revision
         );
@@ -492,7 +520,15 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         );
         assert.deepEqual(
             CORE_AI_NATIVE_CAPABILITIES.commands.map(command => command.id),
-            ['capabilities', 'proof-check', 'proof-goals', 'workspace-check']
+            [
+                'capabilities',
+                'proof-check',
+                'proof-goals',
+                'workspace-check',
+                'development-check',
+                'development-goals',
+                'development-build'
+            ]
         );
         assert.match(
             CORE_AI_NATIVE_CAPABILITIES.commands[1].scope,
@@ -502,11 +538,15 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
             CORE_AI_NATIVE_CAPABILITIES.commands[3].scope,
             /canonical emdash\.workspace\.lock\.json/u
         );
+        assert.match(
+            CORE_AI_NATIVE_CAPABILITIES.commands[4].scope,
+            /canonical emdash\.proof-development\.source\.json/u
+        );
         assert.deepEqual(
             CORE_AI_NATIVE_CAPABILITIES.deferred.map(item => item.id),
             [
-                'general-source-acquisition',
-                'general-development-cli',
+                'restricted-host-source-execution',
+                'development-graph-command',
                 'persisted-or-inline-paper-artifacts',
                 'network-acquisition',
                 'hosted-workspace-delivery',
