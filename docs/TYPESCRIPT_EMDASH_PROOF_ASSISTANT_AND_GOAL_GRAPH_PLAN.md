@@ -104,8 +104,8 @@ compilation shows the selected predecessor runtime omits active transparent
 `Transf` delta lines 9150-9151. That evidence supersedes v4 implementation
 authority. Corrected non-authorizing proposal v5 adds exactly that delta,
 changes the boundary to 5/10/0/6, and is separately approved under delegated
-unattended authority with human supersession. Its review checkpoint is
-pending, so implementation remains paused. No PathOut/PathInd public package
+unattended authority with human supersession at review checkpoint `3f95e7c`;
+exact v5 semantic implementation may resume. No PathOut/PathInd public package
 export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
@@ -5809,8 +5809,8 @@ authorize reversing that delta, importing the whole sibling runtime profile,
 a generic engine/checker/signature/body/owner change, later 1D/1E/1F work,
 public exports, active Lambdapi changes, integration, or release. Proposal and
 review pass eleven focused tests in two suites with root typecheck, focused
-lint, and diff hygiene. Implementation remains paused until this review has
-its own rollback-safe checkpoint.
+lint, and diff hygiene. Review checkpoint `3f95e7c` freezes that decision and
+restores authority for only the exact v5 semantic implementation.
 
 ## Decision Ledger
 
@@ -5949,7 +5949,7 @@ its own rollback-safe checkpoint.
 | `D-PA-131` | Supersede the v3 PathInd review and correct proposal v4 to 5/9/0/6 with one subject-checked weak-head fusion of active lines 5481 and 9177. | Line 9177 is registered but cannot match until nested line 5481 has reduced inside its outer `Obj`; the runtime deliberately matches only the current head. The derived `Obj(Hom_cat(Catd_cat,…))` fusion compiles the same active reduction path without adding mathematics, a checker branch, nested normalization, or a signature substitute. V3 remains backtracking evidence, and v4 still requires its own checkpoint and review. |
 | `D-PA-132` | Approve only checkpointed corrected PathInd proposal v4 under delegated unattended authority, with human supersession. | Proposal checkpoint `f4101e2` preserves the exact 5/9/0/6 weak-head execution closure, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `397472f` restores local implementation authority without making the proposal self-authorizing. |
 | `D-PA-133` | Supersede the v4 PathInd review and correct proposal v5 to 5/10/0/6 with active transparent `Transf` delta lines 9150-9151. | The v4 fusion subject-checks and reaches `Obj(Transf_cat)`, but the generic Core `tapp0_fapp0` signature expects the `Transf` alias and the selected predecessor runtime omits its forward delta. Importing that exact active definition is narrower than reversing reduction, changing the checker, or importing the whole sibling runtime profile. V4 remains backtracking evidence, and v5 still requires its own checkpoint and review. |
-| `D-PA-134` | Approve only checkpointed corrected PathInd proposal v5 under delegated unattended authority, with human supersession. | Proposal checkpoint `7219828` preserves the exact 5/10/0/6 alias-delta closure, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review restores local implementation authority without making the proposal self-authorizing. |
+| `D-PA-134` | Approve only checkpointed corrected PathInd proposal v5 under delegated unattended authority, with human supersession. | Proposal checkpoint `7219828` preserves the exact 5/10/0/6 alias-delta closure, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `3f95e7c` restores local implementation authority without making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
