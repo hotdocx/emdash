@@ -80,8 +80,10 @@ consumer gates. The standard-library parent is repartitioned: a concrete
 PathOut/PathInd product profile is selected because it is already consumed by
 the checked book and research-overview story, while its transparent library
 definitions and opaque semantic owners remain separated by the dedicated
-trusted-profile plan. The first exact trust-boundary/closure audit is selected
-next; no library semantic or public package export has yet been added.
+trusted-profile plan. Its exact trust-boundary audit and root-only
+`PATHOUT-LIBRARY-FOUNDATION-1B` are complete and final-proportional-green at
+5/13/2/9. Fixed-source `PATHIND-TRUSTED-PROFILE-1C` is the next separately
+proposed slice; no PathOut/PathInd public package export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -636,7 +638,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` is complete; delegate the next behavior-free foundation proposal and all later slices to `TYPESCRIPT_ELABORATOR_V3_2_PATHOUT_STANDARD_LIBRARY_PLAN.md`. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. `PATHIND-TRUSTED-PROFILE-1C` is the next separately proposed slice under the dedicated plan. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -5584,6 +5586,20 @@ checkpointed at `2460ae9`; its separate delegated review restores only the
 root-local 5/12/2/9 implementation authority, retains human supersession, and
 preserves every later/public denial.
 
+That v7 authorization is now superseded by a representation-level invariant
+found before semantic compilation. `createCoreLfModuleSpec` rejects every
+proof rule whose generated-constraint list is empty. The predecessor does not
+expose Lambdapi's native `unit`/`tt`, and importing a foundational inductive
+merely to spell a reflexive discharge would widen the trusted boundary.
+Proposal v8 keeps the exact 5/12/2/9 rule set and represents source
+`tt ≡ tt` by one captured `A ≡ A` constraint. Conversion discharges it
+immediately; matching and the mathematical rule are unchanged. This needs no
+generic engine change, new owner, runtime rule, or public effect. V7
+checkpoints `2460ae9` and `7035922` remain backtracking evidence. Proposal v8
+is checkpointed at `6e4bb82`; its separate delegated review restores only the
+root-local 5/12/2/9 implementation authority, retains human supersession, and
+preserves every later/public denial.
+
 That v8 authorization is now superseded by the remaining reflexive consumer.
 The general source-action comparison passes under line 8079, while the
 reflexive case normalizes to
@@ -5599,19 +5615,17 @@ evidence. Proposal v9 is checkpointed at `b4277fb`; its separate delegated
 review restores only the root-local 5/13/2/9 implementation authority,
 retains human supersession, and preserves every later/public denial.
 
-That v7 authorization is now superseded by a representation-level invariant
-found before semantic compilation. `createCoreLfModuleSpec` rejects every
-proof rule whose generated-constraint list is empty. The predecessor does not
-expose Lambdapi's native `unit`/`tt`, and importing a foundational inductive
-merely to spell a reflexive discharge would widen the trusted boundary.
-Proposal v8 keeps the exact 5/12/2/9 rule set and represents source
-`tt ≡ tt` by one captured `A ≡ A` constraint. Conversion discharges it
-immediately; matching and the mathematical rule are unchanged. This needs no
-generic engine change, new owner, runtime rule, or public effect. V7
-checkpoints `2460ae9` and `7035922` remain backtracking evidence. Proposal v8
-is checkpointed at `6e4bb82`; its separate delegated review restores only the
-root-local 5/12/2/9 implementation authority, retains human supersession, and
-preserves every later/public denial.
+`PATHOUT-LIBRARY-FOUNDATION-1B` is now complete and final-proportional-green.
+The sealed root-only transfer compiles five opaque interfaces, thirteen
+runtime rules, two proof comparisons, and nine transparent definitions through
+the generic TypeScript LF engines. Its focused suite passes eighteen checks
+with the opt-in oracle skipped; the separately selected 20-second-bounded
+Lambdapi probe accepts all six assertions. General source transport uses the
+identity-family proof rule, reflexive source transport computes definitionally,
+the canonical arrow typechecks, all eight negative consumers reject, and no
+public/browser/package barrel exports the profile. No long aggregate was
+rerun under the standing policy because no shared engine or package boundary
+changed. `PATHIND-TRUSTED-PROFILE-1C` is the next proposal-gated row.
 
 ## Decision Ledger
 
@@ -5740,6 +5754,7 @@ preserves every later/public denial.
 | `D-PA-121` | Approve only checkpointed PathOut-foundation proposal v8 under delegated unattended authority, with human supersession. | Checkpoint `6e4bb82` preserves the exact 5/12/2/9 identity-family rule and its nonempty reflexive constraint representation, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v7 or making the proposal self-authorizing. |
 | `D-PA-122` | Supersede the v8 PathOut-foundation review and correct proposal v9 to 5/13/2/9 with active identity-incoming precomposition line 8032. | General source action now passes, but reflexive action reaches `hom_precomp_along_fapp0(id,p,id_y) ≡ p` after raw composition has already simplified. Line 8032 is the exact active computation to functorial action, and the predecessor closes identity-functor action; importing it is narrower than adding a proof substitute, derived fusion, or generic identity law. |
 | `D-PA-123` | Approve only checkpointed PathOut-foundation proposal v9 under delegated unattended authority, with human supersession. | Checkpoint `b4277fb` preserves the exact 5/13/2/9 identity-incoming closure, corrected predecessor, root-only qualification, and all denials; separate review restores implementation authority without reviving v1-v8 or making the proposal self-authorizing. |
+| `D-PA-124` | Complete root-only `PATHOUT-LIBRARY-FOUNDATION-1B` at the exact 5/13/2/9 boundary and advance only to a separately proposed `PATHIND-TRUSTED-PROFILE-1C`. | All entries compile through generic engines; seven positive and eight negative consumers, safe-library capability denials, non-export checks, and six bounded Lambdapi assertions are green. The focused evidence directly covers this non-public profile, so the standing anti-aggregate policy permits carrying forward unchanged workspace/package boundaries. |
 
 ## Validation And Checkpoint Policy
 

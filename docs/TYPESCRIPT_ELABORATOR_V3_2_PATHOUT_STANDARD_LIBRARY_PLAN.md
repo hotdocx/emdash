@@ -11,8 +11,9 @@ reflexive-consumer counterevidence now also supersedes the v8 review;
 checkpointed proposal v9 preserves v8 and adds only active line 8032's
 identity-incoming precomposition computation, and is separately approved
 under delegated unattended authority with human supersession; root-only
-`PATHOUT-LIBRARY-FOUNDATION-1B` may resume, and no PathOut profile or public
-export is yet qualified
+`PATHOUT-LIBRARY-FOUNDATION-1B` is implemented and final-proportional-green at
+5/13/2/9; `PATHIND-TRUSTED-PROFILE-1C` is the next proposal-gated row, and no
+PathOut profile or public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -173,8 +174,8 @@ named library presentation.
 | --- | --- | --- | --- |
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | implementation authorized; resume existing work | separately reviewed v9 proposal | Resume exactly the root-local 5/13/2/9 implementation; retain seven positives, eight negatives, six bounded oracle assertions, and every existing denial. |
-| `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
+| `PATHIND-TRUSTED-PROFILE-1C` | next; proposal pending | completed 1B | Freeze a separate exact proposal before importing/transferring the existing fixed-source `path_ind_sec` owner and component/specialized rules; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -987,6 +988,69 @@ git diff --check
 The unchanged workspace contract is carried forward from v8. No Lambdapi or
 long aggregate was run for this behavior-free correction; neither would
 validate the proposal-data boundary.
+
+### `PATHOUT-LIBRARY-FOUNDATION-1B` completion evidence
+
+The root-only implementation is
+[`src/v3_2/pathout_foundation_transfer.ts`](../src/v3_2/pathout_foundation_transfer.ts),
+with focused qualification in
+[`tests/v3_2_pathout_foundation_transfer_tests.ts`](../tests/v3_2_pathout_foundation_transfer_tests.ts)
+and contributor-runner discovery in `tests/main_tests.ts`. It remains absent
+from contributor, npm, authoring, workspace, and browser barrels.
+
+The compiled boundary is exactly **5/13/2/9**:
+
+- five opaque active-authority interfaces;
+- thirteen runtime rules: eleven active computations plus the two reviewed
+  weak-head fusions derived from active rule pairs;
+- two active proof-time comparisons in source order, with the line-8079
+  reflexive source discharge represented by one captured `A ≡ A` constraint
+  and the line-8463 projection-order rule retaining its bounded external
+  typing oracle; and
+- nine checked transparent representable and PathOut definitions.
+
+All thirteen runtime subjects validate through the generic TypeScript runtime
+compiler. All nine transparent definitions compile through the generic
+declaration engine. The general source-transport consumer uses the
+identity-family proof comparison, while reflexive source transport now
+computes definitionally through line 8032 and inherited identity-functor
+action. The canonical Sigma arrow typechecks. Eight negative consumers reject
+wrong categories, endpoints, fibres, scope, and ordinary-library attempts to
+register runtime or proof rules.
+
+Final proportional validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_foundation_transfer.ts \
+  tests/v3_2_pathout_foundation_transfer_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathout_foundation_transfer_tests.ts
+  19 tests / 1 suite: 18 passed, 0 failed, 1 opt-in oracle skipped
+
+EMDASH_RUN_LAMBDAPI_PATHOUT_FOUNDATION_PROBES=1 \
+node --require ts-node/register --test \
+  --test-name-pattern="matches all six" \
+  tests/v3_2_pathout_foundation_transfer_tests.ts
+  1 test / 1 suite: 1 passed, 0 failed; all six assertions accepted
+
+git diff --check
+  passed
+```
+
+The workspace contract is unchanged and carried forward. No long
+`check:ts`/repository aggregate was rerun: this tranche changes no shared LF
+engine, package/workspace setup, public barrel, browser surface, or active
+Lambdapi source, and the user's standing policy requires avoiding such an
+aggregate unless its omission blocks progress. The focused compiler,
+consumer, static, sealing, and bounded-oracle gates directly cover this
+root-local qualification boundary.
 
 ## Required Evidence For Implementation
 
