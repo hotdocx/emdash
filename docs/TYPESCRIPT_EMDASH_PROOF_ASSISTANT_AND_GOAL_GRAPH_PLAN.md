@@ -19,9 +19,10 @@ the stateless development-graph command audit and its exact projection are
 complete and final-proportional-green;
 the simplifier audit has separated proof-level rewriting from definitional
 computation; its bounded proof-checker conversion prerequisite is implemented
-and final-proportional-green; the first proof-producing simplifier has an
-exact frozen v1 contract and is the sole semantic row in progress;
-later search, library, external-automation, and general goal-graph rows remain
+and final-proportional-green; the first proof-producing simplifier is
+implemented and final-green through its focused, browser, packed-package, and
+required full-TypeScript gates; the accessible-premise index/search audit is
+next; later library, external-automation, and general goal-graph rows remain
 dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
@@ -50,7 +51,8 @@ The development-graph command audit checkpoint is `e0d3e4f` and its semantic
 checkpoint is `8e21afb`; its synchronized ledger checkpoint is `3628315`.
 The proof-checker conversion audit checkpoint is `3c102ec` and its semantic
 checkpoint is `7c9d8f7`; its synchronized ledger checkpoint and current clean
-published goal-branch tip are `74e6de8`.
+published predecessor tip are `74e6de8`. The proof-simplifier contract
+checkpoint is `c08c622` and its semantic checkpoint is `828b8ff`.
 
 Depends-On:
 
@@ -525,7 +527,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-COUPLING-4B` | Implement portable direct cross-goal coupling graph | complete | `de971de`; focused semantic/static/browser/packed gates green; no source/artifact migration or long aggregate |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | complete | mechanism separation, equality/transport inventory, deterministic trace/budget contract, and staged scope frozen below |
 | `SIMP-5B0` | Proof-checker bounded beta/conversion prerequisite | complete | `7c9d8f7`; exact LF environment, beta/delta transport replay, lambda-callee inference still closed; focused/browser/packed/full-TypeScript gates green |
-| `SIMP-5B1` | Deterministic unconditional proof-producing simplifier | in progress | green 5B0 proof-document replay boundary; exact v1 API, matching, transport, budget, and rejection contracts frozen below |
+| `SIMP-5B1` | Deterministic unconditional proof-producing simplifier | complete | `828b8ff`; checked global equality evidence, backward transport, stable continuation hole, focused/browser/packed/full-TypeScript gates green |
 | `SIMP-5B2` | Conditional/local/under-binder simplification extensions | deferred | concrete 5B1 consumer plus congruence and premise-discharge contract |
 | `INDEX-SEARCH-6` | Accessible-premise semantic index and exact-ID search | pending | general catalog and module-visibility corpus |
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | pending | plan patches, index, and budget/trace contract |
@@ -2288,6 +2290,96 @@ direct gates. Because the public workspace barrel changes, current root SOP
 requires one complete `check:ts` only after those bounded gates are green and
 before checkpoint; it is not an iterative test and `check:all` remains
 irrelevant.
+
+### SIMP-5B1 completion record
+
+Semantic checkpoint: `828b8ff`
+(`feat: add proof-producing simplifier`).
+
+The browser-safe workspace product now exports
+`emdash-proof-simplifier-v1`. `simplifyCoreProofPlan` accepts one exact LF
+environment, canonical decoded root goal, exact equality/backward-transport
+adapter, ordered forward theorem rules, ordinary continuation plan, and three
+explicit limits. It validates the canonical `Eq` and `ind_eq` signatures and
+every theorem telescope before traversal. Each accepted match recovers every
+theorem parameter from the element classifier plus left side, applies the
+global theorem in its checked plicity order, and retains the freshly checked
+equality proof in a frozen trace.
+
+Traversal is exactly the frozen postorder/left-to-right/first-rule/restart
+strategy. It treats `Pi` and lambda syntax as opaque, uses independent visit,
+attempt, and successful-rewrite counters, and rejects repeated canonical Core
+roots as cycles. Trace paths are diagnostics only: lowering retains the
+accepted internal path directly rather than parsing the displayed path back
+into proof semantics. Reverse trace composition constructs ordinary lambda
+motives and one nested backward-transport term, checks that term in the local
+context of the simplified fact, and lowers to one existing `have` plus one
+existing `exact` body. A no-op returns the caller's exact continuation object.
+
+The standalone generic wrapper fixture is independent of active mathematical
+developments. It demonstrates two inner-first rewrites, caller-order rule
+selection, a complete proof document from a supplied exact continuation, and
+an incomplete proof document with exactly one stable named simplified-target
+hole. Negative cases reject conditional/right-only binders, nested binder
+patterns, forward transport, cycles, duplicate IDs, unsafe limits, and each
+independent exhausted budget. The fixture neither imports nor edits the
+presheaf/site/sheafification/scheme development.
+
+The public contributor and workspace package entries export the additive API;
+the narrow core-only package entry remains unchanged. The capability record
+advances to v9 and names the exact simplifier profile. Installed ESM, CJS,
+strict-TypeScript, and browser-bundle consumers exercise both its profile and
+operation. No proof-document, proof-plan, source, artifact, workspace, CLI, or
+research hash/profile migration was needed because the simplifier is an
+immediately expanded management operation, not canonical source or checker
+state.
+
+Final validation on 2026-08-10:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_simplifier_tests.ts
+  passed: 9/9 tests, 1 suite
+
+node --require ts-node/register --test \
+  tests/v3_2_proof_simplifier_tests.ts \
+  tests/v3_2_ai_proof_cli_tests.ts \
+  tests/v3_2_browser_directed_tests.ts
+  passed: 38/38 tests, 5 suites
+
+./scripts/pnpmw run typecheck
+  passed
+
+eslint over every changed TypeScript/JavaScript file
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1
+
+./scripts/pnpmw run package:check
+  passed: build plus installed ESM, CJS, strict-TypeScript, and browser bundle
+
+./scripts/pnpmw run check:ts
+  passed: 1617 tests, 244 suites; 1563 pass, 54 skip, 0 fail
+  duration: 2017235 ms (about 33 minutes 37 seconds)
+
+git diff --cached --check
+  passed before semantic checkpoint 828b8ff
+```
+
+The complete `check:ts` ran exactly once, only because current root
+`AGENTS.md` makes it a pre-checkpoint requirement when the shared TypeScript
+public barrel changes. It is not a precedent for iterative or reassurance
+reruns. No `check:all`, Lambdapi/kernel, print/book, sibling-repository, npm
+publication, GitHub Release, deployment, or other long aggregate ran.
+
+Non-effects: no Core constructor, checker conversion, proof-plan tag,
+canonical source/artifact field, mathematical equality owner, conditional or
+local rule, under-binder congruence, symmetry synthesis, global registry,
+attribute parser, callback, retained prover session, MCP/LSP service,
+filesystem/network/cache authority, or production Lambdapi dependency was
+added. `SIMP-5B2` stays deferred; `INDEX-SEARCH-6` is the next dependency-ready
+audit.
 
 ## Decision Ledger
 
