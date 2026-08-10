@@ -17,8 +17,10 @@ proportional-green; the cross-goal coupling audit and its separate portable
 direct-dependency graph are complete and final-proportional-green;
 the stateless development-graph command audit and its exact projection are
 complete and final-proportional-green;
-later simplification, search, library, external-automation, and general
-goal-graph rows remain dependency-gated
+the simplifier audit has separated proof-level rewriting from definitional
+computation and frozen a bounded proof-checker conversion prerequisite;
+later simplifier implementation, search, library, external-automation, and
+general goal-graph rows remain dependency-gated
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -43,7 +45,7 @@ management-only template semantic checkpoint is `39d9fc8`.
 The cross-goal coupling audit checkpoint is `48405eb` and its semantic
 checkpoint is `de971de`; its synchronized ledger checkpoint is `d90db3b`.
 The development-graph command audit checkpoint is `e0d3e4f` and its semantic
-checkpoint is `8e21afb`.
+checkpoint is `8e21afb`; its synchronized ledger checkpoint is `3628315`.
 
 Depends-On:
 
@@ -516,8 +518,10 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `PLAN-DECOMPOSE-3C1` | Implement root-scoped explicit-placeholder `refine` macro | complete | `39d9fc8`; focused semantic/static/browser/packed gates green; no source/artifact migration or long aggregate |
 | `GOAL-COUPLING-4A` | Audit stable cross-goal dependency semantics and revision boundary | complete | direct target/context dependency graph selected below; proof-state v2 remains unchanged |
 | `GOAL-COUPLING-4B` | Implement portable direct cross-goal coupling graph | complete | `de971de`; focused semantic/static/browser/packed gates green; no source/artifact migration or long aggregate |
-| `SIMP-5A` | Rewrite/simplifier profile and trace audit | pending | equality/transport owner inventory and termination contract |
-| `SIMP-5B` | Deterministic proof-producing simplifier | pending | approved 5A contract |
+| `SIMP-5A` | Rewrite/simplifier profile and trace audit | complete | mechanism separation, equality/transport inventory, deterministic trace/budget contract, and staged scope frozen below |
+| `SIMP-5B0` | Proof-checker bounded beta/conversion prerequisite | in progress | approved 5A finding; exact LF environment, no annotated-lambda inference, coordinated semantic-profile migration |
+| `SIMP-5B1` | Deterministic unconditional proof-producing simplifier | pending | green 5B0 proof-document replay boundary |
+| `SIMP-5B2` | Conditional/local/under-binder simplification extensions | deferred | concrete 5B1 consumer plus congruence and premise-discharge contract |
 | `INDEX-SEARCH-6` | Accessible-premise semantic index and exact-ID search | pending | general catalog and module-visibility corpus |
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | pending | plan patches, index, and budget/trace contract |
 | `STDLIB-8` | Curated public library profile | gated | existing generated-owner/stress decisions, exact product profile, public base-package trust boundary |
@@ -1949,6 +1953,149 @@ their green `GOAL-COUPLING-4B` evidence is historical unchanged-boundary
 evidence, not a current pass. No Lambdapi/kernel, print/book, npm publication,
 release, deployment, or sibling-repository operation was run.
 
+## SIMP-5A Audit And Frozen Proof-Checker Prerequisite
+
+The audit found four mechanisms which must remain distinct even when a user
+experiences all four as “automation”:
+
+1. kernel/runtime definitional computation decides conversion without
+   constructing a propositional proof;
+2. proof-time unification assigns scoped metavariables while elaborating one
+   checked term;
+3. instance synthesis selects explicit dictionary evidence under its own
+   scope, ambiguity, cycle, and budget policy; and
+4. propositional simplification applies equality theorems and must return the
+   resulting proof term and a replayable trace.
+
+Lean's local source was inspected as comparative evidence, especially its
+ordered theorem sets, pre/post traversal, congruence, dischargers, caches,
+global step bound, and proof production. Those are useful product lessons,
+not an instruction to reproduce a global mutable simp registry or Lean's
+tactic runtime. Emdash v1 instead selects explicit immutable rules per call,
+uses deterministic order and bounded work, and treats fresh checker replay as
+authority.
+
+The active Lambdapi v3.2 equality owners were inspected read-only. They
+provide equality, reflexivity, primitive right path induction, guarded beta,
+and derived symmetry/application principles. No mathematical declaration is
+missing, and this row does not edit or reinterpret presheaves, sites,
+sheafification, schemes, or any other active mathematics. The historical
+`scale_stress_1b_proposal.ts` acquisition is useful signature evidence but is
+not product authority and is not imported by the simplifier.
+
+### Material checker seam
+
+An occurrence-specific rewrite lowers through path induction with a lambda
+motive. Its inferred result type therefore contains a generic lambda call
+which must beta-convert to the user's target. The released proof-document
+compiler currently creates a plain `CoreElaborationSession` and
+`CoreChecker`; that frozen checker deliberately excludes generic-call beta.
+Consequently, a sound proof-producing simplifier cannot replay its ordinary
+transport term through the current proof-document boundary.
+
+Three apparent workarounds are rejected:
+
+- manufacturing a hidden global declaration specialized to each motive;
+- exposing a beta-expanded implementation target to the source author; or
+- emitting a simplifier result which the canonical proof document cannot
+  independently check.
+
+This is a TypeScript proof-document conversion seam, not a Lambdapi or
+mathematics gap. `SIMP-5B` is therefore repartitioned into a narrow checker
+prerequisite, an unconditional first simplifier, and later congruence/premise
+extensions.
+
+### Frozen SIMP-5B0 contract
+
+Add a browser-safe `CoreProofChecker` and immutable profile with these exact
+properties:
+
+1. It checks against one exact `CoreLfDeclarationEnvironment` and reuses the
+   existing `CoreLfElaborationSession` plus `coreLfDefinitionalCompare`.
+   Conversion is bounded by the existing exported 256-step global comparison
+   budget and orders zonking, generic beta, transparent checked delta, and the
+   reviewed built-in runtime exactly as the existing combined comparator.
+2. It does **not** opt into annotated-lambda inference. A lambda is still
+   accepted only while checking against an expected Pi; a generic call whose
+   callee itself is an annotated lambda remains `CANNOT_INFER_LAMBDA`. This
+   preserves the earlier `have`/`refine` decision while allowing lambda
+   motives supplied as checked arguments.
+3. It accepts no runtime callback, theorem hook, simplifier rule, instance
+   provider, or Lambdapi process. The ordinary reviewed runtime is the only
+   runtime component. Checker comparison records remain process-local
+   diagnostics and never enter proof artifacts.
+4. `compileCoreProofDocument` requires the rich LF environment and creates a
+   fresh proof checker/session for every compilation. Exact-closure workspace
+   proofs pass the already-owned reconstructed LF environment, not its lossy
+   body-free Core projection. The direct proof demo is migrated to construct
+   the same opaque LF environment explicitly.
+5. The positive semantic fixture checks an ordinary transport/path-induction
+   term whose explicit lambda motive requires beta at the final target. A
+   transparent-definition fixture establishes exact delta ownership; a
+   negative fixture proves that lambda-callee inference remains closed.
+6. The migration is one coordinated pre-release semantic-profile update:
+
+   | Boundary | Revision after SIMP-5B0 |
+   | --- | --- |
+   | proof checker | new `emdash-core-proof-checker-v1` |
+   | proof document/compiler | v3; checker named `CoreProofChecker` |
+   | proof state/artifact/JSONL and explicit Core | unchanged v2/v2/v2/v1 |
+   | exact-closure workspace proof/compiler | v3; artifact schema remains v2 |
+   | proof development profile | v3; artifact schema remains v2 |
+   | canonical development source | v3; payload shape otherwise unchanged |
+   | mounted development | v3 with the exact v3 source-profile pin |
+   | development CLI profile | v4; summary/goal/build/graph record schemas remain v3/v2/v2/v1 |
+   | research-document binding/snapshot | unchanged v2 |
+   | pinned research overview, files, and browser replay | v3 with recomputed exact hashes |
+   | AI-native capability profile/record | v8, including the new proof-checker profile |
+
+   Fingerprints change because the serialized proof profile changes. Existing
+   v2 artifact *shapes* remain sufficient: their current fingerprint and
+   enclosing profile/compiler fields make stale semantic results rejectable,
+   so inventing v3 JSON envelopes would conflate schema with checker policy.
+7. Package version remains `0.1.0`; this row does not publish. The workspace
+   package explicitly exports the checker because proof-document public types
+   now expose its LF environment boundary. The narrow core-only entry remains
+   unchanged.
+
+Acceptance uses new proof-checker/proof-document cases, the affected proof,
+workspace, development, CLI, research-pin, browser-closure, and packed ESM/
+CJS/strict-TypeScript/browser consumers, plus typecheck, changed-file lint,
+workspace integrity, exact staged-diff review, and whitespace hygiene. No
+Lambdapi/kernel, print/book, sibling-repository, deployment, or publication
+gate is relevant. Under `D-PA-019`, long aggregates remain omitted unless a
+changed boundary cannot be validated proportionally; the root SOP's shared-
+TypeScript aggregate rule is reconciled at checkpoint time rather than used
+as a pre-edit or iterative rerun.
+
+### Frozen SIMP-5B1 first simplifier scope
+
+After 5B0 is green, the first simplifier is a browser-safe management layer,
+not a checker extension. It receives an explicit immutable equality/transport
+adapter and ordered immutable theorem rules; validates rule shapes through the
+proof checker; and returns ordinary explicit Core evidence, an expanded base
+proof plan, and a complete immutable trace. No rule registry, attribute,
+callback, process meta, declaration parser, or retained checker session is
+canonical state.
+
+The v1 strategy is deterministic postorder, left-to-right traversal over the
+selected root target, first matching rule in caller order, then restart. It
+uses structural first-order matching, explicit orientation, separate safe-
+integer rewrite and visit/attempt budgets, and cycle detection. Every trace
+entry records rule ID, occurrence path, before/after terms, orientation, and
+proof origin. Final checking, not the trace, is proof authority.
+
+The first positive scope is unconditional globally declared equality
+theorems over decoded/groupoid propositions. The result lowers to existing
+`have` plus `exact` plans with one simplified-target continuation; no new Core
+node, proof-plan tag, source decoder, or artifact field is added by 5B1.
+Conditional theorem premises, local-hypothesis rule discovery, reverse rules
+requiring synthesized symmetry, rewriting beneath binder bodies, dependent
+congruence, associative/commutative normalization, simprocs, indexing, and
+external premise discharge remain `SIMP-5B2` or later work. This staged scope
+is deliberately useful for ordinary definitional theorem cleanup while
+keeping every dependent extension evidence-producing and reviewable.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -1989,6 +2136,11 @@ release, deployment, or sibling-repository operation was run.
 | `D-PA-034` | Emit one module/declaration-qualified graph wrapper per selected proof, including complete proofs with empty graphs. | Hole IDs are proof-local, and omitting empty graphs would hide selected proof membership from the graph record stream. |
 | `D-PA-035` | Treat `development graph` as successful inspection for incomplete proofs, matching `goals` rather than `check` or `build`. | Deriving an explicit open-goal graph is the intended successful result; it does not claim proof completion. |
 | `D-PA-036` | Advance the development CLI/profile summary family to v3 and add graph-wrapper v1 while retaining goal/build and canonical artifact v2. | The closed command union changes, but existing goal/build payloads and every proof/source/artifact envelope do not. |
+| `D-PA-037` | Keep proof-level simplification separate from definitional computation, unification, and typeclass synthesis. | Equality theorems require explicit proof evidence and their own rule, traversal, trace, and termination policy; none should become a hidden checker or synthesis rule. |
+| `D-PA-038` | Add a dedicated bounded `CoreProofChecker` before implementing transport-based simplification. | An occurrence-specific path-induction motive leaves a beta-redex in the inferred target, while the current proof-document checker cannot replay it soundly. |
+| `D-PA-039` | Reuse exact LF beta/delta/runtime conversion for proof documents but continue to reject annotated-lambda inference. | Lambda motives are checked arguments with expected Pi types; opening lambda-callee inference would revive the separately rejected `have`/`refine` semantic widening. |
+| `D-PA-040` | Advance semantic profiles while retaining unchanged v2 artifact envelopes. | Current fingerprints and enclosing profile/compiler fields reject stale checker results; JSON schema revisions should not be inflated merely because the checking policy advances. |
+| `D-PA-041` | Stage simplification as explicit unconditional root-target rewriting before conditional, local, or under-binder congruence. | The first scope yields ordinary replayable transport terms with deterministic behavior, while dependent premise and congruence evidence need separately reviewable contracts. |
 
 ## Validation And Checkpoint Policy
 
