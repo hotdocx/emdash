@@ -47,7 +47,8 @@ The cross-goal coupling audit checkpoint is `48405eb` and its semantic
 checkpoint is `de971de`; its synchronized ledger checkpoint is `d90db3b`.
 The development-graph command audit checkpoint is `e0d3e4f` and its semantic
 checkpoint is `8e21afb`; its synchronized ledger checkpoint is `3628315`.
-The proof-checker conversion audit checkpoint is `3c102ec`.
+The proof-checker conversion audit checkpoint is `3c102ec` and its semantic
+checkpoint is `7c9d8f7`.
 
 Depends-On:
 
@@ -521,7 +522,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-COUPLING-4A` | Audit stable cross-goal dependency semantics and revision boundary | complete | direct target/context dependency graph selected below; proof-state v2 remains unchanged |
 | `GOAL-COUPLING-4B` | Implement portable direct cross-goal coupling graph | complete | `de971de`; focused semantic/static/browser/packed gates green; no source/artifact migration or long aggregate |
 | `SIMP-5A` | Rewrite/simplifier profile and trace audit | complete | mechanism separation, equality/transport inventory, deterministic trace/budget contract, and staged scope frozen below |
-| `SIMP-5B0` | Proof-checker bounded beta/conversion prerequisite | complete | exact LF environment, beta/delta transport replay, lambda-callee inference still closed; focused/browser/packed/full-TypeScript gates green |
+| `SIMP-5B0` | Proof-checker bounded beta/conversion prerequisite | complete | `7c9d8f7`; exact LF environment, beta/delta transport replay, lambda-callee inference still closed; focused/browser/packed/full-TypeScript gates green |
 | `SIMP-5B1` | Deterministic unconditional proof-producing simplifier | pending | green 5B0 proof-document replay boundary |
 | `SIMP-5B2` | Conditional/local/under-binder simplification extensions | deferred | concrete 5B1 consumer plus congruence and premise-discharge contract |
 | `INDEX-SEARCH-6` | Accessible-premise semantic index and exact-ID search | pending | general catalog and module-visibility corpus |
@@ -2072,6 +2073,9 @@ as a pre-edit or iterative rerun.
 
 ### SIMP-5B0 completion record
 
+Semantic checkpoint: `7c9d8f7`
+(`feat: add bounded proof checker conversion`).
+
 The browser-safe workspace product now exports
 `emdash-core-proof-checker-v1`. `CoreProofChecker` is constructed only from an
 exact `CoreLfDeclarationEnvironment`; it reuses the existing combined
@@ -2130,6 +2134,9 @@ eslint over every changed TypeScript/JavaScript file
 ./scripts/pnpmw run check:ts
   passed: 1607 tests, 243 suites; 1553 pass, 54 skip, 0 fail
   duration: 1603213 ms (about 26 minutes 43 seconds)
+
+git diff --cached --check
+  passed before semantic checkpoint 7c9d8f7
 ```
 
 The complete `check:ts` was run once only because current root `AGENTS.md`
