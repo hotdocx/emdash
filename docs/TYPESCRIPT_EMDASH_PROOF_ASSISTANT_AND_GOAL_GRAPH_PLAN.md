@@ -5425,11 +5425,14 @@ eventual sealed profile. The nearby proof-time Path-category reflexive join
 and equality-comparison library are recorded but excluded from the smallest
 generic product profile.
 
-The audit corrects the dependency ledger rather than opening behavior. Three
+The audit corrects the dependency ledger rather than opening behavior. Four
 closures remain before the corresponding library layers can be honest:
 
 - represented-source action: two opaque owners, three runtime rules, and one
   proof-time rule absent from current selected transfer profiles;
+- Sigma-totalization functor action: one opaque/injective owner and two
+  runtime rules absent from current selected transfer profiles, despite
+  `PathOut_cat_func` naming that owner directly;
 - covariant fibre transport: one transparent target family, three opaque
   owners, and three runtime rules absent from current selected transfer
   profiles; and
@@ -5438,8 +5441,9 @@ closures remain before the corresponding library layers can be honest:
   selected product profile.
 
 Therefore the next row is the separate behavior-free
-`PATHOUT-LIBRARY-FOUNDATION-1B0` proposal. It must freeze the first closure and
-the nine-definition transparent foundation before `1B` may install anything.
+`PATHOUT-LIBRARY-FOUNDATION-1B0` proposal. It must freeze the first two
+closures and the nine-definition transparent foundation before `1B` may
+install anything.
 The fixed-source, internalized, and transitivity layers remain separately
 gated; no whole-source-prefix import is authorized.
 
@@ -5451,9 +5455,11 @@ aggregate and Lambdapi checks were intentionally omitted because this
 behavior-free row is directly covered and their omission does not block
 progress.
 
-The rollback-safe `PATHOUT-TRUST-BOUNDARY-0A` checkpoint is `a05493b`. It is
-the exact predecessor for the delegated `PATHOUT-LIBRARY-FOUNDATION-1B0`
-proposal and contains no semantic transfer or public-package byte.
+The rollback-safe initial `PATHOUT-TRUST-BOUNDARY-0A` checkpoint is `a05493b`.
+The later `1B0` provider inspection found the omitted `Sigma_func` closure and
+corrects the evidence forward; `a05493b` remains backtracking evidence but is
+not by itself the implementation predecessor. Neither checkpoint contains a
+semantic transfer or public-package byte.
 
 ## Decision Ledger
 
@@ -5563,7 +5569,8 @@ proposal and contains no semantic transfer or public-package byte.
 | `D-PA-102` | Select PathOut/PathInd/transitivity as the first curated mathematical product profile, while keeping prelude/Nat transfer artifacts unpromoted. | The checked book and research-overview already consume this Emdash-specific mathematics, and its dedicated plan has a mature trust-separated design; scale fixtures demonstrate mechanisms but do not constitute a public library decision. |
 | `D-PA-103` | Require the PathOut standard library to preserve four layers: generic kernel, sealed opaque-owner theory profile, transparent derived library, and thin presentation. | Opaque `path_ind_sec`/coherent packages and their computation rules belong to the trusted calculus, while representables and PathOut constructions are transparent compositions; conflating them would misstate both derivability and the package trust boundary. |
 | `D-PA-104` | Complete `PATHOUT-TRUST-BOUNDARY-0A` as immutable contributor evidence, not a semantic transfer. | Exact source hashes and positions identify 34 selected declarations, five opaque PathOut/PathInd owners, six selected runtime rules, and one deferred Path-category proof rule without adding a Core owner, rule, syntax, browser API, or package export. |
-| `D-PA-105` | Repartition PathOut implementation around three measured missing prerequisite closures and require a separate `1B0` foundation proposal. | Represented-source action, covariant fibre transport, and Sigma-total uncurrying have different consumers and trust contents; freezing the first closure plus nine transparent foundation definitions prevents a convenient whole-prefix import from becoming the product architecture. |
+| `D-PA-105` | Repartition PathOut implementation around measured missing prerequisite closures and require a separate `1B0` foundation proposal. | The initial audit separated represented-source action, covariant fibre transport, and Sigma-total uncurrying by consumer and trust content; the same dependency-first rule makes later forward correction possible without rewriting its checkpoint. |
+| `D-PA-106` | Correct `0A` forward by adding the missing `Sigma_func` object/capped-action closure to the foundation boundary. | `PathOut_cat_func` directly names `Sigma_func`; current TypeScript transfers contain `Sigma_cat` and `sigma_map_func` but not that opaque/injective owner or its two required projection rules. The unrelated higher `sigma_map_transf` action remains deferred until an internalized consumer requires it. |
 
 ## Validation And Checkpoint Policy
 

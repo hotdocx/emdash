@@ -100,7 +100,7 @@ describe('PATHOUT-TRUST-BOUNDARY-0A read-only audit', () => {
         }
     });
 
-    it('records the three real prerequisite closures and their status', () => {
+    it('records the four real prerequisite closures and their status', () => {
         const closures =
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.prerequisiteClosures;
         assert.deepEqual(
@@ -108,6 +108,10 @@ describe('PATHOUT-TRUST-BOUNDARY-0A read-only audit', () => {
             [
                 [
                     'represented-source-action',
+                    'missing-selected-profile-transfer'
+                ],
+                [
+                    'sigma-totalization-functor-action',
                     'missing-selected-profile-transfer'
                 ],
                 [
@@ -124,6 +128,7 @@ describe('PATHOUT-TRUST-BOUNDARY-0A read-only audit', () => {
             closures.map(entry => entry.opaqueOwners.map(owner => owner.name)),
             [
                 ['hom_int_precomp_tele_func', 'hom_int_precomp_func'],
+                ['Sigma_func'],
                 ['fib_cov_int', 'fib_cov_src_func', 'fib_cov_transf'],
                 ['Sigma_transfd_funcd']
             ]
@@ -133,7 +138,7 @@ describe('PATHOUT-TRUST-BOUNDARY-0A read-only audit', () => {
                 entry.runtimeRules.length,
                 entry.proofRules.length
             ]),
-            [[3, 1], [3, 0], [1, 0]]
+            [[3, 1], [2, 0], [3, 0], [1, 0]]
         );
     });
 

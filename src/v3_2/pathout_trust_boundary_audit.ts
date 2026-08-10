@@ -435,6 +435,14 @@ const rawAudit = {
                 'categorical_displayed_nd_higher_foundation_transfer.ts'
         },
         {
+            name: 'Sigma_cat',
+            provider: 'directed_1a.ts'
+        },
+        {
+            name: 'sigma_map_func',
+            provider: 'categorical_displayed_chain_transfer.ts'
+        },
+        {
             name: 'hom_con',
             provider: 'categorical_mixed_action_transfer.ts'
         },
@@ -487,6 +495,35 @@ const rawAudit = {
                 { id: 'hom-int-precomp-projection-order', line: 8463 }
             ],
             excludedAuxiliaryDefinitions: []
+        },
+        {
+            id: 'sigma-totalization-functor-action',
+            status: 'missing-selected-profile-transfer',
+            requiredBy: ['foundation'],
+            reusedTransferredOwners: ['Sigma_cat', 'sigma_map_func'],
+            transparentDefinitions: [],
+            opaqueOwners: [
+                {
+                    name: 'Sigma_func',
+                    line: 12801,
+                    sourceKind: 'injective-symbol'
+                }
+            ],
+            runtimeRules: [
+                { id: 'sigma-func-object', line: 12803 },
+                { id: 'sigma-func-capped-action', line: 13148 }
+            ],
+            proofRules: [],
+            excludedAuxiliaryDefinitions: [],
+            deferredHigherAction: {
+                owner: 'sigma_map_transf',
+                ownerLine: 13138,
+                ruleLine: 13154,
+                reason:
+                    'not-required-by-the-smallest-object-and-capped-' +
+                    'arrow-foundation;reassess-for-internalized-higher-' +
+                    'action'
+            }
         },
         {
             id: 'covariant-fibre-transport',
@@ -569,7 +606,10 @@ const rawAudit = {
                 'pathout_refl_arrow'
             ],
             rules: [],
-            prerequisiteClosures: ['represented-source-action']
+            prerequisiteClosures: [
+                'represented-source-action',
+                'sigma-totalization-functor-action'
+            ]
         },
         fixedSourceInduction: {
             addsOwners: [
@@ -663,8 +703,8 @@ const rawAudit = {
         nextRow: 'PATHOUT-LIBRARY-FOUNDATION-1B',
         semanticImplementationAuthorizedByThisAudit: false,
         requiredFirstAction:
-            'freeze-a-separate-foundation-proposal-over-the-' +
-            'represented-source-action-prerequisite'
+            'freeze-a-separate-foundation-proposal-over-represented-' +
+            'source-and-sigma-totalization-action-prerequisites'
     },
     productEffects: []
 } as const;
@@ -697,8 +737,8 @@ export function validateCorePathoutTrustBoundary0aAudit(): void {
             entry.hasBody !== (entry.sourceOpacity === 'transparent')
         ) ||
         closures.join(',') !==
-            'represented-source-action,covariant-fibre-transport,' +
-            'sigma-total-transfd-uncurrying' ||
+            'represented-source-action,sigma-totalization-functor-action,' +
+            'covariant-fibre-transport,sigma-total-transfd-uncurrying' ||
         audit.productEffects.length !== 0 ||
         audit.continuation.semanticImplementationAuthorizedByThisAudit ||
         audit.trustBoundary.ordinaryLibraryCanDeclareOpaqueOwners ||

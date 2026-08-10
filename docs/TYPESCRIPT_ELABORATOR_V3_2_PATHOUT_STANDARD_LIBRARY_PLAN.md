@@ -146,7 +146,7 @@ library program.
 | Layer | Current evidence | Future work |
 | --- | --- | --- |
 | Generic dependent LF | checked declarations, Pi/lambda, conversion, runtime and proof rules | no new kernel mechanism expected |
-| Categorical prerequisites | `Catd`, fibres, Sigma/Pi, pullback, section evaluation, generic action, `hom_int`, `fib_cov_tapp0_func`, `sigma_transport_arrow`, and higher action occur in reviewed transfer descendants | add only the three measured missing prerequisite closures recorded below |
+| Categorical prerequisites | `Catd`, fibres, Sigma/Pi, pullback, section evaluation, generic action, `hom_int`, `fib_cov_tapp0_func`, `sigma_transport_arrow`, and higher action occur in reviewed transfer descendants | add only the four measured missing prerequisite closures recorded below |
 | Public typed construction API | categories, objects/arrows, displayed families, fibres, totals, dependent pairs, family transport, Sigma arrows, sections, application, and recursive binders | add thin classifier-checked identity-arrow, representable, canonical Sigma-transport, PathOut, and PathInd facades where useful |
 | Trusted PathInd profile | generic checked declaration/rule machinery exists; named PathInd package is absent from `src/v3_2` | install the smallest sealed, provenance-pinned opaque-owner/rule closure |
 | Derived PathOut/PathInd library | absent from `src/v3_2` at this completion boundary | author transparent definitions and proof terms over the trusted profile |
@@ -162,9 +162,9 @@ named library presentation.
 
 | Slice | State | Dependencies | Exact purpose |
 | --- | --- | --- | --- |
-| `PATHOUT-TRUST-BOUNDARY-0A` | complete | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and three missing prerequisite closures. It installs no behavior or product export. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B0` | next | completed 0A | Freeze and independently review the exact represented-source-action prerequisite plus the nine transparent foundation definitions; specify linkage, sealing, rule policy, typed consumers, negatives, and bounded oracle before behavior. |
-| `PATHOUT-LIBRARY-FOUNDATION-1B` | pending | reviewed 1B0 | Transfer the sealed represented-source-action prerequisite, then author representables, fixed-source `PathOut`, source-arrow action, path objects, reflexive object, and canonical reflexive-to-path arrow as transparent end-user library definitions. Check fibre, object, arrow, and next-action behavior. |
+| `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B0` | next | completed corrected 0A | Freeze and independently review the exact represented-source and Sigma-totalization functor-action prerequisites plus the nine transparent foundation definitions; specify linkage, sealing, rule policy, typed consumers, negatives, and bounded oracle before behavior. |
+| `PATHOUT-LIBRARY-FOUNDATION-1B` | pending | reviewed 1B0 | Transfer the two sealed foundation prerequisites, then author representables, fixed-source `PathOut`, source-arrow action, path objects, reflexive object, and canonical reflexive-to-path arrow as transparent end-user library definitions. Check fibre, object, arrow, and next-action behavior. |
 | `PATHIND-TRUSTED-PROFILE-1C` | pending | completed 1B | Import/transfer the existing fixed-source `path_ind_sec` owner and exact component/specialized rules into the sealed trusted profile; expose only a typed library consumer and one nontrivial computation above that boundary. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
@@ -236,27 +236,38 @@ exclusions is narrower and more faithful than importing the entire nearby
 source interval.
 
 The prior inventory's broad phrase "categorical prerequisites" concealed
-three concrete product-profile gaps:
+four concrete product-profile gaps. The fourth was found by the post-checkpoint
+`1B0` provider audit and recorded as a forward correction rather than by
+rewriting the audit checkpoint:
 
 1. **Represented-source action.** `hom_int` is transferred, but the opaque
    `hom_int_precomp_tele_func` and `hom_int_precomp_func` owners, their three
    runtime projections, and their one proof-time projection-order comparison
    are not in a current selected product profile. `Rep_transport_func` depends
    on this closure.
-2. **Covariant fibre transport.** `hom_con` and
+2. **Sigma-totalization functor action.** `Sigma_cat` and
+   `sigma_map_func` are transferred, but the opaque/injective `Sigma_func`
+   owner and its object and capped-arrow projection rules are not.
+   `PathOut_cat_func` directly names `Sigma_func`, so this closure belongs to
+   the foundation rather than a later convenience layer. The separate
+   `sigma_map_transf` higher-action owner/rule is not needed by the smallest
+   object-and-capped-arrow foundation and remains explicitly deferred for
+   reassessment with internalized higher action.
+3. **Covariant fibre transport.** `hom_con` and
    `fib_cov_tapp0_func` are transferred, but transparent
    `FibCov_target_catd`, opaque `fib_cov_int`, `fib_cov_src_func`, and
    `fib_cov_transf`, and their three runtime projections are not. The readable
    `FibCov_source_catd` alias is not in the selected typed or lexical closure.
-3. **Sigma-total displayed-transformation uncurrying.** The opaque
+4. **Sigma-total displayed-transformation uncurrying.** The opaque
    `Sigma_transfd_funcd` owner and its object-component rule have isolated
    scale-stress representation evidence, but are not part of a selected
    product profile. They are needed only by the later internalized
    `PathInd_funcd` presentation.
 
 This repartitions the continuation without changing the generic Core or
-checker. The smallest foundation is the represented-source-action closure
-plus nine transparent definitions: `Rep_catd_func`, `Rep_catd`,
+checker. The smallest foundation consists of the represented-source-action
+and Sigma-totalization functor-action closures plus nine transparent
+definitions: `Rep_catd_func`, `Rep_catd`,
 `Rep_transport_func`, `PathOut_cat`, `PathOut_cat_func`,
 `PathOut_transport_func`, `pathout_obj`, `pathout_refl_obj`, and
 `pathout_refl_arrow`. Fixed-source induction adds its own opaque owners and
@@ -301,10 +312,11 @@ the standing instruction to avoid long aggregates unless their omission
 blocks progress; full TypeScript checking, focused lint, and every new drift
 test directly cover this read-only contributor artifact.
 
-The rollback-safe `PATHOUT-TRUST-BOUNDARY-0A` implementation checkpoint is
-`a05493b`. It is the exact predecessor for the behavior-free `1B0` proposal;
-the checkpoint contains contributor audit/test evidence and synchronized
-plans only, with no semantic or package export.
+The rollback-safe initial `PATHOUT-TRUST-BOUNDARY-0A` implementation checkpoint
+is `a05493b`. The later `1B0` provider inspection found the omitted
+`Sigma_func` closure and corrects that evidence forward; `a05493b` remains
+backtracking evidence but is not by itself the implementation predecessor.
+Neither checkpoint contains a semantic or package export.
 
 ## Required Evidence For Implementation
 
