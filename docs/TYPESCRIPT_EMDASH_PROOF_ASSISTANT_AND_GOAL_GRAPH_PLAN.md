@@ -96,8 +96,9 @@ published ledger checkpoint is `28a8e07`. The research goal-graph contract
 checkpoint is `75f0362`, its semantic checkpoint is `faa4c27`, and its
 synchronized clean published ledger checkpoint is `bf23c51`. GitHub retains
 annotated tag and Release `emdash-v0.1.0` at `501a5f6`; public-baseline merge
-checkpoint `65549be` incorporates its retained audit history, but npm accepted
-no package version from that attempt.
+checkpoint `65549be` incorporates its retained audit history, and the post-14A
+dependency-gate audit checkpoint is `394ad2c`; npm accepted no package version
+from that attempt.
 
 Depends-On:
 
@@ -587,7 +588,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC hardening | external npm-authentication gate after one safe hosted attempt | classes-plan `PACKAGE-12B2`; run `31391224891` retained a green exact build/artifact handoff, but npm rejected the PUT because the bootstrap token lacked bypass-2FA authority. Registry remains absent and the temporary secret/fallback are removed; retry the same immutable tag/run only with attended 2FA and a dedicated suitable bootstrap credential, then verify and harden trust. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
 | `GOAL-GRAPH-14B` | Arrowgram view and hosted additive adapters | gated | 14A, published package, sibling SOP audits, compatible controller/runtime |
-| `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | Source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
+| `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 
 Only one semantic row is in progress at a time. A later row may be
 repartitioned or rejected when evidence contradicts this plan.
@@ -4090,11 +4091,11 @@ acceptable substitute.
 
 Date: 2026-08-10
 
-Result: no further semantic or hosted row is currently dependency-ready. The
-audit converts the two residual `pending` automation rows into explicit
-consumer-gated deferrals and leaves the product/package rows at their already
-concrete gates. This is a readiness result, not an implementation or rejection
-of the underlying features.
+Result: accepted at audit checkpoint `394ad2c`; no further semantic or hosted
+row is currently dependency-ready. The audit converts the two residual
+`pending` automation rows into explicit consumer-gated deferrals and leaves
+the product/package rows at their already concrete gates. This is a readiness
+result, not an implementation or rejection of the underlying features.
 
 Current-repository evidence:
 
