@@ -18,6 +18,12 @@ Worktree: `/home/user1/emdash1-classes-v1`
 Baseline: `9c633c85b66efb4ac7619912e8d15f928b32d733`
 (`docs: close classes goal readiness audit`)
 
+Git-Boundary: local and public `main` are exactly the qualified predecessor
+`9c633c8`; the frozen plan checkpoint is `671c56a`; the `DEV-CATALOG-1`
+semantic checkpoint is `fcc4547`; and the dedicated branch is pushed at that
+checkpoint as `origin/goal/typescript-emdash-proof-assistant-v1`. The branch
+has not been merged into `main`, tagged, released, or published to npm.
+
 Depends-On:
 
 - [`TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md);
@@ -576,6 +582,10 @@ is required because this tranche adds no cross-layer semantic dependency.
 Date: 2026-08-10
 
 Result: accepted at the frozen boundary.
+
+Checkpoints: frozen architecture `671c56a`; implementation and synchronized
+evidence `fcc4547`, pushed to the same-named dedicated remote branch. Public
+`main` remains at the separately integrated predecessor `9c633c8`.
 
 Implementation:
 
