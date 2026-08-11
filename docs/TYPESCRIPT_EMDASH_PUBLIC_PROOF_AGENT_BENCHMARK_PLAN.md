@@ -13,8 +13,10 @@ Stage A runner is now implemented on an isolated CloserFans branch at
 checkpoints `1d77473` and `8e270a7`, with final tree `9fc93af`; its focused
 containment, replay, public-package, CLI, template, and hygiene gates are
 green. No provider/model execution or real retained run occurred. The next
-bounded action is a second immutable implementation/preflight review;
-provider execution, measurement, and graduation remain gated.
+preflight review accepted the mock boundary but correctly denied a real call
+because no authenticated one-shot driver exists. The corrective driver
+proposal below is frozen but not implemented or reviewed. Provider execution,
+measurement, and graduation remain gated.
 
 Date: 2026-08-11
 
@@ -64,9 +66,10 @@ The first three slices are now complete. The third published exact `0.3.0`,
 restored a permanent release-only workflow, and locally integrated one
 source-first CloserFans workspace; it still invoked no provider/model and made
 no PathOut task conversion. The subsequent 12B4 provider/execution/retention/
-reporting audit, proposal, first review, and mock-only implementation are now
-frozen below. The next bounded action is the second immutable implementation/
-preflight review—not a real-agent run or performance claim.
+reporting audit, proposal, first review, mock-only implementation, and
+fail-closed second preflight are now frozen below. The next bounded action is
+a separate immutable review of its behavior-free corrective driver proposal—
+not a real-agent run or performance claim.
 
 ## Post-`STDLIB-8B` Readiness Findings
 
@@ -232,7 +235,7 @@ the evaluator.
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
 | `AGENT-EVAL-12B3` | complete at Emdash hardening `3af518d` and CloserFans host `cbf2356` | Exact `0.3.0`, Pages run `31509112917`, protected OIDC recovery run `31510726533`, byte/provenance/installed-consumer verification, permanent trigger removal, and the focused-green ten-abstention source workspace are complete. Two safe pre-package failures and the reviewed one-time dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | mock-only Stage A runner complete at `1d77473`/`8e270a7`; real call gated | Final CloserFans tree `9fc93af` implements narrowed audited writes, non-executing source extraction, clean host replay, bounded streams, private evidence, and focused fake/no-model gates. A second exact implementation/preflight review is required before at most one real one-case canary. |
+| `AGENT-EVAL-12B4` | mock-only Stage A runner complete; second preflight denied a call and froze a corrective driver proposal | CloserFans `1d77473`/`8e270a7`, tree `9fc93af`, passes the focused mock boundary. Exact review finds no authenticated one-shot driver or truthful real receipt path, so it authorizes no call. The corrective proposal requires separate review, implementation, and final preflight before at most one real canary. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 separately approved `AGENT-EVAL-12B2` implementation is also complete and its
@@ -2392,13 +2395,152 @@ book/print, push, merge, deployment, package release, or cleanup ran. These
 are omissions, not passes. The master roadmap remains 35 of 41 because this
 mock subtranche does not complete `AGENT-EVAL-12B4`.
 
-The next admissible action is only a second immutable preflight review which
-binds final CloserFans checkpoint/tree, complete relevant file hashes, focused
-test evidence, exact generated arguments and effective permission results,
-selected source/case/prompt/schema bytes, private output path, login category,
-timeout, and a maximum of one invocation. Until that review is checkpointed,
-no real Codex/provider process, credential access, retained real transcript,
-retry, result claim, push, merge, deployment, or Stage B/C work is authorized.
+The next admissible action is only the second immutable preflight review below.
+Until its corrective result is implemented and separately rebound, no real
+Codex/provider process, credential access, retained real transcript, retry,
+result claim, push, merge, deployment, or Stage B/C work is authorized.
+
+### Second exact implementation/preflight review and corrective driver proposal
+
+Review date: 2026-08-11
+
+Review result: **mock implementation accepted; real call not authorized.**
+
+The review binds Emdash plan checkpoint
+`00d56a2257a48af8d53d84d5bc7ea77ad04bdd2e`, CloserFans implementation
+checkpoints `1d77473f662c345d52c060b5af8364ab93265503` and
+`8e270a78da2762148da0c93b0a8b64b74b6d14e9`, final CloserFans tree
+`9fc93afd801b8db2351643249abd0063df580dc6`, and exact host baseline
+`cbf23566fe59d03a9e5f7539a37bfdc0beb473ba`. Both goal worktrees were clean;
+the canary branch was exactly `0 2` relative to that baseline and had no root
+`node_modules`.
+
+The complete relevant final-tree SHA-256 inventory is:
+
+```text
+06a5f28554079aaabe7f7bd63ff70e0542a64ac2a98a47fcf53b5b239a65f338
+  templates/emdash_benchmark/package.json
+e8dbd30a445c9a81f256d15b040548bfff24ffdc81d80fc613d131d07715c9d3
+  templates/emdash_benchmark/getpaidx.template.json
+50ea5f65a847571bf809a37d092b5de7127769c2f4f9dde8f8d02c8de37ed3d8
+  templates/emdash_benchmark/README.md
+0c104f3888c61ce669958c44051ea65a153d9fbaea3c9c37139e6325b310eb84
+  templates/emdash_benchmark/benchmark-run.emdash.ts
+d30d84d74a5f78ee967c403702d188373006b4841ddde24f742831afa930c976
+  templates/emdash_benchmark/scripts/emdash-benchmark.mts
+a0e7ee0431f6196353b7e993fa937d2e0981980c84188352d956fcda5be15366
+  templates/emdash_benchmark/scripts/emdash-canary-contract.mts
+0f6c65353062241d4677acc77bc7f6ee93a53df2400cf019b8adc677d163ac86
+  templates/emdash_benchmark/scripts/emdash-canary.mts
+7666a3659b487fd4633e22b31f3872fa8c262a3ebccc280112f93b40b4305cc8
+  templates/emdash_benchmark/scripts/emdash-canary-evaluate.mts
+117768e52381ede1b23f3bf4c43064e526daa6a25f3d8d4b0c3c879ffd7574ed
+  templates/emdash_benchmark/scripts/emdash-canary-prompt.txt
+f8935691d02f44d7c9b2d0ad1c96559c985c5596ecc210c3c03390a0680a8e06
+  templates/emdash_benchmark/scripts/emdash-canary-output.schema.json
+1f9efb7b416b9ab162ddc98f14c2c4ade0a56ddcf2df5fb519f437031f9fccf8
+  templates/emdash_benchmark/scripts/emdash-canary-package-lock.json
+523357c1109f62bd956d196c9a9280ea5313b5a264c0e080608e9c56b021caac
+  templates/emdash_benchmark/scripts/probe-emdash-canary-permissions.mts
+d2c2107eeefe1fb87a032e5d0f2eb8987c80e2c24109ee643135fc61f94ea9e9
+  templates/emdash_benchmark/scripts/verify-emdash-canary.mts
+0194c5dc3c8ed794eeb25f37250d9e2e6e50d3d21b11c3249ae7b5846b76e006
+  templates/emdash_benchmark/scripts/fixtures/emdash-canary-fake-codex.mjs
+19a859f59d53c3811ae9fb29aea91bbfe5022acf35f1dd91a967cff9f4f276db
+  scripts/verify-emdash-benchmark-template-runtime.ts
+```
+
+The retained lock resolves exact `@hotdocx/emdash@0.3.0` with integrity
+`sha512-ewAhab+tLMY0QZrOXLMSpH19VYkP73iR2iYxYRireYK+21QDOi9Cp/Tq4su+QI+b/NmYnUoZzGoEEQpBGJCxxg==`.
+The preceding focused evidence and template-validation result remain exact.
+A fresh read-only preflight reports `codex-cli 0.147.0`, login category
+`ChatGPT`, and a model cache fetched 2026-08-11 which exposes
+`gpt-5.6-sol`, `comp_hash` `3000`, default low verbosity, and high among its
+supported reasoning levels. No account identifier or credential-file content
+was read or copied, and no model was invoked.
+
+The security and replay implementation passes review, including the two
+measured Linux mount refinements. The call authorization fails for a narrower
+operational reason: the current artifact is intentionally and physically
+mock-only.
+
+1. `emdash-canary.mts` always spawns the tracked fake fixture with
+   `process.execPath`; its CLI requires one enumerated `--fake-scenario` and
+   rejects any real-provider selection.
+2. Its parent environment deliberately points `HOME` to a new empty private
+   directory and passes no `CODEX_HOME`. This proves fake/no-model isolation,
+   but cannot reuse the existing ChatGPT login required by the frozen pilot.
+3. Its receipt correctly hardcodes `providerExecuted=false`,
+   `authCategory=none-fake`, `liveNoModelProbePassed=false`, and fake cost
+   semantics. Reusing or editing that receipt after the fact would be false
+   provenance.
+4. The real receipt contract still needs explicit runner commit/dirty state,
+   current model-cache tuple, at-call probe identity, and corpus/case/profile
+   fingerprints. Existing canonical artifact hashes are strong replay
+   evidence but do not silently substitute for these named provenance fields.
+5. There is consequently no reviewed executable which both performs exactly
+   one authenticated parent call and feeds its output through the already
+   qualified source/event/replay/receipt boundary. An ad hoc shell command or
+   one-line replacement of the fake driver would bypass the immutable-code
+   requirement.
+
+Decision: deny the real Stage A call at this checkpoint. This is not a failed
+mock implementation and does not undo either CloserFans commit. It is the
+required fail-closed outcome of the second preflight.
+
+The smallest corrective tranche is frozen as a behavior-free proposal:
+
+1. Keep `npm run canary:mock` and its CLI physically fake-only. Add one
+   separate local operator entry, not a hosted endpoint, package lifecycle
+   hook, MCP/API action, or default template command.
+2. Make that entry a dependency-free root Node bootstrap. It creates one
+   explicit mode-`0700` run root, copies only the benchmark template,
+   materializes the retained lock, performs one scripts-disabled credential-
+   empty clean install, and then starts an internal TypeScript one-shot driver
+   from that installed authority. The contributor worktree still receives no
+   `node_modules`.
+3. Refactor the shared runner around a closed fake-versus-real driver union.
+   The mock public CLI can construct only the fake member. The operator entry
+   can construct the real member only when passed the exact checkpointed
+   authorization ID and a not-yet-existing run root; no loop, retry, fallback
+   provider, or second spawn is present.
+4. Before the provider spawn, require exact CLI version, exact `Logged in
+   using ChatGPT` category, current cache tuple `gpt-5.6-sol`/`3000` with high
+   support, strict-config parse, and a fresh successful no-model permission/
+   command/network probe built from the same permission function. Failure at
+   any gate leaves `providerExecuted=false` and performs no call.
+5. Give only the Codex parent the existing home/`CODEX_HOME` locator needed
+   for saved authentication; never read or copy `auth.json`. The model's
+   commands retain inheritance `none`, fake home/temp, fixed path/locale, and
+   no credential locator or value. Provider transport remains outside the
+   command-network-denied sandbox.
+6. Derive receipt driver/auth/probe/cost fields from the closed driver result
+   rather than constants. Bind runner commit/tree/clean state, exact model
+   cache fields, generated argument vector after the explicit run path exists,
+   package/corpus/case/profile/source/prompt/schema data, probe/script digests,
+   source/event/command/replay audits, and the permanent contamination/non-
+   graduation labels. Never emit a credential path/value, account identity,
+   raw reasoning, or fabricated dollar cost.
+7. Preserve raw output privately and do not delete it in this tranche. A
+   provider process which starts consumes the sole authorization even if it
+   times out, exits nonzero, violates policy, abstains, or produces a rejected
+   proof. Any retry requires a new immutable review and authorization ID.
+8. Add fake-provider tests of the real-driver orchestration, including every
+   pre-spawn refusal, exactly-one-spawn accounting, dynamic receipt fields,
+   parent-versus-command environment separation, and post-spawn operational
+   failures. These tests must never contact a provider.
+
+The corrective implementation may touch only the benchmark template, one
+dependency-free root operator script, its narrowly owned verifier/registration,
+and these plans. It must not change Emdash bytes/semantics, another template,
+native chat, controller/API/MCP/database, cloud/deployment, Arrowgram, package
+release, or Stage B/C. Focused fake/no-model/template/typecheck/diff/secret/
+ancestry gates remain sufficient; no long aggregate is justified.
+
+This proposal authorizes no code by itself. It requires a separate immutable
+review checkpoint before implementation, followed by a final exact code/
+preflight review before one real call. Human direction may supersede the
+delegated unattended sequence at any point.
 
 ## Validation Policy
 
@@ -2457,8 +2599,9 @@ On continuation:
    `bb16e47`/`0027c66`/`995e497`/`3af518d`/`cbf2356` as complete; treat the
    12B4 audit, exact proposal `286a50d`, immutable corrected review, and local
    mock implementation checkpoints `1d77473`/`8e270a7` with final tree
-   `9fc93af` as non-graduating Stage A preparation only, and require a second
-   exact implementation/preflight review before any real-agent or retention
-   effect; and
+   `9fc93af` as non-graduating Stage A preparation only; treat the second
+   preflight above as a deliberate no-call result and its corrective one-shot
+   driver design as non-authorizing until a separate immutable review,
+   implementation checkpoint, and final exact preflight; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
