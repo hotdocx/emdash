@@ -1,7 +1,8 @@
 # TypeScript/Emdash Public Proof-Agent Benchmark Plan
 
-Status: living plan; post-`STDLIB-8B` audit complete; `AGENT-EVAL-12B1`
-proposal is the sole selected next implementation boundary.
+Status: living plan; post-`STDLIB-8B` audit complete; non-authorizing
+`AGENT-EVAL-12B1` proposal v1 is ready for its rollback-safe checkpoint and
+separate review. No corpus/interchange behavior is authorized yet.
 
 Date: 2026-08-11
 
@@ -211,7 +212,7 @@ the evaluator.
 | Row | State | Exit gate |
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
-| `AGENT-EVAL-12B1` | selected; proposal next | Freeze and separately review an executable corpus/interchange proposal, then implement the representative browser-safe corpus and strict canonical data boundary without a public barrel change until the internal result is green. |
+| `AGENT-EVAL-12B1` | proposal v1 ready for checkpoint and separate review | The executable proposal pins six tracks, ten cases, exact owners/digests, strict canonical APIs, PathOut/task-kind separation, and every non-effect. Implementation remains unauthorized until the checkpoint is separately reviewed. |
 | `AGENT-EVAL-12B2` | gated | Requires qualified 12B1. Add the explicit Node runner, browser/documentation presentation, package capability/export, packed consumers, and one final shared-boundary gate. No publication. |
 | `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
@@ -246,6 +247,69 @@ The proposal may refine case names after executable feasibility probes, but it
 must not reduce the six-track/eight-case representativeness boundary merely
 to make implementation convenient. Any correction requires a new checkpoint
 and separate review.
+
+## `AGENT-EVAL-12B1` Frozen Proposal V1
+
+Date: 2026-08-11
+
+State: non-authorizing proposal candidate complete; its exact checkpoint is
+the commit containing this record. A separate immutable review remains
+mandatory before implementation.
+
+The executable proposal is
+[`lf_proof_agent_public_corpus_proposal.ts`](../src/v3_2/lf_proof_agent_public_corpus_proposal.ts),
+with drift, digest, representativeness, authority, and non-export tests in
+[`v3_2_proof_agent_public_corpus_proposal_tests.ts`](../tests/v3_2_proof_agent_public_corpus_proposal_tests.ts).
+
+It pins thirteen current Emdash owners, exact Emdash/CloserFans/Lean
+checkpoints, exact audited sibling/Lean file digests, and a ten-case matrix
+over all six required tracks. The Lean-shaped case is a manual attributed
+translation of Lean 4 `tests/elab/diamond1.lean` at checkpoint
+`f29e9e488ea8242c875806e4b0564820c2d553b2`, under the recorded Apache-2.0
+license. It is not a Lean parser or claimed syntax-level translation.
+
+The matrix contains two explicit proof-construction cases, two source-level
+management cases, two automation cases, two structure/class cases, one source-
+revision maintenance case, and one Lean-shaped multiple-inheritance case.
+The shared-diamond and ambiguity evidence is not aspirational: the current
+class/inheritance/synthesis owners pass exact checked tests for canonical
+diamond collapse, table hits, genuine equal-priority ambiguity, saturated
+class-call insertion, and independently checked evidence. The proposal still
+requires the corpus implementation to make every selected case inhabit the
+unchanged 12A case/attempt/replay contract.
+
+The proposal and focused test SHA-256 values are, respectively,
+`ecbd67496a99775c13357d9175b623200e20e79346d62b00b8773bc5e7d08a60`
+and
+`b128059af3803eb077fc37b9438e9ef299eb2bf3fab6acb7143f07064ecf71d9`.
+
+Proportional validation:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_agent_public_corpus_proposal_tests.ts
+  passed: 8/8 tests, 1 suite
+
+nearest evaluator, plan/template, simplifier/obvious, maintenance,
+class-inheritance-lowering, and instance-scope command
+  passed: 104/104 tests, 18 suites
+
+./scripts/pnpmw exec tsc --noEmit --pretty false
+  passed
+
+eslint over proposal, proposal test, and test-runner owner
+  passed
+
+git diff --check
+  passed
+```
+
+No browser build, package build, installed consumer, root `check:ts`,
+`check:all`, kernel/Lambdapi, book/print, sibling mutation, registry,
+deployment, model invocation, or long aggregate ran. This behavior-free,
+non-export proposal changes none of those boundaries. Its test is directly
+registered in `tests/main_tests.ts`; exact import plus its direct green run is
+the registration evidence, not a claim that the root aggregate passed.
 
 ## Validation Policy
 
