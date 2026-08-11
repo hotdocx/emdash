@@ -290,7 +290,7 @@ named library presentation.
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
-| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | corrected v4 separately reviewed; implementation-ready | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; review ledger pin is this checkpoint | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—plus one derived complete consumer-parent support at **0/1/0/5**. Cold v3 proves its post-`CompTarget` pattern is still shadowed by transparent `Rep_catd` descendants. Reviewed v4 replaces it one-for-one at the original selected-component consumer before descendant delta; it adds no mathematical equation, proof rule, injectivity, unification, Core, or generic-engine behavior. |
+| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | complete; final-proportional-green | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; semantic checkpoint awaiting its ledger pin | The exact root-only **0/1/0/5** transfer compiles five transparent definitions plus one derived complete consumer-parent support. Eight TypeScript observations, two typed consumers, eight negatives, authority closure, and a separately gated eight-assertion Lambdapi oracle are green. No mathematical equation, local proof rule, injectivity, unification, Core, generic-engine, public, or Lambdapi-source behavior is added. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
@@ -3166,6 +3166,64 @@ Core, adding proof authority, public presentation, active Lambdapi edits,
 integration, or release. It is checkpointed at `fc9a323`, with SHA-256
 `9d37f7fd66c2fb61ce9ebf1dc1c7f5b83ba7558e0457f78252eb8dacb14a48aa`.
 The unchanged 1,923-test aggregate from `e560551` remains carried forward.
+
+### `PATHOUT-LIBRARY-TRANSITIVITY-1E` completion evidence
+
+The root-only transfer
+[`src/v3_2/pathout_transitivity_transfer.ts`](../src/v3_2/pathout_transitivity_transfer.ts)
+implements reviewed v4 exactly. Five body-bearing declarations compile first;
+one later local runtime fragment contains only
+`pathout.transitivity.fixed-source-selected-component-consumer-parent-fusion`.
+Its source owner is `functor-object`, its four variables are `Z`, `x`, `y`,
+and `p`, and its subject is checked after all five definitions. The runtime
+fragment replaces v3 one-for-one and remains exactly **0/1/0/5**.
+
+The focused suite
+[`tests/v3_2_pathout_transitivity_transfer_tests.ts`](../tests/v3_2_pathout_transitivity_transfer_tests.ts)
+records the following cold result:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_pathout_transitivity_transfer_tests.ts
+  9 tests / 1 suite
+  8 passed / 0 failed / 1 ordinary oracle skip
+  five definitions plus one subject-checked rule: 195346 ms
+  complete suite duration: 212272 ms
+```
+
+The exact consumer-parent redex selects its local rule ID. Three initial
+runtime observations pass; the Sigma/Pi category presentation intentionally
+remains non-equal at runtime and is solved by rechecked inherited provider
+`stress.sigma-pi.uncurrying` in the fixture's descendant environment. The
+canonical predecessor Core name closes the `path_ind_sec` observation. The
+remaining four observations reach stable representable precomposition, both
+named library consumers typecheck, all eight wrong-base or wrong-endpoint
+terms are rejected, and ordinary safe-library plus five public/browser
+barrels stay closed.
+
+The one explicitly selected conformance test runs separately:
+
+```text
+EMDASH_RUN_LAMBDAPI_PATHOUT_TRANSITIVITY_PROBES=1 \
+node --require ts-node/register --test \
+  --test-name-pattern='matches all eight bounded active-Lambdapi assertions' \
+  tests/v3_2_pathout_transitivity_transfer_tests.ts
+  1 test: passed
+  8 active-Lambdapi assertions: accepted
+  assertion-process timeout: 20000 ms
+  warnings: disabled
+  test duration: 2469 ms
+```
+
+Root typecheck and focused lint pass. `git diff --check` is clean, the generic
+transfer compiler diff is empty, and the transfer remains absent from all
+public barrels. No active Lambdapi source changes. The 1,923-test full
+TypeScript checkpoint at `e560551` is carried forward under the standing
+direction to avoid long aggregates unless progress would otherwise be
+blocked. The semantic checkpoint introducing this completed transfer must be
+pinned in the next ledger-only update. The next dependency-ready row is
+root/public presentation `PATHOUT-LIBRARY-PRESENTATION-1F`, not another
+semantic equation.
 
 ## Required Evidence For Implementation
 
