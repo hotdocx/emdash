@@ -1431,6 +1431,84 @@ entry change, provider/model execution, run-retention policy, CloserFans
 before verified npm bytes, API/MCP/controller, Arrowgram, Lambdapi,
 mathematics, book/print, history rewrite, force, or cleanup.
 
+## `AGENT-EVAL-12B3-R2` Immutable Dispatch Recovery Review
+
+Date: 2026-08-11
+
+State: approved under the user's delegated unattended authority, with later
+human supersession. This review authorizes only exact proposal checkpoint
+`cda361e` and must itself be checkpointed before implementation.
+
+Immutable proposal evidence:
+
+- dedicated proposal-plan SHA-256:
+  `a69ed4403b6f88231e1e5f2ec3e1742c3dcfb7ee65576f3fa4d4f350ebbd0013`;
+- governing proposal-plan SHA-256:
+  `6efd912cd1c61834b5e3b031e985a02b323c70e47bc84557e48f28c538716898`;
+- exact corrected workflow checkpoint and public main: `f965d03`;
+- exact immutable package source/tag peel: `995e497`;
+- exact first and second failed runs: `31509330799` and `31510177054`; and
+- exact retained Release database ID: `368683536`.
+
+The review accepts the one-time dispatch for nine reasons:
+
+1. **Second-failure isolation.** Run `31510177054` visibly used the old tagged
+   checkout step and failed in the same internal cleanup. All Node, package,
+   artifact, environment, OIDC, and npm steps were skipped; registry `0.3.0`
+   is still absent. There is no partial package to supersede.
+2. **Documented event semantics.** GitHub states that each run uses the
+   workflow version at its associated SHA/ref; release events use the release
+   tag, while `workflow_dispatch` uses the selected branch/tag and requires
+   the workflow on the default branch. This exactly explains both the failed
+   replay and why corrected `main` is the necessary recovery authority.
+3. **Trusted-publisher fit.** npm documents manual workflows as supported and
+   warns that validation follows the calling workflow's filename. Dispatching
+   the same `.github/workflows/npm-publish.yml`, with the same repository,
+   `npm-release` environment, GitHub-hosted runner, and sole publish-job OIDC
+   permission preserves the configured identity rather than routing around it.
+4. **Finite manual authority.** The input is a required choice with exactly
+   one value, `emdash-v0.3.0`; the job condition admits no other manually
+   supplied tag or package. Repository write access, exact source checks, and
+   the protected environment remain independent gates.
+5. **Source/workflow separation.** The dispatch run's `GITHUB_SHA` records the
+   corrected workflow-authority commit. The build itself fetches and checks
+   out immutable package source `995e497`, proves tag peel and main ancestry,
+   and packs only those bytes. Recording both SHAs is more accurate than
+   pretending a workflow absent from the package tag executed there.
+6. **Artifact continuity.** All package checks, deterministic pack, uploaded
+   artifact, digest handoff, no-republish guard, npm version/tool pin, and
+   provenance publication remain unchanged. Local candidate SHA-256
+   `49c4f2ca7a12f1bc0f7721044015c1df3bee17e849bc593b99a9161206178541`
+   remains the independent byte target.
+7. **No Release/tag workaround.** The review forbids another draft/publish
+   transition, Release deletion/recreation, tag movement, alternate version,
+   and local/token publication. Both failed runs remain durable evidence.
+8. **Mandatory hardening.** Registry success does not complete R2 by itself.
+   The temporary dispatch input and dual event resolution must be removed,
+   proportionally rechecked, checkpointed, integrated, and verified on public
+   `main` before CloserFans begins. Future tags then contain the corrected
+   permanent release-only workflow.
+9. **Proportional validation and stop rule.** Focused policy, workspace,
+   typecheck, lint, package build/preflight, YAML, no-secret, exact-diff, and
+   hosted-run evidence cover this boundary. Long/kernel/book/browser/packed
+   aggregates remain irrelevant. Any unexpected dispatch, build, approval,
+   OIDC, registry, provenance, or byte result stops the sequence forward.
+
+Implementation authority is limited to the temporary exact-choice dispatch,
+its focused policy test, and the two living plans; then to its mandatory
+post-publication removal. It authorizes one non-force integration, one exact
+manual dispatch, and approval of only that run's exact environment deployment
+after the build passes. It does not authorize any other manual publish,
+Release/tag change, secret/token, semantic/package-entry change, provider/model
+execution, CloserFans before public verification and hardening, API/MCP,
+controller, Arrowgram, Lambdapi, mathematics, book/print, 12B4, force, rewrite,
+or cleanup.
+
+Review validation is plan-only: exact proposal blob hashes/paths, official
+primary documentation, both job logs, remote/main/tag/Release/npm identities,
+clean worktree, conflict-marker scan, ancestry, and diff hygiene. No behavior
+or aggregate gate is claimed for the review document.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
