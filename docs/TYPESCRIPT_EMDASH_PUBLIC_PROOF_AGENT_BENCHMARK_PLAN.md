@@ -7,7 +7,10 @@ is complete and proportionally qualified at exact checkpoint `d0d3764`. A
 non-authorizing `AGENT-EVAL-12B2` public-surface proposal is complete at exact
 checkpoint `ba49705` and is separately approved by the immutable review in the
 exact checkpoint `8c9652a`. The bounded implementation is complete and
-proportionally qualified at exact semantic checkpoint `93c9804`.
+proportionally qualified at exact semantic checkpoint `93c9804`. The
+read-only `AGENT-EVAL-12B3` package-release and CloserFans host audit is now
+frozen in the proposal contract below; implementation remains gated on a
+separate immutable review.
 
 Date: 2026-08-11
 
@@ -54,9 +57,10 @@ enforcement, publication, and hosted workspace operation remain outer layers.
    measured corpus supports.
 
 The first two slices are now implemented without an npm release, sibling edit,
-model run, or PathOut task conversion. After the exact 12B2 checkpoint is
-pinned, the next bounded action is a non-authorizing 12B3 version/release and
-fresh CloserFans edit-time audit—not publication itself.
+model run, or PathOut task conversion. The exact 12B2 checkpoint is pinned,
+and the next bounded action has therefore been limited to the non-authorizing
+12B3 version/release and fresh CloserFans edit-time audit below—not
+publication itself.
 
 ## Post-`STDLIB-8B` Readiness Findings
 
@@ -221,7 +225,7 @@ the evaluator.
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
-| `AGENT-EVAL-12B3` | next proposal/audit selected; implementation gated | Requires qualified 12B2 checkpoint `93c9804` plus a separately frozen package version/release contract and fresh CloserFans edit-time audit. Publish exact bytes only after that review, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
+| `AGENT-EVAL-12B3` | proposal/audit frozen; implementation review-gated | The commit containing the contract below freezes exact `0.3.0` release, workflow-maintenance, Pages-side-effect, and new ordinary-Node `emdash_benchmark` workspace boundaries. Its exact proposal checkpoint must be pinned and separately reviewed before any version, workflow, Git, registry, Release, deployment, or sibling mutation. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
@@ -701,6 +705,222 @@ fresh CloserFans consumer audit after the exact 12B2 checkpoint is pinned. No
 version change, package publication, GitHub release, push/merge/tag,
 CloserFans/Arrowgram edit, model run, or hosted effect is authorized by this
 record.
+
+## `AGENT-EVAL-12B3` Read-Only Audit And Frozen Release/Host Contract
+
+Date: 2026-08-11
+
+State: non-authorizing proposal. This audit changes only the two living plans.
+Its exact proposal checkpoint must be pinned by an immediate ledger-only
+follow-up and then approved by a separate immutable review before any package,
+workflow, Git-ref, registry, GitHub Release, Pages, or CloserFans mutation.
+
+### Fresh Release And Host Evidence
+
+The audit re-read every Emdash worktree, branch/index/worktree state, exact
+ancestry, current release owners, public registry identity, previous hosted
+run, and the current CloserFans SOP/template owners:
+
+- every Emdash worktree is clean. The proof-assistant branch is at ledger
+  checkpoint `151c518`, descends from exact 12B2 semantic checkpoint
+  `93c9804`, and descends from public `main` `e35d5ae` by 134 commits with no
+  commits on the other side;
+- remote `main` is exact `e35d5ae`. Annotated `emdash-v0.2.0` peels to exact
+  package checkpoint `ab513f7`; public npm `latest` is `0.2.0` and the only
+  public versions are `0.1.0` and `0.2.0`;
+- the public `0.2.0` manifest has only `.`, `./authoring`, `./workspace`, and
+  `./package.json`. Exact `0.3.0` returns `E404`, so the completed
+  `./benchmark` entry is not yet installable from the registry;
+- `package_core.ts`, `package_authoring.ts`, and `package_workspace.ts` are
+  byte-identical to `ab513f7`, with SHA-256 values
+  `34e42cbb1fe6f3bf210e785bafda63b9ce9208da5dd4457e8aafd6fb6f7398a8`,
+  `b4324e7ae3ad9d8db2ec737c050e1444565b265b099832ac2fe39f5f701fe9b4`,
+  and `2d00f937d2484e7fc6c9d749faed53be7141556c9cf64e61b8f619d723daa33e`.
+  `package_benchmark.ts` is the sole new entry owner. This is an additive
+  pre-1.0 public feature, so the selected version is `0.3.0`, not a patch or
+  breaking-major release;
+- the token-free two-job OIDC workflow already published exact `0.2.0` in
+  successful run `31414385484`. Its build and publish jobs verified the tag,
+  ancestry, package, tarball handoff, and provenance. No workflow secret or
+  npm token is required. The owner's separately retained bypass-2FA token
+  policy remains allowed but is not the selected publication mechanism;
+- the prior run log reproduces two maintenance findings rather than hiding
+  them: old upload/download artifact actions were forced from Node 20 to Node
+  24, and checkout cleanup traversed tracked gitlink
+  `.hott-book-review-20260720` without a `.gitmodules` URL and reported Git
+  exit 128 after every owning step had succeeded;
+- official action releases now identify checkout `v7.0.1` at
+  `3d3c42e5aac5ba805825da76410c181273ba90b1`, upload-artifact `v7.0.1` at
+  `043fb46d1a93c77aae656e7c1c64a875d1fc6a0a`, download-artifact `v8.0.1` at
+  `3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c`, and setup-node `v7.0.0` at the
+  already pinned `820762786026740c76f36085b0efc47a31fe5020`;
+- current CloserFans local `master` is exact `5c0d0c1`, has no configured Git
+  remote, and retains only the unrelated untracked
+  `reports/GENERAL_REPOSITORY_QUALITY_REVIEW_PLAN_2026-08-09.md`. That report
+  remains uninspected by this work and must stay untracked and untouched;
+- CloserFans already auto-discovers workspace templates, installs exact
+  template dependencies with ordinary npm, and runs the default controller on
+  Node 20. Existing `emdash_ts` remains the exact `0.1.0` complete/open proof
+  starter, while `emdash_goal_graph` remains the exact `0.2.0` derived
+  read-only visualization. Neither should be silently repurposed; and
+- one explicit current-host measurement of the repository benchmark catalog
+  completed in 3.67 seconds with maximum RSS 561,820 KiB and emitted a
+  1,172-byte compact ten-case/six-track summary. This is capacity evidence for
+  an explicit command, not a latency or memory service-level claim.
+
+The audit therefore accepts one exact release followed by one new additive
+ordinary-Node workspace. It rejects a package bin, embedded provider, hidden
+proof server, new controller image/pool, GetPaidX API/MCP extension,
+repurposing either existing Emdash template, and any Arrowgram edit.
+
+### Frozen `0.3.0` Release Contract
+
+The release candidate may change only the package version and its exact
+version assertions, the existing token-free workflow/action pins, and living
+release records. It must not change the already-qualified benchmark/evaluator
+semantics or any existing package-entry source.
+
+1. Change `packages/emdash/package.json` from `0.2.0` to exact `0.3.0` and
+   update only the matching active assertions in `scripts/check-workspace.mjs`,
+   `packages/emdash/scripts/release-preflight-tests.mjs`, and
+   `packages/emdash/scripts/verify-packed-install.mjs`. Historical `0.1.0` and
+   `0.2.0` evidence remains historical.
+2. Preserve the exact five-key export order `.`, `./authoring`,
+   `./workspace`, `./benchmark`, `./package.json`; no `bin`, install hook,
+   runtime dependency, peer dependency, optional dependency, or package
+   script may appear.
+3. Keep the two-job release-only OIDC design. Update only immutable action
+   pins to checkout `3d3c42e5aac5ba805825da76410c181273ba90b1`,
+   upload-artifact `043fb46d1a93c77aae656e7c1c64a875d1fc6a0a`, and
+   download-artifact `3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c`; retain setup-node
+   `820762786026740c76f36085b0efc47a31fe5020`. Set checkout
+   `persist-credentials: false`: this public read-only release needs no
+   persisted GitHub token and therefore avoids leaving cleanup dependent on
+   the unrelated malformed historical gitlink. Do not add a secret or
+   `NODE_AUTH_TOKEN`.
+4. Qualify one exact local `hotdocx-emdash-0.3.0.tgz` through workspace,
+   typecheck, focused release-policy lint/tests, build, preflight, packed
+   ESM/CommonJS/strict-NodeNext/browser consumers, exact inventory, and
+   digest/entry/size recording. Recheck that the three predecessor entry
+   sources remain byte-identical. Do not rerun `check:ts`, root-test,
+   `check:all`, Lambdapi, book, or print merely for reassurance.
+5. Only after a clean candidate checkpoint and exact staged/ancestry review,
+   non-force-push the goal branch, fast-forward the dedicated local `main`
+   worktree, and non-force-push `main`. Because the accumulated branch changes
+   touch `emdash-template/**` and `src/v3_2/**`, the existing Pages workflow
+   will run; its exact head, build, deployment, and public benchmark panel are
+   part of this release gate rather than an incidental unverified effect.
+6. Create annotated tag `emdash-v0.3.0` only on the exact candidate already in
+   public `main`, push that new tag once, and publish one non-draft,
+   non-prerelease GitHub Release titled `@hotdocx/emdash 0.3.0`. The frozen
+   release body is:
+
+   ```text
+   Publish the isolated browser-safe proof-agent benchmark surface.
+
+   - adds @hotdocx/emdash/benchmark with strict canonical case, run, and
+     report interchange;
+   - provides a fixed six-track, ten-case corpus with nine freshly accepted
+     owner baselines and one honest ambiguity abstention;
+   - retains the existing Core, authoring, and workspace entries and the
+     package's no-bin, no-install-hook, and no-runtime-dependency policy; and
+   - invokes no provider, model, network, filesystem adapter, or proof server.
+
+   Reference attempts are reproducible baselines, not proof authority,
+   committed source, model-performance measurements, or a leaderboard.
+   ```
+
+7. Require exactly one release-triggered npm workflow for that tag. Verify
+   both jobs, environment approval, exact uploaded artifact/head/digest, OIDC
+   publication, npm identity/dist-tag/integrity, attestations and SLSA subject,
+   byte identity among local/GitHub/registry tarballs, exact fresh-installed
+   exports, and successful installed consumers. Never locally publish with the
+   ignored token merely to bypass a failed OIDC boundary.
+8. If integration, Pages, build, approval, publication, or verification fails,
+   retain the exact evidence and correct forward. Do not move/reuse a tag,
+   republish an immutable version, force-push, rewrite history, or delete the
+   release branch/worktree. If npm publication has completed, `0.3.0` is
+   immutable even if a later host step fails.
+
+### Frozen Additive CloserFans Workspace Contract
+
+Only after public `@hotdocx/emdash@0.3.0` and its exact installed benchmark
+entry are verified may CloserFans change. Re-read its status immediately
+before editing. If tracked `master` no longer equals exact `5c0d0c1`, stop and
+revise this baseline rather than absorbing concurrent work. Otherwise create
+branch `goal/emdash-proof-benchmark-v1` from `5c0d0c1`, preserving the
+unrelated untracked report.
+
+Create one new workspace-project template at `templates/emdash_benchmark/`
+with manifest ID `emdash_benchmark` and exact public
+`@hotdocx/emdash@0.3.0`. It stays on the default Node controller and owns only:
+
+- `benchmark-run.emdash.ts`, the compact source of authority for a complete
+  ten-case run. Its initial deterministic policy explicitly abstains on every
+  case. An AI agent edits ordinary TypeScript decisions, retrieved premises,
+  reported usage, and proof-plan patches; no serialized artifact or mutable
+  server cursor is authoritative;
+- `scripts/emdash-benchmark.mts`, a stateless adapter with `catalog`, `case`,
+  `run`, `evaluate`, `evaluate-file`, `reference`, and `verify` commands.
+  Every command freshly reconstructs the fixed package corpus. `run` emits the
+  canonical current source run; `evaluate` freshly scores it;
+  `evaluate-file` reads exactly one explicit canonical run path, strictly
+  parses it, and freshly scores it; `reference` presents the package-owned
+  nine/one baseline. It never scans directories, writes files, invokes a
+  provider/model, accesses a network, retains session state, or pretends to
+  enforce provider-reported resource limits;
+- exact package/TypeScript configuration, source-ownership README,
+  `.gitignore`, and a lightweight static preview which explains the
+  source/edit/evaluate workflow without loading or evaluating the corpus; and
+- no lockfile, tracked generated run/report, dependency cache, or build output.
+  Community run retention and provider execution remain 12B4 decisions.
+
+The repository-owned focused verifier belongs at
+`scripts/verify-emdash-benchmark-template-runtime.ts`, with one root script
+`templates:verify:emdash-benchmark`. It must copy the template to a disposable
+directory, install only from the public registry, assert exact `0.3.0`,
+typecheck, exercise all commands, prove the initial ten abstentions and the
+separate nine/one reference baseline, round-trip canonical run/report bytes,
+reject stale/tampered or unknown-case artifacts, confirm expected exit codes,
+probe the inert preview, and verify the manifest selects no special pool.
+`npm run templates:validate`, targeted lint, and root typecheck are the nearest
+host gates. Full Jest/Playwright/build, controller/Docker/Azure, database,
+MCP/API, Arrowgram, and repository-wide checks remain omitted unless a focused
+failure proves one is necessary.
+
+The bounded CloserFans checkpoint may include only the new template/verifier,
+one root script registration, and concise README/AGENTS/current-runtime
+documentation. If the candidate is clean and green and local `master` remains
+its exact ancestor, fast-forward local `master` only. CloserFans has no remote,
+so no sibling push or deployment is possible or claimed. The existing
+`emdash_ts` and `emdash_goal_graph` versions and behaviors remain unchanged.
+
+### Review And Success Boundary
+
+Separate immutable review must confirm all of the following before
+implementation authority exists:
+
+1. exact 12B2 checkpoint `93c9804` and ledger `151c518` remain ancestors;
+2. `0.3.0` is additive and the three existing package entry owners are
+   byte-identical to `ab513f7`;
+3. release action upgrades and `persist-credentials: false` reduce workflow
+   authority without changing exact artifact handoff or OIDC publication;
+4. Pages deployment is explicit, head-pinned, and verified;
+5. the new template imports public registry bytes only and starts from honest
+   all-abstention rather than disguising owner baselines as agent results;
+6. provider invocation, model credentials, resource enforcement, run
+   retention, and measured performance remain in 12B4;
+7. no Emdash semantics, Core/checker/rule, package bin/dependency, CloserFans
+   API/MCP/controller, Arrowgram, Lambdapi, mathematical, book, or print owner
+   changes; and
+8. exact-diff, ancestry, no-secret, clean-worktree, focused validation, and
+   rollback evidence are synchronized before each checkpoint or external
+   mutation.
+
+This audit itself requires only exact source/status/external-identity review,
+Markdown heading/link hygiene, and `git diff --check`. It runs no TypeScript,
+package, browser, kernel, book, sibling, or aggregate behavior check because
+it changes no behavior. The omitted checks are not passes.
 
 ## Validation Policy
 
