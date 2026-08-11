@@ -2730,6 +2730,61 @@ review. Roadmap accounting remains 35/41. It does not itself authorize the
 exact ID or a provider call; a separate immutable review of these committed
 bytes and current at-call no-model state remains mandatory.
 
+### Final-review correction checkpoint
+
+The first final code audit did not authorize a call. It found two narrow
+requirements that the safe implementation had not yet made reviewable enough:
+recognized pre-spawn gate failures returned only an exit diagnostic rather
+than a privacy-minimized receipt, and the observed process-spawn-error branch
+had no fake executable test. The existing exclusive lease and no-call behavior
+were already correct; this was an evidence/diagnostic correction, not a trust-
+boundary widening.
+
+CloserFans correction
+`4faef7832ae7ac2131fe1c12e50831084835f60f`, exact parent
+`1abdfd8ee3711a3993fa0db573672ababee7e6d3`, and exact tree
+`a5e72ddc8cc62f82087a444c7ec96edd46275d81` closes both findings. Exact updated
+file hashes are:
+
+```text
+6761f9b22d0c4a41dfd08927e61ca824ddeaa740980fa52f89fce93a759968dd  templates/emdash_benchmark/scripts/emdash-canary-real.mts
+0c28e98abbefd9e5160522680322c53cdb6f72d782d9af8fb7bbb6c1d542ab9f  templates/emdash_benchmark/scripts/emdash-canary.mts
+47b8fa608ca98e9ec335ac8b63072a7ad20e49660eca095abf0f8f5884f8e32e  templates/emdash_benchmark/scripts/verify-emdash-canary.mts
+```
+
+Recognized CLI-version, login-category, model-cache, permission-probe, selected-
+case, and authorization refusals now create a mode-`0600` minimized receipt in
+an explicit mode-`0700` unused run root. It records only the normalized gate,
+hashed authorization, exact non-secret source identity, expected public tuple,
+`providerExecuted=false`, `spawned=false`, and unconditional contamination/
+non-graduation/non-proof labels. Invalid authorization grammar and an already
+existing caller path still fail before a run is accepted. Authorization
+collision remains atomic and produces no second spawn.
+
+The focused fake suite now also removes its direct fake executable after all
+no-model preflights but before the leased spawn. The resulting canonical v2
+receipt records `process-spawn-failure`, `spawned=false`, normalized
+`spawnError`, and `providerExecuted=false`, while the lease remains consumed.
+A separate real-member fake policy violation records a successful process
+spawn and `providerExecuted=true`. Together with the retained nonzero,
+timeout/overflow, malformed-stream, scope, replay, abstention, rejection, and
+accepted paths, the receipt outcome partition is now directly covered.
+
+The exact correction checkpoint passes the focused canary/clean-install/
+typecheck suite and the live no-model permission/filesystem/command/network
+probe. Formatting, whitespace, credential-shape, clean-status, no-root-or-
+template-`node_modules`, and no-real-authorization-directory checks are green.
+Its committed 19-entry template snapshot manifest is
+`445f79b056fb29d3caee56049ae196e01acc4efc41c49bea9cca8b1501e8efce`.
+Public adapter/CLI behavior and the root operator are unchanged from their
+immediately preceding focused-green checkpoint. No model/provider, real lease
+or transcript, push, merge, deployment, release, aggregate, or unrelated
+surface occurred.
+
+This correction remains implementation evidence only. A new immutable review
+must bind exact `4faef78` bytes and current no-model state before selecting the
+sole run root and authorizing the committed non-secret ID.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -2791,8 +2846,9 @@ On continuation:
    preflight above as a deliberate no-call result and its corrective one-shot
    driver design as approved only for local code and fake/no-model tests under
    the immutable review above; treat corrective CloserFans checkpoint
-   `1abdfd8`, tree `5912793`, as the focused-green implementation of that
-   approval; and require a new immutable exact code/preflight checkpoint before
-   any real-agent or retention effect; and
+   `1abdfd8`, tree `5912793`, and final-review correction `4faef78`, tree
+   `a5e72dd`, as the focused-green implementation of that approval; and require
+   a new immutable exact code/preflight checkpoint before any real-agent or
+   retention effect; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
