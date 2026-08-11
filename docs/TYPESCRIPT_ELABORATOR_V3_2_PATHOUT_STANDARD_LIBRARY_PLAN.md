@@ -122,7 +122,9 @@ approved at review checkpoint `31f23db` under delegated unattended authority
 with later human supersession. Cold v2 replay then showed that the one support
 rule is shadowed by `CompTarget_catd` delta. Corrected v3 retains **0/1/0/5**
 while replacing that rule one-for-one with its measured stable post-delta
-parent; v3 remains non-authorizing pending a separate review.
+parent. Proposal checkpoint `fe1a9b7` is separately reviewed and approved
+under delegated unattended authority with later human supersession; only that
+exact v3 implementation may now proceed.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -2999,10 +3001,48 @@ node --require ts-node/register --test \
 ```
 
 V3 installs no semantics and remains outside all public barrels. Its artifact,
-tests, and synchronized plans form a proposal checkpoint whose exact commit
-and digest must be pinned by a separate immutable review before the
-implementation is corrected or the cold replay is repeated. No aggregate is
-rerun.
+tests, and synchronized plans are checkpointed at `fe1a9b7`, with SHA-256
+`0d7448ae68d9aa6ae3bf91b9010a676f8ca3c9101976e1de2c88816a94e68dd9`.
+
+The separate immutable review is
+[`src/v3_2/pathout_transitivity_review_v3.ts`](../src/v3_2/pathout_transitivity_review_v3.ts),
+with focused tests in
+[`tests/v3_2_pathout_transitivity_review_v3_tests.ts`](../tests/v3_2/pathout_transitivity_review_v3_tests.ts).
+Under the standing unattended delegation, with later human supersession, it
+approves only proposal checkpoint `fe1a9b7` and that digest. Its authorization
+requires one stable post-`CompTarget`-delta complete-parent support, replacing
+the v2 rule rather than coexisting with it; the inherited proof helper may
+accept an explicit descendant environment and still adds no local proof rule.
+
+Separate-review evidence on 2026-08-11 is:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_pathout_transitivity_proposal_tests.ts \
+  tests/v3_2_pathout_transitivity_review_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v2_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v2_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v3_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v3_tests.ts
+  41 tests / 6 suites: 41 passed, 0 failed
+
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_transitivity_proposal_v3.ts \
+  src/v3_2/pathout_transitivity_review_v3.ts \
+  tests/v3_2_pathout_transitivity_proposal_v3_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v3_tests.ts
+  passed
+```
+
+The review denies retaining v2, adding a second local rule, importing broad
+runtime behavior, changing a generic engine or Core, runtime Sigma/Pi category
+collapse, new proof authority, public presentation, active Lambdapi edits,
+integration, and release. Its synchronized review checkpoint and digest are
+pinned by the next ledger-only checkpoint. The unchanged aggregate remains
+carried forward; no aggregate is rerun.
 
 ## Required Evidence For Implementation
 
