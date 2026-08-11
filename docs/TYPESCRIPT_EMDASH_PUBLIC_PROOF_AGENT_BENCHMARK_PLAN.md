@@ -3232,6 +3232,52 @@ an operator/provider/model call, lease, transcript, retry, push, merge,
 deployment, release, Stage B/C, or performance/proof claim. Accounting remains
 35/41.
 
+##### `AGENT-EVAL-12B4-R2` consumed-ID rotation proposal
+
+The first behavior-free review against clean `a6b5e61` did not authorize a
+call. Its closed eight-key parent environment is otherwise exact: version is
+`codex-cli 0.147.0` on stdout with empty stderr; login is exactly `Logged in
+using ChatGPT` on stderr with empty stdout; the selected cache entry was
+fetched at `2026-08-11T20:00:03.264061398Z` and remains
+`gpt-5.6-sol`/`comp_hash=3000`/default-low/high-supported; and the freshly
+repeated live no-model permission/command/network probe passes. No credential
+content, model, provider, lease, or new run root was accessed or created.
+
+The review instead found an intentional closed-world incompatibility. Both
+`scripts/run-emdash-stage-a-real.mjs` and
+`emdash-canary-contract.mts` still accept only the now-consumed
+`emdash-stage-a-native-exact-local-premise-2026-08-11-v1`. Reusing that ID is
+forbidden even though its first invocation stopped before the provider lease;
+passing a new ID would correctly be rejected by both guards. Final review
+cannot select new coordinates until the committed allowlist is rotated.
+
+The minimal R2 proposal is:
+
+1. replace the exact v1 literal by
+   `emdash-stage-a-native-exact-local-premise-2026-08-11-v2` in only the
+   dependency-free root operator and the internal contract;
+2. extend only `scripts/verify-emdash-benchmark-template-runtime.ts` to assert
+   that both committed sources contain the same exact v2 literal and no longer
+   contain the retired v1 literal;
+3. retain the one-value grammar, exclusive non-deletable lease, unused-absolute-
+   root requirement, no-loop/no-retry behavior, fake-only public commands,
+   committed-byte bootstrap, closed environments, all preflight gates, private
+   evidence, and every contamination/non-graduation/non-proof label; and
+4. run the focused outer canary, live no-model permission probe, snapshot/
+   static/typecheck coverage, formatting/diff/credential-shape, exact scope,
+   ancestry, no-dependency-tree, no-old/new-lease, and preserved-v1-receipt
+   checks before checkpointing.
+
+The old ID remains durable historical evidence and becomes unrepresentable at
+both execution guards; its preserved run/receipt is not removed or rewritten.
+The new ID is a candidate code allowlist value, not an authorization. This
+proposal changes plans only and requires separate immutable review before the
+three local files are edited. A focused-green implementation checkpoint and
+another fresh behavior-free review must bind an absent absolute run root and
+all at-call state before at most one invocation. No call, retry, provider/
+model, push, merge, deployment, release, or claim is authorized. Accounting
+remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
