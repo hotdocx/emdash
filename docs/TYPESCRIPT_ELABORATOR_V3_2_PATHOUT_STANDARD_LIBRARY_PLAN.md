@@ -127,7 +127,9 @@ typed consumers, eight negatives, inherited proof reuse, and eight bounded
 active-Lambdapi assertions are green. Presentation row `1F` is now active. Its
 behavior-free proposal freezes a finite expression vocabulary, an explicit
 Node semantic-check route, a static honest browser view, and a short owned-book
-bridge; it awaits a separate immutable review before implementation.
+bridge. Proposal checkpoint `6ad0812` is separately approved under delegated
+unattended authority with later human supersession; only that exact four-stage
+presentation implementation may now proceed.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -294,7 +296,7 @@ named library presentation.
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | complete; final-proportional-green | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; semantic checkpoint `3b113ad` | The exact root-only **0/1/0/5** transfer compiles five transparent definitions plus one derived complete consumer-parent support. Eight TypeScript observations, two typed consumers, eight negatives, authority closure, and a separately gated eight-assertion Lambdapi oracle are green. No mathematical equation, local proof rule, injectivity, unification, Core, generic-engine, public, or Lambdapi-source behavior is added. |
-| `PATHOUT-LIBRARY-PRESENTATION-1F` | behavior-free proposal v1 focused-green; awaiting separate immutable review | completed direct typed slices through `10432ba` | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
+| `PATHOUT-LIBRARY-PRESENTATION-1F` | proposal v1 separately reviewed; implementation-ready | completed direct typed slices through `10432ba`; proposal checkpoint `6ad0812`; review digest below | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
 ### `PATHOUT-TRUST-BOUNDARY-0A` exact audit contract
@@ -3242,8 +3244,11 @@ The behavior-free proposal is
 [`src/v3_2/pathout_presentation_proposal.ts`](../src/v3_2/pathout_presentation_proposal.ts),
 with focused drift tests in
 [`tests/v3_2_pathout_presentation_proposal_tests.ts`](../tests/v3_2_pathout_presentation_proposal_tests.ts).
-It is non-self-authorizing and awaits a separately checkpointed immutable
-review.
+It is non-self-authorizing. Proposal checkpoint `6ad0812` is now approved by
+the separate immutable review
+[`src/v3_2/pathout_presentation_review.ts`](../src/v3_2/pathout_presentation_review.ts),
+with focused tests in
+[`tests/v3_2_pathout_presentation_review_tests.ts`](../tests/v3_2_pathout_presentation_review_tests.ts).
 
 ### Measured presentation boundary
 
@@ -3336,13 +3341,22 @@ absent from contributor, npm, workspace, browser, and reviewer barrels;
 unchanged `e560551` aggregate is historical evidence only and is not rerun for
 the behavior-free proposal.
 
-Implementation remains unauthorized until a separate immutable review pins
-the proposal checkpoint and digest. Such a review may authorize only the four
-stages above. It must continue to deny a generic/declaration parser, widening
-the categorical parser, browser-side semantic compilation, a static report
-masquerading as a fresh check, any Core/checker/evaluator/rule/equation change,
-active Lambdapi edits, public package/release changes, generated-book edits,
-integration, deployment, and cleanup.
+Under the user's standing unattended delegation, with later human
+supersession, the separate review approves only proposal checkpoint `6ad0812`
+and SHA-256
+`b7b85c34af390a5b1489b0fdd0d015cd2a4ca554c38533bf4459b7ec26029be3`.
+Its own SHA-256 is
+`b28bee76da0aa47ad66a8739ece456973ac515f58fae5b94dc29b5c73f5ab510`.
+Fourteen combined proposal/review tests, root typecheck, focused ESLint,
+non-export checks, and diff hygiene pass; the long aggregate remains omitted
+for behavior-free review data.
+
+Implementation is now authorized only for the four stages above. The review
+continues to deny a generic/declaration parser, widening the categorical
+parser, browser-side semantic compilation, a static report masquerading as a
+fresh check, any Core/checker/evaluator/rule/equation change, active Lambdapi
+edits, public package/release changes, generated-book edits, integration,
+deployment, and cleanup.
 
 ## Required Evidence For Implementation
 

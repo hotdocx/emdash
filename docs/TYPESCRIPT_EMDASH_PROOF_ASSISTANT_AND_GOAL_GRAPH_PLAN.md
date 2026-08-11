@@ -222,7 +222,9 @@ eight negatives, inherited proof reuse, and eight bounded active-Lambdapi
 assertions are green. The next bounded row is presentation `1F`; its first
 behavior-free proposal now freezes a finite expression grammar, an explicit
 Node semantic checker/CLI, an honest static browser route, and an owned Chapter
-5 bridge. It remains non-authorizing pending separate immutable review.
+5 bridge. Proposal checkpoint `6ad0812` is separately approved under delegated
+unattended authority with later human supersession; only that exact four-stage
+presentation implementation may now proceed.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -319,8 +321,8 @@ v5 through v14 are, in order, `fe0306d`/`a94c2f7`,
 transitivity proposal/review/semantic/ledger checkpoints
 `2498053`/`fc9a323`/`3b113ad`/`10432ba` complete every selected root-only
 semantic slice. The current bounded tranche is the behavior-free presentation
-`1F` proposal; it changes no generic engine, public package surface, or active
-mathematical authority.
+`1F` proposal/review boundary; implementation is now ready without changing a
+generic engine, public package surface, or active mathematical authority.
 
 Depends-On:
 
@@ -6394,6 +6396,7 @@ changes, and the completed row advances only to presentation `1F`.
 | `D-PA-173` | Approve only corrected consumer-parent proposal checkpoint `2498053` under delegated unattended authority, with human supersession. | Proposal SHA-256 `820df96e9a0b889172c2e74fbcdc77cd16329dcaf36105d3c53076807e76394b` and separate review checkpoint `fc9a323`, review SHA-256 `9d37f7fd66c2fb61ce9ebf1dc1c7f5b83ba7558e0457f78252eb8dacb14a48aa`, freeze exact 0/1/0/5 implementation and observation boundaries. The review authorizes one original complete consumer-parent replacement, explicit descendant-environment proof reuse, and the canonical predecessor Core-name test repair. It denies retaining v3, a second rule, whole `Rep_catd`/`hom_con`/`id_funcd` behavior, new proof/runtime-category authority, generic-engine/Core/public/Lambdapi changes, integration, and release. Fifty-four combined tests, root typecheck, focused lint, non-export checks, clean generic-compiler diff, and diff hygiene are green; no aggregate is rerun. |
 | `D-PA-174` | Complete root-only `PATHOUT-LIBRARY-TRANSITIVITY-1E` at reviewed v4 and advance only to presentation `1F`. | Semantic checkpoint `3b113ad` compiles five definitions and one subject-checked original-consumer-parent support at exact 0/1/0/5. Transfer/test SHA-256 values are `dd9484a58c6196fe5cc9c6c1ac941bea0a148c449855d011fc61fbcf3dc3fe9d` and `dda1a5436dabc02065aa02e30b1a14000c015783a866a894aa7884d40cae7dbf`. Cold focused execution passes eight active tests with zero failures and one ordinary oracle skip; all observations, both consumers, eight negatives, inherited proof reuse, canonical predecessor-name repair, rule-ID selection, authority closure, and non-export checks are green. The separately gated run accepts all eight active-Lambdapi assertions under a 20-second ceiling with warnings disabled. Root typecheck, focused lint, diff hygiene, and a clean generic-compiler diff pass; the `e560551` aggregate is carried forward. No generic engine, Core, new proof rule, active Lambdapi source, or public/package surface changes. |
 | `D-PA-175` | Freeze a non-authorizing four-stage `PATHOUT-LIBRARY-PRESENTATION-1F` proposal over completed semantic checkpoint `3b113ad` and ledger `10432ba`. | The audit finds no generic LF term parser and refuses to widen the distinct categorical parser. Cold transitivity assembly measured about 195 seconds, so one finite expression vocabulary has two honest modes: a browser-safe inert parser/qualification report that visibly says it did not rerun semantics, and an explicit Node checker/CLI that delegates to the existing transfer, LF checker, and comparator. Four forms present `PathOut`, `rho`, fixed-source `Ind`, and composition. A lazy browser panel and a short owned Chapter 5 bridge complete the row without a second semantic engine. The proposal adds no behavior, parser declaration/binder syntax, Core/checker/rule/equation, active Lambdapi change, npm export/version/release, integration, deployment, or cleanup; separate immutable review remains mandatory. Seven focused tests, root typecheck, focused lint, non-export checks, and proposal SHA-256 `b7b85c34af390a5b1489b0fdd0d015cd2a4ca554c38533bf4459b7ec26029be3` are green; the long aggregate is not rerun for behavior-free data. |
+| `D-PA-176` | Approve only presentation proposal checkpoint `6ad0812` under delegated unattended authority, with human supersession. | Separate immutable review SHA-256 `b28bee76da0aa47ad66a8739ece456973ac515f58fae5b94dc29b5c73f5ab510` authorizes the exact four-stage implementation and named APIs: inert finite parsing and qualification manifest, existing-transfer-backed Node fresh check, static-by-default CLI/browser presentation, and the owned Chapter 5 bridge. It requires source-located diagnostics, canonical serialization, visible evidence classes, all-four-form semantic checking, malformed/role/endpoint negatives, browser closure/build, CLI contracts, book typography/check/render, test-runner registration, typecheck/lint/workspace/diff gates, and the exact `check:ts` disposition. It denies declaration/binder syntax, categorical-parser widening, browser semantic compilation, hidden sessions, semantic/Core/rule changes, npm/package/release effects, active Lambdapi edits, generated-book edits, integration, and deployment. Fourteen combined tests and the proportional static gates are green; no aggregate is rerun for review data. |
 
 ## Validation And Checkpoint Policy
 
