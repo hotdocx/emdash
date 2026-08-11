@@ -41,8 +41,9 @@ corpus/interchange and isolated public package, stateless runner, and lazy
 browser surface are now complete and final-proportional-green, while exact
 release/host installation and real-agent measurements remain separately
 gated; the read-only exact `0.3.0` release and additive CloserFans benchmark-
-workspace audit is frozen at exact proposal checkpoint `bb16e47` and awaits
-separate immutable review; the first research-planning goal-
+workspace proposal is frozen at exact checkpoint `bb16e47` and separately
+approved by the immutable review in the dedicated plan; the first research-
+planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
 owner, typecheck/lint, and browser-closure gates; its replay-gated public
@@ -828,7 +829,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B0` | Post-library benchmark readiness and architecture audit | complete; read-only | Existing 12A evaluator, public workspace/authoring APIs, real CloserFans TypeScript host, and checked proof/class fixtures make corpus construction ready. PathOut remains a distinct semantic-task family, not an LF patch case. |
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
-| `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | proposal frozen at `bb16e47`; implementation review-gated | The exact dedicated-plan contract freezes `0.3.0`, least-authority action-pin maintenance, explicit Pages verification, and a new default-controller `emdash_benchmark` template. Separate immutable review is required before any mutation. |
+| `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | proposal `bb16e47`; separately reviewed; implementation authorized within exact contract | The review checkpoint is the commit containing the dedicated-plan review and is pinned by its immediate ledger follow-up. It approves staged `0.3.0` qualification/release/Pages verification followed only after public byte verification by the isolated CloserFans template. |
 | `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | gated | Requires installed 12B3 consumer and a separately frozen provider/run retention and reporting policy. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
@@ -853,8 +854,8 @@ at exact semantic checkpoint `93c9804`. No version, release, sibling mutation,
 model run, or hosted action is automatically authorized. The subsequent
 read-only 12B3 audit is frozen in
 `docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md`; it remains
-non-authorizing at exact proposal checkpoint `bb16e47` until separately
-reviewed.
+exactly bounded by proposal checkpoint `bb16e47` and its separate immutable
+review. No later-row effect follows automatically.
 
 Roadmap accounting after this row is 34 of 41 scoped rows complete. The seven
 remaining rows are the deliberately deferred/gated `SIMP-5B2`,
@@ -6496,6 +6497,7 @@ relevant evidence to this plan-only selection.
 | `D-PA-185` | Approve only exact 12B2 proposal checkpoint `ba49705` at separate review checkpoint `8c9652a` for bounded public-surface implementation under delegated unattended authority. | Ten review conditions require unchanged 12A/12B1 semantics; a canonical deeply frozen no-case-text catalog; raw-size-before-fatal-UTF-8 run input; strict parsing, fresh replay, canonical JSONL, and stable content-free errors; one isolated benchmark subpath with exact existing-entry exclusion; retained no-bin/dependency preflight; transitive browser raw/gzip closure gates and inert page load; and packed ESM/CommonJS/strict-NodeNext/browser plus core-only consumers. Sixteen combined tests, typecheck, focused lint, and diff hygiene are green. Version/release, siblings, models/providers, hosted effects, and long-aggregate claims remain denied. |
 | `D-PA-186` | Complete reviewed `AGENT-EVAL-12B2` at exact semantic checkpoint `93c9804` and advance only to a separately frozen 12B3 release/host audit. | The isolated `@hotdocx/emdash/benchmark` entry exports unchanged 12A/12B1 owners; the repository-only Node adapter provides exact catalog/case/corpus/reference/evaluate artifacts with bounded fatal UTF-8 input, strict parsing, fresh replay, and stable content-free errors. Capability v15, package docs/preflight, an explicit-click compact browser panel, transitive 441,288/119,383 initial and 447,783/115,747 incremental-lazy raw/gzip closures, packed ESM/CJS/strict-NodeNext/browser plus root-only consumers, and a real-browser smoke are green. Eight adapter, twenty-six browser, fifteen capability, thirty historical proposal/review, and three release-policy tests pass with workspace, root typecheck, focused lint, package, direct Vite, unchanged-owner, and diff gates. The direct standing waiver omits `check:ts`/root-test/`check:all`; no Lambdapi, release/version, sibling, provider/model, hosted, push/merge/tag, or deployment effect occurred. |
 | `D-PA-187` | Freeze a non-authorizing `AGENT-EVAL-12B3` exact-release and additive-host proposal at checkpoint `bb16e47` after completed 12B2. | Fresh worktree/ancestry, npm/GitHub, workflow-log, action-release, package-owner, and CloserFans audits select exact `0.3.0`: public `0.2.0` lacks `./benchmark`, while the three existing entry sources are byte-identical to their release owners. The contract updates only active version assertions and least-authority immutable action pins, adds `persist-credentials: false`, explicitly verifies the necessarily triggered Pages deployment, publishes only by the existing release-only OIDC handoff, then adds a separate default-controller `emdash_benchmark` workspace from exact public bytes. Its direct TypeScript source begins with ten honest abstentions; stateless commands freshly reconstruct and evaluate the corpus without providers, writes, network, or sessions. Existing templates, package no-bin/dependency policy, APIs/MCP, controllers, Arrowgram, semantics, Lambdapi, mathematics, book/print, and real-agent measurement remain unchanged or later. This proposal changes plans only and requires separate immutable review before every mutation. |
+| `D-PA-188` | Approve only exact 12B3 proposal checkpoint `bb16e47` under delegated unattended authority, with human supersession. | Immutable dedicated/governing proposal hashes `4dba6dd000d72982b797d3a594db65957990341b3bed866adf632735ff863dcc` and `0d8a90f3e2678d47fc8794169a92565b0ad02b3a5f648cafd8b438070790879d` freeze ten review conditions. The staged authority permits only active `0.3.0` assertions, current immutable action pins plus non-persisted checkout credentials, exact package/Pages/OIDC verification, and—only after public bytes exist—the new public-registry all-abstention CloserFans workspace on an isolated branch with local fast-forward integration. It denies semantic/public-entry widening, tokens, providers/models, run retention/performance claims, APIs/MCP/controllers, Arrowgram, Lambdapi, mathematics, book/print, history rewriting, cleanup, and every 12B4 effect. Plan-only ancestry/hash/diff hygiene is green; behavior and aggregate checks remain omitted. |
 
 ## Validation And Checkpoint Policy
 
@@ -6623,10 +6625,11 @@ synchronized:
 > subpath, stateless repository
 > adapter, strict artifacts/errors, lazy compact browser view, measured
 > budgets, least-authority package policy, and installed-consumer matrix.
-> Treat exact non-authorizing 12B3 release/host proposal checkpoint `bb16e47`
-> as frozen. Advance only to its separate immutable review; do not change a
-> version, workflow, Git ref, registry, Release, Pages deployment, or sibling
-> merely because the proposal exists. Do not relabel a PathOut request as
+> Treat exact 12B3 release/host proposal checkpoint `bb16e47` and the separate
+> immutable review checkpoint pinned by its immediate ledger follow-up as the
+> sole staged implementation authority. Qualify and release exact `0.3.0`
+> before the additive CloserFans workspace; keep every provider/model/run
+> policy in 12B4. Do not relabel a PathOut request as
 > an LF proof-patch task or shrink representativeness. Keep real-agent runs in
 > 12B4.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,

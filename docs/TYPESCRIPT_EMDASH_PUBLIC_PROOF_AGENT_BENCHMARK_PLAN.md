@@ -10,7 +10,7 @@ exact checkpoint `8c9652a`. The bounded implementation is complete and
 proportionally qualified at exact semantic checkpoint `93c9804`. The
 read-only `AGENT-EVAL-12B3` package-release and CloserFans host audit is now
 frozen at exact proposal checkpoint `bb16e47`; implementation remains gated
-on a separate immutable review.
+on the separate immutable review recorded below.
 
 Date: 2026-08-11
 
@@ -225,7 +225,7 @@ the evaluator.
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
-| `AGENT-EVAL-12B3` | proposal frozen at `bb16e47`; implementation review-gated | The exact contract freezes `0.3.0` release, workflow-maintenance, Pages-side-effect, and new ordinary-Node `emdash_benchmark` workspace boundaries. Separate immutable review is required before any version, workflow, Git, registry, Release, deployment, or sibling mutation. |
+| `AGENT-EVAL-12B3` | proposal `bb16e47`; separately reviewed; implementation authorized within exact contract | The immutable review below approves exact `0.3.0` release, workflow-maintenance, Pages verification, and later ordinary-Node `emdash_benchmark` workspace stages under strict sequencing. The review checkpoint is the commit containing that review and is pinned by its immediate ledger follow-up. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
@@ -921,6 +921,101 @@ This audit itself requires only exact source/status/external-identity review,
 Markdown heading/link hygiene, and `git diff --check`. It runs no TypeScript,
 package, browser, kernel, book, sibling, or aggregate behavior check because
 it changes no behavior. The omitted checks are not passes.
+
+## `AGENT-EVAL-12B3` Immutable Contract Review
+
+Date: 2026-08-11
+
+State: approved under the user's delegated unattended authority, with later
+human supersession. This review approves only exact proposal checkpoint
+`bb16e47`; the review checkpoint is the commit containing this section and is
+pinned by the immediate ledger-only follow-up.
+
+Immutable proposal evidence:
+
+- dedicated proposal-plan SHA-256:
+  `4dba6dd000d72982b797d3a594db65957990341b3bed866adf632735ff863dcc`;
+- governing proposal-plan SHA-256:
+  `0d8a90f3e2678d47fc8794169a92565b0ad02b3a5f648cafd8b438070790879d`;
+- exact semantic predecessor: `93c9804`;
+- exact completed-ledger predecessor: `151c518`; and
+- proposal checkpoint: `bb16e47`.
+
+The review independently accepts the contract for ten reasons:
+
+1. **Dependency closure.** Both required predecessors are ancestors of the
+   proposal. Public `0.2.0` is still latest, exact `0.3.0` is absent, and the
+   benchmark entry has already passed its own 12B2 package/browser consumers.
+2. **Semver and compatibility.** A new isolated subpath is a bounded additive
+   pre-1.0 feature. The exact three predecessor entry sources match
+   `ab513f7`; the review forbids using versioning as cover for an unreviewed
+   source or export change.
+3. **Least-authority workflow maintenance.** The three replacement action
+   commits are official immutable release-tag targets, setup-node is already
+   current, and `persist-credentials: false` removes unnecessary credential
+   persistence. Build remains unprivileged; only the publish job retains
+   `id-token: write`; no token or secret enters the workflow.
+4. **Exact artifact handoff.** The tag/version/repository preflight, one packed
+   tarball, SHA-256 output, named artifact, publish-time digest comparison,
+   no-republish guard, OIDC provenance, and post-registry byte comparison
+   preserve the successful `0.2.0` model. A release failure is corrected
+   forward and never by moving a tag or republishing a version.
+5. **Explicit deployment consequence.** Main integration necessarily triggers
+   Pages because already-qualified benchmark browser paths changed. Requiring
+   the exact main head, successful workflow/deployment, and live panel smoke
+   prevents release integration from smuggling an unverified hosted effect.
+6. **Host isolation.** A new `emdash_benchmark` workspace is more honest than
+   changing the `0.1.0` proof starter or `0.2.0` goal-view artifact. It uses
+   the existing default Node controller and auto-discovery path, so no pool,
+   image, database, API, MCP, permission, or Arrowgram contract is needed.
+7. **Source-first AI operation.** The direct TypeScript run source is compact,
+   diffable, and starts with ten explicit abstentions. It binds attempts to
+   fresh exact cases and lets an AI edit ordinary patch data without treating
+   a generated JSON artifact, terminal cursor, or server session as source
+   authority. Stable provider/revision/seed metadata must be explicit;
+   reported usage remains optional and unverified.
+8. **Fresh evaluation and negatives.** Both source and explicit-file paths
+   reconstruct the public corpus and use the package's strict canonical parser
+   plus unchanged fresh evaluator. Stale/tampered/unknown-case inputs fail;
+   reference nine/one results remain visibly separate from the all-abstention
+   starter and from later model measurements.
+9. **Proportional validation.** Version/workflow edits require exact package,
+   release, packed-consumer, no-secret, and external artifact gates. The later
+   host edit requires registry install, focused command/negative/preview
+   checks, template validation, root typecheck, and targeted lint. Long
+   TypeScript/root/Lambdapi/book/sibling aggregates add no direct coverage and
+   remain omitted unless a focused failure makes one progress-blocking.
+10. **Rollback-safe sequencing.** Package qualification and checkpoint precede
+    branch/main pushes; public main precedes tag/Release; verified npm bytes
+    precede the sibling branch; and the clean CloserFans candidate precedes
+    local `master --ff-only`. Every stage rechecks ancestry and dirty state and
+    preserves unrelated work.
+
+Implementation authority is therefore exact and staged:
+
+1. Emdash may change only the four active `0.2.0` version assertions to
+   `0.3.0`, the three immutable action pins, checkout credential persistence,
+   the tests which own those exact policies, and the two living plans.
+2. After local proportional qualification and a clean checkpoint, the goal
+   may non-force-push its branch, fast-forward and non-force-push public
+   `main`, verify the resulting Pages deployment, create/push the one annotated
+   `emdash-v0.3.0` tag, publish the frozen GitHub Release, approve only its
+   exact `npm-release` deployment, and verify the immutable OIDC package.
+3. Only after that package is public and verified may CloserFans branch from
+   exact clean `5c0d0c1`, add the frozen template/verifier/script/docs slice,
+   checkpoint it, and fast-forward local `master` if ancestry remains exact.
+
+The review does not authorize any semantic source, Core/checker/rule, package
+entry/dependency/bin/hook, provider/model, performance claim, run-retention
+policy, CloserFans API/MCP/controller, Arrowgram, Lambdapi, mathematics,
+book/print, force-push, history rewrite, tag movement, branch/worktree cleanup,
+or sibling deployment. Real-agent operation and community result policy remain
+exclusively `AGENT-EVAL-12B4`.
+
+Review validation is deliberately plan-only: exact proposal blob hashes,
+predecessor ancestry, unchanged public-entry hashes, current clean state,
+exact diff review, conflict-marker scan, and `git diff --check`. No behavior or
+aggregate gate ran, and none is claimed.
 
 ## Validation Policy
 
