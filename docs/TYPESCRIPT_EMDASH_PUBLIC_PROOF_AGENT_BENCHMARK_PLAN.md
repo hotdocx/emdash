@@ -22,6 +22,8 @@ Exact predecessors:
   `85b560e`/`d7d7428`; and
 - synchronized PathOut graduation ledger checkpoint `3135747`.
 
+Post-`STDLIB-8B` audit and this initial plan are checkpointed at `7aeb783`.
+
 This plan adds no behavior by itself. It records why public agent evaluation
 is now the only dependency-ready product stream and prevents that product
 work from silently widening proof authority, package authority, or hosted
@@ -208,7 +210,7 @@ the evaluator.
 
 | Row | State | Exit gate |
 | --- | --- | --- |
-| `AGENT-EVAL-12B0` | complete; read-only selection | This audit proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
+| `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | selected; proposal next | Freeze and separately review an executable corpus/interchange proposal, then implement the representative browser-safe corpus and strict canonical data boundary without a public barrel change until the internal result is green. |
 | `AGENT-EVAL-12B2` | gated | Requires qualified 12B1. Add the explicit Node runner, browser/documentation presentation, package capability/export, packed consumers, and one final shared-boundary gate. No publication. |
 | `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
