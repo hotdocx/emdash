@@ -1509,6 +1509,72 @@ primary documentation, both job logs, remote/main/tag/Release/npm identities,
 clean worktree, conflict-marker scan, ancestry, and diff hygiene. No behavior
 or aggregate gate is claimed for the review document.
 
+## `AGENT-EVAL-12B3-R2` Temporary Dispatch Qualification Record
+
+Date: 2026-08-11
+
+State: implementation complete and proportionally green; the exact semantic
+checkpoint is pinned by the immediately following plan-only ledger update.
+No push, dispatch, environment approval, registry, Release, tag, or sibling
+mutation occurred during this local implementation.
+
+The temporary implementation changes exactly two behavioral owners:
+
+- `.github/workflows/npm-publish.yml` keeps `release: published` and adds one
+  `workflow_dispatch` choice input with sole value `emdash-v0.3.0`. Its
+  concurrency key, build condition, and job-level `RELEASE_TAG` distinguish
+  the ordinary release event from only that exact recovery event. Direct
+  credential-empty tag checkout and every package/artifact/OIDC step remain
+  unchanged; and
+- `packages/emdash/scripts/release-preflight-tests.mjs` requires the exact
+  one-option input, dual event resolution, finite condition, direct checkout,
+  and two-job OIDC policy while continuing to reject push/pull-request
+  triggers, checkout actions, credentials, submodule operations, and token or
+  secret references.
+
+The plans add only failure/review/qualification evidence. There is no package
+manifest, export, source, evaluator, corpus, tarball, Release, tag, environment,
+or registry delta.
+
+Exact proportional evidence:
+
+```text
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; exact four-workspace contract; Node 24.11.1
+
+./scripts/pnpmw run package:release:check
+  passed: 3/3 exact release identity, manifest negatives, direct checkout,
+  and finite one-option dispatch policy
+
+./node_modules/.bin/tsc --noEmit --pretty false
+  passed
+
+./node_modules/.bin/eslint \
+  packages/emdash/scripts/release-preflight-tests.mjs
+  passed with no diagnostics
+
+./scripts/pnpmw run package:build
+  passed: ESM, CommonJS, declarations, and source maps
+
+node packages/emdash/scripts/release-preflight.mjs \
+  --tag emdash-v0.3.0 --repository hotdocx/emdash
+  passed with exact 0.3.0 identity
+
+Python safe YAML parse and git diff --check
+  passed
+```
+
+The unchanged R1 public-fetch probe remains the direct-checkout execution
+evidence. `actionlint` is unavailable and not claimed. No long TypeScript/root
+aggregate, Lambdapi/kernel, book/print, browser, packed-consumer, CloserFans,
+Arrowgram, provider/model, or hosted dispatch gate ran. Those omissions are
+not passes.
+
+The next admissible operation is exact staged review/checkpoint and a
+plan-only pin, then clean re-audit, non-force goal/main integration, public
+workflow recognition, and one dispatch on exact integrated `main`. The
+Release must not be edited again.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
