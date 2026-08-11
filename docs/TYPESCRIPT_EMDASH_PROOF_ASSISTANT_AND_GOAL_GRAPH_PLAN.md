@@ -105,7 +105,11 @@ compilation shows the selected predecessor runtime omits active transparent
 authority. Corrected non-authorizing proposal v5 adds exactly that delta,
 changes the boundary to 5/10/0/6, and is separately approved under delegated
 unattended authority with human supersession at review checkpoint `3f95e7c`;
-exact v5 semantic implementation may resume. No PathOut/PathInd public package
+exact owner tracing shows the outer `FibCov_target_catd` application blocks
+both later reductions. That evidence supersedes v5 implementation authority.
+Corrected non-authorizing proposal v6 adds only the complete forward active-
+path fusion, changes the boundary to 5/11/0/6, and awaits checkpoint plus
+separate review; implementation is paused. No PathOut/PathInd public package
 export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
@@ -661,7 +665,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. Measured alias-delta counterevidence supersedes reviewed 5/9/0/6 PathInd proposal v4; corrected non-authorizing proposal v5 adds only active transparent `Transf` lines 9150-9151 and awaits checkpoint plus separate review at 5/10/0/6. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. Exact-residual counterevidence supersedes reviewed 5/10/0/6 PathInd proposal v5; corrected non-authorizing proposal v6 adds only the complete forward FibCov-target section fusion and awaits checkpoint plus separate review at 5/11/0/6. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -5810,7 +5814,38 @@ a generic engine/checker/signature/body/owner change, later 1D/1E/1F work,
 public exports, active Lambdapi changes, integration, or release. Proposal and
 review pass eleven focused tests in two suites with root typecheck, focused
 lint, and diff hygiene. Review checkpoint `3f95e7c` freezes that decision and
-restores authority for only the exact v5 semantic implementation.
+restored authority for only the exact v5 semantic implementation.
+
+The attempted v5 semantic compile supplies the exact remaining
+counterevidence. A temporary environment-gated diagnostic—removed completely
+after the probe—captured
+
+```text
+Obj(fapp0 K Cat_cat (FibCov_target_catd K E) x)
+vs Transf K Cat_cat (Rep_catd K x) E.
+```
+
+The named FibCov target body remains nested under `fapp0`, while conversion
+intentionally performs no generic declaration unfolding. Consequently the
+outer owners differ before v4's displayed-hom fusion or v5's `Transf` delta
+can meet.
+
+Corrected behavior-free proposal v6 preserves v5 and adds one subject-checked
+fusion from that exact left side to
+`Obj(Transf_cat K Cat_cat (Rep_catd K x) E)`. It is the complete forward path
+through active lines 5481, 7865, 8419, and 9177 plus the representable and
+FibCov-target transparent definitions at lines 13765-13775 and 13923-13928.
+Its exact boundary is **5/11/0/6**; five runtime observations and nine bounded-
+oracle assertions remain unchanged. It adds no mathematics, declaration-
+unfolding engine, checker/signature/body/owner change, later slice, public
+effect, active Lambdapi edit, integration, or release. V5 checkpoints
+`7219828` and `3f95e7c` remain backtracking evidence but no longer authorize
+implementation.
+
+Proposal v6 is immutable, root-only, non-authorizing, and absent from public
+barrels. Root typecheck, focused lint, six focused tests, and diff hygiene
+pass; no Lambdapi or long aggregate was run for this evidence-only correction.
+Implementation remains paused until v6 has its checkpoint and separate review.
 
 ## Decision Ledger
 
@@ -5950,6 +5985,7 @@ restores authority for only the exact v5 semantic implementation.
 | `D-PA-132` | Approve only checkpointed corrected PathInd proposal v4 under delegated unattended authority, with human supersession. | Proposal checkpoint `f4101e2` preserves the exact 5/9/0/6 weak-head execution closure, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `397472f` restores local implementation authority without making the proposal self-authorizing. |
 | `D-PA-133` | Supersede the v4 PathInd review and correct proposal v5 to 5/10/0/6 with active transparent `Transf` delta lines 9150-9151. | The v4 fusion subject-checks and reaches `Obj(Transf_cat)`, but the generic Core `tapp0_fapp0` signature expects the `Transf` alias and the selected predecessor runtime omits its forward delta. Importing that exact active definition is narrower than reversing reduction, changing the checker, or importing the whole sibling runtime profile. V4 remains backtracking evidence, and v5 still requires its own checkpoint and review. |
 | `D-PA-134` | Approve only checkpointed corrected PathInd proposal v5 under delegated unattended authority, with human supersession. | Proposal checkpoint `7219828` preserves the exact 5/10/0/6 alias-delta closure, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `3f95e7c` restores local implementation authority without making the proposal self-authorizing. |
+| `D-PA-135` | Supersede the v5 PathInd review and correct proposal v6 to 5/11/0/6 with the exact measured FibCov-target section fusion. | Exact tracing measured `Obj(fapp0(FibCov_target_catd(E),x))` versus `Transf(Rep_catd(x),E)`: named-body unfolding is intentionally absent, so v4/v5 cannot fire before the outer owner mismatch. One forward fusion of the complete active path is narrower than generic declaration unfolding, reversing `Transf`, or changing signatures/the checker. V5 remains backtracking evidence, and v6 still requires its own checkpoint and review. |
 
 ## Validation And Checkpoint Policy
 
