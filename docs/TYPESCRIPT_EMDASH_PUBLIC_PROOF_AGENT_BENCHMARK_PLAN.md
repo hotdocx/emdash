@@ -2637,6 +2637,99 @@ up, or begin Stage B/C. After a focused-green correcting checkpoint,
 synchronize both plans and perform a final immutable code/preflight review.
 Only that later checkpoint may authorize at most one call.
 
+### Corrective one-shot driver implementation checkpoint
+
+Implementation date: 2026-08-11
+
+The approved local tranche is now checkpointed on isolated CloserFans branch
+`goal/emdash-proof-agent-canary-v1` at
+`1abdfd8ee3711a3993fa0db573672ababee7e6d3`, exact parent
+`8e270a78da2762148da0c93b0a8b64b74b6d14e9`, and exact tree
+`5912793c74fa2b4a247b69f2915baa16344d8447`. The worktree is clean and the
+checkpoint remains local: no push, merge, deployment, release, API/MCP,
+controller, database, other template, Emdash, Arrowgram, or hosted surface
+changed.
+
+The checkpoint implements the reviewed separation rather than weakening the
+mock canary. `npm run canary:mock` retains an enumerated fake-scenario grammar
+and has no real selector. A separate dependency-free repository operator
+requires the exact non-secret authorization ID, an absolute unused run root,
+and a clean source worktree; reconstructs the template from `git ls-tree` and
+`git show` bytes at the recorded commit; excludes ignored working-tree state;
+materializes the retained lock; and performs a scripts-disabled,
+credential-empty clean install. It then invokes an internal closed
+fake-versus-real driver unavailable from `package.json`, API, MCP, controller,
+or hosted UI.
+
+The real member performs exact CLI-version, `Logged in using ChatGPT`, model-
+cache tuple, selected-case, strict-config, filesystem, command, and network
+preflights before the authorization boundary. Its parent environment is a
+closed eight-key set—fixed runtime/locale/temp fields plus `HOME` and
+`CODEX_HOME`—while model-created commands retain the existing inherit-nothing
+fake-home/temp environment. The operator never reads, copies, hashes, or
+receipts authentication content. Immediately before the sole provider spawn,
+an exclusive mode-`0600` lease is created below a mode-`0700` authorization
+directory. The lease is never removed or rewritten, no retry/fallback/loop is
+present, and a child `spawn` event—not intent—sets `providerExecuted`.
+
+Receipt revision v2 derives driver, ChatGPT-auth category, model-cache,
+permission-probe, lease, argument-vector, source commit/tree/clean state,
+template/operator, package, corpus/case/profile, prompt/schema, command/source
+audit, replay, usage, and canonical-artifact provenance. Spawn failure,
+timeout/overflow, process failure, invalid stream/final message, scope or
+authority violation, replay failure, abstention, rejection, incomplete
+acceptance, and complete acceptance remain distinct. Raw JSONL, stderr, final
+message, candidate source/diff, selected attempt, and clean replay remain
+private and untracked. Dollar cost stays null, and contamination,
+`graduationEligible=false`, and `proofEvidence=false` are unconditional.
+
+The complete changed-file SHA-256 inventory is:
+
+```text
+e6e93778a0e021bed8074d888958070465f7bae724879871c6801a3a4288e2f9  AGENTS.md
+cab4764e39e69c9eee7a177da539347f5a9f4a3693be816d3900d08580849db6  README.md
+42325cdedd181f36e1e221c6eb9d6fd2aadf89c005b05b55b08cc7e00b6aee01  scripts/run-emdash-stage-a-real.mjs
+de000ea8a72b9c2d1f482f5801159178677a3f3501925afadf582bfaca42808e  scripts/verify-emdash-benchmark-template-runtime.ts
+b6d4eb040df34eab3864e1c3fad34f49cc0fcc5c669f8f797f0ff95a0e02875a  templates/emdash_benchmark/README.md
+f89f208da92ac16e6835354bee273c5a365a7035a4831bb94a10a7f4eac3e8f1  templates/emdash_benchmark/scripts/emdash-canary-contract.mts
+db599cd2e5dc70f34ff0e6c5c43a910cb003dc9d741d3b49942229dec9e3af88  templates/emdash_benchmark/scripts/emdash-canary-evaluate.mts
+74962e480ad3bd3b51af22ae64314d3d988338146f482b6c3dff428c3b93e23e  templates/emdash_benchmark/scripts/emdash-canary-real.mts
+12c278ceadcb88f0bd1b0dbea0a24e7a955a7d766d95e63280fa26b157b784fb  templates/emdash_benchmark/scripts/emdash-canary.mts
+fc9e704d5578399bd0326f39387e5b96e0f2c60d0b3d7e31c46073cf6e27c2ac  templates/emdash_benchmark/scripts/fixtures/emdash-canary-fake-codex.mjs
+16b4d4494b63fecc9c32a3c8d727dfbe0d0413febc66cbcffd5aa3f955647ef0  templates/emdash_benchmark/scripts/verify-emdash-canary.mts
+```
+
+Exact-checkpoint focused evidence is green:
+
+- `--canary-only`: clean locked install, template typecheck, existing mock
+  containment/failure suite, real-driver fake orchestration, lease collision,
+  exactly-one fake spawn, closed parent environment, dynamic receipt, and
+  pre-/post-spawn failure tests;
+- `--permission-probe-only`: live local `codex sandbox` strict-config,
+  filesystem, command, and network checks, explicitly without a model/API
+  request;
+- `--adapter-only` and `--cli-only`: public-package/source replay and public
+  physically mock-only CLI;
+- dependency-free operator syntax, committed-snapshot fixture, exact ancestry,
+  clean status, whitespace, credential-shape, and public-surface scans; and
+- no root/template `node_modules` and no real authorization directory after
+  validation. A deliberate invocation with an unreviewed ID exited `2` before
+  source bootstrap, lease creation, or provider execution.
+
+The earlier all-template registry validation remains applicable because the
+subsequent changes did not alter any template manifest or registration entry;
+the exact checkpoint's focused verifier nevertheless rechecks this template's
+manifest and installed identity. CloserFans excludes these paths from ESLint,
+so no lint pass is claimed. Long repository aggregates, cloud/controller/
+database/API/MCP checks, Emdash aggregates, kernel/book checks, provider/model
+execution, real lease/transcript creation, push, merge, deployment, release,
+and cleanup remain omitted, not passed.
+
+This checkpoint completes only the implementation authorized by the immutable
+review. Roadmap accounting remains 35/41. It does not itself authorize the
+exact ID or a provider call; a separate immutable review of these committed
+bytes and current at-call no-model state remains mandatory.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -2697,7 +2790,9 @@ On continuation:
    `9fc93af` as non-graduating Stage A preparation only; treat the second
    preflight above as a deliberate no-call result and its corrective one-shot
    driver design as approved only for local code and fake/no-model tests under
-   the immutable review above; require its implementation checkpoint and final
-   exact preflight before any real-agent or retention effect; and
+   the immutable review above; treat corrective CloserFans checkpoint
+   `1abdfd8`, tree `5912793`, as the focused-green implementation of that
+   approval; and require a new immutable exact code/preflight checkpoint before
+   any real-agent or retention effect; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
