@@ -130,8 +130,9 @@ browser view, and a short owned-book bridge. Proposal checkpoint `6ad0812` was
 separately approved at `f03ef01` under delegated unattended authority with
 later human supersession. That exact four-stage implementation is now
 final-proportional-green at semantic checkpoint `8d226cc`. Graduation `0G`
-now has a non-authorizing frozen proposal which qualifies only the root-source
-profile; a separate immutable review is required before completion.
+is now separately approved over exact proposal checkpoint `85b560e`, qualifying
+only the root-source profile. `STDLIB-8B` is complete without a public package
+effect; a post-completion readiness audit is next.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -299,7 +300,7 @@ named library presentation.
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | complete; final-proportional-green | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; semantic checkpoint `3b113ad` | The exact root-only **0/1/0/5** transfer compiles five transparent definitions plus one derived complete consumer-parent support. Eight TypeScript observations, two typed consumers, eight negatives, authority closure, and a separately gated eight-assertion Lambdapi oracle are green. No mathematical equation, local proof rule, injectivity, unification, Core, generic-engine, public, or Lambdapi-source behavior is added. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | complete; final-proportional-green | completed direct typed slices through `10432ba`; proposal/review checkpoints `6ad0812`/`f03ef01`; semantic checkpoint `8d226cc` | Four finite forms now have a browser-safe parser/qualification manifest, explicit transfer-backed Node check, static-by-default CLI and lazy browser panel, and an owned Chapter 5 bridge. No second semantic engine or public package export was added. |
-| `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | proposal v1 frozen; separate review required | all selected slices through presentation ledger `be487c9`; proposal checkpoint is the commit containing the audit below | Graduate only the root-source-qualified profile: five mathematical opaque owners, nine sealed supports, thirty transparent definitions, exact local rule partitions, bounded computation/presentation claims, and no public package effect. |
+| `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | complete; separately approved root-source qualification | all selected slices through presentation ledger `be487c9`; proposal checkpoint `85b560e`; review checkpoint is the commit containing the completion record below | Graduates only the root-source-qualified profile: five mathematical opaque owners, nine sealed supports, thirty transparent definitions, exact local rule partitions, bounded computation/presentation claims, and no public package effect. |
 
 ### `PATHOUT-TRUST-BOUNDARY-0A` exact audit contract
 
@@ -3457,9 +3458,10 @@ source, integration branch, deployment, push, or cleanup changed.
 
 Date: 2026-08-11
 
-Status: dependency-ready and frozen as a non-self-authorizing proposal. The
-proposal checkpoint is the commit containing this record. A separate immutable
-review remains mandatory before `0G` or `STDLIB-8B` can be completed.
+Status: proposal checkpoint `85b560e` is separately approved by the immutable
+review below under delegated unattended authority, with later human
+supersession. The review checkpoint is the commit containing its completion
+record.
 
 The executable proposal is
 [`pathout_library_graduation_proposal.ts`](../src/v3_2/pathout_library_graduation_proposal.ts),
@@ -3508,6 +3510,31 @@ and
 The proposal adds no behavior and is absent from all public/browser/package
 barrels, so no semantic, browser, book, kernel, package, or long aggregate is
 rerun for this audit-only checkpoint.
+
+### Separate Review And Graduation Decision
+
+The immutable review is
+[`pathout_library_graduation_review.ts`](../src/v3_2/pathout_library_graduation_review.ts),
+with focused tests in
+[`v3_2_pathout_library_graduation_review_tests.ts`](../tests/v3_2_pathout_library_graduation_review_tests.ts).
+It approves only proposal checkpoint `85b560e` and proposal SHA-256
+`fc35b53dd151694069974b4df6ad3c04ee55cd5d8bacad34f9f21c47c8cee572`.
+The review's own SHA-256 is
+`69555218149b04833bdd1c791c7ab60fe6d28177748334003d443ab060db486a`.
+
+The decision graduates `emdash-v3.2-pathout-pathind-root-1` as
+**root-only source-qualified** and completes `STDLIB-8B`. It approves the exact
+trust/library partition, measured computation envelope, and honest
+browser-versus-Node evidence classes. Its semantic implementation delta is
+zero. It explicitly leaves contributor/npm export, versioning, publication,
+integration, and deployment unauthorized.
+
+Thirteen combined proposal/review tests pass, along with root typecheck and
+focused ESLint. Both suites are registered in `tests/main_tests.ts`; exact
+imports plus the direct focused run are the registration evidence. No long
+aggregate is rerun for this behavior-free review under the standing human
+direction. The next state is a post-`STDLIB-8B` readiness audit, not automatic
+publication or another mathematical extension.
 
 ## Required Evidence For Implementation
 

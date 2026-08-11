@@ -222,9 +222,10 @@ eight negatives, inherited proof reuse, and eight bounded active-Lambdapi
 assertions are green. Presentation `1F` is now final-proportional-green at
 semantic checkpoint `8d226cc`: its finite parser, explicit Node semantic
 checker/CLI, honest static browser route, and owned Chapter 5 bridge preserve
-the separately reviewed `6ad0812`/`f03ef01` boundary. Graduation `0G` now has
-a non-authorizing frozen root-source qualification proposal; separate review
-is required.
+the separately reviewed `6ad0812`/`f03ef01` boundary. Graduation `0G` is now
+separately approved over proposal checkpoint `85b560e`, qualifying only the
+root-source profile. `STDLIB-8B` is complete; a post-completion readiness audit
+is next.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -322,8 +323,9 @@ transitivity proposal/review/semantic/ledger checkpoints
 `2498053`/`fc9a323`/`3b113ad`/`10432ba` complete every selected root-only
 semantic slice. Presentation `1F` is complete at semantic checkpoint
 `8d226cc`. It changes no generic engine, public package surface, or active
-mathematical authority. Graduation `0G` is frozen as a non-authorizing proposal
-and awaits separate review.
+mathematical authority. Graduation proposal checkpoint `85b560e` is separately
+approved by the review in the commit containing the completion decision below.
+`STDLIB-8B` is complete without a public package effect.
 
 Depends-On:
 
@@ -807,7 +809,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | Terminal same-budget normal-form closure prerequisite | complete | `e560551`; corrected proposal/review `a42ffc9`/`5277885`; original roots replay only after paired `not-equal` under the same consumed budget; focused/static gates and the required 1,923-test full-TypeScript gate are green with zero failures. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | Propagate the existing declaration compiler comparison budget into compilation-time checking | complete | `e560551`; proposal/review `9238104`/`a4d61a9`; exact zero/one-step behavior, retained 256 default and public factory signature, nearest compiler/static gates, and the shared full-TypeScript gate are green. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | Trust boundary `0A`, foundation `1B`, fixed-source `1C`, generic prerequisite `e560551`, internalized `1D`, transitivity `1E`, and presentation `1F` at `8d226cc` are complete. Graduation `0G` has a frozen non-authorizing proposal: qualify only the root-source profile with 5 mathematical opaque owners, 9 sealed supports, 30 transparent definitions, bounded computation/presentation, and no public package effect. Separate review is next. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | complete; root-source-qualified | Trust boundary `0A`, foundation `1B`, fixed-source `1C`, generic prerequisite `e560551`, internalized `1D`, transitivity `1E`, presentation `1F` at `8d226cc`, and separately reviewed graduation `0G` are complete. The graduated profile has 5 mathematical opaque owners, 9 sealed supports, 30 transparent definitions, bounded computation/presentation, and no public package effect. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -827,9 +829,10 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `POST-14B-AUDIT-16` | Re-evaluate incomplete rows after the real package and Arrowgram/GetPaidX consumer | complete | 14B4, 12B, 10, and 11 retain their exact gates; public distribution plus checked book/research consumers make only the bounded `STDLIB-8A` product-selection row ready. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
-for the single active `STDLIB-8B` stream; they were not parallel semantic work.
-Only `STDLIB-8B` is now semantically in progress. A later row may be
-repartitioned or rejected when evidence contradicts this plan.
+for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
+No semantic row is automatically active after graduation. A bounded
+post-`STDLIB-8B` readiness audit must re-evaluate the concretely gated/deferred
+rows before selecting more work.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -6400,6 +6403,7 @@ changes, and the completed row advances only to presentation `1F`.
 | `D-PA-176` | Approve only presentation proposal checkpoint `6ad0812` under delegated unattended authority, with human supersession. | Separate immutable review SHA-256 `b28bee76da0aa47ad66a8739ece456973ac515f58fae5b94dc29b5c73f5ab510` authorizes the exact four-stage implementation and named APIs: inert finite parsing and qualification manifest, existing-transfer-backed Node fresh check, static-by-default CLI/browser presentation, and the owned Chapter 5 bridge. It requires source-located diagnostics, canonical serialization, visible evidence classes, all-four-form semantic checking, malformed/role/endpoint negatives, browser closure/build, CLI contracts, book typography/check/render, test-runner registration, typecheck/lint/workspace/diff gates, and the exact `check:ts` disposition. It denies declaration/binder syntax, categorical-parser widening, browser semantic compilation, hidden sessions, semantic/Core/rule changes, npm/package/release effects, active Lambdapi edits, generated-book edits, integration, and deployment. Fourteen combined tests and the proportional static gates are green; no aggregate is rerun for review data. |
 | `D-PA-177` | Complete reviewed `PATHOUT-LIBRARY-PRESENTATION-1F` at `8d226cc` and advance only to graduation audit `0G`. | Semantic checkpoint `8d226cc` adds the immutable four-form parser/qualification manifest, sole transfer-backed Node check, static-by-default `pathout` CLI, lazy transfer-free browser panel, and owned Chapter 5 bridge. One cold run checks all four forms plus role/endpoint negatives in 207473 ms; ordinary focused execution passes 17 and explicitly skips three cold assertions. Root typecheck, focused lint, workspace, non-export, generic-engine-diff, browser TypeScript/Vite build and 7014-byte transfer-free chunk, book typography/check/render at 300 pages, and diff hygiene are green. A name-filtered main-registry probe timed out at 90 seconds before suite discovery and is not reported as a pass; exact imports plus direct tests establish registration. The long `check:ts` run is waived under the user's direct standing no-long-aggregate instruction, not misreported. No semantic/Core/rule, active Lambdapi, public package/release, integration, deployment, sibling, or generated-book-source effect occurs. |
 | `D-PA-178` | Freeze a non-authorizing `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` root-source qualification proposal. | The proposal pins active source/check digests and every predecessor through `8d226cc`/`be487c9`. It separates five mathematical opaque owners from nine sealed categorical supports, records 39 local runtime rules, two local proof rules, and thirty transparent definitions across exact 5/13/2/9, 5/12/0/6, 4/13/0/10, and 0/1/0/5 partitions. Graduation claims only measured computation and the honest four-form presentation; it denies the path-category bridge, general metatheory, ordinary-user rules/opaque owners, public/npm export, release, integration, and deployment. Seven focused tests, root typecheck, focused lint, proposal SHA-256 `fc35b53dd151694069974b4df6ad3c04ee55cd5d8bacad34f9f21c47c8cee572`, and test SHA-256 `33da42c1e625a04fdb3d68d0f876d71a6224bc1ec2887f9f9f0d9af956236b91` are green; no aggregate is rerun for behavior-free data. Separate immutable review remains mandatory. |
+| `D-PA-179` | Approve exact graduation proposal checkpoint `85b560e`, complete `STDLIB-8B` as root-source-qualified, and select only a post-completion readiness audit. | Separate immutable review SHA-256 `69555218149b04833bdd1c791c7ab60fe6d28177748334003d443ab060db486a` approves the exact 5/9/14 sealed-owner partition, 39/2 local rule partition, 30 transparent definitions, measured computation envelope, and four-form evidence split. It records a zero semantic implementation delta and leaves public/npm barrels, package version/release, integration, deployment, active Lambdapi edits, general HIT/parser/rule capability, the path-category bridge, and metatheoretic claims unauthorized. Thirteen combined tests, root typecheck, focused lint, test-runner registration, non-export checks, and diff hygiene are green; no long aggregate is rerun for behavior-free review data. Human decisions may supersede the delegated unattended approval. |
 
 ## Validation And Checkpoint Policy
 
