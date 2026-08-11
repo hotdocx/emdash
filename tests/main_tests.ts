@@ -31,6 +31,7 @@ import './v3_2_conversion_tests';
 import './v3_2_lf_beta_tests';
 import './v3_2_lf_definition_tests';
 import './v3_2_lf_conversion_tests';
+import './v3_2_lf_conversion_normal_form_closure_proposal_tests';
 import './v3_2_lf_builder_tests';
 import './v3_2_lf_profile_proposal_tests';
 import './v3_2_directed_1a_proposal_tests';
