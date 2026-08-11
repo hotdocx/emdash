@@ -164,11 +164,13 @@ describe('AGENT-EVAL-12B2 separate public-surface proposal review', () => {
         );
     });
 
-    it('adds no public, package, browser, or runner dependency', () => {
+    it('keeps the historical review outside runtime owners', () => {
         for (const relative of [
             'src/v3_2/package_core.ts',
             'src/v3_2/package_authoring.ts',
             'src/v3_2/package_workspace.ts',
+            'src/v3_2/package_benchmark.ts',
+            'src/v3_2/lf_proof_agent_benchmark_cli.ts',
             'emdash-template/src/emdash_api.ts',
             'packages/emdash/package.json',
             'scripts/emdash'
@@ -177,7 +179,7 @@ describe('AGENT-EVAL-12B2 separate public-surface proposal review', () => {
                 'utf8');
             assert.doesNotMatch(
                 source,
-                /lf_proof_agent_public_surface_(?:proposal|review)|package_benchmark/u,
+                /lf_proof_agent_public_surface_(?:proposal|review)/u,
                 relative
             );
         }

@@ -780,6 +780,114 @@ textarea {
   padding-left: 1.2rem;
 }
 
+.benchmark-result {
+  margin-top: 1.4rem;
+}
+
+.benchmark-summary {
+  display: grid;
+  grid-template-columns: 0.65fr 0.65fr 1.7fr;
+  gap: 0.75rem;
+}
+
+.benchmark-summary article {
+  display: flex;
+  min-height: 6rem;
+  padding: 0.9rem;
+  flex-direction: column;
+  justify-content: center;
+  background: #edf3ee;
+  border: 1px solid #d2ded6;
+  border-radius: 8px;
+}
+
+.benchmark-summary strong {
+  color: var(--green-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.benchmark-summary span,
+.benchmark-table small {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 760;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.benchmark-revision {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.benchmark-tracks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.benchmark-tracks li {
+  padding: 0.35rem 0.55rem;
+  color: #345048;
+  background: #f1f3ec;
+  border: 1px solid #d8ded7;
+  border-radius: 999px;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.72rem;
+}
+
+.benchmark-tracks strong {
+  color: var(--green);
+}
+
+.benchmark-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #d5ddd7;
+  border-radius: 8px;
+}
+
+.benchmark-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.benchmark-table th,
+.benchmark-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #dde3de;
+  text-align: left;
+  vertical-align: top;
+}
+
+.benchmark-table th {
+  color: #334942;
+  background: #edf0e9;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.benchmark-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.benchmark-table td:first-child,
+.benchmark-table td:nth-child(2) {
+  min-width: 13rem;
+}
+
+.benchmark-table td code,
+.benchmark-table td small {
+  display: block;
+  margin-bottom: 0.28rem;
+}
+
 .error-banner {
   margin: 1rem;
   padding: 0.85rem 1rem;
@@ -961,6 +1069,10 @@ footer > a:last-child {
 
   .architecture-grid li {
     min-height: auto;
+  }
+
+  .benchmark-summary {
+    grid-template-columns: 1fr;
   }
 }
 

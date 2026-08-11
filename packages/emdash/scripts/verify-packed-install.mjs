@@ -12,6 +12,7 @@ import {
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { gzipSync } from 'node:zlib';
 
 import { validateEmdashNpmReleasePreflight } from './release-preflight.mjs';
 
@@ -149,12 +150,16 @@ try {
     'dist/authoring.cjs',
     'dist/workspace.js',
     'dist/workspace.cjs',
+    'dist/benchmark.js',
+    'dist/benchmark.cjs',
     'dist/types/package_core.d.ts',
     'dist/types/package_core.d.ts.map',
     'dist/types/package_authoring.d.ts',
     'dist/types/package_authoring.d.ts.map',
     'dist/types/package_workspace.d.ts',
     'dist/types/package_workspace.d.ts.map',
+    'dist/types/package_benchmark.d.ts',
+    'dist/types/package_benchmark.d.ts.map',
     'dist/types/package.json',
     'LICENSE',
     'README.md',
@@ -192,7 +197,7 @@ try {
   );
   assert.deepEqual(
     Object.keys(installedManifest.exports),
-    ['.', './authoring', './workspace', './package.json'],
+    ['.', './authoring', './workspace', './benchmark', './package.json'],
   );
   assert.equal(installedManifest.dependencies, undefined);
   assert.equal(
@@ -283,6 +288,14 @@ import {
   sourceSpan,
   validateCoreResearchGoalView,
 } from '@hotdocx/emdash/workspace';
+import {
+  CORE_LF_PROOF_AGENT_BENCHMARK_PROFILE,
+  CORE_LF_PROOF_AGENT_INTERCHANGE_PROFILE,
+  CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE,
+  createCoreLfProofAgentPublicCorpus,
+  parseCoreLfProofAgentBenchmarkRunText,
+  serializeCoreLfProofAgentBenchmarkRun,
+} from '@hotdocx/emdash/benchmark';
 
 assert.equal(typeof CoreChecker, 'function');
 assert.equal(typeof CoreLfScopedBuilder, 'function');
@@ -394,6 +407,27 @@ assert.equal(typeof serializeCoreResearchGoalView, 'function');
 assert.equal(typeof searchCoreLfAccessiblePremises, 'function');
 assert.equal(typeof simplifyCoreProofPlan, 'function');
 assert.equal(typeof validateCoreResearchGoalView, 'function');
+assert.equal(
+  CORE_LF_PROOF_AGENT_BENCHMARK_PROFILE.invokesAgent,
+  false,
+);
+assert.equal(
+  CORE_LF_PROOF_AGENT_INTERCHANGE_PROFILE.nodeBuiltinDependency,
+  false,
+);
+assert.equal(
+  CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE.selectedCaseCount,
+  10,
+);
+assert.equal(typeof parseCoreLfProofAgentBenchmarkRunText, 'function');
+const benchmarkCorpus = createCoreLfProofAgentPublicCorpus();
+assert.equal(benchmarkCorpus.entries.length, 10);
+assert.equal(
+  parseCoreLfProofAgentBenchmarkRunText(
+    serializeCoreLfProofAgentBenchmarkRun(benchmarkCorpus.referenceReport.run),
+  ).attempts.length,
+  10,
+);
 
 // Preserve the public 0.1 hosted-consumer path over direct TypeScript source.
 const compatibilityHash = (digit) => 'sha256:' + digit.repeat(64);
@@ -527,6 +561,7 @@ assert.deepEqual(
 const core = require('@hotdocx/emdash');
 const authoring = require('@hotdocx/emdash/authoring');
 const workspace = require('@hotdocx/emdash/workspace');
+const benchmark = require('@hotdocx/emdash/benchmark');
 
 assert.equal(typeof core.CoreChecker, 'function');
 assert.equal(typeof authoring.CoreLfScopedBuilder, 'function');
@@ -683,6 +718,15 @@ assert.equal(
 );
 assert.equal(typeof workspace.simplifyCoreProofPlan, 'function');
 assert.equal(typeof workspace.validateCoreResearchGoalView, 'function');
+assert.equal(
+  benchmark.CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE.selectedTrackCount,
+  6,
+);
+assert.equal(typeof benchmark.createCoreLfProofAgentPublicCorpus, 'function');
+assert.equal(
+  typeof benchmark.parseCoreLfProofAgentBenchmarkReportText,
+  'function',
+);
 `,
   );
   await writeFile(
@@ -751,6 +795,12 @@ import {
   simplifyCoreProofPlan,
   validateCoreResearchGoalView,
 } from '@hotdocx/emdash/workspace';
+import {
+  CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE,
+  type CoreLfProofAgentPublicCorpus,
+  createCoreLfProofAgentPublicCorpus,
+  parseCoreLfProofAgentBenchmarkReportText,
+} from '@hotdocx/emdash/benchmark';
 
 const checkerConstructor: typeof CoreChecker = CoreChecker;
 const declarationWorkspaceCompiler:
@@ -825,6 +875,12 @@ const goalViewSerializer: typeof serializeCoreResearchGoalView =
   serializeCoreResearchGoalView;
 const goalViewValidator: typeof validateCoreResearchGoalView =
   validateCoreResearchGoalView;
+const benchmarkFactory: typeof createCoreLfProofAgentPublicCorpus =
+  createCoreLfProofAgentPublicCorpus;
+const benchmarkReportParser: typeof parseCoreLfProofAgentBenchmarkReportText =
+  parseCoreLfProofAgentBenchmarkReportText;
+const maybeBenchmarkCorpus: CoreLfProofAgentPublicCorpus | undefined =
+  undefined;
 void checkerConstructor;
 void declarationWorkspaceCompiler;
 void workspaceProofCompiler;
@@ -862,6 +918,9 @@ void goalViewFactory;
 void goalViewParser;
 void goalViewSerializer;
 void goalViewValidator;
+void benchmarkFactory;
+void benchmarkReportParser;
+void maybeBenchmarkCorpus;
 void maybeTerm;
 void CORE_MVP_MANIFEST;
 void CORE_LF_INSTANCE_SCOPE_PROFILE;
@@ -883,6 +942,7 @@ void CORE_PROOF_REFINE_TEMPLATE_PROFILE;
 void CORE_PROOF_SIMPLIFIER_PROFILE;
 void CORE_RESEARCH_GOAL_GRAPH_PROFILE;
 void CORE_RESEARCH_GOAL_VIEW_PROFILE;
+void CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE;
 `,
   );
   await writeFile(
@@ -1002,6 +1062,37 @@ globalThis.emdashPackedSmoke = {
 };
 `,
   );
+  await writeFile(
+    path.join(consumerDirectory, 'browser-benchmark-entry.js'),
+    `import {
+  CORE_LF_PROOF_AGENT_BENCHMARK_PROFILE,
+  CORE_LF_PROOF_AGENT_INTERCHANGE_PROFILE,
+  CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE,
+  createCoreLfProofAgentPublicCorpus,
+  parseCoreLfProofAgentBenchmarkRunText,
+  serializeCoreLfProofAgentBenchmarkRun,
+} from '@hotdocx/emdash/benchmark';
+
+globalThis.emdashPackedBenchmarkSmoke = {
+  benchmarkRevision: CORE_LF_PROOF_AGENT_BENCHMARK_PROFILE.revision,
+  interchangeRevision: CORE_LF_PROOF_AGENT_INTERCHANGE_PROFILE.revision,
+  corpusRevision: CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE.revision,
+  createCoreLfProofAgentPublicCorpus,
+  parseCoreLfProofAgentBenchmarkRunText,
+  serializeCoreLfProofAgentBenchmarkRun,
+};
+`,
+  );
+  await writeFile(
+    path.join(consumerDirectory, 'browser-core-only-entry.js'),
+    `import { CoreChecker, CORE_MVP_MANIFEST } from '@hotdocx/emdash';
+
+globalThis.emdashPackedCoreOnlySmoke = {
+  CoreChecker,
+  revision: CORE_MVP_MANIFEST.revision,
+};
+`,
+  );
 
   run(process.execPath, ['consumer.mjs'], consumerDirectory);
   run(process.execPath, ['consumer.cjs'], consumerDirectory);
@@ -1031,6 +1122,66 @@ globalThis.emdashPackedSmoke = {
       '--outfile=browser-bundle.js',
     ],
     consumerDirectory,
+  );
+  run(
+    path.join(packageRoot, 'node_modules', '.bin', 'esbuild'),
+    [
+      'browser-benchmark-entry.js',
+      '--bundle',
+      '--format=esm',
+      '--platform=browser',
+      '--target=es2020',
+      '--minify',
+      '--outfile=browser-benchmark-bundle.js',
+    ],
+    consumerDirectory,
+  );
+  run(
+    path.join(packageRoot, 'node_modules', '.bin', 'esbuild'),
+    [
+      'browser-core-only-entry.js',
+      '--bundle',
+      '--format=esm',
+      '--platform=browser',
+      '--target=es2020',
+      '--minify',
+      '--outfile=browser-core-only-bundle.js',
+    ],
+    consumerDirectory,
+  );
+  const coreOnlyBrowserBundle = await readFile(
+    path.join(consumerDirectory, 'browser-bundle.js'),
+    'utf8',
+  );
+  const benchmarkBrowserBundle = await readFile(
+    path.join(consumerDirectory, 'browser-benchmark-bundle.js'),
+    'utf8',
+  );
+  const strictCoreOnlyBrowserBundle = await readFile(
+    path.join(consumerDirectory, 'browser-core-only-bundle.js'),
+    'utf8',
+  );
+  assert.doesNotMatch(
+    coreOnlyBrowserBundle,
+    /emdash-lf-proof-agent-public-corpus-v1/u,
+  );
+  assert.match(
+    benchmarkBrowserBundle,
+    /emdash-lf-proof-agent-public-corpus-v1/u,
+  );
+  assert.doesNotMatch(
+    strictCoreOnlyBrowserBundle,
+    /emdash-lf-proof-agent-public-corpus-v1/u,
+  );
+  assert.equal(
+    Buffer.byteLength(benchmarkBrowserBundle, 'utf8') <= 650000,
+    true,
+    'packed benchmark browser closure exceeds the 650000-byte cap',
+  );
+  assert.equal(
+    gzipSync(Buffer.from(benchmarkBrowserBundle, 'utf8')).byteLength <= 175000,
+    true,
+    'packed benchmark browser closure exceeds the 175000-byte gzip cap',
   );
 
   console.log('Packed @hotdocx/emdash install verified.');

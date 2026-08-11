@@ -15,6 +15,7 @@
   "include": [
     "../../src/v3_2/package_core.ts",
     "../../src/v3_2/package_authoring.ts",
-    "../../src/v3_2/package_workspace.ts"
+    "../../src/v3_2/package_workspace.ts",
+    "../../src/v3_2/package_benchmark.ts"
   ]
 }

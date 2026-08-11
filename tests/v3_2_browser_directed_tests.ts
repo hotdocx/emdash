@@ -698,6 +698,50 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
             }
         });
 
+    it('isolates the public benchmark subpath from existing package entries',
+        () => {
+            const benchmarkClosure = collectLocalClosure(
+                'src/v3_2/package_benchmark.ts'
+            );
+            assert.equal(
+                benchmarkClosure.has(resolve(
+                    'src/v3_2/lf_proof_agent_public_corpus.ts'
+                )),
+                true
+            );
+            assert.equal(
+                benchmarkClosure.has(resolve(
+                    'src/v3_2/lf_proof_agent_interchange.ts'
+                )),
+                true
+            );
+            assert.equal(
+                benchmarkClosure.has(resolve(
+                    'src/v3_2/lf_proof_agent_benchmark.ts'
+                )),
+                true
+            );
+            assert.equal(
+                benchmarkClosure.has(resolve(
+                    'src/v3_2/lf_proof_agent_benchmark_cli.ts'
+                )),
+                false
+            );
+            for (const entry of [
+                'src/v3_2/package_core.ts',
+                'src/v3_2/package_authoring.ts',
+                'src/v3_2/package_workspace.ts'
+            ]) {
+                assert.equal(
+                    collectLocalClosure(entry).has(resolve(
+                        'src/v3_2/lf_proof_agent_public_corpus.ts'
+                    )),
+                    false,
+                    `${entry} acquired the benchmark corpus`
+                );
+            }
+        });
+
     it('keeps research goal-graph evaluation browser-safe and host-free', () => {
         const closure = collectLocalClosure(
             'src/v3_2/research_goal_graph.ts'

@@ -121,6 +121,18 @@ import {
 import {
     CORE_RESEARCH_GOAL_VIEW_PROFILE
 } from '../src/v3_2/research_goal_view';
+import {
+    CORE_LF_PROOF_AGENT_BENCHMARK_PROFILE
+} from '../src/v3_2/lf_proof_agent_benchmark';
+import {
+    CORE_LF_PROOF_AGENT_INTERCHANGE_PROFILE
+} from '../src/v3_2/lf_proof_agent_interchange';
+import {
+    CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE
+} from '../src/v3_2/lf_proof_agent_public_corpus';
+import {
+    CORE_LF_PROOF_AGENT_BENCHMARK_CLI_PROFILE
+} from '../src/v3_2/lf_proof_agent_benchmark_cli';
 
 interface CliResult {
     readonly exitCode: number;
@@ -462,7 +474,7 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assertDeepFrozen(CORE_AI_NATIVE_CAPABILITIES);
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES_PROFILE.revision,
-            'emdash-ai-native-capabilities-v14'
+            'emdash-ai-native-capabilities-v15'
         );
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES.status,
@@ -611,6 +623,22 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
             revisions.get('research-browser-recheck'),
             CORE_AI_RESEARCH_OVERVIEW_BROWSER_PROFILE.revision
         );
+        assert.equal(
+            revisions.get('proof-agent-benchmark-evaluator'),
+            CORE_LF_PROOF_AGENT_BENCHMARK_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('proof-agent-canonical-interchange'),
+            CORE_LF_PROOF_AGENT_INTERCHANGE_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('public-proof-agent-corpus'),
+            CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('proof-agent-benchmark-cli'),
+            CORE_LF_PROOF_AGENT_BENCHMARK_CLI_PROFILE.revision
+        );
         assert.deepEqual(
             CORE_AI_NATIVE_CAPABILITIES.commands.map(command => command.id),
             [
@@ -621,7 +649,12 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
                 'development-check',
                 'development-goals',
                 'development-build',
-                'development-graph'
+                'development-graph',
+                'benchmark-catalog',
+                'benchmark-case',
+                'benchmark-corpus',
+                'benchmark-reference',
+                'benchmark-evaluate'
             ]
         );
         assert.match(

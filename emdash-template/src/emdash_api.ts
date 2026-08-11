@@ -24,6 +24,14 @@ export const loadCorePathoutPresentation = () =>
     import('../../src/v3_2/pathout_presentation.js');
 
 /**
+ * Load and construct the representative proof-agent corpus only after an
+ * explicit reviewer action. The initial browser entry deliberately does not
+ * acquire this comparatively large semantic closure.
+ */
+export const loadCoreProofAgentBenchmark = () =>
+    import('../../src/v3_2/lf_proof_agent_public_corpus.js');
+
+/**
  * Vite fingerprints and emits the generated current book as a static asset.
  */
 export const EMDASH_BOOK_URL = new URL(

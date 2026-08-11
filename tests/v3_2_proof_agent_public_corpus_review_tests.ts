@@ -128,12 +128,13 @@ describe('AGENT-EVAL-12B1 separate corpus proposal review', () => {
         );
     });
 
-    it('adds no public, package, browser, or runner dependency', () => {
+    it('keeps the historical review outside runtime owners', () => {
         for (const relative of [
             'src/v3_2/index.ts',
             'src/v3_2/package_core.ts',
             'src/v3_2/package_authoring.ts',
             'src/v3_2/package_workspace.ts',
+            'src/v3_2/package_benchmark.ts',
             'src/v3_2/browser.ts',
             'packages/emdash/package.json'
         ]) {

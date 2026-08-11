@@ -6,7 +6,9 @@ immutable review at `d271c33`. The internal corpus/interchange implementation
 is complete and proportionally qualified at exact checkpoint `d0d3764`. A
 non-authorizing `AGENT-EVAL-12B2` public-surface proposal is complete at exact
 checkpoint `ba49705` and is separately approved by the immutable review in the
-exact checkpoint `8c9652a`. Bounded implementation is active.
+exact checkpoint `8c9652a`. The bounded implementation is complete and
+proportionally qualified in the checkpoint containing the completion record
+below; its exact checkpoint is pinned by the immediate ledger-only follow-up.
 
 Date: 2026-08-11
 
@@ -52,8 +54,10 @@ enforcement, publication, and hosted workspace operation remain outer layers.
 4. record reproducible real-agent runs and graduate only the claims that the
    measured corpus supports.
 
-The next bounded action is not an npm release, sibling edit, model run, or
-PathOut export. It is a non-authorizing executable proposal for slice 1.
+The first two slices are now implemented without an npm release, sibling edit,
+model run, or PathOut task conversion. After the exact 12B2 checkpoint is
+pinned, the next bounded action is a non-authorizing 12B3 version/release and
+fresh CloserFans edit-time audit—not publication itself.
 
 ## Post-`STDLIB-8B` Readiness Findings
 
@@ -217,14 +221,14 @@ the evaluator.
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
-| `AGENT-EVAL-12B2` | proposal/review `ba49705`/`8c9652a` approved; bounded implementation active | The review adds exact catalog/error, fatal UTF-8, fresh replay, transitive browser/package closure, core-only consumer, and retained no-bin conditions. It authorizes only the isolated benchmark subpath, repository adapter, lazy browser presentation, capability/docs, and proportional public gates. |
-| `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
+| `AGENT-EVAL-12B2` | implementation complete; exact checkpoint pending ledger pin | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
+| `AGENT-EVAL-12B3` | next proposal/audit selected; implementation gated | Requires the exact qualified 12B2 checkpoint plus a separately frozen package version/release contract and fresh CloserFans edit-time audit. Publish exact bytes only after that review, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
-non-authorizing `AGENT-EVAL-12B2` proposal below is pinned at `ba49705` and now
-has a separate immutable approval below. No release, version, sibling, model,
-or hosted effect follows from that approval.
+separately approved `AGENT-EVAL-12B2` implementation is also complete and its
+checkpoint is awaiting the immediate ledger-only pin. No release, version,
+sibling, model, or hosted effect follows from either completion.
 
 ## `AGENT-EVAL-12B1` Proposal Requirements
 
@@ -298,7 +302,7 @@ nearest evaluator, plan/template, simplifier/obvious, maintenance,
 class-inheritance-lowering, and instance-scope command
   passed: 104/104 tests, 18 suites
 
-./scripts/pnpmw exec tsc --noEmit --pretty false
+./node_modules/.bin/tsc --noEmit --pretty false
   passed
 
 eslint over proposal, proposal test, and test-runner owner
@@ -575,6 +579,131 @@ npm bin/dependency; no package version, publication, release, sibling edit,
 real-agent run, model/network call, hosted action, push, merge, tag,
 deployment, or aggregate-pass claim.
 
+## `AGENT-EVAL-12B2` Implementation Completion Record
+
+Date: 2026-08-11
+
+State: implementation complete and proportionally qualified. The semantic
+checkpoint is the commit containing this record and is pinned by the next
+ledger-only commit.
+
+The implementation realizes the reviewed surface without changing 12A/12B1
+semantics:
+
+- [`package_benchmark.ts`](../src/v3_2/package_benchmark.ts) is the sole new
+  browser-safe public source entry. It exports the unchanged evaluator,
+  strict interchange, and representative corpus. Root, `authoring`, and
+  `workspace` entries remain unchanged and exclude the corpus closure.
+- [`lf_proof_agent_benchmark_cli.ts`](../src/v3_2/lf_proof_agent_benchmark_cli.ts)
+  is an explicit stateless Node adapter behind `./scripts/emdash benchmark`.
+  Its `catalog`, `case`, `corpus`, `reference`, and `evaluate --run-file`
+  commands use exact canonical serializers. `evaluate` checks the 32 MiB raw
+  ceiling before fatal UTF-8 decoding, reads exactly one explicit path,
+  strictly parses, and freshly replays through unchanged 12A. Stable errors
+  contain neither stacks nor artifact contents.
+- `@hotdocx/emdash/benchmark` is isolated as a fourth package entry while the
+  package remains version `0.2.0`, dependency-free at runtime, script-free,
+  bin-free, and install-hook-free. The repository adapter is deliberately not
+  packed as an npm CLI.
+- The browser's fifth reviewer panel performs no corpus work on page load or
+  tab selection. Its explicit button dynamically imports the corpus, freshly
+  builds/replays it, then retains only the compact six-track/ten-case owner,
+  feature, and outcome projection. It labels nine accepted baselines and one
+  honest ambiguity abstention as neither proof authority nor agent/model
+  performance.
+- The capability record advances from v14 to v15 with four benchmark profiles
+  and five explicit repository commands. Package documentation presents the
+  same evidence and authority boundary.
+- Historical 12B1/12B2 proposal tests now validate their immutable approved
+  predecessor identities rather than incorrectly demanding that the later
+  implementation tree still have no public surface. The proposal/review
+  modules remain absent from every runtime owner.
+
+Key implementation SHA-256 values are:
+
+```text
+lf_proof_agent_benchmark_cli.ts
+  227a8d782d04ff2ea73b8e77be5ddf8dd7172f3433933578bfa651480fa781c1
+package_benchmark.ts
+  8fb8315d308ceb1e4855661d845f80cbf44c365a613b6674d89f935d87ff4a32
+v3_2_proof_agent_benchmark_cli_tests.ts
+  e1482d021be04d2be55083cf1ab890a47f9833d33a8a18ebfad3d02450d76ba0
+v3_2_proof_agent_browser_integration_tests.ts
+  0025f0043fd86d6b11e55c0c544b083014b171ef2480ceb3609057e7ea4496e1
+emdash-template/src/App.tsx
+  4684c3a298f296640ffe20fef9dfbebde27a8e1dce74871e639f10cd91281f1e
+packages/emdash/package.json
+  71bd329083cc66eb5157eacdc95eb254d2c4b472d6002ae1d2ff81e7aaed21d2
+```
+
+The normal Vite 5.4.19 build transforms 179 modules. The complete initial
+static JavaScript closure is 441,288 raw / 119,383 gzip bytes. Vite shares
+already-loaded Core with the benchmark, so the complete incremental dynamic
+closure is measured after subtracting the initial closure while still walking
+every static dependency: 447,783 raw / 115,747 gzip bytes. Both are below the
+reviewed 465,000/130,000 and 650,000/175,000 caps. The corpus revision is
+absent from the initial closure and present in the incremental lazy closure.
+
+Proportional validation:
+
+```text
+stateless adapter and real repository dispatch
+  passed: 8/8 tests, 1 suite
+
+browser source/isolation plus built transitive-closure budgets
+  passed: 26/26 tests, 2 suites
+
+capability/command regression
+  passed: 15/15 tests, 3 suites
+
+historical 12B1/12B2 proposal and review integrity
+  passed: 30/30 tests, 4 suites
+
+release preflight policy
+  passed: 3/3 tests
+
+./scripts/pnpmw run workspace:check
+  passed
+
+./scripts/pnpmw exec tsc --noEmit --pretty false
+  passed
+
+focused ESLint over every changed root TypeScript owner/test
+  passed with zero errors
+
+direct emdash-template TypeScript check and Vite build
+  passed: 179 transformed modules
+
+EMDASH_VERIFY_PROOF_AGENT_BROWSER_BUILD=1 focused browser gate
+  passed: exact initial and incremental lazy raw/gzip closures
+
+./scripts/pnpmw run package:check
+  passed: packed ESM, CommonJS, strict NodeNext, existing-entry browser,
+  benchmark browser, and separate root-only browser consumers
+
+Playwright built-page smoke
+  passed: panel is inert before its explicit action; click-to-load renders
+  6 tracks, 10 cases, 9 accepted baselines, and 1 abstention
+
+git diff --check and unchanged 12A/12B1/existing-entry source audit
+  passed
+```
+
+The earlier prescribed browser wrapper failure remains an environmental
+non-pass; direct checked-in fixture binaries supply the successful typecheck
+and Vite evidence. Root `check:ts`, root-test, `check:all`, Lambdapi/kernel,
+book/print, sibling, registry, release, deployment, provider/model, and hosted
+checks did not run. The user's repeated direct standing waiver applies to the
+long TypeScript/repository aggregates, and the unchanged mathematical owners
+make Lambdapi irrelevant to this surface-only row. These omissions are not
+passes.
+
+The next action is only a non-authorizing 12B3 package-version/release and
+fresh CloserFans consumer audit after the exact 12B2 checkpoint is pinned. No
+version change, package publication, GitHub release, push/merge/tag,
+CloserFans/Arrowgram edit, model run, or hosted effect is authorized by this
+record.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -625,7 +754,8 @@ On continuation:
 3. preserve CloserFans' unrelated untracked review plan;
 4. keep only one semantic row active;
 5. treat 12B1 as complete at exact checkpoint `d0d3764`;
-6. treat exact 12B2 proposal/review checkpoints `ba49705`/`8c9652a` as the
-   only bounded implementation authority; and
+6. treat exact 12B2 proposal/review checkpoints `ba49705`/`8c9652a` and the
+   implementation checkpoint pinned by the immediate ledger follow-up as
+   complete; advance only to a separately frozen 12B3 audit; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.

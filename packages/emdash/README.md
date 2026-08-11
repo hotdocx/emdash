@@ -9,7 +9,7 @@ produce ordinary terms which are checked at the same explicit Core boundary.
 pnpm add @hotdocx/emdash
 ```
 
-The package has three deliberately bounded entries:
+The package has four deliberately bounded entries:
 
 - `@hotdocx/emdash` — Core syntax, contexts, sessions, checking, evaluation,
   conversion, and the reviewed v3.2 manifest;
@@ -60,7 +60,14 @@ The package has three deliberately bounded entries:
   actor identities, host permissions, and action authority are deliberately
   absent. View creation replays the supplied evaluation before projection;
   validation and parsing preserve exact canonical JSON for renderers and
-  lightweight hosts.
+  lightweight hosts; and
+- `@hotdocx/emdash/benchmark` — the browser-safe immutable proof-agent case,
+  suite, attempt, run, and report evaluator; strict canonical interchange;
+  and a fixed six-track, ten-case reference corpus. Nine reference patches
+  pass fresh TypeScript/emdash replay and one genuine ambiguity case abstains.
+  These are reproducible baselines, not proof authority, committed source,
+  agent-performance measurements, or a leaderboard. The evaluator invokes no
+  provider, model, network, filesystem adapter, or proof server.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
@@ -106,6 +113,13 @@ import {
   searchCoreLfAccessiblePremises,
   simplifyCoreProofPlan,
 } from '@hotdocx/emdash/workspace';
+import {
+  CORE_LF_PROOF_AGENT_BENCHMARK_PROFILE,
+  CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE,
+  createCoreLfProofAgentPublicCorpus,
+  parseCoreLfProofAgentBenchmarkRunText,
+  serializeCoreLfProofAgentBenchmarkRun,
+} from '@hotdocx/emdash/benchmark';
 
 const terms = new CoreLfScopedBuilder();
 void CORE_LF_INSTANCE_SYNTHESIS_PROFILE;
@@ -143,11 +157,18 @@ void serializeCoreProofGoalCouplingGraph;
 void serializeCoreResearchGoalView;
 void searchCoreLfAccessiblePremises;
 void simplifyCoreProofPlan;
+void CORE_LF_PROOF_AGENT_BENCHMARK_PROFILE;
+void CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE;
+void createCoreLfProofAgentPublicCorpus;
+void parseCoreLfProofAgentBenchmarkRunText;
+void serializeCoreLfProofAgentBenchmarkRun;
 ```
 
 This package does not parse structure or class declarations, add class nodes
 to Core, keep process-global proof state, run Lambdapi, or provide filesystem,
-network, host-module execution, and CLI adapters. Canonical proof source is a
+network, host-module execution, or CLI adapters. In particular, the package
+publishes no npm bin or install hook; the repository's stateless benchmark
+command is an outer reference adapter. Canonical proof source is a
 portable explicit-Core data envelope, not an emdash term/declaration parser or
 an implicit `*.emdash.ts` import. Lambdapi remains an optional
 development-time conformance route; the production path here is the

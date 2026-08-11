@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v14' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v14' as const,
+    revision: 'emdash-ai-native-capabilities-v15' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v15' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -277,6 +277,34 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 id: 'research-browser-recheck',
                 revision: 'emdash-ai-research-overview-browser-v3',
                 scope: 'release-pinned checked/open client replay'
+            },
+            {
+                id: 'proof-agent-benchmark-evaluator',
+                revision: 'emdash-lf-proof-agent-benchmark-v1',
+                scope:
+                    'pure immutable attempt scoring through fresh exact ' +
+                    'TypeScript/emdash proof replay'
+            },
+            {
+                id: 'proof-agent-canonical-interchange',
+                revision: 'emdash-lf-proof-agent-interchange-v1',
+                scope:
+                    'strict closed-revision case, suite, attempt, run, and ' +
+                    'report parsing with fresh report reevaluation'
+            },
+            {
+                id: 'public-proof-agent-corpus',
+                revision: 'emdash-lf-proof-agent-public-corpus-v1',
+                scope:
+                    'six-track ten-case owner-backed reference corpus with ' +
+                    'nine complete baselines and one ambiguity abstention'
+            },
+            {
+                id: 'proof-agent-benchmark-cli',
+                revision: 'emdash-lf-proof-agent-benchmark-cli-v1',
+                scope:
+                    'stateless catalog, case, corpus, reference, and strict ' +
+                    'run-file evaluation adapter without provider execution'
             }
         ],
         commands: [
@@ -358,6 +386,54 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 scope:
                     'portable direct coupling graphs from freshly checked ' +
                     'proof compilations',
+                performsSemanticChecks: true
+            },
+            {
+                id: 'benchmark-catalog',
+                syntax:
+                    './scripts/emdash benchmark catalog ' +
+                    '[--format jsonl|text]',
+                scope:
+                    'compact non-authoritative catalog derived from the ' +
+                    'freshly rebuilt public corpus',
+                performsSemanticChecks: true
+            },
+            {
+                id: 'benchmark-case',
+                syntax:
+                    './scripts/emdash benchmark case --case ID ' +
+                    '[--format jsonl|text]',
+                scope: 'one exact canonical current public benchmark case',
+                performsSemanticChecks: true
+            },
+            {
+                id: 'benchmark-corpus',
+                syntax:
+                    './scripts/emdash benchmark corpus ' +
+                    '[--format jsonl|text]',
+                scope:
+                    'the exact canonical full public corpus or bounded text ' +
+                    'catalog',
+                performsSemanticChecks: true
+            },
+            {
+                id: 'benchmark-reference',
+                syntax:
+                    './scripts/emdash benchmark reference ' +
+                    '[--format jsonl|text]',
+                scope:
+                    'owner-generated reference attempts freshly evaluated ' +
+                    'as non-authoritative baselines',
+                performsSemanticChecks: true
+            },
+            {
+                id: 'benchmark-evaluate',
+                syntax:
+                    './scripts/emdash benchmark evaluate --run-file PATH ' +
+                    '[--format jsonl|text]',
+                scope:
+                    'one strict canonical run file freshly scored without ' +
+                    'invoking its provider',
                 performsSemanticChecks: true
             }
         ],

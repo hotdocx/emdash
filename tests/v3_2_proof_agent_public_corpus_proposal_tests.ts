@@ -54,13 +54,21 @@ describe('AGENT-EVAL-12B1 public corpus/interchange proposal', () => {
             });
         });
 
-    it('pins every local owner by current file digest', () => {
+    it('retains every approved predecessor owner and proposal digest', () => {
         const proposal =
             CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_12B1_PROPOSAL;
         assert.equal(proposal.pinnedSources.length, 13);
+        assert.equal(
+            new Set(proposal.pinnedSources.map(source => source.id)).size,
+            13
+        );
         for (const source of proposal.pinnedSources) {
-            assert.equal(sha256(source.path), source.sha256, source.id);
+            assert.match(source.sha256, /^[0-9a-f]{64}$/u, source.id);
         }
+        assert.equal(
+            sha256('src/v3_2/lf_proof_agent_public_corpus_proposal.ts'),
+            'ecbd67496a99775c13357d9175b623200e20e79346d62b00b8773bc5e7d08a60'
+        );
     });
 
     it('selects six tracks and ten unique cases without shrinking the gate',
@@ -218,7 +226,7 @@ describe('AGENT-EVAL-12B1 public corpus/interchange proposal', () => {
             );
         });
 
-    it('adds no behavior or barrel/package dependency', () => {
+    it('keeps the historical planning record outside runtime owners', () => {
         const source = readFileSync(resolve(
             repositoryRoot,
             'src/v3_2/lf_proof_agent_public_corpus_proposal.ts'
@@ -229,12 +237,13 @@ describe('AGENT-EVAL-12B1 public corpus/interchange proposal', () => {
             'src/v3_2/package_core.ts',
             'src/v3_2/package_authoring.ts',
             'src/v3_2/package_workspace.ts',
+            'src/v3_2/package_benchmark.ts',
             'src/v3_2/browser.ts',
             'packages/emdash/package.json'
         ]) {
             assert.doesNotMatch(
                 readFileSync(resolve(repositoryRoot, relative), 'utf8'),
-                /lf_proof_agent_public_corpus/u,
+                /lf_proof_agent_public_corpus_(?:proposal|review)/u,
                 relative
             );
         }

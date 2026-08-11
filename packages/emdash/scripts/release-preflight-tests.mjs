@@ -40,6 +40,19 @@ test('accepts the exact immutable emdash release identity', () => {
     provenance: true,
   });
   assert.equal(Object.isFrozen(report), true);
+  assert.deepEqual(
+    Object.keys(manifest.exports),
+    ['.', './authoring', './workspace', './benchmark', './package.json'],
+  );
+  assert.deepEqual(manifest.exports['./benchmark'], {
+    types: './dist/types/package_benchmark.d.ts',
+    import: './dist/benchmark.js',
+    require: './dist/benchmark.cjs',
+    default: './dist/benchmark.js',
+  });
+  assert.equal(manifest.bin, undefined);
+  assert.equal(manifest.scripts, undefined);
+  assert.equal(manifest.dependencies, undefined);
 });
 
 test('rejects tag, repository, and public-manifest drift', () => {
@@ -84,6 +97,16 @@ test('rejects tag, repository, and public-manifest drift', () => {
       exports: {
         ...clone(manifest.exports),
         '.': { ...clone(manifest.exports['.']), import: './wrong.js' },
+      },
+    },
+    {
+      ...clone(manifest),
+      exports: {
+        ...clone(manifest.exports),
+        './benchmark': {
+          ...clone(manifest.exports['./benchmark']),
+          import: './dist/index.js',
+        },
       },
     },
   ]) {

@@ -43,13 +43,22 @@ describe('AGENT-EVAL-12B2 public benchmark-surface proposal', () => {
         );
     });
 
-    it('pins all seventeen local owners by current file digest', () => {
+    it('retains all seventeen approved predecessor owners and proposal digest',
+        () => {
         const proposal =
             CORE_LF_PROOF_AGENT_PUBLIC_SURFACE_12B2_PROPOSAL;
         assert.equal(proposal.pinnedSources.length, 17);
+        assert.equal(
+            new Set(proposal.pinnedSources.map(source => source.id)).size,
+            17
+        );
         for (const source of proposal.pinnedSources) {
-            assert.equal(sha256(source.path), source.sha256, source.id);
+            assert.match(source.sha256, /^[0-9a-f]{64}$/u, source.id);
         }
+        assert.equal(
+            sha256('src/v3_2/lf_proof_agent_public_surface_proposal.ts'),
+            'c820786bd4974313fff2eae5e3d459f29d46a2a18a5c97690047fe324364e759'
+        );
     });
 
     it('measures the payload and freezes a genuinely lazy browser gate',
@@ -227,7 +236,7 @@ describe('AGENT-EVAL-12B2 public benchmark-surface proposal', () => {
             }
         });
 
-    it('adds no behavior or current public/browser/package dependency', () => {
+    it('keeps the historical planning record outside runtime owners', () => {
         const source = readFileSync(resolve(
             repositoryRoot,
             'src/v3_2/lf_proof_agent_public_surface_proposal.ts'
@@ -237,12 +246,14 @@ describe('AGENT-EVAL-12B2 public benchmark-surface proposal', () => {
             'src/v3_2/package_core.ts',
             'src/v3_2/package_authoring.ts',
             'src/v3_2/package_workspace.ts',
+            'src/v3_2/package_benchmark.ts',
+            'src/v3_2/lf_proof_agent_benchmark_cli.ts',
             'emdash-template/src/emdash_api.ts',
             'packages/emdash/package.json'
         ]) {
             assert.doesNotMatch(
                 readFileSync(resolve(repositoryRoot, relative), 'utf8'),
-                /package_benchmark|loadCoreProofAgentBenchmark|\.\/benchmark/u,
+                /lf_proof_agent_public_surface_(?:proposal|review)/u,
                 relative
             );
         }

@@ -11,6 +11,8 @@ type ResearchOverviewModule =
   Awaited<ReturnType<typeof emdash.loadCoreAiResearchOverview>>;
 type PathoutPresentationModule =
   Awaited<ReturnType<typeof emdash.loadCorePathoutPresentation>>;
+type ProofAgentBenchmarkModule =
+  Awaited<ReturnType<typeof emdash.loadCoreProofAgentBenchmark>>;
 type ReviewerPresetId =
   ReviewerModule['CORE_BROWSER_REVIEWER_PRESETS'][number]['id'];
 type ReviewerExpectedMode =
@@ -21,7 +23,34 @@ type PathoutFormId =
   PathoutPresentationModule[
     'CORE_PATHOUT_PRESENTATION_1F_MANIFEST'
   ]['forms'][number]['id'];
-type View = 'categorical' | 'pathout' | 'evidence' | 'core';
+type ProofAgentBenchmarkEntry = {
+  readonly id: string;
+  readonly track: string;
+  readonly origin: string;
+  readonly sourceOwner: string;
+  readonly referenceOwner: string;
+  readonly features: readonly string[];
+  readonly outcome: string;
+};
+type ProofAgentBenchmarkPresentation = {
+  readonly corpusRevision: string;
+  readonly benchmarkRevision: string;
+  readonly meaning: string;
+  readonly tracks: readonly {
+    readonly id: string;
+    readonly selectedCases: number;
+  }[];
+  readonly entries: readonly ProofAgentBenchmarkEntry[];
+  readonly outcomes: {
+    readonly acceptedComplete: number;
+    readonly acceptedIncomplete: number;
+    readonly rejected: number;
+    readonly abstained: number;
+  };
+  readonly referenceAttemptsAreProofAuthority: false;
+  readonly modelPerformanceClaimed: false;
+};
+type View = 'categorical' | 'pathout' | 'evidence' | 'benchmark' | 'core';
 type RunningTask = View | 'paper-proof';
 
 const exampleScript = `// Minimal explicit-Core implementation evidence.
@@ -156,6 +185,9 @@ function App() {
   );
   const [pathoutInput, setPathoutInput] = useState('PathOut(Z, x)');
   const [pathoutOutput, setPathoutOutput] = useState('');
+  const [benchmark, setBenchmark] =
+    useState<ProofAgentBenchmarkPresentation>();
+  const [benchmarkLoadError, setBenchmarkLoadError] = useState('');
   const [coreInput, setCoreInput] = useState(exampleScript);
   const [coreOutput, setCoreOutput] = useState('');
   const [runningView, setRunningView] = useState<RunningTask>();
@@ -329,6 +361,46 @@ function App() {
     });
   };
 
+  const runProofAgentBenchmark = () => {
+    setRunningView('benchmark');
+    setBenchmarkLoadError('');
+    setTimeout(() => {
+      void emdash.loadCoreProofAgentBenchmark().then(
+        (module: ProofAgentBenchmarkModule) => {
+          const corpus = module.createCoreLfProofAgentPublicCorpus();
+          setBenchmark({
+            corpusRevision: corpus.revision,
+            benchmarkRevision: corpus.benchmarkProfileRevision,
+            meaning: corpus.meaning,
+            tracks: corpus.tracks.map(track => ({
+              id: track.id,
+              selectedCases: track.selectedCases
+            })),
+            entries: corpus.entries.map(entry => ({
+              id: entry.id,
+              track: entry.track,
+              origin: entry.origin,
+              sourceOwner: entry.sourceOwner,
+              referenceOwner: entry.referenceOwner,
+              features: [...entry.features],
+              outcome: entry.actualReferenceOutcome
+            })),
+            outcomes: { ...corpus.referenceReport.metrics.outcomes },
+            referenceAttemptsAreProofAuthority:
+              corpus.referenceAttemptsAreProofAuthority,
+            modelPerformanceClaimed: false
+          });
+        }
+      ).catch((error: unknown) => {
+        setBenchmarkLoadError(
+          error instanceof Error ? error.message : String(error)
+        );
+      }).finally(() => {
+        setRunningView(undefined);
+      });
+    }, 0);
+  };
+
   const runCoreCode = () => {
     setRunningView('core');
     const logs: string[] = [];
@@ -453,7 +525,7 @@ function App() {
             <span>reviewed examples</span>
           </div>
           <div><strong>4</strong><span>binder modes</span></div>
-          <div><strong>4</strong><span>evidence panels</span></div>
+          <div><strong>5</strong><span>reviewer panels</span></div>
           <div><strong>299</strong><span>book pages</span></div>
           <div><strong>Client-side</strong><span>published runtime</span></div>
         </section>
@@ -504,7 +576,7 @@ function App() {
           <div className="reviewer-intro">
             <div>
               <p className="kicker">Live external reviewer</p>
-              <h2>Inspect the programme from four angles</h2>
+              <h2>Inspect the programme from five angles</h2>
             </div>
             <p>
               Start with a reviewed expression, run the broader evidence
@@ -540,6 +612,15 @@ function App() {
                 onClick={() => setView('evidence')}
               >
                 Evidence
+              </button>
+              <button
+                className={view === 'benchmark' ? 'tab active' : 'tab'}
+                type="button"
+                role="tab"
+                aria-selected={view === 'benchmark'}
+                onClick={() => setView('benchmark')}
+              >
+                Benchmark
               </button>
               <button
                 className={view === 'core' ? 'tab active' : 'tab'}
@@ -857,6 +938,120 @@ function App() {
                     {researchOutput ||
                       'The full report has not run. Use the explicit action above.'}
                   </pre>
+                </section>
+              )}
+
+              {view === 'benchmark' && (
+                <section aria-labelledby="benchmark-heading">
+                  <div className="section-heading">
+                    <div>
+                      <p className="kicker">Reproducible proof-agent corpus</p>
+                      <h2 id="benchmark-heading">Reference benchmark</h2>
+                    </div>
+                    <span className="status-chip">explicit lazy load</span>
+                  </div>
+                  <p>
+                    Load ten source-backed proof tasks spanning explicit proof
+                    construction, source management, bounded automation,
+                    structures and classes, maintenance, and one manually
+                    attributed Lean-shaped translation.
+                  </p>
+                  <p className="report-boundary-note">
+                    The reference attempts are freshly replayed baseline
+                    evidence. They are not proof authority, agent results, a
+                    leaderboard, or a model-performance claim. No provider or
+                    model runs in this browser view.
+                  </p>
+                  <button
+                    className="action"
+                    type="button"
+                    onClick={runProofAgentBenchmark}
+                    disabled={runningView !== undefined}
+                  >
+                    {runningView === 'benchmark'
+                      ? 'Building and replaying the reference corpus...'
+                      : benchmark === undefined
+                        ? 'Load reference benchmark'
+                        : 'Replay reference benchmark'}
+                  </button>
+
+                  {benchmarkLoadError !== '' && (
+                    <p className="error-banner" role="alert">
+                      Benchmark failed to load: {benchmarkLoadError}
+                    </p>
+                  )}
+
+                  {benchmark !== undefined && (
+                    <div className="benchmark-result" aria-live="polite">
+                      <div className="benchmark-summary">
+                        <article>
+                          <strong>{benchmark.tracks.length}</strong>
+                          <span>tracks</span>
+                        </article>
+                        <article>
+                          <strong>{benchmark.entries.length}</strong>
+                          <span>cases</span>
+                        </article>
+                        <article>
+                          <strong>
+                            {benchmark.outcomes.acceptedComplete}
+                            {' accepted · '}
+                            {benchmark.outcomes.abstained}
+                            {' abstained'}
+                          </strong>
+                          <span>fresh reference replay</span>
+                        </article>
+                      </div>
+                      <p className="benchmark-revision">
+                        <code>{benchmark.corpusRevision}</code>
+                        {' · evaluator '}
+                        <code>{benchmark.benchmarkRevision}</code>
+                      </p>
+                      <ul className="benchmark-tracks" aria-label="Tracks">
+                        {benchmark.tracks.map(track => (
+                          <li key={track.id}>
+                            {track.id} <strong>{track.selectedCases}</strong>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="benchmark-table-wrap">
+                        <table className="benchmark-table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Case</th>
+                              <th scope="col">Owners</th>
+                              <th scope="col">Features</th>
+                              <th scope="col">Reference</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {benchmark.entries.map(entry => (
+                              <tr key={entry.id}>
+                                <td>
+                                  <code>{entry.id}</code>
+                                  <small>{entry.track} · {entry.origin}</small>
+                                </td>
+                                <td>
+                                  <small>source</small>
+                                  <code>{entry.sourceOwner}</code>
+                                  <small>reference</small>
+                                  <code>{entry.referenceOwner}</code>
+                                </td>
+                                <td>{entry.features.join(' · ')}</td>
+                                <td>{entry.outcome}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                      <p className="report-boundary-note">
+                        Boundary: {benchmark.meaning}. Full canonical task and
+                        run artifacts are available through the package and
+                        repository adapter; this panel retains only the compact
+                        presentation above.
+                      </p>
+                    </div>
+                  )}
                 </section>
               )}
 

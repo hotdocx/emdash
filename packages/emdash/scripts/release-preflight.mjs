@@ -38,6 +38,12 @@ const EXPECTED_EXPORTS = Object.freeze({
     require: './dist/workspace.cjs',
     default: './dist/workspace.js',
   },
+  './benchmark': {
+    types: './dist/types/package_benchmark.d.ts',
+    import: './dist/benchmark.js',
+    require: './dist/benchmark.cjs',
+    default: './dist/benchmark.js',
+  },
   './package.json': './package.json',
 });
 const EXPECTED_FILES = Object.freeze(['dist', 'README.md', 'LICENSE']);
