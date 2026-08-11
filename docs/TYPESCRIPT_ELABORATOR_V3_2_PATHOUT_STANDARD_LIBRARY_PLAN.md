@@ -117,8 +117,9 @@ transitivity `1E` admitted all five definitions from its reviewed **0/0/0/5**
 v1 boundary, but cold observation replay found two presentation residuals.
 Corrected v2 therefore freezes **0/1/0/5**: one local derived runtime support,
 zero local proof rules, five unchanged definitions, and reuse of one existing
-proof-time provider. V2 remains non-authorizing pending a separate immutable
-review.
+proof-time provider. Proposal checkpoint `b1e6f0f` is separately reviewed and
+approved under delegated unattended authority with later human supersession;
+only that corrected root-local implementation may now proceed.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -2882,9 +2883,49 @@ node --require ts-node/register --test \
 ```
 
 V2 changes no semantics and enters no contributor, browser, workspace, or npm
-barrel. Its synchronized artifact, tests, and plan form a new proposal
-checkpoint whose exact commit and digest must be pinned by a separate review
-before implementation resumes. The unchanged 1,923-test aggregate from
+barrel. Its synchronized artifact, tests, and plan are checkpointed at
+`b1e6f0f`, with proposal SHA-256
+`139dbc75984f229e879ac93ee01e2dafc8b39982ca19f5ea9120836b0f9c2b1c`.
+
+The separate immutable review is
+[`src/v3_2/pathout_transitivity_review_v2.ts`](../src/v3_2/pathout_transitivity_review_v2.ts),
+with focused tests in
+[`tests/v3_2_pathout_transitivity_review_v2_tests.ts`](../tests/v3_2/pathout_transitivity_review_v2_tests.ts).
+Under the user's standing unattended delegation, with later human
+supersession, it approves only proposal checkpoint `b1e6f0f` and that exact
+digest. Its authorization copies the complete v2 boundary: one exact local
+derived complete-parent support must compile after the five definitions and
+subject-check; `stress.sigma-pi.uncurrying` must be rechecked against the final
+environment as an inherited provider; no local proof rule or runtime category
+collapse is authorized.
+
+Separate-review evidence on 2026-08-11 is:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_pathout_transitivity_proposal_tests.ts \
+  tests/v3_2_pathout_transitivity_review_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v2_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v2_tests.ts
+  27 tests / 4 suites: 27 passed, 0 failed
+
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_transitivity_proposal_v2.ts \
+  src/v3_2/pathout_transitivity_review_v2.ts \
+  tests/v3_2_pathout_transitivity_proposal_v2_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v2_tests.ts
+  passed
+```
+
+The review still denies a broad `hom_con` import, whole `id_funcd` delta,
+generic runtime rule, new proof rule, generic matcher/checker/evaluator/
+comparison change, TypeScript behavior from source injectivity metadata,
+Path-category bridge, public presentation, active Lambdapi edit, integration,
+and release. Its synchronized review checkpoint and digest are pinned by the
+next ledger-only checkpoint. The unchanged 1,923-test aggregate from
 `e560551` remains carried forward under the standing no-long-aggregate
 direction.
 
