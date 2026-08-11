@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | corrected Stage A driver checkpointed; final exact preflight pending | CloserFans `4faef78`, tree `a5e72dd`, adds minimized pre-spawn refusal receipts plus observed spawn-error/policy-failure tests to the approved exclusive-lease, committed-byte, closed-environment driver. No real call occurred; final immutable review still gates the sole authorization. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | sole corrected Stage A invocation authorized but not yet run | Exact CloserFans `4faef78`, tree `a5e72dd`, closed/no-model preflight, non-secret ID, and one absent run root are bound in the dedicated plan. One local open-book invocation is authorized after the behavior-free review checkpoint; no retry, measurement claim, or graduation is authorized. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6510,7 +6510,22 @@ violation test with `providerExecuted=true`. Focused canary/typecheck and live
 no-model permission gates are green; public adapter/CLI and operator behavior
 are unchanged. No provider/model or real lease exists. The dedicated plan
 records the three updated hashes and exact 19-entry committed snapshot digest.
-Final immutable review remains pending and accounting stays 35/41.
+At that correction checkpoint the final immutable review remained pending;
+the review is completed immediately below. Accounting stays 35/41.
+
+The new final immutable review accepts exact corrected CloserFans checkpoint
+`4faef7832ae7ac2131fe1c12e50831084835f60f`, tree
+`a5e72ddc8cc62f82087a444c7ec96edd46275d81`, and committed-template manifest
+`445f79b056fb29d3caee56049ae196e01acc4efc41c49bea9cca8b1501e8efce`.
+Closed-environment CLI 0.147.0/ChatGPT status, fresh `gpt-5.6-sol`/`3000`
+cache tuple, live no-model permission probe, full hash inventory, focused
+tests, clean ancestry/status, credential-shape scan, and absent dependency/
+authorization/run-root state are green. It authorizes one invocation only,
+using the exact public ID and exact absolute run root recorded in the dedicated
+plan, after the review is checkpointed. Every preflight or post-spawn outcome
+is terminal for this authorization; no retry or alternate coordinate is
+permitted. Raw evidence stays private, and all contamination/non-graduation/
+non-proof constraints remain unconditional. Accounting remains 35/41.
 
 ## Decision Ledger
 
@@ -6721,6 +6736,7 @@ Final immutable review remains pending and accounting stays 35/41.
 | `D-PA-202` | Approve only the corrected one-shot-driver implementation from exact proposal checkpoint `4ab09fc`, with human supersession and no real call. | Immutable proposal parent/tree and complete plan hashes are recorded in the dedicated plan. Eight review conditions add atomic non-deletable authorization leasing, exact committed-byte template bootstrap, a physically fake-only public path, closed ChatGPT-parent versus inherit-nothing command environments, all no-model gates before lease/spawn, observed dynamic provenance, private undeleted evidence, and fake coverage of every new branch. The approved tranche may change only the benchmark template, one dependency-free local operator, narrowly owned verification/registration, and plans. Provider/model execution, real lease creation/transcript, Emdash/other surfaces, push/merge/deploy/release, aggregates, and Stage B/C remain denied pending a focused-green checkpoint and final immutable code preflight. |
 | `D-PA-203` | Preserve the corrective one-shot driver at exact local CloserFans checkpoint `1abdfd8`, tree `5912793`, without yet authorizing its real member. | The public package path remains mock-only while the separate root operator reconstructs clean committed bytes, uses credential-empty scripts-disabled installation, closes parent and command environments, completes no-model gates before an exclusive persistent lease, and derives observed receipt/replay provenance. All four focused modes plus syntax, snapshot, ancestry, diff, credential-shape, and no-dependency-tree/real-lease checks are green. No provider/model, real lease/transcript, push/merge/deploy/release, or aggregate occurred; the final immutable code/preflight review remains a distinct gate and accounting stays 35/41. |
 | `D-PA-204` | Withhold the first final-call authorization and preserve exact CloserFans correction `4faef78`, tree `a5e72dd`, for a new immutable review. | The initial final audit found that safe pre-spawn refusals lacked minimized receipts and observed spawn failure lacked direct fake coverage. The additive correction records normalized no-call receipts, preserves atomic lease collision, tests executable disappearance after lease with `providerExecuted=false`, and tests a spawned policy failure with `providerExecuted=true`. Focused canary/typecheck and live no-model gates pass; no real provider/lease/transcript or unrelated effect occurred. |
+| `D-PA-205` | Authorize one corrected Stage A operator invocation only after the final behavior-free review checkpoint, using exact CloserFans `4faef78`, the recorded non-secret ID, and one recorded absent absolute run root. | Full source/input hashes, committed-template manifest, closed-environment CLI/ChatGPT status, fresh selected model tuple, live no-model sandbox probe, focused tests, clean ancestry/status, and absent dependency/lease/run state satisfy the eight mandatory conditions. Every preflight or post-spawn outcome terminates the authorization; no retry, alternate coordinate, performance claim, or graduation is permitted. Raw evidence remains private and accounting remains 35/41. |
 
 ## Validation And Checkpoint Policy
 

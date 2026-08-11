@@ -2785,6 +2785,114 @@ This correction remains implementation evidence only. A new immutable review
 must bind exact `4faef78` bytes and current no-model state before selecting the
 sole run root and authorizing the committed non-secret ID.
 
+### Immutable corrected-driver review and sole Stage A authorization
+
+Review date: 2026-08-11
+
+Decision: approve exactly one local operator invocation after this behavior-
+free review is checkpointed. The reviewed CloserFans source is clean commit
+`4faef7832ae7ac2131fe1c12e50831084835f60f`, exact parent
+`1abdfd8ee3711a3993fa0db573672ababee7e6d3`, exact tree
+`a5e72ddc8cc62f82087a444c7ec96edd46275d81`, and 19-entry committed-template
+manifest SHA-256
+`445f79b056fb29d3caee56049ae196e01acc4efc41c49bea9cca8b1501e8efce`.
+The reviewing Emdash plan parent is clean checkpoint
+`6ab3aefe20382c6a9997c7fcd10a088efa1f2355`, tree
+`99b5727b4dab6a80aea3ac92dfe15817fd5f1f66`.
+
+The exact committed-file inventory is:
+
+```text
+e6e93778a0e021bed8074d888958070465f7bae724879871c6801a3a4288e2f9  AGENTS.md
+cab4764e39e69c9eee7a177da539347f5a9f4a3693be816d3900d08580849db6  README.md
+42325cdedd181f36e1e221c6eb9d6fd2aadf89c005b05b55b08cc7e00b6aee01  scripts/run-emdash-stage-a-real.mjs
+de000ea8a72b9c2d1f482f5801159178677a3f3501925afadf582bfaca42808e  scripts/verify-emdash-benchmark-template-runtime.ts
+b6d4eb040df34eab3864e1c3fad34f49cc0fcc5c669f8f797f0ff95a0e02875a  templates/emdash_benchmark/README.md
+f89f208da92ac16e6835354bee273c5a365a7035a4831bb94a10a7f4eac3e8f1  templates/emdash_benchmark/scripts/emdash-canary-contract.mts
+db599cd2e5dc70f34ff0e6c5c43a910cb003dc9d741d3b49942229dec9e3af88  templates/emdash_benchmark/scripts/emdash-canary-evaluate.mts
+6761f9b22d0c4a41dfd08927e61ca824ddeaa740980fa52f89fce93a759968dd  templates/emdash_benchmark/scripts/emdash-canary-real.mts
+0c28e98abbefd9e5160522680322c53cdb6f72d782d9af8fb7bbb6c1d542ab9f  templates/emdash_benchmark/scripts/emdash-canary.mts
+fc9e704d5578399bd0326f39387e5b96e0f2c60d0b3d7e31c46073cf6e27c2ac  templates/emdash_benchmark/scripts/fixtures/emdash-canary-fake-codex.mjs
+47b8fa608ca98e9ec335ac8b63072a7ad20e49660eca095abf0f8f5884f8e32e  templates/emdash_benchmark/scripts/verify-emdash-canary.mts
+```
+
+The remaining fixed source inputs are exact:
+
+```text
+0c104f3888c61ce669958c44051ea65a153d9fbaea3c9c37139e6325b310eb84  benchmark-run.emdash.ts
+117768e52381ede1b23f3bf4c43064e526daa6a25f3d8d4b0c3c879ffd7574ed  emdash-canary-prompt.txt
+f8935691d02f44d7c9b2d0ad1c96559c985c5596ecc210c3c03390a0680a8e06  emdash-canary-output.schema.json
+523357c1109f62bd956d196c9a9280ea5313b5a264c0e080608e9c56b021caac  probe-emdash-canary-permissions.mts
+1f9efb7b416b9ab162ddc98f14c2c4ade0a56ddcf2df5fb519f437031f9fccf8  emdash-canary-package-lock.json
+```
+
+The retained lock resolves exact `@hotdocx/emdash@0.3.0` with integrity
+`sha512-ewAhab+tLMY0QZrOXLMSpH19VYkP73iR2iYxYRireYK+21QDOi9Cp/Tq4su+QI+b/NmYnUoZzGoEEQpBGJCxxg==`.
+The package manifest has only `benchmark`, `canary:mock`,
+`canary:probe-permissions`, `canary:verify`, `dev`, `start`, `typecheck`, and
+`verify`; it has no real command.
+
+Current no-model state is exact immediately before this decision:
+
+- the CLI resolves through Node 24.11.1 and reports `codex-cli 0.147.0` in the
+  same closed eight-key parent environment;
+- `codex login status` in that closed environment reports exactly `Logged in
+  using ChatGPT`; no account identifier or credential content/path was read,
+  copied, hashed, or recorded;
+- the selected local cache entry was fetched at
+  `2026-08-11T19:11:24.621770496Z` and reports `gpt-5.6-sol`, `comp_hash=3000`,
+  default low verbosity, and high reasoning support;
+- the live no-model strict-config/filesystem/command/network probe is green;
+  its script digest is recorded above and its expected result digest is
+  `2ae19204681704e5dc5beca30d15b5abdfff52a920537042404d7e1d483c340c`;
+- all focused fake orchestration, mock, clean-install/typecheck, public
+  adapter/CLI, committed-snapshot, source/event/replay/receipt, timeout/
+  overflow/refusal/policy/spawn-failure, credential-shape, whitespace,
+  ancestry, and no-in-worktree-dependency-tree gates are green; and
+- neither `~/.emdash-stage-a/authorizations/` nor the selected run root exists.
+
+The exact non-secret authorization ID is
+`emdash-stage-a-native-exact-local-premise-2026-08-11-v1`, SHA-256
+`4c8dc99972629f7b0e0807aa9986111a5dc89bbd839129ffc060c53a1c4aba21`.
+The sole run root is
+`/home/user1/.emdash-stage-a/stage-a-native-exact-local-premise-2026-08-11-v1`,
+SHA-256
+`5690701f93e2ee10e953e3a645afdacf7d69206a6e5e208e3f2b2eb74d897361`.
+Only the following command is authorized, once, from the clean reviewed
+CloserFans worktree:
+
+```bash
+node scripts/run-emdash-stage-a-real.mjs \
+  --authorization-id emdash-stage-a-native-exact-local-premise-2026-08-11-v1 \
+  --run-root /home/user1/.emdash-stage-a/stage-a-native-exact-local-premise-2026-08-11-v1
+```
+
+This authorizes no substitute path, source, ID, case, model, provider, CLI
+revision, credential form, permission profile, second process, retry,
+fallback, recursion, or second turn. Invoke the operator at most once. If any
+preflight refuses, stop even though no provider lease exists; do not select a
+new run root or repeat the command without another immutable review. If a
+provider spawn is attempted, its exclusive persistent lease consumes the ID
+regardless of exec/transport failure, timeout/overflow, malformed output,
+policy/source/replay failure, abstention, rejection, incompleteness, or
+completion. Do not delete or rewrite the bootstrap, run root, private evidence,
+or lease.
+
+After that single invocation, inspect only the minimized receipt and canonical
+artifacts needed to classify the outcome; keep raw JSONL, stderr, final model
+message, candidate source/diff, and replay evidence private and untracked.
+Synchronize both plans in a new rollback-safe checkpoint. The result remains
+open-book and non-graduating under
+`contamination=public-owner-reference-accessible`,
+`graduationEligible=false`, and `proofEvidence=false`. It cannot support a
+success-rate, leaderboard, representative-performance, solver-comparison, or
+graduation claim. ChatGPT-authenticated dollar cost remains unknown/null.
+
+No long aggregate is relevant or authorized. This decision uses the user's
+standing unattended-approval delegation plus checkpointing/backtracking SOP;
+the human may supersede it before execution. Roadmap accounting remains
+35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -2847,8 +2955,9 @@ On continuation:
    driver design as approved only for local code and fake/no-model tests under
    the immutable review above; treat corrective CloserFans checkpoint
    `1abdfd8`, tree `5912793`, and final-review correction `4faef78`, tree
-   `a5e72dd`, as the focused-green implementation of that approval; and require
-   a new immutable exact code/preflight checkpoint before any real-agent or
-   retention effect; and
+   `a5e72dd`, as the focused-green implementation of that approval; treat the
+   immutable corrected-driver review above as authorization for only its exact
+   one-shot operator command after the plan is checkpointed; and forbid any
+   retry or alternate coordinate without another immutable review; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
