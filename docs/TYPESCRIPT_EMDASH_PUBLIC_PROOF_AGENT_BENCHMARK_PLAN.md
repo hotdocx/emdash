@@ -4,9 +4,8 @@ Status: living plan; post-`STDLIB-8B` audit complete; exact non-authorizing
 `AGENT-EVAL-12B1` proposal checkpoint `a181885` is separately approved by the
 immutable review at `d271c33`. The internal corpus/interchange implementation
 is complete and proportionally qualified at exact checkpoint `d0d3764`. A
-non-authorizing `AGENT-EVAL-12B2` public-surface proposal is complete in the
-checkpoint containing the proposal record below; its exact checkpoint must be
-pinned and separately reviewed before implementation.
+non-authorizing `AGENT-EVAL-12B2` public-surface proposal is complete at exact
+checkpoint `ba49705` and must be separately reviewed before implementation.
 
 Date: 2026-08-11
 
@@ -217,14 +216,14 @@ the evaluator.
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
-| `AGENT-EVAL-12B2` | proposal v1 complete; exact checkpoint and separate review pending | The proposal selects one isolated browser-safe `./benchmark` subpath, a stateless repository Node artifact runner, a user-triggered lazy browser view, exact packed consumers, and retained no-bin/no-dependency package policy. It adds no behavior by itself. |
+| `AGENT-EVAL-12B2` | proposal v1 complete at `ba49705`; separate review pending | The proposal selects one isolated browser-safe `./benchmark` subpath, a stateless repository Node artifact runner, a user-triggered lazy browser view, exact packed consumers, and retained no-bin/no-dependency package policy. It adds no behavior by itself. |
 | `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
-non-authorizing `AGENT-EVAL-12B2` proposal below now awaits an exact checkpoint
-pin and separate immutable review. No public export, runner, package, or
-release effect follows merely from writing that proposal.
+non-authorizing `AGENT-EVAL-12B2` proposal below is pinned at `ba49705` and now
+awaits separate immutable review. No public export, runner, package, or release
+effect follows merely from writing that proposal.
 
 ## `AGENT-EVAL-12B1` Proposal Requirements
 
@@ -437,9 +436,8 @@ aggregates are not reported as passes.
 
 Date: 2026-08-11
 
-State: non-authorizing proposal complete; the proposal checkpoint is the
-commit containing this record and will be pinned by the immediate ledger-only
-follow-up. Separate immutable review remains mandatory.
+State: non-authorizing proposal complete at exact checkpoint `ba49705`;
+separate immutable review remains mandatory.
 
 The executable proposal is
 [`lf_proof_agent_public_surface_proposal.ts`](../src/v3_2/lf_proof_agent_public_surface_proposal.ts),
@@ -570,8 +568,8 @@ On continuation:
 3. preserve CloserFans' unrelated untracked review plan;
 4. keep only one semantic row active;
 5. treat 12B1 as complete at exact checkpoint `d0d3764`;
-6. pin and separately review the exact non-authorizing 12B2 proposal before
-   any public runner, browser, barrel, package, or consumer implementation;
-   and
+6. separately review exact non-authorizing 12B2 proposal checkpoint `ba49705`
+   before any public runner, browser, barrel, package, or consumer
+   implementation; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
