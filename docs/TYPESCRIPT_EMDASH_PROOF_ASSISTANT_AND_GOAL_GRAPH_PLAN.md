@@ -37,7 +37,9 @@ automation remains a later boundary; the
 proof-agent benchmark audit is complete and its first pure attempt-scoring
 evaluator is implemented and final-proportional-green through focused,
 nearest-owner, typecheck/lint, and browser-closure gates; its public host,
-package, and corpus layer remains gated; the first research-planning goal-
+package, and corpus layer has now been repartitioned after the post-library
+readiness audit, with only its representative corpus/interchange proposal
+selected; the first research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
 owner, typecheck/lint, and browser-closure gates; its replay-gated public
@@ -224,8 +226,10 @@ semantic checkpoint `8d226cc`: its finite parser, explicit Node semantic
 checker/CLI, honest static browser route, and owned Chapter 5 bridge preserve
 the separately reviewed `6ad0812`/`f03ef01` boundary. Graduation `0G` is now
 separately approved over proposal checkpoint `85b560e`, qualifying only the
-root-source profile. `STDLIB-8B` is complete; a post-completion readiness audit
-is next.
+root-source profile. `STDLIB-8B` is complete. The post-completion readiness
+audit is also complete: five rows retain their exact gates, while public
+proof-agent evaluation is repartitioned and its representative corpus/
+interchange proposal is selected next under the dedicated plan.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -332,6 +336,7 @@ Depends-On:
 - [`TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md);
 - [`TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md`](./TYPESCRIPT_EMDASH_AI_NATIVE_WORKSPACE_AND_PROOF_PLAN.md);
 - [`TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md`](./TYPESCRIPT_EMDASH_STRUCTURES_CLASSES_AND_INSTANCE_SYNTHESIS_PLAN.md);
+- [`TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md`](./TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md);
 - [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md);
 - [`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./PERSISTENT_GOAL_GIT_EXPERIMENTATION.md);
 - the active emdash v3.2 authority chain under `emdash2/`; and
@@ -815,7 +820,12 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
 | `EXTERNAL-CERT-11` | ATP/SMT proposal and certificate adapter | deferred | No solver dependency/binary/corpus or certificate checker is selected. Reactivate only for one concrete solver/certificate-format consumer plus independent reconstruction or checking. |
 | `AGENT-EVAL-12A` | Pure reproducible proof-agent case/run evaluator | complete | `f46ff9a`; self-contained exact cases, arbitrary inert patches, fresh selected-proof replay, stable diagnostics, integer retrieval/plan/replay metrics, and provider-reported usage |
-| `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | gated | 12A measurements and the first concrete hosted package consumer now exist; still require a reviewed representative corpus plus a separately frozen public agent-run/interchange boundary. |
+| `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | repartitioned | The post-`STDLIB-8B` audit separates corpus/interchange, public runner/package surface, exact release/host installation, and measured graduation as 12B1–12B4. |
+| `AGENT-EVAL-12B0` | Post-library benchmark readiness and architecture audit | complete; read-only | Existing 12A evaluator, public workspace/authoring APIs, real CloserFans TypeScript host, and checked proof/class fixtures make corpus construction ready. PathOut remains a distinct semantic-task family, not an LF patch case. |
+| `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | selected; proposal next | Dedicated plan requires six tracks and at least eight cases, strict canonical parsing, fresh 12A replay, and a separately reviewed executable proposal before behavior. No public barrel yet. |
+| `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | gated | Requires qualified 12B1 plus focused browser/package consumers and the final shared-boundary gate. No release. |
+| `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | gated | Requires qualified 12B2, a separate version/release contract, and fresh sibling edit-time audit. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | gated | Requires installed 12B3 consumer and a separately frozen provider/run retention and reporting policy. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -827,12 +837,13 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GOAL-GRAPH-14B4` | Authenticated hosted evidence/action adapters | deferred | Require one exact mutation consumer, actor/signature authority, idempotency/audit/permission semantics, and current host security/deployment clearance; visualization does not authorize effects. |
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 | `POST-14B-AUDIT-16` | Re-evaluate incomplete rows after the real package and Arrowgram/GetPaidX consumer | complete | 14B4, 12B, 10, and 11 retain their exact gates; public distribution plus checked book/research consumers make only the bounded `STDLIB-8A` product-selection row ready. |
+| `POST-STDLIB-8B-AUDIT-17` | Re-evaluate every deferred/gated row after PathOut graduation | complete; read-only | SIMP-5B2, INDEX-SEARCH-6B, COUNTEREVIDENCE-10, EXTERNAL-CERT-11, and GOAL-GRAPH-14B4 retain concrete gates. Only AGENT-EVAL-12B0/12B1 becomes ready through existing evaluator, public authoring/workspace, host, and fixture evidence. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
-No semantic row is automatically active after graduation. A bounded
-post-`STDLIB-8B` readiness audit must re-evaluate the concretely gated/deferred
-rows before selecting more work.
+The post-completion audit selected only the non-authorizing
+`AGENT-EVAL-12B1` proposal. No corpus behavior, public export, runner, release,
+sibling mutation, model run, or hosted action is automatically authorized.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -6220,6 +6231,60 @@ typecheck, focused lint, diff hygiene, and a clean generic-compiler diff are
 green. No long aggregate is rerun, no active Lambdapi source or public surface
 changes, and the completed row advances only to presentation `1F`.
 
+## POST-STDLIB-8B-AUDIT-17 Readiness And Benchmark Selection
+
+Date: 2026-08-11
+
+Result: complete and read-only. The audit inspected the exact current source,
+public package entries, PathOut task boundary, local tool availability, and
+the locally integrated CloserFans consumers. Its full architecture and corpus
+contract are in
+[`TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md`](./TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md).
+
+PathOut graduation changes one broad product fact: Emdash now has substantial
+curated mathematics running through the TypeScript backend. It does not
+change the input contract of the 12A proof-patch evaluator. A PathOut
+presentation request is checked by the transfer-backed PathOut adapter; a 12A
+case is reconstructed from canonical LF proof-development source and one
+named open goal. The audit rejects any attempt to count the static PathOut
+qualification report as an agent proof success.
+
+Five rows retain their prior gates:
+
+1. `SIMP-5B2` still has no non-test 5B1 consumer or reviewed congruence and
+   premise-discharge policy.
+2. `INDEX-SEARCH-6B` still has no theorem-export owner, class/instance/
+   coercion use graph, or measured retrieval corpus. The future benchmark may
+   supply measurement, but an unimplemented corpus is not evidence.
+3. `COUNTEREVIDENCE-10` still lacks a selected finite domain,
+   interpretation, claim, and counterexample evidence contract.
+4. `EXTERNAL-CERT-11` still lacks a selected solver, certificate format,
+   corpus, and independent reconstruction/checking path; the audited host has
+   no listed solver executable.
+5. `GOAL-GRAPH-14B4` still lacks a concrete Emdash mutation consumer,
+   actor/signature authority, idempotency, permission, and audit semantics.
+   The installed goal-graph template remains derived and read-only.
+
+`AGENT-EVAL-12B` is the only row repartitioned. The pure evaluator at
+`f46ff9a`, public proof/class/workspace APIs in 0.2.0, ordinary-Node
+`emdash_ts` host at CloserFans `bd4146b`, and existing checked fixtures are
+enough to build a representative source-backed corpus without a proof server
+or new semantics. They are not enough to skip corpus review, publish a package,
+edit a sibling, or claim a measured agent result.
+
+The selected next operation is therefore one executable, non-authorizing
+`AGENT-EVAL-12B1` proposal. It must preserve the dedicated plan's six-track,
+eight-case minimum and strict task-kind separation, pin exact owners and
+digests, and be separately reviewed before implementation. All behavior,
+public/package, runner, release, hosted, and model-run effects remain later
+rows.
+
+No TypeScript, package, workflow, sibling, kernel/Lambdapi, mathematical,
+book/print, registry, deployment, or hosted state changed in this audit.
+Proportional validation is exact source inventory, link/heading review,
+worktree/ancestry preservation, and diff hygiene. No test or aggregate can add
+relevant evidence to this plan-only selection.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6404,6 +6469,7 @@ changes, and the completed row advances only to presentation `1F`.
 | `D-PA-177` | Complete reviewed `PATHOUT-LIBRARY-PRESENTATION-1F` at `8d226cc` and advance only to graduation audit `0G`. | Semantic checkpoint `8d226cc` adds the immutable four-form parser/qualification manifest, sole transfer-backed Node check, static-by-default `pathout` CLI, lazy transfer-free browser panel, and owned Chapter 5 bridge. One cold run checks all four forms plus role/endpoint negatives in 207473 ms; ordinary focused execution passes 17 and explicitly skips three cold assertions. Root typecheck, focused lint, workspace, non-export, generic-engine-diff, browser TypeScript/Vite build and 7014-byte transfer-free chunk, book typography/check/render at 300 pages, and diff hygiene are green. A name-filtered main-registry probe timed out at 90 seconds before suite discovery and is not reported as a pass; exact imports plus direct tests establish registration. The long `check:ts` run is waived under the user's direct standing no-long-aggregate instruction, not misreported. No semantic/Core/rule, active Lambdapi, public package/release, integration, deployment, sibling, or generated-book-source effect occurs. |
 | `D-PA-178` | Freeze a non-authorizing `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` root-source qualification proposal. | The proposal pins active source/check digests and every predecessor through `8d226cc`/`be487c9`. It separates five mathematical opaque owners from nine sealed categorical supports, records 39 local runtime rules, two local proof rules, and thirty transparent definitions across exact 5/13/2/9, 5/12/0/6, 4/13/0/10, and 0/1/0/5 partitions. Graduation claims only measured computation and the honest four-form presentation; it denies the path-category bridge, general metatheory, ordinary-user rules/opaque owners, public/npm export, release, integration, and deployment. Seven focused tests, root typecheck, focused lint, proposal SHA-256 `fc35b53dd151694069974b4df6ad3c04ee55cd5d8bacad34f9f21c47c8cee572`, and test SHA-256 `33da42c1e625a04fdb3d68d0f876d71a6224bc1ec2887f9f9f0d9af956236b91` are green; no aggregate is rerun for behavior-free data. Separate immutable review remains mandatory. |
 | `D-PA-179` | Approve exact graduation proposal checkpoint `85b560e`, complete `STDLIB-8B` as root-source-qualified, and select only a post-completion readiness audit. | Exact review checkpoint `d7d7428` and immutable review SHA-256 `69555218149b04833bdd1c791c7ab60fe6d28177748334003d443ab060db486a` approve the exact 5/9/14 sealed-owner partition, 39/2 local rule partition, 30 transparent definitions, measured computation envelope, and four-form evidence split. The review records a zero semantic implementation delta and leaves public/npm barrels, package version/release, integration, deployment, active Lambdapi edits, general HIT/parser/rule capability, the path-category bridge, and metatheoretic claims unauthorized. Thirteen combined tests, root typecheck, focused lint, test-runner registration, non-export checks, and diff hygiene are green; no long aggregate is rerun for behavior-free review data. Human decisions may supersede the delegated unattended approval. |
+| `D-PA-180` | Complete the read-only post-`STDLIB-8B` audit, retain five exact deferrals, and repartition only public agent evaluation. | PathOut requests and LF proof-patch cases have different trusted inputs, so graduation does not manufacture a benchmark case. Existing 12A replay, public proof/class/workspace APIs, the real CloserFans TypeScript host, and checked fixtures do make a six-track representative corpus plus canonical interchange implementable. `AGENT-EVAL-12B1` proposal is selected under the dedicated plan; public barrels, runners, package version/release, sibling edits, model runs, and hosted actions remain later rows. |
 
 ## Validation And Checkpoint Policy
 
@@ -6515,25 +6581,22 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from completed `GOAL-GRAPH-14A` checkpoint `faa4c27`, the completed
-> `GOAL-GRAPH-14B1` host-neutral view semantic/ledger checkpoints recorded
-> above, the completed npm 0.1.0 publication/trust boundary, and completed
-> CloserFans hosted-consumer checkpoint `bd4146b`, together with the earlier
-> checked proof-engineering checkpoints in this plan. Treat
-> `GOAL-GRAPH-14B0/14B1/14B2` as complete, including exact public
-> `@hotdocx/emdash@0.2.0`, release run `31414385484`, and the completion record
-> below. Treat `GOAL-GRAPH-14B3` as complete at locally integrated CloserFans
-> checkpoint `5c0d0c1`, with no sibling remote push or deployment. Perform a
-> fresh read-only post-14B readiness audit next: determine whether the concrete
-> consumer changes any exact prerequisite for `GOAL-GRAPH-14B4`,
-> `AGENT-EVAL-12B`, or `STDLIB-8`, and retain explicit deferrals wherever the
-> required mutation workflow/authority, corpus/transport, or mathematical
-> product profile is still absent. Keep Arrowgram source unchanged and hosted
-> actions behind 14B4 and its exact gates. Keep
-> `AGENT-EVAL-12B`, `STDLIB-8`,
-> `COUNTEREVIDENCE-10`, and
-> `EXTERNAL-CERT-11` behind their remaining corpus, product, or solver gates
-> rather than inventing authority merely to advance the ledger.
+> Start from exact public `@hotdocx/emdash@0.2.0`, completed CloserFans
+> TypeScript/goal-view consumers at `bd4146b`/`5c0d0c1`, completed
+> `STDLIB-8B` proposal/review/ledger checkpoints
+> `85b560e`/`d7d7428`/`3135747`, and every earlier proof-engineering checkpoint
+> recorded above. Treat `POST-STDLIB-8B-AUDIT-17` and
+> `AGENT-EVAL-12B0` as complete read-only decisions. Continue through
+> `docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md`: freeze one
+> executable non-authorizing `AGENT-EVAL-12B1` corpus/interchange proposal,
+> checkpoint it, review it separately, and only then implement its full six-
+> track/eight-case representative boundary. Do not relabel a PathOut
+> presentation request as an LF proof-patch task or shrink representativeness
+> merely to ease implementation. Keep public barrels/runners in 12B2,
+> version/release and CloserFans edits in 12B3, and real-agent runs in 12B4.
+> Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
+> `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
+> retained by audit 17 rather than inventing authority to advance the ledger.
 > Preserve the hard distinction between a kernel-checked theorem and every
 > weaker task/observation/approval/AI evidence class.
 >

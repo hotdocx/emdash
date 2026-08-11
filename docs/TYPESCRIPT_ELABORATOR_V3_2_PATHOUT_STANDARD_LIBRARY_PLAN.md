@@ -132,7 +132,9 @@ later human supersession. That exact four-stage implementation is now
 final-proportional-green at semantic checkpoint `8d226cc`. Graduation `0G`
 is now separately approved over exact proposal checkpoint `85b560e`, qualifying
 only the root-source profile. `STDLIB-8B` is complete without a public package
-effect; a post-completion readiness audit is next.
+effect. The governing plan's post-completion readiness audit is now complete;
+it selects only the unrelated public proof-agent corpus/interchange proposal
+and leaves PathOut export, versioning, and publication unselected.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -3532,8 +3534,10 @@ Thirteen combined proposal/review tests pass, along with root typecheck and
 focused ESLint. Both suites are registered in `tests/main_tests.ts`; exact
 imports plus the direct focused run are the registration evidence. No long
 aggregate is rerun for this behavior-free review under the standing human
-direction. The next state is a post-`STDLIB-8B` readiness audit, not automatic
-publication or another mathematical extension.
+direction. The governing plan's post-`STDLIB-8B` readiness audit is now
+complete and selects only the unrelated public proof-agent corpus/interchange
+proposal. It does not authorize PathOut publication or another mathematical
+extension.
 
 ## Required Evidence For Implementation
 
