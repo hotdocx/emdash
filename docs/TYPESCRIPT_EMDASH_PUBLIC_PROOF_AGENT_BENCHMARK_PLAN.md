@@ -3159,6 +3159,38 @@ coordinate or provider/model effect. The discarded outer run and 133.41-second
 direct pass remain recorded with their distinct meanings. Accounting remains
 35/41.
 
+###### Immutable focused-verifier scheduling review
+
+Reviewed proposal checkpoint:
+`2b2387734840a0429307a7573ad78f727d795187`, exact parent
+`e1bae2126faf932b886caccdf18f54bc6c6cf711`, exact tree
+`adc5a42b5531e02e2780e658f58da9d569ccc6dd`. Complete plan SHA-256 values are:
+
+```text
+91188bbca632a2e4b6cb8e5715527a90712e065cf7f4fc72fdeccd0c2fa5d6a3  docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md
+e6f05a5ce8c94ff5b4238f5261065a3e97fcbd19338ebea2bb9b52a06500b923  docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md
+```
+
+The pre-edit verifier SHA-256 is
+`aa386894e968d558c2fe5427b708025e5a9499ac2b6febcdc681b11a4b1fba50`.
+Review confirms that all ten mock invocations allocate disjoint run,
+workspace, fake-home/temp, evidence, and evaluator-output paths. They share
+only the read-only installed template. `Promise.all` returns results in input
+order, while the retained-root cleanup is already order-independent. The
+tamper hook and timeout remain confined to their own roots. The real-driver
+sequence, including its authorization-collision dependency, is outside the
+proposed concurrency and remains sequential.
+
+Decision: approve only replacement of the ten sequential invocations inside
+`verifyMockRunner` by the five explicit pairs recorded above. Do not add a
+general scheduler, exceed concurrency two, coalesce roots or cases, change any
+scenario option/assertion/hook, or edit production/real-driver code. Require
+the direct inner verifier and the unchanged outer `--canary-only` invocation
+to pass under their existing bounds, then run the live no-model permission and
+static hygiene checks. No new coordinates, operator call, provider/model,
+lease/transcript, integration, publication, deployment, cleanup of preserved
+evidence, or performance/proof claim is authorized. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact

@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | focused-verifier scheduling correction proposed; no test edit yet authorized | The four R1 files remove the login-stream and evaluator-IPC defects. The exact inner no-model matrix passes in 133.41 seconds, but the default outer gate expires at 120 seconds. The dedicated plan proposes only bounded pairwise scheduling of the same isolated mock cases; separate review remains mandatory. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | test-only pairwise verifier scheduling approved; implementation pending | The four R1 files remove the login-stream and evaluator-IPC defects. Exact review of proposal `2b23877` permits only five two-case fake/no-model batches in the verifier; all cases, roots, assertions, production behavior, and provider denials remain. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6595,6 +6595,16 @@ receipt check, and cleanup remains; production and real-driver behavior remain
 unchanged. Separate immutable review is required before the verifier edit, and
 new coordinates/provider effects remain denied. Accounting remains 35/41.
 
+Separate immutable review of exact proposal
+`2b2387734840a0429307a7573ad78f727d795187` approves only five explicit
+two-case batches inside `verifyMockRunner`. Every invocation has disjoint
+private state and shares only the read-only installed template; result order
+and all assertions remain exact. Real-driver tests remain sequential. The
+review forbids a general scheduler, concurrency above two, case/root
+coalescing, production changes, and provider effects, and requires both direct
+and default outer focused gates plus live no-model/static checks. Accounting
+remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6811,6 +6821,7 @@ new coordinates/provider effects remain denied. Accounting remains 35/41.
 | `D-PA-209` | Freeze a non-authorizing R1 amendment replacing only clean-evaluator tsx-CLI launch with `node --import tsx`. | Exact no-model reproduction shows the private default run root can make tsx's IPC Unix-socket path exceed the host limit, causing `listen EINVAL`; the same evaluator/attempt succeeds with a shorter temp path. The amendment preserves the long private boundary and all replay semantics while avoiding the CLI IPC socket. It expands implementation scope to `emdash-canary.mts` only after separate review. |
 | `D-PA-210` | Approve exact evaluator-launch amendment `3f5e428` as the fourth and final R1 implementation file. | `node --import tsx` runs the same installed clean evaluator with identical cwd, arguments, closed environment, bounds, manifest/replay parsing, and artifact digests while removing only incidental tsx-CLI IPC. The default long-private-path suite must pass; no path shortening, operator/contract/semantic change, new coordinates, provider, or external effect is allowed. |
 | `D-PA-211` | Freeze a non-authorizing test-only bounded scheduling correction for the focused Stage A verifier. | The unchanged inner fake/no-model matrix passes all assertions in 133.41 seconds, while the default outer gate expires at 120 seconds. Five explicit two-case batches retain all ten independent cases, private roots, assertions, and cleanup without increasing the timeout or changing production/real-driver behavior. Separate review is mandatory before editing. |
+| `D-PA-212` | Approve exact verifier-scheduling proposal `2b23877` only for five explicit two-case mock batches. | All mock invocations own disjoint private roots and share only read-only installed input; tuple result order and cleanup remain deterministic enough, while real-driver authorization ordering stays sequential. Direct and outer focused gates must pass before checkpointing; no production or provider authority is added. |
 
 ## Validation And Checkpoint Policy
 
