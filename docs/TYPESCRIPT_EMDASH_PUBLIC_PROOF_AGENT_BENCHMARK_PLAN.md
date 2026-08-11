@@ -227,7 +227,7 @@ the evaluator.
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
-| `AGENT-EVAL-12B3` | proposal/review/candidate `bb16e47`/`0027c66`/`995e497`; external/host stages pending | Exact `0.3.0` assertions and current action pins are green through focused release/package/consumer gates. No external or sibling effect has occurred. |
+| `AGENT-EVAL-12B3` | exact `0.3.0` registry release verified; permanent workflow hardening candidate locally green; CloserFans host pending | Pages run `31509112917` and live 6/10/9/1 panel passed. After two preserved pre-package checkout failures, reviewed recovery run `31510726533` published byte-identical OIDC/provenance bytes. The temporary dispatch is removed locally and must be checkpointed/integrated before sibling work. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
@@ -1573,6 +1573,102 @@ not passes.
 The next admissible operation is clean re-audit, non-force goal-branch push
 and `main` fast-forward to exact `7e275a7`, public workflow recognition, and
 one dispatch on exact integrated `main`. The Release must not be edited again.
+
+## `AGENT-EVAL-12B3-R2` Public Release And Permanent Hardening Record
+
+Date: 2026-08-11
+
+State: exact public package verified; permanent release-only workflow
+hardening is locally complete and proportionally green. Its exact semantic
+checkpoint is pinned by the immediately following plan-only ledger update.
+CloserFans remains untouched until that hardening reaches public `main`.
+
+### Hosted publication evidence
+
+The sole manual recovery run is `31510726533`, event `workflow_dispatch`,
+workflow-authority branch/head `main` / exact `7e275a7`. Its build job
+`93843570505` passed credential-empty checkout of exact package tag
+`emdash-v0.3.0` at `995e497`, tag/main ancestry, frozen install, workspace,
+typecheck, 3/3 release policy, package build, deterministic pack, installed
+verification, and artifact upload. No checkout action or submodule operation
+ran.
+
+The only pending deployment was exact environment ID `19605245682`, name
+`npm-release`, for that run. The reviewed owner approval created deployment
+`5854097178`; publish job `93843776669` then downloaded the already qualified
+artifact, retained npm 11.19.0, verified its digest, and completed OIDC
+publication. Both jobs and the overall run are successful, the pending list
+is empty, and the complete run log has no GitHub warning or error annotation.
+Failed runs `31509330799` and `31510177054` remain visible and correctly show
+publish skipped before any npm mutation.
+
+Exact artifact and registry evidence:
+
+- GitHub artifact ID `9108950678`, name `emdash-npm-0.3.0`, belongs to run
+  `31510726533` and workflow head `7e275a7`; its ZIP-container digest is
+  SHA-256 `66dbc8d8f3c8344b364ff6a7692fced43defc88a9bddf0161a5ec9caca0d2e26`;
+- the independently retained local candidate, extracted GitHub artifact, and
+  fresh npm-registry tarball are byte-identical: 162 entries, 2,778,964 bytes,
+  SHA-256
+  `49c4f2ca7a12f1bc0f7721044015c1df3bee17e849bc593b99a9161206178541`;
+- npm reports exact package/version `@hotdocx/emdash@0.3.0`, `latest: 0.3.0`,
+  `fileCount: 162`, unpacked size 15,997,850, SHA-1
+  `78ea059643204dd830f8508d0031400923d8b4e9`, and SHA-512 hex
+  `7b002169bfad2cc634419ace5cb312a47d7d55890fef7891da26316118ab7982bedb54033a2f42a7f4eae2cbbe408f9bfcd9989d4a19cc6a04110a411890b1c6`;
+- the registry exposes an npm publish attestation and SLSA provenance v1,
+  plus an npm signature. Both attestation subjects have the exact package
+  SHA-512. Provenance records GitHub-hosted builder, workflow path
+  `.github/workflows/npm-publish.yml`, workflow ref `refs/heads/main`, event
+  `workflow_dispatch`, resolved workflow commit `7e275a7`, and invocation run
+  `31510726533`; the build log independently proves detached package source
+  `995e497`. The Sigstore transparency-log index is `2423388773`; and
+- the registry-downloaded tarball passed fresh installed ESM, CommonJS,
+  strict NodeNext, benchmark-browser, existing-entry-browser, and root-only-
+  browser consumers. It installed as exact `0.3.0` and produced the expected
+  three browser bundles.
+
+Release ID `368683536` remains the same public, non-draft, non-prerelease
+GitHub Release with exact tag/title/body. Annotated tag `emdash-v0.3.0` still
+peels to package source `995e497`; public `main` at publication was workflow
+authority `7e275a7`. No token, ignored `.env`, local npm publish, alternate
+version, package byte change, or sibling mutation participated.
+
+### Permanent workflow hardening
+
+Immediately after registry verification, the temporary dispatch and its sole
+choice, dual concurrency/tag resolution, and manual job condition were
+removed. The workflow and focused policy test now exactly match their reviewed
+R1 blobs at `f965d03`: permanent `release: published` only, credential-empty
+direct tag/main checkout, no manual/push/pull-request trigger, no checkout
+action/submodule traversal, and unchanged protected OIDC jobs. Future release
+tags will contain this corrected workflow; immutable `0.3.0` needs no trigger.
+
+Exact hardening evidence:
+
+```text
+git diff --exit-code f965d03 --
+  .github/workflows/npm-publish.yml
+  packages/emdash/scripts/release-preflight-tests.mjs
+  passed: exact reviewed permanent blobs
+
+./scripts/pnpmw run package:release:check
+  passed: 3/3 release identity, manifest negatives, permanent token-free
+  release-only direct-checkout policy
+
+focused ESLint over release-preflight-tests.mjs
+  passed with no diagnostics
+
+Python safe YAML parse, temporary-trigger absence scan, and git diff --check
+  passed
+```
+
+No TypeScript/root aggregate, Lambdapi/kernel, book/print, browser, package
+repack, CloserFans, Arrowgram, provider/model, Release, tag, environment, or
+registry mutation ran for the exact hardening reversion. Those omissions are
+not passes. The next admissible operation is exact staged review/checkpoint,
+plan-only pin, clean non-force branch/main integration, and public workflow-
+byte verification. Only afterward may the frozen additive CloserFans stage
+begin.
 
 ## Validation Policy
 

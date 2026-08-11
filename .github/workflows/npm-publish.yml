@@ -3,33 +3,19 @@ name: Publish emdash package to npm
 on:
   release:
     types: [published]
-  workflow_dispatch:
-    inputs:
-      release_tag:
-        description: One-time immutable npm release recovery tag
-        required: true
-        type: choice
-        options:
-          - emdash-v0.3.0
 
 permissions:
   contents: read
 
 concurrency:
-  group: npm-emdash-${{ github.event.release.tag_name || inputs.release_tag }}
+  group: npm-emdash-${{ github.event.release.tag_name }}
   cancel-in-progress: false
 
 jobs:
   build:
-    if: >-
-      (github.event_name == 'release' &&
-       startsWith(github.event.release.tag_name, 'emdash-v')) ||
-      (github.event_name == 'workflow_dispatch' &&
-       inputs.release_tag == 'emdash-v0.3.0')
+    if: startsWith(github.event.release.tag_name, 'emdash-v')
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    env:
-      RELEASE_TAG: ${{ github.event.release.tag_name || inputs.release_tag }}
     outputs:
       artifact_name: ${{ steps.package.outputs.artifact_name }}
       filename: ${{ steps.package.outputs.filename }}
@@ -37,6 +23,8 @@ jobs:
       version: ${{ steps.package.outputs.version }}
     steps:
       - name: Checkout exact release tag without credentials
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
           set -euo pipefail
           test -n "$RELEASE_TAG"
@@ -57,6 +45,8 @@ jobs:
           package-manager-cache: false
 
       - name: Verify tag ancestry and release identity
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$(git rev-parse "${RELEASE_TAG}^{commit}")"
@@ -78,6 +68,8 @@ jobs:
 
       - name: Pack and verify exact release tarball
         id: package
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
           set -euo pipefail
           version="${RELEASE_TAG#emdash-v}"

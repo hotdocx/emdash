@@ -118,7 +118,7 @@ test('rejects tag, repository, and public-manifest drift', () => {
   }
 });
 
-test('pins a token-free two-job workflow with one exact recovery dispatch', async () => {
+test('pins a token-free, least-authority two-job workflow', async () => {
   const workflow = await readFile(
     path.join(repositoryRoot, '.github', 'workflows', 'npm-publish.yml'),
     'utf8',
@@ -126,16 +126,7 @@ test('pins a token-free two-job workflow with one exact recovery dispatch', asyn
   for (const required of [
     'release:',
     'types: [published]',
-    'workflow_dispatch:',
-    'description: One-time immutable npm release recovery tag',
-    'required: true',
-    'type: choice',
-    '- emdash-v0.3.0',
-    'github.event.release.tag_name || inputs.release_tag',
-    "github.event_name == 'release'",
-    "startsWith(github.event.release.tag_name, 'emdash-v')",
-    "github.event_name == 'workflow_dispatch'",
-    "inputs.release_tag == 'emdash-v0.3.0'",
+    "if: startsWith(github.event.release.tag_name, 'emdash-v')",
     'name: Checkout exact release tag without credentials',
     'https://github.com/${GITHUB_REPOSITORY}.git',
     'GIT_TERMINAL_PROMPT=0 git',
@@ -161,12 +152,7 @@ test('pins a token-free two-job workflow with one exact recovery dispatch', asyn
     workflow,
     /actions\/checkout|persist-credentials|submodule|GITHUB_TOKEN|secrets\.|NODE_AUTH_TOKEN|NPM_TOKEN/u,
   );
-  assert.doesNotMatch(workflow, /pull_request:|push:/u);
-  assert.equal((workflow.match(/workflow_dispatch:/gu) ?? []).length, 1);
-  assert.match(
-    workflow,
-    /workflow_dispatch:\n\s+inputs:\n\s+release_tag:\n\s+description: One-time immutable npm release recovery tag\n\s+required: true\n\s+type: choice\n\s+options:\n\s+- emdash-v0\.3\.0\n/u,
-  );
+  assert.doesNotMatch(workflow, /pull_request:|push:|workflow_dispatch:/u);
   assert.equal((workflow.match(/id-token: write/gu) ?? []).length, 1);
   const buildStart = workflow.indexOf('\n  build:\n');
   const publishStart = workflow.indexOf('\n  publish:\n');
