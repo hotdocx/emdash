@@ -47,8 +47,9 @@ proposal, immutable first review, and mock-only CloserFans Stage A runner at
 `1d77473`/`8e270a7` are complete; no real provider invocation occurred, and a
 second exact preflight has accepted the mock boundary but denied a call
 because no authenticated one-shot driver exists. Its corrective driver
-proposal remains unreviewed and unimplemented; real-agent execution,
-retention, measurements, and graduation stay gated. The first research-planning
+proposal is separately reviewed for local code and fake/no-model tests only
+but remains unimplemented; real-agent execution, retention, measurements, and
+graduation stay gated. The first research-planning
 goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -836,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | mock Stage A complete; second preflight denied a call and froze a corrective driver proposal | CloserFans `1d77473`/`8e270a7`, tree `9fc93af`, passes its focused boundary. Exact review finds no authenticated one-shot driver or truthful real receipt path. Separate proposal review, implementation, and final preflight are required before at most one real model call. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | mock Stage A complete; corrective one-shot-driver code approved but not started | Second preflight denied a call against CloserFans tree `9fc93af`. Immutable review of proposal `4ab09fc` approves local implementation/fake tests with exclusive leasing, committed-byte bootstrap, closed environments, and truthful provenance. Final code/preflight review still gates at most one real call. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6466,9 +6467,13 @@ bootstrap plus closed one-shot real-driver member, preflight exact CLI/login/
 cache/strict-config/no-model permission results, expose saved auth only to the
 Codex parent while commands inherit nothing, derive truthful dynamic receipt
 and missing provenance fields, and consume the sole authorization on any
-provider spawn. It requires separate immutable proposal review, mock/no-model
-implementation, and a final exact code preflight. No ad hoc shell call or
-source substitution is permitted.
+provider spawn. Its separate immutable review at exact proposal checkpoint
+`4ab09fc` additionally requires an exclusive persistent authorization lease,
+template reconstruction from committed Git bytes, a closed parent environment,
+all no-model gates before the lease, private undeleted evidence, and fake-only
+coverage of every new branch. It approves only local implementation; a final
+exact code preflight remains mandatory. No ad hoc shell call or source
+substitution is permitted.
 
 ## Decision Ledger
 
@@ -6676,6 +6681,7 @@ source substitution is permitted.
 | `D-PA-199` | Approve only the corrected mock-driven 12B4 Stage A runner implementation from exact proposal `286a50d`, with human supersession and no real Codex call. | Immutable proposal parent/tree and full-file hashes are recorded in the dedicated plan. Review finds broad workspace writes and direct host import of AI-edited TypeScript insufficient: implementation must make package/dependencies read-only, allow only the selected source plus fake home/temp writes, statically validate/extract an allowlisted literal AST change, replay that data in a separate clean host evaluator, split public-package setup from the offline agent phase, and enforce bounded source/JSONL/final-output bytes. Ten exact conditions retain root/auth/network/env/plugin/MCP/hook/memory/subagent isolation, private evidence, open-book/non-graduation labels, and focused-only gates. A second exact implementation/preflight review is mandatory before at most one provider invocation. |
 | `D-PA-200` | Preserve the mock-only 12B4 Stage A implementation at CloserFans checkpoints `1d77473`/`8e270a7`, final tree `9fc93af`, without advancing 35/41 accounting or authorizing a real call. | The isolated branch from exact `cbf2356` adds only the benchmark template's bounded fake runner and narrowly owned registration/verifier/docs. It statically extracts the sole allowlisted literal source edit, replays canonical data in a clean host evaluator, separates host and fake-agent state, bounds/audits processes and evidence, and keeps the receipt contaminated/non-graduating. Live no-model probes justify audited `candidate/`-directory writes plus default-denied unlisted paths; post-run manifests close the Linux mount-layout gap. Final focused permission, canary, adapter, CLI, clean-install/typecheck, template, diff, secret, and ancestry gates pass. The lock correction is an additive checkpoint because shared template tooling rejects/drops root `package-lock.json`; the retained lock is materialized only in disposable installs. No provider/model, real transcript, push/merge/deploy/release, long aggregate, or unrelated sibling effect occurred. A second immutable code/preflight review is still mandatory. |
 | `D-PA-201` | Accept the exact mock implementation at its second preflight but deny a real call and freeze only a non-authorizing one-shot-driver correction. | Exact code/hash, focused evidence, current CLI 0.147.0, ChatGPT login category, and model-cache `gpt-5.6-sol`/`3000` review are green without credential content or model access. The artifact is intentionally mock-only: it always spawns the fake fixture, gives the parent an empty unauthenticated home, and truthfully hardcodes fake/no-probe receipt fields. An ad hoc command would bypass reviewed source/event/replay/receipt authority. The corrective proposal keeps the public mock path physically fake, adds a separate local bootstrap and closed real driver, gates on exact at-call no-model preflights, exposes saved auth only to the parent, derives truthful complete provenance, and permits no retry. Separate proposal review, implementation checkpoint, and final preflight remain mandatory; accounting stays 35/41. |
+| `D-PA-202` | Approve only the corrected one-shot-driver implementation from exact proposal checkpoint `4ab09fc`, with human supersession and no real call. | Immutable proposal parent/tree and complete plan hashes are recorded in the dedicated plan. Eight review conditions add atomic non-deletable authorization leasing, exact committed-byte template bootstrap, a physically fake-only public path, closed ChatGPT-parent versus inherit-nothing command environments, all no-model gates before lease/spawn, observed dynamic provenance, private undeleted evidence, and fake coverage of every new branch. The approved tranche may change only the benchmark template, one dependency-free local operator, narrowly owned verification/registration, and plans. Provider/model execution, real lease creation/transcript, Emdash/other surfaces, push/merge/deploy/release, aggregates, and Stage B/C remain denied pending a focused-green checkpoint and final immutable code preflight. |
 
 ## Validation And Checkpoint Policy
 
@@ -6818,9 +6824,12 @@ synchronized:
 > evidence.
 > Treat the completed second preflight as a deliberate no-call result: the
 > checked artifact has no authenticated one-shot driver and only truthful
-> fake receipt fields. Continue only through the dedicated plan's behavior-
-> free corrective proposal, separate immutable approval, mock/no-model
-> implementation checkpoint, and final exact preflight before at most one
+> fake receipt fields. Treat exact corrective proposal `4ab09fc` and its
+> immutable review as authorization only for local code plus fake/no-model
+> tests with exclusive authorization leasing, committed-byte bootstrap,
+> closed parent/command environments, and observed receipt provenance.
+> Require its focused-green implementation checkpoint and final exact
+> preflight before at most one
 > local open-book `native.exact.local-premise` Codex canary. Keep that canary explicitly
 > contaminated and non-graduating; keep decontaminated repeated trials and
 > measured claims in later Stages B/C. Do not relabel a PathOut request as

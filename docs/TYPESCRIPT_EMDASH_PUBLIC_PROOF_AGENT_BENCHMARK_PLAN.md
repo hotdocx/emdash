@@ -15,8 +15,9 @@ containment, replay, public-package, CLI, template, and hygiene gates are
 green. No provider/model execution or real retained run occurred. The next
 preflight review accepted the mock boundary but correctly denied a real call
 because no authenticated one-shot driver exists. The corrective driver
-proposal below is frozen but not implemented or reviewed. Provider execution,
-measurement, and graduation remain gated.
+proposal below is now separately reviewed for code and fake/no-model tests
+only; it is not implemented. Provider execution, measurement, and graduation
+remain gated.
 
 Date: 2026-08-11
 
@@ -67,9 +68,9 @@ restored a permanent release-only workflow, and locally integrated one
 source-first CloserFans workspace; it still invoked no provider/model and made
 no PathOut task conversion. The subsequent 12B4 provider/execution/retention/
 reporting audit, proposal, first review, mock-only implementation, and
-fail-closed second preflight are now frozen below. The next bounded action is
-a separate immutable review of its behavior-free corrective driver proposal—
-not a real-agent run or performance claim.
+fail-closed second preflight, and corrective-driver review are now frozen
+below. The next bounded action is only the approved local code plus fake/no-
+model test implementation—not a real-agent run or performance claim.
 
 ## Post-`STDLIB-8B` Readiness Findings
 
@@ -235,7 +236,7 @@ the evaluator.
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
 | `AGENT-EVAL-12B3` | complete at Emdash hardening `3af518d` and CloserFans host `cbf2356` | Exact `0.3.0`, Pages run `31509112917`, protected OIDC recovery run `31510726533`, byte/provenance/installed-consumer verification, permanent trigger removal, and the focused-green ten-abstention source workspace are complete. Two safe pre-package failures and the reviewed one-time dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | mock-only Stage A runner complete; second preflight denied a call and froze a corrective driver proposal | CloserFans `1d77473`/`8e270a7`, tree `9fc93af`, passes the focused mock boundary. Exact review finds no authenticated one-shot driver or truthful real receipt path, so it authorizes no call. The corrective proposal requires separate review, implementation, and final preflight before at most one real canary. |
+| `AGENT-EVAL-12B4` | mock Stage A complete; corrective one-shot-driver implementation approved but not started | Second preflight denied a call against tree `9fc93af`. Immutable review of proposal `4ab09fc` approves only local code and fake/no-model tests with exclusive authorization leasing, committed-byte bootstrap, closed parent/command environments, and truthful receipt provenance. Final code/preflight review still gates any real canary. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 separately approved `AGENT-EVAL-12B2` implementation is also complete and its
@@ -2542,6 +2543,100 @@ review checkpoint before implementation, followed by a final exact code/
 preflight review before one real call. Human direction may supersede the
 delegated unattended sequence at any point.
 
+### Immutable corrective driver proposal review
+
+Review date: 2026-08-11
+
+Reviewed proposal checkpoint:
+`4ab09fce690be378bfec314d8d0ad67e5f0aaaa0`, exact parent
+`00d56a2257a48af8d53d84d5bc7ea77ad04bdd2e`, exact tree
+`7012f362174d6c2449f896461cd6fe6c3f1bb99a`.
+
+The proposal changes only the two living plans. Its immutable complete-file
+SHA-256 values are:
+
+```text
+2ea99af614f0d9585740f72e2f1b9c00aadb6d94f468ca4261666e788557e858
+  docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md
+220776b4897d6732857972cec21003a5e0e6ba7858a04eefc021ee2c4d233627
+  docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md
+```
+
+Exact ancestry, clean Emdash/CloserFans worktree state, full implementation
+hash inventory, Markdown/diff hygiene, token/private-key pattern scan, CLI
+version, login category, and selected model-cache fields were reviewed. No
+credential content, provider/model call, code edit, raw real transcript,
+package operation, network mutation, push, merge, deployment, or aggregate
+occurred. The second preflight's denial is correct: reviewing an argument
+constructor does not manufacture a truthful authenticated driver.
+
+The corrective architecture is accepted with these mandatory refinements:
+
+1. **Consume authorization atomically.** Select one non-secret authorization
+   ID in the final preflight. Immediately before the sole provider spawn, the
+   operator must create a mode-`0600` lease with exclusive-create semantics
+   under mode-`0700` `~/.emdash-stage-a/authorizations/`. An existing lease
+   refuses the call. A spawn attempt consumes the authorization even if exec,
+   transport, model, policy, or replay later fails. Neither runner nor this
+   goal deletes or rewrites the lease. Tests inject a disposable state root
+   and cannot consume the real authorization.
+2. **Bootstrap committed bytes, not ignored state.** The dependency-free root
+   operator must require a clean exact Git checkpoint and reconstruct the
+   benchmark template from its tracked commit tree (for example, enumerated
+   `git ls-tree` plus `git show` bytes), excluding working-tree ignored files.
+   It refuses a source root with staged, unstaged, or untracked changes and
+   records commit/tree/template-manifest digests. The contributor canary
+   worktree keeps no root or template `node_modules`.
+3. **Keep the public path physically mock-only.** No `package.json` script,
+   hosted button, API/MCP action, lifecycle hook, native-chat integration, or
+   fake CLI flag may select the real member. One separate root operator entry
+   owns the local path. Test dependency injection is callable only from the
+   focused verifier and is absent from the operator's command-line grammar.
+4. **Use a closed parent environment.** The real parent environment may
+   contain only fixed runtime/locale/temp fields plus the existing `HOME` and
+   optional `CODEX_HOME` locator needed by saved ChatGPT authentication.
+   Reject or drop `OPENAI_API_KEY`, `CODEX_API_KEY`, npm, GitHub, cloud,
+   proxy, repository, and unrelated secret variables. Never read, copy, hash,
+   receipt, or expose credential-file contents or paths. The command
+   environment remains the existing inherit-nothing fake home/temp policy.
+5. **Finish every no-model gate before the lease/spawn.** Exact Git/template/
+   package/integrity, CLI version, ChatGPT login category, model-cache tuple,
+   strict config parse, source/case/prompt/schema hashes, and the fresh
+   permission/filesystem/command/network probe must pass first. The lease is
+   then created and exactly one provider child may be spawned. No retry,
+   fallback, recursion, or implicit second turn is allowed.
+6. **Make provider provenance observationally true.** A child `spawn` event,
+   not intent, sets `providerExecuted=true`. The receipt distinguishes
+   pre-spawn refusal, spawn/exec failure, timeout/overflow, invalid stream,
+   policy/source violation, evaluator failure, abstention, rejection,
+   accepted-incomplete, and accepted-complete. Driver kind, ChatGPT auth
+   category, current model tuple, at-call probe and lease identity, argument
+   vector, exact runner commit/tree/clean state, corpus/case/profile, package,
+   source/prompt/schema, and canonical artifact hashes are derived from
+   observed data. Dollar cost stays null.
+7. **Preserve independent authority and private evidence.** The candidate
+   remains hostile data; no real-driver refactor may import it or evaluate in
+   the agent tree. Raw provider output remains under the existing private
+   evidence boundary, untracked and undeleted. Receipt minimization,
+   open-book contamination, `graduationEligible=false`, and
+   `proofEvidence=false` are unconditional.
+8. **Test every new branch without a provider.** Add focused fake executable
+   cases for all pre-spawn refusals, lease collision, exactly-one spawn,
+   authenticated-parent/credential-free-command separation, truthful dynamic
+   receipt, and post-spawn failure classes. Re-run the existing mock suite,
+   live no-model probe, public adapter/CLI, clean install/typecheck, template
+   registry, exact diff/secret/ancestry/ignored-output checks, and no
+   in-worktree dependency-tree assertion.
+
+Decision: approve only this corrected local one-shot-driver implementation
+under delegated unattended authority, with later human supersession. Do not
+invoke a provider/model, create the real authorization lease, read/copy auth
+content, retain a real transcript, change Emdash, modify another CloserFans
+surface, add a public/hosted invocation, push, merge, deploy, release, clean
+up, or begin Stage B/C. After a focused-green correcting checkpoint,
+synchronize both plans and perform a final immutable code/preflight review.
+Only that later checkpoint may authorize at most one call.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -2601,7 +2696,8 @@ On continuation:
    mock implementation checkpoints `1d77473`/`8e270a7` with final tree
    `9fc93af` as non-graduating Stage A preparation only; treat the second
    preflight above as a deliberate no-call result and its corrective one-shot
-   driver design as non-authorizing until a separate immutable review,
-   implementation checkpoint, and final exact preflight; and
+   driver design as approved only for local code and fake/no-model tests under
+   the immutable review above; require its implementation checkpoint and final
+   exact preflight before any real-agent or retention effect; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
