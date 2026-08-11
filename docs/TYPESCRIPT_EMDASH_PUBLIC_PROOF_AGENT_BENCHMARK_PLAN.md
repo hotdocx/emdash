@@ -2998,6 +2998,53 @@ proposal review, focused-green implementation checkpoint, a new exact no-model
 code/preflight review, and wholly new non-secret ID/run-root coordinates before
 any later provider attempt. Accounting remains 35/41.
 
+#### Immutable R1 proposal review
+
+Review date: 2026-08-11
+
+Reviewed proposal checkpoint:
+`58ff9915252d503d215c458f73bb8ba7215b42bb`, exact parent
+`208c109c5e3519cabc4218073edc06fe4e8da092`, exact tree
+`bf1573e3fa4b735c6b5848a2b6b9f4ae40233451`. The proposal changes only the two
+living plans. Their complete SHA-256 values are:
+
+```text
+a435395466ba4926c0c12282cb79d8c698035dee0bf64d256f291822bfc9c573  docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md
+20ea665bea79ad123fd267226c77f12d76b1ee6a7507e08ef7a9c5f9186eac70  docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md
+```
+
+The diagnosis and correction are accepted with six binding conditions:
+
+1. Use the existing bounded child capture; do not add another process,
+   provider, retry, fallback, network, or credential surface.
+2. Require exact version text on stdout with empty stderr, exact login category
+   on stderr with empty stdout, and retain stdout-plus-empty-stderr for the
+   permission and selected-case preflights. Never concatenate or accept both
+   channels.
+3. Decode only the selected bounded channel with fatal UTF-8 and normalize all
+   other-channel/nonzero/timeout/text failures through the existing preflight-
+   refusal receipt without copying raw diagnostics into it.
+4. Change the fake login command to stderr and add a wrong-stream pre-spawn
+   refusal fixture. Retain all existing successful, refusal, lease, spawn,
+   policy, environment, replay, receipt, and public-mock tests.
+5. Touch only the three proposed template script/test files plus later plan
+   synchronization. The root operator, contract/authorization ID, package
+   scripts, prompt/schema/source, permission profile, evaluator, other
+   templates, Emdash, API/MCP/controller/cloud, and preserved run evidence
+   remain byte-for-byte unchanged.
+6. Run focused fake canary/clean-install/typecheck, live no-model permission,
+   formatting/diff, credential-shape, exact scope, clean ancestry, no-
+   dependency-tree, and no-real-lease checks. Do not run a provider or long
+   aggregate.
+
+Decision: approve only this local three-file implementation and fake/no-model
+validation under the user's standing unattended delegation, with human
+supersession. It authorizes no new ID/run root, operator invocation, provider/
+model, lease/transcript, push, merge, deployment, release, cleanup, Stage B/C,
+or performance/proof claim. After a focused-green code checkpoint,
+synchronize both plans and perform a new exact code/preflight review before
+even proposing new call coordinates. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -3064,8 +3111,9 @@ On continuation:
    immutable corrected-driver review above and authorization checkpoint
    `4e39600` as historical authority for the now-consumed operator invocation;
    treat receipt `cb02d50` as a terminal no-call `login-category` refusal; and
-   treat R1 above as a non-authorizing exact-channel correction proposal; and
-   forbid any retry or alternate coordinate without its separate immutable
-   review, implementation, new code/preflight review, and new coordinates; and
+   treat R1 proposal `58ff991` and its immutable review as authority only for
+   the exact three-file local correction and fake/no-model tests; and forbid
+   any retry or alternate coordinate without its implementation checkpoint,
+   new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
