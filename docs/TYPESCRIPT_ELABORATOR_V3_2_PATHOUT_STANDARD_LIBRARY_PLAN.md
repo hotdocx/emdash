@@ -81,16 +81,17 @@ comparison still returns `not-equal`. Generic closure proposal/review v1 at
 `cf8ed76`/`778da06` selected outcome-root replay, but execution proved that
 the paired traversal can normalize past an intermediate parent redex.
 Corrected generic proposal/review v2 at `a42ffc9`/`5277885` instead replay the
-original source roots under the same already-consumed budget; its focused
-implementation candidate is green. Corrected internalized PathInd proposal/
+original source roots under the same already-consumed budget; its
+implementation and the related declaration-budget correction are complete at
+shared semantic checkpoint `e560551`. Corrected internalized PathInd proposal/
 review v5 at `fe0306d`/`a94c2f7` add the active `Pi_pullback_funcd` projection
 at 4/7/0/10. Proposal/review v6 at `19eb941`/`2112543` add one local two-sided
 decoded functor-category presentation bridge at 4/8/0/10. V6 compiles all
 eight rules and the first transparent definition. The next definition exposed
 that `compileCoreLfDeclarations` recorded but did not apply its requested
 512-step checking budget; the default-preserving propagation proposal/review
-are checkpointed at `9238104`/`a4d61a9`, and their focused implementation
-candidate is green. With the existing 512 request effective, replay proceeds
+are checkpointed at `9238104`/`a4d61a9`, and their implementation is also
+complete at `e560551`. With the existing 512 request effective, replay proceeds
 284 steps to a local `functor-object` category-presentation mismatch in
 `pathout_motive_transport_arrow`. The next local correction is measured but
 not yet frozen. No public PathOut/PathInd export is authorized.
@@ -256,8 +257,9 @@ named library presentation.
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
-| `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | proposal/review checkpointed; implementation ready | measured v4 plus in-memory active `Pi_pullback_funcd` projection; proposal/review `cf8ed76`/`778da06` | Preserve the paired traversal and its one global budget, then only after `not-equal` continue deterministic left/right normalization and retry exact structural equality. Add no reduction, proof rule, Core node, unification, or public effect. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | v4 counterevidence measured; paused behind reviewed generic closure | completed 1C at `a361dc3`/`033dbb8`; proposal/review v4 `001a899`/`7984efb`; generic prerequisite `cf8ed76`/`778da06`; superseded v3 `5a1d635`/`6694c87`; superseded v2 `fbfc4dd`/`2a250fb`; superseded v1 `188b8e5`/`d3a0f31` | V4 admits both support fusions and the two earlier local projections. The final projection reveals equal independent normal forms that paired comparison misses. A later v5 may select the active `Pi_pullback_funcd` component at 4/7/0/10 only after the generic prerequisite is complete and a separate v5 proposal/review freezes that boundary. |
+| `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
+| `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | v6 implementation candidate reaches the second transparent definition; v7 correction measured | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; proposal/review v6 `19eb941`/`2112543`; v5 `fe0306d`/`a94c2f7`; superseded v1-v4 retained below | All eight v6 rules and `pathout_motive_transport_obj` compile. Effective 512-step checking reaches one local action-level category-presentation mismatch in `pathout_motive_transport_arrow`; the next correction requires its own proposal and review. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
@@ -2627,9 +2629,10 @@ is checkpointed at `9238104`; separate review
 at `a4d61a9` authorizes only exact propagation through a private factory. The
 public option and one-argument factory signature remain unchanged, the default
 remains 256, and unbounded/adaptive or PathInd-specific budgets remain denied.
-A one-delta fixture now fails at explicit limit zero, passes at one, preserves
-the default at 256, and still rejects invalid limits; all nearest compiler
-tests, root typecheck, and focused lint are green. The one required shared-
+Semantic checkpoint `e560551` makes a one-delta fixture fail at explicit limit
+zero, pass at one, preserve the default at 256, and still reject invalid
+limits; all nearest compiler tests, root typecheck, and focused lint are green.
+The one required shared-
 TypeScript gate also exits zero with 1,923 tests, 1,867 passing, 56 explicitly
 skipped, and no failures; no second aggregate run is needed for this boundary.
 

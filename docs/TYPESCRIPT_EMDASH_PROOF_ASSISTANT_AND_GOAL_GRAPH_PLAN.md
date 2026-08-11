@@ -163,15 +163,16 @@ normalize to the same exact Core expression while paired comparison returns
 `not-equal`. Generic proposal/review v1 at `cf8ed76`/`778da06` selected the
 paired outcome roots, but measured execution proved original-root replay is
 required. Corrected generic proposal/review v2 at `a42ffc9`/`5277885` preserve
-one budget and replay the original roots; its focused implementation candidate
-is green. Internalized PathInd proposal/review v5 at `fe0306d`/`a94c2f7` add
+one budget and replay the original roots; its implementation and the related
+declaration-budget correction are complete at shared semantic checkpoint
+`e560551`. Internalized PathInd proposal/review v5 at `fe0306d`/`a94c2f7` add
 the active Pi-pullback projection at 4/7/0/10. Proposal/review v6 at
 `19eb941`/`2112543` add one local two-sided decoded category-presentation
 support at 4/8/0/10. All eight rules and the first transparent definition now
 compile. The second transparent definition exposed that the generic
 declaration compiler ignored its requested checking budget while recording
 it. Default-preserving budget-propagation proposal/review `9238104`/`a4d61a9`
-are frozen and their focused implementation candidate is green. With 512
+are frozen and their implementation is also complete at `e560551`. With 512
 effective, replay reaches a measured local action-level `Functor_cat` versus
 `Catd_cat` presentation mismatch after 284 steps. The next PathInd correction
 is measured but not frozen. No PathOut/PathInd public package export has yet
@@ -743,9 +744,9 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | Terminal same-budget normal-form closure prerequisite | in progress | Corrected proposal/review `a42ffc9`/`5277885` supersede v1 outcome-root closure and authorize original-left/original-right replay only after paired `not-equal`, under the same consumed budget. Focused conversion tests, root typecheck, and lint are green; the required full-TypeScript gate exits zero with 1,923 tests and no failures. Only the exact semantic checkpoint remains. |
-| `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | Propagate the existing declaration compiler comparison budget into compilation-time checking | in progress | Proposal/review `9238104`/`a4d61a9` preserve the 256 default and public factory signature while making an already accepted per-compilation limit effective. Zero/one-step and nearest compiler tests, typecheck, and lint are green; it shares the current bounded generic prerequisite checkpoint and its required full-TypeScript gate is green. Only the exact semantic checkpoint remains. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, and fixed-source `PATHIND-TRUSTED-PROFILE-1C` at `a361dc3` are complete. Internalized proposal/review v5 `fe0306d`/`a94c2f7` freeze 4/7/0/10; v6 `19eb941`/`2112543` freezes 4/8/0/10. All eight rules and `pathout_motive_transport_obj` compile with the generic candidates. Effective 512-step replay exposes the next local action-level presentation pair in `pathout_motive_transport_arrow`; its correction remains to be frozen separately. Transitivity and public presentation remain later rows. |
+| `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | Terminal same-budget normal-form closure prerequisite | complete | `e560551`; corrected proposal/review `a42ffc9`/`5277885`; original roots replay only after paired `not-equal` under the same consumed budget; focused/static gates and the required 1,923-test full-TypeScript gate are green with zero failures. |
+| `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | Propagate the existing declaration compiler comparison budget into compilation-time checking | complete | `e560551`; proposal/review `9238104`/`a4d61a9`; exact zero/one-step behavior, retained 256 default and public factory signature, nearest compiler/static gates, and the shared full-TypeScript gate are green. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, fixed-source `PATHIND-TRUSTED-PROFILE-1C` at `a361dc3`, and generic checkpoint `e560551` are complete. Internalized proposal/review v5 `fe0306d`/`a94c2f7` freeze 4/7/0/10; v6 `19eb941`/`2112543` freezes 4/8/0/10. All eight rules and `pathout_motive_transport_obj` compile. Effective 512-step replay exposes the next local action-level presentation pair in `pathout_motive_transport_arrow`; its correction remains to be frozen separately. Transitivity and public presentation remain later rows. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -764,10 +765,10 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 | `POST-14B-AUDIT-16` | Re-evaluate incomplete rows after the real package and Arrowgram/GetPaidX consumer | complete | 14B4, 12B, 10, and 11 retain their exact gates; public distribution plus checked book/research consumers make only the bounded `STDLIB-8A` product-selection row ready. |
 
-The two generic labels above are one bounded prerequisite checkpoint for the
-single active `STDLIB-8B` stream; they are not parallel semantic work. Only one
-semantic row is in progress at a time. A later row may be repartitioned or
-rejected when evidence contradicts this plan.
+The two generic labels above are one completed bounded prerequisite checkpoint
+for the single active `STDLIB-8B` stream; they were not parallel semantic work.
+Only `STDLIB-8B` is now semantically in progress. A later row may be
+repartitioned or rejected when evidence contradicts this plan.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -6043,9 +6044,9 @@ its compilation-time factory discarded that value. Proposal/review
 `9238104`/`a4d61a9` authorize only internal propagation of the existing option:
 the public option and one-argument factory remain unchanged, the default stays
 256, and no adaptive/unbounded or PathInd-specific budget is introduced. The
-implementation candidate makes a one-delta fixture fail at limit zero and pass
-at one, preserves the default, rejects invalid limits, and passes all nearest
-compiler tests, root typecheck, and focused lint. The single required
+semantic checkpoint `e560551` makes a one-delta fixture fail at limit zero and
+pass at one, preserves the default, rejects invalid limits, and passes all
+nearest compiler tests, root typecheck, and focused lint. The single required
 `check:ts` run exits zero after 1,923 tests: 1,867 pass, 56 are explicitly
 skipped, and none fail. That evidence is carried forward; this expensive
 aggregate must not be rerun for the ensuing root-local PathInd correction.
@@ -6062,9 +6063,9 @@ fapp0(Catd_cat(K), Catd_cat(L), F, E).
 
 This is the action-level form of the already measured category-presentation
 boundary. No diagnostic wrapper is retained. It does not reopen proof-program
-integration, add mathematics, or justify a generic category collapse. A local
-fourth presentation-support rule must be proposed and separately reviewed
-only after the generic prerequisite checkpoint is green.
+integration, add mathematics, or justify a generic category collapse. The next
+bounded action is to freeze and separately review a local fourth presentation-
+support rule before changing the PathInd implementation candidate.
 
 ## Decision Ledger
 
@@ -6226,6 +6227,7 @@ only after the generic prerequisite checkpoint is green.
 | `D-PA-153` | Supersede internalized PathInd v4 and approve active Pi-pullback projection v5 at 4/7/0/10. | Proposal/review `fe0306d`/`a94c2f7` add only active line 12680 with typed wildcard family slots, increasing mathematical projections from four to five while retaining two supports, zero proof rules, ten definitions, all consumers/oracles, and every generic/public denial. |
 | `D-PA-154` | Supersede internalized PathInd v5 and approve one two-sided decoded category-presentation support at 4/8/0/10. | Proposal/review `19eb941`/`2112543` capture the first transparent declaration's exact `Functor_cat(-,Cat)` versus `Catd_cat(-)` pair. The local classifier wrapper follows the fixed-source precedent and is narrower than an underlying category collapse or proof-program integration. |
 | `D-PA-155` | Approve exact propagation of the existing declaration compiler comparison budget into compilation-time checking. | Proposal/review `9238104`/`a4d61a9` show that a requested 512 was validated and recorded but the checker silently used 256. The correction uses a private limit-aware factory, preserves the public factory signature and 256 default, and denies adaptive/unbounded or PathInd-specific budgets and every semantic/public effect. |
+| `D-PA-156` | Complete both bounded generic prerequisites at one semantic checkpoint and resume only the internalized PathInd row. | Checkpoint `e560551` implements original-source-root terminal closure and exact declaration-budget propagation. Focused conversion and zero/one-step compiler regressions, nearest compiler tests, root typecheck, full lint, workspace checks, and one required `check:ts` run are green: 1,923 tests, 1,867 pass, 56 skip, zero fail. The public factory/default remain stable; no equation, Core node, proof integration, category collapse, Lambdapi source, browser/package export, or PathInd-specific budget is added. |
 
 ## Validation And Checkpoint Policy
 
