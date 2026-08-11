@@ -300,7 +300,7 @@ named library presentation.
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | complete; final-proportional-green | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; semantic checkpoint `3b113ad` | The exact root-only **0/1/0/5** transfer compiles five transparent definitions plus one derived complete consumer-parent support. Eight TypeScript observations, two typed consumers, eight negatives, authority closure, and a separately gated eight-assertion Lambdapi oracle are green. No mathematical equation, local proof rule, injectivity, unification, Core, generic-engine, public, or Lambdapi-source behavior is added. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | complete; final-proportional-green | completed direct typed slices through `10432ba`; proposal/review checkpoints `6ad0812`/`f03ef01`; semantic checkpoint `8d226cc` | Four finite forms now have a browser-safe parser/qualification manifest, explicit transfer-backed Node check, static-by-default CLI and lazy browser panel, and an owned Chapter 5 bridge. No second semantic engine or public package export was added. |
-| `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | complete; separately approved root-source qualification | all selected slices through presentation ledger `be487c9`; proposal checkpoint `85b560e`; review checkpoint is the commit containing the completion record below | Graduates only the root-source-qualified profile: five mathematical opaque owners, nine sealed supports, thirty transparent definitions, exact local rule partitions, bounded computation/presentation claims, and no public package effect. |
+| `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | complete; separately approved root-source qualification | all selected slices through presentation ledger `be487c9`; proposal checkpoint `85b560e`; review checkpoint `d7d7428` | Graduates only the root-source-qualified profile: five mathematical opaque owners, nine sealed supports, thirty transparent definitions, exact local rule partitions, bounded computation/presentation claims, and no public package effect. |
 
 ### `PATHOUT-TRUST-BOUNDARY-0A` exact audit contract
 
@@ -3460,8 +3460,7 @@ Date: 2026-08-11
 
 Status: proposal checkpoint `85b560e` is separately approved by the immutable
 review below under delegated unattended authority, with later human
-supersession. The review checkpoint is the commit containing its completion
-record.
+supersession. The exact review checkpoint is `d7d7428`.
 
 The executable proposal is
 [`pathout_library_graduation_proposal.ts`](../src/v3_2/pathout_library_graduation_proposal.ts),
