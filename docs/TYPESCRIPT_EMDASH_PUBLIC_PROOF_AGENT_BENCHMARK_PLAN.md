@@ -10,7 +10,8 @@ exact checkpoint `8c9652a`. The bounded implementation is complete and
 proportionally qualified at exact semantic checkpoint `93c9804`. The
 read-only `AGENT-EVAL-12B3` package-release and CloserFans host audit is now
 frozen at exact proposal checkpoint `bb16e47`; implementation remains gated
-on the separate immutable review recorded below.
+by the exact immutable review at `0027c66`, which authorizes only the staged
+contract recorded below.
 
 Date: 2026-08-11
 
@@ -225,7 +226,7 @@ the evaluator.
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
-| `AGENT-EVAL-12B3` | proposal `bb16e47`; separately reviewed; implementation authorized within exact contract | The immutable review below approves exact `0.3.0` release, workflow-maintenance, Pages verification, and later ordinary-Node `emdash_benchmark` workspace stages under strict sequencing. The review checkpoint is the commit containing that review and is pinned by its immediate ledger follow-up. |
+| `AGENT-EVAL-12B3` | proposal/review `bb16e47`/`0027c66`; implementation authorized within exact contract | The immutable review approves exact `0.3.0` release, workflow-maintenance, Pages verification, and later ordinary-Node `emdash_benchmark` workspace stages under strict sequencing. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
@@ -926,10 +927,9 @@ it changes no behavior. The omitted checks are not passes.
 
 Date: 2026-08-11
 
-State: approved under the user's delegated unattended authority, with later
-human supersession. This review approves only exact proposal checkpoint
-`bb16e47`; the review checkpoint is the commit containing this section and is
-pinned by the immediate ledger-only follow-up.
+State: approved at exact review checkpoint `0027c66` under the user's
+delegated unattended authority, with later human supersession. This review
+approves only exact proposal checkpoint `bb16e47`.
 
 Immutable proposal evidence:
 
@@ -1069,7 +1069,8 @@ On continuation:
 5. treat 12B1 as complete at exact checkpoint `d0d3764`;
 6. treat exact 12B2 proposal/review/implementation checkpoints
    `ba49705`/`8c9652a`/`93c9804` as complete; treat exact 12B3 proposal
-   checkpoint `bb16e47` as frozen and non-authorizing; advance only to its
-   separate immutable review; and
+   and review checkpoints `bb16e47`/`0027c66` as the sole staged authority;
+   advance to exact `0.3.0` local qualification before any external effect;
+   and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
