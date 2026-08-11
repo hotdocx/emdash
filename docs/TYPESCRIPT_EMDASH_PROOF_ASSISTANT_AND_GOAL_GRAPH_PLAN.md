@@ -168,15 +168,44 @@ declaration-budget correction are complete at shared semantic checkpoint
 `e560551`. Internalized PathInd proposal/review v5 at `fe0306d`/`a94c2f7` add
 the active Pi-pullback projection at 4/7/0/10. Proposal/review v6 at
 `19eb941`/`2112543` add one local two-sided decoded category-presentation
-support at 4/8/0/10. All eight rules and the first transparent definition now
-compile. The second transparent definition exposed that the generic
-declaration compiler ignored its requested checking budget while recording
-it. Default-preserving budget-propagation proposal/review `9238104`/`a4d61a9`
-are frozen and their implementation is also complete at `e560551`. With 512
-effective, replay reaches a measured local action-level `Functor_cat` versus
-`Catd_cat` presentation mismatch after 284 steps. The next PathInd correction
-is measured but not frozen. No PathOut/PathInd public package export has yet
-been added.
+support at 4/8/0/10. Default-preserving budget-propagation proposal/review
+`9238104`/`a4d61a9` are frozen and their implementation is also complete at
+`e560551`. With 512 effective, proposal/review v7 `ef761e4`/`8cdff35` add only
+the measured action-level presentation support at 4/9/0/10. Proposal/review
+v8 `f26d340`/`1de3c95` select the complete source-fibre parent at 4/10/0/10,
+but its direct reference to later `PathIndSrc_catd` cannot inhabit the closed
+base runtime fragment. Proposal/review v9 `a735c40`/`7b466d5` replace that rule
+with an earlier-symbol post-Sigma parent, but exact tracing shows descent
+selects the source-category child first and never reaches that pattern.
+Proposal/review v10 `270da40`/`302c4a9` therefore preserve 4/10/0/10 while
+staging nine base rules, three prefix definitions, and the direct source-fibre
+rule before the four suffix definitions. That rule fires on both measured
+endpoints. Proposal/review v11 `2e1e593`/`731dc32` add the transported-motive
+reflexive-fibre parent at 4/11/0/10. Proposal/review v12
+`39abb02`/`8833f8f` add the complete source-and-target section-category parent
+at 4/12/0/10; proposal/review v13 `d77f0d7`/`a8aff88` replace its shadowed
+pre-delta form one-for-one with the stable decoded-object parent. V13 compiles
+`pathout_pi_transport_func` and reaches only the final total-target fibre.
+Proposal/review v14 `4244b54`/`73aa94e` add that exact staged parent, yielding
+the reviewed **4/13/0/10** boundary: four opaque declarations, five
+mathematical projections, eight derived presentation supports, no proof rule,
+and ten transparent definitions.
+
+The v14 root-only implementation is now final-proportional-green in the
+current semantic checkpoint. Its staged 1/3/3 declaration prefix, 9+4 runtime
+partition, and 3+4 transparent library suffix compile through the existing
+generic engines at the explicit 512-step limit. Seven active focused tests
+pass and one optional oracle test skips in the ordinary run; the separately
+gated run passes all twelve active-Lambdapi assertions. All four extension
+rules fire by exact ID, `PathInd_transfd`, `PathInd_funcd`, and
+`PathIndTgt_transport_func` typecheck, the foreign-motive negative is
+rejected, ordinary-library capability denials and five-barrel closure are
+green, root typecheck and focused lint pass, and the generic compiler diff is
+empty. The 1,923-test `e560551` aggregate is carried forward under the user's
+standing no-long-aggregate policy. No active Lambdapi source, generic Core,
+checker, evaluator, public barrel, browser surface, or package export changed.
+`STDLIB-8B` remains in progress: root-only internalized `1D` is complete, and
+the separately bounded transitivity slice `1E` is next.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -187,8 +216,10 @@ Baseline: `9c633c85b66efb4ac7619912e8d15f928b32d733`
 
 Git-Boundary: the branch fork baseline remains the qualified predecessor
 `9c633c8`. Local and public Emdash `main` remain at post-release ledger
-checkpoint `e35d5ae`; this proof-assistant branch now adds only the 14B3
-contract/candidate/completion ledger descendants recorded below. Annotated tag
+checkpoint `e35d5ae`; this dedicated branch carries the proof-assistant,
+goal-graph, package/host-consumer, and PathOut/PathInd descendants recorded
+below. The reviewed v14 tip is `73aa94e`; its bounded root-only implementation
+and synchronized ledger form the current semantic checkpoint. Annotated tag
 `emdash-v0.2.0` intentionally remains on qualified release commit `ab513f7`,
 whose exact tarball was published through the stable token-free OIDC workflow;
 the later plan-only ledger commits are not part of that package. The frozen
@@ -258,11 +289,17 @@ The internalized PathInd v1 proposal/review checkpoints are `188b8e5` and
 `d3a0f31`; corrected proposal v2 is frozen at `fbfc4dd`, and its exact
 separate review is frozen at `2a250fb`. Measured v2 shadowing and corrected
 proposal v3 are frozen at `5a1d635`; its separate review is frozen at
-`6694c87`. Measured v3 counterevidence and corrected proposal v4 are the
-frozen checkpoint `001a899`; its separate review is frozen at `7984efb`.
-Measured v4 counterevidence and the generic normal-form-closure proposal/review
-are frozen at `cf8ed76`/`778da06`. The exact reviewed generic closure is the
-current bounded tranche; the preserved PathInd implementation remains paused.
+`6694c87`. Measured v3 counterevidence and corrected proposal v4 are frozen at
+`001a899`; its separate review is frozen at `7984efb`. Measured v4
+counterevidence and generic normal-form-closure proposal/review v1 are frozen
+at `cf8ed76`/`778da06`; corrected proposal/review v2 and the shared semantic
+checkpoint are `a42ffc9`/`5277885` and `e560551`. Internalized proposal/review
+v5 through v14 are, in order, `fe0306d`/`a94c2f7`,
+`19eb941`/`2112543`, `ef761e4`/`8cdff35`, `f26d340`/`1de3c95`,
+`a735c40`/`7b466d5`, `270da40`/`302c4a9`, `2e1e593`/`731dc32`,
+`39abb02`/`8833f8f`, `d77f0d7`/`a8aff88`, and
+`4244b54`/`73aa94e`. The current bounded tranche implements the last reviewed
+boundary without changing a generic or public surface.
 
 Depends-On:
 
@@ -746,7 +783,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | Terminal same-budget normal-form closure prerequisite | complete | `e560551`; corrected proposal/review `a42ffc9`/`5277885`; original roots replay only after paired `not-equal` under the same consumed budget; focused/static gates and the required 1,923-test full-TypeScript gate are green with zero failures. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | Propagate the existing declaration compiler comparison budget into compilation-time checking | complete | `e560551`; proposal/review `9238104`/`a4d61a9`; exact zero/one-step behavior, retained 256 default and public factory signature, nearest compiler/static gates, and the shared full-TypeScript gate are green. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, fixed-source `PATHIND-TRUSTED-PROFILE-1C` at `a361dc3`, and generic checkpoint `e560551` are complete. Internalized proposal/review v5 `fe0306d`/`a94c2f7` freeze 4/7/0/10; v6 `19eb941`/`2112543` freezes 4/8/0/10. All eight rules and `pathout_motive_transport_obj` compile. Effective 512-step replay exposes the next local action-level presentation pair in `pathout_motive_transport_arrow`; its correction remains to be frozen separately. Transitivity and public presentation remain later rows. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, fixed-source `PATHIND-TRUSTED-PROFILE-1C` at `a361dc3`, generic checkpoint `e560551`, and root-only internalized `PATHOUT-LIBRARY-INTERNALIZED-1D` are complete. Reviewed v14 `4244b54`/`73aa94e` seals 4/13/0/10; the current semantic checkpoint passes the focused 7-pass/1-skip TypeScript suite, separately gated 12-assertion Lambdapi oracle, typecheck, focused lint, strict negative/capability/non-export checks, and all four staged-rule observations. Transitivity `1E` and public presentation `1F` remain later bounded slices. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -6063,9 +6100,50 @@ fapp0(Catd_cat(K), Catd_cat(L), F, E).
 
 This is the action-level form of the already measured category-presentation
 boundary. No diagnostic wrapper is retained. It does not reopen proof-program
-integration, add mathematics, or justify a generic category collapse. The next
-bounded action is to freeze and separately review a local fourth presentation-
-support rule before changing the PathInd implementation candidate.
+integration, add mathematics, or justify a generic category collapse.
+
+Proposal/review v7 `ef761e4`/`8cdff35` freeze only that local action support at
+**4/9/0/10**. All nine rules and the first three transparent definitions then
+compile before `PathIndSrc_transport_func` exposes the complete source-fibre
+parent. Proposal/review v8 `f26d340`/`1de3c95` select that parent at
+**4/10/0/10**, but exact module closure rejects its forward reference to
+`PathIndSrc_catd`. Proposal/review v9 `a735c40`/`7b466d5` replace it with an
+earlier-symbol post-Sigma parent; the rule subject-checks, but the measured
+comparison descends into the source-category child before the complete
+post-projection pattern can occur. Proposal/review v10
+`270da40`/`302c4a9` retain the direct mathematical parent and repartition only
+compilation order: nine base rules, three prefix definitions including
+`PathIndSrc_catd`, one extension rule, then four suffix definitions. The
+staged rule fires on both observed endpoints without changing a declaration or
+generic engine.
+
+That v10 replay exposes only the transported motive's reflexive fibre.
+Proposal/review v11 `2e1e593`/`731dc32` add its complete parent at
+**4/11/0/10**. Five derived suffix declarations then compile before
+`pathout_pi_transport_func` compares a complete `Functord_cat` parent with its
+`Pi_cat` presentation. Proposal/review v12 `39abb02`/`8833f8f` add that local
+parent at **4/12/0/10**, but predecessor `Functor_cat` delta runs first.
+Proposal/review v13 `d77f0d7`/`a8aff88` replace the unreachable rule one-for-
+one with the stable decoded-object parent, preserving 4/12/0/10. It compiles
+`pathout_pi_transport_func` and advances to the final
+`PathIndTgt_transport_func`, whose only mismatch is the total target fibre at
+`Struct_sigma(x,E)`. Proposal/review v14 `4244b54`/`73aa94e` add precisely
+that staged parent and no mathematical rule, yielding **4/13/0/10** with five
+mathematical projections, eight non-mathematical presentation supports, zero
+proof rules, and ten transparent definitions.
+
+The reviewed v14 implementation now compiles the exact staged boundary through
+the existing generic engines. The focused TypeScript suite records seven
+passes and one ordinary skip after a roughly 190-second cold compile; its
+separately selected oracle test passes all twelve active-Lambdapi assertions.
+All four staged extension redexes select their exact rule IDs; the primary
+`PathInd_transfd`, derived `PathInd_funcd`, and target transport consumers
+typecheck; a foreign motive is rejected; ordinary safe-library authority and
+five public/browser barrels remain closed. Root typecheck and focused lint are
+green, `git diff --check` is clean, and no generic compiler change remains.
+The unchanged 1,923-test aggregate from `e560551` is intentionally carried
+forward. This closes only root-local internalized slice `1D`; transitivity `1E`
+is the next separately bounded row.
 
 ## Decision Ledger
 
@@ -6228,6 +6306,15 @@ support rule before changing the PathInd implementation candidate.
 | `D-PA-154` | Supersede internalized PathInd v5 and approve one two-sided decoded category-presentation support at 4/8/0/10. | Proposal/review `19eb941`/`2112543` capture the first transparent declaration's exact `Functor_cat(-,Cat)` versus `Catd_cat(-)` pair. The local classifier wrapper follows the fixed-source precedent and is narrower than an underlying category collapse or proof-program integration. |
 | `D-PA-155` | Approve exact propagation of the existing declaration compiler comparison budget into compilation-time checking. | Proposal/review `9238104`/`a4d61a9` show that a requested 512 was validated and recorded but the checker silently used 256. The correction uses a private limit-aware factory, preserves the public factory signature and 256 default, and denies adaptive/unbounded or PathInd-specific budgets and every semantic/public effect. |
 | `D-PA-156` | Complete both bounded generic prerequisites at one semantic checkpoint and resume only the internalized PathInd row. | Checkpoint `e560551` implements original-source-root terminal closure and exact declaration-budget propagation. Focused conversion and zero/one-step compiler regressions, nearest compiler tests, root typecheck, full lint, workspace checks, and one required `check:ts` run are green: 1,923 tests, 1,867 pass, 56 skip, zero fail. The public factory/default remain stable; no equation, Core node, proof integration, category collapse, Lambdapi source, browser/package export, or PathInd-specific budget is added. |
+| `D-PA-157` | Approve only the measured internalized action-presentation correction v7 at 4/9/0/10. | Proposal/review `ef761e4`/`8cdff35` add one stable `functor-object` presentation support after the 284-step v6 mismatch. Five mathematical projections, four supports, zero proof rules, ten definitions, the completed generic prerequisites, and every generic/public denial are retained. |
+| `D-PA-158` | Approve the complete source-fibre parent v8 at 4/10/0/10, then retain its closed-fragment failure as counterevidence. | Proposal/review `f26d340`/`1de3c95` select `Fibre_cat(PathIndSrc_catd(Z),Struct_sigma(x,E)) → Fibre_cat(E,pathout_refl_obj(Z,x))` after v7 compiles three transparent definitions. Implementation admission rejects the later `PathIndSrc_catd` global before subject checking, proving that semantic selection and compilation staging must remain separate. |
+| `D-PA-159` | Replace v8's forward reference with the v9 earlier-symbol post-Sigma parent, but do not retain it after exact trace rejection. | Proposal/review `a735c40`/`7b466d5` preserve 4/10/0/10 and close the base fragment. The rule subject-checks, yet neither it nor the generic Sigma telescope fibre rule appears in the 360-step trace because comparison descends into the source-category child first. This is durable rejection evidence, not a reason for a generic matcher change. |
+| `D-PA-160` | Stage the direct source-fibre parent after its three declaration prerequisites. | Proposal/review `270da40`/`302c4a9` preserve the exact 4/10/0/10 semantics while partitioning nine base rules, three prefix definitions, one extension rule, and four suffix definitions. The direct rule fires on both source and transported endpoints; declaration bodies/order, generic engines, proof rules, and public surfaces remain unchanged. |
+| `D-PA-161` | Add only the transported-motive reflexive-fibre presentation support at v11. | Proposal/review `2e1e593`/`731dc32` resolve the v10 bound-variable mismatch with one complete parent, producing 4/11/0/10 across the same staged modules. No mathematical projection, proof rule, declaration, generic comparison behavior, or public capability is added. |
+| `D-PA-162` | Add the complete PathOut-Pi source-and-target section-category parent at v12. | Proposal/review `39abb02`/`8833f8f` freeze 4/12/0/10 after five suffix declarations compile and `pathout_pi_transport_func` reaches a `Functord_cat`/`Pi_cat` parent mismatch. The local rule does not assert an underlying category equality or authorize a generic section-category rule. |
+| `D-PA-163` | Replace v12's shadowed pre-delta rule one-for-one with the stable decoded-object parent at v13. | Proposal/review `d77f0d7`/`a8aff88` retain 4/12/0/10 and record that the predecessor Functor delta fires before the v12 fragment. The corrected rule closes `pathout_pi_transport_func` without an additional rule, category collapse, or generic-engine change, then exposes only the final total-target fibre mismatch. |
+| `D-PA-164` | Approve the exact final total-target fibre support at reviewed v14. | Proposal/review `4244b54`/`73aa94e` add `Fibre_cat(PathIndTgt_catd(Z),Struct_sigma(x,E)) → Pi_cat(PathOut_cat(Z,x),E)` after its prelude owner is declared. The resulting boundary is exactly 4/13/0/10: five mathematical projections, eight derived supports, zero proof rules, ten definitions, and no generic Sigma-fibre rule. |
+| `D-PA-165` | Complete root-only `PATHOUT-LIBRARY-INTERNALIZED-1D` at the reviewed v14 boundary. | The current semantic checkpoint compiles the 1/3/3 declaration prefix, 9+4 runtime partition, and 3+4 transparent suffix through unchanged generic engines at limit 512. The focused suite passes seven active tests with its oracle skipped; the separately gated run passes all twelve Lambdapi assertions. Four exact staged-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, authority denials, five-barrel closure, root typecheck, focused lint, diff hygiene, and a clean generic-compiler diff are green. The 1,923-test `e560551` aggregate is carried forward under the standing no-long-aggregate direction. No active Lambdapi source or public/package surface changes. `STDLIB-8B` remains active and advances only to transitivity `1E`. |
 
 ## Validation And Checkpoint Policy
 

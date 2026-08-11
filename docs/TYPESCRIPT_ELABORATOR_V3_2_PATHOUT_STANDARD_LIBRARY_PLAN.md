@@ -86,15 +86,34 @@ implementation and the related declaration-budget correction are complete at
 shared semantic checkpoint `e560551`. Corrected internalized PathInd proposal/
 review v5 at `fe0306d`/`a94c2f7` add the active `Pi_pullback_funcd` projection
 at 4/7/0/10. Proposal/review v6 at `19eb941`/`2112543` add one local two-sided
-decoded functor-category presentation bridge at 4/8/0/10. V6 compiles all
-eight rules and the first transparent definition. The next definition exposed
-that `compileCoreLfDeclarations` recorded but did not apply its requested
-512-step checking budget; the default-preserving propagation proposal/review
-are checkpointed at `9238104`/`a4d61a9`, and their implementation is also
-complete at `e560551`. With the existing 512 request effective, replay proceeds
-284 steps to a local `functor-object` category-presentation mismatch in
-`pathout_motive_transport_arrow`. The next local correction is measured but
-not yet frozen. No public PathOut/PathInd export is authorized.
+decoded functor-category presentation bridge at 4/8/0/10. The
+default-preserving 512-step propagation proposal/review are checkpointed at
+`9238104`/`a4d61a9`, and their implementation is complete at `e560551`.
+Proposal/review v7 `ef761e4`/`8cdff35` add only the measured action-level
+presentation support at 4/9/0/10. V8 `f26d340`/`1de3c95` selects the complete
+source-fibre parent at 4/10/0/10 but cannot reference later `PathIndSrc_catd`
+from the closed base fragment. V9 `a735c40`/`7b466d5` replaces it with an
+earlier-symbol parent, but exact trace rejects that unreachable shape. V10
+`270da40`/`302c4a9` preserves 4/10/0/10 and stages the direct parent after its
+three transparent prerequisites. V11 `2e1e593`/`731dc32` adds the transported-
+motive reflexive fibre at 4/11/0/10. V12 `39abb02`/`8833f8f` adds a complete
+PathOut-Pi source-and-target parent at 4/12/0/10; v13
+`d77f0d7`/`a8aff88` replaces its predecessor-shadowed form one-for-one with
+the stable decoded-object presentation. V14 `4244b54`/`73aa94e` adds only the
+final total-target fibre support at **4/13/0/10**.
+
+The reviewed v14 root-only implementation is now final-proportional-green in
+the current semantic checkpoint. It compiles all four opaque declarations,
+thirteen runtime rules (five mathematical projections and eight derived
+supports), and ten transparent definitions across the reviewed staged module
+partition. Seven active focused tests, four exact extension-rule observations,
+two named library consumers plus typed target transport, one strict
+foreign-motive negative, safe-library
+denials, non-export checks, root typecheck, and focused lint pass; the
+separately gated oracle passes all twelve active-Lambdapi assertions. The
+unchanged 1,923-test aggregate from `e560551` is carried forward. No public
+PathOut/PathInd export is authorized. Internalized `1D` is complete;
+transitivity `1E` is the next bounded slice.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -259,8 +278,8 @@ named library presentation.
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | v6 implementation candidate reaches the second transparent definition; v7 correction measured | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; proposal/review v6 `19eb941`/`2112543`; v5 `fe0306d`/`a94c2f7`; superseded v1-v4 retained below | All eight v6 rules and `pathout_motive_transport_obj` compile. Effective 512-step checking reaches one local action-level category-presentation mismatch in `pathout_motive_transport_arrow`; the next correction requires its own proposal and review. |
-| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
+| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending; dependency-ready | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
@@ -2649,9 +2668,49 @@ fapp0(Catd_cat(K), Catd_cat(L), F, E).
 Here `K = PathOut_Z(x)`, `L = PathOut_Z(y)`, and `F` is the motive action along
 `p`. This is the action-level form of v6's already measured presentation
 boundary. It is not a mathematical mismatch and does not justify reopening
-generic declaration proof integration. A possible fourth local support rule
-must be frozen and separately reviewed before implementation. No diagnostic
-wrapper, source observer, or active Lambdapi edit remains.
+generic declaration proof integration.
+
+Proposal/review v7 `ef761e4`/`8cdff35` freeze that one support at
+**4/9/0/10**. V7 compiles through three transparent derived declarations, then
+`PathIndSrc_transport_func` exposes its complete source fibre. V8
+`f26d340`/`1de3c95` selects that parent at **4/10/0/10**, but base-fragment
+closure rejects its forward reference to `PathIndSrc_catd`. V9
+`a735c40`/`7b466d5` selects an earlier-symbol post-Sigma parent at the same
+count, but the 360-step trace reaches the source-category child before that
+pattern; neither the proposed rule nor a generic Sigma telescope fibre appears.
+V10 `270da40`/`302c4a9` therefore preserves the direct parent and stages it
+after three prefix definitions. Nine base rules, that one extension, and the
+four suffix definitions all compile through the composed runtime.
+
+V10 then isolates a transported-motive reflexive-fibre mismatch. V11
+`2e1e593`/`731dc32` adds only that parent at **4/11/0/10**. V12
+`39abb02`/`8833f8f` adds the complete `Functord_cat`/`Pi_cat` transport parent
+at **4/12/0/10**, but predecessor Functor delta shadows its pre-delta shape.
+V13 `d77f0d7`/`a8aff88` replaces it one-for-one with the stable decoded-object
+parent. `pathout_pi_transport_func` then compiles and leaves only the total-
+target fibre in `PathIndTgt_transport_func`. V14
+`4244b54`/`73aa94e` adds exactly
+
+```text
+Fibre_cat(PathIndTgt_catd(Z), Struct_sigma(x,E))
+→ Pi_cat(PathOut_cat(Z,x), E)
+```
+
+after `PathIndTgt_catd` is already declared. It adds no mathematical rule,
+generic Sigma-fibre equation, declaration change, or generic-engine behavior.
+
+The resulting reviewed implementation is exact **4/13/0/10**: four opaque
+owners, five mathematical projections, eight local presentation supports,
+zero proof rules, and ten transparent definitions. Its staged 1/3/3
+declaration prefix, 9+4 runtime partition, and 3+4 transparent suffix compile
+at the explicit 512-step limit. The focused suite passes seven active tests
+with the optional oracle skipped; the separately selected oracle passes all
+twelve active-Lambdapi assertions. Four extension redexes fire by exact ID,
+the primary and derived consumers typecheck, a foreign motive is rejected,
+ordinary-library authority and five public/browser barrels stay closed, and
+root typecheck plus focused lint pass. The generic compiler diff is empty and
+no active Lambdapi source changed. The prior 1,923-test aggregate is carried
+forward rather than rerun. No diagnostic wrapper or source observer remains.
 
 ## Required Evidence For Implementation
 
