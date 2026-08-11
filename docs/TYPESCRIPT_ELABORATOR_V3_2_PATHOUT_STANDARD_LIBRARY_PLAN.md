@@ -290,7 +290,7 @@ named library presentation.
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
-| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | complete; final-proportional-green | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; semantic checkpoint awaiting its ledger pin | The exact root-only **0/1/0/5** transfer compiles five transparent definitions plus one derived complete consumer-parent support. Eight TypeScript observations, two typed consumers, eight negatives, authority closure, and a separately gated eight-assertion Lambdapi oracle are green. No mathematical equation, local proof rule, injectivity, unification, Core, generic-engine, public, or Lambdapi-source behavior is added. |
+| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | complete; final-proportional-green | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; semantic checkpoint `3b113ad` | The exact root-only **0/1/0/5** transfer compiles five transparent definitions plus one derived complete consumer-parent support. Eight TypeScript observations, two typed consumers, eight negatives, authority closure, and a separately gated eight-assertion Lambdapi oracle are green. No mathematical equation, local proof rule, injectivity, unification, Core, generic-engine, public, or Lambdapi-source behavior is added. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
@@ -3220,10 +3220,13 @@ transfer compiler diff is empty, and the transfer remains absent from all
 public barrels. No active Lambdapi source changes. The 1,923-test full
 TypeScript checkpoint at `e560551` is carried forward under the standing
 direction to avoid long aggregates unless progress would otherwise be
-blocked. The semantic checkpoint introducing this completed transfer must be
-pinned in the next ledger-only update. The next dependency-ready row is
-root/public presentation `PATHOUT-LIBRARY-PRESENTATION-1F`, not another
-semantic equation.
+blocked. Semantic checkpoint `3b113ad` introduces the completed transfer;
+the transfer SHA-256 is
+`dd9484a58c6196fe5cc9c6c1ac941bea0a148c449855d011fc61fbcf3dc3fe9d`
+and its focused-test SHA-256 is
+`dda1a5436dabc02065aa02e30b1a14000c015783a866a894aa7884d40cae7dbf`.
+The next dependency-ready row is root/public presentation
+`PATHOUT-LIBRARY-PRESENTATION-1F`, not another semantic equation.
 
 ## Required Evidence For Implementation
 
