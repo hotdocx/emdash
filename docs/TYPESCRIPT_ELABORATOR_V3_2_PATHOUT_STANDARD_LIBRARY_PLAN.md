@@ -113,9 +113,12 @@ denials, non-export checks, root typecheck, and focused lint pass; the
 separately gated oracle passes all twelve active-Lambdapi assertions. The
 unchanged 1,923-test aggregate from `e560551` is carried forward. No public
 PathOut/PathInd export is authorized. Internalized `1D` is complete;
-transitivity `1E` now has a frozen, behavior-free **0/0/0/5** proposal and a
-separate immutable review authorizing only its exact root-local
-implementation.
+transitivity `1E` admitted all five definitions from its reviewed **0/0/0/5**
+v1 boundary, but cold observation replay found two presentation residuals.
+Corrected v2 therefore freezes **0/1/0/5**: one local derived runtime support,
+zero local proof rules, five unchanged definitions, and reuse of one existing
+proof-time provider. V2 remains non-authorizing pending a separate immutable
+review.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -2810,6 +2813,80 @@ publication, release, and cleanup remain unauthorized.
 Review checkpoint `f60b36a`, with review SHA-256
 `cd1fead66d6447e0ed73fe5eaa6cbc67ef0a9dbb606897dbad4c6e7c0b6c76ca`,
 freezes that exact authorization.
+
+### Corrected transitivity proposal v2 after cold replay
+
+The reviewed v1 implementation admitted all five transparent declarations at
+the requested 512-step comparison limit. Its focused cold replay then passed
+the boundary, compilation, both typed consumers, all eight strict negatives,
+and capability/non-export closure. Two of the eight selected observations did
+not close definitionally, producing the measured gate
+`8-tests-5-pass-2-fail-1-skip` rather than an implementation checkpoint.
+
+The first residual is the exact category-presentation pair
+
+```text
+Pi_cat(
+  Sigma_cat(Z, Rep_catd(Z,x)),
+  Sigma_proj1_pullback_catd(Z, Rep_catd(Z,x), CompTarget_catd(Z,x)))
+
+Functord_cat(Z, Rep_catd(Z,x), CompTarget_catd(Z,x))
+```
+
+at the root. Active Lambdapi already owns this comparison at proof time, and
+the qualified TypeScript predecessor already transfers it as
+`stress.sigma-pi.uncurrying`. Corrected v2 therefore requires that existing
+proof program to be rechecked against the final descendant declaration
+environment. It adds no local proof rule and explicitly retains the runtime
+non-conversion boundary between these category presentations.
+
+The second residual is the complete `functor-object` parent obtained by
+applying the `CompTarget_catd` arrow action at `p` to
+`id_funcd(Z,Rep_catd(Z,x))`; its other side is the body of
+`path_comp_func(Z,x,y,p)`, namely stable represented precomposition. The
+smallest source-faithful correction is one transitivity-local, derived,
+non-mathematical presentation fusion after all five transparent definitions
+have compiled. The rule must subject-check. It does not import the generic
+`hom_con` arrow ladder, unfold the whole displayed identity facade, or widen
+the matcher, checker, evaluator, conversion engine, or Core.
+
+The corrected, still non-authorizing proposal is
+[`src/v3_2/pathout_transitivity_proposal_v2.ts`](../src/v3_2/pathout_transitivity_proposal_v2.ts),
+with focused tests in
+[`tests/v3_2_pathout_transitivity_proposal_v2_tests.ts`](../tests/v3_2_pathout_transitivity_proposal_v2_tests.ts).
+It pins v1 proposal/review checkpoints `50b9a56`/`f60b36a`, their exact
+SHA-256 digests, and ledger checkpoint `150e315`. It preserves the five
+definitions, eleven existing providers, two typed consumers, eight negatives,
+and eight bounded Lambdapi assertions. Seven observations remain runtime
+definitional; the section-category observation is assigned to the one
+inherited proof-time provider. The exact local semantic boundary is therefore
+**0/1/0/5**, with the inherited provider recorded separately rather than
+miscounted as a new proof rule.
+
+Corrected-proposal evidence on 2026-08-11 is:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_pathout_transitivity_proposal_tests.ts \
+  tests/v3_2_pathout_transitivity_review_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v2_tests.ts
+  20 tests / 3 suites: 20 passed, 0 failed
+
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_transitivity_proposal_v2.ts \
+  tests/v3_2_pathout_transitivity_proposal_v2_tests.ts
+  passed
+```
+
+V2 changes no semantics and enters no contributor, browser, workspace, or npm
+barrel. Its synchronized artifact, tests, and plan form a new proposal
+checkpoint whose exact commit and digest must be pinned by a separate review
+before implementation resumes. The unchanged 1,923-test aggregate from
+`e560551` remains carried forward under the standing no-long-aggregate
+direction.
 
 ## Required Evidence For Implementation
 
