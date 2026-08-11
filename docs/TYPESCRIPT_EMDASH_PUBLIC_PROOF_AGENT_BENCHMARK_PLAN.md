@@ -1108,6 +1108,91 @@ branch/main push, Pages verification, annotated tag, frozen Release, and OIDC
 publication. The CloserFans stage remains forbidden until public registry
 bytes are independently verified.
 
+## `AGENT-EVAL-12B3-R1` Checkout Failure And Forward-Recovery Proposal
+
+Date: 2026-08-11
+
+State: non-authorizing proposal. The failed hosted run and still-absent npm
+version make a bounded workflow correction necessary, but this section must
+be checkpointed and independently reviewed before workflow, `main`, Release,
+environment, or registry state changes again.
+
+The reviewed integration sequence completed safely through its Pages gate:
+
+- remote goal branch `goal/typescript-emdash-proof-assistant-v1` is exact
+  ledger checkpoint `bc80632`;
+- local and remote `main` are the exact qualified package candidate
+  `995e497`, reached by fast-forward;
+- Pages run `31509112917` has exact head `995e497`; both build and deployment
+  passed, and the live browser panel showed six tracks, ten cases, nine
+  accepted references, and one abstention with no console error or warning;
+- annotated tag `emdash-v0.3.0` peels to exact `995e497`;
+- GitHub Release database ID `368683536` is the one public, non-draft,
+  non-prerelease Release titled `@hotdocx/emdash 0.3.0` with the exact frozen
+  body; and
+- release-triggered workflow run `31509330799` is the only `0.3.0` npm run.
+  Its build failed in `Checkout exact release tag`; publish was skipped, and
+  npm still returns `E404` for exact `0.3.0` with `latest` remaining `0.2.0`.
+
+The run log establishes the root cause rather than an application or package
+failure. Official checkout v7 fetched and checked out exact tag `emdash-v0.3.0`
+at `995e497`. Although `persist-credentials: false` was set, checkout first
+installed a temporary include-file credential and then removed it before
+returning. That removal executed `git submodule foreach --recursive` against
+the tracked historical gitlink `.hott-book-review-20260720`. Because that
+gitlink intentionally has no `.gitmodules` URL, Git exited 128 and the action
+failed before Node setup, preflight, build, pack, upload, environment approval,
+OIDC, or npm mutation. The prior assumption that non-persistence would avoid
+the malformed-gitlink cleanup path is therefore falsified. Retrying the same
+run cannot correct it.
+
+The smallest forward correction is release-workflow-only:
+
+1. Remove `actions/checkout` from `.github/workflows/npm-publish.yml`. Replace
+   it with one unprivileged shell step which initializes the empty runner
+   workspace, adds the public HTTPS repository URL without a token, fetches
+   only exact `refs/tags/$RELEASE_TAG` and `refs/heads/main`, and checks out the
+   tag detached. It must not initialize, update, inspect, or recurse through
+   submodules and must not read or persist `GITHUB_TOKEN`.
+2. Keep the release-only `types: [published]` trigger, two-job artifact
+   handoff, unprivileged build, exact ancestry/package checks, immutable
+   setup/upload/download action pins, protected `npm-release` environment,
+   sole publish-job `id-token: write`, no-republish guard, and OIDC provenance
+   publication unchanged. Do not add `workflow_dispatch`, another workflow,
+   a secret, `NODE_AUTH_TOKEN`, or an npm token.
+3. Update the focused release-policy test to require the direct exact-ref
+   fetch, detached checkout, and absence of `actions/checkout`, credentials,
+   submodule operations, and broader push/pull-request/manual triggers.
+4. Reproduce the direct checkout in a fresh disposable directory against the
+   public repository, proving exact tag peel, exact remote-main ancestry, and
+   clean package source without fetching a sibling branch or submodule.
+   Run the three focused release-policy tests, workspace contract, root
+   typecheck, focused lint, package preflight/build, and diff/no-secret gates.
+   Package semantics and the already qualified tarball are unchanged, so no
+   long aggregate, kernel, book, print, browser, or packed-consumer rerun is
+   required merely for this workflow correction.
+5. After a separate immutable review and clean correction checkpoint,
+   non-force-push the goal branch and fast-forward/push `main`. Confirm the
+   public workflow bytes and that tag `emdash-v0.3.0`, Release ID `368683536`,
+   and npm absence remain exact.
+6. Change that same Release object to draft and immediately publish the same
+   object again with its exact tag, title, body, and non-prerelease state. This
+   is a one-time event recovery, not a second Release or a moved/reused tag.
+   It must produce exactly one new `release: published` workflow run at exact
+   package head `995e497`; the first failed run remains durable evidence.
+7. Approve only the corrected run's exact pending `npm-release` deployment,
+   then apply every original artifact, OIDC, registry, provenance, byte-
+   identity, installed-export, and consumer verification gate. The CloserFans
+   stage remains forbidden until these public bytes pass.
+
+If the direct checkout, Release-object transition, corrected workflow, OIDC,
+or registry verification fails, stop again and correct forward. Never move or
+delete the tag, delete/recreate the Release, locally publish, republish an npm
+version, force-push, rewrite history, or conceal the failed run. This recovery
+adds no semantic, package-entry, dependency, bin, hook, provider/model,
+CloserFans, API/MCP/controller, Arrowgram, Lambdapi, mathematics, book, print,
+or 12B4 authority.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
