@@ -1513,10 +1513,10 @@ or aggregate gate is claimed for the review document.
 
 Date: 2026-08-11
 
-State: implementation complete and proportionally green; the exact semantic
-checkpoint is pinned by the immediately following plan-only ledger update.
-No push, dispatch, environment approval, registry, Release, tag, or sibling
-mutation occurred during this local implementation.
+State: implementation complete and proportionally green at exact semantic
+checkpoint `7e275a7`. This immediately following plan-only ledger update pins
+that immutable implementation. No push, dispatch, environment approval,
+registry, Release, tag, or sibling mutation occurred during local work.
 
 The temporary implementation changes exactly two behavioral owners:
 
@@ -1570,10 +1570,9 @@ aggregate, Lambdapi/kernel, book/print, browser, packed-consumer, CloserFans,
 Arrowgram, provider/model, or hosted dispatch gate ran. Those omissions are
 not passes.
 
-The next admissible operation is exact staged review/checkpoint and a
-plan-only pin, then clean re-audit, non-force goal/main integration, public
-workflow recognition, and one dispatch on exact integrated `main`. The
-Release must not be edited again.
+The next admissible operation is clean re-audit, non-force goal-branch push
+and `main` fast-forward to exact `7e275a7`, public workflow recognition, and
+one dispatch on exact integrated `main`. The Release must not be edited again.
 
 ## Validation Policy
 
