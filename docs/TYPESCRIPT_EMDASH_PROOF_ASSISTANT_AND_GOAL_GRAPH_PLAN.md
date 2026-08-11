@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R1 channel correction approved for local code only | Immutable review of proposal `58ff991` approves three-file exact selected-channel/empty-other-stream behavior plus stderr-faithful fake and wrong-stream regression. Old coordinates remain retired; no provider call or new coordinates are authorized. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R1 channel edits in progress; evaluator-launch amendment proposed | Exact login-channel work is approved, but its first focused run exposed unchanged tsx-CLI Unix-socket path overflow under the private default run root. The dedicated amendment proposes `node --import tsx` for only the clean evaluator; separate review is required before that fourth edit. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6562,6 +6562,18 @@ coordinates, provider/model, lease/transcript, external effects, and claims
 remain denied until a focused-green implementation checkpoint and another
 exact review. Accounting remains 35/41.
 
+During the approved but uncommitted R1 work, the first focused canary timed out
+and a disposable isolated run then failed the unchanged mock accepted case.
+Exact evaluator replay under its long private `TMPDIR` reproduced tsx CLI
+`listen EINVAL` on an overlong Unix-socket path; the same evaluator/attempt
+succeeded with a short temp path. The dedicated plan therefore adds a
+behavior-free amendment: use `process.execPath --import tsx` for only the clean
+evaluator, retaining all environment/path/timeout/hash/replay boundaries. This
+is already the selected-case launch pattern and avoids the CLI IPC socket. The
+amendment expands scope to `emdash-canary.mts` but authorizes no such edit until
+separate immutable review. The diagnostic tree was removed; old real evidence
+and coordinates remain immutable. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6775,6 +6787,7 @@ exact review. Accounting remains 35/41.
 | `D-PA-206` | Classify the sole authorized Stage A invocation as a terminal no-call `login-category` preflight refusal and prohibit retry. | Receipt SHA-256 `cb02d5085f855e3a516f5c20f2b5593103b53c38824e5b85e99e530fda25edf3` binds exact source/authorization/case provenance and records `spawned=false`, `providerExecuted=false`, null benchmark outcome, and unconditional non-graduation/non-proof labels. No lease, model, transcript, usage/cost, or proof/performance evidence exists. Diagnosis and any new attempt require separate no-model planning, implementation, checkpoints, and new immutable coordinates. |
 | `D-PA-207` | Freeze a non-authorizing three-file R1 correction for the diagnosed login-status stream mismatch. | Closed no-model probes show version text only on stdout and valid ChatGPT login status only on stderr; the real driver and fake fixture modeled both as stdout. The proposal requires exact selected-channel text, an empty other channel, stderr-faithful fake behavior, and wrong-stream refusal coverage. It preserves the retired ID/run evidence and authorizes no code or provider effect before separate immutable review. |
 | `D-PA-208` | Approve only exact R1 proposal `58ff991` for three local template script/test changes and fake/no-model validation. | Immutable plan hashes and six conditions require bounded exact channel handling, empty nonselected output, fatal decoding, normalized preflight receipts, stderr-faithful fake behavior, wrong-stream refusal, exact scope, and preservation of all operator/contract/source/policy/evidence boundaries. New coordinates, provider/model effects, integration, and claims remain denied pending a focused-green code checkpoint and another review. |
+| `D-PA-209` | Freeze a non-authorizing R1 amendment replacing only clean-evaluator tsx-CLI launch with `node --import tsx`. | Exact no-model reproduction shows the private default run root can make tsx's IPC Unix-socket path exceed the host limit, causing `listen EINVAL`; the same evaluator/attempt succeeds with a shorter temp path. The amendment preserves the long private boundary and all replay semantics while avoiding the CLI IPC socket. It expands implementation scope to `emdash-canary.mts` only after separate review. |
 
 ## Validation And Checkpoint Policy
 

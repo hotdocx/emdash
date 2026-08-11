@@ -3045,6 +3045,50 @@ or performance/proof claim. After a focused-green code checkpoint,
 synchronize both plans and perform a new exact code/preflight review before
 even proposing new call coordinates. Accounting remains 35/41.
 
+##### Post-review evaluator-launch amendment
+
+The three authorized R1 edits were applied but remain uncommitted. Their first
+focused canary run did not pass: the outer 120-second harness timed out. A
+separate disposable clean install then isolated a faster deterministic failure
+in the unchanged mock accepted case. Replaying its canonical selected attempt
+under the exact private evaluator environment produced:
+
+```text
+Error: listen EINVAL: invalid argument
+.../host-evaluator-tmp/tsx-1000/998122.pipe
+```
+
+The same evaluator and attempt succeed under a shorter temp path. The failure
+is therefore not evaluator semantics, the login-stream correction, source
+tampering, or provider behavior. `replayCandidate` launches the clean evaluator
+through `node_modules/.bin/tsx`; that CLI creates an IPC Unix-domain socket
+whose path can exceed the host limit when nested below the intentionally
+private run root. The already qualified selected-case preflight instead uses
+`process.execPath --import tsx` and needs no tsx CLI IPC socket.
+
+The minimal amendment adds one production file to the R1 scope:
+
+1. In `emdash-canary.mts`, launch only the clean evaluator as
+   `process.execPath --import tsx <exact-evaluator-script> ...` from the same
+   clean root and same closed evaluator environment. Keep all input/output
+   paths, timeout/byte bounds, exit handling, clean-manifest comparison,
+   canonical artifact checks, and evaluator source unchanged.
+2. Do not shorten, relocate, symlink, delete, or weaken the private run/evidence
+   boundary; do not widen PATH/environment or call the agent/provider.
+3. Let the existing default-run-root mock suite act as the long-private-path
+   regression, alongside the new login-channel tests. Re-run the focused
+   canary/clean-install/typecheck and live no-model permission gates. Record
+   the initial timeout and diagnostic fixture failure as failures, not passes.
+
+The amended implementation scope is exactly four template files:
+`emdash-canary-real.mts`, `emdash-canary.mts`, the tracked fake fixture, and
+`verify-emdash-canary.mts`. The earlier three-file authorization does not by
+itself authorize the fourth edit. This amendment changes plans only and
+requires a separate immutable review before `emdash-canary.mts` is edited. It
+selects no new call coordinates and authorizes no provider/model or external
+effect. The disposable diagnostic tree was removed after the bounded evidence
+above was recorded; preserved real Stage A evidence remains untouched.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -3112,8 +3156,10 @@ On continuation:
    `4e39600` as historical authority for the now-consumed operator invocation;
    treat receipt `cb02d50` as a terminal no-call `login-category` refusal; and
    treat R1 proposal `58ff991` and its immutable review as authority only for
-   the exact three-file local correction and fake/no-model tests; and forbid
-   any retry or alternate coordinate without its implementation checkpoint,
-   new code/preflight review, and new coordinates; and
+   the exact three-file local correction and fake/no-model tests; treat the
+   evaluator-launch amendment as non-authorizing until separately reviewed;
+   and forbid any retry or alternate coordinate without the amended
+   implementation checkpoint, new code/preflight review, and new coordinates;
+   and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
