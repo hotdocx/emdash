@@ -2940,6 +2940,64 @@ Roadmap accounting remains 35/41. Push, merge, deployment, release, API/MCP,
 controller, database, Emdash semantics, another template, Stage B/C, and long
 aggregates remain untouched or omitted.
 
+### `AGENT-EVAL-12B4-R1` No-model login-stream diagnosis and correction proposal
+
+The terminal receipt made the next operation diagnostic rather than
+provider-backed. A fresh, closed-environment, no-model process probe now
+identifies the exact cause without reading credential content or preserved run
+evidence:
+
+```text
+command              exit  stdout                  stderr
+codex --version      0     codex-cli 0.147.0\n    empty
+codex login status   0     empty                   Logged in using ChatGPT\n
+```
+
+The real driver used one stdout-only `expectText` helper for both commands and
+therefore classified a valid real login as `login-category`. The tracked fake
+executable wrote its login fixture to stdout, so its successful orchestration
+test reproduced the driver's assumption rather than the CLI contract. The
+preflight refusal was consequently correct relative to the implemented gate,
+and its receipt/provenance remain valid; the mismatch is in the modeled stream
+contract. No model/provider, auth-file read, lease, retry, or transcript was
+involved in this diagnosis.
+
+The smallest correction proposal is:
+
+1. Replace the internal stdout-only helper with an exact channel-aware helper
+   over the already bounded capture. Successful version, permission-probe, and
+   selected-case commands require their expected text on stdout and empty
+   stderr. Successful login status requires its expected category on stderr
+   and empty stdout. A nonzero exit, timeout, selected-channel decoding error,
+   unexpected other-channel bytes, or wrong exact text remains a normalized
+   preflight refusal.
+2. Make the tracked fake executable model `codex login status` on stderr,
+   including wrong-category overrides. Do not add a provider selector,
+   environment inheritance, credential fixture, fallback, compatibility
+   acceptance of both channels, or output concatenation.
+3. Extend the focused fake suite so the normal real-member path succeeds only
+   with the stderr login contract and an explicitly stdout-emitting login
+   fixture is rejected before authorization/spawn. Retain every existing
+   refusal, lease, spawn-error, policy, receipt, environment, and replay test.
+4. Rerun only formatting/diff/credential-shape checks, the focused canary/
+   clean-install/typecheck suite, and the live no-model permission probe. The
+   public adapter/operator/CLI behavior and package/template registry are
+   unchanged; their immediately preceding focused-green evidence carries
+   forward unless the exact diff reaches them.
+
+Implementation may change only
+`templates/emdash_benchmark/scripts/emdash-canary-real.mts`, the tracked fake
+fixture, and `verify-emdash-canary.mts`, plus these plans. It may not edit the
+operator, authorization ID, public package scripts, prompt/schema/case,
+permission profile, evaluator, receipt semantics, Emdash, another template,
+API/MCP/controller/cloud surfaces, or preserved Stage A evidence. The existing
+ID/run root are retired and must never be reused or removed.
+
+This proposal authorizes no code and no new call. Require a separate immutable
+proposal review, focused-green implementation checkpoint, a new exact no-model
+code/preflight review, and wholly new non-secret ID/run-root coordinates before
+any later provider attempt. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -3006,7 +3064,8 @@ On continuation:
    immutable corrected-driver review above and authorization checkpoint
    `4e39600` as historical authority for the now-consumed operator invocation;
    treat receipt `cb02d50` as a terminal no-call `login-category` refusal; and
-   forbid any retry or alternate coordinate without separate diagnosis,
-   proposal, implementation, and immutable review; and
+   treat R1 above as a non-authorizing exact-channel correction proposal; and
+   forbid any retry or alternate coordinate without its separate immutable
+   review, implementation, new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
