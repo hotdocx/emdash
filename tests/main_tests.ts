@@ -33,6 +33,7 @@ import './v3_2_lf_definition_tests';
 import './v3_2_lf_conversion_tests';
 import './v3_2_lf_conversion_normal_form_closure_proposal_tests';
 import './v3_2_lf_conversion_normal_form_closure_review_tests';
+import './v3_2_pathind_internalized_proposal_v5_tests';
 import './v3_2_lf_builder_tests';
 import './v3_2_lf_profile_proposal_tests';
 import './v3_2_directed_1a_proposal_tests';
