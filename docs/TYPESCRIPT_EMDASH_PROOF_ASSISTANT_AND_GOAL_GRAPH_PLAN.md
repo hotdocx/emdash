@@ -156,8 +156,13 @@ projection exposes `Catd_cat(PathOut)` versus `Functor_cat(PathOut,Cat)` under
 `Transf_cat`. Corrected behavior-free v4 adds one scoped support fusion,
 making 4/6/0/10. V4 is frozen at `001a899`; its separate review is final-
 proportional-green and checkpointed at `7984efb` under delegated unattended
-authority with later human supersession. No PathOut/PathInd public package
-export has yet been added.
+authority with later human supersession. V4 admits its first five local rules,
+but the final projection exposes a generic conversion-closure defect. With the
+active `Pi_pullback_funcd` component projection supplied in memory, both sides
+normalize to the same exact Core expression while paired comparison returns
+`not-equal`. The generic closure proposal/review are checkpointed at
+`cf8ed76`/`778da06`; PathInd expansion is paused behind that reviewed
+prerequisite. No PathOut/PathInd public package export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -241,7 +246,9 @@ separate review is frozen at `2a250fb`. Measured v2 shadowing and corrected
 proposal v3 are frozen at `5a1d635`; its separate review is frozen at
 `6694c87`. Measured v3 counterevidence and corrected proposal v4 are the
 frozen checkpoint `001a899`; its separate review is frozen at `7984efb`.
-The exact reviewed v4 semantic implementation is the current bounded tranche.
+Measured v4 counterevidence and the generic normal-form-closure proposal/review
+are frozen at `cf8ed76`/`778da06`. The exact reviewed generic closure is the
+current bounded tranche; the preserved PathInd implementation remains paused.
 
 Depends-On:
 
@@ -723,7 +730,8 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, and fixed-source `PATHIND-TRUSTED-PROFILE-1C` at semantic checkpoint `a361dc3` are complete and final-proportional-green. V3's post-prefix support and `PathInd_func` projection compile, but measured transfd-component counterevidence supersedes review `6694c87`. Corrected behavior-free v4 proposal/review checkpoints `001a899`/`7984efb` authorize one scoped `Transf_cat` presentation fusion, producing 4/6/0/10 while preserving every consumer/oracle/denial; its semantic implementation is active. Transitivity and public presentation remain later rows. |
+| `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | Terminal same-budget normal-form closure prerequisite | in progress | Proposal/review `cf8ed76`/`778da06` authorize only a deterministic left-then-right closure after paired `not-equal`, within the original one global budget. It adds no runtime/proof rule, Core node, unification, public effect, or Lambdapi change. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, and fixed-source `PATHIND-TRUSTED-PROFILE-1C` at semantic checkpoint `a361dc3` are complete and final-proportional-green. V4 proposal/review `001a899`/`7984efb` admit five local rules before final `PathInd_transfd` checking. With the active Pi-pullback component projection, independent normalization is exactly equal but paired comparison is not; semantic expansion is paused behind reviewed generic prerequisite `cf8ed76`/`778da06`. A separate v5 proposal/review must freeze any 4/7/0/10 PathInd boundary. Transitivity and public presentation remain later rows. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -6137,6 +6145,8 @@ implementation.
 | `D-PA-147` | Approve only checkpointed corrected internalized PathInd proposal v3 under delegated unattended authority, with human supersession. | Review checkpoint `6694c87`, review SHA-256 `fdd08973311a1afe781e53743a54889a2b58c07a61077fb8b251180d00df6016`, and proposal checkpoint `5a1d635` authorize exactly 4/5/0/10 through generic root-only engines with the one post-prefix support replacement. Thirty-eight historical/current proposal-review tests, typecheck, focused lint, and diff hygiene are green. Retaining v2's pre-prefix rule, adding a sixth rule, proof integration, generic matcher/checker changes, alternate PathInd signatures/bodies, retained observers, whole-profile import, public effects, transitivity, integration, and release remain denied. |
 | `D-PA-148` | Supersede v3 implementation authority and freeze corrected non-authorizing internalized PathInd proposal v4 at 4/6/0/10. | Checkpoint `001a899`, proposal SHA-256 `6d30ede357b09900667904549ab1f4a0f6246ae21b5eb578a4cf57bdeb6127fe`, and focused green evidence record that v3 compiles its post-prefix support and `PathInd_func` projection before `PathInd_transfd` compares `Obj(Transf_cat(Catd_cat(PathOut),Cat,...))` with `Obj(Transf_cat(Functor_cat(PathOut,Cat),Cat,...))`. V4 adds one local non-mathematical presentation fusion under `Transf_cat`, keeps the four mathematical projections and zero proof rules, preserves all consumers/oracles/denials, and still requires its separate review checkpoint. It denies a generic category collapse, and temporary observers are absent. |
 | `D-PA-149` | Approve only checkpointed corrected internalized PathInd proposal v4 under delegated unattended authority, with human supersession. | Review checkpoint `7984efb`, review SHA-256 `a566290417bb9f4790f9d073036106f4ade843172d629c7a4b4983fbd2e32589`, and proposal checkpoint `001a899` authorize exactly 4/6/0/10 through generic root-only engines: four owners, four mathematical projections, two local non-mathematical subject-presentation fusions, zero proof rules, and ten definitions. Fifty historical/current proposal-review tests, typecheck, focused lint, and diff hygiene are green. A seventh runtime rule, generic category collapse, proof integration, generic matcher/checker changes, alternate PathInd signatures/bodies, retained observers, whole-profile import, public effects, transitivity, integration, and release remain denied. |
+| `D-PA-150` | Freeze a non-authorizing generic terminal normal-form-closure proposal after measured v4 counterevidence. | Proposal checkpoint `cf8ed76`, SHA-256 `b0711d2185b3f3fcf2ca35e6507c548f86c8f10d4252ab140f8b8ffa45bf7f4a`, records that the active Pi-pullback projection subject-checks without proof support and makes both PathInd component subject types independently normalize to one exact expression in 58/68 steps, while paired comparison returns `not-equal` after 125. The proposal retains the existing paired traversal, permits closure only after that negative result under the same single budget, and denies new equations, proof search, unification, Core nodes, PathInd-specific commuting rewrites, and public effects. |
+| `D-PA-151` | Approve only checkpointed generic terminal normal-form closure under delegated unattended authority, with human supersession. | Review checkpoint `778da06`, review SHA-256 `465a2056fbbbcfca75af9df33fedffb0142cc53d85f004f7869c41d04f56bd98`, and proposal checkpoint `cf8ed76` authorize deterministic left-then-right normalization of the paired outcome only after `not-equal`, with trace splicing and no budget reset, followed by exact structural retry. Ten proposal/review tests, typecheck, focused lint, and diff hygiene are green. Runtime/proof rules, standalone normalization, weak head, checker ownership, Lambdapi, public surfaces, integration, and release remain unchanged or denied. |
 
 ## Validation And Checkpoint Policy
 

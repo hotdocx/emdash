@@ -73,7 +73,13 @@ implementation authority. Corrected behavior-free v4 adds one scoped
 `Transf_cat` presentation fusion, making 4/6/0/10. Proposal v4 is frozen at
 `001a899`; its separate review is final-proportional-green and checkpointed
 at `7984efb` under delegated unattended authority with later human
-supersession.
+supersession. Semantic replay admits all five rules preceding the final
+`PathInd_transfd` projection but exposes a generic comparison-closure defect:
+after adding the active `Pi_pullback_funcd` component projection in memory,
+both subject types normalize to the same exact Core expression while paired
+comparison still returns `not-equal`. The behavior-free generic closure
+proposal/review are checkpointed at `cf8ed76`/`778da06`; PathInd expansion is
+paused until that reviewed prerequisite is implemented.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -236,7 +242,8 @@ named library presentation.
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | corrected proposal/review v4 checkpointed; implementation ready | completed 1C at `a361dc3`/`033dbb8`; proposal/review v4 checkpoints `001a899`/`7984efb`; superseded v3 checkpoints `5a1d635`/`6694c87`; superseded v2 checkpoints `fbfc4dd`/`2a250fb`; superseded v1 checkpoints `188b8e5`/`d3a0f31` | V4 preserves v3's green post-prefix support and `PathInd_func` projection, then adds one exact local `Transf_cat` subject fusion for the final `PathInd_transfd` projection. Exact boundary is 4/6/0/10: four mathematical projections, two support rules, zero proof rules, ten definitions, and every later/public denial. |
+| `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | proposal/review checkpointed; implementation ready | measured v4 plus in-memory active `Pi_pullback_funcd` projection; proposal/review `cf8ed76`/`778da06` | Preserve the paired traversal and its one global budget, then only after `not-equal` continue deterministic left/right normalization and retry exact structural equality. Add no reduction, proof rule, Core node, unification, or public effect. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | v4 counterevidence measured; paused behind reviewed generic closure | completed 1C at `a361dc3`/`033dbb8`; proposal/review v4 `001a899`/`7984efb`; generic prerequisite `cf8ed76`/`778da06`; superseded v3 `5a1d635`/`6694c87`; superseded v2 `fbfc4dd`/`2a250fb`; superseded v1 `188b8e5`/`d3a0f31` | V4 admits both support fusions and the two earlier local projections. The final projection reveals equal independent normal forms that paired comparison misses. A later v5 may select the active `Pi_pullback_funcd` component at 4/7/0/10 only after the generic prerequisite is complete and a separate v5 proposal/review freezes that boundary. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
@@ -2492,6 +2499,52 @@ The review is checkpointed at `7984efb`, with SHA-256
 It authorizes only the exact v4 implementation under delegated unattended
 authority with later human supersession. No Lambdapi execution or aggregate
 is relevant to this behavior-free review.
+
+### Measured v4 comparison-closure counterevidence
+
+The reviewed v4 support rule itself subject-checks. The local prefix therefore
+admits the Sigma component, reflexive-evaluation component, post-prefix
+`PathInd_func` subject fusion, `PathInd_func` component, and scoped
+`Transf_cat` subject fusion before the final `PathInd_transfd` component is
+checked. That final check still reports `INVALID_RUNTIME_RULE_TYPE`.
+
+An in-memory observer, without generic source edits, independently inferred
+and normalized both component subject types. With the faithful active
+`Pi_pullback_funcd` component projection present, that projection also
+subject-checks without a proof rule. The paired comparison nevertheless
+returns `not-equal` after 125 reductions, while independent normalization
+returns `normal` after 58 and 68 reductions and yields the same exact Core
+expression on both sides. Both have the form
+
+```text
+τ(Obj(Transf_cat(Functor_cat(PathOut_cat(Z,x),Cat_cat),Cat_cat,
+                  PathInd_src_catd(Z,x),Pi_func(PathOut_cat(Z,x)))))
+```
+
+This is generic conversion counterevidence, not a missing PathInd theorem.
+The active Lambdapi authority already checks
+`PathOutPi_funcd(Z)[x] ≡ Pi_func(PathOut_cat(Z,x))` through the generic
+`Pi_pullback_funcd` projection. The narrow PathOutPi-headed experiment was
+unreachable after dependency delta reduction; the exact generic projection
+with its two inferred family slots retained as typed wildcards reaches the
+shared normal form. No observer, diagnostic hook, generic diff, or temporary
+file remains.
+
+The non-authorizing proposal is
+[`src/v3_2/lf_conversion_normal_form_closure_proposal.ts`](../src/v3_2/lf_conversion_normal_form_closure_proposal.ts),
+frozen at checkpoint `cf8ed76`, SHA-256
+`b0711d2185b3f3fcf2ca35e6507c548f86c8f10d4252ab140f8b8ffa45bf7f4a`.
+Its separate review is
+[`src/v3_2/lf_conversion_normal_form_closure_review.ts`](../src/v3_2/lf_conversion_normal_form_closure_review.ts),
+checkpointed at `778da06`, SHA-256
+`465a2056fbbbcfca75af9df33fedffb0142cc53d85f004f7869c41d04f56bd98`.
+Under delegated unattended authority with later human supersession, the review
+authorizes only terminal same-budget normal-form closure after the existing
+paired traversal reports `not-equal`. It denies new runtime/proof rules,
+budget reset, proof search, unification, a PathInd-specific outer commuting
+rewrite, public effects, and active Lambdapi changes. Ten proposal/review
+tests, root typecheck, focused lint, and diff hygiene are green; no Lambdapi
+execution or aggregate is relevant to the behavior-free authority files.
 
 ## Required Evidence For Implementation
 
