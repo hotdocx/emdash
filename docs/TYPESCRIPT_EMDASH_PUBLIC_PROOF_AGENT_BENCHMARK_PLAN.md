@@ -1193,6 +1193,83 @@ adds no semantic, package-entry, dependency, bin, hook, provider/model,
 CloserFans, API/MCP/controller, Arrowgram, Lambdapi, mathematics, book, print,
 or 12B4 authority.
 
+## `AGENT-EVAL-12B3-R1` Immutable Recovery Review
+
+Date: 2026-08-11
+
+State: approved under the user's delegated unattended authority, with later
+human supersession. This review authorizes only exact proposal checkpoint
+`de26b61` and must itself be checkpointed before implementation.
+
+Immutable proposal evidence:
+
+- dedicated proposal-plan SHA-256:
+  `0414852f2c39e3464fe664e5a6ccb49edfb5ee60320e8fc09d032a6a3a275b85`;
+- governing proposal-plan SHA-256:
+  `17b8e9febc7038c76b04c006801135d6ebf78436190b12fe071d42c0edad1ad1`;
+- last qualified package checkpoint and immutable tag peel: `995e497`;
+- pre-failure ledger checkpoint: `bc80632`;
+- exact Pages run: `31509112917`;
+- exact failed npm workflow run/job: `31509330799` / `93838861316`; and
+- exact retained GitHub Release database ID: `368683536`.
+
+The review accepts the correction for eight independent reasons:
+
+1. **Failure isolation.** The job log proves that checkout fetched and checked
+   out exact `995e497`, then failed inside checkout's credential-removal path.
+   Every package-owned and publish-owned step was skipped; npm independently
+   reports `0.3.0` absent. No ambiguous partial publication must be repaired.
+2. **Root-cause fit.** The failure is specifically the action's unconditional
+   recursive submodule-config cleanup against a tracked gitlink without a
+   `.gitmodules` URL. A direct Git fetch never invokes that path. Retrying,
+   adding a token, changing package bytes, or changing the historical book
+   gitlink would not be a proportional correction.
+3. **Lower authority.** The replacement uses the public HTTPS repository with
+   `GIT_TERMINAL_PROMPT=0` and an empty credential helper, fetches only the
+   exact release tag and `main`, and checks out detached. It neither receives
+   `GITHUB_TOKEN` nor persists an authorization header. Setup, artifact, and
+   OIDC actions retain their reviewed immutable pins.
+4. **Independent reproduction.** A fresh disposable repository fetched only
+   public `main` and `emdash-v0.3.0`, checked out exact `995e497`, proved it an
+   ancestor of exact remote `main`, remained clean, and contained no local
+   credential, extra-header, or submodule configuration. The probe performed
+   no submodule operation.
+5. **Release-event integrity.** Keeping only `release: published` avoids a
+   permanent manual publication surface. Re-drafting and publishing the same
+   database object preserves one tag, one Release identity, exact title/body,
+   and the event's package head. The first failed run remains visible; the
+   second run is explicitly a recovery, not falsely described as the sole
+   attempt.
+6. **Immutable package discipline.** The annotated tag never moves, package
+   source stays at the already qualified candidate, the no-republish guard
+   remains, and npm is still empty for the version. If the second run reaches
+   npm, `0.3.0` becomes immutable and all original byte/provenance checks are
+   mandatory before the sibling stage.
+7. **Proportional gates.** Workflow policy tests must now reject checkout,
+   credentials, submodule recursion, and added broad triggers while requiring
+   exact refspecs and detached checkout. A fresh public-fetch probe, focused
+   release tests, workspace, typecheck, focused lint, preflight/build,
+   no-secret scan, and diff hygiene directly cover the change. Long/kernel/
+   book/browser/packed reruns would not exercise the corrected boundary.
+8. **Rollback-safe sequencing.** Correction and plan evidence are checkpointed
+   before goal/main pushes; public workflow bytes are verified before the
+   Release transition; only the resulting exact environment deployment may be
+   approved. Any further failure stops without tag movement, Release deletion,
+   local publication, force, rewrite, or CloserFans mutation.
+
+Implementation authority is limited to the release workflow, its focused
+policy test, and the two living plans. It authorizes the exact non-force
+branch/main integration and same-Release event recovery only after the local
+correction is green. It does not authorize semantic or package-entry changes,
+workflow dispatch, another workflow or Release, credentials, tokens, provider
+or model execution, CloserFans before registry verification, Arrowgram,
+Lambdapi, mathematics, book/print, 12B4, history rewriting, or cleanup.
+
+Review validation is plan-only plus the fresh public Git probe: exact proposal
+blob hashes and paths, ancestry, remote/tag/Release/npm identities, failed-job
+log, clean worktree, conflict-marker scan, and diff hygiene. No behavior or
+aggregate check is claimed for the review document itself.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
