@@ -3278,6 +3278,47 @@ all at-call state before at most one invocation. No call, retry, provider/
 model, push, merge, deployment, release, or claim is authorized. Accounting
 remains 35/41.
 
+###### Immutable consumed-ID rotation review
+
+Reviewed proposal checkpoint:
+`a92c16c348bce39996a735b30e7d31720ef8e0eb`, exact parent
+`2fbd606c2c1cd4494307842f0856e341b037f9a2`, exact tree
+`b4644f85577d5aba9a46fc27c67ac921fbdb3b82`. Complete plan SHA-256 values are:
+
+```text
+cdbe068548bec4b16a657962010c8f78043e47d4c7085114c97fbb685ec7820e  docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md
+26087cdc14111a80d7de99c972b2610b60e4b52a4e31615a350e6480fa37c92e  docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md
+```
+
+Review accepts exact v2 as a code-level one-shot allowlist candidate, not a
+call authorization. The root operator must retain a literal because it is a
+dependency-free bootstrap over committed bytes; the internal contract must
+retain the same literal because it closes the TypeScript driver. Rotating both
+is narrower than accepting arbitrary CLI input, parameterizing the allowlist,
+reusing v1, weakening the guard, or adding a retry registry. The root verifier
+is the existing owner for static agreement between bootstrap and template
+contracts.
+
+Decision: authorize only these three local edits:
+
+1. replace the v1 literal by exact v2 in
+   `scripts/run-emdash-stage-a-real.mjs`;
+2. replace the same literal in
+   `templates/emdash_benchmark/scripts/emdash-canary-contract.mts`; and
+3. make `scripts/verify-emdash-benchmark-template-runtime.ts` require exact v2
+   in both sources and reject v1 in both sources.
+
+Do not change argument grammar, lease naming/creation, run-root handling,
+process count, environment, preflights, provider arguments, evidence,
+receipts, template source/case/prompt/schema/lock, or public commands. Require
+focused outer canary and permission-probe modes, their included clean install/
+typecheck/snapshot/static checks, formatting, exact scope, credential-shape,
+diff/ancestry, no dependency tree, no v1/v2 lease, absent candidate run root,
+and preserved v1 receipt. After a focused-green checkpoint, synchronize both
+plans and repeat the behavior-free at-call review. No operator invocation,
+provider/model, push, merge, deployment, release, Stage B/C, or claim is
+authorized. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact

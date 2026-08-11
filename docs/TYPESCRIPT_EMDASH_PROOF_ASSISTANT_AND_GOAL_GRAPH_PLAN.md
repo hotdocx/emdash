@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | non-authorizing consumed-ID rotation R2 proposed | R1 is focused-green at `a6b5e61`, but fresh preflight found both execution guards still admit only retired v1. The dedicated plan proposes an exact v2 literal rotation plus static equality/retirement checks; separate review is mandatory before code changes. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | exact three-file v2 allowlist rotation approved; implementation pending | Review of `a92c16c` permits only matching v2 literals in the dependency-free operator/internal contract plus static v2-equality/v1-retirement checks. It grants no call or run-root authority. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6630,6 +6630,16 @@ review, implementation checkpoint, and final fresh preflight are still
 required; no coordinate or provider effect is authorized. Accounting remains
 35/41.
 
+Separate immutable review of exact proposal
+`a92c16c348bce39996a735b30e7d31720ef8e0eb` approves only the matching
+v2 literal rotation in the dependency-free operator and internal contract plus
+the existing root verifier's exact v2-presence/v1-absence checks. Arbitrary
+input, parameterized allowlists, v1 reuse, guard weakening, and every process/
+environment/evidence change remain denied. Focused outer canary and no-model
+permission modes plus exact static/security/evidence gates are required before
+a checkpoint and another fresh preflight. No call is authorized. Accounting
+remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6849,6 +6859,7 @@ required; no coordinate or provider effect is authorized. Accounting remains
 | `D-PA-212` | Approve exact verifier-scheduling proposal `2b23877` only for five explicit two-case mock batches. | All mock invocations own disjoint private roots and share only read-only installed input; tuple result order and cleanup remain deterministic enough, while real-driver authorization ordering stays sequential. Direct and outer focused gates must pass before checkpointing; no production or provider authority is added. |
 | `D-PA-213` | Qualify the complete four-file R1 host-contract correction at exact CloserFans checkpoint `a6b5e61`, tree `fe50a80`. | Exact login channels, socket-free evaluator launch, wrong-stream refusal, and unchanged ten-case coverage pass direct/outer canary plus live no-model permission gates. Static scope/security/evidence checks are green; prior failures remain visible. This advances only to a fresh immutable preflight and does not authorize a call. |
 | `D-PA-214` | Freeze a non-authorizing R2 rotation from consumed Stage A ID v1 to candidate v2 at both execution guards. | Fresh no-model preflight is otherwise green, but the closed operator/contract correctly reject unreviewed IDs and still name terminal v1. Exact two-literal rotation plus one static equality/retirement test is required before a new coordinate can be reviewed. |
+| `D-PA-215` | Approve exact R2 proposal `a92c16c` only for a matching v2 literal at both guards and static v1 retirement checks. | A dependency-free bootstrap and internal TypeScript driver require duplicated closed literals; the existing root verifier can prevent drift. The change does not authorize v2 use until checkpointed tests and a new at-call review pass. |
 
 ## Validation And Checkpoint Policy
 
