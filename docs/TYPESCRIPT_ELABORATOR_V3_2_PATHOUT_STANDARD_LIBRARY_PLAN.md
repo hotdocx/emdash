@@ -290,7 +290,7 @@ named library presentation.
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
-| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | corrected v4 separately reviewed; implementation-ready | completed 1D at `b6005b3`/`6225075`; v4 proposal checkpoint `2498053`; separate review awaiting its ledger pin | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—plus one derived complete consumer-parent support at **0/1/0/5**. Cold v3 proves its post-`CompTarget` pattern is still shadowed by transparent `Rep_catd` descendants. Reviewed v4 replaces it one-for-one at the original selected-component consumer before descendant delta; it adds no mathematical equation, proof rule, injectivity, unification, Core, or generic-engine behavior. |
+| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | corrected v4 separately reviewed; implementation-ready | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; review ledger pin is this checkpoint | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—plus one derived complete consumer-parent support at **0/1/0/5**. Cold v3 proves its post-`CompTarget` pattern is still shadowed by transparent `Rep_catd` descendants. Reviewed v4 replaces it one-for-one at the original selected-component consumer before descendant delta; it adds no mathematical equation, proof rule, injectivity, unification, Core, or generic-engine behavior. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
@@ -3163,9 +3163,9 @@ node --require ts-node/register --test \
 The review denies retaining v3, adding a second local rule, importing whole
 `Rep_catd`, `hom_con`, or `id_funcd` behavior, changing any generic engine or
 Core, adding proof authority, public presentation, active Lambdapi edits,
-integration, or release. Its exact checkpoint and digest must be pinned in
-the living ledgers before implementation. The unchanged 1,923-test aggregate
-from `e560551` remains carried forward.
+integration, or release. It is checkpointed at `fc9a323`, with SHA-256
+`9d37f7fd66c2fb61ce9ebf1dc1c7f5b83ba7558e0457f78252eb8dacb14a48aa`.
+The unchanged 1,923-test aggregate from `e560551` remains carried forward.
 
 ## Required Evidence For Implementation
 
