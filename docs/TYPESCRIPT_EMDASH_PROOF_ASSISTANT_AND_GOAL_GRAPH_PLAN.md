@@ -117,8 +117,11 @@ non-authorizing proposal v7 adds only the classifier-wrapped forward bridge
 needed by that definition, changes the boundary to 5/12/0/6, is checkpointed
 at `f0fd4a6`, and is separately approved under delegated unattended authority
 with human supersession at review checkpoint `0cefb73`; exact v7 semantic
-implementation may resume. No PathOut/PathInd public package export has yet
-been added.
+execution shows the predecessor's active `Functor` delta shadows that pre-
+delta rule before the local fragment is consulted. Corrected non-authorizing
+proposal v8 replaces rule five with the exact stable post-delta decoded-type
+fusion, retains 5/12/0/6, and awaits checkpoint plus separate review. No
+PathOut/PathInd public package export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -673,7 +676,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. Reviewed PathInd v6 compiles all eleven selected runtime rules, then declaration zero exposes the proof-time-only displayed-category source presentation. Corrected proposal v7 is separately reviewed at `f0fd4a6`/`0cefb73` and authorizes only the classifier-wrapped forward fusion for 5/12/0/6. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. All twelve reviewed v7 rules subject-check, but predecessor Functor delta executes before the local pre-delta rule. Corrected non-authorizing v8 replaces rule five with the traced stable decoded-type fusion, retains 5/12/0/6, and awaits checkpoint plus separate review. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -5901,6 +5904,27 @@ suites with root typecheck, focused lint, and diff hygiene. Review checkpoint
 `0cefb73` freezes that decision and restores authority for only the exact v7
 semantic implementation.
 
+Focused v7 execution supplies more precise counterevidence. All twelve runtime
+rules subject-check, but predecessor rule
+`categorical.mixed-action.functor-classifier-definition` applies active
+Functor delta lines 3316-3317 before the later local fragment is consulted.
+V7's `Functor`-headed rule is consequently unreachable. A capped temporary
+local trace measures the stable pair
+`τ(Obj(Functor_cat(Functor_cat(K,Cat),Cat)))` versus
+`τ(Obj(Functor_cat(Catd_cat(K),Cat)))`; the trace wrapper was then removed and
+the generic checker diff remains empty.
+
+Corrected behavior-free proposal v8 preserves the exact **5/12/0/6** boundary
+and replaces, rather than supplements, rule five with the forward stable
+decoded-type fusion between that exact pair. It is derived from active lines
+3316-3317, 5457, and 19067-19072. The full decoded object-classifier head keeps
+the rule local and narrower than a general runtime `Functor_cat → Catd_cat`
+collapse. V8 retains the same consumer, negative, runtime-observation, and
+oracle scope, and authorizes no checker/proof integration, new mathematics,
+later slice, public effect, active Lambdapi edit, integration, or release. V7
+checkpoints `f0fd4a6` and `0cefb73` remain backtracking evidence but no longer
+authorize implementation after the measured fragment-order counterexample.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6043,6 +6067,7 @@ semantic implementation.
 | `D-PA-136` | Approve only checkpointed corrected PathInd proposal v6 under delegated unattended authority, with human supersession. | Proposal checkpoint `b41c3b0` preserves the exact 5/11/0/6 complete forward fusion, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, removed diagnostic hook, and every later/public denial. Separate review checkpoint `9b22034` restores local implementation authority without making the proposal self-authorizing. |
 | `D-PA-137` | Supersede the v6 PathInd review and correct proposal v7 to 5/12/0/6 with one classifier-wrapped source-presentation fusion. | V6 makes all eleven selected runtime rules compile, then transparent `pathout_refl_eval_func` exposes `Functor(Functor_cat(K,Cat_cat),Cat_cat)` versus `Functor(Catd_cat(K),Cat_cat)`. Active proof-time line 5457 relates the inner categories, but transparent declaration checking consumes runtime conversion. Wrapping that exact forward comparison under `Functor(-,Cat_cat)` is narrower than a direct runtime category collapse, generic proof-program integration, or changing the active definition. V6 remains backtracking evidence, and v7 still requires its own checkpoint and separate review. |
 | `D-PA-138` | Approve only checkpointed corrected PathInd proposal v7 under delegated unattended authority, with human supersession. | Proposal checkpoint `f0fd4a6` preserves the exact 5/12/0/6 classifier-wrapped bridge, completed PathOut predecessor, rho-section consumer, bounded oracle, runtime-category-collapse denial, generic-declaration-proof-integration denial, and every later/public denial. Separate review checkpoint `0cefb73` restores local implementation authority without making the proposal self-authorizing. |
+| `D-PA-139` | Supersede the v7 PathInd review and correct proposal v8 by replacing its unreachable pre-delta fusion at the same 5/12/0/6 boundary. | All twelve v7 rules subject-check, but composed-runtime order applies predecessor Functor delta lines 3316-3317 before local matching. The traced stable type is `τ(Obj(Functor_cat(Functor_cat(K,Cat),Cat)))`; replacing rule five with its forward `Catd_cat(K)` presentation is narrower than retaining a dead rule plus a thirteenth fusion, changing fragment order, installing a general category collapse, or widening declaration checking. V7 remains backtracking evidence, and v8 still requires its own checkpoint and separate review. |
 
 ## Validation And Checkpoint Policy
 

@@ -42,8 +42,11 @@ source presentation; corrected non-authorizing proposal v7 adds only the
 classifier-wrapped forward bridge needed by that definition, changes the
 boundary to 5/12/0/6, is checkpointed at `f0fd4a6`, and is separately
 approved under delegated unattended authority with human supersession at
-review checkpoint `0cefb73`; semantic implementation may resume, but no
-PathOut/PathInd profile or public export is yet qualified
+review checkpoint `0cefb73`; capped execution tracing shows the predecessor's
+active `Functor` delta runs first and makes the v7 pre-delta rule unreachable;
+corrected non-authorizing proposal v8 replaces that rule with the exact stable
+post-delta decoded-type fusion, retains 5/12/0/6, and awaits checkpoint plus
+separate review; no PathOut/PathInd profile or public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -205,7 +208,7 @@ named library presentation.
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
-| `PATHIND-TRUSTED-PROFILE-1C` | corrected v7 separately reviewed; implementation ready | completed 1B; proposal/review checkpoints `f0fd4a6`/`0cefb73`; superseded v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | V6 compiles all eleven selected runtime rules, then transparent `pathout_refl_eval_func` measures `Functor(Functor_cat(K,Cat_cat),Cat_cat)` versus `Functor(Catd_cat(K),Cat_cat)`. Reviewed v7 adds only that classifier-wrapped forward presentation fusion, for 5/12/0/6 with unchanged consumer, negative, and nine-assertion oracle scope; it does not install a direct category collapse or change the declaration checker. |
+| `PATHIND-TRUSTED-PROFILE-1C` | corrected v8 proposal awaiting checkpoint and separate review | completed 1B; v7 proposal/review checkpoints `f0fd4a6`/`0cefb73`; superseded v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | All twelve v7 rules subject-check, but predecessor `categorical.mixed-action.functor-classifier-definition` shadows rule five before local matching. V8 replaces, rather than adds to, that rule with the exact stable `τ(Obj(Functor_cat(Functor_cat(K,Cat),Cat))) → τ(Obj(Functor_cat(Catd_cat(K),Cat)))` fusion, retaining 5/12/0/6 and every global-category/engine/public denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -1802,6 +1805,87 @@ git diff --check
 No Lambdapi or long aggregate is relevant to this behavior-free review.
 Review checkpoint `0cefb73` freezes that decision. The exact v7 semantic
 implementation may now resume; the review authorizes nothing beyond it.
+
+### `PATHIND-TRUSTED-PROFILE-1C` corrected proposal v8
+
+V7's twelfth rule subject-checks, as do the other eleven selected rules, but
+the focused library compile still reaches the same declaration-zero mismatch.
+A temporary local, environment-gated, eight-expression trace then records the
+execution-order cause. The predecessor fragment applies
+`categorical.mixed-action.functor-classifier-definition`, faithfully
+transferring active lines 3316-3317,
+
+```text
+τ(Functor(A,B)) ↪ τ(Obj(Functor_cat(A,B))),
+```
+
+before the later local fragment is consulted. The v7 rule is therefore
+well-typed but unreachable: by the time local matching occurs, its
+`Functor`-classifier head has already disappeared. The stable residual is
+
+```text
+τ(Obj(Functor_cat(Functor_cat(K,Cat_cat),Cat_cat)))
+τ(Obj(Functor_cat(Catd_cat(K),Cat_cat))).
+```
+
+The temporary trace wrapper was removed completely after this measurement;
+the generic checker diff is empty.
+
+The corrected immutable proposal is
+[`src/v3_2/pathind_fixed_source_proposal_v8.ts`](../src/v3_2/pathind_fixed_source_proposal_v8.ts),
+with focused checks in
+[`tests/v3_2_pathind_fixed_source_proposal_v8_tests.ts`](../tests/v3_2_pathind_fixed_source_proposal_v8_tests.ts).
+It replaces rule five rather than adding a thirteenth rule:
+
+```text
+τ(Obj(Functor_cat(Functor_cat(K,Cat_cat),Cat_cat)))
+  ↪ τ(Obj(Functor_cat(Catd_cat(K),Cat_cat))).
+```
+
+This is the smallest stable forward fusion of the active `Functor` delta at
+lines 3316-3317, proof-time category presentation at line 5457, and consuming
+definition at lines 19067-19072. Including the decoded object-classifier head
+makes it narrower than either v7's pre-delta classifier rule or a direct
+runtime `Functor_cat(K,Cat_cat) → Catd_cat(K)` category collapse.
+
+The exact boundary remains **5/12/0/6**. Five runtime observations, nine
+bounded-oracle assertions, the rho-section consumer, and eight strict
+negatives remain unchanged. V8 retains every generic-engine, active-kernel,
+later-slice, public, integration, and release denial. It also denies retaining
+either the unreachable v7 rule or the temporary trace.
+
+Proposal v8 remains behavior-free, root-only, non-authorizing, and absent
+from contributor, npm, and browser barrels. Its checkpoint and a separate
+immutable review are mandatory before the implementation draft may replace
+rule five.
+
+Corrected-v8 proposal validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_fixed_source_proposal_v8.ts \
+  tests/v3_2_pathind_fixed_source_proposal_v8_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_fixed_source_proposal_v8_tests.ts
+  6 tests / 1 suite: 6 passed, 0 failed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_fixed_source_proposal_v7_tests.ts \
+  tests/v3_2_pathind_fixed_source_proposal_v8_tests.ts
+  12 tests / 2 suites: 12 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi or long repository aggregate is relevant to this proposal-only
+correction.
 
 ## Required Evidence For Implementation
 
