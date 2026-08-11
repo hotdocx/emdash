@@ -108,9 +108,10 @@ unattended authority with human supersession at review checkpoint `3f95e7c`;
 exact owner tracing shows the outer `FibCov_target_catd` application blocks
 both later reductions. That evidence supersedes v5 implementation authority.
 Corrected non-authorizing proposal v6 adds only the complete forward active-
-path fusion, changes the boundary to 5/11/0/6, and awaits checkpoint plus
-separate review; implementation is paused. No PathOut/PathInd public package
-export has yet been added.
+path fusion, changes the boundary to 5/11/0/6, and is separately approved
+under delegated unattended authority with human supersession. Its review
+checkpoint is pending, so implementation remains paused. No PathOut/PathInd
+public package export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -5845,7 +5846,18 @@ implementation.
 Proposal v6 is immutable, root-only, non-authorizing, and absent from public
 barrels. Root typecheck, focused lint, six focused tests, and diff hygiene
 pass; no Lambdapi or long aggregate was run for this evidence-only correction.
-Implementation remains paused until v6 has its checkpoint and separate review.
+Proposal checkpoint `b41c3b0` freezes those bytes.
+
+The separate immutable v6 review approves only checkpoint `b41c3b0` under the
+user's standing unattended delegation, with later human supersession. It
+authorizes exactly the root-only 5/11/0/6 implementation: v5's closure plus
+the one exact forward FibCov-target section fusion. It does not authorize
+generic declaration unfolding, retaining the temporary checker diagnostic,
+reversing `Transf`, a generic engine/checker/signature/body/owner change, later
+1D/1E/1F work, public exports, active Lambdapi changes, integration, or
+release. Proposal and review pass eleven focused tests in two suites with root
+typecheck, focused lint, and diff hygiene. Implementation remains paused until
+this review has its own rollback-safe checkpoint.
 
 ## Decision Ledger
 
@@ -5986,6 +5998,7 @@ Implementation remains paused until v6 has its checkpoint and separate review.
 | `D-PA-133` | Supersede the v4 PathInd review and correct proposal v5 to 5/10/0/6 with active transparent `Transf` delta lines 9150-9151. | The v4 fusion subject-checks and reaches `Obj(Transf_cat)`, but the generic Core `tapp0_fapp0` signature expects the `Transf` alias and the selected predecessor runtime omits its forward delta. Importing that exact active definition is narrower than reversing reduction, changing the checker, or importing the whole sibling runtime profile. V4 remains backtracking evidence, and v5 still requires its own checkpoint and review. |
 | `D-PA-134` | Approve only checkpointed corrected PathInd proposal v5 under delegated unattended authority, with human supersession. | Proposal checkpoint `7219828` preserves the exact 5/10/0/6 alias-delta closure, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `3f95e7c` restores local implementation authority without making the proposal self-authorizing. |
 | `D-PA-135` | Supersede the v5 PathInd review and correct proposal v6 to 5/11/0/6 with the exact measured FibCov-target section fusion. | Exact tracing measured `Obj(fapp0(FibCov_target_catd(E),x))` versus `Transf(Rep_catd(x),E)`: named-body unfolding is intentionally absent, so v4/v5 cannot fire before the outer owner mismatch. One forward fusion of the complete active path is narrower than generic declaration unfolding, reversing `Transf`, or changing signatures/the checker. V5 remains backtracking evidence, and v6 still requires its own checkpoint and review. |
+| `D-PA-136` | Approve only checkpointed corrected PathInd proposal v6 under delegated unattended authority, with human supersession. | Proposal checkpoint `b41c3b0` preserves the exact 5/11/0/6 complete forward fusion, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, removed diagnostic hook, and every later/public denial. Separate review restores local implementation authority without making the proposal self-authorizing. |
 
 ## Validation And Checkpoint Policy
 
