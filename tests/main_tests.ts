@@ -43,6 +43,7 @@ import './v3_2_pathind_internalized_proposal_v6_tests';
 import './v3_2_pathind_internalized_proposal_v7_tests';
 import './v3_2_pathind_internalized_proposal_v8_tests';
 import './v3_2_pathind_internalized_proposal_v9_tests';
+import './v3_2_pathind_internalized_proposal_v10_tests';
 import './v3_2_pathind_internalized_review_v5_tests';
 import './v3_2_pathind_internalized_review_v6_tests';
 import './v3_2_pathind_internalized_review_v7_tests';
