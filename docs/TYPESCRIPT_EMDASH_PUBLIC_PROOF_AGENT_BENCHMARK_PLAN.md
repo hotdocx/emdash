@@ -2893,6 +2893,53 @@ standing unattended-approval delegation plus checkpointing/backtracking SOP;
 the human may supersede it before execution. Roadmap accounting remains
 35/41.
 
+### Sole Stage A invocation outcome: terminal preflight refusal
+
+The behavior-free authorization was checkpointed at Emdash commit
+`4e3960024bad5607c139911189b1006eefa515c6`, exact tree
+`e15c7e51f87999daa6ea3645f13ec21231c7bd03`. The exact reviewed operator
+command was then invoked once from clean CloserFans commit `4faef78`. It
+returned `preflight-refusal` and was not retried.
+
+The only inspected run artifact is the minimized canonical receipt at the
+reviewed run root. Its SHA-256 is
+`cb02d5085f855e3a516f5c20f2b5593103b53c38824e5b85e99e530fda25edf3`.
+It records:
+
+```text
+revision             getpaidx-emdash-stage-a-preflight-receipt-v1
+operationalOutcome   preflight-refusal
+preflight.failure    login-category
+providerExecuted     false
+process.spawned      false
+benchmarkOutcome     null
+valid                false
+graduationEligible   false
+proofEvidence        false
+```
+
+The receipt binds the expected authorization-ID hash, case, exact source
+commit/tree, operator digest, and committed-template manifest. The run root,
+private-evidence directory, and receipt retain modes `0700`, `0700`, and
+`0600`. The real authorization directory remains absent, so no lease was
+created. Nevertheless the plan-level one-operator-invocation authorization is
+terminal: do not reuse the ID with another run root and do not retry this
+command. The bootstrap, run root, and receipt remain preserved and unmodified.
+
+No provider child spawned, no model ran, no real JSONL/final message/candidate
+or replay transcript exists, no usage or cost was incurred or inferred, and
+there is no mathematical, benchmark-performance, proof, or graduation result.
+The earlier direct closed-environment status observation and this normalized
+driver refusal are distinct facts; the receipt alone does not establish the
+cause of the login-category mismatch. Any diagnosis must be separately no-
+model, privacy-preserving, and behavior-free, followed by a new proposal,
+implementation checkpoint, and immutable authorization with new coordinates
+before another provider attempt.
+
+Roadmap accounting remains 35/41. Push, merge, deployment, release, API/MCP,
+controller, database, Emdash semantics, another template, Stage B/C, and long
+aggregates remain untouched or omitted.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -2956,8 +3003,10 @@ On continuation:
    the immutable review above; treat corrective CloserFans checkpoint
    `1abdfd8`, tree `5912793`, and final-review correction `4faef78`, tree
    `a5e72dd`, as the focused-green implementation of that approval; treat the
-   immutable corrected-driver review above as authorization for only its exact
-   one-shot operator command after the plan is checkpointed; and forbid any
-   retry or alternate coordinate without another immutable review; and
+   immutable corrected-driver review above and authorization checkpoint
+   `4e39600` as historical authority for the now-consumed operator invocation;
+   treat receipt `cb02d50` as a terminal no-call `login-category` refusal; and
+   forbid any retry or alternate coordinate without separate diagnosis,
+   proposal, implementation, and immutable review; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.

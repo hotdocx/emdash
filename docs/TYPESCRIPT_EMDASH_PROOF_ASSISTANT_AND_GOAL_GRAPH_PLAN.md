@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | sole corrected Stage A invocation authorized but not yet run | Exact CloserFans `4faef78`, tree `a5e72dd`, closed/no-model preflight, non-secret ID, and one absent run root are bound in the dedicated plan. One local open-book invocation is authorized after the behavior-free review checkpoint; no retry, measurement claim, or graduation is authorized. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | sole Stage A invocation ended in no-call preflight refusal; diagnosis pending | After authorization checkpoint `4e39600`, exact CloserFans `4faef78` ran the reviewed operator once. Receipt `cb02d50` records `login-category`, `spawned=false`, and `providerExecuted=false`; no lease/model/transcript exists and no retry is authorized. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6527,6 +6527,20 @@ is terminal for this authorization; no retry or alternate coordinate is
 permitted. Raw evidence stays private, and all contamination/non-graduation/
 non-proof constraints remain unconditional. Accounting remains 35/41.
 
+That exact one-shot authorization is now terminal. After behavior-free Emdash
+checkpoint `4e3960024bad5607c139911189b1006eefa515c6`, the reviewed command ran once
+from clean CloserFans `4faef78` and returned a minimized
+`preflight-refusal` receipt, SHA-256
+`cb02d5085f855e3a516f5c20f2b5593103b53c38824e5b85e99e530fda25edf3`.
+Its normalized failure is `login-category`; `spawned=false`,
+`providerExecuted=false`, outcome/validity are null/false, and all open-book/
+non-graduation/non-proof labels remain fixed. Run/evidence/receipt modes are
+`0700`/`0700`/`0600`; no authorization lease directory exists. The command
+was not and must not be retried, even though the provider lease was never
+created. No model, real transcript, usage/cost, proof, or performance result
+exists. A separately reviewed no-model diagnosis and new coordinates are
+required before any later provider attempt. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6737,6 +6751,7 @@ non-proof constraints remain unconditional. Accounting remains 35/41.
 | `D-PA-203` | Preserve the corrective one-shot driver at exact local CloserFans checkpoint `1abdfd8`, tree `5912793`, without yet authorizing its real member. | The public package path remains mock-only while the separate root operator reconstructs clean committed bytes, uses credential-empty scripts-disabled installation, closes parent and command environments, completes no-model gates before an exclusive persistent lease, and derives observed receipt/replay provenance. All four focused modes plus syntax, snapshot, ancestry, diff, credential-shape, and no-dependency-tree/real-lease checks are green. No provider/model, real lease/transcript, push/merge/deploy/release, or aggregate occurred; the final immutable code/preflight review remains a distinct gate and accounting stays 35/41. |
 | `D-PA-204` | Withhold the first final-call authorization and preserve exact CloserFans correction `4faef78`, tree `a5e72dd`, for a new immutable review. | The initial final audit found that safe pre-spawn refusals lacked minimized receipts and observed spawn failure lacked direct fake coverage. The additive correction records normalized no-call receipts, preserves atomic lease collision, tests executable disappearance after lease with `providerExecuted=false`, and tests a spawned policy failure with `providerExecuted=true`. Focused canary/typecheck and live no-model gates pass; no real provider/lease/transcript or unrelated effect occurred. |
 | `D-PA-205` | Authorize one corrected Stage A operator invocation only after the final behavior-free review checkpoint, using exact CloserFans `4faef78`, the recorded non-secret ID, and one recorded absent absolute run root. | Full source/input hashes, committed-template manifest, closed-environment CLI/ChatGPT status, fresh selected model tuple, live no-model sandbox probe, focused tests, clean ancestry/status, and absent dependency/lease/run state satisfy the eight mandatory conditions. Every preflight or post-spawn outcome terminates the authorization; no retry, alternate coordinate, performance claim, or graduation is permitted. Raw evidence remains private and accounting remains 35/41. |
+| `D-PA-206` | Classify the sole authorized Stage A invocation as a terminal no-call `login-category` preflight refusal and prohibit retry. | Receipt SHA-256 `cb02d5085f855e3a516f5c20f2b5593103b53c38824e5b85e99e530fda25edf3` binds exact source/authorization/case provenance and records `spawned=false`, `providerExecuted=false`, null benchmark outcome, and unconditional non-graduation/non-proof labels. No lease, model, transcript, usage/cost, or proof/performance evidence exists. Diagnosis and any new attempt require separate no-model planning, implementation, checkpoints, and new immutable coordinates. |
 
 ## Validation And Checkpoint Policy
 
