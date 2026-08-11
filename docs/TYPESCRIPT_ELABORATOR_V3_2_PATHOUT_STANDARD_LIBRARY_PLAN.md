@@ -61,8 +61,9 @@ stable component subject mismatch and are removed. Corrected behavior-free v2
 adds one exact subject-type presentation fusion, making 4/5/0/10 while
 preserving four mathematical projections and zero proof rules. Proposal v2 is
 now frozen at checkpoint `fbfc4dd`; its exact separate review
-candidate is final-proportional-green and awaiting its own checkpoint.
-Semantic implementation remains paused until that review is checkpointed.
+is final-proportional-green and checkpointed at `2a250fb` under delegated
+unattended authority with later human supersession. Semantic implementation
+may resume under exactly the reviewed 4/5/0/10 boundary.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -225,7 +226,7 @@ named library presentation.
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | corrected proposal v2 checkpointed; separate review v2 awaiting checkpoint | completed 1C at `a361dc3`/`033dbb8`; proposal v2 checkpoint `fbfc4dd`; superseded v1 proposal/review checkpoints `188b8e5`/`d3a0f31` | V2 preserves the four owners, four active mathematical projections, and ten definitions, and adds one exact derived subject-type presentation fusion for the measured `PathInd_func` component mismatch. Exact local boundary is 4/5/0/10, with zero proof rules and no whole-profile import, external naturality, transitivity, public, or release effect. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | corrected proposal v2 separately reviewed; implementation ready | completed 1C at `a361dc3`/`033dbb8`; proposal/review v2 checkpoints `fbfc4dd`/`2a250fb`; superseded v1 proposal/review checkpoints `188b8e5`/`d3a0f31` | V2 preserves the four owners, four active mathematical projections, and ten definitions, and adds one exact derived subject-type presentation fusion for the measured `PathInd_func` component mismatch. Exact local boundary is 4/5/0/10, with zero proof rules and no whole-profile import, external naturality, transitivity, public, or release effect. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
@@ -2268,9 +2269,11 @@ node --require ts-node/register --test \
   26 tests / 4 suites: 26 passed, 0 failed
 ```
 
-The review candidate remains non-authoritative until its exact bytes receive
-their rollback-safe checkpoint. No Lambdapi or long aggregate is relevant to
-this behavior-free review.
+Review checkpoint `2a250fb`, with review SHA-256
+`a0d8db8dc8311dbd4314ec7664a6b0d4707a9eef97ea9899d823a3988a72596c`,
+freezes that exact authorization. Semantic implementation may now resume only
+under the reviewed 4/5/0/10 boundary. No Lambdapi or long aggregate is
+relevant to this behavior-free review.
 
 ## Required Evidence For Implementation
 
