@@ -154,9 +154,10 @@ delegated unattended authority with later human supersession. That support
 and the `PathInd_func` projection compile, but the final `PathInd_transfd`
 projection exposes `Catd_cat(PathOut)` versus `Functor_cat(PathOut,Cat)` under
 `Transf_cat`. Corrected behavior-free v4 adds one scoped support fusion,
-making 4/6/0/10. V4 is frozen at `001a899`; its separate review candidate is
-final-proportional-green and awaiting checkpoint. No PathOut/PathInd public
-package export has yet been added.
+making 4/6/0/10. V4 is frozen at `001a899`; its separate review is final-
+proportional-green and checkpointed at `7984efb` under delegated unattended
+authority with later human supersession. No PathOut/PathInd public package
+export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -239,8 +240,8 @@ The internalized PathInd v1 proposal/review checkpoints are `188b8e5` and
 separate review is frozen at `2a250fb`. Measured v2 shadowing and corrected
 proposal v3 are frozen at `5a1d635`; its separate review is frozen at
 `6694c87`. Measured v3 counterevidence and corrected proposal v4 are the
-frozen checkpoint `001a899`; its separate review candidate is the current
-uncheckpointed bounded tranche.
+frozen checkpoint `001a899`; its separate review is frozen at `7984efb`.
+The exact reviewed v4 semantic implementation is the current bounded tranche.
 
 Depends-On:
 
@@ -722,7 +723,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, and fixed-source `PATHIND-TRUSTED-PROFILE-1C` at semantic checkpoint `a361dc3` are complete and final-proportional-green. V3's post-prefix support and `PathInd_func` projection compile, but measured transfd-component counterevidence supersedes review `6694c87`. Corrected behavior-free v4 at `001a899` adds one scoped `Transf_cat` presentation fusion, producing 4/6/0/10 while preserving every consumer/oracle/denial; its review candidate is green and awaiting checkpoint. Transitivity and public presentation remain later rows. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, and fixed-source `PATHIND-TRUSTED-PROFILE-1C` at semantic checkpoint `a361dc3` are complete and final-proportional-green. V3's post-prefix support and `PathInd_func` projection compile, but measured transfd-component counterevidence supersedes review `6694c87`. Corrected behavior-free v4 proposal/review checkpoints `001a899`/`7984efb` authorize one scoped `Transf_cat` presentation fusion, producing 4/6/0/10 while preserving every consumer/oracle/denial; its semantic implementation is active. Transitivity and public presentation remain later rows. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -6135,6 +6136,7 @@ implementation.
 | `D-PA-146` | Supersede v2 implementation authority and freeze corrected non-authorizing internalized PathInd proposal v3 at unchanged 4/5/0/10. | Checkpoint `5a1d635`, proposal SHA-256 `4c9b60411a7b1c98b3da44fdd6919360a3cf65a18e862c163d5f911a214308e3`, and focused green evidence record that, with the correct `Catd_cat(PathOut)` evaluation base, v2's support rule subject-checks before dependency-first `directed.category-hom.decode` and `categorical.mixed-action.functor-classifier-definition` shadow its pre-prefix pattern. V3 replaces that one rule with the exact stable decoded `Functor_cat` object presentation, adds no rule or mathematics, preserves all consumers/oracles/denials, and still requires its separate review checkpoint before implementation. Temporary observers are absent and the generic checker diff is empty. |
 | `D-PA-147` | Approve only checkpointed corrected internalized PathInd proposal v3 under delegated unattended authority, with human supersession. | Review checkpoint `6694c87`, review SHA-256 `fdd08973311a1afe781e53743a54889a2b58c07a61077fb8b251180d00df6016`, and proposal checkpoint `5a1d635` authorize exactly 4/5/0/10 through generic root-only engines with the one post-prefix support replacement. Thirty-eight historical/current proposal-review tests, typecheck, focused lint, and diff hygiene are green. Retaining v2's pre-prefix rule, adding a sixth rule, proof integration, generic matcher/checker changes, alternate PathInd signatures/bodies, retained observers, whole-profile import, public effects, transitivity, integration, and release remain denied. |
 | `D-PA-148` | Supersede v3 implementation authority and freeze corrected non-authorizing internalized PathInd proposal v4 at 4/6/0/10. | Checkpoint `001a899`, proposal SHA-256 `6d30ede357b09900667904549ab1f4a0f6246ae21b5eb578a4cf57bdeb6127fe`, and focused green evidence record that v3 compiles its post-prefix support and `PathInd_func` projection before `PathInd_transfd` compares `Obj(Transf_cat(Catd_cat(PathOut),Cat,...))` with `Obj(Transf_cat(Functor_cat(PathOut,Cat),Cat,...))`. V4 adds one local non-mathematical presentation fusion under `Transf_cat`, keeps the four mathematical projections and zero proof rules, preserves all consumers/oracles/denials, and still requires its separate review checkpoint. It denies a generic category collapse, and temporary observers are absent. |
+| `D-PA-149` | Approve only checkpointed corrected internalized PathInd proposal v4 under delegated unattended authority, with human supersession. | Review checkpoint `7984efb`, review SHA-256 `a566290417bb9f4790f9d073036106f4ade843172d629c7a4b4983fbd2e32589`, and proposal checkpoint `001a899` authorize exactly 4/6/0/10 through generic root-only engines: four owners, four mathematical projections, two local non-mathematical subject-presentation fusions, zero proof rules, and ten definitions. Fifty historical/current proposal-review tests, typecheck, focused lint, and diff hygiene are green. A seventh runtime rule, generic category collapse, proof integration, generic matcher/checker changes, alternate PathInd signatures/bodies, retained observers, whole-profile import, public effects, transitivity, integration, and release remain denied. |
 
 ## Validation And Checkpoint Policy
 
