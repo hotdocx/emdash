@@ -122,8 +122,9 @@ delta rule before the local fragment is consulted. Corrected non-authorizing
 proposal v8 replaces rule five with the exact stable post-delta decoded-type
 fusion, retains 5/12/0/6, is checkpointed at `65656e5`, and is separately
 approved under delegated unattended authority with human supersession at
-review checkpoint `0ab7fd4`. Its root-only semantic implementation is complete
-and final-proportional-green at 5/12/0/6: all twelve runtime rules compile
+review checkpoint `0ab7fd4`. Its root-only semantic implementation at
+checkpoint `a361dc3` is complete and final-proportional-green at 5/12/0/6: all
+twelve runtime rules compile
 through the generic engines; five runtime observations, one typed rho-section
 consumer, eight strict negatives, safe-library denials, non-export checks, and
 nine bounded active-Lambdapi assertions are green. TypeScript retains the
@@ -205,6 +206,10 @@ sibling `master` and branch `goal/emdash-goal-graph-arrowgram-v1`. CloserFans
 has no configured remote, so no sibling push occurred.
 The post-14B readiness/product-selection checkpoint is `fb65a80`; it changes
 only this living plan and the dedicated PathOut plan.
+The initial PathOut trust-boundary checkpoint is `a05493b`; the completed
+PathOut foundation semantic and synchronized-ledger checkpoints are `550316a`
+and `349b6d4`. The fixed-source PathInd v8 proposal/review checkpoints are
+`65656e5` and `0ab7fd4`, and its completed semantic checkpoint is `a361dc3`.
 
 Depends-On:
 
@@ -686,7 +691,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, and fixed-source `PATHIND-TRUSTED-PROFILE-1C` are complete and final-proportional-green. The exact boundaries are 5/13/2/9 and 5/12/0/6 respectively. For 1C, generic compilation, five runtime observations, one typed rho-section consumer, eight strict negatives, safe-library/non-export checks, and nine bounded oracle assertions are green. Internalized PathInd row 1D is next and still requires its own proposal and separate review. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, and fixed-source `PATHIND-TRUSTED-PROFILE-1C` at semantic checkpoint `a361dc3` are complete and final-proportional-green. The exact boundaries are 5/13/2/9 and 5/12/0/6 respectively. For 1C, generic compilation, five runtime observations, one typed rho-section consumer, eight strict negatives, safe-library/non-export checks, and nine bounded oracle assertions are green. Internalized PathInd row 1D is next and still requires its own proposal and separate review. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -6091,7 +6096,7 @@ implementation.
 | `D-PA-138` | Approve only checkpointed corrected PathInd proposal v7 under delegated unattended authority, with human supersession. | Proposal checkpoint `f0fd4a6` preserves the exact 5/12/0/6 classifier-wrapped bridge, completed PathOut predecessor, rho-section consumer, bounded oracle, runtime-category-collapse denial, generic-declaration-proof-integration denial, and every later/public denial. Separate review checkpoint `0cefb73` restores local implementation authority without making the proposal self-authorizing. |
 | `D-PA-139` | Supersede the v7 PathInd review and correct proposal v8 by replacing its unreachable pre-delta fusion at the same 5/12/0/6 boundary. | All twelve v7 rules subject-check, but composed-runtime order applies predecessor Functor delta lines 3316-3317 before local matching. The traced stable type is `τ(Obj(Functor_cat(Functor_cat(K,Cat),Cat)))`; replacing rule five with its forward `Catd_cat(K)` presentation is narrower than retaining a dead rule plus a thirteenth fusion, changing fragment order, installing a general category collapse, or widening declaration checking. V7 remains backtracking evidence, and v8 still requires its own checkpoint and separate review. |
 | `D-PA-140` | Approve only checkpointed corrected PathInd proposal v8 under delegated unattended authority, with human supersession. | Proposal checkpoint `65656e5` preserves exact one-for-one rule-five replacement at 5/12/0/6, the stable post-delta type, completed predecessor, consumer/oracle scope, diagnostic-removal evidence, and every engine/category/public denial. Separate review checkpoint `0ab7fd4` restores local implementation authority without making the proposal self-authorizing. |
-| `D-PA-141` | Complete root-only `PATHIND-TRUSTED-PROFILE-1C` at exactly 5/12/0/6 and advance only to a separately proposed internalized PathInd row 1D. | Generic compilation, five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. The TypeScript normal form deliberately retains explicit transport along rho; the bounded oracle verifies its conventional rho endpoint, so no generic proof-program budget increase or thirteenth runtime collapse is justified. No generic checker, public barrel, package, browser surface, active Lambdapi source, or later-row behavior changed. The long aggregate was intentionally omitted under the standing proportional-validation policy because the changed boundary is root-local and all exact affected gates are green. |
+| `D-PA-141` | Complete root-only `PATHIND-TRUSTED-PROFILE-1C` at exactly 5/12/0/6 and advance only to a separately proposed internalized PathInd row 1D. | Semantic checkpoint `a361dc3` records generic compilation, five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine green bounded active-Lambdapi assertions. The TypeScript normal form deliberately retains explicit transport along rho; the bounded oracle verifies its conventional rho endpoint, so no generic proof-program budget increase or thirteenth runtime collapse is justified. No generic checker, public barrel, package, browser surface, active Lambdapi source, or later-row behavior changed. The long aggregate was intentionally omitted under the standing proportional-validation policy because the changed boundary is root-local and all exact affected gates are green. |
 
 ## Validation And Checkpoint Policy
 
