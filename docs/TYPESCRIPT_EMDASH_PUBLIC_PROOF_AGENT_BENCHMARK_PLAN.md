@@ -6,8 +6,7 @@ immutable review at `d271c33`. The internal corpus/interchange implementation
 is complete and proportionally qualified at exact checkpoint `d0d3764`. A
 non-authorizing `AGENT-EVAL-12B2` public-surface proposal is complete at exact
 checkpoint `ba49705` and is separately approved by the immutable review in the
-checkpoint containing the review record below. Bounded implementation is
-active; the exact review checkpoint is pinned by its immediate ledger follow-up.
+exact checkpoint `8c9652a`. Bounded implementation is active.
 
 Date: 2026-08-11
 
@@ -218,7 +217,7 @@ the evaluator.
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
-| `AGENT-EVAL-12B2` | proposal `ba49705` separately approved; bounded implementation active | The review adds exact catalog/error, fatal UTF-8, fresh replay, transitive browser/package closure, core-only consumer, and retained no-bin conditions. It authorizes only the isolated benchmark subpath, repository adapter, lazy browser presentation, capability/docs, and proportional public gates. |
+| `AGENT-EVAL-12B2` | proposal/review `ba49705`/`8c9652a` approved; bounded implementation active | The review adds exact catalog/error, fatal UTF-8, fresh replay, transitive browser/package closure, core-only consumer, and retained no-bin conditions. It authorizes only the isolated benchmark subpath, repository adapter, lazy browser presentation, capability/docs, and proportional public gates. |
 | `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
@@ -531,8 +530,7 @@ It approves only exact proposal checkpoint `ba49705`, proposal SHA-256
 and proposal-test SHA-256
 `d1bccbc2049330e686a9a2c148c36351c29a902c19432c6f7ab374d031b7045b`
 under delegated unattended authority with later human supersession. The exact
-review checkpoint is the commit containing this record and is pinned by the
-next ledger-only commit.
+review checkpoint is `8c9652a`.
 
 The review/test SHA-256 values are, respectively,
 `7421885c8f01f9c7fec5d3be628470b8af94550c671ecc41939ca79a838f8fb8`
@@ -627,7 +625,7 @@ On continuation:
 3. preserve CloserFans' unrelated untracked review plan;
 4. keep only one semantic row active;
 5. treat 12B1 as complete at exact checkpoint `d0d3764`;
-6. treat exact 12B2 proposal `ba49705` and its separately checkpointed review
-   as the only bounded implementation authority; and
+6. treat exact 12B2 proposal/review checkpoints `ba49705`/`8c9652a` as the
+   only bounded implementation authority; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
