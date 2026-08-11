@@ -2,7 +2,8 @@
 
 Status: living plan; post-`STDLIB-8B` audit complete; exact non-authorizing
 `AGENT-EVAL-12B1` proposal checkpoint `a181885` is separately approved by the
-immutable review below. Internal corpus/interchange implementation is active.
+immutable review at `d271c33`. Internal corpus/interchange implementation is
+active.
 
 Date: 2026-08-11
 
@@ -212,7 +213,7 @@ the evaluator.
 | Row | State | Exit gate |
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
-| `AGENT-EVAL-12B1` | proposal v1 separately approved; internal implementation active | Exact proposal checkpoint `a181885` is approved with seven implementation conditions: unchanged 12A cases, actual reference-owner patch integration, no label substitution, honest ambiguity, attributed manual Lean correspondence, strict interchange, and no public/later effect. |
+| `AGENT-EVAL-12B1` | proposal v1 separately approved; internal implementation active | Exact proposal/review checkpoints `a181885`/`d271c33` impose seven implementation conditions: unchanged 12A cases, actual reference-owner patch integration, no label substitution, honest ambiguity, attributed manual Lean correspondence, strict interchange, and no public/later effect. |
 | `AGENT-EVAL-12B2` | gated | Requires qualified 12B1. Add the explicit Node runner, browser/documentation presentation, package capability/export, packed consumers, and one final shared-boundary gate. No publication. |
 | `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
@@ -319,7 +320,7 @@ with focused tests in
 It approves only proposal checkpoint `a181885` and proposal SHA-256
 `ecbd67496a99775c13357d9175b623200e20e79346d62b00b8773bc5e7d08a60`
 under delegated unattended authority, with later human supersession. The
-review checkpoint is the commit containing this completion record.
+exact review checkpoint is `d271c33`.
 
 The review's SHA-256 is
 `f3f38e47a84e365a7154ed3717f1375fdb62e332185fb0529770c34fef735e41`;
