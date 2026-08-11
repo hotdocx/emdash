@@ -118,8 +118,9 @@ v1 boundary, but cold observation replay found two presentation residuals.
 Corrected v2 therefore freezes **0/1/0/5**: one local derived runtime support,
 zero local proof rules, five unchanged definitions, and reuse of one existing
 proof-time provider. Proposal checkpoint `b1e6f0f` is separately reviewed and
-approved under delegated unattended authority with later human supersession;
-only that corrected root-local implementation may now proceed.
+approved at review checkpoint `31f23db` under delegated unattended authority
+with later human supersession; only that corrected root-local implementation
+may now proceed.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -2924,10 +2925,11 @@ The review still denies a broad `hom_con` import, whole `id_funcd` delta,
 generic runtime rule, new proof rule, generic matcher/checker/evaluator/
 comparison change, TypeScript behavior from source injectivity metadata,
 Path-category bridge, public presentation, active Lambdapi edit, integration,
-and release. Its synchronized review checkpoint and digest are pinned by the
-next ledger-only checkpoint. The unchanged 1,923-test aggregate from
-`e560551` remains carried forward under the standing no-long-aggregate
-direction.
+and release. The synchronized review is checkpointed at `31f23db`, with
+SHA-256
+`b24b2e0dfd77b541b52b7eb6f1388a045f01ed7f08c2f9b6b137da57bb2a4d0a`.
+The unchanged 1,923-test aggregate from `e560551` remains carried forward
+under the standing no-long-aggregate direction.
 
 ## Required Evidence For Implementation
 
