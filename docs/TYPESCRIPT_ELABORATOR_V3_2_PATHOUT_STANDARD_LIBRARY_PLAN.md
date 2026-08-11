@@ -119,8 +119,10 @@ Corrected v2 therefore freezes **0/1/0/5**: one local derived runtime support,
 zero local proof rules, five unchanged definitions, and reuse of one existing
 proof-time provider. Proposal checkpoint `b1e6f0f` is separately reviewed and
 approved at review checkpoint `31f23db` under delegated unattended authority
-with later human supersession; only that corrected root-local implementation
-may now proceed.
+with later human supersession. Cold v2 replay then showed that the one support
+rule is shadowed by `CompTarget_catd` delta. Corrected v3 retains **0/1/0/5**
+while replacing that rule one-for-one with its measured stable post-delta
+parent; v3 remains non-authorizing pending a separate review.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -2930,6 +2932,77 @@ SHA-256
 `b24b2e0dfd77b541b52b7eb6f1388a045f01ed7f08c2f9b6b137da57bb2a4d0a`.
 The unchanged 1,923-test aggregate from `e560551` remains carried forward
 under the standing no-long-aggregate direction.
+
+### Corrected transitivity proposal v3 after reviewed-v2 replay
+
+The reviewed v2 implementation compiled all five definitions and its one
+local runtime rule. The rule subject-checked and fired when instantiated at
+the exact proposed pre-delta redex. The cold focused suite nevertheless
+reported `9-tests-6-pass-2-fail-1-skip` in about 213 seconds.
+
+One failure was an adapter-scope issue: the lazy inherited-proof helper had
+been rechecked against the final compiled transitivity environment, while the
+test's `Z`, objects, and arrows lived in a further descendant fixture
+environment. Corrected v3 requires an explicit descendant-environment
+parameter, defaulting to the compiled environment for callers without extra
+assumptions. This changes no proof rule, category conversion, or semantic
+boundary.
+
+The other failure is decisive rule-selection evidence. In the real section-
+component observation, transparent delta unfolds `CompTarget_catd` before the
+local fragment is consulted. The stable residual contains
+
+```text
+fapp1_func(
+  Z, Cat_cat,
+  hom_con(Catd_cat(Z), Rep_x, Op_cat(Z), Rep_catd_func(Z)),
+  x, y)
+```
+
+inside the complete outer `functor-object`, rather than the v2
+`fapp1_func(...,CompTarget_catd(Z,x),...)` subterm. Retaining v2 and adding a
+second rule would widen the reviewed count without need. Corrected v3 instead
+replaces it one-for-one with the measured post-delta parent, preserving exact
+**0/1/0/5**, one derived non-mathematical support, zero local proof rules,
+five unchanged definitions, and the same inherited proof provider.
+
+The corrected, non-authorizing proposal is
+[`src/v3_2/pathout_transitivity_proposal_v3.ts`](../src/v3_2/pathout_transitivity_proposal_v3.ts),
+with focused tests in
+[`tests/v3_2_pathout_transitivity_proposal_v3_tests.ts`](../tests/v3_2/pathout_transitivity_proposal_v3_tests.ts).
+It pins v2 proposal/review checkpoints `b1e6f0f`/`31f23db`, their exact
+digests, and ledger checkpoint `8668764`. It preserves all five definitions,
+eleven providers, two typed consumers, the seven-runtime/one-proof-time
+observation partition, eight negatives, and eight bounded Lambdapi
+assertions. It denies retaining the v2 rule, adding a second rule, importing
+the broad `hom_con` ladder or whole `id_funcd` delta, and every generic,
+public, kernel, or external widening already denied by v2.
+
+Corrected-v3 proposal evidence on 2026-08-11 is:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_pathout_transitivity_proposal_tests.ts \
+  tests/v3_2_pathout_transitivity_review_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v2_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v2_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v3_tests.ts
+  34 tests / 5 suites: 34 passed, 0 failed
+
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_transitivity_proposal_v3.ts \
+  tests/v3_2_pathout_transitivity_proposal_v3_tests.ts
+  passed
+```
+
+V3 installs no semantics and remains outside all public barrels. Its artifact,
+tests, and synchronized plans form a proposal checkpoint whose exact commit
+and digest must be pinned by a separate immutable review before the
+implementation is corrected or the cold replay is repeated. No aggregate is
+rerun.
 
 ## Required Evidence For Implementation
 
