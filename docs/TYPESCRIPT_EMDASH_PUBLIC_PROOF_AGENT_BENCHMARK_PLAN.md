@@ -3528,6 +3528,52 @@ and minimized receipt facts rather than the private raw transcript. No proof,
 mathematical result, performance result, success-rate, leaderboard,
 solver-comparison, or graduation claim exists. Accounting remains 35/41.
 
+##### `AGENT-EVAL-12B4-R3` no-model process-start diagnosis proposal
+
+Official OpenAI documentation describes `codex exec` as the non-interactive
+automation surface, `--json` as newline-delimited event output,
+`--ignore-user-config` as retaining `CODEX_HOME` authentication, and
+`codex doctor --json` as a redacted machine-readable diagnostic report. Those
+documented/local-help contracts match the intended runner architecture, but
+the existing live probe validated only the complete global config stack plus
+`exec --help`; it did not separately parse every post-`exec` option, load the
+real schema, or audit redacted runtime/provider health.
+
+The minimized receipt bounds the diagnostic problem without revealing raw
+evidence: the host spawned Codex successfully; the process exited 1 in 95 ms;
+no timeout, overflow, signal, spawn error, command, file change, valid final
+message, usage, or benchmark outcome exists; and the event parser saw only an
+incomplete stream. Plausible pre-turn boundaries are therefore post-`exec`
+argument/schema/path validation, ignored-versus-effective config/feature
+state, selected-model/provider availability, or authentication/runtime health.
+No one cause is asserted yet.
+
+The proposed R3 audit is read-only/no-model except for disposable private test
+paths and may:
+
+1. run the exact committed global arguments followed by every reviewed
+   post-`exec` option and `--help`, with no prompt, to validate the complete
+   parser boundary;
+2. run `codex doctor --json` in a fresh closed environment and retain/output
+   only redacted aggregate/check classifications needed for diagnosis;
+3. inspect `codex features list`, `codex debug models --bundled`, and the
+   already whitelisted current cache entry, retaining only the selected model
+   and named disabled-feature facts;
+4. parse and structurally audit the committed output schema, prompt/case/input
+   paths, directory modes, Git status, and exact argument vector without
+   opening any v2 raw evidence file; and
+5. compare the results with official command/config references and local
+   `--help`, then record either one measured correction proposal or an honest
+   unresolved boundary.
+
+The audit may create and remove only explicitly validated disposable `/tmp`
+directories. It must not invoke `codex exec` with a prompt, use the consumed
+ID/run root, remove or inspect private v1/v2 evidence, read credential content,
+alter login/config, contact a model/provider, retry, edit code, or change any
+external/repository state beyond plan checkpoints. This proposal changes plans
+only and requires a separate immutable review before probes. Accounting
+remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
