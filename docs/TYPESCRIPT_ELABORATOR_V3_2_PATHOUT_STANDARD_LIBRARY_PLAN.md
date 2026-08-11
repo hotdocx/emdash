@@ -290,7 +290,7 @@ named library presentation.
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
-| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | corrected v4 awaiting separate review | completed 1D at `b6005b3`/`6225075`; reviewed v3 at `fe1a9b7`/`0834d00` and ledger `5d0dad5` | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—plus one derived complete consumer-parent support at **0/1/0/5**. Cold v3 proves its post-`CompTarget` pattern is still shadowed by transparent `Rep_catd` descendants. V4 replaces it one-for-one at the original selected-component consumer before descendant delta; it adds no mathematical equation, proof rule, injectivity, unification, Core, or generic-engine behavior. |
+| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | corrected v4 separately reviewed; implementation-ready | completed 1D at `b6005b3`/`6225075`; v4 proposal checkpoint `2498053`; separate review awaiting its ledger pin | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—plus one derived complete consumer-parent support at **0/1/0/5**. Cold v3 proves its post-`CompTarget` pattern is still shadowed by transparent `Rep_catd` descendants. Reviewed v4 replaces it one-for-one at the original selected-component consumer before descendant delta; it adds no mathematical equation, proof rule, injectivity, unification, Core, or generic-engine behavior. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
@@ -3123,9 +3123,49 @@ node --require ts-node/register --test \
 ```
 
 V4 installs no semantics, remains outside every public barrel, and is not
-self-authorizing. Its introducing checkpoint and digest must be recorded by a
-separate immutable review before semantic implementation resumes. The
-unchanged 1,923-test aggregate from `e560551` remains carried forward.
+self-authorizing. The proposal is checkpointed at `2498053`, with SHA-256
+`820df96e9a0b889172c2e74fbcdc77cd16329dcaf36105d3c53076807e76394b`.
+
+The separate immutable review is
+[`src/v3_2/pathout_transitivity_review_v4.ts`](../src/v3_2/pathout_transitivity_review_v4.ts),
+with focused tests in
+[`tests/v3_2_pathout_transitivity_review_v4_tests.ts`](../tests/v3_2/pathout_transitivity_review_v4_tests.ts).
+Under the standing unattended delegation, with later human supersession, it
+approves only proposal checkpoint `2498053` and that digest. It authorizes one
+complete original-consumer-parent support, replacing v3 rather than
+coexisting with it; the inherited proof helper keeps its explicit descendant
+environment, and the test-only `path_ind_sec` helper must use the canonical
+fixed-source Core name.
+
+Separate-review evidence on 2026-08-11 is:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_pathout_transitivity_proposal_tests.ts \
+  tests/v3_2_pathout_transitivity_review_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v2_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v2_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v3_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v3_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v4_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v4_tests.ts
+  54 tests / 8 suites: 54 passed, 0 failed
+
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_transitivity_{proposal,review}_v4.ts \
+  tests/v3_2_pathout_transitivity_{proposal,review}_v4_tests.ts
+  passed
+```
+
+The review denies retaining v3, adding a second local rule, importing whole
+`Rep_catd`, `hom_con`, or `id_funcd` behavior, changing any generic engine or
+Core, adding proof authority, public presentation, active Lambdapi edits,
+integration, or release. Its exact checkpoint and digest must be pinned in
+the living ledgers before implementation. The unchanged 1,923-test aggregate
+from `e560551` remains carried forward.
 
 ## Required Evidence For Implementation
 
