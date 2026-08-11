@@ -3,9 +3,7 @@
 Status: living plan; post-`STDLIB-8B` audit complete; exact non-authorizing
 `AGENT-EVAL-12B1` proposal checkpoint `a181885` is separately approved by the
 immutable review at `d271c33`. The internal corpus/interchange implementation
-is proportionally qualified in the checkpoint containing the completion
-record below; the exact checkpoint is pinned by the immediate ledger-only
-follow-up.
+is complete and proportionally qualified at exact checkpoint `d0d3764`.
 
 Date: 2026-08-11
 
@@ -215,8 +213,8 @@ the evaluator.
 | Row | State | Exit gate |
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
-| `AGENT-EVAL-12B1` | implementation complete; exact checkpoint pending ledger pin | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
-| `AGENT-EVAL-12B2` | next proposal selected; implementation gated | Requires the exact qualified 12B1 checkpoint, then a separately frozen/reviewed contract for the explicit Node runner, browser/documentation presentation, package capability/export, packed consumers, and one final shared-boundary gate. No publication. |
+| `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
+| `AGENT-EVAL-12B2` | next proposal selected; implementation gated | Requires qualified 12B1 checkpoint `d0d3764`, then a separately frozen/reviewed contract for the explicit Node runner, browser/documentation presentation, package capability/export, packed consumers, and one final shared-boundary gate. No publication. |
 | `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
@@ -350,9 +348,8 @@ rule change. No long aggregate is rerun for this behavior-free review.
 
 Date: 2026-08-11
 
-State: implementation complete and proportionally qualified; the semantic
-checkpoint is the commit containing this record and is pinned by the next
-ledger-only commit.
+State: implementation complete and proportionally qualified at exact semantic
+checkpoint `d0d3764`.
 
 The implementation adds exactly the two reviewed internal browser-safe
 owners:
@@ -482,8 +479,7 @@ On continuation:
 2. read this plan and the governing master ledger;
 3. preserve CloserFans' unrelated untracked review plan;
 4. keep only one semantic row active;
-5. treat 12B1 as complete only at the exact checkpoint pinned by its immediate
-   ledger follow-up;
+5. treat 12B1 as complete at exact checkpoint `d0d3764`;
 6. freeze and separately review a non-authorizing 12B2 proposal before any
    public runner, browser, barrel, package, or consumer implementation; and
 7. synchronize both plans and exact evidence before every rollback-safe
