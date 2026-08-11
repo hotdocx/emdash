@@ -129,8 +129,8 @@ expression vocabulary, an explicit Node semantic-check route, a static honest
 browser view, and a short owned-book bridge. Proposal checkpoint `6ad0812` was
 separately approved at `f03ef01` under delegated unattended authority with
 later human supersession. That exact four-stage implementation is now
-final-proportional-green in the semantic checkpoint containing the completion
-record below. Graduation audit `0G` is the next dependency-ready row.
+final-proportional-green at semantic checkpoint `8d226cc`. Graduation audit
+`0G` is the next dependency-ready row.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -297,7 +297,7 @@ named library presentation.
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | complete; final-proportional-green | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; semantic checkpoint `3b113ad` | The exact root-only **0/1/0/5** transfer compiles five transparent definitions plus one derived complete consumer-parent support. Eight TypeScript observations, two typed consumers, eight negatives, authority closure, and a separately gated eight-assertion Lambdapi oracle are green. No mathematical equation, local proof rule, injectivity, unification, Core, generic-engine, public, or Lambdapi-source behavior is added. |
-| `PATHOUT-LIBRARY-PRESENTATION-1F` | complete; final-proportional-green | completed direct typed slices through `10432ba`; proposal/review checkpoints `6ad0812`/`f03ef01`; semantic checkpoint is the commit containing the completion record below | Four finite forms now have a browser-safe parser/qualification manifest, explicit transfer-backed Node check, static-by-default CLI and lazy browser panel, and an owned Chapter 5 bridge. No second semantic engine or public package export was added. |
+| `PATHOUT-LIBRARY-PRESENTATION-1F` | complete; final-proportional-green | completed direct typed slices through `10432ba`; proposal/review checkpoints `6ad0812`/`f03ef01`; semantic checkpoint `8d226cc` | Four finite forms now have a browser-safe parser/qualification manifest, explicit transfer-backed Node check, static-by-default CLI and lazy browser panel, and an owned Chapter 5 bridge. No second semantic engine or public package export was added. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
 ### `PATHOUT-TRUST-BOUNDARY-0A` exact audit contract
@@ -3363,10 +3363,9 @@ deployment, and cleanup.
 
 Date: 2026-08-11
 
-Status: complete and final-proportional-green. The semantic checkpoint is the
-commit containing this record; a following plan-only ledger checkpoint may pin
-its short hash without changing the implementation. Graduation audit
-`PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` is next.
+Status: complete and final-proportional-green at semantic checkpoint
+`8d226cc`. This plan-only ledger pin changes no implementation. Graduation
+audit `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` is next.
 
 The implementation preserves the reviewed four-part partition:
 
