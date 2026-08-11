@@ -3121,6 +3121,44 @@ permission/evaluator/package/other-template/Emdash/external edit, new call
 coordinate, provider/model, retry, lease, push, merge, deployment, release,
 cleanup, or claim is authorized. Accounting remains 35/41.
 
+###### Focused-verifier scheduling correction proposal
+
+The approved four-file R1 implementation removes the evaluator IPC failure,
+but the auditable default `--canary-only` run still did not pass: its outer
+focused harness terminated `npm run canary:verify` at the existing 120-second
+ceiling. Running that exact inner verifier from a disposable clean installed
+template, without changing `HOME`, `TMPDIR`, the private default run roots, or
+any code, passed every assertion in 133.41 seconds. This is positive semantic
+evidence for the inner fake/no-model matrix, but it is not a pass for the
+default outer gate. The old `EINVAL` no longer occurs.
+
+The measured cost is the sequential ten-case mock matrix: each independent
+case copies the same read-only preinstalled template into its own private
+agent root and initializes its own audit repository. Increasing the outer
+timeout would preserve a needlessly slow focused gate. Weakening clean-copy,
+private-root, replay, or assertion coverage would weaken the reviewed
+boundary. The narrow proposal instead changes only scheduling inside the
+already scoped `verify-emdash-canary.mts`:
+
+1. execute the same ten mock scenarios as five explicit two-case
+   `Promise.all` batches;
+2. preserve each scenario's existing options, hook, result binding, assertion,
+   receipt checks, independently allocated run root, retained-root cleanup,
+   and the sequential order between pairs;
+3. leave `executeScenario`, `runStageACanary`, real-driver tests, evaluator,
+   production files, limits, environment, and all source/evidence contracts
+   unchanged; and
+4. require both the direct inner verifier and the default outer
+   `--canary-only` gate to pass, followed by the existing live no-model
+   permission and static hygiene checks.
+
+Pairwise concurrency is bounded at two and operates only on fake, isolated,
+no-network cases. This proposal changes plans only. It does not authorize the
+test edit until a separate immutable review, and it selects no new call
+coordinate or provider/model effect. The discarded outer run and 133.41-second
+direct pass remain recorded with their distinct meanings. Accounting remains
+35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
