@@ -7,10 +7,12 @@ Corpus/interchange checkpoint `d0d3764`, public runner/package checkpoint
 separately reviewed contracts and proportional gates recorded below. Exact
 public `@hotdocx/emdash@0.3.0`, Pages, Release, provenance, installed
 consumers, release-only OIDC workflow, and the all-abstention source workspace
-are verified. The `AGENT-EVAL-12B4` read-only audit is now complete and its
-first non-authorizing policy proposal is frozen below. Provider/model
-execution, retained run evidence, measurement, and graduation remain gated
-until separate immutable reviews authorize their exact bounded stages.
+are verified. The `AGENT-EVAL-12B4` read-only audit and first policy proposal
+are frozen below. A separate immutable review approves only the bounded
+mock-driven Stage A runner implementation with additional hardening
+conditions. Provider/model execution, retained run evidence, measurement,
+and graduation remain gated until later immutable reviews authorize their
+exact bounded stages.
 
 Date: 2026-08-11
 
@@ -227,7 +229,7 @@ the evaluator.
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
 | `AGENT-EVAL-12B3` | complete at Emdash hardening `3af518d` and CloserFans host `cbf2356` | Exact `0.3.0`, Pages run `31509112917`, protected OIDC recovery run `31510726533`, byte/provenance/installed-consumer verification, permanent trigger removal, and the focused-green ten-abstention source workspace are complete. Two safe pre-package failures and the reviewed one-time dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | policy proposal frozen; all effects gated | The audit below freezes provider identity/credentials, execution, exact inputs, retention/privacy, reproducibility, cost/usage semantics, reporting, contamination labels, and graduation. Its first review may authorize only a mock-driven local runner implementation; a second implementation/preflight review is required before one real one-case canary. |
+| `AGENT-EVAL-12B4` | Stage A runner implementation approved; real call gated | Proposal `286a50d` and the immutable review below authorize only a mock-driven local runner with narrowed writes, non-executing source validation, clean host replay, bounded streams, and private evidence. A second implementation/preflight review is required before one real one-case canary. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 separately approved `AGENT-EVAL-12B2` implementation is also complete and its
@@ -2158,6 +2160,105 @@ explicit reason; it is not silently part of the one-call authorization. No
 push, deployment, public benchmark result, or Stage B/C work follows
 automatically.
 
+### Immutable Stage A proposal review
+
+Review date: 2026-08-11
+
+Reviewed proposal checkpoint:
+`286a50db5f3295d4f9dbe58e046c82f53ad37e55`, exact parent
+`3727015c1975c346f309981b440810a309776931`, exact tree
+`6be5c72f62a31e088e8bedb01afe001b9fa52d23`.
+
+The proposal changes only the two living plans. Its immutable complete-file
+SHA-256 values are:
+
+```text
+c71bc63ffb715fdb39e0792766a565b15c033de911a0f54449b6f4b2fdcb3942
+  docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md
+48e0e9044ee59d602637ec9706e3d97a4402167d18d7be33716e093c0e80ca93
+  docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md
+```
+
+Exact name/status review, `git diff --check`, secret-token pattern scan,
+clean Emdash/CloserFans status, and remote divergence review passed. The
+proposal branch was exactly one commit ahead of its unchanged remote; no push,
+model run, source edit, package operation, sibling mutation, retained raw
+evidence, or aggregate occurred. Official links were fetched during the
+audit. Master accounting remains 35 of 41: it excludes the three completed
+readiness/audit ledger rows and counts the two generic PathOut prerequisites
+as their recorded single bounded checkpoint.
+
+The review accepts the architecture and Stage A selection, but adds five
+mandatory corrections before implementation:
+
+1. **Narrow writes.** The illustrative proposal profile's workspace-wide
+   write is too broad. The generated effective profile must make the
+   disposable workspace read-only by default and reopen only the selected
+   `benchmark-run.emdash.ts` plus exact private fake-home and temp subtrees for
+   writes. `package.json`, lockfiles, scripts, README, Git metadata, and all
+   `node_modules` remain read-only. Root, real home, real temp, `.env`,
+   `.agents`, and `.codex` reads remain denied except the separately resolved
+   read-only Node/Codex runtime needed to execute tools.
+2. **Never execute unvalidated agent TypeScript as host code.** The candidate
+   source is hostile until a non-executing TypeScript AST validator proves
+   that the complete file is byte/AST-identical to baseline except for the
+   selected `benchmarkAttemptEdits` value and that this value uses only the
+   reviewed data-literal grammar. Imports, calls, accessors, identifiers,
+   spreads, computed keys, templates, functions, classes, statements, and
+   every other case are forbidden. The host extracts/reconstructs canonical
+   patch data from that syntax; it never imports the candidate module.
+3. **Separate clean replay.** Agent-visible evaluation may run inside the
+   restricted disposable workspace, but final authority runs in a fresh
+   host-controlled evaluator environment whose package/scripts cannot have
+   been modified by the agent. It consumes only statically extracted canonical
+   data and the exact selected case. A same-workspace post-run import is not
+   independent evidence.
+4. **Two-phase setup.** Any exact public-package installation is an outer host
+   setup step before Codex starts, uses the fixture lock with lifecycle scripts
+   disabled and no registry credential, and is recorded separately from the
+   command-offline agent phase. The contributor workspace is never the
+   installation target. The installed package identity/integrity and the
+   read-only permission outcome are preflight gates.
+5. **Bound untrusted bytes.** Before parsing or execution, cap the candidate
+   source at 262,144 bytes, each JSONL line at 4 MiB, cumulative JSONL at
+   64 MiB, and final-message output at 65,536 bytes. Overflow terminates the
+   process and yields a distinct invalid operational result. Implementation
+   may lower these limits after focused fixtures prove the selected task fits;
+   it may not raise them without another review.
+
+With those corrections, the review requires all of the following conditions:
+
+1. exact baseline `cbf2356` and a new isolated CloserFans branch/worktree;
+2. changes limited to the benchmark template and its narrowly owned focused
+   verifier/script/docs registrations;
+3. exact `codex-cli 0.147.0` argument/config construction, but only fake Codex
+   processes in this implementation tranche;
+4. root-denying least-privilege no-model probes and inherit-nothing command
+   environment, with all failures closed before a provider process;
+5. no inherited parent `AGENTS.md`, `.codex`, plugin, MCP, hook, rule, memory,
+   web-search, or subagent input in the disposable agent workspace; any
+   intentional instruction file becomes tracked prompt material and is
+   digest-bound;
+6. non-executing whole-source validation and fresh clean evaluator replay as
+   corrected above;
+7. distinct outcomes, exact diff/command/event audits, and canonical hashes
+   without accepting model prose as proof;
+8. private mode-restricted raw evidence and a receipt which excludes
+   credentials, account identity, raw reasoning, and unnormalized host paths;
+9. permanent open-book contamination and non-graduation labels for Stage A;
+   and
+10. focused fake-process, permission, source-validator, evaluator, template,
+    typecheck/lint, secret, diff, and ancestry gates with every aggregate
+    omission stated honestly.
+
+Decision: approve only the corrected mock-driven Stage A runner
+implementation under delegated unattended authority, with later human
+supersession. Do not run Codex, use an OpenAI API key, read/copy cached auth,
+retain a real transcript, remove private evidence, push/deploy, change a
+package/release, modify another CloserFans surface, or begin Stage B/C. After
+the implementation checkpoint, synchronize both plans and perform the second
+exact preflight review required by the proposal before at most one real call.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -2213,9 +2314,9 @@ On continuation:
    `ba49705`/`8c9652a`/`93c9804` as complete; treat 12B3 proposal/review,
    package source, permanent hardening, and locally integrated host checkpoints
    `bb16e47`/`0027c66`/`995e497`/`3af518d`/`cbf2356` as complete; treat the
-   12B4 audit and behavior-free Stage A proposal above as frozen but not yet
-   reviewed; allow its first immutable review to authorize only a mock-driven
-   local runner, and require a second exact implementation/preflight review
-   before any real-agent or retention effect; and
+   12B4 audit, exact proposal `286a50d`, and its immutable corrected review
+   above as authorization only for a mock-driven local runner, and require a
+   second exact implementation/preflight review before any real-agent or
+   retention effect; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
