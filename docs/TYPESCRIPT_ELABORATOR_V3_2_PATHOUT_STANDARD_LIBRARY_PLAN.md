@@ -53,11 +53,14 @@ five runtime observations, one typed rho-section consumer, eight strict
 negatives, nine bounded Lambdapi assertions, safe-library denials, and the
 non-export boundary green at semantic checkpoint `a361dc3`; no PathOut/PathInd
 public export is yet authorized; behavior-free
-`PATHOUT-LIBRARY-INTERNALIZED-1D` proposal v1 is frozen at 4/4/0/10,
-final-proportional-green at checkpoint `188b8e5`, and separately approved
-under delegated unattended authority with human supersession; the exact
-review at checkpoint `d3a0f31` is final-proportional-green and authorizes
-semantic implementation
+`PATHOUT-LIBRARY-INTERNALIZED-1D` proposal v1 was frozen at 4/4/0/10 at
+checkpoint `188b8e5` and separately reviewed at `d3a0f31`, but measured
+generic-runtime admission counterevidence now supersedes that review. Generic
+fixed-evaluation and category-presentation-proof experiments do not solve the
+stable component subject mismatch and are removed. Corrected behavior-free v2
+adds one exact subject-type presentation fusion, making 4/5/0/10 while
+preserving four mathematical projections and zero proof rules. V2 awaits its
+own checkpoint and separate review; semantic implementation is paused.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -220,7 +223,7 @@ named library presentation.
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | proposal v1 separately reviewed; implementation ready | completed 1C at `a361dc3`/`033dbb8`; proposal/review checkpoints `188b8e5`/`d3a0f31` | The separately approved exact local boundary is 4/4/0/10: select only missing `Sigma_transfd_funcd` plus `PathOutReflEval_funcd`, `PathInd_func`, and primary `PathInd_transfd`; install their four active projections; derive ten transparent internalized/Sigma-total definitions. Reuse existing providers without importing the whole scale-stress profile, and preserve internally owned source-arrow and higher action. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | v1 review superseded; corrected proposal v2 awaiting checkpoint/review | completed 1C at `a361dc3`/`033dbb8`; superseded v1 proposal/review checkpoints `188b8e5`/`d3a0f31` | V2 preserves the four owners, four active mathematical projections, and ten definitions, and adds one exact derived subject-type presentation fusion for the measured `PathInd_func` component mismatch. Exact local boundary is 4/5/0/10, with zero proof rules and no whole-profile import, external naturality, transitivity, public, or release effect. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
@@ -2145,10 +2148,91 @@ git diff --check
   passed
 ```
 
-No Lambdapi execution or long aggregate is relevant to this behavior-free
-review. Review checkpoint `d3a0f31` freezes that decision. Semantic
-implementation may now resume under the 4/4/0/10 boundary and no wider
-authority.
+No Lambdapi execution or long aggregate was relevant to this behavior-free
+review. Review checkpoint `d3a0f31` froze that decision and, at that point,
+permitted implementation under the 4/4/0/10 boundary. The measured
+counterevidence below now supersedes that implementation authority.
+
+### `PATHOUT-LIBRARY-INTERNALIZED-1D` measured v1 counterevidence and corrected proposal v2
+
+The first v1 semantic compilation admitted the Sigma owner, transparent
+prelude, and three theorem signatures, then rejected
+`pathind.internalized.path-ind-functor-component` with
+`INVALID_RUNTIME_RULE_TYPE`. Exact diagnostic normalization measured:
+
+```text
+τ(Hom(Cat_cat,
+  PathInd_src_catd(Z,x)[E],
+  PathInd_tgt_catd(Z,x)[E]))
+
+versus
+
+τ(Functor(Fibre_cat(E,pathout_refl_obj(Z,x)),Pi_cat(E))).
+```
+
+This is a TypeScript weak-head presentation boundary, not missing PathInd
+mathematics. The active authority relates the two sides through the category-
+universe Hom/Functor equation, the proof-time `Functor_cat(K,Cat_cat)` versus
+`Catd_cat(K)` comparison, fixed evaluation, the section-functor object rule,
+and the transparent `PathInd_src_catd`/`PathInd_tgt_catd` definitions. The
+selected runtime does not contextually compose that entire path while
+admitting the outer projection.
+
+Two narrower reuse attempts were measured and removed. Adding the already-
+qualified generic fixed-evaluation runtime does not match through the stable
+`Catd_cat(PathOut)` source presentation. Recompiling the existing category-
+presentation proof rule in the exact extended declaration context reaches the
+subject-proof path but returns `stuck`. No diagnostic wrapper, extra runtime
+dependency, or proof program remains in the implementation candidate.
+
+Corrected non-authorizing proposal v2 is
+[`src/v3_2/pathind_internalized_proposal_v2.ts`](../src/v3_2/pathind_internalized_proposal_v2.ts),
+with focused tests in
+[`tests/v3_2_pathind_internalized_proposal_v2_tests.ts`](../tests/v3_2_pathind_internalized_proposal_v2_tests.ts).
+It preserves every v1 owner, mathematical projection, definition, typed
+consumer, negative consumer, runtime observation, bounded Lambdapi assertion,
+and denial. It inserts one derived subject-checked fusion immediately before
+the `PathInd_func` component projection:
+
+```text
+Hom_Cat(PathInd_src[E], PathInd_tgt[E])
+  -> Functor(E[refl], Pi(E)).
+```
+
+The corrected exact local boundary is therefore **4/5/0/10**: four opaque
+owners, four active mathematical projections plus one derived weak-head
+support rule, zero local proof rules, and ten transparent definitions. The
+fusion is scoped to this component subject type. It does not authorize a
+generic runtime matcher/checker change, a generic fixed-evaluation runtime
+import, an inherited proof-program dependency, alternate PathInd signatures
+or bodies, a new mathematical rule, whole-profile import, external
+naturality, transitivity, public export, active Lambdapi edit, integration, or
+release.
+
+Proposal-v2 proportional evidence is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_internalized_proposal_v2.ts \
+  tests/v3_2_pathind_internalized_proposal_v2_tests.ts \
+  src/v3_2/pathind_internalized_transfer.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_internalized_proposal_tests.ts \
+  tests/v3_2_pathind_internalized_proposal_v2_tests.ts
+  14 tests / 2 suites: 14 passed, 0 failed
+```
+
+No Lambdapi execution or repository aggregate is relevant to this behavior-
+free correction. Gate `H-TS-EMDASH-PATHIND-INTERNALIZED-02` asks whether to
+approve decision `D-TS-EMDASH-PATHIND-INTERNALIZED-002` exactly as proposed.
+V2 remains non-authorizing until its exact bytes are checkpointed and receive
+a separate immutable review under the user's standing unattended delegation,
+with later human supersession.
 
 ## Required Evidence For Implementation
 
