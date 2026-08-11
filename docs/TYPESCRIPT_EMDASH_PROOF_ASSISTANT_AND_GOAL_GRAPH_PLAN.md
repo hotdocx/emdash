@@ -212,11 +212,17 @@ derived runtime support, zero local proof rules, five unchanged definitions,
 and one separately recorded inherited proof-time provider. Proposal checkpoint
 `b1e6f0f` is separately reviewed at `31f23db` under delegated unattended
 authority. Cold v2 replay then proved its pre-delta rule is shadowed by
-`CompTarget_catd` delta. Corrected non-authorizing v3 retains **0/1/0/5** and
-replaces that rule one-for-one with the measured post-delta parent. Proposal
-checkpoint `fe1a9b7` is separately reviewed at `0834d00` under delegated
-unattended authority, so only that exact root-local implementation may now
-resume.
+`CompTarget_catd` delta. Corrected non-authorizing v3 retained **0/1/0/5** but
+transparent representable descendants shadowed that parent as well. Corrected
+proposal/review v4 at `2498053`/`fc9a323` selected the original complete
+consumer parent before descendant delta. The final transitivity implementation
+is complete at `3b113ad` and pinned by ledger checkpoint `10432ba`: all five
+definitions, one derived support, eight observations, two typed consumers,
+eight negatives, inherited proof reuse, and eight bounded active-Lambdapi
+assertions are green. The next bounded row is presentation `1F`; its first
+behavior-free proposal now freezes a finite expression grammar, an explicit
+Node semantic checker/CLI, an honest static browser route, and an owned Chapter
+5 bridge. It remains non-authorizing pending separate immutable review.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -309,8 +315,12 @@ v5 through v14 are, in order, `fe0306d`/`a94c2f7`,
 `19eb941`/`2112543`, `ef761e4`/`8cdff35`, `f26d340`/`1de3c95`,
 `a735c40`/`7b466d5`, `270da40`/`302c4a9`, `2e1e593`/`731dc32`,
 `39abb02`/`8833f8f`, `d77f0d7`/`a8aff88`, and
-`4244b54`/`73aa94e`. The current bounded tranche implements the last reviewed
-boundary without changing a generic or public surface.
+`4244b54`/`73aa94e`. Internalized semantic checkpoint `b6005b3` and
+transitivity proposal/review/semantic/ledger checkpoints
+`2498053`/`fc9a323`/`3b113ad`/`10432ba` complete every selected root-only
+semantic slice. The current bounded tranche is the behavior-free presentation
+`1F` proposal; it changes no generic engine, public package surface, or active
+mathematical authority.
 
 Depends-On:
 
@@ -6383,6 +6393,7 @@ changes, and the completed row advances only to presentation `1F`.
 | `D-PA-172` | Supersede reviewed v3 implementation authority with a measured, non-authorizing original-consumer-parent v4 correction. | Cold v3 preserves all five definitions, subject checking, exact-redex firing, consumers, negatives, sealing, and inherited proof reuse, but full replay remains 6/9 with two failures and one skip. The proof failure is now only a canonical predecessor-name test lookup. The semantic residual proves transparent `Rep_catd` descendants shadow v3 before its pattern match. V4 replaces rather than supplements v3 at unchanged 0/1/0/5, selecting the exact original `functor-object(...component(...path_comp_sec...),p)` consumer root before descendant delta. It adds no equation, proof rule, whole-delta import, generic-engine/Core/public/Lambdapi effect, integration, or release. Forty-seven combined proposal/review tests, root typecheck, focused lint, non-export checks, clean generic-compiler diff, and diff hygiene are required before its proposal checkpoint; the long aggregate remains carried forward. |
 | `D-PA-173` | Approve only corrected consumer-parent proposal checkpoint `2498053` under delegated unattended authority, with human supersession. | Proposal SHA-256 `820df96e9a0b889172c2e74fbcdc77cd16329dcaf36105d3c53076807e76394b` and separate review checkpoint `fc9a323`, review SHA-256 `9d37f7fd66c2fb61ce9ebf1dc1c7f5b83ba7558e0457f78252eb8dacb14a48aa`, freeze exact 0/1/0/5 implementation and observation boundaries. The review authorizes one original complete consumer-parent replacement, explicit descendant-environment proof reuse, and the canonical predecessor Core-name test repair. It denies retaining v3, a second rule, whole `Rep_catd`/`hom_con`/`id_funcd` behavior, new proof/runtime-category authority, generic-engine/Core/public/Lambdapi changes, integration, and release. Fifty-four combined tests, root typecheck, focused lint, non-export checks, clean generic-compiler diff, and diff hygiene are green; no aggregate is rerun. |
 | `D-PA-174` | Complete root-only `PATHOUT-LIBRARY-TRANSITIVITY-1E` at reviewed v4 and advance only to presentation `1F`. | Semantic checkpoint `3b113ad` compiles five definitions and one subject-checked original-consumer-parent support at exact 0/1/0/5. Transfer/test SHA-256 values are `dd9484a58c6196fe5cc9c6c1ac941bea0a148c449855d011fc61fbcf3dc3fe9d` and `dda1a5436dabc02065aa02e30b1a14000c015783a866a894aa7884d40cae7dbf`. Cold focused execution passes eight active tests with zero failures and one ordinary oracle skip; all observations, both consumers, eight negatives, inherited proof reuse, canonical predecessor-name repair, rule-ID selection, authority closure, and non-export checks are green. The separately gated run accepts all eight active-Lambdapi assertions under a 20-second ceiling with warnings disabled. Root typecheck, focused lint, diff hygiene, and a clean generic-compiler diff pass; the `e560551` aggregate is carried forward. No generic engine, Core, new proof rule, active Lambdapi source, or public/package surface changes. |
+| `D-PA-175` | Freeze a non-authorizing four-stage `PATHOUT-LIBRARY-PRESENTATION-1F` proposal over completed semantic checkpoint `3b113ad` and ledger `10432ba`. | The audit finds no generic LF term parser and refuses to widen the distinct categorical parser. Cold transitivity assembly measured about 195 seconds, so one finite expression vocabulary has two honest modes: a browser-safe inert parser/qualification report that visibly says it did not rerun semantics, and an explicit Node checker/CLI that delegates to the existing transfer, LF checker, and comparator. Four forms present `PathOut`, `rho`, fixed-source `Ind`, and composition. A lazy browser panel and a short owned Chapter 5 bridge complete the row without a second semantic engine. The proposal adds no behavior, parser declaration/binder syntax, Core/checker/rule/equation, active Lambdapi change, npm export/version/release, integration, deployment, or cleanup; separate immutable review remains mandatory. Seven focused tests, root typecheck, focused lint, non-export checks, and proposal SHA-256 `b7b85c34af390a5b1489b0fdd0d015cd2a4ca554c38533bf4459b7ec26029be3` are green; the long aggregate is not rerun for behavior-free data. |
 
 ## Validation And Checkpoint Policy
 

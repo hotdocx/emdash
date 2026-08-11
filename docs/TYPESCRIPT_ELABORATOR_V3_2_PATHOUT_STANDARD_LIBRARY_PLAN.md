@@ -115,16 +115,19 @@ unchanged 1,923-test aggregate from `e560551` is carried forward. No public
 PathOut/PathInd export is authorized. Internalized `1D` is complete;
 transitivity `1E` admitted all five definitions from its reviewed **0/0/0/5**
 v1 boundary, but cold observation replay found two presentation residuals.
-Corrected v2 therefore freezes **0/1/0/5**: one local derived runtime support,
+Corrected v2 therefore froze **0/1/0/5**: one local derived runtime support,
 zero local proof rules, five unchanged definitions, and reuse of one existing
-proof-time provider. Proposal checkpoint `b1e6f0f` is separately reviewed and
-approved at review checkpoint `31f23db` under delegated unattended authority
-with later human supersession. Cold v2 replay then showed that the one support
-rule is shadowed by `CompTarget_catd` delta. Corrected v3 retains **0/1/0/5**
-while replacing that rule one-for-one with its measured stable post-delta
-parent. Proposal checkpoint `fe1a9b7` is separately reviewed and approved
-at review checkpoint `0834d00` under delegated unattended authority with later
-human supersession; only that exact v3 implementation may now proceed.
+proof-time provider. V2 and v3 retained useful counterevidence, but transparent
+descendant delta made both selected parents unreachable in the real consumer.
+Corrected proposal/review v4 at `2498053`/`fc9a323` selected the original
+complete consumer parent before that delta. The final root-only implementation
+is complete at semantic checkpoint `3b113ad`, with its synchronized ledger at
+`10432ba`: all five definitions, one derived support, eight observations, two
+typed consumers, eight negatives, inherited proof reuse, and eight bounded
+active-Lambdapi assertions are green. Presentation row `1F` is now active. Its
+behavior-free proposal freezes a finite expression vocabulary, an explicit
+Node semantic-check route, a static honest browser view, and a short owned-book
+bridge; it awaits a separate immutable review before implementation.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -267,11 +270,11 @@ library program.
 | Layer | Current evidence | Future work |
 | --- | --- | --- |
 | Generic dependent LF | checked declarations, Pi/lambda, conversion, runtime and proof rules | no new kernel mechanism expected |
-| Categorical prerequisites | `Catd`, fibres, Sigma/Pi, pullback, section evaluation, generic action, `hom_int`, `fib_cov_tapp0_func`, `sigma_transport_arrow`, and higher action occur in reviewed transfer descendants | add only the four measured missing prerequisite closures recorded below |
-| Public typed construction API | categories, objects/arrows, displayed families, fibres, totals, dependent pairs, family transport, Sigma arrows, sections, application, and recursive binders | add thin classifier-checked identity-arrow, representable, canonical Sigma-transport, PathOut, and PathInd facades where useful |
-| Trusted PathInd profile | generic checked declaration/rule machinery exists; named PathInd package is absent from `src/v3_2` | install the smallest sealed, provenance-pinned opaque-owner/rule closure |
-| Derived PathOut/PathInd library | absent from `src/v3_2` at this completion boundary | author transparent definitions and proof terms over the trusted profile |
-| Text/browser presentation | no PathOut grammar or preset | add only after direct typed construction and computation are green |
+| Categorical prerequisites | `Catd`, fibres, Sigma/Pi, pullback, section evaluation, generic action, `hom_int`, `fib_cov_tapp0_func`, `sigma_transport_arrow`, and higher action occur in reviewed transfer descendants; both measured generic closures are complete at `e560551` | no further prerequisite closure is selected by presentation `1F` |
+| Public typed construction API | categories, objects/arrows, displayed families, fibres, totals, dependent pairs, family transport, Sigma arrows, sections, application, and recursive binders; root-only PathOut/PathInd typed consumers are green through `3b113ad` | retain the existing npm surface during `1F`; public export remains a later graduation/release decision |
+| Trusted PathInd profile | the smallest sealed, provenance-pinned opaque-owner/rule closure is complete at `a361dc3` and extended internally at `b6005b3` | expose its exact trust inventory through presentation without relabelling it as end-user-derived code |
+| Derived PathOut/PathInd library | transparent foundation, internalized library, and transitivity definitions are root-only and green at `550316a`, `b6005b3`, and `3b113ad` | add presentation only; no new equation, rule, or normal form is selected |
+| Text/browser presentation | no PathOut grammar or preset; the existing categorical parser is a distinct typed profile, and cold transitivity compilation measured about 195 seconds | implement the separately reviewed finite expression vocabulary, explicit Node check, static browser report, and owned-book bridge |
 
 The public `sigmaArrow` operation accepts a general fibre component; the
 canonical `sigma_transport_arrow` facade is a distinct useful operation. A
@@ -291,7 +294,7 @@ named library presentation.
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | complete; final-proportional-green | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; semantic checkpoint `3b113ad` | The exact root-only **0/1/0/5** transfer compiles five transparent definitions plus one derived complete consumer-parent support. Eight TypeScript observations, two typed consumers, eight negatives, authority closure, and a separately gated eight-assertion Lambdapi oracle are green. No mathematical equation, local proof rule, injectivity, unification, Core, generic-engine, public, or Lambdapi-source behavior is added. |
-| `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
+| `PATHOUT-LIBRARY-PRESENTATION-1F` | behavior-free proposal v1 focused-green; awaiting separate immutable review | completed direct typed slices through `10432ba` | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
 ### `PATHOUT-TRUST-BOUNDARY-0A` exact audit contract
@@ -3227,6 +3230,119 @@ and its focused-test SHA-256 is
 `dda1a5436dabc02065aa02e30b1a14000c015783a866a894aa7884d40cae7dbf`.
 The next dependency-ready row is root/public presentation
 `PATHOUT-LIBRARY-PRESENTATION-1F`, not another semantic equation.
+
+## `PATHOUT-LIBRARY-PRESENTATION-1F` Audit And Frozen Proposal
+
+Date: 2026-08-11
+
+Audit result: the row is dependency-ready, but its browser and semantic
+execution paths must be separated. The completed typed library is sufficient;
+there is no missing PathOut equation, Core node, or generic checker feature.
+The behavior-free proposal is
+[`src/v3_2/pathout_presentation_proposal.ts`](../src/v3_2/pathout_presentation_proposal.ts),
+with focused drift tests in
+[`tests/v3_2_pathout_presentation_proposal_tests.ts`](../tests/v3_2_pathout_presentation_proposal_tests.ts).
+It is non-self-authorizing and awaits a separately checkpointed immutable
+review.
+
+### Measured presentation boundary
+
+The audit found no generic outer-LF term parser. The existing
+[`categorical_text.ts`](../src/v3_2/categorical_text.ts) parser belongs to the
+typed `CoreCategoricalProgram` profile and already supports the reviewed
+ordinary/displayed binder grammar. Widening its result union and fixture
+profile merely to host PathOut would conflate two independent compilation
+layers and would pull a large transfer closure into existing reviewer users.
+The proof-development source contract also states honestly that it does not
+parse term syntax. No declaration parser is needed or selected.
+
+Cold execution of the completed transitivity suite measured approximately
+195 seconds to assemble its five definitions and one subject-checked support
+over the full predecessor chain. That is valid explicit Node work, but it is
+not an appropriate automatic browser interaction. A browser panel that merely
+shows a prequalified artifact must not say that it freshly checked the term.
+Conversely, replacing the check with static JavaScript validation would create
+a second and weaker semantic engine. The selected design therefore has one
+finite expression vocabulary and two explicitly different evidence modes:
+
+1. a fast browser-safe parser and qualification report says
+   **qualified at pinned checkpoint; not rerun in this browser**; and
+2. an explicit Node command maps the same parsed request into the completed
+   transfer, ordinary LF checker, and comparator, and only that result says
+   **fresh TypeScript check**.
+
+The existing book already gives the full mathematical development of
+`PathOut`, `rho`, arrow induction, and composition in owned Chapter 5 source.
+Presentation `1F` therefore adds a short implementation/reviewer bridge after
+the composition diagnostic. It does not rewrite the mathematical section,
+add a theorem, or hand-edit generated `docs/emdash-book.md` /
+`print/public/emdash-book.md`.
+
+### Frozen expression vocabulary
+
+The first grammar is deliberately expression-only:
+
+```text
+Expression := Head "(" Identifier ("," Identifier)* ")"
+
+PathOut(Z, x)
+rho(Z, x, y, p)
+Ind(Z, x, E, u)
+compose(Z, x, y, z, p, q)
+```
+
+The four forms present, respectively, the outgoing-arrow category, canonical
+Sigma arrow, fixed-source induction section, and the selected value of the
+composition functor. The parser accepts variable renaming and returns an inert
+request with source locations and canonical serialization. Parsing is neither
+typing nor qualification. The semantic adapter constructs the role-indexed
+fixture, rejects inconsistent variable roles and endpoints, and checks the
+request through the existing explicit Core owners. There are no declarations,
+binders, nested applications, implicit-argument inference, rewrite commands,
+or general Lambdapi syntax in this finite grammar.
+
+### Frozen implementation partition
+
+1. `PATHOUT-LIBRARY-PRESENTATION-1F1` adds browser-safe
+   `pathout_presentation.ts`: immutable qualification manifest, the finite
+   parser/serializer, and honest static report formatting. Its transitive
+   browser closure must exclude all PathOut transfer modules.
+2. `PATHOUT-LIBRARY-PRESENTATION-1F2` adds Node-oriented
+   `pathout_presentation_check.ts`. It is the sole fresh-check adapter and
+   delegates to `compileCorePathoutTransitivity1eTransfer`,
+   `createCoreLfChecker`, and `coreLfDefinitionalCompare`. Process-local
+   compilation caching is allowed; a hidden server or global prover session
+   is not.
+3. `PATHOUT-LIBRARY-PRESENTATION-1F3` adds
+   `./scripts/emdash pathout catalog|parse|check` and one lazy browser-reviewer
+   panel. `catalog` and `parse` remain fast and cannot load the transfer;
+   `check` warns before the possible cold compilation and dynamically loads
+   the Node semantic adapter. The browser exposes the static route only.
+4. `PATHOUT-LIBRARY-PRESENTATION-1F4` adds the concise Chapter 5 bridge and
+   runs its owned typography/check/render gates.
+
+This row does not export a PathOut module from the contributor or npm barrels.
+Public `@hotdocx/emdash@0.2.0` remains unchanged. Package-entry selection,
+versioning, npm/GitHub release, Pages deployment, sibling integration, push,
+or merge would require a later exact graduation/integration decision.
+
+### Proposal evidence and denials
+
+The proposal's SHA-256 is
+`b7b85c34af390a5b1489b0fdd0d015cd2a4ca554c38533bf4459b7ec26029be3`.
+Its seven focused tests pass, as do root typecheck and focused ESLint. It is
+absent from contributor, npm, workspace, browser, and reviewer barrels;
+`git diff --check` and exact staged review remain checkpoint gates. The
+unchanged `e560551` aggregate is historical evidence only and is not rerun for
+the behavior-free proposal.
+
+Implementation remains unauthorized until a separate immutable review pins
+the proposal checkpoint and digest. Such a review may authorize only the four
+stages above. It must continue to deny a generic/declaration parser, widening
+the categorical parser, browser-side semantic compilation, a static report
+masquerading as a fresh check, any Core/checker/evaluator/rule/equation change,
+active Lambdapi edits, public package/release changes, generated-book edits,
+integration, deployment, and cleanup.
 
 ## Required Evidence For Implementation
 
