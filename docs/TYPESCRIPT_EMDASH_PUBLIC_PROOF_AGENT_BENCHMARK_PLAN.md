@@ -3191,6 +3191,47 @@ static hygiene checks. No new coordinates, operator call, provider/model,
 lease/transcript, integration, publication, deployment, cleanup of preserved
 evidence, or performance/proof claim is authorized. Accounting remains 35/41.
 
+###### R1 implementation qualification checkpoint
+
+CloserFans checkpoint `a6b5e61194551f2cf648226e7e86249eec670168`,
+exact parent `4faef7832ae7ac2131fe1c12e50831084835f60f`, and exact
+tree `fe50a80d4c1c8160a22050487189e5c71e03f969` contain the complete
+four-file R1 correction. Committed file SHA-256 values are:
+
+```text
+6eea2a93d16a1c263ea17458969328535452490386ff6080a725eb6ad83f2e8e  templates/emdash_benchmark/scripts/emdash-canary-real.mts
+2b7cb752a752faf5ed507d613982249f8253c64cb1dea75772aa146a54bb00d5  templates/emdash_benchmark/scripts/emdash-canary.mts
+dcd1b53b9e95db4911e26400ba46ab9c1591a295e42def950e0bcf1087f238c7  templates/emdash_benchmark/scripts/fixtures/emdash-canary-fake-codex.mjs
+37ba4d05b29ebb504b725322ee79ac90af0f3f62254f3a0f556d7841f32f8094  templates/emdash_benchmark/scripts/verify-emdash-canary.mts
+```
+
+The committed 19-entry template snapshot manifest is
+`1d63cef9ed32398ecf768bdaeafc2a4668798d4ed1d83177877804e9a0c5f2e5`;
+the unchanged committed operator is
+`42325cdedd181f36e1e221c6eb9d6fd2aadf89c005b05b55b08cc7e00b6aee01`.
+The direct fresh-installed inner verifier passes all cases in 101.43 seconds,
+the unchanged outer `--canary-only` gate passes under its 120-second bound,
+and the live permission/command probe passes without a model. Formatting,
+exact four-file scope, full staged review, diff/whitespace hygiene, credential-
+shape scan, ancestry, clean worktree, absent contributor/template dependency
+trees, absent real authorization lease, and the preserved receipt hash
+`cb02d5085f855e3a516f5c20f2b5593103b53c38824e5b85e99e530fda25edf3`
+are green.
+
+The evidence history remains explicit: the first R1 outer run timed out; its
+disposable accepted-case diagnosis exposed the tsx CLI `EINVAL`; the amended
+sequential inner matrix later passed in 133.41 seconds but its outer gate still
+expired at 120 seconds; bounded pairwise scheduling then made both exact gates
+green. None of those fake/no-model runs contacted a provider. One mistakenly
+created generated worktree-root dependency tree during disposable setup was
+removed exactly; no tracked file changed and final no-tree checks pass.
+
+This checkpoint authorizes only a new immutable code/preflight review. It does
+not revive the consumed authorization, select new coordinates, or authorize
+an operator/provider/model call, lease, transcript, retry, push, merge,
+deployment, release, Stage B/C, or performance/proof claim. Accounting remains
+35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -3260,7 +3301,10 @@ On continuation:
    treat R1 proposal `58ff991` and its immutable review as authority only for
    the exact three-file local correction and fake/no-model tests; treat the
    evaluator-launch amendment `3f5e428` and its review as authority for only
-   the fourth clean-evaluator launch edit and default-long-path regression; and
+   the fourth clean-evaluator launch edit and default-long-path regression;
+   treat scheduling proposal/review `2b23877`/`5a31712` and CloserFans
+   checkpoint `a6b5e61`, tree `fe50a80`, as the focused-green four-file R1
+   implementation, with no call yet authorized; and
    forbid any retry or alternate coordinate without the amended implementation
    checkpoint, new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe
