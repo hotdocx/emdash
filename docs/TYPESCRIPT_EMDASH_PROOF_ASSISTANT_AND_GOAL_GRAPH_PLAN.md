@@ -110,8 +110,13 @@ both later reductions. That evidence supersedes v5 implementation authority.
 Corrected non-authorizing proposal v6 adds only the complete forward active-
 path fusion, changes the boundary to 5/11/0/6, and is separately approved
 under delegated unattended authority with human supersession at review
-checkpoint `9b22034`; exact v6 semantic implementation may resume. No
-PathOut/PathInd public package export has yet been added.
+checkpoint `9b22034`. Its implementation compiles all eleven selected runtime
+rules, then transparent `pathout_refl_eval_func` exposes the proof-time-only
+`Functor_cat(K,Cat_cat)` versus `Catd_cat(K)` source presentation. Corrected
+non-authorizing proposal v7 adds only the classifier-wrapped forward bridge
+needed by that definition, changes the boundary to 5/12/0/6, and awaits
+checkpoint plus separate review. No PathOut/PathInd public package export has
+yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -666,7 +671,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. Exact-residual counterevidence supersedes reviewed 5/10/0/6 PathInd proposal v5; corrected non-authorizing proposal v6 adds only the complete forward FibCov-target section fusion and awaits checkpoint plus separate review at 5/11/0/6. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A` and root-only `PATHOUT-LIBRARY-FOUNDATION-1B` are complete; the exact 5/13/2/9 foundation is final-proportional-green. Reviewed PathInd v6 compiles all eleven selected runtime rules, then declaration zero exposes the proof-time-only displayed-category source presentation. Corrected non-authorizing proposal v7 adds only a classifier-wrapped forward fusion and awaits checkpoint plus separate review at 5/12/0/6. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -5860,6 +5865,28 @@ typecheck, focused lint, and diff hygiene. Review checkpoint `9b22034` freezes
 that decision and restores authority for only the exact v6 semantic
 implementation.
 
+The attempted v6 semantic compile makes the full selected runtime fragment
+pass: all eleven rules subject-check through the generic runtime engine. The
+next failure is later, at transparent library declaration zero,
+`pathout_refl_eval_func`. Its active `fapp0_func` body infers
+`Functor(Functor_cat(K,Cat_cat),Cat_cat)`, while the declared type exposes
+`Functor(Catd_cat(K),Cat_cat)`. Active proof-time line 5457 relates the two
+inner category presentations, but the generic declaration compiler correctly
+consumes runtime conversion rather than a proof-unification program.
+
+Corrected behavior-free proposal v7 preserves v6 and adds only the forward
+classifier-level fusion
+`Functor(Functor_cat(K,Cat_cat),Cat_cat) ↪
+Functor(Catd_cat(K),Cat_cat)`, pinned to line 5457 and consuming definition
+lines 19067-19072. Its exact boundary is **5/12/0/6**. It does not install a
+direct runtime `Functor_cat → Catd_cat` collapse, widen generic declaration
+checking, or change consumer/oracle scope. It authorizes no new mathematics,
+Core/checker/evaluator branch, active Lambdapi edit, later 1D/1E/1F work,
+public export, integration, or release. V6 checkpoints `b41c3b0` and
+`9b22034` remain backtracking evidence but no longer suffice after the
+measured transparent-definition counterexample. Proposal v7 remains non-
+authorizing until checkpointed and separately reviewed.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6000,6 +6027,7 @@ implementation.
 | `D-PA-134` | Approve only checkpointed corrected PathInd proposal v5 under delegated unattended authority, with human supersession. | Proposal checkpoint `7219828` preserves the exact 5/10/0/6 alias-delta closure, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, and every later/public denial. Separate review checkpoint `3f95e7c` restores local implementation authority without making the proposal self-authorizing. |
 | `D-PA-135` | Supersede the v5 PathInd review and correct proposal v6 to 5/11/0/6 with the exact measured FibCov-target section fusion. | Exact tracing measured `Obj(fapp0(FibCov_target_catd(E),x))` versus `Transf(Rep_catd(x),E)`: named-body unfolding is intentionally absent, so v4/v5 cannot fire before the outer owner mismatch. One forward fusion of the complete active path is narrower than generic declaration unfolding, reversing `Transf`, or changing signatures/the checker. V5 remains backtracking evidence, and v6 still requires its own checkpoint and review. |
 | `D-PA-136` | Approve only checkpointed corrected PathInd proposal v6 under delegated unattended authority, with human supersession. | Proposal checkpoint `b41c3b0` preserves the exact 5/11/0/6 complete forward fusion, active Fibre signatures, completed PathOut predecessor, rho-section consumer, bounded oracle, removed diagnostic hook, and every later/public denial. Separate review checkpoint `9b22034` restores local implementation authority without making the proposal self-authorizing. |
+| `D-PA-137` | Supersede the v6 PathInd review and correct proposal v7 to 5/12/0/6 with one classifier-wrapped source-presentation fusion. | V6 makes all eleven selected runtime rules compile, then transparent `pathout_refl_eval_func` exposes `Functor(Functor_cat(K,Cat_cat),Cat_cat)` versus `Functor(Catd_cat(K),Cat_cat)`. Active proof-time line 5457 relates the inner categories, but transparent declaration checking consumes runtime conversion. Wrapping that exact forward comparison under `Functor(-,Cat_cat)` is narrower than a direct runtime category collapse, generic proof-program integration, or changing the active definition. V6 remains backtracking evidence, and v7 still requires its own checkpoint and separate review. |
 
 ## Validation And Checkpoint Policy
 

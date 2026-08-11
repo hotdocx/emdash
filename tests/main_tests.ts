@@ -247,6 +247,7 @@ import './v3_2_pathind_fixed_source_proposal_v5_tests';
 import './v3_2_pathind_fixed_source_review_v5_tests';
 import './v3_2_pathind_fixed_source_proposal_v6_tests';
 import './v3_2_pathind_fixed_source_review_v6_tests';
+import './v3_2_pathind_fixed_source_proposal_v7_tests';
 import './v3_2_product_review_demo_tests';
 import './v3_2_browser_directed_tests';
 import './v3_2_browser_reviewer_tests';

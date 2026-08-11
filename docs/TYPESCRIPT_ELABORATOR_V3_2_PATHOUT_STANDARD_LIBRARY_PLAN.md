@@ -35,7 +35,12 @@ exact owner tracing shows the outer `FibCov_target_catd` application blocks
 both later reductions; corrected proposal v6 adds only the complete forward
 active-path fusion, changes the boundary to 5/11/0/6, and is separately
 approved under delegated unattended authority with human supersession at
-review checkpoint `9b22034`; semantic implementation may resume, but no
+review checkpoint `9b22034`; v6 implementation confirms that all eleven
+selected runtime rules compile, then the first transparent library definition
+measures the proof-time-only `Functor_cat(K,Cat_cat)` versus `Catd_cat(K)`
+source presentation; corrected non-authorizing proposal v7 adds only the
+classifier-wrapped forward bridge needed by that definition, changes the
+boundary to 5/12/0/6, and awaits checkpoint plus separate review; no
 PathOut/PathInd profile or public export is yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
@@ -198,7 +203,7 @@ named library presentation.
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
-| `PATHIND-TRUSTED-PROFILE-1C` | corrected v6 separately reviewed; implementation ready | completed 1B; proposal/review checkpoints `b41c3b0`/`9b22034`; superseded v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | Exact tracing measured `Obj(fapp0(FibCov_target_catd(E),x))` versus `Transf(Rep_catd(x),E)` before v4/v5 can fire. V6 adds only the complete forward active-path fusion, yielding an approved root-only 5/11/0/6 boundary with unchanged consumer, negative, and nine-assertion oracle scope. |
+| `PATHIND-TRUSTED-PROFILE-1C` | corrected v7 proposal awaiting checkpoint and separate review | completed 1B; v6 proposal/review checkpoints `b41c3b0`/`9b22034`; superseded v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | V6 compiles all eleven selected runtime rules, then transparent `pathout_refl_eval_func` measures `Functor(Functor_cat(K,Cat_cat),Cat_cat)` versus `Functor(Catd_cat(K),Cat_cat)`. V7 proposes only that classifier-wrapped forward presentation fusion, for 5/12/0/6 with unchanged consumer, negative, and nine-assertion oracle scope; it does not install a direct category collapse or change the declaration checker. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -1679,6 +1684,85 @@ git diff --check
 No Lambdapi or long aggregate is relevant to this behavior-free review.
 Review checkpoint `9b22034` freezes that decision. The exact v6 semantic
 implementation may now resume; the review authorizes nothing beyond it.
+
+### `PATHIND-TRUSTED-PROFILE-1C` corrected proposal v7
+
+The v6 implementation supplies the next bounded counterexample only after
+making substantial progress: all eleven selected runtime rules compile
+through the generic runtime engine. Compilation then reaches transparent
+library declaration zero, `pathout_refl_eval_func`, whose body is the active
+`fapp0_func` definition at lines 19067-19072. Its inferred and declared types
+retain two intentionally distinct presentations:
+
+```text
+τ(Functor(Functor_cat(PathOut_cat(Z,x),Cat_cat),Cat_cat))
+τ(Functor(Catd_cat(PathOut_cat(Z,x)),Cat_cat)).
+```
+
+Active line 5457 already relates `Functor_cat(K,Cat_cat)` and `Catd_cat(K)` by
+the proof-time rule
+`categorical.dependent-target.category-presentation`. The generic declaration
+compiler intentionally accepts a runtime program, not a proof-unification
+program, while checking transparent bodies. Widening that generic compiler
+would therefore be a new engine tranche rather than a faithful local closure.
+A direct runtime rewrite from `Functor_cat(K,Cat_cat)` to `Catd_cat(K)` would
+also erase the category-presentation distinction that the existing fibred-
+dependent-target contract explicitly preserves.
+
+The corrected immutable proposal is
+[`src/v3_2/pathind_fixed_source_proposal_v7.ts`](../src/v3_2/pathind_fixed_source_proposal_v7.ts),
+with focused checks in
+[`tests/v3_2_pathind_fixed_source_proposal_v7_tests.ts`](../tests/v3_2_pathind_fixed_source_proposal_v7_tests.ts).
+It instead preserves v6 and proposes one narrower forward fusion under the
+outer classifier:
+
+```text
+Functor(Functor_cat(K,Cat_cat),Cat_cat)
+  ↪ Functor(Catd_cat(K),Cat_cat).
+```
+
+The rule is pinned to active proof-time line 5457 and the consuming definition
+at lines 19067-19072. It must subject-check through the generic runtime
+compiler before any implementation checkpoint. It is local to the sealed
+PathInd profile: it neither installs the underlying category collapse nor
+teaches the declaration compiler to consume proof rules.
+
+The exact local boundary becomes **5/12/0/6**. Five runtime observations,
+nine bounded-oracle assertions, the rho-section consumer, and eight strict
+negatives remain unchanged. The proposal adds no mathematics, generic
+checker/proof integration, Core/checker/evaluator branch, signature/body/
+owner change, active Lambdapi edit, later 1D/1E/1F effect, public export,
+integration, or release. V6 checkpoints `b41c3b0` and `9b22034` remain
+backtracking evidence but no longer suffice for implementation after the
+measured library counterexample.
+
+Proposal v7 remains behavior-free, root-only, non-authorizing, and absent
+from contributor, npm, and browser barrels. Its checkpoint and a separate
+immutable review are mandatory before the implementation draft may adopt the
+twelfth runtime rule.
+
+Corrected-v7 proposal validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_fixed_source_proposal_v7.ts \
+  tests/v3_2_pathind_fixed_source_proposal_v7_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_fixed_source_proposal_v7_tests.ts
+  6 tests / 1 suite: 6 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi or long repository aggregate is relevant to this proposal-only
+correction.
 
 ## Required Evidence For Implementation
 
