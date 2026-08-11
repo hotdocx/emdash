@@ -604,6 +604,401 @@ describe('TypeScript v3.2 DTTLF LF-1C combined conversion', () => {
             );
         });
 
+    it('closes a terminal paired miss through exact shared normal forms', () => {
+        let environment = CoreLfDeclarationEnvironment.empty();
+        environment = environment.extend({
+            name: 'lf_terminal_closure_alias',
+            type: categoryUniverse(35),
+            mode: explicitFunctorial,
+            provenance: because(35, 'LF terminal-closure alias'),
+            body: kernelApplication(
+                'category-of-categories',
+                [],
+                because(35, 'LF terminal-closure alias body')
+            ),
+            transparency: 'transparent'
+        });
+        const alias = free('lf_terminal_closure_alias', 36);
+        const normalizedType = kernelApplication(
+            'category-of-categories',
+            [],
+            because(36, 'LF terminal-closure normalized binder type')
+        );
+        const explicit = kernelLambda(
+            kernelBinder(
+                'explicitValue',
+                alias,
+                explicitFunctorial,
+                because(36, 'LF terminal-closure explicit binder')
+            ),
+            kernelBound(0, because(36, 'LF terminal-closure explicit body')),
+            because(36, 'LF terminal-closure explicit input')
+        );
+        const implicit = kernelLambda(
+            kernelBinder(
+                'implicitValue',
+                alias,
+                binderMode('implicit', 'functorial'),
+                because(37, 'LF terminal-closure implicit binder')
+            ),
+            kernelBound(0, because(37, 'LF terminal-closure implicit body')),
+            because(37, 'LF terminal-closure implicit input')
+        );
+        const normalizedExplicit = kernelLambda(
+            kernelBinder(
+                'explicitValue',
+                normalizedType,
+                explicitFunctorial,
+                because(38, 'LF terminal-closure normalized explicit binder')
+            ),
+            kernelBound(0, because(38, 'LF terminal-closure normalized explicit body')),
+            because(38, 'LF terminal-closure normalized explicit input')
+        );
+        const normalizedImplicit = kernelLambda(
+            kernelBinder(
+                'implicitValue',
+                normalizedType,
+                binderMode('implicit', 'functorial'),
+                because(39, 'LF terminal-closure normalized implicit binder')
+            ),
+            kernelBound(0, because(39, 'LF terminal-closure normalized implicit body')),
+            because(39, 'LF terminal-closure normalized implicit input')
+        );
+        const sharedNormalForm = kernelApplication(
+            'category-of-categories',
+            [],
+            because(39, 'LF terminal-closure shared normal form')
+        );
+        const runtime: CoreLfCatalogRuntime = Object.freeze({
+            revision: 'LF-COMPARISON-NORMAL-FORM-CLOSURE-1',
+            ruleIds: Object.freeze([
+                'fixture.terminal-closure.explicit',
+                'fixture.terminal-closure.implicit'
+            ]),
+            rewriteHead(expression) {
+                const rule = kernelExpressionEquals(
+                    expression,
+                    normalizedExplicit
+                )
+                    ? {
+                        ruleId: 'fixture.terminal-closure.explicit',
+                        ruleIndex: 0
+                    }
+                    : kernelExpressionEquals(expression, normalizedImplicit)
+                        ? {
+                            ruleId: 'fixture.terminal-closure.implicit',
+                            ruleIndex: 1
+                        }
+                        : undefined;
+                if (rule === undefined) {
+                    return Object.freeze({
+                        status: 'irreducible',
+                        expression
+                    });
+                }
+                return Object.freeze({
+                    status: 'rewritten',
+                    ...rule,
+                    before: expression,
+                    after: sharedNormalForm,
+                    match: Object.freeze({
+                        ruleId: rule.ruleId,
+                        bindings: Object.freeze([])
+                    })
+                });
+            }
+        });
+
+        const assertClosed = (
+            left: KernelExpression,
+            right: KernelExpression,
+            expectedRuleIds: readonly string[]
+        ): void => {
+            const comparison = coreLfDefinitionalCompare(
+                environment,
+                left,
+                right,
+                4,
+                undefined,
+                runtime
+            );
+            assert.equal(comparison.status, 'equal');
+            assert.equal(comparison.steps, 4);
+            assert.deepEqual(
+                comparison.trace.map(entry => ({
+                    side: entry.side,
+                    path: entry.path,
+                    kind: entry.reduction.kind,
+                    ruleId: entry.reduction.kind === 'runtime'
+                        ? entry.reduction.ruleId
+                        : undefined
+                })),
+                [
+                    {
+                        side: 'left',
+                        path: ['$', 'lambda:binder-type'],
+                        kind: 'delta',
+                        ruleId: undefined
+                    },
+                    {
+                        side: 'left',
+                        path: ['$'],
+                        kind: 'runtime',
+                        ruleId: expectedRuleIds[0]
+                    },
+                    {
+                        side: 'right',
+                        path: ['$', 'lambda:binder-type'],
+                        kind: 'delta',
+                        ruleId: undefined
+                    },
+                    {
+                        side: 'right',
+                        path: ['$'],
+                        kind: 'runtime',
+                        ruleId: expectedRuleIds[1]
+                    }
+                ]
+            );
+        };
+
+        assertClosed(explicit, implicit, [
+            'fixture.terminal-closure.explicit',
+            'fixture.terminal-closure.implicit'
+        ]);
+        assertClosed(implicit, explicit, [
+            'fixture.terminal-closure.implicit',
+            'fixture.terminal-closure.explicit'
+        ]);
+
+        const exhausted = coreLfDefinitionalCompare(
+            environment,
+            explicit,
+            implicit,
+            3,
+            undefined,
+            runtime
+        );
+        assert.equal(exhausted.status, 'step-limit-exceeded');
+        assert.equal(exhausted.steps, 3);
+        assert.deepEqual(
+            exhausted.status === 'step-limit-exceeded'
+                ? {
+                    side: exhausted.side,
+                    path: exhausted.path,
+                    next: exhausted.next
+                }
+                : undefined,
+            {
+                side: 'right',
+                path: ['$'],
+                next: {
+                    kind: 'runtime',
+                    ruleId: 'fixture.terminal-closure.implicit',
+                    ruleIndex: 1
+                }
+            }
+        );
+
+        const distinct = coreLfDefinitionalCompare(
+            environment,
+            explicit,
+            categoryUniverse(39),
+            4,
+            undefined,
+            runtime
+        );
+        assert.equal(distinct.status, 'not-equal');
+        assert.equal(
+            distinct.status === 'not-equal'
+                ? distinct.mismatch.code
+                : undefined,
+            'OWNER_MISMATCH'
+        );
+    });
+
+    it('replays original roots after paired over-normalization', () => {
+        let environment = CoreLfDeclarationEnvironment.empty();
+        const assumeCategory = (name: string, line: number): void => {
+            environment = environment.extend({
+                name,
+                type: categoryUniverse(line),
+                mode: explicitFunctorial,
+                provenance: because(line, `LF source-replay category ${name}`)
+            });
+        };
+        assumeCategory('lf_replay_A', 45);
+        assumeCategory('lf_replay_B', 46);
+        const A = free('lf_replay_A', 47);
+        const B = free('lf_replay_B', 47);
+        const defineAlias = (
+            name: string,
+            body: KernelExpression,
+            line: number
+        ): void => {
+            environment = environment.extend({
+                name,
+                type: categoryUniverse(line),
+                mode: explicitFunctorial,
+                provenance: because(line, `LF source-replay alias ${name}`),
+                body,
+                transparency: 'transparent'
+            });
+        };
+        defineAlias('lf_replay_gate', A, 47);
+        defineAlias('lf_replay_left_payload', A, 48);
+        defineAlias('lf_replay_right_payload', B, 49);
+
+        const parent = free('lf_replay_parent', 50);
+        const gate = free('lf_replay_gate', 50);
+        const leftPayload = free('lf_replay_left_payload', 50);
+        const rightPayload = free('lf_replay_right_payload', 50);
+        const parentCall = (
+            first: KernelExpression,
+            second: KernelExpression,
+            line: number
+        ): KernelExpression => kernelCall(parent, [
+            { plicity: 'explicit', value: first },
+            { plicity: 'explicit', value: second }
+        ], because(line, 'LF source-replay parent call'));
+        const left = parentCall(gate, leftPayload, 50);
+        const right = parentCall(gate, rightPayload, 51);
+        const leftIntermediate = parentCall(A, leftPayload, 52);
+        const rightIntermediate = parentCall(A, rightPayload, 53);
+        const sharedNormalForm = categoryUniverse(54);
+        const runtime: CoreLfCatalogRuntime = Object.freeze({
+            revision: 'LF-COMPARISON-SOURCE-REPLAY-1',
+            ruleIds: Object.freeze([
+                'fixture.source-replay.left-intermediate',
+                'fixture.source-replay.right-intermediate'
+            ]),
+            rewriteHead(expression) {
+                const rule = kernelExpressionEquals(
+                    expression,
+                    leftIntermediate
+                )
+                    ? {
+                        ruleId: 'fixture.source-replay.left-intermediate',
+                        ruleIndex: 0
+                    }
+                    : kernelExpressionEquals(expression, rightIntermediate)
+                        ? {
+                            ruleId:
+                                'fixture.source-replay.right-intermediate',
+                            ruleIndex: 1
+                        }
+                        : undefined;
+                if (rule === undefined) {
+                    return Object.freeze({
+                        status: 'irreducible',
+                        expression
+                    });
+                }
+                return Object.freeze({
+                    status: 'rewritten',
+                    ...rule,
+                    before: expression,
+                    after: sharedNormalForm,
+                    match: Object.freeze({
+                        ruleId: rule.ruleId,
+                        bindings: Object.freeze([])
+                    })
+                });
+            }
+        });
+
+        const assertReplay = (
+            first: KernelExpression,
+            second: KernelExpression,
+            expectedReplayRuleIds: readonly string[]
+        ): void => {
+            const comparison = coreLfDefinitionalCompare(
+                environment,
+                first,
+                second,
+                8,
+                undefined,
+                runtime
+            );
+            assert.equal(comparison.status, 'equal');
+            assert.equal(comparison.steps, 8);
+            assert.deepEqual(
+                comparison.trace.slice(-4).map(entry => ({
+                    side: entry.side,
+                    path: entry.path,
+                    kind: entry.reduction.kind,
+                    ruleId: entry.reduction.kind === 'runtime'
+                        ? entry.reduction.ruleId
+                        : undefined
+                })),
+                [
+                    {
+                        side: 'left',
+                        path: ['$','call:argument:0'],
+                        kind: 'delta',
+                        ruleId: undefined
+                    },
+                    {
+                        side: 'left',
+                        path: ['$'],
+                        kind: 'runtime',
+                        ruleId: expectedReplayRuleIds[0]
+                    },
+                    {
+                        side: 'right',
+                        path: ['$','call:argument:0'],
+                        kind: 'delta',
+                        ruleId: undefined
+                    },
+                    {
+                        side: 'right',
+                        path: ['$'],
+                        kind: 'runtime',
+                        ruleId: expectedReplayRuleIds[1]
+                    }
+                ]
+            );
+        };
+
+        assertReplay(left, right, [
+            'fixture.source-replay.left-intermediate',
+            'fixture.source-replay.right-intermediate'
+        ]);
+        assertReplay(right, left, [
+            'fixture.source-replay.right-intermediate',
+            'fixture.source-replay.left-intermediate'
+        ]);
+
+        const exhausted = coreLfDefinitionalCompare(
+            environment,
+            left,
+            right,
+            7,
+            undefined,
+            runtime
+        );
+        assert.equal(exhausted.status, 'step-limit-exceeded');
+        assert.equal(exhausted.steps, 7);
+        assert.deepEqual(
+            exhausted.status === 'step-limit-exceeded'
+                ? {
+                    side: exhausted.side,
+                    path: exhausted.path,
+                    next: exhausted.next
+                }
+                : undefined,
+            {
+                side: 'right',
+                path: ['$'],
+                next: {
+                    kind: 'runtime',
+                    ruleId: 'fixture.source-replay.right-intermediate',
+                    ruleIndex: 1
+                }
+            }
+        );
+    });
+
     it('counts solved-meta zonking in the same budget as transparent delta', () => {
         let environment = CoreLfDeclarationEnvironment.empty();
         environment = environment.extend({
@@ -833,6 +1228,58 @@ describe('TypeScript v3.2 DTTLF LF-1C combined conversion', () => {
         );
         assert.equal(stuck.status, 'stuck');
         assert.equal(stuck.steps, 0);
+
+        const plicityComparison = coreLfDefinitionalCompare(
+            environment,
+            mismatch,
+            free('lf_check_A', 70),
+            4
+        );
+        assert.equal(plicityComparison.status, 'not-equal');
+        assert.equal(
+            plicityComparison.status === 'not-equal'
+                ? plicityComparison.mismatch.code
+                : undefined,
+            'PLICITY_MISMATCH'
+        );
+
+        const structuralPlicityCallee = free(
+            'lf_structural_plicity_function',
+            70
+        );
+        const explicitApplication = kernelCall(structuralPlicityCallee, [{
+            plicity: 'explicit',
+            value: categoryUniverse(70)
+        }], because(70, 'LF-1C explicit structural plicity'));
+        const implicitApplication = kernelCall(structuralPlicityCallee, [{
+            plicity: 'implicit',
+            value: categoryUniverse(70)
+        }], because(70, 'LF-1C implicit structural plicity'));
+        const structuralPlicity = coreLfDefinitionalCompare(
+            environment,
+            explicitApplication,
+            implicitApplication,
+            4
+        );
+        assert.equal(structuralPlicity.status, 'not-equal');
+        assert.equal(
+            structuralPlicity.status === 'not-equal'
+                ? structuralPlicity.mismatch.code
+                : undefined,
+            'PLICITY_MISMATCH'
+        );
+        assert.equal(
+            structuralPlicity.status === 'not-equal'
+                ? structuralPlicity.normalizedLeft.tag
+                : undefined,
+            'call'
+        );
+        assert.equal(
+            structuralPlicity.status === 'not-equal'
+                ? structuralPlicity.normalizedRight.tag
+                : undefined,
+            'call'
+        );
 
         const function_ = free('lf_eta_function', 71);
         const etaExpansion = kernelLambda(

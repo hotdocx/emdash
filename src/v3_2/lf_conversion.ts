@@ -538,6 +538,24 @@ type CoreLfComparisonHead =
         { readonly status: 'step-limit-exceeded' }
     >;
 
+type InternalCoreLfNormalizationOutcome =
+    | {
+        readonly status: 'normal';
+        readonly expression: KernelExpression;
+    }
+    | {
+        readonly status: 'plicity-stuck';
+        readonly side: CoreLfComparisonSide;
+        readonly path: readonly string[];
+        readonly expression: KernelExpression;
+        readonly expectedPlicity: Plicity;
+        readonly actualPlicity: Plicity;
+    }
+    | Extract<
+        InternalCoreLfComparisonOutcome,
+        { readonly status: 'step-limit-exceeded' }
+    >;
+
 const freezePath = (path: readonly string[]): readonly string[] =>
     Object.freeze([...path]);
 
@@ -604,7 +622,10 @@ const comparisonMismatch = (
         readonly expectedPlicity: Plicity;
         readonly actualPlicity: Plicity;
     }
-): InternalCoreLfComparisonOutcome => ({
+): Extract<
+    InternalCoreLfComparisonOutcome,
+    { readonly status: 'not-equal' }
+> => ({
     status: 'not-equal',
     normalizedLeft: left,
     normalizedRight: right,
@@ -918,6 +939,60 @@ const freezeNormalizationTrace = (
     }))
 );
 
+const normalizeCoreLfAt = (
+    expression: KernelExpression,
+    side: CoreLfComparisonSide,
+    path: readonly string[],
+    state: MutableCoreLfComparisonState,
+    stopWhen?: (expression: KernelExpression) => boolean
+): InternalCoreLfNormalizationOutcome => {
+    let current = expression;
+
+    while (true) {
+        const head = comparisonWeakHeadAt(
+            current,
+            side,
+            path,
+            state
+        );
+        if (head.status === 'step-limit-exceeded') return head;
+        if (head.status === 'plicity-stuck') {
+            return {
+                status: 'plicity-stuck',
+                side,
+                path: freezePath(path),
+                expression: head.expression,
+                expectedPlicity: head.expectedPlicity,
+                actualPlicity: head.actualPlicity
+            };
+        }
+        current = head.expression;
+        if (stopWhen?.(current) === true) {
+            return {
+                status: 'normal',
+                expression: current
+            };
+        }
+
+        const descendant = reduceOneCoreLfDescendantAt(
+            current,
+            side,
+            path,
+            state
+        );
+        if (descendant.status === 'step-limit-exceeded') {
+            return descendant;
+        }
+        if (descendant.status === 'unchanged') {
+            return {
+                status: 'normal',
+                expression: current
+            };
+        }
+        current = descendant.expression;
+    }
+};
+
 /**
  * Deterministically normalize an expression under one global operation
  * budget. Each iteration normalizes the current head, then the first
@@ -951,71 +1026,45 @@ export function coreLfCombinedNormalize(
         trace: []
     };
     const rootPath = ['$'];
-    let current = expression;
+    const outcome = normalizeCoreLfAt(
+        expression,
+        'left',
+        rootPath,
+        state,
+        stopWhen
+    );
 
-    while (true) {
-        const head = comparisonWeakHeadAt(
-            current,
-            'left',
-            rootPath,
-            state
-        );
-        if (head.status === 'step-limit-exceeded') {
+    switch (outcome.status) {
+        case 'step-limit-exceeded':
             return Object.freeze({
                 status: 'step-limit-exceeded' as const,
-                expression: head.expression,
+                expression: outcome.expression,
                 steps: state.trace.length,
                 trace: freezeNormalizationTrace(state.trace),
-                path: head.path,
-                next: head.next
+                path: outcome.path,
+                next: outcome.next
             });
-        }
-        if (head.status === 'plicity-stuck') {
+        case 'plicity-stuck':
             return Object.freeze({
                 status: 'stuck' as const,
-                expression: head.expression,
+                expression: outcome.expression,
                 steps: state.trace.length,
                 trace: freezeNormalizationTrace(state.trace),
                 reason: 'plicity-mismatch' as const,
-                expectedPlicity: head.expectedPlicity,
-                actualPlicity: head.actualPlicity
+                expectedPlicity: outcome.expectedPlicity,
+                actualPlicity: outcome.actualPlicity
             });
-        }
-        current = head.expression;
-        if (stopWhen?.(current) === true) {
+        case 'normal':
             return Object.freeze({
                 status: 'normal' as const,
-                expression: current,
+                expression: outcome.expression,
                 steps: state.trace.length,
                 trace: freezeNormalizationTrace(state.trace)
             });
+        default: {
+            const exhaustive: never = outcome;
+            return exhaustive;
         }
-
-        const descendant = reduceOneCoreLfDescendantAt(
-            current,
-            'left',
-            rootPath,
-            state
-        );
-        if (descendant.status === 'step-limit-exceeded') {
-            return Object.freeze({
-                status: 'step-limit-exceeded' as const,
-                expression: descendant.expression,
-                steps: state.trace.length,
-                trace: freezeNormalizationTrace(state.trace),
-                path: descendant.path,
-                next: descendant.next
-            });
-        }
-        if (descendant.status === 'unchanged') {
-            return Object.freeze({
-                status: 'normal' as const,
-                expression: current,
-                steps: state.trace.length,
-                trace: freezeNormalizationTrace(state.trace)
-            });
-        }
-        current = descendant.expression;
     }
 }
 
@@ -1210,7 +1259,7 @@ const compareCoreLfAt = (
                     `application:${left.owner}:argument:${index}`
                 );
                 if (leftArgument.plicity !== rightArgument.plicity) {
-                    return comparisonMismatch(
+                    const mismatch = comparisonMismatch(
                         'PLICITY_MISMATCH',
                         argumentPath,
                         leftArgument.value,
@@ -1220,6 +1269,11 @@ const compareCoreLfAt = (
                             actualPlicity: rightArgument.plicity
                         }
                     );
+                    return {
+                        ...mismatch,
+                        normalizedLeft,
+                        normalizedRight
+                    };
                 }
                 const outcome = compareCoreLfAt(
                     leftArgument.value,
@@ -1340,7 +1394,7 @@ const compareCoreLfAt = (
                     `call:argument:${index}`
                 );
                 if (leftArgument.plicity !== rightArgument.plicity) {
-                    return comparisonMismatch(
+                    const mismatch = comparisonMismatch(
                         'PLICITY_MISMATCH',
                         argumentPath,
                         leftArgument.value,
@@ -1350,6 +1404,11 @@ const compareCoreLfAt = (
                             actualPlicity: rightArgument.plicity
                         }
                     );
+                    return {
+                        ...mismatch,
+                        normalizedLeft,
+                        normalizedRight
+                    };
                 }
                 const outcome = compareCoreLfAt(
                     leftArgument.value,
@@ -1510,6 +1569,73 @@ const compareCoreLfAt = (
     }
 };
 
+const closeCoreLfComparisonAtNormalForms = (
+    outcome: Extract<
+        InternalCoreLfComparisonOutcome,
+        { readonly status: 'not-equal' }
+    >,
+    originalLeft: KernelExpression,
+    originalRight: KernelExpression,
+    path: readonly string[],
+    state: MutableCoreLfComparisonState
+): InternalCoreLfComparisonOutcome => {
+    const left = normalizeCoreLfAt(
+        originalLeft,
+        'left',
+        path,
+        state
+    );
+    if (left.status === 'step-limit-exceeded') return left;
+    if (left.status === 'plicity-stuck') {
+        return comparisonMismatch(
+            'PLICITY_MISMATCH',
+            childPath(path, 'terminal:left:weak-head-plicity'),
+            left.expression,
+            originalRight,
+            left
+        );
+    }
+
+    const right = normalizeCoreLfAt(
+        originalRight,
+        'right',
+        path,
+        state
+    );
+    if (right.status === 'step-limit-exceeded') return right;
+    if (right.status === 'plicity-stuck') {
+        return comparisonMismatch(
+            'PLICITY_MISMATCH',
+            childPath(path, 'terminal:right:weak-head-plicity'),
+            left.expression,
+            right.expression,
+            right
+        );
+    }
+
+    const retried = compareCoreLfAt(
+        left.expression,
+        right.expression,
+        path,
+        state
+    );
+    if (retried.status === 'step-limit-exceeded') return retried;
+    if (retried.status === 'equal') {
+        return kernelExpressionEquals(left.expression, right.expression)
+            ? comparisonEqual(left.expression, right.expression)
+            : {
+                ...outcome,
+                normalizedLeft: left.expression,
+                normalizedRight: right.expression
+            };
+    }
+    return {
+        ...retried,
+        normalizedLeft: left.expression,
+        normalizedRight: right.expression
+    };
+};
+
 const freezeComparisonTrace = (
     trace: readonly CoreLfComparisonTraceEntry[]
 ): readonly CoreLfComparisonTraceEntry[] => Object.freeze(
@@ -1548,7 +1674,16 @@ export function coreLfDefinitionalCompare(
         stepLimit,
         trace: []
     };
-    const outcome = compareCoreLfAt(left, right, ['$'], state);
+    const pairedOutcome = compareCoreLfAt(left, right, ['$'], state);
+    const outcome = pairedOutcome.status === 'not-equal'
+        ? closeCoreLfComparisonAtNormalForms(
+            pairedOutcome,
+            left,
+            right,
+            ['$'],
+            state
+        )
+        : pairedOutcome;
     const base = {
         steps: state.trace.length,
         trace: freezeComparisonTrace(state.trace)

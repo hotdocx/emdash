@@ -77,9 +77,23 @@ supersession. Semantic replay admits all five rules preceding the final
 `PathInd_transfd` projection but exposes a generic comparison-closure defect:
 after adding the active `Pi_pullback_funcd` component projection in memory,
 both subject types normalize to the same exact Core expression while paired
-comparison still returns `not-equal`. The behavior-free generic closure
-proposal/review are checkpointed at `cf8ed76`/`778da06`; PathInd expansion is
-paused until that reviewed prerequisite is implemented.
+comparison still returns `not-equal`. Generic closure proposal/review v1 at
+`cf8ed76`/`778da06` selected outcome-root replay, but execution proved that
+the paired traversal can normalize past an intermediate parent redex.
+Corrected generic proposal/review v2 at `a42ffc9`/`5277885` instead replay the
+original source roots under the same already-consumed budget; its focused
+implementation candidate is green. Corrected internalized PathInd proposal/
+review v5 at `fe0306d`/`a94c2f7` add the active `Pi_pullback_funcd` projection
+at 4/7/0/10. Proposal/review v6 at `19eb941`/`2112543` add one local two-sided
+decoded functor-category presentation bridge at 4/8/0/10. V6 compiles all
+eight rules and the first transparent definition. The next definition exposed
+that `compileCoreLfDeclarations` recorded but did not apply its requested
+512-step checking budget; the default-preserving propagation proposal/review
+are checkpointed at `9238104`/`a4d61a9`, and their focused implementation
+candidate is green. With the existing 512 request effective, replay proceeds
+284 steps to a local `functor-object` category-presentation mismatch in
+`pathout_motive_transport_arrow`. The next local correction is measured but
+not yet frozen. No public PathOut/PathInd export is authorized.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -2545,6 +2559,96 @@ budget reset, proof search, unification, a PathInd-specific outer commuting
 rewrite, public effects, and active Lambdapi changes. Ten proposal/review
 tests, root typecheck, focused lint, and diff hygiene are green; no Lambdapi
 execution or aggregate is relevant to the behavior-free authority files.
+
+### Corrected generic comparison v2, internalized v5/v6, and effective budget
+
+Implementation of the first generic closure proposal supplied stricter
+counterevidence. The paired traversal returned two already-normal roots that
+remained distinct, even though independently normalizing the original source
+roots took 58 and 68 steps and produced one exact expression. Paired descent
+had reduced past an intermediate parent redex. Corrected non-authorizing
+proposal v2 is
+[`src/v3_2/lf_conversion_normal_form_closure_proposal_v2.ts`](../src/v3_2/lf_conversion_normal_form_closure_proposal_v2.ts),
+checkpointed at `a42ffc9`; its separate review is
+[`src/v3_2/lf_conversion_normal_form_closure_review_v2.ts`](../src/v3_2/lf_conversion_normal_form_closure_review_v2.ts),
+checkpointed at `5277885`. It authorizes only deterministic original-left,
+then original-right replay after paired `not-equal`, using the remaining part
+of the same global budget and preserving the complete trace. Focused tests
+cover symmetry, exhaustion, distinct normal forms, direct plicity mismatch,
+and the exact lost-parent-redex case. They pass with root typecheck and
+focused lint. No new reduction equation, proof search, memoization, Core node,
+public surface, or active Lambdapi change is introduced.
+
+Corrected internalized proposal v5 is
+[`src/v3_2/pathind_internalized_proposal_v5.ts`](../src/v3_2/pathind_internalized_proposal_v5.ts),
+checkpointed at `fe0306d`; its separate review at `a94c2f7` authorizes exactly
+**4/7/0/10** after the generic prerequisite. It adds active authority line
+12680's pointwise `Pi_pullback_funcd` projection with both inferred family
+slots retained as typed wildcards. The boundary contains five mathematical
+runtime projections, two derived support rules, zero proof rules, and ten
+transparent definitions.
+
+Once all seven v5 runtime rules compiled, the first transparent definition,
+`pathout_motive_transport_obj`, compared
+
+```text
+τ(Obj(Functor_cat(Functor_cat(PathOut_x,Cat_cat),
+                  Functor_cat(PathOut_y,Cat_cat))))
+```
+
+with
+
+```text
+τ(Obj(Functor_cat(Catd_cat(PathOut_x),Catd_cat(PathOut_y)))).
+```
+
+Active line 5457 relates each inner category presentation at proof time, but
+transparent declaration checking intentionally consumes runtime conversion.
+The earlier fixed-source profile already established the narrower design
+precedent: add a classifier-wrapped local bridge rather than a global category
+collapse or generic proof-program integration. Corrected proposal v6 at
+`19eb941` and separate review `2112543` therefore authorize one two-sided
+decoded classifier bridge. The exact boundary becomes **4/8/0/10**: five
+mathematical projections and three local non-mathematical supports. Twelve
+combined proposal/review tests, root typecheck, focused lint, and diff hygiene
+are green.
+
+V6 compilation proves that bridge sufficient: all eight rules and
+`pathout_motive_transport_obj` compile. The next definition,
+`pathout_motive_transport_arrow`, initially stopped with a 256-step exhaustion
+despite every internalized compilation call requesting 512. Source inspection
+found a generic plumbing defect: `compileCoreLfDeclarations` validated and
+stored `options.comparisonStepLimit`, but created its compilation-time checker
+factory before resolving the option and never passed the value into that
+checker. The non-authorizing proposal
+[`src/v3_2/lf_transfer_declaration_budget_proposal.ts`](../src/v3_2/lf_transfer_declaration_budget_proposal.ts)
+is checkpointed at `9238104`; separate review
+[`src/v3_2/lf_transfer_declaration_budget_review.ts`](../src/v3_2/lf_transfer_declaration_budget_review.ts)
+at `a4d61a9` authorizes only exact propagation through a private factory. The
+public option and one-argument factory signature remain unchanged, the default
+remains 256, and unbounded/adaptive or PathInd-specific budgets remain denied.
+A one-delta fixture now fails at explicit limit zero, passes at one, preserves
+the default at 256, and still rejects invalid limits; all nearest compiler
+tests, root typecheck, and focused lint are green. The one required shared-
+TypeScript gate also exits zero with 1,923 tests, 1,867 passing, 56 explicitly
+skipped, and no failures; no second aggregate run is needed for this boundary.
+
+With 512 now effective, the same PathInd replay no longer exhausts. It reaches
+284 bounded steps and exposes the next exact local pair inside the action on a
+motive:
+
+```text
+fapp0(Functor_cat(K,Cat_cat), Functor_cat(L,Cat_cat), F, E)
+≠
+fapp0(Catd_cat(K), Catd_cat(L), F, E).
+```
+
+Here `K = PathOut_Z(x)`, `L = PathOut_Z(y)`, and `F` is the motive action along
+`p`. This is the action-level form of v6's already measured presentation
+boundary. It is not a mathematical mismatch and does not justify reopening
+generic declaration proof integration. A possible fourth local support rule
+must be frozen and separately reviewed before implementation. No diagnostic
+wrapper, source observer, or active Lambdapi edit remains.
 
 ## Required Evidence For Implementation
 

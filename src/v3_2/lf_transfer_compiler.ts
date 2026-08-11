@@ -450,7 +450,9 @@ class CoreLfTransferDeclarationChecker extends CoreChecker {
         environment: CoreDeclarationEnvironment,
         private readonly deltaEnvironment:
             CoreLfDeclarationEnvironment,
-        private readonly runtimeProgram?: CoreLfCatalogRuntime
+        private readonly runtimeProgram?: CoreLfCatalogRuntime,
+        private readonly comparisonStepLimit =
+            CORE_LF_CANDIDATE_COMPARISON_STEP_LIMIT
     ) {
         super(new CoreElaborationSession(environment));
     }
@@ -461,6 +463,10 @@ class CoreLfTransferDeclarationChecker extends CoreChecker {
 
     protected conversionDiagnosticName(): string {
         return 'Transferred Core LF declaration conversion';
+    }
+
+    protected constraintComparisonStepLimit(): number {
+        return this.comparisonStepLimit;
     }
 
     protected compareDefinitions(
@@ -487,8 +493,9 @@ class CoreLfTransferDeclarationChecker extends CoreChecker {
     }
 }
 
-export const createCoreLfTransferDeclarationCheckerFactory = (
-    runtimeProgram?: CoreLfCatalogRuntime
+const createCoreLfTransferDeclarationCheckerFactoryAtLimit = (
+    runtimeProgram: CoreLfCatalogRuntime | undefined,
+    comparisonStepLimit: number
 ): CoreLfDeclarationCheckerFactory =>
     (
         environment: CoreDeclarationEnvironment,
@@ -496,7 +503,16 @@ export const createCoreLfTransferDeclarationCheckerFactory = (
     ) => new CoreLfTransferDeclarationChecker(
         environment,
         context.lfEnvironment,
-        runtimeProgram
+        runtimeProgram,
+        comparisonStepLimit
+    );
+
+export const createCoreLfTransferDeclarationCheckerFactory = (
+    runtimeProgram?: CoreLfCatalogRuntime
+): CoreLfDeclarationCheckerFactory =>
+    createCoreLfTransferDeclarationCheckerFactoryAtLimit(
+        runtimeProgram,
+        CORE_LF_CANDIDATE_COMPARISON_STEP_LIMIT
     );
 
 interface CompilationState {
@@ -1175,10 +1191,6 @@ export function compileCoreLfDeclarations(
         }
     }
 
-    const checkerFactory =
-        createCoreLfTransferDeclarationCheckerFactory(
-            options.runtimeProgram
-        );
     const comparisonStepLimit =
         options.comparisonStepLimit ??
         CORE_LF_CANDIDATE_COMPARISON_STEP_LIMIT;
@@ -1192,6 +1204,11 @@ export function compileCoreLfDeclarations(
             'Declaration comparison budget must be a nonnegative safe integer'
         );
     }
+    const checkerFactory =
+        createCoreLfTransferDeclarationCheckerFactoryAtLimit(
+            options.runtimeProgram,
+            comparisonStepLimit
+        );
 
     const compiled: CoreLfCompiledDeclaration[] = [];
     const compiledBySymbol =
