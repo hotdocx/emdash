@@ -832,7 +832,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | policy audit ready; all effects gated | Installed 12B3 consumer now exists. A separate read-only audit must freeze provider identity/credentials, execution boundary, exact prompts/inputs, retention/privacy, reproducibility, cost/usage semantics, reporting, and graduation before any real run or claim. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | policy proposal frozen; all effects gated | The completed read-only audit freezes a three-stage route: mock-tested local open-book canary, separately designed decontaminated repeated suite, then evidence-limited graduation. The first review may authorize only Stage A implementation; a second exact preflight review is required before one real model call. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -859,10 +859,10 @@ read-only 12B3 audit is frozen in
 exactly bounded by proposal/review checkpoints `bb16e47`/`0027c66`. No later-
 row effect follows automatically.
 
-Roadmap accounting after this row is 34 of 41 scoped rows complete. The seven
+Roadmap accounting after this row is 35 of 41 scoped rows complete. The six
 remaining rows are the deliberately deferred/gated `SIMP-5B2`,
 `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`,
-`AGENT-EVAL-12B3`, `AGENT-EVAL-12B4`, and `GOAL-GRAPH-14B4`.
+`AGENT-EVAL-12B4`, and `GOAL-GRAPH-14B4`.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -6307,6 +6307,90 @@ Proportional validation is exact source inventory, link/heading review,
 worktree/ancestry preservation, and diff hygiene. No test or aggregate can add
 relevant evidence to this plan-only selection.
 
+## `AGENT-EVAL-12B4` Read-Only Audit And Frozen Stage A Policy
+
+Date: 2026-08-11
+
+Result: the provider/execution/retention/privacy/reporting audit is complete;
+the exact behavior-free contract lives in
+[`TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md`](./TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md).
+No model, benchmark attempt, provider credential, retained transcript,
+performance claim, sibling edit, or external mutation occurred.
+
+All Emdash worktrees were clean. The active goal branch, local/public `main`,
+and remote goal branch were exact `3727015`, and the isolated CloserFans
+benchmark worktree was clean at local `master` `cbf2356`. Exact public
+`@hotdocx/emdash@0.3.0`, the six-track/ten-case corpus, pure evaluator, strict
+interchange, stateless runner, and all-abstention CloserFans source remain
+unchanged authorities.
+
+The audit selects installed `codex-cli 0.147.0`, requested model
+`gpt-5.6-sol`, local catalog `comp_hash` `3000`, high reasoning, low verbosity,
+no reasoning summary, and existing local ChatGPT authentication for the first
+possible canary. Official current Codex documentation establishes ephemeral
+non-interactive JSONL/output-schema controls, explicit approval and search
+settings, command-network isolation, environment filtering, and beta
+least-privilege filesystem profiles. The model alias has no separately dated
+snapshot in the audited model page; configuration can be reproduced, but
+bitwise or time-stable model behavior cannot be claimed. ChatGPT usage token
+fields are provider-reported operational data and must not be converted to API
+list-price dollars.
+
+A no-model security probe rejected the initial legacy `workspace-write`
+design: commands could read the cached ChatGPT auth file. A second no-model
+probe succeeded with a permission profile that denies the filesystem root,
+reopens only minimal tools plus the exact installed Node/Codex runtime,
+reopens the disposable workspace, denies secret-like workspace files, and
+keeps command network off. Stage A must additionally give commands an
+inherit-nothing constructed environment with a private fake home/temp,
+disable user config/rules, web search, plugins, MCP discovery, hooks, memories,
+skills discovery/installation, and subagents, and fail closed unless exact
+credential/file/write/network probes pass. Parent authentication is never
+made available as command environment or readable filesystem data.
+
+The public benchmark is not blind. Its `reference` command and installed
+package expose owner patches. Therefore the first runnable stage is one local
+**open-book workflow canary** for `native.exact.local-premise`, permanently
+labeled `public-owner-reference-accessible` and
+`graduationEligible=false`. It may demonstrate source inspection, one bounded
+edit, stateless evaluation, and independent checker replay. It cannot support
+a proof-success rate, model/prover comparison, leaderboard, representative
+score, or graduation even if command audit shows no reference inspection.
+
+The one roadmap row now has three internal stages without changing the 41-row
+accounting:
+
+1. Stage A: separately reviewed mock/fake-process CloserFans runner, followed
+   by another exact preflight review and at most one local open-book call;
+2. Stage B: a separately designed split agent/evaluator environment which
+   makes owner answers inaccessible, followed by repeated trials over all ten
+   unchanged cases; and
+3. Stage C: only the measured claims justified by Stage B's exact outcomes,
+   contamination audit, usage, and uncertainty.
+
+The first immutable review may authorize only additive local Stage A runner
+implementation on a new CloserFans branch/worktree from clean `cbf2356`. It
+must use a tracked prompt and strict final schema, permit edits only to the
+selected attempt in `benchmark-run.emdash.ts`, audit every JSONL event and
+command fail-closed, preserve abstained/rejected/incomplete/accepted/process
+outcomes separately, and rerun the unchanged canonical evaluator after the
+agent exits. Raw JSONL/model text remains private and untracked; only a
+privacy-minimized receipt plus canonical source/attempt/report may survive
+review. The receipt binds exact source/package/corpus/case/prompt/schema,
+CLI/model/configuration, permission and command audits, token/time reports,
+diff/evaluator hashes, contamination, and non-authority flags without account
+or credential data.
+
+The implementation checkpoint still performs no real call. A second
+immutable review must bind its exact code/tests, credential-denial and network
+probes, selected task bytes, private retention/removal boundary, and one-call
+limit before any provider effect. Stage A does not modify Emdash semantics,
+the native chat runner, controller/API/MCP/database, package/release, cloud,
+Arrowgram, Lambdapi, mathematics, book/print, or another template. Focused
+mock runner, permission, template, typecheck/lint, diff, and secret gates are
+sufficient; long aggregates remain omitted unless their absence becomes an
+exact progress blocker.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6509,6 +6593,7 @@ relevant evidence to this plan-only selection.
 | `D-PA-195` | Qualify the reviewed 12B3-R2 temporary dispatch implementation at exact semantic checkpoint `7e275a7`. | Exactly the npm workflow and focused policy test change behavior. The only manual input is a required one-option `emdash-v0.3.0` choice; event resolution and job condition distinguish it from ordinary releases while retaining credential-empty immutable-tag checkout, artifact handoff, protected OIDC, and every package byte. Focused 3/3 release policy, workspace, root typecheck, lint, package build/preflight, YAML parse, and diff hygiene pass; all long/kernel/book/browser/packed/sibling/hosted gates remain omitted. This plan-only pin advances only to clean integration and one exact dispatch. |
 | `D-PA-196` | Verify exact public `@hotdocx/emdash@0.3.0` from recovery run `31510726533` and complete mandatory permanent hardening at exact checkpoint `3af518d`. | Exact build/publish jobs `93843570505`/`93843776669`, protected environment `19605245682`, deployment `5854097178`, artifact `9108950678`, OIDC/SLSA/npm attestations, signature, Sigstore log `2423388773`, dist metadata, and fresh installed consumers are green. Local, artifact, and registry tarballs are byte-identical at 162 entries, 2,778,964 bytes, SHA-256 `49c4f2ca7a12f1bc0f7721044015c1df3bee17e849bc593b99a9161206178541`. Workflow provenance resolves `7e275a7`; build logs prove package source `995e497`. Exact temporary-dispatch removal restores the reviewed R1 workflow/test blobs and passes 3/3 policy, lint, YAML, trigger-absence, and diff gates. This plan-only pin advances only to clean integration/public-byte verification before CloserFans. |
 | `D-PA-197` | Complete `AGENT-EVAL-12B3` with the focused-green source-first CloserFans consumer at exact local checkpoint `cbf2356`. | Public `main` first reached exact hardening `3af518d` with workflow SHA-256 `97ea63caafdd4efd0d17eee9d99fded2ab0acf560257349e34469c633ccf8201`. Concurrent unrelated CloserFans commit `8980842` was preserved and isolated without rewrite; recovery branch/worktree restarted from exact `5c0d0c1`. The additive 14-file template imports exact public `0.3.0`, begins with ten source abstentions, freshly exposes seven stateless commands and separate 9/1 owner reference, and adds no provider/session/network/write/pool/API authority. Disposable registry/runtime negatives, template validation, root typecheck, real targeted lint, server syntax, staged diff/secret/unchanged-owner gates pass. Candidate parent and local `master` were exact `5c0d0c1`; `--ff-only` advanced both master and recovery branch to `cbf2356` with no remote/push/deployment. All long, cloud, controller, database, API/MCP, Arrowgram, kernel/book, and real-agent gates remain omitted. 12B4 advances only to a read-only policy audit. |
+| `D-PA-198` | Freeze `AGENT-EVAL-12B4` as a three-stage program whose first separately reviewed implementation is a non-graduating one-case open-book Codex canary. | Public owner references make the installed 12B3 workspace unsuitable for blind measurement. Installed Codex 0.147.0 and official controls support a standalone ephemeral JSONL runner, but a no-model probe proves legacy workspace-write can read cached auth. A root-denying least-privilege permission profile, inherit-nothing command environment, disabled network/search/plugins/MCP/hooks/memories/subagents, exact source-diff confinement, independent evaluator replay, private raw evidence, and minimized contamination-marked receipt are therefore mandatory. The proposal authorizes no behavior or model call; its first immutable review may authorize only mock-tested CloserFans runner code, and a second implementation/preflight review is required before at most one `native.exact.local-premise` call. Decontaminated repeated trials and measured claims remain later Stages B/C. |
 
 ## Validation And Checkpoint Policy
 
@@ -6642,9 +6727,13 @@ synchronized:
 > `bb16e47`/`0027c66`/`995e497`/`3af518d`/`cbf2356` as complete. Preserve the
 > exact public package, release-only OIDC workflow, all-abstention editable
 > source, stateless commands, and separate non-authoritative 9/1 reference.
-> Advance 12B4 only through a read-only provider/execution/retention/privacy/
-> reporting policy audit and separately reviewed proposal before any real
-> agent run. Do not relabel a PathOut request as
+> Treat the 12B4 provider/execution/retention/privacy/reporting audit and
+> behavior-free Stage A proposal as frozen but unreviewed. Its first immutable
+> review may authorize only a mock-tested CloserFans runner; require a second
+> exact implementation/preflight review before at most one local open-book
+> `native.exact.local-premise` Codex canary. Keep that canary explicitly
+> contaminated and non-graduating; keep decontaminated repeated trials and
+> measured claims in later Stages B/C. Do not relabel a PathOut request as
 > an LF proof-patch task or shrink representativeness. Keep real-agent runs in
 > 12B4.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,

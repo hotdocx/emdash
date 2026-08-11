@@ -7,9 +7,10 @@ Corpus/interchange checkpoint `d0d3764`, public runner/package checkpoint
 separately reviewed contracts and proportional gates recorded below. Exact
 public `@hotdocx/emdash@0.3.0`, Pages, Release, provenance, installed
 consumers, release-only OIDC workflow, and the all-abstention source workspace
-are verified. `AGENT-EVAL-12B4` is ready only for a read-only policy audit;
-provider/model execution, run retention, measurement, and graduation remain
-gated.
+are verified. The `AGENT-EVAL-12B4` read-only audit is now complete and its
+first non-authorizing policy proposal is frozen below. Provider/model
+execution, retained run evidence, measurement, and graduation remain gated
+until separate immutable reviews authorize their exact bounded stages.
 
 Date: 2026-08-11
 
@@ -58,9 +59,9 @@ enforcement, publication, and hosted workspace operation remain outer layers.
 The first three slices are now complete. The third published exact `0.3.0`,
 restored a permanent release-only workflow, and locally integrated one
 source-first CloserFans workspace; it still invoked no provider/model and made
-no PathOut task conversion. The next bounded action is therefore only the
-read-only 12B4 provider/execution/retention/reporting audit—not a real-agent
-run or performance claim.
+no PathOut task conversion. The subsequent read-only 12B4 provider/execution/
+retention/reporting audit is now frozen below. The next bounded action is its
+immutable behavior-free review—not a real-agent run or performance claim.
 
 ## Post-`STDLIB-8B` Readiness Findings
 
@@ -226,7 +227,7 @@ the evaluator.
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
 | `AGENT-EVAL-12B3` | complete at Emdash hardening `3af518d` and CloserFans host `cbf2356` | Exact `0.3.0`, Pages run `31509112917`, protected OIDC recovery run `31510726533`, byte/provenance/installed-consumer verification, permanent trigger removal, and the focused-green ten-abstention source workspace are complete. Two safe pre-package failures and the reviewed one-time dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | policy audit ready; all effects gated | The installed hosted consumer now exists. Freeze provider identity/credentials, execution, exact inputs, retention/privacy, reproducibility, cost/usage semantics, reporting, and graduation before any real run; preserve canonical attempts/reports only under that reviewed policy. |
+| `AGENT-EVAL-12B4` | policy proposal frozen; all effects gated | The audit below freezes provider identity/credentials, execution, exact inputs, retention/privacy, reproducibility, cost/usage semantics, reporting, contamination labels, and graduation. Its first review may authorize only a mock-driven local runner implementation; a second implementation/preflight review is required before one real one-case canary. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 separately approved `AGENT-EVAL-12B2` implementation is also complete and its
@@ -1787,6 +1788,376 @@ provider, execution, retention, privacy, reproducibility, and reporting audit,
 followed by a frozen proposal and independent review before any credential,
 provider, hosted action, retained run, measurement, or performance claim.
 
+## `AGENT-EVAL-12B4` Policy Audit And Frozen First Contract
+
+Date: 2026-08-11
+
+State: read-only audit complete; behavior-free proposal frozen and not yet
+reviewed. No Codex model invocation, provider attempt, benchmark-source edit,
+retained transcript, performance measurement, sibling edit, or external
+mutation is authorized by this section alone.
+
+### Exact audited authorities
+
+The audit started with all twelve Emdash worktrees clean. The active goal
+branch, local `main`, `origin/main`, and the remote goal branch were exact
+checkpoint `3727015c1975c346f309981b440810a309776931`, with identical tree
+`7b128825c7fa5991c9a945de969c83048fb9b940`. The isolated CloserFans
+benchmark worktree was clean on locally integrated `master` at exact
+`cbf23566fe59d03a9e5f7539a37bfdc0beb473ba`. The unrelated concurrent
+CloserFans branch at `8980842` and its untracked first template copy remain
+outside this tranche.
+
+The semantic authority remains unchanged:
+
+- `lf_proof_agent_benchmark.ts` owns immutable cases, attempts, runs, fresh
+  checker replay, outcomes, diagnostics, and integer metrics;
+- `lf_proof_agent_interchange.ts` owns strict canonical interchange;
+- `lf_proof_agent_public_corpus.ts` owns the six-track, ten-case corpus and
+  the separate nine-success/one-abstention owner reference; and
+- `lf_proof_agent_benchmark_cli.ts` owns the stateless Node adapter which
+  invokes no provider and treats resource usage as unverified reported data.
+
+The CloserFans template at `cbf2356` is a real public-package consumer, but it
+is intentionally not an agent host. Its only run authority is direct
+`benchmark-run.emdash.ts`; its seven commands reconstruct public corpus data
+and replay attempts without a provider, session, network, controller, API,
+MCP, or database. The existing CloserFans native chat path is a different
+product boundary: it uses persistent sessions and broad `--search --yolo`
+execution. It must not be reused or modified for the first benchmark pilot.
+
+### Official Codex and model evidence
+
+The audit used current official OpenAI documentation as external execution
+evidence, not repository authority:
+
+- <https://learn.chatgpt.com/docs/developer-commands> documents stable
+  non-interactive `codex exec`, explicit sandbox and approval flags,
+  `--ephemeral`, `--ignore-user-config`, `--ignore-rules`, JSONL,
+  output-schema, model, and prompt-via-stdin controls;
+- <https://learn.chatgpt.com/docs/non-interactive-mode> documents ephemeral
+  runs, machine-readable events and usage, saved authentication reuse, and
+  the rule that any `CODEX_API_KEY` must be scoped only to the one Codex
+  process rather than a repository-controlled job environment;
+- <https://learn.chatgpt.com/docs/agent-approvals-security> distinguishes
+  command sandboxing from approvals and states that command network is off in
+  the ordinary workspace boundary unless deliberately enabled;
+- <https://learn.chatgpt.com/docs/permissions> documents beta least-privilege
+  permission profiles, including root denial, minimal runtime reads,
+  workspace-only writes, secret-file denies, and disabled command network;
+- <https://learn.chatgpt.com/docs/config-file/config-reference> supplies the
+  exact model, web-search, plugin/agent, history, environment, and network
+  configuration keys used below; and
+- <https://developers.openai.com/api/docs/models/gpt-5.6-sol> identifies
+  `gpt-5.6-sol` as the frontier GPT-5.6 model and supports the selected high
+  reasoning setting. Its snapshot table currently exposes only the same
+  alias, not a separately dated immutable model identifier.
+
+The installed local executable is exact `codex-cli 0.147.0`. Read-only login
+status reports ChatGPT authentication; no account identifier, access token,
+API key, or `auth.json` content was read or copied. The live local catalog
+offers `gpt-5.6-sol` with catalog `comp_hash` `3000`, low through ultra CLI
+reasoning settings, default low verbosity, and the ordinary Codex transport.
+The requested first-pilot tuple is therefore:
+
+```text
+provider adapter: codex-cli
+CLI revision:     0.147.0
+model request:    gpt-5.6-sol
+catalog comp_hash: 3000
+reasoning effort: high
+model verbosity: low
+reasoning summary: none
+auth category:    existing local ChatGPT login
+service tier:     unset / provider default
+```
+
+The alias and catalog hash are provenance, not an immutable model snapshot.
+A later rerun can reproduce the task bytes and requested configuration, but
+cannot claim bitwise or time-stable model behavior unless OpenAI supplies and
+the plan selects an immutable snapshot. The benchmark run's `seed` is only a
+stable provenance label; it is not evidence that Codex sampling is seeded or
+deterministic. API list pricing must not be applied to a ChatGPT-authenticated
+run. The first receipt records token counts supplied by Codex but records
+dollar cost as unknown/not applicable to this auth path.
+
+### Credential and sandbox finding
+
+The ordinary legacy `workspace-write` profile is insufficient for this
+benchmark's credential boundary. A no-model local sandbox probe established
+that a command can test the cached `~/.codex/auth.json` as readable under that
+profile. The probe did not print or copy the file. Read-only protection from
+modification is not protection from disclosure, so the initial idea of using
+legacy `--sandbox workspace-write` is rejected.
+
+The successful replacement no-model probe used an explicit beta permission
+profile which denied `:root`, reopened only `:minimal`, reopened the exact
+installed Node/Codex runtime tree read-only, made the current workspace root
+writable, denied `**/*.env`, and disabled command network. Under that profile
+the benchmark `package.json` remained readable while the cached auth file was
+not readable. The exact runtime-tree exception was necessary on this host;
+without it, the sandbox could not execute the installed Codex binary. These
+probes validate feasibility only. The implementation must construct and test
+the same policy for its disposable path, and must fail closed if the installed
+CLI cannot enforce it.
+
+The runner must not pass `--sandbox`, because legacy sandbox selection
+overrides permission-profile configuration. It must start `codex exec` with
+`--ignore-user-config` while retaining `CODEX_HOME` only for parent-process
+authentication, and provide one inline strict permission profile equivalent
+to:
+
+```toml
+default_permissions = "emdash-benchmark"
+
+[permissions.emdash-benchmark]
+extends = ":workspace"
+
+[permissions.emdash-benchmark.filesystem]
+":root" = "deny"
+":minimal" = "read"
+"<resolved-codex-and-node-runtime-root>" = "read"
+":tmpdir" = "deny"
+":slash_tmp" = "deny"
+
+[permissions.emdash-benchmark.filesystem.":workspace_roots"]
+"." = "write"
+"**/*.env" = "deny"
+
+[permissions.emdash-benchmark.network]
+enabled = false
+```
+
+The implementation may encode this as an exact inline TOML table rather than
+write into the user's Codex home. It must resolve and receipt the runtime root,
+must not widen that root to the user's home, and must run no model if the
+credential-denial, workspace-read/write, outside-write, `.env`-deny, or
+network-deny preflight fails.
+
+Parent-process authentication and model-command environment are separate.
+The Codex parent may use the existing login, but commands proposed by the
+model receive a constructed environment with inheritance `none`, a fixed
+tool `PATH`, a private fake `HOME` and `TMPDIR` inside the disposable
+workspace, stable locale/CI values, and no inherited token, key, secret,
+cloud, npm, GitHub, proxy, or repository environment variables. The runner
+sets `shell_environment_policy.ignore_default_excludes=false` as defense in
+depth and `allow_login_shell=false`. No ignored Emdash/Arrowgram `.env` file
+is read; its npm credential is unrelated to this run.
+
+### Public-reference contamination
+
+The 12B3 workspace intentionally exposes `reference`, and exact public
+`@hotdocx/emdash@0.3.0` contains the owner reference patches. A model with
+read access to the installed package can recover those answers. Prompt text
+which merely says not to inspect them does not make the task blind.
+
+Therefore the first runnable slice is classified exactly as an **open-book
+workflow canary**. It may show that Codex can inspect one Emdash task, edit the
+source attempt, invoke the stateless commands, and produce an independently
+replayed result under the frozen boundary. It cannot support a theorem-proving
+rate, comparison with another prover or model, leaderboard entry,
+representative-corpus score, or `AGENT-EVAL-12B4` graduation. The receipt must
+set `contamination = "public-owner-reference-accessible"` and
+`graduationEligible = false`, even if raw command audit finds no forbidden
+reference access.
+
+A later measured stage requires a decontaminated split boundary. The agent
+side may receive only the selected canonical case/task surface, authoring
+instructions, one attempt file, and a narrow stateless checker interface. The
+independent host side must retain the full package, owner references, and
+authoritative evaluator where the agent's filesystem and tools cannot read
+them. Prompt prohibitions, path hiding, post-hoc assertions, or deleting a
+command name are not substitutes for this isolation. Designing that split is
+later work and must not enlarge the trusted Emdash Core or introduce a hidden
+mutable prover server.
+
+### Ordered 12B4 stages
+
+The single roadmap row is implemented through three internal stages. These
+stage names do not add new rows to the 41-row master accounting.
+
+1. **Stage A — local workflow canary.** Add a standalone, mock-tested
+   CloserFans operator runner, then separately preflight and execute at most
+   one real Codex attempt for `native.exact.local-premise`. It is open-book,
+   non-graduating, local-only, and may legitimately abstain or fail.
+2. **Stage B — decontaminated repeated suite.** Freeze and implement a split
+   agent/evaluator environment in which owner answers are unavailable to the
+   model, then run repeated independent trials over all ten unchanged cases.
+3. **Stage C — measured graduation.** Publish only claims supported by Stage
+   B's exact trial matrix, checker outcomes, contamination audit, and
+   uncertainty. A composite score, cross-model ranking, hosted registry, or
+   product claim requires another explicit contract rather than following
+   automatically.
+
+### Frozen Stage A implementation boundary
+
+The first immutable review may authorize only local implementation and
+mock/fake-process tests in a new isolated CloserFans branch/worktree from
+exact clean `cbf2356`. It does not authorize the real Codex call. The
+implementation must be additive under `templates/emdash_benchmark/**` plus
+one narrowly owned verifier/script registration if required. It must not
+modify Emdash semantics or package bytes, the existing native-chat runner,
+controller pools/images, API/MCP, database, GetPaidX plugin contract,
+Arrowgram, cloud/deployment configuration, or any other template.
+
+The operator runner must:
+
+1. create a fresh private disposable Git workspace for one invocation and
+   copy/install only the exact existing `emdash_benchmark` fixture;
+2. start from exact public `@hotdocx/emdash@0.3.0`, canonical ten-abstention
+   source, corpus fingerprint, selected case ID, and a clean Git baseline;
+3. allow the agent to edit only the selected attempt in
+   `benchmark-run.emdash.ts`; every other file/attempt change invalidates the
+   canary even when the evaluator would accept it;
+4. permit ordinary inspection of the fixture README, package manifest,
+   selected source entry, and exact `case` output, plus stateless `case` and
+   `evaluate` commands; forbid `reference`, direct `node_modules` inspection,
+   other-case acquisition, installation, Git mutation, network tools, and
+   writes outside the one source file;
+5. treat abstention, rejected proof, accepted-incomplete proof, process
+   failure, timeout, policy violation, and accepted-complete proof as distinct
+   outcomes; never repair or reinterpret a model result silently;
+6. independently rerun the canonical evaluator after Codex exits and make
+   that fresh report—not model prose—the proof acceptance authority; and
+7. preserve the exact candidate source/diff and canonical attempt/report
+   digests needed for review without making the raw conversation proof
+   evidence.
+
+The first real invocation, if a later preflight review authorizes it, must use
+the equivalent of the following explicit controls. The final implementation
+owns the safely quoted argument vector; this is a contract, not a shell
+snippet to copy blindly:
+
+```text
+codex --strict-config
+  --ask-for-approval never
+  --model gpt-5.6-sol
+  --disable hooks
+  --disable plugins
+  --disable remote_plugin
+  --disable plugin_sharing
+  --disable recommended_plugins
+  --disable skill_search
+  --disable skill_mcp_dependency_install
+  --disable multi_agent
+  -c agents.enabled=false
+  -c web_search="disabled"
+  -c model_reasoning_effort="high"
+  -c model_verbosity="low"
+  -c model_reasoning_summary="none"
+  -c hide_agent_reasoning=true
+  -c history.persistence="none"
+  -c memories.generate_memories=false
+  -c memories.use_memories=false
+  -c allow_login_shell=false
+  -c <exact least-privilege permission profile>
+  -c <exact constructed command environment>
+  exec --ephemeral --ignore-user-config --ignore-rules
+  --json --output-schema <schema> --output-last-message <private-path> -
+```
+
+The prompt is supplied on stdin from a tracked versioned template. It names
+one case, the sole editable source location, allowed commands, forbidden
+reference surfaces, abstention, and the fact that fresh evaluator replay is
+authoritative. The final output schema contains only case ID, declared
+disposition, and a short non-sensitive completion note. It must not request or
+retain chain-of-thought. Prompt, schema, case text, and initial-source bytes
+are each SHA-256-bound in the receipt.
+
+The outer runner enforces a 600,000 ms wall timeout and records any graceful
+termination/kill sequence. It does not claim a token cap because installed
+`codex exec` exposes no audited hard token-limit flag. JSONL is parsed
+fail-closed: unknown or malformed events invalidate usage and command-audit
+claims rather than being ignored. `turn.completed` usage supplies reported
+input, cached-input, output, and reasoning-output counts when present. Outer
+monotonic time supplies elapsed duration. Agent-visible evaluator invocations
+and the final independent host replay are counted separately. None of these
+operational fields changes theorem authority.
+
+### Retention, privacy, and receipt contract
+
+Raw JSONL, final model text, command arguments/output, and transient source
+copies may contain reasoning summaries, paths, source text, or accidental
+sensitive material. They are private operational evidence, never tracked
+artifacts. The runner creates them with user-only permissions under one
+explicit ignored/quarantined directory or private temporary directory. It
+never uploads, serves, commits, publishes, or sends them to GetPaidX. It does
+not print raw JSONL or credentials to the ordinary console.
+
+For the first real canary, raw evidence remains only until an operator reviews
+the forbidden-command and secret scans and derives the minimized receipt. A
+later preflight review must authorize the exact bounded removal policy for the
+runner-created directory; this proposal does not delete anything. The source
+attempt, fresh canonical evaluator report, and minimized receipt may be
+retained after human/privacy review because they contain no model reasoning or
+credential values.
+
+The canonical receipt must include at least:
+
+- receipt schema/revision, runner commit and clean/dirty state;
+- Emdash package name/version/integrity, corpus/run/case/profile fingerprints,
+  selected case, and initial source digest;
+- prompt/schema/case-text digests, not an unreviewed raw prompt transcript;
+- CLI version, requested provider/model/effort/verbosity/summary, local model
+  catalog hash, auth-method category, and explicit mutable-alias warning;
+- permission-profile digest, resolved runtime read root, constructed
+  environment keys, disabled network/search/plugin/MCP/hook/memory/subagent
+  controls, and preflight results;
+- start/end timestamps, monotonic duration, timeout/exit state, and provider-
+  reported token fields without a fabricated dollar cost;
+- parsed tool/command audit, evaluator-call counts, forbidden-surface result,
+  exact source diff and digest, and final host replay outcome;
+- canonical attempt/run/report hashes and any stable diagnostics; and
+- `contamination`, `graduationEligible=false`, and a statement that neither
+  receipt nor AI output is proof evidence.
+
+Authentication is recorded only as a category such as `chatgpt`; user,
+workspace, account, token, cookie, and credential-file contents are forbidden
+receipt fields. Host-absolute paths are normalized or omitted. If any secret-
+name/value scan, permission preflight, source-scope check, command audit, or
+canonical replay cannot be completed, the receipt is invalid and no benchmark
+claim may be made.
+
+### Stage A validation and approval sequence
+
+This proposal checkpoint is plan-only. Its proportional gates are exact diff,
+Markdown/link/heading hygiene, worktree/ancestry checks, and confirmation that
+no provider/model process ran. No TypeScript, CloserFans, browser, package,
+kernel, book, or repository aggregate can add evidence to this behavior-free
+freeze.
+
+After a separate immutable proposal review, implementation requires:
+
+- fake-Codex process fixtures for accepted, rejected, abstained, malformed
+  JSONL, timeout, nonzero exit, forbidden command, forbidden file edit,
+  unknown event, and tampered evaluator output;
+- focused runner/verifier tests proving exact arguments/configuration,
+  prompt/schema hashes, source confinement, fail-closed parsing, receipt
+  minimization, private file modes, and no secret values;
+- no-model sandbox probes proving credential denial, workspace access,
+  `.env` denial, outside-write denial, and command-network denial under the
+  generated exact permission profile;
+- the existing template verifier, template validation, strict local
+  TypeScript/Node checks, root typecheck and focused lint only as directly
+  affected; and
+- exact staged diff, no-secret, ignored-output, unchanged-owner, and clean
+  branch ancestry review before a rollback-safe implementation checkpoint.
+
+No long Jest/Playwright/build, root Emdash `check:ts`/`check:all`, CloserFans
+cloud/controller/database/API/MCP aggregate, Lambdapi/kernel, or book/print
+gate is required for this isolated runner unless an exact changed boundary
+later makes omission progress-blocking. Omissions are not passes.
+
+The implementation checkpoint still performs no real model call. A second
+immutable preflight review must bind its exact code, tests, CLI/catalog/login
+category, permission probe, selected case, prompt/schema/source hashes,
+timeout, private output path, and expected maximum one invocation. Only then
+may the goal authorize one local Stage A call under delegated unattended
+authority with human supersession. Any retry requires a new receipt and
+explicit reason; it is not silently part of the one-call authorization. No
+push, deployment, public benchmark result, or Stage B/C work follows
+automatically.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -1841,8 +2212,10 @@ On continuation:
 6. treat exact 12B2 proposal/review/implementation checkpoints
    `ba49705`/`8c9652a`/`93c9804` as complete; treat 12B3 proposal/review,
    package source, permanent hardening, and locally integrated host checkpoints
-   `bb16e47`/`0027c66`/`995e497`/`3af518d`/`cbf2356` as complete; advance only
-   to a read-only 12B4 policy audit before any real-agent or retention effect;
-   and
+   `bb16e47`/`0027c66`/`995e497`/`3af518d`/`cbf2356` as complete; treat the
+   12B4 audit and behavior-free Stage A proposal above as frozen but not yet
+   reviewed; allow its first immutable review to authorize only a mock-driven
+   local runner, and require a second exact implementation/preflight review
+   before any real-agent or retention effect; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
