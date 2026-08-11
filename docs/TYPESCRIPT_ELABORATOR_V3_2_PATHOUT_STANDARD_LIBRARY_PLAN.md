@@ -123,8 +123,8 @@ with later human supersession. Cold v2 replay then showed that the one support
 rule is shadowed by `CompTarget_catd` delta. Corrected v3 retains **0/1/0/5**
 while replacing that rule one-for-one with its measured stable post-delta
 parent. Proposal checkpoint `fe1a9b7` is separately reviewed and approved
-under delegated unattended authority with later human supersession; only that
-exact v3 implementation may now proceed.
+at review checkpoint `0834d00` under delegated unattended authority with later
+human supersession; only that exact v3 implementation may now proceed.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -3040,9 +3040,10 @@ node --require ts-node/register --test \
 The review denies retaining v2, adding a second local rule, importing broad
 runtime behavior, changing a generic engine or Core, runtime Sigma/Pi category
 collapse, new proof authority, public presentation, active Lambdapi edits,
-integration, and release. Its synchronized review checkpoint and digest are
-pinned by the next ledger-only checkpoint. The unchanged aggregate remains
-carried forward; no aggregate is rerun.
+integration, and release. The synchronized review is checkpointed at
+`0834d00`, with SHA-256
+`064e36392e6e7962912237d4f0d1abc27ae0184e1f0b6e94009ce1b7842664f6`.
+The unchanged aggregate remains carried forward; no aggregate is rerun.
 
 ## Required Evidence For Implementation
 
