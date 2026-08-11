@@ -102,8 +102,8 @@ PathOut-Pi source-and-target parent at 4/12/0/10; v13
 the stable decoded-object presentation. V14 `4244b54`/`73aa94e` adds only the
 final total-target fibre support at **4/13/0/10**.
 
-The reviewed v14 root-only implementation is now final-proportional-green in
-the current semantic checkpoint. It compiles all four opaque declarations,
+The reviewed v14 root-only implementation is final-proportional-green at
+semantic checkpoint `b6005b3`. It compiles all four opaque declarations,
 thirteen runtime rules (five mathematical projections and eight derived
 supports), and ten transparent definitions across the reviewed staged module
 partition. Seven active focused tests, four exact extension-rule observations,
@@ -278,7 +278,7 @@ named library presentation.
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending; dependency-ready | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
@@ -2699,7 +2699,7 @@ Fibre_cat(PathIndTgt_catd(Z), Struct_sigma(x,E))
 after `PathIndTgt_catd` is already declared. It adds no mathematical rule,
 generic Sigma-fibre equation, declaration change, or generic-engine behavior.
 
-The resulting reviewed implementation is exact **4/13/0/10**: four opaque
+Semantic checkpoint `b6005b3` implements exact **4/13/0/10**: four opaque
 owners, five mathematical projections, eight local presentation supports,
 zero proof rules, and ten transparent definitions. Its staged 1/3/3
 declaration prefix, 9+4 runtime partition, and 3+4 transparent suffix compile

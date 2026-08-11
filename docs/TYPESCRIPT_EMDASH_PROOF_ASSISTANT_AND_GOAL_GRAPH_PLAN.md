@@ -191,8 +191,8 @@ the reviewed **4/13/0/10** boundary: four opaque declarations, five
 mathematical projections, eight derived presentation supports, no proof rule,
 and ten transparent definitions.
 
-The v14 root-only implementation is now final-proportional-green in the
-current semantic checkpoint. Its staged 1/3/3 declaration prefix, 9+4 runtime
+The v14 root-only implementation is final-proportional-green at semantic
+checkpoint `b6005b3`. Its staged 1/3/3 declaration prefix, 9+4 runtime
 partition, and 3+4 transparent library suffix compile through the existing
 generic engines at the explicit 512-step limit. Seven active focused tests
 pass and one optional oracle test skips in the ordinary run; the separately
@@ -219,7 +219,7 @@ Git-Boundary: the branch fork baseline remains the qualified predecessor
 checkpoint `e35d5ae`; this dedicated branch carries the proof-assistant,
 goal-graph, package/host-consumer, and PathOut/PathInd descendants recorded
 below. The reviewed v14 tip is `73aa94e`; its bounded root-only implementation
-and synchronized ledger form the current semantic checkpoint. Annotated tag
+and synchronized ledger are checkpointed at `b6005b3`. Annotated tag
 `emdash-v0.2.0` intentionally remains on qualified release commit `ab513f7`,
 whose exact tarball was published through the stable token-free OIDC workflow;
 the later plan-only ledger commits are not part of that package. The frozen
@@ -783,7 +783,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | Terminal same-budget normal-form closure prerequisite | complete | `e560551`; corrected proposal/review `a42ffc9`/`5277885`; original roots replay only after paired `not-equal` under the same consumed budget; focused/static gates and the required 1,923-test full-TypeScript gate are green with zero failures. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | Propagate the existing declaration compiler comparison budget into compilation-time checking | complete | `e560551`; proposal/review `9238104`/`a4d61a9`; exact zero/one-step behavior, retained 256 default and public factory signature, nearest compiler/static gates, and the shared full-TypeScript gate are green. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, fixed-source `PATHIND-TRUSTED-PROFILE-1C` at `a361dc3`, generic checkpoint `e560551`, and root-only internalized `PATHOUT-LIBRARY-INTERNALIZED-1D` are complete. Reviewed v14 `4244b54`/`73aa94e` seals 4/13/0/10; the current semantic checkpoint passes the focused 7-pass/1-skip TypeScript suite, separately gated 12-assertion Lambdapi oracle, typecheck, focused lint, strict negative/capability/non-export checks, and all four staged-rule observations. Transitivity `1E` and public presentation `1F` remain later bounded slices. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, fixed-source `PATHIND-TRUSTED-PROFILE-1C` at `a361dc3`, generic checkpoint `e560551`, and root-only internalized `PATHOUT-LIBRARY-INTERNALIZED-1D` at `b6005b3` are complete. Reviewed v14 `4244b54`/`73aa94e` seals 4/13/0/10; the semantic checkpoint passes the focused 7-pass/1-skip TypeScript suite, separately gated 12-assertion Lambdapi oracle, typecheck, focused lint, strict negative/capability/non-export checks, and all four staged-rule observations. Transitivity `1E` and public presentation `1F` remain later bounded slices. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -6132,9 +6132,9 @@ that staged parent and no mathematical rule, yielding **4/13/0/10** with five
 mathematical projections, eight non-mathematical presentation supports, zero
 proof rules, and ten transparent definitions.
 
-The reviewed v14 implementation now compiles the exact staged boundary through
-the existing generic engines. The focused TypeScript suite records seven
-passes and one ordinary skip after a roughly 190-second cold compile; its
+Semantic checkpoint `b6005b3` compiles the exact reviewed v14 staged boundary
+through the existing generic engines. The focused TypeScript suite records
+seven passes and one ordinary skip after a roughly 190-second cold compile; its
 separately selected oracle test passes all twelve active-Lambdapi assertions.
 All four staged extension redexes select their exact rule IDs; the primary
 `PathInd_transfd`, derived `PathInd_funcd`, and target transport consumers
@@ -6314,7 +6314,7 @@ is the next separately bounded row.
 | `D-PA-162` | Add the complete PathOut-Pi source-and-target section-category parent at v12. | Proposal/review `39abb02`/`8833f8f` freeze 4/12/0/10 after five suffix declarations compile and `pathout_pi_transport_func` reaches a `Functord_cat`/`Pi_cat` parent mismatch. The local rule does not assert an underlying category equality or authorize a generic section-category rule. |
 | `D-PA-163` | Replace v12's shadowed pre-delta rule one-for-one with the stable decoded-object parent at v13. | Proposal/review `d77f0d7`/`a8aff88` retain 4/12/0/10 and record that the predecessor Functor delta fires before the v12 fragment. The corrected rule closes `pathout_pi_transport_func` without an additional rule, category collapse, or generic-engine change, then exposes only the final total-target fibre mismatch. |
 | `D-PA-164` | Approve the exact final total-target fibre support at reviewed v14. | Proposal/review `4244b54`/`73aa94e` add `Fibre_cat(PathIndTgt_catd(Z),Struct_sigma(x,E)) → Pi_cat(PathOut_cat(Z,x),E)` after its prelude owner is declared. The resulting boundary is exactly 4/13/0/10: five mathematical projections, eight derived supports, zero proof rules, ten definitions, and no generic Sigma-fibre rule. |
-| `D-PA-165` | Complete root-only `PATHOUT-LIBRARY-INTERNALIZED-1D` at the reviewed v14 boundary. | The current semantic checkpoint compiles the 1/3/3 declaration prefix, 9+4 runtime partition, and 3+4 transparent suffix through unchanged generic engines at limit 512. The focused suite passes seven active tests with its oracle skipped; the separately gated run passes all twelve Lambdapi assertions. Four exact staged-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, authority denials, five-barrel closure, root typecheck, focused lint, diff hygiene, and a clean generic-compiler diff are green. The 1,923-test `e560551` aggregate is carried forward under the standing no-long-aggregate direction. No active Lambdapi source or public/package surface changes. `STDLIB-8B` remains active and advances only to transitivity `1E`. |
+| `D-PA-165` | Complete root-only `PATHOUT-LIBRARY-INTERNALIZED-1D` at the reviewed v14 boundary. | Semantic checkpoint `b6005b3` compiles the 1/3/3 declaration prefix, 9+4 runtime partition, and 3+4 transparent suffix through unchanged generic engines at limit 512. The focused suite passes seven active tests with its oracle skipped; the separately gated run passes all twelve Lambdapi assertions. Four exact staged-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, authority denials, five-barrel closure, root typecheck, focused lint, diff hygiene, and a clean generic-compiler diff are green. The 1,923-test `e560551` aggregate is carried forward under the standing no-long-aggregate direction. No active Lambdapi source or public/package surface changes. `STDLIB-8B` remains active and advances only to transitivity `1E`. |
 
 ## Validation And Checkpoint Policy
 
