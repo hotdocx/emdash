@@ -127,6 +127,13 @@ test('pins a token-free, least-authority two-job workflow', async () => {
     'release:',
     'types: [published]',
     "if: startsWith(github.event.release.tag_name, 'emdash-v')",
+    'name: Checkout exact release tag without credentials',
+    'https://github.com/${GITHUB_REPOSITORY}.git',
+    'GIT_TERMINAL_PROMPT=0 git',
+    '-c credential.helper=',
+    '+refs/heads/main:refs/remotes/origin/main',
+    '+refs/tags/${RELEASE_TAG}:refs/tags/${RELEASE_TAG}',
+    'git checkout --detach "refs/tags/${RELEASE_TAG}"',
     'environment: npm-release',
     'id-token: write',
     'git merge-base --is-ancestor HEAD refs/remotes/origin/main',
@@ -135,15 +142,16 @@ test('pins a token-free, least-authority two-job workflow', async () => {
     'sha256sum "$tarball"',
     'npm install --global npm@11.19.0 --ignore-scripts',
     'npm publish "$tarball" --access public --provenance',
-    '3d3c42e5aac5ba805825da76410c181273ba90b1',
     '820762786026740c76f36085b0efc47a31fe5020',
     '043fb46d1a93c77aae656e7c1c64a875d1fc6a0a',
     '3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c',
-    'persist-credentials: false',
   ]) {
     assert.match(workflow, new RegExp(required.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&'), 'u'));
   }
-  assert.doesNotMatch(workflow, /secrets\.|NODE_AUTH_TOKEN|NPM_TOKEN/u);
+  assert.doesNotMatch(
+    workflow,
+    /actions\/checkout|persist-credentials|submodule|GITHUB_TOKEN|secrets\.|NODE_AUTH_TOKEN|NPM_TOKEN/u,
+  );
   assert.doesNotMatch(workflow, /pull_request:|push:|workflow_dispatch:/u);
   assert.equal((workflow.match(/id-token: write/gu) ?? []).length, 1);
   const buildStart = workflow.indexOf('\n  build:\n');

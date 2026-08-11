@@ -22,12 +22,21 @@ jobs:
       sha256: ${{ steps.package.outputs.sha256 }}
       version: ${{ steps.package.outputs.version }}
     steps:
-      - name: Checkout exact release tag
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-          ref: ${{ github.event.release.tag_name }}
+      - name: Checkout exact release tag without credentials
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          set -euo pipefail
+          test -n "$RELEASE_TAG"
+          git init .
+          git remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          GIT_TERMINAL_PROMPT=0 git \
+            -c credential.helper= \
+            -c protocol.version=2 \
+            fetch --no-tags origin \
+            "+refs/heads/main:refs/remotes/origin/main" \
+            "+refs/tags/${RELEASE_TAG}:refs/tags/${RELEASE_TAG}"
+          git checkout --detach "refs/tags/${RELEASE_TAG}"
 
       - name: Set up Node
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
@@ -41,7 +50,6 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$(git rev-parse "${RELEASE_TAG}^{commit}")"
-          git fetch --no-tags origin main:refs/remotes/origin/main
           git merge-base --is-ancestor HEAD refs/remotes/origin/main
           node packages/emdash/scripts/release-preflight.mjs \
             --tag "$RELEASE_TAG" \

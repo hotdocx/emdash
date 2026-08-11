@@ -1270,6 +1270,78 @@ blob hashes and paths, ancestry, remote/tag/Release/npm identities, failed-job
 log, clean worktree, conflict-marker scan, and diff hygiene. No behavior or
 aggregate check is claimed for the review document itself.
 
+## `AGENT-EVAL-12B3-R1` Local Correction Qualification Record
+
+Date: 2026-08-11
+
+State: implementation complete and proportionally green; the exact semantic
+checkpoint is pinned by the immediately following plan-only ledger commit.
+No additional remote, Release, environment, registry, or sibling mutation has
+occurred during this local correction.
+
+The implementation changes exactly two behavioral owners:
+
+- `.github/workflows/npm-publish.yml` removes `actions/checkout` and replaces
+  it with one unprivileged, credential-empty direct Git initialization/fetch/
+  detached-checkout step. It fetches only public `main` and exact
+  `emdash-v0.3.0`, never invokes a submodule command, and leaves every later
+  build/artifact/environment/OIDC step unchanged; and
+- `packages/emdash/scripts/release-preflight-tests.mjs` requires those exact
+  refspecs and detached checkout while rejecting checkout-action use,
+  persisted credentials, submodule operations, token/secret references, and
+  push, pull-request, or manual workflow triggers.
+
+The two plans add only failure, review, and qualification evidence. Package
+version, manifest, export order, source entries, evaluator/corpus semantics,
+tarball policy, setup/upload/download action pins, and Release/tag bytes are
+unchanged.
+
+Exact proportional evidence:
+
+```text
+fresh credential-empty public Git probe
+  passed: fetched only main and emdash-v0.3.0; detached exact 995e497;
+  remote main exact 995e497; ancestry and clean status passed; no local
+  credential, extra-header, or submodule configuration
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; exact four-workspace contract; Node 24.11.1
+
+./scripts/pnpmw run package:release:check
+  passed: 3/3 exact release identity, manifest negatives, and corrected
+  token-free workflow policy
+
+./node_modules/.bin/tsc --noEmit --pretty false
+  passed
+
+./node_modules/.bin/eslint \
+  packages/emdash/scripts/release-preflight-tests.mjs
+  passed with no diagnostics
+
+./scripts/pnpmw run package:build
+  passed: ESM, CommonJS, declarations, and source maps
+
+node packages/emdash/scripts/release-preflight.mjs \
+  --tag emdash-v0.3.0 --repository hotdocx/emdash
+  passed with exact 0.3.0 identity
+
+Python safe YAML parse, no-secret/static denial scan, and git diff --check
+  passed
+```
+
+`actionlint` remains unavailable and is not claimed. A Ruby YAML probe could
+not run because Ruby is absent; the available Python parser passed, and the
+focused policy plus forthcoming hosted run own actual GitHub execution. No
+`check:ts`, root-test, `check:all`, Lambdapi/kernel, book/print, browser,
+packed-consumer, CloserFans, Arrowgram, provider/model, or hosted publish gate
+was rerun. Those omissions are deliberate and not passes.
+
+The next admissible operation is an exact four-path staged review and local
+checkpoint, followed by a plan-only pin of that checkpoint. Only then may the
+goal branch and `main` advance non-forced, the public workflow bytes be
+verified, and the exact same Release object be re-published once under the
+reviewed recovery sequence.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
