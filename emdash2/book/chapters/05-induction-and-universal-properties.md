@@ -252,6 +252,42 @@ representable, and the agreement of the generic Sigma and Pi constructions.
 If any of those are reversed, the result has the wrong endpoints before one
 even asks for associativity.
 
+### From mathematical notation to executable evidence
+
+There is now a small reviewer-facing notation for following this construction
+through the TypeScript implementation:
+
+```text
+PathOut(Z, x)
+rho(Z, x, y, p)
+Ind(Z, x, E, u)
+compose(Z, x, y, z, p, q)
+```
+
+These are four views of the development above: the outgoing-arrow category,
+its canonical arrow from the reflexive object, the induced section, and the
+value of the composition functor at $q$. They are not a second foundation or
+a new declaration language. Parsing one of them merely records which
+construction is being discussed, with its variables and source location.
+
+This distinction matters in a browser. The browser can display that the
+corresponding construction was qualified at the pinned semantic checkpoints,
+but it says explicitly that it has not rerun the semantic check. An explicit
+Node invocation such as
+`./scripts/emdash pathout check composition-normal-form` instead assembles the
+existing theory profile, checks the resulting explicit Core term with the
+TypeScript checker, and compares the composition term with its reviewed
+normal form. Only that result is labelled a fresh TypeScript semantic check;
+the first assembly in a process may take several minutes.
+
+The division of labour mirrors the mathematics. A small sealed profile owns
+the primitive path-induction constants and their exact computation rules;
+the `PathOut`, induction, and composition constructions remain transparent
+library material built from them. TypeScript/emdash is the production checker
+for this presentation, while Lambdapi remains a separately bounded
+conformance oracle. The notation therefore makes the evidence easier to
+inspect without changing what counts as evidence.
+
 ## 5.6 Returning To Literal Equality
 
 Set `Z=Path(A)` and let `D` be a directed family over that path

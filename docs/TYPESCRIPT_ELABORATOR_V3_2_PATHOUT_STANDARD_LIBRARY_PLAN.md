@@ -124,12 +124,13 @@ complete consumer parent before that delta. The final root-only implementation
 is complete at semantic checkpoint `3b113ad`, with its synchronized ledger at
 `10432ba`: all five definitions, one derived support, eight observations, two
 typed consumers, eight negatives, inherited proof reuse, and eight bounded
-active-Lambdapi assertions are green. Presentation row `1F` is now active. Its
-behavior-free proposal freezes a finite expression vocabulary, an explicit
-Node semantic-check route, a static honest browser view, and a short owned-book
-bridge. Proposal checkpoint `6ad0812` is separately approved under delegated
-unattended authority with later human supersession; only that exact four-stage
-presentation implementation may now proceed.
+active-Lambdapi assertions are green. Presentation row `1F` froze a finite
+expression vocabulary, an explicit Node semantic-check route, a static honest
+browser view, and a short owned-book bridge. Proposal checkpoint `6ad0812` was
+separately approved at `f03ef01` under delegated unattended authority with
+later human supersession. That exact four-stage implementation is now
+final-proportional-green in the semantic checkpoint containing the completion
+record below. Graduation audit `0G` is the next dependency-ready row.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -296,7 +297,7 @@ named library presentation.
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | complete; final-proportional-green | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; semantic checkpoint `3b113ad` | The exact root-only **0/1/0/5** transfer compiles five transparent definitions plus one derived complete consumer-parent support. Eight TypeScript observations, two typed consumers, eight negatives, authority closure, and a separately gated eight-assertion Lambdapi oracle are green. No mathematical equation, local proof rule, injectivity, unification, Core, generic-engine, public, or Lambdapi-source behavior is added. |
-| `PATHOUT-LIBRARY-PRESENTATION-1F` | proposal v1 separately reviewed; implementation-ready | completed direct typed slices through `10432ba`; proposal checkpoint `6ad0812`; review digest below | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
+| `PATHOUT-LIBRARY-PRESENTATION-1F` | complete; final-proportional-green | completed direct typed slices through `10432ba`; proposal/review checkpoints `6ad0812`/`f03ef01`; semantic checkpoint is the commit containing the completion record below | Four finite forms now have a browser-safe parser/qualification manifest, explicit transfer-backed Node check, static-by-default CLI and lazy browser panel, and an owned Chapter 5 bridge. No second semantic engine or public package export was added. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
 ### `PATHOUT-TRUST-BOUNDARY-0A` exact audit contract
@@ -3357,6 +3358,100 @@ parser, browser-side semantic compilation, a static report masquerading as a
 fresh check, any Core/checker/evaluator/rule/equation change, active Lambdapi
 edits, public package/release changes, generated-book edits, integration,
 deployment, and cleanup.
+
+## `PATHOUT-LIBRARY-PRESENTATION-1F` Implementation Completion
+
+Date: 2026-08-11
+
+Status: complete and final-proportional-green. The semantic checkpoint is the
+commit containing this record; a following plan-only ledger checkpoint may pin
+its short hash without changing the implementation. Graduation audit
+`PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` is next.
+
+The implementation preserves the reviewed four-part partition:
+
+1. [`pathout_presentation.ts`](../src/v3_2/pathout_presentation.ts) owns the
+   immutable four-form manifest, finite source-located parser, canonical
+   serializer, drift rejection, and visibly non-fresh qualification report.
+   It has no import and no transfer, checker, proposal, Node, or public-barrel
+   dependency.
+2. [`pathout_presentation_check.ts`](../src/v3_2/pathout_presentation_check.ts)
+   is the sole fresh-check adapter. It delegates to the completed transitivity
+   transfer, ordinary LF checker, and comparator; one immutable process-local
+   compilation may be reused. It introduces no Core node, definition, rule,
+   equation, or hidden session.
+3. [`pathout_presentation_cli.ts`](../src/v3_2/pathout_presentation_cli.ts)
+   plus `./scripts/emdash pathout` expose `catalog`, `parse`, and `check`.
+   Static commands never call the injected semantic loader. Only explicit
+   `check` warns about cold assembly before dynamically importing the Node
+   adapter. The lazy browser panel imports only the inert presentation module
+   and labels its evidence as pinned rather than fresh.
+4. The owned Chapter 5 source adds a short bridge after the composition
+   diagnostic. It explains the four forms, the browser/Node evidence split,
+   and the sealed-trusted versus transparent-library boundary without adding
+   a mathematical claim or hand-editing generated book Markdown.
+
+Final evidence:
+
+```text
+EMDASH_RUN_PATHOUT_PRESENTATION_CHECKS=1 node --require ts-node/register \
+  --test tests/v3_2_pathout_presentation_check_tests.ts
+  passed: 4/4 tests, 1 suite; 207473 ms
+  all four forms freshly checked through one process-cached transfer
+  role/endpoint negatives rejected
+
+ordinary focused PathOut presentation execution
+  passed: 17 tests; 3 explicitly gated cold assertions skipped
+  parser, CLI, browser integration, closure, and Node-import boundary green
+
+./scripts/pnpmw run typecheck
+  passed
+
+focused ESLint over every changed TypeScript test/source and main_tests.ts
+  passed
+
+./scripts/pnpmw run workspace:check
+  passed: pnpm@11.16.0; Node 24.11.1
+
+standalone emdash-template npm run check
+  passed: TypeScript plus Vite production build
+  emitted pathout_presentation chunk: 7014 bytes
+  no checker, transfer, compileCorePathout, or Node marker in that chunk
+
+./scripts/pnpmw run book:typography
+./scripts/pnpmw run book:check
+./scripts/pnpmw run book:render
+  passed: 39 sources, 2363 math spans, 141/141 evidence ids
+  rendered 300 pages with no console/page/request/render errors
+
+git diff --check, non-export checks, and generic-engine diff
+  passed
+```
+
+The name-filtered `tests/main_tests.ts` registration probe reached its explicit
+90-second timeout before discovering a suite and is **not** reported as a
+pass. Exact imports in `tests/main_tests.ts` plus direct focused execution are
+the registration evidence. The long `check:ts` aggregate is waived for this
+tranche under the user's direct standing instruction to avoid long aggregates
+unless their omission blocks progress. That omission does not conceal a failed
+aggregate: no aggregate was completed. The recent `e560551` full-TypeScript
+result remains historical generic-engine evidence only.
+
+Key SHA-256 values at the implementation boundary are:
+
+```text
+081f6f3539a421ffe46652ad708b764123e7df5a11ab3a5f17fe427d8b1a2fc7  src/v3_2/pathout_presentation.ts
+642bc5a407ca6f3e1c6880ac563ca15a4b0b83ffdb925809ec4b1a1950a3103e  src/v3_2/pathout_presentation_check.ts
+8c68c2ad599ace93f55b086b615180136207a6e865661902162d61e1117b5d0b  src/v3_2/pathout_presentation_cli.ts
+cee680f45dba62c07d7c9beeb8bdfd8aa833382a7ae98e369fdff2afc7e4a249  tests/v3_2_pathout_browser_integration_tests.ts
+506d565ef74daaa854d9603ad87c9faee9f40711156e5d376be2b4ab739021e0  emdash-template/src/emdash_api.ts
+f0cb81941262f48a23ba466ce57ac97584a450224fdc196b96b0fc19eb508530  emdash-template/src/App.tsx
+b4f5d4c5236fdef98eb6e8790d2258613a73e051c7f76eceb9744d72c6a7b6b7  emdash2/book/chapters/05-induction-and-universal-properties.md
+```
+
+No active Lambdapi source, generic engine, backend-neutral Core, public/npm
+barrel, package version, registry artifact, sibling repository, generated book
+source, integration branch, deployment, push, or cleanup changed.
 
 ## Required Evidence For Implementation
 

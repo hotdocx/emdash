@@ -17,6 +17,13 @@ export const loadCoreAiResearchOverview = () =>
     import('../../src/v3_2/ai_research_overview_browser.js');
 
 /**
+ * Load only the inert PathOut parser and pinned qualification manifest.
+ * The Node semantic adapter is intentionally outside the browser closure.
+ */
+export const loadCorePathoutPresentation = () =>
+    import('../../src/v3_2/pathout_presentation.js');
+
+/**
  * Vite fingerprints and emits the generated current book as a static asset.
  */
 export const EMDASH_BOOK_URL = new URL(

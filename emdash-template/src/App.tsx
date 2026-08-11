@@ -9,13 +9,19 @@ type ReviewerModule =
   Awaited<ReturnType<typeof emdash.loadCoreBrowserReviewer>>;
 type ResearchOverviewModule =
   Awaited<ReturnType<typeof emdash.loadCoreAiResearchOverview>>;
+type PathoutPresentationModule =
+  Awaited<ReturnType<typeof emdash.loadCorePathoutPresentation>>;
 type ReviewerPresetId =
   ReviewerModule['CORE_BROWSER_REVIEWER_PRESETS'][number]['id'];
 type ReviewerExpectedMode =
   ReviewerModule['CORE_BROWSER_REVIEWER_PRESETS'][number]['expectedMode'];
 type ReviewerTextResult =
   ReturnType<ReviewerModule['runCoreBrowserReviewerText']>;
-type View = 'categorical' | 'evidence' | 'core';
+type PathoutFormId =
+  PathoutPresentationModule[
+    'CORE_PATHOUT_PRESENTATION_1F_MANIFEST'
+  ]['forms'][number]['id'];
+type View = 'categorical' | 'pathout' | 'evidence' | 'core';
 type RunningTask = View | 'paper-proof';
 
 const exampleScript = `// Minimal explicit-Core implementation evidence.
@@ -143,6 +149,13 @@ function App() {
   const [categoricalOutput, setCategoricalOutput] = useState('');
   const [researchOutput, setResearchOutput] = useState('');
   const [paperProofOutput, setPaperProofOutput] = useState('');
+  const [pathout, setPathout] = useState<PathoutPresentationModule>();
+  const [pathoutLoadError, setPathoutLoadError] = useState('');
+  const [pathoutFormId, setPathoutFormId] = useState<PathoutFormId>(
+    'pathout-category'
+  );
+  const [pathoutInput, setPathoutInput] = useState('PathOut(Z, x)');
+  const [pathoutOutput, setPathoutOutput] = useState('');
   const [coreInput, setCoreInput] = useState(exampleScript);
   const [coreOutput, setCoreOutput] = useState('');
   const [runningView, setRunningView] = useState<RunningTask>();
@@ -169,6 +182,29 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (view !== 'pathout' || pathout !== undefined) return;
+    let active = true;
+    void emdash.loadCorePathoutPresentation().then(module => {
+      if (!active) return;
+      setPathout(module);
+      const initial = module.CORE_PATHOUT_PRESENTATION_1F_MANIFEST.forms.find(
+        form => form.id === pathoutFormId
+      );
+      if (initial !== undefined) {
+        setPathoutInput(current => current || initial.canonicalSource);
+      }
+    }).catch((error: unknown) => {
+      if (!active) return;
+      setPathoutLoadError(
+        error instanceof Error ? error.message : String(error)
+      );
+    });
+    return () => {
+      active = false;
+    };
+  }, [pathout, pathoutFormId, view]);
+
   const selectedPreset = reviewer?.CORE_BROWSER_REVIEWER_PRESETS.find(
     preset => preset.id === presetId
   );
@@ -181,6 +217,22 @@ function App() {
     if (preset !== undefined) {
       setCategoricalInput(preset.source);
       setCategoricalOutput('');
+    }
+  };
+
+  const selectedPathoutForm =
+    pathout?.CORE_PATHOUT_PRESENTATION_1F_MANIFEST.forms.find(
+      form => form.id === pathoutFormId
+    );
+
+  const choosePathoutForm = (nextId: PathoutFormId) => {
+    setPathoutFormId(nextId);
+    const form = pathout?.CORE_PATHOUT_PRESENTATION_1F_MANIFEST.forms.find(
+      candidate => candidate.id === nextId
+    );
+    if (form !== undefined) {
+      setPathoutInput(form.canonicalSource);
+      setPathoutOutput('');
     }
   };
 
@@ -223,6 +275,34 @@ function App() {
           ? error.message
           : String(error);
         setResearchOutput(`EXECUTION ERROR: ${message}`);
+      } finally {
+        setRunningView(undefined);
+      }
+    }, 0);
+  };
+
+  const runPathoutPresentation = () => {
+    if (pathout === undefined) return;
+    setRunningView('pathout');
+    setTimeout(() => {
+      try {
+        const request = pathout.parseCorePathoutPresentationText(
+          pathoutInput,
+          'browser-pathout.emdash'
+        );
+        if (request.formId !== pathoutFormId) {
+          throw new Error(
+            `Selected ${pathoutFormId}, but the expression is ` +
+            `${request.formId}`
+          );
+        }
+        const report = pathout.createCorePathoutQualificationReport(request);
+        setPathoutOutput(
+          pathout.formatCorePathoutQualificationReport(report)
+        );
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : String(error);
+        setPathoutOutput(`PRESENTATION ERROR: ${message}`);
       } finally {
         setRunningView(undefined);
       }
@@ -373,7 +453,7 @@ function App() {
             <span>reviewed examples</span>
           </div>
           <div><strong>4</strong><span>binder modes</span></div>
-          <div><strong>3</strong><span>evidence panels</span></div>
+          <div><strong>4</strong><span>evidence panels</span></div>
           <div><strong>299</strong><span>book pages</span></div>
           <div><strong>Client-side</strong><span>published runtime</span></div>
         </section>
@@ -424,7 +504,7 @@ function App() {
           <div className="reviewer-intro">
             <div>
               <p className="kicker">Live external reviewer</p>
-              <h2>Inspect the programme from three angles</h2>
+              <h2>Inspect the programme from four angles</h2>
             </div>
             <p>
               Start with a reviewed expression, run the broader evidence
@@ -442,6 +522,15 @@ function App() {
                 onClick={() => setView('categorical')}
               >
                 Expression
+              </button>
+              <button
+                className={view === 'pathout' ? 'tab active' : 'tab'}
+                type="button"
+                role="tab"
+                aria-selected={view === 'pathout'}
+                onClick={() => setView('pathout')}
+              >
+                PathOut
               </button>
               <button
                 className={view === 'evidence' ? 'tab active' : 'tab'}
@@ -555,6 +644,110 @@ function App() {
                   >
                     {categoricalOutput ||
                       'Run the expression to inspect explicit Core and its type.'}
+                  </pre>
+                </section>
+              )}
+
+              {view === 'pathout' && (
+                <section aria-labelledby="pathout-heading">
+                  <div className="section-heading">
+                    <div>
+                      <p className="kicker">Derived library presentation</p>
+                      <h2 id="pathout-heading">
+                        PathOut and arrow induction
+                      </h2>
+                    </div>
+                    <span className="status-chip">
+                      pinned evidence · not a browser check
+                    </span>
+                  </div>
+                  <p>
+                    This finite expression view parses four reviewed PathOut
+                    forms and displays their checkpoint-qualified evidence.
+                    It does not assemble the semantic transfer or rerun the
+                    TypeScript checker in your browser.
+                  </p>
+                  <p className="report-boundary-note">
+                    Only the explicit Node command shown in the report may say
+                    “fresh TypeScript semantic check.” Its first transfer
+                    assembly can take several minutes. Lambdapi remains a
+                    separately bounded conformance oracle.
+                  </p>
+
+                  {pathoutLoadError !== '' && (
+                    <p className="error-banner" role="alert">
+                      PathOut presentation failed to load: {pathoutLoadError}
+                    </p>
+                  )}
+
+                  <label className="field-label" htmlFor="pathout-select">
+                    Reviewed form
+                  </label>
+                  <select
+                    id="pathout-select"
+                    aria-label="PathOut form"
+                    value={pathoutFormId}
+                    onChange={event => choosePathoutForm(
+                      event.target.value as PathoutFormId
+                    )}
+                    disabled={pathout === undefined}
+                  >
+                    {pathout?.CORE_PATHOUT_PRESENTATION_1F_MANIFEST.forms.map(
+                      form => (
+                        <option key={form.id} value={form.id}>
+                          {form.label}
+                        </option>
+                      )
+                    )}
+                  </select>
+
+                  {selectedPathoutForm !== undefined && (
+                    <div className="preset-context">
+                      <p>{selectedPathoutForm.qualificationClaim}</p>
+                      <p>
+                        <strong>Semantic target:</strong>{' '}
+                        <code>{selectedPathoutForm.semanticTarget}</code>
+                      </p>
+                      <p>
+                        <strong>Result:</strong>{' '}
+                        {selectedPathoutForm.resultKind}
+                      </p>
+                    </div>
+                  )}
+
+                  <label className="field-label" htmlFor="pathout-input">
+                    Finite PathOut expression
+                  </label>
+                  <textarea
+                    id="pathout-input"
+                    aria-label="PathOut expression"
+                    value={pathoutInput}
+                    onChange={event => setPathoutInput(event.target.value)}
+                    spellCheck="false"
+                    rows={4}
+                  />
+                  <button
+                    className="action"
+                    type="button"
+                    onClick={runPathoutPresentation}
+                    disabled={
+                      pathout === undefined ||
+                      pathoutInput.trim() === '' ||
+                      runningView !== undefined
+                    }
+                  >
+                    {runningView === 'pathout'
+                      ? 'Parsing qualification request...'
+                      : 'Show pinned qualification'}
+                  </button>
+                  <h3>Qualification report</h3>
+                  <pre
+                    className="output report-output"
+                    id="pathout-output"
+                    aria-live="polite"
+                  >
+                    {pathoutOutput ||
+                      'Select a form and display its non-fresh evidence.'}
                   </pre>
                 </section>
               )}

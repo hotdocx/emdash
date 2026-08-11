@@ -17,5 +17,10 @@ if [ "${1-}" = "development" ]; then
     exec node --require ts-node/register \
         "$script_dir/../examples/v3_2_proof_development_cli.ts" "$@"
 fi
+if [ "${1-}" = "pathout" ]; then
+    shift
+    exec node --require ts-node/register \
+        "$script_dir/../examples/v3_2_pathout_cli.ts" "$@"
+fi
 exec node --require ts-node/register \
     "$script_dir/../examples/v3_2_ai_native_proof_cli.ts" "$@"

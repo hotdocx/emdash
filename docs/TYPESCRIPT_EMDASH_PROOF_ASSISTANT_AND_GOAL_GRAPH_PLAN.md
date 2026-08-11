@@ -219,12 +219,11 @@ consumer parent before descendant delta. The final transitivity implementation
 is complete at `3b113ad` and pinned by ledger checkpoint `10432ba`: all five
 definitions, one derived support, eight observations, two typed consumers,
 eight negatives, inherited proof reuse, and eight bounded active-Lambdapi
-assertions are green. The next bounded row is presentation `1F`; its first
-behavior-free proposal now freezes a finite expression grammar, an explicit
-Node semantic checker/CLI, an honest static browser route, and an owned Chapter
-5 bridge. Proposal checkpoint `6ad0812` is separately approved under delegated
-unattended authority with later human supersession; only that exact four-stage
-presentation implementation may now proceed.
+assertions are green. Presentation `1F` is now final-proportional-green in the
+semantic checkpoint containing its completion record: its finite parser,
+explicit Node semantic checker/CLI, honest static browser route, and owned
+Chapter 5 bridge preserve the separately reviewed `6ad0812`/`f03ef01`
+boundary. Graduation audit `0G` is the next dependency-ready row.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -320,9 +319,10 @@ v5 through v14 are, in order, `fe0306d`/`a94c2f7`,
 `4244b54`/`73aa94e`. Internalized semantic checkpoint `b6005b3` and
 transitivity proposal/review/semantic/ledger checkpoints
 `2498053`/`fc9a323`/`3b113ad`/`10432ba` complete every selected root-only
-semantic slice. The current bounded tranche is the behavior-free presentation
-`1F` proposal/review boundary; implementation is now ready without changing a
-generic engine, public package surface, or active mathematical authority.
+semantic slice. The current bounded tranche is completed presentation `1F`;
+its semantic checkpoint is the commit containing the completion record below.
+It changes no generic engine, public package surface, or active mathematical
+authority. Graduation audit `0G` is next.
 
 Depends-On:
 
@@ -806,7 +806,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | Terminal same-budget normal-form closure prerequisite | complete | `e560551`; corrected proposal/review `a42ffc9`/`5277885`; original roots replay only after paired `not-equal` under the same consumed budget; focused/static gates and the required 1,923-test full-TypeScript gate are green with zero failures. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | Propagate the existing declaration compiler comparison budget into compilation-time checking | complete | `e560551`; proposal/review `9238104`/`a4d61a9`; exact zero/one-step behavior, retained 256 default and public factory signature, nearest compiler/static gates, and the shared full-TypeScript gate are green. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, fixed-source `PATHIND-TRUSTED-PROFILE-1C` at `a361dc3`, generic checkpoint `e560551`, root-only internalized `PATHOUT-LIBRARY-INTERNALIZED-1D` at `b6005b3`, and root-only transitivity `PATHOUT-LIBRARY-TRANSITIVITY-1E` at `3b113ad` are complete. Reviewed transitivity v4 at `2498053`/`fc9a323` closes exact 0/1/0/5: eight TypeScript observations, two consumers, eight negatives, authority closure, and eight separately gated Lambdapi assertions are green. Public presentation `1F` is next; graduation `0G` remains later. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | Trust boundary `0A`, foundation `1B`, fixed-source `1C`, generic prerequisite `e560551`, internalized `1D`, transitivity `1E`, and presentation `1F` are complete. The reviewed `1F` implementation adds four finite forms, explicit Node fresh checking, static CLI/browser evidence, and an owned book bridge with no new semantics or public package export. Graduation audit `0G` is next. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |
@@ -6397,6 +6397,7 @@ changes, and the completed row advances only to presentation `1F`.
 | `D-PA-174` | Complete root-only `PATHOUT-LIBRARY-TRANSITIVITY-1E` at reviewed v4 and advance only to presentation `1F`. | Semantic checkpoint `3b113ad` compiles five definitions and one subject-checked original-consumer-parent support at exact 0/1/0/5. Transfer/test SHA-256 values are `dd9484a58c6196fe5cc9c6c1ac941bea0a148c449855d011fc61fbcf3dc3fe9d` and `dda1a5436dabc02065aa02e30b1a14000c015783a866a894aa7884d40cae7dbf`. Cold focused execution passes eight active tests with zero failures and one ordinary oracle skip; all observations, both consumers, eight negatives, inherited proof reuse, canonical predecessor-name repair, rule-ID selection, authority closure, and non-export checks are green. The separately gated run accepts all eight active-Lambdapi assertions under a 20-second ceiling with warnings disabled. Root typecheck, focused lint, diff hygiene, and a clean generic-compiler diff pass; the `e560551` aggregate is carried forward. No generic engine, Core, new proof rule, active Lambdapi source, or public/package surface changes. |
 | `D-PA-175` | Freeze a non-authorizing four-stage `PATHOUT-LIBRARY-PRESENTATION-1F` proposal over completed semantic checkpoint `3b113ad` and ledger `10432ba`. | The audit finds no generic LF term parser and refuses to widen the distinct categorical parser. Cold transitivity assembly measured about 195 seconds, so one finite expression vocabulary has two honest modes: a browser-safe inert parser/qualification report that visibly says it did not rerun semantics, and an explicit Node checker/CLI that delegates to the existing transfer, LF checker, and comparator. Four forms present `PathOut`, `rho`, fixed-source `Ind`, and composition. A lazy browser panel and a short owned Chapter 5 bridge complete the row without a second semantic engine. The proposal adds no behavior, parser declaration/binder syntax, Core/checker/rule/equation, active Lambdapi change, npm export/version/release, integration, deployment, or cleanup; separate immutable review remains mandatory. Seven focused tests, root typecheck, focused lint, non-export checks, and proposal SHA-256 `b7b85c34af390a5b1489b0fdd0d015cd2a4ca554c38533bf4459b7ec26029be3` are green; the long aggregate is not rerun for behavior-free data. |
 | `D-PA-176` | Approve only presentation proposal checkpoint `6ad0812` under delegated unattended authority, with human supersession. | Separate immutable review SHA-256 `b28bee76da0aa47ad66a8739ece456973ac515f58fae5b94dc29b5c73f5ab510` authorizes the exact four-stage implementation and named APIs: inert finite parsing and qualification manifest, existing-transfer-backed Node fresh check, static-by-default CLI/browser presentation, and the owned Chapter 5 bridge. It requires source-located diagnostics, canonical serialization, visible evidence classes, all-four-form semantic checking, malformed/role/endpoint negatives, browser closure/build, CLI contracts, book typography/check/render, test-runner registration, typecheck/lint/workspace/diff gates, and the exact `check:ts` disposition. It denies declaration/binder syntax, categorical-parser widening, browser semantic compilation, hidden sessions, semantic/Core/rule changes, npm/package/release effects, active Lambdapi edits, generated-book edits, integration, and deployment. Fourteen combined tests and the proportional static gates are green; no aggregate is rerun for review data. |
+| `D-PA-177` | Complete reviewed `PATHOUT-LIBRARY-PRESENTATION-1F` and advance only to graduation audit `0G`. | The semantic checkpoint containing this record adds the immutable four-form parser/qualification manifest, sole transfer-backed Node check, static-by-default `pathout` CLI, lazy transfer-free browser panel, and owned Chapter 5 bridge. One cold run checks all four forms plus role/endpoint negatives in 207473 ms; ordinary focused execution passes 17 and explicitly skips three cold assertions. Root typecheck, focused lint, workspace, non-export, generic-engine-diff, browser TypeScript/Vite build and 7014-byte transfer-free chunk, book typography/check/render at 300 pages, and diff hygiene are green. A name-filtered main-registry probe timed out at 90 seconds before suite discovery and is not reported as a pass; exact imports plus direct tests establish registration. The long `check:ts` run is waived under the user's direct standing no-long-aggregate instruction, not misreported. No semantic/Core/rule, active Lambdapi, public package/release, integration, deployment, sibling, or generated-book-source effect occurs. |
 
 ## Validation And Checkpoint Policy
 
