@@ -129,8 +129,9 @@ expression vocabulary, an explicit Node semantic-check route, a static honest
 browser view, and a short owned-book bridge. Proposal checkpoint `6ad0812` was
 separately approved at `f03ef01` under delegated unattended authority with
 later human supersession. That exact four-stage implementation is now
-final-proportional-green at semantic checkpoint `8d226cc`. Graduation audit
-`0G` is the next dependency-ready row.
+final-proportional-green at semantic checkpoint `8d226cc`. Graduation `0G`
+now has a non-authorizing frozen proposal which qualifies only the root-source
+profile; a separate immutable review is required before completion.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -298,7 +299,7 @@ named library presentation.
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | complete; final-proportional-green | completed 1D at `b6005b3`/`6225075`; v4 proposal/review `2498053`/`fc9a323`; semantic checkpoint `3b113ad` | The exact root-only **0/1/0/5** transfer compiles five transparent definitions plus one derived complete consumer-parent support. Eight TypeScript observations, two typed consumers, eight negatives, authority closure, and a separately gated eight-assertion Lambdapi oracle are green. No mathematical equation, local proof rule, injectivity, unification, Core, generic-engine, public, or Lambdapi-source behavior is added. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | complete; final-proportional-green | completed direct typed slices through `10432ba`; proposal/review checkpoints `6ad0812`/`f03ef01`; semantic checkpoint `8d226cc` | Four finite forms now have a browser-safe parser/qualification manifest, explicit transfer-backed Node check, static-by-default CLI and lazy browser panel, and an owned Chapter 5 bridge. No second semantic engine or public package export was added. |
-| `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
+| `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | proposal v1 frozen; separate review required | all selected slices through presentation ledger `be487c9`; proposal checkpoint is the commit containing the audit below | Graduate only the root-source-qualified profile: five mathematical opaque owners, nine sealed supports, thirty transparent definitions, exact local rule partitions, bounded computation/presentation claims, and no public package effect. |
 
 ### `PATHOUT-TRUST-BOUNDARY-0A` exact audit contract
 
@@ -3451,6 +3452,62 @@ b4f5d4c5236fdef98eb6e8790d2258613a73e051c7f76eceb9744d72c6a7b6b7  emdash2/book/c
 No active Lambdapi source, generic engine, backend-neutral Core, public/npm
 barrel, package version, registry artifact, sibling repository, generated book
 source, integration branch, deployment, push, or cleanup changed.
+
+## `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` Audit And Frozen Proposal
+
+Date: 2026-08-11
+
+Status: dependency-ready and frozen as a non-self-authorizing proposal. The
+proposal checkpoint is the commit containing this record. A separate immutable
+review remains mandatory before `0G` or `STDLIB-8B` can be completed.
+
+The executable proposal is
+[`pathout_library_graduation_proposal.ts`](../src/v3_2/pathout_library_graduation_proposal.ts),
+with focused drift and boundary tests in
+[`v3_2_pathout_library_graduation_proposal_tests.ts`](../tests/v3_2_pathout_library_graduation_proposal_tests.ts).
+It pins the active Lambdapi source/check digests and every semantic,
+presentation, and ledger predecessor through `8d226cc`/`be487c9`.
+
+The audit makes four distinctions explicit:
+
+1. **Mathematical interface versus sealed support.** The selected opaque
+   PathInd interface has exactly five owners: `PathOutReflEval_funcd`,
+   `path_ind_sec`, `path_ind_func_fapp0`, `PathInd_func`, and
+   `PathInd_transfd`. Nine further local opaque declarations support the
+   categorical construction and remain sealed. “Graduated” does not allow
+   ordinary library code to create either class of owner or install a rule.
+2. **Trusted profile versus transparent library.** The four local slice
+   boundaries remain exactly 5/13/2/9, 5/12/0/6, 4/13/0/10, and 0/1/0/5.
+   Taken together they contain fourteen local sealed declarations, thirty-nine
+   local runtime rules, two local proof rules, and thirty distinct transparent
+   definitions. These are local ownership partitions, not a claim that every
+   rule is a new mathematical computation principle.
+3. **Computation versus metatheory.** Qualification covers the measured
+   fixed-source point/arrow computation, internally varying source and selected
+   higher action, and the stable representable-precomposition normal form for
+   composition. It does not include the deferred path-category comparison
+   bridge, arbitrary external naturality, whole-theory normalization,
+   confluence, canonicity, or consistency.
+4. **Source qualification versus distribution.** The recommendation is
+   `emdash-v3.2-pathout-pathind-root-1`, qualified for contributor/root-source
+   use with TypeScript/emdash as production backend and Lambdapi as bounded
+   conformance oracle. The contributor and npm barrels remain unchanged. A
+   public export needs a concrete consumer and a separate version/release
+   decision; graduation alone is not publication.
+
+The presentation boundary remains equally explicit: four finite expression
+forms, a browser report labelled “qualified at pinned checkpoint; not rerun in
+browser,” and an explicit Node-only fresh semantic check. It adds neither a
+declaration/binder parser nor browser semantic compilation.
+
+Seven focused proposal tests pass, as do root typecheck and focused ESLint.
+The proposal and test SHA-256 values are, respectively,
+`fc35b53dd151694069974b4df6ad3c04ee55cd5d8bacad34f9f21c47c8cee572`
+and
+`33da42c1e625a04fdb3d68d0f876d71a6224bc1ec2887f9f9f0d9af956236b91`.
+The proposal adds no behavior and is absent from all public/browser/package
+barrels, so no semantic, browser, book, kernel, package, or long aggregate is
+rerun for this audit-only checkpoint.
 
 ## Required Evidence For Implementation
 
