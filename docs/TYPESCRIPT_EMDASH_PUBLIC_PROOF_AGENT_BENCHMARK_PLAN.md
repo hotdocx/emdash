@@ -7,8 +7,7 @@ is complete and proportionally qualified at exact checkpoint `d0d3764`. A
 non-authorizing `AGENT-EVAL-12B2` public-surface proposal is complete at exact
 checkpoint `ba49705` and is separately approved by the immutable review in the
 exact checkpoint `8c9652a`. The bounded implementation is complete and
-proportionally qualified in the checkpoint containing the completion record
-below; its exact checkpoint is pinned by the immediate ledger-only follow-up.
+proportionally qualified at exact semantic checkpoint `93c9804`.
 
 Date: 2026-08-11
 
@@ -221,14 +220,14 @@ the evaluator.
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
-| `AGENT-EVAL-12B2` | implementation complete; exact checkpoint pending ledger pin | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
-| `AGENT-EVAL-12B3` | next proposal/audit selected; implementation gated | Requires the exact qualified 12B2 checkpoint plus a separately frozen package version/release contract and fresh CloserFans edit-time audit. Publish exact bytes only after that review, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
+| `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
+| `AGENT-EVAL-12B3` | next proposal/audit selected; implementation gated | Requires qualified 12B2 checkpoint `93c9804` plus a separately frozen package version/release contract and fresh CloserFans edit-time audit. Publish exact bytes only after that review, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 separately approved `AGENT-EVAL-12B2` implementation is also complete and its
-checkpoint is awaiting the immediate ledger-only pin. No release, version,
-sibling, model, or hosted effect follows from either completion.
+exact semantic checkpoint is `93c9804`. No release, version, sibling, model,
+or hosted effect follows from either completion.
 
 ## `AGENT-EVAL-12B1` Proposal Requirements
 
@@ -583,9 +582,8 @@ deployment, or aggregate-pass claim.
 
 Date: 2026-08-11
 
-State: implementation complete and proportionally qualified. The semantic
-checkpoint is the commit containing this record and is pinned by the next
-ledger-only commit.
+State: implementation complete and proportionally qualified at exact semantic
+checkpoint `93c9804`.
 
 The implementation realizes the reviewed surface without changing 12A/12B1
 semantics:
@@ -754,8 +752,8 @@ On continuation:
 3. preserve CloserFans' unrelated untracked review plan;
 4. keep only one semantic row active;
 5. treat 12B1 as complete at exact checkpoint `d0d3764`;
-6. treat exact 12B2 proposal/review checkpoints `ba49705`/`8c9652a` and the
-   implementation checkpoint pinned by the immediate ledger follow-up as
-   complete; advance only to a separately frozen 12B3 audit; and
+6. treat exact 12B2 proposal/review/implementation checkpoints
+   `ba49705`/`8c9652a`/`93c9804` as complete; advance only to a separately
+   frozen 12B3 audit; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
