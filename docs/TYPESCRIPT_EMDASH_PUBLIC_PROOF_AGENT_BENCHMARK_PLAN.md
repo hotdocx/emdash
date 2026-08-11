@@ -1,8 +1,8 @@
 # TypeScript/Emdash Public Proof-Agent Benchmark Plan
 
-Status: living plan; post-`STDLIB-8B` audit complete; non-authorizing
-`AGENT-EVAL-12B1` proposal v1 is ready for its rollback-safe checkpoint and
-separate review. No corpus/interchange behavior is authorized yet.
+Status: living plan; post-`STDLIB-8B` audit complete; exact non-authorizing
+`AGENT-EVAL-12B1` proposal checkpoint `a181885` is separately approved by the
+immutable review below. Internal corpus/interchange implementation is active.
 
 Date: 2026-08-11
 
@@ -212,7 +212,7 @@ the evaluator.
 | Row | State | Exit gate |
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
-| `AGENT-EVAL-12B1` | proposal v1 ready for checkpoint and separate review | The executable proposal pins six tracks, ten cases, exact owners/digests, strict canonical APIs, PathOut/task-kind separation, and every non-effect. Implementation remains unauthorized until the checkpoint is separately reviewed. |
+| `AGENT-EVAL-12B1` | proposal v1 separately approved; internal implementation active | Exact proposal checkpoint `a181885` is approved with seven implementation conditions: unchanged 12A cases, actual reference-owner patch integration, no label substitution, honest ambiguity, attributed manual Lean correspondence, strict interchange, and no public/later effect. |
 | `AGENT-EVAL-12B2` | gated | Requires qualified 12B1. Add the explicit Node runner, browser/documentation presentation, package capability/export, packed consumers, and one final shared-boundary gate. No publication. |
 | `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
@@ -252,9 +252,8 @@ and separate review.
 
 Date: 2026-08-11
 
-State: non-authorizing proposal candidate complete; its exact checkpoint is
-the commit containing this record. A separate immutable review remains
-mandatory before implementation.
+State: non-authorizing proposal complete at exact checkpoint `a181885` and
+separately approved by the immutable review below.
 
 The executable proposal is
 [`lf_proof_agent_public_corpus_proposal.ts`](../src/v3_2/lf_proof_agent_public_corpus_proposal.ts),
@@ -310,6 +309,38 @@ deployment, model invocation, or long aggregate ran. This behavior-free,
 non-export proposal changes none of those boundaries. Its test is directly
 registered in `tests/main_tests.ts`; exact import plus its direct green run is
 the registration evidence, not a claim that the root aggregate passed.
+
+### Separate Review And Implementation Authority
+
+The immutable review is
+[`lf_proof_agent_public_corpus_review.ts`](../src/v3_2/lf_proof_agent_public_corpus_review.ts),
+with focused tests in
+[`v3_2_proof_agent_public_corpus_review_tests.ts`](../tests/v3_2_proof_agent_public_corpus_review_tests.ts).
+It approves only proposal checkpoint `a181885` and proposal SHA-256
+`ecbd67496a99775c13357d9175b623200e20e79346d62b00b8773bc5e7d08a60`
+under delegated unattended authority, with later human supersession. The
+review checkpoint is the commit containing this completion record.
+
+The review's SHA-256 is
+`f3f38e47a84e365a7154ed3717f1375fdb62e332185fb0529770c34fef735e41`;
+its focused test SHA-256 is
+`ce9a31c6b7631e9cdf6c8f9a5f0836b942697c200d767e0c8190230c367ae999`.
+Fourteen combined proposal/review tests, root typecheck, focused lint,
+non-export checks, and diff hygiene are green.
+
+Approval adds one precise implementation condition to the matrix: curation
+labels never count as feature evidence. Each non-abstaining reference owner
+must generate an ordinary patch accepted by fresh unchanged 12A replay. The
+ambiguity case must retain finite synthesis evidence and abstain without a
+hidden winner. The manually translated Lean case must retain source/license
+attribution and a written semantic correspondence without parser-parity
+claims.
+
+The review authorizes only the two internal browser-safe modules and focused
+tests named by the proposal. It does not authorize public barrels, a Node
+runner, a browser product, a package version/release, sibling mutation, a
+model invocation, hosted state, PathOut task conversion, or any Core/checker/
+rule change. No long aggregate is rerun for this behavior-free review.
 
 ## Validation Policy
 
