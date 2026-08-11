@@ -9,8 +9,8 @@ checkpoint `ba49705` and is separately approved by the immutable review in the
 exact checkpoint `8c9652a`. The bounded implementation is complete and
 proportionally qualified at exact semantic checkpoint `93c9804`. The
 read-only `AGENT-EVAL-12B3` package-release and CloserFans host audit is now
-frozen in the proposal contract below; implementation remains gated on a
-separate immutable review.
+frozen at exact proposal checkpoint `bb16e47`; implementation remains gated
+on a separate immutable review.
 
 Date: 2026-08-11
 
@@ -225,7 +225,7 @@ the evaluator.
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
-| `AGENT-EVAL-12B3` | proposal/audit frozen; implementation review-gated | The commit containing the contract below freezes exact `0.3.0` release, workflow-maintenance, Pages-side-effect, and new ordinary-Node `emdash_benchmark` workspace boundaries. Its exact proposal checkpoint must be pinned and separately reviewed before any version, workflow, Git, registry, Release, deployment, or sibling mutation. |
+| `AGENT-EVAL-12B3` | proposal frozen at `bb16e47`; implementation review-gated | The exact contract freezes `0.3.0` release, workflow-maintenance, Pages-side-effect, and new ordinary-Node `emdash_benchmark` workspace boundaries. Separate immutable review is required before any version, workflow, Git, registry, Release, deployment, or sibling mutation. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
@@ -710,10 +710,10 @@ record.
 
 Date: 2026-08-11
 
-State: non-authorizing proposal. This audit changes only the two living plans.
-Its exact proposal checkpoint must be pinned by an immediate ledger-only
-follow-up and then approved by a separate immutable review before any package,
-workflow, Git-ref, registry, GitHub Release, Pages, or CloserFans mutation.
+State: non-authorizing proposal frozen at exact checkpoint `bb16e47`. This
+audit changes only the two living plans. It must be approved by a separate
+immutable review before any package, workflow, Git-ref, registry, GitHub
+Release, Pages, or CloserFans mutation.
 
 ### Fresh Release And Host Evidence
 
@@ -973,7 +973,8 @@ On continuation:
 4. keep only one semantic row active;
 5. treat 12B1 as complete at exact checkpoint `d0d3764`;
 6. treat exact 12B2 proposal/review/implementation checkpoints
-   `ba49705`/`8c9652a`/`93c9804` as complete; advance only to a separately
-   frozen 12B3 audit; and
+   `ba49705`/`8c9652a`/`93c9804` as complete; treat exact 12B3 proposal
+   checkpoint `bb16e47` as frozen and non-authorizing; advance only to its
+   separate immutable review; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
