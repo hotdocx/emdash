@@ -3574,6 +3574,46 @@ external/repository state beyond plan checkpoints. This proposal changes plans
 only and requires a separate immutable review before probes. Accounting
 remains 35/41.
 
+###### Immutable R3 no-model diagnosis review
+
+Reviewed proposal checkpoint:
+`de1f00ebb47585e741137fb412bd250f48a4c69e`, exact parent
+`8055eb35b4db098da3d41c71ba2f453133867352`, exact tree
+`f5a1772ce6cd237bcf5e074ad3949aef2f80c2f3`. Complete plan SHA-256 values are:
+
+```text
+81a25370fd9883f29bf33008948842cf70a530012c6e83e2a86669259ade2c7b  docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md
+7f2132f108256bb7a08be1ddd5c678dfc3929f603f678baa06a0118794ce3388  docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md
+```
+
+Review checked the current local help against the official
+[Codex developer-command reference](https://developers.openai.com/codex/cli/reference).
+The selected probes are supported read-only/non-interactive surfaces:
+`exec --help` parses options without a prompt; `doctor --json` is documented as
+a redacted diagnostic report; `features list` is read-only; and
+`debug models --bundled` explicitly avoids catalog refresh. None constitutes a
+proof-agent attempt or consumes the v2 lease again.
+
+Decision: approve only the R3 audit exactly as proposed, with these controls:
+
+1. build arguments from committed `8276e96` bytes in one disposable clean
+   template and compare their SHA-256 to receipt-bound
+   `cdca618e4eed081e622b1a3e7fef17be23d5d0d04e32dce85bae6268ad3a4592`;
+2. replace only the terminal stdin prompt marker with `--help`, retaining every
+   preceding global and post-`exec` option, and require zero input/model access;
+3. invoke redacted doctor, feature-list, and bundled-model commands only in a
+   closed environment; whitelist reported fields before recording them and do
+   not retain full diagnostics;
+4. read only committed source/schema/prompt/case metadata and ordinary host
+   path/mode/Git facts, never any private evidence file; and
+5. remove only the validated disposable directory, then synchronize one
+   measured diagnosis or unresolved result in both plans.
+
+Do not invoke `codex exec` with a prompt, read raw v1/v2 evidence or credentials,
+alter config/login, use a network-refreshing model command, retry, create a new
+authorization coordinate, edit code, or mutate external state. A diagnosed
+correction requires a later proposal and review. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
