@@ -1,6 +1,6 @@
 {
   "name": "@hotdocx/emdash",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "AI-native TypeScript authoring over backend-neutral checked emdash Core",
   "keywords": [
     "proof-assistant",

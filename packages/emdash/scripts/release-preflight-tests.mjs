@@ -32,11 +32,11 @@ test('accepts the exact immutable emdash release identity', () => {
   assert.deepEqual(report, {
     revision: 'emdash-npm-release-preflight-v1',
     packageName: '@hotdocx/emdash',
-    version: '0.2.0',
-    tag: 'emdash-v0.2.0',
+    version: '0.3.0',
+    tag: 'emdash-v0.3.0',
     repository: 'hotdocx/emdash',
-    artifactName: 'emdash-npm-0.2.0',
-    tarballName: 'hotdocx-emdash-0.2.0.tgz',
+    artifactName: 'emdash-npm-0.3.0',
+    tarballName: 'hotdocx-emdash-0.3.0.tgz',
     provenance: true,
   });
   assert.equal(Object.isFrozen(report), true);
@@ -57,7 +57,7 @@ test('accepts the exact immutable emdash release identity', () => {
 
 test('rejects tag, repository, and public-manifest drift', () => {
   assert.throws(
-    () => validate({ tag: 'v0.2.0' }),
+    () => validate({ tag: 'v0.3.0' }),
     (error) => error instanceof EmdashNpmReleasePreflightError &&
       error.code === 'INVALID_TAG',
   );
@@ -135,10 +135,11 @@ test('pins a token-free, least-authority two-job workflow', async () => {
     'sha256sum "$tarball"',
     'npm install --global npm@11.19.0 --ignore-scripts',
     'npm publish "$tarball" --access public --provenance',
-    'd23441a48e516b6c34aea4fa41551a30e30af803',
+    '3d3c42e5aac5ba805825da76410c181273ba90b1',
     '820762786026740c76f36085b0efc47a31fe5020',
-    'ea165f8d65b6e75b540449e92b4886f43607fa02',
-    '018cc2cf5baa6db3ef3c5f8a56943fffe632ef53',
+    '043fb46d1a93c77aae656e7c1c64a875d1fc6a0a',
+    '3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c',
+    'persist-credentials: false',
   ]) {
     assert.match(workflow, new RegExp(required.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&'), 'u'));
   }

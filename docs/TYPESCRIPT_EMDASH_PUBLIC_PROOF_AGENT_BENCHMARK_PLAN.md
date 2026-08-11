@@ -11,7 +11,10 @@ proportionally qualified at exact semantic checkpoint `93c9804`. The
 read-only `AGENT-EVAL-12B3` package-release and CloserFans host audit is now
 frozen at exact proposal checkpoint `bb16e47`; implementation remains gated
 by the exact immutable review at `0027c66`, which authorizes only the staged
-contract recorded below.
+contract recorded below. Its Stage A exact `0.3.0` local release candidate is
+now proportionally qualified; the semantic checkpoint is the commit
+containing the qualification record below and is pinned by the immediate
+ledger-only follow-up.
 
 Date: 2026-08-11
 
@@ -226,7 +229,7 @@ the evaluator.
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
-| `AGENT-EVAL-12B3` | proposal/review `bb16e47`/`0027c66`; implementation authorized within exact contract | The immutable review approves exact `0.3.0` release, workflow-maintenance, Pages verification, and later ordinary-Node `emdash_benchmark` workspace stages under strict sequencing. |
+| `AGENT-EVAL-12B3` | proposal/review `bb16e47`/`0027c66`; Stage A local release candidate qualified; external/host stages pending | Exact `0.3.0` assertions and current action pins are green through focused release/package/consumer gates. The candidate checkpoint is the commit containing the qualification record below and is pinned immediately afterward; no external or sibling effect has occurred. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
@@ -1016,6 +1019,97 @@ Review validation is deliberately plan-only: exact proposal blob hashes,
 predecessor ancestry, unchanged public-entry hashes, current clean state,
 exact diff review, conflict-marker scan, and `git diff --check`. No behavior or
 aggregate gate ran, and none is claimed.
+
+## `AGENT-EVAL-12B3` Stage A Local Candidate Qualification Record
+
+Date: 2026-08-11
+
+State: local release candidate complete and proportionally qualified. The
+semantic checkpoint is the commit containing this record and is pinned by the
+immediate ledger-only follow-up. No remote, registry, Release, tag, Pages, or
+sibling mutation has occurred.
+
+The implementation follows the reviewed contract exactly:
+
+- `packages/emdash/package.json` is exact `0.3.0` with the same five ordered
+  export keys, files, engine, repository, provenance, and no-bin/no-script/no-
+  dependency surface;
+- only the matching active version assertions changed in
+  `scripts/check-workspace.mjs`, release preflight tests, and the packed-
+  install verifier. Historical package evidence remains `0.1.0`/`0.2.0`;
+- checkout is pinned to official `v7.0.1`
+  `3d3c42e5aac5ba805825da76410c181273ba90b1` with
+  `persist-credentials: false`; upload-artifact is official `v7.0.1`
+  `043fb46d1a93c77aae656e7c1c64a875d1fc6a0a`; download-artifact is official
+  `v8.0.1` `3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c`; setup-node retains official
+  `v7.0.0` `820762786026740c76f36085b0efc47a31fe5020`;
+- build remains unprivileged, only publish has `id-token: write`, and workflow
+  scanning finds no secret reference, npm token, or local ignored credential;
+  and
+- `package_core.ts`, `package_authoring.ts`, and `package_workspace.ts` retain
+  their exact `ab513f7` SHA-256 values. No semantic/public-entry owner changed.
+
+Changing the workspace package version caused the first pnpm-wrapped
+workspace and release-policy invocations to stop before their scripts with
+`ERR_PNPM_VERIFY_DEPS_BEFORE_RUN`. One frozen-lockfile install refreshed only
+the ignored per-worktree link metadata; pnpm reported the lockfile current and
+changed no package or tracked lock. Both blocked gates then passed. They are
+not misreported as initial test passes.
+
+Exact proportional evidence:
+
+```text
+./scripts/pnpmw install --frozen-lockfile
+  passed; pnpm@11.16.0; lockfile current; no dependency change
+
+./scripts/pnpmw run workspace:check
+  passed; exact four-workspace contract; Node 24.11.1
+
+./scripts/pnpmw run package:release:check
+  passed: 3/3 exact identity, manifest negatives, token-free workflow policy
+
+./node_modules/.bin/tsc --noEmit --pretty false
+  passed
+
+focused ESLint over release-preflight-tests.mjs,
+verify-packed-install.mjs, and check-workspace.mjs
+  passed with no diagnostics
+
+./scripts/pnpmw run package:build
+  passed: ESM, CommonJS, declarations, and source maps
+
+node packages/emdash/scripts/release-preflight.mjs \
+  --tag emdash-v0.3.0 --repository hotdocx/emdash
+  passed with exact version/tag/repository/artifact/tarball/provenance record
+
+node packages/emdash/scripts/verify-packed-install.mjs \
+  --tarball /tmp/.../hotdocx-emdash-0.3.0.tgz
+  passed: exact inventory plus installed ESM, CommonJS, strict NodeNext,
+  benchmark browser, existing-entry browser, and root-only browser consumers
+
+git diff --check, no-secret scan, and unchanged-entry hash audit
+  passed
+```
+
+The exact local candidate tarball has 162 entries and 2,778,964 bytes. Its
+SHA-256 is
+`49c4f2ca7a12f1bc0f7721044015c1df3bee17e849bc593b99a9161206178541`.
+A second independent pack from unchanged source produced the identical digest
+and `cmp` passed. This proves local deterministic repacking; hosted and
+registry identity remain future evidence.
+
+`actionlint` is unavailable on this host, so it is not claimed. The exact
+workflow policy test and later GitHub execution own that boundary. Root
+`check:ts`, root-test, `check:all`, Lambdapi/kernel, book/print, Pages,
+registry, GitHub Release, environment approval, CloserFans, Arrowgram,
+provider/model, and hosted-agent checks did not run. The user's standing
+anti-aggregate direction applies, and the omissions are not passes.
+
+The next admissible sequence is exact staged review and candidate checkpoint,
+then clean ancestry/remote/registry re-audit before the reviewed non-force
+branch/main push, Pages verification, annotated tag, frozen Release, and OIDC
+publication. The CloserFans stage remains forbidden until public registry
+bytes are independently verified.
 
 ## Validation Policy
 

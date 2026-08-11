@@ -189,7 +189,7 @@ try {
     );
   }
   assert.equal(installedManifest.name, '@hotdocx/emdash');
-  assert.equal(installedManifest.version, '0.2.0');
+  assert.equal(installedManifest.version, '0.3.0');
   assert.equal(
     installedManifest.scripts,
     undefined,
