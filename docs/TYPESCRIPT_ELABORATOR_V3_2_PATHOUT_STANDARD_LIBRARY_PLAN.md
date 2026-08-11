@@ -45,8 +45,11 @@ approved under delegated unattended authority with human supersession at
 review checkpoint `0cefb73`; capped execution tracing shows the predecessor's
 active `Functor` delta runs first and makes the v7 pre-delta rule unreachable;
 corrected non-authorizing proposal v8 replaces that rule with the exact stable
-post-delta decoded-type fusion, retains 5/12/0/6, and awaits checkpoint plus
-separate review; no PathOut/PathInd profile or public export is yet qualified
+post-delta decoded-type fusion, retains 5/12/0/6, is checkpointed at
+`65656e5`, and is separately approved under delegated unattended authority
+with human supersession at review checkpoint `0ab7fd4`; semantic
+implementation may resume, but no PathOut/PathInd profile or public export is
+yet qualified
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -208,7 +211,7 @@ named library presentation.
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
-| `PATHIND-TRUSTED-PROFILE-1C` | corrected v8 proposal awaiting checkpoint and separate review | completed 1B; v7 proposal/review checkpoints `f0fd4a6`/`0cefb73`; superseded v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | All twelve v7 rules subject-check, but predecessor `categorical.mixed-action.functor-classifier-definition` shadows rule five before local matching. V8 replaces, rather than adds to, that rule with the exact stable `τ(Obj(Functor_cat(Functor_cat(K,Cat),Cat))) → τ(Obj(Functor_cat(Catd_cat(K),Cat)))` fusion, retaining 5/12/0/6 and every global-category/engine/public denial. |
+| `PATHIND-TRUSTED-PROFILE-1C` | corrected v8 separately reviewed; implementation ready | completed 1B; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | All twelve v7 rules subject-check, but predecessor `categorical.mixed-action.functor-classifier-definition` shadows rule five before local matching. Reviewed v8 replaces, rather than adds to, that rule with the exact stable `τ(Obj(Functor_cat(Functor_cat(K,Cat),Cat))) → τ(Obj(Functor_cat(Catd_cat(K),Cat)))` fusion, retaining 5/12/0/6 and every global-category/engine/public denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -1855,9 +1858,8 @@ later-slice, public, integration, and release denial. It also denies retaining
 either the unreachable v7 rule or the temporary trace.
 
 Proposal v8 remains behavior-free, root-only, non-authorizing, and absent
-from contributor, npm, and browser barrels. Its checkpoint and a separate
-immutable review are mandatory before the implementation draft may replace
-rule five.
+from contributor, npm, and browser barrels. Proposal checkpoint `65656e5`
+freezes those exact bytes.
 
 Corrected-v8 proposal validation on 2026-08-10 is:
 
@@ -1886,6 +1888,44 @@ git diff --check
 
 No Lambdapi or long repository aggregate is relevant to this proposal-only
 correction.
+
+The separate immutable review is
+[`src/v3_2/pathind_fixed_source_review_v8.ts`](../src/v3_2/pathind_fixed_source_review_v8.ts),
+with focused checks in
+[`tests/v3_2_pathind_fixed_source_review_v8_tests.ts`](../tests/v3_2_pathind_fixed_source_review_v8_tests.ts).
+It approves only checkpoint `65656e5` under the user's standing unattended
+delegation, with later human supersession. Authorization is limited to exact
+one-for-one replacement at the root-only **5/12/0/6** boundary, and the stable
+post-delta rule must subject-check through the generic runtime compiler. The
+review expressly denies retaining v7's dead rule, adding a thirteenth rule,
+retaining the trace wrapper, installing the underlying category collapse,
+widening declaration checking, every 1D/1E/1F or public effect, active
+Lambdapi edits, and integration or release.
+
+Corrected-v8 separate-review validation on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_fixed_source_review_v8.ts \
+  tests/v3_2_pathind_fixed_source_review_v8_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_fixed_source_proposal_v8_tests.ts \
+  tests/v3_2_pathind_fixed_source_review_v8_tests.ts
+  11 tests / 2 suites: 11 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi or long aggregate is relevant to this behavior-free review.
+Review checkpoint `0ab7fd4` freezes that decision. The exact v8 semantic
+implementation may now resume; the review authorizes nothing beyond it.
 
 ## Required Evidence For Implementation
 
