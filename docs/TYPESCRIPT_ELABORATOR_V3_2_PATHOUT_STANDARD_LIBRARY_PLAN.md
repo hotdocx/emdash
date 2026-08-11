@@ -48,8 +48,10 @@ corrected non-authorizing proposal v8 replaces that rule with the exact stable
 post-delta decoded-type fusion, retains 5/12/0/6, is checkpointed at
 `65656e5`, and is separately approved under delegated unattended authority
 with human supersession at review checkpoint `0ab7fd4`; semantic
-implementation may resume, but no PathOut/PathInd profile or public export is
-yet qualified
+implementation is complete and final-proportional-green at 5/12/0/6, with
+five runtime observations, one typed rho-section consumer, eight strict
+negatives, nine bounded Lambdapi assertions, safe-library denials, and the
+non-export boundary green; no PathOut/PathInd public export is yet authorized
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -211,7 +213,7 @@ named library presentation.
 | `PATHOUT-TRUST-BOUNDARY-0A` | complete with forward correction | active source and checks; current transfer profiles | The immutable root-only audit pins both sources, 34 selected declarations, seven observed rules, five opaque PathOut/PathInd owners, and four missing prerequisite closures. It installs no behavior or product export. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
-| `PATHIND-TRUSTED-PROFILE-1C` | corrected v8 separately reviewed; implementation ready | completed 1B; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | All twelve v7 rules subject-check, but predecessor `categorical.mixed-action.functor-classifier-definition` shadows rule five before local matching. Reviewed v8 replaces, rather than adds to, that rule with the exact stable `τ(Obj(Functor_cat(Functor_cat(K,Cat),Cat))) → τ(Obj(Functor_cat(Catd_cat(K),Cat)))` fusion, retaining 5/12/0/6 and every global-category/engine/public denial. |
+| `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
@@ -1926,6 +1928,88 @@ git diff --check
 No Lambdapi or long aggregate is relevant to this behavior-free review.
 Review checkpoint `0ab7fd4` freezes that decision. The exact v8 semantic
 implementation may now resume; the review authorizes nothing beyond it.
+
+### `PATHIND-TRUSTED-PROFILE-1C` implementation completion
+
+The corrected-v8 implementation is
+[`src/v3_2/pathind_fixed_source_transfer.ts`](../src/v3_2/pathind_fixed_source_transfer.ts),
+with focused qualification in
+[`tests/v3_2_pathind_fixed_source_transfer_tests.ts`](../tests/v3_2/pathind_fixed_source_transfer_tests.ts).
+It reuses the whole qualified 1B predecessor and adds exactly five opaque
+declarations, twelve runtime rules, zero local proof rules, and six checked
+transparent definitions. All declarations and rules compile through the
+generic transfer engines; all twelve local runtime rules subject-check in
+TypeScript, including corrected v8's stable post-delta fusion. There is no
+Core owner, checker/evaluator branch, generic normalization, active Lambdapi
+source, or declaration-signature substitution.
+
+The five selected TypeScript observations are green:
+
+1. displayed-functor objects project to ordinary transfor objects;
+2. objects of the `FibCov_target_catd` fibre compute to objects of
+   `Hom(Catd_cat(Z),Rep_catd(Z,x),D)`;
+3. `path_ind_func_fapp0(E)[u]` computes to `path_ind_sec(E,u)`;
+4. a literal Sigma point of `path_ind_sec(E,u)` computes to the exact
+   `Obj_func` presentation of transport of `u` along `rho`; and
+5. the selected Sigma-pullback motive folds to `fib_cov_transf`.
+
+The one typed ordinary-library consumer is `pathout_refl_arrow_sec`. The
+TypeScript checker accepts its section type, transparent delta exposes its
+`path_ind_sec(Rep,id)` body, and literal point application computes to the
+exact representable transport-along-`rho` term. The runtime intentionally does
+not add a further rule equating that term with bare `rho`: a trial reuse of
+the predecessor proof program on the fully expanded term reached its fixed
+step budget, so it is neither acceptance evidence nor a reason to widen the
+engine. The ninth bounded Lambdapi assertion independently verifies the active
+authority's conventional
+`piapp0(pathout_refl_arrow_sec,(y,p)) ≡ pathout_refl_arrow(x,y,p)` endpoint.
+This preserves the computation/proof/oracle distinction rather than turning
+a proof-time fact into new runtime computation.
+
+All eight strict negative consumers are executable and green: wrong PathOut
+source category, wrong motive base, datum from the wrong reflexive fibre,
+evaluation at a foreign PathOut object, wrong representable in the Sigma
+pullback, foreign scoped term, ordinary-library runtime-rule authority, and
+ordinary-library opaque-signature authority. The ordinary route accepts only
+checked transparent definitions. The profile remains absent from contributor,
+npm, workspace, and browser barrels; `PathInd_func`, `PathInd_transfd`, the
+internalized theorem, transitivity, text/browser presentation, integration,
+and release remain outside 1C.
+
+Final proportional evidence on 2026-08-10 is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_fixed_source_transfer.ts \
+  tests/v3_2_pathind_fixed_source_transfer_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_fixed_source_transfer_tests.ts
+  18 tests / 1 suite: 17 passed, 0 failed, 1 gated oracle skipped
+
+EMDASH_RUN_LAMBDAPI_PATHIND_FIXED_PROBES=1 \
+node --require ts-node/register --test \
+  --test-name-pattern='matches all nine bounded active-Lambdapi assertions' \
+  tests/v3_2_pathind_fixed_source_transfer_tests.ts
+  1 test / 1 suite: 1 passed, 0 failed; all nine assertions accepted
+
+git diff --check
+  passed
+```
+
+Static scans also confirm that the temporary diagnostic wrapper is absent,
+the generic checker diff is empty, and no public/browser/package barrel names
+the transfer. The root TypeScript and repository aggregates are intentionally
+omitted under the standing proportional-validation policy: this root-only
+profile changes no shared generic engine, public barrel, package/workspace
+boundary, browser closure, or Lambdapi source. This omission is not aggregate
+pass evidence. Row 1D is now dependency-ready but still requires its own
+bounded proposal and separate review before implementation.
 
 ## Required Evidence For Implementation
 
