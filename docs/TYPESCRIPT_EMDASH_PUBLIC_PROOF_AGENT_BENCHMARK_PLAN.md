@@ -2,8 +2,10 @@
 
 Status: living plan; post-`STDLIB-8B` audit complete; exact non-authorizing
 `AGENT-EVAL-12B1` proposal checkpoint `a181885` is separately approved by the
-immutable review at `d271c33`. Internal corpus/interchange implementation is
-active.
+immutable review at `d271c33`. The internal corpus/interchange implementation
+is proportionally qualified in the checkpoint containing the completion
+record below; the exact checkpoint is pinned by the immediate ledger-only
+follow-up.
 
 Date: 2026-08-11
 
@@ -213,14 +215,15 @@ the evaluator.
 | Row | State | Exit gate |
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
-| `AGENT-EVAL-12B1` | proposal v1 separately approved; internal implementation active | Exact proposal/review checkpoints `a181885`/`d271c33` impose seven implementation conditions: unchanged 12A cases, actual reference-owner patch integration, no label substitution, honest ambiguity, attributed manual Lean correspondence, strict interchange, and no public/later effect. |
-| `AGENT-EVAL-12B2` | gated | Requires qualified 12B1. Add the explicit Node runner, browser/documentation presentation, package capability/export, packed consumers, and one final shared-boundary gate. No publication. |
+| `AGENT-EVAL-12B1` | implementation complete; exact checkpoint pending ledger pin | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
+| `AGENT-EVAL-12B2` | next proposal selected; implementation gated | Requires the exact qualified 12B1 checkpoint, then a separately frozen/reviewed contract for the explicit Node runner, browser/documentation presentation, package capability/export, packed consumers, and one final shared-boundary gate. No publication. |
 | `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
-Only `AGENT-EVAL-12B1` proposal work is active. The first proposal checkpoint
-does not authorize implementation until separately reviewed under the
-persistent-goal Git SOP.
+The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
+next bounded action is a non-authorizing `AGENT-EVAL-12B2` proposal after the
+exact completion checkpoint is pinned. No public export, runner, package, or
+release effect follows merely from selecting that proposal.
 
 ## `AGENT-EVAL-12B1` Proposal Requirements
 
@@ -343,6 +346,93 @@ runner, a browser product, a package version/release, sibling mutation, a
 model invocation, hosted state, PathOut task conversion, or any Core/checker/
 rule change. No long aggregate is rerun for this behavior-free review.
 
+## `AGENT-EVAL-12B1` Implementation Completion Record
+
+Date: 2026-08-11
+
+State: implementation complete and proportionally qualified; the semantic
+checkpoint is the commit containing this record and is pinned by the next
+ledger-only commit.
+
+The implementation adds exactly the two reviewed internal browser-safe
+owners:
+
+- [`lf_proof_agent_interchange.ts`](../src/v3_2/lf_proof_agent_interchange.ts)
+  strictly parses canonical case, suite, attempt, run, and report bytes. It
+  rejects malformed JSON, unknown fields at every nested level, unsupported
+  revisions, noncanonical bytes, stale source identities, and forged derived
+  reports. Accepted reports are freshly reconstructed and reevaluated by the
+  unchanged 12A owner.
+- [`lf_proof_agent_public_corpus.ts`](../src/v3_2/lf_proof_agent_public_corpus.ts)
+  constructs, serializes, and strictly parses the fixed six-track/ten-case
+  corpus. Every parsed corpus is rebuilt from current owners and its canonical
+  bytes are compared before use; parsed values are deeply frozen.
+
+The ten cases cover explicit `exact`/`apply`, contextual `have`, coupled
+`refine`, bounded obvious proof, proof-producing transport simplification,
+source-revision maintenance, finite shared-diamond instance synthesis,
+genuine equal-priority ambiguity, and an attributed manual semantic
+translation of Lean 4 `tests/elab/diamond1.lean`. The two class fixtures use a
+real implicit structure parameter and remain standalone: they neither depend
+on nor alter the existing presheaf, sieve, site, sheafification, or scheme
+mathematics.
+
+Fresh unchanged 12A evaluation yields exactly nine `accepted-complete`
+results, zero incomplete results, zero rejected results, and one deliberate
+`abstained` result for ambiguity. Every non-abstaining reference attempt is an
+ordinary patch produced through its named existing owner and accepted by
+fresh replay. Curation labels, the reference run, and the manually translated
+Lean example are explicitly non-authoritative; no parser-parity claim is
+made.
+
+The exact source/test SHA-256 values at qualification are:
+
+```text
+lf_proof_agent_interchange.ts
+  0df6d032d8f67162a499578e59f39f44fc724a08b4be4fa1a6a7c1bef5ce574d
+lf_proof_agent_public_corpus.ts
+  8d207b36ff5d4b645494bc696b681d23b08d0132b7d8b9831065b70a326c97e5
+v3_2_proof_agent_interchange_tests.ts
+  b730fdabdc22ef0bf762a32e136dace886a9a657bd7b82a8b2bc75eec5e60de3
+v3_2_proof_agent_public_corpus_tests.ts
+  f699b3cf7a26ea2aca2bef57cf7e8c790614b00be425554230911434c0046c9b
+```
+
+The canonical self-contained corpus is 5,884,285 UTF-8 bytes. That bounded
+measurement is retained as a 12B2 transport/presentation design input; it is
+not silently replaced with references or a looser parser in 12B1.
+
+Proportional validation:
+
+```text
+strict interchange plus representative corpus
+  passed: 18/18 tests, 2 suites
+
+unchanged AGENT-EVAL-12A evaluator
+  passed: 5/5 tests, 1 suite
+
+browser-directed closure, including the new transitive corpus probe
+  passed: 22/22 tests, 1 suite
+
+./scripts/pnpmw exec tsc --noEmit
+  passed
+
+eslint over both implementation owners, both focused tests,
+the browser-closure owner, and the test registry
+  passed
+
+git diff --check
+  passed
+```
+
+The already-green 14 proposal/review tests and 104 nearest-owner tests are
+carried forward because their frozen owners and digests did not change. Root
+`check:ts`, root-test, `check:all`, package/installed-consumer, browser-product
+build, Lambdapi/kernel, print/book, sibling, registry, deployment, model, and
+hosted checks did not run. Public barrels, package manifests, semantic Core,
+checker/rules, and every later-row surface remain unchanged; the omitted long
+aggregates are not reported as passes.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -392,8 +482,9 @@ On continuation:
 2. read this plan and the governing master ledger;
 3. preserve CloserFans' unrelated untracked review plan;
 4. keep only one semantic row active;
-5. freeze and checkpoint the 12B1 executable proposal before implementation;
-6. review it separately, using delegated unattended approval only after the
-   checkpoint exists; and
+5. treat 12B1 as complete only at the exact checkpoint pinned by its immediate
+   ledger follow-up;
+6. freeze and separately review a non-authorizing 12B2 proposal before any
+   public runner, browser, barrel, package, or consumer implementation; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.

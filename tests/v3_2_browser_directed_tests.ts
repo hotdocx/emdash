@@ -658,6 +658,46 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
         );
     });
 
+    it('keeps the internal proof-agent corpus/interchange closure Node-free',
+        () => {
+            const corpusClosure = collectLocalClosure(
+                'src/v3_2/lf_proof_agent_public_corpus.ts'
+            );
+            const interchangeClosure = collectLocalClosure(
+                'src/v3_2/lf_proof_agent_interchange.ts'
+            );
+            assert.equal(
+                corpusClosure.has(resolve(
+                    'src/v3_2/lf_proof_agent_public_corpus.ts'
+                )),
+                true
+            );
+            assert.equal(
+                corpusClosure.has(resolve(
+                    'src/v3_2/lf_instance_synthesis.ts'
+                )),
+                true
+            );
+            assert.equal(
+                corpusClosure.has(resolve('src/v3_2/proof_simplifier.ts')),
+                true
+            );
+            assert.equal(
+                interchangeClosure.has(resolve(
+                    'src/v3_2/lf_proof_agent_benchmark.ts'
+                )),
+                true
+            );
+            for (const forbidden of [
+                'src/v3_2/ai_proof_cli.ts',
+                'src/v3_2/lf_remote_workspace_store.ts',
+                'src/v3_2/lf_proof_development_cli.ts'
+            ]) {
+                assert.equal(corpusClosure.has(resolve(forbidden)), false);
+                assert.equal(interchangeClosure.has(resolve(forbidden)), false);
+            }
+        });
+
     it('keeps research goal-graph evaluation browser-safe and host-free', () => {
         const closure = collectLocalClosure(
             'src/v3_2/research_goal_graph.ts'

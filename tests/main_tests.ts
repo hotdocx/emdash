@@ -76,6 +76,8 @@ import './v3_2_pathout_library_graduation_proposal_tests';
 import './v3_2_pathout_library_graduation_review_tests';
 import './v3_2_proof_agent_public_corpus_proposal_tests';
 import './v3_2_proof_agent_public_corpus_review_tests';
+import './v3_2_proof_agent_interchange_tests';
+import './v3_2_proof_agent_public_corpus_tests';
 import './v3_2_lf_builder_tests';
 import './v3_2_lf_profile_proposal_tests';
 import './v3_2_directed_1a_proposal_tests';
