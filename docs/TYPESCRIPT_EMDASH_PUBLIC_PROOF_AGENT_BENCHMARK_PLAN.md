@@ -3,7 +3,10 @@
 Status: living plan; post-`STDLIB-8B` audit complete; exact non-authorizing
 `AGENT-EVAL-12B1` proposal checkpoint `a181885` is separately approved by the
 immutable review at `d271c33`. The internal corpus/interchange implementation
-is complete and proportionally qualified at exact checkpoint `d0d3764`.
+is complete and proportionally qualified at exact checkpoint `d0d3764`. A
+non-authorizing `AGENT-EVAL-12B2` public-surface proposal is complete in the
+checkpoint containing the proposal record below; its exact checkpoint must be
+pinned and separately reviewed before implementation.
 
 Date: 2026-08-11
 
@@ -214,14 +217,14 @@ the evaluator.
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
-| `AGENT-EVAL-12B2` | next proposal selected; implementation gated | Requires qualified 12B1 checkpoint `d0d3764`, then a separately frozen/reviewed contract for the explicit Node runner, browser/documentation presentation, package capability/export, packed consumers, and one final shared-boundary gate. No publication. |
+| `AGENT-EVAL-12B2` | proposal v1 complete; exact checkpoint and separate review pending | The proposal selects one isolated browser-safe `./benchmark` subpath, a stateless repository Node artifact runner, a user-triggered lazy browser view, exact packed consumers, and retained no-bin/no-dependency package policy. It adds no behavior by itself. |
 | `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
-next bounded action is a non-authorizing `AGENT-EVAL-12B2` proposal after the
-exact completion checkpoint is pinned. No public export, runner, package, or
-release effect follows merely from selecting that proposal.
+non-authorizing `AGENT-EVAL-12B2` proposal below now awaits an exact checkpoint
+pin and separate immutable review. No public export, runner, package, or
+release effect follows merely from writing that proposal.
 
 ## `AGENT-EVAL-12B1` Proposal Requirements
 
@@ -430,6 +433,93 @@ hosted checks did not run. Public barrels, package manifests, semantic Core,
 checker/rules, and every later-row surface remain unchanged; the omitted long
 aggregates are not reported as passes.
 
+## `AGENT-EVAL-12B2` Frozen Proposal V1
+
+Date: 2026-08-11
+
+State: non-authorizing proposal complete; the proposal checkpoint is the
+commit containing this record and will be pinned by the immediate ledger-only
+follow-up. Separate immutable review remains mandatory.
+
+The executable proposal is
+[`lf_proof_agent_public_surface_proposal.ts`](../src/v3_2/lf_proof_agent_public_surface_proposal.ts),
+with focused drift, digest, package, runner, browser-budget, authority, and
+non-effect tests in
+[`v3_2_proof_agent_public_surface_proposal_tests.ts`](../tests/v3_2_proof_agent_public_surface_proposal_tests.ts).
+It pins all seventeen current evaluator/corpus, package, capability, runner,
+and browser owners to the completed 12B1 ledger `3e3fcf8`.
+
+The proposal makes four architectural choices:
+
+1. Add one isolated browser-safe `@hotdocx/emdash/benchmark` subpath exporting
+   the unchanged 12A evaluator, strict interchange, and fixed public corpus.
+   The root, `authoring`, and `workspace` entries do not reexport it, so their
+   consumers do not acquire the benchmark closure.
+2. Keep the npm package's existing least-authority rule: no npm bin, install
+   hook, runtime dependency, or packed CLI source. The explicit Node reference
+   adapter is instead `./scripts/emdash benchmark`; a later CloserFans runner
+   imports the browser-safe package API in 12B3.
+3. Give that stateless adapter five artifact commands: compact `catalog`,
+   canonical `case`, canonical full `corpus`, canonical `reference`, and
+   strict `evaluate --run-file PATH`. Evaluation reads exactly one bounded
+   file and freshly replays it; the adapter neither scans directories, writes
+   files, spawns a provider, invokes a model, accesses a network, retains a
+   session, nor claims to enforce provider-reported resource limits.
+4. Add a user-triggered dynamic browser import. Page load neither constructs
+   nor serializes the corpus. The panel shows exact tracks, cases, owners,
+   features, nine accepted references, one honest abstention, and the explicit
+   absence of a leaderboard or model-performance claim.
+
+The payload decision is measured rather than guessed. Canonical corpus text
+is 5,884,285 UTF-8 bytes. A standalone minified browser bundle of the current
+corpus closure using esbuild 0.21.5 is 548,200 bytes / 136,817 gzip bytes; the
+current Vite 5.4.19 initial page chunk is 436,361 bytes / 117,869 gzip bytes.
+The proposal caps the candidate initial chunk at 465,000 / 130,000 gzip bytes
+and the benchmark lazy closure at 650,000 / 175,000 gzip bytes. The initial
+chunk must not contain the corpus revision; the lazy closure must.
+
+Proposal/test SHA-256 values are, respectively,
+`c820786bd4974313fff2eae5e3d459f29d46a2a18a5c97690047fe324364e759`
+and
+`d1bccbc2049330e686a9a2c148c36351c29a902c19432c6f7ab374d031b7045b`.
+
+Proportional proposal validation:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_proof_agent_public_surface_proposal_tests.ts
+  passed: 8/8 tests, 1 suite
+
+./scripts/pnpmw exec tsc --noEmit
+  passed
+
+eslint over proposal, proposal test, and test registry
+  passed
+
+./scripts/pnpmw run package:build
+  passed as current-package baseline
+
+direct existing emdash-template tsc plus Vite build
+  passed: 157 modules; initial chunk 436,361 bytes
+
+git diff --check
+  passed
+```
+
+The prescribed wrapper attempt for the unchanged standalone browser fixture
+did not reach its build: pnpm's dependency-status subprocess could not find a
+plain `pnpm` executable in this Corepack-only environment. Direct checked-in
+fixture binaries then passed typecheck and Vite build. This is recorded as an
+environmental wrapper limitation, not a wrapper pass; the 12B2 implementation
+must still satisfy the exact browser gate.
+
+No package verifier, installed consumer, release preflight test, root
+`check:ts`, root-test, `check:all`, Lambdapi/kernel, print/book, sibling,
+registry, release, deployment, model, or hosted operation ran for this
+proposal. Those public-boundary checks belong to the implementation candidate;
+the long aggregates remain subject to the direct standing waiver and are not
+reported as passes.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -480,7 +570,8 @@ On continuation:
 3. preserve CloserFans' unrelated untracked review plan;
 4. keep only one semantic row active;
 5. treat 12B1 as complete at exact checkpoint `d0d3764`;
-6. freeze and separately review a non-authorizing 12B2 proposal before any
-   public runner, browser, barrel, package, or consumer implementation; and
+6. pin and separately review the exact non-authorizing 12B2 proposal before
+   any public runner, browser, barrel, package, or consumer implementation;
+   and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
