@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | one exact v2 Stage A invocation authorized after plan checkpoint | Clean `8276e96`, manifest `28c06be7`, current closed CLI/login/cache state, live no-model permission probe, absent v2 lease/run root, and all focused gates satisfy the immutable at-call review. Any outcome is terminal; no retry or graduation claim is permitted. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | terminal v2 spawned `process-failure`; no-model diagnosis pending | The sole command authorized by `bf94f6b` spawned once, exited 1 in 95 ms with an incomplete stream, zero commands/changes, null usage/outcome, and persistent lease `6dce7e8`. Receipt `c97c1f8` is non-graduating/non-proof; retry is forbidden. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6659,6 +6659,16 @@ command once after checkpoint. Any preflight or post-spawn result terminates
 the authorization; raw evidence stays private, and all open-book/non-
 graduation/non-proof labels remain. Accounting remains 35/41.
 
+That sole command was invoked once and is terminal. Receipt `c97c1f8` records
+a spawned real child, exit 1 after 95 ms, `process-failure`, incomplete stream,
+zero commands/file changes, invalid final message, null usage and benchmark
+outcome, and unconditional non-graduation/non-proof labels. Persistent lease
+`6dce7e8` binds the exact reviewed coordinates and source. Conservative
+`providerExecuted=true` does not establish that a remote request completed;
+no valid model result or cost record exists. Raw private evidence remains
+uninspected, no retry is allowed, and any diagnosis must be a separately
+planned no-model tranche. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6881,6 +6891,7 @@ graduation/non-proof labels remain. Accounting remains 35/41.
 | `D-PA-215` | Approve exact R2 proposal `a92c16c` only for a matching v2 literal at both guards and static v1 retirement checks. | A dependency-free bootstrap and internal TypeScript driver require duplicated closed literals; the existing root verifier can prevent drift. The change does not authorize v2 use until checkpointed tests and a new at-call review pass. |
 | `D-PA-216` | Qualify the exact three-file v2 allowlist rotation at CloserFans checkpoint `8276e96`, tree `e03085a`. | Both guards now match v2 and statically reject retired v1; focused outer canary, live no-model permission, and exact static/security/evidence gates pass. V2 remains non-authorized pending a new immutable at-call review. |
 | `D-PA-217` | Authorize exactly one v2 Stage A operator command after this behavior-free plan checkpoint. | Exact source/manifest/input hashes, closed CLI/login/cache state, live no-model permission, clean ancestry/status, absent v2 lease/run root, and preserved v1 evidence satisfy the final review. Every outcome is terminal; no retry, alternate coordinate, performance claim, or graduation is permitted. |
+| `D-PA-218` | Classify the sole v2 invocation as a terminal spawned `process-failure` and prohibit retry. | Receipt `c97c1f8` and lease `6dce7e8` bind exact provenance. The child exited 1 in 95 ms with incomplete stream, zero commands/changes, no valid final message, null usage/outcome, and no proof/performance evidence. Any diagnosis remains separately no-model. |
 
 ## Validation And Checkpoint Policy
 

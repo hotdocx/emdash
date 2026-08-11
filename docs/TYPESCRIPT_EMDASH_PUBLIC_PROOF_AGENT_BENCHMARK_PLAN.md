@@ -3469,6 +3469,65 @@ No long aggregate is relevant or authorized. This decision uses the user's
 standing unattended-approval delegation plus checkpoint/backtracking SOP; the
 human may supersede it before execution. Roadmap accounting remains 35/41.
 
+### Terminal v2 operator result: spawned process failure
+
+Authorization checkpoint `bf94f6b2293496244651393873a1b846eb77bdb6`, exact
+parent `aa6a105634f4caaf31570cc480b9c3fd302ac78d`, exact tree
+`bf115d4b307bb861737af36f5220cce630218154`, checkpointed the sole command.
+The exact operator command was then invoked once from clean CloserFans
+`8276e96`. It returned `process-failure` and was not retried.
+
+The minimized canonical receipt is preserved at the reviewed run root with
+SHA-256
+`c97c1f87e5734e03c0fa6e69a98b4cb162cd9bff9e9951112809a54c4ba251f1`.
+The persistent v2 lease has SHA-256
+`6dce7e86044eddbf0602dd0a3f95ea18c49cde5d1a82c4fcada05186a3f516eb`.
+Run/evidence/receipt/lease modes are `0700`/`0700`/`0600`/`0600`; both objects
+bind exact ID/run-root/source/tree/template/operator/argument hashes and remain
+preserved.
+
+The receipt records:
+
+```text
+revision             getpaidx-emdash-stage-a-receipt-v2
+caseId               native.exact.local-premise
+operationalOutcome   process-failure
+benchmarkOutcome     null
+valid                false
+providerExecuted     true
+spawned              true
+exitCode             1
+durationMs           95
+timedOut             false
+overflow             null
+signal               null
+spawnError           null
+stream failure       incomplete-stream
+command count        0
+file-change events   0
+final-message valid  false
+usage                 null
+graduationEligible   false
+proofEvidence        false
+```
+
+The source remained unchanged, its audit and clean-authority checks passed,
+and no forbidden command/file surface was observed. The canonical attempt,
+run, and report were independently hashed, but the benchmark outcome is null.
+The receipt's `providerExecuted=true` is the conservative classification for a
+successfully spawned real Codex child. The 95-millisecond process failure does
+not establish whether a remote model request began or completed; it establishes
+only that no valid event stream/final message, usage record, candidate change,
+or benchmark result was produced. Dollar cost therefore remains unknown/null.
+
+The v2 authorization and command are terminal. Do not reuse the ID, replace
+the run root, remove/rewrite the lease or evidence, inspect raw JSONL/stderr/
+model-message/candidate/replay files, or retry. A later diagnosis must be
+separately planned and no-model, using committed code, CLI help/config probes,
+and minimized receipt facts rather than the private raw transcript. No proof,
+mathematical result, performance result, success-rate, leaderboard,
+solver-comparison, or graduation claim exists. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -3543,7 +3602,9 @@ On continuation:
    checkpoint `a6b5e61`, tree `fe50a80`, as the focused-green four-file R1
    implementation; treat R2 proposal/review `a92c16c`/`8f0cf31` and
    CloserFans checkpoint `8276e96`, tree `e03085a`, as only the focused-green
-   v2 allowlist rotation, with no call yet authorized; and
+   v2 allowlist rotation; treat authorization checkpoint `bf94f6b`, receipt
+   `c97c1f8`, and lease `6dce7e8` as a terminal one-shot spawned
+   `process-failure` with no benchmark result and no retry authority; and
    forbid any retry or alternate coordinate without the amended implementation
    checkpoint, new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe
