@@ -40,6 +40,7 @@ import './v3_2_lf_transfer_declaration_budget_review_tests';
 import './v3_2_lf_transfer_declaration_budget_tests';
 import './v3_2_pathind_internalized_proposal_v5_tests';
 import './v3_2_pathind_internalized_proposal_v6_tests';
+import './v3_2_pathind_internalized_proposal_v7_tests';
 import './v3_2_pathind_internalized_review_v5_tests';
 import './v3_2_pathind_internalized_review_v6_tests';
 import './v3_2_lf_builder_tests';
