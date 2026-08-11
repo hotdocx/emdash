@@ -1,18 +1,15 @@
 # TypeScript/Emdash Public Proof-Agent Benchmark Plan
 
-Status: living plan; post-`STDLIB-8B` audit complete; exact non-authorizing
-`AGENT-EVAL-12B1` proposal checkpoint `a181885` is separately approved by the
-immutable review at `d271c33`. The internal corpus/interchange implementation
-is complete and proportionally qualified at exact checkpoint `d0d3764`. A
-non-authorizing `AGENT-EVAL-12B2` public-surface proposal is complete at exact
-checkpoint `ba49705` and is separately approved by the immutable review in the
-exact checkpoint `8c9652a`. The bounded implementation is complete and
-proportionally qualified at exact semantic checkpoint `93c9804`. The
-read-only `AGENT-EVAL-12B3` package-release and CloserFans host audit is now
-frozen at exact proposal checkpoint `bb16e47`; implementation remains gated
-by the exact immutable review at `0027c66`, which authorizes only the staged
-contract recorded below. Its Stage A exact `0.3.0` local release candidate is
-proportionally qualified at exact checkpoint `995e497`.
+Status: living plan; `AGENT-EVAL-12B0` through `AGENT-EVAL-12B3` complete.
+Corpus/interchange checkpoint `d0d3764`, public runner/package checkpoint
+`93c9804`, immutable package source `995e497`, permanent release hardening
+`3af518d`, and locally integrated CloserFans host `cbf2356` satisfy the
+separately reviewed contracts and proportional gates recorded below. Exact
+public `@hotdocx/emdash@0.3.0`, Pages, Release, provenance, installed
+consumers, release-only OIDC workflow, and the all-abstention source workspace
+are verified. `AGENT-EVAL-12B4` is ready only for a read-only policy audit;
+provider/model execution, run retention, measurement, and graduation remain
+gated.
 
 Date: 2026-08-11
 
@@ -23,7 +20,7 @@ Worktree: `/home/user1/emdash1-classes-v1`
 Governing plan:
 [`TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md`](./TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md).
 
-Exact predecessors:
+Original exact predecessors:
 
 - public `@hotdocx/emdash@0.2.0` at release checkpoint `ab513f7`;
 - internal `AGENT-EVAL-12A` evaluator at semantic checkpoint `f46ff9a`;
@@ -58,11 +55,12 @@ enforcement, publication, and hosted workspace operation remain outer layers.
 4. record reproducible real-agent runs and graduate only the claims that the
    measured corpus supports.
 
-The first two slices are now implemented without an npm release, sibling edit,
-model run, or PathOut task conversion. The exact 12B2 checkpoint is pinned,
-and the next bounded action has therefore been limited to the non-authorizing
-12B3 version/release and fresh CloserFans edit-time audit below—not
-publication itself.
+The first three slices are now complete. The third published exact `0.3.0`,
+restored a permanent release-only workflow, and locally integrated one
+source-first CloserFans workspace; it still invoked no provider/model and made
+no PathOut task conversion. The next bounded action is therefore only the
+read-only 12B4 provider/execution/retention/reporting audit—not a real-agent
+run or performance claim.
 
 ## Post-`STDLIB-8B` Readiness Findings
 
@@ -227,13 +225,15 @@ the evaluator.
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
-| `AGENT-EVAL-12B3` | exact `0.3.0` registry release verified; permanent workflow hardening complete at `3af518d`, integration pending; CloserFans host pending | Pages run `31509112917` and live 6/10/9/1 panel passed. After two preserved pre-package checkout failures, reviewed recovery run `31510726533` published byte-identical OIDC/provenance bytes. The temporary dispatch is removed at an exact checkpoint and must reach public `main` before sibling work. |
-| `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
+| `AGENT-EVAL-12B3` | complete at Emdash hardening `3af518d` and CloserFans host `cbf2356` | Exact `0.3.0`, Pages run `31509112917`, protected OIDC recovery run `31510726533`, byte/provenance/installed-consumer verification, permanent trigger removal, and the focused-green ten-abstention source workspace are complete. Two safe pre-package failures and the reviewed one-time dispatch remain durable evidence. |
+| `AGENT-EVAL-12B4` | policy audit ready; all effects gated | The installed hosted consumer now exists. Freeze provider identity/credentials, execution, exact inputs, retention/privacy, reproducibility, cost/usage semantics, reporting, and graduation before any real run; preserve canonical attempts/reports only under that reviewed policy. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 separately approved `AGENT-EVAL-12B2` implementation is also complete and its
-exact semantic checkpoint is `93c9804`. No release, version, sibling, model,
-or hosted effect follows from either completion.
+exact semantic checkpoint is `93c9804`. Separately reviewed 12B3 is complete
+through exact public and local-host checkpoints recorded above. No provider,
+model, retained-run, or measured-graduation effect follows from these
+completions.
 
 ## `AGENT-EVAL-12B1` Proposal Requirements
 
@@ -1670,6 +1670,123 @@ not passes. The next admissible operation is clean non-force goal-branch push
 and `main` fast-forward to exact `3af518d`, followed by public workflow-byte
 verification. Only afterward may the frozen additive CloserFans stage begin.
 
+## `AGENT-EVAL-12B3` CloserFans Candidate And Local Integration Record
+
+Date: 2026-08-11
+
+State: complete. Exact public package, permanent workflow hardening, and the
+additive source-first host are all verified. The qualified CloserFans
+checkpoint is `cbf23566fe59d03a9e5f7539a37bfdc0beb473ba` (`cbf2356`,
+`feat(workspaces): add Emdash proof-agent benchmark`); the same exact commit is
+now local CloserFans `master` by clean fast-forward.
+
+### Public prerequisite closure
+
+Immediately before the sibling edit, public Emdash `main` and the remote
+tracking authority were exact permanent hardening checkpoint `3af518d`; the
+remote proof-assistant branch was exact ledger checkpoint `f5206a8`.
+Annotated `emdash-v0.3.0` still peeled to immutable package source `995e497`.
+The permanent workflow at local/public `main` retained SHA-256
+`97ea63caafdd4efd0d17eee9d99fded2ab0acf560257349e34469c633ccf8201`,
+with no temporary dispatch trigger. The previously recorded npm identity,
+byte equality, installed consumers, provenance, Release, and Pages evidence
+therefore closed every frozen host prerequisite; none was rerun merely for
+reassurance.
+
+### Concurrent-work isolation
+
+CloserFans initially had local `master` at exact frozen baseline `5c0d0c1`, no
+remote, and one unrelated untracked quality-review plan. Branch
+`goal/emdash-proof-benchmark-v1` was created from that baseline. While the new
+template remained untracked, a concurrent process committed that independently
+owned plan as `8980842` on the same branch. This tranche did not inspect,
+absorb, reset, amend, or remove that commit. Instead it created separate
+worktree `/home/user1/closerfans-emdash-benchmark-v1` and recovery branch
+`goal/emdash-proof-benchmark-v1-recovery` from exact `5c0d0c1`, then reproduced
+only the plan-scoped new files there. The first untracked copy remains
+recoverable in the original worktree; it was neither staged nor treated as
+integration evidence.
+
+### Additive host result
+
+The candidate changes exactly fourteen CloserFans files and 904 inserted
+lines: new `templates/emdash_benchmark/**`, one focused verifier, one root
+script registration, and concise `AGENTS.md`, `README.md`, and current-runtime
+records. Existing `emdash_ts` over exact public Emdash `0.1.0`,
+`emdash_goal_graph` over exact public Emdash `0.2.0`, the root lock, controller
+pools/images, API/MCP, database, Arrowgram, and all Emdash package bytes remain
+unchanged.
+
+The auto-discovered `emdash_benchmark@1.0.0` workspace uses the ordinary Node
+controller and exact public `@hotdocx/emdash@0.3.0`. Its only editable run
+authority is `benchmark-run.emdash.ts`: a typed ten-entry record in canonical
+case order with an explicit abstention for every initial decision. An agent
+may edit one decision to a portable proof-plan patch and record exact retrieved
+premises plus optional provider-reported usage. No generated report, mutable
+cursor, provider state, or done flag replaces that source.
+
+The template-local adapter implements `catalog`, `case`, `run`, `evaluate`,
+`evaluate-file`, `reference`, and `verify`. Every invocation freshly
+reconstructs the fixed public corpus. The source run scores as ten abstentions;
+the separately labeled package-owner reference freshly retains nine accepted
+complete patches and one honest ambiguity abstention. The adapter reads only
+one explicitly named canonical run for `evaluate-file`; it does not scan or
+write directories, invoke a provider/model, access a network, retain session
+state, or claim to enforce provider-reported limits. Its preview serves only
+inert HTML/README documentation and exposes neither source nor evaluator
+route.
+
+### Proportional qualification and integration
+
+The first verifier invocation stopped before testing because the new recovery
+worktree had no root `tsx`; a lockfile-based, scripts-disabled local install
+bootstrapped that worktree. The first semantic run then measured a conceptual-
+track versus canonical-case ordering mismatch, which was corrected by using
+the package suite's exact ID order. A strengthened unknown-case negative first
+hit canonical ordering; sorting that deliberately renamed attempt produced a
+valid canonical run which then reached and was rejected by fresh suite
+evaluation. These diagnostics are retained as corrections, not passes.
+
+Final focused evidence is:
+
+- `npm run templates:verify:emdash-benchmark`: passed after a disposable
+  public-registry install; it asserted exact installed `0.3.0`, template
+  typecheck, all seven commands, six tracks/ten cases, initial 0/0/0/10 and
+  separate 9/0/0/1 outcomes, canonical run/report byte replay,
+  noncanonical/stale/tampered/unknown-case rejection with exit 2, default pool,
+  inert preview, and source-route 404;
+- `npm run templates:validate`: passed every discovered manifest and the real
+  archive exclusions;
+- root `npm run typecheck`: passed after local-only `prisma generate`; the
+  preceding missing-generated-client enum cascade is not a TypeScript pass;
+- targeted `eslint --no-ignore` on the repository-owned verifier passed with
+  no diagnostics. Template-local TypeScript/MTS is intentionally outside the
+  root ESLint project and passed its own strict `tsc`; `node --check` passed
+  for the static server. The default ignored-file lint observation and the
+  invalid forced-project retry are not lint passes; and
+- exact staged-name/stat/diff review, `git diff --cached --check`, no-secret
+  scan, manifest/package assertions, unchanged predecessor-template and lock
+  comparisons, and absence of generated/cache/build paths all passed.
+
+No full Jest, Playwright, Next.js build, controller/Docker/Azure, database,
+API/MCP, Arrowgram, Emdash TypeScript aggregate, Lambdapi/kernel, book/print,
+provider/model, cloud workspace, push, or deployment ran. Those unchanged
+boundaries are explicit omissions, not passes.
+
+Candidate `cbf2356` has exact parent `5c0d0c1`. Immediately before integration
+the candidate worktree was clean, local `master` remained exact `5c0d0c1`,
+the revision count was `0 1`, the fourteen-file diff was the reviewed
+candidate, and CloserFans still had no remote. `git switch master` followed by
+`git merge --ff-only goal/emdash-proof-benchmark-v1-recovery` advanced only
+local `master` to exact `cbf2356`; no merge commit, push, publication, or
+deployment occurred. The recovery branch also retains exact `cbf2356`.
+
+`AGENT-EVAL-12B3` is therefore complete. The next admissible benchmark work is
+not an immediate model run: it is a separate read-only `AGENT-EVAL-12B4`
+provider, execution, retention, privacy, reproducibility, and reporting audit,
+followed by a frozen proposal and independent review before any credential,
+provider, hosted action, retained run, measurement, or performance claim.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -1717,13 +1834,15 @@ On continuation:
 1. inspect all worktrees, branch ancestry, staged/unstaged state, and current
    plan checkpoints;
 2. read this plan and the governing master ledger;
-3. preserve CloserFans' unrelated untracked review plan;
+3. preserve the concurrent CloserFans branch at `8980842` and its original-
+   worktree untracked template copy; do not absorb, reset, or clean either;
 4. keep only one semantic row active;
 5. treat 12B1 as complete at exact checkpoint `d0d3764`;
 6. treat exact 12B2 proposal/review/implementation checkpoints
-   `ba49705`/`8c9652a`/`93c9804` as complete; treat exact 12B3 proposal
-   and review checkpoints `bb16e47`/`0027c66` as the sole staged authority;
-   treat exact local candidate `995e497` as qualified; advance only to its
-   clean external integration/release audit before any external effect; and
+   `ba49705`/`8c9652a`/`93c9804` as complete; treat 12B3 proposal/review,
+   package source, permanent hardening, and locally integrated host checkpoints
+   `bb16e47`/`0027c66`/`995e497`/`3af518d`/`cbf2356` as complete; advance only
+   to a read-only 12B4 policy audit before any real-agent or retention effect;
+   and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.

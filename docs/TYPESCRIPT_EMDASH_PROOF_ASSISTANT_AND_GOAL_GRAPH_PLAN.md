@@ -38,13 +38,13 @@ proof-agent benchmark audit is complete and its first pure attempt-scoring
 evaluator is implemented and final-proportional-green through focused,
 nearest-owner, typecheck/lint, and browser-closure gates; its representative
 corpus/interchange and isolated public package, stateless runner, and lazy
-browser surface are now complete and final-proportional-green, while exact
-release/host installation and real-agent measurements remain separately
-gated; the read-only exact `0.3.0` release and additive CloserFans benchmark-
-workspace proposal is frozen at exact checkpoint `bb16e47` and separately
-approved at exact immutable review checkpoint `0027c66`; its Stage A exact
-`0.3.0` local candidate is proportionally qualified at exact checkpoint
-`995e497` and awaits clean external integration; the first research-planning
+browser surface are now complete and final-proportional-green. Exact
+`@hotdocx/emdash@0.3.0`, Pages, protected OIDC publication, provenance,
+installed consumers, permanent release-only workflow hardening at `3af518d`,
+and the additive CloserFans source-run workspace at locally integrated
+checkpoint `cbf2356` complete `AGENT-EVAL-12B3`; real-agent execution,
+retention, measurements, and graduation remain separately gated behind a
+new 12B4 policy audit. The first research-planning
 goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -831,8 +831,8 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B0` | Post-library benchmark readiness and architecture audit | complete; read-only | Existing 12A evaluator, public workspace/authoring APIs, real CloserFans TypeScript host, and checked proof/class fixtures make corpus construction ready. PathOut remains a distinct semantic-task family, not an LF patch case. |
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
-| `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | public `0.3.0` verified; permanent workflow hardening complete at `3af518d`, integration pending; host stage pending | Pages and live benchmark passed. Reviewed OIDC recovery run `31510726533` published byte-identical, attested registry bytes after two preserved pre-package failures. Exact temporary-dispatch removal must be verified on public `main` before CloserFans. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | gated | Requires installed 12B3 consumer and a separately frozen provider/run retention and reporting policy. |
+| `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | policy audit ready; all effects gated | Installed 12B3 consumer now exists. A separate read-only audit must freeze provider identity/credentials, execution boundary, exact prompts/inputs, retention/privacy, reproducibility, cost/usage semantics, reporting, and graduation before any real run or claim. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6508,6 +6508,7 @@ relevant evidence to this plan-only selection.
 | `D-PA-194` | Approve only exact dispatch-recovery proposal `cda361e` under delegated unattended authority, with human supersession. | Immutable dedicated/governing hashes `a69ed4403b6f88231e1e5f2ec3e1742c3dcfb7ee65576f3fa4d4f350ebbd0013` and `6efd912cd1c61834b5e3b031e985a02b323c70e47bc84557e48f28c538716898` freeze a one-option `emdash-v0.3.0` dispatch in the same trusted workflow/environment. Official event semantics, same-filename npm validation, immutable package checkout, separate workflow/package SHAs, protected OIDC, mandatory post-publish trigger removal, and all denials are explicit. The review authorizes only temporary implementation, focused qualification, clean integration, one exact dispatch, and exact pending-environment approval. |
 | `D-PA-195` | Qualify the reviewed 12B3-R2 temporary dispatch implementation at exact semantic checkpoint `7e275a7`. | Exactly the npm workflow and focused policy test change behavior. The only manual input is a required one-option `emdash-v0.3.0` choice; event resolution and job condition distinguish it from ordinary releases while retaining credential-empty immutable-tag checkout, artifact handoff, protected OIDC, and every package byte. Focused 3/3 release policy, workspace, root typecheck, lint, package build/preflight, YAML parse, and diff hygiene pass; all long/kernel/book/browser/packed/sibling/hosted gates remain omitted. This plan-only pin advances only to clean integration and one exact dispatch. |
 | `D-PA-196` | Verify exact public `@hotdocx/emdash@0.3.0` from recovery run `31510726533` and complete mandatory permanent hardening at exact checkpoint `3af518d`. | Exact build/publish jobs `93843570505`/`93843776669`, protected environment `19605245682`, deployment `5854097178`, artifact `9108950678`, OIDC/SLSA/npm attestations, signature, Sigstore log `2423388773`, dist metadata, and fresh installed consumers are green. Local, artifact, and registry tarballs are byte-identical at 162 entries, 2,778,964 bytes, SHA-256 `49c4f2ca7a12f1bc0f7721044015c1df3bee17e849bc593b99a9161206178541`. Workflow provenance resolves `7e275a7`; build logs prove package source `995e497`. Exact temporary-dispatch removal restores the reviewed R1 workflow/test blobs and passes 3/3 policy, lint, YAML, trigger-absence, and diff gates. This plan-only pin advances only to clean integration/public-byte verification before CloserFans. |
+| `D-PA-197` | Complete `AGENT-EVAL-12B3` with the focused-green source-first CloserFans consumer at exact local checkpoint `cbf2356`. | Public `main` first reached exact hardening `3af518d` with workflow SHA-256 `97ea63caafdd4efd0d17eee9d99fded2ab0acf560257349e34469c633ccf8201`. Concurrent unrelated CloserFans commit `8980842` was preserved and isolated without rewrite; recovery branch/worktree restarted from exact `5c0d0c1`. The additive 14-file template imports exact public `0.3.0`, begins with ten source abstentions, freshly exposes seven stateless commands and separate 9/1 owner reference, and adds no provider/session/network/write/pool/API authority. Disposable registry/runtime negatives, template validation, root typecheck, real targeted lint, server syntax, staged diff/secret/unchanged-owner gates pass. Candidate parent and local `master` were exact `5c0d0c1`; `--ff-only` advanced both master and recovery branch to `cbf2356` with no remote/push/deployment. All long, cloud, controller, database, API/MCP, Arrowgram, kernel/book, and real-agent gates remain omitted. 12B4 advances only to a read-only policy audit. |
 
 ## Validation And Checkpoint Policy
 
@@ -6619,8 +6620,9 @@ synchronized:
 > process-global state, an authoritative MCP/LSP server, or a new trusted Core
 > node by analogy.
 >
-> Start from exact public `@hotdocx/emdash@0.2.0`, completed CloserFans
-> TypeScript/goal-view consumers at `bd4146b`/`5c0d0c1`, completed
+> Start from exact public `@hotdocx/emdash@0.3.0`, completed CloserFans
+> TypeScript/goal-view/benchmark consumers at
+> `bd4146b`/`5c0d0c1`/`cbf2356`, completed
 > `STDLIB-8B` proposal/review/ledger checkpoints
 > `85b560e`/`d7d7428`/`3135747`, and every earlier proof-engineering checkpoint
 > recorded above. Treat `POST-STDLIB-8B-AUDIT-17` and
@@ -6635,12 +6637,14 @@ synchronized:
 > subpath, stateless repository
 > adapter, strict artifacts/errors, lazy compact browser view, measured
 > budgets, least-authority package policy, and installed-consumer matrix.
-> Treat exact 12B3 release/host proposal/review checkpoints
-> `bb16e47`/`0027c66` as the sole staged implementation authority and exact
-> local release candidate `995e497` as proportionally qualified. Re-audit and
-> release exact `0.3.0`
-> before the additive CloserFans workspace; keep every provider/model/run
-> policy in 12B4. Do not relabel a PathOut request as
+> Treat exact 12B3 proposal/review, package-source, permanent-hardening, and
+> locally integrated CloserFans checkpoints
+> `bb16e47`/`0027c66`/`995e497`/`3af518d`/`cbf2356` as complete. Preserve the
+> exact public package, release-only OIDC workflow, all-abstention editable
+> source, stateless commands, and separate non-authoritative 9/1 reference.
+> Advance 12B4 only through a read-only provider/execution/retention/privacy/
+> reporting policy audit and separately reviewed proposal before any real
+> agent run. Do not relabel a PathOut request as
 > an LF proof-patch task or shrink representativeness. Keep real-agent runs in
 > 12B4.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
