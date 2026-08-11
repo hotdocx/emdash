@@ -1341,6 +1341,96 @@ then non-force goal-branch push and `main` fast-forward to exact `f965d03`.
 Only after the public workflow bytes are verified may the exact same Release
 object be re-published once under the reviewed recovery sequence.
 
+## `AGENT-EVAL-12B3-R2` Tagged-Workflow Failure And One-Time Dispatch Proposal
+
+Date: 2026-08-11
+
+State: non-authorizing proposal. The second failed run falsifies the proposed
+Release-event recovery mechanism, not the direct-checkout correction. This
+section must be checkpointed and independently reviewed before adding a
+manual trigger, pushing another correction, dispatching, approving an
+environment, publishing, or editing CloserFans.
+
+Exact new evidence:
+
+- recovery implementation `f965d03` and its direct-checkout policy are public
+  on `main`; the public workflow SHA-256 is
+  `97ea63caafdd4efd0d17eee9d99fded2ab0acf560257349e34469c633ccf8201`;
+- Release ID `368683536` was changed to draft and published again without
+  changing its tag, title, body, or non-prerelease state;
+- this emitted exactly one new release run, `31510177054`, at package head
+  `995e497`; and
+- that run nevertheless executed the old step `Checkout exact release tag`
+  from tagged commit `995e497`, failed again in checkout's recursive
+  credential removal, skipped every package/publish step, and left npm exact
+  `0.3.0` absent.
+
+GitHub's documented event model explains the result: each workflow run uses
+the workflow version present at the event's associated commit/ref; for a
+release event, `GITHUB_SHA` is the released tag commit and `GITHUB_REF` is the
+tag. A corrected default-branch workflow is necessary for future release
+tags, but re-publishing an immutable old tag cannot make that tag contain the
+correction. Repeating the Release transition would therefore be knowingly
+ineffective and is forbidden. GitHub separately documents that a
+`workflow_dispatch` run uses the workflow on the selected branch/ref. npm's
+trusted-publisher documentation permits manual workflows and validates the
+calling workflow filename; using the same `npm-publish.yml` and protected
+environment retains the configured publisher identity.
+
+Official design evidence:
+
+- <https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows>;
+- <https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#release>;
+- <https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_dispatch>; and
+- <https://docs.npmjs.com/trusted-publishers/>.
+
+The bounded forward correction is a temporary exact-version recovery path:
+
+1. On current `main`, add `workflow_dispatch` to the existing
+   `.github/workflows/npm-publish.yml` with one required choice input whose
+   only option is exact `emdash-v0.3.0`. Do not add another workflow or accept
+   an arbitrary version, tag, ref, SHA, package, registry, or command input.
+2. Resolve `RELEASE_TAG` and the concurrency key from either the ordinary
+   release tag or that exact dispatch choice. Keep the ordinary release job
+   condition unchanged in meaning; admit manual execution only when
+   `github.event_name == 'workflow_dispatch'` and the choice equals exact
+   `emdash-v0.3.0`.
+3. Retain credential-empty direct checkout, exact tag/main fetch and ancestry,
+   package preflight/build/pack, artifact handoff, no-republish guard,
+   protected `npm-release` environment, sole publish-job `id-token: write`,
+   npm 11.19.0, and OIDC provenance. The manual run's workflow-authority SHA
+   will be the selected corrected `main` commit while its package-source SHA
+   remains the detached immutable tag `995e497`; record both rather than
+   conflating provenance of the release machinery with package source.
+4. Update the focused policy test to require the one-option recovery input,
+   exact event-aware tag resolution and condition, and continued denial of
+   push/pull-request triggers, secrets/tokens, checkout actions, submodule
+   traversal, and arbitrary manual inputs. Run the same focused workflow,
+   workspace, typecheck, lint, build/preflight, YAML, no-secret, and diff gates
+   as R1. Long/kernel/book/browser/packed/sibling aggregates remain omitted.
+5. After separate immutable review, green checkpoint, ledger pin, clean audit,
+   and non-force goal/main integration, dispatch exactly once on exact remote
+   `main` with choice `emdash-v0.3.0`. Do not modify the Release again. Verify
+   the run's workflow-authority head and exact checked-out package head.
+6. Approve only that run's exact pending `npm-release` deployment. Apply all
+   original artifact, OIDC, registry, provenance, byte-identity, installed-
+   export, and consumer gates. If publication fails before npm mutation,
+   retain evidence and stop; if npm succeeds, the version is immutable.
+7. After successful registry verification and before CloserFans, immediately
+   remove `workflow_dispatch`, its input, temporary condition, and dual tag
+   resolution from `main`. Restore the permanent release-only direct-checkout
+   workflow, rerun its focused policy/YAML/diff gates, checkpoint, non-force
+   integrate, and verify public workflow bytes. Future version tags will then
+   contain the corrected release-only workflow; exact `0.3.0` needs no further
+   trigger.
+
+This recovery is narrower than retaining a general manual publish control and
+more truthful than moving the tag. It authorizes no Release re-publication,
+tag change, local/token publish, second package version, semantic/package
+entry change, provider/model execution, run-retention policy, CloserFans
+before verified npm bytes, API/MCP/controller, Arrowgram, Lambdapi,
+mathematics, book/print, history rewrite, force, or cleanup.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
