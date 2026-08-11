@@ -124,15 +124,16 @@ fusion, retains 5/12/0/6, is checkpointed at `65656e5`, and is separately
 approved under delegated unattended authority with human supersession at
 review checkpoint `0ab7fd4`. Its root-only semantic implementation at
 checkpoint `a361dc3` is complete and final-proportional-green at 5/12/0/6: all
-twelve runtime rules compile
-through the generic engines; five runtime observations, one typed rho-section
+twelve runtime rules compile through the generic engines; five runtime
+observations, one typed rho-section
 consumer, eight strict negatives, safe-library denials, non-export checks, and
 nine bounded active-Lambdapi assertions are green. TypeScript retains the
 consumer's exact transport-along-rho normal form rather than installing an
 extra runtime collapse; the bounded oracle checks the conventional rho
-endpoint. No PathOut/PathInd public package export has yet been added, and
-internalized PathInd row 1D still requires its own proposal and separate
-review.
+endpoint. Behavior-free internalized PathInd proposal v1 is now frozen at an
+exact local 4/4/0/10 boundary and final-proportional-green; it awaits its
+rollback-safe proposal checkpoint and separate review. No PathOut/PathInd
+public package export has yet been added.
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -691,7 +692,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `OBVIOUS-PROOF-7` | Bounded explicit obvious-proof provider | complete | `da4b63f`; exact hole patch, accessible installed free declarations, exact/one-step-apply replay, stale-safe acceptance, and full bounded trace |
 | `STDLIB-8` | Curated public library profile | repartitioned | Public-package trust is complete; the post-14B audit splits product selection from the exact trusted-profile/derived-library implementation. |
 | `STDLIB-8A` | Select the first mathematical product profile and its trust partition | complete | PathOut/PathInd is selected from existing checked book/research consumers; generic LF, sealed opaque-owner profile, transparent library, and presentation remain distinct. Prelude/Nat transfer fixtures are not promoted. |
-| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, and fixed-source `PATHIND-TRUSTED-PROFILE-1C` at semantic checkpoint `a361dc3` are complete and final-proportional-green. The exact boundaries are 5/13/2/9 and 5/12/0/6 respectively. For 1C, generic compilation, five runtime observations, one typed rho-section consumer, eight strict negatives, safe-library/non-export checks, and nine bounded oracle assertions are green. Internalized PathInd row 1D is next and still requires its own proposal and separate review. |
+| `STDLIB-8B` | PathOut/PathInd trusted profile and derived public library | in progress | `PATHOUT-TRUST-BOUNDARY-0A`, root-only `PATHOUT-LIBRARY-FOUNDATION-1B`, and fixed-source `PATHIND-TRUSTED-PROFILE-1C` at semantic checkpoint `a361dc3` are complete and final-proportional-green. Behavior-free internalized PathInd proposal v1 is frozen and focused-green at 4/4/0/10, selecting only the missing Sigma-uncurrying owner rather than the whole scale-stress profile. It awaits its proposal checkpoint and separate review; transitivity and public presentation remain later rows. |
 | `REFACTOR-9A` | Exact two-revision declaration/proof-source diff and conservative proof impact | complete | `bed3a9d`; exact canonical source/interface diff, structural dependency impact, broken-current-proof fixture, browser/packed/full-TypeScript gates green |
 | `REFACTOR-9B` | Selected-proof replay diagnostics and open-hole repair candidate patches | complete | `53924d7`; exact one-proof replay, stable diagnostics, named-hole proposals, stale-safe checked candidate replay, browser/packed/full-TypeScript gates green |
 | `COUNTEREVIDENCE-10` | Finite testing/model-finding provider | deferred | No current code or host consumer selects a finite domain, interpretation, or claim-to-test contract. Reactivate only for one executable consumer with explicit counterevidence/non-proof labeling. |

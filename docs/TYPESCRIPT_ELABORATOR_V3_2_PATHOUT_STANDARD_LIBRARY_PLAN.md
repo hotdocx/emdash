@@ -52,7 +52,10 @@ implementation is complete and final-proportional-green at 5/12/0/6, with
 five runtime observations, one typed rho-section consumer, eight strict
 negatives, nine bounded Lambdapi assertions, safe-library denials, and the
 non-export boundary green at semantic checkpoint `a361dc3`; no PathOut/PathInd
-public export is yet authorized
+public export is yet authorized; behavior-free
+`PATHOUT-LIBRARY-INTERNALIZED-1D` proposal v1 is frozen at 4/4/0/10,
+final-proportional-green, and awaiting its rollback-safe proposal checkpoint
+and separate review
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -215,7 +218,7 @@ named library presentation.
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | pending | completed 1C | Add needed opaque `PathInd_func`/`PathInd_transfd` owners to the trusted profile, then derive transparent internalized/Sigma-total library presentations where the authority does. Preserve internally owned source-arrow and higher action. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | proposal v1 final-proportional-green; awaiting checkpoint and separate review | completed 1C at `a361dc3`/`033dbb8` | The exact proposed local boundary is 4/4/0/10: select only missing `Sigma_transfd_funcd` plus `PathOutReflEval_funcd`, `PathInd_func`, and primary `PathInd_transfd`; install their four active projections; derive ten transparent internalized/Sigma-total definitions. Reuse existing providers without importing the whole scale-stress profile, and preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
@@ -2013,6 +2016,88 @@ profile changes no shared generic engine, public barrel, package/workspace
 boundary, browser closure, or Lambdapi source. This omission is not aggregate
 pass evidence. Row 1D is now dependency-ready but still requires its own
 bounded proposal and separate review before implementation.
+
+### `PATHOUT-LIBRARY-INTERNALIZED-1D` frozen proposal v1
+
+The non-authorizing proposal is
+[`src/v3_2/pathind_internalized_proposal.ts`](../src/v3_2/pathind_internalized_proposal.ts),
+with focused immutability, drift, provider, staging, and non-export checks in
+[`tests/v3_2_pathind_internalized_proposal_tests.ts`](../tests/v3_2/pathind_internalized_proposal_tests.ts).
+It pins the completed 1C semantic/ledger checkpoints `a361dc3`/`033dbb8`, the
+unchanged active source/check digests, and the original trust-boundary audit.
+It installs no declaration, rule, Core owner, checker behavior, syntax, or
+export.
+
+The exact proposed local boundary is **4/4/0/10**:
+
+- four opaque trusted declarations: generic `Sigma_transfd_funcd`, internally
+  natural source owner `PathOutReflEval_funcd`, fixed-source package
+  `PathInd_func`, and primary varying-source theorem `PathInd_transfd`;
+- four runtime projections at active lines 14516, 19084, 19248, and 19409;
+- zero local proof/unification rules; and
+- ten transparent definitions: `PathOutMotives_catd`, `PathOutPi_funcd`,
+  `PathIndTgt_catd`, `pathout_motive_transport_obj`,
+  `pathout_motive_transport_arrow`, `PathIndSrc_catd`,
+  `PathIndSrc_transport_func`, `PathInd_funcd`,
+  `pathout_pi_transport_func`, and `PathIndTgt_transport_func`.
+
+The dependency order is explicit rather than source-prefix based. First add
+only the missing Sigma-uncurrying owner. Then check the three transparent
+moving-motive/target definitions; check the remaining three opaque theorem
+owners; install the four projections through the generic runtime compiler;
+and finally check the seven remaining transparent definitions. Existing
+qualified providers already supply `Sigma_catd_functord_catd`, `Transfd`,
+`tdapp0_fapp0`, `Fibre_func`, moving pullback/Pi structure, section pullback,
+and `fdapp1_int_cell`. The isolated scale-stress profile supplies useful
+historical evidence but is not imported wholesale and is not product
+authority.
+
+The primary theorem is `PathInd_transfd`: its `Transfd` type already owns
+naturality in the moving source object. The proposal therefore forbids an
+external hand-written naturality square. `PathInd_funcd` remains a transparent
+Sigma-total presentation derived through `Sigma_transfd_funcd`; it is not
+relabeled as the primitive theorem. The selected observations preserve the
+source action along `rho` and the target section-pullback/higher action rather
+than collapsing either to a new external equation. Arbitrary non-cartesian
+Sigma-arrow naturality remains outside this milestone, exactly as in the
+active authority.
+
+Qualification, if separately approved, requires nine selected TypeScript
+observations, two typed library consumers, ten strict negatives, safe-library
+authority denials, non-export checks, and eleven bounded Lambdapi assertions.
+Those assertions cover each new projection, the composed telescope and
+Sigma-total component/object computations, the source and target transport
+aliases, and the retained `PathOutPi_funcd` higher action. Transitivity, the
+Path-category proof bridge, text/browser/public presentation, integration,
+release, active Lambdapi edits, generic-engine changes, and publication remain
+denied.
+
+Proposal-only proportional evidence is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_internalized_proposal.ts \
+  tests/v3_2_pathind_internalized_proposal_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_internalized_proposal_tests.ts
+  8 tests / 1 suite: 8 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi execution or long aggregate is relevant to this immutable-data
+proposal. Gate `H-TS-EMDASH-PATHIND-INTERNALIZED-01` asks whether to approve
+decision `D-TS-EMDASH-PATHIND-INTERNALIZED-001` exactly as proposed. The
+proposal remains non-authorizing until its exact checkpoint receives a
+separate immutable review under the user's standing unattended delegation,
+with later human supersession.
 
 ## Required Evidence For Implementation
 
