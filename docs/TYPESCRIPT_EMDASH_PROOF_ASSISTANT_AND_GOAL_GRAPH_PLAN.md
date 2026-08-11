@@ -824,7 +824,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B` | Public benchmark package, host adapters, and representative translated/native corpus | repartitioned | The post-`STDLIB-8B` audit separates corpus/interchange, public runner/package surface, exact release/host installation, and measured graduation as 12B1–12B4. |
 | `AGENT-EVAL-12B0` | Post-library benchmark readiness and architecture audit | complete; read-only | Existing 12A evaluator, public workspace/authoring APIs, real CloserFans TypeScript host, and checked proof/class fixtures make corpus construction ready. PathOut remains a distinct semantic-task family, not an LF patch case. |
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
-| `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | proposal v1 `ba49705` complete; separate review pending | The non-authorizing proposal pins seventeen owners and selects an isolated browser-safe `./benchmark` subpath, a stateless five-command repository adapter, a measured lazy browser view, exact installed consumers, and retained no-bin/no-dependency policy. No implementation or release yet. |
+| `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | proposal `ba49705` separately approved; bounded implementation active | Ten review conditions require exact compact catalog/error records, fatal UTF-8 and fresh replay, isolated package entries, retained no-bin policy, transitive browser budgets, inert page load, and four installed-consumer modes. Version/release and later effects remain denied. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | gated | Requires qualified 12B2, a separate version/release contract, and fresh sibling edit-time audit. |
 | `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | gated | Requires installed 12B3 consumer and a separately frozen provider/run retention and reporting policy. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
@@ -844,10 +844,9 @@ The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
 The post-completion audit selected only the non-authorizing
 `AGENT-EVAL-12B1` proposal. That separately reviewed internal implementation
-is now complete at `d0d3764`. The non-authorizing 12B2 proposal is complete at
-`ba49705` and awaits separate immutable review. No public export, runner,
-release, sibling mutation, model run, or hosted action is automatically
-authorized.
+is now complete at `d0d3764`. The non-authorizing 12B2 proposal `ba49705` is
+separately approved for bounded implementation. No version, release, sibling
+mutation, model run, or hosted action is automatically authorized.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -6281,9 +6280,9 @@ ten-case corpus without changing task authority. Its nine ordinary accepted
 patches and one genuine ambiguity abstention satisfy the strict task-kind and
 representativeness boundary. The next operation is therefore one
 non-authorizing 12B2 public-surface proposal from exact 12B1 checkpoint
-`d0d3764`. That proposal is now complete at `ba49705` but unreviewed.
-Public/package, runner, release, hosted, and model-run effects remain
-separately ordered rows.
+`d0d3764`. That proposal is now separately approved at the review checkpoint
+recorded in the dedicated plan. Public/package implementation is bounded by
+that review; release, hosted, and model-run effects remain later rows.
 
 No TypeScript, package, workflow, sibling, kernel/Lambdapi, mathematical,
 book/print, registry, deployment, or hosted state changed in this audit.
@@ -6480,6 +6479,7 @@ relevant evidence to this plan-only selection.
 | `D-PA-182` | Approve only exact `AGENT-EVAL-12B1` proposal checkpoint `a181885` at separate review checkpoint `d271c33` for internal corpus/interchange implementation under delegated unattended authority. | Immutable review SHA-256 `f3f38e47a84e365a7154ed3717f1375fdb62e332185fb0529770c34fef735e41` requires every selected case to inhabit unchanged 12A and every non-abstaining owner to generate a freshly accepted ordinary patch; feature labels cannot substitute for integration. It separately requires honest ambiguity and manual Lean attribution. Fourteen combined tests, typecheck, focused lint, non-export, and diff hygiene are green. Public barrels/runners, release, siblings, models, PathOut task conversion, and semantic authority changes remain denied. |
 | `D-PA-183` | Complete reviewed internal `AGENT-EVAL-12B1` at exact checkpoint `d0d3764` and select only a non-authorizing 12B2 proposal. | The fixed corpus has six tracks and ten unchanged-12A cases: nine named owners generate ordinary patches accepted by fresh replay, while the finite equal-priority ambiguity case abstains without a hidden winner. Strict canonical parsers reconstruct and byte-check every nested artifact and freshly reevaluate reports. The class fixtures use real implicit parameters and are independent of active presheaf/scheme mathematics; the Lean diamond retains checkpoint, path, SHA-256, license, and manual-translation limits. Eighteen new semantic tests, five unchanged-12A tests, twenty-two browser-closure tests, root typecheck, focused lint, non-export checks, and diff hygiene are green. The canonical corpus measures 5,884,285 bytes for 12B2 design. Long aggregates and all package/release/sibling/model/hosted gates are omitted, not passed. |
 | `D-PA-184` | Freeze a non-authorizing `AGENT-EVAL-12B2` public benchmark-surface proposal at exact checkpoint `ba49705` after completed 12B1. | The proposal pins seventeen owners and separates one browser-safe `@hotdocx/emdash/benchmark` subpath from a stateless repository-only Node adapter. It retains the package's no-bin/no-install-hook/no-runtime-dependency policy; freezes catalog/case/corpus/reference/evaluate artifact commands; requires strict fresh replay without provider/model execution; and uses a user-triggered browser import with measured 465,000/130,000 initial and 650,000/175,000 lazy raw/gzip caps. Eight focused tests, typecheck, lint, current package build, direct fixture typecheck/Vite build, and diff hygiene are green. The prescribed browser wrapper failed before build on a Corepack-only subprocess lookup and is not a pass. Package consumers, release checks, long aggregates, version/release, siblings, models, and hosted effects remain pending or denied. Separate immutable review is mandatory. |
+| `D-PA-185` | Approve only exact 12B2 proposal checkpoint `ba49705` for bounded public-surface implementation under delegated unattended authority. | Ten review conditions require unchanged 12A/12B1 semantics; a canonical deeply frozen no-case-text catalog; raw-size-before-fatal-UTF-8 run input; strict parsing, fresh replay, canonical JSONL, and stable content-free errors; one isolated benchmark subpath with exact existing-entry exclusion; retained no-bin/dependency preflight; transitive browser raw/gzip closure gates and inert page load; and packed ESM/CommonJS/strict-NodeNext/browser plus core-only consumers. Sixteen combined tests, typecheck, focused lint, and diff hygiene are green. Version/release, siblings, models/providers, hosted effects, and long-aggregate claims remain denied. |
 
 ## Validation And Checkpoint Policy
 
@@ -6602,10 +6602,11 @@ synchronized:
 > `a181885`/`d271c33`/`d0d3764` as complete. Preserve
 > its full six-track/ten-case representative boundary, unchanged 12A replay,
 > honest ambiguity abstention, strict interchange, and non-authority limits.
-> Treat exact non-authorizing 12B2 proposal checkpoint `ba49705` recorded in
-> the dedicated plan as awaiting separate immutable review. Do not add any
-> public barrel, Node runner, browser presentation, package, or installed-
-> consumer behavior before that review. Do not relabel a PathOut request as
+> Treat exact non-authorizing 12B2 proposal checkpoint `ba49705` and its
+> separate immutable review recorded in the dedicated plan as the sole bounded
+> implementation authority, including all ten review conditions. Do not widen
+> the public barrel, Node runner, browser presentation, package, or installed-
+> consumer behavior beyond that review. Do not relabel a PathOut request as
 > an LF proof-patch task or shrink representativeness merely to ease later
 > transport. Keep version/release and CloserFans edits in 12B3, and real-agent
 > runs in 12B4.

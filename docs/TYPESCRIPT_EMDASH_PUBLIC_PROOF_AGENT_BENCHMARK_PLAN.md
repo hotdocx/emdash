@@ -5,7 +5,9 @@ Status: living plan; post-`STDLIB-8B` audit complete; exact non-authorizing
 immutable review at `d271c33`. The internal corpus/interchange implementation
 is complete and proportionally qualified at exact checkpoint `d0d3764`. A
 non-authorizing `AGENT-EVAL-12B2` public-surface proposal is complete at exact
-checkpoint `ba49705` and must be separately reviewed before implementation.
+checkpoint `ba49705` and is separately approved by the immutable review in the
+checkpoint containing the review record below. Bounded implementation is
+active; the exact review checkpoint is pinned by its immediate ledger follow-up.
 
 Date: 2026-08-11
 
@@ -216,14 +218,14 @@ the evaluator.
 | --- | --- | --- |
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
-| `AGENT-EVAL-12B2` | proposal v1 complete at `ba49705`; separate review pending | The proposal selects one isolated browser-safe `./benchmark` subpath, a stateless repository Node artifact runner, a user-triggered lazy browser view, exact packed consumers, and retained no-bin/no-dependency package policy. It adds no behavior by itself. |
+| `AGENT-EVAL-12B2` | proposal `ba49705` separately approved; bounded implementation active | The review adds exact catalog/error, fatal UTF-8, fresh replay, transitive browser/package closure, core-only consumer, and retained no-bin conditions. It authorizes only the isolated benchmark subpath, repository adapter, lazy browser presentation, capability/docs, and proportional public gates. |
 | `AGENT-EVAL-12B3` | gated | Requires qualified 12B2 plus a separately frozen package version/release and fresh CloserFans edit-time audit. Publish exact bytes, then add one additive ordinary-Node benchmark workspace on an isolated sibling branch. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 non-authorizing `AGENT-EVAL-12B2` proposal below is pinned at `ba49705` and now
-awaits separate immutable review. No public export, runner, package, or release
-effect follows merely from writing that proposal.
+has a separate immutable approval below. No release, version, sibling, model,
+or hosted effect follows from that approval.
 
 ## `AGENT-EVAL-12B1` Proposal Requirements
 
@@ -518,6 +520,63 @@ proposal. Those public-boundary checks belong to the implementation candidate;
 the long aggregates remain subject to the direct standing waiver and are not
 reported as passes.
 
+### Separate Review And Implementation Authority
+
+The immutable review is
+[`lf_proof_agent_public_surface_review.ts`](../src/v3_2/lf_proof_agent_public_surface_review.ts),
+with focused tests in
+[`v3_2_proof_agent_public_surface_review_tests.ts`](../tests/v3_2_proof_agent_public_surface_review_tests.ts).
+It approves only exact proposal checkpoint `ba49705`, proposal SHA-256
+`c820786bd4974313fff2eae5e3d459f29d46a2a18a5c97690047fe324364e759`,
+and proposal-test SHA-256
+`d1bccbc2049330e686a9a2c148c36351c29a902c19432c6f7ab374d031b7045b`
+under delegated unattended authority with later human supersession. The exact
+review checkpoint is the commit containing this record and is pinned by the
+next ledger-only commit.
+
+The review/test SHA-256 values are, respectively,
+`7421885c8f01f9c7fec5d3be628470b8af94550c671ecc41939ca79a838f8fb8`
+and
+`8b0d075341697331bf5f446b5ecba1e98ccf2040c330deb70a7e02ffcd68dbe7`.
+
+Approval adds ten exact implementation conditions. The compact catalog must
+be a revisioned canonical, deeply frozen, non-authoritative projection with no
+case text. `evaluate` must enforce the raw byte ceiling before fatal UTF-8
+decoding, read one explicit file, use the strict run parser and fresh unchanged
+12A replay, and emit stable errors without stacks or artifact contents. Every
+JSONL artifact command must use its owning newline-terminated serializer.
+
+Only `@hotdocx/emdash/benchmark` may expose the benchmark owners; core,
+authoring, and workspace entries remain exact and core-only consumers must not
+acquire the corpus closure. Release preflight continues to reject npm bins,
+install hooks, runtime dependencies, scripts, and packed CLI source. Browser
+gates measure complete transitive initial/static and benchmark/dynamic
+closures rather than one guessed chunk; page load is inert and the explicit
+view remains a baseline presentation rather than proof or performance
+authority. Packed ESM, CommonJS, strict NodeNext, and browser consumers are all
+required.
+
+Combined proportional review validation is green:
+
+```text
+proposal plus separate review
+  passed: 16/16 tests, 2 suites
+
+./scripts/pnpmw exec tsc --noEmit
+  passed
+
+eslint over proposal/review, focused tests, and test registry
+  passed
+
+git diff --check
+  passed
+```
+
+The approval authorizes no change to 12A, 12B1, Core, checker, or rules; no
+npm bin/dependency; no package version, publication, release, sibling edit,
+real-agent run, model/network call, hosted action, push, merge, tag,
+deployment, or aggregate-pass claim.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -568,8 +627,7 @@ On continuation:
 3. preserve CloserFans' unrelated untracked review plan;
 4. keep only one semantic row active;
 5. treat 12B1 as complete at exact checkpoint `d0d3764`;
-6. separately review exact non-authorizing 12B2 proposal checkpoint `ba49705`
-   before any public runner, browser, barrel, package, or consumer
-   implementation; and
+6. treat exact 12B2 proposal `ba49705` and its separately checkpointed review
+   as the only bounded implementation authority; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
