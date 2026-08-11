@@ -113,7 +113,8 @@ denials, non-export checks, root typecheck, and focused lint pass; the
 separately gated oracle passes all twelve active-Lambdapi assertions. The
 unchanged 1,923-test aggregate from `e560551` is carried forward. No public
 PathOut/PathInd export is authorized. Internalized `1D` is complete;
-transitivity `1E` is the next bounded slice.
+transitivity `1E` now has a frozen, behavior-free **0/0/0/5** proposal and is
+awaiting its separate immutable review before implementation.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -279,7 +280,7 @@ named library presentation.
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
-| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending; dependency-ready | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
+| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | proposal frozen; awaiting separate review | completed 1D at `b6005b3`/`6225075` | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—at **0/0/0/5** over existing providers. The source `injective` modifier on `CompTarget_catd` is provenance metadata only; it authorizes no TypeScript injectivity, unification, Core, checker, evaluator, runtime-rule, or proof-rule behavior. Eight selected observations stop at stable representable precomposition. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
@@ -2711,6 +2712,65 @@ ordinary-library authority and five public/browser barrels stay closed, and
 root typecheck plus focused lint pass. The generic compiler diff is empty and
 no active Lambdapi source changed. The prior 1,923-test aggregate is carried
 forward rather than rerun. No diagnostic wrapper or source observer remains.
+
+### `PATHOUT-LIBRARY-TRANSITIVITY-1E` frozen non-authorizing proposal
+
+The active-source and immutable-trust-boundary audit make this row smaller
+than its earlier shorthand suggested. All five selected declarations are
+body-bearing derived-library definitions: `CompTarget_catd`,
+`CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and
+`path_comp_func`. The source contributes no transitivity-specific opaque
+owner, runtime rule, or proof rule. The proof-time Path-category bridge at
+lines 19455--19475 and the comparison library at lines 19488--19673 remain
+excluded because none is required for the selected generic transitivity
+profile.
+
+The frozen proposal is
+[`src/v3_2/pathout_transitivity_proposal.ts`](../src/v3_2/pathout_transitivity_proposal.ts),
+with focused drift and policy tests in
+[`tests/v3_2_pathout_transitivity_proposal_tests.ts`](../tests/v3_2/pathout_transitivity_proposal_tests.ts).
+It selects exact **0/0/0/5** implementation: zero trusted declarations, zero
+runtime rules, zero proof rules, and five checked transparent definitions,
+linked through ordinary free-declaration references at comparison limit 512.
+The `injective` modifier on transparent source declaration
+`CompTarget_catd` is retained only as source provenance. The proposal
+explicitly denies deriving TypeScript injectivity or unification behavior,
+adding an intrinsic Core owner, changing the generic checker/evaluator, or
+registering any runtime/proof rule from that modifier.
+
+Eleven already-qualified providers close the definition graph. The selected
+typed consumers are `path_comp_sec` and `path_comp_func`; eight definitional
+observations progress from target and motive fibres through section/component
+evaluation to the stable `hom_precomp_along_fapp0(...)` normal form. The
+corresponding eight bounded Lambdapi assertions are reserved for
+implementation acceptance. In particular, the TypeScript claim stops at
+that stable precomposition form: active Lambdapi's raw `comp_fapp0`
+comparison is proof-time and is not converted into a new runtime collapse.
+
+Proposal-only proportional evidence on 2026-08-11 is:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_pathout_transitivity_proposal_tests.ts
+  7 tests / 1 suite: 7 passed, 0 failed
+
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_transitivity_proposal.ts \
+  tests/v3_2/pathout_transitivity_proposal_tests.ts \
+  tests/main_tests.ts
+  passed
+```
+
+This proposal installs no semantics, enters no public/browser/package barrel,
+and does not authorize its own implementation. A separate immutable review
+must pin the proposal checkpoint and SHA-256 before the exact root-only
+implementation may begin. The unchanged 1,923-test aggregate from `e560551`
+is carried forward; a long aggregate is irrelevant to this behavior-free
+boundary record. Push, merge, publication, release, and cleanup remain
+unauthorized.
 
 ## Required Evidence For Implementation
 
