@@ -62,8 +62,10 @@ adds one exact subject-type presentation fusion, making 4/5/0/10 while
 preserving four mathematical projections and zero proof rules. Proposal v2 is
 now frozen at checkpoint `fbfc4dd`; its exact separate review
 is final-proportional-green and checkpointed at `2a250fb` under delegated
-unattended authority with later human supersession. Semantic implementation
-may resume under exactly the reviewed 4/5/0/10 boundary.
+unattended authority with later human supersession. Measured dependency-prefix
+shadowing now supersedes that implementation authority. Corrected behavior-
+free v3 replaces the unreachable support rule one-for-one with its stable
+post-prefix form at the same 4/5/0/10 boundary; it awaits checkpoint/review.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -226,7 +228,7 @@ named library presentation.
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | corrected proposal v2 separately reviewed; implementation ready | completed 1C at `a361dc3`/`033dbb8`; proposal/review v2 checkpoints `fbfc4dd`/`2a250fb`; superseded v1 proposal/review checkpoints `188b8e5`/`d3a0f31` | V2 preserves the four owners, four active mathematical projections, and ten definitions, and adds one exact derived subject-type presentation fusion for the measured `PathInd_func` component mismatch. Exact local boundary is 4/5/0/10, with zero proof rules and no whole-profile import, external naturality, transitivity, public, or release effect. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | v2 review superseded; corrected proposal v3 awaiting checkpoint/review | completed 1C at `a361dc3`/`033dbb8`; superseded proposal/review v2 checkpoints `fbfc4dd`/`2a250fb`; superseded v1 checkpoints `188b8e5`/`d3a0f31` | V3 replaces v2's unreachable pre-prefix support fusion one-for-one with the exact decoded `Functor_cat` object presentation reached after dependency-first Hom/Functor rewrites. It preserves four owners, four mathematical projections, one support rule, zero proof rules, ten definitions, and every later/public denial at 4/5/0/10. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
@@ -2271,9 +2273,77 @@ node --require ts-node/register --test \
 
 Review checkpoint `2a250fb`, with review SHA-256
 `a0d8db8dc8311dbd4314ec7664a6b0d4707a9eef97ea9899d823a3988a72596c`,
-freezes that exact authorization. Semantic implementation may now resume only
-under the reviewed 4/5/0/10 boundary. No Lambdapi or long aggregate is
-relevant to this behavior-free review.
+froze that exact authorization. The measured correction below now supersedes
+its implementation authority. No Lambdapi or long aggregate was relevant to
+that behavior-free review.
+
+### `PATHOUT-LIBRARY-INTERNALIZED-1D` measured v2 shadowing and corrected proposal v3
+
+The first v2 implementation encoded `PathInd_src_catd(Z,x)[E]` and
+`PathInd_tgt_catd(Z,x)[E]` at `PathOut_cat(Z,x)` instead of their actual base
+`Catd_cat(PathOut_cat(Z,x))`. A temporary in-memory observer exposed the exact
+base mismatch; correcting that implementation bug made the v2 support rule
+subject-check successfully. No diagnostic hook or generic-file diff remains.
+
+The subsequent component admission then measured the actual v2 limitation.
+The composed runtime is dependency-first, so these inherited rules reduce the
+subject type before the local support rule can match:
+
+```text
+directed.category-hom.decode
+categorical.mixed-action.functor-classifier-definition
+```
+
+Thus v2's well-typed pre-prefix pattern
+`τ(Hom(PathInd_src[E],PathInd_tgt[E]))` is unreachable. At the component rule,
+the stable comparison is already:
+
+```text
+τ(Obj(Functor_cat(PathInd_src_catd(Z,x)[E],
+                  PathInd_tgt_catd(Z,x)[E])))
+
+versus
+
+τ(Obj(Functor_cat(Fibre_cat(E,pathout_refl_obj(Z,x)),
+                  Pi_cat(E)))).
+```
+
+Corrected non-authorizing proposal v3 is
+[`src/v3_2/pathind_internalized_proposal_v3.ts`](../src/v3_2/pathind_internalized_proposal_v3.ts),
+with focused tests in
+[`tests/v3_2_pathind_internalized_proposal_v3_tests.ts`](../tests/v3_2/pathind_internalized_proposal_v3_tests.ts).
+It replaces v2's order-two support fusion one-for-one with the exact stable
+post-prefix form above. The boundary remains **4/5/0/10**: four opaque owners,
+four active mathematical projections, one derived presentation-support rule,
+zero proof rules, and ten transparent definitions. It adds no rule, owner,
+proof program, generic runtime/checker behavior, alternate PathInd signature
+or body, whole-profile import, external naturality, transitivity, public
+surface, integration, or release effect.
+
+Proposal-v3 proportional evidence is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_internalized_proposal_v3.ts \
+  tests/v3_2_pathind_internalized_proposal_v3_tests.ts \
+  src/v3_2/pathind_internalized_transfer.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2/pathind_internalized_proposal_tests.ts \
+  tests/v3_2_pathind_internalized_proposal_v2_tests.ts \
+  tests/v3_2_pathind_internalized_proposal_v3_tests.ts
+  20 tests / 3 suites: 20 passed, 0 failed
+```
+
+No Lambdapi execution or repository aggregate is relevant to this behavior-
+free one-for-one correction. Gate
+`H-TS-EMDASH-PATHIND-INTERNALIZED-03` asks whether to approve decision
+`D-TS-EMDASH-PATHIND-INTERNALIZED-003` exactly as proposed. V3 remains non-
+authorizing until checkpointed and separately reviewed.
 
 ## Required Evidence For Implementation
 
