@@ -290,7 +290,7 @@ named library presentation.
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
-| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | separately reviewed; implementation-ready | completed 1D at `b6005b3`/`6225075`; proposal/review checkpoints `50b9a56`/`f60b36a` | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—at **0/0/0/5** over existing providers. The source `injective` modifier on `CompTarget_catd` is provenance metadata only; it authorizes no TypeScript injectivity, unification, Core, checker, evaluator, runtime-rule, or proof-rule behavior. Eight selected observations stop at stable representable precomposition. |
+| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | corrected v4 awaiting separate review | completed 1D at `b6005b3`/`6225075`; reviewed v3 at `fe1a9b7`/`0834d00` and ledger `5d0dad5` | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—plus one derived complete consumer-parent support at **0/1/0/5**. Cold v3 proves its post-`CompTarget` pattern is still shadowed by transparent `Rep_catd` descendants. V4 replaces it one-for-one at the original selected-component consumer before descendant delta; it adds no mathematical equation, proof rule, injectivity, unification, Core, or generic-engine behavior. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
@@ -3044,6 +3044,88 @@ integration, and release. The synchronized review is checkpointed at
 `0834d00`, with SHA-256
 `064e36392e6e7962912237d4f0d1abc27ae0184e1f0b6e94009ce1b7842664f6`.
 The unchanged aggregate remains carried forward; no aggregate is rerun.
+
+### Corrected transitivity proposal v4 after reviewed-v3 replay
+
+Cold execution of the reviewed v3 boundary preserves the useful positive
+evidence: all five transparent definitions compile; its one local rule
+subject-checks and fires at the exact instantiated rule redex; both typed
+consumers, all eight negatives, capability sealing, and non-export closure
+pass. Passing the fixture's descendant environment also lets inherited
+provider `stress.sigma-pi.uncurrying` solve the intended proof-time category
+presentation without adding a local proof rule.
+
+The full focused replay nevertheless remains
+`9-tests-6-pass-2-fail-1-skip`. The first failure now occurs only after that
+inherited proof succeeds: a test helper asks the transitivity-local linkage
+for predecessor symbol `path_ind_sec`. The correction is to use the canonical
+fixed-source Core name. It changes no semantic boundary.
+
+The second failure is the remaining semantic counterexample. An isolated
+replay of the final-four-observations test reports one failure after about 194
+seconds. Its normalized left side is the expected complete
+`functor-object` presentation, but every `Rep_catd` subterm has already
+delta-expanded to its stable `hom_(...,id,...)` body. The v3 pattern retains
+`Rep_catd`, so it remains syntactically unreachable even though it is
+well-typed and fires when instantiated directly. Importing more deltas or
+adding a second support would enlarge the boundary without addressing the
+ordering principle.
+
+Corrected v4 therefore replaces v3 one-for-one with the original consumer
+parent:
+
+```text
+fapp0(
+  Hom_cat(Z,x,y), Functord_cat(Z,Rep_y,Rep_x),
+  component(
+    Z, Rep_x, CompTarget_catd(Z,x), y, path_comp_sec(Z,x)),
+  p)
+  ↦ path_comp_func(Z,x,y,p).
+```
+
+This exact root is present before any descendant delta is consulted. It is a
+derived presentation fusion for one named consumer, not a new mathematical
+equation. The boundary remains exactly **0/1/0/5**: zero trusted owners, one
+derived runtime support, zero local proof rules, and five transparent
+definitions. V2 and v3 are both replaced rather than retained.
+
+The corrected, non-authorizing proposal is
+[`src/v3_2/pathout_transitivity_proposal_v4.ts`](../src/v3_2/pathout_transitivity_proposal_v4.ts),
+with focused tests in
+[`tests/v3_2_pathout_transitivity_proposal_v4_tests.ts`](../tests/v3_2_pathout_transitivity_proposal_v4_tests.ts).
+It pins v3 proposal/review checkpoints `fe1a9b7`/`0834d00`, their exact
+digests, and ledger checkpoint `5d0dad5`. It preserves the definitions,
+providers, consumers, seven-runtime/one-proof-time observation partition,
+negatives, bounded oracle, and all generic/public/external denials. It
+specifically denies retaining v3, adding a second rule, importing whole
+`Rep_catd`, `hom_con`, or `id_funcd` behavior, or changing conversion.
+
+Corrected-v4 proposal evidence on 2026-08-11 is:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_pathout_transitivity_proposal_tests.ts \
+  tests/v3_2_pathout_transitivity_review_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v2_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v2_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v3_tests.ts \
+  tests/v3_2_pathout_transitivity_review_v3_tests.ts \
+  tests/v3_2_pathout_transitivity_proposal_v4_tests.ts
+  47 tests / 7 suites: 47 passed, 0 failed
+
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_transitivity_proposal_v4.ts \
+  tests/v3_2_pathout_transitivity_proposal_v4_tests.ts
+  passed
+```
+
+V4 installs no semantics, remains outside every public barrel, and is not
+self-authorizing. Its introducing checkpoint and digest must be recorded by a
+separate immutable review before semantic implementation resumes. The
+unchanged 1,923-test aggregate from `e560551` remains carried forward.
 
 ## Required Evidence For Implementation
 
