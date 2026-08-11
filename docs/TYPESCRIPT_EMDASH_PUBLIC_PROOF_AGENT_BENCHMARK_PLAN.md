@@ -1274,10 +1274,10 @@ aggregate check is claimed for the review document itself.
 
 Date: 2026-08-11
 
-State: implementation complete and proportionally green; the exact semantic
-checkpoint is pinned by the immediately following plan-only ledger commit.
-No additional remote, Release, environment, registry, or sibling mutation has
-occurred during this local correction.
+State: implementation complete and proportionally green at exact semantic
+checkpoint `f965d03`. This immediately following plan-only ledger update pins
+that immutable correction. No additional remote, Release, environment,
+registry, or sibling mutation occurred during the local correction.
 
 The implementation changes exactly two behavioral owners:
 
@@ -1336,11 +1336,10 @@ focused policy plus forthcoming hosted run own actual GitHub execution. No
 packed-consumer, CloserFans, Arrowgram, provider/model, or hosted publish gate
 was rerun. Those omissions are deliberate and not passes.
 
-The next admissible operation is an exact four-path staged review and local
-checkpoint, followed by a plan-only pin of that checkpoint. Only then may the
-goal branch and `main` advance non-forced, the public workflow bytes be
-verified, and the exact same Release object be re-published once under the
-reviewed recovery sequence.
+The next admissible operation is a clean ancestry/external-state re-audit,
+then non-force goal-branch push and `main` fast-forward to exact `f965d03`.
+Only after the public workflow bytes are verified may the exact same Release
+object be re-published once under the reviewed recovery sequence.
 
 ## Validation Policy
 
