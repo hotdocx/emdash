@@ -3357,6 +3357,118 @@ manifest/operator/input hashes, current no-model host state, absent v2 lease
 and absolute run root, and then checkpoint the sole command before at most one
 invocation. Accounting remains 35/41.
 
+### Immutable v2 at-call review and sole Stage A authorization
+
+Review date: 2026-08-11
+
+Decision: approve exactly one local operator invocation after this behavior-
+free review is checkpointed. The reviewed CloserFans source is clean commit
+`8276e962ea0d5e2f1fa4e87c79357f38cdd03321`, exact parent
+`a6b5e61194551f2cf648226e7e86249eec670168`, exact tree
+`e03085a472aee51b2b934a9c71b8db7320cb9998`, and 19-entry committed-template
+manifest SHA-256
+`28c06be7b4feeb8077237e82b4524b00f6f88cf5bf40f22d72c0305380dadb82`.
+The reviewing Emdash plan parent is clean checkpoint
+`aa6a105634f4caaf31570cc480b9c3fd302ac78d`, tree
+`2b28d606873371fa81610a26c6f2269cb00d21d8`, with dedicated/governing plan
+SHA-256 values
+`3513c812552c78bf2311deb05b5067838ed5a578297bd5ad1b45c06e7aac06ad` and
+`5c8a0a4611333185a3478f33b84915a2beeb64cd1d5843041c3cd820b984e16f`.
+
+The exact committed-file inventory is:
+
+```text
+e6e93778a0e021bed8074d888958070465f7bae724879871c6801a3a4288e2f9  AGENTS.md
+cab4764e39e69c9eee7a177da539347f5a9f4a3693be816d3900d08580849db6  README.md
+e3c205ecd3b10b380710295b20471992381741d1c16cc76cc6d835c4386655c6  scripts/run-emdash-stage-a-real.mjs
+b615654019cdbd6f364132dc74b72501ec6058dcabe3020cb7ccb91e14348557  scripts/verify-emdash-benchmark-template-runtime.ts
+b6d4eb040df34eab3864e1c3fad34f49cc0fcc5c669f8f797f0ff95a0e02875a  templates/emdash_benchmark/README.md
+4923b93b08af3279443df640e73706a29e3a83c2bd614a16bad413bf759e1271  templates/emdash_benchmark/scripts/emdash-canary-contract.mts
+db599cd2e5dc70f34ff0e6c5c43a910cb003dc9d741d3b49942229dec9e3af88  templates/emdash_benchmark/scripts/emdash-canary-evaluate.mts
+6eea2a93d16a1c263ea17458969328535452490386ff6080a725eb6ad83f2e8e  templates/emdash_benchmark/scripts/emdash-canary-real.mts
+2b7cb752a752faf5ed507d613982249f8253c64cb1dea75772aa146a54bb00d5  templates/emdash_benchmark/scripts/emdash-canary.mts
+dcd1b53b9e95db4911e26400ba46ab9c1591a295e42def950e0bcf1087f238c7  templates/emdash_benchmark/scripts/fixtures/emdash-canary-fake-codex.mjs
+37ba4d05b29ebb504b725322ee79ac90af0f3f62254f3a0f556d7841f32f8094  templates/emdash_benchmark/scripts/verify-emdash-canary.mts
+```
+
+The remaining fixed source inputs are exact:
+
+```text
+0c104f3888c61ce669958c44051ea65a153d9fbaea3c9c37139e6325b310eb84  benchmark-run.emdash.ts
+117768e52381ede1b23f3bf4c43064e526daa6a25f3d8d4b0c3c879ffd7574ed  emdash-canary-prompt.txt
+f8935691d02f44d7c9b2d0ad1c96559c985c5596ecc210c3c03390a0680a8e06  emdash-canary-output.schema.json
+523357c1109f62bd956d196c9a9280ea5313b5a264c0e080608e9c56b021caac  probe-emdash-canary-permissions.mts
+1f9efb7b416b9ab162ddc98f14c2c4ade0a56ddcf2df5fb519f437031f9fccf8  emdash-canary-package-lock.json
+```
+
+The retained lock still resolves exact `@hotdocx/emdash@0.3.0` with integrity
+`sha512-ewAhab+tLMY0QZrOXLMSpH19VYkP73iR2iYxYRireYK+21QDOi9Cp/Tq4su+QI+b/NmYnUoZzGoEEQpBGJCxxg==`.
+The package manifest still exposes only `benchmark`, `canary:mock`,
+`canary:probe-permissions`, `canary:verify`, `dev`, `start`, `typecheck`, and
+`verify`; it exposes no real command.
+
+Current no-model state is exact immediately before this decision:
+
+- the CLI resolves through Node 24.11.1 and reports `codex-cli 0.147.0` only on
+  stdout in the same closed eight-key parent environment;
+- `codex login status` reports exactly `Logged in using ChatGPT` only on
+  stderr; no account identifier or credential content/path was read, copied,
+  hashed, or recorded;
+- the selected local cache entry was fetched at
+  `2026-08-11T20:11:33.210101020Z` and reports `gpt-5.6-sol`,
+  `comp_hash=3000`, default low verbosity, and high reasoning support;
+- the freshly repeated live no-model strict-config/filesystem/command/network
+  probe is green, with script digest recorded above and expected result digest
+  `2ae19204681704e5dc5beca30d15b5abdfff52a920537042404d7e1d483c340c`;
+- focused outer canary, clean-install/typecheck, committed snapshot, static v2/
+  retired-v1, all fake/real-without-provider, public mock CLI, formatting,
+  credential-shape, exact scope, whitespace, ancestry, clean-source, and no-
+  dependency-tree gates are green; the unrelated original CloserFans untracked
+  template remains preserved and outside this clean worktree; and
+- neither the v2 authorization lease nor the selected absolute run root
+  exists; the v1 receipt remains byte-identical at SHA-256
+  `cb02d5085f855e3a516f5c20f2b5593103b53c38824e5b85e99e530fda25edf3`
+  with modes `0700`/`0700`/`0600` and no v1 lease.
+
+The exact non-secret authorization ID is
+`emdash-stage-a-native-exact-local-premise-2026-08-11-v2`, SHA-256
+`aff872d7aa486ab1fb21a73bb514b73218f033f3b2184137969c2000cdccab58`.
+The sole run root is
+`/home/user1/.emdash-stage-a/stage-a-native-exact-local-premise-2026-08-11-v2`,
+SHA-256
+`0359aa03bb162feccb2389e18cd6688b84b4332e257ee0e110136e05bb65ee18`.
+Only the following command is authorized, once, from the clean reviewed
+CloserFans worktree:
+
+```bash
+node scripts/run-emdash-stage-a-real.mjs \
+  --authorization-id emdash-stage-a-native-exact-local-premise-2026-08-11-v2 \
+  --run-root /home/user1/.emdash-stage-a/stage-a-native-exact-local-premise-2026-08-11-v2
+```
+
+This authorizes no substitute path, source, ID, case, model, provider, CLI
+revision, credential form, permission profile, second process, retry,
+fallback, recursion, or second turn. Invoke the operator at most once. Every
+preflight refusal terminates the authorization even if no lease exists. Any
+provider-spawn attempt consumes the exclusive persistent v2 lease regardless
+of exec/transport failure, timeout/overflow, malformed output, policy/source/
+replay failure, abstention, rejection, incompleteness, or completion. Do not
+delete or rewrite either bootstrap, run root, private evidence, or lease.
+
+After the single invocation, inspect only the minimized receipt and canonical
+artifacts needed to classify the outcome; keep raw JSONL, stderr, final model
+message, candidate source/diff, and replay evidence private and untracked.
+Synchronize both plans in a new rollback-safe checkpoint. The result remains
+open-book and non-graduating under
+`contamination=public-owner-reference-accessible`,
+`graduationEligible=false`, and `proofEvidence=false`. It cannot support a
+success-rate, leaderboard, representative-performance, solver-comparison, or
+graduation claim. ChatGPT-authenticated dollar cost remains unknown/null.
+
+No long aggregate is relevant or authorized. This decision uses the user's
+standing unattended-approval delegation plus checkpoint/backtracking SOP; the
+human may supersede it before execution. Roadmap accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
