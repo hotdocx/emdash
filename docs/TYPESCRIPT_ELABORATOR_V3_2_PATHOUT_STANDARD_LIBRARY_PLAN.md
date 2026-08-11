@@ -281,7 +281,7 @@ named library presentation.
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
-| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | separately reviewed; implementation-ready | completed 1D at `b6005b3`/`6225075`; proposal checkpoint `50b9a56` | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—at **0/0/0/5** over existing providers. The source `injective` modifier on `CompTarget_catd` is provenance metadata only; it authorizes no TypeScript injectivity, unification, Core, checker, evaluator, runtime-rule, or proof-rule behavior. Eight selected observations stop at stable representable precomposition. |
+| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | separately reviewed; implementation-ready | completed 1D at `b6005b3`/`6225075`; proposal/review checkpoints `50b9a56`/`f60b36a` | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—at **0/0/0/5** over existing providers. The source `injective` modifier on `CompTarget_catd` is provenance metadata only; it authorizes no TypeScript injectivity, unification, Core, checker, evaluator, runtime-rule, or proof-rule behavior. Eight selected observations stop at stable representable precomposition. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
@@ -2806,6 +2806,10 @@ node --require ts-node/register --test \
 The unchanged 1,923-test aggregate from `e560551` is carried forward; a long
 aggregate is irrelevant to this behavior-free review. Push, merge,
 publication, release, and cleanup remain unauthorized.
+
+Review checkpoint `f60b36a`, with review SHA-256
+`cd1fead66d6447e0ed73fe5eaa6cbc67ef0a9dbb606897dbad4c6e7c0b6c76ca`,
+freezes that exact authorization.
 
 ## Required Evidence For Implementation
 
