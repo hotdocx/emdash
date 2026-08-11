@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R1 channel edits in progress; evaluator-launch amendment proposed | Exact login-channel work is approved, but its first focused run exposed unchanged tsx-CLI Unix-socket path overflow under the private default run root. The dedicated amendment proposes `node --import tsx` for only the clean evaluator; separate review is required before that fourth edit. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | amended four-file R1 implementation approved and in progress | Review of exact amendment `3f5e428` approves `node --import tsx` for only the clean evaluator, alongside the three login-channel files. Long private paths and every replay boundary remain; no new call coordinates or provider effect are authorized. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6574,6 +6574,16 @@ amendment expands scope to `emdash-canary.mts` but authorizes no such edit until
 separate immutable review. The diagnostic tree was removed; old real evidence
 and coordinates remain immutable. Accounting remains 35/41.
 
+Separate review of exact amendment `3f5e428a0e7408e5919c91a1ba69596876b3b559`
+accepts the fourth edit. The launch remains the same exact installed clean
+evaluator, cwd, attempt/output arguments, closed environment, bounds, outcome
+handling, clean-manifest check, strict summary, and canonical digest replay;
+only the tsx CLI IPC server is removed. The default long-private-path suite
+must pass without environment shortening, and the earlier timeout/`EINVAL`
+remain recorded failures. Authority is limited to the four template files and
+focused fake/no-model gates. No new coordinates, provider effect, or external
+mutation is authorized. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6788,6 +6798,7 @@ and coordinates remain immutable. Accounting remains 35/41.
 | `D-PA-207` | Freeze a non-authorizing three-file R1 correction for the diagnosed login-status stream mismatch. | Closed no-model probes show version text only on stdout and valid ChatGPT login status only on stderr; the real driver and fake fixture modeled both as stdout. The proposal requires exact selected-channel text, an empty other channel, stderr-faithful fake behavior, and wrong-stream refusal coverage. It preserves the retired ID/run evidence and authorizes no code or provider effect before separate immutable review. |
 | `D-PA-208` | Approve only exact R1 proposal `58ff991` for three local template script/test changes and fake/no-model validation. | Immutable plan hashes and six conditions require bounded exact channel handling, empty nonselected output, fatal decoding, normalized preflight receipts, stderr-faithful fake behavior, wrong-stream refusal, exact scope, and preservation of all operator/contract/source/policy/evidence boundaries. New coordinates, provider/model effects, integration, and claims remain denied pending a focused-green code checkpoint and another review. |
 | `D-PA-209` | Freeze a non-authorizing R1 amendment replacing only clean-evaluator tsx-CLI launch with `node --import tsx`. | Exact no-model reproduction shows the private default run root can make tsx's IPC Unix-socket path exceed the host limit, causing `listen EINVAL`; the same evaluator/attempt succeeds with a shorter temp path. The amendment preserves the long private boundary and all replay semantics while avoiding the CLI IPC socket. It expands implementation scope to `emdash-canary.mts` only after separate review. |
+| `D-PA-210` | Approve exact evaluator-launch amendment `3f5e428` as the fourth and final R1 implementation file. | `node --import tsx` runs the same installed clean evaluator with identical cwd, arguments, closed environment, bounds, manifest/replay parsing, and artifact digests while removing only incidental tsx-CLI IPC. The default long-private-path suite must pass; no path shortening, operator/contract/semantic change, new coordinates, provider, or external effect is allowed. |
 
 ## Validation And Checkpoint Policy
 

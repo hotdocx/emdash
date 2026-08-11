@@ -3089,6 +3089,38 @@ selects no new call coordinates and authorizes no provider/model or external
 effect. The disposable diagnostic tree was removed after the bounded evidence
 above was recorded; preserved real Stage A evidence remains untouched.
 
+###### Immutable evaluator-launch amendment review
+
+Reviewed amendment checkpoint:
+`3f5e428a0e7408e5919c91a1ba69596876b3b559`, exact parent
+`dcfa9a76799487b44a5d2044dfffa30430e4efa9`, exact tree
+`f227ed1adb7a468fee10be3066c02cd9182ddb06`. Complete plan SHA-256 values are:
+
+```text
+84c7371f1864bbed4f84d5b785081b3d5ededf318ee434ded3c478604e95291d  docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md
+dc8265c92e77875890403e8b77bab3db05f13cc48a1beaea5aa82436135a1334  docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md
+```
+
+Review accepts the diagnosis and the single added production edit. Node
+`--import tsx` executes the same exact evaluator module from the same clean
+root, resolves the same installed dependency, and keeps the same attempt and
+output arguments, cwd, inherit-nothing host evaluator environment, timeout,
+byte bounds, exit classification, manifest comparison, summary parser, and
+canonical-artifact digest checks. It removes only the tsx CLI's incidental IPC
+server and does not weaken private path placement or evaluator authority. The
+existing selected-case preflight is direct evidence that this launch form
+works in the installed fixture.
+
+Decision: expand the prior R1 implementation authority only to the exact four
+template files named above. Require the default long-private-run-root suite to
+pass without a special short `HOME`/`TMPDIR`; also rerun live no-model
+permission, formatting/diff, scope/hash, credential-shape, no-dependency-tree,
+and no-real-lease checks. Preserve and report the prior timeout and disposable
+`EINVAL` run as diagnostic failures. No operator/contract/source/prompt/schema/
+permission/evaluator/package/other-template/Emdash/external edit, new call
+coordinate, provider/model, retry, lease, push, merge, deployment, release,
+cleanup, or claim is authorized. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -3157,9 +3189,9 @@ On continuation:
    treat receipt `cb02d50` as a terminal no-call `login-category` refusal; and
    treat R1 proposal `58ff991` and its immutable review as authority only for
    the exact three-file local correction and fake/no-model tests; treat the
-   evaluator-launch amendment as non-authorizing until separately reviewed;
-   and forbid any retry or alternate coordinate without the amended
-   implementation checkpoint, new code/preflight review, and new coordinates;
-   and
+   evaluator-launch amendment `3f5e428` and its review as authority for only
+   the fourth clean-evaluator launch edit and default-long-path regression; and
+   forbid any retry or alternate coordinate without the amended implementation
+   checkpoint, new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe
    commit.
