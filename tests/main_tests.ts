@@ -255,6 +255,7 @@ import './v3_2_pathind_fixed_source_transfer_tests';
 import './v3_2_pathind_internalized_proposal_tests';
 import './v3_2_pathind_internalized_proposal_v2_tests';
 import './v3_2_pathind_internalized_proposal_v3_tests';
+import './v3_2_pathind_internalized_proposal_v4_tests';
 import './v3_2_pathind_internalized_review_tests';
 import './v3_2_pathind_internalized_review_v2_tests';
 import './v3_2_pathind_internalized_review_v3_tests';

@@ -68,7 +68,9 @@ free v3 replaces the unreachable support rule one-for-one with its stable
 post-prefix form at the same 4/5/0/10 boundary. Proposal v3 is frozen at
 `5a1d635`; its separate review is final-proportional-green and checkpointed
 at `6694c87` under delegated unattended authority with human supersession.
-Semantic implementation may resume only under that exact authorization.
+Measured `PathInd_transfd` component counterevidence now supersedes that
+implementation authority. Corrected behavior-free v4 adds one scoped
+`Transf_cat` presentation fusion, making 4/6/0/10; it awaits checkpoint/review.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -231,7 +233,7 @@ named library presentation.
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | corrected proposal v3 separately reviewed; implementation ready | completed 1C at `a361dc3`/`033dbb8`; proposal/review v3 checkpoints `5a1d635`/`6694c87`; superseded v2 checkpoints `fbfc4dd`/`2a250fb`; superseded v1 checkpoints `188b8e5`/`d3a0f31` | V3 replaces v2's unreachable pre-prefix support fusion one-for-one with the exact decoded `Functor_cat` object presentation reached after dependency-first Hom/Functor rewrites. It preserves four owners, four mathematical projections, one support rule, zero proof rules, ten definitions, and every later/public denial at 4/5/0/10. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | v3 review superseded; corrected proposal v4 awaiting checkpoint/review | completed 1C at `a361dc3`/`033dbb8`; superseded v3 checkpoints `5a1d635`/`6694c87`; superseded v2 checkpoints `fbfc4dd`/`2a250fb`; superseded v1 checkpoints `188b8e5`/`d3a0f31` | V4 preserves v3's green post-prefix support and `PathInd_func` projection, then adds one exact local `Transf_cat` subject fusion for the final `PathInd_transfd` projection. Exact boundary is 4/6/0/10: four mathematical projections, two support rules, zero proof rules, ten definitions, and every later/public denial. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
@@ -2385,9 +2387,66 @@ node --require ts-node/register --test \
 
 Review checkpoint `6694c87`, with review SHA-256
 `fdd08973311a1afe781e53743a54889a2b58c07a61077fb8b251180d00df6016`,
-freezes that exact authorization. Semantic implementation may resume only
-under the reviewed post-prefix 4/5/0/10 boundary. No Lambdapi execution or
-long aggregate is relevant to this behavior-free review.
+froze that exact authorization. The measured correction below now supersedes
+its implementation authority. No Lambdapi execution or long aggregate was
+relevant to that behavior-free review.
+
+### `PATHOUT-LIBRARY-INTERNALIZED-1D` measured v3 transfd mismatch and corrected proposal v4
+
+V3 semantic admission compiled its post-prefix support fusion and the
+`PathInd_func` component projection. The final selected projection,
+`pathind.internalized.path-ind-transfd-component`, then failed subject
+preservation. An in-memory observer measured the normalized comparison as:
+
+```text
+τ(Obj(Transf_cat(Catd_cat(PathOut_cat(Z,x)), Cat_cat,
+                  PathInd_src_catd(Z,x), PathInd_tgt_catd(Z,x))))
+
+versus
+
+τ(Obj(Transf_cat(Functor_cat(PathOut_cat(Z,x),Cat_cat), Cat_cat,
+                  PathInd_src_catd(Z,x), PathInd_tgt_catd(Z,x)))).
+```
+
+The only mismatch is the already-active `Catd_cat(PathOut)` versus
+`Functor_cat(PathOut,Cat_cat)` presentation, now underneath `Transf_cat`.
+Corrected non-authorizing proposal v4 is
+[`src/v3_2/pathind_internalized_proposal_v4.ts`](../src/v3_2/pathind_internalized_proposal_v4.ts),
+with focused tests in
+[`tests/v3_2_pathind_internalized_proposal_v4_tests.ts`](../tests/v3_2_pathind_internalized_proposal_v4_tests.ts).
+It inserts one local support fusion immediately before the transfd component
+projection and shifts that projection from order four to five. The exact
+boundary is **4/6/0/10**: four owners, four mathematical projections, two
+derived presentation-support rules, zero proof rules, and ten definitions.
+It does not authorize a generic category collapse, proof rule, checker/runtime
+matcher change, alternate theorem signature/body, whole-profile import,
+public surface, transitivity, integration, or release.
+
+Proposal-v4 proportional evidence is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_internalized_proposal_v4.ts \
+  tests/v3_2_pathind_internalized_proposal_v4_tests.ts \
+  src/v3_2/pathind_internalized_transfer.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2/pathind_internalized_proposal_tests.ts \
+  tests/v3_2/pathind_internalized_proposal_v2_tests.ts \
+  tests/v3_2/pathind_internalized_proposal_v3_tests.ts \
+  tests/v3_2/pathind_internalized_proposal_v4_tests.ts
+  26 tests / 4 suites: 26 passed, 0 failed
+```
+
+Temporary observers are absent and the generic checker diff is empty. No
+Lambdapi execution or aggregate is relevant to this behavior-free proposal.
+Gate `H-TS-EMDASH-PATHIND-INTERNALIZED-04` asks whether to approve decision
+`D-TS-EMDASH-PATHIND-INTERNALIZED-004` exactly as proposed. V4 remains non-
+authorizing until checkpointed and separately reviewed.
 
 ## Required Evidence For Implementation
 
