@@ -54,8 +54,9 @@ negatives, nine bounded Lambdapi assertions, safe-library denials, and the
 non-export boundary green at semantic checkpoint `a361dc3`; no PathOut/PathInd
 public export is yet authorized; behavior-free
 `PATHOUT-LIBRARY-INTERNALIZED-1D` proposal v1 is frozen at 4/4/0/10,
-final-proportional-green, and awaiting its rollback-safe proposal checkpoint
-and separate review
+final-proportional-green at checkpoint `188b8e5`, and separately approved
+under delegated unattended authority with human supersession; the exact
+review is final-proportional-green and authorizes semantic implementation
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -218,7 +219,7 @@ named library presentation.
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | proposal v1 final-proportional-green; awaiting checkpoint and separate review | completed 1C at `a361dc3`/`033dbb8` | The exact proposed local boundary is 4/4/0/10: select only missing `Sigma_transfd_funcd` plus `PathOutReflEval_funcd`, `PathInd_func`, and primary `PathInd_transfd`; install their four active projections; derive ten transparent internalized/Sigma-total definitions. Reuse existing providers without importing the whole scale-stress profile, and preserve internally owned source-arrow and higher action. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | proposal v1 separately reviewed; implementation ready | completed 1C at `a361dc3`/`033dbb8`; proposal checkpoint `188b8e5` | The separately approved exact local boundary is 4/4/0/10: select only missing `Sigma_transfd_funcd` plus `PathOutReflEval_funcd`, `PathInd_func`, and primary `PathInd_transfd`; install their four active projections; derive ten transparent internalized/Sigma-total definitions. Reuse existing providers without importing the whole scale-stress profile, and preserve internally owned source-arrow and higher action. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
@@ -2098,6 +2099,54 @@ decision `D-TS-EMDASH-PATHIND-INTERNALIZED-001` exactly as proposed. The
 proposal remains non-authorizing until its exact checkpoint receives a
 separate immutable review under the user's standing unattended delegation,
 with later human supersession.
+
+#### Proposal checkpoint and separate review
+
+Checkpoint `188b8e5` freezes the exact proposal bytes; the proposal module's
+SHA-256 is
+`da30d4fc2a9d54737e8fce9b0256e9b066b6b4f463d054d0d38741cdaedddd63`.
+No immediate human objection followed that checkpoint. Under the user's
+standing unattended delegation, the separate immutable review in
+[`src/v3_2/pathind_internalized_review.ts`](../src/v3_2/pathind_internalized_review.ts)
+approves decision `D-TS-EMDASH-PATHIND-INTERNALIZED-001` exactly as proposed,
+with later human supersession. Focused review tests are in
+[`tests/v3_2_pathind_internalized_review_tests.ts`](../tests/v3_2/pathind_internalized_review_tests.ts).
+
+The review authorizes only root-local implementation of four opaque owners,
+four runtime projections, zero proof rules, and ten transparent definitions
+through the generic transfer engines. It requires `PathInd_transfd` to remain
+the primary internally natural theorem, `PathInd_funcd` to remain a derived
+transparent Sigma-total presentation, and both source-arrow and target higher
+action to retain their internal owners. It explicitly denies importing the
+whole scale-stress profile, adding an external naturality square, claiming
+arbitrary non-cartesian Sigma naturality, changing a generic engine or active
+Lambdapi source, entering any public/browser/package barrel, implementing
+transitivity, or performing integration/release work.
+
+Separate-review proportional evidence is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_internalized_review.ts \
+  tests/v3_2_pathind_internalized_review_tests.ts \
+  tests/main_tests.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_internalized_proposal_tests.ts \
+  tests/v3_2_pathind_internalized_review_tests.ts
+  14 tests / 2 suites: 14 passed, 0 failed
+
+git diff --check
+  passed
+```
+
+No Lambdapi execution or long aggregate is relevant to this behavior-free
+review. Once its exact checkpoint is recorded, semantic implementation may
+resume under the 4/4/0/10 boundary and no wider authority.
 
 ## Required Evidence For Implementation
 
