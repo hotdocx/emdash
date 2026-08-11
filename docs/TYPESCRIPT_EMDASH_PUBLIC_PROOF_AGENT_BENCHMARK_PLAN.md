@@ -227,7 +227,7 @@ the evaluator.
 | `AGENT-EVAL-12B0` | complete; read-only selection | Audit/plan checkpoint `7aeb783` proves the evaluator/public-workspace/host prerequisites and freezes the four-slice architecture without behavior. |
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
-| `AGENT-EVAL-12B3` | exact `0.3.0` registry release verified; permanent workflow hardening candidate locally green; CloserFans host pending | Pages run `31509112917` and live 6/10/9/1 panel passed. After two preserved pre-package checkout failures, reviewed recovery run `31510726533` published byte-identical OIDC/provenance bytes. The temporary dispatch is removed locally and must be checkpointed/integrated before sibling work. |
+| `AGENT-EVAL-12B3` | exact `0.3.0` registry release verified; permanent workflow hardening complete at `3af518d`, integration pending; CloserFans host pending | Pages run `31509112917` and live 6/10/9/1 panel passed. After two preserved pre-package checkout failures, reviewed recovery run `31510726533` published byte-identical OIDC/provenance bytes. The temporary dispatch is removed at an exact checkpoint and must reach public `main` before sibling work. |
 | `AGENT-EVAL-12B4` | gated | Requires the installed hosted consumer and one separately frozen provider/run policy. Record reproducible real-agent runs, preserve raw canonical attempts/reports where policy allows, and graduate only measured claims. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
@@ -1579,9 +1579,10 @@ one dispatch on exact integrated `main`. The Release must not be edited again.
 Date: 2026-08-11
 
 State: exact public package verified; permanent release-only workflow
-hardening is locally complete and proportionally green. Its exact semantic
-checkpoint is pinned by the immediately following plan-only ledger update.
-CloserFans remains untouched until that hardening reaches public `main`.
+hardening is complete and proportionally green at exact semantic checkpoint
+`3af518d`. This immediately following plan-only ledger update pins that
+immutable hardening. CloserFans remains untouched until it reaches public
+`main`.
 
 ### Hosted publication evidence
 
@@ -1665,10 +1666,9 @@ Python safe YAML parse, temporary-trigger absence scan, and git diff --check
 No TypeScript/root aggregate, Lambdapi/kernel, book/print, browser, package
 repack, CloserFans, Arrowgram, provider/model, Release, tag, environment, or
 registry mutation ran for the exact hardening reversion. Those omissions are
-not passes. The next admissible operation is exact staged review/checkpoint,
-plan-only pin, clean non-force branch/main integration, and public workflow-
-byte verification. Only afterward may the frozen additive CloserFans stage
-begin.
+not passes. The next admissible operation is clean non-force goal-branch push
+and `main` fast-forward to exact `3af518d`, followed by public workflow-byte
+verification. Only afterward may the frozen additive CloserFans stage begin.
 
 ## Validation Policy
 
