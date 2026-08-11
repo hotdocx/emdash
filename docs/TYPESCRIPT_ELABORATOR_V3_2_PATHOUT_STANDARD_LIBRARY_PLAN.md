@@ -113,8 +113,9 @@ denials, non-export checks, root typecheck, and focused lint pass; the
 separately gated oracle passes all twelve active-Lambdapi assertions. The
 unchanged 1,923-test aggregate from `e560551` is carried forward. No public
 PathOut/PathInd export is authorized. Internalized `1D` is complete;
-transitivity `1E` now has a frozen, behavior-free **0/0/0/5** proposal and is
-awaiting its separate immutable review before implementation.
+transitivity `1E` now has a frozen, behavior-free **0/0/0/5** proposal and a
+separate immutable review authorizing only its exact root-local
+implementation.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -280,7 +281,7 @@ named library presentation.
 | `CORE-LF-COMPARISON-NORMAL-FORM-CLOSURE-1` | complete; full-TypeScript-green | corrected proposal/review `a42ffc9`/`5277885`; semantic checkpoint `e560551`; superseded v1 `cf8ed76`/`778da06` | Preserve paired traversal and its one budget, then only after `not-equal` normalize the original left/right roots and retry exact equality. The implementation adds no equation, proof rule, Core node, unification, or public effect. |
 | `CORE-LF-TRANSFER-DECLARATION-BUDGET-1` | complete; full-TypeScript-green | proposal/review `9238104`/`a4d61a9`; shared semantic checkpoint `e560551` | Apply the already accepted per-compilation comparison limit to its checker while retaining the 256 default, one-argument public factory, and every adaptive/unbounded-budget denial. |
 | `PATHOUT-LIBRARY-INTERNALIZED-1D` | complete; final-proportional-green | completed 1C at `a361dc3`/`033dbb8`; completed generic checkpoint `e560551`; reviewed v14 `4244b54`/`73aa94e`; semantic checkpoint `b6005b3`; superseded v1-v13 retained below | The exact root-only 4/13/0/10 staged transfer compiles through unchanged generic engines. Seven active focused tests, four exact extension-rule observations, two named library consumers plus typed target transport, the foreign-motive negative, safe-library denials, non-export checks, and twelve separately gated active-Lambdapi assertions are green. No public export is authorized. |
-| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | proposal frozen; awaiting separate review | completed 1D at `b6005b3`/`6225075` | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—at **0/0/0/5** over existing providers. The source `injective` modifier on `CompTarget_catd` is provenance metadata only; it authorizes no TypeScript injectivity, unification, Core, checker, evaluator, runtime-rule, or proof-rule behavior. Eight selected observations stop at stable representable precomposition. |
+| `PATHOUT-LIBRARY-TRANSITIVITY-1E` | separately reviewed; implementation-ready | completed 1D at `b6005b3`/`6225075`; proposal checkpoint `50b9a56` | Add exactly five checked transparent definitions—`CompTarget_catd`, `CompTarget_fapp1_func`, `CompMotive_catd`, `path_comp_sec`, and `path_comp_func`—at **0/0/0/5** over existing providers. The source `injective` modifier on `CompTarget_catd` is provenance metadata only; it authorizes no TypeScript injectivity, unification, Core, checker, evaluator, runtime-rule, or proof-rule behavior. Eight selected observations stop at stable representable precomposition. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
 
@@ -2765,12 +2766,46 @@ node --require ts-node/register --test \
 ```
 
 This proposal installs no semantics, enters no public/browser/package barrel,
-and does not authorize its own implementation. A separate immutable review
-must pin the proposal checkpoint and SHA-256 before the exact root-only
-implementation may begin. The unchanged 1,923-test aggregate from `e560551`
-is carried forward; a long aggregate is irrelevant to this behavior-free
-boundary record. Push, merge, publication, release, and cleanup remain
-unauthorized.
+and does not authorize its own implementation. It is frozen at checkpoint
+`50b9a56`, with SHA-256
+`1951ff30d42ab95dfa9d77fadb747be9eca3c4bf760a99ab283da07fc1351bfb`.
+
+The separate immutable review is
+[`src/v3_2/pathout_transitivity_review.ts`](../src/v3_2/pathout_transitivity_review.ts),
+with focused tests in
+[`tests/v3_2/pathout_transitivity_review_tests.ts`](../tests/v3_2/pathout_transitivity_review_tests.ts).
+Under the user's standing unattended delegation, with later human
+supersession, it approves only that exact proposal checkpoint and digest. Its
+authorization copies the complete proposal boundary and permits only five
+checked transparent declarations through unchanged generic engines. It
+denies TypeScript injectivity/unification from source metadata, new Core or
+checker/evaluator behavior, runtime/proof rules, the Path-category bridge,
+raw-composition runtime collapse, public/text presentation, active Lambdapi
+edits, integration, and release.
+
+Combined separate-review evidence on 2026-08-11 is:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_pathout_transitivity_proposal_tests.ts \
+  tests/v3_2_pathout_transitivity_review_tests.ts
+  13 tests / 2 suites: 13 passed, 0 failed
+
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathout_transitivity_proposal.ts \
+  src/v3_2/pathout_transitivity_review.ts \
+  tests/v3_2/pathout_transitivity_proposal_tests.ts \
+  tests/v3_2/pathout_transitivity_review_tests.ts \
+  tests/main_tests.ts
+  passed
+```
+
+The unchanged 1,923-test aggregate from `e560551` is carried forward; a long
+aggregate is irrelevant to this behavior-free review. Push, merge,
+publication, release, and cleanup remain unauthorized.
 
 ## Required Evidence For Implementation
 

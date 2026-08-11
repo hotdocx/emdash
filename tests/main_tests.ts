@@ -60,6 +60,7 @@ import './v3_2_pathind_internalized_review_v13_tests';
 import './v3_2_pathind_internalized_review_v14_tests';
 import './v3_2_pathind_internalized_transfer_tests';
 import './v3_2_pathout_transitivity_proposal_tests';
+import './v3_2_pathout_transitivity_review_tests';
 import './v3_2_lf_builder_tests';
 import './v3_2_lf_profile_proposal_tests';
 import './v3_2_directed_1a_proposal_tests';
