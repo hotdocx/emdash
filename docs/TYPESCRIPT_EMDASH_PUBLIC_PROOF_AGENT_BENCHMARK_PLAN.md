@@ -3319,6 +3319,44 @@ plans and repeat the behavior-free at-call review. No operator invocation,
 provider/model, push, merge, deployment, release, Stage B/C, or claim is
 authorized. Accounting remains 35/41.
 
+###### R2 implementation qualification checkpoint
+
+CloserFans checkpoint `8276e962ea0d5e2f1fa4e87c79357f38cdd03321`, exact
+parent `a6b5e61194551f2cf648226e7e86249eec670168`, and exact tree
+`e03085a472aee51b2b934a9c71b8db7320cb9998` implement only the reviewed
+three-file rotation. Committed file SHA-256 values are:
+
+```text
+e3c205ecd3b10b380710295b20471992381741d1c16cc76cc6d835c4386655c6  scripts/run-emdash-stage-a-real.mjs
+b615654019cdbd6f364132dc74b72501ec6058dcabe3020cb7ccb91e14348557  scripts/verify-emdash-benchmark-template-runtime.ts
+4923b93b08af3279443df640e73706a29e3a83c2bd614a16bad413bf759e1271  templates/emdash_benchmark/scripts/emdash-canary-contract.mts
+```
+
+The new committed 19-entry template snapshot manifest is
+`28c06be7b4feeb8077237e82b4524b00f6f88cf5bf40f22d72c0305380dadb82`.
+Exact v2 hashes to
+`aff872d7aa486ab1fb21a73bb514b73218f033f3b2184137969c2000cdccab58`;
+retired v1 remains
+`4c8dc99972629f7b0e0807aa9986111a5dc89bbd839129ffc060c53a1c4aba21`.
+
+The focused outer canary passes under its existing bound, including clean
+install, typecheck, static v2-equality/v1-retirement checks, committed-snapshot
+coverage, all fake orchestration and real-driver-without-provider tests, and
+public mock CLI smoke. The live no-model permission/command/network probe also
+passes. Formatting, exact three-file scope, full staged review, diff/
+whitespace hygiene, credential-shape scan, ancestry, clean worktree, absent
+contributor/template dependency trees, absent v1/v2 leases, absent candidate
+v2 run root, and unchanged preserved v1 receipt SHA-256
+`cb02d5085f855e3a516f5c20f2b5593103b53c38824e5b85e99e530fda25edf3`
+are green.
+
+No provider/model, real lease/transcript, push, merge, deployment, release, or
+long aggregate occurred. This checkpoint makes v2 representable but does not
+authorize its use. A new immutable at-call review must recheck exact source,
+manifest/operator/input hashes, current no-model host state, absent v2 lease
+and absolute run root, and then checkpoint the sole command before at most one
+invocation. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -3391,7 +3429,9 @@ On continuation:
    the fourth clean-evaluator launch edit and default-long-path regression;
    treat scheduling proposal/review `2b23877`/`5a31712` and CloserFans
    checkpoint `a6b5e61`, tree `fe50a80`, as the focused-green four-file R1
-   implementation, with no call yet authorized; and
+   implementation; treat R2 proposal/review `a92c16c`/`8f0cf31` and
+   CloserFans checkpoint `8276e96`, tree `e03085a`, as only the focused-green
+   v2 allowlist rotation, with no call yet authorized; and
    forbid any retry or alternate coordinate without the amended implementation
    checkpoint, new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe
