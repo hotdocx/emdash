@@ -65,7 +65,9 @@ is final-proportional-green and checkpointed at `2a250fb` under delegated
 unattended authority with later human supersession. Measured dependency-prefix
 shadowing now supersedes that implementation authority. Corrected behavior-
 free v3 replaces the unreachable support rule one-for-one with its stable
-post-prefix form at the same 4/5/0/10 boundary; it awaits checkpoint/review.
+post-prefix form at the same 4/5/0/10 boundary. Proposal v3 is frozen at
+`5a1d635`; its separate review candidate is final-proportional-green and
+awaiting checkpoint.
 
 Authority: `emdash2/emdash3_2.lp`, especially its representable, fibre-
 covariance, directed-Sigma, PathOut, PathInd, and transitivity sections;
@@ -228,7 +230,7 @@ named library presentation.
 | `PATHOUT-LIBRARY-FOUNDATION-1B0` | corrected v9 separately reviewed | completed corrected 0A; superseded v1/v2/v3/v4/v5/v6/v7/v8 | V8 makes general source action pass, but reflexive action stops at stable precomposition of `id_y` by `p`. Checkpointed v9 preserves v8, adds only active line 8032, and is approved at 5/13/2/9. |
 | `PATHOUT-LIBRARY-FOUNDATION-1B` | complete; final-proportional-green | separately reviewed v9 proposal | The root-only 5/13/2/9 transfer compiles through generic engines; seven positives, eight negatives, six bounded oracle assertions, safe-library denials, and non-export checks are green. |
 | `PATHIND-TRUSTED-PROFILE-1C` | complete; final-proportional-green | completed 1B; semantic checkpoint `a361dc3`; proposal/review checkpoints `65656e5`/`0ab7fd4`; superseded v7 checkpoints `f0fd4a6`/`0cefb73`, v6 checkpoints `b41c3b0`/`9b22034`, v5 checkpoints `7219828`/`3f95e7c`, v4 checkpoints `f4101e2`/`397472f`, v3 checkpoints `bfe09e3`/`880593e`, v2 checkpoints `7413dd6`/`3421647`, and v1 checkpoints `cc639fc`/`2deae91` | The exact 5/12/0/6 root-only profile compiles through generic engines. Five runtime observations, the typed rho-section consumer, eight strict negatives, safe-library denials, non-export checks, and nine bounded active-Lambdapi assertions are green. TypeScript exposes the consumer's exact transport-along-rho normal form without adding a final runtime collapse; the oracle verifies its conventional rho endpoint. |
-| `PATHOUT-LIBRARY-INTERNALIZED-1D` | v2 review superseded; corrected proposal v3 awaiting checkpoint/review | completed 1C at `a361dc3`/`033dbb8`; superseded proposal/review v2 checkpoints `fbfc4dd`/`2a250fb`; superseded v1 checkpoints `188b8e5`/`d3a0f31` | V3 replaces v2's unreachable pre-prefix support fusion one-for-one with the exact decoded `Functor_cat` object presentation reached after dependency-first Hom/Functor rewrites. It preserves four owners, four mathematical projections, one support rule, zero proof rules, ten definitions, and every later/public denial at 4/5/0/10. |
+| `PATHOUT-LIBRARY-INTERNALIZED-1D` | corrected proposal v3 checkpointed; separate review v3 awaiting checkpoint | completed 1C at `a361dc3`/`033dbb8`; proposal v3 checkpoint `5a1d635`; superseded v2 checkpoints `fbfc4dd`/`2a250fb`; superseded v1 checkpoints `188b8e5`/`d3a0f31` | V3 replaces v2's unreachable pre-prefix support fusion one-for-one with the exact decoded `Functor_cat` object presentation reached after dependency-first Hom/Functor rewrites. It preserves four owners, four mathematical projections, one support rule, zero proof rules, ten definitions, and every later/public denial at 4/5/0/10. |
 | `PATHOUT-LIBRARY-TRANSITIVITY-1E` | pending | completed 1D | Add `CompTarget_catd`, `CompMotive_catd`, `path_comp_sec`, and the checked reduction to representable precomposition/composition, retaining the authority's transparent/opaque classification. |
 | `PATHOUT-LIBRARY-PRESENTATION-1F` | pending | completed direct typed slices | Add narrow text syntax, CLI/browser reviewer material, and book-facing explanation without adding a second semantic engine. |
 | `PATHOUT-TRUSTED-LIBRARY-GRADUATE-0G` | pending | all selected slices | State the exact trusted profile, derived library, and computation envelope; retain any unimplemented internalized or presentation layers honestly. |
@@ -2342,8 +2344,47 @@ node --require ts-node/register --test \
 No Lambdapi execution or repository aggregate is relevant to this behavior-
 free one-for-one correction. Gate
 `H-TS-EMDASH-PATHIND-INTERNALIZED-03` asks whether to approve decision
-`D-TS-EMDASH-PATHIND-INTERNALIZED-003` exactly as proposed. V3 remains non-
-authorizing until checkpointed and separately reviewed.
+`D-TS-EMDASH-PATHIND-INTERNALIZED-003` exactly as proposed. V3 is frozen at
+checkpoint `5a1d635`, with SHA-256
+`4c9b60411a7b1c98b3da44fdd6919360a3cf65a18e862c163d5f911a214308e3`.
+
+The separate immutable review candidate is
+[`src/v3_2/pathind_internalized_review_v3.ts`](../src/v3_2/pathind_internalized_review_v3.ts),
+with focused tests in
+[`tests/v3_2_pathind_internalized_review_v3_tests.ts`](../tests/v3_2/pathind_internalized_review_v3_tests.ts).
+It authorizes only the exact one-for-one post-prefix replacement under the
+user's standing unattended delegation, with later human supersession. It
+explicitly denies retention of the v2 pre-prefix rule, any sixth runtime rule,
+proof integration, generic runtime/checker changes, and every existing later
+or public effect.
+
+The combined review evidence is:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw exec eslint \
+  src/v3_2/pathind_internalized_proposal_v3.ts \
+  src/v3_2/pathind_internalized_review_v3.ts \
+  tests/v3_2_pathind_internalized_proposal_v3_tests.ts \
+  tests/v3_2_pathind_internalized_review_v3_tests.ts \
+  src/v3_2/pathind_internalized_transfer.ts
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_pathind_internalized_proposal_tests.ts \
+  tests/v3_2_pathind_internalized_proposal_v2_tests.ts \
+  tests/v3_2_pathind_internalized_proposal_v3_tests.ts \
+  tests/v3_2_pathind_internalized_review_tests.ts \
+  tests/v3_2_pathind_internalized_review_v2_tests.ts \
+  tests/v3_2_pathind_internalized_review_v3_tests.ts
+  38 tests / 6 suites: 38 passed, 0 failed
+```
+
+The review candidate remains non-authoritative until checkpointed. No
+Lambdapi execution or long aggregate is relevant to this behavior-free
+review.
 
 ## Required Evidence For Implementation
 

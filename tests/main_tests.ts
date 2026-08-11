@@ -257,6 +257,7 @@ import './v3_2_pathind_internalized_proposal_v2_tests';
 import './v3_2_pathind_internalized_proposal_v3_tests';
 import './v3_2_pathind_internalized_review_tests';
 import './v3_2_pathind_internalized_review_v2_tests';
+import './v3_2_pathind_internalized_review_v3_tests';
 import './v3_2_product_review_demo_tests';
 import './v3_2_browser_directed_tests';
 import './v3_2_browser_reviewer_tests';
