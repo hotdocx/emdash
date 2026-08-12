@@ -53,7 +53,11 @@ class-call semantics are already qualified. `PRACTICAL-CLASS-PROOF-18` is now
 complete and final-proportional-green at `6ad0e17`: source-first complete/open
 proof plans now replay against one exact reconstructed mixed-fragment closure,
 using only the runtime compiled from that closure and excluding unrelated
-workspace modules. The first research-planning
+workspace modules. A bounded post-completion product audit now selects
+`RUNTIME-DEV-CATALOG-19`: compose that checked single-proof owner with the
+existing canonical multi-proof catalog pattern so a directly authored
+TypeScript fragment development exposes all current proof states and named
+goals without a resident prover process. The first research-planning
 goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -855,6 +859,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `POST-14B-AUDIT-16` | Re-evaluate incomplete rows after the real package and Arrowgram/GetPaidX consumer | complete | 14B4, 12B, 10, and 11 retain their exact gates; public distribution plus checked book/research consumers make only the bounded `STDLIB-8A` product-selection row ready. |
 | `POST-STDLIB-8B-AUDIT-17` | Re-evaluate every deferred/gated row after PathOut graduation | complete; read-only | Checkpoint `7aeb783` retains concrete gates for SIMP-5B2, INDEX-SEARCH-6B, COUNTEREVIDENCE-10, EXTERNAL-CERT-11, and GOAL-GRAPH-14B4. Only AGENT-EVAL-12B0/12B1 becomes ready through existing evaluator, public authoring/workspace, host, and fixture evidence. |
 | `PRACTICAL-CLASS-PROOF-18` | Runtime-bearing exact-closure proof attachment for ordinary TypeScript-authored developments | complete | `6ad0e17`; exact transitive source recompile, internally derived reviewed runtime, complete/named-open fresh replay, stable portable evidence, unrelated-module exclusion, closure/runtime drift rejection, browser-safe public workspace export, and packed consumers are green. No new record/class/synthesis semantics. |
+| `RUNTIME-DEV-CATALOG-19` | Canonical multi-proof development catalog over exact runtime-bearing fragment workspaces | in progress; contract frozen | Direct TypeScript plan data, canonical proof ordering, compile workspace once then freshly replay every exact closure, aggregate stable status/goals, and retain portable runtime-bound proof artifacts. No parser, CLI, theorem imports, new semantics, or release. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
@@ -869,9 +874,10 @@ outcome. The row is parked without a classifier repair, fresh coordinate, or
 retry. It does not complete 12B4 or authorize a performance, proof,
 integration, release, deployment, or later-stage claim.
 
-Roadmap accounting after this product checkpoint is 36 of 42 scoped rows
-complete. The six remaining rows are deliberately terminal for their current
-questions: deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
+Roadmap accounting after the bounded post-18 product audit is 36 of 43 scoped
+rows complete. The only active row is `RUNTIME-DEV-CATALOG-19`. The other six
+remaining rows are deliberately terminal for their current questions:
+deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
 `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4`, plus parked
 `AGENT-EVAL-12B4`. None is reopened merely to keep the goal active.
 
@@ -7295,6 +7301,114 @@ omission to remain explicit rather than be presented as positive evidence.
 The row is terminal and may be reopened only for a concrete failing consumer
 or a changed fragment-workspace/runtime contract.
 
+## `RUNTIME-DEV-CATALOG-19` Audit And Frozen Contract
+
+### Product question and existing-owner audit
+
+Can an AI or human author describe a finite runtime-bearing Emdash development
+directly as compact TypeScript data, then obtain one deterministic view of all
+proofs and current named goals without maintaining a resident prover process?
+
+The existing owners answer every part except their composition:
+
+1. `CoreLfProofDevelopment` already validates stable proof identities,
+   canonicalizes proof order, compiles one declaration workspace, freshly
+   replays independent proof leaves, and exposes aggregate status, lookup, and
+   current goals. Its input and profile are intentionally pinned to
+   `CoreLfDeclarationWorkspacePlan` and `CoreLfWorkspaceProofDocumentInput`.
+2. `CoreLfFragmentModuleWorkspacePlan` already represents declaration,
+   runtime, and proof-unification fragments as inert directly authored
+   TypeScript data and has a canonical browser-safe source snapshot.
+3. `compileCoreLfFragmentWorkspaceProofDocument` now reconstructs and drift-
+   checks one selected exact closure, derives its runtime internally, and
+   freshly replays one complete or open proof. It deliberately does not own a
+   multi-proof catalog.
+4. Parameterizing or migrating the declaration-only development family would
+   widen an established public source/artifact/CLI/maintenance ecosystem.
+   A small additive runtime-bearing catalog is both safer and clearer.
+
+This is a concrete product consumer of row 18: a proof assistant must show the
+state of a development, not merely compile one theorem per hand-written call.
+It does not reopen row 18 or any parked benchmark work.
+
+### Selected implementation boundary
+
+Add one browser-safe `lf_fragment_proof_development.ts` owner with:
+
+1. a versioned nonempty input containing one
+   `CoreLfFragmentModuleWorkspacePlan` and a finite list of
+   `CoreLfFragmentWorkspaceProofDocumentInput` values;
+2. stable development/proof identity validation, unique
+   `(moduleId, declarationId)` keys, existing owner-module validation, and
+   canonical module-ID/declaration-ID proof ordering;
+3. one ordinary fragment-workspace compilation followed by fresh independent
+   replay of every proof through
+   `compileCoreLfFragmentWorkspaceProofDocument`; no theorem becomes an
+   implicit premise of another theorem;
+4. a deeply frozen portable artifact containing the canonical fragment-
+   workspace source snapshot, ordered full runtime-bound proof artifacts,
+   aggregate complete/incomplete status, and exact open-goal count;
+5. a process-local checked result retaining the compiled workspace and proof
+   compilations, deterministic exact proof lookup, and a stable flat goal view
+   keyed by module, declaration, and named goal ID; and
+6. deterministic serialization plus additive contributor and public
+   `./workspace` exports, capability inventory, concise package documentation,
+   and installed-consumer checks.
+
+Direct TypeScript construction is the intended authoring path. This row adds
+no canonical text parser or arbitrary module loader. A future transport format
+may project the inert plan only after a real remote/file consumer selects its
+acquisition and hash boundary.
+
+### Executable acceptance boundary
+
+Refactor the standalone mechanism-only runtime fixture from row 18 into one
+test-support module rather than copying it. Use it to demonstrate:
+
+- at least two canonically ordered proofs, one runtime-dependent complete
+  consumer proof and one named-open proof, over provider/consumer/unrelated
+  modules;
+- aggregate incomplete status, exact open-goal count, stable goal projection,
+  exact proof lookup, and per-proof exact closure/runtime evidence;
+- byte-identical artifacts under workspace and proof-input permutations;
+- no unrelated module in either proof closure even though the portable
+  workspace snapshot truthfully contains it;
+- rejection of malformed revisions/IDs, empty catalogs, duplicate proofs,
+  absent owner modules, and stale runtime fingerprints through their owning
+  error boundaries;
+- deeply frozen portable arrays and no checker, session, environment,
+  callback, checked term, meta identity, or mutable runtime authority in the
+  serialization; and
+- a Node-free transitive browser closure and packed ESM/CJS/strict-NodeNext/
+  browser visibility of the additive public API.
+
+Proportional validation is fixture/refactor tests plus the new catalog, nearest
+single-proof/runtime-workspace/declaration-only-catalog suites, workspace
+contract, typecheck, changed-file lint, browser closure, packed package
+consumers, staged diff, and whitespace hygiene. A long root aggregate,
+Lambdapi, book/print, sibling repository, deployment, publication, or release
+is excluded unless a focused failure proves that omission blocks this exact
+row.
+
+### Terminal policy
+
+The row is:
+
+- **complete** when every selected positive and negative gate above passes;
+- **parked** if the audit's apparent gap is already expressible by an existing
+  public generic without changing its declared profiles;
+- **blocked** if portable aggregation cannot retain exact derived-runtime
+  replay without executable authority in input or output; or
+- **rejected** if implementation requires a parser, mutable prover service,
+  theorem-to-theorem visibility, new Core/checker semantics, or weakening of
+  row 18's exact-closure checks.
+
+The budget is one additive design and at most one correction prompted by a
+focused executable counterexample. Any terminal result ends the row. It may be
+reopened only by a concrete multi-proof runtime consumer failure or a changed
+fragment-workspace/proof contract; a desire for a CLI, release, benchmark, or
+larger demo is a separate product question.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7572,6 +7686,7 @@ or a changed fragment-workspace/runtime contract.
 | `D-PA-270` | Use explicit terminal states and a bounded correction budget for every experimental/infrastructure row. | “Enough quality” means enough evidence to make the declared product decision, not unlimited retries. Complete, parked, blocked, and rejected have distinct meanings; only a concrete consumer or changed prerequisite can reopen a terminal row. |
 | `D-PA-271` | Select runtime-bearing exact-closure proof attachment as the first post-benchmark usability tranche. | Records/classes/synthesis and mixed-fragment compilation are already qualified, but source-first proof documents cannot consume the reviewed runtime owned by that workspace. Bridging those existing owners produces direct proof-assistant value without inventing new mathematics or class semantics. |
 | `D-PA-272` | Complete `PRACTICAL-CLASS-PROOF-18` at `6ad0e17` and do not widen it into another management, host, or release layer. | The exact-closure bridge now passes every frozen positive and negative gate: source recompile and drift comparison, internally derived runtime, runtime-dependent complete/open replay, portable fingerprints, contamination exclusion, browser closure, and packed consumers. The omitted long aggregate is non-blocking under `D-PA-019`, and the explicit terminal rule prevents a generic bridge from becoming an endless umbrella tranche. |
+| `D-PA-273` | Select one additive runtime-bearing multi-proof development catalog as the sole post-18 product tranche. | The declaration-only catalog already qualifies ordering, lookup, aggregate goals, and independent leaves, while the fragment workspace and row-18 proof owner qualify runtime semantics. Composing those exact owners gives AI-authored TypeScript developments a compact current-state view; migrating the established declaration-only source/CLI family or adding a parser would be broader and less honest. |
 
 ## Validation And Checkpoint Policy
 
@@ -7725,12 +7840,16 @@ synchronized:
 > evidence, and explicit exclusion of an input runtime, unrelated modules, and
 > process-local authority. Do not reopen or widen it into a catalog, CLI,
 > release, or host adapter without one concrete failing consumer or changed
-> fragment-runtime prerequisite. Before adding another implementation row,
-> perform one bounded read-only product audit: name the user-visible proof-
-> assistant limitation, show that existing owners do not already satisfy it,
-> choose one smallest executable consumer, and freeze its success gate,
-> terminal outcomes, correction budget, and sole reopening trigger. Do not
-> rebuild the already-qualified algebra hierarchy or edit mathematical sources.
+> fragment-runtime prerequisite. The separately identified multi-proof
+> authoring limitation is now the concrete consumer for a new layer; treat its
+> bounded post-18 audit as complete and continue only with frozen
+> `RUNTIME-DEV-CATALOG-19`. Add one browser-safe catalog over directly authored
+> TypeScript fragment-workspace and proof-plan data; compile the workspace once,
+> replay every proof independently through the exact runtime-closure owner, and
+> expose deterministic aggregate status, lookup, and named goals. Reuse the
+> mechanism-only fixture and stop at this semantic/public-workspace boundary.
+> Do not add a parser, source-file schema, CLI, theorem imports, new proof or
+> class semantics, release, host adapter, or mathematical-source edit.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
 > `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
 > retained by audit 17 rather than inventing authority to advance the ledger.
