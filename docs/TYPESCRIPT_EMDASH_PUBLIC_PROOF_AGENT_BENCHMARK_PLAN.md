@@ -4901,6 +4901,39 @@ push, merge, deployment, release, or cleanup ran. These are omissions, not
 passes. The checkpoint remains non-authorizing pending an exact code/access
 review. Accounting remains 35/41.
 
+###### Immutable R10 code/access review and sole authorization
+
+Exact qualification checkpoint `d51b992c1fa2aa365daba5b688ebf4762c3dfb0e`
+has parent `4e3c0920f9247c81b555d8fec6a326cf7589d4dd`, tree
+`1465d67c0674c922149b5b050d0bd6a820f96739`, master-plan SHA-256
+`5af0be1050ee8219e96e02e4f1228f72f848898ecd4298475b10d8c4705855fc`,
+and this-plan SHA-256
+`bedeb4b825f4bb31b68c15df1e0023313ba721405ff4147e4c17ead56e625ef2`.
+CloserFans is clean at exact `d1a270e`/tree `96e7050`; classifier, unchanged
+verifier/operator/canary, and Node hashes are exact.
+
+Code/access review confirms the corrected helper now reaches `openSync` with
+the supported mandatory no-follow flags. Accepted metadata `906e40f...` and
+receipt digest `f7c6f85...` remain current because every diagnostic command was
+read-only and both repositories are clean. Lease/stderr paths, bounds, hashes,
+descriptor identity/stability, fixed stages, rules, output closure, and the
+closed environment remain unchanged.
+
+Under the standing unattended-approval delegation, authorize exactly one R10
+invocation after this checkpoint:
+
+```text
+/usr/bin/env -i HOME=/home/user1 LANG=C.UTF-8 LC_ALL=C.UTF-8 NO_COLOR=1 PATH=/usr/bin:/bin /home/user1/.nvm/versions/node/v24.11.1/bin/node /home/user1/closerfans-emdash-canary-v1/scripts/classify-emdash-stage-a-stderr.mjs
+```
+
+Observe only one closed nine-key classification or three-key fixed-stage
+failure line and its exit/channel shape. Every outcome is terminal; do not
+retry, redirect, parameterize, or feed it to a model. This is local read-only
+classification of preserved evidence, not Codex/provider/model execution.
+
+No benchmark/proof/performance claim, integration, push, deployment, release,
+cleanup, Stage B/C, or graduation is authorized. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
