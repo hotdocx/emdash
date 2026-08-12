@@ -4082,6 +4082,61 @@ provider turn; read no credential or raw evidence; alter no config/cache/state;
 and create no lease/run root. Even a green R6 needs a separate behavior-free
 authorization checkpoint. Accounting remains 35/41.
 
+###### R6 measured v3 preflight result
+
+R6 is green without invoking the v3 command or a model/provider turn. The
+disposable committed snapshot matched exact CloserFans commit/tree
+`0ea5b98fbdacb6f449ef78577aebb8c7277b69a6`/
+`149de95e39270ce007b645c7d11746b0266dfa44`, contained 19 tracked entries,
+and produced manifest SHA-256
+`12aedbdfe2d0891e37422c1594e4c30462ba9539ab03d946f1120d872568a821`.
+Exact operator and input facts are:
+
+```text
+ 9910  774752d0459d405b352d859f71cd0d3c1a275a328708899f9434032019c4854a  scripts/run-emdash-stage-a-real.mjs
+  409  a33c63dccf3a687484358b326dfbf41d1d668ad0fe1c7025b6b3c6aedf8f0978  scripts/emdash-canary-output.schema.json
+ 1704  117768e52381ede1b23f3bf4c43064e526daa6a25f3d8d4b0c3c879ffd7574ed  scripts/emdash-canary-prompt.txt
+ 3593  0c104f3888c61ce669958c44051ea65a153d9fbaea3c9c37139e6325b310eb84  benchmark-run.emdash.ts
+```
+
+The inherit-nothing projection contained only `CI`, `CODEX_HOME`, `HOME`,
+`LANG`, `LC_ALL`, `NO_COLOR`, `PATH`, and `TMPDIR`. It observed Codex
+`0.147.0`, empty stdout plus exact stderr category `Logged in using ChatGPT`,
+and selected cache tuple `gpt-5.6-sol`/`3000`, fetched at
+`2026-08-12T21:08:11.363260352Z`, default verbosity `low`, with high reasoning
+supported. No credential value or full cache was output or retained.
+
+The bounded clean-install `--permission-probe-only` verifier exited zero. It
+passed template typecheck, complete strict-config help parsing, local sandbox
+filesystem confinement, network denial, fake-home/tmp writes, protected-state
+denials, and the exact selected-case allowlisted command. It used no `exec`
+stdin or model turn and removed its probe and installation roots.
+
+Exact v3 ID SHA-256 is
+`e1fe31c138df2b2ea7bf33138862a579aa5064dd1d738afefaffa21602aa5250`;
+the absolute run-root SHA-256 is
+`9015f1615dee96634b6d4356814d97166f30521df849f0ff0de991d739713bd7`.
+Both candidate root and lease remain absent. CloserFans and Emdash plan
+worktrees are clean at `0ea5b98` and the current plan checkpoint respectively;
+no root/template dependency tree or matching temporary root remains. The sole
+v2 lease remains the only authorization file, and terminal hashes are still
+v1 receipt `cb02d508...`, v2 receipt `c97c1f87...`, and v2 lease
+`6dce7e860...`.
+
+The validated temporary root was exactly
+`/tmp/emdash-r6-preflight.rAnljz`, mode 0700, containing only `host-clean` and
+`status-tmp` at cleanup time. Exact realpath/prefix validation preceded its
+removal; it is now absent. No pre-existing `.emdash-stage-a` bootstrap, probe,
+run, lease, or evidence was removed; the dedicated permission probe removed
+only the probe root it had newly allocated.
+
+Doctor/provider reachability, the already-green fake matrix, permission-
+unrelated tests, and all aggregates were omitted. R6 establishes current
+preflight readiness only. It does not prove that schema normalization fixed
+v2, authorize the command, create an outcome, or advance 35/41. A separate
+behavior-free checkpoint must bind these facts and decide whether one terminal
+v3 invocation is authorized.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
