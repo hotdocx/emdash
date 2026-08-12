@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R15 v4 at-call audit green; separate one-call authorization review pending | Exact committed source/manifest/inputs, closed CLI/login/model-cache state, carried R13/R14 gates, absent v4 state, terminal-state presence, and cleanup are green without a model. The real operator remains unauthorized until a distinct immutable review. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | parked after terminal v4 `forbidden-command`; non-graduating | One exact policy-confined provider attempt completed its process and independent replay but produced no source change or benchmark outcome. V4 is consumed. No classifier repair, v5 coordinate, retry, or graduation is planned; retained evidence may be revisited only for a later concrete product need. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -855,14 +855,14 @@ The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
 The post-completion benchmark stream has completed separately reviewed 12B1,
 12B2, and 12B3 through exact Emdash/CloserFans checkpoints recorded above.
-The subsequent 12B4 audit, proposal `286a50d`, immutable first review,
-mock-only isolated CloserFans implementation `1d77473`/`8e270a7`, corrective
-proposal/review `4ab09fc`/`876a4e3`, and focused-green local one-shot-driver
-checkpoints `1abdfd8`/`4faef78` are recorded in
-`docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md`. These local
-checkpoints do not complete 12B4 or authorize a provider call, measurement,
-push, merge, deployment, or later-stage effect. The final exact code/preflight
-review remains mandatory before the sole authorization can be consumed.
+The subsequent 12B4 proposals, reviews, mock boundary, one-shot driver,
+no-model preflights, and terminal v4 result are recorded in
+`docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md`. The sole v4
+attempt completed its process and independent replay but terminated at the
+command audit as `forbidden-command`, with no source change or benchmark
+outcome. The row is parked without a classifier repair, fresh coordinate, or
+retry. It does not complete 12B4 or authorize a performance, proof,
+integration, release, deployment, or later-stage claim.
 
 Roadmap accounting after this row is 35 of 41 scoped rows complete. The six
 remaining rows are the deliberately deferred/gated `SIMP-5B2`,
@@ -7136,6 +7136,18 @@ inspected afterward. Raw evidence, retry, alternate coordinate, integration,
 release, deployment, cleanup, aggregate, proof claim, performance comparison,
 or graduation remains unauthorized. Accounting remains 35/41.
 
+The sole v4 invocation then ran once from exact CloserFans `1074fc7`, tree
+`50d069d`, and terminated publicly as `forbidden-command`. Its minimized
+receipt SHA-256 is `f949fb3c...`; its lease SHA-256 is `ce3d8a03...`. The
+Codex process exited normally with a valid final message and canonical replay;
+source extraction and authority checks were clean, the initial and candidate
+source hashes both remain `0c104f3...`, and no file-change event occurred.
+The one-command audit alone observed a forbidden surface, so the receipt is
+invalid with `benchmarkOutcome=null`, `graduationEligible=false`, and
+`proofEvidence=false`. No raw private evidence was inspected. V4 is consumed.
+To refocus on proof-assistant utility, 12B4 is parked with no v5, classifier
+repair, or retry in the current roadmap. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7409,6 +7421,7 @@ or graduation remains unauthorized. Accounting remains 35/41.
 | `D-PA-266` | Approve exact R15 proposal `27df1b1` for one bounded behavior-free v4 at-call audit under delegated unattended authority. | Import-safe committed snapshotting, an exact eight-key closed Codex version/login projection, bounded jq-selected cache tuple, carried unchanged gates, metadata-only state checks, and validated temp-only cleanup expose no prompt, model turn, credential, or private evidence. Green results still require separate one-call authorization. |
 | `D-PA-267` | Record R15 as green, consumed, and non-authorizing. | Exact committed bytes, closed CLI/login/model tuple, carried gates, absent v4 state, terminal metadata, clean worktrees, and cleanup passed. The wrapper rejected one pre-process shell spelling but no audit operation occurred before the single successful in-memory audit. No model/provider or private read occurred. |
 | `D-PA-268` | Authorize one exact v4 Stage A operator invocation after final review checkpoint under delegated unattended authority. | Clean immutable source/inputs, corrected full-vector permission evidence, focused fake/type evidence, fresh closed CLI/login/model state, absent v4 state, exclusive lease semantics, source confinement, and minimized independent replay satisfy the one-shot boundary. Every outcome is terminal and remains contaminated/non-graduating/non-proof. |
+| `D-PA-269` | Park `AGENT-EVAL-12B4` after the terminal v4 `forbidden-command` outcome and refocus on practical proof-assistant usability. | The sole authorized attempt exercised the governed provider/process/replay path but changed no source and produced no benchmark result. Further coordinate rotation or classifier diagnosis would optimize the harness rather than the product. Retain the evidence, preserve 35/41 accounting, and require a new concrete product need before reopening measurement. |
 
 ## Validation And Checkpoint Policy
 

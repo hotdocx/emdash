@@ -7,19 +7,15 @@ Corpus/interchange checkpoint `d0d3764`, public runner/package checkpoint
 separately reviewed contracts and proportional gates recorded below. Exact
 public `@hotdocx/emdash@0.3.0`, Pages, Release, provenance, installed
 consumers, release-only OIDC workflow, and the all-abstention source workspace
-are verified. The `AGENT-EVAL-12B4` read-only audit, first policy proposal,
-and immutable implementation review are frozen below. The approved mock-only
-Stage A runner is now implemented on an isolated CloserFans branch at
-checkpoints `1d77473` and `8e270a7`, with final tree `9fc93af`; its focused
-containment, replay, public-package, CLI, template, and hygiene gates are
-green. No provider/model execution or real retained run occurred. The next
-preflight review accepted the mock boundary but correctly denied a real call
-because no authenticated one-shot driver exists. The corrective driver
-proposal below is now separately reviewed for code and fake/no-model tests
-only; it is not implemented. Provider execution, measurement, and graduation
-remain gated.
+are verified. `AGENT-EVAL-12B4` reached one terminal, policy-confined v4 model
+attempt on exact CloserFans checkpoint `1074fc7`. The process and independent
+replay completed, but the command audit returned `forbidden-command`; no
+source change or benchmark result exists. The row is deliberately parked as
+non-graduating evidence: there will be no v5 coordinate, classifier repair,
+or retry in the current roadmap. Product work resumes at the practical
+proof-assistant usability boundary.
 
-Date: 2026-08-11
+Date: 2026-08-12
 
 Branch: `goal/typescript-emdash-proof-assistant-v1`
 
@@ -236,7 +232,7 @@ the evaluator.
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
 | `AGENT-EVAL-12B3` | complete at Emdash hardening `3af518d` and CloserFans host `cbf2356` | Exact `0.3.0`, Pages run `31509112917`, protected OIDC recovery run `31510726533`, byte/provenance/installed-consumer verification, permanent trigger removal, and the focused-green ten-abstention source workspace are complete. Two safe pre-package failures and the reviewed one-time dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Stage A terminal without a benchmark result; R11 correction focused-green at CloserFans `8a5c2f9`, with R12 parse-probe repair proposed | Supported `--disable view_image` replaces the stale strict key and focused typecheck/synthetic/mock gates pass. The old `exec --help` check did not load config; R12 proposes validating the full vector to an exact no-prompt boundary. Live probing and new-coordinate authority stay separate. |
+| `AGENT-EVAL-12B4` | parked after terminal v4 `forbidden-command`; non-graduating | Exact CloserFans `1074fc7` produced one policy-confined provider attempt and a valid independently replayed terminal receipt, but no source change or benchmark outcome. V4 is consumed. No v5 coordinate, classifier repair, retry, performance claim, or graduation follows. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 separately approved `AGENT-EVAL-12B2` implementation is also complete and its
@@ -5563,6 +5559,37 @@ cannot establish a success rate, comparison, broad model capability, or 12B4
 graduation. No retry, new coordinate, integration, release, deployment,
 cleanup, or aggregate follows automatically. Human direction may supersede
 this authorization before execution. Accounting remains 35/41.
+
+###### Terminal v4 result and benchmark-stream refocus
+
+The sole authorized v4 command ran once from exact clean CloserFans
+`1074fc75e2ba8a043b1c46c1e5d72a6646e772eb`, tree
+`50d069d0acae66efaffa9dad9fde24d46a9f511c`. It terminated publicly as
+`forbidden-command` with wrapper exit 2. The minimized mode-0600 receipt is
+4,661 bytes at SHA-256
+`f949fb3c8bbc23b95bbdc1c29bf3de6b5651a6fabd4e2f17d9558ffa4e8b0b64`;
+the mode-0600 lease is 691 bytes at SHA-256
+`ce3d8a03cf89de697fae510f4dbe81bf971fd0170d50e25c3f2f28a077d944ea`.
+The authorization ID, run root, committed 19-entry snapshot, manifest
+`1459fe26...`, operator `334b03a...`, and fixed argument-vector hash
+`79dcfaf5...` all match the reviewed boundary.
+
+The receipt records `providerExecuted=true`, a normal Codex process exit,
+valid final-message parsing, canonical replay, clean source extraction, and no
+file-change event. Initial and candidate source both remain `0c104f3...`; the
+source diff is empty. The command audit alone is terminal-invalid with one
+observed forbidden surface. Consequently `benchmarkOutcome=null`,
+`graduationEligible=false`, and `proofEvidence=false`. Usage and monetary cost
+remain unavailable under ChatGPT authentication. Raw JSONL, stderr, final
+model text, candidate internals, credentials, and hidden reasoning were not
+read.
+
+This result is sufficient to close the experiment without pretending it
+measured proof performance. `AGENT-EVAL-12B4` is now **parked**, not complete:
+v4 is consumed and there will be no v5 coordinate, command-classifier repair,
+or retry in this roadmap. Its retained evidence remains available if a future
+concrete product decision makes renewed agent measurement more valuable than
+proof-assistant usability work. Roadmap accounting stays 35/41.
 
 ## Validation Policy
 
