@@ -4445,6 +4445,42 @@ read, provider/model action, Codex retry, integration, push, deployment,
 release, cleanup, result, or graduation. It requires separate immutable
 review. Accounting remains 35/41.
 
+###### Immutable R7 access-proposal review
+
+Exact proposal checkpoint `c88cb1d709293cd3c835ecaa3066f5ba6bd6ef7b`
+has parent `fdd37495d48b1c68fcc039820fa9816e86138faa`, tree
+`aa397b1a543292ae24aba5f3e372e86f8deaa2ba`, master-plan SHA-256
+`8746dc1df09d5f584b07af8e7ee8375d5b23e79fe640ced7d4ee587c4bbb393c`,
+and this-plan SHA-256
+`dafec0b978dafa1bd996e00b5930e0d1552ccb9ac89e8fb15d7f7324b4693164`.
+Committed CloserFans remains clean at exact `04e58f9`/tree `5b150bc`; the
+classifier/verifier, operator/canary, and Node executable hashes remain the
+four values recorded above.
+
+Review confirms that importing the classifier has no main effect, while its
+main can open only the three hard-coded v3 files after validating the four
+hard-coded directories. The pure output cannot carry content or dynamic keys;
+every filesystem or decoding exception becomes the same fixed failure line.
+The closed command supplies no `NODE_OPTIONS`, Codex home, auth, proxy,
+credential, plugin, MCP, hook, memory, model, or provider state.
+
+Under the standing unattended-approval delegation, this review authorizes
+exactly one behavior-free metadata probe. It may call only `lstat` and
+`realpath` on the seven exact paths and emit one closed JSON array with roles
+`state-root`, `authorization-root`, `run-root`, `evidence-root`, `receipt`,
+`stderr`, and `lease`; each entry may contain only expected-kind validity,
+symlink boolean, current-UID boolean, octal mode, file byte size or null, and
+exact-realpath boolean. It may recheck Git/code/executable hashes without
+opening artifacts. It may not call `open`, `read`, `hash`, directory listing,
+or the classifier main.
+
+Only a completely matching result may advance to a distinct behavior-free
+authorization checkpoint for the already frozen classifier command. This
+review does not itself authorize that command, stderr content access, a second
+metadata probe, any Codex/provider/model action, retry, integration, push,
+deployment, release, cleanup, diagnosis, result, or graduation. Accounting
+remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
