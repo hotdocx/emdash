@@ -4137,6 +4137,56 @@ v2, authorize the command, create an outcome, or advance 35/41. A separate
 behavior-free checkpoint must bind these facts and decide whether one terminal
 v3 invocation is authorized.
 
+###### Immutable v3 at-call review and sole authorization
+
+Reviewed qualification checkpoint:
+`926979dd9991781a48aae22b416e47721f688df0`, exact parent
+`6a55c5955a459870606b136d236cd13d54e9828b`, exact tree
+`57660b57a1f010646bb9d71311c960b9840e5d88`. The exact CloserFans source,
+manifest, operator/input, closed host, permission, cleanup, absent-state, and
+preserved-evidence values are those recorded immediately above.
+
+The review checks all mandatory boundaries:
+
+1. CloserFans source is clean at exact `0ea5b98`, tree `149de95`, descending
+   from reviewed R4/R5 checkpoints; its 19-entry snapshot manifest is
+   `12aedbdf...` and both closed guards contain only v3.
+2. Exact normalized schema, prompt, source, and operator hashes are fixed;
+   focused fake/type/static gates and the fresh local permission probe pass.
+3. Closed CLI/login/cache state is exact and exposes no credential value.
+4. Candidate ID/root hashes are exact, both root and lease are absent, no
+   dependency/transient root remains, and terminal v1/v2 evidence is intact.
+5. The public mock route remains fake and the local real operator remains the
+   sole authority that can reconstruct committed bytes, rerun preflights,
+   acquire the exclusive lease, spawn Codex, and derive the minimized receipt.
+
+Decision under the explicitly delegated unattended checkpoint policy:
+authorize exactly one invocation of exactly this command after this
+behavior-free plan checkpoint is committed:
+
+```text
+node scripts/run-emdash-stage-a-real.mjs --authorization-id emdash-stage-a-native-exact-local-premise-2026-08-12-v3 --run-root /home/user1/.emdash-stage-a/emdash-stage-a-native-exact-local-premise-2026-08-12-v3
+```
+
+No equivalent shell spelling, alternate executable, changed environment,
+different ID/root, second command, or manual internal-driver invocation is
+authorized. The operator may create only the bootstrap/preflight/run/evidence/
+lease state already governed by committed code. Every result is terminal:
+preflight refusal, authorization refusal, process failure, invalid stream,
+abstention, rejected/accepted candidate, timeout, or any other observed
+outcome consumes this authorization. Do not retry, reuse v3, replace its root,
+or mint another coordinate without a new diagnosis/proposal/review chain.
+
+Afterward inspect only the minimized receipt, canonical lease, ordinary path/
+mode/hash/source facts, and public candidate diff/outcome fields exposed by the
+receipt contract. Do not inspect or publish raw JSONL, stderr, final model
+message, private candidate/replay files, credentials, or hidden reasoning.
+Treat usage/cost as reported only if present, and retain unconditional
+open-book contamination, non-graduation, and non-proof labels. One Stage A
+result cannot establish success rate, comparative performance, or measured
+graduation. Accounting remains 35/41 until a later Stage B/C design and
+representative repeated evidence satisfy 12B4.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact

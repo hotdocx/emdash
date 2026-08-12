@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R6 v3 no-model preflight green; behavior-free authorization checkpoint required | Exact commit/tree/19-entry manifest and input hashes, closed CLI/login/cache tuple, local permission probe, cleanup, clean worktrees, absent v3 root/lease, and preserved terminal hashes pass. Exact v3 command remains denied pending a distinct checkpoint. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | exactly one terminal v3 Stage A command authorized after behavior-free checkpoint | Qualification `926979d` binds exact source/manifest/input/host/permission/absent-state facts. Only the recorded command/ID/root may run once; every outcome consumes authority, raw evidence remains private, and no performance/graduation claim follows. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6799,6 +6799,15 @@ raw evidence, doctor, fake rerun, or aggregate occurred. A distinct
 behavior-free checkpoint must decide the one command; accounting remains
 35/41.
 
+Separate immutable review of qualification checkpoint `926979d` authorizes
+exactly one recorded v3 operator command after this behavior-free checkpoint.
+All five at-call boundaries pass; ID/root/lease are absent and terminal
+evidence is preserved. No alternate spelling, coordinate, or retry is allowed,
+and every preflight/process/benchmark outcome is terminal. Post-call review is
+limited to minimized receipt/lease and ordinary public provenance; raw private
+evidence remains uninspected. Stage A remains contaminated/non-graduating and
+accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7035,6 +7044,7 @@ behavior-free checkpoint must decide the one command; accounting remains
 | `D-PA-229` | Freeze R6 as a non-authorizing no-model preflight for the exact v3 command. | Current code is focused-green, but one-shot authority requires fresh committed hashes, closed CLI/login/cache facts, local permission semantics, clean source, and absent coordinates. The proposal forbids the real operator/provider and requires another checkpoint before execution. |
 | `D-PA-230` | Approve exact R6 proposal `b5b3cd1` only for its pre-provider snapshot/status/cache/permission audit. | Each allowed operation is committed read-only or local sandbox execution and exposes only whitelisted facts. Exact temporary cleanup and persistent-evidence preservation are mandatory; the v3 command and provider remain denied. |
 | `D-PA-231` | Qualify exact v3 preflight without yet authorizing its command. | Committed source/manifest/input hashes, closed CLI/login/cache state, local permission semantics, exact cleanup, clean/absent coordinates, and unchanged terminal hashes pass. Separating qualification from authorization preserves human supersession and one-shot auditability. |
+| `D-PA-232` | Authorize exactly one terminal v3 Stage A operator command after the behavior-free checkpoint. | Qualification `926979d` satisfies exact source/input, closed host, permission, clean/absent-state, and evidence-preservation conditions. The committed operator alone owns state creation and receipt derivation. Every result consumes authority; no retry, alternate coordinate, broad claim, or graduation is permitted. |
 
 ## Validation And Checkpoint Policy
 
