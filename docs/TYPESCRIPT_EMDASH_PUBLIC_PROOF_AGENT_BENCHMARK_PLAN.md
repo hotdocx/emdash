@@ -236,7 +236,7 @@ the evaluator.
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
 | `AGENT-EVAL-12B3` | complete at Emdash hardening `3af518d` and CloserFans host `cbf2356` | Exact `0.3.0`, Pages run `31509112917`, protected OIDC recovery run `31510726533`, byte/provenance/installed-consumer verification, permanent trigger removal, and the focused-green ten-abstention source workspace are complete. Two safe pre-package failures and the reviewed one-time dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Stage A terminal without a benchmark result; R10 classified the preserved error as `configuration` | The one real canary remains consumed and non-graduating. Exact CloserFans `d1a270e` and qualification `d51b992` enabled one privacy-preserving local classification: 98 valid UTF-8 bytes, one terminal-newline line, digest `74cb003...`, and only the fixed `configuration` rule. No retry is authorized. A local no-evidence Codex-contract audit and separately reviewed non-content subcategory proposal are next. |
+| `AGENT-EVAL-12B4` | Stage A terminal without a benchmark result; R11 identifies an unsupported strict-config key and proposes a local correction | The consumed canary's 98-byte digest exactly equals the public-source-derived Codex 0.147.0 line rejecting `tools.view_image`; the artifact was not reread. Replace that stale key with supported `--disable view_image`, strengthen its synthetic assertion, and keep execution/new-coordinate authority separate. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 separately approved `AGENT-EVAL-12B2` implementation is also complete and its
@@ -4953,12 +4953,64 @@ safe, or whether a later agent attempt would succeed.
 
 No source/evidence mutation, Codex/provider/model invocation, credential or
 network access, install, aggregate, push, merge, deployment, release, or
-cleanup occurred. The classifier must not be rerun. The next dependency-ready
-work is limited to a local no-evidence audit of installed Codex 0.147.0's
-public/configuration error contracts and a non-authorizing R11 proposal for a
-closed configuration subcategory projection. Any classifier edit, private
-artifact read, new canary coordinate, or provider retry still requires its own
-immutable review. Accounting remains 35/41.
+cleanup occurred. The classifier must not be rerun. At that checkpoint the
+only dependency-ready work was a local no-evidence audit of installed Codex
+0.147.0's public/configuration error contracts; its result follows below. Any
+classifier edit, private artifact read, new canary coordinate, or provider
+retry still requires its own immutable review. Accounting remains 35/41.
+
+###### R11 public-source preimage diagnosis and correction proposal
+
+The no-evidence audit used the official Codex tag `rust-v0.147.0`, exact commit
+`be6e8eac029b183056b7e4402879f15d2c85f61b`. The relevant exact source hashes
+are:
+
+- `codex-rs/exec/src/lib.rs`: `52d801c747c18524b42552e9da9080aa43e8eeb04b368570bb0bbfc601f613ae`;
+- `codex-rs/config/src/loader/mod.rs`: `ef4e31d094943c18a995bbb9c3fd390a145a35fc561a3f74d8cd595d733e7005`;
+- `codex-rs/core/config.schema.json`: `b9105f17442d5c41ba5d4d82603259d3cc0ceb38aeb3badf9e5ca20da328ae6e`; and
+- `codex-rs/features/src/lib.rs`: `8437206e83806c546f9c8cf7002384c8d9be1740c1f4c78f44ef9417d7e61344`.
+
+Those authorities are mutually decisive. Headless config-load failure emits
+`Error loading config.toml: {err}`; strict CLI validation emits ``unknown
+configuration field `{path}` in -c/--config override``; `ToolsToml` permits
+only `experimental_request_user_input`, `update_plan`, and `web_search`; and
+the stable feature catalog owns `view_image`. The committed Stage A vector
+nevertheless contains `tools.view_image=false` under `--strict-config`.
+
+Instantiating the two official error templates with that committed key yields
+exactly this public-source-derived candidate, including terminal newline:
+
+```text
+Error loading config.toml: unknown configuration field `tools.view_image` in -c/--config override
+```
+
+It is exactly 98 bytes and has SHA-256
+`74cb00300ed4a4c23ba979d30d34218cd356e4bfb55b81f10a3dc832d52c56c7`,
+identical to R10's independently recorded artifact byte count and digest.
+This establishes the exact terminal cause by equality of immutable bytes; the
+private artifact was not opened or reread, and no substring classifier is
+needed.
+
+Freeze the narrowest correction as non-authorizing:
+
+1. in `templates/emdash_benchmark/scripts/emdash-canary-contract.mts`, remove
+   only `tools.view_image=false` from the `-c` configuration list and add
+   `--disable`, `view_image` beside the existing fixed feature disables;
+2. in `templates/emdash_benchmark/scripts/verify-emdash-canary.mts`, add
+   `view_image` to the exact disabled-feature assertion and assert that the
+   stale `tools.view_image` key is absent;
+3. retain `--strict-config`, every permission profile, closed environment,
+   model/prompt/schema/output coordinate, capability boundary, receipt, and
+   all other argument bytes unchanged; and
+4. run only syntax/typecheck and the nearest fake/synthetic canary contracts.
+   A separately proposed no-model config/permission probe may follow the
+   implementation checkpoint; no real Codex/provider retry or new
+   authorization coordinate follows from this proposal.
+
+Separate immutable review is mandatory before either file is edited. No
+private evidence, Codex/provider/model execution, credential, network,
+install, aggregate, push, merge, deployment, release, or cleanup is
+authorized. Accounting remains 35/41.
 
 ## Validation Policy
 
@@ -5042,7 +5094,9 @@ On continuation:
    and tree `96e7050` as local privacy-preserving diagnosis only; treat R10's
    sole 363-byte record `7d22a71...` as terminal proof that the preserved
    98-byte line matches only fixed category `configuration`; never rerun any
-   consumed command or inspect the private line directly; and
+   consumed command or inspect the private line directly; treat the official
+   Codex 0.147.0 source-preimage equality above as exact diagnosis of stale
+   strict key `tools.view_image` without another evidence read; and
    forbid any retry or alternate coordinate without the amended implementation
    checkpoint, new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe
