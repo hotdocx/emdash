@@ -3841,6 +3841,45 @@ compatibility hardening only. It does not diagnose v2, authorize a provider
 call, create coordinates, produce a benchmark result, or advance 35/41
 accounting. A separate exact code/preflight review remains mandatory.
 
+###### Immutable R4 code/preflight review
+
+The review accepts exact CloserFans checkpoint
+`1307f249df784107a260fb2461719f93f2467fb5`, parent `8276e962...`, tree
+`863db44af8a1d774fa1cac7839efd6babbebe4dc`. `git diff --check` is clean and
+the revision changes only the three reviewed paths. Committed content SHA-256
+values are:
+
+```text
+a33c63dccf3a687484358b326dfbf41d1d668ad0fe1c7025b6b3c6aedf8f0978  templates/emdash_benchmark/scripts/emdash-canary-output.schema.json
+e9935771da40b165efda8f997aff057cac47c35c0fe641ff3965848372ad1a3d  templates/emdash_benchmark/scripts/fixtures/emdash-canary-fake-codex.mjs
+6d2dc52622528645aa5b207f7939dba28de420be7ebd43201b3256745955db8b  templates/emdash_benchmark/scripts/verify-emdash-canary.mts
+```
+
+The committed schema is exactly the reviewed closed typed-enum object. The
+two structural assertions are independent, precede fake execution, and add no
+non-Node dependency. The focused disposable validation exercises both copies
+and the unchanged final-message validator. No production proof/checker,
+benchmark source, invocation argument, sandbox/environment rule, stream or
+receipt parser, evidence policy, or public API changes.
+
+The root operator, `emdash-canary-real.mts`, and
+`emdash-canary-contract.mts` are unchanged from `8276e96`. Both execution
+guards therefore still name terminal v2 and correctly reject every unreviewed
+ID. The current branch is clean, descends from the reviewed base, and retains
+no dependency tree or temporary test root. v1/v2 receipt and v2 lease hashes
+remain exact. The recent R3 redacted host/model/feature health and R4 focused
+fake evidence are carried forward because those inputs did not change; no
+permission, provider, or aggregate rerun is warranted.
+
+Decision: accept R4 as focused-green compatibility hardening and permit only a
+later plan proposal to rotate the two execution guards from consumed v2 to a
+fresh candidate v3 value. That proposal must bind one exact non-secret ID,
+require a static retirement assertion for v2, change no other driver behavior,
+and undergo its own review before code edits. This review itself authorizes no
+new ID/root, edit, prompt/model/provider call, raw-evidence access, retry,
+lease, benchmark result, performance claim, or graduation. Accounting remains
+35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
