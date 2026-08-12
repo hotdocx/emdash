@@ -68,6 +68,13 @@ is one same-module, exact-runtime theorem DAG with explicit bindings,
 target/type rechecking, transitive free-declaration dependency inspection, and
 self/cycle/open-prerequisite rejection. It adds no Core/checker rule, generated
 declaration, parser, registry, or cross-module theorem-export claim. The first
+post-completion audit now selects `MODULE-THEOREM-DAG-21`: one closed
+multi-module workspace may use a completed theorem from an explicit direct
+dependency, but only through that provider's public interface. This tranche
+also closes the already-recorded raw-Core proof-reference gap by preflighting
+proof targets/plans/checked terms against root-local plus direct-public free
+declarations. It does not create a detached theorem package, incremental
+linker, remote import, or general premise-index enrichment. The first
 research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -871,6 +878,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `PRACTICAL-CLASS-PROOF-18` | Runtime-bearing exact-closure proof attachment for ordinary TypeScript-authored developments | complete | `6ad0e17`; exact transitive source recompile, internally derived reviewed runtime, complete/named-open fresh replay, stable portable evidence, unrelated-module exclusion, closure/runtime drift rejection, browser-safe public workspace export, and packed consumers are green. No new record/class/synthesis semantics. |
 | `RUNTIME-DEV-CATALOG-19` | Canonical multi-proof development catalog over exact runtime-bearing fragment workspaces | complete | `1f64d89`; direct TypeScript plan data, canonical proof ordering, one workspace compile plus fresh independent exact-runtime closure replay, aggregate stable status/goals/lookup, portable runtime-bound artifacts, browser closure, and packed consumers are green. No parser, CLI, theorem imports, new semantics, or release. |
 | `DECLARED-THEOREM-DAG-20` | Bind same-module opaque theorem signatures to checked runtime proof plans and validate explicit theorem-use dependencies | complete | `b61eb30`; exact one-to-one opaque-signature bindings, derived-runtime target/term rechecking, explicit workspace/theorem uses, dependency-first order, open-state retention, self/cycle/open-prerequisite rejection, browser closure, and packed consumers are green. No generated declarations, cross-module export, parser, CLI, new Core/checker semantics, or release. |
+| `MODULE-THEOREM-DAG-21` | Closed-workspace cross-module theorem DAG with exact proof-source visibility | selected; frozen proposal | Additive multi-root profile over the row-20 engine; local or explicit direct-public free references only; public imported bound theorems may discharge later proofs; private/protected/transitive/unrelated direct references and all existing self/cycle/open-prerequisite cases fail closed. No detached export artifact, remote linker, parser, CLI, index/ranking, new Core/checker semantics, or release. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
@@ -885,12 +893,13 @@ outcome. The row is parked without a classifier repair, fresh coordinate, or
 retry. It does not complete 12B4 or authorize a performance, proof,
 integration, release, deployment, or later-stage claim.
 
-Roadmap accounting after the declared-theorem checkpoint is 38 of 44 scoped
-rows complete. The six remaining rows are deliberately terminal for their
-current questions:
+Roadmap accounting after selecting the module-theorem tranche is 38 of 45
+scoped rows complete. Six of the seven remaining rows are deliberately
+terminal for their current questions:
 deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
 `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4`, plus parked
-`AGENT-EVAL-12B4`. None is reopened merely to keep the goal active.
+`AGENT-EVAL-12B4`. None is reopened merely to keep the goal active. The sole
+selected implementation row is `MODULE-THEOREM-DAG-21`.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -7662,6 +7671,135 @@ standing anti-aggregate policy and is not a claimed pass. This row is terminal
 and may be reopened only by the concrete same-module consumer or contract
 changes named above.
 
+## `MODULE-THEOREM-DAG-21` Audit And Frozen Contract
+
+### Product question and existing-owner audit
+
+Can a directly authored multi-file Emdash workspace prove a theorem in module
+A and use it in module B, while preserving ordinary module visibility and the
+same well-founded proof authority as row 20?
+
+This is the next concrete practical limitation. Row 20 proves that theorem
+bindings and dependency DAGs are sound within one module, but intentionally
+rejects more than one proof root. The remaining mechanisms already exist:
+
+1. Row 19 accepts proofs rooted in multiple exact fragment modules and replays
+   each against its own source-recompiled declaration/runtime closure.
+2. `CoreLfCompiledModuleInterface` and `CoreLfDependencyAccess` own the source
+   rule: a module may use all of its own non-excluded declarations; an ordinary
+   term may import only a public declaration from an explicit direct
+   dependency. Protected declarations are limited to the separate runtime-
+   pattern path, private declarations are not importable, and transitive
+   dependencies are not implicitly re-exported.
+3. `INDEX-SEARCH-6A` already derives exactly that local/direct-public premise
+   set, but its audit records an important non-effect: the proof checker sees
+   the complete exact closure and is not itself a source-reference firewall.
+   A manually constructed Core proof can therefore name a private or merely
+   transitive free declaration resident in the closure.
+4. Merely deleting row 20's one-root check would consequently be unsound as a
+   module-export claim. The missing product owner is a preflight over inert
+   proof source and complete checked terms, followed by an explicit
+   cross-module theorem-use check against the exact direct public interface.
+5. A closed development artifact already embeds every proof, closure/runtime
+   fingerprint, theorem binding, and source workspace needed for this check.
+   A detached theorem certificate, independently linkable interface digest,
+   incremental build cache, or remote artifact resolver is not required for
+   this first multi-file result and would be a separate contract.
+
+### Selected additive design
+
+Extend the theorem-development module with a distinct
+`emdash-lf-module-theorem-development-v1` profile rather than migrating the
+completed same-module profile. Reuse one private binding/graph engine while
+keeping both portable artifact revisions explicit. The new factory/compiler
+must:
+
+1. accept one row-19 plan and exact one-to-one opaque-signature bindings as in
+   row 20; every proof still proves a declaration owned by its own root module,
+   but the finite binding set may span multiple roots;
+2. compile the row-19 workspace once, resolve and runtime-recheck each binding
+   exactly as row 20 does, and preserve all self/cycle/open-prerequisite and
+   deterministic dependency-first ordering semantics across module boundaries;
+3. structurally collect free declarations from each proof target and every
+   inert source-plan expression (`exact`, `apply`, `have` binder/type,
+   expectation, and nested plans). For a complete proof, also collect the
+   final checked term so inserted/elaborated references cannot escape the
+   preflight;
+4. derive the allowed free Core names only from the exact reconstructed root's
+   non-excluded local interface plus non-excluded public entries of its exact
+   direct dependency interfaces. Reject direct protected/private/transitive/
+   unrelated/unknown names before emitting theorem evidence. A local or
+   imported public wrapper may retain its already-checked private
+   implementation closure; this preflight governs source references, not
+   internal delta bodies;
+5. when a bound theorem edge crosses modules, require the source plan's direct
+   reference to pass that same direct-public rule. Transitive theorem edges
+   discovered inside already checked helper bodies remain dependency evidence
+   but do not pierce provider encapsulation;
+6. emit a deeply frozen additive artifact containing the unchanged row-19
+   development artifact, exact bindings, source/direct/transitive free-
+   reference evidence, theorem/workspace dependency separation, and stable
+   topological order. Process-local checked objects remain outside portable
+   output; and
+7. expose the additive profile/factory/compiler/serializer and types through
+   contributor/public workspace barrels, capability inventory, concise
+   package documentation, browser closure, and installed package consumers.
+
+The result means “these proofs form a well-founded checked theorem DAG inside
+this exact closed workspace.” It is not yet a standalone theorem export that a
+different workspace may trust by digest. It does not infer class/instance/
+coercion relationships, descriptions, ranking, or embeddings and therefore
+does not silently complete `INDEX-SEARCH-6B`.
+
+### Executable consumer and acceptance boundary
+
+Extend the standalone runtime mechanism fixture only. Its provider declares a
+primitive witness, one public theorem signature, and one private theorem
+signature of a type convertible through the existing `normalize` runtime. The
+provider proof closes the public signature from the witness; the consumer
+proof closes a local signature by directly using that public provider theorem.
+Canonical proof order must again differ from dependency-first order.
+
+Focused negatives must show that the unchanged row-19 checker alone accepts a
+direct private-provider reference while the new module theorem owner rejects
+it; similarly reject a protected, merely transitive, unrelated, or unknown
+direct free reference where the fixture can represent it without modifying
+mathematical sources. Retain target, plan (`exact`/`apply`/`have`/expectation),
+checked-term, open-state, duplicate/missing binding, self, cycle, and complete-
+to-open coverage proportionally. Verify byte stability, deep freezing,
+Node-free browser closure, and packed ESM/CJS/strict-NodeNext/browser exports.
+
+Proportional gates are the new suite, row-20 and exact runtime-development
+suites, nearest module-visibility and premise-index suites, capability/browser
+tests, workspace contract, typecheck, changed-file lint, packed package
+consumers, staged diff, and whitespace hygiene. Root test, `check:ts`,
+`check:all`, Lambdapi, book/print, siblings, deployment, publication, and
+release remain excluded unless a focused failure proves that one exact omitted
+boundary blocks progress.
+
+### Terminal policy and correction budget
+
+The row is:
+
+- **complete** only when the positive provider-to-consumer theorem chain and
+  every frozen source-visibility/anti-circularity/portability gate pass;
+- **parked** if an existing public owner already combines cross-root proof
+  binding with the exact source-reference firewall;
+- **blocked** if direct source visibility cannot be recovered from the exact
+  returned closure/interface without a separately reviewed workspace change;
+  or
+- **rejected** if the design requires trusting list/topological order,
+  flattening private provider implementation into consumer scope, accepting an
+  inaccessible/cyclic/open dependency, generating unchecked declarations, or
+  adding a Core/checker rule or mutable theorem registry.
+
+The budget is one additive closed-workspace design and at most one correction
+from a focused executable counterexample. Any terminal result ends the row.
+Reopening requires a concrete failing multi-file theorem consumer or a changed
+row-18/19/20 visibility/interface contract. Detached certificate import,
+incremental/remote linking, general index enrichment/ranking, CLI, release, or
+host integration are separate product questions.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7943,6 +8081,7 @@ changes named above.
 | `D-PA-274` | Complete `RUNTIME-DEV-CATALOG-19` at `1f64d89` and keep acquisition, theorem export, commands, and distribution separate. | The additive catalog passes the frozen runtime-dependent complete/open, ordering, aggregate-goal, lookup, contamination, drift, portability, browser, and packed-consumer gates. It reuses exact existing owners without profile migration or semantic duplication; the long aggregate and unrelated layers would not add decision-relevant evidence to this terminal row. |
 | `D-PA-275` | Select a same-module declared-theorem dependency DAG as the sole post-19 product tranche. | Existing exact closures can check theorem references but cannot certify that their opaque signatures have completed, well-founded proof plans. Explicit one-to-one bindings plus exact runtime target rechecking and transitive free-reference cycle/open-dependency rejection add real theorem chaining without generated declarations, list-order authority, a Kernel-to-transfer reifier, a new Core rule, or premature cross-module publication. |
 | `D-PA-276` | Complete `DECLARED-THEOREM-DAG-20` at `b61eb30` and keep cross-module publication/index enrichment separate. | The additive overlay passes exact runtime-dependent theorem chaining, reverse-list topological order, open-state retention, explicit assumption/use evidence, every binding/type/shape negative, direct/helper-hidden self and cycle rejection, browser closure, and installed package consumers. The sole correction removed surplus proof-document fields from portable identities; no further retry or widening is decision-relevant. |
+| `D-PA-277` | Select one closed-workspace multi-module theorem DAG with an exact local/direct-public proof-source firewall. | Row 20 supplies proof authority but intentionally rejects multiple roots; module interfaces supply visibility, while the checker intentionally sees the full closure. Combining cross-root bindings without preflight would let raw Core bypass private/transitive boundaries. A distinct additive profile can validate target/plan/checked-term free references and public theorem edges without a detached certificate/linker, new Core rule, or broad INDEX-SEARCH-6B enrichment. |
 
 ## Validation And Checkpoint Policy
 
@@ -8121,6 +8260,15 @@ synchronized:
 > sibling integration, or mathematical-source work without its recorded
 > concrete trigger. Before selecting another implementation row, repeat the
 > bounded product audit required above and freeze it as a separate tranche.
+> Treat `MODULE-THEOREM-DAG-21` and `D-PA-277` as that sole selected tranche.
+> Add only the distinct closed-workspace multi-root theorem profile over the
+> shared row-20 binding/DAG semantics. Preflight proof target, inert plan, and
+> complete checked-term free references against exact root-local plus direct-
+> public declarations; preserve provider-private implementation closure; and
+> allow a cross-module theorem edge only through the consumer's exact public
+> direct dependency surface. Keep detached certificates/linking, remote or
+> incremental acquisition, parser/CLI/server, INDEX-SEARCH-6B enrichment,
+> Core/checker changes, release, sibling, and mathematical-source work out.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
 > `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
 > retained by audit 17 rather than inventing authority to advance the ledger.
