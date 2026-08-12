@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R9 hash matches; R10 unsupported flag correction proposed | The receipt digest exactly matches. Exact Node 24.11.1 exposes `O_NOFOLLOW` but not `O_CLOEXEC`; the classifier rejected that absent constant before open. R10 removes only that unnecessary check/flag. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R10 one-file unsupported-flag fix approved | Exact proposal `cad46d9` is approved only to remove `O_CLOEXEC` from the guard/open flags while retaining mandatory `O_NOFOLLOW`. No private execution or evidence access is authorized. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6929,6 +6929,12 @@ failures. The dedicated plan freezes non-authorizing R10 as removal of only
 that unsupported, unnecessary flag from one file. Separate review remains
 mandatory. Accounting stays 35/41.
 
+Immutable review of exact R10 proposal `cad46d9` approves only the two-line
+classifier correction: require/use `O_NOFOLLOW` without unsupported
+`O_CLOEXEC`. Zero child-process capability, bounded same-descriptor reads,
+`finally` close, all hashes/stages/outputs, and synthetic gates remain exact.
+Private execution stays separately gated. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7185,6 +7191,7 @@ mandatory. Accounting stays 35/41.
 | `D-PA-249` | Authorize exactly one R9 minimized-receipt digest command after checkpoint. | The exact local binary, closed environment, known private-file metadata, one-way output, and single path form a narrower diagnostic than another classifier edit. Stderr, provider/model, and all other evidence remain excluded. |
 | `D-PA-250` | Classify R9 as a terminal exact digest match and diagnose the absent Node `O_CLOEXEC` constant as the receipt-integrity cause. | Metadata and content hash pass; exact runtime facts show the helper's pre-open constant guard alone fails. This is local code/runtime incompatibility, not evidence corruption. |
 | `D-PA-251` | Freeze R10 as a non-authorizing one-file removal of the unsupported `O_CLOEXEC` check/flag. | `O_NOFOLLOW`, synchronous bounded same-descriptor reads, `finally` close, and zero child-process capability preserve the access boundary without requiring a platform constant Node does not expose. |
+| `D-PA-252` | Approve exact R10 proposal `cad46d9` only for the two-line classifier flag correction. | The receipt and metadata are valid; the absent constant guard deterministically fails before open. Removing only that unsupported flag restores the reviewed path without adding capability or weakening no-follow/integrity checks. |
 
 ## Validation And Checkpoint Policy
 

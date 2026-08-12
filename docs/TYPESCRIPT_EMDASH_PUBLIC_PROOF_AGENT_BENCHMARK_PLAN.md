@@ -4841,6 +4841,42 @@ hash retry, Codex/provider/model action, integration, push, deployment,
 release, cleanup, result, or graduation. Separate immutable review is
 mandatory. Accounting remains 35/41.
 
+###### Immutable R10 unsupported-flag proposal review
+
+Exact proposal checkpoint `cad46d95c0738e0bb58924d0715f2ed3a9cf7fa9`
+has parent `c9b072bc723b4e16b9046ed8d27f04a0d66f9857`, tree
+`7ba9bce35b6aecdfd2c60423198b59d3ae476ae6`, master-plan SHA-256
+`6875b60b060fc6194b8b0e273725dddf33710c976a23cd5d04414171ae301a7a`,
+and this-plan SHA-256
+`07671089786e45db243f63c0b4f932b70a5e64ac63690fa8177517a25da990a0`.
+CloserFans is clean at exact `7973127`/tree `bbf390d`; classifier, verifier,
+operator, and canary hashes remain the four recorded values.
+
+Review confirms the diagnosis from committed control flow: all accepted
+metadata checks precede a guard whose second conjunct deterministically fails
+because exact Node exposes no integer `O_CLOEXEC`; `openSync` is never reached.
+Receipt SHA-256 independently matches the expected constant. Removing only the
+unsupported guard/flag therefore corrects a harness incompatibility rather
+than weakening a successful evidence check.
+
+Under the standing unattended-approval delegation, authorize exactly one
+classifier-file edit: replace the two-constant integer guard with an
+`O_NOFOLLOW`-only guard and replace the three-flag open expression with
+`O_RDONLY | O_NOFOLLOW`. No fallback flag, conditional child behavior,
+platform branch, descriptor export, or other edit is permitted. The absence
+of all child-process capability is a mandatory static gate.
+
+Run only syntax, the unchanged full synthetic classifier verifier, the exact
+Node constant projection, static capability/`O_CLOEXEC` absence and
+`O_NOFOLLOW` presence checks, exact one-file diff, unchanged verifier/operator/
+canary hashes, ancestry, and clean status. Do not execute the private main or
+open/hash any evidence. A focused-green checkpoint remains non-authorizing
+pending a separate code/access review.
+
+This review authorizes no classifier/evidence access, metadata/hash retry,
+Codex/provider/model action, integration, push, deployment, release, cleanup,
+diagnosis, result, or graduation. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
