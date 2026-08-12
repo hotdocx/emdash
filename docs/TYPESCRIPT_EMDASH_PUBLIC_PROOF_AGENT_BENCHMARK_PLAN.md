@@ -4547,6 +4547,37 @@ stderr access, metadata retry, provider/model action, Codex retry, integration,
 push, deployment, release, cleanup, diagnosis, result, or graduation.
 Accounting remains 35/41.
 
+###### Sole R7 classifier authorization
+
+The final behavior-free audit is green. CloserFans is clean at exact
+`04e58f99313a9c61132d5b13e952e7bbabc63cf0`, tree
+`5b150bc38e421dad7f64871e9389e4015471a874`, with exact classifier/verifier
+hashes `7b5e4d3...`/`2a881c2...`; operator/canary hashes remain
+`774752d...`/`2b7cb75...`. The closed Node executable remains exact SHA-256
+`5796fd9...`. Accepted metadata result `906e40f...` proves the four exact
+private directories and three exact files satisfy kind, non-symlink,
+current-owner, 0700/0600 mode, bounded size, and realpath preconditions.
+
+Under the standing unattended-approval delegation, authorize exactly one
+invocation of the already frozen command, and only after this checkpoint:
+
+```text
+/usr/bin/env -i HOME=/home/user1 LANG=C.UTF-8 LC_ALL=C.UTF-8 NO_COLOR=1 PATH=/usr/bin:/bin /home/user1/.nvm/versions/node/v24.11.1/bin/node /home/user1/closerfans-emdash-canary-v1/scripts/classify-emdash-stage-a-stderr.mjs
+```
+
+The process may internally read only exact receipt, lease, and 98-byte stderr
+through its committed stable bounded descriptors. Only its one fixed JSON
+line or fixed failure line may be observed. Exit zero requires empty stderr
+and the exact nine-key closed result; any failure, ambiguous result, or
+unclassified result is still terminal. The command must never be retried,
+renamed, parameterized, redirected to an artifact, or fed to another model.
+
+This authorization includes no Codex/provider/model action, benchmark result,
+proof or performance claim, integration, push, deployment, release, cleanup,
+Stage B/C, or graduation. Post-command review is limited to the emitted line,
+exit/stderr shape, clean code state, and already public/recorded provenance.
+Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact

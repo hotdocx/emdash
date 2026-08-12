@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R7 metadata correction accepted; authorization pending | Exact correction `cc5db11` accepts only the hash-bound result's duplicate constant `expectedMode` values. The original probe remains shape-nonconforming and terminal; no evidence was reread. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | one R7 classifier command authorized after checkpoint | Exact code, executable, accepted metadata, closed environment, and output boundaries pass. Only the frozen read-only classifier may run once; it is not a Codex/provider retry. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6875,6 +6875,13 @@ consumed. No new metadata or content access occurred. A separate behavior-free
 classifier authorization checkpoint is now dependency-ready; accounting
 remains 35/41.
 
+The final behavior-free audit binds clean CloserFans `04e58f9`, exact code and
+Node hashes, accepted metadata result `906e40f`, and one closed-environment
+absolute classifier command. It authorizes that read-only command exactly once
+after checkpoint. Every output is terminal; no Codex/provider/model retry,
+artifact write, result claim, or graduation is permitted. Accounting remains
+35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7120,6 +7127,7 @@ remains 35/41.
 | `D-PA-238` | Approve exact access proposal `c88cb1d` only for one closed seven-path metadata probe. | `lstat`/`realpath` plus fixed role/kind/UID/mode/size facts can prove the committed classifier's preconditions without opening content. Classifier execution and stderr access remain separately gated. |
 | `D-PA-239` | Record the sole metadata probe as substantively green but strict-shape nonconforming, and freeze an exact-result correction. | The extra `expectedMode` field is a fixed duplicate, not private content, yet the reviewed vocabulary was closed. Hash-binding the consumed output and requiring separate review preserves honesty without rereading evidence. |
 | `D-PA-240` | Accept exact correction `cc5db11` only for the hash-bound metadata result's redundant fixed mode copies. | All seven required facts pass and every extra value equals its permitted mode, so it exposes nothing new. Narrow supersession avoids a second probe while preserving the original nonconformance and separate classifier authorization gate. |
+| `D-PA-241` | Authorize exactly one frozen R7 classifier command after the behavior-free checkpoint. | Exact code/executable hashes, accepted path metadata, closed environment, bounded no-follow reads, and closed output satisfy the privacy boundary. This reads terminal local stderr only and cannot retry Codex or contact a provider. |
 
 ## Validation And Checkpoint Policy
 
