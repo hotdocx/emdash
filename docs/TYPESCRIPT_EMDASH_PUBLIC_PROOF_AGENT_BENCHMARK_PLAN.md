@@ -236,7 +236,7 @@ the evaluator.
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
 | `AGENT-EVAL-12B3` | complete at Emdash hardening `3af518d` and CloserFans host `cbf2356` | Exact `0.3.0`, Pages run `31509112917`, protected OIDC recovery run `31510726533`, byte/provenance/installed-consumer verification, permanent trigger removal, and the focused-green ten-abstention source workspace are complete. Two safe pre-package failures and the reviewed one-time dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | mock Stage A complete; corrective one-shot-driver implementation approved but not started | Second preflight denied a call against tree `9fc93af`. Immutable review of proposal `4ab09fc` approves only local code and fake/no-model tests with exclusive authorization leasing, committed-byte bootstrap, closed parent/command environments, and truthful receipt provenance. Final code/preflight review still gates any real canary. |
+| `AGENT-EVAL-12B4` | Stage A terminal without a benchmark result; R10 classified the preserved error as `configuration` | The one real canary remains consumed and non-graduating. Exact CloserFans `d1a270e` and qualification `d51b992` enabled one privacy-preserving local classification: 98 valid UTF-8 bytes, one terminal-newline line, digest `74cb003...`, and only the fixed `configuration` rule. No retry is authorized. A local no-evidence Codex-contract audit and separately reviewed non-content subcategory proposal are next. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 separately approved `AGENT-EVAL-12B2` implementation is also complete and its
@@ -4934,6 +4934,32 @@ classification of preserved evidence, not Codex/provider/model execution.
 No benchmark/proof/performance claim, integration, push, deployment, release,
 cleanup, Stage B/C, or graduation is authorized. Accounting remains 35/41.
 
+###### Terminal R10 result and bounded continuation
+
+The sole corrected R10 invocation is consumed and terminal. It exited zero and
+emitted exactly one fixed nine-key JSON record:
+
+```json
+{"revision":"getpaidx-emdash-stage-a-stderr-classification-v1","targetAuthorizationIdSha256":"e1fe31c138df2b2ea7bf33138862a579aa5064dd1d738afefaffa21602aa5250","byteCount":98,"sha256":"74cb00300ed4a4c23ba979d30d34218cd356e4bfb55b81f10a3dc832d52c56c7","utf8Valid":true,"lineCount":1,"terminalNewline":true,"matchedRuleIds":["configuration"],"status":"classified"}
+```
+
+The emitted line is 363 bytes with SHA-256
+`7d22a71b0996a5da9565d9e787675bbb3c431cdc41b6171895659ac24b28536e`.
+It reveals neither the terminal line nor any arbitrary substring. The result
+proves only that the preserved 98-byte, valid-UTF-8, LF-terminated single line
+matches the classifier's fixed `configuration` rule and no other fixed rule.
+It does not establish which configuration surface failed, whether a repair is
+safe, or whether a later agent attempt would succeed.
+
+No source/evidence mutation, Codex/provider/model invocation, credential or
+network access, install, aggregate, push, merge, deployment, release, or
+cleanup occurred. The classifier must not be rerun. The next dependency-ready
+work is limited to a local no-evidence audit of installed Codex 0.147.0's
+public/configuration error contracts and a non-authorizing R11 proposal for a
+closed configuration subcategory projection. Any classifier edit, private
+artifact read, new canary coordinate, or provider retry still requires its own
+immutable review. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -5010,7 +5036,13 @@ On continuation:
    CloserFans checkpoint `8276e96`, tree `e03085a`, as only the focused-green
    v2 allowlist rotation; treat authorization checkpoint `bf94f6b`, receipt
    `c97c1f8`, and lease `6dce7e8` as a terminal one-shot spawned
-   `process-failure` with no benchmark result and no retry authority; and
+   `process-failure` with no benchmark result and no retry authority; treat
+   R7/R8/R9/R10 proposal, review, implementation, qualification, and consumed
+   diagnostic checkpoints through Emdash `5b8e4ba`, CloserFans `d1a270e`,
+   and tree `96e7050` as local privacy-preserving diagnosis only; treat R10's
+   sole 363-byte record `7d22a71...` as terminal proof that the preserved
+   98-byte line matches only fixed category `configuration`; never rerun any
+   consumed command or inspect the private line directly; and
    forbid any retry or alternate coordinate without the amended implementation
    checkpoint, new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe

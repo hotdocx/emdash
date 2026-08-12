@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | one corrected R10 classifier authorized after checkpoint | Exact `d1a270e` code, supported no-follow flag, accepted metadata/digest, executable, closed environment, and output boundaries pass. Only one local read is authorized; no Codex/provider retry. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | Stage A terminal without a benchmark result; R10 classified the preserved error as `configuration` | Exact CloserFans `d1a270e` and qualification `d51b992` enabled one consumed privacy-preserving read: 98 valid UTF-8 bytes, one LF-terminated line, digest `74cb003...`, and only fixed rule `configuration`. No retry is authorized. A local no-evidence Codex-contract audit and separately reviewed non-content subcategory proposal are next. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6948,6 +6948,18 @@ It authorizes that command exactly once after checkpoint; every result is
 terminal and no Codex/provider/model action or claim is allowed. Accounting
 remains 35/41.
 
+The sole corrected R10 command is now consumed and terminal. It exited zero
+with one fixed nine-key, 363-byte record, SHA-256 `7d22a71...`. That record
+binds the preserved terminal artifact as 98 valid UTF-8 bytes, one
+terminal-newline line, SHA-256 `74cb003...`, matching only fixed rule
+`configuration`. It disclosed no source text or arbitrary substring and had no
+source/evidence mutation or external effect. R10 must not be rerun. This is a
+diagnostic category, not a benchmark result, proof/performance claim, or safe
+repair determination. Only a local no-evidence audit of installed Codex
+0.147.0's public/configuration error contracts and a separately reviewed,
+non-authorizing R11 subcategory proposal are dependency-ready. Accounting
+remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7207,6 +7219,7 @@ remains 35/41.
 | `D-PA-252` | Approve exact R10 proposal `cad46d9` only for the two-line classifier flag correction. | The receipt and metadata are valid; the absent constant guard deterministically fails before open. Removing only that unsupported flag restores the reviewed path without adding capability or weakening no-follow/integrity checks. |
 | `D-PA-253` | Preserve focused-green R10 at CloserFans `d1a270e`, tree `96e7050`, without evidence access. | Exact one-file diff, supported no-follow flag, unchanged verifier/authorities, full synthetic suite, static capability exclusion, runtime constant, and clean ancestry satisfy the correction. Execution remains separately gated. |
 | `D-PA-254` | Authorize exactly one corrected R10 classifier command after qualification `d51b992`. | Exact code, supported mandatory no-follow flag, accepted path metadata and receipt digest, unchanged bounded reads/rules/outputs, executable, and closed environment satisfy the privacy boundary without any provider action. |
+| `D-PA-255` | Classify the sole corrected R10 invocation as terminal fixed category `configuration` and prohibit rerun. | The closed record proves only a 98-byte, valid-UTF-8, single LF-terminated line with digest `74cb003...` matching no other fixed rule. No content or external effect occurred; finer diagnosis requires a separately reviewed non-content classifier grounded in local public Codex contracts. |
 
 ## Validation And Checkpoint Policy
 
