@@ -3880,6 +3880,50 @@ new ID/root, edit, prompt/model/provider call, raw-evidence access, retry,
 lease, benchmark result, performance claim, or graduation. Accounting remains
 35/41.
 
+##### `AGENT-EVAL-12B4-R5` consumed-ID v3 guard-rotation proposal
+
+R4 is accepted, but both execution guards intentionally still name terminal
+v2. A fresh invocation cannot be reviewed while the committed operator and
+internal contract reject its ID. The proposed non-secret candidate is exactly:
+
+```text
+authorization ID: emdash-stage-a-native-exact-local-premise-2026-08-12-v3
+ID SHA-256:       e1fe31c138df2b2ea7bf33138862a579aa5064dd1d738afefaffa21602aa5250
+candidate root:   /home/user1/.emdash-stage-a/emdash-stage-a-native-exact-local-premise-2026-08-12-v3
+candidate lease:  /home/user1/.emdash-stage-a/authorizations/e1fe31c138df2b2ea7bf33138862a579aa5064dd1d738afefaffa21602aa5250.json
+```
+
+Both candidate filesystem paths are absent at proposal time. Naming them here
+does not create or authorize them.
+
+The proposed implementation changes exactly three literals across three
+CloserFans files from clean checkpoint `1307f249df784107a260fb2461719f93f2467fb5`:
+
+1. root `scripts/run-emdash-stage-a-real.mjs` changes its closed allowlist from
+   exact v2 to exact v3;
+2. `templates/emdash_benchmark/scripts/emdash-canary-contract.mts` makes the
+   identical change to `STAGE_A_REAL_AUTHORIZATION_ID`; and
+3. `scripts/verify-emdash-benchmark-template-runtime.ts` requires exact v3 in
+   both sources and requires both terminal v1 and v2 strings to be absent.
+
+No schema, prompt, source, model, CLI version, model-catalog hash, argument,
+permission/environment rule, bootstrap, lease implementation, process/stream
+handling, evaluator, receipt, or evidence behavior changes. The candidate ID
+does not assert that R4 fixed v2, and v1/v2 evidence remains immutable.
+
+Validation is syntax and fake/no-model only: `node --check` for the root
+operator, exact static presence/retirement checks, `git diff --check`, and the
+bounded clean-install `--canary-only` verifier. The unchanged permission probe
+and every broader aggregate are omitted. The implementation must leave the
+candidate root/lease absent and the terminal receipt/lease hashes unchanged.
+
+This proposal authorizes no edit until separately reviewed. Implementation
+would still be non-authorizing: a fresh redacted at-call preflight, exact code
+review, absent-state recheck, immutable authorization checkpoint, and explicit
+one-command boundary would remain mandatory. No prompt/model/provider call,
+raw-evidence access, v1/v2 retry/mutation, new lease/run root, benchmark result,
+performance claim, or graduation is authorized. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact

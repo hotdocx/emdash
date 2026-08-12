@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R4 accepted; R5 consumed-ID rotation proposal dependency-ready | Exact code review accepts CloserFans `1307f24` and carried focused evidence. Execution guards remain terminal v2 and reject all fresh IDs. Only a separately frozen/reviewed two-literal v3 rotation may be proposed next; prompt execution, raw evidence, retry, and coordinates remain denied. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R5 exact v3 guard rotation proposed | Candidate v3 ID/hash and absent root/lease are frozen. Proposal changes only the two v2 guard literals and one static assertion requiring v3 plus v1/v2 retirement. Separate immutable review is required before edits; prompt execution, raw evidence, retry, and coordinate creation remain denied. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6744,6 +6744,15 @@ static v2-retirement assertion is now dependency-ready. This review creates no
 coordinate and authorizes no edit or provider effect. Accounting remains
 35/41.
 
+The dedicated plan now freezes R5 around exact candidate ID
+`emdash-stage-a-native-exact-local-premise-2026-08-12-v3`, SHA-256
+`e1fe31c138df2b2ea7bf33138862a579aa5064dd1d738afefaffa21602aa5250`.
+Its candidate run root and lease are absent. Only the root operator and shared
+contract v2 literals plus the static current/retired assertion may change;
+every runtime/schema/evidence behavior remains fixed. Separate review is
+mandatory before edits, and implementation would remain non-authorizing.
+Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6974,6 +6983,7 @@ coordinate and authorizes no edit or provider effect. Accounting remains
 | `D-PA-223` | Approve exact R4 proposal `685ce81` only for its three-file fake/no-model implementation. | Typed single-value enum and `const` accept the same intended case ID, the explicit disposition type preserves its enum, and removing `$schema` changes no instance constraint. Structural deep equality avoids key-order authority. Real-driver/auth/evidence changes and all provider effects remain prohibited pending another review. |
 | `D-PA-224` | Preserve focused-green R4 implementation at CloserFans `1307f24`, tree `863db44`, without authorizing new coordinates. | Exact three-file diff implements the reviewed typed-enum schema and independent structural assertions. Clean-install typecheck, bounded fake scenarios, public fake CLI, syntax/diff/containment, and unchanged terminal receipt/lease hashes are green. No real-driver/auth or external boundary changed; code/preflight review remains separate. |
 | `D-PA-225` | Accept exact R4 code and make only a separately reviewed v3 guard-rotation proposal dependency-ready. | Three committed hashes, semantic schema equivalence, focused fake evidence, clean ancestry/status, and unchanged driver/contract/evidence pass review. Both guards still reject fresh IDs because they retain terminal v2; a two-literal rotation plus static retirement assertion is required before any fresh coordinate can exist. |
+| `D-PA-226` | Freeze a non-authorizing R5 rotation from terminal v2 to exact candidate v3 at both execution guards. | R4 is accepted and candidate ID/hash/root/lease absence are fixed, but committed guards correctly reject every fresh ID. Exact two-literal rotation plus a v3-present/v1-v2-absent static assertion is the only dependency-ready change; no invocation or runtime behavior is authorized. |
 
 ## Validation And Checkpoint Policy
 
