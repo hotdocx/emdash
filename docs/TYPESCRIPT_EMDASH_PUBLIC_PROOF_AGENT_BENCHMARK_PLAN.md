@@ -3924,6 +3924,43 @@ one-command boundary would remain mandatory. No prompt/model/provider call,
 raw-evidence access, v1/v2 retry/mutation, new lease/run root, benchmark result,
 performance claim, or graduation is authorized. Accounting remains 35/41.
 
+###### Immutable R5 v3-rotation review
+
+Reviewed proposal checkpoint:
+`43933823ea2f3ae9580b6d05a505e6d7a1e01eb1`, exact parent
+`7ccf29e9fcba2d2a636a7109a3578ee690780642`, exact tree
+`d23b37d1d667b7d3b5731b65a8f6036d3f03311d`. Complete plan SHA-256 values are:
+
+```text
+fe5858eb78853a099bee4b387e92be9d0095f83c5cdece4591e14b54e7635162  docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md
+2de46565722b6f73a8f0c1459c8bcc69c4684529a68650b6f7356d349ef12b3c  docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md
+```
+
+The v3 string is a non-secret monotone identifier distinct from terminal v1
+and v2. Its recorded hash is the exact lease-key derivation used by the
+unchanged driver, and its candidate root and lease paths are absent. The
+review finds no reason to change the date/sequence or broaden the correction.
+
+Decision: approve only the three literal/assertion edits from exact clean
+CloserFans checkpoint `1307f249df784107a260fb2461719f93f2467fb5`, with
+these controls:
+
+1. both execution guards must contain exact v3 once and contain neither exact
+   v1 nor exact v2;
+2. the root verifier must assert v3 presence and absence of both retired IDs
+   in each guard source;
+3. no other source, schema, prompt, runtime, permission, lease, receipt, model,
+   evaluator, or evidence behavior may change;
+4. validation is limited to operator syntax, exact static checks,
+   diff/ancestry/status, and one bounded clean-install fake canary; and
+5. candidate root and lease must remain absent, terminal hashes unchanged,
+   and no provider/model process may be spawned.
+
+The resulting checkpoint is still only a prerequisite for a later exact
+at-call review. Do not create the v3 root/lease, invoke the operator with v3,
+inspect raw evidence, retry or mutate v1/v2, or claim a benchmark/performance/
+graduation result. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
