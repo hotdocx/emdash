@@ -7026,11 +7026,13 @@ stdin-prompt contracts but now list `tools.view_image`, so exact installed
 
 The dedicated plan freezes non-authorizing R13 as one exact offline invocation
 of the existing `--permission-probe-only` verifier from clean checkpoint
-`9ea98c8`. It may create only disposable clean-install and probe state, run
-typecheck, `codex --version`, the complete EOF/no-prompt parse boundary, and
-the existing local `codex sandbox` filesystem/denied-loopback/allowlisted-case
-checks under its closed credential-free environment. A separate immutable
-review must bind the exact command and source hashes before one execution.
+`9ea98c8`, explicitly clearing both executable-substitution and state-retention
+environment overrides. It may create only disposable clean-install and probe
+state, run typecheck, `codex --version`, the complete EOF/no-prompt parse
+boundary, and the existing local `codex sandbox` filesystem/denied-loopback/
+allowlisted-case checks under its closed credential-free environment. A
+separate immutable review must bind the exact command and source hashes before
+one execution.
 Every outcome is terminal; no rerun, repair, new coordinate, private evidence,
 provider/model work, integration, release, cleanup, or aggregate follows from
 the proposal. Accounting remains 35/41.
@@ -7300,7 +7302,7 @@ the proposal. Accounting remains 35/41.
 | `D-PA-258` | Preserve focused-green R11 at CloserFans `8a5c2f9`, tree `d3e9aa9`, without live execution. | The exact two-file diff moves only the image-tool disable, strengthens both presence and absence assertions, and passes the disposable typecheck/synthetic/mock canary gate. |
 | `D-PA-259` | Freeze R12 as a non-authorizing one-file repair of the no-model strict-config preflight. | `exec --help` terminates before config loading and missed the stale key. The complete vector with closed stdin loads strict config first and must stop at an exact fixed no-prompt outcome before schema or agent/provider work. |
 | `D-PA-260` | Approve exact R12 proposal `413efc6` only for the one-file full-vector/no-prompt check and synthetic validation. | Codex 0.147.0 loads strict/effective config before forced-stdin EOF and stops before schema/thread/provider work. Exact channel/outcome checks plus disposable closed state make this a no-model preflight correction, not live-probe authority. |
-| `D-PA-261` | Preserve focused-green R12 checkpoint `9ea98c8` and freeze only a non-authorizing R13 no-model permission-probe proposal. | The exact one-file diff and focused clean-install/typecheck/synthetic/mock gate prove the corrected strict-vector source without executing the live member. R13 binds one offline owning command, closed credential-free Codex environment, disposable state, exact no-prompt and sandbox checks, and terminal no-rerun semantics; separate immutable review remains mandatory. |
+| `D-PA-261` | Preserve focused-green R12 checkpoint `9ea98c8` and freeze only a non-authorizing R13 no-model permission-probe proposal. | The exact one-file diff and focused clean-install/typecheck/synthetic/mock gate prove the corrected strict-vector source without executing the live member. Corrected R13 binds one offline owning command with executable-substitution/state-retention overrides cleared, a closed credential-free Codex environment, disposable state, exact no-prompt and sandbox checks, and terminal no-rerun semantics; separate immutable review remains mandatory. |
 
 ## Validation And Checkpoint Policy
 

@@ -5152,7 +5152,8 @@ Freeze R13 as a non-authorizing proposal for exactly one invocation from the
 clean isolated CloserFans worktree:
 
 ```bash
-env npm_config_offline=true \
+env -u EMDASH_CODEX_BIN -u EMDASH_CANARY_KEEP_PROBE \
+  npm_config_offline=true \
   /home/user1/closerfans/node_modules/.bin/tsx \
   scripts/verify-emdash-benchmark-template-runtime.ts \
   --permission-probe-only
@@ -5171,8 +5172,10 @@ run template typecheck. The permission member may run `codex --version`, the
 complete EOF/no-prompt strict-config check, and the existing `codex sandbox`
 filesystem, denied-loopback-network, and allowlisted benchmark-case probes.
 Codex receives only the closed environment constructed in source, an empty
-disposable host home/tmp, and no API/auth variables. Every temporary directory
-must be removed in `finally`; `EMDASH_CANARY_KEEP_PROBE` must remain unset.
+disposable host home/tmp, and no API/auth variables. Clearing
+`EMDASH_CODEX_BIN` forces the source-owned runtime path, while clearing
+`EMDASH_CANARY_KEEP_PROBE` forces normal `finally` cleanup of every temporary
+directory.
 
 Success requires exit zero and the verifier's fixed no-model summary. Any
 other outcome is terminal evidence for R13 and does not authorize a repair,
