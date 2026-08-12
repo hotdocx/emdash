@@ -4187,6 +4187,68 @@ result cannot establish success rate, comparative performance, or measured
 graduation. Accounting remains 35/41 until a later Stage B/C design and
 representative repeated evidence satisfy 12B4.
 
+###### Sole v3 invocation outcome: terminal 35 ms process failure
+
+The exact authorized command was invoked once after checkpoint `c880c8d` and
+returned:
+
+```text
+emdash Stage A real: process-failure; receipt=receipt.json
+```
+
+This consumes v3 permanently. Do not rerun the command, reuse the ID, replace
+the run root, remove or rewrite its lease/evidence, or create alternate
+coordinates without a new diagnosis/proposal/review chain.
+
+The minimized receipt is 4,658 bytes, mode 0600, SHA-256
+`f7c6f859ee8c2991657214ce91e2be81f7812b7c2c2ccc784f90ca928cb1129a`.
+The canonical 691-byte mode-0600 lease has SHA-256
+`da092debaa617891847a6b29a0e4c7fddace0726153e2679d1640e7e662e4bf4`.
+Run root and private evidence are mode 0700. Preserved v3 state includes
+bootstrap `bootstrap-FXLRBm`, preflight root keyed by exact ID hash, run root,
+private evidence, and the lease; no cleanup is authorized.
+
+Receipt revision is `getpaidx-emdash-stage-a-receipt-v2`. It binds exact case
+`native.exact.local-premise`, clean source `0ea5b98`/tree `149de95`, manifest
+`12aedbdf...`, operator `774752d...`, normalized schema `a33c63d...`, prompt
+`117768e...`, initial/candidate source `0c104f3...`, argument vector
+`4227e9c49130c97a7eb5fde1f7666f59c48c465e1672c253373ae02ec04f5d68`,
+v3 ID hash `e1fe31c...`, and lease hash `da092de...`. The lease independently
+binds the same source/operator/manifest/argument vector, run-root hash
+`9015f161...`, and state `provider-spawn-authorized`.
+
+Operational facts are exact: `providerExecuted=true` under the conservative
+spawn classification; process spawned, exited 1, and ran from
+`2026-08-12T21:12:54.814Z` to `21:12:54.849Z` (35 ms), without timeout,
+overflow, signal, or spawn error. Stream audit is invalid with
+`incomplete-stream`, zero commands, zero file-change events, no forbidden
+surface, and no valid final message. Source remained clean with zero changed
+paths and valid scope/Git/extraction audits. Usage is null; cost amount and
+currency are null with reason `chatgpt-authenticated-provider-cost-not-priced`.
+Benchmark outcome is null and receipt validity is false.
+
+The receipt also confirms exact fresh local permission provenance, disabled
+network/web search/plugins/MCP/hooks/memories/subagents, no inherited agent
+configuration, lifecycle-scripts-disabled clean installation, separate clean
+evaluator, and no registry credential. Contamination remains
+`public-owner-reference-accessible`; `graduationEligible=false` and
+`proofEvidence=false` remain unconditional.
+
+The 35 ms result does not establish whether a remote model request began or
+completed. It does establish that replacing top-level `$schema`/bare `const`
+with the normalized typed-enum schema was not sufficient to cross the same
+pre-turn boundary. No proof patch, proof result, benchmark score, usage/cost,
+performance comparison, or graduation evidence exists. Raw JSONL, stderr,
+final model message, candidate, diff, and replay evidence were not inspected.
+Terminal v1/v2 receipt and v2 lease hashes remain unchanged; both worktrees
+are clean.
+
+Any next step must be separately planned and no-model. The dependency-ready
+direction is an evidence-safe classifier that may read the private stderr only
+inside a bounded local process and emit a fixed, non-content category plus
+byte/hash facts, without exposing raw text to the reviewer. That direction is
+not authorized by this result. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
