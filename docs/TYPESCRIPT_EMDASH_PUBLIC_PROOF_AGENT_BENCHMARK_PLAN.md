@@ -4578,6 +4578,50 @@ Stage B/C, or graduation. Post-command review is limited to the emitted line,
 exit/stderr shape, clean code state, and already public/recorded provenance.
 Accounting remains 35/41.
 
+###### Sole R7 outcome and R8 fixed-stage failure proposal
+
+The frozen classifier command was invoked exactly once after authorization
+checkpoint `eb6af9a` and is terminal. It exited `1` and emitted only:
+
+```text
+emdash Stage A stderr classifier: failed
+```
+
+That newline-terminated line is 41 bytes with SHA-256
+`28b52c309800dfb2f8ff65b2565ca3179626b85fc46f913a92da3aa57970a31f`.
+The committed failure branch writes it to stderr; the captured combined output
+contains nothing else. CloserFans remains clean at exact `04e58f9`/tree
+`5b150bc`. No artifact was written or changed, and no Codex/provider/model,
+configuration, credential, network, retry, or external action occurred.
+
+The generic line proves the non-disclosure boundary but cannot distinguish a
+directory check, receipt/lease integrity check, stderr check, or pure
+classification failure. R7 must not be rerun. Freeze R8 as a non-authorizing
+two-file correction from exact `04e58f9`:
+
+1. The classifier may wrap each existing operation in a fixed-stage boundary
+   and emit on failure only a closed record with revision, target ID hash, and
+   one of `invocation`, `state-root`, `run-root`, `evidence-root`,
+   `authorization-root`, `receipt-integrity`, `lease-integrity`,
+   `stderr-integrity`, `classification`, or `internal`. Arbitrary error text,
+   codes, paths, causes, captures, or stack data remain discarded.
+2. The synthetic verifier may import a pure failure-record constructor and
+   prove exact key closure, every stage, fixed ordering, freezing, and fallback
+   of arbitrary input to `internal`. It still must not invoke the main or open
+   any filesystem path.
+
+All existing path/hash/mode/owner/bound/read/rule/output behavior stays exact.
+Only the classifier and its synthetic verifier may change; operator, canary,
+receipt/lease/stderr, authorization, provider, and every other repository
+surface remain untouched. Syntax, synthetic verifier, static capability/diff,
+unchanged-authority hashes, and clean ancestry are the complete implementation
+gates. No long aggregate is relevant.
+
+This proposal authorizes no code edit, classifier execution, evidence access,
+metadata retry, Codex/provider/model action, integration, push, deployment,
+release, cleanup, diagnosis, result, or graduation. It requires separate
+immutable review. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
