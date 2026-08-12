@@ -61,6 +61,11 @@ The package has four deliberately bounded entries:
   authored TypeScript fragment workspace, canonically orders independent
   proofs, freshly replays each exact runtime closure, and exposes deterministic
   aggregate status, lookup, and named open goals without a resident prover.
+  The declared-theorem layer then binds every proof in one root module to one
+  body-free opaque signature, rechecks targets against the exact derived
+  runtime, and exposes a dependency-first theorem DAG. Self-reference, cycles,
+  and complete proofs which consume an open bound theorem fail closed; unbound
+  opaque declarations remain visible workspace assumptions.
   The research-goal profile keeps theorem, task, and decision evidence
   distinct, freshly replays checked-proof evidence, and derives status across
   finite `requires` and grouped `one-of` dependencies. Its companion
@@ -90,6 +95,7 @@ import {
 } from '@hotdocx/emdash/authoring';
 import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
+  CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
@@ -110,9 +116,11 @@ import {
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
   compareCoreLfProofDevelopmentSources,
+  compileCoreLfDeclaredTheoremDevelopment,
   compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   createCoreProofPlanHoleReplacement,
+  createCoreLfDeclaredTheoremDevelopment,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
@@ -145,6 +153,7 @@ void synthesizeCoreLfInstance;
 void synthesizeCoreLfInstanceByRoles;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_DEVELOPMENT_DIFF_PROFILE;
+void CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE;
 void CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
@@ -163,9 +172,11 @@ void coreProofPlanHave;
 void coreProofPlanRefine;
 void coreProofTemplatePlaceholder;
 void compareCoreLfProofDevelopmentSources;
+void compileCoreLfDeclaredTheoremDevelopment;
 void compileCoreLfFragmentProofDevelopment;
 void compileCoreLfFragmentWorkspaceProofDocument;
 void createCoreProofPlanHoleReplacement;
+void createCoreLfDeclaredTheoremDevelopment;
 void createCoreLfAccessiblePremiseIndex;
 void createCoreLfFragmentProofDevelopment;
 void createCoreLfFragmentWorkspaceProofFingerprint;

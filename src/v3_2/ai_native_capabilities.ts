@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v17' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v17' as const,
+    revision: 'emdash-ai-native-capabilities-v18' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v18' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -223,6 +223,13 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 scope:
                     'canonical multi-proof status and named goals over ' +
                     'independent exact runtime fragment closures'
+            },
+            {
+                id: 'declared-theorem-development',
+                revision: 'emdash-lf-declared-theorem-development-v1',
+                scope:
+                    'same-module opaque-signature proof bindings with exact ' +
+                    'runtime target checks and acyclic theorem dependencies'
             },
             {
                 id: 'mounted-workspace-store',

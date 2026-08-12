@@ -27,6 +27,7 @@ export * from './lf_fragment_workspace';
 export * from './lf_fragment_module_workspace';
 export * from './lf_fragment_workspace_proof';
 export * from './lf_fragment_proof_development';
+export * from './lf_declared_theorem_development';
 export * from './research_document';
 export * from './research_goal_graph';
 export * from './research_goal_view';

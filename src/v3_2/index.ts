@@ -203,6 +203,7 @@ export * from './lf_fragment_workspace';
 export * from './lf_fragment_module_workspace';
 export * from './lf_fragment_workspace_proof';
 export * from './lf_fragment_proof_development';
+export * from './lf_declared_theorem_development';
 export * from './lf_remote_workspace_contract';
 export * from './lf_remote_workspace';
 export * from './differential';

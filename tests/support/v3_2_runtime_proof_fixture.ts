@@ -11,6 +11,7 @@ import {
     compileCoreLfFragmentModuleWorkspace,
     coreLfQualifiedSymbol,
     coreLfTransferAbsentBody,
+    coreLfTransferExplicitBody,
     coreProofPlanExact,
     coreProofPlanHole,
     createCoreLfDependencyModuleFragmentChain,
@@ -60,6 +61,12 @@ const marker = coreLfQualifiedSymbol(
     'runtime_marker'
 );
 const value = coreLfQualifiedSymbol(runtimeProofConsumerModuleId, 'value');
+const first = coreLfQualifiedSymbol(runtimeProofConsumerModuleId, 'first');
+const second = coreLfQualifiedSymbol(runtimeProofConsumerModuleId, 'second');
+const helperFirst = coreLfQualifiedSymbol(
+    runtimeProofConsumerModuleId,
+    'helper_first'
+);
 const secret = coreLfQualifiedSymbol(
     runtimeProofUnrelatedModuleId,
     'secret'
@@ -73,6 +80,9 @@ export const runtimeProofSymbols = Object.freeze({
     normalize,
     marker,
     value,
+    first,
+    second,
+    helperFirst,
     secret
 });
 
@@ -116,6 +126,25 @@ const declaration = (
     provenance: source(authorityPath, `symbol ${symbol.name};`)
 });
 
+const transparentDefinition = (
+    order: number,
+    symbol: Symbol,
+    type: CoreLfTransferExpression,
+    body: CoreLfTransferExpression,
+    authorityPath: string
+) => ({
+    order,
+    symbol,
+    type,
+    body: coreLfTransferExplicitBody(body),
+    modifiers: {
+        visibility: 'public' as const,
+        rigidity: 'ordinary' as const,
+        sourceOpacity: 'transparent' as const
+    },
+    provenance: source(authorityPath, `definition ${symbol.name};`)
+});
+
 const links = (symbols: readonly Symbol[]) => symbols.map((symbol, order) => ({
     order,
     symbol,
@@ -135,7 +164,9 @@ const policyFor = (
                 kind: 'declaration' as const,
                 symbol: entry.symbol
             },
-            policy: 'opaque-signature' as const
+            policy: entry.body.kind === 'absent'
+                ? 'opaque-signature' as const
+                : 'checked-transparent-definition' as const
         })),
         ...module.runtimeRules.map(entry => ({
             sourceOrder: entry.order,
@@ -298,6 +329,7 @@ const providerFixture = (withRuntime: boolean) => {
 };
 
 const consumerFixture = () => {
+    const theoremType = call(decode, call(normalize, global(base)));
     const module = createCoreLfModuleSpec({
         revision: 'runtime-proof-consumer-1',
         moduleId: runtimeProofConsumerModuleId,
@@ -309,12 +341,18 @@ const consumerFixture = () => {
             symbol,
             availability: 'dependency-module' as const
         })),
-        declarations: [declaration(
-            0,
-            value,
-            call(decode, call(normalize, global(base))),
-            consumerPath
-        )],
+        declarations: [
+            declaration(0, value, theoremType, consumerPath),
+            declaration(1, first, theoremType, consumerPath),
+            declaration(2, second, theoremType, consumerPath),
+            transparentDefinition(
+                3,
+                helperFirst,
+                theoremType,
+                global(first),
+                consumerPath
+            )
+        ],
         inductives: [],
         runtimeRules: [],
         proofRules: []
@@ -325,7 +363,15 @@ const consumerFixture = () => {
         linkage: createCoreLfTransferDeclarationLinkage(module, {
             revision: 'runtime-proof-consumer-linkage-1',
             moduleRevision: module.revision,
-            entries: links([decode, normalize, base, value])
+            entries: links([
+                decode,
+                normalize,
+                base,
+                value,
+                first,
+                second,
+                helperFirst
+            ])
         })
     });
     return createCoreLfDependencyModuleFragmentChain({
