@@ -4042,6 +4042,46 @@ the probes. Green results would still not authorize the command: a later
 behavior-free checkpoint must record every exact value and explicitly
 authorize at most one terminal invocation. Accounting remains 35/41.
 
+###### Immutable R6 no-model preflight review
+
+Reviewed proposal checkpoint:
+`b5b3cd14d432148e9cde8cb5ae0b007f5e5c47f5`, exact parent
+`7406a8cb083f465e5c9e8d4f1886385071be1980`, exact tree
+`338b09007007e91f7aad4e60409eb0b1352cc615`. Complete plan SHA-256 values are:
+
+```text
+1c982321680bb0290e0d80ffdb40c8ba6742daafc9397288648a20d8e1931696  docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md
+0f2b20a0ceeadd08058fd00df75bb1befefa1431d8f439cb128125df3e3a0fbc  docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md
+```
+
+The review traces each proposed operation to a pre-provider boundary. Git
+snapshotting and hash calculation read only committed public bytes. Version
+and login status disclose only revision/category. Bounded cache parsing retains
+only the already reviewed model tuple. The dedicated probe uses `exec --help`
+only for parsing and `codex sandbox` for local process containment; it neither
+feeds stdin to `exec` nor requests a model. It removes its own probe root. The
+additional snapshot target is a single newly allocated `/tmp` directory whose
+real path/prefix must be validated before exact removal.
+
+Decision: approve R6 exactly as proposed, with these controls:
+
+1. build the snapshot only from committed `0ea5b98` and reject any commit/tree
+   mismatch before recording hashes;
+2. construct the inherit-nothing environment explicitly and output only the
+   whitelisted version, login category, and selected cache fields;
+3. invoke only the verifier's `--permission-probe-only` mode; do not rerun the
+   fake matrix, doctor, bundled-model refresh, or any aggregate;
+4. validate and remove only the newly created `/tmp/emdash-r6-preflight.*`
+   path, while leaving every `.emdash-stage-a` bootstrap/run/evidence root
+   untouched; and
+5. record failures as failures, then recheck clean worktrees, absent v3
+   root/lease, and unchanged terminal hashes before any authorization proposal.
+
+Do not invoke the exact v3 command, `codex exec` with a prompt, or any model/
+provider turn; read no credential or raw evidence; alter no config/cache/state;
+and create no lease/run root. Even a green R6 needs a separate behavior-free
+authorization checkpoint. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact

@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R6 v3 at-call no-model preflight proposed | Exact command is frozen as review data. Proposal permits only disposable committed snapshot hashes, closed version/login/cache facts, dedicated local permission probe, and clean/absent-state audit. Separate review is required before probes; real operator/provider execution remains denied. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R6 v3 no-model preflight approved | Review of `b5b3cd1` permits only committed snapshot/hash, whitelisted closed version/login/cache facts, dedicated `--permission-probe-only`, and clean/absent-state audit. Exact v3 command and every model/provider effect remain denied pending another checkpoint. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6779,6 +6779,15 @@ raw evidence, state creation, code edits, and aggregates. Separate review is
 mandatory before probes, and a later behavior-free checkpoint is mandatory
 before one command. Accounting remains 35/41.
 
+Immutable review of exact R6 proposal `b5b3cd1` approves the bounded audit.
+Every operation terminates before a model: committed Git/hash reads, closed
+version/login status, bounded model-cache projection, `exec --help`, and local
+`codex sandbox`. Only the verifier's permission-only mode may run; doctor,
+fake matrix, provider, and aggregates remain omitted. The one validated `/tmp`
+snapshot must be removed exactly, while persistent evidence is preserved.
+Green facts still require a separate authorization checkpoint. Accounting
+remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7013,6 +7022,7 @@ before one command. Accounting remains 35/41.
 | `D-PA-227` | Approve exact R5 proposal `4393382` only for its three-file literal/assertion implementation. | Candidate v3 is distinct, non-secret, hash-bound, and absent. Identical guard substitution plus v3-present/v1-v2-absent assertions preserve closed one-shot behavior while retiring consumed IDs; root/lease creation and every provider effect remain prohibited. |
 | `D-PA-228` | Preserve focused-green R5 implementation at CloserFans `0ea5b98`, tree `149de95`, without authorizing the v3 command. | Exact three-file hashes and static counts, operator/type syntax, clean-install typecheck, bounded fake matrix, public fake CLI, absent v3 root/lease, and unchanged terminal evidence are green. Fresh at-call source/input/host/permission review remains mandatory. |
 | `D-PA-229` | Freeze R6 as a non-authorizing no-model preflight for the exact v3 command. | Current code is focused-green, but one-shot authority requires fresh committed hashes, closed CLI/login/cache facts, local permission semantics, clean source, and absent coordinates. The proposal forbids the real operator/provider and requires another checkpoint before execution. |
+| `D-PA-230` | Approve exact R6 proposal `b5b3cd1` only for its pre-provider snapshot/status/cache/permission audit. | Each allowed operation is committed read-only or local sandbox execution and exposes only whitelisted facts. Exact temporary cleanup and persistent-evidence preservation are mandatory; the v3 command and provider remain denied. |
 
 ## Validation And Checkpoint Policy
 
