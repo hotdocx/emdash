@@ -5115,6 +5115,72 @@ the `--permission-probe-only` member under this approval. No private evidence,
 authorization ID/run root, provider/model, network, integration, release, or
 aggregate is authorized. Accounting remains 35/41.
 
+###### R12 implementation qualification and R13 no-model permission-probe proposal
+
+CloserFans checkpoint `9ea98c8c9a51b785dbebe157e88dc31a9943a362`, parent
+`8a5c2f93080d828e73a1547ead8f5a6c870e0325`, and tree
+`070792a6242597aac3cb41bf3a734d77878924ce` implement exactly the approved
+one-file R12 edit: nine insertions and ten deletions in
+`templates/emdash_benchmark/scripts/probe-emdash-canary-permissions.mts`.
+That source has SHA-256
+`03821d6b91c415f7b3e1337bebf0d34bd23eeffb0daa6cfb13d495df2b390b89`.
+It now passes the complete argument vector to the existing closed-stdin
+capture and accepts only exit 1, byte-empty stdout, and byte-exact stderr
+`No prompt provided via stdin.\n`. The subsequent filesystem, loopback-network,
+and allowlisted-command probes are byte-unchanged.
+
+The owning focused `--canary-only` gate passed again from a disposable clean
+installation. It includes template typecheck, synthetic containment/replay/
+failure paths, and the physically mock-only public CLI. No model, provider,
+credential, live permission probe, retained dependency tree, private evidence,
+or repository aggregate was involved. Both project worktrees are clean.
+
+The current [OpenAI configuration
+reference](https://learn.chatgpt.com/docs/config-file/config-reference) and
+[developer command
+reference](https://learn.chatgpt.com/docs/developer-commands?surface=cli)
+confirm the general contracts that `--strict-config` rejects fields unknown to
+the executing Codex version, `codex exec` is the non-interactive runner,
+repeatable `-c` supplies inline configuration, and final `-` reads the prompt
+from stdin. The current configuration reference now also lists
+`tools.view_image`; that is version-current documentation, not evidence about
+the pinned historical runtime. Exact installed Codex 0.147.0 and its matched
+source checkpoint `be6e8eac` therefore remain authoritative for this canary's
+observed rejection and pre-prompt ordering.
+
+Freeze R13 as a non-authorizing proposal for exactly one invocation from the
+clean isolated CloserFans worktree:
+
+```bash
+env npm_config_offline=true \
+  /home/user1/closerfans/node_modules/.bin/tsx \
+  scripts/verify-emdash-benchmark-template-runtime.ts \
+  --permission-probe-only
+```
+
+The command must run with working directory
+`/home/user1/closerfans-emdash-canary-v1` at exact checkpoint `9ea98c8`, with
+the source verifier SHA-256
+`f0091222fd38c4a03fecf825ce12512af4748c314c3b8624742543cf0dec47b8`,
+contract SHA-256
+`1973d6a761adb56d752c99dd1c5f321ecc290a72d1d7785565bc87ff93fe867b`,
+and retained lock SHA-256
+`1f9efb7b416b9ab162ddc98f14c2c4ade0a56ddcf2df5fb519f437031f9fccf8`.
+The outer verifier may create only its disposable clean-install directory and
+run template typecheck. The permission member may run `codex --version`, the
+complete EOF/no-prompt strict-config check, and the existing `codex sandbox`
+filesystem, denied-loopback-network, and allowlisted benchmark-case probes.
+Codex receives only the closed environment constructed in source, an empty
+disposable host home/tmp, and no API/auth variables. Every temporary directory
+must be removed in `finally`; `EMDASH_CANARY_KEEP_PROBE` must remain unset.
+
+Success requires exit zero and the verifier's fixed no-model summary. Any
+other outcome is terminal evidence for R13 and does not authorize a repair,
+rerun, alternate command, new authorization ID/run root, provider/model call,
+private-evidence access, push, merge, deployment, release, cleanup, or
+aggregate. Separate immutable review of this exact checkpoint and command is
+mandatory before its single execution. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact

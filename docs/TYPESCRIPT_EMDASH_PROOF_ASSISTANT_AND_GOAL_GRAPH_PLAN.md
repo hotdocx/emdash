@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R11 correction focused-green at CloserFans `8a5c2f9`; R12 exact no-prompt parse probe proposed | Supported `--disable view_image` replaces the stale strict key and focused typecheck/synthetic/mock gates pass. The old `exec --help` preflight did not load config; R12 proposes validating the complete vector to the fixed no-prompt boundary. Live probing and every new coordinate remain separately gated. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R12 implementation focused-green at CloserFans `9ea98c8`; R13 one-shot no-model permission probe proposed | The complete strict vector now reaches the exact EOF/no-prompt boundary in source and focused clean-install/typecheck/synthetic/mock gates pass. One offline local permission probe requires separate immutable review; every provider call and new coordinate remains later. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -7014,6 +7014,27 @@ stderr comparison is mandatory. The actual permission probe, private evidence,
 new coordinates, and provider/model work remain unauthorized. Accounting
 remains 35/41.
 
+CloserFans `9ea98c8`, parent `8a5c2f9`, and tree `070792a` now qualify the
+exact one-file R12 implementation. The probe source SHA-256 is `03821d6b...`;
+the complete vector replaces the unsound `exec --help` shortcut and requires
+exact exit 1, empty stdout, and fixed no-prompt stderr. The focused disposable
+clean-install/typecheck/synthetic/mock gate passes; no live probe, model,
+provider, credential, private evidence, retained dependency tree, or aggregate
+was involved. Current OpenAI Docs confirm the general strict-config and
+stdin-prompt contracts but now list `tools.view_image`, so exact installed
+0.147.0/source `be6e8eac` remains the historical runtime authority.
+
+The dedicated plan freezes non-authorizing R13 as one exact offline invocation
+of the existing `--permission-probe-only` verifier from clean checkpoint
+`9ea98c8`. It may create only disposable clean-install and probe state, run
+typecheck, `codex --version`, the complete EOF/no-prompt parse boundary, and
+the existing local `codex sandbox` filesystem/denied-loopback/allowlisted-case
+checks under its closed credential-free environment. A separate immutable
+review must bind the exact command and source hashes before one execution.
+Every outcome is terminal; no rerun, repair, new coordinate, private evidence,
+provider/model work, integration, release, cleanup, or aggregate follows from
+the proposal. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7279,6 +7300,7 @@ remains 35/41.
 | `D-PA-258` | Preserve focused-green R11 at CloserFans `8a5c2f9`, tree `d3e9aa9`, without live execution. | The exact two-file diff moves only the image-tool disable, strengthens both presence and absence assertions, and passes the disposable typecheck/synthetic/mock canary gate. |
 | `D-PA-259` | Freeze R12 as a non-authorizing one-file repair of the no-model strict-config preflight. | `exec --help` terminates before config loading and missed the stale key. The complete vector with closed stdin loads strict config first and must stop at an exact fixed no-prompt outcome before schema or agent/provider work. |
 | `D-PA-260` | Approve exact R12 proposal `413efc6` only for the one-file full-vector/no-prompt check and synthetic validation. | Codex 0.147.0 loads strict/effective config before forced-stdin EOF and stops before schema/thread/provider work. Exact channel/outcome checks plus disposable closed state make this a no-model preflight correction, not live-probe authority. |
+| `D-PA-261` | Preserve focused-green R12 checkpoint `9ea98c8` and freeze only a non-authorizing R13 no-model permission-probe proposal. | The exact one-file diff and focused clean-install/typecheck/synthetic/mock gate prove the corrected strict-vector source without executing the live member. R13 binds one offline owning command, closed credential-free Codex environment, disposable state, exact no-prompt and sandbox checks, and terminal no-rerun semantics; separate immutable review remains mandatory. |
 
 ## Validation And Checkpoint Policy
 
