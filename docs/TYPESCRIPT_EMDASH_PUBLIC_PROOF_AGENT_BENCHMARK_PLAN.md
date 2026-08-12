@@ -4737,6 +4737,43 @@ cleanup, Stage B/C, or graduation is authorized. Post-command review remains
 limited to the fixed output, exit/channel shape, clean code state, and recorded
 provenance. Accounting remains 35/41.
 
+###### Sole R8 outcome and R9 receipt-hash audit proposal
+
+The exact R8 command was invoked once after checkpoint `e6d507b` and is
+terminal. It exited `1` with one 200-byte newline-terminated fixed record,
+SHA-256 `ddd0b4736a42768020433d311a6779305af3a3f5a4368193cce4824abfb85a5d`:
+
+```json
+{"revision":"getpaidx-emdash-stage-a-stderr-classifier-failure-v1","targetAuthorizationIdSha256":"e1fe31c138df2b2ea7bf33138862a579aa5064dd1d738afefaffa21602aa5250","failureStage":"receipt-integrity"}
+```
+
+No raw error or artifact content was emitted. Because directory stages pass
+and `receipt-integrity` is thrown before lease, stderr, or classification, this
+attempt did not open stderr. CloserFans remains clean at `7973127`/tree
+`bbf390d`; no file, evidence, provider/model, network, or external state
+changed. R8 must not be rerun.
+
+The accepted metadata already proves receipt kind, non-symlink, owner, mode,
+size, and realpath. The least invasive next discriminator is therefore the
+expected receipt digest, not another classifier edit. Freeze R9 as a
+non-authorizing proposal for exactly one command:
+
+```text
+/usr/bin/env -i LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin /usr/bin/sha256sum /home/user1/.emdash-stage-a/emdash-stage-a-native-exact-local-premise-2026-08-12-v3/private-evidence/receipt.json
+```
+
+`/usr/bin/sha256sum` is GNU coreutils 9.4 with executable SHA-256
+`9992e1f1feb6f0f396bc8d6691ebc1adbfc269fd628bce84eda1d4ba5c3995c7`.
+The command may read only the already minimized receipt and emit only its
+64-hex digest plus the already recorded exact path. It may not read stderr,
+lease, JSONL, final message, candidate, diff, replay, v1, or v2; write a file;
+or contact any process/provider/model beyond the local hash executable.
+
+This proposal authorizes no hash command, evidence read, classifier, metadata
+retry, code edit, Codex/provider/model action, integration, push, deployment,
+release, cleanup, diagnosis, result, or graduation. Separate immutable review
+is mandatory. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
