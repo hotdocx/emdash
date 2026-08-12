@@ -4368,6 +4368,45 @@ provider/model action, Codex retry, integration, push, deployment, release,
 cleanup, diagnosis, benchmark result, or graduation. Human supersession
 remains available through the checkpoint history. Accounting remains 35/41.
 
+###### R7 implementation qualification checkpoint
+
+CloserFans checkpoint `04e58f99313a9c61132d5b13e952e7bbabc63cf0`,
+parent `0ea5b98fbdacb6f449ef78577aebb8c7277b69a6`, and tree
+`5b150bc38e421dad7f64871e9389e4015471a874` add exactly the two reviewed
+scripts in 431 lines. Their SHA-256 values are:
+
+```text
+7b5e4d332ff9ae960f8d6d576ddcbd2aa5da1fdb3dae0514564bb8f1fbc32e24  scripts/classify-emdash-stage-a-stderr.mjs
+2a881c2bed7597a92e88e46d38b508651439dd923ea95c4186fc2b3c9c9b4bf1  scripts/verify-emdash-stage-a-stderr-classifier.mjs
+```
+
+The classifier copies and bounds its byte input, uses fatal UTF-8 decoding,
+emits the exact closed nine-key record, preserves fixed rule order, and
+distinguishes all five statuses. Its closed main binds the full v3
+receipt/lease hashes and exact paths, validates owner/mode/type/realpath,
+opens with `O_NOFOLLOW`, and performs a same-descriptor `limit + 1` read plus
+pre/post stability checks. All exceptions collapse to one fixed failure line.
+The verifier imports only the pure export and uses no real filesystem input.
+
+Node `v24.11.1` syntax checks for both files and the synthetic verifier pass.
+The verifier covers all six rule IDs, empty, invalid UTF-8, ambiguous,
+unclassified, LF/unterminated lines, deterministic order, exact four-MiB
+success, over-limit/non-byte refusal, exact output-key closure, freezing, and
+three sentinel non-disclosures. Static scans find no child-process, network,
+dynamic-import, environment, filesystem-write, or other external capability;
+the only credential-like source term is the fixed authentication regex.
+Diff/whitespace/ancestry checks pass and the CloserFans branch is clean at
+0/9 relative to preserved `master` `cbf2356`.
+
+The unchanged root operator and canary owner retain SHA-256
+`774752d0459d405b352d859f71cd0d3c1a275a328708899f9434032019c4854a`
+and `2b7cb752a752faf5ed507d613982249f8253c64cb1dea75772aa146a54bb00d5`.
+No classifier main, private artifact, Codex/provider/model, configuration,
+credential, package install, aggregate, push, merge, deployment, release, or
+cleanup ran. These are omissions, not passes. This checkpoint remains
+non-authorizing; an exact code/evidence-access review is next. Accounting
+remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
