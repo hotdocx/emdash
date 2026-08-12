@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R8 two-file fixed-stage implementation approved | Exact proposal `8e864e9` is approved only for a three-key constant failure record, stage-discarding wrappers, and pure synthetic coverage. Evidence execution remains separately gated. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R8 fixed-stage implementation qualified; access review pending | CloserFans `7973127` implements the exact ten-stage, three-key, cause-discarding correction. Syntax, synthetic closure/fallback, unchanged classification, static capability, diff, and hash gates pass without evidence access. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6896,6 +6896,13 @@ integrity behavior, and exhaustive pure synthetic closure/non-disclosure
 tests. No private main or evidence access is authorized. Accounting remains
 35/41.
 
+CloserFans `7973127`, tree `bbf390d`, now qualifies the exact two-file R8
+implementation. All fixed-stage and retained R7 synthetic tests, syntax,
+static capability, exact diff, authority-hash, ancestry, and clean-tree gates
+pass. The private main and artifacts remain untouched. A separate code/access
+review is mandatory before any staged diagnostic command; accounting remains
+35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7145,6 +7152,7 @@ tests. No private main or evidence access is authorized. Accounting remains
 | `D-PA-242` | Classify the sole R7 command as a terminal fixed failure with no diagnosis and prohibit retry. | Exit 1 and the single 41-byte generic line expose no content but identify no failing validation stage. The clean source/evidence state and absence of external effects remain intact. |
 | `D-PA-243` | Freeze R8 as a non-authorizing two-file fixed-stage failure correction. | A closed stage enum can narrow the local integrity failure without revealing arbitrary errors. Pure synthetic closure/fallback tests preserve privacy; code and evidence access remain separately reviewed. |
 | `D-PA-244` | Approve exact R8 proposal `8e864e9` only for the fixed-stage classifier/verifier correction. | Three closed failure fields and cause-discarding stage wrappers improve diagnosability without exposing raw errors. Every successful path, evidence binding, capability, and access gate remains unchanged. |
+| `D-PA-245` | Preserve focused-green R8 at CloserFans `7973127`, tree `bbf390d`, without evidence access. | Exact two-file hashes, all stage/closure/fallback and retained classifier tests, cause-discarding code review, static capability exclusion, unchanged authorities, and clean ancestry satisfy the reviewed contract. Execution remains separately gated. |
 
 ## Validation And Checkpoint Policy
 

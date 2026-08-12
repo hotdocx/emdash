@@ -4666,6 +4666,39 @@ Codex/provider/model action, integration, push, deployment, release, cleanup,
 diagnosis, result, or graduation. A focused-green checkpoint still requires a
 separate code/access review. Accounting remains 35/41.
 
+###### R8 fixed-stage implementation qualification
+
+CloserFans checkpoint `7973127ef1349d89aafbeb22756cb3aa3e08e375`,
+parent `04e58f99313a9c61132d5b13e952e7bbabc63cf0`, and tree
+`bbf390dc964e10782e664ee4dbaef940e5ab328d` change exactly the two approved
+files. Their new SHA-256 values are:
+
+```text
+f2166f0c32fb3c2434e11ad44aa27983bf9c914b0f838b24f8edd5952db739d0  scripts/classify-emdash-stage-a-stderr.mjs
+4a86abe9685cb9df042fac68f502aecf295790d3ee7d5045a975cd2ac27064ee  scripts/verify-emdash-stage-a-stderr-classifier.mjs
+```
+
+The implementation adds the exact ten-stage array, frozen three-key pure
+failure record, non-`Error` stage token containing only the validated constant,
+cause-discarding wrappers around each exact directory/file/classification
+step, `invocation` handling, and `internal` fallback. The existing nine-key
+success path, all paths/hashes/rules/bounds/descriptors/modes, and every
+authority surface remain unchanged.
+
+Node syntax checks and the synthetic verifier pass. All ten stages preserve
+order and exact keys/revision/target/freeze; arbitrary string, object, null,
+and undefined inputs fall back to `internal` without the sentinel. Every R7
+empty/UTF-8/rule/ambiguous/unclassified/line/limit/closure/non-disclosure test
+also remains green. Static capability scan has no matches; exact diff and
+whitespace checks pass; operator/canary hashes remain `774752d...` and
+`2b7cb75...`; the CloserFans worktree is clean.
+
+No classifier main, private artifact, metadata probe, Codex/provider/model,
+configuration, credential, network, install, aggregate, push, merge,
+deployment, release, or cleanup ran. These are omissions, not passes. R8
+remains non-authorizing pending an exact code/access review. Accounting remains
+35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
