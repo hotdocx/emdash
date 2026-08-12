@@ -57,6 +57,10 @@ The package has four deliberately bounded entries:
   request contains inert source, dependency, and runtime fingerprints but no
   executable runtime input; the checker derives the reviewed runtime from the
   reconstructed fragments and rejects closure or runtime drift.
+  The companion fragment-proof development catalog compiles one directly
+  authored TypeScript fragment workspace, canonically orders independent
+  proofs, freshly replays each exact runtime closure, and exposes deterministic
+  aggregate status, lookup, and named open goals without a resident prover.
   The research-goal profile keeps theorem, task, and decision evidence
   distinct, freshly replays checked-proof evidence, and derives status across
   finite `requires` and grouped `one-of` dependencies. Its companion
@@ -87,6 +91,7 @@ import {
 import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
@@ -105,9 +110,11 @@ import {
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
   compareCoreLfProofDevelopmentSources,
+  compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
+  createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
   createCoreLfFragmentWorkspaceProofFingerprintForWorkspace,
   createCoreLfFragmentWorkspaceProofRuntimeFingerprint,
@@ -138,6 +145,7 @@ void synthesizeCoreLfInstance;
 void synthesizeCoreLfInstanceByRoles;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_DEVELOPMENT_DIFF_PROFILE;
+void CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
@@ -155,9 +163,11 @@ void coreProofPlanHave;
 void coreProofPlanRefine;
 void coreProofTemplatePlaceholder;
 void compareCoreLfProofDevelopmentSources;
+void compileCoreLfFragmentProofDevelopment;
 void compileCoreLfFragmentWorkspaceProofDocument;
 void createCoreProofPlanHoleReplacement;
 void createCoreLfAccessiblePremiseIndex;
+void createCoreLfFragmentProofDevelopment;
 void createCoreLfFragmentWorkspaceProofFingerprint;
 void createCoreLfFragmentWorkspaceProofFingerprintForWorkspace;
 void createCoreLfFragmentWorkspaceProofRuntimeFingerprint;

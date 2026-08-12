@@ -226,6 +226,7 @@ import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
   CORE_LF_PROOF_MAINTENANCE_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
@@ -242,6 +243,7 @@ import {
   CORE_RESEARCH_GOAL_VIEW_PROFILE,
   binderMode,
   compileCoreLfDeclarationWorkspace,
+  compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   compileCoreLfWorkspaceProofDocument,
   coreLfQualifiedSymbol,
@@ -260,6 +262,7 @@ import {
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfDeclarationWorkspace,
+  createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
   createCoreLfFragmentWorkspaceProofFingerprintForWorkspace,
   createCoreLfFragmentWorkspaceProofRuntimeFingerprint,
@@ -282,6 +285,7 @@ import {
   proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
   replayCoreLfProofRepairCandidate,
+  serializeCoreLfFragmentProofDevelopmentArtifact,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,
@@ -333,6 +337,10 @@ assert.equal(
 );
 assert.equal(
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE.acceptsRuntimeInput,
+  false,
+);
+assert.equal(
+  CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE.acceptsRuntimeInput,
   false,
 );
 assert.equal(
@@ -406,6 +414,12 @@ assert.equal(
 );
 assert.equal(
   typeof compileCoreLfFragmentWorkspaceProofDocument,
+  'function',
+);
+assert.equal(typeof compileCoreLfFragmentProofDevelopment, 'function');
+assert.equal(typeof createCoreLfFragmentProofDevelopment, 'function');
+assert.equal(
+  typeof serializeCoreLfFragmentProofDevelopmentArtifact,
   'function',
 );
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
@@ -664,6 +678,10 @@ assert.equal(
   workspace.CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE.acceptsRuntimeInput,
   false,
 );
+assert.equal(
+  workspace.CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE.acceptsRuntimeInput,
+  false,
+);
 assert.equal(typeof workspace.coreProofPlanConstructor, 'function');
 assert.equal(typeof workspace.coreProofPlanHave, 'function');
 assert.equal(typeof workspace.coreProofPlanRefine, 'function');
@@ -678,6 +696,10 @@ assert.equal(
 );
 assert.equal(
   typeof workspace.compileCoreLfFragmentWorkspaceProofDocument,
+  'function',
+);
+assert.equal(
+  typeof workspace.compileCoreLfFragmentProofDevelopment,
   'function',
 );
 assert.equal(typeof workspace.applyCoreProofPlanPatch, 'function');
@@ -704,6 +726,14 @@ assert.equal(
 );
 assert.equal(
   typeof workspace.createCoreLfFragmentWorkspaceProofRuntimeFingerprint,
+  'function',
+);
+assert.equal(
+  typeof workspace.createCoreLfFragmentProofDevelopment,
+  'function',
+);
+assert.equal(
+  typeof workspace.serializeCoreLfFragmentProofDevelopmentArtifact,
   'function',
 );
 assert.equal(typeof workspace.createCoreLfProofDevelopment, 'function');
@@ -793,6 +823,7 @@ import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
   CORE_LF_PROOF_MAINTENANCE_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
@@ -808,9 +839,12 @@ import {
   CORE_RESEARCH_GOAL_GRAPH_PROFILE,
   CORE_RESEARCH_GOAL_VIEW_PROFILE,
   type CoreLfCompiledDeclarationWorkspace,
+  type CoreLfFragmentProofDevelopmentArtifact,
+  type CoreLfCompiledFragmentProofDevelopment,
   type CoreLfFragmentWorkspaceProofCompilation,
   type CoreLfWorkspaceProofCompilation,
   compileCoreLfDeclarationWorkspace,
+  compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   compileCoreLfWorkspaceProofDocument,
   coreProofPlanConstructor,
@@ -823,6 +857,7 @@ import {
   CoreProofChecker,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
+  createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
   createCoreLfFragmentWorkspaceProofFingerprintForWorkspace,
   createCoreLfFragmentWorkspaceProofRuntimeFingerprint,
@@ -836,6 +871,7 @@ import {
   proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
   replayCoreLfProofRepairCandidate,
+  serializeCoreLfFragmentProofDevelopmentArtifact,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,
@@ -862,12 +898,19 @@ const workspaceProofCompiler: typeof compileCoreLfWorkspaceProofDocument =
 const fragmentWorkspaceProofCompiler:
   typeof compileCoreLfFragmentWorkspaceProofDocument =
     compileCoreLfFragmentWorkspaceProofDocument;
+const fragmentProofDevelopmentCompiler:
+  typeof compileCoreLfFragmentProofDevelopment =
+    compileCoreLfFragmentProofDevelopment;
 const maybeCompiledWorkspace:
   CoreLfCompiledDeclarationWorkspace | undefined = undefined;
 const maybeWorkspaceProof:
   CoreLfWorkspaceProofCompilation | undefined = undefined;
 const maybeFragmentWorkspaceProof:
   CoreLfFragmentWorkspaceProofCompilation | undefined = undefined;
+const maybeFragmentProofDevelopment:
+  CoreLfCompiledFragmentProofDevelopment | undefined = undefined;
+const maybeFragmentProofDevelopmentArtifact:
+  CoreLfFragmentProofDevelopmentArtifact | undefined = undefined;
 const builder = new CoreLfScopedBuilder();
 const exactSynthesizer: typeof synthesizeCoreLfInstance =
   synthesizeCoreLfInstance;
@@ -876,6 +919,12 @@ const roleSynthesizer: typeof synthesizeCoreLfInstanceByRoles =
 const maybeTerm: KernelExpression | undefined = undefined;
 const developmentFactory: typeof createCoreLfProofDevelopment =
   createCoreLfProofDevelopment;
+const fragmentProofDevelopmentFactory:
+  typeof createCoreLfFragmentProofDevelopment =
+    createCoreLfFragmentProofDevelopment;
+const fragmentProofDevelopmentSerializer:
+  typeof serializeCoreLfFragmentProofDevelopmentArtifact =
+    serializeCoreLfFragmentProofDevelopmentArtifact;
 const premiseIndexFactory: typeof createCoreLfAccessiblePremiseIndex =
   createCoreLfAccessiblePremiseIndex;
 const fragmentWorkspaceFingerprintFactory:
@@ -950,13 +999,18 @@ void checkerConstructor;
 void declarationWorkspaceCompiler;
 void workspaceProofCompiler;
 void fragmentWorkspaceProofCompiler;
+void fragmentProofDevelopmentCompiler;
 void maybeCompiledWorkspace;
 void maybeWorkspaceProof;
 void maybeFragmentWorkspaceProof;
+void maybeFragmentProofDevelopment;
+void maybeFragmentProofDevelopmentArtifact;
 void builder;
 void exactSynthesizer;
 void roleSynthesizer;
 void developmentFactory;
+void fragmentProofDevelopmentFactory;
+void fragmentProofDevelopmentSerializer;
 void premiseIndexFactory;
 void premiseSearch;
 void obviousProvider;
@@ -1011,6 +1065,7 @@ void CORE_RESEARCH_GOAL_GRAPH_PROFILE;
 void CORE_RESEARCH_GOAL_VIEW_PROFILE;
 void CORE_LF_PROOF_AGENT_PUBLIC_CORPUS_PROFILE;
 void CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE;
+void CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE;
 void fragmentWorkspaceFingerprintFactory;
 void fragmentWorkspaceBoundFingerprintFactory;
 void fragmentWorkspaceRuntimeFingerprintFactory;
@@ -1030,6 +1085,7 @@ import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
   CORE_LF_PROOF_MAINTENANCE_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
@@ -1045,6 +1101,7 @@ import {
   CORE_RESEARCH_GOAL_GRAPH_PROFILE,
   CORE_RESEARCH_GOAL_VIEW_PROFILE,
   compileCoreLfDeclarationWorkspace,
+  compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   compileCoreLfWorkspaceProofDocument,
   coreProofPlanConstructor,
@@ -1057,6 +1114,7 @@ import {
   CoreProofChecker,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
+  createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
   createCoreLfFragmentWorkspaceProofFingerprintForWorkspace,
   createCoreLfFragmentWorkspaceProofRuntimeFingerprint,
@@ -1070,6 +1128,7 @@ import {
   proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
   replayCoreLfProofRepairCandidate,
+  serializeCoreLfFragmentProofDevelopmentArtifact,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,
@@ -1091,6 +1150,8 @@ globalThis.emdashPackedSmoke = {
   workspaceRevision: CORE_LF_DECLARATION_WORKSPACE_PROFILE.revision,
   fragmentWorkspaceProofRevision:
     CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE.revision,
+  fragmentProofDevelopmentRevision:
+    CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE.revision,
   developmentDiffRevision: CORE_LF_DEVELOPMENT_DIFF_PROFILE.revision,
   proofMaintenanceRevision: CORE_LF_PROOF_MAINTENANCE_PROFILE.revision,
   premiseIndexRevision: CORE_LF_PREMISE_INDEX_PROFILE.revision,
@@ -1107,6 +1168,7 @@ globalThis.emdashPackedSmoke = {
   researchGoalGraphRevision: CORE_RESEARCH_GOAL_GRAPH_PROFILE.revision,
   researchGoalViewRevision: CORE_RESEARCH_GOAL_VIEW_PROFILE.revision,
   compileCoreLfDeclarationWorkspace,
+  compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   compileCoreLfWorkspaceProofDocument,
   coreProofPlanConstructor,
@@ -1119,6 +1181,7 @@ globalThis.emdashPackedSmoke = {
   CoreProofChecker,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
+  createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
   createCoreLfFragmentWorkspaceProofFingerprintForWorkspace,
   createCoreLfFragmentWorkspaceProofRuntimeFingerprint,
@@ -1132,6 +1195,7 @@ globalThis.emdashPackedSmoke = {
   proposeCoreLfProofRepairs,
   replayCoreObviousProofCandidate,
   replayCoreLfProofRepairCandidate,
+  serializeCoreLfFragmentProofDevelopmentArtifact,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,

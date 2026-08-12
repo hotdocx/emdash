@@ -255,6 +255,7 @@ import './v3_2_lf_workspace_proof_tests';
 import './v3_2_lf_fragment_workspace_tests';
 import './v3_2_lf_fragment_module_workspace_tests';
 import './v3_2_lf_fragment_workspace_proof_tests';
+import './v3_2_lf_fragment_proof_development_tests';
 import './v3_2_lf_remote_workspace_tests';
 import './v3_2_lf_transfer_proof_tests';
 import './v3_2_lf_transfer_inductive_tests';
