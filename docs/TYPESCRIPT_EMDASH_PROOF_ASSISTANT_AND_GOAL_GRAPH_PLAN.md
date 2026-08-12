@@ -59,10 +59,11 @@ checked single-proof owner now composes with a canonical multi-proof catalog so
 a directly authored TypeScript fragment development exposes all current proof
 states and named goals without a resident prover process. A bounded product
 audit after that terminal row selects
-`DECLARED-THEOREM-DAG-20`. The next concrete usability gap is no longer proof
-state display: checked proof leaves cannot yet be bound to their declared
-theorem signatures and used by later proofs without silently treating list
-order or an opaque declaration as proof authority. The frozen first boundary
+`DECLARED-THEOREM-DAG-20`; its implementation completes at `b61eb30`. The
+audited limitation was no longer proof-state display: checked proof leaves
+could not yet be bound to their declared theorem signatures and used by later
+proofs without silently treating list order or an opaque declaration as proof
+authority. The frozen first boundary
 is one same-module, exact-runtime theorem DAG with explicit bindings,
 target/type rechecking, transitive free-declaration dependency inspection, and
 self/cycle/open-prerequisite rejection. It adds no Core/checker rule, generated
@@ -869,7 +870,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `POST-STDLIB-8B-AUDIT-17` | Re-evaluate every deferred/gated row after PathOut graduation | complete; read-only | Checkpoint `7aeb783` retains concrete gates for SIMP-5B2, INDEX-SEARCH-6B, COUNTEREVIDENCE-10, EXTERNAL-CERT-11, and GOAL-GRAPH-14B4. Only AGENT-EVAL-12B0/12B1 becomes ready through existing evaluator, public authoring/workspace, host, and fixture evidence. |
 | `PRACTICAL-CLASS-PROOF-18` | Runtime-bearing exact-closure proof attachment for ordinary TypeScript-authored developments | complete | `6ad0e17`; exact transitive source recompile, internally derived reviewed runtime, complete/named-open fresh replay, stable portable evidence, unrelated-module exclusion, closure/runtime drift rejection, browser-safe public workspace export, and packed consumers are green. No new record/class/synthesis semantics. |
 | `RUNTIME-DEV-CATALOG-19` | Canonical multi-proof development catalog over exact runtime-bearing fragment workspaces | complete | `1f64d89`; direct TypeScript plan data, canonical proof ordering, one workspace compile plus fresh independent exact-runtime closure replay, aggregate stable status/goals/lookup, portable runtime-bound artifacts, browser closure, and packed consumers are green. No parser, CLI, theorem imports, new semantics, or release. |
-| `DECLARED-THEOREM-DAG-20` | Bind same-module opaque theorem signatures to checked runtime proof plans and validate explicit theorem-use dependencies | selected; frozen proposal | One additive browser-safe overlay must prove exact declaration/target agreement, retain open goals, derive transitive free-reference uses, and reject self-reference, cycles, duplicate/missing bindings, and complete proofs depending on open bound theorems. No generated declarations, cross-module export, parser, CLI, new Core/checker semantics, or release. |
+| `DECLARED-THEOREM-DAG-20` | Bind same-module opaque theorem signatures to checked runtime proof plans and validate explicit theorem-use dependencies | complete | `b61eb30`; exact one-to-one opaque-signature bindings, derived-runtime target/term rechecking, explicit workspace/theorem uses, dependency-first order, open-state retention, self/cycle/open-prerequisite rejection, browser closure, and packed consumers are green. No generated declarations, cross-module export, parser, CLI, new Core/checker semantics, or release. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
@@ -884,13 +885,12 @@ outcome. The row is parked without a classifier repair, fresh coordinate, or
 retry. It does not complete 12B4 or authorize a performance, proof,
 integration, release, deployment, or later-stage claim.
 
-Roadmap accounting after selecting the declared-theorem tranche is 37 of 44
-scoped rows complete. Six of the seven remaining rows are deliberately
-terminal for their current questions:
+Roadmap accounting after the declared-theorem checkpoint is 38 of 44 scoped
+rows complete. The six remaining rows are deliberately terminal for their
+current questions:
 deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
 `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4`, plus parked
-`AGENT-EVAL-12B4`. None is reopened merely to keep the goal active. The sole
-selected implementation row is `DECLARED-THEOREM-DAG-20`.
+`AGENT-EVAL-12B4`. None is reopened merely to keep the goal active.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -7605,6 +7605,63 @@ publication, theorem indexing/ranking, source acquisition, CLI ergonomics,
 package release, or a larger mathematical demo are separate product questions
 and do not reopen this row.
 
+### Completion record
+
+Checkpoint `b61eb30` completes the row at the frozen same-module boundary.
+`emdash-lf-declared-theorem-development-v1`:
+
+1. reconstructs the row-19 development and requires exact nonempty one-to-one
+   coverage between proof identities and unique same-module qualified symbols;
+2. accepts only checked body-free `opaque-signature` free declarations and
+   rechecks their references against proof targets with each proof's exact
+   internally derived closure runtime;
+3. rechecks every complete returned term against the bound declaration type,
+   while retaining an unconsumed open theorem as ordinary named incomplete
+   state;
+4. separates direct/transitive free references, bound-theorem edges, and
+   remaining workspace declaration/assumption dependencies in portable
+   evidence;
+5. rejects direct and checked-helper-hidden self-use, direct and helper-hidden
+   two-theorem cycles, complete-to-open theorem uses, malformed/missing/extra/
+   duplicate/cross-root bindings, unsupported declaration shapes, and target
+   mismatch; and
+6. computes stable dependency-first order independently of canonical proof
+   list order, with no generated declaration, caller runtime, checker/session
+   object, mutable registry, or process-local authority in serialization.
+
+The positive standalone chain binds `first` to a primitive witness and
+`second` to `first`; its declaration types use `El(normalize base_code)` while
+the proof targets use `El(base_code)`, so exact binding genuinely exercises the
+imported runtime. Canonical proof names deliberately sort in the opposite order
+from the theorem dependency, proving that list recency is not authority. The
+shared fixture remains mechanism-only and no mathematical source changed.
+
+The first focused execution exposed one portable-identity projection bug:
+cloning a structural proof identity from a proof document retained surplus
+document fields. The sole allowed correction now copies only `moduleId` and
+`declarationId`; the corrected artifact is byte-stable across workspace,
+proof, and binding permutations. No second design or semantic correction was
+used.
+
+Final proportional evidence on the checkpointed bytes is:
+
+- workspace contract, root TypeScript typecheck, changed-file ESLint,
+  packed-verifier syntax, staged/whitespace hygiene, and transitive browser
+  closure green;
+- 81 of 81 focused tests green across the new theorem owner, exact runtime
+  proof/development owners, declaration bodies, transfer compiler, capability
+  inventory/command, and browser suites; and
+- `package:check` green across build plus freshly packed ESM, CJS, strict
+  NodeNext, and browser consumers of the additive profile, factory, compiler,
+  serializer, and types.
+
+No root test, `check:ts`, `check:all`, Lambdapi, book/print, sibling,
+deployment, publication, or release gate was run. None of those unchanged
+boundaries became progress-blocking, so their omission is explicit under the
+standing anti-aggregate policy and is not a claimed pass. This row is terminal
+and may be reopened only by the concrete same-module consumer or contract
+changes named above.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7885,6 +7942,7 @@ and do not reopen this row.
 | `D-PA-273` | Select one additive runtime-bearing multi-proof development catalog as the sole post-18 product tranche. | The declaration-only catalog already qualifies ordering, lookup, aggregate goals, and independent leaves, while the fragment workspace and row-18 proof owner qualify runtime semantics. Composing those exact owners gives AI-authored TypeScript developments a compact current-state view; migrating the established declaration-only source/CLI family or adding a parser would be broader and less honest. |
 | `D-PA-274` | Complete `RUNTIME-DEV-CATALOG-19` at `1f64d89` and keep acquisition, theorem export, commands, and distribution separate. | The additive catalog passes the frozen runtime-dependent complete/open, ordering, aggregate-goal, lookup, contamination, drift, portability, browser, and packed-consumer gates. It reuses exact existing owners without profile migration or semantic duplication; the long aggregate and unrelated layers would not add decision-relevant evidence to this terminal row. |
 | `D-PA-275` | Select a same-module declared-theorem dependency DAG as the sole post-19 product tranche. | Existing exact closures can check theorem references but cannot certify that their opaque signatures have completed, well-founded proof plans. Explicit one-to-one bindings plus exact runtime target rechecking and transitive free-reference cycle/open-dependency rejection add real theorem chaining without generated declarations, list-order authority, a Kernel-to-transfer reifier, a new Core rule, or premature cross-module publication. |
+| `D-PA-276` | Complete `DECLARED-THEOREM-DAG-20` at `b61eb30` and keep cross-module publication/index enrichment separate. | The additive overlay passes exact runtime-dependent theorem chaining, reverse-list topological order, open-state retention, explicit assumption/use evidence, every binding/type/shape negative, direct/helper-hidden self and cycle rejection, browser closure, and installed package consumers. The sole correction removed surplus proof-document fields from portable identities; no further retry or widening is decision-relevant. |
 
 ## Validation And Checkpoint Policy
 
@@ -8052,17 +8110,17 @@ synchronized:
 > prove existing owners do not already cover it, name the smallest executable
 > consumer, and freeze terminal states, correction budget, reopening trigger,
 > proportional gates, and explicit non-effects.
-> Treat `DECLARED-THEOREM-DAG-20` and `D-PA-275` as the sole selected next
-> tranche. Implement only the frozen same-module binding overlay over row 19:
-> every proof binds exactly one body-free opaque free declaration; declaration
-> reference/complete term rechecking uses the proof's exact derived runtime;
-> checked-term free references and declaration body dependencies expose an
-> explicit dependency graph; and self, cycle, or complete-to-open theorem uses
-> fail closed. Preserve unbound opaque declarations as explicitly reported
-> workspace assumptions. Do not generate declaration fragments, infer proof
-> authority from list order, add a Kernel-to-transfer reifier, claim
-> cross-module theorem publication, or add a parser, CLI, mutable server, Core
-> node/checker rule, release, sibling edit, or mathematical-source change.
+> Treat `DECLARED-THEOREM-DAG-20`, decisions `D-PA-275`/`D-PA-276`, and exact
+> semantic checkpoint `b61eb30` as complete. Preserve its same-module exact
+> opaque-signature bindings, internally derived runtime target/term rechecks,
+> direct/transitive free-reference evidence, explicit theorem versus workspace
+> uses, dependency-first order, open-state retention, and self/cycle/open-
+> prerequisite rejection. Do not reopen it for generated declaration
+> fragments, list-order authority, a Kernel-to-transfer reifier, cross-module
+> publication, parser, CLI, mutable server, Core/checker semantics, release,
+> sibling integration, or mathematical-source work without its recorded
+> concrete trigger. Before selecting another implementation row, repeat the
+> bounded product audit required above and freeze it as a separate tranche.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
 > `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
 > retained by audit 17 rather than inventing authority to advance the ledger.
