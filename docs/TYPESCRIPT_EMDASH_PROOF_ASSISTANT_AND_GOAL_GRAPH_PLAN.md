@@ -50,9 +50,10 @@ infrastructure evidence with no v5 retry or classifier work. The proof-
 assistant refocus audit then confirmed that the parameterized records/classes,
 multiple-inheritance diamond, recursive instance synthesis, and saturated
 class-call semantics are already qualified. `PRACTICAL-CLASS-PROOF-18` is now
-frozen as the next product tranche: attach source-first complete/open proof
-plans to one exact reconstructed mixed-fragment closure, using only the
-runtime compiled from that closure. The first research-planning
+complete and final-proportional-green at `6ad0e17`: source-first complete/open
+proof plans now replay against one exact reconstructed mixed-fragment closure,
+using only the runtime compiled from that closure and excluding unrelated
+workspace modules. The first research-planning
 goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -853,7 +854,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `GATE-AUDIT-15` | Post-14A concrete-consumer and external-tool audit | complete | `394ad2c`; source/dependency/PATH/sibling/npm evidence records an exact prerequisite for every incomplete row; no proxy semantic or sibling implementation was introduced. |
 | `POST-14B-AUDIT-16` | Re-evaluate incomplete rows after the real package and Arrowgram/GetPaidX consumer | complete | 14B4, 12B, 10, and 11 retain their exact gates; public distribution plus checked book/research consumers make only the bounded `STDLIB-8A` product-selection row ready. |
 | `POST-STDLIB-8B-AUDIT-17` | Re-evaluate every deferred/gated row after PathOut graduation | complete; read-only | Checkpoint `7aeb783` retains concrete gates for SIMP-5B2, INDEX-SEARCH-6B, COUNTEREVIDENCE-10, EXTERNAL-CERT-11, and GOAL-GRAPH-14B4. Only AGENT-EVAL-12B0/12B1 becomes ready through existing evaluator, public authoring/workspace, host, and fixture evidence. |
-| `PRACTICAL-CLASS-PROOF-18` | Runtime-bearing exact-closure proof attachment for ordinary TypeScript-authored developments | in progress; contract frozen | Recompile exactly the selected mixed-fragment module closure, derive rather than accept its reviewed runtime, replay one complete and one named-open proof, and reject unrelated-module contamination, closure drift, and runtime-fingerprint drift. No new record/class/synthesis semantics. |
+| `PRACTICAL-CLASS-PROOF-18` | Runtime-bearing exact-closure proof attachment for ordinary TypeScript-authored developments | complete | `6ad0e17`; exact transitive source recompile, internally derived reviewed runtime, complete/named-open fresh replay, stable portable evidence, unrelated-module exclusion, closure/runtime drift rejection, browser-safe public workspace export, and packed consumers are green. No new record/class/synthesis semantics. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
@@ -868,11 +869,11 @@ outcome. The row is parked without a classifier repair, fresh coordinate, or
 retry. It does not complete 12B4 or authorize a performance, proof,
 integration, release, deployment, or later-stage claim.
 
-Roadmap accounting after this added product row is 35 of 42 scoped rows
-complete. The seven remaining rows are in-progress
-`PRACTICAL-CLASS-PROOF-18` plus the deliberately deferred/gated `SIMP-5B2`,
-`INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`,
-`AGENT-EVAL-12B4`, and `GOAL-GRAPH-14B4`.
+Roadmap accounting after this product checkpoint is 36 of 42 scoped rows
+complete. The six remaining rows are deliberately terminal for their current
+questions: deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
+`COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4`, plus parked
+`AGENT-EVAL-12B4`. None is reopened merely to keep the goal active.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -7249,6 +7250,51 @@ changed-file lint, workspace-contract, staged-diff, and whitespace gates. No
 Lambdapi, sibling, print/book, deployment, publication, or long aggregate is
 required unless a focused failure proves that omission blocks this row.
 
+### Completion record
+
+Checkpoint `6ad0e17` completes this row at the frozen boundary. The additive
+`emdash-lf-fragment-workspace-proof-v1` owner:
+
+1. reconstructs only the selected root's exact transitive mixed-fragment
+   closure from canonical source plans and recompiles it from an empty
+   declaration context;
+2. compares every reconstructed compiled-module snapshot with the supplied
+   checked workspace before using it;
+3. derives the nonempty catalog runtime internally and gives a fresh bounded
+   checker no caller-provided runtime, session, callback, or mutable registry;
+4. binds the exact closure module IDs, caller-computed source/profile/interface
+   digests, runtime revision, and ordered rule IDs in frozen portable evidence;
+5. replays ordinary complete or named-open `CoreProofPlan` data and emits
+   checked Core only after a complete term rechecks; and
+6. exports the bridge through the browser-safe workspace package without a new
+   Core node, parser, catalog, CLI, Lambdapi dependency, or package release.
+
+The standalone `Code`/`El` fixture proves that the ordinary runtime-free proof
+checker rejects the proposed term while the exact derived rewrite runtime
+accepts it. It also covers the named open goal, unrelated earlier-module
+exclusion, input-permutation byte stability, exact dependency fingerprints,
+runtime omission and drift, compiled-closure drift, deep freezing, and absence
+of process-local authority from serialization. This fixture is mechanism
+evidence only and does not modify or stand in for the already-qualified
+record/class hierarchy or any mathematical source.
+
+Final proportional evidence on the checkpointed bytes is:
+
+- `workspace:check`, root TypeScript typecheck, changed-file ESLint,
+  `node --check` for the packed-install verifier, and whitespace checks green;
+- 76 of 76 focused tests green across the exact runtime proof, nearest fragment
+  workspace, declaration-only proof, checker/document, capability, and browser
+  suites; and
+- `package:check` green across build plus packed ESM, CJS, strict NodeNext, and
+  browser consumers of the new public workspace exports.
+
+No root test, `check:ts`, `check:all`, Lambdapi, sibling-repository, book,
+deployment, publication, or release gate was run. Their boundaries did not
+change or block this row, so the standing anti-aggregate policy requires that
+omission to remain explicit rather than be presented as positive evidence.
+The row is terminal and may be reopened only for a concrete failing consumer
+or a changed fragment-workspace/runtime contract.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7525,6 +7571,7 @@ required unless a focused failure proves that omission blocks this row.
 | `D-PA-269` | Park `AGENT-EVAL-12B4` after the terminal v4 `forbidden-command` outcome and refocus on practical proof-assistant usability. | The sole authorized attempt exercised the governed provider/process/replay path but changed no source and produced no benchmark result. Further coordinate rotation or classifier diagnosis would optimize the harness rather than the product. Retain the evidence, preserve 35/41 accounting, and require a new concrete product need before reopening measurement. |
 | `D-PA-270` | Use explicit terminal states and a bounded correction budget for every experimental/infrastructure row. | “Enough quality” means enough evidence to make the declared product decision, not unlimited retries. Complete, parked, blocked, and rejected have distinct meanings; only a concrete consumer or changed prerequisite can reopen a terminal row. |
 | `D-PA-271` | Select runtime-bearing exact-closure proof attachment as the first post-benchmark usability tranche. | Records/classes/synthesis and mixed-fragment compilation are already qualified, but source-first proof documents cannot consume the reviewed runtime owned by that workspace. Bridging those existing owners produces direct proof-assistant value without inventing new mathematics or class semantics. |
+| `D-PA-272` | Complete `PRACTICAL-CLASS-PROOF-18` at `6ad0e17` and do not widen it into another management, host, or release layer. | The exact-closure bridge now passes every frozen positive and negative gate: source recompile and drift comparison, internally derived runtime, runtime-dependent complete/open replay, portable fingerprints, contamination exclusion, browser closure, and packed consumers. The omitted long aggregate is non-blocking under `D-PA-019`, and the explicit terminal rule prevents a generic bridge from becoming an endless umbrella tranche. |
 
 ## Validation And Checkpoint Policy
 
@@ -7672,13 +7719,18 @@ synchronized:
 > v5 coordinate, retry, classifier repair, provider diagnosis, measured claim,
 > or graduation unless a later concrete product need and changed provider
 > prerequisite explicitly reopen it.
-> Continue with frozen `PRACTICAL-CLASS-PROOF-18`. Reconstruct one selected
-> mixed-fragment module's exact declaration/runtime closure and attach fresh
-> complete/open source-first proof plans to it. Derive runtime only from that
-> reconstructed closure, preserve runtime-free behavior, bind runtime identity
-> in portable evidence, and stop at the generic attachment API plus standalone
-> executable consumer. Do not rebuild the already-qualified algebra hierarchy,
-> edit mathematical sources, or bundle a catalog/CLI/release/host adapter.
+> Treat `PRACTICAL-CLASS-PROOF-18` and exact semantic checkpoint `6ad0e17` as
+> complete. Preserve its source-recompiled exact closure, internally derived
+> runtime, runtime-dependent complete/open proof fixture, stable portable
+> evidence, and explicit exclusion of an input runtime, unrelated modules, and
+> process-local authority. Do not reopen or widen it into a catalog, CLI,
+> release, or host adapter without one concrete failing consumer or changed
+> fragment-runtime prerequisite. Before adding another implementation row,
+> perform one bounded read-only product audit: name the user-visible proof-
+> assistant limitation, show that existing owners do not already satisfy it,
+> choose one smallest executable consumer, and freeze its success gate,
+> terminal outcomes, correction budget, and sole reopening trigger. Do not
+> rebuild the already-qualified algebra hierarchy or edit mathematical sources.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
 > `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
 > retained by audit 17 rather than inventing authority to advance the ledger.
