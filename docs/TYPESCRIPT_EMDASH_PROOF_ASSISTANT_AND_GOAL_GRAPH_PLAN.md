@@ -7037,6 +7037,20 @@ Every outcome is terminal; no rerun, repair, new coordinate, private evidence,
 provider/model work, integration, release, cleanup, or aggregate follows from
 the proposal. Accounting remains 35/41.
 
+Immutable review of corrected proposal `1ae9e70`, tree `0e9aabd`, binds clean
+CloserFans `9ea98c8`/tree `070792a`, all four source hashes, the external tsx
+4.20.6/Node 24.11.1 launcher, and installed Codex 0.147.0. The focused verifier
+returns after offline scripts-disabled installation, typecheck, and the local
+permission member; its real-operator import is guarded and side-effect-free.
+The permission member uses a six-key credential-free child environment, exact
+EOF/no-prompt boundary, fixture-only filesystem matrix, denied loopback probe,
+and one fixed benchmark-case command. Executable substitution and state
+retention are cleared, npm fallback is offline, and nested/outer cleanup is
+mandatory. Delegated unattended authority therefore approves the exact R13
+command once after checkpoint. Every outcome consumes it; no model/provider,
+private evidence, retry, edit, coordinate, integration, release, cleanup,
+aggregate, or claim is authorized. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7303,6 +7317,7 @@ the proposal. Accounting remains 35/41.
 | `D-PA-259` | Freeze R12 as a non-authorizing one-file repair of the no-model strict-config preflight. | `exec --help` terminates before config loading and missed the stale key. The complete vector with closed stdin loads strict config first and must stop at an exact fixed no-prompt outcome before schema or agent/provider work. |
 | `D-PA-260` | Approve exact R12 proposal `413efc6` only for the one-file full-vector/no-prompt check and synthetic validation. | Codex 0.147.0 loads strict/effective config before forced-stdin EOF and stops before schema/thread/provider work. Exact channel/outcome checks plus disposable closed state make this a no-model preflight correction, not live-probe authority. |
 | `D-PA-261` | Preserve focused-green R12 checkpoint `9ea98c8` and freeze only a non-authorizing R13 no-model permission-probe proposal. | The exact one-file diff and focused clean-install/typecheck/synthetic/mock gate prove the corrected strict-vector source without executing the live member. Corrected R13 binds one offline owning command with executable-substitution/state-retention overrides cleared, a closed credential-free Codex environment, disposable state, exact no-prompt and sandbox checks, and terminal no-rerun semantics; separate immutable review remains mandatory. |
+| `D-PA-262` | Approve exact corrected R13 proposal `1ae9e70` for one offline local no-model permission-probe execution under delegated unattended authority. | Static review binds clean CloserFans `9ea98c8`, exact sources/launcher/runtime, early focused return, side-effect-free operator import, closed child environment, EOF/no-prompt stop, fixture-only sandbox checks, override clearing, offline npm, cleanup, and terminal one-shot semantics. No provider/model or later effect is authorized. |
 
 ## Validation And Checkpoint Policy
 

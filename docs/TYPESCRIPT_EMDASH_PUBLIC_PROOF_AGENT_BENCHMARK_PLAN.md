@@ -5184,6 +5184,48 @@ private-evidence access, push, merge, deployment, release, cleanup, or
 aggregate. Separate immutable review of this exact checkpoint and command is
 mandatory before its single execution. Accounting remains 35/41.
 
+###### Immutable R13 no-model permission-probe review
+
+Exact corrected proposal checkpoint
+`1ae9e70b50afd63850b82a615fef4c73e6ec5ff0`, parent
+`6960bdf667c93d1f2ba078d4f52d2c14b5b274a6`, and tree
+`0e9aabdff202dcf62d11e6fcd36b2988b1ae189b` have governing-plan
+SHA-256 `9af277be0cd3237d6c2fec84cf5db97607237b3312dc026e552fd2db453fe156`
+and this-plan SHA-256
+`6c406788d86f9e2e18c9153d3d43e26d19626d1ab823e783ab3f79ef0ed043e3`.
+Both project worktrees are clean at exact Emdash `1ae9e70` and CloserFans
+`9ea98c8`/tree `070792a`; the isolated CloserFans worktree has no local
+`node_modules` tree.
+
+Review binds the exact four source hashes and command recorded above. The
+external launcher resolves to `/home/user1/closerfans/node_modules/tsx/dist/
+cli.mjs`, reporting tsx 4.20.6 on Node 24.11.1; the probe itself requires
+`codex-cli 0.147.0` before any later check. The verifier's focused branch
+creates a disposable workspace, verifies the committed snapshot contract,
+performs offline scripts-disabled installation and typecheck, invokes only
+`canary:probe-permissions`, checks its fixed success summary, and returns
+before mock-canary, adapter, preview, or any real-agent path. Its dynamic import
+of the root operator is side-effect-free because that module's main entry is
+guarded by exact `import.meta.url` equality.
+
+Inside the permission member, the full `codex exec` vector receives ignored
+stdin and can succeed only at the exact pre-provider no-prompt boundary.
+Subsequent `codex sandbox` children execute only generated fixture programs:
+the filesystem matrix over disposable files, a loopback connection attempt
+whose server must observe zero connections, and the fixed public benchmark
+case command. The Codex environment is an explicit six-key allowlist with an
+empty host home/tmp and no API/auth input. The command line clears executable
+substitution and retention overrides; offline npm forbids package-network
+fallback; both nested and outer temporary roots have `finally` removal.
+
+Under delegated unattended authority, approve exactly one execution of the
+four-line R13 command above after this review is checkpointed. Success or
+failure consumes the authorization and must be recorded before any next
+proposal. This review authorizes no model/provider call, benchmark result,
+private-evidence read, retry, source edit, new coordinate, push, merge,
+deployment, release, generalized claim, cleanup, or aggregate. Human direction
+may supersede the authorization before execution. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
