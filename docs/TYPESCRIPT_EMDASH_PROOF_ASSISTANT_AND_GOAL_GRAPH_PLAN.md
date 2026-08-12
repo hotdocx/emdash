@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R12 implementation focused-green at CloserFans `9ea98c8`; R13 one-shot no-model permission probe proposed | The complete strict vector now reaches the exact EOF/no-prompt boundary in source and focused clean-install/typecheck/synthetic/mock gates pass. One offline local permission probe requires separate immutable review; every provider call and new coordinate remains later. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R13 no-model permission probe green; R14 non-authorizing v4 guard rotation proposed | Exact Codex 0.147.0 strict-vector, filesystem, denied-loopback, and allowlisted-command probes now pass under the closed environment. Fresh v4 guards require separate review/implementation and a later exact at-call audit; no provider call is authorized. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -7051,6 +7051,26 @@ command once after checkpoint. Every outcome consumes it; no model/provider,
 private evidence, retry, edit, coordinate, integration, release, cleanup,
 aggregate, or claim is authorized. Accounting remains 35/41.
 
+The exact R13 command ran once after authorization checkpoint `9587ce2` and
+exited zero in 4.6 seconds with only the fixed 66-byte no-model success line,
+SHA-256 `7d126b7...`. The offline install/typecheck, complete Codex 0.147.0
+EOF/no-prompt strict vector, fixture filesystem matrix, denied loopback probe,
+and allowlisted selected-case command all passed. Nested/outer cleanup ran;
+CloserFans remains clean at `9ea98c8`/tree `070792a` without worktree
+dependencies. R13 is consumed and is preflight evidence only—not a benchmark,
+model, provider, performance, or proof result. Accounting remains 35/41.
+
+The dedicated plan now freezes non-authorizing R14: rotate only the two v3
+guard literals to fresh v4 and extend the verifier's retired-ID assertion in
+three CloserFans files. Proposed ID `emdash-stage-a-native-exact-local-premise-
+2026-08-12-v4`, its `6866354a...` lease key, and its `74ebd527...` run-root
+hash bind two currently absent candidate paths. No argument/permission/prompt/
+model/evaluator behavior changes; the guard constant is outside argument and
+permission construction, so green R13 must be carried forward rather than
+rerun. Separate review precedes edits, and implementation remains subject to a
+new exact at-call audit before any provider consideration. Accounting remains
+35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7318,6 +7338,7 @@ aggregate, or claim is authorized. Accounting remains 35/41.
 | `D-PA-260` | Approve exact R12 proposal `413efc6` only for the one-file full-vector/no-prompt check and synthetic validation. | Codex 0.147.0 loads strict/effective config before forced-stdin EOF and stops before schema/thread/provider work. Exact channel/outcome checks plus disposable closed state make this a no-model preflight correction, not live-probe authority. |
 | `D-PA-261` | Preserve focused-green R12 checkpoint `9ea98c8` and freeze only a non-authorizing R13 no-model permission-probe proposal. | The exact one-file diff and focused clean-install/typecheck/synthetic/mock gate prove the corrected strict-vector source without executing the live member. Corrected R13 binds one offline owning command with executable-substitution/state-retention overrides cleared, a closed credential-free Codex environment, disposable state, exact no-prompt and sandbox checks, and terminal no-rerun semantics; separate immutable review remains mandatory. |
 | `D-PA-262` | Approve exact corrected R13 proposal `1ae9e70` for one offline local no-model permission-probe execution under delegated unattended authority. | Static review binds clean CloserFans `9ea98c8`, exact sources/launcher/runtime, early focused return, side-effect-free operator import, closed child environment, EOF/no-prompt stop, fixture-only sandbox checks, override clearing, offline npm, cleanup, and terminal one-shot semantics. No provider/model or later effect is authorized. |
+| `D-PA-263` | Record terminal-green R13 and freeze only a non-authorizing three-file v4 guard-rotation proposal. | The sole reviewed probe passed the corrected strict vector and local sandbox boundaries without a model. Terminal v3 cannot be reused; fresh absent v4 coordinates permit a guard-only edit whose constant does not affect arguments or permissions. Separate review, implementation, and later at-call audit remain mandatory. |
 
 ## Validation And Checkpoint Policy
 

@@ -5226,6 +5226,80 @@ private-evidence read, retry, source edit, new coordinate, push, merge,
 deployment, release, generalized claim, cleanup, or aggregate. Human direction
 may supersede the authorization before execution. Accounting remains 35/41.
 
+###### R13 terminal no-model result and R14 v4 guard-rotation proposal
+
+The exact R13 command was invoked once from clean CloserFans `9ea98c8` after
+authorization checkpoint `9587ce22f91fed41d46e8de80b95abe8d15cc6ed`.
+It exited zero in 4.6 seconds and emitted exactly the fixed 66-byte line:
+
+```text
+✔ emdash_benchmark no-model permission and command probe passed
+```
+
+The line has SHA-256
+`7d126b799f339c9c03a11f102b518ade7fadb4faf4adb98f07799750a2e2efb3`.
+The result means the disposable offline install and typecheck succeeded; the
+complete Codex 0.147.0 strict vector reached the exact EOF/no-prompt boundary;
+the fixture filesystem matrix, denied loopback attempt, and allowlisted
+benchmark-case command matched their closed expectations. The successful path
+executed nested and outer `finally` cleanup. CloserFans remains clean at tree
+`070792a` with no worktree `node_modules`, and the Emdash plan worktree remains
+clean at its authorization checkpoint.
+
+R13 is now consumed and must not be rerun. It involved no prompt-bearing
+`codex exec`, model/provider turn, credential exposure, private-evidence read,
+source mutation, benchmark attempt, or performance/proof claim. It advances
+preflight evidence only; accounting remains 35/41.
+
+The existing real-run guards intentionally still name terminal v3. R11 changed
+the complete argument vector and R12/R13 validated its corrected no-model
+boundary, so v3 cannot be reused or relabelled. Freeze R14 as a non-authorizing
+fresh-guard proposal with these public coordinates:
+
+```text
+authorization ID: emdash-stage-a-native-exact-local-premise-2026-08-12-v4
+ID SHA-256:       6866354af735475e7202fa5bc738fbec017535af2bffe40000be237ec4e510db
+candidate root:   /home/user1/.emdash-stage-a/emdash-stage-a-native-exact-local-premise-2026-08-12-v4
+root SHA-256:     74ebd52740182cd4a2bd55d4eacc2f319759f93f4ad92d6c658e9107c14a086e
+candidate lease:  /home/user1/.emdash-stage-a/authorizations/6866354af735475e7202fa5bc738fbec017535af2bffe40000be237ec4e510db.json
+```
+
+Both candidate paths are absent at proposal time. Naming them creates neither
+path and grants no execution authority.
+
+The proposed implementation changes only three literals/assertions across
+three CloserFans files from exact clean checkpoint `9ea98c8`:
+
+1. root `scripts/run-emdash-stage-a-real.mjs` changes its closed allowlist from
+   exact v3 to exact v4;
+2. `templates/emdash_benchmark/scripts/emdash-canary-contract.mts` makes the
+   identical change to `STAGE_A_REAL_AUTHORIZATION_ID`; and
+3. `scripts/verify-emdash-benchmark-template-runtime.ts` requires exact v4 in
+   both guard sources and adds exact v3 to the already-retired v1/v2 absence
+   assertions.
+
+No schema, prompt, selected case, source, model, catalog hash, CLI revision,
+Codex argument, permission/environment rule, bootstrap, install, lease,
+process/stream, evaluator, receipt, or evidence behavior changes. The
+authorization constant is not consumed by `buildCodexArguments` or
+`buildPermissionOverrides`; therefore exact green R13 remains direct evidence
+for the unchanged no-model runtime vector and must not be rerun for this
+identity-only edit.
+
+Validation is limited to operator syntax, stripped-TypeScript/static exact-ID
+checks, `git diff --check`, and one disposable clean-install `--canary-only`
+gate. Candidate v4 paths must remain absent, terminal v1/v2/v3 state must be
+untouched, and neither the permission probe nor any wider aggregate runs.
+
+This proposal authorizes no source edit until separately reviewed. Its eventual
+implementation would remain non-authorizing: a new behavior-free at-call
+audit must bind exact committed source/tree/manifest/input hashes, closed
+CLI/login/model state, carried-forward R13 evidence, absent v4 state, and one
+exact command before a single provider attempt could be considered. No model,
+provider, prompt, private evidence, lease/run-root creation, retry, alternate
+coordinate, integration, release, cleanup, benchmark result, or graduation is
+authorized. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
