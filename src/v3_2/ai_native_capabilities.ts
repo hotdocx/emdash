@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v15' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v15' as const,
+    revision: 'emdash-ai-native-capabilities-v16' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v16' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -209,6 +209,13 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 id: 'fragment-module-workspace',
                 revision: 'emdash-lf-fragment-module-workspace-v1',
                 scope: 'exact declaration/runtime/proof fragment graphs'
+            },
+            {
+                id: 'fragment-workspace-proof',
+                revision: 'emdash-lf-fragment-workspace-proof-v1',
+                scope:
+                    'fresh source-first proof replay in one exact derived ' +
+                    'declaration and runtime fragment closure'
             },
             {
                 id: 'mounted-workspace-store',

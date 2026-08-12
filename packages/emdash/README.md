@@ -52,6 +52,11 @@ The package has four deliberately bounded entries:
   acceptance returns a stale-safe patch, patched inert plan, and fresh replay;
   it does not silently persist source or claim to refresh caller-supplied
   fingerprints.
+  The mixed-fragment proof attachment reconstructs the selected module's
+  exact transitive declaration/runtime closure before every replay. Its proof
+  request contains inert source, dependency, and runtime fingerprints but no
+  executable runtime input; the checker derives the reviewed runtime from the
+  reconstructed fragments and rejects closure or runtime drift.
   The research-goal profile keeps theorem, task, and decision evidence
   distinct, freshly replays checked-proof evidence, and derives status across
   finite `requires` and grouped `one-of` dependencies. Its companion
@@ -82,6 +87,7 @@ import {
 import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
+  CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE,
@@ -99,8 +105,12 @@ import {
   coreProofPlanRefine,
   coreProofTemplatePlaceholder,
   compareCoreLfProofDevelopmentSources,
+  compileCoreLfFragmentWorkspaceProofDocument,
   createCoreProofPlanHoleReplacement,
   createCoreLfAccessiblePremiseIndex,
+  createCoreLfFragmentWorkspaceProofFingerprint,
+  createCoreLfFragmentWorkspaceProofFingerprintForWorkspace,
+  createCoreLfFragmentWorkspaceProofRuntimeFingerprint,
   createCoreLfProofDevelopment,
   createCoreResearchGoalView,
   parseCoreResearchGoalViewText,
@@ -128,6 +138,7 @@ void synthesizeCoreLfInstance;
 void synthesizeCoreLfInstanceByRoles;
 void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_DEVELOPMENT_DIFF_PROFILE;
+void CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
 void CORE_LF_PROOF_DEVELOPMENT_SOURCE_PROFILE;
 void CORE_OBVIOUS_PROOF_PROVIDER_PROFILE;
@@ -144,8 +155,12 @@ void coreProofPlanHave;
 void coreProofPlanRefine;
 void coreProofTemplatePlaceholder;
 void compareCoreLfProofDevelopmentSources;
+void compileCoreLfFragmentWorkspaceProofDocument;
 void createCoreProofPlanHoleReplacement;
 void createCoreLfAccessiblePremiseIndex;
+void createCoreLfFragmentWorkspaceProofFingerprint;
+void createCoreLfFragmentWorkspaceProofFingerprintForWorkspace;
+void createCoreLfFragmentWorkspaceProofRuntimeFingerprint;
 void createCoreLfProofDevelopment;
 void createCoreResearchGoalView;
 void parseCoreResearchGoalViewText;
