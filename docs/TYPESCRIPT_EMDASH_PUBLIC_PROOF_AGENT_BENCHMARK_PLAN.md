@@ -3692,6 +3692,58 @@ The disposable directory was under the validated prefix
 recovery the exact path was absent. No bootstrap, run root, lease, or private
 evidence was removed or changed.
 
+##### `AGENT-EVAL-12B4-R4` documented-subset schema normalization proposal
+
+R3 does not justify changing authentication, model selection, process
+environment, permission policy, prompt, proof source, or stream handling. It
+does justify one smaller compatibility experiment: express the existing final
+message contract using only schema forms shown explicitly in the official
+Structured Outputs examples. This proposal is based on clean CloserFans
+checkpoint `8276e962ea0d5e2f1fa4e87c79357f38cdd03321`, tree
+`e03085a472aee51b2b934a9c71b8db7320cb9998`.
+
+The proposed implementation changes exactly three files under
+`templates/emdash_benchmark/scripts/`:
+
+1. `emdash-canary-output.schema.json` removes the top-level `$schema`
+   annotation, represents `caseId` as
+   `{"type":"string","enum":["native.exact.local-premise"]}`, and adds
+   `"type":"string"` beside the existing `disposition` enum. The `note`
+   string/240-character bound, exact three-property `required` list, object
+   root, and `additionalProperties: false` remain unchanged.
+2. `fixtures/emdash-canary-fake-codex.mjs` validates the exact normalized
+   schema rather than looking only for the former `caseId.const` value. This
+   keeps the fake process aligned with the real invocation contract and makes
+   accidental reintroduction of unstated keywords fail locally.
+3. `verify-emdash-canary.mts` reads the committed schema and asserts the exact
+   normalized object before running the existing fake scenarios. The test
+   must reject the old `$schema` and `const` shapes by exact deep equality,
+   while leaving final-message validation unchanged.
+
+This is syntax-level compatibility hardening, not a semantic relaxation:
+`caseId` still has one possible value, `disposition` still has the same three
+values, `note` has the same type and bound, all three fields remain mandatory,
+and extra properties remain forbidden. No Core, checker, proof source,
+benchmark case, evaluator, receipt, contamination label, or trust boundary
+changes. The public mock command remains physically fake, and the real driver
+continues to copy committed bytes without gaining authorization.
+
+Validation is proportional and entirely fake/no-model: JSON parsing plus the
+new exact schema assertion, JavaScript syntax check for the fake fixture,
+TypeScript formatting/static checks for the three paths, the focused Stage A
+mock canary through its existing bounded scheduler, exact diff/ancestry/status
+inspection, and confirmation that neither a new run root nor authorization
+lease was created. Permission, root TypeScript, package, browser, kernel,
+book, repository-wide, deployment, and release aggregates are unchanged and
+must not be rerun.
+
+This proposal authorizes no edit until a separate immutable review. Even after
+implementation and fake/no-model validation, it authorizes no prompt, model,
+provider, raw-evidence access, retry, v1/v2 mutation, new ID/run root, lease,
+performance claim, benchmark result, or graduation. A later code/preflight
+review would be required before even proposing fresh coordinates. Accounting
+remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
