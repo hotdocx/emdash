@@ -236,7 +236,7 @@ the evaluator.
 | `AGENT-EVAL-12B1` | complete at `d0d3764` | The full six-track/ten-case corpus and strict interchange satisfy the separately reviewed contract. Nine owner-generated ordinary patches pass fresh unchanged 12A replay; the genuine ambiguity case abstains. Focused semantic/static/browser gates are green without public or later-row effects. |
 | `AGENT-EVAL-12B2` | complete at `93c9804` | The isolated package subpath, strict stateless repository adapter, v15 capability record, lazy browser presentation, transitive budgets, retained least-authority package policy, and installed consumer matrix satisfy all ten review conditions. |
 | `AGENT-EVAL-12B3` | complete at Emdash hardening `3af518d` and CloserFans host `cbf2356` | Exact `0.3.0`, Pages run `31509112917`, protected OIDC recovery run `31510726533`, byte/provenance/installed-consumer verification, permanent trigger removal, and the focused-green ten-abstention source workspace are complete. Two safe pre-package failures and the reviewed one-time dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Stage A terminal without a benchmark result; R11 identifies an unsupported strict-config key and proposes a local correction | The consumed canary's 98-byte digest exactly equals the public-source-derived Codex 0.147.0 line rejecting `tools.view_image`; the artifact was not reread. Replace that stale key with supported `--disable view_image`, strengthen its synthetic assertion, and keep execution/new-coordinate authority separate. |
+| `AGENT-EVAL-12B4` | Stage A terminal without a benchmark result; R11 correction focused-green at CloserFans `8a5c2f9`, with R12 parse-probe repair proposed | Supported `--disable view_image` replaces the stale strict key and focused typecheck/synthetic/mock gates pass. The old `exec --help` check did not load config; R12 proposes validating the full vector to an exact no-prompt boundary. Live probing and new-coordinate authority stay separate. |
 
 The separately reviewed `AGENT-EVAL-12B1` implementation is complete. The
 separately approved `AGENT-EVAL-12B2` implementation is also complete and its
@@ -5039,6 +5039,54 @@ validation. It does not authorize the live permission probe, private evidence,
 a new authorization ID/run root, or any Codex/provider/model invocation.
 Accounting remains 35/41.
 
+###### R11 implementation qualification and R12 parse-probe proposal
+
+CloserFans checkpoint `8a5c2f93080d828e73a1547ead8f5a6c870e0325`, parent
+`d1a270e0ad244db83979416193d03b146461b7b7`, and tree
+`d3e9aa900b5ac7a1efc014f33064769b316b0e40` implement exactly the approved
+two-file diff: eight insertions and one deletion. The contract SHA-256 is
+`1973d6a761adb56d752c99dd1c5f321ecc290a72d1d7785565bc87ff93fe867b`;
+the verifier SHA-256 is
+`4b3d76e72c330a6710b599e5247b21eb93ba443e0b952ff9a1d8944438d39d58`.
+The stale config key is absent, supported `--disable view_image` is present,
+and the exact synthetic assertions cover both facts.
+
+The owning focused `--canary-only` gate passed from a disposable clean
+installation. It includes template typecheck, Stage A synthetic containment,
+replay and failure paths, and the public mock CLI. It invoked no model. Both
+worktrees are clean, and no dependency tree was created in the isolated
+CloserFans worktree. Repository-wide checks remain omitted by design.
+
+That qualification does not yet justify the live permission probe. Source
+review found that its current `configParse` check executes the full root option
+prefix followed by `exec --help`. Clap satisfies help while parsing arguments,
+before `codex_exec::run_main` loads strict configuration. The historical green
+check therefore was not evidence that the full strict stack deserialized; the
+consumed v3 failure is concrete counterevidence.
+
+Freeze R12 as a non-authorizing one-file correction to
+`templates/emdash_benchmark/scripts/probe-emdash-canary-permissions.mts`:
+
+1. pass the complete `buildCodexArguments(...)` vector to the existing closed
+   `capture` helper instead of replacing its execution tail with `exec --help`;
+2. keep stdin attached to the helper's existing ignored/EOF channel and
+   require exact exit 1, empty stdout, and exact fixed stderr `No prompt
+   provided via stdin.\n`;
+3. retain the disposable empty host home, closed environment, 30-second bound,
+   all later permission/network/allowlisted-command probes, and cleanup; and
+4. validate the source edit only with typecheck and the focused synthetic/mock
+   canary gate. The actual `--permission-probe-only` invocation remains a
+   separate review after checkpoint.
+
+Codex 0.147.0 source establishes the ordering: strict configuration loads
+before prompt resolution, while schema loading and agent/session/provider work
+follow a nonempty prompt. With empty fake state and no inherited credentials
+or API environment, the exact no-prompt outcome is a local no-model boundary,
+not a benchmark attempt. Separate immutable review is mandatory before the
+one-file edit. No live probe, private evidence, new coordinate, provider/model,
+network, aggregate, integration, release, or cleanup is authorized. Accounting
+remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -5125,7 +5173,10 @@ On continuation:
    Codex 0.147.0 source-preimage equality above as exact diagnosis of stale
    strict key `tools.view_image` without another evidence read; treat exact
    proposal/review checkpoint `9d722d4` and the immutable review above as
-   authority only for the two-file local correction and synthetic tests; and
+   authority only for the two-file local correction and synthetic tests;
+   treat CloserFans `8a5c2f9`, tree `d3e9aa9`, as the focused-green R11
+   implementation and the R12 text above as non-authorizing until separately
+   reviewed; and
    forbid any retry or alternate coordinate without the amended implementation
    checkpoint, new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe

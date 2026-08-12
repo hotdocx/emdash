@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | Stage A terminal without a benchmark result; R11 identifies unsupported strict key `tools.view_image` and proposes a local correction | The public Codex 0.147.0 error template instantiated with the committed key is exactly 98 bytes and digest `74cb003...`, proving equality with R10 without rereading evidence. Replace it with supported `--disable view_image`; implementation, no-model preflight, and any new coordinate remain separately gated. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R11 correction focused-green at CloserFans `8a5c2f9`; R12 exact no-prompt parse probe proposed | Supported `--disable view_image` replaces the stale strict key and focused typecheck/synthetic/mock gates pass. The old `exec --help` preflight did not load config; R12 proposes validating the complete vector to the fixed no-prompt boundary. Live probing and every new coordinate remain separately gated. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6988,6 +6988,22 @@ so no consumed v3 lease or coordinate can be reused. Live no-model probing,
 private evidence, new coordinates, and provider/model execution remain
 unauthorized. Accounting remains 35/41.
 
+CloserFans `8a5c2f9`, tree `d3e9aa9`, now qualifies the exact R11 two-file
+implementation. Stale `tools.view_image` is absent, supported `--disable
+view_image` and its closed synthetic assertion are present, and the disposable
+clean-install typecheck plus focused synthetic/mock canary gate pass. No model,
+live permission probe, private evidence, dependency tree in the isolated
+worktree, or aggregate occurred.
+
+The dedicated plan freezes non-authorizing R12 after source review proved the
+old `exec --help` config check exits in argument parsing before strict config
+loads. The one-file correction must instead run the complete vector with the
+existing closed stdin and require exact exit 1/empty stdout/fixed `No prompt
+provided via stdin.\n` stderr. Codex loads strict config before resolving that
+empty prompt and reaches schema/agent/provider work only afterward. Separate
+review precedes the edit; the actual no-model permission probe remains a later
+gate. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7250,6 +7266,8 @@ unauthorized. Accounting remains 35/41.
 | `D-PA-255` | Classify the sole corrected R10 invocation as terminal fixed category `configuration` and prohibit rerun. | The closed record proves only a 98-byte, valid-UTF-8, single LF-terminated line with digest `74cb003...` matching no other fixed rule. No content or external effect occurred; finer diagnosis requires a separately reviewed non-content classifier grounded in local public Codex contracts. |
 | `D-PA-256` | Diagnose R10 by exact public-source preimage equality and freeze a non-authorizing `view_image` correction. | Codex 0.147.0's fixed strict-config template instantiated with committed `tools.view_image` is exactly 98 bytes and digest `74cb003...`, so no further private read is necessary. `view_image` is a stable feature, not a `ToolsToml` member; moving the disable to its supported CLI feature surface preserves intent. |
 | `D-PA-257` | Approve exact R11 proposal `9d722d4` only for the two-file `view_image` feature-surface correction and synthetic assertions. | The public CLI and stable feature catalog validate `--disable view_image`; strict config and all permission/capability values remain exact. The argument vector changes, so this approval explicitly excludes every consumed lease, live probe, coordinate, or provider action. |
+| `D-PA-258` | Preserve focused-green R11 at CloserFans `8a5c2f9`, tree `d3e9aa9`, without live execution. | The exact two-file diff moves only the image-tool disable, strengthens both presence and absence assertions, and passes the disposable typecheck/synthetic/mock canary gate. |
+| `D-PA-259` | Freeze R12 as a non-authorizing one-file repair of the no-model strict-config preflight. | `exec --help` terminates before config loading and missed the stale key. The complete vector with closed stdin loads strict config first and must stop at an exact fixed no-prompt outcome before schema or agent/provider work. |
 
 ## Validation And Checkpoint Policy
 
