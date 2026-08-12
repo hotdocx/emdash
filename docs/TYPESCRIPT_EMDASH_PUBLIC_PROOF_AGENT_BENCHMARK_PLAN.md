@@ -3744,6 +3744,52 @@ performance claim, benchmark result, or graduation. A later code/preflight
 review would be required before even proposing fresh coordinates. Accounting
 remains 35/41.
 
+###### Immutable R4 schema-normalization review
+
+Reviewed proposal checkpoint:
+`685ce818c15d9d582e880163ad23147a121f3781`, exact parent
+`d62a375ac2637241f224304c6feb9391bef88ac9`, exact tree
+`69ab5e849197fc0e8d06ed802751504322305689`. Complete plan SHA-256 values are:
+
+```text
+135ed479a231f020b6f617f0005d4e8c0ae594369e7499fa2f0ce7eeee3a346a  docs/TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md
+6c8a0e5d466c4ef45114beb768cb25bf590875c535fc52ddd59e363c3ca3b356  docs/TYPESCRIPT_EMDASH_PUBLIC_PROOF_AGENT_BENCHMARK_PLAN.md
+```
+
+The proposal preserves the accepted JSON-instance language: a single-value
+typed enum is extensionally equal to the former string `const`, adding an
+explicit string type to a string-valued enum rejects no intended disposition,
+and `$schema` is an annotation rather than an instance constraint. The result
+matches the object, typed-enum, required-field, closed-property, and string
+bound forms explicitly shown by the official
+[Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs).
+It neither claims that v2 failed because of the old form nor broadens the
+benchmark output.
+
+Decision: approve only the three-file R4 implementation from exact CloserFans
+checkpoint/tree `8276e962...`/`e03085a...`, with these controls:
+
+1. commit the exact normalized schema described above; do not change the
+   prompt, source, case, output values, note bound, required list, or closed
+   object policy;
+2. use structural deep equality in both the fake consumer and focused verifier
+   so JSON member ordering does not become a hidden contract;
+3. keep the fake fixture dependency-free except for Node built-ins, and run
+   schema verification before any fake scenario executes;
+4. do not edit `emdash-canary-real.mts`, `emdash-canary-contract.mts`, the root
+   operator, authorization constants, environment/sandbox policy, receipt
+   logic, or any v1/v2 artifact; and
+5. run only syntax/format/static checks and the existing bounded fake Stage A
+   canary, then inspect exact source/ancestry/status and absence of new
+   authorization/run state. No permission or repository aggregate is needed
+   because those boundaries are unchanged.
+
+The implementation checkpoint remains non-authorizing. Do not invoke a
+prompt/model/provider, inspect raw evidence, retry v1/v2, mint a new ID/root,
+create a real lease, or make a benchmark/performance/graduation claim. A
+separate exact code/preflight review remains mandatory before new coordinates
+may even be proposed. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
