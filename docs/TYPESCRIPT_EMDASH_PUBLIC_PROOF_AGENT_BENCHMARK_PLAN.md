@@ -4774,6 +4774,35 @@ retry, code edit, Codex/provider/model action, integration, push, deployment,
 release, cleanup, diagnosis, result, or graduation. Separate immutable review
 is mandatory. Accounting remains 35/41.
 
+###### Immutable R9 receipt-hash review and sole authorization
+
+Exact proposal checkpoint `c1145d7378046fdcea1b4d7d423b518bdddcb989`
+has parent `e6d507b32122456754fa6ec5bef6fea54bb349ee`, tree
+`4fbf0f8f97e95b6f3032117be3f81c099f322935`, master-plan SHA-256
+`f010316ba57883efb239b64989e44735a2528d407d92e16433b1081d30e3c681`,
+and this-plan SHA-256
+`18ffa3256a8e0e694185a2fc3a95461f6d215d55fff1cb6aced3b20372cc15da`.
+CloserFans remains clean at `7973127`/tree `bbf390d`; no evidence or code was
+accessed during review.
+
+Review accepts the exact command because the target is the already minimized
+receipt whose size, path, type, non-symlink status, owner, and mode are
+recorded; SHA-256 is one-way, non-content output already part of receipt
+provenance. The closed environment and exact coreutils binary expose no
+configuration, credentials, model, provider, network, sibling listing, or
+write authority.
+
+Under the standing unattended-approval delegation, authorize the frozen R9
+command exactly once after this checkpoint. Exit zero and one ordinary
+`sha256sum` line or any failure is terminal. The command must not be retried,
+redirected, generalized, supplied another path, or fed to a model. Post-command
+review may compare only the 64-hex digest with committed expected
+`f7c6f859ee8c2991657214ce91e2be81f7812b7c2c2ccc784f90ca928cb1129a`.
+
+This includes no classifier or stderr/lease/other-artifact access, code edit,
+Codex/provider/model action, integration, push, deployment, release, cleanup,
+benchmark/proof/performance claim, or graduation. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
