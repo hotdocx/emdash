@@ -4803,6 +4803,44 @@ This includes no classifier or stderr/lease/other-artifact access, code edit,
 Codex/provider/model action, integration, push, deployment, release, cleanup,
 benchmark/proof/performance claim, or graduation. Accounting remains 35/41.
 
+###### Sole R9 outcome and R10 unsupported-flag correction proposal
+
+The authorized R9 command ran once after checkpoint `c9b072b`, exited zero,
+and emitted one 180-byte line with SHA-256
+`778c7c806121c5585549662882cdfe20f00c90b988cb10806a45bea9799dbc16`.
+Its digest is exactly the classifier's expected
+`f7c6f859ee8c2991657214ce91e2be81f7812b7c2c2ccc784f90ca928cb1129a`.
+R9 is terminal and must not be rerun. Receipt content/provenance is therefore
+not the cause of `receipt-integrity`.
+
+A no-evidence runtime-constant probe of the exact Node 24.11.1 executable
+returns `O_RDONLY=0`, `O_NOFOLLOW=131072`, `noFollowInteger=true`, and
+`cloexecInteger=false`; `O_CLOEXEC` is absent and therefore omitted from JSON.
+The committed helper rejects when either `O_NOFOLLOW` or `O_CLOEXEC` is not an
+integer, before it calls `openSync`. Accepted path metadata and the matching
+digest eliminate every earlier receipt condition, so this unsupported constant
+check is the exact R7/R8 failure cause.
+
+Freeze R10 as a non-authorizing one-file correction from exact CloserFans
+`7973127`: in `scripts/classify-emdash-stage-a-stderr.mjs`, require only the
+available integer `O_NOFOLLOW` and open with `O_RDONLY | O_NOFOLLOW`. Remove
+only the `O_CLOEXEC` check and flag. The classifier imports no child-process
+primitive and static review prohibits every spawn/exec/fork path, so no child
+exists to inherit the synchronous descriptor; `finally` still closes it and
+process exit closes it on abnormal termination.
+
+All owner/mode/type/realpath, same-descriptor identity, `limit + 1` read,
+pre/post stability, expected hashes, fixed stages, classifier rules, outputs,
+and external authorities remain exact. Validation is exact one-file diff,
+absence of `O_CLOEXEC`, presence/integer runtime check for `O_NOFOLLOW`, syntax,
+unchanged synthetic verifier, static capability scan, unchanged authority
+hashes, and clean ancestry. No private main or aggregate is relevant.
+
+This proposal authorizes no code edit, classifier/evidence access, metadata or
+hash retry, Codex/provider/model action, integration, push, deployment,
+release, cleanup, result, or graduation. Separate immutable review is
+mandatory. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
