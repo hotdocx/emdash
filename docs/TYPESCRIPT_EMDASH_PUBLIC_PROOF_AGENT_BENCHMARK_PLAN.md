@@ -3996,6 +3996,52 @@ permission probe, absent candidate state, and one exact command. Any resulting
 authorization must remain terminal on every outcome. Accounting remains
 35/41.
 
+##### `AGENT-EVAL-12B4-R6` v3 at-call no-model preflight proposal
+
+The proposed preflight audits exact clean CloserFans checkpoint
+`0ea5b98fbdacb6f449ef78577aebb8c7277b69a6`, tree
+`149de95e39270ce007b645c7d11746b0266dfa44`, and exact proposed command:
+
+```text
+node scripts/run-emdash-stage-a-real.mjs --authorization-id emdash-stage-a-native-exact-local-premise-2026-08-12-v3 --run-root /home/user1/.emdash-stage-a/emdash-stage-a-native-exact-local-premise-2026-08-12-v3
+```
+
+The command is review data only and must not be invoked during this tranche.
+The audit may:
+
+1. reconstruct exact committed template bytes in one validated disposable
+   `/tmp/emdash-r6-preflight.*` directory through the exported snapshot helper;
+   record only commit, tree, entry count, manifest SHA-256, operator SHA-256,
+   and prompt/schema/source byte counts and SHA-256 values; then remove only
+   that validated disposable directory;
+2. in the same inherit-nothing environment used by the driver, run only
+   `codex --version` and `codex login status`, retaining exact CLI revision and
+   the non-secret `Logged in using ChatGPT` category but no credential data;
+3. parse the bounded existing model cache and retain only fetched timestamp,
+   selected `gpt-5.6-sol`/`3000`, default `low`, and high-effort support;
+4. run
+   `node --experimental-strip-types
+   scripts/verify-emdash-benchmark-template-runtime.ts
+   --permission-probe-only`, which performs a disposable clean install,
+   template typecheck, full config help parse, local `codex sandbox`
+   filesystem/network checks, and selected-case command without a prompt or
+   model turn; and
+5. recheck exact clean ancestry/status, absence of candidate v3 root/lease,
+   absence of worktree dependencies and temporary roots, and unchanged v1/v2
+   receipt plus v2 lease hashes.
+
+Do not run doctor/provider reachability again; R3 already recorded that
+broader health and R6 needs only the execution-critical local boundary. Do not
+invoke `codex exec` with stdin, the real operator, a model/provider turn, or a
+network-refreshing model command. Do not read credentials or raw v1/v2
+evidence, alter config/login/cache, create a lease/run root, retry v1/v2, edit
+code, or run any aggregate.
+
+This proposal changes plans only and requires separate immutable review before
+the probes. Green results would still not authorize the command: a later
+behavior-free checkpoint must record every exact value and explicitly
+authorize at most one terminal invocation. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact

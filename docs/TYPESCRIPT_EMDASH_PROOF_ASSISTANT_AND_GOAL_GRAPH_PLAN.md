@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R5 focused-green at CloserFans `0ea5b98`; exact at-call review required | Both guards contain v3 once and v1/v2 zero times; clean-install typecheck/fake matrix/public fake CLI and static containment are green. Candidate root/lease remain absent. Prompt execution and all provider effects remain denied pending fresh immutable review. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R6 v3 at-call no-model preflight proposed | Exact command is frozen as review data. Proposal permits only disposable committed snapshot hashes, closed version/login/cache facts, dedicated local permission probe, and clean/absent-state audit. Separate review is required before probes; real operator/provider execution remains denied. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6770,6 +6770,15 @@ no dependency tree, temporary root, model/provider call, or broader aggregate
 was introduced. A fresh immutable at-call review is mandatory before one
 command may be authorized. Accounting remains 35/41.
 
+The dedicated plan now freezes R6 as a non-authorizing at-call preflight for
+the exact v3 command. It permits only a disposable committed snapshot/hash
+audit, whitelisted closed CLI/login/model-cache facts, the dedicated local
+`--permission-probe-only` sandbox check, and clean/absent-state verification.
+It explicitly excludes doctor refresh, `codex exec` stdin, the real operator,
+raw evidence, state creation, code edits, and aggregates. Separate review is
+mandatory before probes, and a later behavior-free checkpoint is mandatory
+before one command. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7003,6 +7012,7 @@ command may be authorized. Accounting remains 35/41.
 | `D-PA-226` | Freeze a non-authorizing R5 rotation from terminal v2 to exact candidate v3 at both execution guards. | R4 is accepted and candidate ID/hash/root/lease absence are fixed, but committed guards correctly reject every fresh ID. Exact two-literal rotation plus a v3-present/v1-v2-absent static assertion is the only dependency-ready change; no invocation or runtime behavior is authorized. |
 | `D-PA-227` | Approve exact R5 proposal `4393382` only for its three-file literal/assertion implementation. | Candidate v3 is distinct, non-secret, hash-bound, and absent. Identical guard substitution plus v3-present/v1-v2-absent assertions preserve closed one-shot behavior while retiring consumed IDs; root/lease creation and every provider effect remain prohibited. |
 | `D-PA-228` | Preserve focused-green R5 implementation at CloserFans `0ea5b98`, tree `149de95`, without authorizing the v3 command. | Exact three-file hashes and static counts, operator/type syntax, clean-install typecheck, bounded fake matrix, public fake CLI, absent v3 root/lease, and unchanged terminal evidence are green. Fresh at-call source/input/host/permission review remains mandatory. |
+| `D-PA-229` | Freeze R6 as a non-authorizing no-model preflight for the exact v3 command. | Current code is focused-green, but one-shot authority requires fresh committed hashes, closed CLI/login/cache facts, local permission semantics, clean source, and absent coordinates. The proposal forbids the real operator/provider and requires another checkpoint before execution. |
 
 ## Validation And Checkpoint Policy
 
