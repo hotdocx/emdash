@@ -4407,6 +4407,44 @@ cleanup ran. These are omissions, not passes. This checkpoint remains
 non-authorizing; an exact code/evidence-access review is next. Accounting
 remains 35/41.
 
+###### R7 exact evidence-access proposal
+
+The next operation is a read-only diagnosis of the already terminal v3
+process, not a Codex retry or provider action. Freeze the sole candidate
+command as:
+
+```text
+/usr/bin/env -i HOME=/home/user1 LANG=C.UTF-8 LC_ALL=C.UTF-8 NO_COLOR=1 PATH=/usr/bin:/bin /home/user1/.nvm/versions/node/v24.11.1/bin/node /home/user1/closerfans-emdash-canary-v1/scripts/classify-emdash-stage-a-stderr.mjs
+```
+
+The Node executable SHA-256 is
+`5796fd9700e83170bc7ddfdf7f18858c794a9f91cb39dd6f9e95060b292f2563`.
+The command has no arguments beyond the exact committed script and supplies
+no inherited environment, configuration, cache, credential, network, model,
+provider, or output-file authority.
+
+Before execution, a separate behavior-free review may recheck clean exact
+CloserFans `04e58f9`/tree `5b150bc`, the two implementation hashes, unchanged
+operator/canary hashes, exact executable/hash, and metadata only for the four
+hard-bound private directories plus exact receipt, lease, and stderr files.
+Metadata output is limited to regular/directory/symlink booleans, current-user
+ownership, exact permission mode, byte size, and exact-realpath equality. It
+must not open or hash stderr, parse any artifact, list sibling evidence, or
+inspect timestamps, names beyond the already recorded paths, content, JSONL,
+final message, candidate, diff, replay, v1, or v2.
+
+If every code and metadata fact satisfies the committed classifier, a distinct
+plan checkpoint may authorize the frozen command exactly once. Successful
+execution must have exit zero, empty stderr, and one newline-terminated JSON
+object with exactly the reviewed nine keys and closed values. Fixed failure is
+also terminal and must not be retried. Only that one output line may be
+recorded; no raw content or new artifact may be displayed or written.
+
+This proposal authorizes no metadata probe, classifier execution, evidence
+read, provider/model action, Codex retry, integration, push, deployment,
+release, cleanup, result, or graduation. It requires separate immutable
+review. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
