@@ -7071,6 +7071,16 @@ rerun. Separate review precedes edits, and implementation remains subject to a
 new exact at-call audit before any provider consideration. Accounting remains
 35/41.
 
+Immutable review of exact R14 proposal `559f80c`, tree `9d48837`, confirms v3
+occurs only in both guards and the current-ID assertion; imported consumers do
+not duplicate it, and argument/permission builders do not read it. Proposed
+v4 ID/root hashes recompute exactly and both paths are absent. Delegated
+unattended authority approves only the three literal/assertion edits, exact
+v1/v2/v3 retirement checks, operator/static/diff hygiene, and one focused fake
+canary. R13 is carried forward without rerun. Implementation cannot create v4
+state or authorize a real call; a fresh at-call audit and review remain
+mandatory. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7339,6 +7349,7 @@ new exact at-call audit before any provider consideration. Accounting remains
 | `D-PA-261` | Preserve focused-green R12 checkpoint `9ea98c8` and freeze only a non-authorizing R13 no-model permission-probe proposal. | The exact one-file diff and focused clean-install/typecheck/synthetic/mock gate prove the corrected strict-vector source without executing the live member. Corrected R13 binds one offline owning command with executable-substitution/state-retention overrides cleared, a closed credential-free Codex environment, disposable state, exact no-prompt and sandbox checks, and terminal no-rerun semantics; separate immutable review remains mandatory. |
 | `D-PA-262` | Approve exact corrected R13 proposal `1ae9e70` for one offline local no-model permission-probe execution under delegated unattended authority. | Static review binds clean CloserFans `9ea98c8`, exact sources/launcher/runtime, early focused return, side-effect-free operator import, closed child environment, EOF/no-prompt stop, fixture-only sandbox checks, override clearing, offline npm, cleanup, and terminal one-shot semantics. No provider/model or later effect is authorized. |
 | `D-PA-263` | Record terminal-green R13 and freeze only a non-authorizing three-file v4 guard-rotation proposal. | The sole reviewed probe passed the corrected strict vector and local sandbox boundaries without a model. Terminal v3 cannot be reused; fresh absent v4 coordinates permit a guard-only edit whose constant does not affect arguments or permissions. Separate review, implementation, and later at-call audit remain mandatory. |
+| `D-PA-264` | Approve exact R14 proposal `559f80c` only for the three-file v4 guard rotation and focused fake/static validation. | V3 has exactly the expected three literal uses, the runtime builders are independent of the guard, v4 hashes and absent paths are exact, and R13 directly covers the unchanged vector. Implementation remains non-authorizing and preserves every terminal artifact. |
 
 ## Validation And Checkpoint Policy
 

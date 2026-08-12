@@ -5300,6 +5300,52 @@ provider, prompt, private evidence, lease/run-root creation, retry, alternate
 coordinate, integration, release, cleanup, benchmark result, or graduation is
 authorized. Accounting remains 35/41.
 
+###### Immutable R14 v4 guard-rotation review
+
+Exact proposal checkpoint `559f80c0620aa7262d00022f6d9810191afb6007`,
+parent `9587ce22f91fed41d46e8de80b95abe8d15cc6ed`, and tree
+`9d48837ba8fbee2b2789902fa3386e24f63e1af0` have governing-plan
+SHA-256 `10eab4b65e2bf68a5bcf77f77c9abf57f1db0a1aa51fffad611ea9971a5f4291`
+and this-plan SHA-256
+`4fda28336ac4b93a35c615314ec2749507ee991c1ea841d91cd245541b68f45a`.
+Both worktrees are clean at this proposal and exact CloserFans `9ea98c8`/tree
+`070792a`.
+
+Static review finds exact v3 once in each execution guard and once in the
+verifier's current-ID assertion. The internal real runner imports the contract
+constant rather than duplicating its value; the mock verifier also imports it.
+Neither `buildCodexArguments` nor `buildPermissionOverrides` reads that
+constant. Consequently the proposed identity rotation changes no Codex
+argument, permission-profile byte, prompt, evaluator, or receipt behavior, and
+the successful R13 no-model result remains direct evidence for the complete
+runtime vector.
+
+The v4 identifier is a monotone non-secret successor to terminal v1/v2/v3. Its
+recorded ID and run-root SHA-256 values recompute exactly, and both proposed
+candidate paths are absent. The edit does not interpret, replace, remove, or
+retry any prior authorization or run artifact.
+
+Under delegated unattended authority, approve exactly the three proposed
+literal/assertion edits from CloserFans `9ea98c8`, subject to these conditions:
+
+1. each execution guard must contain exact v4 once and contain no exact v1,
+   v2, or v3;
+2. the root verifier must require exact v4 in both guards and require exact
+   v1/v2/v3 absence;
+3. no other source, prompt, schema, model, argument, permission, lease, stream,
+   evaluator, receipt, or evidence behavior may change;
+4. run only operator syntax, stripped-TypeScript/static checks, diff/ancestry/
+   status hygiene, and one disposable `--canary-only` gate; carry R13 forward
+   without rerunning it; and
+5. leave v4 root/lease absent and all terminal state untouched.
+
+The implementation checkpoint remains non-authorizing. Do not invoke the real
+operator, create v4 state, run a model/provider turn, access private evidence,
+retry or mutate prior coordinates, integrate, release, clean up, or make a
+benchmark/performance/graduation claim. A new exact at-call audit and separate
+authorization checkpoint remain mandatory. Human direction may supersede this
+review before implementation. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
