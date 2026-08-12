@@ -4877,6 +4877,30 @@ This review authorizes no classifier/evidence access, metadata/hash retry,
 Codex/provider/model action, integration, push, deployment, release, cleanup,
 diagnosis, result, or graduation. Accounting remains 35/41.
 
+###### R10 unsupported-flag implementation qualification
+
+CloserFans checkpoint `d1a270e0ad244db83979416193d03b146461b7b7`,
+parent `7973127ef1349d89aafbeb22756cb3aa3e08e375`, and tree
+`96e705071791fba2a290cccfaa5d42ef40ce7b8b` change only
+`scripts/classify-emdash-stage-a-stderr.mjs` by two insertions and five
+format-inclusive deletions. The new classifier SHA-256 is
+`4105a7b5fe80b9deb046a5fb4a5a6b608b5166624aa2d069ea58d01cee7e6e0e`.
+Verifier, operator, and canary hashes remain `4a86abe...`, `774752d...`, and
+`2b7cb75...`.
+
+The diff removes both `O_CLOEXEC` occurrences, retains the exact integer guard
+for `O_NOFOLLOW`, and opens only `O_RDONLY | O_NOFOLLOW`. Exact Node projects
+`O_NOFOLLOW=131072`. Both syntax checks and the unchanged full synthetic
+verifier pass. Static capability scan has no matches; `O_CLOEXEC` absence,
+`O_NOFOLLOW`/`openSync` presence, exact one-file diff, whitespace, hashes,
+ancestry, and clean-tree gates pass.
+
+No private main, receipt/lease/stderr or other evidence, metadata/hash probe,
+Codex/provider/model, configuration, credential, network, install, aggregate,
+push, merge, deployment, release, or cleanup ran. These are omissions, not
+passes. The checkpoint remains non-authorizing pending an exact code/access
+review. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
