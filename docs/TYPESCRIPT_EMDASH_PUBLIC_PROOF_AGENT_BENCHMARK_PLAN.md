@@ -5457,6 +5457,52 @@ checkpoint records every exact value and approves at most one exact command.
 Human direction may supersede this review before execution. Accounting remains
 35/41.
 
+###### R15 measured v4 at-call audit result
+
+R15 is green without invoking the review-data command, `codex exec`, a
+provider, or a model. The initial shell spelling was rejected by the execution
+wrapper before process creation because it contained a recursively destructive
+cleanup token. No temp root or audit operation existed, so the one reviewed
+audit remained unconsumed. The same approved operations then ran once in an
+in-memory Node program whose validated cleanup used `fs.rm` on only its newly
+allocated root.
+
+The reconstructed snapshot matched exact clean CloserFans commit/tree
+`1074fc75e2ba8a043b1c46c1e5d72a6646e772eb`/
+`50d069d0acae66efaffa9dad9fde24d46a9f511c`, contained 19 tracked entries,
+and had manifest SHA-256
+`1459fe26d9bf348d355d4867b05fca9944a65e719be927f4b278e47fafa5e9b8`.
+Exact committed input measurements are:
+
+```text
+  409  a33c63dccf3a687484358b326dfbf41d1d668ad0fe1c7025b6b3c6aedf8f0978  scripts/emdash-canary-output.schema.json
+ 1704  117768e52381ede1b23f3bf4c43064e526daa6a25f3d8d4b0c3c879ffd7574ed  scripts/emdash-canary-prompt.txt
+ 3593  0c104f3888c61ce669958c44051ea65a153d9fbaea3c9c37139e6325b310eb84  benchmark-run.emdash.ts
+ 9910  334b03ad8aae9071586549df4b00f51433c173d4c0fd3038d706785ef05627f0  scripts/run-emdash-stage-a-real.mjs
+```
+
+The closed projection contained exactly `CI`, `CODEX_HOME`, `HOME`, `LANG`,
+`LC_ALL`, `NO_COLOR`, `PATH`, and `TMPDIR`. It observed `codex-cli 0.147.0`,
+empty unreviewed channels, exact category `Logged in using ChatGPT`, and this
+bounded jq-selected cache tuple:
+
+```json
+{"fetchedAt":"2026-08-12T22:20:50.097073702Z","slug":"gpt-5.6-sol","compHash":"3000","defaultVerbosity":"low","highReasoningSupported":true}
+```
+
+R13's corrected full permission vector and R14's focused fake/type gate are
+carried forward as green. Candidate v4 root and lease remain absent; terminal
+v3 root/lease remain present by metadata only. Both worktrees remained clean,
+the isolated worktree has no dependency tree, and the validated new temporary
+root was removed. No credential, complete model cache, terminal private file,
+prompt/source content, provider reachability, usage, or cost was read or
+retained.
+
+R15 is consumed and must not be rerun. It establishes current at-call
+readiness only. It does not authorize the real operator, create v4 state,
+produce a benchmark result, or advance accounting beyond 35/41. A separate
+immutable review must decide whether the exact command may execute once.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact

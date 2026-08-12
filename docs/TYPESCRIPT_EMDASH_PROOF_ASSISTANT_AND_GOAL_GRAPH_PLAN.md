@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R14 v4 guard rotation focused-green at CloserFans `1074fc7`; R15 behavior-free at-call audit proposed | Exact v4 guard/retirement assertions and focused fake/type gates pass; R13 covers the unchanged permission vector. A bounded committed-byte/login/model-cache/absent-state audit requires separate review before any one-call authorization. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R15 v4 at-call audit green; separate one-call authorization review pending | Exact committed source/manifest/inputs, closed CLI/login/model-cache state, carried R13/R14 gates, absent v4 state, terminal-state presence, and cleanup are green without a model. The real operator remains unauthorized until a distinct immutable review. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -7110,6 +7110,19 @@ and every failure consumes the audit. No real command, model/provider, state,
 private read, edit, integration, release, unrelated cleanup, or aggregate is
 authorized. Accounting remains 35/41.
 
+R15 then completed once in an in-memory Node audit. A prior shell spelling was
+rejected by the wrapper before process creation due to its cleanup token and
+performed no audit operation. Exact CloserFans `1074fc7`/tree `50d069d` yielded
+19 entries and manifest `1459fe26...`; schema/prompt/source hashes remain
+`a33c63d...`/`117768e...`/`0c104f3...`, while the v4 operator is 9,910 bytes at
+`334b03a...`. The exact eight-key environment observed Codex 0.147.0, ChatGPT
+login category, and cache tuple `gpt-5.6-sol`/`3000`/`low`/high fetched at
+`2026-08-12T22:20:50.097073702Z`. R13/R14 are carried green, v4 paths remain
+absent, terminal v3 metadata remains present, both worktrees/no-dependency
+state are clean, and the validated temp root is removed. No model, provider,
+credential, full cache, or private artifact was accessed. R15 is consumed and
+still non-authorizing. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7381,6 +7394,7 @@ authorized. Accounting remains 35/41.
 | `D-PA-264` | Approve exact R14 proposal `559f80c` only for the three-file v4 guard rotation and focused fake/static validation. | V3 has exactly the expected three literal uses, the runtime builders are independent of the guard, v4 hashes and absent paths are exact, and R13 directly covers the unchanged vector. Implementation remains non-authorizing and preserves every terminal artifact. |
 | `D-PA-265` | Preserve focused-green v4 guard checkpoint `1074fc7` and freeze only a non-authorizing R15 behavior-free at-call audit. | Exact identity-only implementation and mock/static gates pass with v4 state absent. The bounded audit may bind committed bytes, non-secret closed login/model-cache state, carried R13/R14 evidence, and absence/cleanliness; a separate review and later one-call authorization remain mandatory. |
 | `D-PA-266` | Approve exact R15 proposal `27df1b1` for one bounded behavior-free v4 at-call audit under delegated unattended authority. | Import-safe committed snapshotting, an exact eight-key closed Codex version/login projection, bounded jq-selected cache tuple, carried unchanged gates, metadata-only state checks, and validated temp-only cleanup expose no prompt, model turn, credential, or private evidence. Green results still require separate one-call authorization. |
+| `D-PA-267` | Record R15 as green, consumed, and non-authorizing. | Exact committed bytes, closed CLI/login/model tuple, carried gates, absent v4 state, terminal metadata, clean worktrees, and cleanup passed. The wrapper rejected one pre-process shell spelling but no audit operation occurred before the single successful in-memory audit. No model/provider or private read occurred. |
 
 ## Validation And Checkpoint Policy
 
