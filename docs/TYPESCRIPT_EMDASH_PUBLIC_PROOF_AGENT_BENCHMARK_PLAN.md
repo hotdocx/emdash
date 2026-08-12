@@ -3614,6 +3614,84 @@ alter config/login, use a network-refreshing model command, retry, create a new
 authorization coordinate, edit code, or mutate external state. A diagnosed
 correction requires a later proposal and review. Accounting remains 35/41.
 
+###### R3 measured diagnosis: parser and host health green; turn-start boundary unresolved
+
+The approved R3 audit completed without a prompt, model turn, retry, code edit,
+or access to the private v1/v2 evidence. It reconstructed one clean disposable
+copy from exact committed CloserFans checkpoint `8276e96`. The installed
+manifest contained 19 entries and matched expected SHA-256
+`28c06be7b4feeb8077237e82b4524b00f6f88cf5bf40f22d72c0305380dadb82`.
+The reconstructed 69-entry argument vector placed `exec` at index 59 and
+matched receipt-bound SHA-256
+`cdca618e4eed081e622b1a3e7fef17be23d5d0d04e32dce85bae6268ad3a4592`.
+Replacing only the terminal stdin marker with `--help` returned zero, printed
+the expected usage, and left stderr empty. The complete reviewed global and
+post-`exec` parser boundary is therefore green; this does not exercise schema
+submission or start a turn.
+
+The whitelisted `codex doctor --json` projection returned zero with overall
+status `ok`, Codex `0.147.0`, and `ok` classifications for installation,
+configuration loading, auth credentials, runtime, system, state, Git,
+sandbox, terminal, MCP, app-server, updates, network environment, provider
+reachability, and WebSocket reachability. The command's documented health
+checks did contact provider/WebSocket health endpoints; they did not submit a
+prompt or request a model completion. No full diagnostic report is retained.
+The first `features list` projection returned one only because that command
+does not accept the global `--strict-config` option. Removing only that
+unsupported diagnostic option returned zero and confirmed `hooks`, `plugins`,
+`remote_plugin`, `plugin_sharing`, `recommended_plugins`, `skill_search`,
+`skill_mcp_dependency_install`, and `multi_agent` disabled. This limitation of
+the diagnostic subcommand is not evidence about `exec`. Bundled-model
+inspection returned zero, parsed as JSON, selected `gpt-5.6-sol` with
+composition hash `3000`, default effort `low`, and `high` effort support, and
+did not refresh the model catalog.
+
+Committed input and path checks also passed. The 421-byte output schema has
+SHA-256 `f8935691d02f44d7c9b2d0ad1c96559c985c5596ecc210c3c03390a0680a8e06`;
+the prompt and source hashes remain respectively
+`117768e52381ede1b23f3bf4c43064e526daa6a25f3d8d4b0c3c879ffd7574ed` and
+`0c104f3888c61ce669958c44051ea65a153d9fbaea3c9c37139e6325b310eb84`
+as recorded by the terminal receipt audit. The private schema copy was mode
+0600; the agent workspace, private evidence, and
+provider temporary directory were mode 0700; and the clean agent workspace
+had empty Git status. JSON parsing and structural inspection establish an
+object root, exactly three required properties, and
+`additionalProperties: false`.
+
+The official
+[Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs)
+requires an object root, every property in `required`, and
+`additionalProperties: false`; it documents enums and ordinary-model string
+length constraints, and the committed schema satisfies those requirements.
+The guide does not explicitly specify whether a top-level `$schema` annotation
+or a property expressed solely with `const` belongs to the supported subset.
+The installed CLI's local contract establishes that `--output-schema` reads
+and JSON-parses a file, but exposes no no-model command that validates the
+remote Structured Outputs subset. An auxiliary read-only inspection of the
+installed npm wrapper/native string inventory after the documentation lookup
+found only local read/JSON error surfaces and did not inspect configuration,
+credentials, or run evidence. It was not one of the named R3 projections, so
+it is recorded as a non-authorizing observation and is not used to claim a
+cause.
+
+R3 therefore rejects several broad hypotheses but does **not** prove the root
+cause. Full argument parsing, ordinary committed paths, selected bundled
+model, disabled optional features, redacted auth/runtime health, and the
+documented portions of the schema are green. The remaining measured boundary
+is schema submission or subsequent remote turn initialization. The 95 ms
+terminal receipt still cannot prove whether a remote request began, and raw
+stderr/JSONL remains intentionally uninspected. The safest next experiment is
+a separately proposed, fake/no-model-tested normalization of the schema to
+only the guide's explicit example forms; that would be a compatibility
+hardening experiment, not proof that the original schema caused v2. No code
+edit, new coordinate, provider call, retry, benchmark result, or graduation
+is authorized by this diagnosis. Accounting remains 35/41.
+
+The disposable directory was under the validated prefix
+`/tmp/emdash-r3-diagnosis.*`. A subsequent host shutdown cleared `/tmp`; on
+recovery the exact path was absent. No bootstrap, run root, lease, or private
+evidence was removed or changed.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact

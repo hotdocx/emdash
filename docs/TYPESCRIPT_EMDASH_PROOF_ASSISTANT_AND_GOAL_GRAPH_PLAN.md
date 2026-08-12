@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | bounded R3 no-model process-start diagnosis approved | Review of `de1f00e` permits only committed-argument full help parsing, whitelisted redacted doctor/features/bundled-model facts, and committed schema/path audits. Prompt execution, provider/model access, raw evidence, retry, and code edits remain denied. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R3 complete; schema-submission/turn-start boundary unresolved | Receipt-bound full help parsing, whitelisted redacted doctor/features/bundled-model facts, and committed schema/path audits are green. The documented schema subset is satisfied, but official/local no-model surfaces do not settle top-level `$schema`/bare `const` acceptance or remote turn initialization. A separately reviewed compatibility-hardening proposal is required before any code edit; prompt execution, raw evidence, retry, and new coordinates remain denied. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6684,6 +6684,26 @@ inspection to committed inputs and ordinary path/mode/Git state. No prompt,
 provider, raw evidence, retry, or code edit is authorized. Accounting remains
 35/41.
 
+R3 is now complete as an honest unresolved diagnosis. Exact committed argv
+matches receipt hash
+`cdca618e4eed081e622b1a3e7fef17be23d5d0d04e32dce85bae6268ad3a4592`;
+replacing only the stdin marker with help
+parses all 69 arguments and exits zero. Redacted doctor health, the selected
+bundled `gpt-5.6-sol`/`3000` model tuple, the eight named disabled features,
+committed paths/modes, clean source, and local JSON parsing are green. Doctor's
+provider/WebSocket reachability checks contacted health endpoints but no
+prompt or model completion was requested. The official Structured Outputs
+contract confirms the object root, complete `required`, closed properties,
+enums, and ordinary-model length constraint, while leaving acceptance of the
+top-level `$schema` annotation and bare `const` form unstated. No supported
+local no-model subset validator was found in the documented/help surfaces.
+The boundary is therefore narrowed to
+schema submission or subsequent remote turn initialization, not diagnosed as
+one cause. Raw evidence remains uninspected and v2 remains terminal. A later
+proposal may normalize only the uncertain schema forms and test them with the
+fake/no-model harness; this record authorizes no code edit, coordinate, retry,
+provider call, result, or graduation. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6909,6 +6929,7 @@ provider, raw evidence, retry, or code edit is authorized. Accounting remains
 | `D-PA-218` | Classify the sole v2 invocation as a terminal spawned `process-failure` and prohibit retry. | Receipt `c97c1f8` and lease `6dce7e8` bind exact provenance. The child exited 1 in 95 ms with incomplete stream, zero commands/changes, no valid final message, null usage/outcome, and no proof/performance evidence. Any diagnosis remains separately no-model. |
 | `D-PA-219` | Freeze a non-authorizing R3 no-model diagnosis of the v2 pre-turn process failure. | Official/local contracts plus the minimized receipt narrow the boundary to post-`exec` parsing/schema/path, effective feature/config, model/provider availability, or redacted auth/runtime health. Only no-prompt help, redacted doctor/model/feature, and committed-input audits are proposed; raw evidence and retry remain forbidden. |
 | `D-PA-220` | Approve exact R3 proposal `de1f00e` only for receipt-bound no-prompt parsing and whitelisted redacted diagnostics. | Official and local command contracts provide read-only help/doctor/features/bundled-model surfaces. The review prohibits full diagnostic retention, model refresh, prompt execution, evidence access, retry, and code changes. |
+| `D-PA-221` | Close R3 as an unresolved schema-submission/turn-start diagnosis rather than inventing a root cause. | Full argv parsing, selected model/features, redacted auth/runtime health, committed paths, JSON parsing, and every explicitly documented schema requirement are green. Official/local no-model contracts do not settle top-level `$schema`/bare `const` acceptance or remote turn initialization. V2 remains terminal, raw evidence uninspected, and a separately reviewed compatibility-hardening proposal is required before editing code or considering new coordinates. |
 
 ## Validation And Checkpoint Policy
 
