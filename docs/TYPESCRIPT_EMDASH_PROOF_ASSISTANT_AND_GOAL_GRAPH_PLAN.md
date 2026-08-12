@@ -6977,6 +6977,17 @@ remain unchanged. Separate immutable review precedes edits; a later no-model
 config/permission probe and every provider/new-coordinate action remain
 separately gated. Accounting remains 35/41.
 
+Immutable review of exact R11 proposal `9d722d4`, tree `c999e99`, approves
+only the two-file local correction and fake/synthetic validation. Official
+Codex 0.147.0 owns `view_image` as a stable feature and maps `--disable` to the
+feature namespace already used by the canary. The correction preserves strict
+config and deny intent; the verifier must prove the supported disable is
+present and stale `tools.view_image` absent. Permission-profile bytes remain
+unchanged, while the complete argument-vector digest intentionally changes,
+so no consumed v3 lease or coordinate can be reused. Live no-model probing,
+private evidence, new coordinates, and provider/model execution remain
+unauthorized. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7238,6 +7249,7 @@ separately gated. Accounting remains 35/41.
 | `D-PA-254` | Authorize exactly one corrected R10 classifier command after qualification `d51b992`. | Exact code, supported mandatory no-follow flag, accepted path metadata and receipt digest, unchanged bounded reads/rules/outputs, executable, and closed environment satisfy the privacy boundary without any provider action. |
 | `D-PA-255` | Classify the sole corrected R10 invocation as terminal fixed category `configuration` and prohibit rerun. | The closed record proves only a 98-byte, valid-UTF-8, single LF-terminated line with digest `74cb003...` matching no other fixed rule. No content or external effect occurred; finer diagnosis requires a separately reviewed non-content classifier grounded in local public Codex contracts. |
 | `D-PA-256` | Diagnose R10 by exact public-source preimage equality and freeze a non-authorizing `view_image` correction. | Codex 0.147.0's fixed strict-config template instantiated with committed `tools.view_image` is exactly 98 bytes and digest `74cb003...`, so no further private read is necessary. `view_image` is a stable feature, not a `ToolsToml` member; moving the disable to its supported CLI feature surface preserves intent. |
+| `D-PA-257` | Approve exact R11 proposal `9d722d4` only for the two-file `view_image` feature-surface correction and synthetic assertions. | The public CLI and stable feature catalog validate `--disable view_image`; strict config and all permission/capability values remain exact. The argument vector changes, so this approval explicitly excludes every consumed lease, live probe, coordinate, or provider action. |
 
 ## Validation And Checkpoint Policy
 

@@ -5012,6 +5012,33 @@ private evidence, Codex/provider/model execution, credential, network,
 install, aggregate, push, merge, deployment, release, or cleanup is
 authorized. Accounting remains 35/41.
 
+###### Immutable R11 correction review
+
+Exact proposal checkpoint `9d722d4a5a9e3d95d23d5a65d554885c2683455b`
+has parent `b6b15638116a428ef93fb1328a1059afd92c9f00`, tree
+`c999e9995742c06a65377d5424f4eab0369e93aa`, master-plan SHA-256
+`0f2bb32897332196d057a35512a0f604d574c393cc90e9b4b86d73ef44f032c3`,
+and this-plan SHA-256
+`e882ce7ef7d99fb074bb88f3f4ad2270992263f86f77d41fb667ac4e1d5a7c17`.
+Both project worktrees are clean at the recorded checkpoints.
+
+Review approves exactly the proposed two-file correction. Codex 0.147.0's
+own catalog marks `view_image` stable and the public CLI maps `--disable NAME`
+to `features.NAME=false`; the same argument surface already owns eight nearby
+canary disables. Removing the rejected `tools.view_image` pair and adding the
+supported feature pair therefore preserves deny-by-construction intent while
+retaining strict validation. Adding `view_image` to the verifier's closed
+disabled-feature list plus an explicit stale-key absence assertion proves both
+sides of that move.
+
+No permission-profile value changes, so `permissionProfileDigest` semantics
+remain exact. The complete argument-vector digest will intentionally change;
+therefore the consumed v3 lease/authorization/run root cannot be reused or
+relabelled. This review authorizes only the two source edits and fake/synthetic
+validation. It does not authorize the live permission probe, private evidence,
+a new authorization ID/run root, or any Codex/provider/model invocation.
+Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
@@ -5096,7 +5123,9 @@ On continuation:
    98-byte line matches only fixed category `configuration`; never rerun any
    consumed command or inspect the private line directly; treat the official
    Codex 0.147.0 source-preimage equality above as exact diagnosis of stale
-   strict key `tools.view_image` without another evidence read; and
+   strict key `tools.view_image` without another evidence read; treat exact
+   proposal/review checkpoint `9d722d4` and the immutable review above as
+   authority only for the two-file local correction and synthetic tests; and
    forbid any retry or alternate coordinate without the amended implementation
    checkpoint, new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe
