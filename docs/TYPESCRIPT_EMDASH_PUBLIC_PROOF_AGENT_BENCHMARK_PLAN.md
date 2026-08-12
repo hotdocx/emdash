@@ -4518,6 +4518,35 @@ retry, provider/model action, Codex retry, integration, push, deployment,
 release, cleanup, diagnosis, result, or graduation. It requires separate
 immutable review. Accounting remains 35/41.
 
+###### Immutable R7 metadata-shape correction review
+
+Exact correction checkpoint `cc5db11dae570615340be34f3bad5c7726876fa4`
+has parent `64d60e6be81f4f95c0c5a433d7f56269599f8cec`, tree
+`476aeaa98bb3da1ddccff138f3fdedc487dfc3d4`, master-plan SHA-256
+`dcd36472cbfc4f19231f45c0785845bdb2b87230d34263bab6c5f0a668801bda`,
+and this-plan SHA-256
+`0cb370d4dddce87d437f4bb14b26965635438a3c8760470684a21668da3a79ae`.
+No new filesystem probe or artifact access was used for this review.
+
+The hash-bound recorded array has exactly seven entries and exactly one
+unreviewed key. For every directory entry, `mode` and `expectedMode` are both
+the fixed string `700`; for every file entry they are both `600`. The added
+property therefore contributes no information beyond the already authorized
+mode and does not alter any required fact. Every kind, non-symlink,
+current-owner, mode, bounded-size, and exact-realpath condition is true.
+
+Under the standing unattended-approval delegation, review accepts only this
+exact output as sufficient metadata qualification. This is a narrow
+supersession of the closed-shape condition, not permission for arbitrary extra
+keys or a declaration that the original probe conformed. The consumed probe
+remains nonconforming and must not be rerun.
+
+Acceptance makes a separate behavior-free authorization checkpoint
+dependency-ready. This review does not itself authorize the classifier,
+stderr access, metadata retry, provider/model action, Codex retry, integration,
+push, deployment, release, cleanup, diagnosis, result, or graduation.
+Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
