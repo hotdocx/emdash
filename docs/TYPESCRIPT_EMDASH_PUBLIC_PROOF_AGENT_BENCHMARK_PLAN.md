@@ -4699,6 +4699,44 @@ deployment, release, or cleanup ran. These are omissions, not passes. R8
 remains non-authorizing pending an exact code/access review. Accounting remains
 35/41.
 
+###### Immutable R8 code/access review and sole authorization
+
+Exact qualification checkpoint `54af912674b61e3316ae9e9bda1323eb7cad3f54`
+has parent `547e367967df5855954ea4f43b513e25edab95a3`, tree
+`c88947b48d79a8a8b3073a6f9820405aeefea1ec`, master-plan SHA-256
+`72c269e545c8ff3899451524fe055a6c7e2b0e05271b270059e06caef661bf52`,
+and this-plan SHA-256
+`5ceece9517c03c128dbe61690986e71385127ad6b7c346fb632630d2eda7ac34`.
+CloserFans is clean at exact `7973127`/tree `bbf390d`, 0/10 from preserved
+`master`; classifier/verifier, operator/canary, and Node hashes are exactly the
+five values recorded above.
+
+Code review confirms that only failure projection changed. Every directory,
+path, file, expected receipt/lease hash, owner/mode check, descriptor flag,
+read bound, stability test, classifier rule, and success output is unchanged.
+Each wrapper catches without retaining its input and throws a frozen non-Error
+token with one stage constant. Main projects only that constant or `internal`.
+The accepted metadata result `906e40f...` therefore still satisfies all
+unchanged access preconditions; no metadata rerun is needed or authorized.
+
+Under the standing unattended-approval delegation, authorize exactly one R8
+invocation after this behavior-free checkpoint:
+
+```text
+/usr/bin/env -i HOME=/home/user1 LANG=C.UTF-8 LC_ALL=C.UTF-8 NO_COLOR=1 PATH=/usr/bin:/bin /home/user1/.nvm/versions/node/v24.11.1/bin/node /home/user1/closerfans-emdash-canary-v1/scripts/classify-emdash-stage-a-stderr.mjs
+```
+
+Only one nine-key classification line on stdout or one three-key staged
+failure line on stderr may be observed. Every exit, stage, classification,
+ambiguous, or unclassified outcome is terminal; the command must not be
+retried, redirected, parameterized, or supplied to another model. This is a
+local read of preserved terminal evidence, not a Codex/provider/model action.
+
+No benchmark/proof/performance claim, integration, push, deployment, release,
+cleanup, Stage B/C, or graduation is authorized. Post-command review remains
+limited to the fixed output, exit/channel shape, clean code state, and recorded
+provenance. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
