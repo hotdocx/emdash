@@ -4301,6 +4301,73 @@ This proposal authorizes no edit, classifier execution, raw evidence read,
 provider/model access, coordinate, retry, cleanup, result, or graduation. It
 requires separate immutable review. Accounting remains 35/41.
 
+###### Immutable R7 proposal review
+
+Exact proposal checkpoint `43a8a9f057439497f7f481832fbc3fcfc6605ce4`
+has parent `0603dae490b2d2424e4e58dcd82fdad4693f6b43`, tree
+`70231c703ab7c5a40035683b879747f783023fc0`, master-plan SHA-256
+`f930312f407204ded15ae8545761e1609159160090033eb37dd8c0b9a6ef254d`,
+and this-plan SHA-256
+`f239ee4d520c14037af4d5b85385e26ebcb2861d0278f48b47b705bfd6ade27c`.
+The implementation baseline is clean CloserFans
+`0ea5b98fbdacb6f449ef78577aebb8c7277b69a6`, tree
+`149de95e39270ce007b645c7d11746b0266dfa44`; both proposed paths are
+absent. The unchanged root operator and canary owner have SHA-256
+`774752d0459d405b352d859f71cd0d3c1a275a328708899f9434032019c4854a`
+and `2b7cb752a752faf5ed507d613982249f8253c64cb1dea75772aa146a54bb00d5`.
+
+Under the standing unattended-approval delegation, review approves only the
+two new local scripts, subject to these corrections and conditions:
+
+1. The pure function accepts bytes, rejects more than exactly 4,194,304 bytes
+   with a constant error, and never performs I/O. Its output keys are exactly
+   revision, target authorization-ID SHA-256, byte count, content SHA-256,
+   UTF-8 validity, LF-delimited line count, terminal-LF boolean, matched fixed
+   rule IDs, and status. Empty input has zero lines and no terminal LF; for
+   non-empty input line count is LF count plus one only when the last byte is
+   not LF, including for invalid UTF-8.
+2. Fatal UTF-8 decoding precedes matching. Empty and invalid input select
+   `empty` and `non-utf8`; zero, one, or multiple matches select
+   `unclassified`, `classified`, or `ambiguous`. Matched IDs are deduplicated
+   in the fixed rule-table order. Patterns must be bounded, capture-free in
+   their use, and may influence only this constant vocabulary.
+3. The proposal's phrase “no raw-derived string” excludes content-bearing or
+   reversible text. It still permits the explicitly reviewed digest, numeric
+   counts, booleans, and selection among fixed rule/status constants. No
+   substring, capture, exception message, path, or arbitrary property key may
+   cross the process boundary.
+4. The no-argument main is hard-bound to the exact absolute v3 run, receipt,
+   stderr, and lease paths plus full receipt SHA-256
+   `f7c6f859ee8c2991657214ce91e2be81f7812b7c2c2ccc784f90ca928cb1129a`
+   and lease SHA-256
+   `da092debaa617891847a6b29a0e4c7fddace0726153e2679d1640e7e662e4bf4`.
+   It validates non-symlink private directories, current-user ownership,
+   exact 0700 directory/0600 file modes, regular files, bounded metadata, and
+   exact metadata hashes before opening stderr.
+5. Every file is opened read-only with `O_NOFOLLOW`; `fstat` and bounded read
+   use that same descriptor, followed by a stability check before close. This
+   is the required meaning of the proposal's “atomic reads.” Validation or I/O
+   failure emits only one fixed non-content failure code and exits nonzero.
+6. Imports are limited to Node filesystem/path/URL/crypto primitives. No
+   filesystem write, child process, network, dynamic import, environment or
+   configuration read, credential/cache access, model/provider call, or
+   evidence path other than exact v3 receipt/lease/stderr is permitted.
+7. The verifier imports only the pure export and uses synthetic bytes. It must
+   prove every status/rule, deterministic order, exact-limit success,
+   over-limit failure, fatal-decoding behavior, output-key closure, and
+   non-disclosure against path/token/provider-message sentinel strings.
+8. Only syntax, the synthetic verifier, static capability/output scans, exact
+   two-file diff and baseline ancestry, and unchanged tracked authority hashes
+   qualify implementation. No private artifact may be opened by a validation
+   command. A focused-green implementation checkpoint remains non-authorizing;
+   a separate exact code/evidence-access review is mandatory before one run.
+
+This review authorizes those two additive code files and synthetic-only gates.
+It authorizes no classifier execution against v3, raw evidence access,
+provider/model action, Codex retry, integration, push, deployment, release,
+cleanup, diagnosis, benchmark result, or graduation. Human supersession
+remains available through the checkpoint history. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
