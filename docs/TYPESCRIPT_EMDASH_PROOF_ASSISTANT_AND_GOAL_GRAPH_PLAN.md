@@ -7098,6 +7098,18 @@ provider work, state creation, edits, integration, cleanup, and aggregates.
 Separate review precedes the audit, and a later immutable authorization remains
 mandatory even if green. Accounting remains 35/41.
 
+Immutable review of exact R15 proposal `27df1b1`, tree `d145a0e`, approves one
+bounded non-model audit. The committed snapshot helper is import-safe and
+destination-confined; one mode-0700 temp root must be validated before its own
+removal, with only counts/hashes emitted. The exact eight-key `env -i` Codex
+projection may retain only version and ChatGPT login category. The bounded
+216,198-byte regular non-symlink cache may be projected by jq 1.7 to one exact
+`gpt-5.6-sol`/`3000`/`low`/high tuple and timestamp, never full content or a
+refresh. R13/R14 remain carried evidence, terminal checks are metadata-only,
+and every failure consumes the audit. No real command, model/provider, state,
+private read, edit, integration, release, unrelated cleanup, or aggregate is
+authorized. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7368,6 +7380,7 @@ mandatory even if green. Accounting remains 35/41.
 | `D-PA-263` | Record terminal-green R13 and freeze only a non-authorizing three-file v4 guard-rotation proposal. | The sole reviewed probe passed the corrected strict vector and local sandbox boundaries without a model. Terminal v3 cannot be reused; fresh absent v4 coordinates permit a guard-only edit whose constant does not affect arguments or permissions. Separate review, implementation, and later at-call audit remain mandatory. |
 | `D-PA-264` | Approve exact R14 proposal `559f80c` only for the three-file v4 guard rotation and focused fake/static validation. | V3 has exactly the expected three literal uses, the runtime builders are independent of the guard, v4 hashes and absent paths are exact, and R13 directly covers the unchanged vector. Implementation remains non-authorizing and preserves every terminal artifact. |
 | `D-PA-265` | Preserve focused-green v4 guard checkpoint `1074fc7` and freeze only a non-authorizing R15 behavior-free at-call audit. | Exact identity-only implementation and mock/static gates pass with v4 state absent. The bounded audit may bind committed bytes, non-secret closed login/model-cache state, carried R13/R14 evidence, and absence/cleanliness; a separate review and later one-call authorization remain mandatory. |
+| `D-PA-266` | Approve exact R15 proposal `27df1b1` for one bounded behavior-free v4 at-call audit under delegated unattended authority. | Import-safe committed snapshotting, an exact eight-key closed Codex version/login projection, bounded jq-selected cache tuple, carried unchanged gates, metadata-only state checks, and validated temp-only cleanup expose no prompt, model turn, credential, or private evidence. Green results still require separate one-call authorization. |
 
 ## Validation And Checkpoint Policy
 

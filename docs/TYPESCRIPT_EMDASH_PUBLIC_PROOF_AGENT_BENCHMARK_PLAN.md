@@ -5409,6 +5409,54 @@ retry. Even a green audit requires a separate immutable checkpoint that binds
 all exact values and explicitly decides whether the one command may run once.
 Accounting remains 35/41.
 
+###### Immutable R15 behavior-free at-call audit review
+
+Exact proposal checkpoint `27df1b1a3e3d49b99c98abb28d7872faa072dfd1`,
+parent `49f66b867480c1c2b20becc4241b5e8460e02a22`, and tree
+`d145a0e374b9319e63d938cdb41bc4a6f721b91e` have governing-plan
+SHA-256 `3a62c24ed978e4172a7f9d33b9e47df0494e1a323768442284b87cad2a45d602`
+and this-plan SHA-256
+`ee4b697fdfacbc8fb7ca06753b0f288e0c037ab48fb32a62567143148e1b62a9`.
+Both worktrees are clean; CloserFans `1074fc7`/tree `50d069d` is a direct
+descendant of the reviewed repair checkpoint. Candidate v4 root and lease are
+absent, and the isolated worktree has no dependency tree.
+
+Static review approves the exact five audit operations above. The exported
+snapshot helper accepts an explicit commit and destination, reads only tracked
+template bytes through Git, writes only below that destination, and has no
+operator-main side effect when imported. The audit must allocate exactly one
+new mode-0700 `/tmp/emdash-r15-preflight.*` parent, validate its real path and
+prefix before removal, and emit only counts and hashes—not source, prompt,
+schema, or operator text.
+
+The closed Codex projection must use `env -i` with exactly `CI`, `CODEX_HOME`,
+`HOME`, `LANG`, `LC_ALL`, `NO_COLOR`, `PATH`, and `TMPDIR`, matching the root
+operator's allowlist. Only `--version` and `login status` may run. The latter's
+only retained value is exact category `Logged in using ChatGPT`; no auth file,
+token, identity, or workspace detail may be read or emitted.
+
+The model cache is currently a 216,198-byte regular non-symlink file, below the
+one-MiB bound, and `/usr/bin/jq` reports 1.7. The reviewed filter must select
+exactly one `gpt-5.6-sol` record and emit only `fetched_at`, slug, `comp_hash`,
+default verbosity, and a derived high-reasoning boolean; it must reject any
+tuple other than `gpt-5.6-sol`/`3000`/`low`/true. It may neither print the full
+cache nor contact a model catalog.
+
+R13 and R14 are exact carried evidence: the guard-only commit does not change
+the runtime vector, and no later source commit exists in CloserFans. Therefore
+rerunning permission or mock gates would add no relevant evidence. Terminal
+state checks are path/metadata-only and may not hash or open private artifacts.
+
+Under delegated unattended authority, approve one R15 audit after this review
+is checkpointed. A failure consumes the audit and remains a failure; no
+adjusted command or retry follows. No prompt-bearing `codex exec`, real
+operator, provider/model, v4 state, credential/private-evidence read, edit,
+integration, release, cleanup beyond the validated new temp root, or aggregate
+is authorized. A green result remains non-authorizing until a separate plan
+checkpoint records every exact value and approves at most one exact command.
+Human direction may supersede this review before execution. Accounting remains
+35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
