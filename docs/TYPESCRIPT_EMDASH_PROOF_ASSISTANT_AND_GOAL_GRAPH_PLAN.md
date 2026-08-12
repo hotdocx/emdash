@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R4 schema normalization approved for local fake/no-model implementation | Immutable review of `685ce81` permits only the exact schema, fake structural consumer, and focused schema verifier. Real-driver/auth changes, prompt execution, raw evidence, retry, and new coordinates remain denied. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R4 schema normalization focused-green at CloserFans `1307f24`; code/preflight review required | Exact three-file typed-enum normalization, independent structural assertions, clean-install typecheck, bounded fake matrix, and public fake CLI are green. Real-driver/auth changes, prompt execution, raw evidence, retry, and new coordinates remain denied. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6723,6 +6723,18 @@ canary are sufficient for this unchanged isolation boundary. The resulting
 implementation checkpoint will remain non-authorizing pending a separate
 code/preflight review. Accounting remains 35/41.
 
+R4 is implemented at exact CloserFans checkpoint `1307f24`, tree `863db44`.
+The 409-byte schema SHA is `a33c63d...`; only the schema, fake consumer, and
+focused verifier changed. JSON/syntax/diff checks and the clean disposable
+`--canary-only` verifier are green, including template typecheck, the bounded
+fake matrix, and public fake CLI. The first dependency-free direct launch and
+one misrouted operator flag stopped before testing and are not passes. No
+worktree dependency tree, temporary verifier root, new authorization, lease,
+run, model/provider call, or raw-evidence access remains. Terminal v1/v2
+receipt and v2 lease hashes are unchanged. All unrelated/aggregate gates were
+omitted. The implementation remains non-authorizing pending exact code and
+preflight review; accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -6951,6 +6963,7 @@ code/preflight review. Accounting remains 35/41.
 | `D-PA-221` | Close R3 as an unresolved schema-submission/turn-start diagnosis rather than inventing a root cause. | Full argv parsing, selected model/features, redacted auth/runtime health, committed paths, JSON parsing, and every explicitly documented schema requirement are green. Official/local no-model contracts do not settle top-level `$schema`/bare `const` acceptance or remote turn initialization. V2 remains terminal, raw evidence uninspected, and a separately reviewed compatibility-hardening proposal is required before editing code or considering new coordinates. |
 | `D-PA-222` | Freeze R4 as a non-authorizing normalization to explicitly documented Structured Outputs forms. | One schema file, its fake consumer, and its focused verifier can replace top-level `$schema`/bare `const` with exact typed enums without changing the accepted message language. Fake/no-model validation and separate review preserve the one-shot boundary; this is compatibility hardening, not a diagnosis or retry authorization. |
 | `D-PA-223` | Approve exact R4 proposal `685ce81` only for its three-file fake/no-model implementation. | Typed single-value enum and `const` accept the same intended case ID, the explicit disposition type preserves its enum, and removing `$schema` changes no instance constraint. Structural deep equality avoids key-order authority. Real-driver/auth/evidence changes and all provider effects remain prohibited pending another review. |
+| `D-PA-224` | Preserve focused-green R4 implementation at CloserFans `1307f24`, tree `863db44`, without authorizing new coordinates. | Exact three-file diff implements the reviewed typed-enum schema and independent structural assertions. Clean-install typecheck, bounded fake scenarios, public fake CLI, syntax/diff/containment, and unchanged terminal receipt/lease hashes are green. No real-driver/auth or external boundary changed; code/preflight review remains separate. |
 
 ## Validation And Checkpoint Policy
 

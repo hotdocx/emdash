@@ -3790,6 +3790,57 @@ create a real lease, or make a benchmark/performance/graduation claim. A
 separate exact code/preflight review remains mandatory before new coordinates
 may even be proposed. Accounting remains 35/41.
 
+###### R4 implementation checkpoint and focused validation
+
+The exact reviewed implementation is committed on the isolated CloserFans
+branch as `1307f249df784107a260fb2461719f93f2467fb5`, parent
+`8276e962ea0d5e2f1fa4e87c79357f38cdd03321`, tree
+`863db44af8a1d774fa1cac7839efd6babbebe4dc`. Its staged and committed diff
+contains only the three authorized paths, with 41 insertions and 5 deletions.
+The normalized schema is 409 bytes with SHA-256
+`a33c63dccf3a687484358b326dfbf41d1d668ad0fe1c7025b6b3c6aedf8f0978`.
+It has no `$schema` or `const`, uses the exact typed single-value `caseId` enum
+and typed three-value `disposition` enum, and retains the note bound, required
+list, and closed object.
+
+The fake fixture and verifier independently use Node strict structural deep
+equality over that complete shape. The verifier performs its schema check
+before any fake scenario. The real driver, shared invocation contract, root
+operator, prompt, proof source, authorization constants, permission profile,
+receipt code, and terminal evidence did not change.
+
+Focused validation is green:
+
+1. JSON parse/static shape, `node --check` for the fake fixture, and
+   `git diff --check` passed.
+2. `node --experimental-strip-types
+   scripts/verify-emdash-benchmark-template-runtime.ts --canary-only` exited
+   zero. Its disposable clean `npm ci` preserved the retained lock, template
+   typecheck passed, the complete bounded fake scenario matrix passed through
+   the existing two-wide scheduler, the new schema assertions passed in both
+   verifier and fake process, and the public abstaining mock CLI passed.
+3. The verifier removed its disposable benchmark/CLI roots. The CloserFans
+   worktree has no root or template `node_modules`; no matching temporary
+   prefix remained.
+4. Only the existing v2 authorization lease is present. Receipt/lease hashes
+   remain v1 `cb02d508...`, v2 `c97c1f87...`, and lease `6dce7e860...` exactly
+   as recorded; no new run root, ID, or lease exists.
+
+Two preliminary launches stopped before testing: direct import of `tsx` found
+the deliberately absent worktree dependency tree, and passing
+`--canary-only` to the root real operator returned its usage because that flag
+belongs to the template verifier. Neither launch copied credentials, invoked
+Codex, created a lease/run root, or contacted a provider; neither is reported
+as a test pass. Node type stripping then invoked the correct focused verifier
+without installing into the worktree.
+
+Permission, full CloserFans TypeScript/lint/test/build, root Emdash, package,
+browser, kernel, book, repository-wide, deployment, and release gates were
+omitted because R4 changes no such boundary. This checkpoint is fake/no-model
+compatibility hardening only. It does not diagnose v2, authorize a provider
+call, create coordinates, produce a benchmark result, or advance 35/41
+accounting. A separate exact code/preflight review remains mandatory.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
