@@ -4481,6 +4481,43 @@ metadata probe, any Codex/provider/model action, retry, integration, push,
 deployment, release, cleanup, diagnosis, result, or graduation. Accounting
 remains 35/41.
 
+###### R7 metadata outcome and shape-correction proposal
+
+The sole authorized metadata probe ran once after review checkpoint `64d60e6`
+and exited zero. Its one newline-terminated line is 983 bytes with SHA-256
+`906e40fd3434dfa7f676fe26809249597e429e90c74af614e13aaf5be5409c5d`.
+All seven substantive entries match the classifier preconditions:
+
+| Role | Kind | Symlink | Current UID | Mode | Bytes | Exact realpath |
+| --- | --- | --- | --- | --- | ---: | --- |
+| `state-root` | directory | false | true | 700 | — | true |
+| `authorization-root` | directory | false | true | 700 | — | true |
+| `run-root` | directory | false | true | 700 | — | true |
+| `evidence-root` | directory | false | true | 700 | — | true |
+| `receipt` | file | false | true | 600 | 4,658 | true |
+| `stderr` | file | false | true | 600 | 98 | true |
+| `lease` | file | false | true | 600 | 691 | true |
+
+The probe nevertheless violated the reviewed closed shape by adding an
+`expectedMode` property to every entry. Each value is a fixed duplicate of the
+already permitted `mode` (`700` for directories and `600` for files), not an
+artifact-derived value, path, message, identifier, timestamp, or content. The
+inline program imported only `lstatSync`/`realpathSync`; it did not open, read,
+hash, list, parse, classify, or mutate any artifact. The probe is consumed and
+must not be rerun. Its result is not reported as a strict preflight pass.
+
+Freeze a behavior-free correction: a separate review may accept only this
+exact recorded 983-byte result despite the redundant constant property, after
+checking that every required fact passes and every `expectedMode` exactly
+equals its permitted `mode`. It may not reinterpret any other extra field,
+run another probe, or access evidence. If accepted, a later behavior-free
+checkpoint may authorize the already frozen classifier command exactly once.
+
+This correction proposal authorizes no classifier, stderr read, metadata
+retry, provider/model action, Codex retry, integration, push, deployment,
+release, cleanup, diagnosis, result, or graduation. It requires separate
+immutable review. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
