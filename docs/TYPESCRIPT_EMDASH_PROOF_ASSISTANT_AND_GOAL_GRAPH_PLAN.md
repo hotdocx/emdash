@@ -7123,6 +7123,19 @@ state are clean, and the validated temp root is removed. No model, provider,
 credential, full cache, or private artifact was accessed. R15 is consumed and
 still non-authorizing. Accounting remains 35/41.
 
+Immutable final review of exact R15 checkpoint `bb72c12`, tree `4d53cc6`,
+binds clean CloserFans `1074fc7`, the full committed source/manifest/input
+measurements, carried R13/R14 gates, fresh closed CLI/login/model tuple, Node
+24.11.1 with no `NODE_OPTIONS`, absent v4 state, terminal metadata presence,
+and cleanup. The separate root operator is the only real path and redoes the
+governed no-model preflights before an exclusive lease and one fixed prompt.
+Delegated unattended authority approves exactly one invocation of the exact v4
+command recorded in the dedicated plan after this review checkpoint. Every
+outcome consumes v4; only minimized receipt/lease/public outcome fields may be
+inspected afterward. Raw evidence, retry, alternate coordinate, integration,
+release, deployment, cleanup, aggregate, proof claim, performance comparison,
+or graduation remains unauthorized. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7395,6 +7408,7 @@ still non-authorizing. Accounting remains 35/41.
 | `D-PA-265` | Preserve focused-green v4 guard checkpoint `1074fc7` and freeze only a non-authorizing R15 behavior-free at-call audit. | Exact identity-only implementation and mock/static gates pass with v4 state absent. The bounded audit may bind committed bytes, non-secret closed login/model-cache state, carried R13/R14 evidence, and absence/cleanliness; a separate review and later one-call authorization remain mandatory. |
 | `D-PA-266` | Approve exact R15 proposal `27df1b1` for one bounded behavior-free v4 at-call audit under delegated unattended authority. | Import-safe committed snapshotting, an exact eight-key closed Codex version/login projection, bounded jq-selected cache tuple, carried unchanged gates, metadata-only state checks, and validated temp-only cleanup expose no prompt, model turn, credential, or private evidence. Green results still require separate one-call authorization. |
 | `D-PA-267` | Record R15 as green, consumed, and non-authorizing. | Exact committed bytes, closed CLI/login/model tuple, carried gates, absent v4 state, terminal metadata, clean worktrees, and cleanup passed. The wrapper rejected one pre-process shell spelling but no audit operation occurred before the single successful in-memory audit. No model/provider or private read occurred. |
+| `D-PA-268` | Authorize one exact v4 Stage A operator invocation after final review checkpoint under delegated unattended authority. | Clean immutable source/inputs, corrected full-vector permission evidence, focused fake/type evidence, fresh closed CLI/login/model state, absent v4 state, exclusive lease semantics, source confinement, and minimized independent replay satisfy the one-shot boundary. Every outcome is terminal and remains contaminated/non-graduating/non-proof. |
 
 ## Validation And Checkpoint Policy
 

@@ -5503,6 +5503,67 @@ readiness only. It does not authorize the real operator, create v4 state,
 produce a benchmark result, or advance accounting beyond 35/41. A separate
 immutable review must decide whether the exact command may execute once.
 
+###### Immutable v4 at-call review and sole authorization
+
+Exact R15 qualification checkpoint
+`bb72c1220a607967d034782cfc29c8825b0d1bc4`, parent
+`1fcfc2c3cb78540b25be49e2aab64ed30b250c1e`, and tree
+`4d53cc6d11c0628fa4fcb655789281f0df7b5ccc` have governing-plan
+SHA-256 `729e6ade8dcf9b317ab1605a84269c3297d3392752f253fca23f0343e635a4ad`
+and this-plan SHA-256
+`480f3ec6b6002057517a1efb0a9ed566a693f34fcbd39fbdafda967353c6c04e`.
+Both worktrees are clean at that checkpoint and exact CloserFans
+`1074fc7`/tree `50d069d`. The shell resolves `node` to exact Node 24.11.1 at
+`/home/user1/.nvm/versions/node/v24.11.1/bin/node`; `NODE_OPTIONS` is unset.
+Candidate v4 root and lease remain absent.
+
+The review checks every mandatory boundary:
+
+1. source ancestry, tree, 19-entry committed snapshot, manifest, operator,
+   schema, prompt, and initial-source identities are exact and clean;
+2. R11/R12 corrected the strict argument vector, R13 proved its complete
+   no-model and sandbox boundary, and R14's identity-only diff passed the
+   focused fake/type/static gate;
+3. R15 freshly confirmed the exact closed eight-key environment, Codex 0.147.0,
+   ChatGPT login category, and `gpt-5.6-sol`/`3000`/`low`/high cache tuple
+   without exposing credentials or refreshing provider state;
+4. v4 ID/root hashes are exact, both candidate paths are absent, terminal v3
+   state remains present by metadata, no dependency/temp root remains, and
+   both worktrees are clean; and
+5. the physically mock-only package route remains separate from the local root
+   operator, which alone reconstructs committed bytes, performs scripts-
+   disabled installation, reruns the at-call no-model preflights, acquires the
+   exclusive `wx` lease, invokes the fixed prompt/model once, confines source
+   edits, and emits the minimized independently replayed receipt.
+
+Decision under the explicitly delegated unattended checkpoint policy:
+authorize exactly one invocation, after this review is committed, from working
+directory `/home/user1/closerfans-emdash-canary-v1`:
+
+```text
+node scripts/run-emdash-stage-a-real.mjs --authorization-id emdash-stage-a-native-exact-local-premise-2026-08-12-v4 --run-root /home/user1/.emdash-stage-a/emdash-stage-a-native-exact-local-premise-2026-08-12-v4
+```
+
+No equivalent shell spelling, alternate Node/Codex executable, changed
+environment, different ID/root, second command, manual internal-driver call,
+or provider retry is authorized. The committed operator may create only its
+governed bootstrap/preflight/run/private-evidence/lease state, perform the
+exact lockfile installation and local preflights, and make the one fixed
+ChatGPT-authenticated model attempt. Every outcome—preflight refusal, lease
+refusal, spawn/process/stream failure, timeout, abstention, rejected patch,
+accepted incomplete patch, or accepted complete patch—consumes v4 permanently.
+
+Afterward inspect only the minimized receipt, canonical lease metadata/hash,
+ordinary path/mode/source facts, and public candidate diff/outcome fields that
+the receipt contract exposes. Do not inspect or publish raw JSONL, stderr,
+final model message, private candidate/evaluator files, credentials, or hidden
+reasoning. Preserve `public-owner-reference-accessible` contamination,
+`graduationEligible=false`, and `proofEvidence=false`. One Stage A outcome
+cannot establish a success rate, comparison, broad model capability, or 12B4
+graduation. No retry, new coordinate, integration, release, deployment,
+cleanup, or aggregate follows automatically. Human direction may supersede
+this authorization before execution. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
