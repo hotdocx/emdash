@@ -3961,6 +3961,41 @@ at-call review. Do not create the v3 root/lease, invoke the operator with v3,
 inspect raw evidence, retry or mutate v1/v2, or claim a benchmark/performance/
 graduation result. Accounting remains 35/41.
 
+###### R5 implementation checkpoint and focused validation
+
+The exact reviewed rotation is committed on the isolated CloserFans branch as
+`0ea5b98fbdacb6f449ef78577aebb8c7277b69a6`, parent
+`1307f249df784107a260fb2461719f93f2467fb5`, tree
+`149de95e39270ce007b645c7d11746b0266dfa44`. Its diff contains only the
+three approved files, with these committed SHA-256 values:
+
+```text
+774752d0459d405b352d859f71cd0d3c1a275a328708899f9434032019c4854a  scripts/run-emdash-stage-a-real.mjs
+f0091222fd38c4a03fecf825ce12512af4748c314c3b8624742543cf0dec47b8  scripts/verify-emdash-benchmark-template-runtime.ts
+4938190361d718672ef9c8b38627c685853c38fb54f5f9690652e0f72341d2b0  templates/emdash_benchmark/scripts/emdash-canary-contract.mts
+```
+
+Both guards contain exact v3 once and contain neither exact v1 nor exact v2.
+The root verifier enforces those counts for both committed sources. Operator
+syntax, stripped-TypeScript syntax, exact static checks, and `git diff --check`
+passed. The bounded disposable clean-install `--canary-only` verifier exited
+zero: lock-preserving install, template typecheck, full fake scenario matrix,
+schema assertions, and public fake CLI are green. It removed its disposable
+roots and left no worktree dependency tree.
+
+Candidate v3 root and lease remain absent. Terminal v1/v2 receipt and v2 lease
+hashes remain `cb02d508...`, `c97c1f87...`, and `6dce7e860...`; no provider,
+model, prompt, raw evidence, lease, or real run was touched. The permission
+probe and all wider gates were omitted because R5 changes only the guard
+identity and its static test.
+
+This checkpoint makes the exact v3 guard available for review but does not
+authorize using it. A fresh at-call review must independently bind committed
+source/tree/manifest/input hashes, current closed CLI/login/model state,
+permission probe, absent candidate state, and one exact command. Any resulting
+authorization must remain terminal on every outcome. Accounting remains
+35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
