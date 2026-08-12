@@ -4622,6 +4622,50 @@ metadata retry, Codex/provider/model action, integration, push, deployment,
 release, cleanup, diagnosis, result, or graduation. It requires separate
 immutable review. Accounting remains 35/41.
 
+###### Immutable R8 fixed-stage proposal review
+
+Exact proposal checkpoint `8e864e9ce3c4a171a0f1b9c5080d3b682e37331c`
+has parent `eb6af9a41ac5c2ebf7b89aa8b40bdcbed48cb197`, tree
+`61df718126ff40f109d5b70526d54dfc97c1cd06`, master-plan SHA-256
+`988c0e1f2ff96c3a2feb07c99e57c67f5113e861391f56390f41e5e8e3491425`,
+and this-plan SHA-256
+`e5081b5784cfa603854e96e80a562f942499c4b599b5530ce16eba517b48f754`.
+CloserFans remains clean at exact `04e58f9`/tree `5b150bc`; classifier,
+verifier, operator, and canary hashes remain `7b5e4d3...`, `2a881c2...`,
+`774752d...`, and `2b7cb75...`.
+
+Under the standing unattended-approval delegation, review approves only the
+two-file local correction, subject to these exact conditions:
+
+1. Add a closed ordered stage set with exactly the ten proposal constants. A
+   pure exported constructor returns a frozen record whose keys are exactly
+   `revision`, `targetAuthorizationIdSha256`, and `failureStage`; its revision
+   is `getpaidx-emdash-stage-a-stderr-classifier-failure-v1`. Any value outside
+   the set becomes `internal` rather than entering output.
+2. A private stage error stores only one validated constant. A wrapper catches
+   every underlying exception without retaining `cause`, message, code, path,
+   stack, object, or string and replaces it with that stage error.
+3. Wrap the four directory validations, three file reads, and pure classifier
+   call separately. Wrong argument count maps to `invocation`; an otherwise
+   unexpected main failure maps to `internal`. Failure writes only the
+   canonical three-key JSON plus LF to stderr and exits one. Successful
+   nine-key stdout remains byte-for-byte unchanged.
+4. The verifier imports only the two pure exports. It tests all ten stages in
+   order, exact keys/revision/hash/freeze, invalid string/object/sentinel
+   fallback to `internal`, and absence of each supplied sentinel from JSON,
+   while retaining every existing classification assertion.
+5. No path, receipt/lease hash, rule, bound, descriptor, owner/mode check,
+   environment, successful output, evidence, operator, canary, authorization,
+   or external surface may otherwise change. Validation is syntax, pure
+   synthetic verifier, static capability/content scans, exact two-file diff,
+   unchanged authority hashes, clean ancestry, and no private main execution.
+
+This review authorizes those two code edits and synthetic-only gates. It
+authorizes no classifier execution, evidence access, metadata retry,
+Codex/provider/model action, integration, push, deployment, release, cleanup,
+diagnosis, result, or graduation. A focused-green checkpoint still requires a
+separate code/access review. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
