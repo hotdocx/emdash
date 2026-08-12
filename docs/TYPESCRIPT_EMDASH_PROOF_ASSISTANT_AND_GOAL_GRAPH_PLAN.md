@@ -7000,9 +7000,19 @@ old `exec --help` config check exits in argument parsing before strict config
 loads. The one-file correction must instead run the complete vector with the
 existing closed stdin and require exact exit 1/empty stdout/fixed `No prompt
 provided via stdin.\n` stderr. Codex loads strict config before resolving that
-empty prompt and reaches schema/agent/provider work only afterward. Separate
+empty prompt and reaches schema/thread/turn/provider work only afterward. Separate
 review precedes the edit; the actual no-model permission probe remains a later
 gate. Accounting remains 35/41.
+
+Immutable review of exact R12 proposal `413efc6`, tree `b3af7b6`, approves
+only the one-file parse-probe edit and focused synthetic/mock validation.
+Official Codex control flow loads strict/effective configuration before the
+forced-stdin prompt, then emits exact `No prompt provided via stdin.\n` on EOF
+before schema or thread/turn/provider work. Empty disposable home/tmp, closed
+environment, and cleanup confine pre-prompt local setup. Exact exit/stdout/
+stderr comparison is mandatory. The actual permission probe, private evidence,
+new coordinates, and provider/model work remain unauthorized. Accounting
+remains 35/41.
 
 ## Decision Ledger
 
@@ -7268,6 +7278,7 @@ gate. Accounting remains 35/41.
 | `D-PA-257` | Approve exact R11 proposal `9d722d4` only for the two-file `view_image` feature-surface correction and synthetic assertions. | The public CLI and stable feature catalog validate `--disable view_image`; strict config and all permission/capability values remain exact. The argument vector changes, so this approval explicitly excludes every consumed lease, live probe, coordinate, or provider action. |
 | `D-PA-258` | Preserve focused-green R11 at CloserFans `8a5c2f9`, tree `d3e9aa9`, without live execution. | The exact two-file diff moves only the image-tool disable, strengthens both presence and absence assertions, and passes the disposable typecheck/synthetic/mock canary gate. |
 | `D-PA-259` | Freeze R12 as a non-authorizing one-file repair of the no-model strict-config preflight. | `exec --help` terminates before config loading and missed the stale key. The complete vector with closed stdin loads strict config first and must stop at an exact fixed no-prompt outcome before schema or agent/provider work. |
+| `D-PA-260` | Approve exact R12 proposal `413efc6` only for the one-file full-vector/no-prompt check and synthetic validation. | Codex 0.147.0 loads strict/effective config before forced-stdin EOF and stops before schema/thread/provider work. Exact channel/outcome checks plus disposable closed state make this a no-model preflight correction, not live-probe authority. |
 
 ## Validation And Checkpoint Policy
 

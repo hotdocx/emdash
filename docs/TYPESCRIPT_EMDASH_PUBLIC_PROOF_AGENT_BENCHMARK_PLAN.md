@@ -5079,13 +5079,41 @@ Freeze R12 as a non-authorizing one-file correction to
    separate review after checkpoint.
 
 Codex 0.147.0 source establishes the ordering: strict configuration loads
-before prompt resolution, while schema loading and agent/session/provider work
+before prompt resolution, while schema loading and thread/turn/provider work
 follow a nonempty prompt. With empty fake state and no inherited credentials
 or API environment, the exact no-prompt outcome is a local no-model boundary,
 not a benchmark attempt. Separate immutable review is mandatory before the
 one-file edit. No live probe, private evidence, new coordinate, provider/model,
 network, aggregate, integration, release, or cleanup is authorized. Accounting
 remains 35/41.
+
+###### Immutable R12 parse-probe review
+
+Exact proposal checkpoint `413efc66f17b83e93eb0a7ac3a8b54978fa1eaaa`
+has parent `73b9e05d8f3c8b0a510bbb3708230d574542aca3`, tree
+`b3af7b6e46515390c01e1faa30307694be665468`, master-plan SHA-256
+`d84dada26f88e73589a6641cc835463226e64ac50abeb2b6419e6e41b8cbde91`,
+and this-plan SHA-256
+`9da4f7449a9a72e067e775ddd393b6e59d3ab5e9d61fbfa44c5f66a29f5c9c5f`.
+CloserFans is clean at exact `8a5c2f9`/tree `d3e9aa9`.
+
+Review of official Codex `be6e8eac` confirms that `run_main` parses overrides,
+loads the strict bootstrap stack, builds effective configuration, and performs
+local setup before `resolve_root_prompt`; output-schema loading and
+thread/turn/provider work follow it. For the final literal `-`, ignored stdin
+selects `Forced`, reads EOF, and emits exactly `No prompt provided via
+stdin.\n` with exit 1. The probe's `HOME` and temporary directory are
+disposable, its environment inherits no API/auth values, user config/rules are
+disabled, and the timeout remains 30 seconds. Any incidental pre-prompt local
+state is therefore confined to the probe root and removed in `finally`.
+
+Approve exactly the one-file R12 edit and focused typecheck/synthetic/mock
+validation. The assertion must compare exact code, stdout, and stderr—not
+trimmed or substring values—and failure may report only this disposable
+no-secret diagnostic. Do not alter later sandbox/network/command tests or run
+the `--permission-probe-only` member under this approval. No private evidence,
+authorization ID/run root, provider/model, network, integration, release, or
+aggregate is authorized. Accounting remains 35/41.
 
 ## Validation Policy
 
@@ -5176,7 +5204,8 @@ On continuation:
    authority only for the two-file local correction and synthetic tests;
    treat CloserFans `8a5c2f9`, tree `d3e9aa9`, as the focused-green R11
    implementation and the R12 text above as non-authorizing until separately
-   reviewed; and
+   reviewed; treat exact proposal `413efc6` and the immutable R12 review above
+   as authority only for the one-file parse-probe edit and synthetic tests; and
    forbid any retry or alternate coordinate without the amended implementation
    checkpoint, new code/preflight review, and new coordinates; and
 7. synchronize both plans and exact evidence before every rollback-safe
