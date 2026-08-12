@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R13 no-model permission probe green; R14 non-authorizing v4 guard rotation proposed | Exact Codex 0.147.0 strict-vector, filesystem, denied-loopback, and allowlisted-command probes now pass under the closed environment. Fresh v4 guards require separate review/implementation and a later exact at-call audit; no provider call is authorized. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R14 v4 guard rotation focused-green at CloserFans `1074fc7`; R15 behavior-free at-call audit proposed | Exact v4 guard/retirement assertions and focused fake/type gates pass; R13 covers the unchanged permission vector. A bounded committed-byte/login/model-cache/absent-state audit requires separate review before any one-call authorization. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -7081,6 +7081,23 @@ canary. R13 is carried forward without rerun. Implementation cannot create v4
 state or authorize a real call; a fresh at-call audit and review remain
 mandatory. Accounting remains 35/41.
 
+CloserFans `1074fc7`, parent `9ea98c8`, and tree `50d069d` now qualify exact
+R14. The three-file 4/3 literal/assertion diff gives both guards one v4 and no
+v1/v2/v3, extends exact retirement checks, and passes operator/stripped-TS
+syntax, occurrence/diff hygiene, and one offline disposable clean-install fake
+canary. Candidate v4 root/lease remain absent; R13 and all provider paths were
+not rerun.
+
+The dedicated plan freezes non-authorizing R15 as a behavior-free at-call
+audit of `1074fc7`: reconstruct and hash committed template/operator/inputs in
+one validated disposable root; project only closed CLI/login category and a
+bounded selected model-cache tuple; carry forward unchanged R13/R14 gates; and
+recheck clean ancestry, absent v4 state, and terminal-state presence without
+private reads. It forbids the real command, permission/mock reruns, model/
+provider work, state creation, edits, integration, cleanup, and aggregates.
+Separate review precedes the audit, and a later immutable authorization remains
+mandatory even if green. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7350,6 +7367,7 @@ mandatory. Accounting remains 35/41.
 | `D-PA-262` | Approve exact corrected R13 proposal `1ae9e70` for one offline local no-model permission-probe execution under delegated unattended authority. | Static review binds clean CloserFans `9ea98c8`, exact sources/launcher/runtime, early focused return, side-effect-free operator import, closed child environment, EOF/no-prompt stop, fixture-only sandbox checks, override clearing, offline npm, cleanup, and terminal one-shot semantics. No provider/model or later effect is authorized. |
 | `D-PA-263` | Record terminal-green R13 and freeze only a non-authorizing three-file v4 guard-rotation proposal. | The sole reviewed probe passed the corrected strict vector and local sandbox boundaries without a model. Terminal v3 cannot be reused; fresh absent v4 coordinates permit a guard-only edit whose constant does not affect arguments or permissions. Separate review, implementation, and later at-call audit remain mandatory. |
 | `D-PA-264` | Approve exact R14 proposal `559f80c` only for the three-file v4 guard rotation and focused fake/static validation. | V3 has exactly the expected three literal uses, the runtime builders are independent of the guard, v4 hashes and absent paths are exact, and R13 directly covers the unchanged vector. Implementation remains non-authorizing and preserves every terminal artifact. |
+| `D-PA-265` | Preserve focused-green v4 guard checkpoint `1074fc7` and freeze only a non-authorizing R15 behavior-free at-call audit. | Exact identity-only implementation and mock/static gates pass with v4 state absent. The bounded audit may bind committed bytes, non-secret closed login/model-cache state, carried R13/R14 evidence, and absence/cleanliness; a separate review and later one-call authorization remain mandatory. |
 
 ## Validation And Checkpoint Policy
 

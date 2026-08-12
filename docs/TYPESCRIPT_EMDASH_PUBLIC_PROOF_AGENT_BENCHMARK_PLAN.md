@@ -5346,6 +5346,69 @@ benchmark/performance/graduation claim. A new exact at-call audit and separate
 authorization checkpoint remain mandatory. Human direction may supersede this
 review before implementation. Accounting remains 35/41.
 
+###### R14 implementation qualification and R15 v4 at-call audit proposal
+
+CloserFans checkpoint `1074fc75e2ba8a043b1c46c1e5d72a6646e772eb`, parent
+`9ea98c8c9a51b785dbebe157e88dc31a9943a362`, and tree
+`50d069d0acae66efaffa9dad9fde24d46a9f511c` implement exactly the approved
+three-file R14 rotation: four insertions and three deletions. Exact committed
+source hashes are:
+
+```text
+334b03ad8aae9071586549df4b00f51433c173d4c0fd3038d706785ef05627f0  scripts/run-emdash-stage-a-real.mjs
+1a3737adb8394792932e0f5cf92f475d1ae3c8c80dba99afefcac9abd897bb87  scripts/verify-emdash-benchmark-template-runtime.ts
+83fd0c2a505537c74a3dfeddf62132fe1060123be0852c81b9b5afb4defd803d  templates/emdash_benchmark/scripts/emdash-canary-contract.mts
+```
+
+Both guards contain exact v4 once and no v1/v2/v3. The verifier requires v4
+once in both sources and explicitly retires v1/v2/v3. Operator JavaScript,
+stripped verifier/contract TypeScript, exact occurrence checks, diff hygiene,
+and the one disposable offline clean-install `--canary-only` gate passed. That
+gate includes template typecheck, synthetic containment/replay/failure paths,
+and the physically mock-only CLI. It removed its disposable installation and
+left the isolated worktree clean without `node_modules`. Candidate v4 root and
+lease remain absent. R13 and every model/provider path were not rerun.
+
+Freeze R15 as a non-authorizing behavior-free audit of exact clean checkpoint
+`1074fc7` and this review-data-only command:
+
+```text
+node scripts/run-emdash-stage-a-real.mjs --authorization-id emdash-stage-a-native-exact-local-premise-2026-08-12-v4 --run-root /home/user1/.emdash-stage-a/emdash-stage-a-native-exact-local-premise-2026-08-12-v4
+```
+
+The command must not run during R15. The audit may perform only these bounded
+operations:
+
+1. use the exported, side-effect-free `snapshotCommittedTemplate` helper to
+   reconstruct exact committed template bytes under one newly allocated
+   mode-0700 `/tmp/emdash-r15-preflight.*` root; record only source commit/tree,
+   tracked-entry count, snapshot-manifest SHA-256, and byte counts/SHA-256 for
+   the committed root operator, output schema, prompt, and initial source;
+2. in the operator's explicit inherit-nothing environment, run only `codex
+   --version` and `codex login status`, retaining exact CLI revision and the
+   non-secret `Logged in using ChatGPT` category but no credential material;
+3. require `/home/user1/.codex/models_cache.json` to be a regular non-symlink
+   file of at most one MiB, then use `/usr/bin/jq` 1.7 to emit only its
+   `fetched_at` plus the selected `gpt-5.6-sol` entry's slug, `comp_hash`,
+   default verbosity, and whether high reasoning is supported; require exact
+   tuple `gpt-5.6-sol`/`3000`/`low`/true without refreshing the cache;
+4. carry forward exact successful R13 permission-vector evidence and the R14
+   focused canary because neither covered source changed after `1074fc7`; do
+   not rerun either gate; and
+5. validate and remove only the new `/tmp/emdash-r15-preflight.*` root, then
+   recheck exact clean ancestry/status, absent v4 root/lease, absent worktree
+   dependencies, and unchanged terminal-state presence without reading any
+   private artifact.
+
+Do not run doctor, model listing/refresh, provider reachability, the permission
+probe, the mock canary, the real operator, `codex exec`, or any model/provider
+turn. Do not read credentials or private v1/v2/v3 evidence, alter login/config/
+cache/state, create v4 state, edit source, integrate, release, clean up, or run
+an aggregate. Failures are terminal R15 evidence and do not authorize repair or
+retry. Even a green audit requires a separate immutable checkpoint that binds
+all exact values and explicitly decides whether the one command may run once.
+Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
