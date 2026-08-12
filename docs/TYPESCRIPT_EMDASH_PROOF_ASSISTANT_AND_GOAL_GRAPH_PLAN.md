@@ -837,7 +837,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `AGENT-EVAL-12B1` | Representative browser-safe LF patch corpus and canonical interchange | complete at `d0d3764` | Six tracks and ten unchanged-12A cases yield nine freshly accepted owner patches and one honest ambiguity abstention. Strict closed-revision interchange, deep rebuild/freeze, Lean attribution, browser closure, typecheck, focused lint, and 45 focused tests are green; no public/package/later effect. |
 | `AGENT-EVAL-12B2` | Explicit Node runner and public package/browser surface | complete at `93c9804` | Exact compact catalog/error records, raw-size-before-fatal-UTF-8 run input, fresh unchanged replay, isolated package entry, retained no-bin/dependency policy, lazy browser budgets, real-browser presentation, and packed ESM/CJS/NodeNext/browser plus root-only consumers are green. |
 | `AGENT-EVAL-12B3` | Exact npm release and additive CloserFans benchmark workspace | complete | Exact `0.3.0`, Pages, Release, protected OIDC run `31510726533`, byte/provenance/installed-consumer verification, permanent workflow hardening `3af518d`, and focused-green CloserFans source-run workspace `cbf2356` are complete. Two safe pre-package failures and the one reviewed recovery dispatch remain durable evidence. |
-| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | v3 terminal 35 ms process failure; no retry | Receipt `f7c6f85` and lease `da092de` bind normalized schema/source/argument provenance. Spawned child exited 1 with incomplete stream, zero commands/changes, no final/usage/outcome, and unconditional non-graduation. Raw evidence remains private; only a separately reviewed no-model classifier may proceed. |
+| `AGENT-EVAL-12B4` | Reproducible real-agent runs and measured graduation | R7 non-content stderr classifier proposed | Proposal adds only a pure bounded classifier and synthetic verifier. Later execution could emit fixed rule IDs plus byte/line/hash facts from exact v3 stderr, never content or captures. Separate review is required before edits; evidence access and provider effects remain denied. |
 | `PACKAGE-RELEASE-13` | First npm publication and OIDC boundary | complete | Attempt 2 of run `31391224891` published exact `@hotdocx/emdash@0.1.0`; identity, digests, provenance, inventory, and installed consumers are verified. The publish-only GitHub Actions OIDC relationship is exact; dedicated bootstrap authority and GitHub secret are removed; stable `main` is token-free. Direct npm settings prove trust configuration, while unauthenticated npm 11.19.0 `trust list` returned `E401`, not a pass. The owner explicitly retains bypass-2FA-token compatibility. |
 | `HOSTED-CONSUMER-13A` | TypeScript-first Emdash GetPaidX workspace starter | complete | CloserFans `bd4146b`; public `@hotdocx/emdash@0.1.0`, direct TypeScript proof source, fresh source/profile/interface fingerprints, stateless goal/check commands, ordinary Node 20 controller, and no new pool/image/MCP/API/Lambdapi authority. Template/package/preview focused gates green. |
 | `GOAL-GRAPH-14A` | Typed goal/evidence graph with one research-planning profile | complete | `faa4c27`; exact theorem/task/decision obligations, fresh checked-proof replay, unverified named approvals, AI-only advice, acyclic dependency semantics, and derived status |
@@ -6821,6 +6821,14 @@ Normalization was not sufficient to cross the pre-turn boundary. Only a
 separately planned/reviewed no-model, non-content error classifier is now
 dependency-ready. Accounting remains 35/41.
 
+The dedicated plan now freezes R7 as a non-authorizing two-file local
+classifier design. Its closed main is hard-bound to exact v3 receipt/lease/run
+facts and may eventually emit only fixed categories plus size/line/hash facts;
+the pure classifier receives exhaustive synthetic non-disclosure tests.
+Implementation reads no real evidence, uses no child/network/model/provider,
+and needs separate review. Real classifier execution would require another
+exact checkpoint. Accounting remains 35/41.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -7059,6 +7067,7 @@ dependency-ready. Accounting remains 35/41.
 | `D-PA-231` | Qualify exact v3 preflight without yet authorizing its command. | Committed source/manifest/input hashes, closed CLI/login/cache state, local permission semantics, exact cleanup, clean/absent coordinates, and unchanged terminal hashes pass. Separating qualification from authorization preserves human supersession and one-shot auditability. |
 | `D-PA-232` | Authorize exactly one terminal v3 Stage A operator command after the behavior-free checkpoint. | Qualification `926979d` satisfies exact source/input, closed host, permission, clean/absent-state, and evidence-preservation conditions. The committed operator alone owns state creation and receipt derivation. Every result consumes authority; no retry, alternate coordinate, broad claim, or graduation is permitted. |
 | `D-PA-233` | Classify the sole v3 invocation as a terminal 35 ms spawned `process-failure` and prohibit retry. | Receipt `f7c6f85`/lease `da092de` bind normalized-schema provenance. The child exited 1 with incomplete stream, zero commands/changes, no valid final/usage/outcome, and no proof/performance evidence. Raw evidence stays private; further diagnosis requires a separately reviewed no-model non-content classifier. |
+| `D-PA-234` | Freeze R7 as a non-authorizing exact-v3 non-content stderr classifier. | Public/minimized diagnostics are exhausted, while direct raw inspection is unnecessarily revealing. A bounded local process can validate exact evidence, classify against fixed rules, and expose only hash/count/constant IDs; synthetic tests and separate execution review preserve privacy and no-retry boundaries. |
 
 ## Validation And Checkpoint Policy
 

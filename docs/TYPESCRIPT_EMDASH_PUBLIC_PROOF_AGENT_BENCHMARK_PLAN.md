@@ -4249,6 +4249,58 @@ inside a bounded local process and emit a fixed, non-content category plus
 byte/hash facts, without exposing raw text to the reviewer. That direction is
 not authorized by this result. Accounting remains 35/41.
 
+##### `AGENT-EVAL-12B4-R7` non-content stderr classifier proposal
+
+The repeated pre-turn failure cannot be narrowed further through public help,
+redacted health, normalized schema, or minimized receipt fields. Opening raw
+stderr directly would unnecessarily expose private provider diagnostics,
+paths, or identifiers to the reviewer. R7 instead proposes a deterministic,
+tracked, local classifier whose process reads only exact v3 stderr and emits no
+raw-derived string.
+
+The proposed implementation adds exactly two root CloserFans scripts from
+clean checkpoint `0ea5b98`:
+
+1. `scripts/classify-emdash-stage-a-stderr.mjs` exports a pure bounded byte
+   classifier and a closed no-argument main program hard-bound to exact v3 run
+   root, receipt SHA `f7c6f85...`, lease SHA `da092de...`, ID hash
+   `e1fe31c...`, expected mode 0600, regular-file/no-symlink status, and a
+   four-MiB maximum. The main program validates those facts before reading
+   `private-evidence/codex-stderr.txt`.
+2. `scripts/verify-emdash-stage-a-stderr-classifier.mjs` imports only the pure
+   classifier and tests empty, non-UTF-8, CLI argument, configuration,
+   authentication, structured-output/schema, model-selection, transport/
+   provider, ambiguous, and unmatched synthetic fixtures plus maximum-size and
+   non-disclosure properties.
+
+The classifier output is a fixed JSON object containing only revision, exact
+target ID hash, byte count, SHA-256, UTF-8 validity, line count, terminal-
+newline boolean, fixed matched rule IDs, and one of `empty`, `classified`,
+`ambiguous`, `unclassified`, or `non-utf8`. Rule IDs are constants such as
+`cli-argument`, `configuration`, `authentication`, `structured-output-schema`,
+`model-selection`, and `transport-provider`. Regex captures, matched text,
+unmatched text, file contents, provider messages, arbitrary error strings, and
+raw-derived paths must never enter output or thrown diagnostics.
+
+The main program must use fatal UTF-8 decoding, bounded synchronous/atomic
+reads of existing files only, fixed error codes/messages, and no writes,
+network, child process, provider, model, config, cache, or credential access.
+It must not open JSONL, final-message, candidate, diff, replay, or any v1/v2
+file. Ambiguous or unmatched data is a valid non-diagnostic result, not a
+reason to reveal content.
+
+Implementation validation is limited to `node --check`, the synthetic
+verifier, a source scan excluding raw-output/error interpolation and external
+capabilities, exact two-file diff/ancestry/status, and unchanged receipt/lease
+hashes. No real evidence is read during implementation. After a separate exact
+code review, a later one-command authorization may run the classifier once and
+record only its fixed output. It may never feed evidence to a model or retry
+Codex.
+
+This proposal authorizes no edit, classifier execution, raw evidence read,
+provider/model access, coordinate, retry, cleanup, result, or graduation. It
+requires separate immutable review. Accounting remains 35/41.
+
 ## Validation Policy
 
 `AGENT-EVAL-12B0` and the first non-behavioral proposal require only exact
