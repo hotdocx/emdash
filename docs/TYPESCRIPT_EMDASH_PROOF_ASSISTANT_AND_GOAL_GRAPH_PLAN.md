@@ -98,7 +98,15 @@ revisions, and erases to the existing dependency-module declaration fragment.
 It composes with a runtime-bearing provider/consumer theorem development and
 adds no trust inference, runtime/proof generation, parser, Core/checker rule,
 or structure/class widening. No further implementation row is selected
-pending another bounded product audit. The first
+pending another bounded product audit. That audit now selects
+`MODULE-WORKSPACE-AUTHORING-25`: direct TypeScript callers already supply all
+complete module chains but still repeat each direct dependency's full module
+identity and latest local runtime-fragment identity. One browser-safe erasing
+facade will derive those exact edges from the supplied closed chain set and
+return the unchanged fragment-module workspace plan. The low-level explicit
+identity API remains authoritative for serialized/remote reconstruction, and
+the new layer adds no acquisition, hashing, runtime/checker input, incremental
+linking, or theorem/declaration semantics. The first
 research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -906,6 +914,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `THEOREM-AUTHORING-22` | Direct-TypeScript theorem entries that lower to the exact row-21 plan without repeated module, target, fingerprint-runtime, or binding plumbing | complete | `50231b7`; additive browser-safe authoring factory over an arbitrary exact fragment workspace, exact local target and closure/runtime fingerprint derivation, byte-identical row-21 lowering/artifacts, delegated typed negatives, browser closure, and packed consumers green. No new artifact, declaration generation, parser, session, Core/checker semantics, host I/O, or release. |
 | `PUBLIC-INTEGRATE-23` | Publish the accumulated qualified proof-assistant source through the existing goal branch and fast-forward-only public `main` | complete | Source candidate `9fcdf1b`, successful Pages run `31655278546`, exact deployment `5879828013`, HTTP-200 public URL, no npm run, and plan-only final ref convergence. No tag, npm/GitHub Release, workflow/package version, new semantics, or cleanup. |
 | `DECLARATION-AUTHORING-24` | Co-located direct-TypeScript declaration, explicit trust evidence, and linkage lowering to an exact dependency-module declaration fragment | complete | `01a2971`; one declaration-only erasing facade with derived orders/companion revisions, explicit external/provider data, deeply equal low-level lowering, runtime-bearing provider/consumer theorem proof, browser closure, and packed consumers green. No trust inference, mixed/runtime/proof generation, structure/class widening, parser/source schema, Core/checker change, host I/O, or release. |
+| `MODULE-WORKSPACE-AUTHORING-25` | Derive exact direct-dependency and latest-runtime provider edges from a closed set of directly authored module chains | proposal frozen | One browser-safe erasing facade lowering to the existing fragment-module workspace plan, deeply equal source snapshot, runtime-backed cross-module theorem consumer, delegated graph negatives, browser closure, and packed consumers. No source acquisition, hash computation, parser, incremental linker, trust/runtime/checker semantics, host I/O, or release. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
@@ -920,14 +929,15 @@ outcome. The row is parked without a classifier repair, fresh coordinate, or
 retry. It does not complete 12B4 or authorize a performance, proof,
 integration, release, deployment, or later-stage claim.
 
-Roadmap accounting after completing the bounded declaration-authoring tranche
-is 42 of 48 scoped rows complete. All six remaining rows are deliberately
-terminal for their current questions:
+Roadmap accounting after selecting the bounded module-workspace authoring
+tranche is 42 of 49 scoped rows complete, one proposal frozen, and six rows
+deliberately terminal for their current questions:
 deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
 `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4`, plus parked
 `AGENT-EVAL-12B4`. None is reopened merely to keep the goal active. No next
-implementation row is selected until another bounded product audit under
-`D-PA-270` identifies and freezes a concrete user-visible limitation.
+implementation row beyond `MODULE-WORKSPACE-AUTHORING-25` is selected. Its
+immutable proposal review must precede implementation, and another row
+requires a later bounded product audit under `D-PA-270`.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -8453,6 +8463,145 @@ focused repair. The row is terminal and may reopen only for the concrete
 consumer or changed owner contracts named above; another implementation row
 requires a fresh bounded product audit.
 
+## `MODULE-WORKSPACE-AUTHORING-25` Audit And Frozen Contract
+
+### Product question and existing-owner audit
+
+Can an AI or human provide the complete directly authored module chains once
+and obtain the exact cross-module workspace without manually copying complete
+module and runtime-fragment identities back into graph edges?
+
+The limitation is concrete in both the row-24 end-to-end consumer and the
+shared exact-runtime fixture. After every dependency-aware chain is already
+constructed, callers must still:
+
+1. call `createCoreLfFragmentModuleIdentity` for every direct dependency;
+2. copy those identities into each consumer's `dependencyProviders`; and
+3. inspect each dependency chain for its latest local runtime fragment and
+   repeat that fragment identity in `runtimeProviders`.
+
+The existing `createCoreLfFragmentModuleWorkspace` owner then reconstructs all
+supplied chains, derives their actual identities, discovers every declared
+direct dependency, finds each dependency's latest local runtime fragment, and
+compares those facts to the caller's repeated arrays before canonical
+topological ordering. This explicit redundancy is correct for parsed,
+serialized, cached, or remote source: it detects drift in persisted provider
+claims. It is unnecessary friction when one direct-TypeScript expression
+already owns the complete closed chain set.
+
+No current authoring owner composes this boundary. The row-24 facade stops at
+one declaration fragment; same-module chain creation stops at one module; the
+workspace owner intentionally accepts the explicit low-level graph; and
+remote workspace contracts reconstruct that explicit graph rather than
+authoring it. The next smaller product improvement is therefore a source-
+expanding workspace facade, not an incremental linker, theorem-declaration
+generator, or source-file loader.
+
+The audit also confirms that co-locating a theorem statement with its proof is
+a real later usability question: row 24 currently receives the opaque theorem
+declaration and row 22 later receives the same theorem symbol plus proof.
+However, composing that feature cleanly across modules first requires a
+compact exact workspace. It remains a later bounded audit candidate and is
+not bundled into this row.
+
+### Selected additive design
+
+Add a browser-safe `emdash-lf-fragment-module-workspace-authoring-v1` profile
+and public workspace module. Its complete input is one workspace revision and
+an unordered array of at least two existing
+`CoreLfDependencyModuleFragmentChainPlan` values. It accepts no module
+identity, provider edge, runtime fragment, compiled interface, runtime
+program, checker, callback, filesystem path root, or hash function.
+
+The factory must:
+
+1. reconstruct each chain through the existing public identity factory and
+   index only its derived module ID, complete portable identity, declared
+   direct dependencies, and fragment list;
+2. for each consumer chain, derive `dependencyProviders` in the consumer's
+   declared dependency order from the exact supplied provider chains;
+3. for each direct dependency, scan its reconstructed fragments in reverse
+   source order and derive a runtime-provider edge only for its latest local
+   fragment containing runtime rules;
+4. invoke `createCoreLfFragmentModuleWorkspace` with those derived arrays and
+   return its ordinary `CoreLfFragmentModuleWorkspacePlan`, leaving canonical
+   ordering, duplicate/missing/cycle detection, exact identity comparisons,
+   and all later compilation to the unchanged owner; and
+5. clone/freeze only through the existing construction boundaries. The
+   profile must state that this is direct-authoring source expansion and not
+   suitable as a substitute for explicit provider claims in untrusted or
+   remotely reconstructed source.
+
+The facade adds no error family. A malformed or noncanonical chain, duplicate
+module, missing dependency, cycle, or impossible graph remains the existing
+chain/workspace typed error. A missing dependency is not invented or silently
+dropped: the facade passes the incomplete closed set to the workspace owner,
+which rejects it before provider validation. Input order must not become
+authority, and no transitive dependency may be promoted to a direct provider.
+
+### Executable consumer and acceptance boundary
+
+Reuse the standalone exact-runtime provider/consumer/unrelated fixture.
+Discard its explicit workspace provider arrays, retain only its complete
+module chains, and feed those chains in multiple input orders to the new
+facade. The result must deeply equal the explicit reference workspace plan and
+produce byte-identical canonical source snapshots. It must derive exactly the
+provider's latest local runtime fragment for the consumer, derive no runtime
+edge for dependencies without local runtime, and retain the unrelated module
+outside the consumer closure.
+
+Compile the authored plan through the unchanged workspace compiler, then use
+the row-22 authoring facade to complete a provider theorem and a consumer
+theorem which directly names the public provider theorem. This proves that the
+new graph convenience composes with actual proof authority rather than only
+matching data shapes.
+
+Focused coverage must additionally show:
+
+- reversed module-chain input yields the same canonical plan/snapshot;
+- caller mutation cannot alter the returned deeply frozen plan;
+- a missing direct dependency, duplicate module, and cyclic graph retain the
+  existing workspace error codes;
+- no unrelated/transitive module identity becomes a direct provider;
+- the explicit low-level factory still rejects a drifted provider claim and
+  remains the reconstruction authority; and
+- the profile/factory/input type are browser-safe and available to freshly
+  packed ESM, CJS, strict NodeNext, and browser consumers.
+
+Proportional gates are the new focused suite, nearest fragment-module,
+exact-runtime proof, theorem-authoring, capability, migration-readiness, and
+browser-closure suites; workspace contract, root typecheck, changed-file lint,
+packed-package verification, exact staged diff, and whitespace hygiene. Root
+policy requires one complete `check:ts` because this row changes a shared
+public TypeScript barrel and root test runner. Run it only once after all
+focused/package gates are green; do not run `check:all`, Lambdapi, book/print,
+siblings, deployment, publication, or release unless a focused failure proves
+that exact omitted boundary blocks progress.
+
+### Terminal policy and correction budget
+
+The row is:
+
+- **complete** only when chain-only input erases to the deeply equal explicit
+  plan and byte-identical source snapshot, derives exact runtime edges, powers
+  the runtime-backed theorem consumer, and passes every frozen browser/
+  package/static gate;
+- **parked** if a current public owner already accepts only the complete chain
+  set and derives these exact provider arrays;
+- **blocked** if the latest local runtime provider cannot be derived without
+  changing or exporting private workspace semantics; or
+- **rejected** if convenience requires weakening explicit remote-source drift
+  validation, guessing missing/transitive dependencies, accepting runtime or
+  checker callbacks, ambient acquisition, or new Core/checker semantics.
+
+The correction budget is the selected erasing facade plus at most one focused
+semantic correction. Any terminal result ends the row. Reopening requires one
+concrete workspace consumer which cannot supply a closed chain set or a
+changed chain/workspace contract. Theorem statement/proof co-location, mixed-
+fragment generation, source files/imports, incremental or remote linking,
+hashing, commands, release, hosted integration, sibling changes, and
+mathematical-source edits remain separate product questions.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -8742,6 +8891,7 @@ requires a fresh bounded product audit.
 | `D-PA-282` | Complete `PUBLIC-INTEGRATE-23` through source candidate `9fcdf1b`, Pages run `31655278546`, and deployment `5879828013`, then converge all four refs on this plan-only checkpoint. | Non-force recovery publication and fast-forward-only main publication succeeded; the exact candidate built/deployed successfully and the public URL returned HTTP 200; no npm run exists for the SHA. Existing hosted annotations were non-blocking and required no correction. The final plan delta is outside the Pages filter, so exact ref convergence closes distribution without a second deployment, tag, release, workflow/source change, or cleanup. |
 | `D-PA-283` | Select `DECLARATION-AUTHORING-24` as one declaration-only erasing facade over the existing module, policy, linkage, and dependency-fragment owners. | Current callers repeat each local declaration across three synchronized arrays, while external symbols require a fourth provider relation. Co-locating the unchanged explicit declaration, trust evidence, and linkage and deriving only orders/companion revisions removes real AI-authoring friction. Deeply equal low-level lowering plus a runtime-bearing cross-module theorem consumer demonstrates value without trust inference, mixed/runtime generation, parser/source schema, new Core/checker semantics, host effects, release, or class/mathematics widening. |
 | `D-PA-284` | Complete `DECLARATION-AUTHORING-24` at `01a2971` and require another bounded product audit before further implementation. | The facade deeply equals the explicit low-level fragment, retains all trust/link/provider decisions, composes with runtime-backed direct-public theorem use, preserves typed owner failures, and is focused/browser/packed/static green. The long aggregate's two failures were pre-existing stale migration-audit assumptions; one focused test-only correction is green, and the user-directed no-repeat policy keeps the aggregate honestly non-passing rather than spending another 24 minutes. No semantic widening, release, host, sibling, or mathematics effect is decision-relevant. |
+| `D-PA-285` | Select `MODULE-WORKSPACE-AUTHORING-25` as one chain-only erasing facade over the exact fragment-module workspace owner. | Direct TypeScript callers already own the closed module-chain set but repeat complete dependency and latest-runtime identities which the workspace owner derives internally to check persisted claims. Deriving those arrays and returning the unchanged plan removes practical graph plumbing while retaining the explicit low-level/remote drift boundary. It is the smallest prerequisite before theorem declaration/proof co-location and requires no parser, acquisition, incremental linker, runtime/checker callback, trust change, host effect, release, or mathematics widening. |
 
 ## Validation And Checkpoint Policy
 
@@ -8964,6 +9114,19 @@ synchronized:
 > publish/release. Preserve the explicit failed-aggregate/focused-repair
 > evidence without rerunning the long aggregate. Require another bounded
 > audit before selecting any further row.
+> Treat `MODULE-WORKSPACE-AUTHORING-25`, decision `D-PA-285`, and its frozen
+> contract as the sole selected implementation row after declaration
+> authoring. Accept only a workspace revision plus a closed set of complete
+> dependency-module fragment chains; derive exact direct-dependency identities
+> and each dependency's latest local runtime-fragment identity; and lower
+> through the unchanged fragment-module workspace owner. Require deep equality
+> with the explicit plan, byte-identical source snapshots, and the runtime-
+> backed cross-module theorem consumer. Preserve the explicit low-level API as
+> serialized/remote drift authority. Do not guess dependencies, promote
+> transitive providers, accept runtime/checker/identity input, add acquisition,
+> hashing, parsing, incremental linking, theorem/declaration semantics, host or
+> sibling effects, mathematics changes, or release. After its terminal result,
+> require another bounded audit before selecting further work.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
 > `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
 > retained by audit 17 rather than inventing authority to advance the ledger.
