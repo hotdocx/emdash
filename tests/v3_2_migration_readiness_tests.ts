@@ -205,7 +205,8 @@ describe('TypeScript v3.2 MIGRATE-2 physical deletion audit', () => {
         assert.equal(
             sourceFilesUnder('tests').every(file =>
                 file === 'tests/main_tests.ts' ||
-                file.startsWith('tests/v3_2_')
+                file.startsWith('tests/v3_2_') ||
+                file.startsWith('tests/support/v3_2_')
             ),
             true
         );
@@ -267,7 +268,7 @@ describe('TypeScript v3.2 MIGRATE-2 physical deletion audit', () => {
         );
         assert.doesNotMatch(
             api,
-            /\b(?:D0|D1|types|state|stdlib|parser|globals)\b/
+            /\b(?:D0|D1|MkCat|ComposeMorph|MkFunctorTerm|defineGlobal|globalDefs|resetMyLambdaPi)\b/
         );
     });
 

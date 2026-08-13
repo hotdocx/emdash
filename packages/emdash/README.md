@@ -76,6 +76,11 @@ The package has four deliberately bounded entries:
   It derives the owning module, exact checked declaration target,
   closure/runtime fingerprint, proof development, and theorem binding, then
   erases to the unchanged module-theorem plan/compiler.
+  The declaration-fragment authoring facade similarly co-locates each
+  ordinary declaration with its explicit trust evidence and Core/backend
+  linkage. It derives only repeated orders and companion revisions, then
+  erases to the unchanged dependency-module declaration fragment; it does not
+  infer trust or generate declarations or runtime rules.
   The research-goal profile keeps theorem, task, and decision evidence
   distinct, freshly replays checked-proof evidence, and derives status across
   finite `requires` and grouped `one-of` dependencies. Its companion
@@ -108,6 +113,7 @@ import {
   CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE,
   CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE,
   CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE,
+  CORE_LF_DECLARATION_FRAGMENT_AUTHORING_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
@@ -137,6 +143,7 @@ import {
   createCoreLfDeclaredTheoremDevelopment,
   createCoreLfModuleTheoremDevelopment,
   createCoreLfAuthoredModuleTheoremDevelopment,
+  createCoreLfAuthoredDependencyModuleDeclarationFragment,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
@@ -172,6 +179,7 @@ void CORE_LF_DEVELOPMENT_DIFF_PROFILE;
 void CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE;
 void CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE;
 void CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE;
+void CORE_LF_DECLARATION_FRAGMENT_AUTHORING_PROFILE;
 void CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
@@ -199,6 +207,7 @@ void createCoreProofPlanHoleReplacement;
 void createCoreLfDeclaredTheoremDevelopment;
 void createCoreLfModuleTheoremDevelopment;
 void createCoreLfAuthoredModuleTheoremDevelopment;
+void createCoreLfAuthoredDependencyModuleDeclarationFragment;
 void createCoreLfAccessiblePremiseIndex;
 void createCoreLfFragmentProofDevelopment;
 void createCoreLfFragmentWorkspaceProofFingerprint;
