@@ -60,12 +60,48 @@ const marker = coreLfQualifiedSymbol(
     runtimeProofProviderModuleId,
     'runtime_marker'
 );
+const providerValue = coreLfQualifiedSymbol(
+    runtimeProofProviderModuleId,
+    'provider_value'
+);
+const providerPublicTheorem = coreLfQualifiedSymbol(
+    runtimeProofProviderModuleId,
+    'provider_public_theorem'
+);
+const providerProtectedTheorem = coreLfQualifiedSymbol(
+    runtimeProofProviderModuleId,
+    'provider_protected_theorem'
+);
+const providerPrivateTheorem = coreLfQualifiedSymbol(
+    runtimeProofProviderModuleId,
+    'provider_private_theorem'
+);
+const providerTransitiveAlias = coreLfQualifiedSymbol(
+    runtimeProofProviderModuleId,
+    'provider_transitive_alias'
+);
 const value = coreLfQualifiedSymbol(runtimeProofConsumerModuleId, 'value');
 const first = coreLfQualifiedSymbol(runtimeProofConsumerModuleId, 'first');
 const second = coreLfQualifiedSymbol(runtimeProofConsumerModuleId, 'second');
 const helperFirst = coreLfQualifiedSymbol(
     runtimeProofConsumerModuleId,
     'helper_first'
+);
+const localPrivate = coreLfQualifiedSymbol(
+    runtimeProofConsumerModuleId,
+    'local_private'
+);
+const localPass = coreLfQualifiedSymbol(
+    runtimeProofConsumerModuleId,
+    'local_pass'
+);
+const consumerTypeGoal = coreLfQualifiedSymbol(
+    runtimeProofConsumerModuleId,
+    'consumer_type_goal'
+);
+const secretType = coreLfQualifiedSymbol(
+    runtimeProofUnrelatedModuleId,
+    'secret_type'
 );
 const secret = coreLfQualifiedSymbol(
     runtimeProofUnrelatedModuleId,
@@ -79,10 +115,19 @@ export const runtimeProofSymbols = Object.freeze({
     base,
     normalize,
     marker,
+    providerValue,
+    providerPublicTheorem,
+    providerProtectedTheorem,
+    providerPrivateTheorem,
+    providerTransitiveAlias,
     value,
     first,
     second,
     helperFirst,
+    localPrivate,
+    localPass,
+    consumerTypeGoal,
+    secretType,
     secret
 });
 
@@ -112,14 +157,15 @@ const declaration = (
     order: number,
     symbol: Symbol,
     type: CoreLfTransferExpression,
-    authorityPath: string
+    authorityPath: string,
+    visibility: 'public' | 'protected' | 'private' = 'public'
 ) => ({
     order,
     symbol,
     type,
     body: coreLfTransferAbsentBody(),
     modifiers: {
-        visibility: 'public' as const,
+        visibility,
         rigidity: 'ordinary' as const,
         sourceOpacity: 'opaque' as const
     },
@@ -189,15 +235,27 @@ const policyFor = (
     });
 };
 
-const providerFixture = (withRuntime: boolean) => {
+const providerFixture = (
+    withRuntime: boolean,
+    dependencies: readonly string[] = []
+) => {
+    const withTransitiveDependency = dependencies.includes(
+        runtimeProofUnrelatedModuleId
+    );
+    const theoremType = call(decode, call(normalize, global(base)));
     const baseModule = createCoreLfModuleSpec({
         revision: 'runtime-proof-provider-base-1',
         moduleId: runtimeProofProviderModuleId,
         fragmentId: 'provider-base',
         authorityPath: providerPath,
         sourceSha256: providerSha,
-        dependencies: [],
-        externalSymbols: [],
+        dependencies,
+        externalSymbols: withTransitiveDependency
+            ? [{
+                symbol: secretType,
+                availability: 'dependency-module' as const
+            }]
+            : [],
         declarations: [
             declaration(0, code, { tag: 'type' }, providerPath),
             {
@@ -240,7 +298,37 @@ const providerFixture = (withRuntime: boolean) => {
                 },
                 provenance: source(providerPath, 'symbol normalize;')
             },
-            declaration(3, base, global(code), providerPath)
+            declaration(3, base, global(code), providerPath),
+            declaration(4, providerValue, theoremType, providerPath),
+            declaration(
+                5,
+                providerPublicTheorem,
+                theoremType,
+                providerPath
+            ),
+            declaration(
+                6,
+                providerProtectedTheorem,
+                theoremType,
+                providerPath,
+                'protected'
+            ),
+            declaration(
+                7,
+                providerPrivateTheorem,
+                theoremType,
+                providerPath,
+                'private'
+            ),
+            ...(withTransitiveDependency
+                ? [transparentDefinition(
+                    8,
+                    providerTransitiveAlias,
+                    { tag: 'type' },
+                    global(secretType),
+                    providerPath
+                )]
+                : [])
         ],
         inductives: [],
         runtimeRules: [],
@@ -252,7 +340,19 @@ const providerFixture = (withRuntime: boolean) => {
         linkage: createCoreLfTransferDeclarationLinkage(baseModule, {
             revision: 'runtime-proof-provider-base-linkage-1',
             moduleRevision: baseModule.revision,
-            entries: links([code, decode, normalize, base])
+            entries: links([
+                code,
+                decode,
+                normalize,
+                base,
+                providerValue,
+                providerPublicTheorem,
+                providerProtectedTheorem,
+                providerPrivateTheorem,
+                ...(withTransitiveDependency
+                    ? [secretType, providerTransitiveAlias]
+                    : [])
+            ])
         })
     });
     if (!withRuntime) {
@@ -273,17 +373,17 @@ const providerFixture = (withRuntime: boolean) => {
         fragmentId: 'provider-mixed',
         authorityPath: providerPath,
         sourceSha256: providerSha,
-        dependencies: [],
+        dependencies,
         externalSymbols: [code, normalize].map(symbol => ({
             symbol,
             availability: 'earlier-fragment' as const
         })),
         declarations: [
-            declaration(4, marker, { tag: 'type' }, providerPath)
+            declaration(9, marker, { tag: 'type' }, providerPath)
         ],
         inductives: [],
         runtimeRules: [{
-            order: 5,
+            order: 10,
             id: 'fixture.runtime_proof.normalize',
             groupId: 'fixture.runtime_proof.normalize',
             clauseOrder: 0,
@@ -328,7 +428,7 @@ const providerFixture = (withRuntime: boolean) => {
     };
 };
 
-const consumerFixture = () => {
+const consumerFixture = (withTransitiveTypeGoal = false) => {
     const theoremType = call(decode, call(normalize, global(base)));
     const module = createCoreLfModuleSpec({
         revision: 'runtime-proof-consumer-1',
@@ -337,7 +437,12 @@ const consumerFixture = () => {
         authorityPath: consumerPath,
         sourceSha256: consumerSha,
         dependencies: [runtimeProofProviderModuleId],
-        externalSymbols: [decode, normalize, base].map(symbol => ({
+        externalSymbols: [
+            decode,
+            normalize,
+            base,
+            ...(withTransitiveTypeGoal ? [providerTransitiveAlias] : [])
+        ].map(symbol => ({
             symbol,
             availability: 'dependency-module' as const
         })),
@@ -351,7 +456,36 @@ const consumerFixture = () => {
                 theoremType,
                 global(first),
                 consumerPath
-            )
+            ),
+            declaration(
+                4,
+                localPrivate,
+                theoremType,
+                consumerPath,
+                'private'
+            ),
+            declaration(
+                5,
+                localPass,
+                {
+                    tag: 'pi',
+                    binder: {
+                        hint: 'proof',
+                        mode,
+                        type: theoremType
+                    },
+                    body: theoremType
+                },
+                consumerPath
+            ),
+            ...(withTransitiveTypeGoal
+                ? [declaration(
+                    6,
+                    consumerTypeGoal,
+                    global(providerTransitiveAlias),
+                    consumerPath
+                )]
+                : [])
         ],
         inductives: [],
         runtimeRules: [],
@@ -370,7 +504,12 @@ const consumerFixture = () => {
                 value,
                 first,
                 second,
-                helperFirst
+                helperFirst,
+                localPrivate,
+                localPass,
+                ...(withTransitiveTypeGoal
+                    ? [providerTransitiveAlias, consumerTypeGoal]
+                    : [])
             ])
         })
     });
@@ -389,7 +528,10 @@ const unrelatedFixture = () => {
         sourceSha256: unrelatedSha,
         dependencies: [],
         externalSymbols: [],
-        declarations: [declaration(0, secret, { tag: 'type' }, unrelatedPath)],
+        declarations: [
+            declaration(0, secretType, { tag: 'type' }, unrelatedPath),
+            declaration(1, secret, global(secretType), unrelatedPath)
+        ],
         inductives: [],
         runtimeRules: [],
         proofRules: []
@@ -400,7 +542,7 @@ const unrelatedFixture = () => {
         linkage: createCoreLfTransferDeclarationLinkage(module, {
             revision: 'runtime-proof-unrelated-linkage-1',
             moduleRevision: module.revision,
-            entries: links([secret])
+            entries: links([secretType, secret])
         })
     });
     return createCoreLfDependencyModuleFragmentChain({
@@ -412,15 +554,31 @@ const unrelatedFixture = () => {
 export interface RuntimeProofWorkspaceFixtureOptions {
     readonly runtime?: boolean;
     readonly reverse?: boolean;
+    /** Make the normally unrelated module a provider dependency. */
+    readonly providerDependsOnUnrelated?: boolean;
 }
 
 export const createRuntimeProofWorkspaceFixture = (
     options: RuntimeProofWorkspaceFixtureOptions = {}
 ): CoreLfCompiledFragmentModuleWorkspace => {
-    const provider = providerFixture(options.runtime ?? true);
-    const consumer = consumerFixture();
     const unrelated = unrelatedFixture();
+    const unrelatedIdentity = createCoreLfFragmentModuleIdentity(unrelated);
+    const provider = providerFixture(
+        options.runtime ?? true,
+        options.providerDependsOnUnrelated
+            ? [runtimeProofUnrelatedModuleId]
+            : []
+    );
+    const consumer = consumerFixture(
+        options.providerDependsOnUnrelated ?? false
+    );
     const providerIdentity = createCoreLfFragmentModuleIdentity(provider.chain);
+    const providerInput = {
+        chain: provider.chain,
+        dependencyProviders: options.providerDependsOnUnrelated
+            ? [unrelatedIdentity]
+            : []
+    };
     const consumerInput = {
         chain: consumer,
         dependencyProviders: [providerIdentity],
@@ -433,7 +591,7 @@ export const createRuntimeProofWorkspaceFixture = (
     };
     const modules = [
         consumerInput,
-        { chain: provider.chain },
+        providerInput,
         { chain: unrelated }
     ];
     const plan = createCoreLfFragmentModuleWorkspace({
@@ -456,6 +614,11 @@ export const createRuntimeProofDocumentInput = (
         }],
         nodeSource
     );
+    const providerHasUnrelatedDependency = workspace.module(
+        runtimeProofProviderModuleId
+    )?.source.identity.dependencies.includes(
+        runtimeProofUnrelatedModuleId
+    ) ?? false;
     return {
         moduleId: runtimeProofConsumerModuleId,
         declarationId: open
@@ -476,6 +639,12 @@ export const createRuntimeProofDocumentInput = (
                 sourceSha256: `sha256:${'4'.repeat(64)}`,
                 profileSha256: `sha256:${'5'.repeat(64)}`,
                 interfaceSha256ByModuleId: {
+                    ...(providerHasUnrelatedDependency
+                        ? {
+                            [runtimeProofUnrelatedModuleId]:
+                                `sha256:${'8'.repeat(64)}`
+                        }
+                        : {}),
                     [runtimeProofProviderModuleId]:
                         `sha256:${'6'.repeat(64)}`,
                     [runtimeProofConsumerModuleId]:

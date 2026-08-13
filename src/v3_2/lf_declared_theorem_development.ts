@@ -35,6 +35,9 @@ import {
     CoreLfFragmentWorkspaceProofCompilation
 } from './lf_fragment_workspace_proof';
 import {
+    CoreProofPlan
+} from './proof_plan';
+import {
     KernelExpression,
     kernelFree,
     provenance
@@ -70,6 +73,34 @@ export const serializeCoreLfDeclaredTheoremDevelopmentProfile = (): string =>
         2
     )}\n`;
 
+export const CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE = Object.freeze({
+    revision: 'emdash-lf-module-theorem-development-v1' as const,
+    artifactRevision:
+        'emdash-lf-module-theorem-development-artifact-v1' as const,
+    proofDevelopmentProfileRevision:
+        CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE.revision,
+    declaredTheoremProfileRevision:
+        CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE.revision,
+    bindingPolicy: 'exact-one-to-one-owning-module-opaque-signature' as const,
+    referencePolicy: 'root-local-plus-direct-public-imports' as const,
+    dependencyPolicy:
+        'closed-workspace-transitive-acyclic-complete-prerequisites' as const,
+    theoremOrder: 'stable-dependency-first-topological' as const,
+    comparisonStepLimit: CORE_LF_CANDIDATE_COMPARISON_STEP_LIMIT,
+    supportsOpenProofs: true as const,
+    supportsCrossModuleTheoremBindings: true as const,
+    supportsDetachedTheoremImports: false as const,
+    generatesDeclarations: false as const,
+    acceptsRuntimeInput: false as const,
+    productionLambdapiDependency: false as const,
+    nodeBuiltinDependency: false as const,
+    computesCryptographicHashes: false as const,
+    performsIo: false as const
+});
+
+export const serializeCoreLfModuleTheoremDevelopmentProfile = (): string =>
+    `${JSON.stringify(CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE, null, 2)}\n`;
+
 export type CoreLfDeclaredTheoremDevelopmentErrorCode =
     | 'INVALID_DEVELOPMENT'
     | 'INVALID_BINDING'
@@ -83,6 +114,7 @@ export type CoreLfDeclaredTheoremDevelopmentErrorCode =
     | 'UNSUPPORTED_THEOREM_DECLARATION'
     | 'THEOREM_TARGET_MISMATCH'
     | 'INVALID_COMPILED_DEVELOPMENT'
+    | 'INACCESSIBLE_PROOF_REFERENCE'
     | 'SELF_THEOREM_DEPENDENCY'
     | 'CYCLIC_THEOREM_DEPENDENCY'
     | 'OPEN_THEOREM_DEPENDENCY';
@@ -186,10 +218,30 @@ export interface CoreLfDeclaredTheoremDevelopmentPlan {
     readonly bindings: readonly CoreLfDeclaredTheoremBindingInput[];
 }
 
-/** Validate exact binding coverage and canonicalize by proof identity. */
-export function createCoreLfDeclaredTheoremDevelopment(
-    input: CoreLfDeclaredTheoremDevelopmentInput
-): CoreLfDeclaredTheoremDevelopmentPlan {
+export interface CoreLfModuleTheoremDevelopmentInput
+extends CoreLfDeclaredTheoremDevelopmentInput {}
+
+export interface CoreLfModuleTheoremDevelopmentPlan {
+    readonly revision: string;
+    readonly profileRevision:
+        typeof CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.revision;
+    readonly proofDevelopmentProfileRevision:
+        typeof CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE.revision;
+    readonly declaredTheoremProfileRevision:
+        typeof CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE.revision;
+    readonly development: CoreLfFragmentProofDevelopmentPlan;
+    readonly bindings: readonly CoreLfDeclaredTheoremBindingInput[];
+}
+
+interface CanonicalTheoremBindings {
+    readonly development: CoreLfFragmentProofDevelopmentPlan;
+    readonly bindings: readonly CoreLfDeclaredTheoremBindingInput[];
+}
+
+const canonicalTheoremBindings = (
+    input: CoreLfDeclaredTheoremDevelopmentInput,
+    requireSingleRoot: boolean
+): CanonicalTheoremBindings => {
     if (!SAFE_REVISION.test(input.revision)) {
         return fail(
             'INVALID_DEVELOPMENT',
@@ -258,7 +310,7 @@ export function createCoreLfDeclaredTheoremDevelopment(
                 'THEOREM_MODULE_MISMATCH',
                 `bindings[${index}].theorem.moduleId`,
                 `Proof '${displayProof(proof)}' cannot bind theorem ` +
-                    `'${displaySymbol(theorem)}' in the same-module profile`
+                    `'${displaySymbol(theorem)}' outside its owning module`
             );
         }
         roots.add(proof.moduleId);
@@ -277,7 +329,7 @@ export function createCoreLfDeclaredTheoremDevelopment(
             );
         }
     }
-    if (roots.size > 1) {
+    if (requireSingleRoot && roots.size > 1) {
         return fail(
             'MULTIPLE_THEOREM_MODULES',
             'bindings',
@@ -288,14 +340,42 @@ export function createCoreLfDeclaredTheoremDevelopment(
     bindings.sort((left, right) =>
         compareText(proofKey(left.proof), proofKey(right.proof))
     );
+    return {
+        development,
+        bindings: Object.freeze(bindings)
+    };
+};
+
+/** Validate exact binding coverage and canonicalize by proof identity. */
+export function createCoreLfDeclaredTheoremDevelopment(
+    input: CoreLfDeclaredTheoremDevelopmentInput
+): CoreLfDeclaredTheoremDevelopmentPlan {
+    const canonical = canonicalTheoremBindings(input, true);
     return Object.freeze({
         revision: input.revision,
         profileRevision:
             CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE.revision,
         proofDevelopmentProfileRevision:
             CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE.revision,
-        development,
-        bindings: Object.freeze(bindings)
+        development: canonical.development,
+        bindings: canonical.bindings
+    });
+}
+
+/** Validate a closed multi-module theorem development. */
+export function createCoreLfModuleTheoremDevelopment(
+    input: CoreLfModuleTheoremDevelopmentInput
+): CoreLfModuleTheoremDevelopmentPlan {
+    const canonical = canonicalTheoremBindings(input, false);
+    return Object.freeze({
+        revision: input.revision,
+        profileRevision: CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.revision,
+        proofDevelopmentProfileRevision:
+            CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE.revision,
+        declaredTheoremProfileRevision:
+            CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE.revision,
+        development: canonical.development,
+        bindings: canonical.bindings
     });
 }
 
@@ -361,6 +441,48 @@ const transitiveFreeReferences = (
     return Object.freeze([...seen].sort(compareText));
 };
 
+const proofPlanFreeReferences = (
+    plan: CoreProofPlan
+): readonly string[] => {
+    const references = new Set<string>();
+    const addExpression = (expression: KernelExpression): void => {
+        expressionFreeReferences(expression).forEach(reference =>
+            references.add(reference)
+        );
+    };
+    const pending: CoreProofPlan[] = [plan];
+    while (pending.length > 0) {
+        const current = pending.pop();
+        if (current === undefined) break;
+        switch (current.tag) {
+            case 'exact':
+                addExpression(current.solution);
+                break;
+            case 'intro':
+                pending.push(current.body);
+                break;
+            case 'apply':
+                addExpression(current.callee);
+                pending.push(...current.premises);
+                break;
+            case 'have':
+                addExpression(current.binding.type);
+                pending.push(current.proof, current.body);
+                break;
+            case 'hole':
+                if (current.expectation?.target !== undefined) {
+                    addExpression(current.expectation.target);
+                }
+                break;
+            default: {
+                const exhaustive: never = current;
+                return exhaustive;
+            }
+        }
+    }
+    return Object.freeze([...references].sort(compareText));
+};
+
 interface ResolvedBinding {
     readonly binding: CoreLfDeclaredTheoremBindingInput;
     readonly proofInput:
@@ -370,6 +492,63 @@ interface ResolvedBinding {
     readonly coreName: string;
     readonly environment: CoreLfDeclarationEnvironment;
 }
+
+const accessibleProofReferences = (
+    entry: ResolvedBinding,
+    index: number
+): readonly string[] => {
+    const root = entry.compilation.closureCompilation.modules.find(module =>
+        module.source.identity.moduleId === entry.binding.proof.moduleId
+    );
+    if (root === undefined) {
+        return fail(
+            'INVALID_COMPILED_DEVELOPMENT',
+            `bindings[${index}].proof.moduleId`,
+            `Exact proof closure has no root ` +
+                `'${entry.binding.proof.moduleId}'`
+        );
+    }
+    const allowed = new Set<string>();
+    root.compiled.moduleInterface?.entries.forEach(candidate => {
+        if (
+            candidate.status !== 'excluded' &&
+            candidate.link.kind === 'free-declaration'
+        ) {
+            allowed.add(candidate.link.coreName);
+        }
+    });
+    root.dependencyInterfaces.forEach(dependency => {
+        dependency.entries.forEach(candidate => {
+            if (
+                candidate.status !== 'excluded' &&
+                candidate.visibility === 'public' &&
+                candidate.link.kind === 'free-declaration'
+            ) {
+                allowed.add(candidate.link.coreName);
+            }
+        });
+    });
+
+    const sourceReferences = new Set<string>([
+        ...expressionFreeReferences(entry.proofInput.type),
+        ...proofPlanFreeReferences(entry.proofInput.plan),
+        ...(entry.compilation.checkedTerm === undefined
+            ? []
+            : expressionFreeReferences(entry.compilation.checkedTerm))
+    ]);
+    const ordered = [...sourceReferences].sort(compareText);
+    const inaccessible = ordered.filter(reference => !allowed.has(reference));
+    if (inaccessible.length > 0) {
+        return fail(
+            'INACCESSIBLE_PROOF_REFERENCE',
+            `bindings[${index}].proof`,
+            `Proof '${displayProof(entry.binding.proof)}' directly names ` +
+                `free declaration(s) outside its local/direct-public ` +
+                `source scope: ${inaccessible.join(', ')}`
+        );
+    }
+    return Object.freeze(ordered);
+};
 
 export interface CoreLfDeclaredTheoremArtifactBinding {
     readonly proof: CoreLfDeclaredTheoremProofIdentity;
@@ -416,6 +595,52 @@ export class CoreLfCompiledDeclaredTheoremDevelopment {
         moduleId: string,
         declarationId: string
     ): CoreLfDeclaredTheoremArtifactBinding | undefined {
+        return this.bindings.find(entry =>
+            entry.proof.moduleId === moduleId &&
+            entry.proof.declarationId === declarationId
+        );
+    }
+}
+
+export interface CoreLfModuleTheoremArtifactBinding
+extends CoreLfDeclaredTheoremArtifactBinding {
+    /** Free declarations named by target, inert plan, or final checked term. */
+    readonly sourceFreeReferences: readonly string[];
+}
+
+export interface CoreLfModuleTheoremDevelopmentArtifact {
+    readonly revision:
+        typeof CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.artifactRevision;
+    readonly profileRevision:
+        typeof CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.revision;
+    readonly developmentRevision: string;
+    readonly status: 'complete' | 'incomplete';
+    readonly openGoalCount: number;
+    readonly development: CoreLfFragmentProofDevelopmentArtifact;
+    readonly bindings: readonly CoreLfModuleTheoremArtifactBinding[];
+    readonly theoremOrder:
+        readonly CoreLfDeclaredTheoremProofIdentity[];
+}
+
+/** Checked closed-workspace theorem DAG plus its portable evidence. */
+export class CoreLfCompiledModuleTheoremDevelopment {
+    readonly revision: string;
+    readonly bindings: readonly CoreLfModuleTheoremArtifactBinding[];
+
+    constructor(
+        public readonly plan: CoreLfModuleTheoremDevelopmentPlan,
+        public readonly development: CoreLfCompiledFragmentProofDevelopment,
+        public readonly artifact: CoreLfModuleTheoremDevelopmentArtifact
+    ) {
+        this.revision = `${plan.revision}+compiled-1`;
+        this.bindings = artifact.bindings;
+        Object.freeze(this);
+    }
+
+    binding(
+        moduleId: string,
+        declarationId: string
+    ): CoreLfModuleTheoremArtifactBinding | undefined {
         return this.bindings.find(entry =>
             entry.proof.moduleId === moduleId &&
             entry.proof.declarationId === declarationId
@@ -598,37 +823,29 @@ const dependencyFirstOrder = (
     return Object.freeze(order);
 };
 
-/** Compile exact proofs, bind theorem signatures, and certify their DAG. */
-export function compileCoreLfDeclaredTheoremDevelopment(
-    plan: CoreLfDeclaredTheoremDevelopmentPlan
-): CoreLfCompiledDeclaredTheoremDevelopment {
-    if (
-        plan.profileRevision !==
-            CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE.revision ||
-        plan.proofDevelopmentProfileRevision !==
-            CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE.revision
-    ) {
-        return fail(
-            'INVALID_DEVELOPMENT',
-            'profileRevision',
-            'Declared-theorem development targets an unsupported profile'
-        );
-    }
-    const canonical = createCoreLfDeclaredTheoremDevelopment({
-        revision: plan.revision,
-        development: plan.development,
-        bindings: plan.bindings
-    });
+interface CoreLfTheoremGraphPlan {
+    readonly development: CoreLfFragmentProofDevelopmentPlan;
+    readonly bindings: readonly CoreLfDeclaredTheoremBindingInput[];
+}
+
+interface CoreLfCompiledTheoremGraph {
+    readonly development: CoreLfCompiledFragmentProofDevelopment;
+    readonly bindings: readonly CoreLfDeclaredTheoremArtifactBinding[];
+    readonly theoremOrder:
+        readonly CoreLfDeclaredTheoremProofIdentity[];
+    readonly sourceFreeReferencesByProof:
+        ReadonlyMap<string, readonly string[]>;
+}
+
+const compileCoreLfTheoremGraph = (
+    plan: CoreLfTheoremGraphPlan,
+    enforceSourceVisibility: boolean
+): CoreLfCompiledTheoremGraph => {
     const development = compileCoreLfFragmentProofDevelopment(
-        canonical.development
+        plan.development
     );
-    const resolved = canonical.bindings.map((binding, index) =>
-        exactResolvedBinding(
-            binding,
-            canonical.development,
-            development,
-            index
-        )
+    const resolved = plan.bindings.map((binding, index) =>
+        exactResolvedBinding(binding, plan.development, development, index)
     );
     const resolvedByProof = new Map(resolved.map(entry => [
         proofKey(entry.binding.proof),
@@ -640,6 +857,10 @@ export function compileCoreLfDeclaredTheoremDevelopment(
     ]));
     const proofKeys = resolved.map(entry => proofKey(entry.binding.proof));
     const edges = new Map<string, readonly string[]>();
+    const sourceFreeReferencesByProof = new Map<
+        string,
+        readonly string[]
+    >();
 
     const bindings = resolved.map((entry, index) => {
         const status = entry.compilation.artifact.state.status;
@@ -655,6 +876,12 @@ export function compileCoreLfDeclaredTheoremDevelopment(
             return dependency === undefined ? [] : [dependency];
         }).sort(compareText));
         const key = proofKey(entry.binding.proof);
+        if (enforceSourceVisibility) {
+            sourceFreeReferencesByProof.set(
+                key,
+                accessibleProofReferences(entry, index)
+            );
+        }
         if (dependencyKeys.includes(key)) {
             return fail(
                 'SELF_THEOREM_DEPENDENCY',
@@ -710,21 +937,51 @@ export function compileCoreLfDeclaredTheoremDevelopment(
     const theoremOrder = dependencyFirstOrder(proofKeys, edges).map(key =>
         cloneProof(resolvedByProof.get(key)!.binding.proof)
     );
+    return {
+        development,
+        bindings: deepFreeze(bindings),
+        theoremOrder: deepFreeze(theoremOrder),
+        sourceFreeReferencesByProof
+    };
+};
+
+/** Compile exact proofs, bind theorem signatures, and certify their DAG. */
+export function compileCoreLfDeclaredTheoremDevelopment(
+    plan: CoreLfDeclaredTheoremDevelopmentPlan
+): CoreLfCompiledDeclaredTheoremDevelopment {
+    if (
+        plan.profileRevision !==
+            CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE.revision ||
+        plan.proofDevelopmentProfileRevision !==
+            CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE.revision
+    ) {
+        return fail(
+            'INVALID_DEVELOPMENT',
+            'profileRevision',
+            'Declared-theorem development targets an unsupported profile'
+        );
+    }
+    const canonical = createCoreLfDeclaredTheoremDevelopment({
+        revision: plan.revision,
+        development: plan.development,
+        bindings: plan.bindings
+    });
+    const graph = compileCoreLfTheoremGraph(canonical, false);
     const artifact: CoreLfDeclaredTheoremDevelopmentArtifact = deepFreeze({
         revision:
             CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE.artifactRevision,
         profileRevision:
             CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE.revision,
         developmentRevision: canonical.revision,
-        status: development.artifact.status,
-        openGoalCount: development.artifact.openGoalCount,
-        development: development.artifact,
-        bindings,
-        theoremOrder
+        status: graph.development.artifact.status,
+        openGoalCount: graph.development.artifact.openGoalCount,
+        development: graph.development.artifact,
+        bindings: graph.bindings,
+        theoremOrder: graph.theoremOrder
     });
     return new CoreLfCompiledDeclaredTheoremDevelopment(
         canonical,
-        development,
+        graph.development,
         artifact
     );
 }
@@ -732,4 +989,58 @@ export function compileCoreLfDeclaredTheoremDevelopment(
 /** Deterministic, diff-friendly portable theorem-development artifact. */
 export const serializeCoreLfDeclaredTheoremDevelopmentArtifact = (
     artifact: CoreLfDeclaredTheoremDevelopmentArtifact
+): string => `${JSON.stringify(artifact, null, 2)}\n`;
+
+/** Compile a visibility-safe theorem DAG across one closed workspace. */
+export function compileCoreLfModuleTheoremDevelopment(
+    plan: CoreLfModuleTheoremDevelopmentPlan
+): CoreLfCompiledModuleTheoremDevelopment {
+    if (
+        plan.profileRevision !==
+            CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.revision ||
+        plan.proofDevelopmentProfileRevision !==
+            CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE.revision ||
+        plan.declaredTheoremProfileRevision !==
+            CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE.revision
+    ) {
+        return fail(
+            'INVALID_DEVELOPMENT',
+            'profileRevision',
+            'Module theorem development targets an unsupported profile'
+        );
+    }
+    const canonical = createCoreLfModuleTheoremDevelopment({
+        revision: plan.revision,
+        development: plan.development,
+        bindings: plan.bindings
+    });
+    const graph = compileCoreLfTheoremGraph(canonical, true);
+    const bindings: readonly CoreLfModuleTheoremArtifactBinding[] =
+        graph.bindings.map(binding => ({
+            ...binding,
+            sourceFreeReferences:
+                graph.sourceFreeReferencesByProof.get(
+                    proofKey(binding.proof)
+                ) ?? Object.freeze([])
+        }));
+    const artifact: CoreLfModuleTheoremDevelopmentArtifact = deepFreeze({
+        revision: CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.artifactRevision,
+        profileRevision: CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.revision,
+        developmentRevision: canonical.revision,
+        status: graph.development.artifact.status,
+        openGoalCount: graph.development.artifact.openGoalCount,
+        development: graph.development.artifact,
+        bindings,
+        theoremOrder: graph.theoremOrder
+    });
+    return new CoreLfCompiledModuleTheoremDevelopment(
+        canonical,
+        graph.development,
+        artifact
+    );
+}
+
+/** Deterministic portable closed-workspace theorem artifact. */
+export const serializeCoreLfModuleTheoremDevelopmentArtifact = (
+    artifact: CoreLfModuleTheoremDevelopmentArtifact
 ): string => `${JSON.stringify(artifact, null, 2)}\n`;
