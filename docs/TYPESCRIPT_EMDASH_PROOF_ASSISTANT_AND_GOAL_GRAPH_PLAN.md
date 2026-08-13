@@ -90,17 +90,15 @@ published non-force, `main` was fast-forwarded without a merge, the unchanged
 path-filtered workflow deployed the exact candidate, and the public URL
 responded with HTTP 200. The plan-only completion checkpoint is the final
 four-ref convergence target. No npm release, tag, GitHub Release, workflow
-edit, or new feature occurred. No further implementation row is selected
-pending the next bounded product audit. That audit now selects
-`DECLARATION-AUTHORING-24`: ordinary declaration-only fragments currently
-require callers to synchronize three parallel declaration, trust-policy, and
-symbol-linkage arrays even though the existing owners already validate their
-one-to-one relationship. The frozen first boundary is one browser-safe direct-
-TypeScript facade which co-locates each declaration with an explicit policy,
+edit, or new feature occurred. The next bounded product audit selected
+`DECLARATION-AUTHORING-24`, now complete at `01a2971`: one browser-safe direct-
+TypeScript facade co-locates each ordinary declaration with explicit policy,
 review evidence, and linkage, derives only repetitive orders and companion
 revisions, and erases to the existing dependency-module declaration fragment.
-It does not infer trust, generate runtime/proof rules, parse declarations,
-change Core/checker semantics, or widen structure/class behavior. The first
+It composes with a runtime-bearing provider/consumer theorem development and
+adds no trust inference, runtime/proof generation, parser, Core/checker rule,
+or structure/class widening. No further implementation row is selected
+pending another bounded product audit. The first
 research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -907,7 +905,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `MODULE-THEOREM-DAG-21` | Closed-workspace cross-module theorem DAG with exact proof-source visibility | complete | `7463439`; additive multi-root profile over the row-20 engine, exact local/direct-public source firewall, public imported theorem chaining, transitive/private/protected/unrelated/unknown rejection, stable portable evidence, browser closure, and packed consumers are green. No detached export, remote linker, parser, CLI, index/ranking, Core/checker semantics, or release. |
 | `THEOREM-AUTHORING-22` | Direct-TypeScript theorem entries that lower to the exact row-21 plan without repeated module, target, fingerprint-runtime, or binding plumbing | complete | `50231b7`; additive browser-safe authoring factory over an arbitrary exact fragment workspace, exact local target and closure/runtime fingerprint derivation, byte-identical row-21 lowering/artifacts, delegated typed negatives, browser closure, and packed consumers green. No new artifact, declaration generation, parser, session, Core/checker semantics, host I/O, or release. |
 | `PUBLIC-INTEGRATE-23` | Publish the accumulated qualified proof-assistant source through the existing goal branch and fast-forward-only public `main` | complete | Source candidate `9fcdf1b`, successful Pages run `31655278546`, exact deployment `5879828013`, HTTP-200 public URL, no npm run, and plan-only final ref convergence. No tag, npm/GitHub Release, workflow/package version, new semantics, or cleanup. |
-| `DECLARATION-AUTHORING-24` | Co-located direct-TypeScript declaration, explicit trust evidence, and linkage lowering to an exact dependency-module declaration fragment | proposal frozen | One declaration-only erasing facade with derived orders/companion revisions, explicit external/provider data, byte-identical low-level lowering, a runtime-bearing provider/consumer theorem proof, browser closure, and packed consumers. No trust inference, mixed/runtime/proof generation, structure/class widening, parser/source schema, Core/checker change, host I/O, or release. |
+| `DECLARATION-AUTHORING-24` | Co-located direct-TypeScript declaration, explicit trust evidence, and linkage lowering to an exact dependency-module declaration fragment | complete | `01a2971`; one declaration-only erasing facade with derived orders/companion revisions, explicit external/provider data, deeply equal low-level lowering, runtime-bearing provider/consumer theorem proof, browser closure, and packed consumers green. No trust inference, mixed/runtime/proof generation, structure/class widening, parser/source schema, Core/checker change, host I/O, or release. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
@@ -922,15 +920,14 @@ outcome. The row is parked without a classifier repair, fresh coordinate, or
 retry. It does not complete 12B4 or authorize a performance, proof,
 integration, release, deployment, or later-stage claim.
 
-Roadmap accounting after selecting the bounded declaration-authoring tranche
-is 41 of 48 scoped rows complete, one proposal frozen, and six rows deliberately
+Roadmap accounting after completing the bounded declaration-authoring tranche
+is 42 of 48 scoped rows complete. All six remaining rows are deliberately
 terminal for their current questions:
 deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
 `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4`, plus parked
 `AGENT-EVAL-12B4`. None is reopened merely to keep the goal active. No next
-implementation row beyond `DECLARATION-AUTHORING-24` is selected. Its immutable
-proposal review must precede implementation, and another row requires a later
-bounded product audit under `D-PA-270`.
+implementation row is selected until another bounded product audit under
+`D-PA-270` identifies and freezes a concrete user-visible limitation.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -8383,6 +8380,79 @@ hash computation, incremental/remote modules, commands, release, hosted
 integration, sibling changes, and mathematical-source edits are separate
 product questions.
 
+### Completion record
+
+Checkpoint `01a2971` completes the row at the frozen erasing-facade boundary.
+`emdash-lf-declaration-fragment-authoring-v1`:
+
+1. accepts explicit module/source/dependency metadata and one ordered list of
+   local declarations, each co-locating its qualified symbol, type, body,
+   modifiers, provenance, declaration policy, nonempty review evidence, and
+   Core-owner or free-declaration linkage;
+2. retains explicit external availability and linkage, and requires an exact
+   caller-supplied provider identity only for an earlier-fragment external;
+3. derives consecutive source order plus policy/linkage entry order and the
+   two companion revisions, then invokes the unchanged module, policy,
+   linkage, and dependency-fragment factories;
+4. returns the ordinary deeply frozen
+   `CoreLfSameModuleDeclarationFragmentSource`, with no artifact, callback,
+   session, runtime input, registry, hash computation, I/O, or second checker;
+   and
+5. publishes the profile, input/entry/link/trust types, factory, capability
+   v21 description, root/workspace exports, package documentation, and packed
+   consumer coverage.
+
+The positive reference proves deep equality with a separately constructed
+low-level module/policy/linkage fragment and demonstrates that later caller
+mutation cannot alter the result. It includes a checked transparent
+definition rather than only opaque signatures. The end-to-end consumer uses
+the facade for both ordinary provider and consumer fragments, retains one
+explicit existing mixed fragment solely for its checked normalization
+runtime, completes a provider theorem through runtime conversion, and then
+completes a consumer theorem by naming that direct-public provider theorem
+through the unchanged row-22/21 owners.
+
+Explicit negative coverage proves that the facade does not repair or infer
+trust: an absent body selected as a checked transparent definition reaches
+the existing compiler's `INCOMPATIBLE_POLICY`; malformed module metadata,
+source order, duplicate declarations, empty review evidence, and invalid
+linkage retain their existing typed owner errors; and a fabricated earlier-
+fragment provider fails at the existing fragment-chain boundary. The
+dependency-module consumer supplies no invented same-module provider.
+
+Final proportional evidence is:
+
+- 83 of 83 nearest declaration compiler, same-/cross-module fragment,
+  theorem-authoring, capability, and browser tests green before the final
+  diagnostic addition; the final changed-boundary subset is 55 of 55 green,
+  including all 6 declaration-authoring and all 6 migration-readiness tests;
+- workspace contract, root typecheck, full lint before the aggregate, final
+  changed-file lint, verifier syntax, staged-diff review, and whitespace
+  hygiene green; and
+- `package:check` green across build and freshly packed ESM, CJS, strict
+  NodeNext, and browser consumers of the new profile, factory, serializer,
+  and public types.
+
+The required long aggregate has an explicit non-pass record. One assistant-
+launched `check:ts` did not return a terminal result before an unexpected
+turn interruption. The subsequent user-run command completed after 2,232
+tests with 2,168 passes, 62 skips, and exactly 2 failures, both in the stale
+MIGRATE-2 audit: it rejected the already-qualified
+`tests/support/v3_2_runtime_proof_fixture.ts` location introduced at
+`6ad0e17`, and treated the ordinary prose word “parser” in the already-public
+PathOut loader comment as a legacy compatibility API. The sole focused
+correction admits only `tests/support/v3_2_*` helpers and scans the standalone
+API for exact retired identifiers while retaining its exact import-target
+check. The migration suite then passed 6 of 6, and the combined final subset
+passed 55 of 55. Per the user's direct no-repeat instruction and `D-PA-019`,
+the 24-minute aggregate was not rerun; it is not reported as green.
+
+No root-test rerun, `check:all`, Lambdapi, book/print, sibling, deployment,
+publication, or release gate was run. None became decision-blocking after the
+focused repair. The row is terminal and may reopen only for the concrete
+consumer or changed owner contracts named above; another implementation row
+requires a fresh bounded product audit.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -8670,7 +8740,8 @@ product questions.
 | `D-PA-280` | Complete `THEOREM-AUTHORING-22` at `50231b7` and require another bounded product audit before selecting implementation. | The facade derives exact local targets and closure/runtime fingerprints, lowers to a deeply equal row-21 plan, produces byte-identical artifacts, preserves downstream typed failures, and is browser/packed-consumer green. Its sole correction removed nested caller-data aliasing through clone-and-freeze. Source schemas, default IDs, class DSLs, detached linking, commands, release, hosts, and mathematics remain separate; no further retry or widening is decision-relevant. |
 | `D-PA-281` | Select `PUBLIC-INTEGRATE-23` to publish exact source candidate `9fcdf1b` through non-force goal/main refs and the existing automatic Pages path. | The clean candidate is 84 commits and five terminal semantic owners ahead of exact local/remote `3727015`, while the public and recovery refs expose none of them. The 20-path diff changes no workflow/version/lock/template/math/book/secret boundary. A staged branch push, fast-forward-only candidate push, exact Pages verification, then plan-only final-ref convergence distributes qualified bytes without a tag, npm/GitHub Release, new feature, history rewrite, or repeated benchmark work. |
 | `D-PA-282` | Complete `PUBLIC-INTEGRATE-23` through source candidate `9fcdf1b`, Pages run `31655278546`, and deployment `5879828013`, then converge all four refs on this plan-only checkpoint. | Non-force recovery publication and fast-forward-only main publication succeeded; the exact candidate built/deployed successfully and the public URL returned HTTP 200; no npm run exists for the SHA. Existing hosted annotations were non-blocking and required no correction. The final plan delta is outside the Pages filter, so exact ref convergence closes distribution without a second deployment, tag, release, workflow/source change, or cleanup. |
-| `D-PA-283` | Select `DECLARATION-AUTHORING-24` as one declaration-only erasing facade over the existing module, policy, linkage, and dependency-fragment owners. | Current callers repeat each local declaration across three synchronized arrays, while external symbols require a fourth provider relation. Co-locating the unchanged explicit declaration, trust evidence, and linkage and deriving only orders/companion revisions removes real AI-authoring friction. Byte-identical lowering plus a runtime-bearing cross-module theorem consumer demonstrates value without trust inference, mixed/runtime generation, parser/source schema, new Core/checker semantics, host effects, release, or class/mathematics widening. |
+| `D-PA-283` | Select `DECLARATION-AUTHORING-24` as one declaration-only erasing facade over the existing module, policy, linkage, and dependency-fragment owners. | Current callers repeat each local declaration across three synchronized arrays, while external symbols require a fourth provider relation. Co-locating the unchanged explicit declaration, trust evidence, and linkage and deriving only orders/companion revisions removes real AI-authoring friction. Deeply equal low-level lowering plus a runtime-bearing cross-module theorem consumer demonstrates value without trust inference, mixed/runtime generation, parser/source schema, new Core/checker semantics, host effects, release, or class/mathematics widening. |
+| `D-PA-284` | Complete `DECLARATION-AUTHORING-24` at `01a2971` and require another bounded product audit before further implementation. | The facade deeply equals the explicit low-level fragment, retains all trust/link/provider decisions, composes with runtime-backed direct-public theorem use, preserves typed owner failures, and is focused/browser/packed/static green. The long aggregate's two failures were pre-existing stale migration-audit assumptions; one focused test-only correction is green, and the user-directed no-repeat policy keeps the aggregate honestly non-passing rather than spending another 24 minutes. No semantic widening, release, host, sibling, or mathematics effect is decision-relevant. |
 
 ## Validation And Checkpoint Policy
 
@@ -8879,8 +8950,8 @@ synchronized:
 > implementation row, perform a fresh bounded read-only product audit under
 > `D-PA-270`; do not add work merely because the persistent goal remains
 > active.
-> Treat `DECLARATION-AUTHORING-24`, decision `D-PA-283`, and its frozen
-> contract as the sole selected implementation row after public integration.
+> Treat `DECLARATION-AUTHORING-24`, decisions `D-PA-283`/`D-PA-284`, and exact
+> semantic checkpoint `01a2971` as complete after public integration.
 > Preserve explicit qualified symbols, declaration bodies/modifiers/
 > provenance, policy classes and review evidence, Core-owner/free-declaration
 > linkage, dependencies, external availability/providers, and source order.
@@ -8890,8 +8961,9 @@ synchronized:
 > theorem consumer. Do not infer trust or names, generate mixed/runtime/proof
 > content, add a parser/source schema/session/callback, change Core/checker or
 > class semantics, compute hashes, touch siblings/hosts/mathematics, or
-> publish/release. After its terminal result, require another bounded audit
-> before selecting any further row.
+> publish/release. Preserve the explicit failed-aggregate/focused-repair
+> evidence without rerunning the long aggregate. Require another bounded
+> audit before selecting any further row.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
 > `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
 > retained by audit 17 rather than inventing authority to advance the ledger.
