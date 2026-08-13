@@ -75,14 +75,16 @@ interface. The additive profile also closes the already-recorded raw-Core
 proof-reference gap by preflighting proof targets/plans/checked terms against
 root-local plus direct-public free declarations. It creates no detached
 theorem package, incremental linker, remote import, or general premise-index
-enrichment. The required bounded product audit has now selected
-`THEOREM-AUTHORING-22`: one additive direct-TypeScript factory will derive a
+enrichment. The required bounded product audit selected
+`THEOREM-AUTHORING-22`, now complete at `50231b7`: one additive
+direct-TypeScript factory derives a
 proof document's owning module, checked target, exact closure/runtime
 fingerprint, row-19 development, and row-21 binding from one theorem symbol,
 proof ID, inert plan, provenance, and caller-supplied hash material. It lowers
 to the existing row-21 plan/compiler and adds no new proof authority, parser,
 declaration generator, mutable session, Core/checker rule, or filesystem/hash
-capability. The first
+capability. No further implementation row is selected pending the next bounded
+product audit. The first
 research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -887,7 +889,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `RUNTIME-DEV-CATALOG-19` | Canonical multi-proof development catalog over exact runtime-bearing fragment workspaces | complete | `1f64d89`; direct TypeScript plan data, canonical proof ordering, one workspace compile plus fresh independent exact-runtime closure replay, aggregate stable status/goals/lookup, portable runtime-bound artifacts, browser closure, and packed consumers are green. No parser, CLI, theorem imports, new semantics, or release. |
 | `DECLARED-THEOREM-DAG-20` | Bind same-module opaque theorem signatures to checked runtime proof plans and validate explicit theorem-use dependencies | complete | `b61eb30`; exact one-to-one opaque-signature bindings, derived-runtime target/term rechecking, explicit workspace/theorem uses, dependency-first order, open-state retention, self/cycle/open-prerequisite rejection, browser closure, and packed consumers are green. No generated declarations, cross-module export, parser, CLI, new Core/checker semantics, or release. |
 | `MODULE-THEOREM-DAG-21` | Closed-workspace cross-module theorem DAG with exact proof-source visibility | complete | `7463439`; additive multi-root profile over the row-20 engine, exact local/direct-public source firewall, public imported theorem chaining, transitive/private/protected/unrelated/unknown rejection, stable portable evidence, browser closure, and packed consumers are green. No detached export, remote linker, parser, CLI, index/ranking, Core/checker semantics, or release. |
-| `THEOREM-AUTHORING-22` | Direct-TypeScript theorem entries that lower to the exact row-21 plan without repeated module, target, fingerprint-runtime, or binding plumbing | selected; frozen proposal | Additive browser-safe authoring factory over an arbitrary exact fragment workspace; byte-identical lowering to row 21 is the positive authority. No new artifact, declaration generation, parser, session, Core/checker semantics, host I/O, or release. |
+| `THEOREM-AUTHORING-22` | Direct-TypeScript theorem entries that lower to the exact row-21 plan without repeated module, target, fingerprint-runtime, or binding plumbing | complete | `50231b7`; additive browser-safe authoring factory over an arbitrary exact fragment workspace, exact local target and closure/runtime fingerprint derivation, byte-identical row-21 lowering/artifacts, delegated typed negatives, browser closure, and packed consumers green. No new artifact, declaration generation, parser, session, Core/checker semantics, host I/O, or release. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
@@ -902,14 +904,14 @@ outcome. The row is parked without a classifier repair, fresh coordinate, or
 retry. It does not complete 12B4 or authorize a performance, proof,
 integration, release, deployment, or later-stage claim.
 
-Roadmap accounting after selecting the bounded theorem-authoring tranche is
-39 of 46 scoped rows complete. Six of the seven remaining rows are
-deliberately terminal for their current questions:
+Roadmap accounting after completing the bounded theorem-authoring tranche is
+40 of 46 scoped rows complete. All six remaining rows are deliberately
+terminal for their current questions:
 deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
 `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4`, plus parked
-`AGENT-EVAL-12B4`. None is reopened merely to keep the goal active. The sole
-selected row is `THEOREM-AUTHORING-22`, whose bounded audit and terminal policy
-are frozen below.
+`AGENT-EVAL-12B4`. None is reopened merely to keep the goal active. No next
+implementation row is selected until another bounded product audit under
+`D-PA-270` identifies and freezes a concrete user-visible limitation.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -8010,6 +8012,61 @@ identity encoding, a larger class-proof DSL, detached theorem packages,
 incremental/remote acquisition, CLI commands, release, and host integration
 remain separate product questions.
 
+### Completion record
+
+Checkpoint `50231b7` completes the row at the frozen erasing-facade boundary.
+`emdash-lf-module-theorem-authoring-v1`:
+
+1. accepts one exact fragment-module workspace plus qualified theorem,
+   explicit portable proof ID, inert proof plan/provenance, source identity,
+   and caller-computed source/profile/interface hashes;
+2. canonically compiles the workspace during lowering, resolves only a local
+   declaration of the theorem's owning module, and derives its exact checked
+   target without accepting a caller target, runtime, checker, proof document,
+   or binding;
+3. obtains the exact transitive closure/runtime fingerprint through the
+   existing row-18 owner and constructs the row-19 development and row-21
+   one-to-one bindings through their existing factories;
+4. returns the ordinary row-21 plan, while its convenience compiler is exactly
+   authoring-factory followed by the unchanged row-21 compiler; and
+5. publishes the profile, input/entry/error types, factory/compiler, capability
+   v20 description, workspace exports, package documentation, and installed
+   consumer coverage without a new artifact or checking rule.
+
+The positive provider/consumer fixture proves exact erasure: the compact
+authoring input deeply equals the explicit low-level row-21 plan and produces
+the same portable artifact bytes across workspace and entry permutations. An
+open proof remains ordinary incomplete row-21 state. Private provider source,
+unknown/invalid theorem identity, duplicate proof/theorem identity, and
+malformed hash material retain their exact authoring or downstream typed
+failures.
+
+The sole focused correction cloned and recursively froze the inert plan and
+provenance while lowering. The downstream canonical envelopes were immutable,
+but a caller-owned nested provenance object was still aliased; the correction
+closes that source boundary without changing any proof, workspace, or theorem
+semantics and without mutating caller input. No further correction or design
+widening was used.
+
+Final proportional evidence on the checkpointed source is:
+
+- 79 of 79 nearest semantic/capability/browser tests green across the new
+  authoring owner, module/same-module theorem DAGs, exact runtime proof and
+  development owners, capability command, and browser closure; the final
+  authoring/capability/browser rerun is 49 of 49 green;
+- workspace contract, root TypeScript typecheck, changed-file ESLint,
+  packed-verifier syntax, exact staged-diff review, and whitespace hygiene
+  green; and
+- `package:check` green across build plus freshly packed ESM, CJS, strict
+  NodeNext, and browser consumers of the profile, factories, public types, and
+  serializer.
+
+No root test, `check:ts`, `check:all`, Lambdapi, book/print, sibling,
+deployment, publication, or release gate was run. None of those unchanged
+boundaries became progress-blocking, so their omission is explicit under
+`D-PA-019` and is not a claimed pass. The row is terminal and may be reopened
+only by the concrete authoring consumer or owner-contract changes named above.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -8294,6 +8351,7 @@ remain separate product questions.
 | `D-PA-277` | Select one closed-workspace multi-module theorem DAG with an exact local/direct-public proof-source firewall. | Row 20 supplies proof authority but intentionally rejects multiple roots; module interfaces supply visibility, while the checker intentionally sees the full closure. Combining cross-root bindings without preflight would let raw Core bypass private/transitive boundaries. A distinct additive profile can validate target/plan/checked-term free references and public theorem edges without a detached certificate/linker, new Core rule, or broad INDEX-SEARCH-6B enrichment. |
 | `D-PA-278` | Complete `MODULE-THEOREM-DAG-21` at `7463439` and require a fresh bounded product audit before selecting more implementation. | The additive profile passes the direct-public cross-module theorem chain, exact source firewall over every inert plan shape and complete checked terms, transitive/private/protected/unrelated/unknown negatives, shared row-20 anti-circularity, stable artifacts, browser closure, and installed package consumers. The one semantic correction restored recursive freezing after engine extraction. Detached linking, index enrichment, commands, release, siblings, and mathematics remain separate; no retry or widening is decision-relevant. |
 | `D-PA-279` | Select `THEOREM-AUTHORING-22` as one source-expanding direct-TypeScript facade over rows 18, 19, and 21. | The checked workspace already owns theorem module/type and exact closure/runtime derivation, while callers currently repeat them across proof documents, fingerprints, developments, and bindings. A factory which accepts theorem, proof ID/plan/provenance, and caller hash material can erase to the exact row-21 plan and demonstrate byte-identical authority without a parser, generated declaration, new artifact/checker, mutable process, source-file migration, release, or class-semantic widening. |
+| `D-PA-280` | Complete `THEOREM-AUTHORING-22` at `50231b7` and require another bounded product audit before selecting implementation. | The facade derives exact local targets and closure/runtime fingerprints, lowers to a deeply equal row-21 plan, produces byte-identical artifacts, preserves downstream typed failures, and is browser/packed-consumer green. Its sole correction removed nested caller-data aliasing through clone-and-freeze. Source schemas, default IDs, class DSLs, detached linking, commands, release, hosts, and mathematics remain separate; no further retry or widening is decision-relevant. |
 
 ## Validation And Checkpoint Policy
 
@@ -8481,19 +8539,19 @@ synchronized:
 > detached certificates/linking, remote or incremental acquisition,
 > parser/CLI/server, INDEX-SEARCH-6B enrichment, Core/checker changes, release,
 > siblings, or mathematical-source work without its concrete recorded trigger.
-> The required fresh bounded audit is now decision `D-PA-279` and the frozen
-> `THEOREM-AUTHORING-22` contract. Implement only its browser-safe
-> source-expanding factory: derive module, exact checked theorem target,
-> closure/runtime fingerprint, row-19 development, and row-21 binding from
-> explicit theorem/proof-plan source plus caller hash material, then lower to
-> the unchanged row-21 plan/compiler. Preserve its byte-identical reference
-> consumer, downstream typed errors, one-correction budget, and explicit
-> exclusion of parser/source-file migration, generated declarations,
-> callbacks/session/runtime input, new Core/checker semantics, release,
-> siblings, host effects, and mathematical-source edits. After that row reaches
-> a terminal result, perform another bounded product audit before selecting
-> anything else; do not implement a new row merely because the persistent goal
-> remains active.
+> Treat `THEOREM-AUTHORING-22`, decisions `D-PA-279`/`D-PA-280`, and exact
+> semantic checkpoint `50231b7` as complete. Preserve its browser-safe
+> source-expanding factory, exact local theorem target and closure/runtime
+> fingerprint derivation, cloned/frozen caller data, ordinary row-19/21
+> lowering, byte-identical reference plan/artifact, and downstream typed-error
+> delegation. Do not reopen it for parser/source-file migration, default proof
+> IDs, generated declarations, a class-proof DSL, callbacks/session/runtime
+> input, new Core/checker semantics, detached linking, commands, release,
+> siblings, host effects, or mathematical-source edits without its concrete
+> recorded trigger. Before selecting another implementation row, perform a
+> fresh bounded read-only product audit under `D-PA-270`, freeze the smallest
+> executable tranche and its terminal/correction policy separately, and do not
+> implement a new row merely because the persistent goal remains active.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
 > `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
 > retained by audit 17 rather than inventing authority to advance the ledger.
