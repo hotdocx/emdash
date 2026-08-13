@@ -83,8 +83,14 @@ fingerprint, row-19 development, and row-21 binding from one theorem symbol,
 proof ID, inert plan, provenance, and caller-supplied hash material. It lowers
 to the existing row-21 plan/compiler and adds no new proof authority, parser,
 declaration generator, mutable session, Core/checker rule, or filesystem/hash
-capability. No further implementation row is selected pending the next bounded
-product audit. The first
+capability. The next bounded product audit selects
+`PUBLIC-INTEGRATE-23`: the completed rows 18--22 are clean but remain 84
+commits ahead of both local/public `main` and the same-named remote goal
+branch. The exact source candidate is `9fcdf1b`; the frozen integration row
+permits only non-force goal-branch publication, fast-forward-only `main`, the
+automatic path-filtered Pages deployment caused by the source push, and exact
+post-action verification. It permits no npm release, tag, GitHub Release,
+workflow edit, or new feature. The first
 research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -890,6 +896,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `DECLARED-THEOREM-DAG-20` | Bind same-module opaque theorem signatures to checked runtime proof plans and validate explicit theorem-use dependencies | complete | `b61eb30`; exact one-to-one opaque-signature bindings, derived-runtime target/term rechecking, explicit workspace/theorem uses, dependency-first order, open-state retention, self/cycle/open-prerequisite rejection, browser closure, and packed consumers are green. No generated declarations, cross-module export, parser, CLI, new Core/checker semantics, or release. |
 | `MODULE-THEOREM-DAG-21` | Closed-workspace cross-module theorem DAG with exact proof-source visibility | complete | `7463439`; additive multi-root profile over the row-20 engine, exact local/direct-public source firewall, public imported theorem chaining, transitive/private/protected/unrelated/unknown rejection, stable portable evidence, browser closure, and packed consumers are green. No detached export, remote linker, parser, CLI, index/ranking, Core/checker semantics, or release. |
 | `THEOREM-AUTHORING-22` | Direct-TypeScript theorem entries that lower to the exact row-21 plan without repeated module, target, fingerprint-runtime, or binding plumbing | complete | `50231b7`; additive browser-safe authoring factory over an arbitrary exact fragment workspace, exact local target and closure/runtime fingerprint derivation, byte-identical row-21 lowering/artifacts, delegated typed negatives, browser closure, and packed consumers green. No new artifact, declaration generation, parser, session, Core/checker semantics, host I/O, or release. |
+| `PUBLIC-INTEGRATE-23` | Publish the accumulated qualified proof-assistant source through the existing goal branch and fast-forward-only public `main` | selected; frozen proposal | Exact source candidate `9fcdf1b` is 84 commits ahead of clean `3727015` local/remote refs. Non-force branch/main publication and the resulting Pages verification only; no tag, npm/GitHub Release, workflow/package version, new semantics, or cleanup. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
@@ -904,14 +911,14 @@ outcome. The row is parked without a classifier repair, fresh coordinate, or
 retry. It does not complete 12B4 or authorize a performance, proof,
 integration, release, deployment, or later-stage claim.
 
-Roadmap accounting after completing the bounded theorem-authoring tranche is
-40 of 46 scoped rows complete. All six remaining rows are deliberately
-terminal for their current questions:
+Roadmap accounting after selecting the bounded public integration tranche is
+40 of 47 scoped rows complete. Six of the seven remaining rows are
+deliberately terminal for their current questions:
 deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
 `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4`, plus parked
-`AGENT-EVAL-12B4`. None is reopened merely to keep the goal active. No next
-implementation row is selected until another bounded product audit under
-`D-PA-270` identifies and freezes a concrete user-visible limitation.
+`AGENT-EVAL-12B4`. None is reopened merely to keep the goal active. The sole
+selected row is `PUBLIC-INTEGRATE-23`; it distributes already-qualified bytes
+and is not another semantic implementation row.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -8067,6 +8074,102 @@ boundaries became progress-blocking, so their omission is explicit under
 `D-PA-019` and is not a claimed pass. The row is terminal and may be reopened
 only by the concrete authoring consumer or owner-contract changes named above.
 
+## `PUBLIC-INTEGRATE-23` Audit And Frozen Contract
+
+### Product question and exact candidate
+
+Should the accumulated qualified proof-assistant work now become the shared
+GitHub source baseline before another feature tranche begins?
+
+Yes. Exact fetch and ancestry review records:
+
+- source candidate `9fcdf1b` on
+  `goal/typescript-emdash-proof-assistant-v1`;
+- local `main`, `origin/main`, and
+  `origin/goal/typescript-emdash-proof-assistant-v1` all exactly `3727015`;
+- `3727015` is an exact ancestor and the candidate is 84 commits ahead with
+  zero commits on the opposite side;
+- every registered worktree, including the dedicated candidate and current
+  `main` worktrees, is clean; and
+- the candidate changes exactly 20 tracked paths relative to `main`: five
+  additive proof-assistant source owners, their tests/fixture/public exports,
+  package documentation/verifier, and the two living plans. It changes no
+  workflow, dependency lock, package version, browser-template source,
+  Lambdapi/math source, book/PDF, environment, credential, or secret file.
+
+The five semantic checkpoints are already terminal and independently recorded:
+runtime-bearing exact-closure proof attachment (`6ad0e17`), runtime proof
+catalogs (`1f64d89`), same-module theorem DAGs (`b61eb30`), module theorem
+visibility (`7463439`), and compact theorem authoring (`50231b7`). The extra
+plan history is durable benchmark-policy and proof-assistant decision evidence,
+not an unreviewed semantic implementation.
+
+Public `main` currently lacks all five user-facing owners, and the remote goal
+branch does not yet preserve the local checkpoint chain. Publishing these
+already-qualified bytes is therefore a concrete availability and recovery
+boundary, not infrastructure experimentation for its own sake.
+
+### Authorized integration sequence
+
+After a proposal checkpoint and exact immutable review, self-approval under the
+standing unattended authority permits only this sequence:
+
+1. push the dedicated goal branch non-force so the proposal and complete local
+   checkpoint chain have a remote recovery ref;
+2. in the clean existing `main` worktree, fast-forward `main` only to exact
+   source candidate `9fcdf1b`, then push `main` non-force and require the remote
+   ref to equal that candidate;
+3. because `.github/workflows/pages.yml` path-filters `src/v3_2/**`, treat the
+   resulting Pages run as part of this row rather than an accidental
+   non-effect. Require the existing unchanged workflow to complete successfully
+   at exact head `9fcdf1b` and verify the deployed Pages URL responds. The npm
+   workflow is release-event-only and must not run;
+4. record the exact run/URL/result in a plan-only completion checkpoint on the
+   goal branch; then fast-forward `main` to that completion checkpoint and push
+   it non-force. Since this final delta is plan-only and outside the Pages path
+   filter, it must not create a second Pages deployment; and
+5. push the goal branch non-force to the same final checkpoint and verify local
+   `main`, `origin/main`, the local goal branch, and its remote ref are byte-
+   identical and both relevant worktrees remain clean.
+
+No merge commit, rebase, amend, squash, reset, force-push, PR, tag, GitHub
+Release, npm publication, package version change, workflow edit/dispatch,
+manual deployment, sibling mutation, branch/worktree cleanup, or new source
+change is authorized. The existing automatic Pages run is the only hosted
+effect.
+
+### Validation, terminal policy, and correction budget
+
+The exact source candidate carries the final row-22 evidence: 79 of 79 nearest
+semantic/capability/browser tests and the final 49 of 49 subset green;
+workspace contract, root typecheck, changed-file lint, verifier syntax,
+package build and freshly packed ESM/CJS/strict-NodeNext/browser consumers,
+staged diff, and whitespace hygiene green. Before the first push, run the
+nearest local `emdash-template` typecheck/build because the source-path push
+will invoke that exact Pages consumer. Recheck fetched refs, ancestry, the
+20-path diff, worktree cleanliness, and absence of workflow/version/secret
+changes. Do not rerun root test, `check:ts`, `check:all`, Lambdapi, book/print,
+or another long aggregate: no omitted aggregate blocks this exact integration
+decision.
+
+The row is:
+
+- **complete** only when every four-way final ref equals the plan-only
+  completion checkpoint, the exact `9fcdf1b` Pages run succeeds, the deployed
+  URL responds, no npm/release run occurs, and both worktrees remain clean;
+- **blocked** if fetch reveals remote divergence, either required worktree is
+  dirty, branch protection rejects the non-force sequence, authentication is
+  unavailable, or Pages remains nonterminal without actionable evidence; or
+- **rejected** if integration would require history rewriting, a merge commit,
+  force, workflow/trust weakening, repackaging, or unrelated source changes.
+
+The correction budget permits no source or workflow correction. One separate
+plan-only forward recovery proposal may be frozen only if the unchanged Pages
+workflow fails for a precise reproducible reason after the authorized push;
+it must not be executed under this row automatically. Any other terminal state
+ends the row. Reopening requires a newly qualified semantic tranche or an
+actual divergence/failure in one of the exact shared refs.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -8352,6 +8455,7 @@ only by the concrete authoring consumer or owner-contract changes named above.
 | `D-PA-278` | Complete `MODULE-THEOREM-DAG-21` at `7463439` and require a fresh bounded product audit before selecting more implementation. | The additive profile passes the direct-public cross-module theorem chain, exact source firewall over every inert plan shape and complete checked terms, transitive/private/protected/unrelated/unknown negatives, shared row-20 anti-circularity, stable artifacts, browser closure, and installed package consumers. The one semantic correction restored recursive freezing after engine extraction. Detached linking, index enrichment, commands, release, siblings, and mathematics remain separate; no retry or widening is decision-relevant. |
 | `D-PA-279` | Select `THEOREM-AUTHORING-22` as one source-expanding direct-TypeScript facade over rows 18, 19, and 21. | The checked workspace already owns theorem module/type and exact closure/runtime derivation, while callers currently repeat them across proof documents, fingerprints, developments, and bindings. A factory which accepts theorem, proof ID/plan/provenance, and caller hash material can erase to the exact row-21 plan and demonstrate byte-identical authority without a parser, generated declaration, new artifact/checker, mutable process, source-file migration, release, or class-semantic widening. |
 | `D-PA-280` | Complete `THEOREM-AUTHORING-22` at `50231b7` and require another bounded product audit before selecting implementation. | The facade derives exact local targets and closure/runtime fingerprints, lowers to a deeply equal row-21 plan, produces byte-identical artifacts, preserves downstream typed failures, and is browser/packed-consumer green. Its sole correction removed nested caller-data aliasing through clone-and-freeze. Source schemas, default IDs, class DSLs, detached linking, commands, release, hosts, and mathematics remain separate; no further retry or widening is decision-relevant. |
+| `D-PA-281` | Select `PUBLIC-INTEGRATE-23` to publish exact source candidate `9fcdf1b` through non-force goal/main refs and the existing automatic Pages path. | The clean candidate is 84 commits and five terminal semantic owners ahead of exact local/remote `3727015`, while the public and recovery refs expose none of them. The 20-path diff changes no workflow/version/lock/template/math/book/secret boundary. A staged branch push, fast-forward-only candidate push, exact Pages verification, then plan-only final-ref convergence distributes qualified bytes without a tag, npm/GitHub Release, new feature, history rewrite, or repeated benchmark work. |
 
 ## Validation And Checkpoint Policy
 
@@ -8548,10 +8652,17 @@ synchronized:
 > IDs, generated declarations, a class-proof DSL, callbacks/session/runtime
 > input, new Core/checker semantics, detached linking, commands, release,
 > siblings, host effects, or mathematical-source edits without its concrete
-> recorded trigger. Before selecting another implementation row, perform a
-> fresh bounded read-only product audit under `D-PA-270`, freeze the smallest
-> executable tranche and its terminal/correction policy separately, and do not
-> implement a new row merely because the persistent goal remains active.
+> recorded trigger. The required fresh audit is now decision `D-PA-281` and
+> frozen `PUBLIC-INTEGRATE-23`. Execute only its exact non-force recovery-branch
+> push, fast-forward-only publication of source candidate `9fcdf1b`, automatic
+> unchanged Pages run and URL verification, then plan-only completion/ref
+> convergence. Preserve the 20-path diff, clean-worktree and four-ref identity
+> gates, zero source/workflow correction budget, and explicit exclusion of
+> merge/rebase/amend/reset/force, PR/tag/GitHub Release/npm, workflow/package
+> changes, manual deployment, siblings, cleanup, and new semantics. After that
+> row reaches a terminal result, perform another bounded product audit before
+> selecting an implementation row; do not add work merely because the
+> persistent goal remains active.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
 > `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
 > retained by audit 17 rather than inventing authority to advance the ledger.
