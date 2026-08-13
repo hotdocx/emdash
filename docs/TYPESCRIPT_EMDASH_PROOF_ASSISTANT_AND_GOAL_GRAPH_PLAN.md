@@ -106,7 +106,11 @@ and source snapshot, powers a runtime-backed cross-module theorem development,
 and preserves the low-level explicit identity API as serialized/remote drift
 authority. The new layer adds no acquisition, hashing, runtime/checker input,
 incremental linking, or theorem/declaration semantics. No further
-implementation row is selected pending another bounded product audit. The first
+implementation row is selected. The terminal post-25 product audit confirms
+that statement/proof co-location would currently remove only one explicit
+identity link, while genuine detached theorem reuse requires a separately
+reviewed source-replay/linker boundary. Neither is promoted merely to keep the
+goal active. The first
 research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -935,8 +939,9 @@ deliberately terminal for their current questions:
 deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
 `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4`, plus parked
 `AGENT-EVAL-12B4`. None is reopened merely to keep the goal active. No next
-implementation row is selected until another bounded product audit under
-`D-PA-270` identifies and freezes a concrete user-visible limitation.
+implementation row is selected; the post-25 audit in `D-PA-287` closes the
+current scope. Any later implementation must begin as explicitly frozen new
+scope around a concrete user-visible limitation.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -8627,6 +8632,56 @@ fragment generation, source files/imports, incremental or remote linking,
 hashing, commands, release, hosted integration, sibling changes, and
 mathematical-source edits remain separate product questions.
 
+## Post-25 Terminal Product Audit
+
+The closing bounded audit compared the previously noted theorem-declaration/
+proof co-location idea with the more substantive ability to reuse a completed
+theorem in a separate later development.
+
+Co-location does not currently justify another public facade. Row 24 already
+stores each qualified theorem symbol and statement exactly once with its
+explicit declaration policy and linkage. Row 22 receives that same qualified
+symbol as the intentional binding key, derives the checked target from the
+compiled declaration, derives closure/runtime fingerprints, and constructs
+the proof document and theorem binding. A wrapper could place those two
+records in one object, but it would remove only one identity reference; it
+would not remove duplicated theorem types, change proof state, enable module
+reuse, or satisfy a measured consumer. Reopen this question only when one
+concrete direct-TypeScript source builder cannot preserve the explicit link or
+when a broader reviewed authoring-source contract needs a single entry shape.
+
+Detached theorem reuse is real but not dependency-ready as a bounded erasing
+layer. The current module-theorem profile explicitly records
+`supportsDetachedTheoremImports: false`. Its portable artifact deliberately
+contains status, bindings, dependencies, source-reference evidence, and the
+underlying proof artifact, but excludes process-local checked terms,
+environments, checkers, and runtimes. Its claim is exactly “this theorem DAG
+checked in this closed workspace,” not “a different workspace may trust this
+JSON by digest.” Reusing it soundly requires one of two separately reviewed
+architectures:
+
+1. a source-first canonical theorem-development package whose exact module,
+   runtime, proof-plan, visibility, and fingerprint closure is acquired,
+   linked, and freshly replayed before consumer checking; or
+2. a checked theorem-body transfer path, which first needs an exact
+   `KernelExpression`-to-transfer representation/reifier plus module-interface,
+   visibility, dependency, and invalidation semantics.
+
+Treating the existing portable artifact as a certificate, copying an opaque
+signature without replay, or importing a process-local checked term would
+weaken the current proof-authority boundary. Remote acquisition, hashing,
+cache identity, export visibility, transitive dependencies, completion/open
+state, and invalidation would also cease to be outer details. That work should
+begin only from a dedicated theorem-package/linker proposal with a real
+separate-development consumer, not as an automatic continuation of row 25.
+
+The audit therefore selects no implementation row. All 49 currently scoped
+rows remain terminal: 43 complete, five explicitly deferred/gated, and one
+parked with durable evidence. The next goal may choose detached theorem
+packages, a broader authoring-source contract, or another measured proof-
+assistant limitation, but must freeze its trust and consumer boundary as new
+scope rather than reopening a completed row by momentum.
+
 ## Decision Ledger
 
 | ID | Decision | Reason |
@@ -8918,6 +8973,7 @@ mathematical-source edits remain separate product questions.
 | `D-PA-284` | Complete `DECLARATION-AUTHORING-24` at `01a2971` and require another bounded product audit before further implementation. | The facade deeply equals the explicit low-level fragment, retains all trust/link/provider decisions, composes with runtime-backed direct-public theorem use, preserves typed owner failures, and is focused/browser/packed/static green. The long aggregate's two failures were pre-existing stale migration-audit assumptions; one focused test-only correction is green, and the user-directed no-repeat policy keeps the aggregate honestly non-passing rather than spending another 24 minutes. No semantic widening, release, host, sibling, or mathematics effect is decision-relevant. |
 | `D-PA-285` | Select `MODULE-WORKSPACE-AUTHORING-25` as one chain-only erasing facade over the exact fragment-module workspace owner. | Direct TypeScript callers already own the closed module-chain set but repeat complete dependency and latest-runtime identities which the workspace owner derives internally to check persisted claims. Deriving those arrays and returning the unchanged plan removes practical graph plumbing while retaining the explicit low-level/remote drift boundary. It is the smallest prerequisite before theorem declaration/proof co-location and requires no parser, acquisition, incremental linker, runtime/checker callback, trust change, host effect, release, or mathematics widening. |
 | `D-PA-286` | Complete `MODULE-WORKSPACE-AUTHORING-25` at `de76355` and require another bounded product audit before further implementation. | Chain-only input deeply equals the explicit canonical plan and source snapshot across permutations, derives only exact direct and latest-local-runtime providers, preserves low-level serialized/remote drift rejection, and powers the runtime-backed cross-module theorem consumer. Focused, nearest-owner, capability, migration, browser, workspace, typecheck/lint, packed-consumer, and one required full `check:ts` gate are green with no semantic correction. Acquisition, hashing, parsing, incremental linking, theorem/declaration generation, hosts, release, siblings, and mathematics remain separate. |
+| `D-PA-287` | End the post-25 audit without selecting another implementation row. | Co-locating statement and proof would presently remove only one explicit qualified-symbol binding and has no measured consumer. Detached theorem reuse is substantive, but the current artifact intentionally has closed-workspace authority and omits checked process state; sound reuse needs a dedicated source-replay/linker or checked-body-transfer architecture with exact visibility, fingerprint, acquisition, and invalidation semantics. All current rows are terminal, so expanding scope automatically would recreate the drift this plan forbids. |
 
 ## Validation And Checkpoint Policy
 
@@ -9155,6 +9211,13 @@ synchronized:
 > require another bounded audit before selecting further work. Carry forward
 > the green 2,239-test full-TypeScript result for unchanged boundaries rather
 > than repeating the long aggregate for reassurance.
+> Treat post-25 decision `D-PA-287` as terminal for the current scoped goal.
+> Do not add a theorem co-location wrapper merely to remove one explicit
+> qualified-symbol binding. Do not treat the portable closed-workspace theorem
+> artifact as a detached certificate or import checked process state. A future
+> theorem-package/linker row requires a concrete separate-development consumer
+> and a frozen source-replay or checked-body-transfer trust design; it is new
+> scope, not an automatic continuation.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
 > `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
 > retained by audit 17 rather than inventing authority to advance the ledger.
