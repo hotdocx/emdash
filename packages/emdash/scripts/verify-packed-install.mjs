@@ -228,6 +228,7 @@ import {
   CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE,
   CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE,
   CORE_LF_DECLARATION_FRAGMENT_AUTHORING_PROFILE,
+  CORE_LF_FRAGMENT_MODULE_WORKSPACE_AUTHORING_PROFILE,
   CORE_LF_PROOF_MAINTENANCE_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
@@ -271,6 +272,7 @@ import {
   createCoreLfModuleTheoremDevelopment,
   createCoreLfAuthoredModuleTheoremDevelopment,
   createCoreLfAuthoredDependencyModuleDeclarationFragment,
+  createCoreLfAuthoredFragmentModuleWorkspace,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfDeclarationWorkspace,
   createCoreLfFragmentProofDevelopment,
@@ -301,6 +303,7 @@ import {
   serializeCoreLfModuleTheoremDevelopmentArtifact,
   serializeCoreLfModuleTheoremAuthoringProfile,
   serializeCoreLfDeclarationFragmentAuthoringProfile,
+  serializeCoreLfFragmentModuleWorkspaceAuthoringProfile,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,
@@ -373,6 +376,11 @@ assert.equal(
 );
 assert.equal(
   CORE_LF_DECLARATION_FRAGMENT_AUTHORING_PROFILE.infersTrust,
+  false,
+);
+assert.equal(
+  CORE_LF_FRAGMENT_MODULE_WORKSPACE_AUTHORING_PROFILE
+    .promotesTransitiveDependencies,
   false,
 );
 assert.equal(
@@ -481,6 +489,11 @@ assert.equal(
 );
 assert.equal(
   typeof serializeCoreLfDeclarationFragmentAuthoringProfile,
+  'function',
+);
+assert.equal(typeof createCoreLfAuthoredFragmentModuleWorkspace, 'function');
+assert.equal(
+  typeof serializeCoreLfFragmentModuleWorkspaceAuthoringProfile,
   'function',
 );
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
@@ -761,11 +774,24 @@ assert.equal(
   false,
 );
 assert.equal(
+  workspace.CORE_LF_FRAGMENT_MODULE_WORKSPACE_AUTHORING_PROFILE
+    .promotesTransitiveDependencies,
+  false,
+);
+assert.equal(
   typeof workspace.createCoreLfAuthoredDependencyModuleDeclarationFragment,
   'function',
 );
 assert.equal(
   typeof workspace.serializeCoreLfDeclarationFragmentAuthoringProfile,
+  'function',
+);
+assert.equal(
+  typeof workspace.createCoreLfAuthoredFragmentModuleWorkspace,
+  'function',
+);
+assert.equal(
+  typeof workspace.serializeCoreLfFragmentModuleWorkspaceAuthoringProfile,
   'function',
 );
 assert.equal(typeof workspace.coreProofPlanConstructor, 'function');
@@ -949,6 +975,7 @@ import {
   CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE,
   CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE,
   CORE_LF_DECLARATION_FRAGMENT_AUTHORING_PROFILE,
+  CORE_LF_FRAGMENT_MODULE_WORKSPACE_AUTHORING_PROFILE,
   CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
@@ -972,6 +999,7 @@ import {
   type CoreLfModuleTheoremAuthoringEntry,
   type CoreLfModuleTheoremAuthoringInput,
   type CoreLfDeclarationFragmentAuthoringInput,
+  type CoreLfFragmentModuleWorkspaceAuthoringInput,
   type CoreLfFragmentProofDevelopmentArtifact,
   type CoreLfCompiledFragmentProofDevelopment,
   type CoreLfFragmentWorkspaceProofCompilation,
@@ -996,6 +1024,7 @@ import {
   createCoreLfModuleTheoremDevelopment,
   createCoreLfAuthoredModuleTheoremDevelopment,
   createCoreLfAuthoredDependencyModuleDeclarationFragment,
+  createCoreLfAuthoredFragmentModuleWorkspace,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
@@ -1016,6 +1045,7 @@ import {
   serializeCoreLfModuleTheoremDevelopmentArtifact,
   serializeCoreLfModuleTheoremAuthoringProfile,
   serializeCoreLfDeclarationFragmentAuthoringProfile,
+  serializeCoreLfFragmentModuleWorkspaceAuthoringProfile,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,
@@ -1078,6 +1108,8 @@ const maybeModuleTheoremAuthoringInput:
   CoreLfModuleTheoremAuthoringInput | undefined = undefined;
 const maybeDeclarationFragmentAuthoringInput:
   CoreLfDeclarationFragmentAuthoringInput | undefined = undefined;
+const maybeFragmentModuleWorkspaceAuthoringInput:
+  CoreLfFragmentModuleWorkspaceAuthoringInput | undefined = undefined;
 const builder = new CoreLfScopedBuilder();
 const exactSynthesizer: typeof synthesizeCoreLfInstance =
   synthesizeCoreLfInstance;
@@ -1116,6 +1148,12 @@ const declarationFragmentAuthoringFactory:
 const declarationFragmentAuthoringProfileSerializer:
   typeof serializeCoreLfDeclarationFragmentAuthoringProfile =
     serializeCoreLfDeclarationFragmentAuthoringProfile;
+const fragmentModuleWorkspaceAuthoringFactory:
+  typeof createCoreLfAuthoredFragmentModuleWorkspace =
+    createCoreLfAuthoredFragmentModuleWorkspace;
+const fragmentModuleWorkspaceAuthoringProfileSerializer:
+  typeof serializeCoreLfFragmentModuleWorkspaceAuthoringProfile =
+    serializeCoreLfFragmentModuleWorkspaceAuthoringProfile;
 const premiseIndexFactory: typeof createCoreLfAccessiblePremiseIndex =
   createCoreLfAccessiblePremiseIndex;
 const fragmentWorkspaceFingerprintFactory:
@@ -1261,6 +1299,7 @@ void CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE;
 void CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE;
 void CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE;
 void CORE_LF_DECLARATION_FRAGMENT_AUTHORING_PROFILE;
+void CORE_LF_FRAGMENT_MODULE_WORKSPACE_AUTHORING_PROFILE;
 void CORE_LF_DEVELOPMENT_DIFF_PROFILE;
 void CORE_LF_PROOF_MAINTENANCE_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
@@ -1282,6 +1321,9 @@ void CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE;
 void fragmentWorkspaceFingerprintFactory;
 void fragmentWorkspaceBoundFingerprintFactory;
 void fragmentWorkspaceRuntimeFingerprintFactory;
+void maybeFragmentModuleWorkspaceAuthoringInput;
+void fragmentModuleWorkspaceAuthoringFactory;
+void fragmentModuleWorkspaceAuthoringProfileSerializer;
 `,
   );
   await writeFile(
@@ -1302,6 +1344,7 @@ import {
   CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE,
   CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE,
   CORE_LF_DECLARATION_FRAGMENT_AUTHORING_PROFILE,
+  CORE_LF_FRAGMENT_MODULE_WORKSPACE_AUTHORING_PROFILE,
   CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
@@ -1337,6 +1380,7 @@ import {
   createCoreLfModuleTheoremDevelopment,
   createCoreLfAuthoredModuleTheoremDevelopment,
   createCoreLfAuthoredDependencyModuleDeclarationFragment,
+  createCoreLfAuthoredFragmentModuleWorkspace,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
@@ -1357,6 +1401,7 @@ import {
   serializeCoreLfModuleTheoremDevelopmentArtifact,
   serializeCoreLfModuleTheoremAuthoringProfile,
   serializeCoreLfDeclarationFragmentAuthoringProfile,
+  serializeCoreLfFragmentModuleWorkspaceAuthoringProfile,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,
@@ -1388,6 +1433,8 @@ globalThis.emdashPackedSmoke = {
     CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE.revision,
   declarationFragmentAuthoringRevision:
     CORE_LF_DECLARATION_FRAGMENT_AUTHORING_PROFILE.revision,
+  fragmentModuleWorkspaceAuthoringRevision:
+    CORE_LF_FRAGMENT_MODULE_WORKSPACE_AUTHORING_PROFILE.revision,
   developmentDiffRevision: CORE_LF_DEVELOPMENT_DIFF_PROFILE.revision,
   proofMaintenanceRevision: CORE_LF_PROOF_MAINTENANCE_PROFILE.revision,
   premiseIndexRevision: CORE_LF_PREMISE_INDEX_PROFILE.revision,
@@ -1423,6 +1470,7 @@ globalThis.emdashPackedSmoke = {
   createCoreLfModuleTheoremDevelopment,
   createCoreLfAuthoredModuleTheoremDevelopment,
   createCoreLfAuthoredDependencyModuleDeclarationFragment,
+  createCoreLfAuthoredFragmentModuleWorkspace,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
@@ -1443,6 +1491,7 @@ globalThis.emdashPackedSmoke = {
   serializeCoreLfModuleTheoremDevelopmentArtifact,
   serializeCoreLfModuleTheoremAuthoringProfile,
   serializeCoreLfDeclarationFragmentAuthoringProfile,
+  serializeCoreLfFragmentModuleWorkspaceAuthoringProfile,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,

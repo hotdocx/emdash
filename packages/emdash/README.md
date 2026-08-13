@@ -81,6 +81,11 @@ The package has four deliberately bounded entries:
   linkage. It derives only repeated orders and companion revisions, then
   erases to the unchanged dependency-module declaration fragment; it does not
   infer trust or generate declarations or runtime rules.
+  The fragment-module workspace authoring facade accepts a closed set of
+  complete module chains, derives their exact direct-dependency identities and
+  each dependency's latest local runtime-fragment identity, then erases to the
+  unchanged workspace plan. Explicit provider claims remain the low-level
+  drift boundary for serialized or remote source.
   The research-goal profile keeps theorem, task, and decision evidence
   distinct, freshly replays checked-proof evidence, and derives status across
   finite `requires` and grouped `one-of` dependencies. Its companion

@@ -54,6 +54,9 @@ import {
     CORE_LF_FRAGMENT_MODULE_WORKSPACE_PROFILE
 } from '../src/v3_2/lf_fragment_module_workspace';
 import {
+    CORE_LF_FRAGMENT_MODULE_WORKSPACE_AUTHORING_PROFILE
+} from '../src/v3_2/lf_fragment_module_workspace_authoring';
+import {
     CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE
 } from '../src/v3_2/lf_fragment_workspace_proof';
 import {
@@ -490,7 +493,7 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assertDeepFrozen(CORE_AI_NATIVE_CAPABILITIES);
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES_PROFILE.revision,
-            'emdash-ai-native-capabilities-v21'
+            'emdash-ai-native-capabilities-v22'
         );
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES.status,
@@ -558,6 +561,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assert.equal(
             revisions.get('fragment-module-workspace'),
             CORE_LF_FRAGMENT_MODULE_WORKSPACE_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('fragment-module-workspace-authoring'),
+            CORE_LF_FRAGMENT_MODULE_WORKSPACE_AUTHORING_PROFILE.revision
         );
         assert.equal(
             revisions.get('fragment-workspace-proof'),

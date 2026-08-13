@@ -726,6 +726,32 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
         );
     });
 
+    it('keeps fragment-module workspace authoring Node-free', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/lf_fragment_module_workspace_authoring.ts'
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_fragment_module_workspace_authoring.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_fragment_module_workspace.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_acquisition.ts')),
+            false
+        );
+    });
+
     it('keeps declaration-fragment authoring and lowering Node-free', () => {
         const closure = collectLocalClosure(
             'src/v3_2/lf_declaration_fragment_authoring.ts'
