@@ -97,16 +97,16 @@ review evidence, and linkage, derives only repetitive orders and companion
 revisions, and erases to the existing dependency-module declaration fragment.
 It composes with a runtime-bearing provider/consumer theorem development and
 adds no trust inference, runtime/proof generation, parser, Core/checker rule,
-or structure/class widening. No further implementation row is selected
-pending another bounded product audit. That audit now selects
-`MODULE-WORKSPACE-AUTHORING-25`: direct TypeScript callers already supply all
-complete module chains but still repeat each direct dependency's full module
-identity and latest local runtime-fragment identity. One browser-safe erasing
-facade will derive those exact edges from the supplied closed chain set and
-return the unchanged fragment-module workspace plan. The low-level explicit
-identity API remains authoritative for serialized/remote reconstruction, and
-the new layer adds no acquisition, hashing, runtime/checker input, incremental
-linking, or theorem/declaration semantics. The first
+or structure/class widening. The subsequent bounded product audit selected
+`MODULE-WORKSPACE-AUTHORING-25`, now complete at `de76355`: one browser-safe
+chain-only facade derives exact direct-dependency and latest-local-runtime
+provider edges from a supplied closed module-chain set, then erases to the
+unchanged fragment-module workspace plan. It deeply equals the explicit plan
+and source snapshot, powers a runtime-backed cross-module theorem development,
+and preserves the low-level explicit identity API as serialized/remote drift
+authority. The new layer adds no acquisition, hashing, runtime/checker input,
+incremental linking, or theorem/declaration semantics. No further
+implementation row is selected pending another bounded product audit. The first
 research-planning goal-
 graph identity/evidence/status audit is complete and its narrow internal
 profile is implemented and final-proportional-green through focused, nearest-
@@ -914,7 +914,7 @@ GetPaidX MCP/API contracts remain additive and versioned.
 | `THEOREM-AUTHORING-22` | Direct-TypeScript theorem entries that lower to the exact row-21 plan without repeated module, target, fingerprint-runtime, or binding plumbing | complete | `50231b7`; additive browser-safe authoring factory over an arbitrary exact fragment workspace, exact local target and closure/runtime fingerprint derivation, byte-identical row-21 lowering/artifacts, delegated typed negatives, browser closure, and packed consumers green. No new artifact, declaration generation, parser, session, Core/checker semantics, host I/O, or release. |
 | `PUBLIC-INTEGRATE-23` | Publish the accumulated qualified proof-assistant source through the existing goal branch and fast-forward-only public `main` | complete | Source candidate `9fcdf1b`, successful Pages run `31655278546`, exact deployment `5879828013`, HTTP-200 public URL, no npm run, and plan-only final ref convergence. No tag, npm/GitHub Release, workflow/package version, new semantics, or cleanup. |
 | `DECLARATION-AUTHORING-24` | Co-located direct-TypeScript declaration, explicit trust evidence, and linkage lowering to an exact dependency-module declaration fragment | complete | `01a2971`; one declaration-only erasing facade with derived orders/companion revisions, explicit external/provider data, deeply equal low-level lowering, runtime-bearing provider/consumer theorem proof, browser closure, and packed consumers green. No trust inference, mixed/runtime/proof generation, structure/class widening, parser/source schema, Core/checker change, host I/O, or release. |
-| `MODULE-WORKSPACE-AUTHORING-25` | Derive exact direct-dependency and latest-runtime provider edges from a closed set of directly authored module chains | proposal frozen | One browser-safe erasing facade lowering to the existing fragment-module workspace plan, deeply equal source snapshot, runtime-backed cross-module theorem consumer, delegated graph negatives, browser closure, and packed consumers. No source acquisition, hash computation, parser, incremental linker, trust/runtime/checker semantics, host I/O, or release. |
+| `MODULE-WORKSPACE-AUTHORING-25` | Derive exact direct-dependency and latest-runtime provider edges from a closed set of directly authored module chains | complete | `de76355`; one browser-safe erasing facade lowers chain-only input to the deeply equal explicit plan and byte-identical source snapshot, derives exact direct/latest-runtime edges, powers the runtime-backed theorem consumer, preserves typed graph/drift failures, and is focused/browser/packed/full-TypeScript green. No acquisition, hashing, parser, incremental linker, trust/runtime/checker semantics, host I/O, or release. |
 
 The two generic labels above are one completed bounded prerequisite checkpoint
 for the now-complete `STDLIB-8B` stream; they were not parallel semantic work.
@@ -929,15 +929,14 @@ outcome. The row is parked without a classifier repair, fresh coordinate, or
 retry. It does not complete 12B4 or authorize a performance, proof,
 integration, release, deployment, or later-stage claim.
 
-Roadmap accounting after selecting the bounded module-workspace authoring
-tranche is 42 of 49 scoped rows complete, one proposal frozen, and six rows
+Roadmap accounting after completing the bounded module-workspace authoring
+tranche is 43 of 49 scoped rows complete, with the remaining six rows
 deliberately terminal for their current questions:
 deferred/gated `SIMP-5B2`, `INDEX-SEARCH-6B`,
 `COUNTEREVIDENCE-10`, `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4`, plus parked
 `AGENT-EVAL-12B4`. None is reopened merely to keep the goal active. No next
-implementation row beyond `MODULE-WORKSPACE-AUTHORING-25` is selected. Its
-immutable proposal review must precede implementation, and another row
-requires a later bounded product audit under `D-PA-270`.
+implementation row is selected until another bounded product audit under
+`D-PA-270` identifies and freezes a concrete user-visible limitation.
 
 ## DEV-CATALOG-1 Frozen First Tranche
 
@@ -8578,6 +8577,32 @@ focused/package gates are green; do not run `check:all`, Lambdapi, book/print,
 siblings, deployment, publication, or release unless a focused failure proves
 that exact omitted boundary blocks progress.
 
+### Completion evidence
+
+Semantic checkpoint `de76355` implements the frozen facade without changing
+the low-level workspace owner or adding an error family. The following exact
+evidence is green:
+
+- all six new focused cases, including deep equality, byte-identical source
+  snapshots, input permutation and caller-array mutation, direct-only provider
+  selection, latest-runtime derivation, no-runtime omission, inherited graph
+  errors, explicit low-level drift rejection, and the checked runtime-backed
+  provider/consumer theorem development;
+- the bounded nine-suite neighborhood at 77 of 77 tests, covering the existing
+  fragment-module owner, theorem and declaration authoring, capability record,
+  migration readiness, and browser closure;
+- workspace contract, root typecheck, full and changed-file lint, JavaScript
+  verifier syntax, whitespace hygiene, and exact staged-diff review;
+- `package:check` across freshly packed ESM, CJS, strict NodeNext, and browser
+  consumers; and
+- the one required complete `check:ts`: 2,239 tests across 339 suites, 2,177
+  passed, 62 skipped, zero failed, in 1,847,719 ms. This supersedes the prior
+  row-24 aggregate's stale-audit failure as current full-TypeScript evidence;
+  it is not a reason to repeat the aggregate for unchanged boundaries.
+
+No `check:all`, Lambdapi, kernel, book/print, sibling, hosted, deployment,
+publication, or release boundary was affected or run.
+
 ### Terminal policy and correction budget
 
 The row is:
@@ -8892,6 +8917,7 @@ mathematical-source edits remain separate product questions.
 | `D-PA-283` | Select `DECLARATION-AUTHORING-24` as one declaration-only erasing facade over the existing module, policy, linkage, and dependency-fragment owners. | Current callers repeat each local declaration across three synchronized arrays, while external symbols require a fourth provider relation. Co-locating the unchanged explicit declaration, trust evidence, and linkage and deriving only orders/companion revisions removes real AI-authoring friction. Deeply equal low-level lowering plus a runtime-bearing cross-module theorem consumer demonstrates value without trust inference, mixed/runtime generation, parser/source schema, new Core/checker semantics, host effects, release, or class/mathematics widening. |
 | `D-PA-284` | Complete `DECLARATION-AUTHORING-24` at `01a2971` and require another bounded product audit before further implementation. | The facade deeply equals the explicit low-level fragment, retains all trust/link/provider decisions, composes with runtime-backed direct-public theorem use, preserves typed owner failures, and is focused/browser/packed/static green. The long aggregate's two failures were pre-existing stale migration-audit assumptions; one focused test-only correction is green, and the user-directed no-repeat policy keeps the aggregate honestly non-passing rather than spending another 24 minutes. No semantic widening, release, host, sibling, or mathematics effect is decision-relevant. |
 | `D-PA-285` | Select `MODULE-WORKSPACE-AUTHORING-25` as one chain-only erasing facade over the exact fragment-module workspace owner. | Direct TypeScript callers already own the closed module-chain set but repeat complete dependency and latest-runtime identities which the workspace owner derives internally to check persisted claims. Deriving those arrays and returning the unchanged plan removes practical graph plumbing while retaining the explicit low-level/remote drift boundary. It is the smallest prerequisite before theorem declaration/proof co-location and requires no parser, acquisition, incremental linker, runtime/checker callback, trust change, host effect, release, or mathematics widening. |
+| `D-PA-286` | Complete `MODULE-WORKSPACE-AUTHORING-25` at `de76355` and require another bounded product audit before further implementation. | Chain-only input deeply equals the explicit canonical plan and source snapshot across permutations, derives only exact direct and latest-local-runtime providers, preserves low-level serialized/remote drift rejection, and powers the runtime-backed cross-module theorem consumer. Focused, nearest-owner, capability, migration, browser, workspace, typecheck/lint, packed-consumer, and one required full `check:ts` gate are green with no semantic correction. Acquisition, hashing, parsing, incremental linking, theorem/declaration generation, hosts, release, siblings, and mathematics remain separate. |
 
 ## Validation And Checkpoint Policy
 
@@ -9114,9 +9140,9 @@ synchronized:
 > publish/release. Preserve the explicit failed-aggregate/focused-repair
 > evidence without rerunning the long aggregate. Require another bounded
 > audit before selecting any further row.
-> Treat `MODULE-WORKSPACE-AUTHORING-25`, decision `D-PA-285`, and its frozen
-> contract as the sole selected implementation row after declaration
-> authoring. Accept only a workspace revision plus a closed set of complete
+> Treat `MODULE-WORKSPACE-AUTHORING-25`, decisions `D-PA-285`/`D-PA-286`, and
+> exact semantic checkpoint `de76355` as complete after declaration authoring.
+> Accept only a workspace revision plus a closed set of complete
 > dependency-module fragment chains; derive exact direct-dependency identities
 > and each dependency's latest local runtime-fragment identity; and lower
 > through the unchanged fragment-module workspace owner. Require deep equality
@@ -9126,7 +9152,9 @@ synchronized:
 > transitive providers, accept runtime/checker/identity input, add acquisition,
 > hashing, parsing, incremental linking, theorem/declaration semantics, host or
 > sibling effects, mathematics changes, or release. After its terminal result,
-> require another bounded audit before selecting further work.
+> require another bounded audit before selecting further work. Carry forward
+> the green 2,239-test full-TypeScript result for unchanged boundaries rather
+> than repeating the long aggregate for reassurance.
 > Keep `SIMP-5B2`, `INDEX-SEARCH-6B`, `COUNTEREVIDENCE-10`,
 > `EXTERNAL-CERT-11`, and `GOAL-GRAPH-14B4` behind the concrete prerequisites
 > retained by audit 17 rather than inventing authority to advance the ledger.
