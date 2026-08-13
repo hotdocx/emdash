@@ -226,6 +226,7 @@ import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
   CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE,
   CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE,
+  CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE,
   CORE_LF_PROOF_MAINTENANCE_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
@@ -247,6 +248,7 @@ import {
   compileCoreLfDeclarationWorkspace,
   compileCoreLfDeclaredTheoremDevelopment,
   compileCoreLfModuleTheoremDevelopment,
+  compileCoreLfAuthoredModuleTheoremDevelopment,
   compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   compileCoreLfWorkspaceProofDocument,
@@ -266,6 +268,7 @@ import {
   createCoreProofPlanHoleReplacement,
   createCoreLfDeclaredTheoremDevelopment,
   createCoreLfModuleTheoremDevelopment,
+  createCoreLfAuthoredModuleTheoremDevelopment,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfDeclarationWorkspace,
   createCoreLfFragmentProofDevelopment,
@@ -294,6 +297,7 @@ import {
   serializeCoreLfFragmentProofDevelopmentArtifact,
   serializeCoreLfDeclaredTheoremDevelopmentArtifact,
   serializeCoreLfModuleTheoremDevelopmentArtifact,
+  serializeCoreLfModuleTheoremAuthoringProfile,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,
@@ -359,6 +363,10 @@ assert.equal(
 assert.equal(
   CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.referencePolicy,
   'root-local-plus-direct-public-imports',
+);
+assert.equal(
+  CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE.targetPolicy,
+  'derive-exact-local-compiled-declaration-type',
 );
 assert.equal(
   CORE_LF_PREMISE_INDEX_PROFILE.revision,
@@ -451,6 +459,15 @@ assert.equal(
   typeof serializeCoreLfModuleTheoremDevelopmentArtifact,
   'function',
 );
+assert.equal(
+  typeof compileCoreLfAuthoredModuleTheoremDevelopment,
+  'function',
+);
+assert.equal(
+  typeof createCoreLfAuthoredModuleTheoremDevelopment,
+  'function',
+);
+assert.equal(typeof serializeCoreLfModuleTheoremAuthoringProfile, 'function');
 assert.equal(typeof createCoreLfProofDevelopment, 'function');
 assert.equal(typeof createCoreResearchGoalGraphDefinition, 'function');
 assert.equal(typeof createCoreResearchGoalView, 'function');
@@ -720,6 +737,10 @@ assert.equal(
   workspace.CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.referencePolicy,
   'root-local-plus-direct-public-imports',
 );
+assert.equal(
+  workspace.CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE.addsProofCheckingSemantics,
+  false,
+);
 assert.equal(typeof workspace.coreProofPlanConstructor, 'function');
 assert.equal(typeof workspace.coreProofPlanHave, 'function');
 assert.equal(typeof workspace.coreProofPlanRefine, 'function');
@@ -762,6 +783,18 @@ assert.equal(
 );
 assert.equal(
   typeof workspace.serializeCoreLfModuleTheoremDevelopmentArtifact,
+  'function',
+);
+assert.equal(
+  typeof workspace.compileCoreLfAuthoredModuleTheoremDevelopment,
+  'function',
+);
+assert.equal(
+  typeof workspace.createCoreLfAuthoredModuleTheoremDevelopment,
+  'function',
+);
+assert.equal(
+  typeof workspace.serializeCoreLfModuleTheoremAuthoringProfile,
   'function',
 );
 assert.equal(typeof workspace.applyCoreProofPlanPatch, 'function');
@@ -887,6 +920,7 @@ import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE,
   CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE,
+  CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE,
   CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
@@ -907,6 +941,8 @@ import {
   type CoreLfDeclaredTheoremDevelopmentArtifact,
   type CoreLfCompiledModuleTheoremDevelopment,
   type CoreLfModuleTheoremDevelopmentArtifact,
+  type CoreLfModuleTheoremAuthoringEntry,
+  type CoreLfModuleTheoremAuthoringInput,
   type CoreLfFragmentProofDevelopmentArtifact,
   type CoreLfCompiledFragmentProofDevelopment,
   type CoreLfFragmentWorkspaceProofCompilation,
@@ -914,6 +950,7 @@ import {
   compileCoreLfDeclarationWorkspace,
   compileCoreLfDeclaredTheoremDevelopment,
   compileCoreLfModuleTheoremDevelopment,
+  compileCoreLfAuthoredModuleTheoremDevelopment,
   compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   compileCoreLfWorkspaceProofDocument,
@@ -928,6 +965,7 @@ import {
   createCoreProofPlanHoleReplacement,
   createCoreLfDeclaredTheoremDevelopment,
   createCoreLfModuleTheoremDevelopment,
+  createCoreLfAuthoredModuleTheoremDevelopment,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
@@ -946,6 +984,7 @@ import {
   serializeCoreLfFragmentProofDevelopmentArtifact,
   serializeCoreLfDeclaredTheoremDevelopmentArtifact,
   serializeCoreLfModuleTheoremDevelopmentArtifact,
+  serializeCoreLfModuleTheoremAuthoringProfile,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,
@@ -981,6 +1020,9 @@ const declaredTheoremDevelopmentCompiler:
 const moduleTheoremDevelopmentCompiler:
   typeof compileCoreLfModuleTheoremDevelopment =
     compileCoreLfModuleTheoremDevelopment;
+const authoredModuleTheoremDevelopmentCompiler:
+  typeof compileCoreLfAuthoredModuleTheoremDevelopment =
+    compileCoreLfAuthoredModuleTheoremDevelopment;
 const maybeCompiledWorkspace:
   CoreLfCompiledDeclarationWorkspace | undefined = undefined;
 const maybeWorkspaceProof:
@@ -999,6 +1041,10 @@ const maybeModuleTheoremDevelopment:
   CoreLfCompiledModuleTheoremDevelopment | undefined = undefined;
 const maybeModuleTheoremDevelopmentArtifact:
   CoreLfModuleTheoremDevelopmentArtifact | undefined = undefined;
+const maybeModuleTheoremAuthoringEntry:
+  CoreLfModuleTheoremAuthoringEntry | undefined = undefined;
+const maybeModuleTheoremAuthoringInput:
+  CoreLfModuleTheoremAuthoringInput | undefined = undefined;
 const builder = new CoreLfScopedBuilder();
 const exactSynthesizer: typeof synthesizeCoreLfInstance =
   synthesizeCoreLfInstance;
@@ -1025,6 +1071,12 @@ const moduleTheoremDevelopmentFactory:
 const moduleTheoremDevelopmentSerializer:
   typeof serializeCoreLfModuleTheoremDevelopmentArtifact =
     serializeCoreLfModuleTheoremDevelopmentArtifact;
+const authoredModuleTheoremDevelopmentFactory:
+  typeof createCoreLfAuthoredModuleTheoremDevelopment =
+    createCoreLfAuthoredModuleTheoremDevelopment;
+const moduleTheoremAuthoringProfileSerializer:
+  typeof serializeCoreLfModuleTheoremAuthoringProfile =
+    serializeCoreLfModuleTheoremAuthoringProfile;
 const premiseIndexFactory: typeof createCoreLfAccessiblePremiseIndex =
   createCoreLfAccessiblePremiseIndex;
 const fragmentWorkspaceFingerprintFactory:
@@ -1102,6 +1154,7 @@ void fragmentWorkspaceProofCompiler;
 void fragmentProofDevelopmentCompiler;
 void declaredTheoremDevelopmentCompiler;
 void moduleTheoremDevelopmentCompiler;
+void authoredModuleTheoremDevelopmentCompiler;
 void maybeCompiledWorkspace;
 void maybeWorkspaceProof;
 void maybeFragmentWorkspaceProof;
@@ -1111,6 +1164,8 @@ void maybeDeclaredTheoremDevelopment;
 void maybeDeclaredTheoremDevelopmentArtifact;
 void maybeModuleTheoremDevelopment;
 void maybeModuleTheoremDevelopmentArtifact;
+void maybeModuleTheoremAuthoringEntry;
+void maybeModuleTheoremAuthoringInput;
 void builder;
 void exactSynthesizer;
 void roleSynthesizer;
@@ -1121,6 +1176,8 @@ void declaredTheoremDevelopmentFactory;
 void declaredTheoremDevelopmentSerializer;
 void moduleTheoremDevelopmentFactory;
 void moduleTheoremDevelopmentSerializer;
+void authoredModuleTheoremDevelopmentFactory;
+void moduleTheoremAuthoringProfileSerializer;
 void premiseIndexFactory;
 void premiseSearch;
 void obviousProvider;
@@ -1160,6 +1217,7 @@ void CORE_LF_INSTANCE_ROLE_SYNTHESIS_PROFILE;
 void CORE_LF_DECLARATION_WORKSPACE_PROFILE;
 void CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE;
 void CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE;
+void CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE;
 void CORE_LF_DEVELOPMENT_DIFF_PROFILE;
 void CORE_LF_PROOF_MAINTENANCE_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
@@ -1199,6 +1257,7 @@ import {
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE,
   CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE,
+  CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE,
   CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
   CORE_LF_PREMISE_INDEX_PROFILE,
@@ -1217,6 +1276,7 @@ import {
   compileCoreLfDeclarationWorkspace,
   compileCoreLfDeclaredTheoremDevelopment,
   compileCoreLfModuleTheoremDevelopment,
+  compileCoreLfAuthoredModuleTheoremDevelopment,
   compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   compileCoreLfWorkspaceProofDocument,
@@ -1231,6 +1291,7 @@ import {
   createCoreProofPlanHoleReplacement,
   createCoreLfDeclaredTheoremDevelopment,
   createCoreLfModuleTheoremDevelopment,
+  createCoreLfAuthoredModuleTheoremDevelopment,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
@@ -1249,6 +1310,7 @@ import {
   serializeCoreLfFragmentProofDevelopmentArtifact,
   serializeCoreLfDeclaredTheoremDevelopmentArtifact,
   serializeCoreLfModuleTheoremDevelopmentArtifact,
+  serializeCoreLfModuleTheoremAuthoringProfile,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,
@@ -1276,6 +1338,8 @@ globalThis.emdashPackedSmoke = {
     CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE.revision,
   moduleTheoremDevelopmentRevision:
     CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.revision,
+  moduleTheoremAuthoringRevision:
+    CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE.revision,
   developmentDiffRevision: CORE_LF_DEVELOPMENT_DIFF_PROFILE.revision,
   proofMaintenanceRevision: CORE_LF_PROOF_MAINTENANCE_PROFILE.revision,
   premiseIndexRevision: CORE_LF_PREMISE_INDEX_PROFILE.revision,
@@ -1294,6 +1358,7 @@ globalThis.emdashPackedSmoke = {
   compileCoreLfDeclarationWorkspace,
   compileCoreLfDeclaredTheoremDevelopment,
   compileCoreLfModuleTheoremDevelopment,
+  compileCoreLfAuthoredModuleTheoremDevelopment,
   compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   compileCoreLfWorkspaceProofDocument,
@@ -1308,6 +1373,7 @@ globalThis.emdashPackedSmoke = {
   createCoreProofPlanHoleReplacement,
   createCoreLfDeclaredTheoremDevelopment,
   createCoreLfModuleTheoremDevelopment,
+  createCoreLfAuthoredModuleTheoremDevelopment,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
@@ -1326,6 +1392,7 @@ globalThis.emdashPackedSmoke = {
   serializeCoreLfFragmentProofDevelopmentArtifact,
   serializeCoreLfDeclaredTheoremDevelopmentArtifact,
   serializeCoreLfModuleTheoremDevelopmentArtifact,
+  serializeCoreLfModuleTheoremAuthoringProfile,
   serializeCoreLfDevelopmentSemanticDiff,
   serializeCoreLfProofMaintenanceInspection,
   serializeCoreLfProofRepairCandidateReplay,

@@ -71,6 +71,11 @@ The package has four deliberately bounded entries:
   checked terms may name only root-local or explicit direct-public free
   declarations, so raw Core cannot bypass private, protected, or transitive
   module boundaries.
+  The additive module-theorem authoring facade accepts a qualified theorem,
+  stable proof ID, inert proof plan, provenance, and caller-supplied hashes.
+  It derives the owning module, exact checked declaration target,
+  closure/runtime fingerprint, proof development, and theorem binding, then
+  erases to the unchanged module-theorem plan/compiler.
   The research-goal profile keeps theorem, task, and decision evidence
   distinct, freshly replays checked-proof evidence, and derives status across
   finite `requires` and grouped `one-of` dependencies. Its companion
@@ -102,6 +107,7 @@ import {
   CORE_LF_DEVELOPMENT_DIFF_PROFILE,
   CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE,
   CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE,
+  CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE,
   CORE_LF_DECLARATION_WORKSPACE_PROFILE,
   CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE,
   CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE,
@@ -124,11 +130,13 @@ import {
   compareCoreLfProofDevelopmentSources,
   compileCoreLfDeclaredTheoremDevelopment,
   compileCoreLfModuleTheoremDevelopment,
+  compileCoreLfAuthoredModuleTheoremDevelopment,
   compileCoreLfFragmentProofDevelopment,
   compileCoreLfFragmentWorkspaceProofDocument,
   createCoreProofPlanHoleReplacement,
   createCoreLfDeclaredTheoremDevelopment,
   createCoreLfModuleTheoremDevelopment,
+  createCoreLfAuthoredModuleTheoremDevelopment,
   createCoreLfAccessiblePremiseIndex,
   createCoreLfFragmentProofDevelopment,
   createCoreLfFragmentWorkspaceProofFingerprint,
@@ -163,6 +171,7 @@ void CORE_LF_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_DEVELOPMENT_DIFF_PROFILE;
 void CORE_LF_DECLARED_THEOREM_DEVELOPMENT_PROFILE;
 void CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE;
+void CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE;
 void CORE_LF_FRAGMENT_PROOF_DEVELOPMENT_PROFILE;
 void CORE_LF_FRAGMENT_WORKSPACE_PROOF_PROFILE;
 void CORE_LF_PREMISE_INDEX_PROFILE;
@@ -183,11 +192,13 @@ void coreProofTemplatePlaceholder;
 void compareCoreLfProofDevelopmentSources;
 void compileCoreLfDeclaredTheoremDevelopment;
 void compileCoreLfModuleTheoremDevelopment;
+void compileCoreLfAuthoredModuleTheoremDevelopment;
 void compileCoreLfFragmentProofDevelopment;
 void compileCoreLfFragmentWorkspaceProofDocument;
 void createCoreProofPlanHoleReplacement;
 void createCoreLfDeclaredTheoremDevelopment;
 void createCoreLfModuleTheoremDevelopment;
+void createCoreLfAuthoredModuleTheoremDevelopment;
 void createCoreLfAccessiblePremiseIndex;
 void createCoreLfFragmentProofDevelopment;
 void createCoreLfFragmentWorkspaceProofFingerprint;

@@ -64,6 +64,9 @@ import {
     CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE
 } from '../src/v3_2/lf_declared_theorem_development';
 import {
+    CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE
+} from '../src/v3_2/lf_module_theorem_authoring';
+import {
     CORE_LF_SAME_MODULE_FRAGMENT_WORKSPACE_PROFILE
 } from '../src/v3_2/lf_fragment_workspace';
 import {
@@ -484,7 +487,7 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assertDeepFrozen(CORE_AI_NATIVE_CAPABILITIES);
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES_PROFILE.revision,
-            'emdash-ai-native-capabilities-v19'
+            'emdash-ai-native-capabilities-v20'
         );
         assert.equal(
             CORE_AI_NATIVE_CAPABILITIES.status,
@@ -568,6 +571,10 @@ describe('TypeScript v3.2 AI-NATIVE-GRADUATE-1 capabilities', () => {
         assert.equal(
             revisions.get('module-theorem-development'),
             CORE_LF_MODULE_THEOREM_DEVELOPMENT_PROFILE.revision
+        );
+        assert.equal(
+            revisions.get('module-theorem-authoring'),
+            CORE_LF_MODULE_THEOREM_AUTHORING_PROFILE.revision
         );
         assert.equal(
             revisions.get('declaration-workspace'),

@@ -7,8 +7,8 @@
  */
 
 export const CORE_AI_NATIVE_CAPABILITIES_PROFILE = Object.freeze({
-    revision: 'emdash-ai-native-capabilities-v19' as const,
-    recordRevision: 'emdash-ai-native-capability-record-v19' as const,
+    revision: 'emdash-ai-native-capabilities-v20' as const,
+    recordRevision: 'emdash-ai-native-capability-record-v20' as const,
     status: 'qualified-local-foundation' as const,
     backend: 'typescript-emdash-explicit-core' as const,
     nodeBuiltinDependency: false as const,
@@ -237,6 +237,13 @@ export const CORE_AI_NATIVE_CAPABILITIES: CoreAiNativeCapabilityRecord =
                 scope:
                     'closed-workspace cross-module theorem DAG with ' +
                     'root-local and direct-public proof-source visibility'
+            },
+            {
+                id: 'module-theorem-authoring',
+                revision: 'emdash-lf-module-theorem-authoring-v1',
+                scope:
+                    'direct TypeScript theorem entries derive exact targets, ' +
+                    'closure fingerprints, developments, and row-21 bindings'
             },
             {
                 id: 'mounted-workspace-store',

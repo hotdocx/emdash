@@ -694,6 +694,38 @@ describe('BROWSER-DIRECTED-1A additive browser entry', () => {
         );
     });
 
+    it('keeps module-theorem authoring and lowering Node-free', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/lf_module_theorem_authoring.ts'
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_module_theorem_authoring.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_declared_theorem_development.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_fragment_module_workspace.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/ai_proof_cli.ts')),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/lf_transfer_acquisition.ts')),
+            false
+        );
+    });
+
     it('keeps remote lock reconstruction browser-safe and hashing outside', () => {
         const closure = collectLocalClosure(
             'src/v3_2/lf_remote_workspace_contract.ts'
