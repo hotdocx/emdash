@@ -49,8 +49,8 @@ bootstrap is locally checkpointed at `0a32ee2`. `GCCI-INT-2` and
 paths, stage quotient
 data, the successor universe path and its transport comparison, and
 set-targeted dependent/nondependent integer induction all check directly with
-their expanded reviewer. Their local checkpoint is pending exact staged
-review.
+their expanded reviewer. They are locally checkpointed at `8ac3599`.
+`GCCI-CIRCLE-1` is now the first dependency-ready active row.
 
 ## Executive Objective
 
@@ -411,9 +411,9 @@ rule-free unless a measured consumer proves otherwise.
 | --- | --- | --- |
 | `GCCI-00` | complete | Promote this self-contained plan; isolate branch/worktree; record exact baseline and proportional focused check. |
 | `GCCI-INT-1` | checkpointed `0a32ee2` | Audited the telescope-localization API and exposed a transparent, rule-free integer-facing carrier, stage representative, zero, Nat embedding, successor, predecessor, whole/contractible-fibre equivalences, and inherited sethood. The source and public reviewer check directly; maintained-list registration is reserved for `GCCI-CLOSE-1`. |
-| `GCCI-INT-2` | focused-green | Exposes the stage-step path, both successor/predecessor inverse paths, the successor universe path and its propositional transport computation, negative one, and its successor law. All are transparent specializations of existing owners; no rule or unifier was added. |
-| `GCCI-INT-3` | focused-green | Exposes inherited sethood plus transparent set-targeted dependent and nondependent integer induction, with constructor computation checked by the public reviewer. This exact elimination boundary requires `circle_is_groupoid` before Circle decode; it does not assume the later loop-space equivalence. |
-| `GCCI-CIRCLE-1` | pending on checkpointing `INT-2..3` | Define Circle HIT signature, base, loop, explicit `IsGroupoidGrpd` dimension evidence, dependent eliminator, point beta, and propositional loop beta under the existing HIT policy. |
+| `GCCI-INT-2` | checkpointed `8ac3599` | Exposes the stage-step path, both successor/predecessor inverse paths, the successor universe path and its propositional transport computation, negative one, and its successor law. All are transparent specializations of existing owners; no rule or unifier was added. |
+| `GCCI-INT-3` | checkpointed `8ac3599` | Exposes inherited sethood plus transparent set-targeted dependent and nondependent integer induction, with constructor computation checked by the public reviewer. This exact elimination boundary requires `circle_is_groupoid` before Circle decode; it does not assume the later loop-space equivalence. |
+| `GCCI-CIRCLE-1` | active | Define Circle HIT signature, base, loop, explicit `IsGroupoidGrpd` dimension evidence, dependent eliminator, point beta, and propositional loop beta under the existing HIT policy. |
 | `GCCI-CIRCLE-2` | pending on `CIRCLE-1` | Construct `CircleCode`, encode, decode, and both inverse laws. |
 | `GCCI-CIRCLE-3` | pending on `CIRCLE-2` | Package based-loop and categorical-Hom equivalences with Integer; prove the selected sethood/1-type consequences and reviewer example. |
 | `GCCI-WALK-1` | pending on `CIRCLE-3` | Construct `walking_to_circle_func` and prove compatibility of powers with the canonical nonnegative integer inclusion. |
