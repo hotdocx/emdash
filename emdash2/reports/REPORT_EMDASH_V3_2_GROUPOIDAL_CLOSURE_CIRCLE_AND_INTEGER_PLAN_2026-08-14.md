@@ -32,7 +32,8 @@ recovery index
 `/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-14_019ffe392eb9/INDEX.md`.
 Active sources, the repository SOP, and this living plan outrank the archive.
 
-Status: active living implementation plan. `GCCI-00` is complete on branch
+Status: completed implementation plan and decision record. `GCCI-00` is
+complete on branch
 `goal/groupoidal-circle-v3.2` in dedicated worktree
 `/home/user1/emdash1-groupoidal-circle-v1`, forked from clean `main` commit
 `86042df`. The focused pre-edit check of
@@ -111,7 +112,7 @@ The source and focused reviewer check directly, no rule or unifier is added,
 and the distinct category heads remain non-convertible. A first-class
 `OmegaEquivAlong Cat_cat` is deliberately not postulated: the current kernel
 lacks a generic constructor assembling its coherent inverse whole functor
-from identity-on-objects/homwise-equivalence data. `GCCI-PROD-2` is now the
+from identity-on-objects/homwise-equivalence data. `GCCI-PROD-2` was then the
 first dependency-ready active row. That row is checkpointed at `90a818a`:
 coordinate paths assemble into a product path; primitive
 right-`J` transport along it agrees with both the base-then-fibre and
@@ -120,7 +121,21 @@ coherence diamond. The existing structured displayed transport and
 structured `PathOut` induction each agree with that same primitive transport.
 The promoted source and expanded public reviewer check directly. This adds no
 runtime rule, unification rule, second equality eliminator, or Gray tensor.
-`GCCI-CLOSE-1` is now the first dependency-ready active row.
+`GCCI-CLOSE-1` then became the first dependency-ready active row.
+That closure row is checkpointed at `92c4b92`. The four modules are registered
+in both maintained source inventories; the four public
+reviewers are automatically registered; no duplicate central assertion was
+added; and the strict catalog remains fresh at 2,091 classified checks across
+98 areas. Generated health is green for 170 targets: the prior 162-target
+content hash matched exactly and was carried forward, while all eight new
+source/reviewer targets ran directly. Foundations, the current SOP, both
+READMEs, the report index, and the concise overview now state the achieved
+slice and its remaining systematic boundary. The overview release passes its
+18-page browser/PDF gate and is promoted to `docs/emdash3_2.{md,pdf}`. The
+health snapshot gate and every remaining non-Lambdapi CI component pass; the
+CI wrapper's redundant second all-target metrics pass was stopped rather than
+rerunning unchanged targets. Every bounded row is now completed, checkpointed,
+or explicitly deferred with its reopening condition; the goal is complete.
 
 ## Executive Objective
 
@@ -244,8 +259,10 @@ The plan begins from deployed owners rather than reimplementing them.
    transition.
 
 The overview statement that complete groupoidal specialization/closure is
-missing remains accurate, but the missing boundary is systematic closure and
-a decisive groupoidification example—not a missing basic equality or `J`.
+missing remains accurate only at the systematic boundary. This plan now
+supplies the decisive Circle/Integer and WalkingEnd comparison examples; what
+remains is closure across further selected formers and, when demanded, a
+generic groupoidification interface—not missing basic equality or `J`.
 
 ## One Primitive Equality Eliminator
 
@@ -265,7 +282,7 @@ proof classifier or a global rule would obscure proof provenance. Structured
 `PathOut` induction is a categorical presentation for a displayed motive and
 is already compared with `ind_eqr`; it is not a competing primitive.
 
-Circle initially requires its own HIT eliminator and beta data. Any further
+Circle owns its own HIT eliminator and beta data. Any further
 `ind_eqr` computation is consumer-gated and belongs in the core only when it
 is genuinely generic.
 
@@ -442,9 +459,9 @@ computational.
 | Sums/standard inductives | curated Nat | redesigned Sum and later curated finite/list/W-type families when demanded; no generic declaration mechanism required |
 | Univalence | `TypeEquiv`, selected inverse algebra, `ua` transport, Product and partial Sigma/Pi closure | remaining base-changing Sigma/Pi cases and controlled universe computation |
 | Truncation | predicates, levels, monotonicity, evidence property, Pi/Sigma closure, and truncated universes | actual HIT reflectors and their eliminators |
-| HITs | directed WalkingEnd and set-truncated telescope localization | Circle first, then selected pushout/suspension/quotient consumers |
+| HITs | directed WalkingEnd, set-truncated telescope localization, and the one-dimensional groupoidal Circle with checked loop-space encode/decode | selected pushout/suspension/quotient consumers; no generic declaration mechanism |
 | Groupoidal categorical interface | `Path_cat`, groupoidality, arrow-to-path, and structured-J comparison | selected former-preservation bridges |
-| Groupoidification | no generic reflector | WalkingEnd-to-Circle first; generic adjunction only after another consumer |
+| Groupoidification | concrete WalkingEnd-to-Circle comparison and nonnegative-power/encoder square; no generic reflector | generic adjunction only after another concrete consumer and a reviewed higher-action design |
 
 This matrix is an orientation and audit device, not a requirement to close
 every row during this goal.
@@ -490,7 +507,7 @@ rule-free unless a measured consumer proves otherwise.
 | `GCCI-WALK-2` | deferred; no further consumer | The concrete comparison and commuting square satisfy the active group-completion consumer. Reopen a restricted universal property only for a named target-side consumer; do not drift into the excluded generic reflector. |
 | `GCCI-PROD-1` | checkpointed `9e8cc36` | The canonical comparison is the existing core inclusion, judgmentally identity on objects. Its actual hom action has an explicit split/join `TypeEquiv` at every pair of objects, and one whole certificate retains those facts without a category-head rewrite, unifier, or opaque category-equivalence axiom. `OmegaEquivAlong Cat_cat` packaging remains consumer-gated on a generic coherent-inverse assembler. |
 | `GCCI-PROD-2` | checkpointed `90a818a` | Coordinate paths assemble into a product path; direct primitive transport agrees with both sequential coordinate orders; the induced diamond is coherent; and existing structured displayed transport and `PathOut` induction agree with the same primitive right-`J` transport. The source and expanded reviewer check directly with no rule, unifier, second `J`, or Gray tensor. |
-| `GCCI-CLOSE-1` | active | Synchronize active authority prose, examples, central diagnostics where appropriate, catalog, health, and proportional integration evidence. |
+| `GCCI-CLOSE-1` | checkpointed `92c4b92` | Registered the four modules and four reviewers, synchronized authority/public prose, kept central diagnostics unduplicated, checked the unchanged strict catalog, refreshed 170-target health with exact carry-forward of 162 unchanged successes plus eight current checks, released/promoted the 18-page overview article, and passed the health snapshot plus all non-Lambdapi CI components. The redundant all-target metrics rerun was stopped under the proportional-validation policy. |
 | `GCCI-GROUPIFY-GENERIC` | deferred | Generic `Groupoidify_func -| Path_cat_func`; reopen only after a second concrete consumer and a reviewed higher-action design. |
 | `GCCI-GRAY` | deferred | Gray tensor and lax/pseudonatural two-dimensional infrastructure; reopen only for an actual higher-categorical consumer. |
 
@@ -611,6 +628,30 @@ probe without a changed prerequisite is not progress.
   ordering question without a Gray tensor, a second `J`, or any new runtime or
   proof-time rule. The comparison is intentionally propositional away from
   reflexivity; no consumer justifies stronger definitional normalization.
+- `GCCI-D-015` — Final integration registers the four new one-way modules in
+  `scripts/check.sh` and `check_metrics.py`; their four reviewer files need no
+  manual list because the reviewer owner enumerates `examples/*.lp`. The
+  focused reviewers already cover the public results, so importing them into
+  `emdash3_2_checks.lp` would duplicate assertions and unnecessarily widen the
+  central diagnostic closure; the strict generated catalog consequently
+  remains unchanged and fresh. To refresh health without a 25-minute
+  unchanged aggregate, the prior report's 162 green file rows were reused
+  only after recomputing their exact sorted path-and-byte content hash and
+  obtaining the recorded digest
+  `728c7d812c1e49d08f8fa9ae51c66e3465bf13e1fd8cd98bb35389038134369c`
+  under the same Lambdapi/version/timeout/flags identity. The eight absent
+  current targets then ran green, producing a 170-target checked-content
+  snapshot of
+  `fac6128b7abd25b3c4b6eb024f0119b6b07c0ee88636c1a6804aa5ace099db94`.
+  The concise article's authored source and publication date were updated;
+  its browser and tagged-PDF release passes at 18 pages and the promoted PDF
+  has SHA-256
+  `b2f263305c6f9b9ec2dc951e1ea9f8f1c083d8446bc3b8f171df163c9f7cf372`.
+  The CI wrapper's initial no-check health snapshot gate passed, but its
+  redundant second all-target metrics command was interrupted; all remaining
+  non-Lambdapi CI commands were then run explicitly and passed. This is
+  proportional integration evidence, not a claim that the redundant full
+  aggregate itself completed.
 
 ## Validation Policy
 
@@ -705,17 +746,17 @@ The completion boundary explicitly excludes:
 - Arbitrary motive-directed computational `J`: research-grade and not needed
   for this usable vertical slice.
 
-## Persistent Goal Launch Objective
+## Completed Goal Handoff
 
-Continue implementing this living plan from the dedicated worktree
+The bounded objective is complete in the dedicated worktree
 `/home/user1/emdash1-groupoidal-circle-v1` on branch
-`goal/groupoidal-circle-v3.2`. Resume the first dependency-ready active row,
-keep this ledger and affected authority prose synchronized, use focused
-Lambdapi checks bounded to 90 seconds, and avoid long aggregates except at an
-actual changed integration boundary. Local checkpoint commits are authorized
-only for bounded green tranches after exact staged review. Do not push, merge,
-publish, tag, rewrite history, delete branches, or remove worktrees without
-separate user authorization.
+`goal/groupoidal-circle-v3.2`. Future work must begin from a new concrete
+consumer or one of the explicit reopening conditions in the ledger; it should
+not silently reopen the generic groupoidification, coherent whole-inverse,
+Gray-tensor, arbitrary shaped-`J`, or every-former closure programmes. This
+record authorizes no push, merge, publication beyond the already promoted
+local article artifact, tag, history rewrite, branch deletion, or worktree
+removal.
 
 ## Research Sources
 
