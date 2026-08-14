@@ -98,7 +98,7 @@ Nat normal form agree as whole carrier functions. `GCCI-WALK-2` is deferred:
 this concrete result meets the active consumer, whereas a restricted or
 generic universal property has no further consumer and would begin the
 explicitly excluded generic-reflector project.
-`GCCI-PROD-1` is now focused-green and pending its local checkpoint. The
+`GCCI-PROD-1` is checkpointed at `9e8cc36`. The
 rule-free `emdash3_2_groupoidal_closure.lp` extension identifies the
 comparison as the existing core inclusion of
 `Product_cat(Path_cat(A),Path_cat(B))`, which definitionally has source
@@ -480,7 +480,7 @@ rule-free unless a measured consumer proves otherwise.
 | `GCCI-CIRCLE-3` | checkpointed `1c34f97` | Packages explicit quasi-inverse maps as both the intrinsic based-loop and categorical-Hom `TypeEquiv` with Integer. Functorial `Path_cat` action gives a whole categorical `OmegaEquiv`; dimension evidence and equivalence transport independently prove based-Hom sethood, and the one-type signature proves `Circle_cat` locally set-valued. |
 | `GCCI-WALK-1` | checkpointed `d793ecb` | The walking recursor gives `walking_to_circle_func`, with constructor observations and Nat-inductive action on every directed power. Circle encoding sends that image to `integer_of_nat(n)`, and the arbitrary-endomorphism encoder square commutes as equality of whole carrier functions. |
 | `GCCI-WALK-2` | deferred; no further consumer | The concrete comparison and commuting square satisfy the active group-completion consumer. Reopen a restricted universal property only for a named target-side consumer; do not drift into the excluded generic reflector. |
-| `GCCI-PROD-1` | focused-green; checkpoint pending | The canonical comparison is the existing core inclusion, judgmentally identity on objects. Its actual hom action has an explicit split/join `TypeEquiv` at every pair of objects, and one whole certificate retains those facts without a category-head rewrite, unifier, or opaque category-equivalence axiom. `OmegaEquivAlong Cat_cat` packaging remains consumer-gated on a generic coherent-inverse assembler. |
+| `GCCI-PROD-1` | checkpointed `9e8cc36` | The canonical comparison is the existing core inclusion, judgmentally identity on objects. Its actual hom action has an explicit split/join `TypeEquiv` at every pair of objects, and one whole certificate retains those facts without a category-head rewrite, unifier, or opaque category-equivalence axiom. `OmegaEquivAlong Cat_cat` packaging remains consumer-gated on a generic coherent-inverse assembler. |
 | `GCCI-PROD-2` | active | Prove direct/sequential transport comparisons, both orders, coherence diamond, and primitive/structured `J` agreement. |
 | `GCCI-CLOSE-1` | pending | Synchronize active authority prose, examples, central diagnostics where appropriate, catalog, health, and proportional integration evidence. |
 | `GCCI-GROUPIFY-GENERIC` | deferred | Generic `Groupoidify_func -| Path_cat_func`; reopen only after a second concrete consumer and a reviewed higher-action design. |
