@@ -68,8 +68,8 @@ checkpointed at `1f2760c`: nested Nat elimination defines a
 simultaneously cancelling `(n,x)` loop representative, making the telescope
 step judgmental; set-targeted Integer elimination then supplies a based
 decoder computing at zero, every nonnegative representative, and negative
-one. The endpoint-dependent decoder and path-side inverse are now focused-
-green pending checkpoint: successor compatibility, Code transport, generic
+one. The endpoint-dependent decoder and path-side inverse are checkpointed at
+`677f446`: successor compatibility, Code transport, generic
 function-family and based-path transport comparisons, and adjacent inverse
 cancellation construct the required Circle loop coherence; ordinary endpoint
 path induction then proves `decode_at(encode(p)) = p`. The code-side inverse
@@ -437,7 +437,7 @@ rule-free unless a measured consumer proves otherwise.
 | `GCCI-INT-2` | checkpointed `8ac3599` | Exposes the stage-step path, both successor/predecessor inverse paths, the successor universe path and its propositional transport computation, negative one, and its successor law. All are transparent specializations of existing owners; no rule or unifier was added. |
 | `GCCI-INT-3` | checkpointed `8ac3599` | Exposes inherited sethood plus transparent set-targeted dependent and nondependent integer induction, with constructor computation checked by the public reviewer. This exact elimination boundary requires `circle_is_groupoid` before Circle decode; it does not assume the later loop-space equivalence. |
 | `GCCI-CIRCLE-1` | checkpointed `e378234` | Defines the opaque Circle, base, loop, explicit `IsGroupoidGrpd` dimension evidence, unrestricted dependent eliminator, judgmental point beta, and propositional PathOver loop beta. The sole runtime rule is warning-neutral at its owner position, its strict inferred-slot audit is clean, and the focused public reviewer checks the intended computation and non-collapse boundary. |
-| `GCCI-CIRCLE-2` | active; cover/encode checkpointed `23fcd1a`; based decoder checkpointed `1f2760c`; endpoint decoder/path inverse focused-green, checkpoint pending | The J-derived cover/encoder and simultaneously cancelling based decoder are checked. Derived successor, Code-transport, function-family transport, based-path transport, and cancellation paths supply the Circle loop coherence and endpoint-dependent decoder; endpoint path induction proves `decode_at(encode(p)) = p`. Next prove `encode(decode_at(c)) = c`. |
+| `GCCI-CIRCLE-2` | active; cover/encode checkpointed `23fcd1a`; based decoder checkpointed `1f2760c`; endpoint decoder/path inverse checkpointed `677f446` | The J-derived cover/encoder and simultaneously cancelling based decoder are checked. Derived successor, Code-transport, function-family transport, based-path transport, and cancellation paths supply the Circle loop coherence and endpoint-dependent decoder; endpoint path induction proves `decode_at(encode(p)) = p`. Next prove `encode(decode_at(c)) = c`. |
 | `GCCI-CIRCLE-3` | pending on `CIRCLE-2` | Package based-loop and categorical-Hom equivalences with Integer; prove the selected sethood/1-type consequences and reviewer example. |
 | `GCCI-WALK-1` | pending on `CIRCLE-3` | Construct `walking_to_circle_func` and prove compatibility of powers with the canonical nonnegative integer inclusion. |
 | `GCCI-WALK-2` | optional, consumer-gated | State and prove a restricted universal property for `Path_cat(A)` or explicitly groupoidal targets. Stop if it begins constructing a generic reflector. |
