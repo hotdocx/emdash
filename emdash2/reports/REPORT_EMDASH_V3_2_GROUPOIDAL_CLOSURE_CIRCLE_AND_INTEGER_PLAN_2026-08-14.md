@@ -98,7 +98,21 @@ Nat normal form agree as whole carrier functions. `GCCI-WALK-2` is deferred:
 this concrete result meets the active consumer, whereas a restricted or
 generic universal property has no further consumer and would begin the
 explicitly excluded generic-reflector project.
-`GCCI-PROD-1` is now the first dependency-ready active row.
+`GCCI-PROD-1` is now focused-green and pending its local checkpoint. The
+rule-free `emdash3_2_groupoidal_closure.lp` extension identifies the
+comparison as the existing core inclusion of
+`Product_cat(Path_cat(A),Path_cat(B))`, which definitionally has source
+`Path_cat(Product_grpd(A,B))`. Its actual hom action is propositionally the
+explicit split from `ProductPathView` to the pair of component paths;
+constant-family `PathOver` elimination supplies an explicit join, both
+round trips, and a `TypeEquiv` at every hom. A whole certificate records that
+the comparison is judgmentally identity on objects and homwise equivalent.
+The source and focused reviewer check directly, no rule or unifier is added,
+and the distinct category heads remain non-convertible. A first-class
+`OmegaEquivAlong Cat_cat` is deliberately not postulated: the current kernel
+lacks a generic constructor assembling its coherent inverse whole functor
+from identity-on-objects/homwise-equivalence data. `GCCI-PROD-2` is now the
+first dependency-ready active row.
 
 ## Executive Objective
 
@@ -466,8 +480,8 @@ rule-free unless a measured consumer proves otherwise.
 | `GCCI-CIRCLE-3` | checkpointed `1c34f97` | Packages explicit quasi-inverse maps as both the intrinsic based-loop and categorical-Hom `TypeEquiv` with Integer. Functorial `Path_cat` action gives a whole categorical `OmegaEquiv`; dimension evidence and equivalence transport independently prove based-Hom sethood, and the one-type signature proves `Circle_cat` locally set-valued. |
 | `GCCI-WALK-1` | checkpointed `d793ecb` | The walking recursor gives `walking_to_circle_func`, with constructor observations and Nat-inductive action on every directed power. Circle encoding sends that image to `integer_of_nat(n)`, and the arbitrary-endomorphism encoder square commutes as equality of whole carrier functions. |
 | `GCCI-WALK-2` | deferred; no further consumer | The concrete comparison and commuting square satisfy the active group-completion consumer. Reopen a restricted universal property only for a named target-side consumer; do not drift into the excluded generic reflector. |
-| `GCCI-PROD-1` | active | Construct the explicit `Path_cat` product comparison and homwise/whole equivalence without a global category-head rewrite. |
-| `GCCI-PROD-2` | pending on `PROD-1` | Prove direct/sequential transport comparisons, both orders, coherence diamond, and primitive/structured `J` agreement. |
+| `GCCI-PROD-1` | focused-green; checkpoint pending | The canonical comparison is the existing core inclusion, judgmentally identity on objects. Its actual hom action has an explicit split/join `TypeEquiv` at every pair of objects, and one whole certificate retains those facts without a category-head rewrite, unifier, or opaque category-equivalence axiom. `OmegaEquivAlong Cat_cat` packaging remains consumer-gated on a generic coherent-inverse assembler. |
+| `GCCI-PROD-2` | active | Prove direct/sequential transport comparisons, both orders, coherence diamond, and primitive/structured `J` agreement. |
 | `GCCI-CLOSE-1` | pending | Synchronize active authority prose, examples, central diagnostics where appropriate, catalog, health, and proportional integration evidence. |
 | `GCCI-GROUPIFY-GENERIC` | deferred | Generic `Groupoidify_func -| Path_cat_func`; reopen only after a second concrete consumer and a reviewed higher-action design. |
 | `GCCI-GRAY` | deferred | Gray tensor and lax/pseudonatural two-dimensional infrastructure; reopen only for an actual higher-categorical consumer. |
@@ -563,6 +577,20 @@ probe without a changed prerequisite is not progress.
   every based endomorphism. The optional restricted-universality row is
   deferred because no additional consumer requires it; constructing a generic
   `Groupoidify_func` remains outside this goal.
+- `GCCI-D-013` — Product preservation uses an existing semantic owner rather
+  than a new primitive functor: `Core_incl_func` for
+  `Product_cat(Path_cat(A),Path_cat(B))` has exactly the desired source and is
+  judgmentally identity on objects. Its actual hom action is compared by path
+  induction with the component split; J-derived constant-`PathOver` inverse
+  laws then give an explicit join and both quasi-inverse laws. The resulting
+  homwise `TypeEquiv` is assembled into one whole identity-on-objects and
+  hom-carrier-equivalence certificate. This is constructive preservation
+  data, but recursive whole-hom comparison and a generic coherent-inverse
+  assembler remain absent. Rather than postulate the missing whole inverse,
+  add a category-head comparison rule, or misuse non-transitive proof-time
+  unification, first-class `OmegaEquivAlong Cat_cat` packaging remains
+  consumer-gated. The focused reviewer also checks that the two category heads
+  stay non-convertible.
 
 ## Validation Policy
 
