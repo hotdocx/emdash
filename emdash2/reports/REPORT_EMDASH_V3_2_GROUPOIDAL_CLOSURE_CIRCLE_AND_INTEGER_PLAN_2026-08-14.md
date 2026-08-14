@@ -43,8 +43,9 @@ first rule-free slice. `GCCI-INT-1` is now focused-green: the new transparent,
 rule-free `emdash3_2_integer_localization.lp` facade and its public reviewer
 example both check in about five seconds. Registration in maintained source
 lists and generated health evidence remains part of `GCCI-CLOSE-1` rather
-than a reason to run an aggregate now. `GCCI-INT-2` is the first active
-mathematical continuation.
+than a reason to run an aggregate now. The bounded plan/facade/reviewer
+bootstrap is locally checkpointed at `0a32ee2`. `GCCI-INT-2` is the first
+active mathematical continuation.
 
 ## Executive Objective
 
@@ -390,7 +391,7 @@ rule-free unless a measured consumer proves otherwise.
 | Row | State | Deliverable and stop condition |
 | --- | --- | --- |
 | `GCCI-00` | complete | Promote this self-contained plan; isolate branch/worktree; record exact baseline and proportional focused check. |
-| `GCCI-INT-1` | focused-green | Audited the telescope-localization API and exposed a transparent, rule-free integer-facing carrier, stage representative, zero, Nat embedding, successor, predecessor, whole/contractible-fibre equivalences, and inherited sethood. The source and public reviewer check directly; maintained-list registration is reserved for `GCCI-CLOSE-1`. |
+| `GCCI-INT-1` | checkpointed `0a32ee2` | Audited the telescope-localization API and exposed a transparent, rule-free integer-facing carrier, stage representative, zero, Nat embedding, successor, predecessor, whole/contractible-fibre equivalences, and inherited sethood. The source and public reviewer check directly; maintained-list registration is reserved for `GCCI-CLOSE-1`. |
 | `GCCI-INT-2` | active | Add focused propositional inverse laws and the canonical representative computations actually needed by Circle, reusing existing owners. New rules require owner-position and warning audits. |
 | `GCCI-INT-3` | pending | Expose sethood and the smallest dependent induction interface consumed by Circle; add a public reviewer example. |
 | `GCCI-CIRCLE-1` | pending on `INT-1..3` | Define Circle HIT signature, base, loop, dependent eliminator, point beta, and propositional loop beta under the existing HIT policy. |
