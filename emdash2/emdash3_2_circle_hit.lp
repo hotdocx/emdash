@@ -2126,3 +2126,154 @@ symbol Circle_cat : Cat
 symbol circle_cat_is_groupoidal
   : τ (IsGroupoidalCat Circle_cat)
 ≔ @path_cat_is_groupoidal Circle_grpd;
+
+// Selected maps underlying the based-loop/Integer equivalence.
+symbol circle_loop_encode_function
+  : τ (@Function_grpd
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd)
+≔ λ p : τ (@= Circle_grpd circle_base circle_base),
+    @circle_encode circle_base p;
+
+symbol circle_loop_decode_function
+  : τ (@Function_grpd
+      Integer_grpd
+      (@= Circle_grpd circle_base circle_base))
+≔ circle_decode;
+
+// The two semantic round trips form explicit quasi-inverse data.
+symbol circle_loop_integer_by_inverse
+  : τ (@EquivByInverse
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd
+      circle_loop_encode_function
+      circle_loop_decode_function)
+≔ @Struct_sigma
+    (@Pi_grpd
+      (@= Circle_grpd circle_base circle_base)
+      (λ p : τ (@= Circle_grpd circle_base circle_base),
+        @= (@= Circle_grpd circle_base circle_base)
+          (circle_loop_decode_function (circle_loop_encode_function p))
+          p))
+    (λ _ : τ (@Pi_grpd
+      (@= Circle_grpd circle_base circle_base)
+      (λ p : τ (@= Circle_grpd circle_base circle_base),
+        @= (@= Circle_grpd circle_base circle_base)
+          (circle_loop_decode_function (circle_loop_encode_function p))
+          p)),
+      @Pi_grpd
+        Integer_grpd
+        (λ z : τ Integer_grpd,
+          @= Integer_grpd
+            (circle_loop_encode_function (circle_loop_decode_function z))
+            z))
+    (λ p : τ (@= Circle_grpd circle_base circle_base),
+      @circle_decode_encode circle_base p)
+    circle_encode_decode_base;
+
+// Based loop space of the Circle is equivalent to the Integer line.
+symbol circle_loop_integer_type_equiv
+  : τ (TypeEquiv
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd)
+≔ @Struct_sigma
+    (@Function_grpd
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd)
+    (λ map : τ (@Function_grpd
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd),
+      @IsEquivMap
+        (@= Circle_grpd circle_base circle_base)
+        Integer_grpd
+        map)
+    circle_loop_encode_function
+    (@is_equiv_map_by_inverse
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd
+      circle_loop_encode_function
+      circle_loop_decode_function
+      circle_loop_integer_by_inverse);
+
+// The categorical Hom carrier is definitionally the same based loop space.
+symbol circle_hom_integer_type_equiv
+  : τ (TypeEquiv
+      (Hom Circle_cat circle_base circle_base)
+      Integer_grpd)
+≔ circle_loop_integer_type_equiv;
+
+// Equality-valued facade for the carrier equivalence in Grpd_cat.
+symbol circle_loop_integer_omega_equiv
+  : τ (@OmegaEquiv
+      Grpd_cat
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd)
+≔ @type_equiv_to_omega
+    (@= Circle_grpd circle_base circle_base)
+    Integer_grpd
+    circle_loop_integer_type_equiv;
+
+// Whole Path-category action of the selected encoder.
+symbol circle_hom_integer_func
+  : τ (Functor
+      (Hom_cat Circle_cat circle_base circle_base)
+      (Path_cat Integer_grpd))
+≔ @path_map_func
+    (@= Circle_grpd circle_base circle_base)
+    Integer_grpd
+    circle_loop_encode_function;
+
+// Functoriality transports the Grpd equivalence to the categorical Hom.
+symbol circle_hom_integer_cat_evidence
+  : τ (@OmegaEquivAlong
+      Cat_cat
+      (Hom_cat Circle_cat circle_base circle_base)
+      (Path_cat Integer_grpd)
+      circle_hom_integer_func)
+≔ @omega_equiv_along_fapp1_fapp0
+    Grpd_cat
+    Cat_cat
+    Path_cat_func
+    (@= Circle_grpd circle_base circle_base)
+    Integer_grpd
+    circle_loop_encode_function
+    (@omega_equiv_evidence
+      Grpd_cat
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd
+      circle_loop_integer_omega_equiv);
+
+symbol circle_hom_integer_cat_omega_equiv
+  : τ (@OmegaEquiv
+      Cat_cat
+      (Hom_cat Circle_cat circle_base circle_base)
+      (Path_cat Integer_grpd))
+≔ @omega_equiv_pack
+    Cat_cat
+    (Hom_cat Circle_cat circle_base circle_base)
+    (Path_cat Integer_grpd)
+    circle_hom_integer_func
+    circle_hom_integer_cat_evidence;
+
+// Signature dimension and the computed carrier equivalence give independent sethood evidence.
+symbol circle_hom_is_set_from_dimension
+  : τ (IsSetGrpd
+      (Hom Circle_cat circle_base circle_base))
+≔ circle_loop_space_is_set;
+
+symbol circle_hom_is_set_from_equiv
+  : τ (IsSetGrpd
+      (Hom Circle_cat circle_base circle_base))
+≔ @is_trunc_grpd_equiv_from
+    trunc_zero
+    (Hom Circle_cat circle_base circle_base)
+    Integer_grpd
+    circle_hom_integer_type_equiv
+    integer_is_set;
+
+// The Circle's one-type signature makes its path category locally set-valued.
+symbol circle_cat_is_locally_set
+  : τ (IsLocallySetCat Circle_cat)
+≔ λ x : τ Circle_grpd,
+    λ y : τ Circle_grpd,
+      circle_is_groupoid x y;

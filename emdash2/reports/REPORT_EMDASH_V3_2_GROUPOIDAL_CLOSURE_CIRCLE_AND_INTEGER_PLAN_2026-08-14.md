@@ -80,7 +80,14 @@ the positive, negative, and arbitrary-stage encoder normal forms; Integer
 induction proves the based inverse; and proposition-valued Circle induction
 lifts sethood and `encode(decode_at(c)) = c` to every Code fibre. No rule or
 unifier is added. `GCCI-CIRCLE-3` is now the first dependency-ready active
-row.
+row. That packaging row is now focused-green pending checkpoint: the selected
+encode/decode maps form explicit quasi-inverse data, hence a `TypeEquiv` for
+the intrinsic based loop space and the definitionally identical categorical
+Hom carrier. Applying `Path_cat_func` yields a whole categorical
+`OmegaEquiv` from the Circle endomorphism category to `Path_cat(Integer)`,
+while dimension evidence and equivalence transport independently establish
+the expected Hom sethood. The Circle signature also makes `Circle_cat`
+locally set-valued.
 
 ## Executive Objective
 
@@ -445,8 +452,8 @@ rule-free unless a measured consumer proves otherwise.
 | `GCCI-INT-3` | checkpointed `8ac3599` | Exposes inherited sethood plus transparent set-targeted dependent and nondependent integer induction, with constructor computation checked by the public reviewer. This exact elimination boundary requires `circle_is_groupoid` before Circle decode; it does not assume the later loop-space equivalence. |
 | `GCCI-CIRCLE-1` | checkpointed `e378234` | Defines the opaque Circle, base, loop, explicit `IsGroupoidGrpd` dimension evidence, unrestricted dependent eliminator, judgmental point beta, and propositional PathOver loop beta. The sole runtime rule is warning-neutral at its owner position, its strict inferred-slot audit is clean, and the focused public reviewer checks the intended computation and non-collapse boundary. |
 | `GCCI-CIRCLE-2` | checkpointed `a026eb4`; earlier checkpoints `23fcd1a`, `1f2760c`, and `677f446` | Both endpoint-general inverse laws are checked. Derived Code action on generator/inverse, positive and negative axis encodings, arbitrary telescope-stage encoding, based Integer induction, and proposition-valued Circle induction prove `decode_at(encode(p)) = p` and `encode(decode_at(c)) = c` without a rule or unifier. |
-| `GCCI-CIRCLE-3` | active | Package based-loop and categorical-Hom equivalences with Integer; prove the selected sethood/1-type consequences and reviewer example. |
-| `GCCI-WALK-1` | pending on `CIRCLE-3` | Construct `walking_to_circle_func` and prove compatibility of powers with the canonical nonnegative integer inclusion. |
+| `GCCI-CIRCLE-3` | focused-green; checkpoint pending | Packages explicit quasi-inverse maps as both the intrinsic based-loop and categorical-Hom `TypeEquiv` with Integer. Functorial `Path_cat` action gives a whole categorical `OmegaEquiv`; dimension evidence and equivalence transport independently prove based-Hom sethood, and the one-type signature proves `Circle_cat` locally set-valued. |
+| `GCCI-WALK-1` | pending final `CIRCLE-3` checkpoint | Construct `walking_to_circle_func` and prove compatibility of powers with the canonical nonnegative integer inclusion. |
 | `GCCI-WALK-2` | optional, consumer-gated | State and prove a restricted universal property for `Path_cat(A)` or explicitly groupoidal targets. Stop if it begins constructing a generic reflector. |
 | `GCCI-PROD-1` | pending; may run after `INT-1` | Construct the explicit `Path_cat` product comparison and homwise/whole equivalence without a global category-head rewrite. |
 | `GCCI-PROD-2` | pending on `PROD-1` | Prove direct/sequential transport comparisons, both orders, coherence diamond, and primitive/structured `J` agreement. |
@@ -525,6 +532,16 @@ probe without a changed prerequisite is not progress.
   fibrewise round-trip classifier is proposition-valued, its loop coherence
   is canonical. Thus both endpoint-general inverse laws are checked with no
   rewrite or unification rule and no signed-integer shadow representation.
+- `GCCI-D-011` — The headline `Hom(Circle,Circle) ≃ Integer` result is
+  packaged without changing either carrier's normal form. The intrinsic
+  based-loop `TypeEquiv` retains `circle_encode` as its selected forward map
+  and `circle_decode` as its selected inverse; `Hom Circle_cat base base`
+  reduces to that same loop classifier. Mapping the equality-valued Grpd
+  equivalence through the existing `Path_cat_func` supplies a whole
+  `OmegaEquiv` between the categorical Hom and `Path_cat(Integer)`. This is a
+  structured categorical consequence, not a rewrite equating category heads.
+  The HIT's one-dimensional signature and equivalence-invariance of
+  truncation remain distinct evidence paths to sethood.
 
 ## Validation Policy
 

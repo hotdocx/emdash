@@ -328,3 +328,80 @@ assert ⊢ Hom Circle_cat circle_base circle_base
 
 assert ⊢ circle_cat_is_groupoidal
   : τ (IsGroupoidalCat Circle_cat);
+
+// The checked round trips package the intrinsic based loop space as Integer.
+assert ⊢ circle_loop_integer_by_inverse
+  : τ (@EquivByInverse
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd
+      circle_loop_encode_function
+      circle_loop_decode_function);
+
+assert ⊢ circle_loop_integer_type_equiv
+  : τ (TypeEquiv
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd);
+
+assert ⊢ circle_hom_integer_type_equiv
+  : τ (TypeEquiv
+      (Hom Circle_cat circle_base circle_base)
+      Integer_grpd);
+
+assert ⊢
+  @type_equiv_to
+    (Hom Circle_cat circle_base circle_base)
+    Integer_grpd
+    circle_hom_integer_type_equiv
+  ≡ circle_loop_encode_function;
+
+assert ⊢
+  @type_equiv_from
+    (Hom Circle_cat circle_base circle_base)
+    Integer_grpd
+    circle_hom_integer_type_equiv
+  ≡ circle_loop_decode_function;
+
+assert ⊢ circle_loop_integer_omega_equiv
+  : τ (@OmegaEquiv
+      Grpd_cat
+      (@= Circle_grpd circle_base circle_base)
+      Integer_grpd);
+
+// The same equivalence acts as a whole functor on the categorical Hom.
+assert ⊢ circle_hom_integer_func
+  : τ (Functor
+      (Hom_cat Circle_cat circle_base circle_base)
+      (Path_cat Integer_grpd));
+
+assert (p : τ (Hom Circle_cat circle_base circle_base)) ⊢
+  @fapp0
+    (Hom_cat Circle_cat circle_base circle_base)
+    (Path_cat Integer_grpd)
+    circle_hom_integer_func
+    p
+  ≡ circle_loop_encode_function p;
+
+assert ⊢ circle_hom_integer_cat_evidence
+  : τ (@OmegaEquivAlong
+      Cat_cat
+      (Hom_cat Circle_cat circle_base circle_base)
+      (Path_cat Integer_grpd)
+      circle_hom_integer_func);
+
+assert ⊢ circle_hom_integer_cat_omega_equiv
+  : τ (@OmegaEquiv
+      Cat_cat
+      (Hom_cat Circle_cat circle_base circle_base)
+      (Path_cat Integer_grpd));
+
+// Dimension evidence and the computed equivalence independently prove sethood.
+assert ⊢ circle_hom_is_set_from_dimension
+  : τ (IsSetGrpd
+      (Hom Circle_cat circle_base circle_base));
+
+assert ⊢ circle_hom_is_set_from_equiv
+  : τ (IsSetGrpd
+      (Hom Circle_cat circle_base circle_base));
+
+assert ⊢ circle_cat_is_locally_set
+  : τ (IsLocallySetCat Circle_cat);
