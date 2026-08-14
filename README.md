@@ -1,5 +1,10 @@
 # emdash — Functorial Type Theory
 
+**Read the book:**
+[*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf)
+· [Zenodo record and DOI](https://doi.org/10.5281/zenodo.21544186)
+· [Live integrated reviewer](https://hotdocx.github.io/emdash/)
+
 emdash is a research programme and executable formalization for functorial
 type theory: categorical action is part of the computational language rather
 than an external structure added after the fact. The development combines
@@ -18,13 +23,16 @@ The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
 of global metatheory.
 
+[![The Functorial Type Theory book on an ivory study desk, with a QR code linking to the emdash repository.](./.github/assets/emdash-book-ivory-study-desk-qr.png)](./docs/emdash-book.pdf)
+
 ## Read And Review
 
 Start with the concise
 [*Functorial Type Theory: An Executable Architecture for Directed Dependency*](./docs/emdash3_2.pdf)
 overview, then continue to the current development edition of
 [*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf)
-([assembled Markdown](./docs/emdash-book.md)).
+([Zenodo record and DOI](https://doi.org/10.5281/zenodo.21544186),
+[assembled Markdown](./docs/emdash-book.md)).
 The active mathematical source is
 [`emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp), together with the modules it
 imports.
