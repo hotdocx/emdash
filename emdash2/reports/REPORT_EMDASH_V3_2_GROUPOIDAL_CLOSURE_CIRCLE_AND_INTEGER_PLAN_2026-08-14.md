@@ -88,7 +88,7 @@ Hom carrier. Applying `Path_cat_func` yields a whole categorical
 while dimension evidence and equivalence transport independently establish
 the expected Hom sethood. The Circle signature also makes `Circle_cat`
 locally set-valued. `GCCI-WALK-1` is now the first dependency-ready active
-row. That concrete comparison is now focused-green pending checkpoint in the
+row. That concrete comparison is checkpointed at `d793ecb` in the
 separate `emdash3_2_walking_circle_completion.lp` extension: the walking
 recursor sends the base and generator to `circle_base` and `circle_loop`, Nat
 induction identifies every directed power with the corresponding nonnegative
@@ -98,6 +98,7 @@ Nat normal form agree as whole carrier functions. `GCCI-WALK-2` is deferred:
 this concrete result meets the active consumer, whereas a restricted or
 generic universal property has no further consumer and would begin the
 explicitly excluded generic-reflector project.
+`GCCI-PROD-1` is now the first dependency-ready active row.
 
 ## Executive Objective
 
@@ -463,9 +464,9 @@ rule-free unless a measured consumer proves otherwise.
 | `GCCI-CIRCLE-1` | checkpointed `e378234` | Defines the opaque Circle, base, loop, explicit `IsGroupoidGrpd` dimension evidence, unrestricted dependent eliminator, judgmental point beta, and propositional PathOver loop beta. The sole runtime rule is warning-neutral at its owner position, its strict inferred-slot audit is clean, and the focused public reviewer checks the intended computation and non-collapse boundary. |
 | `GCCI-CIRCLE-2` | checkpointed `a026eb4`; earlier checkpoints `23fcd1a`, `1f2760c`, and `677f446` | Both endpoint-general inverse laws are checked. Derived Code action on generator/inverse, positive and negative axis encodings, arbitrary telescope-stage encoding, based Integer induction, and proposition-valued Circle induction prove `decode_at(encode(p)) = p` and `encode(decode_at(c)) = c` without a rule or unifier. |
 | `GCCI-CIRCLE-3` | checkpointed `1c34f97` | Packages explicit quasi-inverse maps as both the intrinsic based-loop and categorical-Hom `TypeEquiv` with Integer. Functorial `Path_cat` action gives a whole categorical `OmegaEquiv`; dimension evidence and equivalence transport independently prove based-Hom sethood, and the one-type signature proves `Circle_cat` locally set-valued. |
-| `GCCI-WALK-1` | focused-green; checkpoint pending | The walking recursor gives `walking_to_circle_func`, with constructor observations and Nat-inductive action on every directed power. Circle encoding sends that image to `integer_of_nat(n)`, and the arbitrary-endomorphism encoder square commutes as equality of whole carrier functions. |
+| `GCCI-WALK-1` | checkpointed `d793ecb` | The walking recursor gives `walking_to_circle_func`, with constructor observations and Nat-inductive action on every directed power. Circle encoding sends that image to `integer_of_nat(n)`, and the arbitrary-endomorphism encoder square commutes as equality of whole carrier functions. |
 | `GCCI-WALK-2` | deferred; no further consumer | The concrete comparison and commuting square satisfy the active group-completion consumer. Reopen a restricted universal property only for a named target-side consumer; do not drift into the excluded generic reflector. |
-| `GCCI-PROD-1` | pending; may run after `INT-1` | Construct the explicit `Path_cat` product comparison and homwise/whole equivalence without a global category-head rewrite. |
+| `GCCI-PROD-1` | active | Construct the explicit `Path_cat` product comparison and homwise/whole equivalence without a global category-head rewrite. |
 | `GCCI-PROD-2` | pending on `PROD-1` | Prove direct/sequential transport comparisons, both orders, coherence diamond, and primitive/structured `J` agreement. |
 | `GCCI-CLOSE-1` | pending | Synchronize active authority prose, examples, central diagnostics where appropriate, catalog, health, and proportional integration evidence. |
 | `GCCI-GROUPIFY-GENERIC` | deferred | Generic `Groupoidify_func -| Path_cat_func`; reopen only after a second concrete consumer and a reviewed higher-action design. |
