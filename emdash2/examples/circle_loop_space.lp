@@ -1,7 +1,6 @@
 /*
-  Focused reviewer for the first Circle HIT signature: constructors,
-  one-dimensional evidence, dependent/ordinary point computation, and the
-  propositional loop beta. Integer encode/decode is added in the next tranche.
+  Focused reviewer for the Circle HIT signature, Integer universal cover,
+  endpoint-dependent decoder, and both encode/decode inverse laws.
 */
 
 require open emdash.emdash3_2_circle_hit;
@@ -241,6 +240,75 @@ assert [x : τ Circle_grpd]
       (@= Circle_grpd circle_base x)
       (@circle_decode_at x (@circle_encode x p))
       p);
+
+// Code action follows successor on the generator and predecessor on its inverse.
+assert (z : τ Integer_grpd) ⊢ circle_Code_transport_loop_inverse z
+  : τ (@= Integer_grpd
+      (@coe_grpd
+        Integer_grpd
+        Integer_grpd
+        (@eq_ap
+          Circle_grpd Grpd_grpd
+          CircleCode
+          circle_base circle_base circle_loop_inverse)
+        z)
+      (integer_pred z));
+
+assert (p : τ (@= Circle_grpd circle_base circle_base)) ⊢
+  circle_encode_loop_suffix p
+  : τ (@= Integer_grpd
+      (@circle_encode
+        circle_base
+        (@eq_trans
+          Circle_grpd
+          circle_base circle_base circle_base
+          p circle_loop))
+      (integer_succ (@circle_encode circle_base p)));
+
+assert (p : τ (@= Circle_grpd circle_base circle_base)) ⊢
+  circle_encode_loop_inverse_suffix p
+  : τ (@= Integer_grpd
+      (@circle_encode
+        circle_base
+        (@eq_trans
+          Circle_grpd
+          circle_base circle_base circle_base
+          p circle_loop_inverse))
+      (integer_pred (@circle_encode circle_base p)));
+
+// The two axes and every telescope representative encode to their Integer values.
+assert (n : τ Nat_grpd) ⊢ circle_encode_nat_power n
+  : τ (@= Integer_grpd
+      (@circle_encode circle_base (circle_nat_power n))
+      (integer_of_nat n));
+
+assert (n : τ Nat_grpd) ⊢ circle_encode_nat_inverse_power n
+  : τ (@= Integer_grpd
+      (@circle_encode circle_base (circle_nat_inverse_power n))
+      (integer_stage n zero));
+
+assert (n x : τ Nat_grpd) ⊢ circle_encode_integer_stage_power n x
+  : τ (@= Integer_grpd
+      (@circle_encode
+        circle_base
+        (circle_integer_stage_power n x))
+      (integer_stage n x));
+
+// The code-side inverse is first proved at the base, then over every fibre.
+assert (z : τ Integer_grpd) ⊢ circle_encode_decode_base z
+  : τ (@= Integer_grpd
+      (@circle_encode circle_base (circle_decode z))
+      z);
+
+assert (x : τ Circle_grpd) ⊢ circle_Code_is_set x
+  : τ (IsSetGrpd (CircleCode x));
+
+assert [x : τ Circle_grpd]
+  (c : τ (CircleCode x)) ⊢
+  @circle_encode_decode x c
+  : τ (@= (CircleCode x)
+      (@circle_encode x (@circle_decode_at x c))
+      c);
 
 // Only the base constructor computes; an open Circle point stays opaque.
 assertnot [B : Grpd]
