@@ -477,6 +477,813 @@ symbol circle_decode_neg_one
     (@= Circle_grpd circle_base circle_base)
     circle_loop_inverse;
 
+// Right cancellation against a path inverse, derived from generic J.
+symbol eq_trans_right_sym_cancel
+  [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y))
+  [w : τ A]
+  (r : τ (@= A w x))
+  : τ (@=
+      (@= A w x)
+      (@eq_trans
+        A w y x
+        (@eq_trans A w x y r p)
+        (@eq_sym A x y p))
+      r)
+≔ @ind_eqr
+    A
+    y
+    (λ x : τ A,
+      λ p : τ (@= A x y),
+        @Pi_grpd A
+          (λ w : τ A,
+            @Pi_grpd
+              (@= A w x)
+              (λ r : τ (@= A w x),
+                @=
+                  (@= A w x)
+                  (@eq_trans
+                    A w y x
+                    (@eq_trans A w x y r p)
+                    (@eq_sym A x y p))
+                  r)))
+    (λ w : τ A,
+      λ r : τ (@= A w y),
+        @eq_trans
+          (@= A w y)
+          (@eq_trans
+            A w y y
+            (@eq_trans A w y y r (@eq_refl A y))
+            (@eq_refl A y))
+          (@eq_trans A w y y r (@eq_refl A y))
+          r
+          (@eq_ap
+            (@= A w y)
+            (@= A w y)
+            (λ s : τ (@= A w y),
+              @eq_trans A w y y s (@eq_refl A y))
+            (@eq_trans A w y y r (@eq_refl A y))
+            r
+            (@eq_trans_right_unit A w y r))
+          (@eq_trans_right_unit A w y r))
+    x
+    p
+    w
+    r;
+
+// The other right-adjacent cancellation order, also derived from generic J.
+symbol eq_trans_sym_right_cancel
+  [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y))
+  [w : τ A]
+  (r : τ (@= A w y))
+  : τ (@=
+      (@= A w y)
+      (@eq_trans
+        A w x y
+        (@eq_trans
+          A w y x
+          r
+          (@eq_sym A x y p))
+        p)
+      r)
+≔ @ind_eqr
+    A
+    y
+    (λ x : τ A,
+      λ p : τ (@= A x y),
+        @Pi_grpd A
+          (λ w : τ A,
+            @Pi_grpd
+              (@= A w y)
+              (λ r : τ (@= A w y),
+                @=
+                  (@= A w y)
+                  (@eq_trans
+                    A w x y
+                    (@eq_trans
+                      A w y x
+                      r
+                      (@eq_sym A x y p))
+                    p)
+                  r)))
+    (λ w : τ A,
+      λ r : τ (@= A w y),
+        @eq_trans
+          (@= A w y)
+          (@eq_trans
+            A w y y
+            (@eq_trans A w y y r (@eq_refl A y))
+            (@eq_refl A y))
+          (@eq_trans A w y y r (@eq_refl A y))
+          r
+          (@eq_ap
+            (@= A w y)
+            (@= A w y)
+            (λ s : τ (@= A w y),
+              @eq_trans A w y y s (@eq_refl A y))
+            (@eq_trans A w y y r (@eq_refl A y))
+            r
+            (@eq_trans_right_unit A w y r))
+          (@eq_trans_right_unit A w y r))
+    x
+    p
+    w
+    r;
+
+/*
+  The inverse-prefix boundary followed by the generator cancels. The chosen
+  power recursion makes the cancellation literally adjacent.
+*/
+symbol circle_nat_inverse_power_succ_cancel
+  (n : τ Nat_grpd)
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (@eq_trans
+        Circle_grpd
+        circle_base circle_base circle_base
+        (circle_nat_inverse_power (succ n))
+        circle_loop)
+      (circle_nat_inverse_power n))
+≔ @eq_trans_sym_right_cancel
+    Circle_grpd
+    circle_base circle_base
+    circle_loop
+    circle_base
+    (circle_nat_inverse_power n);
+
+symbol circle_integer_stage_power_zero
+  (n : τ Nat_grpd)
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_integer_stage_power n zero)
+      (circle_nat_inverse_power n))
+≔ @nat_elim
+    (λ n : τ Nat_grpd,
+      @=
+        (@= Circle_grpd circle_base circle_base)
+        (circle_integer_stage_power n zero)
+        (circle_nat_inverse_power n))
+    (@eq_refl
+      (@= Circle_grpd circle_base circle_base)
+      (@eq_refl Circle_grpd circle_base))
+    (λ n : τ Nat_grpd,
+      λ _ : τ (@=
+        (@= Circle_grpd circle_base circle_base)
+        (circle_integer_stage_power n zero)
+        (circle_nat_inverse_power n)),
+      @eq_refl
+        (@= Circle_grpd circle_base circle_base)
+        (circle_nat_inverse_power (succ n)))
+    n;
+
+// Successor of a stage appends one generating loop to its decoded power.
+symbol circle_integer_stage_power_succ
+  (n x : τ Nat_grpd)
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_integer_stage_power n (succ x))
+      (@eq_trans
+        Circle_grpd
+        circle_base circle_base circle_base
+        (circle_integer_stage_power n x)
+        circle_loop))
+≔ (@nat_elim
+      (λ n : τ Nat_grpd,
+        @Pi_grpd Nat_grpd
+          (λ x : τ Nat_grpd,
+            @=
+              (@= Circle_grpd circle_base circle_base)
+              (circle_integer_stage_power n (succ x))
+              (@eq_trans
+                Circle_grpd
+                circle_base circle_base circle_base
+                (circle_integer_stage_power n x)
+                circle_loop)))
+      (λ x : τ Nat_grpd,
+        @eq_refl
+          (@= Circle_grpd circle_base circle_base)
+          (@eq_trans
+            Circle_grpd
+            circle_base circle_base circle_base
+            (circle_nat_power x)
+            circle_loop))
+      (λ n : τ Nat_grpd,
+        λ previous : τ (@Pi_grpd Nat_grpd
+            (λ x : τ Nat_grpd,
+              @=
+                (@= Circle_grpd circle_base circle_base)
+                (circle_integer_stage_power n (succ x))
+                (@eq_trans
+                  Circle_grpd
+                  circle_base circle_base circle_base
+                  (circle_integer_stage_power n x)
+                  circle_loop))),
+          λ x : τ Nat_grpd,
+            @nat_elim
+              (λ x : τ Nat_grpd,
+                @=
+                  (@= Circle_grpd circle_base circle_base)
+                  (circle_integer_stage_power (succ n) (succ x))
+                  (@eq_trans
+                    Circle_grpd
+                    circle_base circle_base circle_base
+                    (circle_integer_stage_power (succ n) x)
+                    circle_loop))
+              (@eq_trans
+                (@= Circle_grpd circle_base circle_base)
+                (circle_integer_stage_power n zero)
+                (circle_nat_inverse_power n)
+                (@eq_trans
+                  Circle_grpd
+                  circle_base circle_base circle_base
+                  (circle_nat_inverse_power (succ n))
+                  circle_loop)
+                (@circle_integer_stage_power_zero n)
+                (@eq_sym
+                  (@= Circle_grpd circle_base circle_base)
+                  (@eq_trans
+                    Circle_grpd
+                    circle_base circle_base circle_base
+                    (circle_nat_inverse_power (succ n))
+                    circle_loop)
+                  (circle_nat_inverse_power n)
+                  (@circle_nat_inverse_power_succ_cancel n)))
+              (λ x0 : τ Nat_grpd,
+                λ _ : τ (@=
+                  (@= Circle_grpd circle_base circle_base)
+                  (circle_integer_stage_power (succ n) (succ x0))
+                  (@eq_trans
+                    Circle_grpd
+                    circle_base circle_base circle_base
+                    (circle_integer_stage_power (succ n) x0)
+                    circle_loop)),
+                  previous x0)
+              x)
+      n)
+    x;
+
+// Motive asserting that Integer successor appends the Circle generator.
+symbol CircleDecodeSuccMotive
+  (z : τ Integer_grpd)
+  : Grpd
+≔ @=
+    (@= Circle_grpd circle_base circle_base)
+    (circle_decode (integer_succ z))
+    (@eq_trans
+      Circle_grpd
+      circle_base circle_base circle_base
+      (circle_decode z)
+      circle_loop);
+
+symbol circle_decode_succ_motive_is_prop
+  (z : τ Integer_grpd)
+  : τ (IsPropGrpd (CircleDecodeSuccMotive z))
+≔ circle_loop_space_is_set
+    (circle_decode (integer_succ z))
+    (@eq_trans
+      Circle_grpd
+      circle_base circle_base circle_base
+      (circle_decode z)
+      circle_loop);
+
+symbol circle_decode_succ_motive_is_set
+  (z : τ Integer_grpd)
+  : τ (IsSetGrpd (CircleDecodeSuccMotive z))
+≔ @is_trunc_grpd_succ
+    trunc_minus_one
+    (CircleDecodeSuccMotive z)
+    (circle_decode_succ_motive_is_prop z);
+
+symbol circle_decode_succ_stage
+  (n x : τ Nat_grpd)
+  : τ (CircleDecodeSuccMotive (integer_stage n x))
+≔ @circle_integer_stage_power_succ n x;
+
+symbol circle_decode_succ_stage_coherence
+  (n x : τ Nat_grpd)
+  : τ (@PathOver
+      Integer_grpd
+      CircleDecodeSuccMotive
+      (integer_stage (succ n) (succ x))
+      (integer_stage n x)
+      (integer_stage_step n x)
+      (circle_decode_succ_stage (succ n) (succ x))
+      (circle_decode_succ_stage n x))
+≔ @prop_family_pathover
+    Integer_grpd
+    CircleDecodeSuccMotive
+    circle_decode_succ_motive_is_prop
+    (integer_stage (succ n) (succ x))
+    (integer_stage n x)
+    (integer_stage_step n x)
+    (circle_decode_succ_stage (succ n) (succ x))
+    (circle_decode_succ_stage n x);
+
+symbol circle_decode_succ
+  (z : τ Integer_grpd)
+  : τ (CircleDecodeSuccMotive z)
+≔ @integer_ind
+    CircleDecodeSuccMotive
+    circle_decode_succ_motive_is_set
+    circle_decode_succ_stage
+    circle_decode_succ_stage_coherence
+    z;
+
+// The Code transport around the generator is the Integer successor.
+symbol circle_Code_transport_loop
+  (z : τ Integer_grpd)
+  : τ (@= Integer_grpd
+      (@coe_grpd
+        Integer_grpd
+        Integer_grpd
+        (@eq_ap
+          Circle_grpd Grpd_grpd
+          CircleCode
+          circle_base circle_base circle_loop)
+        z)
+      (integer_succ z))
+≔ @eq_trans
+    Integer_grpd
+    (@coe_grpd
+      Integer_grpd
+      Integer_grpd
+      (@eq_ap
+        Circle_grpd Grpd_grpd
+        CircleCode
+        circle_base circle_base circle_loop)
+      z)
+    (@coe_grpd Integer_grpd Integer_grpd integer_succ_path z)
+    (integer_succ z)
+    (@eq_ap
+      (@= Grpd_grpd Integer_grpd Integer_grpd)
+      Integer_grpd
+      (λ q : τ (@= Grpd_grpd Integer_grpd Integer_grpd),
+        @coe_grpd Integer_grpd Integer_grpd q z)
+      (@eq_ap
+        Circle_grpd Grpd_grpd
+        CircleCode
+        circle_base circle_base circle_loop)
+      integer_succ_path
+      circle_Code_beta_loop)
+    (integer_succ_path_coe z);
+
+/*
+  Backward transport in a varying function family. The domain is first moved
+  forward by universe transport, while the result is moved backward in the
+  codomain family. Generic J proves the comparison without a transport rule.
+*/
+symbol function_family_transport
+  [A : Grpd]
+  (B C : τ A → Grpd)
+  [x y : τ A]
+  (p : τ (@= A x y))
+  (h : τ (@Function_grpd (B y) (C y)))
+  : τ (@=
+      (@Function_grpd (B x) (C x))
+      (@ind_eq
+        A x y p
+        (λ t : τ A, @Function_grpd (B t) (C t))
+        h)
+      (λ b : τ (B x),
+        @ind_eq
+          A x y p
+          C
+          (h (@coe_grpd
+            (B x)
+            (B y)
+            (@eq_ap A Grpd_grpd B x y p)
+            b))))
+≔ @ind_eqr
+    A
+    y
+    (λ x : τ A,
+      λ p : τ (@= A x y),
+        @Pi_grpd
+          (@Function_grpd (B y) (C y))
+          (λ h : τ (@Function_grpd (B y) (C y)),
+            @=
+              (@Function_grpd (B x) (C x))
+              (@ind_eq
+                A x y p
+                (λ t : τ A, @Function_grpd (B t) (C t))
+                h)
+              (λ b : τ (B x),
+                @ind_eq
+                  A x y p
+                  C
+                  (h (@coe_grpd
+                    (B x)
+                    (B y)
+                    (@eq_ap A Grpd_grpd B x y p)
+                    b)))))
+    (λ h : τ (@Function_grpd (B y) (C y)),
+      @eq_refl (@Function_grpd (B y) (C y)) h)
+    x
+    p
+    h;
+
+// Backward transport of a based path appends the inverse base path.
+symbol based_path_family_transport
+  [A : Grpd]
+  [a x y : τ A]
+  (p : τ (@= A x y))
+  (q : τ (@= A a y))
+  : τ (@=
+      (@= A a x)
+      (@ind_eq
+        A x y p
+        (λ t : τ A, @= A a t)
+        q)
+      (@eq_trans
+        A a y x
+        q
+        (@eq_sym A x y p)))
+≔ @ind_eqr
+    A
+    y
+    (λ x : τ A,
+      λ p : τ (@= A x y),
+        @Pi_grpd
+          (@= A a y)
+          (λ q : τ (@= A a y),
+            @=
+              (@= A a x)
+              (@ind_eq
+                A x y p
+                (λ t : τ A, @= A a t)
+                q)
+              (@eq_trans
+                A a y x
+                q
+                (@eq_sym A x y p))))
+    (λ q : τ (@= A a y),
+      @eq_sym
+        (@= A a y)
+        (@eq_trans A a y y q (@eq_refl A y))
+        q
+        (@eq_trans_right_unit A a y q))
+    x
+    p
+    q;
+
+symbol CircleDecodeMotive
+  (x : τ Circle_grpd)
+  : Grpd
+≔ @Function_grpd
+    (CircleCode x)
+    (@= Circle_grpd circle_base x);
+
+symbol circle_decode_function_transport
+  : τ (@=
+      (CircleDecodeMotive circle_base)
+      (@ind_eq
+        Circle_grpd
+        circle_base circle_base circle_loop
+        CircleDecodeMotive
+        circle_decode)
+      (λ z : τ Integer_grpd,
+        @ind_eq
+          Circle_grpd
+          circle_base circle_base circle_loop
+          (λ x : τ Circle_grpd,
+            @= Circle_grpd circle_base x)
+          (circle_decode
+            (@coe_grpd
+              Integer_grpd
+              Integer_grpd
+              (@eq_ap
+                Circle_grpd Grpd_grpd
+                CircleCode
+                circle_base circle_base circle_loop)
+              z))))
+≔ @function_family_transport
+    Circle_grpd
+    CircleCode
+    (λ x : τ Circle_grpd,
+      @= Circle_grpd circle_base x)
+    circle_base circle_base circle_loop
+    circle_decode;
+
+symbol circle_based_path_transport_loop
+  (q : τ (@= Circle_grpd circle_base circle_base))
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (@ind_eq
+        Circle_grpd
+        circle_base circle_base circle_loop
+        (λ x : τ Circle_grpd,
+          @= Circle_grpd circle_base x)
+        q)
+      (@eq_trans
+        Circle_grpd
+        circle_base circle_base circle_base
+        q circle_loop_inverse))
+≔ @based_path_family_transport
+    Circle_grpd
+    circle_base
+    circle_base circle_base
+    circle_loop
+    q;
+
+// Pointwise formula for transporting the based decoder backward around loop.
+symbol circle_decode_transport_formula
+  (z : τ Integer_grpd)
+  : τ (@= Circle_grpd circle_base circle_base)
+≔ @ind_eq
+    Circle_grpd
+    circle_base circle_base circle_loop
+    (λ x : τ Circle_grpd,
+      @= Circle_grpd circle_base x)
+    (circle_decode
+      (@coe_grpd
+        Integer_grpd
+        Integer_grpd
+        (@eq_ap
+          Circle_grpd Grpd_grpd
+          CircleCode
+          circle_base circle_base circle_loop)
+        z));
+
+symbol circle_decode_transport_Code_step
+  (z : τ Integer_grpd)
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_decode_transport_formula z)
+      (@ind_eq
+        Circle_grpd
+        circle_base circle_base circle_loop
+        (λ x : τ Circle_grpd,
+          @= Circle_grpd circle_base x)
+        (circle_decode (integer_succ z))))
+≔ @eq_ap
+    (@= Circle_grpd circle_base circle_base)
+    (@= Circle_grpd circle_base circle_base)
+    (λ q : τ (@= Circle_grpd circle_base circle_base),
+      @ind_eq
+        Circle_grpd
+        circle_base circle_base circle_loop
+        (λ x : τ Circle_grpd,
+          @= Circle_grpd circle_base x)
+        q)
+    (circle_decode
+      (@coe_grpd
+        Integer_grpd
+        Integer_grpd
+        (@eq_ap
+          Circle_grpd Grpd_grpd
+          CircleCode
+          circle_base circle_base circle_loop)
+        z))
+    (circle_decode (integer_succ z))
+    (@eq_ap
+      Integer_grpd
+      (@= Circle_grpd circle_base circle_base)
+      circle_decode
+      (@coe_grpd
+        Integer_grpd
+        Integer_grpd
+        (@eq_ap
+          Circle_grpd Grpd_grpd
+          CircleCode
+          circle_base circle_base circle_loop)
+        z)
+      (integer_succ z)
+      (@circle_Code_transport_loop z));
+
+symbol circle_decode_transport_succ_step
+  (z : τ Integer_grpd)
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (@ind_eq
+        Circle_grpd
+        circle_base circle_base circle_loop
+        (λ x : τ Circle_grpd,
+          @= Circle_grpd circle_base x)
+        (circle_decode (integer_succ z)))
+      (@ind_eq
+        Circle_grpd
+        circle_base circle_base circle_loop
+        (λ x : τ Circle_grpd,
+          @= Circle_grpd circle_base x)
+        (@eq_trans
+          Circle_grpd
+          circle_base circle_base circle_base
+          (circle_decode z)
+          circle_loop)))
+≔ @eq_ap
+    (@= Circle_grpd circle_base circle_base)
+    (@= Circle_grpd circle_base circle_base)
+    (λ q : τ (@= Circle_grpd circle_base circle_base),
+      @ind_eq
+        Circle_grpd
+        circle_base circle_base circle_loop
+        (λ x : τ Circle_grpd,
+          @= Circle_grpd circle_base x)
+        q)
+    (circle_decode (integer_succ z))
+    (@eq_trans
+      Circle_grpd
+      circle_base circle_base circle_base
+      (circle_decode z)
+      circle_loop)
+    (@circle_decode_succ z);
+
+symbol circle_decode_transport_formula_to_base
+  (z : τ Integer_grpd)
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_decode_transport_formula z)
+      (circle_decode z))
+≔ @eq_trans
+    (@= Circle_grpd circle_base circle_base)
+    (circle_decode_transport_formula z)
+    (@ind_eq
+      Circle_grpd
+      circle_base circle_base circle_loop
+      (λ x : τ Circle_grpd,
+        @= Circle_grpd circle_base x)
+      (circle_decode (integer_succ z)))
+    (circle_decode z)
+    (@circle_decode_transport_Code_step z)
+    (@eq_trans
+      (@= Circle_grpd circle_base circle_base)
+      (@ind_eq
+        Circle_grpd
+        circle_base circle_base circle_loop
+        (λ x : τ Circle_grpd,
+          @= Circle_grpd circle_base x)
+        (circle_decode (integer_succ z)))
+      (@ind_eq
+        Circle_grpd
+        circle_base circle_base circle_loop
+        (λ x : τ Circle_grpd,
+          @= Circle_grpd circle_base x)
+        (@eq_trans
+          Circle_grpd
+          circle_base circle_base circle_base
+          (circle_decode z)
+          circle_loop))
+      (circle_decode z)
+      (@circle_decode_transport_succ_step z)
+      (@eq_trans
+        (@= Circle_grpd circle_base circle_base)
+        (@ind_eq
+          Circle_grpd
+          circle_base circle_base circle_loop
+          (λ x : τ Circle_grpd,
+            @= Circle_grpd circle_base x)
+          (@eq_trans
+            Circle_grpd
+            circle_base circle_base circle_base
+            (circle_decode z)
+            circle_loop))
+        (@eq_trans
+          Circle_grpd
+          circle_base circle_base circle_base
+          (@eq_trans
+            Circle_grpd
+            circle_base circle_base circle_base
+            (circle_decode z)
+            circle_loop)
+          circle_loop_inverse)
+        (circle_decode z)
+        (@circle_based_path_transport_loop
+          (@eq_trans
+            Circle_grpd
+            circle_base circle_base circle_base
+            (circle_decode z)
+            circle_loop))
+        (@eq_trans_right_sym_cancel
+          Circle_grpd
+          circle_base circle_base
+          circle_loop
+          circle_base
+          (circle_decode z))));
+
+symbol circle_decode_loop_pointwise
+  : τ (@PiPointwisePath
+      Integer_grpd
+      (λ _ : τ Integer_grpd,
+        @= Circle_grpd circle_base circle_base)
+      circle_decode
+      circle_decode_transport_formula)
+≔ λ z : τ Integer_grpd,
+    @eq_sym
+      (@= Circle_grpd circle_base circle_base)
+      (circle_decode_transport_formula z)
+      (circle_decode z)
+      (@circle_decode_transport_formula_to_base z);
+
+symbol circle_decode_loop_function_path
+  : τ (@=
+      (CircleDecodeMotive circle_base)
+      circle_decode
+      circle_decode_transport_formula)
+≔ @PiFunext
+    Integer_grpd
+    (λ _ : τ Integer_grpd,
+      @= Circle_grpd circle_base circle_base)
+    circle_decode
+    circle_decode_transport_formula
+    circle_decode_loop_pointwise;
+
+// The based decoder is invariant under the Circle generating loop.
+symbol circle_decode_loop_coherence
+  : τ (@PathOver
+      Circle_grpd
+      CircleDecodeMotive
+      circle_base circle_base circle_loop
+      circle_decode circle_decode)
+≔ @eq_trans
+    (CircleDecodeMotive circle_base)
+    circle_decode
+    circle_decode_transport_formula
+    (@ind_eq
+      Circle_grpd
+      circle_base circle_base circle_loop
+      CircleDecodeMotive
+      circle_decode)
+    circle_decode_loop_function_path
+    (@eq_sym
+      (CircleDecodeMotive circle_base)
+      (@ind_eq
+        Circle_grpd
+        circle_base circle_base circle_loop
+        CircleDecodeMotive
+        circle_decode)
+      circle_decode_transport_formula
+      circle_decode_function_transport);
+
+// Endpoint-dependent decoder obtained from the checked loop coherence.
+symbol circle_decode_function
+  (x : τ Circle_grpd)
+  : τ (CircleDecodeMotive x)
+≔ @circle_ind
+    CircleDecodeMotive
+    circle_decode
+    circle_decode_loop_coherence
+    x;
+
+symbol circle_decode_at
+  [x : τ Circle_grpd]
+  (z : τ (CircleCode x))
+  : τ (@= Circle_grpd circle_base x)
+≔ circle_decode_function x z;
+
+symbol circle_decode_at_beta_base
+  (z : τ Integer_grpd)
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (@circle_decode_at circle_base z)
+      (circle_decode z))
+≔ @eq_refl
+    (@= Circle_grpd circle_base circle_base)
+    (circle_decode z);
+
+symbol circle_decode_function_beta_loop
+  : τ (@=
+      (@PathOver
+        Circle_grpd
+        CircleDecodeMotive
+        circle_base circle_base circle_loop
+        circle_decode circle_decode)
+      (@eq_apd
+        Circle_grpd
+        CircleDecodeMotive
+        circle_decode_function
+        circle_base circle_base circle_loop)
+      circle_decode_loop_coherence)
+≔ @circle_ind_beta_loop
+    CircleDecodeMotive
+    circle_decode
+    circle_decode_loop_coherence;
+
+// Decoding after encoding is identity, by ordinary endpoint path induction.
+symbol circle_decode_encode
+  [x : τ Circle_grpd]
+  (p : τ (@= Circle_grpd circle_base x))
+  : τ (@=
+      (@= Circle_grpd circle_base x)
+      (@circle_decode_at x (@circle_encode x p))
+      p)
+≔ @ind_eql
+    Circle_grpd
+    circle_base
+    (λ x : τ Circle_grpd,
+      λ p : τ (@= Circle_grpd circle_base x),
+        @=
+          (@= Circle_grpd circle_base x)
+          (@circle_decode_at x (@circle_encode x p))
+          p)
+    (@eq_refl
+      (@= Circle_grpd circle_base circle_base)
+      (@eq_refl Circle_grpd circle_base))
+    x
+    p;
+
 // Categorical realization of the intrinsic groupoidal Circle.
 symbol Circle_cat : Cat
 ≔ Path_cat Circle_grpd;

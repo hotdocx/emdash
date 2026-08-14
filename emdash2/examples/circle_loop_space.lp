@@ -169,6 +169,79 @@ assertnot (z : τ Integer_grpd) ⊢
   circle_decode z
   ≡ @eq_refl Circle_grpd circle_base;
 
+// Successor compatibility is proved from the cancelling stage presentation.
+assert (n x : τ Nat_grpd) ⊢
+  circle_integer_stage_power_succ n x
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_integer_stage_power n (succ x))
+      (@eq_trans
+        Circle_grpd
+        circle_base circle_base circle_base
+        (circle_integer_stage_power n x)
+        circle_loop));
+
+assert (z : τ Integer_grpd) ⊢ circle_decode_succ z
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_decode (integer_succ z))
+      (@eq_trans
+        Circle_grpd
+        circle_base circle_base circle_base
+        (circle_decode z)
+        circle_loop));
+
+assert (z : τ Integer_grpd) ⊢ circle_Code_transport_loop z
+  : τ (@= Integer_grpd
+      (@coe_grpd
+        Integer_grpd
+        Integer_grpd
+        (@eq_ap
+          Circle_grpd Grpd_grpd
+          CircleCode
+          circle_base circle_base circle_loop)
+        z)
+      (integer_succ z));
+
+// The based decoder supplies the exact dependent loop coherence for Circle J.
+assert ⊢ circle_decode_loop_coherence
+  : τ (@PathOver
+      Circle_grpd
+      CircleDecodeMotive
+      circle_base circle_base circle_loop
+      circle_decode circle_decode);
+
+assert (x : τ Circle_grpd) ⊢
+  circle_decode_function x
+  : τ (CircleDecodeMotive x);
+
+assert (z : τ Integer_grpd) ⊢
+  @circle_decode_at circle_base z
+  ≡ circle_decode z;
+
+assert ⊢ circle_decode_function_beta_loop
+  : τ (@=
+      (@PathOver
+        Circle_grpd
+        CircleDecodeMotive
+        circle_base circle_base circle_loop
+        circle_decode circle_decode)
+      (@eq_apd
+        Circle_grpd
+        CircleDecodeMotive
+        circle_decode_function
+        circle_base circle_base circle_loop)
+      circle_decode_loop_coherence);
+
+// The path-side inverse is endpoint-general, not only a based-loop statement.
+assert [x : τ Circle_grpd]
+  (p : τ (@= Circle_grpd circle_base x)) ⊢
+  @circle_decode_encode x p
+  : τ (@=
+      (@= Circle_grpd circle_base x)
+      (@circle_decode_at x (@circle_encode x p))
+      p);
+
 // Only the base constructor computes; an open Circle point stays opaque.
 assertnot [B : Grpd]
   (b : τ B)
