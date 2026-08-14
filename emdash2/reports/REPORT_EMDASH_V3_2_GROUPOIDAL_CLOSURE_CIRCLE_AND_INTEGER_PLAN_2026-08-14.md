@@ -112,7 +112,15 @@ and the distinct category heads remain non-convertible. A first-class
 `OmegaEquivAlong Cat_cat` is deliberately not postulated: the current kernel
 lacks a generic constructor assembling its coherent inverse whole functor
 from identity-on-objects/homwise-equivalence data. `GCCI-PROD-2` is now the
-first dependency-ready active row.
+first dependency-ready active row. That row is checkpointed at `90a818a`:
+coordinate paths assemble into a product path; primitive
+right-`J` transport along it agrees with both the base-then-fibre and
+fibre-then-base sequential factorizations; and the two comparisons give the
+coherence diamond. The existing structured displayed transport and
+structured `PathOut` induction each agree with that same primitive transport.
+The promoted source and expanded public reviewer check directly. This adds no
+runtime rule, unification rule, second equality eliminator, or Gray tensor.
+`GCCI-CLOSE-1` is now the first dependency-ready active row.
 
 ## Executive Objective
 
@@ -429,7 +437,7 @@ computational.
 | Equality | `ind_eqr`, transport, symmetry, composition, `ap`, `apd`, and `PathOver` | consumer-led shaped transport/J beyond reflexivity and selected PathOver coherence |
 | Sigma | constructor, projections, eliminator, `SigmaPathView`, equality computation, and round trips | base-changing equivalence/univalence and selected structured action |
 | Pi/functions | `PiPathView`, equality computation, happly/funext equivalence, and iterable `Path_cat_func` action | base-changing equivalence/univalence and stronger structured dependent computation |
-| Product | intrinsic constant-Sigma former, path view, equality/reflexivity computation, and categorical product | transport coherence diamond and `Path_cat` preservation equivalence |
+| Product | intrinsic constant-Sigma former, path view, equality/reflexivity computation, categorical product, homwise `Path_cat` preservation, both sequential transport comparisons, coherence diamond, and structured/primitive `J` agreement | recursive whole-hom preservation and coherent inverse-functor packaging, only when demanded by a concrete consumer |
 | Unit/Bool/Nat | formers, eliminators, bounded observational equality, Nat arithmetic and sethood | selected universal properties and consumer-led higher actions |
 | Sums/standard inductives | curated Nat | redesigned Sum and later curated finite/list/W-type families when demanded; no generic declaration mechanism required |
 | Univalence | `TypeEquiv`, selected inverse algebra, `ua` transport, Product and partial Sigma/Pi closure | remaining base-changing Sigma/Pi cases and controlled universe computation |
@@ -481,8 +489,8 @@ rule-free unless a measured consumer proves otherwise.
 | `GCCI-WALK-1` | checkpointed `d793ecb` | The walking recursor gives `walking_to_circle_func`, with constructor observations and Nat-inductive action on every directed power. Circle encoding sends that image to `integer_of_nat(n)`, and the arbitrary-endomorphism encoder square commutes as equality of whole carrier functions. |
 | `GCCI-WALK-2` | deferred; no further consumer | The concrete comparison and commuting square satisfy the active group-completion consumer. Reopen a restricted universal property only for a named target-side consumer; do not drift into the excluded generic reflector. |
 | `GCCI-PROD-1` | checkpointed `9e8cc36` | The canonical comparison is the existing core inclusion, judgmentally identity on objects. Its actual hom action has an explicit split/join `TypeEquiv` at every pair of objects, and one whole certificate retains those facts without a category-head rewrite, unifier, or opaque category-equivalence axiom. `OmegaEquivAlong Cat_cat` packaging remains consumer-gated on a generic coherent-inverse assembler. |
-| `GCCI-PROD-2` | active | Prove direct/sequential transport comparisons, both orders, coherence diamond, and primitive/structured `J` agreement. |
-| `GCCI-CLOSE-1` | pending | Synchronize active authority prose, examples, central diagnostics where appropriate, catalog, health, and proportional integration evidence. |
+| `GCCI-PROD-2` | checkpointed `90a818a` | Coordinate paths assemble into a product path; direct primitive transport agrees with both sequential coordinate orders; the induced diamond is coherent; and existing structured displayed transport and `PathOut` induction agree with the same primitive right-`J` transport. The source and expanded reviewer check directly with no rule, unifier, second `J`, or Gray tensor. |
+| `GCCI-CLOSE-1` | active | Synchronize active authority prose, examples, central diagnostics where appropriate, catalog, health, and proportional integration evidence. |
 | `GCCI-GROUPIFY-GENERIC` | deferred | Generic `Groupoidify_func -| Path_cat_func`; reopen only after a second concrete consumer and a reviewed higher-action design. |
 | `GCCI-GRAY` | deferred | Gray tensor and lax/pseudonatural two-dimensional infrastructure; reopen only for an actual higher-categorical consumer. |
 
@@ -591,6 +599,18 @@ probe without a changed prerequisite is not progress.
   unification, first-class `OmegaEquivAlong Cat_cat` packaging remains
   consumer-gated. The focused reviewer also checks that the two category heads
   stay non-convertible.
+- `GCCI-D-014` — Product transport is derived around the one primitive
+  equality eliminator rather than installed as type-shape reduction. The
+  explicit pair path is the join from the already checked product-path
+  equivalence. Right-`J` gives forward transport; nested path induction proves
+  that simultaneous transport agrees with both coordinate orders, and their
+  common comparison supplies the coherence diamond. Instantiating the
+  existing `path_lift_fapp0` family makes both structured displayed transport
+  and structured `PathOut` induction agree propositionally with the same
+  primitive operation. Thus ordinary Cartesian path structure resolves the
+  ordering question without a Gray tensor, a second `J`, or any new runtime or
+  proof-time rule. The comparison is intentionally propositional away from
+  reflexivity; no consumer justifies stronger definitional normalization.
 
 ## Validation Policy
 
