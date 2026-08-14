@@ -3,7 +3,7 @@ title: Functorial Type Theory: An Executable Architecture for Directed Dependenc
 authors: The emdash contributors
 edition: overview research article
 status: research draft
-date: 2026-08-05
+date: 2026-08-14
 ---
 
 > **Research-draft status.** This article describes the checked emdash v3.2
@@ -31,7 +31,7 @@ categorical frontend compiles usable binder notation to existing internal
 categorical owners, and bounded typed declarations expand into ordinary
 logical-framework declarations and rules.
 
-Three computations summarize the architecture. First, for
+Four computations summarize the architecture. First, for
 $p:x\\to y$ and $q:y\\to z$, emdash forms the outgoing-arrow category
 
 $$
@@ -48,7 +48,13 @@ invertible defines an ordinary sieve $D_R(f)$ before any representing open is
 chosen. A supplied localization represents that sieve pointwise, finite
 unit-ideal families generate the big Zariski topology, and a separate direct
 cover completion constructs a Cat-valued sheafification reflector from
-return, cover-indexed glue, and silent coherence. Third, the TypeScript
+return, cover-indexed glue, and silent coherence. Third, localizing natural
+numbers along successor gives an integer line, and an opaque groupoidal
+Circle HIT carries a universal Integer cover. Encode/decode proves
+$\mathrm{Hom}_{S^1}(\mathsf{base},\mathsf{base})\simeq\mathbb Z$; the directed
+walking endomorphism maps to the Circle by the nonnegative inclusion, while
+product paths admit both coherent sequential transport factorizations.
+Fourth, the TypeScript
 frontend accepts ordinary, natural, displayed-functorial, and
 displayed-natural abstractions. It recursively factors variable occurrences
 through weakening, pairing, evaluation, reindexing, totalization, and
@@ -60,8 +66,8 @@ The result is a working research artifact rather than a completed proof
 assistant. It demonstrates a coherent design across mathematical kernel,
 dependent logical framework, elaboration, checked computation, and a
 client-side reviewer. Arbitrary dependency and variance graphs,
-whole-library transfer, complete groupoidal closure, a commutative-ring lift
-and left-exactness theorem for constructed sheafification,
+whole-library transfer, systematic groupoidal closure for every former, a
+commutative-ring lift and left-exactness theorem for constructed sheafification,
 representation-independent schemes, and global metatheory remain explicit
 research boundaries.
 
@@ -109,8 +115,10 @@ Neither layer replaces the other. The outer framework hosts the inner
 calculus; the inner calculus gives computational meaning to variables whose
 variation is genuinely categorical. The current groupoidal/type-theoretic
 universe supplies equality, J, dependent pairs, and dependent products as
-well, but systematically relating every directed construction to its
-groupoidal specialization is a later programme.
+well. A checked Circle/Integer encode--decode theorem and representative
+product-transport closure now connect these layers; systematically relating
+every directed construction to its groupoidal specialization remains a later
+programme.
 
 The same order of construction extends beyond binder syntax. A local
 condition should first be stable under every change of stage; only afterward
@@ -1255,9 +1263,14 @@ mates and comparison composition, while the colimit theorem is obtained by
 opposite normalization rather than a duplicate calculus.
 
 At the groupoidal end, decoded type codes, equality and J, dependent sums and
-products, truncation levels, staged equivalence interfaces, and the
-walking-endomorphism normalization proof test how directed structure meets
-equality-local reasoning. Together these examples support the architectural
+products, truncation levels, and staged equivalence interfaces support an
+opaque Circle HIT whose based loop space is explicitly equivalent to the
+successor-localized integers. The walking-endomorphism comparison identifies
+its directed powers with the nonnegative Circle powers. For products, the
+canonical Path-category comparison is homwise an equivalence, and direct
+transport agrees with either sequential coordinate order and with the existing
+structured-J interface. These examples test how directed structure meets
+equality-local reasoning and support the architectural
 conjecture: generic action should own functoriality and naturality, semantic
 constructors should own computation, and elaboration should reconstruct
 structural wiring. They are substantial evidence, not a proof that every
@@ -1300,9 +1313,11 @@ The principal open boundaries are:
   $\\Sigma_F\\dashv F^*\\dashv\\Pi_F$, full profunctor tensor/coend semantics,
   complete equipment coherence, and semantic collage or dependent elimination
   for join remain future work.
-- **Groupoidal closure.** Equality, J, groupoidal dependent sums/products, and
-  substantial categorical DTT are present, but their complete
-  specialization/closure relationship is not.
+- **Groupoidal closure.** Equality, J, groupoidal dependent sums/products, the
+  Circle HIT with $\Omega S^1\simeq\mathbb Z$, its concrete WalkingEnd
+  comparison, and representative product preservation/transport coherence are
+  checked. A generic category-to-groupoid reflector, closure for every former,
+  and arbitrary motive-directed computational decomposition of J are not.
 - **Metatheory.** No global normalization, confluence, canonicity,
   consistency, decidability, or semantic-soundness theorem is claimed for the
   full combined calculus. Lambdapi's local rule checks and the project's

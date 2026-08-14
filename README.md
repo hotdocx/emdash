@@ -19,6 +19,11 @@ geometry organized by the invertibility sieve $D_R(f)$, site-relative
 schemes, and a supplied projective-line presentation. These layers keep
 representability, locality, and construction hypotheses explicit.
 
+Its groupoidal layer now also contains an opaque Circle HIT and a checked
+encode--decode equivalence between its based loop space and the integers,
+together with the concrete WalkingEnd-to-Circle nonnegative comparison and a
+coherent product-transport closure theorem.
+
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
 of global metatheory.
@@ -173,9 +178,11 @@ external naturality evidence when no internal construction owns it.
   and locality capabilities. The projective-line package retains its global
   object and actual overlap; representation-independent schemes, graded
   `Proj`, and general projective space remain open.
-- Groupoidal specialization/closure and general normalization, confluence,
+- Systematic groupoidal specialization for every former, a generic
+  category-to-groupoid reflector, and general normalization, confluence,
   canonicity, consistency, and semantic soundness for the combined calculus
-  are not claimed.
+  are not claimed. The Circle/Integer and representative product closure
+  results are concrete checked slices, not those global theorems.
 
 These are continuation boundaries, not hidden assumptions of the examples
 that already run.

@@ -195,6 +195,12 @@ positions before adding a rule, compare warnings against the recorded
 baseline, keep every Lambdapi invocation within 90 seconds per target, and
 refresh generated catalog/health artifacts only through their owners.
 
+The current groupoidal vertical slice includes a successor-localized Integer,
+an opaque Circle HIT with checked `Hom(Circle,Circle) ≃ Integer`
+encode--decode, the nonnegative WalkingEnd-to-Circle comparison, and coherent
+product-path transport in both coordinate orders. The source modules and
+reviewer examples are listed in the August 14 groupoidal-closure plan.
+
 ## Functorial Type Theory book
 
 *Functorial Type Theory: Univalent Foundations for Mathematics* is authored as
@@ -222,8 +228,9 @@ authoring, attribution, release, and renderer contracts.
 
 Emdash v3.2 remains a research implementation. It does not claim a finished
 proof-assistant surface, global normalization or confluence, a complete weak
-omega-category metatheory, full groupoidal specialization, arbitrary
-dependency/variance elaboration, representation-independent schemes, or a
+omega-category metatheory, systematic groupoidal specialization for every
+former, arbitrary dependency/variance elaboration, representation-independent
+schemes, or a
 general computational univalence theorem. The living reports state each
 boundary at its owning layer; dated reports preserve why earlier candidates
 were accepted, qualified, or retired.

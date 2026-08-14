@@ -160,6 +160,14 @@ affine-atlas extension is
 `emdash3_2_commutative_algebra_affine_atlas.lp`;
 the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
+the transparent integer facade over successor telescope localization is
+`emdash3_2_integer_localization.lp`;
+the opaque one-dimensional Circle HIT, its universal cover, and the checked
+based-loop/Integer equivalence are `emdash3_2_circle_hit.lp`;
+the concrete directed WalkingEnd-to-Circle comparison is
+`emdash3_2_walking_circle_completion.lp`;
+the rule-free Path-product preservation and coherent product-transport
+extension is `emdash3_2_groupoidal_closure.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
 
 ## Authorities
@@ -654,14 +662,33 @@ Use the following order:
     cancellations and instantiate the existing `SheafificationCapability`.
     It does not lift the construction to CommRing values, prove left
     exactness, construct an induced topology, or define a scheme;
-69. `emdash3_2_checks.lp` for executable regression statements;
-70. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+69. `emdash3_2_integer_localization.lp` for the transparent rule-free Integer
+    facade over the set-truncated successor telescope. It exposes zero,
+    nonnegative and negative representatives, mutually inverse successor and
+    predecessor, sethood, and the set-targeted induction used by Circle;
+70. `emdash3_2_circle_hit.lp` for the opaque one-dimensional Circle HIT,
+    unrestricted dependent elimination, judgmental point beta,
+    propositional dependent loop beta, universal Integer cover,
+    encode/decode inverses, and the resulting based-loop and categorical-Hom
+    `TypeEquiv` with Integer;
+71. `emdash3_2_walking_circle_completion.lp` for the concrete functor from the
+    directed walking endomorphism to the Circle. Its action sends every Nat
+    power to the corresponding nonnegative Circle power, and the two encoder
+    routes commute. It is evidence for the selected completion consumer, not
+    a generic groupoidification reflector;
+72. `emdash3_2_groupoidal_closure.lp` for the rule-free product comparison
+    `Path(A x B) -> Path(A) x Path(B)`, explicit homwise split/join
+    equivalences, direct versus both sequential transport factorizations, the
+    coherence diamond, and agreement of structured transport/induction with
+    the one primitive right-`J` operation;
+73. `emdash3_2_checks.lp` for executable regression statements;
+74. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-71. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-72. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+75. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+76. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-73. `reports/INDEX.md` for task-specific plans and decision records.
-74. `book/book.json` and `book/evidence.json` for book source
+77. `reports/INDEX.md` for task-specific plans and decision records.
+78. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

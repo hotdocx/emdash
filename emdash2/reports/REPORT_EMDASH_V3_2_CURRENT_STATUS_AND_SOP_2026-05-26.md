@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-04
+Last consolidated: 2026-08-14
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -389,6 +389,29 @@ detailed probe evidence.
   packages, sethood, directed negative consequences, and a separate `BNat`
   consistency model. It contains no generated-word Hom or WalkingEnd-specific
   identity/composition rule.
+- `emdash3_2_integer_localization.lp`: transparent rule-free Integer facade
+  over the set-truncated telescope localization of Nat successor. It exposes
+  zero, nonnegative and negative representatives, inverse successor and
+  predecessor actions, sethood, and the set-targeted induction consumed by
+  the Circle proof.
+- `emdash3_2_circle_hit.lp`: one-way opaque groupoidal Circle HIT. It owns the
+  base and generating equality loop, explicit one-dimensional evidence,
+  unrestricted dependent elimination, judgmental point computation,
+  propositional dependent loop computation, the universal Integer cover, and
+  the complete encode/decode proof. Its based loop type and the corresponding
+  categorical Hom are explicitly `TypeEquiv` to Integer.
+- `emdash3_2_walking_circle_completion.lp`: transparent rule-free concrete
+  comparison from WalkingEnd to Circle. It sends the directed generator and
+  every Nat power to the Circle generator and its nonnegative powers, and the
+  direct Circle encoder agrees with the route through WalkingEnd's Nat
+  normal form. It is not a generic groupoidification reflector.
+- `emdash3_2_groupoidal_closure.lp`: transparent rule-free representative
+  closure for products. The canonical core-inclusion comparison is identity
+  on objects and a split/join `TypeEquiv` on every hom carrier. Product path
+  transport agrees with both sequential coordinate orders, the resulting
+  diamond is coherent, and existing structured transport and `PathOut`
+  induction agree with the same primitive right-`J` transport. No category-
+  head rewrite, second `J`, proof-time unifier, or Gray tensor is introduced.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
@@ -4330,16 +4353,19 @@ LHS audit is zero unreviewed clauses, 58 annotated slots, and 34 intentional
 clauses. The generated catalog contains 2,091 classified checks across 98
 areas with zero legacy or unclassified entries.
 
-The exact-current registered health boundary is green for all 162 source and
-reviewer targets under the uniform 90-second per-target ceiling. In
-particular, central diagnostics pass in 66.584 seconds, the constructed
-sheafification source in 11.723 seconds, the supplied projective-line source
-in 30.739 seconds, and its reviewer in 31.604 seconds. The source-metrics
-snapshot is
-`sha256:4cd8c818ee88e92dc5feaa2b8a3cc52d8c0d31ddef560b6be0ba88cb79fbced3`
+The exact-current registered health boundary is green for all 170 source and
+reviewer targets under the uniform 90-second per-target ceiling. The August 14
+refresh carried forward 162 targets only after the prior whole-content hash
+matched byte-for-byte, then ran the four newly registered groupoidal modules
+and four reviewers directly. In particular, the Integer, Circle,
+WalkingEnd-to-Circle, and product-closure sources pass in 2.437, 2.460, 2.552,
+and 2.344 seconds; their reviewers pass in 2.486, 2.514, 2.586, and 2.357
+seconds. The source-metrics snapshot is
+`sha256:c5e223032c96d6c32c61321f2d0b694002499170375c71ea46c11db0650d307c`
 and the checked-content snapshot is
-`sha256:728c7d812c1e49d08f8fa9ae51c66e3465bf13e1fd8cd98bb35389038134369c`.
-The constructed-reflector tranche is locally checkpointed at `81edde8`.
+`sha256:fac6128b7abd25b3c4b6eb024f0119b6b07c0ee88636c1a6804aa5ace099db94`.
+The previously registered 162-target boundary remains exact carried evidence,
+not an aggregate rerun.
 
 ## Book And Renderer Workflow
 
@@ -4416,8 +4442,9 @@ The following remain explicit future work rather than hidden assumptions:
   its reviewer clients are already deleted and are not prerequisites;
 - generic abstraction of the completed walking-endomorphism presentation,
   full functor-category initiality, a displayed dependent path-action/section
-  construction, groupoid completion toward `BInt`/Circle, and general
-  higher-inductive categories or pushouts; ordinary raw-function
+  construction, generic groupoidification beyond the concrete checked
+  WalkingEnd-to-Circle comparison, and general higher-inductive categories or
+  pushouts; ordinary raw-function
   `path_map_func` is already the complete canonical nondependent action. A
   future exceptional former may add a local comparison theorem, and a future
   dependent consumer may motivate the displayed construction, but neither

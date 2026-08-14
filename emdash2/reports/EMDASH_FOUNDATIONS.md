@@ -10,6 +10,10 @@ Reusable Nat addition, canonical successor path functor, and sethood live in the
 `emdash3_2_nat_arithmetic.lp` module. The walking-endomorphism directed-HIT/
 `BNat` presentation and its restricted-CoreIncl spiral specialization live
 downstream in `emdash3_2_walking_end_hit.lp` under the July 17 living plan.
+The successor-localized Integer, groupoidal Circle HIT and loop-space
+calculation, concrete WalkingEnd-to-Circle comparison, and representative
+product closure live in the four downstream `emdash3_2_*` modules recorded by
+the August 14 groupoidal-closure plan.
 The isolated binary-Sum experiment was retired on 2026-07-20 for later
 consumer-led redesign; it is not part of the active foundation.
 
@@ -179,6 +183,63 @@ proposition-valuedness is supplied by explicit contractibility/elimination
 terms. This is genuine truncation evidence, not a conclusion inferred only
 from the no-confusion rewrite table. Open addition is not normalized by
 commutativity.
+
+### Integer, Circle, And Representative Groupoidal Closure
+
+The set-truncated telescope localization of Nat successor has a transparent
+integer-facing presentation. Write `Integer` for its carrier. Its selected
+shift and inverse give successor and predecessor, with both inverse laws; Nat
+embeds as the nonnegative stages, and the opposite boundary supplies negative
+representatives. The inherited set-targeted eliminator is the induction
+principle used below. This is one computational localization presentation,
+not a second signed-integer syntax or a claim about every possible quotient.
+
+The groupoidal Circle is an opaque one-dimensional HIT with
+
+```text
+base : Circle
+loop : base = base.
+```
+
+Its dependent eliminator computes judgmentally at `base`; its action on
+`loop` is an explicit propositional `PathOver` equation. There is still one
+primitive equality eliminator, `ind_eqr`. Circle recursion and the more
+structured interfaces are derived facades around it rather than competing
+notions of `J`.
+
+Circle recursion into the groupoid universe constructs the universal cover
+whose fibre at `base` is `Integer` and whose loop monodromy is successor.
+Transporting zero defines `encode`; integer-indexed positive and negative loop
+powers define `decode`. Endpoint path induction, Integer induction, and
+proposition-valued Circle induction establish both round trips. Consequently
+the active development contains checked equivalences
+
+```text
+TypeEquiv(base = base, Integer)
+TypeEquiv(Hom_Circle(base,base), Integer).
+```
+
+The directed WalkingEnd comparison sends its generator to `loop`. Every Nat
+power maps to the corresponding nonnegative Circle power, and encoding either
+directly through Circle or first through the WalkingEnd/Nat normal form gives
+the same Integer. This is the concrete completion behavior required by the
+current consumer; a generic reflector from categories to groupoids remains a
+separate, consumer-gated project.
+
+Products supply a representative closure theorem. The canonical functor
+
+```text
+Path_cat(A x B) -> Path_cat(A) x Path_cat(B)
+```
+
+is identity on objects and an explicit split/join equivalence on every hom
+carrier. For a family `P : A x B -> Grpd`, transport along a paired path agrees
+with transport first in `A` then in `B`, and also with the reverse order; the
+two comparisons form the expected coherence diamond. Existing structured
+displayed transport and structured `PathOut` induction agree propositionally
+with the same primitive right-`J` transport. Ordinary Cartesian path induction
+therefore settles this ordering question. No Gray tensor, category-head
+rewrite, new unification rule, or second equality eliminator is involved.
 
 The Nat extension also exposes successor as an iterable equality action:
 
@@ -4558,7 +4619,8 @@ The current foundations intentionally do not yet include:
 - generic abstraction of the completed walking-endomorphism presentation into
   a reusable directed-HIT/free-category schema, full functor-category
   initiality, a displayed dependent path-action/section construction, and
-  groupoid completion toward the invertible Circle/`BInt` comparison; the
+  generic groupoidification beyond the checked WalkingEnd-to-Circle
+  comparison and `Hom(Circle,Circle) ≃ Integer` calculation; the
   ordinary raw-function `path_map_func` is already the complete selected
   nondependent action, and no generic selected-action registry is planned
   without a concrete new consumer;
