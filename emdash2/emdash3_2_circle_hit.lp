@@ -365,6 +365,118 @@ symbol circle_encode_loop
       circle_Code_beta_loop)
     (integer_succ_path_coe integer_zero);
 
+/*
+  Integer-indexed loop powers.
+
+  The stage representative is defined by simultaneous cancellation rather
+  than by a signed normal-form datatype. At (succ n,succ x) it reduces to the
+  preceding (n,x) stage, so the telescope coherence is literal reflexivity.
+*/
+symbol circle_nat_power
+  (n : τ Nat_grpd)
+  : τ (@= Circle_grpd circle_base circle_base)
+≔ @nat_elim
+    (λ _ : τ Nat_grpd,
+      @= Circle_grpd circle_base circle_base)
+    (@eq_refl Circle_grpd circle_base)
+    (λ _ : τ Nat_grpd,
+      λ p : τ (@= Circle_grpd circle_base circle_base),
+        @eq_trans
+          Circle_grpd
+          circle_base circle_base circle_base
+          p circle_loop)
+    n;
+
+symbol circle_nat_inverse_power
+  (n : τ Nat_grpd)
+  : τ (@= Circle_grpd circle_base circle_base)
+≔ @nat_elim
+    (λ _ : τ Nat_grpd,
+      @= Circle_grpd circle_base circle_base)
+    (@eq_refl Circle_grpd circle_base)
+    (λ _ : τ Nat_grpd,
+      λ p : τ (@= Circle_grpd circle_base circle_base),
+        @eq_trans
+          Circle_grpd
+          circle_base circle_base circle_base
+          p circle_loop_inverse)
+    n;
+
+symbol circle_integer_stage_power
+  (n x : τ Nat_grpd)
+  : τ (@= Circle_grpd circle_base circle_base)
+≔ (@nat_elim
+      (λ _ : τ Nat_grpd,
+        @Function_grpd
+          Nat_grpd
+          (@= Circle_grpd circle_base circle_base))
+      (λ x : τ Nat_grpd, circle_nat_power x)
+      (λ n : τ Nat_grpd,
+        λ previous : τ (@Function_grpd
+            Nat_grpd
+            (@= Circle_grpd circle_base circle_base)),
+          λ x : τ Nat_grpd,
+            @nat_elim
+              (λ _ : τ Nat_grpd,
+                @= Circle_grpd circle_base circle_base)
+              (circle_nat_inverse_power (succ n))
+              (λ x0 : τ Nat_grpd,
+                λ _ : τ (@= Circle_grpd circle_base circle_base),
+                  previous x0)
+              x)
+      n)
+    x;
+
+// The localization relation is respected by definitional diagonal reduction.
+symbol circle_integer_stage_power_step
+  (n x : τ Nat_grpd)
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_integer_stage_power (succ n) (succ x))
+      (circle_integer_stage_power n x))
+≔ @eq_refl
+    (@= Circle_grpd circle_base circle_base)
+    (circle_integer_stage_power n x);
+
+// Based decoder from the trusted integer localization to Circle loops.
+symbol circle_decode
+  (z : τ Integer_grpd)
+  : τ (@= Circle_grpd circle_base circle_base)
+≔ @integer_elim
+    (@= Circle_grpd circle_base circle_base)
+    circle_loop_space_is_set
+    circle_integer_stage_power
+    circle_integer_stage_power_step
+    z;
+
+symbol circle_decode_zero
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_decode integer_zero)
+      (@eq_refl Circle_grpd circle_base))
+≔ @eq_refl
+    (@= Circle_grpd circle_base circle_base)
+    (@eq_refl Circle_grpd circle_base);
+
+symbol circle_decode_of_nat
+  (n : τ Nat_grpd)
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_decode (integer_of_nat n))
+      (circle_nat_power n))
+≔ @eq_refl
+    (@= Circle_grpd circle_base circle_base)
+    (circle_nat_power n);
+
+symbol circle_decode_neg_one
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_decode integer_neg_one)
+      circle_loop_inverse)
+≔ @eq_refl
+    (@= Circle_grpd circle_base circle_base)
+    circle_loop_inverse;
+
 // Categorical realization of the intrinsic groupoidal Circle.
 symbol Circle_cat : Cat
 ≔ Path_cat Circle_grpd;

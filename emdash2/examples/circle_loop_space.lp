@@ -113,6 +113,62 @@ assertnot (p : τ (@= Circle_grpd circle_base circle_base)) ⊢
   @circle_encode circle_base p
   ≡ integer_zero;
 
+// Natural and inverse powers use the conventional right-appending recursion.
+assert ⊢ circle_nat_power zero
+  ≡ @eq_refl Circle_grpd circle_base;
+
+assert (n : τ Nat_grpd) ⊢
+  circle_nat_power (succ n)
+  ≡ @eq_trans
+      Circle_grpd
+      circle_base circle_base circle_base
+      (circle_nat_power n) circle_loop;
+
+assert ⊢ circle_nat_inverse_power (succ zero)
+  ≡ circle_loop_inverse;
+
+// Simultaneous cancellation makes the telescope step judgmental.
+assert (x : τ Nat_grpd) ⊢
+  circle_integer_stage_power zero x
+  ≡ circle_nat_power x;
+
+assert (n : τ Nat_grpd) ⊢
+  circle_integer_stage_power (succ n) zero
+  ≡ circle_nat_inverse_power (succ n);
+
+assert (n x : τ Nat_grpd) ⊢
+  circle_integer_stage_power (succ n) (succ x)
+  ≡ circle_integer_stage_power n x;
+
+assert (n x : τ Nat_grpd) ⊢
+  circle_integer_stage_power_step n x
+  : τ (@=
+      (@= Circle_grpd circle_base circle_base)
+      (circle_integer_stage_power (succ n) (succ x))
+      (circle_integer_stage_power n x));
+
+// Integer elimination yields a computational based decoder.
+assert (n x : τ Nat_grpd) ⊢
+  circle_decode (integer_stage n x)
+  ≡ circle_integer_stage_power n x;
+
+assert ⊢ circle_decode integer_zero
+  ≡ @eq_refl Circle_grpd circle_base;
+
+assert (n : τ Nat_grpd) ⊢
+  circle_decode (integer_of_nat n)
+  ≡ circle_nat_power n;
+
+assert ⊢ circle_decode (integer_of_nat (succ zero))
+  ≡ circle_loop;
+
+assert ⊢ circle_decode integer_neg_one
+  ≡ circle_loop_inverse;
+
+assertnot (z : τ Integer_grpd) ⊢
+  circle_decode z
+  ≡ @eq_refl Circle_grpd circle_base;
+
 // Only the base constructor computes; an open Circle point stays opaque.
 assertnot [B : Grpd]
   (b : τ B)

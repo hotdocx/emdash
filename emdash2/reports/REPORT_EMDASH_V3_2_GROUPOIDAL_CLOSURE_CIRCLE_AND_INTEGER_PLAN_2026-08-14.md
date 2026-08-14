@@ -63,7 +63,12 @@ has Integer base fibre and successor monodromy, and `circle_encode` computes
 at reflexivity and propositionally sends the generating loop to successor of
 zero. No rewrite or unification rule is added. A local checkpoint of this
 cover-and-encoder slice is recorded at `23fcd1a`; integer loop powers, decode,
-and the inverse laws remain in the same active row.
+and the inverse laws remain in the same active row. The next bounded slice is
+also focused-green pending checkpoint: nested Nat elimination defines a
+simultaneously cancelling `(n,x)` loop representative, making the telescope
+step judgmental; set-targeted Integer elimination then supplies a based
+decoder computing at zero, every nonnegative representative, and negative
+one. Endpoint-dependent decode coherence and the two inverse laws remain.
 
 ## Executive Objective
 
@@ -427,7 +432,7 @@ rule-free unless a measured consumer proves otherwise.
 | `GCCI-INT-2` | checkpointed `8ac3599` | Exposes the stage-step path, both successor/predecessor inverse paths, the successor universe path and its propositional transport computation, negative one, and its successor law. All are transparent specializations of existing owners; no rule or unifier was added. |
 | `GCCI-INT-3` | checkpointed `8ac3599` | Exposes inherited sethood plus transparent set-targeted dependent and nondependent integer induction, with constructor computation checked by the public reviewer. This exact elimination boundary requires `circle_is_groupoid` before Circle decode; it does not assume the later loop-space equivalence. |
 | `GCCI-CIRCLE-1` | checkpointed `e378234` | Defines the opaque Circle, base, loop, explicit `IsGroupoidGrpd` dimension evidence, unrestricted dependent eliminator, judgmental point beta, and propositional PathOver loop beta. The sole runtime rule is warning-neutral at its owner position, its strict inferred-slot audit is clean, and the focused public reviewer checks the intended computation and non-collapse boundary. |
-| `GCCI-CIRCLE-2` | active; cover/encode checkpointed `23fcd1a` | The J-derived constant-family bridges, `CircleCode`, successor monodromy, and `circle_encode` are checked, including `encode(refl) = zero`, `encode(loop) = succ(zero)`, and an open-path non-collapse case. Next construct integer-indexed loop powers, decode, and both inverse laws. |
+| `GCCI-CIRCLE-2` | active; cover/encode checkpointed `23fcd1a`; based decoder focused-green, checkpoint pending | The J-derived constant-family bridges, `CircleCode`, successor monodromy, and `circle_encode` are checked. Simultaneously cancelling stage powers descend computationally through Integer and give a based decoder with zero, positive, and negative-one computations plus an open-value non-collapse case. Next construct endpoint-dependent decode coherence and both inverse laws. |
 | `GCCI-CIRCLE-3` | pending on `CIRCLE-2` | Package based-loop and categorical-Hom equivalences with Integer; prove the selected sethood/1-type consequences and reviewer example. |
 | `GCCI-WALK-1` | pending on `CIRCLE-3` | Construct `walking_to_circle_func` and prove compatibility of powers with the canonical nonnegative integer inclusion. |
 | `GCCI-WALK-2` | optional, consumer-gated | State and prove a restricted universal property for `Path_cat(A)` or explicitly groupoidal targets. Stop if it begins constructing a generic reflector. |
@@ -481,6 +486,14 @@ probe without a changed prerequisite is not progress.
   computes, while the generator equation composes the extracted loop beta
   with the existing decoder-owned univalence transport square. This adds no
   general transport fold and preserves open-path opacity.
+- `GCCI-D-008` — Integer-indexed Circle powers are defined directly on the
+  trusted telescope presentation, not through a second signed-integer type.
+  Nested Nat elimination makes
+  `stage_power(succ n,succ x) = stage_power(n,x)` judgmental, while the two
+  boundary axes expose positive powers of `circle_loop` and negative powers
+  of its derived inverse. The Integer eliminator therefore accepts literal
+  reflexivity as its stage coherence and yields a computational based decoder
+  without a quotient rewrite, extra HIT rule, or unproved normal-form claim.
 
 ## Validation Policy
 
