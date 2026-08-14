@@ -11,6 +11,7 @@
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_integer_localization;
 
 // Circle formation and generating point/path constructors.
 constant symbol Circle_grpd : Grpd;
@@ -131,6 +132,238 @@ symbol circle_rec_beta_loop
     (@const_pathover
       Circle_grpd B
       circle_base circle_base b b circle_loop ell);
+
+/*
+  Two generic constant-family observations turn the dependent loop beta into
+  the ordinary `ap` equation expected from Circle recursion. They are proved
+  by the existing right-based path induction and add no computation rule.
+*/
+symbol const_pathover_path_eq_apd
+  [A B : Grpd]
+  (f : τ A → τ B)
+  [x y : τ A]
+  (p : τ (@= A x y))
+  : τ (@=
+      (@= B (f x) (f y))
+      (@const_pathover_path
+        A B x y (f x) (f y) p
+        (@eq_apd
+          A (λ _ : τ A, B) f x y p))
+      (@eq_ap A B f x y p))
+≔ @ind_eqr
+    A
+    y
+    (λ x : τ A,
+      λ p : τ (@= A x y),
+        @=
+          (@= B (f x) (f y))
+          (@const_pathover_path
+            A B x y (f x) (f y) p
+            (@eq_apd
+              A (λ _ : τ A, B) f x y p))
+          (@eq_ap A B f x y p))
+    (@eq_refl (@= B (f y) (f y)) (@eq_refl B (f y)))
+    x
+    p;
+
+symbol const_pathover_path_const
+  [A B : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y))
+  [u v : τ B]
+  (q : τ (@= B u v))
+  : τ (@=
+      (@= B u v)
+      (@const_pathover_path
+        A B x y u v p
+        (@const_pathover A B x y u v p q))
+      q)
+≔ @ind_eqr
+    A
+    y
+    (λ x : τ A,
+      λ p : τ (@= A x y),
+        @Pi_grpd B
+          (λ u : τ B,
+            @Pi_grpd B
+              (λ v : τ B,
+                @Pi_grpd
+                  (@= B u v)
+                  (λ q : τ (@= B u v),
+                    @=
+                      (@= B u v)
+                      (@const_pathover_path
+                        A B x y u v p
+                        (@const_pathover A B x y u v p q))
+                      q))))
+    (λ u : τ B,
+      λ v : τ B,
+        λ q : τ (@= B u v),
+          @eq_refl (@= B u v) q)
+    x
+    p
+    u
+    v
+    q;
+
+// Ordinary `ap` loop beta extracted propositionally from the HIT PathOver beta.
+symbol circle_rec_beta_loop_path
+  [B : Grpd]
+  (b : τ B)
+  (ell : τ (@= B b b))
+  : τ (@=
+      (@= B b b)
+      (@eq_ap
+        Circle_grpd B
+        (λ x : τ Circle_grpd, @circle_rec B b ell x)
+        circle_base circle_base circle_loop)
+      ell)
+≔ @eq_trans
+    (@= B b b)
+    (@eq_ap
+      Circle_grpd B
+      (λ x : τ Circle_grpd, @circle_rec B b ell x)
+      circle_base circle_base circle_loop)
+    (@const_pathover_path
+      Circle_grpd B
+      circle_base circle_base b b circle_loop
+      (@eq_apd
+        Circle_grpd
+        (λ _ : τ Circle_grpd, B)
+        (λ x : τ Circle_grpd, @circle_rec B b ell x)
+        circle_base circle_base circle_loop))
+    ell
+    (@eq_sym
+      (@= B b b)
+      (@const_pathover_path
+        Circle_grpd B
+        circle_base circle_base b b circle_loop
+        (@eq_apd
+          Circle_grpd
+          (λ _ : τ Circle_grpd, B)
+          (λ x : τ Circle_grpd, @circle_rec B b ell x)
+          circle_base circle_base circle_loop))
+      (@eq_ap
+        Circle_grpd B
+        (λ x : τ Circle_grpd, @circle_rec B b ell x)
+        circle_base circle_base circle_loop)
+      (@const_pathover_path_eq_apd
+        Circle_grpd B
+        (λ x : τ Circle_grpd, @circle_rec B b ell x)
+        circle_base circle_base circle_loop))
+    (@eq_trans
+      (@= B b b)
+      (@const_pathover_path
+        Circle_grpd B
+        circle_base circle_base b b circle_loop
+        (@eq_apd
+          Circle_grpd
+          (λ _ : τ Circle_grpd, B)
+          (λ x : τ Circle_grpd, @circle_rec B b ell x)
+          circle_base circle_base circle_loop))
+      (@const_pathover_path
+        Circle_grpd B
+        circle_base circle_base b b circle_loop
+        (@const_pathover
+          Circle_grpd B
+          circle_base circle_base b b circle_loop ell))
+      ell
+      (@eq_ap
+        (@PathOver
+          Circle_grpd
+          (λ _ : τ Circle_grpd, B)
+          circle_base circle_base circle_loop b b)
+        (@= B b b)
+        (λ q : τ (@PathOver
+            Circle_grpd
+            (λ _ : τ Circle_grpd, B)
+            circle_base circle_base circle_loop b b),
+          @const_pathover_path
+            Circle_grpd B
+            circle_base circle_base b b circle_loop q)
+        (@eq_apd
+          Circle_grpd
+          (λ _ : τ Circle_grpd, B)
+          (λ x : τ Circle_grpd, @circle_rec B b ell x)
+          circle_base circle_base circle_loop)
+        (@const_pathover
+          Circle_grpd B
+          circle_base circle_base b b circle_loop ell)
+        (@circle_rec_beta_loop B b ell))
+      (@const_pathover_path_const
+        Circle_grpd B
+        circle_base circle_base circle_loop b b ell));
+
+// Universal-cover code family with successor monodromy.
+symbol CircleCode
+  (x : τ Circle_grpd)
+  : Grpd
+≔ @circle_rec
+    Grpd_grpd
+    Integer_grpd
+    integer_succ_path
+    x;
+
+symbol circle_Code_beta_base
+  : τ (@= Grpd_grpd (CircleCode circle_base) Integer_grpd)
+≔ @eq_refl Grpd_grpd Integer_grpd;
+
+symbol circle_Code_beta_loop
+  : τ (@=
+      (@= Grpd_grpd Integer_grpd Integer_grpd)
+      (@eq_ap
+        Circle_grpd Grpd_grpd
+        CircleCode
+        circle_base circle_base circle_loop)
+      integer_succ_path)
+≔ @circle_rec_beta_loop_path
+    Grpd_grpd Integer_grpd integer_succ_path;
+
+// Encode a path from the base by transporting zero in the code family.
+symbol circle_encode
+  [x : τ Circle_grpd]
+  (p : τ (@= Circle_grpd circle_base x))
+  : τ (CircleCode x)
+≔ @coe_grpd
+    (CircleCode circle_base)
+    (CircleCode x)
+    (@eq_ap
+      Circle_grpd Grpd_grpd
+      CircleCode
+      circle_base x p)
+    integer_zero;
+
+symbol circle_encode_refl
+  : τ (@= Integer_grpd
+      (@circle_encode
+        circle_base
+        (@eq_refl Circle_grpd circle_base))
+      integer_zero)
+≔ @eq_refl Integer_grpd integer_zero;
+
+// The generator encodes as successor of zero, propositionally and rule-free.
+symbol circle_encode_loop
+  : τ (@= Integer_grpd
+      (@circle_encode circle_base circle_loop)
+      (integer_succ integer_zero))
+≔ @eq_trans
+    Integer_grpd
+    (@circle_encode circle_base circle_loop)
+    (@coe_grpd
+      Integer_grpd Integer_grpd integer_succ_path integer_zero)
+    (integer_succ integer_zero)
+    (@eq_ap
+      (@= Grpd_grpd Integer_grpd Integer_grpd)
+      Integer_grpd
+      (λ q : τ (@= Grpd_grpd Integer_grpd Integer_grpd),
+        @coe_grpd Integer_grpd Integer_grpd q integer_zero)
+      (@eq_ap
+        Circle_grpd Grpd_grpd
+        CircleCode
+        circle_base circle_base circle_loop)
+      integer_succ_path
+      circle_Code_beta_loop)
+    (integer_succ_path_coe integer_zero);
 
 // Categorical realization of the intrinsic groupoidal Circle.
 symbol Circle_cat : Cat
