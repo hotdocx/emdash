@@ -479,3 +479,606 @@ symbol path_product_comparison_hom_equiv
       (@PathProductHom_grpd A B p q)
       (@PathProductComponentHom_grpd A B p q))
 ≔ sigma_Snd (@path_product_comparison_evidence A B) p q;
+
+/*
+  Product-path transport and the structured-J comparison.
+
+  A path of pairs is assembled from its two coordinate paths.  For a
+  product-indexed family, primitive right-J transport along that path agrees
+  propositionally with either sequential coordinate factorization.  The two
+  routes therefore form a coherence diamond.  The existing structured
+  Path-category transport and PathOut induction remain presentations of the
+  same primitive eliminator; no second J or computation rule is introduced.
+*/
+// Path of pairs from paths in each coordinate.
+symbol product_pair_path
+  [A B : Grpd]
+  [a0 a1 : τ A]
+  [b0 b1 : τ B]
+  (p : τ (a0 = a1))
+  (q : τ (b0 = b1))
+  : τ (@=
+      (Product_grpd A B)
+      (@Product_pair_grpd A B a0 b0)
+      (@Product_pair_grpd A B a1 b1))
+≔ @path_product_join
+    A B
+    (@Product_pair_grpd A B a0 b0)
+    (@Product_pair_grpd A B a1 b1)
+    (@Product_pair_grpd
+      (@= A a0 a1)
+      (@= B b0 b1)
+      p q);
+
+// Splitting product reflexivity gives the pair of coordinate reflexivities.
+symbol path_product_split_refl
+  [A B : Grpd]
+  (a : τ A)
+  (b : τ B)
+  : τ (@=
+      (@PathProductComponentHom_grpd
+        A B
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b))
+      (@path_product_split
+        A B
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b)
+        (@eq_refl
+          (Product_grpd A B)
+          (@Product_pair_grpd A B a b)))
+      (@Product_pair_grpd
+        (@= A a a)
+        (@= B b b)
+        (@eq_refl A a)
+        (@eq_refl B b)))
+≔ @product_path_intro
+    (@= A a a)
+    (@= B b b)
+    (@path_product_split
+      A B
+      (@Product_pair_grpd A B a b)
+      (@Product_pair_grpd A B a b)
+      (@eq_refl
+        (Product_grpd A B)
+        (@Product_pair_grpd A B a b)))
+    (@Product_pair_grpd
+      (@= A a a)
+      (@= B b b)
+      (@eq_refl A a)
+      (@eq_refl B b))
+    (@eq_refl (@= A a a) (@eq_refl A a))
+    (@pathover_refl
+      (@= A a a)
+      (λ _ : τ (@= A a a), @= B b b)
+      (@eq_refl A a)
+      (@eq_refl B b));
+
+// The pair of coordinate reflexivities represents product reflexivity.
+symbol product_pair_path_refl
+  [A B : Grpd]
+  (a : τ A)
+  (b : τ B)
+  : τ (@=
+      (@PathProductHom_grpd
+        A B
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b))
+      (@product_pair_path A B a a b b
+        (@eq_refl A a)
+        (@eq_refl B b))
+      (@eq_refl
+        (Product_grpd A B)
+        (@Product_pair_grpd A B a b)))
+≔ @eq_trans
+    (@PathProductHom_grpd
+      A B
+      (@Product_pair_grpd A B a b)
+      (@Product_pair_grpd A B a b))
+    (@product_pair_path A B a a b b
+      (@eq_refl A a)
+      (@eq_refl B b))
+    (@path_product_join
+      A B
+      (@Product_pair_grpd A B a b)
+      (@Product_pair_grpd A B a b)
+      (@path_product_split
+        A B
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b)
+        (@eq_refl
+          (Product_grpd A B)
+          (@Product_pair_grpd A B a b))))
+    (@eq_refl
+      (Product_grpd A B)
+      (@Product_pair_grpd A B a b))
+    (@eq_ap
+      (@PathProductComponentHom_grpd
+        A B
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b))
+      (@PathProductHom_grpd
+        A B
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b))
+      (λ h : τ (@PathProductComponentHom_grpd
+        A B
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b)),
+        @path_product_join
+          A B
+          (@Product_pair_grpd A B a b)
+          (@Product_pair_grpd A B a b)
+          h)
+      (@Product_pair_grpd
+        (@= A a a)
+        (@= B b b)
+        (@eq_refl A a)
+        (@eq_refl B b))
+      (@path_product_split
+        A B
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b)
+        (@eq_refl
+          (Product_grpd A B)
+          (@Product_pair_grpd A B a b)))
+      (@eq_sym
+        (@PathProductComponentHom_grpd
+          A B
+          (@Product_pair_grpd A B a b)
+          (@Product_pair_grpd A B a b))
+        (@path_product_split
+          A B
+          (@Product_pair_grpd A B a b)
+          (@Product_pair_grpd A B a b)
+          (@eq_refl
+            (Product_grpd A B)
+            (@Product_pair_grpd A B a b)))
+        (@Product_pair_grpd
+          (@= A a a)
+          (@= B b b)
+          (@eq_refl A a)
+          (@eq_refl B b))
+        (@path_product_split_refl A B a b)))
+    (@path_product_join_split
+      A B
+      (@Product_pair_grpd A B a b)
+      (@Product_pair_grpd A B a b)
+      (@eq_refl
+        (Product_grpd A B)
+        (@Product_pair_grpd A B a b)));
+
+// Primitive forward transport along one path in the product.
+symbol product_path_transport
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [s t : τ (Product_grpd A B)]
+  (r : τ (s = t))
+  (u : τ (P s))
+  : τ (P t)
+≔ (@ind_eqr
+      (Product_grpd A B)
+      t
+      (λ s : τ (Product_grpd A B), λ _ : τ (s = t),
+        @Function_grpd (P s) (P t))
+      (λ v : τ (P t), v)
+      s r)
+    u;
+
+// Transport along the pair of reflexive coordinate paths is neutral.
+symbol product_path_transport_pair_refl
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  (a : τ A)
+  (b : τ B)
+  (u : τ (P (@Product_pair_grpd A B a b)))
+  : τ (@=
+      (P (@Product_pair_grpd A B a b))
+      (@product_path_transport
+        A B P
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b)
+        (@product_pair_path A B a a b b
+          (@eq_refl A a)
+          (@eq_refl B b))
+        u)
+      u)
+≔ @eq_ap
+    (@PathProductHom_grpd
+      A B
+      (@Product_pair_grpd A B a b)
+      (@Product_pair_grpd A B a b))
+    (P (@Product_pair_grpd A B a b))
+    (λ r : τ (@PathProductHom_grpd
+      A B
+      (@Product_pair_grpd A B a b)
+      (@Product_pair_grpd A B a b)),
+      @product_path_transport
+        A B P
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b)
+        r u)
+    (@product_pair_path A B a a b b
+      (@eq_refl A a)
+      (@eq_refl B b))
+    (@eq_refl
+      (Product_grpd A B)
+      (@Product_pair_grpd A B a b))
+    (@product_pair_path_refl A B a b);
+
+// Direct transport along the simultaneously paired coordinate path.
+symbol product_transport_direct
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [a0 a1 : τ A]
+  [b0 b1 : τ B]
+  (p : τ (a0 = a1))
+  (q : τ (b0 = b1))
+  (u : τ (P (@Product_pair_grpd A B a0 b0)))
+  : τ (P (@Product_pair_grpd A B a1 b1))
+≔ @product_path_transport
+    A B P
+    (@Product_pair_grpd A B a0 b0)
+    (@Product_pair_grpd A B a1 b1)
+    (@product_pair_path A B a0 a1 b0 b1 p q)
+    u;
+
+// Sequential transport in the constant-Sigma order: A first, then B.
+symbol product_transport_base_then_fibre
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [a0 a1 : τ A]
+  [b0 b1 : τ B]
+  (p : τ (a0 = a1))
+  (q : τ (b0 = b1))
+  (u : τ (P (@Product_pair_grpd A B a0 b0)))
+  : τ (P (@Product_pair_grpd A B a1 b1))
+≔ @product_path_transport
+    A B P
+    (@Product_pair_grpd A B a1 b0)
+    (@Product_pair_grpd A B a1 b1)
+    (@product_pair_path A B a1 a1 b0 b1
+      (@eq_refl A a1) q)
+    (@product_path_transport
+      A B P
+      (@Product_pair_grpd A B a0 b0)
+      (@Product_pair_grpd A B a1 b0)
+      (@product_pair_path A B a0 a1 b0 b0
+        p (@eq_refl B b0))
+      u);
+
+// The other sequential route: B first, then A.
+symbol product_transport_fibre_then_base
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [a0 a1 : τ A]
+  [b0 b1 : τ B]
+  (p : τ (a0 = a1))
+  (q : τ (b0 = b1))
+  (u : τ (P (@Product_pair_grpd A B a0 b0)))
+  : τ (P (@Product_pair_grpd A B a1 b1))
+≔ @product_path_transport
+    A B P
+    (@Product_pair_grpd A B a0 b1)
+    (@Product_pair_grpd A B a1 b1)
+    (@product_pair_path A B a0 a1 b1 b1
+      p (@eq_refl B b1))
+    (@product_path_transport
+      A B P
+      (@Product_pair_grpd A B a0 b0)
+      (@Product_pair_grpd A B a0 b1)
+      (@product_pair_path A B a0 a0 b0 b1
+        (@eq_refl A a0) q)
+      u);
+
+// The base-first sequential route is neutral at coordinate reflexivity.
+symbol product_transport_base_then_fibre_refl
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  (a : τ A)
+  (b : τ B)
+  (u : τ (P (@Product_pair_grpd A B a b)))
+  : τ (@=
+      (P (@Product_pair_grpd A B a b))
+      (@product_transport_base_then_fibre
+        A B P a a b b
+        (@eq_refl A a) (@eq_refl B b) u)
+      u)
+≔ @eq_trans
+    (P (@Product_pair_grpd A B a b))
+    (@product_transport_base_then_fibre
+      A B P a a b b
+      (@eq_refl A a) (@eq_refl B b) u)
+    (@product_path_transport
+      A B P
+      (@Product_pair_grpd A B a b)
+      (@Product_pair_grpd A B a b)
+      (@product_pair_path A B a a b b
+        (@eq_refl A a) (@eq_refl B b))
+      u)
+    u
+    (@product_path_transport_pair_refl
+      A B P a b
+      (@product_path_transport
+        A B P
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b)
+        (@product_pair_path A B a a b b
+          (@eq_refl A a) (@eq_refl B b))
+        u))
+    (@product_path_transport_pair_refl A B P a b u);
+
+// The fibre-first sequential route is also neutral at reflexivity.
+symbol product_transport_fibre_then_base_refl
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  (a : τ A)
+  (b : τ B)
+  (u : τ (P (@Product_pair_grpd A B a b)))
+  : τ (@=
+      (P (@Product_pair_grpd A B a b))
+      (@product_transport_fibre_then_base
+        A B P a a b b
+        (@eq_refl A a) (@eq_refl B b) u)
+      u)
+≔ @eq_trans
+    (P (@Product_pair_grpd A B a b))
+    (@product_transport_fibre_then_base
+      A B P a a b b
+      (@eq_refl A a) (@eq_refl B b) u)
+    (@product_path_transport
+      A B P
+      (@Product_pair_grpd A B a b)
+      (@Product_pair_grpd A B a b)
+      (@product_pair_path A B a a b b
+        (@eq_refl A a) (@eq_refl B b))
+      u)
+    u
+    (@product_path_transport_pair_refl
+      A B P a b
+      (@product_path_transport
+        A B P
+        (@Product_pair_grpd A B a b)
+        (@Product_pair_grpd A B a b)
+        (@product_pair_path A B a a b b
+          (@eq_refl A a) (@eq_refl B b))
+        u))
+    (@product_path_transport_pair_refl A B P a b u);
+
+// Direct transport agrees with the canonical A-then-B factorization.
+symbol product_transport_direct_agrees_base_then_fibre
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [a0 a1 : τ A]
+  [b0 b1 : τ B]
+  (p : τ (a0 = a1))
+  (q : τ (b0 = b1))
+  (u : τ (P (@Product_pair_grpd A B a0 b0)))
+  : τ (@=
+      (P (@Product_pair_grpd A B a1 b1))
+      (@product_transport_direct A B P a0 a1 b0 b1 p q u)
+      (@product_transport_base_then_fibre
+        A B P a0 a1 b0 b1 p q u))
+≔ (@ind_eqr
+      A
+      a1
+      (λ a0 : τ A, λ p : τ (a0 = a1),
+        @Pi_grpd B (λ b0 : τ B,
+          @Pi_grpd (@= B b0 b1) (λ q : τ (@= B b0 b1),
+            @Pi_grpd
+              (P (@Product_pair_grpd A B a0 b0))
+              (λ u : τ (P (@Product_pair_grpd A B a0 b0)),
+                @=
+                  (P (@Product_pair_grpd A B a1 b1))
+                  (@product_transport_direct
+                    A B P a0 a1 b0 b1 p q u)
+                  (@product_transport_base_then_fibre
+                    A B P a0 a1 b0 b1 p q u)))))
+      (λ b0 : τ B,
+        λ q : τ (@= B b0 b1),
+        λ u : τ (P (@Product_pair_grpd A B a1 b0)),
+          (@ind_eqr
+            B
+            b1
+            (λ b0 : τ B, λ q : τ (b0 = b1),
+              @Pi_grpd
+                (P (@Product_pair_grpd A B a1 b0))
+                (λ u : τ (P (@Product_pair_grpd A B a1 b0)),
+                  @=
+                    (P (@Product_pair_grpd A B a1 b1))
+                    (@product_transport_direct
+                      A B P a1 a1 b0 b1 (@eq_refl A a1) q u)
+                    (@product_transport_base_then_fibre
+                      A B P a1 a1 b0 b1 (@eq_refl A a1) q u)))
+            (λ u : τ (P (@Product_pair_grpd A B a1 b1)),
+              @eq_trans
+                (P (@Product_pair_grpd A B a1 b1))
+                (@product_transport_direct
+                  A B P a1 a1 b1 b1
+                  (@eq_refl A a1) (@eq_refl B b1) u)
+                u
+                (@product_transport_base_then_fibre
+                  A B P a1 a1 b1 b1
+                  (@eq_refl A a1) (@eq_refl B b1) u)
+                (@product_path_transport_pair_refl A B P a1 b1 u)
+                (@eq_sym
+                  (P (@Product_pair_grpd A B a1 b1))
+                  (@product_transport_base_then_fibre
+                    A B P a1 a1 b1 b1
+                    (@eq_refl A a1) (@eq_refl B b1) u)
+                  u
+                  (@product_transport_base_then_fibre_refl
+                    A B P a1 b1 u)))
+            b0 q)
+          u)
+      a0 p)
+    b0 q u;
+
+// Direct transport also agrees with the B-then-A factorization.
+symbol product_transport_direct_agrees_fibre_then_base
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [a0 a1 : τ A]
+  [b0 b1 : τ B]
+  (p : τ (a0 = a1))
+  (q : τ (b0 = b1))
+  (u : τ (P (@Product_pair_grpd A B a0 b0)))
+  : τ (@=
+      (P (@Product_pair_grpd A B a1 b1))
+      (@product_transport_direct A B P a0 a1 b0 b1 p q u)
+      (@product_transport_fibre_then_base
+        A B P a0 a1 b0 b1 p q u))
+≔ (@ind_eqr
+      A
+      a1
+      (λ a0 : τ A, λ p : τ (a0 = a1),
+        @Pi_grpd B (λ b0 : τ B,
+          @Pi_grpd (@= B b0 b1) (λ q : τ (@= B b0 b1),
+            @Pi_grpd
+              (P (@Product_pair_grpd A B a0 b0))
+              (λ u : τ (P (@Product_pair_grpd A B a0 b0)),
+                @=
+                  (P (@Product_pair_grpd A B a1 b1))
+                  (@product_transport_direct
+                    A B P a0 a1 b0 b1 p q u)
+                  (@product_transport_fibre_then_base
+                    A B P a0 a1 b0 b1 p q u)))))
+      (λ b0 : τ B,
+        λ q : τ (@= B b0 b1),
+        λ u : τ (P (@Product_pair_grpd A B a1 b0)),
+          (@ind_eqr
+            B
+            b1
+            (λ b0 : τ B, λ q : τ (b0 = b1),
+              @Pi_grpd
+                (P (@Product_pair_grpd A B a1 b0))
+                (λ u : τ (P (@Product_pair_grpd A B a1 b0)),
+                  @=
+                    (P (@Product_pair_grpd A B a1 b1))
+                    (@product_transport_direct
+                      A B P a1 a1 b0 b1 (@eq_refl A a1) q u)
+                    (@product_transport_fibre_then_base
+                      A B P a1 a1 b0 b1 (@eq_refl A a1) q u)))
+            (λ u : τ (P (@Product_pair_grpd A B a1 b1)),
+              @eq_trans
+                (P (@Product_pair_grpd A B a1 b1))
+                (@product_transport_direct
+                  A B P a1 a1 b1 b1
+                  (@eq_refl A a1) (@eq_refl B b1) u)
+                u
+                (@product_transport_fibre_then_base
+                  A B P a1 a1 b1 b1
+                  (@eq_refl A a1) (@eq_refl B b1) u)
+                (@product_path_transport_pair_refl A B P a1 b1 u)
+                (@eq_sym
+                  (P (@Product_pair_grpd A B a1 b1))
+                  (@product_transport_fibre_then_base
+                    A B P a1 a1 b1 b1
+                    (@eq_refl A a1) (@eq_refl B b1) u)
+                  u
+                  (@product_transport_fibre_then_base_refl
+                    A B P a1 b1 u)))
+            b0 q)
+          u)
+      a0 p)
+    b0 q u;
+
+// The two sequential routes form the expected coherent transport diamond.
+symbol product_transport_coherence_diamond
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [a0 a1 : τ A]
+  [b0 b1 : τ B]
+  (p : τ (a0 = a1))
+  (q : τ (b0 = b1))
+  (u : τ (P (@Product_pair_grpd A B a0 b0)))
+  : τ (@=
+      (P (@Product_pair_grpd A B a1 b1))
+      (@product_transport_base_then_fibre
+        A B P a0 a1 b0 b1 p q u)
+      (@product_transport_fibre_then_base
+        A B P a0 a1 b0 b1 p q u))
+≔ @eq_trans
+    (P (@Product_pair_grpd A B a1 b1))
+    (@product_transport_base_then_fibre
+      A B P a0 a1 b0 b1 p q u)
+    (@product_transport_direct A B P a0 a1 b0 b1 p q u)
+    (@product_transport_fibre_then_base
+      A B P a0 a1 b0 b1 p q u)
+    (@eq_sym
+      (P (@Product_pair_grpd A B a1 b1))
+      (@product_transport_direct A B P a0 a1 b0 b1 p q u)
+      (@product_transport_base_then_fibre
+        A B P a0 a1 b0 b1 p q u)
+      (@product_transport_direct_agrees_base_then_fibre
+        A B P a0 a1 b0 b1 p q u))
+    (@product_transport_direct_agrees_fibre_then_base
+      A B P a0 a1 b0 b1 p q u);
+
+// Path-valued categorical realization of a product-indexed Grpd family.
+symbol ProductPathFamily_catd
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  : τ (@Catd (Path_cat (Product_grpd A B)))
+≔ @path_lift_fapp0
+    (Product_grpd A B)
+    Cat_cat
+    (λ z : τ (Product_grpd A B), Path_cat (P z));
+
+// Existing displayed action along the product path.
+symbol product_path_structured_transport
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [s t : τ (Product_grpd A B)]
+  (u : τ (P s))
+  (r : τ (s = t))
+  : τ (P t)
+≔ @path_cat_structured_transport
+    (Product_grpd A B)
+    (@ProductPathFamily_catd A B P)
+    s t u r;
+
+// Existing structured PathOut induction evaluated at the product path.
+symbol product_path_structured_induction
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [s t : τ (Product_grpd A B)]
+  (u : τ (P s))
+  (r : τ (s = t))
+  : τ (P t)
+≔ @path_cat_path_ind_app
+    (Product_grpd A B)
+    (@ProductPathFamily_catd A B P)
+    s t u r;
+
+// Structured displayed transport agrees with primitive right-J transport.
+symbol product_path_structured_transport_agrees_primitive
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [s t : τ (Product_grpd A B)]
+  (u : τ (P s))
+  (r : τ (s = t))
+  : τ (@=
+      (P t)
+      (@product_path_structured_transport A B P s t u r)
+      (@product_path_transport A B P s t r u))
+≔ @path_cat_structured_transport_agrees_ind_eqr
+    (Product_grpd A B)
+    (@ProductPathFamily_catd A B P)
+    s t u r;
+
+// Structured PathOut induction agrees with the same primitive transport.
+symbol product_path_structured_induction_agrees_primitive
+  [A B : Grpd]
+  (P : τ (Product_grpd A B) → Grpd)
+  [s t : τ (Product_grpd A B)]
+  (u : τ (P s))
+  (r : τ (s = t))
+  : τ (@=
+      (P t)
+      (@product_path_structured_induction A B P s t u r)
+      (@product_path_transport A B P s t r u))
+≔ @path_cat_path_ind_app_agrees_ind_eqr
+    (Product_grpd A B)
+    (@ProductPathFamily_catd A B P)
+    s t u r;
