@@ -44,8 +44,13 @@ rule-free `emdash3_2_integer_localization.lp` facade and its public reviewer
 example both check in about five seconds. Registration in maintained source
 lists and generated health evidence remains part of `GCCI-CLOSE-1` rather
 than a reason to run an aggregate now. The bounded plan/facade/reviewer
-bootstrap is locally checkpointed at `0a32ee2`. `GCCI-INT-2` is the first
-active mathematical continuation.
+bootstrap is locally checkpointed at `0a32ee2`. `GCCI-INT-2` and
+`GCCI-INT-3` are now focused-green together: successor/predecessor inverse
+paths, stage quotient
+data, the successor universe path and its transport comparison, and
+set-targeted dependent/nondependent integer induction all check directly with
+their expanded reviewer. Their local checkpoint is pending exact staged
+review.
 
 ## Executive Objective
 
@@ -242,6 +247,20 @@ second unrelated generator. A strict one-object category with Unit objects
 and Int homs is not an adequate univalent definition here: Unit object
 equality is contractible while its proposed automorphism type is not.
 
+The selected HIT signature also carries
+
+```text
+circle_is_groupoid : IsGroupoidGrpd Circle_grpd.
+```
+
+This is the groupoidal analogue of WalkingEnd's explicit one-dimensional
+signature data. It is needed noncircularly because the trusted Integer is a
+set-truncated telescope: defining `decode` by `integer_ind` requires its
+path-valued target fibres to be sets. After encode/decode, the equivalence
+with Integer supplies an independent sethood proof for the based loop space.
+Thus the implementation both uses the selected dimensional HIT boundary and
+checks that the computed loop classifier has exactly the expected dimension.
+
 The proof follows the standard HoTT encode/decode architecture, expressed
 through active emdash owners.
 
@@ -392,9 +411,9 @@ rule-free unless a measured consumer proves otherwise.
 | --- | --- | --- |
 | `GCCI-00` | complete | Promote this self-contained plan; isolate branch/worktree; record exact baseline and proportional focused check. |
 | `GCCI-INT-1` | checkpointed `0a32ee2` | Audited the telescope-localization API and exposed a transparent, rule-free integer-facing carrier, stage representative, zero, Nat embedding, successor, predecessor, whole/contractible-fibre equivalences, and inherited sethood. The source and public reviewer check directly; maintained-list registration is reserved for `GCCI-CLOSE-1`. |
-| `GCCI-INT-2` | active | Add focused propositional inverse laws and the canonical representative computations actually needed by Circle, reusing existing owners. New rules require owner-position and warning audits. |
-| `GCCI-INT-3` | pending | Expose sethood and the smallest dependent induction interface consumed by Circle; add a public reviewer example. |
-| `GCCI-CIRCLE-1` | pending on `INT-1..3` | Define Circle HIT signature, base, loop, dependent eliminator, point beta, and propositional loop beta under the existing HIT policy. |
+| `GCCI-INT-2` | focused-green | Exposes the stage-step path, both successor/predecessor inverse paths, the successor universe path and its propositional transport computation, negative one, and its successor law. All are transparent specializations of existing owners; no rule or unifier was added. |
+| `GCCI-INT-3` | focused-green | Exposes inherited sethood plus transparent set-targeted dependent and nondependent integer induction, with constructor computation checked by the public reviewer. This exact elimination boundary requires `circle_is_groupoid` before Circle decode; it does not assume the later loop-space equivalence. |
+| `GCCI-CIRCLE-1` | pending on checkpointing `INT-2..3` | Define Circle HIT signature, base, loop, explicit `IsGroupoidGrpd` dimension evidence, dependent eliminator, point beta, and propositional loop beta under the existing HIT policy. |
 | `GCCI-CIRCLE-2` | pending on `CIRCLE-1` | Construct `CircleCode`, encode, decode, and both inverse laws. |
 | `GCCI-CIRCLE-3` | pending on `CIRCLE-2` | Package based-loop and categorical-Hom equivalences with Integer; prove the selected sethood/1-type consequences and reviewer example. |
 | `GCCI-WALK-1` | pending on `CIRCLE-3` | Construct `walking_to_circle_func` and prove compatibility of powers with the canonical nonnegative integer inclusion. |
@@ -426,6 +445,12 @@ probe without a changed prerequisite is not progress.
   checks of `emdash3_2_telescope_localization_hit.lp`,
   `emdash3_2_integer_localization.lp`, and
   `examples/integer_localization.lp`, each under the 90-second ceiling.
+- `GCCI-D-005` — Integer induction remains exactly the set-targeted
+  elimination inherited from telescope localization. Circle therefore carries
+  explicit one-dimensional signature evidence, analogous to WalkingEnd, so
+  its equality fibres are sets before `decode` is constructed. The final
+  equivalence with Integer independently validates based-loop sethood; no
+  encode/decode conclusion is assumed to define encode/decode.
 
 ## Validation Policy
 

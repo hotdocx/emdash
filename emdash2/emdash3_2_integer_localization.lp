@@ -34,6 +34,11 @@ symbol integer_of_nat
   : τ Integer_grpd
 ≔ integer_stage zero n;
 
+// Canonical negative-one representative at the first telescope stage.
+symbol integer_neg_one
+  : τ Integer_grpd
+≔ integer_stage (succ zero) zero;
+
 // Successor is the localized forward transition.
 symbol integer_succ
   : τ (@Function_grpd Integer_grpd Integer_grpd)
@@ -55,6 +60,104 @@ symbol integer_succ_equiv
   : τ (TypeEquiv Integer_grpd Integer_grpd)
 ≔ @omega_along_to_type_equiv
     Integer_grpd Integer_grpd integer_succ integer_succ_omega_equiv;
+
+// Universe path whose transport is propositionally the integer successor.
+symbol integer_succ_path
+  : τ (@= Grpd_grpd Integer_grpd Integer_grpd)
+≔ @grpd_equiv_path Integer_grpd Integer_grpd integer_succ_equiv;
+
+// The telescope generator specialized to the integer stage presentation.
+symbol integer_stage_step
+  (n x : τ Nat_grpd)
+  : τ (@= Integer_grpd
+      (integer_stage (succ n) (succ x))
+      (integer_stage n x))
+≔ @telescope_localization_step Nat_grpd nat_succ_function n x;
+
+// Successor after predecessor is propositionally the identity.
+symbol integer_succ_pred
+  (z : τ Integer_grpd)
+  : τ (@= Integer_grpd (integer_succ (integer_pred z)) z)
+≔ @telescope_localization_forward_inverse_point
+    Nat_grpd nat_succ_function z;
+
+// Predecessor after successor is propositionally the identity.
+symbol integer_pred_succ
+  (z : τ Integer_grpd)
+  : τ (@= Integer_grpd (integer_pred (integer_succ z)) z)
+≔ @telescope_localization_inverse_forward_point
+    Nat_grpd nat_succ_function z;
+
+// Transport along the selected universe path agrees with successor.
+symbol integer_succ_path_coe
+  (z : τ Integer_grpd)
+  : τ (@= Integer_grpd
+      (@coe_grpd
+        Integer_grpd Integer_grpd integer_succ_path z)
+      (integer_succ z))
+≔ @grpd_equiv_path_coe
+    Integer_grpd Integer_grpd integer_succ_equiv z;
+
+// The first negative representative is sent back to zero by successor.
+symbol integer_succ_neg_one
+  : τ (@= Integer_grpd
+      (integer_succ integer_neg_one)
+      integer_zero)
+≔ integer_stage_step zero zero;
+
+/*
+  Integer-facing dependent induction. The fibres are set-valued because the
+  trusted carrier is the set-truncated telescope HIT. Circle will supply this
+  condition for its path-valued decode motive from its one-dimensional
+  signature; no stronger elimination principle is asserted here.
+*/
+symbol integer_ind
+  (D : τ Integer_grpd → Grpd)
+  (hD : Π z : τ Integer_grpd, τ (IsSetGrpd (D z)))
+  (d : Π n : τ Nat_grpd,
+    Π x : τ Nat_grpd,
+      τ (D (integer_stage n x)))
+  (coh : Π n : τ Nat_grpd,
+    Π x : τ Nat_grpd,
+      τ (@PathOver
+        Integer_grpd
+        D
+        (integer_stage (succ n) (succ x))
+        (integer_stage n x)
+        (integer_stage_step n x)
+        (d (succ n) (succ x))
+        (d n x)))
+  (z : τ Integer_grpd)
+  : τ (D z)
+≔ @telescope_localization_ind
+    Nat_grpd nat_succ_function D hD d coh z;
+
+// Nondependent set-valued elimination with an ordinary stage-step equation.
+symbol integer_elim
+  [B : Grpd]
+  (hB : τ (IsSetGrpd B))
+  (d : Π n : τ Nat_grpd, Π x : τ Nat_grpd, τ B)
+  (coh : Π n : τ Nat_grpd,
+    Π x : τ Nat_grpd,
+      τ (@= B (d (succ n) (succ x)) (d n x)))
+  (z : τ Integer_grpd)
+  : τ B
+≔ @integer_ind
+    (λ _ : τ Integer_grpd, B)
+    (λ _ : τ Integer_grpd, hB)
+    d
+    (λ n : τ Nat_grpd,
+      λ x : τ Nat_grpd,
+        @const_pathover
+          Integer_grpd
+          B
+          (integer_stage (succ n) (succ x))
+          (integer_stage n x)
+          (d (succ n) (succ x))
+          (d n x)
+          (integer_stage_step n x)
+          (coh n x))
+    z;
 
 // The integer line inherits the set truncation built into localization.
 symbol integer_is_set
