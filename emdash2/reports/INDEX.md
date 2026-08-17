@@ -1076,7 +1076,8 @@ record.
   biclosed/monoidal Crans--Gray structure, global strict-cut migration,
   groupoidification, and book work remain excluded. The first semantic row is
   checkpointed at `9222dad`; the derived walking-arrow row is checkpointed at
-  `1caf642`; and the right-closure semantic row is checkpointed at `37a5ede`.
+  `1caf642`; the right-closure semantic row is checkpointed at `37a5ede`; and
+  the walking-square boundary is checkpointed at `d2597c9`.
 
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization

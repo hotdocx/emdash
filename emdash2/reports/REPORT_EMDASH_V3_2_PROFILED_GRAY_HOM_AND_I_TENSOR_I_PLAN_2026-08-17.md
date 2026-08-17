@@ -44,7 +44,9 @@ Checkpoints: completed `GRAY-01` semantic tranche
 `9222dad7caf71741d0811505aeebef033f404059`; completed `GRAY-02` walking-arrow
 tranche `1caf642a3b99d4699becac3a1d90e26f4e58c4b1`; completed `GRAY-03`
 right-closure semantic tranche
-`37a5ede9cdfeaea10f0aa2d6dfbbbdacc7e3a957`
+`37a5ede9cdfeaea10f0aa2d6dfbbbdacc7e3a957`; completed `GRAY-04`
+walking-square semantic tranche
+`d2597c9d1296902f5fc693a06826418b00d89ef1`
 
 ## Objective
 
@@ -530,6 +532,8 @@ all-example, or repository-wide aggregate was run.
 This row supplies only the typed square boundary. The orientation name and
 the nonidentity interchanger remain owned by `GRAY-05`, which must project
 them from the existing whole laxity action and retain one next hom action.
+The bounded semantic tranche is locally checkpointed at `d2597c9`; this
+ledger entry records that recovery anchor without widening the row.
 
 ## Validation Policy
 
