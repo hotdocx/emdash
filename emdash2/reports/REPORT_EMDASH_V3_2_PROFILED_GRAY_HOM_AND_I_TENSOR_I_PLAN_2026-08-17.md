@@ -40,6 +40,9 @@ complete; `GRAY-02` is the selected next row. Local green checkpoint commits
 are authorized by the user; push, merge, publication, release, history
 rewrite, branch deletion, and worktree removal are not authorized.
 
+Checkpoint: completed `GRAY-01` semantic tranche
+`9222dad7caf71741d0811505aeebef033f404059`
+
 ## Objective
 
 Implement one selected, computationally inspectable **right-closed Gray
@@ -372,6 +375,10 @@ inclusion evaluator. The strict catalog is regenerated at 2,121 checks in 102
 areas, with zero unclassified checks. Health/CI replacement remains deferred
 to `GRAY-CLOSE-1`; no repository-wide aggregate was run for this intermediate
 row.
+
+The bounded semantic tranche is locally checkpointed at `9222dad`; this
+ledger entry records that immutable recovery anchor without widening the
+validated scope.
 
 ## Validation Policy
 
