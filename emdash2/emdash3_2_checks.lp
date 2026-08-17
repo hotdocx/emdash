@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -24693,3 +24693,74 @@ assert [A B : Cat] (F : τ (Functor A B))
   @fapp1_compositor A B F X Y Z g f
   ≡ @tapp1_post_laxity_cell
       A B F F (@id (Functor_cat A B) F) X Y Z g f;
+
+// catalog-area: Computational strict functors and profiled Gray hom
+// Strictness is selected by a code/decoder boundary. The profile changes the
+// object sort while reusing the complete ambient transfor and higher-cell
+// tower.
+assert [A B : Cat]
+  (S : τ (@StrictFunctorData A B)) ⊢
+  S : τ (Obj (@GrayHom_oplax A B));
+
+assert [A B : Cat]
+  (X Y : τ (Obj (@GrayHom_oplax A B))) ⊢
+  Hom_cat (@GrayHom_oplax A B) X Y
+  ≡ @Transf_cat
+      A B
+      (@strict_functor_carrier A B X)
+      (@strict_functor_carrier A B Y);
+
+assert [A B : Cat]
+  (X : τ (Obj (@GrayHom_oplax A B))) ⊢
+  @id (@GrayHom_oplax A B) X
+  : τ (Hom
+      (@Functor_cat A B)
+      (@strict_functor_carrier A B X)
+      (@strict_functor_carrier A B X));
+
+assert [A B : Cat]
+  (X Y Z : τ (Obj (@GrayHom_oplax A B)))
+  (g : τ (Hom (@GrayHom_oplax A B) Y Z))
+  (f : τ (Hom (@GrayHom_oplax A B) X Y)) ⊢
+  @comp_fapp0 (@GrayHom_oplax A B) X Y Z g f
+  : τ (Hom
+      (@Functor_cat A B)
+      (@strict_functor_carrier A B X)
+      (@strict_functor_carrier A B Z));
+
+assert [A B : Cat]
+  (X Y : τ (Obj (@GrayHom_oplax A B))) ⊢
+  @fapp1_func
+    (@GrayHom_oplax A B)
+    (@Functor_cat A B)
+    (@grayhom_oplax_include_func A B)
+    X Y
+  ≡ @id_func
+      (@Transf_cat
+        A B
+        (@strict_functor_carrier A B X)
+        (@strict_functor_carrier A B Y));
+
+// A decoded strict code makes the already extracted ambient compositor
+// compute to identity at its stable fdapp1_int_cell owner.
+assert [A B : Cat]
+  (S : τ (@StrictFunctorData A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y)) ⊢
+  @fapp1_compositor
+    A B (@strict_functor_carrier A B S)
+    X Y Z g f
+  ≡ @id
+      (Hom_cat
+        B
+        (@fapp0 A B (@strict_functor_carrier A B S) X)
+        (@fapp0 A B (@strict_functor_carrier A B S) Z))
+      (@strict_functor_compositor_lhs
+        A B (@strict_functor_carrier A B S)
+        X Y Z g f);
+
+// Ambient functors are not silently promoted into the strict object sort.
+assertnot [A B : Cat]
+  (F : τ (Functor A B)) ⊢
+  F : τ (Obj (@GrayHom_oplax A B));

@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2114
-- Mapped areas: 101
+- Total checks: 2121
+- Mapped areas: 102
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -120,6 +120,7 @@ stable mathematical-area scopes rather than source locations.
 | Whole comma projection and displayed laxity | 10 |
 | Target-internalized ordinary hom action | 4 |
 | Ordinary post/pre laxity and functor compositor | 5 |
+| Computational strict functors and profiled Gray hom | 7 |
 
 ## Section Details
 
@@ -2741,3 +2742,15 @@ stable mathematical-area scopes rather than source locations.
 | 2112 | 24665 | `assert [A B : Cat] [F G : τ (Functor A B)] (epsilon : τ (Transf F G)) [X Y Z : τ (Obj A)] (g : τ (Hom A Y Z)) (f : τ ...` |
 | 2113 | 24677 | `assert [A B : Cat] [F G : τ (Functor A B)] (epsilon : τ (Transf F G)) [W X Y : τ (Obj A)] (h : τ (Hom A W X)) (q : τ ...` |
 | 2114 | 24690 | `assert [A B : Cat] (F : τ (Functor A B)) [X Y Z : τ (Obj A)] (g : τ (Hom A Y Z)) (f : τ (Hom A X Y)) ⊢ @fapp1_compos ...` |
+
+### Computational strict functors and profiled Gray hom
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 2115 | 24701 | `assert [A B : Cat] (S : τ (@StrictFunctorData A B)) ⊢ S : τ (Obj (@GrayHom_oplax A B));` |
+| 2116 | 24705 | `assert [A B : Cat] (X Y : τ (Obj (@GrayHom_oplax A B))) ⊢ Hom_cat (@GrayHom_oplax A B) X Y ≡ @Transf_cat A B (@stric ...` |
+| 2117 | 24713 | `assert [A B : Cat] (X : τ (Obj (@GrayHom_oplax A B))) ⊢ @id (@GrayHom_oplax A B) X : τ (Hom (@Functor_cat A B) (@str ...` |
+| 2118 | 24721 | `assert [A B : Cat] (X Y Z : τ (Obj (@GrayHom_oplax A B))) (g : τ (Hom (@GrayHom_oplax A B) Y Z)) (f : τ (Hom (@GrayH ...` |
+| 2119 | 24731 | `assert [A B : Cat] (X Y : τ (Obj (@GrayHom_oplax A B))) ⊢ @fapp1_func (@GrayHom_oplax A B) (@Functor_cat A B) (@gray ...` |
+| 2120 | 24746 | `assert [A B : Cat] (S : τ (@StrictFunctorData A B)) [X Y Z : τ (Obj A)] (g : τ (Hom A Y Z)) (f : τ (Hom A X Y)) ⊢ @f ...` |
+| 2121 | 24764 | `assertnot [A B : Cat] (F : τ (Functor A B)) ⊢ F : τ (Obj (@GrayHom_oplax A B));` |

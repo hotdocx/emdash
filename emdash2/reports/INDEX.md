@@ -1057,6 +1057,18 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:
+  active focused child of the internal-laxity/groupoidal-realization master.
+  Its first semantic row now supplies a computational strict-functor
+  code/decoder and a
+  strict-object/lax-arrow Gray internal-hom facade over the shared ambient
+  transfor tower. The next row derives the walking interval from the existing
+  `Join_cat(Terminal_cat,Terminal_cat)`, followed by one right-closed
+  `I tensor I` slice whose interchanger is
+  projected from the active whole laxity action. Mirror closure, full
+  biclosed/monoidal Crans--Gray structure, global strict-cut migration,
+  groupoidification, and book work remain excluded.
+
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization
   decision record. It provides the sorted `NType_cat(n)`

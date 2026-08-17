@@ -18,8 +18,9 @@ Circle/Integer plan or rewrite its validation history.
 
 Side-Task-Ledger: completed `ILGR-00`, `ILGR-LAX-1` through `ILGR-LAX-5`,
 `ILGR-CLOSE-1`, `ILGR-GRPD-1`, and `ILGR-TRUNC-1` through its focused
-computational-truncation/Circle-connectedness child plan; explicitly deferred
-`ILGR-GROUPIFY-1`, `ILGR-GRAY-1`, and `ILGR-BOOK-1` rows below
+computational-truncation/Circle-connectedness child plan; active
+`ILGR-GRAY-1` through its focused profiled-Gray child plan; explicitly
+deferred `ILGR-GROUPIFY-1` and `ILGR-BOOK-1` rows below
 
 Infinity-Codex-Origin: session
 `019ffe39-2eb9-7080-88e3-06b77d69b8d1`; principal design responses
@@ -147,7 +148,7 @@ concrete consumer needs one.
 | `ILGR-GRPD-1` | complete | Reopened with `path_map_func` as the concrete path-valued consumer in `REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md`. The rule-free child module checks the existing generic compositor as an invertible higher path, supplies propositional readable endpoints, and retains one whole next action without reopening the completed `ILGR-LAX-*` rows. |
 | `ILGR-TRUNC-1` | complete | Completed by `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md` and checkpointed at `998c60f`. Its classified reflector/action, Circle mere connectedness, contractibility of the set truncation, public surfaces, and exact 176-target health closeout are green. |
 | `ILGR-GROUPIFY-1` | deferred | Generic groupoidification reflector. The completed WalkingEnd-to-Circle comparison already serves the motivating example; reopen for a new universal-property consumer. |
-| `ILGR-GRAY-1` | deferred | Strict-object/lax-arrow profiles and Crans--Gray closure. Reopen after the shared laxity interface is active and a low-dimensional `I tensor I` consumer is selected. |
+| `ILGR-GRAY-1` | active | Reopened through `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`. Child row `GRAY-01` is complete: the computational strict-functor code/decoder and selected strict-object/lax-arrow `GrayHom_oplax` reuse the ambient transfor tower, with focused source/reviewer/central checks, exact `+18/0` warning classification, zero strict-LHS growth, and a 2,121-check/102-area strict catalog. `GRAY-02`, the curated `Join_cat(1,1)` walking interval, is next. The mirror closure and full Crans--Gray monoidal structure remain excluded. |
 | `ILGR-BOOK-1` | deferred | High-quality-prose book integration after the mathematical boundary selected for publication has stabilized. |
 
 ### Closure verdict
@@ -2106,6 +2107,28 @@ cell even when the cell term itself remains visible.  The profile facade is
 therefore sufficient for extraction and low-dimensional experiments, while a
 claim of faithful general lax semantics waits for those global cuts to be
 migrated to profile-selected rules.
+
+#### Focused-child correction — 2026-08-17
+
+The owner-position probes in
+`REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`
+supersede the preliminary Sigma presentation above for the computational
+slice. In univalent equality, an internal endpoint path and its
+`path_to_hom` image provide a canonical pseudo constraint, not judgmental
+strictness. The active child therefore uses a primitive
+`StrictFunctorData(B,C)` code sort and an opaque
+`strict_functor_carrier` decoder. The decoder head discriminates a narrow
+`fdapp1_int_cell` compositor-to-identity rule while all positive-dimensional
+Gray-hom structure remains the ambient `Transf_cat` tower.
+
+The selected identity code retains that decoder head and is related to
+`id_func` by one whole equality. A direct decoder beta and duplicate
+constructor-specific `fapp0`/`fapp1` rules were measured and rejected because
+they erase the discriminator or create competing reduction paths. An
+eventual extensional comparison between strict codes and ambient functors
+equipped with laws remains possible, but it is not the computational owner.
+The child plan is authoritative for the implementation details and exact
+warning evidence of this correction.
 
 ### 11. The exact Crans--Gray closed structure
 
