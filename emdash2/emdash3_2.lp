@@ -9249,6 +9249,52 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
   Π (ϵ : τ (Obj (Transf_cat F G))),
   τ (Hom B (fapp0 F Y) (fapp0 G Y));
 
+// Component at `Y` of a higher arrow between ordinary transfors.
+//
+// Surface/formula:
+//   Theta : eta -> eta'
+//   tapp0_hom_fapp0(Y,Theta) : eta[Y] -> eta'[Y].
+//
+// This is the generic stable observation owned by component evaluation. The
+// established Cat-valued displayed head remains its stable specialization.
+injective symbol tapp0_hom_fapp0
+  [A B : Cat]
+  [F G : τ (Functor A B)]
+  [eta eta' : τ (Transf F G)]
+  (Y : τ (Obj A))
+  (Theta : τ (Hom (Transf_cat F G) eta eta'))
+  : τ (Hom
+      (Hom_cat B (fapp0 F Y) (fapp0 G Y))
+      (tapp0_fapp0 Y eta)
+      (tapp0_fapp0 Y eta'));
+
+// Higher identity components are identities in the component hom category.
+// The rule contains no reconstructible compound in an inferred LHS slot; its
+// explicit variables are reused in the selected pointwise normal form.
+rule @tapp0_hom_fapp0
+      $A $B $F $G $eta $eta $Y
+      (@id _ $eta)
+  ↪ @id
+      (Hom_cat $B (@fapp0 $A $B $F $Y) (@fapp0 $A $B $G $Y))
+      (@tapp0_fapp0 $A $B $F $G $Y $eta);
+
+// Higher vertical composites project pointwise. This is evaluator beta for
+// the generic component functor, not a second composition owner. The inner
+// composition classifier is intentionally inferred; the remaining variables
+// are reused in the selected pointwise normal form.
+rule @tapp0_hom_fapp0
+      $A $B $F $G $eta $eta'' $Y
+      (@comp_fapp0
+        _
+        $eta $eta' $eta'' $Theta $Phi)
+  ↪ @comp_fapp0
+      (Hom_cat $B (@fapp0 $A $B $F $Y) (@fapp0 $A $B $G $Y))
+      (@tapp0_fapp0 $A $B $F $G $Y $eta)
+      (@tapp0_fapp0 $A $B $F $G $Y $eta')
+      (@tapp0_fapp0 $A $B $F $G $Y $eta'')
+      (@tapp0_hom_fapp0 $A $B $F $G $eta' $eta'' $Y $Theta)
+      (@tapp0_hom_fapp0 $A $B $F $G $eta $eta' $Y $Phi);
+
 /*
   Design note: `tapp0_fapp0` is a primitive projection head, not a
   definitional abbreviation. The head must remain
@@ -9260,6 +9306,15 @@ symbol tapp0_fapp0 : Π [A B : Cat], Π [F G : τ (Functor A B)],
 //   tapp0_func(Y)[epsilon] = epsilon[Y].
 rule fapp0 (@tapp0_func $A $B $F $G $Y) $ϵ
   ↪ @tapp0_fapp0 $A $B $F $G $Y $ϵ;
+
+// The capped hom action of component evaluation has one generic owner. The
+// outer categories and hom endpoints are inferred deliberately: the stable
+// `tapp0_func` head and explicit higher arrow are the semantic discriminators.
+rule @fapp1_fapp0
+      _ _
+      (@tapp0_func $A $B $F $G $Y)
+      $eta $eta' $Theta
+  ↪ @tapp0_hom_fapp0 $A $B $F $G $eta $eta' $Y $Theta;
 
 // Component of a postcomposition-telescope action. Mathematically,
 //   ((hom_A(W,F[-]))[alpha])[u] = u^*(F[alpha]).
@@ -14274,6 +14329,15 @@ symbol tdapp0_fapp0 [K : Cat] [E D : τ (Catd K)]
   (ϵ : τ (Transfd FF GG))
   : τ (Transf (Fibre_func FF z) (Fibre_func GG z));
 
+// Cat-valued specialization of the generic higher component. The direction
+// selects the established displayed head as the sole runtime normal form, so
+// existing nested consumers remain reachable without a duplicate theory.
+// The explicit slots bind the displayed data needed by the selected normal
+// form; no inferred slot contains a reconstructible compound.
+rule @tapp0_hom_fapp0
+      $K Cat_cat $E $D $FF $GG $z $ϵ
+  ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $ϵ;
+
 // Projection from displayed-transfor component functor to capped component.
 rule fapp0 (@tdapp0_func $K $E $D $FF $GG $z) $ϵ
   ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $ϵ;
@@ -14289,13 +14353,9 @@ rule @fapp1_func
       $FF $GG
   ↪ @tdapp0_func $K $E $D $FF $GG $z;
 
-// Direct capped projection joins the full hom-action route above.
-rule @fapp1_fapp0
-      _
-      _
-      (@tapp0_func $K Cat_cat $E $D $z)
-      $FF $GG $eta
-  ↪ @tdapp0_fapp0 $K $E $D $FF $GG $z $eta;
+// Direct capped projection is owned by the generic
+// `fapp1_fapp0(tapp0_func)` rule and then specializes to `tdapp0_fapp0`.
+// The whole `fapp1_func` route above remains available as `tdapp0_func`.
 
 /*
   Runtime component projection for the existing functorial Sigma-section

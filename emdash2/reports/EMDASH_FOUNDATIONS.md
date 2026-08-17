@@ -3094,11 +3094,26 @@ objects, while `Hom_cat(Pi_cat E,s,t)` projects to the corresponding
 comparison with `Functor_cat K A`. Runtime evaluation crosses the boundary
 through the semantic `piapp0_func` / `piapp0` interface. Its object action is
 terminal-source component evaluation; its hom action projects through the
-generic displayed-component functor `tdapp0_func` and caps at
+generic ordinary higher-component observation `tapp0_hom_fapp0`, specializes
+through the displayed-component functor `tdapp0_func`, and caps at
 `tdapp0_fapp0`, which is named at the section surface by `pi_hom_fapp0`.
 These Pi-facing eliminator names are definitions, not a second primitive
 calculus. In the constant-family case `piapp0 F k` computes to ordinary
 `fapp0 F k`.
+
+More generally, if `Theta : eta -> eta'` is a higher arrow between ordinary
+transfors, component evaluation has the stable observation
+
+```text
+tapp0_hom_fapp0(Y,Theta) : eta[Y] -> eta'[Y].
+```
+
+It is the capped hom action of the whole functor `tapp0_func(Y)`, preserves
+higher identity and vertical composition computationally, and specializes at
+`B := Cat_cat` to the existing `tdapp0_fapp0` head. Thus the Cat-valued
+displayed notation is one selected runtime normal form of the generic
+component calculus, not a parallel theory. The whole `fapp1_func` route still
+lands in `tdapp0_func`, retaining its next action.
 
 The capped projection remains coherent with higher ordinary naturality. If a
 generic action component has already projected from `fapp1_fapp0(tapp0_func)`

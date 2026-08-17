@@ -1057,19 +1057,15 @@ record.
 
 ## Current Plans
 
-- `REPORT_EMDASH_V3_2_GROUPOIDAL_CLOSURE_CIRCLE_AND_INTEGER_PLAN_2026-08-14.md`:
-  completed implementation plan and decision record for the bounded
-  computational HoTT vertical slice. It
-  separates intrinsic `Grpd` computation, named `Path_cat` preservation, and
-  groupoidification. The implemented slice includes the integer line from
-  telescope localization, the Circle HIT and `Omega(S1) ~= Integer`, the
-  WalkingEnd-to-Circle nonnegative comparison, homwise Path-product
-  preservation, both sequential product-transport factorizations, their
-  coherence diamond, and structured/primitive `J` agreement. Generic
-  groupoidification, coherent whole inverse-functor assembly, and Gray tensor
-  infrastructure remain explicitly consumer-gated. Its dedicated
-  branch/worktree baseline and proportional-validation policy are recorded in
-  the plan.
+- `REPORT_EMDASH_V3_2_INTERNAL_LAXITY_AND_GROUPOIDAL_REALIZATION_CONTINUATION_PLAN_2026-08-17.md`:
+  active living continuation plan promoted from the post-Circle research
+  synthesis. Its selected tranche exposes lax functoriality and naturality
+  witnesses through whole, iterable internal-action owners, beginning with
+  the generic higher-component observation and its existing Cat-valued
+  specialization. The groupoidal/path realization is retained as a deferred
+  consumer rather than a prerequisite. Computational truncation, generic
+  groupoidification, strict-object/lax-arrow Gray profiles, and the next book
+  update have explicit consumer-led reopening conditions.
 - `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`:
   active living Lambdapi-first standard-library architecture for Cat-valued
   presheaves, ordinary versus higher sieves, coverage/topology/modality
@@ -1625,6 +1621,18 @@ record.
 
 These reports remain active references for exact decisions and probe evidence,
 but their promoted phases are not open implementation plans.
+
+- `REPORT_EMDASH_V3_2_GROUPOIDAL_CLOSURE_CIRCLE_AND_INTEGER_PLAN_2026-08-14.md`:
+  completed implementation plan and decision record for the bounded
+  computational HoTT vertical slice. It separates intrinsic `Grpd`
+  computation, named `Path_cat` preservation, and groupoidification. The
+  implemented slice includes the integer line from telescope localization,
+  the Circle HIT and `Omega(S1) ~= Integer`, the WalkingEnd-to-Circle
+  nonnegative comparison, homwise Path-product preservation, both sequential
+  product-transport factorizations, their coherence diamond, and
+  structured/primitive `J` agreement. Generic groupoidification, coherent
+  whole inverse-functor assembly, and Gray tensor infrastructure remain
+  consumer-gated in the active continuation plan.
 
 - `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`:
   completed selected-MVP overlay for native equality-valued fixed-arrow

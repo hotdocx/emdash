@@ -20,6 +20,7 @@ INFERRED_SLOTS = {
     "fapp1_func": (0, 1, 3, 4),
     "fapp1_fapp0": (0, 1, 3, 4),
     "tapp0_fapp0": (0, 1, 2, 3),
+    "tapp0_hom_fapp0": (0, 1, 2, 3, 4, 5),
     "tapp1_func": (0, 1, 2, 3, 4, 5),
     "tapp1_fapp0": (0, 1, 2, 3, 4, 5),
     "tdapp0_fapp0": (0, 1, 2, 3, 4),

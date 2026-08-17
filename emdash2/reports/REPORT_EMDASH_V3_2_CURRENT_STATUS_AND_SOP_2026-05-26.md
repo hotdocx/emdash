@@ -3972,6 +3972,23 @@ This pointwise expansion coexists with the generic strict-functor cut
 `F[g] o F[f] -> F[g o f]` because the rules operate at different heads and
 must be tested as a joining projection diamond.
 
+The generic higher-component rung is now explicit:
+
+```text
+Theta : eta -> eta'
+tapp0_hom_fapp0(Y,Theta) : eta[Y] -> eta'[Y].
+```
+
+It is the capped hom action of `tapp0_func(Y)`, with computational identity
+and vertical-composition projections. Its `Cat_cat` specialization reduces to
+the pre-existing `tdapp0_fapp0` stable head; the former direct Cat-only capped
+rule is retired, while `fapp1_func(tapp0_func(Y))` still exposes the whole
+`tdapp0_func(Y)` action. The owner-position diagnostic delta is exactly
+`+30` critical pairs (`25` composition, `3` identity, and `2`
+specialization/evaluator interactions), with no replaceable-LHS growth or
+subject-reduction failure. Treat this classified delta as projection evidence,
+not as permission to add reverse joins mechanically.
+
 A specialized projection-order bridge is exceptional but legitimate when:
 
 1. a stable projection erases the literal generic-owner pattern;

@@ -15285,6 +15285,56 @@ assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   fapp0 (@tdapp0_func K E D FF GG z) ϵ
     ≡ @tdapp0_fapp0 K E D FF GG z ϵ;
 
+// Generic component evaluation owns the capped higher component before any
+// Cat-valued specialization. This is the reusable boundary needed by whole
+// laxity projections.
+assert [A B : Cat] (F G : τ (Functor A B))
+  (eta eta' : τ (Transf F G))
+  (Theta : τ (Hom (Transf_cat F G) eta eta'))
+  (Y : τ (Obj A)) ⊢
+  @fapp1_fapp0
+      (Transf_cat F G)
+      (Hom_cat B (fapp0 F Y) (fapp0 G Y))
+      (@tapp0_func A B F G Y)
+      eta eta' Theta
+  ≡ @tapp0_hom_fapp0 A B F G eta eta' Y Theta;
+
+// Identity and vertical composition project through that same generic owner.
+assert [A B : Cat] (F G : τ (Functor A B))
+  (eta : τ (Transf F G))
+  (Y : τ (Obj A)) ⊢
+  @tapp0_hom_fapp0 A B F G eta eta Y
+      (@id (Transf_cat F G) eta)
+  ≡ @id
+      (Hom_cat B (fapp0 F Y) (fapp0 G Y))
+      (@tapp0_fapp0 A B F G Y eta);
+
+assert [A B : Cat] (F G : τ (Functor A B))
+  (eta eta' eta'' : τ (Transf F G))
+  (Theta : τ (Hom (Transf_cat F G) eta' eta''))
+  (Phi : τ (Hom (Transf_cat F G) eta eta'))
+  (Y : τ (Obj A)) ⊢
+  @tapp0_hom_fapp0 A B F G eta eta'' Y
+      (@comp_fapp0
+        (Transf_cat F G)
+        eta eta' eta'' Theta Phi)
+  ≡ @comp_fapp0
+      (Hom_cat B (fapp0 F Y) (fapp0 G Y))
+      (@tapp0_fapp0 A B F G Y eta)
+      (@tapp0_fapp0 A B F G Y eta')
+      (@tapp0_fapp0 A B F G Y eta'')
+      (@tapp0_hom_fapp0 A B F G eta' eta'' Y Theta)
+      (@tapp0_hom_fapp0 A B F G eta eta' Y Phi);
+
+// Cat-valued component evaluation preserves the established displayed head
+// as its single runtime normal form.
+assert [K : Cat] (E D : τ (Catd K))
+  (FF GG : τ (Functord E D))
+  (eta : τ (Transfd FF GG))
+  (z : τ (Obj K)) ⊢
+  @tapp0_hom_fapp0 K Cat_cat E D FF GG z eta
+    ≡ @tdapp0_fapp0 K E D FF GG z eta;
+
 // Generic displayed horizontal action projects to the existing ordinary
 // horizontal-action owner in each fibre. This one assertion covers arbitrary
 // paired cells; fixed pre/postwhiskering are its identity-slot instances.

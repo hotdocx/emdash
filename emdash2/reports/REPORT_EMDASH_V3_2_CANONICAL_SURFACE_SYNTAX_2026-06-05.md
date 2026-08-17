@@ -352,7 +352,9 @@ piapp1_func(s,x,y)[f]  = piapp1_fapp0(s,f) = s[f]
 ```
 
 Their object, hom, and next-hom computations project through `tapp0_func`,
-`tdapp0_func` / `tdapp0_fapp0`, and the generic displayed internal-hom action.
+its generic higher-component observation `tapp0_hom_fapp0`, the Cat-valued
+`tdapp0_func` / `tdapp0_fapp0` specialization, and the generic displayed
+internal-hom action.
 Do not read these names as additional primitive type formers merely because
 `Pi_cat` itself is a stable primitive category facade.
 
@@ -372,6 +374,13 @@ strict-functor composition owner: generic action cuts still contract as
 `F[g] ∘ F[f] -> F[g ∘ f]`, while stable component projections expose a
 composite pointwise. The two levels join through the documented
 component-evaluation projection ladder.
+
+At the ordinary surface, write a higher component as
+`Theta[Y] : eta[Y] -> eta'[Y]`; its stable kernel owner is
+`tapp0_hom_fapp0(Y,Theta)`. Do not introduce a second Pi-specific or
+Cat-specific spelling. When the target is `Cat_cat`, that owner computes to
+the established displayed form `tdapp0_fapp0(Y,Theta)` while the whole hom
+action remains `tdapp0_func(Y)`.
 
 Do not make an Agda-style parenthesized binder-arrow form the primary section
 syntax. The `Π` spelling should visibly signal the terminal-shape section
