@@ -4488,9 +4488,11 @@ The following remain explicit future work rather than hidden assumptions:
   its transparent expression and the general
   `sigma_pullback_total_func(F,D)` base-change totalization are active;
 - semantic uncurry action on arbitrary transfors;
-- a functor varying higher arrows between ordinary transfors and the selected
-  next recursive action beyond the active whole post/left and pre/right
-  surfaces;
+- a named public facade varying higher arrows between ordinary transfors, and
+  a complete recursive simplicial/omega interface beyond the active whole
+  post/left and pre/right surfaces. The existing second `homd_`/Sigma internal
+  action has already passed one current-source, no-associativity tetrahedral
+  probe, so that validated generic action is not itself an open gap;
 - the arrow action of `sigma_intro_tapp0_func`;
 - off-diagonal `tapp1_*` projections for `sigma_map_transf` beyond its current
   point-component computation;

@@ -3486,6 +3486,19 @@ the computational types. Existing whole strict naturality paths compare those
 owners with the readable raw-composition presentation, so no duplicate capped
 pre/post unification rule is installed.
 
+The same ownership remains available one dimension higher. Repeating the
+dependent-hom/Sigma construction represents a base associator together with a
+dependent cell above it. In a focused kernel copy with the global composition
+associativity unifier removed, the explicit `comp_assoc` path decomposes into
+that base comparison and a `PathOver`; ordinary path induction identifies its
+equality transport with categorical transport along the inverse
+`path_to_hom`. Applying the existing recursive internal action then preserves
+the base associator and computes the dependent tetrahedral filler through its
+next `fdapp1_int_hom_fapp0` projection. Thus the first nontrivial recursive
+coherence level is already an action of the generic internal tower, not an
+independently postulated three-arrow law. This validation does not install a
+new rule or claim a complete simplicial or omega-coherence interface.
+
 This boundary retains the whole contravariant source-variable action. A
 separate functor varying a higher arrow between ordinary transfors is still
 consumer-gated; this first ordinary consumer does not require an

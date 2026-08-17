@@ -81,8 +81,16 @@ active-import, central-diagnostic, example, and negative endpoint probes pass;
 the warning inventory remains `1112/159` and strict LHS audit remains zero.
 The generated catalog is current at 2,114 checks across 101 mapped areas.
 The bounded implementation is locally checkpointed at `d2cb4aa`.
-`ILGR-LAX-5` is now the first dependency-ready row. Health and broader closure
-remain assigned to `ILGR-CLOSE-1`. No push, merge, publication, release,
+`ILGR-LAX-5` is complete without a new active-kernel primitive or rule. A
+current-source-derived full-kernel probe disables only the global composition
+associativity unifier while retaining the explicit `comp_assoc` path; the
+existing second `homd_`/Sigma object and recursive internal action then compute
+the base associator and its dependent tetrahedral filler. The quiet and
+warning-enabled current-source probes pass with the unchanged `1112/159`
+warning inventory. This validates the selected next action without promoting
+a capped three-arrow facade or claiming a complete simplicial object.
+`ILGR-CLOSE-1` is now the first dependency-ready row. No push, merge,
+publication, release,
 history rewrite, worktree removal, truncation, generic groupoidification,
 Gray tensor, or book rewrite is authorized by this plan.
 
@@ -118,8 +126,8 @@ concrete consumer needs one.
 | `ILGR-LAX-2` | complete | The late whole comma/identity-section projection recovers the displayed laxity component and retained fibre-arrow action from `fdapp1_int_transfd`; positive/negative consumers, warning neutrality, LHS audit, current transparent `piapp*` sufficiency, and checkpoint `dc89926` are recorded. |
 | `ILGR-LAX-3` | complete | The arbitrary and identity target-internalized actions are transparent opposite specializations; their fixed-target projections compute to the shared off-diagonal hom action, and the pre/right witness is extracted through `functord_laxity_transf` / `fdapp1_int_cell`. Positive/negative consumers, warning neutrality, zero LHS growth, and checkpoint `8333848` are recorded. |
 | `ILGR-LAX-4` | complete | The transparent whole/component post-left and pre-right surfaces specialize `functord_laxity_transf`; `fapp1_compositor` is their identity-transfor specialization. Direct assertions, one ordinary/displayed example, wrong-arrow rejection, warning neutrality, zero LHS growth, and checkpoint `d2cb4aa` are recorded. |
-| `ILGR-LAX-5` | active | Retain one next internal action and inspect its expected recursively assembled boundary. This is an iteration test, not a complete simplicial-object, pentagon, nerve, Segal, or associahedral project. |
-| `ILGR-CLOSE-1` | pending | Synchronize source/example registration, focused diagnostics, Foundations/SOP/canonical syntax, catalog/health evidence, and an authorized local checkpoint. Avoid long aggregates unless their absence would block integration. |
+| `ILGR-LAX-5` | complete | A current-source-derived no-associativity probe retains the explicit base associator and computes its dependent filler through the existing second `homd_`/Sigma internal action. The quiet and warning-enabled runs pass at the unchanged `1112/159`; no capped three-arrow primitive, runtime rule, unifier, or complete-simplicial claim was added. |
+| `ILGR-CLOSE-1` | active | Synchronize source/example registration, focused diagnostics, Foundations/SOP/canonical syntax, catalog/health evidence, and an authorized local checkpoint. Avoid long aggregates unless their absence would block integration. |
 | `ILGR-GRPD-1` | deferred | Groupoidal realization of the directed simplex-shaped calculus. Reopen only after the generic laxity owner has a concrete path-valued consumer. |
 | `ILGR-TRUNC-1` | deferred | Computational truncation classifier/HIT design. Reopen for a selected HoTT consumer, not to complete an inventory abstractly. |
 | `ILGR-GROUPIFY-1` | deferred | Generic groupoidification reflector. The completed WalkingEnd-to-Circle comparison already serves the motivating example; reopen for a new universal-property consumer. |
@@ -1720,6 +1728,44 @@ The promotion boundary should remain narrow:
 The finite probe does not by itself generate the complete omega-coherence
 tower, but it now validates the recursive step at the first genuinely
 nontrivial level without hiding the weak base associativity data.
+
+### 6F. Current-source revalidation and promotion decision (2026-08-17)
+
+The original Section 6E chain was rerun after `ILGR-LAX-4` from a fresh copy
+of the current active kernel. The comparison copy differs from
+`emdash3_2.lp` only by removing the global composition-associativity unifier
+and the transparent `eq_refl` body of `comp_assoc`; the same `comp_assoc`
+symbol remains as opaque explicit mathematical data. This rules out both a
+stale copied-kernel dependency and accidental use of proof-time
+reassociation.
+
+The fresh evidence is:
+
+```text
+logs/probes/internal_laxity_no_assoc_full-20260817-102208.log
+logs/probes/homd_tetrahedron_assoc_path_components-20260817-102221.log
+logs/probes/internal_laxity_no_assoc_full-20260817-102240.log
+logs/probes/homd_tetrahedron_assoc_path_components-20260817-102240.log
+```
+
+The quiet baseline and completed probe pass. Their warning-enabled runs each
+report exactly 1,112 inherited critical pairs and 159 replaceable LHS
+variables, for a zero delta against the active post-`ILGR-LAX-4` warning
+inventory.
+
+This is a positive implementation result with a zero-symbol promotion. The
+existing generic owners already retain and compute the selected next action:
+the output preserves the explicit base `kappa_assoc`, and its dependent
+component is the next `fdapp1_int_hom_fapp0` projection. A named tetrahedron
+constant, a capped pre/post join, or a generic path-transport bridge would
+duplicate or prematurely freeze that computation. The latter two interfaces
+remain eligible only when a second independent consumer establishes a stable
+public boundary.
+
+Accordingly, `ILGR-LAX-5` is complete. Its acceptance boundary is the fresh
+current-source, no-associativity validation of one genuinely recursive level;
+it is not a claim that the kernel now exposes a complete simplicial object,
+nerve, Segal structure, pentagon API, or omega-coherence generator.
 
 ### 7. Strict and lax may coexist in the bounded prototype
 
