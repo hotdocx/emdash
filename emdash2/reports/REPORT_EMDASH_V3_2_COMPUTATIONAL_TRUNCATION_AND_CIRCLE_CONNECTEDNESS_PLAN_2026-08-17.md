@@ -46,6 +46,10 @@ Branch-And-Worktree: `goal/computational-truncation-v3.2` in
 Baseline: completed path-realized pseudo-laxity checkpoint `2fe1e54`,
 descended from `main` baseline `86042df`
 
+Checkpoint: bounded semantic implementation `998c60f26adacee2b2211353e3e60e0f84b529aa`;
+this ledger-only follow-up records that checkpoint without changing its
+validated mathematical or generated-health content
+
 ## 1. Objective
 
 Implement the first actual homotopy-truncation reflector in the computational
@@ -429,8 +433,9 @@ diff checks pass. Generic groupoidification, Gray tensor, classical
 hub-and-spoke comparison, arbitrary quotient/HIT schemas, scheme integration,
 and book/article work remain separate consumer-gated goals. No checkpoint
 commit had been authorized at semantic closure. The user subsequently
-authorized a local checkpoint; its exact commit is recorded by the ledger
-follow-up after this bounded implementation commit. No push, merge,
+authorized a local checkpoint. The bounded implementation is checkpointed at
+`998c60f26adacee2b2211353e3e60e0f84b529aa`; this ledger-only follow-up records
+that fact. No push, merge,
 publication, release, history rewrite, branch deletion, or worktree removal
 was performed.
 
