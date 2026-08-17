@@ -16,8 +16,8 @@ authority for work after the completed Circle/Integer tranche. The notebook
 remains recovery evidence. This plan does **not** supersede the completed
 Circle/Integer plan or rewrite its validation history.
 
-Side-Task-Ledger: `ILGR-00`, `ILGR-LAX-1` through `ILGR-LAX-5`,
-`ILGR-CLOSE-1`, and the explicitly deferred `ILGR-GRPD-1`, `ILGR-TRUNC-1`,
+Side-Task-Ledger: completed `ILGR-00`, `ILGR-LAX-1` through `ILGR-LAX-5`,
+`ILGR-CLOSE-1`, and `ILGR-GRPD-1`; explicitly deferred `ILGR-TRUNC-1`,
 `ILGR-GROUPIFY-1`, `ILGR-GRAY-1`, and `ILGR-BOOK-1` rows below
 
 Infinity-Codex-Origin: session
@@ -94,6 +94,12 @@ bounded evidence and decision are locally checkpointed at `ad5ee7c`.
 checkpointed at `f1d1944`. No push, merge, publication, release,
 history rewrite, worktree removal, truncation, generic groupoidification,
 Gray tensor, or book rewrite is authorized by this plan.
+The subsequently promoted `ILGR-GRPD-1` consumer is now implemented by the
+rule-free `emdash3_2_path_pseudo_laxity.lp` extension and its focused reviewer.
+It realizes the existing `path_map_func` compositor as an invertible equality
+between paths, relates its formal endpoints propositionally to the usual
+`eq_ap`/`eq_trans` formula, and retains one next-hom functor. Its detailed
+evidence and closure status are owned by the focused child plan.
 
 ## Selected Continuation Objective
 
@@ -129,7 +135,7 @@ concrete consumer needs one.
 | `ILGR-LAX-4` | complete | The transparent whole/component post-left and pre-right surfaces specialize `functord_laxity_transf`; `fapp1_compositor` is their identity-transfor specialization. Direct assertions, one ordinary/displayed example, wrong-arrow rejection, warning neutrality, zero LHS growth, and checkpoint `d2cb4aa` are recorded. |
 | `ILGR-LAX-5` | complete | A current-source-derived no-associativity probe retains the explicit base associator and computes its dependent filler through the existing second `homd_`/Sigma internal action. The quiet and warning-enabled runs pass at the unchanged `1112/159`; no capped three-arrow primitive, runtime rule, unifier, or complete-simplicial claim was added. Checkpoint: `ad5ee7c`. |
 | `ILGR-CLOSE-1` | complete | Source/example ownership, focused diagnostics, Foundations/SOP/canonical syntax, the 2,114-check strict catalog, and current 170-target health evidence are synchronized. Lightweight TOC/reference/header/LHS/diff gates pass. The fresh health run was the sole necessary aggregate; redundant `make check`, `make examples`, `make ci`, and root aggregates were not rerun. Checkpoint: `f1d1944`. |
-| `ILGR-GRPD-1` | promoted | Reopened with `path_map_func` as the concrete path-valued consumer in `REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md`. That bounded plan tests the existing generic compositor as an invertible higher path; it does not reopen the completed `ILGR-LAX-*` rows. |
+| `ILGR-GRPD-1` | complete | Reopened with `path_map_func` as the concrete path-valued consumer in `REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md`. The rule-free child module checks the existing generic compositor as an invertible higher path, supplies propositional readable endpoints, and retains one whole next action without reopening the completed `ILGR-LAX-*` rows. |
 | `ILGR-TRUNC-1` | deferred | Computational truncation classifier/HIT design. Reopen for a selected HoTT consumer, not to complete an inventory abstractly. |
 | `ILGR-GROUPIFY-1` | deferred | Generic groupoidification reflector. The completed WalkingEnd-to-Circle comparison already serves the motivating example; reopen for a new universal-property consumer. |
 | `ILGR-GRAY-1` | deferred | Strict-object/lax-arrow profiles and Crans--Gray closure. Reopen after the shared laxity interface is active and a low-dimensional `I tensor I` consumer is selected. |

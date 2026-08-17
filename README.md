@@ -22,7 +22,10 @@ representability, locality, and construction hypotheses explicit.
 Its groupoidal layer now also contains an opaque Circle HIT and a checked
 encode--decode equivalence between its based loop space and the integers,
 together with the concrete WalkingEnd-to-Circle nonnegative comparison and a
-coherent product-transport closure theorem.
+coherent product-transport closure theorem. The same generic lax compositor,
+when realized in a path category, is now checked as an invertible equality
+between paths with the usual `ap`/path-composition presentation and a retained
+higher action.
 
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim

@@ -1057,16 +1057,6 @@ record.
 
 ## Current Plans
 
-- `REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md`:
-  active bounded continuation of the completed generic internal-laxity work.
-  It selects `path_map_func` as the first concrete path-valued consumer,
-  checks that the shared `fapp1_compositor` becomes an equality between paths
-  with canonical reverse by `eq_sym`, compares its formal endpoints with the
-  existing `eq_ap`/`eq_trans` presentation at their actual computational
-  strength, and retains one higher action. It does not introduce a duplicate
-  pseudofunctor hierarchy or reopen complete simplicial, Gray, truncation,
-  groupoidification, global strictness-migration, or book work.
-
 - `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`:
   active living Lambdapi-first standard-library architecture for Cat-valued
   presheaves, ordinary versus higher sieves, coverage/topology/modality
@@ -1623,6 +1613,18 @@ record.
 These reports remain active references for exact decisions and probe evidence,
 but their promoted phases are not open implementation plans.
 
+- `REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md`:
+  completed bounded continuation of the generic internal-laxity work. The
+  rule-free `emdash3_2_path_pseudo_laxity.lp` extension realizes the shared
+  `fapp1_compositor` of `path_map_func` as an equality between paths with
+  canonical `eq_sym` reverse, gives propositional `eq_ap`/`eq_trans` endpoint
+  views without a second runtime normal form, and retains one whole next-hom
+  action. Its focused reviewer supplies positive, negative, non-conversion,
+  and iteration evidence. Generated health is green for 74 core/extensions
+  and 98 reviewers; no pseudofunctor hierarchy, rule, unifier, complete
+  simplicial claim, Gray/truncation/groupoidification work, or book update was
+  introduced.
+
 - `REPORT_EMDASH_V3_2_INTERNAL_LAXITY_AND_GROUPOIDAL_REALIZATION_CONTINUATION_PLAN_2026-08-17.md`:
   completed implementation plan and decision record for the bounded internal-
   laxity continuation. It promotes the generic higher-component observation,
@@ -1634,7 +1636,7 @@ but their promoted phases are not open implementation plans.
   adding a capped three-arrow primitive or claiming a complete simplicial
   object. The closure records 2,114 classified checks, unchanged `1112/159`
   warning evidence, and current green health for all 170 maintained targets.
-  Its groupoidal-realization row is now promoted through the focused
+  Its groupoidal-realization row is now completed through the focused
   `REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md` with
   `path_map_func` as the concrete consumer. Computational truncation, generic
   groupoidification, Gray profiles, and the next book integration retain

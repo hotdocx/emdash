@@ -3486,6 +3486,65 @@ the computational types. Existing whole strict naturality paths compare those
 owners with the readable raw-composition presentation, so no duplicate capped
 pre/post unification rule is installed.
 
+### Path Realization: Laxity Becomes Pseudo
+
+The first groupoidal consumer applies the same compositor to the functor
+
+```text
+path_map_func(h) : Path(A) -> Path(B)
+```
+
+induced by an ordinary map `h : A -> B`. For paths `p : x = y` and
+`q : y = z`, the generic cell now lives in a hom-category which is itself a
+path category:
+
+```text
+path_map_compositor_path(h,q,p)
+  : formal_source(h,q,p) = formal_target(h,q,p).
+```
+
+It is therefore invertible for structural reasons: its selected reverse is
+simply `eq_sym(path_map_compositor_path(h,q,p))`. No second pseudofunctor
+classifier or inverse-cell record is required. This realizes the intended
+profile distinction within one generic action:
+
+```text
+directed target    -> potentially noninvertible laxity cell
+Path target        -> invertible pseudo cell
+selected strictness -> identity/reflexivity specialization.
+```
+
+The formal endpoints deliberately retain represented postcomposition as their
+runtime presentation. Their conventional HoTT readings are
+
+```text
+eq_trans(eq_ap(h,p), eq_ap(h,q))
+eq_ap(h, eq_trans(p,q)).
+```
+
+The comparison is propositional. First, the existing generic proof-time
+comparison between `hom_postcomp_fapp0` and shared `comp_fapp0` is captured as
+typed equality while both rigid heads remain visible. Then
+`path_comp_eq_trans` supplies the J-derived comparison with `eq_trans`.
+Consequently `path_map_compositor_readable` has exactly the familiar
+functoriality-of-path-composition type without installing a second runtime
+normal form.
+
+The construction remains whole rather than capped at `(q,p)`.
+`path_map_compositor_transf(h,x,q)` is a transformation in the first path;
+its off-diagonal action
+
+```text
+path_map_compositor_higher_func(h,q,p0,p1)
+  : Path(p0 = p1)
+      -> Path(formal_source(h,q,p0) = formal_target(h,q,p1))
+```
+
+is again a functor. Generic higher action can therefore continue from this
+owner. This bounded result demonstrates recursive availability; it does not
+claim a complete simplicial object, pentagon presentation, or all-dimensional
+coherence theorem.
+
 The same ownership remains available one dimension higher. Repeating the
 dependent-hom/Sigma construction represents a base associator together with a
 dependent cell above it. In a focused kernel copy with the global composition

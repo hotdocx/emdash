@@ -412,6 +412,14 @@ detailed probe evidence.
   diamond is coherent, and existing structured transport and `PathOut`
   induction agree with the same primitive right-`J` transport. No category-
   head rewrite, second `J`, proof-time unifier, or Gray tensor is introduced.
+- `emdash3_2_path_pseudo_laxity.lp`: transparent rule-free Path realization
+  of the generic normal-lax compositor. For `path_map_func(h)`, the existing
+  `fapp1_compositor` is an equality between paths and `eq_sym` supplies its
+  reverse. Its formal represented-action endpoints compare propositionally
+  with the usual `eq_ap`/`eq_trans` formula, and its whole transformation
+  retains a next-hom functor between paths-between-paths. The module adds no
+  Path-specific runtime fold, proof-time rule, pseudofunctor classifier,
+  inverse record, or complete coherence claim.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
@@ -3187,6 +3195,15 @@ Active equality/equivalence staging includes:
   `path_sym_agrees_eq_sym`, `path_sym_invol`, and
   `path_sym_core_incl_agreement` provide propositional coherence without open
   runtime folds;
+- the first Path-realized pseudo-laxity consumer: the formal whole source and
+  target remain the generic `functord_transport_*_func` owners,
+  `path_map_compositor_path` is the existing `fapp1_compositor` decoded as an
+  equality between paths, and `path_map_compositor_inverse` is its `eq_sym`.
+  A named two-step propositional comparison—generic represented
+  postcomposition to shared composition, then `path_comp_eq_trans`—gives the
+  readable `eq_ap`/`eq_trans` endpoints without making them runtime-convertible.
+  `path_map_compositor_higher_func` retains one off-diagonal next-hom action as
+  a whole functor and therefore leaves generic higher iteration available;
 - `GrpdUnivalence` and decoder-based groupoid-univalence capabilities, with
   named decoder round trips, a canonical contractible-fibre capability
   selecting `grpd_equiv_path`, a propositional decoder transport square, and

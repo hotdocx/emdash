@@ -1159,6 +1159,30 @@ compositor(F,g,f) : F[g] o F[f] ==> F[g o f]
 
 whose transparent kernel owner is `fapp1_compositor`.
 
+For a raw map `h : A -> B` between groupoids and paths `p : x = y`,
+`q : y = z`, the Path-realized specialization may be written
+
+```text
+compositor_Path(h,q,p)
+  : ap(h,p) . ap(h,q) = ap(h,p . q)
+
+compositor_Path(h,q,p)^-1
+  : ap(h,p . q) = ap(h,p) . ap(h,q).
+```
+
+The public owners are `path_map_compositor_readable` and
+`path_map_compositor_readable_inverse`. Here `.` denotes the ordered
+`eq_trans` used by the displayed formula. Internally the generic compositor
+retains `functord_transport_*_func` / represented-postcomposition endpoints;
+`path_map_compositor_lhs_agrees_readable` and
+`path_map_compositor_rhs_agrees_readable` compare them propositionally. This
+notation must not be read as a runtime rewrite to `eq_trans`.
+
+The whole owner `path_map_compositor_transf(h,x,q)` remains natural in `p`.
+Its retained off-diagonal action is
+`path_map_compositor_higher_func(h,q,p0,p1)`; the notation asserts no complete
+simplicial or all-coherence interface.
+
 ## Displayed Sibling Product Notation
 
 For Cat-valued displayed families `B,C : Catd K`, write:

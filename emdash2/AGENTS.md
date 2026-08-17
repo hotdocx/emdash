@@ -173,6 +173,9 @@ the concrete directed WalkingEnd-to-Circle comparison is
 `emdash3_2_walking_circle_completion.lp`;
 the rule-free Path-product preservation and coherent product-transport
 extension is `emdash3_2_groupoidal_closure.lp`;
+the rule-free Path realization of the generic functor compositor, its
+canonical inverse, readable `eq_ap`/`eq_trans` comparison, and retained
+next-hom action is `emdash3_2_path_pseudo_laxity.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
 
 ## Authorities
@@ -686,14 +689,20 @@ Use the following order:
     equivalences, direct versus both sequential transport factorizations, the
     coherence diamond, and agreement of structured transport/induction with
     the one primitive right-`J` operation;
-73. `emdash3_2_checks.lp` for executable regression statements;
-74. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+73. `emdash3_2_path_pseudo_laxity.lp` for the rule-free specialization of the
+    generic `fapp1_compositor` to `path_map_func`. The resulting cell is an
+    equality between paths, has its canonical `eq_sym` reverse, compares
+    propositionally with the readable `eq_ap`/`eq_trans` endpoints, and
+    retains one whole next-hom action. It adds no pseudofunctor classifier,
+    rule, unifier, inverse record, or all-coherence claim;
+74. `emdash3_2_checks.lp` for executable regression statements;
+75. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-75. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-76. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+76. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+77. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-77. `reports/INDEX.md` for task-specific plans and decision records.
-78. `book/book.json` and `book/evidence.json` for book source
+78. `reports/INDEX.md` for task-specific plans and decision records.
+79. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

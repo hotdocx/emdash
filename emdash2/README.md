@@ -198,8 +198,11 @@ refresh generated catalog/health artifacts only through their owners.
 The current groupoidal vertical slice includes a successor-localized Integer,
 an opaque Circle HIT with checked `Hom(Circle,Circle) ≃ Integer`
 encode--decode, the nonnegative WalkingEnd-to-Circle comparison, and coherent
-product-path transport in both coordinate orders. The source modules and
-reviewer examples are listed in the August 14 groupoidal-closure plan.
+product-path transport in both coordinate orders. It now also realizes the
+generic `path_map_func` compositor as an invertible equality between paths,
+with its familiar `eq_ap`/`eq_trans` reading and one retained higher action.
+The source modules and reviewer examples are listed in the August 14 and
+August 17 groupoidal plans.
 
 ## Functorial Type Theory book
 
