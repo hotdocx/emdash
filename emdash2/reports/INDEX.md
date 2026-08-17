@@ -1057,6 +1057,16 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md`:
+  active bounded continuation of the completed generic internal-laxity work.
+  It selects `path_map_func` as the first concrete path-valued consumer,
+  checks that the shared `fapp1_compositor` becomes an equality between paths
+  with canonical reverse by `eq_sym`, compares its formal endpoints with the
+  existing `eq_ap`/`eq_trans` presentation at their actual computational
+  strength, and retains one higher action. It does not introduce a duplicate
+  pseudofunctor hierarchy or reopen complete simplicial, Gray, truncation,
+  groupoidification, global strictness-migration, or book work.
+
 - `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`:
   active living Lambdapi-first standard-library architecture for Cat-valued
   presheaves, ordinary versus higher sieves, coverage/topology/modality
@@ -1624,9 +1634,11 @@ but their promoted phases are not open implementation plans.
   adding a capped three-arrow primitive or claiming a complete simplicial
   object. The closure records 2,114 classified checks, unchanged `1112/159`
   warning evidence, and current green health for all 170 maintained targets.
-  Groupoidal realization, computational truncation, generic groupoidification,
-  Gray profiles, and the next book integration retain explicit consumer-led
-  reopening conditions.
+  Its groupoidal-realization row is now promoted through the focused
+  `REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md` with
+  `path_map_func` as the concrete consumer. Computational truncation, generic
+  groupoidification, Gray profiles, and the next book integration retain
+  explicit consumer-led reopening conditions.
 
 - `REPORT_EMDASH_V3_2_GROUPOIDAL_CLOSURE_CIRCLE_AND_INTEGER_PLAN_2026-08-14.md`:
   completed implementation plan and decision record for the bounded

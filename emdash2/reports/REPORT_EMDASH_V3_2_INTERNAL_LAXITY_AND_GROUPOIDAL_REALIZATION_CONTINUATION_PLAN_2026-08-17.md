@@ -129,7 +129,7 @@ concrete consumer needs one.
 | `ILGR-LAX-4` | complete | The transparent whole/component post-left and pre-right surfaces specialize `functord_laxity_transf`; `fapp1_compositor` is their identity-transfor specialization. Direct assertions, one ordinary/displayed example, wrong-arrow rejection, warning neutrality, zero LHS growth, and checkpoint `d2cb4aa` are recorded. |
 | `ILGR-LAX-5` | complete | A current-source-derived no-associativity probe retains the explicit base associator and computes its dependent filler through the existing second `homd_`/Sigma internal action. The quiet and warning-enabled runs pass at the unchanged `1112/159`; no capped three-arrow primitive, runtime rule, unifier, or complete-simplicial claim was added. Checkpoint: `ad5ee7c`. |
 | `ILGR-CLOSE-1` | complete | Source/example ownership, focused diagnostics, Foundations/SOP/canonical syntax, the 2,114-check strict catalog, and current 170-target health evidence are synchronized. Lightweight TOC/reference/header/LHS/diff gates pass. The fresh health run was the sole necessary aggregate; redundant `make check`, `make examples`, `make ci`, and root aggregates were not rerun. Checkpoint: `f1d1944`. |
-| `ILGR-GRPD-1` | deferred | Groupoidal realization of the directed simplex-shaped calculus. Reopen only after the generic laxity owner has a concrete path-valued consumer. |
+| `ILGR-GRPD-1` | promoted | Reopened with `path_map_func` as the concrete path-valued consumer in `REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md`. That bounded plan tests the existing generic compositor as an invertible higher path; it does not reopen the completed `ILGR-LAX-*` rows. |
 | `ILGR-TRUNC-1` | deferred | Computational truncation classifier/HIT design. Reopen for a selected HoTT consumer, not to complete an inventory abstractly. |
 | `ILGR-GROUPIFY-1` | deferred | Generic groupoidification reflector. The completed WalkingEnd-to-Circle comparison already serves the motivating example; reopen for a new universal-property consumer. |
 | `ILGR-GRAY-1` | deferred | Strict-object/lax-arrow profiles and Crans--Gray closure. Reopen after the shared laxity interface is active and a low-dimensional `I tensor I` consumer is selected. |
@@ -2367,10 +2367,13 @@ This ordering keeps the immediate work at the elementary syntactic owners of
 the emdash kernel while using the classical semantics as validation rather
 than as the primitive implementation.
 
-## Deferred sub-plan: groupoidal realization of the directed simplex-shaped calculus
+## Promoted sub-plan: groupoidal realization of the directed simplex-shaped calculus
 
-Status: **deferred architectural side-plan within this living plan; not the
-selected implementation tranche and not a completion gate**.
+Status: **promoted on 2026-08-17 to the focused
+`REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md` after
+`path_map_func` was selected as the first concrete path-valued consumer**.
+The present section remains the architectural decision record; the focused
+plan owns implementation status and acceptance gates.
 
 This section records a significant possible continuation discovered while
 settling the internal laxity projections. It is preserved here so that its
@@ -2669,11 +2672,13 @@ or a genuine missing prerequisite.
 
 ### I. Planning boundary
 
-This substantial idea remains a deferred sub-plan in the present tracked
-living plan. If `ILGR-GRPD-1` is later reopened, split out a focused sub-plan
-only when its owners, validation gates, or Git checkpoints genuinely differ.
-It must not displace the bounded ordinary lax-functoriality/naturality work
-merely because it is architecturally interesting.
+This substantial idea is now reopened only through the focused path-map
+vertical slice in
+`REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md`.
+That plan has distinct owners, validation gates, and checkpoints while the
+bounded ordinary lax-functoriality/naturality work remains completed. Broader
+groupoidal realization continues to require a new consumer and a new ledger
+decision rather than being inherited automatically.
 
 ## Working inventory for a computational HoTT layer
 
