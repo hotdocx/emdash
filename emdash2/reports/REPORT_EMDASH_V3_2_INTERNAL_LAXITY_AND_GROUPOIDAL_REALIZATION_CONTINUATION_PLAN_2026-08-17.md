@@ -49,7 +49,8 @@ pairs are owned by this projection (`25` composition, `3` identity, `2`
 specialization/evaluator), with no replaceable-LHS growth or subject-reduction
 failure. The strict catalog is regenerated, and the bounded tranche is locally
 checkpointed at `74d4200` with its ledger follow-up at `bc19178`.
-`ILGR-LAX-2` is implemented and focused-green, pending its local checkpoint.
+`ILGR-LAX-2` is implemented, focused-green, and locally checkpointed at
+`dc89926`.
 The active late section 18zz constructs the self-comma identity section, the
 arbitrary internal-action projection ladder, the whole
 `fdapp1_comma_projection_func`, the transparent
@@ -63,8 +64,9 @@ rejects a `p`-indexed laxity transformation requested at a distinct `q`
 endpoint. The strict LHS audit is zero, the catalog is strict and current, and
 the warning inventory remains exactly `1112/159`, so this row is
 warning-neutral relative to `ILGR-LAX-1`. The existing transparent `piapp*`
-aliases were sufficient and remain unchanged. Health and broader closure
-remain assigned to `ILGR-CLOSE-1`. No push, merge, publication, release,
+aliases were sufficient and remain unchanged. `ILGR-LAX-3` is now the first
+dependency-ready row. Health and broader closure remain assigned to
+`ILGR-CLOSE-1`. No push, merge, publication, release,
 history rewrite, worktree removal, truncation, generic groupoidification,
 Gray tensor, or book rewrite is authorized by this plan.
 
@@ -97,8 +99,8 @@ concrete consumer needs one.
 | --- | --- | --- |
 | `ILGR-00` | complete | Promote the research notebook; scan active owners and probes; record reuse, gaps, scope, and proportional validation. |
 | `ILGR-LAX-1` | complete | Promoted the generic `tapp0_hom_fapp0` observation with its existing `tdapp0_fapp0` Cat specialization. One runtime normal form, identity/composition beta, the whole `tapp0_func` hom action, endpoint rejection, subject reduction, strict LHS audit, and exact `+30/0` warning delta are checked. |
-| `ILGR-LAX-2` | focused-green; checkpoint pending | The late whole comma/identity-section projection recovers the displayed laxity component and retained fibre-arrow action from `fdapp1_int_transfd`; positive/negative consumers, warning neutrality, LHS audit, and current transparent `piapp*` sufficiency are checked. |
-| `ILGR-LAX-3` | pending | Expose the ordinary target-internalized/opposite mirror and derive the pre/right witness from the same `fdapp1_int_cell` ladder; do not postulate an independent naturality square. |
+| `ILGR-LAX-2` | complete | The late whole comma/identity-section projection recovers the displayed laxity component and retained fibre-arrow action from `fdapp1_int_transfd`; positive/negative consumers, warning neutrality, LHS audit, current transparent `piapp*` sufficiency, and checkpoint `dc89926` are recorded. |
+| `ILGR-LAX-3` | active | Expose the ordinary target-internalized/opposite mirror and derive the pre/right witness from the same `fdapp1_int_cell` ladder; do not postulate an independent naturality square. |
 | `ILGR-LAX-4` | pending | Package a representative post/left and pre/right compositor/naturality extraction with direct computational assertions and one standalone ordinary/displayed consumer. |
 | `ILGR-LAX-5` | pending | Retain one next internal action and inspect its expected recursively assembled boundary. This is an iteration test, not a complete simplicial-object, pentagon, nerve, Segal, or associahedral project. |
 | `ILGR-CLOSE-1` | pending | Synchronize source/example registration, focused diagnostics, Foundations/SOP/canonical syntax, catalog/health evidence, and an authorized local checkpoint. Avoid long aggregates unless their absence would block integration. |
