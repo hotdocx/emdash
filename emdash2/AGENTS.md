@@ -16,8 +16,10 @@ variables, the functorial `sigma_functord_sec_func` uncurrying owner and its
 direct retained-component beta, proof-time represented comparisons at that
 specialized owner, the late self-comma identity section and whole displayed
 laxity extraction with retained source-fibre action, the transparent
-target-internalized ordinary action and fixed-target opposite projection, and
-the full-`tapp1_func` whole strict `Functord` naturality paths. The one-way
+target-internalized ordinary action and fixed-target opposite projection, the
+transparent whole/component post-left and pre-right laxity surfaces with their
+normal-lax functor-compositor specialization, and the full-`tapp1_func` whole
+strict `Functord` naturality paths. The one-way
 derived native equality-valued
 hom-action/groupoidality extension is `emdash3_2_eq1_hom_action.lp`;
 the Cat-valued presheaf, Yoneda, slice, and higher-sieve library is

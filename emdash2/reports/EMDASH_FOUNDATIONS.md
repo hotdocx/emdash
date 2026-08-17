@@ -3461,6 +3461,31 @@ extracts the pre/right witness from the existing `fdapp1_int_cell` ladder;
 no independent naturality square is declared. The identity specializations
 are `fapp1_con_int_transf(F)` and `fapp1_con_at_transf(F,Y)`.
 
+The ordinary public surfaces now retain that whole provenance explicitly:
+
+```text
+tapp1_post_laxity_transf(epsilon,X,g)
+  : G[g] o epsilon[-] ==> epsilon[g o -]
+
+tapp1_pre_laxity_transf(epsilon,Y,h)
+  : epsilon[-] o F[h] ==> epsilon[- o h].
+```
+
+Their component projections are `tapp1_post_laxity_cell(epsilon,g,f)` and
+`tapp1_pre_laxity_cell(epsilon,h,q)`. Both unfold to the corresponding
+`fdapp1_int_cell` of the fixed-source or fixed-target action. The normal-lax
+composition witness
+
+```text
+fapp1_compositor(F,g,f) : F[g] o F[f] ==> F[g o f]
+```
+
+is the post/left cell of the identity transfor. These names add no runtime or
+proof-time rule; their displayed `functord_transport_*_func` endpoints remain
+the computational types. Existing whole strict naturality paths compare those
+owners with the readable raw-composition presentation, so no duplicate capped
+pre/post unification rule is installed.
+
 This boundary retains the whole contravariant source-variable action. A
 separate functor varying a higher arrow between ordinary transfors is still
 consumer-gated; this first ordinary consumer does not require an

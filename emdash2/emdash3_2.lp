@@ -19513,6 +19513,204 @@ symbol functord_laxity_transf
       (@functord_transport_rhs_func K E D FF x y p))
 ≔ @fdapp1_comma_projection_transf
     K E D FF (@fdapp1_int_transfd K E D FF) x y p;
+
+// Whole post/left ordinary laxity. Fixing the source of epsilon's internal
+// action turns g : Y -> Z into a transformation, still whole in f : X -> Y.
+//
+// Surface/formula:
+//   G[g] o epsilon[-]  ==>  epsilon[g o -].
+symbol tapp1_post_laxity_transf
+  [A B : Cat]
+  [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (X : τ (Obj A))
+  [Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  : τ (Transf
+      (@functord_transport_lhs_func
+        A
+        (@hom_ A A (@id_func A) X)
+        (@hom_ B A G (@fapp0 A B F X))
+        (@tapp1_at_transf A B F G X epsilon)
+        Y Z g)
+      (@functord_transport_rhs_func
+        A
+        (@hom_ A A (@id_func A) X)
+        (@hom_ B A G (@fapp0 A B F X))
+        (@tapp1_at_transf A B F G X epsilon)
+        Y Z g))
+≔ @functord_laxity_transf
+    A
+    (@hom_ A A (@id_func A) X)
+    (@hom_ B A G (@fapp0 A B F X))
+    (@tapp1_at_transf A B F G X epsilon)
+    Y Z g;
+
+// Capped post/left component, projected from the whole transformation above.
+// Its readable endpoints are G[g] o epsilon[f] and epsilon[g o f].
+symbol tapp1_post_laxity_cell
+  [A B : Cat]
+  [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (Hom
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+      (@fapp0
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+        (@functord_transport_lhs_func
+          A
+          (@hom_ A A (@id_func A) X)
+          (@hom_ B A G (@fapp0 A B F X))
+          (@tapp1_at_transf A B F G X epsilon)
+          Y Z g)
+        f)
+      (@fapp0
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+        (@functord_transport_rhs_func
+          A
+          (@hom_ A A (@id_func A) X)
+          (@hom_ B A G (@fapp0 A B F X))
+          (@tapp1_at_transf A B F G X epsilon)
+          Y Z g)
+        f))
+≔ @tapp0_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+    (@functord_transport_lhs_func
+      A
+      (@hom_ A A (@id_func A) X)
+      (@hom_ B A G (@fapp0 A B F X))
+      (@tapp1_at_transf A B F G X epsilon)
+      Y Z g)
+    (@functord_transport_rhs_func
+      A
+      (@hom_ A A (@id_func A) X)
+      (@hom_ B A G (@fapp0 A B F X))
+      (@tapp1_at_transf A B F G X epsilon)
+      Y Z g)
+    f
+    (@tapp1_post_laxity_transf A B F G epsilon X Y Z g);
+
+// Whole pre/right ordinary laxity. Fixing the target makes h : W -> X a
+// base arrow X -> W in Op(A), while q : X -> Y remains the retained variable.
+//
+// Surface/formula:
+//   epsilon[-] o F[h]  ==>  epsilon[- o h].
+symbol tapp1_pre_laxity_transf
+  [A B : Cat]
+  [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (Y : τ (Obj A))
+  [W X : τ (Obj A)]
+  (h : τ (Hom A W X))
+  : τ (Transf
+      (@functord_transport_lhs_func
+        (Op_cat A)
+        (@hom_con A Y A (@id_func A))
+        (@hom_con B (@fapp0 A B G Y) A F)
+        (@tapp1_con_at_transf A B F G epsilon Y)
+        X W h)
+      (@functord_transport_rhs_func
+        (Op_cat A)
+        (@hom_con A Y A (@id_func A))
+        (@hom_con B (@fapp0 A B G Y) A F)
+        (@tapp1_con_at_transf A B F G epsilon Y)
+        X W h))
+≔ @functord_laxity_transf
+    (Op_cat A)
+    (@hom_con A Y A (@id_func A))
+    (@hom_con B (@fapp0 A B G Y) A F)
+    (@tapp1_con_at_transf A B F G epsilon Y)
+    X W h;
+
+// Capped pre/right component, projected from the whole transformation above.
+// Its readable endpoints are epsilon[q] o F[h] and epsilon[q o h].
+symbol tapp1_pre_laxity_cell
+  [A B : Cat]
+  [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [W X Y : τ (Obj A)]
+  (h : τ (Hom A W X))
+  (q : τ (Hom A X Y))
+  : τ (Hom
+      (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+      (@fapp0
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+        (@functord_transport_lhs_func
+          (Op_cat A)
+          (@hom_con A Y A (@id_func A))
+          (@hom_con B (@fapp0 A B G Y) A F)
+          (@tapp1_con_at_transf A B F G epsilon Y)
+          X W h)
+        q)
+      (@fapp0
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+        (@functord_transport_rhs_func
+          (Op_cat A)
+          (@hom_con A Y A (@id_func A))
+          (@hom_con B (@fapp0 A B G Y) A F)
+          (@tapp1_con_at_transf A B F G epsilon Y)
+          X W h)
+        q))
+≔ @tapp0_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+    (@functord_transport_lhs_func
+      (Op_cat A)
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)
+      (@tapp1_con_at_transf A B F G epsilon Y)
+      X W h)
+    (@functord_transport_rhs_func
+      (Op_cat A)
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)
+      (@tapp1_con_at_transf A B F G epsilon Y)
+      X W h)
+    q
+    (@tapp1_pre_laxity_transf A B F G epsilon Y W X h);
+
+// Normal-lax functor compositor. This is the post/left cell of the identity
+// transfor and therefore remains a transparent view of the internal action.
+//
+// Surface/formula:
+//   fapp1_compositor(F,g,f) : F[g] o F[f] ==> F[g o f].
+symbol fapp1_compositor
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (Hom
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@fapp0
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+        (@functord_transport_lhs_func
+          A
+          (@hom_ A A (@id_func A) X)
+          (@hom_ B A F (@fapp0 A B F X))
+          (@fapp1_at_transf A B F X)
+          Y Z g)
+        f)
+      (@fapp0
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+        (@functord_transport_rhs_func
+          A
+          (@hom_ A A (@id_func A) X)
+          (@hom_ B A F (@fapp0 A B F X))
+          (@fapp1_at_transf A B F X)
+          Y Z g)
+        f))
+≔ @tapp1_post_laxity_cell
+    A B F F (@id (Functor_cat A B) F) X Y Z g f;
 // -----------------------------------------------------------------------------------------------
 // Naturality in the retained source-fibre variable u.  The identity section
 // sends h : u -> u' to the comma datum whose transported alpha is E[p][h].

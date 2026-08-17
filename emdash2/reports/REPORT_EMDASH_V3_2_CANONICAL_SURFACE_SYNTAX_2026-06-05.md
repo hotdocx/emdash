@@ -1140,9 +1140,24 @@ action(epsilon,-,Y) : Hom_A(-,Y) => Hom_B(F[-],G[Y]).
 Their kernel owners are `tapp1_at_transf(epsilon,X)` and
 `tapp1_con_at_transf(epsilon,Y)`. Both project at `(X,Y)` to
 `tapp1_func(epsilon,X,Y)`; the second is the transparent opposite
-specialization, not a second square. Named post/left and pre/right *laxity
-transformation* surfaces remain a later convenience layer over these active
-owners and `functord_laxity_transf`.
+specialization, not a second square. The active whole ordinary notation is
+
+```text
+post_laxity(epsilon,X,g) : G[g] o epsilon[-] ==> epsilon[g o -]
+pre_laxity(epsilon,Y,h)  : epsilon[-] o F[h] ==> epsilon[- o h]
+```
+
+with kernel owners `tapp1_post_laxity_transf` and
+`tapp1_pre_laxity_transf`. Their components at `f` and `q` are
+`tapp1_post_laxity_cell` and `tapp1_pre_laxity_cell`; these are projections of
+the same `functord_laxity_transf`, not separately postulated squares. For the
+identity transfor, write
+
+```text
+compositor(F,g,f) : F[g] o F[f] ==> F[g o f]
+```
+
+whose transparent kernel owner is `fapp1_compositor`.
 
 ## Displayed Sibling Product Notation
 

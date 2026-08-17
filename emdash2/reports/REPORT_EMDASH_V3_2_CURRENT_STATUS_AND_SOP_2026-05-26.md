@@ -3427,6 +3427,26 @@ the pre/right witness through `fdapp1_int_cell`; no independent ordinary
 naturality square or new runtime rule is installed. A functor varying higher
 arrows between `epsilon`s remains consumer-gated.
 
+Section 18zz now packages both ordinary variance directions without adding a
+second coherence calculus:
+
+```text
+tapp1_post_laxity_transf(epsilon,X,g)
+  : G[g] o epsilon[-] ==> epsilon[g o -]
+
+tapp1_pre_laxity_transf(epsilon,Y,h)
+  : epsilon[-] o F[h] ==> epsilon[- o h].
+```
+
+The capped `tapp1_post_laxity_cell` and `tapp1_pre_laxity_cell` unfold through
+`tapp0_fapp0` to the corresponding `fdapp1_int_cell`. The transparent
+`fapp1_compositor(F,g,f)` is the post/left component of the identity transfor,
+so it reads `F[g] o F[f] ==> F[g o f]` while retaining the same internal-action
+source. Their formal endpoint types stay at the two
+`functord_transport_*_func` owners. Readable raw-composition endpoints are
+already connected by the existing whole strict-naturality paths; do not add a
+duplicate pointwise pre/post unification rule merely to restate them.
+
 `Hom_tele_func`, `Hom_func`, and `Hom_fapp0` retain focused runtime identity
 and composition joins because projection can hide the literal generic
 functor-action pattern.
@@ -4468,10 +4488,9 @@ The following remain explicit future work rather than hidden assumptions:
   its transparent expression and the general
   `sigma_pullback_total_func(F,D)` base-change totalization are active;
 - semantic uncurry action on arbitrary transfors;
-- named post/left and pre/right ordinary laxity surfaces, a functor varying
-  higher arrows between ordinary transfors, and the selected next recursive
-  action beyond the active target-internalized mirror and whole displayed
-  `functord_laxity_transf` owner;
+- a functor varying higher arrows between ordinary transfors and the selected
+  next recursive action beyond the active whole post/left and pre/right
+  surfaces;
 - the arrow action of `sigma_intro_tapp0_func`;
 - off-diagonal `tapp1_*` projections for `sigma_map_transf` beyond its current
   point-component computation;

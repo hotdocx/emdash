@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2109
-- Mapped areas: 100
+- Total checks: 2114
+- Mapped areas: 101
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -119,6 +119,7 @@ stable mathematical-area scopes rather than source locations.
 | Complementary-idempotent affine atlas | 6 |
 | Whole comma projection and displayed laxity | 10 |
 | Target-internalized ordinary hom action | 4 |
+| Ordinary post/pre laxity and functor compositor | 5 |
 
 ## Section Details
 
@@ -2730,3 +2731,13 @@ stable mathematical-area scopes rather than source locations.
 | 2107 | 24583 | `assert [A B : Cat] (F : τ (Functor A B)) (Y : τ (Obj A)) ⊢ @tapp1_con_at_transf A B F F (@id (Functor_cat A B) F) Y ...` |
 | 2108 | 24590 | `assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) ⊢ @tapp0_fapp0 (Op_cat A) Cat_cat (@hom_con A Y A (@id_fu ...` |
 | 2109 | 24602 | `assert [A B : Cat] [F G : τ (Functor A B)] (epsilon : τ (Transf F G)) [W X Y : τ (Obj A)] (h : τ (Hom A W X)) (q : τ ...` |
+
+### Ordinary post/pre laxity and functor compositor
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 2110 | 24639 | `assert [A B : Cat] [F G : τ (Functor A B)] (epsilon : τ (Transf F G)) (X : τ (Obj A)) [Y Z : τ (Obj A)] (g : τ (Hom ...` |
+| 2111 | 24651 | `assert [A B : Cat] [F G : τ (Functor A B)] (epsilon : τ (Transf F G)) (Y : τ (Obj A)) [W X : τ (Obj A)] (h : τ (Hom ...` |
+| 2112 | 24665 | `assert [A B : Cat] [F G : τ (Functor A B)] (epsilon : τ (Transf F G)) [X Y Z : τ (Obj A)] (g : τ (Hom A Y Z)) (f : τ ...` |
+| 2113 | 24677 | `assert [A B : Cat] [F G : τ (Functor A B)] (epsilon : τ (Transf F G)) [W X Y : τ (Obj A)] (h : τ (Hom A W X)) (q : τ ...` |
+| 2114 | 24690 | `assert [A B : Cat] (F : τ (Functor A B)) [X Y Z : τ (Obj A)] (g : τ (Hom A Y Z)) (f : τ (Hom A X Y)) ⊢ @fapp1_compos ...` |

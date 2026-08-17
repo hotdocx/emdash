@@ -74,7 +74,13 @@ pre/right witness is checked through the active `functord_laxity_transf` /
 fixed-target endpoint is rejected, the strict LHS audit remains zero, and the
 warning inventory remains exactly `1112/159`. No new runtime or unification
 rule, `Op_transf_func`, or displayed contravariant ladder was introduced.
-`ILGR-LAX-4` is now the first dependency-ready row. Health and broader closure
+`ILGR-LAX-4` is implemented and focused-green. Five transparent surfaces
+package the whole and capped post/left and pre/right witnesses plus the
+identity-specialized normal-lax functor compositor. Their focused owner,
+active-import, central-diagnostic, example, and negative endpoint probes pass;
+the warning inventory remains `1112/159` and strict LHS audit remains zero.
+The generated catalog is current at 2,114 checks across 101 mapped areas.
+`ILGR-LAX-5` is now the first dependency-ready row. Health and broader closure
 remain assigned to `ILGR-CLOSE-1`. No push, merge, publication, release,
 history rewrite, worktree removal, truncation, generic groupoidification,
 Gray tensor, or book rewrite is authorized by this plan.
@@ -110,8 +116,8 @@ concrete consumer needs one.
 | `ILGR-LAX-1` | complete | Promoted the generic `tapp0_hom_fapp0` observation with its existing `tdapp0_fapp0` Cat specialization. One runtime normal form, identity/composition beta, the whole `tapp0_func` hom action, endpoint rejection, subject reduction, strict LHS audit, and exact `+30/0` warning delta are checked. |
 | `ILGR-LAX-2` | complete | The late whole comma/identity-section projection recovers the displayed laxity component and retained fibre-arrow action from `fdapp1_int_transfd`; positive/negative consumers, warning neutrality, LHS audit, current transparent `piapp*` sufficiency, and checkpoint `dc89926` are recorded. |
 | `ILGR-LAX-3` | complete | The arbitrary and identity target-internalized actions are transparent opposite specializations; their fixed-target projections compute to the shared off-diagonal hom action, and the pre/right witness is extracted through `functord_laxity_transf` / `fdapp1_int_cell`. Positive/negative consumers, warning neutrality, zero LHS growth, and checkpoint `8333848` are recorded. |
-| `ILGR-LAX-4` | active | Package a representative post/left and pre/right compositor/naturality extraction with direct computational assertions and one standalone ordinary/displayed consumer. |
-| `ILGR-LAX-5` | pending | Retain one next internal action and inspect its expected recursively assembled boundary. This is an iteration test, not a complete simplicial-object, pentagon, nerve, Segal, or associahedral project. |
+| `ILGR-LAX-4` | complete | The transparent whole/component post-left and pre-right surfaces specialize `functord_laxity_transf`; `fapp1_compositor` is their identity-transfor specialization. Direct assertions, one ordinary/displayed example, wrong-arrow rejection, warning neutrality, and zero LHS growth are checked. |
+| `ILGR-LAX-5` | active | Retain one next internal action and inspect its expected recursively assembled boundary. This is an iteration test, not a complete simplicial-object, pentagon, nerve, Segal, or associahedral project. |
 | `ILGR-CLOSE-1` | pending | Synchronize source/example registration, focused diagnostics, Foundations/SOP/canonical syntax, catalog/health evidence, and an authorized local checkpoint. Avoid long aggregates unless their absence would block integration. |
 | `ILGR-GRPD-1` | deferred | Groupoidal realization of the directed simplex-shaped calculus. Reopen only after the generic laxity owner has a concrete path-valued consumer. |
 | `ILGR-TRUNC-1` | deferred | Computational truncation classifier/HIT design. Reopen for a selected HoTT consumer, not to complete an inventory abstractly. |
@@ -1235,6 +1241,65 @@ logs/probes/tapp1_con_wrong_fixed_target_negative-20260817-093253.log
 logs/probes/emdash3_2-20260817-092826.log
 logs/probes/emdash3_2_checks-20260817-093431.log
 ```
+
+#### 6B.3. Ordinary post/pre surface verdict (2026-08-17)
+
+`ILGR-LAX-4` adds no semantic cell and no normalization rule. It gives names
+to the two ordinary specializations of the active whole displayed owner:
+
+```text
+tapp1_post_laxity_transf(epsilon,X,g)
+  := functord_laxity_transf(tapp1_at_transf(epsilon,X),g)
+
+tapp1_pre_laxity_transf(epsilon,Y,h)
+  := functord_laxity_transf(tapp1_con_at_transf(epsilon,Y),h)
+     // over Op(A)
+```
+
+Their transparent component projections are `tapp1_post_laxity_cell` and
+`tapp1_pre_laxity_cell`. Focused conversion checks identify both with the
+corresponding `fdapp1_int_cell`, so the public surface preserves the complete
+internal-action provenance. The normal-lax functor compositor is exactly
+
+```text
+fapp1_compositor(F,g,f)
+  := tapp1_post_laxity_cell(id_F,g,f).
+```
+
+An attempted public type using independently selected stable capped pre/post
+heads exposed a presentation boundary rather than missing mathematics. The
+kernel already compares the raw-composition reading through its whole strict
+naturality paths; adding another pointwise unification bridge would duplicate
+that calculus and cap the owner too early. Public computational types therefore
+remain at `functord_transport_lhs_func` and
+`functord_transport_rhs_func`, with comments recording the familiar formulas
+`G[g] o epsilon[f] ==> epsilon[g o f]` and
+`epsilon[q] o F[h] ==> epsilon[q o h]`.
+
+The existing `examples/dependent_hom_laxity.lp` is now the standalone mixed
+consumer: it checks dependent-hom totalization, displayed identity
+specialization, both ordinary component projections, and the functor
+compositor. A negative probe retains the base-arrow index by rejecting a
+`g`-indexed post transformation projected against an independent `g'` route.
+The exact owner-position and active focused checks are green:
+
+```text
+logs/probes/ordinary_laxity_surfaces_owner_full-20260817-100258.log
+logs/probes/ordinary_laxity_surfaces_owner_full-20260817-100312.log
+logs/probes/ordinary_laxity_surfaces_active-20260817-100741.log
+logs/probes/tapp1_post_laxity_wrong_arrow_negative-20260817-100856.log
+logs/probes/emdash3_2-20260817-101120.log
+logs/probes/emdash3_2_checks-20260817-101120.log
+logs/probes/dependent_hom_laxity-20260817-101120.log
+```
+
+The definitions add no runtime or unification rules. The warning inventory is
+therefore unchanged at `1112/159`, and strict LHS audit remains zero. The
+catalog now contains 2,114 classified checks in 101 areas. The accidentally
+started repository-wide `make check` expansion was stopped after the active
+kernel and several unchanged extensions had passed; it is not closure evidence
+and is not needed for this transparent bounded row under the explicit
+no-long-aggregate policy.
 
 ### 6C. Native iterated-`homd_` tetrahedron design (2026-08-17)
 

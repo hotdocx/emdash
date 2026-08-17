@@ -24632,3 +24632,64 @@ assert [A B : Cat] [F G : τ (Functor A B)]
       (@hom_con B (@fapp0 A B G Y) A F)
       (@tapp1_con_at_transf A B F G epsilon Y)
       X W h q;
+
+// catalog-area: Ordinary post/pre laxity and functor compositor
+// Both named whole ordinary surfaces are transparent specializations of the
+// one displayed laxity owner.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (X : τ (Obj A)) [Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z)) ⊢
+  @tapp1_post_laxity_transf A B F G epsilon X Y Z g
+  ≡ @functord_laxity_transf
+      A
+      (@hom_ A A (@id_func A) X)
+      (@hom_ B A G (@fapp0 A B F X))
+      (@tapp1_at_transf A B F G X epsilon)
+      Y Z g;
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (Y : τ (Obj A)) [W X : τ (Obj A)]
+  (h : τ (Hom A W X)) ⊢
+  @tapp1_pre_laxity_transf A B F G epsilon Y W X h
+  ≡ @functord_laxity_transf
+      (Op_cat A)
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)
+      (@tapp1_con_at_transf A B F G epsilon Y)
+      X W h;
+
+// Capping each whole transformation returns the established internal-action
+// cell rather than a second ordinary naturality square.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z)) (f : τ (Hom A X Y)) ⊢
+  @tapp1_post_laxity_cell A B F G epsilon X Y Z g f
+  ≡ @fdapp1_int_cell
+      A
+      (@hom_ A A (@id_func A) X)
+      (@hom_ B A G (@fapp0 A B F X))
+      (@tapp1_at_transf A B F G X epsilon)
+      Y Z g f;
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [W X Y : τ (Obj A)]
+  (h : τ (Hom A W X)) (q : τ (Hom A X Y)) ⊢
+  @tapp1_pre_laxity_cell A B F G epsilon W X Y h q
+  ≡ @fdapp1_int_cell
+      (Op_cat A)
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)
+      (@tapp1_con_at_transf A B F G epsilon Y)
+      X W h q;
+
+// The normal-lax functor compositor is the identity-transfor specialization.
+assert [A B : Cat] (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z)) (f : τ (Hom A X Y)) ⊢
+  @fapp1_compositor A B F X Y Z g f
+  ≡ @tapp1_post_laxity_cell
+      A B F F (@id (Functor_cat A B) F) X Y Z g f;
