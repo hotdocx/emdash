@@ -30,10 +30,9 @@ realization decisions are archived under
 `/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-14_019ffe392eb9/responses/0032_2026-08-17T10-13-20Z_01a00f29-2d18-78c0-8a76-305d18aba371.md`
 and
 `/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-14_019ffe392eb9/responses/0033_2026-08-17T11-25-56Z_01a00f75-a18f-7b03-8209-b9b86ab06b74.md`.
-Active code and SOP, then this living plan, outrank those archives.
+Active code and SOP, then this decision record, outrank those archives.
 
-Status: bounded implementation complete and closure focused-green, pending
-the authorized local closure checkpoint on branch
+Status: completed bounded implementation and decision record on branch
 `goal/groupoidal-circle-v3.2` in dedicated worktree
 `/home/user1/emdash1-groupoidal-circle-v1`, currently descended from the
 completed groupoidal checkpoint `c957372` and `main` baseline `86042df`.
@@ -91,8 +90,8 @@ warning-enabled current-source probes pass with the unchanged `1112/159`
 warning inventory. This validates the selected next action without promoting
 a capped three-arrow facade or claiming a complete simplicial object. The
 bounded evidence and decision are locally checkpointed at `ad5ee7c`.
-`ILGR-CLOSE-1` has synchronized the maintained evidence and is ready for its
-authorized local checkpoint. No push, merge, publication, release,
+`ILGR-CLOSE-1` synchronized the maintained evidence and is locally
+checkpointed at `f1d1944`. No push, merge, publication, release,
 history rewrite, worktree removal, truncation, generic groupoidification,
 Gray tensor, or book rewrite is authorized by this plan.
 
@@ -129,7 +128,7 @@ concrete consumer needs one.
 | `ILGR-LAX-3` | complete | The arbitrary and identity target-internalized actions are transparent opposite specializations; their fixed-target projections compute to the shared off-diagonal hom action, and the pre/right witness is extracted through `functord_laxity_transf` / `fdapp1_int_cell`. Positive/negative consumers, warning neutrality, zero LHS growth, and checkpoint `8333848` are recorded. |
 | `ILGR-LAX-4` | complete | The transparent whole/component post-left and pre-right surfaces specialize `functord_laxity_transf`; `fapp1_compositor` is their identity-transfor specialization. Direct assertions, one ordinary/displayed example, wrong-arrow rejection, warning neutrality, zero LHS growth, and checkpoint `d2cb4aa` are recorded. |
 | `ILGR-LAX-5` | complete | A current-source-derived no-associativity probe retains the explicit base associator and computes its dependent filler through the existing second `homd_`/Sigma internal action. The quiet and warning-enabled runs pass at the unchanged `1112/159`; no capped three-arrow primitive, runtime rule, unifier, or complete-simplicial claim was added. Checkpoint: `ad5ee7c`. |
-| `ILGR-CLOSE-1` | focused-green; checkpoint pending | Source/example ownership, focused diagnostics, Foundations/SOP/canonical syntax, the 2,114-check strict catalog, and current 170-target health evidence are synchronized. Lightweight TOC/reference/header/LHS/diff gates pass. The fresh health run was the sole necessary aggregate; redundant `make check`, `make examples`, `make ci`, and root aggregates were not rerun. |
+| `ILGR-CLOSE-1` | complete | Source/example ownership, focused diagnostics, Foundations/SOP/canonical syntax, the 2,114-check strict catalog, and current 170-target health evidence are synchronized. Lightweight TOC/reference/header/LHS/diff gates pass. The fresh health run was the sole necessary aggregate; redundant `make check`, `make examples`, `make ci`, and root aggregates were not rerun. Checkpoint: `f1d1944`. |
 | `ILGR-GRPD-1` | deferred | Groupoidal realization of the directed simplex-shaped calculus. Reopen only after the generic laxity owner has a concrete path-valued consumer. |
 | `ILGR-TRUNC-1` | deferred | Computational truncation classifier/HIT design. Reopen for a selected HoTT consumer, not to complete an inventory abstractly. |
 | `ILGR-GROUPIFY-1` | deferred | Generic groupoidification reflector. The completed WalkingEnd-to-Circle comparison already serves the motivating example; reopen for a new universal-property consumer. |
@@ -161,8 +160,8 @@ The strict catalog is current, the source TOC reports 87 sequential headings
 across Sections 0--20, active-reference and current-plan-header lints pass,
 and the strict LHS audit reports zero unreviewed reconstructible compound
 slots. Focused warning evidence remains `1112/159`, including the zero-delta
-current-source no-associativity probe. The checkpoint hash is recorded in the
-follow-up ledger commit rather than predicted here.
+current-source no-associativity probe. The closure artifacts are checkpointed
+at `f1d1944`; this ledger follow-up records that immutable hash.
 
 ### Implementation and validation policy
 

@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-08-04
+Date: 2026-08-17
 
 `../../docs/EMDASH_BOOK_V3_2_POST_INTEGRATION_EXPANSION_PLAN_2026-08-04.md`
 is the active cross-layer editorial and implementation ledger for the
@@ -1057,15 +1057,6 @@ record.
 
 ## Current Plans
 
-- `REPORT_EMDASH_V3_2_INTERNAL_LAXITY_AND_GROUPOIDAL_REALIZATION_CONTINUATION_PLAN_2026-08-17.md`:
-  active living continuation plan promoted from the post-Circle research
-  synthesis. Its selected tranche exposes lax functoriality and naturality
-  witnesses through whole, iterable internal-action owners, beginning with
-  the generic higher-component observation and its existing Cat-valued
-  specialization. The groupoidal/path realization is retained as a deferred
-  consumer rather than a prerequisite. Computational truncation, generic
-  groupoidification, strict-object/lax-arrow Gray profiles, and the next book
-  update have explicit consumer-led reopening conditions.
 - `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`:
   active living Lambdapi-first standard-library architecture for Cat-valued
   presheaves, ordinary versus higher sieves, coverage/topology/modality
@@ -1621,6 +1612,21 @@ record.
 
 These reports remain active references for exact decisions and probe evidence,
 but their promoted phases are not open implementation plans.
+
+- `REPORT_EMDASH_V3_2_INTERNAL_LAXITY_AND_GROUPOIDAL_REALIZATION_CONTINUATION_PLAN_2026-08-17.md`:
+  completed implementation plan and decision record for the bounded internal-
+  laxity continuation. It promotes the generic higher-component observation,
+  whole displayed comma/identity-section extraction, target-internalized
+  opposite projection, ordinary post/pre laxity surfaces, and the normal-lax
+  functor compositor without duplicating the internal-action calculus. A
+  current-source probe with global associativity disabled validates the next
+  recursive `homd_`/Sigma action and its dependent tetrahedral filler without
+  adding a capped three-arrow primitive or claiming a complete simplicial
+  object. The closure records 2,114 classified checks, unchanged `1112/159`
+  warning evidence, and current green health for all 170 maintained targets.
+  Groupoidal realization, computational truncation, generic groupoidification,
+  Gray profiles, and the next book integration retain explicit consumer-led
+  reopening conditions.
 
 - `REPORT_EMDASH_V3_2_GROUPOIDAL_CLOSURE_CIRCLE_AND_INTEGER_PLAN_2026-08-14.md`:
   completed implementation plan and decision record for the bounded
