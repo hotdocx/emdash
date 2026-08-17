@@ -1057,6 +1057,17 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
+  completed focused child of the internal-laxity/groupoidal-realization
+  decision record. It provides the sorted `NType_cat(n)`
+  facade, classified `Trunc_ntype(n,A)` result, restricted point-computing
+  elimination, recursor-derived whole map action, and Circle mere
+  connectedness. The conditional row also proves
+  `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier rewrite to Unit. Its
+  exact 176-target health closeout is green; generic groupoidification, Gray
+  tensor, arbitrary quotient/HIT schemas, existing scheme mathematics, and
+  book work remain excluded.
+
 - `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`:
   active living Lambdapi-first standard-library architecture for Cat-valued
   presheaves, ordinary versus higher sieves, coverage/topology/modality

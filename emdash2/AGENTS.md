@@ -176,6 +176,16 @@ extension is `emdash3_2_groupoidal_closure.lp`;
 the rule-free Path realization of the generic functor compositor, its
 canonical inverse, readable `eq_ap`/`eq_trans` comparison, and retained
 next-hom action is `emdash3_2_path_pseudo_laxity.lp`;
+the classified computational homotopy-truncation reflector and its derived
+whole map action are `emdash3_2_truncation_reflector.lp`; it realizes the
+category of `n`-types through retained `TruncGrpdU(n)` packages, restricts
+elimination to classified motives, and derives identity/composition and
+iterable Path action from that recursor;
+the mere-connectedness consumer for the Circle is
+`emdash3_2_circle_connectedness.lp`; it constructs
+`Pi x:S1, ||circle_base=x||_{-1}` without an untruncated path choice and uses
+that evidence to prove `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier
+rewrite to Unit;
 executable diagnostics live in `emdash3_2_checks.lp`.
 
 ## Authorities
@@ -695,14 +705,26 @@ Use the following order:
     propositionally with the readable `eq_ap`/`eq_trans` endpoints, and
     retains one whole next-hom action. It adds no pseudofunctor classifier,
     rule, unifier, inverse record, or all-coherence claim;
-74. `emdash3_2_checks.lp` for executable regression statements;
-75. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+74. `emdash3_2_truncation_reflector.lp` for the classified computational
+    truncation reflector. It realizes `NType_cat(n)` through the existing
+    retained-evidence `TruncGrpdU(n)` package, provides point-computing
+    restricted induction/recursion, derives map identity and composition by
+    that induction, and reuses `path_map_func` for an iterable whole Hom
+    action;
+75. `emdash3_2_circle_connectedness.lp` for the rule-free first concrete
+    consumer of propositional truncation. It proves mere based connectedness
+    of the Circle by dependent Circle induction; retained proposition evidence
+    supplies the loop `PathOver`, so no untruncated global path is selected.
+    Eliminating this mere path evidence into the set truncation proves
+    `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier rewrite to Unit;
+76. `emdash3_2_checks.lp` for executable regression statements;
+77. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-76. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-77. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+78. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+79. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-78. `reports/INDEX.md` for task-specific plans and decision records.
-79. `book/book.json` and `book/evidence.json` for book source
+80. `reports/INDEX.md` for task-specific plans and decision records.
+81. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

@@ -420,6 +420,23 @@ detailed probe evidence.
   retains a next-hom functor between paths-between-paths. The module adds no
   Path-specific runtime fold, proof-time rule, pseudofunctor classifier,
   inverse record, or complete coherence claim.
+- `emdash3_2_truncation_reflector.lp`: classified computational homotopy-
+  truncation reflector. It realizes `NType_cat(n)` through the existing
+  `TruncGrpdU(n)` retained-evidence package, supplies point-computing
+  restricted induction and recursion, derives map identity/composition by
+  that induction, and uses the existing `path_map_func` for its iterable whole
+  Hom action.
+- `emdash3_2_circle_connectedness.lp`: transparent rule-free propositional-
+  truncation consumer. It constructs
+  `Pi x:S1, ||circle_base=x||_{-1}` by dependent Circle induction; the retained
+  proposition evidence supplies the generating-loop `PathOver`, so the result
+  proves mere connectedness without choosing an untruncated global based path.
+  Restricted elimination first turns each merely inhabited based-path fibre
+  into a path in `Trunc_grpd(0,Circle_grpd)` and then contracts every point of
+  that set truncation. The resulting `IsContr` evidence does not rewrite the
+  carrier to `Unit_grpd`. The bounded tranche is green through exact current
+  health across 76 core/extension files and 100 reviewer examples; its focused
+  plan records the warning, rule-audit, catalog, and snapshot evidence.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation

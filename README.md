@@ -25,7 +25,11 @@ together with the concrete WalkingEnd-to-Circle nonnegative comparison and a
 coherent product-transport closure theorem. The same generic lax compositor,
 when realized in a path category, is now checked as an invertible equality
 between paths with the usual `ap`/path-composition presentation and a retained
-higher action.
+higher action. A classified computational truncation reflector now supplies
+restricted point-computing elimination and recursor-derived whole map action;
+its first concrete consumer proves the Circle merely connected and its set
+truncation contractible, without choosing global based paths or replacing the
+truncated carrier judgmentally by `Unit`.
 
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim

@@ -738,6 +738,84 @@ IsTruncGrpd(succ(n), TruncGrpdU(n)).
 The theorem keeps base/source and successor/target evidence observable where
 used. It adds neither broad proof erasure nor direct universe computation.
 
+### Classified Computational Truncation And Circle Connectedness
+
+The package universe above classifies types already known to be truncated;
+the computational reflector constructs a new classified result. Its category
+of `n`-types realizes objects directly as retained-evidence packages:
+
+```text
+Obj(NType_cat(n)) = TruncGrpdU(n)
+ElNType(n,X)      = carrier(X).
+```
+
+For every ambient groupoid/type `A`, the primary result is a code
+
+```text
+Trunc_ntype(n,A) : Obj(NType_cat(n)).
+```
+
+Its decoded carrier and retained evidence compute to stable owners:
+
+```text
+ElNType(n,Trunc_ntype(n,A)) = Trunc_grpd(n,A)
+trunc_ntype_is_truncated(n,A)
+  : IsTruncGrpd(n,Trunc_grpd(n,A)).
+```
+
+Thus truncation does not first produce an arbitrary ambient type and later
+attach a proof. It lands intrinsically in the smaller classifier, while
+`Trunc_grpd` is the ambient view used by ordinary terms.
+
+The point constructor and restricted eliminator are
+
+```text
+trunc_intro(a) : Trunc_grpd(n,A)
+
+trunc_ind
+  [P : Trunc_grpd(n,A) -> Obj(NType_cat(n))]
+  (d : Pi a:A, ElNType(n,P(trunc_intro(a))))
+  (z : Trunc_grpd(n,A))
+  : ElNType(n,P(z)),
+
+trunc_ind(P,d,trunc_intro(a)) = d(a).
+```
+
+An ambient convenience form requires explicit same-level truncation evidence
+for every motive fibre and reduces through this intrinsic owner. It does not
+permit unrestricted elimination. Nondependent recursion derives
+`trunc_map(n,f)` with the expected point computation. The whole family of
+these maps is acted on by the existing `path_map_func`, so equality and the
+next hom action remain iterable. Identity and composition are derived by the
+same restricted induction. `Truncation_func(n)` computes on objects to
+`Trunc_ntype(n,-)` and retains a propositional comparison between its generic
+hom action and that recursor-derived whole action; no competing capped action
+rule is installed.
+
+The first non-artificial consumer is mere based connectedness of the Circle:
+
+```text
+CircleConnected(x) = Trunc_grpd(-1, base = x)
+circle_connected   : Pi x:Circle, CircleConnected(x).
+```
+
+At `base` it computes to `trunc_intro(refl)`. Every fibre is a proposition, so
+the generating loop coherence is supplied by the existing proposition-family
+`PathOver`; no continuous choice of an untruncated path from `base` is made.
+Eliminating this mere path evidence into the set truncation, and then applying
+set-truncation induction, constructs
+
+```text
+circle_set_trunc_is_contr
+  : IsContr(Trunc_grpd(0,Circle_grpd)).
+```
+
+This is retained contractibility evidence. The truncated carrier is
+deliberately not judgmentally identified with `Unit_grpd`. The selected
+sorted interface is a computational reflector boundary; comparison with a
+classical hub-and-spoke presentation and generic quotient/HIT schemas remain
+separate work.
+
 Ordinary dependent-function extensionality is exposed without discarding the
 related-input Pi path view. For `f,g : Π x:A, B(x)`, the diagonal classifier is
 
@@ -4770,13 +4848,17 @@ The current foundations intentionally do not yet include:
   `PathRecord` convention; its observational path view, stable reflexivity,
   projection betas, reflexive J, and named arbitrary path round trips are
   active;
-- truncation reflectors and universe metatheory; direct Cat/Grpd universe
-  identity now uses the native equality-valued facade, while the D0-free
-  `GrpdPathView` remains a kernel library interface and the former decoder-
-  owned `CatPathView` is retired,
-  while restricted truncated-universe univalence, carrier/evidence package paths,
-  the expected successor-level package-universe theorem, general one-step
-  monotonicity, dependent-Pi/Sigma closure, `TypeEquiv` invariance, and its fixed-map
+- a classical hub-and-spoke comparison for the active sorted computational
+  truncation reflector, broader truncation/universe metatheory, and generic
+  quotient/HIT schemas; direct Cat/Grpd universe identity now uses the native
+  equality-valued facade, while the D0-free `GrpdPathView` remains a kernel
+  library interface and the former decoder-owned `CatPathView` is retired.
+  The classified `NType_cat`/`Trunc_ntype` reflector, its restricted
+  point-computing eliminator and derived whole action, Circle mere
+  connectedness, contractibility of its set truncation, restricted
+  truncated-universe univalence, carrier/evidence package paths, the expected
+  successor-level package-universe theorem, general one-step monotonicity,
+  dependent-Pi/Sigma closure, `TypeEquiv` invariance, and its fixed-map
   categorical object-truncation consumer are active. Native equality-valued
   evidence is proposition-valued and finite-`NCat` object truncation is
   unconditional;
@@ -4983,6 +5065,11 @@ kernel and one-way library vocabulary.
 | universe of `n`-truncated classifiers | `TruncGrpdU n` |
 | proposition/set/groupoid universes | `PropU_grpd` / `SetU_grpd` / `GroupoidU_grpd` |
 | proposition / set / ordinary groupoid property | `IsPropGrpd A` / `IsSetGrpd A` / `IsGroupoidGrpd A` |
+| classified category of `n`-types / decoded carrier | `NType_cat n` / `ElNType n X` |
+| classified homotopy truncation / ambient carrier | `Trunc_ntype n A` / `Trunc_grpd n A` |
+| truncation point / restricted induction / map | `trunc_intro n A a` / `trunc_ind` / `trunc_map` |
+| Circle mere connectedness | `CircleConnected x` / `circle_connected x` |
+| contractibility of the set-truncated Circle | `circle_set_trunc_is_contr` |
 | pointwise paths between dependent functions | `PiPointwisePath A B f g` |
 | diagonal Pi path observation / extension | `PiHapply p` / `PiFunext h` |
 | Pi happly/funext equivalence | `pi_happly_type_equiv A B f g` |

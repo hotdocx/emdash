@@ -1445,6 +1445,43 @@ Use `Checked`, `Formal consequence`,
 book theorem status. These labels report evidence strength and do not alter
 the formula notation above.
 
+## Computational Truncation And Circle Notation
+
+In mathematical comments and reviewer prose, write homotopy truncation as
+
+```text
+‖A‖_n                 the n-truncation of A
+|a|_n : ‖A‖_n         its point constructor
+```
+
+The active kernel keeps the classified result distinct from its decoded
+ambient carrier:
+
+```text
+Trunc_ntype(n,A)        : Obj(NType_cat(n))
+Trunc_grpd(n,A)         = decoded carrier ‖A‖_n
+trunc_intro(n,A,a)      = |a|_n.
+```
+
+Restricted elimination is written as induction or recursion out of `‖A‖_n`
+into an explicitly `n`-truncated target. The kernel owners are `trunc_ind`,
+`trunc_ind_ambient`, `trunc_rec`, and `trunc_rec_ambient`; the ambient forms
+must display or infer the required same-level truncation evidence. Do not use
+this notation to suggest unrestricted elimination.
+
+The selected Circle consumer is written
+
+```text
+CircleConnected(x) := ‖base = x‖_-1
+circle_connected   : Pi x:Circle, ‖base = x‖_-1
+IsContr(‖Circle‖_0).
+```
+
+The final line corresponds to `circle_set_trunc_is_contr`. It is a theorem
+carrying contractibility evidence, not notation for a judgmental equality
+`‖Circle‖_0 = Unit`. None of the notation in this section extends the bounded
+TypeScript text grammar automatically.
+
 ## Future Substitution Syntax
 
 The indexed operators leave room for later pullback/substitution notation:

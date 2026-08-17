@@ -76,6 +76,14 @@ equivalence interfaces, and a restricted groupoidal core test how the directed
 calculus meets ordinary type-theoretic equality. The walking-endomorphism
 development is the principal directed-HIT normalization benchmark.
 
+Computational homotopy truncation lands first in a classified category of
+`n`-types and only then decodes to an ambient groupoid/type. Its restricted
+dependent eliminator computes on point constructors, its map action is derived
+through that eliminator, and its first concrete consumer proves
+`Pi x:S1, ||base=x||_-1`. Eliminating those merely inhabited path fibres into
+the set truncation gives `IsContr(||S1||_0)` while preserving the distinction
+between contractibility evidence and a judgmental `Unit` normal form.
+
 ### Representability and profunctors
 
 Yoneda, represented hom action, dependent hom, Cat-valued profunctors,
@@ -201,8 +209,10 @@ encode--decode, the nonnegative WalkingEnd-to-Circle comparison, and coherent
 product-path transport in both coordinate orders. It now also realizes the
 generic `path_map_func` compositor as an invertible equality between paths,
 with its familiar `eq_ap`/`eq_trans` reading and one retained higher action.
-The source modules and reviewer examples are listed in the August 14 and
-August 17 groupoidal plans.
+The classified truncation reflector, Circle mere connectedness, and
+contractibility of its set truncation are the next checked HoTT slice. The
+source modules and reviewer examples are listed in the August 14 and August
+17 groupoidal plans.
 
 ## Functorial Type Theory book
 

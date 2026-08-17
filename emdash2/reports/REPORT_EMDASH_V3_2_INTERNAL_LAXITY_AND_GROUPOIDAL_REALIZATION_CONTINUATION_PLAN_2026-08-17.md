@@ -17,7 +17,8 @@ remains recovery evidence. This plan does **not** supersede the completed
 Circle/Integer plan or rewrite its validation history.
 
 Side-Task-Ledger: completed `ILGR-00`, `ILGR-LAX-1` through `ILGR-LAX-5`,
-`ILGR-CLOSE-1`, and `ILGR-GRPD-1`; explicitly deferred `ILGR-TRUNC-1`,
+`ILGR-CLOSE-1`, `ILGR-GRPD-1`, and `ILGR-TRUNC-1` through its focused
+computational-truncation/Circle-connectedness child plan; explicitly deferred
 `ILGR-GROUPIFY-1`, `ILGR-GRAY-1`, and `ILGR-BOOK-1` rows below
 
 Infinity-Codex-Origin: session
@@ -92,14 +93,22 @@ a capped three-arrow facade or claiming a complete simplicial object. The
 bounded evidence and decision are locally checkpointed at `ad5ee7c`.
 `ILGR-CLOSE-1` synchronized the maintained evidence and is locally
 checkpointed at `f1d1944`. No push, merge, publication, release,
-history rewrite, worktree removal, truncation, generic groupoidification,
-Gray tensor, or book rewrite is authorized by this plan.
+history rewrite, worktree removal, generic groupoidification, Gray tensor, or
+book rewrite is authorized by this plan. Truncation was subsequently reopened
+only through the separately scoped child plan recorded below.
 The subsequently promoted `ILGR-GRPD-1` consumer is now implemented by the
 rule-free `emdash3_2_path_pseudo_laxity.lp` extension and its focused reviewer.
 It realizes the existing `path_map_func` compositor as an invertible equality
 between paths, relates its formal endpoints propositionally to the usual
 `eq_ap`/`eq_trans` formula, and retains one next-hom functor. Its detailed
 evidence and closure status are owned by the focused child plan.
+`ILGR-TRUNC-1` is now completed by
+`REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`.
+That child selects the sorted `NType_cat(n)` / `Trunc_ntype(n,A)` reflector
+boundary and Circle mere connectedness as its first non-artificial HoTT
+consumer. Its implementation is green through the conditional contractibility
+theorem for `Trunc_grpd(0,Circle_grpd)` and exact 176-target health closeout.
+It does not reopen the completed laxity or path-realization rows.
 
 ## Selected Continuation Objective
 
@@ -136,7 +145,7 @@ concrete consumer needs one.
 | `ILGR-LAX-5` | complete | A current-source-derived no-associativity probe retains the explicit base associator and computes its dependent filler through the existing second `homd_`/Sigma internal action. The quiet and warning-enabled runs pass at the unchanged `1112/159`; no capped three-arrow primitive, runtime rule, unifier, or complete-simplicial claim was added. Checkpoint: `ad5ee7c`. |
 | `ILGR-CLOSE-1` | complete | Source/example ownership, focused diagnostics, Foundations/SOP/canonical syntax, the 2,114-check strict catalog, and current 170-target health evidence are synchronized. Lightweight TOC/reference/header/LHS/diff gates pass. The fresh health run was the sole necessary aggregate; redundant `make check`, `make examples`, `make ci`, and root aggregates were not rerun. Checkpoint: `f1d1944`. |
 | `ILGR-GRPD-1` | complete | Reopened with `path_map_func` as the concrete path-valued consumer in `REPORT_EMDASH_V3_2_PATH_REALIZED_PSEUDO_LAXITY_PLAN_2026-08-17.md`. The rule-free child module checks the existing generic compositor as an invertible higher path, supplies propositional readable endpoints, and retains one whole next action without reopening the completed `ILGR-LAX-*` rows. |
-| `ILGR-TRUNC-1` | deferred | Computational truncation classifier/HIT design. Reopen for a selected HoTT consumer, not to complete an inventory abstractly. |
+| `ILGR-TRUNC-1` | complete | Completed by `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`. Its classified reflector/action, Circle mere connectedness, contractibility of the set truncation, public surfaces, and exact 176-target health closeout are green. |
 | `ILGR-GROUPIFY-1` | deferred | Generic groupoidification reflector. The completed WalkingEnd-to-Circle comparison already serves the motivating example; reopen for a new universal-property consumer. |
 | `ILGR-GRAY-1` | deferred | Strict-object/lax-arrow profiles and Crans--Gray closure. Reopen after the shared laxity interface is active and a low-dimensional `I tensor I` consumer is selected. |
 | `ILGR-BOOK-1` | deferred | High-quality-prose book integration after the mathematical boundary selected for publication has stabilized. |
@@ -2359,9 +2368,10 @@ following sequence:
    boundary is now known to form, but its warning-heavy point joins are
    diagnostic-only and must be replaced by the native dependent filler rather
    than promoted;
-5. specify `NType_cat(n)`, its direct `TruncGrpdU(n)` object realization, the
-   primitive classified result `Trunc_ntype(n,A)`, its carrier/evidence and
-   `trunc_map` projections, and the exact restricted eliminator/beta boundary;
+5. **completed by the focused truncation child:** `NType_cat(n)`, its direct
+   `TruncGrpdU(n)` object realization, the primitive classified result
+   `Trunc_ntype(n,A)`, its carrier/evidence and `trunc_map` projections, and
+   the exact restricted eliminator/beta boundary;
 6. specify `GrayHom_lax`/`GrayHom_oplax` as strict-object profile categories
    whose Homs reuse the ambient transfor tower;
 7. implement one side of Gray curry/uncurry, derive coevaluation from
@@ -2702,8 +2712,8 @@ axis is interoperability; the first three are what make HoTT computational.
 | Empty/Unit/Bool/Nat | decoded formers and dependent eliminators; bounded observational equality for Unit/Bool/Nat; Nat arithmetic and sethood | Empty equality, broader higher actions/no-confusion only when useful, and categorical initial/terminal/NNO universal properties |
 | Sums and standard inductives | no active general Sum; curated Nat exists | redesign Sum from a real consumer; later curated finite types, lists/W-types, quotients, or indexed families rather than a generic declaration mechanism |
 | Equivalences/univalence | `TypeEquiv`, selected inverse algebra, Grpd equality/equivalence adapters, computational transport along `ua`, Product and partial Sigma/Pi constructor closure | complete selected Sigma/Pi base-changing cases, more constructor-specific computation, and a bounded universe-level/stratification policy |
-| Truncation | truncation predicates/levels, monotonicity, evidence property, Pi/Sigma closure, and the packaged `TruncGrpdU(n)` universe | implement the selected `NType_cat(n)` classifier facade, primitive classified result `Trunc_ntype(n,A)`, restricted eliminator/beta computation, and its comparison with a classical hub-and-spoke presentation; then quotient/set-truncation consumers |
-| HITs | WalkingEnd directed HIT, set-truncated telescope localization, Circle, and its checked integer loop-space computation | the selected computational truncation reflector above; then selected pushout/suspension/quotient consumers; no generic declaration schema is required |
+| Truncation | truncation predicates/levels, monotonicity, evidence property, Pi/Sigma closure, packaged `TruncGrpdU(n)`, the classified `NType_cat(n)` / `Trunc_ntype(n,A)` reflector, restricted point beta, recursor-derived whole map action, and the Circle set-truncation consumer | compare the selected sorted interface with a classical hub-and-spoke presentation when a consumer needs it; then selected quotient/set-truncation consumers |
+| HITs | WalkingEnd directed HIT, set-truncated telescope localization, Circle with checked integer loop-space computation, computational truncation, Circle mere connectedness, and contractibility of its set truncation | selected pushout/suspension/quotient consumers; no generic declaration schema is required |
 | Groupoidal categorical interface | `Path_cat`, `Path_cat_func`, Core inclusion, internal groupoidality, arrow-to-path selection, structured transport/J comparison, and representative product closure | more selected former-preservation bridges and possibly a universe/category of groupoidal categorical presentations |
 | Groupoidification | concrete WalkingEnd-to-Circle comparison with nonnegative powers sent to integers; no generic reflector | generic `Groupoidify_func ⊣ Path_cat_func` after truncation/lax-action design and another concrete higher-action consumer |
 
