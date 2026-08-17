@@ -65,9 +65,10 @@ endpoint. The strict LHS audit is zero, the catalog is strict and current, and
 the warning inventory remains exactly `1112/159`, so this row is
 warning-neutral relative to `ILGR-LAX-1`. The existing transparent `piapp*`
 aliases were sufficient and remain unchanged. `ILGR-LAX-3` is implemented and
-focused-green. Four transparent owners expose the arbitrary and
-identity-specialized target-internalized actions and their fixed-target
-projections by applying the existing internal action to `Op_transf`; the
+focused-green, and locally checkpointed at `8333848`. Four transparent owners
+expose the arbitrary and identity-specialized target-internalized actions and
+their fixed-target projections by applying the existing internal action to
+`Op_transf`; the
 pre/right witness is checked through the active `functord_laxity_transf` /
 `fdapp1_int_cell` ladder. The full-file owner and import probes pass, a wrong
 fixed-target endpoint is rejected, the strict LHS audit remains zero, and the
@@ -108,7 +109,7 @@ concrete consumer needs one.
 | `ILGR-00` | complete | Promote the research notebook; scan active owners and probes; record reuse, gaps, scope, and proportional validation. |
 | `ILGR-LAX-1` | complete | Promoted the generic `tapp0_hom_fapp0` observation with its existing `tdapp0_fapp0` Cat specialization. One runtime normal form, identity/composition beta, the whole `tapp0_func` hom action, endpoint rejection, subject reduction, strict LHS audit, and exact `+30/0` warning delta are checked. |
 | `ILGR-LAX-2` | complete | The late whole comma/identity-section projection recovers the displayed laxity component and retained fibre-arrow action from `fdapp1_int_transfd`; positive/negative consumers, warning neutrality, LHS audit, current transparent `piapp*` sufficiency, and checkpoint `dc89926` are recorded. |
-| `ILGR-LAX-3` | complete | The arbitrary and identity target-internalized actions are transparent opposite specializations; their fixed-target projections compute to the shared off-diagonal hom action, and the pre/right witness is extracted through `functord_laxity_transf` / `fdapp1_int_cell`. Positive/negative consumers, warning neutrality, and zero LHS growth are checked. |
+| `ILGR-LAX-3` | complete | The arbitrary and identity target-internalized actions are transparent opposite specializations; their fixed-target projections compute to the shared off-diagonal hom action, and the pre/right witness is extracted through `functord_laxity_transf` / `fdapp1_int_cell`. Positive/negative consumers, warning neutrality, zero LHS growth, and checkpoint `8333848` are recorded. |
 | `ILGR-LAX-4` | active | Package a representative post/left and pre/right compositor/naturality extraction with direct computational assertions and one standalone ordinary/displayed consumer. |
 | `ILGR-LAX-5` | pending | Retain one next internal action and inspect its expected recursively assembled boundary. This is an iteration test, not a complete simplicial-object, pentagon, nerve, Segal, or associahedral project. |
 | `ILGR-CLOSE-1` | pending | Synchronize source/example registration, focused diagnostics, Foundations/SOP/canonical syntax, catalog/health evidence, and an authorized local checkpoint. Avoid long aggregates unless their absence would block integration. |
@@ -1224,6 +1225,16 @@ independent fixed target. The implementation consists only of transparent
 definitions, so it adds no runtime or proof-time rule: warning counts remain
 `1112/159`, subject reduction is unchanged, and the strict LHS audit remains
 zero.
+
+The retained focused logs are:
+
+```text
+logs/probes/tapp1_con_internal_action_owner_full-20260817-092703.log
+logs/probes/tapp1_con_internal_action_active-20260817-093210.log
+logs/probes/tapp1_con_wrong_fixed_target_negative-20260817-093253.log
+logs/probes/emdash3_2-20260817-092826.log
+logs/probes/emdash3_2_checks-20260817-093431.log
+```
 
 ### 6C. Native iterated-`homd_` tetrahedron design (2026-08-17)
 
