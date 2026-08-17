@@ -1064,14 +1064,17 @@ record.
   strict-object/lax-arrow Gray internal-hom facade over the shared ambient
   transfor tower. The second row derives the walking interval, its endpoints,
   generator, and retained next action from the existing
-  `Join_cat(Terminal_cat,Terminal_cat)` and `join_cross_transf`. The next row
-  selects the right-closure/curry boundary leading to an `I tensor I` slice
-  whose interchanger is
+  `Join_cat(Terminal_cat,Terminal_cat)` and `join_cross_transf`. The third row
+  now supplies one `GrayTensor_R`, computationally strict whole curry/uncurry
+  functors between the profiled Hom categories, equality-valued whole
+  beta/eta through `OmegaEquivAlong Cat_cat`, and identity-derived
+  coevaluation/evaluation. The next row constructs the four objects and
+  coordinate arrows of `I tensor I`, leading to the interchanger
   projected from the active whole laxity action. Mirror closure, full
   biclosed/monoidal Crans--Gray structure, global strict-cut migration,
   groupoidification, and book work remain excluded. The first semantic row is
   checkpointed at `9222dad`; the derived walking-arrow row is checkpointed at
-  `1caf642`.
+  `1caf642`; the right-closure semantic row is ready for its local checkpoint.
 
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization

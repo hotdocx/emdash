@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow emdash.emdash3_2_gray_right_closure;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -24835,3 +24835,107 @@ assert ⊢
 assertnot ⊢
   WalkingArrow_cat
   ≡ @Product_cat Terminal_cat Terminal_cat;
+
+// catalog-area: Profiled Gray right closure
+// The selected tensor is characterized only through one profiled right
+// closure; curry and uncurry remain whole computationally strict functors.
+assert [A B C : Cat] ⊢
+  @GrayRightSource A B C
+  ≡ @GrayHom_oplax (@GrayTensor_R A B) C;
+
+assert [A B C : Cat] ⊢
+  @GrayRightTarget A B C
+  ≡ @GrayHom_oplax A (@GrayHom_oplax B C);
+
+assert [A B C : Cat] ⊢
+  @gray_curry_R_func A B C
+  ≡ @strict_functor_carrier
+      (@GrayRightSource A B C)
+      (@GrayRightTarget A B C)
+      (@gray_curry_R_data A B C);
+
+assert [A B C : Cat] ⊢
+  @gray_uncurry_R_func A B C
+  ≡ @strict_functor_carrier
+      (@GrayRightTarget A B C)
+      (@GrayRightSource A B C)
+      (@gray_uncurry_R_data A B C);
+
+// Curry exposes the generic whole Hom action, so no capped transpose is added.
+assert [A B C : Cat]
+  (H K : τ (Obj (@GrayRightSource A B C))) ⊢
+  @fapp1_func
+    (@GrayRightSource A B C)
+    (@GrayRightTarget A B C)
+    (@gray_curry_R_func A B C)
+    H K
+  : τ (@Functor
+      (Hom_cat (@GrayRightSource A B C) H K)
+      (Hom_cat
+        (@GrayRightTarget A B C)
+        (@gray_curry_R A B C H)
+        (@gray_curry_R A B C K)));
+
+// The existing omega-equivalence package uses the selected uncurry both ways.
+assert [A B C : Cat] ⊢
+  @omega_equiv_along_left_inv
+    Cat_cat
+    (@GrayRightSource A B C)
+    (@GrayRightTarget A B C)
+    (@gray_curry_R_func A B C)
+    (@gray_right_closure_omega A B C)
+  ≡ @gray_uncurry_R_func A B C;
+
+assert [A B C : Cat] ⊢
+  @omega_equiv_along_right_inv
+    Cat_cat
+    (@GrayRightSource A B C)
+    (@GrayRightTarget A B C)
+    (@gray_curry_R_func A B C)
+    (@gray_right_closure_omega A B C)
+  ≡ @gray_uncurry_R_func A B C;
+
+// Whole beta/eta compare the corresponding strict-functor codes pointwise.
+assert [A B C : Cat]
+  (H : τ (Obj (@GrayRightSource A B C))) ⊢
+  @gray_uncurry_curry_R_at A B C H
+  : τ (@=
+      (Obj (@GrayRightSource A B C))
+      (@gray_uncurry_R A B C (@gray_curry_R A B C H))
+      H);
+
+assert [A B C : Cat]
+  (K : τ (Obj (@GrayRightTarget A B C))) ⊢
+  @gray_curry_uncurry_R_at A B C K
+  : τ (@=
+      (Obj (@GrayRightTarget A B C))
+      (@gray_curry_R A B C (@gray_uncurry_R A B C K))
+      K);
+
+// Coevaluation and evaluation are the two selected identity transposes.
+assert [A B : Cat] ⊢
+  @gray_coevaluation_R_data A B
+  ≡ @gray_curry_R
+      A B (@GrayTensor_R A B)
+      (@strict_identity_data (@GrayTensor_R A B));
+
+assert [B C : Cat] ⊢
+  @gray_evaluation_R_data B C
+  ≡ @gray_uncurry_R
+      (@GrayHom_oplax B C) B C
+      (@strict_identity_data (@GrayHom_oplax B C));
+
+// The selected boundary remains distinct from the Cartesian scaffold.
+assertnot [A B : Cat] ⊢
+  @GrayTensor_R A B
+  ≡ @Product_cat A B;
+
+assertnot [A B C : Cat] ⊢
+  @GrayRightTarget A B C
+  ≡ @Functor_cat A (@Functor_cat B C);
+
+// Beta is retained equality evidence, not a new runtime object reduction.
+assertnot [A B C : Cat]
+  (H : τ (Obj (@GrayRightSource A B C))) ⊢
+  @gray_uncurry_R A B C (@gray_curry_R A B C H)
+  ≡ H;

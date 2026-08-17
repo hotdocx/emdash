@@ -35,14 +35,15 @@ Worktree: `/home/user1/emdash1-groupoidal-circle-v1`
 
 Branch: `goal/profiled-gray-hom-v3.2`
 
-Status: active bounded implementation plan. `GRAY-00` through `GRAY-02` are
-complete; `GRAY-03` is the selected next row. Local green checkpoint commits
+Status: active bounded implementation plan. `GRAY-00` through `GRAY-03` are
+complete; `GRAY-04` is the selected next row. Local green checkpoint commits
 are authorized by the user; push, merge, publication, release, history
 rewrite, branch deletion, and worktree removal are not authorized.
 
 Checkpoints: completed `GRAY-01` semantic tranche
 `9222dad7caf71741d0811505aeebef033f404059`; completed `GRAY-02` walking-arrow
-tranche `1caf642a3b99d4699becac3a1d90e26f4e58c4b1`
+tranche `1caf642a3b99d4699becac3a1d90e26f4e58c4b1`; completed `GRAY-03`
+right-closure semantic tranche awaiting its local checkpoint hash
 
 ## Objective
 
@@ -278,8 +279,8 @@ typecheck alone.
 | `GRAY-00` | complete | Git/SOP recovery, authority review, anti-duplication inventory, clean child branch, and bounded kernel baseline. The interval is corrected from “missing object” to “missing curated projection surface” over active `Join_cat(1,1)`. |
 | `GRAY-01` | complete | `emdash3_2_gray_profiles.lp` provides the primitive strict-functor code/decoder, selected identity code/path, profile-local compositor-to-identity computation, `GrayHom_oplax`, and its whole inclusion. The registered reviewer and central diagnostics cover object/Hom/identity/composition, inclusion object/hom action, retained next hom, rigid unprofiled non-collapse, and arbitrary-functor rejection. Focused source, reviewer, and central checks pass with subject reduction; the strict LHS audit is zero; the accepted warning inventory is `1130/159`, exactly `+18/0` over `1112/159`; and the regenerated strict catalog has 2,121 checks across 102 areas with zero unclassified checks. |
 | `GRAY-02` | complete | `emdash3_2_walking_arrow.lp` transparently defines `WalkingArrow_cat` as `Join_cat(1,1)`, derives its two distinct endpoints from the join inclusions, and obtains the generator as the terminal component of the fibre of `join_cross_transf`. The whole fibre functor and its `fapp1_func` next action are retained. The focused source/reviewer and affected central diagnostics pass; no rule or unifier is added; the strict LHS audit is zero; the source warning inventory is unchanged at `1112/159`; and the strict catalog has 2,131 checks across 103 areas with zero unclassified checks. |
-| `GRAY-03` | selected next | Select one tensor/right-closure owner and implement whole curry/uncurry, evaluation/coevaluation, and beta/eta comparisons. Confirm the lax/oplax orientation by typed action, not naming convention. |
-| `GRAY-04` | pending | Construct the four `I tensor I` objects and both coordinate arrow families through coevaluation. Reject accidental endpoint collapse and Cartesian-only behavior. |
+| `GRAY-03` | complete | `emdash3_2_gray_right_closure.lp` provides one opaque `GrayTensor_R` category, computationally strict whole curry/uncurry functors between the profiled Hom categories, whole beta/eta paths assembled as the existing `OmegaEquivAlong Cat_cat`, their object evaluations, and coevaluation/evaluation derived at strict identity codes. The rule-free source/reviewer/central targets pass; warning evidence remains exactly `1130/159`; the strict LHS audit is zero; and the catalog has 2,145 checks across 104 areas with zero unclassified checks. The right-closure typing is fixed, while the `oplax` orientation name remains provisional until `GRAY-05` observes the interchanger. |
+| `GRAY-04` | selected next | Construct the four `I tensor I` objects and both coordinate arrow families through coevaluation. Reject accidental endpoint collapse and Cartesian-only behavior. |
 | `GRAY-05` | pending | Project the directed interchanger from the active whole laxity owner, identify its two boundary composites, and retain one next hom action. No independent square axiom or capped-only facade. |
 | `GRAY-CLOSE-1` | pending | Synchronize source/example ownership, master/child ledgers, Foundations/SOP/canonical syntax, report index, checks/catalog/health required by the actual diff, and local green checkpoints. Record exclusions and next consumer. |
 
@@ -428,6 +429,61 @@ reserved for `GRAY-CLOSE-1`; no all-source or all-example aggregate was run.
 
 The bounded walking-arrow tranche is locally checkpointed at `1caf642`; this
 ledger entry records that recovery anchor without widening the row.
+
+### Promoted `GRAY-03` result — 2026-08-17
+
+The one-sided right-closure boundary is now promoted in
+`emdash3_2_gray_right_closure.lp`, with its reviewer in
+`examples/gray_right_closure.lp`. The implementation reuses the existing
+strict-code and equality-valued omega-equivalence owners rather than adding a
+second map or equivalence hierarchy:
+
+```text
+GrayRightSource(A,B,C)
+  := GrayHom_oplax(GrayTensor_R(A,B),C)
+
+GrayRightTarget(A,B,C)
+  := GrayHom_oplax(A,GrayHom_oplax(B,C)).
+```
+
+`gray_curry_R_func` and `gray_uncurry_R_func` decode selected
+`StrictFunctorData` codes between these two category heads. They are therefore
+whole functors with the generic iterable `fapp1_func` action, while their
+objects remain strict-functor codes. Two equality-valued whole cancellation
+paths assemble `gray_right_closure_omega : OmegaEquivAlong Cat_cat`; both
+selected inverse projections compute to the same uncurry functor. Evaluating
+the whole paths derives object-level beta and eta comparisons without adding
+judgmental `uncurry(curry(H))` or `curry(uncurry(K))` folds.
+
+Coevaluation and evaluation are not independent operations:
+
+```text
+gray_coevaluation_R_data(A,B)
+  := gray_curry_R(strict_identity_data(GrayTensor_R(A,B)))
+
+gray_evaluation_R_data(B,C)
+  := gray_uncurry_R(strict_identity_data(GrayHom_oplax(B,C))).
+```
+
+Their public functors are the existing strict decoder applied to these data.
+This gives the exact introduction/elimination surface required by the next
+`I tensor I` consumer while keeping the tensor distinct from `Product_cat`
+and the profiled target distinct from nested ambient `Functor_cat`.
+
+The source, focused reviewer, and affected central diagnostic target pass
+with ordinary subject reduction. The extension adds no rule or unifier, so
+its warning-enabled source remains exactly `1130` critical pairs and `159`
+replaceable-pattern advisories inherited from `emdash3_2_gray_profiles.lp`.
+The strict LHS audit reports zero unreviewed candidates. Fourteen central
+diagnostics regenerate the strict catalog at 2,145 checks across 104 areas,
+with zero unclassified checks. Health/CI remains reserved for
+`GRAY-CLOSE-1`; no all-source, all-example, or repository-wide aggregate was
+run.
+
+This row fixes the typed **right** closure. It does not yet settle whether the
+chosen higher-cell direction deserves the `lax` or `oplax` name; that label is
+confirmed only when `GRAY-05` projects the oriented interchanger. The bounded
+semantic tranche is ready for its authorized local checkpoint.
 
 ## Validation Policy
 

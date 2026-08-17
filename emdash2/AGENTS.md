@@ -185,6 +185,12 @@ the transparent walking-arrow interface over
 `Join_cat(Terminal_cat,Terminal_cat)` is `emdash3_2_walking_arrow.lp`; its two
 endpoints come from the join inclusions, while its generator and retained next
 action are projections of the existing whole `join_cross_transf`;
+the selected profiled right-closure boundary is
+`emdash3_2_gray_right_closure.lp`; it introduces one opaque tensor category,
+decoded computationally strict whole curry/uncurry functors, equality-valued
+whole beta/eta comparisons packaged by `OmegaEquivAlong Cat_cat`, and derived
+coevaluation/evaluation at strict identity codes, without claiming the mirror
+closure or a full Crans--Gray monoidal structure;
 the classified computational homotopy-truncation reflector and its derived
 whole map action are `emdash3_2_truncation_reflector.lp`; it realizes the
 category of `n`-types through retained `TruncGrpdU(n)` packages, restricts
@@ -727,26 +733,33 @@ Use the following order:
     terminal component of the fibre of `join_cross_transf`; and the whole
     fibre owner retains the next hom action. It adds no interval primitive,
     standalone generator, rule, or unifier;
-76. `emdash3_2_truncation_reflector.lp` for the classified computational
+76. `emdash3_2_gray_right_closure.lp` for the selected rule-free profiled
+    right closure. `GrayTensor_R` is an opaque category owner; curry and
+    uncurry decode computationally strict codes between the two Gray-hom
+    profile categories; whole beta/eta paths assemble the existing
+    `OmegaEquivAlong Cat_cat`; and coevaluation/evaluation are projections at
+    strict identity codes. It adds no mirror closure, tensor parameter action,
+    monoidal coherence, judgmental beta/eta fold, or full Crans--Gray claim;
+77. `emdash3_2_truncation_reflector.lp` for the classified computational
     truncation reflector. It realizes `NType_cat(n)` through the existing
     retained-evidence `TruncGrpdU(n)` package, provides point-computing
     restricted induction/recursion, derives map identity and composition by
     that induction, and reuses `path_map_func` for an iterable whole Hom
     action;
-77. `emdash3_2_circle_connectedness.lp` for the rule-free first concrete
+78. `emdash3_2_circle_connectedness.lp` for the rule-free first concrete
     consumer of propositional truncation. It proves mere based connectedness
     of the Circle by dependent Circle induction; retained proposition evidence
     supplies the loop `PathOver`, so no untruncated global path is selected.
     Eliminating this mere path evidence into the set truncation proves
     `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier rewrite to Unit;
-78. `emdash3_2_checks.lp` for executable regression statements;
-79. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+79. `emdash3_2_checks.lp` for executable regression statements;
+80. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-80. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-81. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+81. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+82. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-82. `reports/INDEX.md` for task-specific plans and decision records.
-83. `book/book.json` and `book/evidence.json` for book source
+83. `reports/INDEX.md` for task-specific plans and decision records.
+84. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

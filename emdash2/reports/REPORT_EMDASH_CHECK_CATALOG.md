@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2131
-- Mapped areas: 103
+- Total checks: 2145
+- Mapped areas: 104
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -122,6 +122,7 @@ stable mathematical-area scopes rather than source locations.
 | Ordinary post/pre laxity and functor compositor | 5 |
 | Computational strict functors and profiled Gray hom | 7 |
 | Walking arrow from the directed join | 10 |
+| Profiled Gray right closure | 14 |
 
 ## Section Details
 
@@ -2770,3 +2771,22 @@ stable mathematical-area scopes rather than source locations.
 | 2129 | 24817 | `assert ⊢ walking_arrow_generator_next_func : τ (Functor (Hom_cat Terminal_cat Terminal_obj Terminal_obj) (Hom_cat (H ...` |
 | 2130 | 24826 | `assert ⊢ walking_arrow_generator_next_func ≡ @fapp1_func Terminal_cat (Hom_cat WalkingArrow_cat walking_arrow_src wa ...` |
 | 2131 | 24835 | `assertnot ⊢ WalkingArrow_cat ≡ @Product_cat Terminal_cat Terminal_cat;` |
+
+### Profiled Gray right closure
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 2132 | 24842 | `assert [A B C : Cat] ⊢ @GrayRightSource A B C ≡ @GrayHom_oplax (@GrayTensor_R A B) C;` |
+| 2133 | 24846 | `assert [A B C : Cat] ⊢ @GrayRightTarget A B C ≡ @GrayHom_oplax A (@GrayHom_oplax B C);` |
+| 2134 | 24850 | `assert [A B C : Cat] ⊢ @gray_curry_R_func A B C ≡ @strict_functor_carrier (@GrayRightSource A B C) (@GrayRightTarget ...` |
+| 2135 | 24857 | `assert [A B C : Cat] ⊢ @gray_uncurry_R_func A B C ≡ @strict_functor_carrier (@GrayRightTarget A B C) (@GrayRightSour ...` |
+| 2136 | 24865 | `assert [A B C : Cat] (H K : τ (Obj (@GrayRightSource A B C))) ⊢ @fapp1_func (@GrayRightSource A B C) (@GrayRightTarg ...` |
+| 2137 | 24880 | `assert [A B C : Cat] ⊢ @omega_equiv_along_left_inv Cat_cat (@GrayRightSource A B C) (@GrayRightTarget A B C) (@gray_ ...` |
+| 2138 | 24889 | `assert [A B C : Cat] ⊢ @omega_equiv_along_right_inv Cat_cat (@GrayRightSource A B C) (@GrayRightTarget A B C) (@gray ...` |
+| 2139 | 24899 | `assert [A B C : Cat] (H : τ (Obj (@GrayRightSource A B C))) ⊢ @gray_uncurry_curry_R_at A B C H : τ (@= (Obj (@GrayRi ...` |
+| 2140 | 24907 | `assert [A B C : Cat] (K : τ (Obj (@GrayRightTarget A B C))) ⊢ @gray_curry_uncurry_R_at A B C K : τ (@= (Obj (@GrayRi ...` |
+| 2141 | 24916 | `assert [A B : Cat] ⊢ @gray_coevaluation_R_data A B ≡ @gray_curry_R A B (@GrayTensor_R A B) (@strict_identity_data (@ ...` |
+| 2142 | 24922 | `assert [B C : Cat] ⊢ @gray_evaluation_R_data B C ≡ @gray_uncurry_R (@GrayHom_oplax B C) B C (@strict_identity_data ( ...` |
+| 2143 | 24929 | `assertnot [A B : Cat] ⊢ @GrayTensor_R A B ≡ @Product_cat A B;` |
+| 2144 | 24933 | `assertnot [A B C : Cat] ⊢ @GrayRightTarget A B C ≡ @Functor_cat A (@Functor_cat B C);` |
+| 2145 | 24938 | `assertnot [A B C : Cat] (H : τ (Obj (@GrayRightSource A B C))) ⊢ @gray_uncurry_R A B C (@gray_curry_R A B C H) ≡ H;` |
