@@ -1127,8 +1127,22 @@ The kernel owners are `functord_laxity_transf(FF,p)` and
 extracted from `fdapp1_int_transfd(FF)` through a self-comma identity section;
 it does not introduce a second square or law. For `h : u -> u'` in `E[x]`,
 the expression `laxity(FF,p)[h]` means the retained generic `tapp1` action of
-that same transformation. The post/left and pre/right ordinary specializations
-remain future named surfaces.
+that same transformation.
+
+For an ordinary `epsilon : F => G`, the two active fixed-object internal
+actions may be written
+
+```text
+action(epsilon,X,-) : Hom_A(X,-) => Hom_B(F[X],G[-])
+action(epsilon,-,Y) : Hom_A(-,Y) => Hom_B(F[-],G[Y]).
+```
+
+Their kernel owners are `tapp1_at_transf(epsilon,X)` and
+`tapp1_con_at_transf(epsilon,Y)`. Both project at `(X,Y)` to
+`tapp1_func(epsilon,X,Y)`; the second is the transparent opposite
+specialization, not a second square. Named post/left and pre/right *laxity
+transformation* surfaces remain a later convenience layer over these active
+owners and `functord_laxity_transf`.
 
 ## Displayed Sibling Product Notation
 

@@ -3409,6 +3409,24 @@ rigid-`Hom` provenance. Opposite/identity presentations, independently
 factored pre/post cuts, and one-inactive-endpoint degenerations are related by
 narrow two-rigid-head `unif_rule`s. They are not global runtime folds.
 
+Section 7f now uses that existing variance comparison to expose the ordinary
+target-internalized action. `tapp1_con_int_fapp0_transf(epsilon)` is a
+transparent application of `tapp1_int_fapp0_transf` to
+`Op_transf(epsilon)` in the native opposite presentation. Its fixed-target
+projection
+
+```text
+tapp1_con_at_transf(epsilon,Y)
+  : Hom_A(-,Y) => Hom_B(F[-],G[Y])
+```
+
+computes at `X` to `tapp1_func(epsilon,X,Y)`. The identity-specialized owners
+are `fapp1_con_int_transf(F)` and `fapp1_con_at_transf(F,Y)`. Applying the
+active whole displayed laxity extractor to this fixed-target transfor yields
+the pre/right witness through `fdapp1_int_cell`; no independent ordinary
+naturality square or new runtime rule is installed. A functor varying higher
+arrows between `epsilon`s remains consumer-gated.
+
 `Hom_tele_func`, `Hom_func`, and `Hom_fapp0` retain focused runtime identity
 and composition joins because projection can hide the literal generic
 functor-action pattern.
@@ -4450,8 +4468,9 @@ The following remain explicit future work rather than hidden assumptions:
   its transparent expression and the general
   `sigma_pullback_total_func(F,D)` base-change totalization are active;
 - semantic uncurry action on arbitrary transfors;
-- the ordinary target-internalized/opposite mirror, pre/right laxity witness,
-  and selected next recursive action beyond the active whole displayed
+- named post/left and pre/right ordinary laxity surfaces, a functor varying
+  higher arrows between ordinary transfors, and the selected next recursive
+  action beyond the active target-internalized mirror and whole displayed
   `functord_laxity_transf` owner;
 - the arrow action of `sigma_intro_tapp0_func`;
 - off-diagonal `tapp1_*` projections for `sigma_map_transf` beyond its current

@@ -3438,6 +3438,34 @@ in the internal action; it does not add an independent naturality square.
 The existing transparent `piapp*` presentation is sufficient for this first
 consumer. A primitive redesign of section application remains consumer-gated.
 
+The ordinary internal action now has both fixed-object projections. For
+`epsilon : F => G`, fixing the source gives
+
+```text
+tapp1_at_transf(epsilon,X)
+  : Hom_A(X,-) => Hom_B(F[X],G[-]),
+```
+
+while fixing the target gives the contravariant mirror
+
+```text
+tapp1_con_at_transf(epsilon,Y)
+  : Hom_A(-,Y) => Hom_B(F[-],G[Y]).
+```
+
+The second owner is transparently the first internal action applied to
+`Op_transf(epsilon)`, in its native opposite presentation. Its component at
+`X` computes to the same `tapp1_func(epsilon,X,Y)` off-diagonal hom functor.
+Consequently applying `functord_laxity_transf` over an arrow `h : W -> X`
+extracts the pre/right witness from the existing `fdapp1_int_cell` ladder;
+no independent naturality square is declared. The identity specializations
+are `fapp1_con_int_transf(F)` and `fapp1_con_at_transf(F,Y)`.
+
+This boundary retains the whole contravariant source-variable action. A
+separate functor varying a higher arrow between ordinary transfors is still
+consumer-gated; this first ordinary consumer does not require an
+`Op_transf_func` package or displayed `homd_con_int` mirror.
+
 A future named `section_total(s) : K → Σ_K E` facade would make this sharing
 more visible at the presentation level, but its transparent total-category
 construction and the more general base-change totalization are active. The

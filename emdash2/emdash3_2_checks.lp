@@ -24563,3 +24563,72 @@ assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D))
       (@functord_transport_lhs_func K E D FF x y p)
       (@functord_transport_rhs_func K E D FF x y p)
       u (@fdapp1_comma_projection_transf K E D FF eta x y p);
+
+// catalog-area: Target-internalized ordinary hom action
+// The arbitrary fixed-target mirror is the opposite specialization of the
+// existing internal action and projects to the same off-diagonal hom functor.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (X Y : τ (Obj A)) ⊢
+  @tapp0_fapp0
+    (Op_cat A)
+    Cat_cat
+    (@hom_con A Y A (@id_func A))
+    (@hom_con B (@fapp0 A B G Y) A F)
+    X
+    (@tapp1_con_at_transf A B F G epsilon Y)
+  ≡ @tapp1_func A B F G X Y epsilon;
+
+// Identity specialization reuses the target-internalized functor action.
+assert [A B : Cat] (F : τ (Functor A B)) (Y : τ (Obj A)) ⊢
+  @tapp1_con_at_transf
+    A B F F
+    (@id (Functor_cat A B) F)
+    Y
+  ≡ @fapp1_con_at_transf A B F Y;
+
+assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) ⊢
+  @tapp0_fapp0
+    (Op_cat A)
+    Cat_cat
+    (@hom_con A Y A (@id_func A))
+    (@hom_con B (@fapp0 A B F Y) A F)
+    X
+    (@fapp1_con_at_transf A B F Y)
+  ≡ @fapp1_func A B F X Y;
+
+// The whole displayed extraction consumes the fixed-target mirror and
+// computes to the established fdapp1_int_cell pre/right witness.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [W X Y : τ (Obj A)]
+  (h : τ (Hom A W X))
+  (q : τ (Hom A X Y)) ⊢
+  @tapp0_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+    (@functord_transport_lhs_func
+      (Op_cat A)
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)
+      (@tapp1_con_at_transf A B F G epsilon Y)
+      X W h)
+    (@functord_transport_rhs_func
+      (Op_cat A)
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)
+      (@tapp1_con_at_transf A B F G epsilon Y)
+      X W h)
+    q
+    (@functord_laxity_transf
+      (Op_cat A)
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)
+      (@tapp1_con_at_transf A B F G epsilon Y)
+      X W h)
+  ≡ @fdapp1_int_cell
+      (Op_cat A)
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)
+      (@tapp1_con_at_transf A B F G epsilon Y)
+      X W h q;

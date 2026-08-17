@@ -64,9 +64,17 @@ rejects a `p`-indexed laxity transformation requested at a distinct `q`
 endpoint. The strict LHS audit is zero, the catalog is strict and current, and
 the warning inventory remains exactly `1112/159`, so this row is
 warning-neutral relative to `ILGR-LAX-1`. The existing transparent `piapp*`
-aliases were sufficient and remain unchanged. `ILGR-LAX-3` is now the first
-dependency-ready row. Health and broader closure remain assigned to
-`ILGR-CLOSE-1`. No push, merge, publication, release,
+aliases were sufficient and remain unchanged. `ILGR-LAX-3` is implemented and
+focused-green. Four transparent owners expose the arbitrary and
+identity-specialized target-internalized actions and their fixed-target
+projections by applying the existing internal action to `Op_transf`; the
+pre/right witness is checked through the active `functord_laxity_transf` /
+`fdapp1_int_cell` ladder. The full-file owner and import probes pass, a wrong
+fixed-target endpoint is rejected, the strict LHS audit remains zero, and the
+warning inventory remains exactly `1112/159`. No new runtime or unification
+rule, `Op_transf_func`, or displayed contravariant ladder was introduced.
+`ILGR-LAX-4` is now the first dependency-ready row. Health and broader closure
+remain assigned to `ILGR-CLOSE-1`. No push, merge, publication, release,
 history rewrite, worktree removal, truncation, generic groupoidification,
 Gray tensor, or book rewrite is authorized by this plan.
 
@@ -100,8 +108,8 @@ concrete consumer needs one.
 | `ILGR-00` | complete | Promote the research notebook; scan active owners and probes; record reuse, gaps, scope, and proportional validation. |
 | `ILGR-LAX-1` | complete | Promoted the generic `tapp0_hom_fapp0` observation with its existing `tdapp0_fapp0` Cat specialization. One runtime normal form, identity/composition beta, the whole `tapp0_func` hom action, endpoint rejection, subject reduction, strict LHS audit, and exact `+30/0` warning delta are checked. |
 | `ILGR-LAX-2` | complete | The late whole comma/identity-section projection recovers the displayed laxity component and retained fibre-arrow action from `fdapp1_int_transfd`; positive/negative consumers, warning neutrality, LHS audit, current transparent `piapp*` sufficiency, and checkpoint `dc89926` are recorded. |
-| `ILGR-LAX-3` | active | Expose the ordinary target-internalized/opposite mirror and derive the pre/right witness from the same `fdapp1_int_cell` ladder; do not postulate an independent naturality square. |
-| `ILGR-LAX-4` | pending | Package a representative post/left and pre/right compositor/naturality extraction with direct computational assertions and one standalone ordinary/displayed consumer. |
+| `ILGR-LAX-3` | complete | The arbitrary and identity target-internalized actions are transparent opposite specializations; their fixed-target projections compute to the shared off-diagonal hom action, and the pre/right witness is extracted through `functord_laxity_transf` / `fdapp1_int_cell`. Positive/negative consumers, warning neutrality, and zero LHS growth are checked. |
+| `ILGR-LAX-4` | active | Package a representative post/left and pre/right compositor/naturality extraction with direct computational assertions and one standalone ordinary/displayed consumer. |
 | `ILGR-LAX-5` | pending | Retain one next internal action and inspect its expected recursively assembled boundary. This is an iteration test, not a complete simplicial-object, pentagon, nerve, Segal, or associahedral project. |
 | `ILGR-CLOSE-1` | pending | Synchronize source/example registration, focused diagnostics, Foundations/SOP/canonical syntax, catalog/health evidence, and an authorized local checkpoint. Avoid long aggregates unless their absence would block integration. |
 | `ILGR-GRPD-1` | deferred | Groupoidal realization of the directed simplex-shaped calculus. Reopen only after the generic laxity owner has a concrete path-valued consumer. |
@@ -801,19 +809,19 @@ whole ordinary internal action
     -> capped cell at f.
 ```
 
-### 4. The pre/right side needs the missing fixed-target projection
+### 4. The pre/right side uses the active fixed-target projection
 
 The existing `tapp1_at_transf(epsilon,X)` fixes the source object and varies
-the target. The pre/right cell needs the mirror operation: fix the target
-object and vary the source contravariantly. The required fixed-target owner is
+the target. The active pre/right mirror fixes the target object and varies the
+source contravariantly:
 
 ```text
 tapp1_con_at_transf(epsilon,Y)
   : hom_con(Y,id_A) => hom_con(G[Y],F),
 ```
 
-as a transfor of Cat-valued functors over `Op_cat A`. At `X`, it must project
-to the same off-diagonal hom functor:
+as a transfor of Cat-valued functors over `Op_cat A`. At `X`, it projects to
+the same off-diagonal hom functor:
 
 ```text
 tapp1_con_at_transf(epsilon,Y)[X]
@@ -836,10 +844,9 @@ epsilon[f] o F[h]  ==>  epsilon[f o h].
 ```
 
 This is the fixed-target mirror of the already implemented fixed-source
-projection. It should not be introduced as an unrelated pointwise symbol.
+projection, not an unrelated pointwise symbol.
 
-There is also a mathematically natural whole target-internalized action. The
-existing `hom_con_int` types make its schematic signature precise:
+The active object-action owner has the readable target-internalized view:
 
 ```text
 tapp1_con_int_fapp0_transf(epsilon)
@@ -858,26 +865,28 @@ Its component at `Y` is exactly `tapp1_con_at_transf(epsilon,Y)`. The identity
 specialization gives corresponding `fapp1_con_int_transf(F)` and
 `fapp1_con_at_transf(F,Y)` owners.
 
-This whole mirror is justified by the same policy that produced separate
-runtime heads `hom_int` and `hom_con_int`: source and target variance are
-operationally different, while opposite comparison belongs at proof time.
-The two actions must nevertheless be linked by an explicit opposite/duality
-comparison, rather than installed as independent semantics.
+Its native signature retains the opposite `hom_int` presentation, and its
+transparent body is `tapp1_int_fapp0_transf(Op_transf(epsilon))`. This follows
+the same policy that produced separate runtime heads `hom_int` and
+`hom_con_int`: source and target variance are operationally different, while
+opposite comparison belongs at proof time. The two actions are thereby linked
+by explicit duality rather than installed as independent semantics.
 
 The resulting variance matrix is:
 
 | Projection rung | Source-internalized/covariant-target side | Target-internalized/contravariant-source side |
 | --- | --- | --- |
 | represented whole family | active `hom_int` | active `hom_con_int` |
-| arbitrary transfor action | active `tapp1_int_func_transf` | proposed `tapp1_con_int_func_transf` |
-| identity specialization | active `fapp1_int_transf` | proposed `fapp1_con_int_transf` |
-| fixed object projection | active `tapp1_at_transf` / `fapp1_at_transf` | proposed `tapp1_con_at_transf` / `fapp1_con_at_transf` |
+| arbitrary transfor object action | active `tapp1_int_fapp0_transf` | active transparent `tapp1_con_int_fapp0_transf` |
+| functor varying a higher arrow between transfors | active `tapp1_int_func_transf` | deferred pending a concrete `Op_transf_func` consumer |
+| identity specialization | active `fapp1_int_transf` | active `fapp1_con_int_transf` |
+| fixed object projection | active `tapp1_at_transf` / `fapp1_at_transf` | active `tapp1_con_at_transf` / `fapp1_con_at_transf` |
 | displayed arbitrary/identity action | active `tdapp1_int_*` / `fdapp1_int_*` | reserve a `_con_int` mirror only for a concrete varying-target displayed consumer |
 
 The last row should be systematic in the design, but not duplicated eagerly
-in the source. Ordinary pre/right laxity needs the first four rows and can
-reuse the existing generic displayed `fdapp1_int_cell` after the fixed-target
-projection. `tdapp1_con_int_*` and `fdapp1_con_int_*` become justified when a
+in the source. Ordinary pre/right laxity uses the active object-action and
+fixed-target rows and reuses the existing generic displayed
+`fdapp1_int_cell`. `tdapp1_con_int_*` and `fdapp1_con_int_*` become justified when a
 consumer genuinely has to internalize a displayed target variable and the
 opposite route does not retain an adequate runtime owner. This is an
 incremental realization of a symmetric variance matrix, not an ad hoc
@@ -1176,6 +1185,45 @@ laxity component, and the retained arrow action. A negative probe rejects a
 `p`-indexed transformation requested at a distinct `q` endpoint. This concrete
 consumer confirms that the existing transparent `piapp*` aliases are
 sufficient.
+
+#### 6B.2. Target-internalized mirror verdict (2026-08-17)
+
+`ILGR-LAX-3` does not need a second ordinary naturality square. For an
+arbitrary `epsilon : F => G`, the active transparent owner is the semantic
+term
+
+```text
+tapp1_con_int_fapp0_transf(epsilon)
+  := tapp1_int_fapp0_transf(Op_transf(epsilon)),
+```
+
+kept in its native opposite-`hom_int` signature. The existing proof-time
+`hom_int` / `hom_con_int` comparison supplies the readable target-internalized
+view. Projecting at `Y` gives
+
+```text
+tapp1_con_at_transf(epsilon,Y)
+  : Hom_A(-,Y) => Hom_B(F[-],G[Y]),
+```
+
+whose component at `X` computes to the same
+`tapp1_func(epsilon,X,Y)` off-diagonal hom functor as the fixed-source action.
+The identity specializations are `fapp1_con_int_transf(F)` and
+`fapp1_con_at_transf(F,Y)`.
+
+Applying the already-active `functord_laxity_transf` to this fixed-target
+transfor over `Op_cat(A)` extracts the pre/right witness through the same
+`fdapp1_int_cell` projection ladder. Thus the owner is whole and iterable in
+the source variable even though the row deliberately does not add a functor
+varying a higher arrow between `epsilon`s. Such an `Op_transf_func` package,
+and displayed `_con_int` mirrors, remain consumer-gated.
+
+The exact owner-position full-file probe, focused active import probe, kernel,
+and four central assertions pass. A negative probe rejects projection at an
+independent fixed target. The implementation consists only of transparent
+definitions, so it adds no runtime or proof-time rule: warning counts remain
+`1112/159`, subject reduction is unchanged, and the strict LHS audit remains
+zero.
 
 ### 6C. Native iterated-`homd_` tetrahedron design (2026-08-17)
 
@@ -2140,11 +2188,12 @@ following sequence:
    first hom action only after the exact nonzero diagnostic delta above is
    accepted or narrowed; warnings are evidence to inspect, not an automatic
    veto;
-3. retain the now-green target-internalized ordinary mirror as the
-   opposite-specialized `fapp1_int_transf(Op_func(F))` projection; its
-   fixed-target `fapp1_con_at_transf` and pre/right `fdapp1_int_cell` require no
-   independent square, while a displayed `homd_con_int` remains deferred
-   until a genuinely displayed consumer needs it;
+3. retain the now-active target-internalized ordinary mirror as the
+   opposite-specialized `tapp1_int_fapp0_transf(Op_transf(epsilon))`
+   projection, with `fapp1_int_transf(Op_func(F))` as its identity case; its
+   fixed-target `tapp1_con_at_transf` and pre/right `fdapp1_int_cell` require no
+   independent square, while higher action in `epsilon` and a displayed
+   `homd_con_int` remain deferred until a genuine consumer needs them;
 4. formulate the actual compositor tetrahedron first as the second
    `homd_`/Sigma simplex, obtain its canonical source from the identity-section
    construction one hom level higher, and only then project its four binary
