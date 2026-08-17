@@ -1062,9 +1062,11 @@ record.
   Its first semantic row now supplies a computational strict-functor
   code/decoder and a
   strict-object/lax-arrow Gray internal-hom facade over the shared ambient
-  transfor tower. The next row derives the walking interval from the existing
-  `Join_cat(Terminal_cat,Terminal_cat)`, followed by one right-closed
-  `I tensor I` slice whose interchanger is
+  transfor tower. The second row derives the walking interval, its endpoints,
+  generator, and retained next action from the existing
+  `Join_cat(Terminal_cat,Terminal_cat)` and `join_cross_transf`. The next row
+  selects the right-closure/curry boundary leading to an `I tensor I` slice
+  whose interchanger is
   projected from the active whole laxity action. Mirror closure, full
   biclosed/monoidal Crans--Gray structure, global strict-cut migration,
   groupoidification, and book work remain excluded. The first semantic row is

@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2121
-- Mapped areas: 102
+- Total checks: 2131
+- Mapped areas: 103
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -121,6 +121,7 @@ stable mathematical-area scopes rather than source locations.
 | Target-internalized ordinary hom action | 4 |
 | Ordinary post/pre laxity and functor compositor | 5 |
 | Computational strict functors and profiled Gray hom | 7 |
+| Walking arrow from the directed join | 10 |
 
 ## Section Details
 
@@ -2754,3 +2755,18 @@ stable mathematical-area scopes rather than source locations.
 | 2119 | 24731 | `assert [A B : Cat] (X Y : τ (Obj (@GrayHom_oplax A B))) ⊢ @fapp1_func (@GrayHom_oplax A B) (@Functor_cat A B) (@gray ...` |
 | 2120 | 24746 | `assert [A B : Cat] (S : τ (@StrictFunctorData A B)) [X Y Z : τ (Obj A)] (g : τ (Hom A Y Z)) (f : τ (Hom A X Y)) ⊢ @f ...` |
 | 2121 | 24764 | `assertnot [A B : Cat] (F : τ (Functor A B)) ⊢ F : τ (Obj (@GrayHom_oplax A B));` |
+
+### Walking arrow from the directed join
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 2122 | 24771 | `assert ⊢ WalkingArrow_cat ≡ @Join_cat Terminal_cat Terminal_cat;` |
+| 2123 | 24775 | `assert ⊢ walking_arrow_src : τ (Obj WalkingArrow_cat);` |
+| 2124 | 24779 | `assert ⊢ walking_arrow_tgt : τ (Obj WalkingArrow_cat);` |
+| 2125 | 24783 | `assertnot ⊢ walking_arrow_src ≡ walking_arrow_tgt;` |
+| 2126 | 24787 | `assert ⊢ walking_arrow_generator_func : τ (Functor Terminal_cat (Hom_cat WalkingArrow_cat walking_arrow_src walking_ ...` |
+| 2127 | 24793 | `assert ⊢ walking_arrow_generator_func ≡ @Fibre_func (Product_cat (Op_cat Terminal_cat) Terminal_cat) (@Terminal_prof ...` |
+| 2128 | 24809 | `assert ⊢ walking_arrow_generator ≡ @fapp0 Terminal_cat (Hom_cat WalkingArrow_cat walking_arrow_src walking_arrow_tgt ...` |
+| 2129 | 24817 | `assert ⊢ walking_arrow_generator_next_func : τ (Functor (Hom_cat Terminal_cat Terminal_obj Terminal_obj) (Hom_cat (H ...` |
+| 2130 | 24826 | `assert ⊢ walking_arrow_generator_next_func ≡ @fapp1_func Terminal_cat (Hom_cat WalkingArrow_cat walking_arrow_src wa ...` |
+| 2131 | 24835 | `assertnot ⊢ WalkingArrow_cat ≡ @Product_cat Terminal_cat Terminal_cat;` |

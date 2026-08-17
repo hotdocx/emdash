@@ -181,6 +181,10 @@ strict-object/lax-arrow internal-hom profile are
 `emdash3_2_gray_profiles.lp`; decoded strict codes make the existing extracted
 compositor compute to identity at its stable owner, while homs and every
 higher action reuse the ambient `Transf_cat` tower;
+the transparent walking-arrow interface over
+`Join_cat(Terminal_cat,Terminal_cat)` is `emdash3_2_walking_arrow.lp`; its two
+endpoints come from the join inclusions, while its generator and retained next
+action are projections of the existing whole `join_cross_transf`;
 the classified computational homotopy-truncation reflector and its derived
 whole map action are `emdash3_2_truncation_reflector.lp`; it realizes the
 category of `n`-types through retained `TruncGrpdU(n)` packages, restricts
@@ -717,26 +721,32 @@ Use the following order:
     homs and higher cells reuse the ambient `Transf_cat` tower. The oplax name
     remains provisional until the typed `I tensor I` consumer fixes its
     orientation;
-75. `emdash3_2_truncation_reflector.lp` for the classified computational
+75. `emdash3_2_walking_arrow.lp` for the transparent curated interface
+    `WalkingArrow_cat = Join_cat(Terminal_cat,Terminal_cat)`. Its endpoints
+    are evaluations of the two join inclusions; its generating arrow is the
+    terminal component of the fibre of `join_cross_transf`; and the whole
+    fibre owner retains the next hom action. It adds no interval primitive,
+    standalone generator, rule, or unifier;
+76. `emdash3_2_truncation_reflector.lp` for the classified computational
     truncation reflector. It realizes `NType_cat(n)` through the existing
     retained-evidence `TruncGrpdU(n)` package, provides point-computing
     restricted induction/recursion, derives map identity and composition by
     that induction, and reuses `path_map_func` for an iterable whole Hom
     action;
-76. `emdash3_2_circle_connectedness.lp` for the rule-free first concrete
+77. `emdash3_2_circle_connectedness.lp` for the rule-free first concrete
     consumer of propositional truncation. It proves mere based connectedness
     of the Circle by dependent Circle induction; retained proposition evidence
     supplies the loop `PathOver`, so no untruncated global path is selected.
     Eliminating this mere path evidence into the set truncation proves
     `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier rewrite to Unit;
-77. `emdash3_2_checks.lp` for executable regression statements;
-78. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+78. `emdash3_2_checks.lp` for executable regression statements;
+79. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-79. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-80. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+80. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+81. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-81. `reports/INDEX.md` for task-specific plans and decision records.
-82. `book/book.json` and `book/evidence.json` for book source
+82. `reports/INDEX.md` for task-specific plans and decision records.
+83. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

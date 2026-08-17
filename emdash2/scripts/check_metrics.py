@@ -49,6 +49,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_groupoidal_closure.lp"),
     Path("emdash3_2_path_pseudo_laxity.lp"),
     Path("emdash3_2_gray_profiles.lp"),
+    Path("emdash3_2_walking_arrow.lp"),
     Path("emdash3_2_truncation_reflector.lp"),
     Path("emdash3_2_circle_connectedness.lp"),
     Path("emdash3_2_sieves.lp"),

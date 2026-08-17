@@ -35,8 +35,8 @@ Worktree: `/home/user1/emdash1-groupoidal-circle-v1`
 
 Branch: `goal/profiled-gray-hom-v3.2`
 
-Status: active bounded implementation plan. `GRAY-00` and `GRAY-01` are
-complete; `GRAY-02` is the selected next row. Local green checkpoint commits
+Status: active bounded implementation plan. `GRAY-00` through `GRAY-02` are
+complete; `GRAY-03` is the selected next row. Local green checkpoint commits
 are authorized by the user; push, merge, publication, release, history
 rewrite, branch deletion, and worktree removal are not authorized.
 
@@ -182,6 +182,13 @@ profile carrier or at a later Gray-curry constructor whose strictness is a
 genuine discriminator. It must not become a global collapse of every
 `fapp1_compositor`.
 
+This bounded goal does **not** remove the historical global endpoint cuts.
+Their migration belongs to a later consolidation task that re-homes endpoint
+computation at strict/profile constructors and audits existing consumers in
+stages. Until that migration, this tranche may claim computational
+discrimination of the retained laxity cell, but not ambient endpoint
+non-collapse or a completed generic lax classifier.
+
 ### 4. The interval reuses the active directed join
 
 The audit corrected the preliminary “missing walking arrow” assumption. The
@@ -269,8 +276,8 @@ typecheck alone.
 | --- | --- | --- |
 | `GRAY-00` | complete | Git/SOP recovery, authority review, anti-duplication inventory, clean child branch, and bounded kernel baseline. The interval is corrected from “missing object” to “missing curated projection surface” over active `Join_cat(1,1)`. |
 | `GRAY-01` | complete | `emdash3_2_gray_profiles.lp` provides the primitive strict-functor code/decoder, selected identity code/path, profile-local compositor-to-identity computation, `GrayHom_oplax`, and its whole inclusion. The registered reviewer and central diagnostics cover object/Hom/identity/composition, inclusion object/hom action, retained next hom, rigid unprofiled non-collapse, and arbitrary-functor rejection. Focused source, reviewer, and central checks pass with subject reduction; the strict LHS audit is zero; the accepted warning inventory is `1130/159`, exactly `+18/0` over `1112/159`; and the regenerated strict catalog has 2,121 checks across 102 areas with zero unclassified checks. |
-| `GRAY-02` | selected next | Derive `WalkingArrow_cat`, endpoints, and generator from `Join_cat(1,1)` and `join_cross_transf`. Require the generator to compute through the existing whole cross-cell component and preserve one higher action. |
-| `GRAY-03` | pending | Select one tensor/right-closure owner and implement whole curry/uncurry, evaluation/coevaluation, and beta/eta comparisons. Confirm the lax/oplax orientation by typed action, not naming convention. |
+| `GRAY-02` | complete | `emdash3_2_walking_arrow.lp` transparently defines `WalkingArrow_cat` as `Join_cat(1,1)`, derives its two distinct endpoints from the join inclusions, and obtains the generator as the terminal component of the fibre of `join_cross_transf`. The whole fibre functor and its `fapp1_func` next action are retained. The focused source/reviewer and affected central diagnostics pass; no rule or unifier is added; the strict LHS audit is zero; the source warning inventory is unchanged at `1112/159`; and the strict catalog has 2,131 checks across 103 areas with zero unclassified checks. |
+| `GRAY-03` | selected next | Select one tensor/right-closure owner and implement whole curry/uncurry, evaluation/coevaluation, and beta/eta comparisons. Confirm the lax/oplax orientation by typed action, not naming convention. |
 | `GRAY-04` | pending | Construct the four `I tensor I` objects and both coordinate arrow families through coevaluation. Reject accidental endpoint collapse and Cartesian-only behavior. |
 | `GRAY-05` | pending | Project the directed interchanger from the active whole laxity owner, identify its two boundary composites, and retain one next hom action. No independent square axiom or capped-only facade. |
 | `GRAY-CLOSE-1` | pending | Synchronize source/example ownership, master/child ledgers, Foundations/SOP/canonical syntax, report index, checks/catalog/health required by the actual diff, and local green checkpoints. Record exclusions and next consumer. |
@@ -379,6 +386,44 @@ row.
 The bounded semantic tranche is locally checkpointed at `9222dad`; this
 ledger entry records that immutable recovery anchor without widening the
 validated scope.
+
+### Promoted `GRAY-02` result — 2026-08-17
+
+The walking interval is now a transparent derived interface in
+`emdash3_2_walking_arrow.lp`, with its reviewer in
+`examples/walking_arrow.lp`. It adds no second interval primitive and no
+standalone generating arrow:
+
+```text
+WalkingArrow_cat
+  := Join_cat(Terminal_cat,Terminal_cat)
+
+walking_arrow_src
+  := join_fst_func[Terminal_obj]
+
+walking_arrow_tgt
+  := join_snd_func[Terminal_obj]
+
+walking_arrow_generator_func
+  := Fibre_func(join_cross_transf, (Terminal_obj,Terminal_obj))
+
+walking_arrow_generator
+  := walking_arrow_generator_func[Terminal_obj].
+```
+
+The whole generator functor is intentionally public. Its hom action
+`walking_arrow_generator_next_func` is the literal `fapp1_func` projection,
+so the future `I tensor I` consumer is not forced to reconstruct higher data
+from a capped arrow. Positive diagnostics lock both projection steps to
+`join_cross_transf`; negative diagnostics keep the endpoints distinct and
+reject a Cartesian-product reinterpretation.
+
+The focused source and reviewer pass, as does the affected central diagnostic
+target. Because this extension is transparent and rule-free, its
+warning-enabled source has exactly the active-core `1112/159` inventory. The
+strict LHS audit is zero. Ten new central checks regenerate the strict catalog
+at 2,131 checks in 103 areas, with zero unclassified checks. Health/CI remains
+reserved for `GRAY-CLOSE-1`; no all-source or all-example aggregate was run.
 
 ## Validation Policy
 

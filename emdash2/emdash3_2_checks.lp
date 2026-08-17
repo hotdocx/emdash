@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -24764,3 +24764,74 @@ assert [A B : Cat]
 assertnot [A B : Cat]
   (F : τ (Functor A B)) ⊢
   F : τ (Obj (@GrayHom_oplax A B));
+
+// catalog-area: Walking arrow from the directed join
+// The curated interval, endpoints, and generator are transparent projections
+// of Join_cat(1,1) and its whole internally natural cross cell.
+assert ⊢
+  WalkingArrow_cat
+  ≡ @Join_cat Terminal_cat Terminal_cat;
+
+assert ⊢
+  walking_arrow_src
+  : τ (Obj WalkingArrow_cat);
+
+assert ⊢
+  walking_arrow_tgt
+  : τ (Obj WalkingArrow_cat);
+
+assertnot ⊢
+  walking_arrow_src
+  ≡ walking_arrow_tgt;
+
+assert ⊢
+  walking_arrow_generator_func
+  : τ (Functor
+      Terminal_cat
+      (Hom_cat WalkingArrow_cat walking_arrow_src walking_arrow_tgt));
+
+assert ⊢
+  walking_arrow_generator_func
+  ≡ @Fibre_func
+      (Product_cat (Op_cat Terminal_cat) Terminal_cat)
+      (@Terminal_prof Terminal_cat Terminal_cat)
+      (@Prof_reindex
+        WalkingArrow_cat
+        Terminal_cat
+        WalkingArrow_cat
+        Terminal_cat
+        (@Unit_prof WalkingArrow_cat)
+        (@join_fst_func Terminal_cat Terminal_cat)
+        (@join_snd_func Terminal_cat Terminal_cat))
+      (@join_cross_transf Terminal_cat Terminal_cat)
+      walking_arrow_cross_base;
+
+assert ⊢
+  walking_arrow_generator
+  ≡ @fapp0
+      Terminal_cat
+      (Hom_cat WalkingArrow_cat walking_arrow_src walking_arrow_tgt)
+      walking_arrow_generator_func
+      Terminal_obj;
+
+assert ⊢
+  walking_arrow_generator_next_func
+  : τ (Functor
+      (Hom_cat Terminal_cat Terminal_obj Terminal_obj)
+      (Hom_cat
+        (Hom_cat WalkingArrow_cat walking_arrow_src walking_arrow_tgt)
+        walking_arrow_generator
+        walking_arrow_generator));
+
+assert ⊢
+  walking_arrow_generator_next_func
+  ≡ @fapp1_func
+      Terminal_cat
+      (Hom_cat WalkingArrow_cat walking_arrow_src walking_arrow_tgt)
+      walking_arrow_generator_func
+      Terminal_obj
+      Terminal_obj;
+
+assertnot ⊢
+  WalkingArrow_cat
+  ≡ @Product_cat Terminal_cat Terminal_cat;
