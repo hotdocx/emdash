@@ -40,8 +40,9 @@ complete; `GRAY-03` is the selected next row. Local green checkpoint commits
 are authorized by the user; push, merge, publication, release, history
 rewrite, branch deletion, and worktree removal are not authorized.
 
-Checkpoint: completed `GRAY-01` semantic tranche
-`9222dad7caf71741d0811505aeebef033f404059`
+Checkpoints: completed `GRAY-01` semantic tranche
+`9222dad7caf71741d0811505aeebef033f404059`; completed `GRAY-02` walking-arrow
+tranche `1caf642a3b99d4699becac3a1d90e26f4e58c4b1`
 
 ## Objective
 
@@ -424,6 +425,9 @@ warning-enabled source has exactly the active-core `1112/159` inventory. The
 strict LHS audit is zero. Ten new central checks regenerate the strict catalog
 at 2,131 checks in 103 areas, with zero unclassified checks. Health/CI remains
 reserved for `GRAY-CLOSE-1`; no all-source or all-example aggregate was run.
+
+The bounded walking-arrow tranche is locally checkpointed at `1caf642`; this
+ledger entry records that recovery anchor without widening the row.
 
 ## Validation Policy
 
