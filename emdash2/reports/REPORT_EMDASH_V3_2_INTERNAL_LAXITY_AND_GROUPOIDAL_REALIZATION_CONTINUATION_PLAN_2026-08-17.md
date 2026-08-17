@@ -47,7 +47,8 @@ rejects a mismatched higher endpoint. The strict LHS audit is zero. The
 warning inventory changes from `1082/159` to `1112/159`: all `+30` critical
 pairs are owned by this projection (`25` composition, `3` identity, `2`
 specialization/evaluator), with no replaceable-LHS growth or subject-reduction
-failure. The strict catalog is regenerated. `ILGR-LAX-2` is now the first
+failure. The strict catalog is regenerated, and the bounded tranche is locally
+checkpointed at `74d4200`. `ILGR-LAX-2` is now the first
 dependency-ready row; health and broader closure remain assigned to
 `ILGR-CLOSE-1`. No push, merge, publication, release,
 history rewrite, worktree removal, truncation, generic groupoidification,
