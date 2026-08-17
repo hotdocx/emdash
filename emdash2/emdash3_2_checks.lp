@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow emdash.emdash3_2_gray_right_closure;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow emdash.emdash3_2_gray_right_closure emdash.emdash3_2_gray_walking_square;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -24939,3 +24939,131 @@ assertnot [A B C : Cat]
   (H : τ (Obj (@GrayRightSource A B C))) ⊢
   @gray_uncurry_R A B C (@gray_curry_R A B C H)
   ≡ H;
+
+// catalog-area: Walking square from Gray coevaluation
+// The four vertices and both coordinate directions are projections of the
+// selected right coevaluation and retained walking-generator owner.
+assert ⊢
+  GrayWalkingSquare_cat
+  ≡ @GrayTensor_R WalkingArrow_cat WalkingArrow_cat;
+
+assert ⊢
+  gray_square_inner_src_data
+  ≡ @fapp0
+      WalkingArrow_cat
+      (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+      (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
+      walking_arrow_src;
+
+assert ⊢
+  gray_square_inner_tgt_data
+  ≡ @fapp0
+      WalkingArrow_cat
+      (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+      (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
+      walking_arrow_tgt;
+
+assert ⊢ gray_square_obj00 : τ (Obj GrayWalkingSquare_cat);
+assert ⊢ gray_square_obj01 : τ (Obj GrayWalkingSquare_cat);
+assert ⊢ gray_square_obj10 : τ (Obj GrayWalkingSquare_cat);
+assert ⊢ gray_square_obj11 : τ (Obj GrayWalkingSquare_cat);
+
+// The inner coordinate retains one whole generator owner on each side.
+assert ⊢
+  gray_square_inner_src_generator_func
+  : τ (Functor
+      Terminal_cat
+      (Hom_cat
+        GrayWalkingSquare_cat
+        gray_square_obj00
+        gray_square_obj01));
+
+assert ⊢
+  gray_square_inner_tgt_generator_func
+  : τ (Functor
+      Terminal_cat
+      (Hom_cat
+        GrayWalkingSquare_cat
+        gray_square_obj10
+        gray_square_obj11));
+
+assert ⊢
+  gray_square_inner_src_arrow
+  ≡ @fapp1_fapp0
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      walking_arrow_src
+      walking_arrow_tgt
+      walking_arrow_generator;
+
+assert ⊢
+  gray_square_inner_tgt_arrow
+  ≡ @fapp1_fapp0
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_tgt_func
+      walking_arrow_src
+      walking_arrow_tgt
+      walking_arrow_generator;
+
+// The outer coordinate is one whole coevaluation-generated transformation.
+assert ⊢
+  gray_square_outer_transf
+  ≡ @fapp1_fapp0
+      WalkingArrow_cat
+      (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+      (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
+      walking_arrow_src
+      walking_arrow_tgt
+      walking_arrow_generator;
+
+assert ⊢
+  gray_square_outer_src_eval_func
+  ≡ @tapp0_func
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      gray_square_inner_tgt_func
+      walking_arrow_src;
+
+assert ⊢
+  gray_square_outer_tgt_eval_func
+  ≡ @tapp0_func
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      gray_square_inner_tgt_func
+      walking_arrow_tgt;
+
+assert ⊢
+  gray_square_outer_src_arrow
+  ≡ @tapp0_fapp0
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      gray_square_inner_tgt_func
+      walking_arrow_src
+      gray_square_outer_transf;
+
+assert ⊢
+  gray_square_outer_tgt_arrow
+  ≡ @tapp0_fapp0
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      gray_square_inner_tgt_func
+      walking_arrow_tgt
+      gray_square_outer_transf;
+
+// No pair of constructed vertices collapses definitionally.
+assertnot ⊢ gray_square_obj00 ≡ gray_square_obj01;
+assertnot ⊢ gray_square_obj00 ≡ gray_square_obj10;
+assertnot ⊢ gray_square_obj00 ≡ gray_square_obj11;
+assertnot ⊢ gray_square_obj01 ≡ gray_square_obj10;
+assertnot ⊢ gray_square_obj01 ≡ gray_square_obj11;
+assertnot ⊢ gray_square_obj10 ≡ gray_square_obj11;
+
+assertnot ⊢
+  GrayWalkingSquare_cat
+  ≡ @Product_cat WalkingArrow_cat WalkingArrow_cat;

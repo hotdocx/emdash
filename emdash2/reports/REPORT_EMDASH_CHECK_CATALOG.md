@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2145
-- Mapped areas: 104
+- Total checks: 2168
+- Mapped areas: 105
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -123,6 +123,7 @@ stable mathematical-area scopes rather than source locations.
 | Computational strict functors and profiled Gray hom | 7 |
 | Walking arrow from the directed join | 10 |
 | Profiled Gray right closure | 14 |
+| Walking square from Gray coevaluation | 23 |
 
 ## Section Details
 
@@ -2790,3 +2791,31 @@ stable mathematical-area scopes rather than source locations.
 | 2143 | 24929 | `assertnot [A B : Cat] ⊢ @GrayTensor_R A B ≡ @Product_cat A B;` |
 | 2144 | 24933 | `assertnot [A B C : Cat] ⊢ @GrayRightTarget A B C ≡ @Functor_cat A (@Functor_cat B C);` |
 | 2145 | 24938 | `assertnot [A B C : Cat] (H : τ (Obj (@GrayRightSource A B C))) ⊢ @gray_uncurry_R A B C (@gray_curry_R A B C H) ≡ H;` |
+
+### Walking square from Gray coevaluation
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 2146 | 24946 | `assert ⊢ GrayWalkingSquare_cat ≡ @GrayTensor_R WalkingArrow_cat WalkingArrow_cat;` |
+| 2147 | 24950 | `assert ⊢ gray_square_inner_src_data ≡ @fapp0 WalkingArrow_cat (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat ...` |
+| 2148 | 24958 | `assert ⊢ gray_square_inner_tgt_data ≡ @fapp0 WalkingArrow_cat (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat ...` |
+| 2149 | 24966 | `assert ⊢ gray_square_obj00 : τ (Obj GrayWalkingSquare_cat);` |
+| 2150 | 24967 | `assert ⊢ gray_square_obj01 : τ (Obj GrayWalkingSquare_cat);` |
+| 2151 | 24968 | `assert ⊢ gray_square_obj10 : τ (Obj GrayWalkingSquare_cat);` |
+| 2152 | 24969 | `assert ⊢ gray_square_obj11 : τ (Obj GrayWalkingSquare_cat);` |
+| 2153 | 24972 | `assert ⊢ gray_square_inner_src_generator_func : τ (Functor Terminal_cat (Hom_cat GrayWalkingSquare_cat gray_square_o ...` |
+| 2154 | 24981 | `assert ⊢ gray_square_inner_tgt_generator_func : τ (Functor Terminal_cat (Hom_cat GrayWalkingSquare_cat gray_square_o ...` |
+| 2155 | 24990 | `assert ⊢ gray_square_inner_src_arrow ≡ @fapp1_fapp0 WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_fun ...` |
+| 2156 | 25000 | `assert ⊢ gray_square_inner_tgt_arrow ≡ @fapp1_fapp0 WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_tgt_fun ...` |
+| 2157 | 25011 | `assert ⊢ gray_square_outer_transf ≡ @fapp1_fapp0 WalkingArrow_cat (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare ...` |
+| 2158 | 25021 | `assert ⊢ gray_square_outer_src_eval_func ≡ @tapp0_func WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_ ...` |
+| 2159 | 25030 | `assert ⊢ gray_square_outer_tgt_eval_func ≡ @tapp0_func WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_ ...` |
+| 2160 | 25039 | `assert ⊢ gray_square_outer_src_arrow ≡ @tapp0_fapp0 WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_fun ...` |
+| 2161 | 25049 | `assert ⊢ gray_square_outer_tgt_arrow ≡ @tapp0_fapp0 WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_fun ...` |
+| 2162 | 25060 | `assertnot ⊢ gray_square_obj00 ≡ gray_square_obj01;` |
+| 2163 | 25061 | `assertnot ⊢ gray_square_obj00 ≡ gray_square_obj10;` |
+| 2164 | 25062 | `assertnot ⊢ gray_square_obj00 ≡ gray_square_obj11;` |
+| 2165 | 25063 | `assertnot ⊢ gray_square_obj01 ≡ gray_square_obj10;` |
+| 2166 | 25064 | `assertnot ⊢ gray_square_obj01 ≡ gray_square_obj11;` |
+| 2167 | 25065 | `assertnot ⊢ gray_square_obj10 ≡ gray_square_obj11;` |
+| 2168 | 25067 | `assertnot ⊢ GrayWalkingSquare_cat ≡ @Product_cat WalkingArrow_cat WalkingArrow_cat;` |

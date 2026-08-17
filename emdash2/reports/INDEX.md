@@ -1068,9 +1068,11 @@ record.
   now supplies one `GrayTensor_R`, computationally strict whole curry/uncurry
   functors between the profiled Hom categories, equality-valued whole
   beta/eta through `OmegaEquivAlong Cat_cat`, and identity-derived
-  coevaluation/evaluation. The next row constructs the four objects and
-  coordinate arrows of `I tensor I`, leading to the interchanger
-  projected from the active whole laxity action. Mirror closure, full
+  coevaluation/evaluation. The fourth row derives the four objects and both
+  coordinate arrow families of `I tensor I` from that coevaluation and the
+  retained walking generator, with whole owners in both directions and no
+  Cartesian collapse. The next row projects the interchanger from the active
+  whole laxity action and retains its next hom action. Mirror closure, full
   biclosed/monoidal Crans--Gray structure, global strict-cut migration,
   groupoidification, and book work remain excluded. The first semantic row is
   checkpointed at `9222dad`; the derived walking-arrow row is checkpointed at

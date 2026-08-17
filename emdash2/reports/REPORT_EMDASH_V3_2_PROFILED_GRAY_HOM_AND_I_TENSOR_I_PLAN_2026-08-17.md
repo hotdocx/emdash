@@ -35,8 +35,8 @@ Worktree: `/home/user1/emdash1-groupoidal-circle-v1`
 
 Branch: `goal/profiled-gray-hom-v3.2`
 
-Status: active bounded implementation plan. `GRAY-00` through `GRAY-03` are
-complete; `GRAY-04` is the selected next row. Local green checkpoint commits
+Status: active bounded implementation plan. `GRAY-00` through `GRAY-04` are
+complete; `GRAY-05` is the selected next row. Local green checkpoint commits
 are authorized by the user; push, merge, publication, release, history
 rewrite, branch deletion, and worktree removal are not authorized.
 
@@ -281,8 +281,8 @@ typecheck alone.
 | `GRAY-01` | complete | `emdash3_2_gray_profiles.lp` provides the primitive strict-functor code/decoder, selected identity code/path, profile-local compositor-to-identity computation, `GrayHom_oplax`, and its whole inclusion. The registered reviewer and central diagnostics cover object/Hom/identity/composition, inclusion object/hom action, retained next hom, rigid unprofiled non-collapse, and arbitrary-functor rejection. Focused source, reviewer, and central checks pass with subject reduction; the strict LHS audit is zero; the accepted warning inventory is `1130/159`, exactly `+18/0` over `1112/159`; and the regenerated strict catalog has 2,121 checks across 102 areas with zero unclassified checks. |
 | `GRAY-02` | complete | `emdash3_2_walking_arrow.lp` transparently defines `WalkingArrow_cat` as `Join_cat(1,1)`, derives its two distinct endpoints from the join inclusions, and obtains the generator as the terminal component of the fibre of `join_cross_transf`. The whole fibre functor and its `fapp1_func` next action are retained. The focused source/reviewer and affected central diagnostics pass; no rule or unifier is added; the strict LHS audit is zero; the source warning inventory is unchanged at `1112/159`; and the strict catalog has 2,131 checks across 103 areas with zero unclassified checks. |
 | `GRAY-03` | complete | `emdash3_2_gray_right_closure.lp` provides one opaque `GrayTensor_R` category, computationally strict whole curry/uncurry functors between the profiled Hom categories, whole beta/eta paths assembled as the existing `OmegaEquivAlong Cat_cat`, their object evaluations, and coevaluation/evaluation derived at strict identity codes. The rule-free source/reviewer/central targets pass; warning evidence remains exactly `1130/159`; the strict LHS audit is zero; and the catalog has 2,145 checks across 104 areas with zero unclassified checks. The right-closure typing is fixed, while the `oplax` orientation name remains provisional until `GRAY-05` observes the interchanger. |
-| `GRAY-04` | selected next | Construct the four `I tensor I` objects and both coordinate arrow families through coevaluation. Reject accidental endpoint collapse and Cartesian-only behavior. |
-| `GRAY-05` | pending | Project the directed interchanger from the active whole laxity owner, identify its two boundary composites, and retain one next hom action. No independent square axiom or capped-only facade. |
+| `GRAY-04` | complete | `emdash3_2_gray_walking_square.lp` derives the four `I tensor I` vertices and both coordinate arrow families from coevaluation. Inner edges retain whole Terminal-indexed generator owners; outer edges are two whole component evaluations of one coevaluation-generated transformation. All six pairwise vertex non-collapses and the concrete Cartesian non-collapse are checked. |
+| `GRAY-05` | selected next | Project the directed interchanger from the active whole laxity owner, identify its two boundary composites, and retain one next hom action. No independent square axiom or capped-only facade. |
 | `GRAY-CLOSE-1` | pending | Synchronize source/example ownership, master/child ledgers, Foundations/SOP/canonical syntax, report index, checks/catalog/health required by the actual diff, and local green checkpoints. Record exclusions and next consumer. |
 
 ## First Experiment (`GRAY-01`)
@@ -486,6 +486,50 @@ chosen higher-cell direction deserves the `lax` or `oplax` name; that label is
 confirmed only when `GRAY-05` projects the oriented interchanger.
 The bounded semantic tranche is locally checkpointed at `37a5ede`; this
 ledger entry records that recovery anchor without widening the row.
+
+### Promoted `GRAY-04` result — 2026-08-17
+
+The walking-square boundary is now promoted in
+`emdash3_2_gray_walking_square.lp`, with its reviewer in
+`examples/gray_walking_square.lp`. No object or arrow of the tensor is
+postulated independently. Instead, right coevaluation is evaluated at the
+outer source and target to obtain two strict inner codes, and decoding those
+codes gives two inner functors
+
+```text
+I -> GrayTensor_R(I,I).
+```
+
+Evaluating the two inner functors at the two walking-arrow endpoints gives
+the four vertices `gray_square_obj00`, `gray_square_obj01`,
+`gray_square_obj10`, and `gray_square_obj11`. The two inner-coordinate edge
+owners are whole composites
+
+```text
+Terminal_cat
+  -> Hom_I(0,1)
+  -> Hom_GrayTensor(F_i(0),F_i(1)),
+```
+
+so their capped arrows are generic `fapp1_fapp0` projections and their higher
+action remains available. Applying the whole coevaluation functor to the
+outer generator produces one transformation between the inner functors. The
+two outer-coordinate arrows are its components through the existing whole
+`tapp0_func` evaluators, not separately declared edges.
+
+The source, reviewer, and affected central diagnostics pass with ordinary
+subject reduction. The source is transparent and rule-free, so its
+warning-enabled inventory is exactly the inherited `1130/159`, with no local
+warning. The strict LHS audit remains zero. Twenty-three new central checks
+establish both whole-owner routes, all six pairwise vertex non-collapses, and
+the concrete distinction from `Product_cat`; the regenerated strict catalog
+has 2,168 checks across 105 areas and zero unclassified checks. Health/CI
+replacement remains deferred to `GRAY-CLOSE-1`, and no all-source,
+all-example, or repository-wide aggregate was run.
+
+This row supplies only the typed square boundary. The orientation name and
+the nonidentity interchanger remain owned by `GRAY-05`, which must project
+them from the existing whole laxity action and retain one next hom action.
 
 ## Validation Policy
 
