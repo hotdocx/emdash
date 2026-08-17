@@ -80,6 +80,7 @@ identity-specialized normal-lax functor compositor. Their focused owner,
 active-import, central-diagnostic, example, and negative endpoint probes pass;
 the warning inventory remains `1112/159` and strict LHS audit remains zero.
 The generated catalog is current at 2,114 checks across 101 mapped areas.
+The bounded implementation is locally checkpointed at `d2cb4aa`.
 `ILGR-LAX-5` is now the first dependency-ready row. Health and broader closure
 remain assigned to `ILGR-CLOSE-1`. No push, merge, publication, release,
 history rewrite, worktree removal, truncation, generic groupoidification,
@@ -116,7 +117,7 @@ concrete consumer needs one.
 | `ILGR-LAX-1` | complete | Promoted the generic `tapp0_hom_fapp0` observation with its existing `tdapp0_fapp0` Cat specialization. One runtime normal form, identity/composition beta, the whole `tapp0_func` hom action, endpoint rejection, subject reduction, strict LHS audit, and exact `+30/0` warning delta are checked. |
 | `ILGR-LAX-2` | complete | The late whole comma/identity-section projection recovers the displayed laxity component and retained fibre-arrow action from `fdapp1_int_transfd`; positive/negative consumers, warning neutrality, LHS audit, current transparent `piapp*` sufficiency, and checkpoint `dc89926` are recorded. |
 | `ILGR-LAX-3` | complete | The arbitrary and identity target-internalized actions are transparent opposite specializations; their fixed-target projections compute to the shared off-diagonal hom action, and the pre/right witness is extracted through `functord_laxity_transf` / `fdapp1_int_cell`. Positive/negative consumers, warning neutrality, zero LHS growth, and checkpoint `8333848` are recorded. |
-| `ILGR-LAX-4` | complete | The transparent whole/component post-left and pre-right surfaces specialize `functord_laxity_transf`; `fapp1_compositor` is their identity-transfor specialization. Direct assertions, one ordinary/displayed example, wrong-arrow rejection, warning neutrality, and zero LHS growth are checked. |
+| `ILGR-LAX-4` | complete | The transparent whole/component post-left and pre-right surfaces specialize `functord_laxity_transf`; `fapp1_compositor` is their identity-transfor specialization. Direct assertions, one ordinary/displayed example, wrong-arrow rejection, warning neutrality, zero LHS growth, and checkpoint `d2cb4aa` are recorded. |
 | `ILGR-LAX-5` | active | Retain one next internal action and inspect its expected recursively assembled boundary. This is an iteration test, not a complete simplicial-object, pentagon, nerve, Segal, or associahedral project. |
 | `ILGR-CLOSE-1` | pending | Synchronize source/example registration, focused diagnostics, Foundations/SOP/canonical syntax, catalog/health evidence, and an authorized local checkpoint. Avoid long aggregates unless their absence would block integration. |
 | `ILGR-GRPD-1` | deferred | Groupoidal realization of the directed simplex-shaped calculus. Reopen only after the generic laxity owner has a concrete path-valued consumer. |
@@ -1299,7 +1300,7 @@ catalog now contains 2,114 classified checks in 101 areas. The accidentally
 started repository-wide `make check` expansion was stopped after the active
 kernel and several unchanged extensions had passed; it is not closure evidence
 and is not needed for this transparent bounded row under the explicit
-no-long-aggregate policy.
+no-long-aggregate policy. The bounded implementation checkpoint is `d2cb4aa`.
 
 ### 6C. Native iterated-`homd_` tetrahedron design (2026-08-17)
 
