@@ -88,7 +88,8 @@ existing second `homd_`/Sigma object and recursive internal action then compute
 the base associator and its dependent tetrahedral filler. The quiet and
 warning-enabled current-source probes pass with the unchanged `1112/159`
 warning inventory. This validates the selected next action without promoting
-a capped three-arrow facade or claiming a complete simplicial object.
+a capped three-arrow facade or claiming a complete simplicial object. The
+bounded evidence and decision are locally checkpointed at `ad5ee7c`.
 `ILGR-CLOSE-1` is now the first dependency-ready row. No push, merge,
 publication, release,
 history rewrite, worktree removal, truncation, generic groupoidification,
@@ -126,7 +127,7 @@ concrete consumer needs one.
 | `ILGR-LAX-2` | complete | The late whole comma/identity-section projection recovers the displayed laxity component and retained fibre-arrow action from `fdapp1_int_transfd`; positive/negative consumers, warning neutrality, LHS audit, current transparent `piapp*` sufficiency, and checkpoint `dc89926` are recorded. |
 | `ILGR-LAX-3` | complete | The arbitrary and identity target-internalized actions are transparent opposite specializations; their fixed-target projections compute to the shared off-diagonal hom action, and the pre/right witness is extracted through `functord_laxity_transf` / `fdapp1_int_cell`. Positive/negative consumers, warning neutrality, zero LHS growth, and checkpoint `8333848` are recorded. |
 | `ILGR-LAX-4` | complete | The transparent whole/component post-left and pre-right surfaces specialize `functord_laxity_transf`; `fapp1_compositor` is their identity-transfor specialization. Direct assertions, one ordinary/displayed example, wrong-arrow rejection, warning neutrality, zero LHS growth, and checkpoint `d2cb4aa` are recorded. |
-| `ILGR-LAX-5` | complete | A current-source-derived no-associativity probe retains the explicit base associator and computes its dependent filler through the existing second `homd_`/Sigma internal action. The quiet and warning-enabled runs pass at the unchanged `1112/159`; no capped three-arrow primitive, runtime rule, unifier, or complete-simplicial claim was added. |
+| `ILGR-LAX-5` | complete | A current-source-derived no-associativity probe retains the explicit base associator and computes its dependent filler through the existing second `homd_`/Sigma internal action. The quiet and warning-enabled runs pass at the unchanged `1112/159`; no capped three-arrow primitive, runtime rule, unifier, or complete-simplicial claim was added. Checkpoint: `ad5ee7c`. |
 | `ILGR-CLOSE-1` | active | Synchronize source/example registration, focused diagnostics, Foundations/SOP/canonical syntax, catalog/health evidence, and an authorized local checkpoint. Avoid long aggregates unless their absence would block integration. |
 | `ILGR-GRPD-1` | deferred | Groupoidal realization of the directed simplex-shaped calculus. Reopen only after the generic laxity owner has a concrete path-valued consumer. |
 | `ILGR-TRUNC-1` | deferred | Computational truncation classifier/HIT design. Reopen for a selected HoTT consumer, not to complete an inventory abstractly. |
