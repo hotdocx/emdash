@@ -43,7 +43,8 @@ rewrite, branch deletion, and worktree removal are not authorized.
 Checkpoints: completed `GRAY-01` semantic tranche
 `9222dad7caf71741d0811505aeebef033f404059`; completed `GRAY-02` walking-arrow
 tranche `1caf642a3b99d4699becac3a1d90e26f4e58c4b1`; completed `GRAY-03`
-right-closure semantic tranche awaiting its local checkpoint hash
+right-closure semantic tranche
+`37a5ede9cdfeaea10f0aa2d6dfbbbdacc7e3a957`
 
 ## Objective
 
@@ -482,8 +483,9 @@ run.
 
 This row fixes the typed **right** closure. It does not yet settle whether the
 chosen higher-cell direction deserves the `lax` or `oplax` name; that label is
-confirmed only when `GRAY-05` projects the oriented interchanger. The bounded
-semantic tranche is ready for its authorized local checkpoint.
+confirmed only when `GRAY-05` projects the oriented interchanger.
+The bounded semantic tranche is locally checkpointed at `37a5ede`; this
+ledger entry records that recovery anchor without widening the row.
 
 ## Validation Policy
 
