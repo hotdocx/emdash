@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2095
-- Mapped areas: 98
+- Total checks: 2105
+- Mapped areas: 99
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -117,6 +117,7 @@ stable mathematical-area scopes rather than source locations.
 | Whole localization locality | 5 |
 | Computational affine Spec slice | 6 |
 | Complementary-idempotent affine atlas | 6 |
+| Whole comma projection and displayed laxity | 10 |
 
 ## Section Details
 
@@ -2704,3 +2705,18 @@ stable mathematical-area scopes rather than source locations.
 | 2093 | 24412 | `assert (R S : τ CommRing) ⊢ @comm_ring_psh_restriction_hom (@AffineSpecBigSlice_cat (@comm_ring_product R S)) (@affi ...` |
 | 2094 | 24425 | `assert (R S : τ CommRing) ⊢ @comm_ring_psh_restriction_hom (@AffineSpecBigSlice_cat (@comm_ring_product R S)) (@affi ...` |
 | 2095 | 24439 | `assert ⊢ @comm_ring_mul f2_split_comm_ring f2_split_idempotent f2_split_cosplit_idempotent ≡ @comm_ring_zero f2_spli ...` |
+
+### Whole comma projection and displayed laxity
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 2096 | 24450 | `assert (K : Cat) (E : τ (Catd K)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre_cat E x))) ⊢ @fdapp1_iden ...` |
+| 2097 | 24458 | `assert (A B : Cat) (T : τ (Functor A B)) (u : τ (Obj A)) ⊢ @piapp0 A (@SelfComma_catd A B T) (@hom_con_identity_grap ...` |
+| 2098 | 24463 | `assert (A B : Cat) (T : τ (Functor A B)) (u u' : τ (Obj A)) (h : τ (Hom A u u')) ⊢ @piapp1_fapp0 A (@SelfComma_catd ...` |
+| 2099 | 24469 | `assert (K : Cat) (E : τ (Catd K)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u u' : τ (Obj (Fibre_cat E x))) (h : τ (Hom ...` |
+| 2100 | 24489 | `assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 2101 | 24502 | `assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 2102 | 24511 | `assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
+| 2103 | 24523 | `assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D)) (eta : τ (Transfd (@fdapp1_projection_source K E) (@fdap ...` |
+| 2104 | 24537 | `assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D)) (eta : τ (Transfd (@fdapp1_projection_source K E) (@fdap ...` |
+| 2105 | 24553 | `assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D)) (eta : τ (Transfd (@fdapp1_projection_source K E) (@fdap ...` |

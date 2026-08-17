@@ -1112,6 +1112,24 @@ explicit `apply` nodes. This notation does not select a text parser,
 explicit bracket punctuation, arbitrary mixed-domain evaluation, or a
 general dependent-chain lowering.
 
+## Whole Displayed Laxity Notation
+
+For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity
+transformation as:
+
+```text
+laxity(FF,p) : D[p] o FF[x] => FF[y] o E[p]
+laxity(FF,p)[u] = cell(FF,p,u).
+```
+
+The kernel owners are `functord_laxity_transf(FF,p)` and
+`fdapp1_int_cell(FF,p,u)`. This notation reads a whole transformation already
+extracted from `fdapp1_int_transfd(FF)` through a self-comma identity section;
+it does not introduce a second square or law. For `h : u -> u'` in `E[x]`,
+the expression `laxity(FF,p)[h]` means the retained generic `tapp1` action of
+that same transformation. The post/left and pre/right ordinary specializations
+remain future named surfaces.
+
 ## Displayed Sibling Product Notation
 
 For Cat-valued displayed families `B,C : Catd K`, write:

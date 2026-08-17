@@ -3404,6 +3404,40 @@ or, unfolded:
 s[f] : Hom_{E[y]}(E[f](s[x]), s[y])
 ```
 
+### Whole Displayed Laxity From The Internal Action
+
+For a displayed functor `FF : E → D` and a base arrow `p : x → y`, there are
+two functors from `E[x]` to `D[y]`:
+
+```text
+D[p] o FF[x]
+FF[y] o E[p].
+```
+
+The active whole laxity transformation is written
+
+```text
+lambda_FF(p) : D[p] o FF[x] => FF[y] o E[p].
+```
+
+Its component at `u : E[x]` is not separately postulated:
+
+```text
+lambda_FF(p)[u] = fdapp1_int_cell(FF,p,u).
+```
+
+Computationally, the kernel starts from the whole internal action
+`fdapp1_int_transfd(FF)`, projects it through the dependent-hom ladder, and
+evaluates it at the canonical identity section of the self-comma family
+`u |-> (E[p] downarrow E[p](u))`. The section computes both at `(u,id)` and
+on a fibre arrow `h`; consequently `lambda_FF(p)` retains a whole `tapp1`
+action in `u` rather than stopping at a pointwise cell. The public kernel owner
+is `functord_laxity_transf`. This construction exposes laxity already present
+in the internal action; it does not add an independent naturality square.
+
+The existing transparent `piapp*` presentation is sufficient for this first
+consumer. A primitive redesign of section application remains consumer-gated.
+
 A future named `section_total(s) : K → Σ_K E` facade would make this sharing
 more visible at the presentation level, but its transparent total-category
 construction and the more general base-change totalization are active. The

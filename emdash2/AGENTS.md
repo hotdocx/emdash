@@ -14,8 +14,9 @@ explicit specialized `Sigma_proj1_pullback_catd` owner, the stable internal
 `section_weaken_funcd` computation used by recursively weakened displayed
 variables, the functorial `sigma_functord_sec_func` uncurrying owner and its
 direct retained-component beta, proof-time represented comparisons at that
-specialized owner, and the full-`tapp1_func` whole strict `Functord`
-naturality paths. The one-way
+specialized owner, the late self-comma identity section and whole displayed
+laxity extraction with retained source-fibre action, and the full-`tapp1_func`
+whole strict `Functord` naturality paths. The one-way
 derived native equality-valued
 hom-action/groupoidality extension is `emdash3_2_eq1_hom_action.lp`;
 the Cat-valued presheaf, Yoneda, slice, and higher-sieve library is

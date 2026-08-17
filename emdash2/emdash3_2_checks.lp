@@ -24443,3 +24443,123 @@ assert ⊢
     f2_split_cosplit_idempotent
   ≡ @comm_ring_zero f2_split_comm_ring;
 /* End of the PSSS-10b complementary-idempotent atlas diagnostics. */
+
+// catalog-area: Whole comma projection and displayed laxity
+// The self-comma identity section computes on both objects and retained base
+// arrows; its action is extracted from the existing displayed internal action.
+assert (K : Cat) (E : τ (Catd K))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fdapp1_identity_section_alpha K E x y p u
+  ≡ @id
+      (Fibre_cat E y)
+      (fapp0 (@catd_transport_func K E x y p) u);
+
+assert (A B : Cat) (T : τ (Functor A B)) (u : τ (Obj A)) ⊢
+  @piapp0 A (@SelfComma_catd A B T)
+    (@hom_con_identity_graph_sec A B T) u
+  ≡ @hom_con_identity_graph_obj A B T u;
+
+assert (A B : Cat) (T : τ (Functor A B))
+  (u u' : τ (Obj A)) (h : τ (Hom A u u')) ⊢
+  @piapp1_fapp0 A (@SelfComma_catd A B T)
+    (@hom_con_identity_graph_sec A B T) u u' h
+  ≡ @hom_con_identity_graph_action A B T u u' h;
+
+assert (K : Cat) (E : τ (Catd K))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (u u' : τ (Obj (Fibre_cat E x)))
+  (h : τ (Hom (Fibre_cat E x) u u')) ⊢
+  @fdapp1_identity_section_transport_alpha K E x y p u u' h
+  ≡ sigma_Snd
+      (@piapp1_src_obj
+        (Fibre_cat E x)
+        (@SelfComma_catd
+          (Fibre_cat E x)
+          (Fibre_cat E y)
+          (@catd_transport_func K E x y p))
+        (@hom_con_identity_graph_sec
+          (Fibre_cat E x)
+          (Fibre_cat E y)
+          (@catd_transport_func K E x y p))
+        u u' h);
+
+// The arbitrary whole projection specializes to the existing internal-action
+// component before the transported identity is selected.
+assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  (alpha : τ (Hom
+    (Fibre_cat E y)
+    (fapp0 (@catd_transport_func K E x y p) u)
+    v)) ⊢
+  @fdapp1_project_comma_component
+    K E D FF (@fdapp1_int_transfd K E D FF)
+    x y p u v alpha
+  ≡ @fdapp1_int_hom_fapp0 K E D FF x y p u v alpha;
+
+assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fdapp1_project_identity_section_component
+    K E D FF (@fdapp1_int_transfd K E D FF) x y p u
+  ≡ @fdapp1_int_cell K E D FF x y p u;
+
+// The public whole laxity transformation computes to the established capped
+// cell rather than postulating an independent naturality square.
+assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @tapp0_fapp0
+    (Fibre_cat E x) (Fibre_cat D y)
+    (@functord_transport_lhs_func K E D FF x y p)
+    (@functord_transport_rhs_func K E D FF x y p)
+    u (@functord_laxity_transf K E D FF x y p)
+  ≡ @fdapp1_int_cell K E D FF x y p u;
+
+// The retained source-fibre variable remains iterable at the whole hom owner
+// and at its direct capped application.
+assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (u u' : τ (Obj (Fibre_cat E x))) ⊢
+  @tapp1_func
+    (Fibre_cat E x) (Fibre_cat D y)
+    (@functord_transport_lhs_func K E D FF x y p)
+    (@functord_transport_rhs_func K E D FF x y p)
+    u u' (@fdapp1_comma_projection_transf K E D FF eta x y p)
+  ≡ @fdapp1_comma_projection_tapp1_func
+      K E D FF eta x y p u u';
+
+assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (u u' : τ (Obj (Fibre_cat E x)))
+  (h : τ (Hom (Fibre_cat E x) u u')) ⊢
+  @tapp1_fapp0
+    (Fibre_cat E x) (Fibre_cat D y)
+    (@functord_transport_lhs_func K E D FF x y p)
+    (@functord_transport_rhs_func K E D FF x y p)
+    u u' (@fdapp1_comma_projection_transf K E D FF eta x y p) h
+  ≡ @fdapp1_comma_projection_tapp1_fapp0
+      K E D FF eta x y p u u' h;
+
+// Identity action joins the already checked object component.
+assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fdapp1_comma_projection_tapp1_fapp0
+    K E D FF eta x y p u u (@id (Fibre_cat E x) u)
+  ≡ @tapp0_fapp0
+      (Fibre_cat E x) (Fibre_cat D y)
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_rhs_func K E D FF x y p)
+      u (@fdapp1_comma_projection_transf K E D FF eta x y p);

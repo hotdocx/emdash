@@ -103,6 +103,7 @@
       18j. Weighted representability and adjunction-mate preservation
       18k. Directed-inductive join and internally natural cross arrows
       18z. Late cross-section normalization bridges
+      18zz. Whole comma projection and displayed laxity extraction
     19. Applications: PathOut, path induction, and transitivity
       19a. Outgoing-path categories and fixed-source path induction
       19b. PathOut motives and fixed-source path induction
@@ -14211,11 +14212,11 @@ symbol piapp1_src_obj [K : Cat] (E : τ (Catd K))
 
     D[p](FF[x](u)) ->^(D[y]) FF[y](E[p](u)).
 
-  The active implementation stops at this component-level normal form,
-  `fdapp1_int_cell(FF,p,u)`. A future whole-transfor interface
-  should be added only after the source object `u` can be internalized without
-  obscuring this extraction path. Strict constructors then need explicit folds
-  making their laxity collapse to the identity/cartesian component.
+  The component-level normal form is `fdapp1_int_cell(FF,p,u)`. The late
+  section 18zz internalizes `u` through a self-comma identity section and
+  exposes the resulting whole `functord_laxity_transf(FF,p)` without obscuring
+  this extraction path. Strict constructors still need explicit folds making
+  their selected laxity collapse to the identity/cartesian component.
 */
 symbol tdapp1_int_func_transfd : Π [K : Cat], Π [E D : τ (Catd K)],
   Π [FF GG : τ (Functord E D)],
@@ -14916,29 +14917,18 @@ symbol functord_transport_strict_naturality
 
 // 16b. Identity-specialized displayed hom action and Sigma-map action
 /*
-  Deferred whole-transfor displayed laxity interface.
+  Whole-transfor displayed laxity interface.
 
-  Intended future surface:
+  Active surface:
 
     functord_laxity_transf(FF,p)
       : D[p] ∘ FF[x] => FF[y] ∘ E[p].
 
-  Intended declaration, deliberately not active yet:
-
-    symbol functord_laxity_transf [K : Cat] [E D : τ (Catd K)]
-      (FF : τ (Functord E D))
-      [x y : τ (Obj K)]
-      (p : τ (Hom K x y))
-      : τ (@Transf
-          (Fibre_cat E x)
-          (Fibre_cat D y)
-          (@functord_transport_lhs_func K E D FF x y p)
-          (@functord_transport_rhs_func K E D FF x y p));
-
-  The active implementation stops at the component-level cell
-  `fdapp1_int_cell(FF,p,u)`. Reintroduce the live symbol only after
-  the `fdapp1_int_transfd` extraction internalizes `u` cleanly enough to support
-  the whole `Transf` computationally.
+  This section owns the component-level cell `fdapp1_int_cell(FF,p,u)`.
+  Section 18zz, after the required cross-section normalization bridges,
+  projects `fdapp1_int_transfd(FF)` through a self-comma identity section and
+  defines the whole transformation transparently. Its retained source-fibre
+  arrow action stays at the generic `tapp1` owner.
 */
 
 // Capped object action of the extracted displayed internal-hom functor.
@@ -19005,6 +18995,479 @@ rule @Pullback_catd_func
       (@Op_func $A $A' $F)
       $G;
 
+
+// -------------------------------------------------------------------------------------------------
+// 18zz. Whole comma projection and displayed laxity extraction
+// -------------------------------------------------------------------------------------------------
+/*
+  This section externalizes the already-active component ladder as a whole,
+  iterable transformation. The self-comma identity section supplies the
+  transported identity; no independent naturality square is postulated.
+*/
+// Conventional comma fibres (T downarrow b), assembled from the active
+// target-represented family and Sigma-total owners.
+symbol CommaFib_catd [A B : Cat]
+  (T : τ (Functor A B))
+  : τ (Catd B)
+≔ @Op_catd
+    B
+    (@comp_cat_fapp0
+      B
+      (@Catd_cat (Op_cat A))
+      Cat_cat
+      (@Sigma_func (Op_cat A))
+      (@hom_con_int B A T));
+
+// Pulling the comma family back along T gives u |-> (T downarrow T[u]).
+symbol SelfComma_catd [A B : Cat]
+  (T : τ (Functor A B))
+  : τ (Catd A)
+≔ @Pullback_catd A B (@CommaFib_catd A B T) T;
+
+// The canonical object (u,id_Tu) in the self-comma fibre.
+symbol hom_con_identity_graph_obj [A B : Cat]
+  (T : τ (Functor A B))
+  (u : τ (Obj A))
+  : τ (Obj (Fibre_cat (@SelfComma_catd A B T) u))
+≔ @Struct_sigma
+    (Obj (Op_cat A))
+    (λ a : τ (Obj (Op_cat A)),
+      Obj (Fibre_cat (@hom_con B (@fapp0 A B T u) A T) a))
+    u
+    (@id B (@fapp0 A B T u));
+
+// Stable section owner. Its object and retained-arrow projections compute
+// through the existing Pi/displayed-action ladder below.
+injective symbol hom_con_identity_graph_sec [A B : Cat]
+  (T : τ (Functor A B))
+  : τ (Obj (Pi_cat (@SelfComma_catd A B T)));
+
+// Selected object projection of the stable identity section.  The rule lives
+// at the actual terminal-source component application exposed by `piapp0`.
+rule @fapp0
+      _
+      _
+      (@tapp0_fapp0
+        _
+        _
+        _
+        _
+        $u
+        (@hom_con_identity_graph_sec $A $B $T))
+      Terminal_obj
+  ↪ @hom_con_identity_graph_obj $A $B $T $u;
+// Canonical comma arrow (h,id_T[h]).  The fibre is opposite, so this is the
+// Sigma arrow from (u',id_Tu') to (u,T[h]) in the underlying total.
+symbol hom_con_identity_graph_action [A B : Cat]
+  (T : τ (Functor A B))
+  [u u' : τ (Obj A)]
+  (h : τ (Hom A u u'))
+  : τ (Hom
+      (Fibre_cat (@SelfComma_catd A B T) u')
+      (@piapp1_src_obj
+        A
+        (@SelfComma_catd A B T)
+        (@hom_con_identity_graph_sec A B T)
+        u u' h)
+      (@hom_con_identity_graph_obj A B T u'))
+≔ Struct_sigma
+    h
+    (@id
+      (Hom_cat B (@fapp0 A B T u) (@fapp0 A B T u'))
+      (@fapp1_fapp0 A B T u u' h));
+// The selected section action is a specialization of the existing displayed
+// internal-action cell, not an independent rule on `piapp1_fapp0`.
+rule @fdapp1_int_cell
+      $A
+      _
+      _
+      (@hom_con_identity_graph_sec $A $B $T)
+      $u
+      $u'
+      $h
+      Terminal_obj
+  ↪ @hom_con_identity_graph_action $A $B $T $u $u' $h;
+// -----------------------------------------------------------------------------------------------
+// Arbitrary internal-action projection.  Every rung below is a definition
+// through an existing component owner; no component square is postulated.
+
+symbol fdapp1_projection_source [K : Cat] (E : τ (Catd K))
+  : τ (Functord
+      (@Op_catd K E)
+      (@Homd_target_catd K E))
+≔ @homd_int K E E (@id_funcd K E);
+
+symbol fdapp1_projection_target [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  : τ (Functord
+      (@Op_catd K E)
+      (@Homd_target_catd K E))
+≔ @comp_catd_fapp0
+    K
+    (@Op_catd K E)
+    (@Op_catd K D)
+    (@Homd_target_catd K E)
+    (@homd_int K E D FF)
+    (@Op_funcd K E D FF);
+
+// First projection: retain the arbitrary displayed internal action, then fix
+// only x and u.
+symbol fdapp1_project_section_arrow
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (Fibre_cat (@Homd_target_catd K E) x)
+      (@homd_id_src_sec K E x u)
+      (@homd_ff_src_sec K E D FF x u))
+≔ @tapp0_fapp0
+    (Fibre_cat (@Op_catd K E) x)
+    (Fibre_cat (@Homd_target_catd K E) x)
+    (@Fibre_func
+      K
+      (@Op_catd K E)
+      (@Homd_target_catd K E)
+      (@fdapp1_projection_source K E)
+      x)
+    (@Fibre_func
+      K
+      (@Op_catd K E)
+      (@Homd_target_catd K E)
+      (@fdapp1_projection_target K E D FF)
+      x)
+    u
+    (@tdapp0_fapp0
+      K
+      (@Op_catd K E)
+      (@Homd_target_catd K E)
+      (@fdapp1_projection_source K E)
+      (@fdapp1_projection_target K E D FF)
+      x
+      eta);
+
+// Second projection: keep the arbitrary action and evaluate the resulting
+// arrow between sections at y.
+symbol fdapp1_project_tgt_arrow
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  : τ (Transf
+      (@homd_id_tgt_func K E x u y)
+      (@homd_ff_tgt_func K E D FF x u y))
+≔ @pi_hom_fapp0
+    (Op_cat K)
+    (@Homd_target_section_catd K E x)
+    (@homd_id_src_sec K E x u)
+    (@homd_ff_src_sec K E D FF x u)
+    (@fdapp1_project_section_arrow K E D FF eta x u)
+    y;
+
+// Third projection: evaluate at an arbitrary comma target v.
+symbol fdapp1_project_presheaf_arrow
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  (v : τ (Obj (Fibre_cat E y)))
+  : τ (Hom
+      (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
+      (fapp0 (@homd_id_tgt_func K E x u y) v)
+      (fapp0 (@homd_ff_tgt_func K E D FF x u y) v))
+≔ @tapp0_fapp0
+    (Fibre_cat E y)
+    (Functor_cat (Op_cat (Hom_cat K x y)) Cat_cat)
+    (@homd_id_tgt_func K E x u y)
+    (@homd_ff_tgt_func K E D FF x u y)
+    v
+    (@fdapp1_project_tgt_arrow K E D FF eta x u y);
+
+// Fourth projection: evaluate the comma-indexed presheaf arrow at p.
+symbol fdapp1_project_hom_func
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  : τ (Hom
+      Cat_cat
+      (fapp0
+        (@homd_ K E E (@id_funcd K E) x u y v)
+        p)
+      (fapp0
+        (@homd_ K E D FF x
+          (fapp0 (@Fibre_func K E D FF x) u) y v)
+        p))
+≔ @tapp0_fapp0
+    (Op_cat (Hom_cat K x y))
+    Cat_cat
+    (fapp0 (@homd_id_tgt_func K E x u y) v)
+    (fapp0 (@homd_ff_tgt_func K E D FF x u y) v)
+    p
+    (@fdapp1_project_presheaf_arrow
+      K E D FF eta x u y v);
+
+// Arbitrary-comma component at alpha.  This is the direct nested projection
+// of eta and will be specialized to the transported identity below.
+symbol fdapp1_project_comma_component
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  [v : τ (Obj (Fibre_cat E y))]
+  (alpha : τ (Hom
+    (Fibre_cat E y)
+    (fapp0 (@catd_transport_func K E x y p) u)
+    v))
+  : τ (Hom
+      (Fibre_cat D y)
+      (fapp0 (@functord_transport_lhs_func K E D FF x y p) u)
+      (fapp0 (@Fibre_func K E D FF y) v))
+≔ @fapp0
+    (fapp0
+      (@homd_ K E E (@id_funcd K E) x u y v)
+      p)
+    (fapp0
+      (@homd_ K E D FF x
+        (fapp0 (@Fibre_func K E D FF x) u) y v)
+      p)
+    (@fdapp1_project_hom_func K E D FF eta x y p u v)
+    alpha;
+
+// -----------------------------------------------------------------------------------------------
+// Narrow whole owner.  Its object beta is the arbitrary projection above;
+// because it is a functor rather than a standalone transfor, the generic
+// fapp1/tapp1 tower remains available at the next hom.
+
+injective symbol fdapp1_comma_projection_func
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Functor
+      (@Transfd_cat
+        K
+        (@Op_catd K E)
+        (@Homd_target_catd K E)
+        (@fdapp1_projection_source K E)
+        (@fdapp1_projection_target K E D FF))
+      (@Transf_cat
+        (Fibre_cat E x)
+        (Fibre_cat D y)
+        (@functord_transport_lhs_func K E D FF x y p)
+        (@functord_transport_rhs_func K E D FF x y p)));
+
+// The whole transformation selected from an arbitrary internal action.
+injective symbol fdapp1_comma_projection_transf
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Transf
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_rhs_func K E D FF x y p));
+
+// Object projection of the narrow whole functor.
+rule @fapp0
+      _
+      _
+      (@fdapp1_comma_projection_func
+        $K $E $D $FF $x $y $p)
+      $eta
+  ↪ @fdapp1_comma_projection_transf
+      $K $E $D $FF $eta $x $y $p;
+
+// Object/component beta of the whole projection functor.  The RHS is the
+// transported-identity specialization of the arbitrary comma component.
+rule @tapp0_fapp0
+      _
+      _
+      _
+      _
+      $u
+      (@fdapp1_comma_projection_transf
+        $K $E $D $FF $eta $x $y $p)
+  ↪ @fdapp1_project_comma_component
+      $K $E $D $FF $eta $x $y $p $u
+      (@fapp0
+        (Fibre_cat $E $x)
+        (Fibre_cat $E $y)
+        (@catd_transport_func $K $E $x $y $p)
+        $u)
+      (@id
+        (Fibre_cat $E $y)
+        (@fapp0
+          (Fibre_cat $E $x)
+          (Fibre_cat $E $y)
+          (@catd_transport_func $K $E $x $y $p)
+          $u));
+
+// Read the transported identity literally from the self-comma identity
+// section for T := E[p].
+symbol fdapp1_identity_section_alpha
+  [K : Cat] [E : τ (Catd K)]
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (Fibre_cat E y)
+      (fapp0 (@catd_transport_func K E x y p) u)
+      (fapp0 (@catd_transport_func K E x y p) u))
+≔ sigma_Snd
+    (@piapp0
+      (Fibre_cat E x)
+      (@SelfComma_catd
+        (Fibre_cat E x)
+        (Fibre_cat E y)
+        (@catd_transport_func K E x y p))
+      (@hom_con_identity_graph_sec
+        (Fibre_cat E x)
+        (Fibre_cat E y)
+        (@catd_transport_func K E x y p))
+      u);
+
+symbol fdapp1_project_identity_section_component
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  : τ (Hom
+      (Fibre_cat D y)
+      (fapp0 (@functord_transport_lhs_func K E D FF x y p) u)
+      (fapp0 (@functord_transport_rhs_func K E D FF x y p) u))
+≔ @fdapp1_project_comma_component
+    K E D FF eta x y p u
+    (fapp0 (@catd_transport_func K E x y p) u)
+    (@fdapp1_identity_section_alpha K E x y p u);
+
+// The public whole laxity candidate is now an object projection, not an
+// independently postulated transformation.
+symbol functord_laxity_transf
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (Transf
+      (@functord_transport_lhs_func K E D FF x y p)
+      (@functord_transport_rhs_func K E D FF x y p))
+≔ @fdapp1_comma_projection_transf
+    K E D FF (@fdapp1_int_transfd K E D FF) x y p;
+// -----------------------------------------------------------------------------------------------
+// Naturality in the retained source-fibre variable u.  The identity section
+// sends h : u -> u' to the comma datum whose transported alpha is E[p][h].
+
+symbol fdapp1_identity_section_transport_alpha
+  [K : Cat] [E : τ (Catd K)]
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  [u u' : τ (Obj (Fibre_cat E x))]
+  (h : τ (Hom (Fibre_cat E x) u u'))
+  : τ (Hom
+      (Fibre_cat E y)
+      (fapp0 (@catd_transport_func K E x y p) u)
+      (fapp0 (@catd_transport_func K E x y p) u'))
+≔ @fapp1_fapp0
+    (Fibre_cat E x)
+    (Fibre_cat E y)
+    (@catd_transport_func K E x y p)
+    u u' h;
+
+// Capped off-diagonal action of the projected transformation.  Unlike the
+// object component, this consumes the arrow part of the identity graph.
+symbol fdapp1_comma_projection_tapp1_fapp0
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  [u u' : τ (Obj (Fibre_cat E x))]
+  (h : τ (Hom (Fibre_cat E x) u u'))
+  : τ (Hom
+      (Fibre_cat D y)
+      (fapp0 (@functord_transport_lhs_func K E D FF x y p) u)
+      (fapp0 (@functord_transport_rhs_func K E D FF x y p) u'))
+≔ @fdapp1_project_comma_component
+    K E D FF eta x y p u
+    (fapp0 (@catd_transport_func K E x y p) u')
+    (@fdapp1_identity_section_transport_alpha
+      K E x y p u u' h);
+
+injective symbol fdapp1_comma_projection_tapp1_func
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (eta : τ (Transfd
+    (@fdapp1_projection_source K E)
+    (@fdapp1_projection_target K E D FF)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u u' : τ (Obj (Fibre_cat E x)))
+  : τ (Functor
+      (Hom_cat (Fibre_cat E x) u u')
+      (Hom_cat
+        (Fibre_cat D y)
+        (fapp0 (@functord_transport_lhs_func K E D FF x y p) u)
+        (fapp0 (@functord_transport_rhs_func K E D FF x y p) u')));
+
+rule @tapp1_func
+      _
+      _
+      _
+      _
+      $u $u'
+      (@fdapp1_comma_projection_transf
+        $K $E $D $FF $eta $x $y $p)
+  ↪ @fdapp1_comma_projection_tapp1_func
+      $K $E $D $FF $eta $x $y $p $u $u';
+
+rule @fapp0
+      _
+      _
+      (@fdapp1_comma_projection_tapp1_func
+        $K $E $D $FF $eta $x $y $p $u $u')
+      $h
+  ↪ @fdapp1_comma_projection_tapp1_fapp0
+      $K $E $D $FF $eta $x $y $p $u $u' $h;
+
+rule @tapp1_fapp0
+      _
+      _
+      _
+      _
+      $u $u'
+      (@fdapp1_comma_projection_transf
+        $K $E $D $FF $eta $x $y $p)
+      $h
+  ↪ @fdapp1_comma_projection_tapp1_fapp0
+      $K $E $D $FF $eta $x $y $p $u $u' $h;
 
 // -------------------------------------------------------------------------------------------------
 // 19. Applications: PathOut, path induction, and transitivity

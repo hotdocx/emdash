@@ -3708,8 +3708,24 @@ with the transported-identity specialization:
 fdapp1_int_hom_fapp0(FF,p,u,id) -> fdapp1_int_cell(FF,p,u).
 ```
 
-This is the component-level displayed laxity normal form. A whole-transfor
-laxity interface remains deferred.
+This is the component-level displayed laxity normal form. The late section
+18zz now promotes it to the whole transformation
+
+```text
+functord_laxity_transf(FF,p)
+  : D[p] o FF[x] => FF[y] o E[p].
+```
+
+The implementation projects the arbitrary whole internal action through the
+existing `tdapp0_fapp0`, `tapp0_fapp0`, `pi_hom_fapp0`, dependent-hom, and
+self-comma identity-section owners. Its component reduces back to
+`fdapp1_int_cell`, and its retained source-fibre arrow action computes through
+one `tapp1_func` owner and capped `tapp1_fapp0` projection. No independent
+naturality square is postulated, and this concrete consumer did not require a
+primitive redesign of the transparent `piapp*` aliases. The section is late
+because its identity-section action needs the completed cross-section
+normalization environment; an earlier owner-position probe fails before those
+dependencies are available.
 
 Section 17 contains generic Sigma/Pi introduction/evaluation, constant
 sections, ordinary structural logic, generic functor hom-action, section
@@ -4434,7 +4450,9 @@ The following remain explicit future work rather than hidden assumptions:
   its transparent expression and the general
   `sigma_pullback_total_func(F,D)` base-change totalization are active;
 - semantic uncurry action on arbitrary transfors;
-- whole-transfor displayed laxity beyond `fdapp1_int_cell`;
+- the ordinary target-internalized/opposite mirror, pre/right laxity witness,
+  and selected next recursive action beyond the active whole displayed
+  `functord_laxity_transf` owner;
 - the arrow action of `sigma_intro_tapp0_func`;
 - off-diagonal `tapp1_*` projections for `sigma_map_transf` beyond its current
   point-component computation;

@@ -48,9 +48,23 @@ warning inventory changes from `1082/159` to `1112/159`: all `+30` critical
 pairs are owned by this projection (`25` composition, `3` identity, `2`
 specialization/evaluator), with no replaceable-LHS growth or subject-reduction
 failure. The strict catalog is regenerated, and the bounded tranche is locally
-checkpointed at `74d4200`. `ILGR-LAX-2` is now the first
-dependency-ready row; health and broader closure remain assigned to
-`ILGR-CLOSE-1`. No push, merge, publication, release,
+checkpointed at `74d4200` with its ledger follow-up at `bc19178`.
+`ILGR-LAX-2` is implemented and focused-green, pending its local checkpoint.
+The active late section 18zz constructs the self-comma identity section, the
+arbitrary internal-action projection ladder, the whole
+`fdapp1_comma_projection_func`, the transparent
+`functord_laxity_transf`, and the retained source-fibre `tapp1` action. An
+earlier section-16 owner-position probe correctly failed because the section
+action needs the completed cross-section normalization environment; the exact
+late owner-position probe passes. Both explicit classifier slots in the one
+new section-object rule were removed independently after green remove-one-slot
+probes. The kernel and ten focused central observations pass; a negative probe
+rejects a `p`-indexed laxity transformation requested at a distinct `q`
+endpoint. The strict LHS audit is zero, the catalog is strict and current, and
+the warning inventory remains exactly `1112/159`, so this row is
+warning-neutral relative to `ILGR-LAX-1`. The existing transparent `piapp*`
+aliases were sufficient and remain unchanged. Health and broader closure
+remain assigned to `ILGR-CLOSE-1`. No push, merge, publication, release,
 history rewrite, worktree removal, truncation, generic groupoidification,
 Gray tensor, or book rewrite is authorized by this plan.
 
@@ -83,7 +97,7 @@ concrete consumer needs one.
 | --- | --- | --- |
 | `ILGR-00` | complete | Promote the research notebook; scan active owners and probes; record reuse, gaps, scope, and proportional validation. |
 | `ILGR-LAX-1` | complete | Promoted the generic `tapp0_hom_fapp0` observation with its existing `tdapp0_fapp0` Cat specialization. One runtime normal form, identity/composition beta, the whole `tapp0_func` hom action, endpoint rejection, subject reduction, strict LHS audit, and exact `+30/0` warning delta are checked. |
-| `ILGR-LAX-2` | active | Promote the smallest warning-reviewed whole comma/identity-section projection needed to recover the displayed laxity component and its retained fibre-arrow action. Current `piapp*` aliases remain unless this real consumer proves they are insufficient. |
+| `ILGR-LAX-2` | focused-green; checkpoint pending | The late whole comma/identity-section projection recovers the displayed laxity component and retained fibre-arrow action from `fdapp1_int_transfd`; positive/negative consumers, warning neutrality, LHS audit, and current transparent `piapp*` sufficiency are checked. |
 | `ILGR-LAX-3` | pending | Expose the ordinary target-internalized/opposite mirror and derive the pre/right witness from the same `fdapp1_int_cell` ladder; do not postulate an independent naturality square. |
 | `ILGR-LAX-4` | pending | Package a representative post/left and pre/right compositor/naturality extraction with direct computational assertions and one standalone ordinary/displayed consumer. |
 | `ILGR-LAX-5` | pending | Retain one next internal action and inspect its expected recursively assembled boundary. This is an iteration test, not a complete simplicial-object, pentagon, nerve, Segal, or associahedral project. |
@@ -1125,6 +1139,41 @@ and component betas.  These are useful confluence diagnostics, not automatic
 vetoes: all probes typecheck, no subject-reduction failure occurs, and no
 replaceable-LHS warning is added.  They must nevertheless be recorded and
 reviewed before promotion; this probe has not modified the active kernel.
+
+#### 6B.1. Bounded active promotion verdict (2026-08-17)
+
+The active implementation deliberately partitions the preceding experiment.
+`ILGR-LAX-1` promoted the generic higher-component observation and its
+Cat-valued specialization, accounting for the reviewed `+30/0` warning delta.
+`ILGR-LAX-2` promotes only the warning-neutral whole comma/identity-section
+boundary:
+
+```text
+fdapp1_int_transfd(FF)
+  -> fdapp1_comma_projection_func(FF,p)
+  -> functord_laxity_transf(FF,p)
+  -> fdapp1_int_cell(FF,p,u),
+```
+
+together with the retained source-fibre `tapp1_func` and `tapp1_fapp0`
+actions. The hom-law and tetrahedron experiments responsible for the later
+`+46` probe delta remain outside this row and stay available for
+`ILGR-LAX-5`; they were not imported merely because they appeared in the same
+exploratory file.
+
+The append-only probe had hidden one sequencing fact. At the earlier
+section-16 position, the canonical self-comma section arrow does not yet
+elaborate because its source normal form depends on the completed
+cross-section normalization environment. The exact full-file owner therefore
+lives in late section 18zz, after those bridges and before applications. At
+that position, quiet and warning-enabled checks pass, both explicit classifier
+slots in its object rule can independently be replaced by `_`, and the warning
+inventory remains `1112/159`. Ten central observations cover the section
+object and action, the arbitrary internal-action component, the public whole
+laxity component, and the retained arrow action. A negative probe rejects a
+`p`-indexed transformation requested at a distinct `q` endpoint. This concrete
+consumer confirms that the existing transparent `piapp*` aliases are
+sufficient.
 
 ### 6C. Native iterated-`homd_` tetrahedron design (2026-08-17)
 
