@@ -518,6 +518,13 @@ detailed probe evidence.
   restricted induction and recursion, derives map identity/composition by
   that induction, and uses the existing `path_map_func` for its iterable whole
   Hom action.
+- `emdash3_2_semisimplicial_face_codes.lp`: set-classified augmented
+  semi-simplex face-map codes. A native indexed skip/keep family owns raw
+  structural composition; its public 0-truncation supplies sethood while
+  constructors, identities, and composition still compute through the
+  existing restricted recursor. It adds no proof-time unifier, internal
+  semi-simplex category, join realization, representable, sieve, or Kan
+  claim.
 - `emdash3_2_circle_connectedness.lp`: transparent rule-free propositional-
   truncation consumer. It constructs
   `Pi x:S1, ||circle_base=x||_{-1}` by dependent Circle induction; the retained

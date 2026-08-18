@@ -2,6 +2,15 @@
 
 Date: 2026-08-18
 
+`REPORT_EMDASH_V3_2_SIMPLICIAL_SUBSTRATE_AND_KAN_CONTINUATION_PLAN_2026-08-18.md`
+is the active categorical-first simplicial continuation. It distinguishes
+join-built directed simplex shapes, Yoneda standard simplices, and
+semisimplicial diagrams; schedules a computing augmented face-code category,
+selected boundary/horn sieves, an algebraic path-groupoid horn consumer, and
+categorical decalage; and keeps a curated coinductive `SST` facade behind a
+later evidence gate. It explicitly avoids importing dTT/Narya as a second
+foundation or reproducing Herbelin's external frame/coherence machinery.
+
 `../../docs/EMDASH_BOOK_V3_2_GROUPOIDAL_REALIZATION_EXPANSION_PLAN_2026-08-18.md`
 is the completed cross-layer editorial and implementation ledger for the
 groupoidal-realization book continuation, concise article, and narrowly
