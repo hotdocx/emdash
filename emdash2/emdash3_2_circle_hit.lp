@@ -2,9 +2,10 @@
   One-dimensional groupoidal Circle HIT signature.
 
   Formation, base, loop, dimension evidence, and dependent elimination are
-  opaque signature data. The point-constructor beta is the sole runtime rule;
-  loop computation is propositional, following the active HIT policy and the
-  HoTT Book presentation. The inverse loop is derived from equality symmetry.
+  opaque signature data. Point computation and the canonical dependent
+  PathOver action on the generating loop are runtime rules. The ordinary
+  eq_ap projection remains propositional. The inverse loop is derived from
+  equality symmetry.
 
   This first tranche does not yet construct the integer code family or prove
   the loop-space equivalence.

@@ -1541,10 +1541,16 @@ transport(Mon_e,loop,a) = e(a).
 Here `ua(e)` denotes the selected `grpd_equiv_path(e)`, and the checked owners
 are `walking_circle_monodromy_circle_family`,
 `walking_circle_monodromy_loop_path`, and
-`walking_circle_monodromy_transport_path`. Circle point beta is judgmental in
-the current kernel; Circle loop beta and these displayed loop equations are
-propositional. This notation does not assert a generic `Groupoidify` on every
-category.
+`walking_circle_monodromy_transport_path`. Circle point beta and the dependent
+constructor computation
+
+```text
+apd(circle_ind(D,b,ell),loop) == ell
+```
+
+are judgmental in the current kernel. The ordinary `ap(Mon_e,loop)` equation
+and the displayed monodromy comparisons remain propositional. This notation
+does not assert a generic `Groupoidify` on every category.
 
 ## Computational Truncation And Circle Notation
 

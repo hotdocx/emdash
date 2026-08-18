@@ -810,8 +810,8 @@ Use the following order:
     as whole functors; `OmegaEquivAlong Cat_cat` packages the result, while
     point and generator readings are dependent projections and both selected
     inverse directions retain the extension's higher action. It adds no
-    generic `Groupoidify`, adjunction, rule, unifier, or judgmental Circle
-    loop beta;
+    generic `Groupoidify`, adjunction, rule, unifier, or additional Circle
+    computation beyond the dependent beta owned by the Circle module;
 84. `emdash3_2_walking_circle_monodromy.lp` for the rule-free universe-valued
     consumer. A self-`TypeEquiv` becomes a universe loop by the selected
     univalence decoder, the existing whole inverse builds its Circle family,

@@ -92,9 +92,9 @@ on its own because it:
 - supplies direct design evidence for the arrow-constructor beta of a future
   generic free-coherent-inversion `Groupoidify` HIT.
 
-## Current Authority And Exact Gap
+## Baseline Authority And Exact Gap
 
-`emdash3_2_circle_hit.lp` currently owns:
+At the baseline, `emdash3_2_circle_hit.lp` owned:
 
 ```text
 circle_ind(D,b,ell,base)  -->  b
@@ -195,9 +195,9 @@ Circle-specific projection. A broad cancellation rule for every
 | `CJLC-00` | complete | The dedicated branch/worktree descends cleanly from `cdf3f7c`; staged and unstaged baselines were empty; the plan and parent ledgers are linked; the original-root Infinity archive verifies at 708 responses; report-header and active-reference lints pass; and direct Circle source/reviewer baselines are green under five seconds. The warning baseline is `1112` critical-pair plus `159` replaceable-slot diagnostics. No aggregate ran. |
 | `CJLC-PROBE-1` | complete | The first direct rule correctly failed because public `eq_apd` was defined by `≔ ind_eqr`. A full active-kernel copy validated the narrow prerequisite: stable injective `eq_apd`, its reflexive beta, and a derived `eq_apd_ind_eqr_path`. The full Circle owner copy then accepted the higher-constructor rule, typed reflexivity, constant-family inheritance, and arbitrary-section non-collapse. Decision-tree inspection selects reflexivity versus the rigid Circle path/function shape; strict LHS audit is zero. Replacing either nested Circle motive/base guard by `_` fails subject reduction, so both are retained and annotated. Warning inventory remains exactly `1112/159`. |
 | `CJLC-PROMOTE-2` | complete | `emdash3_2.lp` now owns stable `eq_apd`, its generic reflexive beta, and the transparent J-comparison theorem. `emdash3_2_circle_hit.lp` adds the selected dependent loop rule and makes `circle_ind_beta_loop` reflexivity; `circle_rec` inherits judgmental dependent `PathOver` beta. Ordinary `eq_ap` remains propositional: making it generically stable breaks the active half-adjoint fibre proof's definitional boundary, while the narrow alternative would match the expanded nested `const_pathover`/J tree and did not fire. No brittle outer-eliminator/inner-cut rule is promoted. |
-| `CJLC-CONSUMER-3` | in progress | `examples/circle_judgmental_loop_computation.lp` owns positive typed reflexivity, named-theorem transparency, constant-family inheritance, arbitrary-section non-collapse, generic J comparison, and the explicit ordinary-`eq_ap` non-conversion boundary. Direct Circle source/reviewer, Circle connectedness, restriction, extension, universality, monodromy, and their focused downstream reviewers are green under five seconds each. Remaining: public authority/report synchronization and closeout evidence. |
-| `CJLC-GROUPIFY-HANDOFF-4` | pending | Record that generic `Groupoidify` remains a valid separate construction. Define the next plan's first two source-shape probes—walking non-endomorphism arrow and composable pair/triangle—and the required indexed categorical-HIT unit/recursor/whole-beta-eta boundary. Do not add an opaque reflector here. |
-| `CJLC-CLOSE-5` | pending | Synchronize Foundations, current status/SOP, canonical syntax, report index, diagnostics/catalog/health as affected; run proportional required gates; checkpoint a clean worktree; and record the next dependency-ready generic-groupoidification goal. |
+| `CJLC-CONSUMER-3` | complete | `examples/circle_judgmental_loop_computation.lp` owns positive typed reflexivity, named-theorem transparency, constant-family inheritance, arbitrary-section non-collapse, generic J comparison, and the explicit ordinary-`eq_ap` non-conversion boundary. Direct Circle source/reviewer, Circle connectedness, restriction, extension, universality, monodromy, and their focused downstream reviewers are green. The central diagnostics now also test the stable whole-Pi non-collapse and typed J comparison. Public Foundations, syntax, status/SOP, source comments, and the historical universality record describe the same dependent-versus-ordinary boundary. |
+| `CJLC-GROUPIFY-HANDOFF-4` | complete | `REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md` records the successor. It reuses the active join-derived `WalkingArrow_cat`, introduces a groupoidal interval mapping theorem as the endpoint-varying consumer, derives a walking pair from `Join_cat(WalkingArrow_cat,Terminal_cat)`, and uses an explicit groupoidal 2-simplex to test composition coherence. Only afterward may a generic indexed categorical HIT with whole unit/extension, computation, beta/eta, source action, and adjunction be promoted. No opaque reflector is added here. |
+| `CJLC-CLOSE-5` | in progress | Foundations, current status/SOP, canonical syntax, report index, diagnostics, the 2,183-check strict catalog, and exact 195-target health are synchronized. Header/reference/TOC/diff and strict LHS gates are green. Remaining: create the closeout evidence checkpoint, record its hash in the ledgers, and verify a clean worktree. |
 
 ## Validation Policy
 
@@ -266,6 +266,22 @@ After unfolding the derived `circle_rec`, the same rule computes its dependent
 action to `const_pathover(circle_loop,ell)`. An arbitrary dependent function
 over Circle does not reduce.
 
+The first green implementation checkpoint is
+`c662f2c` (`Add judgmental Circle dependent loop beta`). It contains the
+stable owner, Circle computation, focused reviewer, initial plan, and parent
+ledger synchronization. Later public-document and health closeout remains a
+separate reviewable checkpoint.
+
+The central diagnostic exposed and corrected one obsolete expectation left by
+the former transparent `eq_apd`: a reflexive Pi path computes to `eq_apd` once
+the related endpoints and base path are supplied, but the two partially
+applied whole functions no longer convert. Likewise,
+`PiFunext(PiHapply(refl))` and reflexive Pi action over an arbitrary base path
+are stable observations related propositionally by
+`eq_apd_ind_eqr_path`, rather than a runtime fold. The central suite now tests
+both the intentional non-conversion and the typed J-derived comparison. The
+full `emdash3_2_checks.lp` target is green within the 90-second ceiling.
+
 The separate ordinary `eq_ap` observer remains J-derived and propositional.
 Two alternatives were rejected with direct probe evidence:
 
@@ -280,3 +296,27 @@ the SOP. `circle_rec_beta_loop_path` therefore remains the safe readable
 propositional `eq_ap` equation. This does not weaken the promoted HIT
 constructor computation: dependent elimination and its canonical `PathOver`
 action are judgmental.
+
+## Closeout Evidence — 2026-08-18
+
+The generated diagnostic catalog contains 2,183 classified checks across 107
+areas with no legacy or unclassified entry. Strict LHS auditing reports zero
+unreviewed clauses in both the core and Circle source; the core retains its 58
+annotated slots across 34 measured intentional clauses. The selected-source
+warning inventory is unchanged at `1112/159`.
+
+The one required exact-content aggregate was the resumable health audit. It
+ran every affected closure from the new snapshot rather than carrying stale
+evidence: all 195 targets pass—85 source/diagnostic files and 110 reviewers—
+with 2,150.131 summed check-seconds and a 59.598-second maximum, below the
+uniform 90-second ceiling. The Circle source passes in 5.778 seconds and
+`examples/circle_judgmental_loop_computation.lp` in 5.551 seconds. Its exact
+snapshots are:
+
+```text
+source metrics  8822b00394ad59764ee8857497e0e1ea227da7ccf0ae3bf5aca5ca6a77a053c4
+checked content fa157dd07517f5467001672aa86c7534852d58d19e1874f3b008fbbfd5e226d1
+```
+
+No redundant `make check`, `make examples`, `make ci`, root TypeScript,
+browser, print, book, package, or repository-wide aggregate was run.

@@ -129,9 +129,11 @@ symbol walking_circle_extend_restrict_eta_base_path
     (@walking_circle_extend_restrict_eta_at_path G h);
 
 /*
-  Loop projection is dependent over the whole Circle-function path.  It needs
-  no judgmental Circle loop beta: eq_apd retains the required endpoint
-  transport while the whole uniqueness clause owns the comparison.
+  Loop projection is dependent over the whole Circle-function path. It needs
+  no ordinary circle_rec/eq_ap computation: eq_apd retains the required
+  endpoint transport while the whole uniqueness clause owns the comparison.
+  The selected Circle-induction PathOver constructor beta is independently
+  judgmental.
 */
 symbol walking_circle_extend_restrict_eta_loop_pathover
   [G : Grpd]

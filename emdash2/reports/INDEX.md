@@ -1109,6 +1109,15 @@ record.
   groupoidification remains a separate follow-on construction beginning with
   non-endomorphism and composable-pair source shapes.
 
+- `REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md`:
+  proposed successor to the Circle computation tranche and the completed
+  WalkingEnd--Circle universality decision. It reuses the active join-derived
+  `WalkingArrow_cat` for a two-endpoint groupoidal-interval mapping theorem,
+  then derives a composable-pair source and explicit groupoidal 2-simplex to
+  test composition coherence. Only those consumers may authorize a generic
+  indexed categorical-HIT with whole unit, extension, beta/eta, source action,
+  and eventual adjunction to `Path_cat_func`.
+
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization
   decision record. It provides the sorted `NType_cat(n)`

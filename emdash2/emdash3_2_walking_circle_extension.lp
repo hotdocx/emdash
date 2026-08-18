@@ -10,10 +10,11 @@
 
   The primitive whole functor is the narrow categorical-HIT recursor owner
   missing from the object-only Circle interface. Its object beta computes at
-  runtime. Its first-arrow beta remains propositional, like the Circle loop
-  beta itself, while generic fapp1_func retains an iterable next action. No
-  new generic groupoidification reflector, identity/composition rule, or
-  unifier is introduced.
+  runtime. The underlying Circle-induction `PathOver` constructor beta is
+  judgmental; the ordinary Circle-loop and this whole functor's first-arrow
+  observations remain propositional, while generic fapp1_func retains an
+  iterable next action. No new generic groupoidification reflector,
+  identity/composition rule, or unifier is introduced.
 */
 
 require open emdash.emdash3_2_walking_circle_restriction;

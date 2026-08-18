@@ -397,9 +397,11 @@ detailed probe evidence.
 - `emdash3_2_circle_hit.lp`: one-way opaque groupoidal Circle HIT. It owns the
   base and generating equality loop, explicit one-dimensional evidence,
   unrestricted dependent elimination, judgmental point computation,
-  propositional dependent loop computation, the universal Integer cover, and
-  the complete encode/decode proof. Its based loop type and the corresponding
-  categorical Hom are explicitly `TypeEquiv` to Integer.
+  judgmental dependent `PathOver` loop computation through the stable
+  `eq_apd` owner, the universal Integer cover, and the complete encode/decode
+  proof. Its ordinary `eq_ap` loop equation remains propositional. Its based
+  loop type and the corresponding categorical Hom are explicitly `TypeEquiv`
+  to Integer.
 - `emdash3_2_walking_circle_completion.lp`: transparent rule-free concrete
   comparison from WalkingEnd to Circle. It sends the directed generator and
   every Nat power to the Circle generator and its nonnegative powers, and the
@@ -528,7 +530,11 @@ the isolated Sum former/action experiment are absent from active `.lp`
 sources. Canonical nondependent action is
 `fapp1_fapp0(path_map_func(f),p)`, which reduces to `eq_ap(f,p)`; the uncapped
 next-hom functor remains available through `fapp1_func`, and dependent witness
-transport remains direct `eq_apd`.
+transport remains direct `eq_apd`. That dependent action is now an injective
+stable owner with its generic reflexive beta; `eq_apd_ind_eqr_path` derives
+its agreement with the former transparent J expansion. This makes selected
+higher-constructor computation possible without adding a second equality
+eliminator.
 
 After compatibility deletion, an exact collision manifest found zero conflict
 between the stripped native declarations and existing unsuffixed declarations.
@@ -4505,22 +4511,24 @@ warnings remain measured diagnostic evidence, not a claim of global
 confluence.
 
 After integration of the completed TypeScript-elaborator, PSSS, internal-
-laxity, and profiled-Gray histories, the exact-current selected-source warning
-boundary is 1,289 diagnostics: 1,130 unjoinable critical pairs and 159
+laxity, profiled-Gray, WalkingEnd--Circle, and dependent Circle-computation
+histories, the exact-current selected-source warning boundary is 1,271
+diagnostics: 1,112 unjoinable critical pairs and 159
 replaceable-pattern advisories. The strict
 LHS audit is zero unreviewed clauses, 58 annotated slots, and 34 intentional
-clauses. The generated catalog contains 2,177 classified checks across 106
+clauses. The generated catalog contains 2,183 classified checks across 107
 areas with zero legacy or unclassified entries.
 
-The exact-current registered health boundary is green for all 186 maintained
-targets—81 source/diagnostic files and 105 reviewer examples—under the uniform
-90-second per-target ceiling. The August 17 closeout is fresh rather than
-carried: all 186 targets report exit 0, with 1,655.157 summed check-seconds.
-The new `emdash3_2_gray_interchanger.lp` source passes in 5.773 seconds and its
-reviewer in 5.535 seconds. The source-metrics snapshot is
-`sha256:eded750dd21a254669499f6cecfde8d9e7499d3018f489c8dfd1cce76e49d979`
+The exact-current registered health boundary is green for all 195 maintained
+targets—85 source/diagnostic files and 110 reviewer examples—under the uniform
+90-second per-target ceiling. The August 18 closeout is fresh rather than
+carried: all 195 targets report exit 0, with 2,150.131 summed check-seconds.
+The central diagnostics pass in 59.598 seconds, the Circle source in 5.778
+seconds, and the new judgmental-loop reviewer in 5.551 seconds. The
+source-metrics snapshot is
+`sha256:8822b00394ad59764ee8857497e0e1ea227da7ccf0ae3bf5aca5ca6a77a053c4`
 and the checked-content snapshot is
-`sha256:8a38dabd82f92a1f4a6b54f1436b395d563c6c8db51836504d1238dcfb4e8ea6`.
+`sha256:fa157dd07517f5467001672aa86c7534852d58d19e1874f3b008fbbfd5e226d1`.
 This was the one necessary closeout aggregate; redundant `make check`,
 `make examples`, `make ci`, and repository-wide aggregates were not rerun.
 

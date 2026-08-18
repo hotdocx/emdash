@@ -249,7 +249,7 @@ group before set truncation is `Integer`.
 | `WCGU-EQUIV-3` | complete | `emdash3_2_walking_circle_universality.lp` adds exactly the two scoped categorical-HIT uniqueness clauses needed for `extend o restrict = id` and `restrict o extend = id` as paths between whole functors. It packages restriction as `walking_circle_groupoidification_hom_omega : OmegaEquivAlong Cat_cat`; both selected inverse projections compute to the whole extension, whose first and second hom actions remain available. Circle/WalkingEnd point and generator observations are derived by `eq_ap`/`eq_apd`, including both dependent loop boundaries. Direct source and 12-check reviewer pass with a mismatched-target rejection; the rule-free source has exact zero warning delta from extension (`1123/159`), and strict LHS audit remains zero. The focused reviewer owns regressions under the already-recorded monolithic-target budget decision. Checkpoint: `e0b20f7`. |
 | `WCGU-CIRCLE-COMP-TODO` | promoted to dedicated plan | `WCGU-EQUIV-3` is complete, so the sequencing condition is discharged. The separate normal-form migration is now owned by `REPORT_EMDASH_V3_2_CIRCLE_JUDGMENTAL_LOOP_COMPUTATION_PLAN_2026-08-18.md`; this completed universality ledger remains historical evidence and is not reopened wholesale. |
 | `WCGU-MONO-4` | complete | `emdash3_2_walking_circle_monodromy.lp` specializes universality at `Grpd_grpd`. A self-`TypeEquiv(A,A)` is decoded to `grpd_equiv_path(e)`, forms the canonical WalkingEnd representation, and extends to the literal Circle recursor on that loop. Whole beta recovers the original representation after restriction; base and loop paths are derived, and transport around the actual family loop agrees with `type_equiv_to(e)`. The rule-free source and seven-check reviewer pass, including a mismatched-codomain rejection, with exact zero warning delta (`1123/159`) and zero LHS growth. Checkpoint: `ee25c24`. |
-| `WCGU-GENERIC-5` | complete | Decision: do not promote a generic `Groupoidify_func` from the single WalkingEnd source shape. The completed theorem validates the whole fixed-target interface and iterable inverse action, but neither constructs nor tests free coherent inversion for arbitrary objects, non-endomorphism arrows, composition relations, and higher cells. Telescope localization, `Core_cat`, `Path_cat_func`, and `Adjunction` do not supply that construction. Reopen only with an indexed free-coherent-inversion categorical-HIT design whose unit/recursor compute on every represented cell and whose whole beta/eta and source-functorial action are exercised by at least a non-endomorphism walking-arrow consumer and a composable-pair/triangle consumer. No source symbol, opaque adjunction, or generic claim is added. Decision checkpoint: `22f98f5`. |
+| `WCGU-GENERIC-5` | complete | Decision: do not promote a generic `Groupoidify_func` from the single WalkingEnd source shape. The completed theorem validates the whole fixed-target interface and iterable inverse action, but neither constructs nor tests free coherent inversion for arbitrary objects, non-endomorphism arrows, composition relations, and higher cells. Telescope localization, `Core_cat`, `Path_cat_func`, and `Adjunction` do not supply that construction. Reopen only with an indexed free-coherent-inversion categorical-HIT design whose unit/recursor compute on every represented cell and whose whole beta/eta and source-functorial action are exercised by at least a non-endomorphism walking-arrow consumer and a composable-pair/triangle consumer. The proposed successor design is `REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md`; no source symbol, opaque adjunction, or generic claim is added by this decision row. Decision checkpoint: `22f98f5`. |
 | `WCGU-CLOSE-1` | complete | Source/example registries and authority routing cover restriction, extension, universality, and monodromy. The parent master, Foundations, current status/SOP, canonical syntax, and report index describe the exact concrete theorem and generic deferral. Warning inventories end at `1123/159`, strict LHS audit is zero, and the unchanged central catalog remains strict at 2,182 checks/107 areas. Exact resumable health is current for 85 source/diagnostic targets plus 109 reviewers: 185 byte-identical successes were verified against health commit `053fcce`, the unchanged current diagnostics success is carried from `WCGU-RES-1`, and the eight new targets were checked green in this closeout. Later central reruns reached the 90-second budget without assertion failure and were not repeated indefinitely. No blind `make check`, `make examples`, `make ci`, root aggregate, book, push, merge, or publication was run. Closeout checkpoint: `709c1e3`. |
 
 ## First Focused Experiment
@@ -320,13 +320,14 @@ the semantic path by `walking_circle_extend_transf_agrees`, and
 `walking_circle_extend_next_func` confirms that the generic action remains
 iterable.
 
-This deliberately preserves the active HIT computation policy. Circle point
-beta is judgmental, while Circle loop beta and the extension's first-arrow
-agreement remain propositional. WalkingEnd's contextual generator beta is
-already judgmental. The deferred `WCGU-CIRCLE-COMP-TODO` row records a
-separate reviewed migration toward judgmental Circle path-constructor
-computation if `WCGU-EQUIV-3` or another concrete consumer demonstrates a
-material payoff; universality does not silently change global normal forms.
+This tranche deliberately preserved its baseline HIT computation policy.
+Circle point beta was judgmental, while Circle loop beta and the extension's
+first-arrow agreement remained propositional. WalkingEnd's contextual
+generator beta was already judgmental. Universality therefore did not
+silently change global normal forms. The later dedicated
+`CIRCLE-JUDGMENTAL-LOOP-COMPUTATION-V3.2` child promotes the dependent
+`PathOver` constructor beta; the ordinary `eq_ap` and extension first-arrow
+observations remain propositional.
 
 Direct source and focused reviewer checks pass. The warning-enabled source and
 its import-only control both report exactly `1123` critical-pair and `159`
@@ -374,12 +375,12 @@ and generator observations on both sides. Generator observations use
 `PathOver`, so endpoint transport is retained rather than erased by an
 ill-typed homogeneous equality.
 
-This probe also settles the immediate effect of the current HIT computation
-policy: propositional Circle loop beta does **not** block universality. The
+This probe settled the immediate effect of its baseline HIT computation
+policy: propositional Circle loop beta did **not** block universality. The
 Circle-side loop boundary follows by dependent action on the whole uniqueness
-path, without a new loop rewrite. `WCGU-CIRCLE-COMP-TODO` therefore remains a
-separate deferred normal-form improvement, not a prerequisite for the next
-consumer.
+path. The later dedicated child promotes the canonical dependent loop beta as
+a separate normal-form improvement; it is not a prerequisite retroactively
+attached to this completed universality theorem.
 
 Direct source and focused 12-check reviewer checks pass. The universality
 module is rule-free and has exactly the extension source's warning inventory,
@@ -499,11 +500,13 @@ retime the unchanged diagnostics target reached the ceiling without an
 assertion error; its earlier exact green result is carried with no fabricated
 new duration.
 
-The high-quality-prose book update is now eligible as a separate editorial
-goal. Generic free coherent inversion, judgmental Circle loop computation,
-mirror Gray closure, and the global strict-cut migration remain separately
-gated. No push, merge, publication, release, or worktree cleanup is part of
-this closeout.
+The high-quality-prose book update became eligible as a separate editorial
+goal. At this closeout, generic free coherent inversion, judgmental Circle
+loop computation, mirror Gray closure, and the global strict-cut migration
+remained separately gated. The later Circle child now completes the canonical
+dependent loop beta only; the other gates remain separate. No push, merge,
+publication, release, or worktree cleanup is part of this historical
+closeout.
 
 ## Validation Policy
 

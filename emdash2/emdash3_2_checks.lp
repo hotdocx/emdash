@@ -5065,13 +5065,17 @@ assert [A : Grpd]
   pi_path_refl f x0 x1 p
   ≡ @eq_apd A B f x0 x1 p;
 
-assert [A : Grpd]
+// The stable eq_apd owner deliberately does not fold the whole reflexive Pi
+// path before its related endpoints/path are supplied.  The pointwise rules
+// above retain the computational observation without changing Pi-path normal
+// forms or the existing funext proof.
+assertnot [A : Grpd]
   [B : τ A → Grpd]
   (f : Π x : τ A, τ (B x)) ⊢
   @eq_refl (@Pi_grpd A B) f
   ≡ @eq_apd A B f;
 
-assert [A : Grpd]
+assertnot [A : Grpd]
   [B : τ A → Grpd] ⊢
   @eq_refl (@Pi_grpd A B)
   ≡ @eq_apd A B;
@@ -5173,9 +5177,11 @@ assert [A : Grpd]
         (@PiHapply A B f f (@eq_refl (@Pi_grpd A B) f))
       = @eq_refl (@Pi_grpd A B) f);
 
-// After applying the two stable heads, the shaped-reflexivity and funext
-// action paths join by runtime computation without the proof-time equation.
-assert [A : Grpd]
+// Once eq_apd is a stable owner, the shaped-reflexivity and funext action
+// paths no longer join by runtime computation over an arbitrary base path.
+// Their comparison is the retained generic J theorem checked immediately
+// below; the whole Pi eta equation above remains proof-time only.
+assertnot [A : Grpd]
   [B : τ A → Grpd]
   (f : Π x : τ A, τ (B x))
   (x0 x1 : τ A)
@@ -5184,6 +5190,19 @@ assert [A : Grpd]
     (@PiHapply A B f f (@eq_refl (@Pi_grpd A B) f))
     x0 x1 p
   ≡ @eq_refl (@Pi_grpd A B) f x0 x1 p;
+
+assert [A : Grpd]
+  [B : τ A → Grpd]
+  (f : Π x : τ A, τ (B x))
+  (x0 x1 : τ A)
+  (p : τ (x0 = x1)) ⊢
+  @eq_apd_ind_eqr_path A B f x0 x1 p
+  : τ (@=
+      (@PathOver A B x0 x1 p (f x0) (f x1))
+      (@eq_refl (@Pi_grpd A B) f x0 x1 p)
+      (@PiFunext A B f f
+        (@PiHapply A B f f (@eq_refl (@Pi_grpd A B) f))
+        x0 x1 p));
 
 assert [A : Grpd]
   [B : τ A → Grpd]

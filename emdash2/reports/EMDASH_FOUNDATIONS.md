@@ -201,11 +201,22 @@ base : Circle
 loop : base = base.
 ```
 
-Its dependent eliminator computes judgmentally at `base`; its action on
-`loop` is an explicit propositional `PathOver` equation. There is still one
-primitive equality eliminator, `ind_eqr`. Circle recursion and the more
-structured interfaces are derived facades around it rather than competing
-notions of `J`.
+Its dependent eliminator computes judgmentally at `base`, and its canonical
+dependent action computes judgmentally on the generator:
+
+```text
+apd(circle_ind(D,b,ell),loop) = ell.
+```
+
+Here the displayed equality denotes conversion at the `PathOver` owner. The
+public `eq_apd` action is now a stable head with its generic reflexive beta; a
+derived theorem identifies it propositionally with its former right-based
+path-induction expansion. Thus there is still one primitive equality
+eliminator, `ind_eqr`. The separate ordinary `eq_ap` observation of
+constant-family Circle recursion remains propositional: exposing it directly
+would require either a broader `eq_ap` normal-form migration or a brittle
+nested-J commuting rule. Circle recursion and the more structured interfaces
+remain derived facades rather than competing notions of `J`.
 
 Circle recursion into the groupoid universe constructs the universal cover
 whose fibre at `base` is `Integer` and whose loop monodromy is successor.
@@ -254,10 +265,11 @@ representation, and transport around the loop applies `e.to`.
 This proves concrete groupoidification universality for the WalkingEnd source
 shape. It does not yet construct a generic reflector on every category. Such
 a reflector still requires free coherent inversion of arbitrary
-non-endomorphism arrows, composition relations, and higher cells. The current
-propositional Circle loop beta does not obstruct this concrete theorem; a
-separate reviewed normal-form migration may later make that constructor beta
-judgmental.
+non-endomorphism arrows, composition relations, and higher cells. The theorem
+was first completed using only propositional loop observations. The later
+reviewed normal-form migration makes the canonical dependent Circle
+path-constructor beta judgmental without changing the whole universality
+statement; its ordinary `eq_ap` projection remains propositional.
 
 Products supply a representative closure theorem. The canonical functor
 
