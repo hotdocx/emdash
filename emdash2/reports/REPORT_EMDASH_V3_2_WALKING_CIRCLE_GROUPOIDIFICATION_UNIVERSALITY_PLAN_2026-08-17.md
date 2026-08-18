@@ -4,9 +4,8 @@ Date: 2026-08-17 (America/Toronto)
 
 Plan-ID: `WALKING-CIRCLE-GROUPOIDIFICATION-UNIVERSALITY-V3.2`
 
-Status: **active consumer-first implementation plan**. `WCGU-00`,
-`WCGU-RES-1`, `WCGU-EXT-2`, and `WCGU-EQUIV-3` are complete; `WCGU-MONO-4`
-is complete and `WCGU-GENERIC-5` is the next dependency-ready row.
+Status: **active consumer-first implementation plan**. `WCGU-00` through
+`WCGU-GENERIC-5` are complete; `WCGU-CLOSE-1` is next.
 Local green checkpoint commits are authorized by the user's
 standing instruction for this continuation. Push, merge, publication,
 release, history rewrite, branch deletion, and worktree removal are not
@@ -249,7 +248,7 @@ group before set truncation is `Integer`.
 | `WCGU-EQUIV-3` | complete | `emdash3_2_walking_circle_universality.lp` adds exactly the two scoped categorical-HIT uniqueness clauses needed for `extend o restrict = id` and `restrict o extend = id` as paths between whole functors. It packages restriction as `walking_circle_groupoidification_hom_omega : OmegaEquivAlong Cat_cat`; both selected inverse projections compute to the whole extension, whose first and second hom actions remain available. Circle/WalkingEnd point and generator observations are derived by `eq_ap`/`eq_apd`, including both dependent loop boundaries. Direct source and 12-check reviewer pass with a mismatched-target rejection; the rule-free source has exact zero warning delta from extension (`1123/159`), and strict LHS audit remains zero. The focused reviewer owns regressions under the already-recorded monolithic-target budget decision. Checkpoint: `e0b20f7`. |
 | `WCGU-CIRCLE-COMP-TODO` | deferred | Revisit judgmental computation for the Circle path constructor after `WCGU-EQUIV-3`, or earlier only if a concrete consumer shows that propositional loop beta materially obstructs computation. Any promotion is a separate normal-form migration with owner-position, subject-reduction, critical-pair, warning, and downstream audits; it is not silently bundled into universality. |
 | `WCGU-MONO-4` | complete | `emdash3_2_walking_circle_monodromy.lp` specializes universality at `Grpd_grpd`. A self-`TypeEquiv(A,A)` is decoded to `grpd_equiv_path(e)`, forms the canonical WalkingEnd representation, and extends to the literal Circle recursor on that loop. Whole beta recovers the original representation after restriction; base and loop paths are derived, and transport around the actual family loop agrees with `type_equiv_to(e)`. The rule-free source and seven-check reviewer pass, including a mismatched-codomain rejection, with exact zero warning delta (`1123/159`) and zero LHS growth. Checkpoint: `ee25c24`. |
-| `WCGU-GENERIC-5` | pending | Decide from the completed consumer whether a reusable `Groupoidify_func`, unit, transpose, higher action, and `Adjunction(Groupoidify_func,Path_cat_func)` can be promoted honestly. Implement only the validated generic layer, or record the exact free-inversion prerequisite and keep the generic reflector deferred. |
+| `WCGU-GENERIC-5` | complete | Decision: do not promote a generic `Groupoidify_func` from the single WalkingEnd source shape. The completed theorem validates the whole fixed-target interface and iterable inverse action, but neither constructs nor tests free coherent inversion for arbitrary objects, non-endomorphism arrows, composition relations, and higher cells. Telescope localization, `Core_cat`, `Path_cat_func`, and `Adjunction` do not supply that construction. Reopen only with an indexed free-coherent-inversion categorical-HIT design whose unit/recursor compute on every represented cell and whose whole beta/eta and source-functorial action are exercised by at least a non-endomorphism walking-arrow consumer and a composable-pair/triangle consumer. No source symbol, opaque adjunction, or generic claim is added. Decision checkpoint: to be recorded after this ledger commit. |
 | `WCGU-CLOSE-1` | pending | Synchronize source/example ownership, master ledger, Foundations/SOP/canonical syntax, report index, catalog, warnings/LHS evidence, and proportional health/CI only for the boundary actually changed. Record remaining book, Gray-mirror, strict-cut, and HIT work separately. |
 
 ## First Focused Experiment
@@ -419,6 +418,47 @@ remains zero. It therefore validates the mapping-object theorem through a
 mathematically meaningful local-system/monodromy consumer without adding a
 second Circle code family, new univalence principle, or consumer-specific
 computation rule.
+
+### Completed `WCGU-GENERIC-5` decision — 2026-08-18
+
+The concrete result determines the intended generic interface but does not
+construct its source uniformly. For a genuine generic reflector one still
+needs, for every `C : Cat`, a groupoid and unit
+
+```text
+Groupoidify(C)      : Grpd
+unit_C              : C -> Path_cat(Groupoidify(C))
+```
+
+together with a recursor/transpose whole in maps to every groupoidal target,
+computation on objects and every represented cell, iterable action in both
+the target map and source functor, and whole beta/eta uniqueness. Merely
+declaring those names and packaging them with the existing `Adjunction`
+record would state the desired theorem rather than build free coherent
+inversion.
+
+None of the nearby owners fills this gap:
+
+- `Core_cat(C)` discards arrows which are not already invertible;
+- telescope localization starts from a groupoid/type and one endomap, rather
+  than an arbitrary directed category and all its cells;
+- `Path_cat_func` supplies the inclusion side but not its left adjoint; and
+- the shared strict/lax classifier and extracted pseudo action preserve the
+  required coherence once constructed but do not generate inverse cells.
+
+WalkingEnd tests one object and one endomorphism, while the monodromy theorem
+is a target-side consumer of that same source shape. It is not the independent
+second source-shape consumer required by the earlier generic-groupoidification
+reopening condition. A future design should therefore first handle a walking
+non-endomorphism arrow and then a composable pair/triangle, so that endpoint
+variation, inverse generation, composition compatibility, and one higher
+coherence are all computationally visible. Only an indexed categorical-HIT
+design passing those consumers should be promoted to generic
+`Groupoidify_func` and `Groupoidify_func ⊣ Path_cat_func`.
+
+This is a completed negative promotion decision with a concrete reopening
+prerequisite, not an unfinished attempt. No Lambdapi source, rule, unifier,
+or opaque generic adjunction is added by this row.
 
 ## Validation Policy
 
