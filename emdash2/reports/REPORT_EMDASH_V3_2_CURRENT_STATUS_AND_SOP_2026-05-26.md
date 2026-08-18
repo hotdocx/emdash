@@ -525,6 +525,13 @@ detailed probe evidence.
   existing restricted recursor. It adds no proof-time unifier, internal
   semi-simplex category, join realization, representable, sieve, or Kan
   claim.
+- `emdash3_2_semisimplicial_index.lp`: internal augmented semi-simplex
+  category. Objects compute to finite vertex counts and Homs to discrete path
+  categories of face codes. Identity is the all-keep code; category
+  composition reduces at visible public truncation points through
+  `face_comp`, while arbitrary composition retains the generic owner. It adds
+  no unifier, degeneracy, join realization, representable, sieve, or Kan
+  claim.
 - `emdash3_2_circle_connectedness.lp`: transparent rule-free propositional-
   truncation consumer. It constructs
   `Pi x:S1, ||circle_base=x||_{-1}` by dependent Circle induction; the retained

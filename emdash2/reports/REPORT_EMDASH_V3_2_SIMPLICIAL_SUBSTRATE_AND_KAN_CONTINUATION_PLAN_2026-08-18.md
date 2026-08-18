@@ -5,9 +5,10 @@ Date: 2026-08-18 (America/Toronto)
 Plan-ID: `SIMPLICIAL-SUBSTRATE-KAN-V3.2`
 
 Status: **active bounded implementation plan**. `SIMP-00`, the Cat-valued
-Nat/join feasibility row `SIMP-PROBE-1`, and the set-classified face-code row
-`SIMP-CODE-2` are complete; `SIMP-INDEX-3` is the active implementation row.
-Later rows remain ordered gates rather than simultaneous scope.
+Nat/join feasibility row `SIMP-PROBE-1`, the set-classified face-code row
+`SIMP-CODE-2`, and the internal index-category row `SIMP-INDEX-3` are
+complete; `SIMP-SHAPE-4` is the active implementation row. Later rows remain
+ordered gates rather than simultaneous scope.
 
 Branch: `goal/simplicial-substrate-v3.2`
 
@@ -231,6 +232,14 @@ Hom_cat(SemiDeltaPlus_cat,p,n)
 
 Identity and composition delegate to the computing face-code operations.
 The hom categories are path-discrete once `FaceCode` sethood is established.
+
+The promoted composition boundary is intentionally narrower than a catch-all
+category fold. At visible public `trunc_intro` points it reduces through
+`face_comp`; arbitrary composition remains at the generic `comp_fapp0` head.
+An unconstrained category fold was rejected after bounded quiet and warning
+probes both timed out. The visible-point LHS uses the constructor normal form
+of `trunc_zero`, because that transparent alias normalizes before rule
+selection.
 
 The category must retain category-level identity/composition at the generic
 owners. Constructor computation belongs at face-code identity/composition;
@@ -488,8 +497,8 @@ worktree removal, or deployment is authorized by this plan.
 | `SIMP-00` | complete | Promoted the reviewed categorical-first architecture, reference adaptation boundary, terminology, trust policy, module order, validation policy, and Git boundary into this living plan. |
 | `SIMP-PROBE-1` | complete | The ignored quiet and warning-enabled probe proves that active `nat_elim` computes a Cat-valued iterated join with `0`, `1`, and `2` observations and no new kernel rule. The augmented-empty endpoint remains a separately consumer-gated choice. |
 | `SIMP-CODE-2` | complete | Promoted raw indexed skip/keep syntax with four structural composition clauses and the public set-truncated `FaceCode`; sethood, constructors, identity, composition, both identity directions, a mixed composition branch, and index mismatch are checked without a unifier. |
-| `SIMP-INDEX-3` | active | Construct `SemiDeltaPlus_cat` with Nat objects and locally discrete face-code homs; check identities, composition, and selected coface relations without duplicate generic-action rules. |
-| `SIMP-SHAPE-4` | pending | Promote the Nat-indexed join shape, define whole `join_map`, and connect selected face codes to join-built strict-profile functors through dimensions 0--2. |
+| `SIMP-INDEX-3` | complete | Promoted `SemiDeltaPlus_cat` with Nat objects, locally discrete face-code Homs, all-keep identity, visible-point category composition through `face_comp`, the three dimension-two coface relations, and a direction/index negative. The rejected catch-all composition fold timed out; the selected narrow rule adds no warning or unifier. |
+| `SIMP-SHAPE-4` | active | Promote the Nat-indexed join shape, define whole `join_map`, and connect selected face codes to join-built strict-profile functors through dimensions 0--2. |
 | `SIMP-YONEDA-5` | pending | Define standard representables and groupoid-valued/Cat-realized semisimplicial diagram facades through existing Yoneda and postcomposition owners. |
 | `SIMP-SIEVE-6` | pending | Define the 2-boundary and three 2-horn ordinary sieves with computing membership, whole extensions, inclusions, and pullback stability. |
 | `SIMP-FILL-7` | pending | Construct horn restriction and selected whole fillers for the three 2-horns in the nerve/path realization of a groupoid; retain one higher action and state exact nonclaims. |
@@ -573,6 +582,52 @@ standing no-long-aggregate policy. No tracked health report was rewritten.
 The focused evidence above is the acceptance boundary for this row; one
 health refresh is deferred to a later genuine integration/closure boundary
 instead of being repeated after each simplicial tranche.
+
+### 16.3 Internal Augmented Semi-Simplex Category — 2026-08-18
+
+`emdash3_2_semisimplicial_index.lp` promotes the category
+`SemiDeltaPlus_cat`. Its objects compute to `Nat_grpd`, its Homs compute to
+`Path_cat(FaceCode(p,n))`, and `semi_delta_plus_hom_is_discrete` packages the
+existing face-code sethood with canonical path-category groupoidality.
+Identity computes to the all-keep code.
+
+The first obvious composition rule
+
+```text
+comp_SemiDelta(g,f) -> face_comp(g,f)
+```
+
+for arbitrary `g` and `f` timed out at the uniform 90-second boundary in both
+the full coface probe and a minimal owner-only probe. The selected replacement
+matches only visible public truncation points and routes its RHS through the
+existing `face_comp` owner. A normal-form query established that
+`trunc_zero` expands before matching, so the LHS deliberately uses
+`trunc_succ(trunc_succ(trunc_minus_two))`; the readable alias remains on the
+RHS. Open visible-point comparison verifies both reduction orders.
+
+The focused reviewer `examples/semisimplicial_index_category.lp` checks
+formation, Hom presentation, identity, locally discrete Hom evidence, the
+next generic Path-Hom layer, all three literal 2-simplex coface relations, and
+rejection of a reversed vertex arrow. The active source and reviewer are green
+quietly and with warnings. Each warning stream retains the same 1,297
+predecessor warning headers and contains no new-module warning. The strict LHS
+audit reports zero reconstructible compound candidates; no proof-time unifier
+or generic `fapp*`/`tapp*` clause was added.
+
+Relevant ignored evidence includes:
+
+```text
+logs/probes/semisimplicial_index_category-20260818-135142.log
+logs/probes/semisimplicial_index_category_min-20260818-135405.log
+  rejected catch-all composition: bounded timeouts
+
+logs/probes/semisimplicial_index_category_min-20260818-141645.log
+logs/probes/semisimplicial_index_category_min-20260818-141121.log
+  selected visible-point owner and three coface relations: green
+```
+
+Per the recorded aggregate policy, the deferred health refresh is not rerun
+for this immediately subsequent tranche.
 
 ## 17. Completion Definition
 
