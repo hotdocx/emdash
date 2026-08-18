@@ -539,6 +539,12 @@ detailed probe evidence.
   coface equations compute without an external naturality family. It adds no
   augmented-empty realization, arbitrary face decoder, degeneracy,
   representable, sieve, or Kan claim.
+- `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
+  groupoid-valued semisimplicial diagrams, and their levelwise path-category
+  realization. Whole postcomposition remains at the raw functor-category
+  owner; realized objects and maps pass through the distinct public
+  `Psh_cat` projections. It adds no rule, unifier, representability claim for
+  arbitrary diagrams, boundary, horn, or Kan data.
 - `emdash3_2_circle_connectedness.lp`: transparent rule-free propositional-
   truncation consumer. It constructs
   `Pi x:S1, ||circle_base=x||_{-1}` by dependent Circle induction; the retained

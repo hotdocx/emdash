@@ -8,8 +8,9 @@ Status: **active bounded implementation plan**. `SIMP-00`, the Cat-valued
 Nat/join feasibility row `SIMP-PROBE-1`, the set-classified face-code row
 `SIMP-CODE-2`, and the internal index-category row `SIMP-INDEX-3` are
 complete. The join-shape/selected-realization row `SIMP-SHAPE-4` is also
-complete; `SIMP-YONEDA-5` is the active implementation row. Later rows remain
-ordered gates rather than simultaneous scope.
+complete. The representable/diagram row `SIMP-YONEDA-5` is complete;
+`SIMP-SIEVE-6` is the active implementation row. Later rows remain ordered
+gates rather than simultaneous scope.
 
 Branch: `goal/simplicial-substrate-v3.2`
 
@@ -358,6 +359,13 @@ gives the Cat-valued presheaf realization consumed by the existing Yoneda and
 sieve modules. A thin rigid facade may be added if it preserves the generic
 composition owner; it must not duplicate `Psh_cat` or its action.
 
+The promoted boundary keeps whole postcomposition in
+`Functor_cat(Op(SemiDeltaPlus_cat),Cat_cat)`. `Psh_cat(SemiDeltaPlus_cat)` is a
+deliberately distinct runtime head, so realized objects and maps cross only
+through its existing object/Hom projections. No new rigid whole functor into
+`Psh_cat` is postulated merely to make the two category heads definitionally
+equal.
+
 Levelwise sethood gives the semisimplicial-set specialization. Generic
 Cat-valued presheaves remain available for higher-categorical consumers.
 
@@ -508,8 +516,8 @@ worktree removal, or deployment is authorized by this plan.
 | `SIMP-CODE-2` | complete | Promoted raw indexed skip/keep syntax with four structural composition clauses and the public set-truncated `FaceCode`; sethood, constructors, identity, composition, both identity directions, a mixed composition branch, and index mismatch are checked without a unifier. |
 | `SIMP-INDEX-3` | complete | Promoted `SemiDeltaPlus_cat` with Nat objects, locally discrete face-code Homs, all-keep identity, visible-point category composition through `face_comp`, the three dimension-two coface relations, and a direction/index negative. The rejected catch-all composition fold timed out; the selected narrow rule adds no warning or unifier. |
 | `SIMP-SHAPE-4` | complete | Promoted ordinary Nat-indexed join shapes, a whole `join_map_func` whose cross cell is reindexed from the target join, strict-profile join closure, and paired code/functor realizations for the two vertices of `Delta[1]` and three edges of `Delta[2]`; all three functorial coface equations compute. |
-| `SIMP-YONEDA-5` | active | Define standard representables and groupoid-valued/Cat-realized semisimplicial diagram facades through existing Yoneda and postcomposition owners. |
-| `SIMP-SIEVE-6` | pending | Define the 2-boundary and three 2-horn ordinary sieves with computing membership, whole extensions, inclusions, and pullback stability. |
+| `SIMP-YONEDA-5` | complete | Promoted standard Yoneda semisimplices, the groupoid-valued diagram classifier, generic raw whole postcomposition by `Path_cat_func`, public realized objects/maps through `Psh_cat`, level/face computation, and retained higher action without a rule or unifier. |
+| `SIMP-SIEVE-6` | active | Define the 2-boundary and three 2-horn ordinary sieves with computing membership, whole extensions, inclusions, and pullback stability. |
 | `SIMP-FILL-7` | pending | Construct horn restriction and selected whole fillers for the three 2-horns in the nerve/path realization of a groupoid; retain one higher action and state exact nonclaims. |
 | `SIMP-DEC-8` | pending | Construct the selected shift/decalage and displayed cone fibre; compare its first three layers wholely with existing `homd_`/Sigma action. |
 | `SIMP-CODATA-9` | pending decision gate | Decide whether the successful categorical/decalage interface justifies a curated observation-driven `SST` codata facade. Do not implement generic codata or judgmental eta merely because the references use it. |
@@ -679,6 +687,43 @@ The augmented-empty shape and a decoder for arbitrary `FaceCode` remain
 explicitly deferred. They are not prerequisites for standard representables,
 which live directly in the internal augmented index category. The health
 aggregate remains deferred to the later closure boundary.
+
+### 16.5 Standard Semisimplices And Groupoid-Valued Diagrams — 2026-08-18
+
+`emdash3_2_semisimplicial_diagrams.lp` defines
+`StandardSimplex(n)` transparently as
+`yoneda_psh(SemiDeltaPlus_cat,n)`. Its level at `p` therefore computes to
+`Hom_cat(SemiDeltaPlus_cat,p,n)`, with restriction and every higher action
+owned by the existing contravariant internal-hom/Yoneda tower.
+
+`SemiSimplicialGrpd_cat` is the ordinary functor category from the opposite
+internal index into `Grpd_cat`. The whole realization owner is exactly
+`comp_cat_cov_func(Path_cat_func)` and deliberately targets the raw
+Cat-valued functor category. An initial probe attempting to assign that owner
+directly to rigid `Psh_cat` failed at the intended category-head boundary. The
+accepted design exposes its object and map actions through existing `Psh_cat`
+projections while retaining the raw whole functor for hom and later-cell
+action.
+
+The focused reviewer `examples/semisimplicial_diagrams.lp` checks the three
+classifier presentations and their non-collapse, Yoneda level computation,
+levelwise Path realization, realized face action as `path_map_func`, public
+map typing, one retained whole next action, and non-representability of an
+arbitrary diagram. Source and reviewer are green quietly and with warnings;
+both warning streams contain 1,297 inherited headers and no new-module
+warning. The module is rule-free, its strict LHS audit is empty, and no
+unifier or naturality record was added.
+
+Ignored probe evidence:
+
+```text
+logs/probes/semisimplicial_yoneda_facade-20260818-143849.log
+  rejected direct rigid-Psh whole-functor target
+logs/probes/semisimplicial_yoneda_facade-20260818-144231.log
+  accepted raw whole owner with level/face realization
+```
+
+The health aggregate remains deferred to the later closure boundary.
 
 ## 17. Completion Definition
 

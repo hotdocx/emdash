@@ -43,6 +43,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_semisimplicial_face_codes.lp)
   files+=(emdash3_2_semisimplicial_index.lp)
   files+=(emdash3_2_simplex_shapes.lp)
+  files+=(emdash3_2_semisimplicial_diagrams.lp)
   files+=(emdash3_2_finite_limits.lp)
   files+=(emdash3_2_direct_cover_questions.lp)
   files+=(emdash3_2_direct_cover_question_families.lp)
