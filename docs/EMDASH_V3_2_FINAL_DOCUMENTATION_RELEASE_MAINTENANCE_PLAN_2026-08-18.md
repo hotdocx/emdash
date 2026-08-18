@@ -4,9 +4,9 @@ Date: 2026-08-18 (America/Toronto)
 
 Plan-ID: `EMDASH-V3.2-FINAL-DOCS-RELEASE-MAINT-2026-08-18`
 
-Status: **active bounded documentation, integration, and deployment
-maintenance**. `MAINT-00`, `MAINT-DOC-1`, and `MAINT-EMAIL-2` are complete;
-`MAINT-VERIFY-3` is complete and `MAINT-INTEGRATE-4` is active.
+Status: **complete**. The selected documentation and email authorities are
+synchronized, the cumulative line is published on `main`, and the exact book
+and article bytes are live through the successful GitHub Pages deployment.
 
 Branch: `goal/emdash-v3.2-final-maintenance`
 
@@ -182,9 +182,9 @@ After push:
 | `MAINT-DOC-1` | complete | Foundations now names groupoidal realization at the section boundary and includes path pseudo-laxity plus the profiled Gray slice in its opening active-module inventory. The TypeScript “Start Here” handoff now states the current mathematical/book boundary while explicitly withholding automatic TypeScript-profile expansion. Canonical syntax, current SOP, both AGENTS files, persistent-goal SOP, and completed TypeScript plans were inspected and intentionally left unchanged. |
 | `MAINT-EMAIL-2` | complete | The longer abstract now has four mathematical threads and a standalone groupoidal-realization/Gray section; the shorter appendix has a compact corresponding passage. Both distinguish Path from Groupoidify, state Circle computation and the target-side whole mapping equivalence, derive the profiled interchanger from whole laxity, and defer source action/adjunction/full Gray monoidality. |
 | `MAINT-VERIFY-3` | complete | Exact diff/fence audit, `git diff --check`, report-header lint, active-reference lint, and the centralized Infinity archive verification pass. All four checked book/article owners remain byte-equal to their tracked distributions; no artifact or semantic owner changed. |
-| `MAINT-INTEGRATE-4` | active | Re-fetch, prove zero divergence, fast-forward `main` in its actual worktree, and push `origin/main`. |
-| `MAINT-PAGES-5` | pending | Follow the triggered Pages workflow to success and verify the deployed reviewer/assets. |
-| `MAINT-CLOSE-6` | pending | Record commits, hashes, remote/deployment evidence, clean states, and complete the persistent goal without deleting branches/worktrees. |
+| `MAINT-INTEGRATE-4` | complete | Re-fetched with zero remote-only divergence, fast-forwarded `main` in its actual worktree, and pushed the cumulative line to `origin/main`. |
+| `MAINT-PAGES-5` | complete | Pages run `32154967238` completed successfully; both build and deploy jobs passed, the reviewer returned HTTP 200, and both fingerprinted PDF assets returned HTTP 200 with byte-exact release hashes. |
+| `MAINT-CLOSE-6` | complete | Recorded checkpoints, artifact hashes, remote/deployment evidence, focused checks, and clean-state requirements without deleting branches/worktrees or performing any excluded publication. |
 
 ### 7.1 Documentation Implementation Record — 2026-08-18
 
@@ -244,9 +244,43 @@ docs/emdash3_2.pdf
   sha256 d5ef1d47aa693229e92f52ae84e762d36b620912bf3b16e178456ab3448ed3db
 ```
 
-The remote push and Pages verification remain the open part of
-`MAINT-INTEGRATE-4` and `MAINT-PAGES-5`; this record does not claim either
-before observing them.
+At this intermediate checkpoint, the remote push and Pages verification still
+remained open; §7.3 records their subsequently observed completion.
+
+### 7.3 Remote Publication And Closeout Record — 2026-08-18
+
+After a fresh fetch, `origin/main...goal/emdash-v3.2-final-maintenance` was
+`0 90`; both relevant worktrees were clean, and remote `main` was an ancestor
+of the maintenance tip. Local `main` was fast-forwarded once more to the
+ledger checkpoint `68ea2af`, then the exact range `86042df..68ea2af` was
+pushed to `origin/main`. Local `main`, the maintenance branch, the remote-
+tracking ref, and `git ls-remote` all identified `68ea2af` immediately after
+publication.
+
+The matching GitHub Pages workflow is
+[run 32154967238](https://github.com/hotdocx/emdash/actions/runs/32154967238).
+It completed successfully at `68ea2af`: the `build` job and the `deploy` job
+both passed. The workflow emitted non-fatal GitHub-hosted-runner annotations
+about legacy Node action runtimes and checkout cleanup; neither job, artifact,
+nor deployment failed. Updating third-party action majors is a separate
+provider-maintenance concern, not a reason to alter this already successful
+release boundary.
+
+The deployed reviewer returned HTTP 200 at
+<https://hotdocx.github.io/emdash/>. Its build linked the fingerprinted PDF
+assets below, each served as `application/pdf` with HTTP 200:
+
+```text
+https://hotdocx.github.io/emdash/assets/emdash-book-Bt-dqR_t.pdf
+  sha256 54a11407eb9ca1203979413f3231003ada85021ef2578e247ab922fccd918ad7
+https://hotdocx.github.io/emdash/assets/emdash3_2-BNH-acJ9.pdf
+  sha256 d5ef1d47aa693229e92f52ae84e762d36b620912bf3b16e178456ab3448ed3db
+```
+
+Those hashes exactly equal the promoted local book and article PDFs recorded
+in §7.2. This closeout changes only the living ledger. Its final plan-only
+checkpoint is fast-forwarded and pushed after focused Markdown/reference
+validation; it does not require or trigger a second artifact build.
 
 ## 8. Completion Definition
 
