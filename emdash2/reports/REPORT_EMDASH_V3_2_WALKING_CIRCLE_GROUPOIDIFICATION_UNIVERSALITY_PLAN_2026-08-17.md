@@ -4,8 +4,9 @@ Date: 2026-08-17 (America/Toronto)
 
 Plan-ID: `WALKING-CIRCLE-GROUPOIDIFICATION-UNIVERSALITY-V3.2`
 
-Status: **active consumer-first implementation plan**. `WCGU-00` through
-`WCGU-GENERIC-5` are complete; `WCGU-CLOSE-1` is next.
+Status: **completed consumer-first implementation and decision plan**.
+`WCGU-00` through `WCGU-CLOSE-1` are complete;
+`WCGU-CIRCLE-COMP-TODO` remains explicitly deferred.
 Local green checkpoint commits are authorized by the user's
 standing instruction for this continuation. Push, merge, publication,
 release, history rewrite, branch deletion, and worktree removal are not
@@ -249,7 +250,7 @@ group before set truncation is `Integer`.
 | `WCGU-CIRCLE-COMP-TODO` | deferred | Revisit judgmental computation for the Circle path constructor after `WCGU-EQUIV-3`, or earlier only if a concrete consumer shows that propositional loop beta materially obstructs computation. Any promotion is a separate normal-form migration with owner-position, subject-reduction, critical-pair, warning, and downstream audits; it is not silently bundled into universality. |
 | `WCGU-MONO-4` | complete | `emdash3_2_walking_circle_monodromy.lp` specializes universality at `Grpd_grpd`. A self-`TypeEquiv(A,A)` is decoded to `grpd_equiv_path(e)`, forms the canonical WalkingEnd representation, and extends to the literal Circle recursor on that loop. Whole beta recovers the original representation after restriction; base and loop paths are derived, and transport around the actual family loop agrees with `type_equiv_to(e)`. The rule-free source and seven-check reviewer pass, including a mismatched-codomain rejection, with exact zero warning delta (`1123/159`) and zero LHS growth. Checkpoint: `ee25c24`. |
 | `WCGU-GENERIC-5` | complete | Decision: do not promote a generic `Groupoidify_func` from the single WalkingEnd source shape. The completed theorem validates the whole fixed-target interface and iterable inverse action, but neither constructs nor tests free coherent inversion for arbitrary objects, non-endomorphism arrows, composition relations, and higher cells. Telescope localization, `Core_cat`, `Path_cat_func`, and `Adjunction` do not supply that construction. Reopen only with an indexed free-coherent-inversion categorical-HIT design whose unit/recursor compute on every represented cell and whose whole beta/eta and source-functorial action are exercised by at least a non-endomorphism walking-arrow consumer and a composable-pair/triangle consumer. No source symbol, opaque adjunction, or generic claim is added. Decision checkpoint: `22f98f5`. |
-| `WCGU-CLOSE-1` | pending | Synchronize source/example ownership, master ledger, Foundations/SOP/canonical syntax, report index, catalog, warnings/LHS evidence, and proportional health/CI only for the boundary actually changed. Record remaining book, Gray-mirror, strict-cut, and HIT work separately. |
+| `WCGU-CLOSE-1` | complete | Source/example registries and authority routing cover restriction, extension, universality, and monodromy. The parent master, Foundations, current status/SOP, canonical syntax, and report index describe the exact concrete theorem and generic deferral. Warning inventories end at `1123/159`, strict LHS audit is zero, and the unchanged central catalog remains strict at 2,182 checks/107 areas. Exact resumable health is current for 85 source/diagnostic targets plus 109 reviewers: 185 byte-identical successes were verified against health commit `053fcce`, the unchanged current diagnostics success is carried from `WCGU-RES-1`, and the eight new targets were checked green in this closeout. Later central reruns reached the 90-second budget without assertion failure and were not repeated indefinitely. No blind `make check`, `make examples`, `make ci`, root aggregate, book, push, merge, or publication was run. Closeout checkpoint: to be recorded after the synchronized commit. |
 
 ## First Focused Experiment
 
@@ -459,6 +460,50 @@ design passing those consumers should be promoted to generic
 This is a completed negative promotion decision with a concrete reopening
 prerequisite, not an unfinished attempt. No Lambdapi source, rule, unifier,
 or opaque generic adjunction is added by this row.
+
+### Completed `WCGU-CLOSE-1` result — 2026-08-18
+
+The completed public stack is:
+
+```text
+walking_to_circle_func
+  -> walking_circle_restrict_func
+  -> walking_circle_extend_func
+  -> walking_circle_groupoidification_hom_omega
+  -> walking_circle_monodromy_circle_family.
+```
+
+Restriction is transparent and rule-free. Extension adds the single scoped
+object computation rule. Universality and monodromy are rule-free; the former
+adds only the two categorical-HIT uniqueness equalities needed for whole
+beta/eta. Every public module has a focused positive/negative reviewer, and
+the inverse retains its first and next hom actions.
+
+The warning boundary is exact: restriction has `1122/159`; importing the
+pointwise-equivalence machinery raises the inherited baseline to `1123/159`;
+extension's object rule, universality, and monodromy add no further warning.
+The strict LHS audit remains zero. The central diagnostics file intentionally
+contains only the restriction tranche because duplicating later focused
+reviewers in that already near-limit target exceeded the uniform 90-second
+budget. Its strict generated catalog remains current at 2,182 checks in 107
+areas with no unclassified checks.
+
+Health was refreshed without a repository-wide rerun. The previous 186-target
+snapshot was reconstructed exactly from checkpoint `053fcce`; 185 targets
+were byte-identical, while `emdash3_2_checks.lp` was the sole changed existing
+target and already had current-snapshot green evidence from `WCGU-RES-1`.
+The four new sources and four new reviewers were then checked directly under
+the current 90-second environment. The generated report now covers 85
+source/diagnostic targets and 109 reviewers, 194 total. Subsequent attempts to
+retime the unchanged diagnostics target reached the ceiling without an
+assertion error; its earlier exact green result is carried with no fabricated
+new duration.
+
+The high-quality-prose book update is now eligible as a separate editorial
+goal. Generic free coherent inversion, judgmental Circle loop computation,
+mirror Gray closure, and the global strict-cut migration remain separately
+gated. No push, merge, publication, release, or worktree cleanup is part of
+this closeout.
 
 ## Validation Policy
 

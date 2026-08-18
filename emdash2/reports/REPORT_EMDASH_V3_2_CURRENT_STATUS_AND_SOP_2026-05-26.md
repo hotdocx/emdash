@@ -405,6 +405,25 @@ detailed probe evidence.
   every Nat power to the Circle generator and its nonnegative powers, and the
   direct Circle encoder agrees with the route through WalkingEnd's Nat
   normal form. It is not a generic groupoidification reflector.
+- `emdash3_2_walking_circle_restriction.lp`: transparent rule-free whole
+  restriction of Circle functions along the comparison. Its stable
+  precomposition owner retains first hom action; base evaluation and the
+  generator `PathOver` are derived from one whole comparison.
+- `emdash3_2_walking_circle_extension.lp`: whole inverse candidate on
+  WalkingEnd representations into `Path_cat(G)`. Its single object rule
+  computes to Circle recursion on the selected base and generator. Loop and
+  first-arrow agreement remain propositional, while generic hom action stays
+  iterable one dimension higher.
+- `emdash3_2_walking_circle_universality.lp`: rule-free whole mapping-object
+  equivalence. Two scoped categorical-HIT uniqueness paths make extension and
+  restriction inverse as whole functors and package restriction as an
+  `OmegaEquivAlong Cat_cat`. Dependent projections expose point and generator
+  observations without adding a Circle loop rewrite.
+- `emdash3_2_walking_circle_monodromy.lp`: rule-free universe-valued consumer.
+  A self-equivalence supplies a univalence loop, the whole inverse builds the
+  corresponding Circle family, restriction recovers the original WalkingEnd
+  representation, and loop transport applies the equivalence's forward map.
+  This is not a generic `Groupoidify` construction.
 - `emdash3_2_groupoidal_closure.lp`: transparent rule-free representative
   closure for products. The canonical core-inclusion comparison is identity
   on objects and a split/join `TypeEquiv` on every hom carrier. Product path

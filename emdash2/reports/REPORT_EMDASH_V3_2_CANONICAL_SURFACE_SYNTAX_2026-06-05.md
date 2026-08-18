@@ -1508,6 +1508,44 @@ Use `Checked`, `Formal consequence`,
 book theorem status. These labels report evidence strength and do not alter
 the formula notation above.
 
+## WalkingEnd--Circle Universality Notation
+
+For the selected concrete groupoidification theorem, write
+
+```text
+Res_G : Hom(Circle,G) -> Functor(W,Path(G))
+Ext_G : Functor(W,Path(G)) -> Hom(Circle,G)
+
+Ext_G o Res_G = id
+Res_G o Ext_G = id
+Res_G : Hom(Circle,G) ~= Functor(W,Path(G)).
+```
+
+The kernel owners are `walking_circle_restrict_func`,
+`walking_circle_extend_func`, and
+`walking_circle_groupoidification_hom_omega`. The displayed equivalence is a
+fixed-forward `OmegaEquivAlong Cat_cat`, not a claim that the two category
+expressions are judgmentally equal. Base and generator readings use the
+named `*_base_path` and `*_loop_pathover` projections; do not replace a
+dependent generator `PathOver` by an untyped homogeneous equality.
+
+For `e : A ~= A`, the universe-valued consumer may be written
+
+```text
+Mon_e : Circle -> Grpd
+Mon_e(base) = A
+ap(Mon_e,loop) = ua(e)
+transport(Mon_e,loop,a) = e(a).
+```
+
+Here `ua(e)` denotes the selected `grpd_equiv_path(e)`, and the checked owners
+are `walking_circle_monodromy_circle_family`,
+`walking_circle_monodromy_loop_path`, and
+`walking_circle_monodromy_transport_path`. Circle point beta is judgmental in
+the current kernel; Circle loop beta and these displayed loop equations are
+propositional. This notation does not assert a generic `Groupoidify` on every
+category.
+
 ## Computational Truncation And Circle Notation
 
 In mathematical comments and reviewer prose, write homotopy truncation as

@@ -1086,17 +1086,19 @@ record.
   checkpointed at `053fcce`.
 
 - `REPORT_EMDASH_V3_2_WALKING_CIRCLE_GROUPOIDIFICATION_UNIVERSALITY_PLAN_2026-08-17.md`:
-  active consumer-first child of the internal-laxity/groupoidal-realization
-  master. It reopens `ILGR-GROUPIFY-1` through the concrete question whether
-  whole precomposition along `walking_to_circle_func` gives an
+  completed consumer-first child of the internal-laxity/groupoidal-realization
+  master. Whole precomposition along `walking_to_circle_func` is now an
   `OmegaEquivAlong Cat_cat` from Circle functions into a groupoid `G` to
-  WalkingEnd functors into `Path_cat(G)`. The first row reuses
-  `Path_cat_func` and generic whole precomposition without a new rule; later
-  rows must construct the Circle extension on transformations and its next
-  action before generic `Groupoidify_func` or `Adjunction` packaging is
-  allowed. A universe-valued automorphism/monodromy example is the named
-  target-side consumer. Mirror Gray closure, global strict-cut migration,
-  book work, push, merge, and publication remain excluded.
+  WalkingEnd functors into `Path_cat(G)`. The inverse computes on objects by
+  Circle recursion, retains first and next hom action, and satisfies scoped
+  whole beta/eta uniqueness; base and generator observations are dependent
+  projections. A self-equivalence now gives a Circle-indexed groupoid family
+  whose restriction recovers the WalkingEnd representation and whose loop
+  transport applies the equivalence. Generic `Groupoidify_func` remains
+  explicitly deferred behind a free-coherent-inversion construction tested
+  on non-endomorphism and composition source shapes. Judgmental Circle loop
+  computation, mirror Gray closure, global strict-cut migration, and book
+  work remain separate.
 
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization

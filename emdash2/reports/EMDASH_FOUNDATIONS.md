@@ -222,9 +222,42 @@ TypeEquiv(Hom_Circle(base,base), Integer).
 The directed WalkingEnd comparison sends its generator to `loop`. Every Nat
 power maps to the corresponding nonnegative Circle power, and encoding either
 directly through Circle or first through the WalkingEnd/Nat normal form gives
-the same Integer. This is the concrete completion behavior required by the
-current consumer; a generic reflector from categories to groupoids remains a
-separate, consumer-gated project.
+the same Integer.
+
+The comparison now also satisfies the whole universal property expected of
+this selected free-groupoidal completion. For every groupoid/type `G`, write
+
+```text
+Res_G : Hom(Circle,G) -> Functor(WalkingEnd,Path(G))
+Ext_G : Functor(WalkingEnd,Path(G)) -> Hom(Circle,G).
+```
+
+`Res_G` applies `Path_cat_func` and precomposes with the WalkingEnd-to-Circle
+map. `Ext_G(F)` is Circle recursion on `F[walking_base]` and
+`F[walking_loop]`. The latter varies as a whole functor in `F`; its object
+projection computes, while its loop and first-arrow comparisons remain
+propositional under the current HIT policy. Scoped categorical-HIT uniqueness
+gives whole paths
+
+```text
+Ext_G o Res_G = id
+Res_G o Ext_G = id,
+```
+
+and hence `Res_G` is an `OmegaEquivAlong Cat_cat`. Projecting these whole paths
+recovers both base and generator observations as dependent `PathOver`s, while
+generic hom action remains iterable. In particular, a self-equivalence
+`e : A ~= A` determines a Circle-indexed groupoid family with monodromy
+`grpd_equiv_path(e)`; restricting that family recovers its WalkingEnd
+representation, and transport around the loop applies `e.to`.
+
+This proves concrete groupoidification universality for the WalkingEnd source
+shape. It does not yet construct a generic reflector on every category. Such
+a reflector still requires free coherent inversion of arbitrary
+non-endomorphism arrows, composition relations, and higher cells. The current
+propositional Circle loop beta does not obstruct this concrete theorem; a
+separate reviewed normal-form migration may later make that constructor beta
+judgmental.
 
 Products supply a representative closure theorem. The canonical functor
 
