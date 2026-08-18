@@ -7,8 +7,8 @@ Plan-ID: `EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5`
 Status: **active fourth-spiral book continuation**. The cumulative baseline,
 book contract, stale-claim inventory, evidence boundary, and chapter
 architecture have been reviewed. `BGR-00` and `BGR-ARCH-1` are complete;
-`BGR-REPAIR-2`, `BGR-CH25-3`, and `BGR-CH26-4` are complete, and
-`BGR-CH27-5` is the active chapter row.
+`BGR-REPAIR-2` and `BGR-CH25-3` through `BGR-CH27-5` are complete, and
+`BGR-CH28-6` is the active chapter row.
 
 Branch: `goal/emdash-book-groupoidal-v3.2`
 
@@ -486,8 +486,8 @@ AI imagery is not part of the mathematical pages.
 | `BGR-REPAIR-2` | complete | Corrected the stale truncation-reflector, WalkingEnd–Circle free-inversion, and whole-laxity evidence/status boundaries; repaired Chapters 4, 6–9, 12, and 14 plus Appendices C, D, and F; registered the Chapter 26 HoTT adaptations; preserved the directed Nat theorem's original strength. Focused architecture tests pass 5/5, `book:check` passes at 2,410 math spans, the browser render is green at 313 pages, and the review-only PDF passes at 313 pages/16 fonts with representative pages visually inspected. |
 | `BGR-CH25-3` | complete | Chapter 25 is a 2,783-word theorem-led account of the Path-category bridge, homwise product closure, the product-transport diamond, agreement of structured transport and `PathOut` with primitive right-J, and target-induced pseudo-laxity. Two focused evidence claims separate product split/join and path-realized compositor strength. `book:check` passes at 147 cited claims/2,478 math spans; the 319-page review PDF passes with 16 embedded fonts, and all seven Chapter 25 pages were inspected with Poppler. |
 | `BGR-CH26-4` | complete | Chapter 26 is a 3,748-word proof-led account of successor-localized Integer, judgmental dependent Circle-loop computation, universal-cover encode/decode, intrinsic and categorical loop-space equivalences, arbitrary self-equivalence monodromy, and connectedness/set-truncation. Four focused evidence claims supplement the central Circle/Integer theorem and the HoTT adaptation boundary is explicit. `book:check` passes at 151 cited claims/2,580 math spans; the 328-page review PDF passes with 16 embedded fonts, and all ten Chapter 26 pages were inspected with Poppler after three crowded displays were repaired. |
-| `BGR-CH27-5` | active | Write and visually validate Chapter 27, including both concrete universal mapping theorems and generic groupoidification with its exact deferred source-action boundary. |
-| `BGR-CH28-6` | pending | Write and visually validate Chapter 28, including internal laxity, strict profiles, the selected Gray right closure, walking square, and interchanger without a full-Gray overclaim. |
+| `BGR-CH27-5` | complete | Chapter 27 is a 3,667-word progression from WalkingEnd/Circle and WalkingArrow/Interval to arbitrary category-indexed groupoidification, including whole units, computation, target extension/restriction, beta/eta, the explicit unit compositor and next action, generic Interval recovery, and a variance comparison with Core/truncation. Two focused evidence claims supplement the reused WalkingEnd and generic claims. `book:check` passes at 153 cited claims/2,683 math spans; the 336-page review PDF passes with 16 embedded fonts, and all nine Chapter 27 pages were inspected after repairing one clipped continuation, an overwide table, and a stranded final fragment. |
+| `BGR-CH28-6` | active | Write and visually validate Chapter 28, including internal laxity, strict profiles, the selected Gray right closure, walking square, and interchanger without a full-Gray overclaim. |
 | `BGR-XCUT-7` | pending | Reconcile front matter, reading paths, contents, transitions, notation, glossary, evidence appendix, computation/status/formal appendices, bibliography, credits, and provenance; remove every stale three-spiral or future-groupoidification statement. |
 | `BGR-ARTICLE-8` | pending | Rebalance the overview article within its 18-page maximum, release it deterministically, and promote its tracked Markdown/PDF pair locally. |
 | `BGR-RELEASE-9` | pending | Stabilize edition metadata, run deterministic book release twice, verify equal hashes, promote the checked Markdown/PDF pair, and perform page-image QA of title, contents, all new chapter openings, figures, theorem/status blocks, appendices, bibliography, credits, and license. |
@@ -660,6 +660,57 @@ breaks, and Chapter 27 transition are now legible and uncropped. One final PDF
 attempt reached the existing 90-second pagination ceiling; cleanup completed
 and one bounded retry passed without changing the timeout. The PDF remains an
 ignored review artifact under unchanged 0.4.0-dev metadata.
+
+The Chapter 26 prose/evidence checkpoint is `258585c`.
+
+### 12.5 Chapter 27 Record — 2026-08-18
+
+Chapter 27 now occupies nine pages and 3,667 source words. It develops the
+universal property through three scales:
+
+1. WalkingEnd maps to the Circle, positive powers agree, and whole
+   restriction/extension classify path-valued one-point representations;
+2. WalkingArrow maps to the two-endpoint Interval, whose judgmental
+   dependent-segment computation and whole mapping theorem test endpoint
+   variation; and
+3. arbitrary `C : Cat` has category-indexed `Groupoidify(C)`, one whole unit,
+   a recursor computing on represented objects and dependent first cells,
+   target-varying whole extension/restriction, beta/eta, an explicit
+   nonidentity path-valued compositor, and retained next actions.
+
+The fixed-forward arbitrary-source mapping theorem is stated at full mapping-
+category strength without calling it object-only. The chapter separately
+records the missing source action, `Groupoidify_func`, and adjunction package.
+Specialization at WalkingArrow recovers the independently formed Interval by
+explicit inverse maps and cancellation paths. A compact comparison table
+distinguishes free inversion from Core and truncation without claiming an
+unimplemented three-adjunction chain.
+
+Two focused evidence records were added:
+`WALKING-INTERVAL-GROUPOIDIFICATION` and
+`GROUPOIDIFICATION-INTERVAL-RECOVERY`. The chapter also reuses the checked
+`WE-GROUP-COMPLETION` and `GENERIC-GROUPOIDIFICATION-MAPPING` records. No
+Lambdapi, TypeScript, renderer, package, or release semantics changed.
+
+Proportional validation is green:
+
+```text
+chapter source words: 3,667
+book:check: 43 sources, 153 cited claims, 2,683 math spans
+book:pdf:check: 336 pages, 16 embedded fonts
+review PDF sha256: 1ed14fb5f4293221469bd2c8b2295da90c391febb32d1cbdb711b087351e6782
+```
+
+The owning full browser render passed all source/evidence/typography/KaTeX
+checks and completed its build, then reached the existing 90-second console-
+pagination ceiling without a reported content error. A clean direct PDF
+export, which performs its own pagination and browser-error gate, passed and
+produced the checked artifact above. Poppler review covered every Chapter 27
+page, 215–223. It found a clipped continuation at the original page 222, an
+overwide four-column table whose tag crowded its final cell, and a two-line
+stranded final verso. Substantive reflow, a three-column table, and a tightened
+transition repaired all three; the final pages were re-exported and
+re-inspected. The PDF remains an ignored 0.4.0-dev review artifact.
 
 ## 13. Proportional Validation Policy
 

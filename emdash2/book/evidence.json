@@ -3824,6 +3824,62 @@
         }
       ]
     },
+    "WALKING-INTERVAL-GROUPOIDIFICATION": {
+      "status": "checked",
+      "statement": "The groupoidal interval has two endpoints, one generating path, judgmental point and dependent-segment computation, and a whole fixed-forward mapping-object equivalence from maps Interval to G to path-valued functors WalkingArrow to Path(G), with endpoint/generator projections and retained higher action.",
+      "owners": [
+        {
+          "file": "emdash3_2_groupoidal_interval_hit.lp",
+          "symbol": "interval_ind"
+        },
+        {
+          "file": "emdash3_2_walking_interval_comparison.lp",
+          "symbol": "walking_arrow_to_interval_func"
+        },
+        {
+          "file": "emdash3_2_walking_interval_universality.lp",
+          "symbol": "walking_interval_groupoidification_hom_omega"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/groupoidal_interval_hit.lp",
+          "symbol": "interval_ind_beta_seg"
+        },
+        {
+          "file": "examples/walking_interval_groupoidification.lp",
+          "symbol": "walking_interval_groupoidification_hom_omega"
+        }
+      ]
+    },
+    "GROUPOIDIFICATION-INTERVAL-RECOVERY": {
+      "status": "checked",
+      "statement": "Specializing generic groupoidification to WalkingArrow and comparing the generic and interval extension owners gives maps Groupoidify(WalkingArrow) to Interval and back; their whole beta/eta laws yield both cancellation paths and a TypeEquiv without a definitional identification of the two HITs.",
+      "owners": [
+        {
+          "file": "emdash3_2_groupoidification_interval_recovery.lp",
+          "symbol": "groupoidify_walking_to_interval"
+        },
+        {
+          "file": "emdash3_2_groupoidification_interval_recovery.lp",
+          "symbol": "interval_to_groupoidify_walking"
+        },
+        {
+          "file": "emdash3_2_groupoidification_interval_recovery.lp",
+          "symbol": "groupoidify_walking_interval_type_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/generic_groupoidification_interval.lp",
+          "symbol": "groupoidify_walking_to_interval"
+        },
+        {
+          "file": "examples/generic_groupoidification_interval.lp",
+          "symbol": "groupoidify_walking_interval_type_equiv"
+        }
+      ]
+    },
     "GENERIC-GROUPOIDIFICATION-MAPPING": {
       "status": "checked",
       "statement": "For every category C and groupoid G, restriction along the whole unit C to Path(Groupoidify(C)) is a fixed-forward OmegaEquivAlong between groupoidal maps out of Groupoidify(C) and path-valued functors out of C; the unit recursor computes on represented objects and dependent first cells and retains higher action.",

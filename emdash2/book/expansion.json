@@ -411,7 +411,10 @@
         "evidence": "GENERIC-GROUPOIDIFICATION-MAPPING"
       },
       "secondaryEvidence": [
-        "CAT-PATH-CATEGORY"
+        "CAT-PATH-CATEGORY",
+        "WE-GROUP-COMPLETION",
+        "WALKING-INTERVAL-GROUPOIDIFICATION",
+        "GROUPOIDIFICATION-INTERVAL-RECOVERY"
       ],
       "boundary": "category-indexed formation, the whole unit and recursor, target-side extension/restriction, arbitrary-target mapping equivalence, compositor, and WalkingArrow-Interval recovery are active; source action, Groupoidify_func, its adjunction with Path_cat_func, and post-generic simplex regressions remain deferred"
     },
