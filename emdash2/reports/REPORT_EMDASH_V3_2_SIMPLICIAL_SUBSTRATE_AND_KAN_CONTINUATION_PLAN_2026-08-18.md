@@ -4,7 +4,7 @@ Date: 2026-08-18 (America/Toronto)
 
 Plan-ID: `SIMPLICIAL-SUBSTRATE-KAN-V3.2`
 
-Status: **active bounded implementation plan**. `SIMP-00`, the Cat-valued
+Status: **completed bounded implementation plan**. `SIMP-00`, the Cat-valued
 Nat/join feasibility row `SIMP-PROBE-1`, the set-classified face-code row
 `SIMP-CODE-2`, and the internal index-category row `SIMP-INDEX-3` are
 complete. The join-shape/selected-realization row `SIMP-SHAPE-4` is also
@@ -15,7 +15,8 @@ decalage slice `SIMP-DEC-8` is complete at its checked levelwise boundary;
 the whole varying-fibre comparison is deferred behind the named
 `SIMP-DEC-HFIBRE-TODO` prerequisite. The codata gate `SIMP-CODATA-9` is
 therefore deferred, `SIMP-DOC-10` is complete, and `SIMP-CLOSE-11` is the
-active row. Later work remains ordered rather than simultaneous scope.
+completed closure row. Later work remains consumer-gated rather than
+simultaneous scope.
 
 Branch: `goal/simplicial-substrate-v3.2`
 
@@ -553,7 +554,7 @@ worktree removal, or deployment is authorized by this plan.
 | `SIMP-DEC-HFIBRE-TODO` | deferred prerequisite | Introduce one reusable varying-`HFiber` Catd or total Path-family owner, assemble it through existing `FibrewiseSigma_catd`, and only then compare its first three whole layers with `homd_`/Sigma action. Reopen only for a concrete displayed-fibre consumer. |
 | `SIMP-CODATA-9` | deferred; gate not met | The categorical/decalage interface did not yet produce the required whole displayed comparison, so no curated observation-driven `SST` codata facade, generic codata mechanism, or judgmental eta is promoted. Reconsider after `SIMP-DEC-HFIBRE-TODO`, not merely because an external reference uses codata. |
 | `SIMP-DOC-10` | complete | Synchronized Foundations, canonical cardinal-versus-dimension notation, both READMEs, SOP/source inventories, focused examples, and the report index for the promoted substrate and its exact nonclaims. No generated book/article artifact was edited. |
-| `SIMP-CLOSE-11` | active | Record checkpoints, exact focused evidence, warning deltas, clean state, remaining rows, and a safe continuation prompt. No integration or publication. |
+| `SIMP-CLOSE-11` | complete | Recorded the eight bounded implementation/documentation checkpoints, exact focused evidence, warning deltas, aggregate waiver, clean branch handoff, remaining prerequisites, and safe continuation boundary. No integration or publication occurred. |
 
 ### 16.1 Initial Nat/Join Probe — 2026-08-18
 
@@ -904,6 +905,62 @@ artifacts and were not silently changed by this implementation plan; a future
 reader-facing simplicial chapter should receive its own evidence-backed
 editorial plan.
 
+### 16.10 Closure And Continuation Boundary — 2026-08-18
+
+The implementation history from baseline `e1dc414` consists of these bounded
+local checkpoints:
+
+| Checkpoint | Bounded tranche |
+| --- | --- |
+| `5daa498` | set-classified semisimplicial face codes |
+| `4057420` | internal augmented semi-simplex category |
+| `473d13f` | join-built simplex shapes and selected cofaces |
+| `bdbfa54` | Yoneda semisimplices and groupoid-valued diagrams |
+| `ba114f1` | boundary and three horns of the two-simplex |
+| `a33e886` | algebraic path-groupoid two-horn fillers |
+| `39985ca` | categorical decalage and levelwise cone fibres |
+| `8b66fa3` | Foundations, notation, README, and report consolidation |
+
+Each promoted source and its focused reviewer passed under the 90-second
+per-target ceiling, quietly and with warnings. Depending on its import
+closure, the exact warning stream retained either 1,297 or 1,315 inherited
+headers; every tranche recorded zero new-module diagnostic. New rewrite
+families passed the strict inferred-slot audit with their intentional rigid
+guards documented, while rule-free modules reported an empty audit.
+Positive computations, index/direction or non-collapse negatives, and at
+least one retained whole higher action were checked at each relevant
+boundary.
+
+One early health attempt, made before a useful resume cache existed, was
+stopped after 17 green targets. The full health/CI aggregate was not rerun:
+the user explicitly requested eager avoidance of long aggregates, and no
+trustworthy promotion depended on repeating unchanged sources after all new
+sources, examples, warning streams, rule audits, registries, and documentation
+checks were independently green. The generated health snapshot may therefore
+remain older than this branch. That is an explicit validation waiver, not a
+claim that the aggregate ran.
+
+The remaining mathematical and infrastructure directions are sharply
+separated:
+
+- `SIMP-DEC-HFIBRE-TODO`: a reusable varying-`HFiber` Catd/total Path-family
+  owner and its first whole comparison with `homd_`/Sigma;
+- arbitrary face-code realization, generic boundaries/horns/spines, and the
+  full simplex category with degeneracies;
+- comparison of the algebraic 2-nerve carriers with representable mapping
+  categories and any all-dimensional Kan interface;
+- geometric realization, skeleton/coskeleton, Reedy, Segal, and Rezk
+  consumers; and
+- a curated observation-driven codata facade, reconsidered only after the
+  whole displayed-fibre gate is met.
+
+A safe continuation starts from branch `goal/simplicial-substrate-v3.2` in
+`/home/user1/emdash1-simplicial-v1`, rereads this ledger and the active SOP,
+and selects exactly one of those directions because a concrete mathematical
+consumer needs it. It must not infer authorization to merge, push, publish,
+delete the worktree, run long aggregates for reassurance, or introduce codata
+merely to mirror an external presentation.
+
 ## 17. Completion Definition
 
 This persistent goal is complete when every row is either complete or
@@ -911,4 +968,5 @@ explicitly deferred behind a named prerequisite, the active public owners
 compute at their stated boundary, positive and negative examples agree with
 the plan, whole higher action is retained where claimed, documentation states
 all nonclaims, the dedicated worktree is clean at a green local checkpoint,
-and no excluded Git/publication/aggregate operation has occurred.
+and no excluded Git/publication operation or completed long aggregate has
+occurred.

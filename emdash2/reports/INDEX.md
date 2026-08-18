@@ -3,7 +3,7 @@
 Date: 2026-08-18
 
 `REPORT_EMDASH_V3_2_SIMPLICIAL_SUBSTRATE_AND_KAN_CONTINUATION_PLAN_2026-08-18.md`
-is the active categorical-first simplicial continuation. It distinguishes
+is the completed categorical-first simplicial continuation. It distinguishes
 join-built directed simplex shapes, Yoneda standard simplices, and
 semisimplicial diagrams. Its bounded vertical slice now contains the computing
 augmented face-code category, selected join realizations, representables,
