@@ -1119,9 +1119,10 @@ record.
   judgmental dependent segment computation, and proves the whole
   fixed-forward mapping-object equivalence against every groupoidal target.
   Endpoint-sensitive positive/negative reviewers and exact 202-target health
-  closeout are green; the implementation is checkpointed at `76f43b3`. The
-  composable-pair/2-simplex consumer and any generic indexed categorical-HIT,
-  source action, or adjunction remain proposed later rows.
+  closeout are green; the implementation is checkpointed at `76f43b3` and
+  synchronized closeout at `07ddfd4`. The composable-pair/2-simplex consumer
+  and any generic indexed categorical-HIT, source action, or adjunction remain
+  proposed later rows.
 
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization

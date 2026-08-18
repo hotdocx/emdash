@@ -469,7 +469,8 @@ source-metrics snapshot is
 `sha256:73f84710ac00429de03b1063daddbce4b0aa5edf3b425dd0ebc47dd88e4efa87`;
 the checked-content snapshot is
 `sha256:8502d080e23dbf1987088f9a05c09ac20cb25290a3d6d1574c745ba5f51164d0`.
-The whole universality implementation is checkpointed at `76f43b3`.
+The whole universality implementation is checkpointed at `76f43b3`; its
+synchronized authority and health closeout is checkpointed at `07ddfd4`.
 
 ## Acceptance And Stop Conditions
 
