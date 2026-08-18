@@ -1113,13 +1113,11 @@ record.
   source shapes.
 
 - `REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md`:
-  proposed successor to the Circle computation tranche and the completed
-  WalkingEnd--Circle universality decision. It reuses the active join-derived
-  `WalkingArrow_cat` for a two-endpoint groupoidal-interval mapping theorem,
-  then derives a composable-pair source and explicit groupoidal 2-simplex to
-  test composition coherence. Only those consumers may authorize a generic
-  indexed categorical-HIT with whole unit, extension, beta/eta, source action,
-  and eventual adjunction to `Path_cat_func`.
+  active bounded first-consumer successor to the Circle computation tranche
+  and completed WalkingEnd--Circle universality decision. The current launch
+  reuses `WalkingArrow_cat` for the two-endpoint groupoidal-interval mapping
+  theorem only. The composable-pair/2-simplex consumer and any generic indexed
+  categorical-HIT, source action, or adjunction remain proposed later rows.
 
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization
