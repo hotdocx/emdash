@@ -420,6 +420,28 @@ detailed probe evidence.
   retains a next-hom functor between paths-between-paths. The module adds no
   Path-specific runtime fold, proof-time rule, pseudofunctor classifier,
   inverse record, or complete coherence claim.
+- `emdash3_2_gray_profiles.lp`: computational strict-functor codes, their
+  retained decoder, and the selected `GrayHom_lax` strict-object/lax-arrow
+  profile. Its homs reuse the ambient `Transf_cat` tower, while only decoded
+  strict carriers make the existing compositor compute to identity. The
+  historical global endpoint cuts remain documented pending a later staged
+  migration.
+- `emdash3_2_walking_arrow.lp`: transparent walking-arrow interface derived
+  from `Join_cat(Terminal_cat,Terminal_cat)`. Both endpoints, the generator,
+  and its next hom action are projections of existing join owners.
+- `emdash3_2_gray_right_closure.lp`: one profiled right-closed slice with an
+  opaque `GrayTensor_R`, whole computationally strict curry/uncurry maps,
+  equality-valued beta/eta packaged by `OmegaEquivAlong Cat_cat`, and
+  identity-derived coevaluation/evaluation. It does not claim the mirror
+  closure or full Crans--Gray monoidal structure.
+- `emdash3_2_gray_walking_square.lp`: transparent `I tensor I` boundary whose
+  four vertices and both coordinate directions derive from coevaluation and
+  the retained walking generator; no tensor object or arrow is postulated.
+- `emdash3_2_gray_interchanger.lp`: rule-free directed interchanger. The named
+  cell is the identity component of the active whole post/left laxity owner,
+  its next `tapp1_func` action remains public, and the resulting direction
+  confirms the `GrayHom_lax` convention. It adds no standalone square,
+  endpoint bridge, rewrite, or unifier.
 - `emdash3_2_truncation_reflector.lp`: classified computational homotopy-
   truncation reflector. It realizes `NType_cat(n)` through the existing
   `TruncGrpdU(n)` retained-evidence package, supplies point-computing
@@ -434,9 +456,10 @@ detailed probe evidence.
   Restricted elimination first turns each merely inhabited based-path fibre
   into a path in `Trunc_grpd(0,Circle_grpd)` and then contracts every point of
   that set truncation. The resulting `IsContr` evidence does not rewrite the
-  carrier to `Unit_grpd`. The bounded tranche is green through exact current
-  health across 76 core/extension files and 100 reviewer examples; its focused
-  plan records the warning, rule-audit, catalog, and snapshot evidence.
+  carrier to `Unit_grpd`. The current maintained health boundary, including
+  the subsequent Gray slice, is green across 81 source/diagnostic files and
+  105 reviewer examples; the focused plans record their warning, rule-audit,
+  catalog, and snapshot evidence.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
@@ -3221,6 +3244,17 @@ Active equality/equivalence staging includes:
   readable `eq_ap`/`eq_trans` endpoints without making them runtime-convertible.
   `path_map_compositor_higher_func` retains one off-diagonal next-hom action as
   a whole functor and therefore leaves generic higher iteration available;
+- a computational strict-object/lax-arrow Gray profile and one right-closed
+  consumer: `StrictFunctorData` and `strict_functor_carrier` select the strict
+  object boundary without duplicating the ambient action hierarchy;
+  `GrayHom_lax` reuses `Transf_cat` homs; `GrayTensor_R` has whole strict
+  curry/uncurry maps and equality-valued beta/eta; `WalkingArrow_cat` is
+  transparently `Join_cat(1,1)`; and the four-object walking square and its
+  nonidentity directed interchanger derive from coevaluation and the existing
+  whole post/left laxity owner. `gray_interchanger_next_func` retains one next
+  action. The raw boundary composites are readable presentations, not a new
+  endpoint normal form. Mirror closure, full monoidal coherence, and migration
+  of the historical global strict cuts remain outside this tranche;
 - `GrpdUnivalence` and decoder-based groupoid-univalence capabilities, with
   named decoder round trips, a canonical contractible-fibre capability
   selecting `grpd_equiv_path`, a propositional decoder transport square, and
@@ -4451,26 +4485,25 @@ the honest inherited category operation; strict LHS audit is clean. These
 warnings remain measured diagnostic evidence, not a claim of global
 confluence.
 
-After integration of the completed TypeScript-elaborator and PSSS histories,
-the exact-current global warning boundary is 1,241 diagnostics: 1,082
-unjoinable critical pairs and 159 replaceable-pattern advisories. The strict
+After integration of the completed TypeScript-elaborator, PSSS, internal-
+laxity, and profiled-Gray histories, the exact-current selected-source warning
+boundary is 1,289 diagnostics: 1,130 unjoinable critical pairs and 159
+replaceable-pattern advisories. The strict
 LHS audit is zero unreviewed clauses, 58 annotated slots, and 34 intentional
-clauses. The generated catalog contains 2,091 classified checks across 98
+clauses. The generated catalog contains 2,177 classified checks across 106
 areas with zero legacy or unclassified entries.
 
-The exact-current registered health boundary is green for all 170 source and
-reviewer targets under the uniform 90-second per-target ceiling. The August 14
-refresh carried forward 162 targets only after the prior whole-content hash
-matched byte-for-byte, then ran the four newly registered groupoidal modules
-and four reviewers directly. In particular, the Integer, Circle,
-WalkingEnd-to-Circle, and product-closure sources pass in 2.437, 2.460, 2.552,
-and 2.344 seconds; their reviewers pass in 2.486, 2.514, 2.586, and 2.357
-seconds. The source-metrics snapshot is
-`sha256:c5e223032c96d6c32c61321f2d0b694002499170375c71ea46c11db0650d307c`
+The exact-current registered health boundary is green for all 186 maintained
+targets—81 source/diagnostic files and 105 reviewer examples—under the uniform
+90-second per-target ceiling. The August 17 closeout is fresh rather than
+carried: all 186 targets report exit 0, with 1,655.157 summed check-seconds.
+The new `emdash3_2_gray_interchanger.lp` source passes in 5.773 seconds and its
+reviewer in 5.535 seconds. The source-metrics snapshot is
+`sha256:eded750dd21a254669499f6cecfde8d9e7499d3018f489c8dfd1cce76e49d979`
 and the checked-content snapshot is
-`sha256:fac6128b7abd25b3c4b6eb024f0119b6b07c0ee88636c1a6804aa5ace099db94`.
-The previously registered 162-target boundary remains exact carried evidence,
-not an aggregate rerun.
+`sha256:8a38dabd82f92a1f4a6b54f1436b395d563c6c8db51836504d1238dcfb4e8ea6`.
+This was the one necessary closeout aggregate; redundant `make check`,
+`make examples`, `make ci`, and repository-wide aggregates were not rerun.
 
 ## Book And Renderer Workflow
 

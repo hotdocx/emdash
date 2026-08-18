@@ -1058,7 +1058,7 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:
-  active focused child of the internal-laxity/groupoidal-realization master.
+  completed focused child of the internal-laxity/groupoidal-realization master.
   Its first semantic row now supplies a computational strict-functor
   code/decoder and a
   strict-object/lax-arrow Gray internal-hom facade over the shared ambient
@@ -1074,7 +1074,9 @@ record.
   Cartesian collapse. The fifth row projects the nonidentity interchanger
   from the active whole post/left laxity action, retains its next hom action,
   and confirms the `GrayHom_lax` orientation without adding a square axiom or
-  endpoint bridge. Only the synchronized closeout remains. Mirror closure, full
+  endpoint bridge. The synchronized closeout is green: the strict catalog has
+  2,177 checks across 106 areas, and exact health passes all 81
+  source/diagnostic targets and 105 reviewers. Mirror closure, full
   biclosed/monoidal Crans--Gray structure, global strict-cut migration,
   groupoidification, and book work remain excluded. The first semantic row is
   checkpointed at `9222dad`; the derived walking-arrow row is checkpointed at

@@ -35,8 +35,8 @@ Worktree: `/home/user1/emdash1-groupoidal-circle-v1`
 
 Branch: `goal/profiled-gray-hom-v3.2`
 
-Status: active bounded implementation plan. `GRAY-00` through `GRAY-05` are
-complete; `GRAY-CLOSE-1` is the selected next row. Local green checkpoint commits
+Status: completed bounded implementation plan. `GRAY-00` through
+`GRAY-CLOSE-1` are complete. Local green checkpoint commits
 are authorized by the user; push, merge, publication, release, history
 rewrite, branch deletion, and worktree removal are not authorized.
 
@@ -294,7 +294,7 @@ typecheck alone.
 | `GRAY-03` | complete | `emdash3_2_gray_right_closure.lp` provides one opaque `GrayTensor_R` category, computationally strict whole curry/uncurry functors between the profiled Hom categories, whole beta/eta paths assembled as the existing `OmegaEquivAlong Cat_cat`, their object evaluations, and coevaluation/evaluation derived at strict identity codes. The rule-free source/reviewer/central targets pass; warning evidence remains exactly `1130/159`; the strict LHS audit is zero; and the catalog has 2,145 checks across 104 areas with zero unclassified checks. The right-closure typing was fixed here; the provisional orientation spelling is superseded by the `GRAY-05` verdict. |
 | `GRAY-04` | complete | `emdash3_2_gray_walking_square.lp` derives the four `I tensor I` vertices and both coordinate arrow families from coevaluation. Inner edges retain whole Terminal-indexed generator owners; outer edges are two whole component evaluations of one coevaluation-generated transformation. All six pairwise vertex non-collapses and the concrete Cartesian non-collapse are checked. |
 | `GRAY-05` | complete | `emdash3_2_gray_interchanger.lp` exposes the two readable square composites, derives the oriented interchanger as the identity component of the existing whole `tapp1_post_laxity_transf`, and retains its next `tapp1_func` action. The direction confirms `GrayHom_lax`; no independent square, pointwise endpoint bridge, rule, or unifier is added. Source/reviewer/central checks pass; the warning inventory remains `1130/159`; the strict LHS audit is zero; and the catalog has 2,177 checks across 106 areas with zero unclassified checks. |
-| `GRAY-CLOSE-1` | selected next | Synchronize source/example ownership, master/child ledgers, Foundations/SOP/canonical syntax, report index, checks/catalog/health required by the actual diff, and local green checkpoints. Record exclusions and next consumer. |
+| `GRAY-CLOSE-1` | complete | Source/example ownership, master/child ledgers, Foundations/SOP/canonical syntax, report index, 2,177-check strict catalog, and exact 186-target health are synchronized. All 81 source/diagnostic files and 105 reviewers pass; lightweight TOC/reference/header/LHS/diff gates pass; the warning boundary remains `1130/159`. This health refresh was the sole closeout aggregate. |
 
 ## First Experiment (`GRAY-01`)
 
@@ -602,6 +602,39 @@ all-example, or repository-wide aggregate was run for this intermediate row.
 The bounded oriented-interchanger tranche is locally checkpointed at
 `e2f069c`; this ledger entry records that recovery anchor without widening
 the validated scope.
+
+### Completed `GRAY-CLOSE-1` result — 2026-08-17
+
+The public boundary is synchronized across `EMDASH_FOUNDATIONS.md`, the
+current SOP, canonical surface syntax, `AGENTS.md`, the report index, source
+registries, reviewers, central diagnostics, and the generated strict catalog.
+Those authorities now state the same result: `GrayHom_lax` is the selected
+strict-object/lax-arrow profile; `GrayTensor_R` has one profiled right closure;
+the walking arrow is derived from `Join_cat(1,1)`; and the walking-square
+interchanger is a nonidentity projection of the whole post/left laxity owner
+with one retained next action.
+
+The generated catalog contains 2,177 checks across 106 areas, with zero
+unclassified checks. The exact-current health snapshot is green for all 186
+maintained targets—81 source/diagnostic files and 105 reviewer examples—under
+the 90-second per-target ceiling. Its source-metrics snapshot is
+`sha256:eded750dd21a254669499f6cecfde8d9e7499d3018f489c8dfd1cce76e49d979`
+and its checked-content snapshot is
+`sha256:8a38dabd82f92a1f4a6b54f1436b395d563c6c8db51836504d1238dcfb4e8ea6`.
+All 186 checks are fresh and total 1,655.157 measured check-seconds.
+
+The strict inferred-slot audit remains zero unreviewed clauses; TOC,
+active-reference, report-header, catalog, Python/shell syntax, and diff checks
+pass. The warning-enabled selected source remains exactly `1130/159`. The
+health refresh was the sole necessary aggregate: redundant `make check`,
+`make examples`, `make ci`, root TypeScript, print/book, and repository-wide
+aggregates were not rerun.
+
+This completed boundary remains deliberately one-sided. Mirror closure, full
+biclosed/monoidal Crans--Gray structure, tensor parameter action, generic
+groupoidification, complete all-dimensional coherence, global strict-cut
+migration, and book integration remain consumer-gated future work rather than
+implicit claims of this plan.
 
 ## Validation Policy
 

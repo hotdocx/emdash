@@ -3641,6 +3641,90 @@ separate functor varying a higher arrow between ordinary transfors is still
 consumer-gated; this first ordinary consumer does not require an
 `Op_transf_func` package or displayed `homd_con_int` mirror.
 
+### Profiled Gray Right Closure And The Walking Interchanger
+
+The first directed Gray consumer reuses that same whole laxity calculus. A
+computationally strict functor is selected by a primitive code and retained
+decoder:
+
+```text
+StrictFunctorData(A,B)
+strict_functor_carrier : StrictFunctorData(A,B) -> Functor(A,B).
+```
+
+At a decoded strict carrier, the generic `fapp1_compositor` reduces to the
+identity at its existing `fdapp1_int_cell` owner. An arbitrary ambient functor
+does not acquire this reduction. This is a syntactic/profiled boundary, not a
+path-valued `IsStrictFunctor` property. The prototype still carries historical
+global endpoint-identification cuts; migrating those cuts to profile-local
+owners is a later consolidation task and is not silently claimed here.
+
+The selected internal Hom is the category
+
+```text
+GrayHom_lax(A,B),
+```
+
+whose objects are `StrictFunctorData(A,B)` codes and whose homs are the
+existing `Transf_cat` homs between their decoded carriers. Identity,
+composition, modifications, and every subsequent iterated hom therefore
+reuse the ambient calculus. The whole `grayhom_lax_include_func` exposes this
+profile inside `Functor_cat(A,B)` without identifying the two category heads.
+
+One right-closed slice is represented by
+
+```text
+GrayHom_lax(GrayTensor_R(A,B),C)
+  ~= GrayHom_lax(A,GrayHom_lax(B,C)).
+```
+
+Whole computationally strict `gray_curry_R_func` and
+`gray_uncurry_R_func` maps carry the two directions, while equality-valued
+beta and eta comparisons assemble the existing `OmegaEquivAlong Cat_cat`
+interface. Coevaluation and evaluation are the respective transposes of the
+selected strict identity codes; they are not unrelated tensor operations.
+
+For the walking arrow
+
+```text
+I := Join_cat(Terminal_cat,Terminal_cat),
+```
+
+the endpoints are the two join inclusions and its generator is the terminal
+component of the fibre of `join_cross_transf`. Evaluating coevaluation for
+`I tensor I` yields four vertices, whole owners for both coordinate
+directions, and the outer transformation between the two strict inner
+functors. The directed interchanger is then the identity component of the
+already active whole post/left laxity owner:
+
+```text
+gray_interchanger_transf
+  := tapp1_post_laxity_transf(outer, inner_generator)
+
+gray_interchanger
+  := gray_interchanger_transf[id_I(0)].
+```
+
+Its direction is
+
+```text
+inner_target[g] o outer_source
+  ==> outer_target o inner_source[g],
+```
+
+the convention called **lax** here. The two raw composites are retained as
+readable boundary terms, while the formal component type stays at the stable
+`functord_transport_lhs_func` and `functord_transport_rhs_func` owners. No
+pointwise endpoint rewrite or independent square is needed. Moreover
+`gray_interchanger_next_func` is the whole `tapp1_func` action of this owner,
+so the construction remains iterable rather than ending at one displayed
+2-cell.
+
+This is a profiled one-sided Gray-closed slice, not yet the full Crans--Gray
+monoidal structure. The mirror closure, tensor action in parameters,
+biclosed/monoidal coherences, and the global strict-cut migration remain
+separate consumer-driven work.
+
 A future named `section_total(s) : K → Σ_K E` facade would make this sharing
 more visible at the presentation level, but its transparent total-category
 construction and the more general base-change totalization are active. The

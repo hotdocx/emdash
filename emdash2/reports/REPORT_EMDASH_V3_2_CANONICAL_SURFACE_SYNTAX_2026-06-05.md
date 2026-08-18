@@ -1183,6 +1183,69 @@ Its retained off-diagonal action is
 `path_map_compositor_higher_func(h,q,p0,p1)`; the notation asserts no complete
 simplicial or all-coherence interface.
 
+## Profiled Gray Right-Closure Notation
+
+Write the selected computational strict-functor code and decoder as
+
+```text
+StrictFunctor(A,B)
+decode_strict(S) : Functor(A,B),
+```
+
+with kernel owners `StrictFunctorData(A,B)` and
+`strict_functor_carrier(S)`. This is sorted syntax: an arbitrary ambient
+functor is not implicitly promoted by supplying a path-valued law.
+
+The selected strict-object/lax-arrow internal Hom is written
+
+```text
+GrayHom_lax(A,B).
+```
+
+Its kernel head is the identically named `GrayHom_lax`; its whole inclusion
+is `grayhom_lax_include_func`. There is no active `GrayHom_oplax`
+compatibility spelling. The authoritative orientation is the displayed cell
+
+```text
+G[g] o epsilon[-]  ==>  epsilon[g o -],
+```
+
+called lax in this project. When external literature uses the opposite naming
+convention, show the cell direction rather than silently changing the head.
+
+For the selected right closure, mathematical prose may write
+
+```text
+A tensor_R B
+
+curry_R   : GrayHom_lax(A tensor_R B,C)
+              -> GrayHom_lax(A,GrayHom_lax(B,C))
+uncurry_R : GrayHom_lax(A,GrayHom_lax(B,C))
+              -> GrayHom_lax(A tensor_R B,C).
+```
+
+The kernel owners are `GrayTensor_R`, `gray_curry_R_func`, and
+`gray_uncurry_R_func`; their whole beta/eta package is
+`gray_right_closure_omega`. `tensor_R` is expository notation, not a declared
+string-parser token.
+
+Write the walking interval as `I = Join(1,1)`. For its tensor square, write
+
+```text
+interchanger_I :
+  inner_target[g] o outer_source
+    ==> outer_target o inner_source[g].
+```
+
+The kernel owner `gray_interchanger` is the identity component of
+`gray_interchanger_transf`, itself the specialized
+`tapp1_post_laxity_transf`; `gray_interchanger_next_func` retains the next
+whole action. The readable raw composites do not license a new pointwise
+endpoint rewrite: the formal component endpoints remain the stable
+`functord_transport_*_func` owners. This notation describes one profiled
+right-closed slice and must not be advertised as the full Crans--Gray
+monoidal structure.
+
 ## Displayed Sibling Product Notation
 
 For Cat-valued displayed families `B,C : Catd K`, write:
