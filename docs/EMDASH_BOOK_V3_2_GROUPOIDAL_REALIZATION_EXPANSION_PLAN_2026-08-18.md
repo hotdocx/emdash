@@ -4,12 +4,11 @@ Date: 2026-08-18 (America/Toronto)
 
 Plan-ID: `EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5`
 
-Status: **active fourth-spiral book continuation**. The cumulative baseline,
-book contract, stale-claim inventory, evidence boundary, and chapter
-architecture have been reviewed. `BGR-00` and `BGR-ARCH-1` are complete;
-`BGR-REPAIR-2`, `BGR-CH25-3` through `BGR-CH28-6`, `BGR-XCUT-7`, and
-`BGR-ARTICLE-8` and `BGR-RELEASE-9` are complete, and `BGR-CLOSE-10` is the
-active final authority/diff/plan synchronization row.
+Status: **completed fourth-spiral book continuation**. All rows `BGR-00`
+through `BGR-CLOSE-10` are complete. The locally promoted book is the
+343-page `0.5.0-dev` draft, and the rebalanced article remains within its
+18-page maximum. Remote publication remains separately authorized and was not
+performed.
 
 Branch: `goal/emdash-book-groupoidal-v3.2`
 
@@ -492,7 +491,7 @@ AI imagery is not part of the mathematical pages.
 | `BGR-XCUT-7` | complete | Front matter and transitions now present four spirals; notation, HoTT correspondence, glossary, computation/status/formal appendices, credits, bibliography, and provenance agree with Chapters 25–28 and their exact non-claims. Generated contents/evidence remain owner-generated. A book-only table pagination rule removes inherited title-only table pages without changing article layout. `book:check` passes at 43 sources/155 claims/2,775 math spans; renderer checks pass for the 18-page article and 343-page book; the review PDF passes at 343 pages/16 fonts and representative changed pages were inspected. |
 | `BGR-ARTICLE-8` | complete | Rebalanced rather than appended: one over-detailed mixed-telescope passage now funds a theorem-level groupoidification/Gray subsection; the abstract, roadmap, boundaries, conclusion, and references agree. The article remains 18 pages, passes its release gate with 14 embedded fonts, and is byte-deterministic across two exports. Poppler QA repaired two overwide displays and a split reference. The checked owner pair is promoted byte-identically to `docs/emdash3_2.{md,pdf}`. |
 | `BGR-RELEASE-9` | complete | Stabilized the book at expanded development edition `0.5.0-dev`, dated 2026-08-18 with draft status. Two complete cold `book:release` passes produced the same 343-page/16-font hash. Final Poppler QA covered metadata/title, contents, all new chapter openings, transport and walking-square figures, status/evidence/formal tables, appendices, bibliography, credits, and license. The checked Markdown/PDF pair is promoted byte-identically to `docs/emdash-book.{md,pdf}`. |
-| `BGR-CLOSE-10` | active | Synchronize this plan, parent `ILGR-BOOK-1`, report index, public README/status claims, exact artifact hashes/page counts, and clean staged scope. Run no unrelated kernel/TypeScript aggregates; carry forward `f4d9303` semantic health unless a semantic source changes. Leave remote publication for explicit authorization. |
+| `BGR-CLOSE-10` | complete | Parent `ILGR-BOOK-1`, the report index, root/package READMEs, current-status artifact claim, exact hashes/page counts, and this ledger are synchronized. Baseline ancestry and the complete changed-path set were audited; no Lambdapi or TypeScript semantic source changed. Report-header/active-reference/diff hygiene passes, all four tracked artifacts equal their checked owners, and the dedicated worktree closes cleanly at local checkpoints. No aggregate, push, merge, tag, PR, deployment, publication, history rewrite, branch deletion, or worktree removal was performed. |
 
 ### 12.1 Architecture Implementation Record — 2026-08-18
 
@@ -916,6 +915,48 @@ goal's proportional-validation policy, the prior `f4d9303` semantic health
 boundary is carried forward and the long repository/kernel aggregate was not
 rerun merely for document release. Local promotion is not a push, tag, PR,
 deployment, or remote publication.
+
+### 12.10 Final Authority And Scope Audit — 2026-08-18
+
+The completion audit was performed against the original objective and every
+item in §16 rather than inferred from a passing render.
+
+- `f4d9303411a09f143912832315153c234807e724` is an ancestor of the final
+  branch. The ten bounded checkpoints after it are `bbc7ffd`, `e53dbaa`,
+  `54bfd4a`, `258585c`, `0757d37`, `f53801f`, `3470aa6`, `d626059`,
+  `2be63e2`, and `79a35bb`, followed by this closeout record.
+- The complete changed-path inventory contains book/article sources,
+  evidence/provenance/architecture validators, the book-only pagination rule,
+  promoted documents, plans/reports, and READMEs. It contains no `.lp`
+  source, root TypeScript semantic source, test-runner mutation, package
+  manifest, or lockfile.
+- All eleven `BGR-*` rows are complete. Chapters 25–28 were reviewed page by
+  page during their own tranches and again at the final artifact boundary for
+  openings, figures, and status blocks.
+- The final book and article checks prove source/evidence/provenance/math
+  validity, bounded browser rendering, tagged US Letter PDF structure,
+  embedded fonts, deterministic export, and page budgets at their respective
+  owners.
+- The four tracked distribution artifacts compare byte-for-byte with their
+  checked owners. Their final hashes are:
+
+```text
+docs/emdash-book.md  e26fcb960a5dae0abd24a106035fa79a45f570a1c77edfa33727c6b0d0127604
+docs/emdash-book.pdf 54a11407eb9ca1203979413f3231003ada85021ef2578e247ab922fccd918ad7
+docs/emdash3_2.md     b30908661134c2c9dcb6619cb5c6752658e35875fdb6bbfd859fbd5b8fd9f935
+docs/emdash3_2.pdf    d5ef1d47aa693229e92f52ae84e762d36b620912bf3b16e178456ab3448ed3db
+```
+
+- `lint_report_headers.py`, `lint_active_refs.sh`, and `git diff --check`
+  pass after synchronizing the parent ledger, report index, public READMEs,
+  and current-status artifact record.
+- Other branches and worktrees were inspected and left untouched. The goal
+  branch remains a local, unmerged checkpoint line. No remote mutation or
+  cleanup operation occurred.
+
+The original completion definition is therefore satisfied. The next action,
+if desired, is an explicitly authorized integration or remote-publication
+workflow; it is not part of this completed goal.
 
 ## 13. Proportional Validation Policy
 
