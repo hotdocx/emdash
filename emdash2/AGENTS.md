@@ -260,6 +260,10 @@ the fixed dimension-two boundary/horn ordinary-sieve layer is
 `emdash3_2_simplex2_sieves.lp`; omission bits compute from face codes, one
 kind-indexed higher-sieve owner retains generic action, and existing sieve
 pullback/extension/inclusion owners supply the categorical structure;
+the bounded algebraic path-groupoid two-horn filler layer is
+`emdash3_2_path_groupoid_2horn_fillers.lp`; inner composition, outer inverses,
+J-derived cancellation, whole section paths, and iterable Path-map lifts are
+active without claiming an all-dimensional nerve presheaf or Kan theorem;
 the mere-connectedness consumer for the Circle is
 `emdash3_2_circle_connectedness.lp`; it constructs
 `Pi x:S1, ||circle_base=x||_{-1}` without an untruncated path choice and uses
@@ -858,13 +862,19 @@ Use the following order:
     generic action, ordinary pullback, fibrewise extension, and whole
     inclusion. It adds no generic-dimensional sieve family, degeneracy,
     spine, Kan condition, or filler;
-85. `emdash3_2_circle_connectedness.lp` for the rule-free first concrete
+85. `emdash3_2_path_groupoid_2horn_fillers.lp` for the bounded algebraic
+    2-nerve of a path groupoid. Its three horn restrictions and fillers use
+    path composition/inverses, J-derived cancellation, whole function section
+    paths, and iterable Path-map lifts. It also exposes generic presheaf-facing
+    horn restriction, but does not identify the algebraic carriers with full
+    mapping categories or claim an all-dimensional nerve/Kan theorem;
+86. `emdash3_2_circle_connectedness.lp` for the rule-free first concrete
     consumer of propositional truncation. It proves mere based connectedness
     of the Circle by dependent Circle induction; retained proposition evidence
     supplies the loop `PathOver`, so no untruncated global path is selected.
     Eliminating this mere path evidence into the set truncation proves
     `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier rewrite to Unit;
-86. `emdash3_2_walking_circle_restriction.lp` for the transparent rule-free
+87. `emdash3_2_walking_circle_restriction.lp` for the transparent rule-free
     forward half of the selected WalkingEnd--Circle groupoidification
     universality consumer. It acts on Circle functions through
     `Path_cat_func`, precomposes by `walking_to_circle_func`, retains the
@@ -872,14 +882,14 @@ Use the following order:
     and derives its readable base path and dependent loop `PathOver` from one
     whole functor comparison. It constructs no extension inverse, beta/eta,
     generic reflector, rule, or unifier;
-87. `emdash3_2_walking_circle_extension.lp` for the whole inverse candidate
+88. `emdash3_2_walking_circle_extension.lp` for the whole inverse candidate
     on WalkingEnd representations into `Path_cat(G)`. Its object projection
     computes to Circle recursion on the selected base and generator; generic
     hom action remains iterable, while loop and first-arrow agreement are
     explicit equality evidence. It adds one categorical-HIT recursor owner
     and one object rule, but no generic groupoidification reflector,
     identity/composition rule, unifier, or whole cancellation claim;
-88. `emdash3_2_walking_circle_universality.lp` for the rule-free concrete
+89. `emdash3_2_walking_circle_universality.lp` for the rule-free concrete
     whole universal mapping property against every `G : Grpd`. Two scoped
     categorical-HIT uniqueness paths make extension and restriction inverse
     as whole functors; `OmegaEquivAlong Cat_cat` packages the result, while
@@ -887,51 +897,51 @@ Use the following order:
     inverse directions retain the extension's higher action. It adds no
     generic `Groupoidify`, adjunction, rule, unifier, or additional Circle
     computation beyond the dependent beta owned by the Circle module;
-89. `emdash3_2_walking_circle_monodromy.lp` for the rule-free universe-valued
+90. `emdash3_2_walking_circle_monodromy.lp` for the rule-free universe-valued
     consumer. A self-`TypeEquiv` becomes a universe loop by the selected
     univalence decoder, the existing whole inverse builds its Circle family,
     whole beta recovers the original WalkingEnd representation, and transport
     around the actual family loop agrees with the equivalence's forward map.
     It adds no independent code family, univalence axiom, rule, or unifier;
-90. `emdash3_2_groupoidal_interval_hit.lp` for the opaque two-endpoint
+91. `emdash3_2_groupoidal_interval_hit.lp` for the opaque two-endpoint
     groupoidal interval HIT. Its dependent eliminator computes judgmentally
     at both points and through the stable `eq_apd` owner on the generating
     segment; constant-family ordinary `eq_ap` remains propositional;
-91. `emdash3_2_walking_interval_comparison.lp` for the concrete
+92. `emdash3_2_walking_interval_comparison.lp` for the concrete
     WalkingArrow-to-interval unit. It retains a whole join-eliminator
     presentation, computes judgmentally at both endpoints, compares the
     generator propositionally, and exposes first and next hom action;
-92. `emdash3_2_walking_interval_restriction.lp` for whole precomposition of
+93. `emdash3_2_walking_interval_restriction.lp` for whole precomposition of
     interval functions along that unit. Endpoint observations and the
     endpoint-dependent generator `PathOver` derive from one whole comparison;
-93. `emdash3_2_walking_interval_extension.lp` for the whole inverse candidate
+94. `emdash3_2_walking_interval_extension.lp` for the whole inverse candidate
     built by interval recursion from the two endpoint images and the selected
     generator. Its endpoint betas compute, ordinary generator beta remains
     propositional, and generic higher action remains iterable;
-94. `emdash3_2_walking_interval_universality.lp` for the rule-free
+95. `emdash3_2_walking_interval_universality.lp` for the rule-free
     source-specific universal mapping property against every `G : Grpd`.
     Whole beta/eta package restriction as `OmegaEquivAlong Cat_cat`, with
     dependent endpoint/generator projections; the generic recovery reuses it;
-95. `emdash3_2_groupoidification_hit.lp` for category-indexed
+96. `emdash3_2_groupoidification_hit.lp` for category-indexed
     `Groupoidify(C)`, its whole unit, judgmental point and dependent first-cell
     computation, and a whole extension retaining first and next hom action;
-96. `emdash3_2_groupoidification_universality.lp` for whole restriction,
+97. `emdash3_2_groupoidification_universality.lp` for whole restriction,
     scoped categorical-HIT beta/eta, and `OmegaEquivAlong Cat_cat` for every
     `C : Cat` and `G : Grpd`, without source action or an adjunction;
-97. `emdash3_2_groupoidification_composition.lp` for the nonidentity generic
+98. `emdash3_2_groupoidification_composition.lp` for the nonidentity generic
     unit compositor and one retained next action, both projected from the
     existing ordinary internal-action calculus;
-98. `emdash3_2_groupoidification_interval_recovery.lp` for the two extension-
+99. `emdash3_2_groupoidification_interval_recovery.lp` for the two extension-
     selected comparison maps, beta/eta-derived whole cancellations, explicit
     quasi-inverse data, and `TypeEquiv(Groupoidify(WalkingArrow),Interval)`;
-99. `emdash3_2_checks.lp` for executable regression statements;
-100. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+100. `emdash3_2_checks.lp` for executable regression statements;
+101. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-101. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-102. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+102. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+103. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-103. `reports/INDEX.md` for task-specific plans and decision records.
-104. `book/book.json` and `book/evidence.json` for book source
+104. `reports/INDEX.md` for task-specific plans and decision records.
+105. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

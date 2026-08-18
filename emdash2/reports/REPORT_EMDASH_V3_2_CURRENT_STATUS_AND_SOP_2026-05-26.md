@@ -551,6 +551,12 @@ detailed probe evidence.
   action, ordinary pullback, fibrewise extension, and whole inclusion. It
   adds no generic-dimensional sieve family, degeneracy, spine, Kan condition,
   or filler.
+- `emdash3_2_path_groupoid_2horn_fillers.lp`: bounded algebraic 2-nerve of a
+  path groupoid. Its three horn restrictions and fillers use path
+  composition/inverses, J-derived cancellation, whole function section paths,
+  and iterable Path-map lifts. It also exposes generic presheaf-facing horn
+  restriction, but does not identify the algebraic carriers with full mapping
+  categories or claim an all-dimensional nerve/Kan theorem.
 - `emdash3_2_circle_connectedness.lp`: transparent rule-free propositional-
   truncation consumer. It constructs
   `Pi x:S1, ||circle_base=x||_{-1}` by dependent Circle induction; the retained

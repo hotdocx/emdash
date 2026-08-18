@@ -10,8 +10,9 @@ Nat/join feasibility row `SIMP-PROBE-1`, the set-classified face-code row
 complete. The join-shape/selected-realization row `SIMP-SHAPE-4` is also
 complete. The representable/diagram row `SIMP-YONEDA-5` is complete;
 the dimension-two boundary/horn row `SIMP-SIEVE-6` is complete;
-`SIMP-FILL-7` is the active implementation row. Later rows remain ordered
-gates rather than simultaneous scope.
+the bounded algebraic filler row `SIMP-FILL-7` is complete; `SIMP-DEC-8` is
+the active implementation row. Later rows remain ordered gates rather than
+simultaneous scope.
 
 Branch: `goal/simplicial-substrate-v3.2`
 
@@ -401,6 +402,14 @@ The first nontrivial consumer is the 2-dimensional nerve of a path groupoid:
 - the two outer horns compute using path inverses; and
 - retained higher action reuses the existing path pseudo-laxity tower.
 
+The promoted slice separates two boundaries. For arbitrary Cat-valued `X`,
+horn restriction is exactly existing whole precomposition by the selected
+sieve inclusion. For a path groupoid `G`, one explicit algebraic strict
+2-nerve carrier and three horn carriers provide computational filler functions
+and whole Path-map lifts. The algebraic carriers are not yet identified with
+the full presheaf mapping categories; that comparison is not required for the
+bounded filler computation.
+
 Mere Kan, inner-Kan/quasicategory, and all-dimensional fillers remain later
 interfaces. A successful 2-horn consumer is not a complete Kan theorem.
 
@@ -527,8 +536,8 @@ worktree removal, or deployment is authorized by this plan.
 | `SIMP-SHAPE-4` | complete | Promoted ordinary Nat-indexed join shapes, a whole `join_map_func` whose cross cell is reindexed from the target join, strict-profile join closure, and paired code/functor realizations for the two vertices of `Delta[1]` and three edges of `Delta[2]`; all three functorial coface equations compute. |
 | `SIMP-YONEDA-5` | complete | Promoted standard Yoneda semisimplices, the groupoid-valued diagram classifier, generic raw whole postcomposition by `Path_cat_func`, public realized objects/maps through `Psh_cat`, level/face computation, and retained higher action without a rule or unifier. |
 | `SIMP-SIEVE-6` | complete | Promoted three omission bits, a four-kind boundary/horn membership family, one whole higher-sieve owner, four ordinary sieves, generic pullback, whole extensions/inclusions, the complete codimension-one membership matrix, and structural precomposition checks without a represented-composition bridge. |
-| `SIMP-FILL-7` | active | Construct horn restriction and selected whole fillers for the three 2-horns in the nerve/path realization of a groupoid; retain one higher action and state exact nonclaims. |
-| `SIMP-DEC-8` | pending | Construct the selected shift/decalage and displayed cone fibre; compare its first three layers wholely with existing `homd_`/Sigma action. |
+| `SIMP-FILL-7` | complete | Promoted generic whole partial-simplex restriction plus an algebraic path-groupoid strict 2-nerve with three restrictions/fillers, inner composition, outer inverses, right-J comparison, derived cancellation, whole function section paths, whole Path-map lifts, and retained next action. |
+| `SIMP-DEC-8` | active | Construct the selected shift/decalage and displayed cone fibre; compare its first three layers wholely with existing `homd_`/Sigma action. |
 | `SIMP-CODATA-9` | pending decision gate | Decide whether the successful categorical/decalage interface justifies a curated observation-driven `SST` codata facade. Do not implement generic codata or judgmental eta merely because the references use it. |
 | `SIMP-DOC-10` | pending | Synchronize Foundations, canonical notation, SOP/source inventories, examples, and report index only for actually promoted owners and checked boundaries. |
 | `SIMP-CLOSE-11` | pending | Record checkpoints, exact focused evidence, warning deltas, clean state, remaining rows, and a safe continuation prompt. No integration or publication. |
@@ -777,6 +786,47 @@ logs/probes/simplex2_sieves-20260818-150212.log
 ```
 
 The health aggregate remains deferred to the later closure boundary.
+
+### 16.7 Algebraic Path-Groupoid Horn Fillers — 2026-08-18
+
+`emdash3_2_path_groupoid_2horn_fillers.lp` keeps generic presheaf-facing
+partial-simplex restriction at `ordinary_sieve_local_precomp`. Its selected
+consumer is a transparent algebraic strict 2-nerve of a groupoid `G`: a
+triangle stores three vertices and composable paths `p01,p12`, while the three
+horn carriers retain the appropriate two edges.
+
+The inner filler computes edge `p02` as `eq_trans(p01,p12)`. Horn 0 computes
+the missing edge as `p01^-1 ; p02`. Horn 2 computes it as
+`p02 ; p12^-1` using `eq_trans_right`, a right-J operation whose conventional
+agreement with `eq_trans` is proved propositionally. The dual J orientation
+makes the horn-2 endpoint computational without a new rewrite rule.
+
+Both outer cancellation laws are derived by J. Horn-specific nested-Sigma
+eliminators lift them to pointwise record section paths; `PiFunext` packages
+all three as whole function section laws. Every restriction and filler is
+lifted by `path_map_func`, so equality and all later action remain at the
+generic Path owner. No solver, tactic, primitive filler, rewrite, or unifier is
+introduced.
+
+The reviewer `examples/path_groupoid_2horn_fillers.lp` checks generic mapping-
+category restriction, right-J agreement, all three object computations, both
+outer cancellation proofs, all three section paths, whole restriction/filler
+types, one retained next action, and the all-dimensional-presheaf nonclaim.
+Source and reviewer are green quietly and with warnings; both contain the
+same 1,315 inherited warning headers and no new-module warning. The strict LHS
+audit is empty because the module is rule-free.
+
+Ignored probe evidence:
+
+```text
+logs/probes/path_groupoid_2horn_fillers-20260818-152536.log
+logs/probes/path_groupoid_2horn_fillers-20260818-152557.log
+```
+
+This is not yet an all-dimensional nerve object, a comparison with every
+presheaf mapping category, a mere-Kan theorem, or an inner-Kan/quasicategory
+interface. The health aggregate remains deferred to the later closure
+boundary.
 
 ## 17. Completion Definition
 
