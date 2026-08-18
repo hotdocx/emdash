@@ -16,6 +16,12 @@ syntax.
 | $E[f]$ | functorial action of a family on a base arrow | `catd_transport_func` |
 | $H_x$ | the based hom-category $\operatorname{Hom}_W(*,x)$ | `Hom_cat WalkingEnd_cat walking_base x` |
 | $W$, $*$, $\ell$ | WalkingEnd, its base, and its directed generator | `WalkingEnd_cat`, `walking_base`, `walking_loop` |
+| $\mathsf{Path}(A)$ | the category whose objects are elements of $A$ and whose arrows are equality paths | `Path_cat A` |
+| $S^1$, $\mathsf{base}$, $\mathsf{loop}$ | the groupoidal Circle, its point, and its generating path | `Circle_grpd`, `circle_base`, `circle_loop` |
+| $\mathbb Z$ | the successor-localized Integer classifier | `Integer_grpd` |
+| $I$, $i_0$, $i_1$, $\mathsf{seg}$ | the groupoidal interval, its endpoints, and generating path | `Interval_grpd`, `interval_i0`, `interval_i1`, `interval_seg` |
+| $\mathsf{Groupoidify}(C)$ | free groupoidal realization of a directed category $C$ | `Groupoidify C` |
+| $\eta_C:C\to\mathsf{Path}(\mathsf{Groupoidify}(C))$ | the whole free-inversion unit | `groupoidify_unit_func C` |
 | $\mathsf{Code}$ | the Nat-valued directed family over $W$ | `walking_Code_catd` |
 | $\mathsf{encode}_x(p)$ | apply $\mathsf{Code}[p]$ to zero | `walking_encode` |
 | $\ell^n$ or $\mathsf{power}(n)$ | the $n$th generator-prefix power | `walking_power` |
@@ -27,6 +33,9 @@ syntax.
 | $u^*(h)$ | precomposition by $u$, namely $h\circ u$ | `hom_precomp_along_fapp0` |
 | $\eta[f]$ | off-diagonal action of a transfor on $f:x\to y$ | `tapp1_fapp0` |
 | $\chi^\Phi_{(p,u)}$ | displayed transport-comparison component | `fdapp1_int_cell` |
+| $\phi^F_{g,f}:F[g]\circ F[f]\Rightarrow F[g\circ f]$ | the functor compositor extracted from whole laxity | `fapp1_compositor` |
+| $\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ | strict-functor objects with the ambient lax-arrow and higher-hom tower | `GrayHom_lax A B` |
+| $A\otimes_R B$ | the stable tensor head selected by the checked right Gray closure | `GrayTensor_R A B` |
 | $P:A\rightsquigarrow B$ | a Cat-valued profunctor on $A^{\mathrm{op}}\times B$ | `Prof A B` |
 | $U_A$ | the unit hom profunctor | `Unit_prof A` |
 | $P\otimes_B Q$ | selected fixed-middle profunctor tensor | `Prof_tensor P Q` |

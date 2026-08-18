@@ -22,7 +22,13 @@ topology-local ring behaviour on the actual slice, and derives a selected
 chart intersection from the global structure presheaf.
 [Chapter 24](#chapter-24) constructs Laurent coordinate changes on that
 literal overlap, packages the resulting supplied projective-line capability,
-and separates it from the still-unconstructed graded `Proj` route. The
+and separates it from the still-unconstructed graded `Proj` route. The fourth
+spiral begins with paths, structured transport, and groupoidal closure in
+[Chapter 25](#chapter-25). [Chapter 26](#chapter-26) carries out the
+Circle/Integer encode–decode theorem; [Chapter 27](#chapter-27) passes from
+the WalkingEnd and WalkingArrow tests to category-indexed free inversion; and
+[Chapter 28](#chapter-28) recovers a directed interchanger from whole laxity
+inside one profiled Gray closure. The
 [contents](#contents) and
 [glossary/index](#appendix-glossary) provide stable anchor-based navigation.
 
@@ -30,11 +36,11 @@ Five reading paths make the dependencies explicit:
 
 | Reader | Main path | Consult when needed |
 | --- | --- | --- |
-| type theorist | Prologue; Chapters 1, 3–8, 10, and 15 | Chapters 2 and 9 for directed action; Appendix G for the formal presentation |
-| category theorist | Prologue; Chapters 2, 5, and 8–24 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
+| type theorist | Prologue; Chapters 1, 3–8, 10, 15, and 25–27 | Chapters 2, 9, and 28 for directed action and laxity; Appendix G for the formal presentation |
+| category theorist | Prologue; Chapters 2, 5, and 8–28 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
 | algebraic geometer | Chapters 13, 16, and 18–24 | Chapters 2, 3, 5, 6, and 12 for the directed, logical, inductive, universal, and adjoint foundations |
-| implementer | Chapters 1, 2, 6, 8, and 9; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
-| external reviewer | Chapters 2.6, 8, and 9; then the integrated reviewer, live or local | Appendices A, B, F, and G for notation, evidence, status, and architecture |
+| implementer | Chapters 1, 2, 6, 8, 9, and 25–28; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
+| external reviewer | Chapters 2.6, 8, 25–28; then the integrated reviewer, live or local | Appendices A, B, F, and G for notation, evidence, status, and architecture |
 
 These are paths through one dependency graph, not separate foundations. In
 particular, the category-theory route still uses equality-local reasoning, and
@@ -97,4 +103,7 @@ book, Zeuner's constructive algebraic geometry, and Pédrot's computational
 sheafification work are versioned and section-mapped in
 `book/references/third-party-sources.json`. The relevant licenses and kinds of
 adaptation are recorded there, and emdash's mathematical changes are stated
-rather than hidden behind a change of symbols.
+rather than hidden behind a change of symbols. Hadzihasanovic's combinatorial
+Gray products and oriented cubes are registered there as comparative
+bibliography only: Chapter 28 does not copy their prose or claim to have
+constructed the same full tensor.

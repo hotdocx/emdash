@@ -9,9 +9,12 @@ category theory, weighted universal constructions, directed duality, and a
 categorical-kernel-first formal presentation. A third follows Yoneda's probes
 through presheaves, sieves, sites, and sheafification into constructive
 algebraic geometry, taking the invertibility sieve $D_R(f)$ as prior to any
-representing open. Chapter details, notation, and cross-references may still
-change. The active implementation remains authoritative whenever prose and
-code disagree.
+representing open. A fourth returns from directed motion to its groupoidal
+realization: paths close selected formers, the Circle restores inverse powers,
+groupoidification freely realizes directed cells as paths, and a profiled Gray
+closure exposes a genuinely directed interchanger. Chapter details, notation,
+and cross-references may still change. The active implementation remains
+authoritative whenever prose and code disagree.
 
 Copyright © 2026 the emdash contributors. Except where separately identified,
 the book text is licensed under CC BY-SA 3.0. See

@@ -2,9 +2,10 @@
 
 # Appendix F. Implementation Status And Research Directions
 
-This appendix summarizes the boundary of the expanded development edition.
-The generated [evidence register](#appendix-evidence) remains the detailed
-claim-by-claim authority.
+This appendix summarizes the boundary of the fourth-spiral groupoidal-
+realization development edition. The generated
+[evidence register](#appendix-evidence) remains the detailed claim-by-claim
+authority.
 
 ## F.1 Status Matrix
 

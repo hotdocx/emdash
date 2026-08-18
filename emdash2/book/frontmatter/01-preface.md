@@ -98,6 +98,23 @@ an assumption-explicit projective-line presentation: the overlap calculation
 is checked, while construction of the global object, graded `Proj`, general
 projective space, and non-affineness remain visible boundaries.
 
+A fourth spiral begins in Chapters [25](#chapter-25)–[28](#chapter-28). It
+returns the directed theory to the groupoidal layer without identifying the
+two. Paths in products split and reassemble homwise, and dependent transport
+through those coordinates agrees coherently with primitive equality
+induction. The Circle then restores the inverse powers deliberately absent
+from WalkingEnd: successor-localized integers support an internal
+encode–decode proof of its based loop space. WalkingEnd and the two-ended
+WalkingArrow next become finite tests of free inversion before the same
+mapping property is stated for an arbitrary source category. The final
+chapter turns back toward direction. Whole internal laxity yields a
+computational strict-functor profile, one selected right Gray closure, and a
+nonidentity interchanger on the walking square. These are substantial checked
+slices, not a claim that every categorical former is groupoidally closed,
+that source-functorial groupoidification has already been packaged as an
+adjunction, or that a full Crans–Gray biclosed monoidal structure has been
+constructed.
+
 [Appendix G](#appendix-formal-presentation) then states how the mathematical
 surface, checked categorical kernel, bounded TypeScript elaborator through
 explicit Core, and external models fit together, with the Lambdapi kernel

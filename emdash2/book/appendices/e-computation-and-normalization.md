@@ -53,7 +53,39 @@ restate generic preservation of identity or composition. The decoder's
 normalization cell is the displayed hom-action of one constructed functor; it
 is not a custom recursion rule for every arbitrary based arrow.
 
-## E.3 Direction And Variance In Normal Forms
+## E.3 Selected Groupoidal And Gray Boundaries
+
+The Circle and Interval illustrate why “constructor computation” must name
+the observer. Their dependent eliminators reduce at the point constructors,
+and applying dependent path action to the generating loop or segment reduces
+to the supplied `PathOver` datum. Ordinary constant-family recursion inherits
+that dependent computation. Its familiar homogeneous `ap` equation is instead
+an internal equality derived through the constant-family `PathOver` bridge;
+it is not a second rewrite competing for the same observation.
+
+Classified truncation has a similarly precise boundary. `Trunc_ntype(n,A)`
+constructs a code in `NType_cat(n)`, decoding that code exposes the stable
+carrier `Trunc_grpd(n,A)`, and restricted induction reduces on
+`trunc_intro(a)`. Contractibility of the set truncation of the Circle is a
+proved property. The carrier is not made judgmentally equal to `Unit`.
+
+Generic groupoidification computes at represented points and at the canonical
+dependent action over every represented source arrow. Restriction and
+extension remain whole functors, while their beta and eta laws are paths
+between whole functors. Thus the universal property controls higher action
+without replacing every composite mapping expression by one runtime normal
+form. The compositor of the unit is retained as a directed cell with a next
+action; it is not globally collapsed to identity.
+
+The Gray experiment makes strictness local rather than global. The generic
+compositor reduces to identity when its functor is exposed through the stable
+decoder of a strict-functor code. The same observation on an arbitrary rigid
+ambient functor does not reduce. Curry and uncurry for the selected right
+closure have whole beta/eta paths, and the walking-square interchanger is a
+nonidentity directed cell projected from whole laxity. These facts do not
+install a general weak-category normalizer or a full Crans–Gray tensor.
+
+## E.4 Direction And Variance In Normal Forms
 
 Covariant postcomposition and contravariant precomposition have different
 runtime owners. Their mathematical comparison through opposites is available
@@ -66,7 +98,7 @@ forms are joined only where a typed consumer requires it. Broad eta-style
 rewrites are avoided because unification is experimental and because a
 functor-level normal form may be needed to act on the next cell.
 
-## E.4 How A Checked Prose Claim Is Reviewed
+## E.5 How A Checked Prose Claim Is Reviewed
 
 For a code-facing claim, the review path is:
 
@@ -83,7 +115,7 @@ workflow: an owner-position probe, bounded typecheck, warning comparison when
 relevant, focused assertions, and full CI before handoff. Book prose does not
 authorize changing kernel normal forms merely to make an explanation shorter.
 
-## E.5 What Has Not Been Proved Metatheoretically
+## E.6 What Has Not Been Proved Metatheoretically
 
 The passing executable checks establish the selected interfaces and
 regression observations. They do not by themselves prove global confluence,

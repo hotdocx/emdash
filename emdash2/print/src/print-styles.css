@@ -504,6 +504,8 @@ body {
 .document-book .paper-body table {
   font-size: 8.4pt;
   line-height: 1.2;
+  /* Let long book tables begin below their heading and split between rows. */
+  break-inside: auto;
 }
 
 .document-book .paper-body thead {

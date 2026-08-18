@@ -234,6 +234,17 @@ affine localization, place the invertibility sieve before any representing
 open, and assemble site-relative scheme and supplied projective-line
 presentations without concealing their hypotheses.
 
+The fourth spiral returns to the relation between paths and arrows.
+[Chapter 25](#chapter-25) realizes selected directed action inside path
+categories and compares product transport with equality induction.
+[Chapter 26](#chapter-26) restores the inverse powers missing from the central
+WalkingEnd theorem by proving the Circle/Integer encode–decode equivalence.
+[Chapter 27](#chapter-27) upgrades that comparison to free inversion, first
+for one- and two-endpoint walking shapes and then for an arbitrary source
+category. [Chapter 28](#chapter-28) keeps the target directed again: whole
+laxity, a computational strict profile, and one right Gray closure produce a
+nonidentity walking-square interchanger with higher action still available.
+
 The larger aim is not merely to calculate one hom. It is to show how a type
 theory can let groupoidal equality and noninvertible arrows coexist, interact,
 and compute—without quietly turning one into the other.

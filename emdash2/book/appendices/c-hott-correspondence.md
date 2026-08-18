@@ -1,12 +1,20 @@
 <a id="appendix-hott-correspondence"></a>
 
-# Appendix C. From The Circle To The Walking Endomorphism
+# Appendix C. From The Circle To The Walking Endomorphism—And Back
 
 The proof of Theorem 8.1 is inspired by the encode-decode calculation of the
 loop space of the circle in the [*Homotopy Type Theory* book](#ref-hott-book).
 This appendix
 records the correspondence so that the analogy can guide the reader without
 smuggling groupoidal assumptions into the directed theorem.
+
+The comparison is no longer merely retrospective or prospective. Chapter 26
+checks the Circle side of the analogy with a successor-localized Integer
+classifier, while Chapter 27 proves that mapping out of the Circle into a
+groupoid is equivalent, as a whole mapping object, to mapping out of
+WalkingEnd through paths. The appendix therefore records both the deliberate
+change from inverse to forward powers and the checked free-inversion passage
+back.
 
 The source reference is revision
 `578b85cc8d586b1677ec4335148adeb443057d24` of the HoTT Book

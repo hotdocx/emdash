@@ -102,3 +102,15 @@ is not licensed for textual adaptation here. It is used only as a
 bibliographic and conceptual reference: the exposition, notation, examples,
 and emdash correspondence in this book are newly written, and no passage from
 Došen's text is copied or closely paraphrased.
+
+## Hadzihasanovic's higher-categorical diagrams
+
+Chapter 28 uses the Gray-product and oriented-cube discussion in Amar
+Hadzihasanovic's *Combinatorics of Higher-Categorical Diagrams*,
+arXiv:2404.07273v2, as comparative mathematical orientation. The source is
+cited rather than textually adapted: no passage is copied or closely
+paraphrased. In particular, the chapter distinguishes Hadzihasanovic's
+combinatorially constructed higher-dimensional products from emdash's checked
+and deliberately narrower experiment—one profiled right closure and its
+walking-square interchanger. The exact sections and reference-only boundary
+are recorded in `references/third-party-sources.json`.

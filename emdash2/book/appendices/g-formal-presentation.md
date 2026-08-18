@@ -541,6 +541,9 @@ register supplies the exact owner and reviewer for each cited claim.
 | the ringed-space cover, affine-chart, site-relative-scheme, and chart-overlap modules | one supplied global ringed object, constructively generated covers, whole actual-slice restrictions, affine realizations, topology-local rings, and inherited overlaps |
 | `emdash3_2_commutative_algebra_laurent.lp`, `emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`, `emdash3_2_commutative_algebra_projective_line.lp` | universal-property coordinate inversion on one literal overlap and the supplied projective-line boundary; no graded `Proj` construction |
 | `emdash3_2_eq1_*.lp`, `emdash3_2_nat_arithmetic.lp`, `emdash3_2_walking_end_hit.lp` | equality-valued higher action, reusable arithmetic, and the WalkingEnd encode-decode development |
+| the groupoidal-closure, Integer, Circle, truncation, and connectedness modules | path-former comparisons, successor-localized integers, Circle encode–decode, classified truncation, and the selected connectedness consumer |
+| the groupoidal-interval, walking-comparison, and groupoidification modules | two finite free-inversion tests, category-indexed formation and whole unit, target extension/restriction, whole mapping equivalence, compositor, and Interval recovery |
+| the whole-laxity and Gray profile/right-closure modules | displayed and ordinary whole laxity surfaces, computational strict-functor codes, the shared Gray hom profile, one selected right closure, and the derived walking interchanger |
 | `emdash3_2_checks.lp` and `examples/` | executable diagnostics and independent reviewer-facing witnesses rather than mathematical owners |
 
 Imports use `require`; `open` brings imported public names into scope. The
@@ -727,6 +730,108 @@ projection joins for the concrete ordinary-recursion consumers.
 > `WE-CONTEXTUAL-ELIMINATOR`, and
 > `DHIT-DERIVED-ELIMINATORS`. The absence of a uniqueness theorem is part
 > of the formal statement, not a prose omission.
+
+### Selected Groupoidal HITs And Free Inversion
+
+The groupoidal signatures used by the fourth spiral share the ordinary
+equality eliminator but select different constructor boundaries.
+
+| Construction | Formation and introduction | Selected elimination and computation | Whole boundary |
+| --- | --- | --- | --- |
+| Circle | `Circle_grpd`, `circle_base`, `circle_loop` | unrestricted dependent `circle_ind`; point beta and dependent `PathOver` loop beta compute | ordinary constant-family `ap` beta is propositional; the based loop carrier is equivalent to Integer |
+| Interval | `Interval_grpd`, `interval_i0`, `interval_i1`, `interval_seg` | dependent `interval_ind`; both endpoint betas and dependent segment beta compute | ordinary segment `ap` beta is propositional; WalkingArrow supplies the free-inversion comparison |
+| classified truncation | `Trunc_ntype(n,A)` in `NType_cat(n)`, with point `trunc_intro` | elimination only into classified $n$-truncated fibres; point beta computes | decoding exposes `Trunc_grpd(n,A)` and retained truncation evidence without identifying the result with an arbitrary equivalent carrier |
+| groupoidification | `Groupoidify(C)` with one whole unit $\eta_C:C\to\mathsf{Path}(\mathsf{Groupoidify}(C))$ | recursion computes on represented points and on dependent action over represented arrows | extension and restriction are whole functors with path-valued beta/eta and retained higher action |
+
+The Circle and Interval path-constructor computations are attached to
+dependent action:
+
+$$
+\operatorname{apd}
+  (\mathsf{circle\_ind}(D,b,\ell),\mathsf{loop})
+\rightsquigarrow \ell,
+$$
+
+and analogously for `interval_ind` at `seg`. Passing to a constant family
+produces the familiar homogeneous path only after the general bridge from
+constant-family `PathOver` to `ap`. The resulting equation is internal
+equality, not a second rewrite. This keeps one higher-constructor owner while
+still recovering the usual recursion theorem.
+
+For a category $C$ and groupoid $G$, the free-inversion boundary is the whole
+mapping equivalence
+
+$$
+\operatorname{Hom}_{\mathsf{Grpd}}
+  (\mathsf{Groupoidify}(C),G)
+\simeq_{\omega}
+\operatorname{Functor}
+  (C,\mathsf{Path}(G)).
+$$
+
+Restriction is path action followed by precomposition with $\eta_C$;
+extension is the categorical-HIT recursor varying in the entire source
+representation. Their beta and eta are paths between whole functors, so their
+first and next hom actions remain available. This is the target-side universal
+property for every fixed $C$. The present package does not yet construct the
+action of `Groupoidify` on an arbitrary source functor or assemble the
+resulting adjunction.
+
+<!-- evidence:CIRCLE-HIT-COMPUTATION -->
+<!-- evidence:WALKING-INTERVAL-GROUPOIDIFICATION -->
+<!-- evidence:GENERIC-GROUPOIDIFICATION-MAPPING -->
+
+> **Formal status — checked selected signatures.** Evidence
+> `CIRCLE-HIT-COMPUTATION`, `WALKING-INTERVAL-GROUPOIDIFICATION`, and
+> `GENERIC-GROUPOIDIFICATION-MAPPING`. These are computationally reviewed HIT
+> slices with whole action; they do not constitute a general HIT declaration
+> compiler or a complete computational HoTT metatheory.
+
+### Whole Laxity And The Profiled Gray Closure
+
+The strict naturality cuts of the historical prototype do not exhaust the
+internal action. Before pointwise projection, the displayed hom calculus owns
+a whole laxity transformation. Ordinary post/left and pre/right comparisons
+are transparent specializations of that displayed owner, and the functor
+compositor is its identity-transfor specialization:
+
+$$
+\phi^F_{g,f}:F[g]\circ F[f]\Longrightarrow F[g\circ f].
+$$
+
+Because $f$ still ranges over a whole hom category, one further hom action can
+observe how $\phi$ varies. A path-valued target makes the comparison
+invertible. A decoded strict-functor code instead makes the selected
+compositor compute to identity. These are target and profile specializations
+of one action, not duplicate functor theories.
+
+The category $\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ uses strict-functor codes
+as objects and reuses the ambient transfor and higher-hom tower between their
+decoded carriers. One selected right closure is checked:
+
+$$
+\mathsf{GrayHom}_{\mathrm{lax}}(A\otimes_R B,C)
+\simeq_{\omega}
+\mathsf{GrayHom}_{\mathrm{lax}}
+  \bigl(A,\mathsf{GrayHom}_{\mathrm{lax}}(B,C)\bigr).
+$$
+
+Coevaluation at the walking-arrow shape exposes four vertices and two
+coordinate routes. Projecting the already-existing whole post/left laxity
+action supplies their oriented interchanger and retains its next action. No
+independent square axiom is introduced. The checked slice does not supply the
+mirror closure, tensor functoriality and coherence, or a full Crans–Gray
+biclosed monoidal structure.
+
+<!-- evidence:FUNCTORD-WHOLE-LAXITY -->
+<!-- evidence:GRAY-COMPUTATIONAL-PROFILE -->
+<!-- evidence:GRAY-RIGHT-CLOSURE -->
+
+> **Formal status — checked selected profile.** Evidence
+> `FUNCTORD-WHOLE-LAXITY`, `GRAY-COMPUTATIONAL-PROFILE`, and
+> `GRAY-RIGHT-CLOSURE`. The result is a computational stress test for the
+> foundations, not a reclassification of every existing functor as globally
+> lax or strict.
 
 ### Adjunction And Weighted Representability
 

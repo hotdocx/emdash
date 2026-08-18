@@ -101,6 +101,21 @@ preceding dimension. See [Chapter 7](#chapter-7).
 It is not definitionally an ordinary HoTT precategory. See
 [Chapters 2](#chapter-2) and [10](#chapter-10).
 
+<a id="glossary-circle"></a>
+
+**Circle.** The selected groupoidal HIT with one point and one generating
+path. Its dependent eliminator computes at the point and on dependent action
+over the loop; its based loop carrier is equivalent to the successor-localized
+Integer classifier. See [Chapter 26](#chapter-26).
+
+<a id="glossary-compositor"></a>
+
+**Compositor.** The directed comparison
+$F[g]\circ F[f]\Rightarrow F[g\circ f]$ obtained by specializing whole
+transfor laxity to the identity transfor of $F$. It may become invertible in a
+path target or reduce to identity for a selected strict code without being
+globally erased. See [Chapters 25](#chapter-25) and [28](#chapter-28).
+
 <a id="glossary-commutative-ring"></a>
 
 **Commutative ring.** A set-valued carrier with zero, one, addition,
@@ -261,6 +276,14 @@ the core, which retains arrows already invertible, and from truncation, which
 lowers the homotopy level of groupoidal data. Source functoriality and the
 packaged adjunction remain future interfaces. See [Chapter 27](#chapter-27).
 
+<a id="glossary-gray-profile"></a>
+
+**Gray profile, selected.** The computational full-subcategory facade
+$\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ whose objects are strict-functor codes
+and whose arrows and higher homs reuse the ambient transfor tower. One checked
+right closure yields a walking-square interchanger; a full Crans–Gray
+biclosed monoidal structure is not claimed. See [Chapter 28](#chapter-28).
+
 <a id="glossary-hom-action"></a>
 
 **Hom action.** The functorial action induced on a hom-category. Emdash keeps
@@ -282,6 +305,27 @@ and arrows between them; it is not automatically an ordinary sieve. See
 all probes $p:V\to U$ for which $p^*s$ is a unit. An open may represent this
 sieve, but representability is a further claim. See
 [Chapter 18](#chapter-18).
+
+<a id="glossary-integer-line"></a>
+
+**Integer line.** The set-truncated telescope localization of natural-number
+successor. A stage pair $(n,x)$ represents $x-n$; executable successor and
+predecessor are inverse, and the resulting self-equivalence supplies Circle
+monodromy. See [Chapter 26](#chapter-26).
+
+<a id="glossary-interchanger"></a>
+
+**Interchanger.** A directed higher cell comparing the two coordinate routes
+across the selected Gray walking square. In the checked slice it is projected
+from whole post/left laxity and retains a next action; it is not postulated as
+an isolated square axiom. See [Chapter 28](#chapter-28).
+
+<a id="glossary-interval"></a>
+
+**Interval, groupoidal.** The selected HIT with endpoints $i_0,i_1$ and one
+generating path between them. It is equivalent to the groupoidification of
+the directed WalkingArrow, without the two carriers being definitionally
+identified. See [Chapter 27](#chapter-27).
 
 <a id="glossary-join"></a>
 
@@ -320,6 +364,13 @@ one common base, together with whole paths identifying both internally
 constructed coordinate-inversion endomorphisms with the overlap identity.
 The transition maps are constructed; the identity paths are supplied. See
 [Chapter 24](#chapter-24).
+
+<a id="glossary-laxity-cell"></a>
+
+**Laxity cell.** A directed comparison retained where a strict equation would
+identify its endpoints. Whole laxity varies over an entire hom category, so
+its component and next action arise from one internal operation rather than a
+finite list of unrelated coherence fields. See [Chapter 28](#chapter-28).
 
 <a id="glossary-matching-family"></a>
 
@@ -378,7 +429,15 @@ new categorical semantics. See
 **Path category.** $\mathsf{Path}(A)$, the equality-local groupoidal category
 on a classifier $A$. It embeds ordinary identity reasoning into the directed
 calculus without identifying every directed hom with equality. See
-[Chapter 2](#chapter-2).
+[Chapters 2](#chapter-2) and [25](#chapter-25).
+
+<a id="glossary-path-pseudo-laxity"></a>
+
+**Path-realized pseudo-laxity.** The generic directed compositor viewed in a
+path category. Its underlying cell is an equality and therefore invertible,
+while its whole higher action is retained. This is target-induced
+pseudo-functorial behaviour, not a global strictness rule. See
+[Chapter 25](#chapter-25).
 
 <a id="glossary-pathout"></a>
 

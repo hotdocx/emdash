@@ -454,3 +454,10 @@ The third spiral of the book therefore ends where a good construction should
 end: not with a vague promise that gluing will work, and not with a denial that
 gluing matters, but with a coordinate theorem on an honest overlap and a clear
 account of the global theorem still owed.
+
+The fourth spiral changes direction without abandoning that discipline. It
+returns to the book's first contrast—reversible paths and noninvertible
+arrows—and asks what computation survives when directed structure is viewed
+groupoidally, freely inverted, and then placed back inside a genuinely lax
+higher-categorical comparison. The next chapter begins with the smallest
+bridge: paths in a product and transport through their two coordinates.
