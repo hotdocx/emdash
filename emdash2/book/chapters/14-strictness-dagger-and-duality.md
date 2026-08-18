@@ -31,6 +31,7 @@ The following terms remain separate throughout the book.
 | gaunt category | a HoTT category that is also strict | runtime strictness |
 | native `IsNCat(n,C)` | recursive finite height of the hom-categories | object identity agrees with isomorphism |
 | strict naturality cut | a selected `tapp1` composite reduces to one off-diagonal action | all coherence is judgmental |
+| computational strict-functor code | a decoded functor whose compositor reduces at the selected profile owner | every ambient functor is strict or all higher cells are identities |
 | runtime strictness | an oriented kernel reduction chooses a normal form | object truncation or invertibility |
 | dagger category | identity agrees with *unitary* isomorphism | identity agrees with every isomorphism |
 
@@ -38,6 +39,19 @@ In particular, the HoTT phrase *strict category* begins with a
 **precategory**, not with a univalent category. Chapter 10’s translation table
 uses this definition. A strict precategory may still have nontrivial
 automorphisms that cannot come from its proposition-valued object identity.
+
+The computational code row is the profile used in Chapter 28. Its decoder
+selects functors whose compositor computes to identity while leaving the
+ambient transformation and higher-hom calculus shared with lax maps. This is
+a local syntactic specialization, not evidence that the whole prototype has
+already migrated away from its historical global strict endpoint cuts.
+
+<!-- evidence:GRAY-WALKING-INTERCHANGER -->
+
+> **Formal status — checked.** Evidence `GRAY-WALKING-INTERCHANGER` includes
+> the selected strict-object/lax-arrow profile and its nonidentity walking-
+> square interchanger. The full Crans–Gray monoidal structure remains outside
+> the checked boundary.
 
 ## 14.2 Strict Categories In Ordinary Univalent Foundations
 

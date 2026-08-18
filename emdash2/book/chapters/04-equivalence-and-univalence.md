@@ -301,3 +301,9 @@ type equivalence, and the surrounding universes retain their checked
 univalence interfaces. The lesson is not that univalence disappears. It is
 that univalence governs equivalence and identity, while directed functoriality
 also governs noninvertible action.
+
+Chapter 26 returns to the other side of this contrast with the now-active
+Circle construction. Integer successor is first packaged as an equivalence;
+univalence then turns it into the universe loop used by the universal cover.
+The WalkingEnd and Circle codes therefore share an encode–decode rhythm while
+retaining different reasons why their monodromy is well typed.

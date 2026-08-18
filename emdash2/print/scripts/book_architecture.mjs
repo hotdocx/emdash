@@ -31,3 +31,25 @@ export function deriveNumberedChapterContract(sources, retainedChapterEnd) {
     isContiguous: actualIds.join('\n') === expectedIds.join('\n'),
   };
 }
+
+const PROVENANCE_ID = /^[A-Z][A-Z0-9-]*$/;
+
+export function deriveRequiredProvenanceContract(requiredAdaptations) {
+  if (!Array.isArray(requiredAdaptations)) {
+    return {
+      ids: [],
+      isNonempty: false,
+      isUnique: false,
+      isWellFormed: false,
+    };
+  }
+
+  return {
+    ids: requiredAdaptations,
+    isNonempty: requiredAdaptations.length > 0,
+    isUnique: new Set(requiredAdaptations).size === requiredAdaptations.length,
+    isWellFormed: requiredAdaptations.every(
+      (id) => typeof id === 'string' && PROVENANCE_ID.test(id)
+    ),
+  };
+}

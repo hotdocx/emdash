@@ -25,16 +25,20 @@ category-theoretic setting. In particular, the circle/integer calculation is
 not reproduced as the WalkingEnd/Nat calculation: invertible paths are
 replaced by genuinely directed arrows, integer powers by natural powers, and
 the hard inverse by a directed normalization cell followed by
-one-dimensionality.
+one-dimensionality. Chapter 26 then returns to the Circle itself and adapts
+the universal-cover encode–decode architecture to the checked emdash
+Circle/Integer construction, including its distinct computational and
+categorical boundaries.
 
 The exact source map and adaptation ledger live in
 `references/third-party-sources.json`. They were established before the
 corresponding prose was drafted. The Chapter 8 vertical slice records
 structural and conceptual adaptations from the pinned source, while Chapters
-10–15 adapt all nine sections of `categories.tex` and Appendix G adapts all
-four parts of `formal.tex`. The resulting prose is newly written for the
-directed categorical setting; the ledger records the source labels,
-adaptation kind, and target under this attribution and ShareAlike notice.
+10–15 adapt all nine sections of `categories.tex`, Chapter 26 records the
+Circle HIT and universal-cover source map, and Appendix G adapts all four
+parts of `formal.tex`. The resulting prose is newly written for the directed
+categorical setting; the ledger records the source labels, adaptation kind,
+and target under this attribution and ShareAlike notice.
 
 ## Max Zeuner's constructive algebraic geometry
 

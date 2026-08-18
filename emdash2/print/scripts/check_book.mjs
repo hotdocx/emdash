@@ -7,7 +7,10 @@ import {
   readJsonFile,
   resolveRepoPath,
 } from './book_manifest.mjs';
-import { deriveNumberedChapterContract } from './book_architecture.mjs';
+import {
+  deriveNumberedChapterContract,
+  deriveRequiredProvenanceContract,
+} from './book_architecture.mjs';
 import { loadDocumentRegistry } from './document_registry.mjs';
 
 const ANCHOR_RE = /<a\s+id=["']([A-Za-z0-9][A-Za-z0-9_.:-]*)["']\s*><\/a>/g;
@@ -522,12 +525,18 @@ function checkExpansionContract(manifest, issues) {
   const adaptations = thirdParty.sources?.find((source) => source.id === 'hott-book')
     ?.adaptations ?? [];
   const adaptationIds = new Set(adaptations.map((adaptation) => adaptation.id));
-  if (!Array.isArray(contract.requiredProvenanceAdaptations) ||
-      contract.requiredProvenanceAdaptations.length !== 13 ||
-      new Set(contract.requiredProvenanceAdaptations).size !== 13) {
-    issue(issues, manifest.architecture + ': requiredProvenanceAdaptations must contain 13 unique entries');
+  const requiredProvenance = deriveRequiredProvenanceContract(
+    contract.requiredProvenanceAdaptations
+  );
+  if (!requiredProvenance.isNonempty || !requiredProvenance.isUnique ||
+      !requiredProvenance.isWellFormed) {
+    issue(
+      issues,
+      manifest.architecture +
+      ': requiredProvenanceAdaptations must contain unique well-formed entries'
+    );
   } else {
-    for (const adaptationId of contract.requiredProvenanceAdaptations) {
+    for (const adaptationId of requiredProvenance.ids) {
       if (!adaptationIds.has(adaptationId)) {
         issue(issues, manifest.architecture + ': missing provenance adaptation ' + adaptationId);
       }

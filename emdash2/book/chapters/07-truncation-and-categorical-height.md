@@ -324,27 +324,42 @@ This separation is a model for later proofs:
 The intermediate cell can carry an orientation or support further
 composition even when its equality shadow cannot.
 
-## 7.8 Properties Are Not Reflectors
+## 7.8 From Properties To A Classified Reflector
 
-A general truncation operation would assign to every classifier `A` a
-new classifier `||A||_n`, together with a universal map and an
-elimination principle into `n`-truncated targets. In a directed setting
-one may also ask for categorical truncations that collapse cells above a
-chosen dimension while preserving lower directed structure.
+A truncation operation assigns to every classifier $A$ a new classifier
+$\lVert A\rVert_n$, together with a universal map and elimination into
+$n$-truncated targets. The active groupoidal layer now realizes this idea in
+a classified form. The category $\mathsf{NType}(n)$ contains retained
+$n$-truncated classifiers, and
 
-The active layer does not provide either general reflector. It provides
-predicates on existing classifiers, closure theorems, evidence-retaining
-universes, and consequences of finite categorical dimension. Those tools are
-enough for the WalkingEnd calculation because its one-dimensionality is
-signature data rather than something that must be freely imposed afterward.
+$$
+\mathsf{Trunc}_n(A):\mathsf{NType}(n)
+$$
+
+is the primary result. Decoding its carrier gives the ambient classifier
+$\lVert A\rVert_n$. The point constructor computes, while dependent
+elimination is restricted to motives that themselves land in
+$\mathsf{NType}(n)$. Recursion derives a whole map action; identity,
+composition, and a retained path action follow from that same eliminator
+rather than from an unrelated registry of truncation laws.
+
+This reflector extends rather than replaces the predicates and closure
+theorems developed earlier in the chapter. The predicates state when a given
+classifier is already truncated. The reflector constructs a classified
+truncated target. Finite categorical height remains separate: WalkingEnd's
+one-dimensionality is signature evidence and is not obtained by truncating an
+arbitrary directed category after the fact.
 
 <!-- evidence:TRUNC-REFLECTOR -->
 
-> **Formal status — research boundary.** Evidence `TRUNC-REFLECTOR`.
-> A general truncation HIT or directed categorical reflector remains future
-> work and must come with its own universal and computational properties.
+> **Formal status — checked.** Evidence `TRUNC-REFLECTOR`. The active
+> construction is a computational groupoidal truncation reflector with
+> classified motives. A general directed categorical truncation, arbitrary
+> quotient/HIT schema, and comparison with every classical hub-and-spoke
+> presentation remain future work.
 
 We now have every prerequisite for the main proof: equality-local action,
 functors and directed families, contextual elimination, equivalence packages,
 recursive truncation, and homwise categorical height. The next chapter puts
-them together without identifying direction with invertibility.
+them together without identifying direction with invertibility; Chapter 26
+later returns to the reflector through the connectedness of the Circle.

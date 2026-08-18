@@ -7,7 +7,7 @@ Plan-ID: `EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5`
 Status: **active fourth-spiral book continuation**. The cumulative baseline,
 book contract, stale-claim inventory, evidence boundary, and chapter
 architecture have been reviewed. `BGR-00` and `BGR-ARCH-1` are complete;
-`BGR-REPAIR-2` is the first active prose/evidence row.
+`BGR-REPAIR-2` is complete and `BGR-CH25-3` is the first active chapter row.
 
 Branch: `goal/emdash-book-groupoidal-v3.2`
 
@@ -481,9 +481,9 @@ AI imagery is not part of the mathematical pages.
 | Row | Status | Deliverable and acceptance boundary |
 | --- | --- | --- |
 | `BGR-00` | complete | Create the dedicated branch/worktree at cumulative checkpoint `f4d9303`; bootstrap the pinned workspace; verify clean staged/unstaged state, ancestry, and `workspace:check`; run the green 39-source/141-evidence `book:check`; audit current chapters, article, evidence, provenance, and the 299-page artifact; record the fourth-spiral architecture and exact non-claims. |
-| `BGR-ARCH-1` | complete | `book.json` and `expansion.json` now extend contiguously through Chapters 25–28. Four stable anchored chapter owners contain reader-facing theorem previews and exact boundaries; four coarse checked evidence entries point to active owners/reviewers. The existing generic architecture checker required no code or test change. Release metadata remains at 0.4.0-dev. `book:check` passes for 43 sources, 145 evidence claims, and 2,394 math spans. |
-| `BGR-REPAIR-2` | active | Correct stale formal-status and future-work claims in Chapters 6–8, Appendix C, Appendix F, and `evidence.json`; update Chapters 4/5/9/11/12/14 only where the new narrative needs a bridge. Every changed theorem-like claim must have current evidence and must preserve the directed Nat theorem's original strength. |
-| `BGR-CH25-3` | pending | Write and visually validate Chapter 25, including groupoidal product closure, structured transport, and path pseudo-laxity. |
+| `BGR-ARCH-1` | complete | `book.json` and `expansion.json` now extend contiguously through Chapters 25–28. Four stable anchored chapter owners contain reader-facing theorem previews and exact boundaries; four coarse checked evidence entries point to active owners/reviewers. A real provenance-growth consumer generalized the checker's fixed 13-entry assumption to a nonempty/unique/well-formed contract with focused tests. Release metadata remains at 0.4.0-dev. `book:check` passes for 43 sources and 145 evidence claims. |
+| `BGR-REPAIR-2` | complete | Corrected the stale truncation-reflector, WalkingEnd–Circle free-inversion, and whole-laxity evidence/status boundaries; repaired Chapters 4, 6–9, 12, and 14 plus Appendices C, D, and F; registered the Chapter 26 HoTT adaptations; preserved the directed Nat theorem's original strength. Focused architecture tests pass 5/5, `book:check` passes at 2,410 math spans, the browser render is green at 313 pages, and the review-only PDF passes at 313 pages/16 fonts with representative pages visually inspected. |
+| `BGR-CH25-3` | active | Write and visually validate Chapter 25, including groupoidal product closure, structured transport, and path pseudo-laxity. |
 | `BGR-CH26-4` | pending | Write and visually validate Chapter 26, including Circle computation, Integer encode/decode, monodromy, and connectedness/truncation. |
 | `BGR-CH27-5` | pending | Write and visually validate Chapter 27, including both concrete universal mapping theorems and generic groupoidification with its exact deferred source-action boundary. |
 | `BGR-CH28-6` | pending | Write and visually validate Chapter 28, including internal laxity, strict profiles, the selected Gray right closure, walking square, and interchanger without a full-Gray overclaim. |
@@ -510,7 +510,11 @@ The first implementation row changes only structured book sources:
 
 The existing `deriveNumberedChapterContract` already derives its final
 chapter and expansion count from the manifest, and its tests already cover
-later appended chapters. No renderer or checker change was necessary.
+later appended chapters. The first provenance expansion exposed one separate
+fixed-count assumption in `check_book.mjs`. Its owner is now generalized to a
+nonempty, unique, well-formed requirement list, with focused tests accepting
+13, 15, and 28 entries and rejecting absent, duplicate, and malformed lists.
+No rendering behavior changed.
 
 The owning gate is green:
 
@@ -522,9 +526,50 @@ book:check
   source, provenance, architecture, link, and document validation: passed
 ```
 
-`BGR-REPAIR-2` therefore becomes active before any chapter is expanded. This
+`BGR-REPAIR-2` therefore became active before any chapter was expanded. This
 ordering prevents the new prose from coexisting with known false future-work
 claims in the earlier reader path.
+
+### 12.2 Stale-Claim And Provenance Repair Record — 2026-08-18
+
+Three former research-boundary identifiers are now checked at their current
+owners:
+
+- `TRUNC-REFLECTOR` records classified `NType_cat` formation, restricted
+  elimination, and whole map action;
+- `WE-GROUP-COMPLETION` records the concrete whole WalkingEnd–Circle mapping
+  theorem without claiming a reverse `BNat` functor or monoid package; and
+- `FUNCTORD-WHOLE-LAXITY` records the whole displayed owner, ordinary
+  post/pre surfaces, and functor-compositor specialization without claiming
+  all-coherence or completed strict-cut migration.
+
+The corresponding false future-work statements are removed from Chapters
+7–9, Appendix C, Appendix D, and the status matrix. Short bridges in Chapters
+4, 12, and 14 locate Circle monodromy, the target-side groupoidification
+mapping equivalence, and computational strict-functor profiles without
+duplicating the future chapters. Chapter 6 now distinguishes the selected
+groupoidal interval from a still-absent generic directed-HIT compiler.
+
+The HoTT provenance map now registers the Chapter 26 Circle-HIT and universal-
+cover adaptations before full proof prose is written. The credits and
+Chapter 7 adaptation description are synchronized.
+
+Validation is proportional and green:
+
+```text
+book architecture tests: 5/5
+book:check: 43 sources, 145 cited claims, 2,410 math spans
+book:render: 313 pages, no console/page/request/render failure
+book:pdf:check: 313 pages, 16 embedded fonts
+review PDF sha256: a23d9b97c7ba297eb8f6b94e80f089f7cdd9f1fb3748f89632ea2159efab70d3
+```
+
+Pages containing the repaired Chapter 7 reflector, Chapter 8 free-inversion
+comparison, Chapter 9 laxity boundary, Chapter 12 mapping equivalence,
+Chapter 14 strict-profile table, Appendix C comparison, and all four new
+chapter openings were rendered with Poppler and visually inspected. The PDF
+is a local review artifact under unchanged 0.4.0-dev metadata; it is not
+promoted or released.
 
 ## 13. Proportional Validation Policy
 

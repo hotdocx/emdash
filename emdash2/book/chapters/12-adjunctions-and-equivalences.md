@@ -360,6 +360,29 @@ binary representable comparison. These facts are sufficient for the later
 weighted-limit preservation theorem. They are not yet a complete native
 theory of categorical equivalence.
 
+There is also an important mapping equivalence whose source-functorial
+packaging is not yet an adjunction. For every category $C$ and groupoid $G$,
+restriction along the groupoidification unit gives
+
+$$
+\operatorname{Hom}_{\mathsf{Grpd}}(\mathsf{Groupoidify}(C),G)
+\simeq
+\operatorname{Functor}(C,\operatorname{Path}(G)).
+$$
+
+The forward and inverse operations are whole functors and satisfy whole
+beta/eta comparisons. This is exactly the target-side mapping statement one
+expects from a left adjoint, but the current source assignment has not yet
+been given functor action on $C\to D$.
+
+<!-- evidence:GENERIC-GROUPOIDIFICATION-MAPPING -->
+
+> **Formal status — checked.** Evidence
+> `GENERIC-GROUPOIDIFICATION-MAPPING`. Chapter 27 constructs the unit,
+> recursor, and concrete tests. Calling the current package an adjunction
+> would be premature until `Groupoidify_func` and its source-functor laws are
+> checked.
+
 ## 12.11 The Native Higher Boundary
 
 A higher fully-faithful functor should compare whole hom-categories, then the

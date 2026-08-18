@@ -762,20 +762,34 @@ and cannot move below zero. Natural numbers record the free monoid generated
 by forward motion. The negative integers are missing for the same reason the
 right inverse is missing: direction has not been group-completed.
 
-A future comparison with the circle should therefore proceed by an explicit
-group-completion construction, not by renaming `Nat` to
-`Int` or declaring `ell` invertible.
+The comparison with the Circle now proceeds by exactly such an explicit
+free-inversion construction. A whole functor
+
+$$
+W\longrightarrow\operatorname{Path}(S^1)
+$$
+
+sends the base and directed generator to the Circle base and loop. It sends
+every natural power to the corresponding nonnegative Circle power, and the
+Circle encoder reads that image as the canonical inclusion
+$\mathbb N\to\mathbb Z$. More strongly, restriction along this functor is a
+whole mapping equivalence against every groupoidal target. The theorem does
+not make $\ell$ invertible inside $W$; it characterizes the separate
+groupoidal object obtained by freely allowing inverse motion.
 
 <!-- evidence:WE-GROUP-COMPLETION -->
 
-> **Formal status — research boundary.** Evidence
-> `WE-GROUP-COMPLETION`. No `BInt`/circle group completion
-> or comparison functor is active.
+> **Formal status — checked.** Evidence `WE-GROUP-COMPLETION`. The concrete
+> WalkingEnd–Circle restriction/extension theorem is active and iterable.
+> Chapter 27 places it beside category-indexed groupoidification. A reverse
+> `BNat` functor and a packaged monoid isomorphism for the original carrier
+> theorem remain separate questions.
 
 The calculation has reached its intended boundary. It proves that an opaque
 directed generator has exactly the expected natural powers, and it proves
-noninvertibility rather than assuming it. Stronger categorical universal
-properties are the next layer, not hidden premises of this one.
+noninvertibility rather than assuming it. The later universal mapping theorem
+strengthens the surrounding comparison, but it is not a hidden premise of
+the Nat encode–decode proof.
 
 ## 8.2 Higher Groupoidal Shadows
 

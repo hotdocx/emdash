@@ -323,9 +323,11 @@ would need at least:
 - optional dimension or truncation constructors whose consequences are
   separately controlled.
 
-Pushouts, quotients, directed intervals, and cell complexes would test
+Pushouts, quotients, general directed intervals, and cell complexes would test
 different parts of such a design. None follows merely by changing the name of
-the walking generator.
+the walking generator. The selected groupoidal interval used later in
+Chapters 26–27 is a separate two-point HIT, while its directed WalkingArrow
+source is derived from join; neither supplies a generic signature compiler.
 
 <!-- evidence:DHIT-GENERAL-SCHEMA -->
 

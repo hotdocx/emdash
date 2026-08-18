@@ -295,7 +295,7 @@
             "sec:truncations"
           ],
           "adaptationType": "structural",
-          "description": "Retains recursive h-levels and closure ideas while distinguishing emdash truncation evidence and finite categorical height from an unimplemented truncation reflector or general truncation HIT."
+          "description": "Retains recursive h-levels and closure ideas while distinguishing emdash truncation properties, finite categorical height, and the later classified truncation reflector from a general directed truncation or arbitrary HIT schema."
         },
         {
           "id": "HOTT-PROLOGUE-LOOP-COMPUTATION",
@@ -356,7 +356,35 @@
             "subsec:pi1s1-encode-decode"
           ],
           "adaptationType": "comparative",
-          "description": "Records the precise analogy and the points where invertibility, predecessor, univalence, and group cancellation do not transfer."
+          "description": "Records the precise analogy, the points where invertibility, predecessor, univalence, and group cancellation do not transfer to WalkingEnd, and the later whole free-inversion comparison with the Circle."
+        },
+        {
+          "id": "HOTT-CH26-CIRCLE-HIT",
+          "target": "book/chapters/26-circle-and-integer-line.md",
+          "sourcePath": "hits.tex",
+          "sourceLabels": [
+            "sec:dependent-paths",
+            "sec:circle",
+            "thm:S1rec",
+            "thm:S1ump",
+            "defn-Z",
+            "thm:sign-induction",
+            "thm:looptothe"
+          ],
+          "adaptationType": "structural",
+          "description": "Uses the Circle constructor, induction, recursion, and integer-power progression while making emdash's dependent judgmental loop computation, telescope-localized Integer, and ordinary propositional ap boundary explicit."
+        },
+        {
+          "id": "HOTT-CH26-CIRCLE-ENCODE-DECODE",
+          "target": "book/chapters/26-circle-and-integer-line.md",
+          "sourcePath": "homotopy.tex",
+          "sourceLabels": [
+            "sec:pi1-s1-intro",
+            "sec:pi1s1-universal-cover",
+            "subsec:pi1s1-encode-decode"
+          ],
+          "adaptationType": "structural",
+          "description": "Adapts the universal-cover encode-decode proof as the exposition spine for the checked emdash Circle/Integer equivalence, retaining the distinction among carrier equivalence, categorical Hom equivalence, and whole higher action."
         },
         {
           "id": "HOTT-CAT-9-1",
@@ -504,7 +532,7 @@
             "sec:hott-features"
           ],
           "adaptationType": "comparative",
-          "description": "Replaces the circle-extension story by the book's qualified equality/univalence layers and selected directed WalkingEnd signature."
+          "description": "Compares the book's qualified equality/univalence layers, selected directed WalkingEnd signature, and now-active Circle/Integer computation without presenting any one of them as a generic HIT compiler."
         },
         {
           "id": "HOTT-FORMAL-A-4",

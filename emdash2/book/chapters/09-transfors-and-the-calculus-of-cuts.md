@@ -740,8 +740,10 @@ negative direction.
 - The arbitrary-$K$ product benchmark needs a general chosen-product
   interface. Its $\mathsf{Cat}$ instance still awaits one narrow packaged
   projection/composition comparison; neither gap justifies broad product eta.
-- A displayed family morphism has the component-level laxity cell and its
-  full internal projection ladder, but no duplicate whole-square facade.
+- A displayed family morphism has a whole internal laxity transformation and
+  its component projection ladder. Ordinary post/left and pre/right surfaces
+  are transparent specializations of that owner rather than duplicate
+  naturality squares.
 - General ends, coends, and arbitrary Kan extensions require universal
   interfaces stronger than the selected profunctor operations.
 - Runtime conversion, proof-time comparison, internal equality, and
@@ -749,11 +751,12 @@ negative direction.
 
 <!-- evidence:FUNCTORD-WHOLE-LAXITY -->
 
-> **Formal status — research boundary.** Evidence
-> `FUNCTORD-WHOLE-LAXITY`. A future whole-transfor comparison between
-> $D[p]\circ\Phi_x$ and $\Phi_y\circ E[p]$ should be derived from the internal
-> displayed action, project coherently through higher homs, and serve a
-> concrete consumer. It must not duplicate the component semantics.
+> **Formal status — checked.** Evidence `FUNCTORD-WHOLE-LAXITY`. The whole
+> displayed owner, both ordinary variance surfaces, their capped cells, and
+> the functor-compositor specialization are active. Their next actions remain
+> in the generic hom calculus. This does not claim a complete weak
+> omega-category coherence theorem or remove the prototype's historical
+> strict endpoint cuts.
 
 Cut elimination is therefore not a feature catalogue. It is the organizing
 principle by which functorial type theory decides what should compute, what

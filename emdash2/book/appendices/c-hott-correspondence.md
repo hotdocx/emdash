@@ -125,21 +125,32 @@ These changes explain why a textual search-and-replace from
 
 ## C.5 Stronger Comparisons
 
-The carrier equivalence suggests two future constructions.
+The carrier equivalence suggests two different strengthenings.
 
 First, composition/addition compatibility should package the comparison as a
 monoid isomorphism. Chapter 8 records this as a formal consequence of the
 checked recursion and inverse laws, but the library does not yet expose the
 package.
 
-Second, group completion should freely invert the generator. Only after that
-construction is available should one compare the result with an integer
-one-object category or the circle’s loop object. Such a comparison must state
-whether it concerns carriers, monoids, categories, or a universal property.
+Second, free groupoidal realization should invert the generator without
+silently adding an inverse inside the original directed category. That
+comparison is now active. The functor from WalkingEnd to the Circle sends
+natural powers to nonnegative Circle powers, and restriction along it is a
+whole mapping equivalence from Circle maps into a groupoid to path-valued
+WalkingEnd functors.
 
-> **Formal status — research boundary.** A reverse `BNat` functor,
-> full categorical initiality, group completion, and the precise
-> `BInt`/circle bridge remain future work.
+<!-- evidence:WE-GROUP-COMPLETION -->
+
+> **Formal status — checked.** Evidence `WE-GROUP-COMPLETION`. This is a
+> categorical universal property, not merely a carrier comparison with an
+> integer one-object category. Chapter 27 develops the theorem and its
+> category-indexed successor.
+
+A reverse `BNat` functor, a packaged monoid isomorphism for the Chapter 8
+carrier theorem, source functoriality of generic groupoidification, and the
+resulting adjunction remain future layers. Keeping those claims separate is
+precisely why the completed Circle comparison does not retroactively turn the
+directed Nat proof into a group-valued proof.
 
 ## C.6 Attribution Method
 

@@ -13,13 +13,14 @@ claim-by-claim authority.
 | Equality-local type theory | Equality induction, path action, Sigma/Pi path interfaces, elementary inductives | No claim of a complete standalone HoTT implementation |
 | Directed categories | Iterated homs, identities, composition, functors, transfors, opposites, products | No complete weak omega-category metatheory or model theorem |
 | Directed families | Fibres, transport, family morphisms, Sigma totals, Pi sections, displayed hom action, fibrewise products, pullback totalization, displayed evaluation, and finite canonical sibling/Sigma telescopes | Arbitrary dependency or variance graphs, unrestricted mixed introduction/evaluation, and exchange across genuine dependency remain open |
-| Cut and transfor calculus | Lower-star postcomposition, upper-star precomposition, off-diagonal `tapp1`, horizontal composition, selected universal beta/eta cuts | No unrestricted runtime associativity rewrite or claim that all higher coherence is judgmental |
+| Cut and transfor calculus | Lower-star postcomposition, upper-star precomposition, off-diagonal `tapp1`, horizontal composition, selected universal beta/eta cuts, whole internal displayed laxity, ordinary post/pre surfaces, and the retained functor compositor | No unrestricted runtime associativity rewrite, completed generic lax classifier, or claim that all higher coherence is judgmental |
 | Equivalence and univalence | `TypeEquiv`, groupoid univalence, truncated-universe univalence, native recursive omega-equivalence facade and one-way hom action | No full general object-equality/ordinary-isomorphism equivalence for arbitrary categories |
 | Induction | Nat and equality induction, fixed/varying-source `PathOut` induction, composition benchmark | No general equivalence with homotopy-initial categorical algebras |
-| Directed HITs | One opaque WalkingEnd signature, contextual eliminator, section and recursor specializations | No general directed-HIT signature compiler or arbitrary cell-complex schema |
-| Truncation and height | Recursive truncation properties and closure, evidence-property, finite `IsNCat` object truncation | No general truncation reflector or arbitrary truncation HIT |
-| WalkingEnd calculation | Code, encode, power, spiral, contextual decoder, normalization cell/path, two inverse laws, carrier equivalence and noninvertibility results | No packaged monoid isomorphism, reverse `BNat` functor, full hom-category equivalence, or initiality theorem |
-| Higher groupoidal shadow | Selected Eckmann–Hilton commutativity slice | No claim that all directed structure is groupoidal |
+| Directed and groupoidal HITs | Opaque WalkingEnd and Circle signatures, the groupoidal interval, category-indexed `Groupoidify(C)`, selected dependent eliminators, and constructor computation at their reviewed owners | No general directed/HIT signature compiler, arbitrary pushout or cell-complex schema, or automatic positivity/coherence checker |
+| Truncation and height | Recursive truncation properties and closure, evidence-property, finite `IsNCat` object truncation, classified `NType_cat(n)` targets, point-computing `Trunc_ntype(n,A)`, restricted elimination, and whole map action | No general directed categorical truncation, arbitrary quotient schema, left-exactness theorem, or complete comparison with every hub-and-spoke presentation |
+| WalkingEnd calculation | Code, encode, power, spiral, contextual decoder, normalization cell/path, two inverse laws, carrier equivalence, noninvertibility results, and the whole free-inversion comparison with the Circle | No packaged monoid isomorphism, reverse `BNat` functor, full hom-category equivalence with `BNat`, or directed initiality theorem |
+| Groupoidal realization | Path categories and path functors; product-path split/join and coherent transport; Circle/Integer encode-decode and monodromy; WalkingEnd/Circle and WalkingArrow/interval mapping theorems; category-indexed groupoidification; path-realized pseudo-laxity | Source functoriality and the packaged groupoidification adjunction, closure for every former, generic simplex regressions, and a complete computational HoTT metatheory remain open |
+| Profiled Gray direction | Computational strict-functor codes, the strict-object/lax-arrow `GrayHom_lax` profile, one selected right closure, the walking square, and a nonidentity interchanger with retained next action | No mirror closure, full Crans–Gray biclosed monoidal structure, tensor functoriality/coherence, or global strict-cut migration |
 | Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
 | Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
@@ -54,6 +55,13 @@ Full initiality is a further layer. It asks for a category of endomorphism
 algebras, structured maps, and coherent higher transfors, followed by an
 appropriate contractibility or equivalence theorem.
 
+Generic groupoidification now supplies its target-side mapping equivalence,
+but not yet its action on a source functor $C\to D$. The next categorical
+strengthening is to derive that action from extension of the composite unit,
+prove its identity and composition laws by whole uniqueness, and only then
+package the adjunction with the path-category functor. The mapping theorem
+should not be renamed an adjunction before that source action exists.
+
 ## F.3 Foundational Extensions
 
 A reusable directed-HIT schema should generate contextual elimination and
@@ -61,10 +69,12 @@ constructor computation from typed object, arrow, and higher-cell boundaries.
 Its validation must include rewrite overlap and subject-reduction behavior,
 not only a semantic signature.
 
-A truncation reflector should construct a universal truncated target rather
-than merely certify an existing classifier. Directed categorical truncation
-would additionally need to specify which lower arrows and compositions are
-preserved.
+The active classified truncation reflector now constructs a groupoidal
+$n$-truncated target rather than merely certifying an existing classifier.
+Future work should compare that sorted interface with classical hub-and-spoke
+presentations, add selected quotient consumers, and investigate
+left-exactness. Directed categorical truncation remains a different problem:
+it must specify which lower arrows and compositions are preserved.
 
 The univalence programme should continue to separate carrier equivalence,
 ordinary categorical isomorphism, and native equality-valued recursive
@@ -91,6 +101,12 @@ weighted-limit preservation, its opposite-dual colimit theorem, and the join
 recursor. The checked interfaces are the theorem spine; neighboring Kan,
 end/coend, dagger, collage, and dependent-elimination theory remains
 explicitly status-labeled rather than presented as a feature catalogue.
+
+The selected Gray slice adds a concrete higher-dimensional stress test. Its
+walking-square interchanger is derived from the ordinary internal laxity
+action, but a full Gray theory still needs the mirror closure, tensor action,
+and coherent associativity and unit data. Those are structural projects, not
+extra fields to append to the current interchanger example.
 
 ## F.5 Semantics And Proof-Assistant Engineering
 

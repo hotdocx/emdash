@@ -247,9 +247,19 @@ a separate gluing theorem. See [Chapter 23](#chapter-23).
 
 <a id="glossary-group-completion"></a>
 
-**Group completion.** A future construction freely adjoining inverse motion
-to the walking directed generator. It is the proper route from Nat powers
-toward integers or a circle comparison. See [§8.1.5](#chapter-8-1-5).
+**Group completion.** Free adjoining of inverse motion. The active
+WalkingEnd–Circle theorem gives this comparison as a whole universal mapping
+property, and category-indexed groupoidification extends the construction to
+an arbitrary source category at the target-side mapping boundary. See
+[§8.1.5](#chapter-8-1-5) and [Chapter 27](#chapter-27).
+
+<a id="glossary-groupoidification"></a>
+
+**Groupoidification.** The free realization of directed objects, arrows, and
+higher cells as groupoidal points, paths, and higher paths. It differs from
+the core, which retains arrows already invertible, and from truncation, which
+lowers the homotopy level of groupoidal data. Source functoriality and the
+packaged adjunction remain future interfaces. See [Chapter 27](#chapter-27).
 
 <a id="glossary-hom-action"></a>
 
@@ -519,8 +529,10 @@ transformation through off-diagonal and higher hom action. See
 
 **Truncation evidence.** A recursive property of an existing classifier: at
 the base level it is contractibility, and at successor levels it truncates
-all identity classifiers one step lower. It is not a truncation reflector.
-See [Chapter 7](#chapter-7).
+all identity classifiers one step lower. The property is distinct from the
+active classified truncation reflector, which constructs a new truncated
+target with restricted elimination. See [Chapter 7](#chapter-7) and
+[Chapter 26](#chapter-26).
 
 <a id="glossary-unimodular-presentation"></a>
 

@@ -934,10 +934,40 @@
       ]
     },
     "TRUNC-REFLECTOR": {
-      "status": "research-boundary",
-      "statement": "The active truncation layer supplies properties and packaged truncated universes, not a general truncation reflector or arbitrary truncation HIT.",
-      "owners": [],
-      "reviewers": []
+      "status": "checked",
+      "statement": "The active groupoidal truncation layer has a classified NType_cat(n) target, a primitive Trunc_ntype(n,A) code with decoded carrier Trunc_grpd(n,A), restricted point-computing induction into classified n-types, and a recursor-derived whole map action with identity, composition, and retained Path action.",
+      "owners": [
+        {
+          "file": "emdash3_2_truncation_reflector.lp",
+          "symbol": "NType_cat"
+        },
+        {
+          "file": "emdash3_2_truncation_reflector.lp",
+          "symbol": "Trunc_ntype"
+        },
+        {
+          "file": "emdash3_2_truncation_reflector.lp",
+          "symbol": "trunc_ind"
+        },
+        {
+          "file": "emdash3_2_truncation_reflector.lp",
+          "symbol": "trunc_map_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/computational_truncation_facade.lp",
+          "symbol": "Trunc_ntype"
+        },
+        {
+          "file": "examples/computational_truncation_facade.lp",
+          "symbol": "trunc_ind"
+        },
+        {
+          "file": "examples/computational_truncation_facade.lp",
+          "symbol": "trunc_map_func"
+        }
+      ]
     },
     "WE-SIGNATURE": {
       "status": "checked",
@@ -1341,10 +1371,32 @@
       "reviewers": []
     },
     "WE-GROUP-COMPLETION": {
-      "status": "research-boundary",
-      "statement": "Group completion toward BInt or the circle comparison has not been implemented.",
-      "owners": [],
-      "reviewers": []
+      "status": "checked",
+      "statement": "The concrete WalkingEnd-to-Circle functor sends every directed natural power to the corresponding nonnegative Circle power, and restriction along it is a whole fixed-forward OmegaEquivAlong from Circle maps into every groupoid G to path-valued WalkingEnd functors; source-functorial generic adjunction packaging remains separate.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_circle_completion.lp",
+          "symbol": "walking_to_circle_func"
+        },
+        {
+          "file": "emdash3_2_walking_circle_completion.lp",
+          "symbol": "walking_to_circle_power"
+        },
+        {
+          "file": "emdash3_2_walking_circle_universality.lp",
+          "symbol": "walking_circle_groupoidification_hom_omega"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_circle_completion.lp",
+          "symbol": "walking_to_circle_power"
+        },
+        {
+          "file": "examples/walking_circle_groupoidification_universality.lp",
+          "symbol": "walking_circle_groupoidification_hom_omega"
+        }
+      ]
     },
     "TRANSF-POINT-OFFDIAGONAL": {
       "status": "checked",
@@ -1475,10 +1527,36 @@
       ]
     },
     "FUNCTORD-WHOLE-LAXITY": {
-      "status": "research-boundary",
-      "statement": "A standalone whole-transfor laxity facade between the two transport composites is intentionally deferred; the active owner is the internal displayed hom action and its component projections.",
-      "owners": [],
-      "reviewers": []
+      "status": "checked",
+      "statement": "The active internal displayed action supplies a whole laxity transformation, with ordinary post/left and pre/right whole surfaces obtained as transparent specializations; their capped cells return the existing fdapp1_int_cell witness, and the ordinary functor compositor is the identity-transfor specialization.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "functord_laxity_transf"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "tapp1_post_laxity_transf"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "tapp1_pre_laxity_transf"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "fapp1_compositor"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Ordinary post/pre laxity and functor compositor"
+        },
+        {
+          "file": "examples/dependent_hom_laxity.lp",
+          "symbol": "fapp1_compositor"
+        }
+      ]
     },
     "PROF-CATEGORY": {
       "status": "checked",

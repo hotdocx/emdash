@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { deriveNumberedChapterContract } from './book_architecture.mjs';
+import {
+  deriveNumberedChapterContract,
+  deriveRequiredProvenanceContract,
+} from './book_architecture.mjs';
 
 function sourcesThrough(finalChapterNumber) {
   return [
@@ -42,5 +45,31 @@ test('detects gaps, duplicates, and out-of-order chapter sources', () => {
       1
     );
     assert.equal(contract.isContiguous, false, ids.join(', '));
+  }
+});
+
+test('accepts a growing unique provenance requirement list', () => {
+  for (const count of [13, 15, 28]) {
+    const contract = deriveRequiredProvenanceContract(
+      Array.from({ length: count }, (_, index) => 'HOTT-ADAPT-' + index)
+    );
+    assert.equal(contract.isNonempty, true);
+    assert.equal(contract.isUnique, true);
+    assert.equal(contract.isWellFormed, true);
+  }
+});
+
+test('rejects absent, duplicate, and malformed provenance requirements', () => {
+  for (const required of [
+    undefined,
+    [],
+    ['HOTT-ADAPT-1', 'HOTT-ADAPT-1'],
+    ['hott-adapt-1'],
+  ]) {
+    const contract = deriveRequiredProvenanceContract(required);
+    assert.equal(
+      contract.isNonempty && contract.isUnique && contract.isWellFormed,
+      false
+    );
   }
 });
