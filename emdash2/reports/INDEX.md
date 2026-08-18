@@ -1100,6 +1100,15 @@ record.
   computation, mirror Gray closure, global strict-cut migration, and book
   work remain separate. Synchronized closeout is checkpointed at `709c1e3`.
 
+- `REPORT_EMDASH_V3_2_CIRCLE_JUDGMENTAL_LOOP_COMPUTATION_PLAN_2026-08-18.md`:
+  active bounded normal-form continuation of the completed WalkingEnd--Circle
+  universality plan. It reopens only the deferred Circle higher-constructor
+  computation row: first testing dependent `eq_apd(circle_ind,loop)` at its
+  owner position, then deciding whether ordinary `circle_rec` action is
+  exposed through the existing constant-family projection ladder. Generic
+  groupoidification remains a separate follow-on construction beginning with
+  non-endomorphism and composable-pair source shapes.
+
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization
   decision record. It provides the sorted `NType_cat(n)`

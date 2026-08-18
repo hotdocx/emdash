@@ -370,20 +370,58 @@ symbol pathover_refl
   : τ (@PathOver A P x x (eq_refl x) u u)
 ≔ eq_refl u;
 
-// Dependent action on paths, derived from right-based path induction.
-symbol eq_apd
+// Stable dependent action on paths. Its reflexive computation agrees with
+// right-based path induction; the named theorem below retains the full
+// semantic comparison without unfolding the public action before selected
+// higher constructors can install their own computation.
+injective symbol eq_apd
   [A : Grpd]
   [P : τ A → Grpd]
   (f : Π x : τ A, τ (P x))
   [x y : τ A]
   (p : τ (x = y))
-  : τ (@PathOver A P x y p (f x) (f y))
-≔ @ind_eqr A y
-    (λ x : τ A, λ p : τ (x = y),
-      @PathOver A P x y p (f x) (f y))
-    (eq_refl (f y))
-    x
-    p;
+  : τ (@PathOver A P x y p (f x) (f y));
+
+// Generic reflexive beta preserves the former transparent J normal form.
+rule @eq_apd _ _ $f $x $x (@eq_refl _ $x)
+  ↪ @eq_refl _ ($f $x);
+
+// The stable action remains propositionally identical to its former
+// right-based J expansion on every path. Thus ind_eqr remains the sole
+// primitive equality eliminator.
+symbol eq_apd_ind_eqr_path
+  [A : Grpd]
+  [P : τ A → Grpd]
+  (f : Π x : τ A, τ (P x))
+  [x y : τ A]
+  (p : τ (@= A x y))
+  : τ (@=
+      (@PathOver A P x y p (f x) (f y))
+      (@eq_apd A P f x y p)
+      (@ind_eqr
+        A y
+        (λ x0 : τ A, λ p0 : τ (@= A x0 y),
+          @PathOver A P x0 y p0 (f x0) (f y))
+        (@eq_refl (P y) (f y))
+        x p))
+≔ @ind_eqr
+    A y
+    (λ x0 : τ A,
+      λ p0 : τ (@= A x0 y),
+        @=
+          (@PathOver A P x0 y p0 (f x0) (f y))
+          (@eq_apd A P f x0 y p0)
+          (@ind_eqr
+            A y
+            (λ x1 : τ A, λ p1 : τ (@= A x1 y),
+              @PathOver A P x1 y p1 (f x1) (f y))
+            (@eq_refl (P y) (f y))
+            x0 p0))
+    (@eq_refl
+      (@PathOver
+        A P y y (@eq_refl A y) (f y) (f y))
+      (@eq_refl (P y) (f y)))
+    x p;
 
 builtin "eq"    ≔ =;
 builtin "refl"  ≔ eq_refl;

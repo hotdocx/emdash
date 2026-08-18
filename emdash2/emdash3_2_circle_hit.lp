@@ -53,6 +53,20 @@ injective symbol circle_ind
 // Point-constructor computation is the selected runtime normal form.
 rule @circle_ind _ $b _ circle_base ↪ $b;
 
+/*
+  Dependent action on the generating path computes to the supplied PathOver
+  constructor. Circle, circle_ind, and circle_loop select this normal form;
+  the outer family and endpoints remain inferred. The nested motive and base
+  are retained because replacing either by `_` fails subject reduction.
+*/
+// lhs-audit: keep 1,2 -- nested circle_ind motive/base are subject-reduction guards
+rule @eq_apd
+      Circle_grpd _
+      (λ x : τ Circle_grpd,
+        @circle_ind $D.[] $b.[] $ell.[] x)
+      _ _ circle_loop
+  ↪ $ell;
+
 // Typed view of the runtime point beta.
 symbol circle_ind_beta_base
   (D : τ Circle_grpd → Grpd)
@@ -65,11 +79,8 @@ symbol circle_ind_beta_base
       b)
 ≔ @eq_refl (D circle_base) b;
 
-/*
-  Path-constructor computation is propositional signature data. Its classifier
-  retains the full PathOver proof rather than rewriting generic eq_apd.
-*/
-constant symbol circle_ind_beta_loop
+// Typed view of the runtime path-constructor beta.
+symbol circle_ind_beta_loop
   (D : τ Circle_grpd → Grpd)
   (b : τ (D circle_base))
   (ell : τ (@PathOver
@@ -83,7 +94,12 @@ constant symbol circle_ind_beta_loop
         Circle_grpd D
         (λ x : τ Circle_grpd, @circle_ind D b ell x)
         circle_base circle_base circle_loop)
-      ell);
+      ell)
+≔ @eq_refl
+    (@PathOver
+      Circle_grpd D
+      circle_base circle_base circle_loop b b)
+    ell;
 
 // Ordinary recursion is dependent induction over a constant family.
 symbol circle_rec
@@ -108,7 +124,7 @@ symbol circle_rec_beta_base
   : τ (@= B (@circle_rec B b ell circle_base) b)
 ≔ @eq_refl B b;
 
-// Propositional loop beta retained in its canonical dependent-path form.
+// Dependent loop beta inherited judgmentally from circle_ind.
 symbol circle_rec_beta_loop
   [B : Grpd]
   (b : τ B)

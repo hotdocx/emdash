@@ -167,8 +167,9 @@ the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
 the transparent integer facade over successor telescope localization is
 `emdash3_2_integer_localization.lp`;
-the opaque one-dimensional Circle HIT, its universal cover, and the checked
-based-loop/Integer equivalence are `emdash3_2_circle_hit.lp`;
+the opaque one-dimensional Circle HIT, its judgmental dependent loop action,
+its universal cover, and the checked based-loop/Integer equivalence are
+`emdash3_2_circle_hit.lp`;
 the concrete directed WalkingEnd-to-Circle comparison is
 `emdash3_2_walking_circle_completion.lp`;
 the whole restriction of Circle functions to WalkingEnd representations,
@@ -723,9 +724,10 @@ Use the following order:
     predecessor, sethood, and the set-targeted induction used by Circle;
 70. `emdash3_2_circle_hit.lp` for the opaque one-dimensional Circle HIT,
     unrestricted dependent elimination, judgmental point beta,
-    propositional dependent loop beta, universal Integer cover,
-    encode/decode inverses, and the resulting based-loop and categorical-Hom
-    `TypeEquiv` with Integer;
+    judgmental dependent `PathOver` loop beta through the stable generic
+    `eq_apd` owner, propositional ordinary-`eq_ap` loop observation, universal
+    Integer cover, encode/decode inverses, and the resulting based-loop and
+    categorical-Hom `TypeEquiv` with Integer;
 71. `emdash3_2_walking_circle_completion.lp` for the concrete functor from the
     directed walking endomorphism to the Circle. Its action sends every Nat
     power to the corresponding nonnegative Circle power, and the two encoder
