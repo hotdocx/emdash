@@ -7,8 +7,9 @@ Plan-ID: `EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5`
 Status: **active fourth-spiral book continuation**. The cumulative baseline,
 book contract, stale-claim inventory, evidence boundary, and chapter
 architecture have been reviewed. `BGR-00` and `BGR-ARCH-1` are complete;
-`BGR-REPAIR-2`, `BGR-CH25-3` through `BGR-CH28-6`, and `BGR-XCUT-7` are
-complete, and `BGR-ARTICLE-8` is the active concise-article row.
+`BGR-REPAIR-2`, `BGR-CH25-3` through `BGR-CH28-6`, `BGR-XCUT-7`, and
+`BGR-ARTICLE-8` are complete, and `BGR-RELEASE-9` is the active local book
+release row.
 
 Branch: `goal/emdash-book-groupoidal-v3.2`
 
@@ -489,8 +490,8 @@ AI imagery is not part of the mathematical pages.
 | `BGR-CH27-5` | complete | Chapter 27 is a 3,667-word progression from WalkingEnd/Circle and WalkingArrow/Interval to arbitrary category-indexed groupoidification, including whole units, computation, target extension/restriction, beta/eta, the explicit unit compositor and next action, generic Interval recovery, and a variance comparison with Core/truncation. Two focused evidence claims supplement the reused WalkingEnd and generic claims. `book:check` passes at 153 cited claims/2,683 math spans; the 336-page review PDF passes with 16 embedded fonts, and all nine Chapter 27 pages were inspected after repairing one clipped continuation, an overwide table, and a stranded final fragment. |
 | `BGR-CH28-6` | complete | Chapter 28 is a 3,089-word derivation from whole internal laxity through computational strict-functor codes, the shared strict-object/lax-arrow profile, one selected right closure, coevaluation-derived walking square, and an oriented nonidentity interchanger with retained next action. Two focused evidence claims supplement the whole-laxity and interchanger records; Hadzihasanovic's Gray-product/oriented-cube source is registered as comparative reference only. `book:check` passes at 155 cited claims/2,740 math spans; the 343-page review PDF passes with 16 embedded fonts, and all eight Chapter 28 pages were inspected with Poppler. |
 | `BGR-XCUT-7` | complete | Front matter and transitions now present four spirals; notation, HoTT correspondence, glossary, computation/status/formal appendices, credits, bibliography, and provenance agree with Chapters 25–28 and their exact non-claims. Generated contents/evidence remain owner-generated. A book-only table pagination rule removes inherited title-only table pages without changing article layout. `book:check` passes at 43 sources/155 claims/2,775 math spans; renderer checks pass for the 18-page article and 343-page book; the review PDF passes at 343 pages/16 fonts and representative changed pages were inspected. |
-| `BGR-ARTICLE-8` | active | Rebalance the overview article within its 18-page maximum, release it deterministically, and promote its tracked Markdown/PDF pair locally. |
-| `BGR-RELEASE-9` | pending | Stabilize edition metadata, run deterministic book release twice, verify equal hashes, promote the checked Markdown/PDF pair, and perform page-image QA of title, contents, all new chapter openings, figures, theorem/status blocks, appendices, bibliography, credits, and license. |
+| `BGR-ARTICLE-8` | complete | Rebalanced rather than appended: one over-detailed mixed-telescope passage now funds a theorem-level groupoidification/Gray subsection; the abstract, roadmap, boundaries, conclusion, and references agree. The article remains 18 pages, passes its release gate with 14 embedded fonts, and is byte-deterministic across two exports. Poppler QA repaired two overwide displays and a split reference. The checked owner pair is promoted byte-identically to `docs/emdash3_2.{md,pdf}`. |
+| `BGR-RELEASE-9` | active | Stabilize edition metadata, run deterministic book release twice, verify equal hashes, promote the checked Markdown/PDF pair, and perform page-image QA of title, contents, all new chapter openings, figures, theorem/status blocks, appendices, bibliography, credits, and license. |
 | `BGR-CLOSE-10` | pending | Synchronize this plan, parent `ILGR-BOOK-1`, report index, public README/status claims, exact artifact hashes/page counts, and clean staged scope. Run no unrelated kernel/TypeScript aggregates; carry forward `f4d9303` semantic health unless a semantic source changes. Leave remote publication for explicit authorization. |
 
 ### 12.1 Architecture Implementation Record — 2026-08-18
@@ -818,6 +819,51 @@ table, revised HoTT correspondence, every new glossary-entry page, computation
 and status additions, both new formal-presentation sections, and the updated
 credits. The review PDF remains ignored under unchanged 0.4.0-dev metadata;
 artifact promotion belongs to `BGR-RELEASE-9`.
+
+### 12.8 Concise Article Record — 2026-08-18
+
+The overview article remains a concise architecture paper rather than a
+miniature copy of the book. Its 8,929 words and 18 pages now include the
+fourth-spiral results by replacement:
+
+- the abstract and opening claim add the target-side universal mapping
+  property of `Groupoidify(C)` and name the profiled Gray interchanger;
+- a duplicated implementation-level mixed-telescope walkthrough is
+  compressed while retaining the decisive object/action validation;
+- §8.4 now moves from Path-product closure and Circle computation through the
+  WalkingEnd/Circle and WalkingArrow/Interval tests to the arbitrary-source
+  mapping-object equivalence;
+- the same subsection derives the compositor from whole laxity, distinguishes
+  path-induced pseudo behaviour from computational strict codes, and states
+  the selected right Gray closure and walking interchanger;
+- the research-boundary list now defers source functoriality and adjunction
+  packaging rather than the already-active generic object/mapping boundary,
+  and separately defers full Gray monoidality and strict-cut migration; and
+- the conclusion and bibliography include the groupoidal payoff and
+  Hadzihasanovic comparison without importing implementation chronology.
+
+The first visual pass found two display equations exceeding a two-column
+measure—the groupoidification mapping equivalence and the Gray right closure.
+Both now use aligned two-line layouts. It also found a bibliography item split
+between columns; the citation was tightened without losing its artifact role.
+The abstract, compressed mixed-telescope page, §8.4, research boundaries,
+conclusion, and references were re-rendered with Poppler and inspected.
+
+Validation and promotion evidence:
+
+```text
+article source: 8,929 words
+article:check: 14 registry/architecture tests; Markdown/math validation passed
+article:render: 18 pages; no console/page/request/render errors
+article:pdf:check: 18 pages, 14 embedded fonts
+two consecutive PDF hashes: d5ef1d47aa693229e92f52ae84e762d36b620912bf3b16e178456ab3448ed3db
+promoted Markdown sha256: b30908661134c2c9dcb6619cb5c6752658e35875fdb6bbfd859fbd5b8fd9f935
+promoted PDF sha256: d5ef1d47aa693229e92f52ae84e762d36b620912bf3b16e178456ab3448ed3db
+```
+
+`docs/emdash3_2.md` and `docs/emdash3_2.pdf` are byte-identical to the checked
+article owner and generated PDF. Their 0.2.0-dev research-draft metadata is
+unchanged; local promotion is not remote publication.
 
 ## 13. Proportional Validation Policy
 

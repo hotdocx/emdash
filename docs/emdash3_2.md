@@ -53,8 +53,11 @@ numbers along successor gives an integer line, and an opaque groupoidal
 Circle HIT carries a universal Integer cover. Encode/decode proves
 $\mathrm{Hom}_{S^1}(\mathsf{base},\mathsf{base})\simeq\mathbb Z$; the directed
 walking endomorphism maps to the Circle by the nonnegative inclusion, while
-product paths admit both coherent sequential transport factorizations.
-Fourth, the TypeScript
+product paths admit both coherent sequential transport factorizations. More
+generally, $\mathsf{Groupoidify}(C)$ is characterized by a whole equivalence
+between groupoidal maps out and path-valued functors on $C$. A selected
+strict-object/lax-arrow Gray closure then recovers a nonidentity walking-square
+interchanger from the same internal laxity action. Fourth, the TypeScript
 frontend accepts ordinary, natural, displayed-functorial, and
 displayed-natural abstractions. It recursively factors variable occurrences
 through weakening, pairing, evaluation, reindexing, totalization, and
@@ -65,11 +68,12 @@ factorizations fail closed.
 The result is a working research artifact rather than a completed proof
 assistant. It demonstrates a coherent design across mathematical kernel,
 dependent logical framework, elaboration, checked computation, and a
-client-side reviewer. Arbitrary dependency and variance graphs,
-whole-library transfer, systematic groupoidal closure for every former, a
-commutative-ring lift and left-exactness theorem for constructed sheafification,
-representation-independent schemes, and global metatheory remain explicit
-research boundaries.
+client-side reviewer. Arbitrary dependency and variance graphs, whole-library
+transfer, systematic groupoidal closure for every former, source-functorial
+adjunction packaging for groupoidification, full Gray monoidality, a
+commutative-ring lift and left-exactness theorem for constructed
+sheafification, representation-independent schemes, and global metatheory
+remain explicit research boundaries.
 
 # 1. Why Categorical Variables Should Compute
 
@@ -116,9 +120,10 @@ calculus; the inner calculus gives computational meaning to variables whose
 variation is genuinely categorical. The current groupoidal/type-theoretic
 universe supplies equality, J, dependent pairs, and dependent products as
 well. A checked Circle/Integer encode--decode theorem and representative
-product-transport closure now connect these layers; systematically relating
-every directed construction to its groupoidal specialization remains a later
-programme.
+product-transport closure connect these layers. Category-indexed
+groupoidification now adds the target-side universal mapping property, while
+its source action and packaged adjunction—and systematic closure for every
+former—remain later work.
 
 The same order of construction extends beyond binder syntax. A local
 condition should first be stable under every change of stage; only afterward
@@ -136,17 +141,17 @@ The central claim of this overview is deliberately narrower than a
 foundational completeness theorem:
 
 > A substantial directed dependent calculus, a sieve-to-sheafification
-> application, a minimal outer dependent framework, and a recursive
-> categorical-binder frontend already compose into one executable
-> architecture.
+> application, a computational groupoidal-realization slice, a minimal outer
+> dependent framework, and a recursive categorical-binder frontend already
+> compose into one executable architecture.
 
 The rest of the paper makes that claim concrete. Sections 2 and 3 describe the
 two layers and the directed dependent constructors. Sections 4 and 5 derive
 synthetic arrow induction and its composition normal form. Section 6 explains
 how ordinary and displayed categorical binders compile. Section 7 follows the
 result through explicit Core to the browser artifact. Sections 8 and 9 state
-the local-to-global geometric application and the broader programme's present
-limits.
+the local-to-global geometric application, free groupoidal realization, and
+the broader programme's present limits.
 
 # 2. A Two-Layer Executable Architecture
 
@@ -263,24 +268,16 @@ evaluation. Compiled module interfaces preserve public, protected, and private
 visibility rather than flattening every source declaration into one global
 namespace.
 
-The initial directed continuation contains a small dependency-closed
-Sigma/Pi telescope rather than the entire library. Later qualification
-tranches exercised additional mechanisms—grouped rules, proof comparisons,
-source-ordered modules, generated inductive owners, internal Pi,
-Sigma-transfor operations, and profunctor fragments—through the same engines.
-This is the relevant sense in which transfer becomes mechanical: after
-mathematical review, adding an owner is a typed data and policy operation,
-not a new checker algorithm. It does not mean that an unreviewed rewrite rule
-acquires authority by being parseable.
-
-This separation matters for scale. A categorical operation is represented by
-a semantic owner plus an argument schema, not a bespoke TypeScript AST tag
-with a private evaluator branch. Transfer infrastructure has already handled
-representative opaque and transparent declarations, grouped runtime rules,
-proof-time comparisons, source-ordered modules, and generated inductive
-owners. That evidence does not prove that every remaining Lambdapi declaration
-can be imported as one batch, but it establishes the intended unit of future
-work: reviewed data and policy added to generic engines.
+The transferred profile is a dependency-closed selection rather than the
+entire library. Its generic engines have handled opaque and transparent
+declarations, grouped runtime rules, proof comparisons, source-ordered
+modules, generated inductive owners, internal Pi, Sigma-transfor operations,
+and profunctor fragments. A categorical operation is represented by a
+semantic owner and argument schema, not a bespoke TypeScript AST tag with a
+private evaluator branch. Thus, after mathematical review, extending the
+profile is principally a typed-data and policy operation. This does not imply
+that every remaining declaration can be imported as one batch or that a
+parseable rewrite rule automatically acquires authority.
 
 The public text adapter is intentionally later and thinner. It recognizes a
 bounded mathematical syntax and resolves it into the same typed categorical
@@ -895,28 +892,15 @@ B, C : Catd (Sigma_cat A)
 D : Catd (Sigma_cat P(B,C)).
 ```
 
-The expected type says that the abstraction is a displayed contextual
-functor, not an outer LF lambda or a pointwise function. Lowering proceeds in
-four stages.
-
-1. **Extend by the first dependent slot.** The compiler checks that $A$ is a
-   family over $K$ and changes the active base to $\\Sigma_KA$. The token $a$
-   records both its fibre classifier and the projection back to $K$.
-2. **Form the independent sibling block.** Both $B$ and $C$ are checked
-   against the same active base. Their context is represented by the
-   fibrewise product $P(B,C)$, with `Product_projL_funcd`,
-   `Product_projR_funcd`, and `Product_pair_funcd` as structural owners. The
-   base for the next level becomes its Sigma total.
-3. **Check the final dependency.** The family $D$ must be based on that exact
-   total. A family merely over $K$, or over $\\Sigma_KA$ before the sibling
-   pair, is rejected. The body does not use $d$, so its route contains
-   dependency-aware weakening rather than deleting the level from the
-   telescope.
-4. **Compile the body.** `fibrePair b c` uses the two sibling projections and
-   the displayed pairing owner. The result family is the appropriate
-   reindexing of $P(B,C)$ along the contextual projection. Core emission makes
-   the pullbacks, functor compositions, Sigma projections, and product pair
-   explicit.
+The expected type makes this a displayed contextual functor, not an outer LF
+lambda or a pointwise function. The compiler extends the base to
+$\\Sigma_KA$, verifies that $B$ and $C$ are independent siblings there, and
+represents them by the fibrewise product $P(B,C)$. It then checks $D$ over the
+total containing that pair, inserts dependency-aware weakening because the
+body does not use $d$, and emits the sibling projections and displayed pairing
+owner explicitly. Giving $B$ and $C$ different bases, basing $D$ before the
+sibling pair, exchanging $a$ across a family that depends on it, or returning
+a value from an unrelated displayed family is rejected.
 
 The object component alone would not validate this construction. Let $p$ be
 a base arrow and let $u$ be an internalized arrow in the displayed source.
@@ -935,22 +919,10 @@ The active kernel expresses this at the generic `fdapp1_int_cell` projection
 for `Product_pair_funcd`; it does not introduce a second product-cell
 calculus. The TypeScript consumer transfers the existing owner and rule,
 checks the object and internalized-arrow observations, and retains an opaque
-cell as a non-collapse witness.
-
-Several errors are consequently structural rather than cosmetic. Giving $B$
-and $C$ different bases invalidates the sibling block. Basing $D$ on a total
-that omits the pair invalidates the dependency edge. Exchanging $a$ past
-$B(a)$ is ill typed, while exchanging $b$ and $c$ is meaningful because they
-are independent over the same base. Returning a value from an unrelated
-displayed family fails expected-family checking even if its pointwise fibre
-happens to look similar.
-
-This example also explains why "uniform" is not a requirement on the
-implementation technique. Sequential dependency and fibrewise sibling
-structure may use different compilation routines. The architectural
-requirement is that both routes compose naturally, scale beyond a hard-coded
-body shape, and end in internalized owners whose object and arrow actions are
-checked by the same Core.
+cell as a non-collapse witness. Sequential dependency and fibrewise siblings
+may use different lowering routines; the invariant is that both end in
+composable internal owners whose object and arrow actions are checked by the
+same Core.
 
 The displayed-natural slice demonstrates recursive component composition:
 
@@ -1251,31 +1223,88 @@ of a global object from abstract charts. There is no graded ring interface,
 homogeneous localization, degree-zero construction, `Proj`, general
 projective space, or non-affineness theorem in the active artifact.
 
-## 8.4 The wider programme
+## 8.4 Free groupoidal realization and the Gray test
 
-Local geometry is one application of a larger normalization discipline.
-Cat-valued profunctors are directed families over
-$A^{\\mathrm{op}}\\times B$; representables act by the internal two-sided hom
-action. Selected tensor, co-Yoneda, implication, and weighted-universal
-interfaces reuse strict comparison objects whose forward and backward cuts
-compute. Right-adjoint preservation of weighted limits is assembled from
-mates and comparison composition, while the colimit theorem is obtained by
-opposite normalization rather than a duplicate calculus.
+The same owner discipline connects directed arrows with equality paths.
+For a groupoidal classifier $A$, the category $\\mathsf{Path}(A)$ has elements
+of $A$ as objects and equality as hom. Products are closed under this view
+homwise: a path of pairs splits into its two coordinates and coordinate paths
+reassemble, while direct dependent transport agrees propositionally with
+either sequential coordinate order.
 
-At the groupoidal end, decoded type codes, equality and J, dependent sums and
-products, truncation levels, and staged equivalence interfaces support an
-opaque Circle HIT whose based loop space is explicitly equivalent to the
-successor-localized integers. The walking-endomorphism comparison identifies
-its directed powers with the nonnegative Circle powers. For products, the
-canonical Path-category comparison is homwise an equivalence, and direct
-transport agrees with either sequential coordinate order and with the existing
-structured-J interface. These examples test how directed structure meets
-equality-local reasoning and support the architectural
-conjecture: generic action should own functoriality and naturality, semantic
-constructors should own computation, and elaboration should reconstruct
-structural wiring. They are substantial evidence, not a proof that every
-categorical or geometric construction already belongs to one completed
-foundation.
+The opaque Circle makes the computational boundary sharper. Its dependent
+eliminator reduces both at the base point and when dependent path action is
+observed on the generating loop. The familiar constant-family
+$\\mathsf{ap}$ equation is derived propositionally rather than installed as a
+second runtime rule. A successor-localized Integer classifier supplies the
+universal cover, and encode/decode proves
+
+$$
+\\mathrm{Hom}_{S^1}(\\mathsf{base},\\mathsf{base})
+  \\simeq \\mathbb Z.
+$$
+
+WalkingEnd maps to the Circle by sending its directed generator to the loop;
+natural powers become the nonnegative integer powers. The two-ended
+WalkingArrow similarly maps to a groupoidal Interval. These are finite tests
+of the category-indexed operation
+$\\mathsf{Groupoidify}(C)$, whose constructor is one whole functor
+
+$$
+\\eta_C:C\\longrightarrow
+\\mathsf{Path}(\\mathsf{Groupoidify}(C)).
+$$
+
+For every groupoid $G$, restriction along $\\eta_C$ and the whole extension
+recursor form a fixed-forward mapping-object equivalence
+
+$$
+\\begin{aligned}
+&\\mathrm{Hom}_{\\mathsf{Grpd}}
+  (\\mathsf{Groupoidify}(C),G)\\\\
+&\\qquad\\simeq_{\\omega}
+  \\mathrm{Functor}(C,\\mathsf{Path}(G)).
+\\end{aligned}
+$$
+
+The recursor computes on represented points and dependent first cells.
+Restriction and extension have whole beta/eta paths and retain higher action.
+This is more than a carrier-level free groupoid, but less than a packaged
+adjunction: the action of `Groupoidify` on a source functor has not yet been
+constructed.
+
+The directed side of the same story is exposed by a compositor
+
+$$
+\\phi^F_{g,f}:F[g]\\circ F[f]\\Longrightarrow F[g\\circ f]
+$$
+
+projected from whole internal laxity. In a path target this cell is invertible;
+for a decoded strict-functor code it computes to identity; in an arbitrary
+directed target it may remain noninvertible. Emdash reuses that distinction in
+the profiled category $\\mathsf{GrayHom}_{\\mathrm{lax}}(A,B)$: objects are
+computationally strict functor codes, while arrows and all higher homs come
+from the ambient transfor tower.
+
+One selected right closure is checked:
+
+$$
+\\begin{aligned}
+&\\mathsf{GrayHom}_{\\mathrm{lax}}(A\\otimes_R B,C)\\\\
+&\\qquad\\simeq_{\\omega}
+  \\mathsf{GrayHom}_{\\mathrm{lax}}
+    (A,\\mathsf{GrayHom}_{\\mathrm{lax}}(B,C)).
+\\end{aligned}
+$$
+
+Coevaluation at two walking arrows gives a four-vertex square. Its two
+coordinate routes are compared by a nonidentity interchanger projected from
+whole laxity, with one next action retained. This is a computational coherence
+stress test, not a claim to the full combinatorial or Crans--Gray tensor
+studied in [7]. Together, the geometry and groupoidal slices support the same
+architectural conclusion: generic action should own functoriality and
+naturality, semantic constructors should own computation, and elaboration
+should reconstruct structural wiring.
 
 # 9. Research Boundaries
 
@@ -1315,17 +1344,21 @@ The principal open boundaries are:
   for join remain future work.
 - **Groupoidal closure.** Equality, J, groupoidal dependent sums/products, the
   Circle HIT with $\Omega S^1\simeq\mathbb Z$, its concrete WalkingEnd
-  comparison, and representative product preservation/transport coherence are
-  checked. A generic category-to-groupoid reflector, closure for every former,
+  comparison, the WalkingArrow/Interval test, category-indexed
+  $\\mathsf{Groupoidify}(C)$ with its target-side whole mapping equivalence,
+  and representative product preservation/transport coherence are checked.
+  Source functoriality and the adjunction package, closure for every former,
   and arbitrary motive-directed computational decomposition of J are not.
 - **Metatheory.** No global normalization, confluence, canonicity,
   consistency, decidability, or semantic-soundness theorem is claimed for the
   full combined calculus. Lambdapi's local rule checks and the project's
   diagnostics are implementation evidence, not replacements for those
   theorems.
-- **Higher categories.** The kernel is strict/lax and
-  $\\omega$-oriented. It is not a completed formalization of arbitrary weak
-  $\\omega$-categories.
+- **Higher categories.** Whole laxity, computational strict-functor codes, one
+  profiled right Gray closure, and its walking interchanger are checked. The
+  mirror closure, tensor functoriality and coherence, full Crans--Gray
+  monoidality, global migration of historical strict endpoint cuts, and a
+  general weak-$\\omega$-category metatheory remain open.
 
 These limits are architectural information, not disclaimers added after the
 fact. Fail-closed elaboration, explicit product manifests, runtime versus
@@ -1354,12 +1387,18 @@ completion constructs a Cat-valued reflector through whole return, glue,
 silent coherence, recursion, and uniqueness. The boundaries beyond that
 reflector remain as explicit as the construction itself.
 
+Groupoidal realization exhibits the higher-dimensional payoff. Circle
+encode/decode restores the inverse powers absent from WalkingEnd, generic
+groupoidification characterizes maps out by a whole equivalence, and the Gray
+walking square retains a directed interchanger rather than erasing it into an
+equation.
+
 The current system is bounded, but the design question has a concrete answer:
 readable binders, explicit Core, checked categorical computation, an
-authoritative Lambdapi kernel, sieve-based local geometry, and a client-side
-reviewer fit into one architecture. The remaining work is to extend its
-mathematical and transfer coverage without losing that internalized,
-normalization-first discipline.
+authoritative Lambdapi kernel, sieve-based local geometry, free groupoidal
+realization, and a client-side reviewer fit into one architecture. The
+remaining work is to extend its mathematical and transfer coverage without
+losing that internalized, normalization-first discipline.
 
 # References
 
@@ -1369,9 +1408,10 @@ normalization-first discipline.
    Academic Publishers, 1999.
 3. The Lambdapi contributors. *Lambdapi User Manual*.
    [lambdapi.readthedocs.io](https://lambdapi.readthedocs.io/).
-4. The emdash contributors. *emdash v3.2 Lambdapi and TypeScript Sources*.
-   Accompanying computational artifact.
+4. The emdash contributors. *emdash v3.2 sources*. Accompanying artifact.
 5. Max Zeuner. *Univalent Foundations of Constructive Algebraic Geometry*.
    arXiv:2407.17362v1, 2024.
 6. Pierre-Marie Pédrot. “Pursuing Shtuck.” Preprint, 2023. HAL:
    hal-04251754v1.
+7. Amar Hadzihasanovic. *Combinatorics of Higher-Categorical Diagrams*.
+   arXiv:2404.07273v2, 2024.
