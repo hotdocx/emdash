@@ -175,6 +175,9 @@ the whole restriction of Circle functions to WalkingEnd representations,
 including its stable-precomposition reading, base observation, dependent
 generator `PathOver`, and retained first hom action, is
 `emdash3_2_walking_circle_restriction.lp`;
+the whole Circle extension of WalkingEnd representations, with a computing
+object projection, propositional loop and first-arrow agreement, and retained
+next hom action, is `emdash3_2_walking_circle_extension.lp`;
 the rule-free Path-product preservation and coherent product-transport
 extension is `emdash3_2_groupoidal_closure.lp`;
 the rule-free Path realization of the generic functor compositor, its
@@ -785,14 +788,21 @@ Use the following order:
     and derives its readable base path and dependent loop `PathOver` from one
     whole functor comparison. It constructs no extension inverse, beta/eta,
     generic reflector, rule, or unifier;
-82. `emdash3_2_checks.lp` for executable regression statements;
-83. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+82. `emdash3_2_walking_circle_extension.lp` for the whole inverse candidate
+    on WalkingEnd representations into `Path_cat(G)`. Its object projection
+    computes to Circle recursion on the selected base and generator; generic
+    hom action remains iterable, while loop and first-arrow agreement are
+    explicit equality evidence. It adds one categorical-HIT recursor owner
+    and one object rule, but no generic groupoidification reflector,
+    identity/composition rule, unifier, or whole cancellation claim;
+83. `emdash3_2_checks.lp` for executable regression statements;
+84. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-84. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-85. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+85. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+86. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-86. `reports/INDEX.md` for task-specific plans and decision records.
-87. `book/book.json` and `book/evidence.json` for book source
+87. `reports/INDEX.md` for task-specific plans and decision records.
+88. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

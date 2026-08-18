@@ -4,8 +4,9 @@ Date: 2026-08-17 (America/Toronto)
 
 Plan-ID: `WALKING-CIRCLE-GROUPOIDIFICATION-UNIVERSALITY-V3.2`
 
-Status: **active consumer-first implementation plan**. `WCGU-00` and
-`WCGU-RES-1` are complete; `WCGU-EXT-2` is the next dependency-ready row.
+Status: **active consumer-first implementation plan**. `WCGU-00`,
+`WCGU-RES-1`, and `WCGU-EXT-2` are complete; `WCGU-EQUIV-3` is the next
+dependency-ready row.
 Local green checkpoint commits are authorized by the user's
 standing instruction for this continuation. Push, merge, publication,
 release, history rewrite, branch deletion, and worktree removal are not
@@ -29,7 +30,8 @@ The evolved ignored notebook
 remains recovery evidence and is not an active implementation ledger.
 
 Side-Task-Ledger: `WCGU-00`, `WCGU-RES-1`, `WCGU-EXT-2`, `WCGU-EQUIV-3`,
-`WCGU-MONO-4`, `WCGU-GENERIC-5`, and `WCGU-CLOSE-1`
+`WCGU-CIRCLE-COMP-TODO`, `WCGU-MONO-4`, `WCGU-GENERIC-5`, and
+`WCGU-CLOSE-1`
 
 Infinity-Codex-Origin: session
 `019ffe39-2eb9-7080-88e3-06b77d69b8d1`; selected continuation response
@@ -243,8 +245,9 @@ group before set truncation is `Integer`.
 | --- | --- | --- |
 | `WCGU-00` | complete | The dedicated branch starts at `df8540a`; all worktrees were clean; the archive verifies from the original root; owning Circle/WalkingEnd/path modules pass their focused baselines; and the rule-free restriction probe is green. It established the stable precomposition object normal form, its proof-time raw-composition reading, base evaluation, dependent generator `PathOver`, retained first hom action, and a concrete mismatched-target rejection. |
 | `WCGU-RES-1` | complete | `emdash3_2_walking_circle_restriction.lp` and its focused reviewer promote the whole forward map without a rule or unifier. Direct source/reviewer and affected central diagnostics pass. Its warning inventory is exactly `1122/159`, identical to the predecessor import; the strict LHS audit is zero; and the regenerated catalog contains 2,182 checks across 107 areas with zero unclassified checks. Source registration, active authority routing, and lightweight report/TOC/reference/script gates are synchronized. The replacement all-target health snapshot remains deferred to closeout. Checkpoint: `e240c3e`. |
-| `WCGU-EXT-2` | pending | Construct the Circle extension from a WalkingEnd functor and settle its action on transformations and the first higher cell. If an owner is missing, isolate it with owner-position positive/negative probes before promotion. |
+| `WCGU-EXT-2` | complete | `emdash3_2_walking_circle_extension.lp` promotes the narrow whole categorical-HIT recursor missing from the object-only Circle interface. Its object projection computes to Circle recursion on the WalkingEnd base and generator; transformation action is compared propositionally with the path obtained from pointwise Path equivalences and functor-category univalence; generic `fapp1_func` retains the next action. The source and eight-check reviewer pass directly, including a mismatched-target rejection. The single object rule has exact zero warning delta against its import-only control (`1123/159` on both), and strict LHS audit remains zero. The already near-limit monolithic diagnostics target was restored unchanged after two clean 90-second import-graph timeouts; its previous green/catalog evidence is carried forward, while the focused reviewer owns this extension's regressions. Checkpoint: to be recorded after this green tranche commit. |
 | `WCGU-EQUIV-3` | pending | Establish whole beta/eta cancellation for restriction/extension and package the fixed-forward mapping-object equivalence when justified. Check base, generator, arbitrary functor, transformation, and retained next-action cases. |
+| `WCGU-CIRCLE-COMP-TODO` | deferred | Revisit judgmental computation for the Circle path constructor after `WCGU-EQUIV-3`, or earlier only if a concrete consumer shows that propositional loop beta materially obstructs computation. Any promotion is a separate normal-form migration with owner-position, subject-reduction, critical-pair, warning, and downstream audits; it is not silently bundled into universality. |
 | `WCGU-MONO-4` | pending | Exercise the result at the universe target: an equivalence/automorphism produces a Circle family, and restriction recovers its WalkingEnd base/generator data. Keep this a consumer of the whole theorem, not an independent axiom. |
 | `WCGU-GENERIC-5` | pending | Decide from the completed consumer whether a reusable `Groupoidify_func`, unit, transpose, higher action, and `Adjunction(Groupoidify_func,Path_cat_func)` can be promoted honestly. Implement only the validated generic layer, or record the exact free-inversion prerequisite and keep the generic reflector deferred. |
 | `WCGU-CLOSE-1` | pending | Synchronize source/example ownership, master ledger, Foundations/SOP/canonical syntax, report index, catalog, warnings/LHS evidence, and proportional health/CI only for the boundary actually changed. Record remaining book, Gray-mirror, strict-cut, and HIT work separately. |
@@ -296,6 +299,48 @@ areas with no unclassified checks. No aggregate `make check`, `make examples`,
 health, CI, TypeScript, print, book, or repository-wide test was rerun. The
 next row must now solve the genuinely new question: whole variation of
 `circle_rec` in a WalkingEnd functor and its transformations.
+
+### Completed `WCGU-EXT-2` result — 2026-08-17
+
+The object-level inverse candidate is the expected Circle recursion:
+
+```text
+extend(F)(x) := circle_rec(F[walking_base],F[walking_loop],x).
+```
+
+The missing structure was not another pointwise formula but one whole functor
+owner varying this recursion over the mapping category. A transformation
+`eta : F => H` into `Path_cat(G)` is pointwise an equality and hence a
+pointwise `OmegaEquivAlong`. The existing strict pointwise-to-whole assembly
+turns that data into `F = H`; applying the object extension function gives the
+semantic path between the two selected Circle functions. The promoted
+`walking_circle_extend_func(G)` owns that action at every hom level. Its
+object projection computes at runtime, its first-arrow action is compared to
+the semantic path by `walking_circle_extend_transf_agrees`, and
+`walking_circle_extend_next_func` confirms that the generic action remains
+iterable.
+
+This deliberately preserves the active HIT computation policy. Circle point
+beta is judgmental, while Circle loop beta and the extension's first-arrow
+agreement remain propositional. WalkingEnd's contextual generator beta is
+already judgmental. The deferred `WCGU-CIRCLE-COMP-TODO` row records a
+separate reviewed migration toward judgmental Circle path-constructor
+computation if `WCGU-EQUIV-3` or another concrete consumer demonstrates a
+material payoff; universality does not silently change global normal forms.
+
+Direct source and focused reviewer checks pass. The warning-enabled source and
+its import-only control both report exactly `1123` critical-pair and `159`
+replaceable-slot diagnostics, so the new object rule has zero warning delta;
+strict LHS audit remains zero. Importing the extension and duplicating its
+reviewer assertions in the already near-limit `emdash3_2_checks.lp` exceeded
+the mandatory 90-second target ceiling twice without an assertion failure.
+That redundant edit was removed, leaving the monolith byte-for-byte unchanged
+and its prior green 2,182-check/107-area catalog evidence applicable. The
+focused eight-check reviewer is therefore the executable regression owner for
+this tranche. Source registration, authority routing, TOC, active-reference,
+report-header, script-syntax, catalog-strictness, and diff-hygiene gates are
+green. Health, CI, and all-target aggregates remain deferred to the affected
+closeout boundary.
 
 ## Validation Policy
 
