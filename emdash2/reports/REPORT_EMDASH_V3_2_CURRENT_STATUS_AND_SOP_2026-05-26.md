@@ -545,6 +545,12 @@ detailed probe evidence.
   owner; realized objects and maps pass through the distinct public
   `Psh_cat` projections. It adds no rule, unifier, representability claim for
   arbitrary diagrams, boundary, horn, or Kan data.
+- `emdash3_2_simplex2_sieves.lp`: boundary and three horns of the standard
+  two-simplex. Three omission bits compute from raw face codes and descend
+  through set truncation; one kind-indexed higher-sieve owner retains generic
+  action, ordinary pullback, fibrewise extension, and whole inclusion. It
+  adds no generic-dimensional sieve family, degeneracy, spine, Kan condition,
+  or filler.
 - `emdash3_2_circle_connectedness.lp`: transparent rule-free propositional-
   truncation consumer. It constructs
   `Pi x:S1, ||circle_base=x||_{-1}` by dependent Circle induction; the retained

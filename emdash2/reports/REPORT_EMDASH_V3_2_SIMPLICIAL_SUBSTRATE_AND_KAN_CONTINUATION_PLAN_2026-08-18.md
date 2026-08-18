@@ -9,7 +9,8 @@ Nat/join feasibility row `SIMP-PROBE-1`, the set-classified face-code row
 `SIMP-CODE-2`, and the internal index-category row `SIMP-INDEX-3` are
 complete. The join-shape/selected-realization row `SIMP-SHAPE-4` is also
 complete. The representable/diagram row `SIMP-YONEDA-5` is complete;
-`SIMP-SIEVE-6` is the active implementation row. Later rows remain ordered
+the dimension-two boundary/horn row `SIMP-SIEVE-6` is complete;
+`SIMP-FILL-7` is the active implementation row. Later rows remain ordered
 gates rather than simultaneous scope.
 
 Branch: `goal/simplicial-substrate-v3.2`
@@ -332,6 +333,14 @@ The first implementation is explicitly bounded to dimension two. Generic
 Nat-indexed boundary/horn families follow only after those literal cases
 compute without duplicating the sieve action.
 
+The promoted finite presentation computes three omission bits on raw
+skip/keep codes and descends them through `FaceCode` by restricted recursion
+into the internally proved set `Bool_grpd`. One kind-indexed higher-sieve owner
+exposes proposition-valued fibres; generic `Catd` action owns naturality.
+Generic sieve pullback retains the canonical represented-postcomposition
+head. A direct runtime bridge from that head to `face_comp` is intentionally
+absent; structural `face_comp` computation is checked separately.
+
 A later spine sieve can express the Segal comparison through the existing
 Hom-locality interface. It is not part of the first horn tranche.
 
@@ -517,8 +526,8 @@ worktree removal, or deployment is authorized by this plan.
 | `SIMP-INDEX-3` | complete | Promoted `SemiDeltaPlus_cat` with Nat objects, locally discrete face-code Homs, all-keep identity, visible-point category composition through `face_comp`, the three dimension-two coface relations, and a direction/index negative. The rejected catch-all composition fold timed out; the selected narrow rule adds no warning or unifier. |
 | `SIMP-SHAPE-4` | complete | Promoted ordinary Nat-indexed join shapes, a whole `join_map_func` whose cross cell is reindexed from the target join, strict-profile join closure, and paired code/functor realizations for the two vertices of `Delta[1]` and three edges of `Delta[2]`; all three functorial coface equations compute. |
 | `SIMP-YONEDA-5` | complete | Promoted standard Yoneda semisimplices, the groupoid-valued diagram classifier, generic raw whole postcomposition by `Path_cat_func`, public realized objects/maps through `Psh_cat`, level/face computation, and retained higher action without a rule or unifier. |
-| `SIMP-SIEVE-6` | active | Define the 2-boundary and three 2-horn ordinary sieves with computing membership, whole extensions, inclusions, and pullback stability. |
-| `SIMP-FILL-7` | pending | Construct horn restriction and selected whole fillers for the three 2-horns in the nerve/path realization of a groupoid; retain one higher action and state exact nonclaims. |
+| `SIMP-SIEVE-6` | complete | Promoted three omission bits, a four-kind boundary/horn membership family, one whole higher-sieve owner, four ordinary sieves, generic pullback, whole extensions/inclusions, the complete codimension-one membership matrix, and structural precomposition checks without a represented-composition bridge. |
+| `SIMP-FILL-7` | active | Construct horn restriction and selected whole fillers for the three 2-horns in the nerve/path realization of a groupoid; retain one higher action and state exact nonclaims. |
 | `SIMP-DEC-8` | pending | Construct the selected shift/decalage and displayed cone fibre; compare its first three layers wholely with existing `homd_`/Sigma action. |
 | `SIMP-CODATA-9` | pending decision gate | Decide whether the successful categorical/decalage interface justifies a curated observation-driven `SST` codata facade. Do not implement generic codata or judgmental eta merely because the references use it. |
 | `SIMP-DOC-10` | pending | Synchronize Foundations, canonical notation, SOP/source inventories, examples, and report index only for actually promoted owners and checked boundaries. |
@@ -721,6 +730,50 @@ logs/probes/semisimplicial_yoneda_facade-20260818-143849.log
   rejected direct rigid-Psh whole-functor target
 logs/probes/semisimplicial_yoneda_facade-20260818-144231.log
   accepted raw whole owner with level/face realization
+```
+
+The health aggregate remains deferred to the later closure boundary.
+
+### 16.6 Boundary And Horn Sieves Of The Two-Simplex — 2026-08-18
+
+`emdash3_2_simplex2_sieves.lp` computes omission of each of the three target
+vertices on raw skip/keep words. A local Boolean-set proof permits all three
+observations to descend through public `FaceCode` by the existing restricted
+truncation recursor. Boundary membership is the disjunction of all omission
+bits; horn `k` membership is the disjunction of the two bits distinct from
+`k`. Literal truth values are the actual proposition classifiers
+`Unit_grpd` and `Empty_grpd`.
+
+`Simplex2SieveKind` indexes one whole `simplex2_higher_sieve` owner. Its fibre
+projection is `Path_cat(Simplex2SieveMember(kind,f))`; generic Catd action
+retains restriction and naturality. Proposition evidence packages the four
+ordinary sieves. Existing `sieve_pullback`, `ordinary_sieve_extension_psh`,
+and `ordinary_sieve_extension_inclusion` supply pullback stability, extensions,
+and whole inclusions into `StandardSimplex(3)`.
+
+The focused reviewer `examples/simplex2_boundary_horns.lp` checks that the
+identity face lies in no proper sieve, every edge lies in the boundary, and
+edge `ij` is excluded exactly from the horn missing the opposite vertex. It
+also checks public `SieveMembership`, proposition evidence, one retained
+higher action, generic pullback at canonical represented postcomposition,
+structural `face_comp` precomposition, and every whole inclusion. A trial
+direct equality from generic pullback membership to literal `face_comp` was
+rejected because the active slice owner intentionally retains
+`hom_postcomp_fapp0`; no new bridge was installed.
+
+Source and reviewer are green quietly and with warnings. The exact
+import-closure baseline and promoted candidate each contain 1,315 warning
+headers; no warning is owned by the new module. The two initial unused raw
+constructor payloads were replaced by `_` before promotion. The strict LHS
+audit reports zero candidates, and no unifier or external naturality record
+was added.
+
+Ignored probe evidence:
+
+```text
+logs/probes/simplex2_sieves-20260818-150523.log
+logs/probes/simplex2_sieves_warning_baseline-20260818-150026.log
+logs/probes/simplex2_sieves-20260818-150212.log
 ```
 
 The health aggregate remains deferred to the later closure boundary.
