@@ -1096,18 +1096,21 @@ record.
   whose restriction recovers the WalkingEnd representation and whose loop
   transport applies the equivalence. Generic `Groupoidify_func` remains
   explicitly deferred behind a free-coherent-inversion construction tested
-  on non-endomorphism and composition source shapes. Judgmental Circle loop
-  computation, mirror Gray closure, global strict-cut migration, and book
-  work remain separate. Synchronized closeout is checkpointed at `709c1e3`.
+  on non-endomorphism and composition source shapes. The later Circle child
+  completes canonical dependent loop computation; mirror Gray closure,
+  global strict-cut migration, and book work remain separate. Synchronized
+  universality closeout is checkpointed at `709c1e3`.
 
 - `REPORT_EMDASH_V3_2_CIRCLE_JUDGMENTAL_LOOP_COMPUTATION_PLAN_2026-08-18.md`:
-  active bounded normal-form continuation of the completed WalkingEnd--Circle
-  universality plan. It reopens only the deferred Circle higher-constructor
-  computation row: first testing dependent `eq_apd(circle_ind,loop)` at its
-  owner position, then deciding whether ordinary `circle_rec` action is
-  exposed through the existing constant-family projection ladder. Generic
-  groupoidification remains a separate follow-on construction beginning with
-  non-endomorphism and composable-pair source shapes.
+  completed bounded normal-form continuation of the WalkingEnd--Circle
+  universality plan. A stable generic `eq_apd` owner lets the dependent
+  `eq_apd(circle_ind,loop)` observation compute judgmentally, including the
+  constant-family dependent `circle_rec` view. The ordinary `eq_ap` observer
+  remains propositionally compared through the safe J-derived boundary.
+  Implementation is checkpointed at `c662f2c` and synchronized 195-target
+  closeout at `9ab7c0f`. Generic groupoidification remains the proposed
+  follow-on construction beginning with non-endomorphism and composable-pair
+  source shapes.
 
 - `REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md`:
   proposed successor to the Circle computation tranche and the completed
