@@ -327,7 +327,7 @@ must reduce to the already-checked unit, restriction, and extension owners.
 | Row | Status | Deliverable and acceptance boundary |
 | --- | --- | --- |
 | `GGFI-00` | complete | The authorized worktree/branch descends cleanly from Circle checkpoint `29ff54d`; bootstrap and workspace contract pass. The anti-duplication scan finds the existing join-derived `WalkingArrow_cat`, distinct endpoints, whole generator, and retained next action, but no active `Interval_grpd`, interval eliminator, or walking-arrow/interval mapping theorem. Focused walking-arrow, Circle-computation, and WalkingEnd--Circle universality baselines pass in 2.6--3.0 seconds; no aggregate ran. |
-| `GGFI-INTERVAL-1` | in progress | The public `emdash3_2_groupoidal_interval_hit.lp` and `examples/groupoidal_interval_hit.lp` now validate formation, distinct endpoints, the generating path, both point betas, judgmental dependent path beta, constant-family recursion, the propositional ordinary-`eq_ap` view, and arbitrary-section/nonjudgmental-`eq_ap` negatives. The source is registered and the focused checks pass in 2.5--2.6 seconds. Next: reuse `WalkingArrow_cat` for the comparison functor, whole mapping equivalence, retained higher action, and further endpoint-sensitive reviewers. Do not declare generic groupoidification yet. |
+| `GGFI-INTERVAL-1` | in progress; implementation green | The public interval HIT, join-derived comparison presentation, stable deployed unit, whole restriction/extension, fixed-forward `OmegaEquivAlong`, endpoint/generator projections, retained next action, and positive/negative reviewer are implemented and focused-green. The self-target reviewer exercises genuinely different endpoints; wrong-target and endpoint-collapse readings fail. Remaining work is closeout synchronization and proportional registered evidence only. Do not declare generic groupoidification or begin the triangle row. |
 | `GGFI-TRIANGLE-2` | proposed | Derive the walking composable pair from join; implement the explicit groupoidal 2-simplex/composition filler and whole mapping equivalence; retain one next-dimensional coherence and document the strict/lax profile boundary. |
 | `GGFI-SIGNATURE-3` | proposed | Compare the two consumers and record the smallest uniform indexed categorical-HIT signature. Reject an opaque adjunction or a cell-by-cell handwritten infinite record. |
 | `GGFI-HIT-4` | proposed | Promote `Groupoidify(C)`, its whole unit, and target-varying whole extension with object/first-cell computation and iterable higher action. Include wrong-source/target rejection and warning/LHS/subject-reduction audits. |
@@ -396,9 +396,60 @@ warning, and an explicit nested-guard comment. The strict rule audit reports
 zero unreviewed compound slots. `scripts/check.sh` now registers the source;
 the check-catalog strict consistency gate remains green. No aggregate ran.
 
-The remaining `GGFI-INTERVAL-1` work starts at the directed comparison and
-whole mapping equivalence. This checkpoint does not imply interval
-universality, generic free inversion, or any later source-shape row.
+That first checkpoint did not imply interval universality. The next section
+records the subsequently completed directed comparison and whole mapping
+equivalence; neither checkpoint implies generic free inversion or any later
+source-shape row.
+
+## WalkingArrow--Interval Mapping Equivalence — 2026-08-18
+
+The second implementation tranche adds four rule-bounded source modules:
+
+- `emdash3_2_walking_interval_comparison.lp` keeps the directed source equal
+  to the existing join-derived `WalkingArrow_cat`. A whole profunctor cross
+  cell naturalizes `interval_seg`; its selected fibre computes to the
+  constant segment functor. `walking_arrow_to_interval_join_func` is the
+  structural join-eliminator presentation. The deployed
+  `walking_arrow_to_interval_func` has a stable head with judgmental endpoint
+  computation and a whole equality to that join presentation. Its generator
+  beta remains scoped propositional, matching the ordinary `eq_ap` policy,
+  while its first and next hom actions remain available.
+- `emdash3_2_walking_interval_restriction.lp` is transparent precomposition
+  after `Path_cat_func` action. Its endpoint and generator observations are
+  projections of one whole functor comparison, and the generator projection
+  remains a `PathOver` over changing endpoint data.
+- `emdash3_2_walking_interval_extension.lp` extends an arbitrary
+  `F : WalkingArrow -> Path(G)` by `interval_rec` on the two endpoint images
+  and `F[walking_arrow_generator]`. Both endpoint betas compute; ordinary
+  generator beta is propositional. Strict pointwise equivalence supplies the
+  semantic first-arrow path, and the primitive whole extension retains a
+  next action.
+- `emdash3_2_walking_interval_universality.lp` packages whole extension and
+  restriction uniqueness as
+  `walking_interval_groupoidification_hom_omega`. Object, two-endpoint,
+  generating-path, representation, and generator readings are derived by
+  `eq_ap`/`eq_apd`; no object-only surrogate replaces the whole equivalence.
+
+`examples/walking_interval_groupoidification.lp` reviews all four boundaries.
+In particular, the target `Interval_grpd` with the deployed comparison unit is
+a nontrivial two-endpoint consumer: extension computes to `interval_i0` and
+`interval_i1` separately. A wrong-target equivalence and an attempted
+endpoint collapse are rejected.
+
+Each new source and the combined reviewer passes in approximately 2.5--2.7
+seconds. Strict LHS audit reports zero unreviewed compound slots. The
+warning-enabled comparison closure retains `1112` imported unjoinable pairs
+and the five known Circle/Interval nested-guard advisories, with no
+interval-comparison critical pair or arity warning. The full universality
+dependency closure reports `1113`; the additional pair is the pre-existing
+`strict_pointwise_equivalences.lp` pair exposed by importing that module, not
+an interval-owned overlap. The sources are registered in `scripts/check.sh`.
+No long aggregate ran.
+
+This completes the mathematical implementation promised by the current
+launch boundary. Catalog/health and authority closeout remain before the row
+and persistent goal can be marked complete. `GGFI-TRIANGLE-2` and every
+generic-reflector row remain untouched.
 
 ## Acceptance And Stop Conditions
 
