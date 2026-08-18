@@ -327,7 +327,7 @@ must reduce to the already-checked unit, restriction, and extension owners.
 | Row | Status | Deliverable and acceptance boundary |
 | --- | --- | --- |
 | `GGFI-00` | complete | The authorized worktree/branch descends cleanly from Circle checkpoint `29ff54d`; bootstrap and workspace contract pass. The anti-duplication scan finds the existing join-derived `WalkingArrow_cat`, distinct endpoints, whole generator, and retained next action, but no active `Interval_grpd`, interval eliminator, or walking-arrow/interval mapping theorem. Focused walking-arrow, Circle-computation, and WalkingEnd--Circle universality baselines pass in 2.6--3.0 seconds; no aggregate ran. |
-| `GGFI-INTERVAL-1` | in progress | The first owner-position probe validates two point betas, judgmental dependent path beta, endpoint/non-collapse negatives, and the measured nested-guard policy with zero new critical-pair family. Next: promote the groupoidal interval HIT and constant-family recursor, then reuse `WalkingArrow_cat` for the comparison functor, whole mapping equivalence, retained higher action, and registered reviewers. Do not declare generic groupoidification yet. |
+| `GGFI-INTERVAL-1` | in progress | The public `emdash3_2_groupoidal_interval_hit.lp` and `examples/groupoidal_interval_hit.lp` now validate formation, distinct endpoints, the generating path, both point betas, judgmental dependent path beta, constant-family recursion, the propositional ordinary-`eq_ap` view, and arbitrary-section/nonjudgmental-`eq_ap` negatives. The source is registered and the focused checks pass in 2.5--2.6 seconds. Next: reuse `WalkingArrow_cat` for the comparison functor, whole mapping equivalence, retained higher action, and further endpoint-sensitive reviewers. Do not declare generic groupoidification yet. |
 | `GGFI-TRIANGLE-2` | proposed | Derive the walking composable pair from join; implement the explicit groupoidal 2-simplex/composition filler and whole mapping equivalence; retain one next-dimensional coherence and document the strict/lax profile boundary. |
 | `GGFI-SIGNATURE-3` | proposed | Compare the two consumers and record the smallest uniform indexed categorical-HIT signature. Reject an opaque adjunction or a cell-by-cell handwritten infinite record. |
 | `GGFI-HIT-4` | proposed | Promote `Groupoidify(C)`, its whole unit, and target-varying whole extension with object/first-cell computation and iterable higher action. Include wrong-source/target rejection and warning/LHS/subject-reduction audits. |
@@ -367,11 +367,38 @@ all three nested arguments and records the compiler's three localized
 "need not be named" advisories as intentional guard diagnostics. The final
 candidate has no arity warning and no new unjoinable critical pair.
 
-This establishes formation/elimination feasibility only. Promotion still
-requires a public interval module, named beta views, the constant-family
-recursor used by extension, the WalkingArrow comparison functor, the whole
-restriction/extension equivalence, retained higher action, and registered
-positive/negative reviewers.
+That probe established formation/elimination feasibility only. The next
+subsection records its public promotion; the WalkingArrow comparison functor,
+whole restriction/extension equivalence, retained higher action, and further
+endpoint-sensitive reviewers remain outstanding.
+
+## Public Interval Formation And Elimination — 2026-08-18
+
+`emdash3_2_groupoidal_interval_hit.lp` promotes the probed boundary under the
+stable names `Interval_grpd`, `interval_i0`, `interval_i1`, `interval_seg`,
+and `interval_ind`. Both point reductions and the selected dependent
+`eq_apd(interval_ind,interval_seg)` constructor beta are judgmental. Named
+typed views expose those reductions without introducing a second normal form.
+
+The constant-family specialization `interval_rec` computes at both endpoints
+and inherits the dependent path beta. Its ordinary `eq_ap` comparison remains
+propositional and reuses `const_pathover_path_eq_apd` plus
+`const_pathover_path_const`; those generic observations are currently owned
+by the Circle HIT module, so this first interval file imports that reviewed
+implementation rather than duplicating it or changing the global `eq_ap`
+boundary.
+
+The focused source and reviewer each pass in approximately 2.6 seconds. The
+warning-enabled source check retains the imported `1112` unjoinable critical
+pairs and introduces none. As measured in the probe, the public path rule has
+three localized named-pattern advisories (`D`, `b0`, and `b1`), no arity-map
+warning, and an explicit nested-guard comment. The strict rule audit reports
+zero unreviewed compound slots. `scripts/check.sh` now registers the source;
+the check-catalog strict consistency gate remains green. No aggregate ran.
+
+The remaining `GGFI-INTERVAL-1` work starts at the directed comparison and
+whole mapping equivalence. This checkpoint does not imply interval
+universality, generic free inversion, or any later source-shape row.
 
 ## Acceptance And Stop Conditions
 
