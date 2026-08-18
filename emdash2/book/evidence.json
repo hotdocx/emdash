@@ -3494,6 +3494,134 @@
         }
       ]
     },
+    "GROUPOIDAL-PRODUCT-TRANSPORT": {
+      "status": "checked",
+      "statement": "For a dependent family over a product, transport along the path assembled from two coordinate paths agrees with both sequential coordinate orders; the two comparisons form a coherence diamond, and the existing structured transport and PathOut induction agree with the same primitive right-J transport.",
+      "owners": [
+        {
+          "file": "emdash3_2_groupoidal_closure.lp",
+          "symbol": "product_transport_direct_agrees_base_then_fibre"
+        },
+        {
+          "file": "emdash3_2_groupoidal_closure.lp",
+          "symbol": "product_transport_direct_agrees_fibre_then_base"
+        },
+        {
+          "file": "emdash3_2_groupoidal_closure.lp",
+          "symbol": "product_transport_coherence_diamond"
+        },
+        {
+          "file": "emdash3_2_groupoidal_closure.lp",
+          "symbol": "product_path_structured_induction_agrees_primitive"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/groupoidal_product_transport.lp",
+          "symbol": "product_transport_coherence_diamond"
+        },
+        {
+          "file": "examples/groupoidal_product_transport.lp",
+          "symbol": "product_path_structured_induction_agrees_primitive"
+        }
+      ]
+    },
+    "CIRCLE-LOOP-INTEGER": {
+      "status": "checked",
+      "statement": "The opaque groupoidal Circle has a universal Integer cover whose endpoint-dependent encode and decode maps are inverse; the intrinsic based-loop carrier and the categorical based Hom carrier are TypeEquiv to the successor-localized Integer, with a whole equality-valued categorical equivalence retained separately.",
+      "owners": [
+        {
+          "file": "emdash3_2_circle_hit.lp",
+          "symbol": "circle_loop_integer_type_equiv"
+        },
+        {
+          "file": "emdash3_2_circle_hit.lp",
+          "symbol": "circle_hom_integer_type_equiv"
+        },
+        {
+          "file": "emdash3_2_circle_hit.lp",
+          "symbol": "circle_hom_integer_cat_omega_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/circle_loop_space.lp",
+          "symbol": "circle_loop_integer_type_equiv"
+        },
+        {
+          "file": "examples/circle_loop_space.lp",
+          "symbol": "circle_hom_integer_type_equiv"
+        },
+        {
+          "file": "examples/circle_loop_space.lp",
+          "symbol": "circle_hom_integer_cat_omega_equiv"
+        }
+      ]
+    },
+    "GENERIC-GROUPOIDIFICATION-MAPPING": {
+      "status": "checked",
+      "statement": "For every category C and groupoid G, restriction along the whole unit C to Path(Groupoidify(C)) is a fixed-forward OmegaEquivAlong between groupoidal maps out of Groupoidify(C) and path-valued functors out of C; the unit recursor computes on represented objects and dependent first cells and retains higher action.",
+      "owners": [
+        {
+          "file": "emdash3_2_groupoidification_hit.lp",
+          "symbol": "groupoidify_unit_func"
+        },
+        {
+          "file": "emdash3_2_groupoidification_hit.lp",
+          "symbol": "groupoidify_extend_func"
+        },
+        {
+          "file": "emdash3_2_groupoidification_universality.lp",
+          "symbol": "groupoidification_hom_omega"
+        },
+        {
+          "file": "emdash3_2_groupoidification_composition.lp",
+          "symbol": "groupoidify_unit_compositor_next_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/generic_groupoidification.lp",
+          "symbol": "groupoidification_hom_omega"
+        },
+        {
+          "file": "examples/generic_groupoidification.lp",
+          "symbol": "groupoidify_unit_compositor_next_func"
+        }
+      ]
+    },
+    "GRAY-WALKING-INTERCHANGER": {
+      "status": "checked",
+      "statement": "In the selected strict-object/lax-arrow Gray right-closure slice, the walking square has four coevaluation-derived vertices and two coordinate arrow families, while its oriented nonidentity interchanger is projected from the existing whole post/left laxity action and retains one next hom action.",
+      "owners": [
+        {
+          "file": "emdash3_2_gray_walking_square.lp",
+          "symbol": "gray_square_inner_src_arrow"
+        },
+        {
+          "file": "emdash3_2_gray_walking_square.lp",
+          "symbol": "gray_square_outer_src_arrow"
+        },
+        {
+          "file": "emdash3_2_gray_interchanger.lp",
+          "symbol": "gray_interchanger"
+        },
+        {
+          "file": "emdash3_2_gray_interchanger.lp",
+          "symbol": "gray_interchanger_next_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/gray_interchanger.lp",
+          "symbol": "gray_interchanger"
+        },
+        {
+          "file": "examples/gray_interchanger.lp",
+          "symbol": "gray_interchanger_next_func"
+        }
+      ]
+    },
     "EH-COMMUTATIVITY": {
       "status": "checked",
       "statement": "Two 2-endomorphisms of an identity 1-cell commute in the selected Eckmann-Hilton slice.",

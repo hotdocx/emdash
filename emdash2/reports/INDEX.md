@@ -2,12 +2,15 @@
 
 Date: 2026-08-18
 
-`../../docs/EMDASH_BOOK_V3_2_POST_INTEGRATION_EXPANSION_PLAN_2026-08-04.md`
+`../../docs/EMDASH_BOOK_V3_2_GROUPOIDAL_REALIZATION_EXPANSION_PLAN_2026-08-18.md`
 is the active cross-layer editorial and implementation ledger for the
-post-integration book, concise article, and narrowly supporting documentation
-work. It routes the new local-to-global spiral from presheaves and sieves
-through direct sheafification, constructive algebraic geometry, site-relative
-schemes, and the supplied projective-line boundary. It adds no mathematical
+groupoidal-realization book continuation, concise article, and narrowly
+supporting documentation work. It preserves the completed local-to-global
+edition and adds a fourth theorem-led spiral through Path realization,
+Circle/Integer, free groupoidification, and the selected Gray interchanger.
+The completed predecessor ledger remains
+`../../docs/EMDASH_BOOK_V3_2_POST_INTEGRATION_EXPANSION_PLAN_2026-08-04.md`.
+The active continuation adds no mathematical
 authority: active owners and checked examples remain authoritative for every
 formal claim.
 

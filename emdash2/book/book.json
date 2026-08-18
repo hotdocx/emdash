@@ -181,6 +181,26 @@
       "path": "book/chapters/24-projective-line-and-boundary.md"
     },
     {
+      "id": "chapter-25",
+      "kind": "chapter",
+      "path": "book/chapters/25-paths-and-the-groupoidal-shadow.md"
+    },
+    {
+      "id": "chapter-26",
+      "kind": "chapter",
+      "path": "book/chapters/26-circle-and-integer-line.md"
+    },
+    {
+      "id": "chapter-27",
+      "kind": "chapter",
+      "path": "book/chapters/27-free-inversion-and-groupoidification.md"
+    },
+    {
+      "id": "chapter-28",
+      "kind": "chapter",
+      "path": "book/chapters/28-laxity-interchange-and-gray-direction.md"
+    },
+    {
       "id": "appendix-notation",
       "kind": "appendix",
       "path": "book/appendices/a-notation.md"

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "planId": "EMDASH-V3-2-FTT-BOOK-CATEGORY-THEORY-FORMAL-PRESENTATION-EXPANSION-2026-07-20",
+  "planId": "EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5",
   "retainedChapterRange": [1, 8],
   "retainedChapterCentralTheorems": [
     {
@@ -342,6 +342,93 @@
         "ACTUAL-BINARY-CHART-OVERLAP"
       ],
       "boundary": "the global site-relative scheme, selected actual intersection, common base, polynomial and localization presentations, and whole transition-identity paths are supplied at their stated boundaries; Laurent transition maps are constructed by universal properties, but no atlas-first gluing, closed projective object, projectivity or non-affineness proof, graded ring, homogeneous localization, degree-zero construction, Proj, or general projective space is constructed"
+    },
+    {
+      "id": "chapter-25",
+      "number": 25,
+      "path": "book/chapters/25-paths-and-the-groupoidal-shadow.md",
+      "title": "Paths And The Groupoidal Shadow",
+      "conceptualOwner": "intrinsic Path realization, structured transport, and invertible realization of directed compositor evidence",
+      "spiralFrom": [
+        "chapter-2",
+        "chapter-5",
+        "chapter-7",
+        "chapter-9"
+      ],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "GROUPOIDAL-PRODUCT-TRANSPORT"
+      },
+      "secondaryEvidence": [
+        "CAT-PATH-CATEGORY"
+      ],
+      "boundary": "the selected product and path-compositor consumers exhibit computational groupoidal closure and pseudo realization; they do not establish closure for every categorical former, a second equality eliminator, a complete weak omega-groupoid semantics, or a global normalization theorem"
+    },
+    {
+      "id": "chapter-26",
+      "number": 26,
+      "path": "book/chapters/26-circle-and-integer-line.md",
+      "title": "The Circle And The Integer Line",
+      "conceptualOwner": "computational Circle induction and the universal-cover encode-decode equivalence with successor-localized integers",
+      "spiralFrom": [
+        "chapter-4",
+        "chapter-6",
+        "chapter-7",
+        "chapter-8",
+        "chapter-25"
+      ],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "CIRCLE-LOOP-INTEGER"
+      },
+      "secondaryEvidence": [
+        "UNIV-GROUPOID"
+      ],
+      "boundary": "the Circle has judgmental point and dependent loop computation, an explicit Integer loop-space equivalence, monodromy, and selected connectedness/truncation consequences; ordinary ap on the loop remains propositional and no generic HIT declaration compiler or global computational HoTT metatheory is claimed"
+    },
+    {
+      "id": "chapter-27",
+      "number": 27,
+      "path": "book/chapters/27-free-inversion-and-groupoidification.md",
+      "title": "Free Inversion And Groupoidification",
+      "conceptualOwner": "whole mapping properties for concrete and category-indexed free realization of directed cells as paths",
+      "spiralFrom": [
+        "chapter-8",
+        "chapter-12",
+        "chapter-17",
+        "chapter-25",
+        "chapter-26"
+      ],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "GENERIC-GROUPOIDIFICATION-MAPPING"
+      },
+      "secondaryEvidence": [
+        "CAT-PATH-CATEGORY"
+      ],
+      "boundary": "category-indexed formation, the whole unit and recursor, target-side extension/restriction, arbitrary-target mapping equivalence, compositor, and WalkingArrow-Interval recovery are active; source action, Groupoidify_func, its adjunction with Path_cat_func, and post-generic simplex regressions remain deferred"
+    },
+    {
+      "id": "chapter-28",
+      "number": 28,
+      "path": "book/chapters/28-laxity-interchange-and-gray-direction.md",
+      "title": "Laxity, Interchange, And The Gray Direction",
+      "conceptualOwner": "whole internal laxity action, strict-object profiles, and the selected right-closed walking-square interchanger",
+      "spiralFrom": [
+        "chapter-9",
+        "chapter-11",
+        "chapter-14",
+        "chapter-17",
+        "chapter-25"
+      ],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "GRAY-WALKING-INTERCHANGER"
+      },
+      "secondaryEvidence": [
+        "FUNCTORD-DISPLAYED-LAXITY"
+      ],
+      "boundary": "the active construction is one profiled strict-object/lax-arrow right closure with a derived walking square and oriented interchanger; it does not provide the mirror closure, full Crans-Gray biclosed monoidal structure, tensor functoriality or coherence, or global migration of historical strict endpoint cuts"
     }
   ],
   "appendix": {

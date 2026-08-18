@@ -1,0 +1,655 @@
+# Emdash Book v3.2 Groupoidal Realization Expansion Plan
+
+Date: 2026-08-18 (America/Toronto)
+
+Plan-ID: `EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5`
+
+Status: **active fourth-spiral book continuation**. The cumulative baseline,
+book contract, stale-claim inventory, evidence boundary, and chapter
+architecture have been reviewed. `BGR-00` and `BGR-ARCH-1` are complete;
+`BGR-REPAIR-2` is the first active prose/evidence row.
+
+Branch: `goal/emdash-book-groupoidal-v3.2`
+
+Worktree: `/home/user1/emdash1-book-groupoidal-v3.2`
+
+Baseline: `f4d9303411a09f143912832315153c234807e724`
+
+Parent mathematical ledger:
+`emdash2/reports/REPORT_EMDASH_V3_2_INTERNAL_LAXITY_AND_GROUPOIDAL_REALIZATION_CONTINUATION_PLAN_2026-08-17.md`
+
+Predecessor editorial ledger:
+`docs/EMDASH_BOOK_V3_2_POST_INTEGRATION_EXPANSION_PLAN_2026-08-04.md`
+
+Side-Task-Ledger: `BGR-00`, `BGR-ARCH-1`, `BGR-REPAIR-2`,
+`BGR-CH25-3`, `BGR-CH26-4`, `BGR-CH27-5`, `BGR-CH28-6`, `BGR-XCUT-7`,
+`BGR-ARTICLE-8`, `BGR-RELEASE-9`, and `BGR-CLOSE-10`
+
+Infinity-Codex-Origin: session
+`019ffe39-2eb9-7080-88e3-06b77d69b8d1`; architectural decision response
+`0056`, archived at
+`/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-14_019ffe392eb9/responses/0056_2026-08-18T10-33-36Z_01a0146c-3a14-75e0-9e92-8380e1686fef.md`.
+Active code, the book contract, and this living plan outrank the archive.
+
+## 1. Objective
+
+Expand *Functorial Type Theory: Univalent Foundations for Mathematics* from
+the completed 0.4.0 local-to-global edition into a globally coherent
+groupoidal-realization edition. The new mathematics must be presented as a
+fourth conceptual spiral, not as a list of recently added Lambdapi modules.
+
+The governing question is:
+
+> What becomes of directed motion when it is realized in the groupoidal
+> world, and how much of that realization can still compute?
+
+The primary deliverable is the theorem-led book and its checked local PDF.
+The concise overview article is a secondary deliverable. Repository and
+renderer maintenance are supporting work only where demanded by the book's
+structured owners or release gates.
+
+This goal must preserve the completed first three spirals:
+
+1. foundations and the WalkingEnd/Natural-number calculation;
+2. cut calculus, category theory, and universal constructions;
+3. local-to-global algebraic geometry; and
+4. the new return from directed arrows to groupoidal paths, free inversion,
+   and Gray-shaped coherence.
+
+## 2. Authority And Recovery Order
+
+Use the following order on every continuation:
+
+1. root, Lambdapi, and print `AGENTS.md` instructions;
+2. active Lambdapi owners and focused reviewers;
+3. current Foundations, SOP, and canonical-syntax reports;
+4. `emdash2/book/book.json`, `expansion.json`, `STYLE.md`, `evidence.json`,
+   provenance records, and `RELEASE.md`;
+5. this living plan;
+6. the completed groupoidal, laxity, truncation, Gray, Circle, interval, and
+   generic-groupoidification child plans;
+7. the completed 0.4.0 book ledger and publication/article plan;
+8. pinned third-party sources; and
+9. explicitly linked archived responses only for recovery.
+
+Book prose never becomes a mathematical authority. If prose and an active
+owner disagree, correct the prose and evidence register.
+
+## 3. Git And Publication Boundary
+
+The user authorized a new branch/worktree from the cumulative mathematical
+checkpoint, implementation under a living plan, and a persistent goal. The
+standing thread instruction also authorizes local green checkpoint commits
+following the repository checkpoint SOP.
+
+This authorization does not include:
+
+- push, merge, tag, PR, GitHub Pages deployment, Zenodo publication, or other
+  remote release;
+- rebase, amend, squash, reset, force push, history rewrite, branch deletion,
+  or worktree removal;
+- modifying the completed `/home/user1/emdash1-book-v3.2` worktree; or
+- changing Lambdapi or TypeScript semantics merely to simplify exposition.
+
+Local deterministic generation and promotion to the tracked `docs/` paths
+are in scope because they are explicit book/article deliverables. Remote
+publication remains a separately authorized final release step.
+
+## 4. Reviewed Baseline
+
+### 4.1 Git and mathematical baseline
+
+The new branch starts cleanly at `f4d9303`. That commit is a descendant of:
+
+- current local `main` at `86042df`;
+- the completed 0.4.0 book at `716cd47`;
+- internal-laxity closeout;
+- path-realized pseudo-laxity;
+- computational truncation and Circle connectedness;
+- profiled Gray right closure and interchanger;
+- Circle/Integer and WalkingEnd--Circle universality;
+- dependent judgmental Circle-loop computation;
+- the groupoidal interval and WalkingArrow universality; and
+- generic category-indexed groupoidification through `f4d9303`.
+
+The resulting branch remains linearly fast-forwardable if later publication
+is authorized.
+
+### 4.2 Current book
+
+The completed predecessor edition has:
+
+- version `0.4.0-dev`, publication date 2026-08-05, and draft status;
+- 299 checked PDF pages;
+- 39 ordered source files;
+- 24 numbered chapters and seven appendices;
+- approximately 61,900 chapter words;
+- 141 checked/formal-status evidence claims; and
+- 2,363 mathematical spans at the cumulative baseline.
+
+`workspace:check` and `book:check` pass in the new worktree. The latter
+reassembles all 39 sources, checks all 141 cited evidence identifiers, checks
+typography and KaTeX, and validates the registered generated book.
+
+The predecessor book worktree is clean and retained. No source after that
+edition changed except the focused Chapter 5 reader-facing TypeScript
+PathOut-evidence explanation. The tracked 299-page book artifact itself is
+therefore the correct visual baseline.
+
+### 4.3 Current article
+
+The overview article is already 18 pages, the maximum registered page budget.
+It contains the completed Circle/Integer and representative product-closure
+result, but not the later whole WalkingEnd--Circle theorem, interval theorem,
+generic `Groupoidify(C)`, or selected Gray realization. The article must be
+rebalanced and rewritten, not merely appended to.
+
+### 4.4 Stale reader-facing claims
+
+The audit found concrete claims that were correct in 0.4.0 but are now false
+or materially incomplete:
+
+- Chapter 7 and evidence `TRUNC-REFLECTOR` still say that no computational
+  truncation reflector is active.
+- Chapter 8 says that a future Circle comparison or group completion must be
+  constructed and that no comparison functor is active.
+- Appendix C says that group completion and the `BInt`/Circle bridge remain
+  future work.
+- Chapter 6 names directed intervals only as future tests, although the
+  groupoidal interval and WalkingArrow comparison are active.
+- evidence `WE-GROUP-COMPLETION` says that no Circle comparison exists.
+- evidence `FUNCTORD-WHOLE-LAXITY` still describes a whole laxity facade as
+  deferred, although whole post/left and pre/right surfaces are active.
+- the preface, reading guide, prologue road map, contents, glossary, status
+  appendix, and evidence appendix describe only three spirals.
+
+These are correctness repairs, not optional embellishments. They must be
+resolved before the new edition can close.
+
+## 5. Editorial Thesis
+
+The fourth spiral is governed by two linked sentences:
+
+> Direction is visible in the difference between natural and integer powers.
+
+> Free groupoidal realization does not erase higher action; it makes the
+> directed coherence witnesses invertible.
+
+The WalkingEnd theorem says that one noninvertible generator has natural
+powers. The Circle theorem says that one invertible loop has integer powers.
+The comparison is not a renaming: it is a whole functor whose mapping theorem
+expresses free inversion. The WalkingArrow/interval theorem then tests
+different endpoints, and category-indexed `Groupoidify(C)` abstracts the
+same universal property without reducing the input to an object graph.
+
+This supplies the principal narrative arc:
+
+```text
+directed arrow and explicit higher action
+    -> realization as paths
+    -> invertible pseudo coherence
+    -> Circle and Integer loop calculation
+    -> concrete free inversion of WalkingEnd and WalkingArrow
+    -> category-indexed groupoidification
+    -> selected Gray-shaped interchanger back in the directed world.
+```
+
+The Gray material belongs at the end of the spiral because it answers a
+different question. Product transport in the groupoidal layer does not imply
+that the directed tensor should be Gray. The selected Gray right closure
+instead exposes lax transformations and an oriented interchanger. This is a
+bridge back to directed higher category theory, not an alternative proof of
+the Circle theorem.
+
+## 6. Book Architecture
+
+Use a hybrid architecture:
+
+- add four sustained chapters after Chapter 24;
+- make concise, targeted repairs and forward references in existing chapters;
+- preserve all existing chapter numbers and avoid renumbering the completed
+  geometry spiral; and
+- centralize technical owner names in evidence notes and appendices rather
+  than the main prose.
+
+### Chapter 25 — Paths And The Groupoidal Shadow
+
+Reader question: how does equality-local homotopy sit inside the directed
+categorical calculus without becoming a second foundation?
+
+Narrative:
+
+- one primitive equality eliminator and its structured categorical reading;
+- `Path(A)` as the groupoidal shadow of a classifier;
+- ordinary functions as iterable path functors;
+- product paths and the explicit split/join equivalence;
+- direct versus sequential product transport and the coherence diamond;
+- path realization of the generic compositor;
+- why a directed lax witness becomes an invertible pseudo witness in a path
+  category; and
+- the distinction among groupoidal closure, truncation, and free inversion.
+
+Central checked claim: product path transport agrees with both coordinate
+orders and with the existing structured `J`/`PathOut` presentations.
+
+Secondary checked claim: the generic functor compositor has an invertible
+Path realization with one retained higher action.
+
+Target length: 2,500–3,300 words.
+
+### Chapter 26 — The Circle And The Integer Line
+
+Reader question: why does reversibility change the arithmetic answer from
+natural numbers to integers?
+
+Narrative:
+
+- the successor telescope localization and transparent Integer facade;
+- Circle formation, base, loop, induction, and the exact computation
+  boundary;
+- judgmental dependent loop computation versus propositional ordinary
+  `ap` computation;
+- the universal Integer cover and successor monodromy;
+- integer-indexed positive and negative loop powers;
+- endpoint-dependent encode/decode;
+- the based-loop and categorical-Hom equivalences with Integer;
+- a self-equivalence as Circle monodromy;
+- mere connectedness and contractibility of the set truncation; and
+- an explicit comparison with the HoTT Book proof architecture.
+
+Central checked claim:
+
+```text
+Hom(Circle,Circle) ≃ Integer.
+```
+
+The prose must distinguish the intrinsic based-loop `TypeEquiv`, the
+categorical `OmegaEquiv`, and the absence of a category-head rewrite.
+
+Target length: 3,400–4,400 words.
+
+### Chapter 27 — Free Inversion And Groupoidification
+
+Reader question: can the Circle and interval be characterized by what maps
+out of them do, rather than only by their constructors?
+
+Narrative:
+
+- the concrete WalkingEnd-to-Circle functor and its action on powers;
+- restriction and extension against every groupoidal target;
+- whole beta/eta and the monodromy consumer;
+- the directed WalkingArrow and the two-endpoint groupoidal interval;
+- dependent segment computation and the whole mapping theorem;
+- category-indexed `Groupoidify(C)`, its whole unit, and computing recursor;
+- the arbitrary-source mapping-object equivalence;
+- the explicit nonidentity unit compositor and retained next action;
+- recovery of `Groupoidify(WalkingArrow) ≃ Interval`; and
+- why `Core`, truncation, and groupoidification have different variances and
+  universal properties.
+
+Central checked claim:
+
+```text
+Hom(Groupoidify(C),G) ≃ Functor(C,Path(G))
+```
+
+for arbitrary `C : Cat` and `G : Grpd` at the active fixed-forward whole
+mapping boundary.
+
+The chapter must state that source action, `Groupoidify_func`, and the
+packaged adjunction with `Path_cat_func` remain deferred. It must not call the
+current construction a completed functorial left adjoint.
+
+Target length: 3,200–4,100 words.
+
+### Chapter 28 — Laxity, Interchange, And The Gray Direction
+
+Reader question: where does directed two-dimensional coherence live when it
+is not collapsed to an equation?
+
+Narrative:
+
+- whole internal action before componentwise naturality;
+- displayed laxity and its ordinary post/left and pre/right projections;
+- the explicit compositor as an identity-transfor specialization;
+- recursion through the next `homd_`/Sigma action;
+- strict functors as computational codes inside a shared lax-capable action
+  calculus;
+- `GrayHom_lax` as a strict-object/lax-arrow profile;
+- the selected right-closed transpose boundary;
+- the four vertices and two coordinate directions of the walking square;
+- the interchanger projected from existing laxity; and
+- the exact boundary between this selected slice and a full Crans–Gray
+  monoidal structure.
+
+Central checked claim: the walking-square interchanger is a nonidentity
+directed cell obtained from the whole internal-action owner and retains one
+next action.
+
+Target length: 2,700–3,600 words.
+
+### Why four chapters
+
+One combined chapter would conflate three different universal problems:
+groupoidal closure of formers, free inversion of directed categories, and
+Gray-style directed coherence. More than four chapters would make the book
+follow the implementation chronology. Four gives each major theorem one
+reader question and keeps the final edition near a 40–55 page expansion
+rather than an open-ended manual.
+
+## 7. Cross-Cutting Revision Map
+
+### Front matter
+
+- Update the edition notice, preface, reading paths, contents, and prologue
+  road map from three spirals to four.
+- Keep the WalkingEnd/Natural-number theorem as the first mathematical centre;
+  present the Circle/Integer theorem as the deliberate return to its missing
+  inverse powers.
+- Do not announce a final non-draft edition before release review.
+
+### Existing chapters
+
+- Chapter 4: connect universe paths to Circle monodromy without duplicating
+  Chapter 26.
+- Chapter 5: retain the one-`J` architecture and forward-reference structured
+  product transport.
+- Chapter 6: distinguish selected Circle/interval/groupoidification HITs from
+  a still-absent generic declaration compiler.
+- Chapter 7: replace the stale reflector boundary with the classified
+  `NType_cat`/`Trunc_ntype` construction and Circle connectedness consumer.
+- Chapter 8: preserve the directed Nat proof, replace the false future
+  Circle-comparison claim, and point to Chapters 26–27.
+- Chapters 9 and 11: update the whole-laxity boundary and point to Chapter 28
+  without importing implementation ledgers.
+- Chapter 12: explain the mapping-object equivalence while keeping source
+  functoriality and the adjunction deferred.
+- Chapter 14: distinguish computational strict profiles from global strict
+  endpoint cuts and from pseudo/lax higher cells.
+
+### Appendices
+
+- Appendix A: add only stable book notation for Circle, interval,
+  groupoidification, and Gray profiles.
+- Appendix B: remain generated from `evidence.json`.
+- Appendix C: rewrite from a prospective comparison into an actual
+  WalkingEnd/Circle and Nat/Integer comparison.
+- Appendix D: add stable conceptual index entries and cross-references.
+- Appendix E: state the exact runtime/propositional boundaries for Circle,
+  interval, truncation, and generic groupoidification.
+- Appendix F: update the implementation matrix and research boundary.
+- Appendix G: add compact formal rules for the new selected HITs and whole
+  mapping properties without reproducing kernel declarations line by line.
+
+## 8. Evidence Architecture
+
+Every checked theorem in Chapters 25–28 needs an evidence identifier with an
+active owner and reviewer. Existing false entries must be replaced or
+reclassified; they must not survive merely to preserve identifiers.
+
+The planned evidence families are:
+
+| Evidence family | Representative active owner | Reviewer |
+| --- | --- | --- |
+| path category and structured `J` | `emdash3_2.lp`, `emdash3_2_groupoidal_closure.lp` | `examples/groupoidal_structured_j_eq1.lp`, `examples/groupoidal_product_transport.lp` |
+| path-realized pseudo-laxity | `emdash3_2_path_pseudo_laxity.lp` | `examples/path_pseudo_laxity.lp` |
+| Integer facade and induction | `emdash3_2_integer_localization.lp` | `examples/integer_localization.lp` |
+| Circle HIT and loop computation | `emdash3_2_circle_hit.lp` | `examples/circle_loop_space.lp`, `examples/circle_judgmental_loop_computation.lp` |
+| Circle connectedness/truncation | `emdash3_2_truncation_reflector.lp`, `emdash3_2_circle_connectedness.lp` | `examples/computational_truncation_facade.lp`, `examples/circle_connectedness.lp` |
+| WalkingEnd–Circle comparison and universality | `emdash3_2_walking_circle_*.lp` | corresponding `examples/walking_circle_*.lp` reviewers |
+| interval and WalkingArrow universality | `emdash3_2_groupoidal_interval_hit.lp`, `emdash3_2_walking_interval_*.lp` | `examples/groupoidal_interval_hit.lp`, `examples/walking_interval_groupoidification.lp` |
+| generic groupoidification | `emdash3_2_groupoidification_*.lp` | `examples/generic_groupoidification*.lp` |
+| whole laxity surfaces | active owners in `emdash3_2.lp` | `examples/dependent_hom_laxity.lp` plus central diagnostics |
+| selected Gray profile/closure/interchanger | `emdash3_2_gray_*.lp` | `examples/gray_*.lp` |
+
+At minimum, the stale `TRUNC-REFLECTOR`, `WE-GROUP-COMPLETION`, and
+`FUNCTORD-WHOLE-LAXITY` entries must be corrected. New claims should be
+coarse enough to support prose, not one identifier per kernel helper.
+
+## 9. Attribution And Research Sources
+
+### HoTT Book
+
+The pinned HoTT Book source is already registered under the same CC BY-SA
+3.0 license. Extend its source/adaptation map before writing close adaptations
+for:
+
+- Circle induction and its universal property;
+- the universal cover and encode/decode proof of
+  `Omega(S1) ≃ Integer`;
+- truncation and connectedness; and
+- the comparison between reversible loop powers and directed powers.
+
+Prefer fresh prose and explicit emdash differences. The chapter must not make
+the HoTT proof appear to establish emdash's generic groupoidification or Gray
+interfaces.
+
+### Gray and higher-category references
+
+Use primary sources already reviewed in the mathematical plans:
+
+- Gurski for the low-dimensional Gray interchanger;
+- Bourke–Gurski for the factorization perspective;
+- Ara–Maltsiniotis for strict-omega lax/oplax internal homs and biclosed
+  structure; and
+- Hadzihasanovic for the combinatorics of higher-categorical diagram shapes.
+
+Until a compatible reuse license is verified, treat these as mathematical
+references and write fresh prose. The book must call the active construction
+a selected profiled right-closed Gray slice, not the complete established
+Crans–Gray tensor.
+
+## 10. Concise Article Strategy
+
+The article is secondary and remains bounded to 14–18 pages. It is already at
+18 pages, so the update must replace and compress rather than append.
+
+Required changes:
+
+- revise the abstract and contributions list to include computational
+  groupoidal realization;
+- consolidate the current Circle/Integer paragraph into a short theorem-led
+  section containing the whole WalkingEnd/Circle result, interval test, and
+  generic mapping property;
+- mention Gray only as the selected coherence stress test;
+- update the research-boundary paragraph to defer source functoriality,
+  adjunction packaging, full Gray monoidality, and global strict-cut migration;
+  and
+- keep all implementation-history and health metrics out of the main article.
+
+If the article cannot remain at or below 18 pages without harming clarity,
+reduce less central implementation exposition before requesting a page-budget
+change.
+
+## 11. Diagrams And Visual Design
+
+Use diagrams only where they materially shorten an explanation:
+
+1. a directed-to-groupoidal ladder connecting WalkingEnd/Nat with
+   Circle/Integer;
+2. the restriction/extension mapping-object equivalence for
+   `Groupoidify(C)`; and
+3. the walking square with its oriented interchanger.
+
+Prefer the existing Arrowgram/Mermaid-capable renderer or accessible native
+HTML/CSS/SVG owned by the book pipeline. Every figure needs useful alt text,
+legible print contrast, a stable anchor, and a prose explanation. Decorative
+AI imagery is not part of the mathematical pages.
+
+## 12. Execution Ledger
+
+| Row | Status | Deliverable and acceptance boundary |
+| --- | --- | --- |
+| `BGR-00` | complete | Create the dedicated branch/worktree at cumulative checkpoint `f4d9303`; bootstrap the pinned workspace; verify clean staged/unstaged state, ancestry, and `workspace:check`; run the green 39-source/141-evidence `book:check`; audit current chapters, article, evidence, provenance, and the 299-page artifact; record the fourth-spiral architecture and exact non-claims. |
+| `BGR-ARCH-1` | complete | `book.json` and `expansion.json` now extend contiguously through Chapters 25–28. Four stable anchored chapter owners contain reader-facing theorem previews and exact boundaries; four coarse checked evidence entries point to active owners/reviewers. The existing generic architecture checker required no code or test change. Release metadata remains at 0.4.0-dev. `book:check` passes for 43 sources, 145 evidence claims, and 2,394 math spans. |
+| `BGR-REPAIR-2` | active | Correct stale formal-status and future-work claims in Chapters 6–8, Appendix C, Appendix F, and `evidence.json`; update Chapters 4/5/9/11/12/14 only where the new narrative needs a bridge. Every changed theorem-like claim must have current evidence and must preserve the directed Nat theorem's original strength. |
+| `BGR-CH25-3` | pending | Write and visually validate Chapter 25, including groupoidal product closure, structured transport, and path pseudo-laxity. |
+| `BGR-CH26-4` | pending | Write and visually validate Chapter 26, including Circle computation, Integer encode/decode, monodromy, and connectedness/truncation. |
+| `BGR-CH27-5` | pending | Write and visually validate Chapter 27, including both concrete universal mapping theorems and generic groupoidification with its exact deferred source-action boundary. |
+| `BGR-CH28-6` | pending | Write and visually validate Chapter 28, including internal laxity, strict profiles, the selected Gray right closure, walking square, and interchanger without a full-Gray overclaim. |
+| `BGR-XCUT-7` | pending | Reconcile front matter, reading paths, contents, transitions, notation, glossary, evidence appendix, computation/status/formal appendices, bibliography, credits, and provenance; remove every stale three-spiral or future-groupoidification statement. |
+| `BGR-ARTICLE-8` | pending | Rebalance the overview article within its 18-page maximum, release it deterministically, and promote its tracked Markdown/PDF pair locally. |
+| `BGR-RELEASE-9` | pending | Stabilize edition metadata, run deterministic book release twice, verify equal hashes, promote the checked Markdown/PDF pair, and perform page-image QA of title, contents, all new chapter openings, figures, theorem/status blocks, appendices, bibliography, credits, and license. |
+| `BGR-CLOSE-10` | pending | Synchronize this plan, parent `ILGR-BOOK-1`, report index, public README/status claims, exact artifact hashes/page counts, and clean staged scope. Run no unrelated kernel/TypeScript aggregates; carry forward `f4d9303` semantic health unless a semantic source changes. Leave remote publication for explicit authorization. |
+
+### 12.1 Architecture Implementation Record — 2026-08-18
+
+The first implementation row changes only structured book sources:
+
+- the manifest appends Chapters 25–28 before the appendices;
+- the architecture contract records a distinct conceptual owner, prior
+  spiral dependencies, checked central theorem, and explicit boundary for
+  each chapter;
+- each chapter begins with one stable anchor, a mathematical question,
+  theorem preview, checked evidence marker, and scope note rather than an
+  empty placeholder;
+- `evidence.json` adds four reader-scale claims for product transport,
+  Circle/Integer, generic groupoidification, and the Gray interchanger; and
+- the edition version/date/status and output artifact name remain unchanged
+  until the prose architecture stabilizes.
+
+The existing `deriveNumberedChapterContract` already derives its final
+chapter and expansion count from the manifest, and its tests already cover
+later appended chapters. No renderer or checker change was necessary.
+
+The owning gate is green:
+
+```text
+book:check
+  43 assembled source files
+  145 checked/cited evidence identifiers
+  2,394 typography and KaTeX math spans
+  source, provenance, architecture, link, and document validation: passed
+```
+
+`BGR-REPAIR-2` therefore becomes active before any chapter is expanded. This
+ordering prevents the new prose from coexisting with known false future-work
+claims in the earlier reader path.
+
+## 13. Proportional Validation Policy
+
+### Planning and architecture changes
+
+- exact diff and JSON validation;
+- report header/reference lint;
+- `workspace:check` when package boundaries are implicated;
+- `book:check`; and
+- the focused book-architecture unit test if its owner changes.
+
+### Each prose/evidence tranche
+
+- `book:assemble` and freshness check;
+- evidence registry check;
+- semantic typography and KaTeX checks;
+- `book:check`;
+- focused rendering of affected chapter pages; and
+- Poppler page-image inspection of the changed transitions, figures, display
+  mathematics, status boxes, headers, and footers.
+
+Pure prose does not require Lambdapi or TypeScript aggregates. A disputed
+claim may trigger the nearest focused source/reviewer check, each bounded by
+the existing 90-second policy. Carry forward the exact green 208-target
+kernel health boundary when semantic sources remain unchanged.
+
+### Local release
+
+- `book:release` twice from clean generated state and equal SHA-256 hashes;
+- `article:release` and page-budget verification;
+- `book:promote` and `article:promote` only from checked owners;
+- byte equality between tracked distributions and generated owners;
+- `qpdf`, Poppler metadata/text/font/blank-page checks;
+- final page-image QA; and
+- no repository-wide aggregate unless a changed cross-layer contract makes
+  its omission a genuine blocker.
+
+Remote publication has its own authorization and may impose an additional
+integration gate.
+
+## 14. Risks And Guards
+
+### Risk: the fourth spiral becomes a kernel report
+
+Guard: organize each chapter around a question and theorem. Put source names
+in evidence notes; omit checkpoint chronology, warning counts, and rule LHS
+details from the mathematical line.
+
+### Risk: the Circle proof simply duplicates the HoTT Book
+
+Guard: use the HoTT proof as an attributed expository template, but emphasize
+the exact emdash computation boundary, telescope-localized Integer, whole
+categorical action, and comparison with directed WalkingEnd.
+
+### Risk: groupoidal closure, truncation, and groupoidification blur together
+
+Guard: give each its own universal direction and a comparison table in
+Chapter 27. `Core` retains invertible arrows, truncation lowers homotopy
+level, and `Groupoidify` freely realizes directed arrows as paths.
+
+### Risk: the generic construction is overstated as a completed adjunction
+
+Guard: state the active arbitrary-`C`/`G` mapping-object equivalence and
+computing unit/recursor; mark source action, `Groupoidify_func`, and adjunction
+packaging deferred wherever the theorem is summarized.
+
+### Risk: Gray terminology overclaims the implementation
+
+Guard: use “selected profiled right-closed Gray slice.” State the absent
+mirror closure, tensor functoriality, associativity/unit data, full
+biclosedness, and monoidal coherence.
+
+### Risk: stale old chapters contradict new chapters
+
+Guard: make the stale-claim inventory a blocking row before final chapter
+closeout; search for every future/not-yet occurrence in the affected concept
+families and classify it individually.
+
+### Risk: article growth breaks concision
+
+Guard: treat 18 pages as a hard initial ceiling and replace lower-value detail
+rather than append.
+
+### Risk: visual QA waits until the end
+
+Guard: render each chapter at its own checkpoint and inspect page images. The
+final release reruns representative whole-book inspection rather than being
+the first visual review.
+
+## 15. Persistent Goal Objective
+
+```text
+In the authorized dedicated worktree
+/home/user1/emdash1-book-groupoidal-v3.2 on branch
+goal/emdash-book-groupoidal-v3.2, complete
+EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5 according to the living plan
+docs/EMDASH_BOOK_V3_2_GROUPOIDAL_REALIZATION_EXPANSION_PLAN_2026-08-18.md
+and the active book/print contracts. Preserve the completed 0.4.0 edition and
+build a globally coherent fourth spiral through Chapters 25–28: Paths and the
+groupoidal shadow; the Circle and Integer line; free inversion and generic
+groupoidification; and laxity/Gray interchange. Correct stale earlier
+chapters and evidence, update front matter and appendices, rebalance the
+concise article within its 18-page maximum, and produce deterministic locally
+promoted book/article artifacts with page-image QA. Treat the book as
+theorem-led mathematical prose, not a developer report. Follow proportional
+checks, preserve exact formal-status boundaries, and use authorized local
+green checkpoint commits. Do not change mathematical or TypeScript semantics,
+run unnecessary long aggregates, push, merge, publish remotely, tag, rewrite
+history, delete branches, or remove worktrees.
+```
+
+## 16. Completion Definition
+
+The goal is complete only when:
+
+- all ledger rows are complete, rejected with durable evidence, or explicitly
+  deferred behind an accepted concrete prerequisite;
+- Chapters 25–28 form one coherent fourth spiral and each has a clear reader
+  question, proof architecture, checked central theorem, and honest boundary;
+- every affected stale claim in earlier chapters/appendices is corrected;
+- evidence, provenance, bibliography, notation, glossary, contents, reading
+  paths, and formal-status notes agree with active sources;
+- the article remains concise and accurately states the new boundary;
+- deterministic book and article releases pass their owners;
+- final PDFs receive visual page-image review with no layout defect;
+- tracked `docs/` artifacts are byte-identical to their checked owners;
+- the worktree is clean at reviewed local checkpoints; and
+- remote publication remains untouched unless separately authorized.
