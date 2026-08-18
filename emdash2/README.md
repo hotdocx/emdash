@@ -111,6 +111,25 @@ nonidentity oriented interchanger. The mirror closure, tensor coherence, full
 Crans--Gray monoidality, and global migration of historical strict endpoint
 cuts remain deferred.
 
+### Internal semisimplicial substrate
+
+The augmented injective simplex category is now internal and computational.
+Set-classified skip/keep face codes own identity and composition;
+`SemiDeltaPlus_cat` packages them as locally discrete hom categories.
+Iterated joins give ordinary directed simplex shapes, while Yoneda gives the
+distinct representable semisimplices. The selected two-simplex boundary and
+three horns are ordinary sieves, so their inclusions and mapping-category
+restrictions reuse the existing presheaf/sieve machinery.
+
+For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
+by path composition and the outer fillers by inverses, with J-derived section
+laws and iterable Path action. Categorical decalage is restriction along the
+vertex-appending index shift; both the base and cone tip are whole
+transformations, and fixed-tip cone fibres have a whole Path-map to their
+opposite bases. Generic dimensions, degeneracies, an all-dimensional Kan
+theorem, and assembly of those levelwise fibres into a whole displayed
+semisimplicial object remain explicit boundaries.
+
 ### Representability and profunctors
 
 Yoneda, represented hom action, dependent hom, Cat-valued profunctors,

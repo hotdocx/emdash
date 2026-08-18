@@ -14,8 +14,8 @@ the bounded algebraic filler row `SIMP-FILL-7` is complete. The promoted
 decalage slice `SIMP-DEC-8` is complete at its checked levelwise boundary;
 the whole varying-fibre comparison is deferred behind the named
 `SIMP-DEC-HFIBRE-TODO` prerequisite. The codata gate `SIMP-CODATA-9` is
-therefore deferred, and `SIMP-DOC-10` is the active row. Later work remains
-ordered rather than simultaneous scope.
+therefore deferred, `SIMP-DOC-10` is complete, and `SIMP-CLOSE-11` is the
+active row. Later work remains ordered rather than simultaneous scope.
 
 Branch: `goal/simplicial-substrate-v3.2`
 
@@ -119,8 +119,8 @@ Three objects must remain distinct:
 
 | Name | Meaning | Selected owner |
 | --- | --- | --- |
-| `DirectedSimplex_cat(n)` | finite ordinal category `[n]`, geometrically a directed simplex shape | Nat-recursive iterated `Join_cat` |
-| `StandardSimplex(n)` | representable presheaf `Hom(-,[n])` | existing `yoneda_psh` over `SemiDeltaPlus_cat` |
+| `DirectedSimplex_cat(n)` | finite ordinal category `[n]`, geometrically an `(n+1)`-vertex directed simplex shape | Nat-recursive iterated `Join_cat` |
+| `StandardSimplex(m)` | representable presheaf of the `m`-vertex ordinal; conventional `Delta[n]` is `StandardSimplex(succ n)` | existing `yoneda_psh` over `SemiDeltaPlus_cat` |
 | semisimplicial diagram `X` | coherent diagram on the opposite semi-simplex category | `Functor(Op_cat(SemiDeltaPlus_cat),Grpd_cat)` or its Cat-valued realization |
 
 The earlier `homd_`/Sigma result is a local cell-iteration mechanism. It
@@ -131,7 +131,7 @@ the standard representable simplex.
 The earlier explicit groupoidal `Delta2_grpd` proposal is also distinct. It
 is the groupoidal realization/free inversion of a selected directed
 2-simplex-shaped source, not the representable semisimplicial set
-`StandardSimplex(2)`.
+`StandardSimplex(3)`.
 
 ## 4. Reference Audit And Adaptation Boundary
 
@@ -552,8 +552,8 @@ worktree removal, or deployment is authorized by this plan.
 | `SIMP-DEC-8` | complete at bounded boundary | Promoted the vertex-appending shift, whole base and cone-tip transformations, presheaf decalage, fixed-tip levelwise fibres through the first three selected levels, and an iterable whole base Path-map. The intended whole displayed comparison did not typecheck because no varying-`HFiber` Catd/total Path-family owner exists; it is split into the named deferred prerequisite below rather than approximated pointwise. |
 | `SIMP-DEC-HFIBRE-TODO` | deferred prerequisite | Introduce one reusable varying-`HFiber` Catd or total Path-family owner, assemble it through existing `FibrewiseSigma_catd`, and only then compare its first three whole layers with `homd_`/Sigma action. Reopen only for a concrete displayed-fibre consumer. |
 | `SIMP-CODATA-9` | deferred; gate not met | The categorical/decalage interface did not yet produce the required whole displayed comparison, so no curated observation-driven `SST` codata facade, generic codata mechanism, or judgmental eta is promoted. Reconsider after `SIMP-DEC-HFIBRE-TODO`, not merely because an external reference uses codata. |
-| `SIMP-DOC-10` | active | Synchronize Foundations, canonical notation, SOP/source inventories, examples, and report index only for actually promoted owners and checked boundaries. |
-| `SIMP-CLOSE-11` | pending | Record checkpoints, exact focused evidence, warning deltas, clean state, remaining rows, and a safe continuation prompt. No integration or publication. |
+| `SIMP-DOC-10` | complete | Synchronized Foundations, canonical cardinal-versus-dimension notation, both READMEs, SOP/source inventories, focused examples, and the report index for the promoted substrate and its exact nonclaims. No generated book/article artifact was edited. |
+| `SIMP-CLOSE-11` | active | Record checkpoints, exact focused evidence, warning deltas, clean state, remaining rows, and a safe continuation prompt. No integration or publication. |
 
 ### 16.1 Initial Nat/Join Probe — 2026-08-18
 
@@ -876,6 +876,33 @@ tranche does not claim a whole displayed semisimplicial fibre, comparison
 with `homd_`, or a coinductive `SST` presentation. The health aggregate
 remains deferred to the closure decision under the standing no-long-
 aggregate policy.
+
+### 16.9 Documentation And Notation Consolidation — 2026-08-18
+
+The Foundations guide now separates the local simplicial reading of
+dependent homs from the global internal semisimplicial index, then follows one
+coherent route through face codes, join shapes, Yoneda representables,
+two-dimensional sieves/fillers, and decalage. Its deferred inventory names
+generic dimensions, degeneracies, all-dimensional Kan filling, and the whole
+varying-fibre comparison without weakening the promoted claims.
+
+The canonical-syntax authority records the critical index convention:
+internal object `m` counts vertices, whereas conventional `Delta[n]` is
+`StandardSimplex(succ n)`. The same convention corrects the earlier
+representable two-simplex reference from `StandardSimplex(2)` to
+`StandardSimplex(3)`. It also records comment notation for face codes,
+diagrams, the four selected sieves, algebraic fillers, and decalage, while
+making clear that no corresponding parser extension, generic `Kan` syntax,
+whole cone-display equation, or codata declaration syntax is active.
+
+The root and kernel READMEs, current-status report, nested repository guide,
+check registries, examples, and report index now describe the same promoted
+boundary. Active-reference lint, report-header lint, source-TOC validation,
+shell parsing, Python compilation, and exact diff whitespace checks pass. The
+assembled book and overview article are generated/released editorial
+artifacts and were not silently changed by this implementation plan; a future
+reader-facing simplicial chapter should receive its own evidence-backed
+editorial plan.
 
 ## 17. Completion Definition
 

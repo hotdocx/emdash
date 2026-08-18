@@ -17,6 +17,10 @@ representative product closure, path-realized pseudo-laxity, and the selected
 profiled Gray right closure with its walking interchanger live in the
 downstream `emdash3_2_*` modules recorded by the August
 groupoidal-realization plans.
+The computing face-code category, join-built simplex shapes, Yoneda
+semisimplices, selected two-dimensional boundaries and horns, algebraic
+path-groupoid horn fillers, and categorical decalage live in the subsequent
+semisimplicial modules recorded by the August simplicial-substrate plan.
 The isolated binary-Sum experiment was retired on 2026-07-20 for later
 consumer-led redesign; it is not part of the active foundation.
 
@@ -3566,7 +3570,7 @@ Here "packages" means that `homd_E(x,u,y,v)` is not merely a pointwise formula:
 it is one functorial object carrying the object, arrow, and higher action of
 dependent fibre arrows over the base hom.
 
-### Simplicial Reading
+### Simplicial Reading Of Dependent Homs
 
 The same construction has a simplicial/Grothendieck reading. The Sigma total
 over `homd_E(x,u,y,v)` packages a base arrow `f : x → y` together with a fibre
@@ -3616,6 +3620,95 @@ or, unfolded:
 ```text
 s[f] : Hom_{E[y]}(E[f](s[x]), s[y])
 ```
+
+### Internal Semisimplicial Substrate
+
+The local simplicial reading above now has a complementary global index. The
+active augmented semi-simplex category uses a cardinal convention: an object
+`m : Nat` has `m` vertices. Thus zero is the augmentation object, one is the
+ordinary point, two is the directed edge, and three is the directed
+two-simplex. Its arrows are set-classified codes for injective monotone maps:
+
+```text
+FaceCode(p,n)       p-vertex face of an n-vertex ordinal
+face_skip(f)        omit the next target vertex
+face_keep(f)        retain the next target vertex
+face_comp(g,f)      substitute f into the retained positions of g.
+```
+
+The raw skip/keep syntax computes composition structurally. Its public
+`FaceCode` is the existing 0-truncation, so the hom groupoids of
+`SemiDeltaPlus_cat` are discrete path categories without sacrificing
+constructor computation:
+
+```text
+Obj(SemiDeltaPlus_cat) = Nat
+Hom(p,n) = Path_cat(FaceCode(p,n)).
+```
+
+This is the injective, semisimplicial indexing category; it has no degeneracy
+maps. The ordinary geometric and representable notions of simplex are kept
+distinct. In conventional dimension notation,
+
+```text
+directed [n]   = DirectedSimplex_cat(n)
+Delta[n]       = StandardSimplex(succ n)
+               = Yoneda(SemiDeltaPlus_cat,succ n).
+```
+
+`DirectedSimplex_cat(n)` is the `(n+1)`-vertex iterated join with a point. A
+generic whole `join_map_func` realizes maps between joins, and the first five
+selected cofaces realize the vertices of the edge and the edges of the
+two-simplex. An arbitrary face-code decoder into strict geometric functors is
+not yet claimed. By contrast, `StandardSimplex` is representable, so all of
+its restriction and higher action comes immediately from the existing Yoneda
+and internal-hom owner.
+
+A groupoid-valued semisimplicial object is simply
+
+```text
+X : Functor(Op_cat(SemiDeltaPlus_cat),Grpd_cat),
+X_n := X[succ n].
+```
+
+Postcomposition by `Path_cat_func` realizes its levels and face maps as one
+Cat-valued presheaf. Because the codomain homs are path categories, the
+generic laxity cells are invertible: coherent semisimplicial substitution is
+therefore inherited from the same functor/transfor tower rather than stored
+as a separate list of simplicial equations.
+
+For the ordinary two-simplex, the boundary and three horns are ordinary
+sieves on the three-vertex object. Membership computes by asking which target
+vertices a face code omits. The existing sieve-extension owner then gives
+whole inclusions into `Delta[2]`; precomposition gives the corresponding
+whole restriction of mapping categories. The first computational Kan
+consumer is deliberately algebraic and two-dimensional. In the strict
+2-nerve carrier of a path groupoid, the inner horn is filled by path
+composition and the two outer horns by path inverses. J-derived cancellation
+packages all three restrictions as sections, and `path_map_func` retains
+their higher action. This is not yet an all-dimensional nerve comparison or
+a Kan theorem for arbitrary presheaves.
+
+Categorical decalage adds one final vertex. The index endofunctor acts by
+
+```text
+m |-> succ m
+f |-> face_keep(f),
+```
+
+and presheaf restriction gives `Dec(X)_n = X_{n+1}` in ordinary dimension
+notation. The old vertices and the added cone tip are not pointwise formulas:
+they are components of two whole transformations into the shift. For fixed
+`x : X_0`, the active levelwise cone fibre consists of shifted simplices whose
+new vertex is `x`; forgetting that vertex is one iterable Path-map to the
+opposite base simplex.
+
+The last statement is intentionally levelwise. A reusable varying-`HFiber`
+Cat-valued family, or equivalently a total Path-family over the shifted
+diagram, is still needed before the fibres can be assembled by
+`FibrewiseSigma_catd` and compared wholely with the `homd_`/Sigma tower. Until
+that owner has a concrete consumer, decalage is not advertised as a completed
+display translation, and no coinductive `SST` facade is introduced.
 
 ### Whole Displayed Laxity From The Internal Action
 
@@ -5102,6 +5195,14 @@ The current foundations intentionally do not yet include:
   generic selected-action registry is planned without a concrete new
   consumer;
 - dependent join elimination or a semantic collage construction;
+- generic-dimensional boundaries and horns, degeneracies and the full
+  simplex category, an all-dimensional nerve/Kan theorem, geometric
+  realization, and a whole varying-fibre comparison between categorical
+  decalage and the dependent-hom/Sigma tower. The augmented face-code
+  category, selected join cofaces, Yoneda semisimplices, all four
+  two-simplex sieves, algebraic path-groupoid 2-horn fillers, and levelwise
+  decalage fibres are active; a coinductive `SST` facade remains gated by the
+  missing whole varying-`HFiber` owner;
 - a finalized surface syntax for the future proof assistant;
 - full coherence APIs for every Sigma/Pi helper;
 - a named `section_total(s) : K → Σ_K E` presentation facade and packaged
@@ -5126,8 +5227,8 @@ The current foundations intentionally do not yet include:
 These are compatible future directions. The current v3.2 milestone combines
 the directed categorical foundation with explicit equivalence/univalence
 staging, a first computational profunctor/weighted-representability layer,
-primitive directed join, synthetic path induction, and the Eckmann–Hilton
-application.
+primitive directed join, synthetic path induction, the Eckmann–Hilton
+application, and a first internally indexed semisimplicial vertical slice.
 
 ## 18. Implementation Glossary
 
@@ -5298,6 +5399,16 @@ kernel and one-way library vocabulary.
 | generic groupoidification mapping equivalence | `groupoidification_hom_omega C G` |
 | generic unit compositor / next action | `groupoidify_unit_compositor` / `groupoidify_unit_compositor_next_func` |
 | WalkingArrow generic recovery | `groupoidify_walking_interval_type_equiv` |
+| injective ordinal-face code / identity / composition | `FaceCode p n` / `face_identity n` / `face_comp h g` |
+| augmented semisimplex index category | `SemiDeltaPlus_cat` |
+| ordinary join-built directed simplex `[n]` | `DirectedSimplex_cat n` |
+| representable semisimplex `Delta[n]` | `StandardSimplex (succ n)` |
+| groupoid-valued semisimplicial diagrams | `SemiSimplicialGrpd_cat` |
+| level and face action of a semisimplicial diagram | `semisimplicial_grpd_level` / `semisimplicial_grpd_face_map` |
+| boundary and `k`th horn of `Delta[2]` | `simplex2_boundary_sieve` / `simplex2_horn_{zero,one,two}_sieve` |
+| restriction to a selected two-simplex boundary/horn | `simplex2_partial_restrict` |
+| index shift and categorical decalage | `semi_delta_shift_func` / `semisimplicial_decalage` |
+| fixed-tip levelwise cone fibre / base Path-map | `SemisimplicialConeFibre` / `semisimplicial_cone_base_func` |
 | pointwise paths between dependent functions | `PiPointwisePath A B f g` |
 | diagonal Pi path observation / extension | `PiHapply p` / `PiFunext h` |
 | Pi happly/funext equivalence | `pi_happly_type_equiv A B f g` |

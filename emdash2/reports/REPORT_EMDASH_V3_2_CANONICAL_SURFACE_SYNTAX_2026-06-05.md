@@ -1,7 +1,7 @@
 # emdash v3.2 Canonical Surface Syntax
 
 Date: 2026-06-05
-Last reviewed: 2026-08-04
+Last reviewed: 2026-08-18
 
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
@@ -1027,6 +1027,99 @@ gated.
 This algebraic section adds no further parser tokens. It records canonical
 comments, examples, and direct TypeScript-AST intent; the implemented textual
 subset remains the bounded categorical binder profile stated above.
+
+## Semisimplicial And Simplex Notation
+
+The active semisimplicial index uses *vertex counts*. In comments, write
+
+```text
+alpha : p hook-> n              injective monotone face code
+SemiDeltaPlus                   augmented injective simplex category
+[n]_dir                         directed geometric n-simplex
+Delta[n]                        representable semisimplicial n-simplex
+X_n                             n-simplices of X
+```
+
+with literal owners
+
+```text
+alpha : FaceCode(p,n)
+SemiDeltaPlus_cat
+DirectedSimplex_cat(n)
+StandardSimplex(succ n)
+semisimplicial_grpd_level(X,succ n).
+```
+
+The successor in the last two lines is essential. An internal index object
+`m` has `m` vertices: zero is the augmentation object, one is the ordinary
+point, two the edge, and three the two-simplex. Thus the conventional
+dimension notation `Delta[n]` is `StandardSimplex(succ n)`, not
+`StandardSimplex(n)`. The ASCII spelling `hook->` is comment notation only;
+no new parser token is active.
+
+Face-code constructors and composition may be displayed as
+
+```text
+skip(alpha)                     : p hook-> succ n
+keep(alpha)                     : succ p hook-> succ n
+idFace(n)                       : n hook-> n
+beta o_face alpha               : p hook-> r.
+```
+
+Their kernel owners are `face_skip`, `face_keep`, `face_identity`, and
+`face_comp beta alpha`. Face-code composition, not an external family of
+simplicial equations, owns the coface identities. The geometric realization
+of an arbitrary face code is not yet canonical syntax: only the selected
+cofaces through dimension two have promoted strict-profile functors.
+
+For groupoid-valued diagrams write
+
+```text
+SemiSimplicial(Grpd)
+X[alpha] : X_n -> X_p
+PathRealize(X)
+```
+
+for `SemiSimplicialGrpd_cat`, `semisimplicial_grpd_face_map X alpha`, and
+`semisimplicial_grpd_realize X`. The bracket expression is contravariant in
+`alpha`. Its whole and higher action remain at the ordinary
+functor/transformation owners; the notation must not be elaborated into a
+record containing separate naturality proofs.
+
+The selected two-dimensional sieve notation is
+
+```text
+boundary(Delta[2])              partial Delta[2]
+horn(k,Delta[2])                Lambda^k[2],  k = 0,1,2
+restrict(kind,X)                maps Delta[2] -> X to partial maps.
+```
+
+The literal owners are `simplex2_boundary_sieve`,
+`simplex2_horn_zero_sieve`, `simplex2_horn_one_sieve`,
+`simplex2_horn_two_sieve`, and `simplex2_partial_restrict`. These names refer
+to ordinary sieves on the three-vertex object and their existing whole
+extensions into `StandardSimplex(succ(succ(succ zero)))`. They do not denote
+generic-dimensional boundary/horn families. The algebraic path-groupoid
+fillers may be described as `fill_0`, `fill_1`, and `fill_2`, but their literal
+owners remain the `path_nerve2_fill_*` functions; no all-dimensional `Kan`
+notation is active.
+
+For categorical decalage, write
+
+```text
+shift(m)      = succ m
+shift(alpha)  = keep(alpha)
+Dec(X)_n      = X_(n+1)
+Cone_X(x;n)   = {sigma : X_n | finalVertex(sigma) = x}.
+```
+
+The corresponding owners are `semi_delta_shift_func`,
+`semisimplicial_decalage`, and `SemisimplicialConeFibre X x n`. The last
+kernel index follows the cardinal convention described above. Its base map is
+the whole `semisimplicial_cone_base_func`; however, the collection of fibres
+is not yet assembled into one displayed semisimplicial object. Accordingly,
+there is no canonical surface notation identifying `Cone_X(x;-)` with a
+`homd_` family, and no coinductive `SST` declaration syntax is active.
 
 ## Mixed-Variance Displayed Functor Families
 

@@ -38,6 +38,15 @@ interchanger from whole internal laxity. Source functoriality and the packaged
 groupoidification adjunction, the mirror Gray closure, and full Gray
 monoidality remain explicit boundaries.
 
+An internal semisimplicial substrate now complements that local cell calculus:
+computing face codes form an augmented injective simplex category; iterated
+joins and Yoneda give distinct geometric and representable simplices; the
+boundary and three horns of the two-simplex are ordinary sieves; and a bounded
+path-groupoid 2-nerve computes all three horn fillers. Categorical decalage
+adds whole base and cone-tip observations and selected levelwise cone fibres.
+Degeneracies, generic-dimensional horns/Kan filling, and the whole displayed-
+fibre comparison remain future work.
+
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
 of global metatheory.
