@@ -1,5 +1,20 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
+> **Current mathematical and book boundary (2026-08-18):** The active
+> Lambdapi development now includes the successor-localized Integer and
+> Circle loop-space theorem, WalkingEnd/Circle and WalkingArrow/Interval
+> universal comparisons, category-indexed `Groupoidify(C)` with its whole
+> target-side mapping equivalence and compositor action, classified
+> truncation with Circle connectedness, and one profiled Gray right closure
+> with a nonidentity walking interchanger. The current overview is
+> `emdash2/reports/EMDASH_FOUNDATIONS.md`; exact owners and deferred source
+> functoriality/adjunction/Gray boundaries are in the current-status and
+> canonical-syntax reports. The locally promoted book is the 343-page
+> `0.5.0-dev` draft at `docs/emdash-book.pdf`. These Lambdapi results do not
+> silently enlarge the bounded TypeScript transferred profile: TypeScript
+> work must still add reviewed owners, policies, consumers, and conformance
+> evidence through its governing plans.
+
 > **Proof-assistant and typed-goal-graph continuation (2026-08-10):**
 > [`TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md`](./TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md)
 > is the governing living plan for the continuation from the qualified

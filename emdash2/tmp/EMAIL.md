@@ -13,14 +13,18 @@ directed dependent theory of categories, Cat-valued families, Sigma totals,
 sections, dependent homs, functors, transfors, profunctors, and selected
 universal constructions.
 
-Three applications expose the architecture. Directed arrow induction
+Four mathematical threads expose the architecture. Directed arrow induction
 transports reflexive data along a canonical Sigma arrow and computes ordinary
 composition. A directed higher-inductive walking endomorphism is normalized
 to the natural-number powers of its generator. In local geometry, the locus
 where a section becomes invertible is constructed first as a sieve D_U(s),
 before one asks whether an open represents it; finite localization charts
 then generate a Zariski topology, while a direct return/glue/silent
-categorical HIT constructs fixed-site Cat-valued sheafification.
+categorical HIT constructs fixed-site Cat-valued sheafification. Returning to
+the groupoidal layer, a Circle/Integer encode-decode theorem restores inverse
+powers, category-indexed groupoidification characterizes maps out by a whole
+mapping equivalence, and one profiled Gray right closure exposes a nonidentity
+walking-square interchanger from the same internal laxity action.
 
 The same distinction between readable syntax and explicit structure appears
 in the implementation. A TypeScript elaborator accepts usual binder-and-
@@ -256,6 +260,113 @@ At the next hom level, the Eckmann–Hilton calculation concerns
 Here `·` is vertical composition and `*` is horizontal composition derived
 from whiskering. Their common unit and interchange identify the two products
 and force commutativity.
+
+
+Groupoidal realization and a directed Gray interchanger
+--------------------------------------------------------
+
+The path category places equality inside the same iterable categorical
+interface. For a groupoidal classifier `A`,
+
+```
+Obj(Path(A))       = A
+Hom_Path(A)(x,y)   = (x = y).
+```
+
+This is not groupoidification: `Path(A)` exposes equality already present in
+`A`, whereas groupoidification freely realizes directed arrows as paths. A
+representative closure theorem makes the distinction computationally useful:
+
+```
+Path(A × B) → Path(A) × Path(B)
+```
+
+is the identity on objects and an equivalence on every hom. For a dependent
+family over `A × B`, direct transport along a paired path agrees with transport
+first in either coordinate; the two comparisons form a coherent diamond.
+
+The Circle is an opaque groupoidal HIT rather than a quotient of WalkingEnd:
+
+```
+Circle : Grpd
+base   : Circle
+loop   : base = base.
+```
+
+Its dependent eliminator computes both at the point and at the dependent
+action on the loop:
+
+```
+circle_ind(D,b,ell)(base)       ↝ b
+apd(circle_ind(D,b,ell),loop)   ↝ ell.
+```
+
+The ordinary constant-family `ap` equation remains propositional, so there is
+one selected higher-constructor computation rather than two competing normal
+forms. Localizing natural-number successor to an equivalence gives the
+Integer classifier. Circle monodromy is successor, and universal-cover
+encode/decode yields
+
+```
+Hom_Circle(base,base) ≃ ℤ.
+```
+
+The comparison `WalkingEnd → Path(Circle)` sends `loop^n` to the nonnegative
+Circle power. More generally, every directed category `C` has a groupoidal
+realization with one whole unit
+
+```
+Groupoidify(C) : Grpd
+η_C : C → Path(Groupoidify(C)).
+```
+
+For every groupoid `G`, restriction along `η_C` and whole extension are inverse
+at the level of mapping categories:
+
+```
+Hom_Grpd(Groupoidify(C),G)
+  ≃_ω Functor(C,Path(G)).
+```
+
+The recursor computes on represented points and on dependent action over every
+represented source arrow; beta and eta are paths between whole functors, so
+higher action is retained. Specializing `C` to the two-ended WalkingArrow
+recovers the independently presented groupoidal Interval up to equivalence.
+This is the target-side universal property. Source action
+`Groupoidify(H)`, the whole `Groupoidify_func`, and the packaged adjunction
+with `Path` remain future interfaces.
+
+The same internal-action calculus keeps directed laxity visible. Its functor
+compositor is a cell
+
+```
+φ^F_{g,f} : F[g] ∘ F[f] ⇒ F[g ∘ f].
+```
+
+In a path target this cell is invertible; at a decoded computationally strict
+functor code it reduces to identity; in a general directed target it need not
+be invertible. The selected strict-object/lax-arrow profile reuses the ambient
+transfor and higher-hom tower:
+
+```
+GrayHom_lax(A,B)
+
+GrayHom_lax(A ⊗_R B,C)
+  ≃_ω GrayHom_lax(A,GrayHom_lax(B,C)).
+```
+
+Coevaluation at two walking arrows produces four vertices and two boundary
+routes. Projecting the existing whole laxity action gives the oriented,
+nonidentity interchanger
+
+```
+χ : a₁ ∘ b₀ ⇒ b₁ ∘ a₀,
+```
+
+with one next hom action still available. This is one checked profiled right
+closure and a low-dimensional coherence stress test. It is not the mirror
+closure, tensor functoriality/coherence, a full Crans–Gray biclosed monoidal
+structure, or a global migration of the prototype's historical strict cuts.
 
 
 Profunctors, weighted universals, and duality
@@ -498,8 +609,9 @@ Pⁿ_A = Proj A[x₀,…,xₙ].
 These qualifications are part of the result. Emdash currently demonstrates
 that directed dependency, readable categorical binders, higher-inductive
 normalization, weighted universal constructions, sieve-centered local
-geometry, and a Cat-valued sheafification reflector inhabit one executable
-architecture. It does not claim that every displayed variance, every
+geometry, a Cat-valued sheafification reflector, free groupoidal realization,
+and a profiled Gray interchanger inhabit one executable architecture. It does
+not claim that every displayed variance, every groupoidal closure, every
 coefficient category, or the representation-independent theory of schemes
 has already been completed.
 
@@ -627,6 +739,47 @@ At the next hom level, Eckmann–Hilton gives
 ```
 
 where `·` is vertical composition and `*` is horizontal composition.
+
+---
+
+The groupoidal return keeps the same computational distinction. The Circle
+has `base`, `loop : base = base`, judgmental point and dependent-loop
+computation, and a successor-localized universal cover with
+
+```
+Hom_Circle(base,base) ≃ ℤ.
+```
+
+WalkingEnd maps its forward powers to the nonnegative Circle powers. For an
+arbitrary directed category, one whole unit
+
+```
+η_C : C → Path(Groupoidify(C))
+```
+
+gives the target-side mapping equivalence
+
+```
+Hom_Grpd(Groupoidify(C),G)
+  ≃_ω Functor(C,Path(G)).
+```
+
+The recursor computes on represented points and dependent first cells and
+retains higher action. Source functoriality and the packaged adjunction remain
+separate.
+
+The generic compositor `F[g] ∘ F[f] ⇒ F[g ∘ f]` becomes invertible in a path
+target and becomes identity at a decoded strict code, but may remain directed
+otherwise. One selected strict-object/lax-arrow right closure
+
+```
+GrayHom_lax(A ⊗_R B,C)
+  ≃_ω GrayHom_lax(A,GrayHom_lax(B,C))
+```
+
+derives the nonidentity walking-square interchanger
+`a₁ ∘ b₀ ⇒ b₁ ∘ a₀` from whole laxity. This is a profiled coherence test, not
+the full Crans–Gray monoidal theory.
 
 ---
 

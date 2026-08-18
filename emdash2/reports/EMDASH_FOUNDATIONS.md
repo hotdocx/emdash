@@ -13,9 +13,10 @@ downstream in `emdash3_2_walking_end_hit.lp` under the July 17 living plan.
 The successor-localized Integer, groupoidal Circle and interval HITs,
 loop-space calculation, concrete WalkingEnd-to-Circle comparison,
 WalkingArrow-to-interval mapping theorem, category-indexed groupoidification,
-and representative
-product closure live in the downstream `emdash3_2_*` modules recorded by the
-August groupoidal-realization plans.
+representative product closure, path-realized pseudo-laxity, and the selected
+profiled Gray right closure with its walking interchanger live in the
+downstream `emdash3_2_*` modules recorded by the August
+groupoidal-realization plans.
 The isolated binary-Sum experiment was retired on 2026-07-20 for later
 consumer-led redesign; it is not part of the active foundation.
 
@@ -186,7 +187,7 @@ terms. This is genuine truncation evidence, not a conclusion inferred only
 from the no-confusion rewrite table. Open addition is not normalized by
 commutativity.
 
-### Integer, Circle, And Representative Groupoidal Closure
+### Integer, Circle, And Groupoidal Realization
 
 The set-truncated telescope localization of Nat successor has a transparent
 integer-facing presentation. Write `Integer` for its carrier. Its selected
