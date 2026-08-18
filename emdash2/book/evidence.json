@@ -3572,6 +3572,70 @@
         }
       ]
     },
+    "GROUPOIDAL-PRODUCT-CLOSURE": {
+      "status": "checked",
+      "statement": "The canonical comparison from Path(A x B) to Path(A) x Path(B) is judgmentally identity on objects, and at each pair of objects its actual hom action has explicit split and join maps forming a TypeEquiv between product paths and pairs of component paths; the distinct category heads are not definitionally identified.",
+      "owners": [
+        {
+          "file": "emdash3_2_groupoidal_closure.lp",
+          "symbol": "path_product_compare_func"
+        },
+        {
+          "file": "emdash3_2_groupoidal_closure.lp",
+          "symbol": "path_product_compare_hom_type_equiv"
+        },
+        {
+          "file": "emdash3_2_groupoidal_closure.lp",
+          "symbol": "path_product_comparison_evidence"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/groupoidal_product_transport.lp",
+          "symbol": "path_product_compare_func"
+        },
+        {
+          "file": "examples/groupoidal_product_transport.lp",
+          "symbol": "path_product_compare_hom_type_equiv"
+        }
+      ]
+    },
+    "PATH-PSEUDO-LAXITY": {
+      "status": "checked",
+      "statement": "For a raw map h between groupoids, the generic compositor of path_map_func(h) decodes to an equality between paths with a canonical eq_sym inverse; its formal endpoints compare propositionally with the readable eq_ap/eq_trans composites, and the whole compositor retains one next hom action.",
+      "owners": [
+        {
+          "file": "emdash3_2_path_pseudo_laxity.lp",
+          "symbol": "path_map_compositor_path"
+        },
+        {
+          "file": "emdash3_2_path_pseudo_laxity.lp",
+          "symbol": "path_map_compositor_inverse"
+        },
+        {
+          "file": "emdash3_2_path_pseudo_laxity.lp",
+          "symbol": "path_map_compositor_readable"
+        },
+        {
+          "file": "emdash3_2_path_pseudo_laxity.lp",
+          "symbol": "path_map_compositor_higher_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/path_pseudo_laxity.lp",
+          "symbol": "path_map_compositor_path"
+        },
+        {
+          "file": "examples/path_pseudo_laxity.lp",
+          "symbol": "path_map_compositor_inverse"
+        },
+        {
+          "file": "examples/path_pseudo_laxity.lp",
+          "symbol": "path_map_compositor_higher_func"
+        }
+      ]
+    },
     "GROUPOIDAL-PRODUCT-TRANSPORT": {
       "status": "checked",
       "statement": "For a dependent family over a product, transport along the path assembled from two coordinate paths agrees with both sequential coordinate orders; the two comparisons form a coherence diamond, and the existing structured transport and PathOut induction agree with the same primitive right-J transport.",

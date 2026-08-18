@@ -7,7 +7,8 @@ Plan-ID: `EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5`
 Status: **active fourth-spiral book continuation**. The cumulative baseline,
 book contract, stale-claim inventory, evidence boundary, and chapter
 architecture have been reviewed. `BGR-00` and `BGR-ARCH-1` are complete;
-`BGR-REPAIR-2` is complete and `BGR-CH25-3` is the first active chapter row.
+`BGR-REPAIR-2` and `BGR-CH25-3` are complete, and `BGR-CH26-4` is the active
+chapter row.
 
 Branch: `goal/emdash-book-groupoidal-v3.2`
 
@@ -483,8 +484,8 @@ AI imagery is not part of the mathematical pages.
 | `BGR-00` | complete | Create the dedicated branch/worktree at cumulative checkpoint `f4d9303`; bootstrap the pinned workspace; verify clean staged/unstaged state, ancestry, and `workspace:check`; run the green 39-source/141-evidence `book:check`; audit current chapters, article, evidence, provenance, and the 299-page artifact; record the fourth-spiral architecture and exact non-claims. |
 | `BGR-ARCH-1` | complete | `book.json` and `expansion.json` now extend contiguously through Chapters 25–28. Four stable anchored chapter owners contain reader-facing theorem previews and exact boundaries; four coarse checked evidence entries point to active owners/reviewers. A real provenance-growth consumer generalized the checker's fixed 13-entry assumption to a nonempty/unique/well-formed contract with focused tests. Release metadata remains at 0.4.0-dev. `book:check` passes for 43 sources and 145 evidence claims. |
 | `BGR-REPAIR-2` | complete | Corrected the stale truncation-reflector, WalkingEnd–Circle free-inversion, and whole-laxity evidence/status boundaries; repaired Chapters 4, 6–9, 12, and 14 plus Appendices C, D, and F; registered the Chapter 26 HoTT adaptations; preserved the directed Nat theorem's original strength. Focused architecture tests pass 5/5, `book:check` passes at 2,410 math spans, the browser render is green at 313 pages, and the review-only PDF passes at 313 pages/16 fonts with representative pages visually inspected. |
-| `BGR-CH25-3` | active | Write and visually validate Chapter 25, including groupoidal product closure, structured transport, and path pseudo-laxity. |
-| `BGR-CH26-4` | pending | Write and visually validate Chapter 26, including Circle computation, Integer encode/decode, monodromy, and connectedness/truncation. |
+| `BGR-CH25-3` | complete | Chapter 25 is a 2,783-word theorem-led account of the Path-category bridge, homwise product closure, the product-transport diamond, agreement of structured transport and `PathOut` with primitive right-J, and target-induced pseudo-laxity. Two focused evidence claims separate product split/join and path-realized compositor strength. `book:check` passes at 147 cited claims/2,478 math spans; the 319-page review PDF passes with 16 embedded fonts, and all seven Chapter 25 pages were inspected with Poppler. |
+| `BGR-CH26-4` | active | Write and visually validate Chapter 26, including Circle computation, Integer encode/decode, monodromy, and connectedness/truncation. |
 | `BGR-CH27-5` | pending | Write and visually validate Chapter 27, including both concrete universal mapping theorems and generic groupoidification with its exact deferred source-action boundary. |
 | `BGR-CH28-6` | pending | Write and visually validate Chapter 28, including internal laxity, strict profiles, the selected Gray right closure, walking square, and interchanger without a full-Gray overclaim. |
 | `BGR-XCUT-7` | pending | Reconcile front matter, reading paths, contents, transitions, notation, glossary, evidence appendix, computation/status/formal appendices, bibliography, credits, and provenance; remove every stale three-spiral or future-groupoidification statement. |
@@ -570,6 +571,50 @@ Chapter 14 strict-profile table, Appendix C comparison, and all four new
 chapter openings were rendered with Poppler and visually inspected. The PDF
 is a local review artifact under unchanged 0.4.0-dev metadata; it is not
 promoted or released.
+
+### 12.3 Chapter 25 Record — 2026-08-18
+
+Chapter 25 now occupies seven pages and 2,783 source words. Its exposition is
+organized around three checked theorems rather than module chronology:
+
+1. the canonical comparison from `Path(A x B)` to
+   `Path(A) x Path(B)` is judgmentally identity on objects and an explicit
+   split/join equivalence on each hom;
+2. direct product transport agrees with both sequential coordinate orders,
+   and the two comparisons induce the expected coherence diamond; and
+3. the generic compositor of `Path(f)` is an equality between paths, gains an
+   inverse by symmetry, compares propositionally with its readable
+   `ap`/concatenation endpoints, and retains one next hom action.
+
+The chapter uses those results to distinguish groupoidal closure, truncation,
+and free inversion before handing the reader to the Circle calculation. It
+states explicitly that the product comparison is not promoted to a category-
+head conversion or whole equivalence, that structured transport comparisons
+are propositional rather than competing runtime rules, and that retained
+higher action is not a complete weak-omega-groupoid theorem.
+
+Two focused evidence records were added:
+`GROUPOIDAL-PRODUCT-CLOSURE` and `PATH-PSEUDO-LAXITY`. No Lambdapi,
+TypeScript, renderer, package, or release semantics changed. The preceding
+local checkpoints are `bbc7ffd` for architecture and `e53dbaa` for stale-
+claim/provenance repair.
+
+Proportional validation is green:
+
+```text
+chapter source words: 2,783
+book:check: 43 sources, 147 cited claims, 2,478 math spans
+book:render: no console/page/request/render failure
+book:pdf:check: 319 pages, 16 embedded fonts
+review PDF sha256: 363d1386097d807140e64d2e98e371d74a773a0da97204d3ece8a1c354f26a1b
+```
+
+Poppler review covered every Chapter 25 page, 198–204. The opening, equations
+(25.1)–(25.20), three formal-status boxes, transport diamond, page breaks,
+final synthesis, and Chapter 26 transition are legible, uncropped, and free
+of accidental blank or sparsely stranded pages. The PDF remains an ignored
+review artifact under unchanged 0.4.0-dev metadata; promotion belongs only to
+`BGR-RELEASE-9`.
 
 ## 13. Proportional Validation Policy
 

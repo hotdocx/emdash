@@ -360,7 +360,9 @@
         "evidence": "GROUPOIDAL-PRODUCT-TRANSPORT"
       },
       "secondaryEvidence": [
-        "CAT-PATH-CATEGORY"
+        "CAT-PATH-CATEGORY",
+        "GROUPOIDAL-PRODUCT-CLOSURE",
+        "PATH-PSEUDO-LAXITY"
       ],
       "boundary": "the selected product and path-compositor consumers exhibit computational groupoidal closure and pseudo realization; they do not establish closure for every categorical former, a second equality eliminator, a complete weak omega-groupoid semantics, or a global normalization theorem"
     },
