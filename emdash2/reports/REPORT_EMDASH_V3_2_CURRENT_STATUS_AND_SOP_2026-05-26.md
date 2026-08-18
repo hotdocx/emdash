@@ -557,6 +557,13 @@ detailed probe evidence.
   and iterable Path-map lifts. It also exposes generic presheaf-facing horn
   restriction, but does not identify the algebraic carriers with full mapping
   categories or claim an all-dimensional nerve/Kan theorem.
+- `emdash3_2_semisimplicial_decalage.lp`: categorical decalage through the
+  vertex-appending endofunctor of the internal semi-simplex category. Whole
+  base and cone-tip transformations retain generic naturality; presheaf
+  restriction shifts levels, and a fixed-tip levelwise `HFiber` has an
+  iterable Path-map to its opposite base. A varying-`HFiber` Catd/total
+  Path-family owner is not yet active, so no whole displayed semisimplicial
+  object or `homd_` comparison is claimed.
 - `emdash3_2_circle_connectedness.lp`: transparent rule-free propositional-
   truncation consumer. It constructs
   `Pi x:S1, ||circle_base=x||_{-1}` by dependent Circle induction; the retained

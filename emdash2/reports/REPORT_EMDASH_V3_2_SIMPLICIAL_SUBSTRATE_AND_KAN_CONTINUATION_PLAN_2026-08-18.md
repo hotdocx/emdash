@@ -10,9 +10,12 @@ Nat/join feasibility row `SIMP-PROBE-1`, the set-classified face-code row
 complete. The join-shape/selected-realization row `SIMP-SHAPE-4` is also
 complete. The representable/diagram row `SIMP-YONEDA-5` is complete;
 the dimension-two boundary/horn row `SIMP-SIEVE-6` is complete;
-the bounded algebraic filler row `SIMP-FILL-7` is complete; `SIMP-DEC-8` is
-the active implementation row. Later rows remain ordered gates rather than
-simultaneous scope.
+the bounded algebraic filler row `SIMP-FILL-7` is complete. The promoted
+decalage slice `SIMP-DEC-8` is complete at its checked levelwise boundary;
+the whole varying-fibre comparison is deferred behind the named
+`SIMP-DEC-HFIBRE-TODO` prerequisite. The codata gate `SIMP-CODATA-9` is
+therefore deferred, and `SIMP-DOC-10` is the active row. Later work remains
+ordered rather than simultaneous scope.
 
 Branch: `goal/simplicial-substrate-v3.2`
 
@@ -38,8 +41,8 @@ Depends-On:
 
 Side-Task-Ledger: `SIMP-00`, `SIMP-PROBE-1`, `SIMP-CODE-2`,
 `SIMP-INDEX-3`, `SIMP-SHAPE-4`, `SIMP-YONEDA-5`, `SIMP-SIEVE-6`,
-`SIMP-FILL-7`, `SIMP-DEC-8`, `SIMP-CODATA-9`, `SIMP-DOC-10`, and
-`SIMP-CLOSE-11`
+`SIMP-FILL-7`, `SIMP-DEC-8`, `SIMP-DEC-HFIBRE-TODO`, `SIMP-CODATA-9`,
+`SIMP-DOC-10`, and `SIMP-CLOSE-11`
 
 Infinity-Codex-Origin: session
 `019ffe39-2eb9-7080-88e3-06b77d69b8d1`. The principal design response was
@@ -436,10 +439,19 @@ from `x`, triangles over base edges, and tetrahedral fillers. Those are the
 same base-plus-dependent-cell layers already computed by `homd_`, dependent
 Sigma, and the recursive internal action.
 
-The acceptance test is a whole comparison for the first three dimensions,
-not a pointwise analogy. Only after this comparison exists may the public
-documentation describe decalage/fibre as the derived emdash display for
-semisimplicial objects.
+The acceptance test for calling this fibre *the* derived emdash display is a
+whole comparison for the first three dimensions, not a pointwise analogy.
+The bounded probe established the shift, both whole observations, presheaf
+decalage, levelwise fixed-tip fibres, and one iterable whole base Path-map. It
+also isolated the missing prerequisite: a varying-`HFiber` Catd, or
+equivalently a whole total Path-family over the shifted diagram, from which
+`FibrewiseSigma_catd` can assemble one displayed semisimplicial object.
+
+That prerequisite is recorded as `SIMP-DEC-HFIBRE-TODO`. Until it is met,
+public documentation may describe the active construction as categorical
+decalage with selected levelwise cone fibres, but not as a whole
+`homd_`/dependent-Sigma realization. This is a genuine boundary, not a reason
+to replace the missing whole owner with an external naturality record.
 
 ## 12. Curated Coinduction Policy
 
@@ -537,9 +549,10 @@ worktree removal, or deployment is authorized by this plan.
 | `SIMP-YONEDA-5` | complete | Promoted standard Yoneda semisimplices, the groupoid-valued diagram classifier, generic raw whole postcomposition by `Path_cat_func`, public realized objects/maps through `Psh_cat`, level/face computation, and retained higher action without a rule or unifier. |
 | `SIMP-SIEVE-6` | complete | Promoted three omission bits, a four-kind boundary/horn membership family, one whole higher-sieve owner, four ordinary sieves, generic pullback, whole extensions/inclusions, the complete codimension-one membership matrix, and structural precomposition checks without a represented-composition bridge. |
 | `SIMP-FILL-7` | complete | Promoted generic whole partial-simplex restriction plus an algebraic path-groupoid strict 2-nerve with three restrictions/fillers, inner composition, outer inverses, right-J comparison, derived cancellation, whole function section paths, whole Path-map lifts, and retained next action. |
-| `SIMP-DEC-8` | active | Construct the selected shift/decalage and displayed cone fibre; compare its first three layers wholely with existing `homd_`/Sigma action. |
-| `SIMP-CODATA-9` | pending decision gate | Decide whether the successful categorical/decalage interface justifies a curated observation-driven `SST` codata facade. Do not implement generic codata or judgmental eta merely because the references use it. |
-| `SIMP-DOC-10` | pending | Synchronize Foundations, canonical notation, SOP/source inventories, examples, and report index only for actually promoted owners and checked boundaries. |
+| `SIMP-DEC-8` | complete at bounded boundary | Promoted the vertex-appending shift, whole base and cone-tip transformations, presheaf decalage, fixed-tip levelwise fibres through the first three selected levels, and an iterable whole base Path-map. The intended whole displayed comparison did not typecheck because no varying-`HFiber` Catd/total Path-family owner exists; it is split into the named deferred prerequisite below rather than approximated pointwise. |
+| `SIMP-DEC-HFIBRE-TODO` | deferred prerequisite | Introduce one reusable varying-`HFiber` Catd or total Path-family owner, assemble it through existing `FibrewiseSigma_catd`, and only then compare its first three whole layers with `homd_`/Sigma action. Reopen only for a concrete displayed-fibre consumer. |
+| `SIMP-CODATA-9` | deferred; gate not met | The categorical/decalage interface did not yet produce the required whole displayed comparison, so no curated observation-driven `SST` codata facade, generic codata mechanism, or judgmental eta is promoted. Reconsider after `SIMP-DEC-HFIBRE-TODO`, not merely because an external reference uses codata. |
+| `SIMP-DOC-10` | active | Synchronize Foundations, canonical notation, SOP/source inventories, examples, and report index only for actually promoted owners and checked boundaries. |
 | `SIMP-CLOSE-11` | pending | Record checkpoints, exact focused evidence, warning deltas, clean state, remaining rows, and a safe continuation prompt. No integration or publication. |
 
 ### 16.1 Initial Nat/Join Probe — 2026-08-18
@@ -827,6 +840,42 @@ This is not yet an all-dimensional nerve object, a comparison with every
 presheaf mapping category, a mere-Kan theorem, or an inner-Kan/quasicategory
 interface. The health aggregate remains deferred to the later closure
 boundary.
+
+### 16.8 Categorical Decalage And The Levelwise Cone Boundary — 2026-08-18
+
+`emdash3_2_semisimplicial_decalage.lp` appends one final vertex by the whole
+endofunctor `semi_delta_shift_func`; its arrow action keeps that new vertex in
+every face code. The base inclusion and cone-tip inclusion are components of
+the whole transformations `semi_delta_base_transf` and
+`semi_delta_cone_transf`, so their off-diagonal action remains at the existing
+generic `tapp1_func` owner. Restriction along the shift defines presheaf
+decalage and computes fibrewise as `Dec(X)[n] = X[n+1]`.
+
+For a groupoid-valued semisimplicial diagram and fixed cone tip `x`,
+`SemisimplicialConeFibre(X,x,n)` is the levelwise `HFiber` of the cone-tip
+observation. Forgetting the tip is lifted by `path_map_func` to one whole
+functor from that fibre to the opposite base simplex, retaining the generic
+next Path action. The reviewer `examples/semisimplicial_decalage.lp` checks
+the shift on objects and arrows, both low face codes, both transformation
+components, retained transformation action, the decalage fibre equation, the
+first three selected cone-fibre levels, the whole base Path-map, its next
+action, and the pointwise non-collapse boundary.
+
+Source and reviewer are green quietly and with warnings. Both warning-enabled
+runs contain the same 1,297 inherited warning headers and no source- or
+reviewer-owned diagnostic. The strict LHS audit reports no unreviewed slot;
+the shift action's two rigid category positions are documented subject-
+reduction guards. No unifier or external naturality/coherence record is
+added.
+
+The probe did not find an active varying-`HFiber` Catd or total Path-family
+owner. `FibrewiseSigma_catd` can assemble the desired varying fibres only
+after that generic owner exists. Consequently `SIMP-DEC-HFIBRE-TODO` records
+the exact deferred prerequisite, and the codata gate remains closed. This
+tranche does not claim a whole displayed semisimplicial fibre, comparison
+with `homd_`, or a coinductive `SST` presentation. The health aggregate
+remains deferred to the closure decision under the standing no-long-
+aggregate policy.
 
 ## 17. Completion Definition
 

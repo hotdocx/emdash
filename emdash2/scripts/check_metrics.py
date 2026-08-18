@@ -73,6 +73,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_semisimplicial_diagrams.lp"),
     Path("emdash3_2_simplex2_sieves.lp"),
     Path("emdash3_2_path_groupoid_2horn_fillers.lp"),
+    Path("emdash3_2_semisimplicial_decalage.lp"),
     Path("emdash3_2_circle_connectedness.lp"),
     Path("emdash3_2_sieves.lp"),
     Path("emdash3_2_sites.lp"),
