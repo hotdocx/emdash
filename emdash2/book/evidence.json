@@ -3668,6 +3668,130 @@
         }
       ]
     },
+    "INTEGER-LOCALIZATION-LINE": {
+      "status": "checked",
+      "statement": "The Integer carrier is the transparent set-truncated telescope localization of Nat successor: integer_stage(n,x) represents x-n, successor is an equivalence with executable predecessor, univalence supplies its universe path, and set-targeted dependent and nondependent elimination compute on stage representatives.",
+      "owners": [
+        {
+          "file": "emdash3_2_integer_localization.lp",
+          "symbol": "Integer_grpd"
+        },
+        {
+          "file": "emdash3_2_integer_localization.lp",
+          "symbol": "integer_succ_equiv"
+        },
+        {
+          "file": "emdash3_2_integer_localization.lp",
+          "symbol": "integer_ind"
+        },
+        {
+          "file": "emdash3_2_integer_localization.lp",
+          "symbol": "integer_is_set"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/integer_localization.lp",
+          "symbol": "integer_succ_equiv"
+        },
+        {
+          "file": "examples/integer_localization.lp",
+          "symbol": "integer_ind"
+        },
+        {
+          "file": "examples/integer_localization.lp",
+          "symbol": "integer_is_set"
+        }
+      ]
+    },
+    "CIRCLE-HIT-COMPUTATION": {
+      "status": "checked",
+      "statement": "The groupoidal Circle has base and loop constructors, unrestricted dependent elimination, judgmental point computation, and judgmental dependent PathOver computation on the generating loop; constant-family recursion inherits that dependent beta while its ordinary eq_ap loop equation remains propositional.",
+      "owners": [
+        {
+          "file": "emdash3_2_circle_hit.lp",
+          "symbol": "circle_ind"
+        },
+        {
+          "file": "emdash3_2_circle_hit.lp",
+          "symbol": "circle_ind_beta_loop"
+        },
+        {
+          "file": "emdash3_2_circle_hit.lp",
+          "symbol": "circle_rec_beta_loop_path"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/circle_judgmental_loop_computation.lp",
+          "symbol": "circle_ind_beta_loop"
+        },
+        {
+          "file": "examples/circle_loop_space.lp",
+          "symbol": "circle_rec_beta_loop_path"
+        }
+      ]
+    },
+    "CIRCLE-MONODROMY": {
+      "status": "checked",
+      "statement": "Every selected self-equivalence e of a groupoid A yields a Circle-indexed family with base fibre A and loop monodromy ua(e); transport around the loop agrees with e.to, and restriction along the WalkingEnd-to-Circle map recovers the original directed representation as a whole functor path.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_circle_monodromy.lp",
+          "symbol": "walking_circle_monodromy_circle_family"
+        },
+        {
+          "file": "emdash3_2_walking_circle_monodromy.lp",
+          "symbol": "walking_circle_monodromy_transport_path"
+        },
+        {
+          "file": "emdash3_2_walking_circle_monodromy.lp",
+          "symbol": "walking_circle_monodromy_restriction_path"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_circle_groupoidification_monodromy.lp",
+          "symbol": "walking_circle_monodromy_circle_family"
+        },
+        {
+          "file": "examples/walking_circle_groupoidification_monodromy.lp",
+          "symbol": "walking_circle_monodromy_transport_path"
+        },
+        {
+          "file": "examples/walking_circle_groupoidification_monodromy.lp",
+          "symbol": "walking_circle_monodromy_restriction_path"
+        }
+      ]
+    },
+    "CIRCLE-CONNECTED-TRUNCATION": {
+      "status": "checked",
+      "statement": "Circle induction constructs mere based connectedness x |-> ||base=x||_{-1}; eliminating that evidence into the classified set truncation and then using its restricted induction proves the set truncation of Circle contractible without identifying its carrier judgmentally with Unit.",
+      "owners": [
+        {
+          "file": "emdash3_2_circle_connectedness.lp",
+          "symbol": "circle_connected"
+        },
+        {
+          "file": "emdash3_2_circle_connectedness.lp",
+          "symbol": "circle_set_trunc_contract"
+        },
+        {
+          "file": "emdash3_2_circle_connectedness.lp",
+          "symbol": "circle_set_trunc_is_contr"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/circle_connectedness.lp",
+          "symbol": "circle_connected"
+        },
+        {
+          "file": "examples/circle_connectedness.lp",
+          "symbol": "circle_set_trunc_is_contr"
+        }
+      ]
+    },
     "CIRCLE-LOOP-INTEGER": {
       "status": "checked",
       "statement": "The opaque groupoidal Circle has a universal Integer cover whose endpoint-dependent encode and decode maps are inverse; the intrinsic based-loop carrier and the categorical based Hom carrier are TypeEquiv to the successor-localized Integer, with a whole equality-valued categorical equivalence retained separately.",

@@ -7,8 +7,8 @@ Plan-ID: `EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5`
 Status: **active fourth-spiral book continuation**. The cumulative baseline,
 book contract, stale-claim inventory, evidence boundary, and chapter
 architecture have been reviewed. `BGR-00` and `BGR-ARCH-1` are complete;
-`BGR-REPAIR-2` and `BGR-CH25-3` are complete, and `BGR-CH26-4` is the active
-chapter row.
+`BGR-REPAIR-2`, `BGR-CH25-3`, and `BGR-CH26-4` are complete, and
+`BGR-CH27-5` is the active chapter row.
 
 Branch: `goal/emdash-book-groupoidal-v3.2`
 
@@ -485,8 +485,8 @@ AI imagery is not part of the mathematical pages.
 | `BGR-ARCH-1` | complete | `book.json` and `expansion.json` now extend contiguously through Chapters 25–28. Four stable anchored chapter owners contain reader-facing theorem previews and exact boundaries; four coarse checked evidence entries point to active owners/reviewers. A real provenance-growth consumer generalized the checker's fixed 13-entry assumption to a nonempty/unique/well-formed contract with focused tests. Release metadata remains at 0.4.0-dev. `book:check` passes for 43 sources and 145 evidence claims. |
 | `BGR-REPAIR-2` | complete | Corrected the stale truncation-reflector, WalkingEnd–Circle free-inversion, and whole-laxity evidence/status boundaries; repaired Chapters 4, 6–9, 12, and 14 plus Appendices C, D, and F; registered the Chapter 26 HoTT adaptations; preserved the directed Nat theorem's original strength. Focused architecture tests pass 5/5, `book:check` passes at 2,410 math spans, the browser render is green at 313 pages, and the review-only PDF passes at 313 pages/16 fonts with representative pages visually inspected. |
 | `BGR-CH25-3` | complete | Chapter 25 is a 2,783-word theorem-led account of the Path-category bridge, homwise product closure, the product-transport diamond, agreement of structured transport and `PathOut` with primitive right-J, and target-induced pseudo-laxity. Two focused evidence claims separate product split/join and path-realized compositor strength. `book:check` passes at 147 cited claims/2,478 math spans; the 319-page review PDF passes with 16 embedded fonts, and all seven Chapter 25 pages were inspected with Poppler. |
-| `BGR-CH26-4` | active | Write and visually validate Chapter 26, including Circle computation, Integer encode/decode, monodromy, and connectedness/truncation. |
-| `BGR-CH27-5` | pending | Write and visually validate Chapter 27, including both concrete universal mapping theorems and generic groupoidification with its exact deferred source-action boundary. |
+| `BGR-CH26-4` | complete | Chapter 26 is a 3,748-word proof-led account of successor-localized Integer, judgmental dependent Circle-loop computation, universal-cover encode/decode, intrinsic and categorical loop-space equivalences, arbitrary self-equivalence monodromy, and connectedness/set-truncation. Four focused evidence claims supplement the central Circle/Integer theorem and the HoTT adaptation boundary is explicit. `book:check` passes at 151 cited claims/2,580 math spans; the 328-page review PDF passes with 16 embedded fonts, and all ten Chapter 26 pages were inspected with Poppler after three crowded displays were repaired. |
+| `BGR-CH27-5` | active | Write and visually validate Chapter 27, including both concrete universal mapping theorems and generic groupoidification with its exact deferred source-action boundary. |
 | `BGR-CH28-6` | pending | Write and visually validate Chapter 28, including internal laxity, strict profiles, the selected Gray right closure, walking square, and interchanger without a full-Gray overclaim. |
 | `BGR-XCUT-7` | pending | Reconcile front matter, reading paths, contents, transitions, notation, glossary, evidence appendix, computation/status/formal appendices, bibliography, credits, and provenance; remove every stale three-spiral or future-groupoidification statement. |
 | `BGR-ARTICLE-8` | pending | Rebalance the overview article within its 18-page maximum, release it deterministically, and promote its tracked Markdown/PDF pair locally. |
@@ -596,8 +596,8 @@ higher action is not a complete weak-omega-groupoid theorem.
 Two focused evidence records were added:
 `GROUPOIDAL-PRODUCT-CLOSURE` and `PATH-PSEUDO-LAXITY`. No Lambdapi,
 TypeScript, renderer, package, or release semantics changed. The preceding
-local checkpoints are `bbc7ffd` for architecture and `e53dbaa` for stale-
-claim/provenance repair.
+local checkpoints are `bbc7ffd` for architecture, `e53dbaa` for stale-
+claim/provenance repair, and `54bfd4a` for Chapter 25.
 
 Proportional validation is green:
 
@@ -615,6 +615,51 @@ final synthesis, and Chapter 26 transition are legible, uncropped, and free
 of accidental blank or sparsely stranded pages. The PDF remains an ignored
 review artifact under unchanged 0.4.0-dev metadata; promotion belongs only to
 `BGR-RELEASE-9`.
+
+### 12.4 Chapter 26 Record — 2026-08-18
+
+Chapter 26 now occupies ten pages and 3,748 source words. It follows the HoTT
+Book's Circle and universal-cover encode–decode architecture under explicit
+attribution while changing the computational centre of gravity:
+
+- Integer is the transparent set-truncated telescope localization of Nat
+  successor, with stage representatives `[n,x]`, inverse shift, univalence
+  path, and set-targeted elimination;
+- Circle point and canonical dependent loop action both compute
+  judgmentally, while the ordinary `ap` loop equation remains propositional;
+- the code family has Integer base fibre and successor monodromy;
+- endpoint-dependent encode and decode are inverse, yielding both intrinsic
+  `TypeEquiv` and separate whole categorical `OmegaEquiv` presentations;
+- arbitrary self-equivalences produce Circle monodromy and recover their
+  WalkingEnd representation under restriction; and
+- mere connectedness proves the classified set truncation contractible
+  without replacing its carrier by Unit.
+
+Four focused evidence records were added:
+`INTEGER-LOCALIZATION-LINE`, `CIRCLE-HIT-COMPUTATION`, `CIRCLE-MONODROMY`,
+and `CIRCLE-CONNECTED-TRUNCATION`. The central
+`CIRCLE-LOOP-INTEGER` record remains the owner of the endpoint-dependent
+round trips and the intrinsic/categorical equivalence packages. No semantic,
+renderer, package, or release source changed.
+
+Proportional validation is green:
+
+```text
+chapter source words: 3,748
+book:check: 43 sources, 151 cited claims, 2,580 math spans
+book:render: 328 pages, no console/page/request/render failure
+book:pdf:check: 328 pages, 16 embedded fonts
+review PDF sha256: bd0879203a1be8a5f678e6e9446ba05dee9ad428add579e3a47796f8802653e4
+```
+
+Poppler review covered every Chapter 26 page, 205–214. The first review found
+crowded equation tags at (26.14), (26.17), and (26.29); all three displays
+were converted to aligned multi-line forms and re-inspected. The opening,
+equations (26.1)–(26.32), attribution/status boxes, comparison table, page
+breaks, and Chapter 27 transition are now legible and uncropped. One final PDF
+attempt reached the existing 90-second pagination ceiling; cleanup completed
+and one bounded retry passed without changing the timeout. The PDF remains an
+ignored review artifact under unchanged 0.4.0-dev metadata.
 
 ## 13. Proportional Validation Policy
 

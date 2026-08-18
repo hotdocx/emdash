@@ -384,7 +384,12 @@
         "evidence": "CIRCLE-LOOP-INTEGER"
       },
       "secondaryEvidence": [
-        "UNIV-GROUPOID"
+        "UNIV-GROUPOID",
+        "INTEGER-LOCALIZATION-LINE",
+        "CIRCLE-HIT-COMPUTATION",
+        "CIRCLE-MONODROMY",
+        "CIRCLE-CONNECTED-TRUNCATION",
+        "TRUNC-REFLECTOR"
       ],
       "boundary": "the Circle has judgmental point and dependent loop computation, an explicit Integer loop-space equivalence, monodromy, and selected connectedness/truncation consequences; ordinary ap on the loop remains propositional and no generic HIT declaration compiler or global computational HoTT metatheory is claimed"
     },
