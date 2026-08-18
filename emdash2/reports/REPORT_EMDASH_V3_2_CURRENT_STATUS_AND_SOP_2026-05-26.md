@@ -428,7 +428,29 @@ detailed probe evidence.
   categorical-HIT uniqueness supplies both whole cancellation paths and
   packages restriction as `OmegaEquivAlong Cat_cat`; point, endpoint,
   segment, and source-generator readings remain dependent projections. This
-  is a non-endomorphism source-shape theorem, not generic `Groupoidify`.
+  is the completed non-endomorphism source-shape theorem reused by the generic
+  recovery below.
+- `emdash3_2_groupoidification_hit.lp`: category-indexed free
+  groupoidification HIT. `Groupoidify(C) : Grpd` has one whole unit
+  `C -> Path(Groupoidify(C))`; its recursor computes judgmentally at every
+  represented source object and through `eq_apd` on every represented source
+  arrow. Whole extension in the path-valued representation retains first and
+  next hom action. This is formation/elimination, not source functoriality.
+- `emdash3_2_groupoidification_universality.lp`: transparent whole
+  restriction along the generic unit, scoped categorical-HIT beta/eta, and
+  the resulting `OmegaEquivAlong Cat_cat` between groupoidal maps and
+  path-valued functors for arbitrary `C : Cat` and `G : Grpd`. It declares no
+  `Groupoidify_func` or adjunction.
+- `emdash3_2_groupoidification_composition.lp`: rule-free explicit generic
+  unit compositor for arbitrary composable arrows, recovered from the
+  existing internal-action owner. The whole transformation retains one next
+  action, and the compositor remains nonidentity even where historical strict
+  cuts make its endpoints convertible.
+- `emdash3_2_groupoidification_interval_recovery.lp`: derives mutually inverse
+  maps between `Groupoidify(WalkingArrow_cat)` and `Interval_grpd` from the
+  generic and completed Interval beta/eta laws. Both whole cancellations,
+  pointwise quasi-inverse data, and a `TypeEquiv` are explicit; the two HIT
+  classifiers are not definitionally identified.
 - `emdash3_2_walking_circle_completion.lp`: transparent rule-free concrete
   comparison from WalkingEnd to Circle. It sends the directed generator and
   every Nat power to the Circle generator and its nonnegative powers, and the
@@ -4543,25 +4565,24 @@ warning boundary is 1,271
 diagnostics: 1,112 unjoinable critical pairs and 159
 replaceable-pattern advisories. The strict
 LHS audit is zero unreviewed clauses, 58 annotated slots, and 34 intentional
-clauses. The generated catalog contains 2,183 classified checks across 107
+clauses. The generated catalog contains 2,197 classified checks across 109
 areas with zero legacy or unclassified entries.
 
-The exact-current registered health boundary is green for all 202 maintained
-targets—90 source/diagnostic files and 112 reviewer examples—under the uniform
-90-second per-target ceiling. All 202 report exit 0, with 2,167.963 summed
-check-seconds. The 195 unchanged August 18 targets were reused only after the
-health tool rehashed their exact file subset and matched its environment to
-the prior checked-content identity; the five new interval sources and two new
-reviewers were checked fresh in 2.469--2.610 seconds each. The central
-diagnostics retain their exact 59.598-second evidence. The source-metrics
-snapshot is
-`sha256:73f84710ac00429de03b1063daddbce4b0aa5edf3b425dd0ebc47dd88e4efa87`
+The exact-current registered health boundary is green for all 208 maintained
+targets—94 source/diagnostic files and 114 reviewer examples—under the uniform
+90-second per-target ceiling. All 208 report exit 0, with 1,958.460 summed
+check-seconds. Exact byte comparison verified the 201 unchanged predecessor
+targets before reusing their successful evidence. The changed central
+diagnostic and four new generic-groupoidification sources checked fresh in
+26.978 and 2.425--2.648 seconds; the two new reviewers checked fresh in 2.415
+and 2.697 seconds. The final report records exactly 201 resumed successes. The
+source-metrics snapshot is
+`sha256:1cd888aa1183aa4ed623e59ef3d49d1c94c007814c51fe18df5801669ff75038`
 and the checked-content snapshot is
-`sha256:8502d080e23dbf1987088f9a05c09ac20cb25290a3d6d1574c745ba5f51164d0`.
-No long aggregate was rerun. The additive-resume path is unit-tested and
-rejects a changed predecessor byte, environment mismatch, removed target, or
-non-relative state path; redundant `make check`, `make examples`, `make ci`,
-and repository-wide aggregates remain intentionally omitted.
+`sha256:a4688354d8a468615d2861efe23053ce8484c28bda9ca8a95aae3e6d97bda5b4`.
+No separate `make check`, `make examples`, `make ci`, or repository-wide
+aggregate was run. The required resumable health refresh was bounded to the
+changed/new targets after byte-identical predecessor evidence was selected.
 
 ## Book And Renderer Workflow
 
@@ -4642,13 +4663,16 @@ The following remain explicit future work rather than hidden assumptions:
   its reviewer clients are already deleted and are not prerequisites;
 - generic abstraction of the completed walking-endomorphism presentation,
   full functor-category initiality, a displayed dependent path-action/section
-  construction, generic groupoidification beyond the concrete checked
-  WalkingEnd-to-Circle comparison, and general higher-inductive categories or
-  pushouts; ordinary raw-function
-  `path_map_func` is already the complete canonical nondependent action. A
-  future exceptional former may add a local comparison theorem, and a future
-  dependent consumer may motivate the displayed construction, but neither
-  reinstates a generic selected-action registry by default;
+  construction, source action for the now-active category-indexed
+  `Groupoidify(C)`, the resulting `Groupoidify_func`/`Path_cat_func`
+  adjunction, and general higher-inductive categories or pushouts. The generic
+  formation, whole unit/recursor, arbitrary-target mapping equivalence,
+  compositor observation, and WalkingArrow--Interval recovery are already
+  active. Ordinary raw-function `path_map_func` is the complete canonical
+  nondependent action. A future exceptional former may add a local comparison
+  theorem, and a future dependent consumer may motivate the displayed
+  construction, but neither reinstates a generic selected-action registry by
+  default;
 - a finalized parser/surface language;
 - module splitting of the single kernel file after comment/section boundaries
   stabilize.

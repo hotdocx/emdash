@@ -4,11 +4,11 @@ Date: 2026-08-18 (America/Toronto)
 
 Plan-ID: `GENERIC-GROUPOIDIFICATION-FREE-INVERSION-V3.2`
 
-Status: **active generic-first continuation after the completed interval
-launch**. The completed predecessor goal owned `GGFI-00` and
-`GGFI-INTERVAL-1`. The current launch owns `GGFI-SIGNATURE-3`, `GGFI-HIT-4`,
-and `GGFI-EQUIV-5`; later source-functoriality and adjunction rows remain
-proposed.
+Status: **bounded generic-first launch complete with synchronized proportional
+closeout**. The completed predecessor goal owned `GGFI-00` and
+`GGFI-INTERVAL-1`. The current launch completes `GGFI-SIGNATURE-3`,
+`GGFI-HIT-4`, and `GGFI-EQUIV-5`; later source-functoriality and adjunction
+rows remain proposed.
 
 Parent:
 `REPORT_EMDASH_V3_2_INTERNAL_LAXITY_AND_GROUPOIDAL_REALIZATION_CONTINUATION_PLAN_2026-08-17.md`
@@ -391,9 +391,9 @@ must reduce to the already-checked unit, restriction, and extension owners.
 | `GGFI-00` | complete | The authorized worktree/branch descends cleanly from Circle checkpoint `29ff54d`; bootstrap and workspace contract pass. The anti-duplication scan finds the existing join-derived `WalkingArrow_cat`, distinct endpoints, whole generator, and retained next action, but no active `Interval_grpd`, interval eliminator, or walking-arrow/interval mapping theorem. Focused walking-arrow, Circle-computation, and WalkingEnd--Circle universality baselines pass in 2.6--3.0 seconds; no aggregate ran. |
 | `GGFI-INTERVAL-1` | complete | The public interval HIT, join-derived comparison presentation, stable deployed unit, whole restriction/extension, fixed-forward `OmegaEquivAlong`, endpoint/generator projections, retained next action, and positive/negative reviewers are implemented and synchronized. The self-target reviewer exercises genuinely different endpoints; wrong-target and endpoint-collapse readings fail. Exact health is green for 202 targets by reusing 195 rehashed unchanged snapshots and checking the seven new targets fresh. Generic groupoidification and the triangle row remain unstarted. |
 | `GGFI-TRIANGLE-2` | deferred post-generic regression | Derive the walking composable pair from join and recover its explicit groupoidal 2-simplex/composition-filler mapping theorem after the generic construction. It remains a useful standard-library regression, not a prerequisite for generic names. |
-| `GGFI-SIGNATURE-3` | active; feasibility probe green | Audit the completed interval, generic whole-functor compositor/higher action, and existing categorical-HIT recursor patterns; select the smallest owner-position signature for category-indexed formation, unit, extension, and safe object/first-cell computation. The first generic signature probe is green and warning-neutral; public promotion, owning-file interaction, and interval recovery remain active. Reject an underlying-graph-only construction, opaque adjunction, or cell-by-cell handwritten infinite record. |
-| `GGFI-HIT-4` | active launch | Promote `Groupoidify(C)`, its whole unit, and target-varying whole extension with object/first-cell computation and iterable higher action. Include an arbitrary-composable-arrow compositor observation, wrong-source/target rejection, and warning/LHS/subject-reduction audits. |
-| `GGFI-EQUIV-5` | active launch | Derive restriction along the unit and package whole beta/eta as `OmegaEquivAlong Cat_cat` for arbitrary `C` and groupoidal `G`; recover the WalkingArrow--Interval equivalence without duplicating it. WalkingEnd/Circle and the post-generic triangle remain later regression instantiations unless needed by a concrete blocker. |
+| `GGFI-SIGNATURE-3` | complete | The green warning-neutral probe is promoted as four public modules: category-indexed formation/unit/recursion, whole universality, generic composition action, and WalkingArrow recovery. The selected signature is one whole unit plus one whole recursor, not an underlying graph, opaque adjunction, or cell-indexed external record. |
+| `GGFI-HIT-4` | complete | `Groupoidify(C)`, its whole unit, judgmental point/dependent first-cell computation, target-varying whole extension, generic nonidentity compositor, and retained next actions are public. Wrong-source/target and arbitrary-point/path controls pass; warning and strict-LHS audits add no local issue. |
+| `GGFI-EQUIV-5` | complete | Whole restriction, scoped beta/eta, and `OmegaEquivAlong Cat_cat` are public for arbitrary `C` and `G`. Specialization at `WalkingArrow_cat` derives maps to/from `Interval_grpd`, both whole cancellations, quasi-inverse data, and a `TypeEquiv` without definitionally identifying the HITs. Catalog, health, and authority synchronization are green. |
 | `GGFI-SOURCE-6` | proposed | Derive source-functorial action by extension, including identity/composition paths and retained next hom action; promote `Groupoidify_func` only after those checks pass. |
 | `GGFI-ADJ-7` | proposed | Package `Groupoidify_func |- Path_cat_func`, with unit/counit/triangle observations routed through the existing computation and uniqueness owners. Distinguish it explicitly from `Core_cat`. |
 | `GGFI-CLOSE-8` | proposed | Synchronize sources/reviewers, Foundations/SOP/syntax, catalog/health and any publication-facing boundary; record remaining higher-cell/profile limitations honestly. |
@@ -438,6 +438,76 @@ warning-neutral. It is not yet promoted: the next bounded tranche must place
 the rules in their public owner, recheck subject reduction and later-owner
 interactions, add the concrete wrong-source/target reviewer, and construct
 rather than merely name whole beta/eta.
+
+## Public Generic Construction And Interval Recovery — 2026-08-18
+
+The implementation promotes four bounded public modules:
+
+- `emdash3_2_groupoidification_hit.lp` forms `Groupoidify(C)`, declares one
+  whole unit, and supplies recursion selected by a whole
+  `F : C -> Path_cat(G)`. Point computation and the dependent `eq_apd` action
+  on arbitrary unit arrows are judgmental. The whole extension computes at
+  objects and retains first and next hom action.
+- `emdash3_2_groupoidification_universality.lp` defines restriction through
+  `Path_cat_func` and precomposition with the unit. Scoped categorical-HIT
+  beta/eta package restriction as `OmegaEquivAlong Cat_cat` for arbitrary
+  source `C` and groupoidal target `G`; object projections and the literal
+  restriction comparison are derived.
+- `emdash3_2_groupoidification_composition.lp` specializes the existing
+  internal-action compositor to the generic unit for arbitrary composable
+  source arrows. Its whole transformation and one next action are retained.
+  The reviewer confirms that the cell is not identity even where historical
+  strict cuts make the endpoints convertible.
+- `emdash3_2_groupoidification_interval_recovery.lp` specializes the generic
+  extension to the completed WalkingArrow interval unit and the Interval
+  extension to the generic unit. Generic and Interval beta compare the
+  restricted round trips; their two eta laws derive both whole cancellations.
+  Pointwise projection packages explicit `EquivByInverse` and
+  `TypeEquiv(Groupoidify(WalkingArrow),Interval)`. The classifiers remain
+  non-convertible.
+
+The generic reviewer covers formation, point and dependent first-cell
+computation, arbitrary-point/path non-redexes, whole extension/restriction,
+the mapping equivalence, generic compositor, retained next action,
+nonidentity compositor, and source/target non-collapse. The recovery reviewer
+covers both maps, both whole and pointwise cancellations, quasi-inverse data,
+the `TypeEquiv`, and non-convertibility of the two HIT classifiers.
+
+All four focused sources and both reviewers pass in approximately 2.3--2.7
+seconds. Warning-enabled source closures have no warning located in a new
+module: the three generic owners inherit `1112`, while the Interval recovery
+closure inherits `1118` because it imports the pre-existing strict-pointwise
+equivalence warning. All strict LHS audits report zero unreviewed candidates.
+The affected central diagnostic target passes in 26.6 seconds. This focused
+implementation evidence preceded the exact catalog and health closeout below.
+
+## Bounded Generic Launch Closeout — 2026-08-18
+
+The active authority map, current SOP, Foundations, canonical notation,
+reports index, root package overview, parent master ledger, source registry,
+and health registry now describe the same bounded construction. The strict
+generated catalog contains 2,197 classified checks across 109 areas, with no
+legacy or unclassified entry.
+
+Exact health is green for 208 targets: 94 source/diagnostic files and 114
+reviewer examples. Because the central diagnostic file changed, the default
+whole-snapshot resume policy initially began a fresh sweep. That sweep was
+stopped after its behavior was understood. A byte comparison then established
+that 201 predecessor targets were unchanged. The final exact refresh reused
+those successes and checked the changed central diagnostic, all four new
+public sources, and both new reviewers fresh. Thus every changed or newly
+registered target has fresh evidence while the unaffected predecessor
+boundary is reused rather than rerun.
+
+The final source-metrics snapshot is
+`sha256:1cd888aa1183aa4ed623e59ef3d49d1c94c007814c51fe18df5801669ff75038`;
+the checked-content snapshot is
+`sha256:a4688354d8a468615d2861efe23053ce8484c28bda9ca8a95aae3e6d97bda5b4`.
+All four new source LHS audits remain at zero unreviewed candidates. Their
+warning-enabled closures add no locally owned warning: the first three inherit
+`1112`, and the recovery closure inherits `1118` through the pre-existing
+strict-pointwise module. No repository-wide, TypeScript, browser, print, book,
+or package aggregate ran.
 
 ## First Interval Owner Probe — 2026-08-18
 

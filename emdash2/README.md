@@ -210,9 +210,14 @@ product-path transport in both coordinate orders. It now also realizes the
 generic `path_map_func` compositor as an invertible equality between paths,
 with its familiar `eq_ap`/`eq_trans` reading and one retained higher action.
 The classified truncation reflector, Circle mere connectedness, and
-contractibility of its set truncation are the next checked HoTT slice. The
-source modules and reviewer examples are listed in the August 14 and August
-17 groupoidal plans.
+contractibility of its set truncation complete the next checked HoTT slice.
+Category-indexed `Groupoidify(C)` now has a whole computing unit and extension,
+an arbitrary-source mapping-object equivalence, an explicit nonidentity
+compositor with retained higher action, and a derived
+`TypeEquiv(Groupoidify(WalkingArrow),Interval)`. Source functoriality,
+`Groupoidify_func`, and its adjunction with `Path_cat_func` remain later
+interfaces. The source modules and reviewer examples are listed in the August
+14--18 groupoidal plans.
 
 ## Functorial Type Theory book
 

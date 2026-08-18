@@ -23,6 +23,8 @@ require open emdash.emdash3_2_strict_pointwise_equivalences;
 require open emdash.emdash3_2_direct_cover_completion_locality;
 require open emdash.emdash3_2_direct_cover_completion_universality;
 require open emdash.emdash3_2_direct_cover_sheafification;
+require open emdash.emdash3_2_groupoidification_composition;
+require open emdash.emdash3_2_groupoidification_interval_recovery;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
 assert ⊢ τ Empty_grpd ≡ empty;
@@ -25220,3 +25222,119 @@ assertnot ⊢
   : τ (Functor
       (Hom_cat Grpd_cat Circle_grpd Unit_grpd)
       (Functor_cat WalkingEnd_cat (Path_cat Nat_grpd)));
+
+// catalog-area: Category-indexed computational groupoidification
+// One whole unit represents every source cell; recursion computes on unit
+// objects/arrows, and whole extension/restriction is an Omega equivalence.
+assert [C : Cat] ⊢ Groupoidify C : Grpd;
+
+assert [C : Cat] ⊢ groupoidify_unit_func C
+  : τ (Functor C (Path_cat (Groupoidify C)));
+
+assert [C : Cat] [G : Grpd]
+  (F : τ (Functor C (Path_cat G)))
+  (x : τ (Obj C)) ⊢
+  @groupoidify_rec C G F
+    (@fapp0 C (Path_cat (Groupoidify C))
+      (@groupoidify_unit_func C) x)
+  ≡ @fapp0 C (Path_cat G) F x;
+
+assert [C : Cat] [G : Grpd]
+  (F : τ (Functor C (Path_cat G)))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @eq_apd
+    (Groupoidify C)
+    (λ _ : τ (Groupoidify C), G)
+    (λ u : τ (Groupoidify C), @groupoidify_rec C G F u)
+    (@fapp0 C (Path_cat (Groupoidify C))
+      (@groupoidify_unit_func C) x)
+    (@fapp0 C (Path_cat (Groupoidify C))
+      (@groupoidify_unit_func C) y)
+    (@fapp1_fapp0 C (Path_cat (Groupoidify C))
+      (@groupoidify_unit_func C) x y f)
+  ≡ @const_pathover
+      (Groupoidify C) G
+      (@fapp0 C (Path_cat (Groupoidify C))
+        (@groupoidify_unit_func C) x)
+      (@fapp0 C (Path_cat (Groupoidify C))
+        (@groupoidify_unit_func C) y)
+      (@fapp0 C (Path_cat G) F x)
+      (@fapp0 C (Path_cat G) F y)
+      (@fapp1_fapp0 C (Path_cat (Groupoidify C))
+        (@groupoidify_unit_func C) x y f)
+      (@fapp1_fapp0 C (Path_cat G) F x y f);
+
+assert [C : Cat] [G : Grpd] ⊢
+  @groupoidification_hom_omega C G
+  : τ (@OmegaEquivAlong
+      Cat_cat
+      (Hom_cat Grpd_cat (Groupoidify C) G)
+      (Functor_cat C (Path_cat G))
+      (@groupoidify_restrict_func C G));
+
+assert [C : Cat]
+  [x y z : τ (Obj C)]
+  (g : τ (Hom C y z))
+  (f : τ (Hom C x y)) ⊢
+  @groupoidify_unit_compositor C x y z g f
+  ≡ @fapp1_compositor
+      C (Path_cat (Groupoidify C))
+      (@groupoidify_unit_func C)
+      x y z g f;
+
+assert [C : Cat]
+  [x y z : τ (Obj C)]
+  (g : τ (Hom C y z))
+  (f0 f1 : τ (Hom C x y)) ⊢
+  @groupoidify_unit_compositor_next_func C x y z g f0 f1
+  ≡ @tapp1_func
+      (@Hom_cat C x y)
+      (@Hom_cat
+        (Path_cat (Groupoidify C))
+        (@fapp0 C (Path_cat (Groupoidify C))
+          (@groupoidify_unit_func C) x)
+        (@fapp0 C (Path_cat (Groupoidify C))
+          (@groupoidify_unit_func C) z))
+      (@groupoidify_unit_compositor_lhs_func C x y z g)
+      (@groupoidify_unit_compositor_rhs_func C x y z g)
+      f0 f1
+      (@groupoidify_unit_compositor_transf C x y z g);
+
+assertnot [C : Cat] [G : Grpd]
+  (F : τ (Functor C (Path_cat G)))
+  (u : τ (Groupoidify C))
+  (x : τ (Obj C)) ⊢
+  @groupoidify_rec C G F u
+  ≡ @fapp0 C (Path_cat G) F x;
+
+assertnot [C D : Cat] ⊢ Groupoidify C ≡ Groupoidify D;
+
+// catalog-area: Generic WalkingArrow--Interval recovery
+// The two pre-existing mapping equivalences derive mutually inverse maps and
+// an explicit type equivalence; the HIT classifiers themselves do not fold.
+assert ⊢ groupoidify_walking_roundtrip_cancel_path
+  : τ (@=
+      (Function_grpd
+        (Groupoidify WalkingArrow_cat)
+        (Groupoidify WalkingArrow_cat))
+      groupoidify_walking_roundtrip_func
+      (@id Grpd_cat (Groupoidify WalkingArrow_cat)));
+
+assert ⊢ interval_groupoidify_roundtrip_cancel_path
+  : τ (@=
+      (Function_grpd Interval_grpd Interval_grpd)
+      interval_groupoidify_roundtrip_func
+      (@id Grpd_cat Interval_grpd));
+
+assert ⊢ groupoidify_walking_interval_by_inverse
+  : τ (@EquivByInverse
+      (Groupoidify WalkingArrow_cat)
+      Interval_grpd
+      groupoidify_walking_to_interval
+      interval_to_groupoidify_walking);
+
+assert ⊢ groupoidify_walking_interval_type_equiv
+  : τ (TypeEquiv (Groupoidify WalkingArrow_cat) Interval_grpd);
+
+assertnot ⊢ Groupoidify WalkingArrow_cat ≡ Interval_grpd;

@@ -1113,21 +1113,23 @@ record.
   source shapes.
 
 - `REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md`:
-  active generic-first successor to the completed Circle and interval
-  tranches. The predecessor launch reuses
+  generic-first successor to the completed Circle and interval tranches. The
+  predecessor launch reuses
   `WalkingArrow_cat`, adds the two-endpoint groupoidal interval with
   judgmental dependent segment computation, and proves the whole
   fixed-forward mapping-object equivalence against every groupoidal target.
   Endpoint-sensitive positive/negative reviewers and exact 202-target health
   closeout are green; the implementation is checkpointed at `76f43b3` and
-  synchronized closeout at `07ddfd4`. The current launch proceeds directly to
-  category-indexed `Groupoidify(C)`, its whole unit, extension/restriction,
-  generic composition observation, and mapping-object equivalence. Its first
-  warning-neutral signature probe is green through judgmental point and
-  first-cell computation plus one retained higher action; public promotion
-  and construction of whole beta/eta remain active. The
-  composable-pair/2-simplex moves to a post-generic standard-library
-  regression; source action and the adjunction remain later rows.
+  synchronized closeout at `07ddfd4`. The bounded generic continuation now
+  implements category-indexed `Groupoidify(C)`, its whole unit and computing
+  recursor, whole extension/restriction and arbitrary-target mapping-object
+  equivalence, an explicit nonidentity compositor with retained next action,
+  and beta/eta-derived recovery of
+  `Groupoidify(WalkingArrow) ~= Interval`. The strict catalog has 2,197 checks
+  across 109 areas, and exact health is green for 94 source/diagnostic targets
+  plus 114 reviewers. The composable-pair/2-simplex remains a post-generic
+  standard-library regression; source action, `Groupoidify_func`, and the
+  adjunction remain later rows.
 
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization

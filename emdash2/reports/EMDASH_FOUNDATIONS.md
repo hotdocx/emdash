@@ -12,7 +12,8 @@ Reusable Nat addition, canonical successor path functor, and sethood live in the
 downstream in `emdash3_2_walking_end_hit.lp` under the July 17 living plan.
 The successor-localized Integer, groupoidal Circle and interval HITs,
 loop-space calculation, concrete WalkingEnd-to-Circle comparison,
-WalkingArrow-to-interval mapping theorem, and representative
+WalkingArrow-to-interval mapping theorem, category-indexed groupoidification,
+and representative
 product closure live in the downstream `emdash3_2_*` modules recorded by the
 August groupoidal-realization plans.
 The isolated binary-Sum experiment was retired on 2026-07-20 for later
@@ -264,10 +265,8 @@ generic hom action remains iterable. In particular, a self-equivalence
 representation, and transport around the loop applies `e.to`.
 
 This proves concrete groupoidification universality for the WalkingEnd source
-shape. It does not yet construct a generic reflector on every category. Such
-a reflector still requires free coherent inversion of arbitrary
-non-endomorphism arrows, composition relations, and higher cells. The theorem
-was first completed using only propositional loop observations. The later
+shape. The theorem was first completed using only propositional loop
+observations. The later
 reviewed normal-form migration makes the canonical dependent Circle
 path-constructor beta judgmental without changing the whole universality
 statement; its ordinary `eq_ap` projection remains propositional.
@@ -320,9 +319,46 @@ the cancellation laws are whole functor paths packaged as a fixed-forward
 dependent `PathOver` projections, not object-only equations. The self-target
 case distinguishes the two endpoint computations. This establishes the
 universal free-inversion boundary for one directed arrow with different
-endpoints. It still does not construct free inversion of arbitrary
-composition relations or higher cells, hence does not define generic
-`Groupoidify`.
+endpoints.
+
+The category-indexed construction now abstracts that boundary. For every
+`C : Cat` there is a groupoid and one whole unit
+
+```text
+Groupoidify(C) : Grpd
+u_C : C -> Path(Groupoidify(C)).
+```
+
+The single whole unit represents objects, arrows, and iterated higher cells;
+there is no underlying-graph-only constructor list. For
+`F : C -> Path(G)`, recursion computes at unit points and dependently on unit
+arrows:
+
+```text
+rec_F(u_C[x]) == F[x]
+apd(rec_F,u_C[f]) == const_pathover(F[f]).
+```
+
+Here `==` is kernel conversion at the selected `groupoidify_rec`/`eq_apd`
+owners. Extension is whole in `F` and retains higher action. Restriction along
+`u_C` and extension satisfy scoped categorical-HIT beta/eta, giving
+
+```text
+Hom(Groupoidify(C),G) ~= Functor(C,Path(G))
+```
+
+as an `OmegaEquivAlong Cat_cat` for every groupoidal target `G`. For
+composable `f` and `g`, the explicit cell
+`fapp1_compositor(u_C,g,f)` and one next action remain present; historical
+strict endpoint cuts do not turn that cell into identity.
+
+Specializing at `WalkingArrow`, the generic and Interval extensions give maps
+in both directions. The two mapping-object beta/eta laws derive both whole
+round-trip cancellations and hence a
+`TypeEquiv(Groupoidify(WalkingArrow),Interval)`. This is an equivalence, not a
+definitional fold between the two HIT classifiers. Source functorial action,
+`Groupoidify_func : Cat_cat -> Grpd_cat`, and its adjunction with
+`Path_cat_func` are still intentionally deferred.
 
 Products supply a representative closure theorem. The canonical functor
 
@@ -5056,14 +5092,14 @@ The current foundations intentionally do not yet include:
 - general higher-inductive pushouts and a generic directed-inductive schema;
 - generic abstraction of the completed walking-endomorphism presentation into
   a reusable directed-HIT/free-category schema, full functor-category
-  initiality, a displayed dependent path-action/section construction, and
-  generic groupoidification beyond the checked WalkingEnd-to-Circle and
-  WalkingArrow-to-interval mapping theorems and the
-  `Hom(Circle,Circle) ≃ Integer` calculation; the interval theorem covers one
-  non-endomorphism arrow but not arbitrary composition or higher cells; the
-  ordinary raw-function `path_map_func` is already the complete selected
-  nondependent action, and no generic selected-action registry is planned
-  without a concrete new consumer;
+  initiality, and a displayed dependent path-action/section construction;
+  category-indexed `Groupoidify(C)`, its whole unit/extension, mapping-object
+  equivalence, generic compositor observation, and WalkingArrow--Interval
+  recovery are active, while source action, `Groupoidify_func`, and the
+  adjunction with `Path_cat_func` remain deferred; the ordinary raw-function
+  `path_map_func` is already the complete selected nondependent action, and no
+  generic selected-action registry is planned without a concrete new
+  consumer;
 - dependent join elimination or a semantic collage construction;
 - a finalized surface syntax for the future proof assistant;
 - full coherence APIs for every Sigma/Pi helper;
@@ -5257,6 +5293,10 @@ kernel and one-way library vocabulary.
 | groupoidal interval points and segment | `interval_i0` / `interval_i1` / `interval_seg` |
 | dependent interval induction | `interval_ind` / `interval_ind_beta_seg` |
 | WalkingArrow--interval mapping equivalence | `walking_interval_groupoidification_hom_omega` |
+| category-indexed free groupoidification | `Groupoidify C` / `groupoidify_unit_func C` |
+| generic groupoidification mapping equivalence | `groupoidification_hom_omega C G` |
+| generic unit compositor / next action | `groupoidify_unit_compositor` / `groupoidify_unit_compositor_next_func` |
+| WalkingArrow generic recovery | `groupoidify_walking_interval_type_equiv` |
 | pointwise paths between dependent functions | `PiPointwisePath A B f g` |
 | diagonal Pi path observation / extension | `PiHapply p` / `PiFunext h` |
 | Pi happly/funext equivalence | `pi_happly_type_equiv A B f g` |

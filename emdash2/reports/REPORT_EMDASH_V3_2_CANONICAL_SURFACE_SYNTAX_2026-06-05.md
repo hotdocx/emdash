@@ -1549,8 +1549,8 @@ apd(circle_ind(D,b,ell),loop) == ell
 ```
 
 are judgmental in the current kernel. The ordinary `ap(Mon_e,loop)` equation
-and the displayed monodromy comparisons remain propositional. This notation
-does not assert a generic `Groupoidify` on every category.
+and the displayed monodromy comparisons remain propositional. This monodromy
+statement does not depend on the later generic `Groupoidify` construction.
 
 ## WalkingArrow--Interval Universality Notation
 
@@ -1593,8 +1593,58 @@ generator readings use the named `*_i0_path`, `*_i1_path`, `*_seg_pathover`,
 and `*_generator_pathover` projections. Do not flatten a dependent segment or
 generator `PathOver` into a homogeneous equality. `I_grp` is expository
 notation for `Interval_grpd`, not an implemented parser token. This theorem
-handles the single WalkingArrow source; it does not introduce a generic
-`Groupoidify` operation.
+handles the single WalkingArrow source and is recovered by the generic
+construction below.
+
+## Generic Groupoidification Notation
+
+For a category `C`, write the checked category-indexed free inversion as
+
+```text
+Groupoidify(C) : Grpd
+u_C : C -> Path(Groupoidify(C)).
+```
+
+For `F : C -> Path(G)`, use `Ext^C_G(F)` for
+`groupoidify_extend_at C G F` and `Res^C_G(h)` for
+`groupoidify_restrict_at C G h`. The selected computation and whole mapping
+property are
+
+```text
+Ext^C_G(F)(u_C[x]) == F[x]
+apd(Ext^C_G(F),u_C[f]) == const_pathover(F[f])
+
+Ext^C_G o Res^C_G = id
+Res^C_G o Ext^C_G = id
+Res^C_G : Hom(Groupoidify(C),G) ~= Functor(C,Path(G)).
+```
+
+The first two equations are judgmental at the active `groupoidify_rec` and
+`eq_apd` owners. Whole beta/eta are equality evidence packaged by
+`groupoidification_hom_omega C G`; do not write them as runtime reductions.
+For composable arrows use
+
+```text
+φ_u(g,f) : u_C[g] o u_C[f] ==> u_C[g o f]
+```
+
+for `groupoidify_unit_compositor C g f`. Its whole transformation and next
+action are `groupoidify_unit_compositor_transf` and
+`groupoidify_unit_compositor_next_func`. The explicit cell is not identity,
+even where the prototype's historical strict cuts make its endpoints
+convertible.
+
+The checked recovery result is written
+
+```text
+Groupoidify(WalkingArrow) ~= Interval,
+```
+
+owned by `groupoidify_walking_interval_type_equiv`. This is a `TypeEquiv`, not
+definitional equality. `Groupoidify(C)` is an active kernel constructor, but
+surface parsing, source action `Groupoidify(H)`, the whole
+`Groupoidify_func : Cat_cat -> Grpd_cat`, and its adjunction with
+`Path_cat_func` remain future interfaces.
 
 ## Computational Truncation And Circle Notation
 

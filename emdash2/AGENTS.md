@@ -183,6 +183,14 @@ higher action, is `emdash3_2_walking_interval_extension.lp`;
 the fixed-forward WalkingArrow--interval mapping-object equivalence, with
 whole beta/eta and dependent endpoint/generator projections, is
 `emdash3_2_walking_interval_universality.lp`;
+the category-indexed free-groupoidification HIT, whole unit, computing
+recursor, and iterable extension are `emdash3_2_groupoidification_hit.lp`;
+whole generic restriction, scoped beta/eta, and the arbitrary-source/target
+mapping-object equivalence are `emdash3_2_groupoidification_universality.lp`;
+the explicit generic unit compositor and retained next action are
+`emdash3_2_groupoidification_composition.lp`;
+the beta/eta-derived WalkingArrow--Interval comparison, whole cancellations,
+and `TypeEquiv` are `emdash3_2_groupoidification_interval_recovery.lp`;
 the concrete directed WalkingEnd-to-Circle comparison is
 `emdash3_2_walking_circle_completion.lp`;
 the whole restriction of Circle functions to WalkingEnd representations,
@@ -849,15 +857,27 @@ Use the following order:
 89. `emdash3_2_walking_interval_universality.lp` for the rule-free
     source-specific universal mapping property against every `G : Grpd`.
     Whole beta/eta package restriction as `OmegaEquivAlong Cat_cat`, with
-    dependent endpoint/generator projections and no generic `Groupoidify`;
-90. `emdash3_2_checks.lp` for executable regression statements;
-91. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+    dependent endpoint/generator projections; the generic recovery reuses it;
+90. `emdash3_2_groupoidification_hit.lp` for category-indexed
+    `Groupoidify(C)`, its whole unit, judgmental point and dependent first-cell
+    computation, and a whole extension retaining first and next hom action;
+91. `emdash3_2_groupoidification_universality.lp` for whole restriction,
+    scoped categorical-HIT beta/eta, and `OmegaEquivAlong Cat_cat` for every
+    `C : Cat` and `G : Grpd`, without source action or an adjunction;
+92. `emdash3_2_groupoidification_composition.lp` for the nonidentity generic
+    unit compositor and one retained next action, both projected from the
+    existing ordinary internal-action calculus;
+93. `emdash3_2_groupoidification_interval_recovery.lp` for the two extension-
+    selected comparison maps, beta/eta-derived whole cancellations, explicit
+    quasi-inverse data, and `TypeEquiv(Groupoidify(WalkingArrow),Interval)`;
+94. `emdash3_2_checks.lp` for executable regression statements;
+95. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-92. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-93. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+96. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+97. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-94. `reports/INDEX.md` for task-specific plans and decision records.
-95. `book/book.json` and `book/evidence.json` for book source
+98. `reports/INDEX.md` for task-specific plans and decision records.
+99. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
