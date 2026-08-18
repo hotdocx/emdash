@@ -2,8 +2,8 @@
 title: "Functorial Type Theory: Univalent Foundations for Mathematics"
 authors: "The emdash contributors"
 edition: "expanded development edition"
-editionVersion: "0.4.0-dev"
-publicationDate: "2026-08-05"
+editionVersion: "0.5.0-dev"
+publicationDate: "2026-08-18"
 status: "draft"
 license: "CC-BY-SA-3.0"
 ---
@@ -19,9 +19,12 @@ category theory, weighted universal constructions, directed duality, and a
 categorical-kernel-first formal presentation. A third follows Yoneda's probes
 through presheaves, sieves, sites, and sheafification into constructive
 algebraic geometry, taking the invertibility sieve $D_R(f)$ as prior to any
-representing open. Chapter details, notation, and cross-references may still
-change. The active implementation remains authoritative whenever prose and
-code disagree.
+representing open. A fourth returns from directed motion to its groupoidal
+realization: paths close selected formers, the Circle restores inverse powers,
+groupoidification freely realizes directed cells as paths, and a profiled Gray
+closure exposes a genuinely directed interchanger. Chapter details, notation,
+and cross-references may still change. The active implementation remains
+authoritative whenever prose and code disagree.
 
 Copyright © 2026 the emdash contributors. Except where separately identified,
 the book text is licensed under CC BY-SA 3.0. See
@@ -136,6 +139,23 @@ an assumption-explicit projective-line presentation: the overlap calculation
 is checked, while construction of the global object, graded `Proj`, general
 projective space, and non-affineness remain visible boundaries.
 
+A fourth spiral begins in Chapters [25](#chapter-25)–[28](#chapter-28). It
+returns the directed theory to the groupoidal layer without identifying the
+two. Paths in products split and reassemble homwise, and dependent transport
+through those coordinates agrees coherently with primitive equality
+induction. The Circle then restores the inverse powers deliberately absent
+from WalkingEnd: successor-localized integers support an internal
+encode–decode proof of its based loop space. WalkingEnd and the two-ended
+WalkingArrow next become finite tests of free inversion before the same
+mapping property is stated for an arbitrary source category. The final
+chapter turns back toward direction. Whole internal laxity yields a
+computational strict-functor profile, one selected right Gray closure, and a
+nonidentity interchanger on the walking square. These are substantial checked
+slices, not a claim that every categorical former is groupoidally closed,
+that source-functorial groupoidification has already been packaged as an
+adjunction, or that a full Crans–Gray biclosed monoidal structure has been
+constructed.
+
 [Appendix G](#appendix-formal-presentation) then states how the mathematical
 surface, checked categorical kernel, bounded TypeScript elaborator through
 explicit Core, and external models fit together, with the Lambdapi kernel
@@ -179,7 +199,13 @@ topology-local ring behaviour on the actual slice, and derives a selected
 chart intersection from the global structure presheaf.
 [Chapter 24](#chapter-24) constructs Laurent coordinate changes on that
 literal overlap, packages the resulting supplied projective-line capability,
-and separates it from the still-unconstructed graded `Proj` route. The
+and separates it from the still-unconstructed graded `Proj` route. The fourth
+spiral begins with paths, structured transport, and groupoidal closure in
+[Chapter 25](#chapter-25). [Chapter 26](#chapter-26) carries out the
+Circle/Integer encode–decode theorem; [Chapter 27](#chapter-27) passes from
+the WalkingEnd and WalkingArrow tests to category-indexed free inversion; and
+[Chapter 28](#chapter-28) recovers a directed interchanger from whole laxity
+inside one profiled Gray closure. The
 [contents](#contents) and
 [glossary/index](#appendix-glossary) provide stable anchor-based navigation.
 
@@ -187,11 +213,11 @@ Five reading paths make the dependencies explicit:
 
 | Reader | Main path | Consult when needed |
 | --- | --- | --- |
-| type theorist | Prologue; Chapters 1, 3–8, 10, and 15 | Chapters 2 and 9 for directed action; Appendix G for the formal presentation |
-| category theorist | Prologue; Chapters 2, 5, and 8–24 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
+| type theorist | Prologue; Chapters 1, 3–8, 10, 15, and 25–27 | Chapters 2, 9, and 28 for directed action and laxity; Appendix G for the formal presentation |
+| category theorist | Prologue; Chapters 2, 5, and 8–28 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
 | algebraic geometer | Chapters 13, 16, and 18–24 | Chapters 2, 3, 5, 6, and 12 for the directed, logical, inductive, universal, and adjoint foundations |
-| implementer | Chapters 1, 2, 6, 8, and 9; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
-| external reviewer | Chapters 2.6, 8, and 9; then the integrated reviewer, live or local | Appendices A, B, F, and G for notation, evidence, status, and architecture |
+| implementer | Chapters 1, 2, 6, 8, 9, and 25–28; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
+| external reviewer | Chapters 2.6, 8, 25–28; then the integrated reviewer, live or local | Appendices A, B, F, and G for notation, evidence, status, and architecture |
 
 These are paths through one dependency graph, not separate foundations. In
 particular, the category-theory route still uses equality-local reasoning, and
@@ -254,7 +280,10 @@ book, Zeuner's constructive algebraic geometry, and Pédrot's computational
 sheafification work are versioned and section-mapped in
 `book/references/third-party-sources.json`. The relevant licenses and kinds of
 adaptation are recorded there, and emdash's mathematical changes are stated
-rather than hidden behind a change of symbols.
+rather than hidden behind a change of symbols. Hadzihasanovic's combinatorial
+Gray products and oriented cubes are registered there as comparative
+bibliography only: Chapter 28 does not copy their prose or claim to have
+constructed the same full tensor.
 <!-- /book-source:how-to-read -->
 <div class="book-source-end" aria-hidden="true"></div>
 
@@ -295,12 +324,16 @@ rather than hidden behind a change of symbols.
 - [22. Affine Geometry And The Sieve $D(f)$](#chapter-22)
 - [23. Schemes From Covering Charts](#chapter-23)
 - [24. The Projective Line And The Boundary Of Construction](#chapter-24)
+- [25. Paths And The Groupoidal Shadow](#chapter-25)
+- [26. The Circle And The Integer Line](#chapter-26)
+- [27. Free Inversion And Groupoidification](#chapter-27)
+- [28. Laxity, Interchange, And The Gray Direction](#chapter-28)
 
 ## Appendices
 
 - [Appendix A. Notation](#appendix-notation)
 - [Appendix B. Emdash Evidence](#appendix-evidence)
-- [Appendix C. From The Circle To The Walking Endomorphism](#appendix-hott-correspondence)
+- [Appendix C. From The Circle To The Walking Endomorphism—And Back](#appendix-hott-correspondence)
 - [Appendix D. Glossary And Concept Index](#appendix-glossary)
 - [Appendix E. Computation And Normalization](#appendix-computation)
 - [Appendix F. Implementation Status And Research Directions](#appendix-status)
@@ -550,6 +583,17 @@ sites and descent to direct Cat-valued sheafification. Chapters
 affine localization, place the invertibility sieve before any representing
 open, and assemble site-relative scheme and supplied projective-line
 presentations without concealing their hypotheses.
+
+The fourth spiral returns to the relation between paths and arrows.
+[Chapter 25](#chapter-25) realizes selected directed action inside path
+categories and compares product transport with equality induction.
+[Chapter 26](#chapter-26) restores the inverse powers missing from the central
+WalkingEnd theorem by proving the Circle/Integer encode–decode equivalence.
+[Chapter 27](#chapter-27) upgrades that comparison to free inversion, first
+for one- and two-endpoint walking shapes and then for an arbitrary source
+category. [Chapter 28](#chapter-28) keeps the target directed again: whole
+laxity, a computational strict profile, and one right Gray closure produce a
+nonidentity walking-square interchanger with higher action still available.
 
 The larger aim is not merely to calculate one hom. It is to show how a type
 theory can let groupoidal equality and noninvertible arrows coexist, interact,
@@ -1888,6 +1932,12 @@ type equivalence, and the surrounding universes retain their checked
 univalence interfaces. The lesson is not that univalence disappears. It is
 that univalence governs equivalence and identity, while directed functoriality
 also governs noninvertible action.
+
+Chapter 26 returns to the other side of this contrast with the now-active
+Circle construction. Integer successor is first packaged as an equivalence;
+univalence then turns it into the universe loop used by the universal cover.
+The WalkingEnd and Circle codes therefore share an encode–decode rhythm while
+retaining different reasons why their monodromy is well typed.
 <!-- /book-source:chapter-4 -->
 <div class="book-source-end" aria-hidden="true"></div>
 
@@ -2145,6 +2195,42 @@ function exists. It checks the direction of `rho`, the variance of the
 representable, and the agreement of the generic Sigma and Pi constructions.
 If any of those are reversed, the result has the wrong endpoints before one
 even asks for associativity.
+
+### From mathematical notation to executable evidence
+
+There is now a small reviewer-facing notation for following this construction
+through the TypeScript implementation:
+
+```text
+PathOut(Z, x)
+rho(Z, x, y, p)
+Ind(Z, x, E, u)
+compose(Z, x, y, z, p, q)
+```
+
+These are four views of the development above: the outgoing-arrow category,
+its canonical arrow from the reflexive object, the induced section, and the
+value of the composition functor at $q$. They are not a second foundation or
+a new declaration language. Parsing one of them merely records which
+construction is being discussed, with its variables and source location.
+
+This distinction matters in a browser. The browser can display that the
+corresponding construction was qualified at the pinned semantic checkpoints,
+but it says explicitly that it has not rerun the semantic check. An explicit
+Node invocation such as
+`./scripts/emdash pathout check composition-normal-form` instead assembles the
+existing theory profile, checks the resulting explicit Core term with the
+TypeScript checker, and compares the composition term with its reviewed
+normal form. Only that result is labelled a fresh TypeScript semantic check;
+the first assembly in a process may take several minutes.
+
+The division of labour mirrors the mathematics. A small sealed profile owns
+the primitive path-induction constants and their exact computation rules;
+the `PathOut`, induction, and composition constructions remain transparent
+library material built from them. TypeScript/emdash is the production checker
+for this presentation, while Lambdapi remains a separately bounded
+conformance oracle. The notation therefore makes the evidence easier to
+inspect without changing what counts as evidence.
 
 ## 5.6 Returning To Literal Equality
 
@@ -2581,9 +2667,11 @@ would need at least:
 - optional dimension or truncation constructors whose consequences are
   separately controlled.
 
-Pushouts, quotients, directed intervals, and cell complexes would test
+Pushouts, quotients, general directed intervals, and cell complexes would test
 different parts of such a design. None follows merely by changing the name of
-the walking generator.
+the walking generator. The selected groupoidal interval used later in
+Chapters 26–27 is a separate two-point HIT, while its directed WalkingArrow
+source is derived from join; neither supplies a generic signature compiler.
 
 <!-- evidence:DHIT-GENERAL-SCHEMA -->
 
@@ -2927,30 +3015,45 @@ This separation is a model for later proofs:
 The intermediate cell can carry an orientation or support further
 composition even when its equality shadow cannot.
 
-## 7.8 Properties Are Not Reflectors
+## 7.8 From Properties To A Classified Reflector
 
-A general truncation operation would assign to every classifier `A` a
-new classifier `||A||_n`, together with a universal map and an
-elimination principle into `n`-truncated targets. In a directed setting
-one may also ask for categorical truncations that collapse cells above a
-chosen dimension while preserving lower directed structure.
+A truncation operation assigns to every classifier $A$ a new classifier
+$\lVert A\rVert_n$, together with a universal map and elimination into
+$n$-truncated targets. The active groupoidal layer now realizes this idea in
+a classified form. The category $\mathsf{NType}(n)$ contains retained
+$n$-truncated classifiers, and
 
-The active layer does not provide either general reflector. It provides
-predicates on existing classifiers, closure theorems, evidence-retaining
-universes, and consequences of finite categorical dimension. Those tools are
-enough for the WalkingEnd calculation because its one-dimensionality is
-signature data rather than something that must be freely imposed afterward.
+$$
+\mathsf{Trunc}_n(A):\mathsf{NType}(n)
+$$
+
+is the primary result. Decoding its carrier gives the ambient classifier
+$\lVert A\rVert_n$. The point constructor computes, while dependent
+elimination is restricted to motives that themselves land in
+$\mathsf{NType}(n)$. Recursion derives a whole map action; identity,
+composition, and a retained path action follow from that same eliminator
+rather than from an unrelated registry of truncation laws.
+
+This reflector extends rather than replaces the predicates and closure
+theorems developed earlier in the chapter. The predicates state when a given
+classifier is already truncated. The reflector constructs a classified
+truncated target. Finite categorical height remains separate: WalkingEnd's
+one-dimensionality is signature evidence and is not obtained by truncating an
+arbitrary directed category after the fact.
 
 <!-- evidence:TRUNC-REFLECTOR -->
 
-> **Formal status — research boundary.** Evidence `TRUNC-REFLECTOR`.
-> A general truncation HIT or directed categorical reflector remains future
-> work and must come with its own universal and computational properties.
+> **Formal status — checked.** Evidence `TRUNC-REFLECTOR`. The active
+> construction is a computational groupoidal truncation reflector with
+> classified motives. A general directed categorical truncation, arbitrary
+> quotient/HIT schema, and comparison with every classical hub-and-spoke
+> presentation remain future work.
 
 We now have every prerequisite for the main proof: equality-local action,
 functors and directed families, contextual elimination, equivalence packages,
 recursive truncation, and homwise categorical height. The next chapter puts
-them together without identifying direction with invertibility.
+them together without identifying direction with invertibility; Chapter 26
+later returns to the reflector through the connectedness of the Circle.
 <!-- /book-source:chapter-7 -->
 <div class="book-source-end" aria-hidden="true"></div>
 
@@ -3719,20 +3822,34 @@ and cannot move below zero. Natural numbers record the free monoid generated
 by forward motion. The negative integers are missing for the same reason the
 right inverse is missing: direction has not been group-completed.
 
-A future comparison with the circle should therefore proceed by an explicit
-group-completion construction, not by renaming `Nat` to
-`Int` or declaring `ell` invertible.
+The comparison with the Circle now proceeds by exactly such an explicit
+free-inversion construction. A whole functor
+
+$$
+W\longrightarrow\operatorname{Path}(S^1)
+$$
+
+sends the base and directed generator to the Circle base and loop. It sends
+every natural power to the corresponding nonnegative Circle power, and the
+Circle encoder reads that image as the canonical inclusion
+$\mathbb N\to\mathbb Z$. More strongly, restriction along this functor is a
+whole mapping equivalence against every groupoidal target. The theorem does
+not make $\ell$ invertible inside $W$; it characterizes the separate
+groupoidal object obtained by freely allowing inverse motion.
 
 <!-- evidence:WE-GROUP-COMPLETION -->
 
-> **Formal status — research boundary.** Evidence
-> `WE-GROUP-COMPLETION`. No `BInt`/circle group completion
-> or comparison functor is active.
+> **Formal status — checked.** Evidence `WE-GROUP-COMPLETION`. The concrete
+> WalkingEnd–Circle restriction/extension theorem is active and iterable.
+> Chapter 27 places it beside category-indexed groupoidification. A reverse
+> `BNat` functor and a packaged monoid isomorphism for the original carrier
+> theorem remain separate questions.
 
 The calculation has reached its intended boundary. It proves that an opaque
 directed generator has exactly the expected natural powers, and it proves
-noninvertibility rather than assuming it. Stronger categorical universal
-properties are the next layer, not hidden premises of this one.
+noninvertibility rather than assuming it. The later universal mapping theorem
+strengthens the surrounding comparison, but it is not a hidden premise of
+the Nat encode–decode proof.
 
 ## 8.2 Higher Groupoidal Shadows
 
@@ -4519,8 +4636,10 @@ negative direction.
 - The arbitrary-$K$ product benchmark needs a general chosen-product
   interface. Its $\mathsf{Cat}$ instance still awaits one narrow packaged
   projection/composition comparison; neither gap justifies broad product eta.
-- A displayed family morphism has the component-level laxity cell and its
-  full internal projection ladder, but no duplicate whole-square facade.
+- A displayed family morphism has a whole internal laxity transformation and
+  its component projection ladder. Ordinary post/left and pre/right surfaces
+  are transparent specializations of that owner rather than duplicate
+  naturality squares.
 - General ends, coends, and arbitrary Kan extensions require universal
   interfaces stronger than the selected profunctor operations.
 - Runtime conversion, proof-time comparison, internal equality, and
@@ -4528,11 +4647,12 @@ negative direction.
 
 <!-- evidence:FUNCTORD-WHOLE-LAXITY -->
 
-> **Formal status — research boundary.** Evidence
-> `FUNCTORD-WHOLE-LAXITY`. A future whole-transfor comparison between
-> $D[p]\circ\Phi_x$ and $\Phi_y\circ E[p]$ should be derived from the internal
-> displayed action, project coherently through higher homs, and serve a
-> concrete consumer. It must not duplicate the component semantics.
+> **Formal status — checked.** Evidence `FUNCTORD-WHOLE-LAXITY`. The whole
+> displayed owner, both ordinary variance surfaces, their capped cells, and
+> the functor-compositor specialization are active. Their next actions remain
+> in the generic hom calculus. This does not claim a complete weak
+> omega-category coherence theorem or remove the prototype's historical
+> strict endpoint cuts.
 
 Cut elimination is therefore not a feature catalogue. It is the organizing
 principle by which functorial type theory decides what should compute, what
@@ -5547,6 +5667,29 @@ binary representable comparison. These facts are sufficient for the later
 weighted-limit preservation theorem. They are not yet a complete native
 theory of categorical equivalence.
 
+There is also an important mapping equivalence whose source-functorial
+packaging is not yet an adjunction. For every category $C$ and groupoid $G$,
+restriction along the groupoidification unit gives
+
+$$
+\operatorname{Hom}_{\mathsf{Grpd}}(\mathsf{Groupoidify}(C),G)
+\simeq
+\operatorname{Functor}(C,\operatorname{Path}(G)).
+$$
+
+The forward and inverse operations are whole functors and satisfy whole
+beta/eta comparisons. This is exactly the target-side mapping statement one
+expects from a left adjoint, but the current source assignment has not yet
+been given functor action on $C\to D$.
+
+<!-- evidence:GENERIC-GROUPOIDIFICATION-MAPPING -->
+
+> **Formal status — checked.** Evidence
+> `GENERIC-GROUPOIDIFICATION-MAPPING`. Chapter 27 constructs the unit,
+> recursor, and concrete tests. Calling the current package an adjunction
+> would be premature until `Groupoidify_func` and its source-functor laws are
+> checked.
+
 ## 12.11 The Native Higher Boundary
 
 A higher fully-faithful functor should compare whole hom-categories, then the
@@ -6306,6 +6449,7 @@ The following terms remain separate throughout the book.
 | gaunt category | a HoTT category that is also strict | runtime strictness |
 | native `IsNCat(n,C)` | recursive finite height of the hom-categories | object identity agrees with isomorphism |
 | strict naturality cut | a selected `tapp1` composite reduces to one off-diagonal action | all coherence is judgmental |
+| computational strict-functor code | a decoded functor whose compositor reduces at the selected profile owner | every ambient functor is strict or all higher cells are identities |
 | runtime strictness | an oriented kernel reduction chooses a normal form | object truncation or invertibility |
 | dagger category | identity agrees with *unitary* isomorphism | identity agrees with every isomorphism |
 
@@ -6313,6 +6457,19 @@ In particular, the HoTT phrase *strict category* begins with a
 **precategory**, not with a univalent category. Chapter 10’s translation table
 uses this definition. A strict precategory may still have nontrivial
 automorphisms that cannot come from its proposition-valued object identity.
+
+The computational code row is the profile used in Chapter 28. Its decoder
+selects functors whose compositor computes to identity while leaving the
+ambient transformation and higher-hom calculus shared with lax maps. This is
+a local syntactic specialization, not evidence that the whole prototype has
+already migrated away from its historical global strict endpoint cuts.
+
+<!-- evidence:GRAY-WALKING-INTERCHANGER -->
+
+> **Formal status — checked.** Evidence `GRAY-WALKING-INTERCHANGER` includes
+> the selected strict-object/lax-arrow profile and its nonidentity walking-
+> square interchanger. The full Crans–Gray monoidal structure remains outside
+> the checked boundary.
 
 ## 14.2 Strict Categories In Ordinary Univalent Foundations
 
@@ -11978,7 +12135,2305 @@ The third spiral of the book therefore ends where a good construction should
 end: not with a vague promise that gluing will work, and not with a denial that
 gluing matters, but with a coordinate theorem on an honest overlap and a clear
 account of the global theorem still owed.
+
+The fourth spiral changes direction without abandoning that discipline. It
+returns to the book's first contrast—reversible paths and noninvertible
+arrows—and asks what computation survives when directed structure is viewed
+groupoidally, freely inverted, and then placed back inside a genuinely lax
+higher-categorical comparison. The next chapter begins with the smallest
+bridge: paths in a product and transport through their two coordinates.
 <!-- /book-source:chapter-24 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-25 book/chapters/25-paths-and-the-groupoidal-shadow.md -->
+<a id="chapter-25"></a>
+
+# 25. Paths And The Groupoidal Shadow
+
+A directed arrow remembers which way it points. An equality path may also be
+followed, but it can be reversed. Functorial type theory keeps these two forms
+of motion in one language without identifying them. This is important both
+mathematically and computationally. Directed categories are needed for maps
+that need not be invertible: inclusions, restriction maps, substitutions, and
+the morphisms of algebra and geometry. Paths are needed for identity,
+transport, and homotopy. If every arrow were silently turned into a path, the
+directed theory would disappear. If paths could not enter the categorical
+calculus, the homotopical theory would become a detached second foundation.
+
+The bridge is the path category. For a groupoidal classifier $A$, the category
+$\operatorname{Path}(A)$ has elements of $A$ as objects and equality evidence
+as arrows:
+
+$$
+\operatorname{Obj}(\operatorname{Path}(A))=A,
+\qquad
+\operatorname{Hom}_{\operatorname{Path}(A)}(x,y)=(x=y).
+\tag{25.1}
+$$
+
+Reflexivity is the identity arrow. Categorical composition has the same
+mathematical effect as path concatenation, with a proved comparison between
+the two presentations. Every arrow in $\operatorname{Path}(A)$ is invertible
+because every path has a reverse. Thus equality can be observed through the
+same object, hom, functor, transformation, and higher-action interfaces used
+by the directed theory.
+
+This chapter develops three consequences of that bridge. First, paths in a
+product split into their two coordinate paths and can be reconstructed from
+them. Second, dependent transport over a product can be performed directly or
+one coordinate at a time, and the resulting routes form a coherent diamond.
+Third, a generic directed laxity cell becomes invertible when it is realized
+in a path category. The point is not to add parallel copies of products,
+transport, or functoriality for the groupoidal world. It is to show how one
+iterable categorical calculus changes character when its homs are paths.
+
+## 25.1 Equality In Categorical Form
+
+Let $f:A\to B$ be an ordinary function between groupoidal classifiers. Its
+action on equality is familiar:
+
+$$
+p:x=y
+\quad\longmapsto\quad
+\operatorname{ap}_f(p):f(x)=f(y).
+\tag{25.2}
+$$
+
+In the categorical presentation, (25.2) is the arrow action of a whole
+functor
+
+$$
+\operatorname{Path}(f):\operatorname{Path}(A)
+  \longrightarrow \operatorname{Path}(B).
+\tag{25.3}
+$$
+
+The adjective *whole* matters. Equation (25.3) is not merely a function on
+objects together with a separately stated congruence lemma. It is the first
+action of an internal path-category construction. Equality between functions
+therefore has a next action, equality between those equalities has another,
+and the same mechanism remains available at every represented hom level.
+Functoriality is not reconstructed from a finite record each time the
+dimension rises.
+
+This is the **groupoidal shadow** of ordinary function action. It should not
+be confused with the groupoidification of a directed category. The path
+category begins with a type-like classifier and exposes its existing
+equalities as arrows. Groupoidification, studied in Chapter 27, begins with
+directed arrows and freely realizes them as paths. The first construction
+reveals identity already present; the second imposes invertibility on motion
+that was not initially invertible.
+
+The path category also gives a common surface for equality induction and
+categorical induction. Fix $x:A$. The objects of the outgoing-path category
+are pairs $(y,p)$ with $p:x=y$. Its distinguished object
+$(x,\operatorname{refl}_x)$ is initial in the groupoidal sense: a family over
+outgoing paths is determined by what it does there, and its value at $(y,p)$
+is obtained by transport along $p$. In the directed presentation this is the
+`PathOut` principle of Chapter 5. In the equality presentation it is the
+usual eliminator $J$. They are two views of one operation, not competing
+eliminators.
+
+The computational boundary is precise. Primitive right-based $J$ computes at
+reflexivity. Structured categorical transport and structured `PathOut`
+induction are transparent presentations of the same movement, and there are
+paths comparing each with primitive $J$. Those comparisons are mathematical
+equalities; the book does not promote all three surface expressions to one
+runtime normal form. This separation lets conversion remain controlled while
+still proving that the categorical and groupoidal readings agree.
+
+## 25.2 A Product Path Has Two Coordinates
+
+Consider two groupoidal classifiers $A$ and $B$. There are two evident ways
+to form a category of paths of pairs:
+
+$$
+\operatorname{Path}(A\times B)
+\qquad\text{and}\qquad
+\operatorname{Path}(A)\times\operatorname{Path}(B).
+\tag{25.4}
+$$
+
+Their objects are the same pairs. Their category heads, however, are not
+declared definitionally equal. The comparison is instead carried by a
+canonical functor
+
+$$
+\chi_{A,B}:\operatorname{Path}(A\times B)
+\longrightarrow
+\operatorname{Path}(A)\times\operatorname{Path}(B),
+\tag{25.5}
+$$
+
+which is judgmentally the identity on objects. For
+$s=(a_0,b_0)$ and $t=(a_1,b_1)$, its action on homs reads
+
+$$
+(s=t)
+\longrightarrow
+(a_0=a_1)\times(b_0=b_1).
+\tag{25.6}
+$$
+
+The forward map *splits* a path of pairs by projecting it to the two
+coordinates. Conversely, a pair
+
+$$
+p:a_0=a_1,
+\qquad
+q:b_0=b_1
+\tag{25.7}
+$$
+
+can be *joined* to a path
+
+$$
+\langle p,q\rangle:(a_0,b_0)=(a_1,b_1).
+\tag{25.8}
+$$
+
+The construction of (25.8) uses the stable path view of a dependent pair. A
+path in a sigma type consists of a base path together with a path over it in
+the fibre. For an ordinary product the fibre is constant, so the second
+component of (25.7) is converted into the required path-over and the two
+pieces are assembled. Splitting after joining and joining after splitting are
+both propositionally the identity. Hence, for every pair of endpoints, (25.6)
+is a type equivalence:
+
+$$
+\bigl((a_0,b_0)=(a_1,b_1)\bigr)
+\simeq
+\bigl((a_0=a_1)\times(b_0=b_1)\bigr).
+\tag{25.9}
+$$
+
+<!-- evidence:GROUPOIDAL-PRODUCT-CLOSURE -->
+
+> **Formal status — checked.** **Theorem 25.1 (product-path closure).** Evidence
+> `GROUPOIDAL-PRODUCT-CLOSURE`. The canonical comparison (25.5) is
+> judgmentally identity on objects, and its actual action on every hom has an
+> explicit split/join equivalence. The theorem does not add a category-head
+> rewrite between the two categories in (25.4), nor does it postulate a whole
+> inverse functor or a complete equivalence of categories.
+
+The restraint in the final sentence is useful. The mathematical content
+needed by later transport arguments is already present: a product path may be
+read componentwise and component paths may be assembled. Turning that fact
+into a new definitional equality of large category expressions would choose a
+global normal form and create interactions with every consumer of products
+and paths. Homwise equivalence records the invariant without forcing such a
+choice.
+
+This example illustrates what **groupoidal closure** means in the present
+development. It is not the assertion that every categorical former preserves
+path structure. It is a checked comparison for a selected former—in this
+case, products—showing how the path realization is recovered from the
+component realizations. Other formers require their own comparison or a later
+general closure theorem.
+
+## 25.3 Three Routes Through Dependent Transport
+
+The split/join theorem becomes more informative when the codomain depends on
+the pair. Let
+
+$$
+P:A\times B\longrightarrow\mathcal U
+\tag{25.10}
+$$
+
+be a groupoidal family, let $p:a_0=a_1$ and $q:b_0=b_1$, and take
+$u:P(a_0,b_0)$. Joining $p$ and $q$ gives the simultaneous path (25.8), so
+primitive equality transport gives a direct route
+
+$$
+T_{\mathrm{dir}}(p,q,u)
+:
+P(a_1,b_1).
+\tag{25.11}
+$$
+
+There are also two broken-line routes through the square of indices. The
+base-first route moves from $(a_0,b_0)$ to $(a_1,b_0)$ along $p$, then from
+$(a_1,b_0)$ to $(a_1,b_1)$ along $q$. The fibre-first route changes the
+$B$-coordinate before the $A$-coordinate:
+
+$$
+\begin{aligned}
+T_{A;B}(p,q,u)&:
+P(a_0,b_0)\longrightarrow P(a_1,b_0)
+                 \longrightarrow P(a_1,b_1),\\
+T_{B;A}(p,q,u)&:
+P(a_0,b_0)\longrightarrow P(a_0,b_1)
+                 \longrightarrow P(a_1,b_1).
+\end{aligned}
+\tag{25.12}
+$$
+
+All three expressions have the same endpoint, but they are not selected as
+one judgmental normal form. Equality induction on $p$ and $q$ instead proves
+two comparisons
+
+$$
+T_{\mathrm{dir}}(p,q,u)=T_{A;B}(p,q,u),
+\qquad
+T_{\mathrm{dir}}(p,q,u)=T_{B;A}(p,q,u).
+\tag{25.13}
+$$
+
+At reflexivity, direct transport and both sequential routes reduce to the
+original $u$. The general comparisons are then generated by the same $J$
+principle. Reversing the first path in (25.13) and following the second gives
+the coherence edge between the broken-line routes:
+
+$$
+T_{A;B}(p,q,u)=T_{B;A}(p,q,u).
+\tag{25.14}
+$$
+
+Equations (25.11)–(25.14) form the transport diamond
+
+$$
+\begin{array}{ccc}
+&T_{\mathrm{dir}}(p,q,u)&\\[-2mm]
+\swarrow&&\searrow\\[-1mm]
+T_{A;B}(p,q,u)&&T_{B;A}(p,q,u),
+\end{array}
+\tag{25.15}
+$$
+
+where the lower edge is induced by the two displayed comparisons. The
+diamond answers the ordering question raised by product transport. There is
+no need to declare that transport *is* first-$A$-then-$B$, nor that it *is*
+first-$B$-then-$A$. Direct transport is the neutral centre. Both sequential
+calculations are valid, and their agreement is retained as data that can
+itself be transported or acted upon at a higher level.
+
+Nothing Gray-like is required for this theorem. Gray interchange concerns
+directed two-dimensional composition when comparison cells need not be
+invertible. Here the base arrows are equality paths and the two routes are
+compared by equality induction. Chapter 28 will return to the directed
+interchanger after the groupoidal examples have made this distinction
+visible.
+
+<!-- evidence:GROUPOIDAL-PRODUCT-TRANSPORT -->
+
+> **Formal status — checked.** **Theorem 25.2 (the product-transport
+> diamond).** Evidence
+> `GROUPOIDAL-PRODUCT-TRANSPORT`. Transport along the joined product path
+> agrees with both coordinate orders, and the comparisons compose to the
+> coherent lower edge (25.14). The construction uses primitive right-based
+> equality induction; it introduces no product-specific transport axiom and
+> no second eliminator.
+
+## 25.4 One Transport, Three Presentations
+
+The family $P$ in (25.10) can also be presented categorically. Apply the path
+category to every fibre and use path action to obtain a displayed category
+over $\operatorname{Path}(A\times B)$. A path $r:s=t$ in the base then acts
+on a fibre object $u:P(s)$ by displayed functorial transport. In symbols, the
+three readings are
+
+$$
+\begin{aligned}
+T_J(r,u)&=\text{primitive equality transport},\\
+T_{\mathrm{disp}}(r,u)&=\text{displayed categorical action},\\
+T_{\mathrm{out}}(r,u)&=\text{structured induction over outgoing paths}.
+\end{aligned}
+\tag{25.16}
+$$
+
+The second line sees $r$ as an arrow of the path category. The third sees
+$(t,r)$ as an object of the outgoing-path category based at $s$. These
+descriptions organize transport differently, but both compare to the first:
+
+$$
+T_{\mathrm{disp}}(r,u)=T_J(r,u),
+\qquad
+T_{\mathrm{out}}(r,u)=T_J(r,u).
+\tag{25.17}
+$$
+
+Thus the displayed and `PathOut` interfaces are not alternative axioms for
+transport. They are categorical structures whose computation is justified
+by the primitive equality eliminator. Conversely, (25.17) shows that $J$ is
+not stranded in a purely syntactic equality layer. It can be used through the
+same displayed-action and section interfaces that support directed dependent
+type theory.
+
+There is a deliberate difference between *computes* and *agrees*. Primitive
+$J$ computes judgmentally on reflexivity. The two structured expressions in
+(25.16) agree propositionally with it, including at the reflexive case; they
+are not installed as additional runtime reductions. This is enough to move
+between representations in a proof while avoiding three rival normal forms
+for the same operation.
+
+The result is a useful design test. A computational homotopy layer need not
+duplicate a primitive eliminator for every categorical presentation of a
+family. It can keep one $J$, expose structure through functorial interfaces,
+and prove that the interfaces return to the same transport. The product
+diamond then becomes a substantive consumer of the arrangement rather than a
+second definition of it.
+
+## 25.5 When Directed Laxity Becomes Pseudo
+
+We can now return to the whole path action (25.3). In the directed calculus, a
+functor carries a compositor comparing two ways of acting on composable
+arrows. For $p:x=y$ and $q:y=z$, specialize that generic compositor to
+$\operatorname{Path}(f)$. Its source and target have the familiar readings
+
+$$
+\operatorname{ap}_f(p)\mathbin{\cdot}\operatorname{ap}_f(q)
+\qquad\text{and}\qquad
+\operatorname{ap}_f(p\mathbin{\cdot}q),
+\tag{25.18}
+$$
+
+where $\cdot$ denotes path concatenation in diagrammatic order. Formally, the
+kernel retains represented postcomposition expressions as the compositor's
+runtime endpoints. Separate paths compare those endpoints with the readable
+$\operatorname{ap}$/concatenation expressions in (25.18). The presentation is
+therefore recognizable without selecting the notation of (25.18) as a second
+normal form.
+
+For an arbitrary directed codomain, the compositor is a directed cell and
+need not have an inverse. Here its codomain is
+
+$$
+\operatorname{Hom}_{\operatorname{Path}(B)}(f(x),f(z))
+=(f(x)=f(z)).
+\tag{25.19}
+$$
+
+A cell between the two arrows in (25.18) is consequently an equality between
+paths. Path symmetry supplies its inverse. No inverse field is postulated and
+no second pseudofunctor hierarchy is introduced. The generic lax witness has
+become a pseudo witness because it landed in a groupoidal hom.
+
+This gives a simple three-way interpretation of the same internal action:
+
+$$
+\begin{array}{rcl}
+\text{directed target}&:&\text{the compositor may be noninvertible},\\
+\text{path target}&:&\text{the compositor is invertible by symmetry},\\
+\text{selected strict profile}&:&\text{the compositor specializes to identity}.
+\end{array}
+\tag{25.20}
+$$
+
+Strictness and pseudo-functoriality are therefore not obtained by erasing the
+generic witness. They are two special behaviours of it. This is especially
+important when a strict specialization is also available. The witness cell
+remains visible before that specialization, while an explicit strict profile
+can state exactly where identity behaviour is intended. Chapter 28 will use
+that distinction when comparing Cartesian and Gray-style closure.
+
+The compositor is retained before it is capped at the particular path $p$.
+At that whole level it is a transformation, functorial in the first path.
+Taking its next hom action yields a functor from paths between paths to paths
+between the corresponding compositor endpoints. Thus the construction has
+not discarded higher input merely to prove pointwise invertibility. It
+preserves one explicit next stage of the same internal action, and the generic
+action can be iterated further.
+
+<!-- evidence:PATH-PSEUDO-LAXITY -->
+
+> **Formal status — checked.** **Theorem 25.3 (path-realized
+> pseudo-laxity).** Evidence
+> `PATH-PSEUDO-LAXITY`. The generic compositor of
+> $\operatorname{Path}(f)$ decodes to an equality between paths; symmetry
+> gives its inverse; its formal endpoints compare propositionally with the
+> two expressions in (25.18); and its whole form retains one next hom action.
+> No new rewrite or unification rule, pseudofunctor classifier, inverse
+> record, or complete weak $\omega$-groupoid theorem is claimed.
+
+Theorem 25.3 is small but conceptually decisive. It shows that the directed
+and groupoidal layers do not need unrelated accounts of coherence. A witness
+generated by the directed internal-action machinery can be read as a path
+when the target says that its arrows are equalities. Invertibility then comes
+from the target's geometry. The change from lax to pseudo is semantic in the
+best computational sense: it is witnessed by the actual type of the cell.
+
+## 25.6 Closure, Truncation, And Free Inversion
+
+Three nearby operations can now be separated cleanly.
+
+**Groupoidal closure** starts with groupoidal data and asks whether a former
+preserves it. Theorem 25.1 answers this for the selected product comparison,
+hom by hom. **Truncation** starts with a groupoidal classifier and reflects it
+to a prescribed homotopy level. The active tower and its eliminators were
+introduced in Chapter 7; Chapter 26 will use the $0$-truncated Integer line
+when calculating the loop space of the Circle. **Groupoidification** starts
+with a directed category and freely makes its arrows invertible, together
+with the coherence required by composition. That is neither path exposure
+nor truncation, and it will occupy Chapter 27.
+
+The boundaries of this chapter are just as important as its theorems. The
+product comparison is identity on objects and an equivalence on each hom, but
+is not promoted to a whole category equivalence. The transport comparisons
+are propositional rather than competing conversion rules. The path-valued
+compositor retains higher action, but does not by itself establish a complete
+weak $\omega$-groupoid semantics or a global normalization theorem. These are
+not missing qualifications attached after the mathematics; they locate the
+exact reusable interface that has been checked.
+
+These distinctions suggest a useful discipline for working between the two
+layers. When equality-local data should participate in directed machinery,
+place it in a path category and preserve the whole categorical action for as
+long as possible. Do not cap immediately at objects or arrows if a later
+argument may need the next hom action. When a former such as a product has
+both a groupoidal and a categorical presentation, compare the actual object
+and hom actions before considering a new equality of classifier heads. And
+when a directed comparison lands in a path-valued hom, obtain invertibility
+from path reversal rather than copying the comparison into an unrelated
+pseudo structure.
+
+The common theme is that coherence should be **observed where it lives**.
+Product paths live homwise, so their split/join theorem is homwise. Dependent
+transport lives in a fibre, so its order comparison is an equality in that
+fibre. The functor compositor lives one dimension above arrows, so its
+path-valued realization is an equality between paths and retains a next
+action. None of these facts is improved by flattening it prematurely into an
+external collection of equations. Keeping the owner whole makes both the
+computation and its possible iteration visible.
+
+This is also why the word *shadow* does not mean approximation. The path
+category forgets none of the equality evidence it exposes. Rather, it changes
+the angle from which that evidence is viewed: a path becomes an arrow, a
+path-over becomes displayed action, and higher equality becomes higher
+categorical action. What remains outside the shadow is genuinely directed
+information—arrows that were never equalities in the first place. Free
+inversion will act on precisely that remainder.
+
+The next chapter gives that interface its first geometric test. The Circle is
+generated by one point and one reversible loop. Mapping it into a type $X$
+should therefore amount to choosing a point of $X$ and a loop at that point.
+When $X$ is the universe of sets and the loop acts by successor, repeated
+transport records winding number. The result is the Integer line—not because
+the Circle was declared to be arithmetic, but because groupoidal motion can
+be followed forward and backward.
+<!-- /book-source:chapter-25 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-26 book/chapters/26-circle-and-integer-line.md -->
+<a id="chapter-26"></a>
+
+# 26. The Circle And The Integer Line
+
+The walking endomorphism of Chapter 8 has one point and one directed
+generator. Every based arrow is a finite forward composite, so its arithmetic
+is the arithmetic of natural numbers. The Circle also has one point and one
+generator, but its generator is an equality path. It can be followed in
+either direction. Forward powers are joined by powers of the inverse, and the
+corresponding arithmetic becomes the integer line.
+
+This resemblance is exact enough to be useful and dangerous enough to demand
+care. The Circle is not obtained by replacing the natural-number answer in
+the WalkingEnd theorem with integers. Its loop is intrinsically groupoidal;
+its eliminator must act on dependent paths; and the inverse generator is
+derived from path reversal rather than postulated as another arrow. The
+integer answer is then *calculated* by a universal-cover encode–decode
+argument. Only in Chapter 27 will the relationship with the directed walking
+endomorphism be promoted to a universal free-inversion theorem.
+
+The calculation has four layers. First, successor on natural numbers is
+localized to an invertible shift, producing an internal Integer classifier.
+Second, the Circle is given its point, loop, and dependent computation.
+Third, univalence turns integer successor into the monodromy of a family over
+the Circle; transport in this family records winding number. Finally,
+integer-indexed loop powers decode winding numbers back to paths. The two
+directions are inverse not only at the base point but fibrewise over every
+endpoint of the Circle.
+
+## 26.1 Integers By Inverting Successor
+
+The Integer classifier is not introduced as a new datatype with positive and
+negative constructors. It is obtained from the sequential telescope
+
+$$
+\mathbb N\xrightarrow{\mathsf{succ}}
+\mathbb N\xrightarrow{\mathsf{succ}}
+\mathbb N\xrightarrow{\mathsf{succ}}\cdots
+\tag{26.1}
+$$
+
+by the set-truncated telescope-localization construction of Chapter 7. Write
+
+$$
+\mathsf{Integer}=\operatorname{Tel}(\mathbb N,\mathsf{succ}).
+\tag{26.2}
+$$
+
+A representative at stage $n$ with value $x$ will be denoted $[n,x]$ and has
+the intended reading $x-n$. The telescope constructor identifies the
+diagonal step
+
+$$
+[n+1,x+1]=[n,x].
+\tag{26.3}
+$$
+
+Thus $[0,0]$ represents zero, $[0,x]$ represents the nonnegative integer
+$x$, and $[1,0]$ represents negative one. No subtraction operation is needed
+to define the carrier. The notation $x-n$ explains the invariant respected
+by (26.3); the formal object is the localized telescope itself.
+
+This presentation separates arithmetic content from notation. A signed
+datatype would choose, at the outset, between a nonnegative and a negative
+constructor and would then require normalization at their boundary. The
+telescope instead records a history: $n$ applications of the inverse shift
+and a current natural value $x$. The diagonal equality (26.3) performs the
+cancellation that signed notation normally hides. A later theorem may choose
+canonical representatives, but the Circle proof does not depend on that
+choice.
+
+The construction also isolates exactly what “integer” means at this stage.
+The proof needs a set with a distinguished zero and an invertible successor,
+together with an eliminator that respects the localization equation. It does
+not need addition, multiplication, order, or the universal property of the
+group completion of the natural-number monoid. Those structures may be built
+later from the same carrier. Declining to presuppose them makes the eventual
+loop calculation more informative: integer behaviour is forced by reversible
+successor, not smuggled in through a ready-made ring.
+
+The forward telescope action descends to integer successor. Shifting the
+stage supplies its inverse, predecessor:
+
+$$
+\mathsf{succ},\mathsf{pred}:\mathsf{Integer}\longrightarrow
+\mathsf{Integer},
+\qquad
+\mathsf{succ}\,\mathsf{pred}\simeq\operatorname{id},
+\quad
+\mathsf{pred}\,\mathsf{succ}\simeq\operatorname{id}.
+\tag{26.4}
+$$
+
+Consequently successor is retained as a type equivalence. Univalence turns
+that equivalence into a path
+
+$$
+\mathsf{ua}(\mathsf{succ}):
+\mathsf{Integer}=\mathsf{Integer},
+\tag{26.5}
+$$
+
+and transport along (26.5) agrees with the actual successor function. This is
+the path that will drive the universal cover.
+
+The telescope is set-truncated by construction. Its dependent eliminator is
+therefore restricted to set-valued motives. To define a section over all
+integers, it is enough to define it on every stage representative $[n,x]$,
+give a dependent path over (26.3), and show that each target fibre is a set.
+This restriction is not an inconvenience hidden by notation: it will match
+exactly the one-dimensional boundary of the Circle loop space used by the
+decoder.
+
+<!-- evidence:INTEGER-LOCALIZATION-LINE -->
+
+> **Formal status — checked.** Evidence `INTEGER-LOCALIZATION-LINE`. The
+> Integer carrier is a transparent facade over the successor telescope;
+> successor and predecessor have explicit inverse paths; successor is a
+> retained equivalence and universe path; and set-targeted elimination
+> computes on stage representatives. No addition, signed normal-form
+> equivalence, ordered-ring structure, or universal additive-group-completion
+> theorem is claimed here.
+
+## 26.2 A Circle That Computes On Its Loop
+
+The groupoidal Circle is generated by
+
+$$
+\mathsf{Circle}:\mathcal U,
+\qquad
+\mathsf{base}:\mathsf{Circle},
+\qquad
+\mathsf{loop}:\mathsf{base}=\mathsf{base}.
+\tag{26.6}
+$$
+
+Its inverse loop is simply $\mathsf{loop}^{-1}$, obtained by equality
+symmetry. It is not a second constructor. The signature also states its
+selected one-dimensional boundary: every path type of the Circle is a set.
+This evidence is later checked from another direction when the based loop
+space is computed to be the set-valued Integer classifier.
+
+The dependent eliminator has the usual geometric form. Given a family
+$D:\mathsf{Circle}\to\mathcal U$, an element
+$b:D(\mathsf{base})$, and a dependent path
+
+$$
+\ell:
+\operatorname{PathOver}_D(\mathsf{loop};b,b),
+\tag{26.7}
+$$
+
+it produces a section
+
+$$
+\mathsf{circle\_ind}(D,b,\ell):
+\prod_{x:\mathsf{Circle}}D(x).
+\tag{26.8}
+$$
+
+The section computes judgmentally at the point constructor. More
+significantly, its canonical dependent action computes judgmentally at the
+path constructor:
+
+$$
+\begin{aligned}
+\mathsf{circle\_ind}(D,b,\ell)(\mathsf{base})
+  &\equiv b,\\
+\operatorname{apd}(\mathsf{circle\_ind}(D,b,\ell),\mathsf{loop})
+  &\equiv \ell.
+\end{aligned}
+\tag{26.9}
+$$
+
+The second rule retains the full path-over type in (26.7); it does not erase
+the transport of endpoints. It is also narrowly owned by the Circle
+eliminator and generating loop. An arbitrary dependent function on the
+Circle does not acquire this reduction merely because it is evaluated on
+$\mathsf{loop}$.
+
+Ordinary recursion is the constant-family case of (26.8). For a point $b:B$
+and loop $\ell:b=b$, it gives a function
+
+$$
+\mathsf{circle\_rec}(B,b,\ell):\mathsf{Circle}\to B.
+\tag{26.10}
+$$
+
+Its dependent action inherits the second reduction in (26.9), represented as
+the constant-family path-over built from $\ell$. The familiar ordinary
+equation
+
+$$
+\operatorname{ap}(\mathsf{circle\_rec}(B,b,\ell),\mathsf{loop})=\ell
+\tag{26.11}
+$$
+
+is derived propositionally. It is not a second runtime rule. This distinction
+is easy to miss on paper because (26.9) and (26.11) express the same
+mathematical computation. In the formal calculus they are different
+observers: `apd` sees the primitive dependent constructor action, while
+ordinary `ap` is reconstructed through constant-family transport.
+
+Dependent computation is the stronger statement. In (26.7), the endpoint
+$b$ is transported around the nontrivial base loop before it is compared
+with itself. The path-over remembers that movement even when the family is
+not constant. Ordinary `ap` sees only the constant-family shadow after the
+transport has been converted back into a path of $B$. If one installed only
+(26.11), the universal-cover decoder would still need a separate principle
+to control the function family in (26.20). Rule (26.9) supplies that control
+at the actual higher-constructor owner.
+
+This is the first HIT in the book whose higher constructor has a selected
+judgmental dependent beta. The lesson is not that every appealing higher
+equation should become a rewrite. The safe unit of computation is the action
+of the eliminator on its own constructor, with its full dependent type
+retained. Readable constant-family equations may remain propositional when a
+second reduction would duplicate normal forms or disturb unrelated equality
+proofs.
+
+<!-- evidence:CIRCLE-HIT-COMPUTATION -->
+
+> **Formal status — checked.** Evidence `CIRCLE-HIT-COMPUTATION`. Point beta
+> and dependent loop beta are runtime computations at their stable owners;
+> the named dependent beta is reflexivity after reduction. Constant-family
+> recursion inherits the dependent computation. Its ordinary `ap` equation
+> remains a checked propositional path, and unrelated sections do not
+> collapse to the supplied loop datum.
+
+> **Attribution and adaptation boundary.** The Circle signature and the
+> universal-cover rhythm below structurally adapt the [HoTT Book](#ref-hott-book),
+> Sections 6.2 and 8.1. The present account uses the active emdash dependent
+> computation boundary, successor-localized Integer rather than the Book's
+> signed/quotient presentation, and whole categorical realizations. It does
+> not import the HoTT Book's flattening proof or silently claim all of its
+> later homotopy-group consequences.
+
+## 26.3 The Universal Cover As Monodromy
+
+The classical universal cover of the circle may be pictured as a helix over a
+circle. Following the positive loop raises the lift by one level; following
+the negative loop lowers it. Type theory replaces the helix by a family whose
+fibres are integers and whose monodromy is successor.
+
+Equation (26.5) supplies exactly the loop in the universe needed by Circle
+recursion. Define
+
+$$
+\mathsf{Code}:\mathsf{Circle}\longrightarrow\mathcal U
+\tag{26.12}
+$$
+
+by
+
+$$
+\mathsf{Code}(\mathsf{base})\equiv\mathsf{Integer},
+\qquad
+\operatorname{ap}(\mathsf{Code},\mathsf{loop})
+  =\mathsf{ua}(\mathsf{succ}).
+\tag{26.13}
+$$
+
+The loop equation in (26.13) is the ordinary `ap` observation of Circle
+recursion and is therefore propositional, consistently with (26.11).
+Transport along it nevertheless has the intended computational content:
+
+$$
+\begin{aligned}
+\operatorname{transport}^{\mathsf{Code}}(\mathsf{loop},z)
+  &=\mathsf{succ}(z),\\
+\operatorname{transport}^{\mathsf{Code}}(\mathsf{loop}^{-1},z)
+  &=\mathsf{pred}(z).
+\end{aligned}
+\tag{26.14}
+$$
+
+Univalence is essential here. Successor is not the identity function on
+integers, so an ordinary reflexive universe path could not encode the desired
+monodromy. The equivalence-to-path direction of univalence turns the actual
+self-equivalence into a loop of classifiers, and its transport comparison
+returns the underlying successor map.
+
+For any endpoint $x:\mathsf{Circle}$, a path
+$p:\mathsf{base}=x$ can now be lifted into the code family. Start at integer
+zero and transport it along $p$:
+
+$$
+\mathsf{encode}_x(p)
+  :=\operatorname{transport}^{\mathsf{Code}}(p,0)
+  :\mathsf{Code}(x).
+\tag{26.15}
+$$
+
+Encoding reflexivity computes to zero. Encoding the generating loop is
+propositionally successor of zero. More generally, concatenating a positive
+loop applies successor and concatenating an inverse loop applies predecessor.
+The encoder is therefore the winding-number observer: it converts abstract
+groupoidal motion into a point of the localized integer line.
+
+The calculation can be followed compositionally. If a based path first
+follows $p$ and then follows $q$, transport in the code family first lifts
+zero along $p$ and then acts along $q$. Each occurrence of
+$\mathsf{loop}$ contributes successor, and each occurrence of
+$\mathsf{loop}^{-1}$ contributes predecessor. Adjacent inverse pairs cancel
+through (26.4). Thus a composite such as
+
+$$
+\mathsf{loop}\cdot\mathsf{loop}^{-1}\cdot
+\mathsf{loop}\cdot\mathsf{loop}
+$$
+
+is observed as two. This example is intuition rather than a claim that every
+path arrives as a parsed word. The encode map works on arbitrary equality
+evidence; the word picture explains its behaviour on paths constructed from
+the generator and its inverse.
+
+The family point of view also explains the name *cover*. Over each Circle
+point there is an Integer fibre, and travelling once around the base permutes
+that fibre by successor. What is constructed here is the type-theoretic
+family and its monodromy. No topological space of real numbers, local
+triviality atlas, or external covering-space apparatus is assumed.
+
+It is tempting to stop at the base fibre and define only
+
+$$
+(\mathsf{base}=\mathsf{base})\longrightarrow\mathsf{Integer}.
+\tag{26.16}
+$$
+
+That specialization is the desired forward map, but it is too narrow for the
+hard inverse proof. Path induction cannot directly simplify an arbitrary
+loop whose two endpoints have both been fixed at the base. The crucial move,
+as in the HoTT encode–decode method, is to retain the endpoint $x$ and work
+fibrewise with (26.15).
+
+## 26.4 Decoding Integer Powers
+
+At the base point, decoding should send an integer to the corresponding power
+of the generating loop. Natural powers are obtained by repeatedly appending
+$\mathsf{loop}$; inverse powers repeatedly append
+$\mathsf{loop}^{-1}$:
+
+$$
+\begin{aligned}
+\mathsf{loop}^{0}
+  &=\mathsf{refl}_{\mathsf{base}},\\
+\mathsf{loop}^{n+1}
+  &=\mathsf{loop}^{n}\cdot\mathsf{loop},\\
+\mathsf{loop}^{-(n+1)}
+  &=\mathsf{loop}^{-n}\cdot\mathsf{loop}^{-1}.
+\end{aligned}
+\tag{26.17}
+$$
+
+The telescope presentation asks for a slightly subtler definition. A stage
+representative $[n,x]$ should decode to the loop power corresponding to
+$x-n$. Rather than first choosing a signed normal form, the construction
+recurses simultaneously on $n$ and $x$. Along the diagonal it cancels one
+positive and one negative step, so that
+
+$$
+\mathsf{power}(n+1,x+1)\equiv\mathsf{power}(n,x).
+\tag{26.18}
+$$
+
+The coherence required by the telescope relation (26.3) is therefore literal
+reflexivity. Integer elimination then gives the based decoder
+
+$$
+\mathsf{decode}_{\mathsf{base}}:
+\mathsf{Integer}\longrightarrow
+(\mathsf{base}=\mathsf{base}),
+\tag{26.19}
+$$
+
+with the expected computations at zero, nonnegative representatives, and
+negative one. The required target is a set because the Circle signature says
+that its path types are sets. This is the exact point where the truncation
+level of the telescope eliminator and the dimension of the Circle meet.
+
+The three boundary cases make the construction concrete. At stage zero,
+$[0,x]$ decodes to the $x$th positive power. At value zero, $[n,0]$ decodes
+to the $n$th inverse power. When both indices are successors, the definition
+removes one loop and one inverse loop simultaneously and returns to the
+preceding stage. These are computations of the representative-level decoder,
+not a post hoc proof that two separately normalized signed expressions happen
+to agree.
+
+The decoder must now be generalized over the endpoint, just as the encoder
+was. Consider the family
+
+$$
+M(x):=\mathsf{Code}(x)\longrightarrow(\mathsf{base}=x).
+\tag{26.20}
+$$
+
+At the base, the desired inhabitant is (26.19). To apply Circle induction one
+must show that this function returns to itself over
+$\mathsf{loop}$. Transport in the domain of (26.20) uses predecessor,
+transport in the codomain appends the loop, and the required comparison is
+therefore the cancellation law
+
+$$
+\mathsf{loop}^{z-1}\cdot\mathsf{loop}=\mathsf{loop}^{z}.
+\tag{26.21}
+$$
+
+Positive and negative cases are proved from path composition, reversal, and
+inverse cancellation. The resulting dependent loop datum feeds the Circle
+eliminator and produces
+
+$$
+\mathsf{decode}_x:
+\mathsf{Code}(x)\longrightarrow(\mathsf{base}=x)
+\tag{26.22}
+$$
+
+for every $x$. This is the step that turns the obvious based loop-power
+function into a morphism of the entire path fibration and code family.
+
+Endpoint generalization is therefore not merely a clever way around a weak
+induction tactic. It states the invariant at its natural level. The encoder
+and decoder are maps between two families over the Circle: the outgoing-path
+family $x\mapsto(\mathsf{base}=x)$ and the code family
+$x\mapsto\mathsf{Code}(x)$. The loop coherence for (26.22) says that decode
+commutes with their monodromies. Once the whole family map exists, the based
+loop function is obtained by ordinary specialization rather than by fixing
+endpoints before the structure has been built.
+
+## 26.5 The Two Round Trips
+
+The composite from paths to codes and back is now the easy direction. For
+$p:\mathsf{base}=x$, ordinary endpoint path induction reduces $p$ to
+reflexivity. Encoding reflexivity is zero and decoding zero is reflexivity,
+so
+
+$$
+\mathsf{decode}_x(\mathsf{encode}_x(p))=p.
+\tag{26.23}
+$$
+
+The reverse composite begins at the base. One proves by natural and
+telescope induction that positive loop powers encode to $[0,n]$, inverse
+powers encode to $[n,0]$, and the general simultaneous power encodes to its
+own representative $[n,x]$. Integer induction then gives
+
+$$
+\mathsf{encode}_{\mathsf{base}}
+  (\mathsf{decode}_{\mathsf{base}}(z))=z.
+\tag{26.24}
+$$
+
+To extend (26.24) from the base fibre to every $x$, observe that every
+$\mathsf{Code}(x)$ is a set. At the base this is the sethood of Integer; the
+statement that a fibre is a set is itself propositional, so Circle induction
+propagates it around the generating loop without a new choice of coherence.
+The desired equality is likewise proposition-valued. A second Circle
+induction therefore yields
+
+$$
+\mathsf{encode}_x(\mathsf{decode}_x(c))=c
+\tag{26.25}
+$$
+
+for all endpoints and all codes.
+
+Equations (26.23) and (26.25) package an endpoint-dependent family of
+equivalences. At the base point it gives the central calculation
+
+$$
+(\mathsf{base}=\mathsf{base})\simeq\mathsf{Integer}.
+\tag{26.26}
+$$
+
+Now form the categorical realization
+$\mathsf{Circle}_{\mathrm{cat}}:=\operatorname{Path}(\mathsf{Circle})$.
+Its based hom carrier is definitionally the same loop space, so there is also
+
+$$
+\operatorname{Hom}_{\mathsf{Circle}_{\mathrm{cat}}}
+  (\mathsf{base},\mathsf{base})
+\simeq\mathsf{Integer}.
+\tag{26.27}
+$$
+
+This is the precise meaning of the shorthand
+“$\operatorname{Hom}(\mathsf{Circle})=\mathbb Z$.” It concerns the based
+endomorphism carrier of the path category, not the type of all self-maps of
+the Circle.
+
+The result is retained at three levels. Equation (26.26) is an intrinsic
+type equivalence. Equation (26.27) reads the same carrier as a categorical
+hom. Applying the whole path-category action to the selected encoder gives a
+categorical equivalence
+
+$$
+\operatorname{Hom}_{\mathrm{cat}}
+  (\mathsf{base},\mathsf{base})
+\simeq_{\omega}
+\operatorname{Path}(\mathsf{Integer}),
+\tag{26.28}
+$$
+
+whose forward functor acts by the encoder and retains higher equality action.
+Neither category head is rewritten to the other. The selected
+one-dimensional Circle evidence and the equivalence with the set
+$\mathsf{Integer}$ also give two independent proofs that the based hom is a
+set.
+
+The distinction among these three packages prevents an easy overstatement.
+A `TypeEquiv` is enough to transport properties of the carrier and to select
+the encode/decode functions. The categorical hom reading says where that
+carrier occurs in the directed language. The whole categorical equivalence
+adds action on equalities between loops and on their iterated equalities.
+None of them, by itself, is a judgmental identification of the two category
+expressions, and none yet says that the equivalence preserves a separately
+packaged group operation. Each level answers a different downstream question
+without forcing the strongest possible interface on every reader.
+
+<!-- evidence:CIRCLE-LOOP-INTEGER -->
+
+> **Formal status — checked.** **Theorem 26.1 (the Circle loop space).**
+> Evidence `CIRCLE-LOOP-INTEGER`. Endpoint-dependent encode and decode are
+> inverse. Their based specializations form an explicit `TypeEquiv` between
+> the intrinsic loop space and successor-localized Integer; the categorical
+> hom has the same carrier; and a separate whole equality-valued categorical
+> equivalence is retained. No category-head rewrite or group-structure
+> preservation theorem is included in this result.
+
+## 26.6 Monodromy Beyond Successor
+
+The universal cover is one instance of a general construction. Let $A$ be a
+groupoidal classifier and let $e:A\simeq A$ be a self-equivalence. Univalence
+turns $e$ into a universe path, and Circle recursion constructs a family
+
+$$
+\begin{aligned}
+\mathsf{Mon}_e &: \mathsf{Circle}\longrightarrow\mathcal U,
+&\mathsf{Mon}_e(\mathsf{base})&=A,\\
+\operatorname{ap}(\mathsf{Mon}_e,\mathsf{loop})
+  &=\mathsf{ua}(e).&&
+\end{aligned}
+\tag{26.29}
+$$
+
+Transport around the actual loop agrees with the forward map of $e$. Taking
+$A=\mathsf{Integer}$ and $e=\mathsf{succ}$ recovers the code family above.
+Taking another automorphism produces another local system on the same Circle
+without changing the HIT.
+
+There is also a directed shadow. Restrict the family along the canonical map
+from the walking endomorphism to the Circle. The resulting directed
+representation remembers $A$ at its point and the univalence path of $e$ at
+its forward generator. The checked restriction–extension comparison recovers
+that whole representation, rather than only its two displayed components.
+Chapter 27 will explain the universal mapping theorem that makes this
+restriction canonical; here it serves as a geometric consumer of monodromy.
+
+<!-- evidence:CIRCLE-MONODROMY -->
+
+> **Formal status — checked.** Evidence `CIRCLE-MONODROMY`. A selected
+> self-equivalence determines a Circle-indexed groupoid family; its base and
+> loop observations have the expected values; transport around the loop
+> agrees with the equivalence's forward map; and whole restriction recovers
+> the corresponding WalkingEnd representation. The result is a consumer of
+> the concrete WalkingEnd–Circle universality theorem, not a second primitive
+> monodromy axiom.
+
+## 26.7 Connected Without Choosing Paths
+
+The Circle has one point constructor, so one expects every point to be
+reachable from the base. A function choosing an actual path
+$\mathsf{base}=x$ for every $x$ would say too much: it would contract the
+Circle and destroy its nontrivial loop space. The correct statement is mere
+connectedness:
+
+$$
+\prod_{x:\mathsf{Circle}}
+\left\|\mathsf{base}=x\right\|_{-1}.
+\tag{26.30}
+$$
+
+At the base, reflexivity supplies the truncated witness. Every fibre in
+(26.30) is a proposition, so there is a unique dependent path over the
+generating loop. Circle induction then constructs the section without ever
+choosing an untruncated global path.
+
+This statement has a concrete truncation consequence. Let
+$\|\mathsf{Circle}\|_0$ be the classified set truncation and take the image of
+$\mathsf{base}$ as centre. Mere connectedness can be eliminated into equality
+inside this set, because its path types have the required truncation level.
+First one obtains a path from the centre to the image of every Circle point;
+set-truncation induction then extends it to every point of the truncation:
+
+$$
+\operatorname{isContr}\bigl(\|\mathsf{Circle}\|_0\bigr).
+\tag{26.31}
+$$
+
+Contractibility is retained as evidence. The carrier of the set truncation is
+not judgmentally replaced by Unit. This preserves the distinction between a
+universal construction characterized by elimination and a convenient chosen
+normal form.
+
+Connectedness and the loop calculation complement rather than contradict one
+another. Equation (26.30) says that the Circle has only one component after
+paths are merely inhabited; equation (26.26) says that the ways of returning
+to the base retain an entire Integer classifier. Set truncation forgets those
+different return paths while preserving the component, which is why it is
+contractible even though the Circle itself is not. The proof performs that
+forgetting through the truncation eliminator instead of declaring the loops
+irrelevant in the original type.
+
+<!-- evidence:CIRCLE-CONNECTED-TRUNCATION -->
+
+> **Formal status — checked.** Evidence `CIRCLE-CONNECTED-TRUNCATION`. The
+> propositional truncation of each based path fibre gives mere connectedness,
+> and restricted truncation elimination proves the set truncation
+> contractible. The result selects no global untruncated path and adds no
+> rewrite from the set-truncated Circle to Unit.
+
+## 26.8 From Counting To Free Inversion
+
+We can now place the two arithmetic calculations side by side:
+
+$$
+\begin{array}{c|c|c}
+\text{shape}&\text{generator}&\text{based hom classifier}\\ \hline
+\text{walking endomorphism}&\text{directed arrow}&\mathbb N\\
+\text{Circle}&\text{invertible path}&\mathsf{Integer}.
+\end{array}
+\tag{26.32}
+$$
+
+The change from $\mathbb N$ to Integer is not an analogy imposed after the
+proof. It is the effect of reversibility inside the proof. Positive composites
+of the directed generator remain distinct natural powers because no inverse
+exists. Positive and negative powers of the Circle loop cancel because path
+symmetry supplies an inverse. The telescope relation makes the same
+cancellation computational on integer representatives.
+
+The canonical map from the walking endomorphism sees only the upper half of
+this arithmetic. Its $n$th directed power maps to the nonnegative integer
+$[0,n]$ and to the $n$th positive Circle loop. Nothing in the directed source
+names $[n,0]$ or $\mathsf{loop}^{-n}$: those elements appear because the
+target is groupoidal. Free inversion must therefore do more than preserve the
+old powers. It must add the reverse motion and impose the cancellations that
+make it inverse, while retaining how all of this acts on higher cells.
+
+This observation also explains why the loop-space calculation is such a good
+test for the universal property. If restriction from the Circle to the
+walking endomorphism forgot too much, an extension could choose incompatible
+actions on negative powers. If it imposed too much, ordinary directed
+representations whose generator lands in a groupoidal target might fail to
+extend. The correct theorem says that the image of the one directed generator
+already determines the whole reversible action: its inverse and all integer
+powers are forced by the target's path structure. Chapter 27 establishes that
+claim at the level of whole mapping objects.
+
+Several boundaries remain explicit. Integer has not yet been packaged as an
+additive group, so Theorem 26.1 does not separately prove that path
+composition corresponds to integer addition. The chapter does not provide a
+generic HIT declaration language, a proof that every categorical former has
+a groupoidal specialization, or a global normalization theorem for
+computational homotopy type theory. And although the Circle is connected and
+has a set-valued loop space, the selected results here are not advertised as
+a complete formal calculation of every homotopy group.
+
+What has been obtained is enough for the next question. The walking
+endomorphism maps to the Circle by sending its directed generator to the
+generating loop. Is every map from the walking endomorphism into a groupoidal
+target extended uniquely, in the appropriate whole sense, across this free
+inversion? And can the same principle be stated for an arbitrary directed
+category? Chapter 27 turns the arithmetic evidence of this chapter into that
+universal property.
+<!-- /book-source:chapter-26 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-27 book/chapters/27-free-inversion-and-groupoidification.md -->
+<a id="chapter-27"></a>
+
+# 27. Free Inversion And Groupoidification
+
+Chapter 26 calculated what happens when one directed endomorphism acquires an
+inverse: natural powers expand to integer powers. But a universal construction
+cannot be characterized by its elements alone. It must say what maps *out* of
+the realized object are, how they vary, and why their restriction remembers
+exactly the original directed data.
+
+The relevant operation is **groupoidification**. Starting from a directed
+category $C$, it produces a groupoidal classifier
+$\mathsf{Groupoidify}(C)$ and a whole functor
+
+$$
+\eta_C:C\longrightarrow
+\operatorname{Path}(\mathsf{Groupoidify}(C)).
+\tag{27.1}
+$$
+
+The functor $\eta_C$ is the unit of free inversion. Its object action names
+represented points; its arrow action turns a directed arrow into a path; its
+iterated hom action carries represented higher cells; and its compositor
+records how images of composable arrows compare with the image of their
+composite.
+
+The universal property is tested against a groupoidal target $G$. A map
+$h:\mathsf{Groupoidify}(C)\to G$ restricts along (27.1) to a path-valued
+functor on $C$. Conversely, any
+$F:C\to\operatorname{Path}(G)$ extends to a map from the groupoidification.
+The checked theorem says that restriction and extension are inverse at the
+level of whole mapping categories:
+
+$$
+\operatorname{Map}_{\mathsf{Grpd}}
+  (\mathsf{Groupoidify}(C),G)
+\simeq_{\omega}
+\operatorname{Fun}
+  (C,\operatorname{Path}(G)).
+\tag{27.2}
+$$
+
+Before studying the arbitrary category $C$, we will derive (27.2) twice for
+finite shapes. The walking endomorphism tests inverse powers at one point.
+The walking arrow tests a generator whose endpoints differ. Together they
+show why the general constructor must be a whole functor rather than a set of
+objects followed by an unrelated graph of arrows.
+
+There are two complementary ways to recognize a free object. A constructor
+presentation says how its points and paths are generated and how its
+eliminator computes. A mapping property says that every interpretation of the
+generators extends, and that the extension is unique. Either view alone can
+hide an error. Constructors without uniqueness may admit unintended extra
+maps; an opaque equivalence of mapping carriers may assert the right answer
+without explaining how the generators compute. The constructions below keep
+both: point and dependent-cell beta rules on one side, whole beta/eta
+uniqueness on the other.
+
+The word *whole* also changes the level of the claim. We are not merely
+counting functions in and out. The left and right sides of (27.2) are
+categories with homs, higher homs, and internal action. Restriction and
+extension act on those levels before they are packaged as an equivalence.
+This is what makes groupoidification reusable in later mathematics: a proof
+between representations is itself transported across the universal property.
+
+## 27.1 The One-Point Test: WalkingEnd And Circle
+
+There is a canonical functor
+
+$$
+w:\mathsf{WalkingEnd}\longrightarrow\mathsf{Circle}_{\mathrm{cat}}
+\tag{27.3}
+$$
+
+sending the unique point to $\mathsf{base}$ and the directed generator to
+$\mathsf{loop}$. Its action on the $n$th directed power is the $n$th positive
+Circle power. Following this action by the Circle encoder gives the canonical
+inclusion of natural numbers into the localized Integer line:
+
+$$
+\operatorname{encode}\bigl(w(\mathsf{gen}^{n})\bigr)=[0,n].
+\tag{27.4}
+$$
+
+The comparison is retained not only for each $n$ but as equality of the two
+whole carrier functions from WalkingEnd based arrows to Integer: map through
+the Circle and encode, or normalize to a natural number and include it. This
+is the arithmetic shadow of free inversion.
+
+Now let $G$ be any groupoidal target. Precomposition with $w$ restricts a
+function $h:\mathsf{Circle}\to G$ to a functor
+
+$$
+R_G(h):\mathsf{WalkingEnd}\longrightarrow\operatorname{Path}(G).
+\tag{27.5}
+$$
+
+Because restriction itself is a whole functor, it also acts on equalities
+between Circle functions and on their higher equalities. Evaluating its whole
+comparison at the walking point returns $h(\mathsf{base})$. Its generator
+observation is naturally dependent: the endpoint of the loop changes when
+the whole functor changes, so the comparison is a path-over whose target is
+$\operatorname{ap}_h(\mathsf{loop})$.
+
+The inverse construction reads a path-valued WalkingEnd representation $F$.
+It extracts the image of the walking point and the image path of the
+generator, then applies Circle recursion:
+
+$$
+E_G(F)(x):=
+\mathsf{circle\_rec}
+  \bigl(G,F(\mathsf{pt}),F(\mathsf{gen}),x\bigr).
+\tag{27.6}
+$$
+
+The object action in (27.6) is only the first layer. The extension varies as a
+whole functor in $F$. A transformation between two representations in
+$\operatorname{Path}(G)$ is pointwise equality-valued, hence pointwise
+invertible. The whole univalence machinery turns it into a path of
+representations, and applying (27.6) gives the corresponding path of Circle
+functions. One more hom action remains available after that step.
+
+The categorical-HIT uniqueness clauses state
+
+$$
+R_G E_G=\operatorname{id},
+\qquad
+E_G R_G=\operatorname{id}
+\tag{27.7}
+$$
+
+as paths between whole functors. Their projections recover the expected base
+and generator equations, but the whole statements are stronger: they also
+control transformations and higher action. Thus
+
+$$
+\operatorname{Map}_{\mathsf{Grpd}}(\mathsf{Circle},G)
+\simeq_{\omega}
+\operatorname{Fun}
+  (\mathsf{WalkingEnd},\operatorname{Path}(G)).
+\tag{27.8}
+$$
+
+It is important that (27.8) holds for every groupoidal $G$, not only for the
+Circle itself or for the Integer classifier used in Chapter 26. A
+path-valued WalkingEnd representation in $G$ consists of an object $a:G$ and
+a loop $p:a=a$, together with the functorial action inherited from the source.
+Circle recursion turns exactly this pair into a function from the Circle.
+Conversely, evaluation at the base and action on the loop recover the pair.
+The whole theorem says there is no additional choice hidden at
+transformations or higher paths.
+
+The one-point result also illustrates why free inversion differs from merely
+adding a formal inverse symbol. Once $p^{-1}$ exists in $G$, all negative
+powers and their cancellation laws are already determined by equality. The
+extension does not ask the representation to supply an independent image for
+every negative word. This economy is the universal content behind the
+arithmetic passage from natural to integer powers.
+
+<!-- evidence:WE-GROUP-COMPLETION -->
+
+> **Formal status — checked.** Evidence `WE-GROUP-COMPLETION`. The functor
+> (27.3) sends every directed natural power to the corresponding positive
+> Circle power. For every groupoidal $G$, whole restriction and whole Circle
+> extension give the fixed-forward equivalence (27.8), with beta/eta,
+> dependent generator projections, and retained higher action. This theorem
+> is the free inversion of one source shape, not by itself the generic
+> category-indexed construction.
+
+## 27.2 The Two-Endpoint Test: WalkingArrow And Interval
+
+One point can conceal an important issue: every generator in WalkingEnd is an
+endomorphism. A generic directed arrow has a source and target that need not
+coincide. The next source shape is therefore
+
+$$
+\mathsf{src}\xrightarrow{\mathsf{edge}}\mathsf{tgt},
+\tag{27.9}
+$$
+
+the walking arrow. It is not an ad hoc three-field record. It is obtained from
+the join of two terminal categories, and its generator is a projection of the
+whole cross action. Consequently the source already retains a next hom action
+beyond the displayed edge.
+
+Its groupoidal counterpart is the interval HIT:
+
+$$
+\mathsf{Interval}:\mathcal U,
+\qquad
+i_0,i_1:\mathsf{Interval},
+\qquad
+\mathsf{seg}:i_0=i_1.
+\tag{27.10}
+$$
+
+For a family $D:\mathsf{Interval}\to\mathcal U$, the eliminator takes
+$b_0:D(i_0)$, $b_1:D(i_1)$, and a dependent path over
+$\mathsf{seg}$. It computes judgmentally at both endpoints and at the
+canonical dependent action on the segment. As for the Circle, the ordinary
+constant-family `ap` equation is retained propositionally rather than
+installed as a second runtime normal form.
+
+The comparison functor
+
+$$
+j:\mathsf{WalkingArrow}\longrightarrow
+\operatorname{Path}(\mathsf{Interval})
+\tag{27.11}
+$$
+
+sends source to $i_0$, target to $i_1$, and edge to $\mathsf{seg}$. For any
+groupoidal $G$, restricting along $j$ records the two endpoint values of an
+Interval function and its action on the segment. Extension uses Interval
+recursion on exactly those three pieces. The whole beta/eta paths give
+
+$$
+\operatorname{Map}_{\mathsf{Grpd}}(\mathsf{Interval},G)
+\simeq_{\omega}
+\operatorname{Fun}
+  (\mathsf{WalkingArrow},\operatorname{Path}(G)).
+\tag{27.12}
+$$
+
+The right side of (27.12) has a particularly direct reading. A functor from
+the walking arrow chooses two objects $a_0,a_1:G$ and one path
+$p:a_0=a_1$. A transformation between two such functors chooses endpoint
+components compatible with that path, and its next action records equality of
+such compatibility data. The left side organizes the same information as a
+whole function on the Interval. Thus the equivalence tests not just two-point
+recursion but the dependent geometry of the segment.
+
+This is where an underlying-graph construction would first become visibly
+insufficient. It could remember a source vertex, target vertex, and edge, but
+it would have to recover from elsewhere how transformations act at both
+endpoints and over the edge. In the present construction those observations
+are projections of whole functor paths. Endpoint variation is not metadata
+attached after the free groupoid has been formed.
+
+Equation (27.12) is stronger evidence for the intended operation than the
+observation that the interval is contractible. Contractibility describes the
+homotopy type after it has been formed. The mapping theorem says why its two
+points and one path are freely generated by a directed arrow. It also tests
+the endpoint transport that an endomorphism-only theorem cannot see.
+
+<!-- evidence:WALKING-INTERVAL-GROUPOIDIFICATION -->
+
+> **Formal status — checked.** Evidence
+> `WALKING-INTERVAL-GROUPOIDIFICATION`. The interval has judgmental endpoint
+> and dependent-segment computation. Restriction and extension are inverse as
+> whole functors for every groupoidal target, with separate endpoint and
+> generator projections and retained next action. The two endpoints remain
+> genuinely distinct in the tested interface.
+
+## 27.3 One Whole Constructor For An Arbitrary Category
+
+The two examples suggest what the generic signature must retain. For every
+category $C$, there is a primitive groupoidal HIT
+$\mathsf{Groupoidify}(C)$ and the whole unit (27.1). The constructor is not
+split into a point constructor for every object, a path constructor for every
+arrow, and an external list of coherence constructors. Those observations
+are projections of one iterable functor.
+
+At the first two levels, the unit reads
+
+$$
+\begin{aligned}
+x\in\operatorname{Obj}(C)
+&\longmapsto \eta_C(x):\mathsf{Groupoidify}(C),\\
+f:x\to y
+&\longmapsto
+  \eta_C(f):\eta_C(x)=\eta_C(y).
+\end{aligned}
+\tag{27.13}
+$$
+
+Reapplying the generic hom action exposes the image of a source 2-cell, and
+the process continues at represented higher levels. The use of the word
+“category-indexed” refers to this complete source $C$; it does not mean that
+only the object set of $C$ is retained.
+
+This arrangement should be read as an indexed HIT signature. Formation is
+primitive at the groupoidal level; the whole unit is its constructor owner;
+and recursion supplies elimination. The theory does not pretend to construct
+the carrier by taking an external quotient of strings of arrows. Such a
+quotient would immediately face choices of word representation,
+normalization, and higher coherence. Instead, the computational interface
+specifies what represented cells do, while the mapping theorem specifies
+their universal uniqueness.
+
+Nor does one need a primitive symbol named
+$\mathsf{Groupoidify}_n$ at every dimension. The first hom action of
+$\eta_C$ already turns source arrows into paths. Its next hom action handles
+arrows between arrows, and iteration continues through the ordinary
+categorical classifiers. This is the same compression principle used
+throughout the book: internalization plus iteration replaces an indefinitely
+growing external declaration schema.
+
+Given $F:C\to\operatorname{Path}(G)$, the recursor produces
+
+$$
+\operatorname{rec}_F:
+\mathsf{Groupoidify}(C)\longrightarrow G.
+\tag{27.14}
+$$
+
+It computes judgmentally on every represented source object, and its
+canonical dependent action on every represented source arrow computes to the
+corresponding arrow of $F$ embedded in the constant motive:
+
+$$
+\begin{aligned}
+\operatorname{rec}_F(\eta_C(x))
+  &\equiv F(x),\\
+\operatorname{apd}(\operatorname{rec}_F,\eta_C(f))
+  &\equiv \operatorname{constPathOver}(F(f)).
+\end{aligned}
+\tag{27.15}
+$$
+
+Arbitrary points and arbitrary paths of the groupoidification do not match
+these constructor reductions. The rules compute because the inputs are
+manifestly represented by the whole unit.
+
+The recursor is itself organized as a whole extension functor
+
+$$
+E_{C,G}:
+\operatorname{Fun}(C,\operatorname{Path}(G))
+\longrightarrow
+\operatorname{Map}_{\mathsf{Grpd}}
+  (\mathsf{Groupoidify}(C),G).
+\tag{27.16}
+$$
+
+Its object action is (27.14), its first hom action maps transformations of
+representations to equalities of recursor functions, and a next action is
+retained. This target-varying mapping object is the computational eliminator
+needed by the universal property; a bare function for each individual $F$
+would not express how extension behaves on proofs between representations.
+
+The requirement that $G$ be groupoidal is doing real work. Each directed
+arrow $F(f)$ lands in a path category and is therefore invertible, so the
+recursor may interpret the inverse motion freely added to the source. If the
+target were an arbitrary directed category, a chosen image of $f$ would not
+in general determine an image for its formal inverse. The right side of
+(27.16) is consequently not the ordinary category of all directed functors
+$C\to G$; it is the category of functors into the path realization of a
+groupoidal target.
+
+At the same time, nothing forces the original arrows of $C$ to have been
+invertible. The unit accepts all of them. Groupoidification changes their
+ambient interpretation rather than filtering the source. This is precisely
+the opposite of taking the core.
+
+## 27.4 Composition Is Represented, Not Forgotten
+
+Suppose $f:x\to y$ and $g:y\to z$ are composable arrows in $C$. Since
+$\eta_C$ is a whole functor, its internal action supplies a compositor
+
+$$
+\phi_{g,f}:
+\eta_C(g)\cdot\eta_C(f)
+\Longrightarrow
+\eta_C(g\circ f).
+\tag{27.17}
+$$
+
+The codomain of the unit is a path category. Therefore the directed
+compositor is realized as an equality between paths and is invertible by
+symmetry, exactly as in Chapter 25. It is nevertheless an explicit cell: it
+is not definitionally collapsed to an identity term. Its whole transformation
+form retains a next hom action.
+
+This observation explains why the construction begins with $C$, not with its
+underlying graph. A graph-level free groupoid would create inverse paths for
+edges but would then need composition, identities, and every represented
+higher relation reintroduced by hand. The unit functor already knows those
+relations. The recursor computation in (27.15) says that a path-valued
+representation consumes them using its own whole action.
+
+Identity and composition are therefore not quotient equations checked after
+paths have been created. They are visible through functorial action. At an
+identity arrow the selected unit profile supplies the appropriate unit
+behaviour. At a composite, (27.17) compares the composite of the two image
+paths with the image of the source composite. A representation $F$ carries
+the corresponding compositor, so extending $F$ respects the same boundary.
+The generic theorem is sensitive to the categorical structure of $C$, not
+only to its collection of arrows.
+
+In a strict specialization the two endpoints displayed in (27.17) may become
+convertible. That does not make the compositor term itself an identity, and
+the active negative check confirms it is not collapsed to one. This is useful
+for eventual migration away from historical global strict endpoint cuts: the
+coherence witness and its next action are already present rather than having
+to be reconstructed from an equation that erased them.
+
+Nor is an infinite record of associators and higher laws added beside the
+unit. The compositor in (27.17) is projected from the same internal-action
+calculus used for ordinary and displayed functors. Its next action provides
+the first higher observation. This does not amount to a completed independent
+metatheory of all weak $\omega$-groupoids, but it demonstrates that free
+inversion has not discarded composition or capped coherence at arrows.
+
+## 27.5 The Generic Mapping Theorem
+
+Restriction is obtained by applying the path-category action to a map
+$h:\mathsf{Groupoidify}(C)\to G$ and precomposing with $\eta_C$:
+
+$$
+R_{C,G}(h)=\operatorname{Path}(h)\circ\eta_C.
+\tag{27.18}
+$$
+
+Like extension, $R_{C,G}$ is a whole functor. The categorical-HIT beta and
+eta clauses are whole paths
+
+$$
+R_{C,G}E_{C,G}=\operatorname{id},
+\qquad
+E_{C,G}R_{C,G}=\operatorname{id}.
+\tag{27.19}
+$$
+
+The first says that extending a complete path-valued representation and then
+observing it on every represented source cell returns the original
+representation. The second is uniqueness: a groupoidal map is determined by
+its restriction to the generating whole functor. Projecting (27.19) gives
+pointwise equalities, but the statements themselves compare endofunctors of
+mapping categories.
+
+Packaging restriction as the selected forward direction and extension as its
+inverse gives the promised arbitrary-source theorem:
+
+$$
+R_{C,G}:
+\operatorname{Map}_{\mathsf{Grpd}}
+  (\mathsf{Groupoidify}(C),G)
+\simeq_{\omega}
+\operatorname{Fun}(C,\operatorname{Path}(G)).
+\tag{27.20}
+$$
+
+<!-- evidence:GENERIC-GROUPOIDIFICATION-MAPPING -->
+
+> **Formal status — checked.** **Theorem 27.1 (generic free inversion at the
+> fixed-forward boundary).** Evidence `GENERIC-GROUPOIDIFICATION-MAPPING`.
+> Formation, whole unit, point and dependent first-cell computation, whole
+> target extension/restriction, beta/eta, explicit compositor, and retained
+> next actions are active for arbitrary $C$ and groupoidal $G$. The theorem is
+> a fixed-forward `OmegaEquivAlong` of mapping categories. Source action,
+> `Groupoidify_func`, and the packaged adjunction remain outside this boundary.
+
+The adjective *fixed-forward* records real data, not a weakness in the
+equivalence. The forward functor in (27.20) is specifically restriction along
+$\eta_C$; it is not merely some equivalence between carriers. What remains
+unbuilt is variation in the source category $C$ itself.
+
+Equation (27.20) is also more than an objectwise recursor theorem. Its left
+side contains maps $\mathsf{Groupoidify}(C)\to G$ as objects and equality
+action between them as homs. Its right side contains whole path-valued
+functors and their transformations. The extension functor transports those
+transformations to equalities of recursive maps; restriction transports
+equalities of maps back to transformations. The beta and eta paths compare
+the resulting whole endofunctors, not only their values at one selected
+representation.
+
+This strength is why the remaining qualification must be phrased carefully.
+Formation depends on any supplied category $C$, and the theorem quantifies
+over arbitrary $C$ and $G$. Nothing here is restricted to the objects of a
+single category. The missing operation is instead *functorial dependence on
+$C$*: given a functor between two source categories, the current public
+interface has not yet packaged its induced groupoidal map and higher action
+as one functor on the category universe.
+
+This distinction between quantification and functorial packaging recurs
+throughout category theory. A theorem may be uniform in an arbitrary
+parameter before the parameter has been made the object action of an internal
+functor. Here the formula for source action is already visible, but its
+identity, composition, and higher observations have not yet been promoted.
+Keeping those stages separate lets (27.20) be used now without pretending
+that its future naturality proofs have already computed.
+
+The target side, by contrast, is complete at the mapping-object boundary
+needed here. For each groupoidal $G$, extension and restriction are whole
+functors between the displayed mapping categories, and their inverse laws are
+whole paths. The chapter can therefore compare concrete target presentations
+and transport higher evidence even while source functoriality remains a
+later construction.
+
+## 27.6 Recovering The Interval From The Generic Theorem
+
+The generic construction and the concrete interval were formed independently,
+so their comparison is a useful recovery test. Specialize
+$\mathsf{Groupoidify}$ to $\mathsf{WalkingArrow}$. Extending the concrete unit
+(27.11) through the generic recursor gives
+
+$$
+u:\mathsf{Groupoidify}(\mathsf{WalkingArrow})
+\longrightarrow\mathsf{Interval}.
+\tag{27.21}
+$$
+
+In the other direction, extend the generic unit through the concrete Interval
+recursor:
+
+$$
+v:\mathsf{Interval}
+\longrightarrow\mathsf{Groupoidify}(\mathsf{WalkingArrow}).
+\tag{27.22}
+$$
+
+The generic beta/eta laws and the Interval beta/eta laws identify the
+restrictions of the two composites with the relevant identity
+representations. Their whole uniqueness clauses then give
+
+$$
+v\circ u=\operatorname{id},
+\qquad
+u\circ v=\operatorname{id}.
+\tag{27.23}
+$$
+
+Hence
+
+$$
+\mathsf{Groupoidify}(\mathsf{WalkingArrow})
+\simeq\mathsf{Interval}.
+\tag{27.24}
+$$
+
+<!-- evidence:GROUPOIDIFICATION-INTERVAL-RECOVERY -->
+
+> **Formal status — checked.** Evidence
+> `GROUPOIDIFICATION-INTERVAL-RECOVERY`. The maps (27.21) and (27.22) are
+> selected by the two whole extension owners; both composites have whole and
+> pointwise cancellation paths; and the result is packaged as a `TypeEquiv`.
+> The two HIT classifier heads remain non-convertible.
+
+The lack of a definitional identification is desirable. The concrete
+Interval offers a compact two-endpoint eliminator. The generic object records
+that it arose by applying one operation to a source category. Equivalence
+shows that the presentations have the same groupoidal content without
+forcing every calculation to unfold through the same syntax.
+
+The comparison illustrates a general method for relating independently useful
+HIT presentations. Map each presentation into the other by the appropriate
+recursor. Do not try to compare raw constructors syntactically. Instead,
+restrict each composite to the generating whole representation and use the
+two uniqueness principles to identify it with the identity. This method
+preserves the computational advantages of each presentation while producing
+an explicit equivalence that later proofs can transport across.
+
+It also validates the generic construction against the feature that motivated
+the Interval: distinct endpoints. The recovered equivalence could not pass
+the endpoint and segment projections if the generic unit had silently reduced
+the source to one-object endomorphism data. WalkingEnd/Circle and
+WalkingArrow/Interval are therefore complementary regression theorems, not
+two decorative examples of the same calculation.
+
+## 27.7 Three Operations With Different Directions
+
+Groupoidification sits near two other operations used in the book. Their
+similar notation can obscure opposite universal roles:
+
+$$
+\begin{array}{c|c|c}
+\text{operation}&\text{effect}&\text{characteristic map}\\ \hline
+\operatorname{Core}(C)&
+  \text{retain invertibles}&
+  \iota_C:\operatorname{Path}(\operatorname{Core}C)\to C\\
+\|A\|_n&
+  \text{forget above }n&
+  |-|_n:A\to\|A\|_n\\
+\mathsf{Groupoidify}(C)&
+  \text{freely invert}&
+  \eta_C:C\to\operatorname{Path}(\mathsf{Groupoidify}C).
+\end{array}
+\tag{27.25}
+$$
+
+The core deletes noninvertible motion and keeps what was already reversible.
+Truncation preserves the groupoidal direction but forgets homotopy above a
+chosen level. Groupoidification keeps every represented directed arrow and
+adds inverse motion coherently. Applying truncation after groupoidification
+is meaningful; identifying the two operations would lose the order of those
+steps. The table suppresses only information already stated in prose: the
+inputs to Core and Groupoidify are directed categories, while the input to
+truncation is groupoidal.
+
+Their mapping directions make the distinction even sharper. A map from a
+groupoidification into $G$ is classified by a path-valued representation of
+the original directed category. A map from an $n$-truncation into an
+$n$-truncated target is classified by a map from the original groupoidal
+type. The core instead supplies a groupoidal object mapping into the original
+category by retaining already-invertible arrows. These point in reflective,
+truncating, and core-inclusion directions respectively; substituting one for
+another would reverse which information is freely added and which is
+discarded. The present statement concerns those maps and mapping properties,
+not a packaged three-adjunction chain.
+
+There is one final boundary. A functor $H:C\to D$ should induce a map
+$\mathsf{Groupoidify}(C)\to\mathsf{Groupoidify}(D)$ by extending the composite
+$\eta_D\circ H$. Identity and composition paths should then follow from
+whole uniqueness. That construction is the planned source action. Until its
+higher action has been checked, there is no public whole functor
+
+$$
+\mathsf{Groupoidify}_{\mathrm{fun}}:
+\mathsf{Cat}\longrightarrow\mathsf{Grpd}
+\tag{27.26}
+$$
+
+and therefore no packaged adjunction with the path-category functor. The
+mapping theorem (27.20) is already valid for every fixed $C$ and $G$; it
+should not be weakened to “object-only.” But neither should that family of
+theorems be renamed a completed functorial left adjoint before source action,
+unit/counit observations, and triangle laws are assembled.
+
+The proposed source action has a canonical formula, so the deferral is not a
+lack of mathematical direction. Given $H:C\to D$, extend
+$\eta_D\circ H$ across $\mathsf{Groupoidify}(C)$. Whole uniqueness should
+then prove identity and composition laws and supply higher action. What
+remains is to carry out that construction at the same computational standard
+as (27.15)–(27.20), rather than postulating a functor and an adjunction record
+whose fields merely restate the desired answer.
+
+The next chapter turns from inversion to interchange. Here the unit compositor
+is invertible because it lands in a path category; in a genuinely directed
+two-dimensional target it need not be. The Gray direction asks how that
+noninvertible cell is projected from the same whole internal action.
+<!-- /book-source:chapter-27 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-28 book/chapters/28-laxity-interchange-and-gray-direction.md -->
+<a id="chapter-28"></a>
+
+# 28. Laxity, Interchange, And The Gray Direction
+
+Functoriality is often printed as an equation:
+
+$$
+F(g)\circ F(f)=F(g\circ f).
+\tag{28.1}
+$$
+
+In a directed higher setting, the more informative object is the comparison
+cell that (28.1) would erase. Its source is the composite of the two separate
+arrow actions, its target is the action on the composite arrow, and its next
+action records how that comparison varies. When the cell is invertible, one
+has pseudo-functorial behaviour. When it is an identity, one has a selected
+strict behaviour. When it is merely directed, one has genuine laxity.
+
+The previous chapters repeatedly changed the *target* of such a witness. In a
+path category it became invertible. In a strict computational profile it
+specialized to identity. This chapter keeps the target directed and asks where
+the noninvertible cell itself comes from. The answer is not an extra square
+axiom. It is a component of the same whole internal action that already
+supports dependent transport and ordinary naturality.
+
+The geometric test is the walking square. Let
+$I=\mathsf{WalkingArrow}$ and consider a selected tensor-shaped category
+$I\otimes_R I$. Its four vertices and four boundary arrows are derived from
+coevaluation. The two routes from the source corner to the opposite corner
+need not be equal. A directed **interchanger** compares them. Recovering that
+cell from whole laxity, and retaining one further action, is the checked
+centre of the chapter.
+
+## 28.1 Whole Laxity Before Components
+
+Let $F,G:A\to B$ be functors and let
+$\epsilon:F\Rightarrow G$ be a transformation. The off-diagonal action of
+$\epsilon$ does more than assign a component at each object. Given an arrow
+$f:X\to Y$, it supplies a cell
+
+$$
+\epsilon[f]:F(X)\longrightarrow G(Y)
+\tag{28.2}
+$$
+
+in the appropriate internal hom. Now compose on the target side with an arrow
+$g:Y\to Z$. There are two whole functors, varying in $f$, whose readable
+values are
+
+$$
+G(g)\circ\epsilon[f]
+\qquad\text{and}\qquad
+\epsilon[g\circ f].
+\tag{28.3}
+$$
+
+More explicitly, after $X$, $g$, and the transformation have been fixed, the
+two expressions in (28.3) are the object actions of functors
+
+$$
+\operatorname{Hom}_A(X,Y)
+\longrightarrow
+\operatorname{Hom}_B(FX,GZ).
+$$
+
+The comparison between them is therefore allowed to vary over the *whole*
+hom category. This is the categorical content hidden by the familiar
+pointwise naturality equation: the input arrow is still an object of an
+internal hom and may itself have higher arrows.
+
+The internal displayed action supplies a whole transformation from the first
+functor to the second. Its component is the post/left laxity cell
+
+$$
+\lambda^{\mathrm{post}}_{\epsilon,g,f}:
+G(g)\circ\epsilon[f]
+\Longrightarrow
+\epsilon[g\circ f].
+\tag{28.4}
+$$
+
+There is a target-internalized mirror producing the pre/right comparison.
+These are not two unrelated naturality squares. Both are ordinary
+specializations of a displayed transformation acting in a dependent hom. The
+displayed owner first retains transport in the source and target fibres; the
+ordinary surfaces appear only after the relevant families are specialized to
+representables.
+
+The pre/right mirror fixes the target side and varies an arrow entering the
+source. Its readable comparison has the complementary form
+
+$$
+\epsilon[f]\circ F(h)
+\Longrightarrow
+\epsilon[f\circ h].
+$$
+
+Post/left and pre/right are skew views of one off-diagonal action. They need
+not be identified by a pointwise square equation before their whole owners
+have been compared. The explicit orientation becomes important when one of
+the two views is selected for the Gray interchanger.
+
+This order of construction matters. If one wrote only the component (28.4),
+the variable $f$ and its higher arrows would already have been capped. By
+retaining the whole transformation first, the ordinary hom action may be
+applied again. The next level acts on a cell between $f_0$ and $f_1$ and
+returns a cell between the corresponding laxity boundaries. Iteration, not a
+manually appended coherence record, supplies the higher observation.
+
+The usual functor compositor is obtained by taking
+$\epsilon$ to be the identity transformation of $F$. At the appropriate
+identity component, (28.4) reads
+
+$$
+\phi^F_{g,f}:F(g)\circ F(f)\Longrightarrow F(g\circ f).
+\tag{28.5}
+$$
+
+Thus the compositor is an identity-transformation specialization of whole
+naturality. It is not postulated independently of the transformation
+calculus. The same provenance is what allowed Chapter 25 to realize it as a
+path and Chapter 27 to retain it on the groupoidification unit.
+
+<!-- evidence:FUNCTORD-WHOLE-LAXITY -->
+
+> **Formal status — checked.** Evidence `FUNCTORD-WHOLE-LAXITY`. The displayed
+> internal action owns a whole laxity transformation. Ordinary post/left and
+> pre/right transformations are transparent specializations; their capped
+> cells recover the displayed witness; and the ordinary functor compositor is
+> the identity-transformation specialization. The next hom action remains
+> available. No independent naturality square is added.
+
+## 28.2 Strictness As A Computational Profile
+
+It is tempting to define a strict functor as an ambient functor equipped with
+a path saying that its compositor equals an identity. In a univalent setting
+that path describes an invertible comparison, but it does not make the
+compositor compute to identity. It is therefore evidence of canonical
+pseudo-functoriality, not a computational strictness discriminator.
+
+An evidence package
+$\sum_{F:\operatorname{Functor}(A,B)}\mathsf{IsStrict}(F)$ would have the same
+problem if its second field were merely path-valued. Projecting its first
+field would return an arbitrary ambient functor, after which conversion could
+no longer tell whether strict computation had been selected. The code sort in
+(28.6) keeps the discriminator at the head of the decoded term.
+
+The selected strict boundary is instead a code and decoder:
+
+$$
+\begin{aligned}
+\mathsf{StrictFunctorData}(A,B)&:\mathcal U,\\
+\operatorname{decode}_{A,B}&:
+\mathsf{StrictFunctorData}(A,B)\longrightarrow\operatorname{Functor}(A,B).
+\end{aligned}
+\tag{28.6}
+$$
+
+The decoder is a stable head. When the generic compositor (28.5) is applied
+to a decoded strict code, it reduces to the identity cell. A rigid ambient
+functor outside this code sort does not acquire that reduction. Strictness is
+therefore selected by syntax with computational meaning rather than inferred
+from a propositional field after the fact.
+
+This does not require a second functor theory. Define the profiled internal
+hom
+
+$$
+\mathsf{GrayHom}_{\mathrm{lax}}(A,B)
+\tag{28.7}
+$$
+
+to have strict-functor codes as objects and the existing ambient
+transformation categories between their decoded carriers as homs:
+
+$$
+\begin{aligned}
+\operatorname{Obj}(\mathsf{GrayHom}_{\mathrm{lax}}(A,B))
+  &\equiv\mathsf{StrictFunctorData}(A,B),\\
+\operatorname{Hom}(S,T)
+  &\equiv
+  \operatorname{Transf}(\operatorname{decode}S,\operatorname{decode}T).
+\end{aligned}
+\tag{28.8}
+$$
+
+Identity and composition delegate to the ambient functor category. Homs
+between transformations are the existing modification categories, and every
+subsequent hom is reused. A whole inclusion decodes objects into
+$\operatorname{Functor}(A,B)$ and acts as the identity on this shared
+transformation tower.
+
+The word *lax* in (28.7) describes the arrow profile. Objects are
+computationally strict functors; arrows are the ambient transformations whose
+off-diagonal action retains laxity. The category is not definitionally the
+ambient functor category, and an arbitrary ambient functor is not silently
+accepted as one of its objects.
+
+The selected identity illustrates the separation. There is an identity
+strict code whose decoded carrier has a whole equality to the ambient identity
+functor. The decoder does not simply unfold to that identity everywhere:
+keeping its head stable is what lets compositor computation recognize the
+strict profile without racing the generic object and arrow actions. Semantic
+comparison and computational discrimination are both retained, but they have
+different owners.
+
+This profile architecture scales better than duplicating products, pullbacks,
+transformations, and modifications for each preservation mode. A later
+consumer may introduce another code sort or another object profile while
+sharing the same hom tower. Duplication is justified only where a genuinely
+different computation must be selected.
+
+<!-- evidence:GRAY-COMPUTATIONAL-PROFILE -->
+
+> **Formal status — checked.** Evidence `GRAY-COMPUTATIONAL-PROFILE`.
+> Computational strictness is selected by a primitive code sort and stable
+> decoder. Its generic compositor specializes to identity, while a rigid
+> unprofiled functor does not. GrayHom_lax reuses the complete ambient
+> transformation and higher-hom tower and includes wholly into the functor
+> category; no duplicate modification hierarchy or broad category-head
+> conversion is introduced.
+
+## 28.3 One Selected Right Closure
+
+The tensor-shaped category used here is characterized through one right
+closure. For categories $A,B,C$, the checked boundary is
+
+$$
+\mathsf{GrayHom}_{\mathrm{lax}}(A\otimes_R B,C)
+\simeq_{\omega}
+\mathsf{GrayHom}_{\mathrm{lax}}
+  \bigl(A,\mathsf{GrayHom}_{\mathrm{lax}}(B,C)\bigr).
+\tag{28.9}
+$$
+
+The tensor head $A\otimes_R B$ is stable and distinct from the Cartesian
+product. Curry and uncurry in (28.9) are whole computationally strict functors
+between the two profile categories. Their composites are compared with the
+appropriate identity functors by whole beta and eta paths, and the resulting
+fixed-forward equivalence retains hom action.
+
+Equation (28.9) is an equivalence of profiled mapping *categories*. On the
+left, objects are strict codes for maps out of the selected tensor and arrows
+are ambient transformations. On the right, an outer strict code selects, at
+each object of $A$, an inner strict code $B\to C$; its arrows are allowed the
+lax transformation behaviour retained by (28.7). Curry and uncurry transport
+not only objects but this transformation tower.
+
+The adjective *right* fixes which variable is moved into the internal hom. A
+mirror closure would instead expose the opposite orientation and its
+corresponding lax or oplax convention. The present theorem chooses one of
+these directions rather than asserting that they have already been related.
+
+Coevaluation is not another primitive:
+
+$$
+\operatorname{coev}_{A,B}:
+A\longrightarrow
+\mathsf{GrayHom}_{\mathrm{lax}}(B,A\otimes_R B)
+\tag{28.10}
+$$
+
+is curry applied to the strict identity code on $A\otimes_R B$. Dually,
+evaluation is uncurry applied to the strict identity code of the internal hom.
+These two maps give introduction and elimination for the selected tensor
+boundary.
+
+The introduction/elimination reading is concrete. Coevaluation builds a
+generic tensor point by currying the identity, while evaluation consumes a
+profiled inner map by uncurrying the identity. Their whole beta/eta paths are
+the computational boundary through which the walking-square observations are
+derived. The square is not added beside the closure.
+
+<!-- evidence:GRAY-RIGHT-CLOSURE -->
+
+> **Formal status — checked.** Evidence `GRAY-RIGHT-CLOSURE`. Whole strict curry
+> and uncurry package the right-closure equivalence (28.9), with whole beta/eta
+> and hom action. Coevaluation and evaluation are derived at selected identity
+> codes. The tensor remains distinct from the Cartesian product and the beta
+> comparison is equality evidence, not a competing object-level runtime fold.
+
+There is a complementary combinatorial route to Gray products. In
+[Hadzihasanovic](#ref-hadzihasanovic), Gray products are constructed on
+directed cell complexes and oriented cubes are studied as shapes in their own
+right. That perspective supplies an important model-independent picture of
+the square and its higher-dimensional successors. The emdash result has a
+different boundary: it begins with one profiled internal hom and selects the
+right closure (28.9). It does not construct the tensor combinatorially or
+prove agreement with Hadzihasanovic's Gray product.
+
+## 28.4 The Walking Square From Coevaluation
+
+Take $I=\mathsf{WalkingArrow}$, the join-derived directed interval of
+Chapter 27, and form
+
+$$
+\mathsf{Square}_R:=I\otimes_R I.
+\tag{28.11}
+$$
+
+Evaluating coevaluation at the two outer endpoints produces two strict inner
+functors $I\to\mathsf{Square}_R$. Evaluating those functors at the two inner
+endpoints gives four vertices
+$v_{00},v_{01},v_{10},v_{11}$. Their arrow actions on the walking generator
+give the horizontal edges $a_0,a_1$. The outer generator acts through
+coevaluation as one whole transformation between the inner functors; its two
+components give the vertical edges $b_0,b_1$:
+
+$$
+\begin{array}{ccc}
+v_{00}&\xrightarrow{\ a_0\ }&v_{01}\\
+{\scriptstyle b_0}\big\downarrow&&\big\downarrow{\scriptstyle b_1}\\
+v_{10}&\xrightarrow{\ a_1\ }&v_{11}.
+\end{array}
+\tag{28.12}
+$$
+
+The first index in $v_{ij}$ records the outer endpoint and the second records
+the inner endpoint. Thus $a_0$ and $a_1$ are the inner generator evaluated in
+the two outer fibres. The arrows $b_0$ and $b_1$ are not obtained by applying
+two unrelated maps: they are the two object components of the *same* outer
+transformation. This shared owner is precisely what supplies a naturality
+comparison between the two boundary routes.
+
+Every displayed object and arrow in (28.12) is therefore an observation of
+coevaluation and the existing walking generator. None is postulated as a
+standalone tensor constructor. The four vertex normal forms remain pairwise
+distinct, and the selected square does not convert to $I\times I$.
+
+The two routes around the boundary are
+
+$$
+a_1\circ b_0
+\qquad\text{and}\qquad
+b_1\circ a_0.
+\tag{28.13}
+$$
+
+In a Cartesian product these would be forced to commute by the relevant
+strict interchange. Here their difference is the feature being measured.
+
+## 28.5 The Oriented Interchanger
+
+Let $\epsilon$ be the whole outer transformation generated by coevaluation,
+and let $g$ be the inner walking arrow. The post/left laxity action from
+Section 28.1 has readable direction
+
+$$
+G(g)\circ\epsilon[-]
+\Longrightarrow
+\epsilon[g\circ -].
+\tag{28.14}
+$$
+
+Evaluate this whole transformation at the identity of the outer source
+endpoint. Its component is the square's interchanger:
+
+$$
+\chi:
+a_1\circ b_0
+\Longrightarrow
+b_1\circ a_0.
+\tag{28.15}
+$$
+
+The formal source and target are owned by the stable transport functors of the
+internal action; (28.13) gives their readable composite presentations under
+the current strict endpoint conversions. The direction (28.15), rather than
+the choice of a terminology convention in isolation, is why the internal hom
+is named $\mathsf{GrayHom}_{\mathrm{lax}}$.
+
+The cell $\chi$ is not an independently declared filler. The whole
+post/left transformation exists first; $\chi$ is its identity component. Nor
+does the component end the construction. The transformation's next hom action
+is retained as a functor, and evaluating that next owner at its identity
+recovers $\chi$. This confirms that the square has not capped the common
+action calculus one dimension too early.
+
+The retained action can accept a higher arrow of the input hom and return a
+higher cell between interchanger boundaries. In a larger cubical consumer it
+would be the route by which faces of a three-dimensional comparison are
+observed. This chapter checks only the owner and its identity observation; it
+does not claim that a walking cube, all of its faces, or a general cubical
+coherence theorem has been constructed.
+
+Finally, the interchanger is not collapsed to an identity term. Its
+post/left provenance also remains distinct from the pre/right mirror. If the
+same cell were realized in a path-valued target, symmetry would provide an
+inverse as in Chapter 25. Inside the directed square, no such inversion is
+assumed.
+
+<!-- evidence:GRAY-WALKING-INTERCHANGER -->
+
+> **Formal status — checked.** **Theorem 28.1 (the walking-square
+> interchanger).** Evidence `GRAY-WALKING-INTERCHANGER`. The four vertices and
+> two coordinate arrow families are derived from right coevaluation. The
+> oriented nonidentity interchanger is the identity component of the existing
+> whole post/left laxity transformation, remains distinct from its pre/right
+> mirror, and retains one next hom action. No square filler, endpoint rewrite,
+> or unification rule is added independently.
+
+## 28.6 What This Does And Does Not Call Gray
+
+The low-dimensional picture agrees with the characteristic reason for using a
+Gray rather than Cartesian tensor: currying a strict map produces strict
+inner functors while allowing transformation-level laxity, and $I\otimes_R I$
+exposes a directed interchanger instead of forcing a commuting square. This is
+enough to test the architecture of profiles, closure, and extracted laxity.
+
+Terminology in the literature can exchange *lax* and *oplax* when tensor
+variance or diagrammatic composition conventions are reversed. The invariant
+statement here is the displayed direction (28.14): postcomposition by the
+target action points toward the action on the composite. That typed direction,
+not the name alone, is the comparison surface for any later mirror closure or
+literature equivalence.
+
+It is not enough to assert a full Crans–Gray monoidal structure. Such a claim
+would require at least:
+
+- the mirror closure and a settled comparison between the two orientations;
+- functorial action of the tensor in both parameters;
+- associativity and unit data, with their higher coherences;
+- compatibility of curry, uncurry, evaluation, and coevaluation with those
+  actions; and
+- a comparison with an established combinatorial or globular construction in
+  the dimensions being claimed.
+
+None of these is manufactured by adding fields to Theorem 28.1. They are new
+whole constructions. The tensor in this chapter is consequently written
+$\otimes_R$: it records the selected right closure rather than pretending
+that the mirror and monoidal boundaries have already been built.
+
+There is a second historical boundary. Some ambient functoriality and
+naturality endpoints are still identified by global prototype conversion
+rules. The strict code correctly selects where the compositor cell itself
+computes to identity, and the unprofiled interchanger remains nonidentity, but
+the eventual migration must re-home endpoint conversions at explicit strict
+profiles. This chapter does not perform that repository-wide normal-form
+change.
+
+## 28.7 The End Of The Fourth Spiral
+
+The fourth spiral began by placing equality inside the directed language.
+Product paths showed groupoidal closure without a category-head rewrite. The
+Circle turned reversible motion into the Integer line. Groupoidification then
+freely realized arbitrary directed cells as paths. The Gray square now returns
+to a target where the comparison cell is directed and worth keeping.
+
+These movements are not separate foundations. They are different readings of
+one iterable calculus:
+
+$$
+\begin{array}{c|c}
+\text{target or profile}&\text{behaviour of the comparison cell}\\ \hline
+\text{arbitrary directed target}&\text{lax, possibly noninvertible}\\
+\text{path-valued target}&\text{pseudo, invertible by symmetry}\\
+\text{decoded strict profile}&\text{computes to identity}.
+\end{array}
+\tag{28.16}
+$$
+
+This table also explains why the historical strict endpoint conversions do
+not invalidate the experiment. They may simplify the written source and
+target of a comparison, but they do not turn the unprofiled cell into the
+identity. The path target, strict decoder, and arbitrary directed target still
+select observably different behaviours of the retained witness.
+
+The three rows of (28.16) should be read as operations on one owner, not as
+three parallel theories. The arbitrary directed cell is primary. A
+path-valued target changes its hom into equality and thereby supplies an
+inverse. A strict decoder matches a computationally distinguished head and
+thereby selects the identity reduction. Neither specialization requires the
+ambient compositor, its whole transformation, or its next action to be
+redeclared.
+
+This suggests a discipline for extending the higher theory. First locate the
+whole internal action before introducing a pointwise coherence name. Second
+select the target or code profile that gives the desired invertibility or
+strictness. Third derive the geometric consumer—such as the walking square—
+from evaluation, coevaluation, and existing generators. Finally check both a
+non-collapse boundary and one further hom action. A pointwise cell without its
+owner is too easy to postulate; an owner without a concrete consumer is too
+easy to misorient.
+
+The mirror Gray closure can follow the same discipline. Its construction
+should begin from the pre/right whole action, not by reversing the arrow in
+(28.15) after the fact. Comparing the two closures will then be a theorem
+about their whole curry and evaluation structures. Likewise, a future
+associator for the tensor should be derived at the mapping-category level
+before its components are named. This keeps higher coherence attached to the
+operations that generate it.
+
+The walking square is therefore valuable even though it is small. It tests
+all of the architectural seams at once: strict codes versus ambient functors,
+profiled homs versus duplicated hierarchies, closure versus an opaque tensor,
+whole transformations versus square axioms, and directed cells versus paths.
+Passing that test does not finish Gray theory, but it gives the unfinished
+theory a computational spine.
+
+The result is deliberately asymmetric. Groupoidal realization explains how
+directed coherence may become invertible; the Gray direction explains why it
+should not have been erased beforehand. What follows in the appendices is the
+ledger of exact notation, evidence, provenance, computation, and remaining
+research boundaries for all four spirals.
+<!-- /book-source:chapter-28 -->
 <div class="book-source-end" aria-hidden="true"></div>
 
 <!-- book-source:appendix-notation book/appendices/a-notation.md -->
@@ -12000,6 +14455,12 @@ syntax.
 | $E[f]$ | functorial action of a family on a base arrow | `catd_transport_func` |
 | $H_x$ | the based hom-category $\operatorname{Hom}_W(*,x)$ | `Hom_cat WalkingEnd_cat walking_base x` |
 | $W$, $*$, $\ell$ | WalkingEnd, its base, and its directed generator | `WalkingEnd_cat`, `walking_base`, `walking_loop` |
+| $\mathsf{Path}(A)$ | the category whose objects are elements of $A$ and whose arrows are equality paths | `Path_cat A` |
+| $S^1$, $\mathsf{base}$, $\mathsf{loop}$ | the groupoidal Circle, its point, and its generating path | `Circle_grpd`, `circle_base`, `circle_loop` |
+| $\mathbb Z$ | the successor-localized Integer classifier | `Integer_grpd` |
+| $I$, $i_0$, $i_1$, $\mathsf{seg}$ | the groupoidal interval, its endpoints, and generating path | `Interval_grpd`, `interval_i0`, `interval_i1`, `interval_seg` |
+| $\mathsf{Groupoidify}(C)$ | free groupoidal realization of a directed category $C$ | `Groupoidify C` |
+| $\eta_C:C\to\mathsf{Path}(\mathsf{Groupoidify}(C))$ | the whole free-inversion unit | `groupoidify_unit_func C` |
 | $\mathsf{Code}$ | the Nat-valued directed family over $W$ | `walking_Code_catd` |
 | $\mathsf{encode}_x(p)$ | apply $\mathsf{Code}[p]$ to zero | `walking_encode` |
 | $\ell^n$ or $\mathsf{power}(n)$ | the $n$th generator-prefix power | `walking_power` |
@@ -12011,6 +14472,9 @@ syntax.
 | $u^*(h)$ | precomposition by $u$, namely $h\circ u$ | `hom_precomp_along_fapp0` |
 | $\eta[f]$ | off-diagonal action of a transfor on $f:x\to y$ | `tapp1_fapp0` |
 | $\chi^\Phi_{(p,u)}$ | displayed transport-comparison component | `fdapp1_int_cell` |
+| $\phi^F_{g,f}:F[g]\circ F[f]\Rightarrow F[g\circ f]$ | the functor compositor extracted from whole laxity | `fapp1_compositor` |
+| $\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ | strict-functor objects with the ambient lax-arrow and higher-hom tower | `GrayHom_lax A B` |
+| $A\otimes_R B$ | the stable tensor head selected by the checked right Gray closure | `GrayTensor_R A B` |
 | $P:A\rightsquigarrow B$ | a Cat-valued profunctor on $A^{\mathrm{op}}\times B$ | `Prof A B` |
 | $U_A$ | the unit hom profunctor | `Unit_prof A` |
 | $P\otimes_B Q$ | selected fixed-middle profunctor tensor | `Prof_tensor P Q` |
@@ -12169,7 +14633,7 @@ artifact, not the mathematics printed inside it.
 | `TRUNC-CLOSURE` | checked | Recursive truncation evidence is monotone and has checked dependent Pi and same-level dependent Sigma closure operations. | `is_trunc_grpd_succ`<br><small>`emdash3_2.lp`</small><br>`is_trunc_pi`<br><small>`emdash3_2.lp`</small><br>`is_trunc_sigma`<br><small>`emdash3_2.lp`</small> | `is_trunc_pi`<br><small>`examples/truncation_pi_closure.lp`</small><br>`is_trunc_sigma`<br><small>`examples/truncation_sigma_closure.lp`</small> |
 | `TRUNC-RETRACT` | checked | Every recursive truncation level is closed under explicit retractions. | `is_trunc_retract`<br><small>`emdash3_2_eq1_evidence_property.lp`</small> | `is_trunc_retract`<br><small>`emdash3_2_checks.lp`</small> |
 | `CAT-DIMENSION` | checked | IsNCat defines finite directed height by hom recursion, and every such category has the recursively predicted object-truncation evidence. | `IsNCat`<br><small>`emdash3_2.lp`</small><br>`cat_dim_trunc_level`<br><small>`emdash3_2.lp`</small><br>`ncat_obj_trunc`<br><small>`emdash3_2_eq1_evidence_property.lp`</small> | `IsNCat`<br><small>`examples/directed_dimension.lp`</small><br>`ncat_obj_trunc`<br><small>`examples/equality_valued_omega_equivalence_evidence_property.lp`</small> |
-| `TRUNC-REFLECTOR` | research-boundary | The active truncation layer supplies properties and packaged truncated universes, not a general truncation reflector or arbitrary truncation HIT. | — | — |
+| `TRUNC-REFLECTOR` | checked | The active groupoidal truncation layer has a classified NType_cat(n) target, a primitive Trunc_ntype(n,A) code with decoded carrier Trunc_grpd(n,A), restricted point-computing induction into classified n-types, and a recursor-derived whole map action with identity, composition, and retained Path action. | `NType_cat`<br><small>`emdash3_2_truncation_reflector.lp`</small><br>`Trunc_ntype`<br><small>`emdash3_2_truncation_reflector.lp`</small><br>`trunc_ind`<br><small>`emdash3_2_truncation_reflector.lp`</small><br>`trunc_map_func`<br><small>`emdash3_2_truncation_reflector.lp`</small> | `Trunc_ntype`<br><small>`examples/computational_truncation_facade.lp`</small><br>`trunc_ind`<br><small>`examples/computational_truncation_facade.lp`</small><br>`trunc_map_func`<br><small>`examples/computational_truncation_facade.lp`</small> |
 | `WE-SIGNATURE` | checked | WalkingEnd has an opaque category, base, directed loop, and explicit one-dimensional evidence. | `WalkingEnd_cat`<br><small>`emdash3_2_walking_end_hit.lp`</small><br>`walking_base`<br><small>`emdash3_2_walking_end_hit.lp`</small><br>`walking_loop`<br><small>`emdash3_2_walking_end_hit.lp`</small><br>`walking_end_is_one_cat`<br><small>`emdash3_2_walking_end_hit.lp`</small> | `walking_end_is_one_cat`<br><small>`examples/walking_endomorphism_hit.lp`</small> |
 | `WE-ONE-DIMENSIONAL` | checked | Every WalkingEnd hom-category is discrete, without WalkingEnd itself becoming discrete. | `walking_end_hom_discrete`<br><small>`emdash3_2_walking_end_hit.lp`</small> | `walking_end_hom_discrete`<br><small>`emdash3_2_checks.lp`</small> |
 | `WE-CONTEXTUAL-ELIMINATOR` | checked | The contextual WalkingEnd eliminator has base and loop computation at the selected displayed observers. | `walking_end_ind_funcd`<br><small>`emdash3_2_walking_end_hit.lp`</small><br>`walking_end_ind_funcd_beta_base`<br><small>`emdash3_2_walking_end_hit.lp`</small><br>`walking_end_ind_funcd_beta_loop`<br><small>`emdash3_2_walking_end_hit.lp`</small> | `walking_end_ind_funcd`<br><small>`examples/walking_endomorphism_hit.lp`</small> |
@@ -12192,14 +14656,14 @@ artifact, not the mathematics printed inside it.
 | `WE-STRUCTURED-ENCODER` | checked | The based encoder is also packaged as a functor from the based hom-category to Path(Nat). | `walking_encode_func`<br><small>`emdash3_2_walking_end_hit.lp`</small> | `walking_encode_func`<br><small>`examples/walking_endomorphism_hit.lp`</small> |
 | `WE-COMPOSITION-ADDITION` | formal-consequence | Compatibility of based composition with Nat addition follows from the checked power recursion, inverse laws, and ordinary category/Nat induction, but is not packaged as a monoid equivalence. | `walking_encode_loop_prefix_path`<br><small>`emdash3_2_walking_end_hit.lp`</small><br>`walking_power_encode_roundtrip`<br><small>`emdash3_2_walking_end_hit.lp`</small><br>`walking_encode_power_roundtrip`<br><small>`emdash3_2_walking_end_hit.lp`</small> | — |
 | `WE-FULL-CATEGORICAL-COMPARISON` | research-boundary | A reverse BNat functor, full hom-category equivalence, and functor-category initiality require additional reusable infrastructure. | — | — |
-| `WE-GROUP-COMPLETION` | research-boundary | Group completion toward BInt or the circle comparison has not been implemented. | — | — |
+| `WE-GROUP-COMPLETION` | checked | The concrete WalkingEnd-to-Circle functor sends every directed natural power to the corresponding nonnegative Circle power, and restriction along it is a whole fixed-forward OmegaEquivAlong from Circle maps into every groupoid G to path-valued WalkingEnd functors; source-functorial generic adjunction packaging remains separate. | `walking_to_circle_func`<br><small>`emdash3_2_walking_circle_completion.lp`</small><br>`walking_to_circle_power`<br><small>`emdash3_2_walking_circle_completion.lp`</small><br>`walking_circle_groupoidification_hom_omega`<br><small>`emdash3_2_walking_circle_universality.lp`</small> | `walking_to_circle_power`<br><small>`examples/walking_circle_completion.lp`</small><br>`walking_circle_groupoidification_hom_omega`<br><small>`examples/walking_circle_groupoidification_universality.lp`</small> |
 | `TRANSF-POINT-OFFDIAGONAL` | checked | An ordinary transfor has point components and an iterable off-diagonal hom action from F(x) to G(y) along every source arrow x to y. | `Transf_cat`<br><small>`emdash3_2.lp`</small><br>`tapp0_fapp0`<br><small>`emdash3_2.lp`</small><br>`tapp1_func`<br><small>`emdash3_2.lp`</small><br>`tapp1_fapp0`<br><small>`emdash3_2.lp`</small> | `tapp1_at_transf`<br><small>`emdash3_2_checks.lp`</small> |
 | `TRANSF-STRICT-NATURALITY` | checked | Postcomposition and precomposition adjacent to an ordinary transfor's off-diagonal action reduce to the action on the corresponding composite source arrow. | text `Full strict naturality for ordinary transfors`<br><small>`emdash3_2.lp`</small> | text `Full strict naturality: post/left accumulation before capping`<br><small>`emdash3_2_checks.lp`</small> |
 | `TRANSF-HORIZONTAL-CALCULUS` | checked | The product-composition action supplies an iterable horizontal composite of a pair of ordinary transfors, with checked point, full off-diagonal, and capped off-diagonal projections. | `comp_prod_fapp1_fapp0`<br><small>`emdash3_2.lp`</small> | `comp_prod_fapp1_fapp0`<br><small>`emdash3_2_checks.lp`</small> |
 | `TRANSFD-FIBRE-COMPONENTS` | checked | A natural family transformation between displayed functors has a transformation in every fibre and a point component at every fibre object, with identity and vertical composition inherited from the generic transfor calculus. | `Transfd_cat`<br><small>`emdash3_2.lp`</small><br>`Fibre_transf`<br><small>`emdash3_2.lp`</small><br>`Fibre_transf_app`<br><small>`emdash3_2.lp`</small> | `Fibre_transf_app`<br><small>`emdash3_2_checks.lp`</small> |
 | `FUNCTORD-DISPLAYED-LAXITY` | checked | For a natural family morphism and a base arrow, the internal displayed hom action supplies a directed component from target transport after the source fibre functor to the target fibre functor after source transport. | `functord_transport_lhs_func`<br><small>`emdash3_2.lp`</small><br>`functord_transport_rhs_func`<br><small>`emdash3_2.lp`</small><br>`fdapp1_int_cell`<br><small>`emdash3_2.lp`</small> | `fdapp1_int_cell`<br><small>`examples/dependent_hom_laxity.lp`</small> |
 | `FUNCTORD-SIGMA-ACTION` | checked | The Sigma-total map induced by a natural family morphism sends a total arrow to the same base arrow paired with the capped internal displayed hom action in the fibre. | `sigma_map_func`<br><small>`emdash3_2.lp`</small><br>`fdapp1_int_hom_fapp0`<br><small>`emdash3_2.lp`</small> | `sigma_map_transf`<br><small>`examples/sigma_total.lp`</small> |
-| `FUNCTORD-WHOLE-LAXITY` | research-boundary | A standalone whole-transfor laxity facade between the two transport composites is intentionally deferred; the active owner is the internal displayed hom action and its component projections. | — | — |
+| `FUNCTORD-WHOLE-LAXITY` | checked | The active internal displayed action supplies a whole laxity transformation, with ordinary post/left and pre/right whole surfaces obtained as transparent specializations; their capped cells return the existing fdapp1_int_cell witness, and the ordinary functor compositor is the identity-transfor specialization. | `functord_laxity_transf`<br><small>`emdash3_2.lp`</small><br>`tapp1_post_laxity_transf`<br><small>`emdash3_2.lp`</small><br>`tapp1_pre_laxity_transf`<br><small>`emdash3_2.lp`</small><br>`fapp1_compositor`<br><small>`emdash3_2.lp`</small> | text `Ordinary post/pre laxity and functor compositor`<br><small>`emdash3_2_checks.lp`</small><br>`fapp1_compositor`<br><small>`examples/dependent_hom_laxity.lp`</small> |
 | `PROF-CATEGORY` | checked | A Cat-valued profunctor from A to B is a directed family on A opposite times B, and vertical profunctor maps are natural family morphisms with the existing identity and composition calculus. | `Prof_base`<br><small>`emdash3_2.lp`</small><br>`Prof_cat`<br><small>`emdash3_2.lp`</small><br>`ProfMap`<br><small>`emdash3_2.lp`</small> | text `Cat-valued profunctor facade and representable hom action`<br><small>`emdash3_2_checks.lp`</small> |
 | `PROF-REPRESENTABLE` | checked | The unit profunctor evaluates to the ambient hom, and reindexing it along endpoint functors gives the binary representable with action by precomposition and postcomposition. | `Unit_prof`<br><small>`emdash3_2.lp`</small><br>`Hom_prof_along`<br><small>`emdash3_2.lp`</small><br>`Hom_fapp0`<br><small>`emdash3_2.lp`</small> | `Hom_prof_along`<br><small>`emdash3_2_checks.lp`</small> |
 | `PROF-REINDEXING` | checked | Profunctors reindex functorially in both endpoints by pullback along an opposite-times-covariant product map, including identity, nesting, and representable accumulation laws. | `Prof_reindex`<br><small>`emdash3_2.lp`</small><br>`Prof_reindex_func`<br><small>`emdash3_2.lp`</small> | text `Stable profunctor reindexing and its representable fold`<br><small>`emdash3_2_checks.lp`</small> |
@@ -12271,6 +14735,20 @@ artifact, not the mathematics printed inside it.
 | `LAURENT-COMMON-OVERLAP` | checked | Given two literal restriction maps R to L and T to L, each supplied simultaneously as a one-variable polynomial chart over one base ring and a localization at its coordinate, the Laurent owner constructs both coordinate-inversion endomorphisms of that exact L; a Laurent overlap presentation then supplies whole paths identifying both constructed endomorphisms with the identity, rather than a disconnected overlap isomorphism or componentwise square. | `CommRingOneVariableLocalizationPresentation`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`comm_ring_laurent_common_overlap_transition`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`CommRingLaurentOverlapPresentation`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`comm_ring_laurent_overlap_forward_identity`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small><br>`comm_ring_laurent_overlap_reverse_identity`<br><small>`emdash3_2_commutative_algebra_laurent.lp`</small> | `CommRingOneVariableLocalizationPresentation`<br><small>`examples/commutative_ring_laurent.lp`</small><br>`comm_ring_laurent_common_overlap_transition`<br><small>`examples/commutative_ring_laurent.lp`</small><br>`CommRingLaurentOverlapPresentation`<br><small>`examples/commutative_ring_laurent.lp`</small><br>`comm_ring_laurent_overlap_forward_identity`<br><small>`examples/commutative_ring_laurent.lp`</small><br>`comm_ring_laurent_overlap_reverse_identity`<br><small>`examples/commutative_ring_laurent.lp`</small> |
 | `ACTUAL-SCHEME-LAURENT-OVERLAP` | checked | For a supplied binary site-relative scheme and selected actual chart intersection, the thin Laurent adapter adds one common base ring and retains a generic Laurent overlap presentation at the literal two chart structure rings, inherited overlap ring, and already-derived restriction homomorphisms; it neither duplicates those global owners nor constructs the coordinate presentation from no data. | `BinarySchemeLaurentOverlapPresentation`<br><small>`emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`</small><br>`binary_scheme_laurent_overlap_base_ring`<br><small>`emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`</small><br>`binary_scheme_laurent_overlap_coordinates`<br><small>`emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`</small> | `binary_scheme_laurent_overlap_base_ring`<br><small>`examples/commutative_ring_scheme_laurent_overlaps.lp`</small><br>`binary_scheme_laurent_overlap_coordinates`<br><small>`examples/commutative_ring_scheme_laurent_overlaps.lp`</small> |
 | `SUPPLIED-P1` | checked | A SuppliedProjectiveLinePresentation is the transparent dependent total of one already-global binary site-relative scheme, its selected actual chart intersection, and a Laurent-coordinate presentation on the literal inherited restriction maps; its scheme, overlap, base ring, and coordinate package compute by projection, while no closed projective object, Proj construction, gluing theorem, projectivity proof, or non-affineness proof is produced. | `SuppliedProjectiveLinePresentation`<br><small>`emdash3_2_commutative_algebra_projective_line.lp`</small><br>`supplied_projective_line_scheme`<br><small>`emdash3_2_commutative_algebra_projective_line.lp`</small><br>`supplied_projective_line_overlap`<br><small>`emdash3_2_commutative_algebra_projective_line.lp`</small><br>`supplied_projective_line_base_ring`<br><small>`emdash3_2_commutative_algebra_projective_line.lp`</small><br>`supplied_projective_line_coordinates`<br><small>`emdash3_2_commutative_algebra_projective_line.lp`</small> | `supplied_projective_line_scheme`<br><small>`examples/commutative_ring_projective_line.lp`</small><br>`supplied_projective_line_overlap`<br><small>`examples/commutative_ring_projective_line.lp`</small><br>`supplied_projective_line_base_ring`<br><small>`examples/commutative_ring_projective_line.lp`</small><br>`supplied_projective_line_coordinates`<br><small>`examples/commutative_ring_projective_line.lp`</small> |
+| `GROUPOIDAL-PRODUCT-CLOSURE` | checked | The canonical comparison from Path(A x B) to Path(A) x Path(B) is judgmentally identity on objects, and at each pair of objects its actual hom action has explicit split and join maps forming a TypeEquiv between product paths and pairs of component paths; the distinct category heads are not definitionally identified. | `path_product_compare_func`<br><small>`emdash3_2_groupoidal_closure.lp`</small><br>`path_product_compare_hom_type_equiv`<br><small>`emdash3_2_groupoidal_closure.lp`</small><br>`path_product_comparison_evidence`<br><small>`emdash3_2_groupoidal_closure.lp`</small> | `path_product_compare_func`<br><small>`examples/groupoidal_product_transport.lp`</small><br>`path_product_compare_hom_type_equiv`<br><small>`examples/groupoidal_product_transport.lp`</small> |
+| `PATH-PSEUDO-LAXITY` | checked | For a raw map h between groupoids, the generic compositor of path_map_func(h) decodes to an equality between paths with a canonical eq_sym inverse; its formal endpoints compare propositionally with the readable eq_ap/eq_trans composites, and the whole compositor retains one next hom action. | `path_map_compositor_path`<br><small>`emdash3_2_path_pseudo_laxity.lp`</small><br>`path_map_compositor_inverse`<br><small>`emdash3_2_path_pseudo_laxity.lp`</small><br>`path_map_compositor_readable`<br><small>`emdash3_2_path_pseudo_laxity.lp`</small><br>`path_map_compositor_higher_func`<br><small>`emdash3_2_path_pseudo_laxity.lp`</small> | `path_map_compositor_path`<br><small>`examples/path_pseudo_laxity.lp`</small><br>`path_map_compositor_inverse`<br><small>`examples/path_pseudo_laxity.lp`</small><br>`path_map_compositor_higher_func`<br><small>`examples/path_pseudo_laxity.lp`</small> |
+| `GROUPOIDAL-PRODUCT-TRANSPORT` | checked | For a dependent family over a product, transport along the path assembled from two coordinate paths agrees with both sequential coordinate orders; the two comparisons form a coherence diamond, and the existing structured transport and PathOut induction agree with the same primitive right-J transport. | `product_transport_direct_agrees_base_then_fibre`<br><small>`emdash3_2_groupoidal_closure.lp`</small><br>`product_transport_direct_agrees_fibre_then_base`<br><small>`emdash3_2_groupoidal_closure.lp`</small><br>`product_transport_coherence_diamond`<br><small>`emdash3_2_groupoidal_closure.lp`</small><br>`product_path_structured_induction_agrees_primitive`<br><small>`emdash3_2_groupoidal_closure.lp`</small> | `product_transport_coherence_diamond`<br><small>`examples/groupoidal_product_transport.lp`</small><br>`product_path_structured_induction_agrees_primitive`<br><small>`examples/groupoidal_product_transport.lp`</small> |
+| `INTEGER-LOCALIZATION-LINE` | checked | The Integer carrier is the transparent set-truncated telescope localization of Nat successor: integer_stage(n,x) represents x-n, successor is an equivalence with executable predecessor, univalence supplies its universe path, and set-targeted dependent and nondependent elimination compute on stage representatives. | `Integer_grpd`<br><small>`emdash3_2_integer_localization.lp`</small><br>`integer_succ_equiv`<br><small>`emdash3_2_integer_localization.lp`</small><br>`integer_ind`<br><small>`emdash3_2_integer_localization.lp`</small><br>`integer_is_set`<br><small>`emdash3_2_integer_localization.lp`</small> | `integer_succ_equiv`<br><small>`examples/integer_localization.lp`</small><br>`integer_ind`<br><small>`examples/integer_localization.lp`</small><br>`integer_is_set`<br><small>`examples/integer_localization.lp`</small> |
+| `CIRCLE-HIT-COMPUTATION` | checked | The groupoidal Circle has base and loop constructors, unrestricted dependent elimination, judgmental point computation, and judgmental dependent PathOver computation on the generating loop; constant-family recursion inherits that dependent beta while its ordinary eq_ap loop equation remains propositional. | `circle_ind`<br><small>`emdash3_2_circle_hit.lp`</small><br>`circle_ind_beta_loop`<br><small>`emdash3_2_circle_hit.lp`</small><br>`circle_rec_beta_loop_path`<br><small>`emdash3_2_circle_hit.lp`</small> | `circle_ind_beta_loop`<br><small>`examples/circle_judgmental_loop_computation.lp`</small><br>`circle_rec_beta_loop_path`<br><small>`examples/circle_loop_space.lp`</small> |
+| `CIRCLE-MONODROMY` | checked | Every selected self-equivalence e of a groupoid A yields a Circle-indexed family with base fibre A and loop monodromy ua(e); transport around the loop agrees with e.to, and restriction along the WalkingEnd-to-Circle map recovers the original directed representation as a whole functor path. | `walking_circle_monodromy_circle_family`<br><small>`emdash3_2_walking_circle_monodromy.lp`</small><br>`walking_circle_monodromy_transport_path`<br><small>`emdash3_2_walking_circle_monodromy.lp`</small><br>`walking_circle_monodromy_restriction_path`<br><small>`emdash3_2_walking_circle_monodromy.lp`</small> | `walking_circle_monodromy_circle_family`<br><small>`examples/walking_circle_groupoidification_monodromy.lp`</small><br>`walking_circle_monodromy_transport_path`<br><small>`examples/walking_circle_groupoidification_monodromy.lp`</small><br>`walking_circle_monodromy_restriction_path`<br><small>`examples/walking_circle_groupoidification_monodromy.lp`</small> |
+| `CIRCLE-CONNECTED-TRUNCATION` | checked | Circle induction constructs mere based connectedness x \|-> \|\|base=x\|\|_{-1}; eliminating that evidence into the classified set truncation and then using its restricted induction proves the set truncation of Circle contractible without identifying its carrier judgmentally with Unit. | `circle_connected`<br><small>`emdash3_2_circle_connectedness.lp`</small><br>`circle_set_trunc_contract`<br><small>`emdash3_2_circle_connectedness.lp`</small><br>`circle_set_trunc_is_contr`<br><small>`emdash3_2_circle_connectedness.lp`</small> | `circle_connected`<br><small>`examples/circle_connectedness.lp`</small><br>`circle_set_trunc_is_contr`<br><small>`examples/circle_connectedness.lp`</small> |
+| `CIRCLE-LOOP-INTEGER` | checked | The opaque groupoidal Circle has a universal Integer cover whose endpoint-dependent encode and decode maps are inverse; the intrinsic based-loop carrier and the categorical based Hom carrier are TypeEquiv to the successor-localized Integer, with a whole equality-valued categorical equivalence retained separately. | `circle_loop_integer_type_equiv`<br><small>`emdash3_2_circle_hit.lp`</small><br>`circle_hom_integer_type_equiv`<br><small>`emdash3_2_circle_hit.lp`</small><br>`circle_hom_integer_cat_omega_equiv`<br><small>`emdash3_2_circle_hit.lp`</small> | `circle_loop_integer_type_equiv`<br><small>`examples/circle_loop_space.lp`</small><br>`circle_hom_integer_type_equiv`<br><small>`examples/circle_loop_space.lp`</small><br>`circle_hom_integer_cat_omega_equiv`<br><small>`examples/circle_loop_space.lp`</small> |
+| `WALKING-INTERVAL-GROUPOIDIFICATION` | checked | The groupoidal interval has two endpoints, one generating path, judgmental point and dependent-segment computation, and a whole fixed-forward mapping-object equivalence from maps Interval to G to path-valued functors WalkingArrow to Path(G), with endpoint/generator projections and retained higher action. | `interval_ind`<br><small>`emdash3_2_groupoidal_interval_hit.lp`</small><br>`walking_arrow_to_interval_func`<br><small>`emdash3_2_walking_interval_comparison.lp`</small><br>`walking_interval_groupoidification_hom_omega`<br><small>`emdash3_2_walking_interval_universality.lp`</small> | `interval_ind_beta_seg`<br><small>`examples/groupoidal_interval_hit.lp`</small><br>`walking_interval_groupoidification_hom_omega`<br><small>`examples/walking_interval_groupoidification.lp`</small> |
+| `GROUPOIDIFICATION-INTERVAL-RECOVERY` | checked | Specializing generic groupoidification to WalkingArrow and comparing the generic and interval extension owners gives maps Groupoidify(WalkingArrow) to Interval and back; their whole beta/eta laws yield both cancellation paths and a TypeEquiv without a definitional identification of the two HITs. | `groupoidify_walking_to_interval`<br><small>`emdash3_2_groupoidification_interval_recovery.lp`</small><br>`interval_to_groupoidify_walking`<br><small>`emdash3_2_groupoidification_interval_recovery.lp`</small><br>`groupoidify_walking_interval_type_equiv`<br><small>`emdash3_2_groupoidification_interval_recovery.lp`</small> | `groupoidify_walking_to_interval`<br><small>`examples/generic_groupoidification_interval.lp`</small><br>`groupoidify_walking_interval_type_equiv`<br><small>`examples/generic_groupoidification_interval.lp`</small> |
+| `GENERIC-GROUPOIDIFICATION-MAPPING` | checked | For every category C and groupoid G, restriction along the whole unit C to Path(Groupoidify(C)) is a fixed-forward OmegaEquivAlong between groupoidal maps out of Groupoidify(C) and path-valued functors out of C; the unit recursor computes on represented objects and dependent first cells and retains higher action. | `groupoidify_unit_func`<br><small>`emdash3_2_groupoidification_hit.lp`</small><br>`groupoidify_extend_func`<br><small>`emdash3_2_groupoidification_hit.lp`</small><br>`groupoidification_hom_omega`<br><small>`emdash3_2_groupoidification_universality.lp`</small><br>`groupoidify_unit_compositor_next_func`<br><small>`emdash3_2_groupoidification_composition.lp`</small> | `groupoidification_hom_omega`<br><small>`examples/generic_groupoidification.lp`</small><br>`groupoidify_unit_compositor_next_func`<br><small>`examples/generic_groupoidification.lp`</small> |
+| `GRAY-COMPUTATIONAL-PROFILE` | checked | StrictFunctorData is a primitive computational code sort with a stable decoder into the shared Functor classifier; the generic compositor reduces to identity only at decoded strict codes, while GrayHom_lax uses those codes as objects, reuses the ambient Transf_cat tower as homs, and includes wholly into Functor_cat. | `StrictFunctorData`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`strict_functor_carrier`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`GrayHom_lax`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`grayhom_lax_include_func`<br><small>`emdash3_2_gray_profiles.lp`</small> | `StrictFunctorData`<br><small>`examples/gray_profiles.lp`</small><br>`GrayHom_lax`<br><small>`examples/gray_profiles.lp`</small><br>`grayhom_lax_include_func`<br><small>`examples/gray_profiles.lp`</small> |
+| `GRAY-RIGHT-CLOSURE` | checked | The selected GrayTensor_R has one profiled right closure: computationally strict whole curry and uncurry form an OmegaEquivAlong between GrayHom_lax(GrayTensor_R(A,B),C) and GrayHom_lax(A,GrayHom_lax(B,C)), with whole beta/eta and coevaluation/evaluation derived at strict identity codes. | `GrayTensor_R`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_curry_R_func`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_right_closure_omega`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_coevaluation_R_func`<br><small>`emdash3_2_gray_right_closure.lp`</small> | `GrayTensor_R`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_right_closure_omega`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_coevaluation_R_func`<br><small>`examples/gray_right_closure.lp`</small> |
+| `GRAY-WALKING-INTERCHANGER` | checked | In the selected strict-object/lax-arrow Gray right-closure slice, the walking square has four coevaluation-derived vertices and two coordinate arrow families, while its oriented nonidentity interchanger is projected from the existing whole post/left laxity action and retains one next hom action. | `gray_square_inner_src_arrow`<br><small>`emdash3_2_gray_walking_square.lp`</small><br>`gray_square_outer_src_arrow`<br><small>`emdash3_2_gray_walking_square.lp`</small><br>`gray_interchanger`<br><small>`emdash3_2_gray_interchanger.lp`</small><br>`gray_interchanger_next_func`<br><small>`emdash3_2_gray_interchanger.lp`</small> | `gray_interchanger`<br><small>`examples/gray_interchanger.lp`</small><br>`gray_interchanger_next_func`<br><small>`examples/gray_interchanger.lp`</small> |
 | `EH-COMMUTATIVITY` | checked | Two 2-endomorphisms of an identity 1-cell commute in the selected Eckmann-Hilton slice. | `EH_comm`<br><small>`emdash3_2.lp`</small> | text `Eckmann-Hilton specialization`<br><small>`emdash3_2_checks.lp`</small> |
 <!-- /book-source:appendix-evidence -->
 <div class="book-source-end" aria-hidden="true"></div>
@@ -12278,13 +14756,21 @@ artifact, not the mathematics printed inside it.
 <!-- book-source:appendix-hott book/appendices/c-hott-correspondence.md -->
 <a id="appendix-hott-correspondence"></a>
 
-# Appendix C. From The Circle To The Walking Endomorphism
+# Appendix C. From The Circle To The Walking Endomorphism—And Back
 
 The proof of Theorem 8.1 is inspired by the encode-decode calculation of the
 loop space of the circle in the [*Homotopy Type Theory* book](#ref-hott-book).
 This appendix
 records the correspondence so that the analogy can guide the reader without
 smuggling groupoidal assumptions into the directed theorem.
+
+The comparison is no longer merely retrospective or prospective. Chapter 26
+checks the Circle side of the analogy with a successor-localized Integer
+classifier, while Chapter 27 proves that mapping out of the Circle into a
+groupoid is equivalent, as a whole mapping object, to mapping out of
+WalkingEnd through paths. The appendix therefore records both the deliberate
+change from inverse to forward powers and the checked free-inversion passage
+back.
 
 The source reference is revision
 `578b85cc8d586b1677ec4335148adeb443057d24` of the HoTT Book
@@ -12403,21 +14889,32 @@ These changes explain why a textual search-and-replace from
 
 ## C.5 Stronger Comparisons
 
-The carrier equivalence suggests two future constructions.
+The carrier equivalence suggests two different strengthenings.
 
 First, composition/addition compatibility should package the comparison as a
 monoid isomorphism. Chapter 8 records this as a formal consequence of the
 checked recursion and inverse laws, but the library does not yet expose the
 package.
 
-Second, group completion should freely invert the generator. Only after that
-construction is available should one compare the result with an integer
-one-object category or the circle’s loop object. Such a comparison must state
-whether it concerns carriers, monoids, categories, or a universal property.
+Second, free groupoidal realization should invert the generator without
+silently adding an inverse inside the original directed category. That
+comparison is now active. The functor from WalkingEnd to the Circle sends
+natural powers to nonnegative Circle powers, and restriction along it is a
+whole mapping equivalence from Circle maps into a groupoid to path-valued
+WalkingEnd functors.
 
-> **Formal status — research boundary.** A reverse `BNat` functor,
-> full categorical initiality, group completion, and the precise
-> `BInt`/circle bridge remain future work.
+<!-- evidence:WE-GROUP-COMPLETION -->
+
+> **Formal status — checked.** Evidence `WE-GROUP-COMPLETION`. This is a
+> categorical universal property, not merely a carrier comparison with an
+> integer one-object category. Chapter 27 develops the theorem and its
+> category-indexed successor.
+
+A reverse `BNat` functor, a packaged monoid isomorphism for the Chapter 8
+carrier theorem, source functoriality of generic groupoidification, and the
+resulting adjunction remain future layers. Keeping those claims separate is
+precisely why the completed Circle comparison does not retroactively turn the
+directed Nat proof into a group-valued proof.
 
 ## C.6 Attribution Method
 
@@ -12533,6 +15030,21 @@ preceding dimension. See [Chapter 7](#chapter-7).
 **Category, native.** An object of `Cat`, with iterable category-valued homs.
 It is not definitionally an ordinary HoTT precategory. See
 [Chapters 2](#chapter-2) and [10](#chapter-10).
+
+<a id="glossary-circle"></a>
+
+**Circle.** The selected groupoidal HIT with one point and one generating
+path. Its dependent eliminator computes at the point and on dependent action
+over the loop; its based loop carrier is equivalent to the successor-localized
+Integer classifier. See [Chapter 26](#chapter-26).
+
+<a id="glossary-compositor"></a>
+
+**Compositor.** The directed comparison
+$F[g]\circ F[f]\Rightarrow F[g\circ f]$ obtained by specializing whole
+transfor laxity to the identity transfor of $F$. It may become invertible in a
+path target or reduce to identity for a selected strict code without being
+globally erased. See [Chapters 25](#chapter-25) and [28](#chapter-28).
 
 <a id="glossary-commutative-ring"></a>
 
@@ -12680,9 +15192,27 @@ a separate gluing theorem. See [Chapter 23](#chapter-23).
 
 <a id="glossary-group-completion"></a>
 
-**Group completion.** A future construction freely adjoining inverse motion
-to the walking directed generator. It is the proper route from Nat powers
-toward integers or a circle comparison. See [§8.1.5](#chapter-8-1-5).
+**Group completion.** Free adjoining of inverse motion. The active
+WalkingEnd–Circle theorem gives this comparison as a whole universal mapping
+property, and category-indexed groupoidification extends the construction to
+an arbitrary source category at the target-side mapping boundary. See
+[§8.1.5](#chapter-8-1-5) and [Chapter 27](#chapter-27).
+
+<a id="glossary-groupoidification"></a>
+
+**Groupoidification.** The free realization of directed objects, arrows, and
+higher cells as groupoidal points, paths, and higher paths. It differs from
+the core, which retains arrows already invertible, and from truncation, which
+lowers the homotopy level of groupoidal data. Source functoriality and the
+packaged adjunction remain future interfaces. See [Chapter 27](#chapter-27).
+
+<a id="glossary-gray-profile"></a>
+
+**Gray profile, selected.** The computational full-subcategory facade
+$\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ whose objects are strict-functor codes
+and whose arrows and higher homs reuse the ambient transfor tower. One checked
+right closure yields a walking-square interchanger; a full Crans–Gray
+biclosed monoidal structure is not claimed. See [Chapter 28](#chapter-28).
 
 <a id="glossary-hom-action"></a>
 
@@ -12705,6 +15235,27 @@ and arrows between them; it is not automatically an ordinary sieve. See
 all probes $p:V\to U$ for which $p^*s$ is a unit. An open may represent this
 sieve, but representability is a further claim. See
 [Chapter 18](#chapter-18).
+
+<a id="glossary-integer-line"></a>
+
+**Integer line.** The set-truncated telescope localization of natural-number
+successor. A stage pair $(n,x)$ represents $x-n$; executable successor and
+predecessor are inverse, and the resulting self-equivalence supplies Circle
+monodromy. See [Chapter 26](#chapter-26).
+
+<a id="glossary-interchanger"></a>
+
+**Interchanger.** A directed higher cell comparing the two coordinate routes
+across the selected Gray walking square. In the checked slice it is projected
+from whole post/left laxity and retains a next action; it is not postulated as
+an isolated square axiom. See [Chapter 28](#chapter-28).
+
+<a id="glossary-interval"></a>
+
+**Interval, groupoidal.** The selected HIT with endpoints $i_0,i_1$ and one
+generating path between them. It is equivalent to the groupoidification of
+the directed WalkingArrow, without the two carriers being definitionally
+identified. See [Chapter 27](#chapter-27).
 
 <a id="glossary-join"></a>
 
@@ -12743,6 +15294,13 @@ one common base, together with whole paths identifying both internally
 constructed coordinate-inversion endomorphisms with the overlap identity.
 The transition maps are constructed; the identity paths are supplied. See
 [Chapter 24](#chapter-24).
+
+<a id="glossary-laxity-cell"></a>
+
+**Laxity cell.** A directed comparison retained where a strict equation would
+identify its endpoints. Whole laxity varies over an entire hom category, so
+its component and next action arise from one internal operation rather than a
+finite list of unrelated coherence fields. See [Chapter 28](#chapter-28).
 
 <a id="glossary-matching-family"></a>
 
@@ -12801,7 +15359,15 @@ new categorical semantics. See
 **Path category.** $\mathsf{Path}(A)$, the equality-local groupoidal category
 on a classifier $A$. It embeds ordinary identity reasoning into the directed
 calculus without identifying every directed hom with equality. See
-[Chapter 2](#chapter-2).
+[Chapters 2](#chapter-2) and [25](#chapter-25).
+
+<a id="glossary-path-pseudo-laxity"></a>
+
+**Path-realized pseudo-laxity.** The generic directed compositor viewed in a
+path category. Its underlying cell is an equality and therefore invertible,
+while its whole higher action is retained. This is target-induced
+pseudo-functorial behaviour, not a global strictness rule. See
+[Chapter 25](#chapter-25).
 
 <a id="glossary-pathout"></a>
 
@@ -12952,8 +15518,10 @@ transformation through off-diagonal and higher hom action. See
 
 **Truncation evidence.** A recursive property of an existing classifier: at
 the base level it is contractibility, and at successor levels it truncates
-all identity classifiers one step lower. It is not a truncation reflector.
-See [Chapter 7](#chapter-7).
+all identity classifiers one step lower. The property is distinct from the
+active classified truncation reflector, which constructs a new truncated
+target with restricted elimination. See [Chapter 7](#chapter-7) and
+[Chapter 26](#chapter-26).
 
 <a id="glossary-unimodular-presentation"></a>
 
@@ -13082,7 +15650,39 @@ restate generic preservation of identity or composition. The decoder's
 normalization cell is the displayed hom-action of one constructed functor; it
 is not a custom recursion rule for every arbitrary based arrow.
 
-## E.3 Direction And Variance In Normal Forms
+## E.3 Selected Groupoidal And Gray Boundaries
+
+The Circle and Interval illustrate why “constructor computation” must name
+the observer. Their dependent eliminators reduce at the point constructors,
+and applying dependent path action to the generating loop or segment reduces
+to the supplied `PathOver` datum. Ordinary constant-family recursion inherits
+that dependent computation. Its familiar homogeneous `ap` equation is instead
+an internal equality derived through the constant-family `PathOver` bridge;
+it is not a second rewrite competing for the same observation.
+
+Classified truncation has a similarly precise boundary. `Trunc_ntype(n,A)`
+constructs a code in `NType_cat(n)`, decoding that code exposes the stable
+carrier `Trunc_grpd(n,A)`, and restricted induction reduces on
+`trunc_intro(a)`. Contractibility of the set truncation of the Circle is a
+proved property. The carrier is not made judgmentally equal to `Unit`.
+
+Generic groupoidification computes at represented points and at the canonical
+dependent action over every represented source arrow. Restriction and
+extension remain whole functors, while their beta and eta laws are paths
+between whole functors. Thus the universal property controls higher action
+without replacing every composite mapping expression by one runtime normal
+form. The compositor of the unit is retained as a directed cell with a next
+action; it is not globally collapsed to identity.
+
+The Gray experiment makes strictness local rather than global. The generic
+compositor reduces to identity when its functor is exposed through the stable
+decoder of a strict-functor code. The same observation on an arbitrary rigid
+ambient functor does not reduce. Curry and uncurry for the selected right
+closure have whole beta/eta paths, and the walking-square interchanger is a
+nonidentity directed cell projected from whole laxity. These facts do not
+install a general weak-category normalizer or a full Crans–Gray tensor.
+
+## E.4 Direction And Variance In Normal Forms
 
 Covariant postcomposition and contravariant precomposition have different
 runtime owners. Their mathematical comparison through opposites is available
@@ -13095,7 +15695,7 @@ forms are joined only where a typed consumer requires it. Broad eta-style
 rewrites are avoided because unification is experimental and because a
 functor-level normal form may be needed to act on the next cell.
 
-## E.4 How A Checked Prose Claim Is Reviewed
+## E.5 How A Checked Prose Claim Is Reviewed
 
 For a code-facing claim, the review path is:
 
@@ -13112,7 +15712,7 @@ workflow: an owner-position probe, bounded typecheck, warning comparison when
 relevant, focused assertions, and full CI before handoff. Book prose does not
 authorize changing kernel normal forms merely to make an explanation shorter.
 
-## E.5 What Has Not Been Proved Metatheoretically
+## E.6 What Has Not Been Proved Metatheoretically
 
 The passing executable checks establish the selected interfaces and
 regression observations. They do not by themselves prove global confluence,
@@ -13135,9 +15735,10 @@ book reader; it is not a replacement for that SOP.
 
 # Appendix F. Implementation Status And Research Directions
 
-This appendix summarizes the boundary of the expanded development edition.
-The generated [evidence register](#appendix-evidence) remains the detailed
-claim-by-claim authority.
+This appendix summarizes the boundary of the fourth-spiral groupoidal-
+realization development edition. The generated
+[evidence register](#appendix-evidence) remains the detailed claim-by-claim
+authority.
 
 ## F.1 Status Matrix
 
@@ -13146,13 +15747,14 @@ claim-by-claim authority.
 | Equality-local type theory | Equality induction, path action, Sigma/Pi path interfaces, elementary inductives | No claim of a complete standalone HoTT implementation |
 | Directed categories | Iterated homs, identities, composition, functors, transfors, opposites, products | No complete weak omega-category metatheory or model theorem |
 | Directed families | Fibres, transport, family morphisms, Sigma totals, Pi sections, displayed hom action, fibrewise products, pullback totalization, displayed evaluation, and finite canonical sibling/Sigma telescopes | Arbitrary dependency or variance graphs, unrestricted mixed introduction/evaluation, and exchange across genuine dependency remain open |
-| Cut and transfor calculus | Lower-star postcomposition, upper-star precomposition, off-diagonal `tapp1`, horizontal composition, selected universal beta/eta cuts | No unrestricted runtime associativity rewrite or claim that all higher coherence is judgmental |
+| Cut and transfor calculus | Lower-star postcomposition, upper-star precomposition, off-diagonal `tapp1`, horizontal composition, selected universal beta/eta cuts, whole internal displayed laxity, ordinary post/pre surfaces, and the retained functor compositor | No unrestricted runtime associativity rewrite, completed generic lax classifier, or claim that all higher coherence is judgmental |
 | Equivalence and univalence | `TypeEquiv`, groupoid univalence, truncated-universe univalence, native recursive omega-equivalence facade and one-way hom action | No full general object-equality/ordinary-isomorphism equivalence for arbitrary categories |
 | Induction | Nat and equality induction, fixed/varying-source `PathOut` induction, composition benchmark | No general equivalence with homotopy-initial categorical algebras |
-| Directed HITs | One opaque WalkingEnd signature, contextual eliminator, section and recursor specializations | No general directed-HIT signature compiler or arbitrary cell-complex schema |
-| Truncation and height | Recursive truncation properties and closure, evidence-property, finite `IsNCat` object truncation | No general truncation reflector or arbitrary truncation HIT |
-| WalkingEnd calculation | Code, encode, power, spiral, contextual decoder, normalization cell/path, two inverse laws, carrier equivalence and noninvertibility results | No packaged monoid isomorphism, reverse `BNat` functor, full hom-category equivalence, or initiality theorem |
-| Higher groupoidal shadow | Selected Eckmann–Hilton commutativity slice | No claim that all directed structure is groupoidal |
+| Directed and groupoidal HITs | Opaque WalkingEnd and Circle signatures, the groupoidal interval, category-indexed `Groupoidify(C)`, selected dependent eliminators, and constructor computation at their reviewed owners | No general directed/HIT signature compiler, arbitrary pushout or cell-complex schema, or automatic positivity/coherence checker |
+| Truncation and height | Recursive truncation properties and closure, evidence-property, finite `IsNCat` object truncation, classified `NType_cat(n)` targets, point-computing `Trunc_ntype(n,A)`, restricted elimination, and whole map action | No general directed categorical truncation, arbitrary quotient schema, left-exactness theorem, or complete comparison with every hub-and-spoke presentation |
+| WalkingEnd calculation | Code, encode, power, spiral, contextual decoder, normalization cell/path, two inverse laws, carrier equivalence, noninvertibility results, and the whole free-inversion comparison with the Circle | No packaged monoid isomorphism, reverse `BNat` functor, full hom-category equivalence with `BNat`, or directed initiality theorem |
+| Groupoidal realization | Path categories and path functors; product-path split/join and coherent transport; Circle/Integer encode-decode and monodromy; WalkingEnd/Circle and WalkingArrow/interval mapping theorems; category-indexed groupoidification; path-realized pseudo-laxity | Source functoriality and the packaged groupoidification adjunction, closure for every former, generic simplex regressions, and a complete computational HoTT metatheory remain open |
+| Profiled Gray direction | Computational strict-functor codes, the strict-object/lax-arrow `GrayHom_lax` profile, one selected right closure, the walking square, and a nonidentity interchanger with retained next action | No mirror closure, full Crans–Gray biclosed monoidal structure, tensor functoriality/coherence, or global strict-cut migration |
 | Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
 | Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
@@ -13187,6 +15789,13 @@ Full initiality is a further layer. It asks for a category of endomorphism
 algebras, structured maps, and coherent higher transfors, followed by an
 appropriate contractibility or equivalence theorem.
 
+Generic groupoidification now supplies its target-side mapping equivalence,
+but not yet its action on a source functor $C\to D$. The next categorical
+strengthening is to derive that action from extension of the composite unit,
+prove its identity and composition laws by whole uniqueness, and only then
+package the adjunction with the path-category functor. The mapping theorem
+should not be renamed an adjunction before that source action exists.
+
 ## F.3 Foundational Extensions
 
 A reusable directed-HIT schema should generate contextual elimination and
@@ -13194,10 +15803,12 @@ constructor computation from typed object, arrow, and higher-cell boundaries.
 Its validation must include rewrite overlap and subject-reduction behavior,
 not only a semantic signature.
 
-A truncation reflector should construct a universal truncated target rather
-than merely certify an existing classifier. Directed categorical truncation
-would additionally need to specify which lower arrows and compositions are
-preserved.
+The active classified truncation reflector now constructs a groupoidal
+$n$-truncated target rather than merely certifying an existing classifier.
+Future work should compare that sorted interface with classical hub-and-spoke
+presentations, add selected quotient consumers, and investigate
+left-exactness. Directed categorical truncation remains a different problem:
+it must specify which lower arrows and compositions are preserved.
 
 The univalence programme should continue to separate carrier equivalence,
 ordinary categorical isomorphism, and native equality-valued recursive
@@ -13224,6 +15835,12 @@ weighted-limit preservation, its opposite-dual colimit theorem, and the join
 recursor. The checked interfaces are the theorem spine; neighboring Kan,
 end/coend, dagger, collage, and dependent-elimination theory remains
 explicitly status-labeled rather than presented as a feature catalogue.
+
+The selected Gray slice adds a concrete higher-dimensional stress test. Its
+walking-square interchanger is derived from the ordinary internal laxity
+action, but a full Gray theory still needs the mirror closure, tensor action,
+and coherent associativity and unit data. Those are structural projects, not
+extra fields to append to the current interchanger example.
 
 ## F.5 Semantics And Proof-Assistant Engineering
 
@@ -13825,6 +16442,9 @@ register supplies the exact owner and reviewer for each cited claim.
 | the ringed-space cover, affine-chart, site-relative-scheme, and chart-overlap modules | one supplied global ringed object, constructively generated covers, whole actual-slice restrictions, affine realizations, topology-local rings, and inherited overlaps |
 | `emdash3_2_commutative_algebra_laurent.lp`, `emdash3_2_commutative_algebra_scheme_laurent_overlaps.lp`, `emdash3_2_commutative_algebra_projective_line.lp` | universal-property coordinate inversion on one literal overlap and the supplied projective-line boundary; no graded `Proj` construction |
 | `emdash3_2_eq1_*.lp`, `emdash3_2_nat_arithmetic.lp`, `emdash3_2_walking_end_hit.lp` | equality-valued higher action, reusable arithmetic, and the WalkingEnd encode-decode development |
+| the groupoidal-closure, Integer, Circle, truncation, and connectedness modules | path-former comparisons, successor-localized integers, Circle encode–decode, classified truncation, and the selected connectedness consumer |
+| the groupoidal-interval, walking-comparison, and groupoidification modules | two finite free-inversion tests, category-indexed formation and whole unit, target extension/restriction, whole mapping equivalence, compositor, and Interval recovery |
+| the whole-laxity and Gray profile/right-closure modules | displayed and ordinary whole laxity surfaces, computational strict-functor codes, the shared Gray hom profile, one selected right closure, and the derived walking interchanger |
 | `emdash3_2_checks.lp` and `examples/` | executable diagnostics and independent reviewer-facing witnesses rather than mathematical owners |
 
 Imports use `require`; `open` brings imported public names into scope. The
@@ -14011,6 +16631,108 @@ projection joins for the concrete ordinary-recursion consumers.
 > `WE-CONTEXTUAL-ELIMINATOR`, and
 > `DHIT-DERIVED-ELIMINATORS`. The absence of a uniqueness theorem is part
 > of the formal statement, not a prose omission.
+
+### Selected Groupoidal HITs And Free Inversion
+
+The groupoidal signatures used by the fourth spiral share the ordinary
+equality eliminator but select different constructor boundaries.
+
+| Construction | Formation and introduction | Selected elimination and computation | Whole boundary |
+| --- | --- | --- | --- |
+| Circle | `Circle_grpd`, `circle_base`, `circle_loop` | unrestricted dependent `circle_ind`; point beta and dependent `PathOver` loop beta compute | ordinary constant-family `ap` beta is propositional; the based loop carrier is equivalent to Integer |
+| Interval | `Interval_grpd`, `interval_i0`, `interval_i1`, `interval_seg` | dependent `interval_ind`; both endpoint betas and dependent segment beta compute | ordinary segment `ap` beta is propositional; WalkingArrow supplies the free-inversion comparison |
+| classified truncation | `Trunc_ntype(n,A)` in `NType_cat(n)`, with point `trunc_intro` | elimination only into classified $n$-truncated fibres; point beta computes | decoding exposes `Trunc_grpd(n,A)` and retained truncation evidence without identifying the result with an arbitrary equivalent carrier |
+| groupoidification | `Groupoidify(C)` with one whole unit $\eta_C:C\to\mathsf{Path}(\mathsf{Groupoidify}(C))$ | recursion computes on represented points and on dependent action over represented arrows | extension and restriction are whole functors with path-valued beta/eta and retained higher action |
+
+The Circle and Interval path-constructor computations are attached to
+dependent action:
+
+$$
+\operatorname{apd}
+  (\mathsf{circle\_ind}(D,b,\ell),\mathsf{loop})
+\rightsquigarrow \ell,
+$$
+
+and analogously for `interval_ind` at `seg`. Passing to a constant family
+produces the familiar homogeneous path only after the general bridge from
+constant-family `PathOver` to `ap`. The resulting equation is internal
+equality, not a second rewrite. This keeps one higher-constructor owner while
+still recovering the usual recursion theorem.
+
+For a category $C$ and groupoid $G$, the free-inversion boundary is the whole
+mapping equivalence
+
+$$
+\operatorname{Hom}_{\mathsf{Grpd}}
+  (\mathsf{Groupoidify}(C),G)
+\simeq_{\omega}
+\operatorname{Functor}
+  (C,\mathsf{Path}(G)).
+$$
+
+Restriction is path action followed by precomposition with $\eta_C$;
+extension is the categorical-HIT recursor varying in the entire source
+representation. Their beta and eta are paths between whole functors, so their
+first and next hom actions remain available. This is the target-side universal
+property for every fixed $C$. The present package does not yet construct the
+action of `Groupoidify` on an arbitrary source functor or assemble the
+resulting adjunction.
+
+<!-- evidence:CIRCLE-HIT-COMPUTATION -->
+<!-- evidence:WALKING-INTERVAL-GROUPOIDIFICATION -->
+<!-- evidence:GENERIC-GROUPOIDIFICATION-MAPPING -->
+
+> **Formal status — checked selected signatures.** Evidence
+> `CIRCLE-HIT-COMPUTATION`, `WALKING-INTERVAL-GROUPOIDIFICATION`, and
+> `GENERIC-GROUPOIDIFICATION-MAPPING`. These are computationally reviewed HIT
+> slices with whole action; they do not constitute a general HIT declaration
+> compiler or a complete computational HoTT metatheory.
+
+### Whole Laxity And The Profiled Gray Closure
+
+The strict naturality cuts of the historical prototype do not exhaust the
+internal action. Before pointwise projection, the displayed hom calculus owns
+a whole laxity transformation. Ordinary post/left and pre/right comparisons
+are transparent specializations of that displayed owner, and the functor
+compositor is its identity-transfor specialization:
+
+$$
+\phi^F_{g,f}:F[g]\circ F[f]\Longrightarrow F[g\circ f].
+$$
+
+Because $f$ still ranges over a whole hom category, one further hom action can
+observe how $\phi$ varies. A path-valued target makes the comparison
+invertible. A decoded strict-functor code instead makes the selected
+compositor compute to identity. These are target and profile specializations
+of one action, not duplicate functor theories.
+
+The category $\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ uses strict-functor codes
+as objects and reuses the ambient transfor and higher-hom tower between their
+decoded carriers. One selected right closure is checked:
+
+$$
+\mathsf{GrayHom}_{\mathrm{lax}}(A\otimes_R B,C)
+\simeq_{\omega}
+\mathsf{GrayHom}_{\mathrm{lax}}
+  \bigl(A,\mathsf{GrayHom}_{\mathrm{lax}}(B,C)\bigr).
+$$
+
+Coevaluation at the walking-arrow shape exposes four vertices and two
+coordinate routes. Projecting the already-existing whole post/left laxity
+action supplies their oriented interchanger and retains its next action. No
+independent square axiom is introduced. The checked slice does not supply the
+mirror closure, tensor functoriality and coherence, or a full Crans–Gray
+biclosed monoidal structure.
+
+<!-- evidence:FUNCTORD-WHOLE-LAXITY -->
+<!-- evidence:GRAY-COMPUTATIONAL-PROFILE -->
+<!-- evidence:GRAY-RIGHT-CLOSURE -->
+
+> **Formal status — checked selected profile.** Evidence
+> `FUNCTORD-WHOLE-LAXITY`, `GRAY-COMPUTATIONAL-PROFILE`, and
+> `GRAY-RIGHT-CLOSURE`. The result is a computational stress test for the
+> foundations, not a reclassification of every existing functor as globally
+> lax or strict.
 
 ### Adjunction And Weighted Representability
 
@@ -14519,11 +17241,15 @@ begins from categorical computation.
 10. <a id="ref-pedrot-shtuck"></a>Pierre-Marie Pédrot. “Pursuing
     Shtuck.” Preprint, 2023. [HAL record](https://inria.hal.science/hal-04251754v1).
 
-Items 1–5 and 8–10 situate the mathematical development; items 6–7 identify
+11. <a id="ref-hadzihasanovic"></a>Amar Hadzihasanovic. *Combinatorics of
+    Higher-Categorical Diagrams*. arXiv:2404.07273v2, 2024.
+    [arXiv record](https://arxiv.org/abs/2404.07273).
+
+Items 1–5 and 8–11 situate the mathematical development; items 6–7 identify
 the proof infrastructure and checked artifact. Citation does not by itself
 confer the book's formal-status label. The exact HoTT source revision and
-Zeuner and Pédrot versions, section maps, adaptation targets, and license metadata,
-together with the reference-only policy for Došen's book, are recorded in
+Zeuner, Pédrot, and Hadzihasanovic versions, section maps, adaptation targets,
+and license metadata, together with the reference-only policy for Došen's book, are recorded in
 `book/references/third-party-sources.json`.
 <!-- /book-source:bibliography -->
 <div class="book-source-end" aria-hidden="true"></div>
@@ -14556,16 +17282,20 @@ category-theoretic setting. In particular, the circle/integer calculation is
 not reproduced as the WalkingEnd/Nat calculation: invertible paths are
 replaced by genuinely directed arrows, integer powers by natural powers, and
 the hard inverse by a directed normalization cell followed by
-one-dimensionality.
+one-dimensionality. Chapter 26 then returns to the Circle itself and adapts
+the universal-cover encode–decode architecture to the checked emdash
+Circle/Integer construction, including its distinct computational and
+categorical boundaries.
 
 The exact source map and adaptation ledger live in
 `references/third-party-sources.json`. They were established before the
 corresponding prose was drafted. The Chapter 8 vertical slice records
 structural and conceptual adaptations from the pinned source, while Chapters
-10–15 adapt all nine sections of `categories.tex` and Appendix G adapts all
-four parts of `formal.tex`. The resulting prose is newly written for the
-directed categorical setting; the ledger records the source labels,
-adaptation kind, and target under this attribution and ShareAlike notice.
+10–15 adapt all nine sections of `categories.tex`, Chapter 26 records the
+Circle HIT and universal-cover source map, and Appendix G adapts all four
+parts of `formal.tex`. The resulting prose is newly written for the directed
+categorical setting; the ledger records the source labels, adaptation kind,
+and target under this attribution and ShareAlike notice.
 
 ## Max Zeuner's constructive algebraic geometry
 
@@ -14629,6 +17359,18 @@ is not licensed for textual adaptation here. It is used only as a
 bibliographic and conceptual reference: the exposition, notation, examples,
 and emdash correspondence in this book are newly written, and no passage from
 Došen's text is copied or closely paraphrased.
+
+## Hadzihasanovic's higher-categorical diagrams
+
+Chapter 28 uses the Gray-product and oriented-cube discussion in Amar
+Hadzihasanovic's *Combinatorics of Higher-Categorical Diagrams*,
+arXiv:2404.07273v2, as comparative mathematical orientation. The source is
+cited rather than textually adapted: no passage is copied or closely
+paraphrased. In particular, the chapter distinguishes Hadzihasanovic's
+combinatorially constructed higher-dimensional products from emdash's checked
+and deliberately narrower experiment—one profiled right closure and its
+walking-square interchanger. The exact sections and reference-only boundary
+are recorded in `references/third-party-sources.json`.
 <!-- /book-source:book-credits -->
 <div class="book-source-end" aria-hidden="true"></div>
 

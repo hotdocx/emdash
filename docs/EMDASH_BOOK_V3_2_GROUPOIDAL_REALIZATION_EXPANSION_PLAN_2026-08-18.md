@@ -8,8 +8,8 @@ Status: **active fourth-spiral book continuation**. The cumulative baseline,
 book contract, stale-claim inventory, evidence boundary, and chapter
 architecture have been reviewed. `BGR-00` and `BGR-ARCH-1` are complete;
 `BGR-REPAIR-2`, `BGR-CH25-3` through `BGR-CH28-6`, `BGR-XCUT-7`, and
-`BGR-ARTICLE-8` are complete, and `BGR-RELEASE-9` is the active local book
-release row.
+`BGR-ARTICLE-8` and `BGR-RELEASE-9` are complete, and `BGR-CLOSE-10` is the
+active final authority/diff/plan synchronization row.
 
 Branch: `goal/emdash-book-groupoidal-v3.2`
 
@@ -491,8 +491,8 @@ AI imagery is not part of the mathematical pages.
 | `BGR-CH28-6` | complete | Chapter 28 is a 3,089-word derivation from whole internal laxity through computational strict-functor codes, the shared strict-object/lax-arrow profile, one selected right closure, coevaluation-derived walking square, and an oriented nonidentity interchanger with retained next action. Two focused evidence claims supplement the whole-laxity and interchanger records; Hadzihasanovic's Gray-product/oriented-cube source is registered as comparative reference only. `book:check` passes at 155 cited claims/2,740 math spans; the 343-page review PDF passes with 16 embedded fonts, and all eight Chapter 28 pages were inspected with Poppler. |
 | `BGR-XCUT-7` | complete | Front matter and transitions now present four spirals; notation, HoTT correspondence, glossary, computation/status/formal appendices, credits, bibliography, and provenance agree with Chapters 25–28 and their exact non-claims. Generated contents/evidence remain owner-generated. A book-only table pagination rule removes inherited title-only table pages without changing article layout. `book:check` passes at 43 sources/155 claims/2,775 math spans; renderer checks pass for the 18-page article and 343-page book; the review PDF passes at 343 pages/16 fonts and representative changed pages were inspected. |
 | `BGR-ARTICLE-8` | complete | Rebalanced rather than appended: one over-detailed mixed-telescope passage now funds a theorem-level groupoidification/Gray subsection; the abstract, roadmap, boundaries, conclusion, and references agree. The article remains 18 pages, passes its release gate with 14 embedded fonts, and is byte-deterministic across two exports. Poppler QA repaired two overwide displays and a split reference. The checked owner pair is promoted byte-identically to `docs/emdash3_2.{md,pdf}`. |
-| `BGR-RELEASE-9` | active | Stabilize edition metadata, run deterministic book release twice, verify equal hashes, promote the checked Markdown/PDF pair, and perform page-image QA of title, contents, all new chapter openings, figures, theorem/status blocks, appendices, bibliography, credits, and license. |
-| `BGR-CLOSE-10` | pending | Synchronize this plan, parent `ILGR-BOOK-1`, report index, public README/status claims, exact artifact hashes/page counts, and clean staged scope. Run no unrelated kernel/TypeScript aggregates; carry forward `f4d9303` semantic health unless a semantic source changes. Leave remote publication for explicit authorization. |
+| `BGR-RELEASE-9` | complete | Stabilized the book at expanded development edition `0.5.0-dev`, dated 2026-08-18 with draft status. Two complete cold `book:release` passes produced the same 343-page/16-font hash. Final Poppler QA covered metadata/title, contents, all new chapter openings, transport and walking-square figures, status/evidence/formal tables, appendices, bibliography, credits, and license. The checked Markdown/PDF pair is promoted byte-identically to `docs/emdash-book.{md,pdf}`. |
+| `BGR-CLOSE-10` | active | Synchronize this plan, parent `ILGR-BOOK-1`, report index, public README/status claims, exact artifact hashes/page counts, and clean staged scope. Run no unrelated kernel/TypeScript aggregates; carry forward `f4d9303` semantic health unless a semantic source changes. Leave remote publication for explicit authorization. |
 
 ### 12.1 Architecture Implementation Record — 2026-08-18
 
@@ -864,6 +864,58 @@ promoted PDF sha256: d5ef1d47aa693229e92f52ae84e762d36b620912bf3b16e178456ab3448
 `docs/emdash3_2.md` and `docs/emdash3_2.pdf` are byte-identical to the checked
 article owner and generated PDF. Their 0.2.0-dev research-draft metadata is
 unchanged; local promotion is not remote publication.
+
+### 12.9 Local Book Release And Promotion Record — 2026-08-18
+
+The manifest now owns the stabilized groupoidal-realization snapshot:
+
+```text
+edition: expanded development edition
+version: 0.5.0-dev
+publication date: 2026-08-18
+status: draft
+generated PDF: output/pdf/functorial-type-theory-0.5.0-dev.pdf
+```
+
+The explicit draft status is retained: this is a new checked development
+edition, not a claim of external peer review or a final foundation. The
+versioned output path preserves the completed 0.4.0 comparison rather than
+overwriting its identity in the manifest.
+
+Two complete cold `book:release` passes independently repeated assembly,
+evidence/provenance/source validation, typography and KaTeX checks, TypeScript
+build, bounded browser pagination, console/page/request/render checks, PDF
+export, metadata normalization, `qpdf` verification, extracted-text checks,
+blank-page checks, and font inspection. Both produced exactly:
+
+```text
+pages: 343 US Letter, tagged
+embedded fonts: 16
+PDF bytes: 3,013,229
+PDF sha256: 54a11407eb9ca1203979413f3231003ada85021ef2578e247ab922fccd918ad7
+```
+
+Final Poppler QA covered pages 1–2; both contents pages; all four new chapter
+openings; the product-transport diamond; the Gray walking square and
+interchanger theorem; notation and generated-evidence tables; the revised
+HoTT correspondence, glossary, computation, status, and formal-presentation
+appendices; bibliography; both credit pages; and the license. This complements
+the earlier all-page review of Chapters 25–28. No clipping, overlap, accidental
+blank page, malformed table, stranded fragment, or unreadable status block was
+found.
+
+Local promotion is byte-identical to the checked owners:
+
+```text
+docs/emdash-book.md sha256: e26fcb960a5dae0abd24a106035fa79a45f570a1c77edfa33727c6b0d0127604
+docs/emdash-book.pdf sha256: 54a11407eb9ca1203979413f3231003ada85021ef2578e247ab922fccd918ad7
+```
+
+No Lambdapi or TypeScript semantic source changed. In accordance with the
+goal's proportional-validation policy, the prior `f4d9303` semantic health
+boundary is carried forward and the long repository/kernel aggregate was not
+rerun merely for document release. Local promotion is not a push, tag, PR,
+deployment, or remote publication.
 
 ## 13. Proportional Validation Policy
 
