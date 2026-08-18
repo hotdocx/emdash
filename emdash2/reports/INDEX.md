@@ -1098,7 +1098,7 @@ record.
   explicitly deferred behind a free-coherent-inversion construction tested
   on non-endomorphism and composition source shapes. Judgmental Circle loop
   computation, mirror Gray closure, global strict-cut migration, and book
-  work remain separate.
+  work remain separate. Synchronized closeout is checkpointed at `709c1e3`.
 
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization
