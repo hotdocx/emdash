@@ -46,8 +46,8 @@ tranche `1caf642a3b99d4699becac3a1d90e26f4e58c4b1`; completed `GRAY-03`
 right-closure semantic tranche
 `37a5ede9cdfeaea10f0aa2d6dfbbbdacc7e3a957`; completed `GRAY-04`
 walking-square semantic tranche
-`d2597c9d1296902f5fc693a06826418b00d89ef1`. The `GRAY-05` semantic
-checkpoint is pending immediately after this synchronized ledger update.
+`d2597c9d1296902f5fc693a06826418b00d89ef1`; completed `GRAY-05` oriented
+interchanger tranche `e2f069c11c840f3129331842b14b59ee20d13667`
 
 ## Objective
 
@@ -598,6 +598,10 @@ strict LHS audit remains zero. Nine new classified diagnostics regenerate the
 catalog at 2,177 checks across 106 areas, with zero unclassified checks.
 Health/CI replacement is reserved for `GRAY-CLOSE-1`; no all-source,
 all-example, or repository-wide aggregate was run for this intermediate row.
+
+The bounded oriented-interchanger tranche is locally checkpointed at
+`e2f069c`; this ledger entry records that recovery anchor without widening
+the validated scope.
 
 ## Validation Policy
 
