@@ -4,9 +4,11 @@ Date: 2026-08-18 (America/Toronto)
 
 Plan-ID: `GENERIC-GROUPOIDIFICATION-FREE-INVERSION-V3.2`
 
-Status: **completed bounded first-consumer launch; generic continuation
-remains proposed**. The completed persistent goal owned only `GGFI-00` and
-`GGFI-INTERVAL-1`; later rows remain proposed and require a new launch.
+Status: **active generic-first continuation after the completed interval
+launch**. The completed predecessor goal owned `GGFI-00` and
+`GGFI-INTERVAL-1`. The current launch owns `GGFI-SIGNATURE-3`, `GGFI-HIT-4`,
+and `GGFI-EQUIV-5`; later source-functoriality and adjunction rows remain
+proposed.
 
 Parent:
 `REPORT_EMDASH_V3_2_INTERNAL_LAXITY_AND_GROUPOIDAL_REALIZATION_CONTINUATION_PLAN_2026-08-17.md`
@@ -25,7 +27,8 @@ Side-Task-Ledger: `GGFI-00`, `GGFI-INTERVAL-1`, `GGFI-TRIANGLE-2`,
 `GGFI-ADJ-7`, and `GGFI-CLOSE-8`
 
 Infinity-Codex-Origin: session
-`019ffe39-2eb9-7080-88e3-06b77d69b8d1`; decision responses `0047` and `0049`
+`019ffe39-2eb9-7080-88e3-06b77d69b8d1`; decision responses `0047`, `0049`,
+`0052`, and `0053`
 
 Infinity-Codex-Decision-Responses: response `0047`, archived at
 `/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-14_019ffe392eb9/responses/0047_2026-08-18T04-34-51Z_01a01322-f029-7f01-9030-f0af5473569a.md`,
@@ -34,17 +37,26 @@ and response `0049`, archived at
 The latter selects the groupoidal interval as the bounded next goal. Active
 code/SOP and this living plan outrank both archives.
 
-Baseline: clean completed Circle closeout checkpoint
-`29ff54dcea87082782592251abade27f1bc0fa78`
+Infinity-Codex-Continuation-Responses: response `0052`, archived at
+`/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-14_019ffe392eb9/responses/0052_2026-08-18T07-56-27Z_01a013dd-3713-7a62-b960-af792cd17634.md`,
+and response `0053`, archived at
+`/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-14_019ffe392eb9/responses/0053_2026-08-18T08-03-24Z_01a013e5-264a-79f0-8680-38f414196d5e.md`.
+They correct the sequencing: composition is a generic acceptance obligation,
+but a standalone 2-simplex HIT is not a prerequisite for beginning generic
+groupoidification. Active code/SOP and this living plan outrank both archives.
 
-Worktree: `/home/user1/emdash1-groupoidification-interval-v1`
+Baseline: clean completed interval closeout checkpoint
+`d3c8de8077715503ade3e2035346ac085dcde77d`
 
-Branch: `goal/groupoidification-interval-v3.2`
+Worktree: `/home/user1/emdash1-groupoidification-generic-v1`
 
-Git authority: the user's explicit adoption of response `0049` authorizes
-this dedicated descendant worktree and validated local checkpoint commits.
-It does not authorize push, merge, publication, release, history rewrite,
-branch deletion, or worktree removal.
+Branch: `goal/generic-groupoidification-v3.2`
+
+Git authority: the user's explicit adoption of responses `0052` and `0053`
+authorizes this dedicated descendant worktree, implementation, persistent
+goal, and validated local checkpoint commits. It does not authorize push,
+merge, publication, release, history rewrite, branch deletion, or worktree
+removal.
 
 ## Completed Launch Boundary
 
@@ -57,10 +69,33 @@ GGFI-00 + GGFI-INTERVAL-1
 It adopts the plan, reuses the existing directed walking arrow, constructs the
 groupoidal interval and its dependent computation, and proves the whole
 mapping-object equivalence against every groupoidal target. Completion of
-this launch does **not** authorize `GGFI-TRIANGLE-2`, the generic indexed HIT,
-`Groupoidify_func`, source functoriality, or the adjunction. Those later rows
-require a subsequent explicit continuation after the interval evidence is
-reviewed.
+that predecessor launch did **not** authorize `GGFI-TRIANGLE-2`, the generic
+indexed HIT, `Groupoidify_func`, source functoriality, or the adjunction. The
+current section below records the subsequent explicit generic-first
+continuation after review of the interval evidence.
+
+## Current Generic-First Launch Boundary
+
+The active continuation is:
+
+```text
+GGFI-SIGNATURE-3 + GGFI-HIT-4 + GGFI-EQUIV-5
+```
+
+It constructs category-indexed `Groupoidify(C)`, its whole unit, its whole
+target extension/restriction, and the universal mapping-object equivalence for
+arbitrary `C : Cat` and `G : Grpd`. “Category-indexed” means the object
+assignment of the eventual functor `Cat_cat -> Grpd_cat`; it does **not** mean
+that only objects of `C` are represented. Arrows become paths, represented
+higher cells become higher paths, and identity/composition are carried by the
+unit's iterable whole functor action.
+
+The launch must inspect the generic compositor for arbitrary composable
+arrows, preserve its explicit higher witness rather than rely only on the
+historical global strict endpoint cuts, retain one next action, and recover the
+completed WalkingArrow--Interval theorem as its principal concrete
+validation. It stops before `GGFI-SOURCE-6`, `GGFI-ADJ-7`, the post-generic
+walking-pair/2-simplex regression, global strict-cut migration, or book work.
 
 ## Objective
 
@@ -211,10 +246,12 @@ not the construction mechanism or substitute for the mapping property.
 This row tests what WalkingEnd could not: a generator whose source and target
 differ.
 
-## Consumer 2 — Composable Pair And Groupoidal 2-Simplex
+## Post-Generic Regression — Composable Pair And Groupoidal 2-Simplex
 
-The second source shape must make composition data visible. Derive a directed
-three-object source from `Join_cat(WalkingArrow_cat,Terminal_cat)` and expose:
+This finite source remains a useful standard-library example and regression,
+but it is no longer a prerequisite for beginning the generic construction.
+When revisited, derive a directed three-object source from
+`Join_cat(WalkingArrow_cat,Terminal_cat)` and expose:
 
 ```text
 f01 : 0 -> 1
@@ -223,8 +260,8 @@ f02 : 0 -> 2
 composition observation relating f12 o f01 and f02.
 ```
 
-The groupoidal target should not hide that relation by retaining only two
-paths. Its explicit computational facade is a 2-simplex-shaped HIT:
+Its optional explicit groupoidal target should not hide that relation by
+retaining only two paths. The computational facade is a 2-simplex-shaped HIT:
 
 ```text
 Delta2_grpd : Grpd
@@ -242,22 +279,24 @@ composition. Its eliminator must expose the point/path data and the dependent
 image of `fill012`; the next `eq_apd`/PathOver action should own that higher
 beta rather than a manually duplicated square.
 
-The acceptance theorem is the whole mapping equivalence between functions
-out of `Delta2_grpd` and functors from the directed walking pair into
+The regression theorem is the whole mapping equivalence between functions out
+of `Delta2_grpd` and functors from the directed walking pair into
 `Path_cat(G)`, including an explicit projection of the composition coherence
-and one retained next action. This row must document how today's globally
-strict prototype supplies the selected compositor endpoint while preserving
-the explicit higher witness needed by an eventual lax-profile migration.
+and one retained next action. It should be recovered from or compared with the
+generic groupoidification boundary, not used to postpone that boundary. The
+row must document how today's globally strict prototype supplies the selected
+compositor endpoint while preserving the explicit higher witness needed by an
+eventual lax-profile migration.
 
 This is a vertical test, not a claim that all simplicial identities or a
 generic simplex object have been constructed.
 
 ## Generic Indexed Categorical-HIT Design
 
-Only after both consumers pass should the recurring structure be abstracted.
+The completed interval consumer is sufficient to begin this construction.
 The preferred primitive boundary is not an infinite handwritten family of
-`Groupoidify_n` declarations. It is one groupoidal formation together with a
-whole unit functor and a whole recursor:
+`Groupoidify_n` declarations. It is one category-indexed groupoidal formation
+together with a whole unit functor and a whole recursor:
 
 ```text
 Groupoidify(C) : Grpd
@@ -278,6 +317,21 @@ composition, and higher coherence must be visible through that iterable
 whole owner and the already-extracted lax/pseudo action; they must not be an
 ever-growing external record of equations.
 
+In particular, for arbitrary composable `f : x -> y` and `g : y -> z`, the
+generic acceptance surface includes the existing explicit cell
+
+```text
+fapp1_compositor(groupoidify_unit_func(C),g,f)
+  : unit[g] o unit[f] ==> unit[g o f].
+```
+
+Its Path realization is invertible, and one next action must remain
+available. The historical strict endpoint cuts may make the displayed
+endpoints convertible in today's prototype; they do not replace or collapse
+this explicit cell. Extension must preserve the same composition observation
+through its whole action. This generic arbitrary-`C` test replaces the former
+requirement to construct `Delta2_grpd` first.
+
 Required computation and uniqueness:
 
 ```text
@@ -290,10 +344,18 @@ extend o restrict = id
 ```
 
 The exact runtime-versus-propositional boundary must be selected from the two
-concrete consumers. At minimum, object and canonical dependent first-cell
-betas should be judgmental. Whole beta/eta paths own uniqueness and preserve
-iteration. Merely declaring the last two equalities without a computing
-recursor is insufficient.
+existing concrete consumers, especially the completed endpoint-varying
+interval. At minimum, object and canonical dependent first-cell betas should
+be judgmental when their owner-position audits are safe. Whole beta/eta paths
+own uniqueness and preserve iteration. Merely declaring the last two
+equalities without a computing recursor is insufficient.
+
+The principal recovery test specializes the generic construction at
+`WalkingArrow_cat`. Extending the existing comparison unit gives a map
+`Groupoidify(WalkingArrow) -> Interval`; extending the generic unit through the
+completed interval universality gives the reverse map. Whole beta/eta from the
+two mapping equivalences must supply both cancellation paths. No definitional
+equality between the two groupoids is required.
 
 ## Source Functoriality And Adjunction
 
@@ -328,13 +390,54 @@ must reduce to the already-checked unit, restriction, and extension owners.
 | --- | --- | --- |
 | `GGFI-00` | complete | The authorized worktree/branch descends cleanly from Circle checkpoint `29ff54d`; bootstrap and workspace contract pass. The anti-duplication scan finds the existing join-derived `WalkingArrow_cat`, distinct endpoints, whole generator, and retained next action, but no active `Interval_grpd`, interval eliminator, or walking-arrow/interval mapping theorem. Focused walking-arrow, Circle-computation, and WalkingEnd--Circle universality baselines pass in 2.6--3.0 seconds; no aggregate ran. |
 | `GGFI-INTERVAL-1` | complete | The public interval HIT, join-derived comparison presentation, stable deployed unit, whole restriction/extension, fixed-forward `OmegaEquivAlong`, endpoint/generator projections, retained next action, and positive/negative reviewers are implemented and synchronized. The self-target reviewer exercises genuinely different endpoints; wrong-target and endpoint-collapse readings fail. Exact health is green for 202 targets by reusing 195 rehashed unchanged snapshots and checking the seven new targets fresh. Generic groupoidification and the triangle row remain unstarted. |
-| `GGFI-TRIANGLE-2` | proposed | Derive the walking composable pair from join; implement the explicit groupoidal 2-simplex/composition filler and whole mapping equivalence; retain one next-dimensional coherence and document the strict/lax profile boundary. |
-| `GGFI-SIGNATURE-3` | proposed | Compare the two consumers and record the smallest uniform indexed categorical-HIT signature. Reject an opaque adjunction or a cell-by-cell handwritten infinite record. |
-| `GGFI-HIT-4` | proposed | Promote `Groupoidify(C)`, its whole unit, and target-varying whole extension with object/first-cell computation and iterable higher action. Include wrong-source/target rejection and warning/LHS/subject-reduction audits. |
-| `GGFI-EQUIV-5` | proposed | Derive restriction along the unit and package whole beta/eta as `OmegaEquivAlong Cat_cat` for arbitrary `C` and groupoidal `G`; reinstantiate WalkingEnd/Circle, interval, and triangle consumers without duplicating their proofs. |
+| `GGFI-TRIANGLE-2` | deferred post-generic regression | Derive the walking composable pair from join and recover its explicit groupoidal 2-simplex/composition-filler mapping theorem after the generic construction. It remains a useful standard-library regression, not a prerequisite for generic names. |
+| `GGFI-SIGNATURE-3` | active; feasibility probe green | Audit the completed interval, generic whole-functor compositor/higher action, and existing categorical-HIT recursor patterns; select the smallest owner-position signature for category-indexed formation, unit, extension, and safe object/first-cell computation. The first generic signature probe is green and warning-neutral; public promotion, owning-file interaction, and interval recovery remain active. Reject an underlying-graph-only construction, opaque adjunction, or cell-by-cell handwritten infinite record. |
+| `GGFI-HIT-4` | active launch | Promote `Groupoidify(C)`, its whole unit, and target-varying whole extension with object/first-cell computation and iterable higher action. Include an arbitrary-composable-arrow compositor observation, wrong-source/target rejection, and warning/LHS/subject-reduction audits. |
+| `GGFI-EQUIV-5` | active launch | Derive restriction along the unit and package whole beta/eta as `OmegaEquivAlong Cat_cat` for arbitrary `C` and groupoidal `G`; recover the WalkingArrow--Interval equivalence without duplicating it. WalkingEnd/Circle and the post-generic triangle remain later regression instantiations unless needed by a concrete blocker. |
 | `GGFI-SOURCE-6` | proposed | Derive source-functorial action by extension, including identity/composition paths and retained next hom action; promote `Groupoidify_func` only after those checks pass. |
 | `GGFI-ADJ-7` | proposed | Package `Groupoidify_func |- Path_cat_func`, with unit/counit/triangle observations routed through the existing computation and uniqueness owners. Distinguish it explicitly from `Core_cat`. |
 | `GGFI-CLOSE-8` | proposed | Synchronize sources/reviewers, Foundations/SOP/syntax, catalog/health and any publication-facing boundary; record remaining higher-cell/profile limitations honestly. |
+
+## First Generic Signature Probe — 2026-08-18
+
+The ignored focused probe
+`tmp/probes/generic_groupoidification_signature.lp` validates the first
+category-indexed computational boundary before public names or registry
+changes. For arbitrary `C : Cat`, it jointly typechecks:
+
+- `ProbeGroupoidify(C) : Grpd`;
+- one whole unit
+  `C -> Path_cat(ProbeGroupoidify(C))`, whose ordinary compositor is exposed
+  through the existing `fapp1_compositor` owner and whose whole compositor
+  retains one next `tapp1_func` action;
+- a recursor selected by an arbitrary whole representation
+  `F : C -> Path_cat(G)`;
+- judgmental point computation on every unit object;
+- judgmental dependent first-cell computation on every unit arrow, headed by
+  the stable `eq_apd` owner and returning `const_pathover(...,F[f])`;
+- a whole target extension and transparent restriction along the unit; and
+- whole beta/eta *signature constants* assembled into
+  `OmegaEquivAlong Cat_cat`.
+
+The last item validates the type and orientation of the intended universal
+property; it does not yet construct or justify the two whole uniqueness
+paths. That work remains in `GGFI-HIT-4` and `GGFI-EQUIV-5`.
+
+The quiet probe passes in approximately 2.7 seconds. Two negative controls
+confirm that neither an arbitrary point nor an arbitrary path is mistaken for
+a unit-constructor redex. The LHS audit minimizes inferred `fapp0` and
+`fapp1_fapp0` category/endpoint slots and the recursor's reconstructible
+category argument. The target groupoid and representation arguments remain
+named beneath the `eq_apd` lambda because deleting either leaves a required
+RHS variable unbound. Strict audit reports zero unreviewed compound slots.
+
+The warning-enabled probe also passes. Against the same-import prefix probe,
+the diagnostic inventory is unchanged at `1118` warnings and no warning is
+located in the generic probe. Thus this first signature is feasible and
+warning-neutral. It is not yet promoted: the next bounded tranche must place
+the rules in their public owner, recheck subject reduction and later-owner
+interactions, add the concrete wrong-source/target reviewer, and construct
+rather than merely name whole beta/eta.
 
 ## First Interval Owner Probe — 2026-08-18
 
@@ -474,13 +577,30 @@ synchronized authority and health closeout is checkpointed at `07ddfd4`.
 
 ## Acceptance And Stop Conditions
 
-Promotion of generic names is blocked unless both source-shape consumers are
-green. A failure of the interval mapping equivalence means endpoint-varying
-extension is not understood. A failure of the 2-simplex row means composition
-coherence is not understood. Either failure should revise or defer the
-generic signature rather than be hidden by opaque unit/counit constants.
+Promotion of generic names is no longer blocked on a standalone 2-simplex
+HIT. It is blocked on a green owner-position signature probe, a whole unit and
+extension retaining higher action, and the arbitrary-`C` composition
+observation above. A failure to retain or preserve that compositor must revise
+or defer the generic signature rather than be hidden by opaque unit/counit
+constants or the historical strict endpoint cuts.
 
-The generic goal is complete only when:
+The current launch is complete only when:
+
+- `Groupoidify(C)` is formed for arbitrary `C : Cat`;
+- its whole unit and target extension have safe selected computation and at
+  least one nontrivial retained higher action;
+- restriction is a whole mapping-object equivalence for arbitrary groupoidal
+  target `G`;
+- arbitrary source composition is observed through the explicit generic
+  compositor rather than only endpoint conversion;
+- the completed WalkingArrow--Interval theorem is recovered by mutually
+  inverse maps with whole cancellation evidence; and
+- all affected sources, reviewers, ledgers, warnings, LHS audits, catalog, and
+  proportional health evidence are synchronized.
+
+This launch stops before source-functorial packaging and the adjunction.
+
+The full generic-reflector program is complete only when:
 
 - `Groupoidify(C)` is computationally formed for arbitrary `C`;
 - its unit and target extension retain at least one nontrivial higher action;
@@ -488,7 +608,9 @@ The generic goal is complete only when:
   target;
 - source functoriality is derived and checked;
 - the adjunction is assembled from those owners; and
-- the interval, triangle, and WalkingEnd/Circle instances are recovered.
+- the interval is recovered and the later triangle and WalkingEnd/Circle
+  regressions have either been recovered or explicitly deferred behind a
+  concrete consumer need.
 
 ## Validation Policy
 
@@ -501,17 +623,19 @@ root, TypeScript, browser, print, book, or package aggregates are outside this
 kernel goal unless a changed cross-layer contract makes one strictly
 necessary.
 
-## Completed Persistent Goal Boundary
+## Current Persistent Goal Objective
 
 ```text
-Complete the bounded first-consumer launch of
-GENERIC-GROUPOIDIFICATION-FREE-INVERSION-V3.2 according to
-emdash2/reports/REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md,
-through rows GGFI-00 and GGFI-INTERVAL-1 only. Reuse WalkingArrow_cat;
-construct the groupoidal interval HIT with judgmental dependent constructor
-betas; establish its whole mapping-object equivalence, retained higher action,
-and positive/negative reviewer. Do not begin GGFI-TRIANGLE-2 or declare
-generic Groupoidify. Use the authorized dedicated branch/worktree and local
-green checkpoints; avoid unnecessary aggregates; do not push, merge, publish,
-release, rewrite history, delete branches, or remove worktrees.
+Complete the category-indexed generic groupoidification launch of
+GENERIC-GROUPOIDIFICATION-FREE-INVERSION-V3.2 according to this living plan,
+through GGFI-SIGNATURE-3, GGFI-HIT-4, and GGFI-EQUIV-5 only. Construct
+Groupoidify(C), its whole unit, whole target extension/restriction, safe
+selected computation, iterable higher action, arbitrary-composable-arrow
+compositor observation, and whole mapping-object equivalence for every
+C : Cat and G : Grpd. Recover the completed WalkingArrow--Interval theorem as
+the principal concrete validation. Keep GGFI-TRIANGLE-2 as a post-generic
+regression and do not begin GGFI-SOURCE-6, GGFI-ADJ-7, global strict-cut
+migration, or book work. Use the authorized dedicated branch/worktree and
+local green checkpoints; avoid unnecessary aggregates; do not push, merge,
+publish, release, rewrite history, delete branches, or remove worktrees.
 ```

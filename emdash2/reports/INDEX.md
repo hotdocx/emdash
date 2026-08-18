@@ -1113,16 +1113,21 @@ record.
   source shapes.
 
 - `REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md`:
-  completed bounded first-consumer successor to the Circle computation tranche
-  and WalkingEnd--Circle universality decision. The launch reuses
+  active generic-first successor to the completed Circle and interval
+  tranches. The predecessor launch reuses
   `WalkingArrow_cat`, adds the two-endpoint groupoidal interval with
   judgmental dependent segment computation, and proves the whole
   fixed-forward mapping-object equivalence against every groupoidal target.
   Endpoint-sensitive positive/negative reviewers and exact 202-target health
   closeout are green; the implementation is checkpointed at `76f43b3` and
-  synchronized closeout at `07ddfd4`. The composable-pair/2-simplex consumer
-  and any generic indexed categorical-HIT, source action, or adjunction remain
-  proposed later rows.
+  synchronized closeout at `07ddfd4`. The current launch proceeds directly to
+  category-indexed `Groupoidify(C)`, its whole unit, extension/restriction,
+  generic composition observation, and mapping-object equivalence. Its first
+  warning-neutral signature probe is green through judgmental point and
+  first-cell computation plus one retained higher action; public promotion
+  and construction of whole beta/eta remain active. The
+  composable-pair/2-simplex moves to a post-generic standard-library
+  regression; source action and the adjunction remain later rows.
 
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization
