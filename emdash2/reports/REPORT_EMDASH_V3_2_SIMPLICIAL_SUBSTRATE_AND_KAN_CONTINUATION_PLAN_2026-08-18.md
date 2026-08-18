@@ -7,7 +7,8 @@ Plan-ID: `SIMPLICIAL-SUBSTRATE-KAN-V3.2`
 Status: **active bounded implementation plan**. `SIMP-00`, the Cat-valued
 Nat/join feasibility row `SIMP-PROBE-1`, the set-classified face-code row
 `SIMP-CODE-2`, and the internal index-category row `SIMP-INDEX-3` are
-complete; `SIMP-SHAPE-4` is the active implementation row. Later rows remain
+complete. The join-shape/selected-realization row `SIMP-SHAPE-4` is also
+complete; `SIMP-YONEDA-5` is the active implementation row. Later rows remain
 ordered gates rather than simultaneous scope.
 
 Branch: `goal/simplicial-substrate-v3.2`
@@ -283,6 +284,14 @@ between the appropriate directed simplex shapes. Face-code composition owns
 normalization; join realization owns geometric meaning. Neither presentation
 should be rewritten globally into the other.
 
+The conventions are related by successor rather than identified: index
+object `m` counts vertices (and permits `m=0`), while ordinary
+`DirectedSimplex_cat(n)` has `n+1` vertices. The first selected dictionary
+therefore pairs `FaceCode(succ p,succ n)` with a strict-profile functor
+`DirectedSimplex_cat(p) -> DirectedSimplex_cat(n)`. A generic realization of
+the augmented-empty code remains deferred until an empty-join comparison is a
+real consumer.
+
 ## 8. Standard Simplices, Boundaries, Horns, And Spines
 
 Once `SemiDeltaPlus_cat` exists:
@@ -498,8 +507,8 @@ worktree removal, or deployment is authorized by this plan.
 | `SIMP-PROBE-1` | complete | The ignored quiet and warning-enabled probe proves that active `nat_elim` computes a Cat-valued iterated join with `0`, `1`, and `2` observations and no new kernel rule. The augmented-empty endpoint remains a separately consumer-gated choice. |
 | `SIMP-CODE-2` | complete | Promoted raw indexed skip/keep syntax with four structural composition clauses and the public set-truncated `FaceCode`; sethood, constructors, identity, composition, both identity directions, a mixed composition branch, and index mismatch are checked without a unifier. |
 | `SIMP-INDEX-3` | complete | Promoted `SemiDeltaPlus_cat` with Nat objects, locally discrete face-code Homs, all-keep identity, visible-point category composition through `face_comp`, the three dimension-two coface relations, and a direction/index negative. The rejected catch-all composition fold timed out; the selected narrow rule adds no warning or unifier. |
-| `SIMP-SHAPE-4` | active | Promote the Nat-indexed join shape, define whole `join_map`, and connect selected face codes to join-built strict-profile functors through dimensions 0--2. |
-| `SIMP-YONEDA-5` | pending | Define standard representables and groupoid-valued/Cat-realized semisimplicial diagram facades through existing Yoneda and postcomposition owners. |
+| `SIMP-SHAPE-4` | complete | Promoted ordinary Nat-indexed join shapes, a whole `join_map_func` whose cross cell is reindexed from the target join, strict-profile join closure, and paired code/functor realizations for the two vertices of `Delta[1]` and three edges of `Delta[2]`; all three functorial coface equations compute. |
+| `SIMP-YONEDA-5` | active | Define standard representables and groupoid-valued/Cat-realized semisimplicial diagram facades through existing Yoneda and postcomposition owners. |
 | `SIMP-SIEVE-6` | pending | Define the 2-boundary and three 2-horn ordinary sieves with computing membership, whole extensions, inclusions, and pullback stability. |
 | `SIMP-FILL-7` | pending | Construct horn restriction and selected whole fillers for the three 2-horns in the nerve/path realization of a groupoid; retain one higher action and state exact nonclaims. |
 | `SIMP-DEC-8` | pending | Construct the selected shift/decalage and displayed cone fibre; compare its first three layers wholely with existing `homd_`/Sigma action. |
@@ -628,6 +637,48 @@ logs/probes/semisimplicial_index_category_min-20260818-141121.log
 
 Per the recorded aggregate policy, the deferred health refresh is not rerun
 for this immediately subsequent tranche.
+
+### 16.4 Join Shapes And Selected Face Realization — 2026-08-18
+
+The ignored `simplicial_join_map.lp` probe established the generic whole
+construction before promotion. For `F : A -> A2` and `G : B -> B2`,
+`join_map_cross_transf(F,G)` is obtained by applying
+`Prof_reindex_transf(F,G)` to `join_cross_transf(A2,B2)`. Existing
+constant-profunctor and nested-reindex rules make its source and target
+exactly the cross datum expected by `join_elim_func`. Both restrictions of
+the resulting `join_map_func(F,G)` compute through the existing join betas.
+
+`emdash3_2_simplex_shapes.lp` additionally introduces strict codes for both
+join inclusions and the join of two strict codes. Their carrier rules expose
+only the already-derived whole functors. `DirectedSimplex_cat(n)` is the
+right-iterated join of `n+1` terminal vertices. The transparent
+`SelectedFaceRealization(p,n)` dictionary pairs a
+`FaceCode(succ p,succ n)` with a strict code between those ordinary shapes.
+The promoted instances are the two vertices of `Delta[1]` and the three edges
+of `Delta[2]`.
+
+`examples/simplex_shapes.lp` checks the first three shapes, both generic join
+restrictions, the whole cross-cell type, all selected code/functor
+projections, profile-local strict compositor computation, one code-level
+coface relation, all three functor-level coface relations, and the
+vertex-count/augmented-empty negative boundary. Source and reviewer checks
+are green quietly and with warnings. The exact import-closure baseline and
+candidate each contain 1,315 warning headers; no warning is owned by the new
+module. The strict LHS audit reports zero reconstructible compound slots, and
+no unifier or external naturality record was added.
+
+Relevant ignored probe evidence is:
+
+```text
+logs/probes/simplicial_join_map-20260818-142719.log  quiet
+logs/probes/simplicial_join_map-20260818-142740.log  warnings enabled
+logs/probes/simplicial_join_map_warning_baseline-20260818-142838.log
+```
+
+The augmented-empty shape and a decoder for arbitrary `FaceCode` remain
+explicitly deferred. They are not prerequisites for standard representables,
+which live directly in the internal augmented index category. The health
+aggregate remains deferred to the later closure boundary.
 
 ## 17. Completion Definition
 

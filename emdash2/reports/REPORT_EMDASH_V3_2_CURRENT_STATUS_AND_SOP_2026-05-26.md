@@ -532,6 +532,13 @@ detailed probe evidence.
   `face_comp`, while arbitrary composition retains the generic owner. It adds
   no unifier, degeneracy, join realization, representable, sieve, or Kan
   claim.
+- `emdash3_2_simplex_shapes.lp`: ordinary Nat-indexed simplex shapes, generic
+  whole join-map action, strict-profile join inclusions/maps, and the selected
+  five cofaces through dimension two. Its cross datum is the target join's
+  existing cross cell reindexed along both inputs; code and whole-functor
+  coface equations compute without an external naturality family. It adds no
+  augmented-empty realization, arbitrary face decoder, degeneracy,
+  representable, sieve, or Kan claim.
 - `emdash3_2_circle_connectedness.lp`: transparent rule-free propositional-
   truncation consumer. It constructs
   `Pi x:S1, ||circle_base=x||_{-1}` by dependent Circle induction; the retained

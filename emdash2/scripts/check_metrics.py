@@ -69,6 +69,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_truncation_reflector.lp"),
     Path("emdash3_2_semisimplicial_face_codes.lp"),
     Path("emdash3_2_semisimplicial_index.lp"),
+    Path("emdash3_2_simplex_shapes.lp"),
     Path("emdash3_2_circle_connectedness.lp"),
     Path("emdash3_2_sieves.lp"),
     Path("emdash3_2_sites.lp"),
