@@ -217,6 +217,37 @@ book Markdown/PDF owner comparisons: equal
 article Markdown/PDF owner comparisons: equal
 ```
 
+### 7.2 Local Integration Record — 2026-08-18
+
+The authored documentation tranche is checkpointed at `631b257` (`docs:
+consolidate v3.2 release authorities`). Immediately before local integration,
+the maintenance worktree and the actual `main` worktree were clean, local and
+remote `main` both identified `86042df`, and the comparison
+`main...goal/emdash-v3.2-final-maintenance` was `0 89`. The maintenance line
+therefore had no divergent left-only history.
+
+`main` was fast-forwarded, without merge commit or history rewriting, in its
+actual worktree `/home/user1/emdash1-release-v0.2.0` from `86042df` to
+`631b257`. The historical default directory `/home/user1/emdash1` was not
+mutated; it continues to own `goal/typescript-emdash-classes-v1`.
+
+The locally integrated promoted artifacts are:
+
+```text
+docs/emdash-book.md
+  sha256 e26fcb960a5dae0abd24a106035fa79a45f570a1c77edfa33727c6b0d0127604
+docs/emdash-book.pdf
+  sha256 54a11407eb9ca1203979413f3231003ada85021ef2578e247ab922fccd918ad7
+docs/emdash3_2.md
+  sha256 b30908661134c2c9dcb6619cb5c6752658e35875fdb6bbfd859fbd5b8fd9f935
+docs/emdash3_2.pdf
+  sha256 d5ef1d47aa693229e92f52ae84e762d36b620912bf3b16e178456ab3448ed3db
+```
+
+The remote push and Pages verification remain the open part of
+`MAINT-INTEGRATE-4` and `MAINT-PAGES-5`; this record does not claim either
+before observing them.
+
 ## 8. Completion Definition
 
 This maintenance goal is complete only when:
