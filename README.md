@@ -29,7 +29,14 @@ higher action. A classified computational truncation reflector now supplies
 restricted point-computing elimination and recursor-derived whole map action;
 its first concrete consumer proves the Circle merely connected and its set
 truncation contractible, without choosing global based paths or replacing the
-truncated carrier judgmentally by `Unit`.
+truncated carrier judgmentally by `Unit`. Category-indexed
+`Groupoidify(C)` has a whole unit and a target-side equivalence between maps
+out of the realization and path-valued functors on `C`; specialization
+recovers the groupoidal Interval from the directed WalkingArrow. A selected
+strict-object/lax-arrow Gray profile then derives a nonidentity walking-square
+interchanger from whole internal laxity. Source functoriality and the packaged
+groupoidification adjunction, the mirror Gray closure, and full Gray
+monoidality remain explicit boundaries.
 
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
@@ -43,7 +50,8 @@ Start with the concise
 [*Functorial Type Theory: An Executable Architecture for Directed Dependency*](./docs/emdash3_2.pdf)
 overview, then continue to the current development edition of
 [*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf)
-([Zenodo record and DOI](https://doi.org/10.5281/zenodo.21544186),
+(`0.5.0-dev`, 343 pages;
+[Zenodo record and DOI](https://doi.org/10.5281/zenodo.21544186),
 [assembled Markdown](./docs/emdash-book.md)).
 The active mathematical source is
 [`emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp), together with the modules it

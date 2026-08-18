@@ -84,6 +84,33 @@ through that eliminator, and its first concrete consumer proves
 the set truncation gives `IsContr(||S1||_0)` while preserving the distinction
 between contractibility evidence and a judgmental `Unit` normal form.
 
+### Groupoidal realization and the Gray direction
+
+The groupoidal Circle has judgmental point and dependent-loop computation,
+with ordinary constant-family `ap` retained propositionally. Its universal
+Integer cover proves the based-loop/Integer equivalence, and the concrete
+WalkingEnd map identifies forward powers with the nonnegative Circle powers.
+The two-ended WalkingArrow/Interval comparison tests endpoint variation.
+
+For every category `C`, `Groupoidify(C)` has one whole unit
+`C -> Path(Groupoidify(C))`, a recursor computing on represented points and
+dependent first cells, and a whole target-side mapping equivalence
+
+```text
+Hom_Grpd(Groupoidify(C),G) ≃_omega Functor(C,Path(G)).
+```
+
+The current boundary does not yet construct source action,
+`Groupoidify_func`, or the packaged adjunction with `Path_cat_func`.
+
+Whole internal laxity also exposes the generic functor compositor and its next
+action. Computational strict-functor codes form the objects of the selected
+`GrayHom_lax` profile while reusing the ambient transfor tower. One right
+closure yields a coevaluation-derived walking square and a checked
+nonidentity oriented interchanger. The mirror closure, tensor coherence, full
+Crans--Gray monoidality, and global migration of historical strict endpoint
+cuts remain deferred.
+
 ### Representability and profunctors
 
 Yoneda, represented hom action, dependent hom, Cat-valued profunctors,

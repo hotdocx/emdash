@@ -547,6 +547,8 @@ detailed probe evidence.
   artifact but never override active Lambdapi declarations.
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`:
   completed book architecture and implementation ledger.
+- `../../docs/EMDASH_BOOK_V3_2_GROUPOIDAL_REALIZATION_EXPANSION_PLAN_2026-08-18.md`:
+  completed fourth-spiral book/article and local-release ledger.
 - `REPORT_EMDASH_V3_2_AUTONOMOUS_MAINTENANCE_AND_EVOLUTION_PLAN_2026-07-22.md`:
   current cross-project maintenance, triage, and evolution ledger.
 - `REPORT_EMDASH_CHECK_CATALOG.md`: generated map of the diagnostic suite.
@@ -4591,6 +4593,13 @@ chapter files are authoring sources; the ignored
 `print/public/emdash-book.md` file is deterministic generated input for
 the renderer. Book theorem-like claims use the four statuses defined in
 `book/STYLE.md` and checked claims cite `book/evidence.json`.
+
+The current locally promoted artifact is the draft expanded development
+edition `0.5.0-dev`, dated 2026-08-18: 343 tagged US Letter pages, 16 embedded
+fonts, and PDF SHA-256
+`54a11407eb9ca1203979413f3231003ada85021ef2578e247ab922fccd918ad7`.
+Its deterministic owner and public copy are byte-identical. This artifact
+status is publication evidence, not a new mathematical authority.
 
 ```bash
 ./scripts/pnpmw run book:assemble

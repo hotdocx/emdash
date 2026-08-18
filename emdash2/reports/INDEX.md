@@ -3,14 +3,17 @@
 Date: 2026-08-18
 
 `../../docs/EMDASH_BOOK_V3_2_GROUPOIDAL_REALIZATION_EXPANSION_PLAN_2026-08-18.md`
-is the active cross-layer editorial and implementation ledger for the
+is the completed cross-layer editorial and implementation ledger for the
 groupoidal-realization book continuation, concise article, and narrowly
 supporting documentation work. It preserves the completed local-to-global
 edition and adds a fourth theorem-led spiral through Path realization,
 Circle/Integer, free groupoidification, and the selected Gray interchanger.
+Its locally promoted book is the 343-page `0.5.0-dev` draft; its deterministic
+PDF SHA-256 is
+`54a11407eb9ca1203979413f3231003ada85021ef2578e247ab922fccd918ad7`.
 The completed predecessor ledger remains
 `../../docs/EMDASH_BOOK_V3_2_POST_INTEGRATION_EXPANSION_PLAN_2026-08-04.md`.
-The active continuation adds no mathematical
+The completed continuation adds no mathematical
 authority: active owners and checked examples remain authoritative for every
 formal claim.
 
