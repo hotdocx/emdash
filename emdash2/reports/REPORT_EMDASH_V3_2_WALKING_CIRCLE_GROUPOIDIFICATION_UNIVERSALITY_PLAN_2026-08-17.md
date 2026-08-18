@@ -6,7 +6,7 @@ Plan-ID: `WALKING-CIRCLE-GROUPOIDIFICATION-UNIVERSALITY-V3.2`
 
 Status: **completed consumer-first implementation and decision plan**.
 `WCGU-00` through `WCGU-CLOSE-1` are complete;
-`WCGU-CIRCLE-COMP-TODO` remains explicitly deferred.
+`WCGU-CIRCLE-COMP-TODO` was later completed by its dedicated Circle child.
 Local green checkpoint commits are authorized by the user's
 standing instruction for this continuation. Push, merge, publication,
 release, history rewrite, branch deletion, and worktree removal are not

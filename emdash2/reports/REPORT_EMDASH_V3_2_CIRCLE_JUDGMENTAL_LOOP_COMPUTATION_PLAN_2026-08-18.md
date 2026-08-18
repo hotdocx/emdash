@@ -13,8 +13,8 @@ Depends-On: active `emdash3_2.lp`; `emdash3_2_circle_hit.lp`; completed
 WalkingEnd--Circle extension, universality, and monodromy modules; current
 Foundations, current status/SOP, canonical syntax, and nested Lambdapi SOP
 
-Supersedes: no implementation plan. It promotes only the explicitly deferred
-`WCGU-CIRCLE-COMP-TODO` row to an active bounded migration.
+Supersedes: no implementation plan. It promoted only the explicitly deferred
+`WCGU-CIRCLE-COMP-TODO` row through this bounded migration.
 
 Reopens:
 `REPORT_EMDASH_V3_2_WALKING_CIRCLE_GROUPOIDIFICATION_UNIVERSALITY_PLAN_2026-08-17.md`,
