@@ -1127,9 +1127,10 @@ record.
   and beta/eta-derived recovery of
   `Groupoidify(WalkingArrow) ~= Interval`. The strict catalog has 2,197 checks
   across 109 areas, and exact health is green for 94 source/diagnostic targets
-  plus 114 reviewers. The composable-pair/2-simplex remains a post-generic
-  standard-library regression; source action, `Groupoidify_func`, and the
-  adjunction remain later rows.
+  plus 114 reviewers. The bounded implementation and synchronized closeout
+  are checkpointed at `7a02d85`. The composable-pair/2-simplex remains a
+  post-generic standard-library regression; source action,
+  `Groupoidify_func`, and the adjunction remain later rows.
 
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization
