@@ -673,6 +673,34 @@
       ]
     },
     {
+      "id": "hadzihasanovic-higher-categorical-diagrams",
+      "title": "Combinatorics of higher-categorical diagrams",
+      "authors": "Amar Hadzihasanovic",
+      "arxiv": "2404.07273",
+      "version": "v2",
+      "versionDate": "2024-10-30",
+      "canonicalUrl": "https://arxiv.org/abs/2404.07273",
+      "license": {
+        "spdx": "LicenseRef-ArXiv-Nonexclusive-Distribution-1.0",
+        "name": "arXiv.org perpetual non-exclusive distribution license",
+        "url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      },
+      "use": "Bibliographic and comparative orientation for Gray products and oriented cubes. Chapter 28 contrasts this combinatorial construction with emdash's selected profiled right-closure experiment; no copied or closely adapted prose, and no claim that the checked emdash tensor is the full combinatorial or Crans-Gray tensor.",
+      "sourceMap": [
+        {
+          "section": "7.2",
+          "title": "Gray products",
+          "use": "combinatorial Gray-product orientation and the distinction between a constructed tensor and one selected closure boundary"
+        },
+        {
+          "section": "9.3",
+          "title": "Oriented cubes",
+          "use": "comparative context for the four-vertex walking-square stress test"
+        }
+      ],
+      "adaptations": []
+    },
+    {
       "id": "dosen-cut-elimination",
       "title": "Cut Elimination in Categories",
       "authors": "Kosta Došen",

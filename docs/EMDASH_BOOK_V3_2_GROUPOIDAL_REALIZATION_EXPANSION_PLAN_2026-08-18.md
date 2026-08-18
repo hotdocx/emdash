@@ -7,8 +7,8 @@ Plan-ID: `EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5`
 Status: **active fourth-spiral book continuation**. The cumulative baseline,
 book contract, stale-claim inventory, evidence boundary, and chapter
 architecture have been reviewed. `BGR-00` and `BGR-ARCH-1` are complete;
-`BGR-REPAIR-2` and `BGR-CH25-3` through `BGR-CH27-5` are complete, and
-`BGR-CH28-6` is the active chapter row.
+`BGR-REPAIR-2` and `BGR-CH25-3` through `BGR-CH28-6` are complete, and
+`BGR-XCUT-7` is the active cross-cutting integration row.
 
 Branch: `goal/emdash-book-groupoidal-v3.2`
 
@@ -487,8 +487,8 @@ AI imagery is not part of the mathematical pages.
 | `BGR-CH25-3` | complete | Chapter 25 is a 2,783-word theorem-led account of the Path-category bridge, homwise product closure, the product-transport diamond, agreement of structured transport and `PathOut` with primitive right-J, and target-induced pseudo-laxity. Two focused evidence claims separate product split/join and path-realized compositor strength. `book:check` passes at 147 cited claims/2,478 math spans; the 319-page review PDF passes with 16 embedded fonts, and all seven Chapter 25 pages were inspected with Poppler. |
 | `BGR-CH26-4` | complete | Chapter 26 is a 3,748-word proof-led account of successor-localized Integer, judgmental dependent Circle-loop computation, universal-cover encode/decode, intrinsic and categorical loop-space equivalences, arbitrary self-equivalence monodromy, and connectedness/set-truncation. Four focused evidence claims supplement the central Circle/Integer theorem and the HoTT adaptation boundary is explicit. `book:check` passes at 151 cited claims/2,580 math spans; the 328-page review PDF passes with 16 embedded fonts, and all ten Chapter 26 pages were inspected with Poppler after three crowded displays were repaired. |
 | `BGR-CH27-5` | complete | Chapter 27 is a 3,667-word progression from WalkingEnd/Circle and WalkingArrow/Interval to arbitrary category-indexed groupoidification, including whole units, computation, target extension/restriction, beta/eta, the explicit unit compositor and next action, generic Interval recovery, and a variance comparison with Core/truncation. Two focused evidence claims supplement the reused WalkingEnd and generic claims. `book:check` passes at 153 cited claims/2,683 math spans; the 336-page review PDF passes with 16 embedded fonts, and all nine Chapter 27 pages were inspected after repairing one clipped continuation, an overwide table, and a stranded final fragment. |
-| `BGR-CH28-6` | active | Write and visually validate Chapter 28, including internal laxity, strict profiles, the selected Gray right closure, walking square, and interchanger without a full-Gray overclaim. |
-| `BGR-XCUT-7` | pending | Reconcile front matter, reading paths, contents, transitions, notation, glossary, evidence appendix, computation/status/formal appendices, bibliography, credits, and provenance; remove every stale three-spiral or future-groupoidification statement. |
+| `BGR-CH28-6` | complete | Chapter 28 is a 3,089-word derivation from whole internal laxity through computational strict-functor codes, the shared strict-object/lax-arrow profile, one selected right closure, coevaluation-derived walking square, and an oriented nonidentity interchanger with retained next action. Two focused evidence claims supplement the whole-laxity and interchanger records; Hadzihasanovic's Gray-product/oriented-cube source is registered as comparative reference only. `book:check` passes at 155 cited claims/2,740 math spans; the 343-page review PDF passes with 16 embedded fonts, and all eight Chapter 28 pages were inspected with Poppler. |
+| `BGR-XCUT-7` | active | Reconcile front matter, reading paths, contents, transitions, notation, glossary, evidence appendix, computation/status/formal appendices, bibliography, credits, and provenance; remove every stale three-spiral or future-groupoidification statement. |
 | `BGR-ARTICLE-8` | pending | Rebalance the overview article within its 18-page maximum, release it deterministically, and promote its tracked Markdown/PDF pair locally. |
 | `BGR-RELEASE-9` | pending | Stabilize edition metadata, run deterministic book release twice, verify equal hashes, promote the checked Markdown/PDF pair, and perform page-image QA of title, contents, all new chapter openings, figures, theorem/status blocks, appendices, bibliography, credits, and license. |
 | `BGR-CLOSE-10` | pending | Synchronize this plan, parent `ILGR-BOOK-1`, report index, public README/status claims, exact artifact hashes/page counts, and clean staged scope. Run no unrelated kernel/TypeScript aggregates; carry forward `f4d9303` semantic health unless a semantic source changes. Leave remote publication for explicit authorization. |
@@ -711,6 +711,58 @@ overwide four-column table whose tag crowded its final cell, and a two-line
 stranded final verso. Substantive reflow, a three-column table, and a tightened
 transition repaired all three; the final pages were re-exported and
 re-inspected. The PDF remains an ignored 0.4.0-dev review artifact.
+
+The Chapter 27 prose/evidence checkpoint is `0757d37`.
+
+### 12.6 Chapter 28 Record — 2026-08-18
+
+Chapter 28 now occupies eight pages and 3,089 source words. It follows one
+checked chain rather than presenting Gray terminology as a feature catalogue:
+
+```text
+whole displayed/internal laxity
+  -> ordinary post/left and pre/right surfaces
+  -> functor compositor
+  -> computational strict-functor codes
+  -> strict-object/lax-arrow GrayHom profile
+  -> one selected right closure
+  -> coevaluation-derived I tensor I square
+  -> oriented nonidentity interchanger
+  -> one retained next action
+```
+
+The chapter distinguishes a path-valued pseudo constraint from computational
+strictness, reuses the ambient transformation/modification tower rather than
+duplicating it, and states the typed post/left cell direction as the authority
+for the lax naming. Its exact non-claim includes the mirror closure, tensor
+functoriality, associativity/unit coherence, full Crans–Gray biclosed monoidal
+structure, and global migration of historical strict endpoint cuts.
+
+Two focused evidence records were added: `GRAY-COMPUTATIONAL-PROFILE` and
+`GRAY-RIGHT-CLOSURE`. The chapter also reuses `FUNCTORD-WHOLE-LAXITY` and
+`GRAY-WALKING-INTERCHANGER`. Amar Hadzihasanovic's
+*Combinatorics of higher-categorical diagrams*, arXiv:2404.07273v2, is now a
+bibliographic/comparative reference for Gray products and oriented cubes;
+its arXiv license and exact section map are recorded with no textual
+adaptation claim. No semantic, renderer, package, or release source changed.
+
+Proportional validation is green:
+
+```text
+chapter source words: 3,089
+book:check: 43 sources, 155 cited claims, 2,740 math spans
+book:render: 343 pages, no console/page/request/render failure
+book:pdf:check: 343 pages, 16 embedded fonts
+review PDF sha256: 0defe20cd69ee11e395c34776a51a9b16df016aa2138f309a98ee3645e8a9b2a
+```
+
+Poppler review covered every Chapter 28 page, 224–231. The wrapped chapter
+title, equations (28.1)–(28.16), four formal-status boxes, right-closure
+display, walking-square diagram, interchanger, research-boundary list, final
+comparison table, and fourth-spiral transition are legible and uncropped.
+The initially sparse closing page was filled with a concise reusable
+whole-owner/profile/consumer discipline and re-inspected. The PDF remains an
+ignored 0.4.0-dev review artifact.
 
 ## 13. Proportional Validation Policy
 

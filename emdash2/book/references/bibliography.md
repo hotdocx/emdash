@@ -45,9 +45,13 @@
 10. <a id="ref-pedrot-shtuck"></a>Pierre-Marie Pédrot. “Pursuing
     Shtuck.” Preprint, 2023. [HAL record](https://inria.hal.science/hal-04251754v1).
 
-Items 1–5 and 8–10 situate the mathematical development; items 6–7 identify
+11. <a id="ref-hadzihasanovic"></a>Amar Hadzihasanovic. *Combinatorics of
+    Higher-Categorical Diagrams*. arXiv:2404.07273v2, 2024.
+    [arXiv record](https://arxiv.org/abs/2404.07273).
+
+Items 1–5 and 8–11 situate the mathematical development; items 6–7 identify
 the proof infrastructure and checked artifact. Citation does not by itself
 confer the book's formal-status label. The exact HoTT source revision and
-Zeuner and Pédrot versions, section maps, adaptation targets, and license metadata,
-together with the reference-only policy for Došen's book, are recorded in
+Zeuner, Pédrot, and Hadzihasanovic versions, section maps, adaptation targets,
+and license metadata, together with the reference-only policy for Došen's book, are recorded in
 `book/references/third-party-sources.json`.

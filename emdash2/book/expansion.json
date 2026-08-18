@@ -436,7 +436,10 @@
         "evidence": "GRAY-WALKING-INTERCHANGER"
       },
       "secondaryEvidence": [
-        "FUNCTORD-DISPLAYED-LAXITY"
+        "FUNCTORD-DISPLAYED-LAXITY",
+        "FUNCTORD-WHOLE-LAXITY",
+        "GRAY-COMPUTATIONAL-PROFILE",
+        "GRAY-RIGHT-CLOSURE"
       ],
       "boundary": "the active construction is one profiled strict-object/lax-arrow right closure with a derived walking square and oriented interchanger; it does not provide the mirror closure, full Crans-Gray biclosed monoidal structure, tensor functoriality or coherence, or global migration of historical strict endpoint cuts"
     }

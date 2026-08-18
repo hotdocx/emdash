@@ -3912,6 +3912,78 @@
         }
       ]
     },
+    "GRAY-COMPUTATIONAL-PROFILE": {
+      "status": "checked",
+      "statement": "StrictFunctorData is a primitive computational code sort with a stable decoder into the shared Functor classifier; the generic compositor reduces to identity only at decoded strict codes, while GrayHom_lax uses those codes as objects, reuses the ambient Transf_cat tower as homs, and includes wholly into Functor_cat.",
+      "owners": [
+        {
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "StrictFunctorData"
+        },
+        {
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "strict_functor_carrier"
+        },
+        {
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "GrayHom_lax"
+        },
+        {
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "grayhom_lax_include_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/gray_profiles.lp",
+          "symbol": "StrictFunctorData"
+        },
+        {
+          "file": "examples/gray_profiles.lp",
+          "symbol": "GrayHom_lax"
+        },
+        {
+          "file": "examples/gray_profiles.lp",
+          "symbol": "grayhom_lax_include_func"
+        }
+      ]
+    },
+    "GRAY-RIGHT-CLOSURE": {
+      "status": "checked",
+      "statement": "The selected GrayTensor_R has one profiled right closure: computationally strict whole curry and uncurry form an OmegaEquivAlong between GrayHom_lax(GrayTensor_R(A,B),C) and GrayHom_lax(A,GrayHom_lax(B,C)), with whole beta/eta and coevaluation/evaluation derived at strict identity codes.",
+      "owners": [
+        {
+          "file": "emdash3_2_gray_right_closure.lp",
+          "symbol": "GrayTensor_R"
+        },
+        {
+          "file": "emdash3_2_gray_right_closure.lp",
+          "symbol": "gray_curry_R_func"
+        },
+        {
+          "file": "emdash3_2_gray_right_closure.lp",
+          "symbol": "gray_right_closure_omega"
+        },
+        {
+          "file": "emdash3_2_gray_right_closure.lp",
+          "symbol": "gray_coevaluation_R_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/gray_right_closure.lp",
+          "symbol": "GrayTensor_R"
+        },
+        {
+          "file": "examples/gray_right_closure.lp",
+          "symbol": "gray_right_closure_omega"
+        },
+        {
+          "file": "examples/gray_right_closure.lp",
+          "symbol": "gray_coevaluation_R_func"
+        }
+      ]
+    },
     "GRAY-WALKING-INTERCHANGER": {
       "status": "checked",
       "statement": "In the selected strict-object/lax-arrow Gray right-closure slice, the walking square has four coevaluation-derived vertices and two coordinate arrow families, while its oriented nonidentity interchanger is projected from the existing whole post/left laxity action and retains one next hom action.",
