@@ -195,6 +195,10 @@ the transparent walking-square boundary inside that selected tensor is
 `emdash3_2_gray_walking_square.lp`; its four vertices and both coordinate
 arrow families derive from coevaluation and the retained walking-generator
 owner, without postulating tensor objects or arrows;
+the directed walking-square interchanger is
+`emdash3_2_gray_interchanger.lp`; it is the identity component of the active
+whole post/left laxity owner, retains one next hom action, and adds no
+independent square, endpoint rewrite, or unifier;
 the classified computational homotopy-truncation reflector and its derived
 whole map action are `emdash3_2_truncation_reflector.lp`; it realizes the
 category of `n`-types through retained `TruncGrpdU(n)` packages, restricts
@@ -727,10 +731,10 @@ Use the following order:
 74. `emdash3_2_gray_profiles.lp` for the primitive computational
     `StrictFunctorData` code sort, stable `strict_functor_carrier` decoder,
     selected identity code and carrier path, profile-local reduction of the
-    existing extracted compositor, and the `GrayHom_oplax` category whose
-    homs and higher cells reuse the ambient `Transf_cat` tower. The oplax name
-    remains provisional until the typed `I tensor I` consumer fixes its
-    orientation;
+    existing extracted compositor, and the `GrayHom_lax` category whose
+    homs and higher cells reuse the ambient `Transf_cat` tower. The typed
+    `I tensor I` post/left interchanger confirms the project's lax naming
+    convention;
 75. `emdash3_2_walking_arrow.lp` for the transparent curated interface
     `WalkingArrow_cat = Join_cat(Terminal_cat,Terminal_cat)`. Its endpoints
     are evaluations of the two join inclusions; its generating arrow is the
@@ -751,13 +755,19 @@ Use the following order:
     components of one whole coevaluation-generated transformation. It adds no
     tensor object/arrow constant, rule, unifier, interchanger, orientation
     verdict, or Cartesian reinterpretation;
-78. `emdash3_2_truncation_reflector.lp` for the classified computational
+78. `emdash3_2_gray_interchanger.lp` for the rule-free directed interchanger
+    of the walking square. Its whole owner is the active post/left laxity
+    transformation, its identity component is the named cell, and its next
+    `tapp1_func` action remains public. It confirms the `GrayHom_lax`
+    direction and adds no standalone square, endpoint bridge, rule, or
+    unifier;
+79. `emdash3_2_truncation_reflector.lp` for the classified computational
     truncation reflector. It realizes `NType_cat(n)` through the existing
     retained-evidence `TruncGrpdU(n)` package, provides point-computing
     restricted induction/recursion, derives map identity and composition by
     that induction, and reuses `path_map_func` for an iterable whole Hom
     action;
-79. `emdash3_2_circle_connectedness.lp` for the rule-free first concrete
+80. `emdash3_2_circle_connectedness.lp` for the rule-free first concrete
     consumer of propositional truncation. It proves mere based connectedness
     of the Circle by dependent Circle induction; retained proposition evidence
     supplies the loop `PathOver`, so no untruncated global path is selected.

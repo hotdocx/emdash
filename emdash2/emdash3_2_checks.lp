@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow emdash.emdash3_2_gray_right_closure emdash.emdash3_2_gray_walking_square;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow emdash.emdash3_2_gray_right_closure emdash.emdash3_2_gray_walking_square emdash.emdash3_2_gray_interchanger;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -24700,40 +24700,40 @@ assert [A B : Cat] (F : τ (Functor A B))
 // tower.
 assert [A B : Cat]
   (S : τ (@StrictFunctorData A B)) ⊢
-  S : τ (Obj (@GrayHom_oplax A B));
+  S : τ (Obj (@GrayHom_lax A B));
 
 assert [A B : Cat]
-  (X Y : τ (Obj (@GrayHom_oplax A B))) ⊢
-  Hom_cat (@GrayHom_oplax A B) X Y
+  (X Y : τ (Obj (@GrayHom_lax A B))) ⊢
+  Hom_cat (@GrayHom_lax A B) X Y
   ≡ @Transf_cat
       A B
       (@strict_functor_carrier A B X)
       (@strict_functor_carrier A B Y);
 
 assert [A B : Cat]
-  (X : τ (Obj (@GrayHom_oplax A B))) ⊢
-  @id (@GrayHom_oplax A B) X
+  (X : τ (Obj (@GrayHom_lax A B))) ⊢
+  @id (@GrayHom_lax A B) X
   : τ (Hom
       (@Functor_cat A B)
       (@strict_functor_carrier A B X)
       (@strict_functor_carrier A B X));
 
 assert [A B : Cat]
-  (X Y Z : τ (Obj (@GrayHom_oplax A B)))
-  (g : τ (Hom (@GrayHom_oplax A B) Y Z))
-  (f : τ (Hom (@GrayHom_oplax A B) X Y)) ⊢
-  @comp_fapp0 (@GrayHom_oplax A B) X Y Z g f
+  (X Y Z : τ (Obj (@GrayHom_lax A B)))
+  (g : τ (Hom (@GrayHom_lax A B) Y Z))
+  (f : τ (Hom (@GrayHom_lax A B) X Y)) ⊢
+  @comp_fapp0 (@GrayHom_lax A B) X Y Z g f
   : τ (Hom
       (@Functor_cat A B)
       (@strict_functor_carrier A B X)
       (@strict_functor_carrier A B Z));
 
 assert [A B : Cat]
-  (X Y : τ (Obj (@GrayHom_oplax A B))) ⊢
+  (X Y : τ (Obj (@GrayHom_lax A B))) ⊢
   @fapp1_func
-    (@GrayHom_oplax A B)
+    (@GrayHom_lax A B)
     (@Functor_cat A B)
-    (@grayhom_oplax_include_func A B)
+    (@grayhom_lax_include_func A B)
     X Y
   ≡ @id_func
       (@Transf_cat
@@ -24763,7 +24763,7 @@ assert [A B : Cat]
 // Ambient functors are not silently promoted into the strict object sort.
 assertnot [A B : Cat]
   (F : τ (Functor A B)) ⊢
-  F : τ (Obj (@GrayHom_oplax A B));
+  F : τ (Obj (@GrayHom_lax A B));
 
 // catalog-area: Walking arrow from the directed join
 // The curated interval, endpoints, and generator are transparent projections
@@ -24841,11 +24841,11 @@ assertnot ⊢
 // closure; curry and uncurry remain whole computationally strict functors.
 assert [A B C : Cat] ⊢
   @GrayRightSource A B C
-  ≡ @GrayHom_oplax (@GrayTensor_R A B) C;
+  ≡ @GrayHom_lax (@GrayTensor_R A B) C;
 
 assert [A B C : Cat] ⊢
   @GrayRightTarget A B C
-  ≡ @GrayHom_oplax A (@GrayHom_oplax B C);
+  ≡ @GrayHom_lax A (@GrayHom_lax B C);
 
 assert [A B C : Cat] ⊢
   @gray_curry_R_func A B C
@@ -24922,8 +24922,8 @@ assert [A B : Cat] ⊢
 assert [B C : Cat] ⊢
   @gray_evaluation_R_data B C
   ≡ @gray_uncurry_R
-      (@GrayHom_oplax B C) B C
-      (@strict_identity_data (@GrayHom_oplax B C));
+      (@GrayHom_lax B C) B C
+      (@strict_identity_data (@GrayHom_lax B C));
 
 // The selected boundary remains distinct from the Cartesian scaffold.
 assertnot [A B : Cat] ⊢
@@ -24951,7 +24951,7 @@ assert ⊢
   gray_square_inner_src_data
   ≡ @fapp0
       WalkingArrow_cat
-      (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+      (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
       (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
       walking_arrow_src;
 
@@ -24959,7 +24959,7 @@ assert ⊢
   gray_square_inner_tgt_data
   ≡ @fapp0
       WalkingArrow_cat
-      (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+      (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
       (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
       walking_arrow_tgt;
 
@@ -25012,7 +25012,7 @@ assert ⊢
   gray_square_outer_transf
   ≡ @fapp1_fapp0
       WalkingArrow_cat
-      (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+      (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
       (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
       walking_arrow_src
       walking_arrow_tgt
@@ -25067,3 +25067,90 @@ assertnot ⊢ gray_square_obj10 ≡ gray_square_obj11;
 assertnot ⊢
   GrayWalkingSquare_cat
   ≡ @Product_cat WalkingArrow_cat WalkingArrow_cat;
+
+// catalog-area: Directed Gray walking-square interchanger
+// The square cell is projected from the active whole post/left laxity owner,
+// and its next hom action remains available to subsequent consumers.
+assert [A B C : Cat] ⊢
+  @GrayRightTarget A B C
+  ≡ @GrayHom_lax A (@GrayHom_lax B C);
+
+assert ⊢
+  gray_square_post_composite
+  : τ (Obj GrayInterchangerCodomain_cat);
+
+assert ⊢
+  gray_square_pre_composite
+  : τ (Obj GrayInterchangerCodomain_cat);
+
+assert ⊢
+  gray_interchanger_transf
+  ≡ @tapp1_post_laxity_transf
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      gray_square_inner_tgt_func
+      gray_square_outer_transf
+      walking_arrow_src
+      walking_arrow_src
+      walking_arrow_tgt
+      walking_arrow_generator;
+
+assert ⊢
+  gray_interchanger
+  ≡ @tapp1_post_laxity_cell
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      gray_square_inner_tgt_func
+      gray_square_outer_transf
+      walking_arrow_src
+      walking_arrow_src
+      walking_arrow_tgt
+      walking_arrow_generator
+      (@id WalkingArrow_cat walking_arrow_src);
+
+assert ⊢
+  gray_interchanger_next_func
+  ≡ @tapp1_func
+      GrayInterchangerDomain_cat
+      GrayInterchangerCodomain_cat
+      gray_interchanger_lhs_func
+      gray_interchanger_rhs_func
+      gray_interchanger_base_identity
+      gray_interchanger_base_identity
+      gray_interchanger_transf;
+
+assert ⊢
+  @fapp0
+    (Hom_cat
+      GrayInterchangerDomain_cat
+      gray_interchanger_base_identity
+      gray_interchanger_base_identity)
+    (Hom_cat
+      GrayInterchangerCodomain_cat
+      gray_interchanger_source
+      gray_interchanger_target)
+    gray_interchanger_next_func
+    (@id
+      GrayInterchangerDomain_cat
+      gray_interchanger_base_identity)
+  ≡ gray_interchanger;
+
+assertnot ⊢
+  gray_interchanger
+  ≡ @id GrayInterchangerCodomain_cat gray_interchanger_source;
+
+assertnot ⊢
+  gray_interchanger
+  ≡ @tapp1_pre_laxity_cell
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      gray_square_inner_tgt_func
+      gray_square_outer_transf
+      walking_arrow_src
+      walking_arrow_tgt
+      walking_arrow_tgt
+      walking_arrow_generator
+      (@id WalkingArrow_cat walking_arrow_tgt);

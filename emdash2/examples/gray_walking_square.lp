@@ -17,7 +17,7 @@ assert ⊢
   gray_square_inner_src_data
   ≡ @fapp0
       WalkingArrow_cat
-      (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+      (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
       (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
       walking_arrow_src;
 
@@ -25,7 +25,7 @@ assert ⊢
   gray_square_inner_tgt_data
   ≡ @fapp0
       WalkingArrow_cat
-      (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+      (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
       (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
       walking_arrow_tgt;
 
@@ -79,7 +79,7 @@ assert ⊢
   gray_square_outer_transf
   ≡ @fapp1_fapp0
       WalkingArrow_cat
-      (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+      (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
       (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
       walking_arrow_src
       walking_arrow_tgt

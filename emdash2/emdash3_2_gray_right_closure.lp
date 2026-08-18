@@ -10,8 +10,8 @@
   This is one right-closure boundary, not a full Crans--Gray tensor: it adds
   no mirror closure, tensor action in the parameters, monoidal coherence, or
   global migration of the prototype's strict functoriality/naturality cuts.
-  The oplax name remains provisional until the typed I tensor I interchanger
-  fixes its orientation.
+  The selected internal Hom uses the project's lax direction, confirmed by
+  the typed I tensor I interchanger.
 */
 
 require open emdash.emdash3_2_gray_profiles;
@@ -25,13 +25,13 @@ injective symbol GrayTensor_R
 symbol GrayRightSource
   (A B C : Cat)
   : Cat
-≔ @GrayHom_oplax (@GrayTensor_R A B) C;
+≔ @GrayHom_lax (@GrayTensor_R A B) C;
 
-// Target category of strict outer maps into the oplax-profiled inner Hom.
+// Target category of strict outer maps into the lax-profiled inner Hom.
 symbol GrayRightTarget
   (A B C : Cat)
   : Cat
-≔ @GrayHom_oplax A (@GrayHom_oplax B C);
+≔ @GrayHom_lax A (@GrayHom_lax B C);
 
 // Computationally strict whole curry operation.
 injective symbol gray_curry_R_data
@@ -188,35 +188,35 @@ symbol gray_coevaluation_R_data
   (A B : Cat)
   : τ (@StrictFunctorData
       A
-      (@GrayHom_oplax B (@GrayTensor_R A B)))
+      (@GrayHom_lax B (@GrayTensor_R A B)))
 ≔ @gray_curry_R
     A B (@GrayTensor_R A B)
     (@strict_identity_data (@GrayTensor_R A B));
 
 symbol gray_coevaluation_R_func
   (A B : Cat)
-  : τ (@Functor A (@GrayHom_oplax B (@GrayTensor_R A B)))
+  : τ (@Functor A (@GrayHom_lax B (@GrayTensor_R A B)))
 ≔ @strict_functor_carrier
     A
-    (@GrayHom_oplax B (@GrayTensor_R A B))
+    (@GrayHom_lax B (@GrayTensor_R A B))
     (@gray_coevaluation_R_data A B);
 
 // Evaluation/elimination is uncurry applied to the internal-Hom identity code.
 symbol gray_evaluation_R_data
   (B C : Cat)
   : τ (@StrictFunctorData
-      (@GrayTensor_R (@GrayHom_oplax B C) B)
+      (@GrayTensor_R (@GrayHom_lax B C) B)
       C)
 ≔ @gray_uncurry_R
-    (@GrayHom_oplax B C) B C
-    (@strict_identity_data (@GrayHom_oplax B C));
+    (@GrayHom_lax B C) B C
+    (@strict_identity_data (@GrayHom_lax B C));
 
 symbol gray_evaluation_R_func
   (B C : Cat)
   : τ (@Functor
-      (@GrayTensor_R (@GrayHom_oplax B C) B)
+      (@GrayTensor_R (@GrayHom_lax B C) B)
       C)
 ≔ @strict_functor_carrier
-    (@GrayTensor_R (@GrayHom_oplax B C) B)
+    (@GrayTensor_R (@GrayHom_lax B C) B)
     C
     (@gray_evaluation_R_data B C);

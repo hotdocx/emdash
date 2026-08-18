@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2168
-- Mapped areas: 105
+- Total checks: 2177
+- Mapped areas: 106
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -124,6 +124,7 @@ stable mathematical-area scopes rather than source locations.
 | Walking arrow from the directed join | 10 |
 | Profiled Gray right closure | 14 |
 | Walking square from Gray coevaluation | 23 |
+| Directed Gray walking-square interchanger | 9 |
 
 ## Section Details
 
@@ -2750,13 +2751,13 @@ stable mathematical-area scopes rather than source locations.
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 2115 | 24701 | `assert [A B : Cat] (S : τ (@StrictFunctorData A B)) ⊢ S : τ (Obj (@GrayHom_oplax A B));` |
-| 2116 | 24705 | `assert [A B : Cat] (X Y : τ (Obj (@GrayHom_oplax A B))) ⊢ Hom_cat (@GrayHom_oplax A B) X Y ≡ @Transf_cat A B (@stric ...` |
-| 2117 | 24713 | `assert [A B : Cat] (X : τ (Obj (@GrayHom_oplax A B))) ⊢ @id (@GrayHom_oplax A B) X : τ (Hom (@Functor_cat A B) (@str ...` |
-| 2118 | 24721 | `assert [A B : Cat] (X Y Z : τ (Obj (@GrayHom_oplax A B))) (g : τ (Hom (@GrayHom_oplax A B) Y Z)) (f : τ (Hom (@GrayH ...` |
-| 2119 | 24731 | `assert [A B : Cat] (X Y : τ (Obj (@GrayHom_oplax A B))) ⊢ @fapp1_func (@GrayHom_oplax A B) (@Functor_cat A B) (@gray ...` |
+| 2115 | 24701 | `assert [A B : Cat] (S : τ (@StrictFunctorData A B)) ⊢ S : τ (Obj (@GrayHom_lax A B));` |
+| 2116 | 24705 | `assert [A B : Cat] (X Y : τ (Obj (@GrayHom_lax A B))) ⊢ Hom_cat (@GrayHom_lax A B) X Y ≡ @Transf_cat A B (@strict_fu ...` |
+| 2117 | 24713 | `assert [A B : Cat] (X : τ (Obj (@GrayHom_lax A B))) ⊢ @id (@GrayHom_lax A B) X : τ (Hom (@Functor_cat A B) (@strict_ ...` |
+| 2118 | 24721 | `assert [A B : Cat] (X Y Z : τ (Obj (@GrayHom_lax A B))) (g : τ (Hom (@GrayHom_lax A B) Y Z)) (f : τ (Hom (@GrayHom_l ...` |
+| 2119 | 24731 | `assert [A B : Cat] (X Y : τ (Obj (@GrayHom_lax A B))) ⊢ @fapp1_func (@GrayHom_lax A B) (@Functor_cat A B) (@grayhom_ ...` |
 | 2120 | 24746 | `assert [A B : Cat] (S : τ (@StrictFunctorData A B)) [X Y Z : τ (Obj A)] (g : τ (Hom A Y Z)) (f : τ (Hom A X Y)) ⊢ @f ...` |
-| 2121 | 24764 | `assertnot [A B : Cat] (F : τ (Functor A B)) ⊢ F : τ (Obj (@GrayHom_oplax A B));` |
+| 2121 | 24764 | `assertnot [A B : Cat] (F : τ (Functor A B)) ⊢ F : τ (Obj (@GrayHom_lax A B));` |
 
 ### Walking arrow from the directed join
 
@@ -2777,8 +2778,8 @@ stable mathematical-area scopes rather than source locations.
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 2132 | 24842 | `assert [A B C : Cat] ⊢ @GrayRightSource A B C ≡ @GrayHom_oplax (@GrayTensor_R A B) C;` |
-| 2133 | 24846 | `assert [A B C : Cat] ⊢ @GrayRightTarget A B C ≡ @GrayHom_oplax A (@GrayHom_oplax B C);` |
+| 2132 | 24842 | `assert [A B C : Cat] ⊢ @GrayRightSource A B C ≡ @GrayHom_lax (@GrayTensor_R A B) C;` |
+| 2133 | 24846 | `assert [A B C : Cat] ⊢ @GrayRightTarget A B C ≡ @GrayHom_lax A (@GrayHom_lax B C);` |
 | 2134 | 24850 | `assert [A B C : Cat] ⊢ @gray_curry_R_func A B C ≡ @strict_functor_carrier (@GrayRightSource A B C) (@GrayRightTarget ...` |
 | 2135 | 24857 | `assert [A B C : Cat] ⊢ @gray_uncurry_R_func A B C ≡ @strict_functor_carrier (@GrayRightTarget A B C) (@GrayRightSour ...` |
 | 2136 | 24865 | `assert [A B C : Cat] (H K : τ (Obj (@GrayRightSource A B C))) ⊢ @fapp1_func (@GrayRightSource A B C) (@GrayRightTarg ...` |
@@ -2787,7 +2788,7 @@ stable mathematical-area scopes rather than source locations.
 | 2139 | 24899 | `assert [A B C : Cat] (H : τ (Obj (@GrayRightSource A B C))) ⊢ @gray_uncurry_curry_R_at A B C H : τ (@= (Obj (@GrayRi ...` |
 | 2140 | 24907 | `assert [A B C : Cat] (K : τ (Obj (@GrayRightTarget A B C))) ⊢ @gray_curry_uncurry_R_at A B C K : τ (@= (Obj (@GrayRi ...` |
 | 2141 | 24916 | `assert [A B : Cat] ⊢ @gray_coevaluation_R_data A B ≡ @gray_curry_R A B (@GrayTensor_R A B) (@strict_identity_data (@ ...` |
-| 2142 | 24922 | `assert [B C : Cat] ⊢ @gray_evaluation_R_data B C ≡ @gray_uncurry_R (@GrayHom_oplax B C) B C (@strict_identity_data ( ...` |
+| 2142 | 24922 | `assert [B C : Cat] ⊢ @gray_evaluation_R_data B C ≡ @gray_uncurry_R (@GrayHom_lax B C) B C (@strict_identity_data (@G ...` |
 | 2143 | 24929 | `assertnot [A B : Cat] ⊢ @GrayTensor_R A B ≡ @Product_cat A B;` |
 | 2144 | 24933 | `assertnot [A B C : Cat] ⊢ @GrayRightTarget A B C ≡ @Functor_cat A (@Functor_cat B C);` |
 | 2145 | 24938 | `assertnot [A B C : Cat] (H : τ (Obj (@GrayRightSource A B C))) ⊢ @gray_uncurry_R A B C (@gray_curry_R A B C H) ≡ H;` |
@@ -2797,8 +2798,8 @@ stable mathematical-area scopes rather than source locations.
 | # | Check line | Statement |
 | ---: | ---: | --- |
 | 2146 | 24946 | `assert ⊢ GrayWalkingSquare_cat ≡ @GrayTensor_R WalkingArrow_cat WalkingArrow_cat;` |
-| 2147 | 24950 | `assert ⊢ gray_square_inner_src_data ≡ @fapp0 WalkingArrow_cat (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat ...` |
-| 2148 | 24958 | `assert ⊢ gray_square_inner_tgt_data ≡ @fapp0 WalkingArrow_cat (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat ...` |
+| 2147 | 24950 | `assert ⊢ gray_square_inner_src_data ≡ @fapp0 WalkingArrow_cat (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat) ...` |
+| 2148 | 24958 | `assert ⊢ gray_square_inner_tgt_data ≡ @fapp0 WalkingArrow_cat (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat) ...` |
 | 2149 | 24966 | `assert ⊢ gray_square_obj00 : τ (Obj GrayWalkingSquare_cat);` |
 | 2150 | 24967 | `assert ⊢ gray_square_obj01 : τ (Obj GrayWalkingSquare_cat);` |
 | 2151 | 24968 | `assert ⊢ gray_square_obj10 : τ (Obj GrayWalkingSquare_cat);` |
@@ -2807,7 +2808,7 @@ stable mathematical-area scopes rather than source locations.
 | 2154 | 24981 | `assert ⊢ gray_square_inner_tgt_generator_func : τ (Functor Terminal_cat (Hom_cat GrayWalkingSquare_cat gray_square_o ...` |
 | 2155 | 24990 | `assert ⊢ gray_square_inner_src_arrow ≡ @fapp1_fapp0 WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_fun ...` |
 | 2156 | 25000 | `assert ⊢ gray_square_inner_tgt_arrow ≡ @fapp1_fapp0 WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_tgt_fun ...` |
-| 2157 | 25011 | `assert ⊢ gray_square_outer_transf ≡ @fapp1_fapp0 WalkingArrow_cat (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare ...` |
+| 2157 | 25011 | `assert ⊢ gray_square_outer_transf ≡ @fapp1_fapp0 WalkingArrow_cat (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_c ...` |
 | 2158 | 25021 | `assert ⊢ gray_square_outer_src_eval_func ≡ @tapp0_func WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_ ...` |
 | 2159 | 25030 | `assert ⊢ gray_square_outer_tgt_eval_func ≡ @tapp0_func WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_ ...` |
 | 2160 | 25039 | `assert ⊢ gray_square_outer_src_arrow ≡ @tapp0_fapp0 WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_fun ...` |
@@ -2819,3 +2820,17 @@ stable mathematical-area scopes rather than source locations.
 | 2166 | 25064 | `assertnot ⊢ gray_square_obj01 ≡ gray_square_obj11;` |
 | 2167 | 25065 | `assertnot ⊢ gray_square_obj10 ≡ gray_square_obj11;` |
 | 2168 | 25067 | `assertnot ⊢ GrayWalkingSquare_cat ≡ @Product_cat WalkingArrow_cat WalkingArrow_cat;` |
+
+### Directed Gray walking-square interchanger
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 2169 | 25074 | `assert [A B C : Cat] ⊢ @GrayRightTarget A B C ≡ @GrayHom_lax A (@GrayHom_lax B C);` |
+| 2170 | 25078 | `assert ⊢ gray_square_post_composite : τ (Obj GrayInterchangerCodomain_cat);` |
+| 2171 | 25082 | `assert ⊢ gray_square_pre_composite : τ (Obj GrayInterchangerCodomain_cat);` |
+| 2172 | 25086 | `assert ⊢ gray_interchanger_transf ≡ @tapp1_post_laxity_transf WalkingArrow_cat GrayWalkingSquare_cat gray_square_inn ...` |
+| 2173 | 25099 | `assert ⊢ gray_interchanger ≡ @tapp1_post_laxity_cell WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_fu ...` |
+| 2174 | 25113 | `assert ⊢ gray_interchanger_next_func ≡ @tapp1_func GrayInterchangerDomain_cat GrayInterchangerCodomain_cat gray_inte ...` |
+| 2175 | 25124 | `assert ⊢ @fapp0 (Hom_cat GrayInterchangerDomain_cat gray_interchanger_base_identity gray_interchanger_base_identity) ...` |
+| 2176 | 25140 | `assertnot ⊢ gray_interchanger ≡ @id GrayInterchangerCodomain_cat gray_interchanger_source;` |
+| 2177 | 25144 | `assertnot ⊢ gray_interchanger ≡ @tapp1_pre_laxity_cell WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_ ...` |

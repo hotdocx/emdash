@@ -6,11 +6,11 @@
   classifier.  The existing extracted compositor computes to identity only
   at that decoded shape; ordinary ambient functors retain their laxity cell.
 
-  GrayHom_oplax is the selected strict-object/lax-arrow category.  Its homs
+  GrayHom_lax is the selected strict-object/lax-arrow category.  Its homs
   are the existing Transf_cat homs between decoded carriers, so modifications
   and every subsequent iterated hom remain owned by the ambient calculus.
-  The oplax name remains provisional until the right-closure I tensor I
-  consumer confirms the direction of the interchanger.
+  The I tensor I consumer confirms the selected post/left interchanger as
+  the project's standard lax direction.
 */
 
 require open emdash.emdash3_2;
@@ -120,21 +120,21 @@ constant symbol strict_identity_carrier_path
       (@id_func A));
 
 // Strict-object/lax-arrow right-hom profile.
-injective symbol GrayHom_oplax
+injective symbol GrayHom_lax
   (A B : Cat)
   : Cat;
 
-rule Obj (@GrayHom_oplax $A $B)
+rule Obj (@GrayHom_lax $A $B)
   ↪ @StrictFunctorData $A $B;
 
-rule Hom_cat (@GrayHom_oplax $A $B) $X $Y
+rule Hom_cat (@GrayHom_lax $A $B) $X $Y
   ↪ @Transf_cat
       $A $B
       (@strict_functor_carrier $A $B $X)
       (@strict_functor_carrier $A $B $Y);
 
 // Identity delegates to the ambient functor category.
-rule @id (@GrayHom_oplax $A $B) $X
+rule @id (@GrayHom_lax $A $B) $X
   ↪ @id
       (@Functor_cat $A $B)
       (@strict_functor_carrier $A $B $X);
@@ -142,7 +142,7 @@ rule @id (@GrayHom_oplax $A $B) $X
 // Composition delegates to the ambient functor category.
 // lhs-audit: keep 2,3,4 -- the carrier projections occur on the RHS.
 rule @comp_fapp0
-      (@GrayHom_oplax $A $B) $X $Y $Z $g $f
+      (@GrayHom_lax $A $B) $X $Y $Z $g $f
   ↪ @comp_fapp0
       (@Functor_cat $A $B)
       (@strict_functor_carrier $A $B $X)
@@ -151,18 +151,18 @@ rule @comp_fapp0
       $g $f;
 
 // Whole inclusion into the shared ambient functor category.
-injective symbol grayhom_oplax_include_func
+injective symbol grayhom_lax_include_func
   (A B : Cat)
   : τ (Functor
-      (@GrayHom_oplax A B)
+      (@GrayHom_lax A B)
       (@Functor_cat A B));
 
-rule @fapp0 _ _ (@grayhom_oplax_include_func $A $B) $X
+rule @fapp0 _ _ (@grayhom_lax_include_func $A $B) $X
   ↪ @strict_functor_carrier $A $B $X;
 
 // The profile is full on the reused ambient transformation homs.
 rule @fapp1_func _ _
-      (@grayhom_oplax_include_func $A $B) $X $Y
+      (@grayhom_lax_include_func $A $B) $X $Y
   ↪ @id_func
       (@Transf_cat
         $A $B

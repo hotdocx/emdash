@@ -1071,8 +1071,10 @@ record.
   coevaluation/evaluation. The fourth row derives the four objects and both
   coordinate arrow families of `I tensor I` from that coevaluation and the
   retained walking generator, with whole owners in both directions and no
-  Cartesian collapse. The next row projects the interchanger from the active
-  whole laxity action and retains its next hom action. Mirror closure, full
+  Cartesian collapse. The fifth row projects the nonidentity interchanger
+  from the active whole post/left laxity action, retains its next hom action,
+  and confirms the `GrayHom_lax` orientation without adding a square axiom or
+  endpoint bridge. Only the synchronized closeout remains. Mirror closure, full
   biclosed/monoidal Crans--Gray structure, global strict-cut migration,
   groupoidification, and book work remain excluded. The first semantic row is
   checkpointed at `9222dad`; the derived walking-arrow row is checkpointed at

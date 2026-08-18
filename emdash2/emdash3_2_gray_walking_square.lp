@@ -9,8 +9,8 @@
   evaluators.  No tensor vertex, edge, rule, or unifier is postulated here.
 
   This module supplies the boundary consumed by the subsequent interchanger
-  projection.  It does not yet identify the selected profile's lax/oplax
-  orientation or claim the Cartesian, mirror-closed, or monoidal structure.
+  projection.  The selected profile has the project's lax orientation; this
+  module still claims no Cartesian, mirror-closed, or monoidal structure.
 */
 
 require open emdash.emdash3_2_gray_right_closure;
@@ -26,7 +26,7 @@ symbol gray_square_inner_src_data
   : τ (@StrictFunctorData WalkingArrow_cat GrayWalkingSquare_cat)
 ≔ @fapp0
     WalkingArrow_cat
-    (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+    (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
     (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
     walking_arrow_src;
 
@@ -34,7 +34,7 @@ symbol gray_square_inner_tgt_data
   : τ (@StrictFunctorData WalkingArrow_cat GrayWalkingSquare_cat)
 ≔ @fapp0
     WalkingArrow_cat
-    (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+    (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
     (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
     walking_arrow_tgt;
 
@@ -169,7 +169,7 @@ symbol gray_square_outer_transf
       gray_square_inner_tgt_func)
 ≔ @fapp1_fapp0
     WalkingArrow_cat
-    (@GrayHom_oplax WalkingArrow_cat GrayWalkingSquare_cat)
+    (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
     (@gray_coevaluation_R_func WalkingArrow_cat WalkingArrow_cat)
     walking_arrow_src
     walking_arrow_tgt

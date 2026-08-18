@@ -10,11 +10,11 @@ require open emdash.emdash3_2_gray_right_closure;
 
 assert [A B C : Cat] ⊢
   @GrayRightSource A B C
-  ≡ @GrayHom_oplax (@GrayTensor_R A B) C;
+  ≡ @GrayHom_lax (@GrayTensor_R A B) C;
 
 assert [A B C : Cat] ⊢
   @GrayRightTarget A B C
-  ≡ @GrayHom_oplax A (@GrayHom_oplax B C);
+  ≡ @GrayHom_lax A (@GrayHom_lax B C);
 
 assert [A B C : Cat] ⊢
   @gray_curry_R_func A B C
@@ -92,19 +92,19 @@ assert [A B : Cat] ⊢
   @gray_coevaluation_R_func A B
   ≡ @strict_functor_carrier
       A
-      (@GrayHom_oplax B (@GrayTensor_R A B))
+      (@GrayHom_lax B (@GrayTensor_R A B))
       (@gray_coevaluation_R_data A B);
 
 assert [B C : Cat] ⊢
   @gray_evaluation_R_data B C
   ≡ @gray_uncurry_R
-      (@GrayHom_oplax B C) B C
-      (@strict_identity_data (@GrayHom_oplax B C));
+      (@GrayHom_lax B C) B C
+      (@strict_identity_data (@GrayHom_lax B C));
 
 assert [B C : Cat] ⊢
   @gray_evaluation_R_func B C
   ≡ @strict_functor_carrier
-      (@GrayTensor_R (@GrayHom_oplax B C) B)
+      (@GrayTensor_R (@GrayHom_lax B C) B)
       C
       (@gray_evaluation_R_data B C);
 
