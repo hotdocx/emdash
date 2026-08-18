@@ -10,10 +10,11 @@ Reusable Nat addition, canonical successor path functor, and sethood live in the
 `emdash3_2_nat_arithmetic.lp` module. The walking-endomorphism directed-HIT/
 `BNat` presentation and its restricted-CoreIncl spiral specialization live
 downstream in `emdash3_2_walking_end_hit.lp` under the July 17 living plan.
-The successor-localized Integer, groupoidal Circle HIT and loop-space
-calculation, concrete WalkingEnd-to-Circle comparison, and representative
-product closure live in the four downstream `emdash3_2_*` modules recorded by
-the August 14 groupoidal-closure plan.
+The successor-localized Integer, groupoidal Circle and interval HITs,
+loop-space calculation, concrete WalkingEnd-to-Circle comparison,
+WalkingArrow-to-interval mapping theorem, and representative
+product closure live in the downstream `emdash3_2_*` modules recorded by the
+August groupoidal-realization plans.
 The isolated binary-Sum experiment was retired on 2026-07-20 for later
 consumer-led redesign; it is not part of the active foundation.
 
@@ -270,6 +271,58 @@ was first completed using only propositional loop observations. The later
 reviewed normal-form migration makes the canonical dependent Circle
 path-constructor beta judgmental without changing the whole universality
 statement; its ordinary `eq_ap` projection remains propositional.
+
+The groupoidal interval supplies the first non-endomorphism source test. It
+has two point constructors and one path:
+
+```text
+i0 i1 : Interval
+seg   : i0 = i1.
+```
+
+For a family `D : Interval -> Grpd`, endpoint data `b0 : D(i0)` and
+`b1 : D(i1)`, and `ell : PathOver(D,seg,b0,b1)`, dependent interval induction
+computes judgmentally at both points and on the generating segment:
+
+```text
+apd(interval_ind(D,b0,b1,ell),seg) = ell.
+```
+
+Again this equality denotes conversion at the `PathOver` owner. Ordinary
+`ap` for constant-family recursion remains a propositional observation.
+
+Let `WalkingArrow` be the already-derived join of two terminal categories.
+Its endpoints and generator come from the join inclusions and whole cross
+action; the interval construction does not replace it with a handcrafted
+directed source. The deployed comparison
+
+```text
+u_I : WalkingArrow -> Path(Interval)
+```
+
+computes at the two endpoints and sends the generator to `seg`
+propositionally. Its whole join-eliminator presentation records the structural
+origin of that action. For every `G : Grpd`, restriction and interval
+extension give
+
+```text
+Res^I_G : Hom(Interval,G) -> Functor(WalkingArrow,Path(G))
+Ext^I_G : Functor(WalkingArrow,Path(G)) -> Hom(Interval,G)
+
+Ext^I_G o Res^I_G = id
+Res^I_G o Ext^I_G = id.
+```
+
+Extension recurses on the two endpoint images and the image of the walking
+generator. It is whole in the input representation and retains higher action;
+the cancellation laws are whole functor paths packaged as a fixed-forward
+`OmegaEquivAlong Cat_cat`. Their segment and source-generator readings are
+dependent `PathOver` projections, not object-only equations. The self-target
+case distinguishes the two endpoint computations. This establishes the
+universal free-inversion boundary for one directed arrow with different
+endpoints. It still does not construct free inversion of arbitrary
+composition relations or higher cells, hence does not define generic
+`Groupoidify`.
 
 Products supply a representative closure theorem. The canonical functor
 
@@ -5004,8 +5057,10 @@ The current foundations intentionally do not yet include:
 - generic abstraction of the completed walking-endomorphism presentation into
   a reusable directed-HIT/free-category schema, full functor-category
   initiality, a displayed dependent path-action/section construction, and
-  generic groupoidification beyond the checked WalkingEnd-to-Circle
-  comparison and `Hom(Circle,Circle) ≃ Integer` calculation; the
+  generic groupoidification beyond the checked WalkingEnd-to-Circle and
+  WalkingArrow-to-interval mapping theorems and the
+  `Hom(Circle,Circle) ≃ Integer` calculation; the interval theorem covers one
+  non-endomorphism arrow but not arbitrary composition or higher cells; the
   ordinary raw-function `path_map_func` is already the complete selected
   nondependent action, and no generic selected-action registry is planned
   without a concrete new consumer;
@@ -5199,6 +5254,9 @@ kernel and one-way library vocabulary.
 | truncation point / restricted induction / map | `trunc_intro n A a` / `trunc_ind` / `trunc_map` |
 | Circle mere connectedness | `CircleConnected x` / `circle_connected x` |
 | contractibility of the set-truncated Circle | `circle_set_trunc_is_contr` |
+| groupoidal interval points and segment | `interval_i0` / `interval_i1` / `interval_seg` |
+| dependent interval induction | `interval_ind` / `interval_ind_beta_seg` |
+| WalkingArrow--interval mapping equivalence | `walking_interval_groupoidification_hom_omega` |
 | pointwise paths between dependent functions | `PiPointwisePath A B f g` |
 | diagonal Pi path observation / extension | `PiHapply p` / `PiFunext h` |
 | Pi happly/funext equivalence | `pi_happly_type_equiv A B f g` |

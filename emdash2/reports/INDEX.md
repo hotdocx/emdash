@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-08-17
+Date: 2026-08-18
 
 `../../docs/EMDASH_BOOK_V3_2_POST_INTEGRATION_EXPANSION_PLAN_2026-08-04.md`
 is the active cross-layer editorial and implementation ledger for the
@@ -1113,11 +1113,15 @@ record.
   source shapes.
 
 - `REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md`:
-  active bounded first-consumer successor to the Circle computation tranche
-  and completed WalkingEnd--Circle universality decision. The current launch
-  reuses `WalkingArrow_cat` for the two-endpoint groupoidal-interval mapping
-  theorem only. The composable-pair/2-simplex consumer and any generic indexed
-  categorical-HIT, source action, or adjunction remain proposed later rows.
+  completed bounded first-consumer successor to the Circle computation tranche
+  and WalkingEnd--Circle universality decision. The launch reuses
+  `WalkingArrow_cat`, adds the two-endpoint groupoidal interval with
+  judgmental dependent segment computation, and proves the whole
+  fixed-forward mapping-object equivalence against every groupoidal target.
+  Endpoint-sensitive positive/negative reviewers and exact 202-target health
+  closeout are green; the implementation is checkpointed at `76f43b3`. The
+  composable-pair/2-simplex consumer and any generic indexed categorical-HIT,
+  source action, or adjunction remain proposed later rows.
 
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization

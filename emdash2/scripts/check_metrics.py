@@ -45,6 +45,11 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_telescope_localization_hit.lp"),
     Path("emdash3_2_integer_localization.lp"),
     Path("emdash3_2_circle_hit.lp"),
+    Path("emdash3_2_groupoidal_interval_hit.lp"),
+    Path("emdash3_2_walking_interval_comparison.lp"),
+    Path("emdash3_2_walking_interval_restriction.lp"),
+    Path("emdash3_2_walking_interval_extension.lp"),
+    Path("emdash3_2_walking_interval_universality.lp"),
     Path("emdash3_2_walking_circle_completion.lp"),
     Path("emdash3_2_walking_circle_restriction.lp"),
     Path("emdash3_2_walking_circle_extension.lp"),
@@ -308,16 +313,67 @@ def check_state_identity(
     }
 
 
-def load_resume_checks(path: Path, identity: dict[str, object]) -> dict[str, CheckResult]:
+def resume_identity_is_compatible(
+    previous: dict[str, object],
+    current: dict[str, object],
+    root: Path = ROOT,
+) -> bool:
+    """Accept exact state, or an additive file-list extension with exact old bytes."""
+    if previous == current:
+        return True
+
+    stable_keys = (
+        "state_version",
+        "lambdapi_version",
+        "timeout",
+        "warnings_enabled",
+        "extra_lambdapi_flags",
+    )
+    if any(previous.get(key) != current.get(key) for key in stable_keys):
+        return False
+
+    previous_files = previous.get("files")
+    current_files = current.get("files")
+    previous_snapshot = previous.get("content_snapshot")
+    if not isinstance(previous_files, list) or not isinstance(current_files, list):
+        return False
+    if not isinstance(previous_snapshot, str):
+        return False
+    if not set(previous_files).issubset(set(current_files)):
+        return False
+
+    paths: list[Path] = []
+    for file_name in previous_files:
+        if not isinstance(file_name, str):
+            return False
+        path = Path(file_name)
+        if path.is_absolute() or ".." in path.parts or not (root / path).is_file():
+            return False
+        paths.append(path)
+    return check_content_snapshot(paths, root) == previous_snapshot
+
+
+def load_resume_checks(
+    path: Path,
+    identity: dict[str, object],
+    root: Path = ROOT,
+) -> dict[str, CheckResult]:
     try:
         state = json.loads(path.read_text(encoding="utf-8"))
     except (FileNotFoundError, json.JSONDecodeError, OSError):
         return {}
-    if state.get("identity") != identity:
+    previous_identity = state.get("identity")
+    if not isinstance(previous_identity, dict):
         return {}
+    if not resume_identity_is_compatible(previous_identity, identity, root):
+        return {}
+    previous_files = previous_identity.get("files")
+    allowed_files = set(previous_files) if isinstance(previous_files, list) else None
     checks: dict[str, CheckResult] = {}
     for file_name, item in state.get("checks", {}).items():
-        if item.get("returncode") == 0:
+        if isinstance(item, dict) and item.get("returncode") == 0 and (
+            allowed_files is None or file_name in allowed_files
+        ):
             checks[file_name] = CheckResult(
                 file=file_name,
                 returncode=0,

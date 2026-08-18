@@ -73,6 +73,52 @@ class CheckMetricsTests(unittest.TestCase):
         self.assertEqual(resumed["ok.lp"].evidence, "resumed")
         self.assertEqual(stale, {})
 
+    def test_resume_state_reuses_unchanged_subset_after_additive_extension(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            old_source = root / "old.lp"
+            new_source = root / "new.lp"
+            old_source.write_text("symbol old : TYPE;\n", encoding="utf-8")
+            new_source.write_text("symbol new : TYPE;\n", encoding="utf-8")
+            shared = {
+                "state_version": 1,
+                "lambdapi_version": "test",
+                "timeout": "90s",
+                "warnings_enabled": False,
+                "extra_lambdapi_flags": "",
+            }
+            previous = {
+                **shared,
+                "files": ["old.lp"],
+                "content_snapshot": check_content_snapshot(
+                    [Path("old.lp")], root
+                ),
+            }
+            current = {
+                **shared,
+                "files": ["old.lp", "new.lp"],
+                "content_snapshot": check_content_snapshot(
+                    [Path("old.lp"), Path("new.lp")], root
+                ),
+            }
+            state = root / "state.json"
+            write_resume_checks(
+                state,
+                previous,
+                {
+                    "old.lp": CheckResult("old.lp", 0, 1.25),
+                    "new.lp": CheckResult("new.lp", 0, 9.99),
+                },
+            )
+
+            resumed = load_resume_checks(state, current, root)
+            old_source.write_text("symbol changed : TYPE;\n", encoding="utf-8")
+            stale = load_resume_checks(state, current, root)
+
+        self.assertEqual(list(resumed), ["old.lp"])
+        self.assertEqual(resumed["old.lp"].evidence, "resumed")
+        self.assertEqual(stale, {})
+
     def test_snapshot_is_independent_of_timings_and_generation_date(self) -> None:
         files = {
             "emdash3_2.lp": {

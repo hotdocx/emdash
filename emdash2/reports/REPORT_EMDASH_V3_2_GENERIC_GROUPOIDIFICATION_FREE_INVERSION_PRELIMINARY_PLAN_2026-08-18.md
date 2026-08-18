@@ -4,9 +4,9 @@ Date: 2026-08-18 (America/Toronto)
 
 Plan-ID: `GENERIC-GROUPOIDIFICATION-FREE-INVERSION-V3.2`
 
-Status: **active living implementation plan with a bounded first-consumer
-launch**. The current persistent goal owns only `GGFI-00` and
-`GGFI-INTERVAL-1`; later rows remain proposed.
+Status: **completed bounded first-consumer launch; generic continuation
+remains proposed**. The completed persistent goal owned only `GGFI-00` and
+`GGFI-INTERVAL-1`; later rows remain proposed and require a new launch.
 
 Parent:
 `REPORT_EMDASH_V3_2_INTERNAL_LAXITY_AND_GROUPOIDAL_REALIZATION_CONTINUATION_PLAN_2026-08-17.md`
@@ -46,9 +46,9 @@ this dedicated descendant worktree and validated local checkpoint commits.
 It does not authorize push, merge, publication, release, history rewrite,
 branch deletion, or worktree removal.
 
-## Current Launch Boundary
+## Completed Launch Boundary
 
-The active goal is the first non-endomorphism vertical slice only:
+The completed goal was the first non-endomorphism vertical slice only:
 
 ```text
 GGFI-00 + GGFI-INTERVAL-1
@@ -327,7 +327,7 @@ must reduce to the already-checked unit, restriction, and extension owners.
 | Row | Status | Deliverable and acceptance boundary |
 | --- | --- | --- |
 | `GGFI-00` | complete | The authorized worktree/branch descends cleanly from Circle checkpoint `29ff54d`; bootstrap and workspace contract pass. The anti-duplication scan finds the existing join-derived `WalkingArrow_cat`, distinct endpoints, whole generator, and retained next action, but no active `Interval_grpd`, interval eliminator, or walking-arrow/interval mapping theorem. Focused walking-arrow, Circle-computation, and WalkingEnd--Circle universality baselines pass in 2.6--3.0 seconds; no aggregate ran. |
-| `GGFI-INTERVAL-1` | in progress; implementation green | The public interval HIT, join-derived comparison presentation, stable deployed unit, whole restriction/extension, fixed-forward `OmegaEquivAlong`, endpoint/generator projections, retained next action, and positive/negative reviewer are implemented and focused-green. The self-target reviewer exercises genuinely different endpoints; wrong-target and endpoint-collapse readings fail. Remaining work is closeout synchronization and proportional registered evidence only. Do not declare generic groupoidification or begin the triangle row. |
+| `GGFI-INTERVAL-1` | complete | The public interval HIT, join-derived comparison presentation, stable deployed unit, whole restriction/extension, fixed-forward `OmegaEquivAlong`, endpoint/generator projections, retained next action, and positive/negative reviewers are implemented and synchronized. The self-target reviewer exercises genuinely different endpoints; wrong-target and endpoint-collapse readings fail. Exact health is green for 202 targets by reusing 195 rehashed unchanged snapshots and checking the seven new targets fresh. Generic groupoidification and the triangle row remain unstarted. |
 | `GGFI-TRIANGLE-2` | proposed | Derive the walking composable pair from join; implement the explicit groupoidal 2-simplex/composition filler and whole mapping equivalence; retain one next-dimensional coherence and document the strict/lax profile boundary. |
 | `GGFI-SIGNATURE-3` | proposed | Compare the two consumers and record the smallest uniform indexed categorical-HIT signature. Reject an opaque adjunction or a cell-by-cell handwritten infinite record. |
 | `GGFI-HIT-4` | proposed | Promote `Groupoidify(C)`, its whole unit, and target-varying whole extension with object/first-cell computation and iterable higher action. Include wrong-source/target rejection and warning/LHS/subject-reduction audits. |
@@ -446,10 +446,30 @@ dependency closure reports `1113`; the additional pair is the pre-existing
 an interval-owned overlap. The sources are registered in `scripts/check.sh`.
 No long aggregate ran.
 
-This completes the mathematical implementation promised by the current
-launch boundary. Catalog/health and authority closeout remain before the row
-and persistent goal can be marked complete. `GGFI-TRIANGLE-2` and every
-generic-reflector row remain untouched.
+This completes the mathematical implementation promised by the launch
+boundary. `GGFI-TRIANGLE-2` and every generic-reflector row remain untouched.
+
+## Bounded Launch Closeout — 2026-08-18
+
+The active authority map, current SOP, Foundations, canonical notation,
+reports index, and parent master ledger now describe the interval HIT and its
+one-source mapping theorem without promoting a generic reflector. The five
+new sources are registered in both the kernel checker and health collector;
+the two reviewers are discovered by the ordinary examples registry.
+
+The selected warning boundary remains `1112/159`. The interval source audits
+have zero unreviewed LHS candidates, and the central strict audit remains zero
+unreviewed clauses. The generated catalog remains at 2,183 classified central
+checks across 107 areas with no legacy or unclassified entry. Exact health is
+green for 202 targets: 90 source/diagnostic files and 112 reviewer examples.
+The health tool rehashed the exact 195-target predecessor subset before
+reusing it, then checked the five new sources and two new reviewers fresh;
+all seven passed in 2.469--2.610 seconds. No long aggregate was rerun. The
+source-metrics snapshot is
+`sha256:73f84710ac00429de03b1063daddbce4b0aa5edf3b425dd0ebc47dd88e4efa87`;
+the checked-content snapshot is
+`sha256:8502d080e23dbf1987088f9a05c09ac20cb25290a3d6d1574c745ba5f51164d0`.
+The whole universality implementation is checkpointed at `76f43b3`.
 
 ## Acceptance And Stop Conditions
 
@@ -480,7 +500,7 @@ root, TypeScript, browser, print, book, or package aggregates are outside this
 kernel goal unless a changed cross-layer contract makes one strictly
 necessary.
 
-## Current Persistent Goal Objective
+## Completed Persistent Goal Boundary
 
 ```text
 Complete the bounded first-consumer launch of

@@ -170,6 +170,19 @@ the transparent integer facade over successor telescope localization is
 the opaque one-dimensional Circle HIT, its judgmental dependent loop action,
 its universal cover, and the checked based-loop/Integer equivalence are
 `emdash3_2_circle_hit.lp`;
+the two-endpoint groupoidal interval HIT, with judgmental point and dependent
+segment computation, is `emdash3_2_groupoidal_interval_hit.lp`;
+the join-presented WalkingArrow-to-interval comparison and its deployed
+endpoint-computing unit are `emdash3_2_walking_interval_comparison.lp`;
+the whole restriction of interval functions along that unit, including its
+endpoint-dependent generator observation and retained hom action, is
+`emdash3_2_walking_interval_restriction.lp`;
+the whole interval extension of WalkingArrow representations, with computing
+endpoint observations, propositional ordinary generator beta, and retained
+higher action, is `emdash3_2_walking_interval_extension.lp`;
+the fixed-forward WalkingArrow--interval mapping-object equivalence, with
+whole beta/eta and dependent endpoint/generator projections, is
+`emdash3_2_walking_interval_universality.lp`;
 the concrete directed WalkingEnd-to-Circle comparison is
 `emdash3_2_walking_circle_completion.lp`;
 the whole restriction of Circle functions to WalkingEnd representations,
@@ -818,14 +831,33 @@ Use the following order:
     whole beta recovers the original WalkingEnd representation, and transport
     around the actual family loop agrees with the equivalence's forward map.
     It adds no independent code family, univalence axiom, rule, or unifier;
-85. `emdash3_2_checks.lp` for executable regression statements;
-86. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+85. `emdash3_2_groupoidal_interval_hit.lp` for the opaque two-endpoint
+    groupoidal interval HIT. Its dependent eliminator computes judgmentally
+    at both points and through the stable `eq_apd` owner on the generating
+    segment; constant-family ordinary `eq_ap` remains propositional;
+86. `emdash3_2_walking_interval_comparison.lp` for the concrete
+    WalkingArrow-to-interval unit. It retains a whole join-eliminator
+    presentation, computes judgmentally at both endpoints, compares the
+    generator propositionally, and exposes first and next hom action;
+87. `emdash3_2_walking_interval_restriction.lp` for whole precomposition of
+    interval functions along that unit. Endpoint observations and the
+    endpoint-dependent generator `PathOver` derive from one whole comparison;
+88. `emdash3_2_walking_interval_extension.lp` for the whole inverse candidate
+    built by interval recursion from the two endpoint images and the selected
+    generator. Its endpoint betas compute, ordinary generator beta remains
+    propositional, and generic higher action remains iterable;
+89. `emdash3_2_walking_interval_universality.lp` for the rule-free
+    source-specific universal mapping property against every `G : Grpd`.
+    Whole beta/eta package restriction as `OmegaEquivAlong Cat_cat`, with
+    dependent endpoint/generator projections and no generic `Groupoidify`;
+90. `emdash3_2_checks.lp` for executable regression statements;
+91. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-87. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-88. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+92. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+93. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-89. `reports/INDEX.md` for task-specific plans and decision records.
-90. `book/book.json` and `book/evidence.json` for book source
+94. `reports/INDEX.md` for task-specific plans and decision records.
+95. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
@@ -905,7 +937,10 @@ EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=90s make check
 `scripts/check.sh`, `scripts/check_examples.sh`, `scripts/probe.sh`,
 `scripts/check_warning_summary.sh`, and `scripts/check_metrics.py` all default
 to 90 seconds per Lambdapi target. Resumable health evidence still requires
-exact checked-content and environment identity, including the timeout.
+exact checked-content and environment identity, including the timeout. An
+additive registered-file extension may reuse only the predecessor file subset
+whose paths and bytes rehash to its recorded snapshot under the same
+environment; every newly registered target must check fresh.
 
 All check/probe/metrics scripts append `EMDASH_LAMBDAPI_FLAGS`, for example:
 

@@ -1552,6 +1552,50 @@ are judgmental in the current kernel. The ordinary `ap(Mon_e,loop)` equation
 and the displayed monodromy comparisons remain propositional. This notation
 does not assert a generic `Groupoidify` on every category.
 
+## WalkingArrow--Interval Universality Notation
+
+For the non-endomorphism free-inversion consumer, distinguish the directed
+walking arrow from its groupoidal interval target:
+
+```text
+I_dir              = WalkingArrow
+i0 i1 : I_grp
+seg : i0 = i1
+u_I : I_dir -> Path(I_grp).
+```
+
+The dependent interval computation is judgmental:
+
+```text
+apd(interval_ind(D,b0,b1,ell),seg) == ell.
+```
+
+Point computation at `i0` and `i1` is judgmental as well. The ordinary
+constant-family equation `ap(interval_rec(...),seg) = ell` and the generator
+equation for `u_I` remain propositional; use `=` rather than `==` for those
+readings.
+
+For every `G : Grpd`, write the checked whole mapping equivalence as
+
+```text
+Res^I_G : Hom(I_grp,G) -> Functor(I_dir,Path(G))
+Ext^I_G : Functor(I_dir,Path(G)) -> Hom(I_grp,G)
+
+Ext^I_G o Res^I_G = id
+Res^I_G o Ext^I_G = id
+Res^I_G : Hom(I_grp,G) ~= Functor(I_dir,Path(G)).
+```
+
+The kernel owners are `walking_interval_restrict_func`,
+`walking_interval_extend_func`, and
+`walking_interval_groupoidification_hom_omega`. Endpoint, segment, and source
+generator readings use the named `*_i0_path`, `*_i1_path`, `*_seg_pathover`,
+and `*_generator_pathover` projections. Do not flatten a dependent segment or
+generator `PathOver` into a homogeneous equality. `I_grp` is expository
+notation for `Interval_grpd`, not an implemented parser token. This theorem
+handles the single WalkingArrow source; it does not introduce a generic
+`Groupoidify` operation.
+
 ## Computational Truncation And Circle Notation
 
 In mathematical comments and reviewer prose, write homotopy truncation as

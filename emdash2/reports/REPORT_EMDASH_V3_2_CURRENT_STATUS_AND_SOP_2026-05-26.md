@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-17
+Last consolidated: 2026-08-18
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -402,6 +402,33 @@ detailed probe evidence.
   proof. Its ordinary `eq_ap` loop equation remains propositional. Its based
   loop type and the corresponding categorical Hom are explicitly `TypeEquiv`
   to Integer.
+- `emdash3_2_groupoidal_interval_hit.lp`: one-way opaque groupoidal interval
+  HIT. It owns two distinct endpoint constructors and one generating path,
+  with judgmental computation at both points and on the dependent segment
+  through the stable `eq_apd` owner. Constant-family recursion inherits those
+  dependent betas; its ordinary `eq_ap` segment observation remains
+  propositional.
+- `emdash3_2_walking_interval_comparison.lp`: concrete comparison from the
+  existing join-derived `WalkingArrow_cat` to `Path_cat(Interval_grpd)`. A
+  whole profunctor cross cell carries `interval_seg`, the join eliminator
+  gives the structural presentation, and one stable deployed unit computes at
+  both endpoints while retaining first and next hom action. Generator
+  agreement is scoped propositional rather than a generic join-arrow rule.
+- `emdash3_2_walking_interval_restriction.lp`: transparent whole restriction
+  of interval functions along that deployed unit. Endpoint readings and the
+  endpoint-dependent generator `PathOver` derive from one whole functor path,
+  and ordinary precomposition retains first hom action.
+- `emdash3_2_walking_interval_extension.lp`: whole inverse candidate on
+  WalkingArrow representations into `Path_cat(G)`. Interval recursion uses
+  the two endpoint images and the selected generator; endpoint observations
+  compute judgmentally, ordinary generator beta remains propositional, and
+  the primitive whole owner retains first and next action.
+- `emdash3_2_walking_interval_universality.lp`: rule-free whole
+  mapping-object equivalence against every groupoidal target. Scoped
+  categorical-HIT uniqueness supplies both whole cancellation paths and
+  packages restriction as `OmegaEquivAlong Cat_cat`; point, endpoint,
+  segment, and source-generator readings remain dependent projections. This
+  is a non-endomorphism source-shape theorem, not generic `Groupoidify`.
 - `emdash3_2_walking_circle_completion.lp`: transparent rule-free concrete
   comparison from WalkingEnd to Circle. It sends the directed generator and
   every Nat power to the Circle generator and its nonnegative powers, and the
@@ -477,10 +504,9 @@ detailed probe evidence.
   Restricted elimination first turns each merely inhabited based-path fibre
   into a path in `Trunc_grpd(0,Circle_grpd)` and then contracts every point of
   that set truncation. The resulting `IsContr` evidence does not rewrite the
-  carrier to `Unit_grpd`. The current maintained health boundary, including
-  the subsequent Gray slice, is green across 81 source/diagnostic files and
-  105 reviewer examples; the focused plans record their warning, rule-audit,
-  catalog, and snapshot evidence.
+  carrier to `Unit_grpd`. The exact current cross-module health boundary is
+  recorded in the validation section below; the focused plans retain their
+  historical warning, rule-audit, catalog, and snapshot evidence.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
@@ -4511,26 +4537,31 @@ warnings remain measured diagnostic evidence, not a claim of global
 confluence.
 
 After integration of the completed TypeScript-elaborator, PSSS, internal-
-laxity, profiled-Gray, WalkingEnd--Circle, and dependent Circle-computation
-histories, the exact-current selected-source warning boundary is 1,271
+laxity, profiled-Gray, WalkingEnd--Circle, dependent Circle-computation, and
+bounded WalkingArrow--interval histories, the exact-current selected-source
+warning boundary is 1,271
 diagnostics: 1,112 unjoinable critical pairs and 159
 replaceable-pattern advisories. The strict
 LHS audit is zero unreviewed clauses, 58 annotated slots, and 34 intentional
 clauses. The generated catalog contains 2,183 classified checks across 107
 areas with zero legacy or unclassified entries.
 
-The exact-current registered health boundary is green for all 195 maintained
-targets—85 source/diagnostic files and 110 reviewer examples—under the uniform
-90-second per-target ceiling. The August 18 closeout is fresh rather than
-carried: all 195 targets report exit 0, with 2,150.131 summed check-seconds.
-The central diagnostics pass in 59.598 seconds, the Circle source in 5.778
-seconds, and the new judgmental-loop reviewer in 5.551 seconds. The
-source-metrics snapshot is
-`sha256:8822b00394ad59764ee8857497e0e1ea227da7ccf0ae3bf5aca5ca6a77a053c4`
+The exact-current registered health boundary is green for all 202 maintained
+targets—90 source/diagnostic files and 112 reviewer examples—under the uniform
+90-second per-target ceiling. All 202 report exit 0, with 2,167.963 summed
+check-seconds. The 195 unchanged August 18 targets were reused only after the
+health tool rehashed their exact file subset and matched its environment to
+the prior checked-content identity; the five new interval sources and two new
+reviewers were checked fresh in 2.469--2.610 seconds each. The central
+diagnostics retain their exact 59.598-second evidence. The source-metrics
+snapshot is
+`sha256:73f84710ac00429de03b1063daddbce4b0aa5edf3b425dd0ebc47dd88e4efa87`
 and the checked-content snapshot is
-`sha256:fa157dd07517f5467001672aa86c7534852d58d19e1874f3b008fbbfd5e226d1`.
-This was the one necessary closeout aggregate; redundant `make check`,
-`make examples`, `make ci`, and repository-wide aggregates were not rerun.
+`sha256:8502d080e23dbf1987088f9a05c09ac20cb25290a3d6d1574c745ba5f51164d0`.
+No long aggregate was rerun. The additive-resume path is unit-tested and
+rejects a changed predecessor byte, environment mismatch, removed target, or
+non-relative state path; redundant `make check`, `make examples`, `make ci`,
+and repository-wide aggregates remain intentionally omitted.
 
 ## Book And Renderer Workflow
 
