@@ -1085,6 +1085,19 @@ record.
   interchanger is checkpointed at `e2f069c`; synchronized closeout is
   checkpointed at `053fcce`.
 
+- `REPORT_EMDASH_V3_2_WALKING_CIRCLE_GROUPOIDIFICATION_UNIVERSALITY_PLAN_2026-08-17.md`:
+  active consumer-first child of the internal-laxity/groupoidal-realization
+  master. It reopens `ILGR-GROUPIFY-1` through the concrete question whether
+  whole precomposition along `walking_to_circle_func` gives an
+  `OmegaEquivAlong Cat_cat` from Circle functions into a groupoid `G` to
+  WalkingEnd functors into `Path_cat(G)`. The first row reuses
+  `Path_cat_func` and generic whole precomposition without a new rule; later
+  rows must construct the Circle extension on transformations and its next
+  action before generic `Groupoidify_func` or `Adjunction` packaging is
+  allowed. A universe-valued automorphism/monodromy example is the named
+  target-side consumer. Mirror Gray closure, global strict-cut migration,
+  book work, push, merge, and publication remain excluded.
+
 - `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization
   decision record. It provides the sorted `NType_cat(n)`

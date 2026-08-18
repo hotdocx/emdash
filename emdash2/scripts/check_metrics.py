@@ -46,6 +46,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_integer_localization.lp"),
     Path("emdash3_2_circle_hit.lp"),
     Path("emdash3_2_walking_circle_completion.lp"),
+    Path("emdash3_2_walking_circle_restriction.lp"),
     Path("emdash3_2_groupoidal_closure.lp"),
     Path("emdash3_2_path_pseudo_laxity.lp"),
     Path("emdash3_2_gray_profiles.lp"),

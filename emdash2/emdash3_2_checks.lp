@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow emdash.emdash3_2_gray_right_closure emdash.emdash3_2_gray_walking_square emdash.emdash3_2_gray_interchanger;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow emdash.emdash3_2_gray_right_closure emdash.emdash3_2_gray_walking_square emdash.emdash3_2_gray_interchanger emdash.emdash3_2_walking_circle_restriction;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -25154,3 +25154,50 @@ assertnot ⊢
       walking_arrow_tgt
       walking_arrow_generator
       (@id WalkingArrow_cat walking_arrow_tgt);
+
+// catalog-area: WalkingEnd--Circle groupoidification restriction
+// Circle functions act through Path_cat_func and whole precomposition; the
+// stable object owner retains its next action and a dependent loop boundary.
+assert [G : Grpd] ⊢
+  @walking_circle_restrict_func G
+  : τ (Functor
+      (Hom_cat Grpd_cat Circle_grpd G)
+      (Functor_cat WalkingEnd_cat (Path_cat G)));
+
+assert [G : Grpd]
+  (h : τ (@Function_grpd Circle_grpd G)) ⊢
+  @walking_circle_restrict_at G h
+  ≡ @hom_precomp_along_fapp0
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      (Path_cat G)
+      WalkingEnd_cat Circle_cat
+      walking_to_circle_func
+      (@path_map_func Circle_grpd G h);
+
+assert [G : Grpd]
+  (h : τ (@Function_grpd Circle_grpd G)) ⊢
+  @walking_circle_restrict_base_path G h
+  : τ (@= G
+      (@fapp0
+        WalkingEnd_cat (Path_cat G)
+        (@walking_circle_restrict_at G h)
+        walking_base)
+      (h circle_base));
+
+assert [G : Grpd]
+  [h k : τ (@Function_grpd Circle_grpd G)] ⊢
+  @walking_circle_restrict_hom_func G h k
+  : τ (Functor
+      (Hom_cat
+        (Hom_cat Grpd_cat Circle_grpd G)
+        h k)
+      (Hom_cat
+        (Functor_cat WalkingEnd_cat (Path_cat G))
+        (@walking_circle_restrict_at G h)
+        (@walking_circle_restrict_at G k)));
+
+assertnot ⊢
+  walking_circle_restrict_func Nat_grpd
+  : τ (Functor
+      (Hom_cat Grpd_cat Circle_grpd Unit_grpd)
+      (Functor_cat WalkingEnd_cat (Path_cat Nat_grpd)));

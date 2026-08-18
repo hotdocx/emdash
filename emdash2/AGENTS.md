@@ -171,6 +171,10 @@ the opaque one-dimensional Circle HIT, its universal cover, and the checked
 based-loop/Integer equivalence are `emdash3_2_circle_hit.lp`;
 the concrete directed WalkingEnd-to-Circle comparison is
 `emdash3_2_walking_circle_completion.lp`;
+the whole restriction of Circle functions to WalkingEnd representations,
+including its stable-precomposition reading, base observation, dependent
+generator `PathOver`, and retained first hom action, is
+`emdash3_2_walking_circle_restriction.lp`;
 the rule-free Path-product preservation and coherent product-transport
 extension is `emdash3_2_groupoidal_closure.lp`;
 the rule-free Path realization of the generic functor compositor, its
@@ -773,14 +777,22 @@ Use the following order:
     supplies the loop `PathOver`, so no untruncated global path is selected.
     Eliminating this mere path evidence into the set truncation proves
     `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier rewrite to Unit;
-80. `emdash3_2_checks.lp` for executable regression statements;
-81. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+81. `emdash3_2_walking_circle_restriction.lp` for the transparent rule-free
+    forward half of the selected WalkingEnd--Circle groupoidification
+    universality consumer. It acts on Circle functions through
+    `Path_cat_func`, precomposes by `walking_to_circle_func`, retains the
+    generic stable precomposition object normal form and first hom action,
+    and derives its readable base path and dependent loop `PathOver` from one
+    whole functor comparison. It constructs no extension inverse, beta/eta,
+    generic reflector, rule, or unifier;
+82. `emdash3_2_checks.lp` for executable regression statements;
+83. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-82. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-83. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+84. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+85. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-84. `reports/INDEX.md` for task-specific plans and decision records.
-85. `book/book.json` and `book/evidence.json` for book source
+86. `reports/INDEX.md` for task-specific plans and decision records.
+87. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

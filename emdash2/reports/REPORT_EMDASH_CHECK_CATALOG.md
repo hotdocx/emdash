@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2177
-- Mapped areas: 106
+- Total checks: 2182
+- Mapped areas: 107
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -125,6 +125,7 @@ stable mathematical-area scopes rather than source locations.
 | Profiled Gray right closure | 14 |
 | Walking square from Gray coevaluation | 23 |
 | Directed Gray walking-square interchanger | 9 |
+| WalkingEnd--Circle groupoidification restriction | 5 |
 
 ## Section Details
 
@@ -2834,3 +2835,13 @@ stable mathematical-area scopes rather than source locations.
 | 2175 | 25124 | `assert ⊢ @fapp0 (Hom_cat GrayInterchangerDomain_cat gray_interchanger_base_identity gray_interchanger_base_identity) ...` |
 | 2176 | 25140 | `assertnot ⊢ gray_interchanger ≡ @id GrayInterchangerCodomain_cat gray_interchanger_source;` |
 | 2177 | 25144 | `assertnot ⊢ gray_interchanger ≡ @tapp1_pre_laxity_cell WalkingArrow_cat GrayWalkingSquare_cat gray_square_inner_src_ ...` |
+
+### WalkingEnd--Circle groupoidification restriction
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 2178 | 25161 | `assert [G : Grpd] ⊢ @walking_circle_restrict_func G : τ (Functor (Hom_cat Grpd_cat Circle_grpd G) (Functor_cat Walki ...` |
+| 2179 | 25167 | `assert [G : Grpd] (h : τ (@Function_grpd Circle_grpd G)) ⊢ @walking_circle_restrict_at G h ≡ @hom_precomp_along_fapp ...` |
+| 2180 | 25177 | `assert [G : Grpd] (h : τ (@Function_grpd Circle_grpd G)) ⊢ @walking_circle_restrict_base_path G h : τ (@= G (@fapp0 ...` |
+| 2181 | 25187 | `assert [G : Grpd] [h k : τ (@Function_grpd Circle_grpd G)] ⊢ @walking_circle_restrict_hom_func G h k : τ (Functor (H ...` |
+| 2182 | 25199 | `assertnot ⊢ walking_circle_restrict_func Nat_grpd : τ (Functor (Hom_cat Grpd_cat Circle_grpd Unit_grpd) (Functor_cat ...` |
