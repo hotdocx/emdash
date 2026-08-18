@@ -6,7 +6,7 @@ Plan-ID: `WALKING-CIRCLE-GROUPOIDIFICATION-UNIVERSALITY-V3.2`
 
 Status: **active consumer-first implementation plan**. `WCGU-00`,
 `WCGU-RES-1`, `WCGU-EXT-2`, and `WCGU-EQUIV-3` are complete; `WCGU-MONO-4`
-is the next dependency-ready row.
+is complete and `WCGU-GENERIC-5` is the next dependency-ready row.
 Local green checkpoint commits are authorized by the user's
 standing instruction for this continuation. Push, merge, publication,
 release, history rewrite, branch deletion, and worktree removal are not
@@ -248,7 +248,7 @@ group before set truncation is `Integer`.
 | `WCGU-EXT-2` | complete | `emdash3_2_walking_circle_extension.lp` promotes the narrow whole categorical-HIT recursor missing from the object-only Circle interface. Its object projection computes to Circle recursion on the WalkingEnd base and generator; transformation action is compared propositionally with the path obtained from pointwise Path equivalences and functor-category univalence; generic `fapp1_func` retains the next action. The source and eight-check reviewer pass directly, including a mismatched-target rejection. The single object rule has exact zero warning delta against its import-only control (`1123/159` on both), and strict LHS audit remains zero. The already near-limit monolithic diagnostics target was restored unchanged after two clean 90-second import-graph timeouts; its previous green/catalog evidence is carried forward, while the focused reviewer owns this extension's regressions. Checkpoint: `2149219`. |
 | `WCGU-EQUIV-3` | complete | `emdash3_2_walking_circle_universality.lp` adds exactly the two scoped categorical-HIT uniqueness clauses needed for `extend o restrict = id` and `restrict o extend = id` as paths between whole functors. It packages restriction as `walking_circle_groupoidification_hom_omega : OmegaEquivAlong Cat_cat`; both selected inverse projections compute to the whole extension, whose first and second hom actions remain available. Circle/WalkingEnd point and generator observations are derived by `eq_ap`/`eq_apd`, including both dependent loop boundaries. Direct source and 12-check reviewer pass with a mismatched-target rejection; the rule-free source has exact zero warning delta from extension (`1123/159`), and strict LHS audit remains zero. The focused reviewer owns regressions under the already-recorded monolithic-target budget decision. Checkpoint: `e0b20f7`. |
 | `WCGU-CIRCLE-COMP-TODO` | deferred | Revisit judgmental computation for the Circle path constructor after `WCGU-EQUIV-3`, or earlier only if a concrete consumer shows that propositional loop beta materially obstructs computation. Any promotion is a separate normal-form migration with owner-position, subject-reduction, critical-pair, warning, and downstream audits; it is not silently bundled into universality. |
-| `WCGU-MONO-4` | pending | Exercise the result at the universe target: an equivalence/automorphism produces a Circle family, and restriction recovers its WalkingEnd base/generator data. Keep this a consumer of the whole theorem, not an independent axiom. |
+| `WCGU-MONO-4` | complete | `emdash3_2_walking_circle_monodromy.lp` specializes universality at `Grpd_grpd`. A self-`TypeEquiv(A,A)` is decoded to `grpd_equiv_path(e)`, forms the canonical WalkingEnd representation, and extends to the literal Circle recursor on that loop. Whole beta recovers the original representation after restriction; base and loop paths are derived, and transport around the actual family loop agrees with `type_equiv_to(e)`. The rule-free source and seven-check reviewer pass, including a mismatched-codomain rejection, with exact zero warning delta (`1123/159`) and zero LHS growth. Checkpoint: to be recorded after this green tranche commit. |
 | `WCGU-GENERIC-5` | pending | Decide from the completed consumer whether a reusable `Groupoidify_func`, unit, transpose, higher action, and `Adjunction(Groupoidify_func,Path_cat_func)` can be promoted honestly. Implement only the validated generic layer, or record the exact free-inversion prerequisite and keep the generic reflector deferred. |
 | `WCGU-CLOSE-1` | pending | Synchronize source/example ownership, master ledger, Foundations/SOP/canonical syntax, report index, catalog, warnings/LHS evidence, and proportional health/CI only for the boundary actually changed. Record remaining book, Gray-mirror, strict-cut, and HIT work separately. |
 
@@ -387,6 +387,38 @@ module is rule-free and has exactly the extension source's warning inventory,
 unchanged under the `WCGU-EXT-2` target-budget decision, and its prior strict
 catalog evidence is carried forward. Health, CI, and all-target aggregates
 remain deferred to closeout.
+
+### Completed `WCGU-MONO-4` result — 2026-08-18
+
+For a groupoid `A` and self-equivalence `e`, the selected univalence decoder
+gives
+
+```text
+grpd_equiv_path(e) : A = A.
+```
+
+The ordinary WalkingEnd recursor makes this the generator of a whole
+representation in `Path_cat(Grpd_grpd)`. Applying the newly established
+inverse produces a Circle-indexed family which computes to
+
+```text
+circle_rec(Grpd_grpd,A,grpd_equiv_path(e)).
+```
+
+The result is not merely a familiar objectwise code construction. The whole
+beta path proves that restricting this family recovers the original
+WalkingEnd representation. Its projections recover the base and generator,
+and applying the existing transport/univalence comparison proves that
+transport around the actual Circle loop sends `a : A` to
+`type_equiv_to(e,a)`.
+
+The source and focused seven-check reviewer pass directly, including a
+mismatched-codomain rejection. The module is rule-free and inherits exactly
+the universality source's `1123/159` warning inventory; strict LHS audit
+remains zero. It therefore validates the mapping-object theorem through a
+mathematically meaningful local-system/monodromy consumer without adding a
+second Circle code family, new univalence principle, or consumer-specific
+computation rule.
 
 ## Validation Policy
 

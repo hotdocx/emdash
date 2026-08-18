@@ -181,6 +181,10 @@ next hom action, is `emdash3_2_walking_circle_extension.lp`;
 the whole fixed-forward WalkingEnd--Circle mapping-object equivalence, with
 scoped categorical-HIT beta/eta uniqueness and dependent point/generator
 projections, is `emdash3_2_walking_circle_universality.lp`;
+the universe-valued monodromy consumer, taking a groupoid automorphism to a
+Circle family whose loop transport applies that automorphism and whose
+restriction recovers the original WalkingEnd representation, is
+`emdash3_2_walking_circle_monodromy.lp`;
 the rule-free Path-product preservation and coherent product-transport
 extension is `emdash3_2_groupoidal_closure.lp`;
 the rule-free Path realization of the generic functor compositor, its
@@ -806,14 +810,20 @@ Use the following order:
     inverse directions retain the extension's higher action. It adds no
     generic `Groupoidify`, adjunction, rule, unifier, or judgmental Circle
     loop beta;
-84. `emdash3_2_checks.lp` for executable regression statements;
-85. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+84. `emdash3_2_walking_circle_monodromy.lp` for the rule-free universe-valued
+    consumer. A self-`TypeEquiv` becomes a universe loop by the selected
+    univalence decoder, the existing whole inverse builds its Circle family,
+    whole beta recovers the original WalkingEnd representation, and transport
+    around the actual family loop agrees with the equivalence's forward map.
+    It adds no independent code family, univalence axiom, rule, or unifier;
+85. `emdash3_2_checks.lp` for executable regression statements;
+86. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-86. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-87. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+87. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+88. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-88. `reports/INDEX.md` for task-specific plans and decision records.
-89. `book/book.json` and `book/evidence.json` for book source
+89. `reports/INDEX.md` for task-specific plans and decision records.
+90. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
