@@ -3,20 +3,17 @@
 Date: 2026-08-19
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
-is the active continuation from the completed simplicial substrate. It aims
-to compare the ordinal mapping category `Functor([n],C)` with the recursively
-computed `homd_`/Sigma cell classifier through one generic join-cone step,
-using the tetrahedron as the first genuinely higher validation rather than as
-the permanent definition. Its first-stage join observation and
-variable-dimension nonempty-face decoder are active; scoped join
-identity/composition still gates a whole Cat-valued semisimplicial nerve.
-The variance gate closes through existing covariant/opposite owners, and the
-recursive dependent triangle/tetrahedron map is now the first and next hom
-action of the same `homd_`/Sigma machinery. Its generic lax, selected binary
-strict, and Path-invertible readings are checked without parallel
-classifiers. Whole mapping-category comparison and the variable-dimension
-induction decision remain ordered gates. Full degeneracies, Kan/Segal/Rezk
-theory, codata, and orientals remain outside the initial scope.
+is the completed bounded continuation from the simplicial substrate. It
+compares the ordinal and recursively dependent presentations as far as the
+current owners justify, using the tetrahedron as the first genuinely higher
+validation rather than as the permanent definition. First-stage join
+observation, variable-dimension nonempty-face realization, the variance audit,
+and an iterable dependent triangle/tetrahedron map are active; generic lax,
+selected binary strict, and Path-invertible readings share those owners.
+Whole semisimplicial/mapping-category assembly is explicitly deferred behind
+`CNB-JOIN-NORMALFORM`, while a single Nat-indexed changing-boundary classifier
+is deferred behind `CNB-VERY-DEP-REC`. Full degeneracies, Kan/Segal/Rezk
+theory, codata, and orientals remain outside the bounded result.
 
 `REPORT_EMDASH_V3_2_SIMPLICIAL_SUBSTRATE_AND_KAN_CONTINUATION_PLAN_2026-08-18.md`
 is the completed categorical-first simplicial continuation. It distinguishes

@@ -4,13 +4,14 @@ Date: 2026-08-19 (America/Toronto)
 
 Plan-ID: `COHERENT-NERVE-DEPENDENT-SIMPLEX-V3.2`
 
-Status: **active bounded implementation plan**. The architecture, baseline
+Status: **completed bounded implementation plan**. The architecture, baseline
 reuse audit, variable-level facade, four selected tetrahedral cofaces,
 first-stage join observation, and variable-dimension face decoder are
 complete at their recorded boundaries. The variance audit and recursive
 dependent-simplex bridge are also complete, including their three scoped
-profile readings; `CNB-GENERIC-10` is the next active decision row while whole
-nerve/bridge assembly remains gated by scoped join uniqueness.
+profile readings. Whole nerve/bridge assembly and a uniform very-dependent
+`RecursiveSimplex(C,n)` remain explicitly deferred behind the two named
+prerequisites recorded below.
 
 Branch: `goal/coherent-nerve-bridge-v3.2`
 
@@ -434,14 +435,14 @@ branch/worktree deletion, or unrelated repository mutation is authorized.
 | `CNB-TETRA-FACE-3` | complete | Promoted four strict-profile triangle cofaces `Delta[2] -> Delta[3]`. All six shared edges compute by `FaceCode`; the three old-base comparisons also compute as whole functors. The three new-vertex functor comparisons remain explicit negative conversion checks and route to generic join-map composition rather than a local rule. |
 | `CNB-JOIN-REC-4` | complete at first-stage boundary; stronger collage comparison deferred | Whole branch restriction, internally derived cross observation, shaped evaluation, and object-level join extension are active in `emdash3_2_join_mapping_recursion.lp`. A full mapping-category equivalence is the previously named join-as-collage/dependent-elimination research boundary and requires a Cat-valued total of mixed-variance coherent squares, compatibility between action-derived and primitive recursor cross observations, and scoped propositional join uniqueness. The object Sigma is not substituted for that category, and no broad eta rewrite is added. |
 | `CNB-FACE-GEN-5` | complete at decoder boundary | `emdash3_2_face_realization.lp` recursively realizes every nonempty raw/public face code in variable dimension. Raw sethood enables public descent; skip/keep and selected low-dimensional branches compute. Whole identity and the first new-vertex composition stop exactly at scoped join identity/composition, so the decoder is not mislabeled as a functor on `SemiDeltaPlus_cat`. |
-| `CNB-NERVE-6` | pending on scoped join identity/composition | Assemble `CoherentNerveRaw(C)` by precomposition only after `face_realize_func` has whole identity/composition comparisons; cross the public Psh facade only through existing projections and retain whole face and next action. |
+| `CNB-NERVE-6` | deferred behind `CNB-JOIN-NORMALFORM` | Assemble `CoherentNerveRaw(C)` by precomposition only after `face_realize_func` has owner-aligned whole identity/composition. The current transparent recursion reaches `join_map_func(id,id)` and nested join-map composition; exposing it as an ordinary functor action before those routes join would conflict with the generic strict functor laws. |
 | `CNB-VARIANCE-7A` | complete; no new mirror or oriental | All four tetrahedral face functors and their precomposition restrictions exist. Post/left uses `homd_int`/`fapp1_at_transf`; pre/right is recovered through `Op`, `hom_con_int`, and `fapp1_con_at_transf`. The established no-associativity tetrahedron retains the mirrored face, so `homd_con_int` is not a concrete requirement. New-vertex failures are join composition, not orientation. |
 | `CNB-CELL-7` | complete | `emdash3_2_dependent_simplex_bridge.lp` exposes the first `homd_`/Sigma triangle, identifies its map with the first hom action of `Sigma(FF)`, and takes its iterable next hom action. A visible `(kappa,lambda)` maps to the same base cell and `fdapp1_int_hom_fapp0(...,lambda)`; the ordinary triangle specializes to `fapp1_compositor`. No standalone tetrahedron is added. |
-| `CNB-BRIDGE-8` | pending on scoped join uniqueness and whole face action | Compare the ordinal mapping-category and recursive-cell presentations wholely at the strongest justified level. All four tetrahedral faces and the recursive top-cell action now exist, but an object-only coincidence is not final completion and the mapping-category side still lacks join identity/composition. |
+| `CNB-BRIDGE-8` | deferred behind `CNB-JOIN-NORMALFORM` and `CNB-VERY-DEP-REC` | All four tetrahedral faces and the recursive top-cell action exist, but a whole mapping-category equivalence requires both the join mapping-data/coherent-square uniqueness boundary and a uniform code for the changing recursive boundary type. An object-only Sigma coincidence is explicitly rejected. |
 | `CNB-PROFILE-9` | complete with explicit strict scope | `examples/dependent_simplex_profiles.lp` checks a noncollapsed general compositor, the existing strict-code identity fold for that same triangle cell, the Path equality/inverse reading, and an equality/inverse reading of the recursive tetrahedron whenever target fibres are path categories. Strict collapse beyond the selected binary compositor is not claimed without a future higher strict-profile consumer. |
-| `CNB-GENERIC-10` | active decision gate | Rows 4--9 now share stable join/internal-action owners. Decide the strongest justified variable-`n` statement: recursive face decoding and iterative dependent-cell action are generic, while whole semisimplicial functoriality/mapping-category comparison still require scoped join uniqueness. Record this as a theorem plan or an exact deferral; do not replace it by orientals or a hard-coded dimension ladder. |
-| `CNB-DOC-11` | pending | Synchronize Foundations, canonical notation, status/source inventories, reviewer examples, and report index only for checked promoted results. |
-| `CNB-CLOSE-12` | pending | Record exact checkpoints, focused evidence, warning deltas, deferred prerequisites, clean state, and safe continuation. No integration/publication. |
+| `CNB-GENERIC-10` | complete decision | Face realization is genuinely generic in `(p,n)`, and the triangle/tetrahedron action is one iterable recursive step. A single Nat-indexed `RecursiveSimplex(C,n)` is not fabricated: its boundary classifier changes dependently with `n` and requires a universe-coded/very-dependent recursor (`CNB-VERY-DEP-REC`). This is independent of the join normal-form gate and does not trigger orientals. |
+| `CNB-DOC-11` | complete | Foundations, canonical notation, root/kernel READMEs, current status, nested authority inventory, report index, source/check registries, health snapshot, and this ledger are synchronized to the promoted boundary. |
+| `CNB-CLOSE-12` | complete | Seven green local checkpoints are recorded; focused quiet/warning evidence has zero owned diagnostic deltas, strict audit and documentation gates pass, the health snapshot is source-only by explicit aggregate waiver, and no excluded Git/publication operation occurred. |
 
 ### 13.1 Variable-Dimension Mapping Levels — 2026-08-19
 
@@ -720,6 +721,71 @@ logs/probes/dependent_simplex_profiles-20260819-012806.log
 logs/probes/dependent_simplex_profiles-20260819-012815.log
 ```
 
+### 13.8 Variable-Dimension Decision And Named Prerequisites — 2026-08-19
+
+The implementation establishes two genuinely generic axes:
+
+1. `face_realize_func` is recursive in arbitrary nonempty source and target
+   dimensions; and
+2. `dependent_triangle_map` followed by
+   `dependent_tetrahedron_map` demonstrates that the same internal action can
+   be iterated without capping its next hom action.
+
+They do not yet combine into one Nat-indexed theorem. The blockers are now
+separated precisely.
+
+`CNB-JOIN-NORMALFORM` is the whole-shape prerequisite. At the directed edge,
+the all-keep code realizes to `join_map_func(id,id)` rather than the ordinary
+identity. At the first new-vertex tetrahedral composite, recursive realization
+and composition produce distinct nested join-map presentations. Declaring
+these as the hom action of an ordinary functor would make the kernel's generic
+strict functor laws demand exactly those missing identity/composition joins.
+A future task must choose and audit a stable join-map owner plus narrowly
+scoped identity/composition computation, or a profile-aware coherent-map
+classifier. It must not install a broad join eta or hide the issue under a
+face-specific fold.
+
+`CNB-VERY-DEP-REC` is the recursive-boundary prerequisite. The type of an
+`n+1`-simplex contains the entire `n`-boundary together with a cell in a
+family whose classifier depends on that boundary. Although every fixed
+triangle/tetrahedron step is now executable, ordinary Nat recursion into a
+single fixed category cannot express this changing telescope directly. A
+future universe-coded boundary description, or another curated
+very-dependent recursion interface, must internalize that changing type
+before the repository can claim a uniform `RecursiveSimplex(C,n)`.
+
+Neither failure is a variance failure. Both orientations needed at dimension
+three are active, and the ordinary ordinal tetrahedron supplied all four faces
+and the top dependent action. Therefore Street orientals, simplicial
+thickenings, degeneracies, and codata remain untriggered research options, not
+repairs for the current bounded result.
+
+### 13.9 Checkpoints And Closeout — 2026-08-19
+
+The bounded history is:
+
+```text
+7793f4f  Plan the coherent nerve bridge
+102c8e5  Add coherent nerve level classifiers
+bcfa5aa  Add the tetrahedron triangle cofaces
+9a0665c  Add first-stage join mapping observation
+61f5d8c  Realize semisimplex faces in variable dimension
+6adb5ba  Expose the recursive dependent simplex bridge
+d98ea6c  Validate dependent simplex profiles
+```
+
+Every behavioral tranche has focused quiet and warning-enabled source/
+reviewer evidence recorded in its subsection. Promoted modules add four
+owner-local face-realization rules in a fresh head and no other rewrite or
+unification rule; the strict inferred-slot audit is green. Active-reference,
+report-header, source-TOC, catalog, and health-snapshot checks pass. The health
+report is deliberately source-metrics-only because the user explicitly
+waived the long all-source/all-example aggregate unless it became necessary;
+the focused checks were sufficient for these additive boundaries.
+
+No push, merge, PR, tag, publication, deployment, history rewrite,
+branch/worktree removal, or unrelated repository mutation was performed.
+
 ## 14. Completion Definition
 
 This goal is complete when every row is complete or explicitly deferred
@@ -730,3 +796,8 @@ and dependent top filler from generic owners or records a precise architectural
 failure; strict and Path specializations state their exact scope; the living
 ledger and active documentation agree; the worktree is clean at green local
 checkpoints; and no excluded Git/publication/aggregate operation has occurred.
+
+This definition is satisfied at the bounded boundary above. The two deferred
+rows name exact prerequisites rather than incomplete hidden work; reopening
+either requires a new plan that explicitly selects `CNB-JOIN-NORMALFORM` or
+`CNB-VERY-DEP-REC`.
