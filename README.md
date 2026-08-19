@@ -46,8 +46,11 @@ path-groupoid 2-nerve computes all three horn fillers. Categorical decalage
 adds whole base and cone-tip observations and selected levelwise cone fibres.
 A variable-dimension decoder now realizes every nonempty skip/keep face code
 by recursive join maps; its whole identity/composition laws remain gated by
-join uniqueness. Degeneracies, generic-dimensional horns/Kan filling, and the
-whole displayed-fibre comparison remain future work.
+join uniqueness. On the dependent side, one `homd_`/Sigma action now exposes
+both compositor triangles and an iterable tetrahedron map whose dependent
+component is the next internal-action projection. Degeneracies,
+generic-dimensional horns/Kan filling, and the whole mapping-category/
+displayed-cell comparison remain future work.
 
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim

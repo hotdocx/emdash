@@ -1068,9 +1068,34 @@ beta o_face alpha               : p hook-> r.
 
 Their kernel owners are `face_skip`, `face_keep`, `face_identity`, and
 `face_comp beta alpha`. Face-code composition, not an external family of
-simplicial equations, owns the coface identities. The geometric realization
-of an arbitrary face code is not yet canonical syntax: only the selected
-cofaces through dimension two have promoted strict-profile functors.
+simplicial equations, owns the coface identities. For nonempty source and
+target ordinals, write
+
+```text
+realize(alpha) : [p] -> [n]
+```
+
+for `face_realize_func alpha`. Its raw computation is
+`realize(skip alpha) = inl o realize(alpha)` and
+`realize(keep alpha) = join_map(realize(alpha),id_1)`. This is an
+ambient-functor-valued decoder, not yet a whole functor from
+`SemiDeltaPlus_cat` to `Cat_cat` and not generic strict-profile evidence:
+identity and composition comparisons remain scoped join-uniqueness work.
+
+For the recursive target-dependent reading, use
+
+```text
+Triangle_E((x,u),(y,v)) = (p,alpha)
+Tetrahedron_E            = (kappa,lambda).
+```
+
+The literal classifiers are `DependentTriangle_catd` and
+`DependentTriangle_cat`; the constructor names are `dependent_triangle` and
+`dependent_tetrahedron`. `dependent_triangle_map(FF)` is the first hom action
+of `Sigma(FF)`, and `dependent_tetrahedron_map(FF)` is its next hom action.
+Do not expand these into a record of external face equations. On a visible
+`(kappa,lambda)`, the dependent output remains the native
+`fdapp1_int_hom_fapp0` projection.
 
 For groupoid-valued diagrams write
 

@@ -3717,6 +3717,57 @@ similarly exposes generic join-map composition. Supplying those comparisons
 by scoped join uniqueness is the exact prerequisite for whole semisimplicial
 shape action; no face-specific fold is installed.
 
+The target-dependent cell presentation is already recursive independently of
+that remaining shape-functor law. For fixed total endpoints `(x,u)` and
+`(y,v)`, define
+
+```text
+DependentTriangle_catd(E,x,u,y,v)
+  = homd_(id_E,x,u,y,v)
+
+DependentTriangle_cat(E,x,u,y,v)
+  = Op(Sigma(DependentTriangle_catd(E,x,u,y,v))).
+```
+
+An object is the native pair `(p,alpha)` of a base arrow and a dependent arrow
+above it. For `FF : Functord(E,D)`, the whole map of triangle classifiers is
+the existing first hom action of `Sigma(FF)`; its displayed part is
+`fdapp1_int_presheaf_arrow(FF)`. Taking the next hom action between two
+triangles gives `dependent_tetrahedron_map`. On the visible second-Sigma
+constructor `(kappa,lambda)`, its image computes as
+
+```text
+(kappa,
+ fdapp1_int_hom_fapp0(
+   fdapp1_int_presheaf_arrow(FF),
+   kappa,
+   lambda)).
+```
+
+The map retains another hom action, so this is not a capped three-cell API. In
+the ordinary specialization
+
+```text
+E  = hom_A(X0,-),
+D  = hom_B(F(X0),F(-)),
+FF = fapp1_at_transf(F,X0),
+```
+
+the canonical triangle over `(g,f)` projects to `fdapp1_int_cell(FF,g,f)`,
+which is exactly `fapp1_compositor(F,g,f)`. Thus dimensions two and three are
+successive projections of one internal action rather than separately stored
+coherence fields.
+
+The variance audit at this boundary is closed without a new displayed mirror.
+All four tetrahedral face functors exist covariantly, while nerve restriction
+is ordinary precomposition. The post/left cell uses `homd_int` and
+`fapp1_at_transf`; the pre/right mirror is already recovered through `Op`,
+`hom_con_int`, and `fapp1_con_at_transf`. The earlier no-associativity
+tetrahedron retained the right-whiskered face and its dependent filler through
+those owners. The remaining new-vertex mismatch is therefore join-map
+composition, not missing orientation: neither `homd_con_int` nor a Street
+oriental is presently justified.
+
 A groupoid-valued semisimplicial object is simply
 
 ```text

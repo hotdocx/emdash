@@ -7,8 +7,9 @@ Plan-ID: `COHERENT-NERVE-DEPENDENT-SIMPLEX-V3.2`
 Status: **active bounded implementation plan**. The architecture, baseline
 reuse audit, variable-level facade, four selected tetrahedral cofaces,
 first-stage join observation, and variable-dimension face decoder are
-complete at their recorded boundaries; `CNB-VARIANCE-7A` is the next active
-audit row while whole nerve assembly remains gated by scoped join uniqueness.
+complete at their recorded boundaries. The variance audit and recursive
+dependent-simplex bridge are also complete; `CNB-PROFILE-9` is the next active
+row while whole nerve/bridge assembly remains gated by scoped join uniqueness.
 
 Branch: `goal/coherent-nerve-bridge-v3.2`
 
@@ -433,10 +434,10 @@ branch/worktree deletion, or unrelated repository mutation is authorized.
 | `CNB-JOIN-REC-4` | complete at first-stage boundary; stronger collage comparison deferred | Whole branch restriction, internally derived cross observation, shaped evaluation, and object-level join extension are active in `emdash3_2_join_mapping_recursion.lp`. A full mapping-category equivalence is the previously named join-as-collage/dependent-elimination research boundary and requires a Cat-valued total of mixed-variance coherent squares, compatibility between action-derived and primitive recursor cross observations, and scoped propositional join uniqueness. The object Sigma is not substituted for that category, and no broad eta rewrite is added. |
 | `CNB-FACE-GEN-5` | complete at decoder boundary | `emdash3_2_face_realization.lp` recursively realizes every nonempty raw/public face code in variable dimension. Raw sethood enables public descent; skip/keep and selected low-dimensional branches compute. Whole identity and the first new-vertex composition stop exactly at scoped join identity/composition, so the decoder is not mislabeled as a functor on `SemiDeltaPlus_cat`. |
 | `CNB-NERVE-6` | pending on scoped join identity/composition | Assemble `CoherentNerveRaw(C)` by precomposition only after `face_realize_func` has whole identity/composition comparisons; cross the public Psh facade only through existing projections and retain whole face and next action. |
-| `CNB-VARIANCE-7A` | active audit gate | Inventory the active covariant and opposite/contravariant projections on the four tetrahedral faces. Reuse `hom_con_int`, `tapp1_con_at_transf`, and `fapp1_con_at_transf`; introduce a displayed `homd_con_int` only if a concrete whole face cannot otherwise be retained. Distinguish a missing variance owner from a genuinely insufficient source shape before considering orientals. |
-| `CNB-CELL-7` | pending | Define the recursive join-cone/dependent-cell observation through dimensions 0--3. Triangle must be `fapp1_compositor`; tetrahedron must reuse the established second `homd_`/Sigma action. |
-| `CNB-BRIDGE-8` | pending | Compare the ordinal mapping-category and recursive-cell presentations wholely at the strongest justified level. Require all four tetrahedral faces and the top dependent filler; reject an object-only coincidence as final completion. |
-| `CNB-PROFILE-9` | pending | Validate general directed-lax, selected strict, and `Path_cat` pseudo readings without duplicating classifiers or collapsing the generic laxity cell. |
+| `CNB-VARIANCE-7A` | complete; no new mirror or oriental | All four tetrahedral face functors and their precomposition restrictions exist. Post/left uses `homd_int`/`fapp1_at_transf`; pre/right is recovered through `Op`, `hom_con_int`, and `fapp1_con_at_transf`. The established no-associativity tetrahedron retains the mirrored face, so `homd_con_int` is not a concrete requirement. New-vertex failures are join composition, not orientation. |
+| `CNB-CELL-7` | complete | `emdash3_2_dependent_simplex_bridge.lp` exposes the first `homd_`/Sigma triangle, identifies its map with the first hom action of `Sigma(FF)`, and takes its iterable next hom action. A visible `(kappa,lambda)` maps to the same base cell and `fdapp1_int_hom_fapp0(...,lambda)`; the ordinary triangle specializes to `fapp1_compositor`. No standalone tetrahedron is added. |
+| `CNB-BRIDGE-8` | pending on scoped join uniqueness and whole face action | Compare the ordinal mapping-category and recursive-cell presentations wholely at the strongest justified level. All four tetrahedral faces and the recursive top-cell action now exist, but an object-only coincidence is not final completion and the mapping-category side still lacks join identity/composition. |
+| `CNB-PROFILE-9` | active | Validate general directed-lax, selected strict, and `Path_cat` pseudo readings of the promoted dependent triangle/tetrahedron action without duplicating classifiers or collapsing the generic laxity cell. |
 | `CNB-GENERIC-10` | pending decision gate | If rows 4--9 use one stable recursive owner, formulate/prove the variable-`n` induction. Otherwise record whether the missing ingredient is join uniqueness, generic face realization, recursive boundary formation, or a richer oriented simplex shape. |
 | `CNB-DOC-11` | pending | Synchronize Foundations, canonical notation, status/source inventories, reviewer examples, and report index only for checked promoted results. |
 | `CNB-CLOSE-12` | pending | Record exact checkpoints, focused evidence, warning deltas, deferred prerequisites, clean state, and safe continuation. No integration/publication. |
@@ -614,6 +615,81 @@ logs/probes/face_realization-20260819-005404.log
 
 The health snapshot was again refreshed in source-metrics-only mode; no long
 registered aggregate was rerun for this additive decoder tranche.
+
+### 13.5 Variance And Orientation Audit — 2026-08-19
+
+The orientation gate closes without a new owner. The four geometric faces
+`012`, `013`, `023`, and `123` are all present as covariant whole functors;
+restriction of mapping levels reverses them by the existing whole
+precomposition functor. On the dependent-cell side, the matrix is:
+
+| Boundary | Active whole source | Fixed projection |
+| --- | --- | --- |
+| post/left | `homd_int`, `fapp1_at_transf` | `tapp1_post_laxity_*` |
+| pre/right | `Op`, `hom_con_int`, `fapp1_con_at_transf` | `tapp1_pre_laxity_*` |
+
+The earlier current-source no-associativity tetrahedron already constructed
+both pasting boundaries and the dependent filler through that matrix. The
+current focused `dependent_hom_laxity`, tetrahedral-face, and face-realization
+reviewers remain green. In particular, the three new-vertex face-code
+composites agree while their functor presentations stop at nested
+`join_map_func`; that is positive evidence for a join-composition failure and
+negative evidence for a missing variance projection.
+
+Therefore a displayed `homd_con_int` has no concrete missing-face consumer,
+and the ordinary ordinal source has not failed its orientation test. Street
+orientals or another thickened source are not triggered. Evidence:
+
+```text
+logs/probes/dependent_hom_laxity-20260819-010034.log
+logs/probes/tetrahedron_faces-20260819-010046.log
+logs/probes/face_realization-20260819-010057.log
+```
+
+### 13.6 Recursive Dependent Triangle And Tetrahedron — 2026-08-19
+
+`emdash3_2_dependent_simplex_bridge.lp` promotes the reusable part of the
+earlier no-associativity experiment rather than naming its selected
+three-arrow filler. For fixed total endpoints it exposes
+
+```text
+DependentTriangle_catd = homd_(id_E,x,u,y,v)
+DependentTriangle_cat  = Op(Sigma(DependentTriangle_catd)).
+```
+
+The whole `dependent_triangle_map(FF)` is definitionally the first hom action
+of `Sigma(FF)`, with displayed action owned by
+`fdapp1_int_presheaf_arrow`. Its next hom action is
+`dependent_tetrahedron_map(FF)`. Applying it to the visible second-Sigma
+constructor `(kappa,lambda)` computes to
+
+```text
+(kappa, fdapp1_int_hom_fapp0(...,kappa,...,lambda)).
+```
+
+The reviewer checks both projections and retains the map's next hom action,
+so the interface is not capped at dimension three. In the ordinary
+specialization based at `X0`, the canonical source triangle over `(g,f)` maps
+through the direct internal-action component, and
+`fapp1_compositor(F,g,f)` is the same `fdapp1_int_cell`. This satisfies the
+dimension-two and dimension-three owner requirements without a manual
+tetrahedron, pentagon, external face record, rule, or unifier.
+
+Focused source and reviewer checks pass quietly and with warnings. Each
+warning stream has the same 1,315 inherited diagnostic headers and no owned
+diagnostic. Evidence:
+
+```text
+logs/probes/dependent_simplex_bridge-20260819-011307.log
+logs/probes/dependent_simplex_bridge-20260819-011334.log
+logs/probes/emdash3_2_dependent_simplex_bridge-20260819-011713.log
+logs/probes/emdash3_2_dependent_simplex_bridge-20260819-011750.log
+logs/probes/dependent_simplex_bridge-20260819-011723.log
+logs/probes/dependent_simplex_bridge-20260819-011800.log
+```
+
+The registered health snapshot is refreshed source-only under the standing
+aggregate-avoidance policy.
 
 ## 14. Completion Definition
 

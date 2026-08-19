@@ -567,6 +567,13 @@ detailed probe evidence.
   syntax permits descent through public `FaceCode`. This is a generic decoder,
   not yet a functor on `SemiDeltaPlus_cat`: all-keep and the first new-vertex
   composite expose the still-missing scoped join identity/composition laws.
+- `emdash3_2_dependent_simplex_bridge.lp`: transparent recursive triangle and
+  tetrahedron presentation through the existing `homd_`/Sigma action. The
+  triangle map is exactly the first hom action of `Sigma(FF)`; its next hom
+  action preserves a visible base cell and computes the dependent component
+  through `fdapp1_int_hom_fapp0`, while retaining another hom action. The
+  ordinary specialization recovers `fapp1_compositor`. No standalone higher
+  cell, rule, unifier, `homd_con_int`, or whole nerve equivalence is added.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

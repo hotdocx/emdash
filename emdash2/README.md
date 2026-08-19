@@ -135,6 +135,13 @@ Identity and composition of those realizations remain a scoped join-
 uniqueness boundary, so this decoder is not yet presented as one whole
 semisimplicial shape functor.
 
+The dependent-cell side is recursive through the existing calculus rather
+than a second simplex record. A triangle is the `Hom(Sigma)` total of one
+`homd_` family; applying a displayed functor gives the first hom action of
+`Sigma(FF)`, and its next action maps `(κ,λ)` to the same base cell together
+with `fdapp1_int_hom_fapp0(...,λ)`. The ordinary dimension-two specialization
+is the active functor compositor, and another higher action remains iterable.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the
