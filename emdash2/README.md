@@ -128,6 +128,13 @@ join cross. Its `(left,right,cross)` package is intentionally object-level;
 the category of coherent-square morphisms and join eta remain explicit work
 rather than an external naturality record.
 
+Every nonempty skip/keep face code now also has a variable-dimension geometric
+realization. Raw recursion sends `skip` to the left join inclusion and `keep`
+to the whole join map, then descends through the public set-classified code.
+Identity and composition of those realizations remain a scoped join-
+uniqueness boundary, so this decoder is not yet presented as one whole
+semisimplicial shape functor.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the

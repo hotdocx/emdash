@@ -3686,6 +3686,37 @@ supply that square. Thus no broad join eta or mapping-category equivalence is
 claimed until a whole coherent-square total and the comparison between the
 action-derived and recursor-owned cross observations are available.
 
+For nonempty ordinals, the same join recursion realizes an arbitrary raw face
+code in every dimension:
+
+```text
+raw_face_realize_func(skip f)
+  = join_fst_func o raw_face_realize_func(f)
+
+raw_face_realize_func(keep f)
+  = join_map_func(raw_face_realize_func(f),id_1).
+```
+
+The one-vertex base computes to identity, and retaining the final vertex of a
+larger target computes to the right join inclusion. `RawFaceCode` is the
+finite indexed skip/keep syntax, hence a set; the current module records that
+curated sethood evidence and uses the existing restricted truncation recursor
+to define
+
+```text
+face_realize_func : FaceCode(succ p,succ n)
+                  -> Functor(DirectedSimplex_cat(p),
+                             DirectedSimplex_cat(n)).
+```
+
+Visible public constructors retain the raw computations. This is presently a
+decoder, not a whole functor from `SemiDeltaPlus_cat` to `Cat_cat`. At the
+directed edge, the all-keep code realizes to `join_map_func(id,id)` rather
+than definitionally to identity. The first tetrahedral new-vertex composite
+similarly exposes generic join-map composition. Supplying those comparisons
+by scoped join uniqueness is the exact prerequisite for whole semisimplicial
+shape action; no face-specific fold is installed.
+
 A groupoid-valued semisimplicial object is simply
 
 ```text

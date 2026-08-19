@@ -5,8 +5,10 @@ Date: 2026-08-19 (America/Toronto)
 Plan-ID: `COHERENT-NERVE-DEPENDENT-SIMPLEX-V3.2`
 
 Status: **active bounded implementation plan**. The architecture, baseline
-reuse audit, variable-level facade, and four selected tetrahedral cofaces are
-complete; `CNB-JOIN-REC-4` is the active implementation row.
+reuse audit, variable-level facade, four selected tetrahedral cofaces,
+first-stage join observation, and variable-dimension face decoder are
+complete at their recorded boundaries; `CNB-VARIANCE-7A` is the next active
+audit row while whole nerve assembly remains gated by scoped join uniqueness.
 
 Branch: `goal/coherent-nerve-bridge-v3.2`
 
@@ -428,10 +430,10 @@ branch/worktree deletion, or unrelated repository mutation is authorized.
 | `CNB-BASE-1` | complete | Dedicated worktree forked from clean `e31a812`; workspace bootstrap and focused shape/diagram/dependent-hom baselines are green. |
 | `CNB-LEVEL-2` | complete | Promoted variable-`n` `CoherentNerveLevel_cat(C,n)`, the separate augmented empty/successor shape, and the augmented mapping-category level. Dimensions 0--3, mapping Homs, retained off-diagonal transfor action, and the dimension/vertex-count noncollapse are checked without a rule or unifier. |
 | `CNB-TETRA-FACE-3` | complete | Promoted four strict-profile triangle cofaces `Delta[2] -> Delta[3]`. All six shared edges compute by `FaceCode`; the three old-base comparisons also compute as whole functors. The three new-vertex functor comparisons remain explicit negative conversion checks and route to generic join-map composition rather than a local rule. |
-| `CNB-JOIN-REC-4` | active; first-stage interface promoted | Whole branch restriction, internally derived cross observation, shaped evaluation, and object-level join extension are active in `emdash3_2_join_mapping_recursion.lp`. Completing the mapping-category equivalence now has three exact prerequisites: a Cat-valued total of mixed-variance coherent squares, compatibility between the action-derived and primitive recursor cross observations, and scoped propositional join uniqueness. Do not substitute the object Sigma for that category or add a broad join eta rewrite. |
-| `CNB-FACE-GEN-5` | pending decision gate | Decide whether raw face-code recursion plus join maps can construct `realize_face` for variable dimensions with identity/composition computation. If not, record the exact prerequisite and keep the tetrahedral bridge bounded. |
-| `CNB-NERVE-6` | pending on generic face realization | Assemble `CoherentNerveRaw(C)` by precomposition and cross the public Psh facade only through existing projections. Retain whole face and next action. |
-| `CNB-VARIANCE-7A` | pending audit gate | Inventory the active covariant and opposite/contravariant projections on the four tetrahedral faces. Reuse `hom_con_int`, `tapp1_con_at_transf`, and `fapp1_con_at_transf`; introduce a displayed `homd_con_int` only if a concrete whole face cannot otherwise be retained. Distinguish a missing variance owner from a genuinely insufficient source shape before considering orientals. |
+| `CNB-JOIN-REC-4` | complete at first-stage boundary; stronger collage comparison deferred | Whole branch restriction, internally derived cross observation, shaped evaluation, and object-level join extension are active in `emdash3_2_join_mapping_recursion.lp`. A full mapping-category equivalence is the previously named join-as-collage/dependent-elimination research boundary and requires a Cat-valued total of mixed-variance coherent squares, compatibility between action-derived and primitive recursor cross observations, and scoped propositional join uniqueness. The object Sigma is not substituted for that category, and no broad eta rewrite is added. |
+| `CNB-FACE-GEN-5` | complete at decoder boundary | `emdash3_2_face_realization.lp` recursively realizes every nonempty raw/public face code in variable dimension. Raw sethood enables public descent; skip/keep and selected low-dimensional branches compute. Whole identity and the first new-vertex composition stop exactly at scoped join identity/composition, so the decoder is not mislabeled as a functor on `SemiDeltaPlus_cat`. |
+| `CNB-NERVE-6` | pending on scoped join identity/composition | Assemble `CoherentNerveRaw(C)` by precomposition only after `face_realize_func` has whole identity/composition comparisons; cross the public Psh facade only through existing projections and retain whole face and next action. |
+| `CNB-VARIANCE-7A` | active audit gate | Inventory the active covariant and opposite/contravariant projections on the four tetrahedral faces. Reuse `hom_con_int`, `tapp1_con_at_transf`, and `fapp1_con_at_transf`; introduce a displayed `homd_con_int` only if a concrete whole face cannot otherwise be retained. Distinguish a missing variance owner from a genuinely insufficient source shape before considering orientals. |
 | `CNB-CELL-7` | pending | Define the recursive join-cone/dependent-cell observation through dimensions 0--3. Triangle must be `fapp1_compositor`; tetrahedron must reuse the established second `homd_`/Sigma action. |
 | `CNB-BRIDGE-8` | pending | Compare the ordinal mapping-category and recursive-cell presentations wholely at the strongest justified level. Require all four tetrahedral faces and the top dependent filler; reject an object-only coincidence as final completion. |
 | `CNB-PROFILE-9` | pending | Validate general directed-lax, selected strict, and `Path_cat` pseudo readings without duplicating classifiers or collapsing the generic laxity cell. |
@@ -568,6 +570,50 @@ The registered health report was refreshed in source-metrics-only mode. Its
 long all-source/all-example timing sweep was deliberately waived under the
 goal's aggregate-avoidance policy; the exact focused checks above are the
 behavioral evidence for this additive tranche.
+
+### 13.4 Variable-Dimension Face Decoder — 2026-08-19
+
+`emdash3_2_face_realization.lp` resolves the construction half of the generic
+face-realization gate. For every nonempty raw code it computes recursively:
+
+```text
+realize(skip f) = join_fst o realize(f)
+realize(keep f) = join_map(realize(f),id_1).
+```
+
+The one-vertex identity and final-vertex cases compute to the ordinary
+identity and right join inclusion. `RawFaceCode` is finite indexed skip/keep
+syntax and therefore set-valued; the module records that curated evidence and
+uses `trunc_rec_ambient`, rather than a new eliminator, to decode public
+`FaceCode`. Public visible constructors retain the same computations. The
+result is variable in both source and target dimension and is not a
+hard-coded tetrahedron dictionary.
+
+The reviewer identifies the exact functoriality boundary. At dimension zero,
+the all-keep realization is identity. At the directed edge it is the retained
+presentation `join_map_func(id,id)`, not definitionally `id`. A selected
+left-branch composition still computes through the join recursor beta, while
+the first new-vertex tetrahedral composite does not definitionally equal the
+composite of its two realized faces. Thus raw/public realization is active,
+but assembling it as a whole functor on `SemiDeltaPlus_cat` requires scoped
+propositional join-map identity and composition. No face-specific rule,
+unifier, generic strict code, or claim of whole nerve action is added.
+
+Focused source and reviewer checks pass quietly and with warnings. Both
+warning streams contain the same 1,315 inherited diagnostic headers and no
+owned diagnostic. The four rules have inferred outer slots and pass the
+strict LHS audit. Evidence:
+
+```text
+logs/probes/raw_face_realization-20260819-005145.log
+logs/probes/emdash3_2_face_realization-20260819-005323.log
+logs/probes/emdash3_2_face_realization-20260819-005353.log
+logs/probes/face_realization-20260819-005333.log
+logs/probes/face_realization-20260819-005404.log
+```
+
+The health snapshot was again refreshed in source-metrics-only mode; no long
+registered aggregate was rerun for this additive decoder tranche.
 
 ## 14. Completion Definition
 

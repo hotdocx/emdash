@@ -560,6 +560,13 @@ detailed probe evidence.
   only objects; a Cat-valued total of mixed-variance coherent squares,
   action-derived-cross compatibility, and scoped join eta remain named
   prerequisites rather than hidden equations.
+- `emdash3_2_face_realization.lp`: variable-dimension realization of every
+  nonempty raw/public face code into a whole functor between join-built
+  directed simplex shapes. `skip` computes by the left join inclusion and
+  `keep` by `join_map_func`; a curated sethood witness for the finite raw
+  syntax permits descent through public `FaceCode`. This is a generic decoder,
+  not yet a functor on `SemiDeltaPlus_cat`: all-keep and the first new-vertex
+  composite expose the still-missing scoped join identity/composition laws.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category
