@@ -632,6 +632,14 @@ detailed probe evidence.
   iterable, and endpoint views map through ordinary `eq_ap`. It adds no
   duplicate native-map rule, proof-time unifier, arbitrary category syntax,
   or face action.
+- `emdash3_2_dependent_simplex_faces.lp`: variable-dimensional whole action of
+  existing nonempty `FaceCode`s on intrinsic dependent-simplex codes. Skip
+  selects a constant face of the fixed flag; `keep(skip ...)` composes the
+  recursive target face with `Sigma_proj1_func`; `keep(keep ...)` reuses
+  `pathout_map_func`. All three visible triangle edges compute, another hom
+  action remains iterable, and selected public composition agrees on target
+  codes and visible observations. It adds no duplicate face syntax, broad
+  functor-extensionality, whole-composition rewrite, or proof-time unifier.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

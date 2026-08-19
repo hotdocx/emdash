@@ -3918,6 +3918,27 @@ the already existing maps through dimension four, and their higher action is
 still the generic `fapp1_func`. Formal/readable endpoint views are carried by
 `eq_ap` of the decoded functor's object function.
 
+Nonempty face action is a simultaneous recursion on this flag code and the
+existing skip/keep face word. If the newest target vertex is skipped, the
+desired face lies in the fixed flag, so the resulting whole functor is
+constant at the recursive face of that flag. For a kept newest vertex there
+are two cases. A skipped predecessor means that the desired face lies in the
+target simplex, so the recursive face functor is precomposed with
+`Sigma_proj1_func : PathOut(K,x) -> K`. A kept predecessor means that the
+desired face contains both newest vertices, so `pathout_map_func` maps the
+whole outgoing path by the recursive lower face. These three clauses are
+exactly `raw_dependent_simplex_face`; public
+`dependent_simplex_face` first uses the existing `face_code_raw` decoder.
+
+This action is variable-dimensional, whole, and iterable. In dimension two
+the three structural cases compute to faces 01, 02, and 12. The public
+`face_comp` owner also computes selected composites to the same target code
+and the same constructor-visible observation. Direct and sequential functors
+on an opaque decoded category retain different recursive normal forms,
+however. The current foundation records that non-collapse instead of adding
+a broad functor-extensionality, PathOut-composition rewrite, or independent
+family of simplicial equations.
+
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction
 is ordinary precomposition. The post/left cell uses `homd_int` and

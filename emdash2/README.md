@@ -195,6 +195,14 @@ selected dimensions therefore reduce to `dependent_simplex1_map` through
 `dependent_simplex4_map`, retain another `fapp1_func`, and do not duplicate
 the native action.
 
+`dependent_simplex_face` decodes the existing nonempty `FaceCode` against a
+flag code and returns a target code plus a whole face functor. Its three
+successor cases are constant action on the fixed flag, target projection for
+`keep(skip ...)`, and `pathout_map_func` for `keep(keep ...)`. Together they
+compute faces 01, 02, and 12 of a visible triangle and retain generic hom
+action. Direct and sequential opaque whole functors are not collapsed by a
+new extensionality rule.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the

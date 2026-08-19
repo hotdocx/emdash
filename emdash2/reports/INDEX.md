@@ -35,9 +35,14 @@ views. Its mapped-decoder continuation is
 `emdash3_2_dependent_simplex_code_map.lp`: a source functor recursively maps
 both flags and decoded categories through the existing `pathout_map_func`,
 selected dimensions recover the native whole maps, endpoint views map by
-ordinary equality action, and another hom action remains iterable. The active
-next step is decoded face projection. A global all-simplex category and the
-ordinal/dependent equivalence remain later, profile-sensitive work.
+ordinary equality action, and another hom action remains iterable. Its face
+continuation is `emdash3_2_dependent_simplex_faces.lp`: existing nonempty
+`FaceCode`s recurse by fixed-flag constant action, target projection, and
+outgoing-path map; every visible triangle edge computes and higher action is
+retained. Selected public composition agrees on its target and visible
+observation while opaque whole-functor equality remains deliberately
+unforced. The active next step is low-dimensional ordinal/dependent adequacy.
+A global all-simplex category remains later, profile-sensitive work.
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
 is the completed bounded continuation from the simplicial substrate. It

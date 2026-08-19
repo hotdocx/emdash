@@ -82,6 +82,13 @@ selected codes compute back to the native maps through dimension four, and a
 further hom action remains available; no parallel simplex-map calculus is
 introduced.
 
+Nonempty semisimplicial faces now act on the same codes. The existing
+skip/keep `FaceCode` recursively selects either a face of the fixed flag, the
+corresponding face of the target simplex, or the whole outgoing-path image.
+This computes all three edges of a visible triangle and retains higher action.
+Visible face composition is preserved by the existing code owner; generic
+opaque whole-functor uniqueness remains an explicit later comparison.
+
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
 of global metatheory.

@@ -408,8 +408,8 @@ authorized.
 | `DHSF-DIM4-4` | complete at the honest recursive boundary | `emdash3_2_dependent_simplex_dimension4.lp` adds one more flagged PathOut classifier and whole map action. Visible data expose faces 0123/0124/0134; the typed readable Hom(Sigma) split exposes face 0234 and retains the 1234/top-filler frame. A full-constructor negative proves that this residual requires recursively carried readable lower endpoints rather than a dimension-specific eta or rewrite. Another hom action remains available. |
 | `DHSF-CODE-5` | complete | `emdash3_2_dependent_simplex_codes.lp` defines `RawDependentSimplexCode(C,n,K)` intrinsically indexed by its decoded category: zero has `K=C`, and successor at `x:Obj(K)` has `K=PathOut_K(x)`. The public dependent Sigma hides `K`; existing `FaceCode(succ p,succ n)` supplies boundary references; `DependentSimplexEndpointView` retains typed formal/readable endpoints. No arbitrary Cat syntax or second semantic grammar is introduced. |
 | `DHSF-DECODE-6` | complete | `emdash3_2_dependent_simplex_code_map.lp` recursively maps a raw code along `F:C->D`, returning a target code and whole decoded functor. Zero returns `F`; successor maps the stored flag and reuses `pathout_map_func`. Selected codes recover native maps through dimension four, endpoint views map by `eq_ap`, and another hom action remains iterable without duplicate native-map rules. |
-| `DHSF-FACE-7` | in progress | Implement decoded face projections indexed by existing `FaceCode`, preserve composition through its owner, and retain higher action. Defer degeneracies. |
-| `DHSF-ADEQUACY-8` | pending | Establish the strongest honest ordinal/dependent comparison through dimensions 0--3 and use dimension four as the recursion test; state exact strict/lax/Path scope and any shape/profile obstruction. |
+| `DHSF-FACE-7` | complete at the whole-action boundary | `emdash3_2_dependent_simplex_faces.lp` recursively interprets existing nonempty `FaceCode`s against intrinsic codes. Skip gives fixed-flag constant action, `keep(skip ...)` uses target projection, and `keep(keep ...)` reuses `pathout_map_func`. Visible triangle faces and selected public composition compute, higher action is retained, and opaque direct/sequential whole-functor equality is precisely left unforced. |
+| `DHSF-ADEQUACY-8` | in progress | Establish the strongest honest ordinal/dependent comparison through dimensions 0--3 and use dimension four as the recursion test; state exact strict/lax/Path scope and any shape/profile obstruction. |
 | `DHSF-JOIN-9` | pending | Reassess `CNB-JOIN-NORMALFORM` only when the whole face/nerve consumer reaches it. Implement narrowly if dependency-ready; otherwise hand off with exact owner and consumer evidence. |
 | `DHSF-DOC-10` | pending | Synchronize Foundations, canonical notation, current status, README/source inventories, report index, diagnostics/examples, and generated evidence only for promoted boundaries. |
 | `DHSF-CLOSE-11` | pending | Complete every scoped row by implementation, evidence-backed rejection, or concrete deferral; run proportional final gates, record checkpoints and exact dirty state, and leave remote/integration/cleanup operations excluded. |
@@ -955,6 +955,61 @@ tooling tests, strict core/new-source audits, catalog regeneration/strict
 check, exact diff hygiene, and source-only health are green. The health
 snapshot records 245 files; no long aggregate was run. `DHSF-DECODE-6` is
 complete and decoded face projection is now the sole active row.
+
+### 13.9 Recursive Whole Face Action — 2026-08-19
+
+The successful face probe shows why neither a naive `pathout_map_func` fold
+nor a separate family of coface projections is appropriate. For a successor
+flag code, raw skip/keep syntax has three geometric cases:
+
+```text
+skip alpha       -> constant(recursiveFace(alpha)[flag])
+keep(skip alpha) -> recursiveFace(keep alpha) o Sigma_proj1_func
+keep(keep alpha) -> pathout_map_func(recursiveFace(keep alpha),flag).
+```
+
+The middle clause is essential. In a triangle it sends face 02 to the target
+edge; a naive outgoing-path map of the vertex-0 face would instead produce a
+constant reflexive edge. The final clause sends face 12 through the base-arrow
+projection of the outgoing path. These clauses and the vertex base case form
+the stable `raw_dependent_simplex_face` owner in
+
+```text
+emdash3_2_dependent_simplex_faces.lp.
+```
+
+`DependentSimplexFaceResult(C,p,K)` packages the target intrinsic code and a
+whole `Functor(K,decode(target))`. Public `dependent_simplex_face` reuses
+`face_code_raw` on the existing `DependentSimplexFaceRef = FaceCode`; its two
+projections are `dependent_simplex_face_target` and
+`dependent_simplex_face_func`. The reviewer computes both edge vertices and
+all three triangle edges, and retains the generic next `fapp1_func`.
+
+One selected public `face_comp` consumer distinguishes computation from
+extensionality. Direct and sequential routes compute to the same target code
+and to the same final vertex on a constructor-visible triangle. For an opaque
+simplex object, however, both their object actions and whole functors retain
+different recursive-composition normal forms. This is a durable non-collapse
+result, not a reason for a broad rewrite: no functor extensionality,
+PathOut-map composition law, or external family of simplicial equations is
+added. A later adequacy/whole-nerve consumer may request the narrow comparison.
+
+The four recursive clauses have one stable owner, disjoint raw constructors,
+and no unreviewed inferred LHS slot. Quiet and warning-enabled source/reviewer
+checks are green:
+
+```text
+logs/probes/emdash3_2_dependent_simplex_faces-20260819-100111.log
+logs/probes/dependent_simplex_faces-20260819-100116.log
+logs/probes/emdash3_2_dependent_simplex_faces-20260819-100122.log
+logs/probes/dependent_simplex_faces-20260819-100128.log.
+```
+
+The warning inventory remains `1150/159`. Registration, authority and
+notation updates, strict audits, source TOC/reference/report lints, catalog,
+focused tooling tests, exact diff hygiene, and the 247-file source-only health
+snapshot are green; no long aggregate was run. `DHSF-FACE-7` is complete at
+the honest whole-action boundary, and low-dimensional adequacy is now active.
 
 ## 14. Completion Definition
 

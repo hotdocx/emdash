@@ -1196,6 +1196,21 @@ projections are `dependent_simplex_code_map_target` and
 is `pathout_map_func` of the recursively decoded map. Do not elaborate this
 notation into a second recursive map record.
 
+For nonempty face action write
+
+```text
+face(alpha,c) = (c_alpha,d_alpha)
+d_alpha : decode(c) -> decode(c_alpha).
+```
+
+The literal owners are `dependent_simplex_face`,
+`dependent_simplex_face_target`, and `dependent_simplex_face_func`; `alpha`
+has the already-existing type `DependentSimplexFaceRef(p,n)`, definitionally
+`FaceCode(succ p,succ n)`. Skip means a constant face of the fixed flag,
+`keep(skip ...)` means recursive target projection, and `keep(keep ...)` means
+`pathout_map_func`. Do not write a separate list of coface equations or imply
+that direct and sequential opaque whole functors are judgmentally equal.
+
 For groupoid-valued diagrams write
 
 ```text
