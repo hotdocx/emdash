@@ -552,6 +552,14 @@ detailed probe evidence.
   vertex remain distinct whole-functor presentations pending generic
   join-map composition. It adds no rule, unifier, generic decoder, or top
   tetrahedral cell.
+- `emdash3_2_join_mapping_recursion.lp`: first-stage whole observation and
+  object-level extension for maps out of `Join_cat(A,B)`. The two branch
+  restrictions retain generic transfor action, and the cross observation is
+  derived internally from `Prof_func_hom`, reindexing, and
+  `join_cross_transf`. The explicit `JoinMapObjectData` classifier records
+  only objects; a Cat-valued total of mixed-variance coherent squares,
+  action-derived-cross compatibility, and scoped join eta remain named
+  prerequisites rather than hidden equations.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

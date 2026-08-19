@@ -3664,6 +3664,28 @@ not yet claimed. By contrast, `StandardSimplex` is representable, so all of
 its restriction and higher action comes immediately from the existing Yoneda
 and internal-hom owner.
 
+The recursive content of the join can also be observed internally. For
+
+```text
+H : Functor(Join_cat(A,B),C),
+```
+
+precomposition with the two join inclusions gives whole branch restrictions,
+and applying `H` to `join_cross_transf` gives one internally natural cross
+cell between them. The latter is not a separately quantified family: it is
+the composite of `Prof_func_hom(H)`, profunctor reindexing, and the original
+whole join cross. Conversely, the existing join recursor extends a triple
+`(first,second,cross)` and computes on both branches and at its primitive
+cross owner.
+
+The currently exposed `JoinMapObjectData` is exactly that object classifier,
+not yet the category of all such data. A morphism between two triples must
+include the mixed-variance coherent square relating both endpoint
+transformations to their cross cells. Ordinary Sigma transport does not
+supply that square. Thus no broad join eta or mapping-category equivalence is
+claimed until a whole coherent-square total and the comparison between the
+action-derived and recursor-owned cross observations are available.
+
 A groupoid-valued semisimplicial object is simply
 
 ```text

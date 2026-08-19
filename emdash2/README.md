@@ -121,6 +121,13 @@ distinct representable semisimplices. The selected two-simplex boundary and
 three horns are ordinary sieves, so their inclusions and mapping-category
 restrictions reuse the existing presheaf/sieve machinery.
 
+Maps out of a directed join now have a first-stage internal observation
+interface: both branch restrictions are whole functors, and the cross cell is
+obtained by applying the target functor to the existing internally natural
+join cross. Its `(left,right,cross)` package is intentionally object-level;
+the category of coherent-square morphisms and join eta remain explicit work
+rather than an external naturality record.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the

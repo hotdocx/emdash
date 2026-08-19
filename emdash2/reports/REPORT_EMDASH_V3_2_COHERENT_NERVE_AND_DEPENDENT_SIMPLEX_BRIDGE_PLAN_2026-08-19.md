@@ -428,7 +428,7 @@ branch/worktree deletion, or unrelated repository mutation is authorized.
 | `CNB-BASE-1` | complete | Dedicated worktree forked from clean `e31a812`; workspace bootstrap and focused shape/diagram/dependent-hom baselines are green. |
 | `CNB-LEVEL-2` | complete | Promoted variable-`n` `CoherentNerveLevel_cat(C,n)`, the separate augmented empty/successor shape, and the augmented mapping-category level. Dimensions 0--3, mapping Homs, retained off-diagonal transfor action, and the dimension/vertex-count noncollapse are checked without a rule or unifier. |
 | `CNB-TETRA-FACE-3` | complete | Promoted four strict-profile triangle cofaces `Delta[2] -> Delta[3]`. All six shared edges compute by `FaceCode`; the three old-base comparisons also compute as whole functors. The three new-vertex functor comparisons remain explicit negative conversion checks and route to generic join-map composition rather than a local rule. |
-| `CNB-JOIN-REC-4` | active | Probe and, if supported, promote whole observation/extension for maps out of `A star Terminal`; reuse the existing cross transfor and retain one hom action. Its first concrete consumer is the three new-vertex comparisons exposed by `CNB-TETRA-FACE-3`. Do not add a broad join eta rewrite. |
+| `CNB-JOIN-REC-4` | active; first-stage interface promoted | Whole branch restriction, internally derived cross observation, shaped evaluation, and object-level join extension are active in `emdash3_2_join_mapping_recursion.lp`. Completing the mapping-category equivalence now has three exact prerequisites: a Cat-valued total of mixed-variance coherent squares, compatibility between the action-derived and primitive recursor cross observations, and scoped propositional join uniqueness. Do not substitute the object Sigma for that category or add a broad join eta rewrite. |
 | `CNB-FACE-GEN-5` | pending decision gate | Decide whether raw face-code recursion plus join maps can construct `realize_face` for variable dimensions with identity/composition computation. If not, record the exact prerequisite and keep the tetrahedral bridge bounded. |
 | `CNB-NERVE-6` | pending on generic face realization | Assemble `CoherentNerveRaw(C)` by precomposition and cross the public Psh facade only through existing projections. Retain whole face and next action. |
 | `CNB-VARIANCE-7A` | pending audit gate | Inventory the active covariant and opposite/contravariant projections on the four tetrahedral faces. Reuse `hom_con_int`, `tapp1_con_at_transf`, and `fapp1_con_at_transf`; introduce a displayed `homd_con_int` only if a concrete whole face cannot otherwise be retained. Distinguish a missing variance owner from a genuinely insufficient source shape before considering orientals. |
@@ -511,6 +511,63 @@ logs/probes/tetrahedron_faces-20260818-232805.log
 logs/probes/tetrahedron_faces-20260818-233414.log
 logs/probes/tetrahedron_faces-20260818-233436.log
 ```
+
+### 13.3 First-Stage Join Mapping Observation — 2026-08-19
+
+`emdash3_2_join_mapping_recursion.lp` promotes the part of the join mapping
+comparison already supported by generic owners. Precomposition with the two
+join inclusions gives whole functors
+
+```text
+Functor_cat(Join_cat(A,B),C) -> Functor_cat(A,C)
+Functor_cat(Join_cat(A,B),C) -> Functor_cat(B,C),
+```
+
+and both retain their generic hom action. The cross observation of an
+arbitrary `H` is not postulated: it composes `Prof_func_hom(H)`,
+`Prof_reindex_transf`, and `join_cross_transf`. `Prof_cell_eval` therefore
+still supplies every shaped component while naturality in the two join
+endpoints remains internal. Explicit equality paths relate each whole branch
+owner to its readable direct precomposition view without selecting another
+runtime normal form.
+
+The module names the nested Sigma only `JoinMapObjectData`. Its projections,
+observation, and extension compute, and the extension reduces on both join
+branches and at the primitive `join_elim_cross_transf` owner. The reviewer
+also checks two intentional negative boundaries:
+
+```text
+join_map_observe_cross(join_map_extend_object(d))  !=conv  cross(d)
+join_map_extend_object(join_map_observe_object(H)) !=conv  H.
+```
+
+These failures isolate, rather than conceal, the remaining architecture. A
+morphism between two `(first,second,cross)` triples contains endpoint
+transformations together with a mixed-variance coherent square. An ordinary
+Sigma family cannot retain that square. The full row therefore requires a
+Cat-valued coherent-square total, a comparison between the action-derived and
+primitive recursor cross observations, and scoped propositional join
+uniqueness. A probe that attempted to install a stable cross owner before that
+comparison was available failed its typed semantic check and was discarded;
+no rule or unifier was promoted.
+
+Focused source and reviewer checks pass quietly and with warnings. Both
+warning streams contain the same 1,315 inherited diagnostic headers and no
+owned diagnostic; the source adds no rewrite or unification rule. Evidence:
+
+```text
+logs/probes/join_mapping_observation-20260819-002356.log
+logs/probes/join_mapping_observation-20260819-002409.log
+logs/probes/emdash3_2_join_mapping_recursion-20260819-003913.log
+logs/probes/emdash3_2_join_mapping_recursion-20260819-003924.log
+logs/probes/join_mapping_recursion-20260819-003919.log
+logs/probes/join_mapping_recursion-20260819-003930.log
+```
+
+The registered health report was refreshed in source-metrics-only mode. Its
+long all-source/all-example timing sweep was deliberately waived under the
+goal's aggregate-avoidance policy; the exact focused checks above are the
+behavioral evidence for this additive tranche.
 
 ## 14. Completion Definition
 
