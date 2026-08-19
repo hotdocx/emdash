@@ -141,6 +141,10 @@ than a second simplex record. A triangle is the `Hom(Sigma)` total of one
 `Sigma(FF)`, and its next action maps `(κ,λ)` to the same base cell together
 with `fdapp1_int_hom_fapp0(...,λ)`. The ordinary dimension-two specialization
 is the active functor compositor, and another higher action remains iterable.
+The same owner stays noncollapsed for a generic map, uses the selected
+strict-code identity fold at the binary compositor, and becomes invertible at
+both triangle and tetrahedron components when the target fibres are path
+categories.
 
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section

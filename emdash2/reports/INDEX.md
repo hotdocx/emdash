@@ -12,10 +12,11 @@ variable-dimension nonempty-face decoder are active; scoped join
 identity/composition still gates a whole Cat-valued semisimplicial nerve.
 The variance gate closes through existing covariant/opposite owners, and the
 recursive dependent triangle/tetrahedron map is now the first and next hom
-action of the same `homd_`/Sigma machinery. Whole mapping-category comparison,
-strict/lax/Path profiles, and the variable-dimension induction remain ordered
-gates. Full degeneracies, Kan/Segal/Rezk theory, codata, and orientals remain
-outside the initial scope.
+action of the same `homd_`/Sigma machinery. Its generic lax, selected binary
+strict, and Path-invertible readings are checked without parallel
+classifiers. Whole mapping-category comparison and the variable-dimension
+induction decision remain ordered gates. Full degeneracies, Kan/Segal/Rezk
+theory, codata, and orientals remain outside the initial scope.
 
 `REPORT_EMDASH_V3_2_SIMPLICIAL_SUBSTRATE_AND_KAN_CONTINUATION_PLAN_2026-08-18.md`
 is the completed categorical-first simplicial continuation. It distinguishes

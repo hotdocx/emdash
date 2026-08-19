@@ -3758,6 +3758,16 @@ which is exactly `fapp1_compositor(F,g,f)`. Thus dimensions two and three are
 successive projections of one internal action rather than separately stored
 coherence fields.
 
+This common owner has three checked profile readings. An arbitrary ambient
+functor retains a potentially nonidentity directed compositor. A decoded
+`StrictFunctorData` reduces that selected binary cell to identity at the
+existing strict owner; this does not postulate a separate strict tetrahedron
+or collapse every higher ambient cell. If the target fibres are path
+categories, both the compositor triangle and the dependent component emitted
+by `dependent_tetrahedron_map` are equalities, and path symmetry gives their
+inverses. The pseudo reading therefore follows from the codomain shape rather
+than an added inverse record.
+
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction
 is ordinary precomposition. The post/left cell uses `homd_int` and

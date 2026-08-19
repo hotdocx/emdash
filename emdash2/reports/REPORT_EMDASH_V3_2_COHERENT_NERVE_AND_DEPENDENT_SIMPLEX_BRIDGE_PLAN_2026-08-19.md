@@ -8,8 +8,9 @@ Status: **active bounded implementation plan**. The architecture, baseline
 reuse audit, variable-level facade, four selected tetrahedral cofaces,
 first-stage join observation, and variable-dimension face decoder are
 complete at their recorded boundaries. The variance audit and recursive
-dependent-simplex bridge are also complete; `CNB-PROFILE-9` is the next active
-row while whole nerve/bridge assembly remains gated by scoped join uniqueness.
+dependent-simplex bridge are also complete, including their three scoped
+profile readings; `CNB-GENERIC-10` is the next active decision row while whole
+nerve/bridge assembly remains gated by scoped join uniqueness.
 
 Branch: `goal/coherent-nerve-bridge-v3.2`
 
@@ -437,8 +438,8 @@ branch/worktree deletion, or unrelated repository mutation is authorized.
 | `CNB-VARIANCE-7A` | complete; no new mirror or oriental | All four tetrahedral face functors and their precomposition restrictions exist. Post/left uses `homd_int`/`fapp1_at_transf`; pre/right is recovered through `Op`, `hom_con_int`, and `fapp1_con_at_transf`. The established no-associativity tetrahedron retains the mirrored face, so `homd_con_int` is not a concrete requirement. New-vertex failures are join composition, not orientation. |
 | `CNB-CELL-7` | complete | `emdash3_2_dependent_simplex_bridge.lp` exposes the first `homd_`/Sigma triangle, identifies its map with the first hom action of `Sigma(FF)`, and takes its iterable next hom action. A visible `(kappa,lambda)` maps to the same base cell and `fdapp1_int_hom_fapp0(...,lambda)`; the ordinary triangle specializes to `fapp1_compositor`. No standalone tetrahedron is added. |
 | `CNB-BRIDGE-8` | pending on scoped join uniqueness and whole face action | Compare the ordinal mapping-category and recursive-cell presentations wholely at the strongest justified level. All four tetrahedral faces and the recursive top-cell action now exist, but an object-only coincidence is not final completion and the mapping-category side still lacks join identity/composition. |
-| `CNB-PROFILE-9` | active | Validate general directed-lax, selected strict, and `Path_cat` pseudo readings of the promoted dependent triangle/tetrahedron action without duplicating classifiers or collapsing the generic laxity cell. |
-| `CNB-GENERIC-10` | pending decision gate | If rows 4--9 use one stable recursive owner, formulate/prove the variable-`n` induction. Otherwise record whether the missing ingredient is join uniqueness, generic face realization, recursive boundary formation, or a richer oriented simplex shape. |
+| `CNB-PROFILE-9` | complete with explicit strict scope | `examples/dependent_simplex_profiles.lp` checks a noncollapsed general compositor, the existing strict-code identity fold for that same triangle cell, the Path equality/inverse reading, and an equality/inverse reading of the recursive tetrahedron whenever target fibres are path categories. Strict collapse beyond the selected binary compositor is not claimed without a future higher strict-profile consumer. |
+| `CNB-GENERIC-10` | active decision gate | Rows 4--9 now share stable join/internal-action owners. Decide the strongest justified variable-`n` statement: recursive face decoding and iterative dependent-cell action are generic, while whole semisimplicial functoriality/mapping-category comparison still require scoped join uniqueness. Record this as a theorem plan or an exact deferral; do not replace it by orientals or a hard-coded dimension ladder. |
 | `CNB-DOC-11` | pending | Synchronize Foundations, canonical notation, status/source inventories, reviewer examples, and report index only for checked promoted results. |
 | `CNB-CLOSE-12` | pending | Record exact checkpoints, focused evidence, warning deltas, deferred prerequisites, clean state, and safe continuation. No integration/publication. |
 
@@ -690,6 +691,34 @@ logs/probes/dependent_simplex_bridge-20260819-011800.log
 
 The registered health snapshot is refreshed source-only under the standing
 aggregate-avoidance policy.
+
+### 13.7 Directed-Lax, Strict, And Path Profiles — 2026-08-19
+
+The profile gate reuses existing classifiers and adds only the reviewer
+`examples/dependent_simplex_profiles.lp`.
+
+- For an opaque ambient functor, the bridge's dimension-two
+  `fapp1_compositor` does not convert to identity. This preserves the general
+  directed-lax reading.
+- For a decoded `StrictFunctorData`, that exact compositor reduces to the
+  identity at the established strict owner. The claim is intentionally scoped
+  to the selected binary compositor: no higher strict-profile code or blanket
+  collapse of the shared tetrahedron map is inferred.
+- For `path_map_func`, the same compositor is the existing equality between
+  paths and `eq_sym` supplies its inverse. More generally, when the target
+  fibres of `dependent_tetrahedron_map` are `Path_cat(B)`, the dependent
+  tetrahedron component computes as an equality and `eq_sym` again constructs
+  its inverse.
+
+Thus the generic bridge is shared rather than duplicated into lax, strict,
+and pseudo simplex records. The focused reviewer passes quietly and with
+warnings; the warning run has 1,315 inherited diagnostic headers and no owned
+diagnostic:
+
+```text
+logs/probes/dependent_simplex_profiles-20260819-012806.log
+logs/probes/dependent_simplex_profiles-20260819-012815.log
+```
 
 ## 14. Completion Definition
 

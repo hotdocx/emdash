@@ -574,6 +574,10 @@ detailed probe evidence.
   through `fdapp1_int_hom_fapp0`, while retaining another hom action. The
   ordinary specialization recovers `fapp1_compositor`. No standalone higher
   cell, rule, unifier, `homd_con_int`, or whole nerve equivalence is added.
+  The focused profile reviewer keeps the generic compositor noncollapsed,
+  applies the existing strict-code identity fold at dimension two, and reads
+  Path-valued triangle and tetrahedron components as invertible equalities;
+  no parallel simplex classifier or unscoped higher strictness claim is made.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category
