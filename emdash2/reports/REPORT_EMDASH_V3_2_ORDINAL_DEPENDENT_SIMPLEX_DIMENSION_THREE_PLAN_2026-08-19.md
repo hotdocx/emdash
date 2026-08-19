@@ -1,0 +1,377 @@
+# Emdash v3.2 Ordinal Dependent Simplex Dimension-Three Plan
+
+Date: 2026-08-19 (America/Toronto)
+
+Plan-ID: `ORDINAL-DEPENDENT-SIMPLEX-DIMENSION-THREE-V3.2`
+
+Status: **active implementation plan**. The completed join-cross plan
+constructs the canonical dimension-two ordinal dependent simplex and retains
+the next whole hom action. This child plan uses that boundary to construct the
+corresponding ordinal tetrahedron, without reopening dimension two or silently
+expanding to dimension four.
+
+Branch: `goal/ordinal-dependent-simplex3-v3.2`
+
+Worktree: `/home/user1/emdash1-ordinal-simplex3-v1`
+
+Baseline: completed join-cross dependent-simplex checkpoint
+`e157b37c2cf359a114fff65786e62e2ae6d18fe0`.
+
+Parent-Plan:
+`REPORT_EMDASH_V3_2_JOIN_CROSS_DEPENDENT_SIMPLEX_PLAN_2026-08-19.md`
+
+Depends-On:
+
+- `emdash3_2_dependent_simplex_ordinal_filler.lp` for the constructed native
+  ordinal triangle, its arbitrary-target image, its unconditional observation,
+  and `ordinal_dependent_simplex2_next_func`;
+- `emdash3_2_dependent_simplex_native_dimensions.lp` for
+  `DependentSimplex3_cat`, `dependent_simplex3_visible`, its readable final
+  cell, and `dependent_simplex3_map`;
+- `emdash3_2_tetrahedron_faces.lp` for the four selected ordinal triangle
+  cofaces 012, 013, 023, and 123;
+- `emdash3_2_join_cross_compatibility.lp` and
+  `emdash3_2_join_generator_compatibility.lp` for whole join-cross comparison,
+  generator observation, and retained higher action; and
+- active Foundations, canonical notation, current SOP, report index, and the
+  persistent-goal Git workflow.
+
+Side-Task-Ledger: `ODS3-00`, `ODS3-BASE-1`, `ODS3-OWNER-2`,
+`ODS3-FACES-3`, `ODS3-SOURCE-4`, `ODS3-MAP-5`, `ODS3-OBSERVE-6`,
+`ODS3-PROFILE-7`, `ODS3-NEXT-8`, `ODS3-DOC-9`, and `ODS3-CLOSE-10`.
+
+Infinity-Codex-Origin: session
+`019ffe39-2eb9-7080-88e3-06b77d69b8d1`; launch recommendation response
+`0073_2026-08-19T18-35-16Z_5f1c11a1-d49b-4824-ada0-ece9484feb94.md`.
+That response is recovery evidence only. Active code/SOP and this evolving
+ledger are authoritative.
+
+## 1. Objective
+
+Construct the intrinsic dimension-three dependent-simplex observation of every
+ordinal tetrahedron functor
+
+```text
+H : Functor(DirectedSimplex_cat(3), C)
+```
+
+from the existing join, face, `homd_`/Sigma, and whole internal-action owners.
+The intended public boundary is schematically
+
+```text
+ordinal_dependent_simplex3_observe_canonical(H)
+  : DependentSimplexObservation(C,3).
+```
+
+Its underlying object must be a genuine inhabitant of the existing flagged
+classifier
+
+```text
+DependentSimplex3_cat(C,x0,e01,t012),
+```
+
+whose lower data are the four ordinal triangle restrictions and whose top
+dependent cell comes from the retained recursive action. A primitive
+tetrahedron filler, an unrelated coherence record, or an ordinary
+associativity proof does not satisfy the goal.
+
+## 2. Exact Dimension-Three Boundary
+
+For `H : Functor(Delta[3],C)`, let
+
+```text
+H012, H013, H023, H123 : Functor(Delta[2],C)
+```
+
+be composition with the four already-selected cofaces. Each restriction has
+the constructed dimension-two observation. Dimension-three adequacy must show
+that these observations form one native tetrahedron:
+
+```text
+flag       = triangle 012
+target     = triangle 013
+base face  = triangle 023
+far face   = triangle 123
+top cell   = dependent cell over those four faces.
+```
+
+The native classifier represents this recursively rather than as a flat
+four-face record. Face 123 and the readable top endpoint must therefore be
+obtained through the existing `dependent_simplex3_readable_cell` projection
+and typed endpoint transport, not by duplicating the recursive semantics.
+
+The first owner audit must distinguish three questions:
+
+1. which source object of `DependentSimplex3_cat(Delta[3],...)` is canonical;
+2. which whole hom action supplies its arrow from face 012 to face 013; and
+3. which existing comparison identifies the projected faces with 023 and 123.
+
+## 3. Meaning Of The Retained Dimension-Two Action
+
+`ordinal_dependent_simplex2_next_func(H)` is positive evidence that the mapped
+native triangle remains iterable. Its current public type fixes both endpoints
+to the canonical source triangle, so it must not be assumed without checking
+to be the distinct-face tetrahedral action.
+
+If dimension three needs two different source triangles, expose a transparent
+between-objects projection of the already existing whole owner:
+
+```text
+fapp1_func(dependent_simplex2_map(...), t0, t1).
+```
+
+Such a projection is an API refinement, not a second action semantics. Add no
+new primitive head merely to avoid writing the existing generic action. If the
+required source higher cell is instead the next projection of whole
+join-cross compatibility, recover it there and record the exact projection
+ladder.
+
+The required ownership ladder is:
+
+```text
+whole join/internal action
+  -> source tetrahedral hom
+  -> native source DependentSimplex3 object
+  -> dependent_simplex3_map(H)
+  -> arbitrary-target ordinal observation
+  -> one retained next hom action.
+```
+
+## 4. Canonical Source Tetrahedron
+
+Use the recursive presentation
+
+```text
+Delta[3] = Join_cat(Delta[2], Terminal_cat)
+```
+
+and the existing four coface functors. First construct the canonical native
+tetrahedron for the identity functor on `Delta[3]`. Its three immediately
+visible lower triangles and residual dependent cell must arise from:
+
+- the already-constructed canonical dimension-two source triangle;
+- source join-cross action at the new vertex;
+- the next `homd_`/Sigma action retained by that construction; and
+- only the endpoint paths projected from whole face/join comparisons.
+
+Do not postulate a source top filler. If direct construction fails, the owner
+probe must name the smallest missing whole higher join-cross comparison and
+show why the current retained action cannot project it. A face-specific
+conversion rule, broad join eta, or opaque tetrahedron constant is not an
+acceptable repair.
+
+## 5. Mapping Under An Arbitrary Ordinal Tetrahedron
+
+Once the source native object exists, map it under arbitrary `H` through the
+existing
+
+```text
+dependent_simplex3_map(Delta[3],C,H,...).
+```
+
+The resulting object, rather than a separately assembled flat record, is the
+canonical target tetrahedron. Public readable projections may expose its
+vertices, six edges, four triangle faces, and top dependent cell, but they
+must remain observations of this one mapped native object.
+
+Acceptance requires that the four face observations agree with
+
+```text
+ordinal_dependent_simplex2_observe_canonical(H012)
+ordinal_dependent_simplex2_observe_canonical(H013)
+ordinal_dependent_simplex2_observe_canonical(H023)
+ordinal_dependent_simplex2_observe_canonical(H123)
+```
+
+at the strongest form justified by the current owners. Definitional
+conversion is not required where the existing face/join comparisons are
+propositional, but each comparison must be projected from a whole owner and
+must retain its next action when the source does.
+
+## 6. Profiles And Negative Evidence
+
+The same construction must support three readings:
+
+```text
+general C       directed/lax tetrahedron;
+strict profile  the same object with only selected profile-local collapses;
+Path_cat(A)     an equality-valued, reversibly oriented top cell.
+```
+
+Historical global proof-time strict endpoint comparisons may remain installed
+as the documented prototype boundary. They must not be used as evidence that
+the extracted top cell is an identity. The no-associativity/path-transport
+technique from the dependent-simplex foundations remains the reference when
+endpoint bracketing matters.
+
+Focused reviewers must include:
+
+1. all four face restrictions and their shared lower faces;
+2. the native top dependent component;
+3. one wrong face or wrong top endpoint rejected;
+4. direct noncollapse of the generic top cell where meaningful;
+5. the Path inverse supplied by `eq_sym`; and
+6. one further whole hom action.
+
+## 7. Dimension-Four Handoff
+
+Dimension four is not implemented by this plan. Closeout must expose the
+literal next whole action of the completed dimension-three map and record
+whether it is sufficient input for a later dimension-four child plan. Do not
+add the dimension-four ordinal comparison, a uniform `RecursiveSimplex(C,n)`,
+or a mapping-category equivalence here.
+
+## 8. Escalation Ladder
+
+Use the smallest architecture that constructs the objective:
+
+1. transparent composition and projection from active owners;
+2. one named whole projection facade if the current public endpoint is too
+   specialized;
+3. one propositional whole comparison at the join/internal-action semantic
+   owner if the two existing whole constructions are not definitionally equal;
+4. only after a variance audit, one missing covariant/contravariant displayed
+   owner required by a concrete face; and
+5. only if the ordinary source provably cannot express the oriented boundary,
+   a separately planned richer source such as an oriental.
+
+Every escalation needs a positive consumer, a negative/noncollapse consumer,
+and retained higher action. Do not introduce a capped square or tetrahedron
+axiom.
+
+## 9. Explicit Nonclaims
+
+This plan does not claim or construct:
+
+- dimension-four ordinal adequacy or a general all-`n` theorem;
+- a whole semisimplicial nerve or mapping-category equivalence;
+- degeneracies, horns, Kan, Segal, Rezk, complicial, or oriental structure;
+- a broad join eta or general join mapping equivalence;
+- a manual associator, pentagon, or flat coherence record;
+- a migration of historical global strict endpoint rules;
+- a duplicate `FaceCode`, dependent-simplex code, `homd_`, or Sigma theory;
+- TypeScript/parser work; or
+- integration, publication, deployment, or cleanup.
+
+## 10. Module Strategy
+
+The expected first module is:
+
+```text
+emdash3_2_dependent_simplex_ordinal_dimension3.lp
+  canonical source tetrahedron, arbitrary-H native image, face observations,
+  unconditional dimension-three observation, and retained next action.
+```
+
+If the owner audit proves that one generic higher join-cross comparison is
+missing, place it in a preceding narrowly named module and keep the ordinal
+consumer separate. Edit `emdash3_2.lp` only if an owner-position full-file
+probe proves that a generic computation belongs beside the primitive owner.
+
+Add one focused reviewer for each promoted source. Update registries and
+authority documents only after the source boundary is stable.
+
+## 11. Implementation Order
+
+```text
+baseline and exact owner inventory
+  -> four-face restriction/endpoint audit
+  -> canonical source tetrahedral hom
+  -> native source DependentSimplex3 object
+  -> arbitrary-H whole map
+  -> unconditional observation and readable faces
+  -> strict/Path/noncollapse review
+  -> retained dimension-four handoff
+  -> authority synchronization and closeout.
+```
+
+At most one ledger row may be `in progress`.
+
+## 12. Validation Policy
+
+Follow `emdash2/AGENTS.md` exactly:
+
+- keep every Lambdapi target within 90 seconds;
+- use owner-position full-file probes for any rule or unifier candidate;
+- minimize inferred LHS slots and annotate every measured guard;
+- compare quiet and warning-enabled runs for promoted source/reviewer files;
+- exercise every proposed unifier with typed `eq_refl`;
+- test both projection orders for a commuting bridge;
+- pair positive computation with wrong-endpoint/noncollapse evidence;
+- run affected source/reviewer checks, strict LHS audit, catalog, and
+  source-only health before implementation checkpoints; and
+- eagerly avoid long aggregate checks unless omitting one would block
+  trustworthy promotion or final closeout.
+
+Warnings are diagnostic evidence, not an automatic veto. No promoted code may
+use `--no-sr-check`.
+
+## 13. Git And Authorization Boundary
+
+The user's instruction to proceed with the recommended child goal authorizes:
+
+- this dedicated local branch/worktree;
+- implementation within this plan's scope; and
+- SOP-compliant local checkpoint commits after bounded green tranches.
+
+No push, merge, PR, tag, release, npm/Zenodo publication, deployment, history
+rewrite, branch/worktree deletion, or unrelated mutation is authorized.
+
+## 14. Execution Ledger
+
+| Row | Status | Deliverable and acceptance boundary |
+| --- | --- | --- |
+| `ODS3-00` | complete | Created the dedicated child branch/worktree from clean checkpoint `e157b37`; recorded the exact objective, nonclaims, validation policy, and Git boundary in this linked living plan; and indexed it for a clean launch checkpoint. |
+| `ODS3-BASE-1` | complete | Bootstrapped the worktree. Focused quiet checks of the ordinal filler, native dimension-three classifier, tetrahedron faces, and their three reviewers are green. Unchanged aggregate evidence is carried forward; no long aggregate was run. |
+| `ODS3-OWNER-2` | in progress | Audit the exact types of the canonical source face objects, the fixed public next-action facade, its general distinct-endpoint `fapp1_func` owner, and the source join-cross higher action. Select the smallest projection ladder and record rejection evidence for alternatives. |
+| `ODS3-FACES-3` | pending | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. |
+| `ODS3-SOURCE-4` | pending | Construct the identity-`Delta[3]` native source tetrahedron, including its dependent top cell, from the retained recursive action. No primitive or opaque tetrahedron filler is permitted. |
+| `ODS3-MAP-5` | pending | Map the one source native tetrahedron under arbitrary `H` through `dependent_simplex3_map`; retain the whole map rather than only its top component. |
+| `ODS3-OBSERVE-6` | pending | Expose the unconditional `DependentSimplexObservation(C,3)` and readable projections agreeing with all four canonical dimension-two face observations. |
+| `ODS3-PROFILE-7` | pending | Validate general directed, selected strict, and Path-valued readings; reject a wrong endpoint and verify that endpoint conversion does not imply top-cell collapse. |
+| `ODS3-NEXT-8` | pending | Expose one further whole hom action for a later dimension-four child and record its exact source/target boundary without implementing dimension four. |
+| `ODS3-DOC-9` | pending | Synchronize focused reviewers, source/check registries, Foundations, syntax/SOP status, READMEs/AGENTS where affected, report index, catalog, and source-only health. |
+| `ODS3-CLOSE-10` | pending | Review the exact diff and evidence, create clean implementation and closeout checkpoints, and state the precise achieved boundary. No long aggregate or unauthorized integration/publication/cleanup. |
+
+## 15. Completion Definition
+
+This goal is complete only when the canonical native source tetrahedron and
+its arbitrary-`H` dimension-three observation are constructed from existing or
+properly promoted whole owners; all four ordinal faces are accounted for; the
+top component is not an opaque filler; general/strict/Path and negative
+reviewers pass; one next action remains available; affected authorities and
+evidence are synchronized; and the worktree is clean at green local
+checkpoints.
+
+Merely observing that the fixed public next-action facade is too narrow, or
+naming a possible future higher comparison, does not satisfy this completion
+definition. If a genuine foundational prerequisite blocks construction, keep
+the goal active while safe in-scope alternatives remain; report it as blocked
+only under the persistent-goal blocked-status rules.
+
+## 16. Launch And Baseline — 2026-08-19
+
+The dedicated branch and worktree were created from clean completed checkpoint
+`e157b37` and bootstrapped with the pinned pnpm workspace. The launch plan and
+report-index routing pass report-header, source-TOC, and active-reference
+checks. The ignored Infinity Codex archive is not replicated into a fresh
+worktree; the archive in `/home/user1/emdash1` remains the linked recovery
+evidence.
+
+Focused quiet Lambdapi baselines are green for:
+
+```text
+emdash3_2_dependent_simplex_ordinal_filler.lp
+emdash3_2_dependent_simplex_native_dimensions.lp
+emdash3_2_tetrahedron_faces.lp
+examples/dependent_simplex_ordinal_filler.lp
+examples/dependent_simplex_native_dimensions.lp
+examples/tetrahedron_faces.lp
+```
+
+The first material owner fact is already visible in the checked public type:
+`ordinal_dependent_simplex2_next_func(H)` fixes both hom endpoints to the one
+canonical source triangle. It proves iterability but is not by itself the
+distinct-face arrow needed for a tetrahedron. `ODS3-OWNER-2` therefore starts
+at the underlying `dependent_simplex2_map`/`fapp1_func` owner and the retained
+join-cross action; no new action primitive is presumed.

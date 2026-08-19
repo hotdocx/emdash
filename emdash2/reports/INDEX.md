@@ -2,8 +2,21 @@
 
 Date: 2026-08-19
 
+`REPORT_EMDASH_V3_2_ORDINAL_DEPENDENT_SIMPLEX_DIMENSION_THREE_PLAN_2026-08-19.md`
+is the active child of the completed join-cross dependent-simplex plan. It
+targets constructive ordinal adequacy in dimension three: build the canonical
+native source tetrahedron from the retained join/`homd_`/Sigma action, map that
+one object under arbitrary `H : Functor(Delta[3],C)`, and expose all four
+canonical triangle faces plus the dependent top cell through the existing
+`DependentSimplex3_cat` presentation. The fixed endomorphism-shaped
+`ordinal_dependent_simplex2_next_func` is starting evidence, not permission to
+postulate a distinct-face filler; the plan first recovers the needed general
+hom action from the underlying whole map. Dimension four, a uniform all-`n`
+classifier/equivalence, degeneracies, and broad join or strictness migrations
+are explicitly excluded.
+
 `REPORT_EMDASH_V3_2_JOIN_CROSS_DEPENDENT_SIMPLEX_PLAN_2026-08-19.md`
-is the active child continuation of the completed dependent-hom simplex
+is the completed child continuation of the dependent-hom simplex
 foundations plan. It targets the one remaining dimension-two adequacy datum:
 compatibility between `join_map_extend_cross(d)` and the action-derived
 `join_map_observe_cross(join_map_extend_object(d))`. The intended result is a
