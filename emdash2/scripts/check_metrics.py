@@ -78,6 +78,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_dependent_simplex_path_associator.lp"),
     Path("emdash3_2_dependent_simplex_represented_source.lp"),
     Path("emdash3_2_dependent_simplex_native_dimensions.lp"),
+    Path("emdash3_2_dependent_simplex_dimension4.lp"),
     Path("emdash3_2_semisimplicial_diagrams.lp"),
     Path("emdash3_2_simplex2_sieves.lp"),
     Path("emdash3_2_path_groupoid_2horn_fillers.lp"),

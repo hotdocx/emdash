@@ -51,6 +51,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_dependent_simplex_path_associator.lp)
   files+=(emdash3_2_dependent_simplex_represented_source.lp)
   files+=(emdash3_2_dependent_simplex_native_dimensions.lp)
+  files+=(emdash3_2_dependent_simplex_dimension4.lp)
   files+=(emdash3_2_semisimplicial_diagrams.lp)
   files+=(emdash3_2_simplex2_sieves.lp)
   files+=(emdash3_2_path_groupoid_2horn_fillers.lp)

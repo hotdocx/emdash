@@ -59,7 +59,11 @@ action componentwise, and retains another hom action. More globally, flagged
 native simplex classifiers through dimension three now iterate `PathOut_cat`;
 their whole map action is derived recursively from ordinary functor action,
 and visible boundaries expose all edges, triangular faces, the fourth face,
-and the top dependent filler without a parallel simplex record. Degeneracies,
+and the top dependent filler without a parallel simplex record. The
+dimension-four acceptance level is also active: it derives another whole
+`PathOut` action, exposes tetrahedral faces through 0234, and deliberately
+retains the final 1234/top-filler frame so the later internal code carries
+recursive readable endpoint views. Degeneracies,
 generic-dimensional horns/Kan filling, and the whole mapping-category/
 displayed-cell comparison remain future work.
 

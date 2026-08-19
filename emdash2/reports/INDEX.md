@@ -24,9 +24,13 @@ action with both component betas, and retains another hom action. The active
 finite continuation is `emdash3_2_dependent_simplex_native_dimensions.lp`.
 It iterates flagged `PathOut_cat` classifiers through dimension three, derives
 whole ordinary-functor action recursively, exposes all visible faces and the
-top filler, and keeps another hom action. The active next step is now the
-dimension-four acceptance case. A global all-simplex category and the
-ordinal/dependent equivalence remain later, profile-sensitive work.
+top filler, and keeps another hom action. The dimension-four acceptance case
+is `emdash3_2_dependent_simplex_dimension4.lp`: it adds another whole PathOut
+level, exposes faces through 0234, and retains the final 1234/top-filler frame
+as evidence that readable endpoint views must recurse. The active next step is
+the small internal code/decoder extracted from this pattern. A global
+all-simplex category and the ordinal/dependent equivalence remain later,
+profile-sensitive work.
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
 is the completed bounded continuation from the simplicial substrate. It

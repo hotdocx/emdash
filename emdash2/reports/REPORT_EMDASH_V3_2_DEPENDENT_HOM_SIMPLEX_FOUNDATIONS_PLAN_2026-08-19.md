@@ -405,8 +405,8 @@ authorized.
 | `DHSF-BASE-1` | complete | The clean descendant worktree, bootstrap, relevant owner inventory, focused path/dependent source and profile reviewer baselines, archive verification, and exact current-source no-associativity copy are green. Quiet/warning runs of the copy and first consumer have zero delta at `1112/159`. No long aggregate baseline was run. |
 | `DHSF-NATIVE-2` | complete | `emdash3_2_dependent_simplex_native_dimensions.lp` defines the honest flagged tower `C`, `PathOut_C(x0)`, `PathOut(e01)`, and `PathOut(t012)` through dimension three. Derived whole map functors iterate the existing displayed hom/Sigma/pullback-total action and retain another hom action. Visible constructors expose all lower faces; a typed represented-source conjugation exposes face 123 and the top filler. A single global mixed-variance all-simplex total is explicitly not claimed. |
 | `DHSF-PATH-3` | complete | `emdash3_2_dependent_simplex_path_associator.lp` materializes both generic raw-bracketing endpoint comparisons without a rule/unifier, exposes the whole and raw-endpoint represented associators, specializes invertibly to Path while preserving distinct J provenance, and retains one next action. `emdash3_2_dependent_simplex_represented_source.lp` then projects that selected cell at a constructor-visible Sigma spine to the native `(kappa,lambda)` tetrahedron, maps it through the existing whole next action with both component betas, and retains another hom action. |
-| `DHSF-DIM4-4` | in progress | Construct the next flagged PathOut source from the selected lower groupoidal/native owners, apply the retained dependent action, inspect its complete dimension-four boundary, and reject any hidden reliance on the global associativity unifier. Determine separately what a global mixed-variance total would require. |
-| `DHSF-CODE-5` | pending | Derive the smallest intrinsically indexed `DependentSimplexCode` grammar from dimensions 0--4; reuse `FaceCode`; record reification/decoding scope and profile parameters. No generic type syntax. |
+| `DHSF-DIM4-4` | complete at the honest recursive boundary | `emdash3_2_dependent_simplex_dimension4.lp` adds one more flagged PathOut classifier and whole map action. Visible data expose faces 0123/0124/0134; the typed readable Hom(Sigma) split exposes face 0234 and retains the 1234/top-filler frame. A full-constructor negative proves that this residual requires recursively carried readable lower endpoints rather than a dimension-specific eta or rewrite. Another hom action remains available. |
+| `DHSF-CODE-5` | in progress | Derive the smallest intrinsically indexed `DependentSimplexCode` grammar from dimensions 0--4. The dimension-four result requires codes to retain both the formal native frame and its recursively typed readable view; reuse `FaceCode`, record reification/decoding scope and profile parameters, and add no generic type syntax. |
 | `DHSF-DECODE-6` | pending | Implement code decoding to canonical `Hom_cat`/`Sigma_cat` owners so existing rules expose `homd_`; reproduce the checked triangle/tetrahedron and dimension-four action with no duplicate semantic normal form. |
 | `DHSF-FACE-7` | pending | Implement decoded face projections indexed by existing `FaceCode`, preserve composition through its owner, and retain higher action. Defer degeneracies. |
 | `DHSF-ADEQUACY-8` | pending | Establish the strongest honest ordinal/dependent comparison through dimensions 0--3 and use dimension four as the recursion test; state exact strict/lax/Path scope and any shape/profile obstruction. |
@@ -789,6 +789,78 @@ The strict LHS audit, source TOC, active-reference and report-header lints,
 focused metrics/source-TOC tests, catalog regeneration/strict check, and exact
 diff hygiene are green. The source-only health snapshot now records 239 files;
 no long aggregate was rerun.
+
+### 13.6 Dimension-Four Acceptance Boundary — 2026-08-19
+
+The fourth native level is structurally uniform:
+
+```text
+DependentSimplex4_cat(C,x0,e01,t012,s0123)
+  = PathOut_{DependentSimplex3_cat(C,x0,e01,t012)}(s0123).
+```
+
+`dependent_simplex4_map` is the corresponding next `pathout_map_func`, and
+its reviewer retains another `fapp1_func`. The visible constructor packages a
+target tetrahedron and an arrow out of the flagged tetrahedron. Its immediate
+projections give faces 0124 and 0134, while face 0123 is the classifier flag.
+
+The generic `dependent_simplex4_readable_cell` reuses the dimension-three
+typed endpoint conjugation at the `DependentSimplex2_cat` level. When the
+three lower tetrahedra remain constructor-visible,
+`dependent_simplex4_visible_readable_cell` becomes a Hom(Sigma) pair. Its
+first component is face 0234. Its second component is the remaining dependent
+frame containing face 1234 and the top filler.
+
+The ignored full-constructor probe deliberately attempts
+
+```text
+sigma_Fst(sigma_Snd(dependent_simplex4_visible_readable_cell(...))).
+```
+
+and fails to infer a type even when all C-level vertices, edges, triangles,
+and lower tetrahedra are visible:
+
+```text
+logs/probes/dependent_simplex_dimension4-20260819-083935.log.
+```
+
+The failure is not missing Sigma eta at the outer level—the first pair already
+projects. The residual lower tetrahedra still carry the formal represented
+postcomposition endpoints of their own dependent cells. The restored probe,
+which stops at that exact recursive frame, is green:
+
+```text
+logs/probes/dependent_simplex_dimension4-20260819-084304.log.
+```
+
+This is the dimension-four decision requested by the plan. A viable internal
+code cannot store only a flat list of faces, nor may it decode by rewriting
+all formal endpoints. Each successor frame must retain:
+
+```text
+formal native owner
+typed readable endpoint view
+recursive residual frame.
+```
+
+Accordingly `DHSF-DIM4-4` is complete at the strongest honest computational
+boundary and `DHSF-CODE-5` becomes active. The direct-final-projection gap is
+not silently reclassified as a completed face computation.
+
+Focused source/reviewer checks are green quietly and warning-enabled. Both
+warning runs retain the unchanged `1150/159` import-closure inventory:
+
+```text
+logs/probes/emdash3_2_dependent_simplex_dimension4-20260819-085216.log
+logs/probes/dependent_simplex_dimension4-20260819-085219.log
+logs/probes/emdash3_2_dependent_simplex_dimension4-20260819-085221.log
+logs/probes/dependent_simplex_dimension4-20260819-085224.log.
+```
+
+The strict LHS audit, source TOC, active-reference and report-header lints,
+focused tooling tests, catalog regeneration/strict check, and exact diff
+hygiene are green. The source-only health snapshot records 241 files; no long
+aggregate was run.
 
 ## 14. Completion Definition
 

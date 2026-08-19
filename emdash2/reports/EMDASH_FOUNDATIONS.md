@@ -3870,6 +3870,24 @@ strict/lax comparison with `Functor([n],C)`, and variable-dimensional coding
 remain separate tasks rather than being hidden by an invalid mixed-variance
 Sigma total.
 
+The dimension-four acceptance case adds
+
+```text
+S4(C,x0,e01,t012,s0123) = PathOut_{S3}(s0123).
+```
+
+Its visible object has face 0123 as the flag, face 0124 as the target, and
+face 0134 as the base arrow. Applying the same readable endpoint adapter at
+the `S2` level makes the final cell literal; the first Hom(Sigma) projection
+is face 0234. The second projection is a dependent frame containing face 1234
+and the top filler. Even with all C-level constructors visible, that frame
+does not admit another raw `sigma_Fst`: the lower tetrahedra still remember
+their formal represented endpoints. This is not a failure of the dependent-
+hom account. It is the recursive datum the internal code must retain: each
+frame needs its formal owner and, when a flattened face reading is requested,
+a typed readable endpoint view. No dimension-four eta or endpoint rewrite is
+introduced.
+
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction
 is ordinary precomposition. The post/left cell uses `homd_int` and

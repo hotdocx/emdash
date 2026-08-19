@@ -1154,6 +1154,19 @@ not through a rewrite of the stable represented source. The `flag` arguments
 are semantically essential: this notation does not denote one global category
 of all simplices.
 
+Dimension four continues with `DependentSimplex4_cat` and
+`dependent_simplex4_map`. Write
+
+```text
+S4(C,x0,e01,t012,s0123)
+readable4(alpha01234) = (face0234,residual1234).
+```
+
+The literal first split is `dependent_simplex4_visible_readable_cell`.
+`sigma_Fst` reads face 0234; `sigma_Snd` is the retained frame containing face
+1234 and the top filler. Do not write a second projection of that residual
+unless its recursively readable lower endpoint views have been supplied.
+
 For groupoid-valued diagrams write
 
 ```text

@@ -608,6 +608,14 @@ detailed probe evidence.
   filler; the last represented source is moved to literal composition by
   typed equality-induced conjugation. It adds no global all-simplex category,
   variable dimension, ordinal equivalence, code grammar, rule, or unifier.
+- `emdash3_2_dependent_simplex_dimension4.lp`: rule-free fourth flagged
+  acceptance level. It adds one more `PathOut_cat`, derives whole map action,
+  retains another hom action, and exposes faces 0124/0134 directly and 0234
+  through the typed readable Hom(Sigma) split. Its remaining dependent frame
+  contains face 1234 and the top filler; a durable full-constructor negative
+  shows that recursively carried readable lower endpoints are required before
+  flattening it. No eta, endpoint rewrite, rule, unifier, or global category
+  of all simplices is added.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

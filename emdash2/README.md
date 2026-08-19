@@ -170,6 +170,14 @@ cell to literal composition before its last Sigma projection. These are
 flagged classifiers, not yet one global category of all `n`-simplices or an
 ordinal/dependent equivalence.
 
+Dimension four validates the same recursion one level further. Its classifier
+is `PathOut` at the flagged tetrahedron and its whole map is another
+`pathout_map_func`. A visible object exposes tetrahedral faces 0124 and 0134;
+the typed readable Hom(Sigma) split then exposes face 0234 and one remaining
+dependent frame containing face 1234 and the top filler. A full-constructor
+negative shows that frame must carry recursively normalized lower readable
+views; it does not justify a dimension-specific eta or endpoint rewrite.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the
