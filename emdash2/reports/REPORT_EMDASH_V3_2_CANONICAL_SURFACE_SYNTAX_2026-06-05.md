@@ -1182,6 +1182,20 @@ The literal owners are `DependentSimplexCode`,
 the existing `FaceCode(succ p,succ n)`. Do not describe the code as syntax for
 arbitrary categories: its decoded category is an intrinsic index.
 
+For mapped decoding write
+
+```text
+mapCode(F,c) = (c',F_c)
+mapView(F,c,v).
+```
+
+The literal owners are `dependent_simplex_code_map`, whose two Sigma
+projections are `dependent_simplex_code_map_target` and
+`dependent_simplex_code_map_func`, and
+`dependent_simplex_endpoint_view_map`. At zero `F_c` is `F`; at successor it
+is `pathout_map_func` of the recursively decoded map. Do not elaborate this
+notation into a second recursive map record.
+
 For groupoid-valued diagrams write
 
 ```text

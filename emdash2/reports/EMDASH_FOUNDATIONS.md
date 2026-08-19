@@ -3908,6 +3908,16 @@ required by the dimension-four residual. Boundary references remain
 `FaceCode(succ p,succ n)`, exposed only by the transparent
 `DependentSimplexFaceRef` alias.
 
+Mapped decoding follows the same recursion rather than interpreting a second
+map syntax. For a whole functor `F : C -> D`, define the zero action to return
+`(code0(D),F)`. At a successor flag `x : Obj(K)`, recursively map the previous
+code to `(c',F_c)`, store `F_c(x)` as the new flag, and use
+`pathout_map_func(F_c,x)` as the decoded whole map. This is the computational
+content of `dependent_simplex_code_map`. Consequently selected codes recover
+the already existing maps through dimension four, and their higher action is
+still the generic `fapp1_func`. Formal/readable endpoint views are carried by
+`eq_ap` of the decoded functor's object function.
+
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction
 is ordinary precomposition. The post/left cell uses `homd_int` and

@@ -75,6 +75,13 @@ classifiers through dimension four, existing `FaceCode` supplies boundary
 references, and typed endpoint-view packages preserve the formal/readable
 distinction discovered at dimension four.
 
+Mapped decoding is functorial as well as internal. Given `F : C -> D`, the
+code action recursively maps every stored flag, returns a target code over
+`D`, and reuses the existing whole `pathout_map_func` at each successor. The
+selected codes compute back to the native maps through dimension four, and a
+further hom action remains available; no parallel simplex-map calculus is
+introduced.
+
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
 of global metatheory.

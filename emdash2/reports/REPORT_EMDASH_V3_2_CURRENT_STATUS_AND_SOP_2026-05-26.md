@@ -624,6 +624,14 @@ detailed probe evidence.
   boundary references, and endpoint-view data retains formal/readable
   comparisons. It adds no generic Cat syntax, set quotient, mapped decoder,
   user inductive declaration facility, or proof-time unifier.
+- `emdash3_2_dependent_simplex_code_map.lp`: functorial mapped decoding of
+  intrinsic flag codes. It recursively returns a target code together with a
+  whole functor between decoded categories; zero returns the supplied functor
+  and successor reuses `pathout_map_func`. Selected codes compute to the
+  existing native maps through dimension four, another hom action remains
+  iterable, and endpoint views map through ordinary `eq_ap`. It adds no
+  duplicate native-map rule, proof-time unifier, arbitrary category syntax,
+  or face action.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

@@ -407,8 +407,8 @@ authorized.
 | `DHSF-PATH-3` | complete | `emdash3_2_dependent_simplex_path_associator.lp` materializes both generic raw-bracketing endpoint comparisons without a rule/unifier, exposes the whole and raw-endpoint represented associators, specializes invertibly to Path while preserving distinct J provenance, and retains one next action. `emdash3_2_dependent_simplex_represented_source.lp` then projects that selected cell at a constructor-visible Sigma spine to the native `(kappa,lambda)` tetrahedron, maps it through the existing whole next action with both component betas, and retains another hom action. |
 | `DHSF-DIM4-4` | complete at the honest recursive boundary | `emdash3_2_dependent_simplex_dimension4.lp` adds one more flagged PathOut classifier and whole map action. Visible data expose faces 0123/0124/0134; the typed readable Hom(Sigma) split exposes face 0234 and retains the 1234/top-filler frame. A full-constructor negative proves that this residual requires recursively carried readable lower endpoints rather than a dimension-specific eta or rewrite. Another hom action remains available. |
 | `DHSF-CODE-5` | complete | `emdash3_2_dependent_simplex_codes.lp` defines `RawDependentSimplexCode(C,n,K)` intrinsically indexed by its decoded category: zero has `K=C`, and successor at `x:Obj(K)` has `K=PathOut_K(x)`. The public dependent Sigma hides `K`; existing `FaceCode(succ p,succ n)` supplies boundary references; `DependentSimplexEndpointView` retains typed formal/readable endpoints. No arbitrary Cat syntax or second semantic grammar is introduced. |
-| `DHSF-DECODE-6` | in progress | Category decoding is already the intrinsic `K` projection, and selected codes reproduce native dimensions zero through four. Implement generic mapped decoding so a functor `F:C->D` recursively maps both code flags and decoded categories through `pathout_map_func`; retain a next action and avoid duplicate native-map rules. |
-| `DHSF-FACE-7` | pending | Implement decoded face projections indexed by existing `FaceCode`, preserve composition through its owner, and retain higher action. Defer degeneracies. |
+| `DHSF-DECODE-6` | complete | `emdash3_2_dependent_simplex_code_map.lp` recursively maps a raw code along `F:C->D`, returning a target code and whole decoded functor. Zero returns `F`; successor maps the stored flag and reuses `pathout_map_func`. Selected codes recover native maps through dimension four, endpoint views map by `eq_ap`, and another hom action remains iterable without duplicate native-map rules. |
+| `DHSF-FACE-7` | in progress | Implement decoded face projections indexed by existing `FaceCode`, preserve composition through its owner, and retain higher action. Defer degeneracies. |
 | `DHSF-ADEQUACY-8` | pending | Establish the strongest honest ordinal/dependent comparison through dimensions 0--3 and use dimension four as the recursion test; state exact strict/lax/Path scope and any shape/profile obstruction. |
 | `DHSF-JOIN-9` | pending | Reassess `CNB-JOIN-NORMALFORM` only when the whole face/nerve consumer reaches it. Implement narrowly if dependency-ready; otherwise hand off with exact owner and consumer evidence. |
 | `DHSF-DOC-10` | pending | Synchronize Foundations, canonical notation, current status, README/source inventories, report index, diagnostics/examples, and generated evidence only for promoted boundaries. |
@@ -911,6 +911,50 @@ the two decoded category indices.
 The source TOC, active-reference/report-header lints, focused tooling tests,
 catalog regeneration/strict check, and exact diff hygiene are green. The
 source-only health snapshot records 243 files; no long aggregate was run.
+
+### 13.8 Functorial Mapped Decoding — 2026-08-19
+
+The mapped decoder follows the intrinsic code index instead of introducing a
+parallel recursive action record. Its structural result is
+
+```text
+DependentSimplexCodeMapResult(D,n,K)
+  = Sigma target : DependentSimplexCode(D,n),
+      Functor(K,decode(target)).
+```
+
+The stable recursive owner `raw_dependent_simplex_code_map(F,c)` has exactly
+two runtime clauses. Zero returns `(code0(D),F)`. At a successor flag `x`, it
+recursively obtains `(c',F_c)`, stores `F_c(x)` in `step(c',F_c(x))`, and
+returns `pathout_map_func(F_c,x)`. The public projections are
+`dependent_simplex_code_map_target` and
+`dependent_simplex_code_map_func`. The selected codes compute to
+`dependent_simplex1_map` through `dependent_simplex4_map`; no
+dimension-specific map rule is added. A generic `fapp1_func` remains
+available at dimension four.
+
+`dependent_simplex_endpoint_view_map` applies the decoded whole functor to
+both the formal and readable endpoints and carries their comparison by
+`eq_ap` of its object function. Thus recursive readable views survive mapped
+decoding without a new equality or endpoint normal form.
+
+The two raw-code clauses share one rigid stable owner, and the strict LHS
+audit reports no unreviewed reconstructible compound slot. Quiet and
+warning-enabled source/reviewer checks are green:
+
+```text
+logs/probes/emdash3_2_dependent_simplex_code_map-20260819-092925.log
+logs/probes/dependent_simplex_code_map-20260819-092928.log
+logs/probes/emdash3_2_dependent_simplex_code_map-20260819-092930.log
+logs/probes/dependent_simplex_code_map-20260819-092933.log.
+```
+
+The warning inventory remains `1150/159`. Focused source registration,
+reviewer assertions, source TOC, active-reference/report-header lints,
+tooling tests, strict core/new-source audits, catalog regeneration/strict
+check, exact diff hygiene, and source-only health are green. The health
+snapshot records 245 files; no long aggregate was run. `DHSF-DECODE-6` is
+complete and decoded face projection is now the sole active row.
 
 ## 14. Completion Definition
 

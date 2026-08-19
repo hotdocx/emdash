@@ -305,6 +305,11 @@ the intrinsically indexed flagged-code and category-decoder extension is
 flag and is indexed by its decoded `PathOut_cat`, existing `FaceCode` is reused
 for boundary references, and endpoint-view packages retain formal/readable
 comparisons without a generic category syntax;
+the functorial mapped-decoder extension is
+`emdash3_2_dependent_simplex_code_map.lp`; it recursively maps intrinsic flags
+and decoded categories through the existing `pathout_map_func`, selected codes
+recover the native maps through dimension four, endpoint views use ordinary
+equality action, and another hom action remains iterable;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1060,14 +1065,20 @@ Use the following order:
     `FaceCode` supplies boundary references, and endpoint views retain typed
     formal/readable comparisons. It adds no arbitrary Cat syntax, set
     truncation, user inductive facility, mapped decoder, or unifier;
-111. `emdash3_2_checks.lp` for executable regression statements;
-112. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+111. `emdash3_2_dependent_simplex_code_map.lp` for functorial mapped decoding
+    of intrinsic codes. Its recursive result packages a target code and whole
+    decoded functor; zero returns the supplied functor and successor reuses
+    `pathout_map_func`. Selected codes compute to the native maps through
+    dimension four, endpoint views map by `eq_ap`, and another hom action is
+    retained. It adds no duplicate native-map rule, face action, or unifier;
+112. `emdash3_2_checks.lp` for executable regression statements;
+113. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-113. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-114. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+114. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+115. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-115. `reports/INDEX.md` for task-specific plans and decision records.
-116. `book/book.json` and `book/evidence.json` for book source
+116. `reports/INDEX.md` for task-specific plans and decision records.
+117. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

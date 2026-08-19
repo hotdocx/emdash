@@ -187,6 +187,14 @@ zero through four judgmentally. `DependentSimplexFaceRef` is only the existing
 `FaceCode(succ p,succ n)`, while `DependentSimplexEndpointView` carries formal
 and readable endpoints with their typed equality.
 
+The mapped decoder is also active. For `F : C -> D`,
+`dependent_simplex_code_map` recursively maps the previous code and its flag,
+returning both a target code and a whole functor between decoded categories.
+At successor codes that functor is the existing `pathout_map_func`; the
+selected dimensions therefore reduce to `dependent_simplex1_map` through
+`dependent_simplex4_map`, retain another `fapp1_func`, and do not duplicate
+the native action.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the
