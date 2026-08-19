@@ -258,6 +258,9 @@ Expected one-way modules are:
 emdash3_2_join_cross_compatibility.lp
   whole primitive/action-derived join-cross comparison and projections
 
+emdash3_2_join_generator_compatibility.lp
+  whole reindex/observation component paths and derived walking-generator beta
+
 emdash3_2_dependent_simplex_ordinal_filler.lp
   source triangle, arbitrary-H filler, and unconditional observation.
 ```
@@ -323,13 +326,13 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `JCDS-OWNER-2` | complete | The primitive and action-derived cross objects inhabit the same `Prof_transf_cat` after existing branch/point betas align endpoints. Direct conversion is false. A runtime rule cannot head the transparent defined observation alias; the next justified candidate is one whole equality/path computation principle at the join-recursion semantic owner, not a Cat-valued total. |
 | `JCDS-WHOLE-3` | complete | `emdash3_2_join_cross_compatibility.lp` adds one propositional higher-constructor beta between the whole observed and primitive cross objects. `path_to_hom` turns it into a whole displayed transformation; direct conversion remains false and a wrong target is rejected. No runtime rule or stable-head migration is added. |
 | `JCDS-PROJECT-4` | complete | The whole path projects to arbitrary shaped equality by `Prof_cell_eval`, to endpoint components by `tdapp0_fapp0`, and retains canonical `tdapp1_int_cell` base-arrow action. No duplicate expanded naturality wrapper or Cat-valued total is needed. |
-| `JCDS-SOURCE-5` | in progress | Specialize the retained join-cross base-arrow action to `DirectedSimplex_cat(2)` and construct its canonical native dependent triangle filler. |
-| `JCDS-FILLER-6` | pending | Map the source triangle under arbitrary `H` to inhabit `OrdinalDependentSimplex2CanonicalFiller(C,H)`. |
-| `JCDS-OBSERVE-7` | pending | Define and review the unconditional intrinsic dimension-two observation with all faces and top component computing. |
-| `JCDS-PROFILE-8` | pending | Validate general directed non-collapse, selected strict scope, and Path invertibility without duplicating the construction. |
-| `JCDS-NEXT-9` | pending | Retain the next action and record the exact dimension-three continuation boundary; do not implement dimension four here. |
-| `JCDS-DOC-10` | pending | Synchronize Foundations, syntax, status, READMEs, AGENTS, report index, source/check registries, reviewers, catalog, and source-only health. |
-| `JCDS-CLOSE-11` | pending | Complete every row by implementation, evidence-backed rejection, or concrete deferral; run proportional final gates and leave excluded operations untouched. |
+| `JCDS-SOURCE-5` | complete | `emdash3_2_dependent_simplex_ordinal_filler.lp` reindexes the source join cross by the exact strict terminal profile used by selected edges 02 and 12. Its `fdapp1_int_cell` along the opposite walking generator is conjugated only by whole-derived edge paths and inhabits the canonical source filler; no filler constant is introduced. |
+| `JCDS-FILLER-6` | complete | The source filler is packaged once as the existing native two-simplex, mapped through `dependent_simplex2_map(H)`, and projected at its top component. This constructs `ordinal_dependent_simplex2_canonical_filler(H)` in the exact `OrdinalDependentSimplex2CanonicalFiller(C,H)` type. |
+| `JCDS-OBSERVE-7` | complete | `ordinal_dependent_simplex2_observe_canonical(H)` applies the existing explicit observation to the constructed filler. The reviewer verifies the code/edge-01 flag, visible normalized 02/12 faces, and top component. |
+| `JCDS-PROFILE-8` | complete | The generic endpoints remain non-convertible; selected strict input uses the same construction with only existing compositor reductions; for `Path_cat(A)` the filler elaborates as equality and `eq_sym` supplies its inverse. A wrong final base edge is rejected. |
+| `JCDS-NEXT-9` | complete | `ordinal_dependent_simplex2_native_map(H)` remains the whole `dependent_simplex2_map`, and `ordinal_dependent_simplex2_next_func(H)` exposes its next hom action. Dimension three may consume that action; dimension four is not implemented here. |
+| `JCDS-DOC-10` | complete | Foundations, syntax, current status, root/package READMEs, AGENTS, report index, source/check registries, focused reviewers, catalog, and source-only health are synchronized to the constructive dimension-two result. |
+| `JCDS-CLOSE-11` | in progress | Complete every row by implementation, evidence-backed rejection, or concrete deferral; run proportional final gates and leave excluded operations untouched. |
 
 ### 14.1 Launch And Whole-Type Audit — 2026-08-19
 
@@ -425,6 +428,110 @@ The source adds no rule or unifier; strict LHS audit is vacuous. The reviewer
 keeps direct nonconversion and wrong-target rejection. `JCDS-WHOLE-3` and
 `JCDS-PROJECT-4` are complete. The active row now specializes the retained
 base-arrow action to the canonical source triangle.
+
+### 14.3 Whole Generator Bridge And Canonical Filler — 2026-08-19
+
+The source specialization exposed two genuine whole projection boundaries,
+not a missing pointwise simplex axiom:
+
+```text
+Fibre(Prof_reindex_transf(r,F,G),a,b)
+  = Fibre(r,F(a),G(b))
+
+Fibre(join_map_observe_cross(H),*)
+  = fapp1_func(H) o walking_arrow_generator_func.
+```
+
+`emdash3_2_join_generator_compatibility.lp` records these as propositional
+paths between whole functors. An attempted generic runtime reindex-component
+rule did reduce the term but failed the dependent endpoint/subject-reduction
+boundary, so it was rejected rather than promoted. The equality-induced whole
+component cell retains another hom action. Combining the two paths with the
+already-promoted `join_map_extend_cross_beta` derives
+`join_map_generator_beta(F,G)`; no independent point or generator beta is
+postulated.
+
+The selected source construction fixes the exact terminal strict profile used
+by both new triangle edges. Its reindexed whole cross has two components which
+the derived generator beta identifies with edges 02 and 12. The opposite
+walking generator supplies the raw naturality cell. The retained
+terminal-coordinate action is compared propositionally with identity, and
+equality-induced arrows conjugate the raw cell to the selected edge endpoints.
+The resulting term checks directly as
+
+```text
+ordinal_simplex2_source_canonical_filler
+  : OrdinalDependentSimplex2CanonicalFiller(Delta[2],id).
+```
+
+That source is then packaged through the existing native visible constructor.
+For arbitrary `H : Functor(Delta[2],C)`, the whole existing
+`dependent_simplex2_map(H)` maps this one object; its top Sigma projection is
+
+```text
+ordinal_dependent_simplex2_canonical_filler(H)
+  : OrdinalDependentSimplex2CanonicalFiller(C,H).
+```
+
+The unconditional observation is the existing conditional constructor applied
+to that term. Reviewer checks compute the intrinsic code/edge-01 flag, visible
+02 and 12 faces, and the top filler. The generic source and target generator
+functors remain runtime-distinct; a wrong base edge is rejected. A
+`Path_cat(A)` target makes the filler an equality with `eq_sym` inverse, while
+selected strict data uses the same construction and only the already-active
+strict compositor reductions.
+
+The whole mapped native object remains public and
+`ordinal_dependent_simplex2_next_func(H)` exposes its next hom action. This is
+the exact dimension-three handoff: a later child plan may inspect the image of
+the source tetrahedral action, but this plan adds neither dimension-three
+ordinal adequacy nor dimension four.
+
+Focused quiet and warning-enabled source/reviewer checks are green:
+
+```text
+logs/probes/emdash3_2_join_generator_compatibility-20260819-141653.log
+logs/probes/emdash3_2_dependent_simplex_ordinal_filler-20260819-140639.log
+logs/probes/join_generator_compatibility-20260819-140936.log
+logs/probes/dependent_simplex_ordinal_filler-20260819-141206.log
+logs/probes/emdash3_2_join_generator_compatibility-20260819-141435.log
+logs/probes/emdash3_2_dependent_simplex_ordinal_filler-20260819-141435.log
+logs/probes/join_generator_compatibility-20260819-141435.log
+logs/probes/dependent_simplex_ordinal_filler-20260819-141435.log.
+```
+
+The raw warning-marker inventory is unchanged at `1315` for sources and
+`1316` for reviewers relative to the immediate predecessor closure. Both new
+sources are rule-free, so strict LHS audit remains vacuous for this tranche.
+`JCDS-SOURCE-5` through `JCDS-NEXT-9` are complete; documentation and final
+closeout remain active.
+
+### 14.4 Authority And Validation Synchronization — 2026-08-19
+
+The two new sources are registered in both `scripts/check.sh` and
+`scripts/check_metrics.py`; their two focused reviewers are discovered by the
+standard examples runner. Foundations, canonical syntax, current status,
+root/package READMEs, AGENTS, and the report index now distinguish the
+constructed dimension-two theorem from the still-deferred higher-dimensional
+and mapping-category claims.
+
+Proportional gates are green:
+
+- registered focused source checks for both new modules;
+- focused quiet and warning-enabled checks for both sources and reviewers;
+- unchanged predecessor warning-marker inventory (`1315/1316`);
+- strict LHS audit (both new sources contain no rules or unifiers);
+- check catalog strict verification;
+- source TOC, active-reference, and report-header checks;
+- `git diff --check` and Python compilation of the edited metrics registry;
+- source-only health snapshot for `255` files, hash
+  `sha256:3b45e3c9610c92b88de90848c201290dc26871bd0351cbb692b241a8b6e7fac4`.
+
+No long aggregate was rerun: the new files and their complete import closures
+were checked directly, while unchanged boundaries retain their recent green
+evidence. `JCDS-DOC-10` is complete. `JCDS-CLOSE-11` remains active only long
+enough to create and record the authorized local implementation checkpoint and
+verify the final staged/committed boundary.
 
 ## 15. Completion Definition
 

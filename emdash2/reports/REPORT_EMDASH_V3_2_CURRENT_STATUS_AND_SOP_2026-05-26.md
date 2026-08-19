@@ -644,17 +644,29 @@ detailed probe evidence.
   ordinal/dependent comparison at the strongest current boundary. Dimension
   zero is a whole pointwise retraction; dimension one observes the walking
   arrow's endpoints and generator. Generic core join-eliminator point betas
-  make the three restricted triangle edges share vertices. One explicit
-  `OrdinalDependentSimplex2CanonicalFiller` then constructs the native
-  triangle. The filler itself, dimensions three/four, and a mapping-category
-  equivalence remain outside this relative boundary; no local filler, global
-  total, broad eta, or unifier is added.
+  make the three restricted triangle edges share vertices. It retains the
+  explicit-filler interface consumed by the constructive continuation and
+  adds no global total, broad eta, or unifier.
 - `emdash3_2_join_cross_compatibility.lp`: whole propositional
   higher-constructor beta relating the cross observed from a join extension to
   its primitive supplied cross. The equality-induced displayed transformation
   projects to endpoint and arbitrary shaped components and retains generic
   `tdapp1_int_cell` base-arrow action. It adds no runtime rule, opaque simplex
   filler, Cat-valued coherent-square total, broad join eta, or unifier.
+- `emdash3_2_join_generator_compatibility.lp`: whole walking-generator
+  refinement. A propositional component law for `Prof_reindex_transf` and a
+  whole observation/ordinary-hom-action comparison combine with the existing
+  extension cross beta to derive `join_map_generator_beta`. Equality-induced
+  cells retain higher action; no runtime rule, independent generator axiom,
+  or unifier is added.
+- `emdash3_2_dependent_simplex_ordinal_filler.lp`: constructed ordinal
+  dimension-two adequacy. One profiled source join-cross naturality cell is
+  conjugated to the selected 02/12 edges, packaged as the existing native
+  two-simplex, mapped by `dependent_simplex2_map(H)`, and projected to obtain
+  `ordinal_dependent_simplex2_canonical_filler(H)`. The observation is
+  unconditional and one next action remains public. Dimensions three/four
+  and a mapping-category equivalence remain separate work; no filler constant,
+  rule, or unifier is added.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

@@ -3951,11 +3951,11 @@ first produced three nonconvertible presentations of each shared vertex. The
 generic join eliminator now has direct point betas on both introductions. They
 close the projection-order pair between whole branch restriction and ordinary
 composed-functor object application, so the three vertices compute without a
-selected-simplex rewrite. The remaining datum is one object of the native
-dependent triangle fibre, named
-`OrdinalDependentSimplex2CanonicalFiller`. Given it,
-`ordinal_dependent_simplex2_observe` constructs the intrinsic dimension-two
-observation through the existing `dependent_simplex2_visible` owner.
+selected-simplex rewrite. The corresponding native dependent triangle fibre
+is named `OrdinalDependentSimplex2CanonicalFiller`. The explicit interface
+`ordinal_dependent_simplex2_observe(H,alpha)` remains useful when a caller
+wants to supply its own filler. The canonical interface now constructs that
+object and needs no extra input.
 
 The primitive join-recursion cross datum and the action-derived cross
 observation now have a whole propositional computation path. Its
@@ -3965,14 +3965,38 @@ components, and `tdapp1_int_cell` retains base-arrow action. This is the
 higher-constructor beta for join elimination, not a runtime fold of the
 transparent observed-cross alias.
 
-The active next step is to specialize that whole action to the walking-arrow
-base arrow and obtain the canonical source triangle filler, then map it under
-an arbitrary ordinal functor. No Cat-valued coherent-square total is required
-for the whole beta itself. A strict target profile may collapse the eventual
-functor compositor, and a Path target will make the mapped filler invertible,
-but neither profile replaces the generic construction. The current theorem
-remains a computational relative adequacy result rather than a global
-equivalence of mapping categories.
+Two further whole paths make that specialization computational without a
+Cat-valued coherent-square total. First, the component of
+`Prof_reindex_transf(r,F,G)` agrees propositionally with the component of `r`
+at the mapped endpoint pair. Second, observing a cross through a
+WalkingArrow map agrees with applying that map's ordinary hom action to
+`walking_arrow_generator_func`. Together with the join-extension beta these
+derive the whole walking-generator beta of `join_map_func`; the point equation
+is only its Terminal-object projection.
+
+The source construction reindexes the join cross by the same strict terminal
+profile used by the selected 02 and 12 faces. Its action along the opposite
+walking generator is the raw dependent triangle cell. The derived whole edge
+paths identify its two cross components with the selected generators, and
+equality-induced arrows conjugate the raw cell only at those endpoints. This
+gives
+
+```text
+ordinal_simplex2_source_canonical_filler
+  : OrdinalDependentSimplex2CanonicalFiller(Delta[2],id).
+```
+
+The source is packaged once by `dependent_simplex2_visible`. For arbitrary
+`H : Functor(Delta[2],C)`, the existing whole
+`dependent_simplex2_map(H)` maps that native object, and its top dependent
+projection is `ordinal_dependent_simplex2_canonical_filler(H)`. Consequently
+`ordinal_dependent_simplex2_observe_canonical(H)` constructs the intrinsic
+dimension-two observation without a filler argument. The underlying whole map
+and another hom action remain available. A strict target uses the same
+construction with only already-justified compositor reductions; a Path target
+makes the resulting filler an equality with an `eq_sym` inverse. This remains
+a computational relative adequacy result rather than a global equivalence of
+mapping categories; dimensions three and four are separate continuations.
 
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction

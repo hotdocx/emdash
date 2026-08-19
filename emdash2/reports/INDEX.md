@@ -9,13 +9,18 @@ compatibility between `join_map_extend_cross(d)` and the action-derived
 `join_map_observe_cross(join_map_extend_object(d))`. The intended result is a
 constructed `OrdinalDependentSimplex2CanonicalFiller(C,H)` and unconditional
 native observation for every ordinal triangle functor `H`, with a retained
-next action for the later dimension-three plan. It explicitly excludes an
+next action for the later dimension-three plan. That bounded mathematical
+objective is now implemented: `emdash3_2_join_generator_compatibility.lp`
+derives the whole walking-generator beta from reindex, join-extension, and
+observation/action paths; `emdash3_2_dependent_simplex_ordinal_filler.lp`
+constructs the profiled source filler, maps its native simplex under arbitrary
+`H`, and projects the canonical target filler. Documentation and proportional
+closeout remain active. The plan explicitly excludes an
 opaque filler, broad join eta, full dimensions three/four, and a whole
 semisimplicial nerve. Its first promoted module is
 `emdash3_2_join_cross_compatibility.lp`: a whole propositional cross beta
 induces a displayed transformation, arbitrary shaped equality, endpoint
-components, and retained base-arrow action. The active next step extracts the
-canonical source triangle from that action.
+components, and retained base-arrow action.
 
 `REPORT_EMDASH_V3_2_DEPENDENT_HOM_SIMPLEX_FOUNDATIONS_PLAN_2026-08-19.md`
 is the completed bounded child continuation of the coherent-nerve bridge. It

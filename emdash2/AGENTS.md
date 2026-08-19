@@ -274,6 +274,11 @@ the whole primitive/action-derived join-cross compatibility extension is
 beta induces a whole displayed transformation, arbitrary shaped equality,
 endpoint components, and retained base-arrow action without a runtime rule,
 filler axiom, or Cat-valued coherent-square total;
+the whole walking-generator compatibility refinement is
+`emdash3_2_join_generator_compatibility.lp`; propositional reindex-component
+and observation/action paths combine with the existing extension cross beta
+to derive the `join_map_func` generator beta, while equality-induced cells
+retain higher action and no new runtime rule or unifier is added;
 the variable-dimension nonempty-face realization extension is
 `emdash3_2_face_realization.lp`; raw skip/keep syntax computes recursively by
 join inclusion and join mapping, curated raw-code sethood lets that action
@@ -328,6 +333,11 @@ dimension one observes the walking-arrow edge, and core join point betas make
 the three ordinal triangle edges share vertices; one explicit dependent
 filler then constructs the native triangle, while its canonical source and
 higher dimensions remain at the join-cross compatibility boundary;
+the constructed ordinal dimension-two continuation is
+`emdash3_2_dependent_simplex_ordinal_filler.lp`; a profiled source join-cross
+naturality cell gives the canonical source filler, the existing whole native
+two-simplex map constructs the filler for every ordinal triangle, the public
+observation is unconditional, and one next hom action remains available;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -953,7 +963,11 @@ Use the following order:
     relating the cross observed from a join extension to its primitive cross
     datum. Its equality-induced cell projects to arbitrary shaped components
     and retains `tdapp1_int_cell` base-arrow action. It adds no runtime rule,
-    opaque simplex filler, broad join eta, Cat-valued total, or unifier;
+    opaque simplex filler, broad join eta, Cat-valued total, or unifier. Its
+    one-way continuation `emdash3_2_join_generator_compatibility.lp` adds the
+    two propositional whole projection paths needed to derive the ordinary
+    `join_map_func` walking-generator beta, while retaining higher action and
+    adding no runtime rule or independent generator axiom;
 87. `emdash3_2_face_realization.lp` for variable-dimension realization of
     nonempty semisimplex face codes. Raw skip/keep syntax computes through
     join inclusion/mapping and curated sethood permits public truncation
@@ -1103,9 +1117,12 @@ Use the following order:
 114. `emdash3_2_dependent_simplex_ordinal_adequacy.lp` for the strongest
     relative ordinal comparison. Dimension zero is a whole retraction;
     dimension one observes source/target/generator; and join point betas make
-    triangle vertices shared. `OrdinalDependentSimplex2CanonicalFiller` is
-    the exact remaining input to the native triangle constructor. It adds no
-    canonical join-cross filler, global total, broad eta, rule, or unifier;
+    triangle vertices shared. Its one-way continuation
+    `emdash3_2_dependent_simplex_ordinal_filler.lp` constructs the exact
+    `OrdinalDependentSimplex2CanonicalFiller` from a profiled source
+    join-cross cell, maps that native source under arbitrary `H`, exposes the
+    unconditional observation and one next action, and adds no filler axiom,
+    global total, broad eta, rule, or unifier;
 115. `emdash3_2_checks.lp` for executable regression statements;
 116. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;

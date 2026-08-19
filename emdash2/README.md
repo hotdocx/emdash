@@ -203,17 +203,20 @@ compute faces 01, 02, and 12 of a visible triangle and retain generic hom
 action. Direct and sequential opaque whole functors are not collapsed by a
 new extensionality rule.
 
-`emdash3_2_dependent_simplex_ordinal_adequacy.lp` records the strongest current
+`emdash3_2_dependent_simplex_ordinal_adequacy.lp` records the low-dimensional
 ordinal comparison. Dimension zero has whole evaluation/constant functors;
-dimension one observes an ordinal walking-arrow map as its native edge. Two
-generic join-eliminator point betas make the three restricted edges of an
-ordinal triangle share vertices. `OrdinalDependentSimplex2CanonicalFiller`
-is then the exact remaining dependent cell needed by
-`ordinal_dependent_simplex2_observe`. The whole compatibility between the
-primitive and action-derived join-cross cells is now active as a propositional
-higher-constructor beta, with arbitrary shaped projection and retained
-base-arrow action. Its source-triangle specialization remains the active step;
-no global mixed-variance category or unqualified equivalence is claimed.
+dimension one observes an ordinal walking-arrow map as its native edge, and
+generic join-eliminator point betas make the three restricted triangle edges
+share vertices. The continuation is now constructive in dimension two.
+`emdash3_2_join_generator_compatibility.lp` derives the whole walking-generator
+beta from profunctor reindex, join-extension, and observation/action paths.
+`emdash3_2_dependent_simplex_ordinal_filler.lp` uses one profiled source
+join-cross naturality cell to construct the source filler, maps the resulting
+native simplex under every ordinal triangle `H`, and projects the canonical
+filler. `ordinal_dependent_simplex2_observe_canonical(H)` therefore needs no
+filler argument and retains another hom action. Full dimensions three/four,
+a global mixed-variance category, and an unqualified mapping-category
+equivalence remain unclaimed.
 
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section

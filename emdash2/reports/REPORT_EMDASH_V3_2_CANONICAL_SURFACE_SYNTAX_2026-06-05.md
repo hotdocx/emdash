@@ -1216,31 +1216,37 @@ For the low-dimensional ordinal comparison write
 ```text
 observe0(H)                 H[*]
 observe1(H)                 (H[0],H[1],H[01])
-triangleFiller(H)           the remaining dependent 2-cell
-observe2(H,triangleFiller(H)).
+triangleFiller(H)           the canonical dependent 2-cell
+observe2(H).
 ```
 
 The literal owners are `ordinal_simplex0_observe_func`,
 `ordinal_dependent_simplex1_observe`,
 `OrdinalDependentSimplex2CanonicalFiller`, and
-`ordinal_dependent_simplex2_observe`. Shared ordinal triangle vertices compute
-through the generic join-eliminator point betas. Do not suppress the filler
-argument, call the object-level observation package a category, or write an
-unqualified ordinal/dependent equivalence.
+`ordinal_dependent_simplex2_canonical_filler`, and
+`ordinal_dependent_simplex2_observe_canonical`. The explicit owner
+`ordinal_dependent_simplex2_observe(H,alpha)` remains available when a caller
+supplies a noncanonical filler. Shared ordinal triangle vertices compute
+through the generic join-eliminator point betas. Do not call the object-level
+observation package a category or write an unqualified ordinal/dependent
+equivalence.
 
 For the join higher-constructor computation write
 
 ```text
 crossBeta(d) : observedCross(extend(d)) = primitiveCross(d)
-crossCell(d) : observedCross(extend(d)) -> primitiveCross(d).
+crossCell(d) : observedCross(extend(d)) -> primitiveCross(d)
+generatorBeta(F,G) : sourceCross(F[*],G[*]) = joinMap(F,G)[generator].
 ```
 
 The literal owners are `join_map_extend_cross_beta` and its equality-induced
 `join_map_extend_cross_cell`; shaped equality is
 `join_map_extend_cross_shaped_beta`. Component and base-arrow action remain at
-`tdapp0_fapp0` and `tdapp1_int_cell`. Do not print this propositional beta as a
-runtime reduction or confuse it with the still-unconstructed ordinal triangle
-filler.
+`tdapp0_fapp0` and `tdapp1_int_cell`. The literal whole generator owner is
+`join_map_generator_beta`; its point projection is
+`join_map_generator_at_beta`. Do not print either propositional beta as a
+runtime reduction or replace the whole source filler by a handwritten
+triangle equation.
 
 For groupoid-valued diagrams write
 
