@@ -28,8 +28,11 @@ top filler, and keeps another hom action. The dimension-four acceptance case
 is `emdash3_2_dependent_simplex_dimension4.lp`: it adds another whole PathOut
 level, exposes faces through 0234, and retains the final 1234/top-filler frame
 as evidence that readable endpoint views must recurse. The active next step is
-the small internal code/decoder extracted from this pattern. A global
-all-simplex category and the ordinal/dependent equivalence remain later,
+the mapped decoder over `emdash3_2_dependent_simplex_codes.lp`. That module
+already provides intrinsic flag codes indexed by their decoded category,
+selected decodings through dimension four, existing-`FaceCode` boundary
+references, and typed formal/readable endpoint views. A global all-simplex
+category and the ordinal/dependent equivalence remain later,
 profile-sensitive work.
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`

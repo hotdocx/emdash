@@ -178,6 +178,15 @@ dependent frame containing face 1234 and the top filler. A full-constructor
 negative shows that frame must carry recursively normalized lower readable
 views; it does not justify a dimension-specific eta or endpoint rewrite.
 
+The corresponding intrinsic code grammar is now active. A raw code is indexed
+by `(C,n,K)`, where `K` is already its decoded category. The zero constructor
+has `K=C`; one successor flag `x : Obj(K)` has
+`K'=PathOut_K(x)`. The public package existentially hides `K` and decoding is
+its first projection. Codes selected from the visible flags recover dimensions
+zero through four judgmentally. `DependentSimplexFaceRef` is only the existing
+`FaceCode(succ p,succ n)`, while `DependentSimplexEndpointView` carries formal
+and readable endpoints with their typed equality.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the

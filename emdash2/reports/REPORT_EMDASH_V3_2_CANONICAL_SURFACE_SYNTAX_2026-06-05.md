@@ -1167,6 +1167,21 @@ The literal first split is `dependent_simplex4_visible_readable_cell`.
 1234 and the top filler. Do not write a second projection of that residual
 unless its recursively readable lower endpoint views have been supplied.
 
+For intrinsic flag codes write
+
+```text
+code0(C)
+step(c,x) : Code(C,n+1,PathOut(decode(c),x))
+decode(code4(C,x0,e01,t012,s0123)) = S4(C,x0,e01,t012,s0123)
+view(c;formal,readable,p).
+```
+
+The literal owners are `DependentSimplexCode`,
+`dependent_simplex_code_step`, `dependent_simplex_code_decode_cat`, and
+`DependentSimplexEndpointView`. `DependentSimplexFaceRef(p,n)` is definitionally
+the existing `FaceCode(succ p,succ n)`. Do not describe the code as syntax for
+arbitrary categories: its decoded category is an intrinsic index.
+
 For groupoid-valued diagrams write
 
 ```text

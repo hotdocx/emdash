@@ -67,6 +67,14 @@ recursive readable endpoint views. Degeneracies,
 generic-dimensional horns/Kan filling, and the whole mapping-category/
 displayed-cell comparison remain future work.
 
+That finite pattern now has an internal code. Codes are intrinsically indexed
+by their decoded category: zero is indexed by `C`, and a successor at flag
+`x : Obj(K)` is indexed by `PathOut_K(x)`. Consequently decoding does not
+interpret arbitrary category syntax. Selected codes recover the native
+classifiers through dimension four, existing `FaceCode` supplies boundary
+references, and typed endpoint-view packages preserve the formal/readable
+distinction discovered at dimension four.
+
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
 of global metatheory.

@@ -3888,6 +3888,26 @@ frame needs its formal owner and, when a flattened face reading is requested,
 a typed readable endpoint view. No dimension-four eta or endpoint rewrite is
 introduced.
 
+The internal code therefore indexes syntax by semantics rather than encoding
+semantics as syntax:
+
+```text
+RawCode(C,0,C)
+RawCode(C,n,K), x : Obj(K)
+  -> RawCode(C,n+1,PathOut_K(x)).
+```
+
+`DependentSimplexCode(C,n)` hides the decoded category `K` in a dependent
+Sigma, and `dependent_simplex_code_decode_cat` is its first projection. Thus
+the decoder cannot invent a competing `Hom` or `Sigma` normal form. The
+selected codes `dependent_simplex_code1` through
+`dependent_simplex_code4` decode to the checked flagged classifiers. A
+`DependentSimplexEndpointView` stores a formal endpoint, a readable endpoint,
+and their equality inside the decoded category; this is the recursive view
+required by the dimension-four residual. Boundary references remain
+`FaceCode(succ p,succ n)`, exposed only by the transparent
+`DependentSimplexFaceRef` alias.
+
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction
 is ordinary precomposition. The post/left cell uses `homd_int` and

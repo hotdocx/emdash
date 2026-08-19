@@ -406,8 +406,8 @@ authorized.
 | `DHSF-NATIVE-2` | complete | `emdash3_2_dependent_simplex_native_dimensions.lp` defines the honest flagged tower `C`, `PathOut_C(x0)`, `PathOut(e01)`, and `PathOut(t012)` through dimension three. Derived whole map functors iterate the existing displayed hom/Sigma/pullback-total action and retain another hom action. Visible constructors expose all lower faces; a typed represented-source conjugation exposes face 123 and the top filler. A single global mixed-variance all-simplex total is explicitly not claimed. |
 | `DHSF-PATH-3` | complete | `emdash3_2_dependent_simplex_path_associator.lp` materializes both generic raw-bracketing endpoint comparisons without a rule/unifier, exposes the whole and raw-endpoint represented associators, specializes invertibly to Path while preserving distinct J provenance, and retains one next action. `emdash3_2_dependent_simplex_represented_source.lp` then projects that selected cell at a constructor-visible Sigma spine to the native `(kappa,lambda)` tetrahedron, maps it through the existing whole next action with both component betas, and retains another hom action. |
 | `DHSF-DIM4-4` | complete at the honest recursive boundary | `emdash3_2_dependent_simplex_dimension4.lp` adds one more flagged PathOut classifier and whole map action. Visible data expose faces 0123/0124/0134; the typed readable Hom(Sigma) split exposes face 0234 and retains the 1234/top-filler frame. A full-constructor negative proves that this residual requires recursively carried readable lower endpoints rather than a dimension-specific eta or rewrite. Another hom action remains available. |
-| `DHSF-CODE-5` | in progress | Derive the smallest intrinsically indexed `DependentSimplexCode` grammar from dimensions 0--4. The dimension-four result requires codes to retain both the formal native frame and its recursively typed readable view; reuse `FaceCode`, record reification/decoding scope and profile parameters, and add no generic type syntax. |
-| `DHSF-DECODE-6` | pending | Implement code decoding to canonical `Hom_cat`/`Sigma_cat` owners so existing rules expose `homd_`; reproduce the checked triangle/tetrahedron and dimension-four action with no duplicate semantic normal form. |
+| `DHSF-CODE-5` | complete | `emdash3_2_dependent_simplex_codes.lp` defines `RawDependentSimplexCode(C,n,K)` intrinsically indexed by its decoded category: zero has `K=C`, and successor at `x:Obj(K)` has `K=PathOut_K(x)`. The public dependent Sigma hides `K`; existing `FaceCode(succ p,succ n)` supplies boundary references; `DependentSimplexEndpointView` retains typed formal/readable endpoints. No arbitrary Cat syntax or second semantic grammar is introduced. |
+| `DHSF-DECODE-6` | in progress | Category decoding is already the intrinsic `K` projection, and selected codes reproduce native dimensions zero through four. Implement generic mapped decoding so a functor `F:C->D` recursively maps both code flags and decoded categories through `pathout_map_func`; retain a next action and avoid duplicate native-map rules. |
 | `DHSF-FACE-7` | pending | Implement decoded face projections indexed by existing `FaceCode`, preserve composition through its owner, and retain higher action. Defer degeneracies. |
 | `DHSF-ADEQUACY-8` | pending | Establish the strongest honest ordinal/dependent comparison through dimensions 0--3 and use dimension four as the recursion test; state exact strict/lax/Path scope and any shape/profile obstruction. |
 | `DHSF-JOIN-9` | pending | Reassess `CNB-JOIN-NORMALFORM` only when the whole face/nerve consumer reaches it. Implement narrowly if dependency-ready; otherwise hand off with exact owner and consumer evidence. |
@@ -861,6 +861,56 @@ The strict LHS audit, source TOC, active-reference and report-header lints,
 focused tooling tests, catalog regeneration/strict check, and exact diff
 hygiene are green. The source-only health snapshot records 241 files; no long
 aggregate was run.
+
+### 13.7 Intrinsically Indexed Flag Codes — 2026-08-19
+
+The dimension-four result rules out both earlier extremes: external source
+generation is unnecessary, while a deep code for arbitrary categories would
+duplicate the kernel. The promoted middle ground is:
+
+```text
+RawDependentSimplexCode(C,0,C)
+RawDependentSimplexCode(C,n,K), x : Obj(K)
+  -> RawDependentSimplexCode(C,n+1,PathOut_K(x)).
+```
+
+The public `DependentSimplexCode(C,n)` packages the decoded `K` in a dependent
+Sigma. `dependent_simplex_code_decode_cat` is simply `sigma_Fst`; the raw code
+at that index is `sigma_Snd`. Thus decoding never interprets arbitrary `Cat`
+syntax and cannot create a second Hom/Sigma/homd normal form.
+
+The source
+
+```text
+emdash3_2_dependent_simplex_codes.lp
+```
+
+also provides selected codes through dimension four. Their decoded categories
+are judgmentally the already-promoted `DependentSimplex1_cat` through
+`DependentSimplex4_cat`. `DependentSimplexFaceRef(p,n)` is a transparent alias
+for the existing `FaceCode(succ p,succ n)`, not another face syntax.
+`DependentSimplexEndpointView` packages formal and readable objects in the
+decoded category together with their typed equality, carrying the recursive
+view demanded by the dimension-four residual.
+
+The raw-wrapper rule has one rigid `RawDependentSimplexCode` owner and no
+compound inferred LHS slot. The focused strict rule audit is green. Quiet and
+warning-enabled source/reviewer checks are green with no diagnostic delta:
+
+```text
+logs/probes/emdash3_2_dependent_simplex_codes-20260819-090640.log
+logs/probes/dependent_simplex_codes-20260819-090642.log
+logs/probes/emdash3_2_dependent_simplex_codes-20260819-090645.log
+logs/probes/dependent_simplex_codes-20260819-090648.log.
+```
+
+The warning inventory remains `1150/159`. `DHSF-CODE-5` is complete. The
+remaining decoder work is specifically functorial: recursively map the hidden
+flag code along `F:C->D` and return the existing native whole functor between
+the two decoded category indices.
+The source TOC, active-reference/report-header lints, focused tooling tests,
+catalog regeneration/strict check, and exact diff hygiene are green. The
+source-only health snapshot records 243 files; no long aggregate was run.
 
 ## 14. Completion Definition
 

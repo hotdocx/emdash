@@ -616,6 +616,14 @@ detailed probe evidence.
   shows that recursively carried readable lower endpoints are required before
   flattening it. No eta, endpoint rewrite, rule, unifier, or global category
   of all simplices is added.
+- `emdash3_2_dependent_simplex_codes.lp`: curated intrinsic flag codes indexed
+  by ambient `C`, dimension `n`, and decoded category `K`. Zero is indexed by
+  `C`; successor stores `x : Obj(K)` and is indexed by `PathOut_K(x)`. The
+  public Sigma package decodes by category projection, selected codes recover
+  native dimensions zero through four, existing `FaceCode` is reused for
+  boundary references, and endpoint-view data retains formal/readable
+  comparisons. It adds no generic Cat syntax, set quotient, mapped decoder,
+  user inductive declaration facility, or proof-time unifier.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category
