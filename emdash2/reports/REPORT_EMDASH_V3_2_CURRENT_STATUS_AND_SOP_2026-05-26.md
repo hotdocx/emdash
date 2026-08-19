@@ -545,6 +545,13 @@ detailed probe evidence.
   shape at successor levels. Generic Functor/Transf hom action remains
   iterable; no face action, whole semisimplicial nerve, recursive dependent-
   cell bridge, rule, or unifier is added.
+- `emdash3_2_tetrahedron_faces.lp`: four selected strict-profile triangle
+  cofaces of the ordinal tetrahedron. All six shared edges compute through
+  face-code composition. The three edges inside the old triangle also agree
+  as composite whole functors; the three edges involving the newly joined
+  vertex remain distinct whole-functor presentations pending generic
+  join-map composition. It adds no rule, unifier, generic decoder, or top
+  tetrahedral cell.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

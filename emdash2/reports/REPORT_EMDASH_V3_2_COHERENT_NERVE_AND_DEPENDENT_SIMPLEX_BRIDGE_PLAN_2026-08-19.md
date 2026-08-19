@@ -5,8 +5,8 @@ Date: 2026-08-19 (America/Toronto)
 Plan-ID: `COHERENT-NERVE-DEPENDENT-SIMPLEX-V3.2`
 
 Status: **active bounded implementation plan**. The architecture, baseline
-reuse audit, and variable-level facade are complete; `CNB-TETRA-FACE-3` is
-the active implementation row.
+reuse audit, variable-level facade, and four selected tetrahedral cofaces are
+complete; `CNB-JOIN-REC-4` is the active implementation row.
 
 Branch: `goal/coherent-nerve-bridge-v3.2`
 
@@ -427,8 +427,8 @@ branch/worktree deletion, or unrelated repository mutation is authorized.
 | `CNB-00` | complete | Promoted the generic architecture, dimension-three acceptance boundary, Lean comparison, nonclaims, module order, validation policy, and Git boundary into this living plan. |
 | `CNB-BASE-1` | complete | Dedicated worktree forked from clean `e31a812`; workspace bootstrap and focused shape/diagram/dependent-hom baselines are green. |
 | `CNB-LEVEL-2` | complete | Promoted variable-`n` `CoherentNerveLevel_cat(C,n)`, the separate augmented empty/successor shape, and the augmented mapping-category level. Dimensions 0--3, mapping Homs, retained off-diagonal transfor action, and the dimension/vertex-count noncollapse are checked without a rule or unifier. |
-| `CNB-TETRA-FACE-3` | active | Construct the four strict-profile triangle cofaces `Delta[2] -> Delta[3]` from join maps, with code/functor agreement and selected face-of-face equations. No generic decoder claim. |
-| `CNB-JOIN-REC-4` | pending | Probe and, if supported, promote whole observation/extension for maps out of `A star Terminal`; reuse the existing cross transfor and retain one hom action. Do not add a broad join eta rewrite. |
+| `CNB-TETRA-FACE-3` | complete | Promoted four strict-profile triangle cofaces `Delta[2] -> Delta[3]`. All six shared edges compute by `FaceCode`; the three old-base comparisons also compute as whole functors. The three new-vertex functor comparisons remain explicit negative conversion checks and route to generic join-map composition rather than a local rule. |
+| `CNB-JOIN-REC-4` | active | Probe and, if supported, promote whole observation/extension for maps out of `A star Terminal`; reuse the existing cross transfor and retain one hom action. Its first concrete consumer is the three new-vertex comparisons exposed by `CNB-TETRA-FACE-3`. Do not add a broad join eta rewrite. |
 | `CNB-FACE-GEN-5` | pending decision gate | Decide whether raw face-code recursion plus join maps can construct `realize_face` for variable dimensions with identity/composition computation. If not, record the exact prerequisite and keep the tetrahedral bridge bounded. |
 | `CNB-NERVE-6` | pending on generic face realization | Assemble `CoherentNerveRaw(C)` by precomposition and cross the public Psh facade only through existing projections. Retain whole face and next action. |
 | `CNB-VARIANCE-7A` | pending audit gate | Inventory the active covariant and opposite/contravariant projections on the four tetrahedral faces. Reuse `hom_con_int`, `tapp1_con_at_transf`, and `fapp1_con_at_transf`; introduce a displayed `homd_con_int` only if a concrete whole face cannot otherwise be retained. Distinguish a missing variance owner from a genuinely insufficient source shape before considering orientals. |
@@ -474,6 +474,43 @@ diagnostic. The strict LHS audit is empty because the module adds no rule.
 This row establishes only a variable-level classifier; generic face
 realization, whole nerve action, recursive cell data, and their comparison
 remain later rows.
+
+### 13.2 Four Triangle Cofaces Of The Tetrahedron — 2026-08-19
+
+`emdash3_2_tetrahedron_faces.lp` constructs the four inclusions
+
+```text
+012, 013, 023, 123 : Delta[2] -> Delta[3].
+```
+
+Face `012` is the left join inclusion. The other three are `join_map_func`
+applied to old edges `01`, `02`, and `12` together with the identity on the
+new terminal vertex. Each is packaged by the existing
+`SelectedFaceRealization`, so its `FaceCode` and strict whole functor remain
+paired without a generic decoder.
+
+The reviewer checks every shared edge. All six face-code composites compute
+to the same code. The three edges `01`, `02`, and `12` wholly inside the old
+triangle also agree as composite realized functors. The three edges `03`,
+`13`, and `23` do not currently convert as whole functors: each side is a
+different nested `join_map_func` presentation of the same computing code.
+These are explicit `assertnot` conversion boundaries, not claims that the
+functors are mathematically unequal.
+
+The result identifies a precise generic consumer for `CNB-JOIN-REC-4`:
+composition/naturality of the whole join mapping operation. No local fold,
+functor extensionality axiom, or appeal to orientals is added. The source and
+reviewer pass quietly and with warnings; both warning streams contain the
+same 1,315 inherited headers and no owned diagnostic. The strict LHS audit is
+empty because the module adds no rule.
+
+Ignored probe evidence:
+
+```text
+logs/probes/tetrahedron_faces-20260818-232805.log
+logs/probes/tetrahedron_faces-20260818-233414.log
+logs/probes/tetrahedron_faces-20260818-233436.log
+```
 
 ## 14. Completion Definition
 
