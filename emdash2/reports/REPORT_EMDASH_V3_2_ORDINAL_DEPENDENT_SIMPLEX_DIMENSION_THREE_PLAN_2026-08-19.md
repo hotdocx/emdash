@@ -468,3 +468,63 @@ higher-constructor comparison at that semantic owner. It must map the already
 extracted top cell, retain a next action, and then construct the genuine
 flagged source object; naming this prerequisite alone does not complete the
 goal.
+
+### 16.3 Reflagging And Endpoint-Conjugation Audit
+
+The ignored owner probe now also establishes the reflagging boundary without
+using the historical global associativity comparison.  The two one-arrow
+bracketings
+
+```text
+(p23 o p12) o p01
+p23 o (p12 o p01)
+```
+
+are connected by `represented_assoc_readable_cell`, and the existing
+`Hom_func` plus represented precomposition owners assemble a whole functor
+from the join presentation's top hom-category into the native flagged top
+ambient category.  Applying it to the recursively extracted top cell succeeds.
+Thus neither an associativity axiom nor a new base-cell constructor is the
+remaining issue.
+
+A second, more direct route applies the same whole rebracketing to the raw
+second section action on the lifted 012 filler.  Its source, target, and mapped
+top all typecheck.  This confirms that the top cell itself is present at the
+generic `piapp1_func`/`fdapp1_int_cell` owner and is not manufactured by the
+later readable section-compositor presentation.
+
+Three tempting shortcuts are now rejected with typed negative evidence:
+
+1. the mapped raw endpoints are not definitionally equal to the canonical
+   readable endpoints, because the latter explicitly conjugate the raw face
+   actions along equality-induced arrows;
+2. applying the ordinary compositor to `Op_func(F)` does not create a generic
+   reverse compositor—`Op_cat` reverses 1-arrow endpoints, not all higher hom
+   directions; and
+3. packaging the raw 013 and 023 components directly as native Sigma arrows
+   fails because their rigid `Hom_fapp0` sources have not yet passed through
+   the canonical whole endpoint conjugation.
+
+The remaining construction is therefore sharply identified.  It must compare
+the following two whole procedures by a higher cell:
+
+```text
+raw join-section action -> apply recursive next action -> reframe endpoints
+raw join-section action -> conjugate canonical face endpoints -> compose faces.
+```
+
+Direct equality of their component proof terms is neither expected nor
+required.  The next probe first tests the existing ordinary/displayed
+post/pre-laxity and rigid-Hom interchange owners.  If those do not expose the
+needed whole comparison, escalation row 3 permits one generic propositional
+comparison at this join/internal-action boundary, provided it maps the already
+extracted top and retains a next hom action.  A face-specific coercion or an
+opaque tetrahedron filler remains excluded.
+
+This audit also distinguishes the current result from the existing code
+decoder.  `dependent_simplex_code_map` recursively maps an already chosen
+intrinsic flag code and its decoded `PathOut` classifier along a functor.  It
+does not select, for arbitrary `n`, the ordinal flag object carried by
+`H : Functor(Delta[n],C)`.  The present dimension-three construction is the
+first nontrivial term-level instance of that still-missing uniform ordinal
+realization, rather than a duplicate classifier decoder.
