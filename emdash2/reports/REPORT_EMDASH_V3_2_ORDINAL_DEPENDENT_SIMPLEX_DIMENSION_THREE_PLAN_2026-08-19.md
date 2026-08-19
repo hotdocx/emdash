@@ -323,8 +323,8 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | --- | --- | --- |
 | `ODS3-00` | complete | Created the dedicated child branch/worktree from clean checkpoint `e157b37`; recorded the exact objective, nonclaims, validation policy, and Git boundary in this linked living plan; and indexed it for a clean launch checkpoint. |
 | `ODS3-BASE-1` | complete | Bootstrapped the worktree. Focused quiet checks of the ordinal filler, native dimension-three classifier, tetrahedron faces, and their three reviewers are green. Unchanged aggregate evidence is carried forward; no long aggregate was run. |
-| `ODS3-OWNER-2` | in progress | Audit the exact types of the canonical source face objects, the fixed public next-action facade, its general distinct-endpoint `fapp1_func` owner, and the source join-cross higher action. Select the smallest projection ladder and record rejection evidence for alternatives. |
-| `ODS3-FACES-3` | pending | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. |
+| `ODS3-OWNER-2` | complete | Audited the fixed next-action facade against its distinct-endpoint owner, constructed the source join-cross section and all three new-vertex triangle actions uniformly, applied the recursive section action to the lifted 012 filler, and recovered the missing section-composition route from transparent section totalization plus the generic extracted `fapp1_compositor`. The resulting whole tetrahedral cell and both recursive Sigma projections typecheck without a primitive, rewrite, or unifier. Naive direct packaging is rejected because it confuses the join presentation, whose outer base cell is face 012, with the flagged `DependentSimplex3_cat` presentation, whose outer base cell is face 123. |
+| `ODS3-FACES-3` | in progress | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. The source audit already constructs faces 013, 023, and 123 from one generic cross-action projection and retains face 012 as the existing canonical filler; promotion and arbitrary-`H` comparison remain. |
 | `ODS3-SOURCE-4` | pending | Construct the identity-`Delta[3]` native source tetrahedron, including its dependent top cell, from the retained recursive action. No primitive or opaque tetrahedron filler is permitted. |
 | `ODS3-MAP-5` | pending | Map the one source native tetrahedron under arbitrary `H` through `dependent_simplex3_map`; retain the whole map rather than only its top component. |
 | `ODS3-OBSERVE-6` | pending | Expose the unconditional `DependentSimplexObservation(C,3)` and readable projections agreeing with all four canonical dimension-two face observations. |
@@ -418,3 +418,53 @@ the generic section-composition comparison from that stable action to the
 mirror, or associativity axiom. The next probe must derive it from the
 section/internal-action compositor and the existing stable-to-readable
 postcomposition path before considering any new owner.
+
+### 16.2 Whole Section Composition And Flagging Audit
+
+The same ignored probe now closes the section-composition part of the owner
+audit. A section `s : Pi_cat(E)` totalizes transparently as
+
+```text
+K -> Sigma_K(Const_K(1)) -> Sigma_K(E),
+```
+
+using the terminal total functor followed by `sigma_map_func(s)`. Applying the
+already extracted ordinary `fapp1_compositor` to that whole functor gives the
+missing comparison from the composite of the two section actions to the
+section action on the formal composite base arrow. The formal composite is
+moved to the named stable 012 base arrow by the existing
+`hom_postcomp_fapp0`/raw-composition path and `eq_ap` of the whole section
+action. Composing this comparison with the section's action on the lifted 012
+filler constructs a whole tetrahedral cell.
+
+Constructor-visible total objects and `sigma_arrow` actions expose that cell
+in the existing recursive `DependentTriangle` presentation. Both projections
+typecheck:
+
+```text
+whole section tetrahedron
+  -> lifted face-012 base cell
+  -> internal-action-derived dependent top cell.
+```
+
+No primitive symbol, rewrite rule, proof-time unifier, Sigma eta, join eta, or
+associativity assumption was added. The generic compositor remains the owner,
+and its ordinary next hom action remains available.
+
+The probe also rejects a materially different shortcut. Pairing the projected
+top cell directly with the native face-123 component generates incompatible
+dependent-family obligations. This is not merely a stable endpoint mismatch:
+the join-cross construction presents the tetrahedron with face 012 as its
+outer base cell, whereas `DependentSimplex3_cat(C,x0,e01,t012)` presents the
+same boundary with face 123 as the outer base cell. The dependent top is real,
+but moving it between these two nested Hom/Sigma flaggings requires a whole
+dependent rebracketing/exchange comparison. Pointwise coercions, an opaque top
+filler, and a face-specific conversion rule are rejected.
+
+The next source tranche must therefore derive the smallest whole comparison
+from the existing Hom/Sigma, profunctor interchange, and join owners, or—only
+if that derivation is demonstrably unavailable—promote one generic
+higher-constructor comparison at that semantic owner. It must map the already
+extracted top cell, retain a next action, and then construct the genuine
+flagged source object; naming this prerequisite alone does not complete the
+goal.
