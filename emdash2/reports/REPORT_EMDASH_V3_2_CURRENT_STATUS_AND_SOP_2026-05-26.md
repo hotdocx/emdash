@@ -539,6 +539,12 @@ detailed probe evidence.
   coface equations compute without an external naturality family. It adds no
   augmented-empty realization, arbitrary face decoder, degeneracy,
   representable, sieve, or Kan claim.
+- `emdash3_2_coherent_nerve_levels.lp`: variable-dimension ordinal mapping
+  categories `Functor_cat(DirectedSimplex_cat(n),C)`. Its separate augmented
+  vertex-count shape is empty at zero and recovers the ordinary dimension
+  shape at successor levels. Generic Functor/Transf hom action remains
+  iterable; no face action, whole semisimplicial nerve, recursive dependent-
+  cell bridge, rule, or unifier is added.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

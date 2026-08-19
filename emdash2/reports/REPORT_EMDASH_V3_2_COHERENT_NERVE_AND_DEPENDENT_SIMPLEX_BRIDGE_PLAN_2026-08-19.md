@@ -4,8 +4,9 @@ Date: 2026-08-19 (America/Toronto)
 
 Plan-ID: `COHERENT-NERVE-DEPENDENT-SIMPLEX-V3.2`
 
-Status: **active bounded implementation plan**. The architecture and baseline
-reuse audit are complete; `CNB-LEVEL-2` is the first implementation row.
+Status: **active bounded implementation plan**. The architecture, baseline
+reuse audit, and variable-level facade are complete; `CNB-TETRA-FACE-3` is
+the active implementation row.
 
 Branch: `goal/coherent-nerve-bridge-v3.2`
 
@@ -34,8 +35,8 @@ Depends-On:
 
 Side-Task-Ledger: `CNB-00`, `CNB-BASE-1`, `CNB-LEVEL-2`,
 `CNB-TETRA-FACE-3`, `CNB-JOIN-REC-4`, `CNB-FACE-GEN-5`, `CNB-NERVE-6`,
-`CNB-CELL-7`, `CNB-BRIDGE-8`, `CNB-PROFILE-9`, `CNB-GENERIC-10`,
-`CNB-DOC-11`, and `CNB-CLOSE-12`.
+`CNB-VARIANCE-7A`, `CNB-CELL-7`, `CNB-BRIDGE-8`, `CNB-PROFILE-9`,
+`CNB-GENERIC-10`, `CNB-DOC-11`, and `CNB-CLOSE-12`.
 
 Infinity-Codex-Origin: session
 `019ffe39-2eb9-7080-88e3-06b77d69b8d1`, especially archived decisions
@@ -206,6 +207,36 @@ n = 3  -> explicit base associator
 The completed no-associativity probe is the semantic and computational
 baseline. Do not promote its diagnostic capped pre/post rules, a standalone
 tetrahedron constant, or a manual pentagon record.
+
+### 5.1 Variance And Orientation Gate
+
+Before concluding that the ordinary ordinal shape is too weak and escalating
+to Street orientals or another richer source, audit whether every missing
+boundary is instead a missing variance projection.
+
+The active ordinary contravariant infrastructure includes `hom_con_int`,
+`tapp1_con_at_transf`, and `fapp1_con_at_transf`; these already recovered the
+pre/right compositor as an opposite specialization of the same internal
+action. Contrary to a possible remembered spelling, a displayed
+`homd_con_int` is **not** active today. The earlier internal-laxity plan
+explicitly classified it as a possible target-internalized displayed mirror
+and deferred it because ordinary `hom_con_int` plus opposite specialization
+was sufficient for the bounded tetrahedron.
+
+At dimension three, classify any missing face in this order:
+
+1. can it be projected through the active covariant `homd_int` ladder?
+2. can its mirror be recovered by `Op`, `hom_con_int`, and the active
+   fixed-target ordinary action?
+3. does a concrete displayed consumer now require a whole `homd_con_int`
+   mirror with retained next action?
+4. only if both variance orientations are present and the required oriented
+   boundary still cannot be represented should a richer source shape such as
+   an oriental be considered.
+
+Do not add `homd_con`, `homd_con_int`, or another mirror merely for notational
+symmetry. A promoted mirror must have a concrete missing-face consumer,
+projection betas, and retained whole action.
 
 ## 6. Why Dimension Three Is The Acceptance Test
 
@@ -395,17 +426,54 @@ branch/worktree deletion, or unrelated repository mutation is authorized.
 | --- | --- | --- |
 | `CNB-00` | complete | Promoted the generic architecture, dimension-three acceptance boundary, Lean comparison, nonclaims, module order, validation policy, and Git boundary into this living plan. |
 | `CNB-BASE-1` | complete | Dedicated worktree forked from clean `e31a812`; workspace bootstrap and focused shape/diagram/dependent-hom baselines are green. |
-| `CNB-LEVEL-2` | active | Promote a variable-`n` `CoherentNerveLevel_cat(C,n)` facade and audit the augmented-empty shape without claiming a whole semisimplicial nerve. Check dimensions 0--3 and retained Functor-category hom action. |
-| `CNB-TETRA-FACE-3` | pending | Construct the four strict-profile triangle cofaces `Delta[2] -> Delta[3]` from join maps, with code/functor agreement and selected face-of-face equations. No generic decoder claim. |
+| `CNB-LEVEL-2` | complete | Promoted variable-`n` `CoherentNerveLevel_cat(C,n)`, the separate augmented empty/successor shape, and the augmented mapping-category level. Dimensions 0--3, mapping Homs, retained off-diagonal transfor action, and the dimension/vertex-count noncollapse are checked without a rule or unifier. |
+| `CNB-TETRA-FACE-3` | active | Construct the four strict-profile triangle cofaces `Delta[2] -> Delta[3]` from join maps, with code/functor agreement and selected face-of-face equations. No generic decoder claim. |
 | `CNB-JOIN-REC-4` | pending | Probe and, if supported, promote whole observation/extension for maps out of `A star Terminal`; reuse the existing cross transfor and retain one hom action. Do not add a broad join eta rewrite. |
 | `CNB-FACE-GEN-5` | pending decision gate | Decide whether raw face-code recursion plus join maps can construct `realize_face` for variable dimensions with identity/composition computation. If not, record the exact prerequisite and keep the tetrahedral bridge bounded. |
 | `CNB-NERVE-6` | pending on generic face realization | Assemble `CoherentNerveRaw(C)` by precomposition and cross the public Psh facade only through existing projections. Retain whole face and next action. |
+| `CNB-VARIANCE-7A` | pending audit gate | Inventory the active covariant and opposite/contravariant projections on the four tetrahedral faces. Reuse `hom_con_int`, `tapp1_con_at_transf`, and `fapp1_con_at_transf`; introduce a displayed `homd_con_int` only if a concrete whole face cannot otherwise be retained. Distinguish a missing variance owner from a genuinely insufficient source shape before considering orientals. |
 | `CNB-CELL-7` | pending | Define the recursive join-cone/dependent-cell observation through dimensions 0--3. Triangle must be `fapp1_compositor`; tetrahedron must reuse the established second `homd_`/Sigma action. |
 | `CNB-BRIDGE-8` | pending | Compare the ordinal mapping-category and recursive-cell presentations wholely at the strongest justified level. Require all four tetrahedral faces and the top dependent filler; reject an object-only coincidence as final completion. |
 | `CNB-PROFILE-9` | pending | Validate general directed-lax, selected strict, and `Path_cat` pseudo readings without duplicating classifiers or collapsing the generic laxity cell. |
 | `CNB-GENERIC-10` | pending decision gate | If rows 4--9 use one stable recursive owner, formulate/prove the variable-`n` induction. Otherwise record whether the missing ingredient is join uniqueness, generic face realization, recursive boundary formation, or a richer oriented simplex shape. |
 | `CNB-DOC-11` | pending | Synchronize Foundations, canonical notation, status/source inventories, reviewer examples, and report index only for checked promoted results. |
 | `CNB-CLOSE-12` | pending | Record exact checkpoints, focused evidence, warning deltas, deferred prerequisites, clean state, and safe continuation. No integration/publication. |
+
+### 13.1 Variable-Dimension Mapping Levels — 2026-08-19
+
+`emdash3_2_coherent_nerve_levels.lp` now distinguishes ordinary dimension from
+augmented vertex count:
+
+```text
+CoherentNerveLevel_cat(C,n)
+  = Functor_cat(DirectedSimplex_cat(n),C)
+
+AugmentedDirectedSimplex_cat(0)
+  = Path_cat(Empty_grpd)
+
+AugmentedDirectedSimplex_cat(succ n)
+  = DirectedSimplex_cat(n).
+```
+
+The augmented mapping category is defined levelwise from that shape but is not
+advertised as a semisimplicial functor. The focused reviewer checks ordinary
+dimensions zero through three, the augmented empty level, Functor-category
+Homs as transfors, one retained `tapp1_func` action, and noncollapse of empty
+vertex count with ordinary dimension zero.
+
+The ignored quiet and warning-enabled probes pass:
+
+```text
+logs/probes/coherent_nerve_levels-20260818-231924.log
+logs/probes/coherent_nerve_levels-20260818-231945.log
+```
+
+Source and reviewer pass quietly and with warnings. Both warning streams
+contain the same 1,315 inherited headers and no source/reviewer-owned
+diagnostic. The strict LHS audit is empty because the module adds no rule.
+This row establishes only a variable-level classifier; generic face
+realization, whole nerve action, recursive cell data, and their comparison
+remain later rows.
 
 ## 14. Completion Definition
 
