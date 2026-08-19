@@ -203,6 +203,16 @@ compute faces 01, 02, and 12 of a visible triangle and retain generic hom
 action. Direct and sequential opaque whole functors are not collapsed by a
 new extensionality rule.
 
+`emdash3_2_dependent_simplex_ordinal_adequacy.lp` records the strongest current
+ordinal comparison. Dimension zero has whole evaluation/constant functors;
+dimension one observes an ordinal walking-arrow map as its native edge. Two
+generic join-eliminator point betas make the three restricted edges of an
+ordinal triangle share vertices. `OrdinalDependentSimplex2CanonicalFiller`
+is then the exact remaining dependent cell needed by
+`ordinal_dependent_simplex2_observe`. Dimensions three and four inherit this
+same join-cross filler prerequisite; no global mixed-variance category or
+unqualified equivalence is claimed.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the

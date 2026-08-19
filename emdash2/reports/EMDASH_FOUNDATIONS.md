@@ -3939,6 +3939,34 @@ however. The current foundation records that non-collapse instead of adding
 a broad functor-extensionality, PathOut-composition rewrite, or independent
 family of simplicial equations.
 
+The relationship with the ordinal presentation is fibrewise and staged. At
+dimension zero, evaluation at the terminal object and ordinary constant
+weakening form a whole pointwise retraction; the converse terminal-source eta
+is intentionally not judgmental. At dimension one, an ordinal functor on the
+walking arrow computes to the intrinsic code at its source together with the
+`PathOut` object formed by its target and generator action.
+
+For an ordinal triangle, restricting along the three selected edge functors
+first produced three nonconvertible presentations of each shared vertex. The
+generic join eliminator now has direct point betas on both introductions. They
+close the projection-order pair between whole branch restriction and ordinary
+composed-functor object application, so the three vertices compute without a
+selected-simplex rewrite. The remaining datum is one object of the native
+dependent triangle fibre, named
+`OrdinalDependentSimplex2CanonicalFiller`. Given it,
+`ordinal_dependent_simplex2_observe` constructs the intrinsic dimension-two
+observation through the existing `dependent_simplex2_visible` owner.
+
+No active owner yet extracts that filler canonically from an arbitrary
+ordinal functor. It requires compatibility between the primitive join-recursion
+cross datum and the action-derived cross observation—the same Cat-valued
+coherent-square/join-uniqueness boundary isolated by the join mapping plan.
+A strict target profile may collapse the functor compositor, and a Path target
+makes any supplied filler invertible, but neither profile generates the
+missing source cross comparison. Dimensions three and four recurse through
+that same prerequisite. Thus the current theorem is a computational relative
+adequacy result, not a global equivalence of mapping categories.
+
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction
 is ordinary precomposition. The post/left cell uses `homd_int` and

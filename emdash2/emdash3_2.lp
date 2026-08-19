@@ -19060,6 +19060,23 @@ with @comp_fapp0
       (@join_snd_func $A $B)
   ↪ $second;
 
+// Point betas for the same join branches. These close the two projection
+// orders between the whole branch cut above and ordinary composed-functor
+// object application. The first concrete consumer is the shared-vertex
+// boundary of ordinal/dependent simplex adequacy.
+rule @fapp0
+      _
+      $E
+      (@join_elim_func $A $B $E $first _ _)
+      (@fapp0 $A (@Join_cat $A $B) (@join_fst_func $A $B) $a)
+  ↪ @fapp0 $A $E $first $a
+with @fapp0
+      _
+      $E
+      (@join_elim_func $A $B $E _ $second _)
+      (@fapp0 $B (@Join_cat $A $B) (@join_snd_func $A $B) $b)
+  ↪ @fapp0 $B $E $second $b;
+
 // -------------------------------------------------------------------------------------------------
 // 18z. Late cross-section normalization bridges
 // -------------------------------------------------------------------------------------------------

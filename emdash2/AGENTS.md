@@ -20,7 +20,9 @@ target-internalized ordinary action and fixed-target opposite projection, the
 transparent whole/component post-left and pre-right laxity surfaces with their
 normal-lax functor-compositor specialization, the current-source-validated
 recursive second `homd_`/Sigma action over an explicit base associator, and
-the full-`tapp1_func` whole strict `Functord` naturality paths. The one-way
+the full-`tapp1_func` whole strict `Functord` naturality paths. It also owns
+the direct left/right join-eliminator point betas that close the projection
+order with the existing whole branch cuts. The one-way
 derived native equality-valued
 hom-action/groupoidality extension is `emdash3_2_eq1_hom_action.lp`;
 the Cat-valued presheaf, Yoneda, slice, and higher-sieve library is
@@ -315,6 +317,12 @@ the variable-dimensional whole nonempty-face extension is
 fixed-flag constant action, target projection, and outgoing-path mapping, all
 visible triangle faces compute, and another hom action remains iterable while
 opaque whole-composition equality stays unforced;
+the relative low-dimensional ordinal/dependent comparison is
+`emdash3_2_dependent_simplex_ordinal_adequacy.lp`; dimension zero is whole,
+dimension one observes the walking-arrow edge, and core join point betas make
+the three ordinal triangle edges share vertices; one explicit dependent
+filler then constructs the native triangle, while its canonical source and
+higher dimensions remain at the join-cross compatibility boundary;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1082,14 +1090,20 @@ Use the following order:
     the indices and visible composition; all triangle faces compute and a
     next hom action is retained. It adds no face syntax, whole-composition
     rewrite, functor extensionality, or unifier;
-113. `emdash3_2_checks.lp` for executable regression statements;
-114. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+113. `emdash3_2_dependent_simplex_ordinal_adequacy.lp` for the strongest
+    relative ordinal comparison. Dimension zero is a whole retraction;
+    dimension one observes source/target/generator; and join point betas make
+    triangle vertices shared. `OrdinalDependentSimplex2CanonicalFiller` is
+    the exact remaining input to the native triangle constructor. It adds no
+    canonical join-cross filler, global total, broad eta, rule, or unifier;
+114. `emdash3_2_checks.lp` for executable regression statements;
+115. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-115. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-116. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+116. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+117. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-117. `reports/INDEX.md` for task-specific plans and decision records.
-118. `book/book.json` and `book/evidence.json` for book source
+118. `reports/INDEX.md` for task-specific plans and decision records.
+119. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

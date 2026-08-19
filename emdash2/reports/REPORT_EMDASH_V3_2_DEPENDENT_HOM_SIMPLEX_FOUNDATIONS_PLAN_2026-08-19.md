@@ -409,10 +409,10 @@ authorized.
 | `DHSF-CODE-5` | complete | `emdash3_2_dependent_simplex_codes.lp` defines `RawDependentSimplexCode(C,n,K)` intrinsically indexed by its decoded category: zero has `K=C`, and successor at `x:Obj(K)` has `K=PathOut_K(x)`. The public dependent Sigma hides `K`; existing `FaceCode(succ p,succ n)` supplies boundary references; `DependentSimplexEndpointView` retains typed formal/readable endpoints. No arbitrary Cat syntax or second semantic grammar is introduced. |
 | `DHSF-DECODE-6` | complete | `emdash3_2_dependent_simplex_code_map.lp` recursively maps a raw code along `F:C->D`, returning a target code and whole decoded functor. Zero returns `F`; successor maps the stored flag and reuses `pathout_map_func`. Selected codes recover native maps through dimension four, endpoint views map by `eq_ap`, and another hom action remains iterable without duplicate native-map rules. |
 | `DHSF-FACE-7` | complete at the whole-action boundary | `emdash3_2_dependent_simplex_faces.lp` recursively interprets existing nonempty `FaceCode`s against intrinsic codes. Skip gives fixed-flag constant action, `keep(skip ...)` uses target projection, and `keep(keep ...)` reuses `pathout_map_func`. Visible triangle faces and selected public composition compute, higher action is retained, and opaque direct/sequential whole-functor equality is precisely left unforced. |
-| `DHSF-ADEQUACY-8` | in progress | Establish the strongest honest ordinal/dependent comparison through dimensions 0--3 and use dimension four as the recursion test; state exact strict/lax/Path scope and any shape/profile obstruction. |
-| `DHSF-JOIN-9` | pending | Reassess `CNB-JOIN-NORMALFORM` only when the whole face/nerve consumer reaches it. Implement narrowly if dependency-ready; otherwise hand off with exact owner and consumer evidence. |
-| `DHSF-DOC-10` | pending | Synchronize Foundations, canonical notation, current status, README/source inventories, report index, diagnostics/examples, and generated evidence only for promoted boundaries. |
-| `DHSF-CLOSE-11` | pending | Complete every scoped row by implementation, evidence-backed rejection, or concrete deferral; run proportional final gates, record checkpoints and exact dirty state, and leave remote/integration/cleanup operations excluded. |
+| `DHSF-ADEQUACY-8` | complete at the relative boundary | `emdash3_2_dependent_simplex_ordinal_adequacy.lp` gives a whole dimension-zero retraction and a computing dimension-one observation. Generic join point betas make the three ordinal triangle edges share vertices. One explicit `OrdinalDependentSimplex2CanonicalFiller` then constructs the native triangle. Canonically deriving that filler—and therefore dimensions three/four and a mapping-category equivalence—remains precisely outside the current join-cross boundary. |
+| `DHSF-JOIN-9` | complete by narrow implementation and concrete handoff | Two generic join-eliminator point betas were promoted in `emdash3_2.lp`, closing the whole-branch/object-application projection order with zero warning delta. The remaining requested normal form is no longer generic endpoint composition: it is compatibility between primitive `join_elim_cross_transf` and action-derived `join_map_observe_cross`, requiring the already named Cat-valued coherent-square/join-uniqueness prerequisite. Its concrete consumer is `OrdinalDependentSimplex2CanonicalFiller`; no local filler or broad join eta was added. |
+| `DHSF-DOC-10` | complete | Foundations, canonical notation, current status, root/kernel READMEs, nested authority inventory, report index, source/check registries, reviewers, and the 249-file source-only health snapshot describe the same promoted code/decoder/face/adequacy boundary and exact join-cross prerequisite. |
+| `DHSF-CLOSE-11` | in progress | Complete every scoped row by implementation, evidence-backed rejection, or concrete deferral; run proportional final gates, record checkpoints and exact dirty state, and leave remote/integration/cleanup operations excluded. |
 
 At most one row may be `in progress`. Architectural discovery may revise later
 rows, but each revision must preserve the mathematical objective and record
@@ -1010,6 +1010,107 @@ notation updates, strict audits, source TOC/reference/report lints, catalog,
 focused tooling tests, exact diff hygiene, and the 247-file source-only health
 snapshot are green; no long aggregate was run. `DHSF-FACE-7` is complete at
 the honest whole-action boundary, and low-dimensional adequacy is now active.
+
+### 13.10 Relative Ordinal Adequacy And Join Handoff — 2026-08-19
+
+The ordinal comparison cannot honestly be a global category equivalence: an
+intrinsic flag code fixes its initial face, and the corresponding `PathOut`
+family is contravariant in that flag. The promoted comparison therefore uses
+the object-level package
+
+```text
+DependentSimplexObservation(C,n)
+  = Sigma code : DependentSimplexCode(C,n), Obj(decode(code)),
+```
+
+without calling that mixed-variance total a category.
+
+At dimension zero, terminal evaluation and ordinary constant weakening are
+whole functors; evaluation after encoding computes pointwise, while the
+converse terminal-source eta remains a negative conversion. At dimension one,
+`ordinal_dependent_simplex1_observe` reads an arbitrary walking-arrow functor
+at its source, target, and generator and returns the corresponding intrinsic
+code and `PathOut` object.
+
+The first dimension-two attempt exposed three exact endpoint obligations
+between the restrictions along edges 01, 02, and 12:
+
+```text
+logs/probes/dependent_simplex_ordinal_adequacy-20260819-102457.log.
+```
+
+These were not mathematical missing data. They were the projection-order pair
+between existing whole join branch betas and ordinary composed-functor object
+application. Two generic point betas for `join_elim_func`, at the left and
+right join introductions, close that pair. Their inferred LHS slots are
+minimal, both reduction orders join on the selected consumer, and the focused
+probe is green quietly and warning-enabled with no diagnostic delta:
+
+```text
+logs/probes/join_elim_point_beta-20260819-111608.log
+logs/probes/join_elim_point_beta-20260819-111631.log.
+```
+
+After those betas, `ordinal_dependent_simplex2_compatibility` is built by
+reflexivity. The normalized edges feed the existing dependent triangle
+classifier. The only remaining input is
+
+```text
+OrdinalDependentSimplex2CanonicalFiller(C,H),
+```
+
+and `ordinal_dependent_simplex2_observe(H,alpha)` constructs the native
+dimension-two observation from it. Quiet and warning-enabled promoted checks
+are green:
+
+```text
+logs/probes/emdash3_2-20260819-112124.log
+logs/probes/emdash3_2-20260819-112129.log
+logs/probes/emdash3_2_dependent_simplex_ordinal_adequacy-20260819-112134.log
+logs/probes/dependent_simplex_ordinal_adequacy-20260819-112140.log
+logs/probes/emdash3_2_dependent_simplex_ordinal_adequacy-20260819-112145.log
+logs/probes/dependent_simplex_ordinal_adequacy-20260819-112151.log.
+```
+
+The core inventory remains `1112/159`; the adequacy import closure remains
+`1150/159`. The result applies to the ambient directed/lax classifier. A
+decoded strict target may collapse its compositor, and a Path target makes a
+supplied filler invertible, but neither profile manufactures the source
+filler. Producing it canonically requires compatibility between the primitive
+join-recursion cross datum and the action-derived cross observation, together
+with the Cat-valued coherent-square/join uniqueness already named by
+`CNB-JOIN-NORMALFORM`. Dimensions three and four recurse through that same
+prerequisite; dimension four introduces no second obstruction.
+
+Accordingly the join row closes by one narrow generic implementation plus an
+exact handoff, not by a local triangle filler or broad join eta. Registration,
+authorities, notation, strict audits, catalog, focused tooling tests, and the
+249-file source-only health snapshot are green; no long aggregate was run.
+
+### 13.11 Authority Consolidation — 2026-08-19
+
+The active authority chain now distinguishes four achieved levels:
+
+1. native flagged classifiers and readable endpoint views through dimension
+   four;
+2. intrinsic code decoding and functorial mapped decoding in arbitrary finite
+   dimension;
+3. variable-dimensional whole nonempty-face action through existing
+   `FaceCode`; and
+4. relative ordinal adequacy through the exact dimension-two join-cross filler
+   boundary.
+
+Foundations, canonical notation, current status, root/kernel READMEs, nested
+authority order, report index, source/check registries, reviewers, catalog,
+and source-only health all use that boundary. No document claims a global
+mixed-variance simplex category, a complete ordinal mapping-category
+equivalence, a canonical ordinal triangle filler, dimensions-three/four
+ordinal adequacy, degeneracies, or a whole semisimplicial nerve.
+
+The documentation/source gates are green, the health snapshot records 249
+tracked source/reviewer files, and no print, TypeScript, browser, remote,
+publication, or long repository aggregate was invoked. `DHSF-DOC-10` is
+complete; only the requirement-by-requirement closeout audit remains active.
 
 ## 14. Completion Definition
 

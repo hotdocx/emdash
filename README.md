@@ -89,6 +89,14 @@ This computes all three edges of a visible triangle and retains higher action.
 Visible face composition is preserved by the existing code owner; generic
 opaque whole-functor uniqueness remains an explicit later comparison.
 
+The ordinal comparison is now sharp rather than overstated. Dimension zero
+has a whole pointwise retraction, and a map of the walking arrow computes to
+its intrinsic source/target/generator edge. Generic join-eliminator point
+betas make the three edges of an ordinal triangle share vertices. Turning that
+boundary into a native triangle then requires exactly one dependent filler;
+constructing it is the remaining join-cross uniqueness boundary, not an
+unqualified equivalence `Functor([n],C) ~= DependentSimplex(C,n)`.
+
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
 of global metatheory.

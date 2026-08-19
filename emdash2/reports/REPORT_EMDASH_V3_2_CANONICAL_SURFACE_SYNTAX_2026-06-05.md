@@ -1211,6 +1211,23 @@ has the already-existing type `DependentSimplexFaceRef(p,n)`, definitionally
 `pathout_map_func`. Do not write a separate list of coface equations or imply
 that direct and sequential opaque whole functors are judgmentally equal.
 
+For the low-dimensional ordinal comparison write
+
+```text
+observe0(H)                 H[*]
+observe1(H)                 (H[0],H[1],H[01])
+triangleFiller(H)           the remaining dependent 2-cell
+observe2(H,triangleFiller(H)).
+```
+
+The literal owners are `ordinal_simplex0_observe_func`,
+`ordinal_dependent_simplex1_observe`,
+`OrdinalDependentSimplex2CanonicalFiller`, and
+`ordinal_dependent_simplex2_observe`. Shared ordinal triangle vertices compute
+through the generic join-eliminator point betas. Do not suppress the filler
+argument, call the object-level observation package a category, or write an
+unqualified ordinal/dependent equivalence.
+
 For groupoid-valued diagrams write
 
 ```text

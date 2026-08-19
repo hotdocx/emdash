@@ -41,8 +41,15 @@ continuation is `emdash3_2_dependent_simplex_faces.lp`: existing nonempty
 outgoing-path map; every visible triangle edge computes and higher action is
 retained. Selected public composition agrees on its target and visible
 observation while opaque whole-functor equality remains deliberately
-unforced. The active next step is low-dimensional ordinal/dependent adequacy.
-A global all-simplex category remains later, profile-sensitive work.
+unforced. The relative ordinal comparison is
+`emdash3_2_dependent_simplex_ordinal_adequacy.lp`: dimension zero is whole,
+dimension one observes the walking-arrow edge, and new generic join point
+betas make the three ordinal triangle edges share vertices. One explicit
+dependent filler then constructs the native triangle. Canonically deriving
+that filler, dimensions three/four, and a mapping-category equivalence remain
+behind primitive/action-derived join-cross compatibility. The active next
+step is final authority consolidation and closeout; a global all-simplex
+category remains excluded.
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
 is the completed bounded continuation from the simplicial substrate. It
