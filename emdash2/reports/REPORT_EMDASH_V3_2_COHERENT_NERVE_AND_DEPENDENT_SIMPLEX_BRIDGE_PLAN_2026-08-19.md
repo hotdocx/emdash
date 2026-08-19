@@ -13,6 +13,15 @@ profile readings. Whole nerve/bridge assembly and a uniform very-dependent
 `RecursiveSimplex(C,n)` remain explicitly deferred behind the two named
 prerequisites recorded below.
 
+Active-Continuation:
+`REPORT_EMDASH_V3_2_DEPENDENT_HOM_SIMPLEX_FOUNDATIONS_PLAN_2026-08-19.md`.
+That child plan sharpens the former `CNB-VERY-DEP-REC` placeholder: it first
+specifies native dimensions zero through four and the non-circular
+Path/groupoidal source-coherence adapter, then derives an emdash-specific
+dependent-frame code whose decoder exposes the existing
+`Hom_cat`/`Sigma_cat`/`homd_` owners. The completed results in this parent
+remain unchanged.
+
 Branch: `goal/coherent-nerve-bridge-v3.2`
 
 Worktree: `/home/user1/emdash1-coherent-nerve-v1`

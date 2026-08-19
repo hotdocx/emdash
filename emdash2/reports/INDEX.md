@@ -2,6 +2,18 @@
 
 Date: 2026-08-19
 
+`REPORT_EMDASH_V3_2_DEPENDENT_HOM_SIMPLEX_FOUNDATIONS_PLAN_2026-08-19.md`
+is the active child continuation of the completed coherent-nerve bridge. It
+refocuses the open simplicial work on the mathematical capability rather than
+on codes as an end in themselves: complete native simplex presentations
+through dimension four using `Hom_cat`, `Sigma_cat`, `homd_`, and whole
+internal action; bootstrap Path/groupoidal source coherences without relying
+on the global associativity prototype; and only then derive a small internal
+dependent-frame code whose decoder exposes those existing owners. Existing
+`FaceCode` remains the combinatorial face language. Degeneracies, generic
+Kan/Segal/Rezk structure, a generic type-code universe, and remote integration
+are outside the bounded launch.
+
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
 is the completed bounded continuation from the simplicial substrate. It
 compares the ordinal and recursively dependent presentations as far as the
