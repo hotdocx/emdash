@@ -578,6 +578,17 @@ detailed probe evidence.
   applies the existing strict-code identity fold at dimension two, and reads
   Path-valued triangle and tetrahedron components as invertible equalities;
   no parallel simplex classifier or unscoped higher strictness claim is made.
+- `emdash3_2_dependent_simplex_path_associator.lp`: rule-free groupoidal
+  source-coherence adapter for the recursive bridge. The ordinary generic
+  compositor of `Rep_catd_func(Z)` is retained first as one whole displayed
+  transformation; its component at a fourth object/arrow and its next hom
+  action remain generic in `Z`. For `Z = Path_cat(A)`, one J-derived endpoint
+  comparison on each side exposes the readable orientation
+  `(h o g) o f -> h o (g o f)`, and equality symmetry supplies inversion.
+  The source check remains green with the global associativity unifier removed
+  and `comp_assoc` opaque. No runtime rule, proof-time unifier, generic
+  reassociation, proof-irrelevance principle, or equality with the separate
+  direct-J proof is added.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

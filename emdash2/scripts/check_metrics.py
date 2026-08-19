@@ -75,6 +75,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_join_mapping_recursion.lp"),
     Path("emdash3_2_face_realization.lp"),
     Path("emdash3_2_dependent_simplex_bridge.lp"),
+    Path("emdash3_2_dependent_simplex_path_associator.lp"),
     Path("emdash3_2_semisimplicial_diagrams.lp"),
     Path("emdash3_2_simplex2_sieves.lp"),
     Path("emdash3_2_path_groupoid_2horn_fillers.lp"),

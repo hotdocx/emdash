@@ -146,6 +146,13 @@ strict-code identity fold at the binary compositor, and becomes invertible at
 both triangle and tetrahedron components when the target fibres are path
 categories.
 
+Represented composition now supplies the first non-circular groupoidal source
+coherence for that recursion. The generic compositor of `Rep_catd_func` is a
+whole displayed transformation with a retained next action. In
+`Path_cat(A)`, J-derived typed endpoint comparisons expose it as
+`(h o g) o f -> h o (g o f)` without invoking `comp_assoc`; its proof term
+remains distinct from the direct J associator. No rewrite or unifier is added.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the

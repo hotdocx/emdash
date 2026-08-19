@@ -48,7 +48,11 @@ A variable-dimension decoder now realizes every nonempty skip/keep face code
 by recursive join maps; its whole identity/composition laws remain gated by
 join uniqueness. On the dependent side, one `homd_`/Sigma action now exposes
 both compositor triangles and an iterable tetrahedron map whose dependent
-component is the next internal-action projection. Degeneracies,
+component is the next internal-action projection. The generic compositor of
+the represented family now also supplies a whole source associator: in a Path
+category its formal endpoints compare propositionally with `(h o g) o f` and
+`h o (g o f)`, it is invertible, and its next action remains available even
+when the global associativity prototype is disabled. Degeneracies,
 generic-dimensional horns/Kan filling, and the whole mapping-category/
 displayed-cell comparison remain future work.
 

@@ -12,7 +12,12 @@ on the global associativity prototype; and only then derive a small internal
 dependent-frame code whose decoder exposes those existing owners. Existing
 `FaceCode` remains the combinatorial face language. Degeneracies, generic
 Kan/Segal/Rezk structure, a generic type-code universe, and remote integration
-are outside the bounded launch.
+are outside the bounded launch. Its first promoted source-coherence slice is
+`emdash3_2_dependent_simplex_path_associator.lp`: the whole compositor of
+`Rep_catd_func` yields an iterable represented associator, while the Path
+specialization exposes readable invertible bracketings without `comp_assoc`,
+a rule, or a unifier. Feeding that owner into the complete native
+dimension-four boundary remains the active next step.
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
 is the completed bounded continuation from the simplicial substrate. It

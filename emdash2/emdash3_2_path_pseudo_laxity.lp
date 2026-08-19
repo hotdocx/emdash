@@ -172,10 +172,11 @@ symbol path_map_compositor_target_readable
   : τ (@= B (h x) (h z))
 ≔ @eq_ap A B h x z (@eq_trans A x y z p q);
 
-// Internal helper: preserve both rigid generic heads while turning the active
-// postcomposition proof-time comparison into equality evidence.  Later Path
-// specialization does not rely on transitive unification after projection.
-protected symbol path_pseudo_laxity_postcomp_comp_path
+// Reusable typed view: preserve both rigid generic heads while turning the
+// active postcomposition proof-time comparison into equality evidence. Later
+// Path and represented-associator specializations do not rely on transitive
+// unification after projection.
+symbol path_pseudo_laxity_postcomp_comp_path
   [A B : Cat]
   (F : τ (@Functor B A))
   (W : τ (@Obj A))

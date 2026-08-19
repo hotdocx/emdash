@@ -404,7 +404,7 @@ authorized.
 | `DHSF-00` | complete | This refocused child plan is linked from the completed parent and report index. Recovery, Git, nonclaim, owner, and proportional-validation boundaries are frozen; the first non-circular Path seed is green quietly and warning-enabled. |
 | `DHSF-BASE-1` | complete | The clean descendant worktree, bootstrap, relevant owner inventory, focused path/dependent source and profile reviewer baselines, archive verification, and exact current-source no-associativity copy are green. Quiet/warning runs of the copy and first consumer have zero delta at `1112/159`. No long aggregate baseline was run. |
 | `DHSF-NATIVE-2` | pending | Specify complete native dependent presentations in dimensions 0--3, distinguishing global boundary totals from existing fixed-endpoint local triangle/tetrahedron classifiers. Retain whole and next-hom action. |
-| `DHSF-PATH-3` | in progress | J-derived `eq_trans` and categorical Path associativity compute without `comp_assoc`; the whole represented-composition compositor also forms in the no-associativity kernel. Its direct readable type stops at two stable pre/postcomposition endpoint comparisons. Materialize those paths without a rule/unifier, compare the Path specialization, and retain the next action. |
+| `DHSF-PATH-3` | in progress; first public source slice promoted | `emdash3_2_dependent_simplex_path_associator.lp` materializes the two Path endpoint comparisons without a rule/unifier, exposes the whole represented compositor and readable invertible associator, preserves distinct J provenance, and retains one next action. Feed that selected owner into the native dependent tetrahedron/dimension-four source before closing the row. |
 | `DHSF-DIM4-4` | pending | Construct the full next source boundary from the selected lower groupoidal/native owners, apply the retained dependent action, inspect all required faces, and reject any hidden reliance on the global associativity unifier. |
 | `DHSF-CODE-5` | pending | Derive the smallest intrinsically indexed `DependentSimplexCode` grammar from dimensions 0--4; reuse `FaceCode`; record reification/decoding scope and profile parameters. No generic type syntax. |
 | `DHSF-DECODE-6` | pending | Implement code decoding to canonical `Hom_cat`/`Sigma_cat` owners so existing rules expose `homd_`; reproduce the checked triangle/tetrahedron and dimension-four action with no duplicate semantic normal form. |
@@ -540,6 +540,79 @@ the known non-transitive-unification boundary: the next probe must materialize
 typed comparisons through rigid intermediate heads, following the existing
 Path pseudo-laxity pattern. Do not add a runtime fold, reassociation rule, or
 new unifier merely to make the readable ascription elaborate.
+
+### 13.3 Represented Path Associator — 2026-08-19
+
+The endpoint obstruction is resolved propositionally rather than by changing
+normal forms. At a reflexive first path, the existing generic
+`fapp1_id_path` compares `Rep_catd_func` action with displayed identity. The
+already-selected postcomposition/raw-composition equality and one new
+protected precomposition/raw-composition equality then expose the common
+`h o g` component. Right-based path induction transports those two endpoint
+comparisons to arbitrary `f`.
+
+The promoted rule-free module
+
+```text
+emdash3_2_dependent_simplex_path_associator.lp
+```
+
+therefore retains the following ownership ladder:
+
+```text
+represented_assoc_transfd(f,g)
+  : represented_assoc_lhs_funcd(f,g)
+      => represented_assoc_rhs_funcd(f,g)
+
+represented_assoc_cell(f,g,h)
+  : represented_assoc_lhs(f,g,h)
+      -> represented_assoc_rhs(f,g,h)
+
+represented_assoc_higher_func(f,g,h0,h1)
+  : Hom(h0,h1)
+      -> Hom(represented_lhs(h0),represented_rhs(h1)).
+```
+
+For `Z = Path_cat(A)`, the formal endpoints compare propositionally with
+
+```text
+(h o g) o f
+h o (g o f),
+```
+
+and `path_represented_assoc` is the resulting invertible equality in the
+forward orientation. `path_cat_assoc_J` independently derives the reverse
+orientation by J and `path_assoc_J_forward` reverses it; the reviewer checks
+that this proof term is not definitionally the represented one. A wrong final
+arrow is rejected at the retained formal target.
+
+The general typed postcomposition comparison formerly marked `protected` in
+`emdash3_2_path_pseudo_laxity.lp` is now public because this is its second
+independent source module consumer; its body and computational behavior are
+unchanged.
+
+The final no-associativity probe passes quietly and warning-enabled with the
+same `1112/159` diagnostics as its full-file comparison baseline:
+
+```text
+logs/probes/dependent_simplex_path_assoc_no_assoc-20260819-055955.log
+logs/probes/dependent_simplex_path_assoc_no_assoc-20260819-060015.log.
+```
+
+The final promoted source, reviewer, and unchanged Path-pseudo-laxity warning
+baseline pass at the same minimal active import-closure inventory of
+`1112/159`:
+
+```text
+logs/probes/emdash3_2_dependent_simplex_path_associator-20260819-062349.log
+logs/probes/dependent_simplex_path_associator-20260819-062349.log
+logs/probes/emdash3_2_path_pseudo_laxity-20260819-062434.log.
+```
+
+The module and reviewer add no rule or `unif_rule`, so no new LHS or critical
+pair is owned by the tranche. The remaining `DHSF-PATH-3` obligation is a
+native dependent-simplex consumer of this selected source coherence; merely
+having two readable associator proofs is not yet dimension four.
 
 ## 14. Completion Definition
 

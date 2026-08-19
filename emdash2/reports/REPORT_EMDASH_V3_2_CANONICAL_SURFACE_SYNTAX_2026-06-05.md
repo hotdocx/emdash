@@ -1097,6 +1097,24 @@ Do not expand these into a record of external face equations. On a visible
 `(kappa,lambda)`, the dependent output remains the native
 `fdapp1_int_hom_fapp0` projection.
 
+For the first groupoidal source coherence, comments may write
+
+```text
+assoc_rep(f,g,h) : (h o g) o f = h o (g o f)
+assoc_J(f,g,h)   : (h o g) o f = h o (g o f).
+```
+
+The literal owners are `path_represented_assoc` and
+`path_assoc_J_forward`. The former is projected from the whole compositor of
+`Rep_catd_func`; `represented_assoc_transfd` owns the whole displayed cell,
+`represented_assoc_cell` is its point component, and
+`represented_assoc_higher_func` retains the next action. The latter is path
+symmetry applied to `path_cat_assoc_J`. Do not write either as a definitional
+replacement for `comp_assoc`, and do not identify their proof terms. Formal
+represented endpoints remain `represented_assoc_lhs` and
+`represented_assoc_rhs`; their readable bracketing comparisons are
+propositional.
+
 For groupoid-valued diagrams write
 
 ```text

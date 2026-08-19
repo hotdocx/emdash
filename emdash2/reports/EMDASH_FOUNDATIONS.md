@@ -3768,6 +3768,43 @@ by `dependent_tetrahedron_map` are equalities, and path symmetry gives their
 inverses. The pseudo reading therefore follows from the codomain shape rather
 than an added inverse record.
 
+The first source-coherence adapter is now obtained from the same architecture
+rather than from the primitive categorical associator. The represented
+functor
+
+```text
+Rep_catd_func(Z) : Op_cat(Z) -> Catd_cat(Z)
+```
+
+has the generic compositor supplied by `fapp1_compositor`. Evaluating that
+whole displayed transformation at a fourth object and arrow gives
+
+```text
+represented_assoc_cell(f,g,h)
+  : represented_lhs(f,g,h) -> represented_rhs(f,g,h),
+```
+
+and `represented_assoc_higher_func` retains its next hom action in `h`. The
+formal endpoints intentionally remain at the stable represented
+pre/postcomposition owners. When `Z = Path_cat(A)`, right-based path induction
+and typed equality comparisons identify them propositionally with
+
+```text
+(h o g) o f
+h o (g o f).
+```
+
+Thus `path_represented_assoc(f,g,h)` is an invertible equality in the readable
+forward orientation. A separate `path_cat_assoc_J` derives the reverse
+orientation directly by J; symmetry gives the same endpoints, but the two
+proof terms are not definitionally identified. In an owner-position kernel
+copy with the global associativity unifier removed and `comp_assoc` left
+opaque, the whole represented owner, both endpoint comparisons, the readable
+Path associator, and the retained next action still check. This establishes a
+non-circular groupoidal source seed without adding a reassociation rule,
+unifier, or duplicate coherence record. It does not yet construct the full
+dimension-four boundary.
+
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction
 is ordinary precomposition. The post/left cell uses `homd_int` and
