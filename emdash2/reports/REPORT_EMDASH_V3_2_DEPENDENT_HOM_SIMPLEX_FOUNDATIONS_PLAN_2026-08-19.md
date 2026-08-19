@@ -402,9 +402,9 @@ authorized.
 | Row | Status | Deliverable and acceptance boundary |
 | --- | --- | --- |
 | `DHSF-00` | complete | This refocused child plan is linked from the completed parent and report index. Recovery, Git, nonclaim, owner, and proportional-validation boundaries are frozen; the first non-circular Path seed is green quietly and warning-enabled. |
-| `DHSF-BASE-1` | in progress | The clean descendant worktree, bootstrap, relevant owner inventory, focused path/dependent source and profile reviewer baselines, and archive verification are green. Complete the exact owner-position no-associativity comparison method before promotion. No long aggregate baseline. |
+| `DHSF-BASE-1` | complete | The clean descendant worktree, bootstrap, relevant owner inventory, focused path/dependent source and profile reviewer baselines, archive verification, and exact current-source no-associativity copy are green. Quiet/warning runs of the copy and first consumer have zero delta at `1112/159`. No long aggregate baseline was run. |
 | `DHSF-NATIVE-2` | pending | Specify complete native dependent presentations in dimensions 0--3, distinguishing global boundary totals from existing fixed-endpoint local triangle/tetrahedron classifiers. Retain whole and next-hom action. |
-| `DHSF-PATH-3` | pending | Derive Path associativity by J without `comp_assoc`; compare categorical Path composition; audit represented composition for circular dependencies; select a whole groupoidal source owner or record the exact missing prerequisite. |
+| `DHSF-PATH-3` | in progress | J-derived `eq_trans` and categorical Path associativity compute without `comp_assoc`; the whole represented-composition compositor also forms in the no-associativity kernel. Its direct readable type stops at two stable pre/postcomposition endpoint comparisons. Materialize those paths without a rule/unifier, compare the Path specialization, and retain the next action. |
 | `DHSF-DIM4-4` | pending | Construct the full next source boundary from the selected lower groupoidal/native owners, apply the retained dependent action, inspect all required faces, and reject any hidden reliance on the global associativity unifier. |
 | `DHSF-CODE-5` | pending | Derive the smallest intrinsically indexed `DependentSimplexCode` grammar from dimensions 0--4; reuse `FaceCode`; record reification/decoding scope and profile parameters. No generic type syntax. |
 | `DHSF-DECODE-6` | pending | Implement code decoding to canonical `Hom_cat`/`Sigma_cat` owners so existing rules expose `homd_`; reproduce the checked triangle/tetrahedron and dimension-four action with no duplicate semantic normal form. |
@@ -462,6 +462,84 @@ establishes the non-circular groupoidal seed only. It does not yet compare
 the two categorical `comp_fapp0(Path_cat(A),...)` bracketings, recover a whole
 represented-composition owner, feed the seed into the dependent tetrahedron,
 or construct dimension four.
+
+### 13.2 Exact No-Associativity And Represented-Owner Audit — 2026-08-19
+
+The ignored current-source copy
+
+```text
+tmp/probes/dependent_simplex_no_assoc_full.lp
+```
+
+differs from `emdash3_2.lp` only at the generic associativity owner: it removes
+the proof-time composition-associativity `unif_rule` and leaves `comp_assoc`
+opaque instead of defining it by `eq_refl`. The paired consumer
+
+```text
+tmp/probes/dependent_simplex_path_assoc_no_assoc.lp
+```
+
+imports only that copy. Quiet runs pass, and the warning-enabled copy and
+consumer each report exactly 1,112 critical-pair diagnostics and 159
+replaceable-variable advisories:
+
+```text
+logs/probes/dependent_simplex_no_assoc_full-20260819-053501.log
+logs/probes/dependent_simplex_path_assoc_no_assoc-20260819-053501.log
+logs/probes/dependent_simplex_no_assoc_full-20260819-053525.log
+logs/probes/dependent_simplex_path_assoc_no_assoc-20260819-053525.log.
+```
+
+The consumer derives two non-circular seeds by one `ind_eqr` on the first
+path:
+
+```text
+eq_trans(f,eq_trans(g,h))
+  = eq_trans(eq_trans(f,g),h)
+
+h o (g o f)
+  = (h o g) o f
+  in Path_cat(A).
+```
+
+Both reduce to reflexivity when `f` is reflexive. The second theorem uses the
+selected categorical Path unit rules directly and neither unfolds through
+the first theorem nor references `comp_assoc`.
+
+The same no-associativity consumer also forms the generic compositor of
+
+```text
+Rep_catd_func(Z) : Op_cat(Z) -> Catd_cat(Z)
+```
+
+and projects its displayed component at `h`. Thus the whole represented owner
+is not bootstrapped from generic associativity merely to exist. Its exact
+formal type is retained at the `functord_transport_lhs_func` and
+`functord_transport_rhs_func` endpoints:
+
+```text
+logs/probes/dependent_simplex_path_assoc_no_assoc-20260819-053858.log.
+```
+
+The first attempted direct ascription to the readable orientation
+
+```text
+(h o g) o f -> h o (g o f)
+```
+
+fails with exactly two obligations: one formal source comparison and one
+formal target comparison, both involving stable represented pre/postcomposition
+heads. Evidence:
+
+```text
+logs/probes/dependent_simplex_path_assoc_no_assoc-20260819-054021.log.
+```
+
+This is not evidence that the whole owner is circular or unavailable. It is
+the known non-transitive-unification boundary: the next probe must materialize
+typed comparisons through rigid intermediate heads, following the existing
+Path pseudo-laxity pattern. Do not add a runtime fold, reassociation rule, or
+new unifier merely to make the readable ascription elaborate.
 
 ## 14. Completion Definition
 
