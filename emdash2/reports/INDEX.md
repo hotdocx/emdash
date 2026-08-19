@@ -14,8 +14,9 @@ objective is now implemented: `emdash3_2_join_generator_compatibility.lp`
 derives the whole walking-generator beta from reindex, join-extension, and
 observation/action paths; `emdash3_2_dependent_simplex_ordinal_filler.lp`
 constructs the profiled source filler, maps its native simplex under arbitrary
-`H`, and projects the canonical target filler. Documentation and proportional
-closeout remain active. The plan explicitly excludes an
+`H`, and projects the canonical target filler. The plan is closed at local
+implementation checkpoint `023a1c2`, with a final ledger-only checkpoint
+recording that boundary. It explicitly excludes an
 opaque filler, broad join eta, full dimensions three/four, and a whole
 semisimplicial nerve. Its first promoted module is
 `emdash3_2_join_cross_compatibility.lp`: a whole propositional cross beta

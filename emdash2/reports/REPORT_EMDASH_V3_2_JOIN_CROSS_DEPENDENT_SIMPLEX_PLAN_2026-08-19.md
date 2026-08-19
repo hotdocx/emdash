@@ -4,7 +4,7 @@ Date: 2026-08-19 (America/Toronto)
 
 Plan-ID: `JOIN-CROSS-DEPENDENT-SIMPLEX-V3.2`
 
-Status: **active implementation plan**. The completed dependent-hom simplex
+Status: **completed implementation plan**. The completed dependent-hom simplex
 foundations plan isolates one exact prerequisite: compatibility between the
 primitive cross datum supplied to join elimination and the cross cell obtained
 by applying the resulting functor to the source join-cross transformation.
@@ -332,7 +332,7 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `JCDS-PROFILE-8` | complete | The generic endpoints remain non-convertible; selected strict input uses the same construction with only existing compositor reductions; for `Path_cat(A)` the filler elaborates as equality and `eq_sym` supplies its inverse. A wrong final base edge is rejected. |
 | `JCDS-NEXT-9` | complete | `ordinal_dependent_simplex2_native_map(H)` remains the whole `dependent_simplex2_map`, and `ordinal_dependent_simplex2_next_func(H)` exposes its next hom action. Dimension three may consume that action; dimension four is not implemented here. |
 | `JCDS-DOC-10` | complete | Foundations, syntax, current status, root/package READMEs, AGENTS, report index, source/check registries, focused reviewers, catalog, and source-only health are synchronized to the constructive dimension-two result. |
-| `JCDS-CLOSE-11` | in progress | Complete every row by implementation, evidence-backed rejection, or concrete deferral; run proportional final gates and leave excluded operations untouched. |
+| `JCDS-CLOSE-11` | complete | Every scoped row is implemented and validated; implementation/authority checkpoint `023a1c2` is clean and reviewable. No long aggregate or unauthorized integration, publication, deployment, history rewrite, or cleanup was performed. |
 
 ### 14.1 Launch And Whole-Type Audit — 2026-08-19
 
@@ -529,9 +529,32 @@ Proportional gates are green:
 
 No long aggregate was rerun: the new files and their complete import closures
 were checked directly, while unchanged boundaries retain their recent green
-evidence. `JCDS-DOC-10` is complete. `JCDS-CLOSE-11` remains active only long
-enough to create and record the authorized local implementation checkpoint and
-verify the final staged/committed boundary.
+evidence. At checkpoint preparation, `JCDS-DOC-10` was complete and
+`JCDS-CLOSE-11` remained active only long enough to create and record the
+authorized local implementation checkpoint and verify the final committed
+boundary.
+
+### 14.5 Local Checkpoint And Closeout — 2026-08-19
+
+Implementation, focused reviewers, registries, authority prose, generated
+source-only health, and the synchronized living ledger were committed locally
+as
+
+```text
+023a1c2 feat(emdash2): construct canonical ordinal simplex filler
+```
+
+The checkpoint contains exactly the 15 scoped files reviewed by the staged
+diff; the worktree had no unstaged overlap. Its parent is the earlier whole
+join-cross checkpoint `a56def2`. No push, merge, PR, tag, release, publication,
+deployment, history rewrite, branch/worktree deletion, or unrelated mutation
+occurred. The final plan-only checkpoint records this hash and closes
+`JCDS-CLOSE-11`.
+
+The bounded result is complete. A future child goal may consume
+`ordinal_dependent_simplex2_next_func(H)` to investigate dimension-three
+ordinal adequacy. It should not reopen the completed dimension-two bridge or
+silently include dimension four unless a new living plan explicitly does so.
 
 ## 15. Completion Definition
 
