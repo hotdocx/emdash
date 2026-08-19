@@ -375,3 +375,46 @@ canonical source triangle. It proves iterability but is not by itself the
 distinct-face arrow needed for a tetrahedron. `ODS3-OWNER-2` therefore starts
 at the underlying `dependent_simplex2_map`/`fapp1_func` owner and the retained
 join-cross action; no new action primitive is presumed.
+
+The clean launch checkpoint is `10cca62`.
+
+### 16.1 First Higher Owner Audit
+
+The ignored owner-position probe
+
+```text
+tmp/probes/ordinal_simplex3_owner.lp
+```
+
+constructs the dimension-three source profile without a new kernel symbol:
+
+```text
+base    = Product_cat(Op_cat(Delta[2]),Terminal_cat)
+family  = reindexed Unit_prof(Delta[3])
+section = join_map_cross_transf(id_Delta[2],id_Terminal).
+```
+
+For an arbitrary old edge `p : x -> y`, one generic projection of this
+section supplies the cross-triangle filler on `(x,y,3)`. The raw source keeps
+the terminal-coordinate functor action. The existing `fapp1_id_path`, rigid
+`Hom_fapp0` to precomposition bridge, and pre/post proof-time bridge move it
+to the native stable `hom_postcomp_fapp0` endpoint. The same construction
+therefore gives faces 013, 023, and 123; no three face-specific fillers or
+rules are needed.
+
+The canonical 012 filler lifts through the product/opposite base as a higher
+arrow from its stable represented postcomposition endpoint to its direct
+endpoint. Applying the section action once more succeeds and normalizes to
+the expected recursive `fdapp1_int_cell`. This establishes the whole
+dimension-three source of the top component and is stronger than the fixed
+endomorphism-shaped public handoff.
+
+The first attempted native packaging also rejects one overly short route:
+the raw second action is not by itself the whole native `alpha0123` pair.
+Face 123 is its first Sigma component, while the raw top still targets the
+section action on the stable composite old arrow. The exact remaining join is
+the generic section-composition comparison from that stable action to the
+`(face123,face013)` pasting. It is not a missing tetrahedron filler, variance
+mirror, or associativity axiom. The next probe must derive it from the
+section/internal-action compositor and the existing stable-to-readable
+postcomposition path before considering any new owner.
