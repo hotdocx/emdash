@@ -157,6 +157,19 @@ projects to the native `(kappa,lambda)` tetrahedron, maps through the existing
 dependent action with the expected base/fibre computation, and retains one
 further hom action. No rewrite, unifier, or Sigma eta is added.
 
+The resulting native finite presentation is now explicit through dimension
+three. After choosing the initial lower face, every successor classifier is a
+`PathOut_cat`: edges are objects of `PathOut_C(x0)`, triangles are objects of
+the next PathOut category at edge `e01`, and tetrahedra are objects of the
+next one at triangle `t012`. The derived `pathout_map_func` combines the
+existing displayed hom action, Sigma map, and pullback-total map, so ordinary
+functors act on this whole tower and retain another hom action. Constructor-
+visible dimension-two and dimension-three terms expose all boundary faces and
+the top filler; one typed endpoint conjugation moves the final represented
+cell to literal composition before its last Sigma projection. These are
+flagged classifiers, not yet one global category of all `n`-simplices or an
+ordinal/dependent equivalence.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the

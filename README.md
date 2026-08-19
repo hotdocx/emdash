@@ -55,7 +55,11 @@ stable-owner comparisons expose a directed cell from `(h o g) o f` to
 even when the global associativity prototype is disabled. For a
 constructor-visible three-edge Sigma spine, that same cell projects as the
 native `(kappa,lambda)` tetrahedron input, maps through the existing dependent
-action componentwise, and retains another hom action. Degeneracies,
+action componentwise, and retains another hom action. More globally, flagged
+native simplex classifiers through dimension three now iterate `PathOut_cat`;
+their whole map action is derived recursively from ordinary functor action,
+and visible boundaries expose all edges, triangular faces, the fourth face,
+and the top dependent filler without a parallel simplex record. Degeneracies,
 generic-dimensional horns/Kan filling, and the whole mapping-category/
 displayed-cell comparison remain future work.
 

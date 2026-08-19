@@ -403,9 +403,9 @@ authorized.
 | --- | --- | --- |
 | `DHSF-00` | complete | This refocused child plan is linked from the completed parent and report index. Recovery, Git, nonclaim, owner, and proportional-validation boundaries are frozen; the first non-circular Path seed is green quietly and warning-enabled. |
 | `DHSF-BASE-1` | complete | The clean descendant worktree, bootstrap, relevant owner inventory, focused path/dependent source and profile reviewer baselines, archive verification, and exact current-source no-associativity copy are green. Quiet/warning runs of the copy and first consumer have zero delta at `1112/159`. No long aggregate baseline was run. |
-| `DHSF-NATIVE-2` | in progress | Specify complete native dependent presentations in dimensions 0--3, distinguishing global boundary totals from existing fixed-endpoint local triangle/tetrahedron and three-edge-spine classifiers. Retain whole and next-hom action. |
+| `DHSF-NATIVE-2` | complete | `emdash3_2_dependent_simplex_native_dimensions.lp` defines the honest flagged tower `C`, `PathOut_C(x0)`, `PathOut(e01)`, and `PathOut(t012)` through dimension three. Derived whole map functors iterate the existing displayed hom/Sigma/pullback-total action and retain another hom action. Visible constructors expose all lower faces; a typed represented-source conjugation exposes face 123 and the top filler. A single global mixed-variance all-simplex total is explicitly not claimed. |
 | `DHSF-PATH-3` | complete | `emdash3_2_dependent_simplex_path_associator.lp` materializes both generic raw-bracketing endpoint comparisons without a rule/unifier, exposes the whole and raw-endpoint represented associators, specializes invertibly to Path while preserving distinct J provenance, and retains one next action. `emdash3_2_dependent_simplex_represented_source.lp` then projects that selected cell at a constructor-visible Sigma spine to the native `(kappa,lambda)` tetrahedron, maps it through the existing whole next action with both component betas, and retains another hom action. |
-| `DHSF-DIM4-4` | pending | Construct the full next source boundary from the selected lower groupoidal/native owners, apply the retained dependent action, inspect all required faces, and reject any hidden reliance on the global associativity unifier. |
+| `DHSF-DIM4-4` | in progress | Construct the next flagged PathOut source from the selected lower groupoidal/native owners, apply the retained dependent action, inspect its complete dimension-four boundary, and reject any hidden reliance on the global associativity unifier. Determine separately what a global mixed-variance total would require. |
 | `DHSF-CODE-5` | pending | Derive the smallest intrinsically indexed `DependentSimplexCode` grammar from dimensions 0--4; reuse `FaceCode`; record reification/decoding scope and profile parameters. No generic type syntax. |
 | `DHSF-DECODE-6` | pending | Implement code decoding to canonical `Hom_cat`/`Sigma_cat` owners so existing rules expose `homd_`; reproduce the checked triangle/tetrahedron and dimension-four action with no duplicate semantic normal form. |
 | `DHSF-FACE-7` | pending | Implement decoded face projections indexed by existing `FaceCode`, preserve composition through its owner, and retain higher action. Defer degeneracies. |
@@ -714,6 +714,81 @@ rechecking the unchanged repository; it was interrupted rather than allowed
 to become an unnecessary long aggregate. The focused source/reviewer checks
 above are the semantic evidence for this tranche; no `make check`,
 `make examples`, `make ci`, or repository aggregate is claimed.
+
+### 13.5 Flagged Native Dimensions Zero Through Three — 2026-08-19
+
+The successful native-dimensions probe identifies the recursion that the
+earlier provisional code sketches were trying to describe. It is not a new
+deep syntax. After fixing the initial lower face, the next classifier is the
+already-active outgoing-path category:
+
+```text
+DependentSimplex0_cat(C)                 = C
+DependentSimplex1_cat(C,x0)              = PathOut_C(x0)
+DependentSimplex2_cat(C,x0,e01)          = PathOut_{S1}(e01)
+DependentSimplex3_cat(C,x0,e01,t012)     = PathOut_{S2}(t012).
+```
+
+The promoted rule-free source is
+
+```text
+emdash3_2_dependent_simplex_native_dimensions.lp.
+```
+
+Because `PathOut_Z(x) = Sigma_y Hom_Z(x,y)`, every successor is exactly the
+canonical `Hom_cat`/`Sigma_cat`/`homd_` recursion selected by this plan.
+`dependent_simplex2_visible` projects to edges 02 and 12 and its dependent
+triangle filler; edge 01 is the classifier flag. A visible
+`dependent_simplex3` projects immediately to faces 013 and 023, with face 012
+as its flag. Its remaining component is initially based at the stable
+represented postcomposition owner. The generic
+`dependent_simplex3_readable_cell` conjugates along the existing typed
+postcomposition/raw-composition path. At fully constructor-visible lower
+faces, `dependent_simplex3_visible_readable_cell` then projects by Hom(Sigma)
+to face 123 and the top dependent filler.
+
+Whole map action is also derived rather than postulated:
+
+```text
+pathout_map_func(F,x)
+  = sigma_pullback_total_func(F,Rep_D(Fx))
+      o sigma_map_func(fapp1_at_transf(F,x)).
+```
+
+Iterating it supplies `dependent_simplex1_map` through
+`dependent_simplex3_map`; the reviewer checks a visible edge image and retains
+the next `fapp1_func` in dimension three. No recursive action record, rule,
+unifier, or Sigma eta is introduced.
+
+This resolves the global/local distinction honestly. The active
+computational presentation is **flagged**: its category changes after choosing
+the initial vertex, edge, and triangle. Naively totalizing over all flags would
+ask a Cat-valued family to transport a represented hom covariantly in its
+contravariant endpoint; that is the earlier mixed-variance comma/coherent-
+square gap. This row therefore does not claim a single category of all native
+`n`-simplices. Low-dimensional comparison with `Functor([n],C)` remains the
+profile-sensitive adequacy row, not a prerequisite for using the checked
+flagged tower.
+
+Focused source/reviewer checks are green quietly and warning-enabled. Both
+warning runs retain the unchanged dependent-bridge import-closure inventory
+of `1150/159`:
+
+```text
+logs/probes/emdash3_2_dependent_simplex_native_dimensions-20260819-082712.log
+logs/probes/dependent_simplex_native_dimensions-20260819-082714.log
+logs/probes/emdash3_2_dependent_simplex_native_dimensions-20260819-082717.log
+logs/probes/dependent_simplex_native_dimensions-20260819-082720.log.
+```
+
+The durable negative from the probe is architectural rather than a failing
+promoted term: directly projecting the final component before endpoint
+conjugation does not elaborate. The promoted readable-cell adapter is the
+narrow typed repair; no global postcomposition fold or Sigma eta was added.
+The strict LHS audit, source TOC, active-reference and report-header lints,
+focused metrics/source-TOC tests, catalog regeneration/strict check, and exact
+diff hygiene are green. The source-only health snapshot now records 239 files;
+no long aggregate was rerun.
 
 ## 14. Completion Definition
 

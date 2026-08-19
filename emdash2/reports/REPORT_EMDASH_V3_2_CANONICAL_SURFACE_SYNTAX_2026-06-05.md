@@ -1133,6 +1133,27 @@ The literal owners are `dependent_spine3_left_triangle`,
 native dependent-pair view. Do not infer a Sigma eta or a complete
 dimension-three boundary package from this notation.
 
+For the complete flagged finite tower, comments may write
+
+```text
+S0(C)
+S1(C,x0)
+S2(C,x0,e01)
+S3(C,x0,e01,t012)
+S_n(F) : S_n(C,flag) -> S_n(D,F(flag)).
+```
+
+The literal classifiers are `DependentSimplex0_cat` through
+`DependentSimplex3_cat`; the whole actions are `dependent_simplex0_map`
+through `dependent_simplex3_map`. Constructor notation uses
+`dependent_simplex1`, `dependent_simplex2`, `dependent_simplex3`, and the
+fully visible helpers `dependent_simplex2_visible` and
+`dependent_simplex3_visible`. The final 123-face/filler split goes through
+`dependent_simplex3_readable_cell` or its constructor-visible specialization,
+not through a rewrite of the stable represented source. The `flag` arguments
+are semantically essential: this notation does not denote one global category
+of all simplices.
+
 For groupoid-valued diagrams write
 
 ```text

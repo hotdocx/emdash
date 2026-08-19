@@ -3828,8 +3828,47 @@ the existing `dependent_tetrahedron` owner, and
 
 and another `fapp1_func` remains available. Constructor visibility is part of
 this normal form: arbitrary opaque total arrows do not acquire a Sigma eta.
-This closes the non-circular source bootstrap but does not yet construct the
-complete native boundary telescopes in dimensions zero through four.
+This closes the non-circular source bootstrap. By itself it is only the
+three-edge source slice; the next construction places it inside the complete
+flagged native tower through dimension three, while dimension four remains
+open.
+
+The first complete finite native tower is flagged rather than globally
+totalized. Write
+
+```text
+S0(C)                 = C
+S1(C,x0)              = PathOut_C(x0)
+S2(C,x0,e01)          = PathOut_{S1(C,x0)}(e01)
+S3(C,x0,e01,t012)     = PathOut_{S2(C,x0,e01)}(t012).
+```
+
+An object of `S1` is an edge `(x1,p01)`. An object of `S2` is an edge of
+`S1`, hence three C-edges together with the dependent triangle cell filling
+face 012. An object of `S3` is an edge of `S2`: its immediate projections are
+faces 013 and 023, while face 012 is the flag indexing `S3`. The remaining
+component initially has the stable represented source. The transparent
+`dependent_simplex3_readable_cell` conjugates it along
+`hom_postcomp_fapp0 = comp_fapp0`; at constructor-visible lower faces,
+`dependent_simplex3_visible_readable_cell` then splits by the existing
+Hom(Sigma) computation into face 123 and the top dependent filler.
+
+This tower is functorial without a second recursive action. For `F:C -> D`,
+
+```text
+pathout_map_func(F,x)
+  = sigma_pullback_total_func(F,Rep_D(Fx))
+      o Sigma(fapp1_at_transf(F,x)).
+```
+
+Iterating this formula gives `dependent_simplex1_map`,
+`dependent_simplex2_map`, and `dependent_simplex3_map`; their next actions
+remain ordinary `fapp1_func`. Thus the finite dependent presentation is
+computational and internal through dimension three. It deliberately fixes an
+initial flag. A single global category of all n-simplices, its precise
+strict/lax comparison with `Functor([n],C)`, and variable-dimensional coding
+remain separate tasks rather than being hidden by an invalid mixed-variance
+Sigma total.
 
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction

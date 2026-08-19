@@ -289,6 +289,12 @@ retains both bracketings, exposes the represented associator as the native
 `(kappa,lambda)` tetrahedron input, maps it through the existing next internal
 action, and keeps another hom action iterable without Sigma eta, a rule, or a
 unifier;
+the flagged native dependent-simplex dimensions and their recursively derived
+whole map action are `emdash3_2_dependent_simplex_native_dimensions.lp`;
+dimensions zero through three iterate `PathOut_cat`, visible triangles and
+tetrahedra expose every boundary layer through existing Sigma/homd owners, and
+the final represented endpoint is conjugated propositionally before its
+face/filler projection;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1024,14 +1030,21 @@ Use the following order:
     existing next internal action computes both projected components, and a
     further hom action remains available. It adds no Sigma eta, rule, unifier,
     complete boundary telescope, or uniform dependent-simplex code;
-108. `emdash3_2_checks.lp` for executable regression statements;
-109. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+108. `emdash3_2_dependent_simplex_native_dimensions.lp` for the rule-free
+    flagged classifiers through dimension three. Each successor is a
+    `PathOut_cat`, `pathout_map_func` and its iterations give whole map action,
+    visible dimension-two and dimension-three constructors expose every face
+    and filler, and a typed endpoint conjugation preserves the represented
+    source owner. It does not claim one global category of all simplices,
+    variable dimension, ordinal adequacy, a code grammar, rule, or unifier;
+109. `emdash3_2_checks.lp` for executable regression statements;
+110. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-110. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-111. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+111. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+112. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-112. `reports/INDEX.md` for task-specific plans and decision records.
-113. `book/book.json` and `book/evidence.json` for book source
+113. `reports/INDEX.md` for task-specific plans and decision records.
+114. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

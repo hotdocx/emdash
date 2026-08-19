@@ -21,8 +21,12 @@ a rule, or a unifier. Its first native consumer is
 three-edge Sigma spine exposes that cell as the dependent
 `(kappa,lambda)` tetrahedron input, maps it through the existing whole next
 action with both component betas, and retains another hom action. The active
-next step is now the complete native boundary presentations in dimensions
-zero through three; the dimension-four acceptance case follows them.
+finite continuation is `emdash3_2_dependent_simplex_native_dimensions.lp`.
+It iterates flagged `PathOut_cat` classifiers through dimension three, derives
+whole ordinary-functor action recursively, exposes all visible faces and the
+top filler, and keeps another hom action. The active next step is now the
+dimension-four acceptance case. A global all-simplex category and the
+ordinal/dependent equivalence remain later, profile-sensitive work.
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
 is the completed bounded continuation from the simplicial substrate. It

@@ -599,6 +599,15 @@ detailed probe evidence.
   component through `fdapp1_int_hom_fapp0`, and retains another hom action.
   No Sigma eta, runtime rule, proof-time unifier, complete boundary telescope,
   or uniform code universe is added.
+- `emdash3_2_dependent_simplex_native_dimensions.lp`: rule-free flagged native
+  classifiers through dimension three. The tower starts with `C` and iterates
+  `PathOut_cat` after fixing the initial vertex, edge, and triangle. The
+  derived `pathout_map_func` and its iterations give whole ordinary-functor
+  action and retain another hom action. Visible dimension-two and
+  dimension-three constructors expose every edge/face and top dependent
+  filler; the last represented source is moved to literal composition by
+  typed equality-induced conjugation. It adds no global all-simplex category,
+  variable dimension, ordinal equivalence, code grammar, rule, or unifier.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category
