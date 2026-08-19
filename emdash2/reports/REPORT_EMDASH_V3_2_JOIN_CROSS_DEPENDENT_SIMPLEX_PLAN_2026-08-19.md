@@ -320,8 +320,8 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | --- | --- | --- |
 | `JCDS-00` | complete | Dedicated child branch/worktree created from clean checkpoint `c5300b3`; scope, nonclaims, validation, and Git boundaries are recorded in this linked living plan. |
 | `JCDS-BASE-1` | complete | Bootstrap and focused quiet checks of the core, join observation/extension source/reviewer, ordinal-adequacy source/reviewer, source TOC, active references, and report headers are green. No aggregate was run. |
-| `JCDS-OWNER-2` | in progress | Inventory exact primitive/action-derived cross types, endpoint presentations, existing projections, and retained action; identify whether equality or a directed cell is mathematically correct. |
-| `JCDS-WHOLE-3` | pending | Promote the smallest whole join-cross compatibility owner with both projection orders and wrong-endpoint/non-collapse evidence. |
+| `JCDS-OWNER-2` | complete | The primitive and action-derived cross objects inhabit the same `Prof_transf_cat` after existing branch/point betas align endpoints. Direct conversion is false. A runtime rule cannot head the transparent defined observation alias; the next justified candidate is one whole equality/path computation principle at the join-recursion semantic owner, not a Cat-valued total. |
+| `JCDS-WHOLE-3` | in progress | Probe and promote the smallest whole join-cross computation path, project it to a directed cell when needed, and retain both reduction-order and wrong-endpoint/non-collapse evidence. |
 | `JCDS-PROJECT-4` | pending | Project shaped and walking-arrow components from the whole owner and retain another hom action. |
 | `JCDS-SOURCE-5` | pending | Construct the canonical native dependent triangle of `DirectedSimplex_cat(2)` from the join-cross action. |
 | `JCDS-FILLER-6` | pending | Map the source triangle under arbitrary `H` to inhabit `OrdinalDependentSimplex2CanonicalFiller(C,H)`. |
@@ -330,6 +330,51 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `JCDS-NEXT-9` | pending | Retain the next action and record the exact dimension-three continuation boundary; do not implement dimension four here. |
 | `JCDS-DOC-10` | pending | Synchronize Foundations, syntax, status, READMEs, AGENTS, report index, source/check registries, reviewers, catalog, and source-only health. |
 | `JCDS-CLOSE-11` | pending | Complete every row by implementation, evidence-backed rejection, or concrete deferral; run proportional final gates and leave excluded operations untouched. |
+
+### 14.1 Launch And Whole-Type Audit — 2026-08-19
+
+The dedicated worktree was created from clean checkpoint `c5300b3` and
+bootstrapped with the pinned pnpm workspace. Focused quiet checks are green for
+the core, join mapping source/reviewer, ordinal-adequacy source/reviewer, source
+TOC, active references, and report headers. No aggregate was run.
+
+The first ignored probe
+
+```text
+tmp/probes/join_cross_compatibility.lp
+```
+
+shows that
+
+```text
+join_map_observe_cross(join_map_extend_object(d))
+join_map_extend_cross(d)
+```
+
+both elaborate in the same whole `Prof_transf_cat` after the existing join
+branch and point betas align their endpoint functors. The equality type
+`JoinCrossCompatibility(d)` is therefore well formed, while a direct
+conversion assertion is correctly rejected. Evidence:
+
+```text
+logs/probes/join_cross_compatibility-20260819-115617.log.
+```
+
+A second ignored probe attempted the most direct runtime beta at the public
+`join_map_observe_cross` surface. Lambdapi rejected the rule before semantic
+checking because that surface is already a transparent defined alias:
+
+```text
+logs/probes/join_cross_runtime_beta-20260819-115802.log.
+```
+
+Changing the alias to an injective stable head would be a normal-form migration
+and would force a competing generic-unfold/specialized-beta pair. There is no
+current evidence that such a migration is required. The next candidate is a
+single whole equality/path computation principle for join elimination,
+analogous to a higher-constructor beta. Its equality-induced arrow can retain
+component and next-hom projections without postulating the eventual ordinal
+triangle filler. `JCDS-OWNER-2` is complete and `JCDS-WHOLE-3` is active.
 
 ## 15. Completion Definition
 
