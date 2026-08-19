@@ -1113,7 +1113,25 @@ symmetry applied to `path_cat_assoc_J`. Do not write either as a definitional
 replacement for `comp_assoc`, and do not identify their proof terms. Formal
 represented endpoints remain `represented_assoc_lhs` and
 `represented_assoc_rhs`; their readable bracketing comparisons are
-propositional.
+propositional. For arbitrary directed `Z`, the transported raw-endpoint cell
+is `represented_assoc_readable_cell`; it is not a second primitive
+associator.
+
+For the constructor-visible dependent source, comments may write
+
+```text
+left3(p01,p12,p23)
+right3(p01,p12,p23)
+assoc3(p01,p12,p23) = (kappa,lambda)
+map(FF,assoc3) = (kappa,fdapp1_int_hom_fapp0(FF,lambda)).
+```
+
+The literal owners are `dependent_spine3_left_triangle`,
+`dependent_spine3_right_triangle`, `dependent_spine3_assoc_cell`,
+`dependent_spine3_assoc_tetrahedron`, and `dependent_spine3_assoc_map`. The
+`assoc_cell` is the represented directed cell; `assoc_tetrahedron` exposes its
+native dependent-pair view. Do not infer a Sigma eta or a complete
+dimension-three boundary package from this notation.
 
 For groupoid-valued diagrams write
 

@@ -280,9 +280,15 @@ the existing `fdapp1_int_hom_fapp0` projection without a new coherence record;
 the represented groupoidal source-associator extension is
 `emdash3_2_dependent_simplex_path_associator.lp`; it projects the generic
 compositor of `Rep_catd_func`, retains its whole displayed and next-hom
-action, and uses Path induction plus typed stable-owner comparisons to expose
-the two readable bracketings without relying on `comp_assoc`, a new rule, or
-a new unifier;
+action, and uses typed stable-owner comparisons to expose a generic directed
+cell between the two raw bracketings. Its Path specialization is invertible
+without relying on `comp_assoc`, a new rule, or a new unifier;
+the constructor-visible represented dependent-source extension is
+`emdash3_2_dependent_simplex_represented_source.lp`; a three-edge Sigma spine
+retains both bracketings, exposes the represented associator as the native
+`(kappa,lambda)` tetrahedron input, maps it through the existing next internal
+action, and keeps another hom action iterable without Sigma eta, a rule, or a
+unifier;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1008,18 +1014,24 @@ Use the following order:
 106. `emdash3_2_dependent_simplex_path_associator.lp` for the rule-free
     represented source associator. The generic whole compositor of
     `Rep_catd_func` remains a displayed transformation and its component
-    retains another hom action. In the literal Path profile, J-derived typed
-    endpoint paths expose `(h o g) o f -> h o (g o f)` as an invertible
-    equality. The construction neither uses `comp_assoc` nor identifies its
-    proof term with the separate direct-J associator;
-107. `emdash3_2_checks.lp` for executable regression statements;
-108. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+    retains another hom action. Typed endpoint paths yield a generic directed
+    `(h o g) o f -> h o (g o f)` cell; in the literal Path profile it is an
+    invertible equality. The construction neither uses `comp_assoc` nor
+    identifies its Path proof with the separate direct-J associator;
+107. `emdash3_2_dependent_simplex_represented_source.lp` for the rule-free
+    constructor-visible three-edge Sigma spine. Its represented directed
+    associator is re-presented as the native dependent tetrahedron, the
+    existing next internal action computes both projected components, and a
+    further hom action remains available. It adds no Sigma eta, rule, unifier,
+    complete boundary telescope, or uniform dependent-simplex code;
+108. `emdash3_2_checks.lp` for executable regression statements;
+109. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-109. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-110. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+110. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+111. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-111. `reports/INDEX.md` for task-specific plans and decision records.
-112. `book/book.json` and `book/evidence.json` for book source
+112. `reports/INDEX.md` for task-specific plans and decision records.
+113. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

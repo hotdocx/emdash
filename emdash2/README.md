@@ -149,9 +149,13 @@ categories.
 Represented composition now supplies the first non-circular groupoidal source
 coherence for that recursion. The generic compositor of `Rep_catd_func` is a
 whole displayed transformation with a retained next action. In
-`Path_cat(A)`, J-derived typed endpoint comparisons expose it as
-`(h o g) o f -> h o (g o f)` without invoking `comp_assoc`; its proof term
-remains distinct from the direct J associator. No rewrite or unifier is added.
+every directed `Z`, typed stable-owner comparisons expose it as
+`(h o g) o f -> h o (g o f)` without invoking `comp_assoc`; in `Path_cat(A)`
+the cell is invertible and its proof term remains distinct from the direct J
+associator. For a constructor-visible three-edge Sigma spine, the same cell
+projects to the native `(kappa,lambda)` tetrahedron, maps through the existing
+dependent action with the expected base/fibre computation, and retains one
+further hom action. No rewrite, unifier, or Sigma eta is added.
 
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section

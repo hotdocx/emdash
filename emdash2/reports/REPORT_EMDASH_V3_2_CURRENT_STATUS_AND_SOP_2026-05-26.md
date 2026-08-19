@@ -582,13 +582,23 @@ detailed probe evidence.
   source-coherence adapter for the recursive bridge. The ordinary generic
   compositor of `Rep_catd_func(Z)` is retained first as one whole displayed
   transformation; its component at a fourth object/arrow and its next hom
-  action remain generic in `Z`. For `Z = Path_cat(A)`, one J-derived endpoint
-  comparison on each side exposes the readable orientation
+  action remain generic in `Z`. Typed stable-owner paths compare its formal
+  endpoints with both raw bracketings for arbitrary `Z`, and equality-induced
+  arrows conjugate the cell to a generic directed associator at those
+  endpoints. For `Z = Path_cat(A)`, that cell exposes the readable orientation
   `(h o g) o f -> h o (g o f)`, and equality symmetry supplies inversion.
   The source check remains green with the global associativity unifier removed
   and `comp_assoc` opaque. No runtime rule, proof-time unifier, generic
   reassociation, proof-irrelevance principle, or equality with the separate
   direct-J proof is added.
+- `emdash3_2_dependent_simplex_represented_source.lp`: rule-free
+  constructor-visible source consumer for the recursive bridge. A three-edge
+  Sigma spine retains its two raw bracketings; the generic represented cell
+  projects to the native `(kappa,lambda)` dependent tetrahedron, and the
+  existing whole next action preserves the base component, maps the fibre
+  component through `fdapp1_int_hom_fapp0`, and retains another hom action.
+  No Sigma eta, runtime rule, proof-time unifier, complete boundary telescope,
+  or uniform code universe is added.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

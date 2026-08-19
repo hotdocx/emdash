@@ -3786,24 +3786,50 @@ represented_assoc_cell(f,g,h)
 
 and `represented_assoc_higher_func` retains its next hom action in `h`. The
 formal endpoints intentionally remain at the stable represented
-pre/postcomposition owners. When `Z = Path_cat(A)`, right-based path induction
-and typed equality comparisons identify them propositionally with
+pre/postcomposition owners. Typed stable-owner comparisons identify them
+propositionally, for arbitrary `Z`, with
 
 ```text
 (h o g) o f
 h o (g o f).
 ```
 
-Thus `path_represented_assoc(f,g,h)` is an invertible equality in the readable
-forward orientation. A separate `path_cat_assoc_J` derives the reverse
+Equality-induced arrows conjugate the whole cell to the generic directed
+`represented_assoc_readable_cell` at those literal endpoints. Thus, when
+`Z = Path_cat(A)`, `path_represented_assoc(f,g,h)` is an invertible equality
+in the readable forward orientation. A separate `path_cat_assoc_J` derives the reverse
 orientation directly by J; symmetry gives the same endpoints, but the two
 proof terms are not definitionally identified. In an owner-position kernel
 copy with the global associativity unifier removed and `comp_assoc` left
 opaque, the whole represented owner, both endpoint comparisons, the readable
 Path associator, and the retained next action still check. This establishes a
 non-circular groupoidal source seed without adding a reassociation rule,
-unifier, or duplicate coherence record. It does not yet construct the full
-dimension-four boundary.
+unifier, or duplicate coherence record.
+
+This seed now has a native dependent consumer. Given four constructor-visible
+Sigma vertices and three arrows
+
+```text
+(p01,alpha01), (p12,alpha12), (p23,alpha23),
+```
+
+`dependent_spine3_left_triangle` and
+`dependent_spine3_right_triangle` retain the two bracketed composite arrows.
+The generic `represented_assoc_readable_cell` projects at those literal Sigma
+constructors to a base cell `kappa` together with a dependent cell `lambda`.
+The term `dependent_spine3_assoc_tetrahedron` re-presents exactly that pair at
+the existing `dependent_tetrahedron` owner, and
+`dependent_spine3_assoc_map(FF)` is the already-active next hom action of
+`dependent_triangle_map(FF)`. Consequently its visible image computes as
+
+```text
+(kappa, fdapp1_int_hom_fapp0(FF,lambda)),
+```
+
+and another `fapp1_func` remains available. Constructor visibility is part of
+this normal form: arbitrary opaque total arrows do not acquire a Sigma eta.
+This closes the non-circular source bootstrap but does not yet construct the
+complete native boundary telescopes in dimensions zero through four.
 
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction

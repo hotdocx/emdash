@@ -403,8 +403,8 @@ authorized.
 | --- | --- | --- |
 | `DHSF-00` | complete | This refocused child plan is linked from the completed parent and report index. Recovery, Git, nonclaim, owner, and proportional-validation boundaries are frozen; the first non-circular Path seed is green quietly and warning-enabled. |
 | `DHSF-BASE-1` | complete | The clean descendant worktree, bootstrap, relevant owner inventory, focused path/dependent source and profile reviewer baselines, archive verification, and exact current-source no-associativity copy are green. Quiet/warning runs of the copy and first consumer have zero delta at `1112/159`. No long aggregate baseline was run. |
-| `DHSF-NATIVE-2` | pending | Specify complete native dependent presentations in dimensions 0--3, distinguishing global boundary totals from existing fixed-endpoint local triangle/tetrahedron classifiers. Retain whole and next-hom action. |
-| `DHSF-PATH-3` | in progress; first public source slice promoted | `emdash3_2_dependent_simplex_path_associator.lp` materializes the two Path endpoint comparisons without a rule/unifier, exposes the whole represented compositor and readable invertible associator, preserves distinct J provenance, and retains one next action. Feed that selected owner into the native dependent tetrahedron/dimension-four source before closing the row. |
+| `DHSF-NATIVE-2` | in progress | Specify complete native dependent presentations in dimensions 0--3, distinguishing global boundary totals from existing fixed-endpoint local triangle/tetrahedron and three-edge-spine classifiers. Retain whole and next-hom action. |
+| `DHSF-PATH-3` | complete | `emdash3_2_dependent_simplex_path_associator.lp` materializes both generic raw-bracketing endpoint comparisons without a rule/unifier, exposes the whole and raw-endpoint represented associators, specializes invertibly to Path while preserving distinct J provenance, and retains one next action. `emdash3_2_dependent_simplex_represented_source.lp` then projects that selected cell at a constructor-visible Sigma spine to the native `(kappa,lambda)` tetrahedron, maps it through the existing whole next action with both component betas, and retains another hom action. |
 | `DHSF-DIM4-4` | pending | Construct the full next source boundary from the selected lower groupoidal/native owners, apply the retained dependent action, inspect all required faces, and reject any hidden reliance on the global associativity unifier. |
 | `DHSF-CODE-5` | pending | Derive the smallest intrinsically indexed `DependentSimplexCode` grammar from dimensions 0--4; reuse `FaceCode`; record reification/decoding scope and profile parameters. No generic type syntax. |
 | `DHSF-DECODE-6` | pending | Implement code decoding to canonical `Hom_cat`/`Sigma_cat` owners so existing rules expose `homd_`; reproduce the checked triangle/tetrahedron and dimension-four action with no duplicate semantic normal form. |
@@ -544,12 +544,13 @@ new unifier merely to make the readable ascription elaborate.
 ### 13.3 Represented Path Associator — 2026-08-19
 
 The endpoint obstruction is resolved propositionally rather than by changing
-normal forms. At a reflexive first path, the existing generic
-`fapp1_id_path` compares `Rep_catd_func` action with displayed identity. The
-already-selected postcomposition/raw-composition equality and one new
-protected precomposition/raw-composition equality then expose the common
-`h o g` component. Right-based path induction transports those two endpoint
-comparisons to arbitrary `f`.
+normal forms. The generic typed postcomposition/raw-composition comparison
+first identifies the whole represented source with composition of the two
+represented precomposition functors. Existing fibre projection and one new
+protected precomposition/raw-composition equality then expose
+`(h o g) o f`. The opposite base-composition comparison similarly exposes
+`h o (g o f)` on the target side. These paths work for arbitrary directed
+`Z`; no Path induction or categorical associativity is needed for them.
 
 The promoted rule-free module
 
@@ -613,6 +614,106 @@ The module and reviewer add no rule or `unif_rule`, so no new LHS or critical
 pair is owned by the tranche. The remaining `DHSF-PATH-3` obligation is a
 native dependent-simplex consumer of this selected source coherence; merely
 having two readable associator proofs is not yet dimension four.
+
+The subsequent generic refinement adds
+`represented_assoc_lhs_agrees_raw`, `represented_assoc_rhs_agrees_raw`, and
+`represented_assoc_readable_cell`. Equality-induced arrows conjugate the
+formal whole component to a directed cell
+
+```text
+(h o g) o f -> h o (g o f)
+```
+
+for arbitrary `Z`. In a Sigma total whose three input edges are kept in their
+native `Struct_sigma(p,alpha)` presentation, the existing `Hom(Sigma)` rule
+reduces both raw composites and the readable cell projects directly as the
+second dependent-Sigma pair `(kappa,lambda)`. The focused constructor-visible
+probe is green:
+
+```text
+logs/probes/dependent_simplex_represented_assoc_components-20260819-064903.log.
+```
+
+If the three total edges are first hidden behind arbitrary opaque arrow
+variables or named non-constructor endpoints, the projection intentionally
+stops because the kernel has no Sigma eta. This is positive evidence for the
+planned intrinsic dependent-simplex code: its decoder must retain native
+constructor visibility rather than request a broad projection rule.
+
+### 13.4 Constructor-Visible Represented Source — 2026-08-19
+
+The promoted rule-free module
+
+```text
+emdash3_2_dependent_simplex_represented_source.lp
+```
+
+turns the successful probe into one reusable source boundary. For four Sigma
+vertices and three native `dependent_triangle` arrows it exposes:
+
+```text
+dependent_spine3_left_triangle
+dependent_spine3_right_triangle
+dependent_spine3_assoc_cell
+dependent_spine3_assoc_tetrahedron
+dependent_spine3_assoc_map.
+```
+
+The first two terms are the raw bracketings of the three-edge spine. The
+third is the generic represented directed cell at those literal endpoints.
+The fourth supplies its `sigma_Fst` and `sigma_Snd` projections to the
+existing `dependent_tetrahedron` constructor, rather than postulating a
+parallel coherence record. The final term is the existing
+`dependent_tetrahedron_map` specialized to those endpoints.
+
+The focused reviewer checks that the two bracketings do not collapse by
+runtime conversion, that applying the whole map preserves the represented
+base cell, and that its dependent component computes through
+`fdapp1_int_hom_fapp0`. A further `fapp1_func` of that same map also
+typechecks. Thus the selected non-circular source coherence has now been fed
+through the recursive dependent action; `DHSF-PATH-3` is complete. The next
+row returns to the original global/local distinction: dimensions zero through
+three still need complete boundary telescopes rather than only fixed-endpoint
+triangle/tetrahedron and three-edge-spine slices.
+
+No rule or `unif_rule` is present in either new source slice. The durable
+negative remains the opaque-edge probe: without visible Sigma constructors,
+projection stops and no eta is synthesized.
+
+Focused quiet checks are green:
+
+```text
+logs/probes/emdash3_2_dependent_simplex_path_associator-20260819-073248.log
+logs/probes/dependent_simplex_path_associator-20260819-073253.log
+logs/probes/emdash3_2_dependent_simplex_represented_source-20260819-073251.log
+logs/probes/dependent_simplex_represented_source-20260819-073256.log.
+```
+
+Warning-enabled checks are also green. The path-associator source/reviewer
+retain the `1112/159` import-closure inventory. The represented-source
+source/reviewer report `1150/159`, exactly matching the unchanged
+`emdash3_2_dependent_simplex_bridge.lp` import-closure baseline rather than
+adding a diagnostic family:
+
+```text
+logs/probes/emdash3_2_dependent_simplex_path_associator-20260819-073043.log
+logs/probes/dependent_simplex_path_associator-20260819-073049.log
+logs/probes/dependent_simplex_path_assoc_no_assoc-20260819-074718.log
+logs/probes/dependent_simplex_path_assoc_no_assoc-20260819-074720.log
+logs/probes/emdash3_2_dependent_simplex_bridge-20260819-073143.log
+logs/probes/emdash3_2_dependent_simplex_represented_source-20260819-073046.log
+logs/probes/dependent_simplex_represented_source-20260819-073051.log.
+```
+
+The strict LHS audit, source TOC, active-reference lint, report-header lint,
+catalog regeneration/strict check, and exact diff hygiene are green. Health
+was refreshed in source-only mode and records 237 tracked Lambdapi
+source/reviewer files. An attempted resumable health check invalidated its
+cache because `check_metrics.py` itself gained the new source entry and began
+rechecking the unchanged repository; it was interrupted rather than allowed
+to become an unnecessary long aggregate. The focused source/reviewer checks
+above are the semantic evidence for this tranche; no `make check`,
+`make examples`, `make ci`, or repository aggregate is claimed.
 
 ## 14. Completion Definition
 

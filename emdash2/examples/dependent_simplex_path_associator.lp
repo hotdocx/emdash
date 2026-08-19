@@ -42,6 +42,64 @@ assert [Z : Cat]
       (@represented_assoc_lhs Z x0 x1 x2 x3 f g h)
       (@represented_assoc_rhs Z x0 x1 x2 x3 f g h));
 
+// The formal endpoints compare propositionally with both raw bracketings for
+// every directed category, not only after Path specialization.
+assert [Z : Cat]
+  [x0 x1 x2 x3 : τ (Obj Z)]
+  (f : τ (Hom Z x0 x1))
+  (g : τ (Hom Z x1 x2))
+  (h : τ (Hom Z x2 x3)) ⊢
+  @represented_assoc_lhs_agrees_raw Z x0 x1 x2 x3 f g h
+  : τ (@=
+      (Hom Z x0 x3)
+      (@represented_assoc_lhs Z x0 x1 x2 x3 f g h)
+      (@comp_fapp0
+        Z x0 x1 x3
+        (@comp_fapp0 Z x1 x2 x3 h g)
+        f));
+
+assert [Z : Cat]
+  [x0 x1 x2 x3 : τ (Obj Z)]
+  (f : τ (Hom Z x0 x1))
+  (g : τ (Hom Z x1 x2))
+  (h : τ (Hom Z x2 x3)) ⊢
+  @represented_assoc_rhs_agrees_raw Z x0 x1 x2 x3 f g h
+  : τ (@=
+      (Hom Z x0 x3)
+      (@represented_assoc_rhs Z x0 x1 x2 x3 f g h)
+      (@comp_fapp0
+        Z x0 x2 x3 h
+        (@comp_fapp0 Z x0 x1 x2 g f)));
+
+// Equality-induced endpoint arrows conjugate the generic whole cell to a
+// directed associator at literal raw-composition endpoints.
+assert [Z : Cat]
+  [x0 x1 x2 x3 : τ (Obj Z)]
+  (f : τ (Hom Z x0 x1))
+  (g : τ (Hom Z x1 x2))
+  (h : τ (Hom Z x2 x3)) ⊢
+  @represented_assoc_readable_cell Z x0 x1 x2 x3 f g h
+  : τ (Hom
+      (Hom_cat Z x0 x3)
+      (@comp_fapp0
+        Z x0 x1 x3
+        (@comp_fapp0 Z x1 x2 x3 h g)
+        f)
+      (@comp_fapp0
+        Z x0 x2 x3 h
+        (@comp_fapp0 Z x0 x1 x2 g f)));
+
+assertnot [Z : Cat]
+  [x0 x1 x2 x3 : τ (Obj Z)]
+  (f : τ (Hom Z x0 x1))
+  (g : τ (Hom Z x1 x2))
+  (h : τ (Hom Z x2 x3)) ⊢
+  @represented_assoc_lhs Z x0 x1 x2 x3 f g h
+  ≡ @comp_fapp0
+      Z x0 x1 x3
+      (@comp_fapp0 Z x1 x2 x3 h g)
+      f;
+
 // Both Path endpoint comparisons have the expected readable bracketings.
 assert [A : Grpd]
   [w x : τ A]

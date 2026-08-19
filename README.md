@@ -49,10 +49,13 @@ by recursive join maps; its whole identity/composition laws remain gated by
 join uniqueness. On the dependent side, one `homd_`/Sigma action now exposes
 both compositor triangles and an iterable tetrahedron map whose dependent
 component is the next internal-action projection. The generic compositor of
-the represented family now also supplies a whole source associator: in a Path
-category its formal endpoints compare propositionally with `(h o g) o f` and
-`h o (g o f)`, it is invertible, and its next action remains available even
-when the global associativity prototype is disabled. Degeneracies,
+the represented family now also supplies a whole source associator. Typed
+stable-owner comparisons expose a directed cell from `(h o g) o f` to
+`h o (g o f)` in every target category; its Path specialization is invertible
+even when the global associativity prototype is disabled. For a
+constructor-visible three-edge Sigma spine, that same cell projects as the
+native `(kappa,lambda)` tetrahedron input, maps through the existing dependent
+action componentwise, and retains another hom action. Degeneracies,
 generic-dimensional horns/Kan filling, and the whole mapping-category/
 displayed-cell comparison remain future work.
 

@@ -16,8 +16,13 @@ are outside the bounded launch. Its first promoted source-coherence slice is
 `emdash3_2_dependent_simplex_path_associator.lp`: the whole compositor of
 `Rep_catd_func` yields an iterable represented associator, while the Path
 specialization exposes readable invertible bracketings without `comp_assoc`,
-a rule, or a unifier. Feeding that owner into the complete native
-dimension-four boundary remains the active next step.
+a rule, or a unifier. Its first native consumer is
+`emdash3_2_dependent_simplex_represented_source.lp`: a constructor-visible
+three-edge Sigma spine exposes that cell as the dependent
+`(kappa,lambda)` tetrahedron input, maps it through the existing whole next
+action with both component betas, and retains another hom action. The active
+next step is now the complete native boundary presentations in dimensions
+zero through three; the dimension-four acceptance case follows them.
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
 is the completed bounded continuation from the simplicial substrate. It
