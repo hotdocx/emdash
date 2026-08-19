@@ -2,6 +2,17 @@
 
 Date: 2026-08-19
 
+`REPORT_EMDASH_V3_2_JOIN_CROSS_DEPENDENT_SIMPLEX_PLAN_2026-08-19.md`
+is the active child continuation of the completed dependent-hom simplex
+foundations plan. It targets the one remaining dimension-two adequacy datum:
+compatibility between `join_map_extend_cross(d)` and the action-derived
+`join_map_observe_cross(join_map_extend_object(d))`. The intended result is a
+constructed `OrdinalDependentSimplex2CanonicalFiller(C,H)` and unconditional
+native observation for every ordinal triangle functor `H`, with a retained
+next action for the later dimension-three plan. It explicitly excludes an
+opaque filler, broad join eta, full dimensions three/four, and a whole
+semisimplicial nerve.
+
 `REPORT_EMDASH_V3_2_DEPENDENT_HOM_SIMPLEX_FOUNDATIONS_PLAN_2026-08-19.md`
 is the completed bounded child continuation of the coherent-nerve bridge. It
 refocused the simplicial work on the mathematical capability rather than

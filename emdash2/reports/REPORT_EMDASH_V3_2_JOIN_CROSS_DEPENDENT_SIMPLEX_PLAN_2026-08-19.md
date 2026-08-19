@@ -1,0 +1,352 @@
+# Emdash v3.2 Join-Cross Dependent-Simplex Plan
+
+Date: 2026-08-19 (America/Toronto)
+
+Plan-ID: `JOIN-CROSS-DEPENDENT-SIMPLEX-V3.2`
+
+Status: **active implementation plan**. The completed dependent-hom simplex
+foundations plan isolates one exact prerequisite: compatibility between the
+primitive cross datum supplied to join elimination and the cross cell obtained
+by applying the resulting functor to the source join-cross transformation.
+This plan resolves that prerequisite only as far as needed to construct the
+canonical ordinal dimension-two dependent filler.
+
+Branch: `goal/join-cross-dependent-simplex-v3.2`
+
+Worktree: `/home/user1/emdash1-join-cross-simplex-v1`
+
+Baseline: completed dependent-hom simplex checkpoint
+`c5300b3a9b54b93f98e5ff626ec461b1d2edba68`.
+
+Parent-Plan:
+`REPORT_EMDASH_V3_2_DEPENDENT_HOM_SIMPLEX_FOUNDATIONS_PLAN_2026-08-19.md`
+
+Depends-On:
+
+- `emdash3_2.lp`, especially `join_cross_transf`, `join_elim_func`,
+  `join_elim_cross_transf`, the left/right whole and point betas,
+  `Prof_transf_cat`, `Prof_cell_eval`, and whole ordinary/displayed action;
+- `emdash3_2_join_mapping_recursion.lp`, especially
+  `join_map_observe_cross`, `join_map_observe_cross_at`,
+  `join_map_extend_object`, and `join_map_extend_cross`;
+- `emdash3_2_dependent_simplex_bridge.lp` for the canonical
+  Hom/Sigma/`homd_` triangle and iterable next action;
+- `emdash3_2_dependent_simplex_ordinal_adequacy.lp` for
+  `OrdinalDependentSimplex2CanonicalFiller` and the conditional
+  `ordinal_dependent_simplex2_observe`; and
+- active Foundations, canonical notation, current SOP, report index, and the
+  persistent-goal Git workflow.
+
+Side-Task-Ledger: `JCDS-00`, `JCDS-BASE-1`, `JCDS-OWNER-2`,
+`JCDS-WHOLE-3`, `JCDS-PROJECT-4`, `JCDS-SOURCE-5`, `JCDS-FILLER-6`,
+`JCDS-OBSERVE-7`, `JCDS-PROFILE-8`, `JCDS-NEXT-9`, `JCDS-DOC-10`, and
+`JCDS-CLOSE-11`.
+
+Infinity-Codex-Origin: session
+`019ffe39-2eb9-7080-88e3-06b77d69b8d1`; selected recommendation response
+`0071_2026-08-19T15-45-39Z_01a01ab1-ffb1-78d0-98a1-12ae5ddf8280.md`.
+That response is recovery evidence only. Active code/SOP and this evolving
+ledger are authoritative.
+
+## 1. Objective
+
+Construct, rather than postulate, the canonical dependent triangle filler of
+an arbitrary ordinal triangle functor:
+
+```text
+ordinal_dependent_simplex2_canonical_filler
+  (H : Functor(DirectedSimplex_cat(2),C))
+  : OrdinalDependentSimplex2CanonicalFiller(C,H).
+```
+
+Then remove the explicit filler argument from the public dimension-two
+observation:
+
+```text
+ordinal_dependent_simplex2_observe_canonical(H)
+  : DependentSimplexObservation(C,2).
+```
+
+The construction must be obtained through the source join-cross action and
+the existing dependent-hom owners. An opaque filler constant or a separate
+triangle record does not satisfy the goal.
+
+## 2. Exact Missing Comparison
+
+For object-level join mapping data
+
+```text
+d : JoinMapObjectData(A,B,C),
+```
+
+the current library exposes two cross cells with the same intended meaning:
+
+```text
+primitive(d)
+  := join_map_extend_cross(d)
+
+observed(d)
+  := join_map_observe_cross(join_map_extend_object(d)).
+```
+
+`primitive(d)` reduces through `join_elim_cross_transf` to the cross field
+stored in `d`. `observed(d)` applies the extended functor's hom action to the
+source `join_cross_transf`. They are not currently connected.
+
+The first task is to determine their exact typed relationship at the whole
+`Prof_transf_cat` owner:
+
+- definitional equality after one missing projection bridge;
+- an equality/Path between whole cross objects;
+- a directed higher cell dictated by the current lax profile; or
+- a comparison living in a minimal Cat-valued coherent-square total.
+
+Do not choose the answer by notation. Probe the owners and endpoint actions,
+then promote the strongest computationally justified form.
+
+## 3. Ownership Requirements
+
+The comparison must satisfy this ladder:
+
+```text
+whole join-cross compatibility
+  -> shaped component at arbitrary a:I->A and b:I->B
+  -> terminal/walking-arrow component
+  -> native dependent triangle filler
+  -> retained next hom action.
+```
+
+Prefer the whole owner. A capped equality at the unique terminal component is
+insufficient if it cannot be projected from an internally natural cell or
+retain the action needed by the dimension-three follow-up.
+
+The implementation must reuse:
+
+```text
+join_map_observe_cross
+join_map_extend_cross
+Prof_cell_eval
+fdapp1_int_*
+fapp1_func
+DependentTriangle_catd.
+```
+
+It must not introduce a second profunctor-transformation semantics.
+
+## 4. Source Triangle Specialization
+
+After the generic compatibility is active, specialize it to
+
+```text
+DirectedSimplex_cat(2) = Join_cat(WalkingArrow_cat,Terminal_cat).
+```
+
+The selected source triangle must expose:
+
+```text
+edge 01
+edge 02
+edge 12
+source dependent filler.
+```
+
+The generic join-eliminator point betas already make the three shared
+vertices compute. The new comparison must supply the remaining cross/naturality
+cell, not replace those point betas or add selected endpoint rewrites.
+
+Construct the source filler at the native
+`DependentTriangle_catd`/`Fibre_cat` type. If a readable endpoint conversion
+is required, carry it propositionally through the existing endpoint-view
+discipline rather than adding a broad join eta.
+
+## 5. Mapping Under An Arbitrary Ordinal Triangle
+
+For
+
+```text
+H : Functor(DirectedSimplex_cat(2),C),
+```
+
+map the canonical source triangle through the existing whole functor action.
+The resulting term must inhabit exactly
+
+```text
+OrdinalDependentSimplex2CanonicalFiller(C,H).
+```
+
+The component should compute through the established functor compositor and
+dependent-hom action. Keep the ambient directed/lax reading primary:
+
+- for a general `H`, the filler need not be identity;
+- for a decoded strict profile, only already-justified compositor cells may
+  collapse;
+- for `C = Path_cat(X)`, the filler should be an equality and admit `eq_sym`;
+  and
+- none of those profile specializations may replace the generic construction.
+
+## 6. Unconditional Observation
+
+Once the filler is canonical, define the public facade
+
+```text
+ordinal_dependent_simplex2_observe_canonical(H)
+```
+
+by applying the existing conditional constructor to that filler. Preserve the
+conditional API as the explicit general interface unless a separate consumer
+justifies retirement.
+
+Reviewer acceptance requires:
+
+1. the code is the intrinsic dimension-two code selected by edge 01;
+2. faces 01, 02, and 12 compute through the promoted face action;
+3. the top dependent component is the mapped source cross cell;
+4. one next hom action remains available; and
+5. a wrong source edge, target edge, or filler endpoint is rejected.
+
+## 7. Dimension-Three Handoff
+
+This plan does not implement full dimensions three and four ordinal
+adequacy. It must, however, demonstrate that the canonical dimension-two
+construction retains the whole next action required by the follow-up.
+
+The closeout decision must state one of:
+
+- the dimension-three source tetrahedron is directly the next action and a
+  separate child plan may promote it;
+- one precisely named higher join-cross compatibility remains; or
+- the supposed whole comparison was too capped and must be redesigned before
+  this plan can complete.
+
+Dimension four remains the next plan's recursion test, not scope silently
+added here.
+
+## 8. Escalation Ladder
+
+Use the smallest architecture that meets the objective:
+
+1. derive the comparison from existing transparent owners;
+2. if projection order blocks it, add one scoped bridge at the semantic owner;
+3. if equality is mathematically wrong, expose the directed higher cell;
+4. only if the whole cell cannot be typed otherwise, introduce the minimal
+   Cat-valued coherent-square total required by this consumer.
+
+Every escalation must retain a positive consumer and a corresponding
+negative/non-collapse check. Do not jump directly to a generic collage,
+equipment, double-category, or all-join equivalence framework.
+
+## 9. Explicit Nonclaims
+
+This plan does not claim or construct:
+
+- a broad join eta or a mapping-category equivalence for every join;
+- functor extensionality or proof irrelevance;
+- a global mixed-variance category of dependent simplexes;
+- full dimensions three/four ordinal adequacy;
+- a complete semisimplicial nerve, degeneracies, Kan, Segal, Rezk, or
+  complicial structure;
+- a migration of historical global strict endpoint rules;
+- a duplicate `FaceCode`, dependent-simplex code, or Hom/Sigma semantics;
+- TypeScript/parser work; or
+- integration, publication, deployment, or cleanup.
+
+## 10. Module Strategy
+
+Expected one-way modules are:
+
+```text
+emdash3_2_join_cross_compatibility.lp
+  whole primitive/action-derived join-cross comparison and projections
+
+emdash3_2_dependent_simplex_ordinal_filler.lp
+  source triangle, arbitrary-H filler, and unconditional observation.
+```
+
+Edit `emdash3_2.lp` only if an owner-position probe proves that the missing
+computation is genuinely generic and belongs beside join elimination. Do not
+mix a core normal-form migration with the dependent filler module.
+
+## 11. Implementation Order
+
+```text
+baseline and owner inventory
+  -> exact whole cross types and endpoint audit
+  -> smallest whole compatibility probe
+  -> shaped/terminal projections and retained action
+  -> canonical source triangle
+  -> arbitrary-H canonical filler
+  -> unconditional dimension-two observation
+  -> strict/Path/non-collapse review
+  -> dimension-three next-action handoff
+  -> authority synchronization and closeout.
+```
+
+At most one ledger row may be `in progress`.
+
+## 12. Validation Policy
+
+Follow `emdash2/AGENTS.md` exactly:
+
+- keep every Lambdapi target within 90 seconds;
+- place candidate rules at their semantic owner in a full-file probe;
+- minimize inferred LHS slots and annotate any measured guard;
+- compare quiet and warning-enabled runs;
+- exercise unifiers with typed `eq_refl` if any are proposed;
+- test both projection orders for every commuting bridge;
+- retain whole and next-hom action rather than stopping at a component;
+- pair positive computation with wrong-endpoint/non-collapse checks;
+- run affected source/reviewer checks, strict LHS audit, catalog, and
+  source-only health before local checkpoints; and
+- eagerly avoid long aggregate checks unless omitting one would block
+  trustworthy promotion or final closeout.
+
+Warnings are diagnostic evidence, not an automatic veto. No promoted code may
+use `--no-sr-check`.
+
+## 13. Git And Authorization Boundary
+
+The user's instruction to proceed with the recommended child goal authorizes:
+
+- this dedicated local branch/worktree;
+- implementation within this plan's scope; and
+- SOP-compliant local checkpoint commits after bounded green tranches.
+
+No push, merge, PR, tag, release, npm/Zenodo publication, deployment, history
+rewrite, branch/worktree deletion, or unrelated mutation is authorized.
+
+## 14. Execution Ledger
+
+| Row | Status | Deliverable and acceptance boundary |
+| --- | --- | --- |
+| `JCDS-00` | complete | Dedicated child branch/worktree created from clean checkpoint `c5300b3`; scope, nonclaims, validation, and Git boundaries are recorded in this linked living plan. |
+| `JCDS-BASE-1` | complete | Bootstrap and focused quiet checks of the core, join observation/extension source/reviewer, ordinal-adequacy source/reviewer, source TOC, active references, and report headers are green. No aggregate was run. |
+| `JCDS-OWNER-2` | in progress | Inventory exact primitive/action-derived cross types, endpoint presentations, existing projections, and retained action; identify whether equality or a directed cell is mathematically correct. |
+| `JCDS-WHOLE-3` | pending | Promote the smallest whole join-cross compatibility owner with both projection orders and wrong-endpoint/non-collapse evidence. |
+| `JCDS-PROJECT-4` | pending | Project shaped and walking-arrow components from the whole owner and retain another hom action. |
+| `JCDS-SOURCE-5` | pending | Construct the canonical native dependent triangle of `DirectedSimplex_cat(2)` from the join-cross action. |
+| `JCDS-FILLER-6` | pending | Map the source triangle under arbitrary `H` to inhabit `OrdinalDependentSimplex2CanonicalFiller(C,H)`. |
+| `JCDS-OBSERVE-7` | pending | Define and review the unconditional intrinsic dimension-two observation with all faces and top component computing. |
+| `JCDS-PROFILE-8` | pending | Validate general directed non-collapse, selected strict scope, and Path invertibility without duplicating the construction. |
+| `JCDS-NEXT-9` | pending | Retain the next action and record the exact dimension-three continuation boundary; do not implement dimension four here. |
+| `JCDS-DOC-10` | pending | Synchronize Foundations, syntax, status, READMEs, AGENTS, report index, source/check registries, reviewers, catalog, and source-only health. |
+| `JCDS-CLOSE-11` | pending | Complete every row by implementation, evidence-backed rejection, or concrete deferral; run proportional final gates and leave excluded operations untouched. |
+
+## 15. Completion Definition
+
+This goal is complete when:
+
+1. primitive and action-derived join-cross data have a checked whole
+   relationship, or the exact stronger owner required is demonstrated;
+2. the source ordinal triangle filler is constructed through that relationship
+   rather than postulated;
+3. arbitrary `H` yields a canonical inhabitant of
+   `OrdinalDependentSimplex2CanonicalFiller(C,H)`;
+4. unconditional dimension-two observation computes on its code, faces, and
+   dependent filler and retains higher action;
+5. general/strict/Path claims are separated honestly;
+6. the dimension-three next-action handoff is explicit;
+7. affected authorities and evidence are synchronized; and
+8. the worktree is reviewable with no unauthorized integration, publication,
+   history rewrite, or cleanup.
+
+Nearness to a context, token, or elapsed-time limit is not completion.
