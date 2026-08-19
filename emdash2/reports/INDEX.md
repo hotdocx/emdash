@@ -1,6 +1,16 @@
 # EMDASH Reports Index
 
-Date: 2026-08-18
+Date: 2026-08-19
+
+`REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
+is the active continuation from the completed simplicial substrate. It aims
+to compare the ordinal mapping category `Functor([n],C)` with the recursively
+computed `homd_`/Sigma cell classifier through one generic join-cone step,
+using the tetrahedron as the first genuinely higher validation rather than as
+the permanent definition. Generic face realization, a whole Cat-valued
+semisimplicial nerve, strict/lax/Path profiles, and the variable-dimension
+induction are ordered gates. Full degeneracies, Kan/Segal/Rezk theory,
+codata, and orientals remain outside the initial scope.
 
 `REPORT_EMDASH_V3_2_SIMPLICIAL_SUBSTRATE_AND_KAN_CONTINUATION_PLAN_2026-08-18.md`
 is the completed categorical-first simplicial continuation. It distinguishes
