@@ -11,7 +11,11 @@ constructed `OrdinalDependentSimplex2CanonicalFiller(C,H)` and unconditional
 native observation for every ordinal triangle functor `H`, with a retained
 next action for the later dimension-three plan. It explicitly excludes an
 opaque filler, broad join eta, full dimensions three/four, and a whole
-semisimplicial nerve.
+semisimplicial nerve. Its first promoted module is
+`emdash3_2_join_cross_compatibility.lp`: a whole propositional cross beta
+induces a displayed transformation, arbitrary shaped equality, endpoint
+components, and retained base-arrow action. The active next step extracts the
+canonical source triangle from that action.
 
 `REPORT_EMDASH_V3_2_DEPENDENT_HOM_SIMPLEX_FOUNDATIONS_PLAN_2026-08-19.md`
 is the completed bounded child continuation of the coherent-nerve bridge. It

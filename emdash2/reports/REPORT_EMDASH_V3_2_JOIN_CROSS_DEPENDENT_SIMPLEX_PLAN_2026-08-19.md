@@ -321,9 +321,9 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `JCDS-00` | complete | Dedicated child branch/worktree created from clean checkpoint `c5300b3`; scope, nonclaims, validation, and Git boundaries are recorded in this linked living plan. |
 | `JCDS-BASE-1` | complete | Bootstrap and focused quiet checks of the core, join observation/extension source/reviewer, ordinal-adequacy source/reviewer, source TOC, active references, and report headers are green. No aggregate was run. |
 | `JCDS-OWNER-2` | complete | The primitive and action-derived cross objects inhabit the same `Prof_transf_cat` after existing branch/point betas align endpoints. Direct conversion is false. A runtime rule cannot head the transparent defined observation alias; the next justified candidate is one whole equality/path computation principle at the join-recursion semantic owner, not a Cat-valued total. |
-| `JCDS-WHOLE-3` | in progress | Probe and promote the smallest whole join-cross computation path, project it to a directed cell when needed, and retain both reduction-order and wrong-endpoint/non-collapse evidence. |
-| `JCDS-PROJECT-4` | pending | Project shaped and walking-arrow components from the whole owner and retain another hom action. |
-| `JCDS-SOURCE-5` | pending | Construct the canonical native dependent triangle of `DirectedSimplex_cat(2)` from the join-cross action. |
+| `JCDS-WHOLE-3` | complete | `emdash3_2_join_cross_compatibility.lp` adds one propositional higher-constructor beta between the whole observed and primitive cross objects. `path_to_hom` turns it into a whole displayed transformation; direct conversion remains false and a wrong target is rejected. No runtime rule or stable-head migration is added. |
+| `JCDS-PROJECT-4` | complete | The whole path projects to arbitrary shaped equality by `Prof_cell_eval`, to endpoint components by `tdapp0_fapp0`, and retains canonical `tdapp1_int_cell` base-arrow action. No duplicate expanded naturality wrapper or Cat-valued total is needed. |
+| `JCDS-SOURCE-5` | in progress | Specialize the retained join-cross base-arrow action to `DirectedSimplex_cat(2)` and construct its canonical native dependent triangle filler. |
 | `JCDS-FILLER-6` | pending | Map the source triangle under arbitrary `H` to inhabit `OrdinalDependentSimplex2CanonicalFiller(C,H)`. |
 | `JCDS-OBSERVE-7` | pending | Define and review the unconditional intrinsic dimension-two observation with all faces and top component computing. |
 | `JCDS-PROFILE-8` | pending | Validate general directed non-collapse, selected strict scope, and Path invertibility without duplicating the construction. |
@@ -375,6 +375,56 @@ single whole equality/path computation principle for join elimination,
 analogous to a higher-constructor beta. Its equality-induced arrow can retain
 component and next-hom projections without postulating the eventual ordinal
 triangle filler. `JCDS-OWNER-2` is complete and `JCDS-WHOLE-3` is active.
+
+### 14.2 Whole Propositional Cross Beta — 2026-08-19
+
+The promoted module
+
+```text
+emdash3_2_join_cross_compatibility.lp
+```
+
+selects the propositional higher-constructor policy already used by other
+categorical/HIT boundaries. `join_map_extend_cross_beta(d)` is a path from the
+action-derived whole cross to the primitive cross supplied to join
+elimination. It does not make those terms runtime-convertible.
+
+The path induces
+
+```text
+join_map_extend_cross_cell(d)
+  : observedCross(extend(d)) -> primitiveCross(d)
+```
+
+inside their common `Prof_transf_cat`. This is a whole displayed
+transformation, not a capped component. Consequently:
+
+- `join_map_extend_cross_shaped_beta` is obtained by `eq_ap` through
+  `Prof_cell_eval` for arbitrary shape `I`;
+- `join_map_extend_cross_component` is the canonical `tdapp0_fapp0`
+  projection at an endpoint pair; and
+- the next base-arrow action remains the direct generic
+  `tdapp1_int_cell(join_map_extend_cross_cell(d),p,u)`.
+
+An attempted named wrapper for that last action was rejected during promotion
+because its expanded handwritten return type selected a competing projection
+normal form. The generic owner itself checks and is retained; no duplicate
+facade is introduced.
+
+Quiet and warning-enabled source/reviewer checks are green with the unchanged
+`1150/159` import-closure inventory:
+
+```text
+logs/probes/emdash3_2_join_cross_compatibility-20260819-120943.log
+logs/probes/join_cross_compatibility-20260819-120946.log
+logs/probes/emdash3_2_join_cross_compatibility-20260819-120948.log
+logs/probes/join_cross_compatibility-20260819-120951.log.
+```
+
+The source adds no rule or unifier; strict LHS audit is vacuous. The reviewer
+keeps direct nonconversion and wrong-target rejection. `JCDS-WHOLE-3` and
+`JCDS-PROJECT-4` are complete. The active row now specializes the retained
+base-arrow action to the canonical source triangle.
 
 ## 15. Completion Definition
 

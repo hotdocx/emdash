@@ -1228,6 +1228,20 @@ through the generic join-eliminator point betas. Do not suppress the filler
 argument, call the object-level observation package a category, or write an
 unqualified ordinal/dependent equivalence.
 
+For the join higher-constructor computation write
+
+```text
+crossBeta(d) : observedCross(extend(d)) = primitiveCross(d)
+crossCell(d) : observedCross(extend(d)) -> primitiveCross(d).
+```
+
+The literal owners are `join_map_extend_cross_beta` and its equality-induced
+`join_map_extend_cross_cell`; shaped equality is
+`join_map_extend_cross_shaped_beta`. Component and base-arrow action remain at
+`tdapp0_fapp0` and `tdapp1_int_cell`. Do not print this propositional beta as a
+runtime reduction or confuse it with the still-unconstructed ordinal triangle
+filler.
+
 For groupoid-valued diagrams write
 
 ```text

@@ -46,6 +46,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_coherent_nerve_levels.lp)
   files+=(emdash3_2_tetrahedron_faces.lp)
   files+=(emdash3_2_join_mapping_recursion.lp)
+  files+=(emdash3_2_join_cross_compatibility.lp)
   files+=(emdash3_2_face_realization.lp)
   files+=(emdash3_2_dependent_simplex_bridge.lp)
   files+=(emdash3_2_dependent_simplex_path_associator.lp)

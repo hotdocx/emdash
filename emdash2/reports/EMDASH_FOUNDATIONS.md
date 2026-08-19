@@ -3957,15 +3957,22 @@ dependent triangle fibre, named
 `ordinal_dependent_simplex2_observe` constructs the intrinsic dimension-two
 observation through the existing `dependent_simplex2_visible` owner.
 
-No active owner yet extracts that filler canonically from an arbitrary
-ordinal functor. It requires compatibility between the primitive join-recursion
-cross datum and the action-derived cross observation—the same Cat-valued
-coherent-square/join-uniqueness boundary isolated by the join mapping plan.
-A strict target profile may collapse the functor compositor, and a Path target
-makes any supplied filler invertible, but neither profile generates the
-missing source cross comparison. Dimensions three and four recurse through
-that same prerequisite. Thus the current theorem is a computational relative
-adequacy result, not a global equivalence of mapping categories.
+The primitive join-recursion cross datum and the action-derived cross
+observation now have a whole propositional computation path. Its
+equality-induced arrow is a displayed transformation; `Prof_cell_eval`
+projects arbitrary shaped equality, `tdapp0_fapp0` projects endpoint
+components, and `tdapp1_int_cell` retains base-arrow action. This is the
+higher-constructor beta for join elimination, not a runtime fold of the
+transparent observed-cross alias.
+
+The active next step is to specialize that whole action to the walking-arrow
+base arrow and obtain the canonical source triangle filler, then map it under
+an arbitrary ordinal functor. No Cat-valued coherent-square total is required
+for the whole beta itself. A strict target profile may collapse the eventual
+functor compositor, and a Path target will make the mapped filler invertible,
+but neither profile replaces the generic construction. The current theorem
+remains a computational relative adequacy result rather than a global
+equivalence of mapping categories.
 
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction

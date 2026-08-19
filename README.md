@@ -94,8 +94,11 @@ has a whole pointwise retraction, and a map of the walking arrow computes to
 its intrinsic source/target/generator edge. Generic join-eliminator point
 betas make the three edges of an ordinal triangle share vertices. Turning that
 boundary into a native triangle then requires exactly one dependent filler;
-constructing it is the remaining join-cross uniqueness boundary, not an
-unqualified equivalence `Functor([n],C) ~= DependentSimplex(C,n)`.
+the primitive and action-derived join-cross cells now have a whole
+propositional computation path with shaped components and retained higher
+action. Extracting the canonical source filler from that path is the active
+next step—not an unqualified equivalence
+`Functor([n],C) ~= DependentSimplex(C,n)`.
 
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim

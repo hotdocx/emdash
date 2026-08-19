@@ -647,8 +647,14 @@ detailed probe evidence.
   make the three restricted triangle edges share vertices. One explicit
   `OrdinalDependentSimplex2CanonicalFiller` then constructs the native
   triangle. The filler itself, dimensions three/four, and a mapping-category
-  equivalence remain behind action-derived/primitive join-cross compatibility;
-  no local filler, global total, broad eta, or unifier is added.
+  equivalence remain outside this relative boundary; no local filler, global
+  total, broad eta, or unifier is added.
+- `emdash3_2_join_cross_compatibility.lp`: whole propositional
+  higher-constructor beta relating the cross observed from a join extension to
+  its primitive supplied cross. The equality-induced displayed transformation
+  projects to endpoint and arbitrary shaped components and retains generic
+  `tdapp1_int_cell` base-arrow action. It adds no runtime rule, opaque simplex
+  filler, Cat-valued coherent-square total, broad join eta, or unifier.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category

@@ -73,6 +73,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_coherent_nerve_levels.lp"),
     Path("emdash3_2_tetrahedron_faces.lp"),
     Path("emdash3_2_join_mapping_recursion.lp"),
+    Path("emdash3_2_join_cross_compatibility.lp"),
     Path("emdash3_2_face_realization.lp"),
     Path("emdash3_2_dependent_simplex_bridge.lp"),
     Path("emdash3_2_dependent_simplex_path_associator.lp"),
