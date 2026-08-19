@@ -3,8 +3,8 @@
 Date: 2026-08-19
 
 `REPORT_EMDASH_V3_2_DEPENDENT_HOM_SIMPLEX_FOUNDATIONS_PLAN_2026-08-19.md`
-is the active child continuation of the completed coherent-nerve bridge. It
-refocuses the open simplicial work on the mathematical capability rather than
+is the completed bounded child continuation of the coherent-nerve bridge. It
+refocused the simplicial work on the mathematical capability rather than
 on codes as an end in themselves: complete native simplex presentations
 through dimension four using `Hom_cat`, `Sigma_cat`, `homd_`, and whole
 internal action; bootstrap Path/groupoidal source coherences without relying
@@ -47,9 +47,11 @@ dimension one observes the walking-arrow edge, and new generic join point
 betas make the three ordinal triangle edges share vertices. One explicit
 dependent filler then constructs the native triangle. Canonically deriving
 that filler, dimensions three/four, and a mapping-category equivalence remain
-behind primitive/action-derived join-cross compatibility. The active next
-step is final authority consolidation and closeout; a global all-simplex
-category remains excluded.
+behind primitive/action-derived join-cross compatibility. The bounded plan is
+closed with all rows implemented or precisely deferred; a global all-simplex
+category remains excluded. A future consumer may reopen the separate
+join-cross coherent-square prerequisite, but it is not part of this completed
+boundary.
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
 is the completed bounded continuation from the simplicial substrate. It

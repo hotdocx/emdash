@@ -4,8 +4,9 @@ Date: 2026-08-19 (America/Toronto)
 
 Plan-ID: `DEPENDENT-HOM-SIMPLEX-FOUNDATIONS-V3.2`
 
-Status: **active implementation plan**. The completed coherent-nerve bridge
-supplies the baseline. This continuation refocuses the open work on the
+Status: **completed bounded implementation plan**. The completed
+coherent-nerve bridge supplied the baseline. This continuation refocused the
+open work on the
 mathematical capability: a computational internal presentation of finite
 simplices whose recursive structure is owned by `Hom_cat`, `Sigma_cat`,
 `homd_`, and their whole internal actions. An internal code algebra is a later
@@ -103,7 +104,7 @@ Keep four notions distinct:
 | ordinal simplex shape | `[n] = DirectedSimplex_cat(n)` | active for every Nat `n` |
 | ordinal mapping category | `Functor_cat([n],C)` | active for every `n`, with current prototype profile caveats |
 | semisimplicial object | contravariant action of all injective faces | ingredients active; whole shape functor gated by join normal forms |
-| dependent-hom simplex | a base cell plus a dependent cell above it, recursively | local triangle/tetrahedron active; complete dimensions and uniform internal code absent |
+| dependent-hom simplex | a base cell plus a dependent cell above it, recursively | flagged dimensions 0--4, intrinsic codes, mapped decoding, and nonempty faces active; a global mixed-variance category and full ordinal equivalence remain excluded |
 
 `DependentSimplex_cat(C,n)` is not a fifth unrelated definition. It is the
 native dependent normal form whose relationship with the ordinal mapping
@@ -412,7 +413,7 @@ authorized.
 | `DHSF-ADEQUACY-8` | complete at the relative boundary | `emdash3_2_dependent_simplex_ordinal_adequacy.lp` gives a whole dimension-zero retraction and a computing dimension-one observation. Generic join point betas make the three ordinal triangle edges share vertices. One explicit `OrdinalDependentSimplex2CanonicalFiller` then constructs the native triangle. Canonically deriving that filler—and therefore dimensions three/four and a mapping-category equivalence—remains precisely outside the current join-cross boundary. |
 | `DHSF-JOIN-9` | complete by narrow implementation and concrete handoff | Two generic join-eliminator point betas were promoted in `emdash3_2.lp`, closing the whole-branch/object-application projection order with zero warning delta. The remaining requested normal form is no longer generic endpoint composition: it is compatibility between primitive `join_elim_cross_transf` and action-derived `join_map_observe_cross`, requiring the already named Cat-valued coherent-square/join-uniqueness prerequisite. Its concrete consumer is `OrdinalDependentSimplex2CanonicalFiller`; no local filler or broad join eta was added. |
 | `DHSF-DOC-10` | complete | Foundations, canonical notation, current status, root/kernel READMEs, nested authority inventory, report index, source/check registries, reviewers, and the 249-file source-only health snapshot describe the same promoted code/decoder/face/adequacy boundary and exact join-cross prerequisite. |
-| `DHSF-CLOSE-11` | in progress | Complete every scoped row by implementation, evidence-backed rejection, or concrete deferral; run proportional final gates, record checkpoints and exact dirty state, and leave remote/integration/cleanup operations excluded. |
+| `DHSF-CLOSE-11` | complete | All scoped rows are implemented or precisely deferred behind the named join-cross coherent-square prerequisite. Proportional semantic/document gates, ancestry, checkpoint inventory, and clean-state checks pass; remote integration, publication, cleanup, and long aggregates remain excluded. |
 
 At most one row may be `in progress`. Architectural discovery may revise later
 rows, but each revision must preserve the mathematical objective and record
@@ -1111,6 +1112,64 @@ The documentation/source gates are green, the health snapshot records 249
 tracked source/reviewer files, and no print, TypeScript, browser, remote,
 publication, or long repository aggregate was invoked. `DHSF-DOC-10` is
 complete; only the requirement-by-requirement closeout audit remains active.
+
+### 13.12 Completion Audit — 2026-08-19
+
+The final audit resolves every completion criterion against current evidence:
+
+1. `emdash3_2_dependent_simplex_native_dimensions.lp` and
+   `emdash3_2_dependent_simplex_dimension4.lp` check the flagged native tower
+   through dimension four and retain higher action.
+2. The Path/represented bootstrap is non-circular, checked with generic
+   associativity removed, and feeds the native dependent action.
+3. `emdash3_2_dependent_simplex_codes.lp` and
+   `emdash3_2_dependent_simplex_code_map.lp` provide intrinsic decoding and
+   mapped decoding in arbitrary finite dimension, with selected computations
+   through dimension four.
+4. `emdash3_2_dependent_simplex_faces.lp` supplies variable-dimensional whole
+   nonempty-face action. Relative ordinal adequacy reaches dimension two with
+   one exact remaining filler; dimensions three/four and a mapping-category
+   equivalence are concretely deferred behind primitive/action-derived
+   join-cross compatibility and its Cat-valued coherent-square owner.
+5. Codes remain indexed by the native decoded category and every action reuses
+   `PathOut_cat`, `Hom_cat`, `Sigma_cat`, `homd_`, and their whole owners; no
+   second semantic calculus was introduced.
+6. Foundations, syntax, SOP/status, READMEs, AGENTS authority order, report
+   index, source/check registries, reviewers, catalog, and health agree on that
+   boundary.
+7. Baseline `087e7080ddce308f932760c1403d4289f0d6535c` is an ancestor of the
+   branch. The final closeout checkpoint is the commit containing this entry;
+   after it, the tracked worktree is clean and no excluded operation has
+   occurred.
+
+The local implementation checkpoint sequence is:
+
+```text
+be99ec7  Plan dependent-hom simplex foundations
+064ff56  Record dependent simplex bootstrap audit
+d7d89df  Add represented Path simplex associator
+f82c6cd  Map represented associator through dependent simplex
+681662f  Add native dependent simplex dimensions
+d2ea150  Add dependent simplex dimension four boundary
+4cf1d0a  Add intrinsic dependent simplex codes
+34bcf41  Add functorial dependent simplex code decoding
+8d3a9a9  Add recursive dependent simplex face action
+4899958  Establish relative ordinal simplex adequacy
+```
+
+Final proportional evidence includes focused quiet/warning core and promoted
+source/reviewer checks, unchanged `1112/159` core and `1150/159` adequacy
+warning inventories, strict LHS audits, all directly affected join/simplex
+reviewers, source TOC/reference/report lints, focused tooling tests, catalog
+strictness, exact diff hygiene, and the 249-file source-only health snapshot.
+No `make check`, `make examples`, `make ci`, `check:all`, print/browser/
+TypeScript aggregate, push, merge, PR, tag, release, publication, deployment,
+history rewrite, worktree/branch deletion, or cleanup was performed.
+
+`DHSF-CLOSE-11` and this bounded plan are complete. Future work may consume
+`OrdinalDependentSimplex2CanonicalFiller` to justify the separate join-cross
+coherent-square tranche; it is not unfinished work silently required by this
+plan's accepted relative boundary.
 
 ## 14. Completion Definition
 
