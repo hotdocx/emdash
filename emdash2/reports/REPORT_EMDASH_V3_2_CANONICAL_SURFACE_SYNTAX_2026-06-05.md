@@ -180,6 +180,12 @@ hom_postcomp_fapp0(F,p,g)       = (F[p])_*(g)
 hom_precomp_along_fapp0(F,p,h)  = (F[p])^*(h).
 ```
 
+For a higher arrow `alpha : h ==> k`, the capped precomposition action is
+written by the same convention. Its stable kernel owner is
+`hom_precomp_along_fapp1_fapp0(F,p,alpha)`. Proof-time it agrees with
+`comp_prod_fapp1_fapp0(id_(F[p]),alpha)`, as exposed by
+`hom_precomp_along_fapp1_comp_prod_path`; this is not a runtime rewrite.
+
 When both endpoints move, use the hom-bifunctor action:
 
 ```text
@@ -1242,9 +1248,10 @@ The literal owners are `prof_terminal_expected_retained_source_transf` and
 `prof_terminal_explicit_normalization_funcd`; their point projections are
 `prof_terminal_retained_expected_source_fapp0_path` and
 `prof_terminal_fibre_normalization_func`. The direction of `normalize_p` is
-part of the normal-lax interface. Do not print it as an equality rewrite, and
-do not prepend the separate section compositor to the formal flagged top
-cell: that compositor witnesses the sequential-face comparison.
+part of the normal-lax interface. Do not print it as an equality rewrite or
+invert the section compositor. At dimension three the forward compositor is
+followed by the 012-filler action; their composite is the formal top cell,
+while the two factors remain separately observable.
 
 For the join higher-constructor computation write
 

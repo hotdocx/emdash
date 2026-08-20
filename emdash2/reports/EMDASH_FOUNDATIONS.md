@@ -1135,6 +1135,15 @@ generic product-composition owners `comp_prod_fapp1_func` and
 former compatibility-only `comp_cat_cov_*` and `comp_cat_con_*` heads are no
 longer active kernel owners.
 
+At an arbitrary ambient category, the capped hom action of precomposition is
+proof-time-comparable with that same product-composition action after fixing
+its first input to `F[h]` and its first higher input to the identity. The typed
+view is `hom_precomp_along_fapp1_comp_prod_path`. Runtime deliberately retains
+`hom_precomp_along_fapp1_fapp0` and `comp_prod_fapp1_fapp0` as distinct
+iterable owners. This higher projection-order bridge is what lets a native
+`homd_` transport action be compared with its readable precomposition view
+without identifying the corresponding whole functors.
+
 That construction is polymorphic in its ambient category. At
 `A = Catd_cat(K)` it gives horizontal action on displayed transformations:
 
@@ -4007,14 +4016,14 @@ The explicit directed form computes at each `p` to an equality-induced source
 arrow and therefore induces a whole displayed Hom normalizer; its generic
 displayed laxity retains the next tetrahedral action.
 
-There are two distinct cells at this stage. The section compositor points
+There are two successive cells at this stage. The section compositor points
 from the sequential 013/123 pasting to the stable action on their composite;
-it is the comparison exposing the fourth face. The canonical flagged top cell
-starts at that stable transport and is the action of the already-constructed
-012 filler. Prepending the compositor would change the formal source of the
-top cell and would incorrectly demand an inverse to a merely lax compositor.
-Thus dimension-three packaging keeps the action-only cell as the candidate
-alpha and records the compositor separately as its visible-face comparison.
+the action of the already-constructed 012 filler then points from that stable
+middle boundary to the 012/023 boundary. Their forward composite is the
+candidate flagged top cell and uses all four faces. The compositor is never
+inverted: its dependent fibre projection supplies the first part of the
+tetrahedral alpha, while the action-only projection remains the useful middle
+factor and orientation diagnostic.
 
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction

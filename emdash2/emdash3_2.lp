@@ -8939,6 +8939,78 @@ rule fapp0 (@comp_prod_fapp1_func $A $W $X $Z $pg $pg') $alpha
 rule @fapp1_fapp0 _ _ (@comp_prod_func $A $W $X $Z) $pg $pg' $alpha
   ↪ @comp_prod_fapp1_fapp0 $A $W $X $Z $pg $pg' $alpha;
 
+/*
+  Proof-time projection-order comparison for the capped precomposition hom
+  action.  The left owner keeps precomposition iterable; the right owner is
+  the same horizontal composition action with its first input fixed.  Neither
+  is selected as the other's runtime normal form.
+
+  The product objects and arrow remain side conditions because their public
+  `Product_pair` presentation may already have reduced to `Struct_sigma` when
+  unification reaches this rung.
+*/
+unif_rule
+  @hom_precomp_along_fapp1_fapp0
+    $A $B $F $Z $W $X $h $g $k $alpha
+  ≡ @comp_prod_fapp1_fapp0
+      $B _ _ $Z $pg $pg' $theta
+  ↪ [
+      $pg ≡ @Product_pair _ _
+        (@fapp1_fapp0 $A $B $F $W $X $h) $g;
+      $pg' ≡ @Product_pair _ _
+        (@fapp1_fapp0 $A $B $F $W $X $h) $k;
+      $theta ≡ @Product_pair _ _
+        (@id _ (@fapp1_fapp0 $A $B $F $W $X $h)) $alpha
+    ];
+
+// Typed equality view of the proof-time comparison above.
+symbol hom_precomp_along_fapp1_comp_prod_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (Z : τ (Obj B))
+  [W X : τ (Obj A)]
+  (h : τ (Hom A W X))
+  [g k : τ (Hom B (@fapp0 A B F X) Z)]
+  (alpha : τ (Hom
+    (Hom_cat B (@fapp0 A B F X) Z) g k))
+  : τ (@=
+      (Hom
+        (Hom_cat B (@fapp0 A B F W) Z)
+        (@hom_precomp_along_fapp0 A B F Z W X h g)
+        (@hom_precomp_along_fapp0 A B F Z W X h k))
+      (@hom_precomp_along_fapp1_fapp0
+        A B F Z W X h g k alpha)
+      (@comp_prod_fapp1_fapp0
+        B
+        (@fapp0 A B F W)
+        (@fapp0 A B F X)
+        Z
+        (@Product_pair
+          (Hom_cat B (@fapp0 A B F W) (@fapp0 A B F X))
+          (Hom_cat B (@fapp0 A B F X) Z)
+          (@fapp1_fapp0 A B F W X h) g)
+        (@Product_pair
+          (Hom_cat B (@fapp0 A B F W) (@fapp0 A B F X))
+          (Hom_cat B (@fapp0 A B F X) Z)
+          (@fapp1_fapp0 A B F W X h) k)
+        (@Product_pair
+          (Hom_cat
+            (Hom_cat B (@fapp0 A B F W) (@fapp0 A B F X))
+            (@fapp1_fapp0 A B F W X h)
+            (@fapp1_fapp0 A B F W X h))
+          (Hom_cat (Hom_cat B (@fapp0 A B F X) Z) g k)
+          (@id
+            (Hom_cat B (@fapp0 A B F W) (@fapp0 A B F X))
+            (@fapp1_fapp0 A B F W X h))
+          alpha)))
+≔ @eq_refl
+    (Hom
+      (Hom_cat B (@fapp0 A B F W) Z)
+      (@hom_precomp_along_fapp0 A B F Z W X h g)
+      (@hom_precomp_along_fapp0 A B F Z W X h k))
+    (@hom_precomp_along_fapp1_fapp0
+      A B F Z W X h g k alpha);
+
 // Transparent Cat specialization: compose a pair of ordinary functors.
 symbol Functor_comp_pair_func [A B C : Cat]
   : τ (Functor

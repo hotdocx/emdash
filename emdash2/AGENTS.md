@@ -18,7 +18,9 @@ specialized owner, the late self-comma identity section and whole displayed
 laxity extraction with retained source-fibre action, the transparent
 target-internalized ordinary action and fixed-target opposite projection, the
 transparent whole/component post-left and pre-right laxity surfaces with their
-normal-lax functor-compositor specialization, the current-source-validated
+normal-lax functor-compositor specialization, the proof-time higher
+precomposition/product-composition comparison with its typed equality view,
+the current-source-validated
 recursive second `homd_`/Sigma action over an explicit base associator, and
 the full-`tapp1_func` whole strict `Functord` naturality paths. It also owns
 the direct left/right join-eliminator point betas that close the projection
