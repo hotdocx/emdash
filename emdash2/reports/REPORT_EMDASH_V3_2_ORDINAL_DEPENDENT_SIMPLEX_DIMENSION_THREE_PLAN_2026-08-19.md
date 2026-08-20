@@ -1026,3 +1026,46 @@ step is now precisely to carry this canonical cell through the existing
 represented-associator/native exchange as a whole and package the resulting
 visible tetrahedron.  No capped source equality, endpoint normalizer, Fubini
 axiom, or `piapp*` redesign remains on that path.
+
+### 16.12 Whole Laxity Through The Native Exchange
+
+The post-checkpoint continuation confirms that the last comparison must stay
+whole for one more level.  Directly ascribing the readable compositor, the
+join direct-top component, or the mapped displayed-laxity component to the
+final native endpoints is rejected.  These failures are not evidence for a
+new endpoint equation: each capped term has already forgotten which whole
+source or target functor produced its endpoint.
+
+The ignored focused probe
+
+```text
+tmp/probes/ordinal_simplex3_directed_factor_stages.lp
+```
+
+now keeps the existing
+
+```text
+functord_laxity_transf(
+  prof_terminal_expected_visible_funcd,
+  kappa012)
+```
+
+as a transformation, postcomposes that transformation through the existing
+represented-associator/native exchange using
+`comp_cat_cov_fapp1_func`, and only then evaluates at face 02.  The whole
+transformation, its component, and another `tapp1_func` action all typecheck.
+The evaluated component agrees by typed `eq_refl` with the formerly capped
+image of `fdapp1_int_cell`.  Thus the new term adds no cell and changes no
+mathematics: it recovers the correct owner of the already-constructed
+directed factor.
+
+This closes the owner-selection question but not yet the final endpoint
+factor.  The remaining step is to compare the **source and target functors**
+of that postcomposed whole transformation with the canonical
+`DependentSimplex3_cat` source and readable 012/023 target, using the existing
+represented compositor and typed endpoint paths before taking the component.
+It must not be replaced by a capped `eq_refl`, a terminal eta rule, a Fubini
+axiom, or a primitive `piapp*` head.  Once those two whole endpoint
+comparisons are constructed, their component composes with the green whole
+laxity and the canonical raw top, after which source packaging and
+arbitrary-`H` mapping are expected to be mechanical.
