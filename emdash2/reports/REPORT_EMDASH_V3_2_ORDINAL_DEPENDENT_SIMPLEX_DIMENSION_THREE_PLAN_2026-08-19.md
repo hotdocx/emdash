@@ -791,3 +791,168 @@ dimension-three packaging is still required before claiming a uniform
 variable-`n` ordinal-adequacy theorem; a later recursive owner over the
 existing intrinsic dependent-simplex codes must package the same iterable
 pattern at arbitrary dimension.
+
+### 16.8 Base-Change Audit And Whole-Projection Correction
+
+A later owner audit corrects one over-optimistic sentence in section 16.7.
+The final consumer is not obtained by simply ascribing the reconstructed
+source comparison to the exchanged action endpoint.  The attempted term is
+rejected, and direct equalities between the capped endpoints are also
+rejected.  They retain different whole-action and endpoint-transport
+histories; treating that as a missing `eq_refl` would be precisely the
+face-specific normalization prohibited by this plan.
+
+One apparent prerequisite is now closed constructively.  For
+`F : A -> B`, `E : B -> Cat`, and `u : E[F x]`, `v : E[F y]`, dependent hom
+after pullback is definitionally the pullback of dependent hom along the
+whole hom action:
+
+```text
+homd_(id_(F^*E),x,u,y,v)
+  =
+(Op(F_1))^* homd_(id_E,Fx,u,Fy,v).
+```
+
+The generic probe
+`tmp/probes/homd_pullback_compatibility_refl.lp` proves the Catd equality by
+`eq_refl`; replacing the earlier probe-only opaque path by that transparent
+term leaves the normalized total and action-total probes green.  Therefore
+no Beck--Chevalley axiom, rewrite, unifier, or primitive `piapp*` redesign is
+needed.
+
+The source and target whole carriers also have the same *kind* of recursive
+shape:
+
+```text
+join carrier   = Op(Sigma(Op(Hom(base)), secondAction))
+native carrier = Op(Sigma(nativeTopBase, nativeTopFamily)).
+```
+
+Both equalities are judgmental in
+`tmp/probes/ordinal_simplex3_whole_category_shapes.lp`.  Consequently the
+ordinary total-category Fubini law
+`Sigma_k Sigma_e D(k,e) ~= Sigma_(k,e) D(k,e)` is mathematically natural but
+is not, by itself, the missing comparison here: the two totals have different
+base/family owners rather than merely different parenthesization.  Promoting
+Fubini without an exact instantiation would be scope drift.
+
+The remaining bounded prerequisite is therefore one **whole** comparison
+between those already-existing join/internal-action and native
+`homd_`/Sigma presentations.  It must map the retained higher cell before
+projecting its dependent endpoint, expose the four selected face readings,
+and retain another hom action.  The next probe follows escalation rows 2--3:
+
+1. first attempt a transparent whole base/family reindexing from the active
+   terminal comparison, visible reflag, and Sigma-total owners;
+2. if no such composite elaborates, introduce one named whole projection
+   facade at that semantic owner; and
+3. use one propositional whole join/internal-action comparison only if the two
+   existing whole maps are not definitionally equal.
+
+No capped endpoint equality, arbitrary bracketing normalizer, generic reverse
+compositor, face-specific rule, or opaque tetrahedron filler is admitted.
+The green `os3ff_native_to_stable` factor remains useful evidence: its
+orientation comes from the existing typed strict functor-composition path,
+not inversion of a directed lax compositor.  It is not yet the final native
+top until the whole carrier comparison above is checked.
+
+### 16.9 Parameter-Natural Join-Beta Action
+
+The next owner probe rules out both the ordinary Fubini detour and a merely
+fixed-generator higher projection.  Converting the existing
+`join_map_generator_beta(F,G)` to an equality-induced transformation and
+retaining its `tapp1_func` action is well typed, but its indexing category is
+`Terminal_cat`; it records higher action at one fixed walking generator and
+does not vary that generator along an old-base arrow of `Delta[2]`.
+
+The relevant generic owner is already stronger.  Package the identity
+successor presentation
+
+```text
+Delta[3] = Join_cat(Delta[2],Terminal_cat)
+```
+
+as `JoinMapObjectData` with the existing left inclusion, terminal right
+branch, and primitive `join_map_cross_transf`.  Then
+`join_map_extend_cross_cell` is the equality-induced **whole displayed
+transformation** from the action-observed cross to that primitive cross.  Its
+existing arbitrary-displayed-action ladder supplies:
+
+```text
+tdapp1_int_cell(...,r01,*)
+```
+
+for every old-base arrow, and, for the lifted 012 filler,
+
+```text
+tdapp1_int_presheaf_arrow(...)
+  -> tapp1_fapp0(...,kappa012)
+```
+
+as a whole functor between the corresponding higher hom categories.  The
+focused probe
+`tmp/probes/ordinal_simplex3_join_cross_beta_action.lp` checks this entire
+ladder.  It also checks judgmentally that the target profunctor and primitive
+cross are exactly the existing `os3_source_prof` and `os3_source_cross` owners.
+No new join cell, rule, unifier, `piapp*` primitive, or Fubini comparison is
+needed to obtain this parameter-natural action.
+
+The final target is intentionally not definitionally
+`Fibre_cat(os3_second_action_catd,r012)`.  The arbitrary-transfor action has a
+mixed endpoint: its source retains the action-observed cross while its target
+retains the primitive cross.  This is the ordinary naturality boundary of the
+whole equality-induced beta, not a bracketing defect.  The next probe must use
+the two endpoint components of the same equality-induced cross cell to
+conjugate that mixed-endpoint action into the native primitive presentation.
+Those components are invertible because the owner comes from equality; this
+does not license inversion of a generic directed compositor.  Only after that
+whole conjugation is green should its component be compared with
+`os3nna_source` and used in the final native top.
+
+### 16.10 Whole Conjugation And The Deferred Pi Interface
+
+The required whole conjugation is now green in
+`tmp/probes/ordinal_simplex3_join_cross_beta_conjugation.lp`.  For an arbitrary
+observed cross section `O` and equality `O = os3_source_cross`, equality
+induction supplies forward and reverse displayed cells, retains the whole
+`tdapp1_int_presheaf_arrow`, maps its mixed second-action category into the
+primitive second-action owner, and derives typed source, target, and whole-top
+comparisons.  In the reflexive case all three comparisons compute to the
+existing `os3_raw_top` presentation.  The independent
+`tmp/probes/ordinal_simplex3_join_cross_reflexive_action.lp` check confirms the
+same direct top from the ordinary internal-action owner.  Thus the
+parameter-natural join comparison has reached the exact primitive recursive
+second action; no fixed-face endpoint rule is needed.
+
+A separate fixed-right-pair probe provides useful corroborating evidence.
+`tmp/probes/section_pullback_stable_pair_consumer.lp` maps `p02`, `p012`, the
+canonical filler, and its whole section action through one recursively acting
+pair functor; all four observations compute, and the mapped action is
+`os3_raw_top` by typed `eq_refl`.  This does not justify promoting that helper:
+the parameter-natural join-beta owner above is stronger and already owns the
+relevant higher action.
+
+This consumer therefore does **not** require a primitive-`piapp*` migration.
+The audit distinguishes three facts:
+
+1. the generic public `piapp1_fapp0` view and its underlying
+   `fdapp1_int_cell` view can be compared in isolation;
+2. changing `piapp1_fapp0` into a stable head and adding a runtime fold to
+   `fdapp1_int_cell` fails subject reduction, so that candidate is rejected;
+3. a proof-time stable-head comparison can be made to typecheck in a full-file
+   experiment, but neither the dimension-three construction nor the stronger
+   whole join action needs it.
+
+No `piapp*` rule, unifier, or primitive change is promoted.  Stable Pi
+eliminator heads remain a legitimate future interface/consolidation topic if
+another consumer needs readable projection normal forms, but they are not a
+mathematical or computational prerequisite for this goal.
+
+The remaining native step is narrower than the former Pi detour.  Map and
+reframe the now-conjugated `os3_raw_top` through the existing represented
+associator/native exchange, then compose the resulting directed endpoint
+factors.  Direct `eq_refl` between the stable, action, and native capped
+endpoints remains deliberately rejected: those terms retain different
+projection histories, while the whole comparison already carries the needed
+directed information.  `ODS3-FACES-3` remains in progress until that arrow is
+packaged with the four faces and checked under arbitrary `H`.
