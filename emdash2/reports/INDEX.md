@@ -25,7 +25,12 @@ displayed map and `Pi_func` action transport complete sections and retain
 another hom action. A second, directed whole comparison exposes the literal
 source component and the corresponding displayed fibre normalizer through two
 narrow projection betas, while generic higher action remains intact. It
-contains no ordinal dimension, simplex filler, or proof-time unifier.
+also presents `p |-> g o F[p]` as one whole map-then-postcompose functor and
+supplies a coherent expected-to-constructor-visible displayed reflag. That
+third narrow component beta lets the same normalized Pi section expose literal
+dependent-triangle faces while the two whole source functors remain distinct.
+It contains no ordinal dimension, simplex filler, whole-source equality, or
+proof-time unifier.
 
 `REPORT_EMDASH_V3_2_JOIN_CROSS_DEPENDENT_SIMPLEX_PLAN_2026-08-19.md`
 is the completed child continuation of the dependent-hom simplex

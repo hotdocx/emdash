@@ -440,3 +440,117 @@ assertnot ⊢
         prof_terminal_test_F prof_terminal_test_G
         prof_terminal_test_W prof_terminal_test_X
         prof_terminal_test_g prof_terminal_test_h));
+
+// The constructor-visible source is one whole semantic composite: first map
+// the base arrow through F, then postcompose by g.
+type @prof_terminal_visible_source_func
+  prof_terminal_test_A prof_terminal_test_B
+  prof_terminal_test_F prof_terminal_test_G
+  prof_terminal_test_W prof_terminal_test_X
+  prof_terminal_test_g;
+
+assert ⊢
+  @prof_terminal_visible_source_obj
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g prof_terminal_test_p
+  ≡ @hom_postcomp_fapp0
+      prof_terminal_test_B prof_terminal_test_B
+      (@id_func prof_terminal_test_B)
+      (@fapp0
+        prof_terminal_test_A prof_terminal_test_B
+        prof_terminal_test_F prof_terminal_test_W)
+      (@fapp0
+        prof_terminal_test_A prof_terminal_test_B
+        prof_terminal_test_F prof_terminal_test_X)
+      (@fapp0
+        Terminal_cat prof_terminal_test_B
+        prof_terminal_test_G Terminal_obj)
+      prof_terminal_test_g
+      (@fapp1_fapp0
+        prof_terminal_test_A prof_terminal_test_B
+        prof_terminal_test_F
+        prof_terminal_test_W prof_terminal_test_X
+        prof_terminal_test_p);
+
+// The pointwise expected/visible comparison is explicit, while the two whole
+// functors remain distinct owners.
+type @prof_terminal_expected_visible_source_fapp0_path
+  prof_terminal_test_A prof_terminal_test_B
+  prof_terminal_test_F prof_terminal_test_G
+  prof_terminal_test_W prof_terminal_test_X
+  prof_terminal_test_g prof_terminal_test_p;
+
+assertnot ⊢
+  @prof_terminal_expected_source_func
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g
+  ≡ @prof_terminal_visible_source_func
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g;
+
+type @prof_terminal_visible_action_catd
+  prof_terminal_test_A prof_terminal_test_B
+  prof_terminal_test_F prof_terminal_test_G
+  prof_terminal_test_W prof_terminal_test_X
+  prof_terminal_test_g prof_terminal_test_h;
+
+type @prof_terminal_expected_visible_funcd
+  prof_terminal_test_A prof_terminal_test_B
+  prof_terminal_test_F prof_terminal_test_G
+  prof_terminal_test_W prof_terminal_test_X
+  prof_terminal_test_g prof_terminal_test_h;
+
+// The whole reflag computes in one fibre through the named rigid Hom owner.
+assert ⊢
+  @tapp0_fapp0
+    (Op_cat (Hom_cat prof_terminal_test_A
+      prof_terminal_test_W prof_terminal_test_X))
+    Cat_cat
+    (@prof_terminal_expected_action_catd
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g prof_terminal_test_h)
+    (@prof_terminal_visible_action_catd
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g prof_terminal_test_h)
+    prof_terminal_test_p
+    (@prof_terminal_expected_visible_funcd
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g prof_terminal_test_h)
+  ≡ @prof_terminal_expected_visible_fibre_func
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g prof_terminal_test_h prof_terminal_test_p;
+
+// Another base-arrow action remains owned by the generic displayed calculus.
+type @functord_laxity_transf
+  (Op_cat (Hom_cat prof_terminal_test_A
+    prof_terminal_test_W prof_terminal_test_X))
+  (@prof_terminal_expected_action_catd
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g prof_terminal_test_h)
+  (@prof_terminal_visible_action_catd
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g prof_terminal_test_h)
+  (@prof_terminal_expected_visible_funcd
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g prof_terminal_test_h)
+  prof_terminal_test_p prof_terminal_test_q prof_terminal_test_rho;

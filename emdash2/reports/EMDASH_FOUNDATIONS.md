@@ -4032,6 +4032,18 @@ The explicit directed form computes at each `p` to an equality-induced source
 arrow and therefore induces a whole displayed Hom normalizer; its generic
 displayed laxity retains the next tetrahedral action.
 
+The readable source `g o F[p]` is itself retained as one whole functor: first
+apply the hom action of `F`, then postcompose by `g`. This map-then-cut owner
+is deliberately not identified with the older precomposition presentation.
+Their object actions are joined propositionally through the common raw
+composite, and `prof_terminal_expected_visible_funcd` uses the resulting
+equality-induced rigid Hom action as its fibre component. Because that
+comparison is a displayed functor, applying `Pi_func` to it turns a complete
+normalized section into constructor-visible dependent-triangle faces and
+retains the action between those faces. This is the whole coherence that a
+pointwise endpoint coercion would lose; it is not a new triangle filler or a
+whole-functor extensionality principle.
+
 There are two successive cells at this stage. The section compositor points
 from the sequential 013/123 pasting to the stable action on their composite;
 the action of the already-constructed 012 filler then points from that stable

@@ -345,9 +345,12 @@ the whole terminal-right reindexed-unit normalization extension is
 terminal-branch normality path it compares the native restricted
 `homd_`/`Prof_reindex` family with the canonical precomposition family, maps
 whole Pi sections, exposes a directed source comparison and computational
-fibre component for recursive consumers, and retains another hom action. Its
-two component rules are generic projection betas; it contains no unifier or
-dimension-specific filler;
+fibre component for recursive consumers, and retains another hom action. It
+also exposes the whole constructor-visible source presentation and a coherent
+expected-to-visible displayed reflag; their fibre beta turns normalized Pi
+sections into literal dependent-triangle endpoints without equating the two
+whole source functors. Its three component rules are generic projection betas;
+it contains no unifier or dimension-specific filler;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1136,11 +1139,12 @@ Use the following order:
 115. `emdash3_2_prof_reindex_terminal_normalization.lp` for whole
     normalization of a reindexed unit profunctor's terminal-right action. A
     supplied path `G[id_*]=id` supports both the original family equality and
-    an explicit directed source comparison. Two narrowly guarded component
-    betas expose its rigid Hom action and whole displayed normalizer, while
-    generic `tapp1`/`functord_laxity_transf` retain higher action. The module
-    is generic in the old category and contains no ordinal dimension,
-    face-specific rule, direct simplex category, filler, or unifier;
+    an explicit directed source comparison. Three narrowly guarded component
+    betas expose its rigid Hom action, whole displayed normalizer, and
+    expected-to-constructor-visible reflag, while generic
+    `tapp1`/`functord_laxity_transf` retain higher action. The module is generic
+    in the old category and contains no ordinal dimension, face-specific rule,
+    direct simplex category, filler, whole-source equality, or unifier;
 116. `emdash3_2_checks.lp` for executable regression statements;
 117. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;

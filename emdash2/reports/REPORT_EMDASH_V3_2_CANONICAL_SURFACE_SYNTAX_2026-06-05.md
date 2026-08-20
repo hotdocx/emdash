@@ -1260,6 +1260,21 @@ invert the section compositor. At dimension three the forward compositor is
 followed by the 012-filler action; their composite is the formal top cell,
 while the two factors remain separately observable.
 
+When literal dependent-triangle endpoints are required, write
+
+```text
+visibleSource(p) = g o F[p]
+reflag_p : Hom(expectedSource(p),h) -> Hom(visibleSource(p),h)
+VisibleNormalize : expectedAction ->_K visibleAction.
+```
+
+The literal owners are `prof_terminal_visible_source_func`,
+`prof_terminal_expected_visible_source_fapp0_path`, and
+`prof_terminal_expected_visible_funcd`; the fibre projection is
+`prof_terminal_expected_visible_fibre_func`. The expected and visible whole
+source functors are not equal by definition. Use the displayed reflag when
+higher action matters rather than applying an isolated endpoint path.
+
 For the join higher-constructor computation write
 
 ```text

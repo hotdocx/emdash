@@ -12,7 +12,7 @@
   is the dimension-independent normalization used by every recursive join
   successor A |-> Join(A,1); it contains no ordinal, face, or simplex-specific
   data. The original family comparison is rule-free; the explicit directed
-  refinement below adds only two guarded component projection rules and no
+  refinement below adds only three guarded component projection rules and no
   proof-time unifier.
 */
 
@@ -743,3 +743,244 @@ rule @tapp0_fapp0
         $A $B $F $G $W $X $g $h $normal)
   ↪ @prof_terminal_fibre_normalization_func
       $A $B $F $G $W $X $g $h $normal $p;
+
+// -------------------------------------------------------------------------------------------------
+// Whole constructor-visible source normalization
+// -------------------------------------------------------------------------------------------------
+/*
+  The expected source above presents p |-> g o F[p] by precomposition.  The
+  constructor-visible presentation first applies the whole hom action of F
+  and then postcomposes by g.  These are intentionally distinct whole functor
+  owners: only their object actions are propositionally equal.  The stable
+  displayed reflag below uses that component path and retains its higher
+  naturality through the ordinary Functord action.
+
+  This is the reusable bridge from a computational Pi section to literal
+  dependent-triangle endpoints.  It contains no simplex dimension, face code,
+  broad source collapse, whole-functor equality, or proof-time unifier.
+*/
+
+// Whole constructor-visible source p |-> g o F[p].
+symbol prof_terminal_visible_source_func
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  : τ (Functor
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj)))
+≔ @comp_cat_fapp0
+    (Hom_cat A W X)
+    (Hom_cat B (@fapp0 A B F W) (@fapp0 A B F X))
+    (Hom_cat B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (@hom_postcomp_func
+      B B (@id_func B)
+      (@fapp0 A B F W)
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)
+      g)
+    (@fapp1_func A B F W X);
+
+// Constructor-visible component of the whole source functor.
+symbol prof_terminal_visible_source_obj
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (p : τ (Hom A W X))
+  : τ (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+≔ @fapp0
+    (Hom_cat A W X)
+    (Hom_cat B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (@prof_terminal_visible_source_func A B F G W X g) p;
+
+// Pointwise equality between expected and constructor-visible source views.
+symbol prof_terminal_expected_visible_source_fapp0_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (p : τ (Hom A W X))
+  : τ (@=
+      (Hom B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@fapp0
+        (Hom_cat A W X)
+        (Hom_cat B
+          (@fapp0 A B F W)
+          (@fapp0 Terminal_cat B G Terminal_obj))
+        (@prof_terminal_expected_source_func A B F G W X g) p)
+      (@prof_terminal_visible_source_obj A B F G W X g p))
+≔ @eq_trans
+    (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (@fapp0
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_expected_source_func A B F G W X g) p)
+    (@prof_terminal_raw_composite_source A B F G W X g p)
+    (@prof_terminal_visible_source_obj A B F G W X g p)
+    (@prof_terminal_expected_raw_composite_path A B F G W X g p)
+    (@eq_sym
+      (Hom B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_visible_source_obj A B F G W X g p)
+      (@prof_terminal_raw_composite_source A B F G W X g p)
+      (@eq_refl
+        (Hom B
+          (@fapp0 A B F W)
+          (@fapp0 Terminal_cat B G Terminal_obj))
+        (@prof_terminal_visible_source_obj A B F G W X g p)));
+
+// Constructor-visible dependent-hom family with fixed target h.
+symbol prof_terminal_visible_action_catd
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (h : τ (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  : τ (Catd (Op_cat (Hom_cat A W X)))
+≔ @comp_cat_fapp0
+    (Op_cat (Hom_cat A W X))
+    (Op_cat (Hom_cat B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+    Cat_cat
+    (@hom_con
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      h
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@id_func (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))))
+    (@Op_func
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_visible_source_func A B F G W X g));
+
+// Equality-induced rigid Hom action at one visible source component.
+symbol prof_terminal_expected_visible_fibre_func
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (h : τ (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (p : τ (Hom A W X))
+  : τ (Functor
+      (Fibre_cat
+        (@prof_terminal_expected_action_catd A B F G W X g h) p)
+      (Fibre_cat
+        (@prof_terminal_visible_action_catd A B F G W X g h) p))
+≔ @Hom_func
+    (Hom_cat B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (@fapp0
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_expected_source_func A B F G W X g)
+      p)
+    (@prof_terminal_visible_source_obj A B F G W X g p)
+    h h
+    (@path_to_hom
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_visible_source_obj A B F G W X g p)
+      (@fapp0
+        (Hom_cat A W X)
+        (Hom_cat B
+          (@fapp0 A B F W)
+          (@fapp0 Terminal_cat B G Terminal_obj))
+        (@prof_terminal_expected_source_func A B F G W X g)
+        p)
+      (@eq_sym
+        (Hom B
+          (@fapp0 A B F W)
+          (@fapp0 Terminal_cat B G Terminal_obj))
+        (@fapp0
+          (Hom_cat A W X)
+          (Hom_cat B
+            (@fapp0 A B F W)
+            (@fapp0 Terminal_cat B G Terminal_obj))
+          (@prof_terminal_expected_source_func A B F G W X g)
+          p)
+        (@prof_terminal_visible_source_obj A B F G W X g p)
+        (@prof_terminal_expected_visible_source_fapp0_path
+          A B F G W X g p)))
+    (@id
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      h);
+
+// Whole expected-to-visible reflag.  Its stable head, not a whole equality,
+// owns naturality between the two source presentations.
+injective symbol prof_terminal_expected_visible_funcd
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (h : τ (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  : τ (Functord
+      (@prof_terminal_expected_action_catd A B F G W X g h)
+      (@prof_terminal_visible_action_catd A B F G W X g h));
+
+// Fibre component is the equality-induced rigid Hom reflag.  Generic
+// Functord action supplies its base-arrow and higher-cell coherence.
+// lhs-audit: keep 1,2 -- exact opposite-hom base and Cat codomain are the
+// subject-reduction guards for this displayed component projection.
+rule @tapp0_fapp0
+      (Op_cat (Hom_cat $A $W $X))
+      Cat_cat
+      _ _
+      $p
+      (@prof_terminal_expected_visible_funcd
+        $A $B $F $G $W $X $g $h)
+  ↪ @prof_terminal_expected_visible_fibre_func
+      $A $B $F $G $W $X $g $h $p;

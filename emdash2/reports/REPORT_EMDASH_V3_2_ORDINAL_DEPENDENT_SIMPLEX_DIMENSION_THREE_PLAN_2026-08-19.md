@@ -324,7 +324,7 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `ODS3-00` | complete | Created the dedicated child branch/worktree from clean checkpoint `e157b37`; recorded the exact objective, nonclaims, validation policy, and Git boundary in this linked living plan; and indexed it for a clean launch checkpoint. |
 | `ODS3-BASE-1` | complete | Bootstrapped the worktree. Focused quiet checks of the ordinal filler, native dimension-three classifier, tetrahedron faces, and their three reviewers are green. Unchanged aggregate evidence is carried forward; no long aggregate was run. |
 | `ODS3-OWNER-2` | complete | Audited the fixed next-action facade against its distinct-endpoint owner, constructed the source join-cross section and all three new-vertex triangle actions uniformly, applied the recursive section action to the lifted 012 filler, and recovered the missing section-composition route from transparent section totalization plus the generic extracted `fapp1_compositor`. The resulting whole tetrahedral cell and both recursive Sigma projections typecheck without a primitive, rewrite, or unifier. Naive direct packaging is rejected because it confuses the join presentation, whose outer base cell is face 012, with the flagged `DependentSimplex3_cat` presentation, whose outer base cell is face 123. |
-| `ODS3-FACES-3` | in progress | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. The source audit constructs faces 013, 023, and 123 from one generic cross-action projection and retains face 012 as the existing canonical filler. The generic terminal-right module exposes a computational directed source component and whole displayed normalizer with retained laxity action. Separate green compositor and action projections establish the formal-alpha architecture: the forward section compositor supplies the sequential-013/123 factor and the 012 action supplies the following factor; their already-green whole composite uses all four faces without an inverse compositor. The compositor has been conjugated to readable endpoints, whiskered by face 013, and related to the native `homd_` source through the generic higher precomposition/product-composition bridge. A newly promoted generic `section_postcomp_sec` owner now makes `Pi_func` postcomposition computational: its point components are the normalized successor faces and its base-arrow action is the existing `fdapp1_int_hom_fapp0`, including displayed laxity. The focused normalized-face, whole-action, and owner-comparison probes are green. This resolves the former general LF projection gap; final flagged endpoint packaging and arbitrary-`H` face comparison remain. |
+| `ODS3-FACES-3` | in progress | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. The source audit constructs faces 013, 023, and 123 from one generic cross-action projection and retains face 012 as the existing canonical filler. The generic terminal-right module exposes a computational directed source component and whole displayed normalizer with retained laxity action. Separate green compositor and action projections establish the formal-alpha architecture: the forward section compositor supplies the sequential-013/123 factor and the 012 action supplies the following factor; their already-green whole composite uses all four faces without an inverse compositor. The compositor has been conjugated to readable endpoints, whiskered by face 013, and related to the native `homd_` source through the generic higher precomposition/product-composition bridge. A promoted generic `section_postcomp_sec` owner makes `Pi_func` postcomposition computational: its point components are the normalized successor faces and its base-arrow action is the existing `fdapp1_int_hom_fapp0`, including displayed laxity. The terminal-normalization module now also retains `p |-> g o F[p]` as a whole map-then-postcompose functor and exposes a generic expected-to-constructor-visible displayed reflag. Applying that reflag to the normalized Pi section is green: face 023 computes to the existing visible filler and its 012 base-arrow action remains whole. This closes both the former Pi projection gap and the pointwise-visible coherence gap; final native `DependentSimplex3_cat` endpoint packaging and arbitrary-`H` face comparison remain. |
 | `ODS3-SOURCE-4` | pending | Construct the identity-`Delta[3]` native source tetrahedron, including its dependent top cell, from the retained recursive action. No primitive or opaque tetrahedron filler is permitted. |
 | `ODS3-MAP-5` | pending | Map the one source native tetrahedron under arbitrary `H` through `dependent_simplex3_map`; retain the whole map rather than only its top component. |
 | `ODS3-OBSERVE-6` | pending | Expose the unconditional `DependentSimplexObservation(C,3)` and readable projections agreeing with all four canonical dimension-two face observations. |
@@ -702,3 +702,55 @@ definitions successfully project through the stable `tapp0_fapp0` and
 `section_postcomp_sec` boundary.  Reconsider primitive Pi eliminators only if
 a later arbitrary-dimensional consumer cannot retain a required whole action
 or if independent projection bridges begin to proliferate again.
+
+### 16.6 Whole Constructor-Visible Reflag
+
+The next endpoint audit found that the normalized Pi section was coherent but
+its fibres still used the precomposition presentation of
+`p |-> g o F[p]`. Reflagging each point independently produced the correct
+faces but discarded the base-arrow action needed by the tetrahedral cell.
+The missing boundary is dimension-independent and now lives in
+`emdash3_2_prof_reindex_terminal_normalization.lp`.
+
+`prof_terminal_visible_source_func` presents the same object formula as one
+whole semantic composite:
+
+```text
+Hom_A(W,X)
+  -> Hom_B(FW,FX)
+  -> Hom_B(FW,G*).
+```
+
+The first arrow is `F`'s whole hom action and the second is stable
+postcomposition by `g`. It is intentionally not definitionally equal to
+`prof_terminal_expected_source_func`. Their object actions meet at the raw
+composite, yielding `prof_terminal_expected_visible_source_fapp0_path`.
+The stable displayed owner `prof_terminal_expected_visible_funcd` uses the
+reverse equality-induced source arrow inside one rigid `Hom_func`; its sole
+component beta is `prof_terminal_expected_visible_fibre_func`, while generic
+`Functord` action owns all higher coherence.
+
+Focused generic source and reviewer checks are green. Warning-enabled runs
+inherit exactly `1279` diagnostics (`1120` unjoinable critical pairs and `159`
+replaceable pattern variables), so the new rule adds no warning delta. The
+strict LHS audit reports zero unreviewed compound slots. A negative reviewer
+keeps the expected and visible whole source functors distinct. The concrete
+ordinal application is also green: mapping the computational normalized
+section through the new owner makes its `p02` component exactly the existing
+constructor-visible face-023 filler, and its action on
+`ordinal_simplex2_source_canonical_filler` remains available at the generic
+`piapp1_fapp0`/`fdapp1_int_hom_fapp0` ladder.
+
+A resumable repository-health refresh was stopped under the goal's explicit
+long-aggregate policy after more than two minutes and 34 additional registered
+targets had passed; it reported no failure and wrote no health snapshot. The
+source-health report remains a single closeout gate rather than a per-tranche
+rerun.
+
+This does not yet complete `ODS3-FACES-3`. After represented-associator and
+native endpoint reframing, the two final alpha endpoints remain
+propositionally rather than definitionally presented. The next probe must
+project those comparisons from the same whole visible section action and then
+pair its face-123 base component with its dependent top through the existing
+`dependent_tetrahedron` constructor. No direct `eq_refl`, face-specific rule,
+whole-source equality, or primitive Pi eliminator is justified.
