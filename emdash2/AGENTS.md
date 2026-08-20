@@ -12,7 +12,8 @@ covariant/contravariant represented reindex accumulation through ordinary
 `Pullback_catd`, proof-time generic-composition/pullback comparisons with the
 explicit specialized `Sigma_proj1_pullback_catd` owner, the stable internal
 `section_weaken_funcd` computation used by recursively weakened displayed
-variables, the functorial `sigma_functord_sec_func` uncurrying owner and its
+variables, the typed source/value endpoint comparisons for whole pulled
+section action, the functorial `sigma_functord_sec_func` uncurrying owner and its
 direct retained-component beta, proof-time represented comparisons at that
 specialized owner, the late self-comma identity section and whole displayed
 laxity extraction with retained source-fibre action, the transparent

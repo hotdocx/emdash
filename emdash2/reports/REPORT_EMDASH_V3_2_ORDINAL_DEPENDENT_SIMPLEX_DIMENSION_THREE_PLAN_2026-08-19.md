@@ -956,3 +956,73 @@ endpoints remains deliberately rejected: those terms retain different
 projection histories, while the whole comparison already carries the needed
 directed information.  `ODS3-FACES-3` remains in progress until that arrow is
 packaged with the four faces and checked under arbitrary `H`.
+
+### 16.11 Pulled-Section Endpoints And Whole Sigma Transport
+
+The next audit identifies and closes the actual Pi interface requirement.
+The generic action theorem could already be instantiated, but its dependent
+source endpoint was hidden inside the theorem-selected Hom carrier.  Two
+rule-free projection theorems are now promoted at the existing
+`section_pullback_sec` owner in `emdash3_2.lp`:
+
+```text
+section_pullback_piapp1_src_path
+section_pullback_piapp0_path
+```
+
+They state, respectively, that the transported source of a pulled section
+action is the original transported source along `F[p]`, and that evaluation
+of the pulled section at `y` is evaluation of the original section at `F[y]`.
+Both generic declarations, their actual dimension-three specialization, and
+the active kernel check are green.  They add no rule, unifier, primitive
+`piapp*` head, or Pi eta principle.  This is the reusable interface the
+consumer needed; the broader primitive-Pi experiment remains rejected.
+The warning inventory remains exactly `1279` diagnostics (`1120` unjoinable
+critical pairs and `159` replaceable pattern variables), and the strict LHS
+audit still reports zero unreviewed compound slots.  A repository-wide
+`make check` continuation was stopped after the edited kernel and its first
+downstream targets had passed, under the standing no-long-aggregate policy;
+the direct kernel target and focused consumer are the tranche gates.
+
+The semantic reversed-base hom functor, without the diagnostic fixed-right
+replacement, computes on all three data required by the top cell:
+
+```text
+p02       |-> r02
+p012      |-> r012
+kappa012  |-> kappa012.
+```
+
+All three comparisons are typed `eq_refl` in
+`tmp/probes/section_pullback_actual_base_paths.lp`.  Reframing the pulled
+native action through the two promoted endpoint paths is green in
+`tmp/probes/section_pullback_actual_action_reframe.lp`.
+
+The decisive correction is to stop moving the resulting dependent source
+pointwise.  The active `sigma_pullback_total_func` maps the complete
+`(kappa,lambda)` arrow from `Sigma(F^*D)` to `Sigma(D)`, preserving its
+dependent endpoints in one whole action.  The focused sequence
+
+```text
+section_pullback_actual_total_map.lp
+section_pullback_actual_total_projections.lp
+section_pullback_actual_total_kappa.lp
+section_pullback_actual_total_raw_lambda.lp
+```
+
+is green.  It maps the native total, projects its computed base, composes that
+base path with `mapped kappa012 = kappa012`, and uses equality induction only
+inside the existing `homd_` fibre.  Lambdapi then accepts the transported
+fibre directly at
+
+```text
+Hom(raw_top_source, raw_top_target).
+```
+
+This is the constructive canonical raw top needed by the continuation.  An
+optional judgmental equality with the older `os3_raw_top` is rejected and is
+not required: the two cells retain different derivation histories.  The next
+step is now precisely to carry this canonical cell through the existing
+represented-associator/native exchange as a whole and package the resulting
+visible tetrahedron.  No capped source equality, endpoint normalizer, Fubini
+axiom, or `piapp*` redesign remains on that path.

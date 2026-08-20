@@ -16898,6 +16898,54 @@ rule @tapp0_fapp0
       (Fibre_cat (@Pullback_catd $A $B $E $F) $a)
       (@piapp0 $B $E $s (@fapp0 $A $B $F $a));
 
+// The source endpoint of a pulled section action agrees propositionally with
+// the original section action along the whole mapped base arrow.  This is a
+// typed projection theorem, not a runtime fold for piapp1_src_obj.
+symbol section_pullback_piapp1_src_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (E : τ (Catd B))
+  (s : τ (Obj (Pi_cat E)))
+  [x y : τ (Obj A)]
+  (p : τ (Hom A x y))
+  : τ (@=
+      (Obj (Fibre_cat E (@fapp0 A B F y)))
+      (@piapp1_src_obj
+        A (@Pullback_catd A B E F)
+        (@section_pullback_sec A B F E s)
+        x y p)
+      (@piapp1_src_obj
+        B E s
+        (@fapp0 A B F x) (@fapp0 A B F y)
+        (@fapp1_fapp0 A B F x y p)))
+≔ @eq_refl
+    (Obj (Fibre_cat E (@fapp0 A B F y)))
+    (@piapp1_src_obj
+      A (@Pullback_catd A B E F)
+      (@section_pullback_sec A B F E s)
+      x y p);
+
+// The value endpoint of a pulled section computes to evaluation of the
+// original section at the mapped object.  It is kept as typed equality
+// evidence so consumers can reframe a whole action without a Pi eta rule.
+symbol section_pullback_piapp0_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (E : τ (Catd B))
+  (s : τ (Obj (Pi_cat E)))
+  (y : τ (Obj A))
+  : τ (@=
+      (Obj (Fibre_cat E (@fapp0 A B F y)))
+      (@piapp0
+        A (@Pullback_catd A B E F)
+        (@section_pullback_sec A B F E s) y)
+      (@piapp0 B E s (@fapp0 A B F y)))
+≔ @eq_refl
+    (Obj (Fibre_cat E (@fapp0 A B F y)))
+    (@piapp0
+      A (@Pullback_catd A B E F)
+      (@section_pullback_sec A B F E s) y);
+
 // Stable displayed weakening of a section along an arbitrary displayed
 // source. Semantically it is R -> const(1) -> E. The explicit owner retains
 // whole displayed action and the recursive dependent-variable computation
