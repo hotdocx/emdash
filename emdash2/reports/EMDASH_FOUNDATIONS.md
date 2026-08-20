@@ -3390,6 +3390,24 @@ not reconstruct a naturality square by hand.  The stable head also prevents
 this section-specific computation from rewriting unrelated displayed
 composites.
 
+A Pi section also has a stable Grothendieck totalization
+
+```text
+section_total_func(E,s) : Functor(K,Sigma_cat(E)),
+section_total_func(E,s)[k] -> (k,s[k]),
+section_total_func(E,s)[p] -> (p,s[p]).
+```
+
+This is a whole-functor owner, not a new Pi eliminator.  Its point and arrow
+observations reuse `piapp0` and `piapp1_fapp0`, so successive section actions
+share one literal Sigma object and every higher action remains generic.  The
+active computation also makes totalization commute, at both object and arrow
+observers, with `sigma_map_func(FF)` and `section_postcomp_sec(FF,s)`.  In the
+current lax/strict prototype its arrow beta intentionally meets the historical
+global functoriality cuts: the explicit Sigma arrow is the runtime projection
+owner, while generic identity/composition paths retain the propositional
+comparison with those strict views.
+
 For the Sigma first projection, this stable head makes section uncurrying a
 direct proof-time comparison:
 
@@ -5770,6 +5788,7 @@ kernel and one-way library vocabulary.
 | `eta[k] : s[k] → t[k]` | `pi_hom_fapp0 eta k` |
 | section-action family `f ↦ s[f]` | `piapp1_func s x y` |
 | `s[f]` | `piapp1_fapp0 s f` |
+| total section `k ↦ (k,s[k])` | `section_total_func E s` |
 | `Π_K Const_K(A) = Functor(K,A)` | proof-time comparison for `Pi_cat (Const_catd K A)` |
 | `const_section_{K,A}` | `const_section_func K A` |
 | `const_section_{K,A}(a)` | `Const_func K A a` |

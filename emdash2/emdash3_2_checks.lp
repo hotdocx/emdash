@@ -12773,6 +12773,58 @@ assert [K : Cat] [E D : τ (Catd K)]
         (@piapp0 K E s y)
         (@piapp1_fapp0 K E s x y p);
 
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (k : τ (Obj K)) ⊢
+  @fapp0 K (@Sigma_cat K E) (@section_total_func K E s) k
+    ≡ @Struct_sigma
+        (Obj K)
+        (λ x : τ (Obj K), Obj (Fibre_cat E x))
+        k (@piapp0 K E s k);
+
+assert [K : Cat] (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @fapp1_fapp0 K (@Sigma_cat K E)
+    (@section_total_func K E s) x y p
+    ≡ @sigma_arrow
+        K E x y
+        (@piapp0 K E s x)
+        (@piapp0 K E s y)
+        p (@piapp1_fapp0 K E s x y p);
+
+assert [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (s : τ (Obj (Pi_cat E)))
+  (k : τ (Obj K)) ⊢
+  @fapp0 K (@Sigma_cat K D)
+    (@comp_cat_fapp0
+      K (@Sigma_cat K E) (@Sigma_cat K D)
+      (@sigma_map_func K E D FF)
+      (@section_total_func K E s))
+    k
+    ≡ @fapp0 K (@Sigma_cat K D)
+        (@section_total_func
+          K D (@section_postcomp_sec K E D FF s))
+        k;
+
+assert [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @fapp1_fapp0 K (@Sigma_cat K D)
+    (@comp_cat_fapp0
+      K (@Sigma_cat K E) (@Sigma_cat K D)
+      (@sigma_map_func K E D FF)
+      (@section_total_func K E s))
+    x y p
+    ≡ @fapp1_fapp0 K (@Sigma_cat K D)
+        (@section_total_func
+          K D (@section_postcomp_sec K E D FF s))
+        x y p;
+
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @eq_refl Cat_grpd (@Transf_cat K Cat_cat (@Terminal_catd K) E)
   : τ (@= Cat_grpd

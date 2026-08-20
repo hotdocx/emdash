@@ -324,7 +324,7 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `ODS3-00` | complete | Created the dedicated child branch/worktree from clean checkpoint `e157b37`; recorded the exact objective, nonclaims, validation policy, and Git boundary in this linked living plan; and indexed it for a clean launch checkpoint. |
 | `ODS3-BASE-1` | complete | Bootstrapped the worktree. Focused quiet checks of the ordinal filler, native dimension-three classifier, tetrahedron faces, and their three reviewers are green. Unchanged aggregate evidence is carried forward; no long aggregate was run. |
 | `ODS3-OWNER-2` | complete | Audited the fixed next-action facade against its distinct-endpoint owner, constructed the source join-cross section and all three new-vertex triangle actions uniformly, applied the recursive section action to the lifted 012 filler, and recovered the missing section-composition route from transparent section totalization plus the generic extracted `fapp1_compositor`. The resulting whole tetrahedral cell and both recursive Sigma projections typecheck without a primitive, rewrite, or unifier. Naive direct packaging is rejected because it confuses the join presentation, whose outer base cell is face 012, with the flagged `DependentSimplex3_cat` presentation, whose outer base cell is face 123. |
-| `ODS3-FACES-3` | in progress | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. The source audit constructs faces 013, 023, and 123 from one generic cross-action projection and retains face 012 as the existing canonical filler. The generic terminal-right module exposes a computational directed source component and whole displayed normalizer with retained laxity action. Separate green compositor and action projections establish the formal-alpha architecture: the forward section compositor supplies the sequential-013/123 factor and the 012 action supplies the following factor; their already-green whole composite uses all four faces without an inverse compositor. The compositor has been conjugated to readable endpoints, whiskered by face 013, and related to the native `homd_` source through the generic higher precomposition/product-composition bridge. A promoted generic `section_postcomp_sec` owner makes `Pi_func` postcomposition computational: its point components are the normalized successor faces and its base-arrow action is the existing `fdapp1_int_hom_fapp0`, including displayed laxity. The terminal-normalization module now also retains `p |-> g o F[p]` as a whole map-then-postcompose functor and exposes a generic expected-to-constructor-visible displayed reflag. Applying that reflag to the normalized Pi section is green: face 023 computes to the existing visible filler and its 012 base-arrow action remains whole. A generic stable section-total probe now gives literal `(k,s[k])` and `(p,s[p])` computation, makes the two successive section arrows share one syntactic midpoint, commutes by typed `eq_refl` with displayed postcomposition on both objects and arrows, and identifies the remaining source-factor endpoint with the existing whole compositor-factor source. This closes the former Pi projection, pointwise-visible, and shared-midpoint gaps. The remaining non-routine substep is the directed whole comparison from that source through the already-existing compositor cell to the direct section target; final native `DependentSimplex3_cat` packaging and arbitrary-`H` face comparison then remain. |
+| `ODS3-FACES-3` | in progress | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. The source audit constructs faces 013, 023, and 123 from one generic cross-action projection and retains face 012 as the existing canonical filler. The generic terminal-right module exposes a computational directed source component and whole displayed normalizer with retained laxity action. Separate green compositor and action projections establish the formal-alpha architecture: the forward section compositor supplies the sequential-013/123 factor and the 012 action supplies the following factor; their already-green whole composite uses all four faces without an inverse compositor. The compositor has been conjugated to readable endpoints, whiskered by face 013, and related to the native `homd_` source through the generic higher precomposition/product-composition bridge. A promoted generic `section_postcomp_sec` owner makes `Pi_func` postcomposition computational: its point components are the normalized successor faces and its base-arrow action is the existing `fdapp1_int_hom_fapp0`, including displayed laxity. The terminal-normalization module now also retains `p |-> g o F[p]` as a whole map-then-postcompose functor and exposes a generic expected-to-constructor-visible displayed reflag. Applying that reflag to the normalized Pi section is green: face 023 computes to the existing visible filler and its 012 base-arrow action remains whole. The promoted generic `section_total_func` now gives literal `(k,s[k])` and `(p,s[p])` computation, makes the two successive section arrows share one syntactic midpoint, commutes by typed `eq_refl` with displayed postcomposition on both objects and arrows, and identifies the remaining source-factor endpoint with the existing whole compositor-factor source. This closes the former Pi projection, pointwise-visible, and shared-midpoint gaps. The remaining non-routine substep is the directed whole comparison from that source through the already-existing compositor cell to the direct section target; final native `DependentSimplex3_cat` packaging and arbitrary-`H` face comparison then remain. |
 | `ODS3-SOURCE-4` | pending | Construct the identity-`Delta[3]` native source tetrahedron, including its dependent top cell, from the retained recursive action. No primitive or opaque tetrahedron filler is permitted. |
 | `ODS3-MAP-5` | pending | Map the one source native tetrahedron under arbitrary `H` through `dependent_simplex3_map`; retain the whole map rather than only its top component. |
 | `ODS3-OBSERVE-6` | pending | Expose the unconditional `DependentSimplexObservation(C,3)` and readable projections agreeing with all four canonical dimension-two face observations. |
@@ -1146,8 +1146,8 @@ arbitrary-`H` map, faces, profiles, and documentation become assembly work.
 
 The source-side audit now has a generic computational interface rather than a
 dimension-specific endpoint guess.  The ignored focused probe
-`tmp/probes/ordinal_simplex3_visible_section_compositor.lp` introduces the
-candidate stable owner
+`tmp/probes/ordinal_simplex3_visible_section_compositor.lp` validates the
+stable owner
 
 ```text
 section_total_func(E,s) : Functor(K,Sigma_cat(K,E))
@@ -1201,9 +1201,23 @@ directed compositor into the direct section target, then compose the already
 green target-side chain to `os3nna_qfibre`.  Direct equalities between those
 outer capped presentations remain negative evidence and must not be promoted.
 
-Promotion of `section_total_func` is still consumer-gated until that final
-directed composite packages the native tetrahedron.  If it closes the
-consumer, promote the owner at the first position where `piapp1_fapp0` is
-available, run the full-file owner-position and subject-reduction probe, audit
-both minimal left-hand sides, compare warnings, and add generic object,
-arrow, wrong-section, wrong-endpoint, noncollapse, and retained-action checks.
+`section_total_func` is now promoted at the first position where
+`piapp1_fapp0` is available.  The active kernel, focused generic owner probe,
+focused checks, dimension-three compositor consumer, and strict LHS audit are
+green; the audit reports zero unreviewed compound slots.  The warning inventory
+is `1290 = 1131 + 159`, a classified `+11` unjoinable-critical-pair delta over
+the prior `1279 = 1120 + 159` baseline.  Every new diagnostic is headed by the
+arrow beta meeting a historical generic functor identity/composition or
+naturality cut.  This is the expected current lax/strict prototype boundary:
+the competing terms are related propositionally by the existing generic
+functoriality paths, while the explicit Sigma arrow remains the intended
+runtime projection owner.  No replaceable-pattern warning was added.
+
+A single `make check` attempt was stopped under the standing no-long-aggregate
+policy after the edited kernel and numerous unchanged downstream targets had
+passed without a failure.  It is not used as completed evidence.  The direct
+kernel target, focused active checks, generic consumer, warning inventory, and
+strict audit are the promotion gates for this bounded tranche.  Wrong-section,
+wrong-endpoint, noncollapse, retained-action, and final warning evidence remain
+part of the source/closeout reviewer rather than a reason to rerun the long
+aggregate now.

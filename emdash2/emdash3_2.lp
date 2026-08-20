@@ -15620,6 +15620,41 @@ symbol piapp1_fapp0 [K : Cat] (E : τ (Catd K))
       (@piapp0 K E s y))
 ≔ piapp0 (@piapp1_func K E s x y) f;
 
+/*
+  Stable totalization of a Pi section.  It retains the whole functor, rather
+  than reconstructing successive Sigma arrows independently, so recursive
+  consumers share one literal middle object and keep generic higher action.
+
+  Mathematical notation:
+    total(s)[k] = (k,s[k])
+    total(s)[p] = (p,s[p]).
+
+  This is not a primitive Pi eliminator: its two observations use the active
+  piapp0/piapp1 projections and add no proof-time comparison.
+*/
+injective symbol section_total_func
+  [K : Cat]
+  (E : τ (Catd K))
+  (s : τ (Obj (Pi_cat E)))
+  : τ (Functor K (@Sigma_cat K E));
+
+rule @fapp0 _ _ (@section_total_func $K $E $s) $k
+  ↪ @Struct_sigma
+      (Obj $K)
+      (λ x : τ (Obj $K), Obj (Fibre_cat $E x))
+      $k
+      (@piapp0 $K $E $s $k);
+
+rule @fapp1_fapp0 _ _
+      (@section_total_func $K $E $s)
+      $x $y $p
+  ↪ @sigma_arrow
+      $K $E $x $y
+      (@piapp0 $K $E $s $x)
+      (@piapp0 $K $E $s $y)
+      $p
+      (@piapp1_fapp0 $K $E $s $x $y $p);
+
 // Raw canonical-triangle cell extracted from the internal displayed hom-action.
 // This is the stable component-level displayed laxity normal form.
 // The concrete transported-object identity is consumed directly by the

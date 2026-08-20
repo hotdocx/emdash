@@ -16,8 +16,10 @@ variables, the typed source/value endpoint comparisons for whole pulled
 section action, the functorial `sigma_functord_sec_func` uncurrying owner and its
 direct retained-component beta, proof-time represented comparisons at that
 specialized owner, the late self-comma identity section and whole displayed
-laxity extraction with retained source-fibre action, the transparent
-target-internalized ordinary action and fixed-target opposite projection, the
+laxity extraction with retained source-fibre action, the stable Pi-section
+totalization owner with computing object/arrow observations and retained
+generic hom action, the transparent target-internalized ordinary action and
+fixed-target opposite projection, the
 transparent whole/component post-left and pre-right laxity surfaces with their
 normal-lax functor-compositor specialization, the proof-time higher
 precomposition/product-composition comparison with its typed equality view,
