@@ -1231,6 +1231,21 @@ through the generic join-eliminator point betas. Do not call the object-level
 observation package a category or write an unqualified ordinal/dependent
 equivalence.
 
+For terminal-right normalization in a recursive join successor, write
+
+```text
+normalize_p : Hom(g o F[p],h) -> Hom(nativeSource[p],h)
+Normalize   : nativeAction ->_K expectedAction.
+```
+
+The literal owners are `prof_terminal_expected_retained_source_transf` and
+`prof_terminal_explicit_normalization_funcd`; their point projections are
+`prof_terminal_retained_expected_source_fapp0_path` and
+`prof_terminal_fibre_normalization_func`. The direction of `normalize_p` is
+part of the normal-lax interface. Do not print it as an equality rewrite, and
+do not prepend the separate section compositor to the formal flagged top
+cell: that compositor witnesses the sequential-face comparison.
+
 For the join higher-constructor computation write
 
 ```text

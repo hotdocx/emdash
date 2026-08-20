@@ -99,6 +99,215 @@ type @prof_terminal_section_normalization_next_func
   prof_terminal_test_normal
   prof_terminal_test_s prof_terminal_test_t;
 
+constant symbol prof_terminal_test_p
+  : τ (Hom prof_terminal_test_A
+      prof_terminal_test_W prof_terminal_test_X);
+
+constant symbol prof_terminal_test_q
+  : τ (Hom prof_terminal_test_A
+      prof_terminal_test_W prof_terminal_test_X);
+
+// The directed source comparison computes at a literal old arrow while its
+// off-diagonal action remains a whole functor on higher arrows.
+assert ⊢
+  @tapp0_fapp0
+    (Hom_cat prof_terminal_test_A
+      prof_terminal_test_W prof_terminal_test_X)
+    (Hom_cat prof_terminal_test_B
+      (@fapp0
+        prof_terminal_test_A prof_terminal_test_B
+        prof_terminal_test_F prof_terminal_test_W)
+      (@fapp0
+        Terminal_cat prof_terminal_test_B
+        prof_terminal_test_G Terminal_obj))
+    (@prof_terminal_expected_source_func
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g)
+    (@prof_terminal_retained_source_func
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g)
+    prof_terminal_test_p
+    (@prof_terminal_expected_retained_source_transf
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g prof_terminal_test_normal)
+  ≡ @path_to_hom
+      (Hom_cat prof_terminal_test_B
+        (@fapp0
+          prof_terminal_test_A prof_terminal_test_B
+          prof_terminal_test_F prof_terminal_test_W)
+        (@fapp0
+          Terminal_cat prof_terminal_test_B
+          prof_terminal_test_G Terminal_obj))
+      (@fapp0
+        (Hom_cat prof_terminal_test_A
+          prof_terminal_test_W prof_terminal_test_X)
+        (Hom_cat prof_terminal_test_B
+          (@fapp0
+            prof_terminal_test_A prof_terminal_test_B
+            prof_terminal_test_F prof_terminal_test_W)
+          (@fapp0
+            Terminal_cat prof_terminal_test_B
+            prof_terminal_test_G Terminal_obj))
+        (@prof_terminal_expected_source_func
+          prof_terminal_test_A prof_terminal_test_B
+          prof_terminal_test_F prof_terminal_test_G
+          prof_terminal_test_W prof_terminal_test_X
+          prof_terminal_test_g)
+        prof_terminal_test_p)
+      (@fapp0
+        (Hom_cat prof_terminal_test_A
+          prof_terminal_test_W prof_terminal_test_X)
+        (Hom_cat prof_terminal_test_B
+          (@fapp0
+            prof_terminal_test_A prof_terminal_test_B
+            prof_terminal_test_F prof_terminal_test_W)
+          (@fapp0
+            Terminal_cat prof_terminal_test_B
+            prof_terminal_test_G Terminal_obj))
+        (@prof_terminal_retained_source_func
+          prof_terminal_test_A prof_terminal_test_B
+          prof_terminal_test_F prof_terminal_test_G
+          prof_terminal_test_W prof_terminal_test_X
+          prof_terminal_test_g)
+        prof_terminal_test_p)
+      (@eq_sym
+        (Hom prof_terminal_test_B
+          (@fapp0
+            prof_terminal_test_A prof_terminal_test_B
+            prof_terminal_test_F prof_terminal_test_W)
+          (@fapp0
+            Terminal_cat prof_terminal_test_B
+            prof_terminal_test_G Terminal_obj))
+        (@fapp0
+          (Hom_cat prof_terminal_test_A
+            prof_terminal_test_W prof_terminal_test_X)
+          (Hom_cat prof_terminal_test_B
+            (@fapp0
+              prof_terminal_test_A prof_terminal_test_B
+              prof_terminal_test_F prof_terminal_test_W)
+            (@fapp0
+              Terminal_cat prof_terminal_test_B
+              prof_terminal_test_G Terminal_obj))
+          (@prof_terminal_retained_source_func
+            prof_terminal_test_A prof_terminal_test_B
+            prof_terminal_test_F prof_terminal_test_G
+            prof_terminal_test_W prof_terminal_test_X
+            prof_terminal_test_g)
+          prof_terminal_test_p)
+        (@fapp0
+          (Hom_cat prof_terminal_test_A
+            prof_terminal_test_W prof_terminal_test_X)
+          (Hom_cat prof_terminal_test_B
+            (@fapp0
+              prof_terminal_test_A prof_terminal_test_B
+              prof_terminal_test_F prof_terminal_test_W)
+            (@fapp0
+              Terminal_cat prof_terminal_test_B
+              prof_terminal_test_G Terminal_obj))
+          (@prof_terminal_expected_source_func
+            prof_terminal_test_A prof_terminal_test_B
+            prof_terminal_test_F prof_terminal_test_G
+            prof_terminal_test_W prof_terminal_test_X
+            prof_terminal_test_g)
+          prof_terminal_test_p)
+        (@prof_terminal_retained_expected_source_fapp0_path
+          prof_terminal_test_A prof_terminal_test_B
+          prof_terminal_test_F prof_terminal_test_G
+          prof_terminal_test_W prof_terminal_test_X
+          prof_terminal_test_g prof_terminal_test_normal
+          prof_terminal_test_p));
+
+type @tapp1_func
+  (Hom_cat prof_terminal_test_A
+    prof_terminal_test_W prof_terminal_test_X)
+  (Hom_cat prof_terminal_test_B
+    (@fapp0
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_W)
+    (@fapp0
+      Terminal_cat prof_terminal_test_B
+      prof_terminal_test_G Terminal_obj))
+  (@prof_terminal_expected_source_func
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g)
+  (@prof_terminal_retained_source_func
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g)
+  prof_terminal_test_p prof_terminal_test_q
+  (@prof_terminal_expected_retained_source_transf
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g prof_terminal_test_normal);
+
+// The explicit displayed normalizer computes to the rigid Hom action at each
+// base object and retains its generic whole laxity/next-action tower.
+assert ⊢
+  @tapp0_fapp0
+    (Op_cat (Hom_cat prof_terminal_test_A
+      prof_terminal_test_W prof_terminal_test_X))
+    Cat_cat
+    (@prof_terminal_native_action_catd
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g prof_terminal_test_h)
+    (@prof_terminal_expected_action_catd
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g prof_terminal_test_h)
+    prof_terminal_test_p
+    (@prof_terminal_explicit_normalization_funcd
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g prof_terminal_test_h
+      prof_terminal_test_normal)
+  ≡ @prof_terminal_fibre_normalization_func
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g prof_terminal_test_h
+      prof_terminal_test_normal prof_terminal_test_p;
+
+constant symbol prof_terminal_test_rho
+  : τ (Hom
+      (Hom_cat prof_terminal_test_A
+        prof_terminal_test_W prof_terminal_test_X)
+      prof_terminal_test_q prof_terminal_test_p);
+
+type @functord_laxity_transf
+  (Op_cat (Hom_cat prof_terminal_test_A
+    prof_terminal_test_W prof_terminal_test_X))
+  (@prof_terminal_native_action_catd
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g prof_terminal_test_h)
+  (@prof_terminal_expected_action_catd
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g prof_terminal_test_h)
+  (@prof_terminal_explicit_normalization_funcd
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g prof_terminal_test_h
+    prof_terminal_test_normal)
+  prof_terminal_test_p prof_terminal_test_q prof_terminal_test_rho;
+
 // An unrelated reflexive path at the raw terminal action is not accepted as
 // evidence that this action is the identity.
 constant symbol prof_terminal_test_wrong_normal
@@ -114,6 +323,100 @@ constant symbol prof_terminal_test_wrong_normal
         prof_terminal_test_B prof_terminal_test_G)
       (@prof_terminal_terminal_action
         prof_terminal_test_B prof_terminal_test_G));
+
+injective symbol prof_terminal_test_unrelated_component
+  : τ (Hom
+      (Hom_cat prof_terminal_test_B
+        (@fapp0
+          prof_terminal_test_A prof_terminal_test_B
+          prof_terminal_test_F prof_terminal_test_W)
+        (@fapp0
+          Terminal_cat prof_terminal_test_B
+          prof_terminal_test_G Terminal_obj))
+      (@fapp0
+        (Hom_cat prof_terminal_test_A
+          prof_terminal_test_W prof_terminal_test_X)
+        (Hom_cat prof_terminal_test_B
+          (@fapp0
+            prof_terminal_test_A prof_terminal_test_B
+            prof_terminal_test_F prof_terminal_test_W)
+          (@fapp0
+            Terminal_cat prof_terminal_test_B
+            prof_terminal_test_G Terminal_obj))
+        (@prof_terminal_expected_source_func
+          prof_terminal_test_A prof_terminal_test_B
+          prof_terminal_test_F prof_terminal_test_G
+          prof_terminal_test_W prof_terminal_test_X
+          prof_terminal_test_g)
+        prof_terminal_test_p)
+      (@fapp0
+        (Hom_cat prof_terminal_test_A
+          prof_terminal_test_W prof_terminal_test_X)
+        (Hom_cat prof_terminal_test_B
+          (@fapp0
+            prof_terminal_test_A prof_terminal_test_B
+            prof_terminal_test_F prof_terminal_test_W)
+          (@fapp0
+            Terminal_cat prof_terminal_test_B
+            prof_terminal_test_G Terminal_obj))
+        (@prof_terminal_retained_source_func
+          prof_terminal_test_A prof_terminal_test_B
+          prof_terminal_test_F prof_terminal_test_G
+          prof_terminal_test_W prof_terminal_test_X
+          prof_terminal_test_g)
+        prof_terminal_test_p));
+
+// The component remains a directed comparison and does not collapse to an
+// unrelated arrow with the same endpoints.
+assertnot ⊢
+  @tapp0_fapp0
+    (Hom_cat prof_terminal_test_A
+      prof_terminal_test_W prof_terminal_test_X)
+    (Hom_cat prof_terminal_test_B
+      (@fapp0
+        prof_terminal_test_A prof_terminal_test_B
+        prof_terminal_test_F prof_terminal_test_W)
+      (@fapp0
+        Terminal_cat prof_terminal_test_B
+        prof_terminal_test_G Terminal_obj))
+    (@prof_terminal_expected_source_func
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g)
+    (@prof_terminal_retained_source_func
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g)
+    prof_terminal_test_p
+    (@prof_terminal_expected_retained_source_transf
+      prof_terminal_test_A prof_terminal_test_B
+      prof_terminal_test_F prof_terminal_test_G
+      prof_terminal_test_W prof_terminal_test_X
+      prof_terminal_test_g prof_terminal_test_normal)
+  ≡ prof_terminal_test_unrelated_component;
+
+// A reflexive path at the unnormalized terminal action cannot inhabit the
+// normality slot of the explicit whole displayed normalizer.
+assertnot ⊢
+  @prof_terminal_explicit_normalization_funcd
+    prof_terminal_test_A prof_terminal_test_B
+    prof_terminal_test_F prof_terminal_test_G
+    prof_terminal_test_W prof_terminal_test_X
+    prof_terminal_test_g prof_terminal_test_h
+    prof_terminal_test_wrong_normal
+  : τ (Functord
+      (@prof_terminal_native_action_catd
+        prof_terminal_test_A prof_terminal_test_B
+        prof_terminal_test_F prof_terminal_test_G
+        prof_terminal_test_W prof_terminal_test_X
+        prof_terminal_test_g prof_terminal_test_h)
+      (@prof_terminal_expected_action_catd
+        prof_terminal_test_A prof_terminal_test_B
+        prof_terminal_test_F prof_terminal_test_G
+        prof_terminal_test_W prof_terminal_test_X
+        prof_terminal_test_g prof_terminal_test_h));
 
 assertnot ⊢
   @prof_terminal_native_expected_path

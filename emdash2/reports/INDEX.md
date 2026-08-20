@@ -22,7 +22,10 @@ Its first promoted prerequisite is
 canonical family `p |-> Hom_B(g o F[p],h)`, under an explicit normality
 witness for `G`.  The comparison is one whole family path; its derived
 displayed map and `Pi_func` action transport complete sections and retain
-another hom action.  It contains no ordinal dimension or simplex filler.
+another hom action. A second, directed whole comparison exposes the literal
+source component and the corresponding displayed fibre normalizer through two
+narrow projection betas, while generic higher action remains intact. It
+contains no ordinal dimension, simplex filler, or proof-time unifier.
 
 `REPORT_EMDASH_V3_2_JOIN_CROSS_DEPENDENT_SIMPLEX_PLAN_2026-08-19.md`
 is the completed child continuation of the dependent-hom simplex

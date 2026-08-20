@@ -3998,6 +3998,24 @@ makes the resulting filler an equality with an `eq_sym` inverse. This remains
 a computational relative adequacy result rather than a global equivalence of
 mapping categories; dimensions three and four are separate continuations.
 
+At the first dimension-three successor, the recursive join section initially
+lives over the product base `Delta[2]^op x 1`. Restricting its dependent hom
+along `p |-> (p,id_*)` produces the native action family, whereas the readable
+ordinal boundary uses `p |-> Hom(g o F[p],h)`. A supplied normality path for
+the terminal branch gives a whole comparison between these presentations.
+The explicit directed form computes at each `p` to an equality-induced source
+arrow and therefore induces a whole displayed Hom normalizer; its generic
+displayed laxity retains the next tetrahedral action.
+
+There are two distinct cells at this stage. The section compositor points
+from the sequential 013/123 pasting to the stable action on their composite;
+it is the comparison exposing the fourth face. The canonical flagged top cell
+starts at that stable transport and is the action of the already-constructed
+012 filler. Prepending the compositor would change the formal source of the
+top cell and would incorrectly demand an inverse to a merely lax compositor.
+Thus dimension-three packaging keeps the action-only cell as the candidate
+alpha and records the compositor separately as its visible-face comparison.
+
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction
 is ordinary precomposition. The post/left cell uses `homd_int` and

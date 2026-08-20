@@ -11,7 +11,9 @@
   sections, not isolated cells, and therefore retain another hom action.  This
   is the dimension-independent normalization used by every recursive join
   successor A |-> Join(A,1); it contains no ordinal, face, or simplex-specific
-  data.  The module adds no rewrite rule or proof-time unifier.
+  data. The original family comparison is rule-free; the explicit directed
+  refinement below adds only two guarded component projection rules and no
+  proof-time unifier.
 */
 
 require open emdash.emdash3_2;
@@ -299,3 +301,445 @@ symbol prof_terminal_section_normalization_next_func
     (Pi_cat (@prof_terminal_expected_action_catd A B F G W X g h))
     (@prof_terminal_section_normalization_func A B F G W X g h normal)
     s t;
+
+// -------------------------------------------------------------------------------------------------
+// Explicit componentwise terminal-right normalization
+// -------------------------------------------------------------------------------------------------
+/*
+  The equality-only normalizer above remains the compatibility surface for
+  transporting complete sections.  The following whole directed comparison
+  additionally exposes the point component needed by recursive dependent-hom
+  consumers.  Its component is built from the supplied terminal normality
+  path and rigid two-endpoint Hom action; the whole Transf/Functord owners
+  retain every next action.  These are generic in A,B,F,G and add no ordinal
+  or simplex-specific conversion.
+*/
+
+symbol prof_terminal_retained_source_func
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  : τ (Functor
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj)))
+≔ @comp_cat_fapp0
+    (Hom_cat A W X)
+    (Hom_cat
+      (Product_cat (Op_cat A) Terminal_cat)
+      (@prof_terminal_base A X)
+      (@prof_terminal_base A W))
+    (Fibre_cat
+      (@prof_terminal_prof A B F G)
+      (@prof_terminal_base A W))
+    (@fib_cov_tapp0_func
+      (Product_cat (Op_cat A) Terminal_cat)
+      (@prof_terminal_prof A B F G)
+      (@prof_terminal_base A X)
+      (@prof_terminal_base A W)
+      g)
+    (@prof_terminal_reversed_base_hom_func A W X);
+
+symbol prof_terminal_identity_source
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (p : τ (Hom A W X))
+  : τ (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+≔ @Hom_fapp0
+    B
+    (@fapp0 A B F X)
+    (@fapp0 A B F W)
+    (@fapp0 Terminal_cat B G Terminal_obj)
+    (@fapp0 Terminal_cat B G Terminal_obj)
+    (@fapp1_fapp0 A B F W X p)
+    (@id B (@fapp0 Terminal_cat B G Terminal_obj))
+    g;
+
+symbol prof_terminal_retained_identity_source_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (normal : τ (@=
+      (Hom B
+        (@fapp0 Terminal_cat B G Terminal_obj)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_terminal_action B G)
+      (@id B (@fapp0 Terminal_cat B G Terminal_obj))))
+  (p : τ (Hom A W X))
+  : τ (@=
+      (Hom B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@fapp0
+        (Hom_cat A W X)
+        (Hom_cat B
+          (@fapp0 A B F W)
+          (@fapp0 Terminal_cat B G Terminal_obj))
+        (@prof_terminal_retained_source_func A B F G W X g) p)
+      (@prof_terminal_identity_source A B F G W X g p))
+≔ @eq_ap
+    (Hom B
+      (@fapp0 Terminal_cat B G Terminal_obj)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (λ t : τ (Hom B
+        (@fapp0 Terminal_cat B G Terminal_obj)
+        (@fapp0 Terminal_cat B G Terminal_obj)),
+      @Hom_fapp0
+        B
+        (@fapp0 A B F X)
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj)
+        (@fapp0 Terminal_cat B G Terminal_obj)
+        (@fapp1_fapp0 A B F W X p)
+        t g)
+    (@prof_terminal_terminal_action B G)
+    (@id B (@fapp0 Terminal_cat B G Terminal_obj))
+    normal;
+
+symbol prof_terminal_raw_composite_source
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (p : τ (Hom A W X))
+  : τ (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+≔ @comp_fapp0
+    B
+    (@fapp0 A B F W)
+    (@fapp0 A B F X)
+    (@fapp0 Terminal_cat B G Terminal_obj)
+    g
+    (@fapp1_fapp0 A B F W X p);
+
+symbol prof_terminal_identity_raw_composite_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (p : τ (Hom A W X))
+  : τ (@=
+      (Hom B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_identity_source A B F G W X g p)
+      (@prof_terminal_raw_composite_source A B F G W X g p))
+≔ @eq_refl
+    (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (@prof_terminal_identity_source A B F G W X g p);
+
+symbol prof_terminal_expected_raw_composite_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (p : τ (Hom A W X))
+  : τ (@=
+      (Hom B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@fapp0
+        (Hom_cat A W X)
+        (Hom_cat B
+          (@fapp0 A B F W)
+          (@fapp0 Terminal_cat B G Terminal_obj))
+        (@prof_terminal_expected_source_func A B F G W X g) p)
+      (@prof_terminal_raw_composite_source A B F G W X g p))
+≔ @eq_refl
+    (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (@fapp0
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_expected_source_func A B F G W X g) p);
+
+symbol prof_terminal_identity_expected_source_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (p : τ (Hom A W X))
+  : τ (@=
+      (Hom B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_identity_source A B F G W X g p)
+      (@fapp0
+        (Hom_cat A W X)
+        (Hom_cat B
+          (@fapp0 A B F W)
+          (@fapp0 Terminal_cat B G Terminal_obj))
+        (@prof_terminal_expected_source_func A B F G W X g) p))
+≔ @eq_trans
+    (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (@prof_terminal_identity_source A B F G W X g p)
+    (@prof_terminal_raw_composite_source A B F G W X g p)
+    (@fapp0
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_expected_source_func A B F G W X g) p)
+    (@prof_terminal_identity_raw_composite_path A B F G W X g p)
+    (@eq_sym
+      (Hom B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@fapp0
+        (Hom_cat A W X)
+        (Hom_cat B
+          (@fapp0 A B F W)
+          (@fapp0 Terminal_cat B G Terminal_obj))
+        (@prof_terminal_expected_source_func A B F G W X g) p)
+      (@prof_terminal_raw_composite_source A B F G W X g p)
+      (@prof_terminal_expected_raw_composite_path A B F G W X g p));
+
+symbol prof_terminal_retained_expected_source_fapp0_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (normal : τ (@=
+      (Hom B
+        (@fapp0 Terminal_cat B G Terminal_obj)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_terminal_action B G)
+      (@id B (@fapp0 Terminal_cat B G Terminal_obj))))
+  (p : τ (Hom A W X))
+  : τ (@=
+      (Hom B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@fapp0
+        (Hom_cat A W X)
+        (Hom_cat B
+          (@fapp0 A B F W)
+          (@fapp0 Terminal_cat B G Terminal_obj))
+        (@prof_terminal_retained_source_func A B F G W X g) p)
+      (@fapp0
+        (Hom_cat A W X)
+        (Hom_cat B
+          (@fapp0 A B F W)
+          (@fapp0 Terminal_cat B G Terminal_obj))
+        (@prof_terminal_expected_source_func A B F G W X g) p))
+≔ @eq_trans
+    (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (@fapp0
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_retained_source_func A B F G W X g) p)
+    (@prof_terminal_identity_source A B F G W X g p)
+    (@fapp0
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_expected_source_func A B F G W X g) p)
+    (@prof_terminal_retained_identity_source_path
+      A B F G W X g normal p)
+    (@prof_terminal_identity_expected_source_path
+      A B F G W X g p);
+
+// Whole directed source comparison.  Its component beta below is the
+// generic version of the join-cross endpoint conjugation; tapp1 retains the
+// next coherence without postulating a commuting square.
+injective symbol prof_terminal_expected_retained_source_transf
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (normal : τ (@=
+      (Hom B
+        (@fapp0 Terminal_cat B G Terminal_obj)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_terminal_action B G)
+      (@id B (@fapp0 Terminal_cat B G Terminal_obj))))
+  : τ (Transf
+      (@prof_terminal_expected_source_func A B F G W X g)
+      (@prof_terminal_retained_source_func A B F G W X g));
+
+// lhs-audit: keep 1,2 -- exact hom source/codomain guard this component.
+rule @tapp0_fapp0
+      (Hom_cat $A $W $X)
+      (Hom_cat $B
+        (@fapp0 $A $B $F $W)
+        (@fapp0 Terminal_cat $B $G Terminal_obj))
+      _ _ $p
+      (@prof_terminal_expected_retained_source_transf
+        $A $B $F $G $W $X $g $normal)
+  ↪ @path_to_hom
+      (Hom_cat $B
+        (@fapp0 $A $B $F $W)
+        (@fapp0 Terminal_cat $B $G Terminal_obj))
+      (@fapp0
+        (Hom_cat $A $W $X)
+        (Hom_cat $B
+          (@fapp0 $A $B $F $W)
+          (@fapp0 Terminal_cat $B $G Terminal_obj))
+        (@prof_terminal_expected_source_func $A $B $F $G $W $X $g) $p)
+      (@fapp0
+        (Hom_cat $A $W $X)
+        (Hom_cat $B
+          (@fapp0 $A $B $F $W)
+          (@fapp0 Terminal_cat $B $G Terminal_obj))
+        (@prof_terminal_retained_source_func $A $B $F $G $W $X $g) $p)
+      (@eq_sym
+        (Hom $B
+          (@fapp0 $A $B $F $W)
+          (@fapp0 Terminal_cat $B $G Terminal_obj))
+        (@fapp0
+          (Hom_cat $A $W $X)
+          (Hom_cat $B
+            (@fapp0 $A $B $F $W)
+            (@fapp0 Terminal_cat $B $G Terminal_obj))
+          (@prof_terminal_retained_source_func $A $B $F $G $W $X $g) $p)
+        (@fapp0
+          (Hom_cat $A $W $X)
+          (Hom_cat $B
+            (@fapp0 $A $B $F $W)
+            (@fapp0 Terminal_cat $B $G Terminal_obj))
+          (@prof_terminal_expected_source_func $A $B $F $G $W $X $g) $p)
+        (@prof_terminal_retained_expected_source_fapp0_path
+          $A $B $F $G $W $X $g $normal $p));
+
+symbol prof_terminal_fibre_normalization_func
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (h : τ (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (normal : τ (@=
+      (Hom B
+        (@fapp0 Terminal_cat B G Terminal_obj)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_terminal_action B G)
+      (@id B (@fapp0 Terminal_cat B G Terminal_obj))))
+  (p : τ (Hom A W X))
+  : τ (Functor
+      (Fibre_cat
+        (@prof_terminal_native_action_catd A B F G W X g h) p)
+      (Fibre_cat
+        (@prof_terminal_expected_action_catd A B F G W X g h) p))
+≔ @Hom_func
+    (Hom_cat B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj))
+    (@fapp0
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_retained_source_func A B F G W X g) p)
+    (@fapp0
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_expected_source_func A B F G W X g) p)
+    h h
+    (@tapp0_fapp0
+      (Hom_cat A W X)
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_expected_source_func A B F G W X g)
+      (@prof_terminal_retained_source_func A B F G W X g)
+      p
+      (@prof_terminal_expected_retained_source_transf
+        A B F G W X g normal))
+    (@id
+      (Hom_cat B
+        (@fapp0 A B F W)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      h);
+
+// Whole coherent normalizer.  Only its fibre component is exposed below;
+// generic Functord action retains every higher cell.
+injective symbol prof_terminal_explicit_normalization_funcd
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (G : τ (Functor Terminal_cat B))
+  [W X : τ (Obj A)]
+  (g : τ (Hom B
+      (@fapp0 A B F X)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (h : τ (Hom B
+      (@fapp0 A B F W)
+      (@fapp0 Terminal_cat B G Terminal_obj)))
+  (normal : τ (@=
+      (Hom B
+        (@fapp0 Terminal_cat B G Terminal_obj)
+        (@fapp0 Terminal_cat B G Terminal_obj))
+      (@prof_terminal_terminal_action B G)
+      (@id B (@fapp0 Terminal_cat B G Terminal_obj))))
+  : τ (Functord
+      (@prof_terminal_native_action_catd A B F G W X g h)
+      (@prof_terminal_expected_action_catd A B F G W X g h));
+
+// Fibre-component beta for the explicit whole normalizer.
+// lhs-audit: keep 1,2 -- the exact opposite-hom base and Cat codomain are the
+// subject-reduction guards for this displayed component projection.
+rule @tapp0_fapp0
+      (Op_cat (Hom_cat $A $W $X))
+      Cat_cat
+      _
+      _
+      $p
+      (@prof_terminal_explicit_normalization_funcd
+        $A $B $F $G $W $X $g $h $normal)
+  ↪ @prof_terminal_fibre_normalization_func
+      $A $B $F $G $W $X $g $h $normal $p;

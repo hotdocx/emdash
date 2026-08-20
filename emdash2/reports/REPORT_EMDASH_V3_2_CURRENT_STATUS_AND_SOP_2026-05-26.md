@@ -667,6 +667,14 @@ detailed probe evidence.
   unconditional and one next action remains public. Dimensions three/four
   and a mapping-category equivalence remain separate work; no filler constant,
   rule, or unifier is added.
+- `emdash3_2_prof_reindex_terminal_normalization.lp`: generic whole
+  normalization of the terminal-right action in a reindexed unit profunctor.
+  An explicit path `G[id_*]=id` supports both the retained whole family path
+  and a directed source comparison whose component computes to the existing
+  rigid two-endpoint Hom action. The associated displayed normalizer has one
+  computational fibre projection and retains `functord_laxity_transf` and all
+  subsequent hom action. The two narrowly guarded projection rules add no
+  ordinal dimension, face-specific conversion, filler, or proof-time unifier.
 - `emdash3_2_semisimplicial_diagrams.lp`: standard Yoneda semisimplices,
   groupoid-valued semisimplicial diagrams, and their levelwise path-category
   realization. Whole postcomposition remains at the raw functor-category
