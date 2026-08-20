@@ -1069,3 +1069,75 @@ axiom, or a primitive `piapp*` head.  Once those two whole endpoint
 comparisons are constructed, their component composes with the green whole
 laxity and the canonical raw top, after which source packaging and
 arbitrary-`H` mapping are expected to be mechanical.
+
+The next focused refinement establishes the central comparison rather than
+merely naming it.  The visible and expected exchanges are both rigid Hom
+actions after their precomposition arrows are exposed.  In the probe:
+
+1. a generic rule-free theorem shows that composing two `path_to_hom` arrows
+   agrees propositionally with `path_to_hom(eq_trans(...))`;
+2. `eq_trans_inv_left` cancels the visible detour and `comp_assoc` joins the
+   two explicit bracketings;
+3. `Hom_tele_func` maps that pre-arrow comparison to a whole transformation
+   between the corresponding rigid Hom functors and retains another
+   `tapp1_func` action; and
+4. the existing proof-time degeneration
+   `hom_precomp_along_func == Hom_func(-,id)` is lifted once as typed equality
+   evidence.  After that lift, the sequential native/associator/visible
+   exchange compares to its single rigid `Hom_func` presentation; the only
+   remaining difference is categorical associativity, handled by the existing
+   `comp_assoc` witness.
+
+All four stages are green without a rule, unifier, primitive, or opaque cell.
+The last endpoint substep is consequently very small and explicit: use the
+exact source path already owned by
+`prof_terminal_expected_visible_fibre_func`, rather than the equivalent
+associator-mediated readable path, and compose its rigid Hom action with the
+green exchange transformation.  That should yield the required component
+from the postcomposed whole-laxity endpoint to the expected action endpoint.
+The mirror source-side component must then be assembled with
+`os3ff_native_to_stable`; no new mathematical constructor is indicated.
+
+That exact-owner continuation is now green in
+`tmp/probes/ordinal_simplex3_whole_laxity_endpoint_probe.lp`.  The probe
+derives, by `J`, the reusable path-algebra fact
+
+```text
+(p · q)⁻¹ · p = q⁻¹,
+```
+
+instantiates `p` with the exact source path owned by
+`prof_terminal_expected_visible_fibre_func`, and uses the existing
+`path_comp_eq_trans` comparison to recover the expected rigid precomposition
+arrow.  Replacing the represented-associator precomposition owner by its
+already-checked rigid `Hom_func` view then makes the composite of the visible
+exchange and the fibre reflag compare to one exact rigid Hom action.  Mapping
+the resulting pre-arrow path through `Hom_tele_func` gives a whole
+transformation to the expected action functor, and another `tapp1_func`
+remains available.
+
+Evaluation at the canonical top-source object is also green.  The source of
+that component is judgmentally the target of the postcomposed displayed
+laxity route.  On the target side, the same stable-associator-to-rigid-Hom
+comparison gives a whole path from `os3nna_exchange_func` to the expected
+rigid exchange; evaluating it supplies the final endpoint path to
+`os3nna_source`.  Consequently the directed composite
+
+```text
+os3vlf_exchanged_source
+  → os3dfs_mapped_laxity_target
+  → os3wlep_rhs_at_target
+  → os3nna_source
+```
+
+is checked, rule-free, and retains its whole owners.  No primitive, rewrite,
+unifier, terminal eta, Fubini comparison, or `piapp*` migration is involved.
+
+The target-side technicality is therefore closed.  One mirror source leg
+remains before packaging: construct a whole directed comparison from the
+canonical native/stable source, using `os3ff_native_to_stable`, into
+`os3vlf_exchanged_source`.  A focused negative confirms that the older capped
+`os3nsc_whiskered_compositor` cannot simply be re-ascribed to that endpoint;
+the source comparison must preserve the same whole-action history.  This is
+now the only non-routine endpoint item before the native tetrahedron,
+arbitrary-`H` map, faces, profiles, and documentation become assembly work.
