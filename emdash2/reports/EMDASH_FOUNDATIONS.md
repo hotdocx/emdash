@@ -3374,6 +3374,22 @@ between base arrows reduces to `fdapp1_int_hom_fapp0`; consequently the result
 remains inside the generic iterated-hom architecture rather than stopping at
 an ad hoc Pi-specific component.
 
+The object action of `Pi_func(K)` on a displayed functor is retained by the
+stable section owner
+
+```text
+section_postcomp_sec(FF,s) : Pi_cat(D),
+```
+
+for `FF : Functord(E,D)` and `s : Pi_cat(E)`.  Its component applies `FF[k]`
+to `s[k]`.  More importantly, its action over `p : x -> y` reduces through
+`fdapp1_int_hom_fapp0(FF,p,s[x],s[y],s[p])`.  Thus postcomposition includes
+the displayed laxity of `FF` and the image of the original section cell in one
+internal-action projection.  It is not a strict pointwise shortcut and does
+not reconstruct a naturality square by hand.  The stable head also prevents
+this section-specific computation from rewriting unrelated displayed
+composites.
+
 For the Sigma first projection, this stable head makes section uncurrying a
 direct proof-time comparison:
 

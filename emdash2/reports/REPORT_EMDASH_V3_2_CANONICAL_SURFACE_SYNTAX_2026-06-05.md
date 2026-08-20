@@ -364,6 +364,13 @@ internal-hom action.
 Do not read these names as additional primitive type formers merely because
 `Pi_cat` itself is a stable primitive category facade.
 
+For `FF : Functord(E,D)` and `s : Pi_cat(E)`, the canonical postcomposition
+surface is `section_postcomp_sec(FF,s)`.  It is the object action of
+`Pi_func(K)` on `FF`, not an independent section-map semantics.  Its point
+component is `FF[k](s[k])`; its base-arrow component is the existing
+`fdapp1_int_hom_fapp0` action applied to `s[p]`, so a lax `FF` retains its
+laxity cell rather than being silently treated as strict.
+
 Likewise, write displayed identity using the generic identity notation. The
 compatibility name `id_transfd(FF)` is a transparent view of
 `id_(Functord_cat(E,D))(FF)`, not a distinct constructor; no parallel

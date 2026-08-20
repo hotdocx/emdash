@@ -12913,6 +12913,15 @@ injective symbol Pi_func (K : Cat) : τ (Functor (Catd_cat K) Cat_cat);
 rule @fapp0 _ Cat_cat (@Pi_func $K) $E
   ↪ @Pi_cat $K $E;
 
+// Stable object action of Pi on a displayed functor.  A section s : 1 -> E
+// is postcomposed with FF : E -> D, while the named head retains the whole
+// section action rather than expanding to a generic displayed composite.
+injective symbol section_postcomp_sec
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (s : τ (Obj (Pi_cat E)))
+  : τ (Obj (Pi_cat D));
+
 // Stable displayed-identity bridge for Pi. Generic strict functoriality
 // catches `Pi_func(K)[id]`, while this development often keeps the displayed
 // identity visible as `id_funcd`; this rule is the same identity preservation
@@ -12925,6 +12934,23 @@ rule @fapp1_fapp0
       $E
       (@id_funcd $K $E)
   ↪ @id_func (@Pi_cat $K $E);
+
+// Map a section through a displayed functor by postcomposition.  This is the
+// object action of the existing Pi hom action, not a second map semantics.
+// lhs-audit: keep 1,2 -- both section categories are subject-reduction guards
+// for this exact Pi hom-action projection.
+rule @fapp0
+      (@Pi_cat $K $E)
+      (@Pi_cat $K $D)
+      (@fapp1_fapp0
+        (@Catd_cat $K) Cat_cat (@Pi_func $K) $E $D $FF)
+      $s
+  ↪ @section_postcomp_sec $K $E $D $FF $s;
+
+// Identity postcomposition joins the generic Pi identity route.
+rule @section_postcomp_sec
+      $K $E $E (@id (@Catd_cat $K) $E) $s
+  ↪ $s;
 
 // Internalized-x layer: global natural package for Pi over varying bases.
 //
@@ -15635,6 +15661,59 @@ rule @fdapp1_int_hom_fapp0
       $y
       $p
       Terminal_obj;
+
+// Component of a postcomposed section: apply FF in the selected fibre.
+// This late placement follows the Fibre_func and piapp0 declarations used by
+// the projection; the stable section owner itself remains with Pi_func.
+// lhs-audit: keep 1,2,3 -- the exact base, terminal source, and target family
+// guard this section-component projection.
+rule @tapp0_fapp0
+      $K Cat_cat
+      (@Const_catd $K Terminal_cat)
+      $D
+      $k
+      (@section_postcomp_sec $K $E $D $FF $s)
+  ↪ @Obj_func
+      (Fibre_cat $D $k)
+      (@fapp0
+        (Fibre_cat $E $k)
+        (Fibre_cat $D $k)
+        (@Fibre_func $K $E $D $FF $k)
+        (@piapp0 $K $E $s $k));
+
+// Constant-family presentation of the same component.  A section into a
+// constant family is also an ordinary functor, whose object application can
+// bypass the terminal-source tapp0 projection above.
+// lhs-audit: keep 1,2 -- the ordinary source and constant target category
+// guard this projection-order join.
+rule @fapp0
+      $K
+      $A
+      (@section_postcomp_sec
+        $K $E (@Const_catd $K $A) $FF $s)
+      $k
+  ↪ @fapp0
+      (Fibre_cat $E $k)
+      $A
+      (@Fibre_func $K $E (@Const_catd $K $A) $FF $k)
+      (@piapp0 $K $E $s $k);
+
+// The postcomposed section action is extracted through FF's existing whole
+// internal hom action.  This includes FF's laxity and the image of s[p]; no
+// strictness or independent composition square is assumed.
+// lhs-audit: keep 1,2,3 -- the base, terminal source, and target family guard
+// this exact section-action projection.
+rule @fdapp1_int_cell
+      $K
+      (@Const_catd $K Terminal_cat)
+      $D
+      (@section_postcomp_sec $K $E $D $FF $s)
+      $x $y $p Terminal_obj
+  ↪ @fdapp1_int_hom_fapp0
+      $K $E $D $FF $x $y $p
+      (@piapp0 $K $E $s $x)
+      (@piapp0 $K $E $s $y)
+      (@piapp1_fapp0 $K $E $s $x $y $p);
 
 // Componentwise internalized laxity cell of displayed product pairing.
 // This is the fdapp1_int_cell projection of the existing

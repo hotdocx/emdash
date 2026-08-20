@@ -324,7 +324,7 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `ODS3-00` | complete | Created the dedicated child branch/worktree from clean checkpoint `e157b37`; recorded the exact objective, nonclaims, validation policy, and Git boundary in this linked living plan; and indexed it for a clean launch checkpoint. |
 | `ODS3-BASE-1` | complete | Bootstrapped the worktree. Focused quiet checks of the ordinal filler, native dimension-three classifier, tetrahedron faces, and their three reviewers are green. Unchanged aggregate evidence is carried forward; no long aggregate was run. |
 | `ODS3-OWNER-2` | complete | Audited the fixed next-action facade against its distinct-endpoint owner, constructed the source join-cross section and all three new-vertex triangle actions uniformly, applied the recursive section action to the lifted 012 filler, and recovered the missing section-composition route from transparent section totalization plus the generic extracted `fapp1_compositor`. The resulting whole tetrahedral cell and both recursive Sigma projections typecheck without a primitive, rewrite, or unifier. Naive direct packaging is rejected because it confuses the join presentation, whose outer base cell is face 012, with the flagged `DependentSimplex3_cat` presentation, whose outer base cell is face 123. |
-| `ODS3-FACES-3` | in progress | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. The source audit constructs faces 013, 023, and 123 from one generic cross-action projection and retains face 012 as the existing canonical filler. The generic terminal-right module now also exposes a computational directed source component and whole displayed normalizer with retained laxity action. Separate green compositor and action projections establish the formal-alpha architecture: the forward section compositor supplies the sequential-013/123 factor and the 012 action supplies the following factor; their already-green whole composite uses all four faces without an inverse compositor. The compositor has now been conjugated to its readable endpoints, whiskered by face 013, and related to the native `homd_` source through a generic higher precomposition/product-composition bridge. Native action-target packaging and arbitrary-`H` face comparison remain. |
+| `ODS3-FACES-3` | in progress | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. The source audit constructs faces 013, 023, and 123 from one generic cross-action projection and retains face 012 as the existing canonical filler. The generic terminal-right module exposes a computational directed source component and whole displayed normalizer with retained laxity action. Separate green compositor and action projections establish the formal-alpha architecture: the forward section compositor supplies the sequential-013/123 factor and the 012 action supplies the following factor; their already-green whole composite uses all four faces without an inverse compositor. The compositor has been conjugated to readable endpoints, whiskered by face 013, and related to the native `homd_` source through the generic higher precomposition/product-composition bridge. A newly promoted generic `section_postcomp_sec` owner now makes `Pi_func` postcomposition computational: its point components are the normalized successor faces and its base-arrow action is the existing `fdapp1_int_hom_fapp0`, including displayed laxity. The focused normalized-face, whole-action, and owner-comparison probes are green. This resolves the former general LF projection gap; final flagged endpoint packaging and arbitrary-`H` face comparison remain. |
 | `ODS3-SOURCE-4` | pending | Construct the identity-`Delta[3]` native source tetrahedron, including its dependent top cell, from the retained recursive action. No primitive or opaque tetrahedron filler is permitted. |
 | `ODS3-MAP-5` | pending | Map the one source native tetrahedron under arbitrary `H` through `dependent_simplex3_map`; retain the whole map rather than only its top component. |
 | `ODS3-OBSERVE-6` | pending | Expose the unconditional `DependentSimplexObservation(C,3)` and readable projections agreeing with all four canonical dimension-two face observations. |
@@ -652,3 +652,53 @@ active-reference, report-header, catalog, and diff hygiene checks pass. The
 long repository-wide health refresh remains waived under the user's explicit
 aggregate policy; focused exact-content evidence is the proportional
 checkpoint gate.
+
+### 16.5 Computational Pi Postcomposition
+
+The action-target audit isolated one general LF interface rather than a
+simplex-specific missing cell.  Mapping a section through the explicit
+terminal normalizer was available as the hom action of `Pi_func`, but its
+object and base-arrow projections had no stable computational owner.  As a
+result, the normalized face components and the mapped 012 action were
+mathematically the same whole section while appearing through unrelated
+projection orders.
+
+The promoted `section_postcomp_sec(FF,s)` is the object action of `Pi_func` on
+`FF : Functord(E,D)`.  Its component computes to `FF[k](s[k])`, and its action
+over `p` computes through
+
+```text
+fdapp1_int_hom_fapp0(FF,p,s[x],s[y],s[p]).
+```
+
+The latter includes the outer displayed laxity and the image of the inner
+section cell in one existing internal-action projection.  It neither assumes
+strictness nor postulates a naturality square.  A first probe using a rule on
+all displayed composites was green but added 17 critical-pair diagnostics;
+it was rejected.  The stable section-specific owner is the narrower semantic
+boundary and leaves unrelated displayed composites untouched.
+
+Tracked generic assertions in `emdash3_2_checks.lp` cover the Pi object
+action, point component, and base-arrow component.  The core, tracked checks,
+and focused normalized-section/face/action probes are green.  The strict LHS
+audit reports zero unreviewed compound slots.  The warning inventory is now
+`1279` (`1120` unjoinable critical pairs and `159` replaceable variables), an
+eight-diagnostic increase localized to the intentionally overlapping Pi
+identity, constant-section, and higher-component projection routes.  A typed
+identity join and the concrete owner consumer are green.  Per repository SOP,
+the warnings are recorded diagnostic evidence rather than an automatic veto;
+no broad or face-specific join was added merely to suppress them.
+
+This closes the general LF/foundational prerequisite.  The remaining work is
+the dimension-three flagged packaging itself: project the now-coherent
+normalized section's forward compositor/action composite into the native
+`DependentSimplex3_cat` flag, then map that one source object under arbitrary
+`H` and expose its four face comparisons.
+
+This concrete consumer does **not** trigger the deferred redesign of
+`piapp0`, `piapp1_func`, or `piapp1_fapp0` into primitive heads.  Their current
+definitions successfully project through the stable `tapp0_fapp0` and
+`fdapp1_int_*` owners once `Pi_func`'s object action has the single stable
+`section_postcomp_sec` boundary.  Reconsider primitive Pi eliminators only if
+a later arbitrary-dimensional consumer cannot retain a required whole action
+or if independent projection bridges begin to proliferate again.

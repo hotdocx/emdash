@@ -12739,6 +12739,40 @@ assert [K : Cat] (G : τ (Functor K (Op_cat Cat_cat)))
 assert [K : Cat] (E : τ (Catd K)) ⊢
   fapp1_fapp0 (Pi_func K) id_funcd ≡ id_func;
 
+assert [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (s : τ (Obj (Pi_cat E))) ⊢
+  @fapp0
+    (Pi_cat E)
+    (Pi_cat D)
+    (@fapp1_fapp0
+      (@Catd_cat K) Cat_cat (@Pi_func K) E D FF)
+    s
+    ≡ @section_postcomp_sec K E D FF s;
+
+assert [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (s : τ (Obj (Pi_cat E)))
+  (k : τ (Obj K)) ⊢
+  @piapp0 K D (@section_postcomp_sec K E D FF s) k
+    ≡ @fapp0
+        (Fibre_cat E k)
+        (Fibre_cat D k)
+        (@Fibre_func K E D FF k)
+        (@piapp0 K E s k);
+
+assert [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (s : τ (Obj (Pi_cat E)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @piapp1_fapp0 K D (@section_postcomp_sec K E D FF s) x y p
+    ≡ @fdapp1_int_hom_fapp0
+        K E D FF x y p
+        (@piapp0 K E s x)
+        (@piapp0 K E s y)
+        (@piapp1_fapp0 K E s x y p);
+
 assert [K : Cat] (E : τ (Catd K)) ⊢
   @eq_refl Cat_grpd (@Transf_cat K Cat_cat (@Terminal_catd K) E)
   : τ (@= Cat_grpd
