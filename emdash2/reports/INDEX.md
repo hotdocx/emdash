@@ -15,6 +15,15 @@ hom action from the underlying whole map. Dimension four, a uniform all-`n`
 classifier/equivalence, degeneracies, and broad join or strictness migrations
 are explicitly excluded.
 
+Its first promoted prerequisite is
+`emdash3_2_prof_reindex_terminal_normalization.lp`.  For arbitrary
+`F : A -> B` and terminal branch `G : 1 -> B`, it compares the native
+`homd_`/`Prof_reindex` action restricted along `p |-> (p,id_*)` with the
+canonical family `p |-> Hom_B(g o F[p],h)`, under an explicit normality
+witness for `G`.  The comparison is one whole family path; its derived
+displayed map and `Pi_func` action transport complete sections and retain
+another hom action.  It contains no ordinal dimension or simplex filler.
+
 `REPORT_EMDASH_V3_2_JOIN_CROSS_DEPENDENT_SIMPLEX_PLAN_2026-08-19.md`
 is the completed child continuation of the dependent-hom simplex
 foundations plan. It targets the one remaining dimension-two adequacy datum:

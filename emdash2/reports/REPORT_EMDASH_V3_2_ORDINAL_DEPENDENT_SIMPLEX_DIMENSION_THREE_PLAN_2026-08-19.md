@@ -324,7 +324,7 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `ODS3-00` | complete | Created the dedicated child branch/worktree from clean checkpoint `e157b37`; recorded the exact objective, nonclaims, validation policy, and Git boundary in this linked living plan; and indexed it for a clean launch checkpoint. |
 | `ODS3-BASE-1` | complete | Bootstrapped the worktree. Focused quiet checks of the ordinal filler, native dimension-three classifier, tetrahedron faces, and their three reviewers are green. Unchanged aggregate evidence is carried forward; no long aggregate was run. |
 | `ODS3-OWNER-2` | complete | Audited the fixed next-action facade against its distinct-endpoint owner, constructed the source join-cross section and all three new-vertex triangle actions uniformly, applied the recursive section action to the lifted 012 filler, and recovered the missing section-composition route from transparent section totalization plus the generic extracted `fapp1_compositor`. The resulting whole tetrahedral cell and both recursive Sigma projections typecheck without a primitive, rewrite, or unifier. Naive direct packaging is rejected because it confuses the join presentation, whose outer base cell is face 012, with the flagged `DependentSimplex3_cat` presentation, whose outer base cell is face 123. |
-| `ODS3-FACES-3` | in progress | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. The source audit already constructs faces 013, 023, and 123 from one generic cross-action projection and retains face 012 as the existing canonical filler; promotion and arbitrary-`H` comparison remain. |
+| `ODS3-FACES-3` | in progress | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. The source audit constructs faces 013, 023, and 123 from one generic cross-action projection and retains face 012 as the existing canonical filler. The generic whole terminal-right normalization is now promoted in `emdash3_2_prof_reindex_terminal_normalization.lp`; native-source packaging and arbitrary-`H` face comparison remain. |
 | `ODS3-SOURCE-4` | pending | Construct the identity-`Delta[3]` native source tetrahedron, including its dependent top cell, from the retained recursive action. No primitive or opaque tetrahedron filler is permitted. |
 | `ODS3-MAP-5` | pending | Map the one source native tetrahedron under arbitrary `H` through `dependent_simplex3_map`; retain the whole map rather than only its top component. |
 | `ODS3-OBSERVE-6` | pending | Expose the unconditional `DependentSimplexObservation(C,3)` and readable projections agreeing with all four canonical dimension-two face observations. |
@@ -528,3 +528,82 @@ does not select, for arbitrary `n`, the ordinal flag object carried by
 `H : Functor(Delta[n],C)`.  The present dimension-three construction is the
 first nontrivial term-level instance of that still-missing uniform ordinal
 realization, rather than a duplicate classifier decoder.
+
+### 16.4 Generic Terminal-Right Normalization
+
+The next focused probes separate three issues which had previously appeared
+as one large endpoint mismatch.
+
+First, a terminal-source specialization of the historical global strict
+functor identity rule does normalize the concrete arrow
+`G[Terminal_obj]` to an identity.  It does not identify the whole retained
+action, because the latter remains under the generic ladder
+
+```text
+Prof_reindex_fapp1_func
+  -> evaluation at the retained cross object
+  -> product-pair embedding p |-> (p,id_*).
+```
+
+The temporary runtime rule was therefore removed rather than promoted.  A
+direct primitive presentation of `Delta[n]` would have the same whole-action
+obligation and would duplicate the reusable join cross; it is not a repair
+for this boundary.
+
+Second, the rule-free focused probe
+
+```text
+tmp/probes/prof_reindex_terminal_native_normalization.lp
+```
+
+establishes the smallest dimension-independent interface.  For arbitrary
+`F : A -> B`, `G : 1 -> B`, endpoints `W,X : A`, and retained arrows
+`g,h`, it names:
+
+```text
+native action:
+  pull back homd_(id, (X,g), (W,h)) along p |-> (p,id_*)
+
+expected action:
+  p |-> Hom_B(g o F[p], h).
+```
+
+One supplied normality witness `G[id_*] = id` supports one propositional path
+between those **whole Cat-valued families**.  Equality-to-arrow conversion,
+generic `Pi_func`, and ordinary hom action then derive a displayed map, a
+whole section-normalization functor, and another iterable hom action.  The
+normality argument is intentional: today's global strict prototype supplies
+it via `fapp1_id_path`, while a later lax migration can require it from the
+selected strict profile instead of silently assuming it for every functor.
+
+Third, the ordinal specialization is now green in
+
+```text
+tmp/probes/join_cross_whole_action_compare.lp.
+```
+
+The existing restricted recursive second section is definitionally the
+generic native family.  Applying the generic whole section normalizer and
+then its `piapp1_fapp0` action to
+`ordinal_simplex2_source_canonical_filler` constructs a genuine next higher
+cell in the canonical precomposition family.  No pointwise tetrahedron
+constant, face-specific rule, proof-time unifier, terminal eta, or direct
+ordinal category is used.
+
+The promoted boundary is
+`emdash3_2_prof_reindex_terminal_normalization.lp`, with focused reviewer
+`examples/prof_reindex_terminal_normalization.lp`.  It is generic in `A` and
+therefore reusable at every successor presentation
+`Delta[n+1] = Join_cat(Delta[n],Terminal_cat)`.  It does not by itself assert
+the all-`n` ordinal/dependent equivalence: the immediate remaining task is to
+project and package its dimension-three cell in the existing flagged
+`DependentSimplex3_cat` presentation, then verify the four selected faces.
+
+Focused quiet source and reviewer checks pass.  Warning-enabled checks are
+also green: the source inherits the existing `1271` diagnostics and the
+reviewer has `1272`, the single addition being its intentional rejected
+wrong-normality assertion.  Source-TOC, active-reference, and report-header
+lint pass.  A source-health refresh was started because the plan listed it as
+a checkpoint gate, but was interrupted once it revealed itself as a long
+repository-wide typecheck; every completed target was green, no health report
+was rewritten, and the focused evidence above remains the proportional gate.
