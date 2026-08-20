@@ -754,3 +754,40 @@ project those comparisons from the same whole visible section action and then
 pair its face-123 base component with its dependent top through the existing
 `dependent_tetrahedron` constructor. No direct `eq_refl`, face-specific rule,
 whole-source equality, or primitive Pi eliminator is justified.
+
+### 16.7 Whole Four-Face Total And Normalized Source Factor
+
+Two subsequent ignored probes narrow that last packaging step further. In
+`tmp/probes/ordinal_simplex3_visible_total.lp`, the already-composed
+section-compositor-plus-012 action maps through the whole visible reflag as one
+arrow of `Op(Sigma(base,visibleAction))`. Both outer base projections compute
+to the expected composite and direct ordinal edges; the dependent top and its
+exchange through the represented associator typecheck as whole actions. This
+uses all four faces in one term rather than attempting to compose capped
+pointwise coercions.
+
+The companion
+`tmp/probes/ordinal_simplex3_normalized_source_comparison.lp` rebuilds the
+forward source compositor exclusively from the normalized
+constructor-visible faces. Generic compositor endpoint paths, represented
+fibre-covariance/precomposition comparison, and postcomposition whiskering
+derive a directed cell from the sequential 013/123 pasting to the native
+face-123 transport source. The probe is green and introduces no rule,
+unifier, or old/new-face equality.
+
+The negative endpoint tests are informative: the exchanged whole-total
+endpoint is not definitionally equal to that normalized stable source, just as
+the 012/023 endpoint is not definitionally equal to the corresponding Sigma
+projection. These are the two directed factors carried by the whole reflag
+and its displayed laxity, not missing object equalities. The remaining
+consumer step is therefore to project the forward 012/023 factor from that
+whole laxity and compose it with the green normalized source comparison,
+yielding the native top without inverting either factor.
+
+This architecture remains dimension-independent up to the final flag: the
+Pi postcomposition owner, terminal normalization, visible reflag, compositor,
+and retained next actions contain no dimension-three data. The checked
+dimension-three packaging is still required before claiming a uniform
+variable-`n` ordinal-adequacy theorem; a later recursive owner over the
+existing intrinsic dependent-simplex codes must package the same iterable
+pattern at arbitrary dimension.
