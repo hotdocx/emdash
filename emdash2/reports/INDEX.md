@@ -3,7 +3,7 @@
 Date: 2026-08-21
 
 `REPORT_EMDASH_V3_2_ORDINAL_DEPENDENT_SIMPLEX_DIMENSION_FOUR_AND_RECURSIVE_SOURCE_PLAN_2026-08-21.md`
-is the active child of the completed ordinal dimension-three plan. It first
+is the completed child of the ordinal dimension-three plan. It first
 constructs one native ordinal four-simplex, maps that source under arbitrary
 `H : Functor(Delta[4],C)`, exposes all five tetrahedral faces plus the
 recursive top component, and retains another action. It then uses the checked

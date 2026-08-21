@@ -4,7 +4,7 @@ Date: 2026-08-21 (America/Toronto)
 
 Plan-ID: `ORDINAL-DEPENDENT-SIMPLEX-DIMENSION-FOUR-RECURSIVE-SOURCE-V3.2`
 
-Status: **active implementation plan**. This child plan first constructs the
+Status: **completed implementation plan**. This child plan first constructs the
 ordinal dimension-four dependent simplex from the completed dimension-three
 whole action. It then extracts and implements the smallest genuinely internal
 Nat-indexed source package and successor operation justified by the checked
@@ -408,7 +408,7 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `ODS4R-REC-IMPLEMENT-9` | complete | `emdash3_2_dependent_simplex_ordinal_recursive.lp` implements the indexed stage fold, zero/nonzero source successor, `nat_elim` canonical source, arbitrary-`H` observation through the existing mapped decoder, generic nonempty-face access, canonical successor cell, and retained whole action. The successor is exactly `code' = step(d,F[s])`, `source' = (G[s],epsilon[s])`. |
 | `ODS4R-REC-COMPUTE-10` | complete | The reviewer checks stage computation at one, two, and three stored flags; zero and generic successor beta; selected source-object computations through dimensions zero to four; variable-dimensional observation and face access; a wrong face-index negative; successor-cell noncollapse; and a retained generic next action. |
 | `ODS4R-DOC-11` | complete | Registered the generic successor, fixed dimension four, and recursive sources in both source registries; added focused reviewers; synchronized AGENTS, emdash2 README, Foundations, syntax/status, report index, and this ledger; refreshed the assertion catalog and source TOC; and refreshed/verified the no-check source-health snapshot. |
-| `ODS4R-CLOSE-12` | in progress | Review exact evidence and diffs, create clean implementation and closeout checkpoints, and state the achieved variable-dimensional boundary. No long aggregate or unauthorized integration/publication/cleanup. |
+| `ODS4R-CLOSE-12` | complete | Reviewed exact evidence and diffs; checkpointed the generic transformation lift at `5a6be0e`, fixed dimension four at `67296e9`, and the Nat-indexed recursive implementation plus synchronized authorities at `226097a`; refreshed the source-health snapshot; and prepared this clean closeout checkpoint. No long aggregate or unauthorized integration/publication/cleanup was performed. |
 
 ## 16. Completion Definition
 
@@ -680,3 +680,27 @@ internal canonical source at variable dimension. It still does not claim a
 whole mapping-category equivalence, degeneracies, an all-dimensional Kan or
 Segal theorem, or judgmental equality between every historical finite source
 and the new uniform presentation.
+
+## 22. Closeout — 2026-08-21
+
+All ledger rows are complete. The fixed and variable-dimensional objectives
+both satisfy the completion definition: a canonical native ordinal
+four-simplex is checked with five faces, profiles, negatives, top component,
+and retained action; and a genuine internal Nat-indexed source, successor,
+arbitrary-target observation, generic face access, selected zero-through-four
+computations, noncollapse, and retained action are checked.
+
+The implementation checkpoints are:
+
+```text
+5a6be0e  generic whole PathOut transformation lift
+67296e9  generic identity-join successor and ordinal four-simplex
+226097a  Nat-indexed ordinal source recursion and synchronized authorities.
+```
+
+The branch remains local. No push, merge, publication, deployment, branch or
+worktree removal, history rewrite, or unrelated mutation is included. Future
+work may compare the uniform sources with historical finite presentations at
+the whole mapping-category level, add degeneracies or Kan/Segal structure, or
+develop broader nested-PathOut groupoidal closure; none is a missing item of
+this completed bounded goal.
