@@ -333,7 +333,10 @@ the variable-dimensional whole nonempty-face extension is
 `emdash3_2_dependent_simplex_faces.lp`; existing skip/keep codes recurse by
 fixed-flag constant action, target projection, and outgoing-path mapping, all
 visible triangle faces compute, and another hom action remains iterable while
-opaque whole-composition equality stays unforced;
+opaque whole-composition equality stays unforced; the same module packages
+the `02` and `12` face actions as the two whole line fibrations of the native
+triangle category, so their paired hom action exposes tetrahedron faces `023`
+and `123` while ordinary source/target expose `012` and `013`;
 the relative low-dimensional ordinal/dependent comparison is
 `emdash3_2_dependent_simplex_ordinal_adequacy.lp`; dimension zero is whole,
 dimension one observes the walking-arrow edge, and core join point betas make
@@ -1132,8 +1135,11 @@ Use the following order:
     intrinsic codes. Raw skip/keep recursion selects fixed-flag constant,
     target-projection, or `pathout_map_func` action. Existing `FaceCode` owns
     the indices and visible composition; all triangle faces compute and a
-    next hom action is retained. It adds no face syntax, whole-composition
-    rewrite, functor extensionality, or unifier;
+    next hom action is retained. Its paired target-line/base-line functor is
+    the doubly-fibred boundary of the triangle classifier: source/target give
+    `012`/`013`, while its two hom projections give `023`/`123`. It adds no
+    face syntax, whole-composition rewrite, functor extensionality, or
+    unifier;
 114. `emdash3_2_dependent_simplex_ordinal_adequacy.lp` for the strongest
     relative ordinal comparison. Dimension zero is a whole retraction;
     dimension one observes source/target/generator; and join point betas make

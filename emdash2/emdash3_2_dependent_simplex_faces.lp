@@ -189,3 +189,106 @@ symbol dependent_simplex_face_func
       (@dependent_simplex_code_decode_cat
         C p (@dependent_simplex_face_target C p n c alpha)))
 ≔ sigma_Snd (@dependent_simplex_face C p n c alpha);
+
+// -------------------------------------------------------------------------------------------------
+// Doubly-fibred boundary of the native triangle classifier
+// -------------------------------------------------------------------------------------------------
+/*
+  Objects of S2(C;x0,e01) are triangles 01i.  They retain two whole line
+  projections: the 0i target line and the 1i base line.  An arrow between two
+  such objects is a tetrahedral volume; the hom actions of these projections
+  expose its 023 and 123 faces, while its ordinary source and target are 012
+  and 013.  Thus all four faces are obtained from the existing variable-
+  dimensional FaceCode action, not from an external tetrahedron record.
+
+  The base-line target remains expressed through its intrinsic decoded code.
+  For a constructor-visible flag e01=(x1,p01), that decoded category computes
+  to S1(C;x1).  Keeping the code owner here avoids a global PathOut/Sigma eta
+  or an endpoint-specific rewrite.
+*/
+
+symbol dependent_simplex2_target_line_code
+  [C : Cat]
+  (x0 : τ (Obj C))
+  (e01 : τ (Obj (@DependentSimplex1_cat C x0)))
+  : τ (@DependentSimplexCode C (succ zero))
+≔ @dependent_simplex_face_target
+    C (succ zero) (succ (succ zero))
+    (@dependent_simplex_code2 C x0 e01)
+    simplex_edge_zero_two_code;
+
+symbol dependent_simplex2_base_line_code
+  [C : Cat]
+  (x0 : τ (Obj C))
+  (e01 : τ (Obj (@DependentSimplex1_cat C x0)))
+  : τ (@DependentSimplexCode C (succ zero))
+≔ @dependent_simplex_face_target
+    C (succ zero) (succ (succ zero))
+    (@dependent_simplex_code2 C x0 e01)
+    simplex_edge_one_two_code;
+
+symbol dependent_simplex2_target_line_cat
+  [C : Cat]
+  (x0 : τ (Obj C))
+  (e01 : τ (Obj (@DependentSimplex1_cat C x0)))
+  : Cat
+≔ @dependent_simplex_code_decode_cat
+    C (succ zero)
+    (@dependent_simplex2_target_line_code C x0 e01);
+
+symbol dependent_simplex2_base_line_cat
+  [C : Cat]
+  (x0 : τ (Obj C))
+  (e01 : τ (Obj (@DependentSimplex1_cat C x0)))
+  : Cat
+≔ @dependent_simplex_code_decode_cat
+    C (succ zero)
+    (@dependent_simplex2_base_line_code C x0 e01);
+
+symbol dependent_simplex2_target_line_func
+  [C : Cat]
+  (x0 : τ (Obj C))
+  (e01 : τ (Obj (@DependentSimplex1_cat C x0)))
+  : τ (Functor
+      (@DependentSimplex2_cat C x0 e01)
+      (@dependent_simplex2_target_line_cat C x0 e01))
+≔ @dependent_simplex_face_func
+    C (succ zero) (succ (succ zero))
+    (@dependent_simplex_code2 C x0 e01)
+    simplex_edge_zero_two_code;
+
+symbol dependent_simplex2_base_line_func
+  [C : Cat]
+  (x0 : τ (Obj C))
+  (e01 : τ (Obj (@DependentSimplex1_cat C x0)))
+  : τ (Functor
+      (@DependentSimplex2_cat C x0 e01)
+      (@dependent_simplex2_base_line_cat C x0 e01))
+≔ @dependent_simplex_face_func
+    C (succ zero) (succ (succ zero))
+    (@dependent_simplex_code2 C x0 e01)
+    simplex_edge_one_two_code;
+
+// One whole owner for both non-globular faces. Product projections recover
+// the two line fibrations, and its hom action returns their paired surfaces.
+symbol dependent_simplex2_boundary_line_func
+  [C : Cat]
+  (x0 : τ (Obj C))
+  (e01 : τ (Obj (@DependentSimplex1_cat C x0)))
+  : τ (Functor
+      (@DependentSimplex2_cat C x0 e01)
+      (Product_cat
+        (@dependent_simplex2_target_line_cat C x0 e01)
+        (@dependent_simplex2_base_line_cat C x0 e01)))
+≔ @Struct_sigma
+    (Obj (Functor_cat
+      (@DependentSimplex2_cat C x0 e01)
+      (@dependent_simplex2_target_line_cat C x0 e01)))
+    (λ _ : τ (Obj (Functor_cat
+        (@DependentSimplex2_cat C x0 e01)
+        (@dependent_simplex2_target_line_cat C x0 e01))),
+      Obj (Functor_cat
+        (@DependentSimplex2_cat C x0 e01)
+        (@dependent_simplex2_base_line_cat C x0 e01)))
+    (@dependent_simplex2_target_line_func C x0 e01)
+    (@dependent_simplex2_base_line_func C x0 e01);

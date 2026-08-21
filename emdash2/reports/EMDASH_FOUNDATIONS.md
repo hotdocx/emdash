@@ -3799,6 +3799,42 @@ projections recover them computationally, so a volume is mapped as one whole
 object to the pair consisting of its base surface and fourth surface; the two
 parts are not independently reconstructed capped terms.
 
+For the canonical four-face observation, apply the same principle one level
+higher, to the whole category of triangles
+
+```text
+S2(C;x0,e01) = DependentSimplex2_cat(C,x0,e01).
+```
+
+Its objects are surfaces `01i`. The existing `02` and `12` instances of
+`dependent_simplex_face_func` are whole projection functors to the two line
+categories. They are exposed together as
+
+```text
+dependent_simplex2_boundary_line_func
+  : S2(C;x0,e01)
+      -> S1(C;x0) x S1(C;x1),
+```
+
+where the second target is retained by its intrinsic decoded face code and
+computes to `S1(C;x1)` for a visible `e01=(x1,p01)`. Therefore an arrow
+`theta : surface012 -> surface013` has four surface readings:
+
+```text
+source(theta) = surface012,
+target(theta) = surface013,
+target_line[theta] = face023,
+base_line[theta] = face123.
+```
+
+This is the doubly-fibred tetrahedron boundary in its public native
+orientation. It is still the variable-dimensional face-code action, not a
+new tetrahedron record or a dimension-three-only recursion. Under the current
+lax prototype, a separately reconstructed visible face may retain an
+identity-action `fdapp1_int_hom_fapp0` comparison instead of becoming
+judgmentally identical; that retained cell is profile evidence and is not
+collapsed by a local face rule.
+
 For `FF : Functord(E,D)`, the whole map of triangle classifiers is the
 existing first hom action of `Sigma(FF)`; its displayed part is
 `fdapp1_int_presheaf_arrow(FF)`. Taking the next hom action between two

@@ -112,6 +112,181 @@ type λ C : Cat,
         simplex_edge_zero_two_code)
       t0 t1;
 
+// The native triangle classifier is doubly fibred.  Its two existing face
+// actions are packaged as one whole boundary-line functor; on an arrow
+// (tetrahedral volume), product projection recovers faces 023 and 123.
+symbol dependent_simplex2_target_line_cat_visible_path_test
+  [C : Cat]
+  (x0 x1 : τ (Obj C))
+  (p01 : τ (Hom C x0 x1))
+  : τ (@=
+      (Obj Cat_cat)
+      (@dependent_simplex2_target_line_cat
+        C x0 (@dependent_simplex1 C x0 x1 p01))
+      (@DependentSimplex1_cat C x0))
+≔ @eq_refl
+    (Obj Cat_cat)
+    (@dependent_simplex2_target_line_cat
+      C x0 (@dependent_simplex1 C x0 x1 p01));
+
+symbol dependent_simplex2_base_line_cat_visible_path_test
+  [C : Cat]
+  (x0 x1 : τ (Obj C))
+  (p01 : τ (Hom C x0 x1))
+  : τ (@=
+      (Obj Cat_cat)
+      (@dependent_simplex2_base_line_cat
+        C x0 (@dependent_simplex1 C x0 x1 p01))
+      (@DependentSimplex1_cat C x1))
+≔ @eq_refl
+    (Obj Cat_cat)
+    (@dependent_simplex2_base_line_cat
+      C x0 (@dependent_simplex1 C x0 x1 p01));
+
+symbol dependent_simplex2_boundary_object_path_test
+  [C : Cat]
+  (x0 : τ (Obj C))
+  (e01 : τ (Obj (@DependentSimplex1_cat C x0)))
+  (t : τ (Obj (@DependentSimplex2_cat C x0 e01)))
+  : τ (@=
+      (Obj (Product_cat
+        (@dependent_simplex2_target_line_cat C x0 e01)
+        (@dependent_simplex2_base_line_cat C x0 e01)))
+      (@fapp0
+        (@DependentSimplex2_cat C x0 e01)
+        (Product_cat
+          (@dependent_simplex2_target_line_cat C x0 e01)
+          (@dependent_simplex2_base_line_cat C x0 e01))
+        (@dependent_simplex2_boundary_line_func C x0 e01)
+        t)
+      (@Struct_sigma
+        (Obj (@dependent_simplex2_target_line_cat C x0 e01))
+        (λ _ : τ (Obj (@dependent_simplex2_target_line_cat C x0 e01)),
+          Obj (@dependent_simplex2_base_line_cat C x0 e01))
+        (@fapp0
+          (@DependentSimplex2_cat C x0 e01)
+          (@dependent_simplex2_target_line_cat C x0 e01)
+          (@dependent_simplex2_target_line_func C x0 e01)
+          t)
+        (@fapp0
+          (@DependentSimplex2_cat C x0 e01)
+          (@dependent_simplex2_base_line_cat C x0 e01)
+          (@dependent_simplex2_base_line_func C x0 e01)
+          t)))
+≔ @eq_refl
+    (Obj (Product_cat
+      (@dependent_simplex2_target_line_cat C x0 e01)
+      (@dependent_simplex2_base_line_cat C x0 e01)))
+    (@fapp0
+      (@DependentSimplex2_cat C x0 e01)
+      (Product_cat
+        (@dependent_simplex2_target_line_cat C x0 e01)
+        (@dependent_simplex2_base_line_cat C x0 e01))
+      (@dependent_simplex2_boundary_line_func C x0 e01)
+      t);
+
+symbol dependent_simplex2_boundary_target_action_path_test
+  [C : Cat]
+  (x0 : τ (Obj C))
+  (e01 : τ (Obj (@DependentSimplex1_cat C x0)))
+  (t0 t1 : τ (Obj (@DependentSimplex2_cat C x0 e01)))
+  (theta : τ (Hom (@DependentSimplex2_cat C x0 e01) t0 t1))
+  : τ (@=
+      (Hom
+        (@dependent_simplex2_target_line_cat C x0 e01)
+        (@fapp0
+          (@DependentSimplex2_cat C x0 e01)
+          (@dependent_simplex2_target_line_cat C x0 e01)
+          (@dependent_simplex2_target_line_func C x0 e01) t0)
+        (@fapp0
+          (@DependentSimplex2_cat C x0 e01)
+          (@dependent_simplex2_target_line_cat C x0 e01)
+          (@dependent_simplex2_target_line_func C x0 e01) t1))
+      (sigma_Fst (@fapp1_fapp0
+        (@DependentSimplex2_cat C x0 e01)
+        (Product_cat
+          (@dependent_simplex2_target_line_cat C x0 e01)
+          (@dependent_simplex2_base_line_cat C x0 e01))
+        (@dependent_simplex2_boundary_line_func C x0 e01)
+        t0 t1 theta))
+      (@fapp1_fapp0
+        (@DependentSimplex2_cat C x0 e01)
+        (@dependent_simplex2_target_line_cat C x0 e01)
+        (@dependent_simplex2_target_line_func C x0 e01)
+        t0 t1 theta))
+≔ @eq_refl
+    (Hom
+      (@dependent_simplex2_target_line_cat C x0 e01)
+      (@fapp0
+        (@DependentSimplex2_cat C x0 e01)
+        (@dependent_simplex2_target_line_cat C x0 e01)
+        (@dependent_simplex2_target_line_func C x0 e01) t0)
+      (@fapp0
+        (@DependentSimplex2_cat C x0 e01)
+        (@dependent_simplex2_target_line_cat C x0 e01)
+        (@dependent_simplex2_target_line_func C x0 e01) t1))
+    (sigma_Fst (@fapp1_fapp0
+      (@DependentSimplex2_cat C x0 e01)
+      (Product_cat
+        (@dependent_simplex2_target_line_cat C x0 e01)
+        (@dependent_simplex2_base_line_cat C x0 e01))
+      (@dependent_simplex2_boundary_line_func C x0 e01)
+      t0 t1 theta));
+
+symbol dependent_simplex2_boundary_base_action_path_test
+  [C : Cat]
+  (x0 : τ (Obj C))
+  (e01 : τ (Obj (@DependentSimplex1_cat C x0)))
+  (t0 t1 : τ (Obj (@DependentSimplex2_cat C x0 e01)))
+  (theta : τ (Hom (@DependentSimplex2_cat C x0 e01) t0 t1))
+  : τ (@=
+      (Hom
+        (@dependent_simplex2_base_line_cat C x0 e01)
+        (@fapp0
+          (@DependentSimplex2_cat C x0 e01)
+          (@dependent_simplex2_base_line_cat C x0 e01)
+          (@dependent_simplex2_base_line_func C x0 e01) t0)
+        (@fapp0
+          (@DependentSimplex2_cat C x0 e01)
+          (@dependent_simplex2_base_line_cat C x0 e01)
+          (@dependent_simplex2_base_line_func C x0 e01) t1))
+      (sigma_Snd (@fapp1_fapp0
+        (@DependentSimplex2_cat C x0 e01)
+        (Product_cat
+          (@dependent_simplex2_target_line_cat C x0 e01)
+          (@dependent_simplex2_base_line_cat C x0 e01))
+        (@dependent_simplex2_boundary_line_func C x0 e01)
+        t0 t1 theta))
+      (@fapp1_fapp0
+        (@DependentSimplex2_cat C x0 e01)
+        (@dependent_simplex2_base_line_cat C x0 e01)
+        (@dependent_simplex2_base_line_func C x0 e01)
+        t0 t1 theta))
+≔ @eq_refl
+    (Hom
+      (@dependent_simplex2_base_line_cat C x0 e01)
+      (@fapp0
+        (@DependentSimplex2_cat C x0 e01)
+        (@dependent_simplex2_base_line_cat C x0 e01)
+        (@dependent_simplex2_base_line_func C x0 e01) t0)
+      (@fapp0
+        (@DependentSimplex2_cat C x0 e01)
+        (@dependent_simplex2_base_line_cat C x0 e01)
+        (@dependent_simplex2_base_line_func C x0 e01) t1))
+    (sigma_Snd (@fapp1_fapp0
+      (@DependentSimplex2_cat C x0 e01)
+      (Product_cat
+        (@dependent_simplex2_target_line_cat C x0 e01)
+        (@dependent_simplex2_base_line_cat C x0 e01))
+      (@dependent_simplex2_boundary_line_func C x0 e01)
+      t0 t1 theta));
+
+type @dependent_simplex2_boundary_object_path_test;
+type @dependent_simplex2_boundary_target_action_path_test;
+type @dependent_simplex2_boundary_base_action_path_test;
+type @dependent_simplex2_target_line_cat_visible_path_test;
+type @dependent_simplex2_base_line_cat_visible_path_test;
+
 // Public FaceCode composition owns the selected vertex-of-edge composite.
 assert [C : Cat]
   (x0 : τ (Obj C))

@@ -642,8 +642,11 @@ detailed probe evidence.
   recursive target face with `Sigma_proj1_func`; `keep(keep ...)` reuses
   `pathout_map_func`. All three visible triangle edges compute, another hom
   action remains iterable, and selected public composition agrees on target
-  codes and visible observations. It adds no duplicate face syntax, broad
-  functor-extensionality, whole-composition rewrite, or proof-time unifier.
+  codes and visible observations. Its whole target-line/base-line pair makes
+  the native triangle category explicitly doubly fibred: ordinary endpoints
+  are tetrahedron faces `012` and `013`, while the paired hom action exposes
+  `023` and `123`. It adds no duplicate face syntax, broad functor-
+  extensionality, whole-composition rewrite, or proof-time unifier.
 - `emdash3_2_dependent_simplex_ordinal_adequacy.lp`: relative
   ordinal/dependent comparison at the strongest current boundary. Dimension
   zero is a whole pointwise retraction; dimension one observes the walking
