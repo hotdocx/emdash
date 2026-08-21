@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-18
+Last consolidated: 2026-08-21
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -678,9 +678,22 @@ detailed probe evidence.
   conjugated to the selected 02/12 edges, packaged as the existing native
   two-simplex, mapped by `dependent_simplex2_map(H)`, and projected to obtain
   `ordinal_dependent_simplex2_canonical_filler(H)`. The observation is
-  unconditional and one next action remains public. Dimensions three/four
-  and a mapping-category equivalence remain separate work; no filler constant,
+  unconditional and one next action remains public. Dimension four and a
+  mapping-category equivalence remain separate work; no filler constant,
   rule, or unifier is added.
+- `emdash3_2_dependent_simplex_ordinal_dimension3.lp`: constructive ordinal
+  adequacy in dimension three. A shaped fixed-source `PathOut` map turns the
+  whole join-cross comparison into two successive outgoing-path actions; the
+  generic post/left laxity cell supplies their dependent top, which is paired
+  with its native face-023 base to form one actual
+  `DependentSimplex3_cat` source object. `dependent_simplex3_map(H)` maps that
+  one source under arbitrary `H : Functor(Delta[3],C)`. Public projections
+  expose faces 012, 013, 023, and 123, the top component, and another whole
+  hom action. Wrong-endpoint and noncollapse reviewers are active. A Path
+  target accepts the same recursive object; direct `eq_sym` remains available
+  at the existing generic visible-Path-fibre profile rather than through a new
+  nested-`PathOut` normalization. No opaque filler, runtime rule, or unifier is
+  added.
 - `emdash3_2_prof_reindex_terminal_normalization.lp`: generic whole
   normalization of the terminal-right action in a reindexed unit profunctor.
   An explicit path `G[id_*]=id` supports both the retained whole family path

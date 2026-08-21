@@ -4101,7 +4101,8 @@ and another hom action remain available. A strict target uses the same
 construction with only already-justified compositor reductions; a Path target
 makes the resulting filler an equality with an `eq_sym` inverse. This remains
 a computational relative adequacy result rather than a global equivalence of
-mapping categories; dimensions three and four are separate continuations.
+mapping categories; dimension three is the constructed continuation below,
+while dimension four remains a separate ordinal-adequacy problem.
 
 At the first dimension-three successor, the recursive join section initially
 lives over the product base `Delta[2]^op x 1`. Restricting its dependent hom
@@ -4151,10 +4152,39 @@ There are two successive cells at this stage. The section compositor points
 from the sequential 013/123 pasting to the stable action on their composite;
 the action of the already-constructed 012 filler then points from that stable
 middle boundary to the 012/023 boundary. Their forward composite is the
-candidate flagged top cell and uses all four faces. The compositor is never
+flagged top cell and uses all four faces. The compositor is never
 inverted: its dependent fibre projection supplies the first part of the
 tetrahedral alpha, while the action-only projection remains the useful middle
 factor and orientation diagnostic.
+
+The dimension-three continuation realizes this description as one native
+object. The shaped `PathOut` comparison provides the source and target
+triangles; the whole post/left laxity action provides the higher cell between
+them. After a typed, first-class reframe of its represented source, that cell
+is paired with its face-023 base by the existing Sigma constructor. Hence
+
+```text
+ordinal_dependent_simplex3_source
+  : Obj(DependentSimplex3_cat(Delta[3],x0,e01,t012)).
+```
+
+For every `H : Functor(Delta[3],C)`, the existing
+`dependent_simplex3_map(H)` maps this single source object. The resulting
+unconditional observation exposes faces 012 and 013 as ordinary endpoints,
+faces 023 and 123 through the two whole boundary-line actions, and the final
+dependent component through the native second Sigma projection. The original
+whole post-laxity transformation retains another hom action for a later
+dimension-four ordinal continuation. None of these faces or the top component
+is postulated independently.
+
+When `C = Path_cat(A)`, the same recursive object and all its projections are
+well typed without additional data. Its final component deliberately remains
+under the nested `homd_`/`PathOut` presentation. The already-checked generic
+recursive profile identifies such a component with an equality, and supplies
+its inverse by `eq_sym`, when the target fibre is visibly a Path category. A
+direct normalization of the entire nested ordinal `PathOut` tower to one Path
+category is not added here; it belongs to the broader groupoidal-closure
+interface rather than to ordinal simplex adequacy.
 
 The variance audit at this boundary is closed without a new displayed mirror.
 All four tetrahedral face functors exist covariantly, while nerve restriction

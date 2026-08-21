@@ -354,6 +354,13 @@ the constructed ordinal dimension-two continuation is
 naturality cell gives the canonical source filler, the existing whole native
 two-simplex map constructs the filler for every ordinal triangle, the public
 observation is unconditional, and one next hom action remains available;
+the constructed ordinal dimension-three continuation is
+`emdash3_2_dependent_simplex_ordinal_dimension3.lp`; it realizes the one
+canonical source tetrahedron through the shaped fixed-source `PathOut` and
+whole post-laxity owners, maps that source under every
+`H : Functor(Delta[3],C)`, exposes faces `012`, `013`, `023`, and `123` plus
+the dependent top component, and retains another whole hom action without an
+opaque filler, endpoint rule, or simplex-specific unifier;
 the whole terminal-right reindexed-unit normalization extension is
 `emdash3_2_prof_reindex_terminal_normalization.lp`; under an explicit
 terminal-branch normality path it compares the native restricted
@@ -1160,7 +1167,15 @@ Use the following order:
     join-cross cell, maps that native source under arbitrary `H`, exposes the
     unconditional observation and one next action, and adds no filler axiom,
     global total, broad eta, rule, or unifier;
-115. `emdash3_2_prof_reindex_terminal_normalization.lp` for whole
+115. `emdash3_2_dependent_simplex_ordinal_dimension3.lp` constructs the
+    canonical native ordinal tetrahedron from the shaped fixed-source
+    `PathOut` map and the generic post/left laxity cell. The same native source
+    maps under arbitrary `H`; all four triangle faces, the dependent top
+    component, and another hom action remain public. Its Path specialization
+    stays at the recursive `homd_`/`PathOut` owner, while the generic visible
+    Path-fibre profile supplies equality symmetry. It adds no opaque filler,
+    runtime rule, or proof-time unifier;
+116. `emdash3_2_prof_reindex_terminal_normalization.lp` for whole
     normalization of a reindexed unit profunctor's terminal-right action. A
     supplied path `G[id_*]=id` supports both the original family equality and
     an explicit directed source comparison. Three narrowly guarded component
@@ -1169,14 +1184,14 @@ Use the following order:
     `tapp1`/`functord_laxity_transf` retain higher action. The module is generic
     in the old category and contains no ordinal dimension, face-specific rule,
     direct simplex category, filler, whole-source equality, or unifier;
-116. `emdash3_2_checks.lp` for executable regression statements;
-117. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+117. `emdash3_2_checks.lp` for executable regression statements;
+118. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-118. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-119. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+119. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+120. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-120. `reports/INDEX.md` for task-specific plans and decision records.
-121. `book/book.json` and `book/evidence.json` for book source
+121. `reports/INDEX.md` for task-specific plans and decision records.
+122. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

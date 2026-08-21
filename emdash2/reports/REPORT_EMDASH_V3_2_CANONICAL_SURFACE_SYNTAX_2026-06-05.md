@@ -1,7 +1,7 @@
 # emdash v3.2 Canonical Surface Syntax
 
 Date: 2026-06-05
-Last reviewed: 2026-08-18
+Last reviewed: 2026-08-21
 
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
@@ -1243,6 +1243,26 @@ supplies a noncanonical filler. Shared ordinal triangle vertices compute
 through the generic join-eliminator point betas. Do not call the object-level
 observation package a category or write an unqualified ordinal/dependent
 equivalence.
+
+For the constructed ordinal tetrahedron write
+
+```text
+tetrahedronSource             the one native Delta[3] source
+observe3(H)                   map(H,tetrahedronSource)
+faces(observe3(H))            (012,013,023,123)
+top(observe3(H))              the dependent cell over face 023.
+```
+
+The literal whole owners are `ordinal_dependent_simplex3_source`,
+`ordinal_dependent_simplex3_map`, and
+`ordinal_dependent_simplex3_observation`. Their readable face projections are
+`ordinal_dependent_simplex3_face012`, `...face013`, `...face023`, and
+`...face123`; the final projections are
+`ordinal_dependent_simplex3_theta_base` and
+`ordinal_dependent_simplex3_top_component`. The construction is an object of
+the existing flagged `DependentSimplex3_cat`, not a flat four-face record.
+Do not print the typed represented-source reframe as a definitional endpoint
+rewrite, and do not claim an unqualified all-dimensional equivalence.
 
 For terminal-right normalization in a recursive join successor, write
 

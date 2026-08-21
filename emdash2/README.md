@@ -214,9 +214,14 @@ beta from profunctor reindex, join-extension, and observation/action paths.
 join-cross naturality cell to construct the source filler, maps the resulting
 native simplex under every ordinal triangle `H`, and projects the canonical
 filler. `ordinal_dependent_simplex2_observe_canonical(H)` therefore needs no
-filler argument and retains another hom action. Full dimensions three/four,
-a global mixed-variance category, and an unqualified mapping-category
-equivalence remain unclaimed.
+filler argument and retains another hom action. The dimension-three
+continuation `emdash3_2_dependent_simplex_ordinal_dimension3.lp` realizes the
+join comparison as a shaped fixed-source `PathOut` map, extracts its whole
+post-laxity top cell, and packages one native source tetrahedron. Mapping that
+source by `dependent_simplex3_map(H)` gives an unconditional observation for
+every ordinal tetrahedron, with faces 012, 013, 023, and 123, the dependent top
+component, and one further hom action. Dimension four, a global mixed-variance
+category, and an unqualified mapping-category equivalence remain unclaimed.
 
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section

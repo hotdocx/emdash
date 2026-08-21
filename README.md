@@ -89,7 +89,7 @@ This computes all three edges of a visible triangle and retains higher action.
 Visible face composition is preserved by the existing code owner; generic
 opaque whole-functor uniqueness remains an explicit later comparison.
 
-The ordinal comparison is now constructive through dimension two. Dimension zero
+The ordinal comparison is now constructive through dimension three. Dimension zero
 has a whole pointwise retraction, and a map of the walking arrow computes to
 its intrinsic source/target/generator edge. Generic join-eliminator point
 betas make the three edges of an ordinal triangle share vertices. Whole
@@ -97,10 +97,13 @@ profunctor-reindex and observation/action paths derive the walking-generator
 computation of a join map. One profiled source join-cross naturality cell then
 constructs the native source triangle; the existing whole two-simplex action
 maps it under every `H : Functor([2],C)` and yields the canonical dependent
-filler. The resulting observation is unconditional and retains another hom
-action. This is still not an unqualified equivalence
-`Functor([n],C) ~= DependentSimplex(C,n)`; dimensions three and four remain
-the next ordinal-adequacy tests.
+filler. At the next level, shaped fixed-source `PathOut` action and the whole
+post-laxity cell construct one native source tetrahedron. Mapping that object
+under every `H : Functor([3],C)` exposes faces 012, 013, 023, and 123 plus the
+dependent top component, while retaining another whole hom action. This is
+still not an unqualified equivalence
+`Functor([n],C) ~= DependentSimplex(C,n)`; dimension four remains the next
+ordinal-adequacy test.
 
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim

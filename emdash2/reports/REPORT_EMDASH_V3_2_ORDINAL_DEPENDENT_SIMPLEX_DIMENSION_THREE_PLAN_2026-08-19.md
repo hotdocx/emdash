@@ -324,14 +324,14 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `ODS3-00` | complete | Created the dedicated child branch/worktree from clean checkpoint `e157b37`; recorded the exact objective, nonclaims, validation policy, and Git boundary in this linked living plan; and indexed it for a clean launch checkpoint. |
 | `ODS3-BASE-1` | complete | Bootstrapped the worktree. Focused quiet checks of the ordinal filler, native dimension-three classifier, tetrahedron faces, and their three reviewers are green. Unchanged aggregate evidence is carried forward; no long aggregate was run. |
 | `ODS3-OWNER-2` | complete | Audited the fixed next-action facade against its distinct-endpoint owner, constructed the source join-cross section and all three new-vertex triangle actions uniformly, applied the recursive section action to the lifted 012 filler, and recovered the missing section-composition route from transparent section totalization plus the generic extracted `fapp1_compositor`. The resulting whole tetrahedral cell and both recursive Sigma projections typecheck without a primitive, rewrite, or unifier. Naive direct packaging is rejected because it confuses the join presentation, whose outer base cell is face 012, with the flagged `DependentSimplex3_cat` presentation, whose outer base cell is face 123. |
-| `ODS3-FACES-3` | in progress | Define the four arbitrary-`H` triangle restrictions and establish their six shared edge/vertex comparisons through existing whole face/join owners, without face-specific rewrite rules. The source audit constructs faces 013, 023, and 123 from one generic cross-action projection and retains face 012 as the existing canonical filler. The generic terminal-right module exposes a computational directed source component and whole displayed normalizer with retained laxity action. Separate green compositor and action projections establish the formal-alpha architecture: the forward section compositor supplies the sequential-013/123 factor and the 012 action supplies the following factor; their already-green whole composite uses all four faces without an inverse compositor. The compositor has been conjugated to readable endpoints, whiskered by face 013, and related to the native `homd_` source through the generic higher precomposition/product-composition bridge. A promoted generic `section_postcomp_sec` owner makes `Pi_func` postcomposition computational: its point components are the normalized successor faces and its base-arrow action is the existing `fdapp1_int_hom_fapp0`, including displayed laxity. The terminal-normalization module now also retains `p |-> g o F[p]` as a whole map-then-postcompose functor and exposes a generic expected-to-constructor-visible displayed reflag. Applying that reflag to the normalized Pi section is green: face 023 computes to the existing visible filler and its 012 base-arrow action remains whole. The promoted generic `section_total_func` now gives literal `(k,s[k])` and `(p,s[p])` computation, makes the two successive section arrows share one syntactic midpoint, commutes by typed `eq_refl` with displayed postcomposition on both objects and arrows, and identifies the remaining source-factor endpoint with the existing whole compositor-factor source. This closes the former Pi projection, pointwise-visible, and shared-midpoint gaps. The generic Sigma first-hom projection prerequisite is now promoted as two transparent operations, `sigma_proj1_hom_fapp0` and `sigma_proj1_hom_fapp1_fapp0`; they expose object and next-arrow first components without a hot rewrite, global unifier, eta law, or dependent-cell collapse. Focused opposite-action probes then settle the remaining variance issue but falsify direct conversion between the join/section source and the native `homd_`/Sigma source. Sections 16.15--16.17 retain the whole two-stage owner and reject capped endpoint normalization. Sections 16.18--16.19 distinguish the fixed-endpoint dependent-triangle projections from the actual doubly-fibred category of surfaces. The latter now has one promoted whole boundary-line functor whose object projections are the `0i` and `1i` lines and whose arrow projections are exactly the `023` and `123` face owners. The remaining work is to instantiate that native surface-category action with the ordinal cell, package it in `DependentSimplex3_cat`, and compare its arbitrary-`H` faces. |
-| `ODS3-SOURCE-4` | pending | Construct the identity-`Delta[3]` native source tetrahedron, including its dependent top cell, from the retained recursive action. No primitive or opaque tetrahedron filler is permitted. |
-| `ODS3-MAP-5` | pending | Map the one source native tetrahedron under arbitrary `H` through `dependent_simplex3_map`; retain the whole map rather than only its top component. |
-| `ODS3-OBSERVE-6` | pending | Expose the unconditional `DependentSimplexObservation(C,3)` and readable projections agreeing with all four canonical dimension-two face observations. |
-| `ODS3-PROFILE-7` | pending | Validate general directed, selected strict, and Path-valued readings; reject a wrong endpoint and verify that endpoint conversion does not imply top-cell collapse. |
-| `ODS3-NEXT-8` | pending | Expose one further whole hom action for a later dimension-four child and record its exact source/target boundary without implementing dimension four. |
-| `ODS3-DOC-9` | pending | Synchronize focused reviewers, source/check registries, Foundations, syntax/SOP status, READMEs/AGENTS where affected, report index, catalog, and source-only health. |
-| `ODS3-CLOSE-10` | pending | Review the exact diff and evidence, create clean implementation and closeout checkpoints, and state the precise achieved boundary. No long aggregate or unauthorized integration/publication/cleanup. |
+| `ODS3-FACES-3` | complete | The paired whole boundary-line action now supplies faces 023 and 123, while the shaped `PathOut` source/target projections supply 012 and 013. All four arbitrary-`H` faces are projections of one mapped native tetrahedron; no face-specific rule or duplicate flat record is used. |
+| `ODS3-SOURCE-4` | complete | `ordinal_dependent_simplex3_source` is a genuine identity-`Delta[3]` object of the existing `DependentSimplex3_cat`. Its theta is obtained from the generic whole post/left laxity cell, reframed by typed whole paths, and paired with its face-023 base. No primitive or opaque tetrahedron filler is introduced. |
+| `ODS3-MAP-5` | complete | `ordinal_dependent_simplex3_map(H)` applies the existing `dependent_simplex3_map` to that one source object for arbitrary `H`; the whole map, not only its final component, remains present. |
+| `ODS3-OBSERVE-6` | complete | `ordinal_dependent_simplex3_observation(H)` is unconditional. Named projections expose vertices, edges, faces 012/013/023/123, theta base, and the final dependent component from the same mapped native object. |
+| `ODS3-PROFILE-7` | complete at the exact recursive boundary | General and selected strict observations typecheck; a wrong theta base is rejected; and the extracted generic top cell is not convertible to identity. The same object specializes to `Path_cat(A)` without extra data. Direct `eq_sym` is checked by the existing generic recursive profile when its target fibre is visibly a Path category; the nested ordinal `homd_`/`PathOut` owner is deliberately not collapsed to a new Path normal form. |
+| `ODS3-NEXT-8` | complete | `ordinal_simplex3_top_whole` retains the whole post-laxity transformation and `ordinal_simplex3_top_next_action(u,v)` exposes its literal next hom action. Dimension four is not implemented. |
+| `ODS3-DOC-9` | complete | The focused reviewer, both active-source registries, Foundations, canonical syntax/current status, READMEs/AGENTS, report index, catalog, and source-only health snapshot are synchronized. Focused semantic and static evidence is recorded in section 16.21. |
+| `ODS3-CLOSE-10` | in progress | Review the exact diff and evidence, create clean implementation and closeout checkpoints, and state the precise achieved boundary. No long aggregate or unauthorized integration/publication/cleanup. |
 
 ## 15. Completion Definition
 
@@ -1801,7 +1801,68 @@ tetrahedron : Obj(DependentSimplex3_cat(...))
 
 typecheck. No opaque filler, endpoint rewrite, evaluator rule, Sigma eta, or
 simplex-specific unifier is introduced. The longstanding mathematical/LF
-blocker is therefore closed. Promotion remains: replace the ignored probe
-dependency names by their active owners, map the one source under arbitrary
-`H`, expose `012`, `013`, `023`, `123` and the top component, and retain the
-whole post-laxity next action for the separately planned dimension-four child.
+blocker is therefore closed. The following tranche promotes that probe using
+only active owners, maps the source under arbitrary `H`, exposes all four
+faces and the top component, and retains the whole post-laxity next action for
+the separately planned dimension-four child.
+
+### 16.21 Constructed Ordinal Tetrahedron And Acceptance Boundary
+
+The promotion is now implemented in
+`emdash3_2_dependent_simplex_ordinal_dimension3.lp`. It depends only on active
+registered sources. The source construction retains the shaped comparison as
+one transformation between whole `PathOut` maps and applies the existing
+post/left laxity transformation to the raw-to-stable and stable-to-direct
+outgoing-path arrows. A chain of named equality paths compares the resulting
+stable represented source with the internal-action source; equality-induced
+action reframes the cell only after that whole comparison has been formed.
+Pairing the reframed cell with its face-023 base gives
+
+```text
+ordinal_simplex3_theta
+ordinal_dependent_simplex3_source
+  : Obj(DependentSimplex3_cat(Delta[3],x0,e01,t012)).
+```
+
+This closes the earlier projection-order problem without a new evaluator
+rule, global Sigma eta, primitive `piapp*`, face-specific unifier, or opaque
+tetrahedron filler.
+
+For arbitrary `H : Functor(Delta[3],C)`, the public
+`ordinal_dependent_simplex3_map(H)` is the existing whole
+`dependent_simplex3_map(H)` applied to that one source. Its object result is
+`ordinal_dependent_simplex3_observation(H)`. Ordinary endpoint projection
+exposes faces 012 and 013; the promoted target-line and base-line hom actions
+expose faces 023 and 123; a final Sigma split exposes the theta base and its
+dependent top component. The construction retains
+`ordinal_simplex3_top_whole` and its unrestricted next hom action for a later
+dimension-four child.
+
+The focused reviewer checks arbitrary targets, all four faces, the top
+component, a rejected wrong theta base, generic top-cell noncollapse, the
+selected strict profile, the same recursive object in a Path target, and the
+retained next action. One attempted check was intentionally weakened after it
+exposed a real representation boundary: applying `eq_sym` directly to the
+ordinal top asks the elaborator to collapse a nested `homd_`/`PathOut` fibre
+to a literal equality. No such whole groupoidal-closure normalization is
+active. The generic recursive profile in `examples/dependent_simplex_profiles.lp`
+already checks equality and `eq_sym` when the target fibre is visibly
+`Path_cat`; the ordinal reviewer therefore checks specialization without
+inventing a new nested Path normal form.
+
+The bounded acceptance gates are green:
+
+- quiet checks of the new source and reviewer;
+- the pre-existing generic Path-fibre/`eq_sym` profile reviewer;
+- warning-enabled checks of the new source and reviewer with the unchanged
+  inventory `1290 = 1131 critical + 159 replaceable`;
+- strict rule-LHS audit with zero unreviewed clauses;
+- source TOC, active-reference, report-header, catalog-strictness, and diff
+  hygiene checks;
+- source-only health snapshot over 260 registered files; and
+- the focused `check_metrics` unit suite.
+
+The long aggregate remains deliberately unrun under the plan's proportional
+validation policy. The affected semantic targets are checked directly and
+the source-only health report records the new registry without rechecking
+unrelated algebraic-geometry modules.

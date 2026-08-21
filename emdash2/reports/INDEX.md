@@ -1,19 +1,21 @@
 # EMDASH Reports Index
 
-Date: 2026-08-19
+Date: 2026-08-21
 
 `REPORT_EMDASH_V3_2_ORDINAL_DEPENDENT_SIMPLEX_DIMENSION_THREE_PLAN_2026-08-19.md`
-is the active child of the completed join-cross dependent-simplex plan. It
-targets constructive ordinal adequacy in dimension three: build the canonical
-native source tetrahedron from the retained join/`homd_`/Sigma action, map that
-one object under arbitrary `H : Functor(Delta[3],C)`, and expose all four
-canonical triangle faces plus the dependent top cell through the existing
-`DependentSimplex3_cat` presentation. The fixed endomorphism-shaped
-`ordinal_dependent_simplex2_next_func` is starting evidence, not permission to
-postulate a distinct-face filler; the plan first recovers the needed general
-hom action from the underlying whole map. Dimension four, a uniform all-`n`
-classifier/equivalence, degeneracies, and broad join or strictness migrations
-are explicitly excluded.
+is the active closeout child of the completed join-cross dependent-simplex
+plan. Its constructive dimension-three boundary is now implemented by
+`emdash3_2_dependent_simplex_ordinal_dimension3.lp`: the shaped fixed-source
+`PathOut` and generic post-laxity owners construct one canonical native source
+tetrahedron; the existing whole `dependent_simplex3_map` maps it under every
+`H : Functor(Delta[3],C)`; and the resulting observation exposes all four
+triangle faces, the dependent top component, and another hom action. Wrong
+endpoints are rejected and the generic top cell remains noncollapsed. The
+Path specialization remains at the recursive `homd_`/`PathOut` owner, with
+the already-checked visible-Path-fibre profile supplying the equality/`eq_sym`
+reading. Dimension four, a uniform all-`n` classifier/equivalence,
+degeneracies, and broad join or strictness migrations are explicitly
+excluded.
 
 Its first promoted prerequisite is
 `emdash3_2_prof_reindex_terminal_normalization.lp`.  For arbitrary
