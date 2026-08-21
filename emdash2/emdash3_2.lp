@@ -15826,6 +15826,81 @@ rule @fdapp1_int_cell
       (@piapp0 $K $E $s $y)
       (@piapp1_fapp0 $K $E $s $x $y $p);
 
+/*
+  Whole comparison between mapping a section total and totalizing the mapped
+  section.
+
+  Mathematical notation:
+    Sigma(FF) o total(s)  ==>  total(FF o s).
+
+  The two endpoint functors already have judgmentally equal object and arrow
+  observations through `section_total_func`, `sigma_map_func`, and
+  `section_postcomp_sec`, but they are not equal as whole functor terms. This
+  stable transfor packages that comparison without a functor extensionality
+  rule. Its component is identity and its whole hom action is the existing
+  mapped-total action, so every higher projection remains iterable.
+
+  This owner is intentionally placed after the component and section-action
+  rules above: those computations establish subject reduction for its point
+  and hom observations at the owning position.
+*/
+symbol section_total_mapped_func
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (s : τ (Obj (Pi_cat E)))
+  : τ (Functor K (@Sigma_cat K D))
+≔ @comp_cat_fapp0
+    K (@Sigma_cat K E) (@Sigma_cat K D)
+    (@sigma_map_func K E D FF)
+    (@section_total_func K E s);
+
+symbol section_total_postcomp_func
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (s : τ (Obj (Pi_cat E)))
+  : τ (Functor K (@Sigma_cat K D))
+≔ @section_total_func
+    K D (@section_postcomp_sec K E D FF s);
+
+injective symbol section_total_postcomp_transf
+  [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (s : τ (Obj (Pi_cat E)))
+  : τ (Transf
+      (@section_total_mapped_func K E D FF s)
+      (@section_total_postcomp_func K E D FF s));
+
+// Point component of the whole comparison. Both endpoint objects reduce to
+// the same explicit Sigma pair.
+rule @tapp0_fapp0
+      _ _ _ _ $k
+      (@section_total_postcomp_transf $K $E $D $FF $s)
+  ↪ @id
+      (@Sigma_cat $K $D)
+      (@fapp0
+        $K (@Sigma_cat $K $D)
+        (@section_total_mapped_func $K $E $D $FF $s)
+        $k);
+
+// Whole hom action remains the existing action of the mapped total.
+rule @tapp1_func
+      _ _ _ _ $x $y
+      (@section_total_postcomp_transf $K $E $D $FF $s)
+  ↪ @fapp1_func
+      $K (@Sigma_cat $K $D)
+      (@section_total_mapped_func $K $E $D $FF $s)
+      $x $y;
+
+// Direct capped projection joins the whole hom-action route.
+rule @tapp1_fapp0
+      _ _ _ _ $x $y
+      (@section_total_postcomp_transf $K $E $D $FF $s)
+      $p
+  ↪ @fapp1_fapp0
+      $K (@Sigma_cat $K $D)
+      (@section_total_mapped_func $K $E $D $FF $s)
+      $x $y $p;
+
 // Componentwise internalized laxity cell of displayed product pairing.
 // This is the fdapp1_int_cell projection of the existing
 // Product_pair_funcd owner, not a new displayed-product constructor.
