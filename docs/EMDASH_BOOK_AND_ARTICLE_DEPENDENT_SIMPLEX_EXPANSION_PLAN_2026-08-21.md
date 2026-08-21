@@ -4,7 +4,7 @@ Date: 2026-08-21 (America/Toronto)
 
 Plan-ID: `BOOK-DEPENDENT-SIMPLEX-EXPANSION-V3.2`
 
-Status: **active living implementation plan**.
+Status: **completed implementation, integration, and deployment plan**.
 
 Branch: `goal/emdash-book-simplicial-v3.2`
 
@@ -12,6 +12,13 @@ Worktree: `/home/user1/emdash1-book-simplicial-v1`
 
 Baseline: completed variable-dimensional ordinal-simplex checkpoint
 `a70ea4440101f38ba0a4e068f472f14ec23f4d67`.
+
+Integrated release checkpoint:
+`6b85c2fd991b5ada7282f713a5ce34215d0c0a74`.
+
+GitHub Pages deployment: successful run
+[`32532377691`](https://github.com/hotdocx/emdash/actions/runs/32532377691)
+at <https://hotdocx.github.io/emdash/>.
 
 Primary artifacts:
 
@@ -348,8 +355,8 @@ stop and audit the divergence rather than silently merging unrelated work.
 | `BDS-ARTICLE-QA-7` | complete | `article:release` passes for the 18-page, 14-font `0.3.0-dev` PDF, SHA-256 `c3afdc85c9d7ee7640d8114c4a550bf9a43b6f2b04b3707ddda1e12400b70dcf`. All 18 pages were inspected. The first synthesis exceeded the page ceiling; the compressed version exposed one two-column formula collision; the final inline recurrence removes the collision while retaining the 18-page maximum. |
 | `BDS-PROMOTE-8` | complete | Owner promotion copied the assembled 842,558-byte book Markdown and 3,117,927-byte book PDF to `docs/emdash-book.{md,pdf}`, and the 67,231-byte article Markdown and 739,139-byte article PDF to `docs/emdash3_2.{md,pdf}`. Both public PDFs are byte-identical to their checked owner artifacts. |
 | `BDS-MAINT-8A` | complete | Updated the root reader route and edition size, the emdash2 book summary, active current-status artifact record, report index, and both long/short external-email appendices. The root README no longer calls dimension four future work; all public prose keeps the whole dependent-simplex category/equivalence and degeneracies explicit. |
-| `BDS-INTEGRATE-9` | pending | Audit all worktrees and the remote, fast-forward the registered `main` worktree if clean ancestry permits, push GitHub, and observe affected CI/GitHub Pages deployment; make only evidence-backed maintenance corrections required by those gates. |
-| `BDS-CLOSE-10` | pending | Audit the final local/remote state, synchronize this ledger, checkpoint any closeout record, and close the persistent goal with exact commit and deployment evidence. |
+| `BDS-INTEGRATE-9` | complete | Audited all 25 registered worktrees as clean, fetched the remote, established that release checkpoint `6b85c2fd991b5ada7282f713a5ce34215d0c0a74` was exactly 73 commits ahead of and zero behind the prior `main` checkpoint `e1dc41484e4b906cadf094dc63fc7bddba526a41`, fast-forwarded the registered `main` worktree, and pushed `main` without a merge commit, rebase, or force. GitHub Pages run [`32532377691`](https://github.com/hotdocx/emdash/actions/runs/32532377691) completed both `build` and `deploy` successfully for that exact head. The HTTPS site returns 200, and its fingerprinted 3,117,927-byte book and 739,139-byte article PDFs reproduce the checked SHA-256 hashes recorded above. |
+| `BDS-CLOSE-10` | complete | Synchronized this final ledger and the report index in a documentation-only closeout checkpoint after the terminal deployment audit. No source, generated artifact, or dependency changed; consequently no build or aggregate was repeated. The final push is audited by exact equality of local `main` and `origin/main`, while the release branch remains an intact backtracking checkpoint. |
 
 ## 13. Completion Definition
 
