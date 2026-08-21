@@ -2,6 +2,19 @@
 
 Date: 2026-08-21
 
+`REPORT_EMDASH_V3_2_ORDINAL_DEPENDENT_SIMPLEX_DIMENSION_FOUR_AND_RECURSIVE_SOURCE_PLAN_2026-08-21.md`
+is the active child of the completed ordinal dimension-three plan. It first
+constructs one native ordinal four-simplex, maps that source under arbitrary
+`H : Functor(Delta[4],C)`, exposes all five tetrahedral faces plus the
+recursive top component, and retains another action. It then uses the checked
+dimensions to implement a Nat-indexed canonical source/stage package: mapped
+observation already reuses `dependent_simplex_code_map`, while the substantive
+new operation is the join/internal-action successor cell after mapping the
+previous source along `Delta[n] -> Delta[n+1]`. Dimension four decides whether
+the stage must retain action provenance in addition to intrinsic code and
+source object. A mapping-category equivalence, degeneracies, broad join
+normalization, and nested-PathOut groupoidal closure are explicit nonclaims.
+
 `REPORT_EMDASH_V3_2_ORDINAL_DEPENDENT_SIMPLEX_DIMENSION_THREE_PLAN_2026-08-19.md`
 is the completed child of the join-cross dependent-simplex plan. Its
 constructive dimension-three boundary is implemented at local checkpoint
