@@ -85,6 +85,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_dependent_simplex_code_map.lp"),
     Path("emdash3_2_dependent_simplex_faces.lp"),
     Path("emdash3_2_shaped_pathout.lp"),
+    Path("emdash3_2_pathout_transformation_reframing.lp"),
+    Path("emdash3_2_pathout_transformation_lift.lp"),
     Path("emdash3_2_dependent_simplex_ordinal_adequacy.lp"),
     Path("emdash3_2_dependent_simplex_ordinal_filler.lp"),
     Path("emdash3_2_dependent_simplex_ordinal_dimension3.lp"),

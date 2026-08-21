@@ -398,7 +398,7 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | --- | --- | --- |
 | `ODS4R-00` | complete | Created the dedicated branch/worktree from clean checkpoint `f19fb44`; recorded the fixed dimension-four and variable-source objectives, nonclaims, validation policy, and Git boundary; indexed the plan; and created clean launch checkpoint `9155a73`. |
 | `ODS4R-BASE-1` | complete | Native dimension-four, intrinsic code, mapped-decoder, and variable-face sources plus their focused reviewers are green in the new worktree. The immediately preceding dimension-three source/reviewer evidence is carried forward unchanged from checkpoint `7cfc7db`; no long aggregate was run. |
-| `ODS4R-OWNER-2` | in progress | Audit the concrete higher input and endpoint ownership of `ordinal_simplex3_top_next_action` against the next parameter-natural join/internal action. The public action is genuinely iterable but is indexed by higher arrows between raw-to-stable source cells, not already by the distinct native tetrahedra 0123/0124. Identify the smallest whole projection and concrete input needed for the dimension-four source; no opaque cell or capped endpoint equation. |
+| `ODS4R-OWNER-2` | complete | The missing operation is the generic whole outgoing-path lift of an ordinary transformation, not a dimension-specific input to `ordinal_simplex3_top_next_action`. `emdash3_2_pathout_transformation_reframing.lp` connects the formal pre/right source to the constructor-visible Sigma source through existing typed paths; `emdash3_2_pathout_transformation_lift.lp` totalizes the existing pre/right laxity cell into `pathout_transf_lift`, computes its constructor component, and retains generic `tapp1_func`. Source, reviewer, warning, and LHS audits are green without a core edit, endpoint collapse, runtime normalization, or proof-time unifier. |
 | `ODS4R-SOURCE-3` | pending | Construct the identity-`Delta[4]` native source object in `DependentSimplex4_cat` from the retained recursive action and typed endpoint views. |
 | `ODS4R-MAP-4` | pending | Map the one source under arbitrary `H` through `dependent_simplex4_map` and retain the whole map. |
 | `ODS4R-FACES-5` | pending | Expose tetrahedral faces 0123, 0124, 0134, 0234, and 1234 plus the top component from the one mapped native object, reusing variable-dimensional face action and the recursive readable frame. |
@@ -498,3 +498,48 @@ This is positive evidence that neither a new map decoder nor a new
 variable-dimensional object package is needed. It does not construct the
 canonical successor and therefore does not advance `ODS4R-REC-IMPLEMENT-9`;
 the next audit remains the concrete dimension-four higher input.
+
+## 18. Generic Outgoing-Path Transformation Successor — 2026-08-21
+
+The dimension-four owner audit found a more general successor than the
+provisional direct use of `ordinal_simplex3_top_next_action`. For
+`epsilon : F => G` and fixed `x : A`, the checked whole owner is
+
+```text
+pathout_transf_lift(epsilon,x)
+  : pathout_map_func(F,x)
+      => ((y,p) |-> (G[y],epsilon[p])).
+```
+
+Its component at `(y,p)` is one `sigma_arrow`. The base is `epsilon[y]`; the
+fibre is the already-derived `tapp1_pre_laxity_cell(epsilon,p,id_y)`. The
+formal source and target of that laxity cell do not become new runtime normal
+forms. Instead, `emdash3_2_pathout_transformation_reframing.lp` composes the
+existing first-class comparisons through stable postcomposition, raw
+composition, general precomposition, the Cat-valued telescope, and whole
+Functord transport. Equality-induced hom action then reframes the cell into
+the literal Sigma endpoints.
+
+The implementation has exactly one constructor-visible component beta for
+`pathout_transf_lift`; its LHS uses inferred `_` slots and passes the strict
+LHS audit. The whole transformation's generic `tapp1_func` is deliberately
+unreduced and therefore supplies the next higher action. Focused quiet and
+warning-enabled checks pass for both sources and the reviewer. The reviewer
+checks both endpoint paths, the extracted fibre cell, the total component,
+the component beta, and retained next action; it also rejects a wrong indexed
+endpoint and an arbitrary replacement fibre.
+
+No edit to `emdash3_2.lp`, primitive `piapp*` redesign, broad Sigma eta,
+simplex-specific rule, endpoint equality, or proof-time unifier was needed.
+This closes the generic owner prerequisite. `ODS4R-SOURCE-3` must now
+instantiate this successor at the ordinal dimension-three stage and package
+the resulting object in the existing `DependentSimplex4_cat`; it must not
+copy the source-reframing chain or introduce another opaque filler.
+
+The required source-health refresh was attempted after registering the two
+files, but `make health --resume` did not reuse the prior aggregate evidence
+as expected and began rechecking unrelated sources. It was interrupted rather
+than allowed to become the long aggregate prohibited by this goal. No health
+report was written. The two new sources and their focused reviewer were each
+checked directly and are green; the stable health-report refresh remains
+explicitly owned by `ODS4R-DOC-11` at the final affected-source boundary.

@@ -4324,6 +4324,25 @@ the computational types. Existing whole strict naturality paths compare those
 owners with the readable raw-composition presentation, so no duplicate capped
 pre/post unification rule is installed.
 
+That pre/right surface now has a generic outgoing-path successor. At a fixed
+`x : A`, an ordinary transformation `epsilon : F => G` induces
+
+```text
+pathout_transf_lift(epsilon,x)
+  : pathout_map_func(F,x)
+      => ((y,p) |-> (G[y],epsilon[p])).
+```
+
+The component over `(y,p)` is the Sigma arrow whose base is `epsilon[y]` and
+whose fibre is `tapp1_pre_laxity_cell(epsilon,p,id_y)`. Its formal
+internal-action endpoints and literal Sigma endpoints are related by
+first-class paths through the existing post/precomposition and whole
+Functord-transport owners. Thus the construction is computational at the
+constructor component and remains iterable through `tapp1_func`, without
+turning a genuinely lax cell into an equality or adding a new endpoint
+normalization. This is the reusable successor needed by the next
+dependent-simplex dimension.
+
 ### Path Realization: Laxity Becomes Pseudo
 
 The first groupoidal consumer applies the same compositor to the functor

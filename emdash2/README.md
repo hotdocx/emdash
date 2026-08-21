@@ -223,6 +223,15 @@ every ordinal tetrahedron, with faces 012, 013, 023, and 123, the dependent top
 component, and one further hom action. Dimension four, a global mixed-variance
 category, and an unqualified mapping-category equivalence remain unclaimed.
 
+The reusable successor mechanism is separate from that ordinal example.
+`emdash3_2_pathout_transformation_reframing.lp` connects the formal pre/right
+internal-action source to its constructor-visible Sigma source through typed
+paths, and `emdash3_2_pathout_transformation_lift.lp` lifts any ordinary
+transformation to one whole transformation between outgoing-path functors at
+a fixed source. Its components reuse the existing pre/right laxity cell, one
+constructor beta computes, and another hom action remains iterable; no core
+endpoint rule or unifier is added.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the

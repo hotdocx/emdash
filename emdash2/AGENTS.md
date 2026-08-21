@@ -343,6 +343,18 @@ profunctor totalizes to a whole `PathOut` functor with computing object action
 and retained hom action, while one cold whole-functor comparison observes
 stable Cat-valued precomposition as ordinary composition without a hot
 evaluator rule;
+the generic source-reframing extension is
+`emdash3_2_pathout_transformation_reframing.lp`; existing first-class paths
+connect the stable Sigma source of a pre/right laxity component through raw
+composition, general precomposition, the Cat-valued telescope, and whole
+Functord transport without identifying the lax endpoints or adding a rule or
+unifier;
+the generic whole transformation successor for outgoing-path categories is
+`emdash3_2_pathout_transformation_lift.lp`; at fixed source `x` it lifts
+`epsilon : F => G` to a transformation from `PathOut(F,x)` to the functor
+mapping `(y,p)` to `(G[y],epsilon[p])`, builds each total component from the
+existing pre/right laxity cell, computes at constructor-visible objects, and
+retains another whole hom action;
 the relative low-dimensional ordinal/dependent comparison is
 `emdash3_2_dependent_simplex_ordinal_adequacy.lp`; dimension zero is whole,
 dimension one observes the walking-arrow edge, and core join point betas make
@@ -1158,7 +1170,16 @@ Use the following order:
     whole `PathOut` maps, two late proof-time family comparisons expose the
     represented source/target, and a rule-free whole Cat-precomposition path
     retains higher action without changing either runtime normal form;
-114. `emdash3_2_dependent_simplex_ordinal_adequacy.lp` for the strongest
+114. `emdash3_2_pathout_transformation_reframing.lp` connects the formal
+    pre/right internal-action source to the constructor-visible Sigma source
+    through existing typed paths. It retains both stable owners and adds no
+    endpoint collapse, runtime rule, or proof-time unifier;
+115. `emdash3_2_pathout_transformation_lift.lp` lifts an ordinary
+    transformation to one whole transformation between outgoing-path
+    functors at a fixed source. Its components totalize the existing
+    pre/right laxity cell, one constructor beta computes, and generic
+    `tapp1_func` remains iterable;
+116. `emdash3_2_dependent_simplex_ordinal_adequacy.lp` for the strongest
     relative ordinal comparison. Dimension zero is a whole retraction;
     dimension one observes source/target/generator; and join point betas make
     triangle vertices shared. Its one-way continuation
@@ -1167,7 +1188,7 @@ Use the following order:
     join-cross cell, maps that native source under arbitrary `H`, exposes the
     unconditional observation and one next action, and adds no filler axiom,
     global total, broad eta, rule, or unifier;
-115. `emdash3_2_dependent_simplex_ordinal_dimension3.lp` constructs the
+117. `emdash3_2_dependent_simplex_ordinal_dimension3.lp` constructs the
     canonical native ordinal tetrahedron from the shaped fixed-source
     `PathOut` map and the generic post/left laxity cell. The same native source
     maps under arbitrary `H`; all four triangle faces, the dependent top
@@ -1175,7 +1196,7 @@ Use the following order:
     stays at the recursive `homd_`/`PathOut` owner, while the generic visible
     Path-fibre profile supplies equality symmetry. It adds no opaque filler,
     runtime rule, or proof-time unifier;
-116. `emdash3_2_prof_reindex_terminal_normalization.lp` for whole
+118. `emdash3_2_prof_reindex_terminal_normalization.lp` for whole
     normalization of a reindexed unit profunctor's terminal-right action. A
     supplied path `G[id_*]=id` supports both the original family equality and
     an explicit directed source comparison. Three narrowly guarded component
@@ -1184,14 +1205,14 @@ Use the following order:
     `tapp1`/`functord_laxity_transf` retain higher action. The module is generic
     in the old category and contains no ordinal dimension, face-specific rule,
     direct simplex category, filler, whole-source equality, or unifier;
-117. `emdash3_2_checks.lp` for executable regression statements;
-118. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+119. `emdash3_2_checks.lp` for executable regression statements;
+120. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-119. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-120. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+121. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+122. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-121. `reports/INDEX.md` for task-specific plans and decision records.
-122. `book/book.json` and `book/evidence.json` for book source
+123. `reports/INDEX.md` for task-specific plans and decision records.
+124. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

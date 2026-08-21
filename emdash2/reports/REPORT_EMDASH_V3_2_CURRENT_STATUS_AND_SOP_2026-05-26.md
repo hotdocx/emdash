@@ -654,6 +654,19 @@ detailed probe evidence.
   ordinary functor composition. The two fixed-source family comparisons are
   late proof-time rules; no hot evaluator rewrite or simplex-specific
   endpoint rule is added.
+- `emdash3_2_pathout_transformation_reframing.lp`: rule-free source
+  comparison for the outgoing-path lift of an ordinary transformation. It
+  connects stable Sigma postcomposition to the formal pre/right
+  internal-action source by composing existing typed paths through raw
+  composition, general precomposition, the Cat-valued telescope, and whole
+  Functord transport; it does not identify the lax endpoints.
+- `emdash3_2_pathout_transformation_lift.lp`: generic whole successor on
+  outgoing-path categories. At fixed source `x`, it lifts
+  `epsilon : F => G`; the component over `(y,p)` is a Sigma arrow with base
+  `epsilon[y]` and fibre the existing pre/right laxity cell. One
+  constructor-visible component beta computes and generic `tapp1_func`
+  remains available. No core edit, endpoint normalization, or unifier is
+  added.
 - `emdash3_2_dependent_simplex_ordinal_adequacy.lp`: relative
   ordinal/dependent comparison at the strongest current boundary. Dimension
   zero is a whole pointwise retraction; dimension one observes the walking
