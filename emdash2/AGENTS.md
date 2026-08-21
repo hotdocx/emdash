@@ -292,10 +292,10 @@ by scoped join uniqueness rather than local folds;
 the recursive dependent-simplex bridge is
 `emdash3_2_dependent_simplex_bridge.lp`; its triangle classifier is the active
 `Hom(Sigma)`/`homd_` total, its whole base-line and target-fibre endpoint face
-functors retain action on volumes, its whole map is the first action of
-`Sigma(FF)`, and its iterable next action sends a visible `(kappa,lambda)`
-tetrahedron to the existing `fdapp1_int_hom_fapp0` projection without a new
-coherence record;
+functors retain action on volumes and pair into one whole boundary functor,
+its whole map is the first action of `Sigma(FF)`, and its iterable next action
+sends a visible `(kappa,lambda)` tetrahedron to the existing
+`fdapp1_int_hom_fapp0` projection without a new coherence record;
 the represented groupoidal source-associator extension is
 `emdash3_2_dependent_simplex_path_associator.lp`; it projects the generic
 compositor of `Rep_catd_func`, retains its whole displayed and next-hom
@@ -994,10 +994,10 @@ Use the following order:
 88. `emdash3_2_dependent_simplex_bridge.lp` for the transparent recursive
     `homd_`/Sigma triangle and tetrahedron map. Whole base-line and
     target-fibre endpoint face functors project volumes to their base and
-    fourth surfaces; a visible higher constructor computes through
-    `fdapp1_int_hom_fapp0`, and every projection retains another hom action.
-    It adds no standalone coherence cell, rule, unifier, `homd_con_int`, or
-    whole mapping-category comparison;
+    fourth surfaces and pair as one product-valued boundary functor; a visible
+    higher constructor computes through `fdapp1_int_hom_fapp0`, and every
+    projection retains another hom action. It adds no standalone coherence
+    cell, rule, unifier, `homd_con_int`, or whole mapping-category comparison;
 89. `emdash3_2_semisimplicial_diagrams.lp` for standard Yoneda
     semisimplices, groupoid-valued semisimplicial diagrams, and their
     levelwise path-category realization. Whole postcomposition remains at the

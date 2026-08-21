@@ -3781,6 +3781,10 @@ dependent_triangle_base_face_func
 
 dependent_triangle_endpoint_face_func
   : DependentTriangle(E,x,u,y,v) -> E[y].
+
+dependent_triangle_boundary_face_func
+  : DependentTriangle(E,x,u,y,v)
+      -> Hom_K(x,y) x E[y].
 ```
 
 The first sends `(p,alpha)` to its base line `p`. The second sends it to the
@@ -3790,6 +3794,10 @@ surface. Together with the ordinary source and target of that arrow, these are
 the four faces of the recursive tetrahedron. This is the fixed-endpoint slice
 of the doubly-fibred `homd_int` geometry: it is not an external face record,
 and both projections retain another hom action.
+The third functor is the product pairing of the first two. Its product
+projections recover them computationally, so a volume is mapped as one whole
+object to the pair consisting of its base surface and fourth surface; the two
+parts are not independently reconstructed capped terms.
 
 For `FF : Functord(E,D)`, the whole map of triangle classifiers is the
 existing first hom action of `Sigma(FF)`; its displayed part is

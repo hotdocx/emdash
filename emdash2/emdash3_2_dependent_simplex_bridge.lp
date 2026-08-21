@@ -102,6 +102,32 @@ symbol dependent_triangle_endpoint_face_func
     (@fib_cov_tapp0_func K E x y u)
     (@dependent_triangle_base_face_func K E x u y v);
 
+// Whole paired boundary projection. Product projections recover the base-line
+// and target-fibre endpoint functors above; its hom action sends a volume to
+// the pair (base surface, fourth surface).
+symbol dependent_triangle_boundary_face_func
+  [K : Cat]
+  (E : τ (Catd K))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  (v : τ (Obj (Fibre_cat E y)))
+  : τ (Functor
+      (@DependentTriangle_cat K E x u y v)
+      (Product_cat (Hom_cat K x y) (Fibre_cat E y)))
+≔ @Struct_sigma
+    (Obj (Functor_cat
+      (@DependentTriangle_cat K E x u y v)
+      (Hom_cat K x y)))
+    (λ _ : τ (Obj (Functor_cat
+        (@DependentTriangle_cat K E x u y v)
+        (Hom_cat K x y))),
+      Obj (Functor_cat
+        (@DependentTriangle_cat K E x u y v)
+        (Fibre_cat E y)))
+    (@dependent_triangle_base_face_func K E x u y v)
+    (@dependent_triangle_endpoint_face_func K E x u y v);
+
 // A triangle is one base arrow paired with its dependent fibre arrow.
 symbol dependent_triangle
   [K : Cat]

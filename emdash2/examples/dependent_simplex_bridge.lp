@@ -55,6 +55,28 @@ assert (K : Cat) (E : τ (Catd K))
       (@fib_cov_tapp0_func K E x y u)
       p;
 
+// The two projections are one packaged whole boundary functor.
+assert (K : Cat) (E : τ (Catd K))
+  (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K)) (v : τ (Obj (Fibre_cat E y)))
+  (p : τ (Hom K x y))
+  (alpha : τ (Obj (Fibre_cat
+    (@DependentTriangle_catd K E x u y v) p))) ⊢
+  @fapp0
+    (@DependentTriangle_cat K E x u y v)
+    (Product_cat (Hom_cat K x y) (Fibre_cat E y))
+    (@dependent_triangle_boundary_face_func K E x u y v)
+    (@dependent_triangle K E x u y v p alpha)
+  ≡ @Struct_sigma
+      (Obj (Hom_cat K x y))
+      (λ _ : τ (Obj (Hom_cat K x y)), Obj (Fibre_cat E y))
+      p
+      (@fapp0
+        (Hom_cat K x y)
+        (Fibre_cat E y)
+        (@fib_cov_tapp0_func K E x y u)
+        p);
+
 // Both projection functors retain another hom action on a volume.
 type λ K : Cat, λ E : τ (Catd K),
   λ x : τ (Obj K), λ u : τ (Obj (Fibre_cat E x)),

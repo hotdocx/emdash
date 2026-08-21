@@ -1602,6 +1602,10 @@ dependent_triangle_base_face_func
 
 dependent_triangle_endpoint_face_func
   : DependentTriangle(E,x,u,y,v) -> E[y].
+
+dependent_triangle_boundary_face_func
+  : DependentTriangle(E,x,u,y,v)
+      -> Hom_K(x,y) x E[y].
 ```
 
 The second is transparently
@@ -1628,13 +1632,22 @@ corresponding projection of the base surface because both routes remain under
 the generic functor/hom-action calculus; no face-specific simplicial equation
 is installed.
 
+The third displayed functor above is the product pairing of the first two.
+It implements the packaged `(F,FF)` reading directly: product projection
+recovers the base-line and endpoint functors, while its hom action maps a
+volume to the pair `(base surface,fourth surface)` and retains another action.
+
 The generic probe
 `tmp/probes/dependent_triangle_recursive_tetrahedron_faces.lp` checks both
-object computations and both retained hom actions.  The two functors are now
-promoted transparently in `emdash3_2_dependent_simplex_bridge.lp`, and the
-focused reviewer checks their visible object projections.  No primitive,
-rewrite, unifier, Sigma eta, `homd_con_int`, or external boundary record is
-added.
+object computations, the paired boundary object, and retained hom actions.
+The three functors are now promoted transparently in
+`emdash3_2_dependent_simplex_bridge.lp`, and the focused reviewer checks their
+visible object projections.  The ordinal probe
+`tmp/probes/ordinal_simplex3_doubly_fibred_faces.lp` applies the paired functor
+to the selected endpoint and to the retained next cell: both product
+projections compute to the already-extracted base and endpoint surfaces.  No
+primitive, rewrite, unifier, Sigma eta, `homd_con_int`, or external boundary
+record is added.
 
 This settles the foundational projection problem but not yet its ordinal
 specialization.  The next probe must apply both functors to one selected
