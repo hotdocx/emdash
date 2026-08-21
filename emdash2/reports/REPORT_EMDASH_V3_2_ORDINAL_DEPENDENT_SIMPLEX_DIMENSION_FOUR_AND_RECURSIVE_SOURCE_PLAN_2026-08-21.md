@@ -481,3 +481,20 @@ ordinary `fapp0`. The missing canonical recursion is only the successor object
 in the outgoing-path category after mapping the previous stage along the old-
 vertex join inclusion. `ODS4R-OWNER-2` now audits the dimension-four instance
 of precisely that successor.
+
+The first ignored implementation probe,
+`tmp/probes/ordinal_simplex4_recursive_source_inventory.lp`, checks this split
+inside Lambdapi. It defines the provisional package
+
+```text
+Sigma c : DependentSimplexCode(Delta[n],n), Obj(decode(c)),
+```
+
+packages `ordinal_dependent_simplex3_source` at `n=3`, and defines the generic
+observation of an arbitrary supplied source under
+`H : Functor(Delta[n],C)` solely by the existing mapped-code target, mapped
+whole functor, and `fapp0`. The probe is green under the 90-second ceiling.
+This is positive evidence that neither a new map decoder nor a new
+variable-dimensional object package is needed. It does not construct the
+canonical successor and therefore does not advance `ODS4R-REC-IMPLEMENT-9`;
+the next audit remains the concrete dimension-four higher input.
