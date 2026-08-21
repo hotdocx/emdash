@@ -404,11 +404,11 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `ODS4R-FACES-5` | complete | Native projections expose 0123, 0124, 0134, the recursive readable cell, and top component. Five explicit coface codes and the one generic `ordinal_dependent_simplex4_face(H,alpha)` expose 0123, 0124, 0134, 0234, and 1234 through the existing variable-dimensional face action. Native and code-selected faces remain parallel whole presentations; no unqualified mapping-category equality is claimed. |
 | `ODS4R-PROFILE-6` | complete | The focused reviewer checks the general observation, selected strict carrier, exact `Path_cat` target, wrong recursive source rejection, and generic top-cell noncollapse. No global associativity or new endpoint conversion is used. |
 | `ODS4R-NEXT-7` | complete | `ordinal_simplex4_top_next_action(u,v)` retains `tapp1_func` of the second lifted transformation and records the exact dimension-five handoff without constructing a fifth-level source. |
-| `ODS4R-REC-DESIGN-8` | pending | Compare the checked dimension-two, -three, and -four source constructors. Settle the minimal Nat-indexed source/stage package and whether action provenance is required by the structural successor. |
-| `ODS4R-REC-IMPLEMENT-9` | pending | Implement the generic source package, arbitrary-`H` mapped observation, and one genuine structural successor using existing code/map/join/internal-action owners or a narrowly curated indexed recursor. |
-| `ODS4R-REC-COMPUTE-10` | pending | Check selected source/observation computations through dimensions zero to four, generic nonempty-face access, a wrong-index/endpoint negative, and one retained action. |
-| `ODS4R-DOC-11` | pending | Synchronize focused reviewers, both source registries, Foundations, syntax/status, READMEs/AGENTS where affected, report index, catalog, and source-only health. |
-| `ODS4R-CLOSE-12` | pending | Review exact evidence and diffs, create clean implementation and closeout checkpoints, and state the achieved variable-dimensional boundary. No long aggregate or unauthorized integration/publication/cleanup. |
+| `ODS4R-REC-DESIGN-8` | complete | The minimal varying package reuses existing `DependentSimplexObservation(Delta[n],n)`. A nonzero raw intrinsic code determines `OrdinalJoinLiftStage`: target code, two whole maps `F,G`, and `epsilon : F => G`. The one-flag clause uses `ordinal_join_pathout_transf`; each further flag applies `pathout_transf_lift`. No separate source-code grammar or stored parallel omega-category data is required. |
+| `ODS4R-REC-IMPLEMENT-9` | complete | `emdash3_2_dependent_simplex_ordinal_recursive.lp` implements the indexed stage fold, zero/nonzero source successor, `nat_elim` canonical source, arbitrary-`H` observation through the existing mapped decoder, generic nonempty-face access, canonical successor cell, and retained whole action. The successor is exactly `code' = step(d,F[s])`, `source' = (G[s],epsilon[s])`. |
+| `ODS4R-REC-COMPUTE-10` | complete | The reviewer checks stage computation at one, two, and three stored flags; zero and generic successor beta; selected source-object computations through dimensions zero to four; variable-dimensional observation and face access; a wrong face-index negative; successor-cell noncollapse; and a retained generic next action. |
+| `ODS4R-DOC-11` | complete | Registered the generic successor, fixed dimension four, and recursive sources in both source registries; added focused reviewers; synchronized AGENTS, emdash2 README, Foundations, syntax/status, report index, and this ledger; refreshed the assertion catalog and source TOC; and refreshed/verified the no-check source-health snapshot. |
+| `ODS4R-CLOSE-12` | in progress | Review exact evidence and diffs, create clean implementation and closeout checkpoints, and state the achieved variable-dimensional boundary. No long aggregate or unauthorized integration/publication/cleanup. |
 
 ## 16. Completion Definition
 
@@ -591,3 +591,92 @@ top-cell noncollapse, and `ordinal_simplex4_top_next_action`. The next active
 row is `ODS4R-REC-DESIGN-8`: extract the generic iterator implicit in the
 two-lift dimension-four construction and package its varying code/category
 indices without duplicating the existing intrinsic-code semantics.
+
+## 20. Nat-Indexed Source Recursion — 2026-08-21
+
+The dimension-four pattern internalizes without a new general very-dependent
+eliminator. The existing intrinsically indexed
+`RawDependentSimplexCodeData(C,n,K)` is already the correct recursion spine.
+For every nonzero code, the new `OrdinalJoinLiftStage(A,n,K)` packages:
+
+```text
+B       target decoded category,
+d       raw target code in A * 1,
+F,G     whole functors K -> B,
+epsilon transformation F => G.
+```
+
+The base clause for a one-flag code is
+`ordinal_join_pathout_transf(A,x0)`. The recursive clause for a new flag `x`
+replaces
+
+```text
+(d,F,G,epsilon)
+```
+
+by
+
+```text
+(step(d,F[x]),
+ pathout_map_func(F,x),
+ pathout_transf_target_func(F,G,epsilon,x),
+ pathout_transf_lift(epsilon,x)).
+```
+
+This fold is implemented by the constructor-scoped
+`raw_ordinal_join_lift_stage` rules. Their inferred LHS slots pass the strict
+audit, and warning-enabled checking reports no warning owned by the new file.
+
+The generalized source package is not duplicated: the implementation reuses
+the existing `DependentSimplexObservation(C,n)`. At dimension zero the
+successor evaluates the primitive join cross on `(x0,id_x0)`. At every
+nonzero dimension, if the stage is `(d,F,G,epsilon)` and the old source is
+`s`, then
+
+```text
+new code   = step(d,F[s]),
+new source = (G[s],epsilon[s]).
+```
+
+`OrdinalDependentSimplexSource(n)` is the specialization
+`DependentSimplexObservation(Delta[n],n)`, and
+`ordinal_dependent_simplex_source(n)` is a genuine `nat_elim` value with the
+structural successor above. `ordinal_dependent_simplex_observation(H)` reuses
+`dependent_simplex_code_map_func`; `ordinal_dependent_simplex_face(H,alpha)`
+reuses `dependent_simplex_face_func`. The canonical nonzero stage exposes
+both `ordinal_dependent_simplex_successor_cell` and
+`ordinal_dependent_simplex_lift_next_action`.
+
+The focused reviewer establishes constructor computation for stages with one,
+two, and three stored flags, generic Nat successor beta, selected source
+objects through dimensions zero to four, arbitrary-target mapping, generic
+nonempty-face access, wrong-index rejection, noncollapse, and retained higher
+action. The finite hand-built sources remain useful readable validation
+slices; the new recursion does not claim judgmental equality with every
+historical presentation or the still-deferred equivalence of whole mapping
+categories.
+
+## 21. Proportional Validation Boundary — 2026-08-21
+
+The promoted recursive source and its reviewer check green directly under the
+90-second ceiling. The recursive module also checks with warnings enabled and
+introduces no warning at its own source path. Strict LHS audit reports zero
+unreviewed reconstructible slots: the two constructor-scoped recursive rule
+families are exercised through one-, two-, and three-flag reviewer
+computations. The fixed dimension-four source/reviewer and its two generic
+prerequisite modules retain their earlier green evidence.
+
+`make catalog` and `make toc` pass. The source-health snapshot was refreshed
+and verified with `scripts/check_metrics.py --no-check`; this matches the
+report's existing blank-timing policy and records all 268 registered source
+and reviewer files without launching an aggregate. No `make check`,
+`make examples`, `make ci`, or repository-wide aggregate was run. The earlier
+attempted resumable health aggregate remains explicitly interrupted evidence,
+not a passing gate.
+
+The achieved boundary is stronger than the original finite extrapolation:
+the repository now contains both a checked ordinal four-simplex and an
+internal canonical source at variable dimension. It still does not claim a
+whole mapping-category equivalence, degeneracies, an all-dimensional Kan or
+Segal theorem, or judgmental equality between every historical finite source
+and the new uniform presentation.

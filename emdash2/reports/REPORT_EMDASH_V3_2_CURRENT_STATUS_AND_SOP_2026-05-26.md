@@ -722,6 +722,16 @@ detailed probe evidence.
   and top component. Strict/Path profiles, wrong-endpoint rejection,
   noncollapse, and another action are checked. No opaque filler, endpoint
   rule, broad eta, or unifier is added.
+- `emdash3_2_dependent_simplex_ordinal_recursive.lp`: Nat-indexed canonical
+  ordinal-source construction. `OrdinalJoinLiftStage` folds a nonzero raw
+  intrinsic flag code into a target code, two whole maps, and their
+  transformation. The one-flag clause is the generic identity-join
+  comparison; each later flag applies `pathout_transf_lift`. The zero/nonzero
+  successor rules construct `step(d,F[s])` with source `(G[s],epsilon[s])`,
+  and `nat_elim` produces `ordinal_dependent_simplex_source(n)`. Arbitrary
+  mapping and faces reuse the existing code-map and face owners. Dimensions
+  zero through four, wrong-index rejection, noncollapse, and retained action
+  are checked; no parallel code grammar or unifier is added.
 - `emdash3_2_prof_reindex_terminal_normalization.lp`: generic whole
   normalization of the terminal-right action in a reindexed unit profunctor.
   An explicit path `G[id_*]=id` supports both the retained whole family path

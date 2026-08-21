@@ -10,10 +10,11 @@ recursive top component, and retains another action. It then uses the checked
 dimensions to implement a Nat-indexed canonical source/stage package: mapped
 observation already reuses `dependent_simplex_code_map`, while the substantive
 new operation is the join/internal-action successor cell after mapping the
-previous source along `Delta[n] -> Delta[n+1]`. Dimension four decides whether
-the stage must retain action provenance in addition to intrinsic code and
-source object. A mapping-category equivalence, degeneracies, broad join
-normalization, and nested-PathOut groupoidal closure are explicit nonclaims.
+previous source along `Delta[n] -> Delta[n+1]`. The checked result uses an
+intrinsic-code-indexed stage carrying a target code, two whole maps, and their
+transformation; `nat_elim` now constructs the source at variable dimension.
+A mapping-category equivalence, degeneracies, broad join normalization, and
+nested-PathOut groupoidal closure are explicit nonclaims.
 
 `REPORT_EMDASH_V3_2_ORDINAL_DEPENDENT_SIMPLEX_DIMENSION_THREE_PLAN_2026-08-19.md`
 is the completed child of the join-cross dependent-simplex plan. Its
@@ -128,7 +129,12 @@ identity-join lift, maps one native source under arbitrary `H`, exposes five
 cofaces through existing `FaceCode` action, and retains the recursive top and
 next action. A mapping-category equivalence and global all-simplex category
 remain excluded; the active dimension-four/recursive-source plan now extracts
-the Nat-indexed successor interface from these finite computations.
+the Nat-indexed successor interface from these finite computations. That
+interface is implemented in
+`emdash3_2_dependent_simplex_ordinal_recursive.lp`: raw intrinsic flags fold
+into `OrdinalJoinLiftStage`, the successor is `step(d,F[s])` with
+`(G[s],epsilon[s])`, and arbitrary mapping, nonempty faces, selected
+dimensions zero through four, and retained action are checked.
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
 is the completed bounded continuation from the simplicial substrate. It

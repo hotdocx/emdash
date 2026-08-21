@@ -4202,6 +4202,41 @@ top frame, while the five skip/keep coface codes expose 0123, 0124, 0134,
 code-selected presentations are deliberately not collapsed by a new
 mapping-category normalization.
 
+The same construction is internal at variable dimension. A nonzero intrinsic
+flag code determines a stage
+
+```text
+(d,F,G,epsilon)
+```
+
+where `d` is a target code of the same dimension in `A * 1`, `F` and `G` map
+the old decoded category into `decode(d)`, and `epsilon : F => G`. The first
+stored flag uses the shaped identity-join comparison. Extending the old code
+by a flag `x` extends the stage by
+
+```text
+d        |-> step(d,F[x])
+F        |-> pathout_map_func(F,x)
+G        |-> pathout_transf_target_func(F,G,epsilon,x)
+epsilon  |-> pathout_transf_lift(epsilon,x).
+```
+
+Consequently, for an old source `s`, the ordinal successor is simply
+
+```text
+new code   = step(d,F[s]),
+new source = (G[s],epsilon[s]).
+```
+
+At dimension zero the primitive join cross is evaluated on `(x0,id_x0)`.
+These two clauses support an ordinary `nat_elim`, despite the changing decoded
+categories, because those categories are already indices of the curated raw
+code. The canonical source therefore exists as
+`ordinal_dependent_simplex_source(n)` for variable `n`; mapping and face
+observation reuse the existing code-map and face interpreters. This is an
+internal computational recipe, not external source-text generation and not a
+second encoding of higher categories.
+
 When `C = Path_cat(A)`, the same recursive object and all its projections are
 well typed without additional data. Its final component deliberately remains
 under the nested `homd_`/`PathOut` presentation. The already-checked generic

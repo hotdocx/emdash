@@ -384,6 +384,13 @@ lifts turn the canonical source tetrahedron into one native four-simplex,
 which maps under every `H`, exposes five code-selected tetrahedral faces plus
 native recursive projections, and retains another whole hom action without an
 opaque filler, endpoint normalizer, rule, or unifier;
+the Nat-indexed canonical ordinal-source extension is
+`emdash3_2_dependent_simplex_ordinal_recursive.lp`; it folds existing raw
+intrinsic flag codes into a target code, two whole maps, and a transformation,
+uses the generic join comparison at one flag and `pathout_transf_lift` at each
+later flag, and constructs the successor as `step(d,F[s])` with source
+`(G[s],epsilon[s])`. Arbitrary-target observation and faces reuse the existing
+mapped decoder and `FaceCode` action;
 the whole terminal-right reindexed-unit normalization extension is
 `emdash3_2_prof_reindex_terminal_normalization.lp`; under an explicit
 terminal-branch normality path it compares the native restricted
@@ -1217,7 +1224,13 @@ Use the following order:
     four-simplex; arbitrary-target mapping, five `FaceCode` cofaces, native
     recursive projections, profiles, negatives, and another action are
     checked without an opaque filler, endpoint rule, or unifier;
-120. `emdash3_2_prof_reindex_terminal_normalization.lp` for whole
+120. `emdash3_2_dependent_simplex_ordinal_recursive.lp` folds nonzero
+    intrinsic codes into `OrdinalJoinLiftStage`, computes the zero/nonzero
+    source successor, and uses `nat_elim` to produce a canonical source at
+    variable dimension. Observation, generic faces, successor-cell
+    noncollapse, selected dimensions zero through four, and another action
+    are checked without a second code grammar or proof-time unifier;
+121. `emdash3_2_prof_reindex_terminal_normalization.lp` for whole
     normalization of a reindexed unit profunctor's terminal-right action. A
     supplied path `G[id_*]=id` supports both the original family equality and
     an explicit directed source comparison. Three narrowly guarded component
@@ -1226,14 +1239,14 @@ Use the following order:
     `tapp1`/`functord_laxity_transf` retain higher action. The module is generic
     in the old category and contains no ordinal dimension, face-specific rule,
     direct simplex category, filler, whole-source equality, or unifier;
-121. `emdash3_2_checks.lp` for executable regression statements;
-122. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+122. `emdash3_2_checks.lp` for executable regression statements;
+123. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-123. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-124. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+124. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+125. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-125. `reports/INDEX.md` for task-specific plans and decision records.
-126. `book/book.json` and `book/evidence.json` for book source
+126. `reports/INDEX.md` for task-specific plans and decision records.
+127. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

@@ -242,6 +242,16 @@ existing `FaceCode` action, retains the native recursive top component, and
 keeps another hom action. No opaque filler or simplex-specific conversion is
 added.
 
+`emdash3_2_dependent_simplex_ordinal_recursive.lp` internalizes the same
+pattern at variable dimension. Existing raw intrinsic flag codes drive a
+stage carrying the target code, two whole maps, and their transformation; the
+one-flag case is the identity-join comparison and every later flag applies
+`pathout_transf_lift`. A genuine Nat recursion constructs
+`OrdinalDependentSimplexSource(n)`, while arbitrary-target observations and
+nonempty faces reuse the existing mapped decoder and `FaceCode` action.
+Selected computations through dimension four and another higher action are
+checked.
+
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
 laws and iterable Path action. Categorical decalage is restriction along the

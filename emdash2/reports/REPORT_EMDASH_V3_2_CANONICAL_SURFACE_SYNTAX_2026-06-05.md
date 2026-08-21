@@ -1283,6 +1283,26 @@ iterating `pathout_transf_lift` over
 `ordinal_join_pathout_transf`; do not print it as an opaque four-cell or
 identify native and code-selected face presentations judgmentally.
 
+For the variable-dimensional canonical source write
+
+```text
+source(n)                     canonical intrinsic Delta[n] source
+observe(n,H)                  map the source under H : Delta[n] -> C
+face(n,H,alpha)               selected nonempty FaceCode observation
+successor(source(n))          source(n+1).
+```
+
+The literal owners are `OrdinalDependentSimplexSource`,
+`ordinal_dependent_simplex_source`,
+`ordinal_dependent_simplex_observation`, and
+`ordinal_dependent_simplex_face`. The computational stage is
+`OrdinalJoinLiftStage`; its canonical cell/action owners are
+`ordinal_dependent_simplex_successor_cell` and
+`ordinal_dependent_simplex_lift_next_action`. Describe the successor as
+`step(d,F[s])` with object `(G[s],epsilon[s])`. Do not describe it as
+generated source text, a primitive opaque filler, or a whole
+`Functor(Delta[n],C)` equivalence.
+
 For terminal-right normalization in a recursive join successor, write
 
 ```text
