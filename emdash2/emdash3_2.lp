@@ -13260,6 +13260,82 @@ rule @fapp1_fapp0
       (Struct_sigma $p _)
   ↪ $p;
 
+/*
+  Explicit first-hom projection facade for Sigma totals.
+
+  The ordinary `Sigma_proj1_func` beta above handles a constructor-visible
+  total arrow. Recursive higher-action consumers also need to name the same
+  projection before committing to a global eta law or to rules on the hot
+  `fapp0`/`fapp1_fapp0` eliminators. These transparent operations expose the
+  first component directly. At the next level the two endpoint arrows remain
+  constructor-visible, exactly where `Hom(Sigma)` exposes its next Sigma
+  carrier. No dependent component or higher cell is collapsed.
+*/
+symbol sigma_proj1_hom_fapp0
+  [K : Cat]
+  (E : τ (Catd K))
+  [x y : τ (Obj K)]
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  (p : τ (Hom
+      (@Sigma_cat K E)
+      (Struct_sigma x u)
+      (Struct_sigma y v)))
+  : τ (Hom K x y)
+≔ @sigma_Fst
+    (Obj (Op_cat (Hom_cat K x y)))
+    (λ base : τ (Obj (Op_cat (Hom_cat K x y))),
+      Obj
+        (Fibre_cat
+          (@homd_ K E E (@id_funcd K E) x u y v)
+          base))
+    p;
+
+symbol sigma_proj1_hom_fapp1_fapp0
+  [K : Cat]
+  (E : τ (Catd K))
+  [x y : τ (Obj K)]
+  (u : τ (Obj (Fibre_cat E x)))
+  (v : τ (Obj (Fibre_cat E y)))
+  [p q : τ (Hom K x y)]
+  (alpha : τ (Obj (Fibre_cat
+      (@homd_ K E E (@id_funcd K E) x u y v)
+      p)))
+  (beta : τ (Obj (Fibre_cat
+      (@homd_ K E E (@id_funcd K E) x u y v)
+      q)))
+  (theta : τ (Hom
+      (Hom_cat
+        (@Sigma_cat K E)
+        (Struct_sigma x u)
+        (Struct_sigma y v))
+      (Struct_sigma p alpha)
+      (Struct_sigma q beta)))
+  : τ (Hom (Hom_cat K x y) p q)
+≔ @sigma_Fst
+    (Obj
+      (Op_cat
+        (Hom_cat
+          (Op_cat (Hom_cat K x y))
+          q p)))
+    (λ kappa : τ (Obj
+        (Op_cat
+          (Hom_cat
+            (Op_cat (Hom_cat K x y))
+            q p))),
+      Obj
+        (Fibre_cat
+          (@homd_
+            (Op_cat (Hom_cat K x y))
+            (@homd_ K E E (@id_funcd K E) x u y v)
+            (@homd_ K E E (@id_funcd K E) x u y v)
+            (@id_funcd
+              (Op_cat (Hom_cat K x y))
+              (@homd_ K E E (@id_funcd K E) x u y v))
+            q beta p alpha)
+          kappa))
+    theta;
+
 // Stable head for the computationally important projection pullback. General
 // `Pullback_catd` stays a definition by composition, but this special case is
 // discriminable so sections over the total category can contract to displayed
