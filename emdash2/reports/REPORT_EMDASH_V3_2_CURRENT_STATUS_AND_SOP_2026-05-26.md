@@ -667,6 +667,11 @@ detailed probe evidence.
   constructor-visible component beta computes and generic `tapp1_func`
   remains available. No core edit, endpoint normalization, or unifier is
   added.
+- `emdash3_2_ordinal_join_pathout_successor.lp`: generic identity-join
+  successor for `A * 1`. It packages the observed/primitive shaped cross
+  comparison as one transformation between outgoing-path maps at any fixed
+  old object. The result is generic in `A` and immediately iterable through
+  `pathout_transf_lift`; it adds no dimension-specific simplex data.
 - `emdash3_2_dependent_simplex_ordinal_adequacy.lp`: relative
   ordinal/dependent comparison at the strongest current boundary. Dimension
   zero is a whole pointwise retraction; dimension one observes the walking
@@ -707,6 +712,16 @@ detailed probe evidence.
   at the existing generic visible-Path-fibre profile rather than through a new
   nested-`PathOut` normalization. No opaque filler, runtime rule, or unifier is
   added.
+- `emdash3_2_dependent_simplex_ordinal_dimension4.lp`: constructive ordinal
+  adequacy in dimension four. Starting from the generic identity-join
+  comparison for `Delta[3] * 1`, two `pathout_transf_lift` applications and
+  one component evaluation construct a native fourth-level cell from the
+  canonical source tetrahedron. The resulting source maps under every
+  `H : Functor(Delta[4],C)`; five named coface codes use the existing generic
+  face action, while native projections retain the recursive readable frame
+  and top component. Strict/Path profiles, wrong-endpoint rejection,
+  noncollapse, and another action are checked. No opaque filler, endpoint
+  rule, broad eta, or unifier is added.
 - `emdash3_2_prof_reindex_terminal_normalization.lp`: generic whole
   normalization of the terminal-right action in a reindexed unit profunctor.
   An explicit path `G[id_*]=id` supports both the retained whole family path

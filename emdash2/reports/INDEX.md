@@ -112,17 +112,23 @@ unforced. The generic fixed-source bridge
 `emdash3_2_shaped_pathout.lp` turns a shaped unit-profunctor cell into a whole
 `PathOut` map and packages stable Cat-precomposition versus ordinary
 composition as first-class whole equality rather than a hot evaluator rule.
+The generic successor stack is
+`emdash3_2_pathout_transformation_reframing.lp`,
+`emdash3_2_pathout_transformation_lift.lp`, and
+`emdash3_2_ordinal_join_pathout_successor.lp`: it totalizes the pre/right
+laxity cell, preserves the whole next action, and specializes the result to
+the identity ordinal join `A * 1` for arbitrary `A`.
 The relative ordinal comparison is
 `emdash3_2_dependent_simplex_ordinal_adequacy.lp`: dimension zero is whole,
 dimension one observes the walking-arrow edge, and new generic join point
-betas make the three ordinal triangle edges share vertices. One explicit
-dependent filler then constructs the native triangle. Canonically deriving
-that filler, dimensions three/four, and a mapping-category equivalence remain
-behind primitive/action-derived join-cross compatibility. The bounded plan is
-closed with all rows implemented or precisely deferred; a global all-simplex
-category remains excluded. A future consumer may reopen the separate
-join-cross coherent-square prerequisite, but it is not part of this completed
-boundary.
+betas make the three ordinal triangle edges share vertices. Its constructive
+continuations now derive the triangle filler, canonical tetrahedron, and
+canonical four-simplex. The dimension-four module iterates the generic
+identity-join lift, maps one native source under arbitrary `H`, exposes five
+cofaces through existing `FaceCode` action, and retains the recursive top and
+next action. A mapping-category equivalence and global all-simplex category
+remain excluded; the active dimension-four/recursive-source plan now extracts
+the Nat-indexed successor interface from these finite computations.
 
 `REPORT_EMDASH_V3_2_COHERENT_NERVE_AND_DEPENDENT_SIMPLEX_BRIDGE_PLAN_2026-08-19.md`
 is the completed bounded continuation from the simplicial substrate. It

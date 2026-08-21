@@ -4173,9 +4173,34 @@ For every `H : Functor(Delta[3],C)`, the existing
 unconditional observation exposes faces 012 and 013 as ordinary endpoints,
 faces 023 and 123 through the two whole boundary-line actions, and the final
 dependent component through the native second Sigma projection. The original
-whole post-laxity transformation retains another hom action for a later
-dimension-four ordinal continuation. None of these faces or the top component
-is postulated independently.
+whole post-laxity transformation retains another hom action. None of these
+faces or the top component is postulated independently.
+
+The next dimension is obtained by a uniform successor rather than by copying
+that tetrahedral derivation. For every category `A`, the identity join
+`A * 1` supplies a shaped comparison
+
+```text
+epsilon_1 : outgoing-edge maps(A) => outgoing-edge maps(A * 1).
+```
+
+At `A = Delta[3]`, lift `epsilon_1` first at the canonical edge and then at
+the canonical triangle. The component of the resulting transformation at the
+canonical tetrahedron is
+
+```text
+omega_01234 : Hom(s_0123,s_0124),
+```
+
+so `(s_0124,omega_01234)` is an object of the existing fourth flagged
+`PathOut` classifier. Its component beta is inherited from the generic
+outgoing-path lift; no fourth-dimensional filler is postulated. Mapping this
+one source under `H : Delta[4] -> C` uses `dependent_simplex4_map`. Native
+Sigma projections expose the source, target, base tetrahedron and recursive
+top frame, while the five skip/keep coface codes expose 0123, 0124, 0134,
+0234, and 1234 through the already-generic face action. These native and
+code-selected presentations are deliberately not collapsed by a new
+mapping-category normalization.
 
 When `C = Path_cat(A)`, the same recursive object and all its projections are
 well typed without additional data. Its final component deliberately remains

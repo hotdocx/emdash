@@ -1264,6 +1264,25 @@ the existing flagged `DependentSimplex3_cat`, not a flat four-face record.
 Do not print the typed represented-source reframe as a definitional endpoint
 rewrite, and do not claim an unqualified all-dimensional equivalence.
 
+For the constructed ordinal four-simplex write
+
+```text
+fourSimplexSource             the one native Delta[4] source
+observe4(H)                   map(H,fourSimplexSource)
+faces(observe4(H))            (0123,0124,0134,0234,1234)
+top(observe4(H))              the recursive dependent component.
+```
+
+The literal owners are `ordinal_dependent_simplex4_source`,
+`ordinal_dependent_simplex4_map`, and
+`ordinal_dependent_simplex4_observation`. The five whole code-selected faces
+are `ordinal_dependent_simplex4_face0123` through `...face1234`; the native
+recursive projections include `...s0123`, `...s0124`, `...theta0134`,
+`...readable_cell`, and `...top_component`. The successor is obtained by
+iterating `pathout_transf_lift` over
+`ordinal_join_pathout_transf`; do not print it as an opaque four-cell or
+identify native and code-selected face presentations judgmentally.
+
 For terminal-right normalization in a recursive join successor, write
 
 ```text

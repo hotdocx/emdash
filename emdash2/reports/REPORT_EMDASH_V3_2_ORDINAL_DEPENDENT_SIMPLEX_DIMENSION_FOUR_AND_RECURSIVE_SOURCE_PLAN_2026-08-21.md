@@ -399,11 +399,11 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `ODS4R-00` | complete | Created the dedicated branch/worktree from clean checkpoint `f19fb44`; recorded the fixed dimension-four and variable-source objectives, nonclaims, validation policy, and Git boundary; indexed the plan; and created clean launch checkpoint `9155a73`. |
 | `ODS4R-BASE-1` | complete | Native dimension-four, intrinsic code, mapped-decoder, and variable-face sources plus their focused reviewers are green in the new worktree. The immediately preceding dimension-three source/reviewer evidence is carried forward unchanged from checkpoint `7cfc7db`; no long aggregate was run. |
 | `ODS4R-OWNER-2` | complete | The missing operation is the generic whole outgoing-path lift of an ordinary transformation, not a dimension-specific input to `ordinal_simplex3_top_next_action`. `emdash3_2_pathout_transformation_reframing.lp` connects the formal pre/right source to the constructor-visible Sigma source through existing typed paths; `emdash3_2_pathout_transformation_lift.lp` totalizes the existing pre/right laxity cell into `pathout_transf_lift`, computes its constructor component, and retains generic `tapp1_func`. Source, reviewer, warning, and LHS audits are green without a core edit, endpoint collapse, runtime normalization, or proof-time unifier. |
-| `ODS4R-SOURCE-3` | pending | Construct the identity-`Delta[4]` native source object in `DependentSimplex4_cat` from the retained recursive action and typed endpoint views. |
-| `ODS4R-MAP-4` | pending | Map the one source under arbitrary `H` through `dependent_simplex4_map` and retain the whole map. |
-| `ODS4R-FACES-5` | pending | Expose tetrahedral faces 0123, 0124, 0134, 0234, and 1234 plus the top component from the one mapped native object, reusing variable-dimensional face action and the recursive readable frame. |
-| `ODS4R-PROFILE-6` | pending | Validate general, selected strict, and exact Path-target readings; reject a wrong recursive endpoint and verify generic top-cell noncollapse. |
-| `ODS4R-NEXT-7` | pending | Retain one further whole hom action and record its exact dimension-five handoff without constructing dimension five. |
+| `ODS4R-SOURCE-3` | complete | `emdash3_2_ordinal_join_pathout_successor.lp` packages the generic identity-join shaped comparison for arbitrary `A * 1`. `emdash3_2_dependent_simplex_ordinal_dimension4.lp` lifts it at the canonical source edge and triangle; the component at `ordinal_dependent_simplex3_source` is `ordinal_simplex4_omega`, and pairing it with its endpoints constructs one actual object of the existing `DependentSimplex4_cat`. The constructor beta identifies the cell with the generic `pathout_transf_component`; no filler is postulated. |
+| `ODS4R-MAP-4` | complete | `ordinal_dependent_simplex4_map(H)` is the existing `dependent_simplex4_map`, and `ordinal_dependent_simplex4_observation(H)` is its action on the one canonical source. The mapped intrinsic code is exposed in parallel through the existing code-map target. |
+| `ODS4R-FACES-5` | complete | Native projections expose 0123, 0124, 0134, the recursive readable cell, and top component. Five explicit coface codes and the one generic `ordinal_dependent_simplex4_face(H,alpha)` expose 0123, 0124, 0134, 0234, and 1234 through the existing variable-dimensional face action. Native and code-selected faces remain parallel whole presentations; no unqualified mapping-category equality is claimed. |
+| `ODS4R-PROFILE-6` | complete | The focused reviewer checks the general observation, selected strict carrier, exact `Path_cat` target, wrong recursive source rejection, and generic top-cell noncollapse. No global associativity or new endpoint conversion is used. |
+| `ODS4R-NEXT-7` | complete | `ordinal_simplex4_top_next_action(u,v)` retains `tapp1_func` of the second lifted transformation and records the exact dimension-five handoff without constructing a fifth-level source. |
 | `ODS4R-REC-DESIGN-8` | pending | Compare the checked dimension-two, -three, and -four source constructors. Settle the minimal Nat-indexed source/stage package and whether action provenance is required by the structural successor. |
 | `ODS4R-REC-IMPLEMENT-9` | pending | Implement the generic source package, arbitrary-`H` mapped observation, and one genuine structural successor using existing code/map/join/internal-action owners or a narrowly curated indexed recursor. |
 | `ODS4R-REC-COMPUTE-10` | pending | Check selected source/observation computations through dimensions zero to four, generic nonempty-face access, a wrong-index/endpoint negative, and one retained action. |
@@ -543,3 +543,51 @@ than allowed to become the long aggregate prohibited by this goal. No health
 report was written. The two new sources and their focused reviewer were each
 checked directly and are green; the stable health-report refresh remains
 explicitly owned by `ODS4R-DOC-11` at the final affected-source boundary.
+
+## 19. Fixed Dimension Four — 2026-08-21
+
+The fixed dimension-four slice is complete. The implementation first factors
+the join prelude out of the historical tetrahedron module. For every category
+`A`, `ordinal_join_pathout_transf(A,x0)` is the shaped outgoing-path
+comparison induced by the identity join extension of `A * 1`. It is generic
+in both `A` and the fixed source `x0`.
+
+For `A = Delta[3]`, the checked recursion is
+
+```text
+epsilon1 := ordinal_join_pathout_transf(Delta[3],x0)
+epsilon2 := pathout_transf_lift(epsilon1,e01)
+epsilon3 := pathout_transf_lift(epsilon2,t012)
+omega01234 := epsilon3[s0123]
+source4 := (s0124,omega01234).
+```
+
+Here `s0123` is the already-constructed canonical ordinal tetrahedron. The
+last component beta reduces to the generic `pathout_transf_component`, so the
+fourth-level cell is derived from the existing pre/right laxity action rather
+than supplied by an opaque constant. The result inhabits the existing native
+`DependentSimplex4_cat` without a cast.
+
+The arbitrary-target observation is the image of this single source under
+`dependent_simplex4_map(H)`. Its intrinsic `dependent_simplex_code4` view maps
+through `dependent_simplex_code_map_target`. Five visible coface codes—one
+skip at each of the five vertex positions—are interpreted by the existing
+`dependent_simplex_face_func`; this gives whole observations named 0123,
+0124, 0134, 0234, and 1234. Separately, the native Sigma projections retain
+the source, target, base tetrahedron, readable residual, and dependent top
+component.
+
+The code-selected and native faces have compatible intended geometry but do
+not become judgmentally equal merely because they describe the same coface:
+their codomains retain different intrinsic-code and projection histories.
+The failed stronger probe was therefore rejected rather than answered by a
+normalization or extensionality rule. A future whole mapping-category
+comparison may relate them; it is not required for the canonical source or
+generic face observation.
+
+Focused source and reviewer checks are green. The reviewer also checks the
+selected strict and exact Path targets, wrong recursive endpoint rejection,
+top-cell noncollapse, and `ordinal_simplex4_top_next_action`. The next active
+row is `ODS4R-REC-DESIGN-8`: extract the generic iterator implicit in the
+two-lift dimension-four construction and package its varying code/category
+indices without duplicating the existing intrinsic-code semantics.

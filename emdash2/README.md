@@ -220,8 +220,8 @@ join comparison as a shaped fixed-source `PathOut` map, extracts its whole
 post-laxity top cell, and packages one native source tetrahedron. Mapping that
 source by `dependent_simplex3_map(H)` gives an unconditional observation for
 every ordinal tetrahedron, with faces 012, 013, 023, and 123, the dependent top
-component, and one further hom action. Dimension four, a global mixed-variance
-category, and an unqualified mapping-category equivalence remain unclaimed.
+component, and one further hom action. A global mixed-variance category and an
+unqualified mapping-category equivalence remain unclaimed.
 
 The reusable successor mechanism is separate from that ordinal example.
 `emdash3_2_pathout_transformation_reframing.lp` connects the formal pre/right
@@ -231,6 +231,16 @@ transformation to one whole transformation between outgoing-path functors at
 a fixed source. Its components reuse the existing pre/right laxity cell, one
 constructor beta computes, and another hom action remains iterable; no core
 endpoint rule or unifier is added.
+
+`emdash3_2_ordinal_join_pathout_successor.lp` specializes this mechanism to
+the identity ordinal join `A * 1` for arbitrary `A`. The dimension-four
+continuation `emdash3_2_dependent_simplex_ordinal_dimension4.lp` applies two
+successive lifts at the canonical edge and triangle, then evaluates at the
+canonical tetrahedron. This constructs one native four-simplex, maps it under
+every `H : Functor(Delta[4],C)`, exposes all five tetrahedral faces through the
+existing `FaceCode` action, retains the native recursive top component, and
+keeps another hom action. No opaque filler or simplex-specific conversion is
+added.
 
 For a path groupoid, one bounded algebraic 2-nerve computes the inner filler
 by path composition and the outer fillers by inverses, with J-derived section
