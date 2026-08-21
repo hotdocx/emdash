@@ -3,8 +3,9 @@
 Date: 2026-08-21
 
 `REPORT_EMDASH_V3_2_ORDINAL_DEPENDENT_SIMPLEX_DIMENSION_THREE_PLAN_2026-08-19.md`
-is the active closeout child of the completed join-cross dependent-simplex
-plan. Its constructive dimension-three boundary is now implemented by
+is the completed child of the join-cross dependent-simplex plan. Its
+constructive dimension-three boundary is implemented at local checkpoint
+`7cfc7db` by
 `emdash3_2_dependent_simplex_ordinal_dimension3.lp`: the shaped fixed-source
 `PathOut` and generic post-laxity owners construct one canonical native source
 tetrahedron; the existing whole `dependent_simplex3_map` maps it under every

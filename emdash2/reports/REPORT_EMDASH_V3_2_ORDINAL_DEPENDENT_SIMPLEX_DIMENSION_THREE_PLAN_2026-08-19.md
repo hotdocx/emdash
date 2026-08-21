@@ -4,11 +4,12 @@ Date: 2026-08-19 (America/Toronto)
 
 Plan-ID: `ORDINAL-DEPENDENT-SIMPLEX-DIMENSION-THREE-V3.2`
 
-Status: **active implementation plan**. The completed join-cross plan
-constructs the canonical dimension-two ordinal dependent simplex and retains
-the next whole hom action. This child plan uses that boundary to construct the
-corresponding ordinal tetrahedron, without reopening dimension two or silently
-expanding to dimension four.
+Status: **completed bounded implementation plan**. The completed join-cross
+plan constructs the canonical dimension-two ordinal dependent simplex and
+retains the next whole hom action. This child plan uses that boundary to
+construct the corresponding ordinal tetrahedron, without reopening dimension
+two or silently expanding to dimension four. The implementation checkpoint is
+`7cfc7db`.
 
 Branch: `goal/ordinal-dependent-simplex3-v3.2`
 
@@ -331,7 +332,7 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 | `ODS3-PROFILE-7` | complete at the exact recursive boundary | General and selected strict observations typecheck; a wrong theta base is rejected; and the extracted generic top cell is not convertible to identity. The same object specializes to `Path_cat(A)` without extra data. Direct `eq_sym` is checked by the existing generic recursive profile when its target fibre is visibly a Path category; the nested ordinal `homd_`/`PathOut` owner is deliberately not collapsed to a new Path normal form. |
 | `ODS3-NEXT-8` | complete | `ordinal_simplex3_top_whole` retains the whole post-laxity transformation and `ordinal_simplex3_top_next_action(u,v)` exposes its literal next hom action. Dimension four is not implemented. |
 | `ODS3-DOC-9` | complete | The focused reviewer, both active-source registries, Foundations, canonical syntax/current status, READMEs/AGENTS, report index, catalog, and source-only health snapshot are synchronized. Focused semantic and static evidence is recorded in section 16.21. |
-| `ODS3-CLOSE-10` | in progress | Review the exact diff and evidence, create clean implementation and closeout checkpoints, and state the precise achieved boundary. No long aggregate or unauthorized integration/publication/cleanup. |
+| `ODS3-CLOSE-10` | complete | Reviewed the exact staged diff, created clean implementation checkpoint `7cfc7db`, and recorded the precise achieved and deferred boundaries below. The worktree is clean apart from this final ledger-only closeout update; no long aggregate or unauthorized integration/publication/cleanup occurred. |
 
 ## 15. Completion Definition
 
@@ -1866,3 +1867,28 @@ The long aggregate remains deliberately unrun under the plan's proportional
 validation policy. The affected semantic targets are checked directly and
 the source-only health report records the new registry without rechecking
 unrelated algebraic-geometry modules.
+
+### 16.22 Closeout
+
+Implementation checkpoint `7cfc7db` completes the bounded objective:
+
+```text
+H : Functor(Delta[3],C)
+  |-> ordinal_dependent_simplex3_observation(H)
+      : Obj(DependentSimplex3_cat(...)).
+```
+
+The observation is the image of one constructed native source. Its four
+triangle faces and dependent top are projections of that object, and the
+originating whole action remains iterable. This is constructive
+ordinal/dependent adequacy in dimension three, not a new tetrahedron axiom or
+a flat coherence record.
+
+The result does not yet define the variable-dimensional operation
+`ordinal_dependent_simplex(n,H)`, prove an all-`n` mapping-category
+equivalence, or construct the ordinal dimension-four comparison. Its retained
+next hom action and the dimension-independent shaped-`PathOut`/post-laxity
+architecture are the handoff evidence for such a later child plan. Likewise,
+the direct normalization of nested groupoidal `PathOut` towers to literal
+Path categories remains a broader groupoidal-closure problem, not a defect in
+the dimension-three construction.
