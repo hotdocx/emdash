@@ -115,6 +115,18 @@ that source-functorial groupoidification has already been packaged as an
 adjunction, or that a full Crans–Gray biclosed monoidal structure has been
 constructed.
 
+A fifth spiral begins in [Chapter 29](#chapter-29). It treats the retained
+higher action as recursive geometry. Injective face codes form an internal
+semi-simplex category, directed joins form the ordinal shapes $\Delta[n]$,
+and iterated outgoing-path categories present a simplex as a base cell with a
+dependent cell above it. One structural successor computes a canonical
+ordinal dependent simplex in variable dimension; selected dimensions zero
+through four, every nonempty face observation, and one further action are
+checked. Degeneracies, a whole category of dependent simplexes, and its
+mapping-category equivalence with $\operatorname{Functor}(\Delta[n],C)$
+remain the next boundary rather than being inferred from the object-level
+recursion.
+
 [Appendix G](#appendix-formal-presentation) then states how the mathematical
 surface, checked categorical kernel, bounded TypeScript elaborator through
 explicit Core, and external models fit together, with the Lambdapi kernel

@@ -201,6 +201,11 @@
       "path": "book/chapters/28-laxity-interchange-and-gray-direction.md"
     },
     {
+      "id": "chapter-29",
+      "kind": "chapter",
+      "path": "book/chapters/29-simplexes-from-dependent-homs.md"
+    },
+    {
       "id": "appendix-notation",
       "kind": "appendix",
       "path": "book/appendices/a-notation.md"

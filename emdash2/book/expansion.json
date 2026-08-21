@@ -442,6 +442,31 @@
         "GRAY-RIGHT-CLOSURE"
       ],
       "boundary": "the active construction is one profiled strict-object/lax-arrow right closure with a derived walking square and oriented interchanger; it does not provide the mirror closure, full Crans-Gray biclosed monoidal structure, tensor functoriality or coherence, or global migration of historical strict endpoint cuts"
+    },
+    {
+      "id": "chapter-29",
+      "number": 29,
+      "path": "book/chapters/29-simplexes-from-dependent-homs.md",
+      "title": "Simplexes From Dependent Homs",
+      "conceptualOwner": "computational semisimplicial faces and variable-dimensional ordinal simplexes realized by recursive PathOut, homd, Sigma, and whole action",
+      "spiralFrom": [
+        "chapter-5",
+        "chapter-9",
+        "chapter-13",
+        "chapter-17",
+        "chapter-25",
+        "chapter-28"
+      ],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "ORDINAL-DEPENDENT-SIMPLEX-RECURSION"
+      },
+      "secondaryEvidence": [
+        "SEMISIMPLICIAL-FACE-SUBSTRATE",
+        "DEPENDENT-SIMPLEX-INTERNAL-ACTION",
+        "ORDINAL-DEPENDENT-FOUR-SIMPLEX"
+      ],
+      "boundary": "injective faces, standard semisimplices, native dependent simplexes through dimension four, intrinsic flagged codes, variable-dimensional canonical ordinal sources, generic nonempty-face action, and retained higher action are active; degeneracies, a whole DependentSimplex_cat classifier and Functor_cat(Delta[n],C) equivalence, judgmental agreement of all presentations, and general Kan, Segal, Rezk, complicial, or oriental structure remain unclaimed"
     }
   ],
   "appendix": {

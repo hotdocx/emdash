@@ -245,6 +245,14 @@ category. [Chapter 28](#chapter-28) keeps the target directed again: whole
 laxity, a computational strict profile, and one right Gray closure produce a
 nonidentity walking-square interchanger with higher action still available.
 
+The fifth spiral asks what that still-available action constructs when it is
+iterated. [Chapter 29](#chapter-29) combines a computing category of injective
+faces with the native recursion
+$S_{n+1}=\operatorname{PathOut}_{S_n}(s_n)$. It constructs a canonical
+ordinal dependent simplex in variable dimension, maps it into arbitrary
+targets, and retains both face action and another hom action without
+postulating a new coherence record at every dimension.
+
 The larger aim is not merely to calculate one hom. It is to show how a type
 theory can let groupoidal equality and noninvertible arrows coexist, interact,
 and compute—without quietly turning one into the other.

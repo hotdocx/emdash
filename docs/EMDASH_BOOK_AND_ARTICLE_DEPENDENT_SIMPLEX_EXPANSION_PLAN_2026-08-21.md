@@ -340,9 +340,9 @@ stop and audit the divergence rather than silently merging unrelated work.
 | --- | --- | --- |
 | `BDS-00` | complete | Created the dedicated branch/worktree from clean `a70ea44`; bootstrapped its pnpm graph; audited current book/article architecture, active owners, completed plans, exact nonclaims, and the mapping-category naming boundary; baseline `book:check` and `article:check` are green. |
 | `BDS-PLAN-1` | complete | Adopted this editorial architecture, evidence map, article boundary, artifact policy, integration/deployment authority, and persistent-goal launch prompt. The active goal delegates to this living plan and preserves the whole mapping-category equivalence as a later foundational theorem. |
-| `BDS-EVIDENCE-2` | pending | Register the four checked evidence claims and Chapter 29 architecture metadata. |
-| `BDS-CHAPTER-3` | pending | Write and review Chapter 29 as high-quality mathematical prose, including exact status notes, comparisons, and boundaries. |
-| `BDS-CROSSCUT-4` | pending | Synchronize contents, reading transitions, notation/glossary/status/bibliography material, and any concise cross-chapter links required by the new chapter. |
+| `BDS-EVIDENCE-2` | complete | Registered the four checked evidence claims, their active owners/reviewers, and the Chapter 29 manifest/expansion contract. The source gate reports 159 declared and cited claims. |
+| `BDS-CHAPTER-3` | in progress | Added the 3,119-word Chapter 29 with the mathematical sequence from ordinal shapes and injective faces through native PathOut/homd recursion, tetrahedral projection geometry, intrinsic codes, ordinal successor, the four-simplex, the variable-dimensional theorem, comparisons, and exact nonclaims. Source, evidence, typography, KaTeX, and paper validation are green; render and visual review remain. |
+| `BDS-CROSSCUT-4` | complete | Synchronized the prologue, preface, reading paths, Chapter 28 transition, notation, glossary, status matrix/research direction, bibliography, and generated contents ownership for the fifth spiral. |
 | `BDS-ARTICLE-5` | pending | Add the concise dependent-simplex synthesis; revise abstract, research boundaries, conclusion, metadata, and references while remaining within 18 pages. |
 | `BDS-BOOK-QA-6` | pending | Assemble, source-check, render, export, structurally check, and visually inspect the updated book. |
 | `BDS-ARTICLE-QA-7` | pending | Check, render, export, structurally check, and visually inspect the updated article. |

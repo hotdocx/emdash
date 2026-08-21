@@ -2,8 +2,8 @@
 
 # Appendix F. Implementation Status And Research Directions
 
-This appendix summarizes the boundary of the fourth-spiral groupoidal-
-realization development edition. The generated
+This appendix summarizes the boundary of the higher-categorical development
+edition through the fifth, simplicial spiral. The generated
 [evidence register](#appendix-evidence) remains the detailed claim-by-claim
 authority.
 
@@ -22,6 +22,7 @@ authority.
 | WalkingEnd calculation | Code, encode, power, spiral, contextual decoder, normalization cell/path, two inverse laws, carrier equivalence, noninvertibility results, and the whole free-inversion comparison with the Circle | No packaged monoid isomorphism, reverse `BNat` functor, full hom-category equivalence with `BNat`, or directed initiality theorem |
 | Groupoidal realization | Path categories and path functors; product-path split/join and coherent transport; Circle/Integer encode-decode and monodromy; WalkingEnd/Circle and WalkingArrow/interval mapping theorems; category-indexed groupoidification; path-realized pseudo-laxity | Source functoriality and the packaged groupoidification adjunction, closure for every former, generic simplex regressions, and a complete computational HoTT metatheory remain open |
 | Profiled Gray direction | Computational strict-functor codes, the strict-object/lax-arrow `GrayHom_lax` profile, one selected right closure, the walking square, and a nonidentity interchanger with retained next action | No mirror closure, full Crans–Gray biclosed monoidal structure, tensor functoriality/coherence, or global strict-cut migration |
+| Semisimplicial and dependent simplexes | Computing injective face codes and augmented index; join-built ordinal shapes; Yoneda standard semisimplices; homd/Sigma triangle and tetrahedron action; intrinsic flagged codes; generic nonempty faces; one canonical ordinal source in variable dimension with selected checks through dimension four and retained next action | No degeneracies, whole `DependentSimplex_cat(C,n)` classifier, mapping-category equivalence with `Functor_cat(Delta[n],C)`, judgmental agreement of all finite presentations, or general Kan, Segal, Rezk, complicial, or oriental theory |
 | Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
 | Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
@@ -108,6 +109,16 @@ walking-square interchanger is derived from the ordinary internal laxity
 action, but a full Gray theory still needs the mirror closure, tensor action,
 and coherent associativity and unit data. Those are structural projects, not
 extra fields to append to the current interchanger example.
+
+The dependent-simplex construction supplies the next exact strengthening.
+Its present `DependentSimplexObservation(C,n)` packages objects only. A
+whole comparison with $\operatorname{Functor}(\Delta[n],C)$ first requires an
+internal category whose objects recover that package, whose homs express
+compatible transformations of every dependent frame, and whose higher action
+agrees with the existing internal-action tower. Comparison functors, whole
+beta and eta, and compatibility with face restriction must then be
+constructed. Degeneracies are a separate extension of the index and native
+recursion, not a consequence of ambient identities alone.
 
 ## F.5 Semantics And Proof-Assistant Engineering
 

@@ -499,6 +499,8 @@ theory a computational spine.
 
 The result is deliberately asymmetric. Groupoidal realization explains how
 directed coherence may become invertible; the Gray direction explains why it
-should not have been erased beforehand. What follows in the appendices is the
-ledger of exact notation, evidence, provenance, computation, and remaining
-research boundaries for all four spirals.
+should not have been erased beforehand. [Chapter 29](#chapter-29) now uses the
+same retained action recursively: a dependent arrow between dependent arrows
+becomes a simplex with another dimension. The appendices then give the ledger
+of exact notation, evidence, provenance, computation, and remaining research
+boundaries for all five spirals.

@@ -4016,6 +4016,146 @@
         }
       ]
     },
+    "SEMISIMPLICIAL-FACE-SUBSTRATE": {
+      "status": "checked",
+      "statement": "Injective skip/keep face codes compute, form the locally discrete augmented semi-simplex category, realize selected ordinal shapes by directed join, and define Yoneda standard semisimplices and whole groupoid-valued semisimplicial diagram realization with retained higher action.",
+      "owners": [
+        {
+          "file": "emdash3_2_semisimplicial_face_codes.lp",
+          "symbol": "FaceCode"
+        },
+        {
+          "file": "emdash3_2_semisimplicial_index.lp",
+          "symbol": "SemiDeltaPlus_cat"
+        },
+        {
+          "file": "emdash3_2_simplex_shapes.lp",
+          "symbol": "DirectedSimplex_cat"
+        },
+        {
+          "file": "emdash3_2_semisimplicial_diagrams.lp",
+          "symbol": "StandardSimplex"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/semisimplicial_face_codes.lp",
+          "symbol": "face_vertex_zero"
+        },
+        {
+          "file": "examples/semisimplicial_index_category.lp",
+          "symbol": "semi_delta_edge_zero_one"
+        },
+        {
+          "file": "examples/simplex_shapes.lp",
+          "contains": "Ordinary dimension n means n+1 vertices"
+        },
+        {
+          "file": "examples/semisimplicial_diagrams.lp",
+          "symbol": "semisimplicial_grpd_realized_face_func"
+        }
+      ]
+    },
+    "DEPENDENT-SIMPLEX-INTERNAL-ACTION": {
+      "status": "checked",
+      "statement": "The native dependent triangle is the existing hom of a Sigma total, its base and endpoint faces are whole functor projections, and the next internal action maps a visible dependent tetrahedron while retaining a further hom action rather than adding an independent coherence record.",
+      "owners": [
+        {
+          "file": "emdash3_2_dependent_simplex_bridge.lp",
+          "symbol": "DependentTriangle_cat"
+        },
+        {
+          "file": "emdash3_2_dependent_simplex_bridge.lp",
+          "symbol": "dependent_triangle_boundary_face_func"
+        },
+        {
+          "file": "emdash3_2_dependent_simplex_bridge.lp",
+          "symbol": "dependent_tetrahedron_map"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/dependent_simplex_bridge.lp",
+          "contains": "The triangle classifier is the active Hom(Sigma) presentation"
+        },
+        {
+          "file": "examples/dependent_simplex_bridge.lp",
+          "contains": "A further hom action remains available"
+        }
+      ]
+    },
+    "ORDINAL-DEPENDENT-FOUR-SIMPLEX": {
+      "status": "checked",
+      "statement": "One canonical ordinal four-simplex is constructed by iterating the whole PathOut transformation lift, maps under every functor from Delta[4], exposes all five tetrahedral cofaces through generic FaceCode action, supports selected strict and exact Path targets, remains noncollapsed, and retains one next action.",
+      "owners": [
+        {
+          "file": "emdash3_2_pathout_transformation_lift.lp",
+          "symbol": "pathout_transf_lift"
+        },
+        {
+          "file": "emdash3_2_dependent_simplex_ordinal_dimension4.lp",
+          "symbol": "ordinal_dependent_simplex4_source"
+        },
+        {
+          "file": "emdash3_2_dependent_simplex_ordinal_dimension4.lp",
+          "symbol": "ordinal_dependent_simplex4_face"
+        },
+        {
+          "file": "emdash3_2_dependent_simplex_ordinal_dimension4.lp",
+          "symbol": "ordinal_simplex4_top_next_action"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/pathout_transformation_lift.lp",
+          "symbol": "pathout_transf_component"
+        },
+        {
+          "file": "examples/dependent_simplex_ordinal_dimension4.lp",
+          "symbol": "ordinal_dependent_simplex4_source"
+        },
+        {
+          "file": "examples/dependent_simplex_ordinal_dimension4.lp",
+          "symbol": "ordinal_dependent_simplex4_face1234"
+        }
+      ]
+    },
+    "ORDINAL-DEPENDENT-SIMPLEX-RECURSION": {
+      "status": "checked",
+      "statement": "Nat recursion constructs a canonical intrinsic ordinal dependent-simplex source at variable dimension; its structural successor steps the code at F[s] and stores the transformation component epsilon[s], while arbitrary-target observation, generic nonempty-face access, selected computations through dimensions zero to four, noncollapse, and a retained next action are checked.",
+      "owners": [
+        {
+          "file": "emdash3_2_dependent_simplex_ordinal_recursive.lp",
+          "symbol": "ordinal_dependent_simplex_source"
+        },
+        {
+          "file": "emdash3_2_dependent_simplex_ordinal_recursive.lp",
+          "symbol": "ordinal_dependent_simplex_observation"
+        },
+        {
+          "file": "emdash3_2_dependent_simplex_ordinal_recursive.lp",
+          "symbol": "ordinal_dependent_simplex_face"
+        },
+        {
+          "file": "emdash3_2_dependent_simplex_ordinal_recursive.lp",
+          "symbol": "ordinal_dependent_simplex_lift_next_action"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/dependent_simplex_ordinal_recursive.lp",
+          "symbol": "OrdinalDependentSimplexSource"
+        },
+        {
+          "file": "examples/dependent_simplex_ordinal_recursive.lp",
+          "symbol": "ordinal_dependent_simplex_observation"
+        },
+        {
+          "file": "examples/dependent_simplex_ordinal_recursive.lp",
+          "symbol": "ordinal_dependent_simplex_lift_next_action"
+        }
+      ]
+    },
     "EH-COMMUTATIVITY": {
       "status": "checked",
       "statement": "Two 2-endomorphisms of an identity 1-cell commute in the selected Eckmann-Hilton slice.",

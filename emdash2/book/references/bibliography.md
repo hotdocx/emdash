@@ -49,9 +49,26 @@
     Higher-Categorical Diagrams*. arXiv:2404.07273v2, 2024.
     [arXiv record](https://arxiv.org/abs/2404.07273).
 
-Items 1–5 and 8–11 situate the mathematical development; items 6–7 identify
+12. <a id="ref-kolomatskaia-shulman-sst"></a>Astra Kolomatskaia and Michael
+    Shulman. *Displayed Type Theory and Semi-Simplicial Types*.
+    arXiv:2311.18781v2, 2024.
+    [arXiv record](https://arxiv.org/abs/2311.18781).
+
+13. <a id="ref-herbelin-ramachandra-parametricity"></a>Hugo Herbelin and
+    Ramkumar Ramachandra. *A Parametricity-Based Formalization of
+    Semi-Simplicial and Semi-Cubical Sets*. arXiv:2401.00512v2, 2025.
+    [arXiv record](https://arxiv.org/abs/2401.00512).
+
+14. <a id="ref-herbelin-ramachandra-very-dependent"></a>Hugo Herbelin and
+    Ramkumar Ramachandra. *The Very Dependent Recursive Structure of Iterated
+    Parametricity in Indexed Form*. arXiv:2602.12689v1, 2026.
+    [arXiv record](https://arxiv.org/abs/2602.12689).
+
+Items 1–5 and 8–14 situate the mathematical development; items 6–7 identify
 the proof infrastructure and checked artifact. Citation does not by itself
 confer the book's formal-status label. The exact HoTT source revision and
 Zeuner, Pédrot, and Hadzihasanovic versions, section maps, adaptation targets,
-and license metadata, together with the reference-only policy for Došen's book, are recorded in
-`book/references/third-party-sources.json`.
+and license metadata, together with the reference-only policy for Došen's
+book, are recorded in `book/references/third-party-sources.json`. Items 12–14
+are comparative references for Chapter 29; its prose is original rather than
+an adaptation of those sources.

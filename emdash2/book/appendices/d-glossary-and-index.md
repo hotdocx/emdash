@@ -177,6 +177,15 @@ higher action in a prospective native presentation. It is not merely the
 operation of taking an arbitrary opposite category. See
 [Chapter 14](#chapter-14).
 
+<a id="glossary-dependent-simplex"></a>
+
+**Dependent simplex.** A recursively flagged object obtained by choosing an
+object of $C$, then an object of its outgoing-path category, and continuing.
+Each successor is a `PathOut`, hence a Sigma of a representable hom; its
+arrows expose a base cell and a dependent cell above transport. The active
+variable-dimensional object package is not yet a whole category of all
+dependent simplexes. See [Chapter 29](#chapter-29).
+
 <a id="glossary-directed-hit"></a>
 
 **Directed higher-inductive type/category.** A presentation with object,
@@ -220,6 +229,13 @@ compiler for the whole book surface or a second mathematical kernel. See
 development, or research boundary. The status describes the relation between
 prose and the active artifact. See [How to Read](#how-to-read) and
 [Appendix B](#appendix-evidence).
+
+<a id="glossary-face-code"></a>
+
+**Face code.** A set-classified skip/keep word representing an injective
+monotone map between finite ordinals. Identity is the all-keep word and
+composition computes by structural substitution. Face codes are the homs of
+the augmented semi-simplex category. See [Chapter 29](#chapter-29).
 
 <a id="glossary-explicit-core"></a>
 
@@ -547,6 +563,21 @@ property. See [Chapter 20](#chapter-20).
 **Site.** A category equipped with a Grothendieck topology, whose covering
 sieves satisfy maximality, pullback stability, and local character. A site
 need not be a poset of open subsets. See [Chapter 19](#chapter-19).
+
+<a id="glossary-semisimplicial-diagram"></a>
+
+**Semisimplicial diagram.** A functor from the opposite augmented category of
+injective ordinal maps. It has face action but no degeneracy action. The active
+groupoid-valued diagrams realize levelwise through the path-category functor
+while retaining whole map and higher action. See [Chapter 29](#chapter-29).
+
+<a id="glossary-standard-semisimplex"></a>
+
+**Standard semisimplex.** The Yoneda representable
+$\operatorname{Hom}(-,n+1)$ on the augmented semi-simplex category. The shift
+converts dimension $n$ to $n+1$ vertices. It is distinct from both the ordinal
+source category $\Delta[n]$ and one native dependent simplex. See
+[Chapter 29](#chapter-29).
 
 <a id="glossary-topology-local-ring"></a>
 

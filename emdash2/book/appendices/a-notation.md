@@ -44,6 +44,10 @@ syntax.
 | $\operatorname{IsWeightedLimit}(F,W,L)$ | a chosen representation of weighted cones | `IsWeightedLimit_cov_comp F W L` |
 | $\operatorname{Cocone}_W(F)$ | the opposite-dual weighted-cocone profunctor | `WeightedCocone_prof F W` |
 | $A\star B$ | directed join with left-to-right cross arrows | `Join_cat A B` |
+| $\Delta[n]$ | the join-built finite ordinal category with $n+1$ vertices | `DirectedSimplex_cat n` |
+| $\boldsymbol\Delta[n]$ | the standard representable semisimplex $\operatorname{Hom}(-,n+1)$ | `StandardSimplex (succ n)` |
+| $\mathsf{Face}(p,n)$ | injective monotone maps from the $p$-vertex ordinal to the $n$-vertex ordinal | `FaceCode p n` |
+| $\mathsf{Obs}(C,n)$ | a dependent-simplex code paired with one object of its native decoded category | `DependentSimplexObservation C n` |
 | $X:\mathcal K^{\mathrm{op}}\to\mathsf{Cat}$ | a Cat-valued presheaf on $\mathcal K$ | `Psh K` |
 | $yU$ | the representable presheaf $\operatorname{Hom}_{\mathcal K}(-,U)$ | `yoneda_psh K U` |
 | $p^*R$ | pullback of the sieve $R$ by postcomposing its probes with $p$ | `sieve_pullback K V U p R` |
