@@ -1494,14 +1494,36 @@ early and loses the common owner which relates the two endpoint histories.
 Adding equality, a broad `Hom_fapp0` fold, Sigma eta, or a component rewrite
 would erase directed/lax information.
 
-The next bounded implementation step is therefore:
+The next bounded implementation step must distinguish two independent
+projection axes.  Sigma projection sends a dependent arrow `(p,alpha)` to its
+base arrow `p`.  Fixed-source/fixed-target endpoint projection instead keeps
+one endpoint internal through `hom_int`/`hom_con_int`; in the covariant
+presentation it sends `p` to the transported object `E[p](u)`.  These are not
+two spellings of one projection.
+
+At this level, one endpoint of the whole post-laxity cell is already the
+dimension-three tetrahedron.  Schematically it has the recursive shape
 
 ```text
-whole constructor-visible Sigma/homd cell
-  -> dependent_tetrahedron(kappa,lambda)
-  -> whole base-changing total map Sigma(F,FF)[(kappa,lambda)]
-  -> native dependent-triangle/tetrahedron owner
-  -> only then project the readable top and retained next action.
+source surface  = u
+target surface  = v
+base surface    = p
+action surface  = E[p](u)
+volume          = alpha : E[p](u) -> v.
+```
+
+The whole post-laxity cell *between* two such endpoints is the retained
+dimension-four datum.  The corrected projection order is therefore:
+
+```text
+whole post-laxity transformation
+  -> select one endpoint total arrow (p,alpha), without erasing its owner
+  -> expose source/target total objects
+  -> expose p by the Sigma projection
+  -> expose E[p](u) by the fixed-source endpoint action
+  -> compare those four whole faces with the canonical ordinal faces
+  -> package the resulting native tetrahedron
+  -> retain the post-laxity cell's next action for dimension four.
 ```
 
 The active `emdash3_2_dependent_simplex_bridge.lp` owns the fixed-base part of
@@ -1514,8 +1536,7 @@ dependent_tetrahedron_map(FF)[(kappa,lambda)]
 ```
 
 That formula deliberately retains `kappa` only because `Functord(E,D)` is
-over one fixed base.  It is not yet the projection required by the ordinal
-consumer.  When the base surface is also mapped by
+over one fixed base.  Independently, when a base surface is mapped by
 `F : A -> K`, the correct total action is
 
 ```text
@@ -1523,28 +1544,43 @@ Sigma(F,FF)[(kappa,lambda)]
   = (F_1(kappa), FF_1(kappa,lambda)).
 ```
 
-Here `F_1(kappa)` is the projected base line, while
-`FF_1(kappa,lambda)` is the distinct surface over it.  Together with the
-source and target surfaces these are the four simplex faces.  The active
-kernel already factors this general total action into
+Here `F_1(kappa)` is the mapped base component, while
+`FF_1(kappa,lambda)` is the distinct dependent component over it.  The active
+kernel already factors this valid general total action into
 
 ```text
 sigma_map_func(FF)
   ; sigma_pullback_total_func(F,D),
 ```
 
-and `pathout_map_func` uses exactly that composite.  A focused consumer now
-checks that the new two-stage projections reconstruct a well-typed whole
-`dependent_tetrahedron`.  The remaining audit must identify the existing
-base functor `F` and pulled-back displayed map `FF` supplying the native
-exchange, then apply the *whole composite* above (or its already-defined
-`pathout_map_func`/dependent-simplex specialization) before projecting.  Do
-not introduce a duplicate Sigma exchange or return to componentwise endpoint
-chasing.  Its acceptance test is one mapped whole cell whose first projection
-is `F_1(kappa)` and whose second projection is the corresponding internal
-displayed action, with another hom action retained.  The target-side
-`SigmaPathView` remains valid equality evidence after the whole exchange, but
-it is not a replacement for the source's directed comparison.
+and `pathout_map_func` uses exactly that composite.  The generic focused probe
+`tmp/probes/sigma_basechange_map_probe.lp` checks both constructor-visible
+object/arrow computation and the retained next action.  This does **not** by
+itself produce the ordinal reflag.  After projecting a generated higher cell
+to a bare base component, there is generally no functorial cancellation which
+recovers the missing face.  If the ordinal continuation uses a pair `(F,FF)`,
+both parts must be projections of one whole internal-action owner (or a
+transparent package of that owner), not independently reconstructed maps on
+arbitrary capped cells.
+
+The focused
+`tmp/probes/dependent_triangle_recursive_tetrahedron_faces.lp` now validates
+the relevant recursive geometry directly.  For the selected endpoint, its
+source and target surface views, base surface, covariantly transported action
+surface, and volume all typecheck; the action surface is definitionally the
+existing `os3tsp_source_factor_source`, and the fixed-source endpoint functor
+retains another hom action.  Thus the remaining audit is no longer "find any
+base functor `F`".  It is to project the selected endpoint through the existing
+`hom_int`/`hom_con_int`, `fib_cov_tapp0_func`, Sigma, and join-cross whole
+owners, and compare those four owner-retaining faces with 012, 013, 023, and
+123 before native packaging.  A base-changing total map remains available if
+that audit exposes a genuine packaged displayed map over a base map.
+
+The target-side `SigmaPathView` remains valid equality evidence after any
+whole exchange, but it is not a replacement for the source's directed
+comparison.  This distinction prevents another off-by-one projection and
+matches the intended boundary: one volume with source, target, base, and
+endpoint-action surfaces, followed by a separately retained next action.
 
 This correction does not invalidate checkpoint `f1aa554`: the generic
 `section_total_postcomp_transf`, its point/whole/capped computations, and its
