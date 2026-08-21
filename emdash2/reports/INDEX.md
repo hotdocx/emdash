@@ -176,6 +176,18 @@ The completed continuation adds no mathematical
 authority: active owners and checked examples remain authoritative for every
 formal claim.
 
+`../../docs/EMDASH_BOOK_AND_ARTICLE_DEPENDENT_SIMPLEX_EXPANSION_PLAN_2026-08-21.md`
+is the active fifth-spiral editorial and release ledger. It adds the
+theorem-led dependent-simplex chapter and concise article synthesis, advances
+the draft book to 355-page `0.6.0-dev` and the article to 18-page
+`0.3.0-dev`, and preserves the missing whole
+`Functor_cat(Delta[n],C) ~= DependentSimplex_cat(C,n)` comparison and
+degeneracies as explicit boundaries. The locally promoted book PDF has
+SHA-256
+`4116c6aaa586e55dc7c54b5faa6e379b3a376bb56fb86fec392f7981a72276b3`;
+remote integration and deployment evidence remain governed by that living
+ledger until its closeout.
+
 `../../docs/PARALLEL_GOAL_V3_2_INTEGRATION_PLAN_2026-08-04.md` records the
 completed cross-layer integration joining the TypeScript-elaborator and
 presheaves/sites/schemes histories. It owns the historical conflict decisions,

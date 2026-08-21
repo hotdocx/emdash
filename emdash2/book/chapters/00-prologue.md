@@ -57,12 +57,12 @@ different route.
 
 <!-- evidence:WE-HOM-NAT-CARRIER -->
 
-> **Theorem preview.** There is an equivalence of underlying carriers
->
-> $$
-> \operatorname{Hom}_{W}(*,*)\simeq\mathbb{N}.
-> $$
->
+**Theorem preview.** There is an equivalence of underlying carriers
+
+$$
+\operatorname{Hom}_{W}(*,*)\simeq\mathbb{N}.
+$$
+
 > **Formal status — checked.** Evidence `WE-HOM-NAT-CARRIER`. The
 > current package is a `TypeEquiv`, together with a native
 > equality-valued facade. A monoid or hom-category equivalence is not being

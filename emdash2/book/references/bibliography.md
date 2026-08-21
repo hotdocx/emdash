@@ -64,11 +64,5 @@
     Parametricity in Indexed Form*. arXiv:2602.12689v1, 2026.
     [arXiv record](https://arxiv.org/abs/2602.12689).
 
-Items 1–5 and 8–14 situate the mathematical development; items 6–7 identify
-the proof infrastructure and checked artifact. Citation does not by itself
-confer the book's formal-status label. The exact HoTT source revision and
-Zeuner, Pédrot, and Hadzihasanovic versions, section maps, adaptation targets,
-and license metadata, together with the reference-only policy for Došen's
-book, are recorded in `book/references/third-party-sources.json`. Items 12–14
-are comparative references for Chapter 29; its prose is original rather than
-an adaptation of those sources.
+Items 6–7 identify proof infrastructure. Items 12–14 are comparative Chapter
+29 references and supply no adapted prose.

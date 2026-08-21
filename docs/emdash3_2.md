@@ -3,7 +3,7 @@ title: Functorial Type Theory: An Executable Architecture for Directed Dependenc
 authors: The emdash contributors
 edition: overview research article
 status: research draft
-date: 2026-08-14
+date: 2026-08-21
 ---
 
 > **Research-draft status.** This article describes the checked emdash v3.2
@@ -31,7 +31,7 @@ categorical frontend compiles usable binder notation to existing internal
 categorical owners, and bounded typed declarations expand into ordinary
 logical-framework declarations and rules.
 
-Four computations summarize the architecture. First, for
+Five computations summarize the architecture. First, for
 $p:x\\to y$ and $q:y\\to z$, emdash forms the outgoing-arrow category
 
 $$
@@ -57,7 +57,11 @@ product paths admit both coherent sequential transport factorizations. More
 generally, $\mathsf{Groupoidify}(C)$ is characterized by a whole equivalence
 between groupoidal maps out and path-valued functors on $C$. A selected
 strict-object/lax-arrow Gray closure then recovers a nonidentity walking-square
-interchanger from the same internal laxity action. Fourth, the TypeScript
+interchanger from the same internal laxity action. Fourth, face codes and
+directed join supply ordinal simplexes, while iterated outgoing paths give
+their dependent cells. One Nat recursion constructs their canonical source in
+variable dimension, with faces and higher action checked through dimension
+four. Fifth, the TypeScript
 frontend accepts ordinary, natural, displayed-functorial, and
 displayed-natural abstractions. It recursively factors variable occurrences
 through weakening, pairing, evaluation, reindexing, totalization, and
@@ -1306,6 +1310,33 @@ architectural conclusion: generic action should own functoriality and
 naturality, semantic constructors should own computation, and elaboration
 should reconstruct structural wiring.
 
+## 8.5 Simplexes from dependent homs
+
+Injective skip/keep codes form the internal augmented semi-simplex category.
+Yoneda gives $\boldsymbol\Delta[n]=\mathrm{Hom}(-,n+1)$. Directed join gives
+$\Delta[0]=\mathbf 1$ and
+$\Delta[n+1]=\Delta[n]\star\mathbf 1$; the native recurrence is
+$S_0(C)=C$ and $S_{k+1}=\mathrm{PathOut}_{S_k}(s_k)$.
+
+Since $\mathrm{PathOut}$ is a Sigma of a representable hom, its arrows pair a
+base cell with a dependent cell above transport. A triangle contains
+$p_{12}\circ p_{01}\Longrightarrow p_{02}$; whole base and endpoint action
+supply the extra tetrahedral faces and retain another hom action.
+
+An intrinsic flag code records the changing native category. A stage
+$F,G:K\to B$, $\epsilon:F\Rightarrow G$ sends an old source $s$ to the new
+code $\mathrm{step}(\mathrm{code},F[s])$ and source
+$(G[s],\epsilon[s])$. The first stage comes from the ordinal join and later
+stages lift $\epsilon$ through $\mathrm{PathOut}$. Nat recursion therefore
+constructs the source for variable $n$, maps it under every
+$H:\Delta[n]\to C$, and restricts it along nonempty faces. Dimensions zero
+through four, the five faces of the four-simplex, noncollapse, and one next
+action are checked.
+
+The active `DependentSimplexObservation(C,n)` is an object package, not
+yet a whole category. The corresponding mapping-category equivalence,
+degeneracies, and general Kan, Segal, or Rezk theorems remain open.
+
 # 9. Research Boundaries
 
 The word *checked* in this article has a local meaning. Lambdapi accepts the
@@ -1359,6 +1390,10 @@ The principal open boundaries are:
   mirror closure, tensor functoriality and coherence, full Crans--Gray
   monoidality, global migration of historical strict endpoint cuts, and a
   general weak-$\\omega$-category metatheory remain open.
+- **Simplicial methods.** Injective face codes, the augmented semi-simplex
+  index, native simplexes through dimension four, and the variable canonical
+  source are checked. Degeneracies, the whole mapping-category equivalence,
+  and general Kan, Segal, Rezk, complicial, or oriental structure are not.
 
 These limits are architectural information, not disclaimers added after the
 fact. Fail-closed elaboration, explicit product manifests, runtime versus
@@ -1392,6 +1427,10 @@ encode/decode restores the inverse powers absent from WalkingEnd, generic
 groupoidification characterizes maps out by a whole equivalence, and the Gray
 walking square retains a directed interchanger rather than erasing it into an
 equation.
+
+Dependent simplexes exhibit the recursive payoff: face observations and
+higher action arise from iterated outgoing paths rather than an expanding list
+of coherence fields.
 
 The current system is bounded, but the design question has a concrete answer:
 readable binders, explicit Core, checked categorical computation, an

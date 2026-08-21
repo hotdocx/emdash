@@ -100,16 +100,9 @@ report; the canonical-syntax report owns the mathematical notation, which is
 broader than the reviewed executable text subset. Dated reports preserve
 design history but do not silently revive retired interfaces.
 
-Passages structurally or conceptually adapted from the *Homotopy Type Theory*
-book, Zeuner's constructive algebraic geometry, and Pédrot's computational
-sheafification work are versioned and section-mapped in
-`book/references/third-party-sources.json`. The relevant licenses and kinds of
-adaptation are recorded there, and emdash's mathematical changes are stated
-rather than hidden behind a change of symbols. Hadzihasanovic's combinatorial
-Gray products and oriented cubes are registered there as comparative
-bibliography only: Chapter 28 does not copy their prose or claim to have
-constructed the same full tensor. Kolomatskaia--Shulman and the two
-Herbelin--Ramachandra papers are likewise comparative references for Chapter
-29: the chapter's dependent-hom construction is fresh prose and does not claim
-that its active boundary is definitionally the same as their displayed or
-parametricity-based presentations.
+Adapted passages and licenses are recorded in
+`book/references/third-party-sources.json`. Hadzihasanovic,
+Kolomatskaia--Shulman, and Herbelin--Ramachandra are comparative references
+only: Chapters 28--29 use fresh prose and do not claim that their checked
+constructions are the full tensors or semisimplicial presentations of those
+sources.

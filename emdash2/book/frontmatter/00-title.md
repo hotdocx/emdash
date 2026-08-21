@@ -12,8 +12,10 @@ algebraic geometry, taking the invertibility sieve $D_R(f)$ as prior to any
 representing open. A fourth returns from directed motion to its groupoidal
 realization: paths close selected formers, the Circle restores inverse powers,
 groupoidification freely realizes directed cells as paths, and a profiled Gray
-closure exposes a genuinely directed interchanger. Chapter details, notation,
-and cross-references may still change. The active implementation remains
+closure exposes a genuinely directed interchanger. A fifth spiral uses face
+codes, directed join, and iterated outgoing paths to construct canonical
+dependent simplexes in variable dimension. Chapter details, notation, and
+cross-references may still change. The active implementation remains
 authoritative whenever prose and code disagree.
 
 Copyright © 2026 the emdash contributors. Except where separately identified,

@@ -4842,9 +4842,9 @@ the renderer. Book theorem-like claims use the four statuses defined in
 `book/STYLE.md` and checked claims cite `book/evidence.json`.
 
 The current locally promoted artifact is the draft expanded development
-edition `0.5.0-dev`, dated 2026-08-18: 343 tagged US Letter pages, 16 embedded
+edition `0.6.0-dev`, dated 2026-08-21: 355 tagged US Letter pages, 16 embedded
 fonts, and PDF SHA-256
-`54a11407eb9ca1203979413f3231003ada85021ef2578e247ab922fccd918ad7`.
+`4116c6aaa586e55dc7c54b5faa6e379b3a376bb56fb86fec392f7981a72276b3`.
 Its deterministic owner and public copy are byte-identical. This artifact
 status is publication evidence, not a new mathematical authority.
 

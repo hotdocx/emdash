@@ -402,7 +402,12 @@ interfaces. The source modules and reviewer examples are listed in the August
 chapter-sized Markdown under `book/`. Its third mathematical spiral develops
 presheaves and sieves, sites and descent, direct cover sheafification,
 constructive commutative algebra, affine geometry centered on `D_R(f)`,
-site-relative schemes, and the supplied projective line.
+site-relative schemes, and the supplied projective line. Its fourth spiral
+returns through paths, Circle/Integer, generic groupoidification, and a
+profiled Gray interchanger. Chapter 29 begins a fifth spiral: injective faces,
+join-built ordinals, and iterated outgoing paths construct canonical dependent
+simplexes in variable dimension while preserving the exact
+mapping-category and degeneracy boundaries.
 
 From the repository root:
 

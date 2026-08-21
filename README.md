@@ -89,21 +89,18 @@ This computes all three edges of a visible triangle and retains higher action.
 Visible face composition is preserved by the existing code owner; generic
 opaque whole-functor uniqueness remains an explicit later comparison.
 
-The ordinal comparison is now constructive through dimension three. Dimension zero
-has a whole pointwise retraction, and a map of the walking arrow computes to
-its intrinsic source/target/generator edge. Generic join-eliminator point
-betas make the three edges of an ordinal triangle share vertices. Whole
-profunctor-reindex and observation/action paths derive the walking-generator
-computation of a join map. One profiled source join-cross naturality cell then
-constructs the native source triangle; the existing whole two-simplex action
-maps it under every `H : Functor([2],C)` and yields the canonical dependent
-filler. At the next level, shaped fixed-source `PathOut` action and the whole
-post-laxity cell construct one native source tetrahedron. Mapping that object
-under every `H : Functor([3],C)` exposes faces 012, 013, 023, and 123 plus the
-dependent top component, while retaining another whole hom action. This is
-still not an unqualified equivalence
-`Functor([n],C) ~= DependentSimplex(C,n)`; dimension four remains the next
-ordinal-adequacy test.
+The ordinal comparison is now constructive in variable dimension. The
+triangle and tetrahedron slices expose their ordinary faces and dependent top
+cells; the four-simplex is constructed by repeated whole `PathOut` lift,
+maps under every `H : Functor(Delta[4],C)`, and exposes all five
+tetrahedral cofaces. A genuine Nat recursion then constructs one canonical
+intrinsic source for every `Delta[n]`. Arbitrary-target observation and
+nonempty-face access reuse the existing mapped decoder and `FaceCode`
+action, with selected computations checked through dimension four and another
+higher action retained. The current `DependentSimplexObservation(C,n)` is
+an object package; a whole `DependentSimplex_cat(C,n)` and its
+mapping-category equivalence with `Functor_cat(Delta[n],C)` remain future
+work.
 
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
@@ -117,7 +114,7 @@ Start with the concise
 [*Functorial Type Theory: An Executable Architecture for Directed Dependency*](./docs/emdash3_2.pdf)
 overview, then continue to the current development edition of
 [*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf)
-(`0.5.0-dev`, 343 pages;
+(`0.6.0-dev`, 355 pages;
 [Zenodo record and DOI](https://doi.org/10.5281/zenodo.21544186),
 [assembled Markdown](./docs/emdash-book.md)).
 The active mathematical source is

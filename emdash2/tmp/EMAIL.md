@@ -13,7 +13,7 @@ directed dependent theory of categories, Cat-valued families, Sigma totals,
 sections, dependent homs, functors, transfors, profunctors, and selected
 universal constructions.
 
-Four mathematical threads expose the architecture. Directed arrow induction
+Five mathematical threads expose the architecture. Directed arrow induction
 transports reflexive data along a canonical Sigma arrow and computes ordinary
 composition. A directed higher-inductive walking endomorphism is normalized
 to the natural-number powers of its generator. In local geometry, the locus
@@ -25,6 +25,12 @@ the groupoidal layer, a Circle/Integer encode-decode theorem restores inverse
 powers, category-indexed groupoidification characterizes maps out by a whole
 mapping equivalence, and one profiled Gray right closure exposes a nonidentity
 walking-square interchanger from the same internal laxity action.
+Finally, injective face codes form an internal semi-simplex category, directed
+join builds the ordinal shapes `Delta[n]`, and iterated outgoing paths build
+their native dependent cells. One Nat recursion constructs a canonical
+ordinal source in variable dimension, maps it into arbitrary target
+categories, exposes every nonempty face, and retains another higher action;
+selected computations are checked through dimension four.
 
 The same distinction between readable syntax and explicit structure appears
 in the implementation. A TypeScript elaborator accepts usual binder-and-
@@ -369,6 +375,72 @@ closure, tensor functoriality/coherence, a full Crans–Gray biclosed monoidal
 structure, or a global migration of the prototype's historical strict cuts.
 
 
+Simplexes from dependent homs
+------------------------------
+
+The combinatorial and dependent descriptions of a simplex are both internal.
+In the augmented convention, an injective ordinal map is a skip/keep code
+
+```
+Face(p,n),
+```
+
+whose identity and composition compute structurally. These codes form the
+locally discrete homs of the augmented semi-simplex category. Yoneda gives the
+standard representable semisimplex, while directed join gives the ordinal
+source shapes
+
+```
+Delta[0]   = 1
+Delta[n+1] = Delta[n] * 1.
+```
+
+The native cell presentation uses no second simplex record. Put `S_0(C)=C`;
+after selecting `s_k : Obj(S_k)`, define
+
+```
+S_{k+1} = PathOut_{S_k}(s_k).
+```
+
+Because `PathOut` is a Sigma of a representable hom, its arrows pair a base
+cell with a dependent cell above transport. At dimension two this contains
+`p12 o p01 => p02`. At dimension three, ordinary source and target plus the
+whole base and endpoint-action projections give the four tetrahedral faces,
+and the next internal action remains available.
+
+An intrinsically indexed flag code records the changing native category
+without reimplementing it. A whole stage
+
+```
+F,G : K -> B
+epsilon : F => G
+```
+
+sends an old source `s` to
+
+```
+code'   = step(code,F[s])
+source' = (G[s],epsilon[s]).
+```
+
+The first stage is induced by identity extension across the ordinal join;
+later stages lift `epsilon` through `PathOut`. Nat recursion therefore
+constructs a canonical source for variable `n`. Mapping it under arbitrary
+`H : Functor(Delta[n],C)` and restricting it by the existing nonempty
+`FaceCode` action are whole operations. Dimensions zero through four, all
+five tetrahedral faces of the four-simplex, noncollapse, and a retained next
+action are checked.
+
+The current `DependentSimplexObservation(C,n)` packages objects, not a whole
+category of all dependent simplexes. Degeneracies and the whole equivalence
+
+```
+Functor_cat(Delta[n],C) ~= DependentSimplex_cat(C,n)
+```
+
+remain explicit next steps, as do general Kan, Segal, and Rezk structure.
+
+
 Profunctors, weighted universals, and duality
 ---------------------------------------------
 
@@ -610,7 +682,8 @@ These qualifications are part of the result. Emdash currently demonstrates
 that directed dependency, readable categorical binders, higher-inductive
 normalization, weighted universal constructions, sieve-centered local
 geometry, a Cat-valued sheafification reflector, free groupoidal realization,
-and a profiled Gray interchanger inhabit one executable architecture. It does
+profiled Gray interchange, and variable-dimensional dependent-simplex
+recursion inhabit one executable architecture. It does
 not claim that every displayed variance, every groupoidal closure, every
 coefficient category, or the representation-independent theory of schemes
 has already been completed.
@@ -780,6 +853,24 @@ GrayHom_lax(A ⊗_R B,C)
 derives the nonidentity walking-square interchanger
 `a₁ ∘ b₀ ⇒ b₁ ∘ a₀` from whole laxity. This is a profiled coherence test, not
 the full Crans–Gray monoidal theory.
+
+---
+
+Injective face codes, directed joins, and iterated outgoing paths also give a
+compact internal semisimplicial layer:
+
+```
+Delta[n+1] = Delta[n] * 1
+S_0(C) = C
+S_{k+1} = PathOut_{S_k}(s_k).
+```
+
+One Nat recursion constructs the canonical ordinal dependent simplex at
+variable `n`; arbitrary `H : Functor(Delta[n],C)` maps it into `C`, and the
+existing nonempty `FaceCode` action exposes its faces while retaining higher
+action. Dimensions zero through four are checked. This is not yet a whole
+`Functor_cat(Delta[n],C) ~= DependentSimplex_cat(C,n)` equivalence, and it adds
+no degeneracies or general Kan/Segal/Rezk theorem.
 
 ---
 

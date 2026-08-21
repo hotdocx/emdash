@@ -1313,16 +1313,10 @@ should reconstruct structural wiring.
 ## 8.5 Simplexes from dependent homs
 
 Injective skip/keep codes form the internal augmented semi-simplex category.
-Yoneda gives $\boldsymbol\Delta[n]=\mathrm{Hom}(-,n+1)$, while join and
-outgoing paths give
-
-$$
-\Delta[0]=\mathbf 1,\quad
-\Delta[n+1]=\Delta[n]\star\mathbf 1,
-\qquad
-S_0(C)=C,\quad
-S_{k+1}=\mathrm{PathOut}_{S_k}(s_k).
-$$
+Yoneda gives $\boldsymbol\Delta[n]=\mathrm{Hom}(-,n+1)$. Directed join gives
+$\Delta[0]=\mathbf 1$ and
+$\Delta[n+1]=\Delta[n]\star\mathbf 1$; the native recurrence is
+$S_0(C)=C$ and $S_{k+1}=\mathrm{PathOut}_{S_k}(s_k)$.
 
 Since $\mathrm{PathOut}$ is a Sigma of a representable hom, its arrows pair a
 base cell with a dependent cell above transport. A triangle contains

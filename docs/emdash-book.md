@@ -2,8 +2,8 @@
 title: "Functorial Type Theory: Univalent Foundations for Mathematics"
 authors: "The emdash contributors"
 edition: "expanded development edition"
-editionVersion: "0.5.0-dev"
-publicationDate: "2026-08-18"
+editionVersion: "0.6.0-dev"
+publicationDate: "2026-08-21"
 status: "draft"
 license: "CC-BY-SA-3.0"
 ---
@@ -22,8 +22,10 @@ algebraic geometry, taking the invertibility sieve $D_R(f)$ as prior to any
 representing open. A fourth returns from directed motion to its groupoidal
 realization: paths close selected formers, the Circle restores inverse powers,
 groupoidification freely realizes directed cells as paths, and a profiled Gray
-closure exposes a genuinely directed interchanger. Chapter details, notation,
-and cross-references may still change. The active implementation remains
+closure exposes a genuinely directed interchanger. A fifth spiral uses face
+codes, directed join, and iterated outgoing paths to construct canonical
+dependent simplexes in variable dimension. Chapter details, notation, and
+cross-references may still change. The active implementation remains
 authoritative whenever prose and code disagree.
 
 Copyright © 2026 the emdash contributors. Except where separately identified,
@@ -156,6 +158,18 @@ that source-functorial groupoidification has already been packaged as an
 adjunction, or that a full Crans–Gray biclosed monoidal structure has been
 constructed.
 
+A fifth spiral begins in [Chapter 29](#chapter-29). It treats the retained
+higher action as recursive geometry. Injective face codes form an internal
+semi-simplex category, directed joins form the ordinal shapes $\Delta[n]$,
+and iterated outgoing-path categories present a simplex as a base cell with a
+dependent cell above it. One structural successor computes a canonical
+ordinal dependent simplex in variable dimension; selected dimensions zero
+through four, every nonempty face observation, and one further action are
+checked. Degeneracies, a whole category of dependent simplexes, and its
+mapping-category equivalence with $\operatorname{Functor}(\Delta[n],C)$
+remain the next boundary rather than being inferred from the object-level
+recursion.
+
 [Appendix G](#appendix-formal-presentation) then states how the mathematical
 surface, checked categorical kernel, bounded TypeScript elaborator through
 explicit Core, and external models fit together, with the Lambdapi kernel
@@ -205,7 +219,9 @@ spiral begins with paths, structured transport, and groupoidal closure in
 Circle/Integer encode–decode theorem; [Chapter 27](#chapter-27) passes from
 the WalkingEnd and WalkingArrow tests to category-indexed free inversion; and
 [Chapter 28](#chapter-28) recovers a directed interchanger from whole laxity
-inside one profiled Gray closure. The
+inside one profiled Gray closure. [Chapter 29](#chapter-29) then turns
+dependent hom, outgoing paths, face codes, and join into a
+variable-dimensional semisimplicial construction. The
 [contents](#contents) and
 [glossary/index](#appendix-glossary) provide stable anchor-based navigation.
 
@@ -213,11 +229,11 @@ Five reading paths make the dependencies explicit:
 
 | Reader | Main path | Consult when needed |
 | --- | --- | --- |
-| type theorist | Prologue; Chapters 1, 3–8, 10, 15, and 25–27 | Chapters 2, 9, and 28 for directed action and laxity; Appendix G for the formal presentation |
-| category theorist | Prologue; Chapters 2, 5, and 8–28 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
+| type theorist | Prologue; Chapters 1, 3–8, 10, 15, 25–27, and 29 | Chapters 2, 9, and 28 for directed action and laxity; Appendix G for the formal presentation |
+| category theorist | Prologue; Chapters 2, 5, and 8–29 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
 | algebraic geometer | Chapters 13, 16, and 18–24 | Chapters 2, 3, 5, 6, and 12 for the directed, logical, inductive, universal, and adjoint foundations |
-| implementer | Chapters 1, 2, 6, 8, 9, and 25–28; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
-| external reviewer | Chapters 2.6, 8, 25–28; then the integrated reviewer, live or local | Appendices A, B, F, and G for notation, evidence, status, and architecture |
+| implementer | Chapters 1, 2, 6, 8, 9, and 25–29; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
+| external reviewer | Chapters 2.6, 8, and 25–29; then the integrated reviewer, live or local | Appendices A, B, F, and G for notation, evidence, status, and architecture |
 
 These are paths through one dependency graph, not separate foundations. In
 particular, the category-theory route still uses equality-local reasoning, and
@@ -275,15 +291,12 @@ report; the canonical-syntax report owns the mathematical notation, which is
 broader than the reviewed executable text subset. Dated reports preserve
 design history but do not silently revive retired interfaces.
 
-Passages structurally or conceptually adapted from the *Homotopy Type Theory*
-book, Zeuner's constructive algebraic geometry, and Pédrot's computational
-sheafification work are versioned and section-mapped in
-`book/references/third-party-sources.json`. The relevant licenses and kinds of
-adaptation are recorded there, and emdash's mathematical changes are stated
-rather than hidden behind a change of symbols. Hadzihasanovic's combinatorial
-Gray products and oriented cubes are registered there as comparative
-bibliography only: Chapter 28 does not copy their prose or claim to have
-constructed the same full tensor.
+Adapted passages and licenses are recorded in
+`book/references/third-party-sources.json`. Hadzihasanovic,
+Kolomatskaia--Shulman, and Herbelin--Ramachandra are comparative references
+only: Chapters 28--29 use fresh prose and do not claim that their checked
+constructions are the full tensors or semisimplicial presentations of those
+sources.
 <!-- /book-source:how-to-read -->
 <div class="book-source-end" aria-hidden="true"></div>
 
@@ -328,6 +341,7 @@ constructed the same full tensor.
 - [26. The Circle And The Integer Line](#chapter-26)
 - [27. Free Inversion And Groupoidification](#chapter-27)
 - [28. Laxity, Interchange, And The Gray Direction](#chapter-28)
+- [29. Simplexes From Dependent Homs](#chapter-29)
 
 ## Appendices
 
@@ -407,12 +421,12 @@ different route.
 
 <!-- evidence:WE-HOM-NAT-CARRIER -->
 
-> **Theorem preview.** There is an equivalence of underlying carriers
->
-> $$
-> \operatorname{Hom}_{W}(*,*)\simeq\mathbb{N}.
-> $$
->
+**Theorem preview.** There is an equivalence of underlying carriers
+
+$$
+\operatorname{Hom}_{W}(*,*)\simeq\mathbb{N}.
+$$
+
 > **Formal status — checked.** Evidence `WE-HOM-NAT-CARRIER`. The
 > current package is a `TypeEquiv`, together with a native
 > equality-valued facade. A monoid or hom-category equivalence is not being
@@ -594,6 +608,14 @@ for one- and two-endpoint walking shapes and then for an arbitrary source
 category. [Chapter 28](#chapter-28) keeps the target directed again: whole
 laxity, a computational strict profile, and one right Gray closure produce a
 nonidentity walking-square interchanger with higher action still available.
+
+The fifth spiral asks what that still-available action constructs when it is
+iterated. [Chapter 29](#chapter-29) combines a computing category of injective
+faces with the native recursion
+$S_{n+1}=\operatorname{PathOut}_{S_n}(s_n)$. It constructs a canonical
+ordinal dependent simplex in variable dimension, maps it into arbitrary
+targets, and retains both face action and another hom action without
+postulating a new coherence record at every dimension.
 
 The larger aim is not merely to calculate one hom. It is to show how a type
 theory can let groupoidal equality and noninvertible arrows coexist, interact,
@@ -14430,10 +14452,563 @@ theory a computational spine.
 
 The result is deliberately asymmetric. Groupoidal realization explains how
 directed coherence may become invertible; the Gray direction explains why it
-should not have been erased beforehand. What follows in the appendices is the
-ledger of exact notation, evidence, provenance, computation, and remaining
-research boundaries for all four spirals.
+should not have been erased beforehand. [Chapter 29](#chapter-29) now uses the
+same retained action recursively: a dependent arrow between dependent arrows
+becomes a simplex with another dimension. The appendices then give the ledger
+of exact notation, evidence, provenance, computation, and remaining research
+boundaries for all five spirals.
 <!-- /book-source:chapter-28 -->
+<div class="book-source-end" aria-hidden="true"></div>
+
+<!-- book-source:chapter-29 book/chapters/29-simplexes-from-dependent-homs.md -->
+<a id="chapter-29"></a>
+
+# 29. Simplexes From Dependent Homs
+
+A directed edge has two vertices and one arrow. A directed triangle adds three
+edges and a comparison between a composite edge and a direct one. A
+tetrahedron adds four triangles and a cell relating their comparison data. The
+pattern continues, but its usual description becomes increasingly
+combinatorial: every new dimension carries many faces, and those faces must
+agree on all of their shared lower faces.
+
+Functorial type theory offers another description. Begin with a category
+$C$. Choose an object, then an outgoing arrow, then an outgoing arrow in the
+category of outgoing arrows, and continue. Each new choice is made in a
+category whose objects already contain the entire previous boundary. Its
+arrows contain a base arrow together with a dependent arrow above transport.
+The next hom action therefore supplies the next coherence without asking for
+a separately written coherence record.
+
+This chapter relates that native dependent presentation to the familiar
+combinatorics of standard simplexes. Injective monotone maps give a computing
+category of faces. Directed joins give the finite ordinal categories
+$\Delta[n]$. Representables give standard semisimplices. Iterated outgoing
+paths give the native dependent cells. Finally, a structural recursion builds
+one canonical dependent simplex inside every $\Delta[n]$ and maps it along
+every functor $\Delta[n]\to C$.
+
+The result is deliberately semisimplicial: faces are present, degeneracies are
+not. It is also deliberately weaker than a categorical normal-form theorem.
+The construction computes one canonical simplex and all of its nonempty face
+observations in variable dimension; it does not yet identify the whole
+mapping category $\operatorname{Functor}(\Delta[n],C)$ with a whole category
+of dependent simplexes.
+
+## 29.1 The Shape Before The Coordinates
+
+Write $\Delta[n]$ for the finite ordinal category
+
+$$
+0\longrightarrow 1\longrightarrow\cdots\longrightarrow n,
+\tag{29.1}
+$$
+
+including the unique composite arrow $i\to j$ whenever $i\leq j$. A functor
+$H:\Delta[n]\to C$ is the conventional categorical presentation of an
+$n$-simplex in $C$. At dimension two it selects three vertices, the three
+arrows
+
+$$
+p_{01}:x_0\to x_1,
+\qquad
+p_{12}:x_1\to x_2,
+\qquad
+p_{02}:x_0\to x_2,
+\tag{29.2}
+$$
+
+and whatever comparison is selected by the functorial profile between
+$p_{12}\circ p_{01}$ and $p_{02}$. At dimension three, the four restrictions
+of $H$ to three vertices are its triangular faces.
+
+There are already three distinct notions in this paragraph.
+
+- The category $\Delta[n]$ is the *ordinal shape*.
+- The representable $\operatorname{Hom}(-,[n])$ on the category of injective
+  ordinal maps is the *standard semisimplex*.
+- The data obtained by repeatedly entering an outgoing-path category is the
+  *dependent simplex*.
+
+The first is a finite source category. The second records how all smaller
+faces enter that source. The third is a native normal form for the data seen
+inside a target. The value of the construction below is not that these three
+expressions can be printed. It is that their face and higher-cell operations
+are owned by functors already present in the theory.
+
+The ordinal shapes themselves grow by directed join:
+
+$$
+\Delta[0]\equiv\mathbf 1,
+\qquad
+\Delta[n+1]\equiv\Delta[n]\star\mathbf 1.
+\tag{29.3}
+$$
+
+The new terminal vertex receives one arrow from every old vertex. Thus
+joining with $\mathbf 1$ adds exactly the new final vertex and all arrows that
+point toward it. The construction is directed: it does not add inverse arrows
+from the new vertex back into the old ordinal.
+
+## 29.2 Faces Form A Computing Category
+
+Use the augmented cardinal convention. The natural number $m$ represents the
+finite ordinal with $m$ vertices, so zero is the empty ordinal, one is a
+vertex, two is an edge, and three is a triangle. An injective monotone map from
+the $p$-vertex ordinal to the $n$-vertex ordinal can be encoded by a word of
+length $n$: at each target position, either skip that position or keep it.
+
+The structural constructors have the form
+
+$$
+\begin{aligned}
+\mathsf{skip}&:\mathsf{Face}(p,n)
+  \longrightarrow\mathsf{Face}(p,n+1),\\
+\mathsf{keep}&:\mathsf{Face}(p,n)
+  \longrightarrow\mathsf{Face}(p+1,n+1).
+\end{aligned}
+\tag{29.4}
+$$
+
+The all-keep word is identity. Composition substitutes one word into the kept
+positions of another. Its four skip/keep cases are ordinary structural
+recursion, so closed faces compute rather than requiring a theorem for every
+pair of dimensions.
+
+These codes are classified as sets before becoming public face maps. The
+classification removes unwanted higher ambiguity in the combinatorial index,
+while restricted recursion preserves computation on visible constructors.
+They form the homs of the internal augmented semi-simplex category
+$\Delta_+^{\mathrm{inj}}$:
+
+$$
+\operatorname{Obj}(\Delta_+^{\mathrm{inj}})=\mathbb N,
+\qquad
+\operatorname{Hom}(p,n)=\mathsf{Path}(\mathsf{Face}(p,n)).
+\tag{29.5}
+$$
+
+Identity and composition are the identity and composition of face codes. The
+homs are locally discrete, but the enclosing category remains an ordinary
+internal category, so functors and transfors on it use the generic iterable
+action calculus.
+
+The standard $n$-simplex is now Yoneda:
+
+$$
+\boldsymbol\Delta[n]
+  :=\operatorname{Hom}_{\Delta_+^{\mathrm{inj}}}(-,n+1).
+\tag{29.6}
+$$
+
+The shift by one converts from dimension to vertex count. Evaluating
+$\boldsymbol\Delta[n]$ at a $p$-vertex ordinal returns the code of a
+$p$-vertex face of $[n]$. Restriction is composition of face codes. A
+groupoid-valued semisimplicial diagram is consequently a functor
+
+$$
+X:(\Delta_+^{\mathrm{inj}})^{\mathrm{op}}\longrightarrow\mathbf{Grpd},
+\tag{29.7}
+$$
+
+and postcomposition with the path-category operation realizes all its levels
+and face maps as a Cat-valued presheaf. Because realization is one whole
+postcomposition functor, arrows between diagrams and their higher action are
+retained as well.
+
+<!-- evidence:SEMISIMPLICIAL-FACE-SUBSTRATE -->
+
+> **Formal status — checked.** Evidence
+> `SEMISIMPLICIAL-FACE-SUBSTRATE`. Skip/keep face codes, their composition,
+> the augmented injective index category, join-built ordinal shapes, Yoneda
+> standard semisimplices, and whole groupoid-to-Cat diagram realization are
+> active. No degeneracy maps or full simplex category are asserted.
+
+## 29.3 A Simplex Is An Iterated Outgoing Path
+
+The combinatorial index says which face is selected. It does not yet explain
+why a higher simplex should have the right dependent boundary. That
+explanation begins with the outgoing-arrow category from Chapter 5:
+
+$$
+\operatorname{PathOut}_C(x)
+  =\sum_{y:C}\operatorname{Hom}_C(x,y).
+\tag{29.8}
+$$
+
+An object is an endpoint $y$ and an arrow $p:x\to y$. An arrow between
+$(y,p)$ and $(z,q)$ contains an arrow $r:y\to z$ together with a cell from
+$r\circ p$ to $q$. Thus one step into `PathOut` adds a vertex, the edge from
+the fixed source, and the comparison that makes the resulting triangle
+coherent.
+
+This observation can be iterated. Put
+
+$$
+S_0(C):=C.
+\tag{29.9}
+$$
+
+After choosing a flag $s_k\in\operatorname{Obj}(S_k)$, define
+
+$$
+S_{k+1}(C;s_0,\ldots,s_k)
+  :=\operatorname{PathOut}_{S_k}(s_k).
+\tag{29.10}
+$$
+
+A zero-simplex is an object $x_0$ of $C$. A one-simplex is an object
+$e_{01}=(x_1,p_{01})$ of $\operatorname{PathOut}_C(x_0)$. A two-simplex is
+an object $t_{012}$ of
+$\operatorname{PathOut}_{\operatorname{PathOut}_C(x_0)}(e_{01})$.
+Unpacked readably, it contains an edge $p_{02}$ and an arrow from $e_{01}$ to
+$e_{02}$; the latter contains $p_{12}$ and a two-cell
+
+$$
+\alpha_{012}:p_{12}\circ p_{01}\Longrightarrow p_{02}.
+\tag{29.11}
+$$
+
+No triangle record has been introduced. Equation (29.11) is the dependent
+fibre component of an arrow in a Sigma total.
+
+The generic calculation is worth stating. Let $E$ be a Cat-valued family on
+$K$, and consider total objects $(x,u)$ and $(y,v)$. Their hom in the total
+category has the native presentation
+
+$$
+\operatorname{Hom}_{\sum E}((x,u),(y,v))
+  \simeq
+  \sum_{p:x\to y}
+    \operatorname{Hom}_{E(y)}(E[p](u),v).
+\tag{29.12}
+$$
+
+The second factor is precisely a dependent hom. Specializing $E$ to the
+representable family $\operatorname{Hom}_C(x_0,-)$ gives (29.11). Repeating
+the same hom construction gives tetrahedra, then higher simplexes. The
+recursion is therefore semantic before it is coded: every stage is built from
+the existing `Hom`, dependent `Sigma`, and dependent-hom owners.
+
+## 29.4 Why A Tetrahedron Has Four Surfaces
+
+An ordinary globular arrow has a source and a target. A tetrahedron has four
+triangular faces. The apparent discrepancy disappears when the arrow is
+dependent.
+
+Fix two dependent triangles $t_0$ and $t_1$ in the category described by
+(29.12). An arrow
+
+$$
+\Theta:t_0\longrightarrow t_1
+\tag{29.13}
+$$
+
+has a base component $\kappa$ and a dependent component $\lambda$ above it.
+The ordinary source and target of $\Theta$ give two triangular surfaces. The
+base component gives a third. A whole endpoint-action functor evaluates the
+base movement in the target fibre and gives the fourth.
+
+The important word is *whole*. The base-face and endpoint-face operations are
+functors out of the category of dependent triangles. Their object actions
+read the two lower edges of a triangle; their hom actions send a tetrahedral
+cell to the corresponding surface. Pairing them gives one boundary functor,
+so compatibility of the two observations follows from ordinary product and
+functor action rather than from a hand-written boundary equation.
+
+A displayed functor $\mathcal F:E\to D$ maps the entire triangle category by
+the existing internal displayed action. Its next hom action maps (29.13),
+keeping $\kappa$ and applying the dependent higher action to $\lambda$.
+Applying the hom action once more remains meaningful. This is the same
+iteration that produced the laxity witness of Chapter 28; here its geometric
+reading is a higher simplex.
+
+<!-- evidence:DEPENDENT-SIMPLEX-INTERNAL-ACTION -->
+
+> **Formal status — checked.** Evidence
+> `DEPENDENT-SIMPLEX-INTERNAL-ACTION`. The dependent triangle is the active
+> hom of a Sigma total. Its base and endpoint surfaces are whole projections,
+> a visible tetrahedral constructor computes through the existing displayed
+> internal action, and one further hom action is retained. No standalone
+> tetrahedron filler or coherence record is added.
+
+## 29.5 Codes Without A Second Semantics
+
+Equations (29.9)-(29.10) are dependent in a strong sense: the category at the
+next stage depends on the previously selected object. Ordinary recursion into
+a fixed codomain cannot store that changing type directly. An internal code
+is useful here, but only if it remembers the native category rather than
+interpreting a parallel syntax of cells.
+
+The intrinsic code has two constructors. Its zero case is indexed by $C$.
+Its successor stores an existing code indexed by $K$ and a flag
+$x\in\operatorname{Obj}(K)$, and is indexed by
+$\operatorname{PathOut}_K(x)$. Schematically,
+
+$$
+\begin{aligned}
+\mathsf{zero}_C
+  &: \mathsf{Code}(C,0;C),\\
+\mathsf{step}(c,x)
+  &: \mathsf{Code}(C,n+1;\operatorname{PathOut}_K(x))
+     \quad(c:\mathsf{Code}(C,n;K)).
+\end{aligned}
+\tag{29.14}
+$$
+
+The semicolon records the already-decoded category. Public code packaging may
+hide $K$, but decoding merely projects that index. It does not traverse a
+syntax tree and rebuild `Hom`, `Sigma`, or `PathOut`. This makes the code an
+internal witness to the changing boundary, not a second definition of what a
+simplex means.
+
+Faces recurse simultaneously on the flagged code and the skip/keep word.
+There are three structural situations.
+
+1. Skipping the newest vertex selects a face of the fixed flag and returns a
+   constant whole functor.
+2. Keeping the newest vertex after skipping its predecessor selects the
+   corresponding face through the first projection of `PathOut`.
+3. Keeping both newest vertices maps the whole outgoing path by the recursively
+   selected lower face functor.
+
+The third case is where higher action matters: a face is not only a function
+on stored points, but a functor on the outgoing-path category. The result
+retains its own hom action. Direct and sequential face presentations are not
+globally collapsed to one judgmental normal form; the structural recursion
+provides the selected whole observation.
+
+## 29.6 The Ordinal Source Grows By A Transformation
+
+The code recursion describes arbitrary flags. To compare it with the standard
+ordinal, one needs a canonical flag in every $\Delta[n]$. The directed join
+equation (29.3) supplies the first step. Extend the identity of the old
+ordinal across
+$\Delta[n]\star\mathbf 1$. The old observed outgoing-path map and the
+primitive join outgoing-path map are related by one whole transformation.
+
+Suppose a nonzero stage has already produced:
+
+$$
+d,\qquad F,G:K\longrightarrow B,
+\qquad\epsilon:F\Longrightarrow G.
+\tag{29.15}
+$$
+
+For a selected old source $s\in\operatorname{Obj}(K)$, the new code and source
+are
+
+$$
+d':=\mathsf{step}(d,F(s)),
+\qquad
+s':=(G(s),\epsilon_s).
+\tag{29.16}
+$$
+
+The second expression is an object of
+$\operatorname{PathOut}_B(F(s))$: its endpoint is $G(s)$ and its outgoing
+arrow is the component of the whole transformation. For the next flag, lift
+$\epsilon$ through `PathOut`. The lift is again a whole transformation, so its
+component supplies the next cell and its hom action remains available.
+
+The first stage uses the identity-join comparison. Every later stage repeats
+the same `PathOut` lift. This makes (29.16) a structural successor, not a table
+with separate clauses for triangles, tetrahedra, and four-simplexes.
+
+## 29.7 The Four-Simplex As A Decisive Finite Test
+
+Dimension four is the first compact test that combines the recursive source,
+a genuinely higher component, every coface, arbitrary target mapping, and a
+retained next action. Beginning with the canonical source edge and triangle,
+the join comparison is lifted three times:
+
+$$
+\begin{aligned}
+\epsilon_1&:=\text{identity-join outgoing-path comparison},\\
+\epsilon_2&:=\operatorname{PathOutLift}(\epsilon_1,e_{01}),\\
+\epsilon_3&:=\operatorname{PathOutLift}(\epsilon_2,t_{012}),\\
+\omega_{01234}&:=(\epsilon_3)_{s_{0123}}.
+\end{aligned}
+\tag{29.17}
+$$
+
+The component $\omega_{01234}$ is the fourth-level cell. Pairing it with its
+endpoint constructs an object of the existing native four-simplex classifier;
+it is not supplied as an opaque filler.
+
+For every functor
+
+$$
+H:\Delta[4]\longrightarrow C,
+\tag{29.18}
+$$
+
+the existing mapped-code action sends this single source to a dependent
+four-simplex in $C$. The five skip-one-vertex codes expose its tetrahedral
+faces
+
+$$
+0123,\qquad 0124,\qquad 0134,\qquad 0234,\qquad 1234.
+\tag{29.19}
+$$
+
+Native Sigma projections separately expose the source, target, base
+tetrahedron, and readable dependent top component. These two views have the
+same intended geometry, but they retain different construction histories.
+The development does not force every code-selected face to be judgmentally
+equal to every native projection.
+
+The same construction is checked for an arbitrary target category, a selected
+computationally strict target map, and an exact path-category target. A wrong
+recursive source is rejected, the top cell is not identified with an
+arbitrary replacement, and the next action of $\epsilon_3$ remains available.
+
+<!-- evidence:ORDINAL-DEPENDENT-FOUR-SIMPLEX -->
+
+> **Formal status — checked.** Evidence
+> `ORDINAL-DEPENDENT-FOUR-SIMPLEX`. One canonical four-simplex is constructed
+> from the generic join comparison and repeated whole `PathOut` lift. It maps
+> under every $H:\Delta[4]\to C$, exposes all five cofaces, passes strict and
+> path-valued profile checks, remains noncollapsed, and retains one higher
+> action.
+
+## 29.8 The Variable-Dimensional Theorem
+
+The finite calculation is not the definition. It validates the structural
+successor that Nat recursion can iterate. Let
+
+$$
+\mathsf{Obs}(C,n)
+  :=\sum_{c:\mathsf{DependentSimplexCode}(C,n)}
+      \operatorname{Obj}(\operatorname{decode}(c)).
+\tag{29.20}
+$$
+
+This is the present object package called `DependentSimplexObservation`. It
+contains both the intrinsic boundary code and one object of its native decoded
+category.
+
+<!-- evidence:ORDINAL-DEPENDENT-SIMPLEX-RECURSION -->
+
+> **Formal status — checked.** **Theorem 29.1 (the variable-dimensional ordinal
+> dependent simplex).** Evidence `ORDINAL-DEPENDENT-SIMPLEX-RECURSION`. For
+> every natural number $n$ there is a canonical
+> $s_n\in\mathsf{Obs}(\Delta[n],n)$ computed by Nat recursion and the
+> structural successor (29.16). Every $H:\Delta[n]\to C$ induces a canonical
+> observation $H_*(s_n)\in\mathsf{Obs}(C,n)$. Every nonempty injective face
+> code has a whole face observation. Base and successor computations,
+> selected source objects through dimensions zero to four, wrong-index
+> rejection, noncollapse of the successor cell, and one generic next action
+> are checked.
+
+The theorem is uniform in $n$, but its validation claim is deliberately
+finite where readability matters. The source and successor are genuinely
+variable-dimensional; the explicit zero-through-four checks show that the
+recursor reaches the existing native classifiers and the expected finite
+geometry. They are not an induction theorem identifying the new source
+judgmentally with every earlier hand-written presentation.
+
+The theorem also separates construction from observation. The canonical
+source lives once in $\Delta[n]$. Mapping it by $H$ uses the generic mapped
+decoder; it does not reconstruct the source in $C$. Face restriction then
+uses the generic code action. Thus source recursion, target mapping, and face
+selection are three composable whole operations.
+
+## 29.9 Comparison With Other Recursive Presentations
+
+Semisimplicial types are a well-known stress test for dependent type theory.
+The boundary of an $(n+1)$-simplex depends on all lower dimensions, and the
+coherence needed at the next stage depends on that boundary. Different
+approaches make different parts of this dependency primitive.
+
+Kolomatskaia and Shulman's displayed type theory presents semisimplicial types
+through a compact displayed or cone interface
+[12](#ref-kolomatskaia-shulman-sst). Herbelin and Ramachandra reconstruct the
+frame, restriction, and coherence dependencies through iterated parametricity,
+first for semisimplicial and semicubical sets and then in an indexed very
+dependent formulation
+[13](#ref-herbelin-ramachandra-parametricity),
+[14](#ref-herbelin-ramachandra-very-dependent). These comparisons clarify why
+neither an ordinary fixed-codomain Nat recursor nor a flat record of faces is
+sufficient.
+
+The emdash construction chooses another ownership boundary. Categories and
+category-valued families are already internal types. `PathOut` is already a
+Sigma of a representable. A hom in that Sigma already exposes a dependent
+hom. Whole functor and transfor action already iterate. The semantic simplex
+is therefore built from these owners directly. The code layer is introduced
+only to internalize the changing native category in variable dimension.
+
+This does not make the external combinatorics disappear. Face codes remain
+the clean way to name arbitrary restrictions, and the semi-simplex category
+organizes them globally. Nor does it prove that every other presentation is
+equivalent. It shows a computational bridge at a precise point: the same
+simplex can be observed combinatorially by injective faces and natively as an
+iterated dependent outgoing path.
+
+## 29.10 The Whole Mapping-Category Boundary
+
+The strongest tempting statement is
+
+$$
+\operatorname{Functor}_{\mathrm{cat}}(\Delta[n],C)
+\simeq
+\mathsf{DependentSimplex}_{\mathrm{cat}}(C,n).
+\tag{29.21}
+$$
+
+Equation (29.21) is not yet a theorem. Its right side is intentionally written
+with a future name. The active `DependentSimplexObservation(C,n)` in (29.20)
+is a groupoid-valued object total; it is not a whole category with the arrows
+and higher cells required by (29.21).
+
+Constructing the right side requires a category whose objects recover
+(29.20), whose homs express compatible transformations of all dependent
+frames, and whose higher action agrees with the native internal-action tower.
+One must then construct comparison functors in both directions, whole beta and
+eta witnesses, and compatibility with face action. An objectwise decoding
+function, even one that computes in every dimension, is not that equivalence.
+
+The other major absent operation is degeneracy. The current index has
+injective monotone maps only. Adding surjections would require a computational
+account of repeated vertices and identity cells compatible with the dependent
+recursion. No degeneracy law is inferred merely because each ambient category
+has identities.
+
+Consequently this chapter does not claim a full simplicial object, arbitrary
+horn fillers, a Kan complex, a Segal or Rezk theorem, complicial structure, or
+a comparison with Street orientals. The existing two-dimensional path-groupoid
+horn fillers are bounded consumers, not a general consequence of Theorem
+29.1.
+
+## 29.11 The End Of The Fifth Spiral
+
+The earlier chapters moved repeatedly between points and arrows, local data
+and whole action, directed cells and paths. Simplexes make that movement
+recursive. A point becomes an outgoing arrow. An outgoing arrow becomes an
+arrow between outgoing arrows. The base and fibre of that arrow become two
+faces of the next cell. Its whole image supplies another face. Repeating the
+same construction raises the dimension without changing foundations.
+
+The combinatorial and dependent views play complementary roles. Face words
+say which vertices survive. Yoneda packages all such restrictions into the
+standard semisimplex. Directed join constructs the ordinal source. Dependent
+hom and Sigma explain the cell above its boundary. Whole transformation action
+constructs the successor. The code merely remembers which native category the
+next step inhabits.
+
+This is the computational lesson of Theorem 29.1. Higher-dimensional data need
+not be introduced as an ever-growing list of coherence fields when the theory
+already knows how a dependent arrow acts. The retained action is the resource
+from which the next dimension is observed.
+
+The lesson is also a boundary. Constructing one canonical simplex in every
+dimension is not the same as classifying all simplexes. Faces are not
+degeneracies. A semisimplicial substrate is not a Kan or Segal theory. By
+keeping those differences visible, the checked recursion can serve as a
+foundation for later simplicial methods without being mistaken for their
+completion.
+<!-- /book-source:chapter-29 -->
 <div class="book-source-end" aria-hidden="true"></div>
 
 <!-- book-source:appendix-notation book/appendices/a-notation.md -->
@@ -14483,6 +15058,10 @@ syntax.
 | $\operatorname{IsWeightedLimit}(F,W,L)$ | a chosen representation of weighted cones | `IsWeightedLimit_cov_comp F W L` |
 | $\operatorname{Cocone}_W(F)$ | the opposite-dual weighted-cocone profunctor | `WeightedCocone_prof F W` |
 | $A\star B$ | directed join with left-to-right cross arrows | `Join_cat A B` |
+| $\Delta[n]$ | the join-built finite ordinal category with $n+1$ vertices | `DirectedSimplex_cat n` |
+| $\boldsymbol\Delta[n]$ | the standard representable semisimplex $\operatorname{Hom}(-,n+1)$ | `StandardSimplex (succ n)` |
+| $\mathsf{Face}(p,n)$ | injective monotone maps from the $p$-vertex ordinal to the $n$-vertex ordinal | `FaceCode p n` |
+| $\mathsf{Obs}(C,n)$ | a dependent-simplex code paired with one object of its native decoded category | `DependentSimplexObservation C n` |
 | $X:\mathcal K^{\mathrm{op}}\to\mathsf{Cat}$ | a Cat-valued presheaf on $\mathcal K$ | `Psh K` |
 | $yU$ | the representable presheaf $\operatorname{Hom}_{\mathcal K}(-,U)$ | `yoneda_psh K U` |
 | $p^*R$ | pullback of the sieve $R$ by postcomposing its probes with $p$ | `sieve_pullback K V U p R` |
@@ -14749,6 +15328,10 @@ artifact, not the mathematics printed inside it.
 | `GRAY-COMPUTATIONAL-PROFILE` | checked | StrictFunctorData is a primitive computational code sort with a stable decoder into the shared Functor classifier; the generic compositor reduces to identity only at decoded strict codes, while GrayHom_lax uses those codes as objects, reuses the ambient Transf_cat tower as homs, and includes wholly into Functor_cat. | `StrictFunctorData`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`strict_functor_carrier`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`GrayHom_lax`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`grayhom_lax_include_func`<br><small>`emdash3_2_gray_profiles.lp`</small> | `StrictFunctorData`<br><small>`examples/gray_profiles.lp`</small><br>`GrayHom_lax`<br><small>`examples/gray_profiles.lp`</small><br>`grayhom_lax_include_func`<br><small>`examples/gray_profiles.lp`</small> |
 | `GRAY-RIGHT-CLOSURE` | checked | The selected GrayTensor_R has one profiled right closure: computationally strict whole curry and uncurry form an OmegaEquivAlong between GrayHom_lax(GrayTensor_R(A,B),C) and GrayHom_lax(A,GrayHom_lax(B,C)), with whole beta/eta and coevaluation/evaluation derived at strict identity codes. | `GrayTensor_R`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_curry_R_func`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_right_closure_omega`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_coevaluation_R_func`<br><small>`emdash3_2_gray_right_closure.lp`</small> | `GrayTensor_R`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_right_closure_omega`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_coevaluation_R_func`<br><small>`examples/gray_right_closure.lp`</small> |
 | `GRAY-WALKING-INTERCHANGER` | checked | In the selected strict-object/lax-arrow Gray right-closure slice, the walking square has four coevaluation-derived vertices and two coordinate arrow families, while its oriented nonidentity interchanger is projected from the existing whole post/left laxity action and retains one next hom action. | `gray_square_inner_src_arrow`<br><small>`emdash3_2_gray_walking_square.lp`</small><br>`gray_square_outer_src_arrow`<br><small>`emdash3_2_gray_walking_square.lp`</small><br>`gray_interchanger`<br><small>`emdash3_2_gray_interchanger.lp`</small><br>`gray_interchanger_next_func`<br><small>`emdash3_2_gray_interchanger.lp`</small> | `gray_interchanger`<br><small>`examples/gray_interchanger.lp`</small><br>`gray_interchanger_next_func`<br><small>`examples/gray_interchanger.lp`</small> |
+| `SEMISIMPLICIAL-FACE-SUBSTRATE` | checked | Injective skip/keep face codes compute, form the locally discrete augmented semi-simplex category, realize selected ordinal shapes by directed join, and define Yoneda standard semisimplices and whole groupoid-valued semisimplicial diagram realization with retained higher action. | `FaceCode`<br><small>`emdash3_2_semisimplicial_face_codes.lp`</small><br>`SemiDeltaPlus_cat`<br><small>`emdash3_2_semisimplicial_index.lp`</small><br>`DirectedSimplex_cat`<br><small>`emdash3_2_simplex_shapes.lp`</small><br>`StandardSimplex`<br><small>`emdash3_2_semisimplicial_diagrams.lp`</small> | `face_vertex_zero`<br><small>`examples/semisimplicial_face_codes.lp`</small><br>`semi_delta_edge_zero_one`<br><small>`examples/semisimplicial_index_category.lp`</small><br>text `Ordinary dimension n means n+1 vertices`<br><small>`examples/simplex_shapes.lp`</small><br>`semisimplicial_grpd_realized_face_func`<br><small>`examples/semisimplicial_diagrams.lp`</small> |
+| `DEPENDENT-SIMPLEX-INTERNAL-ACTION` | checked | The native dependent triangle is the existing hom of a Sigma total, its base and endpoint faces are whole functor projections, and the next internal action maps a visible dependent tetrahedron while retaining a further hom action rather than adding an independent coherence record. | `DependentTriangle_cat`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small><br>`dependent_triangle_boundary_face_func`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small><br>`dependent_tetrahedron_map`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small> | text `The triangle classifier is the active Hom(Sigma) presentation`<br><small>`examples/dependent_simplex_bridge.lp`</small><br>text `A further hom action remains available`<br><small>`examples/dependent_simplex_bridge.lp`</small> |
+| `ORDINAL-DEPENDENT-FOUR-SIMPLEX` | checked | One canonical ordinal four-simplex is constructed by iterating the whole PathOut transformation lift, maps under every functor from Delta[4], exposes all five tetrahedral cofaces through generic FaceCode action, supports selected strict and exact Path targets, remains noncollapsed, and retains one next action. | `pathout_transf_lift`<br><small>`emdash3_2_pathout_transformation_lift.lp`</small><br>`ordinal_dependent_simplex4_source`<br><small>`emdash3_2_dependent_simplex_ordinal_dimension4.lp`</small><br>`ordinal_dependent_simplex4_face`<br><small>`emdash3_2_dependent_simplex_ordinal_dimension4.lp`</small><br>`ordinal_simplex4_top_next_action`<br><small>`emdash3_2_dependent_simplex_ordinal_dimension4.lp`</small> | `pathout_transf_component`<br><small>`examples/pathout_transformation_lift.lp`</small><br>`ordinal_dependent_simplex4_source`<br><small>`examples/dependent_simplex_ordinal_dimension4.lp`</small><br>`ordinal_dependent_simplex4_face1234`<br><small>`examples/dependent_simplex_ordinal_dimension4.lp`</small> |
+| `ORDINAL-DEPENDENT-SIMPLEX-RECURSION` | checked | Nat recursion constructs a canonical intrinsic ordinal dependent-simplex source at variable dimension; its structural successor steps the code at F[s] and stores the transformation component epsilon[s], while arbitrary-target observation, generic nonempty-face access, selected computations through dimensions zero to four, noncollapse, and a retained next action are checked. | `ordinal_dependent_simplex_source`<br><small>`emdash3_2_dependent_simplex_ordinal_recursive.lp`</small><br>`ordinal_dependent_simplex_observation`<br><small>`emdash3_2_dependent_simplex_ordinal_recursive.lp`</small><br>`ordinal_dependent_simplex_face`<br><small>`emdash3_2_dependent_simplex_ordinal_recursive.lp`</small><br>`ordinal_dependent_simplex_lift_next_action`<br><small>`emdash3_2_dependent_simplex_ordinal_recursive.lp`</small> | `OrdinalDependentSimplexSource`<br><small>`examples/dependent_simplex_ordinal_recursive.lp`</small><br>`ordinal_dependent_simplex_observation`<br><small>`examples/dependent_simplex_ordinal_recursive.lp`</small><br>`ordinal_dependent_simplex_lift_next_action`<br><small>`examples/dependent_simplex_ordinal_recursive.lp`</small> |
 | `EH-COMMUTATIVITY` | checked | Two 2-endomorphisms of an identity 1-cell commute in the selected Eckmann-Hilton slice. | `EH_comm`<br><small>`emdash3_2.lp`</small> | text `Eckmann-Hilton specialization`<br><small>`emdash3_2_checks.lp`</small> |
 <!-- /book-source:appendix-evidence -->
 <div class="book-source-end" aria-hidden="true"></div>
@@ -15107,6 +15690,15 @@ higher action in a prospective native presentation. It is not merely the
 operation of taking an arbitrary opposite category. See
 [Chapter 14](#chapter-14).
 
+<a id="glossary-dependent-simplex"></a>
+
+**Dependent simplex.** A recursively flagged object obtained by choosing an
+object of $C$, then an object of its outgoing-path category, and continuing.
+Each successor is a `PathOut`, hence a Sigma of a representable hom; its
+arrows expose a base cell and a dependent cell above transport. The active
+variable-dimensional object package is not yet a whole category of all
+dependent simplexes. See [Chapter 29](#chapter-29).
+
 <a id="glossary-directed-hit"></a>
 
 **Directed higher-inductive type/category.** A presentation with object,
@@ -15150,6 +15742,13 @@ compiler for the whole book surface or a second mathematical kernel. See
 development, or research boundary. The status describes the relation between
 prose and the active artifact. See [How to Read](#how-to-read) and
 [Appendix B](#appendix-evidence).
+
+<a id="glossary-face-code"></a>
+
+**Face code.** A set-classified skip/keep word representing an injective
+monotone map between finite ordinals. Identity is the all-keep word and
+composition computes by structural substitution. Face codes are the homs of
+the augmented semi-simplex category. See [Chapter 29](#chapter-29).
 
 <a id="glossary-explicit-core"></a>
 
@@ -15478,6 +16077,21 @@ property. See [Chapter 20](#chapter-20).
 sieves satisfy maximality, pullback stability, and local character. A site
 need not be a poset of open subsets. See [Chapter 19](#chapter-19).
 
+<a id="glossary-semisimplicial-diagram"></a>
+
+**Semisimplicial diagram.** A functor from the opposite augmented category of
+injective ordinal maps. It has face action but no degeneracy action. The active
+groupoid-valued diagrams realize levelwise through the path-category functor
+while retaining whole map and higher action. See [Chapter 29](#chapter-29).
+
+<a id="glossary-standard-semisimplex"></a>
+
+**Standard semisimplex.** The Yoneda representable
+$\operatorname{Hom}(-,n+1)$ on the augmented semi-simplex category. The shift
+converts dimension $n$ to $n+1$ vertices. It is distinct from both the ordinal
+source category $\Delta[n]$ and one native dependent simplex. See
+[Chapter 29](#chapter-29).
+
 <a id="glossary-topology-local-ring"></a>
 
 **Topology-local ring presentation.** A commutative-ring presheaf capability
@@ -15735,8 +16349,8 @@ book reader; it is not a replacement for that SOP.
 
 # Appendix F. Implementation Status And Research Directions
 
-This appendix summarizes the boundary of the fourth-spiral groupoidal-
-realization development edition. The generated
+This appendix summarizes the boundary of the higher-categorical development
+edition through the fifth, simplicial spiral. The generated
 [evidence register](#appendix-evidence) remains the detailed claim-by-claim
 authority.
 
@@ -15755,6 +16369,7 @@ authority.
 | WalkingEnd calculation | Code, encode, power, spiral, contextual decoder, normalization cell/path, two inverse laws, carrier equivalence, noninvertibility results, and the whole free-inversion comparison with the Circle | No packaged monoid isomorphism, reverse `BNat` functor, full hom-category equivalence with `BNat`, or directed initiality theorem |
 | Groupoidal realization | Path categories and path functors; product-path split/join and coherent transport; Circle/Integer encode-decode and monodromy; WalkingEnd/Circle and WalkingArrow/interval mapping theorems; category-indexed groupoidification; path-realized pseudo-laxity | Source functoriality and the packaged groupoidification adjunction, closure for every former, generic simplex regressions, and a complete computational HoTT metatheory remain open |
 | Profiled Gray direction | Computational strict-functor codes, the strict-object/lax-arrow `GrayHom_lax` profile, one selected right closure, the walking square, and a nonidentity interchanger with retained next action | No mirror closure, full Crans–Gray biclosed monoidal structure, tensor functoriality/coherence, or global strict-cut migration |
+| Semisimplicial and dependent simplexes | Computing injective face codes and augmented index; join-built ordinal shapes; Yoneda standard semisimplices; homd/Sigma triangle and tetrahedron action; intrinsic flagged codes; generic nonempty faces; one canonical ordinal source in variable dimension with selected checks through dimension four and retained next action | No degeneracies, whole `DependentSimplex_cat(C,n)` classifier, mapping-category equivalence with `Functor_cat(Delta[n],C)`, judgmental agreement of all finite presentations, or general Kan, Segal, Rezk, complicial, or oriental theory |
 | Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
 | Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
@@ -15841,6 +16456,16 @@ walking-square interchanger is derived from the ordinary internal laxity
 action, but a full Gray theory still needs the mirror closure, tensor action,
 and coherent associativity and unit data. Those are structural projects, not
 extra fields to append to the current interchanger example.
+
+The dependent-simplex construction supplies the next exact strengthening.
+Its present `DependentSimplexObservation(C,n)` packages objects only. A
+whole comparison with $\operatorname{Functor}(\Delta[n],C)$ first requires an
+internal category whose objects recover that package, whose homs express
+compatible transformations of every dependent frame, and whose higher action
+agrees with the existing internal-action tower. Comparison functors, whole
+beta and eta, and compatibility with face restriction must then be
+constructed. Degeneracies are a separate extension of the index and native
+recursion, not a consequence of ambient identities alone.
 
 ## F.5 Semantics And Proof-Assistant Engineering
 
@@ -17245,12 +17870,23 @@ begins from categorical computation.
     Higher-Categorical Diagrams*. arXiv:2404.07273v2, 2024.
     [arXiv record](https://arxiv.org/abs/2404.07273).
 
-Items 1–5 and 8–11 situate the mathematical development; items 6–7 identify
-the proof infrastructure and checked artifact. Citation does not by itself
-confer the book's formal-status label. The exact HoTT source revision and
-Zeuner, Pédrot, and Hadzihasanovic versions, section maps, adaptation targets,
-and license metadata, together with the reference-only policy for Došen's book, are recorded in
-`book/references/third-party-sources.json`.
+12. <a id="ref-kolomatskaia-shulman-sst"></a>Astra Kolomatskaia and Michael
+    Shulman. *Displayed Type Theory and Semi-Simplicial Types*.
+    arXiv:2311.18781v2, 2024.
+    [arXiv record](https://arxiv.org/abs/2311.18781).
+
+13. <a id="ref-herbelin-ramachandra-parametricity"></a>Hugo Herbelin and
+    Ramkumar Ramachandra. *A Parametricity-Based Formalization of
+    Semi-Simplicial and Semi-Cubical Sets*. arXiv:2401.00512v2, 2025.
+    [arXiv record](https://arxiv.org/abs/2401.00512).
+
+14. <a id="ref-herbelin-ramachandra-very-dependent"></a>Hugo Herbelin and
+    Ramkumar Ramachandra. *The Very Dependent Recursive Structure of Iterated
+    Parametricity in Indexed Form*. arXiv:2602.12689v1, 2026.
+    [arXiv record](https://arxiv.org/abs/2602.12689).
+
+Items 6–7 identify proof infrastructure. Items 12–14 are comparative Chapter
+29 references and supply no adapted prose.
 <!-- /book-source:bibliography -->
 <div class="book-source-end" aria-hidden="true"></div>
 
