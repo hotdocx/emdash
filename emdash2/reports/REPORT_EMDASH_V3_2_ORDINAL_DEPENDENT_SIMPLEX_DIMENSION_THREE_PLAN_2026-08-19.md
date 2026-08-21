@@ -1499,31 +1499,50 @@ The next bounded implementation step is therefore:
 ```text
 whole constructor-visible Sigma/homd cell
   -> dependent_tetrahedron(kappa,lambda)
-  -> dependent_tetrahedron_map(FF)[(kappa,lambda)]
+  -> whole base-changing total map Sigma(F,FF)[(kappa,lambda)]
   -> native dependent-triangle/tetrahedron owner
   -> only then project the readable top and retained next action.
 ```
 
-The active `emdash3_2_dependent_simplex_bridge.lp` already owns this exact
-algorithm.  A surface is `(p,alpha)`, a volume is `(kappa,lambda)`, and the
-whole action computes as
+The active `emdash3_2_dependent_simplex_bridge.lp` owns the fixed-base part of
+this algorithm.  A surface is `(p,alpha)`, a volume is `(kappa,lambda)`, and
+the identity-base action computes as
 
 ```text
 dependent_tetrahedron_map(FF)[(kappa,lambda)]
   = (kappa, fdapp1_int_hom_fapp0(FF,kappa,lambda)).
 ```
 
-Thus `kappa` is the dependent-hom base surface while the second component is
-the distinct functorial image of the volume; together with source and target
-surfaces these are the four simplex faces.  A focused consumer now checks
-that the new two-stage projections reconstruct a well-typed whole
+That formula deliberately retains `kappa` only because `Functord(E,D)` is
+over one fixed base.  It is not yet the projection required by the ordinal
+consumer.  When the base surface is also mapped by
+`F : A -> K`, the correct total action is
+
+```text
+Sigma(F,FF)[(kappa,lambda)]
+  = (F_1(kappa), FF_1(kappa,lambda)).
+```
+
+Here `F_1(kappa)` is the projected base line, while
+`FF_1(kappa,lambda)` is the distinct surface over it.  Together with the
+source and target surfaces these are the four simplex faces.  The active
+kernel already factors this general total action into
+
+```text
+sigma_map_func(FF)
+  ; sigma_pullback_total_func(F,D),
+```
+
+and `pathout_map_func` uses exactly that composite.  A focused consumer now
+checks that the new two-stage projections reconstruct a well-typed whole
 `dependent_tetrahedron`.  The remaining audit must identify the existing
-whole `Functord` supplying the native exchange (or assemble only that
-`Functord` from active whole owners), then apply
-`dependent_tetrahedron_image`.  Do not introduce a duplicate Sigma exchange
-or return to componentwise endpoint chasing.  Its acceptance test is one
-mapped whole cell whose two projections reproduce the separately green base
-and fibre observations.  The target-side
+base functor `F` and pulled-back displayed map `FF` supplying the native
+exchange, then apply the *whole composite* above (or its already-defined
+`pathout_map_func`/dependent-simplex specialization) before projecting.  Do
+not introduce a duplicate Sigma exchange or return to componentwise endpoint
+chasing.  Its acceptance test is one mapped whole cell whose first projection
+is `F_1(kappa)` and whose second projection is the corresponding internal
+displayed action, with another hom action retained.  The target-side
 `SigmaPathView` remains valid equality evidence after the whole exchange, but
 it is not a replacement for the source's directed comparison.
 
