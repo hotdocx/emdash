@@ -1281,6 +1281,12 @@ consolidation.
 The owning `emdash3_2.lp` check and a generic typed-`eq_refl` computation probe
 are green, each in approximately ten seconds.  No runtime rule or unifier was
 added, so there is no rule-warning or critical-pair delta in this tranche.  A
+second small generic consumer is also green: it accepts opaque total-arrow
+endpoints, paths to explicit Sigma pairs, and an existing higher cell; applies
+the two endpoint paths through `fapp0(Hom_func,theta)`; and projects the
+resulting constructor-visible cell through
+`sigma_proj1_hom_fapp1_fapp0`.  Thus the complete endpoint-reframe/projection
+pattern is checked independently of the dimension-three source closure.  A
 concrete consumer attempt was not accepted as evidence: on the current host,
 the unchanged `ordinal_simplex3_visible_section_compositor.lp` dependency
 itself reached the mandatory 90-second ceiling (`93.94` seconds including
