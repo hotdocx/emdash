@@ -57,6 +57,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_dependent_simplex_codes.lp)
   files+=(emdash3_2_dependent_simplex_code_map.lp)
   files+=(emdash3_2_dependent_simplex_faces.lp)
+  files+=(emdash3_2_shaped_pathout.lp)
   files+=(emdash3_2_dependent_simplex_ordinal_adequacy.lp)
   files+=(emdash3_2_dependent_simplex_ordinal_filler.lp)
   files+=(emdash3_2_prof_reindex_terminal_normalization.lp)

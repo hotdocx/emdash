@@ -337,6 +337,12 @@ opaque whole-composition equality stays unforced; the same module packages
 the `02` and `12` face actions as the two whole line fibrations of the native
 triangle category, so their paired hom action exposes tetrahedron faces `023`
 and `123` while ordinary source/target expose `012` and `013`;
+the generic fixed-source shaped-cell realization is
+`emdash3_2_shaped_pathout.lp`; a cell from `Unit_prof(I)` to a reindexed unit
+profunctor totalizes to a whole `PathOut` functor with computing object action
+and retained hom action, while one cold whole-functor comparison observes
+stable Cat-valued precomposition as ordinary composition without a hot
+evaluator rule;
 the relative low-dimensional ordinal/dependent comparison is
 `emdash3_2_dependent_simplex_ordinal_adequacy.lp`; dimension zero is whole,
 dimension one observes the walking-arrow edge, and core join point betas make
@@ -1140,6 +1146,11 @@ Use the following order:
     `012`/`013`, while its two hom projections give `023`/`123`. It adds no
     face syntax, whole-composition rewrite, functor extensionality, or
     unifier;
+    the generic fixed-source shaped-cell consumer is
+    `emdash3_2_shaped_pathout.lp`: shaped unit-profunctor cells totalize to
+    whole `PathOut` maps, two late proof-time family comparisons expose the
+    represented source/target, and a rule-free whole Cat-precomposition path
+    retains higher action without changing either runtime normal form;
 114. `emdash3_2_dependent_simplex_ordinal_adequacy.lp` for the strongest
     relative ordinal comparison. Dimension zero is a whole retraction;
     dimension one observes source/target/generator; and join point betas make

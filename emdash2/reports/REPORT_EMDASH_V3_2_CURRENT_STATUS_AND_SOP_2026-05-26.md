@@ -647,6 +647,13 @@ detailed probe evidence.
   are tetrahedron faces `012` and `013`, while the paired hom action exposes
   `023` and `123`. It adds no duplicate face syntax, broad functor-
   extensionality, whole-composition rewrite, or proof-time unifier.
+- `emdash3_2_shaped_pathout.lp`: generic fixed-source realization of a shaped
+  unit-profunctor cell as a whole `PathOut` functor. Its object action sends
+  `(x,p)` to `(G[x],r[p])`, its next hom action remains at `fapp1_func`, and a
+  rule-free first-class path compares stable Cat-valued precomposition with
+  ordinary functor composition. The two fixed-source family comparisons are
+  late proof-time rules; no hot evaluator rewrite or simplex-specific
+  endpoint rule is added.
 - `emdash3_2_dependent_simplex_ordinal_adequacy.lp`: relative
   ordinal/dependent comparison at the strongest current boundary. Dimension
   zero is a whole pointwise retraction; dimension one observes the walking

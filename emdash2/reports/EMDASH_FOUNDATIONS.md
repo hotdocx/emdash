@@ -4124,6 +4124,29 @@ retains the action between those faces. This is the whole coherence that a
 pointwise endpoint coercion would lose; it is not a new triangle filler or a
 whole-functor extensionality principle.
 
+A shaped cell
+
+```text
+r : Unit_prof(I) -> Prof_reindex(Unit_prof(A),F,G)
+```
+
+has a corresponding fixed-source realization on outgoing paths. At `x0`, its
+displayed action maps `Hom_I(x0,x)` to `Hom_A(F[x0],G[x])`; Sigma totalization
+therefore gives a whole functor
+
+```text
+PathOut_I(x0) -> PathOut_A(F[x0]),
+(x,p) |-> (G[x],r[p]).
+```
+
+This is a projection of the shaped cell's existing two-endpoint internal
+action, not a separately postulated nerve map. Its hom action remains whole.
+When evaluation encounters stable Cat-valued precomposition, the calculus
+uses a first-class path from that stable owner to ordinary functor
+composition. Evaluating the path gives `G(F(x))`, while retaining it whole
+preserves all subsequent action; no hot evaluator rule or capped simplicial
+normalization is required.
+
 There are two successive cells at this stage. The section compositor points
 from the sequential 013/123 pasting to the stable action on their composite;
 the action of the already-constructed 012 filler then points from that stable

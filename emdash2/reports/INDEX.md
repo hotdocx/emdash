@@ -92,7 +92,11 @@ continuation is `emdash3_2_dependent_simplex_faces.lp`: existing nonempty
 outgoing-path map; every visible triangle edge computes and higher action is
 retained. Selected public composition agrees on its target and visible
 observation while opaque whole-functor equality remains deliberately
-unforced. The relative ordinal comparison is
+unforced. The generic fixed-source bridge
+`emdash3_2_shaped_pathout.lp` turns a shaped unit-profunctor cell into a whole
+`PathOut` map and packages stable Cat-precomposition versus ordinary
+composition as first-class whole equality rather than a hot evaluator rule.
+The relative ordinal comparison is
 `emdash3_2_dependent_simplex_ordinal_adequacy.lp`: dimension zero is whole,
 dimension one observes the walking-arrow edge, and new generic join point
 betas make the three ordinal triangle edges share vertices. One explicit

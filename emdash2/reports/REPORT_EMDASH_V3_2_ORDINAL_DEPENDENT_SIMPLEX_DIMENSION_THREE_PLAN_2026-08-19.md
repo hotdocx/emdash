@@ -1735,3 +1735,73 @@ it had already checked the dependent-simplex source chain successfully but
 did not write a new health report.  This bounded rule-free tranche therefore
 carries the existing health snapshot forward rather than treating an
 unrelated aggregate rerun as a checkpoint blocker.
+
+### 16.20 Shaped Fixed-Source Realization And Native Packaging
+
+The remaining source mismatch is now resolved at a generic Foundation
+boundary. A shaped cell
+
+```text
+r : Unit_prof(I) -> Prof_reindex(Unit_prof(A),F,G)
+```
+
+is fixed at its first endpoint and totalized to
+
+```text
+shaped_pathout_func(F,G,r,x0)
+  : PathOut_I(x0) -> PathOut_A(F[x0]),
+(x,p) |-> (G[x],r[p]).
+```
+
+The implementation is `emdash3_2_shaped_pathout.lp`. It derives the displayed
+map by pulling the original whole shaped cell along `x |-> (x0,x)`, then uses
+the existing `sigma_map_func` and `sigma_pullback_total_func`. Its object beta
+is judgmental and its `fapp1_func` is retained. Two narrowly shaped proof-time
+family comparisons live in this late module. An attempted early-kernel
+placement preserved the warning count but changed unrelated non-transitive
+proof-time search, so the late owner is intentional.
+
+The final evaluator obstruction was generic Cat-valued precomposition. The
+stable term
+
+```text
+hom_precomp_along_fapp0(Cat_cat,Cat_cat,id,Z,W,X,F,G)
+```
+
+and `comp_cat_fapp0(G,F)` already have an active proof-time comparison, but no
+first-class path. `cat_precomp_composite_path` packages that comparison as
+equality of whole functors; its component path computes the expected
+`G(F(w))`. Direct runtime object/arrow rules were tested. The pair reached the
+90-second ceiling because it matches the hot evaluator heads, whereas the
+rule-free whole path checks at the normal ten-second scale. The selected
+design therefore changes no runtime normal form and retains arbitrary higher
+action through the equality/PathOver interface.
+
+The focused ordinal probe
+`tmp/probes/ordinal_simplex3_pathout_shaped_tetrahedron.lp` now checks the
+complete construction. It forms the equality-induced transformation between
+the observed and primitive shaped `PathOut` maps, applies the existing
+post/left laxity owner to the two successive outgoing-path arrows, and stages
+the source comparison through:
+
+```text
+represented identity postcomposition
+  -> raw composition
+  <- general G-postcomposition
+  -> whole internal-action source.
+```
+
+The resulting cell is reframed only at that typed source and paired with face
+`023` by `sigma_arrow`. Both
+
+```text
+theta : Hom(DependentSimplex2_cat(...),t012,t013)
+tetrahedron : Obj(DependentSimplex3_cat(...))
+```
+
+typecheck. No opaque filler, endpoint rewrite, evaluator rule, Sigma eta, or
+simplex-specific unifier is introduced. The longstanding mathematical/LF
+blocker is therefore closed. Promotion remains: replace the ignored probe
+dependency names by their active owners, map the one source under arbitrary
+`H`, expose `012`, `013`, `023`, `123` and the top component, and retain the
+whole post-laxity next action for the separately planned dimension-four child.
