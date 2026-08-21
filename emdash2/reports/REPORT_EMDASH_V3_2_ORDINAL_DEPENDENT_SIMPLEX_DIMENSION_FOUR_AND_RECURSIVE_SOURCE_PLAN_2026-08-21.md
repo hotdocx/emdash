@@ -396,9 +396,9 @@ rewrite, branch/worktree deletion, or unrelated mutation is authorized.
 
 | Row | Status | Deliverable and acceptance boundary |
 | --- | --- | --- |
-| `ODS4R-00` | in progress | Create the dedicated branch/worktree from clean checkpoint `f19fb44`; record the fixed dimension-four and variable-source objectives, nonclaims, validation policy, and Git boundary; index this plan; run focused baselines; and create the clean launch checkpoint. |
-| `ODS4R-BASE-1` | pending | Check the completed ordinal dimension-three source/reviewer, native dimension-four source/reviewer, intrinsic code/map/face sources and focused reviewers, and the exact retained-action types. Carry forward unchanged aggregate evidence. |
-| `ODS4R-OWNER-2` | pending | Audit the concrete higher input and endpoint ownership of `ordinal_simplex3_top_next_action` against the next parameter-natural join/internal action. Identify the smallest whole projection needed for the dimension-four source; no opaque cell or capped endpoint equation. |
+| `ODS4R-00` | complete | Created the dedicated branch/worktree from clean checkpoint `f19fb44`; recorded the fixed dimension-four and variable-source objectives, nonclaims, validation policy, and Git boundary; indexed the plan; and created clean launch checkpoint `9155a73`. |
+| `ODS4R-BASE-1` | complete | Native dimension-four, intrinsic code, mapped-decoder, and variable-face sources plus their focused reviewers are green in the new worktree. The immediately preceding dimension-three source/reviewer evidence is carried forward unchanged from checkpoint `7cfc7db`; no long aggregate was run. |
+| `ODS4R-OWNER-2` | in progress | Audit the concrete higher input and endpoint ownership of `ordinal_simplex3_top_next_action` against the next parameter-natural join/internal action. The public action is genuinely iterable but is indexed by higher arrows between raw-to-stable source cells, not already by the distinct native tetrahedra 0123/0124. Identify the smallest whole projection and concrete input needed for the dimension-four source; no opaque cell or capped endpoint equation. |
 | `ODS4R-SOURCE-3` | pending | Construct the identity-`Delta[4]` native source object in `DependentSimplex4_cat` from the retained recursive action and typed endpoint views. |
 | `ODS4R-MAP-4` | pending | Map the one source under arbitrary `H` through `dependent_simplex4_map` and retain the whole map. |
 | `ODS4R-FACES-5` | pending | Expose tetrahedral faces 0123, 0124, 0134, 0234, and 1234 plus the top component from the one mapped native object, reusing variable-dimensional face action and the recursive readable frame. |
@@ -438,4 +438,46 @@ the workspace contract. A non-fatal pnpm update-metadata fetch failed; no
 package resolution, lockfile, or workspace contract failed.
 
 Focused Lambdapi baseline evidence and the first exact owner findings are
-recorded here after the bounded checks complete.
+recorded below.
+
+Launch checkpoint `9155a73` contains only this plan and its report-index
+routing. The focused quiet baseline is green for:
+
+```text
+emdash3_2_dependent_simplex_dimension4.lp
+examples/dependent_simplex_dimension4.lp
+emdash3_2_dependent_simplex_codes.lp
+examples/dependent_simplex_codes.lp
+emdash3_2_dependent_simplex_code_map.lp
+examples/dependent_simplex_code_map.lp
+emdash3_2_dependent_simplex_faces.lp
+examples/dependent_simplex_faces.lp
+```
+
+The parent goal checked
+`emdash3_2_dependent_simplex_ordinal_dimension3.lp` and its reviewer at the
+unchanged implementation checkpoint `7cfc7db`; that exact evidence is carried
+forward rather than rerun. Source bytes and Lambdapi environment are unchanged.
+
+The first owner audit distinguishes iterability from readiness. The public
+
+```text
+ordinal_simplex3_top_next_action(u,v)
+```
+
+is a whole functor on the hom-category between two cells
+`u,v : Hom(rawObj,stableObj)`. It does not itself choose the concrete higher
+arrow needed to connect native tetrahedra 0123 and 0124 in
+`DependentSimplex3_cat`. The dimension-four implementation must therefore
+recover that higher input from the next parameter-natural join/internal
+action, then transport the resulting cell through the recursive readable
+frame. No new native dimension-four classifier, map decoder, or face decoder
+is needed.
+
+The variable-dimensional split is also confirmed. For any supplied source
+package `(c_n,s_n)`, mapping under arbitrary `H` is already expressible by
+`dependent_simplex_code_map_target`, `dependent_simplex_code_map_func`, and
+ordinary `fapp0`. The missing canonical recursion is only the successor object
+in the outgoing-path category after mapping the previous stage along the old-
+vertex join inclusion. `ODS4R-OWNER-2` now audits the dimension-four instance
+of precisely that successor.
