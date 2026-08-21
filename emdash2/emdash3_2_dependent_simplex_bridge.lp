@@ -14,6 +14,11 @@
   cell is retained and the dependent component computes through the existing
   fdapp1_int_hom_fapp0 owner.
 
+  Before applying FF, the triangle classifier retains its two lower face
+  projections as whole functors.  One exposes the Sigma/base line; the other
+  evaluates that line at the fixed source endpoint in the target fibre.  On a
+  volume their hom actions are the base and fourth surfaces, respectively.
+
   This is a transparent recursive bridge, not a standalone tetrahedron or an
   external coherence record. It adds no rule or unifier and does not claim a
   whole comparison with Functor_cat(DirectedSimplex_cat(n),C), which remains
@@ -46,6 +51,56 @@ symbol DependentTriangle_cat
     (@Sigma_cat
       (Op_cat (Hom_cat K x y))
       (@DependentTriangle_catd K E x u y v));
+
+/*
+  The dependent-triangle classifier is doubly fibred over lower-dimensional
+  data.  The first whole face functor remembers the base arrow.  The second
+  keeps the fixed source endpoint and evaluates that base arrow in the target
+  fibre.  Consequently, on an arrow between dependent triangles, their hom
+  actions expose respectively the base surface and the fourth endpoint-action
+  surface of the recursive tetrahedron.
+
+  These are transparent projections of the existing homd_/Sigma owner.  They
+  add no face equation, rule, unifier, or capped component normal form.
+*/
+
+// Base-line projection: (p,alpha) |-> p.
+symbol dependent_triangle_base_face_func
+  [K : Cat]
+  (E : τ (Catd K))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  (v : τ (Obj (Fibre_cat E y)))
+  : τ (Functor
+      (@DependentTriangle_cat K E x u y v)
+      (Hom_cat K x y))
+≔ @Op_func
+    (@Sigma_cat
+      (Op_cat (Hom_cat K x y))
+      (@DependentTriangle_catd K E x u y v))
+    (Op_cat (Hom_cat K x y))
+    (@Sigma_proj1_func
+      (Op_cat (Hom_cat K x y))
+      (@DependentTriangle_catd K E x u y v));
+
+// Target-fibre endpoint projection: (p,alpha) |-> E[p](u).
+symbol dependent_triangle_endpoint_face_func
+  [K : Cat]
+  (E : τ (Catd K))
+  (x : τ (Obj K))
+  (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K))
+  (v : τ (Obj (Fibre_cat E y)))
+  : τ (Functor
+      (@DependentTriangle_cat K E x u y v)
+      (Fibre_cat E y))
+≔ @comp_cat_fapp0
+    (@DependentTriangle_cat K E x u y v)
+    (Hom_cat K x y)
+    (Fibre_cat E y)
+    (@fib_cov_tapp0_func K E x y u)
+    (@dependent_triangle_base_face_func K E x u y v);
 
 // A triangle is one base arrow paired with its dependent fibre arrow.
 symbol dependent_triangle

@@ -569,6 +569,9 @@ detailed probe evidence.
   composite expose the still-missing scoped join identity/composition laws.
 - `emdash3_2_dependent_simplex_bridge.lp`: transparent recursive triangle and
   tetrahedron presentation through the existing `homd_`/Sigma action. The
+  triangle classifier exposes whole base-line and target-fibre endpoint face
+  functors; their hom actions project a volume to its base and fourth surfaces
+  while retaining another action. The
   triangle map is exactly the first hom action of `Sigma(FF)`; its next hom
   action preserves a visible base cell and computes the dependent component
   through `fdapp1_int_hom_fapp0`, while retaining another hom action. The

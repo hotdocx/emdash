@@ -4,8 +4,9 @@
   The first layer is exactly Hom(Sigma(E)); its map is the first hom action of
   Sigma(FF). The next action maps a visible tetrahedron (kappa,lambda) to the
   same base cell together with fdapp1_int_hom_fapp0(...,lambda), and retains a
-  further hom action. The ordinary specialization recovers the active functor
-  compositor without a second coherence record.
+  further hom action. Two transparent face functors project a volume to its
+  base surface and target-fibre endpoint surface. The ordinary specialization
+  recovers the active functor compositor without a second coherence record.
 */
 
 require open emdash.emdash3_2_dependent_simplex_bridge;
@@ -21,6 +22,69 @@ assert (K : Cat) (E : τ (Catd K))
     (@Struct_sigma (Obj K)
       (λ k : τ (Obj K), Obj (Fibre_cat E k)) y v)
   ≡ @DependentTriangle_cat K E x u y v;
+
+// The two whole projections expose the base line and the target-fibre
+// endpoint while retaining functor action on volumes.
+assert (K : Cat) (E : τ (Catd K))
+  (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K)) (v : τ (Obj (Fibre_cat E y)))
+  (p : τ (Hom K x y))
+  (alpha : τ (Obj (Fibre_cat
+    (@DependentTriangle_catd K E x u y v) p))) ⊢
+  @fapp0
+    (@DependentTriangle_cat K E x u y v)
+    (Hom_cat K x y)
+    (@dependent_triangle_base_face_func K E x u y v)
+    (@dependent_triangle K E x u y v p alpha)
+  ≡ p;
+
+assert (K : Cat) (E : τ (Catd K))
+  (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x)))
+  (y : τ (Obj K)) (v : τ (Obj (Fibre_cat E y)))
+  (p : τ (Hom K x y))
+  (alpha : τ (Obj (Fibre_cat
+    (@DependentTriangle_catd K E x u y v) p))) ⊢
+  @fapp0
+    (@DependentTriangle_cat K E x u y v)
+    (Fibre_cat E y)
+    (@dependent_triangle_endpoint_face_func K E x u y v)
+    (@dependent_triangle K E x u y v p alpha)
+  ≡ @fapp0
+      (Hom_cat K x y)
+      (Fibre_cat E y)
+      (@fib_cov_tapp0_func K E x y u)
+      p;
+
+// Both projection functors retain another hom action on a volume.
+type λ K : Cat, λ E : τ (Catd K),
+  λ x : τ (Obj K), λ u : τ (Obj (Fibre_cat E x)),
+  λ y : τ (Obj K), λ v : τ (Obj (Fibre_cat E y)),
+  λ p : τ (Hom K x y), λ q : τ (Hom K x y),
+  λ alpha : τ (Obj (Fibre_cat
+    (@DependentTriangle_catd K E x u y v) p)),
+  λ beta : τ (Obj (Fibre_cat
+    (@DependentTriangle_catd K E x u y v) q)),
+    @fapp1_func
+      (@DependentTriangle_cat K E x u y v)
+      (Hom_cat K x y)
+      (@dependent_triangle_base_face_func K E x u y v)
+      (@dependent_triangle K E x u y v p alpha)
+      (@dependent_triangle K E x u y v q beta);
+
+type λ K : Cat, λ E : τ (Catd K),
+  λ x : τ (Obj K), λ u : τ (Obj (Fibre_cat E x)),
+  λ y : τ (Obj K), λ v : τ (Obj (Fibre_cat E y)),
+  λ p : τ (Hom K x y), λ q : τ (Hom K x y),
+  λ alpha : τ (Obj (Fibre_cat
+    (@DependentTriangle_catd K E x u y v) p)),
+  λ beta : τ (Obj (Fibre_cat
+    (@DependentTriangle_catd K E x u y v) q)),
+    @fapp1_func
+      (@DependentTriangle_cat K E x u y v)
+      (Fibre_cat E y)
+      (@dependent_triangle_endpoint_face_func K E x u y v)
+      (@dependent_triangle K E x u y v p alpha)
+      (@dependent_triangle K E x u y v q beta);
 
 // Its whole map is exactly the existing first hom action of Sigma(FF).
 assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D))

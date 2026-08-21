@@ -3773,8 +3773,26 @@ DependentTriangle_cat(E,x,u,y,v)
 ```
 
 An object is the native pair `(p,alpha)` of a base arrow and a dependent arrow
-above it. For `FF : Functord(E,D)`, the whole map of triangle classifiers is
-the existing first hom action of `Sigma(FF)`; its displayed part is
+above it. This classifier retains two whole lower-dimensional projections:
+
+```text
+dependent_triangle_base_face_func
+  : DependentTriangle(E,x,u,y,v) -> Hom_K(x,y)
+
+dependent_triangle_endpoint_face_func
+  : DependentTriangle(E,x,u,y,v) -> E[y].
+```
+
+The first sends `(p,alpha)` to its base line `p`. The second sends it to the
+target-fibre endpoint `E[p](u)`. On an arrow between two such surfaces, their
+generic hom actions expose the base surface and the fourth endpoint-action
+surface. Together with the ordinary source and target of that arrow, these are
+the four faces of the recursive tetrahedron. This is the fixed-endpoint slice
+of the doubly-fibred `homd_int` geometry: it is not an external face record,
+and both projections retain another hom action.
+
+For `FF : Functord(E,D)`, the whole map of triangle classifiers is the
+existing first hom action of `Sigma(FF)`; its displayed part is
 `fdapp1_int_presheaf_arrow(FF)`. Taking the next hom action between two
 triangles gives `dependent_tetrahedron_map`. On the visible second-Sigma
 constructor `(kappa,lambda)`, its image computes as
