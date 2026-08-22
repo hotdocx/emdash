@@ -188,8 +188,10 @@ SHA-256
 `1561efd7462c6fc7a935c72378cb07d71a8d434febdd0f25e7f2a39ec593ca7c`.
 The post-release projection erratum distinguishes the fixed-endpoint
 `E[p](u)` transport observation from the independently varying `PathOut`
-target edge; its integration and deployment evidence remain governed by the
-ledger until closeout.
+target edge. Correction checkpoint `6180c41` was fast-forwarded to `main`,
+and GitHub Pages run
+[`32554952322`](https://github.com/hotdocx/emdash/actions/runs/32554952322)
+deployed the byte-verified corrected book successfully.
 
 `../../docs/PARALLEL_GOAL_V3_2_INTEGRATION_PLAN_2026-08-04.md` records the
 completed cross-layer integration joining the TypeScript-elaborator and
