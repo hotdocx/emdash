@@ -397,31 +397,10 @@ Delta[0]   = 1
 Delta[n+1] = Delta[n] * 1.
 ```
 
-The bridge to the dependent presentation is the whole internal owner
-`homd_int` behind `homd_E(x,u)`, not merely its fully applied fibre. After
-fixed total endpoints `(x,u)` and `(y,v)` are selected, the corresponding hom
-slice has objects
-
-```
-(p,α),
-
-p : x → y
-α : E[p](u) → v.
-```
-
-This fixed-endpoint slice has two useful whole observations:
-
-```
-fixed_base(p,α)   = p
-fixed_action(p,α) = E[p](u).
-```
-
-The second is the first followed by covariant fibre action. It is a
-transported endpoint *inside the already fixed target fibre* `E[y]`; it is not
-the independently varying target projection of a whole simplex.
-
-That independent projection appears when outgoing paths are iterated. Put
-`S_0(C)=C`; after selecting `s_k : Obj(S_k)`, define
+The bridge to the dependent presentation is the whole internal dependent hom
+`homd_int`: it supplies the inner base-arrow-and-comparison layer of a
+simplex, while the enclosing `PathOut` Sigma retains its independently varying
+target edge. Put `S_0(C)=C`; after selecting `s_k : Obj(S_k)`, define
 
 ```
 PathOut_C(x) = Σ(y : C), Hom_C(x,y)
@@ -916,20 +895,17 @@ S_0(C) = C
 S_{k+1} = PathOut_{S_k}(s_k).
 ```
 
-The inner layer is the `homd_int` construction displayed at the start: at
-fixed total endpoints it presents `(p,α)`, with `p : x → y` and
-`α : E[p](u) → v`. Its observations `p` and `E[p](u)` describe base-arrow
-transport inside the fixed fibre; `E[p](u)` is not the independently varying
-target of the simplex.
-
-The latter comes from the outer `PathOut` Sigma. For
-`e₀₁=(x₁,p₀₁)`, a triangle has the nested form
+The internal dependent hom supplies the inner base-arrow-and-comparison pair,
+while the outer `PathOut` Sigma supplies the varying target edge. For
+`e₀₁=(x₁,p₀₁)`, a triangle therefore has the nested form
 
 ```
 t₀₁₂ = (e₀₂,q₀₁₂),
 e₀₂  = (x₂,p₀₂),
 q₀₁₂ = (p₁₂,α₀₁₂).
 ```
+
+Here `α₀₁₂ : p₁₂ ∘ p₀₁ ⇒ p₀₂`.
 
 Two whole projections return the target edge `e₀₂=(x₂,p₀₂)` and the base edge
 `e₁₂=(x₂,p₁₂)`. For a volume `Θ : t₀₁₂ → t₀₁₃`, their hom actions give faces
