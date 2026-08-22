@@ -3791,16 +3791,19 @@ The first sends `(p,alpha)` to its base line `p`. The second sends it to the
 target-fibre endpoint `E[p](u)`. On an arrow between two such surfaces, their
 generic hom actions expose the base surface and the fourth endpoint-action
 surface. Together with the ordinary source and target of that arrow, these are
-the four faces of the recursive tetrahedron. This is the fixed-endpoint slice
-of the doubly-fibred `homd_int` geometry: it is not an external face record,
-and both projections retain another hom action.
+four whole boundary readings of the fixed-endpoint higher cell. They are not
+yet the four ordinal cofaces of a `PathOut` tetrahedron: `(y,v)` is fixed in
+this slice, and `E[p](u)` is a transported object in `E[y]`, not an
+independently varying target edge. This fixed-endpoint action is not an
+external face record, and both projections retain another hom action.
 The third functor is the product pairing of the first two. Its product
 projections recover them computationally, so a volume is mapped as one whole
-object to the pair consisting of its base surface and fourth surface; the two
-parts are not independently reconstructed capped terms.
+object to the pair consisting of its base-action and endpoint-action surfaces;
+the two parts are not independently reconstructed capped terms.
 
-For the canonical four-face observation, apply the same principle one level
-higher, to the whole category of triangles
+For the canonical four-face observation, retain the outer target endpoint by
+applying the same principle one level higher, to the whole category of
+triangles
 
 ```text
 S2(C;x0,e01) = DependentSimplex2_cat(C,x0,e01).

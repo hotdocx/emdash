@@ -164,13 +164,16 @@ record, propagate the recursion.
 
 ### 4.3 Tetrahedral geometry
 
-The tetrahedron must make the recursive geometry readable. A dependent
-triangle has a base arrow and a fibre arrow above transport. An arrow between
-two such triangles is a tetrahedral cell. Besides its ordinary source and
-target triangles, two whole projections expose:
+The tetrahedron must make the recursive geometry readable. A fixed-endpoint
+dependent hom has a base arrow and a fibre arrow above transport; its
+transported endpoint is not the independently varying target edge. The whole
+recursive `PathOut` triangle retains both its outer target edge and the base
+edge of that inner dependent hom. An arrow between two such triangles is a
+tetrahedral cell. Besides its ordinary source and target triangles, two whole
+projections expose:
 
-- the base surface; and
-- the endpoint-action surface.
+- the target-line surface; and
+- the base-line surface.
 
 This gives the four faces `012`, `013`, `023`, and `123` without postulating a
 standalone tetrahedron filler. The next hom action remains available.
@@ -357,6 +360,7 @@ stop and audit the divergence rather than silently merging unrelated work.
 | `BDS-MAINT-8A` | complete | Updated the root reader route and edition size, the emdash2 book summary, active current-status artifact record, report index, and both long/short external-email appendices. The root README no longer calls dimension four future work; all public prose keeps the whole dependent-simplex category/equivalence and degeneracies explicit. |
 | `BDS-INTEGRATE-9` | complete | Audited all 25 registered worktrees as clean, fetched the remote, established that release checkpoint `6b85c2fd991b5ada7282f713a5ce34215d0c0a74` was exactly 73 commits ahead of and zero behind the prior `main` checkpoint `e1dc41484e4b906cadf094dc63fc7bddba526a41`, fast-forwarded the registered `main` worktree, and pushed `main` without a merge commit, rebase, or force. GitHub Pages run [`32532377691`](https://github.com/hotdocx/emdash/actions/runs/32532377691) completed both `build` and `deploy` successfully for that exact head. The HTTPS site returns 200, and its fingerprinted 3,117,927-byte book and 739,139-byte article PDFs reproduce the checked SHA-256 hashes recorded above. |
 | `BDS-CLOSE-10` | complete | Synchronized this final ledger and the report index in a documentation-only closeout checkpoint after the terminal deployment audit. No source, generated artifact, or dependency changed; consequently no build or aggregate was repeated. The final push is audited by exact equality of local `main` and `origin/main`, while the release branch remains an intact backtracking checkpoint. |
+| `BDS-PROJECTION-ERRATUM-11` | in progress | Corrected the post-release conflation between the fixed-endpoint `E[p](u)` transport observation and the independently varying `PathOut` target-line projection in both email appendices, Chapter 29, checked evidence, Foundations, and current-status prose without changing kernel semantics. The first cold 355-page browser render reached the former measured 90-second book budget without a content error, so the document-specific bounded budget is raised to 120 seconds as permitted by the print SOP. `book:release` is green for the 355-page, 16-font `0.6.1-dev` draft, SHA-256 `1561efd7462c6fc7a935c72378cb07d71a8d434febdd0f25e7f2a39ec593ca7c`; owner Markdown/PDF promotion is byte-identical. Poppler review of title/edition pages and affected Chapter 29 pages 234--237 caught and corrected one stranded display introduction; the final rerender is clean. Local checkpoint, integration, push, and deployment verification remain. |
 
 ## 13. Completion Definition
 

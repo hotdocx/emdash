@@ -569,10 +569,12 @@ detailed probe evidence.
   composite expose the still-missing scoped join identity/composition laws.
 - `emdash3_2_dependent_simplex_bridge.lp`: transparent recursive triangle and
   tetrahedron presentation through the existing `homd_`/Sigma action. The
-  triangle classifier exposes whole base-line and target-fibre endpoint face
-  functors; their hom actions project a volume to its base and fourth surfaces
-  while retaining another action. Their product pairing is one whole boundary
-  functor whose projections recover both components. The
+  fixed-endpoint triangle classifier exposes whole base-arrow and transported
+  target-fibre-action functors. Their hom actions give two boundary readings
+  while retaining another action; because the total endpoint is fixed, these
+  are not by themselves the public `023` and `123` cofaces. Their product
+  pairing is one whole fixed-endpoint boundary functor whose projections
+  recover both components. The
   triangle map is exactly the first hom action of `Sigma(FF)`; its next hom
   action preserves a visible base cell and computes the dependent component
   through `fdapp1_int_hom_fapp0`, while retaining another hom action. The
@@ -4841,10 +4843,10 @@ chapter files are authoring sources; the ignored
 the renderer. Book theorem-like claims use the four statuses defined in
 `book/STYLE.md` and checked claims cite `book/evidence.json`.
 
-The current locally promoted artifact is the draft expanded development
-edition `0.6.0-dev`, dated 2026-08-21: 355 tagged US Letter pages, 16 embedded
-fonts, and PDF SHA-256
-`4116c6aaa586e55dc7c54b5faa6e379b3a376bb56fb86fec392f7981a72276b3`.
+The current locally promoted artifact is the corrected draft expanded
+development edition `0.6.1-dev`, dated 2026-08-22: 355 tagged US Letter pages,
+16 embedded fonts, and PDF SHA-256
+`1561efd7462c6fc7a935c72378cb07d71a8d434febdd0f25e7f2a39ec593ca7c`.
 Its deterministic owner and public copy are byte-identical. This artifact
 status is publication evidence, not a new mathematical authority.
 

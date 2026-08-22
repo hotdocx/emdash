@@ -222,52 +222,89 @@ $$
 $$
 
 The second factor is precisely a dependent hom. Specializing $E$ to the
-representable family $\operatorname{Hom}_C(x_0,-)$ gives (29.11). Repeating
-the same hom construction gives tetrahedra, then higher simplexes. The
-recursion is therefore semantic before it is coded: every stage is built from
-the existing `Hom`, dependent `Sigma`, and dependent-hom owners.
+representable family $\operatorname{Hom}_C(x_0,-)$ gives (29.11). Nesting
+this hom slice beneath the next outgoing-path Sigma gives tetrahedra, then
+higher simplexes. The recursion is therefore semantic before it is coded:
+every stage is built from the existing `Hom`, dependent `Sigma`, and
+dependent-hom owners.
+
+With both total endpoints fixed, (29.12) projects $(p,\alpha)$ to $p$ and,
+through covariant fibre action, to $E[p](u)$ in the already fixed fibre
+$E(y)$. The latter is internal transport, not the independently varying
+simplex target supplied by the outer `PathOut` Sigma in (29.8).
 
 ## 29.4 Why A Tetrahedron Has Four Surfaces
 
-An ordinary globular arrow has a source and a target. A tetrahedron has four
-triangular faces. The apparent discrepancy disappears when the arrow is
-dependent.
+An ordinary globular arrow has two endpoints, whereas a tetrahedron has four
+faces. The recursive triangle category supplies the difference through two
+nested fibrations.
 
-Fix two dependent triangles $t_0$ and $t_1$ in the category described by
-(29.12). An arrow
+Write
 
 $$
-\Theta:t_0\longrightarrow t_1
+S_1=\operatorname{PathOut}_C(x_0),
+\qquad
+S_2=\operatorname{PathOut}_{S_1}(e_{01}).
+$$
+
+For a visible $e_{01}=(x_1,p_{01})$, a triangle in $S_2$ has the nested form
+
+$$
+t_{012}=(e_{02},q_{012}),
+\qquad
+e_{02}=(x_2,p_{02}),
+\qquad
+q_{012}=(p_{12},\alpha_{012}).
+$$
+
+The outer pair remembers the target edge $e_{02}$. The inner Hom-of-Sigma pair
+remembers the base edge $e_{12}=(x_2,p_{12})$ and comparison $\alpha_{012}$.
+
+Now take two triangles $t_{012},t_{013}\in S_2$. An arrow
+
+$$
+\Theta:t_{012}\longrightarrow t_{013}
 \tag{29.13}
 $$
 
-has a base component $\kappa$ and a dependent component $\lambda$ above it.
-The ordinary source and target of $\Theta$ give two triangular surfaces. The
-base component gives a third. A whole endpoint-action functor evaluates the
-base movement in the target fibre and gives the fourth.
+is the volume of the tetrahedron $0123$. Its ordinary source and target are
+the faces $012$ and $013$. Two whole line projections provide the remaining
+faces:
 
-The important word is *whole*. The base-face and endpoint-face operations are
-functors out of the category of dependent triangles. Their object actions
-read the two lower edges of a triangle; their hom actions send a tetrahedral
-cell to the corresponding surface. Pairing them gives one boundary functor,
-so compatibility of the two observations follows from ordinary product and
-functor action rather than from a hand-written boundary equation.
+$$
+\begin{aligned}
+d_{02}(t_{01i})&=e_{0i},
+&d_{02}[\Theta]&=t_{023},\\
+d_{12}(t_{01i})&=e_{1i},
+&d_{12}[\Theta]&=t_{123}.
+\end{aligned}
+$$
 
-A displayed functor $\mathcal F:E\to D$ maps the entire triangle category by
-the existing internal displayed action. Its next hom action maps (29.13),
-keeping $\kappa$ and applying the dependent higher action to $\lambda$.
-Applying the hom action once more remains meaningful. This is the same
+The first is the target projection of the outer `PathOut` Sigma. The second
+uses the base-arrow projection of the inner Hom-of-Sigma, whose dependent
+fibre is organized by `homd_int`. Pairing them gives one whole boundary
+functor. Their shared vertices and edges are consequently preserved by
+ordinary functor action rather than imposed by a hand-written boundary
+equation.
+
+An ordinary functor $F:C\to D$ maps the whole recursive triangle category by
+iterated `PathOut` action. Within its fixed-endpoint Hom-of-Sigma slice, the
+displayed part is mapped by the existing internal dependent action: the base
+cell is retained while the fibre cell is sent through the next displayed hom
+action. Applying the hom action once more remains meaningful. This is the same
 iteration that produced the laxity witness of Chapter 28; here its geometric
 reading is a higher simplex.
 
 <!-- evidence:DEPENDENT-SIMPLEX-INTERNAL-ACTION -->
 
 > **Formal status — checked.** Evidence
-> `DEPENDENT-SIMPLEX-INTERNAL-ACTION`. The dependent triangle is the active
-> hom of a Sigma total. Its base and endpoint surfaces are whole projections,
-> a visible tetrahedral constructor computes through the existing displayed
-> internal action, and one further hom action is retained. No standalone
-> tetrahedron filler or coherence record is added.
+> `DEPENDENT-SIMPLEX-INTERNAL-ACTION`. The fixed-endpoint dependent hom is the
+> active hom of a Sigma total and retains its base/transport observations. The
+> recursive `PathOut` triangle category has whole target-line and base-line
+> projections whose hom actions expose faces $023$ and $123$. A visible
+> tetrahedral constructor computes through the existing displayed internal
+> action, and one further hom action is retained. No standalone tetrahedron
+> filler or coherence record is added.
 
 ## 29.5 Codes Without A Second Semantics
 

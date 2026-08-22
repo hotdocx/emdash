@@ -26,11 +26,13 @@ powers, category-indexed groupoidification characterizes maps out by a whole
 mapping equivalence, and one profiled Gray right closure exposes a nonidentity
 walking-square interchanger from the same internal laxity action.
 Finally, injective face codes form an internal semi-simplex category, directed
-join builds the ordinal shapes `Delta[n]`, and iterated outgoing paths build
-their native dependent cells. One Nat recursion constructs a canonical
-ordinal source in variable dimension, maps it into arbitrary target
-categories, exposes every nonempty face, and retains another higher action;
-selected computations are checked through dimension four.
+join builds the ordinal shapes `Delta[n]`, and the internal dependent hom
+keeps the base-arrow layer of a dependent cell functorial. Iterated outgoing
+paths place that layer beneath an independently varying target endpoint. This
+nested double fibration produces native dependent simplexes. One Nat recursion
+constructs a canonical ordinal source in variable dimension, maps it into
+arbitrary target categories, exposes every nonempty face, and retains another
+higher action; selected computations are checked through dimension four.
 
 The same distinction between readable syntax and explicit structure appears
 in the implementation. A TypeScript elaborator accepts usual binder-and-
@@ -395,18 +397,67 @@ Delta[0]   = 1
 Delta[n+1] = Delta[n] * 1.
 ```
 
-The native cell presentation uses no second simplex record. Put `S_0(C)=C`;
-after selecting `s_k : Obj(S_k)`, define
+The bridge to the dependent presentation is the whole internal owner
+`homd_int` behind `homd_E(x,u)`, not merely its fully applied fibre. After
+fixed total endpoints `(x,u)` and `(y,v)` are selected, the corresponding hom
+slice has objects
 
 ```
-S_{k+1} = PathOut_{S_k}(s_k).
+(p,α),
+
+p : x → y
+α : E[p](u) → v.
 ```
 
-Because `PathOut` is a Sigma of a representable hom, its arrows pair a base
-cell with a dependent cell above transport. At dimension two this contains
-`p12 o p01 => p02`. At dimension three, ordinary source and target plus the
-whole base and endpoint-action projections give the four tetrahedral faces,
-and the next internal action remains available.
+This fixed-endpoint slice has two useful whole observations:
+
+```
+fixed_base(p,α)   = p
+fixed_action(p,α) = E[p](u).
+```
+
+The second is the first followed by covariant fibre action. It is a
+transported endpoint *inside the already fixed target fibre* `E[y]`; it is not
+the independently varying target projection of a whole simplex.
+
+That independent projection appears when outgoing paths are iterated. Put
+`S_0(C)=C`; after selecting `s_k : Obj(S_k)`, define
+
+```
+PathOut_C(x) = Σ(y : C), Hom_C(x,y)
+S_{k+1}     = PathOut_{S_k}(s_k).
+```
+
+For a visible first edge `e₀₁=(x₁,p₀₁)`, a triangle is an object
+
+```
+t₀₁₂ = (e₀₂,q₀₁₂) : S_2,
+
+e₀₂  = (x₂,p₀₂)
+q₀₁₂ = (p₁₂,α₀₁₂).
+```
+
+Here `α₀₁₂ : p₁₂ ∘ p₀₁ ⇒ p₀₂`. The outer `PathOut` Sigma and the inner
+`homd_int`/Hom-of-Sigma presentation give two genuinely different whole line
+projections:
+
+```
+d_target(t₀₁₂) = e₀₂ = (x₂,p₀₂)
+d_base(t₀₁₂)   = e₁₂ = (x₂,p₁₂).
+```
+
+If `Θ : t₀₁₂ → t₀₁₃` is a tetrahedral volume, ordinary source and target give
+faces `012` and `013`, while functor action gives
+
+```
+d_target[Θ] = face 023
+d_base[Θ]   = face 123.
+```
+
+Thus the four surfaces arise from the ordinary endpoints and the two nested
+fibrations, not from a separately postulated tetrahedron record or boundary
+equation. The next internal action remains available, so the construction
+continues beyond a capped tetrahedron.
 
 An intrinsically indexed flag code records the changing native category
 without reimplementing it. A whole stage
@@ -712,10 +763,10 @@ Hom_{ΣE}((x,u),(y,v))
   = Σ(f : x → y), Hom_{E[y]}(E[f](u),v).
 ```
 
-For a category `Z`, put
+For a category `Z`, define the outgoing-arrow category
 
 ```
-x ↓ Z = Σ(y : Z), Hom_Z(x,y).
+PathOut_Z(x) := x ↓ Z = Σ(y : Z), Hom_Z(x,y).
 ```
 
 The reflexive object is `(x,id_x)`; write its canonical arrow to `(y,p)`
@@ -864,6 +915,27 @@ Delta[n+1] = Delta[n] * 1
 S_0(C) = C
 S_{k+1} = PathOut_{S_k}(s_k).
 ```
+
+The inner layer is the `homd_int` construction displayed at the start: at
+fixed total endpoints it presents `(p,α)`, with `p : x → y` and
+`α : E[p](u) → v`. Its observations `p` and `E[p](u)` describe base-arrow
+transport inside the fixed fibre; `E[p](u)` is not the independently varying
+target of the simplex.
+
+The latter comes from the outer `PathOut` Sigma. For
+`e₀₁=(x₁,p₀₁)`, a triangle has the nested form
+
+```
+t₀₁₂ = (e₀₂,q₀₁₂),
+e₀₂  = (x₂,p₀₂),
+q₀₁₂ = (p₁₂,α₀₁₂).
+```
+
+Two whole projections return the target edge `e₀₂=(x₂,p₀₂)` and the base edge
+`e₁₂=(x₂,p₁₂)`. For a volume `Θ : t₀₁₂ → t₀₁₃`, their hom actions give faces
+`023` and `123`; ordinary source and target give `012` and `013`. The boundary
+therefore comes from nested functorial projections, not a separate record,
+and the next internal action remains available.
 
 One Nat recursion constructs the canonical ordinal dependent simplex at
 variable `n`; arbitrary `H : Functor(Delta[n],C)` maps it into `C`, and the

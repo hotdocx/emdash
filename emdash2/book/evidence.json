@@ -4058,7 +4058,7 @@
     },
     "DEPENDENT-SIMPLEX-INTERNAL-ACTION": {
       "status": "checked",
-      "statement": "The native dependent triangle is the existing hom of a Sigma total, its base and endpoint faces are whole functor projections, and the next internal action maps a visible dependent tetrahedron while retaining a further hom action rather than adding an independent coherence record.",
+      "statement": "The fixed-endpoint dependent hom is the existing hom of a Sigma total and retains whole base-arrow and transported-endpoint observations; the recursive PathOut triangle category has whole target-line and base-line projections whose hom actions expose the 023 and 123 faces, while the next internal action maps a visible dependent tetrahedron and remains iterable rather than adding an independent coherence record.",
       "owners": [
         {
           "file": "emdash3_2_dependent_simplex_bridge.lp",
@@ -4067,6 +4067,10 @@
         {
           "file": "emdash3_2_dependent_simplex_bridge.lp",
           "symbol": "dependent_triangle_boundary_face_func"
+        },
+        {
+          "file": "emdash3_2_dependent_simplex_faces.lp",
+          "symbol": "dependent_simplex2_boundary_line_func"
         },
         {
           "file": "emdash3_2_dependent_simplex_bridge.lp",
@@ -4081,6 +4085,14 @@
         {
           "file": "examples/dependent_simplex_bridge.lp",
           "contains": "A further hom action remains available"
+        },
+        {
+          "file": "examples/dependent_simplex_faces.lp",
+          "symbol": "dependent_simplex2_boundary_target_action_path_test"
+        },
+        {
+          "file": "examples/dependent_simplex_faces.lp",
+          "symbol": "dependent_simplex2_boundary_base_action_path_test"
         }
       ]
     },

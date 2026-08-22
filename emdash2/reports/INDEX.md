@@ -180,16 +180,16 @@ formal claim.
 is the completed fifth-spiral editorial, integration, and deployment ledger.
 It adds the
 theorem-led dependent-simplex chapter and concise article synthesis, advances
-the draft book to 355-page `0.6.0-dev` and the article to 18-page
+the corrected draft book to 355-page `0.6.1-dev` and the article to 18-page
 `0.3.0-dev`, and preserves the missing whole
 `Functor_cat(Delta[n],C) ~= DependentSimplex_cat(C,n)` comparison and
 degeneracies as explicit boundaries. The published book PDF has
 SHA-256
-`4116c6aaa586e55dc7c54b5faa6e379b3a376bb56fb86fec392f7981a72276b3`;
-release checkpoint `6b85c2f` was fast-forwarded to `main`, and GitHub Pages
-run
-[`32532377691`](https://github.com/hotdocx/emdash/actions/runs/32532377691)
-deployed the reviewer and both byte-verified PDFs successfully.
+`1561efd7462c6fc7a935c72378cb07d71a8d434febdd0f25e7f2a39ec593ca7c`.
+The post-release projection erratum distinguishes the fixed-endpoint
+`E[p](u)` transport observation from the independently varying `PathOut`
+target edge; its integration and deployment evidence remain governed by the
+ledger until closeout.
 
 `../../docs/PARALLEL_GOAL_V3_2_INTEGRATION_PLAN_2026-08-04.md` records the
 completed cross-layer integration joining the TypeScript-elaborator and

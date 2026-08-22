@@ -2,8 +2,8 @@
 title: "Functorial Type Theory: Univalent Foundations for Mathematics"
 authors: "The emdash contributors"
 edition: "expanded development edition"
-editionVersion: "0.6.0-dev"
-publicationDate: "2026-08-21"
+editionVersion: "0.6.1-dev"
+publicationDate: "2026-08-22"
 status: "draft"
 license: "CC-BY-SA-3.0"
 ---
@@ -14685,52 +14685,89 @@ $$
 $$
 
 The second factor is precisely a dependent hom. Specializing $E$ to the
-representable family $\operatorname{Hom}_C(x_0,-)$ gives (29.11). Repeating
-the same hom construction gives tetrahedra, then higher simplexes. The
-recursion is therefore semantic before it is coded: every stage is built from
-the existing `Hom`, dependent `Sigma`, and dependent-hom owners.
+representable family $\operatorname{Hom}_C(x_0,-)$ gives (29.11). Nesting
+this hom slice beneath the next outgoing-path Sigma gives tetrahedra, then
+higher simplexes. The recursion is therefore semantic before it is coded:
+every stage is built from the existing `Hom`, dependent `Sigma`, and
+dependent-hom owners.
+
+With both total endpoints fixed, (29.12) projects $(p,\alpha)$ to $p$ and,
+through covariant fibre action, to $E[p](u)$ in the already fixed fibre
+$E(y)$. The latter is internal transport, not the independently varying
+simplex target supplied by the outer `PathOut` Sigma in (29.8).
 
 ## 29.4 Why A Tetrahedron Has Four Surfaces
 
-An ordinary globular arrow has a source and a target. A tetrahedron has four
-triangular faces. The apparent discrepancy disappears when the arrow is
-dependent.
+An ordinary globular arrow has two endpoints, whereas a tetrahedron has four
+faces. The recursive triangle category supplies the difference through two
+nested fibrations.
 
-Fix two dependent triangles $t_0$ and $t_1$ in the category described by
-(29.12). An arrow
+Write
 
 $$
-\Theta:t_0\longrightarrow t_1
+S_1=\operatorname{PathOut}_C(x_0),
+\qquad
+S_2=\operatorname{PathOut}_{S_1}(e_{01}).
+$$
+
+For a visible $e_{01}=(x_1,p_{01})$, a triangle in $S_2$ has the nested form
+
+$$
+t_{012}=(e_{02},q_{012}),
+\qquad
+e_{02}=(x_2,p_{02}),
+\qquad
+q_{012}=(p_{12},\alpha_{012}).
+$$
+
+The outer pair remembers the target edge $e_{02}$. The inner Hom-of-Sigma pair
+remembers the base edge $e_{12}=(x_2,p_{12})$ and comparison $\alpha_{012}$.
+
+Now take two triangles $t_{012},t_{013}\in S_2$. An arrow
+
+$$
+\Theta:t_{012}\longrightarrow t_{013}
 \tag{29.13}
 $$
 
-has a base component $\kappa$ and a dependent component $\lambda$ above it.
-The ordinary source and target of $\Theta$ give two triangular surfaces. The
-base component gives a third. A whole endpoint-action functor evaluates the
-base movement in the target fibre and gives the fourth.
+is the volume of the tetrahedron $0123$. Its ordinary source and target are
+the faces $012$ and $013$. Two whole line projections provide the remaining
+faces:
 
-The important word is *whole*. The base-face and endpoint-face operations are
-functors out of the category of dependent triangles. Their object actions
-read the two lower edges of a triangle; their hom actions send a tetrahedral
-cell to the corresponding surface. Pairing them gives one boundary functor,
-so compatibility of the two observations follows from ordinary product and
-functor action rather than from a hand-written boundary equation.
+$$
+\begin{aligned}
+d_{02}(t_{01i})&=e_{0i},
+&d_{02}[\Theta]&=t_{023},\\
+d_{12}(t_{01i})&=e_{1i},
+&d_{12}[\Theta]&=t_{123}.
+\end{aligned}
+$$
 
-A displayed functor $\mathcal F:E\to D$ maps the entire triangle category by
-the existing internal displayed action. Its next hom action maps (29.13),
-keeping $\kappa$ and applying the dependent higher action to $\lambda$.
-Applying the hom action once more remains meaningful. This is the same
+The first is the target projection of the outer `PathOut` Sigma. The second
+uses the base-arrow projection of the inner Hom-of-Sigma, whose dependent
+fibre is organized by `homd_int`. Pairing them gives one whole boundary
+functor. Their shared vertices and edges are consequently preserved by
+ordinary functor action rather than imposed by a hand-written boundary
+equation.
+
+An ordinary functor $F:C\to D$ maps the whole recursive triangle category by
+iterated `PathOut` action. Within its fixed-endpoint Hom-of-Sigma slice, the
+displayed part is mapped by the existing internal dependent action: the base
+cell is retained while the fibre cell is sent through the next displayed hom
+action. Applying the hom action once more remains meaningful. This is the same
 iteration that produced the laxity witness of Chapter 28; here its geometric
 reading is a higher simplex.
 
 <!-- evidence:DEPENDENT-SIMPLEX-INTERNAL-ACTION -->
 
 > **Formal status — checked.** Evidence
-> `DEPENDENT-SIMPLEX-INTERNAL-ACTION`. The dependent triangle is the active
-> hom of a Sigma total. Its base and endpoint surfaces are whole projections,
-> a visible tetrahedral constructor computes through the existing displayed
-> internal action, and one further hom action is retained. No standalone
-> tetrahedron filler or coherence record is added.
+> `DEPENDENT-SIMPLEX-INTERNAL-ACTION`. The fixed-endpoint dependent hom is the
+> active hom of a Sigma total and retains its base/transport observations. The
+> recursive `PathOut` triangle category has whole target-line and base-line
+> projections whose hom actions expose faces $023$ and $123$. A visible
+> tetrahedral constructor computes through the existing displayed internal
+> action, and one further hom action is retained. No standalone tetrahedron
+> filler or coherence record is added.
 
 ## 29.5 Codes Without A Second Semantics
 
@@ -15329,7 +15366,7 @@ artifact, not the mathematics printed inside it.
 | `GRAY-RIGHT-CLOSURE` | checked | The selected GrayTensor_R has one profiled right closure: computationally strict whole curry and uncurry form an OmegaEquivAlong between GrayHom_lax(GrayTensor_R(A,B),C) and GrayHom_lax(A,GrayHom_lax(B,C)), with whole beta/eta and coevaluation/evaluation derived at strict identity codes. | `GrayTensor_R`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_curry_R_func`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_right_closure_omega`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_coevaluation_R_func`<br><small>`emdash3_2_gray_right_closure.lp`</small> | `GrayTensor_R`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_right_closure_omega`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_coevaluation_R_func`<br><small>`examples/gray_right_closure.lp`</small> |
 | `GRAY-WALKING-INTERCHANGER` | checked | In the selected strict-object/lax-arrow Gray right-closure slice, the walking square has four coevaluation-derived vertices and two coordinate arrow families, while its oriented nonidentity interchanger is projected from the existing whole post/left laxity action and retains one next hom action. | `gray_square_inner_src_arrow`<br><small>`emdash3_2_gray_walking_square.lp`</small><br>`gray_square_outer_src_arrow`<br><small>`emdash3_2_gray_walking_square.lp`</small><br>`gray_interchanger`<br><small>`emdash3_2_gray_interchanger.lp`</small><br>`gray_interchanger_next_func`<br><small>`emdash3_2_gray_interchanger.lp`</small> | `gray_interchanger`<br><small>`examples/gray_interchanger.lp`</small><br>`gray_interchanger_next_func`<br><small>`examples/gray_interchanger.lp`</small> |
 | `SEMISIMPLICIAL-FACE-SUBSTRATE` | checked | Injective skip/keep face codes compute, form the locally discrete augmented semi-simplex category, realize selected ordinal shapes by directed join, and define Yoneda standard semisimplices and whole groupoid-valued semisimplicial diagram realization with retained higher action. | `FaceCode`<br><small>`emdash3_2_semisimplicial_face_codes.lp`</small><br>`SemiDeltaPlus_cat`<br><small>`emdash3_2_semisimplicial_index.lp`</small><br>`DirectedSimplex_cat`<br><small>`emdash3_2_simplex_shapes.lp`</small><br>`StandardSimplex`<br><small>`emdash3_2_semisimplicial_diagrams.lp`</small> | `face_vertex_zero`<br><small>`examples/semisimplicial_face_codes.lp`</small><br>`semi_delta_edge_zero_one`<br><small>`examples/semisimplicial_index_category.lp`</small><br>text `Ordinary dimension n means n+1 vertices`<br><small>`examples/simplex_shapes.lp`</small><br>`semisimplicial_grpd_realized_face_func`<br><small>`examples/semisimplicial_diagrams.lp`</small> |
-| `DEPENDENT-SIMPLEX-INTERNAL-ACTION` | checked | The native dependent triangle is the existing hom of a Sigma total, its base and endpoint faces are whole functor projections, and the next internal action maps a visible dependent tetrahedron while retaining a further hom action rather than adding an independent coherence record. | `DependentTriangle_cat`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small><br>`dependent_triangle_boundary_face_func`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small><br>`dependent_tetrahedron_map`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small> | text `The triangle classifier is the active Hom(Sigma) presentation`<br><small>`examples/dependent_simplex_bridge.lp`</small><br>text `A further hom action remains available`<br><small>`examples/dependent_simplex_bridge.lp`</small> |
+| `DEPENDENT-SIMPLEX-INTERNAL-ACTION` | checked | The fixed-endpoint dependent hom is the existing hom of a Sigma total and retains whole base-arrow and transported-endpoint observations; the recursive PathOut triangle category has whole target-line and base-line projections whose hom actions expose the 023 and 123 faces, while the next internal action maps a visible dependent tetrahedron and remains iterable rather than adding an independent coherence record. | `DependentTriangle_cat`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small><br>`dependent_triangle_boundary_face_func`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small><br>`dependent_simplex2_boundary_line_func`<br><small>`emdash3_2_dependent_simplex_faces.lp`</small><br>`dependent_tetrahedron_map`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small> | text `The triangle classifier is the active Hom(Sigma) presentation`<br><small>`examples/dependent_simplex_bridge.lp`</small><br>text `A further hom action remains available`<br><small>`examples/dependent_simplex_bridge.lp`</small><br>`dependent_simplex2_boundary_target_action_path_test`<br><small>`examples/dependent_simplex_faces.lp`</small><br>`dependent_simplex2_boundary_base_action_path_test`<br><small>`examples/dependent_simplex_faces.lp`</small> |
 | `ORDINAL-DEPENDENT-FOUR-SIMPLEX` | checked | One canonical ordinal four-simplex is constructed by iterating the whole PathOut transformation lift, maps under every functor from Delta[4], exposes all five tetrahedral cofaces through generic FaceCode action, supports selected strict and exact Path targets, remains noncollapsed, and retains one next action. | `pathout_transf_lift`<br><small>`emdash3_2_pathout_transformation_lift.lp`</small><br>`ordinal_dependent_simplex4_source`<br><small>`emdash3_2_dependent_simplex_ordinal_dimension4.lp`</small><br>`ordinal_dependent_simplex4_face`<br><small>`emdash3_2_dependent_simplex_ordinal_dimension4.lp`</small><br>`ordinal_simplex4_top_next_action`<br><small>`emdash3_2_dependent_simplex_ordinal_dimension4.lp`</small> | `pathout_transf_component`<br><small>`examples/pathout_transformation_lift.lp`</small><br>`ordinal_dependent_simplex4_source`<br><small>`examples/dependent_simplex_ordinal_dimension4.lp`</small><br>`ordinal_dependent_simplex4_face1234`<br><small>`examples/dependent_simplex_ordinal_dimension4.lp`</small> |
 | `ORDINAL-DEPENDENT-SIMPLEX-RECURSION` | checked | Nat recursion constructs a canonical intrinsic ordinal dependent-simplex source at variable dimension; its structural successor steps the code at F[s] and stores the transformation component epsilon[s], while arbitrary-target observation, generic nonempty-face access, selected computations through dimensions zero to four, noncollapse, and a retained next action are checked. | `ordinal_dependent_simplex_source`<br><small>`emdash3_2_dependent_simplex_ordinal_recursive.lp`</small><br>`ordinal_dependent_simplex_observation`<br><small>`emdash3_2_dependent_simplex_ordinal_recursive.lp`</small><br>`ordinal_dependent_simplex_face`<br><small>`emdash3_2_dependent_simplex_ordinal_recursive.lp`</small><br>`ordinal_dependent_simplex_lift_next_action`<br><small>`emdash3_2_dependent_simplex_ordinal_recursive.lp`</small> | `OrdinalDependentSimplexSource`<br><small>`examples/dependent_simplex_ordinal_recursive.lp`</small><br>`ordinal_dependent_simplex_observation`<br><small>`examples/dependent_simplex_ordinal_recursive.lp`</small><br>`ordinal_dependent_simplex_lift_next_action`<br><small>`examples/dependent_simplex_ordinal_recursive.lp`</small> |
 | `EH-COMMUTATIVITY` | checked | Two 2-endomorphisms of an identity 1-cell commute in the selected Eckmann-Hilton slice. | `EH_comm`<br><small>`emdash3_2.lp`</small> | text `Eckmann-Hilton specialization`<br><small>`emdash3_2_checks.lp`</small> |
