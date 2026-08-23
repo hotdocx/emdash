@@ -422,6 +422,13 @@ are the existing variable-boundary `homdc_square_cat`, and whole source and
 target functors compute on arrow objects and square arrows. It is the native
 foundation for later iteration and `{L,R,*}` face action, and adds no Gray,
 walking-arrow, parameterized-`homd_int`, filler-axiom, or unifier dependency;
+the constructor-visible cubical-arrow composition extension is
+`emdash3_2_cubical_arrow_composition.lp`; square pasting post-whiskers the
+first filler, pre-whiskers the second, and composes them in the ordinary Hom.
+Visible category identity/composition compute to those terms; source/target
+whole hom actions recover the side identities/composites. It relies only on
+the tracked strict endpoint rebracketing and adds no cubical associativity,
+filler, or unifier;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1277,14 +1284,19 @@ Use the following order:
     square arrows. Identity/composition and functorial lifting remain the
     next focused continuation; no Gray or triangular-hom comparison is part
     of this foundation;
-125. `emdash3_2_checks.lp` for executable regression statements;
-126. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+125. `emdash3_2_cubical_arrow_composition.lp` for visible square identity and
+    composition. Its filler is the composite of generic post- and
+    pre-whiskering; source/target whole hom actions retain the square and
+    recover composite sides. The current strict endpoint cuts only align
+    bracketings; no cubical coherence equation or unifier is added;
+126. `emdash3_2_checks.lp` for executable regression statements;
+127. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-127. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-128. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+128. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+129. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-129. `reports/INDEX.md` for task-specific plans and decision records;
-130. `book/book.json` and `book/evidence.json` for book source
+130. `reports/INDEX.md` for task-specific plans and decision records;
+131. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

@@ -96,6 +96,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_cubical_dependent_hom.lp"),
     Path("emdash3_2_cubical_square_total.lp"),
     Path("emdash3_2_cubical_arrow.lp"),
+    Path("emdash3_2_cubical_arrow_composition.lp"),
     Path("emdash3_2_semisimplicial_diagrams.lp"),
     Path("emdash3_2_simplex2_sieves.lp"),
     Path("emdash3_2_path_groupoid_2horn_fillers.lp"),
