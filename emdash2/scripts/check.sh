@@ -74,6 +74,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_readable_pseudofunctors.lp)
   files+=(emdash3_2_cubical_arrow_functor.lp)
   files+=(emdash3_2_cubical_square_level.lp)
+  files+=(emdash3_2_cubical_levels.lp)
   files+=(emdash3_2_semicubical_face_codes.lp)
   files+=(emdash3_2_semicubical_index.lp)
   files+=(emdash3_2_semisimplicial_diagrams.lp)

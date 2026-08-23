@@ -448,6 +448,11 @@ faces by outer source/target and recursively lifted inner source/target, and
 maps an arbitrary next arrow to four side-square faces beside its two endpoint
 squares. Every face retains a readable pseudo profile for further iteration,
 with no new rule or unifier;
+the variable-dimensional intrinsic cubical level is
+`emdash3_2_cubical_levels.lp`; genuine Nat recursion starts at `C` and applies
+`CubicalArrow_cat` at every successor, so objects in levels one, two, and
+three are edges, squares, and cubes. It adds no code decoder, action, rule, or
+unifier;
 the set-classified augmented semicube face-code extension is
 `emdash3_2_semicubical_face_codes.lp`; raw indexed `{L,R,*}` words own
 structural substitution into retained coordinates, while public codes,
@@ -1335,23 +1340,26 @@ Use the following order:
     whole edge-face functors; a next arrow exposes four side squares beside
     its two endpoint squares, with all face profiles retained and no rule or
     unifier;
-129. `emdash3_2_semicubical_face_codes.lp` for intrinsically indexed raw
+129. `emdash3_2_cubical_levels.lp` for genuine Nat recursion from `C` by
+    repeated `CubicalArrow_cat`. Dimensions one through three compute to
+    edges, squares, and cubes without a code-only facade, rule, or unifier;
+130. `emdash3_2_semicubical_face_codes.lp` for intrinsically indexed raw
     `{L,R,*}` words and their set-classified public facade. Structural
     substitution consumes the inner word only at outer stars; visible
     constructors, all-star identity, and composition compute without a
     proof-time unifier;
-130. `emdash3_2_semicubical_index.lp` for the internal augmented semicube
+131. `emdash3_2_semicubical_index.lp` for the internal augmented semicube
     category. Its objects are Nat dimensions, Homs are discrete code paths,
     and constructor-visible identity/composition delegate to the public code
     owners without a broad category fold or unifier;
-131. `emdash3_2_checks.lp` for executable regression statements;
-132. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+132. `emdash3_2_checks.lp` for executable regression statements;
+133. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-133. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-134. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+134. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+135. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-135. `reports/INDEX.md` for task-specific plans and decision records;
-136. `book/book.json` and `book/evidence.json` for book source
+136. `reports/INDEX.md` for task-specific plans and decision records;
+137. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
