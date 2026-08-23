@@ -448,6 +448,12 @@ faces by outer source/target and recursively lifted inner source/target, and
 maps an arbitrary next arrow to four side-square faces beside its two endpoint
 squares. Every face retains a readable pseudo profile for further iteration,
 with no new rule or unifier;
+the set-classified augmented semicube face-code extension is
+`emdash3_2_semicubical_face_codes.lp`; raw indexed `{L,R,*}` words own
+structural substitution into retained coordinates, while public codes,
+constructors, all-star identities, and composition use the existing
+0-truncation reflector. Visible operations compute and the two fixed endpoint
+constructors remain distinct, with no proof-time unifier;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1323,14 +1329,19 @@ Use the following order:
     whole edge-face functors; a next arrow exposes four side squares beside
     its two endpoint squares, with all face profiles retained and no rule or
     unifier;
-129. `emdash3_2_checks.lp` for executable regression statements;
-130. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+129. `emdash3_2_semicubical_face_codes.lp` for intrinsically indexed raw
+    `{L,R,*}` words and their set-classified public facade. Structural
+    substitution consumes the inner word only at outer stars; visible
+    constructors, all-star identity, and composition compute without a
+    proof-time unifier;
+130. `emdash3_2_checks.lp` for executable regression statements;
+131. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-131. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-132. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+132. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+133. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-133. `reports/INDEX.md` for task-specific plans and decision records;
-134. `book/book.json` and `book/evidence.json` for book source
+134. `reports/INDEX.md` for task-specific plans and decision records;
+135. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
