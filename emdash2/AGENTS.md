@@ -454,6 +454,12 @@ structural substitution into retained coordinates, while public codes,
 constructors, all-star identities, and composition use the existing
 0-truncation reflector. Visible operations compute and the two fixed endpoint
 constructors remain distinct, with no proof-time unifier;
+the internal augmented semicube category is
+`emdash3_2_semicubical_index.lp`; objects are cube dimensions, Homs are
+discrete path categories of `{L,R,*}` codes, identity is the all-star word,
+and composition computes only at visible public truncation points through the
+existing substitution owner. It adds no face action, degeneracy, connection,
+or unifier;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1334,14 +1340,18 @@ Use the following order:
     substitution consumes the inner word only at outer stars; visible
     constructors, all-star identity, and composition compute without a
     proof-time unifier;
-130. `emdash3_2_checks.lp` for executable regression statements;
-131. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+130. `emdash3_2_semicubical_index.lp` for the internal augmented semicube
+    category. Its objects are Nat dimensions, Homs are discrete code paths,
+    and constructor-visible identity/composition delegate to the public code
+    owners without a broad category fold or unifier;
+131. `emdash3_2_checks.lp` for executable regression statements;
+132. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-132. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-133. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+133. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+134. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-134. `reports/INDEX.md` for task-specific plans and decision records;
-135. `book/book.json` and `book/evidence.json` for book source
+135. `reports/INDEX.md` for task-specific plans and decision records;
+136. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
