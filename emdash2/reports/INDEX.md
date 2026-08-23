@@ -1239,6 +1239,16 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_CUBICAL_DEPENDENT_HOM_PLAN_2026-08-23.md`:
+  active living plan for a two-sided cross-corner dependent hom. It first
+  derives a curried whole classifier from existing endpoint actions and
+  `hom_con_int`, then requires the `hom_int(id_C)` instance to compute the
+  directed square filler category
+  `Hom_{Hom_C(x1,y2)}(b o u,v o a)` without collapsing to the differently
+  typed unit-profunctor cell. Later rows internalize endpoints, expose four
+  square-edge projections, and test a six-faced cube before adding any
+  semicubical code layer or groupoidal-source specialization.
+
 - `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization master.
   Its first semantic row now supplies a computational strict-functor

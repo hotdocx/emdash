@@ -402,6 +402,13 @@ expected-to-visible displayed reflag; their fibre beta turns normalized Pi
 sections into literal dependent-triangle endpoints without equating the two
 whole source functors. Its three component rules are generic projection betas;
 it contains no unifier or dimension-specific filler;
+the fixed-endpoint cubical dependent-hom extension is
+`emdash3_2_cubical_dependent_hom.lp`; for a curried mixed-variance family it
+transports two endpoints into one cross fibre and forms their hom through the
+existing `fib_cov_tapp0_func`, outer hom action, component evaluation, and
+`hom_con_int`. Its `hom_int(id_C)` instance computes to the directed-square
+2-cell category `Hom_{Hom_C(x1,y2)}(b o u,v o a)` while retaining both
+side-arrow actions, and adds no primitive square, rule, or unifier;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1239,13 +1246,19 @@ Use the following order:
     `tapp1`/`functord_laxity_transf` retain higher action. The module is generic
     in the old category and contains no ordinal dimension, face-specific rule,
     direct simplex category, filler, whole-source equality, or unifier;
-122. `emdash3_2_checks.lp` for executable regression statements;
-123. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+122. `emdash3_2_cubical_dependent_hom.lp` for the rule-free curried
+    cross-corner dependent hom. Existing whole endpoint actions transport the
+    source in the second coordinate and the target in the first coordinate;
+    `hom_con_int` forms the selected source-to-target family. Its identity-Hom
+    instance exposes ordinary directed square 2-cells and retains both
+    side-arrow hom actions without a primitive owner, rule, or unifier;
+123. `emdash3_2_checks.lp` for executable regression statements;
+124. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-124. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-125. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+125. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+126. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-126. `reports/INDEX.md` for task-specific plans and decision records.
+127. `reports/INDEX.md` for task-specific plans and decision records.
 127. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
