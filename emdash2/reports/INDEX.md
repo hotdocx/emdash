@@ -1239,6 +1239,16 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_CUBICAL_ARROW_AND_SEMICUBICAL_CODES_PLAN_2026-08-23.md`:
+  active child of the completed cubical-dependent-hom plan. It makes the
+  specialized intrinsic `CubicalArrow_cat(C)`—not Gray or parameterized
+  triangular hom—the foundational successor. Whole source/target and
+  `CubicalArrow_func` must support a genuinely nondegenerate cube before raw
+  `{L,R,*}` word codes, the internal semicube category, variable-dimensional
+  levels, and their contravariant face action are promoted. Gray/walking-arrow,
+  `homd_parameter_func`, degeneracies, connections, and general
+  `TwoSidedSigma(E)` remain explicit later comparison/extension rows.
+
 - `REPORT_EMDASH_V3_2_CUBICAL_DEPENDENT_HOM_PLAN_2026-08-23.md`:
   active living plan for a two-sided cross-corner dependent hom. It first
   derives a curried whole classifier from existing endpoint actions and
