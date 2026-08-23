@@ -441,6 +441,13 @@ post-compositor forward, generic next-hom action on the filler, then
 pre-compositor inverse. Edge and square actions compute, source/target recover
 the mapped sides, and another hom action plus profiles for source, target, and
 the lifted functor remain available for recursive face action;
+the first iterated intrinsic cubical-arrow level is
+`emdash3_2_cubical_square_level.lp`; it identifies square objects with arrows
+of `CubicalArrow_cat(C)`, derives four independently noncollapsed whole edge
+faces by outer source/target and recursively lifted inner source/target, and
+maps an arbitrary next arrow to four side-square faces beside its two endpoint
+squares. Every face retains a readable pseudo profile for further iteration,
+with no new rule or unifier;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1311,14 +1318,19 @@ Use the following order:
     next-hom action, compositor-inverse; source/target and recursively lifted
     profiles remain selected capabilities. Arbitrary lax functors are
     intentionally rejected by the profile boundary;
-128. `emdash3_2_checks.lp` for executable regression statements;
-129. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+128. `emdash3_2_cubical_square_level.lp` for the first iterated arrow level.
+    Outer source/target and recursively lifted inner source/target are its four
+    whole edge-face functors; a next arrow exposes four side squares beside
+    its two endpoint squares, with all face profiles retained and no rule or
+    unifier;
+129. `emdash3_2_checks.lp` for executable regression statements;
+130. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-130. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-131. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+131. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+132. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-132. `reports/INDEX.md` for task-specific plans and decision records;
-133. `book/book.json` and `book/evidence.json` for book source
+133. `reports/INDEX.md` for task-specific plans and decision records;
+134. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
