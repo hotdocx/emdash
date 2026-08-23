@@ -1110,6 +1110,31 @@ Do not expand these into a record of external face equations. On a visible
 `(kappa,lambda)`, the dependent output remains the native
 `fdapp1_int_hom_fapp0` projection.
 
+For the two-sided cross-corner reading, comments may write
+
+```text
+Square_E(u,v)[a,b]
+  = Hom_{E[x1][y2]}(E[x1][b](u),E[a^op][y2](v))
+
+Square_C(u,v)[a,b]
+  = Hom_{Hom_C(x1,y2)}(b o u,v o a)
+
+SquareTotal_E(u,v) = (a,(b,alpha)).
+```
+
+The literal owners are `homdc_`, `homdc_fibre`, `homdc_square_func`,
+`homdc_square_fibre`, `homdc_square_cat`, and `homdc_square_obj`. The variance
+is part of the notation: `a` is covariant and `b` is contravariant. The whole
+line observations are `homdc_square_top_func`,
+`homdc_square_bottom_sec`, `homdc_square_left_func`, and
+`homdc_square_right_func`. An arrow `theta` between two square objects has
+ordinary source/target faces and the four observations
+`homdc_cube_{top,bottom,left,right}_face`. In the current fixed-boundary total,
+left and right compute to identities and bottom remains a dependent section
+action. Do not read this notation as a fully varying `homdc_int`, a flat
+cubical record, degeneracies/connections, Kan filling, or arbitrary-dimensional
+cubical syntax.
+
 For the first groupoidal source coherence, comments may write
 
 ```text

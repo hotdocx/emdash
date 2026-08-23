@@ -111,6 +111,26 @@ nonidentity oriented interchanger. The mirror closure, tensor coherence, full
 Crans--Gray monoidality, and global migration of historical strict endpoint
 cuts remain deferred.
 
+### Two-sided dependent hom and bounded cubes
+
+The one-sided `homd_` calculus now has a transparent two-sided companion. For
+`E : K1^op -> Catd(K2)`, `homdc_` transports a source along the second side
+and a target back along the first side, then takes their hom in the common
+cross fibre. At `E=hom_int(id_C)` its objects are the familiar directed-square
+2-cells
+
+```text
+b o u ==> v o a.
+```
+
+Both side-arrow actions remain whole. A nested-Sigma total packages a
+fixed-vertical-boundary square as `(a,(b,alpha))`; top, bottom, left, and right
+are whole observations. The next hom has two endpoint squares and four side
+faces, with the fixed left/right sides computing to identities. This is a
+computational bounded cube test, not yet a full cubical type theory. Fully
+varying endpoints remain explicitly gated by the absent functorial action
+`FF |-> homd_int(FF)`.
+
 ### Internal semisimplicial substrate
 
 The augmented injective simplex category is now internal and computational.

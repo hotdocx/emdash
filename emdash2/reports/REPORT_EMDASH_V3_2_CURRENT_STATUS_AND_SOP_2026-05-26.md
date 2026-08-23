@@ -512,6 +512,18 @@ detailed probe evidence.
   its next `tapp1_func` action remains public, and the resulting direction
   confirms the `GrayHom_lax` convention. It adds no standalone square,
   endpoint bridge, rewrite, or unifier.
+- `emdash3_2_cubical_dependent_hom.lp`: transparent two-sided cross-corner
+  dependent hom for `E : K1^op -> Catd(K2)`. It transports the source in the
+  second coordinate and the target in the first, then forms one hom in the
+  common fibre. Its identity-Hom instance computes to
+  `Hom_{Hom_C(x1,y2)}(b o u,v o a)` and retains both side-arrow actions without
+  a primitive square, rule, or unifier.
+- `emdash3_2_cubical_square_total.lp`: fixed-vertical-boundary nested-Sigma
+  total of `homdc_`. Square objects are `(a,(b,alpha))`; top, bottom, left, and
+  right remain whole, and the next hom exposes the two endpoint squares plus
+  four side faces. The fixed sides compute to identities and bottom remains a
+  dependent section action. It adds one generic Sigma-projection-family
+  component beta, no filler rule, and no unifier.
 - `emdash3_2_truncation_reflector.lp`: classified computational homotopy-
   truncation reflector. It realizes `NType_cat(n)` through the existing
   `TruncGrpdU(n)` retained-evidence package, supplies point-computing
@@ -4156,6 +4168,27 @@ primitive redesign of the transparent `piapp*` aliases. The section is late
 because its identity-section action needs the completed cross-section
 normalization environment; an earlier owner-position probe fails before those
 dependencies are available.
+
+The first two-sided/cubical consumer now sits beside this one-sided dependent
+hom architecture. For `E : K1^op -> Catd(K2)`, `homdc_` packages
+
+```text
+(a,b) |-> Hom_{E[x1][y2]}(E[x1][b](u),E[a^op][y2](v))
+```
+
+as one functor covariant in `a` and contravariant in `b`. The construction is
+transparent through `fib_cov_tapp0_func`, the outer action of `E`, component
+evaluation, and `hom_con_int`. At `E=hom_int(id_C)` it is the ordinary directed
+square classifier `Hom_{Hom_C(x1,y2)}(b o u,v o a)`.
+
+`emdash3_2_cubical_square_total.lp` totalizes these two side coordinates at a
+fixed vertical boundary. The four line observations remain whole, and their
+actions on a next-hom object expose a bounded six-face cube; the two fixed
+vertical sides reduce to identities. Full nondegenerate endpoint variation is
+not hidden behind a record: it is explicitly deferred until the kernel has a
+whole functorial action of the parameter assignment `FF |-> homd_int(FF)`.
+The existing `tdapp1_int_func_transfd` is a naturality/laxity comparison with a
+different source and target, not that missing owner.
 
 Section 17 contains generic Sigma/Pi introduction/evaluation, constant
 sections, ordinary structural logic, generic functor hom-action, section

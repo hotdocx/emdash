@@ -3648,6 +3648,83 @@ More generally, dependent homs can be formed along a natural family morphism
 `FF : D → E`, allowing endpoint data in different families. The endpoint form
 specializes to the identity-family case above.
 
+### Two-Sided Dependent Homs And Directed Squares
+
+Ordinary `homd_` transports one source endpoint along one base arrow. A fully
+directed square instead has two independently varying side arrows. The
+corresponding mixed-variance input is most naturally curried:
+
+```text
+E : K1^op → Catd(K2).
+```
+
+For fixed corners and endpoint objects
+
+```text
+u : E[x1][x2]
+v : E[y1][y2],
+```
+
+forward side arrows `a : Hom_K1(x1,y1)` and `b : Hom_K2(x2,y2)` transport the
+two endpoints into the common cross fibre `E[x1][y2]`:
+
+```text
+source(b) = E[x1][b](u)
+target(a) = E[a^op][y2](v).
+```
+
+The selected cubical dependent hom is therefore
+
+```text
+homdc_E(u,v)
+  : Hom_K1(x1,y1) → Catd(Hom_K2(x2,y2)^op)
+
+homdc_E(u,v)[a][b]
+  = Hom_{E[x1][y2]}(source(b),target(a)).
+```
+
+Only the second side-hom is opposite: `a` varies the target of the final hom,
+while `b` varies its source. The active `homdc_` is transparent. Its source
+action is existing fibre covariance; its target action is the outer hom action
+of `E` followed by component and object evaluation; `hom_con_int` then forms
+the final source-to-target family. Thus both side coordinates retain ordinary
+hom action without a primitive square or a new cubical coherence axiom.
+
+For the identity represented family `E = hom_int(id_C)`, the formula becomes
+
+```text
+homdc(u,v)[a][b]
+  = Hom_{Hom_C(x1,y2)}(b o u,v o a).
+```
+
+Its objects are the directed lax-square 2-cells `b o u ==> v o a`. This is not
+the direct `homd_(Unit_prof)` specialization: with a forward first side `a`,
+that construction uses differently typed data `u_tw : Hom_C(y1,x2)` and
+produces the twisted cell `b o u_tw o a ==> v_tw`.
+
+The first totalization keeps `x1,y1,x2,y2,u,v` fixed and totalizes successively
+over `b` and `a`. A square object is the native nested Sigma term
+
+```text
+(a,(b,alpha)).
+```
+
+Top, bottom, left, and right are whole observations. Bottom remains a
+variance-correct Pi-section action over the Sigma-projection pullback; it is
+not forced through a strict constant-family conversion. An arrow between two
+such square objects has its two ordinary endpoint squares plus four projected
+side faces. Because `u` and `v` are fixed in this first total, the left and
+right side faces compute to identities. This is a computational six-face cube
+test with two degenerate sides, not yet a category of arbitrary nondegenerate
+cubes.
+
+Full variation of all four endpoints has one precise missing prerequisite:
+the current `homd_int(FF)` cascade is iterable after `FF` is selected, but the
+kernel does not yet expose the assignment `FF ↦ homd_int(FF)` as a functor
+with displayed-transfor action. That missing parameter-action owner, rather
+than a flat cubical boundary record or a displayed `homd_con_int`, is the
+current boundary for a fully varying `homdc_int`.
+
 This same dependent hom architecture is shared by total-category homs and
 section action:
 

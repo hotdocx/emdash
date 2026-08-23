@@ -4,7 +4,27 @@ Date: 2026-08-23 (America/Toronto)
 
 Plan-ID: `CUBICAL-DEPENDENT-HOM-V3.2`
 
-Status: **active living implementation plan**.
+Status: **completed bounded implementation plan**. The fully varying endpoint
+telescope and combinatorial cubical continuations remain explicitly deferred
+at the precise prerequisites recorded below.
+
+Supersedes: no completed implementation plan. It promotes only the two-sided
+dependent-hom/cubical direction developed after the dependent-simplex and
+internal-laxity plans; those plans remain authoritative for their own scopes.
+
+Depends-On: `emdash3_2.lp`, especially `hom_int`, `hom_con_int`, `homd_`,
+`homd_int`, Sigma/Pi totalization, and whole action; the completed internal
+laxity, profiled Gray, and coherent-nerve/dependent-simplex plans named below;
+and the active Foundations, canonical syntax, current SOP, and Git workflow.
+
+Side-Task-Ledger: `CUB-00`, `CUB-01`, `CUB-02`, `CUB-03`, `CUB-04`,
+`CUB-05`, `CUB-06`, `CUB-07`, `CUB-DOC-8`, and `CUB-CLOSE-9`.
+
+Infinity-Codex-Origin: session
+`019ffe39-2eb9-7080-88e3-06b77d69b8d1`; brainstorming decision response
+`0115_2026-08-22T10-13-17Z_01a028f3-9396-7dc1-9187-dac4ba840075.md`.
+
+Infinity-Codex-Decision-Responses: `infinity-codex:019ffe39-2eb9-7080-88e3-06b77d69b8d1:01a028f3-9396-7dc1-9187-dac4ba840075`.
 
 Branch: `goal/cubical-dependent-hom-v3.2`
 
@@ -390,8 +410,8 @@ This plan initially claims none of the following:
 | `CUB-05` | complete at the bounded fixed-boundary scope | For `theta` in the next hom between two square objects, ordinary source/target provide two faces and `homdc_cube_{top,bottom,left,right}_face` provide four more. Top is ordinary whole action, bottom retains the dependent Pi action, and the fixed left/right faces compute to identities. This is a genuine six-face bounded cube with two explicitly degenerate sides, not a claim of fully varying nondegenerate cubical endpoints. The warning-enabled owner-position probe adds no probe-local warning. |
 | `CUB-06` | deferred | Add semicubical face codes, arbitrary dimension, walking-arrow/Gray comparison, or Herbelin--Ramachandra comparison only after `CUB-05` identifies the native semantic recursion. |
 | `CUB-07` | deferred | Add the groupoidal-source/bicubical specialization only after the fully directed cross-corner owner is stable; compare its reflexive-source restriction with the simplicial fixed-apex construction. |
-| `CUB-DOC-8` | pending | Synchronize Foundations, current status/SOP, canonical syntax if needed, AGENTS/source registries, report index, reviewer examples, catalog/health evidence, and any reader-facing prose justified by completed mathematics. |
-| `CUB-CLOSE-9` | pending | Run proportional final gates, checkpoint the complete/deferred ledger, audit the branch/worktree, and hand off exact commits and remaining prerequisites. No push, merge, publication, tag, PR, or cleanup without separate authority. |
+| `CUB-DOC-8` | complete with explicit health deferral | Foundations, current status/SOP, canonical syntax, `emdash2/README.md`, AGENTS authority/source registries, report index, both focused reviewers, and the check catalog are synchronized. Report-header, active-reference, book-evidence, catalog, and diff checks are green. A single `make health` attempt unexpectedly invalidated the whole registry cache and became a repo-wide sweep; it was stopped at direct user instruction after both new sources passed in 2.676s/2.726s and the unchanged aggregate `emdash3_2_checks.lp` hit the existing 90-second ceiling. It changed no tracked health report. Health refresh is therefore intentionally deferred to a future release boundary or a future selected-file/additive health mode; it is not rerun for this scoped checkpoint. |
+| `CUB-CLOSE-9` | complete | The two implementation tranches are checkpointed at `7ec3a9d` and `f61c7a3`; final documentation is checkpointed separately. Focused source/reviewer checks, the warning-enabled owner probe, extension LHS audit, report/header/reference/book-evidence/catalog checks, and exact diff hygiene are green. `CUB-06`, `CUB-07`, full endpoint variation, and health refresh have named prerequisites rather than hidden claims. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal was performed. |
 
 ## 10. Validation And Git Policy
 
@@ -438,6 +458,12 @@ This plan initially claims none of the following:
 > evidence, or explicitly deferred behind a concrete prerequisite and all
 > affected authorities and proportional gates are synchronized.
 
+This launch prompt is retained as historical recovery text. The bounded goal
+has completed; a later goal must explicitly reopen either
+`homd_parameter_func`, variable-endpoint cubical totals, semicubical codes, or
+the groupoidal-source specialization rather than silently continuing this
+closed ledger.
+
 ## 12. Completion Definition
 
 The bounded goal is complete when:
@@ -458,3 +484,44 @@ The bounded goal is complete when:
 8. every noncompleted row is explicitly deferred behind a named consumer or
    prerequisite; and
 9. the dedicated branch is clean at reviewed local checkpoints.
+
+## 13. Closeout Evidence And Deferred Boundary
+
+Promoted sources and reviewers:
+
+- `emdash3_2_cubical_dependent_hom.lp` and
+  `examples/cubical_dependent_hom.lp`;
+- `emdash3_2_cubical_square_total.lp` and
+  `examples/cubical_square_total.lp`.
+
+Focused validation completed under the uniform 90-second target ceiling:
+
+- both promoted sources check directly;
+- both reviewers check directly;
+- the warning-enabled owner-position square-total probe is green and adds no
+  probe-local warning;
+- `audit_rule_lhs.py --strict emdash3_2_cubical_square_total.lp` reports zero
+  unreviewed slots;
+- report-header lint, active-reference lint, book-evidence check, check-catalog
+  strict check, source-TOC check, and `git diff --check` pass.
+
+The interrupted health refresh is negative scope evidence, not a mathematical
+failure. It expanded beyond the changed files, while the new sources had
+already passed. It also found the unrelated registered aggregate
+`emdash3_2_checks.lp` exceeding the same 90-second ceiling. No timeout was
+raised for either new source, no report was rewritten, and no health claim is
+inferred. A future release may refresh that report once the aggregate itself
+fits the policy or
+the tool supports additive selected-file evidence.
+
+The principal mathematical continuation remains:
+
+```text
+homd_parameter_func(D,E)[FF] = homd_int(FF)
+```
+
+with a whole displayed-transfor action. That owner is the exact prerequisite
+for replacing the present fixed-vertical-boundary total by a fully varying
+nondegenerate cubical endpoint telescope. Semicubical combinatorics and the
+groupoidal-source specialization remain later consumers, not retroactive
+requirements of the bounded square/cube result.
