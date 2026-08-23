@@ -183,18 +183,29 @@ src(a,b,alpha) = a          tgt(a,b,alpha) = b.
 Arrow-level betas must project the nested Sigma square; point-only formulas
 are insufficient because the later face-code action consumes whole functors.
 
-### 2.5 Functorial lifting
+### 2.5 Profiled functorial lifting
 
-Every selected ambient functor must lift:
+Every selected readable pseudofunctor carrier must lift:
 
 ```text
-CubicalArrow_func(F)
+P : ReadablePseudoFunctorProfile(F)
+
+CubicalArrow_func(F,P)
   : CubicalArrow_cat(C) -> CubicalArrow_cat(D).
 ```
 
-It maps an edge to `F[u]` and a square through the existing next hom action of
-`F`, with the current strict/pseudo endpoint comparisons made explicit. It
-must retain another hom action and satisfy whole source/target comparisons:
+An arbitrary normal-lax functor is insufficient: mapping the selected square
+orientation requires the compositor forward at the source and inverse at the
+target. `ReadablePseudoFunctorProfile` therefore exposes invertible
+post/left and pre/right compositor views at the two stable cut owners. The
+mapped filler is
+
+```text
+post_compositor.to ; F_1[alpha] ; pre_compositor.from.
+```
+
+The lift maps an edge to `F[u]`, retains another hom action, and satisfies
+whole source/target comparisons:
 
 ```text
 src_D o CubicalArrow_func(F) ~= F o src_C
@@ -408,7 +419,7 @@ introduce a competing cubical representation.
 | `CASC-ARROW-1` | complete for the constructor-visible vertical slice | `emdash3_2_cubical_arrow.lp` adds the stable `CubicalArrow_cat(C)`, nested dependent-Sigma arrow objects, transparent `cubical_edge`, transparent nested-Sigma `cubical_square`, and a Hom rule to the existing `homdc_square_cat`. The focused source/reviewer and owner probe are green; the extension LHS audit reports zero candidates. Malformed endpoints remain rejected by dependent constructor typing without a coercion or eta rule. |
 | `CASC-COMP-2` | complete | `emdash3_2_cubical_arrow_composition.lp` defines post-whiskering of `alpha` by `d`, pre-whiskering of `beta` by `a`, their ordinary Hom-category composite, visible identity squares, and visible category composition. The desired filler at `(d o b) o u` and `w o (c o a)` typechecks without a cubical equation or unifier. The only strict-prototype reliance is the already-tracked identity/associativity endpoint conversion used to align bracketings; the cell term itself is generic action and composition. Focused source/reviewer, warning-enabled owner probe, and zero-candidate LHS audit are green. |
 | `CASC-FACES-3` | complete | Whole source and target functors compute on arrow objects and square arrows. Their retained `fapp1_func` actions consume a visible square and recover `a` and `b`; after visible square pasting they recover `c o a` and `d o b`. Identity/composition agree with generic functoriality, so no duplicate whole-action owner or face equation is introduced. The first iterated-arrow use now depends only on `CubicalArrow_func`. |
-| `CASC-MAP-4` | in progress; exact profile prerequisite identified | The object action and raw next-hom image `F_1[alpha]` are straightforward. The square boundary requires `F[b] o F[u] -> F[v] o F[a]`, while `F_1[alpha]` has endpoints `F[b o u] -> F[v o a]`. An arbitrary normal-lax functor supplies the source compositor but not the inverse target compositor, so it cannot define this lift. The existing `StrictFunctorData` collapse is stored at opaque formal compositor endpoints and does not yet expose the readable endpoint comparison required by `homdc_square_fibre`; focused typed-reflexivity probes correctly reject that shortcut. Continue by designing the smallest strict/pseudo map profile with whole readable compositor, inverse, and cancellations, then give source/target functors selected codes in that profile. No cubical endpoint rewrite or arbitrary-lax `CubicalArrow_func` may be added. |
+| `CASC-MAP-4` | complete | `emdash3_2_readable_pseudofunctors.lp` adds an abstract coherent capability indexed by an ambient carrier, exposing invertible unit and post/left plus pre/right compositor views at the actual stable cut owners; identity/composition profiles are selected. `emdash3_2_cubical_arrow_functor.lp` defines `CubicalArrow_func(F,P)`: its mapped filler is post-compositor forward, generic `F_1[alpha]`, then pre-compositor inverse. Edge and square actions compute; source/target recover `F[a]`/`F[b]`; another hom action remains; source, target, and recursively lifted functors retain profiles. Focused source/reviewer and warning probe are green with zero LHS candidates and no rule/unifier in the profile module. Arbitrary normal-lax lifting remains correctly unavailable. |
 | `CASC-CUBE-5` | pending | Construct `CubicalLevel(C,2)` and one generic/noncollapsed next arrow exposing two endpoint squares and four independently varying side-square actions. Validate exact six-face orientation. |
 | `CASC-CODE-6` | pending | Add raw/public `{L,R,*}` codes, sethood, identity, and structural composition by adapting—not duplicating semantically—the active face-code infrastructure. |
 | `CASC-INDEX-7` | pending | Add `SemiCubePlus_cat` with Nat objects and locally discrete code Homs; check identity/composition and wrong-dimension rejection. |

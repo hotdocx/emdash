@@ -429,6 +429,18 @@ Visible category identity/composition compute to those terms; source/target
 whole hom actions recover the side identities/composites. It relies only on
 the tracked strict endpoint rebracketing and adds no cubical associativity,
 filler, or unifier;
+the readable pseudofunctor-profile extension is
+`emdash3_2_readable_pseudofunctors.lp`; it indexes a coherent capability by
+an existing ambient functor and exposes invertible unit plus post/left and
+pre/right compositor views at their actual stable cut owners. Identity and
+composition profiles are retained as selected capabilities. It adds no rule,
+unifier, Gray dependency, or cubical operation;
+the intrinsic cubical-arrow functor extension is
+`emdash3_2_cubical_arrow_functor.lp`; a profiled carrier maps a square by
+post-compositor forward, generic next-hom action on the filler, then
+pre-compositor inverse. Edge and square actions compute, source/target recover
+the mapped sides, and another hom action plus profiles for source, target, and
+the lifted functor remain available for recursive face action;
 the standard-representable and groupoid-valued semisimplicial-diagram layer is
 `emdash3_2_semisimplicial_diagrams.lp`; Yoneda owns standard simplices and
 generic postcomposition with `Path_cat_func` owns level, face, map, and higher
@@ -1289,14 +1301,24 @@ Use the following order:
     pre-whiskering; source/target whole hom actions retain the square and
     recover composite sides. The current strict endpoint cuts only align
     bracketings; no cubical coherence equation or unifier is added;
-126. `emdash3_2_checks.lp` for executable regression statements;
-127. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+126. `emdash3_2_readable_pseudofunctors.lp` for the abstract coherent
+    pseudofunctor capability indexed by an ambient carrier. It exposes
+    invertible readable unit, post/left compositor, and pre/right compositor
+    views at the active stable cuts, with selected identity/composition
+    closure and no rule or unifier;
+127. `emdash3_2_cubical_arrow_functor.lp` for profiled whole lifting of
+    intrinsic edges and squares. Its filler is compositor-forward, generic
+    next-hom action, compositor-inverse; source/target and recursively lifted
+    profiles remain selected capabilities. Arbitrary lax functors are
+    intentionally rejected by the profile boundary;
+128. `emdash3_2_checks.lp` for executable regression statements;
+129. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-128. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-129. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+130. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+131. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-130. `reports/INDEX.md` for task-specific plans and decision records;
-131. `book/book.json` and `book/evidence.json` for book source
+132. `reports/INDEX.md` for task-specific plans and decision records;
+133. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
