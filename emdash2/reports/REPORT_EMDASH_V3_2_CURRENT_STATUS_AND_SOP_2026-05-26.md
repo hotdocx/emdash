@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-21
+Last consolidated: 2026-08-23
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -524,6 +524,40 @@ detailed probe evidence.
   four side faces. The fixed sides compute to identities and bottom remains a
   dependent section action. It adds one generic Sigma-projection-family
   component beta, no filler rule, and no unifier.
+- `emdash3_2_cubical_arrow.lp` and
+  `emdash3_2_cubical_arrow_composition.lp`: intrinsic variable-boundary arrow
+  category. Objects are arrows of `C`; visible Homs are the existing
+  `homdc_` square totals, and visible square identity/composition use existing
+  whiskering and Hom composition. Whole source/target project objects and
+  square arrows. The current strict endpoint cuts align selected bracketings;
+  no cubical associativity law or unifier is added.
+- `emdash3_2_readable_pseudofunctors.lp` and
+  `emdash3_2_cubical_arrow_functor.lp`: selected coherent lifting boundary.
+  The profile exposes invertible readable post/pre compositor views;
+  `CubicalArrow_func` maps a filler by compositor-forward, generic next-hom
+  action, then compositor-inverse. Source, target, and every recursive lift
+  retain profiles. Arbitrary normal-lax carriers are intentionally not lifted.
+- `emdash3_2_cubical_square_level.lp` and `emdash3_2_cubical_levels.lp`:
+  first six-face cube boundary and genuine Nat-indexed iteration. Level zero
+  is `C`, successor is `CubicalArrow` of the previous level, and dimensions
+  one through three classify edges, squares, and cubes. Four whole edge-face
+  functors beside the two endpoint squares remain independently varying.
+- `emdash3_2_semicubical_face_codes.lp` and
+  `emdash3_2_semicubical_index.lp`: intrinsically indexed `{L,R,*}` words and
+  the augmented semicube category. Raw substitution is structural; public
+  codes are set-classified, Homs are discrete path categories, and visible
+  identity/composition compute without a proof-time unifier.
+- `emdash3_2_semicubical_face_action.lp`,
+  `emdash3_2_semicubical_nerve.lp`, and
+  `emdash3_2_semicubical_frames.lp`: variable-dimensional native restriction
+  action, whole `SemiCubePlus_cat^op -> Cat_cat` nerve, and recursive `2n`
+  boundary. `L/R` use source/target; star uses the profiled arrow lift. The
+  nerve object beta computes, while its arrow observation is propositional to
+  avoid competing with generic strict cuts. Restricted truncation supplies
+  public composition laws; a finite family exposes new `L/R` followed by all
+  star-lifted older faces. Degeneracies, connections, Kan operations, general
+  `TwoSidedSigma(E)`, and the Gray/parameterized-hom comparisons remain future
+  work.
 - `emdash3_2_truncation_reflector.lp`: classified computational homotopy-
   truncation reflector. It realizes `NType_cat(n)` through the existing
   `TruncGrpdU(n)` retained-evidence package, supplies point-computing
@@ -4184,11 +4218,25 @@ square classifier `Hom_{Hom_C(x1,y2)}(b o u,v o a)`.
 `emdash3_2_cubical_square_total.lp` totalizes these two side coordinates at a
 fixed vertical boundary. The four line observations remain whole, and their
 actions on a next-hom object expose a bounded six-face cube; the two fixed
-vertical sides reduce to identities. Full nondegenerate endpoint variation is
-not hidden behind a record: it is explicitly deferred until the kernel has a
-whole functorial action of the parameter assignment `FF |-> homd_int(FF)`.
-The existing `tdapp1_int_func_transfd` is a naturality/laxity comparison with a
-different source and target, not that missing owner.
+vertical sides reduce to identities.
+
+The nondegenerate continuation specializes to the identity-Hom family rather
+than waiting for a general parameterized `homd_int`. `CubicalArrow_cat(C)`
+totalizes both endpoints and both side arrows; its visible Homs are the same
+`homdc_` square totals. A selected readable pseudofunctor profile makes this
+arrow-category operation functorial and recursively iterable. Nat recursion
+then constructs `CubicalLevel_cat(C,n)`.
+
+The associated `{L,R,*}` code grammar is independent of Gray semantics and of
+the still-absent generic assignment `FF |-> homd_int(FF)`. It forms the locally
+discrete `SemiCubePlus_cat`, acts by source/target/profiled lift, and assembles
+a whole opposite-indexed Cat-valued nerve. Public code action and whole nerve
+action are joined by typed paths rather than a runtime arrow beta, because the
+former retains recursive profile histories while generic functor cuts retain
+their selected strict normal forms. Immediate faces form a recursive finite
+family: two new endpoints plus every older face under star. This supplies a
+fully variable native semicubical tower while leaving general
+`TwoSidedSigma(E)` and parameterized-hom comparison as later abstractions.
 
 Section 17 contains generic Sigma/Pi introduction/evaluation, constant
 sections, ordinary structural logic, generic functor hom-action, section

@@ -1240,17 +1240,18 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_CUBICAL_ARROW_AND_SEMICUBICAL_CODES_PLAN_2026-08-23.md`:
-  active child of the completed cubical-dependent-hom plan. It makes the
-  specialized intrinsic `CubicalArrow_cat(C)`—not Gray or parameterized
-  triangular hom—the foundational successor. Whole source/target and
-  `CubicalArrow_func` must support a genuinely nondegenerate cube before raw
-  `{L,R,*}` word codes, the internal semicube category, variable-dimensional
-  levels, and their contravariant face action are promoted. Gray/walking-arrow,
-  `homd_parameter_func`, degeneracies, connections, and general
-  `TwoSidedSigma(E)` remain explicit later comparison/extension rows.
+  completed foundational implementation child of the cubical-dependent-hom
+  plan. The intrinsic `CubicalArrow_cat(C)` and its
+  profiled lift iterate to variable-dimensional levels; set-classified
+  `{L,R,*}` words form `SemiCubePlus_cat`, act contravariantly on those levels,
+  and assemble a whole Cat-valued semicubical nerve. A recursive finite family
+  exposes all `2n` immediate faces and validates squares/cubes without a
+  dimension-specific record. Gray/walking-arrow, `homd_parameter_func`,
+  degeneracies, connections, Kan operations, and general `TwoSidedSigma(E)`
+  remain explicit later comparison/extension rows.
 
 - `REPORT_EMDASH_V3_2_CUBICAL_DEPENDENT_HOM_PLAN_2026-08-23.md`:
-  active living plan for a two-sided cross-corner dependent hom. It first
+  completed parent plan for a two-sided cross-corner dependent hom. It first
   derives a curried whole classifier from existing endpoint actions and
   `hom_con_int`, then requires the `hom_int(id_C)` instance to compute the
   directed square filler category
@@ -1260,9 +1261,9 @@ record.
   semicubical code layer or groupoidal-source specialization. The first
   continuation now provides a fixed-boundary nested-Sigma square total:
   top/bottom vary, left/right are constant, and a next-hom object exposes two
-  endpoint squares plus four side faces. Full nondegenerate endpoint variation
-  is precisely gated by the absent functorial action of `homd_int` in its
-  displayed-functor parameter.
+  endpoint squares plus four side faces. Its intrinsic-arrow child now supplies
+  nondegenerate endpoint variation without making the still-useful general
+  parameter action a prerequisite.
 
 - `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization master.

@@ -21,6 +21,9 @@ The computing face-code category, join-built simplex shapes, Yoneda
 semisimplices, selected two-dimensional boundaries and horns, algebraic
 path-groupoid horn fillers, and categorical decalage live in the subsequent
 semisimplicial modules recorded by the August simplicial-substrate plan.
+The two-sided square classifier, intrinsic cubical-arrow tower, augmented
+`{L,R,*}` index, whole semicubical nerve, and recursive immediate boundaries
+live in the subsequent cubical modules recorded by the August 23 plans.
 The isolated binary-Sum experiment was retired on 2026-07-20 for later
 consumer-led redesign; it is not part of the active foundation.
 
@@ -3715,15 +3718,88 @@ not forced through a strict constant-family conversion. An arrow between two
 such square objects has its two ordinary endpoint squares plus four projected
 side faces. Because `u` and `v` are fixed in this first total, the left and
 right side faces compute to identities. This is a computational six-face cube
-test with two degenerate sides, not yet a category of arbitrary nondegenerate
-cubes.
+test with two degenerate sides. It remains useful as the local fixed-boundary
+view, but it is no longer the boundary of the cubical development.
 
-Full variation of all four endpoints has one precise missing prerequisite:
-the current `homd_int(FF)` cascade is iterable after `FF` is selected, but the
-kernel does not yet expose the assignment `FF ↦ homd_int(FF)` as a functor
-with displayed-transfor action. That missing parameter-action owner, rather
-than a flat cubical boundary record or a displayed `homd_con_int`, is the
-current boundary for a fully varying `homdc_int`.
+Full variation is obtained by totalizing the endpoints at the specialized
+identity-Hom family. The intrinsic arrow category
+
+```text
+CubicalArrow_cat(C)
+```
+
+has arrows `u : Hom_C(x,y)` as objects. Between visible arrows `u` and `v`, its
+Hom is the variable-boundary square total whose objects are
+
+```text
+(a,(b,alpha)),
+alpha : b o u ==> v o a.
+```
+
+Whole source and target functors recover `x,y` on objects and `a,b` on square
+arrows. Identity and composition paste the existing hom-action cells; no
+separate cubical associativity law is added. A coherent profiled functor
+`F : C -> D` lifts to `CubicalArrow_func(F)`. The selected readable profile is
+essential: mapping the oriented filler uses the post-compositor forward and
+the pre-compositor inverse. The profile is retained with the lifted functor so
+the construction can iterate.
+
+The native cubical levels are therefore genuine category recursion:
+
+```text
+CubicalLevel(C,0)       = C
+CubicalLevel(C,n+1)     = CubicalArrow_cat(CubicalLevel(C,n)).
+```
+
+Their objects in dimensions one, two, and three are edges, squares, and cubes.
+An object at dimension three is an arrow between two square objects. Besides
+those two endpoint squares, the four whole edge-face functors of dimension two
+act on that arrow and produce four independently varying side squares.
+
+The matching global index is the augmented semicube category. A code
+`CubeFaceCode(p,n)` is a set-classified length-`n` word in `{L,R,*}` with
+exactly `p` stars. `L` and `R` fix a coordinate at its two endpoints; star
+retains it. Composition substitutes an inner word into the star positions of
+an outer word. Thus
+
+```text
+Obj(SemiCubePlus_cat) = Nat
+Hom(p,n) = Path_cat(CubeFaceCode(p,n)).
+```
+
+The action on native levels is structural and whole:
+
+```text
+action(L f) = action(f) o source
+action(R f) = action(f) o target
+action(* f) = CubicalArrow_func(action(f)).
+```
+
+Each recursive result carries both its functor and the readable profile needed
+by the star branch. The whole native semicubical nerve
+
+```text
+semicubical_nerve_func(C) : SemiCubePlus_cat^op -> Cat_cat
+```
+
+maps `n` to `CubicalLevel(C,n)`. Its arrow observation is propositional rather
+than a competing runtime beta: the standalone action retains its recursive
+profile history, while the whole nerve retains the generic functor identity,
+composition, and higher action. Restricted truncation induction compares the
+named public code composition with categorical composition; this yields the
+all-star identity and contravariant composition laws without face-specific
+rewrites.
+
+The immediate boundary is a recursive finite family. Dimension zero has no
+faces; each successor prepends its new `L/R` pair and star-lifts every older
+face. Hence dimensions one, two, and three expose `2`, `4`, and `6` faces from
+one variable-dimensional construction. The new pair agrees propositionally
+with native source/target, and each inherited face agrees with the profiled
+`CubicalArrow` lift. Degeneracies, connections, reversals, permutations, Kan
+operations, a general `TwoSidedSigma(E)`, the Gray/walking-arrow comparison,
+and a functorial parameter assignment `FF |-> homd_int(FF)` remain later
+extensions or comparisons; none is a prerequisite of the native semicubical
+nerve.
 
 This same dependent hom architecture is shared by total-category homs and
 section action:

@@ -111,7 +111,7 @@ nonidentity oriented interchanger. The mirror closure, tensor coherence, full
 Crans--Gray monoidality, and global migration of historical strict endpoint
 cuts remain deferred.
 
-### Two-sided dependent hom and bounded cubes
+### Two-sided dependent hom and the intrinsic semicubical nerve
 
 The one-sided `homd_` calculus now has a transparent two-sided companion. For
 `E : K1^op -> Catd(K2)`, `homdc_` transports a source along the second side
@@ -127,9 +127,38 @@ Both side-arrow actions remain whole. A nested-Sigma total packages a
 fixed-vertical-boundary square as `(a,(b,alpha))`; top, bottom, left, and right
 are whole observations. The next hom has two endpoint squares and four side
 faces, with the fixed left/right sides computing to identities. This is a
-computational bounded cube test, not yet a full cubical type theory. Fully
-varying endpoints remain explicitly gated by the absent functorial action
-`FF |-> homd_int(FF)`.
+computational bounded test retained beside the fully varying construction.
+
+`CubicalArrow_cat(C)` instead makes every arrow of `C` an object and every
+variable-boundary lax square `(a,(b,alpha))` an arrow. Source and target are
+whole functors, visible square identity/composition compute by existing hom
+action, and a readable pseudofunctor profile supplies the two invertible
+compositor views needed by `CubicalArrow_func`. Genuine Nat recursion gives
+
+```text
+CubicalLevel(C,0)   = C
+CubicalLevel(C,n+1) = CubicalArrow(CubicalLevel(C,n)).
+```
+
+The matching internal index is `SemiCubePlus_cat`. Its morphisms are
+set-classified `{L,R,*}` words: `L/R` fix a coordinate and star retains it.
+Structural substitution owns composition, and the native action is
+
+```text
+action(L f) = action(f) o source
+action(R f) = action(f) o target
+action(* f) = CubicalArrow_func(action(f)).
+```
+
+One whole functor `SemiCubePlus_cat^op -> Cat_cat` packages these levels and
+actions. Its object beta computes; its arrow observation is a typed path so it
+does not compete with generic strict functor cuts. A recursive finite-family
+frame exposes `2n` immediate faces: new source/target followed by the
+star-lifted older faces. Thus a square has four independent edges and a cube
+has two endpoint squares plus four independent side squares. Degeneracies,
+connections, Kan operations, general `TwoSidedSigma(E)`, and the
+Gray/walking-arrow and `homd_parameter_func` comparisons remain future work,
+not prerequisites of this native semicubical nerve.
 
 ### Internal semisimplicial substrate
 

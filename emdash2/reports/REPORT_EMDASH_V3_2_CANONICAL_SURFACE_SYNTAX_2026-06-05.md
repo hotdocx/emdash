@@ -1,7 +1,7 @@
 # emdash v3.2 Canonical Surface Syntax
 
 Date: 2026-06-05
-Last reviewed: 2026-08-21
+Last reviewed: 2026-08-23
 
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
@@ -2079,6 +2079,76 @@ The final line corresponds to `circle_set_trunc_is_contr`. It is a theorem
 carrying contractibility evidence, not notation for a judgmental equality
 `‖Circle‖_0 = Unit`. None of the notation in this section extends the bounded
 TypeScript text grammar automatically.
+
+## Cubical Arrow And Semicubical Nerve Notation
+
+For the intrinsic directed-square tower, write
+
+```text
+Arr□(C)              = CubicalArrow_cat(C)
+Cub_0(C)             = C
+Cub_{n+1}(C)         = Arr□(Cub_n(C)).
+```
+
+An object of `Arr□(C)` is an edge `u : x ->^C y`. An arrow from `u` to
+`v : x' ->^C y'` is written
+
+```text
+(a,b,alpha) : u ==>□ v
+
+a : x  ->^C x'
+b : y  ->^C y'
+alpha : b o u ==> v o a.
+```
+
+This is expository notation for `cubical_edge` and the nested-Sigma
+`cubical_square(a,b,alpha) = (a,(b,alpha))`; it is not a new parser form.
+`CubicalArrow_func(F,P)` requires the selected readable pseudo profile `P`.
+Do not omit that qualification when the distinction between an arbitrary lax
+carrier and a liftable coherent carrier matters.
+
+For the augmented semicube category, use
+
+```text
+CubeFaceCode(p,n)     length-n word in {L,R,*} with p stars
+L f                   cube_face_left(f)
+R f                   cube_face_right(f)
+* f                   cube_face_keep(f)
+g o□ f                cube_face_comp(g,f)
+□_+                   SemiCubePlus_cat.
+```
+
+The native restriction selected by a code is written `d_f : Cub_n(C) ->
+Cub_p(C)`. Its recursive equations are
+
+```text
+d_{L f} = d_f o source
+d_{R f} = d_f o target
+d_{* f} = Arr□(d_f).
+```
+
+At arbitrary public truncation points these constructor readings are typed
+paths; do not print them as judgmental `==` equations. The whole nerve is
+
+```text
+N□(C) : Functor(Op_cat(□_+),Cat_cat)
+N□(C)[n] == Cub_n(C)
+N□(C)[f] = d_f.
+```
+
+The object equation is judgmental. The arrow equation is propositional by
+design: `N□(C)` retains generic functoriality, while `d_f` retains its recursive
+profile history. Consequently
+
+```text
+d_{id_n} = id
+d_{g o□ f} = d_f o d_g
+```
+
+are whole equality paths, not face-specific rewrites. The immediate boundary
+of an `n`-cube is the recursive `2n`-entry family with the new `L/R` pair first
+and all older faces star-lifted afterward. Degeneracy, connection, reversal,
+permutation, and Kan-composition notation remains unselected.
 
 ## Future Substitution Syntax
 
