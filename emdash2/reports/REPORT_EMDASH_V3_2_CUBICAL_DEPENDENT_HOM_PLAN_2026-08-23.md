@@ -300,6 +300,43 @@ prerequisite. The cubical whole-action consumer may justify it later if the
 active ordinary `hom_con_int` plus opposite specialization cannot retain the
 target-side action.
 
+### 6.1 Measured endpoint-internalization boundary
+
+The fixed-boundary probe established the precise relationship with the
+existing dependent-hom tower. For each visible first-coordinate arrow `a`,
+the fibre `homdc_[a]` has the same semantic shape as
+
+```text
+homd_(E[a^op],x2,u,y2,v).
+```
+
+The active kernel can project `homd_int(FF)` through `x2`, `u`, `y2`, and `v`
+once `FF` is already selected. It does not yet expose `homd_int` as a functor
+of its displayed-functor argument. The minimum missing owner is schematically
+
+```text
+homd_parameter_func(D,E)
+  : Functor(
+      Functord_cat(D,E),
+      Functord_cat(Op_catd(E),Homd_target_catd(D)))
+
+homd_parameter_func(D,E)[FF] = homd_int(FF),
+```
+
+with a whole action on displayed transfors. Composing that owner with the
+outer action of `E : K1^op -> Catd(K2)` would keep `a`, the endpoint telescope,
+and every subsequent hom action under one construction. No current symbol has
+that type or action; `tdapp1_int_func_transfd` instead owns the different
+internal naturality/laxity comparison from `homd_int(id_E)` to a reindexed
+`homd_int(GG)`.
+
+This is the exact consumer-backed prerequisite for a fully varying
+`homdc_int`. The present tranche therefore does not postulate that owner. It
+continues with the strongest derived boundary already justified by existing
+action: a fixed-vertical-boundary total retaining both side-arrow coordinates.
+The selected orientation does not require a displayed `homd_con_int`; that
+mirror remains deferred for a genuine opposite-orientation consumer.
+
 ## 7. Square, Cube, And Combinatorial Continuation
 
 After fixed endpoints are green, construct one whole square classifier whose
@@ -348,9 +385,9 @@ This plan initially claims none of the following:
 | `CUB-00` | complete | Audited the active hom, displayed-hom, product, and profunctor owners; corrected the direct `homd_int(Unit_prof)` proposal to a twisted cell; selected the cross-corner formula, curried input, one-op variance, branch/worktree, baseline, validation policy, and this living plan. The core `emdash3_2.lp` baseline checked green; the unnecessary registered extension sweep was interrupted under the standing aggregate-avoidance policy after several unchanged predecessors also passed. |
 | `CUB-01` | complete | Promoted the transparent `homdc_source_func`, `homdc_target_func`, `homdc_`, and readable fibre observation in `emdash3_2_cubical_dependent_hom.lp`. Existing `fib_cov_tapp0_func`, the outer `fapp1_func`/`tapp0_func`/object-evaluation ladder, and `hom_con_int` supply the whole classifier and typed generic cross-fibre computation. The focused source and reviewer are green; the module adds six transparent symbols and no rule, unifier, or primitive filler. |
 | `CUB-02` | complete | The transparent `hom_int(id_C)` specialization computes to `Hom_{Hom_C(x1,y2)}(b o u,v o a)`. The reviewer checks the whole profile, typed generic and concrete point computations, retained hom actions in both side-arrow coordinates, and noncollapse against the differently typed unit-profunctor cell `b o u_tw o a ==> v_tw`. |
-| `CUB-03` | in progress | Internalize the endpoint telescope as `homdc_int` or record the exact stable-head prerequisite. Retain at least one next hom action and decide whether `homd_con_int` has a real consumer. |
-| `CUB-04` | pending | Construct the total square classifier and four whole line-face projections without a flat external boundary record. |
-| `CUB-05` | pending | Apply the retained next action and establish a bounded cube with ordinary source/target plus four projected side faces. Check shared lower-face observations and orientation without ad hoc cubical equations. |
+| `CUB-03` | complete with precise prerequisite | The active `homd_int` cascade handles a selected `FF`, but there is no whole `homd_parameter_func` mapping `FF` to `homd_int(FF)` with displayed-transfor action. That exact owner is required before all four endpoints can vary in one derived `homdc_int`; `tdapp1_int_func_transfd` has a different source/target and is not a substitute. The existing fixed-boundary `homdc_` already retains hom actions in both side-arrow coordinates. No displayed `homd_con_int` consumer arose for the selected orientation. |
+| `CUB-04` | complete at the fixed-boundary scope | `emdash3_2_cubical_square_total.lp` totalizes first the contravariant `b` family and then the covariant `a` family. Objects are constructor-visible `(a,(b,alpha))`. Top and the two fixed vertical faces are whole functors; bottom is a whole Pi section over the stable Sigma-projection pullback. All four object observations compute. The generic `sigma_proj1_family_funcd` and its one component beta are the only new infrastructure; there is no flat cubical record, filler rule, or unifier. |
+| `CUB-05` | complete at the bounded fixed-boundary scope | For `theta` in the next hom between two square objects, ordinary source/target provide two faces and `homdc_cube_{top,bottom,left,right}_face` provide four more. Top is ordinary whole action, bottom retains the dependent Pi action, and the fixed left/right faces compute to identities. This is a genuine six-face bounded cube with two explicitly degenerate sides, not a claim of fully varying nondegenerate cubical endpoints. The warning-enabled owner-position probe adds no probe-local warning. |
 | `CUB-06` | deferred | Add semicubical face codes, arbitrary dimension, walking-arrow/Gray comparison, or Herbelin--Ramachandra comparison only after `CUB-05` identifies the native semantic recursion. |
 | `CUB-07` | deferred | Add the groupoidal-source/bicubical specialization only after the fully directed cross-corner owner is stable; compare its reflexive-source restriction with the simplicial fixed-apex construction. |
 | `CUB-DOC-8` | pending | Synchronize Foundations, current status/SOP, canonical syntax if needed, AGENTS/source registries, report index, reviewer examples, catalog/health evidence, and any reader-facing prose justified by completed mathematics. |

@@ -1247,7 +1247,12 @@ record.
   `Hom_{Hom_C(x1,y2)}(b o u,v o a)` without collapsing to the differently
   typed unit-profunctor cell. Later rows internalize endpoints, expose four
   square-edge projections, and test a six-faced cube before adding any
-  semicubical code layer or groupoidal-source specialization.
+  semicubical code layer or groupoidal-source specialization. The first
+  continuation now provides a fixed-boundary nested-Sigma square total:
+  top/bottom vary, left/right are constant, and a next-hom object exposes two
+  endpoint squares plus four side faces. Full nondegenerate endpoint variation
+  is precisely gated by the absent functorial action of `homd_int` in its
+  displayed-functor parameter.
 
 - `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization master.
