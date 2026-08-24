@@ -1239,6 +1239,15 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_MONAD_COMONAD_COMPUTATION_PLAN_2026-08-23.md`:
+  completed kernel-tranche persistent goal for the new monad-primary
+  full-functor interface, whole Kleisli extension and stable cut,
+  warning-neutral opposite-derived comonad computation, and
+  adjunction-derived instances. Owner probes rejected a broad raw
+  `comp_fapp0` fold and selected the corrected owner-aligned accumulation
+  `KleisliCut(g,f*) -> (KleisliCut(g,f))*` at the exact inherited warning
+  boundary. All registered gates are green; free-syntax decidability and
+  TypeScript declaration work remain separately gated.
 - `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization master.
   Its first semantic row now supplies a computational strict-functor

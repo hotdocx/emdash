@@ -4729,6 +4729,74 @@ equation needs declaration-backed agreement or an explicitly classified
 trusted postulate. Raw named-operation composites therefore do not inherit
 triangle computation accidentally.
 
+### Monad-primary triangular computation
+
+The additive monad layer applies the same indexed-observation discipline to a
+whole endofunctor `T : A -> A`:
+
+```text
+M : Monad(T)
+unit_monad_transf(M) : id_A => T
+mult_monad_transf(M) : T o T => T.
+```
+
+The structural data remain full functors and full transformations. The
+selected computational presentation is triangular Kleisli extension:
+
+```text
+f  : X -> T[Y]
+f* : T[X] -> T[Y].
+```
+
+`kleisli_extend_func(M,X,Y)` is a whole functor and therefore retains higher
+action. Its conventional semantic target is `f |-> mu_Y o T[f]`; the stable
+whole owner is connected to that target by explicit equality evidence rather
+than a runtime expansion.
+
+Kleisli cut has semantic reading
+
+```text
+KleisliCut(g,f) = g* o f.
+```
+
+It too is a whole functor, with product input `(f,g)`, and its capped
+projection owns the triangular reductions:
+
+```text
+KleisliCut(g,eta^c(f)) -> g o f
+KleisliCut(g,f*)       -> (KleisliCut(g,f))*
+(eta_X)*               -> id_TX
+mu_X                   -> (id_TX)*.
+```
+
+The accumulation orientation is important. It is the monadic opposite of
+Došen's `Delta(f2) o Delta(f1) -> Delta(f2 o Delta(f1))`: the top cut between
+two extensions becomes one extension containing a lower-degree cut. The raw
+spelling `g* o f*` remains ordinary `comp_fapp0`; its equality with the stable
+cut result is theorem-level. A probe of the broad raw runtime fold introduced
+unjoined opposite and specialized-category reduction orders, whereas the
+stable-cut formulation preserves the inherited warning inventory.
+
+A comonad is transparently classified by the opposite monad:
+
+```text
+Comonad_A(D) = Monad_(A^op)(D^op).
+```
+
+Whole co-Kleisli extension and cut are endpoint-swapped views of the same
+monadic owners. Hence their beta, accumulation, and counit-extension laws
+compute without a second hot rule family. Standard counit and
+comultiplication remain stable whole observations with equality evidence to
+the opposite unit and multiplication; this avoids making double-opposite
+projection order a runtime normal form. For `J : Adjunction(F,G)`, the layer
+constructs the monad on `G o F` with multiplication `G epsilon F` and the
+comonad on `F o G` with comultiplication `F eta G`.
+
+These generic rules do not by themselves prove decidability of all emdash or
+Lambdapi conversion. Došen's decision theorem concerns the separately free
+syntax; a future executable normalizer must make that syntax and its
+translation boundary explicit.
+
 The current theory includes the expected basic operations:
 
 ```text

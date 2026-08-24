@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-21
+Last consolidated: 2026-08-23
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -54,6 +54,18 @@ detailed probe evidence.
   `OmegaEquivAlong` in the corresponding functor category. The module does
   not assemble incoherent arrow families, invert arbitrary lax
   transformations, or add generic functor extensionality.
+- `emdash3_2_monads.lp`: monad-primary, opposite-dual computational layer.
+  `Monad(T)` is indexed by a whole endofunctor with stable full unit and
+  multiplication observations. Whole Kleisli extension and whole Kleisli cut
+  retain higher action; their capped projections own beta, unit,
+  multiplication, and the corrected Došen accumulation. Raw base-category
+  `comp_fapp0` deliberately remains generic after a rejected probe added four
+  unjoined specialized-category/opposite overlaps. `Comonad(D)` is the
+  transparent `Monad(D^op)` classifier; its standard whole counit and
+  comultiplication stay stable, while coextension and co-Kleisli cut reuse the
+  monadic rule family by endpoint swapping. Existing adjunctions construct
+  both structural instances. The module claims neither free syntax nor a
+  global decision procedure.
 - `emdash3_2_direct_cover_completion_locality.lp`: downstream conventional
   comparison for the direct whole-presheaf cover-completion HIT. A derived
   retained-member theorem is projected through one whole transformation
@@ -3860,6 +3872,39 @@ The product architecture includes:
 - an indexed `Adjunction(F,G)` relation with transparent left/right
   compatibility views, stable unit/counit observations, both component-level
   triangle cut-elimination laws, opposite-index swapping, and mate consumers.
+
+The additive monad layer follows the same indexed-observation boundary. For
+`M : Monad(T)`, `unit_monad_transf(M)` and `mult_monad_transf(M)` are stable
+whole transformations. The selected whole functors
+`kleisli_extend_func(M,X,Y)` and `kleisli_cut_func(M,X,Y,Z)` retain hom action.
+Their point projections compute as
+
+```text
+KleisliCut(g,eta^c(f)) -> g o f
+KleisliCut(g,f*)       -> (KleisliCut(g,f))*
+(eta_X)*               -> id_TX
+mu_X                   -> (id_TX)*.
+```
+
+The second rule is the exact monadic dual of Došen's
+`Delta(f2) o Delta(f1) -> Delta(f2 o Delta(f1))`. Its explicit stable-cut head
+is intentional: a raw `g* o f*` runtime fold conflicts with existing
+opposite, terminal, and equality-skeleton computation. A theorem-level
+semantic comparison retains the conventional reading
+`KleisliCut(g,f)=g* o f` without installing a second hot composition owner.
+The transparent `Comonad(D)=Monad(D^op)` facade reuses these rules for the
+co-Kleisli dual. Standard whole counit/comultiplication observations are
+stable and carry explicit equality evidence to opposite unit/multiplication,
+avoiding the unjoined double-`Op_transf` projection order found by the owner
+probe.
+
+The completed additive tranche is registered in source checks and metrics,
+has a reviewer example, and contributes 26 cataloged central checks. Its
+warning-enabled owner check preserves the inherited `1131/159` warning
+inventory, its strict module LHS audit is empty, and the fresh 270-file health
+and CI passes are green. Free monad/comonad syntax, a commuting decision
+procedure, Kleisli/Eilenberg--Moore categories, and a TypeScript declaration
+surface remain separate consumer-led work.
 
 Cat-valued horizontal action is expressed through the generic
 `comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0` owner and its projection
