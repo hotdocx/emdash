@@ -87,8 +87,7 @@ assert [C : Cat]
     (@lax_edge C x y u)
   ≡ y;
 
-// Source action computes to a. Target action remains a typed whole generic
-// action while its optional readable b-observation is still consumer-gated.
+// Source and target action compute to the two visible side arrows.
 assert [C : Cat]
   [x1 y1 x2 y2 : τ (Obj C)]
   (u : τ (Hom C x1 x2))
@@ -127,7 +126,7 @@ assert [C : Cat]
     (@lax_edge C x1 x2 u)
     (@lax_edge C y1 y2 v)
     (@lax_square C x1 y1 x2 y2 u v a b alpha)
-  : τ (Hom C x2 y2);
+  ≡ b;
 
 // The whole endpoint hom actions remain available for another dimension.
 type @homdc_int;

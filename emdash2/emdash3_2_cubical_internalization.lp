@@ -181,8 +181,8 @@ symbol homdc_total_target_underlying_func
       (@homdc_total_target_funcd K1 K2 E));
 
 // Second endpoint projection. Generic fapp1 retains its whole arrow action;
-// a later focused row may add a propositional visible-b observation without
-// changing this derived owner.
+// the varying-Sigma projection owner computes constructor-visible square
+// action to the second side arrow.
 symbol homdc_total_target_func
   [K1 K2 : Cat]
   (E : τ (Functor (Op_cat K1) (Catd_cat K2)))

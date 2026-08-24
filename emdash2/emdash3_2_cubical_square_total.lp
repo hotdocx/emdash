@@ -36,6 +36,39 @@ rule @tapp0_fapp0
       $A
       (@fapp0 $K (@Catd_cat $A) $G $k);
 
+// Its displayed action sends a constructor-visible total arrow (q,beta) to
+// the base arrow q. This is the varying-family analogue of the ordinary
+// Sigma_proj1_func arrow beta; all inferred slots are reconstructible from
+// the displayed-functor head and visible dependent pair.
+rule @fdapp1_int_hom_fapp0
+      _
+      _
+      _
+      (@sigma_proj1_family_funcd _ _ _)
+      _
+      _
+      _
+      (Struct_sigma _ _)
+      (Struct_sigma _ _)
+      (Struct_sigma $q _)
+  ↪ $q;
+
+// Pointwise opposite retains the same base arrow under the opposite Hom
+// orientation. The separate stable Op_funcd head requires this generic
+// specialization; no cubical endpoint or dimension appears in the rule.
+rule @fdapp1_int_hom_fapp0
+      _
+      _
+      _
+      (@Op_funcd _ _ _ (@sigma_proj1_family_funcd _ _ _))
+      _
+      _
+      _
+      (Struct_sigma _ _)
+      (Struct_sigma _ _)
+      (Struct_sigma $q _)
+  ↪ $q;
+
 // At a, totalize the b-indexed filler family.
 symbol homdc_inner_total_func
   [K1 K2 : Cat]
