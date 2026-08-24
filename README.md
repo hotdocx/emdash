@@ -102,6 +102,17 @@ an object package; a whole `DependentSimplex_cat(C,n)` and its
 mapping-category equivalence with `Functor_cat(Delta[n],C)` remain future
 work.
 
+The same internal-hom/Sigma architecture now has a fully varying cubical
+counterpart. For a mixed-variance family `E : K1^op -> Catd(K2)`, an inner
+Sigma and pointwise opposite let the existing `homd_int` classify directed
+lax squares; an outer opposite Sigma then derives the lax-arrow category.
+Iterating that category gives native edges, squares, cubes, and arbitrary
+dimensions. The internal augmented semicube category uses `{L,R,*}` face
+codes, its whole nerve computes the native levels, and Yoneda standard
+semicubes decode through that same nerve action to the native face functors.
+Thus the combinatorial and dependent-hom presentations are connected
+internally without a primitive cube category or a second totalization theory.
+
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
 of global metatheory.

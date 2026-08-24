@@ -21,9 +21,10 @@ The computing face-code category, join-built simplex shapes, Yoneda
 semisimplices, selected two-dimensional boundaries and horns, algebraic
 path-groupoid horn fillers, and categorical decalage live in the subsequent
 semisimplicial modules recorded by the August simplicial-substrate plan.
-The two-sided square classifier, intrinsic cubical-arrow tower, augmented
-`{L,R,*}` index, whole semicubical nerve, and recursive immediate boundaries
-live in the subsequent cubical modules recorded by the August 23 plans.
+The two-sided square classifier, derived cubical internal hom and lax-arrow
+total, augmented `{L,R,*}` index, whole semicubical nerve, recursive immediate
+boundaries, and Yoneda representable decoding live in the subsequent cubical
+modules recorded by the August 23--24 plans.
 The isolated binary-Sum experiment was retired on 2026-07-20 for later
 consumer-led redesign; it is not part of the active foundation.
 
@@ -3721,24 +3722,67 @@ right side faces compute to identities. This is a computational six-face cube
 test with two degenerate sides. It remains useful as the local fixed-boundary
 view, but it is no longer the boundary of the cubical development.
 
-Full variation is obtained by totalizing the endpoints at the specialized
-identity-Hom family. The intrinsic arrow category
+Full variation is not a second primitive arrow theory. First totalize the
+covariant endpoint of the original family and then take its pointwise
+opposite:
 
 ```text
-CubicalArrow_cat(C)
+EdgeFamily_E[x1] = Sigma(x2 : K2), E[x1][x2]
+D_E              = Op_catd(EdgeFamily_E).
 ```
 
-has arrows `u : Hom_C(x,y)` as objects. Between visible arrows `u` and `v`, its
-Hom is the variable-boundary square total whose objects are
+The two-sided internal hom is the existing dependent internal hom at this
+variance-correct family:
+
+```text
+homdc_int(E) = homd_int(id_D_E).
+```
+
+Its canonical projection order is target edge `(y2,v)`, source edge `(x2,u)`,
+then `a : x1 -> y1`. The resulting category is
+
+```text
+Hom_{EdgeFamily_E[x1]}
+  ((x2,u), EdgeFamily_E[a^op](y2,v)).
+```
+
+Ordinary Sigma-Hom computation exposes an object of this category as
+`(b,alpha)` with exactly the cross-fibre type above. At fixed `a`, this
+category is definitionally the pointwise opposite of the earlier
+`homdc_inner_total_func(E)[a]`; the fixed-boundary and fully internalized
+views therefore share one theory with the variance made explicit.
+
+The full two-sided total is likewise derived:
+
+```text
+homdc_total_cat(E)
+  = Op_cat(Sigma(x1 : K1^op), D_E[x1]).
+```
+
+Its objects are `(x1,(x2,u))`, and its arrows are `(a,(b,alpha))`. The
+specialized lax-arrow category
+
+```text
+LaxArrow_cat(C) = homdc_total_cat(hom_int(id_C))
+```
+
+therefore has arrows `u : Hom_C(x,y)` as objects. `CubicalArrow_cat(C)` is now
+a transparent readability alias of this derived category, not an independent
+primitive. Between visible arrows `u` and `v`, its Hom has objects
 
 ```text
 (a,(b,alpha)),
 alpha : b o u ==> v o a.
 ```
 
-Whole source and target functors recover `x,y` on objects and `a,b` on square
-arrows. Identity and composition paste the existing hom-action cells; no
-separate cubical associativity law is added. A coherent profiled functor
+Whole source and target functors derive from the two nested Sigma projections
+and recover `x,y` on objects and `a,b` on square arrows. The generic varying
+Sigma projection computes on constructor-visible arrows, including its
+pointwise-opposite specialization. Category identity and composition stay at
+the canonical nested-Sigma/internal-action owners; their endpoint boundaries
+compute to the expected identities and composites. The older explicit
+whisker-and-paste terms remain readable typed formulas, not competing runtime
+normal forms. A coherent profiled functor
 `F : C -> D` lifts to `CubicalArrow_func(F)`. The selected readable profile is
 essential: mapping the oriented filler uses the post-compositor forward and
 the pre-compositor inverse. The profile is retained with the lifted functor so
@@ -3795,11 +3839,28 @@ faces; each successor prepends its new `L/R` pair and star-lifts every older
 face. Hence dimensions one, two, and three expose `2`, `4`, and `6` faces from
 one variable-dimensional construction. The new pair agrees propositionally
 with native source/target, and each inherited face agrees with the profiled
-`CubicalArrow` lift. Degeneracies, connections, reversals, permutations, Kan
-operations, a general `TwoSidedSigma(E)`, the Gray/walking-arrow comparison,
-and a functorial parameter assignment `FF |-> homd_int(FF)` remain later
-extensions or comparisons; none is a prerequisite of the native semicubical
-nerve.
+`CubicalArrow` lift.
+
+The standard combinatorial semicube is internal as well:
+
+```text
+StandardSemicube(n) = Yoneda_{SemiCubePlus}(n)
+StandardSemicube(n)[p]
+  = Hom_{SemiCubePlus}(p,n)
+  = Path_cat(CubeFaceCode(p,n)).
+```
+
+The Hom action of `semicubical_nerve_func(C)` is a whole decoder from that
+representable level to functors `CubicalLevel(C,n) -> CubicalLevel(C,p)`.
+`standard_semicube_native_decode_path` compares each decoded face with the
+computing `{L,R,*}` action, and another Hom action remains available. Thus the
+usual face combinatorics and the internally iterated dependent-hom/Sigma
+geometry are connected at arbitrary variable dimensions.
+
+Degeneracies, connections, reversals, permutations, Kan operations, the
+Gray/walking-arrow comparison, and the independent generic assignment
+`FF |-> homd_int(FF)` remain later extensions or comparisons; none is a
+prerequisite of the native semicubical nerve.
 
 This same dependent hom architecture is shared by total-category homs and
 section action:

@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-23
+Last consolidated: 2026-08-24
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -522,15 +522,23 @@ detailed probe evidence.
   total of `homdc_`. Square objects are `(a,(b,alpha))`; top, bottom, left, and
   right remain whole, and the next hom exposes the two endpoint squares plus
   four side faces. The fixed sides compute to identities and bottom remains a
-  dependent section action. It adds one generic Sigma-projection-family
-  component beta, no filler rule, and no unifier.
+  dependent section action. Its generic varying-Sigma projection now computes
+  both point components and constructor-visible displayed arrow action,
+  including pointwise opposite; it adds no cubical filler rule or unifier.
+- `emdash3_2_cubical_internalization.lp`: transparent variance-correct whole
+  cubical internalization. It forms the inner edge family by ordinary Sigma,
+  takes its pointwise opposite, defines `homdc_int` as the existing
+  `homd_int` of that family, and derives
+  `homdc_total_cat = Op(Sigma(Op K1,D_E))`. Its `LaxArrow_cat` specialization,
+  visible edge/square constructors, and whole source/target functors add no
+  primitive category, square, two-sided Sigma, rule, or unifier.
 - `emdash3_2_cubical_arrow.lp` and
-  `emdash3_2_cubical_arrow_composition.lp`: intrinsic variable-boundary arrow
-  category. Objects are arrows of `C`; visible Homs are the existing
-  `homdc_` square totals, and visible square identity/composition use existing
-  whiskering and Hom composition. Whole source/target project objects and
-  square arrows. The current strict endpoint cuts align selected bracketings;
-  no cubical associativity law or unifier is added.
+  `emdash3_2_cubical_arrow_composition.lp`: compatibility/readability layer.
+  `CubicalArrow_cat`, edge/square constructors, and source/target are
+  transparent aliases of the derived lax-arrow theory. The older explicit
+  identity and whisker/paste terms remain well typed, but their two competing
+  runtime rules are retired; generic nested-Sigma identity/composition owns
+  category structure and computes the expected endpoint boundaries.
 - `emdash3_2_readable_pseudofunctors.lp` and
   `emdash3_2_cubical_arrow_functor.lp`: selected coherent lifting boundary.
   The profile exposes invertible readable post/pre compositor views;
@@ -555,9 +563,14 @@ detailed probe evidence.
   nerve object beta computes, while its arrow observation is propositional to
   avoid competing with generic strict cuts. Restricted truncation supplies
   public composition laws; a finite family exposes new `L/R` followed by all
-  star-lifted older faces. Degeneracies, connections, Kan operations, general
-  `TwoSidedSigma(E)`, and the Gray/parameterized-hom comparisons remain future
-  work.
+  star-lifted older faces.
+- `emdash3_2_semicubical_representables.lp`: Yoneda standard semicubes and a
+  whole arbitrary-`p,n` decoder from representable face codes to native
+  restriction functors. The existing nerve-action path reaches the computing
+  `{L,R,*}` action and another Hom action remains. `emdash3_2_cubical.lp` is
+  the rule-free import facade for the resulting layer. Degeneracies,
+  connections, Kan operations, and Gray/parameterized-hom comparisons remain
+  future work.
 - `emdash3_2_truncation_reflector.lp`: classified computational homotopy-
   truncation reflector. It realizes `NType_cat(n)` through the existing
   `TruncGrpdU(n)` retained-evidence package, supplies point-computing
@@ -4220,23 +4233,48 @@ fixed vertical boundary. The four line observations remain whole, and their
 actions on a next-hom object expose a bounded six-face cube; the two fixed
 vertical sides reduce to identities.
 
-The nondegenerate continuation specializes to the identity-Hom family rather
-than waiting for a general parameterized `homd_int`. `CubicalArrow_cat(C)`
-totalizes both endpoints and both side arrows; its visible Homs are the same
-`homdc_` square totals. A selected readable pseudofunctor profile makes this
-arrow-category operation functorial and recursively iterable. Nat recursion
-then constructs `CubicalLevel_cat(C,n)`.
+The nondegenerate continuation is now derived from the same internal-hom/Sigma
+calculus. For
+
+```text
+EdgeFamily_E[x1] = Sigma(x2:K2), E[x1][x2]
+D_E              = Op_catd(EdgeFamily_E),
+```
+
+the whole mixed-variance owner is
+
+```text
+homdc_int(E) = homd_int(id_D_E).
+```
+
+Its canonical target-edge-first projection at `a:x1->y1` is
+`Hom_{EdgeFamily_E[x1]}((x2,u),EdgeFamily_E[a^op](y2,v))`; ordinary Sigma-Hom
+computation exposes `(b,alpha)` with the expected cross-fibre type. The total
+
+```text
+homdc_total_cat(E) = Op(Sigma(x1:K1^op),D_E[x1])
+```
+
+therefore internalizes both endpoints and side arrows without a new
+parameterized-`homd_int` primitive. `LaxArrow_cat(C)` specializes this at
+`hom_int(id_C)`, and `CubicalArrow_cat(C)` is its transparent compatibility
+name. A selected readable pseudofunctor profile makes the operation functorial
+and recursively iterable. Nat recursion then constructs
+`CubicalLevel_cat(C,n)`.
 
 The associated `{L,R,*}` code grammar is independent of Gray semantics and of
-the still-absent generic assignment `FF |-> homd_int(FF)`. It forms the locally
+the separate generic assignment `FF |-> homd_int(FF)`. It forms the locally
 discrete `SemiCubePlus_cat`, acts by source/target/profiled lift, and assembles
 a whole opposite-indexed Cat-valued nerve. Public code action and whole nerve
 action are joined by typed paths rather than a runtime arrow beta, because the
 former retains recursive profile histories while generic functor cuts retain
 their selected strict normal forms. Immediate faces form a recursive finite
 family: two new endpoints plus every older face under star. This supplies a
-fully variable native semicubical tower while leaving general
-`TwoSidedSigma(E)` and parameterized-hom comparison as later abstractions.
+fully variable native semicubical tower. Yoneda on `SemiCubePlus_cat` now
+defines `StandardSemicube(n)`; the whole Hom action of the native nerve decodes
+its `p`-faces into restriction functors and compares them with the computing
+code action at arbitrary `p,n`. Parameterized-hom and Gray comparisons remain
+later abstractions, not foundations of this construction.
 
 Section 17 contains generic Sigma/Pi introduction/evaluation, constant
 sections, ordinary structural logic, generic functor hom-action, section

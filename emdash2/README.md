@@ -129,11 +129,25 @@ are whole observations. The next hom has two endpoint squares and four side
 faces, with the fixed left/right sides computing to identities. This is a
 computational bounded test retained beside the fully varying construction.
 
-`CubicalArrow_cat(C)` instead makes every arrow of `C` an object and every
-variable-boundary lax square `(a,(b,alpha))` an arrow. Source and target are
-whole functors, visible square identity/composition compute by existing hom
-action, and a readable pseudofunctor profile supplies the two invertible
-compositor views needed by `CubicalArrow_func`. Genuine Nat recursion gives
+The fully varying layer is derived from the same primitives. Define
+
+```text
+EdgeFamily_E[x1] = Sigma(x2:K2), E[x1][x2]
+D_E              = Op_catd(EdgeFamily_E)
+homdc_int(E)      = homd_int(id_D_E)
+homdc_total_cat(E)= Op(Sigma(x1:K1^op),D_E[x1]).
+```
+
+The canonical target-edge-first projection of `homdc_int` exposes the
+remaining `(b,alpha)` Sigma-Hom data. At `E=hom_int(id_C)`,
+`LaxArrow_cat(C)` makes every arrow of `C` an object and every
+variable-boundary lax square `(a,(b,alpha))` an arrow. `CubicalArrow_cat(C)` is
+now a transparent readability alias, not a primitive category. Source and
+target are whole derived functors. Generic nested-Sigma identity/composition
+compute their expected endpoint boundaries; the older readable paste terms no
+longer compete as runtime normal forms. A readable pseudofunctor profile
+supplies the two invertible compositor views needed by `CubicalArrow_func`.
+Genuine Nat recursion gives
 
 ```text
 CubicalLevel(C,0)   = C
@@ -156,9 +170,23 @@ does not compete with generic strict functor cuts. A recursive finite-family
 frame exposes `2n` immediate faces: new source/target followed by the
 star-lifted older faces. Thus a square has four independent edges and a cube
 has two endpoint squares plus four independent side squares. Degeneracies,
-connections, Kan operations, general `TwoSidedSigma(E)`, and the
-Gray/walking-arrow and `homd_parameter_func` comparisons remain future work,
-not prerequisites of this native semicubical nerve.
+connections, Kan operations, and the Gray/walking-arrow and independent
+`homd_parameter_func` comparisons remain future work, not prerequisites of
+this native semicubical nerve.
+
+Yoneda also supplies the standard combinatorial semicube:
+
+```text
+StandardSemicube(n)[p]
+  = Hom_{SemiCubePlus}(p,n)
+  = Path_cat(CubeFaceCode(p,n)).
+```
+
+The whole Hom action of the native nerve decodes every such face into the
+corresponding restriction functor, and
+`standard_semicube_native_decode_path` compares it with the computing
+`{L,R,*}` interpreter at arbitrary `p,n`. Import `emdash3_2_cubical.lp` for
+the complete rule-free cubical facade.
 
 ### Internal semisimplicial substrate
 

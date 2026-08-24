@@ -1240,13 +1240,13 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`:
-  active corrective continuation. It restores primitive `homdc_int` as the
-  mixed-variance internal-hom owner, tests the existing
-  `Sigma_cat C (CommaFib_catd(id_C))` lax-arrow candidate, and requires any
-  `TwoSidedSigma` name to derive from or delegate to existing Sigma machinery.
-  The current primitive `CubicalArrow_cat` is retained only as migration
-  evidence until a Sigma-derived lax-arrow construction preserves its checked
-  square orientation and arbitrary-dimensional `{L,R,*}` action.
+  active corrective continuation nearing documentation closure. It derives
+  `homdc_int` from the existing `homd_int` after inner Sigma and pointwise
+  opposite, rejects `Sigma_cat C (CommaFib_catd(id_C))` as the oplax
+  orientation, and constructs the selected lax-arrow category by an outer
+  opposite Sigma. `CubicalArrow_cat` is now a transparent alias; the existing
+  arbitrary-dimensional `{L,R,*}` action is revalidated, and Yoneda standard
+  semicubes decode through the whole native nerve action.
 
 - `REPORT_EMDASH_V3_2_CUBICAL_ARROW_AND_SEMICUBICAL_CODES_PLAN_2026-08-23.md`:
   completed foundational implementation child of the cubical-dependent-hom

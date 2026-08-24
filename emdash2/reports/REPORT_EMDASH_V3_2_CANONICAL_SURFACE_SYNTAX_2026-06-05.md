@@ -1133,7 +1133,18 @@ ordinary source/target faces and the four observations
 left and right compute to identities and bottom remains a dependent section
 action. Do not read this notation as a fully varying `homdc_int`, a flat
 cubical record, degeneracies/connections, Kan filling, or arbitrary-dimensional
-cubical syntax.
+cubical syntax. Fully varying notation belongs to the later derived owner:
+
+```text
+EdgeFamily_E[x1] = Sigma(x2:K2), E[x1][x2]
+homdc_int(E)      = homd_int(id_(Op_catd(EdgeFamily_E)))
+Total□(E)         = Op(Sigma(x1:K1^op),Op(EdgeFamily_E[x1])).
+```
+
+Its canonical projection order is target edge, source edge, then `a`; the
+remaining Sigma-Hom object is `(b,alpha)`. The literal owners are
+`homdc_edge_catd`, `homdc_op_edge_catd`, `homdc_int`, `homdc_at`, and
+`homdc_total_cat`.
 
 For the first groupoidal source coherence, comments may write
 
@@ -2085,10 +2096,15 @@ TypeScript text grammar automatically.
 For the intrinsic directed-square tower, write
 
 ```text
-Arr□(C)              = CubicalArrow_cat(C)
+Arr□(C)              = LaxArrow_cat(C) = CubicalArrow_cat(C)
 Cub_0(C)             = C
 Cub_{n+1}(C)         = Arr□(Cub_n(C)).
 ```
+
+The first equality is mathematical and computational: `LaxArrow_cat` is the
+derived two-sided Sigma total, while `CubicalArrow_cat` is its transparent
+readability/compatibility alias. Do not present `CubicalArrow_cat` as a
+primitive category.
 
 An object of `Arr□(C)` is an edge `u : x ->^C y`. An arrow from `u` to
 `v : x' ->^C y'` is written
@@ -2106,6 +2122,11 @@ This is expository notation for `cubical_edge` and the nested-Sigma
 `CubicalArrow_func(F,P)` requires the selected readable pseudo profile `P`.
 Do not omit that qualification when the distinction between an arbitrary lax
 carrier and a liftable coherent carrier matters.
+
+Category identity and composition remain at the generic nested-Sigma owners.
+The readable `cubical_square_id` and `cubical_square_comp` terms may illustrate
+the old explicit whisker/paste presentation, but comments must not print them
+as judgmental normal forms of `id` or `comp`.
 
 For the augmented semicube category, use
 
@@ -2145,7 +2166,21 @@ d_{id_n} = id
 d_{g o□ f} = d_f o d_g
 ```
 
-are whole equality paths, not face-specific rewrites. The immediate boundary
+For standard combinatorial semicubes, write
+
+```text
+□[n]                 = StandardSemicube(n) = Yoneda(n)
+□[n][p]              = Hom_{□_+}(p,n)
+decode_{p,n}           = standard_semicube_native_decode_func(p,n)
+decode_{p,n}(f)        = d_f.
+```
+
+The level equation is judgmental. The final equation is the selected path
+`standard_semicube_native_decode_path`, not a second runtime arrow beta. Its
+whole Hom action remains available for higher representable paths.
+
+The `d`-equations above are whole equality paths, not face-specific rewrites.
+The immediate boundary
 of an `n`-cube is the recursive `2n`-entry family with the new `L/R` pair first
 and all older faces star-lifted afterward. Degeneracy, connection, reversal,
 permutation, and Kan-composition notation remains unselected.
