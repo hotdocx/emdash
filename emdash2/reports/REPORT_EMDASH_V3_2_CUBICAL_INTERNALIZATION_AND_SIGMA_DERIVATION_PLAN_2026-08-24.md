@@ -55,12 +55,16 @@ internal hom owner
       -> recursively iterable shapes.
 ```
 
-For cubical structure, the new primitive—if a primitive is required—is
-`homdc_int`. A shape-specific primitive `CubicalArrow_cat` is not the desired
-foundation. The target dependency path is:
+For cubical structure, the foundational owner is `homdc_int`. Focused probes
+have now shown that it need not be a new primitive: the variance-correct owner
+is a transparent specialization of the existing `homd_int` after one inner
+Sigma total and one pointwise opposite. A shape-specific primitive
+`CubicalArrow_cat` is not the desired foundation. The target dependency path
+is:
 
 ```text
-homdc_int
+Sigma_cat / Op_catd / homd_int
+  -> homdc_int
   -> homdc_ and its fixed fibres
     -> variance-correct comma/two-sided family
       -> existing Sigma_cat / FibrewiseSigma_catd
@@ -122,54 +126,115 @@ The correct uncurrying is comma/two-sided: source transport uses `b`, target
 transport uses `a^op`, and the final hom is formed in the cross fibre. This is
 the role of `homdc_int`.
 
-## 3. Primitive `homdc_int` Boundary
+## 3. Derived `homdc_int` Boundary
 
-The whole owner must internalize, in a documented projection order,
+The owner-position probe selected the following transparent construction. For
 
 ```text
-source K1 endpoint
-  -> source K2 endpoint and object
-    -> target K1 endpoint
-      -> target K2 endpoint and object
-        -> side arrow a
-          -> side arrow b
-            -> filler category.
+E : K1^op -> Catd(K2),
 ```
 
-Schematically, its fully evaluated observation is
+define the inner edge family and its pointwise opposite by
+
+```text
+EdgeFamily_E(x1) := Sigma_cat K2 (E[x1])
+D_E              := Op_catd(EdgeFamily_E).
+```
+
+Thus an object of `EdgeFamily_E(x1)` is `(x2,u)`. The mixed-variance owner is
+
+```text
+homdc_int(E) := homd_int(id_D_E)
+
+  : Functord(EdgeFamily_E,Homd_target_catd(D_E))
+```
+
+over the base `K1^op`. The pointwise opposite is essential:
+`Op_catd(D_E)` reduces back to `EdgeFamily_E`, while the endpoint Hom in
+`D_E` reverses once more to the selected forward lax cell.
+
+Variance forces the canonical projection order to be target edge first:
+
+```text
+target K1 endpoint y1
+  -> target edge (y2,v)
+    -> source K1 endpoint x1
+      -> source edge (x2,u)
+        -> side arrow a : x1 -> y1
+          -> category of pairs (b,alpha).
+```
+
+The final category is
 
 ```text
 homdc_int(E)
-  [x1][x2][u][y1][y2][v][a][b]
-    =
-  Hom_{E[x1][y2]}
-    (E[x1][b](u),E[a^op][y2](v)).
+  [y1][(y2,v)][x1][(x2,u)][a]
+    = Hom_{EdgeFamily_E(x1)}
+        ((x2,u),EdgeFamily_E[a^op](y2,v)).
 ```
 
-Exact `Catd`/`Functord` nesting must be selected from owner-position probes;
-the schematic telescope is not permission to invent a flat record or erase
-variance under products. Acceptance requires:
+Generic Sigma-Hom computation then exposes its objects as
 
-1. the existing transparent `homdc_` is a projection or transparent
-   specialization of `homdc_int`, not an independent competing theory;
-2. fixing endpoints recovers the existing whole functor in `a` and displayed
-   functor in `b`;
-3. fixing `a` exposes the expected `homd_int`-shaped slice, with a typed whole
-   comparison if the stable owners differ;
+```text
+(b,alpha),
+
+b     : Hom_K2(x2,y2),
+alpha : Hom_{E[x1][y2]}
+          (E[x1][b](u),E[a^op][y2](v)).
+```
+
+This is the earlier source-first schematic telescope, but expressed in the
+only projection order that preserves its mixed variance as one existing whole
+internal action. It neither flattens the endpoints into a product nor invents
+a new record.
+
+The focused probe also establishes
+
+```text
+homdc_int(E)[...][a]
+  = Op_cat(homdc_inner_total_func(E,...)[a])
+```
+
+definitionally. Hence the current fixed-endpoint theory is recovered with the
+precise pointwise opposite required by the canonical target-first owner; it is
+not a competing primitive.
+
+Acceptance requires:
+
+1. `homdc_int` is the transparent `homd_int(id_D_E)` construction above;
+2. fixing endpoints and `a` recovers the pointwise opposite of the existing
+   `homdc_inner_total_func`, while its Sigma object projection recovers
+   `homdc_` and `homdc_fibre`;
+3. fixing `a` exposes the expected `homd_int`-shaped slice without a new
+   parameter-action primitive;
 4. each remaining endpoint/side parameter retains its next hom action;
 5. the `hom_int(id_C)` instance computes to
    `Hom_{Hom_C(x1,y2)}(b o u,v o a)`;
 6. the opposite/twisted orientation remains distinct.
 
-If a transparent construction from current `homd_int` cannot retain the
-parameter action, a primitive `homdc_int` is justified at this internal-hom
-layer. It must own projection/action rules, not merely be an opaque synonym.
-The former proposed prerequisite `homd_parameter_func` may then become a
-derived slice/comparison rather than a foundational blocker.
+The former proposed prerequisite `homd_parameter_func` is therefore not a
+foundational blocker. If later consumers need the independent assignment
+`FF |-> homd_int(FF)`, it remains a derived comparison/API task rather than the
+source of cubical structure.
 
 ## 4. Sigma-First Totalization Policy
 
 No independent primitive `TwoSidedSigma_cat` is planned initially.
+
+The exact variance-correct total selected by the probe is
+
+```text
+TwoSidedSigma_cat(E)
+  := Op_cat(
+       Sigma_cat (Op_cat K1)
+         (Op_catd(EdgeFamily_E))).
+```
+
+Its objects compute to `(x1,(x2,u))`. A Hom from `(x1,(x2,u))` to
+`(y1,(y2,v))` is generated by the same `homd_int(id_D_E)` endpoint used above,
+so a visible object computes to `(a,(b,alpha))` in the selected lax direction.
+This formula is nested ordinary Sigma plus two semantically required opposite
+placements; it is not a second total-category theory.
 
 For visible endpoint objects, the desired Hom is already an iterated ordinary
 Sigma:
@@ -204,7 +269,7 @@ CommaFib_catd(T) : Catd(B)
 CommaFib_catd(T)[y] = (T downarrow y).
 ```
 
-The first mandatory probe is
+The first mandatory probe was
 
 ```text
 LaxArrowCandidate(C)
@@ -235,7 +300,16 @@ Sigma(b : Hom_C(x2,y2)),
   Hom_{Hom_C(x1,y2)}(b o u,v o a).
 ```
 
-The probe must classify whether the existing comma total yields:
+The probe classifies the existing comma total as the **oplax** presentation:
+
+```text
+alpha : v o a ==> b o u.
+```
+
+Its outer Sigma projection computes to the target endpoint and to side `b` on
+visible arrows. It is therefore useful semantic/opposite evidence but is not
+the selected computational lax-arrow owner. In the original three-way audit,
+the possible verdicts were:
 
 - exactly this lax orientation;
 - the opposite/oplax orientation, correctable transparently by existing `Op`
@@ -252,7 +326,7 @@ Its verdict has three strengths:
 3. **wrong construction:** it has the twisted or role-swapped variance and
    cannot serve as the lax-arrow total.
 
-Only the first verdict permits the literal definition
+Only the first verdict would have permitted the literal definition
 `LaxArrow_cat(C) := Sigma_cat C (CommaFib_catd(id_C))`.  The second and third
 verdicts require the total derived from `homdc_int`; they must not be repaired
 by an endpoint-specific rewrite.
@@ -273,25 +347,13 @@ Preferred definitions, in order, are:
 
 ```text
 LaxArrow_cat(C)
-  := Sigma_cat C (CommaFib_catd(id_C))
+  := TwoSidedSigma_cat(hom_int(id_C)).
 ```
 
-when the comma orientation is exact, or
-
-```text
-LaxArrow_cat(C)
-  := derived two-sided Sigma total of homdc_int(hom_int(id_C))
-```
-
-when the generic internalization is required to obtain the correct action.
-
-This ordering is a probe strategy, not a commitment that the pre-existing
-comma total outranks `homdc_int`.  The primitive/internal owner remains
-`homdc_int`; the comma probe asks whether the active Sigma/comma calculus
-already supplies its correctly oriented total as a specialization.  If it
-supplies only an equivalent role-swapped category, that comparison is useful
-evidence but the public computational arrow category must still be derived
-from the `homdc_int` family in the intended source/target order.
+The rejected literal comma definition remains a negative/orientation check.
+`homdc_int` is the internal action used by the generic Hom rule of this
+two-sided total, so the public arrow category follows from the self-contained
+internal-hom/Sigma theory rather than from a coincidental pre-existing comma.
 
 Only after the derived source is green may
 
@@ -375,11 +437,11 @@ lax-arrow category, or arbitrary-dimensional semicubical face action.
 | --- | --- | --- |
 | `CINT-00` | complete | Created `goal/cubical-internalization-v3.2` at exact baseline `bfd5f05` in `/home/user1/emdash1-cubical-internalization-v1`; bootstrapped its own pnpm link graph; promoted this corrective plan and cross-linked both parent plans; the deepest unchanged semicubical source checks green under 90 seconds; selected focused validation and safe migration policy. |
 | `CINT-AUDIT-1` | complete | Audited the completed branch against the parent plan and decision response. Confirmed that arbitrary-`n` codes/action are real, while generic `homdc_int`, Sigma derivation, full combinatorial adequacy, and a constructed whole nerve remain absent. Classified primitive `CubicalArrow_cat` as a useful lax-arrow prototype rather than the definitive foundation. |
-| `CINT-COMMA-2` | pending | Probe `Sigma_cat C (CommaFib_catd(id_C))` at object, Hom, identity, composition, source/target, and next-action levels; classify it as the exact definitional owner, a typed equivalent but role-swapped presentation, or a genuinely wrong lax/oplax/twisted construction, without adding a bridge. |
-| `CINT-HOMDC-DESIGN-3` | pending | Select the exact nested `Catd`/`Functord` type of primitive `homdc_int`, its projection order, and its rules after owner-position probes. Show how it subsumes or derives the former `homd_parameter_func` prerequisite. |
-| `CINT-HOMDC-4` | pending | Implement `homdc_int`; derive or transparently route `homdc_` and `homdc_fibre`; validate generic cross-fibre computation, both side actions, endpoint action, higher action, identity-Hom square, and opposite noncollapse. |
-| `CINT-TOTAL-5` | pending | Construct the variance-correct comma/two-sided displayed family and totalize it through existing Sigma owners. Add no independent primitive `TwoSidedSigma`; if a measured facade is required, document and validate its delegation boundary. |
-| `CINT-LAXARROW-6` | pending | Define Sigma-derived `LaxArrow_cat(C)` and compare it with the current primitive `CubicalArrow_cat` on visible objects, Homs, identity/pasting, source/target, mapped squares, and next action. |
+| `CINT-COMMA-2` | complete | The typed owner probe shows `Sigma_cat C (CommaFib_catd(id_C))` stores edges as `(target,(source,u))`, projects target/`b`, and selects the oplax cell `v o a ==> b o u`. It is not the selected lax owner and no bridge, rule, unifier, or category head was added. Generic Sigma owns its identity/composition/higher action. |
+| `CINT-HOMDC-DESIGN-3` | complete | Selected `EdgeFamily_E := Sigma_func(K2) o E`, `D_E := Op_catd(EdgeFamily_E)`, and transparent `homdc_int(E) := homd_int(id_D_E)` over `K1^op`. Its canonical target-edge-first projection at `a` is definitionally the pointwise opposite of the existing fixed-endpoint inner total, and a typed constructor exposes `(b,alpha)` in the selected lax direction. The former `homd_parameter_func` is not a prerequisite. |
+| `CINT-HOMDC-4` | in progress | `emdash3_2_cubical_internalization.lp` now implements transparent `homdc_int := homd_int(id_D_E)` and its fixed-`a` projection `homdc_at`; the reviewer checks the exact pointwise-opposite relation to the earlier inner total and a generic `(b,alpha)` square. Remaining acceptance is the explicit projection/routing inventory, identity/Hom and opposite negatives, and higher-action reading after the whole varying projection is settled. |
+| `CINT-TOTAL-5` | in progress | The promoted transparent `homdc_total_cat := Op_cat(Sigma_cat(Op K1,D_E))` has visible `(x1,(x2,u))` objects and `(a,(b,alpha))` arrows in the selected lax direction. Derived source and target endpoint functors compute on objects; source arrow action computes and target action remains typed/whole. Typed `eq_refl` confirms that the readable target-`b` beta is genuinely absent because the inherited opaque `sigma_proj1_family_funcd` constrains only point components. The next generic task is to derive that varying Sigma projection (preferably from fibrewise Sigma) rather than add a cubical rule. Focused source/reviewer checks are green, warning count is unchanged from the immediate predecessor (`1290`), and the new rule-free source has zero LHS candidates. |
+| `CINT-LAXARROW-6` | in progress | `LaxArrow_cat(C) := homdc_total_cat(hom_int(id_C))`, `lax_edge`, and the constructor-visible derived `lax_square` are active. Complete the whole comparison with primitive `CubicalArrow_cat` on identity/pasting, both projections, mapped squares, and next action before migration. |
 | `CINT-MIGRATE-7` | pending | Retarget `CubicalLevel` and current cubical clients to the derived lax-arrow owner; retire or reduce primitive `CubicalArrow_cat` to a transparent alias only after focused downstream evidence is green. Preserve checkpoint history and negatives. |
 | `CINT-VARDIM-8` | pending | Revalidate arbitrary-variable-dimension `{L,R,*}` action, whole identity/composition, `2n` frames, and dimensions one through three against the derived levels. Replace opaque nerve packaging where the new internal action permits an actual construction. |
 | `CINT-ADEQUACY-9` | pending | Add standard representable semicubes and a selected internal comparison with native face/boundary action; state the exact remaining boundary to full cubical sets, degeneracies/connections, and Kan structure. |
@@ -414,9 +476,10 @@ lax-arrow category, or arbitrary-dimensional semicubical face action.
 > sequencing, evidence, exclusions, validation, migration, Git discipline,
 > and completion to
 > `emdash2/reports/REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`
-> and its authority chain. Begin at `bfd5f05`. Treat primitive `homdc_int` as
-> the mixed-variance foundational owner; derive any two-sided total through
-> existing Sigma/comma machinery; do not retain primitive `CubicalArrow_cat`
+> and its authority chain. Begin at `bfd5f05`. Treat the transparent
+> `homdc_int(E) := homd_int(id_(Op_catd(EdgeFamily_E)))` construction as the
+> mixed-variance foundational owner; derive the two-sided total through the
+> selected nested Sigma/opposite formula; do not retain primitive `CubicalArrow_cat`
 > as the final foundation without a measured derivation failure. Preserve the
 > completed arbitrary-dimensional code evidence while migrating it only after
 > a derived lax-arrow replacement is green. Keep all Lambdapi commands within

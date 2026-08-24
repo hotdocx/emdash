@@ -69,6 +69,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_prof_reindex_terminal_normalization.lp)
   files+=(emdash3_2_cubical_dependent_hom.lp)
   files+=(emdash3_2_cubical_square_total.lp)
+  files+=(emdash3_2_cubical_internalization.lp)
   files+=(emdash3_2_cubical_arrow.lp)
   files+=(emdash3_2_cubical_arrow_composition.lp)
   files+=(emdash3_2_readable_pseudofunctors.lp)

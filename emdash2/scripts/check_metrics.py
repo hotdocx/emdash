@@ -95,6 +95,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_dependent_simplex_ordinal_recursive.lp"),
     Path("emdash3_2_cubical_dependent_hom.lp"),
     Path("emdash3_2_cubical_square_total.lp"),
+    Path("emdash3_2_cubical_internalization.lp"),
     Path("emdash3_2_cubical_arrow.lp"),
     Path("emdash3_2_cubical_arrow_composition.lp"),
     Path("emdash3_2_readable_pseudofunctors.lp"),
