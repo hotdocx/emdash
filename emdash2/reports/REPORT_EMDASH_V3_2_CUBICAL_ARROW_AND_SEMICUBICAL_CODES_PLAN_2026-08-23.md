@@ -6,6 +6,13 @@ Plan-ID: `CUBICAL-ARROW-SEMICUBICAL-CODES-V3.2`
 
 Status: **completed implementation plan**.
 
+Corrective-Continuation:
+`REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`.
+The completed rows remain evidence for the specialized square orientation,
+arbitrary-dimensional `{L,R,*}` action, and recursive frames. They do not
+establish generic `homdc_int`, a Sigma-derived lax-arrow category, or full
+cubical combinatorial adequacy.
+
 Supersedes: no completed plan. This is the implementation child of the
 completed cubical-dependent-hom plan. It reopens only the fully varying
 endpoint, iterated cubical-arrow, and semicubical-code continuations deferred

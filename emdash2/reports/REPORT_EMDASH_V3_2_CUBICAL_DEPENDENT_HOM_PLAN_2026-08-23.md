@@ -8,6 +8,11 @@ Status: **completed bounded implementation plan**. The fully varying endpoint
 telescope and combinatorial cubical continuations remain explicitly deferred
 at the precise prerequisites recorded below.
 
+Corrective-Continuation:
+`REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`.
+That plan reopens the generic endpoint telescope as primitive `homdc_int` and
+requires any two-sided total to derive through existing Sigma/comma machinery.
+
 Supersedes: no completed implementation plan. It promotes only the two-sided
 dependent-hom/cubical direction developed after the dependent-simplex and
 internal-laxity plans; those plans remain authoritative for their own scopes.
