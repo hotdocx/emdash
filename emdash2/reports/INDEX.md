@@ -1240,7 +1240,7 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`:
-  active corrective continuation nearing documentation closure. It derives
+  completed corrective continuation. It derives
   `homdc_int` from the existing `homd_int` after inner Sigma and pointwise
   opposite, rejects `Sigma_cat C (CommaFib_catd(id_C))` as the oplax
   orientation, and constructs the selected lax-arrow category by an outer
@@ -1249,15 +1249,16 @@ record.
   semicubes decode through the whole native nerve action.
 
 - `REPORT_EMDASH_V3_2_CUBICAL_ARROW_AND_SEMICUBICAL_CODES_PLAN_2026-08-23.md`:
-  completed foundational implementation child of the cubical-dependent-hom
-  plan. The intrinsic `CubicalArrow_cat(C)` and its
-  profiled lift iterate to variable-dimensional levels; set-classified
+  completed prototype/implementation child of the cubical-dependent-hom plan,
+  corrected foundationally by the August 24 internalization plan.
+  Its profiled lift, variable-dimensional levels, and set-classified
   `{L,R,*}` words form `SemiCubePlus_cat`, act contravariantly on those levels,
   and assemble a whole Cat-valued semicubical nerve. A recursive finite family
-  exposes all `2n` immediate faces and validates squares/cubes without a
-  dimension-specific record. Gray/walking-arrow, `homd_parameter_func`,
-  degeneracies, connections, Kan operations, and general `TwoSidedSigma(E)`
-  remain explicit later comparison/extension rows.
+  exposes all `2n` immediate faces. The former primitive `CubicalArrow_cat`
+  and explicit identity/composition runtime rules have since been replaced by
+  a transparent alias to the derived lax-arrow total; the checked recursive
+  evidence remains active. Gray/walking-arrow, `homd_parameter_func`,
+  degeneracies, connections, and Kan operations remain later rows.
 
 - `REPORT_EMDASH_V3_2_CUBICAL_DEPENDENT_HOM_PLAN_2026-08-23.md`:
   completed parent plan for a two-sided cross-corner dependent hom. It first
@@ -1267,12 +1268,13 @@ record.
   `Hom_{Hom_C(x1,y2)}(b o u,v o a)` without collapsing to the differently
   typed unit-profunctor cell. Later rows internalize endpoints, expose four
   square-edge projections, and test a six-faced cube before adding any
-  semicubical code layer or groupoidal-source specialization. The first
-  continuation now provides a fixed-boundary nested-Sigma square total:
+  semicubical code layer or groupoidal-source specialization. Its first
+  continuation provides a fixed-boundary nested-Sigma square total:
   top/bottom vary, left/right are constant, and a next-hom object exposes two
-  endpoint squares plus four side faces. Its intrinsic-arrow child now supplies
-  nondegenerate endpoint variation without making the still-useful general
-  parameter action a prerequisite.
+  endpoint squares plus four side faces. The completed August 24 correction
+  now derives nondegenerate endpoint variation as
+  `homd_int(id_(Op EdgeFamily))` followed by the outer opposite Sigma, without
+  making the independent general parameter action a prerequisite.
 
 - `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization master.

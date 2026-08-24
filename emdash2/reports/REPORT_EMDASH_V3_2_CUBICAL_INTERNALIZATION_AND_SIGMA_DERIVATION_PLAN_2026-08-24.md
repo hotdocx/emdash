@@ -4,7 +4,7 @@ Date: 2026-08-24 (America/Toronto)
 
 Plan-ID: `CUBICAL-INTERNALIZATION-SIGMA-DERIVATION-V3.2`
 
-Status: **active corrective implementation plan**.
+Status: **completed corrective implementation plan**.
 
 Supersedes: no completed plan. It corrects the foundational interpretation of
 the completed intrinsic-semicubical prototype while preserving its evidence.
@@ -447,7 +447,7 @@ lax-arrow category, or arbitrary-dimensional semicubical face action.
 | `CINT-ADEQUACY-9` | complete | `emdash3_2_semicubical_representables.lp` defines `StandardSemicube(n)` as Yoneda on `SemiCubePlus_cat`; its `p`-level computes to `Hom(p,n)=Path(CubeFaceCode(p,n))`. The Hom action of `semicubical_nerve_func` is the whole decoder to native restriction functors, the existing action path compares every decoded face with `cube_face_action_func`, and another Hom action remains. This is a uniform selected comparison at arbitrary `p,n`, not a claim that every semicubical set is a native nerve or that degeneracies/connections/Kan structure exist. The rule-free source/reviewer are green with warning count `1310` and zero LHS candidates. |
 | `CINT-FACADE-10` | complete | `emdash3_2_cubical.lp` is a rule-free canonical import facade over recursive frames and representable adequacy. Its concise dependency map names the `homdc_int`/Sigma foundation, profiled lifting, levels, code/action/nerve/frames, and Yoneda decoding; it owns no symbol or duplicate theory. |
 | `CINT-DOC-11` | complete | Synchronized Foundations, current status/SOP, canonical notation, root and `emdash2` READMEs, nested AGENTS authority inventories, report index, source/metrics registries, focused reviewer examples, and static health source metrics. The documents now distinguish the fixed-boundary `homdc_` view, derived target-first `homdc_int`, outer opposite-Sigma total, transparent `CubicalArrow_cat` facade, generic identity/composition normal forms, arbitrary-dimensional `{L,R,*}` action, and Yoneda representable decoding. Health was refreshed with `--no-check`; no broad aggregate was run. |
-| `CINT-CLOSE-12` | in progress | Audit every scoped row, checkpoint complete/deferred evidence, and hand off exact commits and prerequisites. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal without separate authority. |
+| `CINT-CLOSE-12` | complete | Audited all scoped rows and exact worktree state. Checkpoints are `bdf421c` (plan), `5d2fc67` (derived internal hom/total), `cf02336` (varying Sigma projection action), `9caf732` (identity/composition boundaries), `07ad671` (transparent facade migration), `0e06e93` (representable decoding/facade), and `a45b032` (authority synchronization), followed by this plan-only closure checkpoint. Focused owning sources/reviewers, unchanged warning comparisons, zero-candidate LHS audits, report/header/TOC/reference/catalog/static-health checks, script syntax, and diff hygiene are green. The long registered/example/CI/repository aggregates were deliberately not run. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal was performed. |
 
 ## 10. Validation And Git Policy
 
