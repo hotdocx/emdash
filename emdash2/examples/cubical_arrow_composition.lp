@@ -5,16 +5,19 @@
 
 require open emdash.emdash3_2_cubical_arrow_composition;
 
-// The category identity is the visible square with identity sides/filler.
+// The readable identity square remains a well-typed arrow. Category identity
+// itself stays at the canonical nested-Sigma owner.
 assert [C : Cat]
   (x y : τ (Obj C))
   (u : τ (Hom C x y)) ⊢
-  @id
-    (@CubicalArrow_cat C)
-    (@cubical_edge C x y u)
-  ≡ @cubical_square_id C x y u;
+  @cubical_square_id C x y u
+  : τ (Hom
+      (@CubicalArrow_cat C)
+      (@cubical_edge C x y u)
+      (@cubical_edge C x y u));
 
-// Visible category composition is the generic whisker-and-paste operation.
+// The readable whisker-and-paste composite also remains a well-typed arrow;
+// it is not selected as a second runtime normal form.
 assert [C : Cat]
   [x1 y1 z1 x2 y2 z2 : τ (Obj C)]
   (u : τ (Hom C x1 x2))
@@ -28,16 +31,13 @@ assert [C : Cat]
     (@homdc_square_fibre C x1 y1 x2 y2 u v a b)))
   (beta : τ (Obj
     (@homdc_square_fibre C y1 z1 y2 z2 v w c d))) ⊢
-  @comp_fapp0
+  @cubical_square_comp
+    C x1 y1 z1 x2 y2 z2
+    u v w a b c d alpha beta
+  : τ (Hom
     (@CubicalArrow_cat C)
     (@cubical_edge C x1 x2 u)
-    (@cubical_edge C y1 y2 v)
-    (@cubical_edge C z1 z2 w)
-    (@cubical_square C y1 z1 y2 z2 v w c d beta)
-    (@cubical_square C x1 y1 x2 y2 u v a b alpha)
-  ≡ @cubical_square_comp
-      C x1 y1 z1 x2 y2 z2
-      u v w a b c d alpha beta;
+    (@cubical_edge C z1 z2 w));
 
 // The pasted filler is a genuine cell at the composite sides.
 assert [C : Cat]

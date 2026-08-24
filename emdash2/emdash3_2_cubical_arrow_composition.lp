@@ -7,10 +7,12 @@
   presents the result at the composite sides; no cubical-specific coherence
   equation, filler, or unifier is added.
 
-  The identity and composition rules are scoped to visible CubicalArrow
-  constructors. The current global strict identity/associativity endpoint
-  cuts are used only to align the displayed raw endpoints; the cell terms
-  themselves remain the generic hom actions below.
+  These readable terms record the provisional hand presentation used before
+  CubicalArrow_cat became a transparent alias of the Sigma-derived lax-arrow
+  category. Category identity and composition now remain at their generic
+  nested-Sigma owners; no competing constructor rules are installed here.
+  The current global strict identity/associativity endpoint cuts are used only
+  to type the readable cell terms below.
 */
 
 require open emdash.emdash3_2_cubical_arrow;
@@ -139,20 +141,3 @@ symbol cubical_square_comp
     (@cubical_square_paste_cell
       C x1 y1 z1 x2 y2 z2
       u v w a b c d alpha beta);
-
-// Candidate category computations at visible constructors.
-rule @id
-      (@CubicalArrow_cat $C)
-      (Struct_sigma $x (Struct_sigma $y $u))
-  ↪ @cubical_square_id $C $x $y $u;
-
-rule @comp_fapp0
-      (@CubicalArrow_cat $C)
-      (Struct_sigma $x1 (Struct_sigma $x2 $u))
-      (Struct_sigma $y1 (Struct_sigma $y2 $v))
-      (Struct_sigma $z1 (Struct_sigma $z2 $w))
-      (Struct_sigma $c (Struct_sigma $d $beta))
-      (Struct_sigma $a (Struct_sigma $b $alpha))
-  ↪ @cubical_square_comp
-      $C $x1 $y1 $z1 $x2 $y2 $z2
-      $u $v $w $a $b $c $d $alpha $beta;

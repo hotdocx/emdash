@@ -8,11 +8,13 @@
   endpoint squares and four projected side faces.
 
   The source and target vertical edges u,v are fixed parameters of this first
-  bounded total. Consequently their two side faces are degenerate identities;
-  full nondegenerate endpoint variation remains gated by functoriality of
-  homd_int in its displayed-functor parameter. The bottom face deliberately
-  remains a Pi-section action over the stable Sigma-projection pullback rather
-  than being forced through a false strict-constant conversion.
+  bounded total. Consequently their two side faces are degenerate identities.
+  The later `emdash3_2_cubical_internalization` module now supplies full
+  endpoint variation by applying the existing `homd_int` to the pointwise
+  opposite inner edge total; no parameterized-hom primitive is required. The
+  bottom face here deliberately remains a Pi-section action over the stable
+  Sigma-projection pullback rather than being forced through a false
+  strict-constant conversion.
 */
 
 require open emdash.emdash3_2_cubical_dependent_hom;
