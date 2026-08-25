@@ -1144,7 +1144,8 @@ Total□(E)         = Op(Sigma(x1:K1^op),Op(EdgeFamily_E[x1])).
 Its canonical projection order is target edge, source edge, then `a`; the
 remaining Sigma-Hom object is `(b,alpha)`. The literal owners are
 `homdc_edge_catd`, `homdc_op_edge_catd`, `homdc_int`, `homdc_at`, and
-`homdc_total_cat`.
+`homdc_total_cat`. `EdgeFamily_E` is prose for `homdc_edge_catd(E)` and must
+not be confused with the unrelated older symbol `Edge_catd_func`.
 
 For the first groupoidal source coherence, comments may write
 

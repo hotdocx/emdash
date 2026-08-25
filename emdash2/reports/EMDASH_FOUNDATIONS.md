@@ -3731,12 +3731,41 @@ EdgeFamily_E[x1] = Sigma(x2 : K2), E[x1][x2]
 D_E              = Op_catd(EdgeFamily_E).
 ```
 
+`EdgeFamily_E` is expository notation, not a literal kernel symbol. The
+corresponding transparent declaration is `homdc_edge_catd(E)`:
+
+```text
+homdc_edge_catd(E) = Sigma_func(K2) o E
+
+homdc_edge_catd(E)[x1]
+  = Sigma(x2 : K2), E[x1][x2].
+```
+
+This symbol is unrelated to the older `Edge_catd_func`, which denotes the
+pointwise opposite representable used elsewhere in the presheaf-family
+calculus. The pointwise-opposite family `D_E` is literally
+`homdc_op_edge_catd(E) = Op_catd(homdc_edge_catd(E))`.
+
 The two-sided internal hom is the existing dependent internal hom at this
 variance-correct family:
 
 ```text
 homdc_int(E) = homd_int(id_D_E).
 ```
+
+The word “derived” is literal. `homdc_edge_catd`,
+`homdc_op_edge_catd`, and `homdc_int` are transparent definitions. Unfolding
+`homdc_int(E)` gives
+
+```text
+homd_int(id_funcd(homdc_op_edge_catd(E))).
+```
+
+No cubical internal-hom primitive, rewrite rule, or unification rule is added.
+The stable primitive machinery is the already-existing `homd_int`; the new
+name selects its variance-correct cubical instance. Because
+`Op_catd(Op_catd(X))` reduces to `X`, the source family of this displayed
+functor is again `homdc_edge_catd(E)`.
 
 Its canonical projection order is target edge `(y2,v)`, source edge `(x2,u)`,
 then `a : x1 -> y1`. The resulting category is
@@ -3765,6 +3794,19 @@ specialized lax-arrow category
 ```text
 LaxArrow_cat(C) = homdc_total_cat(hom_int(id_C))
 ```
+
+Equivalently, a readable general two-sided Sigma operation would be the
+transparent abbreviation
+
+```text
+TwoSidedSigma(E)
+  := homdc_total_cat(E)
+   = (Sigma(x1 : K1^op),
+        (Sigma(x2 : K2), E[x1][x2])^op)^op.
+```
+
+It is two ordinary Sigma totalizations with the two variance-forced opposite
+placements, not a second primitive total-category constructor.
 
 therefore has arrows `u : Hom_C(x,y)` as objects. `CubicalArrow_cat(C)` is now
 a transparent readability alias of this derived category, not an independent

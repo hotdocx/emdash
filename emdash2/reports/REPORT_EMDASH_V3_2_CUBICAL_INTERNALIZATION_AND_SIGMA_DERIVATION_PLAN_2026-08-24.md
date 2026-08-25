@@ -490,3 +490,232 @@ lax-arrow category, or arbitrary-dimensional semicubical face action.
 > complete until every scoped row is implemented, rejected with durable
 > evidence, or explicitly deferred behind a concrete prerequisite and all
 > affected authorities are synchronized.
+
+## 12. Post-Completion Declaration Clarification
+
+This section records the literal declarations behind the shorter
+`EdgeFamily`/two-sided-Sigma prose. It is a clarification of the completed
+implementation, not a new primitive design.
+
+### 12.1 How `homdc_int` is transparently derived
+
+Start with a mixed-variance family:
+
+```text
+E : K1^op -> Catd(K2).
+```
+
+Thus `E[x1] : K2 -> Cat` and `E[x1][x2] : Cat`.
+
+The prose name
+
+```text
+EdgeFamily_E[x1] := Sigma(x2 : K2), E[x1][x2]
+```
+
+is implemented by the literal symbol `homdc_edge_catd`:
+
+```text
+homdc_edge_catd(E) := Sigma_func(K2) o E.
+```
+
+An object of `homdc_edge_catd(E)[x1]` is `(x2,u)` with
+`u : E[x1][x2]`. For `E := hom_int(id_C)`, this fibre is
+`Hom_C(x1,x2)`, so `(x2,u)` is literally an edge `u : x1 -> x2`. The name
+`EdgeFamily_E` comes from that specialization. It is not a source symbol and
+is unrelated to the older `Edge_catd_func`, the pointwise-opposite
+representable used by the presheaf-family calculus.
+
+The next declaration is
+
+```text
+D_E := homdc_op_edge_catd(E)
+     := Op_catd(homdc_edge_catd(E)).
+```
+
+Thus `D_E[x1] = EdgeFamily_E[x1]^op`. This pointwise opposite is the essential
+variance adjustment.
+
+The code then declares
+
+```text
+homdc_int(E) := homd_int(id_D_E),
+```
+
+literally
+
+```text
+homdc_int(E)
+  := homd_int(id_funcd(homdc_op_edge_catd(E))).
+```
+
+This is “derived transparently” because `homdc_int` is a transparent
+`symbol ... := ...`: it has no primitive cubical constructor and owns no
+rewrite or unification rule. Unfolding it produces the already-existing
+stable `homd_int` owner at an identity displayed functor. Because
+`Op_catd(Op_catd(X))` reduces to `X`, its source family is again
+`homdc_edge_catd(E)`.
+
+The outer base is `K1^op`, so variance forces the canonical projection order:
+
+```text
+target y1
+  -> target edge (y2,v)
+    -> source x1
+      -> source edge (x2,u)
+        -> a : x1 -> y1.
+```
+
+At that projection the ordinary `homd_int` formula gives
+
+```text
+Hom_{D_E[x1]}(D_E[a^op](y2,v),(x2,u)).
+```
+
+Since `D_E[x1] = EdgeFamily_E[x1]^op`, this is
+
+```text
+Hom_{EdgeFamily_E[x1]}
+  ((x2,u),EdgeFamily_E[a^op](y2,v)).
+```
+
+Ordinary Sigma-Hom computation then exposes an object as
+
+```text
+b     : x2 -> y2
+alpha : E[x1][b](u) -> E[a^op][y2](v).
+```
+
+For `E = hom_int(id_C)`, the two endpoints reduce to `b o u` and `v o a`, so
+the filler is the selected directed lax cell
+
+```text
+alpha : b o u ==> v o a.
+```
+
+The literal readable endpoint of this projection is `homdc_at`.
+
+### 12.2 How the two-sided Sigma and `LaxArrow_cat` are derived
+
+The general two-sided total is
+
+```text
+TwoSidedSigma(E)
+  := (Sigma(x1 : K1^op),
+        (Sigma(x2 : K2), E[x1][x2])^op)^op.
+```
+
+The implementation names this transparent expression `homdc_total_cat`, not
+`TwoSidedSigma_cat`:
+
+```text
+homdc_total_cat(E)
+  := Op_cat(
+       Sigma_cat(K1^op,homdc_op_edge_catd(E))).
+```
+
+A future readable `TwoSidedSigma_cat(E)` would therefore be only a transparent
+alias of `homdc_total_cat(E)`. It would not own another object, Hom, identity,
+composition, or higher-action theory.
+
+Objects are `(x1,(x2,u))` with `u : E[x1][x2]`. An arrow from
+`(x1,(x2,u))` to `(y1,(y2,v))` consists of
+
+```text
+a     : x1 -> y1
+b     : x2 -> y2
+alpha : E[x1][b](u) -> E[a^op][y2](v).
+```
+
+The outer opposite turns the base arrow `y1 -> x1` in `K1^op` into the
+forward `a : x1 -> y1`; the inner opposite and the Sigma-Hom reversal produce
+the forward `b` and the selected direction of `alpha`.
+
+The ordinary lax-arrow category is the specialization
+
+```text
+LaxArrow_cat(C)
+  := homdc_total_cat(hom_int(id_C)).
+```
+
+Its objects are arrows of `C`, and its arrows are the lax squares above.
+Finally,
+
+```text
+CubicalArrow_cat(C) := LaxArrow_cat(C)
+```
+
+is a literal transparent readability/compatibility alias. The dependency is
+therefore:
+
+```text
+ordinary Sigma + pointwise opposite + homd_int
+  -> homdc_int
+  -> homdc_total_cat
+  -> LaxArrow_cat
+  -> CubicalArrow_cat  // transparent alias.
+```
+
+## 13. Follow-Up Cubical Adequacy Distinction
+
+Two useful statements must remain distinct.
+
+### 13.1 Geometric/computadic cube observation
+
+```text
+H : Functor(CubeShape(n),C)
+  |-> native_cube(H) : Obj(CubicalLevel_cat(C,n)).
+```
+
+This compares an independently presented geometric cube diagram with the
+native iterated-lax-arrow cell. It is the stronger independent validation, but
+requires a correct free lax/Gray cube shape. The Cartesian power of the
+walking arrow generally describes strictly commuting cubes and must not be
+silently substituted for the required lax shape. No `CubeShape(n)` or such
+observation is currently implemented.
+
+### 13.2 Representable/Yoneda realization
+
+```text
+eta : Hom_Psh(StandardSemicube(n),N_cube(C))
+  |-> eta[n](id_n) : Obj(CubicalLevel_cat(C,n)).
+```
+
+Here `N_cube(C)[n] = CubicalLevel_cat(C,n)`. A map from the representable
+standard semicube assigns a native cell to every face code, coherently under
+face substitution. By Yoneda this is another presentation of an already
+native `n`-cube, not an independent geometric cube model.
+
+The current implementation has `StandardSemicube(n)`, the native whole nerve,
+and a decoder sending each face code to its restriction functor. It does not
+yet package the object maps
+
+```text
+X |-> (the Yoneda section StandardSemicube(n) -> N_cube(C))
+eta |-> eta[n](id_n),
+```
+
+nor their beta/eta comparison. Generic `fib_cov_transf` and evaluation at
+`cube_face_identity(n)` supply the expected ingredients.
+
+The recommended order for a later goal is:
+
+1. package these two cubical Yoneda object maps and a selected point beta;
+2. only then select and validate an independent free lax cube shape and its
+   object-level geometric observation;
+3. defer whole mapping-category equivalences until the object operations and
+   their computational projections are stable.
+
+The simplicial ordinal observation already supplies the more substantive
+geometric direction at object level:
+
+```text
+H : Functor(DirectedSimplex_cat(n),C)
+  |-> ordinal_dependent_simplex_observation(H).
+```
+
+A simplicial Yoneda object operation would still be useful for symmetric
+whole-face packaging, but first requires a whole native dependent-simplex
+semisimplicial nerve. It is therefore a later coherence/organization task,
+not a prerequisite for the already-implemented ordinal-to-dependent-simplex
+decoder.
