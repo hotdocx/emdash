@@ -4,8 +4,7 @@ Date: 2026-08-25 (America/Toronto)
 
 Plan-ID: `CUBICAL-YONEDA-GRAY-CUBE-ADEQUACY-V3.2`
 
-Status: **completed implementation and prototype-lax graph correction; local
-checkpoint pending**.
+Status: **completed implementation and prototype-lax graph correction**.
 
 Supersedes: no completed plan. It is the semantic-adequacy continuation of
 `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`
@@ -568,8 +567,8 @@ This plan does not initially claim:
 | `CGCA-STRICT-PROJ-14` | complete, checkpoint `a70c71f`; public reading sharpened by row 17 | Runtime carrier projection rules were correctly rejected by subject reduction. No replacement unifier is needed. The existing whole carrier path yields a first-class object equality by `eq_ap` and the correctly dependent arrow comparison by `eq_apd : PathOver`; the strict carrier head and compositor computation remain untouched. Row 17 changes the public graph computation, not this stable-code/path design. |
 | `CGCA-NORMAL-LAX-15` | superseded as a blocker | `ReadablePseudoFunctorProfile` already supplies coherent pseudo capability over existing ambient carriers. It does not construct a carrier or disable the historical global strict cuts, but its existence means the repository must not claim that no such profile exists. A future arbitrary noninvertible lax carrier classifier remains a separate possible extension, not a prerequisite for retaining the current intended graph beta. |
 | `CGCA-RECLOSE-16` | complete historical checkpoint `a70c71f`; superseded by row 17 | Records the focused evidence for the first correction. Its decision to omit the runtime graph beta is superseded; the underlying core bridges and `eq_ap`/`eq_apd` strict-carrier observations remain valid. |
-| `CGCA-PROTOTYPE-LAX-17` | complete pending checkpoint | The stable whole public graph now has object and capped-arrow betas to component edges and the standard square, retains generic `fapp1_func`, and keeps the transparent totalization protected. Literal target/interchanger observations are restored. A registered `assertnot` and exactly three diagnosed graph-source critical pairs record the intended graph beta versus the historical generic identity variants. `ReadablePseudoFunctorProfile` is documented as existing evidence over an ambient carrier, not a missing carrier constructor. The subject-reduction-failing strict-carrier projection folds remain rejected; the whole carrier path and its `eq_ap`/`eq_apd` observations remain green. |
-| `CGCA-RECLOSE-18` | complete pending checkpoint | The graph source/reviewer, strict-profile reviewer, variable-dimensional decoder reviewer, dimension-two consumer, and central diagnostics are green under the 90-second ceiling. Core warnings remain `1290 = 1131 + 159`; graph warnings are the accepted `1311 = 1152 + 159`, exactly three identity-family critical pairs over the transparent dependency boundary. Strict LHS audits for core and graph report zero unreviewed candidates. Catalog generation/strict checking, TOC, report headers, active references, and diff hygiene are green. Long aggregates remain intentionally omitted because their absence does not block classification. |
+| `CGCA-PROTOTYPE-LAX-17` | complete, checkpoint `dfd5a08` | The stable whole public graph now has object and capped-arrow betas to component edges and the standard square, retains generic `fapp1_func`, and keeps the transparent totalization protected. Literal target/interchanger observations are restored. A registered `assertnot` and exactly three diagnosed graph-source critical pairs record the intended graph beta versus the historical generic identity variants. `ReadablePseudoFunctorProfile` is documented as existing evidence over an ambient carrier, not a missing carrier constructor. The subject-reduction-failing strict-carrier projection folds remain rejected; the whole carrier path and its `eq_ap`/`eq_apd` observations remain green. |
+| `CGCA-RECLOSE-18` | complete, correction checkpoint `dfd5a08` | The graph source/reviewer, strict-profile reviewer, variable-dimensional decoder reviewer, dimension-two consumer, and central diagnostics are green under the 90-second ceiling. Core warnings remain `1290 = 1131 + 159`; graph warnings are the accepted `1311 = 1152 + 159`, exactly three identity-family critical pairs over the transparent dependency boundary. Strict LHS audits for core and graph report zero unreviewed candidates. Catalog generation/strict checking, TOC, report headers, active references, and diff hygiene are green. Long aggregates remain intentionally omitted because their absence does not block classification. |
 
 ### 12.1 `CGCA-WALKING-BRIDGE-5` validation boundary
 
@@ -761,6 +760,8 @@ cd23484  validate Gray cube dimensions
 0835e22  synchronize mathematical and public documentation
 b3c9ef0  close the cubical Gray adequacy plan
 a70c71f  correct the Gray transformation graph boundary
+71a31d9  record the first graph-correction checkpoint
+dfd5a08  retain lax graph computation over prototype strict cuts
 ```
 
 The remaining inverse/equivalence, tensor-coherence, and simplicial-native-
