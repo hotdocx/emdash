@@ -68,6 +68,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_gray_interchanger.lp"),
     Path("emdash3_2_gray_interchanger_orientation.lp"),
     Path("emdash3_2_gray_transformation_graph.lp"),
+    Path("emdash3_2_gray_cubes.lp"),
     Path("emdash3_2_truncation_reflector.lp"),
     Path("emdash3_2_semisimplicial_face_codes.lp"),
     Path("emdash3_2_semisimplicial_index.lp"),

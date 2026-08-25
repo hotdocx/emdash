@@ -254,6 +254,10 @@ represented identity section, family-natural Sigma base change, and opposite
 totals. Its object reading, source side, retained target side, directed filler,
 and next hom action are public; it adds no graph primitive, Sigma eta, or
 pointwise naturality record;
+the fixed-bracketing positive-dimensional right-Gray cubes are
+`emdash3_2_gray_cubes.lp`; genuine Nat recursion gives dimensions one through
+three as `I`, `I tensor_R I`, and `I tensor_R (I tensor_R I)` while making no
+zero-dimensional unit, associativity, symmetry, or full monoidal claim;
 the classified computational homotopy-truncation reflector and its derived
 whole map action are `emdash3_2_truncation_reflector.lp`; it realizes the
 category of `n`-types through retained `TruncGrpdU(n)` packages, restricts
@@ -1093,7 +1097,10 @@ Use the following order:
     component edges, arrows expose both side projections and the existing
     directed filler, and another hom action remains iterable. The generic lax
     target side retains its internal-action normal form rather than being
-    identified with a separately named functor action;
+    identified with a separately named functor action. Its continuation
+    `emdash3_2_gray_cubes.lp` defines the `(n+1)`-dimensional fixed-bracketing
+    shape by genuine Nat recursion from the walking arrow, without postulating
+    a tensor unit or coherence between bracketings;
 79. `emdash3_2_truncation_reflector.lp` for the classified computational
     truncation reflector. It realizes `NType_cat(n)` through the existing
     retained-evidence `TruncGrpdU(n)` package, provides point-computing

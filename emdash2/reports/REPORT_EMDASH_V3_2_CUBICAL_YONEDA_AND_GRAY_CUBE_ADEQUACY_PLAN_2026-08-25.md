@@ -394,19 +394,25 @@ is the recursive successor input required by the Gray-cube decoder.
 
 ## 8. Fixed-Bracketing Gray Cubes
 
-After the orientation verdict, define one chosen recursion:
+The selected tensor has no unit comparison, so the implemented recursion uses
+the predecessor of the positive geometric dimension:
 
 ```text
-GrayCube_mu(1)       = WalkingArrow_cat
-GrayCube_mu(n+1)     = GrayTensor_mu(WalkingArrow_cat,GrayCube_mu(n)).
+GrayCubePos_R(0)       = WalkingArrow_cat
+GrayCubePos_R(succ n)  = GrayTensor_R(WalkingArrow_cat,GrayCubePos_R(n)).
 ```
+
+Thus index `n` denotes the `(n+1)`-dimensional cube. The first three values are
+judgmentally `I`, `I tensor_R I`, and `I tensor_R (I tensor_R I)`. This avoids
+inventing a dimension-zero unit for a tensor whose unit law is outside the
+selected right-closure boundary.
 
 This prepends the new coordinate and matches the selected right-closure
 currying order
 
 ```text
-GrayHom_mu(WalkingArrow tensor GrayCube_mu(n),C)
-  ~= GrayHom_mu(WalkingArrow,GrayHom_mu(GrayCube_mu(n),C)).
+GrayHom_lax(GrayTensor_R(WalkingArrow,GrayCubePos_R(n)),C)
+  ~= GrayHom_lax(WalkingArrow,GrayHom_lax(GrayCubePos_R(n),C)).
 ```
 
 Fixed bracketing is sufficient for an object-level first theorem. The plan
@@ -498,7 +504,7 @@ This plan does not initially claim:
 | `CGCA-YONEDA-BETA-3` | complete | Evaluation of the selected section computes to `semicubical_nerve_action_func(C,n,n,id_n)[X]`, not judgmentally to `X`. `cubical_yoneda_beta` is therefore derived by applying object evaluation to the nerve's existing whole `fapp1_id_path`; it adds no equality axiom and claims no eta law. The rule-free source has zero LHS candidates and exactly the dependency warning count (`1310`). |
 | `CGCA-GRAY-ORIENT-4` | complete | Checkpoint `d288339`. Promoted the generic third projection `tapp1_at_transf(epsilon,X)[g][f] -> epsilon[g o f]` at the represented-composition owner. Kernel, central diagnostics, typed endpoint probe, dedicated positive/negative reviewer, strict LHS audit, strict catalog, and exact warning comparison are green; warnings remain `1290 = 1131 + 159`. `emdash3_2_gray_interchanger_orientation.lp` derives first-class stable-to-readable paths and a capped `v o a ==> b o u` cell without endpoint collapse. Swapping coordinate roles constructs `gray_interchanger_swapped_square` in the native `CubicalArrow_cat`, while the unswapped application is rejected. |
 | `CGCA-WALKING-BRIDGE-5` | complete, checkpoint `6a9d54b` | `emdash3_2_gray_transformation_graph.lp` transparently constructs `epsilon:F=>G |-> (B -> LaxArrow_cat(C))` from the whole internal action, the new generic ordinary represented identity section, family-natural Sigma base change, and opposites. Objects read as native component edges; arrow projections expose `F[g]`, a retained target side in `Hom(G[x],G[y])`, the coordinate-swapped native filler, and another hom action. The generic lax target side is deliberately not equated with the separate term `G[g]`; strict-profile packaging is the next decoder prerequisite. No graph primitive, Sigma eta, pointwise naturality record, graph-specific rule, or new warning is added. The earlier whole `GrayHom_lax(WalkingArrow,C) -> LaxArrow_cat(C)` proposal remains rejected. |
-| `CGCA-GRAYCUBE-6` | pending | Define a fixed-bracketing positive-dimensional Gray-cube recursion after the orientation verdict; validate dimensions one through three without claiming unit/associativity/symmetry. |
+| `CGCA-GRAYCUBE-6` | complete, checkpoint pending | `emdash3_2_gray_cubes.lp` defines `GrayCubePos_R(n)` by genuine Nat recursion, with predecessor index `n` denoting geometric dimension `n+1`. The dedicated reviewer checks dimensions one through three as `I`, `I tensor_R I`, and `I tensor_R (I tensor_R I)`. The rule-free module claims no tensor unit, alternate bracketing, associator, coordinate permutation, or full monoidal structure. |
 | `CGCA-GRAY-DECODE-7` | pending | Construct the Gray-cube-to-native decoder using selected curry and the walking bridge. Publicize object action first; promote a whole functor only where recursion genuinely requires it. |
 | `CGCA-DIM-8` | pending | Validate dimensions one, two, and three: endpoints/generator; four edges and directed interchanger; six faces and retained next action. State the exact boundary to arbitrary variable `n`. |
 | `CGCA-SIMPLICIAL-DEFER-9` | pending | Audit and document the distinct later simplicial Yoneda prerequisite without constructing an unsettled native semisimplicial level facade. |
@@ -521,6 +527,11 @@ proportional-validation boundary: the changed kernel, central diagnostics,
 new source, and new reviewer have each checked directly; health/report-wide
 refresh remains for `CGCA-DOC-10` or the eventual close boundary if it is then
 needed to classify the release.
+
+`CGCA-GRAYCUBE-6` adds only one transparent Nat-recursive source and a focused
+reviewer. Both direct checks are green; it changes no rule, unifier, warning
+family, or central diagnostic, so the preceding warning/LHS evidence carries
+forward unchanged.
 
 ## 13. Validation And Git Policy
 
