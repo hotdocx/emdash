@@ -4791,14 +4791,19 @@ Comonad_A(D) = Monad_(A^op)(D^op).
 ```
 
 The evidence classifier alone does not retain an opposite matching head under
-ordinary composition in `A`. The computational facade therefore exposes a
-stable whole `cokleisli_extend_func` and point owner, with explicit equality
-evidence to endpoint-swapped monadic extension. Ambient composition owns the
-dual beta and accumulation laws, coextension of the counit is identity, and
-the standard comultiplication component compiles to coextension of
-`id_DX`. Derived co-Kleisli cut remains transparent. The dual rule has the
-corresponding classified `Op_cat` and `EqSkeleton_cat` projection reports.
-Standard counit and comultiplication remain stable whole observations. For
+ordinary composition in `A`. The computational mirror is therefore limited to
+heads that active triangular rules must still discriminate after Op
+normalization: stable counit, comultiplication, and point coextension. Whole
+coextension is not such a discriminator; it transparently reuses the
+endpoint-swapped primary monadic whole extension and retains that owner's
+higher action. Its generic object projection reaches the stable point through
+the surviving `Op_func(D)` fold. Thus this is not a duplicated full comonad
+theory, and no whole proof-time or propositional comparison is needed.
+Ambient composition owns the dual beta and accumulation laws, coextension of
+the counit is identity, and the standard comultiplication component compiles
+to coextension of `id_DX`. Derived co-Kleisli cut remains transparent. The
+dual rule has the corresponding classified projection reports. Standard
+counit and comultiplication remain stable whole observations. For
 `J : Adjunction(F,G)`, the layer constructs the monad on `G o F` with
 multiplication `G epsilon F` and the comonad on `F o G` with comultiplication
 `F eta G`.

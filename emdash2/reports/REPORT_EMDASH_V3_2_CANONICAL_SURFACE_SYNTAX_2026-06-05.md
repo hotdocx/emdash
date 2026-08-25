@@ -2005,10 +2005,12 @@ CoKCut_C(f2,f1) = f2 o Delta(f1).
 ```
 
 `Comonad_A(D)` is transparently `Monad_(A^op)(D^op)`. The computational owners
-are
-`counit_comonad_transf`, `comult_comonad_transf`,
-and stable `cokleisli_extend_func`/`cokleisli_extend_fapp0`. Ambient
-composition computes
+are stable `counit_comonad_transf`, `comult_comonad_transf`, and point
+`cokleisli_extend_fapp0`, because these are the heads consumed by triangular
+runtime rules. Whole `cokleisli_extend_func` is transparently the
+endpoint-swapped `kleisli_extend_func` on the opposite category; generic
+projection then folds to the stable point. This is a narrow computational
+mirror, not a duplicated full comonad theory. Ambient composition computes
 
 ```text
 epsilon^a(f2) o Delta(f1) -> f2 o f1
@@ -2016,8 +2018,9 @@ Delta(f2) o Delta(f1)     -> Delta(f2 o Delta(f1)).
 ```
 
 `cokleisli_cut_func`/`cokleisli_cut_fapp0` are transparent notation. Whole
-standard observations are stable; names ending in `_op_path`, `_fapp0_path`,
-or `_antecedent_path` record their agreement with the opposite views.
+standard observations are stable and compute through `Op_transf` folds. No
+opaque `_op_path`, `_fapp0_path`, or `_antecedent_path` comparison is part of
+the selected surface.
 
 For `J : Adjunction(F,G)`, use `adjunction_monad(J)` on `G o F` and
 `adjunction_comonad(J)` on `F o G`; their multiplication and comultiplication

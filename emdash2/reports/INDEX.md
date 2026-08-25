@@ -1240,16 +1240,20 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_MONAD_COMONAD_COMPUTATION_PLAN_2026-08-23.md`:
-  completed post-`ac1671c` definitional-duality correction. Monad
+  completed post-`ad46632` transparent-whole correction over the completed
+  definitional-duality checkpoint. Monad
   remains primary, ordinary ambient `comp_fapp0` owns Došen beta and
   accumulation, and `KleisliCut` remains transparent notation. The optional
   comonad layer now uses a transparent classifier plus a measured narrow
-  stable variance mirror: canonical Op observations and point components fold
-  computationally, whole coextension uses proof-time comparison, and all
-  opaque equality bridges have been removed. Focused checks, the 2,260-check
-  catalog, strict audits, warning classification, the complete reviewer sweep,
-  a fresh 270-file health pass, and the independent 270-file full CI plus all
-  post-check gates are green.
+  stable variance mirror: only counit, comultiplication, and point coextension
+  have stable dual heads because active runtime LHSs discriminate on them.
+  Whole coextension transparently reuses primary monadic whole extension; its
+  former custom projection and proof-time equation have been removed. All
+  opaque equality bridges remain absent. Focused correction checks, strict
+  audit, warning classification, the 2,260-check catalog, and fresh
+  270-target health are green. Per the user's 2026-08-25 validation boundary,
+  the already-started independent CI sweep was stopped and no further
+  repository-wide long aggregate was run.
   Explicit Kleisli-category, free-syntax decidability, and TypeScript work
   remain separately gated.
 - `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:

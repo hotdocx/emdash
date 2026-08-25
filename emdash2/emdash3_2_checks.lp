@@ -11231,7 +11231,8 @@ assert [A : Cat]
       X Y
       (@counit_comonad_transf A D C);
 
-// Stable whole coextension projects to its stable point owner.
+// Transparent whole coextension projects through the primary monadic whole
+// owner and the surviving Op_func point fold to the stable point owner.
 assert [A : Cat]
   [D : τ (Functor A A)]
   (C : τ (@Comonad A D))
@@ -11244,8 +11245,8 @@ assert [A : Cat]
     f
   ≡ @cokleisli_extend_fapp0 A D C X Y f;
 
-// Typed reflexivity exercises the proof-time whole comparison to the opposite
-// monad; no opaque equality constant is involved.
+// Typed reflexivity exercises the transparent whole definition; no second
+// whole owner, proof-time equation, or opaque equality constant is involved.
 assert [A : Cat]
   [D : τ (Functor A A)]
   (C : τ (@Comonad A D))

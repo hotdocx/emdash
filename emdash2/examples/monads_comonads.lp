@@ -9,8 +9,9 @@
 
   KleisliCut is only transparent derived notation. Opposite-derived comonad
   observations and point coextension compute into a narrow stable variance
-  mirror after Op normalization; the whole coextension comparison is a
-  proof-time equation. No propositional equality bridge is involved.
+  mirror after Op normalization; whole coextension transparently reuses the
+  endpoint-swapped primary monadic whole owner. No propositional equality or
+  whole proof-time bridge is involved.
 */
 
 require open emdash.emdash3_2_monads;
@@ -170,7 +171,8 @@ assert [A : Cat]
         f2
         (@cokleisli_extend_fapp0 A D C X Y f1));
 
-// Both whole computational owners retain another hom action.
+// The primary whole owner and its transparent dual view retain another hom
+// action; only the dual point projection has a separate stable runtime head.
 assert [A : Cat]
   [T : τ (Functor A A)]
   (M : τ (@Monad A T))

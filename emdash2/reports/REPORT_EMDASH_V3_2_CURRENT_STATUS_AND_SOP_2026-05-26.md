@@ -59,12 +59,13 @@ detailed probe evidence.
   multiplication observations. Whole extension retains higher action, while
   ordinary ambient `comp_fapp0` owns Došen beta and accumulation. Kleisli cut
   is transparent derived notation. `Comonad(D)` is the transparent
-  `Monad(D^op)` classifier, while a stable whole coextension facade supplies
-  executable ambient dual beta, accumulation, counit-extension identity, and
-  the comultiplication bridge with equality evidence back to the opposite
-  monad. Existing adjunctions construct both structural instances. The module
-  claims neither an explicit Kleisli category, free syntax, nor a global
-  decision procedure.
+  `Monad(D^op)` classifier. Stable counit, comultiplication, and point
+  coextension heads supply the narrow runtime mirror needed by ambient dual
+  beta, accumulation, counit-extension identity, and the comultiplication
+  bridge. Whole coextension transparently reuses endpoint-swapped monadic
+  whole extension; no whole unifier or equality bridge remains. Existing
+  adjunctions construct both structural instances. The module claims neither
+  an explicit Kleisli category, free syntax, nor a global decision procedure.
 - `emdash3_2_direct_cover_completion_locality.lp`: downstream conventional
   comparison for the direct whole-presheaf cover-completion HIT. A derived
   retained-member theorem is projected through one whole transformation
@@ -3890,11 +3891,17 @@ delta/Kleisli composition is not the §5.8.3 ambient normalization owner.
 Accordingly `kleisli_cut_func` and `kleisli_cut_fapp0` are transparent views of
 `g* o f`, not primitive heads.
 
-The evidence classifier remains `Comonad(D)=Monad(D^op)`, but ordinary
-composition in `A` cannot retain a double-opposite matching head. Stable whole
-`cokleisli_extend_func` and its point owner therefore form the computational
-facade, with explicit whole/point equality evidence to opposite monadic
-extension. Ambient composition computes
+The evidence classifier remains transparently
+`Comonad_A(D)=Monad_(A^op)(D^op)`. Opposite normalization can erase heads that
+runtime laws must discriminate on, but this justifies only a narrow
+computational mirror, not a duplicate comonad theory. Stable dual heads are
+retained for counit, comultiplication, and point coextension because those
+exact heads occur in active triangular rewrite LHSs. Whole coextension does
+not occur in such an LHS and is transparently the endpoint-swapped primary
+monadic whole extension. Generic `fapp0` projection followed by the surviving
+`Op_func(D)` point fold reaches the stable point, while primary whole higher
+action remains available. There is no whole coextension unifier or opaque
+duality equality evidence. Ambient composition computes
 
 ```text
 epsilon^a(f2) o Delta(f1) -> f2 o f1
@@ -3905,18 +3912,16 @@ Coextension of the standard counit is identity, and standard
 comultiplication compiles to coextension of `id_DX`. Co-Kleisli cut is also
 transparent derived notation.
 
-The corrective tranche has 37 focused central checks and twelve reviewer
-statements before catalog regeneration. Its warning-enabled owner check is
-`1135/159`: four classified accumulation/projection reports, namely monad and
-comonad against `Op_cat` and `EqSkeleton_cat`. Component-first and Terminal
-orders are joined, a broad Op runtime bridge was rejected because it duplicated
-19 higher-action projection interactions, and the strict module LHS audit is
-empty. The fresh catalog has 2,244 checks across 110 areas with zero
-unclassified entries. The 270-file health snapshot and full CI are green;
-CI completed in 1,316.709 seconds and its post-check gates passed 44 Python
-and 5 Node tests. The health source/check snapshots are
-`3bdea4b20549469d0d2cdbfad57a4a184e333b58f7a6d27467419ddcbc48a0bc` and
-`efac5fae4151945619b94ef41a713fc8eb97b99fb6e3e5ad594cd731d539acc3`.
+Historical checkpoint `ad46632` records 52 focused central checks, 14 reviewer
+statements, a 2,260-check catalog with zero unclassified entries, the
+`1116/159` base and `1140/159` monad-module warning inventories, fresh 270-file
+health, and a green 1,802.847-second full CI. The post-checkpoint
+transparent-whole correction removes the unnecessary whole projection rule
+and whole proof-time equation while retaining all focused computations and an
+empty strict module LHS audit. Its warning inventory, 2,260-check catalog, and
+fresh 270-target health are synchronized. Per the user's 2026-08-25 scoped
+validation instruction, the correction does not claim a new completed full-CI
+run; exact closure evidence is recorded in the living monad/comonad plan.
 Free monad/comonad syntax, a commuting decision procedure, explicit
 Kleisli/Eilenberg--Moore categories, and a TypeScript declaration surface
 remain separate consumer-led work.

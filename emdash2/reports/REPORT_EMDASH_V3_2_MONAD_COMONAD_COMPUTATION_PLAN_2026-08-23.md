@@ -4,10 +4,12 @@ Date: 2026-08-23 (America/Toronto)
 
 Plan-ID: `MONAD-COMONAD-COMPUTATION-V3.2`
 
-Status: **completed post-checkpoint definitional-duality correction as of
-2026-08-25**. Commit `ac1671c` preserves the prior ambient-composition tranche
-as a historical checkpoint. `MCD-MONAD-SOP-13`, `MCD-OP-DEF-14`, the optional
-`MCD-CODUAL-15`, and `MCD-RECLOSE-16` are complete in the worktree. Free
+Status: **completed post-`ad46632` transparent-whole correction as of
+2026-08-25**. Commit `ad46632` preserves the completely validated
+definitional-duality tranche as a historical checkpoint. The subsequent
+review found that stable whole coextension plus a proof-time comparison was
+unnecessary: only its point projection is a runtime triangular discriminator.
+`MCD-CODUAL-WHOLE-17` and its scoped reclosure are complete. Free
 syntax/decidability and an explicit Kleisli category remain deliberately
 outside this goal.
 
@@ -32,22 +34,24 @@ facade. This plan is authoritative.
 Side-Task-Ledger: `MCD-00`, `MCD-OWNER-1`, `MCD-MONAD-2`, `MCD-KLEISLI-3`,
 `MCD-OP-4`, `MCD-ADJ-5`, `MCD-CLOSE-6`, `MCD-FREE-7`, `MCD-TS-8`,
 `MCD-AMBIENT-9`, `MCD-DUAL-10`, `MCD-KLCAT-11`, `MCD-RECLOSE-12`,
-`MCD-MONAD-SOP-13`, `MCD-OP-DEF-14`, `MCD-CODUAL-15`, and
-`MCD-RECLOSE-16`
+`MCD-MONAD-SOP-13`, `MCD-OP-DEF-14`, `MCD-CODUAL-15`,
+`MCD-RECLOSE-16`, `MCD-CODUAL-WHOLE-17`, and `MCD-RECLOSE-18`
 
 Baseline: clean assistant-authored historical checkpoint
-`ac1671c` over the user's earlier checkpoint `c1f4419`
+`ad46632` over `ac1671c` and the user's earlier checkpoint `c1f4419`
 
 Worktree: `/home/user1/emdash1-monads-v3.2`
 
 Branch: `goal/monad-comonad-computation-v3.2`
 
-Git authority: the user's 2026-08-23 instruction explicitly authorizes
+Git authority: the user's 2026-08-23 instruction explicitly authorized
 restoring the `main` checkout to `/home/user1/emdash1`, creating this dedicated
 goal branch/worktree, starting the persistent goal, evolving this plan, and
-performing the scoped implementation and validation. It does **not** authorize
-commits, pushes, merges, publication, release, history rewriting, branch
-deletion, or worktree removal.
+performing the scoped implementation and validation. The user separately
+authorized the local historical checkpoint `ad46632`. The current correction
+does **not** carry new commit authorization, and pushes, merges, publication,
+release, history rewriting, branch deletion, and worktree removal remain
+unauthorized.
 
 Recovery archive: response `0001` is archived at
 `/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-23_01a02f686142/responses/0001_2026-08-23T16-44-54Z_01a02f6e-40e9-7583-a15c-955153fb9f89.md`.
@@ -417,25 +421,34 @@ critical-pair analysis while still missing its exact open runtime term. That
 runtime false negative is the measured stable-discriminator blocker required
 by the fallback hierarchy.
 
-The selected result therefore keeps the transparent `Comonad` classifier but
-uses the smallest stable variance mirror already present at `ac1671c`:
+The `ad46632` checkpoint kept the transparent `Comonad` classifier but still
+retained a stable whole and point coextension mirror. Further review showed
+that this was one stable head too many. Stable heads are justified by runtime
+discrimination, not merely by duality or API symmetry:
 
 - `Op_transf(unit)` and `Op_transf(mult)` fold to stable whole counit and
   comultiplication observations, with reverse `Op_transf` folds for
-  double-opposite recovery;
+  double-opposite recovery. These whole observations remain stable because
+  their heads occur under the triangular `tapp*` discriminators;
 - direct opposite unit/multiplication components fold toward the stable
   components, preserving the component-first triangular heads;
-- whole opposite extension is related to stable whole coextension by an
-  SOP-minimal `unif_rule`, so the primary Monad runtime owner is not erased;
+- whole coextension is transparently the endpoint-swapped primary monadic
+  whole extension. It needs neither a second primitive owner, a custom `fapp0`
+  rule, nor a proof-time comparison, because no triangular LHS discriminates
+  on the whole coextension head;
 - point opposite extension folds at the surviving `Op_func(D)` head, with all
-  category and endpoint LHS slots inferred; and
+  category and endpoint LHS slots inferred. This stable point remains
+  necessary because ambient co-beta and accumulation discriminate on it; and
 - the duplicated ambient dual beta/accumulation rules operate only on those
-  stable mirror heads.
+  stable point and observation heads.
 
 All former opaque equality constants have been deleted. This is the same
 layered pattern seen elsewhere: transparent dual classifiers at theorem level,
-with paired stable owners only where normalization destroys variance
-discrimination.
+with stable owners only where normalization destroys a required runtime
+discriminator. The quiet-green
+`tmp/probes/monad_comonad_transparent_whole_review.lp` confirms that generic
+whole projection, retained higher action, co-beta, and accumulation all work
+with only the stable point mirror.
 
 ## Adjunction-Derived Consumers
 
@@ -521,10 +534,12 @@ Every candidate implementation must include:
 | `MCD-RECLOSE-12` | historical checkpoint | `MCD-AMBIENT-9`, `MCD-DUAL-10` | Checks/examples/authorities, catalog, health, warning/order audits, and full 270-file CI are preserved at `ac1671c`. |
 | `MCD-MONAD-SOP-13` | complete | checkpoint `ac1671c`; response `0007` | Primary Monad rules bind category/functor indices once at rigid operation heads; strict LHS audit is empty. Whole/point semantic comparison uses two proof-time equations at the actual post-`mu` normal forms, and the opaque path is gone. |
 | `MCD-OP-DEF-14` | complete | accepted `MCD-MONAD-SOP-13` | `Op_transf _ _ _ _ (Op_transf _ _ _ _ eta) -> eta` is the active involution owner. Base checking is green at `1116/159`, down from `1131/159`, and the opposite-adjunction counit route computes. |
-| `MCD-CODUAL-15` | complete | accepted `MCD-MONAD-SOP-13`, `MCD-OP-DEF-14` | The transparent classifier plus measured narrow stable variance mirror provides definitional whole observations, component and point folds, whole proof-time comparison, ambient dual beta/accumulation, double-opposite recovery, and an adjunction consumer. Every opaque duality equality constant has been removed. |
-| `MCD-RECLOSE-16` | complete | accepted implementation rows | Focused and full example validation, strict LHS audits, warning classification, the 2,260-check catalog, fresh 270-file health, and the independent 270-file full CI plus all post-check gates are green. |
+| `MCD-CODUAL-15` | historical checkpoint | accepted `MCD-MONAD-SOP-13`, `MCD-OP-DEF-14` | Checkpoint `ad46632` removed opaque duality evidence and supplied the narrow runtime mirror, but still retained an unnecessary stable whole coextension plus proof-time comparison. `MCD-CODUAL-WHOLE-17` corrects that final excess owner. |
+| `MCD-RECLOSE-16` | historical checkpoint | accepted implementation rows | The 2,260-check catalog, warning/audit boundary, fresh 270-file health, and independent full CI are preserved at `ad46632`. |
+| `MCD-CODUAL-WHOLE-17` | complete | checkpoint `ad46632`; user review | Stable whole coextension is now the transparent endpoint-swapped primary monadic whole owner. Its custom point projection and whole unifier are removed; stable observations and stable point coextension remain as the only justified dual runtime discriminators. |
+| `MCD-RECLOSE-18` | complete | accepted `MCD-CODUAL-WHOLE-17`; user-scoped validation boundary | Focused module/check/example/probe validation, strict LHS audit, active rationale documents, unchanged `1140/159` module warnings, the 2,260-check catalog, and fresh 270-target health are synchronized. Per the user's 2026-08-25 instruction, no further repository-wide long aggregate was required; an already-started independent CI sweep was stopped after its snapshot gate and initial green targets. |
 
-At most one implementation row is in progress. A rejected probe updates the
+No implementation row remains in progress. A rejected probe updates the
 decision ledger and may split or defer its dependent row rather than forcing
 the proposed signature.
 
@@ -544,7 +559,7 @@ the proposed signature.
 | `D-MCD-010` | accepted | The first real consumer is the monad/comonad induced by the existing indexed adjunction. |
 | `D-MCD-011` | refined Git boundary | Dedicated branch/worktree and scoped edits were initially authorized without commits. The user separately authorized one local post-validation checkpoint on 2026-08-25; remote, integration, history-rewrite, publication, and cleanup mutations remain unauthorized. |
 | `D-MCD-012` | resolved/accepted | Kleisli extension remains the selected whole/point monadic runtime owner. Two SOP-minimal proof-time equations connect it to the actual semantic normal forms; no opaque equality constant or hot expansion is used. |
-| `D-MCD-013` | corrected/accepted | `Comonad` remains a transparent classifier. Stable counit/comultiplication and whole/point coextension are retained only as the measured variance mirror where Op normalization loses the discriminator; canonical Op terms fold or unify into those heads without equality evidence. |
+| `D-MCD-013` | corrected/accepted | `Comonad` remains a transparent classifier. Stable counit/comultiplication and point coextension are retained only where Op normalization loses a required runtime discriminator. Whole coextension transparently reuses primary monadic whole extension. |
 | `D-MCD-014` | reversed/accepted requirement | Ambient `comp_fapp0(g*,f*) -> ...` is required. Its warning families must be classified and joined where appropriate; warning count alone is not a veto. |
 | `D-MCD-015` | historical/superseded | The inferred-slot result remains useful evidence, but the primitive stable-cut rule it governed is no longer the selected owner. |
 | `D-MCD-016` | corrected/accepted | `adjunction_monad(Op_adjunction(J))` folds into the stable adjunction-comonad witness. Both polarity observations compute, and comultiplication is definitionally the Op-derived opposite multiplication (`F eta G` mathematically). |
@@ -552,7 +567,7 @@ the proposed signature.
 | `D-MCD-018` | accepted source correction | Došen's delta/Kleisli composition and Kleisli category are separate from the ambient-composition reductions used by §5.8.3. |
 | `D-MCD-019` | accepted warning policy | Critical-pair reports are classified diagnostic evidence. Preserve intended computation unless an actual cycle, subject-reduction failure, unacceptable conversion loss, or better owner is demonstrated. |
 | `D-MCD-020` | accepted separation | A future explicit Kleisli category may derive `KleisliCut` from its ordinary composition and extension from its canonical right functor; it is not part of the corrective ambient tranche. |
-| `D-MCD-021` | corrected/accepted | The former 19-report bridge delta was warning evidence, not a veto. The selected point bridge matches only the surviving `Op_func(D)` owner; the whole bridge is proof-time only. Its projection orders are classified and intended typed routes are checked. |
+| `D-MCD-021` | corrected/accepted | The former 19-report bridge delta was warning evidence, not a veto. The selected point bridge matches only the surviving `Op_func(D)` owner. The former whole proof-time bridge is removed because transparent whole reuse is sufficient. |
 | `D-MCD-022` | historical warning boundary | `1135/159` is the `ac1671c` module inventory. The current definitional-duality boundary is recorded separately by `D-MCD-035`. |
 | `D-MCD-023` | accepted scope correction | Do not implement a free monad/comonad syntax, normalizer, or commuting decision procedure; use Došen's results only to select the useful ambient reductions. |
 | `D-MCD-024` | accepted definitional boundary | Opaque equality constants may not mediate Monad/comonad duality or semantic/runtime presentations. Use transparent definitions, selected runtime folds, or narrowly validated `unif_rule`s. |
@@ -562,12 +577,14 @@ the proposed signature.
 | `D-MCD-028` | accepted fallback hierarchy | Weighted colimits are transparent opposite-weighted limits, while lower variance infrastructure sometimes has parallel stable owners (`Prof_imply_cov/con`, `hom_int/con_int`). A comonad mirror is a last-resort generic variance design, not the first solution. |
 | `D-MCD-029` | rejected probe shape | The expanded semantic-unification and raw dual rules that repeated `D[X]`, `D[Y]`, identity endpoints, and `Op_func(D)` together are anti-SOP false-negative probes. The later point bridge keeps only the independently necessary `Op_func(D)` discriminator. |
 | `D-MCD-030` | accepted measured blocker | Transparent dual accumulation is subject-reduction feasible, but the transparent co-beta rule was registered yet missed its exact open runtime term. This runtime false negative, not warning count, justifies the narrow stable variance mirror. |
-| `D-MCD-031` | accepted runtime/proof-time split | Whole coextension uses `unif_rule`; point coextension uses a runtime `Op_func(D)` fold. This preserves primary Monad runtime heads and still feeds ambient comonad normalization. |
+| `D-MCD-031` | historical/superseded | `ad46632` used a whole `unif_rule` and point runtime fold. The resulting two whole runtime heads were an unnecessary asymmetry; `D-MCD-038` replaces it. |
 | `D-MCD-032` | accepted component direction | Raw opposite unit/multiplication components fold toward stable comonad components. The reverse direction erased component-first triangular discriminators and was rejected. |
 | `D-MCD-033` | accepted observation duality | Whole unit/multiplication under `Op_transf` fold to counit/comultiplication, with reverse Op folds for double-opposite recovery. No opaque equality constant remains. |
 | `D-MCD-034` | accepted adjunction mirror | The stable adjunction-comonad witness is retained because a transparent defined argument is not a reliable observation discriminator. The opposite-adjunction monad folds into it and all four operations compute. |
 | `D-MCD-035` | accepted warning boundary | Base warnings are `1116/159`; the monad module is `1140/159`. Its 24-report delta is classified as eight accumulation, nine point-bridge, four double-Op observation, two adjunction-operation, and one opposite-adjunction witness orders. Warnings remain diagnostic; typed intended routes are green. |
 | `D-MCD-036` | accepted local checkpoint | After the complete green closeout, the user explicitly authorized committing this bounded tranche as a local historical checkpoint. This does not authorize push, merge, publication, release, history rewriting, branch deletion, or worktree removal. |
+| `D-MCD-037` | accepted stable-head criterion | A dual stable head is justified only when an active runtime LHS must discriminate on it after Op normalization. API symmetry, warning count, or proof-time convenience alone is insufficient. |
+| `D-MCD-038` | accepted transparent whole | No triangular rule matches whole coextension. Define it transparently as endpoint-swapped `kleisli_extend_func`; generic projection plus the retained point fold gives the stable point, and primary higher action remains available. Remove the custom whole projection rule and whole unifier. |
 
 ## Historical First-Checkpoint Evidence
 
@@ -627,9 +644,9 @@ The warning-enabled module check is exactly `1131/159`, so the accepted
 module adds zero warnings. The strict module LHS audit reports zero
 reconstructible compound slots and zero unreviewed clauses.
 
-## Post-ac1671c Definitional-Duality Evidence
+## Historical ad46632 Definitional-Duality Evidence
 
-The primary Monad correction is focused-green. Its ambient beta,
+At checkpoint `ad46632`, the primary Monad correction was focused-green. Its ambient beta,
 component-beta, accumulation, unit-extension, and multiplication-component
 rules have SOP-minimal inferred LHS slots. The semantic whole and point
 comparisons are proof-time equations at the actual post-multiplication normal
@@ -657,7 +674,7 @@ tmp/probes/monad_comonad_component_unif_review.lp
   raw-component-to-stable direction: quiet-green and strict-LHS-green
 ```
 
-The promoted module has no opaque constants. Canonical raw Op observations,
+The checkpointed module has no opaque constants. Canonical raw Op observations,
 components, and point extensions feed the stable mirror; whole extension uses
 proof-time comparison. Both stable and raw ambient co-beta/accumulation,
 double-opposite observation recovery, retained higher action, and all four
@@ -698,6 +715,44 @@ strict LHS audit, and strict catalog freshness. The user subsequently
 authorized one local historical checkpoint of this validated tranche. Push,
 merge, publication, release, history rewrite, branch deletion, and worktree
 removal remain outside that authorization.
+
+## Post-ad46632 Transparent-Whole Evidence
+
+The owner-position probe
+`tmp/probes/monad_comonad_transparent_whole_review.lp` is quiet-green and
+strict-LHS-green. With whole coextension defined transparently as
+endpoint-swapped `kleisli_extend_func`, it verifies:
+
+- generic whole object projection reaches stable point coextension through the
+  existing primary projection and `Op_func(D)` point fold;
+- the primary whole owner retains the next hom action;
+- the projected whole term feeds ambient comonad beta; and
+- two projected whole terms feed ambient comonad accumulation.
+
+The active correction therefore removes the primitive/injective whole
+coextension owner, its custom `fapp0` rule, and its proof-time equation. Stable
+counit, comultiplication, and point coextension remain because their heads are
+actual triangular runtime discriminators. This is explicitly a narrow
+computational mirror rather than a duplicated full comonad theory. Focused
+module, central, reviewer, and probe checks are green, and the strict module
+LHS audit remains empty. Warning-enabled module checking remains `1140/159`
+against the `1116/159` base: removing the unnecessary whole owner changes the
+architecture, not the classified warning boundary. The regenerated catalog
+contains 2,260 checks across 110 mapped areas with zero unclassified checks.
+Fresh health checks all 270 registered kernel/example targets with zero
+failures and zero resumed results; its source-metrics and checked-content
+snapshots are respectively
+`e7914e963e5a71d01907813e284f9f792a44bb9bd1668af8b516ff81f519c7cd`
+and `aba9a05571c9e6d7785d9e3800feeaba354fb354149f6182638dbeb9b7be664d`.
+
+After that health run, the user explicitly narrowed final validation to the
+changed files and features and asked to avoid further repository-wide long
+aggregates. An independent CI sweep that had just started was therefore
+stopped after its health-snapshot gate and initial green targets. The scoped
+closure uses the focused checks above plus catalog, health-snapshot,
+active-reference, report-header, source-TOC, and exact-diff consistency gates;
+it does not claim a new completed full-CI run for this post-checkpoint
+correction.
 
 ## Historical ac1671c Corrective Evidence
 
@@ -879,18 +934,17 @@ Stop and revise rather than promote if:
 - warning neutrality is obtained only by replacing ambient computation with
   a private operation head.
 
-## Current Persistent Goal Objective
+## Completed Persistent Goal Objective
 
 ```text
-Execute the post-ac1671c definitional-duality correction in this evolving
-plan. Keep Monad primary; first make its triangular rules and semantic
-comparison obey the active rewrite/unification SOP, then improve generic Op
-infrastructure where measured, and only afterward derive the optional
-comonad surface uniformly through transparent Op definitions plus the minimum
-justified dual runtime instances. Remove opaque equality bridges, treat
-warnings as diagnostic rather than vetoes, keep free syntax/decidability and
-explicit Kleisli categories out of scope, and synchronize checks, examples,
-authorities, catalog, health, and CI evidence. Preserve checkpoint `ac1671c`
-and unrelated work. Do not commit, push, merge, publish, release, rewrite
-history, delete branches, or remove worktrees without separate authorization.
+Execute the post-ad46632 transparent-whole correction in this evolving plan.
+Keep Monad primary and `Comonad` transparently classified on the opposite
+category. Retain stable comonad heads only where an active runtime LHS needs a
+post-Op discriminator: counit, comultiplication, and point coextension. Make
+whole coextension transparently reuse endpoint-swapped monadic whole extension;
+remove its custom projection rule and proof-time equation. Synchronize checks,
+examples, active authorities, warning evidence, catalog, health, and CI.
+Preserve checkpoint `ad46632` and unrelated work. Do not commit, push, merge,
+publish, release, rewrite history, delete branches, or remove worktrees without
+separate authorization.
 ```

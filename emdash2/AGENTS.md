@@ -429,10 +429,12 @@ the monad-primary indexed full-functor interface, whole extension, ambient
 Došen reductions, narrow stable opposite-variance mirror, and
 adjunction-derived structural instances are `emdash3_2_monads.lp`; canonical
 Op observations and point coextension fold computationally into the mirror,
-whole coextension uses a proof-time equation, and no opaque equality bridge is
-used. Ordinary `comp_fapp0` owns the monad/comonad beta and accumulation laws,
-while Kleisli/co-Kleisli cut names are transparent derived notation and
-explicit Kleisli categories remain separately gated;
+while whole coextension transparently reuses endpoint-swapped primary monadic
+whole extension. Stable dual heads exist only where an active runtime LHS
+needs a post-Op discriminator; no whole coextension unifier or opaque equality
+bridge is used. Ordinary `comp_fapp0` owns the monad/comonad beta and
+accumulation laws, while Kleisli/co-Kleisli cut names are transparent derived
+notation and explicit Kleisli categories remain separately gated;
 executable diagnostics live in `emdash3_2_checks.lp`.
 
 ## Authorities
@@ -1251,8 +1253,11 @@ Use the following order:
     unit/multiplication observations, whole extension with retained higher
     action, ambient triangular beta/accumulation, the transparent
     opposite-derived `Comonad(D)` classifier with its narrow stable variance
-    mirror, and the monad/comonad induced by an existing adjunction. Canonical
-    Op terms are related by runtime folds or a whole-extension `unif_rule`, not
+    mirror, and the monad/comonad induced by an existing adjunction. Stable
+    dual heads are limited to counit, comultiplication, and point coextension,
+    where active runtime rules require a discriminator. Whole coextension is a
+    transparent endpoint-swapped monadic whole view; it has no custom
+    projection or unifier. Canonical Op terms use runtime folds rather than
     equality axioms. Kleisli cut is transparent notation rather than a runtime
     owner. Against the `1116/159` base warning inventory, the module's
     `1140/159` inventory adds 24 classified reports: eight ambient

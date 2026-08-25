@@ -14,12 +14,14 @@
   as transparent derived notation; it is not a second rewrite owner.
 
   A comonad on A is classified transparently as a monad on A^op. Stable
-  counit/comultiplication and whole/point coextension heads are the narrow
-  variance mirror required after opposite-category normalization erases the
-  runtime discriminator. Canonical Op terms fold or unify directly with those
-  heads; no propositional equality bridge is used. This module does not
-  construct free syntax, a global commuting decision procedure, Kleisli or
-  Eilenberg--Moore categories, or a TypeScript declaration surface.
+  counit/comultiplication and point coextension heads are the narrow variance
+  mirror required where opposite-category normalization erases an active
+  runtime discriminator. Whole coextension transparently reuses primary
+  monadic whole extension. Canonical Op terms fold directly to the stable
+  heads; no whole coextension unifier or propositional equality bridge is used.
+  This module does not construct free syntax, a global commuting decision
+  procedure, Kleisli or Eilenberg--Moore categories, or a TypeScript
+  declaration surface.
 */
 
 require open emdash.emdash3_2;
@@ -535,39 +537,13 @@ symbol counit_comonad_antecedent_func
     (@counit_comonad_transf A D C);
 
 /*
-  Stable whole coextension.
-
-  Mathematically this is endpoint-swapped monadic extension in A^op. The stable
-  mirror is required because ordinary composition in A cannot retain the
-  double-opposite matching head long enough to inherit every ambient monad
-  rule. Its whole comparison is proof-time definitional; the point comparison
-  is a runtime fold keyed only by the surviving Op_func head.
+  Whole coextension is transparently endpoint-swapped monadic extension in
+  A^op. No triangular rule discriminates on this whole head, so a second stable
+  whole owner and proof-time comparison are unnecessary. The primary monadic
+  whole owner retains higher action; its generic object projection reaches the
+  stable point fold below.
 */
-injective symbol cokleisli_extend_func
-  [A : Cat]
-  [D : τ (@Functor A A)]
-  (C : τ (@Comonad A D))
-  (X Y : τ (@Obj A))
-  : τ (@Functor
-      (@Hom_cat A (@fapp0 A A D X) Y)
-      (@Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y)));
-
-symbol cokleisli_extend_fapp0
-  [A : Cat]
-  [D : τ (@Functor A A)]
-  (C : τ (@Comonad A D))
-  [X Y : τ (@Obj A)]
-  (f : τ (@Hom A (@fapp0 A A D X) Y))
-  : τ (@Hom A (@fapp0 A A D X) (@fapp0 A A D Y));
-
-rule @fapp0
-      _ _
-      (@cokleisli_extend_func $A $D $C $X $Y)
-      $f
-  ↪ @cokleisli_extend_fapp0 $A $D $C $X $Y $f;
-
-// Transparent opposite-monad comparison targets.
-symbol cokleisli_extend_op_func
+symbol cokleisli_extend_func
   [A : Cat]
   [D : τ (@Functor A A)]
   (C : τ (@Comonad A D))
@@ -581,6 +557,28 @@ symbol cokleisli_extend_op_func
     C
     Y X;
 
+// Stable point coextension is the runtime discriminator used by ambient
+// comonad beta, accumulation, counit identity, and comultiplication rules.
+symbol cokleisli_extend_fapp0
+  [A : Cat]
+  [D : τ (@Functor A A)]
+  (C : τ (@Comonad A D))
+  [X Y : τ (@Obj A)]
+  (f : τ (@Hom A (@fapp0 A A D X) Y))
+  : τ (@Hom A (@fapp0 A A D X) (@fapp0 A A D Y));
+
+// Historical comparison names remain transparent aliases of the selected
+// whole and point surfaces; they introduce no second semantic body.
+symbol cokleisli_extend_op_func
+  [A : Cat]
+  [D : τ (@Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y : τ (@Obj A))
+  : τ (@Functor
+      (@Hom_cat A (@fapp0 A A D X) Y)
+      (@Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y)))
+≔ @cokleisli_extend_func A D C X Y;
+
 symbol cokleisli_extend_op_fapp0
   [A : Cat]
   [D : τ (@Functor A A)]
@@ -588,25 +586,13 @@ symbol cokleisli_extend_op_fapp0
   [X Y : τ (@Obj A)]
   (f : τ (@Hom A (@fapp0 A A D X) Y))
   : τ (@Hom A (@fapp0 A A D X) (@fapp0 A A D Y))
-≔ @kleisli_extend_fapp0
-    (Op_cat A)
-    (@Op_func A A D)
-    C
-    Y X
-    f;
+≔ @cokleisli_extend_fapp0 A D C X Y f;
 
 /*
-  The whole bridge is proof-time only so it cannot erase the primary monadic
-  runtime owner. The point fold is runtime because ambient co-beta and
-  accumulation need the stable dual discriminator after Op_cat has normalized
-  away. Matching only Op_func(D) avoids repeated reducible endpoint guards.
+  The point fold is runtime because ambient co-beta and accumulation need the
+  stable dual discriminator after Op_cat has normalized away. Matching only
+  Op_func(D) avoids repeated reducible category and endpoint guards.
 */
-unif_rule
-  @kleisli_extend_func
-    _ (@Op_func $A $A $D) $C $Y $X
-  ≡ @cokleisli_extend_func $A $D $C $X $Y
-  ↪ [ tt ≡ tt ];
-
 rule @kleisli_extend_fapp0
       _ (@Op_func $A $A $D) $C $Y $X $f
   ↪ @cokleisli_extend_fapp0 $A $D $C $X $Y $f;
