@@ -107,9 +107,27 @@ Whole internal laxity also exposes the generic functor compositor and its next
 action. Computational strict-functor codes form the objects of the selected
 `GrayHom_lax` profile while reusing the ambient transfor tower. One right
 closure yields a coevaluation-derived walking square and a checked
-nonidentity oriented interchanger. The mirror closure, tensor coherence, full
-Crans--Gray monoidality, and global migration of historical strict endpoint
-cuts remain deferred.
+nonidentity oriented interchanger. Its checked direction becomes the native
+lax-square direction after exchanging the two coordinate roles.
+
+Every transformation now has one whole graph `B -> LaxArrow_cat(C)`. Objects
+read as its components; arrows expose a source side, retained target side, the
+existing directed filler, and another hom action. A selected strict code keeps
+the decoder head stable while one carrier path provides the transparent graph
+reading. Fixed-bracketing positive right-Gray cubes and one Nat-recursive
+object decoder then give
+
+```text
+StrictFunctorData(GrayCubePos_R(n),C)
+  -> Obj(CubicalLevel(C,succ n)).
+```
+
+The index `n` denotes geometric dimension `n+1`. Dimensions one through three,
+the selected `I tensor_R I` interchanger direction, four square edges, six cube
+faces, and arbitrary-variable-dimension recursion are checked. The mirror
+closure, tensor unit/associativity/symmetry, inverse decoder, mapping-category
+equivalence, full Crans--Gray monoidality, and global migration of historical
+strict endpoint cuts remain deferred.
 
 ### Two-sided dependent hom and the intrinsic semicubical nerve
 
@@ -170,9 +188,9 @@ does not compete with generic strict functor cuts. A recursive finite-family
 frame exposes `2n` immediate faces: new source/target followed by the
 star-lifted older faces. Thus a square has four independent edges and a cube
 has two endpoint squares plus four independent side squares. Degeneracies,
-connections, Kan operations, and the Gray/walking-arrow and independent
-`homd_parameter_func` comparisons remain future work, not prerequisites of
-this native semicubical nerve.
+connections, Kan operations, and the independent `homd_parameter_func`
+comparison remain future work, not prerequisites of this native semicubical
+nerve.
 
 Yoneda also supplies the standard combinatorial semicube:
 
@@ -187,6 +205,12 @@ corresponding restriction functor, and
 `standard_semicube_native_decode_path` compares it with the computing
 `{L,R,*}` interpreter at arbitrary `p,n`. Import `emdash3_2_cubical.lp` for
 the complete rule-free cubical facade.
+
+The direct Yoneda object slice additionally sends a native cube to its coherent
+face family and evaluates at the identity face; the beta is the existing whole
+nerve identity path, not a full eta equivalence. The independent Gray decoder
+above supplies the geometric/computadic object reading. These are complementary
+adequacy statements, not an asserted equivalence of mapping categories.
 
 ### Internal semisimplicial substrate
 

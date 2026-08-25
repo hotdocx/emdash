@@ -488,6 +488,31 @@ This plan therefore records but does not implement the simplicial Yoneda
 analogue. It is a later organization/coherence task, not a prerequisite for
 the existing ordinal decoder or the cubical adequacy results.
 
+The closing audit identifies the exact missing object rather than a missing
+face algorithm. `CoherentNerveLevel(C,n)=Functor(DirectedSimplex_cat(n),C)` is
+the geometric mapping side and cannot also serve as the independent native
+level without making the comparison circular. The intrinsic dependent-simplex
+codes, mapped decoder, nonempty-face action, and canonical ordinal-source
+recursion already work at arbitrary variable dimension, but their decoded
+categories vary with the stored flag; they do not yet assemble into one
+category `DependentSimplexLevel_cat(C,n)` at each `n`.
+
+A later simplicial Yoneda tranche should therefore construct one whole native
+semisimplicial nerve
+
+```text
+N_delta(C) : SemiDeltaPlus_cat^op -> Cat_cat
+N_delta(C)[n] = DependentSimplexLevel_cat(C,n),
+```
+
+whose object/face action factors the existing intrinsic code machinery. Only
+then should it add the representable section/evaluation and compare the
+independent ordinal operation
+`Functor(DirectedSimplex_cat(n),C) -> DependentSimplexLevel_cat(C,n)`. Join
+identity/composition uniqueness and the changing-boundary classifier remain
+the named prerequisites. No part of that assembly is required by the now
+complete cubical object decoder.
+
 ## 11. Explicit Nonclaims
 
 This plan does not initially claim:
@@ -514,9 +539,9 @@ This plan does not initially claim:
 | `CGCA-WALKING-BRIDGE-5` | complete, checkpoint `6a9d54b` | `emdash3_2_gray_transformation_graph.lp` transparently constructs `epsilon:F=>G |-> (B -> LaxArrow_cat(C))` from the whole internal action, the new generic ordinary represented identity section, family-natural Sigma base change, and opposites. Objects read as native component edges; arrow projections expose `F[g]`, a retained target side in `Hom(G[x],G[y])`, the coordinate-swapped native filler, and another hom action. The generic lax target side is deliberately not equated with the separate term `G[g]`; strict-profile packaging is the next decoder prerequisite. No graph primitive, Sigma eta, pointwise naturality record, graph-specific rule, or new warning is added. The earlier whole `GrayHom_lax(WalkingArrow,C) -> LaxArrow_cat(C)` proposal remains rejected. |
 | `CGCA-GRAYCUBE-6` | complete, checkpoint `5871e30` | `emdash3_2_gray_cubes.lp` defines `GrayCubePos_R(n)` by genuine Nat recursion, with predecessor index `n` denoting geometric dimension `n+1`. The dedicated reviewer checks dimensions one through three as `I`, `I tensor_R I`, and `I tensor_R (I tensor_R I)`. The rule-free module claims no tensor unit, alternate bracketing, associator, coordinate permutation, or full monoidal structure. |
 | `CGCA-GRAY-DECODE-7` | complete, checkpoint `79a8250` | `emdash3_2_gray_transformation_graph_profile.lp` adds the selected strict-code closure for graphs of transformations between strict-coded endpoint diagrams, retaining a stable strict carrier plus a whole path to the transparent graph. `emdash3_2_gray_cube_decoder.lp` defines `gray_cube_observation(C,n)` by one internal Nat recursion uniform in `C`: dimension one evaluates the walking map, and each successor curries, takes the generator, packages its graph, recurses in `LaxArrow(C)`, and applies the proved cubical-level shift. The rule-free decoder is arbitrary in variable `n`; its reviewer checks the zero/successor computations, dimensions one through three, the recursive carrier path, and recovery of the existing walking-square coevaluation inputs. No source generation, dimension-specific filler, inverse, or mapping-category equivalence is added. |
-| `CGCA-DIM-8` | complete, checkpoint pending | Dimensions one through three and the arbitrary-`n` recursion are checked. The identity realization of `I tensor_R I` recovers the exact existing coevaluation source/target strict codes and outer transformation; `emdash3_2_gray_cube_dimension2.lp` names the actual retained target side, coordinate-swapped internal-action interchanger, and next whole action. A direct equality with `gray_interchanger_readable` is intentionally rejected as the wrong boundary because that older name has additionally reframed the target side. `gray_cube_immediate_faces` applies the existing variable-dimensional frame to every decoded cube, yielding four edges in dimension two and six square faces in dimension three without a bespoke record. |
-| `CGCA-SIMPLICIAL-DEFER-9` | pending | Audit and document the distinct later simplicial Yoneda prerequisite without constructing an unsettled native semisimplicial level facade. |
-| `CGCA-DOC-10` | pending | Synchronize the living plan, Foundations, status/SOP, canonical syntax, READMEs, AGENTS/source registries, examples, catalog, and proportional health evidence. |
+| `CGCA-DIM-8` | complete, checkpoint `cd23484` | Dimensions one through three and the arbitrary-`n` recursion are checked. The identity realization of `I tensor_R I` recovers the exact existing coevaluation source/target strict codes and outer transformation; `emdash3_2_gray_cube_dimension2.lp` names the actual retained target side, coordinate-swapped internal-action interchanger, and next whole action. A direct equality with `gray_interchanger_readable` is intentionally rejected as the wrong boundary because that older name has additionally reframed the target side. `gray_cube_immediate_faces` applies the existing variable-dimensional frame to every decoded cube, yielding four edges in dimension two and six square faces in dimension three without a bespoke record. |
+| `CGCA-SIMPLICIAL-DEFER-9` | complete, documented deferral | The existing ordinal observation, intrinsic dependent codes, mapped decoder, faces, and variable-dimensional canonical source are sufficient object algorithms but do not yet form one native category `DependentSimplexLevel_cat(C,n)` or one whole nerve `N_delta(C)`. `CoherentNerveLevel(C,n)` is the independent geometric mapping side and cannot be reused without circularity. A later tranche must assemble the changing-boundary native levels and whole face action before adding a simplicial Yoneda section/evaluation; join uniqueness and the changing-boundary classifier are the exact prerequisites. No implementation is needed for cubical adequacy. |
+| `CGCA-DOC-10` | complete, checkpoint pending | Synchronized the living plan, Foundations, current status/SOP, canonical notation, root and `emdash2` READMEs, report index, `AGENTS.md`, source/metrics registries, focused reviewers, and generated check catalog. The exact proportional validation and the stopped long aggregate/health attempts are recorded rather than overstated; the health report remains intentionally deferred because the changed core hash would force a long repository-wide refresh that is not needed to classify this branch. |
 | `CGCA-CLOSE-11` | pending | Audit every scoped row, checkpoint implemented/deferred evidence, and hand off exact commits/prerequisites. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal without separate authority. |
 
 ### 12.1 `CGCA-WALKING-BRIDGE-5` validation boundary

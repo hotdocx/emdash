@@ -512,6 +512,26 @@ detailed probe evidence.
   its next `tapp1_func` action remains public, and the resulting direction
   confirms the `GrayHom_lax` convention. It adds no standalone square,
   endpoint bridge, rewrite, or unifier.
+- `emdash3_2_gray_interchanger_orientation.lp` and
+  `emdash3_2_gray_transformation_graph.lp`: the selected interchanger has
+  checked direction `v o a ==> b o u`; exchanging the coordinate roles gives
+  the native lax-square orientation. Every transformation then yields one
+  whole functor `B -> LaxArrow_cat(C)` constructed from internal action,
+  represented identity section, family-natural Sigma base change, and
+  opposites. Objects read as component edges; arrows expose `F[g]`, a retained
+  target side, the existing directed filler, and another whole hom action.
+- `emdash3_2_gray_cubes.lp`,
+  `emdash3_2_gray_transformation_graph_profile.lp`,
+  `emdash3_2_gray_cube_decoder.lp`, and
+  `emdash3_2_gray_cube_dimension2.lp`: fixed-bracketing positive Gray cubes,
+  their selected strict graph profile, and a genuine arbitrary-`n` object
+  decoder. The predecessor index `n` denotes dimension `n+1`. Successor
+  decoding curries, takes the walking generator, recursively decodes its graph
+  in `LaxArrow`, and applies the Nat-derived level shift. Dimensions one
+  through three, the selected `I tensor_R I` interchanger direction, four
+  square edges, six cube faces, and retained next action are checked. No tensor
+  unit, alternate-bracketing coherence, inverse decoder, or mapping-category
+  equivalence is claimed.
 - `emdash3_2_cubical_dependent_hom.lp`: transparent two-sided cross-corner
   dependent hom for `E : K1^op -> Catd(K2)`. It transports the source in the
   second coordinate and the target in the first, then forms one hom in the
@@ -4273,8 +4293,33 @@ family: two new endpoints plus every older face under star. This supplies a
 fully variable native semicubical tower. Yoneda on `SemiCubePlus_cat` now
 defines `StandardSemicube(n)`; the whole Hom action of the native nerve decodes
 its `p`-faces into restriction functors and compares them with the computing
-code action at arbitrary `p,n`. Parameterized-hom and Gray comparisons remain
-later abstractions, not foundations of this construction.
+code action at arbitrary `p,n`.
+
+The subsequent adequacy layer now supplies both requested object readings.
+`cubical_yoneda_section` sends a native cube to its coherent code-indexed face
+family, and evaluation at the identity face returns it along the existing
+whole nerve identity path. Independently,
+
+```text
+GrayCubePos_R(0)       = WalkingArrow
+GrayCubePos_R(succ n)  = WalkingArrow tensor_R GrayCubePos_R(n)
+```
+
+defines the fixed-bracketing geometric shapes. A selected strict realization
+decodes by one Nat recursion uniform in the target category. The successor
+uses right curry, the walking generator, the whole transformation graph, and a
+proved cubical-level shift. The graph's target side deliberately retains its
+internal-action/total-base-change normal form rather than being identified
+with a separately named `G[g]`; its final projection already has the native
+cell boundary. The selected two-dimensional identity realization recovers the
+existing coevaluation data and the same coordinate-swapped interchanger. The
+existing immediate-frame family gives four edges and six faces at dimensions
+two and three and remains variable-dimensional.
+
+This is object-level semantic adequacy, not a full equivalence between Gray
+mapping categories and native cubical levels. Tensor action in parameters,
+unit/associativity/symmetry data, inverse decoding, degeneracies, connections,
+and Kan structure remain separate future consumers.
 
 Section 17 contains generic Sigma/Pi introduction/evaluation, constant
 sections, ordinary structural logic, generic functor hom-action, section

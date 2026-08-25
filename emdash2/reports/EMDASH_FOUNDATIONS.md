@@ -23,8 +23,9 @@ path-groupoid horn fillers, and categorical decalage live in the subsequent
 semisimplicial modules recorded by the August simplicial-substrate plan.
 The two-sided square classifier, derived cubical internal hom and lax-arrow
 total, augmented `{L,R,*}` index, whole semicubical nerve, recursive immediate
-boundaries, and Yoneda representable decoding live in the subsequent cubical
-modules recorded by the August 23--24 plans.
+boundaries, Yoneda representable decoding, and the fixed-bracketing right-Gray
+cube decoder live in the subsequent cubical modules recorded by the August
+23--25 plans.
 The isolated binary-Sum experiment was retired on 2026-07-20 for later
 consumer-led redesign; it is not part of the active foundation.
 
@@ -3899,10 +3900,65 @@ computing `{L,R,*}` action, and another Hom action remains available. Thus the
 usual face combinatorics and the internally iterated dependent-hom/Sigma
 geometry are connected at arbitrary variable dimensions.
 
+There are now two complementary whole-object adequacy readings. Yoneda sends a
+native cube `X` to its coherent family of code-selected faces and evaluates
+that family back at the identity face. The selected beta is the existing whole
+nerve identity path; no pointwise naturality record or full eta law is added.
+
+The independent geometric reading uses fixed-bracketing positive-dimensional
+right-Gray cubes. Because the selected tensor has no unit comparison, the
+index is the predecessor of the dimension:
+
+```text
+GrayCubePos_R(0)       = WalkingArrow
+GrayCubePos_R(succ n)  = WalkingArrow tensor_R GrayCubePos_R(n).
+```
+
+An ordinary transformation `epsilon : F => G` first gives one whole graph
+
+```text
+gray_transf_graph_func(epsilon) : B -> LaxArrow_cat(C).
+```
+
+Its object at `y` reads as the edge `epsilon[y]`. On `g:x->y`, the source side
+computes to `F[g]`; the target-side projection remains a typed arrow
+`G[x] -> G[y]` with its family-natural total-base-change history; and the final
+nested-Sigma projection is the existing internal-action cell
+
+```text
+target_side(g) o epsilon[x]  ==>  epsilon[y] o F[g].
+```
+
+This retained side is not silently identified with the separately named term
+`G[g]`. The earlier `gray_interchanger_readable` performs an additional
+boundary reframe, so direct equality of the two cell presentations would be
+the wrong adequacy statement. The selected strict-code closure instead keeps a
+stable strict carrier and supplies one whole path to the transparent graph.
+
+The variable-dimensional decoder is then one internal Nat recursion uniform
+in the ambient category:
+
+```text
+gray_cube_observation(C,n)
+  : StrictFunctorData(GrayCubePos_R(n),C)
+    -> Obj(CubicalLevel(C,succ n)).
+```
+
+Dimension one evaluates the walking endpoints and generator. A successor
+curries once, takes the walking generator, packages its transformation graph,
+recurses in `LaxArrow_cat(C)`, and applies the Nat-derived cubical-level shift.
+The identity realization of `I tensor_R I` recovers the already checked
+coevaluation diagrams and outer transformation; its selected cell has the same
+coordinate-swapped direction as the Gray interchanger. Applying the generic
+immediate-face family yields four edges in dimension two and six square faces
+in dimension three, and works at arbitrary `n` without a dimension-specific
+record.
+
 Degeneracies, connections, reversals, permutations, Kan operations, the
-Gray/walking-arrow comparison, and the independent generic assignment
-`FF |-> homd_int(FF)` remain later extensions or comparisons; none is a
-prerequisite of the native semicubical nerve.
+inverse Gray/native decoder, mapping-category equivalence, tensor parameter
+action, and the independent generic assignment `FF |-> homd_int(FF)` remain
+later extensions or comparisons; none is a prerequisite of the native
+semicubical nerve or the object-level adequacy result.
 
 This same dependent hom architecture is shared by total-category homs and
 section action:

@@ -1651,8 +1651,42 @@ The kernel owner `gray_interchanger` is the identity component of
 `tapp1_post_laxity_transf`; `gray_interchanger_next_func` retains the next
 whole action. The readable raw composites do not license a new pointwise
 endpoint rewrite: the formal component endpoints remain the stable
-`functord_transport_*_func` owners. This notation describes one profiled
-right-closed slice and must not be advertised as the full Crans--Gray
+`functord_transport_*_func` owners.
+
+After exchanging coordinate roles, write the transformation graph as
+
+```text
+Graph(ε) : B → Arr□(C)
+Graph(ε)[y] = ε_y
+
+Graph(ε)[g]
+  : target_side(g) o ε_x  ==>  ε_y o F[g].
+```
+
+The kernel owners are `gray_transf_graph_func`,
+`gray_transf_graph_obj_path`, `gray_transf_graph_target_side`, and
+`gray_transf_graph_cell`. The target side is typed in `Hom_C(Gx,Gy)` but keeps
+its internal-action normal form; comments must not replace it judgmentally by
+the separately named `G[g]`. The selected strict graph code keeps a stable
+`strict_functor_carrier`; `strict_gray_transf_graph_carrier_path`, not a
+runtime carrier fold, supplies the readable graph.
+
+For positive right-Gray cubes and their native observation, write
+
+```text
+GrayCube⁺_R(0)       = I
+GrayCube⁺_R(n+1)     = I tensor_R GrayCube⁺_R(n)
+
+decode□_R(C,n)
+  : StrictFunctor(GrayCube⁺_R(n),C) → Cub_{n+1}(C).
+```
+
+These denote `GrayCubePos_R` and `gray_cube_observation`. The index is the
+predecessor of geometric dimension. Successor decoding uses right curry, the
+walking generator, the strict graph code, recursion in `Arr□(C)`, and
+`cubical_level_shift_path`. This notation describes one profiled right-closed
+slice and must not be advertised as a tensor unit, alternate-bracketing
+coherence, inverse decoder, mapping-category equivalence, or full Crans--Gray
 monoidal structure.
 
 ## Displayed Sibling Product Notation
@@ -2179,6 +2213,18 @@ decode_{p,n}(f)        = d_f.
 The level equation is judgmental. The final equation is the selected path
 `standard_semicube_native_decode_path`, not a second runtime arrow beta. Its
 whole Hom action remains available for higher representable paths.
+
+For the direct Yoneda object slice, write
+
+```text
+yoneda□(X) : Hom_Psh(□[n],N□(C))
+eval_id(η) = η[n](id_n)
+eval_id(yoneda□(X)) = X.
+```
+
+The owners are `cubical_yoneda_section`, `cubical_yoneda_eval`, and
+`cubical_yoneda_beta`. The last equation is a path derived from the whole
+nerve identity law, not a judgmental beta or a full eta equivalence.
 
 The `d`-equations above are whole equality paths, not face-specific rewrites.
 The immediate boundary

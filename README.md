@@ -34,9 +34,14 @@ truncated carrier judgmentally by `Unit`. Category-indexed
 out of the realization and path-valued functors on `C`; specialization
 recovers the groupoidal Interval from the directed WalkingArrow. A selected
 strict-object/lax-arrow Gray profile then derives a nonidentity walking-square
-interchanger from whole internal laxity. Source functoriality and the packaged
-groupoidification adjunction, the mirror Gray closure, and full Gray
-monoidality remain explicit boundaries.
+interchanger from whole internal laxity. Its checked coordinate swap extends
+to a whole transformation graph, fixed-bracketing positive Gray cubes, and an
+internal Nat-recursive decoder into native cubical levels. Dimensions one
+through three, the selected `I tensor_R I` direction, four square edges, six
+cube faces, and arbitrary-variable-dimension recursion are checked. Source
+functoriality and the packaged groupoidification adjunction, the mirror Gray
+closure, tensor coherence, inverse decoding, and full Gray monoidality remain
+explicit boundaries.
 
 An internal semisimplicial substrate now complements that local cell calculus:
 computing face codes form an augmented injective simplex category; iterated
@@ -112,6 +117,12 @@ codes, its whole nerve computes the native levels, and Yoneda standard
 semicubes decode through that same nerve action to the native face functors.
 Thus the combinatorial and dependent-hom presentations are connected
 internally without a primitive cube category or a second totalization theory.
+The direct Yoneda object slice sends a native cube to its coherent face family
+and evaluates back at the identity face. Independently, strict realizations of
+the fixed-bracketing Gray cubes decode into the same native levels by curry,
+walking-generator action, whole transformation graphs, and a canonical level
+shift. These are complementary object-level adequacy results, not yet an
+equivalence of mapping categories.
 
 The current v3.2 edition is a checked development draft and a working,
 bounded product—not a finished foundation, complete proof assistant, or claim
