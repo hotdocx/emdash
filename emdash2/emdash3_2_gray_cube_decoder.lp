@@ -22,6 +22,7 @@
 
 require open emdash.emdash3_2_gray_transformation_graph_profile;
 require open emdash.emdash3_2_cubical_levels;
+require open emdash.emdash3_2_semicubical_frames;
 
 // Iterating cubical levels after one LaxArrow step agrees with adding one
 // more successor to the original ambient category.
@@ -218,3 +219,30 @@ symbol gray_cube_observation
   (H : τ (@StrictFunctorData (@GrayCubePos_R n) C))
   : τ (Obj (@CubicalLevel_cat C (succ n)))
 ≔ @gray_cube_observation_all n C H;
+
+// Apply the already-internal immediate coface family to a decoded cube.  At
+// dimension n+1 this returns 2(n+1) native n-faces, so squares have four edges
+// and cubes have six square faces without a dimension-specific boundary
+// record.
+symbol gray_cube_immediate_faces
+  [C : Cat]
+  (n : τ Nat_grpd)
+  (H : τ (@StrictFunctorData (@GrayCubePos_R n) C))
+  : τ (@FiniteFamily
+      (Obj (@CubicalLevel_cat C n))
+      (@CubeImmediateFaceCount (succ n)))
+≔ @finite_family_map
+    (Functor
+      (@CubicalLevel_cat C (succ n))
+      (@CubicalLevel_cat C n))
+    (Obj (@CubicalLevel_cat C n))
+    (λ face : τ (Functor
+        (@CubicalLevel_cat C (succ n))
+        (@CubicalLevel_cat C n)),
+      @fapp0
+        (@CubicalLevel_cat C (succ n))
+        (@CubicalLevel_cat C n)
+        face
+        (@gray_cube_observation C n H))
+    (@CubeImmediateFaceCount (succ n))
+    (@cube_immediate_face_actions C n);

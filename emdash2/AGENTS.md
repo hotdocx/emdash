@@ -265,6 +265,11 @@ the variable-dimensional object decoder is `emdash3_2_gray_cube_decoder.lp`;
 one Nat recursion uniform in the ambient category curries, takes the walking
 generator, packages its whole graph, recurses in `LaxArrow`, and transports
 through the canonical cubical-level shift;
+the selected `I tensor_R I` decoder reading is
+`emdash3_2_gray_cube_dimension2.lp`; it exposes the retained target side, the
+same internal-action interchanger with native coordinate-swapped direction,
+and another whole action without identifying it with the additionally
+reframed readable interchanger;
 the classified computational homotopy-truncation reflector and its derived
 whole map action are `emdash3_2_truncation_reflector.lp`; it realizes the
 category of `n`-types through retained `TruncGrpdU(n)` packages, restricts
@@ -1112,7 +1117,11 @@ Use the following order:
     strict graph carrier stable and supplies a whole equality to the
     transparent graph. `emdash3_2_gray_cube_decoder.lp` then gives the
     arbitrary-variable-dimensional object observation by one Nat recursion,
-    with dimensions one through three and the recursive carrier path checked;
+    with dimensions one through three, the recursive carrier path, and the
+    generic four-edge/six-face frames checked. The selected dimension-two
+    continuation `emdash3_2_gray_cube_dimension2.lp` names the actual retained
+    interchanger cell and its next action without a false equality to the
+    separately reframed readable cell;
 79. `emdash3_2_truncation_reflector.lp` for the classified computational
     truncation reflector. It realizes `NType_cat(n)` through the existing
     retained-evidence `TruncGrpdU(n)` package, provides point-computing

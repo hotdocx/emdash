@@ -97,3 +97,27 @@ assert ⊢
     GrayWalkingSquare_cat zero
     (@strict_identity_data GrayWalkingSquare_cat)
   ≡ gray_square_outer_transf;
+
+// The same variable-dimensional frame gives four edges for a square and six
+// square faces for a cube.
+assert ⊢
+  @CubeImmediateFaceCount (succ (succ zero))
+  ≡ succ (succ (succ (succ zero)));
+
+assert ⊢
+  @CubeImmediateFaceCount (succ (succ (succ zero)))
+  ≡ succ (succ (succ (succ (succ (succ zero)))));
+
+assert [C : Cat]
+  (H : τ (@StrictFunctorData GrayCube2_R C)) ⊢
+  @gray_cube_immediate_faces C (succ zero) H
+  : τ (@FiniteFamily
+      (Obj (@CubicalLevel_cat C (succ zero)))
+      (succ (succ (succ (succ zero)))));
+
+assert [C : Cat]
+  (H : τ (@StrictFunctorData GrayCube3_R C)) ⊢
+  @gray_cube_immediate_faces C (succ (succ zero)) H
+  : τ (@FiniteFamily
+      (Obj (@CubicalLevel_cat C (succ (succ zero))))
+      (succ (succ (succ (succ (succ (succ zero)))))));
