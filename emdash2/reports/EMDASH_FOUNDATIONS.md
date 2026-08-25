@@ -3914,26 +3914,44 @@ GrayCubePos_R(0)       = WalkingArrow
 GrayCubePos_R(succ n)  = WalkingArrow tensor_R GrayCubePos_R(n).
 ```
 
-An ordinary transformation `epsilon : F => G` first gives one whole graph
+An ordinary transformation `epsilon : F => G` first gives one iterable
+internal graph
 
 ```text
 gray_transf_graph_func(epsilon) : B -> LaxArrow_cat(C).
 ```
 
-Its object at `y` reads as the edge `epsilon[y]`. On `g:x->y`, the source side
-computes to `F[g]`; the target-side projection remains a typed arrow
-`G[x] -> G[y]` with its family-natural total-base-change history; and the final
-nested-Sigma projection is the existing internal-action cell
+The standard transformation-to-arrow-category transpose is the governing
+geometry, not merely an orientation workaround. A transformation between two
+walking-arrow diagrams and the graph of a fixed transformation read the same directed cell
+along opposite coordinate axes; one is lax exactly when the other is oplax
+under a fixed naming convention. Reversing `LaxArrow_cat` would exchange those
+readings, not make both covariant unless the cell were invertible.
+
+The current whole functor is the represented-Sigma/opposite totalization. Its
+object at `y` reads as the edge `epsilon[y]`; its first side reads as `F[g]`,
+while its second side deliberately retains the totalization history needed by
+the next whole action. Separately, the pointwise standard square has literal
+sides `F[g]` and `G[g]`, and its filler is the existing post/left
+internal-action cell at `id_x`:
 
 ```text
-target_side(g) o epsilon[x]  ==>  epsilon[y] o F[g].
+G[g] o epsilon[x]  ==>  epsilon[y] o F[g].
 ```
 
-This retained side is not silently identified with the separately named term
-`G[g]`. The earlier `gray_interchanger_readable` performs an additional
-boundary reframe, so direct equality of the two cell presentations would be
-the wrong adequacy statement. The selected strict-code closure instead keeps a
-stable strict carrier and supplies one whole path to the transparent graph.
+This separation is necessary in the current prototype. Installing the
+standard square as the arrow beta of an ordinary `Functor` conflicts with the
+global judgmental identity cut: the standard squares carry normal-lax identity
+and composition coherence, not automatically strict functor computation.
+Accordingly, `gray_transf_standard_cell` and
+`gray_transf_standard_square` are pointwise operations. A later
+normal-lax/lax-map profile must assemble them into a whole graph.
+
+The selected strict-code closure keeps the decoder carrier stable, supplies
+one whole path to the internal graph, derives object equality by `eq_ap`, and
+derives the necessarily dependent arrow comparison by `eq_apd` as a
+`PathOver`. Thus readability does not erase the strict-code discriminator or
+pretend that the internal second-side history is literally `G[g]`.
 
 The variable-dimensional decoder is then one internal Nat recursion uniform
 in the ambient category:
@@ -3948,11 +3966,14 @@ Dimension one evaluates the walking endpoints and generator. A successor
 curries once, takes the walking generator, packages its transformation graph,
 recurses in `LaxArrow_cat(C)`, and applies the Nat-derived cubical-level shift.
 The identity realization of `I tensor_R I` recovers the already checked
-coevaluation diagrams and outer transformation; its selected cell has the same
-coordinate-swapped direction as the Gray interchanger. Applying the generic
-immediate-face family yields four edges in dimension two and six square faces
-in dimension three, and works at arbitrary `n` without a dimension-specific
-record.
+coevaluation diagrams and outer transformation; its retained internal graph
+cell has the same coordinate-swapped boundary shape as the Gray interchanger.
+The separate standard pointwise cell has the literal inner-target side and is
+definitionally the established `gray_interchanger`. No equality between that
+cell and the retained internal graph cell is claimed before the normal-lax
+whole-graph profile exists. Applying the generic immediate-face family yields
+four edges in dimension two and six square faces in dimension three, and works
+at arbitrary `n` without a dimension-specific record.
 
 Degeneracies, connections, reversals, permutations, Kan operations, the
 inverse Gray/native decoder, mapping-category equivalence, tensor parameter

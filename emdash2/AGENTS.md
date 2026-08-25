@@ -247,29 +247,31 @@ are `emdash3_2_gray_interchanger_orientation.lp`; one generic fixed-source
 internal-action projection beta exposes `epsilon[g o f]`, while first-class
 paths retain both stable endpoint histories and the same directed cell becomes
 a native lax square only after exchanging the two coordinate roles;
-the whole lax-arrow graph of an ordinary transformation is
-`emdash3_2_gray_transformation_graph.lp`; it derives one functor
-`B -> LaxArrow_cat(C)` from the existing internal action, the ordinary
-represented identity section, family-natural Sigma base change, and opposite
-totals. Its object reading, source side, retained target side, directed filler,
-and next hom action are public; it adds no graph primitive, Sigma eta, or
-pointwise naturality record;
+the internal lax-arrow graph and standard pointwise square of an ordinary
+transformation are `emdash3_2_gray_transformation_graph.lp`; the stable functor
+`B -> LaxArrow_cat(C)` computes its component edge and first side, retains its
+second-side represented-Sigma/opposite history, and exposes another hom action.
+Separately, `gray_transf_standard_square` has literal sides `F[g]` and `G[g]`
+and reuses the existing post/left internal-action cell. A whole standard graph
+is deferred to a normal-lax/lax-map profile; no independent square is added;
 the fixed-bracketing positive-dimensional right-Gray cubes are
 `emdash3_2_gray_cubes.lp`; genuine Nat recursion gives dimensions one through
 three as `I`, `I tensor_R I`, and `I tensor_R (I tensor_R I)` while making no
 zero-dimensional unit, associativity, symmetry, or full monoidal claim;
 the selected strict-code closure of those transformation graphs is
 `emdash3_2_gray_transformation_graph_profile.lp`; a first-class carrier path
-preserves both the stable strict decoder and the transparent graph reading;
+preserves both the stable strict decoder and the internal graph reading, while
+`eq_ap` and dependent `eq_apd` expose object and arrow observations without a
+carrier fold;
 the variable-dimensional object decoder is `emdash3_2_gray_cube_decoder.lp`;
 one Nat recursion uniform in the ambient category curries, takes the walking
 generator, packages its whole graph, recurses in `LaxArrow`, and transports
 through the canonical cubical-level shift;
 the selected `I tensor_R I` decoder reading is
-`emdash3_2_gray_cube_dimension2.lp`; it exposes the retained target side, the
-same internal-action interchanger with native coordinate-swapped direction,
-and another whole action without identifying it with the additionally
-reframed readable interchanger;
+`emdash3_2_gray_cube_dimension2.lp`; it retains the internal graph cell and
+another whole action, while its separate standard pointwise cell has the
+inner-target side and is definitionally the coordinate-swapped
+`gray_interchanger`;
 the classified computational homotopy-truncation reflector and its derived
 whole map action are `emdash3_2_truncation_reflector.lp`; it realizes the
 category of `n`-types through retained `TruncGrpdU(n)` packages, restricts
@@ -1105,23 +1107,28 @@ Use the following order:
     endpoint equality, or inverse cell. The subsequent
     `emdash3_2_gray_transformation_graph.lp` uses the new generic ordinary
     represented identity section and family-natural Sigma base-change owners
-    to construct the whole graph of every transformation. Objects read as
-    component edges, arrows expose both side projections and the existing
-    directed filler, and another hom action remains iterable. The generic lax
-    target side retains its internal-action normal form rather than being
-    identified with a separately named functor action. Its continuation
+    to derive an iterable internal whole graph. Its component edges and first
+    side are readable; its second side deliberately retains the totalization
+    history. Separately, `gray_transf_standard_cell` and
+    `gray_transf_standard_square` expose the literal sides `F[g]` and `G[g]`
+    from the existing post/left laxity owner, without independently postulating
+    a filler. A whole graph of those standard squares is deferred until a
+    normal-lax/lax-map profile owns its identity and composition coherence. Its
+    continuation
     `emdash3_2_gray_cubes.lp` defines the `(n+1)`-dimensional fixed-bracketing
     shape by genuine Nat recursion from the walking arrow, without postulating
     a tensor unit or coherence between bracketings. The selected profile
     continuation `emdash3_2_gray_transformation_graph_profile.lp` keeps the
-    strict graph carrier stable and supplies a whole equality to the
-    transparent graph. `emdash3_2_gray_cube_decoder.lp` then gives the
+    strict graph carrier stable, supplies a whole equality to the internal graph,
+    and derives object equality plus arrow `PathOver` by `eq_ap`/`eq_apd`.
+    `emdash3_2_gray_cube_decoder.lp` then gives the
     arbitrary-variable-dimensional object observation by one Nat recursion,
     with dimensions one through three, the recursive carrier path, and the
     generic four-edge/six-face frames checked. The selected dimension-two
-    continuation `emdash3_2_gray_cube_dimension2.lp` names the actual retained
-    interchanger cell and its next action without a false equality to the
-    separately reframed readable cell;
+    continuation `emdash3_2_gray_cube_dimension2.lp` distinguishes the actual
+    retained internal graph cell from the standard pointwise cell; the latter
+    is definitionally the established interchanger, while no false equality
+    identifies it with the retained internal graph cell;
 79. `emdash3_2_truncation_reflector.lp` for the classified computational
     truncation reflector. It realizes `NType_cat(n)` through the existing
     retained-evidence `TruncGrpdU(n)` package, provides point-computing

@@ -24977,6 +24977,45 @@ assert [A B : Cat] [F G : τ (Functor A B)]
       (@tapp1_con_at_transf A B F G epsilon Y)
       X W h q;
 
+// The active strict-naturality cuts remain available when represented
+// post/precomposition has already selected its stable point head.  These
+// typed reflexivity checks exercise the two proof-time bridges directly.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [X Y : τ (Obj A)]
+  (g : τ (Hom A X Y)) ⊢
+  @eq_refl
+    (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
+    (@tapp1_fapp0 A B F G X Y epsilon g)
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
+      (@tapp1_fapp0 A B F G X Y epsilon g)
+      (@hom_postcomp_fapp0
+        B B (@id Cat_cat B)
+        (@fapp0 A B F X)
+        (@fapp0 A B G X)
+        (@fapp0 A B G Y)
+        (@fapp1_fapp0 A B G X Y g)
+        (@tapp0_fapp0 A B F G X epsilon)));
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [X Y : τ (Obj A)]
+  (g : τ (Hom A X Y)) ⊢
+  @eq_refl
+    (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
+    (@tapp1_fapp0 A B F G X Y epsilon g)
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
+      (@tapp1_fapp0 A B F G X Y epsilon g)
+      (@hom_precomp_along_fapp0
+        B B (@id Cat_cat B)
+        (@fapp0 A B G Y)
+        (@fapp0 A B F X)
+        (@fapp0 A B F Y)
+        (@fapp1_fapp0 A B F X Y g)
+        (@tapp0_fapp0 A B F G Y epsilon)));
+
 // The normal-lax functor compositor is the identity-transfor specialization.
 assert [A B : Cat] (F : τ (Functor A B))
   [X Y Z : τ (Obj A)]

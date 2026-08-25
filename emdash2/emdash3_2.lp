@@ -11212,6 +11212,44 @@ rule comp_fapp0
       (@fapp1_fapp0 $A $B $F $X0 $X $g)
   ↪ tapp1_fapp0 $ϵ (comp_fapp0 $f $g);
 
+/*
+  Proof-time stable-head readings of the two component cuts above.
+
+  Runtime deliberately retains `hom_postcomp_fapp0` and
+  `hom_precomp_along_fapp0` as represented-action histories.  These direct
+  rigid-head comparisons avoid relying on non-transitive unification through
+  their separate raw-composition views.  They add no new naturality law.
+
+  These are part of the historical globally strict prototype.  A later
+  strict/lax migration must re-home them at the selected strict/skew transfor
+  profile rather than treating them as generic lax endpoint collapse.
+*/
+unif_rule
+  @tapp1_fapp0 $A $B $F $G $X $Y $epsilon $g
+  ≡ @hom_postcomp_fapp0
+      $B $B $IdB $FX $GX $GY $Gg $epsilonX
+  ↪ [
+    $IdB ≡ (@id Cat_cat $B);
+    $FX ≡ (@fapp0 $A $B $F $X);
+    $GX ≡ (@fapp0 $A $B $G $X);
+    $GY ≡ (@fapp0 $A $B $G $Y);
+    $Gg ≡ (@fapp1_fapp0 $A $B $G $X $Y $g);
+    $epsilonX ≡ (@tapp0_fapp0 $A $B $F $G $X $epsilon)
+  ];
+
+unif_rule
+  @tapp1_fapp0 $A $B $F $G $X $Y $epsilon $g
+  ≡ @hom_precomp_along_fapp0
+      $B $B $IdB $GY $FX $FY $Fg $epsilonY
+  ↪ [
+    $IdB ≡ (@id Cat_cat $B);
+    $GY ≡ (@fapp0 $A $B $G $Y);
+    $FX ≡ (@fapp0 $A $B $F $X);
+    $FY ≡ (@fapp0 $A $B $F $Y);
+    $Fg ≡ (@fapp1_fapp0 $A $B $F $X $Y $g);
+    $epsilonY ≡ (@tapp0_fapp0 $A $B $F $G $Y $epsilon)
+  ];
+
 // Cat-valued object-level projections of strict naturality. Both composites
 // fold to the off-diagonal component at the base arrow.
 //

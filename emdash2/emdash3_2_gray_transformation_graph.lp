@@ -13,10 +13,12 @@
   and finally takes the outer opposite. Generic fapp1 therefore retains every
   subsequent action.
 
-  Generic represented-Sigma accumulation and proof-time opposite/reindex
-  comparison join the deliberate stable histories without equality-induced
-  action casts. This module adds no primitive graph functor, square, rule,
-  unifier, endpoint collapse, or hand-written naturality field.
+  This strictified/internal graph has a retained second-side projection.  The
+  standard directed square with literal sides F[g] and G[g] is exposed
+  separately from the existing post/left laxity cell.  Assembling those
+  standard squares into a whole graph requires a normal-lax/lax-map profile;
+  forcing them into today's globally strict Functor classifier would conflict
+  with its judgmental identity cut.
 */
 
 require open emdash.emdash3_2_gray_interchanger_orientation;
@@ -326,7 +328,7 @@ protected symbol gray_transf_graph_underlying_func
       (@gray_transf_graph_target_catd B C F)
       (@gray_transf_graph_target_sec B C F G epsilon));
 
-// Whole transformation graph; generic hom action remains iterable.
+// Whole strictified transformation graph; generic hom action remains iterable.
 symbol gray_transf_graph_func
   [B C : Cat]
   [F G : τ (Functor B C)]
@@ -412,10 +414,8 @@ symbol gray_transf_graph_source_side_path
     (Hom C (@fapp0 B C F x) (@fapp0 B C F y))
     (@fapp1_fapp0 B C F x y g);
 
-// The opposite nested-Sigma second projection is the target side of the
-// square.  In the generic lax ambient it deliberately retains the
-// family-natural total-base-change action rather than being collapsed to the
-// separately named G[g].
+// The opposite nested-Sigma second projection is the retained target side of
+// the strictified/internal graph.  It is not the standard G[g] observation.
 symbol gray_transf_graph_target_side
   [B C : Cat]
   [F G : τ (Functor B C)]
@@ -427,9 +427,8 @@ symbol gray_transf_graph_target_side
     (sigma_Snd
       (@gray_transf_graph_arrow B C F G epsilon x y g));
 
-// The remaining nested-Sigma projection is the coordinate-swapped existing
-// internal-action cell.  Its displayed boundary is exactly the native lax
-// square boundary; no naturality square is postulated here.
+// The remaining nested-Sigma projection is the internal graph cell.  Its
+// target-side presentation is intentionally retained.
 symbol gray_transf_graph_cell
   [B C : Cat]
   [F G : τ (Functor B C)]
@@ -451,6 +450,59 @@ symbol gray_transf_graph_cell
 ≔ sigma_Snd
     (sigma_Snd
       (@gray_transf_graph_arrow B C F G epsilon x y g));
+
+// Standard lax-naturality filler with literal sides F[g] and G[g], extracted
+// from the existing post/left whole action at the identity source arrow.
+symbol gray_transf_standard_cell
+  [B C : Cat]
+  [F G : τ (Functor B C)]
+  (epsilon : τ (Transf F G))
+  [x y : τ (Obj B)]
+  (g : τ (Hom B x y))
+  : τ (Obj
+      (@homdc_square_fibre
+        C
+        (@fapp0 B C F x)
+        (@fapp0 B C F y)
+        (@fapp0 B C G x)
+        (@fapp0 B C G y)
+        (@tapp0_fapp0 B C F G x epsilon)
+        (@tapp0_fapp0 B C F G y epsilon)
+        (@fapp1_fapp0 B C F x y g)
+        (@fapp1_fapp0 B C G x y g)))
+≔ @tapp1_post_laxity_cell
+    B C F G epsilon
+    x x y g (@id B x);
+
+// Constructor-visible standard square.  This is a pointwise operation, not
+// yet a whole strict functor in the varying x-coordinate.
+symbol gray_transf_standard_square
+  [B C : Cat]
+  [F G : τ (Functor B C)]
+  (epsilon : τ (Transf F G))
+  [x y : τ (Obj B)]
+  (g : τ (Hom B x y))
+  : τ (Hom
+      (@LaxArrow_cat C)
+      (@lax_edge C
+        (@fapp0 B C F x)
+        (@fapp0 B C G x)
+        (@tapp0_fapp0 B C F G x epsilon))
+      (@lax_edge C
+        (@fapp0 B C F y)
+        (@fapp0 B C G y)
+        (@tapp0_fapp0 B C F G y epsilon)))
+≔ @lax_square
+    C
+    (@fapp0 B C F x)
+    (@fapp0 B C F y)
+    (@fapp0 B C G x)
+    (@fapp0 B C G y)
+    (@tapp0_fapp0 B C F G x epsilon)
+    (@tapp0_fapp0 B C F G y epsilon)
+    (@fapp1_fapp0 B C F x y g)
+    (@fapp1_fapp0 B C G x y g)
+    (@gray_transf_standard_cell B C F G epsilon x y g);
 
 // The graph is not capped at its square reading: another whole hom action is
 // available for the recursive Gray-cube successor.

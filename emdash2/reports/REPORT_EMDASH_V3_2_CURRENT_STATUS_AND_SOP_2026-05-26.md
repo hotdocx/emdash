@@ -515,11 +515,13 @@ detailed probe evidence.
 - `emdash3_2_gray_interchanger_orientation.lp` and
   `emdash3_2_gray_transformation_graph.lp`: the selected interchanger has
   checked direction `v o a ==> b o u`; exchanging the coordinate roles gives
-  the native lax-square orientation. Every transformation then yields one
-  whole functor `B -> LaxArrow_cat(C)` constructed from internal action,
-  represented identity section, family-natural Sigma base change, and
-  opposites. Objects read as component edges; arrows expose `F[g]`, a retained
-  target side, the existing directed filler, and another whole hom action.
+  the native lax-square orientation. Every transformation yields an iterable
+  internal whole functor `B -> LaxArrow_cat(C)`. Objects read as component
+  edges and the first side reads as `F[g]`; the second side retains its
+  represented-Sigma/opposite totalization history. Separately, the standard
+  pointwise square has literal sides `F[g]` and `G[g]`, with filler extracted
+  from the existing post/left internal action. Assembling those pointwise
+  squares into a whole graph awaits a normal-lax/lax-map profile.
 - `emdash3_2_gray_cubes.lp`,
   `emdash3_2_gray_transformation_graph_profile.lp`,
   `emdash3_2_gray_cube_decoder.lp`, and
@@ -527,11 +529,12 @@ detailed probe evidence.
   their selected strict graph profile, and a genuine arbitrary-`n` object
   decoder. The predecessor index `n` denotes dimension `n+1`. Successor
   decoding curries, takes the walking generator, recursively decodes its graph
-  in `LaxArrow`, and applies the Nat-derived level shift. Dimensions one
-  through three, the selected `I tensor_R I` interchanger direction, four
-  square edges, six cube faces, and retained next action are checked. No tensor
-  unit, alternate-bracketing coherence, inverse decoder, or mapping-category
-  equivalence is claimed.
+  in `LaxArrow`, and applies the Nat-derived level shift. The strict carrier
+  stays stable; `eq_ap` and dependent `eq_apd` expose its object and arrow
+  readings. Dimensions one through three, the exact `I tensor_R I`
+  interchanger, four square edges, six cube faces, and retained next action are
+  checked. No tensor unit, alternate-bracketing coherence, inverse decoder, or
+  mapping-category equivalence is claimed.
 - `emdash3_2_cubical_dependent_hom.lp`: transparent two-sided cross-corner
   dependent hom for `E : K1^op -> Catd(K2)`. It transports the source in the
   second coordinate and the target in the first, then forms one hom in the
@@ -4307,14 +4310,18 @@ GrayCubePos_R(succ n)  = WalkingArrow tensor_R GrayCubePos_R(n)
 
 defines the fixed-bracketing geometric shapes. A selected strict realization
 decodes by one Nat recursion uniform in the target category. The successor
-uses right curry, the walking generator, the whole transformation graph, and a
-proved cubical-level shift. The graph's target side deliberately retains its
-internal-action/total-base-change normal form rather than being identified
-with a separately named `G[g]`; its final projection already has the native
-cell boundary. The selected two-dimensional identity realization recovers the
-existing coevaluation data and the same coordinate-swapped interchanger. The
-existing immediate-frame family gives four edges and six faces at dimensions
-two and three and remains variable-dimensional.
+uses right curry, the walking generator, the internal whole transformation
+graph, and a proved cubical-level shift. That graph retains its second-side
+totalization history and another whole action. Its separate standard
+pointwise square has literal sides `F[g]` and `G[g]`; its filler is
+`tapp1_post_laxity_cell(epsilon,g,id_x)`, derived from the whole internal
+action rather than independently postulated. The selected two-dimensional
+identity realization recovers the existing coevaluation data, and the
+standard pointwise filler is definitionally the established
+coordinate-swapped interchanger. No equality with the retained internal graph
+cell is claimed before the normal-lax whole-graph profile exists. The existing
+immediate-frame family gives four edges and six faces at dimensions two and
+three and remains variable-dimensional.
 
 This is object-level semantic adequacy, not a full equivalence between Gray
 mapping categories and native cubical levels. Tensor action in parameters,

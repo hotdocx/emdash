@@ -110,11 +110,16 @@ closure yields a coevaluation-derived walking square and a checked
 nonidentity oriented interchanger. Its checked direction becomes the native
 lax-square direction after exchanging the two coordinate roles.
 
-Every transformation now has one whole graph `B -> LaxArrow_cat(C)`. Objects
-read as its components; arrows expose a source side, retained target side, the
-existing directed filler, and another hom action. A selected strict code keeps
-the decoder head stable while one carrier path provides the transparent graph
-reading. Fixed-bracketing positive right-Gray cubes and one Nat-recursive
+Every transformation now has an iterable internal graph
+`B -> LaxArrow_cat(C)`. Objects read as its components; its first side computes
+to `F[g]`, while the second side retains the whole totalization history needed
+by recursion. Separately, the standard pointwise square has literal sides
+`F[g]` and `G[g]`, with filler extracted from the existing post/left internal
+action. A selected strict code keeps the decoder head stable while one carrier
+path, its object action, and dependent arrow action expose the internal graph.
+A whole graph of the standard squares remains deferred to a
+normal-lax/lax-map profile. Fixed-bracketing positive right-Gray cubes and one
+Nat-recursive
 object decoder then give
 
 ```text

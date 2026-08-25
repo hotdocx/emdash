@@ -8,11 +8,11 @@
 
     target_side o outer_source  ==>  outer_target o inner_source.
 
-  The target side deliberately remains the total-base-change/internal-action
-  projection.  `gray_interchanger_readable` additionally reframes that side to
-  the separately named inner-target arrow, so no direct equality between those
-  differently presented cells is asserted.  The whole graph action remains
-  available for the next dimension.
+  The internal whole graph retains its second-side construction history and
+  another action for recursion.  Separately, the standard square with literal
+  inner-target side is the existing `gray_interchanger` itself.  The two
+  readings must not be identified until a normal-lax/lax-map graph profile
+  supplies their whole comparison.
 */
 
 require open emdash.emdash3_2_gray_cube_decoder;
@@ -51,6 +51,56 @@ symbol gray_cube2_interchanger_cell
     gray_square_outer_transf
     walking_arrow_src walking_arrow_tgt
     walking_arrow_generator;
+
+symbol gray_cube2_standard_interchanger_cell
+  : τ (Obj
+      (@homdc_square_fibre
+        GrayWalkingSquare_cat
+        gray_square_obj00
+        gray_square_obj01
+        gray_square_obj10
+        gray_square_obj11
+        gray_square_outer_src_arrow
+        gray_square_outer_tgt_arrow
+        gray_square_inner_src_arrow
+        gray_square_inner_tgt_arrow))
+≔ @gray_transf_standard_cell
+    WalkingArrow_cat
+    GrayWalkingSquare_cat
+    gray_square_inner_src_func
+    gray_square_inner_tgt_func
+    gray_square_outer_transf
+    walking_arrow_src walking_arrow_tgt
+    walking_arrow_generator;
+
+symbol gray_cube2_standard_interchanger_path
+  : τ (@=
+      (Obj
+        (@homdc_square_fibre
+          GrayWalkingSquare_cat
+          gray_square_obj00
+          gray_square_obj01
+          gray_square_obj10
+          gray_square_obj11
+          gray_square_outer_src_arrow
+          gray_square_outer_tgt_arrow
+          gray_square_inner_src_arrow
+          gray_square_inner_tgt_arrow))
+      gray_cube2_standard_interchanger_cell
+      gray_interchanger)
+≔ @eq_refl
+    (Obj
+      (@homdc_square_fibre
+        GrayWalkingSquare_cat
+        gray_square_obj00
+        gray_square_obj01
+        gray_square_obj10
+        gray_square_obj11
+        gray_square_outer_src_arrow
+        gray_square_outer_tgt_arrow
+        gray_square_inner_src_arrow
+        gray_square_inner_tgt_arrow))
+    gray_cube2_standard_interchanger_cell;
 
 symbol gray_cube2_graph_next_func
   : τ (Functor
