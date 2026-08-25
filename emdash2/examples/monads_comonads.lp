@@ -7,9 +7,10 @@
 
     g* o f* -> (g* o f)*.
 
-  KleisliCut is only transparent derived notation. The opposite-derived
-  comonad has a stable whole coextension facade whose ambient rules use the
-  exact dual orientations.
+  KleisliCut is only transparent derived notation. Opposite-derived comonad
+  observations and point coextension compute into a narrow stable variance
+  mirror after Op normalization; the whole coextension comparison is a
+  proof-time equation. No propositional equality bridge is involved.
 */
 
 require open emdash.emdash3_2_monads;
@@ -122,6 +123,29 @@ assert [A : Cat]
     (@cokleisli_extend_fapp0 A D C X Y f)
   ≡ @comp_fapp0 A (@fapp0 A A D X) Y Z h f;
 
+// The canonical raw Op presentation enters the same stable co-beta rule.
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y Z : τ (Obj A))
+  (f : τ (Hom A (@fapp0 A A D X) Y))
+  (h : τ (Hom A Y Z)) ⊢
+  @comp_fapp0
+    A
+    (@fapp0 A A D X)
+    (@fapp0 A A D Y)
+    Z
+    (@tapp1_fapp0
+      A A D (@id_func A) Y Z
+      (@Op_transf
+        (Op_cat A) (Op_cat A)
+        (@id_func (Op_cat A)) (@Op_func A A D)
+        (@unit_monad_transf (Op_cat A) (@Op_func A A D) C))
+      h)
+    (@kleisli_extend_fapp0
+      (Op_cat A) (@Op_func A A D) C Y X f)
+  ≡ @comp_fapp0 A (@fapp0 A A D X) Y Z h f;
+
 // Exact dual accumulation in the comonad facade.
 assert [A : Cat]
   [D : τ (Functor A A)]
@@ -181,7 +205,8 @@ assert [A : Cat]
         (@cokleisli_extend_fapp0 A D C X Y f)
         (@cokleisli_extend_fapp0 A D C X Y g)));
 
-// The existing adjunction constructs both exact structural instances.
+// The existing adjunction constructs both exact structural instances; the
+// stable comultiplication is the Op-derived opposite-monad multiplication.
 assert [R L : Cat]
   [F : τ (Functor R L)]
   [G : τ (Functor L R)]
@@ -195,6 +220,13 @@ assert [R L : Cat]
   (J : τ (@Adjunction R L F G)) ⊢
   counit_comonad_transf (adjunction_comonad J)
     ≡ counit_adj_transf J;
+
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  comult_comonad_transf (adjunction_comonad J)
+    ≡ adjunction_comonad_comult_transf J;
 
 // Unrelated same-typed operations remain untrusted.
 assertnot [A : Cat]

@@ -1240,13 +1240,16 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_MONAD_COMONAD_COMPUTATION_PLAN_2026-08-23.md`:
-  completed corrective persistent goal over historical checkpoint `c1f4419`.
-  The indexed full-functor interface and whole extension remain, but ordinary
-  ambient `comp_fapp0` now owns Došen beta and accumulation. Primitive
-  `KleisliCut` has been superseded as the normalizer, warning deltas are
-  classified rather than vetoed, and stable coextension supplies executable
-  ambient comonad duality. The focused checks, catalog, health snapshot,
-  warning/audit boundary, examples, and full 270-file CI closeout are green.
+  completed post-`ac1671c` definitional-duality correction. Monad
+  remains primary, ordinary ambient `comp_fapp0` owns Došen beta and
+  accumulation, and `KleisliCut` remains transparent notation. The optional
+  comonad layer now uses a transparent classifier plus a measured narrow
+  stable variance mirror: canonical Op observations and point components fold
+  computationally, whole coextension uses proof-time comparison, and all
+  opaque equality bridges have been removed. Focused checks, the 2,260-check
+  catalog, strict audits, warning classification, the complete reviewer sweep,
+  a fresh 270-file health pass, and the independent 270-file full CI plus all
+  post-check gates are green.
   Explicit Kleisli-category, free-syntax decidability, and TypeScript work
   remain separately gated.
 - `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:

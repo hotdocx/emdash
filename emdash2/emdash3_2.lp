@@ -9824,10 +9824,8 @@ injective symbol Op_transf
 
 // Opposite-transfor involution.
 rule @Op_transf
-      (Op_cat $A) (Op_cat $B)
-      (@Op_func $A $B $G)
-      (@Op_func $A $B $F)
-      (@Op_transf $A $B $F $G $eta)
+      _ _ _ _
+      (@Op_transf _ _ _ _ $eta)
   ↪ $eta;
 
 // Opposite sends identity to identity on the opposite functor.

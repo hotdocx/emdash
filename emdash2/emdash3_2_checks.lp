@@ -10786,6 +10786,25 @@ assert [A B : Cat]
     (@Op_transf A B F G eta)
   ≡ eta;
 
+// Involution still fires after the inner opposite-adjunction unit projection
+// has normalized the outer transformation indices away from literal Op_func
+// heads. This is the motivating consumer for the fully inferred LHS.
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @Op_transf
+    (Op_cat L)
+    (Op_cat L)
+    (@id_func (Op_cat L))
+    (@Op_func L L (@comp_cat_fapp0 L R L F G))
+    (@unit_adj_transf
+      (Op_cat L) (Op_cat R)
+      (@Op_func L R G)
+      (@Op_func R L F)
+      (@Op_adjunction R L F G J))
+  ≡ @counit_adj_transf R L F G J;
+
 assert [A B : Cat]
   (F : τ (Functor A B)) ⊢
   @Op_transf
@@ -10908,6 +10927,47 @@ assert [A : Cat]
         (Hom_cat A (@fapp0 A A T X) (@fapp0 A A T Y))
         (@kleisli_extend_fapp0 A T M X Y f)
         (@kleisli_extend_fapp0 A T M X Y g)));
+
+// Whole semantic comparison is proof-time unification after mu selects its
+// triangular component normal form; no opaque equality constant is involved.
+assert [A : Cat]
+  [T : τ (Functor A A)]
+  (M : τ (@Monad A T))
+  (X Y : τ (Obj A)) ⊢
+  @eq_refl
+    (Functor
+      (@Hom_cat A X (@fapp0 A A T Y))
+      (@Hom_cat A (@fapp0 A A T X) (@fapp0 A A T Y)))
+    (@kleisli_extend_semantic_func A T M X Y)
+  : τ (@=
+      (Functor
+        (@Hom_cat A X (@fapp0 A A T Y))
+        (@Hom_cat A (@fapp0 A A T X) (@fapp0 A A T Y)))
+      (@kleisli_extend_func A T M X Y)
+      (@kleisli_extend_semantic_func A T M X Y));
+
+// Point semantic comparison is registered independently; unification is not
+// assumed to propagate through the whole functor's fapp0 projection.
+assert [A : Cat]
+  [T : τ (Functor A A)]
+  (M : τ (@Monad A T))
+  (X Y : τ (Obj A))
+  (f : τ (Hom A X (@fapp0 A A T Y))) ⊢
+  @eq_refl
+    (Hom A (@fapp0 A A T X) (@fapp0 A A T Y))
+    (@fapp0
+      (@Hom_cat A X (@fapp0 A A T Y))
+      (@Hom_cat A (@fapp0 A A T X) (@fapp0 A A T Y))
+      (@kleisli_extend_semantic_func A T M X Y)
+      f)
+  : τ (@=
+      (Hom A (@fapp0 A A T X) (@fapp0 A A T Y))
+      (@kleisli_extend_fapp0 A T M X Y f)
+      (@fapp0
+        (@Hom_cat A X (@fapp0 A A T Y))
+        (@Hom_cat A (@fapp0 A A T X) (@fapp0 A A T Y))
+        (@kleisli_extend_semantic_func A T M X Y)
+        f));
 
 // Ambient Došen beta: g* o eta^c(f) -> g o f.
 assert [A : Cat]
@@ -11100,23 +11160,76 @@ assert [A : Cat]
   @comult_comonad_transf A D C
   : τ (Transf D (@comp_cat_fapp0 A A A D D));
 
-// The full counit antecedental action agrees propositionally with the direct
-// dual-unit owner while both whole functors remain available.
+// Whole opposite unit/multiplication fold definitionally to the stable dual
+// observations; no equality constants mediate these comparisons.
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D)) ⊢
+  @Op_transf
+    (Op_cat A) (Op_cat A)
+    (@id_func (Op_cat A)) (@Op_func A A D)
+    (@unit_monad_transf (Op_cat A) (@Op_func A A D) C)
+  ≡ @counit_comonad_transf A D C;
+
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D)) ⊢
+  @Op_transf
+    (Op_cat A) (Op_cat A)
+    (@comp_cat_fapp0
+      (Op_cat A) (Op_cat A) (Op_cat A)
+      (@Op_func A A D) (@Op_func A A D))
+    (@Op_func A A D)
+    (@mult_monad_transf (Op_cat A) (@Op_func A A D) C)
+  ≡ @comult_comonad_transf A D C;
+
+// Applying Op to stable dual observations recovers the primary operations.
+assert [A : Cat]
+  [T : τ (Functor A A)]
+  (M : τ (@Monad A T)) ⊢
+  @eq_refl
+    (Transf (@id_func A) T)
+    (@unit_monad_transf A T M)
+  : τ (@=
+      (Transf (@id_func A) T)
+      (@Op_transf
+        (Op_cat A) (Op_cat A)
+        (@Op_func A A T)
+        (@id_func (Op_cat A))
+        (@counit_comonad_transf
+          (Op_cat A) (@Op_func A A T) M))
+      (@unit_monad_transf A T M));
+
+assert [A : Cat]
+  [T : τ (Functor A A)]
+  (M : τ (@Monad A T)) ⊢
+  @eq_refl
+    (Transf (@comp_cat_fapp0 A A A T T) T)
+    (@mult_monad_transf A T M)
+  : τ (@=
+      (Transf (@comp_cat_fapp0 A A A T T) T)
+      (@Op_transf
+        (Op_cat A) (Op_cat A)
+        (@Op_func A A T)
+        (@comp_cat_fapp0
+          (Op_cat A) (Op_cat A) (Op_cat A)
+          (@Op_func A A T) (@Op_func A A T))
+        (@comult_comonad_transf
+          (Op_cat A) (@Op_func A A T) M))
+      (@mult_monad_transf A T M));
+
+// The readable counit antecedental action is the standard whole action
+// definitionally; no equality witness mediates the two presentations.
 assert [A : Cat]
   [D : τ (Functor A A)]
   (C : τ (@Comonad A D))
   (X Y : τ (Obj A)) ⊢
-  @counit_comonad_antecedent_path A D C X Y
-  : τ (@=
-      (Functor
-        (Hom_cat A X Y)
-        (Hom_cat A (@fapp0 A A D X) Y))
-      (@tapp1_func
-        A A
-        D (@id_func A)
-        X Y
-        (@counit_comonad_transf A D C))
-      (@counit_comonad_antecedent_func A D C X Y));
+  @counit_comonad_antecedent_func A D C X Y
+  ≡ @tapp1_func
+      A A
+      D (@id_func A)
+      X Y
+      (@counit_comonad_transf A D C);
 
 // Stable whole coextension projects to its stable point owner.
 assert [A : Cat]
@@ -11131,29 +11244,89 @@ assert [A : Cat]
     f
   ≡ @cokleisli_extend_fapp0 A D C X Y f;
 
-// Stable coextension retains explicit evidence to the opposite monad.
+// Typed reflexivity exercises the proof-time whole comparison to the opposite
+// monad; no opaque equality constant is involved.
 assert [A : Cat]
   [D : τ (Functor A A)]
   (C : τ (@Comonad A D))
   (X Y : τ (Obj A)) ⊢
-  @cokleisli_extend_op_path A D C X Y
+  @eq_refl
+    (Functor
+      (@Hom_cat A (@fapp0 A A D X) Y)
+      (@Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y)))
+    (@cokleisli_extend_func A D C X Y)
   : τ (@=
       (Functor
         (Hom_cat A (@fapp0 A A D X) Y)
         (Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y)))
-      (@cokleisli_extend_func A D C X Y)
-      (@cokleisli_extend_op_func A D C X Y));
+      (@kleisli_extend_func
+        (Op_cat A) (@Op_func A A D) C Y X)
+      (@cokleisli_extend_func A D C X Y));
 
+// The point comparison is a runtime fold at the surviving Op_func head.
 assert [A : Cat]
   [D : τ (Functor A A)]
   (C : τ (@Comonad A D))
   (X Y : τ (Obj A))
   (f : τ (Hom A (@fapp0 A A D X) Y)) ⊢
-  @cokleisli_extend_op_fapp0_path A D C X Y f
+  @eq_refl
+    (Hom A (@fapp0 A A D X) (@fapp0 A A D Y))
+    (@cokleisli_extend_fapp0 A D C X Y f)
   : τ (@=
       (Hom A (@fapp0 A A D X) (@fapp0 A A D Y))
-      (@cokleisli_extend_fapp0 A D C X Y f)
-      (@cokleisli_extend_op_fapp0 A D C X Y f));
+      (@kleisli_extend_fapp0
+        (Op_cat A) (@Op_func A A D) C Y X f)
+      (@cokleisli_extend_fapp0 A D C X Y f));
+
+// Canonical raw Op terms enter the stable ambient co-beta normalizer.
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y Z : τ (Obj A))
+  (f : τ (Hom A (@fapp0 A A D X) Y))
+  (h : τ (Hom A Y Z)) ⊢
+  @comp_fapp0
+    A
+    (@fapp0 A A D X)
+    (@fapp0 A A D Y)
+    Z
+    (@tapp1_fapp0
+      A A D (@id_func A)
+      Y Z
+      (@Op_transf
+        (Op_cat A) (Op_cat A)
+        (@id_func (Op_cat A)) (@Op_func A A D)
+        (@unit_monad_transf (Op_cat A) (@Op_func A A D) C))
+      h)
+    (@kleisli_extend_fapp0
+      (Op_cat A) (@Op_func A A D) C Y X f)
+  ≡ @comp_fapp0 A (@fapp0 A A D X) Y Z h f;
+
+// Canonical raw opposite extensions enter stable dual accumulation.
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y Z : τ (Obj A))
+  (f1 : τ (Hom A (@fapp0 A A D X) Y))
+  (f2 : τ (Hom A (@fapp0 A A D Y) Z)) ⊢
+  @comp_fapp0
+    A
+    (@fapp0 A A D X)
+    (@fapp0 A A D Y)
+    (@fapp0 A A D Z)
+    (@kleisli_extend_fapp0
+      (Op_cat A) (@Op_func A A D) C Z Y f2)
+    (@kleisli_extend_fapp0
+      (Op_cat A) (@Op_func A A D) C Y X f1)
+  ≡ @cokleisli_extend_fapp0
+      A D C X Z
+      (@comp_fapp0
+        A
+        (@fapp0 A A D X)
+        (@fapp0 A A D Y)
+        Z
+        f2
+        (@cokleisli_extend_fapp0 A D C X Y f1));
 
 // Ambient Došen co-beta: epsilon^a(h) o Delta(f) -> h o f.
 assert [A : Cat]
@@ -11262,6 +11435,19 @@ assert [D : τ (Functor Terminal_cat Terminal_cat)]
   @cokleisli_extend_fapp0 Terminal_cat D C X Y f
   ≡ Terminal_obj;
 
+// Op_func-first and Terminal-arrow-first point-bridge orders agree.
+assert [D : τ (Functor Terminal_cat Terminal_cat)]
+  (C : τ (@Comonad Terminal_cat D))
+  (X Y : τ (Obj Terminal_cat))
+  (f : τ (Hom Terminal_cat
+    (@fapp0 Terminal_cat Terminal_cat D X)
+    Y)) ⊢
+  @kleisli_extend_fapp0
+    Terminal_cat
+    (@Op_func Terminal_cat Terminal_cat D)
+    C Y X f
+  ≡ Terminal_obj;
+
 // Coextension of the standard counit component is identity.
 assert [A : Cat]
   [D : τ (Functor A A)]
@@ -11296,7 +11482,9 @@ assert [A : Cat]
   [D : τ (Functor A A)]
   (C : τ (@Comonad A D))
   (X : τ (Obj A)) ⊢
-  @counit_comonad_fapp0_path A D C X
+  @eq_refl
+    (Hom A (@fapp0 A A D X) X)
+    (@counit_comonad_fapp0 A D C X)
   : τ (@=
       (Hom A (@fapp0 A A D X) X)
       (@tapp0_fapp0
@@ -11305,6 +11493,26 @@ assert [A : Cat]
         X
         (@counit_comonad_transf A D C))
       (@counit_comonad_fapp0 A D C X));
+
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X : τ (Obj A)) ⊢
+  @eq_refl
+    (Hom A
+      (@fapp0 A A D X)
+      (@fapp0 A A D (@fapp0 A A D X)))
+    (@comult_comonad_fapp0 A D C X)
+  : τ (@=
+      (Hom A
+        (@fapp0 A A D X)
+        (@fapp0 A A D (@fapp0 A A D X)))
+      (@tapp0_fapp0
+        A A
+        D (@comp_cat_fapp0 A A A D D)
+        X
+        (@comult_comonad_transf A D C))
+      (@comult_comonad_fapp0 A D C X));
 
 // The stable coextension remains whole and iterable.
 assert [A : Cat]
@@ -11357,20 +11565,100 @@ assert [R L : Cat]
   [F : τ (Functor R L)]
   [G : τ (Functor L R)]
   (J : τ (@Adjunction R L F G)) ⊢
-  @adjunction_comonad_unit_op_path R L F G J
-  : τ (@=
-      (Transf
-        (@id_func (Op_cat L))
-        (@Op_func L L (@comp_cat_fapp0 L R L F G)))
-      (@unit_monad_transf
-        (Op_cat L)
-        (@Op_func L L (@comp_cat_fapp0 L R L F G))
-        (@adjunction_comonad R L F G J))
-      (@Op_transf
-        L L
+  @unit_monad_transf
+    (Op_cat L)
+    (@Op_func L L (@comp_cat_fapp0 L R L F G))
+    (@adjunction_comonad R L F G J)
+  ≡ @Op_transf
+      L L
+      (@comp_cat_fapp0 L R L F G)
+      (@id_func L)
+      (@counit_adj_transf R L F G J);
+
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @mult_monad_transf
+    (Op_cat L)
+    (@Op_func L L (@comp_cat_fapp0 L R L F G))
+    (@adjunction_comonad R L F G J)
+  ≡ @Op_transf
+      L L
+      (@comp_cat_fapp0 L R L F G)
+      (@comp_cat_fapp0
+        L L L
         (@comp_cat_fapp0 L R L F G)
-        (@id_func L)
-        (@counit_adj_transf R L F G J)));
+        (@comp_cat_fapp0 L R L F G))
+      (@adjunction_comonad_comult_transf R L F G J);
+
+// The transparent opposite-adjunction construction selects the same stable
+// witness at runtime.
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @eq_refl
+    (@Comonad L (@comp_cat_fapp0 L R L F G))
+    (@adjunction_comonad R L F G J)
+  : τ (@=
+      (@Comonad L (@comp_cat_fapp0 L R L F G))
+      (@adjunction_monad
+        (Op_cat L) (Op_cat R)
+        (@Op_func L R G) (@Op_func R L F)
+        (@Op_adjunction R L F G J))
+      (@adjunction_comonad R L F G J));
+
+// The selected comultiplication is definitionally the opposite of the
+// concrete multiplication of the opposite-adjunction monad.
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @adjunction_comonad_comult_transf R L F G J
+  ≡ @Op_transf
+      (Op_cat L) (Op_cat L)
+      (@comp_cat_fapp0
+        (Op_cat L) (Op_cat L) (Op_cat L)
+        (@Op_func L L (@comp_cat_fapp0 L R L F G))
+        (@Op_func L L (@comp_cat_fapp0 L R L F G)))
+      (@Op_func L L (@comp_cat_fapp0 L R L F G))
+      (@adjunction_monad_mult_transf
+        (Op_cat L) (Op_cat R)
+        (@Op_func L R G) (@Op_func R L F)
+        (@Op_adjunction R L F G J));
+
+// Both bridge-first and concrete-operation-first routes join.
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @Op_transf
+    (Op_cat L) (Op_cat L)
+    (@id_func (Op_cat L))
+    (@Op_func L L (@comp_cat_fapp0 L R L F G))
+    (@unit_monad_transf
+      (Op_cat L)
+      (@Op_func L L (@comp_cat_fapp0 L R L F G))
+      (@adjunction_comonad R L F G J))
+  ≡ @counit_adj_transf R L F G J;
+
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @Op_transf
+    (Op_cat L) (Op_cat L)
+    (@comp_cat_fapp0
+      (Op_cat L) (Op_cat L) (Op_cat L)
+      (@Op_func L L (@comp_cat_fapp0 L R L F G))
+      (@Op_func L L (@comp_cat_fapp0 L R L F G)))
+    (@Op_func L L (@comp_cat_fapp0 L R L F G))
+    (@mult_monad_transf
+      (Op_cat L)
+      (@Op_func L L (@comp_cat_fapp0 L R L F G))
+      (@adjunction_comonad R L F G J))
+  ≡ @adjunction_comonad_comult_transf R L F G J;
 
 // catalog-area: auto
 
