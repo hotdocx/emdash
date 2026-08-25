@@ -51,6 +51,13 @@ interchanger tranche `e2f069c11c840f3129331842b14b59ee20d13667`; completed
 `GRAY-CLOSE-1` synchronization tranche
 `053fcce8d8f641cf2b74847e60577f700a72bec1`
 
+Cubical-Adequacy-Continuation:
+`REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`.
+That continuation treats Gray tensor powers of the walking arrow as the
+literature-backed geometric cube candidates, audits the selected lax/oplax
+direction against `b o u ==> v o a`, and seeks only the object-level
+geometric decoder before any whole equivalence or full monoidal claim.
+
 ## Objective
 
 Implement one selected, computationally inspectable **right-closed Gray

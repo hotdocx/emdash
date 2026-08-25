@@ -43,6 +43,12 @@ Baseline: completed experimental intrinsic-semicubical checkpoint
 
 Active code, this plan, and measured probes outrank archived conversation.
 
+Semantic-Adequacy-Continuation:
+`REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`.
+That plan packages the representable/Yoneda object maps and then compares the
+native levels with literature-standard Gray tensor powers of the walking
+arrow, after an explicit lax/oplax orientation audit.
+
 ## 1. Corrective Objective
 
 Restore the same foundations-first architecture that governs the simplicial

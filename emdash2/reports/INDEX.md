@@ -1239,6 +1239,15 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`:
+  active semantic-adequacy continuation. It first packages the object-level
+  Yoneda section/evaluation between `StandardSemicube(n)` and the whole native
+  cubical nerve, then audits the selected Gray walking-square orientation and
+  develops fixed-bracketing Gray tensor powers of the walking arrow as
+  independent geometric cube shapes. Public claims remain object-level while
+  recursive implementation may retain whole action; full equivalences,
+  alternate bracketings, and monoidal coherence are deferred.
+
 - `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`:
   completed corrective continuation. It derives
   `homdc_int` from the existing `homd_int` after inner Sigma and pointwise
