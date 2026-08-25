@@ -12108,6 +12108,29 @@ rule @tapp0_fapp0
       (@tapp1_at_transf $A $B $F $G $X $ϵ)
   ↪ @tapp1_func $A $B $F $G $X $Y $ϵ;
 
+// Third projection of the fixed-source internal action.  Its base-arrow
+// action remains a whole functor; only evaluation at f exposes the ordinary
+// off-diagonal component at the represented composite g o f.
+//
+// Surface/formula:
+//   tapp1_at_transf(epsilon,X)[g][f] = epsilon[g o f].
+//
+// The displayed source/target families are inferred from the stable
+// `tapp1_at_transf` head.  The RHS keeps represented postcomposition as the
+// compositional owner instead of selecting raw `comp_fapp0` as a second
+// normal form.
+rule @fapp0
+      _ _
+      (@tapp1_fapp0
+        $A Cat_cat _ _ $Y $Z
+        (@tapp1_at_transf $A $B $F $G $X $epsilon)
+        $g)
+      $f
+  ↪ @tapp1_fapp0
+      $A $B $F $G $X $Z $epsilon
+      (@hom_postcomp_fapp0
+        $A $A (@id_func $A) $X $Y $Z $g $f);
+
 // Second projection of identity-specialized internal hom-action.
 //
 // Surface/formula:

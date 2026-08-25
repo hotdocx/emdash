@@ -242,6 +242,11 @@ the directed walking-square interchanger is
 `emdash3_2_gray_interchanger.lp`; it is the identity component of the active
 whole post/left laxity owner, retains one next hom action, and adds no
 independent square, endpoint rewrite, or unifier;
+the typed readable orientation and coordinate-swapped native cubical reading
+are `emdash3_2_gray_interchanger_orientation.lp`; one generic fixed-source
+internal-action projection beta exposes `epsilon[g o f]`, while first-class
+paths retain both stable endpoint histories and the same directed cell becomes
+a native lax square only after exchanging the two coordinate roles;
 the classified computational homotopy-truncation reflector and its derived
 whole map action are `emdash3_2_truncation_reflector.lp`; it realizes the
 category of `n`-types through retained `TruncGrpdU(n)` packages, restricts
@@ -1070,7 +1075,11 @@ Use the following order:
     transformation, its identity component is the named cell, and its next
     `tapp1_func` action remains public. It confirms the `GrayHom_lax`
     direction and adds no standalone square, endpoint bridge, rule, or
-    unifier;
+    unifier. Its continuation `emdash3_2_gray_interchanger_orientation.lp`
+    derives typed readable endpoints and the coordinate-swapped native square.
+    The one new generic rule is the warning-neutral third projection of
+    `tapp1_at_transf`; the continuation adds no Gray-specific rule, unifier,
+    endpoint equality, or inverse cell;
 79. `emdash3_2_truncation_reflector.lp` for the classified computational
     truncation reflector. It realizes `NType_cat(n)` through the existing
     retained-evidence `TruncGrpdU(n)` package, provides point-computing

@@ -218,6 +218,44 @@ the current interchanger has the reverse direction, the plan must select a
 factor swap/opposite or rename the profile; it must not add an endpoint rewrite
 or silently call the reverse cell "lax".
 
+The checked verdict is now precise. The selected right-Gray cell has readable
+direction
+
+```text
+v o a ==> b o u,
+```
+
+where `u,v` are the inner-coordinate arrows and `a,b` are the outer-coordinate
+arrows. A generic missing projection beta was promoted at its true
+`tapp1_at_transf` owner:
+
+```text
+tapp1_at_transf(epsilon,X)[g][f] = epsilon[g o f].
+```
+
+It exposes the already-existing ordinary off-diagonal action, retains
+represented composition on the right, and is warning-neutral (`1290 =
+1131 + 159`) against the unchanged baseline. Whole strict paths, stable
+postcomposition, and the existing pre/right PathOut reframe then give
+first-class comparisons from the formal endpoints to both raw composites.
+
+No directed cell is inverted. Instead the coordinate-swapped assignment
+
+```text
+native source/target edges := a,b
+native side arrows         := u,v
+```
+
+turns the same cell into the native boundary
+
+```text
+v o a ==> b o u.
+```
+
+`gray_interchanger_swapped_square` checks this as an actual arrow of
+`CubicalArrow_cat(GrayWalkingSquare_cat)`, while the unswapped
+`cubical_square` application is rejected.
+
 ## 6. Cubical Yoneda Object Slice
 
 The first implementation tranche should use existing generic owners.
@@ -276,42 +314,57 @@ presheaf heads retain different stable histories, derive a typed path through
 their existing comparison. Do not add a broad Yoneda fold or claim the full
 eta law.
 
-## 7. Walking-Arrow Bridge
+## 7. Transformation-Graph Bridge
 
-The central geometric comparison begins at dimension one:
-
-```text
-gray_walking_to_lax_obj
-  : Obj(GrayHom_mu(WalkingArrow,C))
-    -> Obj(LaxArrow_cat(C)).
-```
-
-For a strict code `S`, decode its carrier `F : WalkingArrow -> C` and form the
-native edge
+The orientation audit rejects the previously proposed whole functor
 
 ```text
-(F[src],F[tgt],F[generator]).
+GrayHom_lax(WalkingArrow,C) -> LaxArrow_cat(C).
 ```
 
-For variable-dimensional recursion, an object-only function may be
-insufficient internally. A curried successor cube is a transformation between
-two lower-dimensional realizations; mapping it to a native square requires
-the lower decoder's arrow action. The scalable target is therefore likely a
-whole functor
+Its object map would send a strict walking map `F` to the edge `F[g]`, but an
+arrow `epsilon:F=>G` has the selected right-Gray cell in the reverse direction
+from the square between those two edges. The dimension-one object observation
+remains valid; it simply does not extend to that whole functor for this
+profile.
+
+The coordinate-swapped result identifies the scalable bridge instead. Every
+ordinary transformation
 
 ```text
-gray_walking_to_lax_func(C)
-  : GrayHom_mu(WalkingArrow,C) -> LaxArrow_cat(C),
+epsilon : F => G,       F,G : B -> C,
 ```
 
-while this plan initially advertises only its object projection. The functor's
-arrow action must be the transformation's two endpoint components plus its
-selected lax/oplax naturality cell, extracted through existing `tapp*` owners.
+should induce its whole **transformation graph**
 
-The inverse edge-to-strict-code constructor is not required for the first
-observation. If later needed, it requires a curated strict walking-arrow code
-whose carrier is the existing join extension; it must not postulate an opaque
-functor unrelated to `Join_cat(1,1)`.
+```text
+gray_transf_lax_arrow_func(epsilon)
+  : B -> LaxArrow_cat(C)
+
+y |-> (F[y] -> G[y], epsilon[y])
+
+g |-> square(
+       epsilon[y], epsilon[z],
+       F[g], G[g],
+       G[g] o epsilon[y] ==> epsilon[z] o F[g]).
+```
+
+The square filler is the existing post/left internal-action cell with the
+typed endpoint reframe established by `CGCA-GRAY-ORIENT-4`. Thus this is not a
+new naturality record. The implementation should derive the whole functor
+through the existing hom/Sigma totalization and retained `tapp*` action; an
+opaque object-and-arrow constructor is not acceptable.
+
+For
+
+```text
+H : StrictFunctorData(GrayTensor_R(WalkingArrow,B),C),
+```
+
+right curry produces a strict walking map into `GrayHom_lax(B,C)`. Its action
+on the walking generator is a transformation between two `B`-diagrams, and
+the graph above is therefore a strict candidate `B -> LaxArrow_cat(C)`. This
+is the recursive successor input required by the Gray-cube decoder.
 
 ## 8. Fixed-Bracketing Gray Cubes
 
@@ -351,11 +404,24 @@ The public first result is its object action:
 H |-> gray_cube_observation(H).
 ```
 
-The successor should use selected Gray curry, the walking-arrow bridge, and
-the recursively retained decoder action. If current `GrayTensor_R` lacks a
-parameter action needed to map the inner target of curry, record the exact
-consumer-gated prerequisite rather than postulating a dimension-specific
-cube decoder.
+The selected recursion is now expected to read schematically
+
+```text
+decode_1(H)
+  = (H[src],H[tgt],H[generator])
+
+decode_(n+1)(H)
+  = decode_n(
+      LaxArrow_cat(C),
+      gray_transf_lax_arrow_func(
+        gray_curry_R(H)[walking_generator])).
+```
+
+The successor therefore uses selected Gray curry, the transformation-graph
+bridge, and the recursively retained decoder action. If current
+`GrayTensor_R` or strict-code infrastructure lacks the exact whole action or
+profile needed to package that graph, record the consumer-gated prerequisite
+rather than postulating a dimension-specific cube decoder.
 
 Acceptance proceeds through dimensions one, two, and three before claiming
 variable `n`. At dimension two, the decoded top filler must be the actual
@@ -404,8 +470,8 @@ This plan does not initially claim:
 | `CGCA-AUDIT-1` | complete | Re-audited the generic represented covariance/component ladder, public Yoneda facade, native nerve/action, strict-code Gray profile, selected right closure, walking-square/interchanger, derived lax-arrow total, and recursive cubical levels. The literature establishes Gray tensor powers of the arrow as the geometric shapes but does not settle the project's `R`/lax naming; the exact dimension-two orientation remains isolated in `CGCA-GRAY-ORIENT-4`. The first concrete missing API was only the named cubical Yoneda section/evaluation, not a new naturality owner. |
 | `CGCA-YONEDA-2` | complete | `emdash3_2_cubical_yoneda.lp` transparently defines `cubical_yoneda_section` by `fib_cov_transf` and `cubical_yoneda_eval` by the existing fibre functor at `cube_face_identity(n)`. The arbitrary-`C,n` source and reviewer are green; no pointwise naturality family, rule, or unifier is added, and the section retains the generic displayed/face-code action. |
 | `CGCA-YONEDA-BETA-3` | complete | Evaluation of the selected section computes to `semicubical_nerve_action_func(C,n,n,id_n)[X]`, not judgmentally to `X`. `cubical_yoneda_beta` is therefore derived by applying object evaluation to the nerve's existing whole `fapp1_id_path`; it adds no equality axiom and claims no eta law. The rule-free source has zero LHS candidates and exactly the dependency warning count (`1310`). |
-| `CGCA-GRAY-ORIENT-4` | in progress | Direct typing of `gray_interchanger` as either `b o u ==> v o a` or `v o a ==> b o u` fails, and typed `eq_refl` cannot identify either stable endpoint with the corresponding readable composite. This is not an orientation verdict: the interchanger retains `functord_transport_lhs/rhs` endpoints. Its `tapp1_post_laxity_transf` provenance reads schematically `G[g] o epsilon[-] ==> epsilon[g o -]`, predicting visible `v o a ==> b o u`. Derive the two endpoint readings through existing whole internal-action paths before selecting factor swap/opposite/profile naming; add no endpoint rewrite. |
-| `CGCA-WALKING-BRIDGE-5` | pending | Construct the strict-walking-map to native-edge object operation and, if required for recursion, its whole functorial arrow action from transformation components and internal naturality. Do not require the inverse code constructor initially. |
+| `CGCA-GRAY-ORIENT-4` | complete | Promoted the generic third projection `tapp1_at_transf(epsilon,X)[g][f] -> epsilon[g o f]` at the represented-composition owner. Kernel, central diagnostics, typed endpoint probe, dedicated positive/negative reviewer, strict LHS audit, strict catalog, and exact warning comparison are green; warnings remain `1290 = 1131 + 159`. `emdash3_2_gray_interchanger_orientation.lp` derives first-class stable-to-readable paths and a capped `v o a ==> b o u` cell without endpoint collapse. Swapping coordinate roles constructs `gray_interchanger_swapped_square` in the native `CubicalArrow_cat`, while the unswapped application is rejected. |
+| `CGCA-WALKING-BRIDGE-5` | pending, corrected target | Construct the whole transformation graph `epsilon:F=>G |-> (B -> LaxArrow_cat(C))`, with object components as native edges and arrow action as the coordinate-swapped existing laxity cell. The earlier whole `GrayHom_lax(WalkingArrow,C) -> LaxArrow_cat(C)` proposal is rejected by the checked orientation; retain only its valid dimension-one object observation. |
 | `CGCA-GRAYCUBE-6` | pending | Define a fixed-bracketing positive-dimensional Gray-cube recursion after the orientation verdict; validate dimensions one through three without claiming unit/associativity/symmetry. |
 | `CGCA-GRAY-DECODE-7` | pending | Construct the Gray-cube-to-native decoder using selected curry and the walking bridge. Publicize object action first; promote a whole functor only where recursion genuinely requires it. |
 | `CGCA-DIM-8` | pending | Validate dimensions one, two, and three: endpoints/generator; four edges and directed interchanger; six faces and retained next action. State the exact boundary to arbitrary variable `n`. |

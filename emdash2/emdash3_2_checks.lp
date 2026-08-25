@@ -11085,6 +11085,28 @@ assert [A B : Cat] (F G : τ (Functor A B))
       (@tapp1_at_transf A B F G X ϵ)
     ≡ @tapp1_func A B F G X Y ϵ;
 
+// The next projection remains the same ordinary off-diagonal action at the
+// represented composite; this is the generic beta used by readable laxity
+// endpoints and not a separate naturality square.
+assert [A B : Cat] (F G : τ (Functor A B))
+  (ϵ : τ (Transf F G))
+  (X Y Z : τ (Obj A))
+  (g : τ (Hom A Y Z)) (f : τ (Hom A X Y)) ⊢
+  @fapp0
+      _ _
+      (@tapp1_fapp0
+        A Cat_cat
+        (@hom_ A A (@id_func A) X)
+        (@hom_ B A G (@fapp0 A B F X))
+        Y Z
+        (@tapp1_at_transf A B F G X ϵ)
+        g)
+      f
+  ≡ @tapp1_fapp0
+      A B F G X Z ϵ
+      (@hom_postcomp_fapp0
+        A A (@id_func A) X Y Z g f);
+
 assert [A B : Cat] (F G : τ (Functor A B))
   (ϵ : τ (Transf F G)) (X Y : τ (Obj A)) ⊢
   @tapp0_fapp0
