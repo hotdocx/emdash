@@ -109,6 +109,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_semicubical_frames.lp"),
     Path("emdash3_2_semicubical_representables.lp"),
     Path("emdash3_2_cubical.lp"),
+    Path("emdash3_2_cubical_yoneda.lp"),
     Path("emdash3_2_semisimplicial_diagrams.lp"),
     Path("emdash3_2_simplex2_sieves.lp"),
     Path("emdash3_2_path_groupoid_2horn_fillers.lp"),

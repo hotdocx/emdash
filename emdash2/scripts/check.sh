@@ -83,6 +83,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_semicubical_frames.lp)
   files+=(emdash3_2_semicubical_representables.lp)
   files+=(emdash3_2_cubical.lp)
+  files+=(emdash3_2_cubical_yoneda.lp)
   files+=(emdash3_2_semisimplicial_diagrams.lp)
   files+=(emdash3_2_simplex2_sieves.lp)
   files+=(emdash3_2_path_groupoid_2horn_fillers.lp)
