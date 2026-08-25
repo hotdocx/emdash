@@ -4,34 +4,37 @@ Date: 2026-08-23 (America/Toronto)
 
 Plan-ID: `MONAD-COMONAD-COMPUTATION-V3.2`
 
-Status: **completed kernel tranche; persistent-goal objective achieved
-2026-08-23**. Rows `MCD-00` through `MCD-CLOSE-6` are complete. The Došen
-reduction orientation is corrected, the raw-composition candidate is rejected
-with measured evidence, and the selected additive module is aggregate-green
-at the exact inherited warning boundary. `MCD-FREE-7` and `MCD-TS-8` remain
-explicitly deferred behind their recorded consumer prerequisites.
+Status: **completed corrective persistent goal as of 2026-08-24**. Commit
+`c1f4419` preserves the first implementation as a historical checkpoint, but
+its substitution of primitive `KleisliCut` computation for Došen's ambient
+composition reductions is superseded. `MCD-AMBIENT-9` and `MCD-DUAL-10` are
+complete, and `MCD-RECLOSE-12` records green catalog, health, warning/audit,
+example, and full-CI evidence. An explicit Kleisli category is the separate
+`MCD-KLCAT-11` row and is not a prerequisite for the ambient normalizer.
 
 Depends-On: active v3.2 `Adjunction`, `Op_cat`, `Op_func`, `Op_transf`,
 `tapp1_func`/`tapp1_fapp0`, stable represented precomposition and
 postcomposition owners, current rewrite/unification SOP, Foundations, and
 canonical syntax
 
-Supersedes: no earlier monad/comonad implementation plan. It refines the
-initial 2026-08-23 review by correcting the Kleisli accumulation orientation
-and then replaces its raw-composition proposal with the measured stable-cut
-owner.
+Supersedes: the completed-state conclusion recorded at historical checkpoint
+`c1f4419`. The first review correctly fixed the accumulation orientation but
+incorrectly replaced ambient composition by a primitive stable-cut owner and
+treated a warning delta as a veto.
 
 Infinity-Codex-Origin: session `01a02f68-6142-7e53-993a-4505aa8e2cbe`,
 response `0001`
 
-Infinity-Codex-Decision-Responses: response `0001`; the current owner probes
-correct its raw rewrite realization, and this plan is authoritative.
+Infinity-Codex-Decision-Responses: responses `0001` and `0003`; response
+`0003` and the 2026-08-24 user clarification supersede the first checkpoint's
+raw-rule rejection. This plan is authoritative.
 
 Side-Task-Ledger: `MCD-00`, `MCD-OWNER-1`, `MCD-MONAD-2`, `MCD-KLEISLI-3`,
-`MCD-OP-4`, `MCD-ADJ-5`, `MCD-CLOSE-6`, `MCD-FREE-7`, and `MCD-TS-8`
+`MCD-OP-4`, `MCD-ADJ-5`, `MCD-CLOSE-6`, `MCD-FREE-7`, `MCD-TS-8`,
+`MCD-AMBIENT-9`, `MCD-DUAL-10`, `MCD-KLCAT-11`, and `MCD-RECLOSE-12`
 
-Baseline: clean `main` checkpoint
-`689f41c057f5eeee5fd82486fcad79acd136bdfa`
+Baseline: clean user-authored historical checkpoint
+`c1f4419ac65cbd6b68b357accea3564ed6fa21a8`
 
 Worktree: `/home/user1/emdash1-monads-v3.2`
 
@@ -55,13 +58,16 @@ Add a computational monad interface aligned with active emdash v3.2 whole
 functors and higher action, obtain comonad computation by checked opposite
 duality, and connect both to the existing indexed adjunction calculus.
 
-The intended boundary separates three roles:
+The corrected boundary separates four roles:
 
 1. full functor and full transformation observations are the structural
    authority;
-2. Kleisli extension plus a stable Kleisli-cut owner form the selected
-   monadic runtime language; and
-3. Došen's rectangular and triangular presentations are derived,
+2. whole Kleisli extension plus ordinary ambient `comp_fapp0` form Došen's
+   selected triangular runtime language;
+3. delta/Kleisli composition and an explicit Kleisli category are derived,
+   separately gated constructions rather than substitutes for ambient cut
+   elimination; and
+4. Došen's rectangular and triangular presentations are derived,
    testable views rather than competing global normal forms.
 
 The first implementation target is an additive extension module, provisionally
@@ -170,6 +176,58 @@ accumulate into one action indexed by a composite.
 
 The previously proposed reverse runtime orientation
 `(g* o f)* -> g* o f*` is rejected.
+
+### Ambient composition versus delta/Kleisli composition
+
+The 2026-08-24 source review corrects a more fundamental owner mistake. In
+§5.1.5 Došen separately defines delta composition by
+
+```text
+f2 odot f1 = f2 o Delta(f1).
+```
+
+Its monadic dual is exactly `KleisliCut(g,f)=g* o f`. Došen then treats the
+Kleisli category separately in §5.1.6. He explicitly warns that taking delta
+composition as primitive is not practical for cut elimination because both
+ordinary composition and delta composition would have to be eliminated. His
+§5.8.3 normalizer therefore orients reductions on ordinary ambient
+composition, not on an `odot`/Kleisli-composition constructor.
+
+The historical checkpoint made `kleisli_cut_func`/`kleisli_cut_fapp0`
+primitive owners and left ambient `g* o f*` deliberately non-convertible,
+with only `kleisli_extend_comp_path` as equality evidence. That is a useful
+Kleisli-composition presentation, but it is not the requested Došen ambient
+normalizer. The theorem-level comparison is insufficient at conversion time.
+
+The correction is:
+
+```text
+ordinary comp_fapp0(g*,eta^c(f)) -> g o f
+ordinary comp_fapp0(g*,f*)       -> (g* o f)*.
+```
+
+`KleisliCut` must be deleted as a primitive owner or retained only as
+transparent notation. A future `Kleisli_cat(M)` may make it an alias for
+ordinary composition in that separate category, but that construction cannot
+replace the ambient rules.
+
+### Warning evidence is diagnostic, not a veto
+
+The historical raw probe passed quiet typing but reported four additional
+critical pairs and one replaceable pattern variable. That count was used as a
+veto, contrary to the active SOP. The minimized corrective probe
+`tmp/probes/monad_raw_ambient_review.lp`:
+
+- keeps the ambient composition owner in the component-first beta bridge;
+- adds the honest terminal-extension projection;
+- uses inferred LHS slots; and
+- passes quiet checking and strict LHS audit.
+
+It reports `1133/159`, only two critical-pair reports above the inherited
+`1131/159`: the `Op_cat` dual reduction order and the deliberately inherited
+`EqSkeleton_cat` composition projection. These reports require explicit
+classification and both-order evidence. They neither prove the rule safe nor
+justify replacing its semantics by a warning-neutral private head.
 
 ### What the theorem transfers, and what it does not
 
@@ -294,32 +352,31 @@ functor for higher action.
 
 The owner probe accepted these names and the whole/stable-point split.
 
-### Stable Kleisli cut instead of a raw composition rule
+### Ambient composition is the triangular owner
 
-A direct generic runtime rule on base-category composition,
+A direct generic runtime rule on ambient composition,
 
 ```text
 g* o f* -> (g* o f)*,
 ```
 
-passed quiet typing but added four unjoined critical pairs: opposite-category
-composition, terminal composition, and equality-skeleton composition. This
-is the same raw-composition failure mode rejected by earlier
-profunctor-comparison work. The direct rule is not promoted.
-
-The accepted owner is the whole `kleisli_cut_func`, with capped
-`kleisli_cut_fapp0` and semantic equality
-`KleisliCut(g,f)=g* o f`. The corrected hot rule is:
+is required for the Došen runtime language. The optimized component-first
+beta bridge is:
 
 ```text
-KleisliCut(g,f*) -> (KleisliCut(g,f))*.
+g* o eta_X -> g o id_X,
 ```
 
-Writing its first source endpoint as inferred `_` is essential. An explicit
-`T[X]` LHS slot passed quietly but created more than one hundred avoidable
-object-action overlaps. With the inferred slot and the remaining audited
-LHSs, the full monad plus opposite-derived comonad probe stays exactly at the
-inherited `1131/159` warning boundary.
+which lets specialized ambient categories choose their existing composition
+normal form before generic identity elimination. A narrow terminal-extension
+projection joins the terminal accumulation order. The remaining `Op_cat` and
+`EqSkeleton_cat` reports must be classified at the intended owner position.
+
+The historical stable-cut probe and its warning-neutral boundary remain
+valuable backtracking evidence, but warning neutrality obtained by changing
+the requested operation is not acceptance evidence. Whole higher action is
+already retained by `kleisli_extend_func`; no second whole cut functor is
+needed for the ambient rule.
 
 ## Opposite-Derived Comonad
 
@@ -336,20 +393,23 @@ counit_comonad_transf(C) := Op_transf(unit_monad_transf(C))
 comult_comonad_transf(C) := Op_transf(mult_monad_transf(C)).
 ```
 
-The co-Kleisli extension should be the endpoint-swapped view of the same
-Kleisli owner, since
+The mathematical coextension is the endpoint-swapped view of monadic
+extension, since
 
 ```text
 Hom_(Op A)(X,Op(D)[Y]) = Hom_A(D(Y),X).
 ```
 
-The transparent classifier is accepted and gives one law authority. Whole
-coextension and co-Kleisli cut are endpoint-swapped monadic owners and remain
-warning-neutral. Standard whole counit/comultiplication observations are
-stable, with explicit equality paths to opposite unit/multiplication and
-computational component/antecedental views. This avoids a transparent
-double-`Op_transf` runtime boundary while retaining exact mathematical
-duality.
+The transparent classifier remains accepted and gives one evidence authority.
+However, a transparent `cokleisli_extend_fapp0` alias does not by itself make
+ordinary composition in `A` match a monadic rule indexed by `A^op`: the
+canonical `Op_cat(Op_cat A) -> A` direction erases the matching head first.
+`MCD-DUAL-10` must therefore select either a stable whole/point coextension
+facade with explicit equality to the opposite monad, or a narrower checked
+`Op` bridge. A naive underlying-Op rule with literal `D[X]`, `D[Y]`, and
+`D[Z]` endpoint guards passed quietly but produced hundreds of reducible
+endpoint overlaps and is rejected. The dual ambient reductions must be
+computationally demonstrated, not inferred merely from the classifier alias.
 
 ## Adjunction-Derived Consumers
 
@@ -395,17 +455,18 @@ Every candidate implementation must include:
 1. exact types of `Monad(T)`, unit, multiplication, and whole Kleisli
    extension;
 2. one retained next hom action of `kleisli_extend_func`;
-3. Kleisli beta at the stable cut owner, with theorem-level semantic reading
-   `g* o eta^c(f) = g o f`;
-4. corrected stable-cut accumulation, with theorem-level semantic reading
-   `g* o f* = (g* o f)*`;
+3. ambient beta conversion `g* o eta^c(f) -> g o f`, including its
+   component-first projection order;
+4. ambient accumulation conversion `g* o f* -> (g* o f)*`;
 5. unit-extension reduction `(eta_X)* -> 1_TX`, including both projection
    orders around `tapp1(eta,1_X) -> tapp0(eta,X)`;
-6. absence of the rejected reverse accumulation;
+6. absence of the reverse accumulation rewrite;
 7. an independently named same-typed unit/multiplication non-agreement;
 8. a positive adjunction-derived monad instance;
-9. a positive opposite-derived comonad instance;
-10. double-opposite recovery and exact counit/comultiplication observations;
+9. executable ambient comonad beta and accumulation in the exact dual
+   directions, not merely equality paths through `Op`;
+10. a positive opposite-derived comonad instance, double-opposite recovery,
+    and exact counit/comultiplication observations;
 11. noncollapse negatives showing that independently named same-typed
     observations do not acquire definitional agreement; this generic layer
     must not be advertised as a model-theoretic free or non-idempotent monad;
@@ -418,16 +479,20 @@ Every candidate implementation must include:
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | `MCD-00` | complete | user review; baseline `689f41c` | Living plan, source audit, exact dual reduction table, restored root `main`, dedicated goal/worktree, Infinity verification, and green bounded baseline. |
-| `MCD-OWNER-1` | complete | `MCD-00` | Selected stable whole extension plus capped projection, stable whole Kleisli cut, and transparent Comonad classifier with stable standard observations; rejected broad raw composition and broad Op-involution candidates with warning evidence. |
+| `MCD-OWNER-1` | historical/superseded | `MCD-00` | Correctly selected stable whole extension plus capped projection, but incorrectly selected primitive Kleisli cut in place of ambient composition. Preserved at `c1f4419`. |
 | `MCD-MONAD-2` | complete | accepted `MCD-OWNER-1` | `emdash3_2_monads.lp` adds indexed `Monad(T)`, stable full unit/multiplication, semantic equality paths, and trust negatives. |
-| `MCD-KLEISLI-3` | complete | `MCD-MONAD-2` | Whole Kleisli extension/cut, capped projections, beta, corrected owner-aligned accumulation, unit, multiplication, higher action, and raw-composition negative. |
-| `MCD-OP-4` | complete | `MCD-KLEISLI-3` | Transparent Comonad classifier, stable standard observations with opposite paths, warning-neutral endpoint-swapped coextension/cut, dual beta/accumulation/unit, and retained higher action. |
+| `MCD-KLEISLI-3` | historical/superseded | `MCD-MONAD-2` | Primitive Kleisli-composition implementation and raw-composition negative preserved at `c1f4419`; not accepted as Došen ambient computation. |
+| `MCD-OP-4` | historical/superseded | `MCD-AMBIENT-9` | The classifier and standard observations remain useful, but its transparent facade did not supply ambient dual reductions. The completed `MCD-DUAL-10` replaces that facade. |
 | `MCD-ADJ-5` | complete | `MCD-MONAD-2`, `MCD-OP-4` | Adjunction-derived monad/comonad witnesses, exact `G epsilon F` and `F eta G`, direct standard observations, and theorem-level underlying opposite-operation agreements. |
-| `MCD-CLOSE-6` | complete | accepted implementation rows | Source/check/example registration, exact warning comparison, zero LHS audit, 2,233-check catalog, fresh 270-file health evidence, aggregate CI, authority prose, and final ledger synchronization. |
+| `MCD-CLOSE-6` | historical/superseded | historical implementation rows | Green checkpoint evidence at `c1f4419`; superseded semantically by the 2026-08-24 review. |
 | `MCD-FREE-7` | deferred | explicit free-syntax consumer | Separate free monad/comonad term grammar, rectangular-to-triangular translation, normalizer, and decision procedure; no global Lambdapi decidability claim. |
 | `MCD-TS-8` | deferred | stable kernel API plus TypeScript consumer | Optional outer-LF declaration/compiler surface; no trusted Core macro merely to mirror the kernel relation. |
+| `MCD-AMBIENT-9` | complete | historical checkpoint `c1f4419`; response `0003` | Ambient monad beta/accumulation, component and Terminal joins, positive conversion checks, transparent `KleisliCut`, and classified `Op_cat`/`EqSkeleton_cat` orders. |
+| `MCD-DUAL-10` | complete | accepted `MCD-AMBIENT-9` | Stable whole/point coextension with Op equality evidence, executable ambient comonad beta/accumulation/unit/comultiplication, retained higher action, and classified dual projection orders. A broad Op runtime bridge was rejected. |
+| `MCD-KLCAT-11` | deferred/separate | stable ambient calculus plus explicit consumer | Optional `Kleisli_cat(M)`, canonical functors, and composition aliases. It must not replace ambient normalization. |
+| `MCD-RECLOSE-12` | complete | `MCD-AMBIENT-9`, `MCD-DUAL-10` | Checks/examples/authorities, catalog, fresh health, warning/order audits, and the full 270-file CI boundary are green. |
 
-At most one implementation row is in progress. A rejected probe updates the
+No implementation row remains in progress. A rejected probe updates the
 decision ledger and may split or defer its dependent row rather than forcing
 the proposed signature.
 
@@ -437,38 +502,61 @@ the proposed signature.
 | --- | --- | --- |
 | `D-MCD-001` | accepted | Monad is the primary public/primitive direction; comonad is obtained through checked opposite duality. |
 | `D-MCD-002` | accepted | Full endofunctor and full unit/multiplication transfors are structural authority; an object-only triangular structure is not the sole emdash core. |
-| `D-MCD-003` | refined/accepted | Whole Kleisli extension and stable whole Kleisli cut are the selected runtime language; raw rectangular compositions are theorem-level views. |
+| `D-MCD-003` | corrected/accepted | Whole extension is retained, but ordinary ambient composition is the Došen runtime owner. Primitive Kleisli cut is not the ambient normalizer. |
 | `D-MCD-004` | corrected/accepted | Runtime accumulation is `g* o f* -> (g* o f)*`. The previously proposed reverse orientation is rejected. |
 | `D-MCD-005` | accepted | Generic `tapp1` naturality owns `eta^c(g) o f -> eta^c(g o f)`; do not duplicate it in the monad module. |
 | `D-MCD-006` | accepted | Multiplication components compile one-way toward `(1_TX)*`; the reverse is absent. |
-| `D-MCD-007` | accepted | `Comonad_A(D) := Monad_(A^op)(D^op)` is transparent; standard whole observations stay stable with explicit opposite-agreement paths. |
+| `D-MCD-007` | refined/accepted | `Comonad_A(D) := Monad_(A^op)(D^op)` remains the evidence classifier; its ambient computational facade may require stable coextension owners because transparent Op alone does not preserve the matching head. |
 | `D-MCD-008` | accepted | The four triangular laws are retained for the full monad/equality normalizer even though the identity-extension law is not needed for Cut Disintegration alone. |
 | `D-MCD-009` | accepted | `A*` freeness and the decision algorithm are separate from the generic monad relation and generic Lambdapi conversion. |
 | `D-MCD-010` | accepted | The first real consumer is the monad/comonad induced by the existing indexed adjunction. |
 | `D-MCD-011` | accepted Git boundary | Dedicated branch/worktree and scoped edits are authorized; local commits and every remote/integration/cleanup mutation are not. |
 | `D-MCD-012` | resolved | Kleisli extension needs a stable whole owner plus stable capped projection; its semantic composite is retained by equality evidence. |
 | `D-MCD-013` | resolved | Comonad remains a transparent classifier alias; stable counit/comultiplication observations and direct computational views avoid double-Op runtime competition. |
-| `D-MCD-014` | rejected raw rule | Generic `comp_fapp0(g*,f*) -> ...` adds four unjoined specialized-category/opposite pairs; use stable `KleisliCut` instead. |
-| `D-MCD-015` | accepted LHS discipline | The corrected stable-cut rule keeps its reconstructible source endpoint `_`; explicitly spelling `T[X]` created over one hundred avoidable overlaps. |
+| `D-MCD-014` | reversed/accepted requirement | Ambient `comp_fapp0(g*,f*) -> ...` is required. Its warning families must be classified and joined where appropriate; warning count alone is not a veto. |
+| `D-MCD-015` | historical/superseded | The inferred-slot result remains useful evidence, but the primitive stable-cut rule it governed is no longer the selected owner. |
 | `D-MCD-016` | accepted adjunction dual boundary | Direct full comonad observations compute for `adjunction_comonad`; underlying Monad-on-opposite agreements are equality evidence because runtime rules at literal `Op_cat L` added six overlaps. |
-| `D-MCD-017` | completed closeout | The additive module remains separate from `emdash3_2.lp`; all registered source/example, catalog, health, warning, audit, and CI boundaries are green, while free syntax and TypeScript stay separately gated. |
+| `D-MCD-017` | historical closeout | Records the green `c1f4419` checkpoint; its semantic acceptance conclusion is superseded. |
+| `D-MCD-018` | accepted source correction | Došen's delta/Kleisli composition and Kleisli category are separate from the ambient-composition reductions used by §5.8.3. |
+| `D-MCD-019` | accepted warning policy | Critical-pair reports are classified diagnostic evidence. Preserve intended computation unless an actual cycle, subject-reduction failure, unacceptable conversion loss, or better owner is demonstrated. |
+| `D-MCD-020` | accepted separation | A future explicit Kleisli category may derive `KleisliCut` from its ordinary composition and extension from its canonical right functor; it is not part of the corrective ambient tranche. |
+| `D-MCD-021` | rejected bridge | A direct runtime bridge from monadic extension in `A^op` to stable coextension duplicated 19 whole/higher-action projection interactions. Retain explicit equality evidence instead. |
+| `D-MCD-022` | accepted warning boundary | The corrected module reports `1135/159`: exactly monad/comonad accumulation against `Op_cat` and `EqSkeleton_cat`. Component-first and Terminal orders are joined; the four remaining category-projection reports are classified debt. |
 
-## First Implementation Checkpoint Evidence
+## Historical First-Checkpoint Evidence
 
-The accepted owner probe is `tmp/probes/monad_kleisli_cut.lp`. Its quiet and
-warning-enabled dual runs are:
+The formerly accepted owner probe is `tmp/probes/monad_kleisli_cut.lp`. Its
+quiet and warning-enabled runs are preserved as historical evidence:
 
 ```text
 logs/probes/monad_kleisli_cut-20260823-141458.log
 logs/probes/monad_kleisli_cut-20260823-141543.log
 ```
 
-The minimized precursor run at `20260823-140408` first established the exact
-inherited `1131/159` warning boundary. The rejected raw-composition probe is
+The minimized precursor run at `20260823-140408` established the inherited
+`1131/159` warning boundary. The first raw-composition probe is
 `tmp/probes/monad_kleisli_rules.lp`; its warning-enabled run at
 `20260823-135351` measured `1135/160`, including four new unjoinable pairs.
-The rejected broad opposite-involution probe in `monad_owner_types.lp`
-reached `1141` unjoinable pairs and is not promoted.
+That result is no longer rejection evidence. The broad opposite-involution
+probe in `monad_owner_types.lp` reached `1141` unjoinable pairs and remains
+unpromoted.
+
+Corrective review probes are:
+
+```text
+tmp/probes/monad_raw_ambient_review.lp
+tmp/probes/monad_kleisli_category_review.lp
+tmp/probes/monad_raw_dual_review.lp
+```
+
+The minimized ambient monad probe is quiet-green, strict-LHS-green, and
+reports `1133/159` after joining the component-first Terminal order and the
+terminal-extension order. Its remaining reports are precisely `Op_cat` and
+`EqSkeleton_cat`. The separate Kleisli-category feasibility probe is
+quiet-green, strict-LHS-green, and exactly `1131/159` when extension is the
+hom action of the canonical right functor. The naive transparent-Op dual probe
+shows why `MCD-DUAL-10` needs a stable facade or narrow bridge: literal
+reducible `D[-]` guards produce hundreds of avoidable overlaps.
 
 Tracked implementation now includes:
 
@@ -493,15 +581,62 @@ The warning-enabled module check is exactly `1131/159`, so the accepted
 module adds zero warnings. The strict module LHS audit reports zero
 reconstructible compound slots and zero unreviewed clauses.
 
-## Final Closeout Evidence
+## Corrective Implementation Evidence
 
-The generated catalog records 2,233 checks in 110 areas, including 26 checks
-under `Monad and comonad triangular computation`, with zero unclassified
-checks. The repository warning inventory remains exactly 1,290 inherited
+The corrected module, central diagnostics, and reviewer example are
+focused-green. The central area now contains 37 checks, and the reviewer has
+12 statements. The generated catalog contains 2,244 checks across 110 mapped
+areas with zero unclassified entries.
+
+The strict module LHS audit remains empty. Warning-enabled checking reports
+`1135/159`, a classified delta of four critical-pair reports:
+
+```text
+monad accumulation   x Op_cat
+monad accumulation   x EqSkeleton_cat
+comonad accumulation x Op_cat
+comonad accumulation x EqSkeleton_cat
+```
+
+The component-first beta orders preserve ambient identity composition, and
+the monad/comonad Terminal extension projections join the Terminal orders.
+Stable whole coextension retains higher action and explicit whole/point
+equality evidence to opposite monadic extension. A proposed direct runtime Op
+bridge passed quiet typing but raised the boundary to `1154/159`, duplicating
+19 whole/higher-action projection interactions; it was removed. The four
+remaining reports expose ordinary category projection before versus after the
+intended accumulation law and are retained as classified warning debt rather
+than treated as a semantic veto.
+
+The complete reviewer-example sweep and fresh 270-file health pass are green.
+The health report records source snapshot
+`sha256:3bdea4b20549469d0d2cdbfad57a4a184e333b58f7a6d27467419ddcbc48a0bc`
+and check-content snapshot
+`sha256:efac5fae4151945619b94ef41a713fc8eb97b99fb6e3e5ad594cd731d539acc3`.
+It records current exit-0 evidence for the 1,013-line/40-symbol/18-rule monad
+module, central checks, and the 205-line reviewer example.
+
+The full `make ci` closeout checked all 270 registered files in 1,316.709
+seconds. Its post-check gates passed 44 Python unit tests, 5 Node registry
+tests, source TOC and active-reference lint, report headers, book
+evidence/typography/KaTeX and assembly checks, shell syntax, Python
+compilation, diff hygiene, the base strict LHS audit, and strict catalog and
+health freshness. No commit, push, merge, publication, release, history
+rewrite, branch deletion, or worktree removal was performed by this
+corrective goal.
+
+## Historical Closeout Evidence
+
+At checkpoint `c1f4419`, the generated catalog records 2,233 checks in 110
+areas, including 26 checks under `Monad and comonad triangular computation`,
+with zero unclassified checks. The repository warning inventory remains
+exactly 1,290 inherited
 warnings: 1,131 unjoinable critical pairs and 159 replaceable pattern
-variables. The accepted module therefore adds no warning delta.
+variables. The historical module therefore added no warning delta by moving
+computation to its private head; this is no longer semantic acceptance
+evidence.
 
-The fresh health report records source-metrics snapshot
+At that checkpoint, its health report recorded source-metrics snapshot
 `sha256:0744074076bbdf57f26343a2d6f49e05d0e4bd86e70f99de2b8cff9603058b5b`
 and check-content snapshot
 `sha256:28f9c195853ad966491bd2756c7a681fd2f36cb4bd8ebc871b67cee8b70418a2`.
@@ -529,8 +664,10 @@ strict LHS audit, and strict catalog freshness. No commit, push, merge,
 publication, release, history rewrite, branch deletion, or worktree removal
 was performed.
 
-The raw-composition negative and independently named unit/multiplication
-negatives are deliberately conversion-level noncollapse evidence. They do not
+At historical checkpoint `c1f4419`, the raw-composition negative and
+independently named unit/multiplication negatives were deliberately
+conversion-level noncollapse evidence. The raw-composition negative is now
+superseded by positive ambient reductions. The remaining negatives do not
 claim that this generic interface constructs a free, non-idempotent model;
 that stronger claim belongs only after `MCD-FREE-7` supplies explicit syntax
 and a normalizer.
@@ -569,17 +706,22 @@ make ci
 Do not run root TypeScript, print, browser, book, package, or repository-wide
 aggregates unless a changed cross-layer contract makes them relevant.
 
-### Launch baseline evidence
+### Baseline evidence
 
-Before tracked plan edits, the clean goal worktree at `689f41c` passed:
+Before the first implementation, the clean goal worktree at `689f41c` passed
+the full registered check. The user then committed the complete first tranche
+as historical checkpoint `c1f4419`. At the start of the corrective goal that
+checkpoint passed:
 
 ```bash
-EMDASH_TYPECHECK_TIMEOUT=90s make -C emdash2 check
+./scripts/check.sh emdash3_2_monads.lp
+./scripts/check.sh emdash3_2_checks.lp
+make warning-summary  # 1131/159
 ```
 
-Every registered Lambdapi target completed within the uniform per-target
-ceiling. The command emitted no failure. This is comparison evidence for the
-untouched baseline, not permission to skip focused checks after changes.
+Its prior 270-file health and CI evidence remains exact-byte historical
+evidence. This is comparison evidence, not permission to skip affected checks
+after correction.
 
 ## Acceptance And Stop Conditions
 
@@ -587,12 +729,16 @@ The first kernel tranche is accepted only when:
 
 - the indexed full-functor Monad interface is stable and declaration-safe;
 - Kleisli extension is whole and retains higher action;
-- the exact Došen-dual reductions use the corrected orientation;
+- the exact Došen-dual reductions compute on ordinary ambient composition in
+  the corrected orientation;
 - the rejected reverse orientation remains absent;
-- the selected runtime heads have no unjoined owner/projection reduction
-  order;
+- every new warning family is classified with both-order evidence, and every
+  practical narrow join is installed without cycles or subject-reduction
+  failure;
 - opposite duality provides genuine comonad computations and double-opposite
   recovery;
+- primitive `KleisliCut` is absent from the ambient owner boundary or is only
+  transparent derived notation;
 - the existing adjunction constructs both sides with exact unit/counit and
   whiskered multiplication/comultiplication;
 - noncollapse negatives preserve the declaration trust boundary without
@@ -610,22 +756,22 @@ Stop and revise rather than promote if:
 - the corrected accumulation direction creates a cycle with a semantic
   expansion or existing hom-action fold; or
 - a global rewrite is justified only by the free-category metatheorem rather
-  than a typed active consumer.
+  than a typed active consumer; or
+- warning neutrality is obtained only by replacing ambient computation with
+  a private operation head.
 
-## Completed Persistent Goal Objective
+## Current Persistent Goal Objective
 
 ```text
-Execute MONAD-COMONAD-COMPUTATION-V3.2 according to this living plan. First
-settle the owner-position and dual-normalization questions in MCD-00 and
-MCD-OWNER-1. Then implement only accepted dependency-ready rows through the
-smallest coherent monad/Kleisli/opposite-comonad/adjunction tranche, retaining
-whole higher action, the corrected owner-aligned
-KleisliCut(g,f*) -> (KleisliCut(g,f))* orientation, the theorem-level raw
-composition view, trust negatives, and proportional Lambdapi evidence. Revise
-the plan when probes
-reject an assumption. Keep free-syntax decidability and TypeScript surfaces
-deferred unless a concrete consumer reopens them. Work only in the authorized
-dedicated branch/worktree. Do not commit, push, merge, publish, release,
-rewrite history, delete branches, or remove worktrees without separate user
-authorization.
+Execute the evolving living plan to correct the checkpointed tranche. Make
+Došen's triangular laws compute on ordinary ambient composition with the exact
+orientations; replace the primitive KleisliCut substitution by ambient rules
+and, at most, transparent derived notation; classify and join or explicitly
+accept warning interactions under the active SOP; and provide a genuinely
+computational ambient Op-dual comonad surface. Keep any explicit Kleisli
+category separate from the main Došen normalizer. Evolve the plan, checks,
+examples, authorities, catalog, health, and CI evidence. Preserve historical
+checkpoint c1f4419 and unrelated work. Do not commit, push, merge, publish,
+release, rewrite history, delete branches, or remove worktrees without
+separate user authorization.
 ```

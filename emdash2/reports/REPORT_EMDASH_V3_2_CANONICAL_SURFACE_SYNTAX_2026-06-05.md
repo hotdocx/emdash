@@ -1979,21 +1979,21 @@ f*    : T[X] -> T[Y]              for f : X -> T[Y]
 KCut_M(g,f) = g* o f.
 ```
 
-The kernel owners are `unit_monad_transf`, `mult_monad_transf`,
-`kleisli_extend_func`/`kleisli_extend_fapp0`, and
-`kleisli_cut_func`/`kleisli_cut_fapp0`. The selected runtime reductions are
+The structural and extension owners are `unit_monad_transf`,
+`mult_monad_transf`, and
+`kleisli_extend_func`/`kleisli_extend_fapp0`. Ordinary ambient composition owns
+the selected runtime reductions:
 
 ```text
-KCut_M(g,eta^c(f)) -> g o f
-KCut_M(g,f*)       -> (KCut_M(g,f))*
-(eta_M[X])*        -> id_T[X]
-mu_M[X]            -> (id_T[X])*.
+g* o eta^c(f) -> g o f
+g* o f*       -> (g* o f)*
+(eta_M[X])*   -> id_T[X]
+mu_M[X]       -> (id_T[X])*.
 ```
 
-Do not write raw `g* o f* -> (g* o f)*` as a kernel runtime rule. The raw
-composition remains at `comp_fapp0`; `kleisli_cut_fapp0_path` records its
-semantic relation to the stable cut owner. This distinction preserves higher
-action and avoids specialized-category/opposite critical pairs.
+`KCut_M(g,f)` may still be written for readability, but
+`kleisli_cut_func`/`kleisli_cut_fapp0` are transparent notation for
+`g* o f`, not primitive runtime owners or an explicit Kleisli category.
 
 For `C : Comonad(D)`, write
 
@@ -2004,12 +2004,20 @@ Delta(f)  : D[X] -> D[Y]          for f : D[X] -> Y
 CoKCut_C(f2,f1) = f2 o Delta(f1).
 ```
 
-`Comonad_A(D)` is transparently `Monad_(A^op)(D^op)`. The owners are
+`Comonad_A(D)` is transparently `Monad_(A^op)(D^op)`. The computational owners
+are
 `counit_comonad_transf`, `comult_comonad_transf`,
-`cokleisli_extend_func`/`cokleisli_extend_fapp0`, and
-`cokleisli_cut_func`/`cokleisli_cut_fapp0`. Whole standard observations are
-stable; names ending in `_op_path`, `_fapp0_path`, or `_antecedent_path`
-record their agreement with the computational opposite views.
+and stable `cokleisli_extend_func`/`cokleisli_extend_fapp0`. Ambient
+composition computes
+
+```text
+epsilon^a(f2) o Delta(f1) -> f2 o f1
+Delta(f2) o Delta(f1)     -> Delta(f2 o Delta(f1)).
+```
+
+`cokleisli_cut_func`/`cokleisli_cut_fapp0` are transparent notation. Whole
+standard observations are stable; names ending in `_op_path`, `_fapp0_path`,
+or `_antecedent_path` record their agreement with the opposite views.
 
 For `J : Adjunction(F,G)`, use `adjunction_monad(J)` on `G o F` and
 `adjunction_comonad(J)` on `F o G`; their multiplication and comultiplication

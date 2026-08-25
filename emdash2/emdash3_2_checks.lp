@@ -10909,15 +10909,18 @@ assert [A : Cat]
         (@kleisli_extend_fapp0 A T M X Y f)
         (@kleisli_extend_fapp0 A T M X Y g)));
 
-// Kleisli beta at the selected cut owner.
+// Ambient Došen beta: g* o eta^c(f) -> g o f.
 assert [A : Cat]
   [T : τ (Functor A A)]
   (M : τ (@Monad A T))
   (X Y Z : τ (Obj A))
   (f : τ (Hom A X Y))
   (g : τ (Hom A Y (@fapp0 A A T Z))) ⊢
-  @kleisli_cut_fapp0
-    A T M X Y Z g
+  @comp_fapp0
+    A X
+    (@fapp0 A A T Y)
+    (@fapp0 A A T Z)
+    (@kleisli_extend_fapp0 A T M Y Z g)
     (@tapp1_fapp0
       A A
       (@id_func A) T
@@ -10926,22 +10929,46 @@ assert [A : Cat]
       f)
   ≡ @comp_fapp0 A X Y (@fapp0 A A T Z) g f;
 
-// Correct Došen-dual accumulation:
-//   KleisliCut(g,f*) -> (KleisliCut(g,f))*.
+// Component-first ambient beta joins tapp1(eta,id_X) with ambient identity.
+assert [A : Cat]
+  [T : τ (Functor A A)]
+  (M : τ (@Monad A T))
+  (X Z : τ (Obj A))
+  (g : τ (Hom A X (@fapp0 A A T Z))) ⊢
+  @comp_fapp0
+    A X
+    (@fapp0 A A T X)
+    (@fapp0 A A T Z)
+    (@kleisli_extend_fapp0 A T M X Z g)
+    (@tapp0_fapp0
+      A A
+      (@id_func A) T
+      X
+      (@unit_monad_transf A T M))
+  ≡ g;
+
+// Exact ambient Došen-dual accumulation: g* o f* -> (g* o f)*.
 assert [A : Cat]
   [T : τ (Functor A A)]
   (M : τ (@Monad A T))
   (X Y Z : τ (Obj A))
   (f : τ (Hom A X (@fapp0 A A T Y)))
   (g : τ (Hom A Y (@fapp0 A A T Z))) ⊢
-  @kleisli_cut_fapp0
-    A T M
-    (@fapp0 A A T X) Y Z
-    g
+  @comp_fapp0
+    A
+    (@fapp0 A A T X)
+    (@fapp0 A A T Y)
+    (@fapp0 A A T Z)
+    (@kleisli_extend_fapp0 A T M Y Z g)
     (@kleisli_extend_fapp0 A T M X Y f)
   ≡ @kleisli_extend_fapp0
       A T M X Z
-      (@kleisli_cut_fapp0 A T M X Y Z g f);
+      (@comp_fapp0
+        A X
+        (@fapp0 A A T Y)
+        (@fapp0 A A T Z)
+        (@kleisli_extend_fapp0 A T M Y Z g)
+        f);
 
 assert [A : Cat]
   [T : τ (Functor A A)]
@@ -10961,7 +10988,12 @@ assert [A : Cat]
         (@kleisli_extend_fapp0 A T M X Y f))
       (@kleisli_extend_fapp0
         A T M X Z
-        (@kleisli_cut_fapp0 A T M X Y Z g f)));
+        (@comp_fapp0
+          A X
+          (@fapp0 A A T Y)
+          (@fapp0 A A T Z)
+          (@kleisli_extend_fapp0 A T M Y Z g)
+          f)));
 
 // Unit extension joins the off-diagonal-identity and component-first paths.
 assert [A : Cat]
@@ -10994,23 +11026,46 @@ assert [A : Cat]
       X
       (@id A (@fapp0 A A T X));
 
-// Raw base-category composition is deliberately not a second hot owner.
-assertnot [A : Cat]
+// KleisliCut is now transparent notation for ordinary ambient composition.
+assert [A : Cat]
   [T : τ (Functor A A)]
   (M : τ (@Monad A T))
   (X Y Z : τ (Obj A))
   (f : τ (Hom A X (@fapp0 A A T Y)))
   (g : τ (Hom A Y (@fapp0 A A T Z))) ⊢
-  @comp_fapp0
-    A
-    (@fapp0 A A T X)
-    (@fapp0 A A T Y)
-    (@fapp0 A A T Z)
-    (@kleisli_extend_fapp0 A T M Y Z g)
-    (@kleisli_extend_fapp0 A T M X Y f)
-  ≡ @kleisli_extend_fapp0
-      A T M X Z
-      (@kleisli_cut_fapp0 A T M X Y Z g f);
+  @kleisli_cut_fapp0 A T M X Y Z g f
+  ≡ @comp_fapp0
+      A X
+      (@fapp0 A A T Y)
+      (@fapp0 A A T Z)
+      (@kleisli_extend_fapp0 A T M Y Z g)
+      f;
+
+assert [A : Cat]
+  [T : τ (Functor A A)]
+  (M : τ (@Monad A T))
+  (X Y Z : τ (Obj A))
+  (f : τ (Hom A X (@fapp0 A A T Y)))
+  (g : τ (Hom A Y (@fapp0 A A T Z))) ⊢
+  @fapp0
+    (Product_cat
+      (Hom_cat A X (@fapp0 A A T Y))
+      (Hom_cat A Y (@fapp0 A A T Z)))
+    (Hom_cat A X (@fapp0 A A T Z))
+    (@kleisli_cut_func A T M X Y Z)
+    (@Product_pair
+      (Hom_cat A X (@fapp0 A A T Y))
+      (Hom_cat A Y (@fapp0 A A T Z))
+      f g)
+  ≡ @kleisli_cut_fapp0 A T M X Y Z g f;
+
+// The Terminal specialization joins the ambient category normal form.
+assert [T : τ (Functor Terminal_cat Terminal_cat)]
+  (M : τ (@Monad Terminal_cat T))
+  (X Y : τ (Obj Terminal_cat))
+  (f : τ (Hom Terminal_cat X (@fapp0 Terminal_cat Terminal_cat T Y))) ⊢
+  @kleisli_extend_fapp0 Terminal_cat T M X Y f
+  ≡ Terminal_obj;
 
 // Independently named operations do not acquire trusted agreement.
 assertnot [A : Cat]
@@ -11063,48 +11118,179 @@ assert [A : Cat]
         (@counit_comonad_transf A D C))
       (@counit_comonad_antecedent_func A D C X Y));
 
-// Co-Kleisli beta inherited from the monadic rule in A^op.
+// Stable whole coextension projects to its stable point owner.
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y : τ (Obj A))
+  (f : τ (Hom A (@fapp0 A A D X) Y)) ⊢
+  @fapp0
+    (Hom_cat A (@fapp0 A A D X) Y)
+    (Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y))
+    (@cokleisli_extend_func A D C X Y)
+    f
+  ≡ @cokleisli_extend_fapp0 A D C X Y f;
+
+// Stable coextension retains explicit evidence to the opposite monad.
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y : τ (Obj A)) ⊢
+  @cokleisli_extend_op_path A D C X Y
+  : τ (@=
+      (Functor
+        (Hom_cat A (@fapp0 A A D X) Y)
+        (Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y)))
+      (@cokleisli_extend_func A D C X Y)
+      (@cokleisli_extend_op_func A D C X Y));
+
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y : τ (Obj A))
+  (f : τ (Hom A (@fapp0 A A D X) Y)) ⊢
+  @cokleisli_extend_op_fapp0_path A D C X Y f
+  : τ (@=
+      (Hom A (@fapp0 A A D X) (@fapp0 A A D Y))
+      (@cokleisli_extend_fapp0 A D C X Y f)
+      (@cokleisli_extend_op_fapp0 A D C X Y f));
+
+// Ambient Došen co-beta: epsilon^a(h) o Delta(f) -> h o f.
 assert [A : Cat]
   [D : τ (Functor A A)]
   (C : τ (@Comonad A D))
   (X Y Z : τ (Obj A))
   (f : τ (Hom A (@fapp0 A A D X) Y))
   (h : τ (Hom A Y Z)) ⊢
-  @cokleisli_cut_fapp0
-    A D C X Y Z
-    (@fapp0
-      (Hom_cat A Y Z)
-      (Hom_cat A (@fapp0 A A D Y) Z)
-      (@counit_comonad_antecedent_func A D C Y Z)
+  @comp_fapp0
+    A
+    (@fapp0 A A D X)
+    (@fapp0 A A D Y)
+    Z
+    (@tapp1_fapp0
+      A A
+      D (@id_func A)
+      Y Z
+      (@counit_comonad_transf A D C)
       h)
-    f
+    (@cokleisli_extend_fapp0 A D C X Y f)
   ≡ @comp_fapp0 A (@fapp0 A A D X) Y Z h f;
 
-// Exact Došen comonadic accumulation, with no second rule family.
+// Component-first co-beta joins tapp1(epsilon,id_Y) with ambient identity.
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y : τ (Obj A))
+  (f : τ (Hom A (@fapp0 A A D X) Y)) ⊢
+  @comp_fapp0
+    A
+    (@fapp0 A A D X)
+    (@fapp0 A A D Y)
+    Y
+    (@tapp0_fapp0
+      A A
+      D (@id_func A)
+      Y
+      (@counit_comonad_transf A D C))
+    (@cokleisli_extend_fapp0 A D C X Y f)
+  ≡ f;
+
+// Exact ambient Došen comonadic accumulation.
 assert [A : Cat]
   [D : τ (Functor A A)]
   (C : τ (@Comonad A D))
   (X Y Z : τ (Obj A))
   (f1 : τ (Hom A (@fapp0 A A D X) Y))
   (f2 : τ (Hom A (@fapp0 A A D Y) Z)) ⊢
-  @cokleisli_cut_fapp0
-    A D C
-    X Y (@fapp0 A A D Z)
+  @comp_fapp0
+    A
+    (@fapp0 A A D X)
+    (@fapp0 A A D Y)
+    (@fapp0 A A D Z)
     (@cokleisli_extend_fapp0 A D C Y Z f2)
-    f1
+    (@cokleisli_extend_fapp0 A D C X Y f1)
   ≡ @cokleisli_extend_fapp0
       A D C X Z
-      (@cokleisli_cut_fapp0 A D C X Y Z f2 f1);
+      (@comp_fapp0
+        A
+        (@fapp0 A A D X)
+        (@fapp0 A A D Y)
+        Z
+        f2
+        (@cokleisli_extend_fapp0 A D C X Y f1));
 
-// Coextension of the counit component is identity.
+// CoKleisliCut is transparent notation for ambient f2 o Delta(f1).
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y Z : τ (Obj A))
+  (f1 : τ (Hom A (@fapp0 A A D X) Y))
+  (f2 : τ (Hom A (@fapp0 A A D Y) Z)) ⊢
+  @cokleisli_cut_fapp0 A D C X Y Z f2 f1
+  ≡ @comp_fapp0
+      A
+      (@fapp0 A A D X)
+      (@fapp0 A A D Y)
+      Z
+      f2
+      (@cokleisli_extend_fapp0 A D C X Y f1);
+
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y Z : τ (Obj A))
+  (f1 : τ (Hom A (@fapp0 A A D X) Y))
+  (f2 : τ (Hom A (@fapp0 A A D Y) Z)) ⊢
+  @fapp0
+    (Product_cat
+      (Hom_cat A (@fapp0 A A D Y) Z)
+      (Hom_cat A (@fapp0 A A D X) Y))
+    (Hom_cat A (@fapp0 A A D X) Z)
+    (@cokleisli_cut_func A D C X Y Z)
+    (@Product_pair
+      (Hom_cat A (@fapp0 A A D Y) Z)
+      (Hom_cat A (@fapp0 A A D X) Y)
+      f2 f1)
+  ≡ @cokleisli_cut_fapp0 A D C X Y Z f2 f1;
+
+assert [D : τ (Functor Terminal_cat Terminal_cat)]
+  (C : τ (@Comonad Terminal_cat D))
+  (X Y : τ (Obj Terminal_cat))
+  (f : τ (Hom Terminal_cat
+    (@fapp0 Terminal_cat Terminal_cat D X)
+    Y)) ⊢
+  @cokleisli_extend_fapp0 Terminal_cat D C X Y f
+  ≡ Terminal_obj;
+
+// Coextension of the standard counit component is identity.
 assert [A : Cat]
   [D : τ (Functor A A)]
   (C : τ (@Comonad A D))
   (X : τ (Obj A)) ⊢
   @cokleisli_extend_fapp0
     A D C X X
-    (@counit_comonad_fapp0 A D C X)
+    (@tapp0_fapp0
+      A A
+      D (@id_func A)
+      X
+      (@counit_comonad_transf A D C))
   ≡ @id A (@fapp0 A A D X);
+
+// Standard comultiplication compiles to coextension of identity.
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X : τ (Obj A)) ⊢
+  @tapp0_fapp0
+    A A
+    D (@comp_cat_fapp0 A A A D D)
+    X
+    (@comult_comonad_transf A D C)
+  ≡ @cokleisli_extend_fapp0
+      A D C
+      X
+      (@fapp0 A A D X)
+      (@id A (@fapp0 A A D X));
 
 assert [A : Cat]
   [D : τ (Functor A A)]
@@ -11120,7 +11306,7 @@ assert [A : Cat]
         (@counit_comonad_transf A D C))
       (@counit_comonad_fapp0 A D C X));
 
-// The transparent coextension remains whole and iterable.
+// The stable coextension remains whole and iterable.
 assert [A : Cat]
   [D : τ (Functor A A)]
   (C : τ (@Comonad A D))

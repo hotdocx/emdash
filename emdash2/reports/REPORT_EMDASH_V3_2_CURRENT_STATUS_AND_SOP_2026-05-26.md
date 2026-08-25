@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-23
+Last consolidated: 2026-08-24
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -56,16 +56,15 @@ detailed probe evidence.
   transformations, or add generic functor extensionality.
 - `emdash3_2_monads.lp`: monad-primary, opposite-dual computational layer.
   `Monad(T)` is indexed by a whole endofunctor with stable full unit and
-  multiplication observations. Whole Kleisli extension and whole Kleisli cut
-  retain higher action; their capped projections own beta, unit,
-  multiplication, and the corrected Došen accumulation. Raw base-category
-  `comp_fapp0` deliberately remains generic after a rejected probe added four
-  unjoined specialized-category/opposite overlaps. `Comonad(D)` is the
-  transparent `Monad(D^op)` classifier; its standard whole counit and
-  comultiplication stay stable, while coextension and co-Kleisli cut reuse the
-  monadic rule family by endpoint swapping. Existing adjunctions construct
-  both structural instances. The module claims neither free syntax nor a
-  global decision procedure.
+  multiplication observations. Whole extension retains higher action, while
+  ordinary ambient `comp_fapp0` owns Došen beta and accumulation. Kleisli cut
+  is transparent derived notation. `Comonad(D)` is the transparent
+  `Monad(D^op)` classifier, while a stable whole coextension facade supplies
+  executable ambient dual beta, accumulation, counit-extension identity, and
+  the comultiplication bridge with equality evidence back to the opposite
+  monad. Existing adjunctions construct both structural instances. The module
+  claims neither an explicit Kleisli category, free syntax, nor a global
+  decision procedure.
 - `emdash3_2_direct_cover_completion_locality.lp`: downstream conventional
   comparison for the direct whole-presheaf cover-completion HIT. A derived
   retained-member theorem is projected through one whole transformation
@@ -3875,36 +3874,52 @@ The product architecture includes:
 
 The additive monad layer follows the same indexed-observation boundary. For
 `M : Monad(T)`, `unit_monad_transf(M)` and `mult_monad_transf(M)` are stable
-whole transformations. The selected whole functors
-`kleisli_extend_func(M,X,Y)` and `kleisli_cut_func(M,X,Y,Z)` retain hom action.
-Their point projections compute as
+whole transformations. `kleisli_extend_func(M,X,Y)` retains hom action. Its
+point projection and ordinary ambient composition compute as
 
 ```text
-KleisliCut(g,eta^c(f)) -> g o f
-KleisliCut(g,f*)       -> (KleisliCut(g,f))*
-(eta_X)*               -> id_TX
-mu_X                   -> (id_TX)*.
+g* o eta^c(f) -> g o f
+g* o f*       -> (g* o f)*
+(eta_X)*      -> id_TX
+mu_X          -> (id_TX)*.
 ```
 
 The second rule is the exact monadic dual of Došen's
-`Delta(f2) o Delta(f1) -> Delta(f2 o Delta(f1))`. Its explicit stable-cut head
-is intentional: a raw `g* o f*` runtime fold conflicts with existing
-opposite, terminal, and equality-skeleton computation. A theorem-level
-semantic comparison retains the conventional reading
-`KleisliCut(g,f)=g* o f` without installing a second hot composition owner.
-The transparent `Comonad(D)=Monad(D^op)` facade reuses these rules for the
-co-Kleisli dual. Standard whole counit/comultiplication observations are
-stable and carry explicit equality evidence to opposite unit/multiplication,
-avoiding the unjoined double-`Op_transf` projection order found by the owner
-probe.
+`Delta(f2) o Delta(f1) -> Delta(f2 o Delta(f1))`. Došen's separately defined
+delta/Kleisli composition is not the §5.8.3 ambient normalization owner.
+Accordingly `kleisli_cut_func` and `kleisli_cut_fapp0` are transparent views of
+`g* o f`, not primitive heads.
 
-The completed additive tranche is registered in source checks and metrics,
-has a reviewer example, and contributes 26 cataloged central checks. Its
-warning-enabled owner check preserves the inherited `1131/159` warning
-inventory, its strict module LHS audit is empty, and the fresh 270-file health
-and CI passes are green. Free monad/comonad syntax, a commuting decision
-procedure, Kleisli/Eilenberg--Moore categories, and a TypeScript declaration
-surface remain separate consumer-led work.
+The evidence classifier remains `Comonad(D)=Monad(D^op)`, but ordinary
+composition in `A` cannot retain a double-opposite matching head. Stable whole
+`cokleisli_extend_func` and its point owner therefore form the computational
+facade, with explicit whole/point equality evidence to opposite monadic
+extension. Ambient composition computes
+
+```text
+epsilon^a(f2) o Delta(f1) -> f2 o f1
+Delta(f2) o Delta(f1)     -> Delta(f2 o Delta(f1)).
+```
+
+Coextension of the standard counit is identity, and standard
+comultiplication compiles to coextension of `id_DX`. Co-Kleisli cut is also
+transparent derived notation.
+
+The corrective tranche has 37 focused central checks and twelve reviewer
+statements before catalog regeneration. Its warning-enabled owner check is
+`1135/159`: four classified accumulation/projection reports, namely monad and
+comonad against `Op_cat` and `EqSkeleton_cat`. Component-first and Terminal
+orders are joined, a broad Op runtime bridge was rejected because it duplicated
+19 higher-action projection interactions, and the strict module LHS audit is
+empty. The fresh catalog has 2,244 checks across 110 areas with zero
+unclassified entries. The 270-file health snapshot and full CI are green;
+CI completed in 1,316.709 seconds and its post-check gates passed 44 Python
+and 5 Node tests. The health source/check snapshots are
+`3bdea4b20549469d0d2cdbfad57a4a184e333b58f7a6d27467419ddcbc48a0bc` and
+`efac5fae4151945619b94ef41a713fc8eb97b99fb6e3e5ad594cd731d539acc3`.
+Free monad/comonad syntax, a commuting decision procedure, explicit
+Kleisli/Eilenberg--Moore categories, and a TypeScript declaration surface
+remain separate consumer-led work.
 
 Cat-valued horizontal action is expressed through the generic
 `comp_prod_fapp1_func` / `comp_prod_fapp1_fapp0` owner and its projection

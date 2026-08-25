@@ -4753,29 +4753,36 @@ action. Its conventional semantic target is `f |-> mu_Y o T[f]`; the stable
 whole owner is connected to that target by explicit equality evidence rather
 than a runtime expansion.
 
-Kleisli cut has semantic reading
+Derived Kleisli-composition notation has semantic reading
 
 ```text
 KleisliCut(g,f) = g* o f.
 ```
 
-It too is a whole functor, with product input `(f,g)`, and its capped
-projection owns the triangular reductions:
+but it is transparent notation rather than a second cut owner. Došen's
+triangular reductions compute on ordinary ambient composition:
 
 ```text
-KleisliCut(g,eta^c(f)) -> g o f
-KleisliCut(g,f*)       -> (KleisliCut(g,f))*
-(eta_X)*               -> id_TX
-mu_X                   -> (id_TX)*.
+g* o eta^c(f) -> g o f
+g* o f*       -> (g* o f)*
+(eta_X)*      -> id_TX
+mu_X          -> (id_TX)*.
 ```
 
 The accumulation orientation is important. It is the monadic opposite of
 Došen's `Delta(f2) o Delta(f1) -> Delta(f2 o Delta(f1))`: the top cut between
-two extensions becomes one extension containing a lower-degree cut. The raw
-spelling `g* o f*` remains ordinary `comp_fapp0`; its equality with the stable
-cut result is theorem-level. A probe of the broad raw runtime fold introduced
-unjoined opposite and specialized-category reduction orders, whereas the
-stable-cut formulation preserves the inherited warning inventory.
+two extensions becomes one extension containing a lower-degree cut. Došen
+separately defines delta/Kleisli composition and then a Kleisli category; he
+does not use that separate operation as a substitute for ambient composition
+in the §5.8.3 normalizer. Consequently `kleisli_cut_func` and
+`kleisli_cut_fapp0` are transparent derived views.
+
+The ambient monad rule has two classified projection-order reports, against
+`Op_cat` and `EqSkeleton_cat`. Component-first beta preserves ambient
+composition so specialized identity computation joins, and a narrow Terminal
+projection selects the unique terminal arrow. The remaining reports are
+diagnostic interactions with honest ambient category projections, not a
+reason to change the mathematical owner.
 
 A comonad is transparently classified by the opposite monad:
 
@@ -4783,14 +4790,18 @@ A comonad is transparently classified by the opposite monad:
 Comonad_A(D) = Monad_(A^op)(D^op).
 ```
 
-Whole co-Kleisli extension and cut are endpoint-swapped views of the same
-monadic owners. Hence their beta, accumulation, and counit-extension laws
-compute without a second hot rule family. Standard counit and
-comultiplication remain stable whole observations with equality evidence to
-the opposite unit and multiplication; this avoids making double-opposite
-projection order a runtime normal form. For `J : Adjunction(F,G)`, the layer
-constructs the monad on `G o F` with multiplication `G epsilon F` and the
-comonad on `F o G` with comultiplication `F eta G`.
+The evidence classifier alone does not retain an opposite matching head under
+ordinary composition in `A`. The computational facade therefore exposes a
+stable whole `cokleisli_extend_func` and point owner, with explicit equality
+evidence to endpoint-swapped monadic extension. Ambient composition owns the
+dual beta and accumulation laws, coextension of the counit is identity, and
+the standard comultiplication component compiles to coextension of
+`id_DX`. Derived co-Kleisli cut remains transparent. The dual rule has the
+corresponding classified `Op_cat` and `EqSkeleton_cat` projection reports.
+Standard counit and comultiplication remain stable whole observations. For
+`J : Adjunction(F,G)`, the layer constructs the monad on `G o F` with
+multiplication `G epsilon F` and the comonad on `F o G` with comultiplication
+`F eta G`.
 
 These generic rules do not by themselves prove decidability of all emdash or
 Lambdapi conversion. Došen's decision theorem concerns the separately free

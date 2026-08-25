@@ -425,12 +425,12 @@ the mere-connectedness consumer for the Circle is
 `Pi x:S1, ||circle_base=x||_{-1}` without an untruncated path choice and uses
 that evidence to prove `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier
 rewrite to Unit;
-the monad-primary indexed full-functor interface, whole Kleisli extension and
-stable Kleisli cut, opposite-derived comonad computation, and
-adjunction-derived structural instances are `emdash3_2_monads.lp`; raw
-base-category composition deliberately remains at the generic owner, while
-the corrected Došen accumulation computes at the stable cut head and the
-dual co-Kleisli laws reuse that same rule family;
+the monad-primary indexed full-functor interface, whole extension, ambient
+Došen reductions, stable opposite-derived coextension, and adjunction-derived
+structural instances are `emdash3_2_monads.lp`; ordinary `comp_fapp0` owns the
+monad/comonad beta and accumulation laws, while Kleisli/co-Kleisli cut names
+are transparent derived notation and explicit Kleisli categories remain
+separately gated;
 executable diagnostics live in `emdash3_2_checks.lp`.
 
 ## Authorities
@@ -1246,12 +1246,14 @@ Use the following order:
     in the old category and contains no ordinal dimension, face-specific rule,
     direct simplex category, filler, whole-source equality, or unifier;
 122. `emdash3_2_monads.lp` for the indexed `Monad(T)` relation, stable whole
-    unit/multiplication observations, whole Kleisli extension and cut with
-    retained higher action, the warning-neutral owner-aligned triangular
-    reductions, the transparent opposite-derived `Comonad(D)` classifier and
-    co-Kleisli views, and the monad/comonad induced by an existing adjunction.
-    It deliberately leaves raw `comp_fapp0` unchanged and claims no free
-    syntax or global decision procedure;
+    unit/multiplication observations, whole extension with retained higher
+    action, ambient triangular beta/accumulation, the transparent
+    opposite-derived `Comonad(D)` classifier with stable whole coextension,
+    and the monad/comonad induced by an existing adjunction. Kleisli cut is
+    transparent notation rather than a runtime owner. The classified warning
+    delta is four `Op_cat`/`EqSkeleton_cat` accumulation-projection orders; it
+    claims no explicit Kleisli category, free syntax, or global decision
+    procedure;
 123. `emdash3_2_checks.lp` for executable regression statements;
 124. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;

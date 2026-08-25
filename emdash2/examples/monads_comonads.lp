@@ -2,26 +2,30 @@
   Reviewer milestone: monad-primary triangular computation and its checked
   opposite-derived comonad.
 
-  Whole Kleisli extension and cut retain higher action. The selected runtime
-  accumulation is
+  Whole extension retains higher action. The selected Došen runtime
+  accumulation is ordinary ambient composition:
 
-    KleisliCut(g,f*) -> (KleisliCut(g,f))*
+    g* o f* -> (g* o f)*.
 
-  while raw base-category composition remains generic. Co-Kleisli laws reuse
-  exactly that monadic rule in the opposite category.
+  KleisliCut is only transparent derived notation. The opposite-derived
+  comonad has a stable whole coextension facade whose ambient rules use the
+  exact dual orientations.
 */
 
 require open emdash.emdash3_2_monads;
 
-// Kleisli beta.
+// Ambient monadic beta.
 assert [A : Cat]
   [T : τ (Functor A A)]
   (M : τ (@Monad A T))
   (X Y Z : τ (Obj A))
   (f : τ (Hom A X Y))
   (g : τ (Hom A Y (@fapp0 A A T Z))) ⊢
-  @kleisli_cut_fapp0
-    A T M X Y Z g
+  @comp_fapp0
+    A X
+    (@fapp0 A A T Y)
+    (@fapp0 A A T Z)
+    (@kleisli_extend_fapp0 A T M Y Z g)
     (@tapp1_fapp0
       A A
       (@id_func A) T
@@ -37,14 +41,21 @@ assert [A : Cat]
   (X Y Z : τ (Obj A))
   (f : τ (Hom A X (@fapp0 A A T Y)))
   (g : τ (Hom A Y (@fapp0 A A T Z))) ⊢
-  @kleisli_cut_fapp0
-    A T M
-    (@fapp0 A A T X) Y Z
-    g
+  @comp_fapp0
+    A
+    (@fapp0 A A T X)
+    (@fapp0 A A T Y)
+    (@fapp0 A A T Z)
+    (@kleisli_extend_fapp0 A T M Y Z g)
     (@kleisli_extend_fapp0 A T M X Y f)
   ≡ @kleisli_extend_fapp0
       A T M X Z
-      (@kleisli_cut_fapp0 A T M X Y Z g f);
+      (@comp_fapp0
+        A X
+        (@fapp0 A A T Y)
+        (@fapp0 A A T Z)
+        (@kleisli_extend_fapp0 A T M Y Z g)
+        f);
 
 // Unit and multiplication observations compile into the triangular owner.
 assert [A : Cat]
@@ -75,23 +86,41 @@ assert [A : Cat]
       X
       (@id A (@fapp0 A A T X));
 
-// Raw base-category composition deliberately has no duplicate hot fold.
-assertnot [A : Cat]
+// KleisliCut is transparent notation, not the ambient rewrite owner.
+assert [A : Cat]
   [T : τ (Functor A A)]
   (M : τ (@Monad A T))
   (X Y Z : τ (Obj A))
   (f : τ (Hom A X (@fapp0 A A T Y)))
   (g : τ (Hom A Y (@fapp0 A A T Z))) ⊢
+  @kleisli_cut_fapp0 A T M X Y Z g f
+  ≡ @comp_fapp0
+      A X
+      (@fapp0 A A T Y)
+      (@fapp0 A A T Z)
+      (@kleisli_extend_fapp0 A T M Y Z g)
+      f;
+
+// Ambient comonadic beta.
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y Z : τ (Obj A))
+  (f : τ (Hom A (@fapp0 A A D X) Y))
+  (h : τ (Hom A Y Z)) ⊢
   @comp_fapp0
     A
-    (@fapp0 A A T X)
-    (@fapp0 A A T Y)
-    (@fapp0 A A T Z)
-    (@kleisli_extend_fapp0 A T M Y Z g)
-    (@kleisli_extend_fapp0 A T M X Y f)
-  ≡ @kleisli_extend_fapp0
-      A T M X Z
-      (@kleisli_cut_fapp0 A T M X Y Z g f);
+    (@fapp0 A A D X)
+    (@fapp0 A A D Y)
+    Z
+    (@tapp1_fapp0
+      A A
+      D (@id_func A)
+      Y Z
+      (@counit_comonad_transf A D C)
+      h)
+    (@cokleisli_extend_fapp0 A D C X Y f)
+  ≡ @comp_fapp0 A (@fapp0 A A D X) Y Z h f;
 
 // Exact dual accumulation in the comonad facade.
 assert [A : Cat]
@@ -100,14 +129,22 @@ assert [A : Cat]
   (X Y Z : τ (Obj A))
   (f1 : τ (Hom A (@fapp0 A A D X) Y))
   (f2 : τ (Hom A (@fapp0 A A D Y) Z)) ⊢
-  @cokleisli_cut_fapp0
-    A D C
-    X Y (@fapp0 A A D Z)
+  @comp_fapp0
+    A
+    (@fapp0 A A D X)
+    (@fapp0 A A D Y)
+    (@fapp0 A A D Z)
     (@cokleisli_extend_fapp0 A D C Y Z f2)
-    f1
+    (@cokleisli_extend_fapp0 A D C X Y f1)
   ≡ @cokleisli_extend_fapp0
       A D C X Z
-      (@cokleisli_cut_fapp0 A D C X Y Z f2 f1);
+      (@comp_fapp0
+        A
+        (@fapp0 A A D X)
+        (@fapp0 A A D Y)
+        Z
+        f2
+        (@cokleisli_extend_fapp0 A D C X Y f1));
 
 // Both whole computational owners retain another hom action.
 assert [A : Cat]
@@ -126,6 +163,23 @@ assert [A : Cat]
         (Hom_cat A (@fapp0 A A T X) (@fapp0 A A T Y))
         (@kleisli_extend_fapp0 A T M X Y f)
         (@kleisli_extend_fapp0 A T M X Y g)));
+
+assert [A : Cat]
+  [D : τ (Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y : τ (Obj A))
+  (f g : τ (Hom A (@fapp0 A A D X) Y)) ⊢
+  @fapp1_func
+    (Hom_cat A (@fapp0 A A D X) Y)
+    (Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y))
+    (@cokleisli_extend_func A D C X Y)
+    f g
+  : τ (Functor
+      (Hom_cat (Hom_cat A (@fapp0 A A D X) Y) f g)
+      (Hom_cat
+        (Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y))
+        (@cokleisli_extend_fapp0 A D C X Y f)
+        (@cokleisli_extend_fapp0 A D C X Y g)));
 
 // The existing adjunction constructs both exact structural instances.
 assert [R L : Cat]
@@ -149,4 +203,3 @@ assertnot [A : Cat]
   (eta : τ (Transf (@id_func A) T)) ⊢
   unit_monad_transf M
     ≡ eta;
-

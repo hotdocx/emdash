@@ -2,26 +2,23 @@
   Monad-primary computation with opposite-derived comonads.
 
   A Monad witness is indexed by a whole endofunctor. Its unit and
-  multiplication are stable full-transformation observations. Whole Kleisli
-  extension and whole Kleisli cut retain higher action, while their capped
-  projections own the Došen-style triangular computation.
+  multiplication are stable full-transformation observations. Whole extension
+  retains higher action, while ordinary ambient composition owns Došen's
+  triangular beta and accumulation reductions.
 
-  Raw categorical composition remains at the generic `comp_fapp0` owner. In
-  particular this module does not add a broad
+  The primary monadic runtime orientation is
 
     g* o f* -> (g* o f)*
 
-  rule to arbitrary base-category composition: that spelling conflicts with
-  existing opposite and specialized-category computation. The selected hot
-  form is instead
+  at the generic `comp_fapp0` head. `KleisliCut(g,f)=g* o f` is retained only
+  as transparent derived notation; it is not a second rewrite owner.
 
-    KleisliCut(g,f*) -> (KleisliCut(g,f))*.
-
-  A comonad on A is transparently a monad on A^op. Co-Kleisli extension and
-  cut are endpoint-swapped views of the same whole owners, so the dual
-  computations introduce no second runtime law family. This module does not
-  construct free syntax, a global commuting decision procedure, Kleisli or
-  Eilenberg--Moore categories, or a TypeScript declaration surface.
+  A comonad on A is classified transparently as a monad on A^op. Stable whole
+  coextension supplies the computational facade needed for ambient dual beta
+  and accumulation, with explicit equality evidence back to the opposite
+  monad. This module does not construct free syntax, a global commuting
+  decision procedure, Kleisli or Eilenberg--Moore categories, or a TypeScript
+  declaration surface.
 */
 
 require open emdash.emdash3_2;
@@ -131,45 +128,18 @@ constant symbol kleisli_extend_semantic_path
       (@kleisli_extend_semantic_func A T M X Y));
 
 /*
-  Whole Kleisli cut.
+  Derived Kleisli-composition notation.
 
-  The input order is (f,g), represented by Product_pair(f,g), and the point
-  observation is named with composition order (g,f):
+  Došen's ambient normalizer is owned by ordinary `comp_fapp0` below. The
+  optional notation
 
-    KleisliCut(g,f) = g* o f.
+    KleisliCut(g,f) = g* o f
+
+  is the monadic dual of delta composition and is transparent rather than a
+  second primitive cut owner. An explicit Kleisli category remains a separate
+  construction.
 */
-injective symbol kleisli_cut_func
-  [A : Cat]
-  [T : τ (@Functor A A)]
-  (M : τ (@Monad A T))
-  (X Y Z : τ (@Obj A))
-  : τ (@Functor
-      (Product_cat
-        (@Hom_cat A X (@fapp0 A A T Y))
-        (@Hom_cat A Y (@fapp0 A A T Z)))
-      (@Hom_cat A X (@fapp0 A A T Z)));
-
-// Stable capped Kleisli cut: g* o f.
-symbol kleisli_cut_fapp0
-  [A : Cat]
-  [T : τ (@Functor A A)]
-  (M : τ (@Monad A T))
-  [X Y Z : τ (@Obj A)]
-  (g : τ (@Hom A Y (@fapp0 A A T Z)))
-  (f : τ (@Hom A X (@fapp0 A A T Y)))
-  : τ (@Hom A X (@fapp0 A A T Z));
-
-rule @fapp0
-      _ _
-      (@kleisli_cut_func $A $T $M $X $Y $Z)
-      $fg
-  ↪ @kleisli_cut_fapp0
-      $A $T $M $X $Y $Z
-      (sigma_Snd $fg)
-      (sigma_Fst $fg);
-
-// Whole semantic cut target: map (f,g) to (f,g*) and compose.
-symbol kleisli_cut_semantic_func
+symbol kleisli_cut_func
   [A : Cat]
   [T : τ (@Functor A A)]
   (M : τ (@Monad A T))
@@ -203,8 +173,36 @@ symbol kleisli_cut_semantic_func
       (@id_func (@Hom_cat A X (@fapp0 A A T Y)))
       (@kleisli_extend_func A T M Y Z));
 
-// Whole and pointwise semantic comparisons remain equality evidence.
-constant symbol kleisli_cut_semantic_path
+// Historical semantic name retained as a transparent compatibility alias.
+symbol kleisli_cut_semantic_func
+  [A : Cat]
+  [T : τ (@Functor A A)]
+  (M : τ (@Monad A T))
+  (X Y Z : τ (@Obj A))
+  : τ (@Functor
+      (Product_cat
+        (@Hom_cat A X (@fapp0 A A T Y))
+        (@Hom_cat A Y (@fapp0 A A T Z)))
+      (@Hom_cat A X (@fapp0 A A T Z)))
+≔ @kleisli_cut_func A T M X Y Z;
+
+// Transparent point notation: KleisliCut(g,f) = g* o f.
+symbol kleisli_cut_fapp0
+  [A : Cat]
+  [T : τ (@Functor A A)]
+  (M : τ (@Monad A T))
+  [X Y Z : τ (@Obj A)]
+  (g : τ (@Hom A Y (@fapp0 A A T Z)))
+  (f : τ (@Hom A X (@fapp0 A A T Y)))
+  : τ (@Hom A X (@fapp0 A A T Z))
+≔ @comp_fapp0
+    A X
+    (@fapp0 A A T Y)
+    (@fapp0 A A T Z)
+    (@kleisli_extend_fapp0 A T M Y Z g)
+    f;
+
+symbol kleisli_cut_semantic_path
   [A : Cat]
   [T : τ (@Functor A A)]
   (M : τ (@Monad A T))
@@ -216,9 +214,16 @@ constant symbol kleisli_cut_semantic_path
           (@Hom_cat A Y (@fapp0 A A T Z)))
         (@Hom_cat A X (@fapp0 A A T Z)))
       (@kleisli_cut_func A T M X Y Z)
-      (@kleisli_cut_semantic_func A T M X Y Z));
+      (@kleisli_cut_semantic_func A T M X Y Z))
+≔ @eq_refl
+    (Functor
+      (Product_cat
+        (@Hom_cat A X (@fapp0 A A T Y))
+        (@Hom_cat A Y (@fapp0 A A T Z)))
+      (@Hom_cat A X (@fapp0 A A T Z)))
+    (@kleisli_cut_func A T M X Y Z);
 
-constant symbol kleisli_cut_fapp0_path
+symbol kleisli_cut_fapp0_path
   [A : Cat]
   [T : τ (@Functor A A)]
   (M : τ (@Monad A T))
@@ -233,13 +238,22 @@ constant symbol kleisli_cut_fapp0_path
         (@fapp0 A A T Y)
         (@fapp0 A A T Z)
         (@kleisli_extend_fapp0 A T M Y Z g)
-        f));
+        f))
+≔ @eq_refl
+    (Hom A X (@fapp0 A A T Z))
+    (@kleisli_cut_fapp0 A T M X Y Z g f);
 
-// Kleisli beta: KleisliCut(g,eta^c(f)) -> g o f.
-rule @kleisli_cut_fapp0
-      $A $T $M
-      $X $Y $Z
-      $g
+// Every extension arrow in Terminal_cat has the terminal arrow normal form.
+// This narrow projection joins ambient accumulation with Terminal composition.
+rule @kleisli_extend_fapp0
+      Terminal_cat _ _ _ _ _
+  ↪ Terminal_obj;
+
+// Ambient Došen beta: g* o eta^c(f) -> g o f.
+rule @comp_fapp0
+      $A
+      _ _ _
+      (@kleisli_extend_fapp0 $A $T $M $Y $Z $g)
       (@tapp1_fapp0
         $A $A
         _ $T
@@ -248,32 +262,40 @@ rule @kleisli_cut_fapp0
         $f)
   ↪ @comp_fapp0 $A $X $Y (@fapp0 $A $A $T $Z) $g $f;
 
-// Component-first beta overlap at f = id_X.
-rule @kleisli_cut_fapp0
-      $A $T $M
-      $X $X _
-      $g
+// Component-first beta bridge at f=id_X. Keep ambient composition visible so
+// specialized categories select their own identity-composition normal form.
+rule @comp_fapp0
+      $A
+      _ _ _
+      (@kleisli_extend_fapp0 $A $T $M $X $Z $g)
       (@tapp0_fapp0
         $A $A
         _ $T
         $X
         (@unit_monad_transf $A $T $M))
-  ↪ $g;
-
-// Correct Došen direction at the selected stable cut owner:
-//   KleisliCut(g,f*) -> (KleisliCut(g,f))*.
-rule @kleisli_cut_fapp0
-      $A $T $M
-      _ $Y $Z
+  ↪ @comp_fapp0
+      $A $X $X
+      (@fapp0 $A $A $T $Z)
       $g
+      (@id $A $X);
+
+// Exact ambient Došen direction: g* o f* -> (g* o f)*.
+rule @comp_fapp0
+      $A
+      _ _ _
+      (@kleisli_extend_fapp0 $A $T $M $Y $Z $g)
       (@kleisli_extend_fapp0 $A $T $M $X $Y $f)
   ↪ @kleisli_extend_fapp0
       $A $T $M $X $Z
-      (@kleisli_cut_fapp0 $A $T $M $X $Y $Z $g $f);
+      (@comp_fapp0
+        $A
+        $X
+        (@fapp0 $A $A $T $Y)
+        (@fapp0 $A $A $T $Z)
+        (@kleisli_extend_fapp0 $A $T $M $Y $Z $g)
+        $f);
 
-// The familiar raw equation is retained propositionally in its normalization
-// direction, without making raw base composition another runtime owner:
-//   g* o f* = (KleisliCut(g,f))*.
+// Typed equality view of the ambient accumulation conversion.
 symbol kleisli_extend_comp_path
   [A : Cat]
   [T : τ (@Functor A A)]
@@ -292,24 +314,22 @@ symbol kleisli_extend_comp_path
         (@kleisli_extend_fapp0 A T M X Y f))
       (@kleisli_extend_fapp0
         A T M X Z
-        (@kleisli_cut_fapp0 A T M X Y Z g f)))
-≔ @eq_sym
+        (@comp_fapp0
+          A X
+          (@fapp0 A A T Y)
+          (@fapp0 A A T Z)
+          (@kleisli_extend_fapp0 A T M Y Z g)
+          f)))
+≔ @eq_refl
     (Hom A (@fapp0 A A T X) (@fapp0 A A T Z))
     (@kleisli_extend_fapp0
       A T M X Z
-      (@kleisli_cut_fapp0 A T M X Y Z g f))
-    (@comp_fapp0
-      A
-      (@fapp0 A A T X)
-      (@fapp0 A A T Y)
-      (@fapp0 A A T Z)
-      (@kleisli_extend_fapp0 A T M Y Z g)
-      (@kleisli_extend_fapp0 A T M X Y f))
-    (@kleisli_cut_fapp0_path
-      A T M
-      (@fapp0 A A T X) Y Z
-      g
-      (@kleisli_extend_fapp0 A T M X Y f));
+      (@comp_fapp0
+        A X
+        (@fapp0 A A T Y)
+        (@fapp0 A A T Z)
+        (@kleisli_extend_fapp0 A T M Y Z g)
+        f));
 
 // (eta_X)* -> id_TX at the canonical unit component.
 rule @kleisli_extend_fapp0
@@ -536,8 +556,38 @@ constant symbol counit_comonad_antecedent_path
         (@counit_comonad_transf A D C))
       (@counit_comonad_antecedent_func A D C X Y));
 
-// Delta(f) is the endpoint-swapped Kleisli extension in A^op.
-symbol cokleisli_extend_func
+/*
+  Stable whole coextension.
+
+  Mathematically this is endpoint-swapped monadic extension in A^op. A stable
+  facade is required because ordinary composition in A cannot retain the
+  double-opposite matching head long enough to inherit the ambient monad rule.
+*/
+injective symbol cokleisli_extend_func
+  [A : Cat]
+  [D : τ (@Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y : τ (@Obj A))
+  : τ (@Functor
+      (@Hom_cat A (@fapp0 A A D X) Y)
+      (@Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y)));
+
+symbol cokleisli_extend_fapp0
+  [A : Cat]
+  [D : τ (@Functor A A)]
+  (C : τ (@Comonad A D))
+  [X Y : τ (@Obj A)]
+  (f : τ (@Hom A (@fapp0 A A D X) Y))
+  : τ (@Hom A (@fapp0 A A D X) (@fapp0 A A D Y));
+
+rule @fapp0
+      _ _
+      (@cokleisli_extend_func $A $D $C $X $Y)
+      $f
+  ↪ @cokleisli_extend_fapp0 $A $D $C $X $Y $f;
+
+// Transparent opposite-monad comparison targets.
+symbol cokleisli_extend_op_func
   [A : Cat]
   [D : τ (@Functor A A)]
   (C : τ (@Comonad A D))
@@ -551,7 +601,7 @@ symbol cokleisli_extend_func
     C
     Y X;
 
-symbol cokleisli_extend_fapp0
+symbol cokleisli_extend_op_fapp0
   [A : Cat]
   [D : τ (@Functor A A)]
   (C : τ (@Comonad A D))
@@ -565,7 +615,109 @@ symbol cokleisli_extend_fapp0
     Y X
     f;
 
-// Whole co-Kleisli cut; its product input order is (f2,f1).
+constant symbol cokleisli_extend_op_path
+  [A : Cat]
+  [D : τ (@Functor A A)]
+  (C : τ (@Comonad A D))
+  (X Y : τ (@Obj A))
+  : τ (@=
+      (Functor
+        (@Hom_cat A (@fapp0 A A D X) Y)
+        (@Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y)))
+      (@cokleisli_extend_func A D C X Y)
+      (@cokleisli_extend_op_func A D C X Y));
+
+constant symbol cokleisli_extend_op_fapp0_path
+  [A : Cat]
+  [D : τ (@Functor A A)]
+  (C : τ (@Comonad A D))
+  [X Y : τ (@Obj A)]
+  (f : τ (@Hom A (@fapp0 A A D X) Y))
+  : τ (@=
+      (Hom A (@fapp0 A A D X) (@fapp0 A A D Y))
+      (@cokleisli_extend_fapp0 A D C X Y f)
+      (@cokleisli_extend_op_fapp0 A D C X Y f));
+
+// Terminal coextension uses the ambient terminal-arrow normal form.
+rule @cokleisli_extend_fapp0
+      Terminal_cat _ _ _ _ _
+  ↪ Terminal_obj;
+
+// Ambient Došen co-beta: epsilon^a(f2) o Delta(f1) -> f2 o f1.
+rule @comp_fapp0
+      $A
+      _ _ _
+      (@tapp1_fapp0
+        $A $A
+        $D _
+        $Y $Z
+        (@counit_comonad_transf $A $D $C)
+        $f2)
+      (@cokleisli_extend_fapp0 $A $D $C $X $Y $f1)
+  ↪ @comp_fapp0
+      $A
+      (@fapp0 $A $A $D $X)
+      $Y $Z
+      $f2 $f1;
+
+// Component-first co-beta bridge at f2=id_Y.
+rule @comp_fapp0
+      $A
+      _ _ _
+      (@tapp0_fapp0
+        $A $A
+        $D _
+        $Y
+        (@counit_comonad_transf $A $D $C))
+      (@cokleisli_extend_fapp0 $A $D $C $X $Y $f1)
+  ↪ @comp_fapp0
+      $A
+      (@fapp0 $A $A $D $X)
+      $Y $Y
+      (@id $A $Y)
+      $f1;
+
+// Exact ambient Došen accumulation:
+//   Delta(f2) o Delta(f1) -> Delta(f2 o Delta(f1)).
+rule @comp_fapp0
+      $A
+      _ _ _
+      (@cokleisli_extend_fapp0 $A $D $C $Y $Z $f2)
+      (@cokleisli_extend_fapp0 $A $D $C $X $Y $f1)
+  ↪ @cokleisli_extend_fapp0
+      $A $D $C $X $Z
+      (@comp_fapp0
+        $A
+        (@fapp0 $A $A $D $X)
+        (@fapp0 $A $A $D $Y)
+        $Z
+        $f2
+        (@cokleisli_extend_fapp0 $A $D $C $X $Y $f1));
+
+// Coextension of the standard counit component is identity.
+rule @cokleisli_extend_fapp0
+      $A $D $C $X $X
+      (@tapp0_fapp0
+        $A $A
+        $D _
+        $X
+        (@counit_comonad_transf $A $D $C))
+  ↪ @id $A (@fapp0 $A $A $D $X);
+
+// Standard comultiplication components compile into coextension of identity:
+//   delta_X -> Delta(id_DX).
+rule @tapp0_fapp0
+      $A $A
+      $D _
+      $X
+      (@comult_comonad_transf $A $D $C)
+  ↪ @cokleisli_extend_fapp0
+      $A $D $C
+      $X
+      (@fapp0 $A $A $D $X)
+      (@id $A (@fapp0 $A $A $D $X));
+
+// Whole derived co-Kleisli composition; input order is (f2,f1).
 symbol cokleisli_cut_func
   [A : Cat]
   [D : τ (@Functor A A)]
@@ -576,11 +728,39 @@ symbol cokleisli_cut_func
         (@Hom_cat A (@fapp0 A A D Y) Z)
         (@Hom_cat A (@fapp0 A A D X) Y))
       (@Hom_cat A (@fapp0 A A D X) Z))
-≔ @kleisli_cut_func
-    (Op_cat A)
-    (@Op_func A A D)
-    C
-    Z Y X;
+≔ @comp_cat_fapp0
+    (Product_cat
+      (@Hom_cat A (@fapp0 A A D Y) Z)
+      (@Hom_cat A (@fapp0 A A D X) Y))
+    (Product_cat
+      (@Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y))
+      (@Hom_cat A (@fapp0 A A D Y) Z))
+    (@Hom_cat A (@fapp0 A A D X) Z)
+    (@comp_prod_func
+      A
+      (@fapp0 A A D X)
+      (@fapp0 A A D Y)
+      Z)
+    (@comp_cat_fapp0
+      (Product_cat
+        (@Hom_cat A (@fapp0 A A D Y) Z)
+        (@Hom_cat A (@fapp0 A A D X) Y))
+      (Product_cat
+        (@Hom_cat A (@fapp0 A A D X) Y)
+        (@Hom_cat A (@fapp0 A A D Y) Z))
+      (Product_cat
+        (@Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y))
+        (@Hom_cat A (@fapp0 A A D Y) Z))
+      (@Product_map_func
+        (@Hom_cat A (@fapp0 A A D X) Y)
+        (@Hom_cat A (@fapp0 A A D X) (@fapp0 A A D Y))
+        (@Hom_cat A (@fapp0 A A D Y) Z)
+        (@Hom_cat A (@fapp0 A A D Y) Z)
+        (@cokleisli_extend_func A D C X Y)
+        (@id_func (@Hom_cat A (@fapp0 A A D Y) Z)))
+      (@Product_swap_func
+        (@Hom_cat A (@fapp0 A A D Y) Z)
+        (@Hom_cat A (@fapp0 A A D X) Y)));
 
 // CoKleisliCut(f2,f1) = f2 o Delta(f1).
 symbol cokleisli_cut_fapp0
@@ -591,12 +771,13 @@ symbol cokleisli_cut_fapp0
   (f2 : τ (@Hom A (@fapp0 A A D Y) Z))
   (f1 : τ (@Hom A (@fapp0 A A D X) Y))
   : τ (@Hom A (@fapp0 A A D X) Z)
-≔ @kleisli_cut_fapp0
-    (Op_cat A)
-    (@Op_func A A D)
-    C
-    Z Y X
-    f1 f2;
+≔ @comp_fapp0
+    A
+    (@fapp0 A A D X)
+    (@fapp0 A A D Y)
+    Z
+    f2
+    (@cokleisli_extend_fapp0 A D C X Y f1);
 
 // --------------------------------------------------------------------------
 // Monad and comonad induced by an existing adjunction
