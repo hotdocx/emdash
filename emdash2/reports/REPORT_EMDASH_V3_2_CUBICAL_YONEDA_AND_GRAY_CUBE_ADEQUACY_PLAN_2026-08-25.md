@@ -542,7 +542,7 @@ This plan does not initially claim:
 | `CGCA-DIM-8` | complete, checkpoint `cd23484` | Dimensions one through three and the arbitrary-`n` recursion are checked. The identity realization of `I tensor_R I` recovers the exact existing coevaluation source/target strict codes and outer transformation; `emdash3_2_gray_cube_dimension2.lp` names the actual retained target side, coordinate-swapped internal-action interchanger, and next whole action. A direct equality with `gray_interchanger_readable` is intentionally rejected as the wrong boundary because that older name has additionally reframed the target side. `gray_cube_immediate_faces` applies the existing variable-dimensional frame to every decoded cube, yielding four edges in dimension two and six square faces in dimension three without a bespoke record. |
 | `CGCA-SIMPLICIAL-DEFER-9` | complete, documented deferral at `0835e22` | The existing ordinal observation, intrinsic dependent codes, mapped decoder, faces, and variable-dimensional canonical source are sufficient object algorithms but do not yet form one native category `DependentSimplexLevel_cat(C,n)` or one whole nerve `N_delta(C)`. `CoherentNerveLevel(C,n)` is the independent geometric mapping side and cannot be reused without circularity. A later tranche must assemble the changing-boundary native levels and whole face action before adding a simplicial Yoneda section/evaluation; join uniqueness and the changing-boundary classifier are the exact prerequisites. No implementation is needed for cubical adequacy. |
 | `CGCA-DOC-10` | complete, checkpoint `0835e22` | Synchronized the living plan, Foundations, current status/SOP, canonical notation, root and `emdash2` READMEs, report index, `AGENTS.md`, source/metrics registries, focused reviewers, and generated check catalog. The exact proportional validation and the stopped long aggregate/health attempts are recorded rather than overstated; the health report remains intentionally deferred because the changed core hash would force a long repository-wide refresh that is not needed to classify this branch. |
-| `CGCA-CLOSE-11` | complete, closure checkpoint pending | Every scoped row is implemented or explicitly deferred behind a named prerequisite. The exact checkpoint chain is recorded below; the dedicated branch is clean before this final ledger edit. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal was performed. |
+| `CGCA-CLOSE-11` | complete, closure checkpoint `b3c9ef0` | Every scoped row is implemented or explicitly deferred behind a named prerequisite. The exact checkpoint chain is recorded below; the dedicated branch is clean before the final ledger commits. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal was performed. |
 
 ### 12.1 `CGCA-WALKING-BRIDGE-5` validation boundary
 
@@ -609,6 +609,7 @@ d288339  align Gray interchanger with native cubes
 79a8250  decode variable-dimensional Gray cubes
 cd23484  validate Gray cube dimensions
 0835e22  synchronize mathematical and public documentation
+b3c9ef0  close the cubical Gray adequacy plan
 ```
 
 The remaining inverse/equivalence, tensor-coherence, and simplicial-native-
