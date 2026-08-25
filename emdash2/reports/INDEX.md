@@ -1240,7 +1240,7 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`:
-  active semantic-adequacy continuation. It first packages the object-level
+  completed semantic-adequacy continuation. It first packages the object-level
   Yoneda section/evaluation between `StandardSemicube(n)` and the whole native
   cubical nerve, checks the coordinate-swapped Gray walking-square orientation,
   constructs whole transformation graphs, and decodes fixed-bracketing Gray

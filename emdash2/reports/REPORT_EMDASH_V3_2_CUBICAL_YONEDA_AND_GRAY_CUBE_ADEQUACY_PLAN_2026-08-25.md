@@ -4,7 +4,7 @@ Date: 2026-08-25 (America/Toronto)
 
 Plan-ID: `CUBICAL-YONEDA-GRAY-CUBE-ADEQUACY-V3.2`
 
-Status: **active implementation plan**.
+Status: **completed implementation plan**.
 
 Supersedes: no completed plan. It is the semantic-adequacy continuation of
 `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`
@@ -540,9 +540,9 @@ This plan does not initially claim:
 | `CGCA-GRAYCUBE-6` | complete, checkpoint `5871e30` | `emdash3_2_gray_cubes.lp` defines `GrayCubePos_R(n)` by genuine Nat recursion, with predecessor index `n` denoting geometric dimension `n+1`. The dedicated reviewer checks dimensions one through three as `I`, `I tensor_R I`, and `I tensor_R (I tensor_R I)`. The rule-free module claims no tensor unit, alternate bracketing, associator, coordinate permutation, or full monoidal structure. |
 | `CGCA-GRAY-DECODE-7` | complete, checkpoint `79a8250` | `emdash3_2_gray_transformation_graph_profile.lp` adds the selected strict-code closure for graphs of transformations between strict-coded endpoint diagrams, retaining a stable strict carrier plus a whole path to the transparent graph. `emdash3_2_gray_cube_decoder.lp` defines `gray_cube_observation(C,n)` by one internal Nat recursion uniform in `C`: dimension one evaluates the walking map, and each successor curries, takes the generator, packages its graph, recurses in `LaxArrow(C)`, and applies the proved cubical-level shift. The rule-free decoder is arbitrary in variable `n`; its reviewer checks the zero/successor computations, dimensions one through three, the recursive carrier path, and recovery of the existing walking-square coevaluation inputs. No source generation, dimension-specific filler, inverse, or mapping-category equivalence is added. |
 | `CGCA-DIM-8` | complete, checkpoint `cd23484` | Dimensions one through three and the arbitrary-`n` recursion are checked. The identity realization of `I tensor_R I` recovers the exact existing coevaluation source/target strict codes and outer transformation; `emdash3_2_gray_cube_dimension2.lp` names the actual retained target side, coordinate-swapped internal-action interchanger, and next whole action. A direct equality with `gray_interchanger_readable` is intentionally rejected as the wrong boundary because that older name has additionally reframed the target side. `gray_cube_immediate_faces` applies the existing variable-dimensional frame to every decoded cube, yielding four edges in dimension two and six square faces in dimension three without a bespoke record. |
-| `CGCA-SIMPLICIAL-DEFER-9` | complete, documented deferral | The existing ordinal observation, intrinsic dependent codes, mapped decoder, faces, and variable-dimensional canonical source are sufficient object algorithms but do not yet form one native category `DependentSimplexLevel_cat(C,n)` or one whole nerve `N_delta(C)`. `CoherentNerveLevel(C,n)` is the independent geometric mapping side and cannot be reused without circularity. A later tranche must assemble the changing-boundary native levels and whole face action before adding a simplicial Yoneda section/evaluation; join uniqueness and the changing-boundary classifier are the exact prerequisites. No implementation is needed for cubical adequacy. |
-| `CGCA-DOC-10` | complete, checkpoint pending | Synchronized the living plan, Foundations, current status/SOP, canonical notation, root and `emdash2` READMEs, report index, `AGENTS.md`, source/metrics registries, focused reviewers, and generated check catalog. The exact proportional validation and the stopped long aggregate/health attempts are recorded rather than overstated; the health report remains intentionally deferred because the changed core hash would force a long repository-wide refresh that is not needed to classify this branch. |
-| `CGCA-CLOSE-11` | pending | Audit every scoped row, checkpoint implemented/deferred evidence, and hand off exact commits/prerequisites. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal without separate authority. |
+| `CGCA-SIMPLICIAL-DEFER-9` | complete, documented deferral at `0835e22` | The existing ordinal observation, intrinsic dependent codes, mapped decoder, faces, and variable-dimensional canonical source are sufficient object algorithms but do not yet form one native category `DependentSimplexLevel_cat(C,n)` or one whole nerve `N_delta(C)`. `CoherentNerveLevel(C,n)` is the independent geometric mapping side and cannot be reused without circularity. A later tranche must assemble the changing-boundary native levels and whole face action before adding a simplicial Yoneda section/evaluation; join uniqueness and the changing-boundary classifier are the exact prerequisites. No implementation is needed for cubical adequacy. |
+| `CGCA-DOC-10` | complete, checkpoint `0835e22` | Synchronized the living plan, Foundations, current status/SOP, canonical notation, root and `emdash2` READMEs, report index, `AGENTS.md`, source/metrics registries, focused reviewers, and generated check catalog. The exact proportional validation and the stopped long aggregate/health attempts are recorded rather than overstated; the health report remains intentionally deferred because the changed core hash would force a long repository-wide refresh that is not needed to classify this branch. |
+| `CGCA-CLOSE-11` | complete, closure checkpoint pending | Every scoped row is implemented or explicitly deferred behind a named prerequisite. The exact checkpoint chain is recorded below; the dedicated branch is clean before this final ledger edit. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal was performed. |
 
 ### 12.1 `CGCA-WALKING-BRIDGE-5` validation boundary
 
@@ -580,7 +580,45 @@ the updated decoder/reviewer are green. No rule, unifier, endpoint equality,
 Sigma eta, or warning family is added; the prior focused evidence remains the
 applicable kernel boundary.
 
-## 13. Validation And Git Policy
+## 13. Completion Verdict
+
+The plan's two object-level adequacy questions are answered within their stated
+boundaries:
+
+1. the Yoneda section/evaluation coherently re-presents every native cube by
+   its internal `{L,R,*}` faces and returns it at the identity face; and
+2. strict realizations of fixed-bracketing positive right-Gray cubes decode by
+   one internal Nat recursion to native cubical levels.
+
+The second construction is variable-dimensional, not a dimension-three macro.
+It uses the checked coordinate swap, whole transformation graphs, a selected
+strict graph code with stable carrier path, right curry, and a proved
+cubical-level shift. Dimensions one through three, the `I tensor_R I`
+interchanger direction, four square edges, six cube faces, and another whole
+action are checked. The direct equality between the retained graph cell and
+the separately reframed readable interchanger is intentionally not claimed.
+
+Checkpoint chain:
+
+```text
+69fb447  plan cubical semantic adequacy
+0be1813  realize native cubes by Yoneda
+d288339  align Gray interchanger with native cubes
+6a9d54b  construct Gray transformation graphs
+5871e30  define fixed-bracketing Gray cubes
+79a8250  decode variable-dimensional Gray cubes
+cd23484  validate Gray cube dimensions
+0835e22  synchronize mathematical and public documentation
+```
+
+The remaining inverse/equivalence, tensor-coherence, and simplicial-native-
+nerve work is precisely documented, not silently folded into this result.
+Long registered-source and health aggregates were deliberately not completion
+gates under the plan's proportional-validation policy; all changed semantic
+owners, central diagnostics, new sources, and focused reviewers were checked
+directly under the 90-second per-target ceiling.
+
+## 14. Validation And Git Policy
 
 - Keep every Lambdapi command bounded to 90 seconds.
 - Use ignored focused probes before promoting semantic rules or stable heads.
@@ -597,7 +635,7 @@ applicable kernel boundary.
 - Do not push, merge, publish, tag, create a PR, amend/rebase/reset, delete a
   branch, or remove a worktree without separate explicit authority.
 
-## 14. Persistent-Goal Launch Prompt
+## 15. Persistent-Goal Launch Prompt
 
 > Continue the emdash v3.2 cubical Yoneda and Gray-cube adequacy work in
 > `/home/user1/emdash1-gray-cube-adequacy-v1` on branch
