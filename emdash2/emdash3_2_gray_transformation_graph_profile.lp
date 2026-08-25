@@ -6,13 +6,15 @@
 
     B -> LaxArrow_cat(C).
 
-  A whole carrier path identifies its stable strict decoder with the
-  transparent graph from the preceding module.  Keeping the decoder head
+  A whole carrier path identifies its stable strict decoder with the public
+  computing graph from the preceding module.  Keeping the decoder head
   stable lets the existing strict compositor rule compute before readability
   reframes it to the graph. This is the profile closure needed by recursive
-  Gray currying; it does not classify arbitrary ambient graphs as strict,
-  identify the retained target side with a separately named G[g], or add a
-  second graph semantics.
+  Gray currying; it does not classify arbitrary ambient graphs as strict or
+  add a second graph semantics. The path is an observational bridge, not a
+  runtime carrier fold: the latter would erase the strict profile
+  discriminator. The existing ReadablePseudoFunctorProfile is a separate
+  evidence capability indexed by an already-formed carrier.
 */
 
 require open emdash.emdash3_2_gray_cubes;

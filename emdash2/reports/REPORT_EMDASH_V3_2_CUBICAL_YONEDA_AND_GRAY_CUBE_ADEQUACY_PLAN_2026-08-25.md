@@ -4,7 +4,8 @@ Date: 2026-08-25 (America/Toronto)
 
 Plan-ID: `CUBICAL-YONEDA-GRAY-CUBE-ADEQUACY-V3.2`
 
-Status: **completed implementation and bounded graph-readability correction**.
+Status: **completed implementation and prototype-lax graph correction; local
+checkpoint pending**.
 
 Supersedes: no completed plan. It is the semantic-adequacy continuation of
 `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`
@@ -17,14 +18,16 @@ Depends-On: `emdash3_2_cubical.lp`, especially `StandardSemicube`,
 presheaf owners in `emdash3_2.lp` and `emdash3_2_presheaves.lp`; and
 `emdash3_2_gray_profiles.lp`, `emdash3_2_gray_right_closure.lp`,
 `emdash3_2_gray_walking_square.lp`, `emdash3_2_gray_interchanger.lp`, and
-`emdash3_2_walking_arrow.lp`.
+`emdash3_2_walking_arrow.lp`; the correction also audits the existing
+evidence-over-carrier capability in `emdash3_2_readable_pseudofunctors.lp`.
 
 Side-Task-Ledger: `CGCA-00`, `CGCA-AUDIT-1`, `CGCA-YONEDA-2`,
 `CGCA-YONEDA-BETA-3`, `CGCA-GRAY-ORIENT-4`, `CGCA-WALKING-BRIDGE-5`,
 `CGCA-GRAYCUBE-6`, `CGCA-GRAY-DECODE-7`, `CGCA-DIM-8`,
 `CGCA-SIMPLICIAL-DEFER-9`, `CGCA-DOC-10`, `CGCA-CLOSE-11`,
 `CGCA-GRAPH-ORIENT-12`, `CGCA-GRAPH-READABLE-13`,
-`CGCA-STRICT-PROJ-14`, `CGCA-NORMAL-LAX-15`, and `CGCA-RECLOSE-16`.
+`CGCA-STRICT-PROJ-14`, `CGCA-NORMAL-LAX-15`, `CGCA-RECLOSE-16`,
+`CGCA-PROTOTYPE-LAX-17`, and `CGCA-RECLOSE-18`.
 
 Infinity-Codex-Origin: session
 `019ffe39-2eb9-7080-88e3-06b77d69b8d1`; decisive responses
@@ -330,22 +333,21 @@ from the square between those two edges. The dimension-one object observation
 remains valid; it simply does not extend to that whole functor for this
 profile.
 
-The coordinate-swapped result identifies the scalable geometry instead. Every
+The coordinate-swapped result identifies the scalable graph instead. Every
 ordinary transformation
 
 ```text
 epsilon : F => G,       F,G : B -> C,
 ```
 
-has the standard pointwise squares
+has one whole graph
 
 ```text
-standardSquare(epsilon,g)
-  : square(
-      epsilon[x], epsilon[y],
-      F[g], G[g],
-      G[g] o epsilon[x]
-        ==> epsilon[y] o F[g]).
+Graph(epsilon) : B -> LaxArrow_cat(C)
+Graph(epsilon)[x] = epsilon[x]
+
+Graph(epsilon)[g]
+  : G[g] o epsilon[x] ==> epsilon[y] o F[g].
 ```
 
 The square filler is the existing post/left internal-action cell with the
@@ -370,23 +372,26 @@ are side conditions rather than compound LHS slots. They let the pointwise
 standard cell typecheck with literal sides `F[g]` and `G[g]` and add no
 independent square, Sigma eta, or pointwise naturality record.
 
-The first corrected implementation attempt additionally installed the
-standard square as the runtime arrow beta of a stable ordinary `Functor`. A
-focused identity-law probe rejected that design: its special arrow beta
-overrode the global functor identity cut, while the extracted standard square
-did not reduce to the identity square. This is not an incidental orientation
-or owner-position problem. The standard squares form a normal-lax/lax graph
-whose identity and composition coherence must be owned by the corresponding
-map profile.
+The public `gray_transf_graph_func` is a stable whole functor head. Its object
+beta computes to `epsilon[x]`; its capped-arrow beta computes to
+`gray_transf_standard_square(epsilon,g)`; and generic `fapp1_func` retains the
+next whole action. The earlier represented-Sigma/opposite totalization remains
+as `gray_transf_graph_internal_func`, protected derivation evidence rather than
+the public normal form.
 
-The accepted boundary therefore retains the earlier represented-Sigma/opposite
-whole graph as `gray_transf_graph_func`. It computes component edges and the
-first side, retains its second-side totalization history, and exposes another
-whole action for recursion. Separately,
-`gray_transf_standard_cell` and `gray_transf_standard_square` expose the
-literal pointwise naturality reading. No equality identifies their cell with
-the retained internal graph cell. A future normal-lax/lax-map profile must
-assemble the standard squares into a whole graph.
+At `g=id`, the graph-specific beta and the historical global strict-functor
+identity cut select different normal forms. Lambdapi accepts and typechecks the
+rule; a focused identity probe records the critical pair. Under the repository
+prototype policy this overlap is not a veto: the global strict cuts are
+temporary fast-prototyping approximations explicitly scheduled for later
+profile-local migration. The intended lax graph computation must remain.
+
+The repository already has `ReadablePseudoFunctorProfile(F)`, an abstract
+coherent capability indexed by an existing ambient carrier and exposing
+invertible unit and post/pre compositor views. The earlier claim that the
+profile itself was missing was wrong. That capability neither constructs the
+graph carrier nor disables global cuts, and its pseudo/invertible boundary may
+be stronger than a future arbitrary lax carrier classifier.
 
 The original ordinary represented identity section `(y,id_y)`, family-natural
 `sigma_pullback_total_transf`, represented Sigma reindex accumulation, and
@@ -401,10 +406,9 @@ H : StrictFunctorData(GrayTensor_R(WalkingArrow,B),C),
 
 right curry produces a strict walking map into `GrayHom_lax(B,C)`. Its action
 on the walking generator is a transformation between two `B`-diagrams. The
-current decoder packages its iterable internal graph by the selected strict
-code; this remains the recursive successor input. Replacing that internal
-graph by the whole standard graph is deferred to the normal-lax/lax-map
-profile rather than forced through the strict `Functor` classifier.
+current decoder packages the stable whole graph by the selected strict code;
+this is the recursive successor input required by the variable-dimensional
+decoder.
 
 ## 8. Fixed-Bracketing Gray Cubes
 
@@ -469,18 +473,16 @@ decode_(n+1)(H)
 `strict_gray_transf_graph_data` is selected only when the transformation's two
 endpoint diagrams already carry strict codes. Its decoder head remains stable
 so the profile-local compositor computes; a whole carrier path supplies the
-internal graph reading without a competing runtime fold. Object equality is its
+public graph reading without a competing runtime fold. Object equality is its
 ordinary `eq_ap`, while arrow comparison is necessarily dependent and is
 exposed by `eq_apd` as a `PathOver`. The canonical
 `cubical_level_shift_path` is proved by Nat induction and turns the recursive
 cell over `LaxArrow(C)` into the next cubical level over `C`.
 
 Acceptance is checked both at selected low dimensions and at variable `n`.
-At dimension two, `emdash3_2_gray_cube_dimension2.lp` exposes the actual
-internal-action cell selected by the iterable graph and retains its target-side
-history. Separately, its standard pointwise cell has the literal inner-target
-side and is definitionally `gray_interchanger`. No equality identifies these
-two cells before the normal-lax whole-graph prerequisite is implemented.
+At dimension two, `emdash3_2_gray_cube_dimension2.lp` exposes the actual public
+graph cell. Its target side is the literal inner-target arrow and its filler is
+definitionally `gray_interchanger`.
 `gray_interchanger_readable` remains a further endpoint-reframed presentation,
 not the primitive acceptance boundary.
 At dimension three, the existing variable-dimensional immediate frame applied
@@ -556,16 +558,18 @@ This plan does not initially claim:
 | `CGCA-GRAY-ORIENT-4` | complete | Checkpoint `d288339`. Promoted the generic third projection `tapp1_at_transf(epsilon,X)[g][f] -> epsilon[g o f]` at the represented-composition owner. Kernel, central diagnostics, typed endpoint probe, dedicated positive/negative reviewer, strict LHS audit, strict catalog, and exact warning comparison are green; warnings remain `1290 = 1131 + 159`. `emdash3_2_gray_interchanger_orientation.lp` derives first-class stable-to-readable paths and a capped `v o a ==> b o u` cell without endpoint collapse. Swapping coordinate roles constructs `gray_interchanger_swapped_square` in the native `CubicalArrow_cat`, while the unswapped application is rejected. |
 | `CGCA-WALKING-BRIDGE-5` | complete initial experiment at `6a9d54b`; public boundary superseded by `CGCA-GRAPH-READABLE-13` | The first graph was a transparent composition of whole internal-action, represented-identity, family-natural Sigma base-change, and opposite owners. It established that a whole graph and next action are internally available, but left its second side at an unreadable projection history. The generic infrastructure remains active; the old public-boundary verdict does not. The earlier horizontal `GrayHom_lax(WalkingArrow,C) -> LaxArrow_cat(C)` proposal remains rejected for the selected coordinate variance. |
 | `CGCA-GRAYCUBE-6` | complete, checkpoint `5871e30` | `emdash3_2_gray_cubes.lp` defines `GrayCubePos_R(n)` by genuine Nat recursion, with predecessor index `n` denoting geometric dimension `n+1`. The dedicated reviewer checks dimensions one through three as `I`, `I tensor_R I`, and `I tensor_R (I tensor_R I)`. The rule-free module claims no tensor unit, alternate bracketing, associator, coordinate permutation, or full monoidal structure. |
-| `CGCA-GRAY-DECODE-7` | complete, checkpoint `79a8250`, observation sharpened by `CGCA-STRICT-PROJ-14` | `emdash3_2_gray_transformation_graph_profile.lp` adds the selected strict-code closure for graphs of transformations between strict-coded endpoint diagrams, retaining a stable strict carrier plus a whole path to the iterable internal graph. `emdash3_2_gray_cube_decoder.lp` defines `gray_cube_observation(C,n)` by one internal Nat recursion uniform in `C`: dimension one evaluates the walking map, and each successor curries, takes the generator, packages its graph, recurses in `LaxArrow(C)`, and applies the proved cubical-level shift. The rule-free decoder is arbitrary in variable `n`; its reviewer checks the zero/successor computations, dimensions one through three, the recursive carrier path, and recovery of the existing walking-square coevaluation inputs. No source generation, dimension-specific filler, inverse, or mapping-category equivalence is added. |
-| `CGCA-DIM-8` | complete initial validation at `cd23484`; sharpened by `CGCA-GRAPH-READABLE-13` | Dimensions one through three and the arbitrary-`n` recursion are checked. The identity realization of `I tensor_R I` recovers the exact existing coevaluation source/target strict codes and outer transformation. The retained internal graph cell remains distinct from the literal standard square. The standard pointwise cell has the existing inner-target side and is definitionally `gray_interchanger`; no equality with the retained internal cell is claimed. `gray_cube_immediate_faces` yields four edges and six square faces without a bespoke record. |
+| `CGCA-GRAY-DECODE-7` | complete, checkpoint `79a8250`, observation sharpened by `CGCA-STRICT-PROJ-14` | `emdash3_2_gray_transformation_graph_profile.lp` adds the selected strict-code closure for graphs of transformations between strict-coded endpoint diagrams, retaining a stable strict carrier plus a whole path to the public graph. `emdash3_2_gray_cube_decoder.lp` defines `gray_cube_observation(C,n)` by one internal Nat recursion uniform in `C`: dimension one evaluates the walking map, and each successor curries, takes the generator, packages its graph, recurses in `LaxArrow(C)`, and applies the proved cubical-level shift. The rule-free decoder is arbitrary in variable `n`; its reviewer checks the zero/successor computations, dimensions one through three, the recursive carrier path, and recovery of the existing walking-square coevaluation inputs. No source generation, dimension-specific filler, inverse, or mapping-category equivalence is added. |
+| `CGCA-DIM-8` | complete initial validation at `cd23484`; sharpened by `CGCA-PROTOTYPE-LAX-17` | Dimensions one through three and the arbitrary-`n` recursion are checked. The identity realization of `I tensor_R I` recovers the exact existing coevaluation source/target strict codes and outer transformation. The public graph target side is the existing inner-target arrow and its filler is definitionally `gray_interchanger`. `gray_cube_immediate_faces` yields four edges and six square faces without a bespoke record. |
 | `CGCA-SIMPLICIAL-DEFER-9` | complete, documented deferral at `0835e22` | The existing ordinal observation, intrinsic dependent codes, mapped decoder, faces, and variable-dimensional canonical source are sufficient object algorithms but do not yet form one native category `DependentSimplexLevel_cat(C,n)` or one whole nerve `N_delta(C)`. `CoherentNerveLevel(C,n)` is the independent geometric mapping side and cannot be reused without circularity. A later tranche must assemble the changing-boundary native levels and whole face action before adding a simplicial Yoneda section/evaluation; join uniqueness and the changing-boundary classifier are the exact prerequisites. No implementation is needed for cubical adequacy. |
 | `CGCA-DOC-10` | complete, checkpoint `0835e22` | Synchronized the living plan, Foundations, current status/SOP, canonical notation, root and `emdash2` READMEs, report index, `AGENTS.md`, source/metrics registries, focused reviewers, and generated check catalog. The exact proportional validation and the stopped long aggregate/health attempts are recorded rather than overstated; the health report remains intentionally deferred because the changed core hash would force a long repository-wide refresh that is not needed to classify this branch. |
 | `CGCA-CLOSE-11` | complete, closure checkpoint `b3c9ef0` | Every scoped row is implemented or explicitly deferred behind a named prerequisite. The exact checkpoint chain is recorded below; the dedicated branch is clean before the final ledger commits. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal was performed. |
 | `CGCA-GRAPH-ORIENT-12` | complete | Re-audited the two coordinate readings. A transformation between walking-arrow diagrams is oplax relative to the current horizontal `LaxArrow_cat` convention, while fixing the transformation and varying its source object is lax relative to the vertical convention. Flipping one global arrow-category orientation would exchange, not eliminate, this distinction. The graph is the standard transformation-to-arrow-category geometry needed by recursive currying, not merely an orientation workaround. |
-| `CGCA-GRAPH-READABLE-13` | complete, checkpoint `a70c71f` | The retained internal whole graph computes its component object and first side, preserves its second-side totalization history, and exposes another hom action. Separately, `gray_transf_standard_cell` and `gray_transf_standard_square` expose the literal sides `F[g]` and `G[g]` from `tapp1_post_laxity_cell(epsilon,g,id_x)`. Two owner-position proof-time bridges expose already-active strict naturality at stable post/precomposition heads; their LHSs contain only variables in semantic endpoint/action slots. A focused negative identity-law probe rejects installing the standard square as an ordinary strict-functor arrow beta. No such runtime graph rule was promoted. Core warnings remain exactly `1290 = 1131 + 159`; the accepted graph source returns to its former dependency boundary `1308 = 1149 + 159`. |
-| `CGCA-STRICT-PROJ-14` | complete, checkpoint `a70c71f` | Runtime carrier projection rules were correctly rejected by subject reduction. No replacement unifier is needed. The existing whole carrier path now yields a first-class object equality by `eq_ap` and the correctly dependent arrow comparison by `eq_apd : PathOver`; the strict carrier head and compositor computation remain untouched. At dimension two, the standard pointwise cell is definitionally `gray_interchanger`, while no false path identifies it with the retained internal graph cell. |
-| `CGCA-NORMAL-LAX-15` | precisely deferred | A whole graph whose arrows are the literal standard squares requires a normal-lax/lax-map classifier with identity and composition coherence. The current globally strict `Functor` identity cut rejects that arrow beta. Do not add a graph-specific identity/composition patch or collapse the internal target-side history; implement the reusable profile only when this or another concrete consumer opens that foundational tranche. |
-| `CGCA-RECLOSE-16` | complete, correction checkpoint `a70c71f` | The changed core, central diagnostics, graph reviewer, strict-profile reviewer, and dimension-two reviewer are green under the 90-second ceiling. The decoder itself is unchanged and carries forward its recent focused green evidence. Core and graph warning inventories are exactly `1290 = 1131 + 159` and `1308 = 1149 + 159`; the strict LHS audit reports zero unreviewed candidates. Catalog generation/strict checking, TOC, report headers, active references, and `git diff --check` are green. Long registered-source and health aggregates remain intentionally omitted because their absence does not block classification. |
+| `CGCA-GRAPH-READABLE-13` | superseded policy verdict at checkpoint `a70c71f` | This checkpoint correctly added the literal standard cell, owner-position strict-naturality bridges, and strict-carrier observations, but incorrectly treated the graph/strict-identity critical pair as a veto on the public arrow beta. `CGCA-PROTOTYPE-LAX-17` corrects that verdict under the repository's documented future strict-cut migration policy. |
+| `CGCA-STRICT-PROJ-14` | complete, checkpoint `a70c71f`; public reading sharpened by row 17 | Runtime carrier projection rules were correctly rejected by subject reduction. No replacement unifier is needed. The existing whole carrier path yields a first-class object equality by `eq_ap` and the correctly dependent arrow comparison by `eq_apd : PathOver`; the strict carrier head and compositor computation remain untouched. Row 17 changes the public graph computation, not this stable-code/path design. |
+| `CGCA-NORMAL-LAX-15` | superseded as a blocker | `ReadablePseudoFunctorProfile` already supplies coherent pseudo capability over existing ambient carriers. It does not construct a carrier or disable the historical global strict cuts, but its existence means the repository must not claim that no such profile exists. A future arbitrary noninvertible lax carrier classifier remains a separate possible extension, not a prerequisite for retaining the current intended graph beta. |
+| `CGCA-RECLOSE-16` | complete historical checkpoint `a70c71f`; superseded by row 17 | Records the focused evidence for the first correction. Its decision to omit the runtime graph beta is superseded; the underlying core bridges and `eq_ap`/`eq_apd` strict-carrier observations remain valid. |
+| `CGCA-PROTOTYPE-LAX-17` | complete pending checkpoint | The stable whole public graph now has object and capped-arrow betas to component edges and the standard square, retains generic `fapp1_func`, and keeps the transparent totalization protected. Literal target/interchanger observations are restored. A registered `assertnot` and exactly three diagnosed graph-source critical pairs record the intended graph beta versus the historical generic identity variants. `ReadablePseudoFunctorProfile` is documented as existing evidence over an ambient carrier, not a missing carrier constructor. The subject-reduction-failing strict-carrier projection folds remain rejected; the whole carrier path and its `eq_ap`/`eq_apd` observations remain green. |
+| `CGCA-RECLOSE-18` | complete pending checkpoint | The graph source/reviewer, strict-profile reviewer, variable-dimensional decoder reviewer, dimension-two consumer, and central diagnostics are green under the 90-second ceiling. Core warnings remain `1290 = 1131 + 159`; graph warnings are the accepted `1311 = 1152 + 159`, exactly three identity-family critical pairs over the transparent dependency boundary. Strict LHS audits for core and graph report zero unreviewed candidates. Catalog generation/strict checking, TOC, report headers, active references, and diff hygiene are green. Long aggregates remain intentionally omitted because their absence does not block classification. |
 
 ### 12.1 `CGCA-WALKING-BRIDGE-5` validation boundary
 
@@ -603,7 +607,7 @@ the updated decoder/reviewer are green. No rule, unifier, endpoint equality,
 Sigma eta, or warning family is added; the prior focused evidence remains the
 applicable kernel boundary.
 
-### 12.2 Post-completion graph correction
+### 12.2 First post-completion graph correction (superseded verdict)
 
 The initial closure correctly found a coordinate-variance distinction but
 gave the wrong status to the graph's retained second side.  For
@@ -658,16 +662,14 @@ remain explicitly documented as part of the historical strict prototype and
 must migrate to the appropriate strict/skew profile when the global strict
 cuts are eventually retired.
 
-A candidate runtime arrow beta then attempted to assemble those squares into
-an ordinary whole `Functor`. Its focused identity assertion failed: the
-special graph beta selected a nontrivial standard square on `id`, while the
-global functor cut requires the identity arrow. This is decisive evidence that
-the whole standard graph belongs to a normal-lax/lax-map profile. The rejected
-rule was removed. The current boundary therefore keeps the iterable internal
-graph, adds the standard pointwise cell and square, and defers their whole
-assembly behind `CGCA-NORMAL-LAX-15`.
+A candidate runtime arrow beta then assembled those squares into an ordinary
+whole `Functor`. Its focused identity assertion failed: the special graph beta
+selected a nontrivial standard square on `id`, while the global functor cut
+requires the identity arrow. The first correction incorrectly treated that
+known temporary strict-cut conflict as a veto and removed the rule. That
+decision is superseded by `CGCA-PROTOTYPE-LAX-17`.
 
-The accepted correction is warning-neutral at its intended boundaries. The
+That first, now-superseded correction was warning-neutral at its boundaries. The
 core inventory is exactly `1290 = 1131 critical + 159 replaceable`, and the
 graph source is back at its pre-experiment dependency inventory
 `1308 = 1149 + 159`. The changed core, central diagnostics, graph reviewer,
@@ -676,6 +678,53 @@ strict-profile reviewer, and dimension-two reviewer check directly under the
 catalog, TOC, report-header, active-reference, and whitespace checks are green.
 The unchanged decoder and unrelated registered sources are not rerun as long
 aggregates merely for reassurance.
+
+### 12.3 Prototype-lax policy correction
+
+The repository's standing design is that the globally installed strict
+functoriality/naturality cuts support fast prototyping and will later migrate
+to selected strict profiles. Therefore an intended lax consumer computation
+must not be rejected solely because its identity or composition instance forms
+a critical pair with those temporary global cuts. Lambdapi accepted and
+typechecked the stable graph rule; the negative identity probe diagnosed the
+known overlap rather than a subject-reduction failure.
+
+The corrected boundary promotes:
+
+```text
+Graph(epsilon) : B -> LaxArrow_cat(C)
+Graph(epsilon)[x]  --> epsilon[x]
+Graph(epsilon)[g]  --> standardSquare(epsilon,g),
+```
+
+where the square has literal `F[g]`/`G[g]` sides and its filler is
+`tapp1_post_laxity_cell(epsilon,g,id_x)`. Generic `fapp1_func` remains the
+whole hom action and retains the next dimension; no additional whole-action
+beta is claimed. The former transparent represented-Sigma/opposite graph is
+kept as protected derivation evidence.
+
+`ReadablePseudoFunctorProfile` already exists as an abstract coherent
+capability indexed by an ambient carrier. It exposes invertible unit and
+post/pre compositor observations but neither constructs the graph carrier nor
+turns off global strict cuts. Consequently it is relevant existing
+infrastructure, not a missing prerequisite and not by itself the graph
+implementation.
+
+The strict decoder remains a separate sorted concern. Its stable
+`strict_functor_carrier` head is needed for the selected compositor-to-identity
+rule, so a runtime fold to `Graph(epsilon)` would erase the discriminator and
+was correctly rejected by subject reduction. The whole carrier equality is
+therefore retained as an observational path. `eq_ap` gives its object
+observation; dependent `eq_apd` gives the arrow `PathOver`. These paths do not
+implement the graph beta and do not drive recursive computation.
+
+The accepted graph source has `1311 = 1152 critical + 159 replaceable`
+warnings, exactly three more critical pairs than its transparent dependency
+boundary `1308 = 1149 + 159`; all three are the documented graph-arrow versus
+generic identity variants. The core remains `1290 = 1131 + 159`. Graph,
+strict-profile, decoder, dimension-two, and central focused checks are green,
+as are the strict LHS audits. No long registered-source or health aggregate is
+needed to classify this bounded correction.
 
 ## 13. Completion Verdict
 
@@ -688,17 +737,16 @@ boundaries:
    one internal Nat recursion to native cubical levels.
 
 The second construction is variable-dimensional, not a dimension-three macro.
-It uses the checked coordinate swap, iterable internal transformation graphs, a selected
-strict graph code with stable carrier path, right curry, and a proved
+It uses the checked coordinate swap, iterable whole transformation graphs, a
+selected strict graph code with stable carrier path, right curry, and a proved
 cubical-level shift. Dimensions one through three, the `I tensor_R I`
 interchanger direction, four square edges, six cube faces, and another whole
-action are checked. The separate standard pointwise square has literal sides
-`F[g]` and `G[g]`; its selected two-dimensional filler is definitionally
-`gray_interchanger`. The retained internal decoder cell is not falsely
-identified with that standard cell. The strict carrier remains stable, with
+action are checked. The graph's capped arrow has literal sides `F[g]` and
+`G[g]`; its selected two-dimensional filler is definitionally
+`gray_interchanger`. Its identity overlap with the temporary globally strict
+cut is explicitly accepted pending cut migration. The strict carrier remains stable, with
 object equality and dependent arrow `PathOver` derived from its whole carrier
-path. A whole standard graph is precisely deferred behind the reusable
-normal-lax/lax-map prerequisite.
+path rather than a discriminator-erasing runtime fold.
 
 Checkpoint chain:
 

@@ -34,12 +34,13 @@ truncated carrier judgmentally by `Unit`. Category-indexed
 out of the realization and path-valued functors on `C`; specialization
 recovers the groupoidal Interval from the directed WalkingArrow. A selected
 strict-object/lax-arrow Gray profile then derives a nonidentity walking-square
-interchanger from whole internal laxity. Its checked coordinate swap exposes
-both an iterable internal transformation graph and the literal pointwise
-square `G[g] o epsilon[x] ==> epsilon[y] o F[g]`; assembling the latter into
-a whole graph is explicitly deferred to a normal-lax/lax-map profile.
-Fixed-bracketing positive Gray cubes and an internal Nat-recursive decoder
-then reach native cubical levels. Dimensions one
+interchanger from whole internal laxity. Its checked coordinate swap gives an
+iterable whole transformation graph whose capped arrows compute to the literal
+square `G[g] o epsilon[x] ==> epsilon[y] o F[g]`. The graph beta deliberately
+survives its known overlap with the historical globally strict functor cuts,
+which remain scheduled for profile-local migration. Fixed-bracketing positive
+Gray cubes and an internal Nat-recursive decoder then reach native cubical
+levels. Dimensions one
 through three, the selected `I tensor_R I` direction, four square edges, six
 cube faces, and arbitrary-variable-dimension recursion are checked. Source
 functoriality and the packaged groupoidification adjunction, the mirror Gray

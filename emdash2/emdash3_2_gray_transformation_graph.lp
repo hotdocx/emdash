@@ -13,12 +13,17 @@
   and finally takes the outer opposite. Generic fapp1 therefore retains every
   subsequent action.
 
-  This strictified/internal graph has a retained second-side projection.  The
-  standard directed square with literal sides F[g] and G[g] is exposed
-  separately from the existing post/left laxity cell.  Assembling those
-  standard squares into a whole graph requires a normal-lax/lax-map profile;
-  forcing them into today's globally strict Functor classifier would conflict
-  with its judgmental identity cut.
+  The represented-Sigma/opposite construction is retained as protected
+  derivation evidence.  The public stable graph computes on objects and capped
+  arrows to the standard directed square with literal sides F[g] and G[g].
+  Its generic fapp1_func remains available for the next action.
+
+  At g=id this selected graph beta overlaps the historical global strict
+  functor-identity cut.  That diagnostic overlap is deliberately accepted by
+  the repository's prototype policy: the global strict cuts are scheduled for
+  later profile-local migration and must not veto intended lax computation.
+  ReadablePseudoFunctorProfile already supplies an evidence-level coherent
+  capability for existing carriers; it does not install this graph beta.
 */
 
 require open emdash.emdash3_2_gray_interchanger_orientation;
@@ -328,8 +333,8 @@ protected symbol gray_transf_graph_underlying_func
       (@gray_transf_graph_target_catd B C F)
       (@gray_transf_graph_target_sec B C F G epsilon));
 
-// Whole strictified transformation graph; generic hom action remains iterable.
-symbol gray_transf_graph_func
+// Protected transparent derivation retained for architecture evidence.
+protected symbol gray_transf_graph_internal_func
   [B C : Cat]
   [F G : τ (Functor B C)]
   (epsilon : τ (Transf F G))
@@ -340,6 +345,88 @@ symbol gray_transf_graph_func
       (Op_cat C)
       (@gray_transf_graph_target_base_catd C))
     (@gray_transf_graph_underlying_func B C F G epsilon);
+
+// Standard lax-naturality filler with literal sides F[g] and G[g], extracted
+// from the existing post/left whole action at the identity source arrow.
+symbol gray_transf_standard_cell
+  [B C : Cat]
+  [F G : τ (Functor B C)]
+  (epsilon : τ (Transf F G))
+  [x y : τ (Obj B)]
+  (g : τ (Hom B x y))
+  : τ (Obj
+      (@homdc_square_fibre
+        C
+        (@fapp0 B C F x)
+        (@fapp0 B C F y)
+        (@fapp0 B C G x)
+        (@fapp0 B C G y)
+        (@tapp0_fapp0 B C F G x epsilon)
+        (@tapp0_fapp0 B C F G y epsilon)
+        (@fapp1_fapp0 B C F x y g)
+        (@fapp1_fapp0 B C G x y g)))
+≔ @tapp1_post_laxity_cell
+    B C F G epsilon
+    x x y g (@id B x);
+
+// Constructor-visible standard square.
+symbol gray_transf_standard_square
+  [B C : Cat]
+  [F G : τ (Functor B C)]
+  (epsilon : τ (Transf F G))
+  [x y : τ (Obj B)]
+  (g : τ (Hom B x y))
+  : τ (Hom
+      (@LaxArrow_cat C)
+      (@lax_edge C
+        (@fapp0 B C F x)
+        (@fapp0 B C G x)
+        (@tapp0_fapp0 B C F G x epsilon))
+      (@lax_edge C
+        (@fapp0 B C F y)
+        (@fapp0 B C G y)
+        (@tapp0_fapp0 B C F G y epsilon)))
+≔ @lax_square
+    C
+    (@fapp0 B C F x)
+    (@fapp0 B C F y)
+    (@fapp0 B C G x)
+    (@fapp0 B C G y)
+    (@tapp0_fapp0 B C F G x epsilon)
+    (@tapp0_fapp0 B C F G y epsilon)
+    (@fapp1_fapp0 B C F x y g)
+    (@fapp1_fapp0 B C G x y g)
+    (@gray_transf_standard_cell B C F G epsilon x y g);
+
+/*
+  Stable public transformation graph.
+
+  The object and capped-arrow betas below are the selected intended
+  computation.  The identity instance is knowingly nonjoinable with the
+  historical generic strict-functor cut.  Keep this rule and migrate the
+  generic cut later; do not suppress the lax graph computation merely to make
+  the temporary prototype globally strict.
+*/
+injective symbol gray_transf_graph_func
+  [B C : Cat]
+  [F G : τ (Functor B C)]
+  (epsilon : τ (Transf F G))
+  : τ (Functor B (@LaxArrow_cat C));
+
+rule @fapp0 _ _
+      (@gray_transf_graph_func $B $C $F $G $epsilon) $x
+  ↪ @lax_edge
+      $C
+      (@fapp0 $B $C $F $x)
+      (@fapp0 $B $C $G $x)
+      (@tapp0_fapp0 $B $C $F $G $x $epsilon);
+
+rule @fapp1_fapp0
+      _ _
+      (@gray_transf_graph_func $B $C $F $G $epsilon)
+      $x $y $g
+  ↪ @gray_transf_standard_square
+      $B $C $F $G $epsilon $x $y $g;
 
 // Public object observation, retained as the graph functor's ordinary action.
 symbol gray_transf_graph_obj
@@ -414,8 +501,7 @@ symbol gray_transf_graph_source_side_path
     (Hom C (@fapp0 B C F x) (@fapp0 B C F y))
     (@fapp1_fapp0 B C F x y g);
 
-// The opposite nested-Sigma second projection is the retained target side of
-// the strictified/internal graph.  It is not the standard G[g] observation.
+// The target-side projection computes to G[g].
 symbol gray_transf_graph_target_side
   [B C : Cat]
   [F G : τ (Functor B C)]
@@ -427,8 +513,21 @@ symbol gray_transf_graph_target_side
     (sigma_Snd
       (@gray_transf_graph_arrow B C F G epsilon x y g));
 
-// The remaining nested-Sigma projection is the internal graph cell.  Its
-// target-side presentation is intentionally retained.
+symbol gray_transf_graph_target_side_path
+  [B C : Cat]
+  [F G : τ (Functor B C)]
+  (epsilon : τ (Transf F G))
+  [x y : τ (Obj B)]
+  (g : τ (Hom B x y))
+  : τ (@=
+      (Hom C (@fapp0 B C G x) (@fapp0 B C G y))
+      (@gray_transf_graph_target_side B C F G epsilon x y g)
+      (@fapp1_fapp0 B C G x y g))
+≔ @eq_refl
+    (Hom C (@fapp0 B C G x) (@fapp0 B C G y))
+    (@fapp1_fapp0 B C G x y g);
+
+// The remaining nested-Sigma projection computes to the standard cell.
 symbol gray_transf_graph_cell
   [B C : Cat]
   [F G : τ (Functor B C)]
@@ -451,15 +550,28 @@ symbol gray_transf_graph_cell
     (sigma_Snd
       (@gray_transf_graph_arrow B C F G epsilon x y g));
 
-// Standard lax-naturality filler with literal sides F[g] and G[g], extracted
-// from the existing post/left whole action at the identity source arrow.
-symbol gray_transf_standard_cell
+symbol gray_transf_graph_cell_projection_path
   [B C : Cat]
   [F G : τ (Functor B C)]
   (epsilon : τ (Transf F G))
   [x y : τ (Obj B)]
   (g : τ (Hom B x y))
-  : τ (Obj
+  : τ (@=
+      (Obj
+        (@homdc_square_fibre
+          C
+          (@fapp0 B C F x)
+          (@fapp0 B C F y)
+          (@fapp0 B C G x)
+          (@fapp0 B C G y)
+          (@tapp0_fapp0 B C F G x epsilon)
+          (@tapp0_fapp0 B C F G y epsilon)
+          (@fapp1_fapp0 B C F x y g)
+          (@fapp1_fapp0 B C G x y g)))
+      (@gray_transf_graph_cell B C F G epsilon x y g)
+      (@gray_transf_standard_cell B C F G epsilon x y g))
+≔ @eq_refl
+    (Obj
       (@homdc_square_fibre
         C
         (@fapp0 B C F x)
@@ -470,38 +582,6 @@ symbol gray_transf_standard_cell
         (@tapp0_fapp0 B C F G y epsilon)
         (@fapp1_fapp0 B C F x y g)
         (@fapp1_fapp0 B C G x y g)))
-≔ @tapp1_post_laxity_cell
-    B C F G epsilon
-    x x y g (@id B x);
-
-// Constructor-visible standard square.  This is a pointwise operation, not
-// yet a whole strict functor in the varying x-coordinate.
-symbol gray_transf_standard_square
-  [B C : Cat]
-  [F G : τ (Functor B C)]
-  (epsilon : τ (Transf F G))
-  [x y : τ (Obj B)]
-  (g : τ (Hom B x y))
-  : τ (Hom
-      (@LaxArrow_cat C)
-      (@lax_edge C
-        (@fapp0 B C F x)
-        (@fapp0 B C G x)
-        (@tapp0_fapp0 B C F G x epsilon))
-      (@lax_edge C
-        (@fapp0 B C F y)
-        (@fapp0 B C G y)
-        (@tapp0_fapp0 B C F G y epsilon)))
-≔ @lax_square
-    C
-    (@fapp0 B C F x)
-    (@fapp0 B C F y)
-    (@fapp0 B C G x)
-    (@fapp0 B C G y)
-    (@tapp0_fapp0 B C F G x epsilon)
-    (@tapp0_fapp0 B C F G y epsilon)
-    (@fapp1_fapp0 B C F x y g)
-    (@fapp1_fapp0 B C G x y g)
     (@gray_transf_standard_cell B C F G epsilon x y g);
 
 // The graph is not capped at its square reading: another whole hom action is

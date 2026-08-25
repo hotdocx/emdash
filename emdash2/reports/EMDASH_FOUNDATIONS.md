@@ -3914,8 +3914,7 @@ GrayCubePos_R(0)       = WalkingArrow
 GrayCubePos_R(succ n)  = WalkingArrow tensor_R GrayCubePos_R(n).
 ```
 
-An ordinary transformation `epsilon : F => G` first gives one iterable
-internal graph
+An ordinary transformation `epsilon : F => G` gives one iterable stable graph
 
 ```text
 gray_transf_graph_func(epsilon) : B -> LaxArrow_cat(C).
@@ -3928,30 +3927,41 @@ along opposite coordinate axes; one is lax exactly when the other is oplax
 under a fixed naming convention. Reversing `LaxArrow_cat` would exchange those
 readings, not make both covariant unless the cell were invertible.
 
-The current whole functor is the represented-Sigma/opposite totalization. Its
-object at `y` reads as the edge `epsilon[y]`; its first side reads as `F[g]`,
-while its second side deliberately retains the totalization history needed by
-the next whole action. Separately, the pointwise standard square has literal
-sides `F[g]` and `G[g]`, and its filler is the existing post/left
-internal-action cell at `id_x`:
+The represented-Sigma/opposite totalization remains protected derivation
+evidence. The public stable head has two selected runtime observations: its
+object at `y` computes to the edge `epsilon[y]`, and its capped action on
+`g:x->y` computes to the standard square with literal sides `F[g]` and `G[g]`.
+Its filler is the existing post/left internal-action cell at `id_x`:
 
 ```text
 G[g] o epsilon[x]  ==>  epsilon[y] o F[g].
 ```
 
-This separation is necessary in the current prototype. Installing the
-standard square as the arrow beta of an ordinary `Functor` conflicts with the
-global judgmental identity cut: the standard squares carry normal-lax identity
-and composition coherence, not automatically strict functor computation.
-Accordingly, `gray_transf_standard_cell` and
-`gray_transf_standard_square` are pointwise operations. A later
-normal-lax/lax-map profile must assemble them into a whole graph.
+Generic `fapp1_func` retains the next whole action. At `g=id`, the selected
+graph beta is nonjoinable with the historical globally strict functor-identity
+cut. This is an accepted prototype overlap, not a reason to remove the graph
+beta: those global strict cuts are explicitly scheduled for later migration to
+strict profiles. Lambdapi accepts and typechecks the graph rule; warning and
+identity probes record the competing temporary normal form. The same policy
+applies to intended lax/profile-specific consumers generally: a known overlap
+with the temporary global strict approximation is diagnostic, whereas subject
+reduction failure or an unrelated unclassified overlap remains a blocker.
+
+The repository already has `ReadablePseudoFunctorProfile(F)`, an abstract
+coherent capability over an existing ambient carrier, with invertible unitor
+and post/pre compositor observations. It must not be described as missing. It
+does not itself construct a carrier or disable the global strict cuts, and its
+pseudo/invertible boundary may be stronger than an eventual arbitrary lax-map
+classifier.
 
 The selected strict-code closure keeps the decoder carrier stable, supplies
-one whole path to the internal graph, derives object equality by `eq_ap`, and
+one whole path to the public graph, derives object equality by `eq_ap`, and
 derives the necessarily dependent arrow comparison by `eq_apd` as a
-`PathOver`. Thus readability does not erase the strict-code discriminator or
-pretend that the internal second-side history is literally `G[g]`.
+`PathOver`. This equality is an observational boundary rather than the graph's
+computation: rewriting the strict decoder to the public graph would erase the
+`strict_functor_carrier` head needed by profile-local compositor reduction.
+The public graph already computes independently; `eq_ap`/`eq_apd` merely make
+the stable strict code readable at objects and dependent arrow actions.
 
 The variable-dimensional decoder is then one internal Nat recursion uniform
 in the ambient category:
@@ -3966,14 +3976,11 @@ Dimension one evaluates the walking endpoints and generator. A successor
 curries once, takes the walking generator, packages its transformation graph,
 recurses in `LaxArrow_cat(C)`, and applies the Nat-derived cubical-level shift.
 The identity realization of `I tensor_R I` recovers the already checked
-coevaluation diagrams and outer transformation; its retained internal graph
-cell has the same coordinate-swapped boundary shape as the Gray interchanger.
-The separate standard pointwise cell has the literal inner-target side and is
-definitionally the established `gray_interchanger`. No equality between that
-cell and the retained internal graph cell is claimed before the normal-lax
-whole-graph profile exists. Applying the generic immediate-face family yields
-four edges in dimension two and six square faces in dimension three, and works
-at arbitrary `n` without a dimension-specific record.
+coevaluation diagrams and outer transformation. Its public target side
+computes to the literal inner-target arrow, and its filler is definitionally
+the established `gray_interchanger`. Applying the generic immediate-face
+family yields four edges in dimension two and six square faces in dimension
+three, and works at arbitrary `n` without a dimension-specific record.
 
 Degeneracies, connections, reversals, permutations, Kan operations, the
 inverse Gray/native decoder, mapping-category equivalence, tensor parameter

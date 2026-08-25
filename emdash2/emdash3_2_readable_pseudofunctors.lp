@@ -11,6 +11,12 @@
   and their cancellation paths. Unit/pentagon/triangle coherence is part of
   the capability boundary; only the observations selected by current
   consumers are exposed here. This adds no rewrite or proof-time unifier.
+
+  This capability is evidence over an already-existing ambient Functor; it is
+  not a separate lax-carrier classifier and does not disable the historical
+  global strict cuts. Conversely, those temporary cuts must not be used to
+  veto an intended lax consumer beta that otherwise passes its owner and
+  subject-reduction checks; their migration remains profile-local future work.
 */
 
 require open emdash.emdash3_2;

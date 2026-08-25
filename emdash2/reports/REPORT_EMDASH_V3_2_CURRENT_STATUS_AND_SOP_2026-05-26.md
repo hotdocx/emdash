@@ -516,12 +516,13 @@ detailed probe evidence.
   `emdash3_2_gray_transformation_graph.lp`: the selected interchanger has
   checked direction `v o a ==> b o u`; exchanging the coordinate roles gives
   the native lax-square orientation. Every transformation yields an iterable
-  internal whole functor `B -> LaxArrow_cat(C)`. Objects read as component
-  edges and the first side reads as `F[g]`; the second side retains its
-  represented-Sigma/opposite totalization history. Separately, the standard
-  pointwise square has literal sides `F[g]` and `G[g]`, with filler extracted
-  from the existing post/left internal action. Assembling those pointwise
-  squares into a whole graph awaits a normal-lax/lax-map profile.
+  stable whole functor `B -> LaxArrow_cat(C)`. Objects compute to component
+  edges; capped arrows compute to the standard square with literal sides
+  `F[g]` and `G[g]`, with filler extracted from the existing post/left internal
+  action. Generic `fapp1_func` retains the next action. Its identity overlap
+  with the historical global strict-functor cut is deliberately accepted
+  pending the planned profile-local cut migration; the transparent
+  represented-Sigma/opposite construction remains protected evidence.
 - `emdash3_2_gray_cubes.lp`,
   `emdash3_2_gray_transformation_graph_profile.lp`,
   `emdash3_2_gray_cube_decoder.lp`, and
@@ -1140,6 +1141,20 @@ walking owner is `1026/159`, down from the additive redesign's `1028/159` and
 Warnings remain diagnostics rather than a veto on intended computation.
 Generated health is synchronized with all 55 measured files/examples passing,
 and full local CI passes those 55 targets in 306.294s.
+
+For current lax/Gray consumers, apply that policy specifically to the
+historical global strict `fapp1` identity/composition and strict-naturality
+cuts. They are temporary fast-prototyping approximations scheduled for later
+profile-local migration. If an intended lax/profile-specific runtime rule
+typechecks at its owner, preserves subject reduction, and passes its focused
+nonidentity/downstream consumers, an identity/composition critical pair with
+those global cuts must be recorded but does not veto the rule. Do not hide the
+intended lax computation merely to preserve temporary global strictness. This
+exception does not excuse unrelated subject-reduction failures or arbitrary
+unclassified overlaps. Also distinguish the existing
+`ReadablePseudoFunctorProfile`—coherent evidence indexed by an already-formed
+ambient carrier—from a separate carrier classifier; the former already exists
+but neither constructs the carrier nor disables global cuts.
 
 The walking-endomorphism plan resumed at implementation-goal baseline
 `82d0e27...`. Its G1–G6 implementation is active: `WalkingEnd_cat`,
@@ -4310,16 +4325,14 @@ GrayCubePos_R(succ n)  = WalkingArrow tensor_R GrayCubePos_R(n)
 
 defines the fixed-bracketing geometric shapes. A selected strict realization
 decodes by one Nat recursion uniform in the target category. The successor
-uses right curry, the walking generator, the internal whole transformation
-graph, and a proved cubical-level shift. That graph retains its second-side
-totalization history and another whole action. Its separate standard
-pointwise square has literal sides `F[g]` and `G[g]`; its filler is
+uses right curry, the walking generator, the stable whole transformation graph,
+and a proved cubical-level shift. Its capped arrow has literal sides `F[g]` and
+`G[g]`; its filler is
 `tapp1_post_laxity_cell(epsilon,g,id_x)`, derived from the whole internal
 action rather than independently postulated. The selected two-dimensional
-identity realization recovers the existing coevaluation data, and the
-standard pointwise filler is definitionally the established
-coordinate-swapped interchanger. No equality with the retained internal graph
-cell is claimed before the normal-lax whole-graph profile exists. The existing
+identity realization recovers the existing coevaluation data; its target side
+is the inner-target arrow and its filler is definitionally the established
+coordinate-swapped interchanger. The existing
 immediate-frame family gives four edges and six faces at dimensions two and
 three and remains variable-dimensional.
 

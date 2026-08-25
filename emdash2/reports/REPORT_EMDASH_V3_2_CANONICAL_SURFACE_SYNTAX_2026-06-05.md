@@ -1653,29 +1653,32 @@ whole action. The readable raw composites do not license a new pointwise
 endpoint rewrite: the formal component endpoints remain the stable
 `functord_transport_*_func` owners.
 
-After exchanging coordinate roles, distinguish the iterable internal graph
-from the literal standard pointwise square:
+After exchanging coordinate roles, write the iterable transformation graph as:
 
 ```text
-Graph_int(ε) : B → Arr□(C)
-Graph_int(ε)[y] = ε_y
+Graph(ε) : B → Arr□(C)
+Graph(ε)[y] = ε_y
 
-standardSquare(ε,g)
+Graph(ε)[g]
   : G[g] o ε_x  ==>  ε_y o F[g].
 ```
 
 The kernel owners are `gray_transf_graph_func`,
 `gray_transf_graph_obj_path`, `gray_transf_graph_source_side_path`,
-`gray_transf_graph_target_side`, and `gray_transf_graph_cell` for the internal
-whole graph. Its second side retains the totalization history. The separate
-owners `gray_transf_standard_cell` and `gray_transf_standard_square` have the
-literal sides `F[g]` and `G[g]`; their filler is
+`gray_transf_graph_target_side_path`, `gray_transf_graph_cell`, and
+`gray_transf_graph_cell_projection_path`. The object and capped-arrow betas
+compute to the displayed graph; `gray_transf_standard_cell` and
+`gray_transf_standard_square` name its literal filler and arrow. The filler is
 `tapp1_post_laxity_cell(epsilon,g,id_x)`, not a separately postulated
-naturality square. Reserve unqualified whole `Graph(ε)` notation until a
-normal-lax/lax-map profile assembles the standard squares without conflicting
-with the present strict `Functor` identity cut. The selected strict graph code
-keeps a stable `strict_functor_carrier`;
-`strict_gray_transf_graph_carrier_path` supplies the whole internal reading,
+naturality square. Generic `fapp1_func` retains the next action.
+
+At an identity arrow, this intended graph beta overlaps the historical global
+strict-functor identity cut. Preserve the graph beta and record the warning;
+the global cut is the temporary approximation that must later migrate to its
+strict profile. `ReadablePseudoFunctorProfile` already names coherent evidence
+over an existing carrier but does not install or suppress runtime carrier
+rules. The selected strict graph code keeps a stable `strict_functor_carrier`;
+`strict_gray_transf_graph_carrier_path` supplies the whole public reading,
 while `strict_gray_transf_graph_obj_path` and
 `strict_gray_transf_graph_arrow_pathover` derive its object and dependent
 arrow observations without a runtime carrier fold.
