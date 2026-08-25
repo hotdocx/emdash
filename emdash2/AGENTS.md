@@ -247,6 +247,13 @@ are `emdash3_2_gray_interchanger_orientation.lp`; one generic fixed-source
 internal-action projection beta exposes `epsilon[g o f]`, while first-class
 paths retain both stable endpoint histories and the same directed cell becomes
 a native lax square only after exchanging the two coordinate roles;
+the whole lax-arrow graph of an ordinary transformation is
+`emdash3_2_gray_transformation_graph.lp`; it derives one functor
+`B -> LaxArrow_cat(C)` from the existing internal action, the ordinary
+represented identity section, family-natural Sigma base change, and opposite
+totals. Its object reading, source side, retained target side, directed filler,
+and next hom action are public; it adds no graph primitive, Sigma eta, or
+pointwise naturality record;
 the classified computational homotopy-truncation reflector and its derived
 whole map action are `emdash3_2_truncation_reflector.lp`; it realizes the
 category of `n`-types through retained `TruncGrpdU(n)` packages, restricts
@@ -1079,7 +1086,14 @@ Use the following order:
     derives typed readable endpoints and the coordinate-swapped native square.
     The one new generic rule is the warning-neutral third projection of
     `tapp1_at_transf`; the continuation adds no Gray-specific rule, unifier,
-    endpoint equality, or inverse cell;
+    endpoint equality, or inverse cell. The subsequent
+    `emdash3_2_gray_transformation_graph.lp` uses the new generic ordinary
+    represented identity section and family-natural Sigma base-change owners
+    to construct the whole graph of every transformation. Objects read as
+    component edges, arrows expose both side projections and the existing
+    directed filler, and another hom action remains iterable. The generic lax
+    target side retains its internal-action normal form rather than being
+    identified with a separately named functor action;
 79. `emdash3_2_truncation_reflector.lp` for the classified computational
     truncation reflector. It realizes `NType_cat(n)` through the existing
     retained-evidence `TruncGrpdU(n)` package, provides point-computing

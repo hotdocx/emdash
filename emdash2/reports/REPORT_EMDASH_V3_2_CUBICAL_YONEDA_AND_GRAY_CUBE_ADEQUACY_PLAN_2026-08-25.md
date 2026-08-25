@@ -345,8 +345,9 @@ y |-> (F[y] -> G[y], epsilon[y])
 
 g |-> square(
        epsilon[y], epsilon[z],
-       F[g], G[g],
-       G[g] o epsilon[y] ==> epsilon[z] o F[g]).
+       F[g], graph_target_side(g),
+       graph_target_side(g) o epsilon[y]
+         ==> epsilon[z] o F[g]).
 ```
 
 The square filler is the existing post/left internal-action cell with the
@@ -354,6 +355,31 @@ typed endpoint reframe established by `CGCA-GRAY-ORIENT-4`. Thus this is not a
 new naturality record. The implementation should derive the whole functor
 through the existing hom/Sigma totalization and retained `tapp*` action; an
 opaque object-and-arrow constructor is not acceptable.
+
+The completed implementation sharpens the generic-lax reading. The retained
+target side has the correct type
+
+```text
+graph_target_side(g) : Hom_C(G[x],G[y]),
+```
+
+but remains the family-natural total-base-change/internal-action projection;
+it is not judgmentally or propositionally identified here with the separately
+named term `G[g]`. That stronger reading belongs at the selected strict
+profile required by the Gray decoder, not in the generic ambient graph. The
+source side does compute to `F[g]`, and the remaining nested-Sigma projection
+is already a cell with the displayed native lax-square boundary above.
+
+`emdash3_2_gray_transformation_graph.lp` now constructs the whole graph without
+a graph primitive. Its source section is the new generic ordinary represented
+identity section `(y,id_y)`—the covariant mirror of the pre-existing
+self-comma section. Family-natural `sigma_pullback_total_transf`, represented
+Sigma reindex accumulation, and proof-time opposite/reindex comparison remove
+the former equality-transport scaffolding while preserving each whole action.
+Objects have a typed path to the visible edge `epsilon[y]`; arrows expose the
+source side, retained target side, directed filler, and another whole hom
+action. No Sigma eta, pointwise naturality record, endpoint collapse, or
+graph-specific rule is added.
 
 For
 
@@ -471,13 +497,30 @@ This plan does not initially claim:
 | `CGCA-YONEDA-2` | complete | `emdash3_2_cubical_yoneda.lp` transparently defines `cubical_yoneda_section` by `fib_cov_transf` and `cubical_yoneda_eval` by the existing fibre functor at `cube_face_identity(n)`. The arbitrary-`C,n` source and reviewer are green; no pointwise naturality family, rule, or unifier is added, and the section retains the generic displayed/face-code action. |
 | `CGCA-YONEDA-BETA-3` | complete | Evaluation of the selected section computes to `semicubical_nerve_action_func(C,n,n,id_n)[X]`, not judgmentally to `X`. `cubical_yoneda_beta` is therefore derived by applying object evaluation to the nerve's existing whole `fapp1_id_path`; it adds no equality axiom and claims no eta law. The rule-free source has zero LHS candidates and exactly the dependency warning count (`1310`). |
 | `CGCA-GRAY-ORIENT-4` | complete | Checkpoint `d288339`. Promoted the generic third projection `tapp1_at_transf(epsilon,X)[g][f] -> epsilon[g o f]` at the represented-composition owner. Kernel, central diagnostics, typed endpoint probe, dedicated positive/negative reviewer, strict LHS audit, strict catalog, and exact warning comparison are green; warnings remain `1290 = 1131 + 159`. `emdash3_2_gray_interchanger_orientation.lp` derives first-class stable-to-readable paths and a capped `v o a ==> b o u` cell without endpoint collapse. Swapping coordinate roles constructs `gray_interchanger_swapped_square` in the native `CubicalArrow_cat`, while the unswapped application is rejected. |
-| `CGCA-WALKING-BRIDGE-5` | pending, corrected target | Construct the whole transformation graph `epsilon:F=>G |-> (B -> LaxArrow_cat(C))`, with object components as native edges and arrow action as the coordinate-swapped existing laxity cell. The earlier whole `GrayHom_lax(WalkingArrow,C) -> LaxArrow_cat(C)` proposal is rejected by the checked orientation; retain only its valid dimension-one object observation. |
+| `CGCA-WALKING-BRIDGE-5` | complete, checkpoint pending | `emdash3_2_gray_transformation_graph.lp` transparently constructs `epsilon:F=>G |-> (B -> LaxArrow_cat(C))` from the whole internal action, the new generic ordinary represented identity section, family-natural Sigma base change, and opposites. Objects read as native component edges; arrow projections expose `F[g]`, a retained target side in `Hom(G[x],G[y])`, the coordinate-swapped native filler, and another hom action. The generic lax target side is deliberately not equated with the separate term `G[g]`; strict-profile packaging is the next decoder prerequisite. No graph primitive, Sigma eta, pointwise naturality record, graph-specific rule, or new warning is added. The earlier whole `GrayHom_lax(WalkingArrow,C) -> LaxArrow_cat(C)` proposal remains rejected. |
 | `CGCA-GRAYCUBE-6` | pending | Define a fixed-bracketing positive-dimensional Gray-cube recursion after the orientation verdict; validate dimensions one through three without claiming unit/associativity/symmetry. |
 | `CGCA-GRAY-DECODE-7` | pending | Construct the Gray-cube-to-native decoder using selected curry and the walking bridge. Publicize object action first; promote a whole functor only where recursion genuinely requires it. |
 | `CGCA-DIM-8` | pending | Validate dimensions one, two, and three: endpoints/generator; four edges and directed interchanger; six faces and retained next action. State the exact boundary to arbitrary variable `n`. |
 | `CGCA-SIMPLICIAL-DEFER-9` | pending | Audit and document the distinct later simplicial Yoneda prerequisite without constructing an unsettled native semisimplicial level facade. |
 | `CGCA-DOC-10` | pending | Synchronize the living plan, Foundations, status/SOP, canonical syntax, READMEs, AGENTS/source registries, examples, catalog, and proportional health evidence. |
 | `CGCA-CLOSE-11` | pending | Audit every scoped row, checkpoint implemented/deferred evidence, and hand off exact commits/prerequisites. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal without separate authority. |
+
+### 12.1 `CGCA-WALKING-BRIDGE-5` validation boundary
+
+The promoted source, dedicated reviewer, and central diagnostics check under
+the uniform 90-second ceiling. The strict LHS audit reports zero unreviewed
+candidates, and warning diagnostics remain exactly the pre-tranche baseline
+`1290 = 1131 critical pairs + 159 replaceable variables`. Source TOC,
+catalog strictness, report headers, active references, Python syntax, shell
+syntax, and `git diff --check` are green.
+
+The full registered-source `make check` and the health refresh were stopped
+after they expanded into long aggregates over unchanged mathematics. Their
+partial results are not claimed as gates. This is the plan-authorized
+proportional-validation boundary: the changed kernel, central diagnostics,
+new source, and new reviewer have each checked directly; health/report-wide
+refresh remains for `CGCA-DOC-10` or the eventual close boundary if it is then
+needed to classify the release.
 
 ## 13. Validation And Git Policy
 

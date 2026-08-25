@@ -13616,6 +13616,44 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
   @fapp1_fapp0 (Catd_cat K) Cat_cat (@Sigma_func K) E D η
     ≡ @sigma_map_func K E D η;
 
+// Total family reindexing lies over its base functor as a whole functor.
+assert [A K : Cat] (F : τ (Functor A K)) (D : τ (Catd K)) ⊢
+  @comp_cat_fapp0
+    (@Sigma_cat A (@Pullback_catd A K D F))
+    (@Sigma_cat K D)
+    K
+    (@Sigma_proj1_func K D)
+    (@sigma_pullback_total_func A K F D)
+  ≡ @comp_cat_fapp0
+      (@Sigma_cat A (@Pullback_catd A K D F))
+      A K
+      F
+      (@Sigma_proj1_func A (@Pullback_catd A K D F));
+
+// Represented-family reindexing also accumulates under Sigma totalization
+// while a further outer reindex remains whole.
+assert [A B C D : Cat]
+  (F : τ (Functor A (Op_cat C)))
+  (G : τ (Functor B D))
+  (H : τ (Functor D C)) ⊢
+  @comp_cat_fapp0
+    A (@Catd_cat D) Cat_cat
+    (@comp_cat_fapp0
+      (@Catd_cat D) (@Catd_cat B) Cat_cat
+      (@Sigma_func B)
+      (@Pullback_catd_func B D G))
+    (@comp_cat_fapp0
+      A (Op_cat C) (@Catd_cat D)
+      (@hom_int C D H)
+      F)
+  ≡ @comp_cat_fapp0
+      A (Op_cat C) Cat_cat
+      (@comp_cat_fapp0
+        (Op_cat C) (@Catd_cat B) Cat_cat
+        (@Sigma_func B)
+        (@hom_int C B (@comp_cat_fapp0 B D C H G)))
+      F;
+
 // The generic second hom action of Sigma totalization reaches the stable
 // totalized-transfor projection.
 assert [K : Cat]
@@ -24698,6 +24736,26 @@ assert (A B : Cat) (T : τ (Functor A B))
   @piapp1_fapp0 A (@SelfComma_catd A B T)
     (@hom_con_identity_graph_sec A B T) u u' h
   ≡ @hom_con_identity_graph_action A B T u u' h;
+
+// The ordinary represented mirror selects (y,id_y) in Op(PathOut(A,y)) and
+// acts along g:x->y by the opposite canonical total arrow (g,id_g).
+assert (A : Cat) (y : τ (Obj A)) ⊢
+  @piapp0
+    (Op_cat A)
+    (@hom_identity_graph_catd A)
+    (@hom_identity_graph_sec A)
+    y
+  ≡ @hom_identity_graph_obj A y;
+
+assert (A : Cat)
+  (y x : τ (Obj A))
+  (g : τ (Hom A x y)) ⊢
+  @piapp1_fapp0
+    (Op_cat A)
+    (@hom_identity_graph_catd A)
+    (@hom_identity_graph_sec A)
+    y x g
+  ≡ @hom_identity_graph_action A y x g;
 
 assert (K : Cat) (E : τ (Catd K))
   (x y : τ (Obj K)) (p : τ (Hom K x y))
