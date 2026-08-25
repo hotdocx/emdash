@@ -422,38 +422,42 @@ or full Crans--Gray monoidality.
 
 ## 9. Gray-Cube Decoder
 
-The desired scalable owner is
+The implemented scalable object owner uses the predecessor index:
 
 ```text
-gray_cube_decode_func(C,n)
-  : GrayHom_mu(GrayCube_mu(n),C)
-    -> CubicalLevel_cat(C,n).
+gray_cube_observation(C,n)
+  : StrictFunctorData(GrayCubePos_R(n),C)
+    -> Obj(CubicalLevel_cat(C,succ n)).
 ```
 
-The public first result is its object action:
+Its induction hypothesis is uniform in the target category:
 
 ```text
-H |-> gray_cube_observation(H).
+Pi C,
+  StrictFunctorData(GrayCubePos_R(n),C)
+    -> Obj(CubicalLevel_cat(C,succ n)).
 ```
 
-The selected recursion is now expected to read schematically
+The checked recursion reads schematically
 
 ```text
 decode_1(H)
   = (H[src],H[tgt],H[generator])
 
 decode_(n+1)(H)
-  = decode_n(
-      LaxArrow_cat(C),
-      gray_transf_lax_arrow_func(
-        gray_curry_R(H)[walking_generator])).
+  = shift_n(
+      decode_n(
+        LaxArrow_cat(C),
+        strict_graph_data(
+          gray_curry_R(H)[walking_generator]))).
 ```
 
-The successor therefore uses selected Gray curry, the transformation-graph
-bridge, and the recursively retained decoder action. If current
-`GrayTensor_R` or strict-code infrastructure lacks the exact whole action or
-profile needed to package that graph, record the consumer-gated prerequisite
-rather than postulating a dimension-specific cube decoder.
+`strict_gray_transf_graph_data` is selected only when the transformation's two
+endpoint diagrams already carry strict codes. Its decoder head remains stable
+so the profile-local compositor computes; a whole carrier path supplies the
+transparent graph reading without a competing runtime fold. The canonical
+`cubical_level_shift_path` is proved by Nat induction and turns the recursive
+cell over `LaxArrow(C)` into the next cubical level over `C`.
 
 Acceptance proceeds through dimensions one, two, and three before claiming
 variable `n`. At dimension two, the decoded top filler must be the actual
@@ -504,9 +508,9 @@ This plan does not initially claim:
 | `CGCA-YONEDA-BETA-3` | complete | Evaluation of the selected section computes to `semicubical_nerve_action_func(C,n,n,id_n)[X]`, not judgmentally to `X`. `cubical_yoneda_beta` is therefore derived by applying object evaluation to the nerve's existing whole `fapp1_id_path`; it adds no equality axiom and claims no eta law. The rule-free source has zero LHS candidates and exactly the dependency warning count (`1310`). |
 | `CGCA-GRAY-ORIENT-4` | complete | Checkpoint `d288339`. Promoted the generic third projection `tapp1_at_transf(epsilon,X)[g][f] -> epsilon[g o f]` at the represented-composition owner. Kernel, central diagnostics, typed endpoint probe, dedicated positive/negative reviewer, strict LHS audit, strict catalog, and exact warning comparison are green; warnings remain `1290 = 1131 + 159`. `emdash3_2_gray_interchanger_orientation.lp` derives first-class stable-to-readable paths and a capped `v o a ==> b o u` cell without endpoint collapse. Swapping coordinate roles constructs `gray_interchanger_swapped_square` in the native `CubicalArrow_cat`, while the unswapped application is rejected. |
 | `CGCA-WALKING-BRIDGE-5` | complete, checkpoint `6a9d54b` | `emdash3_2_gray_transformation_graph.lp` transparently constructs `epsilon:F=>G |-> (B -> LaxArrow_cat(C))` from the whole internal action, the new generic ordinary represented identity section, family-natural Sigma base change, and opposites. Objects read as native component edges; arrow projections expose `F[g]`, a retained target side in `Hom(G[x],G[y])`, the coordinate-swapped native filler, and another hom action. The generic lax target side is deliberately not equated with the separate term `G[g]`; strict-profile packaging is the next decoder prerequisite. No graph primitive, Sigma eta, pointwise naturality record, graph-specific rule, or new warning is added. The earlier whole `GrayHom_lax(WalkingArrow,C) -> LaxArrow_cat(C)` proposal remains rejected. |
-| `CGCA-GRAYCUBE-6` | complete, checkpoint pending | `emdash3_2_gray_cubes.lp` defines `GrayCubePos_R(n)` by genuine Nat recursion, with predecessor index `n` denoting geometric dimension `n+1`. The dedicated reviewer checks dimensions one through three as `I`, `I tensor_R I`, and `I tensor_R (I tensor_R I)`. The rule-free module claims no tensor unit, alternate bracketing, associator, coordinate permutation, or full monoidal structure. |
-| `CGCA-GRAY-DECODE-7` | pending | Construct the Gray-cube-to-native decoder using selected curry and the walking bridge. Publicize object action first; promote a whole functor only where recursion genuinely requires it. |
-| `CGCA-DIM-8` | pending | Validate dimensions one, two, and three: endpoints/generator; four edges and directed interchanger; six faces and retained next action. State the exact boundary to arbitrary variable `n`. |
+| `CGCA-GRAYCUBE-6` | complete, checkpoint `5871e30` | `emdash3_2_gray_cubes.lp` defines `GrayCubePos_R(n)` by genuine Nat recursion, with predecessor index `n` denoting geometric dimension `n+1`. The dedicated reviewer checks dimensions one through three as `I`, `I tensor_R I`, and `I tensor_R (I tensor_R I)`. The rule-free module claims no tensor unit, alternate bracketing, associator, coordinate permutation, or full monoidal structure. |
+| `CGCA-GRAY-DECODE-7` | complete, checkpoint pending | `emdash3_2_gray_transformation_graph_profile.lp` adds the selected strict-code closure for graphs of transformations between strict-coded endpoint diagrams, retaining a stable strict carrier plus a whole path to the transparent graph. `emdash3_2_gray_cube_decoder.lp` defines `gray_cube_observation(C,n)` by one internal Nat recursion uniform in `C`: dimension one evaluates the walking map, and each successor curries, takes the generator, packages its graph, recurses in `LaxArrow(C)`, and applies the proved cubical-level shift. The rule-free decoder is arbitrary in variable `n`; its reviewer checks the zero/successor computations, dimensions one through three, the recursive carrier path, and recovery of the existing walking-square coevaluation inputs. No source generation, dimension-specific filler, inverse, or mapping-category equivalence is added. |
+| `CGCA-DIM-8` | in progress | Dimensions one through three and the arbitrary-`n` recursion type are checked. The identity realization of `I tensor_R I` recovers the exact existing coevaluation source/target strict codes and outer transformation. Remaining semantic reading: compare the retained target-side/internal-action projection of its graph square with the named inner-target arrow and `gray_interchanger_readable` through a first-class whole-action reframe, without adding a target-side collapse or Sigma eta; then expose the six dimension-three faces from the same recursion. |
 | `CGCA-SIMPLICIAL-DEFER-9` | pending | Audit and document the distinct later simplicial Yoneda prerequisite without constructing an unsettled native semisimplicial level facade. |
 | `CGCA-DOC-10` | pending | Synchronize the living plan, Foundations, status/SOP, canonical syntax, READMEs, AGENTS/source registries, examples, catalog, and proportional health evidence. |
 | `CGCA-CLOSE-11` | pending | Audit every scoped row, checkpoint implemented/deferred evidence, and hand off exact commits/prerequisites. No push, merge, publication, tag, PR, history rewrite, branch deletion, or worktree removal without separate authority. |
@@ -532,6 +536,14 @@ needed to classify the release.
 reviewer. Both direct checks are green; it changes no rule, unifier, warning
 family, or central diagnostic, so the preceding warning/LHS evidence carries
 forward unchanged.
+
+`CGCA-GRAY-DECODE-7` adds a selected strict code and carrier path, followed by
+one rule-free decoder and focused reviewers. Direct source/reviewer checks are
+green. The attempted runtime carrier fold was rejected during probing because
+it erased the strict-code discriminator before compositor reduction; no such
+rule was promoted. The stable-carrier/path design adds no rewrite, unifier, or
+warning family, so the `1290 = 1131 + 159` kernel evidence again carries
+forward.
 
 ## 13. Validation And Git Policy
 
