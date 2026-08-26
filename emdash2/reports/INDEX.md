@@ -1038,6 +1038,19 @@ record.
 
 ## Recently Completed Plan Ledgers
 
+- `REPORT_EMDASH_V3_2_INTRINSIC_FUNCTOR_PROFILES_AND_GRAY_GRAPH_REDESIGN_PLAN_2026-08-26.md`:
+  completed corrective continuation of cubical Gray adequacy. The strict graph
+  code now decodes computationally to the public graph; its existing identity
+  filler and binary compositor compute at their internal-action owners, while
+  the former opaque carrier path and `eq_ap`/`eq_apd` observers are retired.
+  Pseudofunctor profiles now constrain one readable reframe of the intrinsic
+  compositor through fixed-forward inverse evidence; the pre/right inverse is
+  derived from the same evidence, and cubical lifting plus recursive face
+  action retain whole higher action. An explicit profile constructor supports
+  future typeclass resolution. Remaining identity/composition/structural
+  instances are honestly supplied pending extracted unit/composite coherence;
+  `cubical_*` remains intentional transparent readability notation.
+
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`:
   completed C0-C7 follow-on to the initial-book plan. It expands the
   book through a globally coherent adaptation of all HoTT Chapter 9 topics
@@ -1238,17 +1251,6 @@ record.
   new cross-project maintenance is owned by the autonomous maintenance plan.
 
 ## Current Plans
-
-- `REPORT_EMDASH_V3_2_INTRINSIC_FUNCTOR_PROFILES_AND_GRAY_GRAPH_REDESIGN_PLAN_2026-08-26.md`:
-  active corrective continuation of the cubical Gray adequacy work. It probes
-  a computational whole decoder for the selected strict graph code, then uses
-  the graph's already-extracted unit/compositor cells to decide whether that
-  graph is genuinely strict or the recursive decoder needs a coherent-map
-  profile. It also replaces independent-forward pseudofunctor evidence with
-  fixed-forward invertibility of the existing internal-action cells and
-  migrates the cubical lifting/face recursion without capping higher action.
-  Global strict-cut migration, automatic typeclass resolution, and cubical
-  readability-facade deletion remain separate boundaries.
 
 - `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`:
   completed semantic-adequacy continuation. It first packages the object-level

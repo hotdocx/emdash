@@ -10,7 +10,8 @@
   its already-existing Functor carrier. It does not supply another compositor:
   fixed-forward `IsoCellEvidence` gives an inverse and cancellation paths for
   the existing post cell extracted from internal action. Higher coherence
-  remains the next internal action. This adds no rewrite or proof-time unifier.
+  remains the next internal action. The only rewrite is the explicit profile
+  constructor's field-projection beta; no proof-time unifier is added.
 
   This capability is evidence over an already-existing ambient Functor; it is
   not a separate lax-carrier classifier and does not disable the historical

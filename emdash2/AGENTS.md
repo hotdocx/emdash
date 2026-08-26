@@ -476,7 +476,8 @@ from that same evidence plus the existing post/pre reframe. Identity and
 composition profiles remain explicitly supplied capabilities pending extracted
 unit/composite coherence. `readable_pseudo_profile_intro` constructs arbitrary
 profiles from an explicit dependent evidence family. It adds no parallel
-compositor, rule, unifier, or cubical operation;
+compositor, proof-time unifier, or cubical operation; its only rule is the
+record-style profile projection beta;
 the intrinsic cubical-arrow functor extension is
 `emdash3_2_cubical_arrow_functor.lp`; a profiled carrier maps a square by
 the existing readable compositor forward, generic next-hom action on the

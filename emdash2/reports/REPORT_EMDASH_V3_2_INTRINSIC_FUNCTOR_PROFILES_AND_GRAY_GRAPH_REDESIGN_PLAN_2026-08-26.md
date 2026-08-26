@@ -4,7 +4,7 @@ Date: 2026-08-26 (America/Toronto)
 
 Plan-ID: `INTRINSIC-FUNCTOR-PROFILES-GRAY-GRAPH-V3.2`
 
-Status: **active implementation plan**.
+Status: **completed implementation plan; close checkpoint pending**.
 
 Supersedes: no completed plan. It is a corrective continuation of
 `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`.
@@ -399,8 +399,25 @@ This plan does not initially claim:
 | `IFPG-CUBICAL-MIGRATE-6` | complete semantic migration, checkpoint `396ecc2` | `cubical_arrow_map_cell` now composes the existing readable compositor, generic `F_1[alpha]`, and its derived pre-readable inverse. Cubical lift, square-level and recursive face-action reviewers are green; source/target and next-hom behavior remain unchanged. The cubical source remains warning-neutral at `1308 = 1149 + 159`, and its strict LHS audit has zero candidates. The remaining opaque identity/composition/source/target/lifted profile inhabitants are owned by the hierarchy/instance row rather than this cell migration. |
 | `IFPG-HIERARCHY-7` | complete selected boundary, checkpoint `89ea513` | `readable_pseudo_profile_intro` constructs a profile from one explicit dependent family of fixed-forward evidence and its projection computes. This realizes the intrinsic-map/pseudo-evidence layer without rebuilding object or arrow maps. Identity/composition and cubical source/target/lifted instances are now documented as supplied capabilities; deriving them is precisely gated by an extracted unit interface and next-action composite-profile coherence rather than hidden behind independent cells. Typeclass search remains a future management-layer consumer. |
 | `IFPG-FACADE-8` | complete decision, recorded at `89ea513` | Retain `CubicalArrow_cat`, `cubical_edge`, and `cubical_square` as intentional domain-readable transparent aliases for now, not compatibility obligations. They own no rules or competing semantics; deleting them would be broad low-value mechanical churn and is not required by the profile redesign. |
-| `IFPG-DOC-9` | pending | Synchronize Foundations, current SOP/status, canonical syntax, AGENTS, READMEs, report map, reviewers, catalogs and exact warning/negative evidence. |
-| `IFPG-CLOSE-10` | pending | Every scoped row is implemented, rejected with durable evidence, or precisely deferred; proportional gates are green and a clean local checkpoint exists. |
+| `IFPG-DOC-9` | complete pending checkpoint | Synchronized Foundations, current SOP/status, canonical syntax, AGENTS, `emdash2/README`, report map, superseded cubical-plan descriptions, focused reviewers, and the generated catalog. The `cubical_*` vocabulary is explicitly readability rather than compatibility, fixed-forward evidence and supplied-instance boundaries are stated consistently, and retired graph-path/independent-compositor names have no active source consumer. |
+| `IFPG-CLOSE-10` | complete pending checkpoint | Every scoped row is implemented or precisely deferred behind a named generic prerequisite. Graph profile/decoder/dimension-two, fixed-forward profile, cubical lift, square-level and recursive face-action sources/reviewers are green under the 90-second ceiling. Exact inventories are `1311 = 1152 + 159` for the graph profile and `1308 = 1149 + 159` for readable/cubical profile consumers; strict LHS audits report zero candidates. Catalog, report headers, active references, TOC and diff hygiene are green. Long registered-source, examples, health and repository aggregates remain intentionally omitted because unchanged boundaries and focused evidence suffice. |
+
+### 12.1 Completion Verdict
+
+The redesign satisfies the governing invariant. The strict graph code decodes
+computationally to the public graph; its existing identity filler and binary
+compositor compute at their internal-action owners; and no opaque carrier path
+or parallel coherence cell remains. Pseudo evidence fixes the forward readable
+cell derived from `fapp1_compositor`, supplies only inverse/cancellation data,
+and derives its pre/right inverse by endpoint reframing. Cubical lifting and
+variable-dimensional face action retain their whole higher action.
+
+The remaining supplied profile instances are explicit assumptions rather than
+hidden independent cells. Their construction is gated by an extracted unitor
+and next-action composite-profile coherence. The readable
+`lax_square(id,id,id)` versus canonical nested-Sigma identity comparison is a
+generic derived-total path and is not made a graph-specific axiom. These are
+precise future prerequisites, not missing requirements of this bounded plan.
 
 ## 13. Validation Policy
 
