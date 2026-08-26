@@ -470,7 +470,9 @@ an existing ambient functor. Transparent endpoint paths reframe the existing
 `fapp1_compositor` to one readable post cell; fixed-forward `IsoCellEvidence`
 supplies only its inverse/cancellations, and the pre/right inverse is derived
 from that same evidence plus the existing post/pre reframe. Identity and
-composition profiles remain selected capabilities. It adds no parallel
+composition profiles remain explicitly supplied capabilities pending extracted
+unit/composite coherence. `readable_pseudo_profile_intro` constructs arbitrary
+profiles from an explicit dependent evidence family. It adds no parallel
 compositor, rule, unifier, or cubical operation;
 the intrinsic cubical-arrow functor extension is
 `emdash3_2_cubical_arrow_functor.lp`; a profiled carrier maps a square by
@@ -1419,7 +1421,9 @@ Use the following order:
     existing internal-action compositor to one readable cell and supplies
     fixed-forward inverse/cancellation evidence for that cell; the pre/right
     inverse is derived, not independently supplied. Selected
-    identity/composition closure remains, with no rule or unifier;
+    identity/composition closure remains explicitly supplied, while the
+    general profile constructor and projection beta are computational, with no
+    rule or unifier beyond that record-style beta;
 128. `emdash3_2_cubical_arrow_functor.lp` for profiled whole lifting of
     intrinsic edges and squares. Its filler is the existing readable
     compositor, generic next-hom action, then the derived pre-readable inverse;

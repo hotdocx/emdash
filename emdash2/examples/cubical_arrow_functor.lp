@@ -4,6 +4,27 @@
 
 require open emdash.emdash3_2_cubical_arrow_functor;
 
+// Explicit profile construction projects the supplied fixed-forward evidence.
+assert [C D : Cat]
+  [F : τ (Functor C D)]
+  (evidence :
+    Π X : τ (Obj C),
+    Π Y : τ (Obj C),
+    Π Z : τ (Obj C),
+    Π g : τ (Hom C Y Z),
+    Π f : τ (Hom C X Y),
+      τ (@IsoCellEvidence
+        (Hom_cat D (@fapp0 C D F X) (@fapp0 C D F Z))
+        _ _
+        (@readable_pseudo_post_cell C D F X Y Z g f)))
+  [x y z : τ (Obj C)]
+  (g : τ (Hom C y z))
+  (f : τ (Hom C x y)) ⊢
+  @readable_pseudo_post_evidence
+    C D F (@readable_pseudo_profile_intro C D F evidence)
+    x y z g f
+  ≡ evidence x y z g f;
+
 // The pseudo profile constrains the existing readable compositor; it does not
 // supply an independent forward cell.
 assert [C D : Cat]

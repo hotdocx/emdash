@@ -372,6 +372,23 @@ protected symbol readable_pseudo_post_pre_reframe
     (@readable_pseudo_pre_raw_source A B F X Y Z g f)
     (@readable_pseudo_post_pre_source_path A B F X Y Z g f);
 
+// Explicit profile constructor. The sole mathematical field is invertibility
+// of the one readable cell derived from the intrinsic compositor.
+injective symbol readable_pseudo_profile_intro
+  [A B : Cat]
+  [F : τ (Functor A B)]
+  (evidence :
+    Π X : τ (Obj A),
+    Π Y : τ (Obj A),
+    Π Z : τ (Obj A),
+    Π g : τ (Hom A Y Z),
+    Π f : τ (Hom A X Y),
+      τ (@IsoCellEvidence
+        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+        _ _
+        (@readable_pseudo_post_cell A B F X Y Z g f)))
+  : τ (@ReadablePseudoFunctorProfile A B F);
+
 // Post/left readable compositor:
 //   F[g] o F[f] ~= F[g o f]
 // at the stable hom_postcomp owner used by source-varying hom families.
@@ -386,6 +403,12 @@ injective symbol readable_pseudo_post_evidence
       (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
       _ _
       (@readable_pseudo_post_cell A B F X Y Z g f));
+
+rule @readable_pseudo_post_evidence
+      $A $B $F
+      (@readable_pseudo_profile_intro $A $B $F $evidence)
+      $X $Y $Z $g $f
+  ↪ $evidence $X $Y $Z $g $f;
 
 // Pre/right inverse is derived from the inverse of the one fixed-forward post
 // cell, followed by the existing post/pre endpoint reframe.
@@ -412,11 +435,15 @@ symbol readable_pseudo_pre_inverse
       (@readable_pseudo_post_cell A B F X Y Z g f)
       (@readable_pseudo_post_evidence A B F P X Y Z g f));
 
-// Selected coherent profiles are closed under identity and composition.
+// Supplied identity instance. Constructing this through `profile_intro`
+// requires an extracted unit/normality interface, which remains separate.
 constant symbol readable_pseudo_identity_profile
   (A : Cat)
   : τ (@ReadablePseudoFunctorProfile A A (@id_func A));
 
+// Supplied composition instance. A transparent constructor requires the next
+// internal action comparing the composite functor's intrinsic compositor with
+// the two component profiles.
 constant symbol readable_pseudo_comp_profile
   [A B C : Cat]
   [F : τ (Functor A B)]

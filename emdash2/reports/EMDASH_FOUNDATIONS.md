@@ -3830,7 +3830,11 @@ normal forms. A coherent profiled functor
 essential: mapping the oriented filler uses the existing internally extracted
 compositor after transparent endpoint reframing, then the inverse of that same
 fixed-forward cell reframed to the pre/right endpoint. The profile is retained with the lifted functor so
-the construction can iterate.
+the construction can iterate. The general profile constructor takes an
+explicit dependent family of this fixed-forward evidence and projects it
+computationally. Identity, composition, source, target, and lifted instances
+remain named supplied capabilities until their unit/composite higher coherence
+is constructible from the internal-action tower.
 
 The native cubical levels are therefore genuine category recursion:
 

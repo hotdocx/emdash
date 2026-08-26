@@ -159,8 +159,9 @@ rule @fapp1_fapp0
   ↪ @cubical_arrow_map_square
       $C $D $F $P $x1 $y1 $x2 $y2 $u $v $a $b $alpha;
 
-// Source, target, and lifted cubical-arrow functors retain selected readable
-// pseudo profiles, enabling recursive face-code lifting.
+// Supplied source, target, and lifted instances retain selected readable pseudo
+// profiles, enabling recursive face-code lifting. Their transparent
+// construction is gated by the corresponding unit/composite coherence layer.
 constant symbol cubical_src_pseudo_profile
   (C : Cat)
   : τ (@ReadablePseudoFunctorProfile

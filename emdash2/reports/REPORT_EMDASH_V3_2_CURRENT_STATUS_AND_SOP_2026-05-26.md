@@ -571,7 +571,10 @@ detailed probe evidence.
   and the pre/right inverse is derived by the existing endpoint comparison.
   `CubicalArrow_func` maps a filler by that cell, generic next-hom action, then
   the derived inverse. Source, target, and every recursive lift
-  retain profiles. Arbitrary normal-lax carriers are intentionally not lifted.
+  retain profiles. A general constructor accepts an explicit family of
+  fixed-forward evidence; identity/composition and cubical structural
+  instances remain honestly supplied pending extracted unit/composite
+  coherence. Arbitrary normal-lax carriers are intentionally not lifted.
 - `emdash3_2_cubical_square_level.lp` and `emdash3_2_cubical_levels.lp`:
   first six-face cube boundary and genuine Nat-indexed iteration. Level zero
   is `C`, successor is `CubicalArrow` of the previous level, and dimensions
