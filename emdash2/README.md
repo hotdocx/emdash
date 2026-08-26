@@ -117,8 +117,9 @@ filler extracted from the existing post/left internal action. Generic
 `fapp1_func` retains the next whole action. The identity instance knowingly
 overlaps the historical global strict-functor cut; the intended graph beta is
 kept under the prototype policy pending profile-local migration. A selected
-strict code keeps the decoder head stable while one carrier path, its object
-action, and dependent arrow action expose the public graph. Fixed-bracketing
+strict code now decodes judgmentally to the public graph; one narrow rule makes
+that graph's already-extracted compositor compute to identity for strict-coded
+endpoints. Fixed-bracketing
 positive right-Gray cubes and one Nat-recursive
 object decoder then give
 

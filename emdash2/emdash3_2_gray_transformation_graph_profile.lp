@@ -28,114 +28,63 @@ injective symbol strict_gray_transf_graph_data
     (@strict_functor_carrier B C SG)))
   : τ (@StrictFunctorData B (@LaxArrow_cat C));
 
-// Whole readability boundary. This is equality evidence, not a carrier fold:
-// the stable strict-code head remains available to profile-local computation.
-constant symbol strict_gray_transf_graph_carrier_path
-  [B C : Cat]
-  (SF SG : τ (@StrictFunctorData B C))
-  (epsilon : τ (Transf
-    (@strict_functor_carrier B C SF)
-    (@strict_functor_carrier B C SG)))
-  : τ (@=
-      (Functor B (@LaxArrow_cat C))
-      (@strict_functor_carrier
-        B (@LaxArrow_cat C)
-        (@strict_gray_transf_graph_data B C SF SG epsilon))
-      (@gray_transf_graph_func
-        B C
-        (@strict_functor_carrier B C SF)
-        (@strict_functor_carrier B C SG)
-        epsilon));
+// Whole computational decoder at the true strict-code owner.
+rule @strict_functor_carrier _ _
+      (@strict_gray_transf_graph_data $B $C $SF $SG $epsilon)
+  ↪ @gray_transf_graph_func
+      $B $C
+      (@strict_functor_carrier $B $C $SF)
+      (@strict_functor_carrier $B $C $SG)
+      $epsilon;
 
-// Object observation is ordinary action of the whole carrier path.
-symbol strict_gray_transf_graph_obj_path
-  [B C : Cat]
-  (SF SG : τ (@StrictFunctorData B C))
-  (epsilon : τ (Transf
-    (@strict_functor_carrier B C SF)
-    (@strict_functor_carrier B C SG)))
-  (x : τ (Obj B))
-  : τ (@=
-      (Obj (@LaxArrow_cat C))
-      (@fapp0
-        B (@LaxArrow_cat C)
-        (@strict_functor_carrier
-          B (@LaxArrow_cat C)
-          (@strict_gray_transf_graph_data B C SF SG epsilon))
-        x)
-      (@gray_transf_graph_obj
-        B C
-        (@strict_functor_carrier B C SF)
-        (@strict_functor_carrier B C SG)
-        epsilon x))
-≔ @eq_ap
-    (Functor B (@LaxArrow_cat C))
-    (Obj (@LaxArrow_cat C))
-    (λ H : τ (Functor B (@LaxArrow_cat C)),
-      @fapp0 B (@LaxArrow_cat C) H x)
-    (@strict_functor_carrier
-      B (@LaxArrow_cat C)
-      (@strict_gray_transf_graph_data B C SF SG epsilon))
-    (@gray_transf_graph_func
-      B C
-      (@strict_functor_carrier B C SF)
-      (@strict_functor_carrier B C SG)
-      epsilon)
-    (@strict_gray_transf_graph_carrier_path B C SF SG epsilon);
+/*
+  Selected strict compositor computation after whole carrier decoding.
+  This is the existing `fdapp1_int_cell`/`fapp1_compositor` owner specialized
+  to the graph of a transformation between strict-coded endpoint diagrams; it
+  does not introduce a second graph compositor.
 
-// Arrow observation is necessarily dependent because its two endpoint objects
-// vary with the functor.  `eq_apd` preserves that exact dependency rather than
-// forcing a false equality in one fixed Hom category.
-symbol strict_gray_transf_graph_arrow_pathover
-  [B C : Cat]
-  (SF SG : τ (@StrictFunctorData B C))
-  (epsilon : τ (Transf
-    (@strict_functor_carrier B C SF)
-    (@strict_functor_carrier B C SG)))
-  [x y : τ (Obj B)]
-  (g : τ (Hom B x y))
-  : τ (@PathOver
-      (Functor B (@LaxArrow_cat C))
-      (λ H : τ (Functor B (@LaxArrow_cat C)),
-        @Hom
-          (@LaxArrow_cat C)
-          (@fapp0 B (@LaxArrow_cat C) H x)
-          (@fapp0 B (@LaxArrow_cat C) H y))
-      (@strict_functor_carrier
-        B (@LaxArrow_cat C)
-        (@strict_gray_transf_graph_data B C SF SG epsilon))
-      (@gray_transf_graph_func
-        B C
-        (@strict_functor_carrier B C SF)
-        (@strict_functor_carrier B C SG)
-        epsilon)
-      (@strict_gray_transf_graph_carrier_path B C SF SG epsilon)
-      (@fapp1_fapp0
-        B (@LaxArrow_cat C)
-        (@strict_functor_carrier
-          B (@LaxArrow_cat C)
-          (@strict_gray_transf_graph_data B C SF SG epsilon))
-        x y g)
-      (@gray_transf_graph_arrow
-        B C
-        (@strict_functor_carrier B C SF)
-        (@strict_functor_carrier B C SG)
-        epsilon x y g))
-≔ @eq_apd
-    (Functor B (@LaxArrow_cat C))
-    (λ H : τ (Functor B (@LaxArrow_cat C)),
-      @Hom
-        (@LaxArrow_cat C)
-        (@fapp0 B (@LaxArrow_cat C) H x)
-        (@fapp0 B (@LaxArrow_cat C) H y))
-    (λ H : τ (Functor B (@LaxArrow_cat C)),
-      @fapp1_fapp0 B (@LaxArrow_cat C) H x y g)
-    (@strict_functor_carrier
-      B (@LaxArrow_cat C)
-      (@strict_gray_transf_graph_data B C SF SG epsilon))
-    (@gray_transf_graph_func
-      B C
-      (@strict_functor_carrier B C SF)
-      (@strict_functor_carrier B C SG)
-      epsilon)
-    (@strict_gray_transf_graph_carrier_path B C SF SG epsilon);
+  The source/target displayed families are inferred from the visible graph
+  action. Keeping them as `_` prevents reducible `LaxArrow_cat` and hom-family
+  aliases from hiding the actual discriminator.
+*/
+rule @fdapp1_int_cell
+      $B
+      _
+      _
+      (@fapp1_at_transf
+        $B _
+        (@gray_transf_graph_func
+          $B $C
+          (@strict_functor_carrier $B $C $SF)
+          (@strict_functor_carrier $B $C $SG)
+          $epsilon)
+        $X)
+      $Y $Z $g $f
+  ↪ @id
+      (Hom_cat
+        (@LaxArrow_cat $C)
+        (@fapp0
+          $B (@LaxArrow_cat $C)
+          (@gray_transf_graph_func
+            $B $C
+            (@strict_functor_carrier $B $C $SF)
+            (@strict_functor_carrier $B $C $SG)
+            $epsilon)
+          $X)
+        (@fapp0
+          $B (@LaxArrow_cat $C)
+          (@gray_transf_graph_func
+            $B $C
+            (@strict_functor_carrier $B $C $SF)
+            (@strict_functor_carrier $B $C $SG)
+            $epsilon)
+          $Z))
+      (@strict_functor_compositor_lhs
+        $B
+        (@LaxArrow_cat $C)
+        (@gray_transf_graph_func
+          $B $C
+          (@strict_functor_carrier $B $C $SF)
+          (@strict_functor_carrier $B $C $SG)
+          $epsilon)
+        $X $Y $Z $g $f);

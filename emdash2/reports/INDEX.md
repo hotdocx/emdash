@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-08-21
+Date: 2026-08-26
 
 `REPORT_EMDASH_V3_2_ORDINAL_DEPENDENT_SIMPLEX_DIMENSION_FOUR_AND_RECURSIVE_SOURCE_PLAN_2026-08-21.md`
 is the completed child of the ordinal dimension-three plan. It first
@@ -1238,6 +1238,17 @@ record.
   new cross-project maintenance is owned by the autonomous maintenance plan.
 
 ## Current Plans
+
+- `REPORT_EMDASH_V3_2_INTRINSIC_FUNCTOR_PROFILES_AND_GRAY_GRAPH_REDESIGN_PLAN_2026-08-26.md`:
+  active corrective continuation of the cubical Gray adequacy work. It probes
+  a computational whole decoder for the selected strict graph code, then uses
+  the graph's already-extracted unit/compositor cells to decide whether that
+  graph is genuinely strict or the recursive decoder needs a coherent-map
+  profile. It also replaces independent-forward pseudofunctor evidence with
+  fixed-forward invertibility of the existing internal-action cells and
+  migrates the cubical lifting/face recursion without capping higher action.
+  Global strict-cut migration, automatic typeclass resolution, and cubical
+  readability-facade deletion remain separate boundaries.
 
 - `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`:
   completed semantic-adequacy continuation. It first packages the object-level

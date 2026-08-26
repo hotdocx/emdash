@@ -531,8 +531,9 @@ detailed probe evidence.
   decoder. The predecessor index `n` denotes dimension `n+1`. Successor
   decoding curries, takes the walking generator, recursively decodes its graph
   in `LaxArrow`, and applies the Nat-derived level shift. The strict carrier
-  stays stable; `eq_ap` and dependent `eq_apd` expose its object and arrow
-  readings. Dimensions one through three, the exact `I tensor_R I`
+  now computes directly to the public graph, while a graph-head rule constrains
+  the already-extracted compositor to identity for strict-coded endpoints.
+  Dimensions one through three, the exact `I tensor_R I`
   interchanger, four square edges, six cube faces, and retained next action are
   checked. No tensor unit, alternate-bracketing coherence, inverse decoder, or
   mapping-category equivalence is claimed.

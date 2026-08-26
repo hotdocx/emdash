@@ -44,33 +44,24 @@ assert [C : Cat]
   : τ (Obj
       (@CubicalLevel_cat C (succ (succ (succ zero)))));
 
-// The successor graph keeps a strict code and a first-class readable carrier
-// path to the transparent whole transformation graph.
+// The successor strict graph code decodes directly to the whole graph.
 assert [C : Cat]
   (n : τ Nat_grpd)
   (H : τ (@StrictFunctorData (@GrayCubePos_R (succ n)) C)) ⊢
-  @strict_gray_transf_graph_carrier_path
+  @strict_functor_carrier
     (@GrayCubePos_R n)
-    C
-    (@gray_cube_step_source_data C n H)
-    (@gray_cube_step_target_data C n H)
-    (@gray_cube_step_transf C n H)
-  : τ (@=
-      (Functor (@GrayCubePos_R n) (@LaxArrow_cat C))
+    (@LaxArrow_cat C)
+    (@gray_cube_step_graph_data C n H)
+  ≡ @gray_transf_graph_func
+      (@GrayCubePos_R n)
+      C
       (@strict_functor_carrier
-        (@GrayCubePos_R n)
-        (@LaxArrow_cat C)
-        (@gray_cube_step_graph_data C n H))
-      (@gray_transf_graph_func
-        (@GrayCubePos_R n)
-        C
-        (@strict_functor_carrier
-          (@GrayCubePos_R n) C
-          (@gray_cube_step_source_data C n H))
-        (@strict_functor_carrier
-          (@GrayCubePos_R n) C
-          (@gray_cube_step_target_data C n H))
-        (@gray_cube_step_transf C n H)));
+        (@GrayCubePos_R n) C
+        (@gray_cube_step_source_data C n H))
+      (@strict_functor_carrier
+        (@GrayCubePos_R n) C
+        (@gray_cube_step_target_data C n H))
+      (@gray_cube_step_transf C n H);
 
 // For the identity realization of I tensor_R I, the successor inputs recover
 // the already-established walking-square coevaluation data.

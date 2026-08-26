@@ -3954,14 +3954,20 @@ does not itself construct a carrier or disable the global strict cuts, and its
 pseudo/invertible boundary may be stronger than an eventual arbitrary lax-map
 classifier.
 
-The selected strict-code closure keeps the decoder carrier stable, supplies
-one whole path to the public graph, derives object equality by `eq_ap`, and
-derives the necessarily dependent arrow comparison by `eq_apd` as a
-`PathOver`. This equality is an observational boundary rather than the graph's
-computation: rewriting the strict decoder to the public graph would erase the
-`strict_functor_carrier` head needed by profile-local compositor reduction.
-The public graph already computes independently; `eq_ap`/`eq_apd` merely make
-the stable strict code readable at objects and dependent arrow actions.
+The selected strict-code closure now follows the same computational decoder
+pattern as strict join codes:
+
+```text
+strict_functor_carrier(strict_graph_data(SF,SG,epsilon))
+  --> Graph(epsilon).
+```
+
+Unfolding the carrier erases the generic strict-code discriminator, so one
+narrow graph-head rule makes the already-extracted `fdapp1_int_cell`
+compositor compute to identity for strict-coded endpoint diagrams. It declares
+no second compositor. The former opaque carrier path and its `eq_ap`/`eq_apd`
+observers are retired. Whether the graph's unit remains genuinely strict after
+the global-cut migration is an explicit continuing audit.
 
 The variable-dimensional decoder is then one internal Nat recursion uniform
 in the ambient category:

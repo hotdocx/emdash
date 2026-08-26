@@ -1678,10 +1678,10 @@ the global cut is the temporary approximation that must later migrate to its
 strict profile. `ReadablePseudoFunctorProfile` already names coherent evidence
 over an existing carrier but does not install or suppress runtime carrier
 rules. The selected strict graph code keeps a stable `strict_functor_carrier`;
-`strict_gray_transf_graph_carrier_path` supplies the whole public reading,
-while `strict_gray_transf_graph_obj_path` and
-`strict_gray_transf_graph_arrow_pathover` derive its object and dependent
-arrow observations without a runtime carrier fold.
+its carrier computes directly to `gray_transf_graph_func`. The narrow
+graph-head strictness rule reduces the existing extracted compositor rather
+than declaring another one; no carrier path or `eq_ap`/`eq_apd` observer is
+needed.
 
 For positive right-Gray cubes and their native observation, write
 
