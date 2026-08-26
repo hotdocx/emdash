@@ -1,14 +1,17 @@
 /*
   Emdash v3.2: functorial lifting of intrinsic cubical arrows.
 
-  A readable pseudofunctor profile supplies an invertible compositor at the
-  post/left and pre/right stable cut presentations. The image of a square
-  filler is:
+  A readable pseudofunctor profile supplies fixed-forward invertibility for
+  the existing post/left compositor. The image of a square filler is:
 
-    post_compositor.to ; F_1[alpha] ; pre_compositor.from.
+    existing readable post cell
+      ; F_1[alpha]
+      ; derived pre-readable inverse.
 
-  Thus the lift uses the generic next hom action and standard pseudo
-  coherence, not an endpoint rewrite or a cubical-specific map operation.
+  The last arrow is the inverse of that same post cell followed by the existing
+  post/pre endpoint reframe. Thus the lift uses the generic next hom action and
+  one intrinsic coherence cell, not an endpoint rewrite, parallel compositor,
+  or cubical-specific map operation.
   Object and visible square actions compute; generic fapp1 retains every
   subsequent hom action.
 */
@@ -80,19 +83,8 @@ symbol cubical_arrow_map_cell
       (@fapp0 C D F y1)
       (@fapp1_fapp0 C D F x1 y1 a)
       (@fapp1_fapp0 C D F y1 y2 v))
-    (@iso_evidence_from
-      (Hom_cat D (@fapp0 C D F x1) (@fapp0 C D F y2))
-      (@hom_precomp_along_fapp0
-        D D (@id_func D)
-        (@fapp0 D D (@id_func D) (@fapp0 C D F y2))
-        (@fapp0 C D F x1)
-        (@fapp0 C D F y1)
-        (@fapp1_fapp0 C D F x1 y1 a)
-        (@fapp1_fapp0 C D F y1 y2 v))
-      (@fapp1_fapp0 C D F x1 y2
-        (@comp_fapp0 C x1 y1 y2 v a))
-      (@readable_pseudo_pre_compositor
-        C D F P x1 y1 y2 v a))
+    (@readable_pseudo_pre_inverse
+      C D F P x1 y1 y2 v a)
     (@comp_fapp0
       (Hom_cat D (@fapp0 C D F x1) (@fapp0 C D F y2))
       (@hom_postcomp_fapp0
@@ -108,19 +100,7 @@ symbol cubical_arrow_map_cell
         (@comp_fapp0 C x1 y1 y2 v a))
       (@cubical_arrow_map_raw_cell
         C D F x1 y1 x2 y2 u v a b alpha)
-      (@iso_evidence_to
-        (Hom_cat D (@fapp0 C D F x1) (@fapp0 C D F y2))
-        (@hom_postcomp_fapp0
-          D D (@id_func D)
-          (@fapp0 C D F x1)
-          (@fapp0 C D F x2)
-          (@fapp0 C D F y2)
-          (@fapp1_fapp0 C D F x2 y2 b)
-          (@fapp1_fapp0 C D F x1 x2 u))
-        (@fapp1_fapp0 C D F x1 y2
-          (@comp_fapp0 C x1 x2 y2 b u))
-        (@readable_pseudo_post_compositor
-          C D F P x1 x2 y2 b u)));
+      (@readable_pseudo_post_cell C D F x1 x2 y2 b u));
 
 injective symbol CubicalArrow_func
   [C D : Cat]

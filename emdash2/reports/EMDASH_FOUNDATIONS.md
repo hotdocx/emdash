@@ -3827,8 +3827,9 @@ compute to the expected identities and composites. The older explicit
 whisker-and-paste terms remain readable typed formulas, not competing runtime
 normal forms. A coherent profiled functor
 `F : C -> D` lifts to `CubicalArrow_func(F)`. The selected readable profile is
-essential: mapping the oriented filler uses the post-compositor forward and
-the pre-compositor inverse. The profile is retained with the lifted functor so
+essential: mapping the oriented filler uses the existing internally extracted
+compositor after transparent endpoint reframing, then the inverse of that same
+fixed-forward cell reframed to the pre/right endpoint. The profile is retained with the lifted functor so
 the construction can iterate.
 
 The native cubical levels are therefore genuine category recursion:

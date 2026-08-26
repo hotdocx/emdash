@@ -2168,7 +2168,9 @@ This is expository notation for `cubical_edge` and the nested-Sigma
 `cubical_square(a,b,alpha) = (a,(b,alpha))`; it is not a new parser form.
 `CubicalArrow_func(F,P)` requires the selected readable pseudo profile `P`.
 Do not omit that qualification when the distinction between an arbitrary lax
-carrier and a liftable coherent carrier matters.
+carrier and a liftable coherent carrier matters. The profile supplies
+fixed-forward inverse evidence for the readable reframe of the existing
+`fapp1_compositor`; it does not own a second compositor.
 
 Category identity and composition remain at the generic nested-Sigma owners.
 The readable `cubical_square_id` and `cubical_square_comp` terms may illustrate

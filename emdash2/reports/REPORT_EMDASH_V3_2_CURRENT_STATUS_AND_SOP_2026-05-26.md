@@ -566,9 +566,11 @@ detailed probe evidence.
   category structure and computes the expected endpoint boundaries.
 - `emdash3_2_readable_pseudofunctors.lp` and
   `emdash3_2_cubical_arrow_functor.lp`: selected coherent lifting boundary.
-  The profile exposes invertible readable post/pre compositor views;
-  `CubicalArrow_func` maps a filler by compositor-forward, generic next-hom
-  action, then compositor-inverse. Source, target, and every recursive lift
+  Transparent paths reframe the existing internal compositor to one readable
+  post cell; the profile supplies fixed-forward inverse evidence for that cell,
+  and the pre/right inverse is derived by the existing endpoint comparison.
+  `CubicalArrow_func` maps a filler by that cell, generic next-hom action, then
+  the derived inverse. Source, target, and every recursive lift
   retain profiles. Arbitrary normal-lax carriers are intentionally not lifted.
 - `emdash3_2_cubical_square_level.lp` and `emdash3_2_cubical_levels.lp`:
   first six-face cube boundary and genuine Nat-indexed iteration. Level zero
@@ -1155,7 +1157,9 @@ exception does not excuse unrelated subject-reduction failures or arbitrary
 unclassified overlaps. Also distinguish the existing
 `ReadablePseudoFunctorProfile`—coherent evidence indexed by an already-formed
 ambient carrier—from a separate carrier classifier; the former already exists
-but neither constructs the carrier nor disables global cuts.
+but neither constructs the carrier nor disables global cuts. Its compositor
+evidence is now fixed-forward: the forward cell is the existing
+internal-action compositor, not a profile-supplied parallel arrow.
 
 The walking-endomorphism plan resumed at implementation-goal baseline
 `82d0e27...`. Its G1–G6 implementation is active: `WalkingEnd_cat`,
@@ -4296,9 +4300,10 @@ homdc_total_cat(E) = Op(Sigma(x1:K1^op),D_E[x1])
 
 therefore internalizes both endpoints and side arrows without a new
 parameterized-`homd_int` primitive. `LaxArrow_cat(C)` specializes this at
-`hom_int(id_C)`, and `CubicalArrow_cat(C)` is its transparent compatibility
-name. A selected readable pseudofunctor profile makes the operation functorial
-and recursively iterable. Nat recursion then constructs
+`hom_int(id_C)`, and `CubicalArrow_cat(C)` is its transparent readability
+name. A selected readable pseudofunctor profile constrains the existing
+compositor with fixed-forward inverse evidence, making the operation
+functorial and recursively iterable. Nat recursion then constructs
 `CubicalLevel_cat(C,n)`.
 
 The associated `{L,R,*}` code grammar is independent of Gray semantics and of

@@ -3,14 +3,14 @@
 
   The active generic functor/transfor calculus exposes normal-lax compositor
   cells at formal internal-action endpoints. Consumers such as intrinsic
-  cubical arrows require an invertible compositor at the two stable readable
-  cut presentations retained by ordinary post- and precomposition.
+  cubical arrows require an invertible readable view of the existing
+  compositor; its inverse supplies the opposite boundary direction.
 
   ReadablePseudoFunctorProfile is an abstract coherent capability indexed by
-  its already-existing Functor carrier. IsoEvidence supplies both directions
-  and their cancellation paths. Unit/pentagon/triangle coherence is part of
-  the capability boundary; only the observations selected by current
-  consumers are exposed here. This adds no rewrite or proof-time unifier.
+  its already-existing Functor carrier. It does not supply another compositor:
+  fixed-forward `IsoCellEvidence` gives an inverse and cancellation paths for
+  the existing post cell extracted from internal action. Higher coherence
+  remains the next internal action. This adds no rewrite or proof-time unifier.
 
   This capability is evidence over an already-existing ambient Functor; it is
   not a separate lax-carrier classifier and does not disable the historical
@@ -19,7 +19,8 @@
   subject-reduction checks; their migration remains profile-local future work.
 */
 
-require open emdash.emdash3_2;
+require open emdash.emdash3_2_gray_profiles;
+require open emdash.emdash3_2_path_pseudo_laxity;
 
 // Coherent readable pseudofunctor capability for one ambient carrier.
 injective symbol ReadablePseudoFunctorProfile
@@ -27,59 +28,389 @@ injective symbol ReadablePseudoFunctorProfile
   (F : τ (Functor A B))
   : Grpd;
 
-// Readable unit comparison id_(F[X]) ~= F[id_X].
-injective symbol readable_pseudo_unitor
-  [A B : Cat]
-  [F : τ (Functor A B)]
-  (P : τ (@ReadablePseudoFunctorProfile A B F))
-  (X : τ (Obj A))
-  : τ (@IsoEvidence
-      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F X))
-      (@id B (@fapp0 A B F X))
-      (@fapp1_fapp0 A B F X X (@id A X)));
+// Invertibility evidence for one already-selected arrow. The forward cell is
+// an input, never an independently supplied profile field.
+symbol IsoCellEvidence
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (cell : τ (Hom C x y))
+  : Grpd
+≔ `Σ_ inverse : τ (Hom C y x),
+   `Σ_ _ : τ (
+      @comp_fapp0 C x y x inverse cell
+        =
+      @id C x),
+      @comp_fapp0 C y x y cell inverse
+        =
+      @id C y;
 
-// Post/left readable compositor:
-//   F[g] o F[f] ~= F[g o f]
-// at the stable hom_postcomp owner used by source-varying hom families.
-injective symbol readable_pseudo_post_compositor
+symbol iso_cell_inverse
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [cell : τ (Hom C x y)]
+  (evidence : τ (@IsoCellEvidence C x y cell))
+  : τ (Hom C y x)
+≔ sigma_Fst evidence;
+
+symbol iso_cell_left
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [cell : τ (Hom C x y)]
+  (evidence : τ (@IsoCellEvidence C x y cell))
+  : τ (
+      @comp_fapp0 C x y x
+        (@iso_cell_inverse C x y cell evidence) cell
+        =
+      @id C x)
+≔ sigma_Fst (sigma_Snd evidence);
+
+symbol iso_cell_right
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [cell : τ (Hom C x y)]
+  (evidence : τ (@IsoCellEvidence C x y cell))
+  : τ (
+      @comp_fapp0 C y x y
+        cell (@iso_cell_inverse C x y cell evidence)
+        =
+      @id C y)
+≔ sigma_Snd (sigma_Snd evidence);
+
+symbol readable_pseudo_post_raw_source
   [A B : Cat]
-  [F : τ (Functor A B)]
-  (P : τ (@ReadablePseudoFunctorProfile A B F))
+  (F : τ (Functor A B))
   [X Y Z : τ (Obj A)]
   (g : τ (Hom A Y Z))
   (f : τ (Hom A X Y))
-  : τ (@IsoEvidence
-      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
-      (@hom_postcomp_fapp0
-        B B (@id_func B)
+  : τ (Obj (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z)))
+≔ @hom_postcomp_fapp0
+    B B (@id_func B)
+    (@fapp0 A B F X)
+    (@fapp0 A B F Y)
+    (@fapp0 A B F Z)
+    (@fapp1_fapp0 A B F Y Z g)
+    (@fapp1_fapp0 A B F X Y f);
+
+symbol readable_pseudo_post_raw_target
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (Obj (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z)))
+≔ @fapp1_fapp0 A B F X Z (@comp_fapp0 A X Y Z g f);
+
+symbol readable_pseudo_post_stable_action
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (Obj (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z)))
+≔ @fapp1_fapp0 A B F X Z
+    (@hom_postcomp_fapp0 A A (@id_func A) X Y Z g f);
+
+symbol readable_pseudo_post_formal_source_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@strict_functor_compositor_lhs A B F X Y Z g f)
+      (@readable_pseudo_post_stable_action A B F X Y Z g f))
+≔ @eq_refl
+    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@strict_functor_compositor_lhs A B F X Y Z g f);
+
+symbol readable_pseudo_post_formal_target_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@strict_functor_compositor_rhs A B F X Y Z g f)
+      (@readable_pseudo_post_stable_action A B F X Y Z g f))
+≔ @eq_refl
+    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@strict_functor_compositor_rhs A B F X Y Z g f);
+
+symbol readable_pseudo_post_stable_comp_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@readable_pseudo_post_stable_action A B F X Y Z g f)
+      (@readable_pseudo_post_raw_target A B F X Y Z g f))
+≔ @eq_ap
+    (Hom A X Z)
+    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (λ r : τ (Hom A X Z), @fapp1_fapp0 A B F X Z r)
+    (@hom_postcomp_fapp0 A A (@id_func A) X Y Z g f)
+    (@comp_fapp0 A X Y Z g f)
+    (@path_pseudo_laxity_postcomp_comp_path
+      A A (@id_func A) X Y Z g f);
+
+symbol readable_pseudo_post_comp_raw_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@readable_pseudo_post_raw_target A B F X Y Z g f)
+      (@comp_fapp0
+        B
+        (@fapp0 A B F X)
+        (@fapp0 A B F Y)
+        (@fapp0 A B F Z)
+        (@fapp1_fapp0 A B F Y Z g)
+        (@fapp1_fapp0 A B F X Y f)))
+≔ @fapp1_comp_path A B F X Y Z g f;
+
+symbol readable_pseudo_post_raw_owner_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@comp_fapp0
+        B
         (@fapp0 A B F X)
         (@fapp0 A B F Y)
         (@fapp0 A B F Z)
         (@fapp1_fapp0 A B F Y Z g)
         (@fapp1_fapp0 A B F X Y f))
-      (@fapp1_fapp0 A B F X Z
-        (@comp_fapp0 A X Y Z g f)));
+      (@readable_pseudo_post_raw_source A B F X Y Z g f))
+≔ @eq_sym
+    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@readable_pseudo_post_raw_source A B F X Y Z g f)
+    (@comp_fapp0
+      B
+      (@fapp0 A B F X)
+      (@fapp0 A B F Y)
+      (@fapp0 A B F Z)
+      (@fapp1_fapp0 A B F Y Z g)
+      (@fapp1_fapp0 A B F X Y f))
+    (@path_pseudo_laxity_postcomp_comp_path
+      B B (@id_func B)
+      (@fapp0 A B F X)
+      (@fapp0 A B F Y)
+      (@fapp0 A B F Z)
+      (@fapp1_fapp0 A B F Y Z g)
+      (@fapp1_fapp0 A B F X Y f));
 
-// Pre/right readable view of the same pseudofunctor compositor. The separate
-// stable endpoint is intentional: the kernel preserves the two cut histories.
-injective symbol readable_pseudo_pre_compositor
+symbol readable_pseudo_post_source_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@strict_functor_compositor_lhs A B F X Y Z g f)
+      (@readable_pseudo_post_raw_source A B F X Y Z g f))
+≔ @eq_trans
+    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@strict_functor_compositor_lhs A B F X Y Z g f)
+    (@readable_pseudo_post_stable_action A B F X Y Z g f)
+    (@readable_pseudo_post_raw_source A B F X Y Z g f)
+    (@readable_pseudo_post_formal_source_path A B F X Y Z g f)
+    (@eq_trans
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@readable_pseudo_post_stable_action A B F X Y Z g f)
+      (@readable_pseudo_post_raw_target A B F X Y Z g f)
+      (@readable_pseudo_post_raw_source A B F X Y Z g f)
+      (@readable_pseudo_post_stable_comp_path A B F X Y Z g f)
+      (@eq_trans
+        (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+        (@readable_pseudo_post_raw_target A B F X Y Z g f)
+        (@comp_fapp0
+          B
+          (@fapp0 A B F X)
+          (@fapp0 A B F Y)
+          (@fapp0 A B F Z)
+          (@fapp1_fapp0 A B F Y Z g)
+          (@fapp1_fapp0 A B F X Y f))
+        (@readable_pseudo_post_raw_source A B F X Y Z g f)
+        (@readable_pseudo_post_comp_raw_path A B F X Y Z g f)
+        (@readable_pseudo_post_raw_owner_path A B F X Y Z g f)));
+
+symbol readable_pseudo_post_target_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@strict_functor_compositor_rhs A B F X Y Z g f)
+      (@readable_pseudo_post_raw_target A B F X Y Z g f))
+≔ @eq_trans
+    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@strict_functor_compositor_rhs A B F X Y Z g f)
+    (@readable_pseudo_post_stable_action A B F X Y Z g f)
+    (@readable_pseudo_post_raw_target A B F X Y Z g f)
+    (@readable_pseudo_post_formal_target_path A B F X Y Z g f)
+    (@readable_pseudo_post_stable_comp_path A B F X Y Z g f);
+
+protected symbol readable_pseudo_post_source_reframe
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (Hom
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@readable_pseudo_post_raw_source A B F X Y Z g f)
+      (@strict_functor_compositor_lhs A B F X Y Z g f))
+≔ @path_to_hom
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@readable_pseudo_post_raw_source A B F X Y Z g f)
+    (@strict_functor_compositor_lhs A B F X Y Z g f)
+    (@eq_sym
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@strict_functor_compositor_lhs A B F X Y Z g f)
+      (@readable_pseudo_post_raw_source A B F X Y Z g f)
+      (@readable_pseudo_post_source_path A B F X Y Z g f));
+
+protected symbol readable_pseudo_post_target_reframe
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (Hom
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@strict_functor_compositor_rhs A B F X Y Z g f)
+      (@readable_pseudo_post_raw_target A B F X Y Z g f))
+≔ @path_to_hom
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@strict_functor_compositor_rhs A B F X Y Z g f)
+    (@readable_pseudo_post_raw_target A B F X Y Z g f)
+    (@readable_pseudo_post_target_path A B F X Y Z g f);
+
+// Readable post/left cell obtained only by reframing the existing internal
+// compositor. No independent coherence cell is declared.
+symbol readable_pseudo_post_cell
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (Hom
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@readable_pseudo_post_raw_source A B F X Y Z g f)
+      (@readable_pseudo_post_raw_target A B F X Y Z g f))
+≔ @comp_fapp0
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@readable_pseudo_post_raw_source A B F X Y Z g f)
+    (@strict_functor_compositor_rhs A B F X Y Z g f)
+    (@readable_pseudo_post_raw_target A B F X Y Z g f)
+    (@readable_pseudo_post_target_reframe A B F X Y Z g f)
+    (@comp_fapp0
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@readable_pseudo_post_raw_source A B F X Y Z g f)
+      (@strict_functor_compositor_lhs A B F X Y Z g f)
+      (@strict_functor_compositor_rhs A B F X Y Z g f)
+      (@fapp1_compositor A B F X Y Z g f)
+      (@readable_pseudo_post_source_reframe A B F X Y Z g f));
+
+// Pre/right readable source for the same composite.
+symbol readable_pseudo_pre_raw_source
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (Obj (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z)))
+≔ @hom_precomp_along_fapp0
+    B B (@id_func B)
+    (@fapp0 B B (@id_func B) (@fapp0 A B F Z))
+    (@fapp0 A B F X)
+    (@fapp0 A B F Y)
+    (@fapp1_fapp0 A B F X Y f)
+    (@fapp1_fapp0 A B F Y Z g);
+
+// Existing proof-time post/pre comparison, now retained as first-class path.
+symbol readable_pseudo_post_pre_source_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@readable_pseudo_post_raw_source A B F X Y Z g f)
+      (@readable_pseudo_pre_raw_source A B F X Y Z g f))
+≔ @eq_refl
+    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@readable_pseudo_post_raw_source A B F X Y Z g f);
+
+protected symbol readable_pseudo_post_pre_reframe
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (Hom
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@readable_pseudo_post_raw_source A B F X Y Z g f)
+      (@readable_pseudo_pre_raw_source A B F X Y Z g f))
+≔ @path_to_hom
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@readable_pseudo_post_raw_source A B F X Y Z g f)
+    (@readable_pseudo_pre_raw_source A B F X Y Z g f)
+    (@readable_pseudo_post_pre_source_path A B F X Y Z g f);
+
+// Post/left readable compositor:
+//   F[g] o F[f] ~= F[g o f]
+// at the stable hom_postcomp owner used by source-varying hom families.
+injective symbol readable_pseudo_post_evidence
   [A B : Cat]
   [F : τ (Functor A B)]
   (P : τ (@ReadablePseudoFunctorProfile A B F))
   [X Y Z : τ (Obj A)]
   (g : τ (Hom A Y Z))
   (f : τ (Hom A X Y))
-  : τ (@IsoEvidence
+  : τ (@IsoCellEvidence
       (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
-      (@hom_precomp_along_fapp0
-        B B (@id_func B)
-        (@fapp0 B B (@id_func B) (@fapp0 A B F Z))
-        (@fapp0 A B F X)
-        (@fapp0 A B F Y)
-        (@fapp1_fapp0 A B F X Y f)
-        (@fapp1_fapp0 A B F Y Z g))
-      (@fapp1_fapp0 A B F X Z
-        (@comp_fapp0 A X Y Z g f)));
+      _ _
+      (@readable_pseudo_post_cell A B F X Y Z g f));
+
+// Pre/right inverse is derived from the inverse of the one fixed-forward post
+// cell, followed by the existing post/pre endpoint reframe.
+symbol readable_pseudo_pre_inverse
+  [A B : Cat]
+  [F : τ (Functor A B)]
+  (P : τ (@ReadablePseudoFunctorProfile A B F))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (Hom
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@readable_pseudo_post_raw_target A B F X Y Z g f)
+      (@readable_pseudo_pre_raw_source A B F X Y Z g f))
+≔ @comp_fapp0
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@readable_pseudo_post_raw_target A B F X Y Z g f)
+    (@readable_pseudo_post_raw_source A B F X Y Z g f)
+    (@readable_pseudo_pre_raw_source A B F X Y Z g f)
+    (@readable_pseudo_post_pre_reframe A B F X Y Z g f)
+    (@iso_cell_inverse
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+      _ _
+      (@readable_pseudo_post_cell A B F X Y Z g f)
+      (@readable_pseudo_post_evidence A B F P X Y Z g f));
 
 // Selected coherent profiles are closed under identity and composition.
 constant symbol readable_pseudo_identity_profile

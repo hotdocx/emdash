@@ -170,7 +170,9 @@ now a transparent readability alias, not a primitive category. Source and
 target are whole derived functors. Generic nested-Sigma identity/composition
 compute their expected endpoint boundaries; the older readable paste terms no
 longer compete as runtime normal forms. A readable pseudofunctor profile
-supplies the two invertible compositor views needed by `CubicalArrow_func`.
+supplies fixed-forward inverse evidence for the one readable cell derived from
+`fapp1_compositor`; `CubicalArrow_func` uses that cell forward and derives its
+pre/right inverse by endpoint reframing.
 Genuine Nat recursion gives
 
 ```text

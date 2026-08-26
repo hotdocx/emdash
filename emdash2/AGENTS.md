@@ -466,14 +466,16 @@ the side identities/composites. It adds no cubical associativity, filler, or
 unifier;
 the readable pseudofunctor-profile extension is
 `emdash3_2_readable_pseudofunctors.lp`; it indexes a coherent capability by
-an existing ambient functor and exposes invertible unit plus post/left and
-pre/right compositor views at their actual stable cut owners. Identity and
-composition profiles are retained as selected capabilities. It adds no rule,
-unifier, Gray dependency, or cubical operation;
+an existing ambient functor. Transparent endpoint paths reframe the existing
+`fapp1_compositor` to one readable post cell; fixed-forward `IsoCellEvidence`
+supplies only its inverse/cancellations, and the pre/right inverse is derived
+from that same evidence plus the existing post/pre reframe. Identity and
+composition profiles remain selected capabilities. It adds no parallel
+compositor, rule, unifier, or cubical operation;
 the intrinsic cubical-arrow functor extension is
 `emdash3_2_cubical_arrow_functor.lp`; a profiled carrier maps a square by
-post-compositor forward, generic next-hom action on the filler, then
-pre-compositor inverse. Edge and square actions compute, source/target recover
+the existing readable compositor forward, generic next-hom action on the
+filler, then its derived pre-readable inverse. Edge and square actions compute, source/target recover
 the mapped sides, and another hom action plus profiles for source, target, and
 the lifted functor remain available for recursive face action;
 the first iterated intrinsic cubical-arrow level is
@@ -1407,19 +1409,21 @@ Use the following order:
     Sigma total, `LaxArrow_cat`, visible constructors, and both whole endpoint
     projections. It adds no primitive category, square, two-sided total, rule,
     or unifier;
-125. `emdash3_2_cubical_arrow.lp` for the transparent compatibility names
+125. `emdash3_2_cubical_arrow.lp` for the transparent readability names
     `CubicalArrow_cat`, `cubical_edge`, `cubical_square`, and source/target;
 126. `emdash3_2_cubical_arrow_composition.lp` for readable explicit identity
     and whisker/paste terms. Generic nested-Sigma identity/composition owns the
     category normal forms; the former competing constructor rules are retired;
 127. `emdash3_2_readable_pseudofunctors.lp` for the abstract coherent
-    pseudofunctor capability indexed by an ambient carrier. It exposes
-    invertible readable unit, post/left compositor, and pre/right compositor
-    views at the active stable cuts, with selected identity/composition
-    closure and no rule or unifier;
+    pseudofunctor capability indexed by an ambient carrier. It reframes the
+    existing internal-action compositor to one readable cell and supplies
+    fixed-forward inverse/cancellation evidence for that cell; the pre/right
+    inverse is derived, not independently supplied. Selected
+    identity/composition closure remains, with no rule or unifier;
 128. `emdash3_2_cubical_arrow_functor.lp` for profiled whole lifting of
-    intrinsic edges and squares. Its filler is compositor-forward, generic
-    next-hom action, compositor-inverse; source/target and recursively lifted
+    intrinsic edges and squares. Its filler is the existing readable
+    compositor, generic next-hom action, then the derived pre-readable inverse;
+    source/target and recursively lifted
     profiles remain selected capabilities. Arbitrary lax functors are
     intentionally rejected by the profile boundary;
 129. `emdash3_2_cubical_square_level.lp` for the first iterated arrow level.
