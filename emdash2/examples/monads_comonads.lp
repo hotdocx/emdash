@@ -207,9 +207,33 @@ assert [A : Cat]
         (@cokleisli_extend_fapp0 A D C X Y f)
         (@cokleisli_extend_fapp0 A D C X Y g)));
 
-// The existing adjunction constructs both exact structural instances; the
-// stable comultiplication is the Op-derived opposite-monad multiplication.
+// The existing adjunction constructs both exact structural instances. Its
+// named unit is a proof-time usability endpoint; whole multiplication remains
+// semantic and computes to the transparent G-epsilon-F construction.
 assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @eq_refl
+    (Transf
+      (@id_func R)
+      (@comp_cat_fapp0 R L R G F))
+    (unit_monad_transf (adjunction_monad J))
+  : τ (@=
+      (Transf
+        (@id_func R)
+        (@comp_cat_fapp0 R L R G F))
+      (unit_monad_transf (adjunction_monad J))
+      (unit_adj_transf J));
+
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  mult_monad_transf (adjunction_monad J)
+    ≡ adjunction_monad_mult_transf J;
+
+assertnot [R L : Cat]
   [F : τ (Functor R L)]
   [G : τ (Functor L R)]
   (J : τ (@Adjunction R L F G)) ⊢

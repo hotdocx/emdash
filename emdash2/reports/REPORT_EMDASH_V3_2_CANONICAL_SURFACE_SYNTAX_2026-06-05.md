@@ -2025,7 +2025,15 @@ the selected surface.
 For `J : Adjunction(F,G)`, use `adjunction_monad(J)` on `G o F` and
 `adjunction_comonad(J)` on `F o G`; their multiplication and comultiplication
 are `G epsilon F` and `F eta G`, respectively. This notation does not denote a
-free-monad syntax or claim a global decision procedure.
+free-monad syntax or claim a global decision procedure. In computational
+Monad terms, spell the unit through the canonical
+`unit_monad_transf(adjunction_monad(J))`; the adjunction unit is its proof-time
+usability endpoint and does not replace that head at runtime. Whole
+`mult_monad_transf(adjunction_monad(J))` is semantic notation and computes to
+the transparent `G epsilon F` construction. Its component-first triangular
+endpoint and whole-first semantic component are joined by the derived
+`adjunction_monad_mult_component_path`; this path does not alter runtime
+preference. TypeScript declaration automation is deferred.
 
 ## Generic Groupoidification Notation
 

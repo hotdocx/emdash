@@ -427,7 +427,13 @@ that evidence to prove `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier
 rewrite to Unit;
 the monad-primary indexed full-functor interface, whole extension, ambient
 Došen reductions, narrow stable opposite-variance mirror, and
-adjunction-derived structural instances are `emdash3_2_monads.lp`; canonical
+adjunction-derived structural instances are `emdash3_2_monads.lp`; the
+canonical unit of the adjunction-induced Monad retains runtime computation and
+its adjunction unit is a proof-time usability endpoint. Whole multiplication
+remains semantic and reduces to the transparent `G epsilon F` construction,
+whose component-first triangular endpoint is propositionally joined to the
+whole-first semantic component. TypeScript automation of the unit-usability
+protocol remains deferred. Canonical
 Op observations and point coextension fold computationally into the mirror,
 while whole coextension transparently reuses endpoint-swapped primary monadic
 whole extension. Stable dual heads exist only where an active runtime LHS

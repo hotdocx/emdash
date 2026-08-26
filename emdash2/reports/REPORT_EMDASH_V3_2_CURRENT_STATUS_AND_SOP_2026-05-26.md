@@ -3912,16 +3912,35 @@ Coextension of the standard counit is identity, and standard
 comultiplication compiles to coextension of `id_DX`. Co-Kleisli cut is also
 transparent derived notation.
 
+For the adjunction-induced witness, the formal/computational Monad layer and
+the source adjunction spelling now follow the established usability boundary.
+Canonical `unit_monad_transf(adjunction_monad(J))` remains available to the
+generic triangular runtime rules. The adjunction unit is related to it by one
+SOP-minimal proof-time agreement and remains runtime-nonconvertible. Whole
+`mult_monad_transf(adjunction_monad(J))` is instead semantic: it reduces to the
+transparent checked `G epsilon F` construction. Its component-first branch
+uses the generic compilation into triangular extension; a non-axiomatic path
+propositionally joins that endpoint with the whole-first semantic component
+without changing runtime preference. This is a direct Lambdapi correction;
+TypeScript usability automation remains deferred. Both unit-agreement
+orientations, canonical beta/unit-extension, transparent multiplication
+projection, the component path, and raw unit/name nonclaims are executable
+diagnostics.
+
 Historical checkpoint `ad46632` records 52 focused central checks, 14 reviewer
 statements, a 2,260-check catalog with zero unclassified entries, the
 `1116/159` base and `1140/159` monad-module warning inventories, fresh 270-file
 health, and a green 1,802.847-second full CI. The post-checkpoint
 transparent-whole correction removes the unnecessary whole projection rule
 and whole proof-time equation while retaining all focused computations and an
-empty strict module LHS audit. Its warning inventory, 2,260-check catalog, and
-fresh 270-target health are synchronized. Per the user's 2026-08-25 scoped
-validation instruction, the correction does not claim a new completed full-CI
-run; exact closure evidence is recorded in the living monad/comonad plan.
+empty strict module LHS audit; checkpoint `e90ce3c` preserves that correction.
+Its warning inventory, 2,260-check catalog, and fresh 270-target health are
+synchronized. The subsequent direct-usability correction passes the module,
+2,268-check central suite, reviewer example, derived multiplication-component
+join, empty strict module LHS audit, `1139/159` warning inventory, catalog, and
+authority checks. Under the user's
+scoped-validation instruction it does not claim a new health or full-CI run;
+exact evidence is recorded in the living monad/comonad plan.
 Free monad/comonad syntax, a commuting decision procedure, explicit
 Kleisli/Eilenberg--Moore categories, and a TypeScript declaration surface
 remain separate consumer-led work.

@@ -4806,7 +4806,15 @@ dual rule has the corresponding classified projection reports. Standard
 counit and comultiplication remain stable whole observations. For
 `J : Adjunction(F,G)`, the layer constructs the monad on `G o F` with
 multiplication `G epsilon F` and the comonad on `F o G` with comultiplication
-`F eta G`.
+`F eta G`. The canonical unit of `adjunction_monad(J)` remains a runtime head
+used by the triangular calculus, while the adjunction unit is related to it
+only at proof time and remains runtime-nonconvertible. Whole multiplication is
+instead a semantic observation: it reduces to the transparent checked
+`G epsilon F` construction. Its component-first reduction compiles into
+triangular extension, and a derived path propositionally joins that endpoint
+with the whole-first semantic component without changing runtime preference.
+This is the direct Lambdapi form of the relevant usability boundary, with
+TypeScript automation deferred.
 
 These generic rules do not by themselves prove decidability of all emdash or
 Lambdapi conversion. Došen's decision theorem concerns the separately free

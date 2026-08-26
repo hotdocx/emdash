@@ -11534,19 +11534,227 @@ assert [A : Cat]
         (@cokleisli_extend_fapp0 A D C X Y g)));
 
 // The existing adjunction supplies the first concrete monad and comonad.
+// Its unit spelling is a declaration-backed proof-time usability endpoint.
+// Whole multiplication remains semantic and computes to G-epsilon-F.
 assert [R L : Cat]
   [F : τ (Functor R L)]
   [G : τ (Functor L R)]
   (J : τ (@Adjunction R L F G)) ⊢
-  unit_monad_transf (adjunction_monad J)
-    ≡ unit_adj_transf J;
+  @eq_refl
+    (Transf
+      (@id_func R)
+      (@comp_cat_fapp0 R L R G F))
+    (@unit_monad_transf
+      R (@comp_cat_fapp0 R L R G F)
+      (@adjunction_monad R L F G J))
+  : τ (@=
+      (Transf
+        (@id_func R)
+        (@comp_cat_fapp0 R L R G F))
+      (@unit_monad_transf
+        R (@comp_cat_fapp0 R L R G F)
+        (@adjunction_monad R L F G J))
+      (@unit_adj_transf R L F G J));
 
 assert [R L : Cat]
   [F : τ (Functor R L)]
   [G : τ (Functor L R)]
   (J : τ (@Adjunction R L F G)) ⊢
-  mult_monad_transf (adjunction_monad J)
-    ≡ adjunction_monad_mult_transf J;
+  @mult_monad_transf
+    R (@comp_cat_fapp0 R L R G F)
+    (@adjunction_monad R L F G J)
+  ≡ @adjunction_monad_mult_transf R L F G J;
+
+// Agreements are symmetric at proof time.
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @eq_refl
+    (Transf
+      (@id_func R)
+      (@comp_cat_fapp0 R L R G F))
+    (@unit_adj_transf R L F G J)
+  : τ (@=
+      (Transf
+        (@id_func R)
+        (@comp_cat_fapp0 R L R G F))
+      (@unit_adj_transf R L F G J)
+      (@unit_monad_transf
+        R (@comp_cat_fapp0 R L R G F)
+        (@adjunction_monad R L F G J)));
+
+// Unit proof-time agreement deliberately does not select a runtime normal form.
+assertnot [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G)) ⊢
+  @unit_monad_transf
+    R (@comp_cat_fapp0 R L R G F)
+    (@adjunction_monad R L F G J)
+  ≡ @unit_adj_transf R L F G J;
+
+// Unit proof-time agreement is witness- and operation-specific.
+assertnot [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G))
+  (eta : τ (Transf
+    (@id_func R)
+    (@comp_cat_fapp0 R L R G F))) ⊢
+  @eq_refl
+    (Transf
+      (@id_func R)
+      (@comp_cat_fapp0 R L R G F))
+    (@unit_monad_transf
+      R (@comp_cat_fapp0 R L R G F)
+      (@adjunction_monad R L F G J))
+  : τ (@=
+      (Transf
+        (@id_func R)
+        (@comp_cat_fapp0 R L R G F))
+      (@unit_monad_transf
+        R (@comp_cat_fapp0 R L R G F)
+        (@adjunction_monad R L F G J))
+      eta);
+
+// Canonical observations of the adjunction-induced witness retain the generic
+// Monad triangular runtime calculus.
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G))
+  (X Y Z : τ (Obj R))
+  (f : τ (Hom R X Y))
+  (g : τ (Hom R Y
+    (@fapp0 R R (@comp_cat_fapp0 R L R G F) Z))) ⊢
+  @comp_fapp0
+    R X
+    (@fapp0 R R (@comp_cat_fapp0 R L R G F) Y)
+    (@fapp0 R R (@comp_cat_fapp0 R L R G F) Z)
+    (@kleisli_extend_fapp0
+      R (@comp_cat_fapp0 R L R G F)
+      (@adjunction_monad R L F G J)
+      Y Z g)
+    (@tapp1_fapp0
+      R R
+      (@id_func R)
+      (@comp_cat_fapp0 R L R G F)
+      X Y
+      (@unit_monad_transf
+        R (@comp_cat_fapp0 R L R G F)
+        (@adjunction_monad R L F G J))
+      f)
+  ≡ @comp_fapp0
+      R X Y
+      (@fapp0 R R (@comp_cat_fapp0 R L R G F) Z)
+      g f;
+
+// The independently named adjunction unit is an agreement endpoint, not a
+// second runtime beta owner.
+assertnot [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G))
+  (X Y Z : τ (Obj R))
+  (f : τ (Hom R X Y))
+  (g : τ (Hom R Y
+    (@fapp0 R R (@comp_cat_fapp0 R L R G F) Z))) ⊢
+  @comp_fapp0
+    R X
+    (@fapp0 R R (@comp_cat_fapp0 R L R G F) Y)
+    (@fapp0 R R (@comp_cat_fapp0 R L R G F) Z)
+    (@kleisli_extend_fapp0
+      R (@comp_cat_fapp0 R L R G F)
+      (@adjunction_monad R L F G J)
+      Y Z g)
+    (@tapp1_fapp0
+      R R
+      (@id_func R)
+      (@comp_cat_fapp0 R L R G F)
+      X Y
+      (@unit_adj_transf R L F G J)
+      f)
+  ≡ @comp_fapp0
+      R X Y
+      (@fapp0 R R (@comp_cat_fapp0 R L R G F) Z)
+      g f;
+
+// The two multiplication-component reductions join propositionally even
+// though the transparent G-epsilon-F component is not a second triangular
+// runtime owner.
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G))
+  (X : τ (Obj R)) ⊢
+  @adjunction_monad_mult_component_path R L F G J X
+  : τ (@=
+      (Hom R
+        (@fapp0
+          R R
+          (@comp_cat_fapp0
+            R R R
+            (@comp_cat_fapp0 R L R G F)
+            (@comp_cat_fapp0 R L R G F))
+          X)
+        (@fapp0 R R (@comp_cat_fapp0 R L R G F) X))
+      (@tapp0_fapp0
+        R R
+        (@comp_cat_fapp0
+          R R R
+          (@comp_cat_fapp0 R L R G F)
+          (@comp_cat_fapp0 R L R G F))
+        (@comp_cat_fapp0 R L R G F)
+        X
+        (@adjunction_monad_mult_transf R L F G J))
+      (@kleisli_extend_fapp0
+        R
+        (@comp_cat_fapp0 R L R G F)
+        (@adjunction_monad R L F G J)
+        (@fapp0 R R (@comp_cat_fapp0 R L R G F) X)
+        X
+        (@id R (@fapp0 R R (@comp_cat_fapp0 R L R G F) X))));
+
+assert [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G))
+  (X : τ (Obj R)) ⊢
+  @kleisli_extend_fapp0
+    R
+    (@comp_cat_fapp0 R L R G F)
+    (@adjunction_monad R L F G J)
+    X X
+    (@tapp0_fapp0
+      R R
+      (@id_func R)
+      (@comp_cat_fapp0 R L R G F)
+      X
+      (@unit_monad_transf
+        R (@comp_cat_fapp0 R L R G F)
+        (@adjunction_monad R L F G J)))
+  ≡ @id R
+      (@fapp0 R R (@comp_cat_fapp0 R L R G F) X);
+
+assertnot [R L : Cat]
+  [F : τ (Functor R L)]
+  [G : τ (Functor L R)]
+  (J : τ (@Adjunction R L F G))
+  (X : τ (Obj R)) ⊢
+  @kleisli_extend_fapp0
+    R
+    (@comp_cat_fapp0 R L R G F)
+    (@adjunction_monad R L F G J)
+    X X
+    (@tapp0_fapp0
+      R R
+      (@id_func R)
+      (@comp_cat_fapp0 R L R G F)
+      X
+      (@unit_adj_transf R L F G J))
+  ≡ @id R
+      (@fapp0 R R (@comp_cat_fapp0 R L R G F) X);
 
 assert [R L : Cat]
   [F : τ (Functor R L)]

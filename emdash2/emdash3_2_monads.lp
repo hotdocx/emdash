@@ -19,6 +19,11 @@
   runtime discriminator. Whole coextension transparently reuses primary
   monadic whole extension. Canonical Op terms fold directly to the stable
   heads; no whole coextension unifier or propositional equality bridge is used.
+  For the adjunction-induced Monad, the canonical unit remains a runtime head
+  and the adjunction unit is a proof-time usability endpoint. The standard
+  whole multiplication remains semantic and reduces to the transparent
+  G-epsilon-F construction; its component-first triangular branch is joined
+  propositionally to the whole-first semantic component.
   This module does not construct free syntax, a global commuting decision
   procedure, Kleisli or Eilenberg--Moore categories, or a TypeScript
   declaration surface.
@@ -820,15 +825,129 @@ injective symbol adjunction_monad
       R
       (@comp_cat_fapp0 R L R G F));
 
-rule @unit_monad_transf
-      $R _
-      (@adjunction_monad $R $L $F $G $J)
-  ↪ @unit_adj_transf $R $L $F $G $J;
+/*
+  Declaration-backed unit usability agreement for the adjunction-induced
+  Monad.
+
+  The canonical Monad unit remains the runtime discriminator for the
+  triangular calculus. The adjunction unit is a proof-time comparison
+  endpoint, as in the established adjunction-usability boundary. Standard
+  multiplication is not a triangular discriminator at the whole level, so it
+  retains the semantic runtime projection to G-epsilon-F below.
+*/
+unif_rule
+  @unit_monad_transf
+    _ _
+    (@adjunction_monad _ _ _ _ $J)
+  ≡ @unit_adj_transf _ _ _ _ $J
+  ↪ [ tt ≡ tt ];
+
+/*
+  First leg of the multiplication-component projection diamond.
+
+  This declaration deliberately precedes the whole semantic multiplication
+  projection below. At this point the generic component rule checks the common
+  ancestor against `(id_TX)*` by reflexivity. After the whole projection is
+  installed, the path's source also presents the G-epsilon-F component.
+*/
+symbol adjunction_monad_mult_component_to_extension_path
+  [R L : Cat]
+  [F : τ (@Functor R L)]
+  [G : τ (@Functor L R)]
+  (J : τ (@Adjunction R L F G))
+  (X : τ (@Obj R))
+  : τ (@=
+      (Hom R
+        (@fapp0
+          R R
+          (@comp_cat_fapp0
+            R R R
+            (@comp_cat_fapp0 R L R G F)
+            (@comp_cat_fapp0 R L R G F))
+          X)
+        (@fapp0 R R (@comp_cat_fapp0 R L R G F) X))
+      (@tapp0_fapp0
+        R R
+        (@comp_cat_fapp0
+          R R R
+          (@comp_cat_fapp0 R L R G F)
+          (@comp_cat_fapp0 R L R G F))
+        (@comp_cat_fapp0 R L R G F)
+        X
+        (@mult_monad_transf
+          R
+          (@comp_cat_fapp0 R L R G F)
+          (@adjunction_monad R L F G J)))
+      (@kleisli_extend_fapp0
+        R
+        (@comp_cat_fapp0 R L R G F)
+        (@adjunction_monad R L F G J)
+        (@fapp0 R R (@comp_cat_fapp0 R L R G F) X)
+        X
+        (@id R (@fapp0 R R (@comp_cat_fapp0 R L R G F) X))))
+≔ @eq_refl
+    (Hom R
+      (@fapp0
+        R R
+        (@comp_cat_fapp0
+          R R R
+          (@comp_cat_fapp0 R L R G F)
+          (@comp_cat_fapp0 R L R G F))
+        X)
+      (@fapp0 R R (@comp_cat_fapp0 R L R G F) X))
+    (@tapp0_fapp0
+      R R
+      (@comp_cat_fapp0
+        R R R
+        (@comp_cat_fapp0 R L R G F)
+        (@comp_cat_fapp0 R L R G F))
+      (@comp_cat_fapp0 R L R G F)
+      X
+      (@mult_monad_transf
+        R
+        (@comp_cat_fapp0 R L R G F)
+        (@adjunction_monad R L F G J)));
 
 rule @mult_monad_transf
       $R _
       (@adjunction_monad $R $L $F $G $J)
   ↪ @adjunction_monad_mult_transf $R $L $F $G $J;
+
+// Propositional join of the whole-first G-epsilon-F component and the
+// component-first triangular extension normal form.
+symbol adjunction_monad_mult_component_path
+  [R L : Cat]
+  [F : τ (@Functor R L)]
+  [G : τ (@Functor L R)]
+  (J : τ (@Adjunction R L F G))
+  (X : τ (@Obj R))
+  : τ (@=
+      (Hom R
+        (@fapp0
+          R R
+          (@comp_cat_fapp0
+            R R R
+            (@comp_cat_fapp0 R L R G F)
+            (@comp_cat_fapp0 R L R G F))
+          X)
+        (@fapp0 R R (@comp_cat_fapp0 R L R G F) X))
+      (@tapp0_fapp0
+        R R
+        (@comp_cat_fapp0
+          R R R
+          (@comp_cat_fapp0 R L R G F)
+          (@comp_cat_fapp0 R L R G F))
+        (@comp_cat_fapp0 R L R G F)
+        X
+        (@adjunction_monad_mult_transf R L F G J))
+      (@kleisli_extend_fapp0
+        R
+        (@comp_cat_fapp0 R L R G F)
+        (@adjunction_monad R L F G J)
+        (@fapp0 R R (@comp_cat_fapp0 R L R G F) X)
+        X
+        (@id R (@fapp0 R R (@comp_cat_fapp0 R L R G F) X))))
+≔ @adjunction_monad_mult_component_to_extension_path R L F G J X;
 
 /*
   Comultiplication of the adjunction comonad.
