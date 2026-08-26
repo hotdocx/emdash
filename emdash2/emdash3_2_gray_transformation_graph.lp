@@ -438,9 +438,8 @@ symbol gray_transf_graph_obj
 ≔ @fapp0 B (@LaxArrow_cat C)
     (@gray_transf_graph_func B C F G epsilon) y;
 
-// The whole construction has the visible edge component (F[y],G[y],epsilon[y]).
-// This is a typed proof-time reading; runtime keeps the internal-action
-// construction rather than installing Sigma eta.
+// Equality view of the runtime object beta
+// (F[y],G[y],epsilon[y]); no additional Sigma eta is installed.
 symbol gray_transf_graph_obj_path
   [B C : Cat]
   [F G : τ (Functor B C)]
