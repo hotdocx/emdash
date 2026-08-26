@@ -13,18 +13,21 @@ directed dependent theory of categories, Cat-valued families, Sigma totals,
 sections, dependent homs, functors, transfors, profunctors, and selected
 universal constructions.
 
-Five mathematical threads expose the architecture. Directed arrow induction
+Six mathematical threads expose the architecture. Directed arrow induction
 transports reflexive data along a canonical Sigma arrow and computes ordinary
-composition. A directed higher-inductive walking endomorphism is normalized
-to the natural-number powers of its generator. In local geometry, the locus
-where a section becomes invertible is constructed first as a sieve D_U(s),
-before one asks whether an open represents it; finite localization charts
-then generate a Zariski topology, while a direct return/glue/silent
-categorical HIT constructs fixed-site Cat-valued sheafification. Returning to
-the groupoidal layer, a Circle/Integer encode-decode theorem restores inverse
-powers, category-indexed groupoidification characterizes maps out by a whole
-mapping equivalence, and one profiled Gray right closure exposes a nonidentity
-walking-square interchanger from the same internal laxity action.
+composition. A monad-primary full-functor interface combines whole unit and
+multiplication observations with whole Kleisli extension, while ordinary
+composition computes Došen's triangular reductions. A directed
+higher-inductive walking endomorphism is normalized to the natural-number
+powers of its generator. In local geometry, the locus where a section becomes
+invertible is constructed first as a sieve D_U(s), before one asks whether an
+open represents it; finite localization charts then generate a Zariski
+topology, while a direct return/glue/silent categorical HIT constructs
+fixed-site Cat-valued sheafification. Returning to the groupoidal layer, a
+Circle/Integer encode-decode theorem restores inverse powers, category-indexed
+groupoidification characterizes maps out by a whole mapping equivalence, and
+one profiled Gray right closure exposes a nonidentity walking-square
+interchanger from the same internal laxity action.
 Finally, injective face codes form an internal semi-simplex category, directed
 join builds the ordinal shapes `Delta[n]`, and the internal dependent hom
 keeps the base-arrow layer of a dependent cell functorial. Iterated outgoing
@@ -442,8 +445,8 @@ An intrinsically indexed flag code records the changing native category
 without reimplementing it. A whole stage
 
 ```
-F,G : K -> B
-epsilon : F => G
+F,G : K ⊢ B
+ε : F ⇒ G
 ```
 
 sends an old source `s` to
@@ -522,6 +525,58 @@ unrelated component data. The calculus also includes a primitive
 directed-inductive join category with two inclusions and one internally
 natural cross cell. General coend semantics, a complete profunctor
 bicategory, and unrestricted weighted (co)limit existence are not claimed.
+
+
+Monad computation in the triangular presentation
+--------------------------------------------------
+
+For a whole endofunctor `T : A ⊢ A`, an indexed witness
+
+```
+M : Monad_A(T)
+```
+
+has stable whole observations
+
+```
+η_M : id_A ⇒ T
+μ_M : T ∘ T ⇒ T
+```
+
+and a whole extension functor
+
+```
+(-)*_{M,X,Y}
+  : Hom_A(X,T(Y)) ⊢ Hom_A(T(X),T(Y)).
+```
+
+The whole extension retains another hom action. Its point observation sends
+`f : X → T(Y)` to `f* : T(X) → T(Y)`. The standard semantic formula
+
+```
+f* = μ_Y ∘ T[f]
+```
+
+is a proof-time comparison rather than a runtime expansion of the stable
+extension head. Ordinary ambient composition owns the monadic duals of
+Došen's triangular reductions:
+
+```
+ηᶜ(g) ∘ f   ⇝ ηᶜ(g ∘ f)
+g* ∘ ηᶜ(f)  ⇝ g ∘ f
+g* ∘ f*     ⇝ (g* ∘ f)*
+(η_X)*      ⇝ id_TX.
+```
+
+Here `η_X = ηᶜ(id_X)`. The first law is inherited from generic
+transformation naturality. The accumulation orientation removes the top-level
+cut between two extension-generated arrows and retains a single extension
+whose internal cut has lower degree. The standard multiplication observation
+uses the same triangular normal-form language at components:
+
+```
+μ_X ⇝ (id_TX)*.
+```
 
 
 From invertibility sieves to sheafification
@@ -940,6 +995,33 @@ W-Colim_A(F,C)
 
 This is obtained from right-adjoint preservation of weighted limits by
 opposite normalization, rather than by duplicating the proof.
+
+---
+
+For `T : A ⊢ A`, the monad interface combines whole transformations
+
+```
+η : id_A ⇒ T
+μ : T ∘ T ⇒ T
+```
+
+with a whole extension functor sending `f : X → T(Y)` to
+`f* : T(X) → T(Y)`. Ordinary composition computes the Došen-oriented laws
+
+```
+ηᶜ(g) ∘ f   ⇝ ηᶜ(g ∘ f)
+g* ∘ ηᶜ(f)  ⇝ g ∘ f
+g* ∘ f*     ⇝ (g* ∘ f)*
+(η_X)*      ⇝ id_TX.
+```
+
+Here `η_X = ηᶜ(id_X)`. The semantic equation `f* = μ_Y ∘ T[f]` is
+proof-time, so it does not erase the stable extension head. Standard
+multiplication components use the same triangular language:
+
+```
+μ_X ⇝ (id_TX)*.
+```
 
 ---
 

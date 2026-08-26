@@ -42,8 +42,9 @@ Side-Task-Ledger: `MCD-00`, `MCD-OWNER-1`, `MCD-MONAD-2`, `MCD-KLEISLI-3`,
 `MCD-RECLOSE-16`, `MCD-CODUAL-WHOLE-17`, `MCD-RECLOSE-18`,
 `MCD-MONAD-USABILITY-19`, and `MCD-RECLOSE-20`
 
-Baseline: clean local historical checkpoint `e90ce3c` over `ad46632`,
-`ac1671c`, and the user's earlier checkpoint `c1f4419`
+Baseline: local direct-usability checkpoint `3a47e2b` over transparent-whole
+checkpoint `e90ce3c`, `ad46632`, `ac1671c`, and the user's earlier checkpoint
+`c1f4419`
 
 Worktree: `/home/user1/emdash1-monads-v3.2`
 
@@ -53,8 +54,9 @@ Git authority: the user's 2026-08-23 instruction explicitly authorized
 restoring the `main` checkout to `/home/user1/emdash1`, creating this dedicated
 goal branch/worktree, starting the persistent goal, evolving this plan, and
 performing the scoped implementation and validation. The user separately
-authorized the local historical checkpoints through `e90ce3c`. The current
-correction does **not** carry new commit authorization. Pushes, merges,
+authorized the local historical checkpoints through `e90ce3c`, then on
+2026-08-26 explicitly authorized checkpoint `3a47e2b` and one final local
+commit containing the reviewed correction plus `tmp/EMAIL.md`. Pushes, merges,
 publication, release, history rewriting, branch deletion, and worktree removal
 remain unauthorized.
 
@@ -599,6 +601,7 @@ the proposed signature.
 | `D-MCD-040` | rejected opacity workaround | Making `adjunction_monad_mult_transf(J)` opaque forced a rigid proof-time endpoint but discarded its `G epsilon F` body from runtime reduction. This is not normal computational-owner SOP and is removed. The bare-variable fallback is also rejected: it violated the two-rigid-head preference and triggered a Lambdapi evaluator assertion. |
 | `D-MCD-041` | accepted asymmetric evidence boundary | Typed `eq_refl` exercises both unit-agreement orientations, while raw adjunction unit runtime conversion remains false. Whole multiplication conversion to transparent `G epsilon F` is positive. Its whole-first semantic component and component-first `(id_TX)*` reduction are propositionally joined by a non-axiomatic path defined from their common ancestor; no duplicate triangular runtime owner is added. |
 | `D-MCD-042` | accepted measured boundary | Warning-enabled module checking is `1139/159`, removing the historical unit-observation overlap from `1140/159` while retaining the intended semantic multiplication overlap and adding no replaceable-variable diagnostics. The strict LHS audit remains empty. |
+| `D-MCD-043` | accepted local checkpoints | The user explicitly authorized two local commits on 2026-08-26: `3a47e2b` records the first reviewed direct-usability tranche, and one final commit may record the corrected asymmetric unit/multiplication boundary, propositional component join, synchronized authorities, and `tmp/EMAIL.md`. This does not authorize any remote or integration mutation. |
 
 ## Historical First-Checkpoint Evidence
 
@@ -998,9 +1001,9 @@ component-to-extension rule and expose a derived propositional join of the two
 component reductions. Do not add per-adjunction triangular runtime rewrites,
 change the Terminal rule, or implement the deferred TypeScript automation.
 Audit the opposite/comonad routes and run only scoped validation. Preserve
-checkpoint e90ce3c and unrelated work. Do not commit, push, merge, publish,
-release, rewrite history, delete branches, or remove worktrees without
-separate authorization.
+checkpoint e90ce3c and unrelated work. Make only the two local commits
+explicitly authorized by the user after review; do not push, merge, publish,
+release, rewrite history, delete branches, or remove worktrees.
 ```
 
 ## Completed Transparent-Whole Objective
