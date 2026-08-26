@@ -264,7 +264,10 @@ the selected strict-code closure of those transformation graphs is
 `emdash3_2_gray_transformation_graph_profile.lp`; its whole carrier computes
 directly to the public graph, and one graph-head specialization makes the
 already-extracted `fdapp1_int_cell` compositor compute to identity for
-strict-coded endpoints. It adds no second compositor or opaque carrier path;
+strict-coded endpoints. A second narrow rule makes the existing identity
+laxity filler compute to identity; the remaining readable-square/canonical
+Sigma-identity comparison is generic and propositional. It adds no second
+compositor, unit cell, or opaque carrier path;
 the variable-dimensional object decoder is `emdash3_2_gray_cube_decoder.lp`;
 one Nat recursion uniform in the ambient category curries, takes the walking
 generator, packages its whole graph, recurses in `LaxArrow`, and transports
@@ -1124,8 +1127,9 @@ Use the following order:
     a tensor unit or coherence between bracketings. The selected profile
     continuation `emdash3_2_gray_transformation_graph_profile.lp` makes the
     strict code decode judgmentally to the public graph and specializes the
-    existing `fdapp1_int_cell` compositor at that graph head; the former opaque
-    carrier path and its `eq_ap`/`eq_apd` observers are retired.
+    existing binary compositor and identity laxity filler at their
+    `fdapp1_int_cell` owners; the former opaque carrier path and its
+    `eq_ap`/`eq_apd` observers are retired.
     `emdash3_2_gray_cube_decoder.lp` then gives the
     arbitrary-variable-dimensional object observation by one Nat recursion,
     with dimensions one through three, the recursive carrier computation, and the

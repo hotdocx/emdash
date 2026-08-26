@@ -532,7 +532,8 @@ detailed probe evidence.
   decoding curries, takes the walking generator, recursively decodes its graph
   in `LaxArrow`, and applies the Nat-derived level shift. The strict carrier
   now computes directly to the public graph, while a graph-head rule constrains
-  the already-extracted compositor to identity for strict-coded endpoints.
+  the already-extracted compositor to identity for strict-coded endpoints; its
+  existing identity laxity filler is likewise constrained at its own owner.
   Dimensions one through three, the exact `I tensor_R I`
   interchanger, four square edges, six cube faces, and retained next action are
   checked. No tensor unit, alternate-bracketing coherence, inverse decoder, or

@@ -1680,8 +1680,11 @@ over an existing carrier but does not install or suppress runtime carrier
 rules. The selected strict graph code keeps a stable `strict_functor_carrier`;
 its carrier computes directly to `gray_transf_graph_func`. The narrow
 graph-head strictness rule reduces the existing extracted compositor rather
-than declaring another one; no carrier path or `eq_ap`/`eq_apd` observer is
-needed.
+than declaring another one; the strict endpoint profile also reduces the
+existing identity laxity filler. Do not print this as a new graph unit: the
+readable `lax_square(id,id,id)` versus canonical nested-Sigma identity remains
+a generic presentation comparison. No carrier path or `eq_ap`/`eq_apd`
+observer is needed.
 
 For positive right-Gray cubes and their native observation, write
 

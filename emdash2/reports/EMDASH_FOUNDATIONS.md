@@ -3970,9 +3970,12 @@ strict_functor_carrier(strict_graph_data(SF,SG,epsilon))
 Unfolding the carrier erases the generic strict-code discriminator, so one
 narrow graph-head rule makes the already-extracted `fdapp1_int_cell`
 compositor compute to identity for strict-coded endpoint diagrams. It declares
-no second compositor. The former opaque carrier path and its `eq_ap`/`eq_apd`
-observers are retired. Whether the graph's unit remains genuinely strict after
-the global-cut migration is an explicit continuing audit.
+no second compositor. The existing identity laxity filler likewise computes to
+identity at its own `fdapp1_int_cell` owner. The resulting readable
+`lax_square(id,id,id)` and the canonical nested-Sigma identity remain distinct
+presentations; their eventual comparison is a generic derived-total path, not
+a graph-specific unit. The former opaque carrier path and its `eq_ap`/`eq_apd`
+observers are retired.
 
 The variable-dimensional decoder is then one internal Nat recursion uniform
 in the ambient category:

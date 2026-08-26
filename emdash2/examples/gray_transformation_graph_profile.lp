@@ -57,6 +57,30 @@ assert [B C : Cat]
       (@strict_functor_carrier B C SG)
       epsilon x y g;
 
+// The selected strict endpoint profile constrains the existing identity
+// laxity filler itself; no separate graph-unit cell is declared.
+assert [B C : Cat]
+  (SF SG : τ (@StrictFunctorData B C))
+  (epsilon : τ (Transf
+    (@strict_functor_carrier B C SF)
+    (@strict_functor_carrier B C SG)))
+  (x : τ (Obj B)) ⊢
+  @gray_transf_standard_cell
+    B C
+    (@strict_functor_carrier B C SF)
+    (@strict_functor_carrier B C SG)
+    epsilon x x (@id B x)
+  ≡ @id
+      (Hom_cat
+        C
+        (@fapp0 B C (@strict_functor_carrier B C SF) x)
+        (@fapp0 B C (@strict_functor_carrier B C SG) x))
+      (@tapp0_fapp0
+        B C
+        (@strict_functor_carrier B C SF)
+        (@strict_functor_carrier B C SG)
+        x epsilon);
+
 // The selected code activates the existing profile-local compositor beta.
 assert [B C : Cat]
   (SF SG : τ (@StrictFunctorData B C))

@@ -38,6 +38,34 @@ rule @strict_functor_carrier _ _
       $epsilon;
 
 /*
+  Selected unit/normality computation at the existing internal-action cell.
+  For a transformation between strict-coded endpoint diagrams, the identity
+  component of its post/left laxity is the identity on epsilon[x]. This is the
+  filler already used by `gray_transf_standard_square(epsilon,id_x)`; no graph
+  unit or second naturality cell is introduced.
+*/
+rule @fdapp1_int_cell
+      $B
+      _
+      _
+      (@tapp1_at_transf
+        $B $C
+        (@strict_functor_carrier $B $C $SF)
+        (@strict_functor_carrier $B $C $SG)
+        $x $epsilon)
+      $x $x (@id $B $x) (@id $B $x)
+  ↪ @id
+      (Hom_cat
+        $C
+        (@fapp0 $B $C (@strict_functor_carrier $B $C $SF) $x)
+        (@fapp0 $B $C (@strict_functor_carrier $B $C $SG) $x))
+      (@tapp0_fapp0
+        $B $C
+        (@strict_functor_carrier $B $C $SF)
+        (@strict_functor_carrier $B $C $SG)
+        $x $epsilon);
+
+/*
   Selected strict compositor computation after whole carrier decoding.
   This is the existing `fdapp1_int_cell`/`fapp1_compositor` owner specialized
   to the graph of a transformation between strict-coded endpoint diagrams; it
