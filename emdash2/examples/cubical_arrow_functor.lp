@@ -13,7 +13,7 @@ assert [C D : Cat]
     Π Z : τ (Obj C),
     Π g : τ (Hom C Y Z),
     Π f : τ (Hom C X Y),
-      τ (@IsoCellEvidence
+      τ (@OmegaEquivAlong
         (Hom_cat D (@fapp0 C D F X) (@fapp0 C D F Z))
         _ _
         (@readable_pseudo_post_cell C D F X Y Z g f)))
@@ -34,13 +34,13 @@ assert [C D : Cat]
   (g : τ (Hom C y z))
   (f : τ (Hom C x y)) ⊢
   @readable_pseudo_post_evidence C D F P x y z g f
-  : τ (@IsoCellEvidence
+  : τ (@OmegaEquivAlong
       (Hom_cat D (@fapp0 C D F x) (@fapp0 C D F z))
       _ _
       (@readable_pseudo_post_cell C D F x y z g f));
 
-// The pre/right inverse is derived from that one inverse plus the existing
-// post/pre endpoint reframe.
+// The pre/right reverse adjustment is derived from a selected native
+// omega-equivalence inverse plus the existing post/pre endpoint reframe.
 assert [C D : Cat]
   (F : τ (Functor C D))
   (P : τ (@ReadablePseudoFunctorProfile C D F))

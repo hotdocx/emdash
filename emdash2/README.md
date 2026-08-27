@@ -170,9 +170,11 @@ now a transparent readability alias, not a primitive category. Source and
 target are whole derived functors. Generic nested-Sigma identity/composition
 compute their expected endpoint boundaries; the older readable paste terms no
 longer compete as runtime normal forms. A readable pseudofunctor profile
-supplies fixed-forward inverse evidence for the one readable cell derived from
-`fapp1_compositor`; `CubicalArrow_func` uses that cell forward and derives its
-pre/right inverse by endpoint reframing.
+supplies fixed-forward `OmegaEquivAlong` for the one readable cell derived
+from `fapp1_compositor`; `CubicalArrow_func` uses that cell forward and derives
+its pre/right reverse adjustment from a selected native inverse. The readable
+source ladder is a documented adapter for the temporary global strict cut and
+does not claim noncollapsed lax endpoints.
 Genuine Nat recursion gives
 
 ```text

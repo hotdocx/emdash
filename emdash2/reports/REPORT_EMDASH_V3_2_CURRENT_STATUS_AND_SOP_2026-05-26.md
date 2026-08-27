@@ -568,14 +568,18 @@ detailed probe evidence.
 - `emdash3_2_readable_pseudofunctors.lp` and
   `emdash3_2_cubical_arrow_functor.lp`: selected coherent lifting boundary.
   Transparent paths reframe the existing internal compositor to one readable
-  post cell; the profile supplies fixed-forward inverse evidence for that cell,
-  and the pre/right inverse is derived by the existing endpoint comparison.
+  post cell; the profile supplies fixed-forward `OmegaEquivAlong` for that
+  cell, and the pre/right reverse adjustment is derived from a selected native
+  inverse plus the existing endpoint comparison. The source ladder is a
+  documented adapter for the temporary global strict-composition cut and does
+  not claim noncollapsed lax endpoints.
   `CubicalArrow_func` maps a filler by that cell, generic next-hom action, then
-  the derived inverse. Source, target, and every recursive lift
+  the derived reverse adjustment. Source, target, and every recursive lift
   retain profiles. A general constructor accepts an explicit family of
-  fixed-forward evidence; identity/composition and cubical structural
-  instances remain honestly supplied pending extracted unit/composite
-  coherence. Arbitrary normal-lax carriers are intentionally not lifted.
+  fixed-forward omega-equivalence evidence; identity/composition and cubical
+  structural instances remain honestly supplied pending extracted
+  unit/composite coherence. Arbitrary normal-lax carriers are intentionally
+  not lifted.
 - `emdash3_2_cubical_square_level.lp` and `emdash3_2_cubical_levels.lp`:
   first six-face cube boundary and genuine Nat-indexed iteration. Level zero
   is `C`, successor is `CubicalArrow` of the previous level, and dimensions
@@ -1162,8 +1166,10 @@ unclassified overlaps. Also distinguish the existing
 `ReadablePseudoFunctorProfile`—coherent evidence indexed by an already-formed
 ambient carrier—from a separate carrier classifier; the former already exists
 but neither constructs the carrier nor disables global cuts. Its compositor
-evidence is now fixed-forward: the forward cell is the existing
-internal-action compositor, not a profile-supplied parallel arrow.
+evidence is now fixed-forward `OmegaEquivAlong`: the forward cell is the
+existing internal-action compositor, not a profile-supplied parallel arrow.
+Its readable endpoint ladder compensates for the temporary global strict cut
+and is not a noncollapse theorem.
 
 The walking-endomorphism plan resumed at implementation-goal baseline
 `82d0e27...`. Its G1–G6 implementation is active: `WalkingEnd_cat`,
@@ -4306,8 +4312,10 @@ therefore internalizes both endpoints and side arrows without a new
 parameterized-`homd_int` primitive. `LaxArrow_cat(C)` specializes this at
 `hom_int(id_C)`, and `CubicalArrow_cat(C)` is its transparent readability
 name. A selected readable pseudofunctor profile constrains the existing
-compositor with fixed-forward inverse evidence, making the operation
-functorial and recursively iterable. Nat recursion then constructs
+compositor with fixed-forward `OmegaEquivAlong`; a selected native inverse
+supplies the reverse boundary adjustment, making the operation functorial and
+recursively iterable. Its endpoint reframe remains explicitly approximate
+under the temporary global strict cut. Nat recursion then constructs
 `CubicalLevel_cat(C,n)`.
 
 The associated `{L,R,*}` code grammar is independent of Gray semantics and of

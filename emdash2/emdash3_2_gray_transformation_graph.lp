@@ -22,8 +22,9 @@
   functor-identity cut.  That diagnostic overlap is deliberately accepted by
   the repository's prototype policy: the global strict cuts are scheduled for
   later profile-local migration and must not veto intended lax computation.
-  ReadablePseudoFunctorProfile already supplies an evidence-level coherent
-  capability for existing carriers; it does not install this graph beta.
+  ReadablePseudoFunctorProfile already supplies fixed-forward
+  OmegaEquivAlong evidence for the existing readable compositor of a selected
+  carrier; it does not install this graph beta or disable the global cuts.
 */
 
 require open emdash.emdash3_2_gray_interchanger_orientation;

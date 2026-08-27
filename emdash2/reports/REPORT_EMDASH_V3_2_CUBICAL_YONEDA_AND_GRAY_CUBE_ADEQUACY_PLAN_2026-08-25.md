@@ -386,11 +386,13 @@ temporary fast-prototyping approximations explicitly scheduled for later
 profile-local migration. The intended lax graph computation must remain.
 
 The repository already has `ReadablePseudoFunctorProfile(F)`, an abstract
-coherent capability indexed by an existing ambient carrier and exposing
-invertible unit and post/pre compositor views. The earlier claim that the
-profile itself was missing was wrong. That capability neither constructs the
-graph carrier nor disables global cuts, and its pseudo/invertible boundary may
-be stronger than a future arbitrary lax carrier classifier.
+coherent capability indexed by an existing ambient carrier. Its corrected
+fixed-forward field is `OmegaEquivAlong` for the readable reframe of the
+existing compositor; selected reverse action is derived rather than supplied
+as another cell. The earlier claim that the profile itself was missing was
+wrong. That capability neither constructs the graph carrier nor disables
+global cuts. Its endpoint ladder is explicitly a temporary strict-prototype
+adapter and does not claim noncollapsed lax endpoints.
 
 The original ordinary represented identity section `(y,id_y)`, family-natural
 `sigma_pullback_total_transf`, represented Sigma reindex accumulation, and
@@ -703,11 +705,12 @@ beta is claimed. The former transparent represented-Sigma/opposite graph is
 kept as protected derivation evidence.
 
 `ReadablePseudoFunctorProfile` already exists as an abstract coherent
-capability indexed by an ambient carrier. It exposes invertible unit and
-post/pre compositor observations but neither constructs the graph carrier nor
-turns off global strict cuts. Consequently it is relevant existing
-infrastructure, not a missing prerequisite and not by itself the graph
-implementation.
+capability indexed by an ambient carrier. Its fixed-forward
+`OmegaEquivAlong` field constrains the existing readable compositor, but it
+neither constructs the graph carrier nor turns off global strict cuts. Its
+endpoint reframe compensates for that temporary strict prototype and is not a
+noncollapse theorem. Consequently it is relevant existing infrastructure, not
+a missing prerequisite and not by itself the graph implementation.
 
 The strict decoder remains a separate sorted concern. Its stable
 `strict_functor_carrier` head is needed for the selected compositor-to-identity

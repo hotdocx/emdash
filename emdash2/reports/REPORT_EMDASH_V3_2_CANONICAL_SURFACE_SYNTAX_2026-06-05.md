@@ -1677,7 +1677,11 @@ strict-functor identity cut. Preserve the graph beta and record the warning;
 the global cut is the temporary approximation that must later migrate to its
 strict profile. `ReadablePseudoFunctorProfile` already names coherent evidence
 over an existing carrier but does not install or suppress runtime carrier
-rules. The selected strict graph code keeps a stable `strict_functor_carrier`;
+rules. Its fixed-forward field is
+`OmegaEquivAlong(readable_pseudo_post_cell(F,g,f))`; the readable endpoint
+ladder compensates for the temporary global strict cut and must not be printed
+as a noncollapse theorem. The selected strict graph code keeps a stable
+`strict_functor_carrier`;
 its carrier computes directly to `gray_transf_graph_func`. The narrow
 graph-head strictness rule reduces the existing extracted compositor rather
 than declaring another one; the strict endpoint profile also reduces the
@@ -2172,8 +2176,10 @@ This is expository notation for `cubical_edge` and the nested-Sigma
 `CubicalArrow_func(F,P)` requires the selected readable pseudo profile `P`.
 Do not omit that qualification when the distinction between an arbitrary lax
 carrier and a liftable coherent carrier matters. The profile supplies
-fixed-forward inverse evidence for the readable reframe of the existing
-`fapp1_compositor`; it does not own a second compositor.
+fixed-forward `OmegaEquivAlong` for the readable reframe of the existing
+`fapp1_compositor`; its selected inverse supplies the reverse square-boundary
+adjustment, and it does not own a second compositor. The reframe compensates
+for the documented temporary global strict cut.
 
 Category identity and composition remain at the generic nested-Sigma owners.
 The readable `cubical_square_id` and `cubical_square_comp` terms may illustrate

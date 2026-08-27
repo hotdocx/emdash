@@ -3953,11 +3953,25 @@ with the temporary global strict approximation is diagnostic, whereas subject
 reduction failure or an unrelated unclassified overlap remains a blocker.
 
 The repository already has `ReadablePseudoFunctorProfile(F)`, an abstract
-coherent capability over an existing ambient carrier, with invertible unitor
-and post/pre compositor observations. It must not be described as missing. It
-does not itself construct a carrier or disable the global strict cuts, and its
-pseudo/invertible boundary may be stronger than an eventual arbitrary lax-map
-classifier.
+coherent capability over an existing ambient carrier. Its active mathematical
+field is fixed-forward
+`OmegaEquivAlong(readable_pseudo_post_cell(F,g,f))`: the forward compositor is
+the cell already extracted from internal action, while native selected inverse
+arrows and equality-valued cancellation provide the pseudo structure. The
+pre/right reverse adjustment is derived from a selected inverse plus the
+existing post/pre presentation reframe. Identity/composition and cubical
+structural closure remain explicitly supplied pending extracted unit/composite
+coherence.
+
+The readable source ladder currently passes through the historical global
+strict-composition path in order to recover the surface spelling
+`F[g] o F[f]` after the prototype cut has selected `F[g o f]`. This is a
+documented presentation adapter, not the construction of the intrinsic cell
+and not a claim that generic lax endpoints remain noncollapsed. The eventual
+profile-local strict-cut migration must replace it by direct left/right
+internal-action observations. Until then the implementation validates the
+cell's provenance, selected omega-equivalence evidence, cubical use, and
+iterable higher action under the explicit prototype boundary.
 
 The selected strict-code closure now follows the same computational decoder
 pattern as strict join codes:

@@ -470,14 +470,17 @@ unifier;
 the readable pseudofunctor-profile extension is
 `emdash3_2_readable_pseudofunctors.lp`; it indexes a coherent capability by
 an existing ambient functor. Transparent endpoint paths reframe the existing
-`fapp1_compositor` to one readable post cell; fixed-forward `IsoCellEvidence`
-supplies only its inverse/cancellations, and the pre/right inverse is derived
-from that same evidence plus the existing post/pre reframe. Identity and
-composition profiles remain explicitly supplied capabilities pending extracted
-unit/composite coherence. `readable_pseudo_profile_intro` constructs arbitrary
-profiles from an explicit dependent evidence family. It adds no parallel
-compositor, proof-time unifier, or cubical operation; its only rule is the
-record-style profile projection beta;
+`fapp1_compositor` to one readable post cell; fixed-forward
+`OmegaEquivAlong` supplies native equality-valued inverse/cancellation data,
+and the pre/right reverse adjustment is derived from its selected left inverse
+plus the existing post/pre reframe. The source endpoint ladder is explicitly a
+prototype adapter for the historical global strict-composition cut: it does
+not construct the intrinsic cell or claim noncollapsed lax endpoints. Identity
+and composition profiles remain explicitly supplied capabilities pending
+extracted unit/composite coherence. `readable_pseudo_profile_intro` constructs
+arbitrary profiles from an explicit dependent evidence family. It adds no
+parallel compositor, proof-time unifier, or cubical operation; its only rule
+is the record-style profile projection beta;
 the intrinsic cubical-arrow functor extension is
 `emdash3_2_cubical_arrow_functor.lp`; a profiled carrier maps a square by
 the existing readable compositor forward, generic next-hom action on the
@@ -1424,8 +1427,10 @@ Use the following order:
 127. `emdash3_2_readable_pseudofunctors.lp` for the abstract coherent
     pseudofunctor capability indexed by an ambient carrier. It reframes the
     existing internal-action compositor to one readable cell and supplies
-    fixed-forward inverse/cancellation evidence for that cell; the pre/right
-    inverse is derived, not independently supplied. Selected
+    fixed-forward `OmegaEquivAlong` for that cell; the pre/right reverse
+    adjustment is derived from a selected native inverse, not independently
+    supplied. The endpoint reframe compensates for the documented temporary
+    global strict cut and is not a noncollapse theorem. Selected
     identity/composition closure remains explicitly supplied, while the
     general profile constructor and projection beta are computational, with no
     rule or unifier beyond that record-style beta;
@@ -1604,10 +1609,14 @@ with warnings enabled before rejecting the proposed rule.
   globally strict approximation. Conversely, this exception is not permission
   to ignore unrelated subject-reduction failures or unclassified overlaps.
 - `ReadablePseudoFunctorProfile` already provides an abstract coherent
-  capability—with invertible unit and post/pre compositor views—indexed by an
-  existing ambient `Functor`. Do not claim that no pseudofunctor profile
-  exists. It is evidence over an already-formed carrier, not a separate carrier
-  classifier and not a mechanism for disabling the global strict cuts.
+  capability—with fixed-forward `OmegaEquivAlong` for the existing readable
+  compositor—indexed by an existing ambient `Functor`. Do not claim that no
+  pseudofunctor profile exists. Its current endpoint reframe is a documented
+  adapter for the historical global strict cuts, not a proof that lax
+  endpoints remain noncollapsed. It is evidence over an already-formed
+  carrier, not a separate carrier classifier and not a mechanism for disabling
+  those cuts. Identity/composition and cubical structural closure remain
+  explicitly supplied pending extracted unit/composite coherence.
 - Use rewrites only for intended runtime normal forms. Use narrowly typed
   `unif_rule`s for proof-time comparison when neither side should compute to
   the other.

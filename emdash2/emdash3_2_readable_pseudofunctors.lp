@@ -4,12 +4,13 @@
   The active generic functor/transfor calculus exposes normal-lax compositor
   cells at formal internal-action endpoints. Consumers such as intrinsic
   cubical arrows require an invertible readable view of the existing
-  compositor; its inverse supplies the opposite boundary direction.
+  compositor; its selected omega-equivalence inverse supplies the opposite
+  boundary direction.
 
   ReadablePseudoFunctorProfile is an abstract coherent capability indexed by
   its already-existing Functor carrier. It does not supply another compositor:
-  fixed-forward `IsoCellEvidence` gives an inverse and cancellation paths for
-  the existing post cell extracted from internal action. Higher coherence
+  fixed-forward `OmegaEquivAlong` gives native equality-valued inverse data
+  for the existing post cell extracted from internal action. Higher coherence
   remains the next internal action. The only rewrite is the explicit profile
   constructor's field-projection beta; no proof-time unifier is added.
 
@@ -28,54 +29,6 @@ injective symbol ReadablePseudoFunctorProfile
   [A B : Cat]
   (F : τ (Functor A B))
   : Grpd;
-
-// Invertibility evidence for one already-selected arrow. The forward cell is
-// an input, never an independently supplied profile field.
-symbol IsoCellEvidence
-  [C : Cat]
-  [x y : τ (Obj C)]
-  (cell : τ (Hom C x y))
-  : Grpd
-≔ `Σ_ inverse : τ (Hom C y x),
-   `Σ_ _ : τ (
-      @comp_fapp0 C x y x inverse cell
-        =
-      @id C x),
-      @comp_fapp0 C y x y cell inverse
-        =
-      @id C y;
-
-symbol iso_cell_inverse
-  [C : Cat]
-  [x y : τ (Obj C)]
-  [cell : τ (Hom C x y)]
-  (evidence : τ (@IsoCellEvidence C x y cell))
-  : τ (Hom C y x)
-≔ sigma_Fst evidence;
-
-symbol iso_cell_left
-  [C : Cat]
-  [x y : τ (Obj C)]
-  [cell : τ (Hom C x y)]
-  (evidence : τ (@IsoCellEvidence C x y cell))
-  : τ (
-      @comp_fapp0 C x y x
-        (@iso_cell_inverse C x y cell evidence) cell
-        =
-      @id C x)
-≔ sigma_Fst (sigma_Snd evidence);
-
-symbol iso_cell_right
-  [C : Cat]
-  [x y : τ (Obj C)]
-  [cell : τ (Hom C x y)]
-  (evidence : τ (@IsoCellEvidence C x y cell))
-  : τ (
-      @comp_fapp0 C y x y
-        cell (@iso_cell_inverse C x y cell evidence)
-        =
-      @id C y)
-≔ sigma_Snd (sigma_Snd evidence);
 
 symbol readable_pseudo_post_raw_source
   [A B : Cat]
@@ -110,6 +63,19 @@ symbol readable_pseudo_post_stable_action
   : τ (Obj (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z)))
 ≔ @fapp1_fapp0 A B F X Z
     (@hom_postcomp_fapp0 A A (@id_func A) X Y Z g f);
+
+/*
+  Prototype endpoint adapter.
+
+  The historical global strict-functoriality cut selects the stable action
+  `F[g o f]` before the formal left endpoint can expose `F[g] o F[f]`.
+  The path ladder below therefore returns through the typed equality view of
+  that temporary cut and then the stable postcomposition owner. It reframes an
+  already-extracted cell; it neither constructs the compositor nor claims that
+  generic lax endpoints remain noncollapsed. A later profile-local strict-cut
+  migration must replace this ladder by direct left/right internal-action
+  observations.
+*/
 
 symbol readable_pseudo_post_formal_source_path
   [A B : Cat]
@@ -373,8 +339,9 @@ protected symbol readable_pseudo_post_pre_reframe
     (@readable_pseudo_pre_raw_source A B F X Y Z g f)
     (@readable_pseudo_post_pre_source_path A B F X Y Z g f);
 
-// Explicit profile constructor. The sole mathematical field is invertibility
-// of the one readable cell derived from the intrinsic compositor.
+// Explicit profile constructor. The sole mathematical field is native
+// fixed-arrow omega-equivalence of the one readable cell derived from the
+// intrinsic compositor.
 injective symbol readable_pseudo_profile_intro
   [A B : Cat]
   [F : τ (Functor A B)]
@@ -384,7 +351,7 @@ injective symbol readable_pseudo_profile_intro
     Π Z : τ (Obj A),
     Π g : τ (Hom A Y Z),
     Π f : τ (Hom A X Y),
-      τ (@IsoCellEvidence
+      τ (@OmegaEquivAlong
         (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
         _ _
         (@readable_pseudo_post_cell A B F X Y Z g f)))
@@ -400,7 +367,7 @@ injective symbol readable_pseudo_post_evidence
   [X Y Z : τ (Obj A)]
   (g : τ (Hom A Y Z))
   (f : τ (Hom A X Y))
-  : τ (@IsoCellEvidence
+  : τ (@OmegaEquivAlong
       (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
       _ _
       (@readable_pseudo_post_cell A B F X Y Z g f));
@@ -411,8 +378,10 @@ rule @readable_pseudo_post_evidence
       $X $Y $Z $g $f
   ↪ $evidence $X $Y $Z $g $f;
 
-// Pre/right inverse is derived from the inverse of the one fixed-forward post
-// cell, followed by the existing post/pre endpoint reframe.
+// Pre/right reverse adjustment uses the selected left inverse of the one
+// fixed-forward post cell, followed by the existing post/pre endpoint reframe.
+// The `OmegaEquivAlong` right inverse and both cancellation laws remain
+// available to later coherence consumers.
 symbol readable_pseudo_pre_inverse
   [A B : Cat]
   [F : τ (Functor A B)]
@@ -430,7 +399,7 @@ symbol readable_pseudo_pre_inverse
     (@readable_pseudo_post_raw_source A B F X Y Z g f)
     (@readable_pseudo_pre_raw_source A B F X Y Z g f)
     (@readable_pseudo_post_pre_reframe A B F X Y Z g f)
-    (@iso_cell_inverse
+    (@omega_equiv_along_left_inv
       (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
       _ _
       (@readable_pseudo_post_cell A B F X Y Z g f)

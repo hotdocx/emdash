@@ -1036,17 +1036,20 @@ claim mathematical impossibility. See the retirement plan under Audits And
 Retirements and the living mixed-introduction ledger for the supersession
 record.
 
-## Recently Completed Plan Ledgers
+## Recent And Corrective Plan Ledgers
 
 - `REPORT_EMDASH_V3_2_INTRINSIC_FUNCTOR_PROFILES_AND_GRAY_GRAPH_REDESIGN_PLAN_2026-08-26.md`:
-  completed corrective continuation of cubical Gray adequacy. The strict graph
+  active fixed-forward-equivalence correction following the completed cubical
+  Gray adequacy redesign. The strict graph
   code now decodes computationally to the public graph; its existing identity
   filler and binary compositor compute at their internal-action owners, while
   the former opaque carrier path and `eq_ap`/`eq_apd` observers are retired.
   Pseudofunctor profiles now constrain one readable reframe of the intrinsic
-  compositor through fixed-forward inverse evidence; the pre/right inverse is
-  derived from the same evidence, and cubical lifting plus recursive face
-  action retain whole higher action. An explicit profile constructor supports
+  compositor through fixed-forward `OmegaEquivAlong`; the pre/right reverse
+  adjustment is derived from a selected native inverse, and cubical lifting
+  plus recursive face action retain whole higher action. The endpoint reframe
+  is explicitly limited to compensating for the historical global strict cut;
+  it is not a noncollapse theorem. An explicit profile constructor supports
   future typeclass resolution. Remaining identity/composition/structural
   instances are honestly supplied pending extracted unit/composite coherence;
   `cubical_*` remains intentional transparent readability notation.

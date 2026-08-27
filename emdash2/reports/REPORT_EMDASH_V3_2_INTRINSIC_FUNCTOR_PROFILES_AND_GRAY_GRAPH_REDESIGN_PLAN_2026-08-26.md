@@ -1,10 +1,13 @@
 # Emdash v3.2 Intrinsic Functor Profiles And Gray-Graph Redesign Plan
 
-Date: 2026-08-26 (America/Toronto)
+Date: 2026-08-27 (America/Toronto)
 
 Plan-ID: `INTRINSIC-FUNCTOR-PROFILES-GRAY-GRAPH-V3.2`
 
-Status: **completed implementation plan**.
+Status: **active corrective continuation**. The 2026-08-26 graph/profile
+tranche remains historical green evidence; rows `IFPG-OMEGA-AUDIT-11`
+through `IFPG-OMEGA-CLOSE-15` correct its fixed-forward equivalence boundary
+without launching the deferred global strict/lax migration.
 
 Supersedes: no completed plan. It is a corrective continuation of
 `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`.
@@ -36,10 +39,16 @@ Infinity-Codex-Origin: session
 
 Infinity-Codex-Decision-Responses: `infinity-codex:019ffe39-2eb9-7080-88e3-06b77d69b8d1:01a03e68-460a-7230-bd89-cf70c34a00ea`.
 
+Corrective-Decision-Response:
+`infinity-codex:019ffe39-2eb9-7080-88e3-06b77d69b8d1:01a03eee-6d6f-7d83-9189-1602dd992e45`.
+
 Side-Task-Ledger: `IFPG-00`, `IFPG-AUDIT-1`, `IFPG-GRAPH-CARRIER-2`,
 `IFPG-GRAPH-STRICTNESS-3`, `IFPG-GRAPH-MIGRATE-4`,
 `IFPG-PSEUDO-EVIDENCE-5`, `IFPG-CUBICAL-MIGRATE-6`,
-`IFPG-HIERARCHY-7`, `IFPG-FACADE-8`, `IFPG-DOC-9`, and `IFPG-CLOSE-10`.
+`IFPG-HIERARCHY-7`, `IFPG-FACADE-8`, `IFPG-DOC-9`, `IFPG-CLOSE-10`,
+`IFPG-OMEGA-AUDIT-11`, `IFPG-OMEGA-EVIDENCE-12`,
+`IFPG-OMEGA-CUBICAL-13`, `IFPG-OMEGA-DOC-14`, and
+`IFPG-OMEGA-CLOSE-15`.
 
 ## 1. Objective
 
@@ -58,6 +67,10 @@ internally derived architecture:
    variable-dimensional face recursion; and
 6. establish a reusable hierarchical profile design suitable for later
    AI-native structure/typeclass resolution.
+7. replace the temporary single-inverse `IsoCellEvidence` vocabulary by the
+   active fixed-arrow `OmegaEquivAlong` owner, while retaining the existing
+   strict-prototype endpoint reframe only as an explicitly bounded
+   presentation adapter.
 
 The plan is a redesign of profile evidence, not a new category theory encoded
 beside the active functorial type theory.
@@ -265,36 +278,54 @@ Do not let the historical global strict cuts decide this semantic question.
 
 ## 7. Fixed-Forward Pseudo Evidence
 
-The replacement must fix the forward cell as an input. A suitable transparent
-shape is:
+The replacement must fix the forward cell as an input. The repository already
+owns exactly this native boundary:
 
 ```text
-IsoCellEvidence(C,x,y,c)
-  := Sigma inverse : Hom_C(y,x),
-       inverse o c = id_x
-     x c o inverse = id_y.
+OmegaEquivAlong(C,x,y,c).
 ```
 
-The actual Lambdapi spelling may use a transparent specialization of
-`IsoEvidence` plus a forward-equality field or a direct Sigma. Prefer the direct
-fixed-forward Sigma when it avoids transports and duplicate normal forms.
+It decodes to separate selected left and right inverse arrows with
+equality-valued cancellation in the two endomorphism hom-categories. This is
+the active recursive omega-equivalence vocabulary. A second single-inverse
+`IsoCellEvidence` duplicates that vocabulary and is therefore retired by the
+corrective continuation.
 
 The pseudo profile should constrain the already-extracted cells:
 
 ```text
 PseudoFunctorEvidence(F)
   := Pi X Y Z g f,
-       IsoCellEvidence(
+       OmegaEquivAlong(
          Hom_cat(B,F[X],F[Z]),
          source(F,g,f),
          target(F,g,f),
          fapp1_compositor(F,g,f)).
 ```
 
+The public field is indexed by the already-fixed forward cell; it must not use
+`OmegaEquiv`, which would package and reselect a forward arrow. If an endpoint
+path is desired, package the fixed cell and its `OmegaEquivAlong` evidence into
+`OmegaEquiv` and use the active univalence bridge as a derived observation.
+
+The current readable post cell remains a prototype presentation of that
+intrinsic cell. Its source reframe deliberately uses the historical global
+strict-functoriality path to recover the surface spelling
+`F[g] o F[f]` after that temporary cut has selected `F[g o f]`. This does not
+construct the cell: `fapp1_compositor` is already independently projected from
+the whole internal action and retains its next action. The reframe is therefore
+accepted only as a documented adapter under the existing prototype policy. It
+does **not** establish noncollapsed lax endpoint semantics, and the eventual
+profile-local strict-cut migration must replace it by direct left/right
+internal-action observations.
+
 The pre/right presentation must either constrain
 `tapp1_pre_laxity_cell(id_F,...)` directly or be derived from the post/left
 owner through a checked whole comparison. It must not be an independently
-supplied forward cell.
+supplied forward cell. For the current cubical consumer, select one reverse
+arrow from `OmegaEquivAlong` and follow it by the existing post/pre
+presentation reframe. The reverse arrow is the final pseudofunctor adjustment
+in `phi ; F_1[alpha] ; phi^-1`; it is not another compositor.
 
 An arbitrary non-normal unit profile is deferred until the corresponding
 unitor has itself been extracted from internal action. Do not retain a
@@ -401,8 +432,13 @@ This plan does not initially claim:
 | `IFPG-FACADE-8` | complete decision, recorded at `89ea513` | Retain `CubicalArrow_cat`, `cubical_edge`, and `cubical_square` as intentional domain-readable transparent aliases for now, not compatibility obligations. They own no rules or competing semantics; deleting them would be broad low-value mechanical churn and is not required by the profile redesign. |
 | `IFPG-DOC-9` | complete, closeout checkpoint `02675f4` | Synchronized Foundations, current SOP/status, canonical syntax, AGENTS, `emdash2/README`, report map, superseded cubical-plan descriptions, focused reviewers, and the generated catalog. The `cubical_*` vocabulary is explicitly readability rather than compatibility, fixed-forward evidence and supplied-instance boundaries are stated consistently, and retired graph-path/independent-compositor names have no active source consumer. |
 | `IFPG-CLOSE-10` | complete, closeout checkpoint `02675f4` | Every scoped row is implemented or precisely deferred behind a named generic prerequisite. Graph profile/decoder/dimension-two, fixed-forward profile, cubical lift, square-level and recursive face-action sources/reviewers are green under the 90-second ceiling. Exact inventories are `1311 = 1152 + 159` for the graph profile and `1308 = 1149 + 159` for readable/cubical profile consumers; strict LHS audits report zero candidates. Catalog, report headers, active references, TOC and diff hygiene are green. Long registered-source, examples, health and repository aggregates remain intentionally omitted because unchanged boundaries and focused evidence suffice. |
+| `IFPG-OMEGA-AUDIT-11` | complete design correction | Re-audited the fixed-forward field and endpoint ladder. `IsoCellEvidence` is a duplicate single-inverse vocabulary; `OmegaEquivAlong` is the active native fixed-arrow owner. A focused no-adapter diagnostic confirms that the historical whole strict cut normalizes the formal source to `F[hom_postcomp(id,g,f)]`, so the existing `fapp1_comp_path` rung is retained only as an explicit prototype presentation adapter. It does not construct the independently extracted cell and does not claim noncollapsed lax endpoints. The large global strict/lax migration remains out of scope. |
+| `IFPG-OMEGA-EVIDENCE-12` | complete, checkpoint pending | Removed the duplicate transparent `IsoCellEvidence` Sigma and all three projections. `readable_pseudo_profile_intro` and its computing field projection now use `OmegaEquivAlong` over the exact existing `readable_pseudo_post_cell`, adding no cell, rule, unifier, or facade. The explicit-constructor reviewer computes to the supplied native evidence family. |
+| `IFPG-OMEGA-CUBICAL-13` | complete, checkpoint pending | `readable_pseudo_pre_inverse` now selects `omega_equiv_along_left_inv` and follows it by the existing post/pre presentation reframe. The intrinsic square map remains exactly `phi(b,u) ; F_1[alpha] ; phi(v,a)^-1`; edge/square computation, next action, square level, and variable-dimensional `{L,R,*}` recursion are green. The five identity/composition/source/target/lifted profile constants remain explicitly supplied. |
+| `IFPG-OMEGA-DOC-14` | complete, checkpoint pending | Synchronized the active plan, AGENTS, Foundations, status/SOP, canonical syntax, README/report map, predecessor cubical/Gray ledgers, graph comments, and focused reviewer. Every active claim now names fixed-forward `OmegaEquivAlong`; the endpoint ladder is consistently documented as a temporary strict-prototype adapter validating cell provenance/iteration rather than noncollapsed lax endpoints. Historical ledger mentions of the retired name remain only as dated evidence. |
+| `IFPG-OMEGA-CLOSE-15` | complete pending exact checkpoint | Focused profile/cubical sources and reviewers, square level and recursive face action are green under the 90-second ceiling. Warning inventories remain exactly `1308 = 1149 critical + 159 replaceable`; strict LHS audits report zero candidates. Catalog, source TOC and diff hygiene are green. No active source/reviewer retains `IsoCellEvidence`; only its explicit historical/retirement mentions remain. Long registered-source, examples, health and repository aggregates were intentionally omitted because no changed boundary requires them. |
 
-### 12.1 Completion Verdict
+### 12.1 Historical 2026-08-26 Completion Verdict
 
 The redesign satisfies the governing invariant. The strict graph code decodes
 computationally to the public graph; its existing identity filler and binary
@@ -418,6 +454,13 @@ and next-action composite-profile coherence. The readable
 `lax_square(id,id,id)` versus canonical nested-Sigma identity comparison is a
 generic derived-total path and is not made a graph-specific axiom. These are
 precise future prerequisites, not missing requirements of this bounded plan.
+
+The corrective continuation does not invalidate that graph/cubical execution
+evidence. It narrows the semantic claim: the endpoint reframe is a temporary
+strict-prototype adapter, and the native pseudo field is
+`OmegaEquivAlong(readable_pseudo_post_cell)`. Rows 11--15 supersede the
+single-inverse vocabulary and the earlier unqualified phrase "semantic
+migration complete."
 
 Checkpoint chain:
 
@@ -455,21 +498,25 @@ or remove worktrees without separate explicit authorization.
 
 ## 15. Persistent-Goal Launch Prompt
 
-> Continue the emdash v3.2 intrinsic functor-profile and Gray-graph redesign in
+> Continue the emdash v3.2 intrinsic functor-profile corrective continuation in
 > `/home/user1/emdash1-gray-cube-adequacy-v1` on branch
 > `goal/gray-cube-adequacy-v3.2`, delegating exact design, sequencing,
 > acceptance, exclusions, proportional validation, documentation and Git
 > discipline to
 > `emdash2/reports/REPORT_EMDASH_V3_2_INTRINSIC_FUNCTOR_PROFILES_AND_GRAY_GRAPH_REDESIGN_PLAN_2026-08-26.md`
-> and its authority chain. Begin at `c4df575`. Profiles must never invent
+> and its authority chain. Resume from the validated 2026-08-26 closeout at
+> `7454a65`. Profiles must never invent
 > coherence cells: they may only classify, constrain, invert or make
-> judgmental the cells already extracted from the internal-action tower. Probe
-> the whole strict graph carrier rule first, then decide from the existing
-> graph unit/compositor whether the graph is genuinely strict or the recursive
-> decoder needs a coherent-map profile. Replace the old pseudo capability's
-> independent forward arrows by fixed-forward evidence, and preserve whole
-> higher action throughout cubical migration. Keep every Lambdapi command
-> within 90 seconds and avoid long aggregates unless omission blocks
+> judgmental the cells already extracted from the internal-action tower.
+> Execute rows `IFPG-OMEGA-EVIDENCE-12` through `IFPG-OMEGA-CLOSE-15`: replace
+> the duplicate `IsoCellEvidence` field by fixed-forward `OmegaEquivAlong`,
+> derive the reverse cubical adjustment from its selected inverse, preserve
+> whole higher action, and synchronize every affected authority. Retain the
+> current endpoint path ladder only as a documented adapter for the temporary
+> global strict-functoriality prototype; do not claim noncollapsed lax endpoint
+> semantics and do not launch the large global strict/lax migration in this
+> tranche. Keep the five closure profiles explicitly supplied. Keep every
+> Lambdapi command within 90 seconds and avoid long aggregates unless omission blocks
 > classification. Local checkpoint commits are authorized after bounded green
 > tranches and ledger synchronization. Do not push, merge, publish, tag, create
 > a PR, rewrite history, delete branches or remove worktrees. Complete only
