@@ -19,7 +19,7 @@ assert [C : Cat] ⊢
   @cube_face_action_func C zero (succ zero) cube_action_right_0_1
   ≡ @cubical_tgt_func C;
 
-// Star lifts the older action through CubicalArrow with its retained profile.
+// Star lifts the older action through CubicalArrow with its retained property.
 assert [C : Cat] ⊢
   @cube_face_action_func
     C (succ zero) (succ zero)
@@ -27,11 +27,11 @@ assert [C : Cat] ⊢
   ≡ @CubicalArrow_func
       C C
       (@id_func C)
-      (@readable_pseudo_identity_profile C);
+      (@identity_is_pseudo C);
 
-// The two inner edge faces are recursively lifted L/R actions. Their profiles
-// retain the recursive construction rather than being silently replaced by
-// the independently selected square-face profiles.
+// The two inner edge faces are recursively lifted L/R actions. Their property
+// proofs retain the recursive construction rather than being silently
+// replaced by independently selected square-face proofs.
 symbol cube_action_inner_left_1_2
   : τ (@CubeFaceCode
       (succ zero)
@@ -55,7 +55,7 @@ assert [C : Cat] ⊢
   ≡ @CubicalArrow_func
       (@CubicalArrow_cat C) C
       (@cube_face_action_func C zero (succ zero) cube_action_left_0_1)
-      (@cube_face_action_profile C zero (succ zero) cube_action_left_0_1);
+      (@cube_face_action_is_pseudo C zero (succ zero) cube_action_left_0_1);
 
 assert [C : Cat] ⊢
   @cube_face_action_func
@@ -64,7 +64,7 @@ assert [C : Cat] ⊢
   ≡ @CubicalArrow_func
       (@CubicalArrow_cat C) C
       (@cube_face_action_func C zero (succ zero) cube_action_right_0_1)
-      (@cube_face_action_profile C zero (succ zero) cube_action_right_0_1);
+      (@cube_face_action_is_pseudo C zero (succ zero) cube_action_right_0_1);
 
 /*
   An outer face retains action(*) before source/target. It is not collapsed to
@@ -89,15 +89,15 @@ assert [C : Cat] ⊢
       (@CubicalArrow_func
         C C
         (@id_func C)
-        (@readable_pseudo_identity_profile C))
+        (@identity_is_pseudo C))
       (@cubical_src_func (@CubicalArrow_cat C));
 
-// Every action retains a profile for another star step.
+// Every action retains the property for another star step.
 assert [C : Cat]
   (p n : τ Nat_grpd)
   (f : τ (@CubeFaceCode p n)) ⊢
-  @cube_face_action_profile C p n f
-  : τ (@ReadablePseudoFunctorProfile
+  @cube_face_action_is_pseudo C p n f
+  : τ (@IsPseudoFunctor
       (@CubicalLevel_cat C n)
       (@CubicalLevel_cat C p)
       (@cube_face_action_func C p n f));

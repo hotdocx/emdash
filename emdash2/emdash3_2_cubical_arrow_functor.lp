@@ -1,7 +1,7 @@
 /*
   Emdash v3.2: functorial lifting of intrinsic cubical arrows.
 
-  A readable pseudofunctor profile supplies fixed-forward invertibility for
+  The pseudo-functor property supplies fixed-forward invertibility for
   the existing post/left compositor. The image of a square filler is:
 
     existing readable post cell
@@ -46,7 +46,7 @@ symbol cubical_arrow_map_raw_cell
 symbol cubical_arrow_map_cell
   [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   [x1 y1 x2 y2 : τ (Obj C)]
   (u : τ (Hom C x1 x2))
   (v : τ (Hom C y1 y2))
@@ -83,7 +83,7 @@ symbol cubical_arrow_map_cell
       (@fapp0 C D F y1)
       (@fapp1_fapp0 C D F x1 y1 a)
       (@fapp1_fapp0 C D F y1 y2 v))
-    (@readable_pseudo_pre_inverse
+    (@pseudo_pre_inverse
       C D F P x1 y1 y2 v a)
     (@comp_fapp0
       (Hom_cat D (@fapp0 C D F x1) (@fapp0 C D F y2))
@@ -105,7 +105,7 @@ symbol cubical_arrow_map_cell
 injective symbol CubicalArrow_func
   [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   : τ (Functor (@CubicalArrow_cat C) (@CubicalArrow_cat D));
 
 rule @fapp0 _ _ (@CubicalArrow_func $C $D $F _)
@@ -119,7 +119,7 @@ rule @fapp0 _ _ (@CubicalArrow_func $C $D $F _)
 symbol cubical_arrow_map_square
   [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   [x1 y1 x2 y2 : τ (Obj C)]
   (u : τ (Hom C x1 x2))
   (v : τ (Hom C y1 y2))
@@ -159,24 +159,24 @@ rule @fapp1_fapp0
   ↪ @cubical_arrow_map_square
       $C $D $F $P $x1 $y1 $x2 $y2 $u $v $a $b $alpha;
 
-// Supplied source, target, and lifted instances retain selected readable pseudo
-// profiles, enabling recursive face-code lifting. Their transparent
+// Supplied source, target, and lifted proofs retain the pseudo property,
+// enabling recursive face-code lifting. Their transparent
 // construction is gated by the corresponding unit/composite coherence layer.
-constant symbol cubical_src_pseudo_profile
+constant symbol cubical_src_is_pseudo
   (C : Cat)
-  : τ (@ReadablePseudoFunctorProfile
+  : τ (@IsPseudoFunctor
       (@CubicalArrow_cat C) C (@cubical_src_func C));
 
-constant symbol cubical_tgt_pseudo_profile
+constant symbol cubical_tgt_is_pseudo
   (C : Cat)
-  : τ (@ReadablePseudoFunctorProfile
+  : τ (@IsPseudoFunctor
       (@CubicalArrow_cat C) C (@cubical_tgt_func C));
 
-constant symbol cubical_arrow_pseudo_profile
+constant symbol cubical_arrow_is_pseudo
   [C D : Cat]
   [F : τ (Functor C D)]
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
-  : τ (@ReadablePseudoFunctorProfile
+  (P : τ (@IsPseudoFunctor C D F))
+  : τ (@IsPseudoFunctor
       (@CubicalArrow_cat C)
       (@CubicalArrow_cat D)
       (@CubicalArrow_func C D F P));

@@ -180,7 +180,7 @@ symbol cube_face_action_keep_path
         (@CubicalLevel_cat C n)
         (@CubicalLevel_cat C p)
         (@cube_face_action_func C p n f)
-        (@cube_face_action_profile C p n f)))
+        (@cube_face_action_is_pseudo C p n f)))
 ≔ @eq_ap
     (@RawCubeFaceCode (succ p) (succ n))
     (Hom Cat_cat
@@ -490,7 +490,7 @@ symbol cube_keep_face_action_path
         (@CubicalLevel_cat C n)
         (@CubicalLevel_cat C p)
         (@cube_face_action_func C p n f)
-        (@cube_face_action_profile C p n f)))
+        (@cube_face_action_is_pseudo C p n f)))
 ≔ @cube_face_action_keep_path C p n f;
 
 // Evaluating the new L comparison recovers the ordinary source endpoint of
@@ -616,7 +616,7 @@ symbol cube_keep_face_at_path
       (@CubicalLevel_cat C n)
       (@CubicalLevel_cat C p)
       (@cube_face_action_func C p n f)
-      (@cube_face_action_profile C p n f))
+      (@cube_face_action_is_pseudo C p n f))
     (@cube_keep_face_action_path C p n f);
 
 assert ⊢ @CubeImmediateFaceCount zero ≡ zero;
@@ -648,4 +648,4 @@ assert [C : Cat]
         (@CubicalLevel_cat C n)
         (@CubicalLevel_cat C p)
         (@cube_face_action_func C p n f)
-        (@cube_face_action_profile C p n f)));
+        (@cube_face_action_is_pseudo C p n f)));

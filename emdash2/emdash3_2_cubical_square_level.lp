@@ -7,7 +7,7 @@
   source/target. An arrow between two square objects therefore has two
   endpoint square faces plus four side-square actions.
 
-  Every face retains a readable pseudo profile for subsequent iteration.
+  Every face retains the pseudo-functor property for subsequent iteration.
   This module adds no rule, face equation, Gray comparison, or code syntax.
 */
 
@@ -35,7 +35,7 @@ symbol cubical_square_inner_src_func
 ≔ @CubicalArrow_func
     (@CubicalArrow_cat C) C
     (@cubical_src_func C)
-    (@cubical_src_pseudo_profile C);
+    (@cubical_src_is_pseudo C);
 
 symbol cubical_square_inner_tgt_func
   (C : Cat)
@@ -43,7 +43,7 @@ symbol cubical_square_inner_tgt_func
 ≔ @CubicalArrow_func
     (@CubicalArrow_cat C) C
     (@cubical_tgt_func C)
-    (@cubical_tgt_pseudo_profile C);
+    (@cubical_tgt_is_pseudo C);
 
 // A constructor-visible square is an arrow object in CubicalArrow(C).
 symbol cubical_square_object
@@ -127,37 +127,37 @@ symbol cubical_cube_inner_tgt
     (@CubicalSquare_cat C) (@CubicalArrow_cat C)
     (@cubical_square_inner_tgt_func C) S T theta;
 
-// Profiles for all four face functors survive to the next recursive level.
-symbol cubical_square_outer_src_profile
+// Pseudo properties for all four face functors survive to the next level.
+symbol cubical_square_outer_src_is_pseudo
   (C : Cat)
-  : τ (@ReadablePseudoFunctorProfile
+  : τ (@IsPseudoFunctor
       (@CubicalSquare_cat C) (@CubicalArrow_cat C)
       (@cubical_square_outer_src_func C))
-≔ @cubical_src_pseudo_profile (@CubicalArrow_cat C);
+≔ @cubical_src_is_pseudo (@CubicalArrow_cat C);
 
-symbol cubical_square_outer_tgt_profile
+symbol cubical_square_outer_tgt_is_pseudo
   (C : Cat)
-  : τ (@ReadablePseudoFunctorProfile
+  : τ (@IsPseudoFunctor
       (@CubicalSquare_cat C) (@CubicalArrow_cat C)
       (@cubical_square_outer_tgt_func C))
-≔ @cubical_tgt_pseudo_profile (@CubicalArrow_cat C);
+≔ @cubical_tgt_is_pseudo (@CubicalArrow_cat C);
 
-symbol cubical_square_inner_src_profile
+symbol cubical_square_inner_src_is_pseudo
   (C : Cat)
-  : τ (@ReadablePseudoFunctorProfile
+  : τ (@IsPseudoFunctor
       (@CubicalSquare_cat C) (@CubicalArrow_cat C)
       (@cubical_square_inner_src_func C))
-≔ @cubical_arrow_pseudo_profile
+≔ @cubical_arrow_is_pseudo
     (@CubicalArrow_cat C) C
     (@cubical_src_func C)
-    (@cubical_src_pseudo_profile C);
+    (@cubical_src_is_pseudo C);
 
-symbol cubical_square_inner_tgt_profile
+symbol cubical_square_inner_tgt_is_pseudo
   (C : Cat)
-  : τ (@ReadablePseudoFunctorProfile
+  : τ (@IsPseudoFunctor
       (@CubicalSquare_cat C) (@CubicalArrow_cat C)
       (@cubical_square_inner_tgt_func C))
-≔ @cubical_arrow_pseudo_profile
+≔ @cubical_arrow_is_pseudo
     (@CubicalArrow_cat C) C
     (@cubical_tgt_func C)
-    (@cubical_tgt_pseudo_profile C);
+    (@cubical_tgt_is_pseudo C);

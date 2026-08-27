@@ -1,10 +1,10 @@
 /*
-  Reviewer example: readable pseudo profiles and whole CubicalArrow lifting.
+  Reviewer example: pseudo-functor property and whole CubicalArrow lifting.
 */
 
 require open emdash.emdash3_2_cubical_arrow_functor;
 
-// Explicit profile construction projects the supplied fixed-forward evidence.
+// The property is the supplied fixed-forward evidence family itself.
 assert [C D : Cat]
   [F : τ (Functor C D)]
   (evidence :
@@ -20,20 +20,20 @@ assert [C D : Cat]
   [x y z : τ (Obj C)]
   (g : τ (Hom C y z))
   (f : τ (Hom C x y)) ⊢
-  @readable_pseudo_post_evidence
-    C D F (@readable_pseudo_profile_intro C D F evidence)
+  @pseudo_compositor_equiv
+    C D F evidence
     x y z g f
   ≡ evidence x y z g f;
 
-// The pseudo profile constrains the existing readable compositor; it does not
+// The pseudo property constrains the existing readable compositor; it does not
 // supply an independent forward cell.
 assert [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   [x y z : τ (Obj C)]
   (g : τ (Hom C y z))
   (f : τ (Hom C x y)) ⊢
-  @readable_pseudo_post_evidence C D F P x y z g f
+  @pseudo_compositor_equiv C D F P x y z g f
   : τ (@OmegaEquivAlong
       (Hom_cat D (@fapp0 C D F x) (@fapp0 C D F z))
       _ _
@@ -43,11 +43,11 @@ assert [C D : Cat]
 // omega-equivalence inverse plus the existing post/pre endpoint reframe.
 assert [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   [x y z : τ (Obj C)]
   (g : τ (Hom C y z))
   (f : τ (Hom C x y)) ⊢
-  @readable_pseudo_pre_inverse C D F P x y z g f
+  @pseudo_pre_inverse C D F P x y z g f
   : τ (Hom
       (Hom_cat D (@fapp0 C D F x) (@fapp0 C D F z))
       (@readable_pseudo_post_raw_target C D F x y z g f)
@@ -56,7 +56,7 @@ assert [C D : Cat]
 // The mapped filler has the required composite-side square boundary.
 assert [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   [x1 y1 x2 y2 : τ (Obj C)]
   (u : τ (Hom C x1 x2))
   (v : τ (Hom C y1 y2))
@@ -80,7 +80,7 @@ assert [C D : Cat]
 // Edge and square actions compute through the same whole lifted functor.
 assert [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   (x y : τ (Obj C))
   (u : τ (Hom C x y)) ⊢
   @fapp0
@@ -95,7 +95,7 @@ assert [C D : Cat]
 
 assert [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   [x1 y1 x2 y2 : τ (Obj C)]
   (u : τ (Hom C x1 x2))
   (v : τ (Hom C y1 y2))
@@ -116,7 +116,7 @@ assert [C D : Cat]
 // side arrows, as required for recursive face action.
 assert [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   [x1 y1 x2 y2 : τ (Obj C)]
   (u : τ (Hom C x1 x2))
   (v : τ (Hom C y1 y2))
@@ -141,7 +141,7 @@ assert [C D : Cat]
 
 assert [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   [x1 y1 x2 y2 : τ (Obj C)]
   (u : τ (Hom C x1 x2))
   (v : τ (Hom C y1 y2))
@@ -167,7 +167,7 @@ assert [C D : Cat]
 // The lift remains whole and iterable at the next hom.
 assert [C D : Cat]
   (F : τ (Functor C D))
-  (P : τ (@ReadablePseudoFunctorProfile C D F))
+  (P : τ (@IsPseudoFunctor C D F))
   (U V : τ (Obj (@CubicalArrow_cat C))) ⊢
   @fapp1_func
     (@CubicalArrow_cat C) (@CubicalArrow_cat D)
@@ -183,22 +183,22 @@ assert [C D : Cat]
           (@CubicalArrow_cat C) (@CubicalArrow_cat D)
           (@CubicalArrow_func C D F P) V)));
 
-// Profiles required by recursive left/right/star face action are available.
+// Properties required by recursive left/right/star face action are available.
 assert [C : Cat] ⊢
-  @cubical_src_pseudo_profile C
-  : τ (@ReadablePseudoFunctorProfile
+  @cubical_src_is_pseudo C
+  : τ (@IsPseudoFunctor
       (@CubicalArrow_cat C) C (@cubical_src_func C));
 
 assert [C : Cat] ⊢
-  @cubical_tgt_pseudo_profile C
-  : τ (@ReadablePseudoFunctorProfile
+  @cubical_tgt_is_pseudo C
+  : τ (@IsPseudoFunctor
       (@CubicalArrow_cat C) C (@cubical_tgt_func C));
 
 assert [C D : Cat]
   [F : τ (Functor C D)]
-  (P : τ (@ReadablePseudoFunctorProfile C D F)) ⊢
-  @cubical_arrow_pseudo_profile C D F P
-  : τ (@ReadablePseudoFunctorProfile
+  (P : τ (@IsPseudoFunctor C D F)) ⊢
+  @cubical_arrow_is_pseudo C D F P
+  : τ (@IsPseudoFunctor
       (@CubicalArrow_cat C)
       (@CubicalArrow_cat D)
       (@CubicalArrow_func C D F P));

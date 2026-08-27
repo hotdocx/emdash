@@ -82,15 +82,15 @@ assertnot [C : Cat] ⊢
   @cubical_square_outer_src_func C
   ≡ @cubical_square_inner_src_func C;
 
-// All face functors retain pseudo profiles for another CubicalArrow lift.
+// All face functors retain pseudo properties for another CubicalArrow lift.
 assert [C : Cat] ⊢
-  @cubical_square_outer_src_profile C
-  : τ (@ReadablePseudoFunctorProfile
+  @cubical_square_outer_src_is_pseudo C
+  : τ (@IsPseudoFunctor
       (@CubicalSquare_cat C) (@CubicalArrow_cat C)
       (@cubical_square_outer_src_func C));
 
 assert [C : Cat] ⊢
-  @cubical_square_inner_tgt_profile C
-  : τ (@ReadablePseudoFunctorProfile
+  @cubical_square_inner_tgt_is_pseudo C
+  : τ (@IsPseudoFunctor
       (@CubicalSquare_cat C) (@CubicalArrow_cat C)
       (@cubical_square_inner_tgt_func C));

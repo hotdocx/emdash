@@ -1,5 +1,5 @@
 /*
-  Emdash v3.2: readable pseudofunctor profiles over ambient functor carriers.
+  Emdash v3.2: readable pseudofunctor property over ambient functor carriers.
 
   The active generic functor/transfor calculus exposes normal-lax compositor
   cells at formal internal-action endpoints. Consumers such as intrinsic
@@ -7,12 +7,11 @@
   compositor; its selected omega-equivalence inverse supplies the opposite
   boundary direction.
 
-  ReadablePseudoFunctorProfile is an abstract coherent capability indexed by
-  its already-existing Functor carrier. It does not supply another compositor:
-  fixed-forward `OmegaEquivAlong` gives native equality-valued inverse data
-  for the existing post cell extracted from internal action. Higher coherence
-  remains the next internal action. The only rewrite is the explicit profile
-  constructor's field-projection beta; no proof-time unifier is added.
+  IsPseudoFunctor is the direct dependent property of an already-existing
+  Functor carrier. It does not supply another compositor: fixed-forward
+  `OmegaEquivAlong` gives native equality-valued inverse data for the existing
+  post cell extracted from internal action. Higher coherence remains the next
+  internal action. No property wrapper, rule, or proof-time unifier is added.
 
   This capability is evidence over an already-existing ambient Functor; it is
   not a separate lax-carrier classifier and does not disable the historical
@@ -23,12 +22,6 @@
 
 require open emdash.emdash3_2_gray_profiles;
 require open emdash.emdash3_2_path_pseudo_laxity;
-
-// Coherent readable pseudofunctor capability for one ambient carrier.
-injective symbol ReadablePseudoFunctorProfile
-  [A B : Cat]
-  (F : τ (Functor A B))
-  : Grpd;
 
 symbol readable_pseudo_post_raw_source
   [A B : Cat]
@@ -339,53 +332,60 @@ protected symbol readable_pseudo_post_pre_reframe
     (@readable_pseudo_pre_raw_source A B F X Y Z g f)
     (@readable_pseudo_post_pre_source_path A B F X Y Z g f);
 
-// Explicit profile constructor. The sole mathematical field is native
-// fixed-arrow omega-equivalence of the one readable cell derived from the
-// intrinsic compositor.
-injective symbol readable_pseudo_profile_intro
+// Normal-pseudofunctor property: every existing readable compositor is a
+// fixed-forward native omega-equivalence. Identity preservation remains the
+// current ambient normal-lax convention.
+symbol IsPseudoFunctor
   [A B : Cat]
-  [F : τ (Functor A B)]
-  (evidence :
-    Π X : τ (Obj A),
-    Π Y : τ (Obj A),
-    Π Z : τ (Obj A),
-    Π g : τ (Hom A Y Z),
-    Π f : τ (Hom A X Y),
-      τ (@OmegaEquivAlong
-        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
-        _ _
-        (@readable_pseudo_post_cell A B F X Y Z g f)))
-  : τ (@ReadablePseudoFunctorProfile A B F);
+  (F : τ (Functor A B))
+  : Grpd
+≔ @Pi_grpd
+    (Obj A)
+    (λ X : τ (Obj A),
+      @Pi_grpd
+        (Obj A)
+        (λ Y : τ (Obj A),
+          @Pi_grpd
+            (Obj A)
+            (λ Z : τ (Obj A),
+              @Pi_grpd
+                (Hom A Y Z)
+                (λ g : τ (Hom A Y Z),
+                  @Pi_grpd
+                    (Hom A X Y)
+                    (λ f : τ (Hom A X Y),
+                      @OmegaEquivAlong
+                        (Hom_cat B
+                          (@fapp0 A B F X)
+                          (@fapp0 A B F Z))
+                        _ _
+                        (@readable_pseudo_post_cell
+                          A B F X Y Z g f))))));
 
 // Post/left readable compositor:
 //   F[g] o F[f] ~= F[g o f]
 // at the stable hom_postcomp owner used by source-varying hom families.
-injective symbol readable_pseudo_post_evidence
+symbol pseudo_compositor_equiv
   [A B : Cat]
   [F : τ (Functor A B)]
-  (P : τ (@ReadablePseudoFunctorProfile A B F))
+  (P : τ (@IsPseudoFunctor A B F))
   [X Y Z : τ (Obj A)]
   (g : τ (Hom A Y Z))
   (f : τ (Hom A X Y))
   : τ (@OmegaEquivAlong
       (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
       _ _
-      (@readable_pseudo_post_cell A B F X Y Z g f));
-
-rule @readable_pseudo_post_evidence
-      $A $B $F
-      (@readable_pseudo_profile_intro $A $B $F $evidence)
-      $X $Y $Z $g $f
-  ↪ $evidence $X $Y $Z $g $f;
+      (@readable_pseudo_post_cell A B F X Y Z g f))
+≔ P X Y Z g f;
 
 // Pre/right reverse adjustment uses the selected left inverse of the one
 // fixed-forward post cell, followed by the existing post/pre endpoint reframe.
 // The `OmegaEquivAlong` right inverse and both cancellation laws remain
 // available to later coherence consumers.
-symbol readable_pseudo_pre_inverse
+symbol pseudo_pre_inverse
   [A B : Cat]
   [F : τ (Functor A B)]
-  (P : τ (@ReadablePseudoFunctorProfile A B F))
+  (P : τ (@IsPseudoFunctor A B F))
   [X Y Z : τ (Obj A)]
   (g : τ (Hom A Y Z))
   (f : τ (Hom A X Y))
@@ -403,22 +403,22 @@ symbol readable_pseudo_pre_inverse
       (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
       _ _
       (@readable_pseudo_post_cell A B F X Y Z g f)
-      (@readable_pseudo_post_evidence A B F P X Y Z g f));
+      (@pseudo_compositor_equiv A B F P X Y Z g f));
 
-// Supplied identity instance. Constructing this through `profile_intro`
-// requires an extracted unit/normality interface, which remains separate.
-constant symbol readable_pseudo_identity_profile
+// Supplied identity proof. Constructing it transparently requires the
+// extracted unit/normality interface, which remains separate.
+constant symbol identity_is_pseudo
   (A : Cat)
-  : τ (@ReadablePseudoFunctorProfile A A (@id_func A));
+  : τ (@IsPseudoFunctor A A (@id_func A));
 
-// Supplied composition instance. A transparent constructor requires the next
+// Supplied composition proof. A transparent constructor requires the next
 // internal action comparing the composite functor's intrinsic compositor with
-// the two component profiles.
-constant symbol readable_pseudo_comp_profile
+// the two component properties.
+constant symbol comp_is_pseudo
   [A B C : Cat]
   [F : τ (Functor A B)]
-  (PF : τ (@ReadablePseudoFunctorProfile A B F))
+  (PF : τ (@IsPseudoFunctor A B F))
   [G : τ (Functor B C)]
-  (PG : τ (@ReadablePseudoFunctorProfile B C G))
-  : τ (@ReadablePseudoFunctorProfile
+  (PG : τ (@IsPseudoFunctor B C G))
+  : τ (@IsPseudoFunctor
       A C (@comp_cat_fapp0 A B C G F));

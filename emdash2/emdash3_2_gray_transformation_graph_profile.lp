@@ -11,7 +11,7 @@
   public head and reduce only its already-extracted identity filler and binary
   compositor. This is the profile closure needed by recursive Gray currying;
   it does not classify arbitrary ambient graphs as strict or add a second
-  graph semantics. The existing ReadablePseudoFunctorProfile is a separate
+  graph semantics. The existing IsPseudoFunctor is a separate
   fixed-forward OmegaEquivAlong capability indexed by an already-formed
   carrier.
 */
