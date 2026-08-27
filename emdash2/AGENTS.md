@@ -441,6 +441,21 @@ needs a post-Op discriminator; no whole coextension unifier or opaque equality
 bridge is used. Ordinary `comp_fapp0` owns the monad/comonad beta and
 accumulation laws, while Kleisli/co-Kleisli cut names are transparent derived
 notation and explicit Kleisli categories remain separately gated;
+the enhanced triangular chosen-binary-product interface is
+`emdash3_2_triangular_binary_products.lp`; it is indexed by a selected whole
+`P : C × C ⊢ C`, exposes whole projection transfors and a whole
+represented-family pairing transfor, and retains stable post-projection
+`K1a`/`K2a`, pairing-functor, and pairing-point heads for Došen's runtime
+beta/distribution/eta calculus and the two selected section-6.4
+normalizations. Canonical `Struct_sigma` shapes, rather than the reducible
+`Product_pair` alias, own rule matching. Two narrowly typed proof-time
+comparisons relate projection after generic `P` action to the triangular
+heads, while an explicit common-ancestor path proves agreement of generic
+`P` action with the derived product map without a hot runtime expansion or an
+opaque equality bridge. Direct projection betas close the post-`K(id)` order,
+and eta plus distribution derive ordinary hom-level pairing uniqueness. The
+existing per-pair weighted-limit presentation remains separate, and terminal
+objects remain deferred;
 executable diagnostics live in `emdash3_2_checks.lp`.
 
 ## Authorities
@@ -1273,14 +1288,29 @@ Use the following order:
     routes; the reports remain diagnostics rather than vetoes. The module
     claims no explicit Kleisli category, free syntax, or global decision
     procedure;
-123. `emdash3_2_checks.lp` for executable regression statements;
-124. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+123. `emdash3_2_triangular_binary_products.lp` for the selected whole
+    `BinaryProducts(C,P)` interface, whole projection and represented-pairing
+    transfors, stable post-projection `K1a`/`K2a` and pairing heads, ambient
+    Došen beta/distribution/eta computation, both selected section-6.4
+    reductions, and direct projection-order joins. Generic `P` action remains
+    a distinct runtime normal form; two typed proof-time projection
+    comparisons and an explicit `pair(proj1,proj2) o P[(f,g)]` path derive its
+    agreement with the triangular map. The same common-ancestor method derives
+    ordinary hom-level pairing uniqueness. Against the `1116/159` base
+    warning inventory, the module's `1179/171` inventory adds 63 classified
+    critical-pair and 12 replaceable-variable reports around the intentional
+    projection/naturality/beta/eta/section-6.4 orders; focused checks and the
+    strict LHS audit are green. No free syntax, decision procedure, global
+    product existence, terminal object, opaque equality bridge, or automatic
+    weighted-limit adapter is claimed;
+124. `emdash3_2_checks.lp` for executable regression statements;
+125. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-125. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-126. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+126. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+127. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-127. `reports/INDEX.md` for task-specific plans and decision records.
-128. `book/book.json` and `book/evidence.json` for book source
+128. `reports/INDEX.md` for task-specific plans and decision records.
+129. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

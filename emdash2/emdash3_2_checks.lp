@@ -25,7 +25,7 @@ require open emdash.emdash3_2_direct_cover_completion_universality;
 require open emdash.emdash3_2_direct_cover_sheafification;
 require open emdash.emdash3_2_groupoidification_composition;
 require open emdash.emdash3_2_groupoidification_interval_recovery;
-require open emdash.emdash3_2_monads;
+require open emdash.emdash3_2_monads emdash.emdash3_2_triangular_binary_products;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
 assert ⊢ τ Empty_grpd ≡ empty;
@@ -26533,3 +26533,314 @@ assert ⊢ groupoidify_walking_interval_type_equiv
   : τ (TypeEquiv (Groupoidify WalkingArrow_cat) Interval_grpd);
 
 assertnot ⊢ Groupoidify WalkingArrow_cat ≡ Interval_grpd;
+
+// -------------------------------------------------------------------------------------------------
+// Enhanced triangular chosen binary products
+// catalog-area: Enhanced triangular binary-product computation
+// -------------------------------------------------------------------------------------------------
+
+// The selected product functor is an index; projections and pairing are whole.
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)] ⊢
+  @BinaryProducts C P : Grpd;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P)) ⊢
+  @binary_products_proj1_transf C P BP
+  : τ (Transf P (@Product_projL_func C C));
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A0 A1 : τ (Obj C)) ⊢
+  @binary_products_pair_transf C P BP A0 A1
+  : τ (Transf
+      (@binary_products_pair_source_family C A0 A1)
+      (@binary_products_pair_target_family C P A0 A1));
+
+// Whole projection components and their full off-diagonal actions.
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A0 A1 : τ (Obj C)) ⊢
+  @tapp0_fapp0
+    (Product_cat C C) C
+    P (@Product_projL_func C C)
+    (@Product_pair C C A0 A1)
+    (@binary_products_proj1_transf C P BP)
+  ≡ @binary_products_proj1_fapp0 C P BP A0 A1;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A0 A1 B0 B1 : τ (Obj C))
+  (f : τ (Hom C A0 A1))
+  (g : τ (Hom C B0 B1)) ⊢
+  @tapp1_fapp0
+    (Product_cat C C) C
+    P (@Product_projL_func C C)
+    (@Product_pair C C A0 B0)
+    (@Product_pair C C A1 B1)
+    (@binary_products_proj1_transf C P BP)
+    (@Product_pair
+      (Hom_cat C A0 A1)
+      (Hom_cat C B0 B1)
+      f g)
+  ≡ @binary_products_K1a_fapp0 C P BP B0 A0 A1 f;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A0 A1 B0 B1 : τ (Obj C))
+  (f : τ (Hom C A0 A1))
+  (g : τ (Hom C B0 B1)) ⊢
+  @tapp1_fapp0
+    (Product_cat C C) C
+    P (@Product_projR_func C C)
+    (@Product_pair C C A0 B0)
+    (@Product_pair C C A1 B1)
+    (@binary_products_proj2_transf C P BP)
+    (@Product_pair
+      (Hom_cat C A0 A1)
+      (Hom_cat C B0 B1)
+      f g)
+  ≡ @binary_products_K2a_fapp0 C P BP A0 B0 B1 g;
+
+// Pairing projects through a whole component functor and retains higher action.
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A0 A1 : τ (Obj C))
+  (f : τ (Hom C X A0))
+  (g : τ (Hom C X A1)) ⊢
+  @fapp0
+    (Product_cat (Hom_cat C X A0) (Hom_cat C X A1))
+    (Hom_cat C X
+      (@fapp0
+        (Product_cat C C) C P
+        (@Product_pair C C A0 A1)))
+    (@binary_products_pair_func C P BP X A0 A1)
+    (@Product_pair
+      (Hom_cat C X A0)
+      (Hom_cat C X A1)
+      f g)
+  ≡ @binary_products_pair_fapp0 C P BP X A0 A1 f g;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X Y A0 A1 : τ (Obj C)) ⊢
+  @tapp1_func
+    (Op_cat C) Cat_cat
+    (@binary_products_pair_source_family C A0 A1)
+    (@binary_products_pair_target_family C P A0 A1)
+    X Y
+    (@binary_products_pair_transf C P BP A0 A1)
+  : τ (Functor
+      (Hom_cat (Op_cat C) X Y)
+      (Functor_cat
+        (@fapp0
+          (Op_cat C) Cat_cat
+          (@binary_products_pair_source_family C A0 A1)
+          X)
+        (@fapp0
+          (Op_cat C) Cat_cat
+          (@binary_products_pair_target_family C P A0 A1)
+          Y)));
+
+// Došen naturality and pairing distribution.
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A B0 B1 B2 : τ (Obj C))
+  (f : τ (Hom C B0 B1))
+  (h : τ (Hom C B1 B2)) ⊢
+  @comp_fapp0
+    C
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C B0 A))
+    B1 B2
+    h
+    (@binary_products_K1a_fapp0 C P BP A B0 B1 f)
+  ≡ @binary_products_K1a_fapp0
+      C P BP A B0 B2
+      (@comp_fapp0 C B0 B1 B2 h f);
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X0 X1 A0 A1 : τ (Obj C))
+  (h : τ (Hom C X0 X1))
+  (f : τ (Hom C X1 A0))
+  (g : τ (Hom C X1 A1)) ⊢
+  @comp_fapp0
+    C X0 X1
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+    (@binary_products_pair_fapp0 C P BP X1 A0 A1 f g)
+    h
+  ≡ @binary_products_pair_fapp0
+      C P BP X0 A0 A1
+      (@comp_fapp0 C X0 X1 A0 f h)
+      (@comp_fapp0 C X0 X1 A1 g h);
+
+// Both projection betas and product eta.
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A B D : τ (Obj C))
+  (f : τ (Hom C X A))
+  (g : τ (Hom C X B))
+  (h : τ (Hom C A D)) ⊢
+  @comp_fapp0
+    C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A B))
+    D
+    (@binary_products_K1a_fapp0 C P BP B A D h)
+    (@binary_products_pair_fapp0 C P BP X A B f g)
+  ≡ @comp_fapp0 C X A D h f;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A B D : τ (Obj C))
+  (f : τ (Hom C X A))
+  (g : τ (Hom C X B))
+  (h : τ (Hom C B D)) ⊢
+  @comp_fapp0
+    C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A B))
+    D
+    (@binary_products_K2a_fapp0 C P BP A B D h)
+    (@binary_products_pair_fapp0 C P BP X A B f g)
+  ≡ @comp_fapp0 C X B D h g;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A B : τ (Obj C))
+  (f : τ (Hom C X A))
+  (g : τ (Hom C X B)) ⊢
+  @comp_fapp0
+    C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A B))
+    A
+    (@binary_products_proj1_fapp0 C P BP A B)
+    (@binary_products_pair_fapp0 C P BP X A B f g)
+  ≡ f;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A B : τ (Obj C)) ⊢
+  @binary_products_pair_fapp0
+    C P BP
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A B))
+    A B
+    (@binary_products_proj1_fapp0 C P BP A B)
+    (@binary_products_proj2_fapp0 C P BP A B)
+  ≡ @id C
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A B));
+
+// The two selected §6.4 orientations.
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A B D0 D1 : τ (Obj C))
+  (f : τ (Hom C B D0))
+  (g : τ (Hom C B D1)) ⊢
+  @binary_products_pair_fapp0
+    C P BP
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C B A))
+    D0 D1
+    (@binary_products_K1a_fapp0 C P BP A B D0 f)
+    (@binary_products_K1a_fapp0 C P BP A B D1 g)
+  ≡ @binary_products_K1a_fapp0
+      C P BP A B
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C D0 D1))
+      (@binary_products_pair_fapp0 C P BP B D0 D1 f g);
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A B D0 D1 : τ (Obj C))
+  (f : τ (Hom C B D0))
+  (g : τ (Hom C B D1)) ⊢
+  @binary_products_pair_fapp0
+    C P BP
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A B))
+    D0 D1
+    (@binary_products_K2a_fapp0 C P BP A B D0 f)
+    (@binary_products_K2a_fapp0 C P BP A B D1 g)
+  ≡ @binary_products_K2a_fapp0
+      C P BP A B
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C D0 D1))
+      (@binary_products_pair_fapp0 C P BP B D0 D1 f g);
+
+// The extra semantic P action agrees propositionally, but not by runtime collapse.
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A0 A1 B0 B1 : τ (Obj C))
+  (f : τ (Hom C A0 A1))
+  (g : τ (Hom C B0 B1)) ⊢
+  @binary_products_map_path C P BP A0 A1 B0 B1 f g
+  : τ (@=
+      (Hom C
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 B0))
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A1 B1)))
+      (@binary_products_semantic_map_fapp0
+        C P BP A0 A1 B0 B1 f g)
+      (@binary_products_map_fapp0
+        C P BP A0 A1 B0 B1 f g));
+
+assertnot [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A0 A1 B0 B1 : τ (Obj C))
+  (f : τ (Hom C A0 A1))
+  (g : τ (Hom C B0 B1)) ⊢
+  @binary_products_semantic_map_fapp0
+    C P BP A0 A1 B0 B1 f g
+  ≡ @binary_products_map_fapp0
+      C P BP A0 A1 B0 B1 f g;
+
+assertnot [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (A : τ (Obj C)) ⊢
+  @binary_products_K1a_fapp0 C P BP A A A (@id C A)
+  ≡ @binary_products_K2a_fapp0 C P BP A A A (@id C A);
+
+assertnot [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A0 A1 : τ (Obj C))
+  (f : τ (Hom C X A0))
+  (g : τ (Hom C X A1))
+  (u : τ (Hom C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))) ⊢
+  @binary_products_pair_fapp0 C P BP X A0 A1 f g ≡ u;
+
+assertnot [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (theta : τ (Transf P (@Product_projL_func C C))) ⊢
+  theta ≡ @binary_products_proj1_transf C P BP;
+
+assertnot [C : Cat]
+  [P Q : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P)) ⊢
+  @BinaryProducts C P ≡ @BinaryProducts C Q;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A0 A1 : τ (Obj C))
+  (h : τ (Hom C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))) ⊢
+  @binary_products_pair_unique_path C P BP X A0 A1 h
+  : τ (@=
+      (Hom C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+      h
+      (@binary_products_pair_reconstruct_fapp0 C P BP X A0 A1 h));

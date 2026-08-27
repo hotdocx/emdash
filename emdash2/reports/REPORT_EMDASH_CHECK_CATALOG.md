@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2268
-- Mapped areas: 110
+- Total checks: 2291
+- Mapped areas: 111
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -129,6 +129,7 @@ stable mathematical-area scopes rather than source locations.
 | WalkingEnd--Circle groupoidification restriction | 5 |
 | Category-indexed computational groupoidification | 9 |
 | Generic WalkingArrow--Interval recovery | 5 |
+| Enhanced triangular binary-product computation | 23 |
 
 ## Section Details
 
@@ -2949,3 +2950,31 @@ stable mathematical-area scopes rather than source locations.
 | 2266 | 26525 | `assert ⊢ groupoidify_walking_interval_by_inverse : τ (@EquivByInverse (Groupoidify WalkingArrow_cat) Interval_grpd g ...` |
 | 2267 | 26532 | `assert ⊢ groupoidify_walking_interval_type_equiv : τ (TypeEquiv (Groupoidify WalkingArrow_cat) Interval_grpd);` |
 | 2268 | 26535 | `assertnot ⊢ Groupoidify WalkingArrow_cat ≡ Interval_grpd;` |
+
+### Enhanced triangular binary-product computation
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 2269 | 26543 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] ⊢ @BinaryProducts C P : Grpd;` |
+| 2270 | 26547 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) ⊢ @binary_products_proj1_trans ...` |
+| 2271 | 26553 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A0 A1 : τ (Obj C)) ⊢ @binary_ ...` |
+| 2272 | 26563 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A0 A1 : τ (Obj C)) ⊢ @tapp0_f ...` |
+| 2273 | 26574 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A0 A1 B0 B1 : τ (Obj C)) (f : ...` |
+| 2274 | 26592 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A0 A1 B0 B1 : τ (Obj C)) (f : ...` |
+| 2275 | 26611 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (X A0 A1 : τ (Obj C)) (f : τ ( ...` |
+| 2276 | 26630 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (X Y A0 A1 : τ (Obj C)) ⊢ @tap ...` |
+| 2277 | 26653 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A B0 B1 B2 : τ (Obj C)) (f : ...` |
+| 2278 | 26669 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (X0 X1 A0 A1 : τ (Obj C)) (h : ...` |
+| 2279 | 26687 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (X A B D : τ (Obj C)) (f : τ ( ...` |
+| 2280 | 26702 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (X A B D : τ (Obj C)) (f : τ ( ...` |
+| 2281 | 26717 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (X A B : τ (Obj C)) (f : τ (Ho ...` |
+| 2282 | 26731 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A B : τ (Obj C)) ⊢ @binary_pr ...` |
+| 2283 | 26745 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A B D0 D1 : τ (Obj C)) (f : τ ...` |
+| 2284 | 26762 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A B D0 D1 : τ (Obj C)) (f : τ ...` |
+| 2285 | 26780 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A0 A1 B0 B1 : τ (Obj C)) (f : ...` |
+| 2286 | 26796 | `assertnot [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A0 A1 B0 B1 : τ (Obj C)) ( ...` |
+| 2287 | 26807 | `assertnot [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (A : τ (Obj C)) ⊢ @binary_p ...` |
+| 2288 | 26814 | `assertnot [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (X A0 A1 : τ (Obj C)) (f : ...` |
+| 2289 | 26824 | `assertnot [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (theta : τ (Transf P (@Prod ...` |
+| 2290 | 26830 | `assertnot [C : Cat] [P Q : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) ⊢ @BinaryProducts C P ≡ @ ...` |
+| 2291 | 26835 | `assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] (BP : τ (@BinaryProducts C P)) (X A0 A1 : τ (Obj C)) (h : τ ( ...` |

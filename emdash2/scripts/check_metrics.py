@@ -142,6 +142,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_affine_intersections.lp"),
     Path("emdash3_2_commutative_algebra_affine_atlas.lp"),
     Path("emdash3_2_monads.lp"),
+    Path("emdash3_2_triangular_binary_products.lp"),
     Path("emdash3_2_checks.lp"),
 ]
 # Run the two consistently near-timeout aggregate targets before sustained

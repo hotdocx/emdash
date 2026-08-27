@@ -1239,6 +1239,26 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md`:
+  active scoped-closeout plan for the implemented enhanced triangular chosen-
+  binary-products module. `BinaryProducts(C,P)` is indexed by a selected whole
+  product functor; whole projection transfors and one represented-family
+  pairing transfor retain higher action, while stable post-projection heads
+  implement Došen's beta/distribution/eta calculus, direct projection-order
+  joins, and both selected §6.4 normalizations. Rule LHSs use canonical
+  `Struct_sigma`, never the reducible `Product_pair` alias. Two narrow
+  proof-time comparisons relate projection after generic `P` action to the
+  triangular heads; explicit common-ancestor paths prove map agreement and
+  ordinary hom-level pairing uniqueness without a hot `P` expansion or
+  opaque equality bridge. The promoted warning inventory is classified at
+  `1179/171` against the `1116/159` base, and focused source/check/example
+  validation is green. The existing rule-free per-pair
+  `BinaryProductPresentation` remains the weighted-limit authority; an
+  automatic adapter is a separate follow-up. Došen's free syntax/decision
+  algorithm and the terminal-object extension remain out of scope; a later
+  terminal design must use a whole canonical-arrow transfor plus derived
+  propositional uniqueness, never a variable-headed rewrite or bare-variable
+  unifier.
 - `REPORT_EMDASH_V3_2_MONAD_COMONAD_COMPUTATION_PLAN_2026-08-23.md`:
   completed direct Monad-usability correction over the `e90ce3c`
   transparent-whole checkpoint. Monad

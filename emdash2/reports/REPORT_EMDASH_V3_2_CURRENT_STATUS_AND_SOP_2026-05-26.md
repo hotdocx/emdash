@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-24
+Last consolidated: 2026-08-27
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -66,6 +66,21 @@ detailed probe evidence.
   whole extension; no whole unifier or equality bridge remains. Existing
   adjunctions construct both structural instances. The module claims neither
   an explicit Kleisli category, free syntax, nor a global decision procedure.
+- `emdash3_2_triangular_binary_products.lp`: enhanced triangular selected-
+  binary-products layer. `BinaryProducts(C,P)` is indexed by one whole
+  `P : C × C ⊢ C`; its projections and represented-family pairing are whole
+  transfors, while stable component/off-diagonal heads retain Došen's
+  `K1a`, `K2a`, pairing beta/distribution/eta, direct post-`K(id)` projection
+  betas, and both selected section-6.4 normalizations. Canonical
+  `Struct_sigma`, not the reducible `Product_pair` alias, owns rule matching.
+  Two narrowly typed unification rules compare projection after generic `P`
+  action with the triangular heads only at proof time. An explicit
+  `pair(proj1,proj2) o P[(f,g)]` common-ancestor proof gives propositional map
+  agreement without runtime expansion or an opaque equality bridge. Eta and
+  distribution also derive ordinary hom-level pairing uniqueness. The module
+  does not assert global products, add terminal objects, reproduce free syntax
+  or decidability, or automatically package the existing per-pair weighted-
+  limit presentation.
 - `emdash3_2_direct_cover_completion_locality.lp`: downstream conventional
   comparison for the direct whole-presheaf cover-completion HIT. A derived
   retained-member theorem is projected through one whole transformation
