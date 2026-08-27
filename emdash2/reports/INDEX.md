@@ -1256,8 +1256,8 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_FUNCTOR_PROPERTY_PROFILE_MIGRATION_PLAN_2026-08-27.md`:
-  implementation-complete property-first continuation from the Gray/cubical
-  profile redesign, pending only its final documentation checkpoint. The
+  completed property-first continuation from the Gray/cubical profile
+  redesign. The
   transparent fixed-forward `IsPseudoFunctor` property and exact
   carrier/`IsStrictFunctor` package replace the former abstract pseudo wrapper
   and primitive strict code grammar. Gray strict-object/lax-arrow behavior,
