@@ -219,20 +219,22 @@ extension is `emdash3_2_groupoidal_closure.lp`;
 the rule-free Path realization of the generic functor compositor, its
 canonical inverse, readable `eq_ap`/`eq_trans` comparison, and retained
 next-hom action is `emdash3_2_path_pseudo_laxity.lp`;
-the computational strict-functor code/decoder and selected
-strict-object/lax-arrow internal-hom profile are
-`emdash3_2_gray_profiles.lp`; decoded strict codes make the existing extracted
-compositor compute to identity at its stable owner, while homs and every
-higher action reuse the ambient `Transf_cat` tower;
+the semantic `IsStrictFunctor` property, exact `StrictFunctor` Sigma package,
+stable constructor-visible ambient view, and selected strict-object/lax-arrow
+internal-hom profile are `emdash3_2_gray_profiles.lp`; the property constrains
+the existing extracted compositor without adding a cell or immediately
+reflecting it to literal identity, while homs and every higher action reuse the
+ambient `Transf_cat` tower;
 the transparent walking-arrow interface over
 `Join_cat(Terminal_cat,Terminal_cat)` is `emdash3_2_walking_arrow.lp`; its two
 endpoints come from the join inclusions, while its generator and retained next
 action are projections of the existing whole `join_cross_transf`;
 the selected profiled right-closure boundary is
 `emdash3_2_gray_right_closure.lp`; it introduces one opaque tensor category,
-decoded computationally strict whole curry/uncurry functors, equality-valued
-whole beta/eta comparisons packaged by `OmegaEquivAlong Cat_cat`, and derived
-coevaluation/evaluation at strict identity codes, without claiming the mirror
+whole curry/uncurry functors paired with supplied strictness evidence,
+equality-valued whole beta/eta comparisons packaged by
+`OmegaEquivAlong Cat_cat`, and derived coevaluation/evaluation at strict
+identity packages, without claiming the mirror
 closure or a full Crans--Gray monoidal structure;
 the transparent walking-square boundary inside that selected tensor is
 `emdash3_2_gray_walking_square.lp`; its four vertices and both coordinate
@@ -260,14 +262,13 @@ the fixed-bracketing positive-dimensional right-Gray cubes are
 `emdash3_2_gray_cubes.lp`; genuine Nat recursion gives dimensions one through
 three as `I`, `I tensor_R I`, and `I tensor_R (I tensor_R I)` while making no
 zero-dimensional unit, associativity, symmetry, or full monoidal claim;
-the selected strict-code closure of those transformation graphs is
-`emdash3_2_gray_transformation_graph_profile.lp`; its whole carrier computes
-directly to the public graph, and one graph-head specialization makes the
-already-extracted `fdapp1_int_cell` compositor compute to identity for
-strict-coded endpoints. A second narrow rule makes the existing identity
-laxity filler compute to identity; the remaining readable-square/canonical
-Sigma-identity comparison is generic and propositional. It adds no second
-compositor, unit cell, or opaque carrier path;
+the selected strict-property closure of those transformation graphs is
+`emdash3_2_gray_transformation_graph_profile.lp`; when both endpoint diagrams
+are `StrictFunctor` packages, it pairs the public graph with supplied
+`IsStrictFunctor` evidence about that graph's already-extracted compositor.
+Its carrier and evidence projections compute and all graph/higher action stays
+at the public internal-action owner. It adds no second compositor, unit cell,
+code grammar, carrier path, or profile-specific identity rule;
 the variable-dimensional object decoder is `emdash3_2_gray_cube_decoder.lp`;
 one Nat recursion uniform in the ambient category curries, takes the walking
 generator, packages its whole graph, recurses in `LaxArrow`, and transports
@@ -1080,13 +1081,14 @@ Use the following order:
     propositionally with the readable `eq_ap`/`eq_trans` endpoints, and
     retains one whole next-hom action. It adds no pseudofunctor classifier,
     rule, unifier, inverse record, or all-coherence claim;
-74. `emdash3_2_gray_profiles.lp` for the primitive computational
-    `StrictFunctorData` code sort, stable `strict_functor_carrier` decoder,
-    selected identity code and carrier path, profile-local reduction of the
-    existing extracted compositor, and the `GrayHom_lax` category whose
-    homs and higher cells reuse the ambient `Transf_cat` tower. The typed
-    `I tensor I` post/left interchanger confirms the project's lax naming
-    convention;
+74. `emdash3_2_gray_profiles.lp` for `IsStrictCell`, the transparent
+    `IsStrictFunctor` property over the existing extracted compositor, the
+    exact-Sigma `StrictFunctor` package, its constructor-visible stable
+    `strict_functor` view, and the `GrayHom_lax` category whose homs and higher
+    cells reuse the ambient `Transf_cat` tower. Semantic strictness is evidence,
+    not a parallel compositor or an immediate literal-identity reduction; the
+    generic strict-cut migration remains separate. The typed `I tensor I`
+    post/left interchanger confirms the project's lax naming convention;
 75. `emdash3_2_walking_arrow.lp` for the transparent curated interface
     `WalkingArrow_cat = Join_cat(Terminal_cat,Terminal_cat)`. Its endpoints
     are evaluations of the two join inclusions; its generating arrow is the
@@ -1094,11 +1096,12 @@ Use the following order:
     fibre owner retains the next hom action. It adds no interval primitive,
     standalone generator, rule, or unifier;
 76. `emdash3_2_gray_right_closure.lp` for the selected rule-free profiled
-    right closure. `GrayTensor_R` is an opaque category owner; curry and
-    uncurry decode computationally strict codes between the two Gray-hom
-    profile categories; whole beta/eta paths assemble the existing
-    `OmegaEquivAlong Cat_cat`; and coevaluation/evaluation are projections at
-    strict identity codes. It adds no mirror closure, tensor parameter action,
+    right closure. `GrayTensor_R` is an opaque category owner; raw curry and
+    uncurry functors between the two Gray-hom profile categories are paired
+    with supplied `IsStrictFunctor` evidence; whole beta/eta paths assemble
+    the existing `OmegaEquivAlong Cat_cat`; and coevaluation/evaluation are
+    projections at strict identity packages. It adds no mirror closure,
+    tensor parameter action,
     monoidal coherence, judgmental beta/eta fold, or full Crans--Gray claim;
 77. `emdash3_2_gray_walking_square.lp` for the transparent rule-free
     `I tensor I` boundary. Its four vertices are endpoint evaluations of the
@@ -1129,10 +1132,10 @@ Use the following order:
     `emdash3_2_gray_cubes.lp` defines the `(n+1)`-dimensional fixed-bracketing
     shape by genuine Nat recursion from the walking arrow, without postulating
     a tensor unit or coherence between bracketings. The selected profile
-    continuation `emdash3_2_gray_transformation_graph_profile.lp` makes the
-    strict code decode judgmentally to the public graph and specializes the
-    existing binary compositor and identity laxity filler at their
-    `fdapp1_int_cell` owners; the former opaque carrier path and its
+    continuation `emdash3_2_gray_transformation_graph_profile.lp` packages the
+    public graph with supplied `IsStrictFunctor` evidence when its endpoints
+    are strict packages. Carrier/evidence projections compute; the former
+    graph-specific compositor/identity rules, opaque carrier path and its
     `eq_ap`/`eq_apd` observers are retired.
     `emdash3_2_gray_cube_decoder.lp` then gives the
     arbitrary-variable-dimensional object observation by one Nat recursion,
@@ -1608,15 +1611,14 @@ with warnings enabled before rejecting the proposed rule.
   do **not** suppress the intended lax rule merely to preserve the temporary
   globally strict approximation. Conversely, this exception is not permission
   to ignore unrelated subject-reduction failures or unclassified overlaps.
-- `ReadablePseudoFunctorProfile` already provides an abstract coherent
-  capability—with fixed-forward `OmegaEquivAlong` for the existing readable
-  compositor—indexed by an existing ambient `Functor`. Do not claim that no
-  pseudofunctor profile exists. Its current endpoint reframe is a documented
-  adapter for the historical global strict cuts, not a proof that lax
-  endpoints remain noncollapsed. It is evidence over an already-formed
-  carrier, not a separate carrier classifier and not a mechanism for disabling
-  those cuts. Identity/composition and cubical structural closure remain
-  explicitly supplied pending extracted unit/composite coherence.
+- `IsPseudoFunctor(F)` is the transparent dependent product of fixed-forward
+  `OmegaEquivAlong` evidence for the existing readable compositor. Do not
+  claim that no pseudofunctor property exists. Its current endpoint reframe is
+  a documented adapter for the historical global strict cuts, not a proof
+  that lax endpoints remain noncollapsed. It is evidence over an already-
+  formed carrier, not a separate carrier classifier and not a mechanism for
+  disabling those cuts. Identity/composition and cubical structural closure
+  remain explicitly supplied pending extracted unit/composite coherence.
 - Use rewrites only for intended runtime normal forms. Use narrowly typed
   `unif_rule`s for proof-time comparison when neither side should compute to
   the other.

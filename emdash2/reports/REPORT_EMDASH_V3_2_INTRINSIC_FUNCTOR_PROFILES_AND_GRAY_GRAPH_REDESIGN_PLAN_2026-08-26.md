@@ -10,6 +10,17 @@ through `IFPG-OMEGA-CLOSE-15` correct its fixed-forward equivalence boundary
 at checkpoint `cc6005c` without launching the deferred global strict/lax
 migration.
 
+Property-profile supersession (2026-08-27): the historical implementation
+names and checkpoints below are preserved as decision evidence, but the active
+architecture is now governed by
+`REPORT_EMDASH_V3_2_FUNCTOR_PROPERTY_PROFILE_MIGRATION_PLAN_2026-08-27.md`.
+`ReadablePseudoFunctorProfile` became the transparent property
+`IsPseudoFunctor`; `StrictFunctorData` became the exact carrier/evidence
+package `StrictFunctor`; and graph strictness is supplied
+`IsStrictFunctor` evidence about the existing internal-action compositor. The
+former graph-specific literal-identity rules are retired. The generic global
+strict-cut migration remains separately deferred.
+
 Supersedes: no completed plan. It is a corrective continuation of
 `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`.
 

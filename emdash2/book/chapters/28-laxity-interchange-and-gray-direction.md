@@ -130,95 +130,113 @@ path and Chapter 27 to retain it on the groupoidification unit.
 > the identity-transformation specialization. The next hom action remains
 > available. No independent naturality square is added.
 
-## 28.2 Strictness As A Computational Profile
+## 28.2 Strictness As A Property And Profile
 
-It is tempting to define a strict functor as an ambient functor equipped with
-a path saying that its compositor equals an identity. In a univalent setting
-that path describes an invertible comparison, but it does not make the
-compositor compute to identity. It is therefore evidence of canonical
-pseudo-functoriality, not a computational strictness discriminator.
+Strictness should constrain the compositor already obtained in (28.5), not
+manufacture a second compositor beside it. For a cell $c:x\to y$, write
 
-An evidence package
-$\sum_{F:\operatorname{Functor}(A,B)}\mathsf{IsStrict}(F)$ would have the same
-problem if its second field were merely path-valued. Projecting its first
-field would return an arbitrary ambient functor, after which conversion could
-no longer tell whether strict computation had been selected. The code sort in
-(28.6) keeps the discriminator at the head of the decoded term.
+$$
+\mathsf{IsStrictCell}(c)
+  \;\equiv\;
+  \sum_{p:x=y}\bigl(c=\operatorname{pathToHom}(p)\bigr).
+$$
 
-The selected strict boundary is instead a code and decoder:
+The endpoint path is explicit. This matters because the prototype still has
+historical cuts that identify several strict endpoints judgmentally; the
+property continues to say something meaningful after those cuts are moved to
+their proper profiles. Applying it to every binary compositor gives
 
 $$
 \begin{aligned}
-\mathsf{StrictFunctorData}(A,B)&:\mathcal U,\\
-\operatorname{decode}_{A,B}&:
-\mathsf{StrictFunctorData}(A,B)\longrightarrow\operatorname{Functor}(A,B).
+\mathsf{IsStrictFunctor}(F)
+  &\equiv
+    \prod_{f,g}\mathsf{IsStrictCell}(\phi^F_{g,f}),\\
+\mathsf{StrictFunctor}(A,B)
+  &\equiv
+    \sum_{F:\operatorname{Functor}(A,B)}
+      \mathsf{IsStrictFunctor}(F).
 \end{aligned}
 \tag{28.6}
 $$
 
-The decoder is a stable head. When the generic compositor (28.5) is applied
-to a decoded strict code, it reduces to the identity cell. A rigid ambient
-functor outside this code sort does not acquire that reduction. Strictness is
-therefore selected by syntax with computational meaning rather than inferred
-from a propositional field after the fact.
+Thus the evidence itself is the proof-carrying code; there is no second
+grammar of strict functors. In the logical framework the outer
+$\mathsf{StrictFunctor}(A,B)$ name is nevertheless kept as a rigid
+record-like head whose carrier is exactly the second line of (28.6). This
+retains the indices $A$ and $B$ when a rule must invert a package. Its
+constructor and projections recover the ambient functor and its proof.
 
-This does not require a second functor theory. Define the profiled internal
-hom
+A stable view, written $\operatorname{strict}(S)$, places such a package back
+in the ambient functor classifier. When the package constructor is visible,
+point and hom action compute to the packaged carrier. When a strict package is
+itself returned by higher action, the stable head remains visible instead of
+prematurely erasing the evidence discriminator.
+
+There is a deliberate limit to the present computation. The former rule that
+reduced every selected compositor to a literal identity has been retired: an
+arbitrary proof of $\mathsf{IsStrictCell}(c)$ identifies $c$ with an
+equality-induced arrow, and does not justify that blanket rewrite by subject
+reduction. A later consolidation will move the historical global strict cuts
+to evidence-bearing functor and transformation profiles. The current package
+records the correct semantic information without anticipating that normal-form
+migration.
+
+This still requires no second functor theory. Define the profiled internal hom
 
 $$
 \mathsf{GrayHom}_{\mathrm{lax}}(A,B)
 \tag{28.7}
 $$
 
-to have strict-functor codes as objects and the existing ambient
-transformation categories between their decoded carriers as homs:
+to have strict packages as objects and the existing ambient transformation
+categories between their stable views as homs:
 
 $$
 \begin{aligned}
 \operatorname{Obj}(\mathsf{GrayHom}_{\mathrm{lax}}(A,B))
-  &\equiv\mathsf{StrictFunctorData}(A,B),\\
+  &\equiv\mathsf{StrictFunctor}(A,B),\\
 \operatorname{Hom}(S,T)
   &\equiv
-  \operatorname{Transf}(\operatorname{decode}S,\operatorname{decode}T).
+  \operatorname{Transf}(\operatorname{strict}S,
+                         \operatorname{strict}T).
 \end{aligned}
 \tag{28.8}
 $$
 
 Identity and composition delegate to the ambient functor category. Homs
 between transformations are the existing modification categories, and every
-subsequent hom is reused. A whole inclusion decodes objects into
-$\operatorname{Functor}(A,B)$ and acts as the identity on this shared
+subsequent hom is reused. A whole inclusion acts as the identity on this shared
 transformation tower.
 
-The word *lax* in (28.7) describes the arrow profile. Objects are
-computationally strict functors; arrows are the ambient transformations whose
+The word *lax* in (28.7) describes the arrow profile. Objects are functors
+equipped with strictness evidence; arrows are the ambient transformations whose
 off-diagonal action retains laxity. The category is not definitionally the
 ambient functor category, and an arbitrary ambient functor is not silently
 accepted as one of its objects.
 
-The selected identity illustrates the separation. There is an identity
-strict code whose decoded carrier has a whole equality to the ambient identity
-functor. The decoder does not simply unfold to that identity everywhere:
-keeping its head stable is what lets compositor computation recognize the
-strict profile without racing the generic object and arrow actions. Semantic
-comparison and computational discrimination are both retained, but they have
-different owners.
+The selected identity illustrates the separation. It is the ordinary identity
+functor paired with supplied strictness evidence. Gray curry, uncurry, join
+maps, and transformation graphs follow the same pattern: first construct the
+ordinary whole functor, then retain an $\mathsf{IsStrictFunctor}$ proof about
+its existing compositor. The proof may initially be supplied where its full
+internal derivation is not yet needed, but it can never conceal an independent
+forward cell because the property fixes that cell in its own type.
 
 This profile architecture scales better than duplicating products, pullbacks,
-transformations, and modifications for each preservation mode. A later
-consumer may introduce another code sort or another object profile while
-sharing the same hom tower. Duplication is justified only where a genuinely
-different computation must be selected.
+transformations, and modifications for each preservation mode. Further
+properties may refine the same ambient carriers and share the same hom tower;
+duplication is reserved for a genuinely different classifier or computation.
 
 <!-- evidence:GRAY-COMPUTATIONAL-PROFILE -->
 
 > **Formal status — checked.** Evidence `GRAY-COMPUTATIONAL-PROFILE`.
-> Computational strictness is selected by a primitive code sort and stable
-> decoder. Its generic compositor specializes to identity, while a rigid
-> unprofiled functor does not. GrayHom_lax reuses the complete ambient
-> transformation and higher-hom tower and includes wholly into the functor
-> category; no duplicate modification hierarchy or broad category-head
-> conversion is introduced.
+> `IsStrictFunctor` constrains the existing extracted compositor, and
+> `StrictFunctor` is its exact carrier/evidence package behind a rigid indexed
+> facade. Constructor-visible stable-view action computes to the carrier.
+> GrayHom_lax reuses the complete ambient transformation and higher-hom tower;
+> no duplicate strict-functor grammar, compositor, modification hierarchy, or
+> broad category-head conversion is introduced. Reflection of strict evidence
+> into judgmental computation remains part of the later global-cut migration.
 
 ## 28.3 One Selected Right Closure
 
@@ -234,17 +252,18 @@ $$
 $$
 
 The tensor head $A\otimes_R B$ is stable and distinct from the Cartesian
-product. Curry and uncurry in (28.9) are whole computationally strict functors
-between the two profile categories. Their composites are compared with the
-appropriate identity functors by whole beta and eta paths, and the resulting
-fixed-forward equivalence retains hom action.
+product. Curry and uncurry in (28.9) are whole functors between the two profile
+categories, each paired with supplied $\mathsf{IsStrictFunctor}$ evidence.
+Their composites are compared
+with the appropriate identity functors by whole beta and eta paths, and the
+resulting fixed-forward equivalence retains hom action.
 
 Equation (28.9) is an equivalence of profiled mapping *categories*. On the
-left, objects are strict codes for maps out of the selected tensor and arrows
-are ambient transformations. On the right, an outer strict code selects, at
-each object of $A$, an inner strict code $B\to C$; its arrows are allowed the
-lax transformation behaviour retained by (28.7). Curry and uncurry transport
-not only objects but this transformation tower.
+left, objects are strict packages for maps out of the selected tensor and
+arrows are ambient transformations. On the right, an outer strict package
+selects, at each object of $A$, an inner strict package $B\to C$; its arrows
+are allowed the lax transformation behaviour retained by (28.7). Curry and
+uncurry transport not only objects but this transformation tower.
 
 The adjective *right* fixes which variable is moved into the internal hom. A
 mirror closure would instead expose the opposite orientation and its
@@ -260,8 +279,8 @@ A\longrightarrow
 \tag{28.10}
 $$
 
-is curry applied to the strict identity code on $A\otimes_R B$. Dually,
-evaluation is uncurry applied to the strict identity code of the internal hom.
+is curry applied to the strict identity package on $A\otimes_R B$. Dually,
+evaluation is uncurry applied to the strict identity package of the internal hom.
 These two maps give introduction and elimination for the selected tensor
 boundary.
 
@@ -432,11 +451,12 @@ that the mirror and monoidal boundaries have already been built.
 
 There is a second historical boundary. Some ambient functoriality and
 naturality endpoints are still identified by global prototype conversion
-rules. The strict code correctly selects where the compositor cell itself
-computes to identity, and the unprofiled interchanger remains nonidentity, but
-the eventual migration must re-home endpoint conversions at explicit strict
-profiles. This chapter does not perform that repository-wide normal-form
-change.
+rules. The strict property now records where the compositor cell itself is
+constrained by semantic evidence, and the unprofiled interchanger remains
+nonidentity, but the eventual migration must both re-home endpoint conversions
+at explicit strict profiles and decide where that evidence should be reflected
+into judgmental computation. This chapter does not perform that repository-wide
+normal-form change.
 
 ## 28.7 The End Of The Fourth Spiral
 
@@ -454,7 +474,7 @@ $$
 \text{target or profile}&\text{behaviour of the comparison cell}\\ \hline
 \text{arbitrary directed target}&\text{lax, possibly noninvertible}\\
 \text{path-valued target}&\text{pseudo, invertible by symmetry}\\
-\text{decoded strict profile}&\text{computes to identity}.
+\text{strict property package}&\text{equal to an equality-induced cell}.
 \end{array}
 \tag{28.16}
 $$
@@ -462,20 +482,20 @@ $$
 This table also explains why the historical strict endpoint conversions do
 not invalidate the experiment. They may simplify the written source and
 target of a comparison, but they do not turn the unprofiled cell into the
-identity. The path target, strict decoder, and arbitrary directed target still
+identity. The path target, strict property, and arbitrary directed target still
 select observably different behaviours of the retained witness.
 
 The three rows of (28.16) should be read as operations on one owner, not as
 three parallel theories. The arbitrary directed cell is primary. A
 path-valued target changes its hom into equality and thereby supplies an
-inverse. A strict decoder matches a computationally distinguished head and
-thereby selects the identity reduction. Neither specialization requires the
-ambient compositor, its whole transformation, or its next action to be
-redeclared.
+inverse. A strict package retains an endpoint path and identifies the same
+cell with the arrow induced by that path; judgmental reflection is deliberately
+deferred. Neither specialization requires the ambient compositor, its whole
+transformation, or its next action to be redeclared.
 
 This suggests a discipline for extending the higher theory. First locate the
 whole internal action before introducing a pointwise coherence name. Second
-select the target or code profile that gives the desired invertibility or
+select the target or property profile that gives the desired invertibility or
 strictness. Third derive the geometric consumer—such as the walking square—
 from evaluation, coevaluation, and existing generators. Finally check both a
 non-collapse boundary and one further hom action. A pointwise cell without its
@@ -491,7 +511,7 @@ before its components are named. This keeps higher coherence attached to the
 operations that generate it.
 
 The walking square is therefore valuable even though it is small. It tests
-all of the architectural seams at once: strict codes versus ambient functors,
+all of the architectural seams at once: strict packages versus ambient functors,
 profiled homs versus duplicated hierarchies, closure versus an opaque tensor,
 whole transformations versus square axioms, and directed cells versus paths.
 Passing that test does not finish Gray theory, but it gives the unfinished

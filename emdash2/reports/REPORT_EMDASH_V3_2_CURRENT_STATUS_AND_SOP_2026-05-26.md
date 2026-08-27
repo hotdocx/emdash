@@ -530,10 +530,11 @@ detailed probe evidence.
   their selected strict graph profile, and a genuine arbitrary-`n` object
   decoder. The predecessor index `n` denotes dimension `n+1`. Successor
   decoding curries, takes the walking generator, recursively decodes its graph
-  in `LaxArrow`, and applies the Nat-derived level shift. The strict carrier
-  now computes directly to the public graph, while a graph-head rule constrains
-  the already-extracted compositor to identity for strict-coded endpoints; its
-  existing identity laxity filler is likewise constrained at its own owner.
+  in `LaxArrow`, and applies the Nat-derived level shift. For strict endpoint
+  packages, the public graph is paired with supplied `IsStrictFunctor`
+  evidence over its already-extracted compositor; carrier and evidence
+  projections compute, and no graph-specific compositor or identity rule is
+  added.
   Dimensions one through three, the exact `I tensor_R I`
   interchanger, four square edges, six cube faces, and retained next action are
   checked. No tensor unit, alternate-bracketing coherence, inverse decoder, or
@@ -675,7 +676,7 @@ detailed probe evidence.
   ordinary specialization recovers `fapp1_compositor`. No standalone higher
   cell, rule, unifier, `homd_con_int`, or whole nerve equivalence is added.
   The focused profile reviewer keeps the generic compositor noncollapsed,
-  applies the existing strict-code identity fold at dimension two, and reads
+  checks semantic `IsStrictFunctor` evidence at dimension two, and reads
   Path-valued triangle and tetrahedron components as invertible equalities;
   no parallel simplex classifier or unscoped higher strictness claim is made.
 - `emdash3_2_dependent_simplex_path_associator.lp`: rule-free groupoidal
@@ -1162,14 +1163,14 @@ nonidentity/downstream consumers, an identity/composition critical pair with
 those global cuts must be recorded but does not veto the rule. Do not hide the
 intended lax computation merely to preserve temporary global strictness. This
 exception does not excuse unrelated subject-reduction failures or arbitrary
-unclassified overlaps. Also distinguish the existing
-`ReadablePseudoFunctorProfile`—coherent evidence indexed by an already-formed
-ambient carrier—from a separate carrier classifier; the former already exists
-but neither constructs the carrier nor disables global cuts. Its compositor
-evidence is now fixed-forward `OmegaEquivAlong`: the forward cell is the
-existing internal-action compositor, not a profile-supplied parallel arrow.
-Its readable endpoint ladder compensates for the temporary global strict cut
-and is not a noncollapse theorem.
+unclassified overlaps. Also distinguish the transparent property
+`IsPseudoFunctor(F)`—coherent evidence indexed by an already-formed ambient
+carrier—from a separate carrier classifier; the property neither constructs
+the carrier nor disables global cuts. Its fields are fixed-forward
+`OmegaEquivAlong`: each forward cell is the existing internal-action
+compositor, not a profile-supplied parallel arrow. Its readable endpoint
+ladder compensates for the temporary global strict cut and is not a
+noncollapse theorem.
 
 The walking-endomorphism plan resumed at implementation-goal baseline
 `82d0e27...`. Its G1–G6 implementation is active: `WalkingEnd_cat`,
@@ -3680,11 +3681,13 @@ Active equality/equivalence staging includes:
   readable `eq_ap`/`eq_trans` endpoints without making them runtime-convertible.
   `path_map_compositor_higher_func` retains one off-diagonal next-hom action as
   a whole functor and therefore leaves generic higher iteration available;
-- a computational strict-object/lax-arrow Gray profile and one right-closed
-  consumer: `StrictFunctorData` and `strict_functor_carrier` select the strict
-  object boundary without duplicating the ambient action hierarchy;
-  `GrayHom_lax` reuses `Transf_cat` homs; `GrayTensor_R` has whole strict
-  curry/uncurry maps and equality-valued beta/eta; `WalkingArrow_cat` is
+- a semantic strict-object/lax-arrow Gray profile and one right-closed
+  consumer: `IsStrictFunctor` constrains the existing compositor,
+  `StrictFunctor` is its exact carrier/evidence Sigma package, and the stable
+  `strict_functor` view selects the strict object boundary without duplicating
+  the ambient action hierarchy; `GrayHom_lax` reuses `Transf_cat` homs;
+  `GrayTensor_R` has whole curry/uncurry maps paired with supplied strictness
+  evidence and equality-valued beta/eta; `WalkingArrow_cat` is
   transparently `Join_cat(1,1)`; and the four-object walking square and its
   nonidentity directed interchanger derive from coevaluation and the existing
   whole post/left laxity owner. `gray_interchanger_next_func` retains one next

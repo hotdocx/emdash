@@ -6,6 +6,12 @@ Plan-ID: `CUBICAL-ARROW-SEMICUBICAL-CODES-V3.2`
 
 Status: **completed implementation plan**.
 
+Property-profile supersession (2026-08-27): historical rows below use the
+profile names active at their checkpoints. Current recursive face actions and
+frames carry the transparent property `IsPseudoFunctor`, not an abstract
+`ReadablePseudoFunctorProfile`; see
+`REPORT_EMDASH_V3_2_FUNCTOR_PROPERTY_PROFILE_MIGRATION_PLAN_2026-08-27.md`.
+
 Corrective-Continuation:
 `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`.
 The completed rows remain evidence for the specialized square orientation,

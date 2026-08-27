@@ -104,11 +104,13 @@ The current boundary does not yet construct source action,
 `Groupoidify_func`, or the packaged adjunction with `Path_cat_func`.
 
 Whole internal laxity also exposes the generic functor compositor and its next
-action. Computational strict-functor codes form the objects of the selected
-`GrayHom_lax` profile while reusing the ambient transfor tower. One right
-closure yields a coevaluation-derived walking square and a checked
-nonidentity oriented interchanger. Its checked direction becomes the native
-lax-square direction after exchanging the two coordinate roles.
+action. Semantic strict functors are exact packages
+`(F,IsStrictFunctor(F))`; these packages form the objects of the selected
+`GrayHom_lax` profile while reusing the ambient transfor tower. No second
+strict-functor code grammar or parallel compositor is introduced. One right
+closure yields a coevaluation-derived walking square and a checked nonidentity
+oriented interchanger. Its checked direction becomes the native lax-square
+direction after exchanging the two coordinate roles.
 
 Every transformation now has an iterable whole graph
 `B -> LaxArrow_cat(C)`. Objects compute to its components; capped arrows
@@ -116,15 +118,15 @@ compute to the standard square with literal `F[g]` and `G[g]` sides and a
 filler extracted from the existing post/left internal action. Generic
 `fapp1_func` retains the next whole action. The identity instance knowingly
 overlaps the historical global strict-functor cut; the intended graph beta is
-kept under the prototype policy pending profile-local migration. A selected
-strict code now decodes judgmentally to the public graph; one narrow rule makes
-that graph's already-extracted compositor compute to identity for strict-coded
-endpoints. Fixed-bracketing
-positive right-Gray cubes and one Nat-recursive
+kept under the prototype policy pending profile-local migration. For strict
+endpoint packages, the public graph is paired with supplied
+`IsStrictFunctor` evidence about its already-extracted compositor; carrier and
+evidence projections compute, without a graph-specific identity rule.
+Fixed-bracketing positive right-Gray cubes and one Nat-recursive
 object decoder then give
 
 ```text
-StrictFunctorData(GrayCubePos_R(n),C)
+StrictFunctor(GrayCubePos_R(n),C)
   -> Obj(CubicalLevel(C,succ n)).
 ```
 
@@ -252,10 +254,10 @@ than a second simplex record. A triangle is the `Hom(Sigma)` total of one
 `Sigma(FF)`, and its next action maps `(κ,λ)` to the same base cell together
 with `fdapp1_int_hom_fapp0(...,λ)`. The ordinary dimension-two specialization
 is the active functor compositor, and another higher action remains iterable.
-The same owner stays noncollapsed for a generic map, uses the selected
-strict-code identity fold at the binary compositor, and becomes invertible at
-both triangle and tetrahedron components when the target fibres are path
-categories.
+The same owner stays noncollapsed for a generic map, is constrained by the
+selected semantic `IsStrictFunctor` property at the binary compositor, and
+becomes invertible at both triangle and tetrahedron components when the target
+fibres are path categories.
 
 Represented composition now supplies the first non-circular groupoidal source
 coherence for that recursion. The generic compositor of `Rep_catd_func` is a

@@ -1256,15 +1256,14 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_FUNCTOR_PROPERTY_PROFILE_MIGRATION_PLAN_2026-08-27.md`:
-  active property-first continuation from the completed Gray/cubical profile
-  redesign. It replaces `ReadablePseudoFunctorProfile` by the transparent
-  fixed-forward `IsPseudoFunctor` property, then replaces primitive
-  `StrictFunctorData` codes by ordinary functors paired with
-  `IsStrictFunctor` evidence and one stable evidence-bearing carrier view.
-  Gray strict-object/lax-arrow behavior, cubical recursion, ordinal-simplex
-  action, and higher internal action must remain intact. The generic global
-  strict functoriality, naturality, and displayed-rule migration is an
-  explicit later goal.
+  implementation-complete property-first continuation from the Gray/cubical
+  profile redesign, pending only its final documentation checkpoint. The
+  transparent fixed-forward `IsPseudoFunctor` property and exact
+  carrier/`IsStrictFunctor` package replace the former abstract pseudo wrapper
+  and primitive strict code grammar. Gray strict-object/lax-arrow behavior,
+  cubical recursion, ordinal-simplex action, whole coface equations and higher
+  internal action remain checked. The generic global strict functoriality,
+  naturality, and displayed-rule migration is an explicit later goal.
 
 - `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`:
   completed semantic-adequacy continuation. It first packages the object-level

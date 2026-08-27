@@ -1594,16 +1594,22 @@ simplicial or all-coherence interface.
 
 ## Profiled Gray Right-Closure Notation
 
-Write the selected computational strict-functor code and decoder as
+Write semantic strictness and its package as
 
 ```text
-StrictFunctor(A,B)
-decode_strict(S) : Functor(A,B),
+IsStrictFunctor(F)
+StrictFunctor(A,B) := Sigma F : Functor(A,B), IsStrictFunctor(F)
+underlying(S) : Functor(A,B),
 ```
 
-with kernel owners `StrictFunctorData(A,B)` and
-`strict_functor_carrier(S)`. This is sorted syntax: an arbitrary ambient
-functor is not implicitly promoted by supplying a path-valued law.
+with kernel owners `IsStrictFunctor`, `StrictFunctor`,
+`strict_functor_intro`, `strict_functor_underlying`, and
+`strict_functor_evidence`. The stable ambient view is `strict_functor(S)`.
+At a constructor-visible package its point and hom action computes to the
+underlying carrier; an opaque package retains the stable head. Strictness
+constrains the existing `fapp1_compositor` through `IsStrictCell`; it neither
+supplies another compositor nor currently forces a literal identity normal
+form. The global/profile-local strict-cut migration is separate.
 
 The selected strict-object/lax-arrow internal Hom is written
 
@@ -1675,17 +1681,15 @@ naturality square. Generic `fapp1_func` retains the next action.
 At an identity arrow, this intended graph beta overlaps the historical global
 strict-functor identity cut. Preserve the graph beta and record the warning;
 the global cut is the temporary approximation that must later migrate to its
-strict profile. `ReadablePseudoFunctorProfile` already names coherent evidence
-over an existing carrier but does not install or suppress runtime carrier
-rules. Its fixed-forward field is
+strict profile. `IsPseudoFunctor(F)` already names transparent coherent
+evidence over an existing carrier but does not install or suppress runtime
+carrier rules. Its fixed-forward fields are
 `OmegaEquivAlong(readable_pseudo_post_cell(F,g,f))`; the readable endpoint
 ladder compensates for the temporary global strict cut and must not be printed
-as a noncollapse theorem. The selected strict graph code keeps a stable
-`strict_functor_carrier`;
-its carrier computes directly to `gray_transf_graph_func`. The narrow
-graph-head strictness rule reduces the existing extracted compositor rather
-than declaring another one; the strict endpoint profile also reduces the
-existing identity laxity filler. Do not print this as a new graph unit: the
+as a noncollapse theorem. The selected strict graph package pairs
+`gray_transf_graph_func` with supplied `IsStrictFunctor` evidence; its
+underlying-carrier and evidence projections compute. It adds no graph-head
+compositor or identity-filler rule. Do not print this as a new graph unit: the
 readable `lax_square(id,id,id)` versus canonical nested-Sigma identity remains
 a generic presentation comparison. No carrier path or `eq_ap`/`eq_apd`
 observer is needed.
@@ -1702,7 +1706,7 @@ decode□_R(C,n)
 
 These denote `GrayCubePos_R` and `gray_cube_observation`. The index is the
 predecessor of geometric dimension. Successor decoding uses right curry, the
-walking generator, the strict graph code, recursion in `Arr□(C)`, and
+walking generator, the strict graph package, recursion in `Arr□(C)`, and
 `cubical_level_shift_path`. This notation describes one profiled right-closed
 slice and must not be advertised as a tensor unit, alternate-bracketing
 coherence, inverse decoder, mapping-category equivalence, or full Crans--Gray

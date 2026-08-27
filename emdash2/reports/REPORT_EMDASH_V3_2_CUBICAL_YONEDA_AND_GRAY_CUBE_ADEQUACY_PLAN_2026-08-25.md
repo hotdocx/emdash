@@ -6,6 +6,15 @@ Plan-ID: `CUBICAL-YONEDA-GRAY-CUBE-ADEQUACY-V3.2`
 
 Status: **completed implementation and prototype-lax graph correction**.
 
+Property-profile supersession (2026-08-27): retain the code/profile names in
+the historical rows below as checkpoint evidence. Active consumers now use
+`IsPseudoFunctor(F)` and the exact package
+`StrictFunctor(A,B) := Sigma F, IsStrictFunctor(F)`, as specified by
+`REPORT_EMDASH_V3_2_FUNCTOR_PROPERTY_PROFILE_MIGRATION_PLAN_2026-08-27.md`.
+The variable-dimensional Gray decoder is unchanged in substance but accepts
+that strict package; graph closure supplies a property instead of a second
+strict code or graph-specific identity computation.
+
 Supersedes: no completed plan. It is the semantic-adequacy continuation of
 `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`
 and a consumer of the completed selected right-Gray closure in

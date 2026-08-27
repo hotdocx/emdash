@@ -3952,16 +3952,16 @@ applies to intended lax/profile-specific consumers generally: a known overlap
 with the temporary global strict approximation is diagnostic, whereas subject
 reduction failure or an unrelated unclassified overlap remains a blocker.
 
-The repository already has `ReadablePseudoFunctorProfile(F)`, an abstract
-coherent capability over an existing ambient carrier. Its active mathematical
-field is fixed-forward
+The repository's pseudofunctor boundary is the transparent property
+`IsPseudoFunctor(F)` over an already formed ambient carrier. It is the
+dependent product, over composable arrows, of fixed-forward
 `OmegaEquivAlong(readable_pseudo_post_cell(F,g,f))`: the forward compositor is
 the cell already extracted from internal action, while native selected inverse
 arrows and equality-valued cancellation provide the pseudo structure. The
 pre/right reverse adjustment is derived from a selected inverse plus the
 existing post/pre presentation reframe. Identity/composition and cubical
-structural closure remain explicitly supplied pending extracted unit/composite
-coherence.
+structural closure remain explicitly supplied proofs pending extracted
+unit/composite coherence.
 
 The readable source ladder currently passes through the historical global
 strict-composition path in order to recover the surface spelling
@@ -3973,30 +3973,32 @@ internal-action observations. Until then the implementation validates the
 cell's provenance, selected omega-equivalence evidence, cubical use, and
 iterable higher action under the explicit prototype boundary.
 
-The selected strict-code closure now follows the same computational decoder
-pattern as strict join codes:
+The selected graph closure now follows the same semantic property-package
+pattern as strict join maps:
 
 ```text
-strict_functor_carrier(strict_graph_data(SF,SG,epsilon))
+strict_gray_transf_graph(SF,SG,epsilon)
+  := (Graph(epsilon), gray_transf_graph_is_strict(SF,SG,epsilon)).
+
+strict_functor_underlying(strict_gray_transf_graph(SF,SG,epsilon))
   --> Graph(epsilon).
 ```
 
-Unfolding the carrier erases the generic strict-code discriminator, so one
-narrow graph-head rule makes the already-extracted `fdapp1_int_cell`
-compositor compute to identity for strict-coded endpoint diagrams. It declares
-no second compositor. The existing identity laxity filler likewise computes to
-identity at its own `fdapp1_int_cell` owner. The resulting readable
-`lax_square(id,id,id)` and the canonical nested-Sigma identity remain distinct
-presentations; their eventual comparison is a generic derived-total path, not
-a graph-specific unit. The former opaque carrier path and its `eq_ap`/`eq_apd`
-observers are retired.
+Here `gray_transf_graph_is_strict` constrains the graph's one existing
+internally extracted compositor; it supplies no second cell. Carrier and
+evidence projections compute. The old graph-specific compositor-to-identity
+and identity-filler rules are retired: reflecting semantic strictness into
+judgmental computation belongs to the later global/profile-local strict-cut
+migration. The resulting readable `lax_square(id,id,id)` and the canonical
+nested-Sigma identity remain distinct presentations; their eventual comparison
+is a generic derived-total path, not a graph-specific unit.
 
 The variable-dimensional decoder is then one internal Nat recursion uniform
 in the ambient category:
 
 ```text
 gray_cube_observation(C,n)
-  : StrictFunctorData(GrayCubePos_R(n),C)
+  : StrictFunctor(GrayCubePos_R(n),C)
     -> Obj(CubicalLevel(C,succ n)).
 ```
 
@@ -4235,14 +4237,14 @@ successive projections of one internal action rather than separately stored
 coherence fields.
 
 This common owner has three checked profile readings. An arbitrary ambient
-functor retains a potentially nonidentity directed compositor. A decoded
-`StrictFunctorData` reduces that selected binary cell to identity at the
-existing strict owner; this does not postulate a separate strict tetrahedron
-or collapse every higher ambient cell. If the target fibres are path
-categories, both the compositor triangle and the dependent component emitted
-by `dependent_tetrahedron_map` are equalities, and path symmetry gives their
-inverses. The pseudo reading therefore follows from the codomain shape rather
-than an added inverse record.
+functor retains a potentially nonidentity directed compositor. An
+`IsStrictFunctor` proof constrains that same selected binary cell by an
+endpoint path and equality with its `path_to_hom`; it neither postulates a
+separate strict tetrahedron nor currently forces a literal identity normal
+form. If the target fibres are path categories, both the compositor triangle
+and the dependent component emitted by `dependent_tetrahedron_map` are
+equalities, and path symmetry gives their inverses. The pseudo reading
+therefore follows from the codomain shape rather than an added inverse record.
 
 The first source-coherence adapter is now obtained from the same architecture
 rather than from the primitive categorical associator. The represented
@@ -4853,21 +4855,35 @@ consumer-gated; this first ordinary consumer does not require an
 
 ### Profiled Gray Right Closure And The Walking Interchanger
 
-The first directed Gray consumer reuses that same whole laxity calculus. A
-computationally strict functor is selected by a primitive code and retained
-decoder:
+The first directed Gray consumer reuses that same whole laxity calculus.
+Strictness is a property of the existing internally extracted compositor:
 
 ```text
-StrictFunctorData(A,B)
-strict_functor_carrier : StrictFunctorData(A,B) -> Functor(A,B).
+IsStrictCell_C(c : Hom_C(x,y))
+  := Sigma p : x = y, c = path_to_hom(p)
+
+IsStrictFunctor(F)
+  := Pi X Y Z g f, IsStrictCell(fapp1_compositor(F,g,f))
+
+StrictFunctor(A,B)
+  := Sigma F : Functor(A,B), IsStrictFunctor(F).
 ```
 
-At a decoded strict carrier, the generic `fapp1_compositor` reduces to the
-identity at its existing `fdapp1_int_cell` owner. An arbitrary ambient functor
-does not acquire this reduction. This is a syntactic/profiled boundary, not a
-path-valued `IsStrictFunctor` property. The prototype still carries historical
-global endpoint-identification cuts; migrating those cuts to profile-local
-owners is a later consolidation task and is not silently claimed here.
+`StrictFunctor` is a rigid record-like facade whose carrier reduces to that
+exact Sigma, so category indices remain recoverable on rule left-hand sides.
+`strict_functor_intro`, `strict_functor_underlying`, and
+`strict_functor_evidence` are its constructor and projections. The stable
+`strict_functor(S)` view embeds a package in the ambient functor classifier;
+constructor-visible point and hom action computes to the packaged carrier,
+while opaque higher-produced packages retain the evidence discriminator.
+
+The old code-specific rule reducing `fapp1_compositor` to a literal identity
+is retired. For arbitrary semantic evidence such a blanket rule is not
+subject-reduction sound: strictness is instead the stored equality relating
+the one existing compositor to an equality-induced arrow. The prototype still
+carries historical global endpoint-identification cuts. Reflecting strictness
+evidence into profile-local judgmental computation, and migrating those global
+cuts, is a later consolidation task and is not silently claimed here.
 
 The selected internal Hom is the category
 
@@ -4875,8 +4891,8 @@ The selected internal Hom is the category
 GrayHom_lax(A,B),
 ```
 
-whose objects are `StrictFunctorData(A,B)` codes and whose homs are the
-existing `Transf_cat` homs between their decoded carriers. Identity,
+whose objects are `StrictFunctor(A,B)` packages and whose homs are the
+existing `Transf_cat` homs between their stable ambient views. Identity,
 composition, modifications, and every subsequent iterated hom therefore
 reuse the ambient calculus. The whole `grayhom_lax_include_func` exposes this
 profile inside `Functor_cat(A,B)` without identifying the two category heads.
@@ -4888,11 +4904,12 @@ GrayHom_lax(GrayTensor_R(A,B),C)
   ~= GrayHom_lax(A,GrayHom_lax(B,C)).
 ```
 
-Whole computationally strict `gray_curry_R_func` and
-`gray_uncurry_R_func` maps carry the two directions, while equality-valued
-beta and eta comparisons assemble the existing `OmegaEquivAlong Cat_cat`
-interface. Coevaluation and evaluation are the respective transposes of the
-selected strict identity codes; they are not unrelated tensor operations.
+Whole `gray_curry_R_func` and `gray_uncurry_R_func` maps carry the two
+directions. Each is paired with supplied `IsStrictFunctor` evidence, while
+equality-valued beta and eta comparisons assemble the existing
+`OmegaEquivAlong Cat_cat` interface. Coevaluation and evaluation are the
+respective transposes of the selected strict identity packages; they are not
+unrelated tensor operations.
 
 For the walking arrow
 
