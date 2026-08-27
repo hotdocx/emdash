@@ -1039,8 +1039,8 @@ record.
 ## Recent And Corrective Plan Ledgers
 
 - `REPORT_EMDASH_V3_2_INTRINSIC_FUNCTOR_PROFILES_AND_GRAY_GRAPH_REDESIGN_PLAN_2026-08-26.md`:
-  active fixed-forward-equivalence correction following the completed cubical
-  Gray adequacy redesign. The strict graph
+  completed fixed-forward-equivalence correction following the cubical Gray
+  adequacy redesign, checkpointed at `cc6005c`. The strict graph
   code now decodes computationally to the public graph; its existing identity
   filler and binary compositor compute at their internal-action owners, while
   the former opaque carrier path and `eq_ap`/`eq_apd` observers are retired.

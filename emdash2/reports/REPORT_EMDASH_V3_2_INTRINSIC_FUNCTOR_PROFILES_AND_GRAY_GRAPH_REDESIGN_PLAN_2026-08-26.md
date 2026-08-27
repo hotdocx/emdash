@@ -4,10 +4,11 @@ Date: 2026-08-27 (America/Toronto)
 
 Plan-ID: `INTRINSIC-FUNCTOR-PROFILES-GRAY-GRAPH-V3.2`
 
-Status: **active corrective continuation**. The 2026-08-26 graph/profile
+Status: **completed corrective continuation**. The 2026-08-26 graph/profile
 tranche remains historical green evidence; rows `IFPG-OMEGA-AUDIT-11`
 through `IFPG-OMEGA-CLOSE-15` correct its fixed-forward equivalence boundary
-without launching the deferred global strict/lax migration.
+at checkpoint `cc6005c` without launching the deferred global strict/lax
+migration.
 
 Supersedes: no completed plan. It is a corrective continuation of
 `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`.
@@ -433,10 +434,10 @@ This plan does not initially claim:
 | `IFPG-DOC-9` | complete, closeout checkpoint `02675f4` | Synchronized Foundations, current SOP/status, canonical syntax, AGENTS, `emdash2/README`, report map, superseded cubical-plan descriptions, focused reviewers, and the generated catalog. The `cubical_*` vocabulary is explicitly readability rather than compatibility, fixed-forward evidence and supplied-instance boundaries are stated consistently, and retired graph-path/independent-compositor names have no active source consumer. |
 | `IFPG-CLOSE-10` | complete, closeout checkpoint `02675f4` | Every scoped row is implemented or precisely deferred behind a named generic prerequisite. Graph profile/decoder/dimension-two, fixed-forward profile, cubical lift, square-level and recursive face-action sources/reviewers are green under the 90-second ceiling. Exact inventories are `1311 = 1152 + 159` for the graph profile and `1308 = 1149 + 159` for readable/cubical profile consumers; strict LHS audits report zero candidates. Catalog, report headers, active references, TOC and diff hygiene are green. Long registered-source, examples, health and repository aggregates remain intentionally omitted because unchanged boundaries and focused evidence suffice. |
 | `IFPG-OMEGA-AUDIT-11` | complete design correction | Re-audited the fixed-forward field and endpoint ladder. `IsoCellEvidence` is a duplicate single-inverse vocabulary; `OmegaEquivAlong` is the active native fixed-arrow owner. A focused no-adapter diagnostic confirms that the historical whole strict cut normalizes the formal source to `F[hom_postcomp(id,g,f)]`, so the existing `fapp1_comp_path` rung is retained only as an explicit prototype presentation adapter. It does not construct the independently extracted cell and does not claim noncollapsed lax endpoints. The large global strict/lax migration remains out of scope. |
-| `IFPG-OMEGA-EVIDENCE-12` | complete, checkpoint pending | Removed the duplicate transparent `IsoCellEvidence` Sigma and all three projections. `readable_pseudo_profile_intro` and its computing field projection now use `OmegaEquivAlong` over the exact existing `readable_pseudo_post_cell`, adding no cell, rule, unifier, or facade. The explicit-constructor reviewer computes to the supplied native evidence family. |
-| `IFPG-OMEGA-CUBICAL-13` | complete, checkpoint pending | `readable_pseudo_pre_inverse` now selects `omega_equiv_along_left_inv` and follows it by the existing post/pre presentation reframe. The intrinsic square map remains exactly `phi(b,u) ; F_1[alpha] ; phi(v,a)^-1`; edge/square computation, next action, square level, and variable-dimensional `{L,R,*}` recursion are green. The five identity/composition/source/target/lifted profile constants remain explicitly supplied. |
-| `IFPG-OMEGA-DOC-14` | complete, checkpoint pending | Synchronized the active plan, AGENTS, Foundations, status/SOP, canonical syntax, README/report map, predecessor cubical/Gray ledgers, graph comments, and focused reviewer. Every active claim now names fixed-forward `OmegaEquivAlong`; the endpoint ladder is consistently documented as a temporary strict-prototype adapter validating cell provenance/iteration rather than noncollapsed lax endpoints. Historical ledger mentions of the retired name remain only as dated evidence. |
-| `IFPG-OMEGA-CLOSE-15` | complete pending exact checkpoint | Focused profile/cubical sources and reviewers, square level and recursive face action are green under the 90-second ceiling. Warning inventories remain exactly `1308 = 1149 critical + 159 replaceable`; strict LHS audits report zero candidates. Catalog, source TOC and diff hygiene are green. No active source/reviewer retains `IsoCellEvidence`; only its explicit historical/retirement mentions remain. Long registered-source, examples, health and repository aggregates were intentionally omitted because no changed boundary requires them. |
+| `IFPG-OMEGA-EVIDENCE-12` | complete, checkpoint `cc6005c` | Removed the duplicate transparent `IsoCellEvidence` Sigma and all three projections. `readable_pseudo_profile_intro` and its computing field projection now use `OmegaEquivAlong` over the exact existing `readable_pseudo_post_cell`, adding no cell, rule, unifier, or facade. The explicit-constructor reviewer computes to the supplied native evidence family. |
+| `IFPG-OMEGA-CUBICAL-13` | complete, checkpoint `cc6005c` | `readable_pseudo_pre_inverse` now selects `omega_equiv_along_left_inv` and follows it by the existing post/pre presentation reframe. The intrinsic square map remains exactly `phi(b,u) ; F_1[alpha] ; phi(v,a)^-1`; edge/square computation, next action, square level, and variable-dimensional `{L,R,*}` recursion are green. The five identity/composition/source/target/lifted profile constants remain explicitly supplied. |
+| `IFPG-OMEGA-DOC-14` | complete, checkpoint `cc6005c` | Synchronized the active plan, AGENTS, Foundations, status/SOP, canonical syntax, README/report map, predecessor cubical/Gray ledgers, graph comments, and focused reviewer. Every active claim now names fixed-forward `OmegaEquivAlong`; the endpoint ladder is consistently documented as a temporary strict-prototype adapter validating cell provenance/iteration rather than noncollapsed lax endpoints. Historical ledger mentions of the retired name remain only as dated evidence. |
+| `IFPG-OMEGA-CLOSE-15` | complete, checkpoint `cc6005c` | Focused profile/cubical sources and reviewers, square level and recursive face action are green under the 90-second ceiling. Warning inventories remain exactly `1308 = 1149 critical + 159 replaceable`; strict LHS audits report zero candidates. Catalog, source TOC and diff hygiene are green. No active source/reviewer retains `IsoCellEvidence`; only its explicit historical/retirement mentions remain. Long registered-source, examples, health and repository aggregates were intentionally omitted because no changed boundary requires them. |
 
 ### 12.1 Historical 2026-08-26 Completion Verdict
 
@@ -470,6 +471,7 @@ Checkpoint chain:
 89ea513  add explicit intrinsic pseudo profile constructor
 a07f8d0  constrain Gray graph unit at intrinsic cell
 02675f4  close intrinsic functor profile redesign
+cc6005c  use native omega equivalence for pseudo profiles
 ```
 
 ## 13. Validation Policy
