@@ -14,9 +14,9 @@ require open emdash.emdash3_2_join_cross_compatibility;
 
 symbol ordinal_join_terminal_func
   : τ (Functor Terminal_cat Terminal_cat)
-≔ @strict_functor_carrier
+≔ @strict_functor
     Terminal_cat Terminal_cat
-    (@strict_identity_data Terminal_cat);
+    (@strict_identity Terminal_cat);
 
 symbol ordinal_join_target_cat
   (A : Cat)

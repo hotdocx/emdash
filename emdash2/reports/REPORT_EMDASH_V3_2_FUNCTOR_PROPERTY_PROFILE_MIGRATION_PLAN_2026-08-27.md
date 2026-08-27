@@ -116,7 +116,8 @@ judgmental and no independent unitor field is added. If a future fully lax
 unit interface is introduced, strict-unit evidence must extend this property
 in that later plan.
 
-Semantic strict functors are ordinary dependent packages:
+Semantic strict functors are ordinary dependent packages behind one rigid
+record-like classifier head:
 
 ```text
 StrictFunctor(A,B)
@@ -127,16 +128,26 @@ strict_functor_underlying(S) : Functor(A,B)
 strict_functor_evidence(S) : IsStrictFunctor(underlying(S)).
 ```
 
+The outer `StrictFunctor(A,B)` symbol is injective and its carrier has one
+runtime rule to the exact Sigma above. This preserves rigid `(A,B)` index
+inversion on rewrite LHSs; it does not introduce another code syntax or hide
+different mathematical data.
+
 One stable evidence-bearing view is permitted:
 
 ```text
 strict_functor(S) : Functor(A,B).
 ```
 
-Its point and hom actions expose `strict_functor_underlying(S)`. The existing
-selected compositor-to-identity computation moves from
-`strict_functor_carrier(oldCode)` to this package-indexed head. A whole
-runtime fold that erases `S` before profile-local computation is not required.
+At a constructor-visible package its point and hom actions expose the packaged
+carrier. An opaque package returned by higher action retains the
+`strict_functor(S)` head instead of losing the evidence discriminator. The old
+code-specific compositor-to-identity rewrite is retired: semantic strictness
+is the `IsStrictCell` evidence equating the existing compositor with
+`path_to_hom` of its stored endpoint path. Reflecting that proof back into
+judgmental identity computation belongs to the separately deferred global/
+profile-local rewrite migration. A whole runtime fold that erases `S` before
+that future computation is not required.
 
 ## 5. Gray Category And Hom Profile
 
@@ -191,10 +202,10 @@ substitute for that separate transformation-profile work.
 | `FPP-00` | complete | Created `/home/user1/emdash1-functor-property-profiles-v1` on `goal/functor-property-profiles-v3.2` from clean validated baseline `1dce023`; bootstrapped its own pnpm link graph. No push, merge, publication, history rewrite, or cleanup is authorized. |
 | `FPP-AUDIT-1` | complete | Exact lexical scope is nine pseudo-profile source/reviewer files and twenty strict-code source/reviewer files. The pseudo migration is a property/name change. The strict migration changes primitive codes into Sigma packages and must retain an evidence-bearing stable carrier view; it does not move global strict rules. |
 | `FPP-PSEUDO-2` | complete, checkpoint `5d835b8` | `IsPseudoFunctor` is the transparent dependent product of fixed-forward `OmegaEquivAlong` evidence. The abstract profile wrapper and constructor/projection rule are removed; five supplied closure proofs and all cubical, square, recursive face-action and frame consumers use the property directly. Focused sources/reviewers are green; warning inventories remain exactly `1308 = 1149 critical + 159 replaceable`, strict LHS audits report zero candidates, and catalog/TOC/diff hygiene pass. Authority prose is consolidated in `FPP-DOC-6`. |
-| `FPP-STRICT-SHAPE-3` | pending | Probe and promote `IsStrictCell`, `IsStrictFunctor`, transparent `StrictFunctor` package observations, and the stable `strict_functor` view. Preserve point/arrow action, exact intrinsic compositor ownership, selected strict identity computation, next action, subject reduction, warning inventory, and zero unreviewed LHS candidates. |
-| `FPP-STRICT-GRAY-4` | pending | Change `GrayHom_lax` objects to strict packages; migrate identity, curry/uncurry, transformation graph, walking-square, Gray cube recursion/decoder, and focused reviewers. Retain strict-object/lax-arrow homs and whole inclusion action. |
-| `FPP-STRICT-SIMPLEX-5` | pending | Replace strict join and identity codes in simplex shapes, tetrahedron faces, ordinal fillers/successors and their focused reviewers by ordinary functors paired with supplied/derived `IsStrictFunctor` evidence. Preserve all visible face and retained next-action computations. |
-| `FPP-DOC-6` | pending | Synchronize AGENTS, Foundations, status/SOP, canonical syntax, README, report index, predecessor plans, examples and generated catalog. Record `IsPseudoFunctor` as normal-pseudo under the present unit convention, `IsStrictFunctor` as proof-carrying code, and the global strict-rule migration as deferred. |
+| `FPP-STRICT-SHAPE-3` | complete, awaiting checkpoint | Promoted future-proof `IsStrictCell(c) := Sigma p:x=y, c=path_to_hom(p)`, transparent `IsStrictFunctor`, the rigid exact-Sigma `StrictFunctor(A,B)` facade, constructor/projections, and constructor-visible `strict_functor` point/whole-hom/capped-arrow action. Opaque higher-produced packages retain the stable view. The old blanket compositor-to-literal-identity rule is retired rather than renamed because it is not subject-reduction sound for arbitrary semantic evidence. The focused reviewer is green; `gray_profiles` retains exactly the baseline warning inventory `1308 = 1149 critical + 159 replaceable`, with zero strict LHS-audit findings. |
+| `FPP-STRICT-GRAY-4` | complete, awaiting checkpoint | `GrayHom_lax` objects are strict packages while homs remain the ambient lax/coherent `Transf_cat` tower. Identity, raw curry/uncurry plus supplied strictness, coevaluation/evaluation, transformation-graph closure, walking square and variable-dimensional cube decoding use packages without a second code grammar. Package carrier/evidence projections and retained graph/cube action are green. The graph profile remains exactly `1311 = 1152 + 159`, with unchanged critical-pair structure and zero strict LHS-audit findings. |
+| `FPP-STRICT-SIMPLEX-5` | complete, awaiting checkpoint | Join inclusions/maps and selected faces pair their ordinary carriers with supplied `IsStrictFunctor` evidence. `strict_join_map` acts on the packages' actual first projections, and `selected_face_func` is that actual carrier rather than the stable Gray-profile view; this preserves all whole coface equations while keeping the evidence package available separately. Simplex shapes, tetrahedron faces, ordinal filler/successor, dimensions three/four and focused reviewers are green. The simplex owner remains exactly `1328 = 1169 + 159`, with unchanged critical-pair structure and zero strict LHS-audit findings. |
+| `FPP-DOC-6` | in progress | Synchronize AGENTS, Foundations, status/SOP, canonical syntax, README, report index, predecessor plans, examples and generated catalog. Record `IsPseudoFunctor` as normal-pseudo under the present unit convention, `IsStrictFunctor` as proof-carrying code, and the global strict-rule migration as deferred. |
 | `FPP-CLOSE-7` | pending | Require focused sources/reviewers, exact warning and LHS audits, catalog/TOC/diff hygiene, and a clean checkpoint chain. Eagerly avoid long registered-source, examples, health and repository aggregates unless omission blocks classification. Complete only after no active source/reviewer uses `ReadablePseudoFunctorProfile`, `StrictFunctorData`, or `strict_functor_carrier`. |
 
 ## 8. Validation Policy

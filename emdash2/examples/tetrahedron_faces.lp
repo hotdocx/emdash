@@ -9,41 +9,55 @@
 
 require open emdash.emdash3_2_tetrahedron_faces;
 
-// The four cofaces use the expected join branches.
+// The four coface packages have the expected join carriers.
 assert ⊢
-  simplex_triangle_zero_one_two_func
-  ≡ @join_fst_func
+  @strict_functor_underlying
+    (@DirectedSimplex_cat (succ (succ zero)))
+    (@DirectedSimplex_cat (succ (succ (succ zero))))
+    (@selected_face_data
+      (succ (succ zero)) (succ (succ (succ zero)))
+      simplex_triangle_zero_one_two_realization)
+≡ @join_fst_func
       (@DirectedSimplex_cat (succ (succ zero))) Terminal_cat;
 
 assert ⊢
-  simplex_triangle_zero_one_three_func
-  ≡ @join_map_func
+  @strict_functor_underlying
+    (@DirectedSimplex_cat (succ (succ zero)))
+    (@DirectedSimplex_cat (succ (succ (succ zero))))
+    (@selected_face_data
+      (succ (succ zero)) (succ (succ (succ zero)))
+      simplex_triangle_zero_one_three_realization)
+≡ @join_map_func
       WalkingArrow_cat Terminal_cat
       (@DirectedSimplex_cat (succ (succ zero))) Terminal_cat
       simplex_edge_zero_one_func
-      (@strict_functor_carrier
-        Terminal_cat Terminal_cat
-        (@strict_identity_data Terminal_cat));
+      (@id_func Terminal_cat);
 
 assert ⊢
-  simplex_triangle_zero_two_three_func
-  ≡ @join_map_func
+  @strict_functor_underlying
+    (@DirectedSimplex_cat (succ (succ zero)))
+    (@DirectedSimplex_cat (succ (succ (succ zero))))
+    (@selected_face_data
+      (succ (succ zero)) (succ (succ (succ zero)))
+      simplex_triangle_zero_two_three_realization)
+≡ @join_map_func
       WalkingArrow_cat Terminal_cat
       (@DirectedSimplex_cat (succ (succ zero))) Terminal_cat
       simplex_edge_zero_two_func
-      (@strict_functor_carrier
-        Terminal_cat Terminal_cat
-        (@strict_identity_data Terminal_cat));
+      (@id_func Terminal_cat);
 
 assert ⊢
-  simplex_triangle_one_two_three_func
-  ≡ @join_map_func
+  @strict_functor_underlying
+    (@DirectedSimplex_cat (succ (succ zero)))
+    (@DirectedSimplex_cat (succ (succ (succ zero))))
+    (@selected_face_data
+      (succ (succ zero)) (succ (succ (succ zero)))
+      simplex_triangle_one_two_three_realization)
+≡ @join_map_func
       WalkingArrow_cat Terminal_cat
       (@DirectedSimplex_cat (succ (succ zero))) Terminal_cat
       simplex_edge_one_two_func
-      (@strict_functor_carrier
-        Terminal_cat Terminal_cat
-        (@strict_identity_data Terminal_cat));
+      (@id_func Terminal_cat);
 
 // Shared edge 01: both code and whole realization compute.
 assert ⊢

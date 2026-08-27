@@ -25,20 +25,13 @@ assertnot [A B : Cat]
       (@strict_functor_compositor_lhs
         A B (@dependent_simplex_unprofiled_functor A B) X Y Z g f);
 
-// A decoded strict code collapses that same generic compositor to identity.
+// A strict package retains semantic evidence about that same intrinsic
+// compositor; it does not introduce or force a parallel literal-id cell.
 assert [A B : Cat]
-  (S : τ (@StrictFunctorData A B))
-  [X Y Z : τ (Obj A)]
-  (g : τ (Hom A Y Z))
-  (f : τ (Hom A X Y)) ⊢
-  @fapp1_compositor
-    A B (@strict_functor_carrier A B S) X Y Z g f
-  ≡ @id
-      (Hom_cat B
-        (@fapp0 A B (@strict_functor_carrier A B S) X)
-        (@fapp0 A B (@strict_functor_carrier A B S) Z))
-      (@strict_functor_compositor_lhs
-        A B (@strict_functor_carrier A B S) X Y Z g f);
+  (S : τ (@StrictFunctor A B)) ⊢
+  @strict_functor_evidence A B S
+  : τ (@IsStrictFunctor
+      A B (@strict_functor_underlying A B S));
 
 // Path realization reads the same compositor as an equality with a symmetric
 // inverse and keeps the existing higher action.

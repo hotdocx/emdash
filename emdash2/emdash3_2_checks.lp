@@ -25029,7 +25029,7 @@ assert [A B : Cat] (F : τ (Functor A B))
 // object sort while reusing the complete ambient transfor and higher-cell
 // tower.
 assert [A B : Cat]
-  (S : τ (@StrictFunctorData A B)) ⊢
+  (S : τ (@StrictFunctor A B)) ⊢
   S : τ (Obj (@GrayHom_lax A B));
 
 assert [A B : Cat]
@@ -25037,16 +25037,16 @@ assert [A B : Cat]
   Hom_cat (@GrayHom_lax A B) X Y
   ≡ @Transf_cat
       A B
-      (@strict_functor_carrier A B X)
-      (@strict_functor_carrier A B Y);
+      (@strict_functor A B X)
+      (@strict_functor A B Y);
 
 assert [A B : Cat]
   (X : τ (Obj (@GrayHom_lax A B))) ⊢
   @id (@GrayHom_lax A B) X
   : τ (Hom
       (@Functor_cat A B)
-      (@strict_functor_carrier A B X)
-      (@strict_functor_carrier A B X));
+      (@strict_functor A B X)
+      (@strict_functor A B X));
 
 assert [A B : Cat]
   (X Y Z : τ (Obj (@GrayHom_lax A B)))
@@ -25055,8 +25055,8 @@ assert [A B : Cat]
   @comp_fapp0 (@GrayHom_lax A B) X Y Z g f
   : τ (Hom
       (@Functor_cat A B)
-      (@strict_functor_carrier A B X)
-      (@strict_functor_carrier A B Z));
+      (@strict_functor A B X)
+      (@strict_functor A B Z));
 
 assert [A B : Cat]
   (X Y : τ (Obj (@GrayHom_lax A B))) ⊢
@@ -25068,27 +25068,16 @@ assert [A B : Cat]
   ≡ @id_func
       (@Transf_cat
         A B
-        (@strict_functor_carrier A B X)
-        (@strict_functor_carrier A B Y));
+        (@strict_functor A B X)
+        (@strict_functor A B Y));
 
-// A decoded strict code makes the already extracted ambient compositor
-// compute to identity at its stable fdapp1_int_cell owner.
+// A strict package retains semantic evidence about the already extracted
+// ambient compositor; it introduces no parallel or literal-id cell.
 assert [A B : Cat]
-  (S : τ (@StrictFunctorData A B))
-  [X Y Z : τ (Obj A)]
-  (g : τ (Hom A Y Z))
-  (f : τ (Hom A X Y)) ⊢
-  @fapp1_compositor
-    A B (@strict_functor_carrier A B S)
-    X Y Z g f
-  ≡ @id
-      (Hom_cat
-        B
-        (@fapp0 A B (@strict_functor_carrier A B S) X)
-        (@fapp0 A B (@strict_functor_carrier A B S) Z))
-      (@strict_functor_compositor_lhs
-        A B (@strict_functor_carrier A B S)
-        X Y Z g f);
+  (S : τ (@StrictFunctor A B)) ⊢
+  @strict_functor_evidence A B S
+  : τ (@IsStrictFunctor
+      A B (@strict_functor_underlying A B S));
 
 // Ambient functors are not silently promoted into the strict object sort.
 assertnot [A B : Cat]
@@ -25178,18 +25167,18 @@ assert [A B C : Cat] ⊢
   ≡ @GrayHom_lax A (@GrayHom_lax B C);
 
 assert [A B C : Cat] ⊢
-  @gray_curry_R_func A B C
-  ≡ @strict_functor_carrier
+  @strict_functor_underlying
       (@GrayRightSource A B C)
       (@GrayRightTarget A B C)
-      (@gray_curry_R_data A B C);
+      (@gray_curry_R_strict A B C)
+  ≡ @gray_curry_R_func A B C;
 
 assert [A B C : Cat] ⊢
-  @gray_uncurry_R_func A B C
-  ≡ @strict_functor_carrier
+  @strict_functor_underlying
       (@GrayRightTarget A B C)
       (@GrayRightSource A B C)
-      (@gray_uncurry_R_data A B C);
+      (@gray_uncurry_R_strict A B C)
+  ≡ @gray_uncurry_R_func A B C;
 
 // Curry exposes the generic whole Hom action, so no capped transpose is added.
 assert [A B C : Cat]
@@ -25244,16 +25233,16 @@ assert [A B C : Cat]
 
 // Coevaluation and evaluation are the two selected identity transposes.
 assert [A B : Cat] ⊢
-  @gray_coevaluation_R_data A B
+  @gray_coevaluation_R_strict A B
   ≡ @gray_curry_R
       A B (@GrayTensor_R A B)
-      (@strict_identity_data (@GrayTensor_R A B));
+      (@strict_identity (@GrayTensor_R A B));
 
 assert [B C : Cat] ⊢
-  @gray_evaluation_R_data B C
+  @gray_evaluation_R_strict B C
   ≡ @gray_uncurry_R
       (@GrayHom_lax B C) B C
-      (@strict_identity_data (@GrayHom_lax B C));
+      (@strict_identity (@GrayHom_lax B C));
 
 // The selected boundary remains distinct from the Cartesian scaffold.
 assertnot [A B : Cat] ⊢

@@ -2,7 +2,7 @@
   Focused reviewer for join-built ordinary simplex shapes.
 
   The whole join map reindexes the target's existing natural cross cell.
-  Selected strict codes realize the two vertices of Delta[1] and the three
+  Selected strict packages realize the two vertices of Delta[1] and the three
   edges of Delta[2]; their code-level and functor-level coface equations agree.
   The augmented empty face and arbitrary-code realization remain deferred.
 */
@@ -60,7 +60,7 @@ assert
         (@Unit_prof (@Join_cat A2 B2))
         (@join_map_right_func A B A2 B2 G)));
 
-// Selected dictionaries project their code and strict whole functor.
+// Selected dictionaries project their face code and strict package carrier.
 assert ⊢
   simplex_vertex_zero_code
   ≡ @face_skip
@@ -74,65 +74,68 @@ assert ⊢
       (@face_skip zero zero face_nil);
 
 assert ⊢
-  simplex_vertex_zero_func
-  ≡ @join_fst_func Terminal_cat Terminal_cat;
+  @strict_functor_underlying
+    Terminal_cat WalkingArrow_cat
+    (@selected_face_data
+      zero (succ zero) simplex_vertex_zero_realization)
+≡ @join_fst_func Terminal_cat Terminal_cat;
 
 assert ⊢
-  simplex_vertex_one_func
-  ≡ @join_snd_func Terminal_cat Terminal_cat;
+  @strict_functor_underlying
+    Terminal_cat WalkingArrow_cat
+    (@selected_face_data
+      zero (succ zero) simplex_vertex_one_realization)
+≡ @join_snd_func Terminal_cat Terminal_cat;
 
 assert ⊢
-  simplex_edge_zero_one_func
-  ≡ @join_fst_func WalkingArrow_cat Terminal_cat;
+  @strict_functor_underlying
+    WalkingArrow_cat
+    (@Join_cat WalkingArrow_cat Terminal_cat)
+    (@selected_face_data
+      (succ zero) (succ (succ zero))
+      simplex_edge_zero_one_realization)
+≡ @join_fst_func WalkingArrow_cat Terminal_cat;
 
 assert ⊢
-  simplex_edge_zero_two_func
-  ≡ @join_map_func
+  @strict_functor_underlying
+    WalkingArrow_cat
+    (@Join_cat WalkingArrow_cat Terminal_cat)
+    (@selected_face_data
+      (succ zero) (succ (succ zero))
+      simplex_edge_zero_two_realization)
+≡ @join_map_func
       Terminal_cat Terminal_cat WalkingArrow_cat Terminal_cat
       simplex_vertex_zero_func
-      (@strict_functor_carrier
-        Terminal_cat Terminal_cat
-        (@strict_identity_data Terminal_cat));
+      (@id_func Terminal_cat);
 
 assert ⊢
-  simplex_edge_one_two_func
-  ≡ @join_map_func
+  @strict_functor_underlying
+    WalkingArrow_cat
+    (@Join_cat WalkingArrow_cat Terminal_cat)
+    (@selected_face_data
+      (succ zero) (succ (succ zero))
+      simplex_edge_one_two_realization)
+≡ @join_map_func
       Terminal_cat Terminal_cat WalkingArrow_cat Terminal_cat
       simplex_vertex_one_func
-      (@strict_functor_carrier
-        Terminal_cat Terminal_cat
-        (@strict_identity_data Terminal_cat));
+      (@id_func Terminal_cat);
 
-// Every selected realization inherits the profile-local strict compositor.
+// Every selected realization retains semantic strictness evidence over the
+// intrinsic compositor of its packaged carrier.
 assert
   (p n : τ Nat_grpd)
-  (R : τ (@SelectedFaceRealization p n))
-  [X Y Z : τ (Obj (@DirectedSimplex_cat p))]
-  (g : τ (Hom (@DirectedSimplex_cat p) Y Z))
-  (f : τ (Hom (@DirectedSimplex_cat p) X Y)) ⊢
-  @fapp1_compositor
+  (R : τ (@SelectedFaceRealization p n)) ⊢
+  @strict_functor_evidence
     (@DirectedSimplex_cat p)
     (@DirectedSimplex_cat n)
-    (@selected_face_func p n R)
-    X Y Z g f
-  ≡ @id
-      (Hom_cat
-        (@DirectedSimplex_cat n)
-        (@fapp0
-          (@DirectedSimplex_cat p)
-          (@DirectedSimplex_cat n)
-          (@selected_face_func p n R)
-          X)
-        (@fapp0
-          (@DirectedSimplex_cat p)
-          (@DirectedSimplex_cat n)
-          (@selected_face_func p n R)
-          Z))
-      (@strict_functor_compositor_lhs
+    (@selected_face_data p n R)
+  : τ (@IsStrictFunctor
+      (@DirectedSimplex_cat p)
+      (@DirectedSimplex_cat n)
+      (@strict_functor_underlying
         (@DirectedSimplex_cat p)
         (@DirectedSimplex_cat n)
-        (@selected_face_func p n R)
-        X Y Z g f);
+        (@selected_face_data p n R)));
 
 // Code-level first coface equation in the augmented index category.
 assert ⊢

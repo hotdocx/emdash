@@ -4,7 +4,7 @@
   The recursion is uniform in the target category:
 
     decode_n : Pi C,
-      StrictFunctorData(GrayCubePos_R(n),C)
+      StrictFunctor(GrayCubePos_R(n),C)
         -> Obj(CubicalLevel_cat(C,succ n)).
 
   Dimension one evaluates a strict walking map at the two endpoints and the
@@ -76,27 +76,27 @@ symbol GrayCubeObservationFamily
     (Obj Cat_cat)
     (λ C : Cat,
       @Function_grpd
-        (@StrictFunctorData (@GrayCubePos_R n) C)
+        (@StrictFunctor (@GrayCubePos_R n) C)
         (Obj (@CubicalLevel_cat C (succ n))));
 
 // Dimension-one observation of a strict walking-arrow realization.
 symbol gray_cube_decode_one
   [C : Cat]
-  (H : τ (@StrictFunctorData WalkingArrow_cat C))
+  (H : τ (@StrictFunctor WalkingArrow_cat C))
   : τ (Obj (@CubicalLevel_cat C (succ zero)))
 ≔ @lax_edge
     C
     (@fapp0
       WalkingArrow_cat C
-      (@strict_functor_carrier WalkingArrow_cat C H)
+      (@strict_functor WalkingArrow_cat C H)
       walking_arrow_src)
     (@fapp0
       WalkingArrow_cat C
-      (@strict_functor_carrier WalkingArrow_cat C H)
+      (@strict_functor WalkingArrow_cat C H)
       walking_arrow_tgt)
     (@fapp1_fapp0
       WalkingArrow_cat C
-      (@strict_functor_carrier WalkingArrow_cat C H)
+      (@strict_functor WalkingArrow_cat C H)
       walking_arrow_src walking_arrow_tgt
       walking_arrow_generator);
 
@@ -104,8 +104,8 @@ symbol gray_cube_decode_one
 symbol gray_cube_step_curry_data
   [C : Cat]
   (n : τ Nat_grpd)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R (succ n)) C))
-  : τ (@StrictFunctorData
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C))
+  : τ (@StrictFunctor
       WalkingArrow_cat
       (@GrayHom_lax (@GrayCubePos_R n) C))
 ≔ @gray_curry_R
@@ -117,11 +117,11 @@ symbol gray_cube_step_curry_data
 symbol gray_cube_step_curry_func
   [C : Cat]
   (n : τ Nat_grpd)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R (succ n)) C))
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C))
   : τ (Functor
       WalkingArrow_cat
       (@GrayHom_lax (@GrayCubePos_R n) C))
-≔ @strict_functor_carrier
+≔ @strict_functor
     WalkingArrow_cat
     (@GrayHom_lax (@GrayCubePos_R n) C)
     (@gray_cube_step_curry_data C n H);
@@ -129,8 +129,8 @@ symbol gray_cube_step_curry_func
 symbol gray_cube_step_source_data
   [C : Cat]
   (n : τ Nat_grpd)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R (succ n)) C))
-  : τ (@StrictFunctorData (@GrayCubePos_R n) C)
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C))
+  : τ (@StrictFunctor (@GrayCubePos_R n) C)
 ≔ @fapp0
     WalkingArrow_cat
     (@GrayHom_lax (@GrayCubePos_R n) C)
@@ -140,8 +140,8 @@ symbol gray_cube_step_source_data
 symbol gray_cube_step_target_data
   [C : Cat]
   (n : τ Nat_grpd)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R (succ n)) C))
-  : τ (@StrictFunctorData (@GrayCubePos_R n) C)
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C))
+  : τ (@StrictFunctor (@GrayCubePos_R n) C)
 ≔ @fapp0
     WalkingArrow_cat
     (@GrayHom_lax (@GrayCubePos_R n) C)
@@ -151,12 +151,12 @@ symbol gray_cube_step_target_data
 symbol gray_cube_step_transf
   [C : Cat]
   (n : τ Nat_grpd)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R (succ n)) C))
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C))
   : τ (Transf
-      (@strict_functor_carrier
+      (@strict_functor
         (@GrayCubePos_R n) C
         (@gray_cube_step_source_data C n H))
-      (@strict_functor_carrier
+      (@strict_functor
         (@GrayCubePos_R n) C
         (@gray_cube_step_target_data C n H)))
 ≔ @fapp1_fapp0
@@ -170,11 +170,11 @@ symbol gray_cube_step_transf
 symbol gray_cube_step_graph_data
   [C : Cat]
   (n : τ Nat_grpd)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R (succ n)) C))
-  : τ (@StrictFunctorData
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C))
+  : τ (@StrictFunctor
       (@GrayCubePos_R n)
       (@LaxArrow_cat C))
-≔ @strict_gray_transf_graph_data
+≔ @strict_gray_transf_graph
     (@GrayCubePos_R n)
     C
     (@gray_cube_step_source_data C n H)
@@ -186,7 +186,7 @@ symbol gray_cube_decode_step
   (n : τ Nat_grpd)
   (rec : τ (@GrayCubeObservationFamily n))
   (C : Cat)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R (succ n)) C))
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C))
   : τ (Obj (@CubicalLevel_cat C (succ (succ n))))
 ≔ @fapp0
     (@CubicalLevel_cat (@LaxArrow_cat C) (succ n))
@@ -203,12 +203,12 @@ symbol gray_cube_observation_all
 ≔ @nat_elim
     (λ k : τ Nat_grpd, @GrayCubeObservationFamily k)
     (λ C : Cat,
-      λ H : τ (@StrictFunctorData (@GrayCubePos_R zero) C),
+      λ H : τ (@StrictFunctor (@GrayCubePos_R zero) C),
         @gray_cube_decode_one C H)
     (λ k : τ Nat_grpd,
       λ rec : τ (@GrayCubeObservationFamily k),
       λ C : Cat,
-      λ H : τ (@StrictFunctorData (@GrayCubePos_R (succ k)) C),
+      λ H : τ (@StrictFunctor (@GrayCubePos_R (succ k)) C),
         @gray_cube_decode_step k rec C H)
     n;
 
@@ -216,7 +216,7 @@ symbol gray_cube_observation_all
 symbol gray_cube_observation
   [C : Cat]
   (n : τ Nat_grpd)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R n) C))
+  (H : τ (@StrictFunctor (@GrayCubePos_R n) C))
   : τ (Obj (@CubicalLevel_cat C (succ n)))
 ≔ @gray_cube_observation_all n C H;
 
@@ -227,7 +227,7 @@ symbol gray_cube_observation
 symbol gray_cube_immediate_faces
   [C : Cat]
   (n : τ Nat_grpd)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R n) C))
+  (H : τ (@StrictFunctor (@GrayCubePos_R n) C))
   : τ (@FiniteFamily
       (Obj (@CubicalLevel_cat C n))
       (@CubeImmediateFaceCount (succ n)))

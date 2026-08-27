@@ -2,10 +2,11 @@
   Emdash v3.2: one profiled right-closed Gray slice.
 
   The tensor is an opaque stable category owner. Curry and uncurry are
-  decoded computationally strict functors between the selected Gray-hom
-  profile categories. Their whole equality-valued beta/eta comparisons
+  ordinary whole functors between the selected Gray-hom profile categories,
+  each paired with supplied IsStrictFunctor evidence. Their whole
+  equality-valued beta/eta comparisons
   assemble the existing OmegaEquivAlong Cat_cat interface. Coevaluation and
-  evaluation are object projections at the selected strict identity codes.
+  evaluation are object projections at the selected strict identity packages.
 
   This is one right-closure boundary, not a full Crans--Gray tensor: it adds
   no mirror closure, tensor action in the parameters, monoidal coherence, or
@@ -33,39 +34,59 @@ symbol GrayRightTarget
   : Cat
 ≔ @GrayHom_lax A (@GrayHom_lax B C);
 
-// Computationally strict whole curry operation.
-injective symbol gray_curry_R_data
+// Whole curry operation.
+injective symbol gray_curry_R_func
   (A B C : Cat)
-  : τ (@StrictFunctorData
+  : τ (@Functor
       (@GrayRightSource A B C)
       (@GrayRightTarget A B C));
 
-symbol gray_curry_R_func
+// Supplied semantic strictness of the existing whole curry operation.
+constant symbol gray_curry_R_is_strict
   (A B C : Cat)
-  : τ (@Functor
+  : τ (@IsStrictFunctor
       (@GrayRightSource A B C)
-      (@GrayRightTarget A B C))
-≔ @strict_functor_carrier
+      (@GrayRightTarget A B C)
+      (@gray_curry_R_func A B C));
+
+symbol gray_curry_R_strict
+  (A B C : Cat)
+  : τ (@StrictFunctor
+      (@GrayRightSource A B C)
+      (@GrayRightTarget A B C)
+    )
+≔ @strict_functor_intro
     (@GrayRightSource A B C)
     (@GrayRightTarget A B C)
-    (@gray_curry_R_data A B C);
+    (@gray_curry_R_func A B C)
+    (@gray_curry_R_is_strict A B C);
 
-// Computationally strict whole uncurry operation.
-injective symbol gray_uncurry_R_data
+// Whole uncurry operation.
+injective symbol gray_uncurry_R_func
   (A B C : Cat)
-  : τ (@StrictFunctorData
+  : τ (@Functor
       (@GrayRightTarget A B C)
       (@GrayRightSource A B C));
 
-symbol gray_uncurry_R_func
+// Supplied semantic strictness of the existing whole uncurry operation.
+constant symbol gray_uncurry_R_is_strict
   (A B C : Cat)
-  : τ (@Functor
+  : τ (@IsStrictFunctor
       (@GrayRightTarget A B C)
-      (@GrayRightSource A B C))
-≔ @strict_functor_carrier
+      (@GrayRightSource A B C)
+      (@gray_uncurry_R_func A B C));
+
+symbol gray_uncurry_R_strict
+  (A B C : Cat)
+  : τ (@StrictFunctor
+      (@GrayRightTarget A B C)
+      (@GrayRightSource A B C)
+    )
+≔ @strict_functor_intro
     (@GrayRightTarget A B C)
     (@GrayRightSource A B C)
-    (@gray_uncurry_R_data A B C);
+    (@gray_uncurry_R_func A B C)
+    (@gray_uncurry_R_is_strict A B C);
 
 // Object projection of whole curry.
 symbol gray_curry_R
@@ -183,40 +204,40 @@ symbol gray_curry_uncurry_R_at
     _ _
     (@gray_curry_uncurry_R_path A B C);
 
-// Coevaluation/introduction is curry applied to the tensor identity code.
-symbol gray_coevaluation_R_data
+// Coevaluation/introduction is curry applied to the tensor identity package.
+symbol gray_coevaluation_R_strict
   (A B : Cat)
-  : τ (@StrictFunctorData
+  : τ (@StrictFunctor
       A
       (@GrayHom_lax B (@GrayTensor_R A B)))
 ≔ @gray_curry_R
     A B (@GrayTensor_R A B)
-    (@strict_identity_data (@GrayTensor_R A B));
+    (@strict_identity (@GrayTensor_R A B));
 
 symbol gray_coevaluation_R_func
   (A B : Cat)
   : τ (@Functor A (@GrayHom_lax B (@GrayTensor_R A B)))
-≔ @strict_functor_carrier
+≔ @strict_functor
     A
     (@GrayHom_lax B (@GrayTensor_R A B))
-    (@gray_coevaluation_R_data A B);
+    (@gray_coevaluation_R_strict A B);
 
-// Evaluation/elimination is uncurry applied to the internal-Hom identity code.
-symbol gray_evaluation_R_data
+// Evaluation/elimination is uncurry applied to the internal-Hom identity package.
+symbol gray_evaluation_R_strict
   (B C : Cat)
-  : τ (@StrictFunctorData
+  : τ (@StrictFunctor
       (@GrayTensor_R (@GrayHom_lax B C) B)
       C)
 ≔ @gray_uncurry_R
     (@GrayHom_lax B C) B C
-    (@strict_identity_data (@GrayHom_lax B C));
+    (@strict_identity (@GrayHom_lax B C));
 
 symbol gray_evaluation_R_func
   (B C : Cat)
   : τ (@Functor
       (@GrayTensor_R (@GrayHom_lax B C) B)
       C)
-≔ @strict_functor_carrier
+≔ @strict_functor
     (@GrayTensor_R (@GrayHom_lax B C) B)
     C
-    (@gray_evaluation_R_data B C);
+    (@gray_evaluation_R_strict B C);

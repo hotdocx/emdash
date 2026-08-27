@@ -15,50 +15,50 @@ assert [C : Cat] ⊢
 
 // Dimension one is literal walking-arrow evaluation.
 assert [C : Cat]
-  (H : τ (@StrictFunctorData WalkingArrow_cat C)) ⊢
+  (H : τ (@StrictFunctor WalkingArrow_cat C)) ⊢
   @gray_cube_observation C zero H
   ≡ @gray_cube_decode_one C H;
 
 // The variable successor is exactly curry, graph, recursive decode, and shift.
 assert [C : Cat]
   (n : τ Nat_grpd)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R (succ n)) C)) ⊢
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C)) ⊢
   @gray_cube_observation C (succ n) H
   ≡ @gray_cube_decode_step
       n (@gray_cube_observation_all n) C H;
 
 // Selected dimensions one through three have the native cubical classifiers.
 assert [C : Cat]
-  (H : τ (@StrictFunctorData GrayCube1_R C)) ⊢
+  (H : τ (@StrictFunctor GrayCube1_R C)) ⊢
   @gray_cube_observation C zero H
   : τ (Obj (@CubicalLevel_cat C (succ zero)));
 
 assert [C : Cat]
-  (H : τ (@StrictFunctorData GrayCube2_R C)) ⊢
+  (H : τ (@StrictFunctor GrayCube2_R C)) ⊢
   @gray_cube_observation C (succ zero) H
   : τ (Obj (@CubicalLevel_cat C (succ (succ zero))));
 
 assert [C : Cat]
-  (H : τ (@StrictFunctorData GrayCube3_R C)) ⊢
+  (H : τ (@StrictFunctor GrayCube3_R C)) ⊢
   @gray_cube_observation C (succ (succ zero)) H
   : τ (Obj
       (@CubicalLevel_cat C (succ (succ (succ zero)))));
 
-// The successor strict graph code decodes directly to the whole graph.
+// The successor strict graph package has the whole graph as its carrier.
 assert [C : Cat]
   (n : τ Nat_grpd)
-  (H : τ (@StrictFunctorData (@GrayCubePos_R (succ n)) C)) ⊢
-  @strict_functor_carrier
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C)) ⊢
+  @strict_functor_underlying
     (@GrayCubePos_R n)
     (@LaxArrow_cat C)
     (@gray_cube_step_graph_data C n H)
   ≡ @gray_transf_graph_func
       (@GrayCubePos_R n)
       C
-      (@strict_functor_carrier
+      (@strict_functor
         (@GrayCubePos_R n) C
         (@gray_cube_step_source_data C n H))
-      (@strict_functor_carrier
+      (@strict_functor
         (@GrayCubePos_R n) C
         (@gray_cube_step_target_data C n H))
       (@gray_cube_step_transf C n H);
@@ -68,25 +68,25 @@ assert [C : Cat]
 assert ⊢
   @gray_cube_step_curry_data
     GrayWalkingSquare_cat zero
-    (@strict_identity_data GrayWalkingSquare_cat)
-  ≡ @gray_coevaluation_R_data WalkingArrow_cat WalkingArrow_cat;
+    (@strict_identity GrayWalkingSquare_cat)
+  ≡ @gray_coevaluation_R_strict WalkingArrow_cat WalkingArrow_cat;
 
 assert ⊢
   @gray_cube_step_source_data
     GrayWalkingSquare_cat zero
-    (@strict_identity_data GrayWalkingSquare_cat)
+    (@strict_identity GrayWalkingSquare_cat)
   ≡ gray_square_inner_src_data;
 
 assert ⊢
   @gray_cube_step_target_data
     GrayWalkingSquare_cat zero
-    (@strict_identity_data GrayWalkingSquare_cat)
+    (@strict_identity GrayWalkingSquare_cat)
   ≡ gray_square_inner_tgt_data;
 
 assert ⊢
   @gray_cube_step_transf
     GrayWalkingSquare_cat zero
-    (@strict_identity_data GrayWalkingSquare_cat)
+    (@strict_identity GrayWalkingSquare_cat)
   ≡ gray_square_outer_transf;
 
 // The same variable-dimensional frame gives four edges for a square and six
@@ -100,14 +100,14 @@ assert ⊢
   ≡ succ (succ (succ (succ (succ (succ zero)))));
 
 assert [C : Cat]
-  (H : τ (@StrictFunctorData GrayCube2_R C)) ⊢
+  (H : τ (@StrictFunctor GrayCube2_R C)) ⊢
   @gray_cube_immediate_faces C (succ zero) H
   : τ (@FiniteFamily
       (Obj (@CubicalLevel_cat C (succ zero)))
       (succ (succ (succ (succ zero)))));
 
 assert [C : Cat]
-  (H : τ (@StrictFunctorData GrayCube3_R C)) ⊢
+  (H : τ (@StrictFunctor GrayCube3_R C)) ⊢
   @gray_cube_immediate_faces C (succ (succ zero)) H
   : τ (@FiniteFamily
       (Obj (@CubicalLevel_cat C (succ (succ zero))))

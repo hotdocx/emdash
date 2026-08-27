@@ -23,23 +23,23 @@ require open emdash.emdash3_2_dependent_simplex_ordinal_adequacy;
 // The exact strict-profile endpoint maps used by the selected 02 and 12 edges.
 symbol profiled_vertex0
   : τ (Functor Terminal_cat WalkingArrow_cat)
-≔ @strict_functor_carrier
+≔ @strict_functor
     Terminal_cat WalkingArrow_cat
     (@selected_face_data
       zero (succ zero) simplex_vertex_zero_realization);
 
 symbol profiled_vertex1
   : τ (Functor Terminal_cat WalkingArrow_cat)
-≔ @strict_functor_carrier
+≔ @strict_functor
     Terminal_cat WalkingArrow_cat
     (@selected_face_data
       zero (succ zero) simplex_vertex_one_realization);
 
 symbol profiled_terminal
   : τ (Functor Terminal_cat Terminal_cat)
-≔ @strict_functor_carrier
+≔ @strict_functor
     Terminal_cat Terminal_cat
-    (@strict_identity_data Terminal_cat);
+    (@strict_identity Terminal_cat);
 
 // Reindex the target join's whole cross along id on the old edge and the same
 // strict terminal profile used by the selected new edges.
