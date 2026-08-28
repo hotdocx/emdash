@@ -22,28 +22,6 @@
 require open emdash.emdash3_2_commutative_algebra_ringed_space_covers;
 
 /*
-  Whole domain projections for the restriction-oriented total and its
-  conventional opposite slice.
-
-  Into_restr_cat(K,U) is the Sigma total over K^op, so its generic Sigma
-  projection lands in K^op.  Taking the opposite produces K/U -> K.
-*/
-symbol into_restr_domain_func
-  [K : Cat]
-  (U : τ (Obj K))
-  : τ (Functor (@Into_restr_cat K U) (Op_cat K))
-≔ @Sigma_proj1_func (Op_cat K) (@yoneda_psh K U);
-
-symbol slice_domain_func
-  [K : Cat]
-  (U : τ (Obj K))
-  : τ (Functor (@Slice_cat K U) K)
-≔ @Op_func
-    (@Into_restr_cat K U)
-    (Op_cat K)
-    (@into_restr_domain_func K U);
-
-/*
   Whole restriction of a CommRing-valued presheaf along a base functor.
 
   For F:A->B and O:B^op->CommRing, this is O o F^op.  The result is itself a

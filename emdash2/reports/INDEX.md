@@ -1255,6 +1255,17 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_PULLBACKS_AND_SLICE_BASE_CHANGE_COMPUTATION_PLAN_2026-08-28.md`:
+  active computational/internal pullback plan. The primary structure is one
+  whole contravariant slice family with exact `C/X` fibres and action
+  `f* : C/Y → C/X`; the already-existing covariant slice action is
+  `Σ_f : C/X → C/Y`, and each selected base change is characterized by the
+  existing adjunction `Σ_f ⊣ f*`. Generic adjunction triangles remain the
+  semantic owners. Narrow post-projection runtime instances and rigid-head
+  proof-time usability rules are allowed only after typed owner-position and
+  runtime-noncollapse probes. Pullback objects, projections, square, whole
+  transpose, and mediator are derived before products-in-slices, terminal,
+  weighted-limit, pushout-duality, or `Π_f` compatibility work.
 - `REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md`:
   completed second-tranche closeout plan for enhanced triangular products,
   terminal objects, and their thin Cartesian package. One direct map unifier
