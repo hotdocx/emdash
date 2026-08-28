@@ -25,7 +25,7 @@ require open emdash.emdash3_2_direct_cover_completion_universality;
 require open emdash.emdash3_2_direct_cover_sheafification;
 require open emdash.emdash3_2_groupoidification_composition;
 require open emdash.emdash3_2_groupoidification_interval_recovery;
-require open emdash.emdash3_2_monads emdash.emdash3_2_triangular_binary_products emdash.emdash3_2_terminal_objects emdash.emdash3_2_cartesian_categories emdash.emdash3_2_triangular_binary_products_finite_limits;
+require open emdash.emdash3_2_monads emdash.emdash3_2_triangular_binary_products emdash.emdash3_2_terminal_objects emdash.emdash3_2_cartesian_categories emdash.emdash3_2_triangular_binary_products_finite_limits emdash.emdash3_2_pullbacks;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
 assert ⊢ τ Empty_grpd ≡ empty;
@@ -27203,3 +27203,153 @@ assert [C : Cat]
         C A B
         (@binary_products_weighted_presentation C P BP K A B))
       (@binary_products_proj2_fapp0 C P BP A B));
+
+// -------------------------------------------------------------------------------------------------
+// Chosen pullbacks as whole slice base change
+// catalog-area: Pullbacks and slice base change
+// -------------------------------------------------------------------------------------------------
+
+assert [C : Cat]
+  (X : τ (Obj C)) ⊢
+  @fapp0 C Cat_cat (@SliceSigma_catd C) X
+  ≡ @Slice_cat C X;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X : τ (Obj C)) ⊢
+  @fapp0 (Op_cat C) Cat_cat (@SliceBaseChange_catd C PB) X
+  ≡ @Slice_cat C X;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y)) ⊢
+  @slice_base_change_adjunction C PB X Y f
+  : τ (@Adjunction
+      (@Slice_cat C X)
+      (@Slice_cat C Y)
+      (@slice_sigma_func C X Y f)
+      (@slice_base_change_func C PB X Y f));
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y)))
+  (h : τ (Hom (@Slice_cat C Y)
+    (@slice_sigma_obj C X Y f a) g)) ⊢
+  @slice_base_change_transpose_semantic_path C PB X Y f a g h
+  : τ (@=
+      (Hom (@Slice_cat C X) a
+        (@slice_base_change_obj C PB X Y f g))
+      (@slice_base_change_transpose C PB X Y f a g h)
+      (@slice_base_change_transpose_semantic C PB X Y f a g h));
+
+assertnot [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y)))
+  (h : τ (Hom (@Slice_cat C Y)
+    (@slice_sigma_obj C X Y f a) g)) ⊢
+  @slice_base_change_transpose C PB X Y f a g h
+  ≡ @slice_base_change_transpose_semantic C PB X Y f a g h;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y)))
+  (k : τ (Hom (@Slice_cat C X) a
+    (@slice_base_change_obj C PB X Y f g))) ⊢
+  @slice_base_change_untranspose_semantic_path C PB X Y f a g k
+  : τ (@=
+      (Hom (@Slice_cat C Y)
+        (@slice_sigma_obj C X Y f a) g)
+      (@slice_base_change_untranspose C PB X Y f a g k)
+      (@slice_base_change_untranspose_semantic C PB X Y f a g k));
+
+assertnot [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y)))
+  (k : τ (Hom (@Slice_cat C X) a
+    (@slice_base_change_obj C PB X Y f g))) ⊢
+  @slice_base_change_untranspose C PB X Y f a g k
+  ≡ @slice_base_change_untranspose_semantic C PB X Y f a g k;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y)))
+  (h : τ (Hom (@Slice_cat C Y)
+    (@slice_sigma_obj C X Y f a) g)) ⊢
+  @slice_base_change_untranspose C PB X Y f a g
+    (@slice_base_change_transpose C PB X Y f a g h)
+  ≡ h;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y)))
+  (k : τ (Hom (@Slice_cat C X)
+    a (@pullback_slice_obj C PB X Y f g))) ⊢
+  @pullback_lift_slice C PB X Y f a g
+    (@pullback_cone_of_lift C PB X Y f a g k)
+  ≡ k;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (g : τ (Obj (@Slice_cat C Y))) ⊢
+  @pullback_square_readable_cell C PB X Y f g
+  : τ (Hom
+      (Hom_cat C (@pullback_domain C PB X Y f g) Y)
+      (@pullback_square_readable_source C PB X Y f g)
+      (@pullback_square_readable_target C PB X Y f g));
+
+assert [C : Cat]
+  (W X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Hom C W X))
+  (g : τ (Obj (@Slice_cat C Y)))
+  (b : τ (Hom C W (@slice_object_domain C Y g)))
+  (alpha : τ (Hom
+    (Hom_cat C W Y)
+    (@comp_fapp0 C W (@slice_object_domain C Y g) Y
+      (@slice_object_arrow C Y g) b)
+    (@comp_fapp0 C W X Y f a))) ⊢
+  @slice_arrow_underlying
+    C Y
+    (@slice_sigma_obj C X Y f (Struct_sigma W a))
+    g
+    (@pullback_cone_constructor C W X Y f a g b alpha)
+  ≡ b;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y)))
+  (h : τ (Obj (@pullback_cone_cat C X Y f a g))) ⊢
+  @pullback_cone_of_lift C PB X Y f a g
+    (@pullback_lift_slice C PB X Y f a g h)
+  ≡ h;
+
+assertnot [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X : τ (Obj C))
+  (f : τ (Hom C X X)) ⊢
+  @slice_base_change_func C PB X X f
+  ≡ @slice_sigma_func C X X f;

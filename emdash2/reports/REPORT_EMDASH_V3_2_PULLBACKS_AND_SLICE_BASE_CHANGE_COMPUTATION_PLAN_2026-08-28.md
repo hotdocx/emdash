@@ -4,7 +4,7 @@ Date: 2026-08-28 (America/Toronto)
 
 Plan-ID: `PULLBACKS-SLICE-BASE-CHANGE-COMPUTATION-V3.2`
 
-Status: **active implementation plan**.
+Status: **implementation and scoped validation complete; closeout checkpoint pending**.
 
 Branch: `goal/pullback-computation-v3.2`
 
@@ -339,22 +339,44 @@ discriminate on it.
 
 ## Desired Triangular Computation
 
-The generic adjunction triangles should yield, first in slice categories and
-then after ambient projection:
+The generic adjunction triangles yield the primary strict computation in the
+whole slice hom categories:
 
 ```text
 untranspose(transpose(b̄)) ↪ b̄
-transpose(untranspose(k))     ↪ k
-
-π₁ ∘ ⟨a,b;q⟩_pb ↪ a
-π₂ ∘ ⟨a,b;q⟩_pb ↪ b
-
-⟨π₁ ∘ h, π₂ ∘ h; square(h)⟩_pb ↪ h.
+transpose(untranspose(k))  ↪ k.
 ```
 
-The first projection law may already be constructor/typing computation of an
-arrow in `C/X`. The second beta and eta are the expected adjunction triangle
-cuts. Probe the generic unit/counit composites before adding any direct rule.
+Stable slice-arrow projections do not obstruct these reductions. Hence the
+underlying second leg and directed cone cell of
+`untranspose(transpose(b̄))` reduce to the corresponding projections of
+`b̄`; a constructor-visible ambient cone recovers its supplied `b` and
+`q` directly. Conversely, transposing the cone induced by a slice lift reduces
+to that lift, which is the internal uniqueness computation.
+
+The ambient interpretation must respect the repository's higher-categorical
+slice encoding. A morphism in `C/X` contains a directed triangle rather than a
+postulated strict equality. Accordingly the first projection result is the
+retained cell
+
+```text
+π₁ ∘ lift(b̄) ⇒ arrow(a),
+```
+
+exposed by `pullback_lift_fst_cell`. The second result is the whole recovered
+cone and its two stable projections. Raw ambient composites
+`π₁ ∘ lift(b̄)` and `π₂ ∘ lift(b̄)` deliberately do not
+rewrite to bare arrows in an arbitrary emdash category: such rules would erase
+the directed higher cells and silently strengthen a lax/internal pullback to a
+strict one. A locally discrete adapter may later turn these retained cells
+into ordinary categorical equalities when the required discreteness evidence
+is supplied.
+
+The stable mate heads remain propositionally connected to the explicit
+unit/counit composites by non-opaque typed-reflexivity paths. Those paths are
+the theorem-level route for consumers that need the semantic
+`f*[h] ∘ η` or `ε ∘ Σ_f[k]` presentation; they do not introduce a runtime
+fold.
 
 If a stable projected head is required, the pullback-specific rules above are
 the only expected new semantic runtime family. Naturality in cone arrows,
@@ -498,17 +520,17 @@ green.
 | Row | State | Deliverable and acceptance boundary |
 | --- | --- | --- |
 | `PB-00` | complete | Dedicated branch/worktree created from exact integrated baseline; bootstrap and clean-state preflight pass; this plan is the living authority. |
-| `PB-SLICE-1` | in progress | Exact whole covariant slice family and `Sigma_f` action selected through existing comma/arrow-into owners; fibre/action probes green without duplicate runtime owner. |
-| `PB-DOMAIN-2` | pending | Generic whole slice-domain functor available at an honest dependency boundary and its object/arrow projections checked. |
-| `PB-STRUCT-3` | pending | Chosen whole contravariant slice family with exact `Slice_cat` fibres and retained higher action. |
-| `PB-ADJ-4` | pending | Per-arrow `Adjunction(Sigma_f,f*)` observation, unit/counit projections, and generic triangle consumers. |
-| `PB-USABILITY-5` | pending | Required rigid-head proof-time orientations, typed `eq_refl`, runtime negatives, and any declaration-backed named-adjunction bridge. |
-| `PB-CONE-6` | pending | Pullback object, domain, two projections, commuting square, constructor-visible cone arrow, whole transpose, and ambient mediator. |
-| `PB-TRIANGLE-7` | pending | Both slice cancellations and ambient beta/eta; only measured post-projection instances promoted. |
-| `PB-PSEUDO-8` | pending | Composition/identity higher action retained; invertible compositor derived, honestly supplied, or explicitly deferred without importing Gray-only infrastructure. |
-| `PB-COMPAT-9` | pending | Products-in-slices, terminal-derived products, weighted pullback, and opposite pushout comparisons classified and implemented only where concrete. |
-| `PB-DOC-10` | pending | Central checks, reviewer, Foundations/SOP/syntax/index/source maps, catalog, and health registries synchronized. |
-| `PB-CLOSE-11` | pending | Focused checks, warnings, strict LHS audit, usability/noncollapse tests, catalog, health freshness, exact diff, and local checkpoint green. |
+| `PB-SLICE-1` | complete, checkpoint `a055eb0` | `SliceSigma_catd(C)` is the existing `CommaFib_catd(id_C)` owner. Exact fibre, capped/full action, canonical postcomposition, and constructor-object probes are green without a duplicate runtime owner. |
+| `PB-DOMAIN-2` | complete, checkpoint `a055eb0` | Generic whole slice-domain functors were factored into `emdash3_2_presheaves.lp`; stable object, structure-arrow, ambient-arrow, and directed-cell projections plus the stable slice-arrow constructor are green. The downstream commutative-algebra duplicates were removed. |
+| `PB-STRUCT-3` | complete, checkpoint `a055eb0` | `PullbackStructure(C)` owns one whole `SliceBaseChange_catd(PB):Catd(Op C)` with exact `Slice_cat` fibres and generic retained higher action. |
+| `PB-ADJ-4` | complete, checkpoint `a055eb0` | Every internal `f:X→Y` supplies the existing `Adjunction(Σ_f,f*)`; readable unit/counit and component observations use the generic authority. |
+| `PB-USABILITY-5` | complete implementation | Stable whole/point mate heads retain triangle discriminators. Two narrow proof-time rules identify their points with explicit unit/counit semantics; both non-opaque semantic paths are typed reflexivity and runtime remains distinct. |
+| `PB-CONE-6` | complete, checkpoint `a055eb0` | Pullback slice object/domain, two projections, native/readable square, whole cone category, constructor-visible ambient cone, whole transpose/inverse, slice lift, ambient mediator, and first directed projection cell are implemented. |
+| `PB-TRIANGLE-7` | complete implementation | Both whole slice cancellations and both stable record projections are green. Literal cone arrow/cell recovery and uniqueness compute. Raw ambient 1-arrow collapses are registered negatives because the internal slice stores directed triangles; no pullback-specific runtime join is warranted. |
+| `PB-PSEUDO-8` | complete classification | Identity, composition, and higher action are retained by the one whole `Catd(Op C)` owner. No strictness claim or Gray-only pseudo-property dependency is added; an explicit invertible compositor certificate remains consumer-gated. |
+| `PB-COMPAT-9` | complete classification | Products-in-slices, terminal-derived products, weighted pullbacks, opposite pushouts, `Π_f`, Beck–Chevalley, and Frobenius remain assumption-explicit later consumers. No concrete canonical-choice comparison is available in this tranche, so none is postulated. |
+| `PB-DOC-10` | complete | Thirteen central checks and the 27-assert `examples/pullbacks.lp` reviewer cover the selected positive/negative boundary. Foundations, canonical syntax, SOP, AGENTS authority order, report index, source registries, 2,336-check/115-area catalog, and source-only health report are synchronized. |
+| `PB-CLOSE-11` | validation complete; checkpoint pending | Focused sources/reviewer, the affected moved-definition downstream module/example, central diagnostics, exact `1116/159` warnings, empty strict audits, catalog/health/document/script/diff hygiene, and worktree bootstrap are green. The final local closeout checkpoint is the only remaining action. |
 
 ## Decision Ledger
 
@@ -523,6 +545,57 @@ green.
 | `D-PB-007` | accepted | Generic `Pullback_catd` family substitution remains distinct in name and ownership from categorical slice base change. |
 | `D-PB-008` | accepted | Do not require strict base-change functoriality; retain current whole higher action and classify pseudo coherence separately. |
 | `D-PB-009` | accepted | Products-in-slices, terminal-derived products, weighted limits, and pushout duality are compatibility consumers after the primary calculus. |
+| `D-PB-010` | accepted | Arbitrary slice objects/arrows do not Sigma-expand. Stable object-domain, structure-arrow, ambient-arrow, directed-cell, and constructor heads are the minimal reusable record boundary; semantic whole projections agree at proof time and no arbitrary eta is installed. |
+| `D-PB-011` | accepted | Stable whole mate functors and point heads are necessary post-projection instances of the existing adjunction computation. Their direct cancellations are runtime rules; semantic agreement is proof-time and exposed by non-opaque typed-reflexivity paths. |
+| `D-PB-012` | accepted | The internal universal property is the whole hom-category equivalence `Hom_{C/Y}(Σ_f a,g) ⇄ Hom_{C/X}(a,f*g)`. Cone recovery and uniqueness compute strictly at that owner and under stable record projections. |
+| `D-PB-013` | accepted | In an arbitrary emdash category, pullback projection laws retain directed cells. Raw `πᵢ ∘ lift` to bare-arrow rewrites are false runtime expectations and would impose unrequested strictness; no such join is promoted. |
+| `D-PB-014` | accepted | Generic whole functoriality supplies current base identity/composition/higher action. Explicit pseudo invertibility and every product/weighted/dual/dependent comparison remain later assumption-explicit consumers. |
+
+## Implementation Checkpoints
+
+- `a055eb0` is the recovered, focused-green first computational checkpoint.
+  It contains the slice substrate refactor, chosen whole base-change family,
+  adjunction/mate calculus, pullback projections and square, and whole
+  cone/lift interface. The source was reconstructed exactly from recorded
+  successful patches after an external full-disk incident truncated the
+  then-untracked new module; the focused module check passed immediately
+  before the checkpoint.
+- The current documentation/reviewer tranche follows that checkpoint and must
+  receive its own green local checkpoint before closeout.
+
+## Scoped Closeout Evidence
+
+The final implementation boundary has the following current evidence:
+
+- `emdash3_2_presheaves.lp`, `emdash3_2_pullbacks.lp`, and
+  `examples/pullbacks.lp` pass focused Lambdapi checking under the uniform
+  90-second ceiling.
+- The moved generic slice-domain owner is rechecked through
+  `emdash3_2_commutative_algebra_ringed_space_restrictions.lp` and
+  `examples/commutative_ring_ringed_space_restrictions.lp`.
+- The affected aggregate `emdash3_2_checks.lp` passes once after importing the
+  pullback module and adding its 13-check catalog area.
+- Warning-enabled no-color checks report exactly
+  `1275 = 1116 unjoinable critical pairs + 159 replaceable variables` for the
+  kernel, modified presheaf substrate, and pullback module. The pullback
+  tranche therefore adds no warning relative to the kernel. Both changed
+  rule-bearing files have zero unreviewed strict LHS-audit candidates.
+- The generated strict catalog contains 2,336 classified checks across 115
+  areas, including 13 pullback checks, with zero unclassified statements.
+- Source-only health metadata is fresh for 326 registered files with snapshot
+  `sha256:720f360507519e4505d5408aaf196f263935f98d4d13d7b9ba2b21fbd640a0d0`;
+  focused check evidence above is recorded separately rather than represented
+  as a repository-wide health run.
+- The source TOC has 87 valid headings; active-reference lint, 26 current-plan
+  headers, 17 relevant Python tests, Python/shell syntax, generated catalog
+  freshness, health freshness, and exact diff hygiene pass.
+- The dedicated worktree's generated pnpm link graph has been restored and its
+  workspace contract passes.
+
+The user's scoped-validation policy excludes an unrelated full `make check`,
+all-example sweep, health resume, or repository-wide CI run. No changed
+cross-layer/release boundary requires those aggregates; the affected central
+diagnostics and downstream consumer have been checked directly.
 
 ## Required Positive Evidence
 

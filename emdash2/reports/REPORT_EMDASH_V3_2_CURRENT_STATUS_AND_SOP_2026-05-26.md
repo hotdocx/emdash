@@ -96,6 +96,23 @@ detailed probe evidence.
   witness and paths identifying both weighted projections with the triangular
   projections. It adds no automatic `DefIso`, rule, unifier, or reverse global
   assembly.
+- `emdash3_2_pullbacks.lp`: chosen computational/internal pullbacks as one
+  whole contravariant slice family. `SliceSigma_catd(C)` reuses the existing
+  covariant comma family for `Σ_f:C/X→C/Y`; `SliceBaseChange_catd(PB)` has
+  exact `C/X` fibres and supplies `f*:C/Y→C/X`, with every internal base
+  arrow carrying the existing adjunction `Σ_f⊣f*`. Stable whole mate
+  functors and point heads retain the two triangle cuts after projection;
+  narrow proof-time rules and non-opaque typed-reflexivity paths relate them
+  to explicit unit/counit semantics while runtime stays distinct. The
+  pullback object, projections, directed square, whole cone category, literal
+  cone constructor, universal lift, and uniqueness are derived from that
+  adjunction. Raw ambient projection composites do not collapse to bare
+  arrows in an arbitrary higher category: the first law is a retained
+  directed slice cell and the second computes through whole cone recovery.
+  Generic family substitution `Pullback_catd` remains a separate owner;
+  explicit pseudo invertibility, products-in-slices, weighted pullbacks,
+  pushout duality, `Π_f`, Beck–Chevalley, and Frobenius are later
+  assumption-explicit consumers.
 - `emdash3_2_direct_cover_completion_locality.lp`: downstream conventional
   comparison for the direct whole-presheaf cover-completion HIT. A derived
   retained-member theorem is projected through one whole transformation

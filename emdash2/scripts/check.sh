@@ -51,6 +51,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_terminal_objects.lp)
   files+=(emdash3_2_cartesian_categories.lp)
   files+=(emdash3_2_triangular_binary_products_finite_limits.lp)
+  files+=(emdash3_2_pullbacks.lp)
   files+=(emdash3_2_checks.lp)
   files+=(emdash3_2_semisimplicial_face_codes.lp)
   files+=(emdash3_2_semisimplicial_index.lp)

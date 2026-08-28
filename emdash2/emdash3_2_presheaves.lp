@@ -213,7 +213,7 @@ unif_rule
         (@hom_con $K $X $K (@id Cat_cat $K))
         (@hom_con $K $Y $K (@id Cat_cat $K))
         (@hom_con_int_postcomp_func
-          $K $K (@id Cat_cat $K) $X $Y $p))
+          $K $K (@id Cat_cat $K) $X $Y _))
       $a)
   ↪ [ tt ≡ tt ];
 
@@ -293,7 +293,8 @@ unif_rule
 
   Arbitrary slice homs do not runtime-expand to their Sigma presentation, so
   this stable projection is required for whole counit and pullback-square
-  consumers. The sole beta remains constructor-visible.
+  consumers. Its betas are limited to the raw constructor and the stable
+  record constructor below; arbitrary arrows do not eta-expand.
 */
 injective symbol slice_arrow_cell
   [K : Cat]
@@ -349,12 +350,12 @@ injective symbol slice_arrow_intro
 
 rule @slice_arrow_underlying
       _ _ _ _
-      (@slice_arrow_intro $K $U $q $r $p $alpha)
+      (@slice_arrow_intro _ _ _ _ $p _)
   ↪ $p;
 
 rule @slice_arrow_cell
       _ _ _ _
-      (@slice_arrow_intro $K $U $q $r $p $alpha)
+      (@slice_arrow_intro _ _ _ _ _ $alpha)
   ↪ $alpha;
 
 /*

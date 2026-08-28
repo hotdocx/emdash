@@ -1256,16 +1256,24 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_PULLBACKS_AND_SLICE_BASE_CHANGE_COMPUTATION_PLAN_2026-08-28.md`:
-  active computational/internal pullback plan. The primary structure is one
-  whole contravariant slice family with exact `C/X` fibres and action
-  `f* : C/Y → C/X`; the already-existing covariant slice action is
-  `Σ_f : C/X → C/Y`, and each selected base change is characterized by the
-  existing adjunction `Σ_f ⊣ f*`. Generic adjunction triangles remain the
-  semantic owners. Narrow post-projection runtime instances and rigid-head
-  proof-time usability rules are allowed only after typed owner-position and
-  runtime-noncollapse probes. Pullback objects, projections, square, whole
-  transpose, and mediator are derived before products-in-slices, terminal,
-  weighted-limit, pushout-duality, or `Π_f` compatibility work.
+  active closeout of the computational/internal pullback implementation at
+  first checkpoint `a055eb0`. One whole covariant slice family supplies
+  `Σ_f:C/X→C/Y`; one selected whole contravariant family has exact `C/X`
+  fibres and supplies `f*:C/Y→C/X`, with each internal base arrow carrying
+  the existing adjunction `Σ_f⊣f*`. Stable whole/point mates retain both
+  triangle cuts, while narrow proof-time usability and non-opaque semantic
+  paths expose unit/counit formulas without runtime erasure. Pullback object,
+  projections, native/readable directed square, whole cone category, literal
+  cone constructor, universal lift, cone recovery, and uniqueness are active.
+  Raw ambient projection composites remain negative in the arbitrary
+  higher-categorical slice: the first law is a retained directed cell and the
+  second computes through whole cone recovery. Generic `Pullback_catd`, pseudo
+  invertibility, products/weighted/dual comparisons, `Π_f`,
+  Beck–Chevalley, and Frobenius remain distinct or later assumption-explicit
+  consumers. Durable reviewer/central checks are green; documentation,
+  registration, exact warning/audit, 2,336-check/115-area catalog, and
+  source-only health closeout are green; the final local checkpoint is
+  pending.
 - `REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md`:
   completed second-tranche closeout plan for enhanced triangular products,
   terminal objects, and their thin Cartesian package. One direct map unifier

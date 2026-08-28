@@ -2129,6 +2129,75 @@ endpoint and whole-first semantic component are joined by the derived
 `adjunction_monad_mult_component_path`; this path does not alter runtime
 preference. TypeScript declaration automation is deferred.
 
+## Pullback And Slice Base-Change Notation
+
+For `f : X → Y`, use distinct indexed slice notation
+
+```text
+Σ_f : C/X → C/Y
+f^* : C/Y → C/X
+Σ_f ⊣ f^*.
+```
+
+The owners are `slice_sigma_func`, `slice_base_change_func`, and
+`slice_base_change_adjunction`. Write `f^*`, not the monadic postfix `f*`,
+when ambiguity is possible. `SliceSigma_catd(C)` is the always-existing whole
+covariant family; `SliceBaseChange_catd(PB)` is the selected whole
+contravariant family supplied by `PB : PullbackStructure(C)`. Both have exact
+fibre `C/X = Slice_cat(C,X)`.
+
+For `g : Z → Y`, comments may write
+
+```text
+P        = dom(f^*(g))
+π₁       : P → X
+π₂       : P → Z
+X ←π₁— P —π₂→ Z
+```
+
+for `pullback_domain`, `pullback_fst`, and `pullback_snd`. The directed square
+owner is `pullback_square_readable_cell`; do not print it as a strict equality
+in an arbitrary emdash category.
+
+For `a : Obj(C/X)`, use
+
+```text
+Cone_f(a,g) = Hom_{C/Y}(Σ_f(a),g)
+lift_f      : Cone_f(a,g) → Hom_{C/X}(a,f^*(g))
+cone_f      : Hom_{C/X}(a,f^*(g)) → Cone_f(a,g).
+```
+
+The whole owners are `pullback_cone_cat`, `pullback_lift_func`, and
+`pullback_cone_of_lift_func`. Their selected point computations are
+
+```text
+cone_f(lift_f(h)) == h
+lift_f(cone_f(k)) == k.
+```
+
+Here `==` is justified by the active stable adjunction-triangle rules. A
+literal ambient cone `a:W→X`, `b:W→Z`, and `alpha:g ∘ b ⇒ f ∘ a` may be
+written `(a,b,alpha)` and is constructed by `pullback_cone_constructor`; its
+ambient-arrow and directed-cell projections compute to `b` and `alpha`.
+
+The first ambient projection law is written
+
+```text
+π₁ ∘ lift_f(h) ⇒ a
+```
+
+and is owned by `pullback_lift_fst_cell`. Do not write
+`π₁ ∘ lift_f(h) == a` or `π₂ ∘ lift_f(h) == b` without a locally
+discrete/strict adapter: raw ambient composites deliberately remain runtime
+distinct. The stable mate operations have propositional semantic paths to
+`f^*[h] ∘ η` and `ε ∘ Σ_f[k]`; these paths are typed reflexivity
+through proof-time usability rules, not opaque equality bridges.
+
+`Pullback_catd(E,F)` continues to mean substitution of a Cat-valued family
+along `F`. It is not notation for categorical pullback objects or `f^*`.
+Products-in-slices, weighted pullback notation, pushouts, `Π_f`,
+Beck–Chevalley, and Frobenius have no selected surface syntax yet.
+
 ## Generic Groupoidification Notation
 
 For a category `C`, write the checked category-indexed free inversion as

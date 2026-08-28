@@ -9,8 +9,10 @@
   The whole families retain base-arrow and higher action.  This module does
   not identify categorical base change with the kernel's unrelated
   Pullback_catd(E,F) family substitution, does not add a second adjunction
-  theory, and does not yet claim direct ambient pullback beta/eta, Π_f,
-  Beck--Chevalley, products-in-slices, or pushouts.
+  theory, and does not collapse directed ambient projection cells to strict
+  arrow equalities. Whole cone recovery and uniqueness compute through the
+  selected adjunction. Explicit pseudo invertibility, Π_f, Beck--Chevalley,
+  products-in-slices, weighted comparisons, and pushouts remain later layers.
 */
 
 require open emdash.emdash3_2_presheaves;
@@ -475,6 +477,50 @@ unif_rule
         $C $C (@id_func $C) $X $Y $f));
     $Gb ≡ (@slice_base_change_obj $C $PB $X $Y $f $b)
   ];
+
+/*
+  Explicit non-opaque witnesses for the two proof-time usability agreements.
+  Their bodies are typed reflexivity through the unifiers above. Runtime
+  retains the stable mate heads; consumers that need semantic composition can
+  apply ordinary equality functoriality to these paths.
+*/
+symbol slice_base_change_transpose_semantic_path
+  [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  [X Y : τ (Obj C)]
+  (f : τ (Hom C X Y))
+  [a : τ (Obj (@Slice_cat C X))]
+  [b : τ (Obj (@Slice_cat C Y))]
+  (h : τ (Hom (@Slice_cat C Y)
+      (@slice_sigma_obj C X Y f a) b))
+  : τ (@=
+      (Hom (@Slice_cat C X) a
+        (@slice_base_change_obj C PB X Y f b))
+      (@slice_base_change_transpose C PB X Y f a b h)
+      (@slice_base_change_transpose_semantic C PB X Y f a b h))
+≔ @eq_refl
+    (Hom (@Slice_cat C X) a
+      (@slice_base_change_obj C PB X Y f b))
+    (@slice_base_change_transpose C PB X Y f a b h);
+
+symbol slice_base_change_untranspose_semantic_path
+  [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  [X Y : τ (Obj C)]
+  (f : τ (Hom C X Y))
+  [a : τ (Obj (@Slice_cat C X))]
+  [b : τ (Obj (@Slice_cat C Y))]
+  (k : τ (Hom (@Slice_cat C X) a
+      (@slice_base_change_obj C PB X Y f b)))
+  : τ (@=
+      (Hom (@Slice_cat C Y)
+        (@slice_sigma_obj C X Y f a) b)
+      (@slice_base_change_untranspose C PB X Y f a b k)
+      (@slice_base_change_untranspose_semantic C PB X Y f a b k))
+≔ @eq_refl
+    (Hom (@Slice_cat C Y)
+      (@slice_sigma_obj C X Y f a) b)
+    (@slice_base_change_untranspose C PB X Y f a b k);
 
 /*
   Domain and structure-arrow observations of covariant slice action.

@@ -601,6 +601,21 @@ the assumption-explicit weighted-product adapter is
 `emdash3_2_triangular_binary_products_finite_limits.lp`, carrying supplied
 strict weighted comparisons and two projection-compatibility paths without an
 automatic `DefIso` witness;
+the chosen computational/internal pullback interface is
+`emdash3_2_pullbacks.lp`; `SliceSigma_catd(C)` reuses the existing whole
+covariant slice family and `SliceBaseChange_catd(PB)` supplies one selected
+whole opposite-variance family with exact `C/X` fibres. Every internal
+`f:X→Y` carries the existing adjunction `Σ_f⊣f*`. Stable whole mate
+functors and point heads retain both triangle cuts, while narrow proof-time
+usability and non-opaque typed-reflexivity paths expose explicit unit/counit
+semantics without a runtime fold. Pullback object, projections, directed
+square, whole cone category, literal cone constructor, universal lift, and
+uniqueness derive from that owner. Raw ambient projection composites do not
+collapse to bare arrows in an arbitrary higher category; the first projection
+is a retained directed slice cell and the second computes through whole cone
+recovery. `Pullback_catd` remains generic family substitution, and explicit
+pseudo invertibility, products-in-slices, weighted/dual comparisons, `Π_f`,
+Beck–Chevalley, and Frobenius remain later assumption-explicit consumers;
 executable diagnostics live in `emdash3_2_checks.lp`.
 
 ## Authorities
@@ -1498,28 +1513,45 @@ Use the following order:
     `BinaryProductPresentation`, and paths relating both weighted projections
     to the triangular projections. It adds no automatic `DefIso`, rule,
     unifier, or reverse global assembly;
-127. `emdash3_2_cubical_dependent_hom.lp` for the rule-free curried
+127. `emdash3_2_pullbacks.lp` for the chosen whole
+    `SliceBaseChange_catd(PB):Catd(Op C)` with exact conventional-slice fibres,
+    the existing whole `SliceSigma_catd(C)` covariant action, and each internal
+    adjunction `Σ_f⊣f*`. Stable whole and point mate owners retain both
+    triangle cuts; two rigid proof-time comparisons and non-opaque semantic
+    paths expose the explicit unit/counit presentations while preserving
+    runtime noncollapse. The pullback object/domain/projections, native and
+    readable directed square, whole cone category, literal cone constructor,
+    universal slice/ambient lift, and first directed projection cell are
+    derived. Whole cone recovery and uniqueness compute under both stable
+    record projections. Raw ambient `πᵢ∘lift` terms deliberately do not
+    rewrite to bare arrows in the arbitrary higher-categorical slice. Generic
+    `Pullback_catd` substitution, strict/pseudo certificates, product/weighted
+    and opposite comparisons, `Π_f`, Beck–Chevalley, and Frobenius remain
+    distinct or later assumption-explicit layers. The slice substrate and
+    pullback module are warning-neutral at the kernel's `1116/159` inventory,
+    and both strict LHS audits report zero unreviewed candidates;
+128. `emdash3_2_cubical_dependent_hom.lp` for the rule-free curried
     cross-corner dependent hom. Existing whole endpoint actions transport the
     source in the second coordinate and the target in the first coordinate;
     `hom_con_int` forms the selected source-to-target family. Its identity-Hom
     instance exposes ordinary directed square 2-cells and retains both
     side-arrow hom actions without a primitive owner, rule, or unifier;
-128. `emdash3_2_cubical_square_total.lp` for the fixed-boundary nested Sigma
+129. `emdash3_2_cubical_square_total.lp` for the fixed-boundary nested Sigma
     total of `homdc_`. Its square objects are `(a,(b,alpha))`; four whole line
     observations and the next hom expose six cube faces. Its generic varying-
     Sigma projection computes on point components and constructor-visible
     arrows, including pointwise opposite;
-129. `emdash3_2_cubical_internalization.lp` for transparent
+130. `emdash3_2_cubical_internalization.lp` for transparent
     `homdc_int := homd_int(id_(Op EdgeFamily))`, the derived outer opposite
     Sigma total, `LaxArrow_cat`, visible constructors, and both whole endpoint
     projections. It adds no primitive category, square, two-sided total, rule,
     or unifier;
-130. `emdash3_2_cubical_arrow.lp` for the transparent readability names
+131. `emdash3_2_cubical_arrow.lp` for the transparent readability names
     `CubicalArrow_cat`, `cubical_edge`, `cubical_square`, and source/target;
-131. `emdash3_2_cubical_arrow_composition.lp` for readable explicit identity
+132. `emdash3_2_cubical_arrow_composition.lp` for readable explicit identity
     and whisker/paste terms. Generic nested-Sigma identity/composition owns the
     category normal forms; the former competing constructor rules are retired;
-132. `emdash3_2_readable_pseudofunctors.lp` for the abstract coherent
+133. `emdash3_2_readable_pseudofunctors.lp` for the abstract coherent
     pseudofunctor capability indexed by an ambient carrier. It reframes the
     existing internal-action compositor to one readable cell and supplies
     fixed-forward `OmegaEquivAlong` for that cell; the pre/right reverse
@@ -1529,54 +1561,54 @@ Use the following order:
     identity/composition closure remains explicitly supplied, while the
     general profile constructor and projection beta are computational, with no
     rule or unifier beyond that record-style beta;
-133. `emdash3_2_cubical_arrow_functor.lp` for profiled whole lifting of
+134. `emdash3_2_cubical_arrow_functor.lp` for profiled whole lifting of
     intrinsic edges and squares. Its filler is the existing readable
     compositor, generic next-hom action, then the derived pre-readable inverse;
     source/target and recursively lifted
     profiles remain selected capabilities. Arbitrary lax functors are
     intentionally rejected by the profile boundary;
-134. `emdash3_2_cubical_square_level.lp` for the first iterated arrow level.
+135. `emdash3_2_cubical_square_level.lp` for the first iterated arrow level.
     Outer source/target and recursively lifted inner source/target are its four
     whole edge-face functors; a next arrow exposes four side squares beside
     its two endpoint squares, with all face profiles retained and no rule or
     unifier;
-135. `emdash3_2_cubical_levels.lp` for genuine Nat recursion from `C` by
+136. `emdash3_2_cubical_levels.lp` for genuine Nat recursion from `C` by
     repeated derived `CubicalArrow_cat`. Dimensions one through three compute
     to edges, squares, and cubes without a code-only facade, rule, or unifier;
-136. `emdash3_2_semicubical_face_codes.lp` for intrinsically indexed raw
+137. `emdash3_2_semicubical_face_codes.lp` for intrinsically indexed raw
     `{L,R,*}` words and their set-classified public facade. Structural
     substitution consumes the inner word only at outer stars; visible
     constructors, all-star identity, and composition compute without a
     proof-time unifier;
-137. `emdash3_2_semicubical_index.lp` for the internal augmented semicube
+138. `emdash3_2_semicubical_index.lp` for the internal augmented semicube
     category. Its objects are Nat dimensions, Homs are discrete code paths,
     and constructor-visible identity/composition delegate to the public code
     owners without a broad category fold or unifier;
-138. `emdash3_2_semicubical_face_action.lp` for variable-dimensional native
+139. `emdash3_2_semicubical_face_action.lp` for variable-dimensional native
     code action. Its dependent result retains both a whole restriction functor
     and its readable pseudo profile; `L/R` use source/target and star uses
     profiled `CubicalArrow_func`, with generic next-hom action still available;
-139. `emdash3_2_semicubical_nerve.lp` for the whole functor
+140. `emdash3_2_semicubical_nerve.lp` for the whole functor
     `SemiCubePlus_cat^op -> Cat_cat`. Its object action computes; its arrow
     observation is propositional so recursive profile histories do not
     compete with generic strict cuts. Public identity/composition laws and
     higher action follow without a runtime arrow beta or unifier;
-140. `emdash3_2_semicubical_frames.lp` for the generic immediate boundary.
+141. `emdash3_2_semicubical_frames.lp` for the generic immediate boundary.
     Its finite family has two entries per dimension: new source/target first,
     then every older face star-lifted through the native arrow action. Generic
     paths and dimensions one through three validate the indexed/native match;
-141. `emdash3_2_semicubical_representables.lp` for Yoneda standard semicubes,
+142. `emdash3_2_semicubical_representables.lp` for Yoneda standard semicubes,
     their whole native decoder, selected comparison with the computing face
     action, and retained higher representable action;
-142. `emdash3_2_cubical.lp` for the rule-free canonical import facade;
-143. `emdash3_2_checks.lp` for executable regression statements;
-144. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+143. `emdash3_2_cubical.lp` for the rule-free canonical import facade;
+144. `emdash3_2_checks.lp` for executable regression statements;
+145. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-145. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-146. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+146. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+147. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-147. `reports/INDEX.md` for task-specific plans and decision records;
-148. `book/book.json` and `book/evidence.json` for book source
+148. `reports/INDEX.md` for task-specific plans and decision records;
+149. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

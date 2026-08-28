@@ -5206,6 +5206,106 @@ Lambdapi conversion. Došen's decision theorem concerns the separately free
 syntax; a future executable normalizer must make that syntax and its
 translation boundary explicit.
 
+### Chosen pullbacks as internal slice base change
+
+The pullback layer applies the indexed-adjunction discipline to the whole
+family of conventional slices. Every category already has covariant
+postcomposition:
+
+```text
+SliceSigma(C) : C → Cat
+X             ↦ C/X
+f : X → Y   ↦ Σ_f : C/X → C/Y.
+```
+
+This is the existing comma-family owner at `id_C`; it is not new pullback
+structure. A selected
+
+```text
+PB : PullbackStructure(C)
+```
+
+supplies one coherent opposite-variance family with the same exact fibres:
+
+```text
+SliceBaseChange(PB) : C^op → Cat
+X                   ↦ C/X
+f : X → Y         ↦ f* : C/Y → C/X,
+```
+
+and every internal base arrow carries the existing adjunction
+
+```text
+Σ_f ⊣ f*.
+```
+
+The whole family, rather than independent point operations, owns identity,
+composition, and higher base-arrow action. This construction must not be
+confused with `Pullback_catd(E,F)`, which merely substitutes an already-given
+Cat-valued family `E` along a functor `F` and exists without categorical
+pullbacks in `C`.
+
+For `f:X→Y` and a slice object `g:Z→Y`, the selected pullback object is
+`f*(g)` in `C/X`. Its ambient domain is `P`; its structure arrow is
+`π₁:P→X`. The counit slice arrow
+
+```text
+ε_g : Σ_f(f*(g)) → g
+```
+
+supplies `π₂:P→Z` and the directed commuting square. The apparent
+domain mismatch between `P` and the domain of `Σ_f(f*(g))` is handled by
+explicit non-opaque recentering paths derived from the whole slice-domain
+functor; no arbitrary Sigma eta or equality axiom is installed.
+
+For a slice object `a` over `X`, the whole cone category is
+
+```text
+Cone_f(a,g) = Hom_{C/Y}(Σ_f(a),g).
+```
+
+A literal ambient cone `a:W→X`, `b:W→Z`, and directed cell
+`g∘b ⇒ f∘a` packages as an object of this hom category. Adjunction
+transpose gives the universal slice lift
+
+```text
+transpose : Cone_f(a,g) → Hom_{C/X}(a,f*(g)),
+```
+
+and its underlying ambient arrow is the mediator `W→P`. The inverse is
+adjunction untranspose. Both are whole functors, so higher cone arrows remain
+available, and the computational universal property is
+
+```text
+untranspose(transpose(h)) → h
+transpose(untranspose(k)) → k.
+```
+
+Stable ambient-arrow and directed-cell projections do not obstruct the first
+reduction: a literal cone recovers both `b` and its supplied square cell. The
+first projection of a lift is the retained directed triangle
+
+```text
+π₁ ∘ lift(h) ⇒ arrow(a).
+```
+
+This distinction is essential. `Slice_cat(C,X)` is the internal directed
+slice: its morphisms carry higher cells, not postulated strict equations.
+Consequently the theory does not rewrite the raw composites
+`π₁∘lift(h)` or `π₂∘lift(h)` to bare ambient arrows for arbitrary
+`C`. Such a rule would erase the higher witness and silently strengthen the
+selected lax/internal pullback. Locally discrete consumers may derive the
+ordinary 1-categorical equalities from supplied discreteness evidence.
+
+The stable transpose and untranspose heads are related to the explicit
+`f*[h]∘η` and `ε∘Σ_f[k]` presentations by narrow proof-time usability
+rules. Named semantic paths are typed reflexivity through those rules; they
+are not opaque bridges and do not change runtime preference. The initial
+layer claims neither strict base-change functoriality nor an explicit pseudo
+certificate. Products in slices, terminal-derived products, weighted
+pullbacks, pushout duality, the second adjunction `f*⊣Π_f`,
+Beck–Chevalley, and Frobenius remain later assumption-explicit structures.
+
 The current theory includes the expected basic operations:
 
 ```text
@@ -6352,6 +6452,14 @@ kernel and one-way library vocabulary.
 | contravariant Yoneda functor/object | `yoneda_psh_func K` / `yoneda_psh U` |
 | restriction-oriented arrows into `U` | `Into_restr_cat U` |
 | conventional slice `K/U` | `Slice_cat U` |
+| whole covariant slice family / postcomposition | `SliceSigma_catd C` / `slice_sigma_func f` |
+| chosen whole pullback base-change family | `PullbackStructure C` / `SliceBaseChange_catd PB` |
+| pullback reindexing along `f` | `slice_base_change_func PB f` |
+| selected slice adjunction `Σ_f ⊣ f*` | `slice_base_change_adjunction PB f` |
+| selected pullback domain and projections | `pullback_domain PB f g` / `pullback_fst PB f g` / `pullback_snd PB f g` |
+| retained directed pullback square | `pullback_square_readable_cell PB f g` |
+| whole cone category and universal lift | `pullback_cone_cat f a g` / `pullback_lift_func PB f a g` |
+| cone induced by a slice lift | `pullback_cone_of_lift PB f k` |
 | Cat-valued higher sieves on `U` | `HigherSieve_cat U` / `HigherSieve U` |
 | maximal Cat-valued higher sieve | `maximal_higher_sieve U` |
 | native subterminal category | `IsSubterminalCat C` |
