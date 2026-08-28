@@ -1272,8 +1272,7 @@ record.
   Beck–Chevalley, and Frobenius remain distinct or later assumption-explicit
   consumers. Durable reviewer/central checks are green; documentation,
   registration, exact warning/audit, 2,336-check/115-area catalog, and
-  source-only health closeout are green; the final local checkpoint is
-  pending.
+  source-only health closeout are green at local checkpoint `d572193`.
 - `REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md`:
   completed second-tranche closeout plan for enhanced triangular products,
   terminal objects, and their thin Cartesian package. One direct map unifier

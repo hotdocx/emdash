@@ -4,7 +4,7 @@ Date: 2026-08-28 (America/Toronto)
 
 Plan-ID: `PULLBACKS-SLICE-BASE-CHANGE-COMPUTATION-V3.2`
 
-Status: **implementation and scoped validation complete; closeout checkpoint pending**.
+Status: **complete at local closeout checkpoint `d572193`**.
 
 Branch: `goal/pullback-computation-v3.2`
 
@@ -530,7 +530,7 @@ green.
 | `PB-PSEUDO-8` | complete classification | Identity, composition, and higher action are retained by the one whole `Catd(Op C)` owner. No strictness claim or Gray-only pseudo-property dependency is added; an explicit invertible compositor certificate remains consumer-gated. |
 | `PB-COMPAT-9` | complete classification | Products-in-slices, terminal-derived products, weighted pullbacks, opposite pushouts, `Π_f`, Beck–Chevalley, and Frobenius remain assumption-explicit later consumers. No concrete canonical-choice comparison is available in this tranche, so none is postulated. |
 | `PB-DOC-10` | complete | Thirteen central checks and the 27-assert `examples/pullbacks.lp` reviewer cover the selected positive/negative boundary. Foundations, canonical syntax, SOP, AGENTS authority order, report index, source registries, 2,336-check/115-area catalog, and source-only health report are synchronized. |
-| `PB-CLOSE-11` | validation complete; checkpoint pending | Focused sources/reviewer, the affected moved-definition downstream module/example, central diagnostics, exact `1116/159` warnings, empty strict audits, catalog/health/document/script/diff hygiene, and worktree bootstrap are green. The final local closeout checkpoint is the only remaining action. |
+| `PB-CLOSE-11` | complete, checkpoint `d572193` | Focused sources/reviewer, the affected moved-definition downstream module/example, central diagnostics, exact `1116/159` warnings, empty strict audits, catalog/health/document/script/diff hygiene, and worktree bootstrap are green. The validated implementation/documentation tranche is locally checkpointed. |
 
 ## Decision Ledger
 
@@ -560,8 +560,10 @@ green.
   successful patches after an external full-disk incident truncated the
   then-untracked new module; the focused module check passed immediately
   before the checkpoint.
-- The current documentation/reviewer tranche follows that checkpoint and must
-  receive its own green local checkpoint before closeout.
+- `d572193` is the validated implementation/documentation closeout checkpoint:
+  it adds explicit mate-semantic paths, the complete reviewer and central
+  diagnostics, warning-neutral SOP cleanup, authority prose, registrations,
+  catalog, and source-only health synchronization.
 
 ## Scoped Closeout Evidence
 
