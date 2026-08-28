@@ -73,14 +73,29 @@ detailed probe evidence.
   `K1a`, `K2a`, pairing beta/distribution/eta, direct post-`K(id)` projection
   betas, and both selected section-6.4 normalizations. Canonical
   `Struct_sigma`, not the reducible `Product_pair` alias, owns rule matching.
-  Two narrowly typed unification rules compare projection after generic `P`
-  action with the triangular heads only at proof time. An explicit
-  `pair(proj1,proj2) o P[(f,g)]` common-ancestor proof gives propositional map
-  agreement without runtime expansion or an opaque equality bridge. Eta and
-  distribution also derive ordinary hom-level pairing uniqueness. The module
-  does not assert global products, add terminal objects, reproduce free syntax
-  or decidability, or automatically package the existing per-pair weighted-
-  limit presentation.
+  One direct proof-time unifier compares generic `P` action with the
+  triangular map; projection paths derive by congruence and direct beta while
+  runtime forms remain distinct. Eta/distribution derive ordinary hom-level
+  uniqueness. A transparent whole unpair functor retains higher action and
+  carries both pointwise inverse paths. Equality of the whole pair/unpair
+  functors remains an explicit assembly boundary, so no `OmegaEquivAlong` is
+  claimed.
+- `emdash3_2_terminal_objects.lp`: whole selected terminal-object layer.
+  `TerminalObject(C,t)` exposes `! : id_C => Const_t`, stable components,
+  computing off-diagonal point action and canonical cuts, and retained full
+  hom action. Every `Hom_C(A,t)` is contractible and recentered at `!_A`, so
+  arbitrary `f = !_A` and `!_t = id_t` are derived paths. Arbitrary arrows and
+  `!_t` remain runtime-distinct; there is no variable-headed rewrite or
+  bare-variable unifier.
+- `emdash3_2_cartesian_categories.lp`: transparent rule-free pairing of
+  `BinaryProducts(C,P)` and `TerminalObject(C,t)`. It adds no duplicate
+  product or terminal computation.
+- `emdash3_2_triangular_binary_products_finite_limits.lp`: assumption-explicit
+  bridge to the existing per-pair `BinaryProductPresentation`. A supplied
+  `BinaryProductsWeightedComp` carries each strict `DefIso`-based weighted
+  witness and paths identifying both weighted projections with the triangular
+  projections. It adds no automatic `DefIso`, rule, unifier, or reverse global
+  assembly.
 - `emdash3_2_direct_cover_completion_locality.lp`: downstream conventional
   comparison for the direct whole-presheaf cover-completion HIT. A derived
   retained-member theorem is projected through one whole transformation

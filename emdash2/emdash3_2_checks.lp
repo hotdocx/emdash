@@ -25,7 +25,7 @@ require open emdash.emdash3_2_direct_cover_completion_universality;
 require open emdash.emdash3_2_direct_cover_sheafification;
 require open emdash.emdash3_2_groupoidification_composition;
 require open emdash.emdash3_2_groupoidification_interval_recovery;
-require open emdash.emdash3_2_monads emdash.emdash3_2_triangular_binary_products;
+require open emdash.emdash3_2_monads emdash.emdash3_2_triangular_binary_products emdash.emdash3_2_terminal_objects emdash.emdash3_2_cartesian_categories emdash.emdash3_2_triangular_binary_products_finite_limits;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
 assert ⊢ τ Empty_grpd ≡ empty;
@@ -26649,6 +26649,69 @@ assert [C : Cat]
           (@binary_products_pair_target_family C P A0 A1)
           Y)));
 
+// Unpair is a transparent whole functor and retains another hom action.
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A0 A1 : τ (Obj C)) ⊢
+  @binary_products_unpair_func C P BP X A0 A1
+  : τ (Functor
+      (Hom_cat C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+      (Product_cat (Hom_cat C X A0) (Hom_cat C X A1)));
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A0 A1 : τ (Obj C))
+  (h k : τ (Hom C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))) ⊢
+  @fapp1_func
+    (Hom_cat C X
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+    (Product_cat (Hom_cat C X A0) (Hom_cat C X A1))
+    (@binary_products_unpair_func C P BP X A0 A1)
+    h k
+  : τ (Functor
+      (Hom_cat
+        (Hom_cat C X
+          (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+        h k)
+      (Hom_cat
+        (Product_cat (Hom_cat C X A0) (Hom_cat C X A1))
+        (@binary_products_unpair_fapp0 C P BP X A0 A1 h)
+        (@binary_products_unpair_fapp0 C P BP X A0 A1 k)));
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A0 A1 : τ (Obj C))
+  (f : τ (Hom C X A0))
+  (g : τ (Hom C X A1)) ⊢
+  @binary_products_unpair_pair_path C P BP X A0 A1 f g
+  : τ (@=
+      (Obj (Product_cat (Hom_cat C X A0) (Hom_cat C X A1)))
+      (@binary_products_unpair_fapp0
+        C P BP X A0 A1
+        (@binary_products_pair_fapp0 C P BP X A0 A1 f g))
+      (@Product_pair (Hom_cat C X A0) (Hom_cat C X A1) f g));
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A0 A1 : τ (Obj C))
+  (h : τ (Hom C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))) ⊢
+  @binary_products_pair_unpair_path C P BP X A0 A1 h
+  : τ (@=
+      (Hom C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+      h
+      (@binary_products_pair_fapp0
+        C P BP X A0 A1
+        (sigma_Fst (@binary_products_unpair_fapp0 C P BP X A0 A1 h))
+        (sigma_Snd (@binary_products_unpair_fapp0 C P BP X A0 A1 h))));
+
 // Došen naturality and pairing distribution.
 assert [C : Cat]
   [P : τ (Functor (Product_cat C C) C)]
@@ -26844,3 +26907,191 @@ assert [C : Cat]
         (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
       h
       (@binary_products_pair_reconstruct_fapp0 C P BP X A0 A1 h));
+
+// -------------------------------------------------------------------------------------------------
+// Whole terminal objects and hom-contractibility
+// catalog-area: Whole terminal-object computation and contractibility
+// -------------------------------------------------------------------------------------------------
+
+assert [C : Cat] (t : τ (Obj C)) ⊢ @TerminalObject C t : Grpd;
+
+assert [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) ⊢
+  @terminal_arrow_transf C t T
+  : τ (Transf (@id_func C) (@Const_func C C t));
+
+assert [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t))
+  (A : τ (Obj C)) ⊢
+  @tapp0_fapp0
+    C C
+    (@id_func C) (@Const_func C C t)
+    A
+    (@terminal_arrow_transf C t T)
+  ≡ @terminal_arrow_fapp0 C t T A;
+
+assert [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t))
+  (A B : τ (Obj C))
+  (h : τ (Hom C A B)) ⊢
+  @tapp1_fapp0
+    C C
+    (@id_func C) (@Const_func C C t)
+    A B
+    (@terminal_arrow_transf C t T)
+    h
+  ≡ @terminal_arrow_fapp0 C t T A;
+
+assert [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t))
+  (A B : τ (Obj C)) ⊢
+  @tapp1_func
+    C C
+    (@id_func C) (@Const_func C C t)
+    A B
+    (@terminal_arrow_transf C t T)
+  : τ (Functor (Hom_cat C A B) (Hom_cat C A t));
+
+assert [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t))
+  (A : τ (Obj C)) ⊢
+  @is_contr_center
+    (Hom C A t)
+    (@terminal_hom_contr_at_arrow C t T A)
+  ≡ @terminal_arrow_fapp0 C t T A;
+
+assert [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t))
+  (A : τ (Obj C))
+  (f : τ (Hom C A t)) ⊢
+  @terminal_unique_path C t T A f
+  : τ (@= (Hom C A t) f (@terminal_arrow_fapp0 C t T A));
+
+assert [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t))
+  (A B : τ (Obj C))
+  (h : τ (Hom C A B)) ⊢
+  @comp_fapp0 C A B t
+    (@terminal_arrow_fapp0 C t T B)
+    h
+  ≡ @terminal_arrow_fapp0 C t T A;
+
+assert [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) ⊢
+  @terminal_arrow_at_terminal_path C t T
+  : τ (@= (Hom C t t)
+      (@terminal_arrow_fapp0 C t T t)
+      (@id C t));
+
+assertnot [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) ⊢
+  @terminal_arrow_fapp0 C t T t ≡ @id C t;
+
+assertnot [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t))
+  (A : τ (Obj C))
+  (f : τ (Hom C A t)) ⊢
+  f ≡ @terminal_arrow_fapp0 C t T A;
+
+assertnot [C : Cat]
+  (t u : τ (Obj C))
+  (T : τ (@TerminalObject C t)) ⊢
+  @TerminalObject C t ≡ @TerminalObject C u;
+
+// -------------------------------------------------------------------------------------------------
+// Thin selected cartesian-category capability
+// catalog-area: Thin selected cartesian-category capability
+// -------------------------------------------------------------------------------------------------
+
+assert [C : Cat]
+  (P : τ (Functor (Product_cat C C) C))
+  (t : τ (Obj C)) ⊢
+  @CartesianCategory C P t : Grpd;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (BP : τ (@BinaryProducts C P))
+  (T : τ (@TerminalObject C t)) ⊢
+  @cartesian_binary_products
+    C P t (@cartesian_category_intro C P t BP T)
+  ≡ BP;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (BP : τ (@BinaryProducts C P))
+  (T : τ (@TerminalObject C t)) ⊢
+  @cartesian_terminal_object
+    C P t (@cartesian_category_intro C P t BP T)
+  ≡ T;
+
+assertnot [C : Cat]
+  [P Q : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (K : τ (@CartesianCategory C P t)) ⊢
+  @CartesianCategory C P t ≡ @CartesianCategory C Q t;
+
+// -------------------------------------------------------------------------------------------------
+// Assumption-explicit weighted-product compatibility
+// catalog-area: Triangular/weighted binary-product compatibility
+// -------------------------------------------------------------------------------------------------
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P)) ⊢
+  @BinaryProductsWeightedComp C P BP : Grpd;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [BP : τ (@BinaryProducts C P)]
+  (K : τ (@BinaryProductsWeightedComp C P BP))
+  (A B : τ (Obj C)) ⊢
+  @binary_product_object C A B
+    (@binary_products_weighted_presentation C P BP K A B)
+  ≡ @fapp0 (Product_cat C C) C P (@Product_pair C C A B);
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [BP : τ (@BinaryProducts C P)]
+  (K : τ (@BinaryProductsWeightedComp C P BP))
+  (A B : τ (Obj C)) ⊢
+  @binary_product_universal C A B
+    (@binary_products_weighted_presentation C P BP K A B)
+  ≡ @binary_products_weighted_comp C P BP K A B;
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [BP : τ (@BinaryProducts C P)]
+  (K : τ (@BinaryProductsWeightedComp C P BP))
+  (A B : τ (Obj C)) ⊢
+  @binary_products_weighted_proj1_path C P BP K A B
+  : τ (@= (Hom C
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A B)) A)
+      (@selected_binary_product_projection0
+        C A B
+        (@binary_products_weighted_presentation C P BP K A B))
+      (@binary_products_proj1_fapp0 C P BP A B));
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [BP : τ (@BinaryProducts C P)]
+  (K : τ (@BinaryProductsWeightedComp C P BP))
+  (A B : τ (Obj C)) ⊢
+  @binary_products_weighted_proj2_path C P BP K A B
+  : τ (@= (Hom C
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A B)) B)
+      (@selected_binary_product_projection1
+        C A B
+        (@binary_products_weighted_presentation C P BP K A B))
+      (@binary_products_proj2_fapp0 C P BP A B));

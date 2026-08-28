@@ -448,14 +448,23 @@ represented-family pairing transfor, and retains stable post-projection
 `K1a`/`K2a`, pairing-functor, and pairing-point heads for Došen's runtime
 beta/distribution/eta calculus and the two selected section-6.4
 normalizations. Canonical `Struct_sigma` shapes, rather than the reducible
-`Product_pair` alias, own rule matching. Two narrowly typed proof-time
-comparisons relate projection after generic `P` action to the triangular
-heads, while an explicit common-ancestor path proves agreement of generic
-`P` action with the derived product map without a hot runtime expansion or an
-opaque equality bridge. Direct projection betas close the post-`K(id)` order,
-and eta plus distribution derive ordinary hom-level pairing uniqueness. The
-existing per-pair weighted-limit presentation remains separate, and terminal
-objects remain deferred;
+`Product_pair` alias, own rule matching. One proof-time comparison relates
+generic `P` action directly to the triangular map; projection paths derive by
+congruence and direct beta while runtime forms remain distinct. Direct
+projection betas close the post-`K(id)` order, eta plus distribution derive
+ordinary hom-level pairing uniqueness, and transparent whole unpair retains
+higher action plus both pointwise inverse paths. Equality of the whole
+pair/unpair functors remains a bounded assembly boundary;
+the selected terminal-object interface is `emdash3_2_terminal_objects.lp`;
+it exposes one whole `id_C => Const_t` transfor, stable components, computing
+off-diagonal point action and canonical cuts, hom-contractibility recentered at
+the canonical component, and derived arbitrary-arrow uniqueness. It adds no
+variable-headed rule, bare-variable unifier, or runtime `!_t -> id_t` fold;
+the thin rule-free Cartesian package is `emdash3_2_cartesian_categories.lp`;
+the assumption-explicit weighted-product adapter is
+`emdash3_2_triangular_binary_products_finite_limits.lp`, carrying supplied
+strict weighted comparisons and two projection-compatibility paths without an
+automatic `DefIso` witness;
 executable diagnostics live in `emdash3_2_checks.lp`.
 
 ## Authorities
@@ -1293,24 +1302,43 @@ Use the following order:
     transfors, stable post-projection `K1a`/`K2a` and pairing heads, ambient
     Došen beta/distribution/eta computation, both selected section-6.4
     reductions, and direct projection-order joins. Generic `P` action remains
-    a distinct runtime normal form; two typed proof-time projection
-    comparisons and an explicit `pair(proj1,proj2) o P[(f,g)]` path derive its
-    agreement with the triangular map. The same common-ancestor method derives
-    ordinary hom-level pairing uniqueness. Against the `1116/159` base
-    warning inventory, the module's `1179/171` inventory adds 63 classified
-    critical-pair and 12 replaceable-variable reports around the intentional
+    a distinct runtime normal form; one direct map unifier owns proof-time
+    comparison and both projection paths derive by congruence. Eta/distribution
+    derive ordinary hom-level pairing uniqueness. Transparent whole unpair
+    retains higher action and both pointwise inverse paths; equality of whole
+    pair/unpair functors remains gated by a missing assembly constructor.
+    Against the `1116/159` base warning inventory, the module's `1179/169`
+    inventory adds 63 classified critical-pair and 10 replaceable-variable
+    reports around the intentional
     projection/naturality/beta/eta/section-6.4 orders; focused checks and the
     strict LHS audit are green. No free syntax, decision procedure, global
-    product existence, terminal object, opaque equality bridge, or automatic
-    weighted-limit adapter is claimed;
-124. `emdash3_2_checks.lp` for executable regression statements;
-125. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+    product existence, opaque equality bridge, automatic whole equivalence, or
+    automatic weighted-limit adapter is claimed;
+124. `emdash3_2_terminal_objects.lp` for indexed `TerminalObject(C,t)`, the
+    whole canonical-arrow transfor `id_C => Const_t`, stable component and
+    off-diagonal computation, retained higher action, hom-contractibility
+    recentered at the canonical component, derived Došen `(K)` paths, and the
+    canonical cut `!_B o h -> !_A`. Its base-relative warning inventory is
+    `1123/161`; importing it with products yields `1188/171`, with the nine
+    terminal critical-pair and two replaceable-variable additions classified.
+    It adds no arbitrary-arrow evaluator, bare-variable unifier, runtime
+    `!_t -> id_t`, free syntax, or commuting decision procedure;
+125. `emdash3_2_cartesian_categories.lp` for the transparent rule-free pairing
+    of selected binary-products and terminal-object evidence. It introduces no
+    new computation;
+126. `emdash3_2_triangular_binary_products_finite_limits.lp` for supplied
+    `BinaryProductsWeightedComp`, its transparent per-pair
+    `BinaryProductPresentation`, and paths relating both weighted projections
+    to the triangular projections. It adds no automatic `DefIso`, rule,
+    unifier, or reverse global assembly;
+127. `emdash3_2_checks.lp` for executable regression statements;
+128. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-126. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-127. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+129. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+130. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-128. `reports/INDEX.md` for task-specific plans and decision records.
-129. `book/book.json` and `book/evidence.json` for book source
+131. `reports/INDEX.md` for task-specific plans and decision records.
+132. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

@@ -20,13 +20,16 @@
     <pi_1,pi_2>       -> id.
 
   The two selected §6.4 reductions are oriented toward one K^a operation.
-  The extra whole P action is not expanded at runtime. Its local projection
-  comparisons are proof-time usability rules, from which an explicit
-  propositional product-map agreement is derived below.
+  The extra whole P action is not expanded at runtime. One direct proof-time
+  comparison identifies it with the triangular map; projection equalities
+  derive by congruence and direct beta. Whole unpair is transparent, retains
+  higher action, and carries explicit pointwise inverse paths. Equality of the
+  whole pair/unpair functors remains a separate assembly boundary.
 
   This module does not construct Došen's free syntax or decision algorithm,
   assert products for every category, replace the existing per-pair
-  weighted-limit BinaryProductPresentation, or add a terminal object.
+  weighted-limit BinaryProductPresentation, or add a terminal object. Those
+  bridges live in separate one-way modules.
 */
 
 require open emdash.emdash3_2;
@@ -134,6 +137,48 @@ symbol binary_products_pair_fapp0
       (@fapp0
         (Product_cat C C) C P
         (@Product_pair C C A0 A1)));
+
+// Whole unpair is the product of postcomposition by the two projections.
+// It is transparent semantic structure; generic functor action retains all
+// higher cells.
+symbol binary_products_unpair_func
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (B : τ (@BinaryProducts C P))
+  (X A0 A1 : τ (Obj C))
+  : τ (Functor
+      (Hom_cat C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+      (Product_cat (Hom_cat C X A0) (Hom_cat C X A1)))
+≔ Struct_sigma
+    (@hom_postcomp_func
+      C C (@id_func C)
+      X
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+      A0
+      (@binary_products_proj1_fapp0 C P B A0 A1))
+    (@hom_postcomp_func
+      C C (@id_func C)
+      X
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+      A1
+      (@binary_products_proj2_fapp0 C P B A0 A1));
+
+// Readable object observation of the whole unpair functor.
+symbol binary_products_unpair_fapp0
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (B : τ (@BinaryProducts C P))
+  [X A0 A1 : τ (Obj C)]
+  (h : τ (Hom C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))))
+  : τ (Obj (Product_cat (Hom_cat C X A0) (Hom_cat C X A1)))
+≔ @fapp0
+    (Hom_cat C X
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+    (Product_cat (Hom_cat C X A0) (Hom_cat C X A1))
+    (@binary_products_unpair_func C P B X A0 A1)
+    h;
 
 // Stable K_1^a_A(f) : P(B0,A) -> B1.
 symbol binary_products_K1a_fapp0
@@ -380,40 +425,57 @@ symbol binary_products_semantic_map_fapp0
       f g);
 
 /*
-  Proof-time coherence of the extra whole P action with the triangular
-  projections. These are usability comparisons, not runtime reductions:
-  generic P action and the stable K^a heads retain distinct normal forms.
+  Sole proof-time coherence of the extra whole P action with the triangular
+  map. This is a usability comparison, not a runtime reduction: generic P
+  action and stable pairing retain distinct normal forms.
 
   `Struct_sigma` is the canonical post-Product_pair shape. No defined alias
   occurs on either unification-rule side.
 */
 unif_rule
-  @comp_fapp0
-    _ _ _ _
-    (@binary_products_proj1_fapp0
-      $C $P $BP $A1 $B1)
-    (@fapp1_fapp0
-      _ _ $P
-      (Struct_sigma $A0 $B0)
-      (Struct_sigma $A1 $B1)
-      (Struct_sigma $f $g))
-  ≡ @binary_products_K1a_fapp0
-      $C $P $BP $B0 $A0 $A1 $f
+  @fapp1_fapp0
+    _ _ $P
+    (Struct_sigma $A0 $B0)
+    (Struct_sigma $A1 $B1)
+    (Struct_sigma $f $g)
+  ≡ @binary_products_pair_fapp0
+      $C $P $BP _ $A1 $B1
+      (@binary_products_K1a_fapp0
+        $C $P $BP $B0 $A0 $A1 $f)
+      (@binary_products_K2a_fapp0
+        $C $P $BP $A0 $B0 $B1 $g)
   ↪ [ tt ≡ tt ];
 
-unif_rule
-  @comp_fapp0
-    _ _ _ _
-    (@binary_products_proj2_fapp0
-      $C $P $BP $A1 $B1)
-    (@fapp1_fapp0
-      _ _ $P
-      (Struct_sigma $A0 $B0)
-      (Struct_sigma $A1 $B1)
-      (Struct_sigma $f $g))
-  ≡ @binary_products_K2a_fapp0
-      $C $P $BP $A0 $B0 $B1 $g
-  ↪ [ tt ≡ tt ];
+// Typed proof-time agreement: P[(f,g)] = <K_1^a(f),K_2^a(g)>.
+symbol binary_products_map_path
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (B : τ (@BinaryProducts C P))
+  [A0 A1 B0 B1 : τ (Obj C)]
+  (f : τ (Hom C A0 A1))
+  (g : τ (Hom C B0 B1))
+  : τ (@=
+      (Hom C
+        (@fapp0
+          (Product_cat C C) C P
+          (@Product_pair C C A0 B0))
+        (@fapp0
+          (Product_cat C C) C P
+          (@Product_pair C C A1 B1)))
+      (@binary_products_semantic_map_fapp0
+        C P B A0 A1 B0 B1 f g)
+      (@binary_products_map_fapp0
+        C P B A0 A1 B0 B1 f g))
+≔ @eq_refl
+    (Hom C
+      (@fapp0
+        (Product_cat C C) C P
+        (@Product_pair C C A0 B0))
+      (@fapp0
+        (Product_cat C C) C P
+        (@Product_pair C C A1 B1)))
+    (@binary_products_map_fapp0
+      C P B A0 A1 B0 B1 f g);
 
 // Typed equality view of product eta.
 symbol binary_products_pair_eta_path
@@ -523,13 +585,29 @@ symbol binary_products_proj1_action_path
         (@binary_products_semantic_map_fapp0
           C P B A0 A1 B0 B1 f g))
       (@binary_products_K1a_fapp0 C P B B0 A0 A1 f))
-≔ @eq_refl
+≔ @eq_ap
     (Hom C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 B0))
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A1 B1)))
+    (Hom C
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 B0))
       A1)
-    (@binary_products_K1a_fapp0 C P B B0 A0 A1 f);
+    (λ q : τ (Hom C
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 B0))
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A1 B1))),
+      @comp_fapp0
+        C
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 B0))
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A1 B1))
+        A1
+        (@binary_products_proj1_fapp0 C P B A1 B1)
+        q)
+    (@binary_products_semantic_map_fapp0
+      C P B A0 A1 B0 B1 f g)
+    (@binary_products_map_fapp0
+      C P B A0 A1 B0 B1 f g)
+    (@binary_products_map_path
+      C P B A0 A1 B0 B1 f g);
 
 // Typed proof-time second-projection comparison.
 symbol binary_products_proj2_action_path
@@ -558,13 +636,29 @@ symbol binary_products_proj2_action_path
         (@binary_products_semantic_map_fapp0
           C P B A0 A1 B0 B1 f g))
       (@binary_products_K2a_fapp0 C P B A0 B0 B1 g))
-≔ @eq_refl
+≔ @eq_ap
     (Hom C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 B0))
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A1 B1)))
+    (Hom C
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 B0))
       B1)
-    (@binary_products_K2a_fapp0 C P B A0 B0 B1 g);
+    (λ q : τ (Hom C
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 B0))
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A1 B1))),
+      @comp_fapp0
+        C
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 B0))
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A1 B1))
+        B1
+        (@binary_products_proj2_fapp0 C P B A1 B1)
+        q)
+    (@binary_products_semantic_map_fapp0
+      C P B A0 A1 B0 B1 f g)
+    (@binary_products_map_fapp0
+      C P B A0 A1 B0 B1 f g)
+    (@binary_products_map_path
+      C P B A0 A1 B0 B1 f g);
 
 // Equality action by postcomposing a fixed arrow on the right.
 symbol binary_products_comp_post_path
@@ -583,429 +677,6 @@ symbol binary_products_comp_post_path
     (λ q : τ (Hom C Y Z), @comp_fapp0 C X Y Z q h)
     k l p;
 
-// Equality action in the first pairing input.
-symbol binary_products_pair_left_path
-  [C : Cat]
-  [P : τ (Functor (Product_cat C C) C)]
-  (B : τ (@BinaryProducts C P))
-  [X A0 A1 : τ (Obj C)]
-  [f f' : τ (Hom C X A0)]
-  (p : τ (@= (Hom C X A0) f f'))
-  (g : τ (Hom C X A1))
-  : τ (@=
-      (Hom C X
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A0 A1)))
-      (@binary_products_pair_fapp0 C P B X A0 A1 f g)
-      (@binary_products_pair_fapp0 C P B X A0 A1 f' g))
-≔ @eq_ap
-    (Hom C X A0)
-    (Hom C X
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 A1)))
-    (λ q : τ (Hom C X A0),
-      @binary_products_pair_fapp0 C P B X A0 A1 q g)
-    f f' p;
-
-// Equality action in the second pairing input.
-symbol binary_products_pair_right_path
-  [C : Cat]
-  [P : τ (Functor (Product_cat C C) C)]
-  (B : τ (@BinaryProducts C P))
-  [X A0 A1 : τ (Obj C)]
-  (f : τ (Hom C X A0))
-  [g g' : τ (Hom C X A1)]
-  (p : τ (@= (Hom C X A1) g g'))
-  : τ (@=
-      (Hom C X
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A0 A1)))
-      (@binary_products_pair_fapp0 C P B X A0 A1 f g)
-      (@binary_products_pair_fapp0 C P B X A0 A1 f g'))
-≔ @eq_ap
-    (Hom C X A1)
-    (Hom C X
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 A1)))
-    (λ q : τ (Hom C X A1),
-      @binary_products_pair_fapp0 C P B X A0 A1 f q)
-    g g' p;
-
-// Common ancestor <pi_1,pi_2> o P[(f,g)].
-symbol binary_products_map_common_fapp0
-  [C : Cat]
-  [P : τ (Functor (Product_cat C C) C)]
-  (B : τ (@BinaryProducts C P))
-  [A0 A1 B0 B1 : τ (Obj C)]
-  (f : τ (Hom C A0 A1))
-  (g : τ (Hom C B0 B1))
-  : τ (Hom C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1)))
-≔ @comp_fapp0
-    C
-    (@fapp0
-      (Product_cat C C) C P
-      (@Product_pair C C A0 B0))
-    (@fapp0
-      (Product_cat C C) C P
-      (@Product_pair C C A1 B1))
-    (@fapp0
-      (Product_cat C C) C P
-      (@Product_pair C C A1 B1))
-    (@binary_products_pair_fapp0
-      C P B
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1))
-      A1 B1
-      (@binary_products_proj1_fapp0 C P B A1 B1)
-      (@binary_products_proj2_fapp0 C P B A1 B1))
-    (@binary_products_semantic_map_fapp0
-      C P B A0 A1 B0 B1 f g);
-
-// Semantic P action reaches the common ancestor by left identity and eta.
-symbol binary_products_semantic_to_common_path
-  [C : Cat]
-  [P : τ (Functor (Product_cat C C) C)]
-  (B : τ (@BinaryProducts C P))
-  [A0 A1 B0 B1 : τ (Obj C)]
-  (f : τ (Hom C A0 A1))
-  (g : τ (Hom C B0 B1))
-  : τ (@=
-      (Hom C
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A0 B0))
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A1 B1)))
-      (@binary_products_semantic_map_fapp0
-        C P B A0 A1 B0 B1 f g)
-      (@binary_products_map_common_fapp0
-        C P B A0 A1 B0 B1 f g))
-≔ @eq_trans
-    (Hom C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1)))
-    (@binary_products_semantic_map_fapp0
-      C P B A0 A1 B0 B1 f g)
-    (@comp_fapp0
-      C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1))
-      (@id C
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A1 B1)))
-      (@binary_products_semantic_map_fapp0
-        C P B A0 A1 B0 B1 f g))
-    (@binary_products_map_common_fapp0
-      C P B A0 A1 B0 B1 f g)
-    (@eq_refl
-      (Hom C
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A0 B0))
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A1 B1)))
-      (@binary_products_semantic_map_fapp0
-        C P B A0 A1 B0 B1 f g))
-    (@binary_products_comp_post_path
-      C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1))
-      (@binary_products_semantic_map_fapp0
-        C P B A0 A1 B0 B1 f g)
-      (@id C
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A1 B1)))
-      (@binary_products_pair_fapp0
-        C P B
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A1 B1))
-        A1 B1
-        (@binary_products_proj1_fapp0 C P B A1 B1)
-        (@binary_products_proj2_fapp0 C P B A1 B1))
-      (@eq_sym
-        (Hom C
-          (@fapp0
-            (Product_cat C C) C P
-            (@Product_pair C C A1 B1))
-          (@fapp0
-            (Product_cat C C) C P
-            (@Product_pair C C A1 B1)))
-        (@binary_products_pair_fapp0
-          C P B
-          (@fapp0
-            (Product_cat C C) C P
-            (@Product_pair C C A1 B1))
-          A1 B1
-          (@binary_products_proj1_fapp0 C P B A1 B1)
-          (@binary_products_proj2_fapp0 C P B A1 B1))
-        (@id C
-          (@fapp0
-            (Product_cat C C) C P
-            (@Product_pair C C A1 B1)))
-        (@binary_products_pair_eta_path C P B A1 B1)));
-
-// First projection cut after semantic P action, used only in the map proof.
-symbol binary_products_map_proj1_cut
-  [C : Cat]
-  [P : τ (Functor (Product_cat C C) C)]
-  (B : τ (@BinaryProducts C P))
-  [A0 A1 B0 B1 : τ (Obj C)]
-  (f : τ (Hom C A0 A1))
-  (g : τ (Hom C B0 B1))
-  : τ (Hom C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      A1)
-≔ @comp_fapp0
-    C
-    (@fapp0
-      (Product_cat C C) C P
-      (@Product_pair C C A0 B0))
-    (@fapp0
-      (Product_cat C C) C P
-      (@Product_pair C C A1 B1))
-    A1
-    (@binary_products_proj1_fapp0 C P B A1 B1)
-    (@binary_products_semantic_map_fapp0
-      C P B A0 A1 B0 B1 f g);
-
-// Second projection cut after semantic P action, used only in the map proof.
-symbol binary_products_map_proj2_cut
-  [C : Cat]
-  [P : τ (Functor (Product_cat C C) C)]
-  (B : τ (@BinaryProducts C P))
-  [A0 A1 B0 B1 : τ (Obj C)]
-  (f : τ (Hom C A0 A1))
-  (g : τ (Hom C B0 B1))
-  : τ (Hom C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      B1)
-≔ @comp_fapp0
-    C
-    (@fapp0
-      (Product_cat C C) C P
-      (@Product_pair C C A0 B0))
-    (@fapp0
-      (Product_cat C C) C P
-      (@Product_pair C C A1 B1))
-    B1
-    (@binary_products_proj2_fapp0 C P B A1 B1)
-    (@binary_products_semantic_map_fapp0
-      C P B A0 A1 B0 B1 f g);
-
-// Distribution branch before either proof-time projection comparison.
-symbol binary_products_map_distributed_fapp0
-  [C : Cat]
-  [P : τ (Functor (Product_cat C C) C)]
-  (B : τ (@BinaryProducts C P))
-  [A0 A1 B0 B1 : τ (Obj C)]
-  (f : τ (Hom C A0 A1))
-  (g : τ (Hom C B0 B1))
-  : τ (Hom C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1)))
-≔ @binary_products_pair_fapp0
-    C P B
-    (@fapp0
-      (Product_cat C C) C P
-      (@Product_pair C C A0 B0))
-    A1 B1
-    (@binary_products_map_proj1_cut
-      C P B A0 A1 B0 B1 f g)
-    (@binary_products_map_proj2_cut
-      C P B A0 A1 B0 B1 f g);
-
-// Distribution branch after joining its first projection.
-symbol binary_products_map_left_joined_fapp0
-  [C : Cat]
-  [P : τ (Functor (Product_cat C C) C)]
-  (B : τ (@BinaryProducts C P))
-  [A0 A1 B0 B1 : τ (Obj C)]
-  (f : τ (Hom C A0 A1))
-  (g : τ (Hom C B0 B1))
-  : τ (Hom C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1)))
-≔ @binary_products_pair_fapp0
-    C P B
-    (@fapp0
-      (Product_cat C C) C P
-      (@Product_pair C C A0 B0))
-    A1 B1
-    (@binary_products_K1a_fapp0 C P B B0 A0 A1 f)
-    (@binary_products_map_proj2_cut
-      C P B A0 A1 B0 B1 f g);
-
-// The common ancestor reaches the triangular product map constructively.
-symbol binary_products_common_to_map_path
-  [C : Cat]
-  [P : τ (Functor (Product_cat C C) C)]
-  (B : τ (@BinaryProducts C P))
-  [A0 A1 B0 B1 : τ (Obj C)]
-  (f : τ (Hom C A0 A1))
-  (g : τ (Hom C B0 B1))
-  : τ (@=
-      (Hom C
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A0 B0))
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A1 B1)))
-      (@binary_products_map_common_fapp0
-        C P B A0 A1 B0 B1 f g)
-      (@binary_products_map_fapp0
-        C P B A0 A1 B0 B1 f g))
-≔ @eq_trans
-    (Hom C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1)))
-    (@binary_products_map_common_fapp0
-      C P B A0 A1 B0 B1 f g)
-    (@binary_products_map_distributed_fapp0
-      C P B A0 A1 B0 B1 f g)
-    (@binary_products_map_fapp0
-      C P B A0 A1 B0 B1 f g)
-    (@binary_products_pair_distribution_path
-      C P B
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1))
-      A1 B1
-      (@binary_products_semantic_map_fapp0
-        C P B A0 A1 B0 B1 f g)
-      (@binary_products_proj1_fapp0 C P B A1 B1)
-      (@binary_products_proj2_fapp0 C P B A1 B1))
-    (@eq_trans
-      (Hom C
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A0 B0))
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A1 B1)))
-      (@binary_products_map_distributed_fapp0
-        C P B A0 A1 B0 B1 f g)
-      (@binary_products_map_left_joined_fapp0
-        C P B A0 A1 B0 B1 f g)
-      (@binary_products_map_fapp0
-        C P B A0 A1 B0 B1 f g)
-      (@binary_products_pair_left_path
-        C P B
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A0 B0))
-        A1 B1
-        (@binary_products_map_proj1_cut
-          C P B A0 A1 B0 B1 f g)
-        (@binary_products_K1a_fapp0 C P B B0 A0 A1 f)
-        (@binary_products_proj1_action_path
-          C P B A0 A1 B0 B1 f g)
-        (@binary_products_map_proj2_cut
-          C P B A0 A1 B0 B1 f g))
-      (@binary_products_pair_right_path
-        C P B
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A0 B0))
-        A1 B1
-        (@binary_products_K1a_fapp0 C P B B0 A0 A1 f)
-        (@binary_products_map_proj2_cut
-          C P B A0 A1 B0 B1 f g)
-        (@binary_products_K2a_fapp0 C P B A0 B0 B1 g)
-        (@binary_products_proj2_action_path
-          C P B A0 A1 B0 B1 f g)));
-
-// Final non-opaque agreement: P[(f,g)] = <K_1^a(f),K_2^a(g)>.
-symbol binary_products_map_path
-  [C : Cat]
-  [P : τ (Functor (Product_cat C C) C)]
-  (B : τ (@BinaryProducts C P))
-  [A0 A1 B0 B1 : τ (Obj C)]
-  (f : τ (Hom C A0 A1))
-  (g : τ (Hom C B0 B1))
-  : τ (@=
-      (Hom C
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A0 B0))
-        (@fapp0
-          (Product_cat C C) C P
-          (@Product_pair C C A1 B1)))
-      (@binary_products_semantic_map_fapp0
-        C P B A0 A1 B0 B1 f g)
-      (@binary_products_map_fapp0
-        C P B A0 A1 B0 B1 f g))
-≔ @eq_trans
-    (Hom C
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A0 B0))
-      (@fapp0
-        (Product_cat C C) C P
-        (@Product_pair C C A1 B1)))
-    (@binary_products_semantic_map_fapp0
-      C P B A0 A1 B0 B1 f g)
-    (@binary_products_map_common_fapp0
-      C P B A0 A1 B0 B1 f g)
-    (@binary_products_map_fapp0
-      C P B A0 A1 B0 B1 f g)
-    (@binary_products_semantic_to_common_path
-      C P B A0 A1 B0 B1 f g)
-    (@binary_products_common_to_map_path
-      C P B A0 A1 B0 B1 f g);
 
 // --------------------------------------------------------------------------
 // Ordinary hom-level universal-property consumer
@@ -1127,3 +798,234 @@ symbol binary_products_pair_unique_path
       h
       (@binary_products_proj1_fapp0 C P B A0 A1)
       (@binary_products_proj2_fapp0 C P B A0 A1));
+
+// --------------------------------------------------------------------------
+// Pointwise pair/unpair inverse evidence
+// --------------------------------------------------------------------------
+
+// Stable postcomposition/raw-composition comparison for each unpair projection.
+symbol binary_products_unpair_proj1_raw_path
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (B : τ (@BinaryProducts C P))
+  [X A0 A1 : τ (Obj C)]
+  (h : τ (Hom C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))))
+  : τ (@=
+      (Hom C X A0)
+      (sigma_Fst (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+      (@comp_fapp0
+        C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+        A0
+        (@binary_products_proj1_fapp0 C P B A0 A1)
+        h))
+≔ @eq_refl
+    (Hom C X A0)
+    (@comp_fapp0
+      C X
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+      A0
+      (@binary_products_proj1_fapp0 C P B A0 A1)
+      h);
+
+symbol binary_products_unpair_proj2_raw_path
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (B : τ (@BinaryProducts C P))
+  [X A0 A1 : τ (Obj C)]
+  (h : τ (Hom C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))))
+  : τ (@=
+      (Hom C X A1)
+      (sigma_Snd (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+      (@comp_fapp0
+        C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+        A1
+        (@binary_products_proj2_fapp0 C P B A0 A1)
+        h))
+≔ @eq_refl
+    (Hom C X A1)
+    (@comp_fapp0
+      C X
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+      A1
+      (@binary_products_proj2_fapp0 C P B A0 A1)
+      h);
+
+// Pairing congruence in each input.
+symbol binary_products_pair_left_path
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (B : τ (@BinaryProducts C P))
+  [X A0 A1 : τ (Obj C)]
+  [f f' : τ (Hom C X A0)]
+  (p : τ (@= (Hom C X A0) f f'))
+  (g : τ (Hom C X A1))
+  : τ (@=
+      (Hom C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+      (@binary_products_pair_fapp0 C P B X A0 A1 f g)
+      (@binary_products_pair_fapp0 C P B X A0 A1 f' g))
+≔ @eq_ap
+    (Hom C X A0)
+    (Hom C X
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+    (λ q : τ (Hom C X A0),
+      @binary_products_pair_fapp0 C P B X A0 A1 q g)
+    f f' p;
+
+symbol binary_products_pair_right_path
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (B : τ (@BinaryProducts C P))
+  [X A0 A1 : τ (Obj C)]
+  (f : τ (Hom C X A0))
+  [g g' : τ (Hom C X A1)]
+  (p : τ (@= (Hom C X A1) g g'))
+  : τ (@=
+      (Hom C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+      (@binary_products_pair_fapp0 C P B X A0 A1 f g)
+      (@binary_products_pair_fapp0 C P B X A0 A1 f g'))
+≔ @eq_ap
+    (Hom C X A1)
+    (Hom C X
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+    (λ q : τ (Hom C X A1),
+      @binary_products_pair_fapp0 C P B X A0 A1 f q)
+    g g' p;
+
+// Pointwise left inverse: unpair(pair(f,g)) = (f,g).
+symbol binary_products_unpair_pair_path
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (B : τ (@BinaryProducts C P))
+  [X A0 A1 : τ (Obj C)]
+  (f : τ (Hom C X A0))
+  (g : τ (Hom C X A1))
+  : τ (@=
+      (Obj (Product_cat (Hom_cat C X A0) (Hom_cat C X A1)))
+      (@binary_products_unpair_fapp0
+        C P B X A0 A1
+        (@binary_products_pair_fapp0 C P B X A0 A1 f g))
+      (@Product_pair (Hom_cat C X A0) (Hom_cat C X A1) f g))
+≔ @product_path_intro
+    (Obj (Hom_cat C X A0))
+    (Obj (Hom_cat C X A1))
+    (@binary_products_unpair_fapp0
+      C P B X A0 A1
+      (@binary_products_pair_fapp0 C P B X A0 A1 f g))
+    (@Product_pair (Hom_cat C X A0) (Hom_cat C X A1) f g)
+    (@binary_products_unpair_proj1_raw_path
+      C P B X A0 A1
+      (@binary_products_pair_fapp0 C P B X A0 A1 f g))
+    (@const_pathover
+      (Obj (Hom_cat C X A0))
+      (Obj (Hom_cat C X A1))
+      (sigma_Fst
+        (@binary_products_unpair_fapp0
+          C P B X A0 A1
+          (@binary_products_pair_fapp0 C P B X A0 A1 f g)))
+      f
+      (sigma_Snd
+        (@binary_products_unpair_fapp0
+          C P B X A0 A1
+          (@binary_products_pair_fapp0 C P B X A0 A1 f g)))
+      g
+      (@binary_products_unpair_proj1_raw_path
+        C P B X A0 A1
+        (@binary_products_pair_fapp0 C P B X A0 A1 f g))
+      (@binary_products_unpair_proj2_raw_path
+        C P B X A0 A1
+        (@binary_products_pair_fapp0 C P B X A0 A1 f g)));
+
+// Pointwise right inverse: h = pair(unpair(h)).
+symbol binary_products_pair_unpair_path
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (B : τ (@BinaryProducts C P))
+  [X A0 A1 : τ (Obj C)]
+  (h : τ (Hom C X
+    (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))))
+  : τ (@=
+      (Hom C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+      h
+      (@binary_products_pair_fapp0
+        C P B X A0 A1
+        (sigma_Fst (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+        (sigma_Snd (@binary_products_unpair_fapp0 C P B X A0 A1 h))))
+≔ @eq_trans
+    (Hom C X
+      (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+    h
+    (@binary_products_pair_reconstruct_fapp0 C P B X A0 A1 h)
+    (@binary_products_pair_fapp0
+      C P B X A0 A1
+      (sigma_Fst (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+      (sigma_Snd (@binary_products_unpair_fapp0 C P B X A0 A1 h)))
+    (@binary_products_pair_unique_path C P B X A0 A1 h)
+    (@eq_trans
+      (Hom C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1)))
+      (@binary_products_pair_reconstruct_fapp0 C P B X A0 A1 h)
+      (@binary_products_pair_fapp0
+        C P B X A0 A1
+        (sigma_Fst (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+        (@comp_fapp0
+          C X
+          (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+          A1
+          (@binary_products_proj2_fapp0 C P B A0 A1)
+          h))
+      (@binary_products_pair_fapp0
+        C P B X A0 A1
+        (sigma_Fst (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+        (sigma_Snd (@binary_products_unpair_fapp0 C P B X A0 A1 h)))
+      (@binary_products_pair_left_path
+        C P B X A0 A1
+        (@comp_fapp0
+          C X
+          (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+          A0
+          (@binary_products_proj1_fapp0 C P B A0 A1)
+          h)
+        (sigma_Fst (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+        (@eq_sym
+          (Hom C X A0)
+          (sigma_Fst (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+          (@comp_fapp0
+            C X
+            (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+            A0
+            (@binary_products_proj1_fapp0 C P B A0 A1)
+            h)
+          (@binary_products_unpair_proj1_raw_path C P B X A0 A1 h))
+        (@comp_fapp0
+          C X
+          (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+          A1
+          (@binary_products_proj2_fapp0 C P B A0 A1)
+          h))
+      (@binary_products_pair_right_path
+        C P B X A0 A1
+        (sigma_Fst (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+        (@comp_fapp0
+          C X
+          (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+          A1
+          (@binary_products_proj2_fapp0 C P B A0 A1)
+          h)
+        (sigma_Snd (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+        (@eq_sym
+          (Hom C X A1)
+          (sigma_Snd (@binary_products_unpair_fapp0 C P B X A0 A1 h))
+          (@comp_fapp0
+            C X
+            (@fapp0 (Product_cat C C) C P (@Product_pair C C A0 A1))
+            A1
+            (@binary_products_proj2_fapp0 C P B A0 A1)
+            h)
+          (@binary_products_unpair_proj2_raw_path C P B X A0 A1 h))));

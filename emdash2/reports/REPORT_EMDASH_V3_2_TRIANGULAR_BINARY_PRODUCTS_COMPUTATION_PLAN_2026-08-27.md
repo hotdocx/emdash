@@ -4,36 +4,42 @@ Date: 2026-08-27 (America/Toronto)
 
 Plan-ID: `TRIANGULAR-BINARY-PRODUCTS-COMPUTATION-V3.2`
 
-Status: **completed first computational tranche as of 2026-08-27**. The
-enhanced triangular owner, runtime calculus, proof-time `P` coherence,
-explicit map-agreement proof, ordinary hom-level uniqueness consumer, focused
-diagnostics, reviewer example, warning classification, catalog, authorities,
-and scoped hygiene are synchronized and green. The automatic adapter to the
-existing weighted-limit package remains a separate follow-up boundary; the
-terminal-object row remains deferred.
+Status: **completed second computational/cartesian tranche as of 2026-08-27**.
+Checkpoint `946252c` closes the first binary-product tranche. The second
+tranche replaces the two projection-specific unifiers by one canonical map
+unifier, derives projection equalities by congruence, constructs whole unpair
+and both pointwise inverse paths while recording the exact whole-equality
+assembly boundary, adds an assumption-explicit weighted adapter, and promotes
+terminal objects plus a thin Cartesian capability. Scoped closeout is green;
+on 2026-08-28 the user explicitly authorized a local checkpoint of this
+completed second tranche.
 
 Depends-On: active v3.2 `Cat`, `Functor`, `Transf`, `tapp0_*`/`tapp1_*`,
 `Product_cat`, `Product_projL_func`, `Product_projR_func`, `Product_map_func`,
 represented hom/precomposition owners, fixed-base fibrewise products,
-`emdash3_2_finite_limits.lp`, the rewrite/unification SOP, Foundations, and
-canonical syntax
+`IsContr`/`is_contr_recenter`, `Const_func`, `OmegaEquivAlong`,
+`IsoEvidence`, `DefIso`/`ProfComparison`, `emdash3_2_finite_limits.lp`, the
+rewrite/unification SOP, Foundations, and canonical syntax
 
-Supersedes: no earlier dedicated binary-products plan. It incorporates and
-operationalizes the reviewed design in Infinity response `0019`; later entries
-in this living plan supersede that response where owner probes required stable
-post-projection heads and narrow duplicated runtime instances.
+Supersedes: no earlier dedicated binary-products plan. It incorporates the
+initial review in response `0019`, the completed first tranche at `946252c`,
+and the follow-up unifier/equivalence review in response `0023`. The second-
+tranche decisions below supersede `D-TBP-018` and `D-TBP-019` where they chose
+two projection unifiers and an `eq_trans` map proof.
 
 Infinity-Codex-Origin: session `01a02f68-6142-7e53-993a-4505aa8e2cbe`,
 response `0019`
 
-Infinity-Codex-Decision-Responses: response `0019`; the archived path below is
-recovery evidence, while active source and this evolved plan are authoritative.
+Infinity-Codex-Decision-Responses: responses `0019` and `0023`; the archived
+paths below are recovery evidence, while active source and this evolved plan
+are authoritative.
 
 Side-Task-Ledger: `TBP-PLAN-0`, `TBP-OWNER-1`, `TBP-PROJ-2`, `TBP-PAIR-3`,
 `TBP-RULES-4`, `TBP-NF-5`, `TBP-SEM-6`, `TBP-CAT-7`, `TBP-TERM-8`, and
-`TBP-RECLOSE-9`
+`TBP-RECLOSE-9`; follow-up rows `TBP-MAP-UNIF-10` through
+`TBP-RECLOSE-19`
 
-Baseline: clean local checkpoint `2ef786c` on
+Baseline: clean local checkpoint `946252c` over historical checkpoint `2ef786c` on
 `goal/monad-comonad-computation-v3.2`
 
 Worktree: `/home/user1/emdash1-monads-v3.2`
@@ -45,11 +51,15 @@ plan, starting a new persistent goal, and proceeding with the scoped
 implementation and validation. This does **not** authorize a new branch,
 worktree, push, merge, publication, release, history rewrite, branch deletion,
 or worktree removal. On 2026-08-27 the user separately authorized a local Git
-commit/checkpoint of the completed synchronized tranche. Preserve unrelated
-work and historical checkpoint `2ef786c`.
+commit/checkpoint of the completed synchronized first tranche, producing
+`946252c`. The current request authorizes the reopened plan and implementation,
+and the user's 2026-08-28 follow-up separately authorizes one local checkpoint
+commit of the completed second tranche. Push, merge, publication, history
+rewrite, branch deletion, and worktree removal remain unauthorized. Preserve
+unrelated work and checkpoint `946252c`.
 
-Recovery archive: response `0019` is archived at
-`emdash2/tmp/ai-responses/sessions/2026-08-23_01a02f686142/responses/0019_2026-08-27T10-02-04Z_01a0429e-a4f3-7ce2-8726-87c43483b158.md`;
+Recovery archive: responses `0019` and `0023` are archived under
+`/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-23_01a02f686142/responses/`;
 the active source and this evolved plan are authoritative.
 
 ## Objective
@@ -77,9 +87,9 @@ The selected layer should:
 7. preserve the existing per-pair weighted-limit
    `BinaryProductPresentation` as semantic authority and later bridge the
    global triangular structure to it rather than replacing it; and
-8. defer the terminal-object extension until the binary-product owner is
-   stable, unless a separate bounded semantic/propositional terminal probe is
-   independently accepted.
+8. add the terminal-object extension only through a whole canonical-arrow
+   transfor, hom-contractibility, and derived arbitrary-arrow uniqueness; do
+   not use a variable-headed rewrite or bare-variable unifier.
 
 This goal implements the useful generic computational consequences. It does
 not construct Došen's free syntax, reproduce his metatheoretical decidability
@@ -595,18 +605,217 @@ strict audit independently reports no reconstructible compound slot. These
 warnings are classified diagnostics, not vetoes. Focused module, central
 diagnostic, and reviewer-example checks are green.
 
+## Reopened Second Tranche: Products, Equivalence, And Terminality
+
+### One canonical map unifier
+
+Response `0023` and its follow-up probe supersede the first tranche's
+asymmetric proof-time design. The structural comparison is the whole product
+map itself:
+
+```text
+P[(f,g)] ≐ <K1a(f),K2a(g)>.
+```
+
+The accepted candidate uses only canonical post-`Product_pair` shapes:
+
+```lambdapi
+unif_rule
+  @fapp1_fapp0
+    _ _ $P
+    (Struct_sigma $A0 $B0)
+    (Struct_sigma $A1 $B1)
+    (Struct_sigma $f $g)
+  ≡ @binary_products_pair_fapp0
+      $C $P $BP _ $A1 $B1
+      (@binary_products_K1a_fapp0
+        $C $P $BP $B0 $A0 $A1 $f)
+      (@binary_products_K2a_fapp0
+        $C $P $BP $A0 $B0 $B1 $g)
+  ↪ [ tt ≡ tt ];
+```
+
+The disposable probe is green, leaves the warning inventory at `1179/171`,
+passes the strict LHS audit, and preserves the runtime negative. The promoted
+change should therefore:
+
+1. add this direct map unifier;
+2. remove the two projection-specific unifiers;
+3. make `binary_products_map_path` a typed `eq_refl` proof through the direct
+   unifier;
+4. derive `binary_products_proj1_action_path` and
+   `binary_products_proj2_action_path` by `eq_ap` of the map path followed by
+   the already-computing direct projection betas; and
+5. remove the obsolete map-only common-ancestor scaffolding.
+
+The projection equalities remain first-class propositions but cease to be
+independent proof-time equations. Direct `eq_refl` on a projection equation
+may therefore cease to elaborate; consumers use the named derived paths. This
+is intentional: map coherence is structural, and projection coherence is its
+consequence. A full owner-position probe with the old unifiers absent remains
+the promotion gate even though the new rule and derived paths already pass in
+the focused additive probe.
+
+### Whole pair/unpair equivalence audit
+
+The next semantic target is the whole comparison
+
+```text
+pair   : Hom(X,A) × Hom(X,B) ⊢ Hom(X,P(A,B))
+unpair : Hom(X,P(A,B)) ⊢ Hom(X,A) × Hom(X,B).
+```
+
+`pair` already exists. The first unpair probe should construct the whole
+functor as the product of postcomposition by the two stable projections, not
+as a capped point operation. Generic functor action must remain iterable.
+
+`IsoEvidence` is a transparent package, and `OmegaEquivAlong` has the concrete
+constructor `omega_equiv_along_intro`. Either can be built once whole inverse
+functors and whole cancellation equality paths are available. The current
+point betas and `binary_products_pair_unique_path` do not by themselves
+assemble equality of whole functors. The generic strict-pointwise library
+starts from an already whole transformation; it does not convert an arbitrary
+family of point equalities into one. Owner probes must therefore establish the
+whole cancellation boundary rather than assume functor extensionality.
+
+### Weighted-limit boundary
+
+The existing semantic layers are deliberately distinct:
+
+```text
+IsWeightedLimit_cov_iso  = ordinary IsoEvidence of profunctors
+IsWeightedLimit_cov_comp = ProfComparison = DefIso in Prof_cat.
+```
+
+There is a forgetful `DefIso -> IsoEvidence` operation but no generic reverse
+constructor. Hence even a successfully constructed hom-level
+`OmegaEquivAlong Cat_cat` does not automatically inhabit
+`IsWeightedLimit_cov_comp`.
+
+The follow-up order is:
+
+1. construct/probe whole `unpair`;
+2. construct whole pair/unpair cancellation if the current higher owners
+   suffice;
+3. package `OmegaEquivAlong Cat_cat` and/or `IsoEvidence`;
+4. investigate `IsWeightedLimit_cov_iso`; and
+5. treat `_comp`/`DefIso` as a separate selected computational capability.
+
+The safest computational bridge is assumption-explicit:
+
+```text
+BinaryProductsWeightedComp(BP)
+  := Pi A B,
+       IsBinaryProduct_comp(C,A,B,P(A,B)).
+```
+
+A supplied `W : BinaryProductsWeightedComp(BP)` transparently constructs a
+`BinaryProductPresentation(C,A,B)`. If a stronger automatic stable witness is
+selected later, it is an additional computational coherence principle. Its
+`defiso_to`/`defiso_from`, push/pull, and ordinary-evidence observations must
+be related to pair/unpair; it must not be described as derived merely because
+the ordinary mathematics is valid. The existing finite-limit module and its
+downstream consumers remain active throughout.
+
+### Terminal object from a whole arrow and contractibility
+
+The printed §§6.7-6.8 review confirms two complementary readings. Došen's
+terminal arrow is the component of a natural transformation from the identity
+to the constant terminal functor, while the free-cartesian presentation adds
+
+```text
+(K)  for f : A -> T,  f = K_A.
+```
+
+Došen also records that a complete commuting normalization in this
+presentation requires additional interactions beyond cut elimination. Emdash
+therefore implements the internal semantic/computational content rather than
+a catch-all normalizer for arbitrary opaque arrows.
+
+The selected owner is indexed by the chosen terminal object:
+
+```lambdapi
+injective symbol TerminalObject
+  [C : Cat]
+  (t : τ (Obj C))
+  : Grpd;
+
+symbol terminal_arrow_transf
+  [C : Cat]
+  [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t))
+  : τ (Transf (@id_func C) (@Const_func C C t));
+```
+
+Its canonical component is retained at a stable point head:
+
+```text
+!_A : A -> t.
+```
+
+Terminal semantics is hom-contractibility:
+
+```lambdapi
+terminal_hom_contr(T,A) : IsContr(Hom_C(A,t)).
+```
+
+Recenter that evidence at the whole-transfor component:
+
+```text
+terminal_hom_contr_at_arrow(T,A)
+  := is_contr_recenter(terminal_hom_contr(T,A), !_A).
+```
+
+Then arbitrary-arrow uniqueness is derived, not postulated:
+
+```text
+terminal_unique_path(T,f) : f = !_A
+```
+
+by symmetry of the contraction path from `!_A` to `f`. No variable-headed
+rewrite and no bare-variable unifier is permitted.
+
+The selected runtime computation is only the canonical-arrow cut:
+
+```text
+!_B o h -> !_A.
+```
+
+It should first be tested against generic transfor naturality and then added
+as the narrow stable post-projection instance if the component head erases the
+generic pattern, as occurred for products. The whole off-diagonal action and
+next hom action must remain available. `!_t = id_t` is initially
+propositional through contractibility; no runtime fold is added without a
+separate normal-form decision and overlap audit.
+
+Once `TerminalObject(C,t)` is green, a thin combined Cartesian capability may
+package `BinaryProducts(C,P)` and `TerminalObject(C,t)`. It owns no duplicate
+rules; all computation remains at the two constituent owners. Free syntax,
+global commuting decidability, and arbitrary-arrow runtime normalization stay
+out of scope.
+
+Promotion result: all of the product-map, whole-unpair, pointwise-inverse,
+terminal, and thin Cartesian owners above are now active and focused-green.
+The weighted bridge is active in a separate assumption-explicit module. The
+only bounded-negative row is whole equality of pair/unpair functors (and hence
+automatic `OmegaEquivAlong`/`IsWeightedLimit_cov_iso`); the exact blocker is
+the absence of an assembly constructor from the available pointwise paths.
+
 ## Settled Module And Public Boundary
 
-The selected one-way additive module is:
+The selected one-way modules are:
 
 ```text
 emdash3_2_triangular_binary_products.lp
+emdash3_2_terminal_objects.lp
+emdash3_2_cartesian_categories.lp
+emdash3_2_triangular_binary_products_finite_limits.lp
 ```
 
-It imports the base kernel. A later automatic weighted-limit adapter may
-import `emdash3_2_finite_limits.lp`; the computational owner itself does not.
-The monolithic kernel and existing rule-free finite-limit module remain
-unchanged.
+The product and terminal computational owners import only the base kernel.
+The Cartesian module imports those two owners and is rule-free. Only the
+assumption-explicit adapter imports `emdash3_2_finite_limits.lp`. The
+monolithic kernel and existing rule-free finite-limit module remain unchanged.
 
 The selected public computational names are:
 
@@ -619,11 +828,23 @@ binary_products_proj2_fapp0
 binary_products_pair_transf
 binary_products_pair_func
 binary_products_pair_fapp0
+binary_products_unpair_func
+binary_products_unpair_fapp0
 binary_products_K1a_fapp0
 binary_products_K2a_fapp0
 binary_products_map_fapp0
 binary_products_map_path
-binary_products_pair_unique_path.
+binary_products_pair_unique_path
+binary_products_unpair_pair_path
+binary_products_pair_unpair_path
+TerminalObject
+terminal_arrow_transf
+terminal_arrow_fapp0
+terminal_hom_contr
+terminal_unique_path
+CartesianCategory
+BinaryProductsWeightedComp
+binary_products_weighted_presentation.
 ```
 
 The shorter classifier is unambiguous beside `BinaryProductPresentation`.
@@ -651,8 +872,18 @@ heads above are retained only where runtime discrimination survives.
    warning classification, and strict LHS audit.
 9. Run only scoped validation unless the user separately expands the
    aggregate boundary.
-10. Leave `TBP-TERM-8` deferred unless its separate owner and acceptance
-    contract are explicitly promoted.
+10. The first tranche deferred `TBP-TERM-8`; the reviewed second tranche then
+    promoted it under its separate whole-transfor/contractibility contract.
+11. Replace the projection unifiers by the direct map unifier and derive their
+    equality paths by congruence.
+12. Construct whole unpair and pointwise inverse evidence; stop at the exact
+    whole-equality assembly boundary.
+13. Add only the assumption-explicit weighted compatibility adapter supported
+    by supplied `DefIso` evidence.
+14. Promote terminal owner, contractibility, uniqueness, and canonical cut in
+    a separate module.
+15. Add the thin rule-free Cartesian capability.
+16. Reclose with scoped diagnostics, warnings, catalog, and authorities.
 
 ## Side-Task Ledger
 
@@ -666,8 +897,18 @@ heads above are retained only where runtime discrimination survives.
 | `TBP-NF-5` | complete | accepted `TBP-RULES-4` | Both §6.4 `K1a`/`K2a` reductions are active in Došen's orientation; no reverse rule is installed. |
 | `TBP-SEM-6` | complete | accepted `TBP-RULES-4` | Transparent triangular/semantic map terms, two narrow proof-time projection comparisons, explicit non-opaque common-ancestor map path, and runtime noncollapse. |
 | `TBP-CAT-7` | complete first consumer; weighted adapter separate | accepted `TBP-SEM-6`; existing finite-limit layer | Computing projection betas plus `binary_products_pair_unique_path` give the ordinary hom-level universal property. The automatic adapter into `BinaryProductPresentation(C,A,B)` is a separate later assembly task; the existing owner remains untouched. |
-| `TBP-TERM-8` | deferred/separate | stable binary-product core; explicit user promotion | Chosen terminal object, whole canonical-arrow transfor, propositional uniqueness from contractibility/empty limit, and scoped cut computation. No arbitrary-arrow runtime normalization claim. |
+| `TBP-TERM-8` | promoted umbrella | stable binary-product core; responses `0019`, `0023` | Reopened terminal/cartesian tranche governed by `TBP-TERM-OWNER-15` through `TBP-CART-18`. Whole canonical arrow, hom-contractibility, derived uniqueness, and scoped canonical cut only. |
 | `TBP-RECLOSE-9` | complete | all accepted nondeferred rows | Focused module/check/example checks, `1179/171` warning classification, empty strict LHS audit, 2,291-check/111-area strict catalog, plan/header/authority synchronization, source-TOC/active-reference lint, script syntax, and exact diff hygiene are green. Repository-wide health/CI aggregates were intentionally not run under the user's scoped-validation policy. |
+| `TBP-MAP-UNIF-10` | complete | `TBP-RECLOSE-9`; response `0023`; checkpoint `946252c` | Two projection unifiers replaced by one direct map unifier; `binary_products_map_path` is typed reflexivity; projection paths derive by `eq_ap`; map-only scaffolding removed. Focused checks/runtime negative/strict audit are green and inventory improves to `1179/169`. |
+| `TBP-UNPAIR-11` | complete | accepted `TBP-MAP-UNIF-10` | Transparent whole unpair is the product of projection postcomposition functors; readable object observation, next hom action, raw-component paths, and both pointwise inverse paths are checked. |
+| `TBP-HOMEQ-12` | complete bounded-negative | accepted `TBP-UNPAIR-11` | Pointwise inverse paths are constructible, but current infrastructure does not assemble them into equality of whole functors. No `OmegaEquivAlong Cat_cat` or `IsoEvidence` is claimed; an already-whole transformation/equality assembly owner would be required. |
+| `TBP-WISO-13` | deferred by exact prerequisite | bounded-negative `TBP-HOMEQ-12`; finite-limit layer | Ordinary `IsWeightedLimit_cov_iso` translation remains gated by whole functor/profunctor-map cancellation assembly, not by object-level product laws. |
+| `TBP-WCOMP-14` | complete assumption-explicit boundary | `TBP-WISO-13`; `DefIso` constructor audit | Separate module adds supplied `BinaryProductsWeightedComp`, transparent `BinaryProductPresentation`, and paths identifying both weighted projections with triangular projections. No automatic `DefIso` witness, rule, or unifier is added. |
+| `TBP-TERM-OWNER-15` | complete | accepted `TBP-MAP-UNIF-10`; terminal §§6.7-6.8 review | Separate terminal module adds indexed `TerminalObject(C,t)`, whole `id_C => Const_t`, stable component, computing off-diagonal point action, and retained full `tapp1_func`. |
+| `TBP-TERM-CONTR-16` | complete | accepted `TBP-TERM-OWNER-15` | Every `Hom_C(A,t)` carries `IsContr`, recentered at `!_A`; arbitrary `f = !_A` and `!_t = id_t` are derived paths with runtime negatives. |
+| `TBP-TERM-CUT-17` | complete | accepted `TBP-TERM-CONTR-16` | Stable canonical cut `!_B o h -> !_A` is active. Warning delta is classified; `!_t` remains runtime-distinct from identity and arbitrary arrows receive no rule/unifier. |
+| `TBP-CART-18` | complete | accepted product and terminal rows | Rule-free `CartesianCategory(C,P,t)` transparently pairs the two existing capabilities and adds no computation. |
+| `TBP-RECLOSE-19` | complete | all accepted second-tranche rows | Four focused modules, four reviewers, central diagnostics, strict audits, combined `1188/171` warning inventory, 2,316-check/114-area catalog, authorities/plan, script and repository hygiene are green. No repository-wide aggregate or second Git checkpoint was authorized or run. |
 
 At most one implementation row may be in progress. Failed probes update this
 ledger and the decision table; they are not silently bypassed.
@@ -693,9 +934,23 @@ ledger and the decision table; they are not silently bypassed.
 | `D-TBP-015` | accepted Git boundary | Work in the clean `2ef786c` worktree without new branch/worktree/commit or remote/integration mutations unless separately authorized. |
 | `D-TBP-016` | accepted | Stable `K1a`/`K2a` points and the pairing component-functor/point ladder are justified discriminators projected from whole transfors; no restricted duplicate `K1a_func`/`K2a_func` is added. |
 | `D-TBP-017` | accepted | Rule LHSs use canonical `Struct_sigma` after `Product_pair` normalization. Defined aliases never discriminate a promoted rule. |
-| `D-TBP-018` | accepted | Projection after generic `P` action is proof-time coherence through two narrowly typed `unif_rule`s, validated by typed `eq_refl`; generic `P` action is not rewritten at runtime. |
-| `D-TBP-019` | accepted | Product-map agreement and ordinary pairing uniqueness are explicit common-ancestor equality proofs, not opaque constants or direct map-level unifiers. |
+| `D-TBP-018` | superseded by `D-TBP-021`/`022` | First tranche used two projection-specific unifiers. The second tranche selects one direct map unifier and derives projection paths propositionally. |
+| `D-TBP-019` | partially superseded by `D-TBP-021` | Ordinary pairing uniqueness remains an explicit eta/distribution proof. Product-map equality becomes typed `eq_refl` through the direct map unifier; the map-only common-ancestor scaffolding is retired. |
 | `D-TBP-020` | accepted warning classification | The promoted `1179/171` inventory adds `63/12` diagnostic reports over the `1116/159` base. Focused terms and negatives cover the intended routes; warnings are not a veto. |
+| `D-TBP-021` | accepted/probe-green | The sole product-action usability rule is `P[(f,g)] ≐ <K1a(f),K2a(g)>` at canonical `Struct_sigma` shapes. It is proof-time only, keeps runtime noncollapse, and added no warnings in the additive probe. |
+| `D-TBP-022` | accepted | Projection-after-`P` comparisons are derived by `eq_ap` of `binary_products_map_path` and direct projection beta, not independent unifiers. Named paths preserve first-class evidence. |
+| `D-TBP-023` | accepted and measured constructor boundary | Whole unpair and both pointwise inverse paths are constructed. `OmegaEquivAlong` and `IsoEvidence` still require equality of whole functors, which current pointwise paths do not assemble. `IsWeightedLimit_cov_comp = ProfComparison = DefIso` additionally has no generic constructor from propositional equivalence data. |
+| `D-TBP-024` | accepted | If `_comp` cannot be derived, prefer an assumption-explicit `BinaryProductsWeightedComp` capability. An automatic stable witness is extra computational coherence, not a derived theorem. |
+| `D-TBP-025` | accepted | Terminality is indexed by `t` and exposes one whole transfor `id_C => Const_t`; its stable components are the canonical arrows. |
+| `D-TBP-026` | accepted | Terminal semantics is `IsContr(Hom_C(A,t))`, recentered at `!_A`; arbitrary `f = !_A` is derived by symmetry of contraction. |
+| `D-TBP-027` | accepted | No variable-headed rewrite or bare-variable unifier implements Došen `(K)`. Only the canonical cut `!_B o h -> !_A` is runtime-selected when a measured stable-head bridge is necessary. |
+| `D-TBP-028` | accepted/probe-gated | `!_t = id_t` is initially propositional. A runtime fold requires a separate normal-form and overlap decision. |
+| `D-TBP-029` | accepted sequencing | A combined Cartesian capability is a thin package over binary-products and terminal evidence, with no duplicate computation. |
+| `D-TBP-030` | accepted Git boundary | `946252c` is the clean second-tranche baseline. The user authorized one local closeout checkpoint on 2026-08-28; no push, merge, publication, history rewrite, branch deletion, or worktree removal is authorized. |
+| `D-TBP-031` | accepted | The weighted bridge is a separate assumption-explicit module carrying a supplied strict witness and two projection-compatibility paths; the triangular core does not import finite limits. |
+| `D-TBP-032` | accepted | Terminal off-diagonal point action computes to the canonical source arrow while full `tapp1_func` remains iterable. Hom-contractibility, not a catch-all evaluator, owns arbitrary-arrow uniqueness. |
+| `D-TBP-033` | accepted warning classification | Product-only inventory is `1179/169`; terminal alone is `1123/161`; the combined Cartesian import is `1188/171`. Against the original base `1116/159`, the combined delta is `+72/+12`, localized to the previously classified product families and nine terminal interactions. |
+| `D-TBP-034` | accepted | Whole pair/unpair cancellation is a future generic assembly problem. Pointwise inverse evidence is retained publicly so a later whole-transformation constructor can consume it without reproving product laws. |
 
 ## Required Positive Evidence
 
@@ -714,7 +969,19 @@ The promoted layer must check at least:
     action;
 11. the ordinary hom-level universal-property consumer, with any automatic
     weighted-limit adapter explicitly staged separately; and
-12. retained higher action after all selected whole projections.
+12. retained higher action after all selected whole projections;
+13. the direct map unifier validated by typed `eq_refl`, with the two former
+    projection unifiers absent;
+14. both projection paths derived by congruence and direct beta;
+15. a whole unpair functor and retained hom action, or an exact bounded
+    constructor blocker;
+16. no `OmegaEquivAlong`/`IsoEvidence`/weighted claim beyond constructed whole
+    cancellation data;
+17. `TerminalObject(C,t)` and the whole `id_C => Const_t` transfor;
+18. hom-contractibility recentered at every canonical component;
+19. derived arbitrary-arrow terminal uniqueness;
+20. canonical-arrow cut computation with both projection orders; and
+21. a thin combined Cartesian package only after both constituent owners pass.
 
 ## Required Negative And Noncollapse Evidence
 
@@ -728,7 +995,16 @@ The promoted layer must also retain negatives showing that:
 6. generic `P` action is not erased to the triangular derived map at runtime
    unless a later explicitly accepted owner requires it;
 7. one selected per-pair presentation does not imply global products; and
-8. terminal uniqueness does not leak into this tranche.
+8. runtime map action remains distinct from the triangular map despite their
+   proof-time comparison;
+9. projection comparisons are not silently retained as independent unifiers;
+10. arbitrary arrows to `t` receive no runtime fold or bare-variable unifier;
+11. unrelated same-typed arrows do not become the canonical terminal arrow;
+12. `!_t` does not collapse to identity at runtime unless separately selected;
+13. terminal evidence does not imply binary-products evidence or conversely;
+14. an ordinary hom equivalence does not silently become `DefIso`; and
+15. no automatic weighted `_comp` witness is claimed without explicit extra
+    capability data.
 
 ## SOP And Probe Discipline
 
@@ -750,7 +1026,9 @@ The promoted layer must also retain negatives showing that:
   Use a narrowly typed `unif_rule` only for proof-time comparison between
   stable heads, validated with typed `eq_refl` and runtime-negative controls.
 - Prefer a derived propositional path from common-ancestor reductions over an
-  opaque equality constant.
+  opaque equality constant. When a reviewed usability boundary instead owns a
+  direct unifier, keep the corresponding typed path and runtime-negative
+  control explicit.
 - Keep disposable candidates under `tmp/probes/`; do not import them into
   tracked code.
 
@@ -813,9 +1091,37 @@ user explicitly authorized one local checkpoint commit of this tranche; no
 push, merge, publication, history rewrite, branch/worktree cleanup, or other
 integration mutation is authorized.
 
+The completed second tranche records:
+
+- focused exit 0 for `emdash3_2_triangular_binary_products.lp`,
+  `emdash3_2_terminal_objects.lp`, `emdash3_2_cartesian_categories.lp`, and
+  `emdash3_2_triangular_binary_products_finite_limits.lp`;
+- focused exit 0 for their four reviewer examples and the central diagnostic
+  module;
+- one direct map unifier, product-only inventory `1179/169`, terminal-only
+  inventory `1123/161`, and combined Cartesian inventory `1188/171` against
+  base `1116/159`;
+- strict LHS audit `0` reconstructible compound slots across `0` unreviewed
+  clauses for all four modules;
+- strict generated catalog: 2,316 checks across 114 mapped areas, including
+  27 product, 12 terminal, 4 Cartesian, and 5 weighted-compatibility checks,
+  with zero legacy or unclassified checks;
+- whole unpair and pointwise inverse paths without a false whole-equivalence
+  claim; the whole equality assembly blocker is explicit;
+- an assumption-explicit weighted capability and transparent old-presentation
+  adapter with both projection compatibility paths;
+- passing plan/header, active-reference, source-TOC, shell-syntax,
+  Python-compile, and exact-diff hygiene; and
+- registration of every new module in focused checks and health metrics.
+
+No repository-wide `make check`, `make examples`, `make health`, `make ci`, or
+root aggregate was run for the second tranche. The user subsequently
+authorized one local closeout checkpoint on 2026-08-28. No push, merge,
+publication, history rewrite, or branch/worktree mutation is authorized.
+
 ## Acceptance And Stop Conditions
 
-Accept the first tranche only when:
+Accept each computational tranche only when:
 
 - the product functor, projection transfors, and pairing owner all retain their
   intended whole/higher action;
@@ -852,21 +1158,23 @@ Stop and revise rather than promote if:
 ## Persistent Goal Objective
 
 ```text
-Execute the living and evolving plan in
+Execute the active second tranche of the living and evolving plan in
 emdash2/reports/REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md.
 Treat that plan as the authority for current rows, exact owner choices,
 acceptance evidence, validation scope, and stop conditions. Implement the
-enhanced triangular chosen-binary-product layer in Lambdapi: a selected whole
-product functor, whole projection transfors, internally natural whole pairing,
-Došen-oriented beta/eta and accepted derived normalization rules, explicit
-semantic/propositional agreement with generic product-functor action, and the
-ordinary hom-level universal-property consumer. Preserve the existing
-selected finite-limit layer; keep its automatic adapter and the terminal-
-object row deferred unless the plan explicitly promotes their separate
-contracts. Evolve the plan
+canonical direct map unifier, derive projection equalities propositionally,
+retire the obsolete map-only scaffolding, construct/probe whole unpair and
+whole hom equivalence without overstating available constructors, preserve the
+existing finite-limit layer behind an assumption-explicit computational
+capability when necessary, and implement terminality through a whole
+`id_C => Const_t` transfor plus hom-contractibility and derived uniqueness.
+Add only the measured canonical terminal cut; never add a variable-headed
+rewrite or bare-variable unifier. A combined Cartesian capability must remain
+a thin package over its constituents. Evolve the plan
 and active authorities with every accepted/rejected probe. Preserve baseline
-2ef786c and unrelated work. Do not create branches/worktrees, commit, push,
-merge, publish, release, rewrite history, delete branches, or remove worktrees
+946252c and unrelated work. One local closeout checkpoint was separately
+authorized on 2026-08-28. Do not create branches/worktrees, push, merge,
+publish, release, rewrite history, delete branches, or remove worktrees
 without separate authorization; run only the user-scoped validation recorded
 in the plan.
 ```

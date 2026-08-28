@@ -52,6 +52,31 @@ assert [C : Cat]
           (@binary_products_pair_target_family C P A0 A1)
           Y)));
 
+// The inverse-facing operation is also whole and keeps higher action.
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A B : τ (Obj C)) ⊢
+  @binary_products_unpair_func C P BP X A B
+  : τ (Functor
+      (Hom_cat C X
+        (@fapp0 (Product_cat C C) C P (@Product_pair C C A B)))
+      (Product_cat (Hom_cat C X A) (Hom_cat C X B)));
+
+assert [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  (BP : τ (@BinaryProducts C P))
+  (X A B : τ (Obj C))
+  (f : τ (Hom C X A))
+  (g : τ (Hom C X B)) ⊢
+  @binary_products_unpair_pair_path C P BP X A B f g
+  : τ (@=
+      (Obj (Product_cat (Hom_cat C X A) (Hom_cat C X B)))
+      (@binary_products_unpair_fapp0
+        C P BP X A B
+        (@binary_products_pair_fapp0 C P BP X A B f g))
+      (@Product_pair (Hom_cat C X A) (Hom_cat C X B) f g));
+
 // First projection beta.
 assert [C : Cat]
   [P : τ (Functor (Product_cat C C) C)]
