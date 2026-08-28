@@ -1,0 +1,114 @@
+/*
+  Reviewer example: the right-Gray cube decoder is one internal Nat recursion,
+  uniform in the ambient category.  Its public index n denotes geometric
+  dimension n+1.
+*/
+
+require open emdash.emdash3_2_gray_cube_decoder;
+
+// The level shift begins by reflexivity and remains internal at successors.
+assert [C : Cat] ⊢
+  @cubical_level_shift_path C zero
+  ≡ @eq_refl
+      (Obj Cat_cat)
+      (@CubicalLevel_cat (@LaxArrow_cat C) (succ zero));
+
+// Dimension one is literal walking-arrow evaluation.
+assert [C : Cat]
+  (H : τ (@StrictFunctor WalkingArrow_cat C)) ⊢
+  @gray_cube_observation C zero H
+  ≡ @gray_cube_decode_one C H;
+
+// The variable successor is exactly curry, graph, recursive decode, and shift.
+assert [C : Cat]
+  (n : τ Nat_grpd)
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C)) ⊢
+  @gray_cube_observation C (succ n) H
+  ≡ @gray_cube_decode_step
+      n (@gray_cube_observation_all n) C H;
+
+// Selected dimensions one through three have the native cubical classifiers.
+assert [C : Cat]
+  (H : τ (@StrictFunctor GrayCube1_R C)) ⊢
+  @gray_cube_observation C zero H
+  : τ (Obj (@CubicalLevel_cat C (succ zero)));
+
+assert [C : Cat]
+  (H : τ (@StrictFunctor GrayCube2_R C)) ⊢
+  @gray_cube_observation C (succ zero) H
+  : τ (Obj (@CubicalLevel_cat C (succ (succ zero))));
+
+assert [C : Cat]
+  (H : τ (@StrictFunctor GrayCube3_R C)) ⊢
+  @gray_cube_observation C (succ (succ zero)) H
+  : τ (Obj
+      (@CubicalLevel_cat C (succ (succ (succ zero)))));
+
+// The successor strict graph package has the whole graph as its carrier.
+assert [C : Cat]
+  (n : τ Nat_grpd)
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C)) ⊢
+  @strict_functor_underlying
+    (@GrayCubePos_R n)
+    (@LaxArrow_cat C)
+    (@gray_cube_step_graph_data C n H)
+  ≡ @gray_transf_graph_func
+      (@GrayCubePos_R n)
+      C
+      (@strict_functor
+        (@GrayCubePos_R n) C
+        (@gray_cube_step_source_data C n H))
+      (@strict_functor
+        (@GrayCubePos_R n) C
+        (@gray_cube_step_target_data C n H))
+      (@gray_cube_step_transf C n H);
+
+// For the identity realization of I tensor_R I, the successor inputs recover
+// the already-established walking-square coevaluation data.
+assert ⊢
+  @gray_cube_step_curry_data
+    GrayWalkingSquare_cat zero
+    (@strict_identity GrayWalkingSquare_cat)
+  ≡ @gray_coevaluation_R_strict WalkingArrow_cat WalkingArrow_cat;
+
+assert ⊢
+  @gray_cube_step_source_data
+    GrayWalkingSquare_cat zero
+    (@strict_identity GrayWalkingSquare_cat)
+  ≡ gray_square_inner_src_data;
+
+assert ⊢
+  @gray_cube_step_target_data
+    GrayWalkingSquare_cat zero
+    (@strict_identity GrayWalkingSquare_cat)
+  ≡ gray_square_inner_tgt_data;
+
+assert ⊢
+  @gray_cube_step_transf
+    GrayWalkingSquare_cat zero
+    (@strict_identity GrayWalkingSquare_cat)
+  ≡ gray_square_outer_transf;
+
+// The same variable-dimensional frame gives four edges for a square and six
+// square faces for a cube.
+assert ⊢
+  @CubeImmediateFaceCount (succ (succ zero))
+  ≡ succ (succ (succ (succ zero)));
+
+assert ⊢
+  @CubeImmediateFaceCount (succ (succ (succ zero)))
+  ≡ succ (succ (succ (succ (succ (succ zero)))));
+
+assert [C : Cat]
+  (H : τ (@StrictFunctor GrayCube2_R C)) ⊢
+  @gray_cube_immediate_faces C (succ zero) H
+  : τ (@FiniteFamily
+      (Obj (@CubicalLevel_cat C (succ zero)))
+      (succ (succ (succ (succ zero)))));
+
+assert [C : Cat]
+  (H : τ (@StrictFunctor GrayCube3_R C)) ⊢
+  @gray_cube_immediate_faces C (succ (succ zero)) H
+  : τ (@FiniteFamily
+      (Obj (@CubicalLevel_cat C (succ (succ zero))))
+      (succ (succ (succ (succ (succ (succ zero)))))));

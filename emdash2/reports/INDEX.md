@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-08-21
+Date: 2026-08-26
 
 `REPORT_EMDASH_V3_2_ORDINAL_DEPENDENT_SIMPLEX_DIMENSION_FOUR_AND_RECURSIVE_SOURCE_PLAN_2026-08-21.md`
 is the completed child of the ordinal dimension-three plan. It first
@@ -1036,7 +1036,23 @@ claim mathematical impossibility. See the retirement plan under Audits And
 Retirements and the living mixed-introduction ledger for the supersession
 record.
 
-## Recently Completed Plan Ledgers
+## Recent And Corrective Plan Ledgers
+
+- `REPORT_EMDASH_V3_2_INTRINSIC_FUNCTOR_PROFILES_AND_GRAY_GRAPH_REDESIGN_PLAN_2026-08-26.md`:
+  completed fixed-forward-equivalence correction following the cubical Gray
+  adequacy redesign, checkpointed at `cc6005c`. The strict graph
+  code now decodes computationally to the public graph; its existing identity
+  filler and binary compositor compute at their internal-action owners, while
+  the former opaque carrier path and `eq_ap`/`eq_apd` observers are retired.
+  Pseudofunctor profiles now constrain one readable reframe of the intrinsic
+  compositor through fixed-forward `OmegaEquivAlong`; the pre/right reverse
+  adjustment is derived from a selected native inverse, and cubical lifting
+  plus recursive face action retain whole higher action. The endpoint reframe
+  is explicitly limited to compensating for the historical global strict cut;
+  it is not a noncollapse theorem. An explicit profile constructor supports
+  future typeclass resolution. Remaining identity/composition/structural
+  instances are honestly supplied pending extracted unit/composite coherence;
+  `cubical_*` remains intentional transparent readability notation.
 
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`:
   completed C0-C7 follow-on to the initial-book plan. It expands the
@@ -1240,7 +1256,7 @@ record.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md`:
-  active second-tranche closeout plan for enhanced triangular products,
+  completed second-tranche closeout plan for enhanced triangular products,
   terminal objects, and their thin Cartesian package. One direct map unifier
   replaces the former projection unifiers; projection equalities derive by
   congruence, runtime map forms remain distinct, and whole unpair retains
@@ -1279,6 +1295,64 @@ record.
   validation policy.
   Explicit Kleisli-category, free-syntax decidability, and TypeScript work
   remain separately gated.
+- `REPORT_EMDASH_V3_2_FUNCTOR_PROPERTY_PROFILE_MIGRATION_PLAN_2026-08-27.md`:
+  completed property-first continuation from the Gray/cubical profile
+  redesign. The
+  transparent fixed-forward `IsPseudoFunctor` property and exact
+  carrier/`IsStrictFunctor` package replace the former abstract pseudo wrapper
+  and primitive strict code grammar. Gray strict-object/lax-arrow behavior,
+  cubical recursion, ordinal-simplex action, whole coface equations and higher
+  internal action remain checked. The generic global strict functoriality,
+  naturality, and displayed-rule migration is an explicit later goal.
+
+- `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`:
+  completed semantic-adequacy continuation. It first packages the object-level
+  Yoneda section/evaluation between `StandardSemicube(n)` and the whole native
+  cubical nerve, checks the coordinate-swapped Gray walking-square orientation,
+  constructs whole transformation graphs, and decodes fixed-bracketing Gray
+  tensor powers of the walking arrow into native cubical levels by one internal
+  Nat recursion. Dimensions one through three, four edges, six faces, and the
+  arbitrary-variable-dimensional object operation are active. Public claims
+  remain object-level; full equivalences, inverse decoding, alternate
+  bracketings, and monoidal coherence are deferred.
+
+- `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`:
+  completed corrective continuation. It derives
+  `homdc_int` from the existing `homd_int` after inner Sigma and pointwise
+  opposite, rejects `Sigma_cat C (CommaFib_catd(id_C))` as the oplax
+  orientation, and constructs the selected lax-arrow category by an outer
+  opposite Sigma. `CubicalArrow_cat` is now a transparent alias; the existing
+  arbitrary-dimensional `{L,R,*}` action is revalidated, and Yoneda standard
+  semicubes decode through the whole native nerve action.
+
+- `REPORT_EMDASH_V3_2_CUBICAL_ARROW_AND_SEMICUBICAL_CODES_PLAN_2026-08-23.md`:
+  completed prototype/implementation child of the cubical-dependent-hom plan,
+  corrected foundationally by the August 24 internalization plan.
+  Its profiled lift, variable-dimensional levels, and set-classified
+  `{L,R,*}` words form `SemiCubePlus_cat`, act contravariantly on those levels,
+  and assemble a whole Cat-valued semicubical nerve. A recursive finite family
+  exposes all `2n` immediate faces. The former primitive `CubicalArrow_cat`
+  and explicit identity/composition runtime rules have since been replaced by
+  a transparent alias to the derived lax-arrow total; the checked recursive
+  evidence remains active. Gray/walking-arrow, `homd_parameter_func`,
+  degeneracies, connections, and Kan operations remain later rows.
+
+- `REPORT_EMDASH_V3_2_CUBICAL_DEPENDENT_HOM_PLAN_2026-08-23.md`:
+  completed parent plan for a two-sided cross-corner dependent hom. It first
+  derives a curried whole classifier from existing endpoint actions and
+  `hom_con_int`, then requires the `hom_int(id_C)` instance to compute the
+  directed square filler category
+  `Hom_{Hom_C(x1,y2)}(b o u,v o a)` without collapsing to the differently
+  typed unit-profunctor cell. Later rows internalize endpoints, expose four
+  square-edge projections, and test a six-faced cube before adding any
+  semicubical code layer or groupoidal-source specialization. Its first
+  continuation provides a fixed-boundary nested-Sigma square total:
+  top/bottom vary, left/right are constant, and a next-hom object exposes two
+  endpoint squares plus four side faces. The completed August 24 correction
+  now derives nondegenerate endpoint variation as
+  `homd_int(id_(Op EdgeFamily))` followed by the outer opposite Sigma, without
+  making the independent general parameter action a prerequisite.
+
 - `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:
   completed focused child of the internal-laxity/groupoidal-realization master.
   Its first semantic row now supplies a computational strict-functor

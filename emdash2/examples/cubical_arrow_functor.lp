@@ -1,0 +1,204 @@
+/*
+  Reviewer example: pseudo-functor property and whole CubicalArrow lifting.
+*/
+
+require open emdash.emdash3_2_cubical_arrow_functor;
+
+// The property is the supplied fixed-forward evidence family itself.
+assert [C D : Cat]
+  [F : τ (Functor C D)]
+  (evidence :
+    Π X : τ (Obj C),
+    Π Y : τ (Obj C),
+    Π Z : τ (Obj C),
+    Π g : τ (Hom C Y Z),
+    Π f : τ (Hom C X Y),
+      τ (@OmegaEquivAlong
+        (Hom_cat D (@fapp0 C D F X) (@fapp0 C D F Z))
+        _ _
+        (@readable_pseudo_post_cell C D F X Y Z g f)))
+  [x y z : τ (Obj C)]
+  (g : τ (Hom C y z))
+  (f : τ (Hom C x y)) ⊢
+  @pseudo_compositor_equiv
+    C D F evidence
+    x y z g f
+  ≡ evidence x y z g f;
+
+// The pseudo property constrains the existing readable compositor; it does not
+// supply an independent forward cell.
+assert [C D : Cat]
+  (F : τ (Functor C D))
+  (P : τ (@IsPseudoFunctor C D F))
+  [x y z : τ (Obj C)]
+  (g : τ (Hom C y z))
+  (f : τ (Hom C x y)) ⊢
+  @pseudo_compositor_equiv C D F P x y z g f
+  : τ (@OmegaEquivAlong
+      (Hom_cat D (@fapp0 C D F x) (@fapp0 C D F z))
+      _ _
+      (@readable_pseudo_post_cell C D F x y z g f));
+
+// The pre/right reverse adjustment is derived from a selected native
+// omega-equivalence inverse plus the existing post/pre endpoint reframe.
+assert [C D : Cat]
+  (F : τ (Functor C D))
+  (P : τ (@IsPseudoFunctor C D F))
+  [x y z : τ (Obj C)]
+  (g : τ (Hom C y z))
+  (f : τ (Hom C x y)) ⊢
+  @pseudo_pre_inverse C D F P x y z g f
+  : τ (Hom
+      (Hom_cat D (@fapp0 C D F x) (@fapp0 C D F z))
+      (@readable_pseudo_post_raw_target C D F x y z g f)
+      (@readable_pseudo_pre_raw_source C D F x y z g f));
+
+// The mapped filler has the required composite-side square boundary.
+assert [C D : Cat]
+  (F : τ (Functor C D))
+  (P : τ (@IsPseudoFunctor C D F))
+  [x1 y1 x2 y2 : τ (Obj C)]
+  (u : τ (Hom C x1 x2))
+  (v : τ (Hom C y1 y2))
+  (a : τ (Hom C x1 y1))
+  (b : τ (Hom C x2 y2))
+  (alpha : τ (Obj
+    (@homdc_square_fibre C x1 y1 x2 y2 u v a b))) ⊢
+  @cubical_arrow_map_cell C D F P x1 y1 x2 y2 u v a b alpha
+  : τ (Obj
+      (@homdc_square_fibre
+        D
+        (@fapp0 C D F x1)
+        (@fapp0 C D F y1)
+        (@fapp0 C D F x2)
+        (@fapp0 C D F y2)
+        (@fapp1_fapp0 C D F x1 x2 u)
+        (@fapp1_fapp0 C D F y1 y2 v)
+        (@fapp1_fapp0 C D F x1 y1 a)
+        (@fapp1_fapp0 C D F x2 y2 b)));
+
+// Edge and square actions compute through the same whole lifted functor.
+assert [C D : Cat]
+  (F : τ (Functor C D))
+  (P : τ (@IsPseudoFunctor C D F))
+  (x y : τ (Obj C))
+  (u : τ (Hom C x y)) ⊢
+  @fapp0
+    (@CubicalArrow_cat C) (@CubicalArrow_cat D)
+    (@CubicalArrow_func C D F P)
+    (@cubical_edge C x y u)
+  ≡ @cubical_edge
+      D
+      (@fapp0 C D F x)
+      (@fapp0 C D F y)
+      (@fapp1_fapp0 C D F x y u);
+
+assert [C D : Cat]
+  (F : τ (Functor C D))
+  (P : τ (@IsPseudoFunctor C D F))
+  [x1 y1 x2 y2 : τ (Obj C)]
+  (u : τ (Hom C x1 x2))
+  (v : τ (Hom C y1 y2))
+  (a : τ (Hom C x1 y1))
+  (b : τ (Hom C x2 y2))
+  (alpha : τ (Obj
+    (@homdc_square_fibre C x1 y1 x2 y2 u v a b))) ⊢
+  @fapp1_fapp0
+    (@CubicalArrow_cat C) (@CubicalArrow_cat D)
+    (@CubicalArrow_func C D F P)
+    (@cubical_edge C x1 x2 u)
+    (@cubical_edge C y1 y2 v)
+    (@cubical_square C x1 y1 x2 y2 u v a b alpha)
+  ≡ @cubical_arrow_map_square
+      C D F P x1 y1 x2 y2 u v a b alpha;
+
+// Source/target projection of the mapped square gives the separately mapped
+// side arrows, as required for recursive face action.
+assert [C D : Cat]
+  (F : τ (Functor C D))
+  (P : τ (@IsPseudoFunctor C D F))
+  [x1 y1 x2 y2 : τ (Obj C)]
+  (u : τ (Hom C x1 x2))
+  (v : τ (Hom C y1 y2))
+  (a : τ (Hom C x1 y1))
+  (b : τ (Hom C x2 y2))
+  (alpha : τ (Obj
+    (@homdc_square_fibre C x1 y1 x2 y2 u v a b))) ⊢
+  @fapp1_fapp0
+    (@CubicalArrow_cat D) D
+    (@cubical_src_func D)
+    (@fapp0
+      (@CubicalArrow_cat C) (@CubicalArrow_cat D)
+      (@CubicalArrow_func C D F P)
+      (@cubical_edge C x1 x2 u))
+    (@fapp0
+      (@CubicalArrow_cat C) (@CubicalArrow_cat D)
+      (@CubicalArrow_func C D F P)
+      (@cubical_edge C y1 y2 v))
+    (@cubical_arrow_map_square
+      C D F P x1 y1 x2 y2 u v a b alpha)
+  ≡ @fapp1_fapp0 C D F x1 y1 a;
+
+assert [C D : Cat]
+  (F : τ (Functor C D))
+  (P : τ (@IsPseudoFunctor C D F))
+  [x1 y1 x2 y2 : τ (Obj C)]
+  (u : τ (Hom C x1 x2))
+  (v : τ (Hom C y1 y2))
+  (a : τ (Hom C x1 y1))
+  (b : τ (Hom C x2 y2))
+  (alpha : τ (Obj
+    (@homdc_square_fibre C x1 y1 x2 y2 u v a b))) ⊢
+  @fapp1_fapp0
+    (@CubicalArrow_cat D) D
+    (@cubical_tgt_func D)
+    (@fapp0
+      (@CubicalArrow_cat C) (@CubicalArrow_cat D)
+      (@CubicalArrow_func C D F P)
+      (@cubical_edge C x1 x2 u))
+    (@fapp0
+      (@CubicalArrow_cat C) (@CubicalArrow_cat D)
+      (@CubicalArrow_func C D F P)
+      (@cubical_edge C y1 y2 v))
+    (@cubical_arrow_map_square
+      C D F P x1 y1 x2 y2 u v a b alpha)
+  ≡ @fapp1_fapp0 C D F x2 y2 b;
+
+// The lift remains whole and iterable at the next hom.
+assert [C D : Cat]
+  (F : τ (Functor C D))
+  (P : τ (@IsPseudoFunctor C D F))
+  (U V : τ (Obj (@CubicalArrow_cat C))) ⊢
+  @fapp1_func
+    (@CubicalArrow_cat C) (@CubicalArrow_cat D)
+    (@CubicalArrow_func C D F P) U V
+  : τ (Functor
+      (Hom_cat (@CubicalArrow_cat C) U V)
+      (Hom_cat
+        (@CubicalArrow_cat D)
+        (@fapp0
+          (@CubicalArrow_cat C) (@CubicalArrow_cat D)
+          (@CubicalArrow_func C D F P) U)
+        (@fapp0
+          (@CubicalArrow_cat C) (@CubicalArrow_cat D)
+          (@CubicalArrow_func C D F P) V)));
+
+// Properties required by recursive left/right/star face action are available.
+assert [C : Cat] ⊢
+  @cubical_src_is_pseudo C
+  : τ (@IsPseudoFunctor
+      (@CubicalArrow_cat C) C (@cubical_src_func C));
+
+assert [C : Cat] ⊢
+  @cubical_tgt_is_pseudo C
+  : τ (@IsPseudoFunctor
+      (@CubicalArrow_cat C) C (@cubical_tgt_func C));
+
+assert [C D : Cat]
+  [F : τ (Functor C D)]
+  (P : τ (@IsPseudoFunctor C D F)) ⊢
+  @cubical_arrow_is_pseudo C D F P
+  : τ (@IsPseudoFunctor
+      (@CubicalArrow_cat C)
+      (@CubicalArrow_cat D)
+      (@CubicalArrow_func C D F P));

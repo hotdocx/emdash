@@ -40,6 +40,15 @@ Status: completed bounded implementation plan. `GRAY-00` through
 are authorized by the user; push, merge, publication, release, history
 rewrite, branch deletion, and worktree removal are not authorized.
 
+Property-profile supersession (2026-08-27): this plan's primitive-code design
+is historical. The active kernel instead uses `IsStrictFunctor` over the one
+internally extracted compositor, the exact Sigma package `StrictFunctor`, and
+the stable `strict_functor` ambient view; see
+`REPORT_EMDASH_V3_2_FUNCTOR_PROPERTY_PROFILE_MIGRATION_PLAN_2026-08-27.md`.
+The selected right-closure mathematics is retained. Reflection of property
+evidence into judgmental strict computation remains part of the separately
+deferred global/profile-local cut migration.
+
 Checkpoints: completed `GRAY-01` semantic tranche
 `9222dad7caf71741d0811505aeebef033f404059`; completed `GRAY-02` walking-arrow
 tranche `1caf642a3b99d4699becac3a1d90e26f4e58c4b1`; completed `GRAY-03`
@@ -50,6 +59,13 @@ walking-square semantic tranche
 interchanger tranche `e2f069c11c840f3129331842b14b59ee20d13667`; completed
 `GRAY-CLOSE-1` synchronization tranche
 `053fcce8d8f641cf2b74847e60577f700a72bec1`
+
+Cubical-Adequacy-Continuation:
+`REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`.
+That continuation treats Gray tensor powers of the walking arrow as the
+literature-backed geometric cube candidates, audits the selected lax/oplax
+direction against `b o u ==> v o a`, and seeks only the object-level
+geometric decoder before any whole equivalence or full monoidal claim.
 
 ## Objective
 

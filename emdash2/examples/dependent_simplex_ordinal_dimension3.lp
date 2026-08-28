@@ -90,9 +90,9 @@ assertnot ⊢
 // A selected strict profile uses the same observation without a second
 // simplex implementation.
 type λ C : Cat,
-  λ S : τ (@StrictFunctorData ordinal_simplex3_target_cat C),
+  λ S : τ (@StrictFunctor ordinal_simplex3_target_cat C),
     @ordinal_dependent_simplex3_observation
-      C (@strict_functor_carrier ordinal_simplex3_target_cat C S);
+      C (@strict_functor ordinal_simplex3_target_cat C S);
 
 // The same native tetrahedron specializes without extra data to a Path
 // target.  Its final component deliberately remains under the recursive

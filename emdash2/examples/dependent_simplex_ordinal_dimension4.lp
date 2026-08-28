@@ -72,9 +72,9 @@ type λ C : Cat, λ H : τ (Functor ordinal_simplex4_target_cat C),
 
 // Selected strict and exact Path targets reuse the same observation.
 type λ C : Cat,
-  λ S : τ (@StrictFunctorData ordinal_simplex4_target_cat C),
+  λ S : τ (@StrictFunctor ordinal_simplex4_target_cat C),
     @ordinal_dependent_simplex4_observation
-      C (@strict_functor_carrier ordinal_simplex4_target_cat C S);
+      C (@strict_functor ordinal_simplex4_target_cat C S);
 
 type λ A : Grpd,
   λ H : τ (Functor ordinal_simplex4_target_cat (Path_cat A)),

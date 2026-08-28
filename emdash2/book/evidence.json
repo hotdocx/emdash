@@ -3914,15 +3914,19 @@
     },
     "GRAY-COMPUTATIONAL-PROFILE": {
       "status": "checked",
-      "statement": "StrictFunctorData is a primitive computational code sort with a stable decoder into the shared Functor classifier; the generic compositor reduces to identity only at decoded strict codes, while GrayHom_lax uses those codes as objects, reuses the ambient Transf_cat tower as homs, and includes wholly into Functor_cat.",
+      "statement": "IsStrictFunctor constrains the existing extracted compositor, StrictFunctor is its exact carrier/evidence Sigma package behind a rigid indexed facade, and constructor-visible strict_functor action computes to the carrier; GrayHom_lax uses those packages as objects and reuses the ambient Transf_cat tower without a duplicate code grammar or compositor.",
       "owners": [
         {
           "file": "emdash3_2_gray_profiles.lp",
-          "symbol": "StrictFunctorData"
+          "symbol": "IsStrictFunctor"
         },
         {
           "file": "emdash3_2_gray_profiles.lp",
-          "symbol": "strict_functor_carrier"
+          "symbol": "StrictFunctor"
+        },
+        {
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "strict_functor"
         },
         {
           "file": "emdash3_2_gray_profiles.lp",
@@ -3936,7 +3940,11 @@
       "reviewers": [
         {
           "file": "examples/gray_profiles.lp",
-          "symbol": "StrictFunctorData"
+          "symbol": "IsStrictFunctor"
+        },
+        {
+          "file": "examples/gray_profiles.lp",
+          "symbol": "strict_functor_evidence"
         },
         {
           "file": "examples/gray_profiles.lp",
@@ -3950,7 +3958,7 @@
     },
     "GRAY-RIGHT-CLOSURE": {
       "status": "checked",
-      "statement": "The selected GrayTensor_R has one profiled right closure: computationally strict whole curry and uncurry form an OmegaEquivAlong between GrayHom_lax(GrayTensor_R(A,B),C) and GrayHom_lax(A,GrayHom_lax(B,C)), with whole beta/eta and coevaluation/evaluation derived at strict identity codes.",
+      "statement": "The selected GrayTensor_R has one profiled right closure: whole curry and uncurry, each paired with supplied IsStrictFunctor evidence, form an OmegaEquivAlong between GrayHom_lax(GrayTensor_R(A,B),C) and GrayHom_lax(A,GrayHom_lax(B,C)), with whole beta/eta and coevaluation/evaluation derived at strict identity packages.",
       "owners": [
         {
           "file": "emdash3_2_gray_right_closure.lp",
@@ -3959,6 +3967,10 @@
         {
           "file": "emdash3_2_gray_right_closure.lp",
           "symbol": "gray_curry_R_func"
+        },
+        {
+          "file": "emdash3_2_gray_right_closure.lp",
+          "symbol": "gray_curry_R_is_strict"
         },
         {
           "file": "emdash3_2_gray_right_closure.lp",
@@ -3977,6 +3989,10 @@
         {
           "file": "examples/gray_right_closure.lp",
           "symbol": "gray_right_closure_omega"
+        },
+        {
+          "file": "examples/gray_right_closure.lp",
+          "symbol": "gray_curry_R_is_strict"
         },
         {
           "file": "examples/gray_right_closure.lp",

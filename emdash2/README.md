@@ -104,12 +104,125 @@ The current boundary does not yet construct source action,
 `Groupoidify_func`, or the packaged adjunction with `Path_cat_func`.
 
 Whole internal laxity also exposes the generic functor compositor and its next
-action. Computational strict-functor codes form the objects of the selected
-`GrayHom_lax` profile while reusing the ambient transfor tower. One right
-closure yields a coevaluation-derived walking square and a checked
-nonidentity oriented interchanger. The mirror closure, tensor coherence, full
-Crans--Gray monoidality, and global migration of historical strict endpoint
-cuts remain deferred.
+action. Semantic strict functors are exact packages
+`(F,IsStrictFunctor(F))`; these packages form the objects of the selected
+`GrayHom_lax` profile while reusing the ambient transfor tower. No second
+strict-functor code grammar or parallel compositor is introduced. One right
+closure yields a coevaluation-derived walking square and a checked nonidentity
+oriented interchanger. Its checked direction becomes the native lax-square
+direction after exchanging the two coordinate roles.
+
+Every transformation now has an iterable whole graph
+`B -> LaxArrow_cat(C)`. Objects compute to its components; capped arrows
+compute to the standard square with literal `F[g]` and `G[g]` sides and a
+filler extracted from the existing post/left internal action. Generic
+`fapp1_func` retains the next whole action. The identity instance knowingly
+overlaps the historical global strict-functor cut; the intended graph beta is
+kept under the prototype policy pending profile-local migration. For strict
+endpoint packages, the public graph is paired with supplied
+`IsStrictFunctor` evidence about its already-extracted compositor; carrier and
+evidence projections compute, without a graph-specific identity rule.
+Fixed-bracketing positive right-Gray cubes and one Nat-recursive
+object decoder then give
+
+```text
+StrictFunctor(GrayCubePos_R(n),C)
+  -> Obj(CubicalLevel(C,succ n)).
+```
+
+The index `n` denotes geometric dimension `n+1`. Dimensions one through three,
+the selected `I tensor_R I` interchanger direction, four square edges, six cube
+faces, and arbitrary-variable-dimension recursion are checked. The mirror
+closure, tensor unit/associativity/symmetry, inverse decoder, mapping-category
+equivalence, full Crans--Gray monoidality, and global migration of historical
+strict endpoint cuts remain deferred.
+
+### Two-sided dependent hom and the intrinsic semicubical nerve
+
+The one-sided `homd_` calculus now has a transparent two-sided companion. For
+`E : K1^op -> Catd(K2)`, `homdc_` transports a source along the second side
+and a target back along the first side, then takes their hom in the common
+cross fibre. At `E=hom_int(id_C)` its objects are the familiar directed-square
+2-cells
+
+```text
+b o u ==> v o a.
+```
+
+Both side-arrow actions remain whole. A nested-Sigma total packages a
+fixed-vertical-boundary square as `(a,(b,alpha))`; top, bottom, left, and right
+are whole observations. The next hom has two endpoint squares and four side
+faces, with the fixed left/right sides computing to identities. This is a
+computational bounded test retained beside the fully varying construction.
+
+The fully varying layer is derived from the same primitives. Define
+
+```text
+EdgeFamily_E[x1] = Sigma(x2:K2), E[x1][x2]
+D_E              = Op_catd(EdgeFamily_E)
+homdc_int(E)      = homd_int(id_D_E)
+homdc_total_cat(E)= Op(Sigma(x1:K1^op),D_E[x1]).
+```
+
+The canonical target-edge-first projection of `homdc_int` exposes the
+remaining `(b,alpha)` Sigma-Hom data. At `E=hom_int(id_C)`,
+`LaxArrow_cat(C)` makes every arrow of `C` an object and every
+variable-boundary lax square `(a,(b,alpha))` an arrow. `CubicalArrow_cat(C)` is
+now a transparent readability alias, not a primitive category. Source and
+target are whole derived functors. Generic nested-Sigma identity/composition
+compute their expected endpoint boundaries; the older readable paste terms no
+longer compete as runtime normal forms. A readable pseudofunctor profile
+supplies fixed-forward `OmegaEquivAlong` for the one readable cell derived
+from `fapp1_compositor`; `CubicalArrow_func` uses that cell forward and derives
+its pre/right reverse adjustment from a selected native inverse. The readable
+source ladder is a documented adapter for the temporary global strict cut and
+does not claim noncollapsed lax endpoints.
+Genuine Nat recursion gives
+
+```text
+CubicalLevel(C,0)   = C
+CubicalLevel(C,n+1) = CubicalArrow(CubicalLevel(C,n)).
+```
+
+The matching internal index is `SemiCubePlus_cat`. Its morphisms are
+set-classified `{L,R,*}` words: `L/R` fix a coordinate and star retains it.
+Structural substitution owns composition, and the native action is
+
+```text
+action(L f) = action(f) o source
+action(R f) = action(f) o target
+action(* f) = CubicalArrow_func(action(f)).
+```
+
+One whole functor `SemiCubePlus_cat^op -> Cat_cat` packages these levels and
+actions. Its object beta computes; its arrow observation is a typed path so it
+does not compete with generic strict functor cuts. A recursive finite-family
+frame exposes `2n` immediate faces: new source/target followed by the
+star-lifted older faces. Thus a square has four independent edges and a cube
+has two endpoint squares plus four independent side squares. Degeneracies,
+connections, Kan operations, and the independent `homd_parameter_func`
+comparison remain future work, not prerequisites of this native semicubical
+nerve.
+
+Yoneda also supplies the standard combinatorial semicube:
+
+```text
+StandardSemicube(n)[p]
+  = Hom_{SemiCubePlus}(p,n)
+  = Path_cat(CubeFaceCode(p,n)).
+```
+
+The whole Hom action of the native nerve decodes every such face into the
+corresponding restriction functor, and
+`standard_semicube_native_decode_path` compares it with the computing
+`{L,R,*}` interpreter at arbitrary `p,n`. Import `emdash3_2_cubical.lp` for
+the complete rule-free cubical facade.
+
+The direct Yoneda object slice additionally sends a native cube to its coherent
+face family and evaluates at the identity face; the beta is the existing whole
+nerve identity path, not a full eta equivalence. The independent Gray decoder
+above supplies the geometric/computadic object reading. These are complementary
+adequacy statements, not an asserted equivalence of mapping categories.
 
 ### Internal semisimplicial substrate
 
@@ -141,10 +254,10 @@ than a second simplex record. A triangle is the `Hom(Sigma)` total of one
 `Sigma(FF)`, and its next action maps `(κ,λ)` to the same base cell together
 with `fdapp1_int_hom_fapp0(...,λ)`. The ordinary dimension-two specialization
 is the active functor compositor, and another higher action remains iterable.
-The same owner stays noncollapsed for a generic map, uses the selected
-strict-code identity fold at the binary compositor, and becomes invertible at
-both triangle and tetrahedron components when the target fibres are path
-categories.
+The same owner stays noncollapsed for a generic map, is constrained by the
+selected semantic `IsStrictFunctor` property at the binary compositor, and
+becomes invertible at both triangle and tetrahedron components when the target
+fibres are path categories.
 
 Represented composition now supplies the first non-circular groupoidal source
 coherence for that recursion. The generic compositor of `Rep_catd_func` is a

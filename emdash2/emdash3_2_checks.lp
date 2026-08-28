@@ -12090,6 +12090,28 @@ assert [A B : Cat] (F G : τ (Functor A B))
       (@tapp1_at_transf A B F G X ϵ)
     ≡ @tapp1_func A B F G X Y ϵ;
 
+// The next projection remains the same ordinary off-diagonal action at the
+// represented composite; this is the generic beta used by readable laxity
+// endpoints and not a separate naturality square.
+assert [A B : Cat] (F G : τ (Functor A B))
+  (ϵ : τ (Transf F G))
+  (X Y Z : τ (Obj A))
+  (g : τ (Hom A Y Z)) (f : τ (Hom A X Y)) ⊢
+  @fapp0
+      _ _
+      (@tapp1_fapp0
+        A Cat_cat
+        (@hom_ A A (@id_func A) X)
+        (@hom_ B A G (@fapp0 A B F X))
+        Y Z
+        (@tapp1_at_transf A B F G X ϵ)
+        g)
+      f
+  ≡ @tapp1_fapp0
+      A B F G X Z ϵ
+      (@hom_postcomp_fapp0
+        A A (@id_func A) X Y Z g f);
+
 assert [A B : Cat] (F G : τ (Functor A B))
   (ϵ : τ (Transf F G)) (X Y : τ (Obj A)) ⊢
   @tapp0_fapp0
@@ -14598,6 +14620,44 @@ assert [K : Cat] (E : τ (Catd K)) ⊢
 assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
   @fapp1_fapp0 (Catd_cat K) Cat_cat (@Sigma_func K) E D η
     ≡ @sigma_map_func K E D η;
+
+// Total family reindexing lies over its base functor as a whole functor.
+assert [A K : Cat] (F : τ (Functor A K)) (D : τ (Catd K)) ⊢
+  @comp_cat_fapp0
+    (@Sigma_cat A (@Pullback_catd A K D F))
+    (@Sigma_cat K D)
+    K
+    (@Sigma_proj1_func K D)
+    (@sigma_pullback_total_func A K F D)
+  ≡ @comp_cat_fapp0
+      (@Sigma_cat A (@Pullback_catd A K D F))
+      A K
+      F
+      (@Sigma_proj1_func A (@Pullback_catd A K D F));
+
+// Represented-family reindexing also accumulates under Sigma totalization
+// while a further outer reindex remains whole.
+assert [A B C D : Cat]
+  (F : τ (Functor A (Op_cat C)))
+  (G : τ (Functor B D))
+  (H : τ (Functor D C)) ⊢
+  @comp_cat_fapp0
+    A (@Catd_cat D) Cat_cat
+    (@comp_cat_fapp0
+      (@Catd_cat D) (@Catd_cat B) Cat_cat
+      (@Sigma_func B)
+      (@Pullback_catd_func B D G))
+    (@comp_cat_fapp0
+      A (Op_cat C) (@Catd_cat D)
+      (@hom_int C D H)
+      F)
+  ≡ @comp_cat_fapp0
+      A (Op_cat C) Cat_cat
+      (@comp_cat_fapp0
+        (Op_cat C) (@Catd_cat B) Cat_cat
+        (@Sigma_func B)
+        (@hom_int C B (@comp_cat_fapp0 B D C H G)))
+      F;
 
 // The generic second hom action of Sigma totalization reaches the stable
 // totalized-transfor projection.
@@ -25682,6 +25742,26 @@ assert (A B : Cat) (T : τ (Functor A B))
     (@hom_con_identity_graph_sec A B T) u u' h
   ≡ @hom_con_identity_graph_action A B T u u' h;
 
+// The ordinary represented mirror selects (y,id_y) in Op(PathOut(A,y)) and
+// acts along g:x->y by the opposite canonical total arrow (g,id_g).
+assert (A : Cat) (y : τ (Obj A)) ⊢
+  @piapp0
+    (Op_cat A)
+    (@hom_identity_graph_catd A)
+    (@hom_identity_graph_sec A)
+    y
+  ≡ @hom_identity_graph_obj A y;
+
+assert (A : Cat)
+  (y x : τ (Obj A))
+  (g : τ (Hom A x y)) ⊢
+  @piapp1_fapp0
+    (Op_cat A)
+    (@hom_identity_graph_catd A)
+    (@hom_identity_graph_sec A)
+    y x g
+  ≡ @hom_identity_graph_action A y x g;
+
 assert (K : Cat) (E : τ (Catd K))
   (x y : τ (Obj K)) (p : τ (Hom K x y))
   (u u' : τ (Obj (Fibre_cat E x)))
@@ -25902,6 +25982,45 @@ assert [A B : Cat] [F G : τ (Functor A B)]
       (@tapp1_con_at_transf A B F G epsilon Y)
       X W h q;
 
+// The active strict-naturality cuts remain available when represented
+// post/precomposition has already selected its stable point head.  These
+// typed reflexivity checks exercise the two proof-time bridges directly.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [X Y : τ (Obj A)]
+  (g : τ (Hom A X Y)) ⊢
+  @eq_refl
+    (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
+    (@tapp1_fapp0 A B F G X Y epsilon g)
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
+      (@tapp1_fapp0 A B F G X Y epsilon g)
+      (@hom_postcomp_fapp0
+        B B (@id Cat_cat B)
+        (@fapp0 A B F X)
+        (@fapp0 A B G X)
+        (@fapp0 A B G Y)
+        (@fapp1_fapp0 A B G X Y g)
+        (@tapp0_fapp0 A B F G X epsilon)));
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [X Y : τ (Obj A)]
+  (g : τ (Hom A X Y)) ⊢
+  @eq_refl
+    (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
+    (@tapp1_fapp0 A B F G X Y epsilon g)
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
+      (@tapp1_fapp0 A B F G X Y epsilon g)
+      (@hom_precomp_along_fapp0
+        B B (@id Cat_cat B)
+        (@fapp0 A B G Y)
+        (@fapp0 A B F X)
+        (@fapp0 A B F Y)
+        (@fapp1_fapp0 A B F X Y g)
+        (@tapp0_fapp0 A B F G Y epsilon)));
+
 // The normal-lax functor compositor is the identity-transfor specialization.
 assert [A B : Cat] (F : τ (Functor A B))
   [X Y Z : τ (Obj A)]
@@ -25915,7 +26034,7 @@ assert [A B : Cat] (F : τ (Functor A B))
 // object sort while reusing the complete ambient transfor and higher-cell
 // tower.
 assert [A B : Cat]
-  (S : τ (@StrictFunctorData A B)) ⊢
+  (S : τ (@StrictFunctor A B)) ⊢
   S : τ (Obj (@GrayHom_lax A B));
 
 assert [A B : Cat]
@@ -25923,16 +26042,16 @@ assert [A B : Cat]
   Hom_cat (@GrayHom_lax A B) X Y
   ≡ @Transf_cat
       A B
-      (@strict_functor_carrier A B X)
-      (@strict_functor_carrier A B Y);
+      (@strict_functor A B X)
+      (@strict_functor A B Y);
 
 assert [A B : Cat]
   (X : τ (Obj (@GrayHom_lax A B))) ⊢
   @id (@GrayHom_lax A B) X
   : τ (Hom
       (@Functor_cat A B)
-      (@strict_functor_carrier A B X)
-      (@strict_functor_carrier A B X));
+      (@strict_functor A B X)
+      (@strict_functor A B X));
 
 assert [A B : Cat]
   (X Y Z : τ (Obj (@GrayHom_lax A B)))
@@ -25941,8 +26060,8 @@ assert [A B : Cat]
   @comp_fapp0 (@GrayHom_lax A B) X Y Z g f
   : τ (Hom
       (@Functor_cat A B)
-      (@strict_functor_carrier A B X)
-      (@strict_functor_carrier A B Z));
+      (@strict_functor A B X)
+      (@strict_functor A B Z));
 
 assert [A B : Cat]
   (X Y : τ (Obj (@GrayHom_lax A B))) ⊢
@@ -25954,27 +26073,16 @@ assert [A B : Cat]
   ≡ @id_func
       (@Transf_cat
         A B
-        (@strict_functor_carrier A B X)
-        (@strict_functor_carrier A B Y));
+        (@strict_functor A B X)
+        (@strict_functor A B Y));
 
-// A decoded strict code makes the already extracted ambient compositor
-// compute to identity at its stable fdapp1_int_cell owner.
+// A strict package retains semantic evidence about the already extracted
+// ambient compositor; it introduces no parallel or literal-id cell.
 assert [A B : Cat]
-  (S : τ (@StrictFunctorData A B))
-  [X Y Z : τ (Obj A)]
-  (g : τ (Hom A Y Z))
-  (f : τ (Hom A X Y)) ⊢
-  @fapp1_compositor
-    A B (@strict_functor_carrier A B S)
-    X Y Z g f
-  ≡ @id
-      (Hom_cat
-        B
-        (@fapp0 A B (@strict_functor_carrier A B S) X)
-        (@fapp0 A B (@strict_functor_carrier A B S) Z))
-      (@strict_functor_compositor_lhs
-        A B (@strict_functor_carrier A B S)
-        X Y Z g f);
+  (S : τ (@StrictFunctor A B)) ⊢
+  @strict_functor_evidence A B S
+  : τ (@IsStrictFunctor
+      A B (@strict_functor_underlying A B S));
 
 // Ambient functors are not silently promoted into the strict object sort.
 assertnot [A B : Cat]
@@ -26064,18 +26172,18 @@ assert [A B C : Cat] ⊢
   ≡ @GrayHom_lax A (@GrayHom_lax B C);
 
 assert [A B C : Cat] ⊢
-  @gray_curry_R_func A B C
-  ≡ @strict_functor_carrier
+  @strict_functor_underlying
       (@GrayRightSource A B C)
       (@GrayRightTarget A B C)
-      (@gray_curry_R_data A B C);
+      (@gray_curry_R_strict A B C)
+  ≡ @gray_curry_R_func A B C;
 
 assert [A B C : Cat] ⊢
-  @gray_uncurry_R_func A B C
-  ≡ @strict_functor_carrier
+  @strict_functor_underlying
       (@GrayRightTarget A B C)
       (@GrayRightSource A B C)
-      (@gray_uncurry_R_data A B C);
+      (@gray_uncurry_R_strict A B C)
+  ≡ @gray_uncurry_R_func A B C;
 
 // Curry exposes the generic whole Hom action, so no capped transpose is added.
 assert [A B C : Cat]
@@ -26130,16 +26238,16 @@ assert [A B C : Cat]
 
 // Coevaluation and evaluation are the two selected identity transposes.
 assert [A B : Cat] ⊢
-  @gray_coevaluation_R_data A B
+  @gray_coevaluation_R_strict A B
   ≡ @gray_curry_R
       A B (@GrayTensor_R A B)
-      (@strict_identity_data (@GrayTensor_R A B));
+      (@strict_identity (@GrayTensor_R A B));
 
 assert [B C : Cat] ⊢
-  @gray_evaluation_R_data B C
+  @gray_evaluation_R_strict B C
   ≡ @gray_uncurry_R
       (@GrayHom_lax B C) B C
-      (@strict_identity_data (@GrayHom_lax B C));
+      (@strict_identity (@GrayHom_lax B C));
 
 // The selected boundary remains distinct from the Cartesian scaffold.
 assertnot [A B : Cat] ⊢

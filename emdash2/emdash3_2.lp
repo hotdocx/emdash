@@ -11210,6 +11210,44 @@ rule comp_fapp0
       (@fapp1_fapp0 $A $B $F $X0 $X $g)
   ↪ tapp1_fapp0 $ϵ (comp_fapp0 $f $g);
 
+/*
+  Proof-time stable-head readings of the two component cuts above.
+
+  Runtime deliberately retains `hom_postcomp_fapp0` and
+  `hom_precomp_along_fapp0` as represented-action histories.  These direct
+  rigid-head comparisons avoid relying on non-transitive unification through
+  their separate raw-composition views.  They add no new naturality law.
+
+  These are part of the historical globally strict prototype.  A later
+  strict/lax migration must re-home them at the selected strict/skew transfor
+  profile rather than treating them as generic lax endpoint collapse.
+*/
+unif_rule
+  @tapp1_fapp0 $A $B $F $G $X $Y $epsilon $g
+  ≡ @hom_postcomp_fapp0
+      $B $B $IdB $FX $GX $GY $Gg $epsilonX
+  ↪ [
+    $IdB ≡ (@id Cat_cat $B);
+    $FX ≡ (@fapp0 $A $B $F $X);
+    $GX ≡ (@fapp0 $A $B $G $X);
+    $GY ≡ (@fapp0 $A $B $G $Y);
+    $Gg ≡ (@fapp1_fapp0 $A $B $G $X $Y $g);
+    $epsilonX ≡ (@tapp0_fapp0 $A $B $F $G $X $epsilon)
+  ];
+
+unif_rule
+  @tapp1_fapp0 $A $B $F $G $X $Y $epsilon $g
+  ≡ @hom_precomp_along_fapp0
+      $B $B $IdB $GY $FX $FY $Fg $epsilonY
+  ↪ [
+    $IdB ≡ (@id Cat_cat $B);
+    $GY ≡ (@fapp0 $A $B $G $Y);
+    $FX ≡ (@fapp0 $A $B $F $X);
+    $FY ≡ (@fapp0 $A $B $F $Y);
+    $Fg ≡ (@fapp1_fapp0 $A $B $F $X $Y $g);
+    $epsilonY ≡ (@tapp0_fapp0 $A $B $F $G $Y $epsilon)
+  ];
+
 // Cat-valued object-level projections of strict naturality. Both composites
 // fold to the off-diagonal component at the base arrow.
 //
@@ -12106,6 +12144,29 @@ rule @tapp0_fapp0
       (@tapp1_at_transf $A $B $F $G $X $ϵ)
   ↪ @tapp1_func $A $B $F $G $X $Y $ϵ;
 
+// Third projection of the fixed-source internal action.  Its base-arrow
+// action remains a whole functor; only evaluation at f exposes the ordinary
+// off-diagonal component at the represented composite g o f.
+//
+// Surface/formula:
+//   tapp1_at_transf(epsilon,X)[g][f] = epsilon[g o f].
+//
+// The displayed source/target families are inferred from the stable
+// `tapp1_at_transf` head.  The RHS keeps represented postcomposition as the
+// compositional owner instead of selecting raw `comp_fapp0` as a second
+// normal form.
+rule @fapp0
+      _ _
+      (@tapp1_fapp0
+        $A Cat_cat _ _ $Y $Z
+        (@tapp1_at_transf $A $B $F $G $X $epsilon)
+        $g)
+      $f
+  ↪ @tapp1_fapp0
+      $A $B $F $G $X $Z $epsilon
+      (@hom_postcomp_fapp0
+        $A $A (@id_func $A) $X $Y $Z $g $f);
+
 // Second projection of identity-specialized internal hom-action.
 //
 // Surface/formula:
@@ -12386,6 +12447,19 @@ rule @fapp0 _ _
       (@Pullback_catd_func $A $B $F) $E
   ↪ @Pullback_catd $A $B $E $F;
 
+// Whole covariant represented-family reindexing accumulates at `hom_int`.
+// This is the functor-level counterpart of the existing fibrewise
+// Pullback_catd(hom_) rule: G^*(Hom_C(W,H[-])) = Hom_C(W,H[G[-]]).
+// The outer composition endpoints are inferred; the two stable inner heads
+// are the semantic discriminators.
+rule @comp_fapp0
+      Cat_cat _ _ _
+      (@Pullback_catd_func $B $D $G)
+      (@hom_int $C $D $H)
+  ↪ @hom_int
+      $C $B
+      (@comp_fapp0 Cat_cat $B $D $C $H $G);
+
 /*
   Proof-time comparison with semantic precomposition.
 
@@ -12533,6 +12607,17 @@ rule @comp_fapp0 Cat_cat $K Cat_cat Cat_cat op $E
 // Stable pullback notation for the same pointwise opposite construction.
 rule @Pullback_catd $K Cat_cat op $E
   ↪ @Op_catd $K $E;
+
+// Proof-time only: pointwise opposite commutes with Cat-valued family
+// reindexing. Both `Op_catd(E o F)` and `F^*(Op_catd(E))` remain distinct
+// runtime histories. The potentially compound opposite family is abstracted
+// to Eop and recovered in the side condition rather than embedded in the
+// Pullback_catd family slot.
+unif_rule
+  @Op_catd $A
+    (@comp_fapp0 Cat_cat _ _ Cat_cat $E $F)
+  ≡ @Pullback_catd $A $B $Eop $F
+  ↪ [ $Eop ≡ (@Op_catd $B $E) ];
 
 // Fibre projection: E^op[k] ↪ E[k]^op.
 rule @fapp0 $K Cat_cat (@Op_catd $K $E) $k
@@ -13686,6 +13771,74 @@ rule @fapp0
       (@sigma_pullback_total_func $A $K $F _)
       (Struct_sigma $a $u)
   ↪ Struct_sigma (@fapp0 $A $K $F $a) $u;
+
+// The total base-change map lies over F.  This is the whole counterpart of
+// its constructor-visible object/arrow betas and keeps the source total's
+// first projection available for subsequent hom action.
+rule @comp_fapp0
+      Cat_cat _ _ _
+      (@Sigma_proj1_func $K $D)
+      (@sigma_pullback_total_func $A $K $F $D)
+  ↪ @comp_fapp0
+      Cat_cat
+      (@Sigma_cat $A (@Pullback_catd $A $K $D $F))
+      $A $K
+      $F
+      (@Sigma_proj1_func
+        $A
+        (@Pullback_catd $A $K $D $F));
+
+// Whole family-natural base-change totalization.  Its component at D is the
+// existing map Sigma_A(F^*D) -> Sigma_K(D); generic tapp1 retains naturality
+// and every subsequent hom action in the varying family.
+injective symbol sigma_pullback_total_transf
+  [A K : Cat]
+  (F : τ (Functor A K))
+  : τ (Transf
+      (@comp_cat_fapp0
+        (@Catd_cat K)
+        (@Catd_cat A)
+        Cat_cat
+        (@Sigma_func A)
+        (@Pullback_catd_func A K F))
+      (@Sigma_func K));
+
+// Family component: total base change at D is the established whole functor.
+rule @tapp0_fapp0
+      _ Cat_cat _ _ $D
+      (@sigma_pullback_total_transf $A $K $F)
+  ↪ @sigma_pullback_total_func $A $K $F $D;
+
+// Whole represented-Sigma base change accumulates before a retained outer
+// reindexing.  This is the total-category counterpart of the earlier
+// Pullback_catd_func/hom_int rule:
+//
+//   (Sigma_B o G^*) o hom_int(H) o F
+//     -> (Sigma_B o hom_int(H o G)) o F.
+//
+// Keeping F outside the fold preserves its whole higher action.  The rule is
+// placed only after Sigma_func and the family-natural base-change owner are
+// available, so both object and arrow observations have established owners.
+// lhs-audit: keep 1 -- the source A is needed by the reconstructed RHS.
+rule @comp_fapp0
+      Cat_cat $A _ _
+      (@comp_fapp0
+        Cat_cat _ _ Cat_cat
+        (@comp_fapp0
+          Cat_cat _ _ Cat_cat
+          (@Sigma_func $B)
+          (@Pullback_catd_func $B $D $G))
+        (@hom_int $C $D $H))
+      $F
+  ↪ @comp_fapp0
+      Cat_cat $A (Op_cat $C) Cat_cat
+      (@comp_fapp0
+        Cat_cat (Op_cat $C) (@Catd_cat $B) Cat_cat
+        (@Sigma_func $B)
+        (@hom_int
+          $C $B
+          (@comp_fapp0 Cat_cat $B $D $C $H $G)))
+      $F;
 
 // 9c. Families over Sigma totals and displayed-transfor uncurrying
 //
@@ -19659,6 +19812,98 @@ rule @fdapp1_int_cell
       $h
       Terminal_obj
   ↪ @hom_con_identity_graph_action $A $B $T $u $u' $h;
+
+/*
+  Covariant represented mirror of the self-comma identity section.
+
+  Over y : A^op, the fibre is Op(PathOut(A,y)); its selected object is
+  (y,id_y).  For g : x -> y, the base arrow y -> x in A^op transports that
+  object to (y,g), and the section action is the opposite of the canonical
+  total arrow (g,id_g) : (x,id_x) -> (y,g).
+
+  This is the ordinary hom_int mirror of hom_con_identity_graph_sec.  It is a
+  reusable internal-action owner, not a transformation-graph constructor.
+*/
+symbol hom_identity_graph_catd
+  (A : Cat)
+  : τ (Catd (Op_cat A))
+≔ @Op_catd
+    (Op_cat A)
+    (@comp_cat_fapp0
+      (Op_cat A) (@Catd_cat A) Cat_cat
+      (@Sigma_func A)
+      (@hom_int A A (@id_func A)));
+
+symbol hom_identity_graph_obj
+  [A : Cat]
+  (y : τ (Obj A))
+  : τ (Obj (Fibre_cat (@hom_identity_graph_catd A) y))
+≔ @Struct_sigma
+    (Obj A)
+    (λ z : τ (Obj A), Obj (Hom_cat A y z))
+    y
+    (@id A y);
+
+injective symbol hom_identity_graph_sec
+  (A : Cat)
+  : τ (Obj (@Pi_cat
+      (Op_cat A)
+      (@hom_identity_graph_catd A)));
+
+// Selected object projection of the ordinary represented identity section.
+rule @fapp0
+      _ _
+      (@tapp0_fapp0
+        _ _ _ _ $y
+        (@hom_identity_graph_sec $A))
+      Terminal_obj
+  ↪ @hom_identity_graph_obj $A $y;
+
+// Transported source (y,g) of the canonical opposite total arrow.
+symbol hom_identity_graph_action_source
+  [A : Cat]
+  [y x : τ (Obj A)]
+  (g : τ (Hom A x y))
+  : τ (Obj (Fibre_cat (@hom_identity_graph_catd A) x))
+≔ @piapp1_src_obj
+    (Op_cat A)
+    (@hom_identity_graph_catd A)
+    (@hom_identity_graph_sec A)
+    y x g;
+
+// Stable hom owner used to type the constructor-visible section action.
+symbol hom_identity_graph_action_cat
+  [A : Cat]
+  [y x : τ (Obj A)]
+  (g : τ (Hom A x y))
+  : Cat
+≔ @Hom_cat
+    (Fibre_cat (@hom_identity_graph_catd A) x)
+    (@hom_identity_graph_action_source A y x g)
+    (@hom_identity_graph_obj A x);
+
+// Canonical section action: the opposite of (g,id_g).
+symbol hom_identity_graph_action
+  [A : Cat]
+  [y x : τ (Obj A)]
+  (g : τ (Hom A x y))
+  : τ (Obj (@hom_identity_graph_action_cat A y x g))
+≔ @sigma_arrow
+    A
+    (@hom_ A A (@id_func A) x)
+    x y
+    (@id A x)
+    g
+    g
+    (@id (Hom_cat A x y) g);
+
+// The action remains a specialization of the generic displayed internal
+// action; no competing rule is installed on piapp1_fapp0.
+rule @fdapp1_int_cell
+      _ _ _
+      (@hom_identity_graph_sec $A)
+      $y $x $g Terminal_obj
+  ↪ @hom_identity_graph_action $A $y $x $g;
 // -----------------------------------------------------------------------------------------------
 // Arbitrary internal-action projection.  Every rung below is a definition
 // through an existing component owner; no component square is postulated.

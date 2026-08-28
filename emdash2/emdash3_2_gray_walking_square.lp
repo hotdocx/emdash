@@ -23,7 +23,7 @@ symbol GrayWalkingSquare_cat
 
 // Evaluating coevaluation at the outer endpoints yields strict inner codes.
 symbol gray_square_inner_src_data
-  : τ (@StrictFunctorData WalkingArrow_cat GrayWalkingSquare_cat)
+  : τ (@StrictFunctor WalkingArrow_cat GrayWalkingSquare_cat)
 ≔ @fapp0
     WalkingArrow_cat
     (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
@@ -31,7 +31,7 @@ symbol gray_square_inner_src_data
     walking_arrow_src;
 
 symbol gray_square_inner_tgt_data
-  : τ (@StrictFunctorData WalkingArrow_cat GrayWalkingSquare_cat)
+  : τ (@StrictFunctor WalkingArrow_cat GrayWalkingSquare_cat)
 ≔ @fapp0
     WalkingArrow_cat
     (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
@@ -41,14 +41,14 @@ symbol gray_square_inner_tgt_data
 // Decode the two inner functors while retaining their strict profile heads.
 symbol gray_square_inner_src_func
   : τ (Functor WalkingArrow_cat GrayWalkingSquare_cat)
-≔ @strict_functor_carrier
+≔ @strict_functor
     WalkingArrow_cat
     GrayWalkingSquare_cat
     gray_square_inner_src_data;
 
 symbol gray_square_inner_tgt_func
   : τ (Functor WalkingArrow_cat GrayWalkingSquare_cat)
-≔ @strict_functor_carrier
+≔ @strict_functor
     WalkingArrow_cat
     GrayWalkingSquare_cat
     gray_square_inner_tgt_data;

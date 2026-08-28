@@ -1,7 +1,7 @@
 # emdash v3.2 Canonical Surface Syntax
 
 Date: 2026-06-05
-Last reviewed: 2026-08-21
+Last reviewed: 2026-08-23
 
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
@@ -1110,6 +1110,43 @@ Do not expand these into a record of external face equations. On a visible
 `(kappa,lambda)`, the dependent output remains the native
 `fdapp1_int_hom_fapp0` projection.
 
+For the two-sided cross-corner reading, comments may write
+
+```text
+Square_E(u,v)[a,b]
+  = Hom_{E[x1][y2]}(E[x1][b](u),E[a^op][y2](v))
+
+Square_C(u,v)[a,b]
+  = Hom_{Hom_C(x1,y2)}(b o u,v o a)
+
+SquareTotal_E(u,v) = (a,(b,alpha)).
+```
+
+The literal owners are `homdc_`, `homdc_fibre`, `homdc_square_func`,
+`homdc_square_fibre`, `homdc_square_cat`, and `homdc_square_obj`. The variance
+is part of the notation: `a` is covariant and `b` is contravariant. The whole
+line observations are `homdc_square_top_func`,
+`homdc_square_bottom_sec`, `homdc_square_left_func`, and
+`homdc_square_right_func`. An arrow `theta` between two square objects has
+ordinary source/target faces and the four observations
+`homdc_cube_{top,bottom,left,right}_face`. In the current fixed-boundary total,
+left and right compute to identities and bottom remains a dependent section
+action. Do not read this notation as a fully varying `homdc_int`, a flat
+cubical record, degeneracies/connections, Kan filling, or arbitrary-dimensional
+cubical syntax. Fully varying notation belongs to the later derived owner:
+
+```text
+EdgeFamily_E[x1] = Sigma(x2:K2), E[x1][x2]
+homdc_int(E)      = homd_int(id_(Op_catd(EdgeFamily_E)))
+Total□(E)         = Op(Sigma(x1:K1^op),Op(EdgeFamily_E[x1])).
+```
+
+Its canonical projection order is target edge, source edge, then `a`; the
+remaining Sigma-Hom object is `(b,alpha)`. The literal owners are
+`homdc_edge_catd`, `homdc_op_edge_catd`, `homdc_int`, `homdc_at`, and
+`homdc_total_cat`. `EdgeFamily_E` is prose for `homdc_edge_catd(E)` and must
+not be confused with the unrelated older symbol `Edge_catd_func`.
+
 For the first groupoidal source coherence, comments may write
 
 ```text
@@ -1557,16 +1594,22 @@ simplicial or all-coherence interface.
 
 ## Profiled Gray Right-Closure Notation
 
-Write the selected computational strict-functor code and decoder as
+Write semantic strictness and its package as
 
 ```text
-StrictFunctor(A,B)
-decode_strict(S) : Functor(A,B),
+IsStrictFunctor(F)
+StrictFunctor(A,B) := Sigma F : Functor(A,B), IsStrictFunctor(F)
+underlying(S) : Functor(A,B),
 ```
 
-with kernel owners `StrictFunctorData(A,B)` and
-`strict_functor_carrier(S)`. This is sorted syntax: an arbitrary ambient
-functor is not implicitly promoted by supplying a path-valued law.
+with kernel owners `IsStrictFunctor`, `StrictFunctor`,
+`strict_functor_intro`, `strict_functor_underlying`, and
+`strict_functor_evidence`. The stable ambient view is `strict_functor(S)`.
+At a constructor-visible package its point and hom action computes to the
+underlying carrier; an opaque package retains the stable head. Strictness
+constrains the existing `fapp1_compositor` through `IsStrictCell`; it neither
+supplies another compositor nor currently forces a literal identity normal
+form. The global/profile-local strict-cut migration is separate.
 
 The selected strict-object/lax-arrow internal Hom is written
 
@@ -1614,8 +1657,59 @@ The kernel owner `gray_interchanger` is the identity component of
 `tapp1_post_laxity_transf`; `gray_interchanger_next_func` retains the next
 whole action. The readable raw composites do not license a new pointwise
 endpoint rewrite: the formal component endpoints remain the stable
-`functord_transport_*_func` owners. This notation describes one profiled
-right-closed slice and must not be advertised as the full Crans--Gray
+`functord_transport_*_func` owners.
+
+After exchanging coordinate roles, write the iterable transformation graph as:
+
+```text
+Graph(ε) : B → Arr□(C)
+Graph(ε)[y] = ε_y
+
+Graph(ε)[g]
+  : G[g] o ε_x  ==>  ε_y o F[g].
+```
+
+The kernel owners are `gray_transf_graph_func`,
+`gray_transf_graph_obj_path`, `gray_transf_graph_source_side_path`,
+`gray_transf_graph_target_side_path`, `gray_transf_graph_cell`, and
+`gray_transf_graph_cell_projection_path`. The object and capped-arrow betas
+compute to the displayed graph; `gray_transf_standard_cell` and
+`gray_transf_standard_square` name its literal filler and arrow. The filler is
+`tapp1_post_laxity_cell(epsilon,g,id_x)`, not a separately postulated
+naturality square. Generic `fapp1_func` retains the next action.
+
+At an identity arrow, this intended graph beta overlaps the historical global
+strict-functor identity cut. Preserve the graph beta and record the warning;
+the global cut is the temporary approximation that must later migrate to its
+strict profile. `IsPseudoFunctor(F)` already names transparent coherent
+evidence over an existing carrier but does not install or suppress runtime
+carrier rules. Its fixed-forward fields are
+`OmegaEquivAlong(readable_pseudo_post_cell(F,g,f))`; the readable endpoint
+ladder compensates for the temporary global strict cut and must not be printed
+as a noncollapse theorem. The selected strict graph package pairs
+`gray_transf_graph_func` with supplied `IsStrictFunctor` evidence; its
+underlying-carrier and evidence projections compute. It adds no graph-head
+compositor or identity-filler rule. Do not print this as a new graph unit: the
+readable `lax_square(id,id,id)` versus canonical nested-Sigma identity remains
+a generic presentation comparison. No carrier path or `eq_ap`/`eq_apd`
+observer is needed.
+
+For positive right-Gray cubes and their native observation, write
+
+```text
+GrayCube⁺_R(0)       = I
+GrayCube⁺_R(n+1)     = I tensor_R GrayCube⁺_R(n)
+
+decode□_R(C,n)
+  : StrictFunctor(GrayCube⁺_R(n),C) → Cub_{n+1}(C).
+```
+
+These denote `GrayCubePos_R` and `gray_cube_observation`. The index is the
+predecessor of geometric dimension. Successor decoding uses right curry, the
+walking generator, the strict graph package, recursion in `Arr□(C)`, and
+`cubical_level_shift_path`. This notation describes one profiled right-closed
+slice and must not be advertised as a tensor unit, alternate-bracketing
+coherence, inverse decoder, mapping-category equivalence, or full Crans--Gray
 monoidal structure.
 
 ## Displayed Sibling Product Notation
@@ -2121,6 +2215,116 @@ The final line corresponds to `circle_set_trunc_is_contr`. It is a theorem
 carrying contractibility evidence, not notation for a judgmental equality
 `‖Circle‖_0 = Unit`. None of the notation in this section extends the bounded
 TypeScript text grammar automatically.
+
+## Cubical Arrow And Semicubical Nerve Notation
+
+For the intrinsic directed-square tower, write
+
+```text
+Arr□(C)              = LaxArrow_cat(C) = CubicalArrow_cat(C)
+Cub_0(C)             = C
+Cub_{n+1}(C)         = Arr□(Cub_n(C)).
+```
+
+The first equality is mathematical and computational: `LaxArrow_cat` is the
+derived two-sided Sigma total, while `CubicalArrow_cat` is its transparent
+readability/compatibility alias. Do not present `CubicalArrow_cat` as a
+primitive category.
+
+An object of `Arr□(C)` is an edge `u : x ->^C y`. An arrow from `u` to
+`v : x' ->^C y'` is written
+
+```text
+(a,b,alpha) : u ==>□ v
+
+a : x  ->^C x'
+b : y  ->^C y'
+alpha : b o u ==> v o a.
+```
+
+This is expository notation for `cubical_edge` and the nested-Sigma
+`cubical_square(a,b,alpha) = (a,(b,alpha))`; it is not a new parser form.
+`CubicalArrow_func(F,P)` requires the selected readable pseudo profile `P`.
+Do not omit that qualification when the distinction between an arbitrary lax
+carrier and a liftable coherent carrier matters. The profile supplies
+fixed-forward `OmegaEquivAlong` for the readable reframe of the existing
+`fapp1_compositor`; its selected inverse supplies the reverse square-boundary
+adjustment, and it does not own a second compositor. The reframe compensates
+for the documented temporary global strict cut.
+
+Category identity and composition remain at the generic nested-Sigma owners.
+The readable `cubical_square_id` and `cubical_square_comp` terms may illustrate
+the old explicit whisker/paste presentation, but comments must not print them
+as judgmental normal forms of `id` or `comp`.
+
+For the augmented semicube category, use
+
+```text
+CubeFaceCode(p,n)     length-n word in {L,R,*} with p stars
+L f                   cube_face_left(f)
+R f                   cube_face_right(f)
+* f                   cube_face_keep(f)
+g o□ f                cube_face_comp(g,f)
+□_+                   SemiCubePlus_cat.
+```
+
+The native restriction selected by a code is written `d_f : Cub_n(C) ->
+Cub_p(C)`. Its recursive equations are
+
+```text
+d_{L f} = d_f o source
+d_{R f} = d_f o target
+d_{* f} = Arr□(d_f).
+```
+
+At arbitrary public truncation points these constructor readings are typed
+paths; do not print them as judgmental `==` equations. The whole nerve is
+
+```text
+N□(C) : Functor(Op_cat(□_+),Cat_cat)
+N□(C)[n] == Cub_n(C)
+N□(C)[f] = d_f.
+```
+
+The object equation is judgmental. The arrow equation is propositional by
+design: `N□(C)` retains generic functoriality, while `d_f` retains its recursive
+profile history. Consequently
+
+```text
+d_{id_n} = id
+d_{g o□ f} = d_f o d_g
+```
+
+For standard combinatorial semicubes, write
+
+```text
+□[n]                 = StandardSemicube(n) = Yoneda(n)
+□[n][p]              = Hom_{□_+}(p,n)
+decode_{p,n}           = standard_semicube_native_decode_func(p,n)
+decode_{p,n}(f)        = d_f.
+```
+
+The level equation is judgmental. The final equation is the selected path
+`standard_semicube_native_decode_path`, not a second runtime arrow beta. Its
+whole Hom action remains available for higher representable paths.
+
+For the direct Yoneda object slice, write
+
+```text
+yoneda□(X) : Hom_Psh(□[n],N□(C))
+eval_id(η) = η[n](id_n)
+eval_id(yoneda□(X)) = X.
+```
+
+The owners are `cubical_yoneda_section`, `cubical_yoneda_eval`, and
+`cubical_yoneda_beta`. The last equation is a path derived from the whole
+nerve identity law, not a judgmental beta or a full eta equivalence.
+
+The `d`-equations above are whole equality paths, not face-specific rewrites.
+The immediate boundary
+of an `n`-cube is the recursive `2n`-entry family with the new `L/R` pair first
+and all older faces star-lifted afterward. Degeneracy, connection, reversal,
+permutation, and Kan-composition notation remains unselected.
 
 ## Future Substitution Syntax
 

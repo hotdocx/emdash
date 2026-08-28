@@ -92,10 +92,10 @@ type λ A : Grpd,
 // The selected strict profile uses the same construction; only its already-
 // justified compositor cells collapse.
 type λ C : Cat,
-  λ S : τ (@StrictFunctorData
+  λ S : τ (@StrictFunctor
     (@DirectedSimplex_cat (succ (succ zero))) C),
     @ordinal_dependent_simplex2_canonical_filler
-      C (@strict_functor_carrier
+      C (@strict_functor
         (@DirectedSimplex_cat (succ (succ zero))) C S);
 
 // The whole native map retains a further hom action for dimension three.

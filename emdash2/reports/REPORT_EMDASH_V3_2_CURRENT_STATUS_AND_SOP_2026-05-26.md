@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-27
+Last consolidated: 2026-08-28
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -554,6 +554,101 @@ detailed probe evidence.
   its next `tapp1_func` action remains public, and the resulting direction
   confirms the `GrayHom_lax` convention. It adds no standalone square,
   endpoint bridge, rewrite, or unifier.
+- `emdash3_2_gray_interchanger_orientation.lp` and
+  `emdash3_2_gray_transformation_graph.lp`: the selected interchanger has
+  checked direction `v o a ==> b o u`; exchanging the coordinate roles gives
+  the native lax-square orientation. Every transformation yields an iterable
+  stable whole functor `B -> LaxArrow_cat(C)`. Objects compute to component
+  edges; capped arrows compute to the standard square with literal sides
+  `F[g]` and `G[g]`, with filler extracted from the existing post/left internal
+  action. Generic `fapp1_func` retains the next action. Its identity overlap
+  with the historical global strict-functor cut is deliberately accepted
+  pending the planned profile-local cut migration; the transparent
+  represented-Sigma/opposite construction remains protected evidence.
+- `emdash3_2_gray_cubes.lp`,
+  `emdash3_2_gray_transformation_graph_profile.lp`,
+  `emdash3_2_gray_cube_decoder.lp`, and
+  `emdash3_2_gray_cube_dimension2.lp`: fixed-bracketing positive Gray cubes,
+  their selected strict graph profile, and a genuine arbitrary-`n` object
+  decoder. The predecessor index `n` denotes dimension `n+1`. Successor
+  decoding curries, takes the walking generator, recursively decodes its graph
+  in `LaxArrow`, and applies the Nat-derived level shift. For strict endpoint
+  packages, the public graph is paired with supplied `IsStrictFunctor`
+  evidence over its already-extracted compositor; carrier and evidence
+  projections compute, and no graph-specific compositor or identity rule is
+  added.
+  Dimensions one through three, the exact `I tensor_R I`
+  interchanger, four square edges, six cube faces, and retained next action are
+  checked. No tensor unit, alternate-bracketing coherence, inverse decoder, or
+  mapping-category equivalence is claimed.
+- `emdash3_2_cubical_dependent_hom.lp`: transparent two-sided cross-corner
+  dependent hom for `E : K1^op -> Catd(K2)`. It transports the source in the
+  second coordinate and the target in the first, then forms one hom in the
+  common fibre. Its identity-Hom instance computes to
+  `Hom_{Hom_C(x1,y2)}(b o u,v o a)` and retains both side-arrow actions without
+  a primitive square, rule, or unifier.
+- `emdash3_2_cubical_square_total.lp`: fixed-vertical-boundary nested-Sigma
+  total of `homdc_`. Square objects are `(a,(b,alpha))`; top, bottom, left, and
+  right remain whole, and the next hom exposes the two endpoint squares plus
+  four side faces. The fixed sides compute to identities and bottom remains a
+  dependent section action. Its generic varying-Sigma projection now computes
+  both point components and constructor-visible displayed arrow action,
+  including pointwise opposite; it adds no cubical filler rule or unifier.
+- `emdash3_2_cubical_internalization.lp`: transparent variance-correct whole
+  cubical internalization. It forms the inner edge family by ordinary Sigma,
+  takes its pointwise opposite, defines `homdc_int` as the existing
+  `homd_int` of that family, and derives
+  `homdc_total_cat = Op(Sigma(Op K1,D_E))`. Its `LaxArrow_cat` specialization,
+  visible edge/square constructors, and whole source/target functors add no
+  primitive category, square, two-sided Sigma, rule, or unifier.
+- `emdash3_2_cubical_arrow.lp` and
+  `emdash3_2_cubical_arrow_composition.lp`: compatibility/readability layer.
+  `CubicalArrow_cat`, edge/square constructors, and source/target are
+  transparent aliases of the derived lax-arrow theory. The older explicit
+  identity and whisker/paste terms remain well typed, but their two competing
+  runtime rules are retired; generic nested-Sigma identity/composition owns
+  category structure and computes the expected endpoint boundaries.
+- `emdash3_2_readable_pseudofunctors.lp` and
+  `emdash3_2_cubical_arrow_functor.lp`: selected coherent lifting boundary.
+  Transparent paths reframe the existing internal compositor to one readable
+  post cell; the profile supplies fixed-forward `OmegaEquivAlong` for that
+  cell, and the pre/right reverse adjustment is derived from a selected native
+  inverse plus the existing endpoint comparison. The source ladder is a
+  documented adapter for the temporary global strict-composition cut and does
+  not claim noncollapsed lax endpoints.
+  `CubicalArrow_func` maps a filler by that cell, generic next-hom action, then
+  the derived reverse adjustment. Source, target, and every recursive lift
+  retain profiles. A general constructor accepts an explicit family of
+  fixed-forward omega-equivalence evidence; identity/composition and cubical
+  structural instances remain honestly supplied pending extracted
+  unit/composite coherence. Arbitrary normal-lax carriers are intentionally
+  not lifted.
+- `emdash3_2_cubical_square_level.lp` and `emdash3_2_cubical_levels.lp`:
+  first six-face cube boundary and genuine Nat-indexed iteration. Level zero
+  is `C`, successor is `CubicalArrow` of the previous level, and dimensions
+  one through three classify edges, squares, and cubes. Four whole edge-face
+  functors beside the two endpoint squares remain independently varying.
+- `emdash3_2_semicubical_face_codes.lp` and
+  `emdash3_2_semicubical_index.lp`: intrinsically indexed `{L,R,*}` words and
+  the augmented semicube category. Raw substitution is structural; public
+  codes are set-classified, Homs are discrete path categories, and visible
+  identity/composition compute without a proof-time unifier.
+- `emdash3_2_semicubical_face_action.lp`,
+  `emdash3_2_semicubical_nerve.lp`, and
+  `emdash3_2_semicubical_frames.lp`: variable-dimensional native restriction
+  action, whole `SemiCubePlus_cat^op -> Cat_cat` nerve, and recursive `2n`
+  boundary. `L/R` use source/target; star uses the profiled arrow lift. The
+  nerve object beta computes, while its arrow observation is propositional to
+  avoid competing with generic strict cuts. Restricted truncation supplies
+  public composition laws; a finite family exposes new `L/R` followed by all
+  star-lifted older faces.
+- `emdash3_2_semicubical_representables.lp`: Yoneda standard semicubes and a
+  whole arbitrary-`p,n` decoder from representable face codes to native
+  restriction functors. The existing nerve-action path reaches the computing
+  `{L,R,*}` action and another Hom action remains. `emdash3_2_cubical.lp` is
+  the rule-free import facade for the resulting layer. Degeneracies,
+  connections, Kan operations, and Gray/parameterized-hom comparisons remain
+  future work.
 - `emdash3_2_truncation_reflector.lp`: classified computational homotopy-
   truncation reflector. It realizes `NType_cat(n)` through the existing
   `TruncGrpdU(n)` retained-evidence package, supplies point-computing
@@ -623,7 +718,7 @@ detailed probe evidence.
   ordinary specialization recovers `fapp1_compositor`. No standalone higher
   cell, rule, unifier, `homd_con_int`, or whole nerve equivalence is added.
   The focused profile reviewer keeps the generic compositor noncollapsed,
-  applies the existing strict-code identity fold at dimension two, and reads
+  checks semantic `IsStrictFunctor` evidence at dimension two, and reads
   Path-valued triangle and tetrahedron components as invertible equalities;
   no parallel simplex classifier or unscoped higher strictness claim is made.
 - `emdash3_2_dependent_simplex_path_associator.lp`: rule-free groupoidal
@@ -1100,6 +1195,24 @@ walking owner is `1026/159`, down from the additive redesign's `1028/159` and
 Warnings remain diagnostics rather than a veto on intended computation.
 Generated health is synchronized with all 55 measured files/examples passing,
 and full local CI passes those 55 targets in 306.294s.
+
+For current lax/Gray consumers, apply that policy specifically to the
+historical global strict `fapp1` identity/composition and strict-naturality
+cuts. They are temporary fast-prototyping approximations scheduled for later
+profile-local migration. If an intended lax/profile-specific runtime rule
+typechecks at its owner, preserves subject reduction, and passes its focused
+nonidentity/downstream consumers, an identity/composition critical pair with
+those global cuts must be recorded but does not veto the rule. Do not hide the
+intended lax computation merely to preserve temporary global strictness. This
+exception does not excuse unrelated subject-reduction failures or arbitrary
+unclassified overlaps. Also distinguish the transparent property
+`IsPseudoFunctor(F)`—coherent evidence indexed by an already-formed ambient
+carrier—from a separate carrier classifier; the property neither constructs
+the carrier nor disables global cuts. Its fields are fixed-forward
+`OmegaEquivAlong`: each forward cell is the existing internal-action
+compositor, not a profile-supplied parallel arrow. Its readable endpoint
+ladder compensates for the temporary global strict cut and is not a
+noncollapse theorem.
 
 The walking-endomorphism plan resumed at implementation-goal baseline
 `82d0e27...`. Its G1–G6 implementation is active: `WalkingEnd_cat`,
@@ -3610,11 +3723,13 @@ Active equality/equivalence staging includes:
   readable `eq_ap`/`eq_trans` endpoints without making them runtime-convertible.
   `path_map_compositor_higher_func` retains one off-diagonal next-hom action as
   a whole functor and therefore leaves generic higher iteration available;
-- a computational strict-object/lax-arrow Gray profile and one right-closed
-  consumer: `StrictFunctorData` and `strict_functor_carrier` select the strict
-  object boundary without duplicating the ambient action hierarchy;
-  `GrayHom_lax` reuses `Transf_cat` homs; `GrayTensor_R` has whole strict
-  curry/uncurry maps and equality-valued beta/eta; `WalkingArrow_cat` is
+- a semantic strict-object/lax-arrow Gray profile and one right-closed
+  consumer: `IsStrictFunctor` constrains the existing compositor,
+  `StrictFunctor` is its exact carrier/evidence Sigma package, and the stable
+  `strict_functor` view selects the strict object boundary without duplicating
+  the ambient action hierarchy; `GrayHom_lax` reuses `Transf_cat` homs;
+  `GrayTensor_R` has whole curry/uncurry maps paired with supplied strictness
+  evidence and equality-valued beta/eta; `WalkingArrow_cat` is
   transparently `Join_cat(1,1)`; and the four-object walking square and its
   nonidentity directed interchanger derive from coevaluation and the existing
   whole post/left laxity owner. `gray_interchanger_next_func` retains one next
@@ -4271,6 +4386,96 @@ because its identity-section action needs the completed cross-section
 normalization environment; an earlier owner-position probe fails before those
 dependencies are available.
 
+The first two-sided/cubical consumer now sits beside this one-sided dependent
+hom architecture. For `E : K1^op -> Catd(K2)`, `homdc_` packages
+
+```text
+(a,b) |-> Hom_{E[x1][y2]}(E[x1][b](u),E[a^op][y2](v))
+```
+
+as one functor covariant in `a` and contravariant in `b`. The construction is
+transparent through `fib_cov_tapp0_func`, the outer action of `E`, component
+evaluation, and `hom_con_int`. At `E=hom_int(id_C)` it is the ordinary directed
+square classifier `Hom_{Hom_C(x1,y2)}(b o u,v o a)`.
+
+`emdash3_2_cubical_square_total.lp` totalizes these two side coordinates at a
+fixed vertical boundary. The four line observations remain whole, and their
+actions on a next-hom object expose a bounded six-face cube; the two fixed
+vertical sides reduce to identities.
+
+The nondegenerate continuation is now derived from the same internal-hom/Sigma
+calculus. For
+
+```text
+EdgeFamily_E[x1] = Sigma(x2:K2), E[x1][x2]
+D_E              = Op_catd(EdgeFamily_E),
+```
+
+the whole mixed-variance owner is
+
+```text
+homdc_int(E) = homd_int(id_D_E).
+```
+
+Its canonical target-edge-first projection at `a:x1->y1` is
+`Hom_{EdgeFamily_E[x1]}((x2,u),EdgeFamily_E[a^op](y2,v))`; ordinary Sigma-Hom
+computation exposes `(b,alpha)` with the expected cross-fibre type. The total
+
+```text
+homdc_total_cat(E) = Op(Sigma(x1:K1^op),D_E[x1])
+```
+
+therefore internalizes both endpoints and side arrows without a new
+parameterized-`homd_int` primitive. `LaxArrow_cat(C)` specializes this at
+`hom_int(id_C)`, and `CubicalArrow_cat(C)` is its transparent readability
+name. A selected readable pseudofunctor profile constrains the existing
+compositor with fixed-forward `OmegaEquivAlong`; a selected native inverse
+supplies the reverse boundary adjustment, making the operation functorial and
+recursively iterable. Its endpoint reframe remains explicitly approximate
+under the temporary global strict cut. Nat recursion then constructs
+`CubicalLevel_cat(C,n)`.
+
+The associated `{L,R,*}` code grammar is independent of Gray semantics and of
+the separate generic assignment `FF |-> homd_int(FF)`. It forms the locally
+discrete `SemiCubePlus_cat`, acts by source/target/profiled lift, and assembles
+a whole opposite-indexed Cat-valued nerve. Public code action and whole nerve
+action are joined by typed paths rather than a runtime arrow beta, because the
+former retains recursive profile histories while generic functor cuts retain
+their selected strict normal forms. Immediate faces form a recursive finite
+family: two new endpoints plus every older face under star. This supplies a
+fully variable native semicubical tower. Yoneda on `SemiCubePlus_cat` now
+defines `StandardSemicube(n)`; the whole Hom action of the native nerve decodes
+its `p`-faces into restriction functors and compares them with the computing
+code action at arbitrary `p,n`.
+
+The subsequent adequacy layer now supplies both requested object readings.
+`cubical_yoneda_section` sends a native cube to its coherent code-indexed face
+family, and evaluation at the identity face returns it along the existing
+whole nerve identity path. Independently,
+
+```text
+GrayCubePos_R(0)       = WalkingArrow
+GrayCubePos_R(succ n)  = WalkingArrow tensor_R GrayCubePos_R(n)
+```
+
+defines the fixed-bracketing geometric shapes. A selected strict realization
+decodes by one Nat recursion uniform in the target category. The successor
+uses right curry, the walking generator, the stable whole transformation graph,
+and a proved cubical-level shift. Its capped arrow has literal sides `F[g]` and
+`G[g]`; its filler is
+`tapp1_post_laxity_cell(epsilon,g,id_x)`, derived from the whole internal
+action rather than independently postulated. The selected two-dimensional
+identity realization recovers the existing coevaluation data; its target side
+is the inner-target arrow and its filler is definitionally the established
+coordinate-swapped interchanger. The existing
+immediate-frame family gives four edges and six faces at dimensions two and
+three and remains variable-dimensional.
+
+This is object-level semantic adequacy, not a full equivalence between Gray
+mapping categories and native cubical levels. Tensor action in parameters,
+unit/associativity/symmetry data, inverse decoding, degeneracies, connections,
+and Kan structure remain separate future consumers.
+
 Section 17 contains generic Sigma/Pi introduction/evaluation, constant
 sections, ordinary structural logic, generic functor hom-action, section
 pullback, and internal Pi action. Ordinary weakening `Const_func_func` is a
@@ -4924,30 +5129,29 @@ warnings remain measured diagnostic evidence, not a claim of global
 confluence.
 
 After integration of the completed TypeScript-elaborator, PSSS, internal-
-laxity, profiled-Gray, WalkingEnd--Circle, dependent Circle-computation, and
-bounded WalkingArrow--interval histories, the exact-current selected-source
-warning boundary is 1,271
-diagnostics: 1,112 unjoinable critical pairs and 159
-replaceable-pattern advisories. The strict
-LHS audit is zero unreviewed clauses, 58 annotated slots, and 34 intentional
-clauses. The generated catalog contains 2,197 classified checks across 109
-areas with zero legacy or unclassified entries.
+laxity, profiled-Gray, WalkingEnd--Circle, groupoidification, monad/product/
+terminal, and cubical/functor-property-profile histories, the exact-current
+selected-source warning boundary is 1,275 diagnostics: 1,116 unjoinable
+critical pairs and 159 replaceable-pattern advisories. Relative to the
+functor-property parent, the generalized double-`Op_transf` involution removes
+exactly 15 `Op_transf` critical-pair reports (`30` to `15`) without adding a
+new warning family. The strict kernel LHS audit has zero unreviewed clauses,
+61 annotated slots, and 36 intentional clauses; every changed rule-bearing
+extension also has zero strict findings. The generated catalog contains 2,323
+classified checks across 114 areas with zero legacy or unclassified entries.
 
-The exact-current registered health boundary is green for all 208 maintained
-targets—94 source/diagnostic files and 114 reviewer examples—under the uniform
-90-second per-target ceiling. All 208 report exit 0, with 1,958.460 summed
-check-seconds. Exact byte comparison verified the 201 unchanged predecessor
-targets before reusing their successful evidence. The changed central
-diagnostic and four new generic-groupoidification sources checked fresh in
-26.978 and 2.425--2.648 seconds; the two new reviewers checked fresh in 2.415
-and 2.697 seconds. The final report records exactly 201 resumed successes. The
+The current registered health report is deliberately an honest no-check source
+snapshot over 324 maintained targets. It records no exit or timing claim,
+because the integration follows the user's scoped-validation boundary rather
+than launching a repository-wide health sweep. The merged kernel, all 2,323
+central diagnostics, every changed profile source owner, and all 36 changed
+reviewer examples pass under the uniform 90-second per-target ceiling. The
 source-metrics snapshot is
-`sha256:1cd888aa1183aa4ed623e59ef3d49d1c94c007814c51fe18df5801669ff75038`
+`sha256:08bfc957fc9c66f87ee0773cc36db9365a13c5c47df3029ea8cb7c6f4c14f9fa`
 and the checked-content snapshot is
-`sha256:a4688354d8a468615d2861efe23053ce8484c28bda9ca8a95aae3e6d97bda5b4`.
-No separate `make check`, `make examples`, `make ci`, or repository-wide
-aggregate was run. The required resumable health refresh was bounded to the
-changed/new targets after byte-identical predecessor evidence was selected.
+`sha256:6c9031879e6022fe4040fae0143e9f1065e3da4e351df1dcfbe8a231203f98f6`.
+No repository-wide `make check`, `make examples`, `make health`, `make ci`, or
+root aggregate is claimed.
 
 ## Book And Renderer Workflow
 

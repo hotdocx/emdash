@@ -20,26 +20,29 @@ require open emdash.emdash3_2_join_generator_compatibility;
 require open emdash.emdash3_2_dependent_simplex_ordinal_adequacy;
 
 
-// The exact strict-profile endpoint maps used by the selected 02 and 12 edges.
+// The underlying endpoint maps carried by the exact strict profiles selected
+// for the 02 and 12 edges.  The stable `strict_functor` view intentionally
+// retains evidence at whole-functor position; this ordinary join reindexing
+// consumes the package projection used by `selected_face_func` instead.
 symbol profiled_vertex0
   : τ (Functor Terminal_cat WalkingArrow_cat)
-≔ @strict_functor_carrier
+≔ @strict_functor_underlying
     Terminal_cat WalkingArrow_cat
     (@selected_face_data
       zero (succ zero) simplex_vertex_zero_realization);
 
 symbol profiled_vertex1
   : τ (Functor Terminal_cat WalkingArrow_cat)
-≔ @strict_functor_carrier
+≔ @strict_functor_underlying
     Terminal_cat WalkingArrow_cat
     (@selected_face_data
       zero (succ zero) simplex_vertex_one_realization);
 
 symbol profiled_terminal
   : τ (Functor Terminal_cat Terminal_cat)
-≔ @strict_functor_carrier
+≔ @strict_functor_underlying
     Terminal_cat Terminal_cat
-    (@strict_identity_data Terminal_cat);
+    (@strict_identity Terminal_cat);
 
 // Reindex the target join's whole cross along id on the old edge and the same
 // strict terminal profile used by the selected new edges.
