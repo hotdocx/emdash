@@ -154,92 +154,26 @@ symbol slice_domain_func
     (@into_restr_domain_func K U);
 
 /*
-  Stable domain of a conventional slice object.
-
-  Generic slice objects need not be constructor-visible, so the whole domain
-  functor and raw `sigma_Fst` projection intentionally remain distinct runtime
-  histories. The stable head gives later pullback projections one exact source
-  object; proof-time rules relate both semantic presentations without adding
-  arbitrary Sigma eta or a global projection rewrite.
+  Conventional-slice observations are transparent consumers of the generic
+  Sigma façade. Opposite orientation reverses arrow endpoints, while generic
+  Sigma-map action makes postcomposition preserve the domain and compute the
+  structure arrow without proof-time recentering.
 */
-injective symbol slice_object_domain
+symbol slice_object_domain
   [K : Cat]
   [U : τ (Obj K)]
   (f : τ (Obj (@Slice_cat K U)))
-  : τ (Obj K);
+  : τ (Obj K)
+≔ @sigma_obj_base (Op_cat K) (@yoneda_psh K U) f;
 
-// Constructor-visible slice object `(V,f)` has domain V.
-rule @slice_object_domain _ _ (Struct_sigma $V $_)
-  ↪ $V;
-
-// Proof-time raw Sigma projection view.
-unif_rule
-  @slice_object_domain $K $U $f
-  ≡ @sigma_Fst $A $B $f
-  ↪ [
-    $A ≡ (Obj (Op_cat $K));
-    $B ≡ (λ V : τ (Obj (Op_cat $K)),
-      Obj (@Fibre_cat (Op_cat $K) (@yoneda_psh $K $U) V))
-  ];
-
-/*
-  Proof-time whole-domain observation after opposite action has exposed the
-  underlying restriction-oriented Sigma projection.
-*/
-unif_rule
-  @slice_object_domain $K $U $f
-  ≡ @fapp0 $A $B $F $f
-  ↪ [
-    $A ≡ (@Into_restr_cat $K $U);
-    $B ≡ (Op_cat $K);
-    $F ≡ (@into_restr_domain_func $K $U)
-  ];
-
-/*
-  Direct proof-time postcomposition-domain comparison. Opposite slice action
-  has exposed the underlying Sigma map, whose first projection is unchanged.
-  This one-step rule avoids relying on nontransitive chaining through the
-  separate raw-Sigma and whole-domain comparisons above.
-*/
-unif_rule
-  @slice_object_domain $K $X $a
-  ≡ @fapp0 _ _
-    (@Sigma_proj1_func
-      (Op_cat $K)
-      (@hom_con $K $Y $K (@id Cat_cat $K)))
-    (@fapp0 _ _
-      (@sigma_map_func
-        (Op_cat $K)
-        (@hom_con $K $X $K (@id Cat_cat $K))
-        (@hom_con $K $Y $K (@id Cat_cat $K))
-        (@hom_con_int_postcomp_func
-          $K $K (@id Cat_cat $K) $X $Y _))
-      $a)
-  ↪ [ tt ≡ tt ];
-
-// Stable structure arrow of a conventional slice object.
-injective symbol slice_object_arrow
+symbol slice_object_arrow
   [K : Cat]
   [U : τ (Obj K)]
   (f : τ (Obj (@Slice_cat K U)))
-  : τ (Hom K (@slice_object_domain K U f) U);
+  : τ (Hom K (@slice_object_domain K U f) U)
+≔ @sigma_obj_fibre (Op_cat K) (@yoneda_psh K U) f;
 
-// Constructor-visible structure-arrow projection.
-rule @slice_object_arrow _ _ (Struct_sigma _ $f)
-  ↪ $f;
-
-// Proof-time raw Sigma second projection view.
-unif_rule
-  @slice_object_arrow $K $U $f
-  ≡ @sigma_Snd $A $B $f
-  ↪ [
-    $A ≡ (Obj (Op_cat $K));
-    $B ≡ (λ V : τ (Obj (Op_cat $K)),
-      Obj (@Fibre_cat (Op_cat $K) (@yoneda_psh $K $U) V))
-  ];
-
-// Transparent whole-domain observation of a conventional slice morphism.
-symbol slice_arrow_underlying_semantic
+symbol slice_arrow_underlying
   [K : Cat]
   [U : τ (Obj K)]
   [q r : τ (Obj (@Slice_cat K U))]
@@ -253,50 +187,7 @@ symbol slice_arrow_underlying_semantic
     (@slice_domain_func K U)
     q r h;
 
-/*
-  Stable underlying ambient arrow of a conventional slice morphism.
-
-  Opposite action reverses the endpoint order before exposing the underlying
-  Sigma projection.  The stable head retains the conventional q→r reading for
-  arbitrary slice arrows; the proof-time rule records the exact post-`Op`
-  semantic observation without a runtime fold.
-*/
-injective symbol slice_arrow_underlying
-  [K : Cat]
-  [U : τ (Obj K)]
-  [q r : τ (Obj (@Slice_cat K U))]
-  (h : τ (Hom (@Slice_cat K U) q r))
-  : τ (Hom K
-      (@slice_object_domain K U q)
-      (@slice_object_domain K U r));
-
-// Constructor-visible ambient-arrow projection.
-rule @slice_arrow_underlying
-      _ _
-      (Struct_sigma _ _)
-      (Struct_sigma _ _)
-      (Struct_sigma $p _)
-  ↪ $p;
-
-unif_rule
-  @slice_arrow_underlying $K $U $q $r $h
-  ≡ @fapp1_fapp0 $Into (Op_cat $K) $Domain $r $q $h
-  ↪ [
-    $Into ≡ (@Into_restr_cat $K $U);
-    $Domain ≡ (@into_restr_domain_func $K $U)
-  ];
-
-/*
-  Retained directed triangle of a slice arrow:
-
-    arrow(r) ∘ underlying(h) ⇒ arrow(q).
-
-  Arbitrary slice homs do not runtime-expand to their Sigma presentation, so
-  this stable projection is required for whole counit and pullback-square
-  consumers. Its betas are limited to the raw constructor and the stable
-  record constructor below; arbitrary arrows do not eta-expand.
-*/
-injective symbol slice_arrow_cell
+symbol slice_arrow_cell
   [K : Cat]
   [U : τ (Obj K)]
   [q r : τ (Obj (@Slice_cat K U))]
@@ -310,26 +201,13 @@ injective symbol slice_arrow_cell
         U
         (@slice_object_arrow K U r)
         (@slice_arrow_underlying K U q r h))
-      (@slice_object_arrow K U q));
+      (@slice_object_arrow K U q))
+≔ @sigma_arrow_fibre
+    (Op_cat K)
+    (@yoneda_psh K U)
+    r q h;
 
-// Constructor-visible triangle projection; its one projection warning is
-// classified and does not introduce a critical pair.
-rule @slice_arrow_cell
-      _ _
-      (Struct_sigma _ _)
-      (Struct_sigma _ _)
-      (Struct_sigma _ $alpha)
-  ↪ $alpha;
-
-/*
-  Stable constructor for an arbitrary conventional-slice arrow.
-
-  Raw `sigma_arrow` remains the constructor-visible implementation. Generic
-  slice objects need not Sigma-expand, so this constructor accepts exactly
-  the stable record data: an ambient arrow p and its directed triangle
-  arrow(r) ∘ p ⇒ arrow(q). There is deliberately no arbitrary-arrow eta rule.
-*/
-injective symbol slice_arrow_intro
+symbol slice_arrow_intro
   [K : Cat]
   [U : τ (Obj K)]
   [q r : τ (Obj (@Slice_cat K U))]
@@ -346,17 +224,11 @@ injective symbol slice_arrow_intro
         (@slice_object_arrow K U r)
         p)
       (@slice_object_arrow K U q)))
-  : τ (Hom (@Slice_cat K U) q r);
-
-rule @slice_arrow_underlying
-      _ _ _ _
-      (@slice_arrow_intro _ _ _ _ $p _)
-  ↪ $p;
-
-rule @slice_arrow_cell
-      _ _ _ _
-      (@slice_arrow_intro _ _ _ _ _ $alpha)
-  ↪ $alpha;
+  : τ (Hom (@Slice_cat K U) q r)
+≔ @sigma_arrow_intro
+    (Op_cat K)
+    (@yoneda_psh K U)
+    r q p alpha;
 
 /*
   Cat-valued higher sieves.

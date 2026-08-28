@@ -48,6 +48,39 @@ assert [C : Cat]
       W
       (@hom_postcomp_fapp0 C C (@id_func C) W X Y f a);
 
+// Whole postcomposition and the stable arbitrary-object point share the
+// selected runtime endpoint.
+assert [C : Cat]
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X))) ⊢
+  @fapp0
+    (@Slice_cat C X)
+    (@Slice_cat C Y)
+    (@slice_sigma_func C X Y f)
+    a
+  ≡ @slice_sigma_obj C X Y f a;
+
+// No equality transport is needed to observe the preserved domain or the
+// postcomposed structure arrow of an arbitrary slice object.
+assert [C : Cat]
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X))) ⊢
+  @slice_object_domain C Y (@slice_sigma_obj C X Y f a)
+  ≡ @slice_object_domain C X a;
+
+assert [C : Cat]
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X))) ⊢
+  @slice_object_arrow C Y (@slice_sigma_obj C X Y f a)
+  ≡ @hom_postcomp_fapp0
+      C C (@id Cat_cat C)
+      (@slice_object_domain C X a)
+      X Y f
+      (@slice_object_arrow C X a);
+
 assert [C : Cat]
   (PB : τ (@PullbackStructure C))
   (X Y : τ (Obj C))
@@ -260,43 +293,6 @@ assert [C : Cat]
       (@pullback_square_readable_source C PB X Y f g)
       (@pullback_square_readable_target C PB X Y f g));
 
-// A literal ambient cone packages as a slice arrow with computing projections.
-assert [C : Cat]
-  (W X Y : τ (Obj C))
-  (f : τ (Hom C X Y))
-  (a : τ (Hom C W X))
-  (g : τ (Obj (@Slice_cat C Y)))
-  (b : τ (Hom C W (@slice_object_domain C Y g)))
-  (alpha : τ (Hom
-    (Hom_cat C W Y)
-    (@comp_fapp0 C W (@slice_object_domain C Y g) Y
-      (@slice_object_arrow C Y g) b)
-    (@comp_fapp0 C W X Y f a))) ⊢
-  @slice_arrow_underlying
-    C Y
-    (@slice_sigma_obj C X Y f (Struct_sigma W a))
-    g
-    (@pullback_cone_constructor C W X Y f a g b alpha)
-  ≡ b;
-
-assert [C : Cat]
-  (W X Y : τ (Obj C))
-  (f : τ (Hom C X Y))
-  (a : τ (Hom C W X))
-  (g : τ (Obj (@Slice_cat C Y)))
-  (b : τ (Hom C W (@slice_object_domain C Y g)))
-  (alpha : τ (Hom
-    (Hom_cat C W Y)
-    (@comp_fapp0 C W (@slice_object_domain C Y g) Y
-      (@slice_object_arrow C Y g) b)
-    (@comp_fapp0 C W X Y f a))) ⊢
-  @slice_arrow_cell
-    C Y
-    (@slice_sigma_obj C X Y f (Struct_sigma W a))
-    g
-    (@pullback_cone_constructor C W X Y f a g b alpha)
-  ≡ alpha;
-
 // Cone recovery and uniqueness are the computational universal property.
 assert [C : Cat]
   (PB : τ (@PullbackStructure C))
@@ -370,41 +366,33 @@ assert [C : Cat]
 // Raw ambient composites do not silently impose strictness.
 assertnot [C : Cat]
   (PB : τ (@PullbackStructure C))
-  (W X Y : τ (Obj C))
+  (X Y : τ (Obj C))
   (f : τ (Hom C X Y))
-  (a : τ (Hom C W X))
+  (a : τ (Obj (@Slice_cat C X)))
   (g : τ (Obj (@Slice_cat C Y)))
-  (b : τ (Hom C W (@slice_object_domain C Y g)))
-  (alpha : τ (Hom
-    (Hom_cat C W Y)
-    (@comp_fapp0 C W (@slice_object_domain C Y g) Y
-      (@slice_object_arrow C Y g) b)
-    (@comp_fapp0 C W X Y f a))) ⊢
-  @comp_fapp0 C W (@pullback_domain C PB X Y f g) X
+  (h : τ (Obj (@pullback_cone_cat C X Y f a g))) ⊢
+  @comp_fapp0 C
+    (@slice_object_domain C X a)
+    (@pullback_domain C PB X Y f g) X
     (@pullback_fst C PB X Y f g)
-    (@pullback_lift C PB X Y f (Struct_sigma W a) g
-      (@pullback_cone_constructor C W X Y f a g b alpha))
-  ≡ a;
+    (@pullback_lift C PB X Y f a g h)
+  ≡ @slice_object_arrow C X a;
 
 assertnot [C : Cat]
   (PB : τ (@PullbackStructure C))
-  (W X Y : τ (Obj C))
+  (X Y : τ (Obj C))
   (f : τ (Hom C X Y))
-  (a : τ (Hom C W X))
+  (a : τ (Obj (@Slice_cat C X)))
   (g : τ (Obj (@Slice_cat C Y)))
-  (b : τ (Hom C W (@slice_object_domain C Y g)))
-  (alpha : τ (Hom
-    (Hom_cat C W Y)
-    (@comp_fapp0 C W (@slice_object_domain C Y g) Y
-      (@slice_object_arrow C Y g) b)
-    (@comp_fapp0 C W X Y f a))) ⊢
-  @comp_fapp0 C W
+  (h : τ (Obj (@pullback_cone_cat C X Y f a g))) ⊢
+  @comp_fapp0 C
+    (@slice_object_domain C X a)
     (@pullback_domain C PB X Y f g)
     (@slice_object_domain C Y g)
     (@pullback_snd C PB X Y f g)
-    (@pullback_lift C PB X Y f (Struct_sigma W a) g
-      (@pullback_cone_constructor C W X Y f a g b alpha))
-  ≡ b;
+    (@pullback_lift C PB X Y f a g h)
+  ≡ @slice_arrow_underlying
+      C Y (@slice_sigma_obj C X Y f a) g h;
 
 // Selected base change does not collapse to covariant postcomposition.
 assertnot [C : Cat]
@@ -419,7 +407,7 @@ assertnot [C : Cat]
   (E : τ (Catd (Op_cat C))) ⊢
   @SliceBaseChange_catd C PB ≡ E;
 
-// Stable slice records expose projections but do not eta-collapse arbitrary arrows.
+// Generic Sigma-backed slice arrows expose projections without arbitrary eta.
 assertnot [C : Cat]
   (U : τ (Obj C))
   (q r : τ (Obj (@Slice_cat C U)))

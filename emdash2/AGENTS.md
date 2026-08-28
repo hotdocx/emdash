@@ -11,6 +11,9 @@ opposite represented families and whole represented-family owners, runtime
 covariant/contravariant represented reindex accumulation through ordinary
 `Pullback_catd`, proof-time generic-composition/pullback comparisons with the
 explicit specialized `Sigma_proj1_pullback_catd` owner, the stable internal
+arbitrary-object/arrow Sigma facade with guarded forward composition and its
+constant-family post-projection instance, the proof-time whole comparison and
+computing projections of `sigma_map_obj`, the stable internal
 `section_weaken_funcd` computation used by recursively weakened displayed
 variables, the typed source/value endpoint comparisons for whole pulled
 section action, the functorial `sigma_functord_sec_func` uncurrying owner and its
@@ -608,11 +611,15 @@ whole opposite-variance family with exact `C/X` fibres. Every internal
 `f:X→Y` carries the existing adjunction `Σ_f⊣f*`. Stable whole mate
 functors and point heads retain both triangle cuts, while narrow proof-time
 usability and non-opaque typed-reflexivity paths expose explicit unit/counit
-semantics without a runtime fold. Pullback object, projections, directed
-square, whole cone category, literal cone constructor, universal lift, and
-uniqueness derive from that owner. Raw ambient projection composites do not
-collapse to bare arrows in an arbitrary higher category; the first projection
-is a retained directed slice cell and the second computes through whole cone
+semantics without a runtime fold. Generic arbitrary-object/arrow Sigma
+observations own slice projection and composition; canonical represented
+postcomposition makes `Σ_f` preserve domains and postcompose structure arrows
+without equality transport. Pullback object, projections, derived directed
+square, the exact Hom cone category, universal lift, and uniqueness derive
+from that owner. There is no pullback-specific cone record or constructor
+accepting a square witness. Raw ambient projection composites do not collapse
+to bare arrows in an arbitrary higher category; the first projection is a
+retained directed slice cell and the second computes through whole Hom
 recovery. `Pullback_catd` remains generic family substitution, and explicit
 pseudo invertibility, products-in-slices, weighted/dual comparisons, `Π_f`,
 Beck–Chevalley, and Frobenius remain later assumption-explicit consumers;
@@ -1519,17 +1526,21 @@ Use the following order:
     adjunction `Σ_f⊣f*`. Stable whole and point mate owners retain both
     triangle cuts; two rigid proof-time comparisons and non-opaque semantic
     paths expose the explicit unit/counit presentations while preserving
-    runtime noncollapse. The pullback object/domain/projections, native and
-    readable directed square, whole cone category, literal cone constructor,
-    universal slice/ambient lift, and first directed projection cell are
-    derived. Whole cone recovery and uniqueness compute under both stable
-    record projections. Raw ambient `πᵢ∘lift` terms deliberately do not
-    rewrite to bare arrows in the arbitrary higher-categorical slice. Generic
-    `Pullback_catd` substitution, strict/pseudo certificates, product/weighted
-    and opposite comparisons, `Π_f`, Beck–Chevalley, and Frobenius remain
-    distinct or later assumption-explicit layers. The slice substrate and
-    pullback module are warning-neutral at the kernel's `1116/159` inventory,
-    and both strict LHS audits report zero unreviewed candidates;
+    runtime noncollapse. Generic Sigma object/arrow observations and the
+    guarded arbitrary-endpoint constructor calculus are owned by
+    `emdash3_2.lp`; conventional slice observations are transparent consumers.
+    Canonical represented postcomposition gives runtime domain/structure
+    computation without recentering paths. The pullback object/domain/
+    projections, derived directed square, exact Hom cone category, universal
+    slice/ambient lift, and first directed projection cell follow from these
+    owners. Recovery and uniqueness compute on an arbitrary existing Hom
+    object; no pullback-specific cone constructor accepts a square witness.
+    Raw ambient `πᵢ∘lift` terms deliberately do not rewrite to bare arrows in
+    the arbitrary higher-categorical slice. Generic `Pullback_catd`
+    substitution, strict/pseudo certificates, product/weighted and opposite
+    comparisons, `Π_f`, Beck–Chevalley, and Frobenius remain distinct or later
+    assumption-explicit layers. Final correction warning/catalog/health
+    closure is recorded in the active pullback plan;
 128. `emdash3_2_cubical_dependent_hom.lp` for the rule-free curried
     cross-corner dependent hom. Existing whole endpoint actions transport the
     source in the second coordinate and the target in the first coordinate;

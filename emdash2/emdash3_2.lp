@@ -13216,6 +13216,27 @@ rule @fapp0 _ Cat_cat (@Sigma_func $K) $E
 rule τ (Obj (@Sigma_cat $K $E))
   ↪ `τΣ_ k : τ (Obj $K), Obj (Fibre_cat $E k);
 
+// Generic projections of an arbitrary object of a Sigma total.
+symbol sigma_obj_base
+  [K : Cat]
+  [E : τ (Catd K)]
+  (q : τ (Obj (@Sigma_cat K E)))
+  : τ (Obj K)
+≔ @sigma_Fst
+    (Obj K)
+    (λ k : τ (Obj K), Obj (@Fibre_cat K E k))
+    q;
+
+symbol sigma_obj_fibre
+  [K : Cat]
+  [E : τ (Catd K)]
+  (q : τ (Obj (@Sigma_cat K E)))
+  : τ (Obj (@Fibre_cat K E (@sigma_obj_base K E q)))
+≔ @sigma_Snd
+    (Obj K)
+    (λ k : τ (Obj K), Obj (@Fibre_cat K E k))
+    q;
+
 // Hom categories of Sigma totals are the dependent-hom Sigma over base arrows.
 //
 // Simplicial reading:
@@ -13263,6 +13284,33 @@ symbol sigma_arrow [K : Cat] (E : τ (Catd K))
       Obj (Fibre_cat (@homd_ K E E (@id_funcd K E) x u y v) f))
     p
     alpha;
+
+/*
+  Stable arbitrary-endpoint Sigma arrow. The older transparent `sigma_arrow`
+  remains the raw constructor-specialized spelling. This owner supplies
+  generic projection and composition betas without imposing arbitrary arrow
+  eta or a competing literal-endpoint fold.
+*/
+injective symbol sigma_arrow_intro
+  [K : Cat]
+  [E : τ (Catd K)]
+  [q r : τ (Obj (@Sigma_cat K E))]
+  (p : τ (Hom K
+      (@sigma_obj_base K E q)
+      (@sigma_obj_base K E r)))
+  (alpha : τ (Hom
+      (@Fibre_cat K E (@sigma_obj_base K E r))
+      (@fapp0
+        (@Fibre_cat K E (@sigma_obj_base K E q))
+        (@Fibre_cat K E (@sigma_obj_base K E r))
+        (@catd_transport_func
+          K E
+          (@sigma_obj_base K E q)
+          (@sigma_obj_base K E r)
+          p)
+        (@sigma_obj_fibre K E q))
+      (@sigma_obj_fibre K E r)))
+  : τ (Hom (@Sigma_cat K E) q r);
 
 // Composition of Sigma arrows.
 //
@@ -13320,6 +13368,62 @@ rule @comp_fapp0
           $v
           $alpha));
 
+// Generic Sigma constructors compose without exposing object constructors.
+// lhs-audit: keep 1 -- `Sigma_cat(K,E)` is the semantic discriminator that
+// prevents this forward composition law from matching opposite composition.
+rule @comp_fapp0
+      (@Sigma_cat $K $E) _ _ _
+      (@sigma_arrow_intro $K $E $r $s $q $beta)
+      (@sigma_arrow_intro $K $E $a $r $p $alpha)
+  ↪ @sigma_arrow_intro
+      $K $E $a $s
+      (@comp_fapp0
+        $K
+        (@sigma_obj_base $K $E $a)
+        (@sigma_obj_base $K $E $r)
+        (@sigma_obj_base $K $E $s)
+        $q $p)
+      (@comp_fapp0
+        (@Fibre_cat $K $E (@sigma_obj_base $K $E $s))
+        _ _ _
+        $beta
+        (@fapp1_fapp0
+          (@Fibre_cat $K $E (@sigma_obj_base $K $E $r))
+          (@Fibre_cat $K $E (@sigma_obj_base $K $E $s))
+          (@catd_transport_func
+            $K $E
+            (@sigma_obj_base $K $E $r)
+            (@sigma_obj_base $K $E $s)
+            $q)
+          _ _
+          $alpha));
+
+/*
+  Constant-family totalization may expose `Product_cat` before this
+  constructor composition. This is the sole duplicated post-projection
+  instance of the same generic law.
+*/
+// lhs-audit: keep 1 -- `Product_cat(K,A)` is the surviving semantic
+// discriminator after `Sigma_cat(K,Const(A))` has reduced away.
+rule @comp_fapp0
+      (Product_cat $K $A) _ _ _
+      (@sigma_arrow_intro $K (@Const_catd $K $A) $r $s $q $beta)
+      (@sigma_arrow_intro $K (@Const_catd $K $A) $a $r $p $alpha)
+  ↪ @sigma_arrow_intro
+      $K (@Const_catd $K $A) $a $s
+      (@comp_fapp0
+        $K
+        (@sigma_obj_base $K (@Const_catd $K $A) $a)
+        (@sigma_obj_base $K (@Const_catd $K $A) $r)
+        (@sigma_obj_base $K (@Const_catd $K $A) $s)
+        $q $p)
+      (@comp_fapp0
+        $A
+        (@sigma_obj_fibre $K (@Const_catd $K $A) $a)
+        (@sigma_obj_fibre $K (@Const_catd $K $A) $r)
+        (@sigma_obj_fibre $K (@Const_catd $K $A) $s)
+        $beta $alpha);
+
 // Fixed-base layer: first projection from a total category.
 //
 // Surface/formula:
@@ -13328,8 +13432,9 @@ rule @comp_fapp0
 injective symbol Sigma_proj1_func [K : Cat] (E : τ (Catd K))
   : τ (Functor (Sigma_cat E) K);
 
-// First projection on objects: pi_1[(k,u)] ↪ k.
-rule fapp0 (Sigma_proj1_func $E) (Struct_sigma $k $u) ↪ $k;
+// First projection on arbitrary total objects.
+rule @fapp0 _ _ (@Sigma_proj1_func $K $E) $q
+  ↪ @sigma_obj_base $K $E $q;
 
 // Structured-arrow projection: pi_1[(p,alpha)] = p.
 // lhs-audit: keep 1,2 -- the Sigma source and base target guard the
@@ -13342,6 +13447,50 @@ rule @fapp1_fapp0
       (Struct_sigma _ _)
       (Struct_sigma $p _)
   ↪ $p;
+
+// First projection of the stable arbitrary-endpoint constructor.
+rule @fapp1_fapp0
+      _ _
+      (@Sigma_proj1_func _ _)
+      _ _
+      (@sigma_arrow_intro _ _ _ _ $p _)
+  ↪ $p;
+
+// Stable fibre component of an arbitrary total arrow.
+injective symbol sigma_arrow_fibre
+  [K : Cat]
+  [E : τ (Catd K)]
+  [q r : τ (Obj (@Sigma_cat K E))]
+  (h : τ (Hom (@Sigma_cat K E) q r))
+  : τ (Hom
+      (@Fibre_cat K E (@sigma_obj_base K E r))
+      (@fapp0
+        (@Fibre_cat K E (@sigma_obj_base K E q))
+        (@Fibre_cat K E (@sigma_obj_base K E r))
+        (@catd_transport_func
+          K E
+          (@sigma_obj_base K E q)
+          (@sigma_obj_base K E r)
+          (@fapp1_fapp0
+            (@Sigma_cat K E)
+            K
+            (@Sigma_proj1_func K E)
+            q r h))
+        (@sigma_obj_fibre K E q))
+      (@sigma_obj_fibre K E r));
+
+rule @sigma_arrow_fibre
+      _ _ _ _
+      (@sigma_arrow_intro _ _ _ _ _ $alpha)
+  ↪ $alpha;
+
+// Fibre projection of the established constructor-visible raw encoding.
+rule @sigma_arrow_fibre
+      _ _
+      (Struct_sigma _ _)
+      (Struct_sigma _ _)
+      (Struct_sigma _ $alpha)
+  ↪ $alpha;
 
 /*
   Explicit first-hom projection facade for Sigma totals.
@@ -13618,6 +13767,15 @@ injective symbol sigma_map_func [K : Cat] [E D : τ (Catd K)]
   (η : τ (Functord E D))
   : τ (Functor (Sigma_cat E) (Sigma_cat D));
 
+// Stable arbitrary-object action of a Sigma map. Whole semantic action
+// agrees at proof time; literal inputs and both object projections compute.
+injective symbol sigma_map_obj
+  [K : Cat]
+  [E D : τ (Catd K)]
+  (η : τ (Functord E D))
+  (q : τ (Obj (@Sigma_cat K E)))
+  : τ (Obj (@Sigma_cat K D));
+
 // Stable second-hom projection of Sigma totalization. A displayed transfor
 // between displayed maps induces an ordinary transfor between total maps.
 injective symbol sigma_map_transf [K : Cat] [E D : τ (Catd K)]
@@ -13654,6 +13812,35 @@ rule @fapp0 _ _
   ↪ Struct_sigma
       $k
       (fapp0 (@tapp0_fapp0 $K Cat_cat $E $D $k $η) $u);
+
+rule @sigma_map_obj $K $E $D $η (Struct_sigma $k $u)
+  ↪ @Struct_sigma
+      (Obj $K)
+      (λ j : τ (Obj $K), Obj (@Fibre_cat $K $D j))
+      $k
+      (@fapp0
+        (@Fibre_cat $K $E $k)
+        (@Fibre_cat $K $D $k)
+        (@tapp0_fapp0 $K Cat_cat $E $D $k $η)
+        $u);
+
+rule @sigma_Fst _ _ (@sigma_map_obj $K $E _ _ $q)
+  ↪ @sigma_obj_base $K $E $q;
+
+rule @sigma_Snd _ _ (@sigma_map_obj $K $E $D $η $q)
+  ↪ @fapp0
+      (@Fibre_cat $K $E (@sigma_obj_base $K $E $q))
+      (@Fibre_cat $K $D (@sigma_obj_base $K $E $q))
+      (@tapp0_fapp0
+        $K Cat_cat $E $D
+        (@sigma_obj_base $K $E $q)
+        $η)
+      (@sigma_obj_fibre $K $E $q);
+
+unif_rule
+  @fapp0 _ _ (@sigma_map_func $K $E $D $η) $q
+  ≡ @sigma_map_obj $K $E $D $η $q
+  ↪ [ tt ≡ tt ];
 
 // A Sigma map lies over the identity on K: pi_1 ∘ Sigma(η) ↪ pi_1.
 rule @comp_fapp0 Cat_cat _ _ _

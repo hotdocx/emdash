@@ -10,9 +10,11 @@
   not identify categorical base change with the kernel's unrelated
   Pullback_catd(E,F) family substitution, does not add a second adjunction
   theory, and does not collapse directed ambient projection cells to strict
-  arrow equalities. Whole cone recovery and uniqueness compute through the
-  selected adjunction. Explicit pseudo invertibility, Π_f, Beck--Chevalley,
-  products-in-slices, weighted comparisons, and pushouts remain later layers.
+  arrow equalities. A cone is exactly an object of the internal slice Hom;
+  there is no pullback-specific record or constructor carrying a square.
+  Whole Hom recovery and uniqueness compute through the selected adjunction.
+  Explicit pseudo invertibility, Π_f, Beck--Chevalley, products-in-slices,
+  weighted comparisons, and pushouts remain later layers.
 */
 
 require open emdash.emdash3_2_presheaves;
@@ -69,18 +71,38 @@ symbol slice_base_change_func
     (@SliceBaseChange_catd C PB)
     Y X f;
 
-// Object postcomposition in the covariant slice family.
+// Computational object postcomposition in the covariant slice family.
+// The generic stable Sigma-map point retains a runtime discriminator while
+// agreeing at proof time with the whole semantic `slice_sigma_func` action.
 symbol slice_sigma_obj
   [C : Cat]
   [X Y : τ (Obj C)]
   (f : τ (Hom C X Y))
   (a : τ (Obj (@Slice_cat C X)))
   : τ (Obj (@Slice_cat C Y))
-≔ @fapp0
-    (@Slice_cat C X)
-    (@Slice_cat C Y)
-    (@slice_sigma_func C X Y f)
+≔ @sigma_map_obj
+    (Op_cat C)
+    (@fapp0
+      C (Catd_cat (Op_cat C))
+      (@hom_con_int C C (@id Cat_cat C))
+      X)
+    (@fapp0
+      C (Catd_cat (Op_cat C))
+      (@hom_con_int C C (@id Cat_cat C))
+      Y)
+    (@hom_con_int_postcomp_func
+      C C (@id Cat_cat C) X Y f)
     a;
+
+// Whole semantic Σ_f object action projects to the selected generic Sigma
+// point. The displayed postcomposition operation is the sole discriminator;
+// reducible family/category slots remain inferred.
+rule @fapp0 _ _
+      (@sigma_map_func _ _ _
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $f))
+      $a
+  ↪ @slice_sigma_obj $C $X $Y $f $a;
 
 // Object base change in the chosen opposite-variance slice family.
 symbol slice_base_change_obj
@@ -340,7 +362,7 @@ symbol slice_base_change_untranspose_semantic
   The point heads are justified because the two triangle runtime rules must
   recognize nested transpose/untranspose after the explicit semantic
   composition has projected to stable hom-action heads. The whole heads retain
-  action on higher cone arrows. They are not independent adjunction data:
+  action on higher Hom arrows. They are not independent adjunction data:
   proof-time rules below identify each point with its explicit unit/counit
   semantics, while runtime keeps the two presentations distinct.
 */
@@ -522,79 +544,14 @@ symbol slice_base_change_untranspose_semantic_path
       (@slice_sigma_obj C X Y f a) b)
     (@slice_base_change_untranspose C PB X Y f a b k);
 
-/*
-  Domain and structure-arrow observations of covariant slice action.
-
-  Arbitrary Sigma objects deliberately do not satisfy runtime eta. The first
-  two paths each use one proof-time owner and are composed explicitly, avoiding
-  reliance on transitivity across unification rules.
-*/
-symbol slice_sigma_whole_domain
-  [C : Cat]
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (a : τ (Obj (@Slice_cat C X)))
-  : τ (Obj C)
-≔ @fapp0
-    (@Slice_cat C Y)
-    C
-    (@slice_domain_func C Y)
-    (@slice_sigma_obj C X Y f a);
-
-symbol slice_sigma_domain_to_whole_path
-  [C : Cat]
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (a : τ (Obj (@Slice_cat C X)))
-  : τ (@= (Obj C)
-      (@slice_object_domain C X a)
-      (@slice_sigma_whole_domain C X Y f a))
-≔ @eq_refl (Obj C) (@slice_object_domain C X a);
-
-symbol slice_sigma_whole_to_domain_path
-  [C : Cat]
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (a : τ (Obj (@Slice_cat C X)))
-  : τ (@= (Obj C)
-      (@slice_sigma_whole_domain C X Y f a)
-      (@slice_object_domain C Y (@slice_sigma_obj C X Y f a)))
-≔ @eq_refl (Obj C) (@slice_sigma_whole_domain C X Y f a);
-
-symbol slice_sigma_domain_path
-  [C : Cat]
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (a : τ (Obj (@Slice_cat C X)))
-  : τ (@= (Obj C)
-      (@slice_object_domain C X a)
-      (@slice_object_domain C Y (@slice_sigma_obj C X Y f a)))
-≔ @eq_trans
-    (Obj C)
-    (@slice_object_domain C X a)
-    (@slice_sigma_whole_domain C X Y f a)
-    (@slice_object_domain C Y (@slice_sigma_obj C X Y f a))
-    (@slice_sigma_domain_to_whole_path C X Y f a)
-    (@slice_sigma_whole_to_domain_path C X Y f a);
-
-// Structure arrow of Σ_f(a), recentered at the stable domain of a.
+// Structure arrow of Σ_f(a), whose generic Sigma action preserves the domain.
 symbol slice_sigma_structure_arrow
   [C : Cat]
   [X Y : τ (Obj C)]
   (f : τ (Hom C X Y))
   (a : τ (Obj (@Slice_cat C X)))
   : τ (Hom C (@slice_object_domain C X a) Y)
-≔ @comp_fapp0
-    C
-    (@slice_object_domain C X a)
-    (@slice_object_domain C Y (@slice_sigma_obj C X Y f a))
-    Y
-    (@slice_object_arrow C Y (@slice_sigma_obj C X Y f a))
-    (@path_to_hom
-      C
-      (@slice_object_domain C X a)
-      (@slice_object_domain C Y (@slice_sigma_obj C X Y f a))
-      (@slice_sigma_domain_path C X Y f a));
+≔ @slice_object_arrow C Y (@slice_sigma_obj C X Y f a);
 
 // -------------------------------------------------------------------------------------------------
 // Chosen pullback object, projections, and retained square
@@ -644,47 +601,7 @@ symbol pullback_counit_slice_arrow
       g)
 ≔ @slice_base_change_counit C PB X Y f g;
 
-// Native second projection before recentering its source at P.
-symbol pullback_snd_native
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (Hom C
-      (@slice_object_domain C Y
-        (@slice_sigma_obj C X Y f
-          (@pullback_slice_obj C PB X Y f g)))
-      (@slice_object_domain C Y g))
-≔ @slice_arrow_underlying
-    C Y
-    (@slice_sigma_obj C X Y f
-      (@pullback_slice_obj C PB X Y f g))
-    g
-    (@pullback_counit_slice_arrow C PB X Y f g);
-
-// Domain recentering P → domain(Σ_f(f*(g))).
-symbol pullback_domain_recenter_arrow
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (Hom C
-      (@pullback_domain C PB X Y f g)
-      (@slice_object_domain C Y
-        (@slice_sigma_obj C X Y f
-          (@pullback_slice_obj C PB X Y f g))))
-≔ @path_to_hom
-    C
-    (@pullback_domain C PB X Y f g)
-    (@slice_object_domain C Y
-      (@slice_sigma_obj C X Y f
-        (@pullback_slice_obj C PB X Y f g)))
-    (@slice_sigma_domain_path C X Y f
-      (@pullback_slice_obj C PB X Y f g));
-
-// Readable second projection π₂:P→domain(g).
+// Second projection π₂:P→domain(g), directly projected from the counit.
 symbol pullback_snd
   [C : Cat]
   (PB : τ (@PullbackStructure C))
@@ -694,122 +611,14 @@ symbol pullback_snd
   : τ (Hom C
       (@pullback_domain C PB X Y f g)
       (@slice_object_domain C Y g))
-≔ @comp_fapp0
-    C
-    (@pullback_domain C PB X Y f g)
-    (@slice_object_domain C Y
-      (@slice_sigma_obj C X Y f
-        (@pullback_slice_obj C PB X Y f g)))
-    (@slice_object_domain C Y g)
-    (@pullback_snd_native C PB X Y f g)
-    (@pullback_domain_recenter_arrow C PB X Y f g);
-
-// Native directed counit square at the unrecentered source object.
-symbol pullback_square_native
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (Hom
-      (Hom_cat C
-        (@slice_object_domain C Y
-          (@slice_sigma_obj C X Y f
-            (@pullback_slice_obj C PB X Y f g)))
-        Y)
-      (@comp_fapp0
-        C
-        (@slice_object_domain C Y
-          (@slice_sigma_obj C X Y f
-            (@pullback_slice_obj C PB X Y f g)))
-        (@slice_object_domain C Y g)
-        Y
-        (@slice_object_arrow C Y g)
-        (@pullback_snd_native C PB X Y f g))
-      (@slice_object_arrow C Y
-        (@slice_sigma_obj C X Y f
-          (@pullback_slice_obj C PB X Y f g))))
-≔ @slice_arrow_cell
+≔ @slice_arrow_underlying
     C Y
     (@slice_sigma_obj C X Y f
       (@pullback_slice_obj C PB X Y f g))
     g
     (@pullback_counit_slice_arrow C PB X Y f g);
 
-// Whole precomposition used to recenter the square at P.
-symbol pullback_square_recenter_func
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (Functor
-      (Hom_cat C
-        (@slice_object_domain C Y
-          (@slice_sigma_obj C X Y f
-            (@pullback_slice_obj C PB X Y f g)))
-        Y)
-      (Hom_cat C (@pullback_domain C PB X Y f g) Y))
-≔ @hom_precomp_along_func
-    C C (@id_func C) Y
-    (@pullback_domain C PB X Y f g)
-    (@slice_object_domain C Y
-      (@slice_sigma_obj C X Y f
-        (@pullback_slice_obj C PB X Y f g)))
-    (@pullback_domain_recenter_arrow C PB X Y f g);
-
-symbol pullback_square_source
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (Obj (Hom_cat C (@pullback_domain C PB X Y f g) Y))
-≔ @fapp0
-    _ _
-    (@pullback_square_recenter_func C PB X Y f g)
-    (@comp_fapp0
-      C
-      (@slice_object_domain C Y
-        (@slice_sigma_obj C X Y f
-          (@pullback_slice_obj C PB X Y f g)))
-      (@slice_object_domain C Y g)
-      Y
-      (@slice_object_arrow C Y g)
-      (@pullback_snd_native C PB X Y f g));
-
-symbol pullback_square_target
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (Obj (Hom_cat C (@pullback_domain C PB X Y f g) Y))
-≔ @fapp0
-    _ _
-    (@pullback_square_recenter_func C PB X Y f g)
-    (@slice_object_arrow C Y
-      (@slice_sigma_obj C X Y f
-        (@pullback_slice_obj C PB X Y f g)));
-
-// Recentered directed pullback square, retaining the counit's higher cell.
-symbol pullback_square_cell
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (Hom
-      (Hom_cat C (@pullback_domain C PB X Y f g) Y)
-      (@pullback_square_source C PB X Y f g)
-      (@pullback_square_target C PB X Y f g))
-≔ @fapp1_fapp0
-    _ _
-    (@pullback_square_recenter_func C PB X Y f g)
-    _ _
-    (@pullback_square_native C PB X Y f g);
-
-// Readable source g ∘ π₂ of the recentered square.
+// Source g ∘ π₂ of the directed counit square.
 symbol pullback_square_readable_source
   [C : Cat]
   (PB : τ (@PullbackStructure C))
@@ -825,7 +634,7 @@ symbol pullback_square_readable_source
     (@slice_object_arrow C Y g)
     (@pullback_snd C PB X Y f g);
 
-// Readable target: the recentered structure arrow of Σ_f(f*(g)).
+// Target f ∘ π₁, selected by generic Sigma-map structure action.
 symbol pullback_square_readable_target
   [C : Cat]
   (PB : τ (@PullbackStructure C))
@@ -836,112 +645,7 @@ symbol pullback_square_readable_target
 ≔ @slice_sigma_structure_arrow
     C X Y f (@pullback_slice_obj C PB X Y f g);
 
-// Raw right-associated endpoint selected after stable precomposition unfolds.
-symbol pullback_square_source_raw
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (Obj (Hom_cat C (@pullback_domain C PB X Y f g) Y))
-≔ @comp_fapp0
-    C
-    (@pullback_domain C PB X Y f g)
-    (@slice_object_domain C Y
-      (@slice_sigma_obj C X Y f
-        (@pullback_slice_obj C PB X Y f g)))
-    Y
-    (@comp_fapp0
-      C
-      (@slice_object_domain C Y
-        (@slice_sigma_obj C X Y f
-          (@pullback_slice_obj C PB X Y f g)))
-      (@slice_object_domain C Y g)
-      Y
-      (@slice_object_arrow C Y g)
-      (@pullback_snd_native C PB X Y f g))
-    (@pullback_domain_recenter_arrow C PB X Y f g);
-
-// Stable precomposition has the raw composition reading at proof time.
-symbol pullback_square_source_to_raw_path
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (@=
-      (Hom C (@pullback_domain C PB X Y f g) Y)
-      (@pullback_square_source C PB X Y f g)
-      (@pullback_square_source_raw C PB X Y f g))
-≔ @eq_refl
-    (Hom C (@pullback_domain C PB X Y f g) Y)
-    (@pullback_square_source C PB X Y f g);
-
-// Associativity changes `(g ∘ π₂_native) ∘ recenter` to `g ∘ π₂`.
-symbol pullback_square_raw_to_readable_path
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (@=
-      (Hom C (@pullback_domain C PB X Y f g) Y)
-      (@pullback_square_source_raw C PB X Y f g)
-      (@pullback_square_readable_source C PB X Y f g))
-≔ @eq_sym
-    (Hom C (@pullback_domain C PB X Y f g) Y)
-    (@pullback_square_readable_source C PB X Y f g)
-    (@pullback_square_source_raw C PB X Y f g)
-    (@comp_assoc
-      C
-      (@pullback_domain C PB X Y f g)
-      (@slice_object_domain C Y
-        (@slice_sigma_obj C X Y f
-          (@pullback_slice_obj C PB X Y f g)))
-      (@slice_object_domain C Y g)
-      Y
-      (@slice_object_arrow C Y g)
-      (@pullback_snd_native C PB X Y f g)
-      (@pullback_domain_recenter_arrow C PB X Y f g));
-
-symbol pullback_square_source_path
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (@=
-      (Hom C (@pullback_domain C PB X Y f g) Y)
-      (@pullback_square_source C PB X Y f g)
-      (@pullback_square_readable_source C PB X Y f g))
-≔ @eq_trans
-    (Hom C (@pullback_domain C PB X Y f g) Y)
-    (@pullback_square_source C PB X Y f g)
-    (@pullback_square_source_raw C PB X Y f g)
-    (@pullback_square_readable_source C PB X Y f g)
-    (@pullback_square_source_to_raw_path C PB X Y f g)
-    (@pullback_square_raw_to_readable_path C PB X Y f g);
-
-// Target comparison is typed reflexivity through the selected recentering.
-symbol pullback_square_target_path
-  [C : Cat]
-  (PB : τ (@PullbackStructure C))
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (g : τ (Obj (@Slice_cat C Y)))
-  : τ (@=
-      (Hom C (@pullback_domain C PB X Y f g) Y)
-      (@pullback_square_target C PB X Y f g)
-      (@pullback_square_readable_target C PB X Y f g))
-≔ @eq_refl
-    (Hom C (@pullback_domain C PB X Y f g) Y)
-    (@pullback_square_target C PB X Y f g);
-
-/*
-  Fully readable recentered square. Equality paths only adjust the two object
-  presentations in the ambient hom category; the directed middle cell remains
-  the actual counit projection.
-*/
+// Directed square, directly projected from the counit slice arrow.
 symbol pullback_square_readable_cell
   [C : Cat]
   (PB : τ (@PullbackStructure C))
@@ -952,31 +656,12 @@ symbol pullback_square_readable_cell
       (Hom_cat C (@pullback_domain C PB X Y f g) Y)
       (@pullback_square_readable_source C PB X Y f g)
       (@pullback_square_readable_target C PB X Y f g))
-  ≔ @comp_fapp0
-    (Hom_cat C (@pullback_domain C PB X Y f g) Y)
-    (@pullback_square_readable_source C PB X Y f g)
-    (@pullback_square_target C PB X Y f g)
-    (@pullback_square_readable_target C PB X Y f g)
-    (@path_to_hom
-      (Hom_cat C (@pullback_domain C PB X Y f g) Y)
-      (@pullback_square_target C PB X Y f g)
-      (@pullback_square_readable_target C PB X Y f g)
-      (@pullback_square_target_path C PB X Y f g))
-    (@comp_fapp0
-      (Hom_cat C (@pullback_domain C PB X Y f g) Y)
-      (@pullback_square_readable_source C PB X Y f g)
-      (@pullback_square_source C PB X Y f g)
-      (@pullback_square_target C PB X Y f g)
-      (@pullback_square_cell C PB X Y f g)
-      (@path_to_hom
-        (Hom_cat C (@pullback_domain C PB X Y f g) Y)
-        (@pullback_square_readable_source C PB X Y f g)
-        (@pullback_square_source C PB X Y f g)
-        (@eq_sym
-          (Hom C (@pullback_domain C PB X Y f g) Y)
-          (@pullback_square_source C PB X Y f g)
-          (@pullback_square_readable_source C PB X Y f g)
-          (@pullback_square_source_path C PB X Y f g))));
+  ≔ @slice_arrow_cell
+    C Y
+    (@slice_sigma_obj C X Y f
+      (@pullback_slice_obj C PB X Y f g))
+    g
+    (@pullback_counit_slice_arrow C PB X Y f g);
 
 // -------------------------------------------------------------------------------------------------
 // Whole cone category and computational universal lift
@@ -1000,66 +685,7 @@ symbol pullback_cone_cat
     (@slice_sigma_obj C X Y f a)
     g;
 
-// Native cone constructor for arbitrary slice objects and exact endpoints.
-symbol pullback_cone_intro
-  [C : Cat]
-  [X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  [a : τ (Obj (@Slice_cat C X))]
-  [g : τ (Obj (@Slice_cat C Y))]
-  (p : τ (Hom C
-      (@slice_object_domain C Y (@slice_sigma_obj C X Y f a))
-      (@slice_object_domain C Y g)))
-  (alpha : τ (Hom
-      (Hom_cat C
-        (@slice_object_domain C Y (@slice_sigma_obj C X Y f a))
-        Y)
-      (@comp_fapp0
-        C
-        (@slice_object_domain C Y (@slice_sigma_obj C X Y f a))
-        (@slice_object_domain C Y g)
-        Y
-        (@slice_object_arrow C Y g)
-        p)
-      (@slice_object_arrow C Y (@slice_sigma_obj C X Y f a))))
-  : τ (Obj (@pullback_cone_cat C X Y f a g))
-≔ @slice_arrow_intro
-    C Y
-    (@slice_sigma_obj C X Y f a)
-    g
-    p alpha;
-
-/*
-  Constructor-visible ambient cone:
-
-    a : W→X,  b : W→dom(g),  alpha : g∘b ⇒ f∘a.
-
-  The identity-family postcomposition unifier relates the readable target
-  f∘a to the stable represented action selected by Σ_f.
-*/
-symbol pullback_cone_constructor
-  [C : Cat]
-  [W X Y : τ (Obj C)]
-  (f : τ (Hom C X Y))
-  (a : τ (Hom C W X))
-  [g : τ (Obj (@Slice_cat C Y))]
-  (b : τ (Hom C W (@slice_object_domain C Y g)))
-  (alpha : τ (Hom
-      (Hom_cat C W Y)
-      (@comp_fapp0
-        C W (@slice_object_domain C Y g) Y
-        (@slice_object_arrow C Y g)
-        b)
-      (@comp_fapp0 C W X Y f a)))
-  : τ (Obj (@pullback_cone_cat
-      C X Y f (Struct_sigma W a) g))
-≔ @slice_arrow_intro
-    C Y
-    (@slice_sigma_obj C X Y f (Struct_sigma W a))
-    g
-    b alpha;
-
-// Whole universal lift, retaining action on higher cone arrows.
+// Whole universal lift, retaining action on higher Hom arrows.
 symbol pullback_lift_func
   [C : Cat]
   (PB : τ (@PullbackStructure C))

@@ -4,7 +4,8 @@ Date: 2026-08-28 (America/Toronto)
 
 Plan-ID: `PULLBACKS-SLICE-BASE-CHANGE-COMPUTATION-V3.2`
 
-Status: **complete at local closeout checkpoint `d572193`**.
+Status: **complete strict-computational correction from checkpoint `e9ac7e6`;
+validated for a local checkpoint**.
 
 Branch: `goal/pullback-computation-v3.2`
 
@@ -25,7 +26,8 @@ does not supersede generic family substitution `Pullback_catd`.
 
 Side-Task-Ledger: `PB-00`, `PB-SLICE-1`, `PB-DOMAIN-2`, `PB-STRUCT-3`,
 `PB-ADJ-4`, `PB-USABILITY-5`, `PB-CONE-6`, `PB-TRIANGLE-7`, `PB-PSEUDO-8`,
-`PB-COMPAT-9`, `PB-DOC-10`, and `PB-CLOSE-11`.
+`PB-COMPAT-9`, `PB-DOC-10`, `PB-CLOSE-11`, `PB-RUNTIME-12`,
+`PB-SIGMA-13`, `PB-NOCONE-14`, and `PB-RECLOSE-15`.
 
 Infinity-Codex-Origin: session `01a02f68-6142-7e53-993a-4505aa8e2cbe`,
 review response `0028_2026-08-28T07-43-06Z_01a04745-7f87-7750-a3e1-2bdea720554d.md`.
@@ -64,6 +66,19 @@ pullbacks exist.
 TypeScript macros, metaprogramming, surface declaration automation, free
 pullback syntax, a global commuting decision procedure, and publication are
 outside this goal.
+
+The 2026-08-28 continuation adds one overriding computational constraint:
+the primary notion of cone is the internal hom object
+`Hom_{C/Y}(Σ_f(a),g)`. The pullback theory must not introduce a cone record
+whose fields manually store a strict, pseudo, or lax commuting square. A
+semantic adapter may consume equality/cell evidence later, but such evidence
+is not primary pullback syntax.
+
+The implemented correction makes the same distinction at the generic Sigma
+boundary. Slice objects and slice arrows now use transparent observations of
+one arbitrary-object/arrow Sigma facade. The pullback module consumes those
+existing slice arrows; it does not reconstruct or store their component
+triangle as pullback data.
 
 ## Reviewed Conclusion
 
@@ -115,19 +130,17 @@ identity functor:
 CommaFib_catd(id_C)[Y] = C/Y.
 ```
 
-Its base-arrow action is postcomposition, hence `Sigma_f`. The first probe
-must determine whether the following selected presentation is definitionally
-usable at fibre and action positions:
+Its base-arrow action is postcomposition, hence `Sigma_f`. The implemented
+presentation is definitionally usable at fibre and action positions:
 
 ```text
 SliceSigma_catd(C) ≡ CommaFib_catd(id_C).
 ```
 
-If a canonical projection order prevents that exact presentation from
-typing, use the existing transparent
-`Op_catd(arrow_into_catd(C))`/`Op_func(into_restr_postcompose_func(f))`
-route. Do not introduce two runtime owners for the same covariant slice
-action.
+The existing transparent
+`Op_catd(arrow_into_catd(C))`/`Op_func(into_restr_postcompose_func(f))` route
+is its canonical reduced action; no second covariant slice-action owner was
+introduced.
 
 Three existing notions must remain distinct:
 
@@ -136,19 +149,60 @@ Three existing notions must remain distinct:
    pullbacks in the base category.
 2. `SliceBaseChange_catd(PB)` is the new chosen categorical base-change
    family whose action sends an arrow over `Y` to its pullback over `X`.
-3. `homd_int` classifies dependent triangles/higher cells used inside slice
-   arrows and pullback cones; it is not itself the choice of a pullback.
+3. `homd_int` classifies the dependent higher component already internal to a
+   generic Sigma/slice arrow; it is not a pullback cone field and is not itself
+   the choice of a pullback.
 
-The generic whole `slice_domain_func : C/Y → C` currently lives too far
-downstream in the commutative-algebra restriction module. The preferred
-dependency correction is to move or factor the rule-free generic domain
-functor into the slice/presheaf layer, preserving its exact body and all
-downstream consumers. A temporary raw projection in the new module is allowed
-only if that refactor would materially widen the initial tranche.
+The generic whole `slice_domain_func : C/Y → C` was factored from the
+commutative-algebra restriction module into the slice/presheaf layer,
+preserving its whole body and downstream consumers.
+
+## Implemented Generic Sigma Correction
+
+The first checkpoint used slice-specific stable record projections because an
+arbitrary object or arrow of `Sigma_cat(E)` did not expose its raw
+`Struct_sigma` representation. That workaround has been replaced at the
+generic owner in `emdash3_2.lp`:
+
+- `sigma_obj_base` and `sigma_obj_fibre` are transparent observations of an
+  arbitrary total object;
+- `sigma_arrow_intro` is the stable arbitrary-endpoint constructor needed
+  when `Hom(Sigma_cat(E),q,r)` cannot reduce through variable endpoints;
+- `Sigma_proj1_func` and `sigma_arrow_fibre` expose its two arrow components;
+- composition of two such constructors computes at the guarded
+  `Sigma_cat(E)` owner; and
+- the constant-family specialization has one post-projection instance after
+  `Sigma_cat(Const(A))` has become `Product_cat`.
+
+The category guard on generic constructor composition is essential. A
+category wildcard incorrectly let the forward Sigma law match composition in
+`Op_cat(Sigma_cat(E))` before the opposite-category reversal. The guarded law
+and a durable conventional-slice composition consumer now enforce the correct
+order: reverse through `Op` first, then compose in Sigma. `Terminal_cat` no
+longer overlaps that law.
+
+The older transparent `sigma_arrow` remains the raw constructor-visible
+encoding. `sigma_arrow_fibre` retains its raw beta, but there is deliberately
+no runtime fold from a literal `sigma_arrow_intro` to `sigma_arrow`: that fold
+creates mixed raw/stable composition peaks. Both constructors have their own
+intended projection computations, and arbitrary arrow eta remains absent.
+
+Generic Sigma-map object action uses the stable point `sigma_map_obj`.
+Literal action and both total-object projections compute; one proof-time
+comparison relates it to whole `fapp0(sigma_map_func,–)`. The pullback module
+adds only the narrower runtime projection for the canonical represented
+postcomposition action. Consequently `slice_sigma_obj` preserves the domain
+and postcomposes the structure arrow definitionally, and every former
+`path_to_hom` domain/square recentering operation has been removed.
+
+The conventional slice observations and `slice_arrow_intro` are now
+transparent aliases of this generic Sigma facade. No slice-specific record
+theory or arbitrary-arrow eta remains.
 
 ## Selected Enhanced Interface
 
-Provisional declarations are:
+The selected declarations are summarized below; the active source owns their
+exact Lambdapi spelling:
 
 ```lambdapi
 symbol SliceSigma_catd (C : Cat) : τ (Catd C)
@@ -302,34 +356,23 @@ Write its domain as `P`. Then:
 - `π₁ : P → X` is the structure arrow of the slice object `f*(g)`;
 - `π₂ : P → Z` is the ambient-domain projection of the counit component
   `ε_g : Σ_f(f*(g)) → g` in `C/Y`; and
-- the commuting square `f ∘ π₁ = g ∘ π₂` is extracted from that slice arrow,
-  not postulated as an unrelated path.
+- the internal square `g ∘ π₂ ⇒ f ∘ π₁` is projected from that
+  slice arrow, not stored or postulated as unrelated pullback data.
 
 For a cone
 
 ```text
-a : W → X
-b : W → Z
-q : f ∘ a = g ∘ b,
+h : Hom_{C/Y}(Σ_f(a),g),
 ```
 
-constructor-visible Sigma/homd data form a slice arrow
+its adjoint transpose is
 
 ```text
-b̄ : Σ_f(a) → g.
-```
-
-Its adjoint transpose is
-
-```text
-f*(b̄) ∘ η_a : a → f*(g)
+f*(h) ∘ η_a : a → f*(g)
 ```
 
 in `C/X`. Applying the whole slice-domain functor gives the ambient mediator
-
-```text
-⟨a,b;q⟩_pb : W → P.
-```
+from `domain(a)` to `P`.
 
 The primary transpose must remain whole in the cone arrow and retain higher
 action. A bare primitive point `pullback_lift(a,b,q)` is not an accepted
@@ -343,16 +386,16 @@ The generic adjunction triangles yield the primary strict computation in the
 whole slice hom categories:
 
 ```text
-untranspose(transpose(b̄)) ↪ b̄
+untranspose(transpose(h)) ↪ h
 transpose(untranspose(k))  ↪ k.
 ```
 
-Stable slice-arrow projections do not obstruct these reductions. Hence the
-underlying second leg and directed cone cell of
-`untranspose(transpose(b̄))` reduce to the corresponding projections of
-`b̄`; a constructor-visible ambient cone recovers its supplied `b` and
-`q` directly. Conversely, transposing the cone induced by a slice lift reduces
-to that lift, which is the internal uniqueness computation.
+Generic Sigma-backed slice-arrow projections do not obstruct these
+reductions. Hence the underlying second leg and higher component of
+`untranspose(transpose(h))` reduce to the corresponding observations of the
+same existing arrow `h`. Conversely, transposing the arrow induced by a slice
+lift reduces to that lift, which is the internal uniqueness computation. No
+pullback-specific constructor accepts either observation as input.
 
 The ambient interpretation must respect the repository's higher-categorical
 slice encoding. A morphism in `C/X` contains a directed triangle rather than a
@@ -360,17 +403,24 @@ postulated strict equality. Accordingly the first projection result is the
 retained cell
 
 ```text
-π₁ ∘ lift(b̄) ⇒ arrow(a),
+π₁ ∘ lift(h) ⇒ arrow(a),
 ```
 
 exposed by `pullback_lift_fst_cell`. The second result is the whole recovered
-cone and its two stable projections. Raw ambient composites
-`π₁ ∘ lift(b̄)` and `π₂ ∘ lift(b̄)` deliberately do not
+Hom arrow and its generic Sigma projections. Raw ambient composites
+`π₁ ∘ lift(h)` and `π₂ ∘ lift(h)` deliberately do not
 rewrite to bare arrows in an arbitrary emdash category: such rules would erase
-the directed higher cells and silently strengthen a lax/internal pullback to a
-strict one. A locally discrete adapter may later turn these retained cells
-into ordinary categorical equalities when the required discreteness evidence
-is supplied.
+the directed higher cells and silently replace the internal higher-categorical
+observation by a 1-categorical equality. A locally discrete adapter may later
+turn these retained cells into ordinary categorical equalities when the
+required discreteness evidence is supplied.
+
+Thus the selected computation is strict at its actual internal owner: the two
+Hom-category mate cancellations are runtime reductions, and the Sigma domain
+and structure observations are definitional. This does not mean that the
+first higher arrow of an arbitrary ambient emdash category is definitionally
+an equality. The derived square cell belongs to that ambient category; it is
+not a lax/pseudo/strict square field of a pullback cone record.
 
 The stable mate heads remain propositionally connected to the explicit
 unit/counit composites by non-opaque typed-reflexivity paths. Those paths are
@@ -378,13 +428,14 @@ the theorem-level route for consumers that need the semantic
 `f*[h] ∘ η` or `ε ∘ Σ_f[k]` presentation; they do not introduce a runtime
 fold.
 
-If a stable projected head is required, the pullback-specific rules above are
-the only expected new semantic runtime family. Naturality in cone arrows,
-identity/composition of `f*`, and composition of transposes remain generic.
-Do not add a pullback rule whose only content is ordinary functoriality or
-adjunction naturality.
+Outside the stable mate triangles, the only pullback-specific runtime
+projection is canonical represented postcomposition from whole Sigma action to
+`slice_sigma_obj`; the remaining object/arrow laws belong to generic Sigma.
+Naturality in Hom arrows, identity/composition of `f*`, and composition of
+transposes remain generic. Do not add a pullback rule whose only content is
+ordinary functoriality or adjunction naturality.
 
-An `IsContr` factorization category recentered at the selected mediator or a
+An `IsContr` factorization category centred at the selected mediator or a
 terminal-object presentation of the cone category is a valuable semantic
 verification layer. It does not replace the whole computational transpose.
 
@@ -395,17 +446,18 @@ verification layer. It does not replace the whole computational transpose.
 | Raw `Hom(X,-)` with a second variance | Rejected as primary: it cannot choose the new pullback domain. |
 | Per-arrow `Adjunction(Sigma_f,F)` | Minimal semantic probe/fallback; useful but not the final coherent whole interface. |
 | Binary products in every slice `C/Y` | Equivalent compatibility theorem and possible adapter; not the first owner of `f*`. |
-| Terminal object in a cospan-cone category | Semantic verification/contractibility view; cone-category infrastructure is heavier. |
+| Pullback-specific cospan/cone record with a square field | Rejected: the internal Hom arrow is already the commuting triangle. |
+| Terminal object in a separately assembled cospan category | Later semantic verification/contractibility view only; it must derive from the internal Hom presentation. |
 | Primitive cospan category and pullback-object functor | Possible later internalization, but unnecessary before the requested base-change action. |
 | Bare primitive projections/lift | Rejected as primary because it caps higher action; allowed only as projections of whole owners. |
 | Existing `Pullback_catd(E,F)` | Preserved as generic family substitution, a distinct construction. |
 
 For locally discrete categories, the selected slice construction specializes
 to ordinary categorical pullbacks. For a general emdash category, the existing
-slice/comma totals retain directed higher cells; the feature is therefore a
-chosen higher/lax base-change structure. Any later strict, pseudo, or
-groupoidal pullback profile must be named explicitly rather than silently
-conflated.
+slice/comma totals retain directed higher cells; the feature is a chosen
+internal base-change structure in that ambient category. Later comparison
+with 1-categorical, pseudo, or groupoidal semantic presentations must be named
+explicitly and must not add a square field to the primary cone syntax.
 
 ## Products, Terminal Objects, Weighted Limits, And Duality
 
@@ -521,16 +573,20 @@ green.
 | --- | --- | --- |
 | `PB-00` | complete | Dedicated branch/worktree created from exact integrated baseline; bootstrap and clean-state preflight pass; this plan is the living authority. |
 | `PB-SLICE-1` | complete, checkpoint `a055eb0` | `SliceSigma_catd(C)` is the existing `CommaFib_catd(id_C)` owner. Exact fibre, capped/full action, canonical postcomposition, and constructor-object probes are green without a duplicate runtime owner. |
-| `PB-DOMAIN-2` | complete, checkpoint `a055eb0` | Generic whole slice-domain functors were factored into `emdash3_2_presheaves.lp`; stable object, structure-arrow, ambient-arrow, and directed-cell projections plus the stable slice-arrow constructor are green. The downstream commutative-algebra duplicates were removed. |
+| `PB-DOMAIN-2` | corrected after checkpoint `e9ac7e6` | Generic whole slice-domain functors remain factored into `emdash3_2_presheaves.lp`; the former slice-specific stable record surface has been replaced by transparent consumers of the generic arbitrary-object/arrow Sigma facade. The downstream commutative-algebra duplicates remain removed. |
 | `PB-STRUCT-3` | complete, checkpoint `a055eb0` | `PullbackStructure(C)` owns one whole `SliceBaseChange_catd(PB):Catd(Op C)` with exact `Slice_cat` fibres and generic retained higher action. |
 | `PB-ADJ-4` | complete, checkpoint `a055eb0` | Every internal `f:X→Y` supplies the existing `Adjunction(Σ_f,f*)`; readable unit/counit and component observations use the generic authority. |
 | `PB-USABILITY-5` | complete implementation | Stable whole/point mate heads retain triangle discriminators. Two narrow proof-time rules identify their points with explicit unit/counit semantics; both non-opaque semantic paths are typed reflexivity and runtime remains distinct. |
-| `PB-CONE-6` | complete, checkpoint `a055eb0` | Pullback slice object/domain, two projections, native/readable square, whole cone category, constructor-visible ambient cone, whole transpose/inverse, slice lift, ambient mediator, and first directed projection cell are implemented. |
-| `PB-TRIANGLE-7` | complete implementation | Both whole slice cancellations and both stable record projections are green. Literal cone arrow/cell recovery and uniqueness compute. Raw ambient 1-arrow collapses are registered negatives because the internal slice stores directed triangles; no pullback-specific runtime join is warranted. |
+| `PB-CONE-6` | corrected after checkpoint `e9ac7e6` | Pullback slice object/domain, two projections, derived square, whole Hom cone category, whole transpose/inverse, slice lift, ambient mediator, and first directed projection cell are implemented. The former pullback-specific cone constructors are removed. |
+| `PB-TRIANGLE-7` | complete implementation | Both whole slice cancellations and the generic Sigma-backed slice projections are green. Recovery and uniqueness compute on an arbitrary existing Hom object. Raw ambient 1-arrow collapses remain registered negatives because the internal slice stores directed higher arrows; no pullback-specific runtime join is warranted. |
 | `PB-PSEUDO-8` | complete classification | Identity, composition, and higher action are retained by the one whole `Catd(Op C)` owner. No strictness claim or Gray-only pseudo-property dependency is added; an explicit invertible compositor certificate remains consumer-gated. |
 | `PB-COMPAT-9` | complete classification | Products-in-slices, terminal-derived products, weighted pullbacks, opposite pushouts, `Π_f`, Beck–Chevalley, and Frobenius remain assumption-explicit later consumers. No concrete canonical-choice comparison is available in this tranche, so none is postulated. |
-| `PB-DOC-10` | complete | Thirteen central checks and the 27-assert `examples/pullbacks.lp` reviewer cover the selected positive/negative boundary. Foundations, canonical syntax, SOP, AGENTS authority order, report index, source registries, 2,336-check/115-area catalog, and source-only health report are synchronized. |
+| `PB-DOC-10` | superseded by `PB-RECLOSE-15` | The checkpoint documentation/catalog described the former slice-record and literal-cone workaround. The correction tranche updates the same authorities and focused reviewers before a new closeout. |
 | `PB-CLOSE-11` | complete, checkpoint `d572193` | Focused sources/reviewer, the affected moved-definition downstream module/example, central diagnostics, exact `1116/159` warnings, empty strict audits, catalog/health/document/script/diff hygiene, and worktree bootstrap are green. The validated implementation/documentation tranche is locally checkpointed. |
+| `PB-RUNTIME-12` | complete implementation | `sigma_map_obj` owns arbitrary-point action, agrees with whole Sigma action at proof time, and has literal/base/fibre runtime observations. One narrow represented-postcomposition projection makes `slice_sigma_obj` preserve domains and postcompose structure arrows definitionally. Every pullback `path_to_hom` recentering helper is removed. |
+| `PB-SIGMA-13` | complete implementation | Generic `sigma_obj_base`, `sigma_obj_fibre`, `sigma_arrow_intro`, and `sigma_arrow_fibre` replace the slice-specific record workaround. Sigma composition is guarded against `Op`; the constant-family `Product_cat` post-projection instance is executable; raw fibre projection remains; arbitrary eta and a mixed raw/stable literal fold are absent. |
+| `PB-NOCONE-14` | complete implementation | `pullback_cone_cat` is exactly the internal Hom category. Both pullback-specific constructors that manually accepted a commuting cell/path are removed, and whole lift consumes an existing Hom object directly. |
+| `PB-RECLOSE-15` | complete validation | Authority claims and focused generic-Sigma/slice/pullback consumers are synchronized. The final `1117/157` warning inventory is classified, strict audits are clean, the 2,338-check/115-area catalog and source-only health report are fresh, and proportional closeout is green for the containing local checkpoint. |
 
 ## Decision Ledger
 
@@ -545,11 +601,16 @@ green.
 | `D-PB-007` | accepted | Generic `Pullback_catd` family substitution remains distinct in name and ownership from categorical slice base change. |
 | `D-PB-008` | accepted | Do not require strict base-change functoriality; retain current whole higher action and classify pseudo coherence separately. |
 | `D-PB-009` | accepted | Products-in-slices, terminal-derived products, weighted limits, and pushout duality are compatibility consumers after the primary calculus. |
-| `D-PB-010` | accepted | Arbitrary slice objects/arrows do not Sigma-expand. Stable object-domain, structure-arrow, ambient-arrow, directed-cell, and constructor heads are the minimal reusable record boundary; semantic whole projections agree at proof time and no arbitrary eta is installed. |
+| `D-PB-010` | superseded correction | Arbitrary slice objects/arrows do not Sigma-expand, but their reusable boundary belongs at generic Sigma. Slice object/domain/arrow observations and introduction are transparent consumers of `sigma_obj_base`, `sigma_obj_fibre`, `sigma_arrow_intro`, and `sigma_arrow_fibre`; no slice-specific record theory or arbitrary eta is installed. |
 | `D-PB-011` | accepted | Stable whole mate functors and point heads are necessary post-projection instances of the existing adjunction computation. Their direct cancellations are runtime rules; semantic agreement is proof-time and exposed by non-opaque typed-reflexivity paths. |
-| `D-PB-012` | accepted | The internal universal property is the whole hom-category equivalence `Hom_{C/Y}(Σ_f a,g) ⇄ Hom_{C/X}(a,f*g)`. Cone recovery and uniqueness compute strictly at that owner and under stable record projections. |
+| `D-PB-012` | accepted | The internal universal property is the whole hom-category equivalence `Hom_{C/Y}(Σ_f a,g) ⇄ Hom_{C/X}(a,f*g)`. Recovery and uniqueness compute strictly at that owner and under generic Sigma-backed slice projections. |
 | `D-PB-013` | accepted | In an arbitrary emdash category, pullback projection laws retain directed cells. Raw `πᵢ ∘ lift` to bare-arrow rewrites are false runtime expectations and would impose unrequested strictness; no such join is promoted. |
 | `D-PB-014` | accepted | Generic whole functoriality supplies current base identity/composition/higher action. Explicit pseudo invertibility and every product/weighted/dual/dependent comparison remain later assumption-explicit consumers. |
+| `D-PB-015` | accepted and implemented | A pullback cone is an arrow in the internal Hom category, never a pullback-specific record carrying a manually supplied commutativity equality/cell. `pullback_cone_intro` and `pullback_cone_constructor` are removed. |
+| `D-PB-016` | accepted and implemented | Propositional domain/square recentering is not an acceptable primary computational normal form when runtime Sigma action can expose the same endpoint. All pullback recentering paths are removed. Warnings remain diagnostic; subject reduction and typed reduction-order joins decide promotion. |
+| `D-PB-017` | accepted | Strict computation means runtime beta/eta at the whole internal Hom equivalence and definitional Sigma observations. The ambient higher square is derived from an existing slice arrow, not stored as a lax/pseudo/strict field. Univalence may compare later semantic structures but is not needed for this primary computation. |
+| `D-PB-018` | accepted | Generic `sigma_arrow_intro` composition must discriminate on `Sigma_cat(K,E)`. A category wildcard is invalid because it matches `Op_cat` before variance reversal. Constant-family reduction is handled by one explicit `Product_cat` post-projection instance. |
+| `D-PB-019` | accepted | The stable arbitrary-endpoint Sigma constructor and raw constructor-visible `sigma_arrow` remain distinct runtime forms. Both project computationally; a literal fold is rejected because it produces mixed raw/stable composition peaks. Arbitrary arrow eta remains absent. |
 
 ## Implementation Checkpoints
 
@@ -564,10 +625,15 @@ green.
   it adds explicit mate-semantic paths, the complete reviewer and central
   diagnostics, warning-neutral SOP cleanup, authority prose, registrations,
   catalog, and source-only health synchronization.
+- The containing local checkpoint records `PB-RUNTIME-12` through
+  `PB-RECLOSE-15`: generic Sigma ownership replaces the slice-record
+  workaround, all pullback recentering and cone-constructor code is removed,
+  and the corrected scoped evidence below is synchronized.
 
-## Scoped Closeout Evidence
+## Prior Checkpoint Evidence
 
-The final implementation boundary has the following current evidence:
+Checkpoint `d572193` had the following evidence for the now-superseded first
+implementation shape:
 
 - `emdash3_2_presheaves.lp`, `emdash3_2_pullbacks.lp`, and
   `examples/pullbacks.lp` pass focused Lambdapi checking under the uniform
@@ -599,6 +665,43 @@ all-example sweep, health resume, or repository-wide CI run. No changed
 cross-layer/release boundary requires those aggregates; the affected central
 diagnostics and downstream consumer have been checked directly.
 
+## Strict-Computational Correction Evidence
+
+The completed correction has the following proportional evidence:
+
+- the active kernel, presheaf substrate, pullback module, and focused
+  `sigma_total`, `presheaf_facade`, and `pullbacks` reviewers pass under the
+  uniform 90-second ceiling;
+- a guarded owner-position Sigma probe passes quiet checking, with the generic
+  composition law no longer matching either `Op_cat` or `Terminal_cat`;
+- the conventional-slice composition reviewer confirms that opposite reversal
+  precedes forward Sigma composition;
+- the warning-enabled kernel, presheaf, and pullback-module inventories are
+  all
+  `1274 = 1117 unjoinable-critical-pair reports + 157 replaceable-variable
+  reports`. Relative to checkpoint `d572193`'s `1116/159`, the correction adds
+  one report: generic Sigma-constructor composition versus the earlier
+  constant-family total-to-product fold. The later explicit `Product_cat`
+  instance is exercised by a typed reviewer and closes the canonical
+  post-projection term. The invalid `Op_cat` and `Terminal_cat` overlaps of the
+  category-wildcard experiment are absent;
+- the active generic Sigma/presheaf/pullback LHS audits have no unreviewed
+  candidates (`63` annotated slots across `38` intentional kernel clauses);
+- the affected central diagnostics pass and the fresh strict catalog contains
+  2,338 classified checks across 115 areas, including 15 pullback checks, with
+  zero unclassified statements;
+- the moved slice substrate still passes through the directly affected
+  commutative-ringed-space restriction owner and reviewer;
+- source-only health metadata is fresh for 326 registered files at snapshot
+  `sha256:4cc54a5084388daf8533e51d1a0631b56c75be0089344cc18913d5f988e3053c`;
+  and
+- source TOC, active-reference lint, current-plan headers, 17 relevant Python
+  tests, catalog/health freshness, and exact diff hygiene pass.
+
+Per the user's scoped-validation policy, this closeout does not run the
+unrelated all-source check, all-example sweep, health resume, repository-wide
+CI, print, or book aggregates.
+
 ## Required Positive Evidence
 
 At minimum, durable checks must establish:
@@ -614,11 +717,13 @@ At minimum, durable checks must establish:
 - required semantic/stable spellings type by `eq_refl` through selected
   usability rules while remaining runtime distinct;
 - the chosen pullback object's domain and first projection compute;
-- the second projection is derived from the counit and whole domain action;
+- whole Sigma postcomposition projects to the stable arbitrary-object point,
+  whose domain and structure arrow compute without equality transport;
+- the second projection is derived directly from the counit and generic Sigma
+  observations;
 - the square is projected from the slice arrow;
 - the cone transpose/mediator types and retains higher action;
-- both pullback beta laws and eta/uniqueness compute or have precisely
-  classified derived paths; and
+- both pullback beta laws and eta/uniqueness compute at the Hom owner; and
 - locally discrete/closed examples reject false endpoint or variance
   identifications.
 
@@ -631,12 +736,14 @@ Durable negatives must reject at least:
 - arbitrary `SliceBaseChange_catd(PB)` fibres collapsing without the structure
   head;
 - proof-time usability becoming a runtime fold;
+- a pullback-specific cone constructor accepting a square witness;
 - generic base-change action collapsing to identity or composition by a
   pullback-specific rule;
 - a point lift replacing its whole transpose/hom action;
 - direct equality of independently selected product and pullback-derived
   product functors;
-- strict/pseudo/groupoidal pullbacks being silently conflated; and
+- the ambient higher square being replaced by a stored strict/pseudo/lax cone
+  field; and
 - `Pi_f`, Beck--Chevalley, Frobenius, or pushout computation being claimed by
   the first tranche.
 
@@ -670,9 +777,12 @@ The first computational pullback tranche is complete only when:
   runtime heads;
 - pullback object, projections, square, whole transpose, and mediator are
   internal constructions;
+- the primary cone is only `Hom_{C/Y}(Σ_f(a),g)`, with no pullback-specific
+  record or constructor carrying a square;
 - beta/eta reach their intended canonical terms through generic triangles or
   narrowly justified projection instances;
-- no hidden propositional bridge substitutes for a feasible definitional
+- generic Sigma and canonical `Σ_f` domain/structure observations compute,
+  and no hidden propositional bridge substitutes for that definitional
   fibre/action boundary;
 - warnings and strict-LHS findings are classified;
 - authorities, checks, reviewer, catalog, and health registrations agree; and

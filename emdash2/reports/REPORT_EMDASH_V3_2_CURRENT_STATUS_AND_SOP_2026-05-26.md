@@ -103,12 +103,16 @@ detailed probe evidence.
   arrow carrying the existing adjunction `Σ_f⊣f*`. Stable whole mate
   functors and point heads retain the two triangle cuts after projection;
   narrow proof-time rules and non-opaque typed-reflexivity paths relate them
-  to explicit unit/counit semantics while runtime stays distinct. The
-  pullback object, projections, directed square, whole cone category, literal
-  cone constructor, universal lift, and uniqueness are derived from that
-  adjunction. Raw ambient projection composites do not collapse to bare
-  arrows in an arbitrary higher category: the first law is a retained
-  directed slice cell and the second computes through whole cone recovery.
+  to explicit unit/counit semantics while runtime stays distinct. Generic
+  arbitrary-object/arrow Sigma observations replace the former slice-specific
+  record surface; canonical represented postcomposition computes the
+  `Σ_f` domain and structure arrow without equality transport. The pullback
+  object, projections, derived directed square, exact Hom cone category,
+  universal lift, and uniqueness are derived from that adjunction. No
+  pullback-specific cone constructor accepts a square witness. Raw ambient
+  projection composites do not collapse to bare arrows in an arbitrary higher
+  category: the first law is a retained directed slice cell and the second
+  computes through whole Hom recovery.
   Generic family substitution `Pullback_catd` remains a separate owner;
   explicit pseudo invertibility, products-in-slices, weighted pullbacks,
   pushout duality, `Π_f`, Beck–Chevalley, and Frobenius are later

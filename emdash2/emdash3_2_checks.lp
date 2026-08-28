@@ -27215,6 +27215,35 @@ assert [C : Cat]
   ≡ @Slice_cat C X;
 
 assert [C : Cat]
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X))) ⊢
+  @fapp0
+    (@Slice_cat C X)
+    (@Slice_cat C Y)
+    (@slice_sigma_func C X Y f)
+    a
+  ≡ @slice_sigma_obj C X Y f a;
+
+assert [C : Cat]
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X))) ⊢
+  @slice_object_domain C Y (@slice_sigma_obj C X Y f a)
+  ≡ @slice_object_domain C X a;
+
+assert [C : Cat]
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X))) ⊢
+  @slice_object_arrow C Y (@slice_sigma_obj C X Y f a)
+  ≡ @hom_postcomp_fapp0
+      C C (@id Cat_cat C)
+      (@slice_object_domain C X a)
+      X Y f
+      (@slice_object_arrow C X a);
+
+assert [C : Cat]
   (PB : τ (@PullbackStructure C))
   (X : τ (Obj C)) ⊢
   @fapp0 (Op_cat C) Cat_cat (@SliceBaseChange_catd C PB) X
@@ -27317,24 +27346,6 @@ assert [C : Cat]
       (Hom_cat C (@pullback_domain C PB X Y f g) Y)
       (@pullback_square_readable_source C PB X Y f g)
       (@pullback_square_readable_target C PB X Y f g));
-
-assert [C : Cat]
-  (W X Y : τ (Obj C))
-  (f : τ (Hom C X Y))
-  (a : τ (Hom C W X))
-  (g : τ (Obj (@Slice_cat C Y)))
-  (b : τ (Hom C W (@slice_object_domain C Y g)))
-  (alpha : τ (Hom
-    (Hom_cat C W Y)
-    (@comp_fapp0 C W (@slice_object_domain C Y g) Y
-      (@slice_object_arrow C Y g) b)
-    (@comp_fapp0 C W X Y f a))) ⊢
-  @slice_arrow_underlying
-    C Y
-    (@slice_sigma_obj C X Y f (Struct_sigma W a))
-    g
-    (@pullback_cone_constructor C W X Y f a g b alpha)
-  ≡ b;
 
 assert [C : Cat]
   (PB : τ (@PullbackStructure C))

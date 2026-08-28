@@ -5208,6 +5208,15 @@ translation boundary explicit.
 
 ### Chosen pullbacks as internal slice base change
 
+The generic Sigma total now exposes transparent base/fibre observations of an
+arbitrary object, a stable arbitrary-endpoint arrow constructor, and base/
+fibre observations of such arrows. Constructor composition is guarded by the
+actual `Sigma_cat` source so that an opposite slice reverses composition
+before applying the forward Sigma law. A constant-family post-projection
+instance retains the same computation after the total has become an ordinary
+product. Conventional slice observations are transparent consumers of this
+generic calculus; they are not a parallel slice-record theory.
+
 The pullback layer applies the indexed-adjunction discipline to the whole
 family of conventional slices. Every category already has covariant
 postcomposition:
@@ -5254,9 +5263,11 @@ For `f:X→Y` and a slice object `g:Z→Y`, the selected pullback object is
 ```
 
 supplies `π₂:P→Z` and the directed commuting square. The apparent
-domain mismatch between `P` and the domain of `Σ_f(f*(g))` is handled by
-explicit non-opaque recentering paths derived from the whole slice-domain
-functor; no arbitrary Sigma eta or equality axiom is installed.
+domain mismatch between `P` and the domain of `Σ_f(f*(g))` is absent from
+the selected normal form: generic Sigma-map action preserves the first
+projection definitionally. Its second projection computes to postcomposition,
+so neither projection nor square uses equality transport. No arbitrary Sigma
+eta or equality axiom is installed.
 
 For a slice object `a` over `X`, the whole cone category is
 
@@ -5264,16 +5275,17 @@ For a slice object `a` over `X`, the whole cone category is
 Cone_f(a,g) = Hom_{C/Y}(Σ_f(a),g).
 ```
 
-A literal ambient cone `a:W→X`, `b:W→Z`, and directed cell
-`g∘b ⇒ f∘a` packages as an object of this hom category. Adjunction
-transpose gives the universal slice lift
+An object `h` of this Hom category already is the internally commuting
+triangle. There is no pullback-specific record or constructor that separately
+stores two legs and a strict, pseudo, or lax square. Adjunction transpose gives
+the universal slice lift
 
 ```text
 transpose : Cone_f(a,g) → Hom_{C/X}(a,f*(g)),
 ```
 
-and its underlying ambient arrow is the mediator `W→P`. The inverse is
-adjunction untranspose. Both are whole functors, so higher cone arrows remain
+and its underlying ambient arrow is the mediator `domain(a)→P`. The inverse is
+adjunction untranspose. Both are whole functors, so higher Hom arrows remain
 available, and the computational universal property is
 
 ```text
@@ -5281,9 +5293,9 @@ untranspose(transpose(h)) → h
 transpose(untranspose(k)) → k.
 ```
 
-Stable ambient-arrow and directed-cell projections do not obstruct the first
-reduction: a literal cone recovers both `b` and its supplied square cell. The
-first projection of a lift is the retained directed triangle
+Generic Sigma-backed ambient-arrow and higher-component projections do not
+obstruct the first reduction: recovery observes the same existing Hom arrow
+`h`. The first projection of a lift is the retained directed triangle
 
 ```text
 π₁ ∘ lift(h) ⇒ arrow(a).
@@ -5294,8 +5306,16 @@ slice: its morphisms carry higher cells, not postulated strict equations.
 Consequently the theory does not rewrite the raw composites
 `π₁∘lift(h)` or `π₂∘lift(h)` to bare ambient arrows for arbitrary
 `C`. Such a rule would erase the higher witness and silently strengthen the
-selected lax/internal pullback. Locally discrete consumers may derive the
+internal observation to a 1-categorical equality. Locally discrete consumers may derive the
 ordinary 1-categorical equalities from supplied discreteness evidence.
+
+The selected pullback computation is nevertheless strict at its actual
+internal owner: both mate cancellations are runtime reductions, and the Sigma
+domain/structure observations are definitional. The directed square above is
+an observation of the ambient higher category, not a lax/pseudo/strict field
+stored in a cone. Univalence may support later comparisons between selected
+semantic structures, but no univalence transport is needed for this primary
+calculus.
 
 The stable transpose and untranspose heads are related to the explicit
 `f*[h]∘η` and `ε∘Σ_f[k]` presentations by narrow proof-time usability
@@ -6577,6 +6597,9 @@ kernel and one-way library vocabulary.
 | `const_section_{K,A}(p)` | `Const_transfd K A p` |
 | `Σ_k E[k]` | `Sigma_cat E` |
 | `(k,u)` | `Struct_sigma k u` |
+| arbitrary total-object projections | `sigma_obj_base q` / `sigma_obj_fibre q` |
+| arbitrary-endpoint total arrow `(p,α)` | `sigma_arrow_intro q r p alpha` |
+| fibre component of a total arrow | `sigma_arrow_fibre h` |
 | `Σ_A(F^*D) → Σ_K D` | `sigma_pullback_total_func F D` |
 | `{src,dst : A; witness : src = dst}` | `PathRecord_grpd A` / `Struct_path_record` |
 | shaped paths of dependent records | `PathRecordPathView A r s` / `PathRecordPathRefl A r` |

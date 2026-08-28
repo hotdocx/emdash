@@ -2146,6 +2146,13 @@ covariant family; `SliceBaseChange_catd(PB)` is the selected whole
 contravariant family supplied by `PB : PullbackStructure(C)`. Both have exact
 fibre `C/X = Slice_cat(C,X)`.
 
+For an arbitrary total object `q : Σ_k E[k]`, the kernel observations
+`sigma_obj_base(q)` and `sigma_obj_fibre(q)` may be printed as `q.1` and
+`q.2`. The generic arrow constructor `sigma_arrow_intro` may be written
+`(p,α) : q → r`; its base and fibre observations compute. This is generic
+Sigma syntax, not a pullback cone record. Composition in an opposite slice
+reverses before using the forward Sigma constructor law.
+
 For `g : Z → Y`, comments may write
 
 ```text
@@ -2156,8 +2163,9 @@ X ←π₁— P —π₂→ Z
 ```
 
 for `pullback_domain`, `pullback_fst`, and `pullback_snd`. The directed square
-owner is `pullback_square_readable_cell`; do not print it as a strict equality
-in an arbitrary emdash category.
+owner is `pullback_square_readable_cell`, projected from the counit slice
+arrow; it is not stored as a field. Do not print it as a strict equality in an
+arbitrary emdash category.
 
 For `a : Obj(C/X)`, use
 
@@ -2176,9 +2184,10 @@ lift_f(cone_f(k)) == k.
 ```
 
 Here `==` is justified by the active stable adjunction-triangle rules. A
-literal ambient cone `a:W→X`, `b:W→Z`, and `alpha:g ∘ b ⇒ f ∘ a` may be
-written `(a,b,alpha)` and is constructed by `pullback_cone_constructor`; its
-ambient-arrow and directed-cell projections compute to `b` and `alpha`.
+cone variable `h` is already an object of
+`Hom_{C/Y}(Σ_f(a),g)`, hence already an internal commuting triangle. Do not
+introduce or print a pullback-specific tuple `(a,b,α)` that stores a square;
+the removed `pullback_cone_constructor` is not part of the surface.
 
 The first ambient projection law is written
 
@@ -2192,6 +2201,11 @@ discrete/strict adapter: raw ambient composites deliberately remain runtime
 distinct. The stable mate operations have propositional semantic paths to
 `f^*[h] ∘ η` and `ε ∘ Σ_f[k]`; these paths are typed reflexivity
 through proof-time usability rules, not opaque equality bridges.
+
+Whole `Σ_f` action and `slice_sigma_obj` share the selected runtime point.
+Its domain is definitionally the domain of `a`, and its structure arrow
+computes to `f ∘ arrow(a)`; surface prose should not insert a recentering
+path or equality transport between those presentations.
 
 `Pullback_catd(E,F)` continues to mean substitution of a Cat-valued family
 along `F`. It is not notation for categorical pullback objects or `f^*`.

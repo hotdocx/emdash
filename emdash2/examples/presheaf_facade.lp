@@ -59,3 +59,93 @@ assert [A B : Cat]
       (Op_cat A)
       (@Pullback_catd (Op_cat A) (Op_cat B) P (@Op_func A B F))
       (@Pullback_catd (Op_cat A) (Op_cat B) Q (@Op_func A B F)));
+
+// Conventional slices are transparent opposite-Sigma consumers. This is the
+// generic slice-arrow constructor, not a pullback-specific cone record.
+assert [K : Cat]
+  (U : τ (Obj K))
+  (q r : τ (Obj (@Slice_cat K U)))
+  (p : τ (Hom K
+    (@slice_object_domain K U q)
+    (@slice_object_domain K U r)))
+  (alpha : τ (Hom
+    (Hom_cat K (@slice_object_domain K U q) U)
+    (@comp_fapp0 K
+      (@slice_object_domain K U q)
+      (@slice_object_domain K U r)
+      U
+      (@slice_object_arrow K U r)
+      p)
+    (@slice_object_arrow K U q))) ⊢
+  @slice_arrow_underlying K U q r
+    (@slice_arrow_intro K U q r p alpha)
+  ≡ p;
+
+assert [K : Cat]
+  (U : τ (Obj K))
+  (q r : τ (Obj (@Slice_cat K U)))
+  (p : τ (Hom K
+    (@slice_object_domain K U q)
+    (@slice_object_domain K U r)))
+  (alpha : τ (Hom
+    (Hom_cat K (@slice_object_domain K U q) U)
+    (@comp_fapp0 K
+      (@slice_object_domain K U q)
+      (@slice_object_domain K U r)
+      U
+      (@slice_object_arrow K U r)
+      p)
+    (@slice_object_arrow K U q))) ⊢
+  @slice_arrow_cell K U q r
+    (@slice_arrow_intro K U q r p alpha)
+  ≡ alpha;
+
+// Opposite-category composition reverses first, then the generic Sigma law
+// composes the ambient arrows in the conventional slice direction.
+assert [K : Cat]
+  (U : τ (Obj K))
+  (q r s : τ (Obj (@Slice_cat K U)))
+  (p : τ (Hom K
+    (@slice_object_domain K U q)
+    (@slice_object_domain K U r)))
+  (w : τ (Hom K
+    (@slice_object_domain K U r)
+    (@slice_object_domain K U s)))
+  (alpha : τ (Hom
+    (Hom_cat K (@slice_object_domain K U q) U)
+    (@comp_fapp0 K
+      (@slice_object_domain K U q)
+      (@slice_object_domain K U r)
+      U
+      (@slice_object_arrow K U r)
+      p)
+    (@slice_object_arrow K U q)))
+  (beta : τ (Hom
+    (Hom_cat K (@slice_object_domain K U r) U)
+    (@comp_fapp0 K
+      (@slice_object_domain K U r)
+      (@slice_object_domain K U s)
+      U
+      (@slice_object_arrow K U s)
+      w)
+    (@slice_object_arrow K U r))) ⊢
+  @slice_arrow_underlying K U q s
+    (@comp_fapp0
+      (@Slice_cat K U) q r s
+      (@slice_arrow_intro K U r s w beta)
+      (@slice_arrow_intro K U q r p alpha))
+  ≡ @comp_fapp0 K
+      (@slice_object_domain K U q)
+      (@slice_object_domain K U r)
+      (@slice_object_domain K U s)
+      w p;
+
+// Arbitrary slice arrows do not eta-expand to the generic constructor.
+assertnot [K : Cat]
+  (U : τ (Obj K))
+  (q r : τ (Obj (@Slice_cat K U)))
+  (h : τ (Hom (@Slice_cat K U) q r)) ⊢
+  @slice_arrow_intro K U q r
+    (@slice_arrow_underlying K U q r h)
+    (@slice_arrow_cell K U q r h)
+  ≡ h;
