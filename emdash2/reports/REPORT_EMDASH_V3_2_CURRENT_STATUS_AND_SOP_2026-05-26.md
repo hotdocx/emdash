@@ -105,10 +105,11 @@ detailed probe evidence.
   narrow proof-time rules and non-opaque typed-reflexivity paths relate them
   to explicit unit/counit semantics while runtime stays distinct. The generic
   adjunction profunctor comparison owns the whole varying-endpoint Hom
-  equivalence; whole equality or `OmegaEquivAlong` packaging of the stable
-  specialized mate functors remains consumer-gated. Body-unfolded canonical
-  whole unifiers and direct `comp_fapp0 Cat_cat` cancellations have been
-  feasibility-checked, so the deferral is not an architecture limitation. Generic
+  presentation. Body-unfolded canonical whole unifiers identify the stable
+  mate functors with their semantic bodies at proof time. Exact raw-Hom-guarded
+  `comp_fapp0 Cat_cat` rules reduce both stable whole composites to identity;
+  the wildcard-only version is rejected because it reconstructed the wrong
+  endpoint after `Op`. No additional `OmegaEquivAlong` package is required. Generic
   arbitrary-object/arrow Sigma observations replace the former slice-specific
   record surface. Stable whole `f*`, object, unit, and counit observations
   retain the declaration indices; their `tapp1` projections are Došen's

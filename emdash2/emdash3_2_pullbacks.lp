@@ -704,8 +704,10 @@ symbol slice_base_change_untranspose_semantic
   recognize nested transpose/untranspose after the explicit semantic
   composition has projected to stable hom-action heads. The whole heads retain
   action on higher Hom arrows. They are not independent adjunction data:
-  proof-time rules below identify each point with its explicit unit/counit
-  semantics, while runtime keeps the two presentations distinct.
+  proof-time rules below identify both their whole and point presentations with
+  explicit unit/counit semantics, while runtime keeps the semantic and stable
+  presentations distinct. Both stable point cuts and both stable whole-functor
+  composites compute.
 */
 injective symbol slice_base_change_transpose_func
   [C : Cat]
@@ -785,6 +787,108 @@ with @slice_base_change_transpose
   ↪ $k;
 
 /*
+  Whole stable mate cancellations in Cat_cat.
+
+  Opposite-slice normalization reverses both Hom categories before this cut is
+  matched. The repeated raw Hom-category endpoints are subject-reduction
+  guards: a wildcard-only probe could reconstruct the source object from the
+  codomain and silently change the selected whole Hom category.
+*/
+// Γstable ∘ Φstable → id.
+// lhs-audit: keep 1,2,3,4 -- exact raw Hom-category endpoints retain a and b.
+rule @comp_fapp0
+      Cat_cat
+      (Hom_cat
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $Y $C (@id Cat_cat $C)))
+        $b
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $f)
+          $a))
+      (Hom_cat
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C)))
+        (@slice_base_change_obj $C $PB $X $Y $f $b)
+        $a)
+      (Hom_cat
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $Y $C (@id Cat_cat $C)))
+        $b
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $f)
+          $a))
+      (@slice_base_change_untranspose_func
+        $C $PB $X $Y $f $a $b)
+      (@slice_base_change_transpose_func
+        $C $PB $X $Y $f $a $b)
+  ↪ @id
+      Cat_cat
+      (Hom_cat
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $Y $C (@id Cat_cat $C)))
+        $b
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $f)
+          $a));
+
+// Φstable ∘ Γstable → id.
+// lhs-audit: keep 1,2,3,4 -- exact raw Hom-category endpoints retain a and b.
+rule @comp_fapp0
+      Cat_cat
+      (Hom_cat
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C)))
+        (@slice_base_change_obj $C $PB $X $Y $f $b)
+        $a)
+      (Hom_cat
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $Y $C (@id Cat_cat $C)))
+        $b
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $f)
+          $a))
+      (Hom_cat
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C)))
+        (@slice_base_change_obj $C $PB $X $Y $f $b)
+        $a)
+      (@slice_base_change_transpose_func
+        $C $PB $X $Y $f $a $b)
+      (@slice_base_change_untranspose_func
+        $C $PB $X $Y $f $a $b)
+  ↪ @id
+      Cat_cat
+      (Hom_cat
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C)))
+        (@slice_base_change_obj $C $PB $X $Y $f $b)
+        $a);
+
+/*
   Proof-time transpose usability.
 
   Keep the rigid hom_precomp head and recover its canonical slots in side
@@ -842,7 +946,83 @@ unif_rule
   ];
 
 /*
-  Explicit non-opaque witnesses for the two proof-time usability agreements.
+  Proof-time whole-mate usability.
+
+  These compare the stable whole functors with the canonical bodies of the
+  transparent semantic definitions. The defined slice Sigma point has already
+  normalized to sigma_map_obj; keeping that owner visible and leaving the
+  non-discriminating category slots `_` is the checked post-Op SOP shape.
+*/
+unif_rule
+  @slice_base_change_transpose_func
+    $C $PB $X $Y $f $a $b
+  ≡ @comp_fapp0
+    Cat_cat _ _ _
+    (@hom_precomp_along_func
+      _ _ _
+      (@slice_base_change_obj $C $PB $X $Y $f $b)
+      $a
+      (@slice_base_change_obj $C $PB $X $Y $f
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $f)
+          $a))
+      (@tapp0_fapp0 _ _ _ _ $a
+        (@slice_base_change_unit_transf $C $PB $X $Y $f)))
+    (@fapp1_func
+      _ _
+      (@slice_base_change_func $C $PB $X $Y $f)
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $f)
+        $a)
+      $b)
+  ↪ [ tt ≡ tt ];
+
+unif_rule
+  @slice_base_change_untranspose_func
+    $C $PB $X $Y $f $a $b
+  ≡ @comp_fapp0
+    Cat_cat _ _ _
+    (@hom_postcomp_func
+      _ _ _
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $f)
+        $a)
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $f)
+        (@slice_base_change_obj $C $PB $X $Y $f $b))
+      $b
+      (@tapp0_fapp0 _ _ _ _ $b
+        (@slice_base_change_counit_transf $C $PB $X $Y $f)))
+    (@fapp1_func
+      _ _
+      (@sigma_map_func
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $f))
+      (@slice_base_change_obj $C $PB $X $Y $f $b)
+      $a)
+  ↪ [ tt ≡ tt ];
+
+/*
+  Explicit non-opaque witnesses for the pointwise proof-time usability agreements.
   Their bodies are typed reflexivity through the unifiers above. Runtime
   retains the stable mate heads; consumers that need semantic composition can
   apply ordinary equality functoriality to these paths.
@@ -884,6 +1064,54 @@ symbol slice_base_change_untranspose_semantic_path
     (Hom (@Slice_cat C Y)
       (@slice_sigma_obj C X Y f a) b)
     (@slice_base_change_untranspose C PB X Y f a b k);
+
+// Whole semantic transpose agrees propositionally with the stable functor.
+symbol slice_base_change_transpose_func_semantic_path
+  [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  [X Y : τ (Obj C)]
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (b : τ (Obj (@Slice_cat C Y)))
+  : τ (@=
+      (Functor
+        (Hom_cat (@Slice_cat C Y)
+          (@slice_sigma_obj C X Y f a) b)
+        (Hom_cat (@Slice_cat C X) a
+          (@slice_base_change_obj C PB X Y f b)))
+      (@slice_base_change_transpose_semantic_func C PB X Y f a b)
+      (@slice_base_change_transpose_func C PB X Y f a b))
+≔ @eq_refl
+    (Functor
+      (Hom_cat (@Slice_cat C Y)
+        (@slice_sigma_obj C X Y f a) b)
+      (Hom_cat (@Slice_cat C X) a
+        (@slice_base_change_obj C PB X Y f b)))
+    (@slice_base_change_transpose_semantic_func C PB X Y f a b);
+
+// Whole semantic untranspose agrees propositionally with the stable functor.
+symbol slice_base_change_untranspose_func_semantic_path
+  [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  [X Y : τ (Obj C)]
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (b : τ (Obj (@Slice_cat C Y)))
+  : τ (@=
+      (Functor
+        (Hom_cat (@Slice_cat C X) a
+          (@slice_base_change_obj C PB X Y f b))
+        (Hom_cat (@Slice_cat C Y)
+          (@slice_sigma_obj C X Y f a) b))
+      (@slice_base_change_untranspose_semantic_func C PB X Y f a b)
+      (@slice_base_change_untranspose_func C PB X Y f a b))
+≔ @eq_refl
+    (Functor
+      (Hom_cat (@Slice_cat C X) a
+        (@slice_base_change_obj C PB X Y f b))
+      (Hom_cat (@Slice_cat C Y)
+        (@slice_sigma_obj C X Y f a) b))
+    (@slice_base_change_untranspose_semantic_func C PB X Y f a b);
 
 // Structure arrow of Σ_f(a), whose generic Sigma action preserves the domain.
 symbol slice_sigma_structure_arrow

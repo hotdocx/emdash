@@ -2225,12 +2225,11 @@ discrete/strict adapter: raw ambient composites deliberately remain runtime
 distinct. The stable mate operations have propositional semantic paths to
 `f^*[h] ∘ η` and `ε ∘ Σ_f[k]`; these paths are typed reflexivity
 through proof-time usability rules, not opaque equality bridges. The stable
-mate functors retain higher action, but their point cancellations do not assert
-whole-functor equality or an `OmegaEquivAlong`; whole semantic Hom equivalence
-is already owned by the generic `Adjunction_hom_prof_comparison`. If a later
-consumer selects the specialized whole facade, its body-unfolded unifiers use
-the canonical `sigma_map_obj` form and its cancellations are ordinary
-`Cat_cat` functor-composition rules; both shapes are already feasibility-checked.
+mate functors retain higher action. Canonical body-unfolded whole unifiers use
+the `sigma_map_obj` form to compare them with the semantic functors, and exact
+raw-Hom-guarded `Cat_cat` rules compute both whole composites to identity. The
+generic `Adjunction_hom_prof_comparison` remains the varying-endpoint
+profunctor presentation; do not print a second `OmegaEquivAlong` package.
 
 Whole `Σ_f` action and `slice_sigma_obj` share the selected runtime point.
 Its domain is definitionally the domain of `a`, and its structure arrow

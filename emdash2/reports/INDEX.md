@@ -1270,9 +1270,9 @@ record.
   proposed general `Pi_along_func`, and slice `Π_u` distinct. Beck–Chevalley,
   Frobenius, slice exponentials, general right-Kan comparison, TypeScript
   generation, and optional whole stable-mate `OmegaEquivAlong` packaging are
-  later layers. The strict catalog has 2,353 checks across 116 areas, including
-  9 slice-dependent-product checks; source-only health covers 328 registered
-  owner/reviewer files.
+  later layers. The strict catalog has 2,359 checks across 116 areas, including
+  27 pullback and 9 slice-dependent-product checks; source-only health covers
+  328 registered owner/reviewer files.
 - `REPORT_EMDASH_V3_2_PULLBACKS_AND_SLICE_BASE_CHANGE_COMPUTATION_PLAN_2026-08-28.md`:
   completed strict-computational correction of the pullback implementation after
   checkpoint `e9ac7e6`. One whole covariant slice family supplies
@@ -1280,10 +1280,12 @@ record.
   fibres and supplies `f*:C/Y→C/X`, with each internal base arrow carrying
   the existing adjunction `Σ_f⊣f*`. Stable whole/point mates retain both
   triangle cuts, while narrow proof-time usability and non-opaque semantic
-  paths expose unit/counit formulas without runtime erasure. The generic
-  adjunction profunctor comparison owns the whole Hom equivalence; whole
-  equality or `OmegaEquivAlong` packaging of the specialized stable mates is
-  consumer-gated. Generic
+  paths expose unit/counit formulas without runtime erasure. Canonical
+  body-unfolded whole unifiers identify the stable mate functors with their
+  semantic bodies, and exact raw-Hom-guarded `Cat_cat` rules reduce both whole
+  composites to identity. The generic adjunction profunctor comparison remains
+  the varying-endpoint Hom presentation; no additional `OmegaEquivAlong`
+  package is required. Generic
   arbitrary-object/arrow Sigma observations replace the former slice-record
   workaround; canonical represented postcomposition computes the `Σ_f`
   domain and structure arrow without recentering paths. The follow-up retains
@@ -1303,7 +1305,8 @@ record.
   consumers. The earlier strict-computational correction is complete in
   `PB-RECLOSE-15`, and the validated rectangle follow-up is complete in
   `PB-RECT-CLOSE-18`, with final generic-owner/documentation cleanup in
-  `PB-GENERIC-19` and `PB-FINAL-DOC-20`.
+  `PB-GENERIC-19`/`PB-FINAL-DOC-20` and whole mate closure in
+  `PB-WHOLE-MATE-21`/`PB-WHOLE-CLOSE-22`.
 - `REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md`:
   completed second-tranche closeout plan for enhanced triangular products,
   terminal objects, and their thin Cartesian package. One direct map unifier

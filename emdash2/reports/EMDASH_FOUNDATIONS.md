@@ -5321,22 +5321,26 @@ The stable transpose and untranspose heads are related to the explicit
 `f*[h]∘η` and `ε∘Σ_f[k]` presentations by narrow proof-time usability
 rules. Named semantic paths are typed reflexivity through those rules; they
 are not opaque bridges and do not change runtime preference. The initial
-stable functors retain generic higher action, but only their point actions are
-identified with those transparent semantic formulas; point cancellation does
-not by itself construct equality of whole functors or an `OmegaEquivAlong`
-package. This is not missing adjunction semantics: the generic
-`Adjunction_hom_prof_comparison` already supplies the whole varying-endpoint
-Hom-profunctor `ProfComparison`/`DefIso`. Packaging the specialized stable mate
-facade as a whole equivalence remains consumer-gated.
+stable functors retain generic higher action. Their point actions and their
+whole functors are identified proof-theoretically with the transparent
+semantic formulas. With the semantic bodies normalized to canonical
+`comp_fapp0 Cat_cat` forms, using raw `sigma_map_obj` discriminators and `_` in
+non-discriminating slots, both whole unifiers admit typed `eq_refl` while
+runtime stable/semantic forms remain distinct.
 
-This consumer gate is not an expressibility limitation. With the semantic
-whole mate bodies normalized to their canonical `comp_fapp0 Cat_cat` forms,
-using raw `sigma_map_obj` discriminators and `_` in non-discriminating slots,
-both stable-to-semantic whole unifiers admit typed `eq_refl`. Likewise, direct
-whole rules `Γstable∘Φstable → id` and `Φstable∘Γstable → id` are ordinary
-functor composition rules in `Cat_cat` and pass owner-position checking. They
-remain deferred because the generic profunctor comparison already owns the
-needed semantics, not because the specialized laws require redesign.
+Both stable whole composites compute:
+
+```text
+Γstable ∘ Φstable → id
+Φstable ∘ Γstable → id.
+```
+
+These `Cat_cat` composition rules repeat the exact raw Hom-category endpoints.
+A wildcard-only candidate typechecked but could reconstruct `a` from `b` after
+opposite normalization; the guarded active rules preserve the original
+endpoints. The generic `Adjunction_hom_prof_comparison` remains the whole
+varying-endpoint profunctor `ProfComparison`/`DefIso`, so no additional
+`OmegaEquivAlong` package is needed.
 
 The initial layer claims neither strict base-change functoriality nor an
 explicit pseudo certificate. Products in slices, terminal-derived products,

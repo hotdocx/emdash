@@ -109,10 +109,12 @@ purposes:
 - the pullback cone carrier is exactly the existing whole Hom category, with
   no record carrying a manually supplied square;
 - the generic `Adjunction_hom_prof_comparison` supplies the whole semantic
-  varying-endpoint Hom equivalence; and
-- specialized stable mate heads retain higher action and point computation,
-  while whole equality or `OmegaEquivAlong` packaging of that facade remains
-  an optional consumer-gated bridge.
+  varying-endpoint Hom equivalence;
+- specialized stable mate heads retain higher action and point computation;
+- canonical body-unfolded whole unifiers compare those stable functors with
+  their semantic bodies; and
+- exact raw-Hom-guarded `Cat_cat` rules reduce both stable whole mate
+  composites to identity without an additional `OmegaEquivAlong` package.
 
 The `Πᵤ` work must reuse these conclusions rather than reopen them.
 
@@ -492,8 +494,9 @@ Current proportional evidence:
   rectangles, both component triangles, transparent whole mate action, the
   generic whole Hom comparison, and noncollapse from `Σᵤ` and `u*`;
 - warning-enabled owner checking yields
-  `1440 = 1283 critical-pair reports + 157 replaceable-variable reports`, a
-  37-critical-pair delta over the pullback baseline `1246/157`; the additions
+  `1482 = 1325 critical-pair reports + 157 replaceable-variable reports`, a
+  37-critical-pair delta over the whole-mate-complete pullback baseline
+  `1288/157`; the additions
   are exactly whole `Πᵤ` action projection (3), `γΠᶜ(id)`/`φΠᵃ(id)`
   component folds (3+3), and the two rectangles (14+14); the two component
   joins add no report;
@@ -502,11 +505,12 @@ Current proportional evidence:
 - no `unif_rule`, specialized composite-point rule, specialized identity
   action, stable whole unit/counit duplicate, stable mate-functor facade,
   `OmegaEquivAlong`, or manual coherence record is introduced;
-- the strict catalog contains 2,353 checks across 116 areas, including 9
-  slice-dependent-product checks, with zero unclassified statements;
+- the strict catalog contains 2,359 checks across 116 areas, including 27
+  pullback and 9 slice-dependent-product checks, with zero unclassified
+  statements;
 - source-only health metadata is fresh for 328 registered owner/reviewer files
   at snapshot
-  `sha256:7ebf710f4bc7abb74f47acde5673df9a03394d77f4b76ab6c6cd37e2690c6f00`;
+  `sha256:612715e4cbae9d012908bf1a6c344df3ea2e878f4a471bf69341f3ff3b4a7253`;
   and
 - source TOC, active references, current-plan headers, catalog freshness,
   source-only health freshness, and exact diff hygiene pass.
@@ -641,7 +645,7 @@ SOP gates; do not run unrelated repository-wide long aggregates.
 | `SDP-LCCC-9` | complete bounded result | `SliceDependentProducts(C)` is the thin total Sigma capability pairing `PB` with `DependentProductStructure(C,PB)`. The stronger convention-sensitive `LocallyCartesianClosedCategory` name remains gated by selected terminal/finite-limit and derived slice-exponential surfaces. |
 | `SDP-COHERENCE-10` | complete classification | Beck–Chevalley, Frobenius, exponentials, general Pi-along comparison, and strict/pseudo packaging remain later consumers. |
 | `SDP-DOC-11` | complete | Foundations, canonical syntax, SOP/status, report index, owner, reviewer, central diagnostics, catalog, and health registrations are synchronized. |
-| `SDP-CLOSE-12` | complete validation | Owner, reviewer, affected central diagnostics, exact `1283/157` warning boundary, strict audit, 2,353/116 catalog, 328-file source-only health, document gates, and diff hygiene are green. No unrelated aggregate was run. |
+| `SDP-CLOSE-12` | complete validation | Owner, reviewer, affected central diagnostics, exact `1325/157` warning boundary, strict audit, strict catalog, 328-file source-only health, document gates, and diff hygiene are green. No unrelated aggregate was run. |
 
 ## Decision Ledger
 

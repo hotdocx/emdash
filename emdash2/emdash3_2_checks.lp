@@ -27498,6 +27498,98 @@ assertnot [C : Cat]
   @slice_base_change_func C PB X X f
   ≡ @slice_sigma_func C X X f;
 
+// Whole pullback mate usability and runtime cancellation.
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y))) ⊢
+  @slice_base_change_transpose_func_semantic_path C PB X Y f a g
+  : τ (@=
+      (Functor
+        (Hom_cat (@Slice_cat C Y) (@slice_sigma_obj C X Y f a) g)
+        (Hom_cat (@Slice_cat C X) a
+          (@slice_base_change_obj C PB X Y f g)))
+      (@slice_base_change_transpose_semantic_func C PB X Y f a g)
+      (@slice_base_change_transpose_func C PB X Y f a g));
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y))) ⊢
+  @slice_base_change_untranspose_func_semantic_path C PB X Y f a g
+  : τ (@=
+      (Functor
+        (Hom_cat (@Slice_cat C X) a
+          (@slice_base_change_obj C PB X Y f g))
+        (Hom_cat (@Slice_cat C Y) (@slice_sigma_obj C X Y f a) g))
+      (@slice_base_change_untranspose_semantic_func C PB X Y f a g)
+      (@slice_base_change_untranspose_func C PB X Y f a g));
+
+assertnot [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y))) ⊢
+  @slice_base_change_transpose_func C PB X Y f a g
+  ≡ @slice_base_change_transpose_semantic_func C PB X Y f a g;
+
+assertnot [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y))) ⊢
+  @slice_base_change_untranspose_func C PB X Y f a g
+  ≡ @slice_base_change_untranspose_semantic_func C PB X Y f a g;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y))) ⊢
+  @comp_cat_fapp0
+    _ _ _
+    (@slice_base_change_untranspose_func C PB X Y f a g)
+    (@slice_base_change_transpose_func C PB X Y f a g)
+  ≡ @id
+      Cat_cat
+      (Hom_cat
+        (@Sigma_cat
+          (Op_cat C)
+          (@hom_con C Y C (@id Cat_cat C)))
+        g
+        (@sigma_map_obj
+          (Op_cat C)
+          (@hom_con C X C (@id Cat_cat C))
+          (@hom_con C Y C (@id Cat_cat C))
+          (@hom_con_int_postcomp_func C C (@id Cat_cat C) X Y f)
+          a));
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (g : τ (Obj (@Slice_cat C Y))) ⊢
+  @comp_cat_fapp0
+    _ _ _
+    (@slice_base_change_transpose_func C PB X Y f a g)
+    (@slice_base_change_untranspose_func C PB X Y f a g)
+  ≡ @id
+      Cat_cat
+      (Hom_cat
+        (@Sigma_cat
+          (Op_cat C)
+          (@hom_con C X C (@id Cat_cat C)))
+        (@slice_base_change_obj C PB X Y f g)
+        a);
+
 // -------------------------------------------------------------------------------------------------
 // Selected coherent dependent products in slices
 // catalog-area: Slice dependent products and LCCC foundation

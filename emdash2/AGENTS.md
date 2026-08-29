@@ -612,11 +612,12 @@ whole opposite-variance family with exact `C/X` fibres. Every internal
 functors and point heads retain both triangle cuts, while narrow proof-time
 usability and non-opaque typed-reflexivity paths expose explicit unit/counit
 semantics without a runtime fold. Their point cancellations do not package
-whole equality of the specialized stable mate functors; the generic
-`Adjunction_hom_prof_comparison` remains the whole varying-endpoint Hom
-equivalence owner. Body-unfolded canonical whole unifiers and direct
-`comp_fapp0 Cat_cat` cancellations for the specialized mate functors have been
-feasibility-checked; they remain consumer-gated, not architecture-gated.
+whole equality by themselves, so canonical body-unfolded whole unifiers now
+provide that proof-time comparison. Exact raw-Hom-guarded
+`comp_fapp0 Cat_cat` rules reduce both specialized whole mate composites to
+identity; a wildcard-only version is rejected because it reconstructed the
+wrong endpoint after `Op`. `Adjunction_hom_prof_comparison` remains the whole
+varying-endpoint profunctor presentation.
 Stable whole `f*`, object, unit, and counit
 observations retain the declaration indices; their `tapp1` projections are
 Došen's `γᶜ` and `φᵃ`, and both full `(ac)` rectangles plus their identity
@@ -1555,10 +1556,11 @@ Use the following order:
     triangle cuts; two rigid proof-time comparisons and non-opaque semantic
     paths expose the explicit unit/counit presentations while preserving
     runtime noncollapse. The generic adjunction profunctor comparison owns the
-    whole Hom equivalence; equality or `OmegaEquivAlong` packaging of the
-    specialized stable mate functors remains consumer-gated. Canonical
-    body-unfolded whole unifiers and direct `Cat_cat` composition cancellations
-    are feasibility-checked, so this is not an expressibility boundary. Stable whole
+    varying-endpoint Hom presentation. Canonical body-unfolded whole unifiers
+    identify the stable mate functors with their semantic bodies at proof time,
+    and exact raw-Hom-guarded `Cat_cat` composition rules reduce both whole
+    composites to identity. No separate `OmegaEquivAlong` package is needed.
+    Stable whole
     `f*`, object action, unit, and counit
     observations preserve the declaration indices through opposite
     normalization. Their `tapp1` projections are the public `γᶜ`/`φᵃ` heads;
