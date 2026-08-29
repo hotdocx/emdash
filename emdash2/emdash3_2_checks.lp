@@ -27253,12 +27253,145 @@ assert [C : Cat]
   (PB : τ (@PullbackStructure C))
   (X Y : τ (Obj C))
   (f : τ (Hom C X Y)) ⊢
+  @fapp1_fapp0
+    (Op_cat C) Cat_cat
+    (@SliceBaseChange_catd C PB)
+    Y X f
+  ≡ @slice_base_change_func C PB X Y f;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (b : τ (Obj (@Slice_cat C Y))) ⊢
+  @fapp0
+    (@Slice_cat C Y) (@Slice_cat C X)
+    (@slice_base_change_func C PB X Y f)
+    b
+  ≡ @slice_base_change_obj C PB X Y f b;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a a' : τ (Obj (@Slice_cat C X)))
+  (k : τ (Hom (@Slice_cat C X) a a')) ⊢
+  @tapp1_fapp0
+    (@Slice_cat C X) (@Slice_cat C X)
+    _ _ a a'
+    (@slice_base_change_unit_transf C PB X Y f)
+    k
+  ≡ @slice_base_change_gamma C PB X Y f a a' k;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (b' b : τ (Obj (@Slice_cat C Y)))
+  (h : τ (Hom (@Slice_cat C Y) b' b)) ⊢
+  @tapp1_fapp0
+    (@Slice_cat C Y) (@Slice_cat C Y)
+    _ _ b' b
+    (@slice_base_change_counit_transf C PB X Y f)
+    h
+  ≡ @slice_base_change_phi C PB X Y f b' b h;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y)) ⊢
   @slice_base_change_adjunction C PB X Y f
   : τ (@Adjunction
       (@Slice_cat C X)
       (@Slice_cat C Y)
       (@slice_sigma_func C X Y f)
       (@slice_base_change_func C PB X Y f));
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a a' : τ (Obj (@Slice_cat C X)))
+  (b : τ (Obj (@Slice_cat C Y)))
+  (k : τ (Hom (@Slice_cat C X) a a'))
+  (h : τ (Hom
+    (@Slice_cat C Y) (@slice_sigma_obj C X Y f a') b)) ⊢
+  @comp_fapp0
+    (@Slice_cat C Y)
+    (@slice_sigma_obj C X Y f a)
+    (@slice_sigma_obj C X Y f
+      (@slice_base_change_obj C PB X Y f
+        (@slice_sigma_obj C X Y f a')))
+    b
+    (@tapp1_fapp0
+      (@Slice_cat C Y) (@Slice_cat C Y)
+      _ _
+      (@slice_sigma_obj C X Y f a') b
+      (@slice_base_change_counit_transf C PB X Y f)
+      h)
+    (@fapp1_fapp0
+      (@Slice_cat C X) (@Slice_cat C Y)
+      (@slice_sigma_func C X Y f)
+      a
+      (@slice_base_change_obj C PB X Y f
+        (@slice_sigma_obj C X Y f a'))
+      (@tapp1_fapp0
+        (@Slice_cat C X) (@Slice_cat C X)
+        _ _ a a'
+        (@slice_base_change_unit_transf C PB X Y f)
+        k))
+  ≡ @comp_fapp0
+      (@Slice_cat C Y)
+      (@slice_sigma_obj C X Y f a)
+      (@slice_sigma_obj C X Y f a')
+      b h
+      (@fapp1_fapp0
+        (@Slice_cat C X) (@Slice_cat C Y)
+        (@slice_sigma_func C X Y f) a a' k);
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (X Y : τ (Obj C))
+  (f : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C X)))
+  (b' b : τ (Obj (@Slice_cat C Y)))
+  (k : τ (Hom
+    (@Slice_cat C X)
+    a (@slice_base_change_obj C PB X Y f b')))
+  (h : τ (Hom (@Slice_cat C Y) b' b)) ⊢
+  @comp_fapp0
+    (@Slice_cat C X)
+    a
+    (@slice_base_change_obj C PB X Y f
+      (@slice_sigma_obj C X Y f
+        (@slice_base_change_obj C PB X Y f b')))
+    (@slice_base_change_obj C PB X Y f b)
+    (@fapp1_fapp0
+      (@Slice_cat C Y) (@Slice_cat C X)
+      (@slice_base_change_func C PB X Y f)
+      (@slice_sigma_obj C X Y f
+        (@slice_base_change_obj C PB X Y f b'))
+      b
+      (@tapp1_fapp0
+        (@Slice_cat C Y) (@Slice_cat C Y)
+        _ _ b' b
+        (@slice_base_change_counit_transf C PB X Y f)
+        h))
+    (@tapp1_fapp0
+      (@Slice_cat C X) (@Slice_cat C X)
+      _ _
+      a (@slice_base_change_obj C PB X Y f b')
+      (@slice_base_change_unit_transf C PB X Y f)
+      k)
+  ≡ @comp_fapp0
+      (@Slice_cat C X)
+      a
+      (@slice_base_change_obj C PB X Y f b')
+      (@slice_base_change_obj C PB X Y f b)
+      (@fapp1_fapp0
+        (@Slice_cat C Y) (@Slice_cat C X)
+        (@slice_base_change_func C PB X Y f) b' b h)
+      k;
 
 assert [C : Cat]
   (PB : τ (@PullbackStructure C))

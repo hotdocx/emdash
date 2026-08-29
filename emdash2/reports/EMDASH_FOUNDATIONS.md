@@ -5326,6 +5326,29 @@ certificate. Products in slices, terminal-derived products, weighted
 pullbacks, pushout duality, the second adjunction `f*⊣Π_f`,
 Beck–Chevalley, and Frobenius remain later assumption-explicit structures.
 
+The pullback instance now also retains Došen's full rectangular `(ac)`
+calculus. The selected whole `f*`, unit, and counit observations keep the
+base-arrow endpoints visible after opposite normalization. Their off-diagonal
+actions are
+
+```text
+γᶜ(k) = tapp1(unit_f,k),
+φᵃ(h) = tapp1(counit_f,h),
+```
+
+and the canonical cuts compute as
+
+```text
+φᵃ(h) ∘ Σ_f(γᶜ(k)) → h ∘ Σ_f(k),
+f*(φᵃ(h)) ∘ γᶜ(k) → f*(h) ∘ k.
+```
+
+These are runtime post-`Op` instances of the generic adjunction laws, not a
+second adjunction theory. At identity arrows, `γᶜ` and `φᵃ` compute to the
+unit and counit components; the resulting two component triangles reduce to
+identity and join the fixed-endpoint mate cancellations. Fully expanded
+semantic mate implementations remain proof-time comparison endpoints.
+
 The current theory includes the expected basic operations:
 
 ```text
@@ -6475,6 +6498,7 @@ kernel and one-way library vocabulary.
 | whole covariant slice family / postcomposition | `SliceSigma_catd C` / `slice_sigma_func f` |
 | chosen whole pullback base-change family | `PullbackStructure C` / `SliceBaseChange_catd PB` |
 | pullback reindexing along `f` | `slice_base_change_func PB f` |
+| pullback Došen off-diagonal unit/counit actions | `slice_base_change_gamma PB f` / `slice_base_change_phi PB f` |
 | selected slice adjunction `Σ_f ⊣ f*` | `slice_base_change_adjunction PB f` |
 | selected pullback domain and projections | `pullback_domain PB f g` / `pullback_fst PB f g` / `pullback_snd PB f g` |
 | retained directed pullback square | `pullback_square_readable_cell PB f g` |

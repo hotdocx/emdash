@@ -611,7 +611,11 @@ whole opposite-variance family with exact `C/X` fibres. Every internal
 `f:X→Y` carries the existing adjunction `Σ_f⊣f*`. Stable whole mate
 functors and point heads retain both triangle cuts, while narrow proof-time
 usability and non-opaque typed-reflexivity paths expose explicit unit/counit
-semantics without a runtime fold. Generic arbitrary-object/arrow Sigma
+semantics without a runtime fold. Stable whole `f*`, object, unit, and counit
+observations retain the declaration indices; their `tapp1` projections are
+Došen's `γᶜ` and `φᵃ`, and both full `(ac)` rectangles plus their identity
+component triangles compute at exact post-`Op` shapes. Generic
+arbitrary-object/arrow Sigma
 observations own slice projection and composition; canonical represented
 postcomposition makes `Σ_f` preserve domains and postcompose structure arrows
 without equality transport. Pullback object, projections, derived directed
@@ -1526,7 +1530,11 @@ Use the following order:
     adjunction `Σ_f⊣f*`. Stable whole and point mate owners retain both
     triangle cuts; two rigid proof-time comparisons and non-opaque semantic
     paths expose the explicit unit/counit presentations while preserving
-    runtime noncollapse. Generic Sigma object/arrow observations and the
+    runtime noncollapse. Stable whole `f*`, object action, unit, and counit
+    observations preserve the declaration indices through opposite
+    normalization. Their `tapp1` projections are the public `γᶜ`/`φᵃ` heads;
+    both full Došen `(ac)` rectangles and both identity component triangles
+    compute at exact raw post-`Op` guards. Generic Sigma object/arrow observations and the
     guarded arbitrary-endpoint constructor calculus are owned by
     `emdash3_2.lp`; conventional slice observations are transparent consumers.
     Canonical represented postcomposition gives runtime domain/structure

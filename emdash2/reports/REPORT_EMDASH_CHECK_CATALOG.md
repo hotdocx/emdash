@@ -12,7 +12,7 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2338
+- Total checks: 2344
 - Mapped areas: 115
 - Legacy source-line tags: 0
 - Unclassified checks: 0
@@ -133,7 +133,7 @@ stable mathematical-area scopes rather than source locations.
 | Whole terminal-object computation and contractibility | 12 |
 | Thin selected cartesian-category capability | 4 |
 | Triangular/weighted binary-product compatibility | 5 |
-| Pullbacks and slice base change | 15 |
+| Pullbacks and slice base change | 21 |
 
 ## Section Details
 
@@ -3039,13 +3039,19 @@ stable mathematical-area scopes rather than source locations.
 | 2326 | 27228 | `assert [C : Cat] (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X))) ⊢ @slice_object_domain C Y (@s ...` |
 | 2327 | 27235 | `assert [C : Cat] (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X))) ⊢ @slice_object_arrow C Y (@sl ...` |
 | 2328 | 27246 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X : τ (Obj C)) ⊢ @fapp0 (Op_cat C) Cat_cat (@SliceBaseChange_catd ...` |
-| 2329 | 27252 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) ⊢ @slice_base_change_adjuncti ...` |
-| 2330 | 27263 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
-| 2331 | 27278 | `assertnot [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C ...` |
-| 2332 | 27289 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
-| 2333 | 27304 | `assertnot [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C ...` |
-| 2334 | 27315 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
-| 2335 | 27327 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
-| 2336 | 27339 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (g : τ (Obj (@Slice_cat C Y)) ...` |
-| 2337 | 27350 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
-| 2338 | 27361 | `assertnot [C : Cat] (PB : τ (@PullbackStructure C)) (X : τ (Obj C)) (f : τ (Hom C X X)) ⊢ @slice_base_change_func C ...` |
+| 2329 | 27252 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) ⊢ @fapp1_fapp0 (Op_cat C) Cat ...` |
+| 2330 | 27262 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (b : τ (Obj (@Slice_cat C Y)) ...` |
+| 2331 | 27273 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a a' : τ (Obj (@Slice_cat C ...` |
+| 2332 | 27286 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (b' b : τ (Obj (@Slice_cat C ...` |
+| 2333 | 27299 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) ⊢ @slice_base_change_adjuncti ...` |
+| 2334 | 27310 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a a' : τ (Obj (@Slice_cat C ...` |
+| 2335 | 27352 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
+| 2336 | 27396 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
+| 2337 | 27411 | `assertnot [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C ...` |
+| 2338 | 27422 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
+| 2339 | 27437 | `assertnot [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C ...` |
+| 2340 | 27448 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
+| 2341 | 27460 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
+| 2342 | 27472 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (g : τ (Obj (@Slice_cat C Y)) ...` |
+| 2343 | 27483 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
+| 2344 | 27494 | `assertnot [C : Cat] (PB : τ (@PullbackStructure C)) (X : τ (Obj C)) (f : τ (Hom C X X)) ⊢ @slice_base_change_func C ...` |

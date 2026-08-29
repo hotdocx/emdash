@@ -1265,7 +1265,10 @@ record.
   paths expose unit/counit formulas without runtime erasure. Generic
   arbitrary-object/arrow Sigma observations replace the former slice-record
   workaround; canonical represented postcomposition computes the `Σ_f`
-  domain and structure arrow without recentering paths. Pullback object,
+  domain and structure arrow without recentering paths. The follow-up retains
+  stable whole `f*`, unit, and counit heads, exposes Došen's `γᶜ`/`φᵃ` as their
+  off-diagonal projections, and makes both full `(ac)` rectangles plus both
+  identity component triangles compute. Pullback object,
   projections, derived directed square, exact Hom cone category, universal
   lift, recovery, and uniqueness are active. No pullback-specific constructor
   accepts a square witness.
@@ -1274,9 +1277,9 @@ record.
   second computes through whole cone recovery. Generic `Pullback_catd`, pseudo
   invertibility, products/weighted/dual comparisons, `Π_f`,
   Beck–Chevalley, and Frobenius remain distinct or later assumption-explicit
-  consumers. Focused generic-Sigma, slice, pullback, and directly affected
-  downstream consumers are green; warning/audit/catalog/health/documentation
-  closure is complete in `PB-RECLOSE-15`.
+  consumers. The earlier strict-computational correction is complete in
+  `PB-RECLOSE-15`, and the validated rectangle follow-up is complete in
+  `PB-RECT-CLOSE-18`.
 - `REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md`:
   completed second-tranche closeout plan for enhanced triangular products,
   terminal objects, and their thin Cartesian package. One direct map unifier

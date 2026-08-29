@@ -105,7 +105,10 @@ detailed probe evidence.
   narrow proof-time rules and non-opaque typed-reflexivity paths relate them
   to explicit unit/counit semantics while runtime stays distinct. Generic
   arbitrary-object/arrow Sigma observations replace the former slice-specific
-  record surface; canonical represented postcomposition computes the
+  record surface. Stable whole `f*`, object, unit, and counit observations
+  retain the declaration indices; their `tapp1` projections are Došen's
+  `γᶜ`/`φᵃ`, with both full `(ac)` rectangles and identity component triangles
+  computing at exact post-`Op` shapes. Canonical represented postcomposition computes the
   `Σ_f` domain and structure arrow without equality transport. The pullback
   object, projections, derived directed square, exact Hom cone category,
   universal lift, and uniqueness are derived from that adjunction. No

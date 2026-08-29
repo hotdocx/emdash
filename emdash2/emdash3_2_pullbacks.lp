@@ -58,18 +58,21 @@ rule @fapp0 _ Cat_cat
       $X
   ↪ @Slice_cat $C $X;
 
-// Whole categorical pullback along f:X→Y.
-symbol slice_base_change_func
+// Stable whole categorical pullback along f:X→Y. The selected Catd action
+// below is its semantic owner and projects to this runtime discriminator.
+injective symbol slice_base_change_func
   [C : Cat]
   (PB : τ (@PullbackStructure C))
   [X Y : τ (Obj C)]
   (f : τ (Hom C X Y))
-  : τ (Functor (@Slice_cat C Y) (@Slice_cat C X))
-≔ @fapp1_fapp0
-    (Op_cat C)
-    Cat_cat
-    (@SliceBaseChange_catd C PB)
-    Y X f;
+  : τ (Functor (@Slice_cat C Y) (@Slice_cat C X));
+
+// lhs-audit: keep 1 -- `Op_cat(C)` is the variance guard on the whole family action.
+rule @fapp1_fapp0
+      (Op_cat $C) Cat_cat
+      (@SliceBaseChange_catd $C $PB)
+      $Y $X $f
+  ↪ @slice_base_change_func $C $PB $X $Y $f;
 
 // Computational object postcomposition in the covariant slice family.
 // The generic stable Sigma-map point retains a runtime discriminator while
@@ -104,19 +107,33 @@ rule @fapp0 _ _
       $a
   ↪ @slice_sigma_obj $C $X $Y $f $a;
 
-// Object base change in the chosen opposite-variance slice family.
-symbol slice_base_change_obj
+// Stable object action of the selected f* functor.
+injective symbol slice_base_change_obj
   [C : Cat]
   (PB : τ (@PullbackStructure C))
   [X Y : τ (Obj C)]
   (f : τ (Hom C X Y))
   (b : τ (Obj (@Slice_cat C Y)))
-  : τ (Obj (@Slice_cat C X))
-≔ @fapp0
-    (@Slice_cat C Y)
-    (@Slice_cat C X)
-    (@slice_base_change_func C PB X Y f)
-    b;
+  : τ (Obj (@Slice_cat C X));
+
+rule @fapp0 _ _
+      (@slice_base_change_func $C $PB $X $Y $f)
+      $b
+  ↪ @slice_base_change_obj $C $PB $X $Y $f $b;
+
+// Proof-time direct composite-action view used by the unit off-diagonal type.
+unif_rule
+  @fapp0 _ _
+    (@comp_cat_fapp0
+      (@Slice_cat $C $X)
+      (@Slice_cat $C $Y)
+      (@Slice_cat $C $X)
+      (@slice_base_change_func $C $PB $X $Y $f)
+      (@slice_sigma_func $C $X $Y $f))
+    $a
+  ≡ @slice_base_change_obj $C $PB $X $Y $f
+      (@slice_sigma_obj $C $X $Y $f $a)
+  ↪ [ tt ≡ tt ];
 
 /*
   Declaration-backed existing adjunction Σ_f ⊣ f*.
@@ -136,8 +153,8 @@ injective symbol slice_base_change_adjunction
       (@slice_sigma_func C X Y f)
       (@slice_base_change_func C PB X Y f));
 
-// Readable transparent unit of slice base change.
-symbol slice_base_change_unit_transf
+// Stable whole unit observation of slice base change.
+injective symbol slice_base_change_unit_transf
   [C : Cat]
   (PB : τ (@PullbackStructure C))
   [X Y : τ (Obj C)]
@@ -149,16 +166,10 @@ symbol slice_base_change_unit_transf
         (@Slice_cat C Y)
         (@Slice_cat C X)
         (@slice_base_change_func C PB X Y f)
-        (@slice_sigma_func C X Y f)))
-≔ @unit_adj_transf
-    (@Slice_cat C X)
-    (@Slice_cat C Y)
-    (@slice_sigma_func C X Y f)
-    (@slice_base_change_func C PB X Y f)
-    (@slice_base_change_adjunction C PB X Y f);
+        (@slice_sigma_func C X Y f)));
 
-// Readable transparent counit of slice base change.
-symbol slice_base_change_counit_transf
+// Stable whole counit observation of slice base change.
+injective symbol slice_base_change_counit_transf
   [C : Cat]
   (PB : τ (@PullbackStructure C))
   [X Y : τ (Obj C)]
@@ -170,13 +181,18 @@ symbol slice_base_change_counit_transf
         (@Slice_cat C Y)
         (@slice_sigma_func C X Y f)
         (@slice_base_change_func C PB X Y f))
-      (@id_func (@Slice_cat C Y)))
-≔ @counit_adj_transf
-    (@Slice_cat C X)
-    (@Slice_cat C Y)
-    (@slice_sigma_func C X Y f)
-    (@slice_base_change_func C PB X Y f)
-    (@slice_base_change_adjunction C PB X Y f);
+      (@id_func (@Slice_cat C Y)));
+
+// Declaration-backed generic observations compile to the stable whole heads.
+rule @unit_adj_transf
+      _ _ _ _
+      (@slice_base_change_adjunction $C $PB $X $Y $f)
+  ↪ @slice_base_change_unit_transf $C $PB $X $Y $f;
+
+rule @counit_adj_transf
+      _ _ _ _
+      (@slice_base_change_adjunction $C $PB $X $Y $f)
+  ↪ @slice_base_change_counit_transf $C $PB $X $Y $f;
 
 // Component of the base-change unit at an object a of C/X.
 symbol slice_base_change_unit
@@ -215,6 +231,375 @@ symbol slice_base_change_counit
     _ _
     b
     (@slice_base_change_counit_transf C PB X Y f);
+
+/*
+  Stable `(ac)` off-diagonal observations and canonical rectangle cuts.
+
+  The whole unit/counit transfors above retain the declaration indices. Their
+  tapp1 projections below are Došen's γᶜ and φᵃ operations. Literal
+  post-`Op` rules are required because the conventional slice aliases and
+  opposite composition have reduced before runtime matching.
+*/
+injective symbol slice_base_change_gamma
+  [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  [X Y : τ (Obj C)]
+  (u : τ (Hom C X Y))
+  [a a' : τ (Obj (@Slice_cat C X))]
+  (k : τ (Hom (@Slice_cat C X) a a'))
+  : τ (Hom
+      (@Slice_cat C X)
+      a
+      (@slice_base_change_obj C PB X Y u
+        (@slice_sigma_obj C X Y u a')));
+
+injective symbol slice_base_change_phi
+  [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  [X Y : τ (Obj C)]
+  (u : τ (Hom C X Y))
+  [b' b : τ (Obj (@Slice_cat C Y))]
+  (h : τ (Hom (@Slice_cat C Y) b' b))
+  : τ (Hom
+      (@Slice_cat C Y)
+      (@slice_sigma_obj C X Y u
+        (@slice_base_change_obj C PB X Y u b'))
+      b);
+
+rule @tapp1_fapp0
+      _ _ _ _
+      $a $a'
+      (@slice_base_change_unit_transf $C $PB $X $Y $u)
+      $k
+  ↪ @slice_base_change_gamma $C $PB $X $Y $u $a $a' $k;
+
+rule @tapp1_fapp0
+      _ _ _ _
+      $b' $b
+      (@slice_base_change_counit_transf $C $PB $X $Y $u)
+      $h
+  ↪ @slice_base_change_phi $C $PB $X $Y $u $b' $b $h;
+
+// Identity boundaries recover the ordinary unit and counit components.
+rule @slice_base_change_gamma
+      $C $PB $X $Y $u $a $a
+      (@id _ $a)
+  ↪ @slice_base_change_unit $C $PB $X $Y $u $a;
+
+rule @slice_base_change_phi
+      $C $PB $X $Y $u $b $b
+      (@id _ $b)
+  ↪ @slice_base_change_counit $C $PB $X $Y $u $b;
+
+// Projection-order identity joins for the two selected functor actions.
+// lhs-audit: keep 1,2 -- the raw Sigma source/target guard opposite projection order.
+rule @fapp1_fapp0
+      (@Sigma_cat
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C)))
+      (@Sigma_cat
+        (Op_cat $C)
+        (@hom_con $C $Y $C (@id Cat_cat $C)))
+      (@sigma_map_func
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $u))
+      $a $a
+      (@id _ $a)
+  ↪ @id
+      (@Into_restr_cat $C $Y)
+      (@slice_sigma_obj $C $X $Y $u $a);
+
+rule @fapp1_fapp0
+      _ _
+      (@slice_base_change_func $C $PB $X $Y $u)
+      $b $b
+      (@id _ $b)
+  ↪ @id
+      (@Slice_cat $C $X)
+      (@slice_base_change_obj $C $PB $X $Y $u $b);
+
+// Canonical post-`Op` left triangle after γᶜ(id) and φᵃ(id) expose components.
+// lhs-audit: keep 1,2,3,4 -- exact raw endpoints are the subject-reduction guards.
+rule @comp_fapp0
+      (@Sigma_cat
+        (Op_cat $C)
+        (@hom_con $C $Y $C (@id Cat_cat $C)))
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $u)
+        $a)
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $u)
+        (@slice_base_change_obj $C $PB $X $Y $u
+          (@sigma_map_obj
+            (Op_cat $C)
+            (@hom_con $C $X $C (@id Cat_cat $C))
+            (@hom_con $C $Y $C (@id Cat_cat $C))
+            (@hom_con_int_postcomp_func
+              $C $C (@id Cat_cat $C) $X $Y $u)
+            $a)))
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $u)
+        $a)
+      (@fapp1_fapp0
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C)))
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $Y $C (@id Cat_cat $C)))
+        (@sigma_map_func
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $u))
+        (@slice_base_change_obj $C $PB $X $Y $u
+          (@sigma_map_obj
+            (Op_cat $C)
+            (@hom_con $C $X $C (@id Cat_cat $C))
+            (@hom_con $C $Y $C (@id Cat_cat $C))
+            (@hom_con_int_postcomp_func
+              $C $C (@id Cat_cat $C) $X $Y $u)
+            $a))
+        $a
+        (@tapp0_fapp0
+          _ _ _ _ $a
+          (@slice_base_change_unit_transf $C $PB $X $Y $u)))
+      (@tapp0_fapp0
+        _ _ _ _
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $u)
+          $a)
+        (@slice_base_change_counit_transf $C $PB $X $Y $u))
+  ↪ @id
+      (@Sigma_cat
+        (Op_cat $C)
+        (@hom_con $C $Y $C (@id Cat_cat $C)))
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $u)
+        $a);
+
+// Canonical post-`Op` right triangle after γᶜ(id) and φᵃ(id) expose components.
+// lhs-audit: keep 1,2,3,4 -- exact raw endpoints are the subject-reduction guards.
+rule @comp_fapp0
+      (@Sigma_cat
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C)))
+      (@slice_base_change_obj $C $PB $X $Y $u $b)
+      (@slice_base_change_obj $C $PB $X $Y $u
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $u)
+          (@slice_base_change_obj $C $PB $X $Y $u $b)))
+      (@slice_base_change_obj $C $PB $X $Y $u $b)
+      (@tapp0_fapp0
+        _ _ _ _
+        (@slice_base_change_obj $C $PB $X $Y $u $b)
+        (@slice_base_change_unit_transf $C $PB $X $Y $u))
+      (@fapp1_fapp0
+        (Op_cat
+          (@Sigma_cat
+            (Op_cat $C)
+            (@hom_con $C $Y $C (@id Cat_cat $C))))
+        (Op_cat
+          (@Sigma_cat
+            (Op_cat $C)
+            (@hom_con $C $X $C (@id Cat_cat $C))))
+        (@slice_base_change_func $C $PB $X $Y $u)
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $u)
+          (@slice_base_change_obj $C $PB $X $Y $u $b))
+        $b
+        (@tapp0_fapp0
+          _ _ _ _ $b
+          (@slice_base_change_counit_transf $C $PB $X $Y $u)))
+  ↪ @id
+      (@Sigma_cat
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C)))
+      (@slice_base_change_obj $C $PB $X $Y $u $b);
+
+// Literal canonical F-side rectangle after all aliases have unfolded.
+// lhs-audit: keep 1,3,4 -- exact raw category/middle/final guards prevent endpoint collapse.
+rule @comp_fapp0
+      (@Sigma_cat
+        (Op_cat $C)
+        (@hom_con $C $Y $C (@id Cat_cat $C)))
+      $b
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $u)
+        (@slice_base_change_obj $C $PB $X $Y $u
+          (@sigma_map_obj
+            (Op_cat $C)
+            (@hom_con $C $X $C (@id Cat_cat $C))
+            (@hom_con $C $Y $C (@id Cat_cat $C))
+            (@hom_con_int_postcomp_func
+              $C $C (@id Cat_cat $C) $X $Y $u)
+            $a')))
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $u)
+        $a)
+      (@fapp1_fapp0
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C)))
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $Y $C (@id Cat_cat $C)))
+        (@sigma_map_func
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $u))
+        (@slice_base_change_obj $C $PB $X $Y $u
+          (@sigma_map_obj
+            (Op_cat $C)
+            (@hom_con $C $X $C (@id Cat_cat $C))
+            (@hom_con $C $Y $C (@id Cat_cat $C))
+            (@hom_con_int_postcomp_func
+              $C $C (@id Cat_cat $C) $X $Y $u)
+            $a'))
+        $a
+        (@slice_base_change_gamma $C $PB $X $Y $u $a $a' $k))
+      (@slice_base_change_phi $C $PB $X $Y $u
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $u)
+          $a')
+        $b $h)
+  ↪ @comp_fapp0
+      (@Sigma_cat
+        (Op_cat $C)
+        (@hom_con $C $Y $C (@id Cat_cat $C)))
+      $b
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $u)
+        $a')
+      (@sigma_map_obj
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C))
+        (@hom_con $C $Y $C (@id Cat_cat $C))
+        (@hom_con_int_postcomp_func
+          $C $C (@id Cat_cat $C) $X $Y $u)
+        $a)
+      (@fapp1_fapp0
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C)))
+        (@Sigma_cat
+          (Op_cat $C)
+          (@hom_con $C $Y $C (@id Cat_cat $C)))
+        (@sigma_map_func
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $u))
+        $a' $a $k)
+      $h;
+
+// Literal canonical G-side rectangle after all aliases have unfolded.
+// lhs-audit: keep 1,2,3 -- exact raw category/source/middle guards retain Y.
+rule @comp_fapp0
+      (@Sigma_cat
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C)))
+      (@slice_base_change_obj $C $PB $X $Y $u $b)
+      (@slice_base_change_obj $C $PB $X $Y $u
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $u)
+          (@slice_base_change_obj $C $PB $X $Y $u $b')))
+      $a
+      (@slice_base_change_gamma $C $PB $X $Y $u
+        $a (@slice_base_change_obj $C $PB $X $Y $u $b') $k)
+      (@fapp1_fapp0
+        (Op_cat
+          (@Sigma_cat
+            (Op_cat $C)
+            (@hom_con $C $Y $C (@id Cat_cat $C))))
+        (Op_cat
+          (@Sigma_cat
+            (Op_cat $C)
+            (@hom_con $C $X $C (@id Cat_cat $C))))
+        (@slice_base_change_func $C $PB $X $Y $u)
+        (@sigma_map_obj
+          (Op_cat $C)
+          (@hom_con $C $X $C (@id Cat_cat $C))
+          (@hom_con $C $Y $C (@id Cat_cat $C))
+          (@hom_con_int_postcomp_func
+            $C $C (@id Cat_cat $C) $X $Y $u)
+          (@slice_base_change_obj $C $PB $X $Y $u $b'))
+        $b
+        (@slice_base_change_phi $C $PB $X $Y $u $b' $b $h))
+  ↪ @comp_fapp0
+      (@Sigma_cat
+        (Op_cat $C)
+        (@hom_con $C $X $C (@id Cat_cat $C)))
+      (@slice_base_change_obj $C $PB $X $Y $u $b)
+      (@slice_base_change_obj $C $PB $X $Y $u $b')
+      $a
+      $k
+      (@fapp1_fapp0
+        (Op_cat
+          (@Sigma_cat
+            (Op_cat $C)
+            (@hom_con $C $Y $C (@id Cat_cat $C))))
+        (Op_cat
+          (@Sigma_cat
+            (Op_cat $C)
+            (@hom_con $C $X $C (@id Cat_cat $C))))
+      (@slice_base_change_func $C $PB $X $Y $u)
+        $b' $b $h);
 
 /*
   Transparent semantic mate functors.

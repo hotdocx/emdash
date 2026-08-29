@@ -2189,6 +2189,28 @@ cone variable `h` is already an object of
 introduce or print a pullback-specific tuple `(a,b,α)` that stores a square;
 the removed `pullback_cone_constructor` is not part of the surface.
 
+For the full Došen `(ac)` calculus, write the off-diagonal actions of the
+same whole unit and counit as
+
+```text
+γᶜ_f(k) := tapp1(unit_f,k)
+φᵃ_f(h) := tapp1(counit_f,h).
+```
+
+The kernel owners are `slice_base_change_gamma` and
+`slice_base_change_phi`. Their canonical rectangular cuts are
+
+```text
+φᵃ_f(h) ∘ Σ_f(γᶜ_f(k)) == h ∘ Σ_f(k)
+f*(φᵃ_f(h)) ∘ γᶜ_f(k) == f*(h) ∘ k.
+```
+
+Here `==` is runtime computation at the selected post-opposite normal form.
+At identities, `γᶜ_f` and `φᵃ_f` recover the ordinary unit/counit components,
+and both component triangles compute to identity. The fully expanded
+`f*[h]∘η` and `ε∘Σ_f[k]` mate implementations remain proof-time usability
+views rather than competing runtime spellings.
+
 The first ambient projection law is written
 
 ```text
