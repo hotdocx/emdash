@@ -106,7 +106,9 @@ detailed probe evidence.
   to explicit unit/counit semantics while runtime stays distinct. The generic
   adjunction profunctor comparison owns the whole varying-endpoint Hom
   equivalence; whole equality or `OmegaEquivAlong` packaging of the stable
-  specialized mate functors remains consumer-gated. Generic
+  specialized mate functors remains consumer-gated. Body-unfolded canonical
+  whole unifiers and direct `comp_fapp0 Cat_cat` cancellations have been
+  feasibility-checked, so the deferral is not an architecture limitation. Generic
   arbitrary-object/arrow Sigma observations replace the former slice-specific
   record surface. Stable whole `f*`, object, unit, and counit observations
   retain the declaration indices; their `tapp1` projections are Došen's
@@ -125,6 +127,20 @@ detailed probe evidence.
   explicit pseudo invertibility, products-in-slices, weighted pullbacks,
   pushout duality, `Π_f`, Beck–Chevalley, and Frobenius are later
   assumption-explicit consumers.
+- `emdash3_2_slice_dependent_products.lp`: selected coherent dependent
+  products indexed by `PB : PullbackStructure(C)`. One whole covariant family
+  has exact fibre `C/X` and action `Π_u:C/X→C/Y`; each internal arrow carries
+  the existing second adjunction `u*⊣Π_u`. Generic unit/counit observations are
+  the actual whole transfors. Their `tapp1` observations compute to stable
+  `γΠᶜ`/`φΠᵃ` heads, and both full post-opposite Došen rectangles plus
+  component triangles compute. No composite-point unifier or specialized
+  identity-action rule is added. Transparent semantic mate functors retain
+  higher action, and the named whole Hom comparison is the generic adjunction
+  `ProfComparison`. `Pi_cat`, general proposed `Pi_along_func`, and slice
+  `Π_u` remain distinct; Beck–Chevalley, Frobenius, exponentials, and the thin
+  convention-sensitive LCCC name remain later layers. The transparent
+  `SliceDependentProducts(C)` total pairs only the selected pullbacks and their
+  indexed dependent-product structure.
 - `emdash3_2_direct_cover_completion_locality.lp`: downstream conventional
   comparison for the direct whole-presheaf cover-completion HIT. A derived
   retained-member theorem is projected through one whole transformation

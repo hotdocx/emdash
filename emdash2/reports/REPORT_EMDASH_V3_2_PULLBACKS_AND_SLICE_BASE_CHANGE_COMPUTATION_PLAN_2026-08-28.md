@@ -260,6 +260,17 @@ Hom-profunctor `ProfComparison`/`DefIso`. A future consumer may package the
 stable specialized presentation, but that optional bridge is not part of the
 pullback computation boundary.
 
+A 2026-08-29 deferred-feasibility probe confirms that this optional bridge is
+straightforwardly expressible. After the semantic mate definitions are
+unfolded through the canonical post-`Op` shape—in particular,
+`slice_sigma_obj` becomes its `sigma_map_obj` owner and non-discriminating
+slots are `_`—whole stable-to-semantic `unif_rule`s support typed `eq_refl` in
+both mate directions. Two direct `comp_fapp0 Cat_cat` rules for
+`Γstable∘Φstable` and `Φstable∘Γstable` also typecheck and reduce the whole
+composites to identity functors. These rules remain unpromoted solely because
+the generic `ProfComparison` already serves current consumers; there is no
+expressibility or architecture blocker.
+
 ## Selected Enhanced Interface
 
 The selected declarations are summarized below; the active source owns their
@@ -681,7 +692,7 @@ green.
 | `D-PB-021` | accepted and implemented | Canonical rectangle matching needs the stable projection ladder `SliceBaseChange_catd → slice_base_change_func → slice_base_change_obj` and stable whole unit/counit observations. Their `tapp1` projections are the stable `slice_base_change_gamma`/`slice_base_change_phi` heads. This is a declaration-backed computational facade, not a second adjunction theory. |
 | `D-PB-022` | accepted | Readability aliases in the rectangle LHS reconstruct `Y` as `X` after opposite normalization. Promoted rules therefore use exact raw `Sigma_cat`/`sigma_map_obj` endpoint guards, annotated as subject-reduction discriminators. The remaining 129 resulting critical-pair reports are diagnostics, not vetoes; focused rules and both reduction orders are green. |
 | `D-PB-023` | accepted and implemented | Generic `fapp0` composition and `fapp1` identity computation already own `(u*∘Σ_u)[a]` and the selected `Σ_u(id)`/`u*(id)` cases. Pullback-specific copies are unjustified when owner-position removal retains the two component triangles, so the former unifier and two rules are removed rather than retained as warning-producing joins. |
-| `D-PB-024` | accepted | A stable specialized mate functor being callable at higher arrows does not by itself identify that action with the transparent semantic mate functor. The generic adjunction `ProfComparison` supplies whole semantic coherence. Whole equality or `OmegaEquivAlong` packaging for the stable facade is feasible only after constructing whole composite laws and remains consumer-gated. |
+| `D-PB-024` | accepted, feasibility confirmed | A stable specialized mate functor being callable at higher arrows does not by itself identify that action with the transparent semantic mate functor. The generic adjunction `ProfComparison` supplies whole semantic coherence. Owner-position probes confirm that body-unfolded whole unifiers with canonical `sigma_map_obj` heads admit typed `eq_refl`, and direct `comp_fapp0 Cat_cat` cancellation rules reduce both stable whole composites to identity. Promotion and `OmegaEquivAlong` packaging remain consumer-gated, not architecture-gated. |
 
 ## Implementation Checkpoints
 

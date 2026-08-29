@@ -2227,7 +2227,10 @@ distinct. The stable mate operations have propositional semantic paths to
 through proof-time usability rules, not opaque equality bridges. The stable
 mate functors retain higher action, but their point cancellations do not assert
 whole-functor equality or an `OmegaEquivAlong`; whole semantic Hom equivalence
-is already owned by the generic `Adjunction_hom_prof_comparison`.
+is already owned by the generic `Adjunction_hom_prof_comparison`. If a later
+consumer selects the specialized whole facade, its body-unfolded unifiers use
+the canonical `sigma_map_obj` form and its cancellations are ordinary
+`Cat_cat` functor-composition rules; both shapes are already feasibility-checked.
 
 Whole `Σ_f` action and `slice_sigma_obj` share the selected runtime point.
 Its domain is definitionally the domain of `a`, and its structure arrow
@@ -2236,8 +2239,55 @@ path or equality transport between those presentations.
 
 `Pullback_catd(E,F)` continues to mean substitution of a Cat-valued family
 along `F`. It is not notation for categorical pullback objects or `f^*`.
-Products-in-slices, weighted pullback notation, pushouts, `Π_f`,
-Beck–Chevalley, and Frobenius have no selected surface syntax yet.
+Products-in-slices, weighted pullback notation, pushouts, Beck–Chevalley, and
+Frobenius have no selected surface syntax yet.
+
+## Slice Dependent-Product Notation
+
+Given `PB : PullbackStructure(C)` and
+`DP : DependentProductStructure(C,PB)`, write
+
+```text
+Π_u : C/X → C/Y
+Σ_u ⊣ u* ⊣ Π_u
+```
+
+for `slice_dependent_product_func(DP,u)` and the two existing indexed
+adjunctions. Do not confuse this `Π_u` with `Pi_cat(E)` or the separately
+proposed general `Pi_along_func(f)`.
+
+Write the second unit/counit and their off-diagonal observations as
+
+```text
+ηΠ_u : id_(C/Y) ⇒ Π_u ∘ u*
+εΠ_u : u* ∘ Π_u ⇒ id_(C/X)
+
+γΠᶜ_u(k) := tapp1(ηΠ_u,k)
+φΠᵃ_u(h) := tapp1(εΠ_u,h).
+```
+
+The corresponding runtime cuts are
+
+```text
+φΠᵃ_u(h) ∘ u*(γΠᶜ_u(k)) == h ∘ u*(k)
+Π_u(φΠᵃ_u(h)) ∘ γΠᶜ_u(k) == Π_u(h) ∘ k.
+```
+
+The actual whole unit/counit use the generic adjunction symbols; the stable
+`γΠᶜ`/`φΠᵃ` heads are their computing `tapp1` observations. Generic
+functor composition and identity own composite points and identity action.
+The transparent Hom mate functors may be printed as
+
+```text
+transposeΠ(h)   = Π_u(h) ∘ ηΠ_u(a)
+untransposeΠ(k) = εΠ_u(b) ∘ u*(k).
+```
+
+Their whole semantic equivalence is the generic adjunction
+`ProfComparison`; do not print an additional `OmegaEquivAlong` claim.
+`SliceDependentProducts(C)` denotes the thin total pairing of the selected
+pullback and dependent-product structures; reserve the stronger locally
+cartesian closed category name for the later convention-sensitive package.
 
 ## Generic Groupoidification Notation
 

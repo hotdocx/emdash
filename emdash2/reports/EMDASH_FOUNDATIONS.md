@@ -5329,10 +5329,20 @@ package. This is not missing adjunction semantics: the generic
 Hom-profunctor `ProfComparison`/`DefIso`. Packaging the specialized stable mate
 facade as a whole equivalence remains consumer-gated.
 
+This consumer gate is not an expressibility limitation. With the semantic
+whole mate bodies normalized to their canonical `comp_fapp0 Cat_cat` forms,
+using raw `sigma_map_obj` discriminators and `_` in non-discriminating slots,
+both stable-to-semantic whole unifiers admit typed `eq_refl`. Likewise, direct
+whole rules `Γstable∘Φstable → id` and `Φstable∘Γstable → id` are ordinary
+functor composition rules in `Cat_cat` and pass owner-position checking. They
+remain deferred because the generic profunctor comparison already owns the
+needed semantics, not because the specialized laws require redesign.
+
 The initial layer claims neither strict base-change functoriality nor an
-explicit pseudo certificate. Products in slices, terminal-derived products, weighted
-pullbacks, pushout duality, the second adjunction `f*⊣Π_f`,
-Beck–Chevalley, and Frobenius remain later assumption-explicit structures.
+explicit pseudo certificate. Products in slices, terminal-derived products,
+weighted pullbacks, pushout duality, Beck–Chevalley, and Frobenius remain later
+assumption-explicit structures. The second adjunction is owned by the selected
+slice-dependent-product extension described below.
 
 The pullback instance now also retains Došen's full rectangular `(ac)`
 calculus. The selected whole `f*`, unit, and counit observations keep the
@@ -5359,6 +5369,80 @@ semantic mate implementations remain proof-time comparison endpoints. Generic
 composed-functor object beta and generic functor identity already own
 `(f*∘Σ_f)[a]`, `Σ_f(id)`, and `f*(id)`; no pullback-specific unifier or
 identity-action copy is retained.
+
+### Selected dependent products in slices
+
+For a chosen pullback structure `PB`, a selected dependent-product structure
+adds the whole covariant family
+
+```text
+SliceDependentProduct(DP) : C → Cat
+X                         ↦ C/X
+u : X → Y                 ↦ Π_u : C/X → C/Y
+```
+
+and the existing adjunction instance
+
+```text
+u* ⊣ Π_u.
+```
+
+Together with pullback base change, the selected chain is
+
+```text
+Σ_u ⊣ u* ⊣ Π_u.
+```
+
+The unit and counit of the second adjunction remain the generic actual whole
+transfors
+
+```text
+ηΠ_u : id_(C/Y) ⇒ Π_u ∘ u*
+εΠ_u : u* ∘ Π_u ⇒ id_(C/X).
+```
+
+Their off-diagonal observations are
+
+```text
+γΠᶜ_u(k) = tapp1(ηΠ_u,k)
+φΠᵃ_u(h) = tapp1(εΠ_u,h),
+```
+
+and the canonical cuts compute as
+
+```text
+φΠᵃ_u(h) ∘ u*(γΠᶜ_u(k)) → h ∘ u*(k)
+Π_u(φΠᵃ_u(h)) ∘ γΠᶜ_u(k) → Π_u(h) ∘ k.
+```
+
+Opposite-slice normalization turns the readable composites into reversed
+restriction-oriented Sigma compositions. The implementation therefore retains
+stable `Π_u`, object, `γΠᶜ`, and `φΠᵃ` heads plus the two exact
+post-opposite rectangle instances and two component joins. It does not
+duplicate whole unit/counit heads: their generic adjunction indices remain
+rigid enough. Generic composed-functor object beta and functor identity remain
+the sole owners of composite points and identities, so this module adds no
+unification rule or specialized identity-action rule.
+
+The transparent whole transpose and untranspose functors implement
+
+```text
+h ↦ Π_u(h) ∘ ηΠ_u(a)
+k ↦ εΠ_u(b) ∘ u*(k)
+```
+
+and retain higher Hom action. Whole varying-endpoint Hom equivalence is the
+existing `Adjunction_hom_prof_comparison`; it is exposed under the readable
+slice-dependent-product name without a second equivalence package.
+
+This selected `Π_u` is distinct from `Pi_cat(E)`, the category of global
+sections of one displayed family, and from the separately proposed general
+`Pi_along_func(f)`, a right-Kan direct image of Cat-valued families. The thin
+total `SliceDependentProducts(C)` pairs exactly the selected pullbacks and
+their indexed dependent-product structure. The stronger
+convention-sensitive locally cartesian closed name, slice exponentials,
+Beck–Chevalley, Frobenius, and comparisons among those presentations remain
+subsequent layers.
 
 The current theory includes the expected basic operations:
 

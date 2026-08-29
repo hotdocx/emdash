@@ -170,6 +170,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_cartesian_categories.lp"),
     Path("emdash3_2_triangular_binary_products_finite_limits.lp"),
     Path("emdash3_2_pullbacks.lp"),
+    Path("emdash3_2_slice_dependent_products.lp"),
     Path("emdash3_2_checks.lp"),
 ]
 # Run the two consistently near-timeout aggregate targets before sustained

@@ -25,7 +25,7 @@ require open emdash.emdash3_2_direct_cover_completion_universality;
 require open emdash.emdash3_2_direct_cover_sheafification;
 require open emdash.emdash3_2_groupoidification_composition;
 require open emdash.emdash3_2_groupoidification_interval_recovery;
-require open emdash.emdash3_2_monads emdash.emdash3_2_triangular_binary_products emdash.emdash3_2_terminal_objects emdash.emdash3_2_cartesian_categories emdash.emdash3_2_triangular_binary_products_finite_limits emdash.emdash3_2_pullbacks;
+require open emdash.emdash3_2_monads emdash.emdash3_2_triangular_binary_products emdash.emdash3_2_terminal_objects emdash.emdash3_2_cartesian_categories emdash.emdash3_2_triangular_binary_products_finite_limits emdash.emdash3_2_pullbacks emdash.emdash3_2_slice_dependent_products;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
 assert ⊢ τ Empty_grpd ≡ empty;
@@ -27497,3 +27497,163 @@ assertnot [C : Cat]
   (f : τ (Hom C X X)) ⊢
   @slice_base_change_func C PB X X f
   ≡ @slice_sigma_func C X X f;
+
+// -------------------------------------------------------------------------------------------------
+// Selected coherent dependent products in slices
+// catalog-area: Slice dependent products and LCCC foundation
+// -------------------------------------------------------------------------------------------------
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (DP : τ (@DependentProductStructure C PB))
+  (X : τ (Obj C)) ⊢
+  @fapp0 C Cat_cat (@SliceDependentProduct_catd C PB DP) X
+  ≡ @Slice_cat C X;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (DP : τ (@DependentProductStructure C PB))
+  (X Y : τ (Obj C))
+  (u : τ (Hom C X Y)) ⊢
+  @fapp1_fapp0 C Cat_cat
+    (@SliceDependentProduct_catd C PB DP) X Y u
+  ≡ @slice_dependent_product_func C PB DP X Y u;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (DP : τ (@DependentProductStructure C PB))
+  (X Y : τ (Obj C))
+  (u : τ (Hom C X Y)) ⊢
+  @slice_dependent_product_adjunction C PB DP X Y u
+  : τ (@Adjunction
+      (@Slice_cat C Y)
+      (@Slice_cat C X)
+      (@slice_base_change_func C PB X Y u)
+      (@slice_dependent_product_func C PB DP X Y u));
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (DP : τ (@DependentProductStructure C PB))
+  (X Y : τ (Obj C))
+  (u : τ (Hom C X Y))
+  (a a' : τ (Obj (@Slice_cat C Y)))
+  (k : τ (Hom (@Slice_cat C Y) a a')) ⊢
+  @tapp1_fapp0
+    (@Slice_cat C Y) (@Slice_cat C Y)
+    _ _ a a'
+    (@unit_adj_transf
+      (@Slice_cat C Y) (@Slice_cat C X)
+      (@slice_base_change_func C PB X Y u)
+      (@slice_dependent_product_func C PB DP X Y u)
+      (@slice_dependent_product_adjunction C PB DP X Y u))
+    k
+  ≡ @slice_dependent_product_gamma C PB DP X Y u a a' k;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (DP : τ (@DependentProductStructure C PB))
+  (X Y : τ (Obj C))
+  (u : τ (Hom C X Y))
+  (b' b : τ (Obj (@Slice_cat C X)))
+  (h : τ (Hom (@Slice_cat C X) b' b)) ⊢
+  @tapp1_fapp0
+    (@Slice_cat C X) (@Slice_cat C X)
+    _ _ b' b
+    (@counit_adj_transf
+      (@Slice_cat C Y) (@Slice_cat C X)
+      (@slice_base_change_func C PB X Y u)
+      (@slice_dependent_product_func C PB DP X Y u)
+      (@slice_dependent_product_adjunction C PB DP X Y u))
+    h
+  ≡ @slice_dependent_product_phi C PB DP X Y u b' b h;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (DP : τ (@DependentProductStructure C PB))
+  (X Y : τ (Obj C))
+  (u : τ (Hom C X Y))
+  (a a' : τ (Obj (@Slice_cat C Y)))
+  (b : τ (Obj (@Slice_cat C X)))
+  (k : τ (Hom (@Slice_cat C Y) a a'))
+  (h : τ (Hom (@Slice_cat C X)
+    (@slice_base_change_obj C PB X Y u a') b)) ⊢
+  @comp_fapp0
+    (@Slice_cat C X)
+    (@slice_base_change_obj C PB X Y u a)
+    (@slice_base_change_obj C PB X Y u
+      (@slice_dependent_product_obj C PB DP X Y u
+        (@slice_base_change_obj C PB X Y u a')))
+    b
+    (@slice_dependent_product_phi C PB DP X Y u
+      (@slice_base_change_obj C PB X Y u a') b h)
+    (@fapp1_fapp0
+      (@Slice_cat C Y) (@Slice_cat C X)
+      (@slice_base_change_func C PB X Y u)
+      a
+      (@slice_dependent_product_obj C PB DP X Y u
+        (@slice_base_change_obj C PB X Y u a'))
+      (@slice_dependent_product_gamma C PB DP X Y u a a' k))
+  ≡ @comp_fapp0
+      (@Slice_cat C X)
+      (@slice_base_change_obj C PB X Y u a)
+      (@slice_base_change_obj C PB X Y u a')
+      b h
+      (@fapp1_fapp0
+        (@Slice_cat C Y) (@Slice_cat C X)
+        (@slice_base_change_func C PB X Y u) a a' k);
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (DP : τ (@DependentProductStructure C PB))
+  (X Y : τ (Obj C))
+  (u : τ (Hom C X Y))
+  (a : τ (Obj (@Slice_cat C Y)))
+  (b' b : τ (Obj (@Slice_cat C X)))
+  (k : τ (Hom (@Slice_cat C Y)
+    a (@slice_dependent_product_obj C PB DP X Y u b')))
+  (h : τ (Hom (@Slice_cat C X) b' b)) ⊢
+  @comp_fapp0
+    (@Slice_cat C Y)
+    a
+    (@slice_dependent_product_obj C PB DP X Y u
+      (@slice_base_change_obj C PB X Y u
+        (@slice_dependent_product_obj C PB DP X Y u b')))
+    (@slice_dependent_product_obj C PB DP X Y u b)
+    (@fapp1_fapp0
+      (@Slice_cat C X) (@Slice_cat C Y)
+      (@slice_dependent_product_func C PB DP X Y u)
+      (@slice_base_change_obj C PB X Y u
+        (@slice_dependent_product_obj C PB DP X Y u b'))
+      b
+      (@slice_dependent_product_phi C PB DP X Y u b' b h))
+    (@slice_dependent_product_gamma C PB DP X Y u
+      a (@slice_dependent_product_obj C PB DP X Y u b') k)
+  ≡ @comp_fapp0
+      (@Slice_cat C Y)
+      a
+      (@slice_dependent_product_obj C PB DP X Y u b')
+      (@slice_dependent_product_obj C PB DP X Y u b)
+      (@fapp1_fapp0
+        (@Slice_cat C X) (@Slice_cat C Y)
+        (@slice_dependent_product_func C PB DP X Y u) b' b h)
+      k;
+
+assert [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (DP : τ (@DependentProductStructure C PB))
+  (X Y : τ (Obj C))
+  (u : τ (Hom C X Y)) ⊢
+  @slice_dependent_product_hom_prof_comparison C PB DP X Y u
+  ≡ @Adjunction_hom_prof_comparison
+      (@Slice_cat C Y) (@Slice_cat C X)
+      (@slice_base_change_func C PB X Y u)
+      (@slice_dependent_product_func C PB DP X Y u)
+      (@slice_dependent_product_adjunction C PB DP X Y u);
+
+assertnot [C : Cat]
+  (PB : τ (@PullbackStructure C))
+  (DP : τ (@DependentProductStructure C PB))
+  (X Y : τ (Obj C))
+  (u : τ (Hom C X Y)) ⊢
+  @slice_dependent_product_func C PB DP X Y u
+  ≡ @slice_sigma_func C X Y u;

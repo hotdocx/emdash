@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2344
-- Mapped areas: 115
+- Total checks: 2353
+- Mapped areas: 116
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -134,6 +134,7 @@ stable mathematical-area scopes rather than source locations.
 | Thin selected cartesian-category capability | 4 |
 | Triangular/weighted binary-product compatibility | 5 |
 | Pullbacks and slice base change | 21 |
+| Slice dependent products and LCCC foundation | 9 |
 
 ## Section Details
 
@@ -3055,3 +3056,17 @@ stable mathematical-area scopes rather than source locations.
 | 2342 | 27472 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (g : τ (Obj (@Slice_cat C Y)) ...` |
 | 2343 | 27483 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (X Y : τ (Obj C)) (f : τ (Hom C X Y)) (a : τ (Obj (@Slice_cat C X)) ...` |
 | 2344 | 27494 | `assertnot [C : Cat] (PB : τ (@PullbackStructure C)) (X : τ (Obj C)) (f : τ (Hom C X X)) ⊢ @slice_base_change_func C ...` |
+
+### Slice dependent products and LCCC foundation
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 2345 | 27506 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (DP : τ (@DependentProductStructure C PB)) (X : τ (Obj C)) ⊢ @fapp0 ...` |
+| 2346 | 27513 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (DP : τ (@DependentProductStructure C PB)) (X Y : τ (Obj C)) (u : τ ...` |
+| 2347 | 27522 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (DP : τ (@DependentProductStructure C PB)) (X Y : τ (Obj C)) (u : τ ...` |
+| 2348 | 27534 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (DP : τ (@DependentProductStructure C PB)) (X Y : τ (Obj C)) (u : τ ...` |
+| 2349 | 27552 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (DP : τ (@DependentProductStructure C PB)) (X Y : τ (Obj C)) (u : τ ...` |
+| 2350 | 27570 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (DP : τ (@DependentProductStructure C PB)) (X Y : τ (Obj C)) (u : τ ...` |
+| 2351 | 27605 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (DP : τ (@DependentProductStructure C PB)) (X Y : τ (Obj C)) (u : τ ...` |
+| 2352 | 27641 | `assert [C : Cat] (PB : τ (@PullbackStructure C)) (DP : τ (@DependentProductStructure C PB)) (X Y : τ (Obj C)) (u : τ ...` |
+| 2353 | 27653 | `assertnot [C : Cat] (PB : τ (@PullbackStructure C)) (DP : τ (@DependentProductStructure C PB)) (X Y : τ (Obj C)) (u ...` |

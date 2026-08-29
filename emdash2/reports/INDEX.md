@@ -1255,6 +1255,24 @@ record.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_SLICE_DEPENDENT_PRODUCTS_AND_LCCC_COMPUTATION_PLAN_2026-08-29.md`:
+  completed first-tranche implementation successor to the pullback
+  computation. It selects one whole
+  covariant exact-slice family whose internal arrow action is
+  `Π_u:C/X→C/Y`, indexed by the existing chosen pullback structure, and
+  instantiates the existing adjunction as `u*⊣Π_u`. Generic unit/counit
+  observations remain the actual whole transfors; their `tapp1` projections
+  compute to stable Došen heads. Both full post-opposite rectangles and both
+  component triangles are active, while transparent Hom mate functors retain
+  higher action and the named whole comparison reuses
+  `Adjunction_hom_prof_comparison`. The implementation adds no unifier or
+  specialized composite-point/identity-action rule, and keeps `Pi_cat`, the
+  proposed general `Pi_along_func`, and slice `Π_u` distinct. Beck–Chevalley,
+  Frobenius, slice exponentials, general right-Kan comparison, TypeScript
+  generation, and optional whole stable-mate `OmegaEquivAlong` packaging are
+  later layers. The strict catalog has 2,353 checks across 116 areas, including
+  9 slice-dependent-product checks; source-only health covers 328 registered
+  owner/reviewer files.
 - `REPORT_EMDASH_V3_2_PULLBACKS_AND_SLICE_BASE_CHANGE_COMPUTATION_PLAN_2026-08-28.md`:
   completed strict-computational correction of the pullback implementation after
   checkpoint `e9ac7e6`. One whole covariant slice family supplies

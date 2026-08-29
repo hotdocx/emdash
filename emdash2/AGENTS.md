@@ -614,7 +614,10 @@ usability and non-opaque typed-reflexivity paths expose explicit unit/counit
 semantics without a runtime fold. Their point cancellations do not package
 whole equality of the specialized stable mate functors; the generic
 `Adjunction_hom_prof_comparison` remains the whole varying-endpoint Hom
-equivalence owner. Stable whole `f*`, object, unit, and counit
+equivalence owner. Body-unfolded canonical whole unifiers and direct
+`comp_fapp0 Cat_cat` cancellations for the specialized mate functors have been
+feasibility-checked; they remain consumer-gated, not architecture-gated.
+Stable whole `f*`, object, unit, and counit
 observations retain the declaration indices; their `tapp1` projections are
 Došen's `γᶜ` and `φᵃ`, and both full `(ac)` rectangles plus their identity
 component triangles compute at exact post-`Op` shapes. Generic composed-functor
@@ -632,6 +635,22 @@ retained directed slice cell and the second computes through whole Hom
 recovery. `Pullback_catd` remains generic family substitution, and explicit
 pseudo invertibility, products-in-slices, weighted/dual comparisons, `Π_f`,
 Beck–Chevalley, and Frobenius remain later assumption-explicit consumers;
+the selected coherent slice-dependent-product interface is
+`emdash3_2_slice_dependent_products.lp`; a
+`DependentProductStructure(C,PB)` supplies one whole covariant exact-slice
+family with action `Π_u:C/X→C/Y` and the existing adjunction `u*⊣Π_u`.
+The generic adjunction unit/counit remain the actual whole transfors; their
+`tapp1` observations project to stable `slice_dependent_product_gamma` and
+`slice_dependent_product_phi` heads. Two exact post-opposite rectangles and
+two component joins compute the full Došen calculus. Generic composition and
+identity remain sole owners of composite points and identity action; the
+module adds no unifier. Transparent Hom mate functors retain higher action,
+and `slice_dependent_product_hom_prof_comparison` reuses the generic whole
+adjunction `ProfComparison`. `Pi_cat`, the general proposed `Pi_along_func`,
+and slice `Π_u` remain distinct; Beck–Chevalley, Frobenius, slice exponentials,
+and the convention-sensitive LCCC name remain later layers. The transparent
+`SliceDependentProducts(C)` total pairs exactly the selected pullbacks with
+their indexed dependent-product structure;
 executable diagnostics live in `emdash3_2_checks.lp`.
 
 ## Authorities
@@ -1537,7 +1556,9 @@ Use the following order:
     paths expose the explicit unit/counit presentations while preserving
     runtime noncollapse. The generic adjunction profunctor comparison owns the
     whole Hom equivalence; equality or `OmegaEquivAlong` packaging of the
-    specialized stable mate functors remains consumer-gated. Stable whole
+    specialized stable mate functors remains consumer-gated. Canonical
+    body-unfolded whole unifiers and direct `Cat_cat` composition cancellations
+    are feasibility-checked, so this is not an expressibility boundary. Stable whole
     `f*`, object action, unit, and counit
     observations preserve the declaration indices through opposite
     normalization. Their `tapp1` projections are the public `γᶜ`/`φᵃ` heads;
