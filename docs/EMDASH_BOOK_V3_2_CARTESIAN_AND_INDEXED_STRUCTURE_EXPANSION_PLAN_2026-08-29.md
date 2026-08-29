@@ -4,8 +4,8 @@ Date: 2026-08-29 (America/Toronto)
 
 Plan-ID: `EMDASH-BOOK-CARTESIAN-INDEXED-STRUCTURE-EDITION-V0.7`
 
-Status: **active implementation plan; mathematical prose and source registries
-green, final deterministic release and visual QA in progress**.
+Status: **complete; checked `0.7.0-dev` edition locally promoted, with no
+remote publication performed**.
 
 Branch: `goal/emdash-book-categorical-structures-v3.2`
 
@@ -516,6 +516,26 @@ docs/emdash-book.pdf.
 
 No remote publication is authorized.
 
+The completed local result is:
+
+```text
+ordered sources: 45
+evidence claims/citations: 164/164
+mathematical spans: 3,091
+PDF pages: 374
+PDF SHA-256: d15287f7a841dfd25ad441c7fc8ff804425659ae0c292c2d8ae726fb46c9204b
+promoted Markdown SHA-256: b8814f4872e1dbaac544e10d6ff824baf0996d194404a57a864b840a19ef37f6
+```
+
+Two independent full release cycles produced the same PDF checksum. The final
+artifact passed the source/evidence/KaTeX/browser gates, qpdf structure check,
+Poppler metadata/text/font inspection, and the planned visual review. The
+review covered title/front matter, contents, the edited Chapter 9/12/16/28/29
+pages, every page of Chapter 30, all five new evidence rows, notation,
+glossary, computation, status, formal-presentation, bibliography, credits,
+and license pages. No clipped text, overlap, malformed mathematics, black box,
+replacement glyph, broken table, or heading defect remains.
+
 ## 11. Visual And Prose Quality Plan
 
 ### 11.1 Prose review
@@ -612,8 +632,8 @@ SHA-256 checksums before promotion.
 | `BCIS-XCUT-8` | complete source synchronization | Synchronized the prologue, front matter, Chapter 16, Chapter 28/29 transitions, notation, glossary, computation, status, formal presentation, credits, architecture, version metadata, links, and the report map. |
 | `BCIS-FORMAL-9` | complete source gate | Assembly, typography, strict KaTeX, evidence, source-order, anchor, and link checks pass with 45 ordered sources, 3,091 math spans, 164/164 evidence citations, and source fingerprint `578b85cc8d586b1677ec4335148adeb443057d24`. The stale-claim search leaves no false authored-source hit. |
 | `BCIS-RENDER-10` | complete development render | Browser pagination completed at 374 US-Letter pages with zero console, page, request, or render errors. Final-PDF Poppler review remains owned by `BCIS-RELEASE-11`. |
-| `BCIS-RELEASE-11` | pending | Produce two deterministic `0.7.0-dev` PDFs, complete structural/font/text/visual QA, and locally promote the checked pair. |
-| `BCIS-CLOSE-12` | pending | Synchronize this ledger, exact diff, checksums, page count, source/evidence/math counts, and local checkpoint history. |
+| `BCIS-RELEASE-11` | complete | Two full releases produced the identical 374-page PDF SHA-256 `d15287f7a841dfd25ad441c7fc8ff804425659ae0c292c2d8ae726fb46c9204b`. PDF structure, metadata, 18 embedded Unicode fonts, extracted text, and the complete planned visual sample are clean. The checked PDF and assembled Markdown were locally promoted. |
+| `BCIS-CLOSE-12` | ready for final checkpoint | Synchronized status, exact counts, checksums, visual-gate result, and local promotion. The bounded source checkpoints are `175815f`, `9f9f3d8`, and `30b7c7f`; the promoted-artifact checkpoint and final clean-tree audit remain. |
 
 ## 14. Decision Ledger
 

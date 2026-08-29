@@ -985,10 +985,10 @@ detailed probe evidence.
   completed fifth-spiral book/article ledger and corrected `0.6.1-dev`
   publication record.
 - `../../docs/EMDASH_BOOK_V3_2_CARTESIAN_AND_INDEXED_STRUCTURE_EXPANSION_PLAN_2026-08-29.md`:
-  active sixth-spiral book ledger for adjunction-generated monads, finite
+  completed sixth-spiral book ledger for adjunction-generated monads, finite
   cartesian structure, slice base change, and `Sigma_u |- u* |- Pi_u`. It owns
-  the draft `0.7.0-dev` local release and visual gate, but no remote
-  publication.
+  the locally promoted 374-page draft `0.7.0-dev` release and its deterministic
+  PDF/visual gate; no remote publication occurred.
 - `REPORT_EMDASH_V3_2_AUTONOMOUS_MAINTENANCE_AND_EVOLUTION_PLAN_2026-07-22.md`:
   current cross-project maintenance, triage, and evolution ledger.
 - `REPORT_EMDASH_CHECK_CATALOG.md`: generated map of the diagnostic suite.
