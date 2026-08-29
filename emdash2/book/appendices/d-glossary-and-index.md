@@ -120,8 +120,9 @@ Integer classifier. See [Chapter 26](#chapter-26).
 **Compositor.** The directed comparison
 $F[g]\circ F[f]\Rightarrow F[g\circ f]$ obtained by specializing whole
 transfor laxity to the identity transfor of $F$. It may become invertible in a
-path target or reduce to identity for a selected strict code without being
-globally erased. See [Chapters 25](#chapter-25) and [28](#chapter-28).
+path target; selected `IsStrictFunctor` evidence instead compares it with an
+equality-induced arrow without globally erasing it. See
+[Chapters 25](#chapter-25) and [28](#chapter-28).
 
 <a id="glossary-commutative-ring"></a>
 

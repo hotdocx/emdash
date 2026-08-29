@@ -531,7 +531,7 @@ register supplies the exact owner and reviewer for each cited claim.
 | --- | --- |
 | `emdash3_2.lp` | categorical nucleus: classifiers, iterated homs, functors, transfors, directed families, cuts, and universal-construction interfaces |
 | `emdash3_2_monads.lp`, `emdash3_2_triangular_binary_products.lp`, `emdash3_2_terminal_objects.lp`, `emdash3_2_cartesian_categories.lp` | selected monad extension and finite cartesian introduction/elimination computation, with thin packaging separated from runtime owners |
-| `emdash3_2_pullbacks.lp`, `emdash3_2_slice_dependent_products.lp` | exact whole slice families, `Σ_u⊣u*⊣Π_u`, full rectangular cuts, point/whole mates, and derived pullback observations without a cone record |
+| `emdash3_2_pullbacks.lp`, `emdash3_2_slice_dependent_products.lp` | exact whole slice families, $\Sigma_u\dashv u^*\dashv\Pi_u$, full rectangular cuts, point/whole mates, and derived pullback observations without a cone record |
 | `emdash3_2_presheaves.lp`, `emdash3_2_sieves.lp`, `emdash3_2_sites.lp` | presheaves, higher and ordinary sieves, pullback, and the direct Grothendieck-topology laws |
 | `emdash3_2_generated_topologies.lp`, `emdash3_2_sieve_extensions.lp`, `emdash3_2_site_basis.lp`, `emdash3_2_ringed_sites.lp` | least generated topology, whole matching/section families, basis comparison, and ringed-site presentations |
 | `emdash3_2_direct_cover_*.lp` | return/glue/silent cover completion, recursion, topology-locality, whole Hom universality, and the resulting Cat-valued reflector |

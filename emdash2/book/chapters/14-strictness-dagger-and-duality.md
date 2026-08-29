@@ -31,7 +31,7 @@ The following terms remain separate throughout the book.
 | gaunt category | a HoTT category that is also strict | runtime strictness |
 | native `IsNCat(n,C)` | recursive finite height of the hom-categories | object identity agrees with isomorphism |
 | strict naturality cut | a selected `tapp1` composite reduces to one off-diagonal action | all coherence is judgmental |
-| computational strict-functor code | a decoded functor whose compositor reduces at the selected profile owner | every ambient functor is strict or all higher cells are identities |
+| computational strict-functor property | `IsStrictFunctor(F)` compares the existing compositor with its equality-induced arrow; `StrictFunctor(A,B)` pairs $F$ with that evidence | every ambient functor is strict or every coherence is judgmental |
 | runtime strictness | an oriented kernel reduction chooses a normal form | object truncation or invertibility |
 | dagger category | identity agrees with *unitary* isomorphism | identity agrees with every isomorphism |
 
@@ -40,11 +40,13 @@ In particular, the HoTT phrase *strict category* begins with a
 uses this definition. A strict precategory may still have nontrivial
 automorphisms that cannot come from its proposition-valued object identity.
 
-The computational code row is the profile used in Chapter 28. Its decoder
-selects functors whose compositor computes to identity while leaving the
-ambient transformation and higher-hom calculus shared with lax maps. This is
-a local syntactic specialization, not evidence that the whole prototype has
-already migrated away from its historical global strict endpoint cuts.
+The proof-carrying row is the profile used in Chapter 28. It does not decode a
+second functor grammar. `IsStrictFunctor` constrains the compositor already
+extracted from an ambient functor, and the exact `StrictFunctor` package pairs
+that functor with its evidence while leaving the ambient transformation and
+higher-hom calculus shared with lax maps. This is a local property/evidence
+specialization, not a blanket compositor-to-identity rewrite or evidence that
+every historical global strict endpoint cut has already migrated.
 
 <!-- evidence:GRAY-WALKING-INTERCHANGER -->
 
