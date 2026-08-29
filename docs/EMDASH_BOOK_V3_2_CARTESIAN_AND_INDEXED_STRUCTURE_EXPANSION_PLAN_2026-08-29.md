@@ -633,7 +633,7 @@ SHA-256 checksums before promotion.
 | `BCIS-FORMAL-9` | complete source gate | Assembly, typography, strict KaTeX, evidence, source-order, anchor, and link checks pass with 45 ordered sources, 3,091 math spans, 164/164 evidence citations, and source fingerprint `578b85cc8d586b1677ec4335148adeb443057d24`. The stale-claim search leaves no false authored-source hit. |
 | `BCIS-RENDER-10` | complete development render | Browser pagination completed at 374 US-Letter pages with zero console, page, request, or render errors. Final-PDF Poppler review remains owned by `BCIS-RELEASE-11`. |
 | `BCIS-RELEASE-11` | complete | Two full releases produced the identical 374-page PDF SHA-256 `d15287f7a841dfd25ad441c7fc8ff804425659ae0c292c2d8ae726fb46c9204b`. PDF structure, metadata, 18 embedded Unicode fonts, extracted text, and the complete planned visual sample are clean. The checked PDF and assembled Markdown were locally promoted. |
-| `BCIS-CLOSE-12` | ready for final checkpoint | Synchronized status, exact counts, checksums, visual-gate result, and local promotion. The bounded source checkpoints are `175815f`, `9f9f3d8`, and `30b7c7f`; the promoted-artifact checkpoint and final clean-tree audit remain. |
+| `BCIS-CLOSE-12` | complete | Synchronized status, exact counts, checksums, visual-gate result, and local promotion. The bounded source checkpoints are `175815f`, `9f9f3d8`, and `30b7c7f`; promoted artifacts and release records are checkpoint `7884982`. The tree was clean immediately after that checkpoint; this final closeout changes only this ledger. |
 
 ## 14. Decision Ledger
 
