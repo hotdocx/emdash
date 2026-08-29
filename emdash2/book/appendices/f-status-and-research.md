@@ -3,7 +3,7 @@
 # Appendix F. Implementation Status And Research Directions
 
 This appendix summarizes the boundary of the higher-categorical development
-edition through the fifth, simplicial spiral. The generated
+edition through the sixth, cartesian and indexed-structure spiral. The generated
 [evidence register](#appendix-evidence) remains the detailed claim-by-claim
 authority.
 
@@ -21,10 +21,11 @@ authority.
 | Truncation and height | Recursive truncation properties and closure, evidence-property, finite `IsNCat` object truncation, classified `NType_cat(n)` targets, point-computing `Trunc_ntype(n,A)`, restricted elimination, and whole map action | No general directed categorical truncation, arbitrary quotient schema, left-exactness theorem, or complete comparison with every hub-and-spoke presentation |
 | WalkingEnd calculation | Code, encode, power, spiral, contextual decoder, normalization cell/path, two inverse laws, carrier equivalence, noninvertibility results, and the whole free-inversion comparison with the Circle | No packaged monoid isomorphism, reverse `BNat` functor, full hom-category equivalence with `BNat`, or directed initiality theorem |
 | Groupoidal realization | Path categories and path functors; product-path split/join and coherent transport; Circle/Integer encode-decode and monodromy; WalkingEnd/Circle and WalkingArrow/interval mapping theorems; category-indexed groupoidification; path-realized pseudo-laxity | Source functoriality and the packaged groupoidification adjunction, closure for every former, generic simplex regressions, and a complete computational HoTT metatheory remain open |
-| Profiled Gray direction | Computational strict-functor codes, the strict-object/lax-arrow `GrayHom_lax` profile, one selected right closure, the walking square, and a nonidentity interchanger with retained next action | No mirror closure, full Crans–Gray biclosed monoidal structure, tensor functoriality/coherence, or global strict-cut migration |
+| Profiled Gray direction | `IsStrictFunctor` properties, exact functor/evidence packages, the strict-object/lax-arrow `GrayHom_lax` profile, one selected right closure, the walking square, and a nonidentity interchanger with retained next action | No mirror closure, full Crans–Gray biclosed monoidal structure, tensor functoriality/coherence, or global/profile-local strict-cut migration |
 | Semisimplicial and dependent simplexes | Computing injective face codes and augmented index; join-built ordinal shapes; Yoneda standard semisimplices; homd/Sigma triangle and tetrahedron action; intrinsic flagged codes; generic nonempty faces; one canonical ordinal source in variable dimension with selected checks through dimension four and retained next action | No degeneracies, whole `DependentSimplex_cat(C,n)` classifier, mapping-category equivalence with `Functor_cat(Delta[n],C)`, judgmental agreement of all finite presentations, or general Kan, Segal, Rezk, complicial, or oriental theory |
 | Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
 | Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
+| Monads and cartesian/indexed structure | Whole monad extension with ambient beta/accumulation; selected triangular products and terminality; chosen pullback base change with point/whole mates; selected dependent products and `Σ_u⊣u*⊣Π_u` | No free-monad syntax, explicit Kleisli category, automatic weighted-product witness, pushout duality, Beck–Chevalley, Frobenius, derived slice exponentials, or final convention-sensitive LCCC package |
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
 | Presheaves and sieves | Cat-valued presheaves, Yoneda and slices, higher sieves, ordinary pointwise-subterminal sieves, pullback membership, and commutative-ring invertibility sieves | No global ordinary-sieve classifier, automatic representation by one open, topology, descent, or sheafification follows from this layer |
 | Sites and descent | Ordinary-sieve Grothendieck topology laws, chaotic model, internally generated least topology, whole sieve extensions, matching and section Hom families, and topology-locality | No inductive cover derivations, coverhood decision procedure, automatic subcanonicity, sheafification reflector, or identification with a separate rigid sheaf facade follows from locality alone |
@@ -119,6 +120,15 @@ agrees with the existing internal-action tower. Comparison functors, whole
 beta and eta, and compatibility with face restriction must then be
 constructed. Degeneracies are a separate extension of the index and native
 recursion, not a consequence of ambient identities alone.
+
+The selected cartesian and slice structures supply a different continuation.
+Beck–Chevalley should compare pullback followed by dependent product across a
+selected pullback square, with an explicit direction and invertibility
+boundary. Frobenius should relate selected Sigma/base-change action to the
+chosen product structure. Slice exponentials should be derived from pullbacks
+and `Π_u` before the neutral `SliceDependentProducts(C)` total is renamed as
+a convention-sensitive locally cartesian closed package. None of these
+comparisons requires replacing the active `Σ_u`, `u*`, or `Π_u` owners.
 
 ## F.5 Semantics And Proof-Assistant Engineering
 

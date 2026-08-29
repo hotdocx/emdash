@@ -14,9 +14,12 @@ realization: paths close selected formers, the Circle restores inverse powers,
 groupoidification freely realizes directed cells as paths, and a profiled Gray
 closure exposes a genuinely directed interchanger. A fifth spiral uses face
 codes, directed join, and iterated outgoing paths to construct canonical
-dependent simplexes in variable dimension. Chapter details, notation, and
-cross-references may still change. The active implementation remains
-authoritative whenever prose and code disagree.
+dependent simplexes in variable dimension. A sixth returns to universal
+structure: adjunctions generate monads, finite products acquire a triangular
+cut calculus, and slice base change extends to the chain
+$\Sigma_u\dashv u^*\dashv\Pi_u$. Chapter details, notation, and cross-references
+may still change. The active implementation remains authoritative whenever
+prose and code disagree.
 
 Copyright © 2026 the emdash contributors. Except where separately identified,
 the book text is licensed under CC BY-SA 3.0. See

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "planId": "EMDASH-BOOK-GROUPOIDAL-REALIZATION-EDITION-V0.5",
+  "planId": "EMDASH-BOOK-CARTESIAN-INDEXED-STRUCTURE-EDITION-V0.7",
   "retainedChapterRange": [1, 8],
   "retainedChapterCentralTheorems": [
     {
@@ -88,7 +88,12 @@
         "status": "checked",
         "evidence": "TRANSF-STRICT-NATURALITY"
       },
-      "boundary": "the product/projection theorem remains mathematical development for a general category with chosen products; the active Cat-specialized owner-aligned legs are checked and the displayed comparison is a formal consequence, without a new global rewrite"
+      "secondaryEvidence": [
+        "TRIANGULAR-BINARY-PRODUCTS",
+        "CAT-PRODUCT-CALCULUS",
+        "ADJ-TRIANGLE-CUTS"
+      ],
+      "boundary": "selected triangular products now compute in an arbitrary supplied BinaryProducts(C,P) structure while generic product-category action remains separate; terminal, pullback, and dependent-product continuations are developed in Chapter 30, without a free syntax or global commuting theorem"
     },
     {
       "id": "chapter-10",
@@ -127,6 +132,10 @@
         "status": "checked",
         "evidence": "ADJ-TRIANGLE-CUTS"
       },
+      "secondaryEvidence": [
+        "ADJ-HOM-PROF-COMPARISON",
+        "MONAD-TRIANGULAR-COMPUTATION"
+      ],
       "boundary": "the fully-faithful and essentially-surjective characterization needs native packages and coherent higher action"
     },
     {
@@ -180,8 +189,13 @@
         "status": "checked",
         "evidence": "WEIGHTED-LIMIT-PRESERVATION"
       },
-      "secondaryEvidence": ["PROF-CLOSED-CALCULUS", "WEIGHTED-LIMIT-REPRESENTABILITY"],
-      "boundary": "terminal and conjoint weights are active interface specializations, while their standard cone, end, and pointwise Kan semantics and general dependent adjunctions require variance-correct higher owners"
+      "secondaryEvidence": [
+        "PROF-CLOSED-CALCULUS",
+        "WEIGHTED-LIMIT-REPRESENTABILITY",
+        "TRIANGULAR-BINARY-PRODUCTS",
+        "PULLBACK-SLICE-BASE-CHANGE"
+      ],
+      "boundary": "terminal and conjoint weights are active interface specializations; direct selected products, terminality, pullbacks, and slice dependent products now have separate computational owners, while automatic weighted comparison, standard end formulas, pointwise Kan semantics, Beck-Chevalley, and Frobenius remain later layers"
     },
     {
       "id": "chapter-17",
@@ -467,6 +481,32 @@
         "ORDINAL-DEPENDENT-FOUR-SIMPLEX"
       ],
       "boundary": "injective faces, standard semisimplices, native dependent simplexes through dimension four, intrinsic flagged codes, variable-dimensional canonical ordinal sources, generic nonempty-face action, and retained higher action are active; degeneracies, a whole DependentSimplex_cat classifier and Functor_cat(Delta[n],C) equivalence, judgmental agreement of all presentations, and general Kan, Segal, Rezk, complicial, or oriental structure remain unclaimed"
+    },
+    {
+      "id": "chapter-30",
+      "number": 30,
+      "path": "book/chapters/30-cartesian-structure-and-dependent-products.md",
+      "title": "Cartesian Structure And Dependent Products",
+      "conceptualOwner": "computational finite cartesian structure, chosen slice base change, and the three-adjoint dependent chain",
+      "spiralFrom": [
+        "chapter-9",
+        "chapter-12",
+        "chapter-13",
+        "chapter-16",
+        "chapter-17"
+      ],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "SLICE-DEPENDENT-PRODUCTS"
+      },
+      "secondaryEvidence": [
+        "TRIANGULAR-BINARY-PRODUCTS",
+        "TERMINAL-OBJECT-COMPUTATION",
+        "PULLBACK-SLICE-BASE-CHANGE",
+        "ADJ-TRIANGLE-CUTS",
+        "ADJ-HOM-PROF-COMPARISON"
+      ],
+      "boundary": "selected products, terminality, pullbacks, and slice dependent products have whole computational owners and Došen-style cuts; weighted comparison remains supplied, while pushouts, Beck-Chevalley, Frobenius, derived slice exponentials, and the convention-sensitive final LCCC package remain later layers"
     }
   ],
   "appendix": {

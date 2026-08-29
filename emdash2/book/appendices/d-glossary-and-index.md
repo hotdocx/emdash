@@ -101,6 +101,13 @@ preceding dimension. See [Chapter 7](#chapter-7).
 It is not definitionally an ordinary HoTT precategory. See
 [Chapters 2](#chapter-2) and [10](#chapter-10).
 
+<a id="glossary-chosen-binary-product"></a>
+
+**Chosen binary product.** A selected whole functor $P:C\times C\to C$
+together with whole projections and a represented-family pairing operation.
+Its triangular beta, distribution, and eta cuts compute. It is distinct from
+the product category constructor. See [Chapter 30](#chapter-30).
+
 <a id="glossary-circle"></a>
 
 **Circle.** The selected groupoidal HIT with one point and one generating
@@ -185,6 +192,14 @@ Each successor is a `PathOut`, hence a Sigma of a representable hom; its
 arrows expose a base cell and a dependent cell above transport. The active
 variable-dimensional object package is not yet a whole category of all
 dependent simplexes. See [Chapter 29](#chapter-29).
+
+<a id="glossary-dependent-product-slice"></a>
+
+**Dependent product in slices.** A selected whole functor
+$\Pi_u:C/X\to C/Y$ right adjoint to pullback base change
+$u^*:C/Y\to C/X$. It is distinct from the global section category
+`Pi_cat` and from a general right-Kan direct image. See
+[Chapter 30](#chapter-30).
 
 <a id="glossary-directed-hit"></a>
 
@@ -295,8 +310,9 @@ packaged adjunction remain future interfaces. See [Chapter 27](#chapter-27).
 <a id="glossary-gray-profile"></a>
 
 **Gray profile, selected.** The computational full-subcategory facade
-$\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ whose objects are strict-functor codes
-and whose arrows and higher homs reuse the ambient transfor tower. One checked
+$\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ whose objects are ordinary functors
+paired with `IsStrictFunctor` evidence and whose arrows and higher homs reuse
+the ambient transfor tower. One checked
 right closure yields a walking-square interchanger; a full Crans–Gray
 biclosed monoidal structure is not claimed. See [Chapter 28](#chapter-28).
 
@@ -394,6 +410,14 @@ finite list of unrelated coherence fields. See [Chapter 28](#chapter-28).
 data to every member of a sieve $R$, compatibly with refinement. A global
 section restricts to a matching family by precomposition. See
 [Chapter 19](#chapter-19).
+
+<a id="glossary-monad"></a>
+
+**Monad, computational presentation.** An endofunctor $T$ with whole unit and
+multiplication observations and a whole extension operation
+$f\mapsto f^*$. The ambient beta and accumulation cuts normalize extension
+without requiring an explicit Kleisli category. See
+[Chapter 12](#chapter-12).
 
 <a id="glossary-natural-transformation"></a>
 
@@ -508,6 +532,13 @@ $A^{\mathrm{op}}\times B\to\mathsf{Cat}$, contravariant in its first endpoint
 and covariant in its second. See
 [Chapter 13](#chapter-13).
 
+<a id="glossary-pullback-base-change"></a>
+
+**Pullback base change.** For chosen pullbacks and $u:X\to Y$, the whole
+functor $u^*:C/Y\to C/X$ right adjoint to slice postcomposition
+$\Sigma_u$. Pullback objects, projections, and their directed square derive
+from this slice action and its counit. See [Chapter 30](#chapter-30).
+
 <a id="glossary-representable"></a>
 
 **Representable.** A family or profunctor obtained from an ambient hom. Its
@@ -578,6 +609,14 @@ $\operatorname{Hom}(-,n+1)$ on the augmented semi-simplex category. The shift
 converts dimension $n$ to $n+1$ vertices. It is distinct from both the ordinal
 source category $\Delta[n]$ and one native dependent simplex. See
 [Chapter 29](#chapter-29).
+
+<a id="glossary-terminal-object"></a>
+
+**Terminal object, selected.** An object $t$ with one whole canonical-arrow
+transformation $!:\operatorname{id}_C\Rightarrow\operatorname{Const}_t$.
+Every $\operatorname{Hom}_C(A,t)$ is contractible at $!_A$; arbitrary
+uniqueness is equality evidence rather than a variable-headed rewrite. See
+[Chapter 30](#chapter-30).
 
 <a id="glossary-topology-local-ring"></a>
 

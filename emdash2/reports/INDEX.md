@@ -193,6 +193,17 @@ and GitHub Pages run
 [`32554952322`](https://github.com/hotdocx/emdash/actions/runs/32554952322)
 deployed the byte-verified corrected book successfully.
 
+`../../docs/EMDASH_BOOK_V3_2_CARTESIAN_AND_INDEXED_STRUCTURE_EXPANSION_PLAN_2026-08-29.md`
+is the active sixth-spiral book ledger. It extends the checked exposition from
+adjunction-generated monads and triangular binary/empty products through
+slice base change and the three-adjoint chain `Sigma_u |- u* |- Pi_u`, while
+preserving weighted universal constructions as a distinct semantic comparison
+layer. Its active local target is the draft `0.7.0-dev` edition. The plan owns
+the evidence repair, Chapter 9 and Chapter 12 corrections, new Chapter 30,
+cross-cutting appendix/front-matter synchronization, deterministic local PDF
+release, visual QA, and local promotion. It authorizes no article expansion or
+remote publication.
+
 `../../docs/PARALLEL_GOAL_V3_2_INTEGRATION_PLAN_2026-08-04.md` records the
 completed cross-layer integration joining the TypeScript-elaborator and
 presheaves/sites/schemes histories. It owns the historical conflict decisions,

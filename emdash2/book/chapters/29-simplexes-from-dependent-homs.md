@@ -582,3 +582,9 @@ degeneracies. A semisimplicial substrate is not a Kan or Segal theory. By
 keeping those differences visible, the checked recursion can serve as a
 foundation for later simplicial methods without being mistaken for their
 completion.
+
+The next chapter changes scale rather than dimension. It returns to the
+structural cuts of Chapters 9 and 12 and asks how products, terminality, and
+adjunctions behave when the objects being varied are themselves arrows in a
+slice. The same insistence on whole action will turn finite cartesian
+structure into the indexed chain $\Sigma_u\dashv u^*\dashv\Pi_u$.

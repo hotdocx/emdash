@@ -530,6 +530,8 @@ register supplies the exact owner and reviewer for each cited claim.
 | Module family | Formal role |
 | --- | --- |
 | `emdash3_2.lp` | categorical nucleus: classifiers, iterated homs, functors, transfors, directed families, cuts, and universal-construction interfaces |
+| `emdash3_2_monads.lp`, `emdash3_2_triangular_binary_products.lp`, `emdash3_2_terminal_objects.lp`, `emdash3_2_cartesian_categories.lp` | selected monad extension and finite cartesian introduction/elimination computation, with thin packaging separated from runtime owners |
+| `emdash3_2_pullbacks.lp`, `emdash3_2_slice_dependent_products.lp` | exact whole slice families, `Σ_u⊣u*⊣Π_u`, full rectangular cuts, point/whole mates, and derived pullback observations without a cone record |
 | `emdash3_2_presheaves.lp`, `emdash3_2_sieves.lp`, `emdash3_2_sites.lp` | presheaves, higher and ordinary sieves, pullback, and the direct Grothendieck-topology laws |
 | `emdash3_2_generated_topologies.lp`, `emdash3_2_sieve_extensions.lp`, `emdash3_2_site_basis.lp`, `emdash3_2_ringed_sites.lp` | least generated topology, whole matching/section families, basis comparison, and ringed-site presentations |
 | `emdash3_2_direct_cover_*.lp` | return/glue/silent cover completion, recursion, topology-locality, whole Hom universality, and the resulting Cat-valued reflector |
@@ -543,7 +545,7 @@ register supplies the exact owner and reviewer for each cited claim.
 | `emdash3_2_eq1_*.lp`, `emdash3_2_nat_arithmetic.lp`, `emdash3_2_walking_end_hit.lp` | equality-valued higher action, reusable arithmetic, and the WalkingEnd encode-decode development |
 | the groupoidal-closure, Integer, Circle, truncation, and connectedness modules | path-former comparisons, successor-localized integers, Circle encode–decode, classified truncation, and the selected connectedness consumer |
 | the groupoidal-interval, walking-comparison, and groupoidification modules | two finite free-inversion tests, category-indexed formation and whole unit, target extension/restriction, whole mapping equivalence, compositor, and Interval recovery |
-| the whole-laxity and Gray profile/right-closure modules | displayed and ordinary whole laxity surfaces, computational strict-functor codes, the shared Gray hom profile, one selected right closure, and the derived walking interchanger |
+| the whole-laxity and Gray profile/right-closure modules | displayed and ordinary whole laxity surfaces, `IsStrictFunctor` properties, exact functor/evidence packages, the shared Gray hom profile, one selected right closure, and the derived walking interchanger |
 | `emdash3_2_checks.lp` and `examples/` | executable diagnostics and independent reviewer-facing witnesses rather than mathematical owners |
 
 Imports use `require`; `open` brings imported public names into scope. The
@@ -681,9 +683,11 @@ $$
 
 The evaluation projection computes through `piapp0_func`. Constant
 sections and pullback of sections supply important introductions, but the
-current interface does not assert a general categorical Pi-eta or a fully
-packaged dependent adjunction. Those stronger universal laws require the
-base-arrow, off-diagonal, and Beck–Chevalley data described in Chapter 16.
+current section interface does not assert a general categorical Pi-eta or the
+separately proposed right-Kan direct image `Pi_along_func`. Selected slice
+dependent products now form a different whole family
+$\Pi_u:C/X\to C/Y$ right adjoint to pullback base change. Beck–Chevalley and
+comparison with the section/right-Kan presentations remain later layers.
 
 At the groupoid layer, encoded Sigma and Pi classifiers separately provide
 dependent pairs, projections, pointwise path observation, and the selected
@@ -696,8 +700,9 @@ categories and their arrow action is part of the interface.
 
 > **Formal status — checked nucleus.** Evidence `CAT-SIGMA-PI` and
 > `TT-SIGMA-PI-PATHS`. The active rules cover the cited constructors,
-> projections, evaluation, and action. General dependent adjunctions remain
-> the research boundary recorded in Chapter 16.
+> projections, evaluation, and action. Evidence `SLICE-DEPENDENT-PRODUCTS`
+> separately records the selected slice adjunction $u^*\dashv\Pi_u$; it does
+> not identify slice dependent products with global section categories.
 
 ### The WalkingEnd Rule Package
 
@@ -801,13 +806,15 @@ $$
 
 Because $f$ still ranges over a whole hom category, one further hom action can
 observe how $\phi$ varies. A path-valued target makes the comparison
-invertible. A decoded strict-functor code instead makes the selected
-compositor compute to identity. These are target and profile specializations
-of one action, not duplicate functor theories.
+invertible. A strict-functor property instead stores an endpoint path and an
+equality identifying the selected compositor with its equality-induced arrow.
+This is evidence about one action, not a duplicate functor theory or a blanket
+compositor-to-identity rewrite.
 
-The category $\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ uses strict-functor codes
-as objects and reuses the ambient transfor and higher-hom tower between their
-decoded carriers. One selected right closure is checked:
+The category $\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ uses proof-carrying
+strict-functor packages as objects: each package is an ambient functor paired
+with `IsStrictFunctor` evidence. It reuses the ambient transfor and higher-hom
+tower between their stable views. One selected right closure is checked:
 
 $$
 \mathsf{GrayHom}_{\mathrm{lax}}(A\otimes_R B,C)
@@ -896,6 +903,60 @@ uniqueness package.
 > The formation/elimination/computation interface is active. Semantic end
 > formulas, general existence, and univalent uniqueness remain separately
 > status-labeled mathematics.
+
+### Monads, Cartesian Structure, And Slice Adjunctions
+
+The newer structural interfaces reuse the same rule schema rather than adding
+a second logical framework.
+
+| Structure | Formation/selected data | Elimination or observation | Principal computation |
+| --- | --- | --- | --- |
+| monad | `Monad(A,T)` indexed by an endofunctor | whole unit, multiplication, and extension; point extension $f^*$ | extension beta and accumulation; multiplication component to extension of identity |
+| binary products | `BinaryProducts(C,P)` indexed by $P:C\times C\to C$ | whole projections, represented-family pairing, $K_1^a/K_2^a$ | projection beta, pairing distribution, eta, selected normalizations |
+| terminal object | `TerminalObject(C,t)` indexed by $t$ | whole $!:\operatorname{id}\Rightarrow\operatorname{Const}_t$ and Hom contraction | $!_B\circ h\rightsquigarrow !_A$; arbitrary uniqueness is equality |
+| pullbacks | `PullbackStructure(C)` | exact whole base-change family $u^*$ and $\Sigma_u\dashv u^*$ | both adjunction rectangles, point/whole mate cancellation, derived object/projections/square |
+| slice dependent products | `DependentProductStructure(C,PB)` | exact whole family $\Pi_u$ and $u^*\dashv\Pi_u$ | both second-adjunction rectangles and component triangles |
+
+The product and terminal structures are selected: their classifiers do not
+inhabit themselves for every category. The thin cartesian package only pairs
+the two existing capabilities.
+
+For pullbacks, a cone is already an object of
+$\operatorname{Hom}_{C/Y}(\Sigma_u a,g)$. The pullback object is the selected
+slice object $u^*(g)$, and its counit yields the second projection and directed
+square. Hence no record constructor accepts two legs plus a manually supplied
+commutativity equation.
+
+At the whole mate level, proof-time unifiers compare stable functors with
+their canonical semantic bodies after `slice_sigma_obj` has normalized to
+`sigma_map_obj`. Runtime cancellation is composition in `Cat_cat`, but the
+active rules repeat exact raw Hom-category endpoints; wildcard-only endpoints
+could reconstruct the wrong source after opposite normalization.
+
+Dependent products add the second adjunction without identifying three
+different Pi notions:
+
+```text
+Pi_cat(E)          category of global sections
+Pi_along_func(F)   proposed general right-Kan direct image
+Π_u                 selected right adjoint C/X → C/Y.
+```
+
+The neutral `SliceDependentProducts(C)` total packages the pullback structure
+and its indexed dependent-product structure. It does not yet assert the final
+finite-limit convention, derived slice exponentials, Beck–Chevalley, or
+Frobenius coherence of a convention-sensitive LCCC package.
+
+<!-- evidence:MONAD-TRIANGULAR-COMPUTATION -->
+<!-- evidence:TRIANGULAR-BINARY-PRODUCTS -->
+<!-- evidence:TERMINAL-OBJECT-COMPUTATION -->
+<!-- evidence:PULLBACK-SLICE-BASE-CHANGE -->
+<!-- evidence:SLICE-DEPENDENT-PRODUCTS -->
+
+> **Formal status — checked selected structures.** The five cited evidence
+> rows connect each classifier to its whole operations and independent
+> reviewer. They establish the displayed local cut computations, not global
+> existence, a free syntax, or coherence layers explicitly listed as future.
 
 <a id="appendix-formal-presentation-g5"></a>
 

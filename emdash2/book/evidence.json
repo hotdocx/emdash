@@ -219,6 +219,158 @@
         }
       ]
     },
+    "TRIANGULAR-BINARY-PRODUCTS": {
+      "status": "checked",
+      "statement": "A selected whole product functor P:C×C→C exposes whole projection transfors, represented-family pairing, stable K1a/K2a and pairing heads, runtime beta/distribution/eta computation, and transparent whole unpair action without duplicating the ambient product-category calculus.",
+      "owners": [
+        {
+          "file": "emdash3_2_triangular_binary_products.lp",
+          "symbol": "BinaryProducts"
+        },
+        {
+          "file": "emdash3_2_triangular_binary_products.lp",
+          "symbol": "binary_products_proj1_transf"
+        },
+        {
+          "file": "emdash3_2_triangular_binary_products.lp",
+          "symbol": "binary_products_proj2_transf"
+        },
+        {
+          "file": "emdash3_2_triangular_binary_products.lp",
+          "symbol": "binary_products_pair_transf"
+        },
+        {
+          "file": "emdash3_2_triangular_binary_products.lp",
+          "symbol": "binary_products_K1a_fapp0"
+        },
+        {
+          "file": "emdash3_2_triangular_binary_products.lp",
+          "symbol": "binary_products_K2a_fapp0"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/triangular_binary_products.lp",
+          "symbol": "binary_products_pair_fapp0"
+        },
+        {
+          "file": "examples/triangular_binary_products.lp",
+          "symbol": "binary_products_map_fapp0"
+        }
+      ]
+    },
+    "TERMINAL-OBJECT-COMPUTATION": {
+      "status": "checked",
+      "statement": "A selected terminal object exposes one whole transformation from the identity functor to the constant terminal functor, computing components and off-diagonal action; every Hom_C(A,t) is contractible at the canonical arrow, yielding arbitrary-arrow uniqueness without a variable-headed runtime rule.",
+      "owners": [
+        {
+          "file": "emdash3_2_terminal_objects.lp",
+          "symbol": "TerminalObject"
+        },
+        {
+          "file": "emdash3_2_terminal_objects.lp",
+          "symbol": "terminal_arrow_transf"
+        },
+        {
+          "file": "emdash3_2_terminal_objects.lp",
+          "symbol": "terminal_hom_contr"
+        },
+        {
+          "file": "emdash3_2_terminal_objects.lp",
+          "symbol": "terminal_unique_path"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/terminal_objects.lp",
+          "symbol": "terminal_arrow_transf"
+        },
+        {
+          "file": "examples/terminal_objects.lp",
+          "symbol": "terminal_unique_path"
+        }
+      ]
+    },
+    "PULLBACK-SLICE-BASE-CHANGE": {
+      "status": "checked",
+      "statement": "Chosen pullbacks form one whole opposite-variance exact-slice family u*:C/Y→C/X with Σ_u⊣u*, actual whole unit/counit transfors, full Došen rectangles, proof-time whole/point semantic comparison, guarded whole mate cancellation, and pullback object/projection/square observations derived from u*(g) and the counit rather than from a cone record.",
+      "owners": [
+        {
+          "file": "emdash3_2_pullbacks.lp",
+          "symbol": "PullbackStructure"
+        },
+        {
+          "file": "emdash3_2_pullbacks.lp",
+          "symbol": "SliceBaseChange_catd"
+        },
+        {
+          "file": "emdash3_2_pullbacks.lp",
+          "symbol": "slice_base_change_adjunction"
+        },
+        {
+          "file": "emdash3_2_pullbacks.lp",
+          "symbol": "slice_base_change_gamma"
+        },
+        {
+          "file": "emdash3_2_pullbacks.lp",
+          "symbol": "slice_base_change_transpose_func_semantic_path"
+        },
+        {
+          "file": "emdash3_2_pullbacks.lp",
+          "symbol": "pullback_square_readable_cell"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/pullbacks.lp",
+          "symbol": "slice_base_change_gamma"
+        },
+        {
+          "file": "examples/pullbacks.lp",
+          "symbol": "pullback_lift_slice"
+        }
+      ]
+    },
+    "SLICE-DEPENDENT-PRODUCTS": {
+      "status": "checked",
+      "statement": "A selected coherent dependent-product structure supplies one whole covariant exact-slice family Π_u:C/X→C/Y and the existing adjunction u*⊣Π_u; its actual unit/counit tapp1 observations, both full Došen rectangles, component triangles, transparent whole mate action, generic Hom comparison, and thin total SliceDependentProducts package are active.",
+      "owners": [
+        {
+          "file": "emdash3_2_slice_dependent_products.lp",
+          "symbol": "DependentProductStructure"
+        },
+        {
+          "file": "emdash3_2_slice_dependent_products.lp",
+          "symbol": "SliceDependentProduct_catd"
+        },
+        {
+          "file": "emdash3_2_slice_dependent_products.lp",
+          "symbol": "slice_dependent_product_adjunction"
+        },
+        {
+          "file": "emdash3_2_slice_dependent_products.lp",
+          "symbol": "slice_dependent_product_gamma"
+        },
+        {
+          "file": "emdash3_2_slice_dependent_products.lp",
+          "symbol": "slice_dependent_product_hom_prof_comparison"
+        },
+        {
+          "file": "emdash3_2_slice_dependent_products.lp",
+          "symbol": "SliceDependentProducts"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/slice_dependent_products.lp",
+          "symbol": "slice_dependent_product_gamma"
+        },
+        {
+          "file": "examples/slice_dependent_products.lp",
+          "symbol": "slice_dependent_product_hom_prof_comparison"
+        }
+      ]
+    },
     "CUT-PRODUCT-PROJECTION": {
       "status": "formal-consequence",
       "statement": "In the Cat-specialized case, for h:A0→A1, k:B0→B1, and g:A1→C, the readable equation pi1^*(g) composed with h×k equals pi1'^*(g composed with h); its owner-aligned projection and nested-precomposition forms are checked, while the literal raw projection-composite equality is not packaged.",
@@ -1950,6 +2102,46 @@
         }
       ]
     },
+    "MONAD-TRIANGULAR-COMPUTATION": {
+      "status": "checked",
+      "statement": "A selected monad exposes whole unit and multiplication observations and one whole Kleisli-extension operation whose point action supports the ambient Došen beta and accumulation cuts; an adjunction supplies the canonical monad with runtime unit and transparent G-epsilon-F multiplication semantics.",
+      "owners": [
+        {
+          "file": "emdash3_2_monads.lp",
+          "symbol": "Monad"
+        },
+        {
+          "file": "emdash3_2_monads.lp",
+          "symbol": "unit_monad_transf"
+        },
+        {
+          "file": "emdash3_2_monads.lp",
+          "symbol": "mult_monad_transf"
+        },
+        {
+          "file": "emdash3_2_monads.lp",
+          "symbol": "kleisli_extend_func"
+        },
+        {
+          "file": "emdash3_2_monads.lp",
+          "symbol": "kleisli_extend_fapp0"
+        },
+        {
+          "file": "emdash3_2_monads.lp",
+          "symbol": "adjunction_monad"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/monads_comonads.lp",
+          "symbol": "kleisli_extend_fapp0"
+        },
+        {
+          "file": "examples/monads_comonads.lp",
+          "symbol": "adjunction_monad"
+        }
+      ]
+    },
     "WEIGHTED-LIMIT-REPRESENTABILITY": {
       "status": "checked",
       "statement": "A parameterized weighted-cone profunctor is formed by the selected covariant residual, and its computational representation by a functor exposes inverse push and pull operations on every reindexed incoming profunctor map.",
@@ -3185,7 +3377,7 @@
       "statement": "Precomposition with the whole slice-domain functor constructs the ambient CommRing presheaf on K/U; a supplied reflective slice retains a whole DefIso to that target, and supplied sheaf-basis semantics plus an ambient-to-affine-underlying bridge and the affine presentation's retained coordinate bridge derive one whole ambient-to-coordinate DefIso for a selected cover chart.",
       "owners": [
         {
-          "file": "emdash3_2_commutative_algebra_ringed_space_restrictions.lp",
+          "file": "emdash3_2_presheaves.lp",
           "symbol": "slice_domain_func"
         },
         {

@@ -288,20 +288,25 @@ by product projection, followed by upper-star accumulation. The arrow $k$
 disappears because the first projection observes only the first component.
 
 The source is a composite out of $A_0\times B_0$ and the target is a single
-upper-star cut with the same source and codomain. The proposed normal form is
-$(\pi_1^0)^*(g\circ h)$. Its future generic owners should be the upper-star
-action together with chosen product projections and the bifunctorial action
-of the product structure in $K$. The equality mode here is mathematical
-development: emdash does not yet package binary products of objects in an
-arbitrary ambient category with this universal computation. Such an owner
-should retain the next-hom actions of the projection and product-arrow
-operations, rather than stop at a 1-categorical equation.
+upper-star cut with the same source and codomain. The selected normal form is
+$(\pi_1^0)^*(g\circ h)$. The active chosen-product interface now supplies the
+required whole product functor, whole projections, stable antecedential
+projection operations, and a derived product map. Its direct Došen naturality,
+beta, distribution, and eta rules retain higher action rather than stopping at
+the displayed 1-arrow equation.
 
-> **Formal status — mathematical development.** The general theorem assumes a
-> chosen binary-product interface internal to an arbitrary category $K$,
-> including product arrows, projection beta, and iterable higher action. The
-> active product package instead supplies binary products of categories, which
-> gives the specialization $K=\mathsf{Cat}$ described next.
+The generic action $P[h,k]$ is proof-time comparable with the triangular map
+formed from the two antecedential projections. Thus the readable equation
+above is supported by one selected product calculus, while runtime keeps its
+owner-aligned smaller cuts visible.
+
+<!-- evidence:TRIANGULAR-BINARY-PRODUCTS -->
+
+> **Formal status — checked.** Evidence `TRIANGULAR-BINARY-PRODUCTS`. For a
+> supplied `BinaryProducts(K,P)` structure, the whole product, projection, and
+> pairing owners compute the general beta/distribution/eta calculus and retain
+> higher action. Existence of such a structure is selected data; no claim is
+> made that every category has binary products.
 
 ### 9.4.2 The Checked Cat-Specialized Legs
 
@@ -346,9 +351,9 @@ much stronger and unsafe response.
 
 ### 9.4.3 Example 5: Product Beta Is Elimination After Introduction
 
-In a category $K$ with chosen products, arrows $p:X\to A$ and $q:X\to B$
-have a pairing $\langle p,q\rangle:X\to A\times B$. The characteristic
-structural cuts are
+In a category $K$ with selected `BinaryProducts(K,P)`, arrows $p:X\to A$ and
+$q:X\to B$ have a pairing
+$\langle p,q\rangle:X\to A\times B$. The characteristic structural cuts are
 
 $$
 \pi_1\circ\langle p,q\rangle=p,
@@ -358,10 +363,18 @@ $$
 
 The source and target of the first equation lie in
 $\operatorname{Hom}_K(X,A)$, and those of the second lie in
-$\operatorname{Hom}_K(X,B)$. Their proposed normal forms are $p$ and $q$.
-For arbitrary $K$, the owners and higher action belong to the same future
-chosen-product interface as Example 4, so these equations are mathematical
-development rather than claims about the present kernel.
+$\operatorname{Hom}_K(X,B)$. Their selected normal forms are $p$ and $q$.
+More generally, postcomposing either projection with $h$ gives the checked
+triangular beta rules from (30.7), and pairing distributes through
+precomposition. The whole pairing functor retains arrows between possible
+legs.
+
+<!-- evidence:TRIANGULAR-BINARY-PRODUCTS -->
+
+> **Formal status — checked.** Evidence `TRIANGULAR-BINARY-PRODUCTS`. The
+> general selected product interface computes projection after pairing,
+> pairing distribution, and eta. Chapter 30 develops this whole interface and
+> its terminal and indexed continuations.
 
 The active category-of-categories specialization is nevertheless concrete.
 For arrows $p:a\to a'$ in $A$ and $q:b\to b'$ in $B$, the pair $(p,q)$ is an

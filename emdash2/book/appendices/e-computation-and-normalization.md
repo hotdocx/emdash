@@ -77,13 +77,17 @@ without replacing every composite mapping expression by one runtime normal
 form. The compositor of the unit is retained as a directed cell with a next
 action; it is not globally collapsed to identity.
 
-The Gray experiment makes strictness local rather than global. The generic
-compositor reduces to identity when its functor is exposed through the stable
-decoder of a strict-functor code. The same observation on an arbitrary rigid
-ambient functor does not reduce. Curry and uncurry for the selected right
-closure have whole beta/eta paths, and the walking-square interchanger is a
-nonidentity directed cell projected from whole laxity. These facts do not
-install a general weak-category normalizer or a full Crans–Gray tensor.
+The Gray experiment makes strictness a property rather than a second functor
+grammar. `IsStrictFunctor` constrains the compositor already extracted from
+whole internal action, and `StrictFunctor` pairs an ambient functor with that
+evidence. One stable evidence-bearing view retains the proof where a selected
+consumer needs it. The retired blanket rule that sent every such compositor
+to literal identity was not justified by arbitrary semantic evidence. Curry
+and uncurry for the selected right closure have whole beta/eta paths, and the
+walking-square interchanger is a nonidentity directed cell projected from
+whole laxity. These facts do not install a general weak-category normalizer,
+a profile-local replacement for every historical global strict cut, or a full
+Crans–Gray tensor.
 
 ## E.4 Direction And Variance In Normal Forms
 
@@ -98,7 +102,34 @@ forms are joined only where a typed consumer requires it. Broad eta-style
 rewrites are avoided because unification is experimental and because a
 functor-level normal form may be needed to act on the next cell.
 
-## E.5 How A Checked Prose Claim Is Reviewed
+## E.5 Structural And Indexed Cut Families
+
+The cartesian and slice interfaces illustrate all three equality modes in one
+calculus.
+
+- Product beta, pairing distribution, terminal composition, adjunction
+  rectangles, and selected mate cancellation are runtime reductions.
+- Generic product action and the triangular product map compare at proof time.
+- Arbitrary uniqueness into a terminal object is internal equality derived
+  from Hom contractibility.
+
+For pullback mates, the stable point and whole functors remain runtime-distinct
+from their explicit unit/counit formulas. Their proof-time unifiers match the
+semantic bodies only after those bodies have reached the canonical post-`Op`
+shape. In particular, the readable Sigma action has become `sigma_map_obj`,
+while non-discriminating category slots are `_`.
+
+Whole cancellation is ordinary composition in `Cat_cat`, but the rule cannot
+discard its endpoint guards. A wildcard-only candidate typechecked while
+reconstructing the source object from the codomain after opposite
+normalization. The active rules repeat the exact raw Hom-category source,
+middle, and target, preserving the intended $a$ and $b$.
+
+This example sharpens the owner discipline: a rule may be mathematically
+obvious and syntactically expressible yet still require exact canonical guards
+to be a sound runtime interface.
+
+## E.6 How A Checked Prose Claim Is Reviewed
 
 For a code-facing claim, the review path is:
 
@@ -115,7 +146,7 @@ workflow: an owner-position probe, bounded typecheck, warning comparison when
 relevant, focused assertions, and full CI before handoff. Book prose does not
 authorize changing kernel normal forms merely to make an explanation shorter.
 
-## E.6 What Has Not Been Proved Metatheoretically
+## E.7 What Has Not Been Proved Metatheoretically
 
 The passing executable checks establish the selected interfaces and
 regression observations. They do not by themselves prove global confluence,

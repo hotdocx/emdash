@@ -40,6 +40,17 @@ syntax.
 | $U_A$ | the unit hom profunctor | `Unit_prof A` |
 | $P\otimes_B Q$ | selected fixed-middle profunctor tensor | `Prof_tensor P Q` |
 | $F\dashv G$ | adjunction data with selected triangle cuts | `Adjunction F G` |
+| $T$, $\eta$, $\mu$, $f^*$ | a selected monad, its unit/multiplication, and Kleisli extension in the ambient category | `Monad`, `unit_monad_transf`, `mult_monad_transf`, `kleisli_extend_fapp0` |
+| $A\times B=P(A,B)$ | a selected product object from a whole product functor | `BinaryProducts C P` |
+| $\langle f,g\rangle$ | selected triangular pairing into $P(A,B)$ | `binary_products_pair_fapp0` |
+| $K_1^a(h)$, $K_2^a(h)$ | postcomposition with the selected first or second projection | `binary_products_K1a_fapp0`, `binary_products_K2a_fapp0` |
+| $!_A:A\to t$ | canonical arrow to a selected terminal object | `terminal_arrow_fapp0` |
+| $C/X$ | the conventional internal slice over $X$ | `Slice_cat C X` |
+| $\Sigma_u:C/X\to C/Y$ | slice postcomposition along $u:X\to Y$ | `slice_sigma_func C X Y u` |
+| $u^*:C/Y\to C/X$ | chosen pullback/base-change action when the endpoints are slice categories | `slice_base_change_func C PB X Y u` |
+| $\Pi_u:C/X\to C/Y$ | chosen slice dependent product, right adjoint to base change | `slice_dependent_product_func C PB DP X Y u` |
+| $\Sigma_u\dashv u^*\dashv\Pi_u$ | the selected three-adjoint slice chain | `slice_base_change_adjunction`, `slice_dependent_product_adjunction` |
+| $\mathsf{SliceDependentProducts}(C)$ | thin total pairing chosen pullbacks with their indexed dependent-product structure | `SliceDependentProducts C` |
 | $\operatorname{Cone}_W(F)$ | the weighted-cone profunctor | `WeightedCone_prof F W` |
 | $\operatorname{IsWeightedLimit}(F,W,L)$ | a chosen representation of weighted cones | `IsWeightedLimit_cov_comp F W L` |
 | $\operatorname{Cocone}_W(F)$ | the opposite-dual weighted-cocone profunctor | `WeightedCocone_prof F W` |
@@ -104,6 +115,12 @@ $u:x\to y$, then $u_*(g):w\to y$. If $u:x\to y$ and $h:y\to z$, then
 $u^*(h):x\to z$. Thus the formula $f^*(g)=g\circ f$ names
 **precomposition** and belongs to `hom_precomp_along_*`; it is not the
 postcomposition owner with a typographic variation.
+
+The same superscript star is conventional for pullback reindexing. Context
+disambiguates it: $u^*(h)=h\circ u$ between ordinary Hom objects means
+precomposition, while $u^*:C/Y\to C/X$ between slice categories is the
+selected base-change functor. Monad extension $f^*:TX\to TY$ is a third
+typed use, always accompanied by a monad endofunctor $T$.
 
 These formulas are categorical, not specifically functor-categorical. Their
 general reading takes $w,x,y,z$ to be objects and the displayed arrows to be

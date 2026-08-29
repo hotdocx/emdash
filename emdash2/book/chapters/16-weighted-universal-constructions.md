@@ -359,6 +359,19 @@ Products, terminal objects, pullbacks, and equalizers arise by choosing their
 usual indexing categories $J$. The weighted formulation does not require a
 new universal-property mechanism for each of them.
 
+There are now also direct computational interfaces for selected binary
+products, a terminal object, and pullback base change. They are not defined by
+the opaque weighted comparison. The direct interfaces choose the runtime
+pairing, terminal-arrow, or slice-adjunction calculus. For binary products, an
+assumption-explicit adapter accepts a strict weighted comparison and records
+paths relating its projections to the triangular ones. It does not construct
+that stronger comparison automatically from product beta and eta.
+
+Chapter 30 follows the direct route through
+$\Sigma_u\dashv u^*\dashv\Pi_u$. The second adjunction and its dependent
+product are additional selected structure; they do not follow merely by
+substituting a terminal weight here.
+
 At the active-interface level, the substitution is exact:
 
 $$
@@ -378,7 +391,11 @@ functor category of ordinary cones.
 > `IsWeightedLimit_cov_comp`, and the focused classifier diagnostics
 > establish the terminal-weight instance and its preservation corollary.
 > Calling its fibres the usual cone categories is mathematical development
-> contingent on the end semantics described below.
+> contingent on the end semantics described below. Evidence
+> `TRIANGULAR-BINARY-PRODUCTS`, `TERMINAL-OBJECT-COMPUTATION`, and
+> `PULLBACK-SLICE-BASE-CHANGE` separately support the direct computational
+> interfaces; they do not turn the terminal-weight comparison into an
+> automatic witness.
 
 ## 16.7 Right Kan Extensions As Conjoint-Weighted Limits
 

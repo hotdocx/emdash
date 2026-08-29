@@ -96,12 +96,13 @@ results. Exact source sections and adaptation boundaries are recorded in
 
 ## Došen's cut-elimination perspective
 
-The four-level cut calculus in Chapter 9 takes conceptual inspiration from
-Kosta Došen's *Cut Elimination in Categories* (Kluwer, 1999). The cited work
-is not licensed for textual adaptation here. It is used only as a
-bibliographic and conceptual reference: the exposition, notation, examples,
-and emdash correspondence in this book are newly written, and no passage from
-Došen's text is copied or closely paraphrased.
+The four-level cut calculus in Chapter 9 and the monad/product/adjunction
+rectangles in Chapters 12 and 30 take conceptual inspiration from Kosta
+Došen's *Cut Elimination in Categories* (Kluwer, 1999). The cited work is not
+licensed for textual adaptation here. It is used only as a bibliographic and
+conceptual reference: the exposition, notation, examples, and emdash
+correspondence in this book are newly written, and no passage from Došen's
+text is copied or closely paraphrased.
 
 ## Hadzihasanovic's higher-categorical diagrams
 

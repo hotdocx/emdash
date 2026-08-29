@@ -30,7 +30,10 @@ the WalkingEnd and WalkingArrow tests to category-indexed free inversion; and
 [Chapter 28](#chapter-28) recovers a directed interchanger from whole laxity
 inside one profiled Gray closure. [Chapter 29](#chapter-29) then turns
 dependent hom, outgoing paths, face codes, and join into a
-variable-dimensional semisimplicial construction. The
+variable-dimensional semisimplicial construction. [Chapter 30](#chapter-30)
+returns to universal structure: it follows products and terminality into
+slices, chosen pullbacks, and the dependent chain
+$\Sigma_u\dashv u^*\dashv\Pi_u$. The
 [contents](#contents) and
 [glossary/index](#appendix-glossary) provide stable anchor-based navigation.
 
@@ -38,11 +41,11 @@ Five reading paths make the dependencies explicit:
 
 | Reader | Main path | Consult when needed |
 | --- | --- | --- |
-| type theorist | Prologue; Chapters 1, 3–8, 10, 15, 25–27, and 29 | Chapters 2, 9, and 28 for directed action and laxity; Appendix G for the formal presentation |
-| category theorist | Prologue; Chapters 2, 5, and 8–29 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
-| algebraic geometer | Chapters 13, 16, and 18–24 | Chapters 2, 3, 5, 6, and 12 for the directed, logical, inductive, universal, and adjoint foundations |
-| implementer | Chapters 1, 2, 6, 8, 9, and 25–29; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
-| external reviewer | Chapters 2.6, 8, and 25–29; then the integrated reviewer, live or local | Appendices A, B, F, and G for notation, evidence, status, and architecture |
+| type theorist | Prologue; Chapters 1, 3–8, 10, 12, 15, 25–27, 29, and 30 | Chapters 2, 9, and 28 for directed action and laxity; Appendix G for the formal presentation |
+| category theorist | Prologue; Chapters 2, 5, and 8–30 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
+| algebraic geometer | Chapters 13, 16, 18–24, and 30 | Chapters 2, 3, 5, 6, and 12 for the directed, logical, inductive, universal, and adjoint foundations |
+| implementer | Chapters 1, 2, 6, 8, 9, and 25–30; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
+| external reviewer | Chapters 2.6, 8, and 25–30; then the integrated reviewer, live or local | Appendices A, B, F, and G for notation, evidence, status, and architecture |
 
 These are paths through one dependency graph, not separate foundations. In
 particular, the category-theory route still uses equality-local reasoning, and
