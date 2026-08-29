@@ -253,6 +253,13 @@ ordinal dependent simplex in variable dimension, maps it into arbitrary
 targets, and retains both face action and another hom action without
 postulating a new coherence record at every dimension.
 
+The sixth spiral returns to universal structure with that lesson in hand.
+[Chapter 30](#chapter-30) starts from whole selected products and terminality,
+then moves through slices to pullback base change and the chain
+$\Sigma_u\dashv u^*\dashv\Pi_u$. Products, pullbacks, and dependent products
+are presented by their introduction/elimination cuts and whole higher action,
+not by disconnected objectwise universal properties.
+
 The larger aim is not merely to calculate one hom. It is to show how a type
 theory can let groupoidal equality and noninvertible arrows coexist, interact,
 and compute—without quietly turning one into the other.

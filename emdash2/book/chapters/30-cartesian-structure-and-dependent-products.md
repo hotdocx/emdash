@@ -242,7 +242,7 @@ For $u:X\to Y$, postcomposition is always available:
 $$
 \Sigma_u:C/X\longrightarrow C/Y,
 \qquad
-(A\xrightarrow{p}X)longmapsto
+(A\xrightarrow{p}X)\longmapsto
 (A\xrightarrow{u\circ p}Y).
 \tag{30.17}
 $$

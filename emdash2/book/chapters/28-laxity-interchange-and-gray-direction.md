@@ -521,6 +521,8 @@ The result is deliberately asymmetric. Groupoidal realization explains how
 directed coherence may become invertible; the Gray direction explains why it
 should not have been erased beforehand. [Chapter 29](#chapter-29) now uses the
 same retained action recursively: a dependent arrow between dependent arrows
-becomes a simplex with another dimension. The appendices then give the ledger
-of exact notation, evidence, provenance, computation, and remaining research
-boundaries for all five spirals.
+becomes a simplex with another dimension. [Chapter 30](#chapter-30) returns to
+universal structure and keeps the same higher action through products,
+pullback base change, and dependent products. The appendices then give the
+ledger of exact notation, evidence, provenance, computation, and remaining
+research boundaries for all six spirals.
