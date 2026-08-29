@@ -238,7 +238,7 @@ assertnot [C : Cat]
   @slice_base_change_untranspose C PB X Y f a g k
   ≡ @slice_base_change_untranspose_semantic C PB X Y f a g k;
 
-// Both whole mate cuts compute.
+// Both stable mate point cuts compute; whole semantic equivalence is generic.
 assert [C : Cat]
   (PB : τ (@PullbackStructure C))
   (X Y : τ (Obj C))

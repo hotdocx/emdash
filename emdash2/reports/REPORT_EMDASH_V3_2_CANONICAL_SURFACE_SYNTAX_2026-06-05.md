@@ -2209,7 +2209,9 @@ Here `==` is runtime computation at the selected post-opposite normal form.
 At identities, `γᶜ_f` and `φᵃ_f` recover the ordinary unit/counit components,
 and both component triangles compute to identity. The fully expanded
 `f*[h]∘η` and `ε∘Σ_f[k]` mate implementations remain proof-time usability
-views rather than competing runtime spellings.
+views rather than competing runtime spellings. Generic composed-functor object
+and functor-identity computation owns `(f*∘Σ_f)[a]`, `Σ_f(id)`, and
+`f*(id)`; do not print or document pullback-specific rules for those cases.
 
 The first ambient projection law is written
 
@@ -2222,7 +2224,10 @@ and is owned by `pullback_lift_fst_cell`. Do not write
 discrete/strict adapter: raw ambient composites deliberately remain runtime
 distinct. The stable mate operations have propositional semantic paths to
 `f^*[h] ∘ η` and `ε ∘ Σ_f[k]`; these paths are typed reflexivity
-through proof-time usability rules, not opaque equality bridges.
+through proof-time usability rules, not opaque equality bridges. The stable
+mate functors retain higher action, but their point cancellations do not assert
+whole-functor equality or an `OmegaEquivAlong`; whole semantic Hom equivalence
+is already owned by the generic `Adjunction_hom_prof_comparison`.
 
 Whole `Σ_f` action and `slice_sigma_obj` share the selected runtime point.
 Its domain is definitionally the domain of `a`, and its structure arrow

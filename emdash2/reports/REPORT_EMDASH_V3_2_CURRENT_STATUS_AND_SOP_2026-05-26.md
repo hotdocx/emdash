@@ -103,12 +103,17 @@ detailed probe evidence.
   arrow carrying the existing adjunction `Σ_f⊣f*`. Stable whole mate
   functors and point heads retain the two triangle cuts after projection;
   narrow proof-time rules and non-opaque typed-reflexivity paths relate them
-  to explicit unit/counit semantics while runtime stays distinct. Generic
+  to explicit unit/counit semantics while runtime stays distinct. The generic
+  adjunction profunctor comparison owns the whole varying-endpoint Hom
+  equivalence; whole equality or `OmegaEquivAlong` packaging of the stable
+  specialized mate functors remains consumer-gated. Generic
   arbitrary-object/arrow Sigma observations replace the former slice-specific
   record surface. Stable whole `f*`, object, unit, and counit observations
   retain the declaration indices; their `tapp1` projections are Došen's
   `γᶜ`/`φᵃ`, with both full `(ac)` rectangles and identity component triangles
-  computing at exact post-`Op` shapes. Canonical represented postcomposition computes the
+  computing at exact post-`Op` shapes. Generic composed-functor object and
+  identity-action rules own `(f*∘Σ_f)[a]`, `Σ_f(id)`, and `f*(id)`; no
+  pullback-specific copies remain. Canonical represented postcomposition computes the
   `Σ_f` domain and structure arrow without equality transport. The pullback
   object, projections, derived directed square, exact Hom cone category,
   universal lift, and uniqueness are derived from that adjunction. No

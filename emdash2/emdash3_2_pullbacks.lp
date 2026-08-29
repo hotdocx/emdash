@@ -121,20 +121,6 @@ rule @fapp0 _ _
       $b
   ↪ @slice_base_change_obj $C $PB $X $Y $f $b;
 
-// Proof-time direct composite-action view used by the unit off-diagonal type.
-unif_rule
-  @fapp0 _ _
-    (@comp_cat_fapp0
-      (@Slice_cat $C $X)
-      (@Slice_cat $C $Y)
-      (@Slice_cat $C $X)
-      (@slice_base_change_func $C $PB $X $Y $f)
-      (@slice_sigma_func $C $X $Y $f))
-    $a
-  ≡ @slice_base_change_obj $C $PB $X $Y $f
-      (@slice_sigma_obj $C $X $Y $f $a)
-  ↪ [ tt ≡ tt ];
-
 /*
   Declaration-backed existing adjunction Σ_f ⊣ f*.
 
@@ -290,36 +276,6 @@ rule @slice_base_change_phi
       $C $PB $X $Y $u $b $b
       (@id _ $b)
   ↪ @slice_base_change_counit $C $PB $X $Y $u $b;
-
-// Projection-order identity joins for the two selected functor actions.
-// lhs-audit: keep 1,2 -- the raw Sigma source/target guard opposite projection order.
-rule @fapp1_fapp0
-      (@Sigma_cat
-        (Op_cat $C)
-        (@hom_con $C $X $C (@id Cat_cat $C)))
-      (@Sigma_cat
-        (Op_cat $C)
-        (@hom_con $C $Y $C (@id Cat_cat $C)))
-      (@sigma_map_func
-        (Op_cat $C)
-        (@hom_con $C $X $C (@id Cat_cat $C))
-        (@hom_con $C $Y $C (@id Cat_cat $C))
-        (@hom_con_int_postcomp_func
-          $C $C (@id Cat_cat $C) $X $Y $u))
-      $a $a
-      (@id _ $a)
-  ↪ @id
-      (@Into_restr_cat $C $Y)
-      (@slice_sigma_obj $C $X $Y $u $a);
-
-rule @fapp1_fapp0
-      _ _
-      (@slice_base_change_func $C $PB $X $Y $u)
-      $b $b
-      (@id _ $b)
-  ↪ @id
-      (@Slice_cat $C $X)
-      (@slice_base_change_obj $C $PB $X $Y $u $b);
 
 // Canonical post-`Op` left triangle after γᶜ(id) and φᵃ(id) expose components.
 // lhs-audit: keep 1,2,3,4 -- exact raw endpoints are the subject-reduction guards.

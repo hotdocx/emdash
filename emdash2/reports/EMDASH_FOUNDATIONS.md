@@ -5321,8 +5321,16 @@ The stable transpose and untranspose heads are related to the explicit
 `f*[h]∘η` and `ε∘Σ_f[k]` presentations by narrow proof-time usability
 rules. Named semantic paths are typed reflexivity through those rules; they
 are not opaque bridges and do not change runtime preference. The initial
-layer claims neither strict base-change functoriality nor an explicit pseudo
-certificate. Products in slices, terminal-derived products, weighted
+stable functors retain generic higher action, but only their point actions are
+identified with those transparent semantic formulas; point cancellation does
+not by itself construct equality of whole functors or an `OmegaEquivAlong`
+package. This is not missing adjunction semantics: the generic
+`Adjunction_hom_prof_comparison` already supplies the whole varying-endpoint
+Hom-profunctor `ProfComparison`/`DefIso`. Packaging the specialized stable mate
+facade as a whole equivalence remains consumer-gated.
+
+The initial layer claims neither strict base-change functoriality nor an
+explicit pseudo certificate. Products in slices, terminal-derived products, weighted
 pullbacks, pushout duality, the second adjunction `f*⊣Π_f`,
 Beck–Chevalley, and Frobenius remain later assumption-explicit structures.
 
@@ -5347,7 +5355,10 @@ These are runtime post-`Op` instances of the generic adjunction laws, not a
 second adjunction theory. At identity arrows, `γᶜ` and `φᵃ` compute to the
 unit and counit components; the resulting two component triangles reduce to
 identity and join the fixed-endpoint mate cancellations. Fully expanded
-semantic mate implementations remain proof-time comparison endpoints.
+semantic mate implementations remain proof-time comparison endpoints. Generic
+composed-functor object beta and generic functor identity already own
+`(f*∘Σ_f)[a]`, `Σ_f(id)`, and `f*(id)`; no pullback-specific unifier or
+identity-action copy is retained.
 
 The current theory includes the expected basic operations:
 

@@ -611,10 +611,15 @@ whole opposite-variance family with exact `C/X` fibres. Every internal
 `f:X→Y` carries the existing adjunction `Σ_f⊣f*`. Stable whole mate
 functors and point heads retain both triangle cuts, while narrow proof-time
 usability and non-opaque typed-reflexivity paths expose explicit unit/counit
-semantics without a runtime fold. Stable whole `f*`, object, unit, and counit
+semantics without a runtime fold. Their point cancellations do not package
+whole equality of the specialized stable mate functors; the generic
+`Adjunction_hom_prof_comparison` remains the whole varying-endpoint Hom
+equivalence owner. Stable whole `f*`, object, unit, and counit
 observations retain the declaration indices; their `tapp1` projections are
 Došen's `γᶜ` and `φᵃ`, and both full `(ac)` rectangles plus their identity
-component triangles compute at exact post-`Op` shapes. Generic
+component triangles compute at exact post-`Op` shapes. Generic composed-functor
+object and functor-identity rules own `(f*∘Σ_f)[a]`, `Σ_f(id)`, and
+`f*(id)`; no pullback-specific unifier or identity-action copy remains. Generic
 arbitrary-object/arrow Sigma
 observations own slice projection and composition; canonical represented
 postcomposition makes `Σ_f` preserve domains and postcompose structure arrows
@@ -1530,11 +1535,16 @@ Use the following order:
     adjunction `Σ_f⊣f*`. Stable whole and point mate owners retain both
     triangle cuts; two rigid proof-time comparisons and non-opaque semantic
     paths expose the explicit unit/counit presentations while preserving
-    runtime noncollapse. Stable whole `f*`, object action, unit, and counit
+    runtime noncollapse. The generic adjunction profunctor comparison owns the
+    whole Hom equivalence; equality or `OmegaEquivAlong` packaging of the
+    specialized stable mate functors remains consumer-gated. Stable whole
+    `f*`, object action, unit, and counit
     observations preserve the declaration indices through opposite
     normalization. Their `tapp1` projections are the public `γᶜ`/`φᵃ` heads;
     both full Došen `(ac)` rectangles and both identity component triangles
-    compute at exact raw post-`Op` guards. Generic Sigma object/arrow observations and the
+    compute at exact raw post-`Op` guards. Generic composed-functor object and
+    identity action own the canonical component/identity points; no
+    pullback-specific copies remain. Generic Sigma object/arrow observations and the
     guarded arbitrary-endpoint constructor calculus are owned by
     `emdash3_2.lp`; conventional slice observations are transparent consumers.
     Canonical represented postcomposition gives runtime domain/structure

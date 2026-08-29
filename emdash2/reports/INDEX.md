@@ -1262,13 +1262,18 @@ record.
   fibres and supplies `f*:C/Y→C/X`, with each internal base arrow carrying
   the existing adjunction `Σ_f⊣f*`. Stable whole/point mates retain both
   triangle cuts, while narrow proof-time usability and non-opaque semantic
-  paths expose unit/counit formulas without runtime erasure. Generic
+  paths expose unit/counit formulas without runtime erasure. The generic
+  adjunction profunctor comparison owns the whole Hom equivalence; whole
+  equality or `OmegaEquivAlong` packaging of the specialized stable mates is
+  consumer-gated. Generic
   arbitrary-object/arrow Sigma observations replace the former slice-record
   workaround; canonical represented postcomposition computes the `Σ_f`
   domain and structure arrow without recentering paths. The follow-up retains
   stable whole `f*`, unit, and counit heads, exposes Došen's `γᶜ`/`φᵃ` as their
   off-diagonal projections, and makes both full `(ac)` rectangles plus both
-  identity component triangles compute. Pullback object,
+  identity component triangles compute. Generic composition and identity own
+  `(f*∘Σ_f)[a]`, `Σ_f(id)`, and `f*(id)`; the three redundant
+  pullback-specific clauses are removed. Pullback object,
   projections, derived directed square, exact Hom cone category, universal
   lift, recovery, and uniqueness are active. No pullback-specific constructor
   accepts a square witness.
@@ -1279,7 +1284,8 @@ record.
   Beck–Chevalley, and Frobenius remain distinct or later assumption-explicit
   consumers. The earlier strict-computational correction is complete in
   `PB-RECLOSE-15`, and the validated rectangle follow-up is complete in
-  `PB-RECT-CLOSE-18`.
+  `PB-RECT-CLOSE-18`, with final generic-owner/documentation cleanup in
+  `PB-GENERIC-19` and `PB-FINAL-DOC-20`.
 - `REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md`:
   completed second-tranche closeout plan for enhanced triangular products,
   terminal objects, and their thin Cartesian package. One direct map unifier

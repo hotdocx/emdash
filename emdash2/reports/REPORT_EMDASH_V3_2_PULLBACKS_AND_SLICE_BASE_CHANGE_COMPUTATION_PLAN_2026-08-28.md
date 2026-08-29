@@ -4,8 +4,8 @@ Date: 2026-08-28 (America/Toronto)
 
 Plan-ID: `PULLBACKS-SLICE-BASE-CHANGE-COMPUTATION-V3.2`
 
-Status: **complete Došen-rectangle follow-up from checkpoint `d24ed5c`;
-validated for a local checkpoint**.
+Status: **complete Došen-rectangle follow-up from checkpoint `d24ed5c`,
+including the final generic-owner cleanup; validated for a local checkpoint**.
 
 Branch: `goal/pullback-computation-v3.2`
 
@@ -28,7 +28,8 @@ Side-Task-Ledger: `PB-00`, `PB-SLICE-1`, `PB-DOMAIN-2`, `PB-STRUCT-3`,
 `PB-ADJ-4`, `PB-USABILITY-5`, `PB-CONE-6`, `PB-TRIANGLE-7`, `PB-PSEUDO-8`,
 `PB-COMPAT-9`, `PB-DOC-10`, `PB-CLOSE-11`, `PB-RUNTIME-12`,
 `PB-SIGMA-13`, `PB-NOCONE-14`, `PB-RECLOSE-15`, `PB-RECT-16`,
-`PB-RECT-PROBE-17`, and `PB-RECT-CLOSE-18`.
+`PB-RECT-PROBE-17`, `PB-RECT-CLOSE-18`, `PB-GENERIC-19`, and
+`PB-FINAL-DOC-20`.
 
 Infinity-Codex-Origin: session `01a02f68-6142-7e53-993a-4505aa8e2cbe`,
 review response `0028_2026-08-28T07-43-06Z_01a04745-7f87-7750-a3e1-2bdea720554d.md`.
@@ -238,11 +239,26 @@ stable `f*` guards are therefore subject-reduction discriminators, not
 anti-SOP decoration.
 
 Identity off-diagonal observations compute to the unit/counit components.
-Two narrow selected-functor identity joins and two component triangle joins
-then make both identity-boundary rectangles reduce to identity, agreeing with
-the fixed-endpoint mate cancellations. The transparent semantic
+The generic composed-functor object beta and generic functor identity rule
+already expose the required point and identity actions; two component triangle
+joins then make both identity-boundary rectangles reduce to identity, agreeing
+with the fixed-endpoint mate cancellations. A final owner-position removal
+probe confirmed that the former pullback-specific composite-point unifier and
+two selected identity-action rules were redundant, so all three are absent.
+The transparent semantic
 `G[h]∘η`/`ε∘F[k]` implementations remain proof-time usability endpoints and
 do not become competing runtime normal forms.
+
+The stable mate functors are whole functors and therefore retain generic
+higher action, while their point observations compare at proof time with the
+explicit semantic formulas. The stable functors are not themselves identified
+by whole-functor equality with those transparent semantic implementations, and
+their point cancellations are not packaged as an `OmegaEquivAlong`. This is
+not a missing adjunction semantics: the generic
+`Adjunction_hom_prof_comparison` already supplies the whole varying-endpoint
+Hom-profunctor `ProfComparison`/`DefIso`. A future consumer may package the
+stable specialized presentation, but that optional bridge is not part of the
+pullback computation boundary.
 
 ## Selected Enhanced Interface
 
@@ -623,7 +639,7 @@ green.
 | `PB-ADJ-4` | complete, checkpoint `a055eb0` | Every internal `f:X→Y` supplies the existing `Adjunction(Σ_f,f*)`; readable unit/counit and component observations use the generic authority. |
 | `PB-USABILITY-5` | complete implementation | Stable whole/point mate heads retain triangle discriminators. Two narrow proof-time rules identify their points with explicit unit/counit semantics; both non-opaque semantic paths are typed reflexivity and runtime remains distinct. |
 | `PB-CONE-6` | corrected after checkpoint `e9ac7e6` | Pullback slice object/domain, two projections, derived square, whole Hom cone category, whole transpose/inverse, slice lift, ambient mediator, and first directed projection cell are implemented. The former pullback-specific cone constructors are removed. |
-| `PB-TRIANGLE-7` | complete implementation | Both whole slice cancellations and the generic Sigma-backed slice projections are green. Recovery and uniqueness compute on an arbitrary existing Hom object. Raw ambient 1-arrow collapses remain registered negatives because the internal slice stores directed higher arrows; no pullback-specific runtime join is warranted. |
+| `PB-TRIANGLE-7` | complete implementation | Both stable mate point cancellations and the generic Sigma-backed slice projections are green. Recovery and uniqueness compute on an arbitrary existing Hom object. Raw ambient 1-arrow collapses remain registered negatives because the internal slice stores directed higher arrows; no pullback-specific runtime join is warranted. Whole semantic Hom equivalence is separately owned by the generic adjunction profunctor comparison. |
 | `PB-PSEUDO-8` | complete classification | Identity, composition, and higher action are retained by the one whole `Catd(Op C)` owner. No strictness claim or Gray-only pseudo-property dependency is added; an explicit invertible compositor certificate remains consumer-gated. |
 | `PB-COMPAT-9` | complete classification | Products-in-slices, terminal-derived products, weighted pullbacks, opposite pushouts, `Π_f`, Beck–Chevalley, and Frobenius remain assumption-explicit later consumers. No concrete canonical-choice comparison is available in this tranche, so none is postulated. |
 | `PB-DOC-10` | superseded by `PB-RECLOSE-15` | The checkpoint documentation/catalog described the former slice-record and literal-cone workaround. The correction tranche updates the same authorities and focused reviewers before a new closeout. |
@@ -635,6 +651,8 @@ green.
 | `PB-RECT-16` | complete implementation | Both canonical pullback-specialized `(ac)` rectangles compute: `φᵃ(h)∘Σ_u(γᶜ(k)) → h∘Σ_u(k)` and `u*(φᵃ(h))∘γᶜ(k) → u*(h)∘k`. Whole `f*`, object action, unit, and counit now have stable declaration-backed heads; `γᶜ` and `φᵃ` remain their `tapp1` projections, not independent adjunction data. |
 | `PB-RECT-PROBE-17` | complete | Exact post-`Op`/represented owner shapes are selected. Both general rectangles, generic-unit/counit spellings, fixed-endpoint mate cancellations, `γᶜ(id)`/`φᵃ(id)` component folds, and both component triangle joins are executable. Fully expanded semantic mate implementations deliberately remain runtime-distinct. |
 | `PB-RECT-CLOSE-18` | complete validation | Active owner, reviewer, raw-generic specialization probe, central diagnostics, and strict audit are green. The `1268/157` warning boundary adds 151 classified projection-order reports in nine intended rules. Authorities, 2,344-check catalog, 326-file source-only health, and document hygiene are synchronized for the containing authorized checkpoint. |
+| `PB-GENERIC-19` | complete correction | Owner-position removal probes confirm that `(u*∘Σ_u)[a]` is reconstructed by the generic composed-functor object beta and that both selected identity actions are owned by generic functor identity. The redundant pullback-specific unifier and two runtime rules are removed; both component triangles, owner, and reviewer remain green. The pullback warning boundary improves by 22 critical-pair reports to `1246/157`, and the strict LHS audit improves to 15 annotated slots across five intentional clauses. |
+| `PB-FINAL-DOC-20` | complete documentation | The settled inventory distinguishes actual unit/counit transfors and their `tapp1` `γᶜ`/`φᵃ` observations from stable runtime heads, records generic ownership of composite and identity action, and distinguishes the generic whole Hom-profunctor comparison from the optional stable-mate whole-functor bridge. |
 
 ## Decision Ledger
 
@@ -650,18 +668,20 @@ green.
 | `D-PB-008` | accepted | Do not require strict base-change functoriality; retain current whole higher action and classify pseudo coherence separately. |
 | `D-PB-009` | accepted | Products-in-slices, terminal-derived products, weighted limits, and pushout duality are compatibility consumers after the primary calculus. |
 | `D-PB-010` | superseded correction | Arbitrary slice objects/arrows do not Sigma-expand, but their reusable boundary belongs at generic Sigma. Slice object/domain/arrow observations and introduction are transparent consumers of `sigma_obj_base`, `sigma_obj_fibre`, `sigma_arrow_intro`, and `sigma_arrow_fibre`; no slice-specific record theory or arbitrary eta is installed. |
-| `D-PB-011` | accepted | Stable whole mate functors and point heads are necessary post-projection instances of the existing adjunction computation. Their direct cancellations are runtime rules; semantic agreement is proof-time and exposed by non-opaque typed-reflexivity paths. |
-| `D-PB-012` | accepted | The internal universal property is the whole hom-category equivalence `Hom_{C/Y}(Σ_f a,g) ⇄ Hom_{C/X}(a,f*g)`. Recovery and uniqueness compute strictly at that owner and under generic Sigma-backed slice projections. |
+| `D-PB-011` | accepted | Stable whole mate functors and point heads are necessary post-projection instances of the existing adjunction computation. Their point cancellations are runtime rules; pointwise semantic agreement is proof-time and exposed by non-opaque typed-reflexivity paths. They retain higher action but are not identified as whole functors with the semantic mate implementations. The generic `Adjunction_hom_prof_comparison`, not a pullback-specific `OmegaEquivAlong`, owns the whole varying-endpoint Hom equivalence. |
+| `D-PB-012` | accepted | The internal cone carrier is the whole hom category `Hom_{C/Y}(Σ_f a,g)`, and recovery and uniqueness compute on its arrow-term objects under generic Sigma-backed slice projections. The generic adjunction profunctor comparison supplies the whole semantic equivalence; equality of the specialized stable mate functors is a deferred optional packaging layer. |
 | `D-PB-013` | accepted | In an arbitrary emdash category, pullback projection laws retain directed cells. Raw `πᵢ ∘ lift` to bare-arrow rewrites are false runtime expectations and would impose unrequested strictness; no such join is promoted. |
 | `D-PB-014` | accepted | Generic whole functoriality supplies current base identity/composition/higher action. Explicit pseudo invertibility and every product/weighted/dual/dependent comparison remain later assumption-explicit consumers. |
 | `D-PB-015` | accepted and implemented | A pullback cone is an arrow in the internal Hom category, never a pullback-specific record carrying a manually supplied commutativity equality/cell. `pullback_cone_intro` and `pullback_cone_constructor` are removed. |
 | `D-PB-016` | accepted and implemented | Propositional domain/square recentering is not an acceptable primary computational normal form when runtime Sigma action can expose the same endpoint. All pullback recentering paths are removed. Warnings remain diagnostic; subject reduction and typed reduction-order joins decide promotion. |
-| `D-PB-017` | accepted | Strict computation means runtime beta/eta at the whole internal Hom equivalence and definitional Sigma observations. The ambient higher square is derived from an existing slice arrow, not stored as a lax/pseudo/strict field. Univalence may compare later semantic structures but is not needed for this primary computation. |
+| `D-PB-017` | accepted | Strict computation means runtime mate beta/eta on Hom-arrow objects, both full Došen rectangles, and definitional Sigma observations, while the generic profunctor comparison owns whole semantic equivalence. The ambient higher square is derived from an existing slice arrow, not stored as a lax/pseudo/strict field. Univalence may compare later semantic structures but is not needed for this primary computation. |
 | `D-PB-018` | accepted | Generic `sigma_arrow_intro` composition must discriminate on `Sigma_cat(K,E)`. A category wildcard is invalid because it matches `Op_cat` before variance reversal. Constant-family reduction is handled by one explicit `Product_cat` post-projection instance. |
 | `D-PB-019` | accepted | The stable arbitrary-endpoint Sigma constructor and raw constructor-visible `sigma_arrow` remain distinct runtime forms. Both project computationally; a literal fold is rejected because it produces mixed raw/stable composition peaks. Arbitrary arrow eta remains absent. |
 | `D-PB-020` | accepted diagnosis | Fixed-endpoint mate cancellation is not the complete pullback instance of Došen's `(ac)` calculus. At checkpoint `d24ed5c`, canonical `Σ_u`/`u*` rectangles passed runtime-negative probes after their discriminating functor shape unfolded. The follow-up closes that gap with the stable projection ladder and exact post-`Op` instances; proof-time comparison alone was insufficient. |
 | `D-PB-021` | accepted and implemented | Canonical rectangle matching needs the stable projection ladder `SliceBaseChange_catd → slice_base_change_func → slice_base_change_obj` and stable whole unit/counit observations. Their `tapp1` projections are the stable `slice_base_change_gamma`/`slice_base_change_phi` heads. This is a declaration-backed computational facade, not a second adjunction theory. |
-| `D-PB-022` | accepted | Readability aliases in the rectangle LHS reconstruct `Y` as `X` after opposite normalization. Promoted rules therefore use exact raw `Sigma_cat`/`sigma_map_obj` endpoint guards, annotated as subject-reduction discriminators. The 151 resulting critical-pair reports are diagnostics, not vetoes; focused rules and both reduction orders are green. |
+| `D-PB-022` | accepted | Readability aliases in the rectangle LHS reconstruct `Y` as `X` after opposite normalization. Promoted rules therefore use exact raw `Sigma_cat`/`sigma_map_obj` endpoint guards, annotated as subject-reduction discriminators. The remaining 129 resulting critical-pair reports are diagnostics, not vetoes; focused rules and both reduction orders are green. |
+| `D-PB-023` | accepted and implemented | Generic `fapp0` composition and `fapp1` identity computation already own `(u*∘Σ_u)[a]` and the selected `Σ_u(id)`/`u*(id)` cases. Pullback-specific copies are unjustified when owner-position removal retains the two component triangles, so the former unifier and two rules are removed rather than retained as warning-producing joins. |
+| `D-PB-024` | accepted | A stable specialized mate functor being callable at higher arrows does not by itself identify that action with the transparent semantic mate functor. The generic adjunction `ProfComparison` supplies whole semantic coherence. Whole equality or `OmegaEquivAlong` packaging for the stable facade is feasible only after constructing whole composite laws and remains consumer-gated. |
 
 ## Implementation Checkpoints
 
@@ -684,6 +704,11 @@ green.
   `PB-RECT-CLOSE-18`: the stable declaration-projection ladder, both full
   `(ac)` rectangles, their identity component joins, and the follow-up
   evidence below are synchronized.
+- The final generic-owner cleanup records `PB-GENERIC-19` and
+  `PB-FINAL-DOC-20`: generic composition/identity laws replace three redundant
+  pullback clauses, and the semantic/stable whole-mate boundary is stated
+  without treating optional `OmegaEquivAlong` packaging as missing adjunction
+  semantics.
 
 ## Prior Checkpoint Evidence
 
@@ -771,18 +796,20 @@ Current proportional closeout evidence is:
   cancellations;
 - the fully expanded semantic mate implementations remain registered runtime
   negatives, preserving the selected stable normal form;
-- the warning-enabled pullback inventory is
-  `1425 = 1268 unjoinable-critical-pair reports + 157 replaceable-variable
-  reports`. Relative to `d24ed5c`'s `1117/157`, all 151 additions are
-  classified in nine intended rules: whole `f*` projection (12), `γᶜ`/`φᵃ`
-  projections (3+3), selected F/G identity joins (16+6), left/right component
-  triangles (27+12), and F/G rectangles (48+24);
-- strict LHS audit reports zero unreviewed candidates and 17 annotated slots
-  across six intentional pullback clauses; and
+- after the final generic-owner cleanup, the warning-enabled pullback inventory
+  is `1403 = 1246 unjoinable-critical-pair reports + 157
+  replaceable-variable reports`. Relative to `d24ed5c`'s `1117/157`, all 129
+  additions are classified in seven intended rules: whole `f*` projection
+  (12), `γᶜ`/`φᵃ` projections (3+3), left/right component triangles
+  (27+12), and F/G rectangles (48+24). The removed selected identity copies
+  account exactly for the 22-report improvement from the prior `1268/157`
+  checkpoint;
+- strict LHS audit reports zero unreviewed candidates and 15 annotated slots
+  across five intentional pullback clauses; and
 - the fresh strict catalog contains 2,344 classified checks across 115 areas,
   including 21 pullback checks, with zero unclassified statements;
 - source-only health metadata is fresh for 326 registered files at snapshot
-  `sha256:981ab42a6709e2b6ac39223e953f5de9b748b6b835ed777ea867f05f818eeb6f`;
+  `sha256:a5933783a07f5752b9f33d36a29112fed819c7d13e8a83b09cd1c6d285047f40`;
   and
 - source TOC, active references, current-plan headers, 17 relevant Python
   tests, catalog/health freshness, and exact diff hygiene pass.
