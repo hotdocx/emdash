@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-08-26
+Date: 2026-08-30
 
 `REPORT_EMDASH_V3_2_ORDINAL_DEPENDENT_SIMPLEX_DIMENSION_FOUR_AND_RECURSIVE_SOURCE_PLAN_2026-08-21.md`
 is the completed child of the ordinal dimension-three plan. It first
@@ -1266,243 +1266,9 @@ record.
   completed initial MathOps/DevOps/SOP improvement plan and utility roadmap;
   new cross-project maintenance is owned by the autonomous maintenance plan.
 
-## Current Plans
+## Active Plans
 
-- `REPORT_EMDASH_V3_2_SLICE_DEPENDENT_PRODUCTS_AND_LCCC_COMPUTATION_PLAN_2026-08-29.md`:
-  completed first-tranche implementation successor to the pullback
-  computation. It selects one whole
-  covariant exact-slice family whose internal arrow action is
-  `Π_u:C/X→C/Y`, indexed by the existing chosen pullback structure, and
-  instantiates the existing adjunction as `u*⊣Π_u`. Generic unit/counit
-  observations remain the actual whole transfors; their `tapp1` projections
-  compute to stable Došen heads. Both full post-opposite rectangles and both
-  component triangles are active, while transparent Hom mate functors retain
-  higher action and the named whole comparison reuses
-  `Adjunction_hom_prof_comparison`. The implementation adds no unifier or
-  specialized composite-point/identity-action rule, and keeps `Pi_cat`, the
-  proposed general `Pi_along_func`, and slice `Π_u` distinct. Beck–Chevalley,
-  Frobenius, slice exponentials, general right-Kan comparison, TypeScript
-  generation, and optional whole stable-mate `OmegaEquivAlong` packaging are
-  later layers. The strict catalog has 2,359 checks across 116 areas, including
-  27 pullback and 9 slice-dependent-product checks; source-only health covers
-  328 registered owner/reviewer files.
-- `REPORT_EMDASH_V3_2_PULLBACKS_AND_SLICE_BASE_CHANGE_COMPUTATION_PLAN_2026-08-28.md`:
-  completed strict-computational correction of the pullback implementation after
-  checkpoint `e9ac7e6`. One whole covariant slice family supplies
-  `Σ_f:C/X→C/Y`; one selected whole contravariant family has exact `C/X`
-  fibres and supplies `f*:C/Y→C/X`, with each internal base arrow carrying
-  the existing adjunction `Σ_f⊣f*`. Stable whole/point mates retain both
-  triangle cuts, while narrow proof-time usability and non-opaque semantic
-  paths expose unit/counit formulas without runtime erasure. Canonical
-  body-unfolded whole unifiers identify the stable mate functors with their
-  semantic bodies, and exact raw-Hom-guarded `Cat_cat` rules reduce both whole
-  composites to identity. The generic adjunction profunctor comparison remains
-  the varying-endpoint Hom presentation; no additional `OmegaEquivAlong`
-  package is required. Generic
-  arbitrary-object/arrow Sigma observations replace the former slice-record
-  workaround; canonical represented postcomposition computes the `Σ_f`
-  domain and structure arrow without recentering paths. The follow-up retains
-  stable whole `f*`, unit, and counit heads, exposes Došen's `γᶜ`/`φᵃ` as their
-  off-diagonal projections, and makes both full `(ac)` rectangles plus both
-  identity component triangles compute. Generic composition and identity own
-  `(f*∘Σ_f)[a]`, `Σ_f(id)`, and `f*(id)`; the three redundant
-  pullback-specific clauses are removed. Pullback object,
-  projections, derived directed square, exact Hom cone category, universal
-  lift, recovery, and uniqueness are active. No pullback-specific constructor
-  accepts a square witness.
-  Raw ambient projection composites remain negative in the arbitrary
-  higher-categorical slice: the first law is a retained directed cell and the
-  second computes through whole cone recovery. Generic `Pullback_catd`, pseudo
-  invertibility, products/weighted/dual comparisons, `Π_f`,
-  Beck–Chevalley, and Frobenius remain distinct or later assumption-explicit
-  consumers. The earlier strict-computational correction is complete in
-  `PB-RECLOSE-15`, and the validated rectangle follow-up is complete in
-  `PB-RECT-CLOSE-18`, with final generic-owner/documentation cleanup in
-  `PB-GENERIC-19`/`PB-FINAL-DOC-20` and whole mate closure in
-  `PB-WHOLE-MATE-21`/`PB-WHOLE-CLOSE-22`.
-- `REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md`:
-  completed second-tranche closeout plan for enhanced triangular products,
-  terminal objects, and their thin Cartesian package. One direct map unifier
-  replaces the former projection unifiers; projection equalities derive by
-  congruence, runtime map forms remain distinct, and whole unpair retains
-  higher action plus both pointwise inverse paths. Whole functor equality is
-  still constructor-gated, so no `OmegaEquivAlong` is claimed. The separate
-  terminal module exposes `! : id_C => Const_t`, computing components,
-  off-diagonal action and canonical cuts, while hom-contractibility derives
-  arbitrary `f = !_A` and `!_t = id_t` propositionally. No variable-headed
-  rewrite or bare-variable unifier is used. The Cartesian package is
-  rule-free. A separate assumption-explicit adapter preserves the existing
-  `BinaryProductPresentation`, carrying supplied strict weighted comparisons
-  and paths joining both projection surfaces; no automatic `DefIso` is
-  postulated. Product-only warnings are `1179/169`; the combined Cartesian
-  import is `1188/171` against the `1116/159` base. Focused closeout remains
-  green and complete under the scoped-validation policy; whole functor
-  equality and automatic `DefIso` remain explicitly gated follow-ups.
-- `REPORT_EMDASH_V3_2_MONAD_COMONAD_COMPUTATION_PLAN_2026-08-23.md`:
-  completed direct Monad-usability correction over the `e90ce3c`
-  transparent-whole checkpoint. Monad
-  remains primary, ordinary ambient `comp_fapp0` owns Došen beta and
-  accumulation, and `KleisliCut` remains transparent notation. The optional
-  comonad layer now uses a transparent classifier plus a measured narrow
-  stable variance mirror: only counit, comultiplication, and point coextension
-  have stable dual heads because active runtime LHSs discriminate on them.
-  Whole coextension transparently reuses primary monadic whole extension; its
-  former custom projection and proof-time equation have been removed. All
-  opaque equality bridges remain absent. The canonical unit of the
-  adjunction-induced Monad retains runtime computation and its adjunction unit
-  is a proof-time usability endpoint. Whole multiplication remains semantic
-  and reduces to transparent `G epsilon F`; a derived path propositionally
-  joins its whole-first component with the component-first triangular branch.
-  TypeScript automation is deferred. Focused correction checks are green; the
-  catalog has 2,268 classified checks, the strict module audit is empty, and
-  warning-enabled module checking is `1139/159`. No
-  repository-wide health or CI aggregate was run under the user's scoped-
-  validation policy.
-  Explicit Kleisli-category, free-syntax decidability, and TypeScript work
-  remain separately gated.
-- `REPORT_EMDASH_V3_2_FUNCTOR_PROPERTY_PROFILE_MIGRATION_PLAN_2026-08-27.md`:
-  completed property-first continuation from the Gray/cubical profile
-  redesign. The
-  transparent fixed-forward `IsPseudoFunctor` property and exact
-  carrier/`IsStrictFunctor` package replace the former abstract pseudo wrapper
-  and primitive strict code grammar. Gray strict-object/lax-arrow behavior,
-  cubical recursion, ordinal-simplex action, whole coface equations and higher
-  internal action remain checked. The generic global strict functoriality,
-  naturality, and displayed-rule migration is an explicit later goal.
-
-- `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`:
-  completed semantic-adequacy continuation. It first packages the object-level
-  Yoneda section/evaluation between `StandardSemicube(n)` and the whole native
-  cubical nerve, checks the coordinate-swapped Gray walking-square orientation,
-  constructs whole transformation graphs, and decodes fixed-bracketing Gray
-  tensor powers of the walking arrow into native cubical levels by one internal
-  Nat recursion. Dimensions one through three, four edges, six faces, and the
-  arbitrary-variable-dimensional object operation are active. Public claims
-  remain object-level; full equivalences, inverse decoding, alternate
-  bracketings, and monoidal coherence are deferred.
-
-- `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`:
-  completed corrective continuation. It derives
-  `homdc_int` from the existing `homd_int` after inner Sigma and pointwise
-  opposite, rejects `Sigma_cat C (CommaFib_catd(id_C))` as the oplax
-  orientation, and constructs the selected lax-arrow category by an outer
-  opposite Sigma. `CubicalArrow_cat` is now a transparent alias; the existing
-  arbitrary-dimensional `{L,R,*}` action is revalidated, and Yoneda standard
-  semicubes decode through the whole native nerve action.
-
-- `REPORT_EMDASH_V3_2_CUBICAL_ARROW_AND_SEMICUBICAL_CODES_PLAN_2026-08-23.md`:
-  completed prototype/implementation child of the cubical-dependent-hom plan,
-  corrected foundationally by the August 24 internalization plan.
-  Its profiled lift, variable-dimensional levels, and set-classified
-  `{L,R,*}` words form `SemiCubePlus_cat`, act contravariantly on those levels,
-  and assemble a whole Cat-valued semicubical nerve. A recursive finite family
-  exposes all `2n` immediate faces. The former primitive `CubicalArrow_cat`
-  and explicit identity/composition runtime rules have since been replaced by
-  a transparent alias to the derived lax-arrow total; the checked recursive
-  evidence remains active. Gray/walking-arrow, `homd_parameter_func`,
-  degeneracies, connections, and Kan operations remain later rows.
-
-- `REPORT_EMDASH_V3_2_CUBICAL_DEPENDENT_HOM_PLAN_2026-08-23.md`:
-  completed parent plan for a two-sided cross-corner dependent hom. It first
-  derives a curried whole classifier from existing endpoint actions and
-  `hom_con_int`, then requires the `hom_int(id_C)` instance to compute the
-  directed square filler category
-  `Hom_{Hom_C(x1,y2)}(b o u,v o a)` without collapsing to the differently
-  typed unit-profunctor cell. Later rows internalize endpoints, expose four
-  square-edge projections, and test a six-faced cube before adding any
-  semicubical code layer or groupoidal-source specialization. Its first
-  continuation provides a fixed-boundary nested-Sigma square total:
-  top/bottom vary, left/right are constant, and a next-hom object exposes two
-  endpoint squares plus four side faces. The completed August 24 correction
-  now derives nondegenerate endpoint variation as
-  `homd_int(id_(Op EdgeFamily))` followed by the outer opposite Sigma, without
-  making the independent general parameter action a prerequisite.
-
-- `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:
-  completed focused child of the internal-laxity/groupoidal-realization master.
-  Its first semantic row now supplies a computational strict-functor
-  code/decoder and a
-  strict-object/lax-arrow Gray internal-hom facade over the shared ambient
-  transfor tower. The second row derives the walking interval, its endpoints,
-  generator, and retained next action from the existing
-  `Join_cat(Terminal_cat,Terminal_cat)` and `join_cross_transf`. The third row
-  now supplies one `GrayTensor_R`, computationally strict whole curry/uncurry
-  functors between the profiled Hom categories, equality-valued whole
-  beta/eta through `OmegaEquivAlong Cat_cat`, and identity-derived
-  coevaluation/evaluation. The fourth row derives the four objects and both
-  coordinate arrow families of `I tensor I` from that coevaluation and the
-  retained walking generator, with whole owners in both directions and no
-  Cartesian collapse. The fifth row projects the nonidentity interchanger
-  from the active whole post/left laxity action, retains its next hom action,
-  and confirms the `GrayHom_lax` orientation without adding a square axiom or
-  endpoint bridge. The synchronized closeout is green: the strict catalog has
-  2,177 checks across 106 areas, and exact health passes all 81
-  source/diagnostic targets and 105 reviewers. Mirror closure, full
-  biclosed/monoidal Crans--Gray structure, global strict-cut migration,
-  groupoidification, and book work remain excluded. The first semantic row is
-  checkpointed at `9222dad`; the derived walking-arrow row is checkpointed at
-  `1caf642`; the right-closure semantic row is checkpointed at `37a5ede`; and
-  the walking-square boundary is checkpointed at `d2597c9`; the oriented
-  interchanger is checkpointed at `e2f069c`; synchronized closeout is
-  checkpointed at `053fcce`.
-
-- `REPORT_EMDASH_V3_2_WALKING_CIRCLE_GROUPOIDIFICATION_UNIVERSALITY_PLAN_2026-08-17.md`:
-  completed consumer-first child of the internal-laxity/groupoidal-realization
-  master. Whole precomposition along `walking_to_circle_func` is now an
-  `OmegaEquivAlong Cat_cat` from Circle functions into a groupoid `G` to
-  WalkingEnd functors into `Path_cat(G)`. The inverse computes on objects by
-  Circle recursion, retains first and next hom action, and satisfies scoped
-  whole beta/eta uniqueness; base and generator observations are dependent
-  projections. A self-equivalence now gives a Circle-indexed groupoid family
-  whose restriction recovers the WalkingEnd representation and whose loop
-  transport applies the equivalence. Generic `Groupoidify_func` remains
-  explicitly deferred behind a free-coherent-inversion construction tested
-  on non-endomorphism and composition source shapes. The later Circle child
-  completes canonical dependent loop computation; mirror Gray closure,
-  global strict-cut migration, and book work remain separate. Synchronized
-  universality closeout is checkpointed at `709c1e3`.
-
-- `REPORT_EMDASH_V3_2_CIRCLE_JUDGMENTAL_LOOP_COMPUTATION_PLAN_2026-08-18.md`:
-  completed bounded normal-form continuation of the WalkingEnd--Circle
-  universality plan. A stable generic `eq_apd` owner lets the dependent
-  `eq_apd(circle_ind,loop)` observation compute judgmentally, including the
-  constant-family dependent `circle_rec` view. The ordinary `eq_ap` observer
-  remains propositionally compared through the safe J-derived boundary.
-  Implementation is checkpointed at `c662f2c` and synchronized 195-target
-  closeout at `9ab7c0f`. Generic groupoidification remains the proposed
-  follow-on construction beginning with non-endomorphism and composable-pair
-  source shapes.
-
-- `REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md`:
-  generic-first successor to the completed Circle and interval tranches. The
-  predecessor launch reuses
-  `WalkingArrow_cat`, adds the two-endpoint groupoidal interval with
-  judgmental dependent segment computation, and proves the whole
-  fixed-forward mapping-object equivalence against every groupoidal target.
-  Endpoint-sensitive positive/negative reviewers and exact 202-target health
-  closeout are green; the implementation is checkpointed at `76f43b3` and
-  synchronized closeout at `07ddfd4`. The bounded generic continuation now
-  implements category-indexed `Groupoidify(C)`, its whole unit and computing
-  recursor, whole extension/restriction and arbitrary-target mapping-object
-  equivalence, an explicit nonidentity compositor with retained next action,
-  and beta/eta-derived recovery of
-  `Groupoidify(WalkingArrow) ~= Interval`. The strict catalog has 2,197 checks
-  across 109 areas, and exact health is green for 94 source/diagnostic targets
-  plus 114 reviewers. The bounded implementation and synchronized closeout
-  are checkpointed at `7a02d85`. The composable-pair/2-simplex remains a
-  post-generic standard-library regression; source action,
-  `Groupoidify_func`, and the adjunction remain later rows.
-
-- `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
-  completed focused child of the internal-laxity/groupoidal-realization
-  decision record. It provides the sorted `NType_cat(n)`
-  facade, classified `Trunc_ntype(n,A)` result, restricted point-computing
-  elimination, recursor-derived whole map action, and Circle mere
-  connectedness. The conditional row also proves
-  `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier rewrite to Unit. Its
-  exact 176-target health closeout is green; generic groupoidification, Gray
-  tensor, arbitrary quotient/HIT schemas, existing scheme mathematics, and
-  book work remain excluded.
+These ledgers contain genuinely active or incrementally open work. A completed plan must not remain in this section merely because its result is current architecture.
 
 - `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`:
   active living Lambdapi-first standard-library architecture for Cat-valued
@@ -1676,30 +1442,7 @@ record.
   base change is PSSS-09b; proposition-valued topology and subcanonicity
   remain PSSS-09c rather than treating chosen presentation data as a
   proposition.
-- `../../docs/RECORD_STRUCTURE_USABILITY_V3_2_PLAN.md`:
-  active isolated TypeScript outer-LF usability plan for an
-  unparameterized, nonrecursive, single-constructor dependent structure with
-  named primitive projections and field-ordered subject-reducing beta rules.
-  It reuses the completed adjunction macro architecture while keeping the
-  macro private to the host layer and emitting only ordinary declarations and
-  runtime rules. Record eta, decoded classifiers, eliminators, parameters,
-  native-inductive attachment, recursion/positivity, parser work, browser
-  promotion, and Lambdapi source changes remain separate gated rows. An
-  ordinary general-inductive declaration macro is explicitly postponed: the
-  intended future declaration problem is higher inductive categories/types,
-  such as the walking endomorphism, and requires a separate dimensional and
-  coherence-aware design.
-- `../../docs/ADJUNCTION_USABILITY_V3_2_PLAN.md`:
-  completed isolated cross-layer adjunction-usability plan. Its implemented
-  first tranche is a focused/live-conformance-green direct-TypeScript
-  outer-LF trusted `assumeAdjunction` macro that expands to one canonical
-  `Adjunction(F,G)` witness and two proof-time unit/counit agreements without
-  adding a parser or trusted-Core macro node. A second focused/live-green
-  facade accepts a whole counit and coherent forward `ProfMap`, then reuses
-  the existing selected Hom-profunctor comparison with proof-time agreement.
-  The completed owner audit justifies no Lambdapi edit or parallel
-  full-functor classifier; runtime mate projection and the faithful
-  object-only `G^o` triangular junction/adjunction remain consumer-gated.
+
 - `../../docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`:
   active living cross-layer plan for stress-testing a systematic,
   data/policy-driven transfer architecture against representative groupoidal,
@@ -1714,6 +1457,310 @@ record.
   `../../docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. Any Lambdapi change
   scheduled here remains subordinate to the active authorities and full
   kernel SOP.
+
+- `REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`:
+  active representability/computational-comparison redesign and deferred
+  internalization ledger.
+
+- `REPORT_EMDASH_V3_2_DEFISO_HOM_ACTION_PROFCOMPARISON_MIGRATION_PLAN_2026-06-28.md`:
+  active incremental `DefIso`, hom-action, and `ProfComparison` migration.
+
+- `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
+  active/deferred redesign of remaining equipment-shadow, tensor,
+  co-Yoneda, and primitive-join ownership.
+
+- `REPORT_EMDASH_V3_2_FULL_NATURALITY_PRELIM_PLAN_2026-06-12.md`:
+  full-naturality follow-up after the first implemented slice.
+
+- `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
+  ordinary structural functor logic and displayed/product follow-ups.
+
+- `REPORT_EMDASH_V3_2_PROFUNCTOR_WEIGHTED_LIMITS_PRELIM_PLAN_2026-06-17.md`:
+  implementation log plus remaining profunctor, weighted-limit, duality, and
+  directed-inductive follow-ups after the first end-to-end pass.
+
+## Completed Current-Architecture Ledgers
+
+These plans are complete but remain the recovery and decision authority for currently integrated interfaces. Their dated measurements are historical evidence, not standing SOP.
+
+- `REPORT_EMDASH_V3_2_FOUNDATIONAL_DOCUMENTATION_SOP_AND_REGISTRY_MAINTENANCE_PLAN_2026-08-30.md`:
+  completed corrective maintenance ledger for the integrated `0e61a79`
+  baseline. It assigns one role to each standing authority, adds the missing
+  selected binary/terminal/Cartesian layer to Foundations and canonical
+  syntax, reduces nested `AGENTS.md` from duplicated catalogues to mandatory
+  SOP plus compact routing, reclassifies plan lifecycle, and strengthens the
+  registry checker against the observed recurrence. It changes no Lambdapi
+  semantics and excludes the in-progress global strictness-profile migration.
+
+- `REPORT_EMDASH_V3_2_SLICE_DEPENDENT_PRODUCTS_AND_LCCC_COMPUTATION_PLAN_2026-08-29.md`:
+  completed first-tranche implementation successor to the pullback
+  computation. It selects one whole
+  covariant exact-slice family whose internal arrow action is
+  `Π_u:C/X→C/Y`, indexed by the existing chosen pullback structure, and
+  instantiates the existing adjunction as `u*⊣Π_u`. Generic unit/counit
+  observations remain the actual whole transfors; their `tapp1` projections
+  compute to stable Došen heads. Both full post-opposite rectangles and both
+  component triangles are active, while transparent Hom mate functors retain
+  higher action and the named whole comparison reuses
+  `Adjunction_hom_prof_comparison`. The implementation adds no unifier or
+  specialized composite-point/identity-action rule, and keeps `Pi_cat`, the
+  proposed general `Pi_along_func`, and slice `Π_u` distinct. Beck–Chevalley,
+  Frobenius, slice exponentials, general right-Kan comparison, TypeScript
+  generation, and optional whole stable-mate `OmegaEquivAlong` packaging are
+  later layers. The strict catalog has 2,359 checks across 116 areas, including
+  27 pullback and 9 slice-dependent-product checks; source-only health covers
+  328 registered owner/reviewer files.
+
+- `REPORT_EMDASH_V3_2_PULLBACKS_AND_SLICE_BASE_CHANGE_COMPUTATION_PLAN_2026-08-28.md`:
+  completed strict-computational correction of the pullback implementation after
+  checkpoint `e9ac7e6`. One whole covariant slice family supplies
+  `Σ_f:C/X→C/Y`; one selected whole contravariant family has exact `C/X`
+  fibres and supplies `f*:C/Y→C/X`, with each internal base arrow carrying
+  the existing adjunction `Σ_f⊣f*`. Stable whole/point mates retain both
+  triangle cuts, while narrow proof-time usability and non-opaque semantic
+  paths expose unit/counit formulas without runtime erasure. Canonical
+  body-unfolded whole unifiers identify the stable mate functors with their
+  semantic bodies, and exact raw-Hom-guarded `Cat_cat` rules reduce both whole
+  composites to identity. The generic adjunction profunctor comparison remains
+  the varying-endpoint Hom presentation; no additional `OmegaEquivAlong`
+  package is required. Generic
+  arbitrary-object/arrow Sigma observations replace the former slice-record
+  workaround; canonical represented postcomposition computes the `Σ_f`
+  domain and structure arrow without recentering paths. The follow-up retains
+  stable whole `f*`, unit, and counit heads, exposes Došen's `γᶜ`/`φᵃ` as their
+  off-diagonal projections, and makes both full `(ac)` rectangles plus both
+  identity component triangles compute. Generic composition and identity own
+  `(f*∘Σ_f)[a]`, `Σ_f(id)`, and `f*(id)`; the three redundant
+  pullback-specific clauses are removed. Pullback object,
+  projections, derived directed square, exact Hom cone category, universal
+  lift, recovery, and uniqueness are active. No pullback-specific constructor
+  accepts a square witness.
+  Raw ambient projection composites remain negative in the arbitrary
+  higher-categorical slice: the first law is a retained directed cell and the
+  second computes through whole cone recovery. Generic `Pullback_catd`, pseudo
+  invertibility, products/weighted/dual comparisons, `Π_f`,
+  Beck–Chevalley, and Frobenius remain distinct or later assumption-explicit
+  consumers. The earlier strict-computational correction is complete in
+  `PB-RECLOSE-15`, and the validated rectangle follow-up is complete in
+  `PB-RECT-CLOSE-18`, with final generic-owner/documentation cleanup in
+  `PB-GENERIC-19`/`PB-FINAL-DOC-20` and whole mate closure in
+  `PB-WHOLE-MATE-21`/`PB-WHOLE-CLOSE-22`.
+
+- `REPORT_EMDASH_V3_2_TRIANGULAR_BINARY_PRODUCTS_COMPUTATION_PLAN_2026-08-27.md`:
+  completed second-tranche closeout plan for enhanced triangular products,
+  terminal objects, and their thin Cartesian package. One direct map unifier
+  replaces the former projection unifiers; projection equalities derive by
+  congruence, runtime map forms remain distinct, and whole unpair retains
+  higher action plus both pointwise inverse paths. Whole functor equality is
+  still constructor-gated, so no `OmegaEquivAlong` is claimed. The separate
+  terminal module exposes `! : id_C => Const_t`, computing components,
+  off-diagonal action and canonical cuts, while hom-contractibility derives
+  arbitrary `f = !_A` and `!_t = id_t` propositionally. No variable-headed
+  rewrite or bare-variable unifier is used. The Cartesian package is
+  rule-free. A separate assumption-explicit adapter preserves the existing
+  `BinaryProductPresentation`, carrying supplied strict weighted comparisons
+  and paths joining both projection surfaces; no automatic `DefIso` is
+  postulated. Product-only warnings are `1179/169`; the combined Cartesian
+  import is `1188/171` against the `1116/159` base. Focused closeout remains
+  green and complete under the scoped-validation policy; whole functor
+  equality and automatic `DefIso` remain explicitly gated follow-ups.
+
+- `REPORT_EMDASH_V3_2_MONAD_COMONAD_COMPUTATION_PLAN_2026-08-23.md`:
+  completed direct Monad-usability correction over the `e90ce3c`
+  transparent-whole checkpoint. Monad
+  remains primary, ordinary ambient `comp_fapp0` owns Došen beta and
+  accumulation, and `KleisliCut` remains transparent notation. The optional
+  comonad layer now uses a transparent classifier plus a measured narrow
+  stable variance mirror: only counit, comultiplication, and point coextension
+  have stable dual heads because active runtime LHSs discriminate on them.
+  Whole coextension transparently reuses primary monadic whole extension; its
+  former custom projection and proof-time equation have been removed. All
+  opaque equality bridges remain absent. The canonical unit of the
+  adjunction-induced Monad retains runtime computation and its adjunction unit
+  is a proof-time usability endpoint. Whole multiplication remains semantic
+  and reduces to transparent `G epsilon F`; a derived path propositionally
+  joins its whole-first component with the component-first triangular branch.
+  TypeScript automation is deferred. Focused correction checks are green; the
+  catalog has 2,268 classified checks, the strict module audit is empty, and
+  warning-enabled module checking is `1139/159`. No
+  repository-wide health or CI aggregate was run under the user's scoped-
+  validation policy.
+  Explicit Kleisli-category, free-syntax decidability, and TypeScript work
+  remain separately gated.
+
+- `REPORT_EMDASH_V3_2_FUNCTOR_PROPERTY_PROFILE_MIGRATION_PLAN_2026-08-27.md`:
+  completed property-first continuation from the Gray/cubical profile
+  redesign. The
+  transparent fixed-forward `IsPseudoFunctor` property and exact
+  carrier/`IsStrictFunctor` package replace the former abstract pseudo wrapper
+  and primitive strict code grammar. Gray strict-object/lax-arrow behavior,
+  cubical recursion, ordinal-simplex action, whole coface equations and higher
+  internal action remain checked. The generic global strict functoriality,
+  naturality, and displayed-rule migration is an explicit later goal.
+
+- `REPORT_EMDASH_V3_2_CUBICAL_YONEDA_AND_GRAY_CUBE_ADEQUACY_PLAN_2026-08-25.md`:
+  completed semantic-adequacy continuation. It first packages the object-level
+  Yoneda section/evaluation between `StandardSemicube(n)` and the whole native
+  cubical nerve, checks the coordinate-swapped Gray walking-square orientation,
+  constructs whole transformation graphs, and decodes fixed-bracketing Gray
+  tensor powers of the walking arrow into native cubical levels by one internal
+  Nat recursion. Dimensions one through three, four edges, six faces, and the
+  arbitrary-variable-dimensional object operation are active. Public claims
+  remain object-level; full equivalences, inverse decoding, alternate
+  bracketings, and monoidal coherence are deferred.
+
+- `REPORT_EMDASH_V3_2_CUBICAL_INTERNALIZATION_AND_SIGMA_DERIVATION_PLAN_2026-08-24.md`:
+  completed corrective continuation. It derives
+  `homdc_int` from the existing `homd_int` after inner Sigma and pointwise
+  opposite, rejects `Sigma_cat C (CommaFib_catd(id_C))` as the oplax
+  orientation, and constructs the selected lax-arrow category by an outer
+  opposite Sigma. `CubicalArrow_cat` is now a transparent alias; the existing
+  arbitrary-dimensional `{L,R,*}` action is revalidated, and Yoneda standard
+  semicubes decode through the whole native nerve action.
+
+- `REPORT_EMDASH_V3_2_CUBICAL_ARROW_AND_SEMICUBICAL_CODES_PLAN_2026-08-23.md`:
+  completed prototype/implementation child of the cubical-dependent-hom plan,
+  corrected foundationally by the August 24 internalization plan.
+  Its profiled lift, variable-dimensional levels, and set-classified
+  `{L,R,*}` words form `SemiCubePlus_cat`, act contravariantly on those levels,
+  and assemble a whole Cat-valued semicubical nerve. A recursive finite family
+  exposes all `2n` immediate faces. The former primitive `CubicalArrow_cat`
+  and explicit identity/composition runtime rules have since been replaced by
+  a transparent alias to the derived lax-arrow total; the checked recursive
+  evidence remains active. Gray/walking-arrow, `homd_parameter_func`,
+  degeneracies, connections, and Kan operations remain later rows.
+
+- `REPORT_EMDASH_V3_2_CUBICAL_DEPENDENT_HOM_PLAN_2026-08-23.md`:
+  completed parent plan for a two-sided cross-corner dependent hom. It first
+  derives a curried whole classifier from existing endpoint actions and
+  `hom_con_int`, then requires the `hom_int(id_C)` instance to compute the
+  directed square filler category
+  `Hom_{Hom_C(x1,y2)}(b o u,v o a)` without collapsing to the differently
+  typed unit-profunctor cell. Later rows internalize endpoints, expose four
+  square-edge projections, and test a six-faced cube before adding any
+  semicubical code layer or groupoidal-source specialization. Its first
+  continuation provides a fixed-boundary nested-Sigma square total:
+  top/bottom vary, left/right are constant, and a next-hom object exposes two
+  endpoint squares plus four side faces. The completed August 24 correction
+  now derives nondegenerate endpoint variation as
+  `homd_int(id_(Op EdgeFamily))` followed by the outer opposite Sigma, without
+  making the independent general parameter action a prerequisite.
+
+- `REPORT_EMDASH_V3_2_PROFILED_GRAY_HOM_AND_I_TENSOR_I_PLAN_2026-08-17.md`:
+  completed focused child of the internal-laxity/groupoidal-realization master.
+  Its original first semantic row used a computational strict-functor
+  code/decoder; that carrier design is superseded by the later property-profile
+  ledger. The current integrated reading uses exact
+  `StrictFunctor = Sigma(F,IsStrictFunctor(F))` packages and retains the same
+  strict-object/lax-arrow Gray internal-hom facade over the shared ambient
+  transfor tower. The second row derives the walking interval, its endpoints,
+  generator, and retained next action from the existing
+  `Join_cat(Terminal_cat,Terminal_cat)` and `join_cross_transf`. The third row
+  supplies one `GrayTensor_R`, whole curry/uncurry functors paired with
+  supplied `IsStrictFunctor` evidence, equality-valued whole beta/eta through
+  `OmegaEquivAlong Cat_cat`, and identity-derived coevaluation/evaluation. The
+  fourth row derives the four objects and both
+  coordinate arrow families of `I tensor I` from that coevaluation and the
+  retained walking generator, with whole owners in both directions and no
+  Cartesian collapse. The fifth row projects the nonidentity interchanger
+  from the active whole post/left laxity action, retains its next hom action,
+  and confirms the `GrayHom_lax` orientation without adding a square axiom or
+  endpoint bridge. The synchronized closeout is green: the strict catalog has
+  2,177 checks across 106 areas, and exact health passes all 81
+  source/diagnostic targets and 105 reviewers. Mirror closure, full
+  biclosed/monoidal Crans--Gray structure, and global strict-cut migration
+  remain excluded; groupoidification and book work were outside this plan and
+  were completed in later ledgers. The historical first semantic row is
+  checkpointed at `9222dad`; the derived walking-arrow row is checkpointed at
+  `1caf642`; the right-closure semantic row is checkpointed at `37a5ede`; and
+  the walking-square boundary is checkpointed at `d2597c9`; the oriented
+  interchanger is checkpointed at `e2f069c`; synchronized closeout is
+  checkpointed at `053fcce`.
+
+- `REPORT_EMDASH_V3_2_WALKING_CIRCLE_GROUPOIDIFICATION_UNIVERSALITY_PLAN_2026-08-17.md`:
+  completed consumer-first child of the internal-laxity/groupoidal-realization
+  master. Whole precomposition along `walking_to_circle_func` is now an
+  `OmegaEquivAlong Cat_cat` from Circle functions into a groupoid `G` to
+  WalkingEnd functors into `Path_cat(G)`. The inverse computes on objects by
+  Circle recursion, retains first and next hom action, and satisfies scoped
+  whole beta/eta uniqueness; base and generator observations are dependent
+  projections. A self-equivalence now gives a Circle-indexed groupoid family
+  whose restriction recovers the WalkingEnd representation and whose loop
+  transport applies the equivalence. Generic `Groupoidify_func` remains
+  explicitly deferred behind a free-coherent-inversion construction tested
+  on non-endomorphism and composition source shapes. The later Circle child
+  completes canonical dependent loop computation; mirror Gray closure,
+  global strict-cut migration, and book work remain separate. Synchronized
+  universality closeout is checkpointed at `709c1e3`.
+
+- `REPORT_EMDASH_V3_2_CIRCLE_JUDGMENTAL_LOOP_COMPUTATION_PLAN_2026-08-18.md`:
+  completed bounded normal-form continuation of the WalkingEnd--Circle
+  universality plan. A stable generic `eq_apd` owner lets the dependent
+  `eq_apd(circle_ind,loop)` observation compute judgmentally, including the
+  constant-family dependent `circle_rec` view. The ordinary `eq_ap` observer
+  remains propositionally compared through the safe J-derived boundary.
+  Implementation is checkpointed at `c662f2c` and synchronized 195-target
+  closeout at `9ab7c0f`. Generic groupoidification remains the proposed
+  follow-on construction beginning with non-endomorphism and composable-pair
+  source shapes.
+
+- `REPORT_EMDASH_V3_2_GENERIC_GROUPOIDIFICATION_FREE_INVERSION_PRELIMINARY_PLAN_2026-08-18.md`:
+  generic-first successor to the completed Circle and interval tranches. The
+  predecessor launch reuses
+  `WalkingArrow_cat`, adds the two-endpoint groupoidal interval with
+  judgmental dependent segment computation, and proves the whole
+  fixed-forward mapping-object equivalence against every groupoidal target.
+  Endpoint-sensitive positive/negative reviewers and exact 202-target health
+  closeout are green; the implementation is checkpointed at `76f43b3` and
+  synchronized closeout at `07ddfd4`. The bounded generic continuation now
+  implements category-indexed `Groupoidify(C)`, its whole unit and computing
+  recursor, whole extension/restriction and arbitrary-target mapping-object
+  equivalence, an explicit nonidentity compositor with retained next action,
+  and beta/eta-derived recovery of
+  `Groupoidify(WalkingArrow) ~= Interval`. The strict catalog has 2,197 checks
+  across 109 areas, and exact health is green for 94 source/diagnostic targets
+  plus 114 reviewers. The bounded implementation and synchronized closeout
+  are checkpointed at `7a02d85`. The composable-pair/2-simplex remains a
+  post-generic standard-library regression; source action,
+  `Groupoidify_func`, and the adjunction remain later rows.
+
+- `REPORT_EMDASH_V3_2_COMPUTATIONAL_TRUNCATION_AND_CIRCLE_CONNECTEDNESS_PLAN_2026-08-17.md`:
+  completed focused child of the internal-laxity/groupoidal-realization
+  decision record. It provides the sorted `NType_cat(n)`
+  facade, classified `Trunc_ntype(n,A)` result, restricted point-computing
+  elimination, recursor-derived whole map action, and Circle mere
+  connectedness. The conditional row also proves
+  `IsContr(Trunc_grpd(0,Circle_grpd))` without a carrier rewrite to Unit. Its
+  exact 176-target health closeout is green; generic groupoidification, Gray
+  tensor, arbitrary quotient/HIT schemas, existing scheme mathematics, and
+  book work remain excluded.
+
+- `../../docs/RECORD_STRUCTURE_USABILITY_V3_2_PLAN.md`:
+  active isolated TypeScript outer-LF usability plan for an
+  unparameterized, nonrecursive, single-constructor dependent structure with
+  named primitive projections and field-ordered subject-reducing beta rules.
+  It reuses the completed adjunction macro architecture while keeping the
+  macro private to the host layer and emitting only ordinary declarations and
+  runtime rules. Record eta, decoded classifiers, eliminators, parameters,
+  native-inductive attachment, recursion/positivity, parser work, browser
+  promotion, and Lambdapi source changes remain separate gated rows. An
+  ordinary general-inductive declaration macro is explicitly postponed: the
+  intended future declaration problem is higher inductive categories/types,
+  such as the walking endomorphism, and requires a separate dimensional and
+  coherence-aware design.
+
+- `../../docs/ADJUNCTION_USABILITY_V3_2_PLAN.md`:
+  completed isolated cross-layer adjunction-usability plan. Its implemented
+  first tranche is a focused/live-conformance-green direct-TypeScript
+  outer-LF trusted `assumeAdjunction` macro that expands to one canonical
+  `Adjunction(F,G)` witness and two proof-time unit/counit agreements without
+  adding a parser or trusted-Core macro node. A second focused/live-green
+  facade accepts a whole counit and coherent forward `ProfMap`, then reuses
+  the existing selected Hom-profunctor comparison with proof-time agreement.
+  The completed owner audit justifies no Lambdapi edit or parallel
+  full-functor classifier; runtime mate projection and the faithful
+  object-only `G^o` triangular junction/adjunction remain consumer-gated.
+
 - `REPORT_EMDASH_V3_2_AUTONOMOUS_MAINTENANCE_AND_EVOLUTION_PLAN_2026-07-22.md`:
   active living cross-project maintenance plan. Its initial AME-0 through
   AME-9 autonomous cycle and the evidence-backed AME-10 Git-worktree, root
@@ -1721,12 +1768,19 @@ record.
   tranche are complete. The plan reopens only on concrete new evidence;
   speculative or decision-dependent work remains in an explicit human/research
   boundary.
+
+## Deferred Proposals
+
+These proposals remain intentionally unimplemented pending the prerequisites stated in their own ledgers.
+
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
   proposed dependent products along functors and comma-category
   infrastructure.
-- `REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`:
-  active representability/computational-comparison redesign and deferred
-  internalization ledger.
+
+## Superseded Or Historical Plans
+
+These plans retain provenance but are not current implementation or scheduling authority where their own headers name a successor.
+
 - `REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13.md`:
   retained living predecessor/master ledger integrating full
   observational equality, HoTT truncation and `Prop`/`Set`/`n`-groupoid
@@ -2042,18 +2096,6 @@ record.
   refinement wrapper because they had no consumer beyond that selected-action
   presentation. `NatSucc_func`, recursive Nat equality, `nat_succ_ind_eqr`,
   Nat arithmetic/sethood, and WalkingEnd remain active.
-- `REPORT_EMDASH_V3_2_DEFISO_HOM_ACTION_PROFCOMPARISON_MIGRATION_PLAN_2026-06-28.md`:
-  active incremental `DefIso`, hom-action, and `ProfComparison` migration.
-- `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
-  active/deferred redesign of remaining equipment-shadow, tensor,
-  co-Yoneda, and primitive-join ownership.
-- `REPORT_EMDASH_V3_2_FULL_NATURALITY_PRELIM_PLAN_2026-06-12.md`:
-  full-naturality follow-up after the first implemented slice.
-- `REPORT_EMDASH_V3_2_FUNCTOR_STRUCTURAL_LOGIC_PRELIM_PLAN_2026-06-04.md`:
-  ordinary structural functor logic and displayed/product follow-ups.
-- `REPORT_EMDASH_V3_2_PROFUNCTOR_WEIGHTED_LIMITS_PRELIM_PLAN_2026-06-17.md`:
-  implementation log plus remaining profunctor, weighted-limit, duality, and
-  directed-inductive follow-ups after the first end-to-end pass.
 
 ## Completed Or Promoted Decision Records
 
@@ -2203,13 +2245,17 @@ explicitly requested.
 
 ## Maintenance Rules
 
-- Add every new active report to this index.
-- List only genuinely open plans under `Current Plans`; move completed promoted
-  plans to a completed ledger/decision-record section without deleting their
-  history.
-- Current plans require `Plan-ID`, dependency, supersession, side-task-ledger,
-  Infinity Codex provenance, and status fields. `make ci` enforces them.
-- Mark reports as current orientation, current plan, completed decision record,
-  deferred plan, audit, or generated report.
+- Add every new active report under `Active Plans`.
+- Move completed but still architecture-relevant plans to
+  `Completed Current-Architecture Ledgers`; do not delete their history or
+  leave them active merely because their results remain current.
+- Put intentionally unimplemented designs under `Deferred Proposals` and
+  displaced predecessors under `Superseded Or Historical Plans`.
+- Every entry in those four lifecycle sections requires `Plan-ID`, dependency,
+  supersession, side-task-ledger, Infinity Codex provenance, and status fields.
+  Status must agree with the section, and a file may occur in only one of the
+  four. `make ci` enforces these invariants.
+- Continue to distinguish current orientation, decision records, audits,
+  retirements, and generated reports from plan lifecycle.
 - Keep normal-work instructions pointed at active authorities rather than
   ignored historical material.

@@ -19,6 +19,14 @@ geometry organized by the invertibility sieve $D_R(f)$, site-relative
 schemes, and a supplied projective-line presentation. These layers keep
 representability, locality, and construction hypotheses explicit.
 
+Its universal-construction layer now also combines whole monad extension with
+selected finite Cartesian and indexed computation. A chosen product functor,
+whole projections, pairing, and a terminal-arrow transfor support Došen-style
+triangular cuts. In slices, postcomposition, chosen pullback base change, and
+selected dependent products form the internal chain
+`Sigma_u |- u* |- Pi_u`, with whole mate action and no manually stored
+pullback-cone square.
+
 Its groupoidal layer now also contains an opaque Circle HIT and a checked
 encode--decode equivalence between its based loop space and the integers,
 together with the concrete WalkingEnd-to-Circle nonnegative comparison and a
@@ -140,8 +148,8 @@ Start with the concise
 [*Functorial Type Theory: An Executable Architecture for Directed Dependency*](./docs/emdash3_2.pdf)
 overview, then continue to the current development edition of
 [*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf)
-(`0.6.1-dev`, 355 pages;
-[Zenodo record and DOI](https://doi.org/10.5281/zenodo.21544186),
+(`0.7.0-dev`, 374 pages, locally promoted;
+[Zenodo record and DOI for the latest public release](https://doi.org/10.5281/zenodo.21544186),
 [assembled Markdown](./docs/emdash-book.md)).
 The active mathematical source is
 [`emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp), together with the modules it

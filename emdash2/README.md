@@ -28,6 +28,22 @@ The concrete one-object category `BNat` is a separate model, not the
 definition of `WalkingEnd`. The loop is neither collapsed to the identity nor
 given an inverse.
 
+Selected universal constructions use the same whole-owner discipline. The
+monad layer retains whole extension while ordinary composition computes its
+triangular cuts. `BinaryProducts(C,P)` supplies one whole product functor,
+whole projections and represented-family pairing; `TerminalObject(C,t)`
+supplies one whole canonical-arrow transfor and Hom contractibility. Their
+thin Cartesian package adds no duplicate computation. On conventional slices,
+chosen pullbacks and selected dependent products give
+
+```text
+Sigma_u |- u* |- Pi_u,
+```
+
+with actual whole adjunction transfors and mate action. A pullback cone is an
+object of an internal slice Hom, not a separate record carrying two legs and a
+commuting-square field.
+
 The local-to-global development applies the same computational discipline to
 geometry. It forms ordinary invertibility sieves before choosing representing
 opens, represents affine instances pointwise by supplied localizations,
@@ -45,10 +61,11 @@ used by the current scheme presentations.
 ## Where to start
 
 - `emdash3_2.lp` is the import root and active computation authority.
+- `AGENTS.md` is the mandatory Lambdapi editing and validation SOP.
 - `reports/EMDASH_FOUNDATIONS.md` is the mathematician-facing guide.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
-  records exact owners, current boundaries, warning evidence, and the
-  mandatory kernel workflow.
+  records exact owners, current boundaries, architecture, and selected
+  baseline evidence.
 - `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
   owns mathematical comment/example notation and records the bounded
   TypeScript text profile separately.

@@ -1,7 +1,7 @@
 # emdash v3.2 Canonical Surface Syntax
 
 Date: 2026-06-05
-Last reviewed: 2026-08-23
+Last reviewed: 2026-08-30
 
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
@@ -2128,6 +2128,152 @@ the transparent `G epsilon F` construction. Its component-first triangular
 endpoint and whole-first semantic component are joined by the derived
 `adjunction_monad_mult_component_path`; this path does not alter runtime
 preference. TypeScript declaration automation is deferred.
+
+## Triangular Binary-Product And Terminal-Object Notation
+
+After selecting
+
+```text
+P  : C × C -> C
+BP : BinaryProducts(C,P),
+```
+
+write
+
+```text
+A ×_P B := P(A,B).
+```
+
+The shorter `A × B` is permitted when one `P` and `BP` are fixed and no
+product-category ambiguity is present. `Product_cat(A,B)` continues to mean
+the category of pairs and exists independently of `BinaryProducts(C,P)`; do
+not use the same unqualified phrase for those two constructions.
+
+The whole projections and their point components are written
+
+```text
+κ₁ : P => pr₁
+κ₂ : P => pr₂
+
+κ₁^{A,B} : A ×_P B -> A
+κ₂^{A,B} : A ×_P B -> B.
+```
+
+The owners are `binary_products_proj1_transf`,
+`binary_products_proj2_transf`, `binary_products_proj1_fapp0`, and
+`binary_products_proj2_fapp0`. Their full off-diagonal `tapp1` projections are
+the antecedential operations
+
+```text
+K₁ᵃ_A(f) := f o κ₁
+K₂ᵃ_A(f) := f o κ₂.
+```
+
+Pairing is written
+
+```text
+<f,g> : X -> A ×_P B.
+```
+
+It is the point observation of the whole represented-family pairing transfor
+`binary_products_pair_transf`; its component
+`binary_products_pair_func(BP,X,A,B)` is a whole functor between Hom
+categories and retains another hom action. Do not describe pairing as a capped
+binary function when that retained action matters.
+
+The selected runtime equations are
+
+```text
+h o K₁ᵃ(f)       == K₁ᵃ(h o f)
+h o K₂ᵃ(f)       == K₂ᵃ(h o f)
+
+K₁ᵃ(h) o <f,g>  == h o f
+K₂ᵃ(h) o <f,g>  == h o g
+
+<f,g> o k        == <f o k,g o k>
+<κ₁,κ₂>          == id
+
+<K₁ᵃ(f),K₁ᵃ(g)> == K₁ᵃ(<f,g>)
+<K₂ᵃ(f),K₂ᵃ(g)> == K₂ᵃ(<f,g>).
+```
+
+Here `==` denotes runtime computation at the stable `K₁ᵃ`, `K₂ᵃ`, pairing,
+or ambient-composition owner. The generic action of the selected whole product
+functor remains a different runtime presentation. Write its agreement with
+the triangular map as
+
+```text
+P[(f,g)] =proof-time <K₁ᵃ(f),K₂ᵃ(g)>.
+```
+
+The owner is the single direct map `unif_rule`; the typed first-class view is
+`binary_products_map_path`. Do not print two projection-specific unifiers.
+Their equality paths derive from this map path by ordinary congruence and the
+runtime projection betas.
+
+The transparent whole unpair functor may be written
+
+```text
+unpair(h) := (κ₁ o h,κ₂ o h).
+```
+
+Pointwise pair/unpair composites have internal equality paths. Do not promote
+those paths to equality of whole functors or to `OmegaEquivAlong` unless a
+separate whole assembly owner is supplied.
+
+For a selected terminal object
+
+```text
+T : TerminalObject(C,t),
+```
+
+write its whole canonical-arrow transfor and components as
+
+```text
+!   : id_C => Const_t
+!_A : A -> t.
+```
+
+The canonical terminal cut is runtime:
+
+```text
+!_B o h == !_A.
+```
+
+For arbitrary `f : A -> t`, write
+
+```text
+f = !_A
+!_t = id_t
+```
+
+only as internal equality paths derived from
+`terminal_hom_contr_at_arrow`. They are not runtime folds and not proof-time
+bare-variable unifiers. In particular, do not print `!_t == id_t`.
+
+The thin combined capability is
+
+```text
+CartesianCategory(C,P,t)
+  := BinaryProducts(C,P) × TerminalObject(C,t).
+```
+
+It introduces no additional computational notation. The weighted comparison
+surface remains assumption-explicit:
+
+```text
+W : BinaryProductsWeightedComp(BP).
+```
+
+Such a `W` carries a supplied strict weighted comparison and paths identifying
+its two projections with `κ₁` and `κ₂`. It is not automatically constructed
+from the triangular beta/eta equations, and it does not replace the direct
+runtime calculus.
+
+None of this notation asserts products or a terminal object for every
+category, free Cartesian syntax, or a global commuting decision procedure.
+It is canonical mathematical/comment/example notation only; the bounded
+TypeScript text grammar does not acquire these forms automatically.
 
 ## Pullback And Slice Base-Change Notation
 

@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-28
+Last consolidated: 2026-08-30
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -9,6 +9,12 @@ for changing it safely. It intentionally records the current selected design,
 not the chronological sequence of earlier candidates. Dated implementation
 plans in `reports/INDEX.md` retain decision history, rejected orientations, and
 detailed probe evidence.
+
+Discovered `../AGENTS.md` is the mandatory editing and validation SOP. This
+report owns the current implementation architecture, owner map, selected
+baseline, and explanatory invariants. Where an operational instruction is
+repeated below, `AGENTS.md` takes precedence; dated warning/probe evidence
+belongs to the owning implementation plan rather than to standing guidance.
 
 ## Sources Of Truth
 
@@ -126,8 +132,9 @@ detailed probe evidence.
   computes through whole Hom recovery.
   Generic family substitution `Pullback_catd` remains a separate owner;
   explicit pseudo invertibility, products-in-slices, weighted pullbacks,
-  pushout duality, `Π_f`, Beck–Chevalley, and Frobenius are later
-  assumption-explicit consumers.
+  pushout duality, general `Pi_along_func`, Beck–Chevalley, and Frobenius are
+  later assumption-explicit consumers. The selected slice `Π_u` is active in
+  the immediately following module.
 - `emdash3_2_slice_dependent_products.lp`: selected coherent dependent
   products indexed by `PB : PullbackStructure(C)`. One whole covariant family
   has exact fibre `C/X` and action `Π_u:C/X→C/Y`; each internal arrow carries
@@ -578,20 +585,23 @@ detailed probe evidence.
   retains a next-hom functor between paths-between-paths. The module adds no
   Path-specific runtime fold, proof-time rule, pseudofunctor classifier,
   inverse record, or complete coherence claim.
-- `emdash3_2_gray_profiles.lp`: computational strict-functor codes, their
-  retained decoder, and the selected `GrayHom_lax` strict-object/lax-arrow
-  profile. Its homs reuse the ambient `Transf_cat` tower, while only decoded
-  strict carriers make the existing compositor compute to identity. The
-  historical global endpoint cuts remain documented pending a later staged
-  migration.
+- `emdash3_2_gray_profiles.lp`: semantic `IsStrictFunctor` evidence, the exact
+  `StrictFunctor(A,B) = Sigma(F,IsStrictFunctor(F))` package, its stable
+  evidence-bearing ambient view, and the selected `GrayHom_lax`
+  strict-object/lax-arrow profile. The property constrains the already
+  extracted compositor by an endpoint path and equality-induced arrow; it
+  adds no second functor grammar or compositor and does not reflect arbitrary
+  evidence to literal identity. Homs and every higher action reuse the
+  ambient `Transf_cat` tower. Historical global endpoint cuts remain pending
+  a separate profile-local migration.
 - `emdash3_2_walking_arrow.lp`: transparent walking-arrow interface derived
   from `Join_cat(Terminal_cat,Terminal_cat)`. Both endpoints, the generator,
   and its next hom action are projections of existing join owners.
 - `emdash3_2_gray_right_closure.lp`: one profiled right-closed slice with an
-  opaque `GrayTensor_R`, whole computationally strict curry/uncurry maps,
-  equality-valued beta/eta packaged by `OmegaEquivAlong Cat_cat`, and
-  identity-derived coevaluation/evaluation. It does not claim the mirror
-  closure or full Crans--Gray monoidal structure.
+  opaque `GrayTensor_R`, whole curry/uncurry maps paired with supplied
+  `IsStrictFunctor` evidence, equality-valued beta/eta packaged by
+  `OmegaEquivAlong Cat_cat`, and identity-derived coevaluation/evaluation. It
+  does not claim the mirror closure or full Crans--Gray monoidal structure.
 - `emdash3_2_gray_walking_square.lp`: transparent `I tensor I` boundary whose
   four vertices and both coordinate directions derive from coevaluation and
   the retained walking generator; no tensor object or arrow is postulated.
@@ -989,8 +999,13 @@ detailed probe evidence.
   cartesian structure, slice base change, and `Sigma_u |- u* |- Pi_u`. It owns
   the locally promoted 374-page draft `0.7.0-dev` release and its deterministic
   PDF/visual gate; no remote publication occurred.
+- `REPORT_EMDASH_V3_2_FOUNDATIONAL_DOCUMENTATION_SOP_AND_REGISTRY_MAINTENANCE_PLAN_2026-08-30.md`:
+  completed corrective authority/registry maintenance ledger for the
+  integrated `0e61a79` baseline. It changes no Lambdapi semantics and excludes
+  the in-flight global strictness migration.
 - `REPORT_EMDASH_V3_2_AUTONOMOUS_MAINTENANCE_AND_EVOLUTION_PLAN_2026-07-22.md`:
-  current cross-project maintenance, triage, and evolution ledger.
+  completed reusable predecessor ledger for cross-project maintenance,
+  triage, and evolution. The 2026-08-30 child above owns the current reopen.
 - `REPORT_EMDASH_CHECK_CATALOG.md`: generated map of the diagnostic suite.
 - `REPORT_EMDASH_HEALTH.md`: generated source metrics and bounded timings.
 
@@ -5182,30 +5197,31 @@ the honest inherited category operation; strict LHS audit is clean. These
 warnings remain measured diagnostic evidence, not a claim of global
 confluence.
 
-After integration of the completed TypeScript-elaborator, PSSS, internal-
-laxity, profiled-Gray, WalkingEnd--Circle, groupoidification, monad/product/
-terminal, and cubical/functor-property-profile histories, the exact-current
-selected-source warning boundary is 1,275 diagnostics: 1,116 unjoinable
-critical pairs and 159 replaceable-pattern advisories. Relative to the
-functor-property parent, the generalized double-`Op_transf` involution removes
-exactly 15 `Op_transf` critical-pair reports (`30` to `15`) without adding a
-new warning family. The strict kernel LHS audit has zero unreviewed clauses,
-61 annotated slots, and 36 intentional clauses; every changed rule-bearing
-extension also has zero strict findings. The generated catalog contains 2,323
-classified checks across 114 areas with zero legacy or unclassified entries.
+After integration of the completed TypeScript-elaborator, PSSS,
+internal-laxity, profiled-Gray, WalkingEnd--Circle, groupoidification,
+monad/Cartesian, cubical/property-profile, pullback, and
+slice-dependent-product histories, the active kernel warning boundary remains
+1,274 diagnostics: 1,117 unjoinable critical pairs and 157
+replaceable-pattern advisories. Downstream module-specific additions and
+projection-order classifications remain in their dated implementation plans;
+there is no fabricated single warning total for every possible import
+closure. The strict kernel LHS audit has zero unreviewed clauses, 63 annotated
+slots, and 38 intentional clauses; every changed rule-bearing extension also
+has zero strict findings. The generated catalog contains 2,359 classified
+checks across 116 areas with zero legacy or unclassified entries.
 
-The current registered health report is deliberately an honest no-check source
-snapshot over 324 maintained targets. It records no exit or timing claim,
-because the integration follows the user's scoped-validation boundary rather
-than launching a repository-wide health sweep. The merged kernel, all 2,323
-central diagnostics, every changed profile source owner, and all 36 changed
-reviewer examples pass under the uniform 90-second per-target ceiling. The
-source-metrics snapshot is
-`sha256:08bfc957fc9c66f87ee0773cc36db9365a13c5c47df3029ea8cb7c6f4c14f9fa`
-and the checked-content snapshot is
-`sha256:6c9031879e6022fe4040fae0143e9f1065e3da4e351df1dcfbe8a231203f98f6`.
-No repository-wide `make check`, `make examples`, `make health`, `make ci`, or
-root aggregate is claimed.
+The current registered health report is deliberately an honest no-check
+source snapshot over 328 maintained owner/reviewer files. It records no exit
+or timing claim, because the integration follows the user's scoped-validation
+boundary rather than launching a repository-wide health sweep. The relevant
+changed kernel/module/diagnostic/reviewer targets passed their proportional
+90-second-per-target gates in their owning tranches. The source-metrics
+snapshot is
+`sha256:612715e4cbae9d012908bf1a6c344df3ea2e878f4a471bf69341f3ff3b4a7253`
+and the check-content snapshot is
+`sha256:62cfae850b43e11f7303f4882c1c0fbe8caffaa7dbef65516013f164074a7100`.
+No repository-wide post-integration `make check`, `make examples`,
+`make health`, `make ci`, or root aggregate is claimed.
 
 ## Book And Renderer Workflow
 
@@ -5215,12 +5231,14 @@ chapter files are authoring sources; the ignored
 the renderer. Book theorem-like claims use the four statuses defined in
 `book/STYLE.md` and checked claims cite `book/evidence.json`.
 
-The current locally promoted artifact is the corrected draft expanded
-development edition `0.6.1-dev`, dated 2026-08-22: 355 tagged US Letter pages,
-16 embedded fonts, and PDF SHA-256
-`1561efd7462c6fc7a935c72378cb07d71a8d434febdd0f25e7f2a39ec593ca7c`.
-Its deterministic owner and public copy are byte-identical. This artifact
-status is publication evidence, not a new mathematical authority.
+The current locally promoted artifact is the draft expanded development
+edition `0.7.0-dev`, dated 2026-08-29: 45 ordered sources, 164 cited evidence
+claims, 3,091 mathematical spans, 374 tagged US Letter pages, 18 embedded
+fonts, and PDF SHA-256
+`d15287f7a841dfd25ad441c7fc8ff804425659ae0c292c2d8ae726fb46c9204b`.
+Two independent releases produced that same checksum, and the promoted owner
+and public copy are byte-identical. This artifact status is publication
+evidence, not a new mathematical authority; no remote publication occurred.
 
 ```bash
 ./scripts/pnpmw run book:assemble
@@ -5251,8 +5269,10 @@ split of `emdash3_2.lp` is not a prerequisite for book development.
 
 The following remain explicit future work rather than hidden assumptions:
 
-- full general dependent adjunctions `Sigma_F ⊣ F^* ⊣ Pi_F`, including the
-  planned `Pi_f`/comma-category infrastructure;
+- full general dependent adjunctions `Sigma_F ⊣ F^* ⊣ Pi_F` along an arbitrary
+  functor `F`, including the planned comma/right-Kan `Pi_along_func`
+  infrastructure. The selected slice chain `Sigma_u ⊣ u* ⊣ Pi_u` is already
+  active and is not this deferred general construction;
 - remaining displayed structural logic and product/curry compatibility; the
   transparent Cat-valued sibling product now has fixed-base
   projection/pairing, derived swap/diagonal, point/full/capped action, both

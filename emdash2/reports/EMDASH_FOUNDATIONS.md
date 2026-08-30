@@ -1,5 +1,7 @@
 # emdash Foundations
 
+Last reviewed: 2026-08-30
+
 Draft status: this document is a mathematician-facing reading guide for the
 current `emdash3_2.lp` theory, its one-way derived native equality-valued hom-action
 extension `emdash3_2_eq1_hom_action.lp`, and the transparent evidence-property
@@ -26,6 +28,13 @@ total, augmented `{L,R,*}` index, whole semicubical nerve, recursive immediate
 boundaries, Yoneda representable decoding, and the fixed-bracketing right-Gray
 cube decoder live in the subsequent cubical modules recorded by the August
 23--25 plans.
+The monad-primary extension calculus, selected whole binary and empty products,
+thin Cartesian package, chosen pullback base change, and selected slice
+dependent products live in the subsequent universal-construction modules
+recorded by the August 23--29 plans. Their primary indexed chain is
+`Σ_u ⊣ u* ⊣ Π_u`; Beck--Chevalley, Frobenius, derived slice exponentials, and
+the convention-sensitive locally Cartesian closed package remain later
+layers.
 The isolated binary-Sum experiment was retired on 2026-07-20 for later
 consumer-led redesign; it is not part of the active foundation.
 
@@ -5205,6 +5214,161 @@ These generic rules do not by themselves prove decidability of all emdash or
 Lambdapi conversion. Došen's decision theorem concerns the separately free
 syntax; a future executable normalizer must make that syntax and its
 translation boundary explicit.
+
+### Selected binary and empty products
+
+The selected Cartesian layer applies the same computational principle to
+finite products: keep the whole universal operation and its higher action,
+but orient elimination-after-introduction at stable triangular observations.
+
+A chosen binary-product structure is indexed by an already selected whole
+functor
+
+```text
+P  : C × C → C
+BP : BinaryProducts(C,P).
+```
+
+This `P` is a functor internal to the arbitrary category `C`. It is not
+`Product_cat(A,B)`, the always-available category whose objects and arrows are
+pairs. The two selected projections are components of whole transfors
+
+```text
+κ₁ : P ⇒ pr₁
+κ₂ : P ⇒ pr₂.
+```
+
+Pairing is likewise not only an operation on two displayed arrows. For fixed
+objects `A`, `B`, it is one whole transfor between represented families over
+`C^op`. Its component at `X` is the whole functor
+
+```text
+pair_{X,A,B}
+  : Hom_C(X,A) × Hom_C(X,B)
+      → Hom_C(X,P(A,B)).
+```
+
+Consequently a higher arrow between two possible pairs of legs is mapped to a
+higher arrow between their pairings. The stable point observation is written
+`<f,g>`.
+
+Došen's antecedential projections retain the post-projection cut as one
+visible owner:
+
+```text
+K₁ᵃ_A(f) = f o κ₁
+K₂ᵃ_A(f) = f o κ₂.
+```
+
+Ordinary ambient composition then owns the selected runtime orientation:
+
+```text
+h o K₁ᵃ(f)        -> K₁ᵃ(h o f)
+h o K₂ᵃ(f)        -> K₂ᵃ(h o f)
+
+K₁ᵃ(h) o <f,g>   -> h o f
+K₂ᵃ(h) o <f,g>   -> h o g
+
+<f,g> o k         -> <f o k,g o k>
+<κ₁,κ₂>           -> id.
+```
+
+The two selected product normalizations from the triangular presentation also
+reduce toward one surviving antecedential operation:
+
+```text
+<K₁ᵃ(f),K₁ᵃ(g)>  -> K₁ᵃ(<f,g>)
+<K₂ᵃ(f),K₂ᵃ(g)>  -> K₂ᵃ(<f,g>).
+```
+
+The extra whole functor `P` already has generic arrow action. Expanding that
+action at runtime would compete with the triangular map and erase neither
+presentation cleanly. Instead one proof-time comparison identifies the
+canonical constructor-visible action with
+
+```text
+P[(f,g)] ≐ <K₁ᵃ(f),K₂ᵃ(g)>.
+```
+
+Here `≐` means proof-time unification, not runtime reduction. The typed path
+`binary_products_map_path` is reflexivity through that comparison. Projection
+paths are derived by congruence and the ordinary beta cuts; there are no two
+independent projection unifiers.
+
+Postcomposition with both projections defines a transparent whole unpair
+functor
+
+```text
+unpair : Hom_C(X,P(A,B))
+           → Hom_C(X,A) × Hom_C(X,B).
+```
+
+Pair-after-unpair and unpair-after-pair have explicit pointwise inverse paths,
+and ordinary eta plus distribution derive the familiar hom-level uniqueness
+statement. Equality of the two *whole functor composites* remains a stronger
+assembly boundary: the active layer does not infer it merely from pointwise
+paths and therefore does not claim a packaged `OmegaEquivAlong`.
+
+The empty product is selected independently. For a chosen object `t`,
+
+```text
+T : TerminalObject(C,t)
+! : id_C ⇒ Const_t
+```
+
+is one whole canonical-arrow transfor. Its point component is
+
+```text
+!_A : A → t,
+```
+
+and its off-diagonal action selects the canonical source component. The stable
+terminal cut computes:
+
+```text
+!_B o h -> !_A.
+```
+
+Došen's unrestricted equation for an arbitrary `f : A → t` is deliberately
+not a variable-headed rewrite or a bare-variable unifier. The structure
+instead supplies
+
+```text
+terminal_hom_contr(A) : IsContr(Hom_C(A,t)).
+```
+
+That contraction is recentered at `!_A`; ordinary contractibility then derives
+the internal paths
+
+```text
+f   = !_A
+!_t = id_t.
+```
+
+Neither path changes the runtime normal form of an arbitrary arrow or of
+`!_t`.
+
+The thin capability
+
+```text
+CartesianCategory(C,P,t)
+  = BinaryProducts(C,P) × TerminalObject(C,t)
+```
+
+only pairs the two selected structures. It adds no projection, pairing,
+terminal arrow, rewrite rule, or unification rule.
+
+Weighted products remain a distinct semantic presentation. A supplied
+`BinaryProductsWeightedComp(BP)` packages the existing strict `DefIso`-based
+weighted comparison and paths identifying its two projections with the
+triangular projections. The adapter does not construct that stronger witness
+automatically from beta, eta, and pointwise uniqueness. Conversely, the
+weighted presentation does not own the direct triangular runtime calculus.
+
+This layer establishes selected introduction/elimination computation and
+retained whole action. It does not assert products or a terminal object for
+every category, construct free Cartesian syntax, or prove a global commuting
+decision procedure.
 
 ### Chosen pullbacks as internal slice base change
 
