@@ -12,13 +12,18 @@ import {
     ComputableCategory,
     planCategoryOperation
 } from './algebra_category';
-import { CategoricalTower, ConstructorLoweringRule } from './algebra_tower';
+import {
+    ALGEBRA_TOWER_PROFILE,
+    CategoricalTower,
+    ConstructorLoweringRule
+} from './algebra_tower';
 
 export const ALGEBRA_CATEGORICAL_PROGRAM_PROFILE = Object.freeze({
     revision: 'emdash-categorical-program-v1' as const,
     valueRevision: 'emdash-categorical-program-value-v1' as const,
     compilationRevision: 'emdash-categorical-compilation-v1' as const,
     lowering: 'explicit-whole-operation-bindings' as const,
+    reinterpretationRules: 'retained-not-executed' as const,
     derivedCallbackInlining: false as const,
     optimizer: false as const,
     nodeBuiltinDependency: false as const,
@@ -33,6 +38,8 @@ export type AlgebraCategoricalProgramErrorCode =
     | 'SCHEMA_MISMATCH'
     | 'MISSING_LOWERING'
     | 'DUPLICATE_LOWERING'
+    | 'DUPLICATE_COMPILER_RULE'
+    | 'FOREIGN_REINTERPRETATION'
     | 'CATEGORY_METHOD_UNAVAILABLE';
 
 export class AlgebraCategoricalProgramError extends Error {
@@ -208,6 +215,15 @@ export interface CategoricalCompilationTraceNode {
     readonly algebraOperationId: string;
 }
 
+export interface CategoricalCompilationReinterpretation {
+    readonly profileRevision:
+        typeof ALGEBRA_TOWER_PROFILE.reinterpretationRevision;
+    readonly id: string;
+    readonly publicCategoryId: string;
+    readonly modelingCategoryId: string;
+    readonly loweringRules: readonly ConstructorLoweringRule[];
+}
+
 export interface CategoricalCompilation {
     readonly profileRevision:
         typeof ALGEBRA_CATEGORICAL_PROGRAM_PROFILE.compilationRevision;
@@ -216,6 +232,8 @@ export interface CategoricalCompilation {
     readonly graph: AlgebraComputationGraph;
     readonly nodes: readonly CategoricalCompilationTraceNode[];
     readonly towerRules: readonly ConstructorLoweringRule[];
+    readonly reinterpretationRules: readonly ConstructorLoweringRule[];
+    readonly loweringRules: readonly ConstructorLoweringRule[];
 }
 
 export const compileCategoricalProgram = (input: {
@@ -223,6 +241,7 @@ export const compileCategoricalProgram = (input: {
     readonly category: ComputableCategory<unknown, unknown>;
     readonly tower: CategoricalTower;
     readonly lowerings: readonly CategoryOperationLowering[];
+    readonly reinterpretations?: readonly CategoricalCompilationReinterpretation[];
 }): CategoricalCompilation => {
     const lowerings = new Map<string, CategoryOperationLowering>();
     input.lowerings.forEach(lowering => {
@@ -236,6 +255,47 @@ export const compileCategoricalProgram = (input: {
             lowering.algebraOperation.output
         )) fail('SCHEMA_MISMATCH', id, 'Lowering schemas disagree');
         lowerings.set(id, lowering);
+    });
+    const compilerRuleIds = new Set<string>();
+    const retainRule = (rule: ConstructorLoweringRule, path: string): void => {
+        if (compilerRuleIds.has(rule.id)) {
+            fail(
+                'DUPLICATE_COMPILER_RULE',
+                path,
+                `Duplicate compiler rule '${rule.id}'`
+            );
+        }
+        compilerRuleIds.add(rule.id);
+    };
+    input.tower.loweringRules.forEach((rule, index) => retainRule(
+        rule,
+        `tower.loweringRules[${index}]`
+    ));
+    const reinterpretationIds = new Set<string>();
+    const reinterpretationRules: ConstructorLoweringRule[] = [];
+    (input.reinterpretations ?? []).forEach((reinterpretation, index) => {
+        if (
+            reinterpretation.profileRevision !==
+                ALGEBRA_TOWER_PROFILE.reinterpretationRevision ||
+            reinterpretation.publicCategoryId !== input.category.identity.id ||
+            reinterpretationIds.has(reinterpretation.id)
+        ) {
+            fail(
+                reinterpretationIds.has(reinterpretation.id)
+                    ? 'DUPLICATE_COMPILER_RULE'
+                    : 'FOREIGN_REINTERPRETATION',
+                `reinterpretations[${index}]`,
+                `Invalid reinterpretation '${reinterpretation.id}'`
+            );
+        }
+        reinterpretationIds.add(reinterpretation.id);
+        reinterpretation.loweringRules.forEach((rule, ruleIndex) => {
+            retainRule(
+                rule,
+                `reinterpretations[${index}].loweringRules[${ruleIndex}]`
+            );
+            reinterpretationRules.push(rule);
+        });
     });
     const builder = createAlgebraComputationGraphBuilder(
         `${input.program.id}.lowered`,
@@ -288,6 +348,11 @@ export const compileCategoricalProgram = (input: {
         tower: input.tower,
         graph,
         nodes: Object.freeze(trace),
-        towerRules: input.tower.loweringRules
+        towerRules: input.tower.loweringRules,
+        reinterpretationRules: Object.freeze(reinterpretationRules),
+        loweringRules: Object.freeze([
+            ...input.tower.loweringRules,
+            ...reinterpretationRules
+        ])
     });
 };

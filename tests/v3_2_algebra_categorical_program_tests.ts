@@ -132,6 +132,8 @@ describe('v3.2 retained categorical-program lowering', () => {
             'additive-closure.matrix-lowering',
             'freyd.presentation-lowering'
         ]);
+        assert.deepEqual(compilation.reinterpretationRules, []);
+        assert.deepEqual(compilation.loweringRules, compilation.towerRules);
     });
 
     it('rejects missing, duplicate, schema-mismatched, and foreign lowerings', () => {
