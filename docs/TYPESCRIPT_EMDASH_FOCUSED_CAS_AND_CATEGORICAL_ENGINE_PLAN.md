@@ -11,7 +11,7 @@ proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
 focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
 implemented and focused-green; `CAS-FREYD-6B` is implemented and
 proportional-green; `CAS-HOMOLOGICAL-7A` is complete and proportional-green;
-the first `CAS-MODULE-4B2A` and `4B2B` tranches are implemented and proportional-green,
+the `CAS-MODULE-4B2A` through `4B2C` tranches are implemented and proportional-green,
 while the larger `CAS-MODULE-4B2` row remains in progress and
 `CAS-CONSTRUCTIBLE-8A` remains independently dependency-ready.
 
@@ -790,7 +790,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-ZARISKI-3B` | complete; proportional-green at `ebbe15f` | `CAS-IDEAL-3A` | whole unimodular result retaining ideal/basis/membership/coefficients/combination/remainder; positive-only computational finite basic-open cover, schemas/serialization, native operations, and graph pipeline; formal adapter explicitly deferred; nine tests and all 76 focused CAS tests green |
 | `CAS-MATRIX-4A` | complete; proportional-green at `442cbff` | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | structural exact matrix spaces; immutable row-major arithmetic, transpose, composition, RREF with left transformation, column-kernel basis, schemas/serialization, field/limit/cancellation gates, native operations, and transpose graph; nine tests and all 85 focused CAS tests green |
 | `CAS-MODULE-4B1` | complete; focused-green at `707a7da` | `CAS-MATRIX-4A` | field-linear free/presented modules, relation-witnessed morphisms and composition, quotient projection/section realization, free kernels, presented cokernels, and matrix syzygies; seven module and nine affected matrix tests green |
-| `CAS-MODULE-4B2` | in progress; `4B2A` `ecf1b97`, `4B2B` `96dad7f` green | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | module orders/division/Buchberger/membership and recursively induced Schreyer modules with verified syzygy generators complete; presented polynomial modules, first resolutions, and native graph operations remain |
+| `CAS-MODULE-4B2` | in progress; `4B2A` `ecf1b97`, `4B2B` `96dad7f`, `4B2C` `499aea5` green | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | module orders/Buchberger/membership, Schreyer syzygies, presented polynomial modules, quotient normal forms, and bounded recursive free resolutions complete; native graph operations remain |
 | `CAS-CATEGORY-5A` | complete; proportional-green at `64b4c7c` (core `90cfca0`) | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict category shell, weighted primitive/derived registry, ring-as-one-object category, and presented-field-module category with primitive whole kernels/cokernels and derived object projections; four category and sixteen affected module/matrix tests green |
 | `CAS-DOCTRINE-5B` | complete; focused-green at `02ac3d0` | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
 | `CAS-TOWER-5C` | complete; focused-green at `dd910b0` | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
@@ -932,6 +932,33 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-083` | accepted | Module Buchberger retains a polynomial transformation row for every basis vector, and membership returns original-generator coefficients plus a module remainder satisfying exact reconstruction. |
 | `D-CAS-084` | accepted | A Schreyer free-module parent retains the target module and the leading term of every reference basis vector; induced comparison descends recursively to the target order and then uses the recorded basis-index tie break. |
 | `D-CAS-085` | accepted | Schreyer generators are coefficient rows of module S-pairs that reduce to zero against the complete computed module Gröbner basis; each row is recombined with that basis and required to produce the zero module vector. |
+| `D-CAS-086` | accepted | A presented polynomial module retains its original relation submodule and its computed module Gröbner basis; quotient normal form is the position-aware module-division remainder, with coefficients and reconstruction data retained. |
+| `D-CAS-087` | accepted | A bounded Schreyer resolution recursively uses each current Gröbner basis as differential columns, computes its verified Schreyer syzygies, Gröbner-normalizes the next syzygy submodule, checks consecutive composites, and distinguishes completion from explicit truncation. |
+
+## `CAS-MODULE-4B2C` Result
+
+Presented polynomial modules, free-module maps, and bounded recursive Schreyer
+resolutions are implemented in
+`src/v3_2/algebra_polynomial_presentation.ts`. A module presentation retains
+the original relation family and its module Gröbner basis. Quotient reduction
+returns the existing membership result: original-relation coefficients, basis
+quotients, and the canonical module remainder.
+
+A free-module map is represented by the images of its ordered source basis;
+application, identity, composition, and zero testing are computational. The
+resolution algorithm repeatedly installs the current Gröbner basis as a
+differential, computes verified Schreyer syzygies, normalizes their submodule,
+and continues until no syzygies remain or the caller's length bound is met.
+Every consecutive composite is required to be zero.
+
+For the running presentation, the complete resolution has free ranks
+`2 <- 3 <- 1` and length two. A length-one request is retained as incomplete,
+while a quotient with no relations terminates at length zero without fake
+zero stages. Three presentation tests plus the affected module and ideal
+suites give 19 passing tests, followed by workspace check, affected lint,
+root typecheck, and diff hygiene. No repository-wide aggregate was run.
+
+Semantic checkpoint: `499aea5` (`cas: add polynomial module Schreyer resolutions`).
 
 ## `CAS-MODULE-4B2B` Result
 
