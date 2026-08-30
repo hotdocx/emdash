@@ -6,9 +6,8 @@ Plan-ID: `TS-EMDASH-FOCUSED-CAS`
 
 Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
-`CAS-CONTRACT-1A`, `CAS-GRAPH-1B`, `CAS-EXACT-2A`, `CAS-POLY-2B`, and
-`CAS-ENGINE-2C` implemented and proportional-green; `CAS-IDEAL-3A` is the
-next dependency-ready implementation row.
+`CAS-CONTRACT-1A` through `CAS-IDEAL-3A` implemented and proportional-green;
+`CAS-ZARISKI-3B` is the next dependency-ready implementation row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -781,8 +780,8 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-EXACT-2A` | complete; proportional-green at `36dc108` | `CAS-GRAPH-1B` | stable parent/element base; canonical bigint-only integers and reduced rationals; arithmetic, order, Euclidean division, gcd, powers, text/JSON serialization, runtime schemas, and immutable operational domains; twelve exact tests and all 33 focused CAS tests green |
 | `CAS-POLY-2B` | complete; proportional-green at `7b6b929` | `CAS-EXACT-2A` | coefficient-polymorphic parent-aware sparse multivariate polynomials; lex/grlex/grevlex, canonicalization, arithmetic, powers, substitution, stable serialization, runtime schema, and field-only ordered division; thirteen polynomial tests and all 46 focused CAS tests green |
 | `CAS-ENGINE-2C` | complete; proportional-green at `765aa32` | `CAS-POLY-2B` | native in-process TypeScript registry with multiple deterministic algorithms per exact operation contract; selected integer/rational and ring-specific polynomial operations, direct/graph execution, fuel, cancellation, progress, metadata, and output limits; ten engine tests and all 56 focused CAS tests green |
-| `CAS-IDEAL-3A` | in progress | `CAS-ENGINE-2C` | ideals, Buchberger reference implementation, reduction, membership, reduced bases, and retained transformations |
-| `CAS-ZARISKI-3B` | pending | `CAS-IDEAL-3A` | unimodular-combination computation and optional adapter to current Zariski-cover presentation |
+| `CAS-IDEAL-3A` | complete; proportional-green; checkpoint candidate | `CAS-ENGINE-2C` | ordered polynomial ideals; deterministic monic Buchberger basis, retained generator transformations, reduced-basis postpass, positive/negative membership decomposition, schemas/serialization, bounded cancellation, native operations, and graph pipeline; eleven ideal tests and all 67 focused CAS tests green |
+| `CAS-ZARISKI-3B` | in progress | `CAS-IDEAL-3A` | unimodular-combination computation and optional adapter to current Zariski-cover presentation |
 | `CAS-MATRIX-4A` | pending | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | exact matrices and selected row/column algorithms with explicit orientation conventions |
 | `CAS-MODULE-4B` | pending | `CAS-IDEAL-3A`, `CAS-MATRIX-4A` | free and finitely presented modules, morphisms, kernels/cokernels, and syzygies |
 | `CAS-CATEGORY-5A` | pending | `CAS-GRAPH-1B`, representative algebra values | minimal strict computable-category runtime, ring-as-category, matrix/free-module category, primitive/derived registry |
@@ -873,6 +872,10 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-030` | accepted | The native reference engine registers one or more algorithms under an exact operation/input/output schema contract; available algorithms are deterministically ordered and explicit selection is honored. |
 | `D-CAS-031` | accepted | Reference-engine v1 enforces cancellation before an operation, per-operation declared fuel cost, start/end progress, and selected output limits; polling inside heavyweight algorithms is introduced with those algorithms. |
 | `D-CAS-032` | accepted | Exact operation descriptors are global, while polynomial operation bundles are ring-specific and include the structural polynomial parent in every operation and schema identity. |
+| `D-CAS-033` | accepted | An ideal retains its ordered normalized generator family, including zero entries; Groebner transformations are rows relative to that exact family. |
+| `D-CAS-034` | accepted | Buchberger v1 uses a deterministic pair queue, monic new basis elements, no optimization criterion, and explicit pair/basis/reduction/cancellation bounds; faster algorithms remain alternative implementations. |
+| `D-CAS-035` | accepted | Ideal membership always returns coefficients and a remainder satisfying `f = sum_i a_i*g_i + r`; `member` is exactly whether the remainder is zero for the supplied Groebner result. |
+| `D-CAS-036` | accepted | Groebner and membership schemas validate structural shape and parent agreement but do not silently certify that an externally supplied basis has the Groebner property. |
 
 ## `CAS-CONTRACT-1A` Result
 
@@ -1013,6 +1016,35 @@ Semantic checkpoint: `765aa32` (`cas: add native TypeScript reference engine`).
 
 Focused evidence in `tests/v3_2_algebra_reference_engine_tests.ts` covers ten
 positive and negative native-engine cases. All 56 focused CAS tests pass
+together, followed by workspace check, affected-file lint, root typecheck,
+and diff hygiene.
+
+## `CAS-IDEAL-3A` Result
+
+The first ideal layer is implemented in `src/v3_2/algebra_ideal.ts` and
+`src/v3_2/algebra_ideal_reference_operations.ts`. It provides:
+
+- ordered parent-checked polynomial ideals;
+- a deterministic transparent Buchberger reference algorithm;
+- monic initial and newly discovered basis elements;
+- retained transformation rows expressing each basis element in the original
+  generators;
+- cancellation polling between S-pairs;
+- pair, basis-size, per-division, and total-reduction ceilings;
+- S-polynomial construction and Buchberger-pair inspection;
+- a reduced-basis postpass retaining transformation rows;
+- ideal linear-combination evaluation;
+- membership coefficients, basis quotients, canonical remainder, and exact
+  reconstruction data for both positive and negative outcomes;
+- immutable structural schemas and deterministic text-oriented JSON; and
+- ring-specific native Groebner/reduced-basis/membership operations, including
+  a retained `ideal -> basis -> reduced basis` graph pipeline.
+
+Focused evidence in `tests/v3_2_algebra_ideal_tests.ts` covers eleven positive
+and negative ideal cases, including every transformation reconstruction,
+every resulting S-pair, positive/nonmember decompositions, the zero ideal,
+limits, cancellation, non-field rejection, schema drift, serialization,
+native execution, and graph composition. All 67 focused CAS tests pass
 together, followed by workspace check, affected-file lint, root typecheck,
 and diff hygiene.
 

@@ -19,6 +19,8 @@ export * from './algebra_exact';
 export * from './algebra_polynomial';
 export * from './algebra_reference_engine';
 export * from './algebra_reference_operations';
+export * from './algebra_ideal';
+export * from './algebra_ideal_reference_operations';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
