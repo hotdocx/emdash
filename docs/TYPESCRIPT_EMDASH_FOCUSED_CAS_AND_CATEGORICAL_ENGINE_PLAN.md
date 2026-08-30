@@ -791,7 +791,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-CATEGORY-5A` | complete; proportional-green at `64b4c7c` (core `90cfca0`) | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict category shell, weighted primitive/derived registry, ring-as-one-object category, and presented-field-module category with primitive whole kernels/cokernels and derived object projections; four category and sixteen affected module/matrix tests green |
 | `CAS-DOCTRINE-5B` | complete; focused-green at `02ac3d0` | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
 | `CAS-TOWER-5C` | complete; focused-green at `dd910b0` | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
-| `CAS-COMPILER-6A` | complete; proportional-green; checkpoint candidate | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
+| `CAS-COMPILER-6A` | complete; proportional-green at `c28da8f` | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
 | `CAS-FREYD-6B` | in progress | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | compiled Freyd/AdditiveClosure presentation agrees operationally with direct `PresentedModule` computations |
 | `CAS-HOMOLOGICAL-7A` | pending | `CAS-FREYD-6B` | complexes, homology, connecting morphism, initial generalized-morphism and resolution algorithms |
 | `CAS-CONSTRUCTIBLE-8A` | pending | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | selected slice/poset/stable-poset/opposite/difference/union tower lowered to ideal and saturation operations |
@@ -915,6 +915,8 @@ double-negation program, module-tower rule retention, and missing/duplicate/
 foreign lowering failures. Together with the affected tower, category, graph,
 and engine suites, 33 tests pass, followed by workspace check, affected lint,
 root typecheck, and diff hygiene.
+
+Semantic checkpoint: `c28da8f` (`cas: add staged categorical program lowering`).
 
 ## `CAS-TOWER-5C` Result
 
