@@ -630,6 +630,78 @@ export function algebraModuleColiftAlongEpimorphism<
     return colift;
 }
 
+/**
+ * Choose a deterministic lift lambda with epsilon * lambda equal to tau.
+ *
+ * This uses the split-epimorphism property of finite-dimensional vector
+ * spaces and is not asserted as an operation for arbitrary module categories.
+ */
+export function algebraModuleLiftAlongEpimorphism<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    epsilon: AlgebraModuleMorphism<P, C, I>,
+    tau: AlgebraModuleMorphism<P, C, I>
+): AlgebraModuleMorphism<P, C, I> {
+    if (!algebraPresentedModuleEquals(epsilon.target, tau.target)) {
+        return fail(
+            'NOT_LIFTABLE',
+            'moduleEpiLift.target',
+            'An epimorphism lift requires morphisms with one target'
+        );
+    }
+    let inverse: AlgebraMatrix<P, C, I>;
+    try {
+        inverse = algebraMatrixRightInverse(
+            algebraModuleInducedMatrix(epsilon)
+        );
+    } catch (error: unknown) {
+        if (
+            error instanceof AlgebraMatrixError &&
+            error.code === 'NO_RIGHT_INVERSE'
+        ) {
+            return fail(
+                'NOT_EPIMORPHISM',
+                'moduleEpiLift.epsilon',
+                'The proposed epimorphism is not surjective'
+            );
+        }
+        throw error;
+    }
+    const sourceRealization = algebraModuleRealization(tau.source);
+    const targetRealization = algebraModuleRealization(epsilon.source);
+    const induced = algebraMatrixMultiply(
+        inverse,
+        algebraModuleInducedMatrix(tau)
+    );
+    const matrix = algebraMatrixMultiply(
+        algebraMatrixMultiply(targetRealization.section, induced),
+        sourceRealization.projection
+    );
+    const lift = algebraModuleMorphism(
+        tau.source,
+        epsilon.source,
+        matrix,
+        algebraZeroMatrix(algebraMatrixSpace(
+            epsilon.source.field,
+            epsilon.source.relations.parent.columns,
+            tau.source.relations.parent.columns
+        ))
+    );
+    if (!algebraModuleMorphismEquivalent(
+        algebraModuleCompose(epsilon, lift),
+        tau
+    )) {
+        return fail(
+            'NOT_LIFTABLE',
+            'moduleEpiLift.tau',
+            'The test morphism does not lift through the epimorphism'
+        );
+    }
+    return lift;
+}
+
 export interface AlgebraModuleKernel<
     P extends AlgebraParent,
     C extends AlgebraElement<P>,

@@ -20,6 +20,8 @@ import {
     algebraModuleIdentity,
     algebraModuleKernel,
     algebraModuleKernelLift,
+    algebraModuleLiftAlongEpimorphism,
+    algebraModuleLiftAlongMonomorphism,
     algebraModuleMorphismIsZero,
     algebraModuleMorphismEquivalent,
     algebraModuleZeroMorphism,
@@ -44,6 +46,8 @@ export type AlgebraHomologicalErrorCode =
     | 'CHAIN_CONDITION_FAILED'
     | 'INVALID_CHAIN_MAP'
     | 'CHAIN_MAP_CONDITION_FAILED'
+    | 'INVALID_SHORT_EXACT_SEQUENCE'
+    | 'SHORT_EXACTNESS_FAILED'
     | 'DEGREE_OUT_OF_RANGE';
 
 export class AlgebraHomologicalError extends Error {
@@ -442,6 +446,127 @@ export function algebraModuleChainMapCompose<
     );
 }
 
+export interface AlgebraModuleShortExactDegree<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly degree: number;
+    readonly projectionKernel: AlgebraModuleKernel<P, C, I>;
+    readonly inclusionToKernel: AlgebraModuleMorphism<P, C, I>;
+    readonly kernelToSubcomplex: AlgebraModuleMorphism<P, C, I>;
+    readonly projectionSection: AlgebraModuleMorphism<P, C, I>;
+}
+
+export interface AlgebraModuleShortExactSequence<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly kind: 'algebra-module-short-exact-sequence';
+    readonly subcomplex: AlgebraModuleChainComplex<P, C, I>;
+    readonly middle: AlgebraModuleChainComplex<P, C, I>;
+    readonly quotient: AlgebraModuleChainComplex<P, C, I>;
+    readonly inclusion: AlgebraModuleChainMap<P, C, I>;
+    readonly projection: AlgebraModuleChainMap<P, C, I>;
+    readonly degrees: readonly AlgebraModuleShortExactDegree<P, C, I>[];
+}
+
+export function algebraModuleShortExactSequence<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    inclusion: AlgebraModuleChainMap<P, C, I>,
+    projection: AlgebraModuleChainMap<P, C, I>
+): AlgebraModuleShortExactSequence<P, C, I> {
+    if (!algebraModuleChainComplexEquals(
+        inclusion.target,
+        projection.source
+    )) {
+        return fail(
+            'INVALID_SHORT_EXACT_SEQUENCE',
+            'shortExactSequence',
+            'The inclusion target must be the projection source'
+        );
+    }
+    const degrees = inclusion.components.map((entry, index) => {
+        const iota = entry.morphism;
+        const epsilon = projection.components[index].morphism;
+        if (!algebraModuleMorphismIsZero(algebraModuleCompose(
+            epsilon,
+            iota
+        ))) {
+            return fail(
+                'SHORT_EXACTNESS_FAILED',
+                `shortExactSequence.degrees[${index}]`,
+                `The degree-${entry.degree} projection-inclusion ` +
+                    'composite is not zero'
+            );
+        }
+        try {
+            const projectionKernel = algebraModuleKernel(epsilon);
+            const inclusionToKernel = algebraModuleKernelLift(
+                projectionKernel,
+                iota
+            );
+            const kernelToSubcomplex = algebraModuleLiftAlongMonomorphism(
+                iota,
+                projectionKernel.inclusion
+            );
+            const projectionSection = algebraModuleLiftAlongEpimorphism(
+                epsilon,
+                algebraModuleIdentity(epsilon.target)
+            );
+            if (
+                !algebraModuleMorphismEquivalent(
+                    algebraModuleCompose(
+                        kernelToSubcomplex,
+                        inclusionToKernel
+                    ),
+                    algebraModuleIdentity(iota.source)
+                ) ||
+                !algebraModuleMorphismEquivalent(
+                    algebraModuleCompose(
+                        inclusionToKernel,
+                        kernelToSubcomplex
+                    ),
+                    algebraModuleIdentity(projectionKernel.object)
+                )
+            ) {
+                return fail(
+                    'SHORT_EXACTNESS_FAILED',
+                    `shortExactSequence.degrees[${index}]`,
+                    'The inclusion image is not the projection kernel'
+                );
+            }
+            return Object.freeze({
+                degree: entry.degree,
+                projectionKernel,
+                inclusionToKernel,
+                kernelToSubcomplex,
+                projectionSection
+            });
+        } catch (error: unknown) {
+            if (error instanceof AlgebraHomologicalError) throw error;
+            return fail(
+                'SHORT_EXACTNESS_FAILED',
+                `shortExactSequence.degrees[${index}]`,
+                `The degree-${entry.degree} sequence is not short exact`
+            );
+        }
+    });
+    return Object.freeze({
+        kind: 'algebra-module-short-exact-sequence',
+        subcomplex: inclusion.source,
+        middle: inclusion.target,
+        quotient: projection.target,
+        inclusion,
+        projection,
+        degrees: Object.freeze(degrees)
+    });
+}
+
 export interface AlgebraModuleHomology<
     P extends AlgebraParent,
     C extends AlgebraElement<P>,
@@ -579,6 +704,97 @@ export function algebraModuleChainMapHomology<
         degree: requested,
         sourceHomology,
         targetHomology,
+        cycleMap,
+        morphism
+    });
+}
+
+export interface AlgebraModuleConnectingMorphism<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly kind: 'algebra-module-connecting-morphism';
+    readonly sequence: AlgebraModuleShortExactSequence<P, C, I>;
+    readonly degree: number;
+    readonly sourceHomology: AlgebraModuleComplexHomology<P, C, I>;
+    readonly targetHomology: AlgebraModuleComplexHomology<P, C, I>;
+    readonly liftedCyclesToMiddle: AlgebraModuleMorphism<P, C, I>;
+    readonly middleBoundary: AlgebraModuleMorphism<P, C, I>;
+    readonly boundaryInProjectionKernel: AlgebraModuleMorphism<P, C, I>;
+    readonly liftedBoundaryToSubcomplex: AlgebraModuleMorphism<P, C, I>;
+    readonly cycleMap: AlgebraModuleMorphism<P, C, I>;
+    readonly morphism: AlgebraModuleMorphism<P, C, I>;
+}
+
+/** Compute the connecting map H_n(quotient) -> H_(n-1)(subcomplex). */
+export function algebraModuleConnectingMorphism<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    sequence: AlgebraModuleShortExactSequence<P, C, I>,
+    degreeInput: number
+): AlgebraModuleConnectingMorphism<P, C, I> {
+    const requested = degree(degreeInput, 'connectingMorphism.degree');
+    if (
+        requested <= sequence.middle.minimumDegree ||
+        requested > sequence.middle.maximumDegree
+    ) {
+        return fail(
+            'DEGREE_OUT_OF_RANGE',
+            'connectingMorphism.degree',
+            'A connecting morphism requires both degree n and n - 1'
+        );
+    }
+    const sourceHomology = algebraModuleChainComplexHomology(
+        sequence.quotient,
+        requested
+    );
+    const targetHomology = algebraModuleChainComplexHomology(
+        sequence.subcomplex,
+        requested - 1
+    );
+    const degreeData = sequence.degrees[
+        requested - sequence.middle.minimumDegree
+    ];
+    const previousDegreeData = sequence.degrees[
+        requested - sequence.middle.minimumDegree - 1
+    ];
+    const liftedCyclesToMiddle = algebraModuleCompose(
+        degreeData.projectionSection,
+        sourceHomology.cycles.inclusion
+    );
+    const middleBoundary = algebraModuleCompose(
+        algebraModuleChainComplexDifferential(sequence.middle, requested),
+        liftedCyclesToMiddle
+    );
+    const boundaryInProjectionKernel = algebraModuleKernelLift(
+        previousDegreeData.projectionKernel,
+        middleBoundary
+    );
+    const liftedBoundaryToSubcomplex = algebraModuleCompose(
+        previousDegreeData.kernelToSubcomplex,
+        boundaryInProjectionKernel
+    );
+    const cycleMap = algebraModuleKernelLift(
+        targetHomology.cycles,
+        liftedBoundaryToSubcomplex
+    );
+    const morphism = algebraModuleCokernelColift(
+        sourceHomology.quotient,
+        algebraModuleCompose(targetHomology.quotient.projection, cycleMap)
+    );
+    return Object.freeze({
+        kind: 'algebra-module-connecting-morphism',
+        sequence,
+        degree: requested,
+        sourceHomology,
+        targetHomology,
+        liftedCyclesToMiddle,
+        middleBoundary,
+        boundaryInProjectionKernel,
+        liftedBoundaryToSubcomplex,
         cycleMap,
         morphism
     });

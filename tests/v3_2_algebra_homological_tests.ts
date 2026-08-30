@@ -26,11 +26,13 @@ import {
     algebraModuleChainMapCompose,
     algebraModuleChainMapHomology,
     algebraModuleChainMapIdentity,
+    algebraModuleConnectingMorphism,
     algebraModuleChainComplex,
     algebraModuleChainComplexDifferential,
     algebraModuleChainComplexHomology,
     algebraModuleChainComplexTerm,
-    algebraModuleHomology
+    algebraModuleHomology,
+    algebraModuleShortExactSequence
 } from '../src/v3_2/algebra_homological';
 
 const homologicalError = (code: AlgebraHomologicalError['code']) =>
@@ -112,6 +114,66 @@ const scalarChainMap = (
         )
     }))
 );
+
+const shortExactComplexFixture = () => {
+    const zero = algebraFreeModule(RATIONAL_DOMAIN, 0);
+    const one = algebraFreeModule(RATIONAL_DOMAIN, 1);
+    const zeroFromZeroToOne = algebraModuleMorphism(
+        zero,
+        one,
+        algebraZeroMatrix(algebraMatrixSpace(RATIONAL_DOMAIN, 1, 0)),
+        zeroWitness()
+    );
+    const zeroFromOneToZero = algebraModuleMorphism(
+        one,
+        zero,
+        algebraZeroMatrix(algebraMatrixSpace(RATIONAL_DOMAIN, 0, 1)),
+        zeroWitness()
+    );
+    const identity = algebraModuleIdentity(one);
+    const subcomplex = algebraModuleChainComplex(
+        RATIONAL_DOMAIN,
+        [{ degree: 0, object: one }, { degree: 1, object: zero }],
+        [{ degree: 1, morphism: zeroFromZeroToOne }]
+    );
+    const middle = algebraModuleChainComplex(
+        RATIONAL_DOMAIN,
+        [{ degree: 0, object: one }, { degree: 1, object: one }],
+        [{ degree: 1, morphism: identity }]
+    );
+    const quotient = algebraModuleChainComplex(
+        RATIONAL_DOMAIN,
+        [{ degree: 0, object: zero }, { degree: 1, object: one }],
+        [{ degree: 1, morphism: zeroFromOneToZero }]
+    );
+    const inclusion = algebraModuleChainMap(
+        subcomplex,
+        middle,
+        [
+            { degree: 0, morphism: identity },
+            { degree: 1, morphism: zeroFromZeroToOne }
+        ]
+    );
+    const projection = algebraModuleChainMap(
+        middle,
+        quotient,
+        [
+            { degree: 0, morphism: zeroFromOneToZero },
+            { degree: 1, morphism: identity }
+        ]
+    );
+    const sequence = algebraModuleShortExactSequence(inclusion, projection);
+    return {
+        zero,
+        one,
+        subcomplex,
+        middle,
+        quotient,
+        inclusion,
+        projection,
+        sequence
+    };
+};
 
 describe('v3.2 bounded field-module complexes and homology', () => {
     it('constructs a bounded complex and computes whole homology in every degree', () => {
@@ -222,6 +284,106 @@ describe('v3.2 bounded field-module complexes and homology', () => {
                 inducedTwice.morphism
             )
         ));
+    });
+
+    it('computes the connecting morphism of a short exact sequence', () => {
+        const { sequence } = shortExactComplexFixture();
+        const connecting = algebraModuleConnectingMorphism(sequence, 1);
+        assert.equal(
+            RATIONAL_DOMAIN.text(
+                algebraModuleInducedMatrix(connecting.morphism).entries[0][0]
+            ),
+            '1'
+        );
+        const projection = sequence.projection.components[1].morphism;
+        assert.ok(algebraModuleMorphismEquivalent(
+            algebraModuleCompose(
+                projection,
+                connecting.liftedCyclesToMiddle
+            ),
+            connecting.sourceHomology.cycles.inclusion
+        ));
+        const inclusion = sequence.inclusion.components[0].morphism;
+        assert.ok(algebraModuleMorphismEquivalent(
+            algebraModuleCompose(
+                sequence.degrees[0].projectionKernel.inclusion,
+                connecting.boundaryInProjectionKernel
+            ),
+            connecting.middleBoundary
+        ));
+        assert.ok(algebraModuleMorphismEquivalent(
+            algebraModuleCompose(
+                inclusion,
+                connecting.liftedBoundaryToSubcomplex
+            ),
+            connecting.middleBoundary
+        ));
+        assert.ok(algebraModuleMorphismEquivalent(
+            algebraModuleCompose(
+                connecting.targetHomology.cycles.inclusion,
+                connecting.cycleMap
+            ),
+            connecting.liftedBoundaryToSubcomplex
+        ));
+        assert.ok(algebraModuleMorphismEquivalent(
+            algebraModuleCompose(
+                connecting.morphism,
+                connecting.sourceHomology.quotient.projection
+            ),
+            algebraModuleCompose(
+                connecting.targetHomology.quotient.projection,
+                connecting.cycleMap
+            )
+        ));
+        assert.ok(Object.isFrozen(sequence));
+        assert.ok(Object.isFrozen(connecting));
+    });
+
+    it('rejects a degreewise sequence that is not short exact', () => {
+        const fixture = shortExactComplexFixture();
+        const badInclusion = algebraModuleChainMap(
+            fixture.subcomplex,
+            fixture.middle,
+            [
+                {
+                    degree: 0,
+                    morphism: algebraModuleMorphism(
+                        fixture.one,
+                        fixture.one,
+                        algebraZeroMatrix(algebraMatrixSpace(
+                            RATIONAL_DOMAIN,
+                            1,
+                            1
+                        )),
+                        zeroWitness()
+                    )
+                },
+                {
+                    degree: 1,
+                    morphism: algebraModuleMorphism(
+                        fixture.zero,
+                        fixture.one,
+                        algebraZeroMatrix(algebraMatrixSpace(
+                            RATIONAL_DOMAIN,
+                            1,
+                            0
+                        )),
+                        zeroWitness()
+                    )
+                }
+            ]
+        );
+        assert.throws(
+            () => algebraModuleShortExactSequence(
+                badInclusion,
+                fixture.projection
+            ),
+            homologicalError('SHORT_EXACTNESS_FAILED')
+        );
+        assert.throws(
+            () => algebraModuleConnectingMorphism(fixture.sequence, 0),
+            homologicalError('DEGREE_OUT_OF_RANGE')
+        );
     });
 
     it('rejects malformed bounds, endpoints, chain laws, and queried degrees', () => {
