@@ -8,7 +8,8 @@ Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `AFFINE-QUOTIENT-1A` is complete and proportional-green;
 `AFFINE-MAPS-1B`, `AFFINE-LOCALIZATION-2A`, and `AFFINE-SCHEMES-2B` are
 complete and proportional-green; `AFFINE-TENSOR-3A` is complete and
-proportional-green; `AFFINE-COVERS-4A` is the next dependency-ready row.
+proportional-green; `AFFINE-COVERS-4A` is complete and proportional-green;
+`AFFINE-GRAPH-5A` is the next dependency-ready row.
 
 Baseline: `1095fab1fd64de6a2793f6958721bedc4b550f21`
 
@@ -202,8 +203,8 @@ tests, define API semantics, or require `check:ts`.
 | `AFFINE-LOCALIZATION-2A` | complete; proportional-green at `5954407` | `AFFINE-MAPS-1B` | fresh adjoined-inverse presentation, embedded source relations, canonical map, distinguished inverse/equation, basic-open chart, native operation/context, graph, and unit/nilpotent/foreign/collision cases complete |
 | `AFFINE-SCHEMES-2B` | complete; proportional-green at `157bb09` | `AFFINE-LOCALIZATION-2A` | affine schemes, explicit contravariant morphisms, reversed composition/equality, closed and basic-open immersion whole constructions, schemas, and strict computable category complete |
 | `AFFINE-TENSOR-3A` | complete; proportional-green at `89f6614` | `AFFINE-MAPS-1B`, `AFFINE-SCHEMES-2B` | renamed combined presentation, base-identification relations, canonical maps/compatibility, universal factorization, affine fiber products/projections, and invalid-map cases complete |
-| `AFFINE-COVERS-4A` | pending; next selected row | `AFFINE-LOCALIZATION-2A`, existing unimodular covers | actual finite affine charts, overlaps, restriction maps, Cech nerve, and initial cochain data |
-| `AFFINE-GRAPH-5A` | pending | one representative consumer from each preceding layer | native operation bundles, computation graphs, affine category/tower metadata, direct reinterpretations, and staged compilation |
+| `AFFINE-COVERS-4A` | complete; proportional-green at `faadadc` | `AFFINE-LOCALIZATION-2A`, existing unimodular covers | quotient-unimodular validation, coefficients, actual charts/product overlaps, restriction maps, ordered signed Cech nerve/cochain data, triple/noncover/zero-scheme cases complete |
+| `AFFINE-GRAPH-5A` | pending; next selected row | one representative consumer from each preceding layer | native operation bundles, computation graphs, affine category/tower metadata, direct reinterpretations, and staged compilation |
 | `AFFINE-SINGULAR-6A` | pending | installed Singular and representative native consumers | real opt-in differential comparisons for radical, quotient, localization, and selected fiber-product computations |
 | `AFFINE-FORMAL-CONSUMER-7` | deferred | completed finite-cover/Cech consumer and separate user authorization | inspect the concrete consumer and launch or specify the minimal follow-up formal-bridge goal; not an affine computation prerequisite |
 
@@ -237,6 +238,33 @@ validation, synchronized decisions/results, and a local checkpoint.
 | `D-AFFINE-020` | accepted | A relative tensor presentation places renamed left generators before renamed right generators in one lexicographic ring, embeds both relation families, and identifies the two canonical images of every ordered base generator. |
 | `D-AFFINE-021` | accepted | The whole tensor product retains both base maps, canonical factor maps, and computed base compatibility. A universal factor exists only for maps to one target that agree canonically on the base. |
 | `D-AFFINE-022` | accepted | The affine fiber product is `Spec` of the presented tensor algebra; projection coordinate maps are the tensor canonical maps, and their composites to the base are retained and compared. |
+| `D-AFFINE-023` | accepted | A finite affine cover is validated by adjoining canonical cover representatives to the ambient relation ideal and retaining the whole unimodular computation; coefficients for cover elements are projected back into the ambient quotient. |
+| `D-AFFINE-024` | accepted | A Cech simplex uses a strictly increasing chart-index tuple and the direct localization at the product of its elements. The configured degree bound is retained and explicit truncation does not claim a full nerve. |
+| `D-AFFINE-025` | accepted | For the face omitting `h` from a product `gh`, the coordinate restriction `A_g -> A_(gh)` sends the inverse of `g` to `h(gh)^-1`; every map is revalidated against the localization presentation. |
+| `D-AFFINE-026` | accepted | Initial Cech cochain data retains degree terms and signed incoming face maps with sign `(-1)^removedPosition`; no sheaf, exactness, or cohomology claim is attached to this first nerve. |
+| `D-AFFINE-027` | accepted | The empty basic-open family is accepted exactly for the zero affine scheme, where the ambient relation ideal already contains one; its nerve has no simplices and maximum degree `-1`. |
+
+## `AFFINE-COVERS-4A` Result
+
+Finite affine basic-open covers and initial Cech data are implemented in
+`src/v3_2/algebra_cech.ts`. Cover validation computes unimodularity of the
+ambient relation ideal together with the selected quotient representatives
+and retains coefficients for the actual cover elements.
+
+Each increasing index tuple up to the explicit degree bound produces the
+localization at the product of its elements. Higher simplices retain signed
+face data and validated restriction algebra maps. Cochain-degree records group
+the ordered simplices and incoming signed restrictions without claiming
+cohomology.
+
+Five focused tests cover the `D(x),D(1-x)` charts and overlap, inverse equations
+for both restrictions, ambient quotient coefficients, the `3,3,1` two-skeleton
+of `D(x),D(y),D(1-x-y)`, noncovers, invalid bounds, and the empty cover of the
+zero scheme. Together with affected localization, presented-map, and Zariski
+suites, 28 tests pass, followed by workspace check, affected lint, root
+typecheck, and diff hygiene. `check:ts` was not run.
+
+Semantic checkpoint: `faadadc` (`affine: add finite covers and Cech data`).
 
 ## `AFFINE-TENSOR-3A` Result
 
