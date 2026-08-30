@@ -6,8 +6,9 @@ Plan-ID: `TS-EMDASH-FOCUSED-CAS`
 
 Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
-`CAS-CONTRACT-1A` and `CAS-GRAPH-1B` implemented and proportional-green;
-`CAS-EXACT-2A` is the next dependency-ready implementation row.
+`CAS-CONTRACT-1A`, `CAS-GRAPH-1B`, and `CAS-EXACT-2A` implemented and
+proportional-green; `CAS-POLY-2B` is the next dependency-ready implementation
+row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -777,8 +778,8 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-PLAN-0` | complete | reviewed design discussion and source audit | this living plan, branch/worktree identity, source baseline, architecture, decisions, validation, and launch prompt |
 | `CAS-CONTRACT-1A` | complete; proportional-green at `46b8fda` | `CAS-PLAN-0` | browser-safe immutable operation, engine, support, result-quality, execution-context, diagnostic, and reusable-artifact contracts; ten focused tests, workspace check, affected lint, typecheck, and diff hygiene green; no algorithm, process, logical-Core, or public-package dependency |
 | `CAS-GRAPH-1B` | complete; proportional-green at `d6e2e00` | `CAS-CONTRACT-1A` | typed backend-neutral input/node/output computation graph, immutable reconstruction, bounded validation, topology-only stable JSON, cancellation, exact-node diagnostics, and sequential direct-execution lowering; eleven focused graph tests plus the ten predecessor tests green |
-| `CAS-EXACT-2A` | in progress | `CAS-GRAPH-1B` | exact integer/rational domains using `bigint`, normalization, arithmetic, serialization, and strict negatives |
-| `CAS-POLY-2B` | pending | `CAS-EXACT-2A` | parent-aware sparse multivariate polynomials, monomial orders, arithmetic, substitution, and division |
+| `CAS-EXACT-2A` | complete; proportional-green; checkpoint candidate | `CAS-GRAPH-1B` | stable parent/element base; canonical bigint-only integers and reduced rationals; arithmetic, order, Euclidean division, gcd, powers, text/JSON serialization, runtime schemas, and immutable operational domains; twelve exact tests and all 33 focused CAS tests green |
+| `CAS-POLY-2B` | in progress | `CAS-EXACT-2A` | parent-aware sparse multivariate polynomials, monomial orders, arithmetic, substitution, and division |
 | `CAS-ENGINE-2C` | pending | `CAS-POLY-2B` | native TypeScript reference engine executes selected exact and polynomial graph nodes with limits/cancellation |
 | `CAS-IDEAL-3A` | pending | `CAS-ENGINE-2C` | ideals, Buchberger reference implementation, reduction, membership, reduced bases, and retained transformations |
 | `CAS-ZARISKI-3B` | pending | `CAS-IDEAL-3A` | unimodular-combination computation and optional adapter to current Zariski-cover presentation |
@@ -862,6 +863,9 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-020` | accepted | Graph v1 serializes topology, operation/schema identities, preferred algorithms, and named outputs; runtime input values remain separate execution data. |
 | `D-CAS-021` | accepted | Graph v1 uses declared topological order and one selected engine, retaining every node result; optimization, engine routing, caching, batching, and parallel scheduling remain later rows. |
 | `D-CAS-022` | accepted | Graph construction and reconstruction require exact schema-identity agreement across edges; no implicit computational coercion is invented at the graph layer. |
+| `D-CAS-023` | accepted | Exact integer/rational values store only `bigint`; constructors accept bigint or canonical base-10 text and reject JavaScript `number`, including safe integers. |
+| `D-CAS-024` | accepted | Rational normal form has coprime numerator/denominator, positive denominator, and unique zero `0/1`; ordinary power uses nonnegative bigint exponents. |
+| `D-CAS-025` | accepted | Immutable operational commutative-ring/field dictionaries supply later algorithms but are runtime capabilities, not formal doctrine evidence. |
 
 ## `CAS-CONTRACT-1A` Result
 
@@ -924,6 +928,29 @@ and negative graph cases. The graph suite and the ten predecessor contract
 tests pass together, followed by affected-file lint, root typecheck, and diff
 hygiene. No aggregate, kernel, package, browser, print, or book check is
 required by the scoped policy.
+
+## `CAS-EXACT-2A` Result
+
+The exact foundation is implemented in `src/v3_2/algebra_parent.ts` and
+`src/v3_2/algebra_exact.ts`. It remains contributor-only and provides:
+
+- stable parent identities and parent-checked elements;
+- canonical integer and rational parents;
+- bigint-only integer payloads;
+- rational payloads reduced to coprime numerator and positive denominator;
+- canonical base-10 integer and `n/d` acquisition;
+- integer ring arithmetic, comparison, gcd, exponentiation, and Euclidean
+  quotient/remainder for every divisor sign;
+- rational field arithmetic, comparison, inversion, division, and powers;
+- canonical text and newline-terminated JSON that represents bigint as text;
+- runtime schemas rejecting JavaScript numbers and foreign parents;
+- topology-only graph flow for exact inputs; and
+- immutable operational integer-ring and rational-field dictionaries for
+  coefficient-polymorphic algorithms.
+
+Focused evidence in `tests/v3_2_algebra_exact_tests.ts` covers twelve positive
+and negative exact-domain cases. All 33 engine/graph/exact focused tests pass
+together, followed by affected-file lint, root typecheck, and diff hygiene.
 
 ## Validation Policy
 
