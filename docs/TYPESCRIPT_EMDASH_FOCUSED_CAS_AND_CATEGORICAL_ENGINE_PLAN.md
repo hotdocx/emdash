@@ -11,8 +11,9 @@ proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
 focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
 implemented and focused-green; `CAS-FREYD-6B` is implemented and
 proportional-green; `CAS-HOMOLOGICAL-7A` is complete and proportional-green;
-`CAS-MODULE-4B2` is complete and proportional-green; `CAS-CONSTRUCTIBLE-8A`
-is the next selected dependency-ready row.
+`CAS-MODULE-4B2` is complete and proportional-green; the first
+`CAS-CONSTRUCTIBLE-8A1` ideal-geometry tranche is implemented and
+proportional-green while the larger constructible row remains in progress.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -796,7 +797,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-COMPILER-6A` | complete; proportional-green at `c28da8f` | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
 | `CAS-FREYD-6B` | complete; proportional-green at `2f26a59` | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | native whole module kernel/cokernel operations, concrete Freyd/AdditiveClosure field-module model, direct-presentation reinterpretation, schema-preserving compiler bindings, retained reinterpretation rule, and structural agreement with direct `PresentedModule` computations; three Freyd and forty affected tests green |
 | `CAS-HOMOLOGICAL-7A` | complete; `7A1` `66ed5a8`, `7A2` `8b97bad`, `7A3` `5f22b08`, `7A4` `3961bc5`, `7A5` `052032a`, `7A6` `ab68a11` green | `CAS-FREYD-6B` | quotient-aware universal operations, bounded complexes, whole/functorial/connecting homology, initial generalized spans, field resolutions, and native graph operations complete; broader representations and polynomial resolutions remain separately gated |
-| `CAS-CONSTRUCTIBLE-8A` | pending | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | selected slice/poset/stable-poset/opposite/difference/union tower lowered to ideal and saturation operations |
+| `CAS-CONSTRUCTIBLE-8A` | in progress; `8A1` proportional-green at `d4ccd34` | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | ideal sum/product/intersection, principal saturation, radical membership/equivalence, and retained elimination data complete; locally closed/constructible values, tower reinterpretation, and native graph/compiler lowering remain |
 | `CAS-ORACLE-9A` | pending | one native representative consumer | opt-in Singular/Macaulay2/CAP-homalg differential oracle with no public semantic authority |
 | `CAS-FORMAL-BRIDGE-10` | deferred | concrete formal consumer | selected computational realization, trusted-computation marker, or checked-proof adapter; not a CAS prerequisite |
 
@@ -935,6 +936,28 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-087` | accepted | A bounded Schreyer resolution recursively uses each current Gröbner basis as differential columns, computes its verified Schreyer syzygies, Gröbner-normalizes the next syzygy submodule, checks consecutive composites, and distinguishes completion from explicit truncation. |
 | `D-CAS-088` | accepted | Module Gröbner bases, Schreyer syzygies, and bounded resolutions have fixed-ambient native operation descriptors and schemas; Gröbner output feeds a syzygy node directly through exact schema identity. |
 | `D-CAS-089` | accepted | Completion of `CAS-MODULE-4B2` covers the transparent reference algorithms and bounded graph pipeline, not optimized F4/F5/module-signature methods, minimal resolutions, grading metadata, or arbitrary-coefficient-ring Gröbner bases. |
+| `D-CAS-090` | accepted | Ideal intersection is computed as the elimination part of `tI + (1-t)J` in a fresh leading lexicographic variable; the whole result retains the extended ring, ideal, Gröbner basis, and projected ideal. |
+| `D-CAS-091` | accepted | Principal saturation `I:f^infinity` is computed by eliminating `t` from `I + (1-tf)`, with no bounded exponent guess or repeated-colon heuristic. |
+| `D-CAS-092` | accepted | Radical membership uses Rabinowitsch unit membership in `I + (1-tf)` and retains the complete unit decomposition; radical equivalence checks both generator families and retains every directional membership result. |
+| `D-CAS-093` | accepted | These elimination results are computational data for the constructible engine, not formal radical-ideal or scheme-theoretic proof evidence; formal adoption remains consumer-gated. |
+
+## `CAS-CONSTRUCTIBLE-8A1` Result
+
+The elimination-based ideal substrate is implemented in
+`src/v3_2/algebra_ideal_geometry.ts`. Direct operations provide ideal sum and
+product. Whole elimination results provide intersection, principal saturation,
+radical membership, and radical equivalence while retaining the fresh
+variable, extended lexicographic ring, embedded ideal, Gröbner basis with
+transformations, and projected ideal.
+
+Five focused tests establish `⟨x⟩∩⟨y⟩=⟨xy⟩`,
+`⟨xy⟩:x^infinity=⟨y⟩`, saturation of `⟨x⟩` by `x` as the unit ideal,
+positive and negative Rabinowitsch membership, and
+`sqrt(⟨x⟩)=sqrt(⟨x²⟩)`. Together with the affected ideal and Zariski suites,
+25 tests pass, followed by workspace check, affected lint, root typecheck,
+and diff hygiene. No repository-wide aggregate was run.
+
+Semantic checkpoint: `d4ccd34` (`cas: add elimination ideal geometry`).
 
 ## `CAS-MODULE-4B2D` Result And Row Completion
 
