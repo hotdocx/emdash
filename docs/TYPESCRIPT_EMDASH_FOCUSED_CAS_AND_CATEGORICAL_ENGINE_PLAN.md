@@ -10,7 +10,7 @@ CAP-aware design reviewed; dedicated implementation branch/worktree created;
 proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
 focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
 implemented and focused-green; `CAS-FREYD-6B` is implemented and
-proportional-green; `CAS-HOMOLOGICAL-7A1` and `7A2` are implemented and
+proportional-green; `CAS-HOMOLOGICAL-7A1` through `7A3` are implemented and
 proportional-green while the larger `CAS-HOMOLOGICAL-7A` row remains in
 progress and `CAS-MODULE-4B2` remains a separate pending track.
 
@@ -795,7 +795,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-TOWER-5C` | complete; focused-green at `dd910b0` | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
 | `CAS-COMPILER-6A` | complete; proportional-green at `c28da8f` | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
 | `CAS-FREYD-6B` | complete; proportional-green at `2f26a59` | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | native whole module kernel/cokernel operations, concrete Freyd/AdditiveClosure field-module model, direct-presentation reinterpretation, schema-preserving compiler bindings, retained reinterpretation rule, and structural agreement with direct `PresentedModule` computations; three Freyd and forty affected tests green |
-| `CAS-HOMOLOGICAL-7A` | in progress; `7A1` green at `66ed5a8`, `7A2` green at `8b97bad` | `CAS-FREYD-6B` | `7A1`: quotient-aware module universal operations, bounded complexes, and whole homology; `7A2`: chain maps, identity/composition, and functorial homology complete; connecting morphisms, generalized morphisms, and resolution algorithms remain |
+| `CAS-HOMOLOGICAL-7A` | in progress; `7A1` `66ed5a8`, `7A2` `8b97bad`, `7A3` `5f22b08` green | `CAS-FREYD-6B` | quotient-aware universal operations, bounded complexes, whole/functorial homology, degreewise short exact sequences, and connecting morphisms complete; generalized morphisms and bounded resolution algorithms remain |
 | `CAS-CONSTRUCTIBLE-8A` | pending | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | selected slice/poset/stable-poset/opposite/difference/union tower lowered to ideal and saturation operations |
 | `CAS-ORACLE-9A` | pending | one native representative consumer | opt-in Singular/Macaulay2/CAP-homalg differential oracle with no public semantic authority |
 | `CAS-FORMAL-BRIDGE-10` | deferred | concrete formal consumer | selected computational realization, trusted-computation marker, or checked-proof adapter; not a CAS prerequisite |
@@ -915,6 +915,40 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-067` | accepted | First homology is the whole construction `coker(incoming -> ker(outgoing))` and requires `outgoing * incoming = 0`; CAP's broader homology object for an arbitrary composable pair is not silently claimed by this chain-complex tranche. |
 | `D-CAS-068` | accepted | First chain maps require one common bounded degree range, retain every component, and validate each differential square using quotient-aware morphism equality; identity and composition are componentwise and revalidated. |
 | `D-CAS-069` | accepted | Functorial homology first restricts the selected chain-map component to the target cycle kernel and then descends through the source boundary cokernel; the whole result retains both homology constructions, the cycle map, and the final morphism. |
+| `D-CAS-070` | accepted | A deterministic lift through an epimorphism is exposed only for presented modules over the current field-linear category, where RREF supplies a right inverse; recomposition is checked on quotient coordinates and no corresponding claim is made for arbitrary module categories. |
+| `D-CAS-071` | accepted | A short exact sequence of bounded complexes consists of two already-validated chain maps plus computed degreewise exactness data: the projection kernel, inverse identifications with the included subobject, and a projection section. No independent hand-written commuting-square witness is stored. |
+| `D-CAS-072` | accepted | The connecting map `H_n(C) -> H_(n-1)(A)` retains the quotient-cycle lift, middle boundary, lift into the projection kernel, transport through the retained kernel/subobject identification, target-cycle lift, and final boundary descent. |
+
+## `CAS-HOMOLOGICAL-7A3` Result
+
+Degreewise short exact sequences and connecting morphisms are implemented in
+`src/v3_2/algebra_homological.ts`, supported by the field-specific epimorphism
+lift in `src/v3_2/algebra_module.ts`. The short-exact constructor consumes two
+validated chain maps `A -> B -> C`. In each degree it checks the zero
+composite, computes `ker(B -> C)`, constructs inverse quotient-aware maps
+between that kernel and `A`, and computes a section of the degreewise
+projection. A failed monomorphism, epimorphism, or kernel identification is
+reported as failed exactness rather than retained as an assertion.
+
+The connecting computation lifts quotient cycles to the middle complex,
+applies the middle differential, lifts the boundary into the retained kernel
+of the preceding projection, transports it to the subcomplex, lifts it into
+subcomplex cycles, and descends through quotient boundaries. Every
+intermediate map is retained in the whole result. The focused example
+
+```text
+0 -> (0 -> F) -> (F -id-> F) -> (F -> 0) -> 0
+```
+
+computes the identity `H_1(F -> 0) -> H_0(0 -> F)`, and tests check all four
+factorization stages. A degreewise sequence with the wrong included image and
+an out-of-range connecting degree are rejected.
+
+Seven focused homological tests and the affected matrix, module, category,
+and Freyd suites give 33 passing tests, followed by workspace check, affected
+lint, root typecheck, and diff hygiene. No repository-wide aggregate was run.
+
+Semantic checkpoint: `5f22b08` (`cas: add homology connecting morphisms`).
 
 ## `CAS-HOMOLOGICAL-7A2` Result
 
