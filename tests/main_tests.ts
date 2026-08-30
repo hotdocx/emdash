@@ -288,6 +288,7 @@ import './v3_2_algebra_presented_algebra_tests';
 import './v3_2_algebra_localization_tests';
 import './v3_2_algebra_affine_scheme_tests';
 import './v3_2_algebra_tensor_tests';
+import './v3_2_algebra_cech_tests';
 import './v3_2_lf_module_theorem_development_tests';
 import './v3_2_lf_module_theorem_authoring_tests';
 import './v3_2_lf_declaration_fragment_authoring_tests';
