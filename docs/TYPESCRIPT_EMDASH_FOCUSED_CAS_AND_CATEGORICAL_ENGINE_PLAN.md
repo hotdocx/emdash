@@ -11,9 +11,9 @@ proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
 focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
 implemented and focused-green; `CAS-FREYD-6B` is implemented and
 proportional-green; `CAS-HOMOLOGICAL-7A` is complete and proportional-green;
-`CAS-MODULE-4B2` is complete and proportional-green; the first
-`CAS-CONSTRUCTIBLE-8A` row is complete and proportional-green;
-`CAS-ORACLE-9A` is the next selected dependency-ready row.
+`CAS-MODULE-4B2`, `CAS-CONSTRUCTIBLE-8A`, and `CAS-ORACLE-9A` are complete
+and proportional-green. All nondeferred implementation rows in this plan are
+complete; `CAS-FORMAL-BRIDGE-10` remains explicitly consumer-gated.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -798,7 +798,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-FREYD-6B` | complete; proportional-green at `2f26a59` | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | native whole module kernel/cokernel operations, concrete Freyd/AdditiveClosure field-module model, direct-presentation reinterpretation, schema-preserving compiler bindings, retained reinterpretation rule, and structural agreement with direct `PresentedModule` computations; three Freyd and forty affected tests green |
 | `CAS-HOMOLOGICAL-7A` | complete; `7A1` `66ed5a8`, `7A2` `8b97bad`, `7A3` `5f22b08`, `7A4` `3961bc5`, `7A5` `052032a`, `7A6` `ab68a11` green | `CAS-FREYD-6B` | quotient-aware universal operations, bounded complexes, whole/functorial/connecting homology, initial generalized spans, field resolutions, and native graph operations complete; broader representations and polynomial resolutions remain separately gated |
 | `CAS-CONSTRUCTIBLE-8A` | complete; `8A1` `d4ccd34`, `8A2` `ec81ba3`, `8A3` `ec9b01e` green | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | elimination ideal operations, normalized locally closed/constructible Boolean sets, seven-stage tower metadata, direct reinterpretation, inclusion-poset category, native operations, and categorical compilation complete |
-| `CAS-ORACLE-9A` | pending | one native representative consumer | opt-in Singular/Macaulay2/CAP-homalg differential oracle with no public semantic authority |
+| `CAS-ORACLE-9A` | complete; proportional-green at `8a82f27` | one native representative consumer | shared radical-membership operation implemented by native TypeScript and an opt-in Singular engine, deterministic script adapter, injected transport, bounded shell-free Node transport, and retained match/mismatch comparison; five oracle and twenty-five affected tests green |
 | `CAS-FORMAL-BRIDGE-10` | deferred | concrete formal consumer | selected computational realization, trusted-computation marker, or checked-proof adapter; not a CAS prerequisite |
 
 No later row may be advanced merely to keep the goal active. Each row requires
@@ -947,6 +947,39 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-098` | accepted | The efficient public representation is the direct finite constructible-piece list; tower objects are modeling metadata and do not impose runtime box layers. |
 | `D-CAS-099` | accepted | The direct computable category is the constructible inclusion poset: a morphism retains the computed empty source-minus-target difference, and object/morphism equality uses constructible mutual difference. |
 | `D-CAS-100` | accepted | Union, intersection, difference, and equivalence have matching category and native algebra operations, allowing exact schema-preserving categorical lowering while retaining all seven tower rules and the direct reinterpretation rule. |
+| `D-CAS-101` | accepted | The first external differential consumer is radical membership, with one operation/input/output schema shared exactly by the native TypeScript implementation and the Singular oracle engine. |
+| `D-CAS-102` | accepted | Oracle comparisons retain native and external decisions plus an agreement Boolean; disagreement never overwrites the native result or acquires proof, consistency, or semantic authority. |
+| `D-CAS-103` | accepted | Singular command generation is deterministic and transport-injected. The optional Node transport invokes an explicit executable and argument array with `shell: false`, bounded time/output, and no dependency from browser-safe engine contracts. |
+| `D-CAS-104` | accepted | Lack of a locally installed Singular executable does not block native computation or adapter validation; actual external differential runs are opt-in environment evidence rather than a routine repository gate. |
+
+## `CAS-ORACLE-9A` Result And Nondeferred Plan Completion
+
+The shared radical-membership decision operation and Singular adapter are
+implemented in `src/v3_2/algebra_oracle.ts`. Native TypeScript computes the
+decision through the retained Rabinowitsch result. The Singular engine accepts
+only that exact operation/schema contract, generates a deterministic
+Rabinowitsch script, parses one bounded result marker, and labels its result as
+an external oracle diagnostic.
+
+`src/v3_2/algebra_oracle_node.ts` supplies the optional process transport. It
+uses `spawn` with `shell: false`, explicit arguments/stdin, timeout and output
+limits, launch/exit diagnostics, and no import from the browser-safe algebra
+engine. Tests use an injected transport, so no external executable is a native
+test prerequisite.
+
+Five focused tests cover agreement, retained disagreement, malformed output,
+failed execution, deterministic scripts, request data, missing executables,
+and the shell-free opt-in Node boundary. Together with affected engine,
+reference-engine, and radical tests, 30 tests pass, followed by workspace
+check, affected lint, root typecheck, and diff hygiene. No repository-wide
+aggregate was run.
+
+Semantic checkpoint: `8a82f27` (`cas: add Singular differential oracle`).
+
+This completes every nondeferred ledger row. `CAS-FORMAL-BRIDGE-10` remains
+deferred exactly as designed: no concrete formal consumer currently requires
+trusted-computation, checked-proof, or LF realization data, and formal
+certification is not a prerequisite for the focused CAS product.
 
 ## `CAS-CONSTRUCTIBLE-8A3` Result And Row Completion
 
