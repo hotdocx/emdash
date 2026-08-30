@@ -790,7 +790,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-MODULE-4B2` | pending | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | polynomial-module term orders, module Groebner bases, Schreyer syzygies, finitely presented polynomial modules, and first free resolutions |
 | `CAS-CATEGORY-5A` | complete; proportional-green at `64b4c7c` (core `90cfca0`) | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict category shell, weighted primitive/derived registry, ring-as-one-object category, and presented-field-module category with primitive whole kernels/cokernels and derived object projections; four category and sixteen affected module/matrix tests green |
 | `CAS-DOCTRINE-5B` | complete; focused-green at `02ac3d0` | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
-| `CAS-TOWER-5C` | complete; focused-green; checkpoint candidate | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
+| `CAS-TOWER-5C` | complete; focused-green at `dd910b0` | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
 | `CAS-COMPILER-6A` | in progress | `CAS-TOWER-5C` | retained categorical-program IR and first specialization/lowering passes to algebra graph |
 | `CAS-FREYD-6B` | pending | `CAS-COMPILER-6A`, `CAS-MODULE-4B` | compiled Freyd/AdditiveClosure presentation agrees operationally with direct `PresentedModule` computations |
 | `CAS-HOMOLOGICAL-7A` | pending | `CAS-FREYD-6B` | complexes, homology, connecting morphism, initial generalized-morphism and resolution algorithms |
@@ -911,6 +911,8 @@ module tower remains correctly additive plus an introduced cokernel role,
 avoiding a generic Abelian overclaim. Five tower tests and the fifteen affected
 doctrine/category/module tests pass, followed by workspace check, affected
 lint, root typecheck, and diff hygiene.
+
+Semantic checkpoint: `dd910b0` (`cas: add categorical tower descriptors`).
 
 ## `CAS-DOCTRINE-5B` Result
 
