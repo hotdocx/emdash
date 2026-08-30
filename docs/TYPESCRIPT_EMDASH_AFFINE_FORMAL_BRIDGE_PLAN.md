@@ -5,7 +5,8 @@ Date: 2026-08-30
 Plan-ID: `TS-EMDASH-AFFINE-FORMAL-BRIDGE`
 
 Status: living architecture and implementation ledger; dedicated branch and
-worktree created; formal-owner audit is the first dependency-ready row.
+worktree created; `BRIDGE-AUDIT-1A` is complete; `BRIDGE-CONTRACT-1B` is the
+next dependency-ready row.
 
 Baseline: `5df79d356d003d3c1831ff1b93a2c593f299f75b`
 
@@ -239,8 +240,8 @@ Lambdapi text, and focused Lambdapi checking.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `BRIDGE-PLAN-0` | complete | completed affine goal and reviewed recommendation | this living plan, dedicated branch/worktree, architecture, staged rows, validation policy, and Git limits |
-| `BRIDGE-AUDIT-1A` | pending; next selected row | active TypeScript/Lambdapi authorities | exact formal owner/consumer map, current symbol inventory, trust/equality options, gap classification, and selected first consumer |
-| `BRIDGE-CONTRACT-1B` | pending | `BRIDGE-AUDIT-1A` | backend-neutral parent-aware realization contract, status boundary, deterministic generator/element reification interfaces, and negative diagnostics |
+| `BRIDGE-AUDIT-1A` | complete; focused owner checks green | active TypeScript/Lambdapi authorities | exact owner map in `TYPESCRIPT_EMDASH_AFFINE_FORMAL_BRIDGE_OWNER_AUDIT.md`; algebraic Zariski cover selected; quotient/localization/scheme/Cech gaps and trust boundary classified |
+| `BRIDGE-CONTRACT-1B` | pending; next selected row | `BRIDGE-AUDIT-1A` | backend-neutral parent-aware realization contract, status boundary, deterministic generator/element reification interfaces, and negative diagnostics |
 | `BRIDGE-REIFY-2A` | pending | `BRIDGE-CONTRACT-1B` | canonical polynomial/quotient-element reifier into explicit Core with representative invariance and coefficient/generator coverage |
 | `BRIDGE-COVER-3A` | pending | `BRIDGE-REIFY-2A`, current formal unimodular owner | concrete affine-cover adapter carrying ordered elements, coefficients, combination, and selected formal ring/algebra realization |
 | `BRIDGE-LOCALIZATION-4A` | pending | `BRIDGE-COVER-3A`, current formal localization owner | chart/localization realization, ambient maps, distinguished inverses, and overlap product localizations |
@@ -251,6 +252,36 @@ Lambdapi text, and focused Lambdapi checking.
 Rows may be split into lettered subtranches. A row completes only after
 implementation, focused positive and negative tests, proportional validation,
 synchronized decisions/results, and a local checkpoint.
+
+## Decision Ledger
+
+| Decision | Status | Rationale |
+| --- | --- | --- |
+| `D-BRIDGE-001` | accepted | The first exact formal target is `CommRingZariskiCoverPresentation R`, constructed from the existing finite-family and unimodular-intro owners over a supplied formal `R`. |
+| `D-BRIDGE-002` | accepted | The active formal polynomial algebra is universal-property-only and has no concrete quotient syntax; the bridge requires a supplied formal ring/generator realization and does not construct the CAS quotient formally. |
+| `D-BRIDGE-003` | accepted | `explicit-data` and `checked` statuses may produce a formal cover term only with an actual formal equality law. `trusted-computation` remains metadata and never creates an opaque equality inhabitant. |
+| `D-BRIDGE-004` | accepted | A CAS adjoined inverse can realize unit evidence, but not the contractible universal-property field of `CommRingLocalizationAt`; whole localization realization requires supplied formal universal data. |
+| `D-BRIDGE-005` | accepted | `AffineSchemePresentation` requires supplied structure-sheaf and localization-locality capabilities and is not derivable from the CAS affine presentation alone. |
+| `D-BRIDGE-006` | accepted | No concrete formal Čech owner exists in the active library; later work must use a genuinely suitable generic diagram owner or separately review one minimal consumer-driven owner. |
+| `D-BRIDGE-007` | accepted | Bridge terms use arbitrary reviewed Core free references, checked external signature mirrors, and deterministic backend remapping; no new `CoreOwnerId` or global Lambdapi binding is needed. |
+
+## `BRIDGE-AUDIT-1A` Result
+
+The complete owner/gap audit is recorded in
+`docs/TYPESCRIPT_EMDASH_AFFINE_FORMAL_BRIDGE_OWNER_AUDIT.md`. It selects one
+implementable vertical slice: construct the existing algebraic finite Zariski
+cover over a supplied formal commutative ring from realized cover elements,
+coefficients, and an actual formal dot-product law.
+
+The audit rejects automatic formal quotient, localization, affine-scheme, and
+Čech claims. Those owners are absent or require additional semantic universal,
+sheaf, locality, or diagram data. The TypeScript bridge will use external free
+declarations and deterministic probe mappings, leaving the Core owner catalog
+unchanged.
+
+The unchanged finite-cover, localization, and affine-scheme Lambdapi owners
+each pass a focused check bounded to 90 seconds. No TypeScript or Lambdapi
+source was edited in this audit.
 
 ## Initial `BRIDGE-AUDIT-1A` Tranche
 
