@@ -260,4 +260,3 @@ validated, documented, and checkpointed; the native CAS remains the default;
 real Singular checks are opt-in and non-authoritative; and the completed cover
 consumer makes the follow-up formal-bridge requirements concrete. It is not
 complete merely because quotient rings or one affine example works.
-
