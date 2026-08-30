@@ -5,9 +5,9 @@ Date: 2026-08-30
 Plan-ID: `TS-EMDASH-AFFINE-FORMAL-BRIDGE`
 
 Status: living architecture and implementation ledger; dedicated branch and
-worktree created; `BRIDGE-AUDIT-1A` is complete; `BRIDGE-CONTRACT-1B` is the
-complete and proportional-green; `BRIDGE-REIFY-2A` is the next
-dependency-ready row.
+worktree created; `BRIDGE-AUDIT-1A`, `BRIDGE-CONTRACT-1B`, and
+`BRIDGE-REIFY-2A` are complete; `BRIDGE-COVER-3A` is the next dependency-ready
+row.
 
 Baseline: `5df79d356d003d3c1831ff1b93a2c593f299f75b`
 
@@ -243,8 +243,8 @@ Lambdapi text, and focused Lambdapi checking.
 | `BRIDGE-PLAN-0` | complete | completed affine goal and reviewed recommendation | this living plan, dedicated branch/worktree, architecture, staged rows, validation policy, and Git limits |
 | `BRIDGE-AUDIT-1A` | complete; focused owner checks green | active TypeScript/Lambdapi authorities | exact owner map in `TYPESCRIPT_EMDASH_AFFINE_FORMAL_BRIDGE_OWNER_AUDIT.md`; algebraic Zariski cover selected; quotient/localization/scheme/Cech gaps and trust boundary classified |
 | `BRIDGE-CONTRACT-1B` | complete; proportional-green at `bbccc06` | `BRIDGE-AUDIT-1A` | parent-aware formal algebra realization, explicit/checked/trusted status boundary, deterministic closed/meta-free element reification, cover alignment, law requirements, and negative diagnostics complete |
-| `BRIDGE-REIFY-2A` | pending; next selected row | `BRIDGE-CONTRACT-1B` | canonical polynomial/quotient-element reifier into explicit Core with representative invariance and coefficient/generator coverage |
-| `BRIDGE-COVER-3A` | pending | `BRIDGE-REIFY-2A`, current formal unimodular owner | concrete affine-cover adapter carrying ordered elements, coefficients, combination, and selected formal ring/algebra realization |
+| `BRIDGE-REIFY-2A` | complete; proportional-green at `56a880c` | `BRIDGE-CONTRACT-1B` | reviewed formal ring bindings, bounded deterministic polynomial evaluation, canonical quotient representative invariance, realization construction, cover integration, and negative diagnostics complete |
+| `BRIDGE-COVER-3A` | pending; next selected row | `BRIDGE-REIFY-2A`, current formal unimodular owner | concrete affine-cover adapter carrying ordered elements, coefficients, combination, and selected formal ring/algebra realization |
 | `BRIDGE-LOCALIZATION-4A` | pending | `BRIDGE-COVER-3A`, current formal localization owner | chart/localization realization, ambient maps, distinguished inverses, and overlap product localizations |
 | `BRIDGE-CECH-5A` | pending | `BRIDGE-LOCALIZATION-4A`, current diagram/Cech owner | ordered simplex and signed restriction realization into existing formal diagram/cochain structures |
 | `BRIDGE-EMISSION-6A` | pending | representative bridge consumer | deterministic explicit-Core declarations/workspaces and Lambdapi emission without handwritten semantic templates |
@@ -269,6 +269,34 @@ synchronized decisions/results, and a local checkpoint.
 | `D-BRIDGE-009` | accepted | Cover realization calls the element reifier twice and requires byte-identical canonical Core, preventing stateful/nondeterministic callbacks from entering snapshots or emission. |
 | `D-BRIDGE-010` | accepted | Explicit-data and checked cover realizations require a closed meta-free law term. Trusted computation forbids a law term and exposes `formalCoverAvailable=false`. |
 | `D-BRIDGE-011` | accepted | The contract validates cover/algebra parent identity and exact generator/coefficient arity while retaining the original computational cover and equation status. |
+| `D-BRIDGE-012` | accepted | Canonical polynomial evaluation uses reviewed portable free references for formal zero, one, addition, negation, and multiplication; backend owner names are substituted only during Lambdapi emission. |
+| `D-BRIDGE-013` | accepted | Monomial powers use a bounded deterministic binary-exponentiation tree; exponent overflow fails before constructing an unbounded Core term. |
+| `D-BRIDGE-014` | accepted | Coefficient and generator realizations must be closed, meta-free, parent-aligned, and deterministic. The coefficient callback is evaluated twice and compared in canonical Core serialization. |
+| `D-BRIDGE-015` | accepted | A quotient element is reified only through its canonical reduced polynomial representative, so computationally equal representatives emit byte-identical explicit Core. |
+
+## `BRIDGE-REIFY-2A` Result
+
+Canonical polynomial and quotient-element reification is implemented in
+`src/v3_2/algebra_formal_reifier.ts`. The reifier binds one computational
+presented algebra to a supplied formal ring, ordered formal generator terms,
+a coefficient reifier, a status, and an exponent limit. It evaluates canonical
+sparse representatives using portable free references for the active formal
+ring operations and constructs a compatible formal algebra realization.
+
+Powers use deterministic binary exponentiation. Generator arity, polynomial
+parent, quotient parent, exponent bounds, closed Core, and coefficient
+determinism fail closed. Backend-neutral Core retains bridge-local names;
+`AFFINE_FORMAL_RING_BINDINGS` maps them to active Lambdapi owners only during
+emission.
+
+Five focused reifier tests cover quotient representative invariance, portable
+versus Lambdapi spellings, cover integration, generator arity, exponent
+overflow, coefficient nondeterminism, and foreign elements. Together with
+contract, quotient, and explicit-Core serialization suites, 25 tests pass,
+followed by workspace check, affected lint, root typecheck, and diff hygiene.
+`check:ts` was not run and no Lambdapi source changed.
+
+Semantic checkpoint: `56a880c` (`bridge: add canonical quotient element reifier`).
 
 ## `BRIDGE-CONTRACT-1B` Result
 
