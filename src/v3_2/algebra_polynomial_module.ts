@@ -51,9 +51,13 @@ export const ALGEBRA_POLYNOMIAL_MODULE_PROFILE = Object.freeze({
     performsIo: false as const
 });
 
-export type AlgebraPolynomialModuleTermOrder =
+export type AlgebraPolynomialModuleBaseTermOrder =
     | 'position-over-term'
     | 'term-over-position';
+
+export type AlgebraPolynomialModuleTermOrder =
+    | AlgebraPolynomialModuleBaseTermOrder
+    | 'schreyer';
 
 export type AlgebraPolynomialModuleErrorCode =
     | 'INVALID_FREE_MODULE'
@@ -64,6 +68,7 @@ export type AlgebraPolynomialModuleErrorCode =
     | 'ZERO_DIVISOR'
     | 'INVALID_SUBMODULE'
     | 'INVALID_TRANSFORMATION'
+    | 'INVALID_GROEBNER_BASIS'
     | 'INVALID_OPTIONS'
     | 'MODULE_LIMIT_EXCEEDED'
     | 'CANCELLED';
@@ -98,6 +103,7 @@ export interface AlgebraPolynomialFreeModule<
     readonly ring: AlgebraPolynomialRing<P, C, I>;
     readonly rank: number;
     readonly termOrder: AlgebraPolynomialModuleTermOrder;
+    readonly schreyerData?: AlgebraPolynomialSchreyerData<P, C, I>;
 }
 
 export interface AlgebraPolynomialModuleVector<
@@ -116,9 +122,18 @@ export interface AlgebraPolynomialModuleTerm<
     readonly position: number;
 }
 
+export interface AlgebraPolynomialSchreyerData<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly targetModule: AlgebraPolynomialFreeModule<P, C, I>;
+    readonly leadingTerms: readonly AlgebraPolynomialModuleTerm<P, C>[];
+}
+
 const assertOrder = (
     value: unknown
-): AlgebraPolynomialModuleTermOrder => {
+): AlgebraPolynomialModuleBaseTermOrder => {
     if (value === 'position-over-term' || value === 'term-over-position') {
         return value;
     }
@@ -149,7 +164,7 @@ export function algebraPolynomialFreeModule<
 >(
     ring: AlgebraPolynomialRing<P, C, I>,
     rankInput: number,
-    orderInput: AlgebraPolynomialModuleTermOrder = 'term-over-position'
+    orderInput: AlgebraPolynomialModuleBaseTermOrder = 'term-over-position'
 ): AlgebraPolynomialFreeModule<P, C, I> {
     const normalizedRank = rank(rankInput);
     const termOrder = assertOrder(orderInput);
@@ -299,6 +314,37 @@ export const compareAlgebraPolynomialModuleTerms = <
     const positionComparison = left.position === right.position
         ? 0
         : left.position < right.position ? 1 : -1;
+    if (module.termOrder === 'schreyer') {
+        const data = module.schreyerData!;
+        const leftReference = data.leadingTerms[left.position];
+        const rightReference = data.leadingTerms[right.position];
+        const inducedLeft: AlgebraPolynomialModuleTerm<P, C> = {
+            coefficient: left.coefficient,
+            position: leftReference.position,
+            monomial: {
+                exponents: Object.freeze(left.monomial.exponents.map(
+                    (value, index) =>
+                        value + leftReference.monomial.exponents[index]
+                ))
+            }
+        };
+        const inducedRight: AlgebraPolynomialModuleTerm<P, C> = {
+            coefficient: right.coefficient,
+            position: rightReference.position,
+            monomial: {
+                exponents: Object.freeze(right.monomial.exponents.map(
+                    (value, index) =>
+                        value + rightReference.monomial.exponents[index]
+                ))
+            }
+        };
+        const inducedComparison = compareAlgebraPolynomialModuleTerms(
+            data.targetModule,
+            inducedLeft,
+            inducedRight
+        );
+        return inducedComparison === 0 ? positionComparison : inducedComparison;
+    }
     if (module.termOrder === 'position-over-term' && positionComparison !== 0) {
         return positionComparison;
     }
@@ -333,6 +379,54 @@ export const algebraPolynomialModuleLeadingTerm = <
     });
     return leading;
 };
+
+export function algebraPolynomialSchreyerModule<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    targetModule: AlgebraPolynomialFreeModule<P, C, I>,
+    referenceBasis: readonly AlgebraPolynomialModuleVector<P, C, I>[]
+): AlgebraPolynomialFreeModule<P, C, I> {
+    const leadingTerms = referenceBasis.map((vector, index) => {
+        if (!sameAlgebraParent(vector.parent, targetModule)) {
+            return fail(
+                'FOREIGN_FREE_MODULE',
+                `schreyerModule.referenceBasis[${index}]`,
+                'Schreyer reference vector belongs to a foreign module'
+            );
+        }
+        const leading = algebraPolynomialModuleLeadingTerm(vector);
+        if (leading === undefined) {
+            return fail(
+                'INVALID_GROEBNER_BASIS',
+                `schreyerModule.referenceBasis[${index}]`,
+                'Schreyer reference vectors must be nonzero'
+            );
+        }
+        return leading;
+    });
+    const referenceId = leadingTerms.map(term =>
+        `p${term.position}.e${term.monomial.exponents.join('.')}`
+    ).join('_') || 'empty';
+    const parent = defineAlgebraParent(
+        'polynomial-free-module',
+        `algebra.polynomial-free-module/${targetModule.ring.identity.id}/` +
+            `${referenceBasis.length}/schreyer/${targetModule.identity.id}/` +
+            referenceId,
+        `v1.${targetModule.ring.identity.revision}`
+    );
+    return Object.freeze({
+        ...parent,
+        ring: targetModule.ring,
+        rank: referenceBasis.length,
+        termOrder: 'schreyer',
+        schreyerData: Object.freeze({
+            targetModule,
+            leadingTerms: Object.freeze(leadingTerms)
+        })
+    });
+}
 
 export const algebraPolynomialModuleAdd = <
     P extends AlgebraParent,
@@ -937,6 +1031,127 @@ export function algebraPolynomialModuleGroebnerBasis<
         transformations: Object.freeze(transformations.map(row =>
             Object.freeze(row)
         )),
+        pairsProcessed,
+        reductionSteps
+    });
+}
+
+export interface AlgebraPolynomialModuleSchreyerSyzygies<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly kind: 'algebra-polynomial-module-schreyer-syzygies';
+    readonly basis: AlgebraPolynomialModuleGroebnerBasis<P, C, I>;
+    readonly module: AlgebraPolynomialFreeModule<P, C, I>;
+    readonly generators: readonly AlgebraPolynomialModuleVector<P, C, I>[];
+    readonly sourcePairs: readonly {
+        readonly left: number;
+        readonly right: number;
+    }[];
+    readonly pairsProcessed: number;
+    readonly reductionSteps: number;
+}
+
+/**
+ * Compute the Schreyer generators of the syzygy module of a module GB.
+ * Each generator is the coefficient row of a zero-reduced module S-pair.
+ */
+export function algebraPolynomialModuleSchreyerSyzygies<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    basis: AlgebraPolynomialModuleGroebnerBasis<P, C, I>,
+    maximumReductionSteps: number =
+        ALGEBRA_POLYNOMIAL_MODULE_PROFILE.maximumReductionStepsPerPair
+): AlgebraPolynomialModuleSchreyerSyzygies<P, C, I> {
+    if (!Number.isSafeInteger(maximumReductionSteps) || maximumReductionSteps <= 0) {
+        return fail(
+            'MODULE_LIMIT_EXCEEDED',
+            'schreyerSyzygies.maximumReductionSteps',
+            'Schreyer reduction limit must be a positive safe integer'
+        );
+    }
+    const field = fieldDomain(basis.submodule.module.ring);
+    const module = algebraPolynomialSchreyerModule(
+        basis.submodule.module,
+        basis.basis
+    );
+    const generators: AlgebraPolynomialModuleVector<P, C, I>[] = [];
+    const sourcePairs: { left: number; right: number }[] = [];
+    let pairsProcessed = 0;
+    let reductionSteps = 0;
+    for (let right = 1; right < basis.basis.length; right++) {
+        const rightLead = algebraPolynomialModuleLeadingTerm(basis.basis[right])!;
+        for (let left = 0; left < right; left++) {
+            const leftLead = algebraPolynomialModuleLeadingTerm(basis.basis[left])!;
+            if (leftLead.position !== rightLead.position) continue;
+            pairsProcessed++;
+            const pair = sPairWithRow(
+                basis.basis[left],
+                unitRow(basis.submodule.module.ring, basis.basis.length, left),
+                basis.basis[right],
+                unitRow(basis.submodule.module.ring, basis.basis.length, right),
+                field
+            );
+            const division = algebraPolynomialModuleDivide(
+                pair.vector,
+                basis.basis,
+                maximumReductionSteps
+            );
+            reductionSteps += division.steps;
+            if (algebraPolynomialModuleLeadingTerm(division.remainder) !== undefined) {
+                return fail(
+                    'INVALID_GROEBNER_BASIS',
+                    `schreyerSyzygies.pair[${left},${right}]`,
+                    'A module S-pair did not reduce to zero'
+                );
+            }
+            let row = [...pair.row];
+            division.quotients.forEach((quotient, index) => {
+                row = rowSubtract(
+                    row,
+                    rowScale(
+                        quotient,
+                        unitRow(
+                            basis.submodule.module.ring,
+                            basis.basis.length,
+                            index
+                        )
+                    )
+                );
+            });
+            const syzygy = algebraPolynomialModuleVector(module, row);
+            if (algebraPolynomialModuleLeadingTerm(syzygy) === undefined) continue;
+            const reconstructed = algebraPolynomialModuleCombination(
+                basis.basis,
+                syzygy.components
+            );
+            if (!algebraPolynomialModuleEquals(
+                reconstructed,
+                algebraPolynomialModuleZero(basis.submodule.module)
+            )) {
+                return fail(
+                    'INVALID_TRANSFORMATION',
+                    `schreyerSyzygies.pair[${left},${right}]`,
+                    'Computed Schreyer row is not a syzygy'
+                );
+            }
+            if (generators.some(value => algebraPolynomialModuleEquals(
+                value,
+                syzygy
+            ))) continue;
+            generators.push(syzygy);
+            sourcePairs.push(Object.freeze({ left, right }));
+        }
+    }
+    return Object.freeze({
+        kind: 'algebra-polynomial-module-schreyer-syzygies',
+        basis,
+        module,
+        generators: Object.freeze(generators),
+        sourcePairs: Object.freeze(sourcePairs),
         pairsProcessed,
         reductionSteps
     });

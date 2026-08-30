@@ -23,6 +23,7 @@ import {
     algebraPolynomialModuleLeadingTerm,
     algebraPolynomialModuleMembership,
     algebraPolynomialModuleScale,
+    algebraPolynomialModuleSchreyerSyzygies,
     algebraPolynomialModuleVector,
     algebraPolynomialModuleVectorSchema,
     algebraPolynomialModuleZero,
@@ -152,6 +153,54 @@ describe('v3.2 polynomial free modules and module Buchberger', () => {
         assert.ok(Object.isFrozen(basis.transformations));
     });
 
+    it('computes verified syzygies in the induced Schreyer order', () => {
+        const ring = algebraPolynomialRing(RATIONAL_DOMAIN, ['x', 'y'], 'lex');
+        const x = algebraPolynomialVariable(ring, 0);
+        const y = algebraPolynomialVariable(ring, 1);
+        const zero = algebraPolynomialZero(ring);
+        const ambient = algebraPolynomialFreeModule(
+            ring,
+            2,
+            'position-over-term'
+        );
+        const basis = algebraPolynomialModuleGroebnerBasis(
+            algebraPolynomialSubmodule(ambient, [
+                algebraPolynomialModuleVector(ambient, [x, y]),
+                algebraPolynomialModuleVector(ambient, [y, zero])
+            ])
+        );
+        const syzygies = algebraPolynomialModuleSchreyerSyzygies(basis);
+        assert.equal(syzygies.module.termOrder, 'schreyer');
+        assert.equal(syzygies.generators.length, 1);
+        assert.deepEqual(vectorText(syzygies.generators[0]), [
+            '1*y',
+            '-1*x',
+            '-1'
+        ]);
+        assert.equal(
+            algebraPolynomialModuleLeadingTerm(syzygies.generators[0])!
+                .position,
+            0
+        );
+        assert.deepEqual(syzygies.sourcePairs, [{ left: 0, right: 1 }]);
+        assert.ok(algebraPolynomialModuleEquals(
+            algebraPolynomialModuleCombination(
+                basis.basis,
+                syzygies.generators[0].components
+            ),
+            algebraPolynomialModuleZero(ambient)
+        ));
+        const syzygyBasis = algebraPolynomialModuleGroebnerBasis(
+            algebraPolynomialSubmodule(
+                syzygies.module,
+                syzygies.generators
+            )
+        );
+        assert.equal(syzygyBasis.basis.length, 1);
+        assert.ok(Object.isFrozen(syzygies));
+        assert.ok(Object.isFrozen(syzygies.module.schreyerData));
+    });
+
     it('enforces field, module, divisor, basis, and cancellation gates', () => {
         const ring = algebraPolynomialRing(RATIONAL_DOMAIN, ['x', 'y'], 'lex');
         const x = algebraPolynomialVariable(ring, 0);
@@ -172,6 +221,15 @@ describe('v3.2 polynomial free modules and module Buchberger', () => {
                 context: { cancellation: { requested: () => true } }
             }),
             moduleError('CANCELLED')
+        );
+        const incomplete = algebraPolynomialModuleGroebnerBasis(submodule);
+        assert.throws(
+            () => algebraPolynomialModuleSchreyerSyzygies({
+                ...incomplete,
+                basis: incomplete.basis.slice(0, 2),
+                transformations: incomplete.transformations.slice(0, 2)
+            }),
+            moduleError('INVALID_GROEBNER_BASIS')
         );
         assert.throws(
             () => algebraPolynomialModuleDivide(first, [
