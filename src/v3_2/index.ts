@@ -57,6 +57,7 @@ export * from './algebra_tensor';
 export * from './algebra_cech';
 export * from './algebra_affine_reference_operations';
 export * from './algebra_affine_tower';
+export * from './algebra_affine_singular';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
