@@ -7,8 +7,8 @@ Plan-ID: `TS-EMDASH-AFFINE-ALGEBRAIC-GEOMETRY`
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `AFFINE-QUOTIENT-1A` is complete and proportional-green;
 `AFFINE-MAPS-1B`, `AFFINE-LOCALIZATION-2A`, and `AFFINE-SCHEMES-2B` are
-complete and proportional-green; `AFFINE-TENSOR-3A` is the next
-dependency-ready row.
+complete and proportional-green; `AFFINE-TENSOR-3A` is complete and
+proportional-green; `AFFINE-COVERS-4A` is the next dependency-ready row.
 
 Baseline: `1095fab1fd64de6a2793f6958721bedc4b550f21`
 
@@ -201,8 +201,8 @@ tests, define API semantics, or require `check:ts`.
 | `AFFINE-MAPS-1B` | complete; proportional-green at `9ef4027` | `AFFINE-QUOTIENT-1A` | presented algebra wrappers, relation-checked generator-image maps, polynomial/element evaluation, identity/composition/equality, schemas, native application, graphs, and invalid-map diagnostics complete |
 | `AFFINE-LOCALIZATION-2A` | complete; proportional-green at `5954407` | `AFFINE-MAPS-1B` | fresh adjoined-inverse presentation, embedded source relations, canonical map, distinguished inverse/equation, basic-open chart, native operation/context, graph, and unit/nilpotent/foreign/collision cases complete |
 | `AFFINE-SCHEMES-2B` | complete; proportional-green at `157bb09` | `AFFINE-LOCALIZATION-2A` | affine schemes, explicit contravariant morphisms, reversed composition/equality, closed and basic-open immersion whole constructions, schemas, and strict computable category complete |
-| `AFFINE-TENSOR-3A` | pending; next selected row | `AFFINE-MAPS-1B`, `AFFINE-SCHEMES-2B` | presented tensor products, universal maps, compatibility computations, and affine fiber products |
-| `AFFINE-COVERS-4A` | pending | `AFFINE-LOCALIZATION-2A`, existing unimodular covers | actual finite affine charts, overlaps, restriction maps, Cech nerve, and initial cochain data |
+| `AFFINE-TENSOR-3A` | complete; proportional-green at `89f6614` | `AFFINE-MAPS-1B`, `AFFINE-SCHEMES-2B` | renamed combined presentation, base-identification relations, canonical maps/compatibility, universal factorization, affine fiber products/projections, and invalid-map cases complete |
+| `AFFINE-COVERS-4A` | pending; next selected row | `AFFINE-LOCALIZATION-2A`, existing unimodular covers | actual finite affine charts, overlaps, restriction maps, Cech nerve, and initial cochain data |
 | `AFFINE-GRAPH-5A` | pending | one representative consumer from each preceding layer | native operation bundles, computation graphs, affine category/tower metadata, direct reinterpretations, and staged compilation |
 | `AFFINE-SINGULAR-6A` | pending | installed Singular and representative native consumers | real opt-in differential comparisons for radical, quotient, localization, and selected fiber-product computations |
 | `AFFINE-FORMAL-CONSUMER-7` | deferred | completed finite-cover/Cech consumer and separate user authorization | inspect the concrete consumer and launch or specify the minimal follow-up formal-bridge goal; not an affine computation prerequisite |
@@ -234,6 +234,33 @@ validation, synchronized decisions/results, and a local checkpoint.
 | `D-AFFINE-017` | accepted | A closed affine subscheme adjoins canonical ambient quotient representatives as additional equations and retains the quotient map/immersion; an empty equation family uniformly recovers the ambient scheme. |
 | `D-AFFINE-018` | accepted | A basic-open affine subscheme reuses the whole principal localization and its canonical map as the immersion coordinate map. |
 | `D-AFFINE-019` | accepted | The affine-scheme runtime is an ordinary strict computational category over presented algebra data and does not impose its equality on emdash's omega-categorical semantics. |
+| `D-AFFINE-020` | accepted | A relative tensor presentation places renamed left generators before renamed right generators in one lexicographic ring, embeds both relation families, and identifies the two canonical images of every ordered base generator. |
+| `D-AFFINE-021` | accepted | The whole tensor product retains both base maps, canonical factor maps, and computed base compatibility. A universal factor exists only for maps to one target that agree canonically on the base. |
+| `D-AFFINE-022` | accepted | The affine fiber product is `Spec` of the presented tensor algebra; projection coordinate maps are the tensor canonical maps, and their composites to the base are retained and compared. |
+
+## `AFFINE-TENSOR-3A` Result
+
+Presented relative tensor products and affine fiber products are implemented
+in `src/v3_2/algebra_tensor.ts`. The tensor presentation renames left and
+right variable blocks, embeds both relation ideals, and adds equations
+identifying both images of each base generator. It retains the resulting
+algebra, canonical maps, and every base compatibility comparison.
+
+Universal factorization validates two maps into one target, retains their
+compatibility checks, and constructs the map from the tensor algebra by the
+concatenated generator images. Affine fiber products retain the tensor,
+product scheme, two projections, their composites to the base, and the
+computed equality of those composites.
+
+Five focused tests cover the cusp presentation
+`Q[x] tensor_(Q[t]) Q[y] = Q[x,y]/(x^2-y^3)`, canonical compatibility,
+identity universal factorization, incompatible factor maps, affine projection
+compatibility, tensoring over the coefficient field, and nonparallel scheme
+maps. Together with affected scheme, presented-map, and ideal suites, 29 tests
+pass, followed by workspace check, affected lint, root typecheck, and diff
+hygiene. `check:ts` was not run.
+
+Semantic checkpoint: `89f6614` (`affine: add tensor and fiber products`).
 
 ## `AFFINE-SCHEMES-2B` Result
 
