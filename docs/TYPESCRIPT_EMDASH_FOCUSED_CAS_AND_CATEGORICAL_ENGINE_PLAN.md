@@ -6,8 +6,9 @@ Plan-ID: `TS-EMDASH-FOCUSED-CAS`
 
 Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
-`CAS-CONTRACT-1A` through `CAS-IDEAL-3A` implemented and proportional-green;
-`CAS-ZARISKI-3B` is the next dependency-ready implementation row.
+`CAS-CONTRACT-1A` through `CAS-ZARISKI-3B` implemented and
+proportional-green; `CAS-MATRIX-4A` is the next dependency-ready
+implementation row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -781,8 +782,8 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-POLY-2B` | complete; proportional-green at `7b6b929` | `CAS-EXACT-2A` | coefficient-polymorphic parent-aware sparse multivariate polynomials; lex/grlex/grevlex, canonicalization, arithmetic, powers, substitution, stable serialization, runtime schema, and field-only ordered division; thirteen polynomial tests and all 46 focused CAS tests green |
 | `CAS-ENGINE-2C` | complete; proportional-green at `765aa32` | `CAS-POLY-2B` | native in-process TypeScript registry with multiple deterministic algorithms per exact operation contract; selected integer/rational and ring-specific polynomial operations, direct/graph execution, fuel, cancellation, progress, metadata, and output limits; ten engine tests and all 56 focused CAS tests green |
 | `CAS-IDEAL-3A` | complete; proportional-green at `58f51f2` | `CAS-ENGINE-2C` | ordered polynomial ideals; deterministic monic Buchberger basis, retained generator transformations, reduced-basis postpass, positive/negative membership decomposition, schemas/serialization, bounded cancellation, native operations, and graph pipeline; eleven ideal tests and all 67 focused CAS tests green |
-| `CAS-ZARISKI-3B` | in progress | `CAS-IDEAL-3A` | unimodular-combination computation and optional adapter to current Zariski-cover presentation |
-| `CAS-MATRIX-4A` | pending | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | exact matrices and selected row/column algorithms with explicit orientation conventions |
+| `CAS-ZARISKI-3B` | complete; proportional-green; checkpoint candidate | `CAS-IDEAL-3A` | whole unimodular result retaining ideal/basis/membership/coefficients/combination/remainder; positive-only computational finite basic-open cover, schemas/serialization, native operations, and graph pipeline; formal adapter explicitly deferred; nine tests and all 76 focused CAS tests green |
+| `CAS-MATRIX-4A` | in progress | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | exact matrices and selected row/column algorithms with explicit orientation conventions |
 | `CAS-MODULE-4B` | pending | `CAS-IDEAL-3A`, `CAS-MATRIX-4A` | free and finitely presented modules, morphisms, kernels/cokernels, and syzygies |
 | `CAS-CATEGORY-5A` | pending | `CAS-GRAPH-1B`, representative algebra values | minimal strict computable-category runtime, ring-as-category, matrix/free-module category, primitive/derived registry |
 | `CAS-DOCTRINE-5B` | pending | `CAS-CATEGORY-5A` | preadditive, additive, pre-Abelian, and Abelian doctrine descriptors with dual metadata |
@@ -876,6 +877,9 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-034` | accepted | Buchberger v1 uses a deterministic pair queue, monic new basis elements, no optimization criterion, and explicit pair/basis/reduction/cancellation bounds; faster algorithms remain alternative implementations. |
 | `D-CAS-035` | accepted | Ideal membership always returns coefficients and a remainder satisfying `f = sum_i a_i*g_i + r`; `member` is exactly whether the remainder is zero for the supplied Groebner result. |
 | `D-CAS-036` | accepted | Groebner and membership schemas validate structural shape and parent agreement but do not silently certify that an externally supplied basis has the Groebner property. |
+| `D-CAS-037` | accepted | A unimodular computation retains the complete ideal/basis/membership path and projects coefficients, combination, and remainder; it is not reduced to a Boolean. |
+| `D-CAS-038` | accepted | A computational finite basic-open cover is constructed only from a positive unimodular result whose retained combination is exactly one. |
+| `D-CAS-039` | accepted | The TypeScript formal commutative-algebra profile is not yet qualified, so the current Zariski result remains computational data and the `CommRingUnimodularPresentation` bridge stays in `CAS-FORMAL-BRIDGE-10`. |
 
 ## `CAS-CONTRACT-1A` Result
 
@@ -1018,6 +1022,29 @@ Focused evidence in `tests/v3_2_algebra_reference_engine_tests.ts` covers ten
 positive and negative native-engine cases. All 56 focused CAS tests pass
 together, followed by workspace check, affected-file lint, root typecheck,
 and diff hygiene.
+
+## `CAS-ZARISKI-3B` Result
+
+The first geometry-facing computation is implemented in
+`src/v3_2/algebra_zariski.ts` and
+`src/v3_2/algebra_zariski_reference_operations.ts`. It provides:
+
+- a whole unimodular-combination result retaining the ideal, reduced basis,
+  membership computation, coefficients, combination, and remainder;
+- direct finite generator-family acquisition;
+- a positive-only computational Zariski-cover presentation;
+- structural validators that reject projection drift;
+- deterministic serialization of generators, coefficients, combination, and
+  remainder;
+- native unimodular and cover operations; and
+- a retained `ideal -> unimodular result -> cover presentation` graph.
+
+Focused evidence in `tests/v3_2_algebra_zariski_tests.ts` covers nine positive
+and negative cases: `x,1-x`, non-unimodular and empty families, whole-schema
+drift, serialization, native execution, graph composition, limits,
+cancellation, and the explicit absence of a formal adapter. All 76 focused
+CAS tests pass together, followed by workspace check, affected-file lint,
+root typecheck, and diff hygiene.
 
 ## `CAS-IDEAL-3A` Result
 
