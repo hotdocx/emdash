@@ -9,7 +9,8 @@ worktree created; `AFFINE-QUOTIENT-1A` is complete and proportional-green;
 `AFFINE-MAPS-1B`, `AFFINE-LOCALIZATION-2A`, and `AFFINE-SCHEMES-2B` are
 complete and proportional-green; `AFFINE-TENSOR-3A` is complete and
 proportional-green; `AFFINE-COVERS-4A` is complete and proportional-green;
-`AFFINE-GRAPH-5A` is the next dependency-ready row.
+`AFFINE-GRAPH-5A` is complete and proportional-green; `AFFINE-SINGULAR-6A`
+is the next dependency-ready row.
 
 Baseline: `1095fab1fd64de6a2793f6958721bedc4b550f21`
 
@@ -204,8 +205,8 @@ tests, define API semantics, or require `check:ts`.
 | `AFFINE-SCHEMES-2B` | complete; proportional-green at `157bb09` | `AFFINE-LOCALIZATION-2A` | affine schemes, explicit contravariant morphisms, reversed composition/equality, closed and basic-open immersion whole constructions, schemas, and strict computable category complete |
 | `AFFINE-TENSOR-3A` | complete; proportional-green at `89f6614` | `AFFINE-MAPS-1B`, `AFFINE-SCHEMES-2B` | renamed combined presentation, base-identification relations, canonical maps/compatibility, universal factorization, affine fiber products/projections, and invalid-map cases complete |
 | `AFFINE-COVERS-4A` | complete; proportional-green at `faadadc` | `AFFINE-LOCALIZATION-2A`, existing unimodular covers | quotient-unimodular validation, coefficients, actual charts/product overlaps, restriction maps, ordered signed Cech nerve/cochain data, triple/noncover/zero-scheme cases complete |
-| `AFFINE-GRAPH-5A` | pending; next selected row | one representative consumer from each preceding layer | native operation bundles, computation graphs, affine category/tower metadata, direct reinterpretations, and staged compilation |
-| `AFFINE-SINGULAR-6A` | pending | installed Singular and representative native consumers | real opt-in differential comparisons for radical, quotient, localization, and selected fiber-product computations |
+| `AFFINE-GRAPH-5A` | complete; proportional-green at `c874016` | one representative consumer from each preceding layer | context-aware tensor/fiber/cover native operations, graphs, six-stage affine tower, direct reinterpretation, primitive category methods, exact lowerings, compiler wrapper, and staged execution complete |
+| `AFFINE-SINGULAR-6A` | pending; next selected row | installed Singular and representative native consumers | real opt-in differential comparisons for radical, quotient, localization, and selected fiber-product computations |
 | `AFFINE-FORMAL-CONSUMER-7` | deferred | completed finite-cover/Cech consumer and separate user authorization | inspect the concrete consumer and launch or specify the minimal follow-up formal-bridge goal; not an affine computation prerequisite |
 
 Rows may be split into lettered subtranches when needed. A row is complete only
@@ -243,6 +244,34 @@ validation, synchronized decisions/results, and a local checkpoint.
 | `D-AFFINE-025` | accepted | For the face omitting `h` from a product `gh`, the coordinate restriction `A_g -> A_(gh)` sends the inverse of `g` to `h(gh)^-1`; every map is revalidated against the localization presentation. |
 | `D-AFFINE-026` | accepted | Initial Cech cochain data retains degree terms and signed incoming face maps with sign `(-1)^removedPosition`; no sheaf, exactness, or cohomology claim is attached to this first nerve. |
 | `D-AFFINE-027` | accepted | The empty basic-open family is accepted exactly for the zero affine scheme, where the ambient relation ideal already contains one; its nerve has no simplices and maximum degree `-1`. |
+| `D-AFFINE-028` | accepted | Tensor products, affine fiber products, and finite covers have whole native operation contracts; each passes execution context into its internal Gröbner computations and is graph-executable. |
+| `D-AFFINE-029` | accepted | The affine modeling tower records presented algebras, opposite variance, affine `Spec`, principal opens, finite covers, and Cech nerve stages, with one explicit lowering rule per constructor. |
+| `D-AFFINE-030` | accepted | The direct affine-scheme runtime is the public reinterpretation; modeling stages do not impose runtime boxes. Fiber product and cover are primitive category operations with exact native schema bindings. |
+| `D-AFFINE-031` | accepted | Staged affine compilation retains all six constructor rules and the direct reinterpretation rule while lowering a selected category method to the ordinary algebra graph engine. |
+
+## `AFFINE-GRAPH-5A` Result
+
+Whole native tensor, fiber-product, and cover operations are implemented in
+`src/v3_2/algebra_affine_reference_operations.ts`. Their schemas retain
+structured inputs and outputs; implementations pass computation context into
+all nested Gröbner work. Focused graphs execute the cusp tensor/fiber product
+and the `D(x),D(1-x)` Cech cover.
+
+The affine constructor tower and staged bindings are implemented in
+`src/v3_2/algebra_affine_tower.ts`. Six constructors record presented
+algebras, opposite variance, affine `Spec`, principal opens, finite covers,
+and Cech nerve lowering. The direct affine-scheme representation is a
+first-class reinterpretation. Fiber product and cover are primitive category
+methods with exact native bindings and a compiler wrapper.
+
+Five focused affine native/tower tests cover tensor, fiber product, cover,
+constructor and lowering identity, reinterpretation, category method
+selection, compilation, and execution with six constructor plus one
+reinterpretation rule. Together with affected compiler, tower, and graph
+suites, 24 tests pass, followed by workspace check, affected lint, root
+typecheck, and diff hygiene. `check:ts` was not run.
+
+Semantic checkpoint: `c874016` (`affine: add staged affine graph operations`).
 
 ## `AFFINE-COVERS-4A` Result
 
