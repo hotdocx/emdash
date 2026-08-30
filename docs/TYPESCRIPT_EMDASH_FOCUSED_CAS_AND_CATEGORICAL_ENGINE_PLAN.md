@@ -10,8 +10,8 @@ CAP-aware design reviewed; dedicated implementation branch/worktree created;
 proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
 focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
 implemented and focused-green; `CAS-FREYD-6B` is implemented and
-proportional-green; the first `CAS-HOMOLOGICAL-7A1` substrate is implemented
-and proportional-green while the larger `CAS-HOMOLOGICAL-7A` row remains in
+proportional-green; `CAS-HOMOLOGICAL-7A1` and `7A2` are implemented and
+proportional-green while the larger `CAS-HOMOLOGICAL-7A` row remains in
 progress and `CAS-MODULE-4B2` remains a separate pending track.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
@@ -795,7 +795,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-TOWER-5C` | complete; focused-green at `dd910b0` | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
 | `CAS-COMPILER-6A` | complete; proportional-green at `c28da8f` | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
 | `CAS-FREYD-6B` | complete; proportional-green at `2f26a59` | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | native whole module kernel/cokernel operations, concrete Freyd/AdditiveClosure field-module model, direct-presentation reinterpretation, schema-preserving compiler bindings, retained reinterpretation rule, and structural agreement with direct `PresentedModule` computations; three Freyd and forty affected tests green |
-| `CAS-HOMOLOGICAL-7A` | in progress; `7A1` proportional-green at `66ed5a8` | `CAS-FREYD-6B` | `7A1`: one-sided matrix inverses, quotient-aware module equality, zero maps, lifts/colifts, bounded chain complexes, and whole homology complete; chain maps/functorial homology, connecting morphisms, generalized morphisms, and resolution algorithms remain |
+| `CAS-HOMOLOGICAL-7A` | in progress; `7A1` green at `66ed5a8`, `7A2` green at `8b97bad` | `CAS-FREYD-6B` | `7A1`: quotient-aware module universal operations, bounded complexes, and whole homology; `7A2`: chain maps, identity/composition, and functorial homology complete; connecting morphisms, generalized morphisms, and resolution algorithms remain |
 | `CAS-CONSTRUCTIBLE-8A` | pending | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | selected slice/poset/stable-poset/opposite/difference/union tower lowered to ideal and saturation operations |
 | `CAS-ORACLE-9A` | pending | one native representative consumer | opt-in Singular/Macaulay2/CAP-homalg differential oracle with no public semantic authority |
 | `CAS-FORMAL-BRIDGE-10` | deferred | concrete formal consumer | selected computational realization, trusted-computation marker, or checked-proof adapter; not a CAS prerequisite |
@@ -913,6 +913,31 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-065` | accepted | Whole module kernels and cokernels retain their input morphisms as well as structural maps, enabling kernel lifts and cokernel colifts without reconstructing or separately pairing universal-construction data. |
 | `D-CAS-066` | accepted | The first chain-complex profile is finite, bounded, consecutively integer-graded, and uses `d_n: C_n -> C_(n-1)`; endpoint zero maps are generated internally and every chain law is checked on quotient coordinates. |
 | `D-CAS-067` | accepted | First homology is the whole construction `coker(incoming -> ker(outgoing))` and requires `outgoing * incoming = 0`; CAP's broader homology object for an arbitrary composable pair is not silently claimed by this chain-complex tranche. |
+| `D-CAS-068` | accepted | First chain maps require one common bounded degree range, retain every component, and validate each differential square using quotient-aware morphism equality; identity and composition are componentwise and revalidated. |
+| `D-CAS-069` | accepted | Functorial homology first restricts the selected chain-map component to the target cycle kernel and then descends through the source boundary cokernel; the whole result retains both homology constructions, the cycle map, and the final morphism. |
+
+## `CAS-HOMOLOGICAL-7A2` Result
+
+Bounded chain maps and functorial homology are implemented in
+`src/v3_2/algebra_homological.ts`. A chain map retains one component in every
+degree of a common finite bound and validates
+`d_target * f_n = f_(n-1) * d_source` on quotient coordinates. Identity and
+composition are constructed componentwise and passed back through the same
+validation boundary.
+
+The induced homology computation is retained as a whole factorization. It
+first lifts `f_n` restricted to source cycles into the target cycle kernel,
+then composes with the target homology projection and colifts through the
+source boundary cokernel. Tests inspect both factorization equations, not only
+the final matrix. Scalar chain maps induce the expected scalar on homology;
+identity and composition agree with the corresponding computed homology maps,
+and a noncommuting differential square is rejected.
+
+Five focused homological tests and the affected matrix, module, category, and
+Freyd suites give 31 passing tests, followed by workspace check, affected
+lint, root typecheck, and diff hygiene. No repository-wide aggregate was run.
+
+Semantic checkpoint: `8b97bad` (`cas: add functorial module homology`).
 
 ## `CAS-HOMOLOGICAL-7A1` Result
 
