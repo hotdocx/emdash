@@ -6,9 +6,9 @@ Plan-ID: `TS-EMDASH-FOCUSED-CAS`
 
 Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
-`CAS-CONTRACT-1A`, `CAS-GRAPH-1B`, `CAS-EXACT-2A`, and `CAS-POLY-2B`
-implemented and proportional-green; `CAS-ENGINE-2C` is the next
-dependency-ready implementation row.
+`CAS-CONTRACT-1A`, `CAS-GRAPH-1B`, `CAS-EXACT-2A`, `CAS-POLY-2B`, and
+`CAS-ENGINE-2C` implemented and proportional-green; `CAS-IDEAL-3A` is the
+next dependency-ready implementation row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -780,8 +780,8 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-GRAPH-1B` | complete; proportional-green at `d6e2e00` | `CAS-CONTRACT-1A` | typed backend-neutral input/node/output computation graph, immutable reconstruction, bounded validation, topology-only stable JSON, cancellation, exact-node diagnostics, and sequential direct-execution lowering; eleven focused graph tests plus the ten predecessor tests green |
 | `CAS-EXACT-2A` | complete; proportional-green at `36dc108` | `CAS-GRAPH-1B` | stable parent/element base; canonical bigint-only integers and reduced rationals; arithmetic, order, Euclidean division, gcd, powers, text/JSON serialization, runtime schemas, and immutable operational domains; twelve exact tests and all 33 focused CAS tests green |
 | `CAS-POLY-2B` | complete; proportional-green at `7b6b929` | `CAS-EXACT-2A` | coefficient-polymorphic parent-aware sparse multivariate polynomials; lex/grlex/grevlex, canonicalization, arithmetic, powers, substitution, stable serialization, runtime schema, and field-only ordered division; thirteen polynomial tests and all 46 focused CAS tests green |
-| `CAS-ENGINE-2C` | in progress | `CAS-POLY-2B` | native TypeScript reference engine executes selected exact and polynomial graph nodes with limits/cancellation |
-| `CAS-IDEAL-3A` | pending | `CAS-ENGINE-2C` | ideals, Buchberger reference implementation, reduction, membership, reduced bases, and retained transformations |
+| `CAS-ENGINE-2C` | complete; proportional-green; checkpoint candidate | `CAS-POLY-2B` | native in-process TypeScript registry with multiple deterministic algorithms per exact operation contract; selected integer/rational and ring-specific polynomial operations, direct/graph execution, fuel, cancellation, progress, metadata, and output limits; ten engine tests and all 56 focused CAS tests green |
+| `CAS-IDEAL-3A` | in progress | `CAS-ENGINE-2C` | ideals, Buchberger reference implementation, reduction, membership, reduced bases, and retained transformations |
 | `CAS-ZARISKI-3B` | pending | `CAS-IDEAL-3A` | unimodular-combination computation and optional adapter to current Zariski-cover presentation |
 | `CAS-MATRIX-4A` | pending | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | exact matrices and selected row/column algorithms with explicit orientation conventions |
 | `CAS-MODULE-4B` | pending | `CAS-IDEAL-3A`, `CAS-MATRIX-4A` | free and finitely presented modules, morphisms, kernels/cokernels, and syzygies |
@@ -870,6 +870,9 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-027` | accepted | Polynomial parent identity contains coefficient-parent identity, ordered variable list, and selected lex/grlex/grevlex order; no implicit cross-parent arithmetic is performed. |
 | `D-CAS-028` | accepted | Initial substitution remains within one polynomial ring; general coefficient/ring maps are a later explicit operation rather than an inferred coercion. |
 | `D-CAS-029` | accepted | Initial multivariate division is divisor-order-sensitive, requires an operational field, rejects zero divisors, retains all quotients and the remainder, and enforces a step ceiling. |
+| `D-CAS-030` | accepted | The native reference engine registers one or more algorithms under an exact operation/input/output schema contract; available algorithms are deterministically ordered and explicit selection is honored. |
+| `D-CAS-031` | accepted | Reference-engine v1 enforces cancellation before an operation, per-operation declared fuel cost, start/end progress, and selected output limits; polling inside heavyweight algorithms is introduced with those algorithms. |
+| `D-CAS-032` | accepted | Exact operation descriptors are global, while polynomial operation bundles are ring-specific and include the structural polynomial parent in every operation and schema identity. |
 
 ## `CAS-CONTRACT-1A` Result
 
@@ -986,6 +989,30 @@ arithmetic, rational division reconstruction, order distinctions, structural
 ring separation, schema rejection, and zero-variable rings. All 46 focused
 CAS tests pass together, followed by workspace check, affected-file lint,
 root typecheck, and diff hygiene.
+
+## `CAS-ENGINE-2C` Result
+
+The native execution layer is implemented in
+`src/v3_2/algebra_reference_engine.ts` and
+`src/v3_2/algebra_reference_operations.ts`. It provides:
+
+- immutable typed reference-implementation declarations;
+- multiple algorithms per exact operation contract;
+- duplicate and schema-contract collision rejection;
+- deterministic algorithm ordering and explicit selection;
+- an in-process engine with no I/O or external CAS dependency;
+- per-operation fuel costs and pre-execution cancellation;
+- deterministic start/completion progress events;
+- structured result metadata flowing through the general engine validator;
+- global selected integer/rational operations;
+- ring-specific polynomial negate/add/multiply/power/division bundles;
+- polynomial term-output ceilings and division step budgets; and
+- direct and retained multi-node graph execution.
+
+Focused evidence in `tests/v3_2_algebra_reference_engine_tests.ts` covers ten
+positive and negative native-engine cases. All 56 focused CAS tests pass
+together, followed by workspace check, affected-file lint, root typecheck,
+and diff hygiene.
 
 ## Validation Policy
 
