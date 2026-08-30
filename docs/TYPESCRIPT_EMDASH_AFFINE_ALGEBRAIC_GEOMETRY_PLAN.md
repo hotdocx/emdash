@@ -5,7 +5,8 @@ Date: 2026-08-30
 Plan-ID: `TS-EMDASH-AFFINE-ALGEBRAIC-GEOMETRY`
 
 Status: living architecture and implementation ledger; dedicated branch and
-worktree created; quotient rings are the first dependency-ready row.
+worktree created; `AFFINE-QUOTIENT-1A` is complete and proportional-green;
+`AFFINE-MAPS-1B` is the next dependency-ready row.
 
 Baseline: `1095fab1fd64de6a2793f6958721bedc4b550f21`
 
@@ -194,8 +195,8 @@ tests, define API semantics, or require `check:ts`.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `AFFINE-PLAN-0` | complete | completed focused-CAS goal and reviewed continuation | this living plan, isolated branch/worktree, architecture, staged rows, validation policy, and Git limits |
-| `AFFINE-QUOTIENT-1A` | pending; next selected row | CAS ideals, reduced Gröbner bases, membership | quotient-ring parents and canonical elements; arithmetic, equality, schemas, serialization, retained reduction, native operations, and graph execution |
-| `AFFINE-MAPS-1B` | pending | `AFFINE-QUOTIENT-1A` | presented algebras and relation-checked algebra maps with identity, composition, application, and equality |
+| `AFFINE-QUOTIENT-1A` | complete; proportional-green at `9b0a1e0` | CAS ideals, reduced Gröbner bases, membership | reduced-basis structural parents, whole reductions, canonical elements, arithmetic/equality, schemas/serialization, native operations, graphs, edge cases, cancellation, and real Singular smoke comparison complete |
+| `AFFINE-MAPS-1B` | pending; next selected row | `AFFINE-QUOTIENT-1A` | presented algebras and relation-checked algebra maps with identity, composition, application, and equality |
 | `AFFINE-LOCALIZATION-2A` | pending | `AFFINE-MAPS-1B` | principal localization by adjoining an inverse, canonical map/inverse data, and basic-open coordinate charts |
 | `AFFINE-SCHEMES-2B` | pending | `AFFINE-LOCALIZATION-2A` | affine schemes, contravariant morphisms, closed immersions, basic-open immersions, and a strict computational category |
 | `AFFINE-TENSOR-3A` | pending | `AFFINE-MAPS-1B`, `AFFINE-SCHEMES-2B` | presented tensor products, universal maps, compatibility computations, and affine fiber products |
@@ -207,6 +208,45 @@ tests, define API semantics, or require `check:ts`.
 Rows may be split into lettered subtranches when needed. A row is complete only
 after implementation, focused positive and negative tests, proportional
 validation, synchronized decisions/results, and a local checkpoint.
+
+## Decision Ledger
+
+| Decision | Status | Rationale |
+| --- | --- | --- |
+| `D-AFFINE-001` | accepted | Quotient-parent identity is owned by the fixed polynomial ring and canonical reduced Gröbner basis, so scaled or otherwise equivalent generator presentations share one structural quotient identity. |
+| `D-AFFINE-002` | accepted | A quotient element stores only its reduced Gröbner remainder; the whole reduction separately retains the input polynomial, basis quotients, original-generator coefficients, and remainder. |
+| `D-AFFINE-003` | accepted | Quotient arithmetic always renormalizes after polynomial arithmetic, and equality is structural-parent agreement plus canonical polynomial equality. |
+| `D-AFFINE-004` | accepted | The quotient layer exposes direct commutative-ring operations rather than pretending to implement the existing ordered-domain interface; a quotient ring has no canonical total order. |
+| `D-AFFINE-005` | accepted | Zero and unit ideals use the same representation and algorithms as every other quotient; in the unit quotient, zero and one compute equal without a special zero-ring branch. |
+| `D-AFFINE-006` | accepted | Singular is installed and the existing real radical-membership adapter was exercised successfully against it; external agreement remains focused non-authoritative evidence. |
+
+## `AFFINE-QUOTIENT-1A` Result
+
+Canonical polynomial quotient rings are implemented in
+`src/v3_2/algebra_quotient.ts`. A parent retains its polynomial ring, source
+ideal, and reduced Gröbner basis; an exact safe fingerprint of that canonical
+basis enters the parent identity. A whole reduction reuses ideal membership to
+retain original-generator coefficients, basis quotients, and the remainder.
+Elements store only that remainder.
+
+The layer supplies zero, one, addition, negation, multiplication, nonnegative
+powers, equality, text, serialization, and schemas. The ring-specific native
+bundle in `src/v3_2/algebra_quotient_reference_operations.ts` exposes whole
+reduction, normalization, negation, addition, multiplication, and powers.
+Retained graphs normalize/double-negate representatives and multiply external
+quotient pairs.
+
+Eight quotient tests cover equivalent representatives, nilpotence in
+`Q[x]/(x^2)`, canonical identity across scaled relations, zero and unit ideals,
+schemas, serialization, foreign polynomial/quotient parents, negative powers,
+graph execution, and cancelled Gröbner construction. Together with affected
+ideal, graph, and reference-engine suites, 40 tests pass, followed by workspace
+check, affected lint, root typecheck, and diff hygiene. `check:ts` was not run.
+
+The installed Singular executable also returned agreement with the native
+Rabinowitsch radical-membership decision for `x in sqrt((x^2))`.
+
+Semantic checkpoint: `9b0a1e0` (`affine: add canonical quotient rings`).
 
 ## Initial `AFFINE-QUOTIENT-1A` Tranche
 
