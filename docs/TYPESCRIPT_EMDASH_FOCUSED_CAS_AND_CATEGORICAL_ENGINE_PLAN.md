@@ -789,7 +789,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-MODULE-4B1` | complete; focused-green at `707a7da` | `CAS-MATRIX-4A` | field-linear free/presented modules, relation-witnessed morphisms and composition, quotient projection/section realization, free kernels, presented cokernels, and matrix syzygies; seven module and nine affected matrix tests green |
 | `CAS-MODULE-4B2` | pending | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | polynomial-module term orders, module Groebner bases, Schreyer syzygies, finitely presented polynomial modules, and first free resolutions |
 | `CAS-CATEGORY-5A` | complete; proportional-green at `64b4c7c` (core `90cfca0`) | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict category shell, weighted primitive/derived registry, ring-as-one-object category, and presented-field-module category with primitive whole kernels/cokernels and derived object projections; four category and sixteen affected module/matrix tests green |
-| `CAS-DOCTRINE-5B` | complete; focused-green; checkpoint candidate | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
+| `CAS-DOCTRINE-5B` | complete; focused-green at `02ac3d0` | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
 | `CAS-TOWER-5C` | in progress | `CAS-DOCTRINE-5B` | Opposite, AdditiveClosure, Freyd, and reinterpretation descriptors with retained lowering data |
 | `CAS-COMPILER-6A` | pending | `CAS-TOWER-5C` | retained categorical-program IR and first specialization/lowering passes to algebra graph |
 | `CAS-FREYD-6B` | pending | `CAS-COMPILER-6A`, `CAS-MODULE-4B` | compiled Freyd/AdditiveClosure presentation agrees operationally with direct `PresentedModule` computations |
@@ -907,6 +907,8 @@ descriptors. Four focused doctrine tests cover hierarchy/duality, honest
 missing-role reporting for the module category, complete qualification, and
 cycle/non-involutive rejection; the four affected category tests also pass,
 followed by workspace check, affected lint, root typecheck, and diff hygiene.
+
+Semantic checkpoint: `02ac3d0` (`cas: add operational category doctrines`).
 
 ## `CAS-CATEGORY-5A` In-Progress Result
 
