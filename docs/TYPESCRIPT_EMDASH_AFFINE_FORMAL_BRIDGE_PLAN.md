@@ -6,8 +6,8 @@ Plan-ID: `TS-EMDASH-AFFINE-FORMAL-BRIDGE`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `BRIDGE-AUDIT-1A`, `BRIDGE-CONTRACT-1B`, and
-`BRIDGE-REIFY-2A`, and `BRIDGE-COVER-3A` are complete;
-`BRIDGE-LOCALIZATION-4A` is the next dependency-ready row.
+`BRIDGE-REIFY-2A`, `BRIDGE-COVER-3A`, and `BRIDGE-LOCALIZATION-4A` are
+complete; `BRIDGE-OVERLAP-4B` is the next dependency-ready row.
 
 Baseline: `5df79d356d003d3c1831ff1b93a2c593f299f75b`
 
@@ -245,8 +245,9 @@ Lambdapi text, and focused Lambdapi checking.
 | `BRIDGE-CONTRACT-1B` | complete; proportional-green at `bbccc06` | `BRIDGE-AUDIT-1A` | parent-aware formal algebra realization, explicit/checked/trusted status boundary, deterministic closed/meta-free element reification, cover alignment, law requirements, and negative diagnostics complete |
 | `BRIDGE-REIFY-2A` | complete; proportional-green at `56a880c` | `BRIDGE-CONTRACT-1B` | reviewed formal ring bindings, bounded deterministic polynomial evaluation, canonical quotient representative invariance, realization construction, cover integration, and negative diagnostics complete |
 | `BRIDGE-COVER-3A` | complete; proportional-green at `792f3c4` | `BRIDGE-REIFY-2A`, current formal unimodular owner | exact right-associated finite families and existing unimodular/Zariski-cover constructors, with deterministic portable Core and active-backend emission |
-| `BRIDGE-LOCALIZATION-4A` | pending; next selected row | `BRIDGE-COVER-3A`, current formal localization owner | chart/localization realization, ambient maps, distinguished inverses, and overlap product localizations |
-| `BRIDGE-CECH-5A` | pending | `BRIDGE-LOCALIZATION-4A`, current diagram/Cech owner | ordered simplex and signed restriction realization into existing formal diagram/cochain structures |
+| `BRIDGE-LOCALIZATION-4A` | complete; proportional-green at `8f2e502` | `BRIDGE-COVER-3A`, current formal localization owner | assumption-explicit unit, universal localization, basic-open chart, and ordered dependent cover-localization family construction |
+| `BRIDGE-OVERLAP-4B` | pending; next selected row | `BRIDGE-LOCALIZATION-4A`, current product-localization owners | retain product-localization simplices and realize supplied formal overlap localizations without deriving universal data from CAS equations |
+| `BRIDGE-CECH-5A` | pending | `BRIDGE-OVERLAP-4B`, current diagram/Cech owner | ordered simplex and signed restriction realization into existing formal diagram/cochain structures |
 | `BRIDGE-EMISSION-6A` | pending | representative bridge consumer | deterministic explicit-Core declarations/workspaces and Lambdapi emission without handwritten semantic templates |
 | `BRIDGE-CONFORMANCE-7A` | pending | all preceding active rows | two concrete cover examples, focused TypeScript tests, deterministic snapshots, bounded Lambdapi checks, warning comparison, and final boundary audit |
 
@@ -276,6 +277,38 @@ synchronized decisions/results, and a local checkpoint.
 | `D-BRIDGE-016` | accepted | Formal finite families are represented exactly as the active `FiniteFamily` owner expects: structural naturals and right-associated `finite_family_nil`/`finite_family_cons`, preserving the computational cover order. |
 | `D-BRIDGE-017` | accepted | The cover adapter constructs the existing `comm_ring_unimodular_intro` and `comm_ring_zariski_cover_intro` terms through reviewed portable Core references; it adds neither a parallel formal cover owner nor a new `CoreOwnerId`. |
 | `D-BRIDGE-018` | accepted | A trusted-computation cover without an actual formal dot-product law is rejected at formal-term construction. The adapter never converts computational success into an equality inhabitant. |
+| `D-BRIDGE-019` | accepted | A computational adjoined inverse is reified into the selected formal target, but it yields `CommRingUnitEvidence` only with an actual formal inverse law. The computational Boolean equation never becomes a formal law automatically. |
+| `D-BRIDGE-020` | accepted | The whole `CommRingLocalizationAt` term is built from the realized unit and a separately supplied universal-factorization term via the existing property and localization constructors. Unit-only realizations remain explicitly available. |
+| `D-BRIDGE-021` | accepted | A formal localization realization retains source ring, target ring, localized element, canonical map, inverse, image, law, and universal data. Formal cover packaging additionally requires exact retained chart identity, formal source identity, element realization, and order. |
+| `D-BRIDGE-022` | accepted | Trusted localization computation carries neither an inverse-law term nor universal data and cannot build formal unit, localization, or chart terms. No opaque property or equality bridge is introduced. |
+
+## `BRIDGE-LOCALIZATION-4A` Result
+
+Assumption-explicit principal-localization realization is implemented in
+`src/v3_2/algebra_formal_localization.ts`. One realization aligns the retained
+computational source and target algebras with selected formal rings, reifies
+the localized element, distinguished inverse, and its computational image,
+and retains an explicit formal structure map.
+
+An actual inverse law constructs the existing `CommRingUnitEvidence`. A
+separately supplied universal-factorization term then constructs the existing
+`IsCommRingLocalizationAt`, `CommRingLocalizationAt`, and
+`affine_spec_basic_open_chart` terms. This layering deliberately permits a
+unit-only realization while refusing to infer the formal universal property
+from the CAS adjoined-inverse equation. At cover level, exact chart identity,
+formal source identity, generator realization, and order are checked before
+the existing dependent `CommRingLocalizationFamily` and
+`CommRingZariskiCoverFamily` constructors are built.
+
+Five focused tests cover exact portable and active owner names, unit-only
+realization, trusted/no-evidence behavior, ordered dependent cover packaging,
+deterministic emission, and foreign target/order/source failures. Together
+with affected cover, reifier, realization, and computational-localization
+suites, 27 tests pass, followed by workspace check, affected lint, root
+typecheck, and diff hygiene. `check:ts` was not run and no Lambdapi source
+changed.
+
+Semantic checkpoint: `8f2e502` (`bridge: realize formal localizations and charts`).
 
 ## `BRIDGE-COVER-3A` Result
 
