@@ -6,7 +6,8 @@ Plan-ID: `TS-EMDASH-AFFINE-FORMAL-BRIDGE`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `BRIDGE-AUDIT-1A` is complete; `BRIDGE-CONTRACT-1B` is the
-next dependency-ready row.
+complete and proportional-green; `BRIDGE-REIFY-2A` is the next
+dependency-ready row.
 
 Baseline: `5df79d356d003d3c1831ff1b93a2c593f299f75b`
 
@@ -241,8 +242,8 @@ Lambdapi text, and focused Lambdapi checking.
 | --- | --- | --- | --- |
 | `BRIDGE-PLAN-0` | complete | completed affine goal and reviewed recommendation | this living plan, dedicated branch/worktree, architecture, staged rows, validation policy, and Git limits |
 | `BRIDGE-AUDIT-1A` | complete; focused owner checks green | active TypeScript/Lambdapi authorities | exact owner map in `TYPESCRIPT_EMDASH_AFFINE_FORMAL_BRIDGE_OWNER_AUDIT.md`; algebraic Zariski cover selected; quotient/localization/scheme/Cech gaps and trust boundary classified |
-| `BRIDGE-CONTRACT-1B` | pending; next selected row | `BRIDGE-AUDIT-1A` | backend-neutral parent-aware realization contract, status boundary, deterministic generator/element reification interfaces, and negative diagnostics |
-| `BRIDGE-REIFY-2A` | pending | `BRIDGE-CONTRACT-1B` | canonical polynomial/quotient-element reifier into explicit Core with representative invariance and coefficient/generator coverage |
+| `BRIDGE-CONTRACT-1B` | complete; proportional-green at `bbccc06` | `BRIDGE-AUDIT-1A` | parent-aware formal algebra realization, explicit/checked/trusted status boundary, deterministic closed/meta-free element reification, cover alignment, law requirements, and negative diagnostics complete |
+| `BRIDGE-REIFY-2A` | pending; next selected row | `BRIDGE-CONTRACT-1B` | canonical polynomial/quotient-element reifier into explicit Core with representative invariance and coefficient/generator coverage |
 | `BRIDGE-COVER-3A` | pending | `BRIDGE-REIFY-2A`, current formal unimodular owner | concrete affine-cover adapter carrying ordered elements, coefficients, combination, and selected formal ring/algebra realization |
 | `BRIDGE-LOCALIZATION-4A` | pending | `BRIDGE-COVER-3A`, current formal localization owner | chart/localization realization, ambient maps, distinguished inverses, and overlap product localizations |
 | `BRIDGE-CECH-5A` | pending | `BRIDGE-LOCALIZATION-4A`, current diagram/Cech owner | ordered simplex and signed restriction realization into existing formal diagram/cochain structures |
@@ -264,6 +265,34 @@ synchronized decisions/results, and a local checkpoint.
 | `D-BRIDGE-005` | accepted | `AffineSchemePresentation` requires supplied structure-sheaf and localization-locality capabilities and is not derivable from the CAS affine presentation alone. |
 | `D-BRIDGE-006` | accepted | No concrete formal Čech owner exists in the active library; later work must use a genuinely suitable generic diagram owner or separately review one minimal consumer-driven owner. |
 | `D-BRIDGE-007` | accepted | Bridge terms use arbitrary reviewed Core free references, checked external signature mirrors, and deterministic backend remapping; no new `CoreOwnerId` or global Lambdapi binding is needed. |
+| `D-BRIDGE-008` | accepted | A formal algebra realization is structurally tied to one computational quotient identity, one closed meta-free formal ring term, one explicit status, and a parent-checked element reifier. |
+| `D-BRIDGE-009` | accepted | Cover realization calls the element reifier twice and requires byte-identical canonical Core, preventing stateful/nondeterministic callbacks from entering snapshots or emission. |
+| `D-BRIDGE-010` | accepted | Explicit-data and checked cover realizations require a closed meta-free law term. Trusted computation forbids a law term and exposes `formalCoverAvailable=false`. |
+| `D-BRIDGE-011` | accepted | The contract validates cover/algebra parent identity and exact generator/coefficient arity while retaining the original computational cover and equation status. |
+
+## `BRIDGE-CONTRACT-1B` Result
+
+The parent-aware computational/formal boundary is implemented in
+`src/v3_2/algebra_formal_realization.ts`. A realization binds one
+`AlgebraPresentedAlgebra` quotient identity to a closed meta-free formal ring
+Core term, an explicit status, and an element reifier. Reification rejects
+foreign quotient parents and invalid Core.
+
+The cover contract validates the ambient algebra, reifies generators and
+coefficients deterministically, checks arity, and enforces the trust boundary.
+Only explicit-data or checked realizations with an actual formal law report an
+available formal cover. Trusted computation remains non-formal metadata and
+cannot carry a law term.
+
+Six focused contract tests cover explicit and checked realizations, missing
+laws, trusted metadata, forbidden trusted laws, foreign cover/elements,
+nondeterministic reification, closed Core, immutability, and stable
+serialization. Together with affected affine-cover, explicit-Core, and scoped
+builder suites, 25 tests pass, followed by workspace check, affected lint,
+root typecheck, and diff hygiene. `check:ts` was not run and no Lambdapi source
+changed.
+
+Semantic checkpoint: `bbccc06` (`bridge: add affine formal realization contract`).
 
 ## `BRIDGE-AUDIT-1A` Result
 
