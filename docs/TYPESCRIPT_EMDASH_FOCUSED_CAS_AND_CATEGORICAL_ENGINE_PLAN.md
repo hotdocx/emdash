@@ -9,8 +9,9 @@ CAP-aware design reviewed; dedicated implementation branch/worktree created;
 `CAS-CONTRACT-1A` through `CAS-MATRIX-4A` implemented and
 proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
 focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
-implemented and focused-green; `CAS-FREYD-6B` is the next dependency-ready
-implementation row.
+implemented and focused-green; `CAS-FREYD-6B` is implemented and
+proportional-green; `CAS-HOMOLOGICAL-7A` is the next dependency-ready
+implementation row while `CAS-MODULE-4B2` remains a separate pending track.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -792,7 +793,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-DOCTRINE-5B` | complete; focused-green at `02ac3d0` | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
 | `CAS-TOWER-5C` | complete; focused-green at `dd910b0` | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
 | `CAS-COMPILER-6A` | complete; proportional-green at `c28da8f` | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
-| `CAS-FREYD-6B` | in progress | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | compiled Freyd/AdditiveClosure presentation agrees operationally with direct `PresentedModule` computations |
+| `CAS-FREYD-6B` | complete; proportional-green at `2f26a59` | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | native whole module kernel/cokernel operations, concrete Freyd/AdditiveClosure field-module model, direct-presentation reinterpretation, schema-preserving compiler bindings, retained reinterpretation rule, and structural agreement with direct `PresentedModule` computations; three Freyd and forty affected tests green |
 | `CAS-HOMOLOGICAL-7A` | pending | `CAS-FREYD-6B` | complexes, homology, connecting morphism, initial generalized-morphism and resolution algorithms |
 | `CAS-CONSTRUCTIBLE-8A` | pending | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | selected slice/poset/stable-poset/opposite/difference/union tower lowered to ideal and saturation operations |
 | `CAS-ORACLE-9A` | pending | one native representative consumer | opt-in Singular/Macaulay2/CAP-homalg differential oracle with no public semantic authority |
@@ -902,6 +903,38 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-056` | accepted | Categorical programs retain scoped input/node/output IR and never recover semantics from arbitrary TypeScript function ASTs. |
 | `D-CAS-057` | accepted | Compiler v1 resolves and records the selected category method, but lowers the whole operation only through an explicit input/output-schema-preserving algebra binding. |
 | `D-CAS-058` | accepted | Tower lowering rules are retained in compilation artifacts; callback inlining, box/unbox cancellation, fusion, routing, and optimization remain later explicit passes. |
+| `D-CAS-059` | accepted | Native field-module kernel and cokernel algebra operations reuse the exact input/output schemas of the categorical whole-construction owners, making compiler bindings explicit and schema-preserving rather than coercive. |
+| `D-CAS-060` | accepted | `PresentedModule` is the efficient public and executable reinterpretation of `Freyd(AdditiveClosure(RingCategory(F)))`; the tower remains explicit modeling/compiler metadata and does not impose runtime wrapper boxes. |
+| `D-CAS-061` | accepted | Reinterpretations are optional explicit compiler inputs whose rules are retained with constructor rules; compiler v1 rejects foreign public categories and duplicate rule identities but does not yet execute representation rewrites or optimization passes. |
+| `D-CAS-062` | accepted | The first Freyd acceptance boundary is structural computational agreement of the complete kernel/cokernel results with direct module algorithms; no proof certificate is required, and the generic Freyd tower remains additive rather than being mislabeled Abelian. |
+
+## `CAS-FREYD-6B` Result
+
+The first concrete CAP-style reinterpretation is implemented in
+`src/v3_2/algebra_freyd.ts`, with native whole module operations in
+`src/v3_2/algebra_module_reference_operations.ts`. For a field `F`, the model
+retains the `AdditiveClosure` then `Freyd` constructor tower and its matrix and
+presentation lowering rules, while exposing direct presentation matrices as
+the public and executable representation. The runtime therefore avoids
+constructing wrapper objects for the modeling tower.
+
+Whole categorical kernel and cokernel nodes bind to schema-identical native
+algebra operations and compile into `AlgebraComputationGraph`. The compilation
+artifact records the selected primitive categorical methods, both constructor
+rules, and the direct-presentation reinterpretation rule. Reinterpretation
+rules are retained metadata in this profile; callback inlining, representation
+rewrite execution, fusion, and optimization remain later explicit passes.
+
+Three focused Freyd tests cover tower/reinterpretation packaging, compiled
+kernel and cokernel execution, structural agreement of every retained whole
+result with direct `algebraModuleKernel` and `algebraModuleCokernel`
+computations, schema-preserving bindings, and rejection of missing bindings,
+duplicate compiler rules, and foreign reinterpretations. Together with the
+affected compiler, tower, category, module, graph, and reference-engine suites,
+43 tests pass, followed by workspace check, affected lint, root typecheck, and
+diff hygiene. No repository-wide aggregate was run.
+
+Semantic checkpoint: `2f26a59` (`cas: compile Freyd module constructions`).
 
 ## `CAS-COMPILER-6A` Result
 
