@@ -6,7 +6,8 @@ Plan-ID: `TS-EMDASH-AFFINE-ALGEBRAIC-GEOMETRY`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `AFFINE-QUOTIENT-1A` is complete and proportional-green;
-`AFFINE-MAPS-1B` is the next dependency-ready row.
+`AFFINE-MAPS-1B` is complete and proportional-green; `AFFINE-LOCALIZATION-2A`
+is the next dependency-ready row.
 
 Baseline: `1095fab1fd64de6a2793f6958721bedc4b550f21`
 
@@ -196,8 +197,8 @@ tests, define API semantics, or require `check:ts`.
 | --- | --- | --- | --- |
 | `AFFINE-PLAN-0` | complete | completed focused-CAS goal and reviewed continuation | this living plan, isolated branch/worktree, architecture, staged rows, validation policy, and Git limits |
 | `AFFINE-QUOTIENT-1A` | complete; proportional-green at `9b0a1e0` | CAS ideals, reduced Gröbner bases, membership | reduced-basis structural parents, whole reductions, canonical elements, arithmetic/equality, schemas/serialization, native operations, graphs, edge cases, cancellation, and real Singular smoke comparison complete |
-| `AFFINE-MAPS-1B` | pending; next selected row | `AFFINE-QUOTIENT-1A` | presented algebras and relation-checked algebra maps with identity, composition, application, and equality |
-| `AFFINE-LOCALIZATION-2A` | pending | `AFFINE-MAPS-1B` | principal localization by adjoining an inverse, canonical map/inverse data, and basic-open coordinate charts |
+| `AFFINE-MAPS-1B` | complete; proportional-green at `9ef4027` | `AFFINE-QUOTIENT-1A` | presented algebra wrappers, relation-checked generator-image maps, polynomial/element evaluation, identity/composition/equality, schemas, native application, graphs, and invalid-map diagnostics complete |
+| `AFFINE-LOCALIZATION-2A` | pending; next selected row | `AFFINE-MAPS-1B` | principal localization by adjoining an inverse, canonical map/inverse data, and basic-open coordinate charts |
 | `AFFINE-SCHEMES-2B` | pending | `AFFINE-LOCALIZATION-2A` | affine schemes, contravariant morphisms, closed immersions, basic-open immersions, and a strict computational category |
 | `AFFINE-TENSOR-3A` | pending | `AFFINE-MAPS-1B`, `AFFINE-SCHEMES-2B` | presented tensor products, universal maps, compatibility computations, and affine fiber products |
 | `AFFINE-COVERS-4A` | pending | `AFFINE-LOCALIZATION-2A`, existing unimodular covers | actual finite affine charts, overlaps, restriction maps, Cech nerve, and initial cochain data |
@@ -219,6 +220,34 @@ validation, synchronized decisions/results, and a local checkpoint.
 | `D-AFFINE-004` | accepted | The quotient layer exposes direct commutative-ring operations rather than pretending to implement the existing ordered-domain interface; a quotient ring has no canonical total order. |
 | `D-AFFINE-005` | accepted | Zero and unit ideals use the same representation and algorithms as every other quotient; in the unit quotient, zero and one compute equal without a special zero-ring branch. |
 | `D-AFFINE-006` | accepted | Singular is installed and the existing real radical-membership adapter was exercised successfully against it; external agreement remains focused non-authoritative evidence. |
+| `D-AFFINE-007` | accepted | A presented algebra is the canonical quotient owner from `AFFINE-QUOTIENT-1A`; the wrapper supplies algebraic role and variance without duplicating quotient normalization. |
+| `D-AFFINE-008` | accepted | A map is determined by one target quotient element for every ordered source polynomial generator, and construction evaluates every source ideal generator and requires canonical zero. |
+| `D-AFFINE-009` | accepted | Polynomial and quotient-element application uses exact substitution into target quotient arithmetic; identity uses source variables, composition substitutes the first map's generator images through the second, and equality compares canonical generator images. |
+| `D-AFFINE-010` | accepted | The first native map operation fixes one already-validated map and applies it to source quotient elements, preserving source/target schemas without serializing callbacks or decompiling TypeScript. |
+
+## `AFFINE-MAPS-1B` Result
+
+Finitely presented algebras and relation-checked maps are implemented in
+`src/v3_2/algebra_presented_algebra.ts`. A map retains source and target
+algebras, canonical target images for every ordered source generator, and the
+computed image of every source relation. Construction fails if any relation
+does not normalize to zero.
+
+Exact substitution applies maps to source polynomials and quotient elements.
+Identity, composition, and equality are defined entirely through canonical
+generator images. A stable map schema reconstructs and revalidates those
+images and relations. The native operation in
+`src/v3_2/algebra_presented_algebra_reference_operations.ts` applies one fixed
+validated map through the ordinary graph engine.
+
+Seven focused map tests cover valid and invalid relation images, generator
+arity, quotient-element application, identity, composition, canonical map
+equality, schemas, foreign elements, noncomposable maps, and retained graph
+execution. Together with affected quotient, graph, and reference-engine
+suites, 36 tests pass, followed by workspace check, affected lint, root
+typecheck, and diff hygiene. `check:ts` was not run.
+
+Semantic checkpoint: `9ef4027` (`affine: add relation-checked algebra maps`).
 
 ## `AFFINE-QUOTIENT-1A` Result
 
