@@ -776,7 +776,7 @@ elaborator adapter, or an optional proof-development adapter.
 | --- | --- | --- | --- |
 | `CAS-PLAN-0` | complete | reviewed design discussion and source audit | this living plan, branch/worktree identity, source baseline, architecture, decisions, validation, and launch prompt |
 | `CAS-CONTRACT-1A` | complete; proportional-green at `46b8fda` | `CAS-PLAN-0` | browser-safe immutable operation, engine, support, result-quality, execution-context, diagnostic, and reusable-artifact contracts; ten focused tests, workspace check, affected lint, typecheck, and diff hygiene green; no algorithm, process, logical-Core, or public-package dependency |
-| `CAS-GRAPH-1B` | complete; proportional-green; checkpoint candidate | `CAS-CONTRACT-1A` | typed backend-neutral input/node/output computation graph, immutable reconstruction, bounded validation, topology-only stable JSON, cancellation, exact-node diagnostics, and sequential direct-execution lowering; eleven focused graph tests plus the ten predecessor tests green |
+| `CAS-GRAPH-1B` | complete; proportional-green at `d6e2e00` | `CAS-CONTRACT-1A` | typed backend-neutral input/node/output computation graph, immutable reconstruction, bounded validation, topology-only stable JSON, cancellation, exact-node diagnostics, and sequential direct-execution lowering; eleven focused graph tests plus the ten predecessor tests green |
 | `CAS-EXACT-2A` | in progress | `CAS-GRAPH-1B` | exact integer/rational domains using `bigint`, normalization, arithmetic, serialization, and strict negatives |
 | `CAS-POLY-2B` | pending | `CAS-EXACT-2A` | parent-aware sparse multivariate polynomials, monomial orders, arithmetic, substitution, and division |
 | `CAS-ENGINE-2C` | pending | `CAS-POLY-2B` | native TypeScript reference engine executes selected exact and polynomial graph nodes with limits/cancellation |
@@ -903,6 +903,8 @@ under `D-CAS-018` and is not part of the acceptance evidence.
 
 The first graph profile is implemented in `src/v3_2/algebra_graph.ts` and is
 also confined to the contributor barrel. It provides:
+
+Semantic checkpoint: `d6e2e00` (`cas: add algebra computation graphs`).
 
 - typed graph-input and node-output tokens scoped to one builder identity;
 - globally distinct input/node IDs and distinct named-output IDs;
