@@ -780,7 +780,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-EXACT-2A` | complete; proportional-green at `36dc108` | `CAS-GRAPH-1B` | stable parent/element base; canonical bigint-only integers and reduced rationals; arithmetic, order, Euclidean division, gcd, powers, text/JSON serialization, runtime schemas, and immutable operational domains; twelve exact tests and all 33 focused CAS tests green |
 | `CAS-POLY-2B` | complete; proportional-green at `7b6b929` | `CAS-EXACT-2A` | coefficient-polymorphic parent-aware sparse multivariate polynomials; lex/grlex/grevlex, canonicalization, arithmetic, powers, substitution, stable serialization, runtime schema, and field-only ordered division; thirteen polynomial tests and all 46 focused CAS tests green |
 | `CAS-ENGINE-2C` | complete; proportional-green at `765aa32` | `CAS-POLY-2B` | native in-process TypeScript registry with multiple deterministic algorithms per exact operation contract; selected integer/rational and ring-specific polynomial operations, direct/graph execution, fuel, cancellation, progress, metadata, and output limits; ten engine tests and all 56 focused CAS tests green |
-| `CAS-IDEAL-3A` | complete; proportional-green; checkpoint candidate | `CAS-ENGINE-2C` | ordered polynomial ideals; deterministic monic Buchberger basis, retained generator transformations, reduced-basis postpass, positive/negative membership decomposition, schemas/serialization, bounded cancellation, native operations, and graph pipeline; eleven ideal tests and all 67 focused CAS tests green |
+| `CAS-IDEAL-3A` | complete; proportional-green at `58f51f2` | `CAS-ENGINE-2C` | ordered polynomial ideals; deterministic monic Buchberger basis, retained generator transformations, reduced-basis postpass, positive/negative membership decomposition, schemas/serialization, bounded cancellation, native operations, and graph pipeline; eleven ideal tests and all 67 focused CAS tests green |
 | `CAS-ZARISKI-3B` | in progress | `CAS-IDEAL-3A` | unimodular-combination computation and optional adapter to current Zariski-cover presentation |
 | `CAS-MATRIX-4A` | pending | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | exact matrices and selected row/column algorithms with explicit orientation conventions |
 | `CAS-MODULE-4B` | pending | `CAS-IDEAL-3A`, `CAS-MATRIX-4A` | free and finitely presented modules, morphisms, kernels/cokernels, and syzygies |
@@ -1023,6 +1023,8 @@ and diff hygiene.
 
 The first ideal layer is implemented in `src/v3_2/algebra_ideal.ts` and
 `src/v3_2/algebra_ideal_reference_operations.ts`. It provides:
+
+Semantic checkpoint: `58f51f2` (`cas: add polynomial ideals and Buchberger`).
 
 - ordered parent-checked polynomial ideals;
 - a deterministic transparent Buchberger reference algorithm;
