@@ -778,7 +778,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-PLAN-0` | complete | reviewed design discussion and source audit | this living plan, branch/worktree identity, source baseline, architecture, decisions, validation, and launch prompt |
 | `CAS-CONTRACT-1A` | complete; proportional-green at `46b8fda` | `CAS-PLAN-0` | browser-safe immutable operation, engine, support, result-quality, execution-context, diagnostic, and reusable-artifact contracts; ten focused tests, workspace check, affected lint, typecheck, and diff hygiene green; no algorithm, process, logical-Core, or public-package dependency |
 | `CAS-GRAPH-1B` | complete; proportional-green at `d6e2e00` | `CAS-CONTRACT-1A` | typed backend-neutral input/node/output computation graph, immutable reconstruction, bounded validation, topology-only stable JSON, cancellation, exact-node diagnostics, and sequential direct-execution lowering; eleven focused graph tests plus the ten predecessor tests green |
-| `CAS-EXACT-2A` | complete; proportional-green; checkpoint candidate | `CAS-GRAPH-1B` | stable parent/element base; canonical bigint-only integers and reduced rationals; arithmetic, order, Euclidean division, gcd, powers, text/JSON serialization, runtime schemas, and immutable operational domains; twelve exact tests and all 33 focused CAS tests green |
+| `CAS-EXACT-2A` | complete; proportional-green at `36dc108` | `CAS-GRAPH-1B` | stable parent/element base; canonical bigint-only integers and reduced rationals; arithmetic, order, Euclidean division, gcd, powers, text/JSON serialization, runtime schemas, and immutable operational domains; twelve exact tests and all 33 focused CAS tests green |
 | `CAS-POLY-2B` | in progress | `CAS-EXACT-2A` | parent-aware sparse multivariate polynomials, monomial orders, arithmetic, substitution, and division |
 | `CAS-ENGINE-2C` | pending | `CAS-POLY-2B` | native TypeScript reference engine executes selected exact and polynomial graph nodes with limits/cancellation |
 | `CAS-IDEAL-3A` | pending | `CAS-ENGINE-2C` | ideals, Buchberger reference implementation, reduction, membership, reduced bases, and retained transformations |
@@ -933,6 +933,8 @@ required by the scoped policy.
 
 The exact foundation is implemented in `src/v3_2/algebra_parent.ts` and
 `src/v3_2/algebra_exact.ts`. It remains contributor-only and provides:
+
+Semantic checkpoint: `36dc108` (`cas: add exact integer and rational domains`).
 
 - stable parent identities and parent-checked elements;
 - canonical integer and rational parents;
