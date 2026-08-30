@@ -77,7 +77,7 @@ const status = (value: unknown): AffineFormalRealizationStatus => {
     );
 };
 
-const checkedClosedTerm = (
+export const validateAffineFormalCoreTerm = (
     value: KernelExpression,
     path: string
 ): KernelExpression => {
@@ -136,7 +136,10 @@ export function defineAffineFormalAlgebraRealization<
             'Formal algebra realization requires one element reifier'
         );
     }
-    const formalRing = checkedClosedTerm(input.formalRing, 'formalRealization.formalRing');
+    const formalRing = validateAffineFormalCoreTerm(
+        input.formalRing,
+        'formalRealization.formalRing'
+    );
     const selectedStatus = status(input.status);
     const quotientId = input.algebra.quotient.identity.id;
     const reify = (element: AlgebraQuotientElement<P, C, I>): KernelExpression => {
@@ -148,7 +151,7 @@ export function defineAffineFormalAlgebraRealization<
                 'Element belongs to a foreign computational quotient parent'
             );
         }
-        return checkedClosedTerm(
+        return validateAffineFormalCoreTerm(
             input.reifyElement(element),
             'formalRealization.reifiedElement'
         );
@@ -259,7 +262,7 @@ export function defineAffineFormalCoverRealization<
                 'Explicit or checked cover realization requires a formal law term'
             );
         }
-        lawTerm = checkedClosedTerm(input.lawTerm, 'formalCover.lawTerm');
+        lawTerm = validateAffineFormalCoreTerm(input.lawTerm, 'formalCover.lawTerm');
     }
     return Object.freeze({
         profileRevision: ALGEBRA_FORMAL_REALIZATION_PROFILE.revision,
