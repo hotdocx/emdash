@@ -1,7 +1,7 @@
 /** Finite affine basic-open covers and initial Cech nerve/cochain data. */
 
 import { AlgebraElement, AlgebraParent, sameAlgebraParent } from './algebra_parent';
-import { algebraPolynomialIdeal } from './algebra_ideal';
+import { AlgebraGroebnerOptions, algebraPolynomialIdeal } from './algebra_ideal';
 import { AlgebraUnimodularCombination, algebraUnimodularCombination } from './algebra_zariski';
 import {
     AlgebraQuotientElement,
@@ -130,7 +130,8 @@ export function algebraAffineCover<
 >(
     ambient: AlgebraAffineScheme<P, C, I>,
     elementInput: readonly AlgebraQuotientElement<P, C, I>[],
-    maximumDegreeInput: number = ALGEBRA_CECH_PROFILE.defaultMaximumDegree
+    maximumDegreeInput: number = ALGEBRA_CECH_PROFILE.defaultMaximumDegree,
+    options: AlgebraGroebnerOptions = {}
 ): AlgebraAffineCover<P, C, I> {
     if (!Number.isSafeInteger(maximumDegreeInput) || maximumDegreeInput < 0 ||
         maximumDegreeInput > ALGEBRA_CECH_PROFILE.maximumDegree) {
@@ -159,7 +160,7 @@ export function algebraAffineCover<
             ...elements.map(element => element.representative)
         ]
     );
-    const unimodular = algebraUnimodularCombination(combinedIdeal);
+    const unimodular = algebraUnimodularCombination(combinedIdeal, options);
     if (!unimodular.unimodular) {
         return fail(
             'NOT_A_COVER',
@@ -189,7 +190,7 @@ export function algebraAffineCover<
                 degree: size - 1,
                 indices: Object.freeze(indices),
                 product,
-                chart: algebraBasicOpenAffineSubscheme(ambient, product)
+                chart: algebraBasicOpenAffineSubscheme(ambient, product, options)
             }));
         });
     }
