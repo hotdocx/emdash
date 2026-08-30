@@ -787,7 +787,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-MATRIX-4A` | complete; proportional-green at `442cbff` | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | structural exact matrix spaces; immutable row-major arithmetic, transpose, composition, RREF with left transformation, column-kernel basis, schemas/serialization, field/limit/cancellation gates, native operations, and transpose graph; nine tests and all 85 focused CAS tests green |
 | `CAS-MODULE-4B1` | complete; focused-green at `707a7da` | `CAS-MATRIX-4A` | field-linear free/presented modules, relation-witnessed morphisms and composition, quotient projection/section realization, free kernels, presented cokernels, and matrix syzygies; seven module and nine affected matrix tests green |
 | `CAS-MODULE-4B2` | pending | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | polynomial-module term orders, module Groebner bases, Schreyer syzygies, finitely presented polynomial modules, and first free resolutions |
-| `CAS-CATEGORY-5A` | pending | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | minimal strict computable-category runtime, ring-as-category, matrix/free-module category, primitive/derived registry |
+| `CAS-CATEGORY-5A` | in progress; core registry focused-green; checkpoint candidate | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict computable-category shell and weighted primitive/derived registry implemented; ring-as-category and field-module category consumers remain before row completion |
 | `CAS-DOCTRINE-5B` | pending | `CAS-CATEGORY-5A` | preadditive, additive, pre-Abelian, and Abelian doctrine descriptors with dual metadata |
 | `CAS-TOWER-5C` | pending | `CAS-DOCTRINE-5B` | Opposite, AdditiveClosure, Freyd, and reinterpretation descriptors with retained lowering data |
 | `CAS-COMPILER-6A` | pending | `CAS-TOWER-5C` | retained categorical-program IR and first specialization/lowering passes to algebra graph |
@@ -889,6 +889,18 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-044` | accepted | A field-linear presentation is `R^r -> R^g -> M -> 0` with relation columns; a morphism retains `F*R_source = R_target*W`. |
 | `D-CAS-045` | accepted | Quotient coordinates use a left-annihilator projection with an explicit section; field-linear kernels are lifted from the induced quotient-coordinate matrix. |
 | `D-CAS-046` | accepted | A morphism cokernel appends the morphism columns to target relations; polynomial-module kernels/cokernels remain gated on module Groebner machinery. |
+| `D-CAS-047` | accepted | Additional categorical operations use immutable primitive/derived methods; planning recursively selects least total declared weight with deterministic method-ID ties and rejects cycles/unavailable prerequisites. |
+
+## `CAS-CATEGORY-5A` In-Progress Result
+
+The first category-runtime subtranche is implemented in
+`src/v3_2/algebra_category.ts`. It provides strict category identity and
+composition hooks, typed operation schemas, immutable primitive/derived
+methods, weighted recursive planning with retained prerequisite trees, and
+normalized execution. Two focused tests cover cheaper derived selection,
+nested calls, unavailability, duplicate methods, and derivation cycles.
+Ring-as-category and field-module category instances remain required before
+this ledger row is complete.
 
 ## `CAS-MODULE-4B1` Result
 
