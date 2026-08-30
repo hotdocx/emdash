@@ -40,6 +40,7 @@ export * from './algebra_homological_reference_operations';
 export * from './algebra_polynomial_module';
 export * from './algebra_polynomial_presentation';
 export * from './algebra_polynomial_module_reference_operations';
+export * from './algebra_ideal_geometry';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
