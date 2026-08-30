@@ -30,6 +30,7 @@ export * from './algebra_category';
 export * from './algebra_category_instances';
 export * from './algebra_doctrine';
 export * from './algebra_tower';
+export * from './algebra_categorical_program';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';

@@ -8,8 +8,8 @@ Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
 `CAS-CONTRACT-1A` through `CAS-MATRIX-4A` implemented and
 proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
-focused-green; `CAS-DOCTRINE-5B` and `CAS-TOWER-5C` are implemented and
-focused-green; `CAS-COMPILER-6A` is the next dependency-ready
+focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
+implemented and focused-green; `CAS-FREYD-6B` is the next dependency-ready
 implementation row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
@@ -791,8 +791,8 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-CATEGORY-5A` | complete; proportional-green at `64b4c7c` (core `90cfca0`) | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict category shell, weighted primitive/derived registry, ring-as-one-object category, and presented-field-module category with primitive whole kernels/cokernels and derived object projections; four category and sixteen affected module/matrix tests green |
 | `CAS-DOCTRINE-5B` | complete; focused-green at `02ac3d0` | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
 | `CAS-TOWER-5C` | complete; focused-green at `dd910b0` | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
-| `CAS-COMPILER-6A` | in progress | `CAS-TOWER-5C` | retained categorical-program IR and first specialization/lowering passes to algebra graph |
-| `CAS-FREYD-6B` | pending | `CAS-COMPILER-6A`, `CAS-MODULE-4B` | compiled Freyd/AdditiveClosure presentation agrees operationally with direct `PresentedModule` computations |
+| `CAS-COMPILER-6A` | complete; proportional-green; checkpoint candidate | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
+| `CAS-FREYD-6B` | in progress | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | compiled Freyd/AdditiveClosure presentation agrees operationally with direct `PresentedModule` computations |
 | `CAS-HOMOLOGICAL-7A` | pending | `CAS-FREYD-6B` | complexes, homology, connecting morphism, initial generalized-morphism and resolution algorithms |
 | `CAS-CONSTRUCTIBLE-8A` | pending | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | selected slice/poset/stable-poset/opposite/difference/union tower lowered to ideal and saturation operations |
 | `CAS-ORACLE-9A` | pending | one native representative consumer | opt-in Singular/Macaulay2/CAP-homalg differential oracle with no public semantic authority |
@@ -899,6 +899,22 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-053` | accepted | Generic Freyd adds the operational cokernel role but remains in the additive doctrine; stronger pre-Abelian/Abelian claims require additional capabilities or a concrete qualified reinterpretation. |
 | `D-CAS-054` | accepted | Opposite categories execute reversed source/target and composition while opposite descriptors route through doctrine duality; Freyd and CoFreyd are explicit dual constructors. |
 | `D-CAS-055` | accepted | Reinterpretation retains public/model conversion functions and lowering rules as compiler input; roundtrip equality is consumer-tested rather than silently assumed by the descriptor. |
+| `D-CAS-056` | accepted | Categorical programs retain scoped input/node/output IR and never recover semantics from arbitrary TypeScript function ASTs. |
+| `D-CAS-057` | accepted | Compiler v1 resolves and records the selected category method, but lowers the whole operation only through an explicit input/output-schema-preserving algebra binding. |
+| `D-CAS-058` | accepted | Tower lowering rules are retained in compilation artifacts; callback inlining, box/unbox cancellation, fusion, routing, and optimization remain later explicit passes. |
+
+## `CAS-COMPILER-6A` Result
+
+The first staged compiler is implemented in
+`src/v3_2/algebra_categorical_program.ts`. It provides a scoped retained
+categorical-program builder, typed category-operation nodes, named outputs,
+method-resolution traces, explicit category-to-algebra operation bindings,
+tower-rule retention, lowering into `AlgebraComputationGraph`, and execution
+through the native engine. Three compiler tests cover an executable retained
+double-negation program, module-tower rule retention, and missing/duplicate/
+foreign lowering failures. Together with the affected tower, category, graph,
+and engine suites, 33 tests pass, followed by workspace check, affected lint,
+root typecheck, and diff hygiene.
 
 ## `CAS-TOWER-5C` Result
 
