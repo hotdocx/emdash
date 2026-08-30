@@ -258,6 +258,7 @@ import './v3_2_lf_fragment_module_workspace_authoring_tests';
 import './v3_2_lf_fragment_workspace_proof_tests';
 import './v3_2_lf_fragment_proof_development_tests';
 import './v3_2_lf_declared_theorem_development_tests';
+import './v3_2_algebra_engine_tests';
 import './v3_2_lf_module_theorem_development_tests';
 import './v3_2_lf_module_theorem_authoring_tests';
 import './v3_2_lf_declaration_fragment_authoring_tests';
