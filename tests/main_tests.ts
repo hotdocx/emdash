@@ -283,6 +283,7 @@ import './v3_2_algebra_ideal_geometry_tests';
 import './v3_2_algebra_constructible_tests';
 import './v3_2_algebra_constructible_category_tests';
 import './v3_2_algebra_oracle_tests';
+import './v3_2_algebra_quotient_tests';
 import './v3_2_lf_module_theorem_development_tests';
 import './v3_2_lf_module_theorem_authoring_tests';
 import './v3_2_lf_declaration_fragment_authoring_tests';

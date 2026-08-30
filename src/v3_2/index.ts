@@ -46,6 +46,8 @@ export * from './algebra_constructible_tower';
 export * from './algebra_constructible_category';
 export * from './algebra_oracle';
 export * from './algebra_oracle_node';
+export * from './algebra_quotient';
+export * from './algebra_quotient_reference_operations';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
