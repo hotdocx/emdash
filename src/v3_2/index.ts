@@ -37,6 +37,7 @@ export * from './algebra_homological';
 export * from './algebra_generalized';
 export * from './algebra_resolution';
 export * from './algebra_homological_reference_operations';
+export * from './algebra_polynomial_module';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
