@@ -12,7 +12,7 @@ focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
 implemented and focused-green; `CAS-FREYD-6B` is implemented and
 proportional-green; `CAS-HOMOLOGICAL-7A` is complete and proportional-green;
 `CAS-MODULE-4B2` is complete and proportional-green; the first
-`CAS-CONSTRUCTIBLE-8A1` ideal-geometry tranche is implemented and
+`CAS-CONSTRUCTIBLE-8A1` and `8A2` tranches are implemented and
 proportional-green while the larger constructible row remains in progress.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
@@ -797,7 +797,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-COMPILER-6A` | complete; proportional-green at `c28da8f` | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
 | `CAS-FREYD-6B` | complete; proportional-green at `2f26a59` | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | native whole module kernel/cokernel operations, concrete Freyd/AdditiveClosure field-module model, direct-presentation reinterpretation, schema-preserving compiler bindings, retained reinterpretation rule, and structural agreement with direct `PresentedModule` computations; three Freyd and forty affected tests green |
 | `CAS-HOMOLOGICAL-7A` | complete; `7A1` `66ed5a8`, `7A2` `8b97bad`, `7A3` `5f22b08`, `7A4` `3961bc5`, `7A5` `052032a`, `7A6` `ab68a11` green | `CAS-FREYD-6B` | quotient-aware universal operations, bounded complexes, whole/functorial/connecting homology, initial generalized spans, field resolutions, and native graph operations complete; broader representations and polynomial resolutions remain separately gated |
-| `CAS-CONSTRUCTIBLE-8A` | in progress; `8A1` proportional-green at `d4ccd34` | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | ideal sum/product/intersection, principal saturation, radical membership/equivalence, and retained elimination data complete; locally closed/constructible values, tower reinterpretation, and native graph/compiler lowering remain |
+| `CAS-CONSTRUCTIBLE-8A` | in progress; `8A1` `d4ccd34`, `8A2` `ec81ba3` green | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | elimination ideal operations and saturation-normalized locally closed/finite constructible Boolean sets complete; tower reinterpretation, computable-category surface, and native graph/compiler lowering remain |
 | `CAS-ORACLE-9A` | pending | one native representative consumer | opt-in Singular/Macaulay2/CAP-homalg differential oracle with no public semantic authority |
 | `CAS-FORMAL-BRIDGE-10` | deferred | concrete formal consumer | selected computational realization, trusted-computation marker, or checked-proof adapter; not a CAS prerequisite |
 
@@ -940,6 +940,32 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-091` | accepted | Principal saturation `I:f^infinity` is computed by eliminating `t` from `I + (1-tf)`, with no bounded exponent guess or repeated-colon heuristic. |
 | `D-CAS-092` | accepted | Radical membership uses Rabinowitsch unit membership in `I + (1-tf)` and retains the complete unit decomposition; radical equivalence checks both generator families and retains every directional membership result. |
 | `D-CAS-093` | accepted | These elimination results are computational data for the constructible engine, not formal radical-ideal or scheme-theoretic proof evidence; formal adoption remains consumer-gated. |
+| `D-CAS-094` | accepted | A basic locally closed piece is `V(I) intersect D(f)` normalized immediately to `V(I:f^infinity) intersect D(f)`; emptiness is retained radical membership `f in sqrt(I:f^infinity)`. |
+| `D-CAS-095` | accepted | Constructible values are finite unions of nonempty normalized pieces. Intersection uses ideal sum and open-product; difference expands the complement of `V(J) intersect D(g)` into the basic opens of generators of `J` plus the closed branch `V(g)`. |
+| `D-CAS-096` | accepted | Constructible equality is mutual finite-difference emptiness with both differences retained; presentation-list equality, ad hoc sorting, or unproved deduplication is not used as set equality. |
+
+## `CAS-CONSTRUCTIBLE-8A2` Result
+
+Saturation-normalized locally closed pieces and finite constructible sets are
+implemented in `src/v3_2/algebra_constructible.ts`. Each piece retains its
+source ideal, open polynomial, whole saturation computation, normalized closed
+ideal, whole radical-emptiness computation, and Boolean projection. Empty
+pieces are removed when assembling a finite constructible union.
+
+Union concatenates normalized pieces. Pairwise intersection computes
+`V(I+J) intersect D(fg)`. Difference expands each subtracted piece using its
+closed generators and open complement, normalizing every resulting piece;
+complement is difference from the full affine set. Equivalence retains both
+directional differences and succeeds exactly when both are empty.
+
+Four focused tests cover `V(xy) intersect D(x)=V(y) intersect D(x)`, empty
+`V(x) intersect D(x)`, `V(x) union D(x)=A^2`, complementary differences,
+disjoint intersection, mutual-difference inequality, immutability, and
+foreign-ring rejection. Together with elimination, ideal, and Zariski suites,
+29 tests pass, followed by workspace check, affected lint, root typecheck, and
+diff hygiene. No repository-wide aggregate was run.
+
+Semantic checkpoint: `ec81ba3` (`cas: add constructible Boolean sets`).
 
 ## `CAS-CONSTRUCTIBLE-8A1` Result
 
