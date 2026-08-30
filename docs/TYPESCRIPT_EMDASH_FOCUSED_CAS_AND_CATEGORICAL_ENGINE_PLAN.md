@@ -8,7 +8,8 @@ Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
 `CAS-CONTRACT-1A` through `CAS-MATRIX-4A` implemented and
 proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
-focused-green; `CAS-DOCTRINE-5B` is the next dependency-ready
+focused-green; `CAS-DOCTRINE-5B` is implemented and focused-green;
+`CAS-TOWER-5C` is the next dependency-ready
 implementation row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
@@ -788,8 +789,8 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-MODULE-4B1` | complete; focused-green at `707a7da` | `CAS-MATRIX-4A` | field-linear free/presented modules, relation-witnessed morphisms and composition, quotient projection/section realization, free kernels, presented cokernels, and matrix syzygies; seven module and nine affected matrix tests green |
 | `CAS-MODULE-4B2` | pending | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | polynomial-module term orders, module Groebner bases, Schreyer syzygies, finitely presented polynomial modules, and first free resolutions |
 | `CAS-CATEGORY-5A` | complete; proportional-green at `64b4c7c` (core `90cfca0`) | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict category shell, weighted primitive/derived registry, ring-as-one-object category, and presented-field-module category with primitive whole kernels/cokernels and derived object projections; four category and sixteen affected module/matrix tests green |
-| `CAS-DOCTRINE-5B` | in progress | `CAS-CATEGORY-5A` | preadditive, additive, pre-Abelian, and Abelian doctrine descriptors with dual metadata |
-| `CAS-TOWER-5C` | pending | `CAS-DOCTRINE-5B` | Opposite, AdditiveClosure, Freyd, and reinterpretation descriptors with retained lowering data |
+| `CAS-DOCTRINE-5B` | complete; focused-green; checkpoint candidate | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
+| `CAS-TOWER-5C` | in progress | `CAS-DOCTRINE-5B` | Opposite, AdditiveClosure, Freyd, and reinterpretation descriptors with retained lowering data |
 | `CAS-COMPILER-6A` | pending | `CAS-TOWER-5C` | retained categorical-program IR and first specialization/lowering passes to algebra graph |
 | `CAS-FREYD-6B` | pending | `CAS-COMPILER-6A`, `CAS-MODULE-4B` | compiled Freyd/AdditiveClosure presentation agrees operationally with direct `PresentedModule` computations |
 | `CAS-HOMOLOGICAL-7A` | pending | `CAS-FREYD-6B` | complexes, homology, connecting morphism, initial generalized-morphism and resolution algorithms |
@@ -892,6 +893,20 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-047` | accepted | Additional categorical operations use immutable primitive/derived methods; planning recursively selects least total declared weight with deterministic method-ID ties and rejects cycles/unavailable prerequisites. |
 | `D-CAS-048` | accepted | Ring-as-category is a strict one-object runtime category whose endomorphisms are coefficient elements, identity is one, and composition is multiplication. |
 | `D-CAS-049` | accepted | Presented-field-module kernels and cokernels are primitive whole operations; kernel-object and cokernel-object are derived registry methods depending on those whole owners. |
+| `D-CAS-050` | accepted | Doctrine descriptors are operational metadata with inherited required roles and involutive dual mappings; they do not constitute LF evidence. |
+| `D-CAS-051` | accepted | Doctrine qualification succeeds only when every inherited role is explicitly bound to a plannable category operation; missing roles are retained rather than inferred from category names. |
+
+## `CAS-DOCTRINE-5B` Result
+
+Operational doctrine metadata is implemented in `src/v3_2/algebra_doctrine.ts`.
+It provides validated acyclic hierarchies, involutive doctrine and role
+duality, inherited capability-role closure, explicit role bindings, and
+qualified/missing reports based on actual operation planning. The base
+registry contains Category, Preadditive, Additive, Pre-Abelian, and Abelian
+descriptors. Four focused doctrine tests cover hierarchy/duality, honest
+missing-role reporting for the module category, complete qualification, and
+cycle/non-involutive rejection; the four affected category tests also pass,
+followed by workspace check, affected lint, root typecheck, and diff hygiene.
 
 ## `CAS-CATEGORY-5A` In-Progress Result
 
