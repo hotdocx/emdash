@@ -7,7 +7,8 @@ Plan-ID: `TS-EMDASH-AFFINE-ALGEBRAIC-GEOMETRY`
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `AFFINE-QUOTIENT-1A` is complete and proportional-green;
 `AFFINE-MAPS-1B` is complete and proportional-green; `AFFINE-LOCALIZATION-2A`
-is the next dependency-ready row.
+is complete and proportional-green; `AFFINE-SCHEMES-2B` is the next
+dependency-ready row.
 
 Baseline: `1095fab1fd64de6a2793f6958721bedc4b550f21`
 
@@ -198,8 +199,8 @@ tests, define API semantics, or require `check:ts`.
 | `AFFINE-PLAN-0` | complete | completed focused-CAS goal and reviewed continuation | this living plan, isolated branch/worktree, architecture, staged rows, validation policy, and Git limits |
 | `AFFINE-QUOTIENT-1A` | complete; proportional-green at `9b0a1e0` | CAS ideals, reduced Gröbner bases, membership | reduced-basis structural parents, whole reductions, canonical elements, arithmetic/equality, schemas/serialization, native operations, graphs, edge cases, cancellation, and real Singular smoke comparison complete |
 | `AFFINE-MAPS-1B` | complete; proportional-green at `9ef4027` | `AFFINE-QUOTIENT-1A` | presented algebra wrappers, relation-checked generator-image maps, polynomial/element evaluation, identity/composition/equality, schemas, native application, graphs, and invalid-map diagnostics complete |
-| `AFFINE-LOCALIZATION-2A` | pending; next selected row | `AFFINE-MAPS-1B` | principal localization by adjoining an inverse, canonical map/inverse data, and basic-open coordinate charts |
-| `AFFINE-SCHEMES-2B` | pending | `AFFINE-LOCALIZATION-2A` | affine schemes, contravariant morphisms, closed immersions, basic-open immersions, and a strict computational category |
+| `AFFINE-LOCALIZATION-2A` | complete; proportional-green at `5954407` | `AFFINE-MAPS-1B` | fresh adjoined-inverse presentation, embedded source relations, canonical map, distinguished inverse/equation, basic-open chart, native operation/context, graph, and unit/nilpotent/foreign/collision cases complete |
+| `AFFINE-SCHEMES-2B` | pending; next selected row | `AFFINE-LOCALIZATION-2A` | affine schemes, contravariant morphisms, closed immersions, basic-open immersions, and a strict computational category |
 | `AFFINE-TENSOR-3A` | pending | `AFFINE-MAPS-1B`, `AFFINE-SCHEMES-2B` | presented tensor products, universal maps, compatibility computations, and affine fiber products |
 | `AFFINE-COVERS-4A` | pending | `AFFINE-LOCALIZATION-2A`, existing unimodular covers | actual finite affine charts, overlaps, restriction maps, Cech nerve, and initial cochain data |
 | `AFFINE-GRAPH-5A` | pending | one representative consumer from each preceding layer | native operation bundles, computation graphs, affine category/tower metadata, direct reinterpretations, and staged compilation |
@@ -224,6 +225,33 @@ validation, synchronized decisions/results, and a local checkpoint.
 | `D-AFFINE-008` | accepted | A map is determined by one target quotient element for every ordered source polynomial generator, and construction evaluates every source ideal generator and requires canonical zero. |
 | `D-AFFINE-009` | accepted | Polynomial and quotient-element application uses exact substitution into target quotient arithmetic; identity uses source variables, composition substitutes the first map's generator images through the second, and equality compares canonical generator images. |
 | `D-AFFINE-010` | accepted | The first native map operation fixes one already-validated map and applies it to source quotient elements, preserving source/target schemas without serializing callbacks or decompiling TypeScript. |
+| `D-AFFINE-011` | accepted | Principal localization of `A` at canonical `f` is presented by extending the source polynomial variables with one fresh inverse variable and adjoining embedded source relations plus `t f - 1`. |
+| `D-AFFINE-012` | accepted | The whole localization retains the extended ring/algebra, canonical map, distinguished inverse, image of `f`, their product, and the canonical equality-to-one projection. |
+| `D-AFFINE-013` | accepted | Units, zero, and nilpotents use the same quotient construction; inverting a nilpotent computes the zero algebra through ordinary Gröbner normalization rather than a special emptiness branch. |
+| `D-AFFINE-014` | accepted | A basic-open chart is the whole localization plus its coordinate algebra. The native operation fixes the source algebra, passes execution context into Gröbner work, and returns the whole result through a retained graph. |
+
+## `AFFINE-LOCALIZATION-2A` Result
+
+Principal localizations and basic-open charts are implemented in
+`src/v3_2/algebra_localization.ts`. The implementation chooses a fresh inverse
+variable, embeds the source presentation, adds `t f - 1`, computes the new
+canonical quotient, and constructs the source algebra map from the original
+generators. It retains the distinguished inverse and checks its product with
+the image of `f` against canonical one.
+
+The construction uniformly handles localization at a unit and at a nilpotent;
+the latter yields the zero quotient algebra. Canonically equal source elements
+produce one localization parent identity, and source variables already named
+`emdash_inv` trigger a deterministic fresh suffix.
+
+The native source-specific operation in
+`src/v3_2/algebra_localization_reference_operations.ts` passes the computation
+context to Gröbner construction and returns the whole localization in a graph.
+Seven focused localization tests plus affected presented-map, quotient, and
+ideal suites give 33 passing tests, followed by workspace check, affected lint,
+root typecheck, and diff hygiene. `check:ts` was not run.
+
+Semantic checkpoint: `5954407` (`affine: add principal localizations`).
 
 ## `AFFINE-MAPS-1B` Result
 
