@@ -44,6 +44,8 @@ export * from './algebra_ideal_geometry';
 export * from './algebra_constructible';
 export * from './algebra_constructible_tower';
 export * from './algebra_constructible_category';
+export * from './algebra_oracle';
+export * from './algebra_oracle_node';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
