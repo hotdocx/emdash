@@ -10,7 +10,7 @@ CAP-aware design reviewed; dedicated implementation branch/worktree created;
 proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
 focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
 implemented and focused-green; `CAS-FREYD-6B` is implemented and
-proportional-green; `CAS-HOMOLOGICAL-7A1` through `7A3` are implemented and
+proportional-green; `CAS-HOMOLOGICAL-7A1` through `7A4` are implemented and
 proportional-green while the larger `CAS-HOMOLOGICAL-7A` row remains in
 progress and `CAS-MODULE-4B2` remains a separate pending track.
 
@@ -795,7 +795,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-TOWER-5C` | complete; focused-green at `dd910b0` | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
 | `CAS-COMPILER-6A` | complete; proportional-green at `c28da8f` | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
 | `CAS-FREYD-6B` | complete; proportional-green at `2f26a59` | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | native whole module kernel/cokernel operations, concrete Freyd/AdditiveClosure field-module model, direct-presentation reinterpretation, schema-preserving compiler bindings, retained reinterpretation rule, and structural agreement with direct `PresentedModule` computations; three Freyd and forty affected tests green |
-| `CAS-HOMOLOGICAL-7A` | in progress; `7A1` `66ed5a8`, `7A2` `8b97bad`, `7A3` `5f22b08` green | `CAS-FREYD-6B` | quotient-aware universal operations, bounded complexes, whole/functorial homology, degreewise short exact sequences, and connecting morphisms complete; generalized morphisms and bounded resolution algorithms remain |
+| `CAS-HOMOLOGICAL-7A` | in progress; `7A1` `66ed5a8`, `7A2` `8b97bad`, `7A3` `5f22b08`, `7A4` `3961bc5` green | `CAS-FREYD-6B` | quotient-aware universal operations, bounded complexes, whole/functorial homology, connecting morphisms, and initial generalized spans complete; bounded field-linear resolution algorithms remain |
 | `CAS-CONSTRUCTIBLE-8A` | pending | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | selected slice/poset/stable-poset/opposite/difference/union tower lowered to ideal and saturation operations |
 | `CAS-ORACLE-9A` | pending | one native representative consumer | opt-in Singular/Macaulay2/CAP-homalg differential oracle with no public semantic authority |
 | `CAS-FORMAL-BRIDGE-10` | deferred | concrete formal consumer | selected computational realization, trusted-computation marker, or checked-proof adapter; not a CAS prerequisite |
@@ -918,6 +918,40 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-070` | accepted | A deterministic lift through an epimorphism is exposed only for presented modules over the current field-linear category, where RREF supplies a right inverse; recomposition is checked on quotient coordinates and no corresponding claim is made for arbitrary module categories. |
 | `D-CAS-071` | accepted | A short exact sequence of bounded complexes consists of two already-validated chain maps plus computed degreewise exactness data: the projection kernel, inverse identifications with the included subobject, and a projection section. No independent hand-written commuting-square witness is stored. |
 | `D-CAS-072` | accepted | The connecting map `H_n(C) -> H_(n-1)(A)` retains the quotient-cycle lift, middle boundary, lift into the projection kernel, transport through the retained kernel/subobject identification, target-cycle lift, and final boundary descent. |
+| `D-CAS-073` | accepted | Initial generalized morphisms use CAP's span shape `A <- D -> B` with a monic source aid; three-arrow, cospan, pseudo-inverse, common-restriction, and Serre-quotient semantics remain explicit later work rather than aliases for this subset. |
+| `D-CAS-074` | accepted | Span composition uses a whole field-module pullback retaining both projections, the comparison matrix, its kernel basis, and a universal lift; composition retains the pullback artifact instead of erasing directly to a resulting span. |
+| `D-CAS-075` | accepted | Honest module maps embed as identity-source spans. An honest representative is returned only when the source aid has full domain; partial spans remain partial and are not extended by an arbitrary complement. |
+
+## `CAS-HOMOLOGICAL-7A4` Result
+
+The initial generalized-morphism layer is implemented in
+`src/v3_2/algebra_generalized.ts`. It follows CAP's span representation:
+
+```text
+A <-sourceAid- D -arrow-> B
+```
+
+where the source aid is computationally checked to be monic. The layer also
+implements a whole pullback of presented field-module maps and its universal
+lift. Pullbacks are computed on quotient coordinates as kernels of
+`[left, -right]`, then projected back to the presented modules through their
+retained quotient realizations.
+
+Composition forms the pullback of the first span's arrow and the second
+span's source aid. The whole composition retains both input spans, the
+pullback, and the resulting span. Honest morphisms embed with identity source
+aid, and compositions of honest spans recover direct composition. A partial
+domain remains partial under composition; requesting an honest representative
+requires the source aid to be onto as well as monic.
+
+Three generalized-span tests cover the pullback square and universal lift,
+honest embedding/composition/identity, partial-domain composition, and
+rejection of invalid source aids, noncomposable spans, invalid cones, and
+honest representatives for partial maps. Together with the affected module
+and matrix suites, 22 tests pass, followed by workspace check, affected lint,
+root typecheck, and diff hygiene. No repository-wide aggregate was run.
+
+Semantic checkpoint: `3961bc5` (`cas: add generalized module spans`).
 
 ## `CAS-HOMOLOGICAL-7A3` Result
 
