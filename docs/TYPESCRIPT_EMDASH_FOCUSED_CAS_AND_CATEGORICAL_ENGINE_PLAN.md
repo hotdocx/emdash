@@ -10,9 +10,9 @@ CAP-aware design reviewed; dedicated implementation branch/worktree created;
 proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
 focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
 implemented and focused-green; `CAS-FREYD-6B` is implemented and
-proportional-green; `CAS-HOMOLOGICAL-7A1` through `7A5` are implemented and
-proportional-green while the larger `CAS-HOMOLOGICAL-7A` row remains in
-progress and `CAS-MODULE-4B2` remains a separate pending track.
+proportional-green; `CAS-HOMOLOGICAL-7A` is complete and proportional-green;
+`CAS-MODULE-4B2` is the next selected dependency-ready row, while
+`CAS-CONSTRUCTIBLE-8A` remains independently dependency-ready.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -789,13 +789,13 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-ZARISKI-3B` | complete; proportional-green at `ebbe15f` | `CAS-IDEAL-3A` | whole unimodular result retaining ideal/basis/membership/coefficients/combination/remainder; positive-only computational finite basic-open cover, schemas/serialization, native operations, and graph pipeline; formal adapter explicitly deferred; nine tests and all 76 focused CAS tests green |
 | `CAS-MATRIX-4A` | complete; proportional-green at `442cbff` | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | structural exact matrix spaces; immutable row-major arithmetic, transpose, composition, RREF with left transformation, column-kernel basis, schemas/serialization, field/limit/cancellation gates, native operations, and transpose graph; nine tests and all 85 focused CAS tests green |
 | `CAS-MODULE-4B1` | complete; focused-green at `707a7da` | `CAS-MATRIX-4A` | field-linear free/presented modules, relation-witnessed morphisms and composition, quotient projection/section realization, free kernels, presented cokernels, and matrix syzygies; seven module and nine affected matrix tests green |
-| `CAS-MODULE-4B2` | pending | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | polynomial-module term orders, module Groebner bases, Schreyer syzygies, finitely presented polynomial modules, and first free resolutions |
+| `CAS-MODULE-4B2` | pending; next selected row | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | polynomial-module term orders, module Groebner bases, Schreyer syzygies, finitely presented polynomial modules, and first free resolutions |
 | `CAS-CATEGORY-5A` | complete; proportional-green at `64b4c7c` (core `90cfca0`) | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict category shell, weighted primitive/derived registry, ring-as-one-object category, and presented-field-module category with primitive whole kernels/cokernels and derived object projections; four category and sixteen affected module/matrix tests green |
 | `CAS-DOCTRINE-5B` | complete; focused-green at `02ac3d0` | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
 | `CAS-TOWER-5C` | complete; focused-green at `dd910b0` | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
 | `CAS-COMPILER-6A` | complete; proportional-green at `c28da8f` | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
 | `CAS-FREYD-6B` | complete; proportional-green at `2f26a59` | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | native whole module kernel/cokernel operations, concrete Freyd/AdditiveClosure field-module model, direct-presentation reinterpretation, schema-preserving compiler bindings, retained reinterpretation rule, and structural agreement with direct `PresentedModule` computations; three Freyd and forty affected tests green |
-| `CAS-HOMOLOGICAL-7A` | in progress; `7A1` `66ed5a8`, `7A2` `8b97bad`, `7A3` `5f22b08`, `7A4` `3961bc5`, `7A5` `052032a` green | `CAS-FREYD-6B` | quotient-aware universal operations, complexes, whole/functorial/connecting homology, initial generalized spans, and field resolutions complete; native graph-operation exposure remains before row completion |
+| `CAS-HOMOLOGICAL-7A` | complete; `7A1` `66ed5a8`, `7A2` `8b97bad`, `7A3` `5f22b08`, `7A4` `3961bc5`, `7A5` `052032a`, `7A6` `ab68a11` green | `CAS-FREYD-6B` | quotient-aware universal operations, bounded complexes, whole/functorial/connecting homology, initial generalized spans, field resolutions, and native graph operations complete; broader representations and polynomial resolutions remain separately gated |
 | `CAS-CONSTRUCTIBLE-8A` | pending | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | selected slice/poset/stable-poset/opposite/difference/union tower lowered to ideal and saturation operations |
 | `CAS-ORACLE-9A` | pending | one native representative consumer | opt-in Singular/Macaulay2/CAP-homalg differential oracle with no public semantic authority |
 | `CAS-FORMAL-BRIDGE-10` | deferred | concrete formal consumer | selected computational realization, trusted-computation marker, or checked-proof adapter; not a CAS prerequisite |
@@ -923,6 +923,42 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-075` | accepted | Honest module maps embed as identity-source spans. An honest representative is returned only when the source aid has full domain; partial spans remain partial and are not extended by an arbitrary complement. |
 | `D-CAS-076` | accepted | Field resolutions expose both a presentation-derived free complex retaining relation syzygies and a minimal split length-zero resolution; they answer different computational questions and neither is hidden behind the other. |
 | `D-CAS-077` | accepted | The presentation resolution retains free terms in degrees zero through two, including zero-rank terms, and reports projective length from the last nonzero term; polynomial-module and Schreyer resolutions remain exclusively in `CAS-MODULE-4B2`. |
+| `D-CAS-078` | accepted | Whole homology, functorial homology, connecting morphisms, presentation/split resolutions, and generalized-span composition have field-specific native operation descriptors and runtime schemas, so they execute directly or as `AlgebraComputationGraph` nodes. |
+| `D-CAS-079` | accepted | Native graph exposure completes the first homological row without pretending that compiler v1 already expands a generic categorical homology derivation into primitive kernels, lifts, and cokernels; derivation inlining remains a later compiler pass. |
+| `D-CAS-080` | accepted | After the complete field-linear homological row, the next selected row is polynomial modules and Schreyer syzygies (`CAS-MODULE-4B2`), which unlock non-field resolutions; constructible geometry remains independently dependency-ready rather than blocked. |
+
+## `CAS-HOMOLOGICAL-7A6` Result And Row Completion
+
+Native graph operations are implemented in
+`src/v3_2/algebra_homological_reference_operations.ts`. The field-specific
+bundle revalidates bounded complexes, chain maps, short exact sequences, and
+generalized spans at operation boundaries. It exposes whole operations for:
+
+- homology in one degree;
+- the map on homology induced by a chain map;
+- a connecting morphism;
+- presentation-derived and split resolutions; and
+- generalized-span composition.
+
+All implementations run inside the native TypeScript reference engine and
+retain their complete structured results. Tests execute homology and a
+presentation resolution as computation-graph nodes, and exercise functorial
+homology, connecting morphisms, a split resolution, and generalized-span
+composition through the same operation/engine contracts.
+
+Three native-operation tests plus the affected homological, generalized-span,
+resolution, graph, reference-engine, and module suites give 46 passing tests,
+followed by workspace check, affected lint, root typecheck, and diff hygiene.
+No repository-wide aggregate was run.
+
+Semantic checkpoint: `ab68a11` (`cas: expose native homological graph operations`).
+
+This completes `CAS-HOMOLOGICAL-7A` at its stated initial boundary. The row
+does not claim unbounded complexes, three-arrow/cospan/Serre-quotient
+generalized morphisms, arbitrary-ring resolutions, or compiler expansion of
+generic categorical derivations. Polynomial-module and Schreyer resolutions
+belong to `CAS-MODULE-4B2`; broader generalized-morphism and compiler passes
+require later concrete consumers.
 
 ## `CAS-HOMOLOGICAL-7A5` Result
 
