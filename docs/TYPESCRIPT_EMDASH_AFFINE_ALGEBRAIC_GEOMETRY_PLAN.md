@@ -6,8 +6,8 @@ Plan-ID: `TS-EMDASH-AFFINE-ALGEBRAIC-GEOMETRY`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `AFFINE-QUOTIENT-1A` is complete and proportional-green;
-`AFFINE-MAPS-1B` is complete and proportional-green; `AFFINE-LOCALIZATION-2A`
-is complete and proportional-green; `AFFINE-SCHEMES-2B` is the next
+`AFFINE-MAPS-1B`, `AFFINE-LOCALIZATION-2A`, and `AFFINE-SCHEMES-2B` are
+complete and proportional-green; `AFFINE-TENSOR-3A` is the next
 dependency-ready row.
 
 Baseline: `1095fab1fd64de6a2793f6958721bedc4b550f21`
@@ -200,8 +200,8 @@ tests, define API semantics, or require `check:ts`.
 | `AFFINE-QUOTIENT-1A` | complete; proportional-green at `9b0a1e0` | CAS ideals, reduced Gröbner bases, membership | reduced-basis structural parents, whole reductions, canonical elements, arithmetic/equality, schemas/serialization, native operations, graphs, edge cases, cancellation, and real Singular smoke comparison complete |
 | `AFFINE-MAPS-1B` | complete; proportional-green at `9ef4027` | `AFFINE-QUOTIENT-1A` | presented algebra wrappers, relation-checked generator-image maps, polynomial/element evaluation, identity/composition/equality, schemas, native application, graphs, and invalid-map diagnostics complete |
 | `AFFINE-LOCALIZATION-2A` | complete; proportional-green at `5954407` | `AFFINE-MAPS-1B` | fresh adjoined-inverse presentation, embedded source relations, canonical map, distinguished inverse/equation, basic-open chart, native operation/context, graph, and unit/nilpotent/foreign/collision cases complete |
-| `AFFINE-SCHEMES-2B` | pending; next selected row | `AFFINE-LOCALIZATION-2A` | affine schemes, contravariant morphisms, closed immersions, basic-open immersions, and a strict computational category |
-| `AFFINE-TENSOR-3A` | pending | `AFFINE-MAPS-1B`, `AFFINE-SCHEMES-2B` | presented tensor products, universal maps, compatibility computations, and affine fiber products |
+| `AFFINE-SCHEMES-2B` | complete; proportional-green at `157bb09` | `AFFINE-LOCALIZATION-2A` | affine schemes, explicit contravariant morphisms, reversed composition/equality, closed and basic-open immersion whole constructions, schemas, and strict computable category complete |
+| `AFFINE-TENSOR-3A` | pending; next selected row | `AFFINE-MAPS-1B`, `AFFINE-SCHEMES-2B` | presented tensor products, universal maps, compatibility computations, and affine fiber products |
 | `AFFINE-COVERS-4A` | pending | `AFFINE-LOCALIZATION-2A`, existing unimodular covers | actual finite affine charts, overlaps, restriction maps, Cech nerve, and initial cochain data |
 | `AFFINE-GRAPH-5A` | pending | one representative consumer from each preceding layer | native operation bundles, computation graphs, affine category/tower metadata, direct reinterpretations, and staged compilation |
 | `AFFINE-SINGULAR-6A` | pending | installed Singular and representative native consumers | real opt-in differential comparisons for radical, quotient, localization, and selected fiber-product computations |
@@ -229,6 +229,33 @@ validation, synchronized decisions/results, and a local checkpoint.
 | `D-AFFINE-012` | accepted | The whole localization retains the extended ring/algebra, canonical map, distinguished inverse, image of `f`, their product, and the canonical equality-to-one projection. |
 | `D-AFFINE-013` | accepted | Units, zero, and nilpotents use the same quotient construction; inverting a nilpotent computes the zero algebra through ordinary Gröbner normalization rather than a special emptiness branch. |
 | `D-AFFINE-014` | accepted | A basic-open chart is the whole localization plus its coordinate algebra. The native operation fixes the source algebra, passes execution context into Gröbner work, and returns the whole result through a retained graph. |
+| `D-AFFINE-015` | accepted | `Spec(B) -> Spec(A)` stores the contravariant coordinate map `A -> B`; endpoint validation and naming make variance explicit. |
+| `D-AFFINE-016` | accepted | Scheme identity comes from algebra-map identity, while scheme composition reverses algebra-map composition; equality compares source/target coordinate algebras and canonical generator images. |
+| `D-AFFINE-017` | accepted | A closed affine subscheme adjoins canonical ambient quotient representatives as additional equations and retains the quotient map/immersion; an empty equation family uniformly recovers the ambient scheme. |
+| `D-AFFINE-018` | accepted | A basic-open affine subscheme reuses the whole principal localization and its canonical map as the immersion coordinate map. |
+| `D-AFFINE-019` | accepted | The affine-scheme runtime is an ordinary strict computational category over presented algebra data and does not impose its equality on emdash's omega-categorical semantics. |
+
+## `AFFINE-SCHEMES-2B` Result
+
+Affine schemes and morphisms are implemented in
+`src/v3_2/algebra_affine_scheme.ts`. A scheme retains one presented coordinate
+algebra. A morphism `Spec(B) -> Spec(A)` retains and validates the reversed
+algebra map `A -> B`; identity, composition, and equality follow that explicit
+variance.
+
+Closed subschemes add canonical ambient equations to the coordinate ideal and
+retain the quotient immersion. Basic-open subschemes reuse the whole
+localization chart and canonical map. The strict computable category supplies
+object/morphism schemas, identity, composition, and computational equality.
+
+Six focused scheme tests cover variance, reversed composition, identities,
+closed equations, empty closed families, basic-open localizations, strict
+category laws, and invalid coordinate endpoints. Together with affected
+localization, presented-map, and category suites, 24 tests pass, followed by
+workspace check, affected lint, root typecheck, and diff hygiene. `check:ts`
+was not run.
+
+Semantic checkpoint: `157bb09` (`affine: add schemes and standard immersions`).
 
 ## `AFFINE-LOCALIZATION-2A` Result
 
