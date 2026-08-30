@@ -6,8 +6,8 @@ Plan-ID: `TS-EMDASH-FOCUSED-CAS`
 
 Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
-`CAS-CONTRACT-1A` implemented and proportional-green; `CAS-GRAPH-1B` is the
-next dependency-ready implementation row.
+`CAS-CONTRACT-1A` and `CAS-GRAPH-1B` implemented and proportional-green;
+`CAS-EXACT-2A` is the next dependency-ready implementation row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -776,8 +776,8 @@ elaborator adapter, or an optional proof-development adapter.
 | --- | --- | --- | --- |
 | `CAS-PLAN-0` | complete | reviewed design discussion and source audit | this living plan, branch/worktree identity, source baseline, architecture, decisions, validation, and launch prompt |
 | `CAS-CONTRACT-1A` | complete; proportional-green at `46b8fda` | `CAS-PLAN-0` | browser-safe immutable operation, engine, support, result-quality, execution-context, diagnostic, and reusable-artifact contracts; ten focused tests, workspace check, affected lint, typecheck, and diff hygiene green; no algorithm, process, logical-Core, or public-package dependency |
-| `CAS-GRAPH-1B` | in progress | `CAS-CONTRACT-1A` | typed backend-neutral one-node and multi-node computation graph, validation, stable serialization, and direct-execution lowering |
-| `CAS-EXACT-2A` | pending | `CAS-GRAPH-1B` | exact integer/rational domains using `bigint`, normalization, arithmetic, serialization, and strict negatives |
+| `CAS-GRAPH-1B` | complete; proportional-green; checkpoint candidate | `CAS-CONTRACT-1A` | typed backend-neutral input/node/output computation graph, immutable reconstruction, bounded validation, topology-only stable JSON, cancellation, exact-node diagnostics, and sequential direct-execution lowering; eleven focused graph tests plus the ten predecessor tests green |
+| `CAS-EXACT-2A` | in progress | `CAS-GRAPH-1B` | exact integer/rational domains using `bigint`, normalization, arithmetic, serialization, and strict negatives |
 | `CAS-POLY-2B` | pending | `CAS-EXACT-2A` | parent-aware sparse multivariate polynomials, monomial orders, arithmetic, substitution, and division |
 | `CAS-ENGINE-2C` | pending | `CAS-POLY-2B` | native TypeScript reference engine executes selected exact and polynomial graph nodes with limits/cancellation |
 | `CAS-IDEAL-3A` | pending | `CAS-ENGINE-2C` | ideals, Buchberger reference implementation, reduction, membership, reduced bases, and retained transformations |
@@ -859,6 +859,9 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-017` | accepted | The initial implementation begins with the portable computation contract before exact arithmetic or categorical doctrines. |
 | `D-CAS-018` | accepted | Early isolated CAS rows use proportional focused validation only; repository-wide long aggregates over untouched features require a genuinely affected boundary or an explicit request. |
 | `D-CAS-019` | accepted | The user explicitly authorizes validated local checkpoint commits on this dedicated goal branch as work progresses; push, merge, publication, release, and history rewriting remain unauthorized. |
+| `D-CAS-020` | accepted | Graph v1 serializes topology, operation/schema identities, preferred algorithms, and named outputs; runtime input values remain separate execution data. |
+| `D-CAS-021` | accepted | Graph v1 uses declared topological order and one selected engine, retaining every node result; optimization, engine routing, caching, batching, and parallel scheduling remain later rows. |
+| `D-CAS-022` | accepted | Graph construction and reconstruction require exact schema-identity agreement across edges; no implicit computational coercion is invented at the graph layer. |
 
 ## `CAS-CONTRACT-1A` Result
 
@@ -895,6 +898,30 @@ git diff --check
 
 All pass. The initially started repository aggregate was explicitly cancelled
 under `D-CAS-018` and is not part of the acceptance evidence.
+
+## `CAS-GRAPH-1B` Result
+
+The first graph profile is implemented in `src/v3_2/algebra_graph.ts` and is
+also confined to the contributor barrel. It provides:
+
+- typed graph-input and node-output tokens scoped to one builder identity;
+- globally distinct input/node IDs and distinct named-output IDs;
+- exact schema checks on every edge;
+- optional preferred algorithms retained per node;
+- one-shot builders producing independently reconstructed immutable graphs;
+- topological-reference validation and explicit graph-size ceilings;
+- deterministic topology-only JSON with no runtime values or callbacks;
+- exact input-set validation;
+- graph-level pre-node cancellation;
+- sequential lowering through `computeAlgebraOperation`;
+- retained immutable node results and named outputs; and
+- graph-node diagnostics wrapping the exact underlying engine error.
+
+Focused evidence in `tests/v3_2_algebra_graph_tests.ts` covers eleven positive
+and negative graph cases. The graph suite and the ten predecessor contract
+tests pass together, followed by affected-file lint, root typecheck, and diff
+hygiene. No aggregate, kernel, package, browser, print, or book check is
+required by the scoped policy.
 
 ## Validation Policy
 

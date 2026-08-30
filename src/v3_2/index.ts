@@ -13,6 +13,7 @@ export * from './runtime';
 export * from './evaluator';
 export * from './conversion';
 export * from './algebra_engine';
+export * from './algebra_graph';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
