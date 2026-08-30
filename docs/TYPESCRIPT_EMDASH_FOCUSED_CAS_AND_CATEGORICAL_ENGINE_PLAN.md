@@ -782,7 +782,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-POLY-2B` | complete; proportional-green at `7b6b929` | `CAS-EXACT-2A` | coefficient-polymorphic parent-aware sparse multivariate polynomials; lex/grlex/grevlex, canonicalization, arithmetic, powers, substitution, stable serialization, runtime schema, and field-only ordered division; thirteen polynomial tests and all 46 focused CAS tests green |
 | `CAS-ENGINE-2C` | complete; proportional-green at `765aa32` | `CAS-POLY-2B` | native in-process TypeScript registry with multiple deterministic algorithms per exact operation contract; selected integer/rational and ring-specific polynomial operations, direct/graph execution, fuel, cancellation, progress, metadata, and output limits; ten engine tests and all 56 focused CAS tests green |
 | `CAS-IDEAL-3A` | complete; proportional-green at `58f51f2` | `CAS-ENGINE-2C` | ordered polynomial ideals; deterministic monic Buchberger basis, retained generator transformations, reduced-basis postpass, positive/negative membership decomposition, schemas/serialization, bounded cancellation, native operations, and graph pipeline; eleven ideal tests and all 67 focused CAS tests green |
-| `CAS-ZARISKI-3B` | complete; proportional-green; checkpoint candidate | `CAS-IDEAL-3A` | whole unimodular result retaining ideal/basis/membership/coefficients/combination/remainder; positive-only computational finite basic-open cover, schemas/serialization, native operations, and graph pipeline; formal adapter explicitly deferred; nine tests and all 76 focused CAS tests green |
+| `CAS-ZARISKI-3B` | complete; proportional-green at `ebbe15f` | `CAS-IDEAL-3A` | whole unimodular result retaining ideal/basis/membership/coefficients/combination/remainder; positive-only computational finite basic-open cover, schemas/serialization, native operations, and graph pipeline; formal adapter explicitly deferred; nine tests and all 76 focused CAS tests green |
 | `CAS-MATRIX-4A` | in progress | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | exact matrices and selected row/column algorithms with explicit orientation conventions |
 | `CAS-MODULE-4B` | pending | `CAS-IDEAL-3A`, `CAS-MATRIX-4A` | free and finitely presented modules, morphisms, kernels/cokernels, and syzygies |
 | `CAS-CATEGORY-5A` | pending | `CAS-GRAPH-1B`, representative algebra values | minimal strict computable-category runtime, ring-as-category, matrix/free-module category, primitive/derived registry |
@@ -1028,6 +1028,8 @@ and diff hygiene.
 The first geometry-facing computation is implemented in
 `src/v3_2/algebra_zariski.ts` and
 `src/v3_2/algebra_zariski_reference_operations.ts`. It provides:
+
+Semantic checkpoint: `ebbe15f` (`cas: add computational Zariski covers`).
 
 - a whole unimodular-combination result retaining the ideal, reduced basis,
   membership computation, coefficients, combination, and remainder;
