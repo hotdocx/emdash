@@ -787,7 +787,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-MATRIX-4A` | complete; proportional-green at `442cbff` | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | structural exact matrix spaces; immutable row-major arithmetic, transpose, composition, RREF with left transformation, column-kernel basis, schemas/serialization, field/limit/cancellation gates, native operations, and transpose graph; nine tests and all 85 focused CAS tests green |
 | `CAS-MODULE-4B1` | complete; focused-green at `707a7da` | `CAS-MATRIX-4A` | field-linear free/presented modules, relation-witnessed morphisms and composition, quotient projection/section realization, free kernels, presented cokernels, and matrix syzygies; seven module and nine affected matrix tests green |
 | `CAS-MODULE-4B2` | pending | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | polynomial-module term orders, module Groebner bases, Schreyer syzygies, finitely presented polynomial modules, and first free resolutions |
-| `CAS-CATEGORY-5A` | in progress; core registry focused-green; checkpoint candidate | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict computable-category shell and weighted primitive/derived registry implemented; ring-as-category and field-module category consumers remain before row completion |
+| `CAS-CATEGORY-5A` | in progress; core registry focused-green at `90cfca0` | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict computable-category shell and weighted primitive/derived registry implemented; ring-as-category and field-module category consumers remain before row completion |
 | `CAS-DOCTRINE-5B` | pending | `CAS-CATEGORY-5A` | preadditive, additive, pre-Abelian, and Abelian doctrine descriptors with dual metadata |
 | `CAS-TOWER-5C` | pending | `CAS-DOCTRINE-5B` | Opposite, AdditiveClosure, Freyd, and reinterpretation descriptors with retained lowering data |
 | `CAS-COMPILER-6A` | pending | `CAS-TOWER-5C` | retained categorical-program IR and first specialization/lowering passes to algebra graph |
@@ -901,6 +901,8 @@ normalized execution. Two focused tests cover cheaper derived selection,
 nested calls, unavailability, duplicate methods, and derivation cycles.
 Ring-as-category and field-module category instances remain required before
 this ledger row is complete.
+
+Core-registry checkpoint: `90cfca0` (`cas: add computable category registry`).
 
 ## `CAS-MODULE-4B1` Result
 
