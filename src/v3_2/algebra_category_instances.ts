@@ -14,9 +14,6 @@ import {
     defineAlgebraRuntimeSchema
 } from './algebra_engine';
 import {
-    algebraMatrixEquals
-} from './algebra_matrix';
-import {
     AlgebraModuleCokernel,
     AlgebraModuleKernel,
     AlgebraModuleMorphism,
@@ -26,6 +23,8 @@ import {
     algebraModuleIdentity,
     algebraModuleKernel,
     algebraModuleMorphism,
+    algebraModuleMorphismEquivalent,
+    algebraPresentedModuleEquals,
     algebraPresentedModule
 } from './algebra_module';
 import {
@@ -97,15 +96,6 @@ export function algebraRingComputableCategory<
         equalMorphisms: (left, right) => domain.equals(left, right)
     });
 }
-
-const sameModule = <
-    P extends AlgebraParent,
-    C extends AlgebraElement<P>,
-    I
->(left: AlgebraPresentedModule<P, C, I>, right: AlgebraPresentedModule<P, C, I>) =>
-    left.generators === right.generators &&
-    sameAlgebraParent(left.field.parent, right.field.parent) &&
-    algebraMatrixEquals(left.relations, right.relations);
 
 export interface AlgebraModuleCategoryOperations<
     P extends AlgebraParent,
@@ -281,15 +271,8 @@ export function algebraModuleComputableCategory<
             target: morphism => morphism.target,
             identityMorphism: algebraModuleIdentity,
             compose: algebraModuleCompose,
-            equalObjects: sameModule,
-            equalMorphisms: (left, right) =>
-                sameModule(left.source, right.source) &&
-                sameModule(left.target, right.target) &&
-                algebraMatrixEquals(left.matrix, right.matrix) &&
-                algebraMatrixEquals(
-                    left.relationWitness,
-                    right.relationWitness
-                )
+            equalObjects: algebraPresentedModuleEquals,
+            equalMorphisms: algebraModuleMorphismEquivalent
         }),
         operations: Object.freeze({
             kernel,

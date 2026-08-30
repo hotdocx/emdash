@@ -10,13 +10,16 @@ import {
 } from './algebra_exact';
 import {
     AlgebraMatrix,
+    AlgebraMatrixError,
     AlgebraMatrixSpace,
     AlgebraKernelBasis,
     algebraIdentityMatrix,
     algebraMatrix,
     algebraMatrixEquals,
     algebraMatrixKernelBasis,
+    algebraMatrixLeftInverse,
     algebraMatrixMultiply,
+    algebraMatrixRightInverse,
     algebraMatrixRref,
     algebraMatrixSpace,
     algebraMatrixText,
@@ -29,6 +32,8 @@ export const ALGEBRA_MODULE_PROFILE = Object.freeze({
     presentation: 'cokernel-of-column-relation-matrix' as const,
     morphismLaw: 'F-times-source-relations-equals-target-relations-times-W' as const,
     quotientModel: 'left-annihilator-projection-with-explicit-section' as const,
+    morphismEquality: 'induced-matrix-on-quotient-coordinates' as const,
+    universalFactorization: 'one-sided-inverse-lift-and-colift' as const,
     polynomialModuleGroebner: false as const,
     nodeBuiltinDependency: false as const,
     performsIo: false as const
@@ -40,7 +45,11 @@ export type AlgebraModuleErrorCode =
     | 'FOREIGN_MODULE'
     | 'INVALID_MORPHISM'
     | 'MORPHISM_LAW_FAILED'
-    | 'DIMENSION_MISMATCH';
+    | 'DIMENSION_MISMATCH'
+    | 'NOT_MONOMORPHISM'
+    | 'NOT_EPIMORPHISM'
+    | 'NOT_LIFTABLE'
+    | 'NOT_COLIFTABLE';
 
 export class AlgebraModuleError extends Error {
     constructor(
@@ -157,7 +166,7 @@ export const algebraFreeModule = <
 >(field: AlgebraFieldDomain<P, C, I>, rank: number):
     AlgebraPresentedModule<P, C, I> => algebraPresentedModule(field, rank);
 
-const sameModule = <
+export const algebraPresentedModuleEquals = <
     P extends AlgebraParent,
     C extends AlgebraElement<P>,
     I
@@ -235,7 +244,7 @@ export function algebraModuleCompose<
     after: AlgebraModuleMorphism<P, C, I>,
     before: AlgebraModuleMorphism<P, C, I>
 ): AlgebraModuleMorphism<P, C, I> {
-    if (!sameModule(before.target, after.source)) {
+    if (!algebraPresentedModuleEquals(before.target, after.source)) {
         return fail(
             'FOREIGN_MODULE',
             'compose',
@@ -252,6 +261,28 @@ export function algebraModuleCompose<
         )
     );
 }
+
+export const algebraModuleZeroMorphism = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    source: AlgebraPresentedModule<P, C, I>,
+    target: AlgebraPresentedModule<P, C, I>
+): AlgebraModuleMorphism<P, C, I> => algebraModuleMorphism(
+    source,
+    target,
+    algebraZeroMatrix(algebraMatrixSpace(
+        source.field,
+        target.generators,
+        source.generators
+    )),
+    algebraZeroMatrix(algebraMatrixSpace(
+        source.field,
+        target.relations.parent.columns,
+        source.relations.parent.columns
+    ))
+);
 
 const horizontalConcat = <
     P extends AlgebraParent,
@@ -321,6 +352,7 @@ export interface AlgebraModuleCokernel<
     I
 > {
     readonly kind: 'algebra-module-cokernel';
+    readonly morphism: AlgebraModuleMorphism<P, C, I>;
     readonly object: AlgebraPresentedModule<P, C, I>;
     readonly projection: AlgebraModuleMorphism<P, C, I>;
 }
@@ -358,6 +390,7 @@ export function algebraModuleCokernel<
     );
     return Object.freeze({
         kind: 'algebra-module-cokernel',
+        morphism,
         object,
         projection
     });
@@ -411,12 +444,199 @@ export function algebraModuleRealization<
     });
 }
 
+const inducedMatrixFromRealizations = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    morphism: AlgebraModuleMorphism<P, C, I>,
+    source: AlgebraModuleRealization<P, C, I>,
+    target: AlgebraModuleRealization<P, C, I>
+): AlgebraMatrix<P, C, I> => algebraMatrixMultiply(
+    algebraMatrixMultiply(target.projection, morphism.matrix),
+    source.section
+);
+
+/** Matrix of a module morphism on canonical quotient coordinates. */
+export function algebraModuleInducedMatrix<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(morphism: AlgebraModuleMorphism<P, C, I>): AlgebraMatrix<P, C, I> {
+    return inducedMatrixFromRealizations(
+        morphism,
+        algebraModuleRealization(morphism.source),
+        algebraModuleRealization(morphism.target)
+    );
+}
+
+/** Equality of represented module morphisms after passage to the quotients. */
+export const algebraModuleMorphismEquivalent = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    left: AlgebraModuleMorphism<P, C, I>,
+    right: AlgebraModuleMorphism<P, C, I>
+): boolean =>
+    algebraPresentedModuleEquals(left.source, right.source) &&
+    algebraPresentedModuleEquals(left.target, right.target) &&
+    algebraMatrixEquals(
+        algebraModuleInducedMatrix(left),
+        algebraModuleInducedMatrix(right)
+    );
+
+export const algebraModuleMorphismIsZero = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(morphism: AlgebraModuleMorphism<P, C, I>): boolean => {
+    const induced = algebraModuleInducedMatrix(morphism);
+    return algebraMatrixEquals(
+        induced,
+        algebraZeroMatrix(induced.parent)
+    );
+};
+
+/** Return lambda with iota * lambda equal to tau in quotient coordinates. */
+export function algebraModuleLiftAlongMonomorphism<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    iota: AlgebraModuleMorphism<P, C, I>,
+    tau: AlgebraModuleMorphism<P, C, I>
+): AlgebraModuleMorphism<P, C, I> {
+    if (!algebraPresentedModuleEquals(iota.target, tau.target)) {
+        return fail(
+            'NOT_LIFTABLE',
+            'moduleLift.target',
+            'A lift requires morphisms with one target'
+        );
+    }
+    let inverse: AlgebraMatrix<P, C, I>;
+    try {
+        inverse = algebraMatrixLeftInverse(algebraModuleInducedMatrix(iota));
+    } catch (error: unknown) {
+        if (
+            error instanceof AlgebraMatrixError &&
+            error.code === 'NO_LEFT_INVERSE'
+        ) {
+            return fail(
+                'NOT_MONOMORPHISM',
+                'moduleLift.iota',
+                'The proposed monomorphism is not injective'
+            );
+        }
+        throw error;
+    }
+    const sourceRealization = algebraModuleRealization(tau.source);
+    const targetRealization = algebraModuleRealization(iota.source);
+    const induced = algebraMatrixMultiply(
+        inverse,
+        algebraModuleInducedMatrix(tau)
+    );
+    const matrix = algebraMatrixMultiply(
+        algebraMatrixMultiply(targetRealization.section, induced),
+        sourceRealization.projection
+    );
+    const lift = algebraModuleMorphism(
+        tau.source,
+        iota.source,
+        matrix,
+        algebraZeroMatrix(algebraMatrixSpace(
+            tau.source.field,
+            iota.source.relations.parent.columns,
+            tau.source.relations.parent.columns
+        ))
+    );
+    if (!algebraModuleMorphismEquivalent(
+        algebraModuleCompose(iota, lift),
+        tau
+    )) {
+        return fail(
+            'NOT_LIFTABLE',
+            'moduleLift.tau',
+            'The test morphism does not factor through the monomorphism'
+        );
+    }
+    return lift;
+}
+
+/** Return lambda with lambda * epsilon equal to tau in quotient coordinates. */
+export function algebraModuleColiftAlongEpimorphism<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    epsilon: AlgebraModuleMorphism<P, C, I>,
+    tau: AlgebraModuleMorphism<P, C, I>
+): AlgebraModuleMorphism<P, C, I> {
+    if (!algebraPresentedModuleEquals(epsilon.source, tau.source)) {
+        return fail(
+            'NOT_COLIFTABLE',
+            'moduleColift.source',
+            'A colift requires morphisms with one source'
+        );
+    }
+    let inverse: AlgebraMatrix<P, C, I>;
+    try {
+        inverse = algebraMatrixRightInverse(
+            algebraModuleInducedMatrix(epsilon)
+        );
+    } catch (error: unknown) {
+        if (
+            error instanceof AlgebraMatrixError &&
+            error.code === 'NO_RIGHT_INVERSE'
+        ) {
+            return fail(
+                'NOT_EPIMORPHISM',
+                'moduleColift.epsilon',
+                'The proposed epimorphism is not surjective'
+            );
+        }
+        throw error;
+    }
+    const sourceRealization = algebraModuleRealization(epsilon.target);
+    const targetRealization = algebraModuleRealization(tau.target);
+    const induced = algebraMatrixMultiply(
+        algebraModuleInducedMatrix(tau),
+        inverse
+    );
+    const matrix = algebraMatrixMultiply(
+        algebraMatrixMultiply(targetRealization.section, induced),
+        sourceRealization.projection
+    );
+    const colift = algebraModuleMorphism(
+        epsilon.target,
+        tau.target,
+        matrix,
+        algebraZeroMatrix(algebraMatrixSpace(
+            epsilon.source.field,
+            tau.target.relations.parent.columns,
+            epsilon.target.relations.parent.columns
+        ))
+    );
+    if (!algebraModuleMorphismEquivalent(
+        algebraModuleCompose(colift, epsilon),
+        tau
+    )) {
+        return fail(
+            'NOT_COLIFTABLE',
+            'moduleColift.tau',
+            'The test morphism does not factor through the epimorphism'
+        );
+    }
+    return colift;
+}
+
 export interface AlgebraModuleKernel<
     P extends AlgebraParent,
     C extends AlgebraElement<P>,
     I
 > {
     readonly kind: 'algebra-module-kernel';
+    readonly morphism: AlgebraModuleMorphism<P, C, I>;
     readonly object: AlgebraPresentedModule<P, C, I>;
     readonly inclusion: AlgebraModuleMorphism<P, C, I>;
     readonly inducedMatrix: AlgebraMatrix<P, C, I>;
@@ -431,9 +651,10 @@ export function algebraModuleKernel<
 >(morphism: AlgebraModuleMorphism<P, C, I>): AlgebraModuleKernel<P, C, I> {
     const sourceRealization = algebraModuleRealization(morphism.source);
     const targetRealization = algebraModuleRealization(morphism.target);
-    const inducedMatrix = algebraMatrixMultiply(
-        algebraMatrixMultiply(targetRealization.projection, morphism.matrix),
-        sourceRealization.section
+    const inducedMatrix = inducedMatrixFromRealizations(
+        morphism,
+        sourceRealization,
+        targetRealization
     );
     const quotientKernel: AlgebraKernelBasis<P, C, I> =
         algebraMatrixKernelBasis(inducedMatrix);
@@ -455,12 +676,61 @@ export function algebraModuleKernel<
     );
     return Object.freeze({
         kind: 'algebra-module-kernel',
+        morphism,
         object,
         inclusion,
         inducedMatrix,
         sourceRealization,
         targetRealization
     });
+}
+
+export function algebraModuleKernelLift<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    kernel: AlgebraModuleKernel<P, C, I>,
+    testMorphism: AlgebraModuleMorphism<P, C, I>
+): AlgebraModuleMorphism<P, C, I> {
+    if (!algebraModuleMorphismIsZero(algebraModuleCompose(
+        kernel.morphism,
+        testMorphism
+    ))) {
+        return fail(
+            'NOT_LIFTABLE',
+            'kernelLift.testMorphism',
+            'A kernel lift requires a zero composite'
+        );
+    }
+    return algebraModuleLiftAlongMonomorphism(
+        kernel.inclusion,
+        testMorphism
+    );
+}
+
+export function algebraModuleCokernelColift<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    cokernel: AlgebraModuleCokernel<P, C, I>,
+    testMorphism: AlgebraModuleMorphism<P, C, I>
+): AlgebraModuleMorphism<P, C, I> {
+    if (!algebraModuleMorphismIsZero(algebraModuleCompose(
+        testMorphism,
+        cokernel.morphism
+    ))) {
+        return fail(
+            'NOT_COLIFTABLE',
+            'cokernelColift.testMorphism',
+            'A cokernel colift requires a zero composite'
+        );
+    }
+    return algebraModuleColiftAlongEpimorphism(
+        cokernel.projection,
+        testMorphism
+    );
 }
 
 export const algebraMatrixSyzygies = <

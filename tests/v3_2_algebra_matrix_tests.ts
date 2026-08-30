@@ -16,9 +16,11 @@ import {
     algebraMatrixEntry,
     algebraMatrixEquals,
     algebraMatrixKernelBasis,
+    algebraMatrixLeftInverse,
     algebraMatrixMultiply,
     algebraMatrixNegate,
     algebraMatrixRref,
+    algebraMatrixRightInverse,
     algebraMatrixSchema,
     algebraMatrixSpace,
     algebraMatrixSubtract,
@@ -171,6 +173,36 @@ describe('v3.2 exact row-major matrices', () => {
             composite,
             algebraZeroMatrix(composite.parent)
         ));
+    });
+
+    it('constructs left and right inverses exactly when ranks permit', () => {
+        const tall = algebraMatrix(
+            algebraMatrixSpace(RATIONAL_DOMAIN, 3, 2),
+            [['1', '0'], ['0', '1'], ['1', '1']]
+        );
+        const leftInverse = algebraMatrixLeftInverse(tall);
+        assert.ok(algebraMatrixEquals(
+            algebraMatrixMultiply(leftInverse, tall),
+            algebraIdentityMatrix(RATIONAL_DOMAIN, 2)
+        ));
+        const wide = algebraMatrixTranspose(tall);
+        const rightInverse = algebraMatrixRightInverse(wide);
+        assert.ok(algebraMatrixEquals(
+            algebraMatrixMultiply(wide, rightInverse),
+            algebraIdentityMatrix(RATIONAL_DOMAIN, 2)
+        ));
+        const singular = algebraMatrix(
+            algebraMatrixSpace(RATIONAL_DOMAIN, 2, 2),
+            [['1', '1'], ['1', '1']]
+        );
+        assert.throws(
+            () => algebraMatrixLeftInverse(singular),
+            matrixError('NO_LEFT_INVERSE')
+        );
+        assert.throws(
+            () => algebraMatrixRightInverse(singular),
+            matrixError('NO_RIGHT_INVERSE')
+        );
     });
 
     it('rejects foreign dimensions, non-fields, fuel exhaustion, and cancellation', () => {

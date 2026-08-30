@@ -25,6 +25,7 @@ export const ALGEBRA_MATRIX_PROFILE = Object.freeze({
     orientation: 'm-by-n-is-map-Rn-to-Rm-on-column-vectors' as const,
     composition: 'left-matrix-multiplication' as const,
     kernelGenerators: 'columns-of-n-by-k-matrix' as const,
+    oneSidedInverses: 'rref-full-rank-left-and-right-inverses' as const,
     maximumRows: 100_000,
     maximumColumns: 100_000,
     maximumEntries: 10_000_000,
@@ -39,6 +40,8 @@ export type AlgebraMatrixErrorCode =
     | 'DIMENSION_MISMATCH'
     | 'INDEX_OUT_OF_RANGE'
     | 'NON_FIELD_COEFFICIENTS'
+    | 'NO_LEFT_INVERSE'
+    | 'NO_RIGHT_INVERSE'
     | 'MATRIX_LIMIT_EXCEEDED'
     | 'CANCELLED';
 
@@ -697,6 +700,74 @@ export function algebraMatrixKernelBasis<
         generators,
         nullity: freeColumns.length
     });
+}
+
+/**
+ * Return a left inverse L with L * matrix = identity.
+ *
+ * A left inverse exists exactly when the columns are linearly independent.
+ */
+export function algebraMatrixLeftInverse<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    matrix: AlgebraMatrix<P, C, I>,
+    context: AlgebraComputationContextInput = {}
+): AlgebraMatrix<P, C, I> {
+    const reduction = algebraMatrixRref(matrix, context);
+    if (reduction.rank !== matrix.parent.columns) {
+        return fail(
+            'NO_LEFT_INVERSE',
+            'matrixLeftInverse',
+            'A left inverse requires full column rank'
+        );
+    }
+    return algebraMatrix(
+        algebraMatrixSpace(
+            matrix.parent.coefficientDomain,
+            matrix.parent.columns,
+            matrix.parent.rows
+        ),
+        reduction.leftTransformation.entries.slice(
+            0,
+            matrix.parent.columns
+        )
+    );
+}
+
+/**
+ * Return a right inverse R with matrix * R = identity.
+ *
+ * A right inverse exists exactly when the rows are linearly independent.
+ */
+export function algebraMatrixRightInverse<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    matrix: AlgebraMatrix<P, C, I>,
+    context: AlgebraComputationContextInput = {}
+): AlgebraMatrix<P, C, I> {
+    try {
+        return algebraMatrixTranspose(algebraMatrixLeftInverse(
+            algebraMatrixTranspose(matrix),
+            context
+        ));
+    } catch (error: unknown) {
+        if (
+            error instanceof AlgebraMatrixError &&
+            error.code === 'NO_LEFT_INVERSE'
+        ) {
+            return fail(
+                'NO_RIGHT_INVERSE',
+                'matrixRightInverse',
+                'A right inverse requires full row rank',
+                error
+            );
+        }
+        throw error;
+    }
 }
 
 export const algebraMatrixText = <
