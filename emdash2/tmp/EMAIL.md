@@ -13,23 +13,31 @@ directed dependent theory of categories, Cat-valued families, Sigma totals,
 sections, dependent homs, functors, transfors, profunctors, and selected
 universal constructions.
 
-Six mathematical threads expose the architecture. Directed arrow induction
+Eight mathematical threads expose the architecture. Directed arrow induction
 transports reflexive data along a canonical Sigma arrow and computes ordinary
 composition. A monad-primary full-functor interface combines whole unit and
 multiplication observations with whole Kleisli extension, while ordinary
-composition computes Došen's triangular reductions. A directed
-higher-inductive walking endomorphism is normalized to the natural-number
-powers of its generator. In local geometry, the locus where a section becomes
-invertible is constructed first as a sieve D_U(s), before one asks whether an
-open represents it; finite localization charts then generate a Zariski
-topology, while a direct return/glue/silent categorical HIT constructs
-fixed-site Cat-valued sheafification. Returning to the groupoidal layer, a
-Circle/Integer encode-decode theorem restores inverse powers, category-indexed
+composition computes Došen's triangular reductions. Selected binary and empty
+products expose whole projection, pairing, and terminal-arrow computation;
+inside slices, chosen pullback and dependent-product structures extend them to
+the three-adjoint chain `Σ_u ⊣ u* ⊣ Π_u`. A directed higher-inductive walking
+endomorphism is normalized to the natural-number powers of its generator. In
+local geometry, the locus where a section becomes invertible is constructed
+first as a sieve D_U(s), before one asks whether an open represents it; finite
+localization charts then generate a Zariski topology, while a direct
+return/glue/silent categorical HIT constructs fixed-site Cat-valued
+sheafification. Returning to the groupoidal layer, a Circle/Integer
+encode-decode theorem restores inverse powers, category-indexed
 groupoidification characterizes maps out by a whole mapping equivalence, and
 one profiled Gray right closure exposes a nonidentity walking-square
-interchanger from the same internal laxity action.
-Finally, injective face codes form an internal semi-simplex category, directed
-join builds the ordinal shapes `Delta[n]`, and the internal dependent hom
+interchanger from the same internal laxity action. That laxity is also
+internalized cubically by applying the same triangular `homd_int` after an
+inner Sigma total has made edges into objects. Generic Sigma-Hom then exposes
+lax squares, and iterating the resulting derived lax-arrow category produces
+cubes; `{L,R,*}` face codes act through whole restriction functors and retain
+higher action. Finally, injective face codes form an internal semi-simplex
+category. Directed join builds the ordinal shapes `Delta[n]`, and the internal
+dependent hom
 keeps the base-arrow layer of a dependent cell functorial. Iterated outgoing
 paths place that layer beneath an independently varying target endpoint. This
 nested double fibration produces native dependent simplexes. One Nat recursion
@@ -348,16 +356,26 @@ This is the target-side universal property. Source action
 with `Path` remain future interfaces.
 
 The same internal-action calculus keeps directed laxity visible. Its functor
-compositor is a cell
+compositor is an already-existing cell
 
 ```
 φ^F_{g,f} : F[g] ∘ F[f] ⇒ F[g ∘ f].
 ```
 
-In a path target this cell is invertible; at a decoded computationally strict
-functor code it reduces to identity; in a general directed target it need not
-be invertible. The selected strict-object/lax-arrow profile reuses the ambient
-transfor and higher-hom tower:
+In a path target this cell is invertible; in a general directed target it need
+not be. Strictness and pseudofunctoriality are properties of this existing
+internal action, not alternate functor grammars. `IsStrictFunctor(F)` supplies
+an endpoint path and identifies the compositor with the equality-induced
+arrow, while `IsPseudoFunctor(F)` equips its fixed-forward readable
+presentation with a native equivalence witness. The exact strict package is
+
+```
+StrictFunctor(A,B)
+  = Σ(F : A ⊢ B), IsStrictFunctor(F).
+```
+
+The selected strict-object/lax-arrow profile uses these packages as objects
+and reuses the ambient transfor and every higher-hom category as its hom tower:
 
 ```
 GrayHom_lax(A,B)
@@ -378,6 +396,171 @@ with one next hom action still available. This is one checked profiled right
 closure and a low-dimensional coherence stress test. It is not the mirror
 closure, tensor functoriality/coherence, a full Crans–Gray biclosed monoidal
 structure, or a global migration of the prototype's historical strict cuts.
+In particular, no claim here depends on the separate continuing work to
+re-home those historical global cuts at explicit profiles.
+
+
+Cubical cells from the same internal action
+--------------------------------------------
+
+The key point is that a square is still produced by the triangular dependent
+hom, not by a new square former. For an ordinary category-valued family `D`,
+generic Sigma-Hom computation has the familiar form
+
+```
+Hom_{ΣD}((x,u),(y,v))
+  = Σ(p : x → y), Hom_{D[y]}(D[p](u),v).
+```
+
+It says that an arrow in a Sigma total is a base arrow together with one fibre
+arrow after transport. This is the same triangular mechanism used for
+dependent arrows and simplexes.
+
+To apply it cubically, begin with a mixed-variance family
+
+```
+E : K₁^op ⊢ Catd(K₂).
+```
+
+First internalize the second endpoint by an ordinary Sigma total:
+
+```
+Edge_E[x₁] := Σ(x₂ : K₂), E[x₁][x₂].
+```
+
+An object is `(x₂,u)` with `u : E[x₁][x₂]`. In the specialization
+`E = hom_int(id_C)`, this is literally an edge `u : x₁ → x₂`. Now make the
+variance adjustment
+
+```
+D_E[x₁] := Edge_E[x₁]^op
+```
+
+and reuse the existing whole dependent internal hom at its identity displayed
+functor:
+
+```
+homdc_int(E) := homd_int(id_{D_E}).
+```
+
+This is a transparent definition, not a primitive cubical constructor. After
+selecting target edge `(y₂,v)`, source edge `(x₂,u)`, and
+`a : x₁ → y₁`, ordinary `homd_int` gives
+
+```
+Hom_{Edge_E[x₁]}
+  ((x₂,u), Edge_E[a^op](y₂,v)).
+```
+
+Generic Sigma-Hom computation—not a square-specific rule—then exposes an
+object as
+
+```
+b : x₂ → y₂
+α : E[x₁][b](u) → E[a^op][y₂](v).
+```
+
+For `E = hom_int(id_C)`, the two existing Hom actions compute the endpoints:
+
+```
+E[x₁][b](u)    = b ∘ u
+E[a^op][y₂](v) = v ∘ a.
+```
+
+Therefore the fibre arrow is precisely the directed 2-cell
+
+```
+α : b ∘ u ⇒ v ∘ a.
+```
+
+A particular square genuinely includes a chosen `α`, just as any directed
+2-cell is data. What is absent is a bespoke record field or independently
+postulated lax-commutativity law: the classifier and both endpoints of `α`
+were computed by existing `homd_int`, Hom action, and Sigma-Hom.
+
+The category of such arrows is also a transparent total:
+
+```
+TwoSided_E
+  := (Σ(x₁ : K₁^op), Edge_E[x₁]^op)^op
+
+LaxArrow(C)
+  := TwoSided_{hom_int(id_C)}.
+```
+
+Its objects are edges. Its arrows have the canonical nested Sigma form
+
+```
+(a,(b,α)).
+```
+
+The readable constructor `lax_square(a,b,α)` merely packages that generic
+term; it owns no separate square computation. The inner and outer opposites
+select the displayed lax direction. The corresponding unreversed comma-total
+orientation exposes the opposite, oplax cell `v ∘ a ⇒ b ∘ u`; changing
+variance exchanges the two directions rather than removing the cell.
+
+The source and target projections are whole functors, so both side-arrow
+directions and the comparison cell retain their next actions. The public
+`CubicalArrow` names are transparent readability aliases for this derived
+`LaxArrow` construction, not a duplicate square theory. In short:
+
+```
+ordinary Sigma + pointwise opposite + homd_int
+  → homdc_int
+  → two-sided total
+  → LaxArrow
+  → CubicalArrow.       // transparent alias
+```
+
+Native cubical levels are genuine Nat recursion:
+
+```
+Cube_C(0)   = C
+Cube_C(n+1) = LaxArrow(Cube_C(n)).
+```
+
+Objects at levels one, two, and three are edges, lax squares, and cubes. Face
+maps are intrinsically indexed words in `{L,R,*}`: `L` and `R` fix the newest
+coordinate at its two endpoints, while `*` retains it. Structural substitution
+of these words computes, and their whole action satisfies the recursive
+reading
+
+```
+L(f) ↦ face(f) ∘ source
+R(f) ↦ face(f) ∘ target
+*(f) ↦ LaxArrow(face(f)).
+```
+
+The star case consumes the retained `IsPseudoFunctor` property; it does not
+invent a second forward map. The resulting whole semicubical nerve is
+
+```
+N_□(C) : SemiCubePlus^op ⊢ Cat
+N_□(C)[n] = Cube_C(n).
+```
+
+Its generic arrow action remains available above every face restriction. A
+recursive finite family exposes all `2n` immediate faces. Yoneda supplies an
+object-level section/evaluation beta between the standard representable
+semicube and a native cube, without asserting a whole equivalence.
+
+The Gray and cubical readings meet through a fixed right bracketing:
+
+```
+GrayCube_R(1)   = I
+GrayCube_R(n+2) = I ⊗_R GrayCube_R(n+1)
+
+StrictFunctor(GrayCube_R(n+1),C)
+  → Obj(Cube_C(n+1)).
+```
+
+This decoder is one internal Nat recursion. Dimensions one through three are
+checked, and at dimension two its transformation graph recovers the same
+coordinate-swapped interchanger as the walking-square calculation. The result
+does not yet include an inverse decoder, a mapping-category equivalence,
+alternate bracketings, tensor associativity, degeneracies, connections, or
+Kan filling.
 
 
 Simplexes from dependent homs
@@ -579,6 +762,143 @@ uses the same triangular normal-form language at components:
 ```
 
 
+Products, terminal objects, and indexed base change
+----------------------------------------------------
+
+A selected binary product begins with a whole functor, not with unrelated
+objectwise choices:
+
+```
+P : C × C ⊢ C
+
+κ₁ : P ⇒ pr₁
+κ₂ : P ⇒ pr₂.
+```
+
+For `f : X → A` and `g : X → B`, pairing is itself the point of a whole
+represented-family transformation
+
+```
+⟨-,-⟩_X
+  : Hom_C(X,A) × Hom_C(X,B) ⊢ Hom_C(X,P(A,B)).
+```
+
+Consequently higher arrows between possible legs are mapped to higher arrows
+between their pairings. Došen's antecedential projections
+
+```
+K₁ᵃ(h) = h ∘ κ₁
+K₂ᵃ(h) = h ∘ κ₂
+```
+
+make the principal structural cuts visible:
+
+```
+K₁ᵃ(h) ∘ ⟨f,g⟩ ⇝ h ∘ f
+K₂ᵃ(h) ∘ ⟨f,g⟩ ⇝ h ∘ g
+
+⟨f,g⟩ ∘ k ⇝ ⟨f ∘ k,g ∘ k⟩
+h ∘ Kᵢᵃ(f) ⇝ Kᵢᵃ(h ∘ f)
+⟨κ₁,κ₂⟩ ⇝ id.
+```
+
+The generic whole-functor action is retained, rather than expanded as another
+runtime normal form. It agrees at proof time with the triangular map:
+
+```
+P[f,g] ≐ ⟨K₁ᵃ(f),K₂ᵃ(g)⟩.
+```
+
+Here `≐` means proof-time agreement. The selected product calculus is distinct
+from the always-available product *category* constructor and from the stronger
+weighted-limit presentation; an explicit adapter can relate a supplied
+weighted comparison without manufacturing one from beta and eta alone.
+
+The empty product is a selected terminal object `t` with one whole canonical
+arrow transformation
+
+```
+! : id_C ⇒ Const_t.
+```
+
+Its component and off-diagonal action compute through the terminal cut
+
+```
+!_B ∘ h ⇝ !_A.
+```
+
+Unrestricted uniqueness is not a variable-headed rewrite. Instead
+`Hom_C(A,t)` is contractible, recentered at `!_A`, and every `f : A → t`
+therefore has an internal path `f = !_A`. A thin cartesian package merely
+pairs the already-selected binary and empty products; it introduces no second
+set of operations or rules.
+
+The same introduction/elimination discipline becomes indexed in slices. For
+`u : X → Y`, postcomposition always gives
+
+```
+Σ_u : C/X ⊢ C/Y.
+```
+
+A chosen pullback structure supplies one opposite-variance whole family with
+exact fibres `C/X` and action
+
+```
+u* : C/Y ⊢ C/X,
+
+Σ_u ⊣ u*.
+```
+
+The unit and counit are actual whole transformations. Their off-diagonal
+actions `γᶜ` and `φᵃ` satisfy the full rectangular reductions
+
+```
+φᵃ(h) ∘ Σ_u(γᶜ(k)) ⇝ h ∘ Σ_u(k)
+u*(φᵃ(h)) ∘ γᶜ(k) ⇝ u*(h) ∘ k.
+```
+
+The associated mate functors act on whole hom-categories:
+
+```
+Hom_{C/Y}(Σ_u(a),g) ⇄ Hom_{C/X}(a,u*(g)).
+```
+
+Their point and whole composites cancel, while the stable computational
+presentation remains proof-time comparable with the explicit unit/counit
+formulas. A pullback cone is therefore already an object of the left-hand hom,
+not a record storing two legs and a commuting-square proof. If
+`g : Z → Y`, the selected slice object
+
+```
+u*(g) = (Q, π₁ : Q → X)
+```
+
+is the pullback object. The counit supplies `π₂ : Q → Z` and the retained
+directed square
+
+```
+g ∘ π₂ ⇒ u ∘ π₁.
+```
+
+In a locally discrete category this recovers the usual strict equation.
+
+A selected dependent-product structure supplies the third whole slice family
+and the second adjunction:
+
+```
+Π_u : C/X ⊢ C/Y
+
+Σ_u ⊣ u* ⊣ Π_u.
+```
+
+Its unit/counit transfors, both Došen rectangles, whole transpose and
+untranspose, and the varying-endpoint hom comparison reuse the same generic
+adjunction calculus. This is a computational foundation for local cartesian
+closure, not yet a convention-sensitive LCCC package: derived slice
+exponentials, Beck–Chevalley, Frobenius, pushout duality, and comparison with
+independently selected weighted pullbacks remain later coherence layers.
+
+
 From invertibility sieves to sheafification
 -------------------------------------------
 
@@ -765,10 +1085,12 @@ Pⁿ_A = Proj A[x₀,…,xₙ].
 
 These qualifications are part of the result. Emdash currently demonstrates
 that directed dependency, readable categorical binders, higher-inductive
-normalization, weighted universal constructions, sieve-centered local
-geometry, a Cat-valued sheafification reflector, free groupoidal realization,
-profiled Gray interchange, and variable-dimensional dependent-simplex
-recursion inhabit one executable architecture. It does
+normalization, monad and cartesian cut elimination, indexed
+`Σ_u ⊣ u* ⊣ Π_u` structure, weighted universal constructions,
+sieve-centered local geometry, a Cat-valued sheafification reflector, free
+groupoidal realization, profiled Gray interchange, native cubical action, and
+variable-dimensional dependent-simplex recursion inhabit one executable
+architecture. It does
 not claim that every displayed variance, every groupoidal closure, every
 coefficient category, or the representation-independent theory of schemes
 has already been completed.
@@ -927,8 +1249,10 @@ retains higher action. Source functoriality and the packaged adjunction remain
 separate.
 
 The generic compositor `F[g] ∘ F[f] ⇒ F[g ∘ f]` becomes invertible in a path
-target and becomes identity at a decoded strict code, but may remain directed
-otherwise. One selected strict-object/lax-arrow right closure
+target but may remain directed otherwise. `IsStrictFunctor(F)` and
+`IsPseudoFunctor(F)` constrain that same existing internal action; the strict
+package is exactly `Σ(F : A ⊢ B), IsStrictFunctor(F)`, not a decoded parallel
+grammar. One selected strict-object/lax-arrow right closure
 
 ```
 GrayHom_lax(A ⊗_R B,C)
@@ -936,8 +1260,60 @@ GrayHom_lax(A ⊗_R B,C)
 ```
 
 derives the nonidentity walking-square interchanger
-`a₁ ∘ b₀ ⇒ b₁ ∘ a₀` from whole laxity. This is a profiled coherence test, not
-the full Crans–Gray monoidal theory.
+`a₁ ∘ b₀ ⇒ b₁ ∘ a₀` from whole laxity. This is a profiled coherence test,
+not the full Crans–Gray monoidal theory or the still-separate global migration
+of historical strict cuts.
+
+The square is another use of the same triangular formula
+
+```
+Hom_{ΣD}((x,u),(y,v))
+  = Σ(p : x → y), Hom_{D[y]}(D[p](u),v).
+```
+
+For `E : K₁^op ⊢ Catd(K₂)`, first make edges into objects and correct the
+variance:
+
+```
+Edge_E[x₁] := Σ(x₂ : K₂), E[x₁][x₂]
+D_E[x₁]    := Edge_E[x₁]^op
+
+homdc_int(E) := homd_int(id_{D_E}).
+```
+
+After fixing edge objects `(x₂,u)`, `(y₂,v)`, and `a : x₁ → y₁`, generic
+Sigma-Hom exposes
+
+```
+b : x₂ → y₂
+α : E[x₁][b](u) → E[a^op][y₂](v).
+```
+
+For `E = hom_int(id_C)`, ordinary post- and precomposition reduce this to
+
+```
+α : b ∘ u ⇒ v ∘ a.
+```
+
+Thus a square is a triangular `homd_int` arrow between edge objects. The
+derived total has objects `u` and arrows `(a,(b,α))`; the readable
+`lax_square(a,b,α)` only packages this canonical nested Sigma term. It does
+not introduce a square record or a separate commutativity law. Iteration then
+gives native cubical levels
+
+```
+Cube_C(0)   = C
+Cube_C(n+1) = LaxArrow(Cube_C(n)),
+```
+
+while intrinsically indexed `{L,R,*}` words compute face substitution and act
+by whole restriction functors. They assemble a semicubical nerve
+`N_□(C) : SemiCubePlus^op ⊢ Cat`, retain higher action, and expose all `2n`
+immediate faces. A fixed-bracketing right-Gray cube decoder maps strict Gray
+cube diagrams to native cubes; dimensions one through three are checked, and
+dimension two recovers the walking-square interchanger. No inverse decoder,
+whole mapping equivalence, degeneracies, connections, Kan fillers, alternate
+bracketings, or Gray monoidal coherence is claimed.
 
 ---
 
@@ -1022,6 +1398,48 @@ multiplication components use the same triangular language:
 ```
 μ_X ⇝ (id_TX)*.
 ```
+
+---
+
+A selected binary product is a whole functor `P : C × C ⊢ C` with whole
+projections and whole represented-family pairing. Its triangular cuts compute:
+
+```
+K₁ᵃ(h) ∘ ⟨f,g⟩ ⇝ h ∘ f
+K₂ᵃ(h) ∘ ⟨f,g⟩ ⇝ h ∘ g
+⟨f,g⟩ ∘ k ⇝ ⟨f ∘ k,g ∘ k⟩
+⟨κ₁,κ₂⟩ ⇝ id.
+```
+
+The whole action `P[f,g]` agrees at proof time with
+`⟨K₁ᵃ(f),K₂ᵃ(g)⟩`; it is not expanded as a competing runtime form. A
+selected terminal object has
+
+```
+! : id_C ⇒ Const_t
+!_B ∘ h ⇝ !_A,
+```
+
+while arbitrary uniqueness follows from contractibility of `Hom_C(A,t)`
+rather than a variable-headed rule.
+
+For `u : X → Y`, postcomposition in slices always supplies `Σ_u : C/X ⊢ C/Y`.
+Chosen pullbacks and dependent products add whole functors
+
+```
+u*  : C/Y ⊢ C/X
+Π_u : C/X ⊢ C/Y
+
+Σ_u ⊣ u* ⊣ Π_u.
+```
+
+Both adjunctions retain actual whole unit/counit transfors, the full Došen
+rectangles, whole mate action, and Hom-category comparison. The pullback of
+`g : Z → Y` is the selected slice object `u*(g)`; its counit supplies the
+second projection and directed square. Thus a cone is an object of
+`Hom_{C/Y}(Σ_u(a),g)`, not a separately stored pair of legs and equation.
+Beck–Chevalley, Frobenius, derived slice exponentials, and the final
+convention-sensitive LCCC package remain later layers.
 
 ---
 
