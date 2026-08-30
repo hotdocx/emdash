@@ -4,8 +4,9 @@ Date: 2026-08-30 (America/Toronto)
 
 Plan-ID: `EMDASH-V3-2-FOUNDATIONAL-DOCS-SOP-REGISTRY-MAINTENANCE-2026-08-30`
 
-Status: **complete; foundational authorities, lifecycle registry, and focused
-anti-drift tooling synchronized without Lambdapi semantic changes**.
+Status: **complete and deployed; foundational authorities, lifecycle registry,
+focused anti-drift tooling, remote `main`, and the GitHub Pages book artifact
+synchronized without Lambdapi semantic changes**.
 
 Branch: `goal/foundational-docs-maintenance-v3.2`
 
@@ -33,7 +34,7 @@ standing prose corrected by this ledger.
 Side-Task-Ledger: `FDM-00`, `FDM-BASE-1`, `FDM-ROLE-2`, `FDM-FOUND-3`,
 `FDM-SYNTAX-4`, `FDM-AGENTS-5`, `FDM-STATUS-6`, `FDM-INDEX-7`,
 `FDM-LINT-8`, `FDM-ROOT-9`, `FDM-REFS-10`, `FDM-CLEAN-11`,
-`FDM-VALIDATE-12`, and `FDM-CLOSE-13`.
+`FDM-VALIDATE-12`, `FDM-CLOSE-13`, and `FDM-REMOTE-14`.
 
 Infinity-Codex-Origin: session `01a02f68-6142-7e53-993a-4505aa8e2cbe`, response `0044_2026-08-30T11-24-42Z_01a05260-fe99-7141-ad53-075dc363d4b5.md`.
 Infinity-Codex-Decision-Responses: `infinity-codex:01a02f68-6142-7e53-993a-4505aa8e2cbe:01a05260-fe99-7141-ad53-075dc363d4b5`
@@ -108,10 +109,18 @@ The user authorized:
 
 The completed fast-forward used `--ff-only`; it introduced no merge commit.
 
-This authorization does not by itself include:
+The initial launch authorization did not include remote integration. After
+reviewing the completed checkpoint, the user separately and explicitly
+authorized:
 
-- push, pull request, tag, publication, release, or deployment;
-- merge of this maintenance branch back to `main`;
+- fast-forward integration of this maintenance branch into `main`;
+- push of `main` to GitHub; and
+- the affected GitHub Pages deployment and live book-link verification.
+
+The combined authorization still does not include:
+
+- pull request, tag, GitHub release, npm/Zenodo publication, or unrelated
+  deployment;
 - amend, rebase, reset, squash, force push, or other history rewriting;
 - deletion of live branches or worktrees;
 - importing or anticipating the unfinished
@@ -443,7 +452,8 @@ changes. Run shell syntax only when shell scripts change.
 | `FDM-REFS-10` | complete | Confirmed source-registration arrays include all monad/Cartesian/pullback/`Π_u` and cubical owners and the 328-file health snapshot is fresh. Corrected only concrete README drift: added the integrated universal-construction chain, routed mandatory workflow to nested `AGENTS.md`, and advanced the local book label from `0.6.1-dev`/355 to `0.7.0-dev`/374 while distinguishing the latest public DOI. Wrapper, book/evidence, handoff, and recovery routes otherwise remain unchanged. |
 | `FDM-CLEAN-11` | complete | Reconfirmed the dry run, pruned only dead metadata for `/tmp/emdash-gray-graph-owner-probe-20260825`, and reran the dry run with no remaining candidate. No branch, file, or live worktree was removed. |
 | `FDM-VALIDATE-12` | complete | Final proportional gates pass: 87-heading source TOC, active references, lifecycle/header registry (`active=8`, `completed=18`, `deferred=1`, `superseded=1` after closeout reclassification), strict 2,359-check/116-area catalog freshness, 328-file health snapshot `612715e4…`, all 52 relevant Python tests, Python compilation, and diff hygiene. The fresh warning audit is `1,117/157`; strict LHS audit is zero/63/38. No Lambdapi or render aggregate was run because no executable mathematical or pagination-owned source changed. |
-| `FDM-CLOSE-13` | complete | Synchronized this ledger and current-status/index routes. Historical `main` remains at integrated `0e61a79`; the user separately authorized one final local checkpoint after reviewing the completed goal, and this ledger is included in that exact checkpoint tranche. The in-progress global strictness migration remains an explicit later documentation-sync boundary. |
+| `FDM-CLOSE-13` | complete | Synchronized this ledger and current-status/index routes. The reviewed maintenance tranche is checkpoint `64edf08`; the in-progress global strictness migration remains an explicit later documentation-sync boundary. |
+| `FDM-REMOTE-14` | complete | Re-fetched with `origin/main` at ancestral `689f41c`, fast-forwarded clean local `main` from `0e61a79` to `64edf08`, and pushed without force or merge commit. GitHub Pages run [`33313026870`](https://github.com/hotdocx/emdash/actions/runs/33313026870) completed both `build` and `deploy` successfully for exact head `64edf08`. The live reviewer returned HTTP 200 and embedded fingerprinted asset `emdash-book-B9zyzyLo.pdf`; that 3,288,810-byte, 374-page `0.7.0-dev` PDF is byte-identical to `docs/emdash-book.pdf`, SHA-256 `d15287f7a841dfd25ad441c7fc8ff804425659ae0c292c2d8ae726fb46c9204b`. Local and remote `main` were equal at the deployed checkpoint. |
 
 ## 10. Acceptance And Stop Conditions
 
@@ -495,4 +505,6 @@ Stop and request direction rather than:
 > Follow proportional documentation/tooling validation. Branch/worktree
 > creation and implementation are authorized; local checkpoint commits,
 > merge, push, publication, history rewriting, and live-worktree cleanup are
-> not authorized unless separately requested.
+> not authorized unless separately requested. The completed `FDM-REMOTE-14`
+> record documents the later explicit authorization limited to fast-forward,
+> GitHub push, and the affected Pages deployment.

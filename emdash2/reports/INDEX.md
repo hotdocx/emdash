@@ -1491,6 +1491,9 @@ These plans are complete but remain the recovery and decision authority for curr
   SOP plus compact routing, reclassifies plan lifecycle, and strengthens the
   registry checker against the observed recurrence. It changes no Lambdapi
   semantics and excludes the in-progress global strictness-profile migration.
+  Its post-completion remote row records successful fast-forward integration,
+  GitHub push, Pages run `33313026870`, and byte-exact live `0.7.0-dev` book
+  verification.
 
 - `REPORT_EMDASH_V3_2_SLICE_DEPENDENT_PRODUCTS_AND_LCCC_COMPUTATION_PLAN_2026-08-29.md`:
   completed first-tranche implementation successor to the pullback
