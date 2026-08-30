@@ -295,6 +295,7 @@ import './v3_2_algebra_affine_singular_tests';
 import './v3_2_algebra_formal_realization_tests';
 import './v3_2_algebra_formal_reifier_tests';
 import './v3_2_algebra_formal_cover_tests';
+import './v3_2_algebra_formal_localization_tests';
 import './v3_2_lf_module_theorem_development_tests';
 import './v3_2_lf_module_theorem_authoring_tests';
 import './v3_2_lf_declaration_fragment_authoring_tests';

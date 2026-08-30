@@ -61,6 +61,7 @@ export * from './algebra_affine_singular';
 export * from './algebra_formal_realization';
 export * from './algebra_formal_reifier';
 export * from './algebra_formal_cover';
+export * from './algebra_formal_localization';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
