@@ -779,7 +779,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-CONTRACT-1A` | complete; proportional-green at `46b8fda` | `CAS-PLAN-0` | browser-safe immutable operation, engine, support, result-quality, execution-context, diagnostic, and reusable-artifact contracts; ten focused tests, workspace check, affected lint, typecheck, and diff hygiene green; no algorithm, process, logical-Core, or public-package dependency |
 | `CAS-GRAPH-1B` | complete; proportional-green at `d6e2e00` | `CAS-CONTRACT-1A` | typed backend-neutral input/node/output computation graph, immutable reconstruction, bounded validation, topology-only stable JSON, cancellation, exact-node diagnostics, and sequential direct-execution lowering; eleven focused graph tests plus the ten predecessor tests green |
 | `CAS-EXACT-2A` | complete; proportional-green at `36dc108` | `CAS-GRAPH-1B` | stable parent/element base; canonical bigint-only integers and reduced rationals; arithmetic, order, Euclidean division, gcd, powers, text/JSON serialization, runtime schemas, and immutable operational domains; twelve exact tests and all 33 focused CAS tests green |
-| `CAS-POLY-2B` | complete; proportional-green; checkpoint candidate | `CAS-EXACT-2A` | coefficient-polymorphic parent-aware sparse multivariate polynomials; lex/grlex/grevlex, canonicalization, arithmetic, powers, substitution, stable serialization, runtime schema, and field-only ordered division; thirteen polynomial tests and all 46 focused CAS tests green |
+| `CAS-POLY-2B` | complete; proportional-green at `7b6b929` | `CAS-EXACT-2A` | coefficient-polymorphic parent-aware sparse multivariate polynomials; lex/grlex/grevlex, canonicalization, arithmetic, powers, substitution, stable serialization, runtime schema, and field-only ordered division; thirteen polynomial tests and all 46 focused CAS tests green |
 | `CAS-ENGINE-2C` | in progress | `CAS-POLY-2B` | native TypeScript reference engine executes selected exact and polynomial graph nodes with limits/cancellation |
 | `CAS-IDEAL-3A` | pending | `CAS-ENGINE-2C` | ideals, Buchberger reference implementation, reduction, membership, reduced bases, and retained transformations |
 | `CAS-ZARISKI-3B` | pending | `CAS-IDEAL-3A` | unimodular-combination computation and optional adapter to current Zariski-cover presentation |
@@ -963,6 +963,8 @@ together, followed by affected-file lint, root typecheck, and diff hygiene.
 The first sparse polynomial layer is implemented in
 `src/v3_2/algebra_polynomial.ts`. It is generic over the operational
 commutative-ring domain and provides:
+
+Semantic checkpoint: `7b6b929` (`cas: add sparse polynomial algebra`).
 
 - structural polynomial-ring parents over ordered variable lists;
 - lexicographic, graded lexicographic, and graded reverse lexicographic
