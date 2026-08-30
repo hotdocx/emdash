@@ -775,7 +775,7 @@ elaborator adapter, or an optional proof-development adapter.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `CAS-PLAN-0` | complete | reviewed design discussion and source audit | this living plan, branch/worktree identity, source baseline, architecture, decisions, validation, and launch prompt |
-| `CAS-CONTRACT-1A` | complete; proportional-green; checkpoint candidate | `CAS-PLAN-0` | browser-safe immutable operation, engine, support, result-quality, execution-context, diagnostic, and reusable-artifact contracts; ten focused tests, workspace check, affected lint, typecheck, and diff hygiene green; no algorithm, process, logical-Core, or public-package dependency |
+| `CAS-CONTRACT-1A` | complete; proportional-green at `46b8fda` | `CAS-PLAN-0` | browser-safe immutable operation, engine, support, result-quality, execution-context, diagnostic, and reusable-artifact contracts; ten focused tests, workspace check, affected lint, typecheck, and diff hygiene green; no algorithm, process, logical-Core, or public-package dependency |
 | `CAS-GRAPH-1B` | in progress | `CAS-CONTRACT-1A` | typed backend-neutral one-node and multi-node computation graph, validation, stable serialization, and direct-execution lowering |
 | `CAS-EXACT-2A` | pending | `CAS-GRAPH-1B` | exact integer/rational domains using `bigint`, normalization, arithmetic, serialization, and strict negatives |
 | `CAS-POLY-2B` | pending | `CAS-EXACT-2A` | parent-aware sparse multivariate polynomials, monomial orders, arithmetic, substitution, and division |
@@ -865,6 +865,8 @@ cross-layer aggregates are also outside this row.
 The first contract is implemented in `src/v3_2/algebra_engine.ts` and exposed
 only through the contributor `src/v3_2/index.ts` barrel. It is deliberately
 absent from the distributable package barrels.
+
+Semantic checkpoint: `46b8fda` (`cas: add algebra engine contracts`).
 
 The implementation provides:
 
