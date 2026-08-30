@@ -12,8 +12,8 @@ focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
 implemented and focused-green; `CAS-FREYD-6B` is implemented and
 proportional-green; `CAS-HOMOLOGICAL-7A` is complete and proportional-green;
 `CAS-MODULE-4B2` is complete and proportional-green; the first
-`CAS-CONSTRUCTIBLE-8A1` and `8A2` tranches are implemented and
-proportional-green while the larger constructible row remains in progress.
+`CAS-CONSTRUCTIBLE-8A` row is complete and proportional-green;
+`CAS-ORACLE-9A` is the next selected dependency-ready row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -797,7 +797,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-COMPILER-6A` | complete; proportional-green at `c28da8f` | `CAS-TOWER-5C` | scoped retained categorical-program IR, method-resolution trace, explicit schema-preserving category-to-algebra bindings, tower-rule retention, graph lowering and native execution; three compiler and thirty affected tests green |
 | `CAS-FREYD-6B` | complete; proportional-green at `2f26a59` | `CAS-COMPILER-6A`, `CAS-MODULE-4B1` | native whole module kernel/cokernel operations, concrete Freyd/AdditiveClosure field-module model, direct-presentation reinterpretation, schema-preserving compiler bindings, retained reinterpretation rule, and structural agreement with direct `PresentedModule` computations; three Freyd and forty affected tests green |
 | `CAS-HOMOLOGICAL-7A` | complete; `7A1` `66ed5a8`, `7A2` `8b97bad`, `7A3` `5f22b08`, `7A4` `3961bc5`, `7A5` `052032a`, `7A6` `ab68a11` green | `CAS-FREYD-6B` | quotient-aware universal operations, bounded complexes, whole/functorial/connecting homology, initial generalized spans, field resolutions, and native graph operations complete; broader representations and polynomial resolutions remain separately gated |
-| `CAS-CONSTRUCTIBLE-8A` | in progress; `8A1` `d4ccd34`, `8A2` `ec81ba3` green | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | elimination ideal operations and saturation-normalized locally closed/finite constructible Boolean sets complete; tower reinterpretation, computable-category surface, and native graph/compiler lowering remain |
+| `CAS-CONSTRUCTIBLE-8A` | complete; `8A1` `d4ccd34`, `8A2` `ec81ba3`, `8A3` `ec9b01e` green | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | elimination ideal operations, normalized locally closed/constructible Boolean sets, seven-stage tower metadata, direct reinterpretation, inclusion-poset category, native operations, and categorical compilation complete |
 | `CAS-ORACLE-9A` | pending | one native representative consumer | opt-in Singular/Macaulay2/CAP-homalg differential oracle with no public semantic authority |
 | `CAS-FORMAL-BRIDGE-10` | deferred | concrete formal consumer | selected computational realization, trusted-computation marker, or checked-proof adapter; not a CAS prerequisite |
 
@@ -943,6 +943,40 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-094` | accepted | A basic locally closed piece is `V(I) intersect D(f)` normalized immediately to `V(I:f^infinity) intersect D(f)`; emptiness is retained radical membership `f in sqrt(I:f^infinity)`. |
 | `D-CAS-095` | accepted | Constructible values are finite unions of nonempty normalized pieces. Intersection uses ideal sum and open-product; difference expands the complement of `V(J) intersect D(g)` into the basic opens of generators of `J` plus the closed branch `V(g)`. |
 | `D-CAS-096` | accepted | Constructible equality is mutual finite-difference emptiness with both differences retained; presentation-list equality, ad hoc sorting, or unproved deduplication is not used as set equality. |
+| `D-CAS-097` | accepted | The modeled constructor path is AdditiveClosure, slice over the tensor unit, poset reflection, stable poset, opposite, differences, and finite unions; each stage retains one explicit compiler-facing lowering rule. |
+| `D-CAS-098` | accepted | The efficient public representation is the direct finite constructible-piece list; tower objects are modeling metadata and do not impose runtime box layers. |
+| `D-CAS-099` | accepted | The direct computable category is the constructible inclusion poset: a morphism retains the computed empty source-minus-target difference, and object/morphism equality uses constructible mutual difference. |
+| `D-CAS-100` | accepted | Union, intersection, difference, and equivalence have matching category and native algebra operations, allowing exact schema-preserving categorical lowering while retaining all seven tower rules and the direct reinterpretation rule. |
+
+## `CAS-CONSTRUCTIBLE-8A3` Result And Row Completion
+
+The selected constructible constructor tower and direct reinterpretation are
+implemented in `src/v3_2/algebra_constructible_tower.ts`. Its seven retained
+rules lower additive matrices, tensor-unit slices, poset comparisons, stable
+comparisons, opposite order, formal differences, and finite unions to direct
+matrix, ideal, radical, saturation, locally closed, and constructible data.
+
+The executable surface in `src/v3_2/algebra_constructible_category.ts` is the
+constructible inclusion poset. An inclusion `A -> B` exists only when `A-B`
+computes empty and retains that difference. Union, intersection, difference,
+and equivalence are primitive whole category operations with schema-identical
+native algebra bindings. The concrete model packages the category, seven-stage
+tower, direct reinterpretation, compiler lowerings, and native engine.
+
+Three focused tests cover tower/rule identity, reinterpretation roundtrip,
+positive and negative inclusion, category method selection, categorical
+compilation, native graph execution, and retention of seven constructor plus
+one reinterpretation rule. Together with constructible, elimination,
+categorical-program, tower, and graph suites, 31 tests pass, followed by
+workspace check, affected lint, root typecheck, and diff hygiene. No
+repository-wide aggregate was run.
+
+Semantic checkpoint: `ec9b01e` (`cas: compile constructible category tower`).
+
+This completes `CAS-CONSTRUCTIBLE-8A` at the direct computational
+reinterpretation boundary. Operational tower metadata is not LF evidence;
+formal comparison with emdash's semantic Zariski or constructible structures
+remains consumer-gated under `CAS-FORMAL-BRIDGE-10`.
 
 ## `CAS-CONSTRUCTIBLE-8A2` Result
 
