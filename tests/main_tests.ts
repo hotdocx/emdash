@@ -278,6 +278,7 @@ import './v3_2_algebra_resolution_tests';
 import './v3_2_algebra_homological_reference_operations_tests';
 import './v3_2_algebra_polynomial_module_tests';
 import './v3_2_algebra_polynomial_presentation_tests';
+import './v3_2_algebra_polynomial_module_reference_operations_tests';
 import './v3_2_lf_module_theorem_development_tests';
 import './v3_2_lf_module_theorem_authoring_tests';
 import './v3_2_lf_declaration_fragment_authoring_tests';
