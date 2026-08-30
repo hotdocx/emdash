@@ -780,7 +780,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-GRAPH-1B` | complete; proportional-green at `d6e2e00` | `CAS-CONTRACT-1A` | typed backend-neutral input/node/output computation graph, immutable reconstruction, bounded validation, topology-only stable JSON, cancellation, exact-node diagnostics, and sequential direct-execution lowering; eleven focused graph tests plus the ten predecessor tests green |
 | `CAS-EXACT-2A` | complete; proportional-green at `36dc108` | `CAS-GRAPH-1B` | stable parent/element base; canonical bigint-only integers and reduced rationals; arithmetic, order, Euclidean division, gcd, powers, text/JSON serialization, runtime schemas, and immutable operational domains; twelve exact tests and all 33 focused CAS tests green |
 | `CAS-POLY-2B` | complete; proportional-green at `7b6b929` | `CAS-EXACT-2A` | coefficient-polymorphic parent-aware sparse multivariate polynomials; lex/grlex/grevlex, canonicalization, arithmetic, powers, substitution, stable serialization, runtime schema, and field-only ordered division; thirteen polynomial tests and all 46 focused CAS tests green |
-| `CAS-ENGINE-2C` | complete; proportional-green; checkpoint candidate | `CAS-POLY-2B` | native in-process TypeScript registry with multiple deterministic algorithms per exact operation contract; selected integer/rational and ring-specific polynomial operations, direct/graph execution, fuel, cancellation, progress, metadata, and output limits; ten engine tests and all 56 focused CAS tests green |
+| `CAS-ENGINE-2C` | complete; proportional-green at `765aa32` | `CAS-POLY-2B` | native in-process TypeScript registry with multiple deterministic algorithms per exact operation contract; selected integer/rational and ring-specific polynomial operations, direct/graph execution, fuel, cancellation, progress, metadata, and output limits; ten engine tests and all 56 focused CAS tests green |
 | `CAS-IDEAL-3A` | in progress | `CAS-ENGINE-2C` | ideals, Buchberger reference implementation, reduction, membership, reduced bases, and retained transformations |
 | `CAS-ZARISKI-3B` | pending | `CAS-IDEAL-3A` | unimodular-combination computation and optional adapter to current Zariski-cover presentation |
 | `CAS-MATRIX-4A` | pending | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | exact matrices and selected row/column algorithms with explicit orientation conventions |
@@ -995,6 +995,8 @@ root typecheck, and diff hygiene.
 The native execution layer is implemented in
 `src/v3_2/algebra_reference_engine.ts` and
 `src/v3_2/algebra_reference_operations.ts`. It provides:
+
+Semantic checkpoint: `765aa32` (`cas: add native TypeScript reference engine`).
 
 - immutable typed reference-implementation declarations;
 - multiple algorithms per exact operation contract;
