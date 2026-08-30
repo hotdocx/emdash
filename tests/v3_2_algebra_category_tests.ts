@@ -3,6 +3,16 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { defineAlgebraRuntimeSchema } from '../src/v3_2/algebra_engine';
+import { RATIONAL_DOMAIN, algebraRationalText } from '../src/v3_2/algebra_exact';
+import {
+    algebraMatrix,
+    algebraMatrixSpace,
+    algebraZeroMatrix
+} from '../src/v3_2/algebra_matrix';
+import {
+    algebraFreeModule,
+    algebraModuleMorphism
+} from '../src/v3_2/algebra_module';
 import {
     AlgebraCategoryError,
     createCategoryOperationRegistry,
@@ -12,6 +22,10 @@ import {
     executeCategoryOperation,
     planCategoryOperation
 } from '../src/v3_2/algebra_category';
+import {
+    algebraModuleComputableCategory,
+    algebraRingComputableCategory
+} from '../src/v3_2/algebra_category_instances';
 
 const numberSchema = defineAlgebraRuntimeSchema<number>({
     id: 'fixture.category.number',
@@ -129,5 +143,73 @@ describe('v3.2 computable-category operation registry', () => {
             () => planCategoryOperation(cycle, double),
             categoryError('DERIVATION_CYCLE')
         );
+    });
+
+    it('instantiates a ring as a strict one-object computable category', () => {
+        const category = algebraRingComputableCategory(RATIONAL_DOMAIN);
+        const object = category.source(RATIONAL_DOMAIN.one);
+        assert.ok(category.equalObjects(object, category.target(RATIONAL_DOMAIN.zero)));
+        assert.equal(
+            algebraRationalText(category.identityMorphism(object)),
+            '1'
+        );
+        assert.equal(
+            algebraRationalText(category.compose(
+                RATIONAL_DOMAIN.normalize('2/3'),
+                RATIONAL_DOMAIN.normalize('9/4')
+            )),
+            '3/2'
+        );
+        assert.equal(category.operations.methods.length, 0);
+    });
+
+    it('instantiates presented modules with whole and derived kernel/cokernel operations', async () => {
+        const source = algebraFreeModule(RATIONAL_DOMAIN, 2);
+        const target = algebraFreeModule(RATIONAL_DOMAIN, 2);
+        const morphism = algebraModuleMorphism(
+            source,
+            target,
+            algebraMatrix(
+                algebraMatrixSpace(RATIONAL_DOMAIN, 2, 2),
+                [['1', '0'], ['0', '0']]
+            ),
+            algebraZeroMatrix(algebraMatrixSpace(RATIONAL_DOMAIN, 0, 0))
+        );
+        const runtime = algebraModuleComputableCategory(RATIONAL_DOMAIN);
+        const category = runtime.category;
+        assert.ok(category.equalObjects(category.source(morphism), source));
+        assert.ok(category.equalMorphisms(
+            category.compose(category.identityMorphism(target), morphism),
+            morphism
+        ));
+        const kernel = await executeCategoryOperation(
+            category as never,
+            runtime.operations.kernel,
+            morphism
+        );
+        const kernelObject = await executeCategoryOperation(
+            category as never,
+            runtime.operations.kernelObject,
+            morphism
+        );
+        assert.equal(kernel.value.object.generators, 1);
+        assert.equal(kernelObject.value.generators, 1);
+        assert.equal(kernelObject.plan.method.kind, 'derived');
+        assert.equal(kernelObject.plan.prerequisites[0].operation.id,
+            runtime.operations.kernel.id);
+
+        const cokernel = await executeCategoryOperation(
+            category as never,
+            runtime.operations.cokernel,
+            morphism
+        );
+        const cokernelObject = await executeCategoryOperation(
+            category as never,
+            runtime.operations.cokernelObject,
+            morphism
+        );
+        assert.equal(cokernel.value.object.relations.parent.columns, 2);
+        assert.equal(cokernelObject.value.relations.parent.columns, 2);
+        assert.equal(cokernelObject.plan.method.kind, 'derived');
     });
 });
