@@ -34,6 +34,7 @@ export * from './algebra_tower';
 export * from './algebra_categorical_program';
 export * from './algebra_freyd';
 export * from './algebra_homological';
+export * from './algebra_generalized';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
