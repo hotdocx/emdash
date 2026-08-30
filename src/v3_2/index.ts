@@ -16,6 +16,7 @@ export * from './algebra_engine';
 export * from './algebra_graph';
 export * from './algebra_parent';
 export * from './algebra_exact';
+export * from './algebra_polynomial';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';

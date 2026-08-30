@@ -629,18 +629,18 @@ export interface AlgebraCommutativeRingDomain<
     readonly schema: AlgebraRuntimeSchema<Element>;
     readonly zero: Element;
     readonly one: Element;
-    normalize(value: Input): Element;
-    add(left: Input, right: Input): Element;
-    negate(value: Input): Element;
-    subtract(left: Input, right: Input): Element;
-    multiply(left: Input, right: Input): Element;
-    power(base: Input, exponent: bigint): Element;
-    equals(left: Input, right: Input): boolean;
-    compare(left: Input, right: Input): -1 | 0 | 1;
-    isZero(value: Input): boolean;
-    isOne(value: Input): boolean;
-    text(value: Input): string;
-    serialize(value: Input): string;
+    normalize(value: Input | Element): Element;
+    add(left: Input | Element, right: Input | Element): Element;
+    negate(value: Input | Element): Element;
+    subtract(left: Input | Element, right: Input | Element): Element;
+    multiply(left: Input | Element, right: Input | Element): Element;
+    power(base: Input | Element, exponent: bigint): Element;
+    equals(left: Input | Element, right: Input | Element): boolean;
+    compare(left: Input | Element, right: Input | Element): -1 | 0 | 1;
+    isZero(value: Input | Element): boolean;
+    isOne(value: Input | Element): boolean;
+    text(value: Input | Element): string;
+    serialize(value: Input | Element): string;
 }
 
 export interface AlgebraFieldDomain<
@@ -649,8 +649,8 @@ export interface AlgebraFieldDomain<
     Input
 > extends AlgebraCommutativeRingDomain<Parent, Element, Input> {
     readonly field: true;
-    inverse(value: Input): Element;
-    divide(dividend: Input, divisor: Input): Element;
+    inverse(value: Input | Element): Element;
+    divide(dividend: Input | Element, divisor: Input | Element): Element;
 }
 
 export const INTEGER_DOMAIN: AlgebraCommutativeRingDomain<

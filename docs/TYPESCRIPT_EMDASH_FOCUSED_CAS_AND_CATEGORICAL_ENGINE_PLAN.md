@@ -6,9 +6,9 @@ Plan-ID: `TS-EMDASH-FOCUSED-CAS`
 
 Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
-`CAS-CONTRACT-1A`, `CAS-GRAPH-1B`, and `CAS-EXACT-2A` implemented and
-proportional-green; `CAS-POLY-2B` is the next dependency-ready implementation
-row.
+`CAS-CONTRACT-1A`, `CAS-GRAPH-1B`, `CAS-EXACT-2A`, and `CAS-POLY-2B`
+implemented and proportional-green; `CAS-ENGINE-2C` is the next
+dependency-ready implementation row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
 
@@ -779,8 +779,8 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-CONTRACT-1A` | complete; proportional-green at `46b8fda` | `CAS-PLAN-0` | browser-safe immutable operation, engine, support, result-quality, execution-context, diagnostic, and reusable-artifact contracts; ten focused tests, workspace check, affected lint, typecheck, and diff hygiene green; no algorithm, process, logical-Core, or public-package dependency |
 | `CAS-GRAPH-1B` | complete; proportional-green at `d6e2e00` | `CAS-CONTRACT-1A` | typed backend-neutral input/node/output computation graph, immutable reconstruction, bounded validation, topology-only stable JSON, cancellation, exact-node diagnostics, and sequential direct-execution lowering; eleven focused graph tests plus the ten predecessor tests green |
 | `CAS-EXACT-2A` | complete; proportional-green at `36dc108` | `CAS-GRAPH-1B` | stable parent/element base; canonical bigint-only integers and reduced rationals; arithmetic, order, Euclidean division, gcd, powers, text/JSON serialization, runtime schemas, and immutable operational domains; twelve exact tests and all 33 focused CAS tests green |
-| `CAS-POLY-2B` | in progress | `CAS-EXACT-2A` | parent-aware sparse multivariate polynomials, monomial orders, arithmetic, substitution, and division |
-| `CAS-ENGINE-2C` | pending | `CAS-POLY-2B` | native TypeScript reference engine executes selected exact and polynomial graph nodes with limits/cancellation |
+| `CAS-POLY-2B` | complete; proportional-green; checkpoint candidate | `CAS-EXACT-2A` | coefficient-polymorphic parent-aware sparse multivariate polynomials; lex/grlex/grevlex, canonicalization, arithmetic, powers, substitution, stable serialization, runtime schema, and field-only ordered division; thirteen polynomial tests and all 46 focused CAS tests green |
+| `CAS-ENGINE-2C` | in progress | `CAS-POLY-2B` | native TypeScript reference engine executes selected exact and polynomial graph nodes with limits/cancellation |
 | `CAS-IDEAL-3A` | pending | `CAS-ENGINE-2C` | ideals, Buchberger reference implementation, reduction, membership, reduced bases, and retained transformations |
 | `CAS-ZARISKI-3B` | pending | `CAS-IDEAL-3A` | unimodular-combination computation and optional adapter to current Zariski-cover presentation |
 | `CAS-MATRIX-4A` | pending | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | exact matrices and selected row/column algorithms with explicit orientation conventions |
@@ -866,6 +866,10 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-023` | accepted | Exact integer/rational values store only `bigint`; constructors accept bigint or canonical base-10 text and reject JavaScript `number`, including safe integers. |
 | `D-CAS-024` | accepted | Rational normal form has coprime numerator/denominator, positive denominator, and unique zero `0/1`; ordinary power uses nonnegative bigint exponents. |
 | `D-CAS-025` | accepted | Immutable operational commutative-ring/field dictionaries supply later algorithms but are runtime capabilities, not formal doctrine evidence. |
+| `D-CAS-026` | accepted | Polynomial normal form is an immutable descending sparse term list; equal monomials are merged, zero coefficients are removed, and exponents are nonnegative bigint. |
+| `D-CAS-027` | accepted | Polynomial parent identity contains coefficient-parent identity, ordered variable list, and selected lex/grlex/grevlex order; no implicit cross-parent arithmetic is performed. |
+| `D-CAS-028` | accepted | Initial substitution remains within one polynomial ring; general coefficient/ring maps are a later explicit operation rather than an inferred coercion. |
+| `D-CAS-029` | accepted | Initial multivariate division is divisor-order-sensitive, requires an operational field, rejects zero divisors, retains all quotients and the remainder, and enforces a step ceiling. |
 
 ## `CAS-CONTRACT-1A` Result
 
@@ -953,6 +957,33 @@ Semantic checkpoint: `36dc108` (`cas: add exact integer and rational domains`).
 Focused evidence in `tests/v3_2_algebra_exact_tests.ts` covers twelve positive
 and negative exact-domain cases. All 33 engine/graph/exact focused tests pass
 together, followed by affected-file lint, root typecheck, and diff hygiene.
+
+## `CAS-POLY-2B` Result
+
+The first sparse polynomial layer is implemented in
+`src/v3_2/algebra_polynomial.ts`. It is generic over the operational
+commutative-ring domain and provides:
+
+- structural polynomial-ring parents over ordered variable lists;
+- lexicographic, graded lexicographic, and graded reverse lexicographic
+  monomial comparison;
+- nonnegative bigint exponent vectors;
+- canonical merging, zero removal, and descending sparse ordering;
+- zero, one, constants, variables, and monomial construction;
+- addition, negation, subtraction, multiplication, and nonnegative powers;
+- equality and leading-term observation;
+- stable text and newline-terminated JSON without bigint ambiguity;
+- ring-specific runtime schemas;
+- same-ring polynomial substitution; and
+- ordered multivariate division over operational fields with quotients,
+  remainder, step count, zero-divisor rejection, and explicit limits.
+
+Focused evidence in `tests/v3_2_algebra_polynomial_tests.ts` covers thirteen
+positive and negative polynomial cases, including coefficient-generic integer
+arithmetic, rational division reconstruction, order distinctions, structural
+ring separation, schema rejection, and zero-variable rings. All 46 focused
+CAS tests pass together, followed by workspace check, affected-file lint,
+root typecheck, and diff hygiene.
 
 ## Validation Policy
 
