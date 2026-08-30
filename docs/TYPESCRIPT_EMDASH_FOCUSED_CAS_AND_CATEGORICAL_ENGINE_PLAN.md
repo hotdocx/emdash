@@ -6,8 +6,8 @@ Plan-ID: `TS-EMDASH-FOCUSED-CAS`
 
 Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
-`CAS-CONTRACT-1A` through `CAS-ZARISKI-3B` implemented and
-proportional-green; `CAS-MATRIX-4A` is the next dependency-ready
+`CAS-CONTRACT-1A` through `CAS-MATRIX-4A` implemented and
+proportional-green; `CAS-MODULE-4B` is the next dependency-ready
 implementation row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
@@ -783,8 +783,8 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-ENGINE-2C` | complete; proportional-green at `765aa32` | `CAS-POLY-2B` | native in-process TypeScript registry with multiple deterministic algorithms per exact operation contract; selected integer/rational and ring-specific polynomial operations, direct/graph execution, fuel, cancellation, progress, metadata, and output limits; ten engine tests and all 56 focused CAS tests green |
 | `CAS-IDEAL-3A` | complete; proportional-green at `58f51f2` | `CAS-ENGINE-2C` | ordered polynomial ideals; deterministic monic Buchberger basis, retained generator transformations, reduced-basis postpass, positive/negative membership decomposition, schemas/serialization, bounded cancellation, native operations, and graph pipeline; eleven ideal tests and all 67 focused CAS tests green |
 | `CAS-ZARISKI-3B` | complete; proportional-green at `ebbe15f` | `CAS-IDEAL-3A` | whole unimodular result retaining ideal/basis/membership/coefficients/combination/remainder; positive-only computational finite basic-open cover, schemas/serialization, native operations, and graph pipeline; formal adapter explicitly deferred; nine tests and all 76 focused CAS tests green |
-| `CAS-MATRIX-4A` | in progress | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | exact matrices and selected row/column algorithms with explicit orientation conventions |
-| `CAS-MODULE-4B` | pending | `CAS-IDEAL-3A`, `CAS-MATRIX-4A` | free and finitely presented modules, morphisms, kernels/cokernels, and syzygies |
+| `CAS-MATRIX-4A` | complete; proportional-green; checkpoint candidate | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | structural exact matrix spaces; immutable row-major arithmetic, transpose, composition, RREF with left transformation, column-kernel basis, schemas/serialization, field/limit/cancellation gates, native operations, and transpose graph; nine tests and all 85 focused CAS tests green |
+| `CAS-MODULE-4B` | in progress | `CAS-IDEAL-3A`, `CAS-MATRIX-4A` | free and finitely presented modules, morphisms, kernels/cokernels, and syzygies |
 | `CAS-CATEGORY-5A` | pending | `CAS-GRAPH-1B`, representative algebra values | minimal strict computable-category runtime, ring-as-category, matrix/free-module category, primitive/derived registry |
 | `CAS-DOCTRINE-5B` | pending | `CAS-CATEGORY-5A` | preadditive, additive, pre-Abelian, and Abelian doctrine descriptors with dual metadata |
 | `CAS-TOWER-5C` | pending | `CAS-DOCTRINE-5B` | Opposite, AdditiveClosure, Freyd, and reinterpretation descriptors with retained lowering data |
@@ -880,6 +880,9 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-037` | accepted | A unimodular computation retains the complete ideal/basis/membership path and projects coefficients, combination, and remainder; it is not reduced to a Boolean. |
 | `D-CAS-038` | accepted | A computational finite basic-open cover is constructed only from a positive unimodular result whose retained combination is exactly one. |
 | `D-CAS-039` | accepted | The TypeScript formal commutative-algebra profile is not yet qualified, so the current Zariski result remains computational data and the `CommRingUnimodularPresentation` bridge stays in `CAS-FORMAL-BRIDGE-10`. |
+| `D-CAS-040` | accepted | An `m x n` matrix represents `R^n -> R^m` on column vectors; composition is left multiplication and storage is immutable row-major. |
+| `D-CAS-041` | accepted | Field row reduction retains `L` with `L*A = rref(A)`, ordered pivot columns, rank, and work count. |
+| `D-CAS-042` | accepted | A kernel basis is an `n x k` matrix whose columns generate the nullspace and satisfy `A*K = 0`; `k` is the recorded nullity. |
 
 ## `CAS-CONTRACT-1A` Result
 
@@ -996,6 +999,31 @@ arithmetic, rational division reconstruction, order distinctions, structural
 ring separation, schema rejection, and zero-variable rings. All 46 focused
 CAS tests pass together, followed by workspace check, affected-file lint,
 root typecheck, and diff hygiene.
+
+## `CAS-MATRIX-4A` Result
+
+The first exact matrix layer is implemented in `src/v3_2/algebra_matrix.ts`
+and `src/v3_2/algebra_matrix_reference_operations.ts`. It provides:
+
+- structural matrix-space parents over operational coefficient rings;
+- immutable row-major values and exact entry access;
+- zero and identity matrices, arithmetic, transpose, equality, and standard
+  multiplication;
+- explicit `m x n` column-vector-map orientation;
+- field RREF with retained left row-operation transformation;
+- ordered pivot columns, rank, work count, and progress;
+- kernel generators as columns of an `n x k` matrix;
+- field, dimension, entry, intermediate-storage, fuel, and cancellation gates;
+- runtime schemas and deterministic coefficient-text JSON; and
+- native negate/add/transpose/RREF/kernel operations with a retained
+  double-transpose graph.
+
+Focused evidence in `tests/v3_2_algebra_matrix_tests.ts` covers nine positive
+and negative matrix cases, including empty dimensions, composition,
+`L*A = rref(A)`, `A*K = 0`, non-field rejection, limits, schemas,
+serialization, native operations, and graph composition. All 85 focused CAS
+tests pass together, followed by workspace check, affected-file lint, root
+typecheck, and diff hygiene.
 
 ## `CAS-ENGINE-2C` Result
 
