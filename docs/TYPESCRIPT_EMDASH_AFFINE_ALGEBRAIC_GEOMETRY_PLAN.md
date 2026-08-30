@@ -9,8 +9,9 @@ worktree created; `AFFINE-QUOTIENT-1A` is complete and proportional-green;
 `AFFINE-MAPS-1B`, `AFFINE-LOCALIZATION-2A`, and `AFFINE-SCHEMES-2B` are
 complete and proportional-green; `AFFINE-TENSOR-3A` is complete and
 proportional-green; `AFFINE-COVERS-4A` is complete and proportional-green;
-`AFFINE-GRAPH-5A` is complete and proportional-green; `AFFINE-SINGULAR-6A`
-is the next dependency-ready row.
+`AFFINE-GRAPH-5A` and `AFFINE-SINGULAR-6A` are complete and
+proportional-green. All nondeferred implementation rows are complete;
+`AFFINE-FORMAL-CONSUMER-7` remains a separately authorized follow-up.
 
 Baseline: `1095fab1fd64de6a2793f6958721bedc4b550f21`
 
@@ -206,7 +207,7 @@ tests, define API semantics, or require `check:ts`.
 | `AFFINE-TENSOR-3A` | complete; proportional-green at `89f6614` | `AFFINE-MAPS-1B`, `AFFINE-SCHEMES-2B` | renamed combined presentation, base-identification relations, canonical maps/compatibility, universal factorization, affine fiber products/projections, and invalid-map cases complete |
 | `AFFINE-COVERS-4A` | complete; proportional-green at `faadadc` | `AFFINE-LOCALIZATION-2A`, existing unimodular covers | quotient-unimodular validation, coefficients, actual charts/product overlaps, restriction maps, ordered signed Cech nerve/cochain data, triple/noncover/zero-scheme cases complete |
 | `AFFINE-GRAPH-5A` | complete; proportional-green at `c874016` | one representative consumer from each preceding layer | context-aware tensor/fiber/cover native operations, graphs, six-stage affine tower, direct reinterpretation, primitive category methods, exact lowerings, compiler wrapper, and staged execution complete |
-| `AFFINE-SINGULAR-6A` | pending; next selected row | installed Singular and representative native consumers | real opt-in differential comparisons for radical, quotient, localization, and selected fiber-product computations |
+| `AFFINE-SINGULAR-6A` | complete; proportional-green at `be9b461` | installed Singular and representative native consumers | deterministic ideal/saturation scripts, injected retained comparisons, quotient/localization/fiber wrappers, and real installed-Singular agreement across all four consumers complete |
 | `AFFINE-FORMAL-CONSUMER-7` | deferred | completed finite-cover/Cech consumer and separate user authorization | inspect the concrete consumer and launch or specify the minimal follow-up formal-bridge goal; not an affine computation prerequisite |
 
 Rows may be split into lettered subtranches when needed. A row is complete only
@@ -248,6 +249,58 @@ validation, synchronized decisions/results, and a local checkpoint.
 | `D-AFFINE-029` | accepted | The affine modeling tower records presented algebras, opposite variance, affine `Spec`, principal opens, finite covers, and Cech nerve stages, with one explicit lowering rule per constructor. |
 | `D-AFFINE-030` | accepted | The direct affine-scheme runtime is the public reinterpretation; modeling stages do not impose runtime boxes. Fiber product and cover are primitive category operations with exact native schema bindings. |
 | `D-AFFINE-031` | accepted | Staged affine compilation retains all six constructor rules and the direct reinterpretation rule while lowering a selected category method to the ordinary algebra graph engine. |
+| `D-AFFINE-032` | accepted | Affine differential comparison uses deterministic Singular ideal-membership and Rabinowitsch-saturation scripts with injected transport and retained native/external Boolean results. |
+| `D-AFFINE-033` | accepted | Quotient equality, localization inverse equations, and fiber-product relations all reduce to ideal membership under the fixed presentation, so they reuse one comparison mechanism rather than provider-specific semantic APIs. |
+| `D-AFFINE-034` | accepted | Real installed-Singular tests are explicitly gated by `EMDASH_RUN_SINGULAR_AFFINE_ORACLE=1`; ordinary native tests remain executable without Singular and disagreement remains data. |
+| `D-AFFINE-035` | accepted | The completed finite-cover consumer makes the follow-up formal bridge concrete, but does not authorize or require it in this goal. |
+
+## `AFFINE-SINGULAR-6A` Result And Nondeferred Completion
+
+Affine Singular comparisons are implemented in
+`src/v3_2/algebra_affine_singular.ts`. Deterministic scripts compare ordinary
+ideal membership and Rabinowitsch saturation membership. Quotient equality is
+reduced to membership of a representative difference; localization and fiber
+consumers use that same quotient comparison for inverse and presentation
+relations.
+
+Injected tests retain both agreement and disagreement and inspect generated
+scripts. The installed-Singular gate executes four real comparisons:
+
+- equality of `x+x^2` and `x` in `Q[x]/(x^2)`;
+- `y in (xy):x^infinity`;
+- the principal-localization inverse equation; and
+- the cusp fiber-product relation `x^2-y^3`.
+
+All four real comparisons agree with native TypeScript. The ordinary focused
+oracle/quotient/saturation/localization/tensor gate has 28 passes and one
+explicitly skipped real test; the separately enabled real gate has four
+passes. Workspace check, affected lint, root typecheck, and diff hygiene also
+pass. `check:ts` was not run.
+
+Semantic checkpoint: `be9b461` (`affine: add real Singular comparisons`).
+
+## Concrete Follow-Up For `AFFINE-FORMAL-CONSUMER-7`
+
+The finite-cover consumer now determines the minimal prospective formal
+bridge. A separately authorized goal should inspect current LF owners and
+translate only these concrete data:
+
+1. a computational realization of `AlgebraPresentedAlgebra` as the selected
+   formal commutative-ring or algebra object;
+2. the ordered cover elements and quotient coefficients retained by
+   `AlgebraAffineCover`, whose combination is canonically one;
+3. the localized chart coordinate algebras and canonical maps;
+4. product-localization overlap charts; and
+5. signed face restriction maps in the retained Cech nerve.
+
+The first adapter may use explicit computational data or a clearly marked
+trusted-computation mode. Checked witnesses are optional consumers, not a
+precondition. The follow-up must decide how this data instantiates the existing
+`CommRingUnimodularPresentation`/Zariski owners after inspecting their current
+LF surface; it must not invent a parallel formal geometry API from memory.
+
+This specification satisfies the consumer gate but does not start, authorize,
+or complete the formal-bridge goal.
 
 ## `AFFINE-GRAPH-5A` Result
 
