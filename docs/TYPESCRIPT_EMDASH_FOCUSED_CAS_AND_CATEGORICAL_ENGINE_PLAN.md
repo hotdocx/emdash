@@ -11,7 +11,8 @@ proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
 focused-green; `CAS-DOCTRINE-5B`, `CAS-TOWER-5C`, and `CAS-COMPILER-6A` are
 implemented and focused-green; `CAS-FREYD-6B` is implemented and
 proportional-green; `CAS-HOMOLOGICAL-7A` is complete and proportional-green;
-`CAS-MODULE-4B2` is the next selected dependency-ready row, while
+the first `CAS-MODULE-4B2A` tranche is implemented and proportional-green,
+while the larger `CAS-MODULE-4B2` row remains in progress and
 `CAS-CONSTRUCTIBLE-8A` remains independently dependency-ready.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
@@ -789,7 +790,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-ZARISKI-3B` | complete; proportional-green at `ebbe15f` | `CAS-IDEAL-3A` | whole unimodular result retaining ideal/basis/membership/coefficients/combination/remainder; positive-only computational finite basic-open cover, schemas/serialization, native operations, and graph pipeline; formal adapter explicitly deferred; nine tests and all 76 focused CAS tests green |
 | `CAS-MATRIX-4A` | complete; proportional-green at `442cbff` | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | structural exact matrix spaces; immutable row-major arithmetic, transpose, composition, RREF with left transformation, column-kernel basis, schemas/serialization, field/limit/cancellation gates, native operations, and transpose graph; nine tests and all 85 focused CAS tests green |
 | `CAS-MODULE-4B1` | complete; focused-green at `707a7da` | `CAS-MATRIX-4A` | field-linear free/presented modules, relation-witnessed morphisms and composition, quotient projection/section realization, free kernels, presented cokernels, and matrix syzygies; seven module and nine affected matrix tests green |
-| `CAS-MODULE-4B2` | pending; next selected row | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | polynomial-module term orders, module Groebner bases, Schreyer syzygies, finitely presented polynomial modules, and first free resolutions |
+| `CAS-MODULE-4B2` | in progress; `4B2A` proportional-green at `ecf1b97` | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | POT/TOP free-module orders, canonical vectors/schema, position-aware division, deterministic module Buchberger bases, retained transformations, and membership complete; Schreyer syzygies, presented polynomial modules, resolutions, and native graph operations remain |
 | `CAS-CATEGORY-5A` | complete; proportional-green at `64b4c7c` (core `90cfca0`) | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict category shell, weighted primitive/derived registry, ring-as-one-object category, and presented-field-module category with primitive whole kernels/cokernels and derived object projections; four category and sixteen affected module/matrix tests green |
 | `CAS-DOCTRINE-5B` | complete; focused-green at `02ac3d0` | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
 | `CAS-TOWER-5C` | complete; focused-green at `dd910b0` | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
@@ -926,6 +927,38 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-078` | accepted | Whole homology, functorial homology, connecting morphisms, presentation/split resolutions, and generalized-span composition have field-specific native operation descriptors and runtime schemas, so they execute directly or as `AlgebraComputationGraph` nodes. |
 | `D-CAS-079` | accepted | Native graph exposure completes the first homological row without pretending that compiler v1 already expands a generic categorical homology derivation into primitive kernels, lifts, and cokernels; derivation inlining remains a later compiler pass. |
 | `D-CAS-080` | accepted | After the complete field-linear homological row, the next selected row is polynomial modules and Schreyer syzygies (`CAS-MODULE-4B2`), which unlock non-field resolutions; constructible geometry remains independently dependency-ready rather than blocked. |
+| `D-CAS-081` | accepted | Polynomial free modules expose position-over-term and term-over-position orders with lower basis indices first; the selected module order is part of the structural parent identity rather than ambient mutable state. |
+| `D-CAS-082` | accepted | A module leading term divides another only when both polynomial monomial divisibility and basis position agree; module reduction and Buchberger pairing therefore do not decompose into unrelated scalar ideal computations. |
+| `D-CAS-083` | accepted | Module Buchberger retains a polynomial transformation row for every basis vector, and membership returns original-generator coefficients plus a module remainder satisfying exact reconstruction. |
+
+## `CAS-MODULE-4B2A` Result
+
+The polynomial free-module substrate and reference Buchberger engine are
+implemented in `src/v3_2/algebra_polynomial_module.ts`. A structural parent
+records the polynomial ring, free rank, and either position-over-term or
+term-over-position order. Vectors are canonical arrays of sparse polynomials,
+while leading terms are selected globally using the module order and an
+explicit lower-position-first tie break.
+
+Module division requires equal basis position in addition to scalar monomial
+divisibility. The deterministic Buchberger algorithm queues S-pairs only for
+basis elements with matching leading position, normalizes new basis vectors,
+retains transformations to the original generator family, enforces pair,
+basis, per-reduction, total-reduction, and cancellation limits, and reports
+progress. Membership retains basis quotients, coefficients in the original
+generators, and a remainder.
+
+The distinguishing test starts from `(x,y)` and `(y,0)` in a rank-two module
+with position-over-term order. Their S-pair creates `(0,y^2)`, demonstrating
+that the implementation is a module computation rather than two scalar ideal
+computations. Four focused tests cover POT/TOP leading-term differences,
+position-aware division and reconstruction, basis transformations, positive
+and negative membership, schemas, foreign modules, non-fields, zero divisors,
+limits, and cancellation. Together with the affected polynomial and ideal
+suites, 28 tests pass, followed by workspace check, affected lint, root
+typecheck, and diff hygiene. No repository-wide aggregate was run.
+
+Semantic checkpoint: `ecf1b97` (`cas: add polynomial module Buchberger engine`).
 
 ## `CAS-HOMOLOGICAL-7A6` Result And Row Completion
 
