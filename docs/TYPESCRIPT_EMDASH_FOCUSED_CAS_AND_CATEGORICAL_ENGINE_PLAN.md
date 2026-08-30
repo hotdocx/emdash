@@ -8,8 +8,8 @@ Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
 `CAS-CONTRACT-1A` through `CAS-MATRIX-4A` implemented and
 proportional-green; `CAS-MODULE-4B1` and `CAS-CATEGORY-5A` are implemented and
-focused-green; `CAS-DOCTRINE-5B` is implemented and focused-green;
-`CAS-TOWER-5C` is the next dependency-ready
+focused-green; `CAS-DOCTRINE-5B` and `CAS-TOWER-5C` are implemented and
+focused-green; `CAS-COMPILER-6A` is the next dependency-ready
 implementation row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
@@ -790,8 +790,8 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-MODULE-4B2` | pending | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | polynomial-module term orders, module Groebner bases, Schreyer syzygies, finitely presented polynomial modules, and first free resolutions |
 | `CAS-CATEGORY-5A` | complete; proportional-green at `64b4c7c` (core `90cfca0`) | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | strict category shell, weighted primitive/derived registry, ring-as-one-object category, and presented-field-module category with primitive whole kernels/cokernels and derived object projections; four category and sixteen affected module/matrix tests green |
 | `CAS-DOCTRINE-5B` | complete; focused-green at `02ac3d0` | `CAS-CATEGORY-5A` | explicit Category/Preadditive/Additive/Pre-Abelian/Abelian hierarchy, involutive doctrine/role duality, inherited capability roles, plannability-based qualification and missing-role reports; four doctrine and four affected category tests green |
-| `CAS-TOWER-5C` | in progress | `CAS-DOCTRINE-5B` | Opposite, AdditiveClosure, Freyd, and reinterpretation descriptors with retained lowering data |
-| `CAS-COMPILER-6A` | pending | `CAS-TOWER-5C` | retained categorical-program IR and first specialization/lowering passes to algebra graph |
+| `CAS-TOWER-5C` | complete; focused-green; checkpoint candidate | `CAS-DOCTRINE-5B` | validated constructor/tower/lowering/reinterpretation descriptors, executable opposite category, AdditiveClosure/Freyd/CoFreyd metadata, module-tower consumer and invalid-chain checks; five tower and fifteen affected doctrine/category/module tests green |
+| `CAS-COMPILER-6A` | in progress | `CAS-TOWER-5C` | retained categorical-program IR and first specialization/lowering passes to algebra graph |
 | `CAS-FREYD-6B` | pending | `CAS-COMPILER-6A`, `CAS-MODULE-4B` | compiled Freyd/AdditiveClosure presentation agrees operationally with direct `PresentedModule` computations |
 | `CAS-HOMOLOGICAL-7A` | pending | `CAS-FREYD-6B` | complexes, homology, connecting morphism, initial generalized-morphism and resolution algorithms |
 | `CAS-CONSTRUCTIBLE-8A` | pending | `CAS-ZARISKI-3B`, `CAS-COMPILER-6A` | selected slice/poset/stable-poset/opposite/difference/union tower lowered to ideal and saturation operations |
@@ -895,6 +895,22 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-049` | accepted | Presented-field-module kernels and cokernels are primitive whole operations; kernel-object and cokernel-object are derived registry methods depending on those whole owners. |
 | `D-CAS-050` | accepted | Doctrine descriptors are operational metadata with inherited required roles and involutive dual mappings; they do not constitute LF evidence. |
 | `D-CAS-051` | accepted | Doctrine qualification succeeds only when every inherited role is explicitly bound to a plannable category operation; missing roles are retained rather than inferred from category names. |
+| `D-CAS-052` | accepted | Constructor descriptors retain source/output doctrines, representation layers, introduced roles, dual constructor identity, and compiler-facing lowering rules. |
+| `D-CAS-053` | accepted | Generic Freyd adds the operational cokernel role but remains in the additive doctrine; stronger pre-Abelian/Abelian claims require additional capabilities or a concrete qualified reinterpretation. |
+| `D-CAS-054` | accepted | Opposite categories execute reversed source/target and composition while opposite descriptors route through doctrine duality; Freyd and CoFreyd are explicit dual constructors. |
+| `D-CAS-055` | accepted | Reinterpretation retains public/model conversion functions and lowering rules as compiler input; roundtrip equality is consumer-tested rather than silently assumed by the descriptor. |
+
+## `CAS-TOWER-5C` Result
+
+Constructor towers are implemented in `src/v3_2/algebra_tower.ts`. The layer
+provides validated constructor descriptors, doctrine-compatible tower
+composition, introduced-role and lowering-rule aggregation, AdditiveClosure,
+Freyd and CoFreyd metadata, doctrine-indexed opposite descriptors, executable
+opposite categories, and explicit computational reinterpretations. The
+module tower remains correctly additive plus an introduced cokernel role,
+avoiding a generic Abelian overclaim. Five tower tests and the fifteen affected
+doctrine/category/module tests pass, followed by workspace check, affected
+lint, root typecheck, and diff hygiene.
 
 ## `CAS-DOCTRINE-5B` Result
 

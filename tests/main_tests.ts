@@ -269,6 +269,7 @@ import './v3_2_algebra_matrix_tests';
 import './v3_2_algebra_module_tests';
 import './v3_2_algebra_category_tests';
 import './v3_2_algebra_doctrine_tests';
+import './v3_2_algebra_tower_tests';
 import './v3_2_lf_module_theorem_development_tests';
 import './v3_2_lf_module_theorem_authoring_tests';
 import './v3_2_lf_declaration_fragment_authoring_tests';
