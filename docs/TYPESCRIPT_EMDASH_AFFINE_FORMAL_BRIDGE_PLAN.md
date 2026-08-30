@@ -6,8 +6,8 @@ Plan-ID: `TS-EMDASH-AFFINE-FORMAL-BRIDGE`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `BRIDGE-AUDIT-1A`, `BRIDGE-CONTRACT-1B`, and
-`BRIDGE-REIFY-2A` are complete; `BRIDGE-COVER-3A` is the next dependency-ready
-row.
+`BRIDGE-REIFY-2A`, and `BRIDGE-COVER-3A` are complete;
+`BRIDGE-LOCALIZATION-4A` is the next dependency-ready row.
 
 Baseline: `5df79d356d003d3c1831ff1b93a2c593f299f75b`
 
@@ -244,8 +244,8 @@ Lambdapi text, and focused Lambdapi checking.
 | `BRIDGE-AUDIT-1A` | complete; focused owner checks green | active TypeScript/Lambdapi authorities | exact owner map in `TYPESCRIPT_EMDASH_AFFINE_FORMAL_BRIDGE_OWNER_AUDIT.md`; algebraic Zariski cover selected; quotient/localization/scheme/Cech gaps and trust boundary classified |
 | `BRIDGE-CONTRACT-1B` | complete; proportional-green at `bbccc06` | `BRIDGE-AUDIT-1A` | parent-aware formal algebra realization, explicit/checked/trusted status boundary, deterministic closed/meta-free element reification, cover alignment, law requirements, and negative diagnostics complete |
 | `BRIDGE-REIFY-2A` | complete; proportional-green at `56a880c` | `BRIDGE-CONTRACT-1B` | reviewed formal ring bindings, bounded deterministic polynomial evaluation, canonical quotient representative invariance, realization construction, cover integration, and negative diagnostics complete |
-| `BRIDGE-COVER-3A` | pending; next selected row | `BRIDGE-REIFY-2A`, current formal unimodular owner | concrete affine-cover adapter carrying ordered elements, coefficients, combination, and selected formal ring/algebra realization |
-| `BRIDGE-LOCALIZATION-4A` | pending | `BRIDGE-COVER-3A`, current formal localization owner | chart/localization realization, ambient maps, distinguished inverses, and overlap product localizations |
+| `BRIDGE-COVER-3A` | complete; proportional-green at `792f3c4` | `BRIDGE-REIFY-2A`, current formal unimodular owner | exact right-associated finite families and existing unimodular/Zariski-cover constructors, with deterministic portable Core and active-backend emission |
+| `BRIDGE-LOCALIZATION-4A` | pending; next selected row | `BRIDGE-COVER-3A`, current formal localization owner | chart/localization realization, ambient maps, distinguished inverses, and overlap product localizations |
 | `BRIDGE-CECH-5A` | pending | `BRIDGE-LOCALIZATION-4A`, current diagram/Cech owner | ordered simplex and signed restriction realization into existing formal diagram/cochain structures |
 | `BRIDGE-EMISSION-6A` | pending | representative bridge consumer | deterministic explicit-Core declarations/workspaces and Lambdapi emission without handwritten semantic templates |
 | `BRIDGE-CONFORMANCE-7A` | pending | all preceding active rows | two concrete cover examples, focused TypeScript tests, deterministic snapshots, bounded Lambdapi checks, warning comparison, and final boundary audit |
@@ -273,6 +273,34 @@ synchronized decisions/results, and a local checkpoint.
 | `D-BRIDGE-013` | accepted | Monomial powers use a bounded deterministic binary-exponentiation tree; exponent overflow fails before constructing an unbounded Core term. |
 | `D-BRIDGE-014` | accepted | Coefficient and generator realizations must be closed, meta-free, parent-aligned, and deterministic. The coefficient callback is evaluated twice and compared in canonical Core serialization. |
 | `D-BRIDGE-015` | accepted | A quotient element is reified only through its canonical reduced polynomial representative, so computationally equal representatives emit byte-identical explicit Core. |
+| `D-BRIDGE-016` | accepted | Formal finite families are represented exactly as the active `FiniteFamily` owner expects: structural naturals and right-associated `finite_family_nil`/`finite_family_cons`, preserving the computational cover order. |
+| `D-BRIDGE-017` | accepted | The cover adapter constructs the existing `comm_ring_unimodular_intro` and `comm_ring_zariski_cover_intro` terms through reviewed portable Core references; it adds neither a parallel formal cover owner nor a new `CoreOwnerId`. |
+| `D-BRIDGE-018` | accepted | A trusted-computation cover without an actual formal dot-product law is rejected at formal-term construction. The adapter never converts computational success into an equality inhabitant. |
+
+## `BRIDGE-COVER-3A` Result
+
+Exact construction of the active formal algebraic Zariski-cover presentation
+is implemented in `src/v3_2/algebra_formal_cover.ts`. It translates the
+selected formal ring, ordered realized cover elements, ordered realized
+coefficients, and supplied formal combination law into the existing
+`FiniteFamily`, `CommRingUnimodularPresentation`, and
+`CommRingZariskiCoverPresentation` constructors.
+
+Family lengths are structural natural numbers and family values are
+right-associated Sigma encodings, matching the active formal owner without a
+new Core node. Portable bridge references are mapped to active Lambdapi owner
+names only during emission. A realization that is merely
+`trusted-computation` remains useful as metadata but cannot produce the formal
+cover term because it has no equality law.
+
+Four focused cover tests check exact Core constructors, active Lambdapi names,
+ordering, structural family lengths, deterministic emission, and rejection of
+the trusted/no-law case. Together with the affected realization, reifier, and
+LF-builder suites, 23 tests pass, followed by workspace check, affected lint,
+root typecheck, and diff hygiene. `check:ts` was not run and no Lambdapi source
+changed.
+
+Semantic checkpoint: `792f3c4` (`bridge: construct formal Zariski cover terms`).
 
 ## `BRIDGE-REIFY-2A` Result
 
