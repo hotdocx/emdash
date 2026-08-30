@@ -7,7 +7,8 @@ Plan-ID: `TS-EMDASH-FOCUSED-CAS`
 Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
 `CAS-CONTRACT-1A` through `CAS-MATRIX-4A` implemented and
-proportional-green; `CAS-MODULE-4B1` is the next dependency-ready
+proportional-green; `CAS-MODULE-4B1` is implemented and focused-green;
+`CAS-CATEGORY-5A` is the next dependency-ready
 implementation row.
 
 Baseline: `9edbdb2a929858f6d4091d475b750459dec8a681`
@@ -784,7 +785,7 @@ elaborator adapter, or an optional proof-development adapter.
 | `CAS-IDEAL-3A` | complete; proportional-green at `58f51f2` | `CAS-ENGINE-2C` | ordered polynomial ideals; deterministic monic Buchberger basis, retained generator transformations, reduced-basis postpass, positive/negative membership decomposition, schemas/serialization, bounded cancellation, native operations, and graph pipeline; eleven ideal tests and all 67 focused CAS tests green |
 | `CAS-ZARISKI-3B` | complete; proportional-green at `ebbe15f` | `CAS-IDEAL-3A` | whole unimodular result retaining ideal/basis/membership/coefficients/combination/remainder; positive-only computational finite basic-open cover, schemas/serialization, native operations, and graph pipeline; formal adapter explicitly deferred; nine tests and all 76 focused CAS tests green |
 | `CAS-MATRIX-4A` | complete; proportional-green at `442cbff` | `CAS-EXACT-2A`, `CAS-ENGINE-2C` | structural exact matrix spaces; immutable row-major arithmetic, transpose, composition, RREF with left transformation, column-kernel basis, schemas/serialization, field/limit/cancellation gates, native operations, and transpose graph; nine tests and all 85 focused CAS tests green |
-| `CAS-MODULE-4B1` | in progress | `CAS-MATRIX-4A` | finite-dimensional free/presented modules over operational fields, morphisms, kernel/cokernel presentations, and matrix syzygies |
+| `CAS-MODULE-4B1` | complete; focused-green; checkpoint candidate | `CAS-MATRIX-4A` | field-linear free/presented modules, relation-witnessed morphisms and composition, quotient projection/section realization, free kernels, presented cokernels, and matrix syzygies; seven module and nine affected matrix tests green |
 | `CAS-MODULE-4B2` | pending | `CAS-IDEAL-3A`, `CAS-MODULE-4B1` | polynomial-module term orders, module Groebner bases, Schreyer syzygies, finitely presented polynomial modules, and first free resolutions |
 | `CAS-CATEGORY-5A` | pending | `CAS-GRAPH-1B`, `CAS-MODULE-4B1` | minimal strict computable-category runtime, ring-as-category, matrix/free-module category, primitive/derived registry |
 | `CAS-DOCTRINE-5B` | pending | `CAS-CATEGORY-5A` | preadditive, additive, pre-Abelian, and Abelian doctrine descriptors with dual metadata |
@@ -885,6 +886,22 @@ cross-layer aggregates are also outside this row.
 | `D-CAS-041` | accepted | Field row reduction retains `L` with `L*A = rref(A)`, ordered pivot columns, rank, and work count. |
 | `D-CAS-042` | accepted | A kernel basis is an `n x k` matrix whose columns generate the nullspace and satisfy `A*K = 0`; `k` is the recorded nullity. |
 | `D-CAS-043` | accepted | Module work is split: field-linear presentations can derive from current RREF/kernel matrices, while polynomial-ring modules require a separate module-Groebner/Schreyer layer and must not be approximated by scalar ideal algorithms. |
+| `D-CAS-044` | accepted | A field-linear presentation is `R^r -> R^g -> M -> 0` with relation columns; a morphism retains `F*R_source = R_target*W`. |
+| `D-CAS-045` | accepted | Quotient coordinates use a left-annihilator projection with an explicit section; field-linear kernels are lifted from the induced quotient-coordinate matrix. |
+| `D-CAS-046` | accepted | A morphism cokernel appends the morphism columns to target relations; polynomial-module kernels/cokernels remain gated on module Groebner machinery. |
+
+## `CAS-MODULE-4B1` Result
+
+The field-linear presentation layer is implemented in
+`src/v3_2/algebra_module.ts`. It provides free and finitely presented modules,
+relation-witnessed morphisms, identities and composition, explicit quotient
+projection/section realizations, free kernel objects with inclusions,
+presented cokernels with projections, and matrix syzygies. The quotient model
+checks `Q*R = 0` and `Q*S = id`; kernel inclusions satisfy the induced zero
+equation. Seven focused module tests and the nine affected matrix tests pass,
+followed by workspace check, affected-file lint, root typecheck, and diff
+hygiene. Polynomial-module term orders, module Groebner bases, Schreyer
+syzygies, and resolutions remain exclusively in `CAS-MODULE-4B2`.
 
 ## `CAS-CONTRACT-1A` Result
 
