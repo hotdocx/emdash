@@ -11,6 +11,8 @@ import {
 import {
     algebraFreeModule,
     algebraModuleCompose,
+    algebraModuleIdentity,
+    algebraModuleInducedMatrix,
     algebraModuleMorphism,
     algebraModuleMorphismEquivalent,
     algebraModuleMorphismIsZero,
@@ -19,6 +21,11 @@ import {
 import {
     ALGEBRA_HOMOLOGICAL_PROFILE,
     AlgebraHomologicalError,
+    algebraModuleChainMap,
+    algebraModuleChainMapComponentAt,
+    algebraModuleChainMapCompose,
+    algebraModuleChainMapHomology,
+    algebraModuleChainMapIdentity,
     algebraModuleChainComplex,
     algebraModuleChainComplexDifferential,
     algebraModuleChainComplexHomology,
@@ -76,6 +83,36 @@ const complexFixture = () => {
     return { c0, c1, c2, d1, d2, complex };
 };
 
+const scalarChainMap = (
+    complex: ReturnType<typeof complexFixture>['complex'],
+    scalar: string
+) => algebraModuleChainMap(
+    complex,
+    complex,
+    complex.terms.map(term => ({
+        degree: term.degree,
+        morphism: algebraModuleMorphism(
+            term.object,
+            term.object,
+            algebraMatrix(
+                algebraMatrixSpace(
+                    RATIONAL_DOMAIN,
+                    term.object.generators,
+                    term.object.generators
+                ),
+                Array.from(
+                    { length: term.object.generators },
+                    (_, row) => Array.from(
+                        { length: term.object.generators },
+                        (_, column) => row === column ? scalar : '0'
+                    )
+                )
+            ),
+            zeroWitness()
+        )
+    }))
+);
+
 describe('v3.2 bounded field-module complexes and homology', () => {
     it('constructs a bounded complex and computes whole homology in every degree', () => {
         const { c1, d1, d2, complex } = complexFixture();
@@ -118,6 +155,72 @@ describe('v3.2 bounded field-module complexes and homology', () => {
                 homology.boundaryLift
             ),
             d2
+        ));
+    });
+
+    it('validates chain maps and descends their components to homology', () => {
+        const { complex } = complexFixture();
+        const twice = scalarChainMap(complex, '2');
+        const induced = algebraModuleChainMapHomology(twice, 1);
+        assert.equal(
+            RATIONAL_DOMAIN.text(
+                algebraModuleInducedMatrix(induced.morphism).entries[0][0]
+            ),
+            '2'
+        );
+        const component = algebraModuleChainMapComponentAt(twice, 1);
+        assert.ok(algebraModuleMorphismEquivalent(
+            algebraModuleCompose(
+                induced.targetHomology.cycles.inclusion,
+                induced.cycleMap
+            ),
+            algebraModuleCompose(
+                component,
+                induced.sourceHomology.cycles.inclusion
+            )
+        ));
+        assert.ok(algebraModuleMorphismEquivalent(
+            algebraModuleCompose(
+                induced.morphism,
+                induced.sourceHomology.quotient.projection
+            ),
+            algebraModuleCompose(
+                induced.targetHomology.quotient.projection,
+                induced.cycleMap
+            )
+        ));
+        const identity = algebraModuleChainMapHomology(
+            algebraModuleChainMapIdentity(complex),
+            1
+        );
+        assert.ok(algebraModuleMorphismEquivalent(
+            identity.morphism,
+            algebraModuleIdentity(identity.sourceHomology.object)
+        ));
+    });
+
+    it('preserves chain-map composition on computed homology', () => {
+        const { complex } = complexFixture();
+        const twice = scalarChainMap(complex, '2');
+        const thrice = scalarChainMap(complex, '3');
+        const composite = algebraModuleChainMapCompose(thrice, twice);
+        const inducedTwice = algebraModuleChainMapHomology(twice, 1);
+        const inducedThrice = algebraModuleChainMapHomology(thrice, 1);
+        const inducedComposite = algebraModuleChainMapHomology(composite, 1);
+        assert.equal(
+            RATIONAL_DOMAIN.text(
+                algebraModuleInducedMatrix(
+                    inducedComposite.morphism
+                ).entries[0][0]
+            ),
+            '6'
+        );
+        assert.ok(algebraModuleMorphismEquivalent(
+            inducedComposite.morphism,
+            algebraModuleCompose(
+                inducedThrice.morphism,
+                inducedTwice.morphism
+            )
         ));
     });
 
@@ -173,6 +276,42 @@ describe('v3.2 bounded field-module complexes and homology', () => {
         );
         assert.throws(
             () => algebraModuleChainComplexDifferential(complex, 0),
+            homologicalError('DEGREE_OUT_OF_RANGE')
+        );
+        assert.throws(
+            () => algebraModuleChainMap(
+                complex,
+                complex,
+                [
+                    {
+                        degree: 0,
+                        morphism: algebraModuleIdentity(c0)
+                    },
+                    {
+                        degree: 1,
+                        morphism: algebraModuleMorphism(
+                            c1,
+                            c1,
+                            algebraMatrix(
+                                algebraMatrixSpace(RATIONAL_DOMAIN, 2, 2),
+                                [['2', '0'], ['0', '1']]
+                            ),
+                            zeroWitness()
+                        )
+                    },
+                    {
+                        degree: 2,
+                        morphism: algebraModuleIdentity(c2)
+                    }
+                ]
+            ),
+            homologicalError('CHAIN_MAP_CONDITION_FAILED')
+        );
+        assert.throws(
+            () => algebraModuleChainMapComponentAt(
+                algebraModuleChainMapIdentity(complex),
+                -1
+            ),
             homologicalError('DEGREE_OUT_OF_RANGE')
         );
     });

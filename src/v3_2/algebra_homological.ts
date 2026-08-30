@@ -14,11 +14,14 @@ import {
     AlgebraModuleMorphism,
     AlgebraPresentedModule,
     algebraFreeModule,
+    algebraModuleCokernelColift,
     algebraModuleCokernel,
     algebraModuleCompose,
+    algebraModuleIdentity,
     algebraModuleKernel,
     algebraModuleKernelLift,
     algebraModuleMorphismIsZero,
+    algebraModuleMorphismEquivalent,
     algebraModuleZeroMorphism,
     algebraPresentedModuleEquals
 } from './algebra_module';
@@ -39,6 +42,8 @@ export type AlgebraHomologicalErrorCode =
     | 'NON_CONSECUTIVE_DEGREES'
     | 'INVALID_DIFFERENTIAL'
     | 'CHAIN_CONDITION_FAILED'
+    | 'INVALID_CHAIN_MAP'
+    | 'CHAIN_MAP_CONDITION_FAILED'
     | 'DEGREE_OUT_OF_RANGE';
 
 export class AlgebraHomologicalError extends Error {
@@ -249,6 +254,194 @@ export function algebraModuleChainComplexDifferential<
     ].morphism;
 }
 
+export const algebraModuleChainComplexEquals = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    left: AlgebraModuleChainComplex<P, C, I>,
+    right: AlgebraModuleChainComplex<P, C, I>
+): boolean =>
+    left.minimumDegree === right.minimumDegree &&
+    left.maximumDegree === right.maximumDegree &&
+    sameAlgebraParent(left.field.parent, right.field.parent) &&
+    left.terms.every((term, index) => algebraPresentedModuleEquals(
+        term.object,
+        right.terms[index].object
+    )) &&
+    left.differentials.every((entry, index) =>
+        algebraModuleMorphismEquivalent(
+            entry.morphism,
+            right.differentials[index].morphism
+        )
+    );
+
+export interface AlgebraModuleChainMapComponent<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly degree: number;
+    readonly morphism: AlgebraModuleMorphism<P, C, I>;
+}
+
+export interface AlgebraModuleChainMap<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly kind: 'algebra-module-chain-map';
+    readonly source: AlgebraModuleChainComplex<P, C, I>;
+    readonly target: AlgebraModuleChainComplex<P, C, I>;
+    readonly components: readonly AlgebraModuleChainMapComponent<P, C, I>[];
+}
+
+export function algebraModuleChainMap<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    source: AlgebraModuleChainComplex<P, C, I>,
+    target: AlgebraModuleChainComplex<P, C, I>,
+    componentInput: readonly AlgebraModuleChainMapComponent<P, C, I>[]
+): AlgebraModuleChainMap<P, C, I> {
+    if (
+        source.minimumDegree !== target.minimumDegree ||
+        source.maximumDegree !== target.maximumDegree ||
+        !sameAlgebraParent(source.field.parent, target.field.parent) ||
+        componentInput.length !== source.terms.length
+    ) {
+        return fail(
+            'INVALID_CHAIN_MAP',
+            'chainMap',
+            'The first chain-map profile requires equal bounded degree ranges'
+        );
+    }
+    const components = [...componentInput]
+        .map((component, index) => Object.freeze({
+            degree: degree(
+                component.degree,
+                `chainMap.components[${index}].degree`
+            ),
+            morphism: component.morphism
+        }))
+        .sort((left, right) => left.degree - right.degree);
+    components.forEach((component, index) => {
+        const expectedDegree = source.minimumDegree + index;
+        if (
+            component.degree !== expectedDegree ||
+            !algebraPresentedModuleEquals(
+                component.morphism.source,
+                source.terms[index].object
+            ) ||
+            !algebraPresentedModuleEquals(
+                component.morphism.target,
+                target.terms[index].object
+            )
+        ) {
+            fail(
+                'INVALID_CHAIN_MAP',
+                `chainMap.components[${index}]`,
+                `Expected a component C_${expectedDegree} -> D_` +
+                    `${expectedDegree}`
+            );
+        }
+    });
+    for (let index = 1; index < components.length; index++) {
+        const targetAfterComponent = algebraModuleCompose(
+            target.differentials[index - 1].morphism,
+            components[index].morphism
+        );
+        const componentAfterSource = algebraModuleCompose(
+            components[index - 1].morphism,
+            source.differentials[index - 1].morphism
+        );
+        if (!algebraModuleMorphismEquivalent(
+            targetAfterComponent,
+            componentAfterSource
+        )) {
+            fail(
+                'CHAIN_MAP_CONDITION_FAILED',
+                `chainMap.components[${index}]`,
+                `The component in degree ${components[index].degree} ` +
+                    'does not commute with the differential'
+            );
+        }
+    }
+    return Object.freeze({
+        kind: 'algebra-module-chain-map',
+        source,
+        target,
+        components: Object.freeze(components)
+    });
+}
+
+export function algebraModuleChainMapComponentAt<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    chainMap: AlgebraModuleChainMap<P, C, I>,
+    degreeInput: number
+): AlgebraModuleMorphism<P, C, I> {
+    const requested = degree(degreeInput, 'chainMap.component.degree');
+    if (
+        requested < chainMap.source.minimumDegree ||
+        requested > chainMap.source.maximumDegree
+    ) {
+        return fail(
+            'DEGREE_OUT_OF_RANGE',
+            'chainMap.component.degree',
+            `The chain map has no component in degree ${requested}`
+        );
+    }
+    return chainMap.components[
+        requested - chainMap.source.minimumDegree
+    ].morphism;
+}
+
+export const algebraModuleChainMapIdentity = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(complex: AlgebraModuleChainComplex<P, C, I>): AlgebraModuleChainMap<P, C, I> =>
+    algebraModuleChainMap(
+        complex,
+        complex,
+        complex.terms.map(term => ({
+            degree: term.degree,
+            morphism: algebraModuleIdentity(term.object)
+        }))
+    );
+
+export function algebraModuleChainMapCompose<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    after: AlgebraModuleChainMap<P, C, I>,
+    before: AlgebraModuleChainMap<P, C, I>
+): AlgebraModuleChainMap<P, C, I> {
+    if (!algebraModuleChainComplexEquals(before.target, after.source)) {
+        return fail(
+            'INVALID_CHAIN_MAP',
+            'chainMapCompose',
+            'Chain maps are not composable'
+        );
+    }
+    return algebraModuleChainMap(
+        before.source,
+        after.target,
+        before.components.map((component, index) => ({
+            degree: component.degree,
+            morphism: algebraModuleCompose(
+                after.components[index].morphism,
+                component.morphism
+            )
+        }))
+    );
+}
+
 export interface AlgebraModuleHomology<
     P extends AlgebraParent,
     C extends AlgebraElement<P>,
@@ -336,5 +529,57 @@ export function algebraModuleChainComplexHomology<
         kind: 'algebra-module-complex-homology',
         complex,
         degree: requested
+    });
+}
+
+export interface AlgebraModuleHomologyMap<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly kind: 'algebra-module-homology-map';
+    readonly chainMap: AlgebraModuleChainMap<P, C, I>;
+    readonly degree: number;
+    readonly sourceHomology: AlgebraModuleComplexHomology<P, C, I>;
+    readonly targetHomology: AlgebraModuleComplexHomology<P, C, I>;
+    readonly cycleMap: AlgebraModuleMorphism<P, C, I>;
+    readonly morphism: AlgebraModuleMorphism<P, C, I>;
+}
+
+/** Restrict a chain-map component to cycles and descend through boundaries. */
+export function algebraModuleChainMapHomology<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    chainMap: AlgebraModuleChainMap<P, C, I>,
+    degreeInput: number
+): AlgebraModuleHomologyMap<P, C, I> {
+    const requested = degree(degreeInput, 'chainMapHomology.degree');
+    const sourceHomology = algebraModuleChainComplexHomology(
+        chainMap.source,
+        requested
+    );
+    const targetHomology = algebraModuleChainComplexHomology(
+        chainMap.target,
+        requested
+    );
+    const component = algebraModuleChainMapComponentAt(chainMap, requested);
+    const cycleMap = algebraModuleKernelLift(
+        targetHomology.cycles,
+        algebraModuleCompose(component, sourceHomology.cycles.inclusion)
+    );
+    const morphism = algebraModuleCokernelColift(
+        sourceHomology.quotient,
+        algebraModuleCompose(targetHomology.quotient.projection, cycleMap)
+    );
+    return Object.freeze({
+        kind: 'algebra-module-homology-map',
+        chainMap,
+        degree: requested,
+        sourceHomology,
+        targetHomology,
+        cycleMap,
+        morphism
     });
 }
