@@ -52,6 +52,7 @@ export * from './algebra_presented_algebra';
 export * from './algebra_presented_algebra_reference_operations';
 export * from './algebra_localization';
 export * from './algebra_localization_reference_operations';
+export * from './algebra_affine_scheme';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
