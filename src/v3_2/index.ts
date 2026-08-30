@@ -48,6 +48,8 @@ export * from './algebra_oracle';
 export * from './algebra_oracle_node';
 export * from './algebra_quotient';
 export * from './algebra_quotient_reference_operations';
+export * from './algebra_presented_algebra';
+export * from './algebra_presented_algebra_reference_operations';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
