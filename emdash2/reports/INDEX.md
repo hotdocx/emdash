@@ -3,7 +3,7 @@
 Date: 2026-08-31
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_PRESENTATION_MORPHISMS_PLAN.md` is the
-active cross-layer continuation from finite presentations to fixed-ring
+completed cross-layer continuation from finite presentations to fixed-ring
 relation-preserving maps, representative congruence, and a chain-square
 capstone. Its rule-free formal owner retains `F`, computed `W`, and
 `R_Q o W = F o R_P`, or computed `H` with `R_Q o H = F-G`. Whole polynomial

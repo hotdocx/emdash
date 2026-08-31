@@ -4,8 +4,8 @@ Date: 2026-08-31
 
 Plan-ID: `TS-EMDASH-FORMAL-PRESENTATION-MORPHISMS`
 
-Status: implementation complete on a dedicated branch/worktree; final
-conformance/documentation checkpoint pending.
+Status: completed on a dedicated branch/worktree; implementation and
+conformance checkpoint `694d14a`.
 
 Baseline: `2c56d41b6b152fd912feeb517a2bae68c9ced64b`
 
@@ -343,7 +343,7 @@ overclaim.
 
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
-| `FPMAP-PLAN-0` | in progress | completed finite-presentation bridge at `2c56d41` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, mathematics, validation, Git limits |
+| `FPMAP-PLAN-0` | complete; checkpoint `f482080` | completed finite-presentation bridge at `2c56d41` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, mathematics, validation, Git limits |
 | `FPMAP-AUDIT-1A` | complete; checkpoint `6c4ea6b` | plan | exact formal/CAS orientation, missing owners, matrix-law burden, selected fixed-ring model, category boundary |
 | `FPMAP-MATRIX-2A` | complete; checkpoint `d5bae5d` | audit | transparent matrix add/neg/sub and narrowly required identity/law support, positive/noncollapse consumers |
 | `FPMAP-FORMAL-3A` | complete; checkpoint `d5bae5d` | matrix | formal presentation, relation-preserving morphism, representative agreement, and chain-square classifiers without quotient overclaim |
@@ -353,7 +353,7 @@ overclaim.
 | `FPMAP-DELEGATE-7A` | complete; checkpoint `9299126` | reifier | exact-target adapters, positive/negative workflows, classified batch source, deterministic artifact |
 | `FPMAP-CATEGORY-8A` | complete; checkpoint `9299126` | witness/congruence | identity/composition and representative categorical lowering/direct agreement; no forced formal `Cat` |
 | `FPMAP-CHAIN-9A` | complete; checkpoint `9299126` | map equations | computed chain-map-square capstone using components rather than manually supplied coherence |
-| `FPMAP-CONFORMANCE-10A` | complete; final checkpoint pending | all active rows | registration, standing docs, affected checks/lint, live emitted-Core Lambdapi acceptance, proportional final audit |
+| `FPMAP-CONFORMANCE-10A` | complete; checkpoint `694d14a` | all active rows | registration, standing docs, affected checks/lint, live emitted-Core Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
 synchronized plan. Each completed row requires focused positive/negative
