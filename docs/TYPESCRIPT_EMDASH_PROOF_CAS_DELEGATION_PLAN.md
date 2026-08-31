@@ -4,8 +4,10 @@ Date: 2026-08-31
 
 Plan-ID: `TS-EMDASH-PROOF-CAS-DELEGATION`
 
-Status: active implementation on a dedicated branch/worktree; initial
-architecture and Git boundary frozen, owner audit in progress.
+Status: implementation complete on the dedicated branch/worktree; every
+active ledger row is proportional-green, with the one required shared
+TypeScript aggregate executed and its unrelated baseline pin failures
+reproduced on clean `main`.
 
 Baseline: `79f3bb7fd05446fe14739bfb056b7dc2d254affd`
 
@@ -481,9 +483,9 @@ syntax.
 | `PCD-DELEGATE-3A` | complete; checkpoint `dc0aff6` | `PCD-CONTRACT-2A` | native exact execution bound to one named goal and realization, observation result, limits/cancellation/progress/diagnostics, no proof or workspace mutation; graph agreement remains consumer-level |
 | `PCD-ADOPT-4A` | complete; checkpoint `a6356a3` | `PCD-DELEGATE-3A` | explicit Core-data checking, checked-plan route, explicit trusted opaque-declaration adoption, ordinary exact patch, stale/implicit/foreign rejection |
 | `PCD-ZARISKI-5A` | complete; checkpoint `82a6c98` | `PCD-ADOPT-4A` | end-to-end unimodular-cover delegation, coefficient reification, exact formal law target, observed and trusted paths, existing cover construction, negative open-goal behavior |
-| `PCD-IDEAL-5B` | complete; ideal checkpoint pending | `PCD-ADOPT-4A`, audit-approved interpretation | second ring-level ideal-membership/quotient-equality consumer with explicit trusted-relation policy, positive/negative and graph agreement |
-| `PCD-REPLAY-6A` | pending | both concrete consumers | canonical request/result/adoption serialization, exact freshness/invalidation, deterministic direct-TypeScript usability surface |
-| `PCD-CONFORMANCE-7A` | pending | all preceding active rows | representative portable artifacts, direct/native-graph agreement where applicable, exact checked workspace behavior, focused live Lambdapi conformance only if emitted terms or owner bindings change |
+| `PCD-IDEAL-5B` | complete; checkpoint `a51f22a` | `PCD-ADOPT-4A`, audit-approved interpretation | second ring-level ideal-membership/quotient-equality consumer with explicit trusted-relation policy, positive/negative and graph agreement |
+| `PCD-REPLAY-6A` | complete; final implementation checkpoint pending | both concrete consumers | canonical request/result/adoption serialization, exact freshness/invalidation, deterministic direct-TypeScript usability surface |
+| `PCD-CONFORMANCE-7A` | complete; final implementation checkpoint pending | all preceding active rows | portable request/result/receipt/adoption artifacts, both direct/native-graph agreements, exact checked LF behavior, focused live Lambdapi conformance, and baseline-differential aggregate audit |
 
 Rows may be split into lettered subtranches. A row completes only after
 implementation, focused positive and negative tests, proportional validation,
@@ -537,6 +539,76 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PCD-042` | accepted after `PCD-IDEAL-5B` | Because the supplied formal ring is not automatically a model of the computational ideal, the realization records `trusted-selected-ideal-relations` in the canonical request. |
 | `D-PCD-043` | accepted after `PCD-IDEAL-5B` | Positive membership retains and checks the combination coefficient terms before explicit trusted equality adoption; nonmembership retains its canonical remainder and exposes no claim. |
 | `D-PCD-044` | accepted after `PCD-IDEAL-5B` | The membership adapter owns canonical input/output encodings because the generic ideal operation did not previously expose a whole membership serializer. |
+| `D-PCD-045` | accepted after `PCD-REPLAY-6A` | The concise workflow composes goal selection, request construction, and exact execution only; checked or trusted adoption remains a visibly separate call. |
+| `D-PCD-046` | accepted after `PCD-REPLAY-6A` | A portable receipt stores canonical request/result bytes and outcome, but it is evidence rather than an executable deserialized result. |
+| `D-PCD-047` | accepted after `PCD-REPLAY-6A` | V1 reuses only an in-memory whole result after exact current-request, output, identity, quality, and freshly repeated interpretation validation. |
+| `D-PCD-048` | accepted after `PCD-REPLAY-6A` | The actual Zariski positive consumer uses the concise run API and then the separate trusted-adoption API; the source goal remains open between those actions. |
+| `D-PCD-049` | accepted after `PCD-CONFORMANCE-7A` | Final affected acceptance is the complete 32-test proof–CAS boundary, including the live adopted-cover Lambdapi probe; it passes without skips or failures. |
+| `D-PCD-050` | accepted after `PCD-CONFORMANCE-7A` | The one required `check:ts` was executed. Workspace, typecheck, lint, all new suites, and their consumers passed; the aggregate remained nonzero solely in untouched historical digest/line-position pins already stale on baseline `main`. |
+| `D-PCD-051` | accepted after `PCD-CONFORMANCE-7A` | Representative clean-`main` reruns reproduce the overview-source and `emdash3_2.lp` digest failures (22/25 pass, the same three fail), so repairing those unrelated pins is not absorbed into this goal. |
+| `D-PCD-052` | accepted after `PCD-CONFORMANCE-7A` | No `check:all`, book, print, package, release, broad kernel CI, or second TypeScript aggregate is justified. |
+
+## `PCD-CONFORMANCE-7A` Result
+
+The final bounded acceptance command runs all three new suites together with
+the live Zariski backend probe. It passes 32/32 tests across six suites with
+zero failures, skips, cancellations, or todos. This covers:
+
+- inert goal/adapter/request contracts;
+- exact execution, negative observation, limits, cancellation, and progress;
+- checked data, checked plans, explicit trusted assumptions, and stale gates;
+- concise run/receipt/reuse plus separate checked/trusted adoption;
+- positive and negative unimodular Zariski computations;
+- positive and negative ideal-membership quotient equalities;
+- direct/native-graph agreement for both mathematical consumers; and
+- live Lambdapi acceptance of the adopted existing formal cover term.
+
+Workspace check, root typecheck, affected-file lint, and diff hygiene pass.
+
+The root SOP's one required `check:ts` was also executed at the shared
+integration boundary. Its workspace, typecheck, and full lint phases pass.
+The complete test process exits nonzero in untouched historical source-pin and
+line-position suites: the integrated baseline's `emdash3_2.lp` digest is
+`e87ddf...` while several older transfer fixtures still expect `0a117...`,
+and the current overview Markdown digest is `f7b441...` while its fixed reader
+fixture expects `06ba39...`. Additional position failures are the same
+consequence of those pre-existing source migrations.
+
+No file in those failing owners/tests is changed by this branch. A focused
+clean-`main` rerun of the representative `AI-PAPER-1B1` and `SCALE-0B` suites
+passes 22/25 and reproduces the exact same two overview-pin failures plus the
+same kernel-digest failure. Those baseline maintenance defects are therefore
+recorded, not repaired or hidden in this proof–CAS goal. Every proof–CAS suite
+inside the complete aggregate is green.
+
+No repository-wide `check:all`, print, book, package, release, or additional
+kernel aggregate was run.
+
+## `PCD-REPLAY-6A` Result
+
+The direct authoring surface is implemented in
+`src/v3_2/algebra_formal_workflow.ts`. `runAlgebraFormalWorkflow` composes
+exact root-goal selection, request construction, and exact execution. It has
+no adoption option. `trustAlgebraFormalWorkflow` and
+`checkAlgebraFormalWorkflow` are separate explicit calls over the retained
+run result.
+
+A portable receipt retains module/declaration/goal identity, claim versus
+observation outcome, and the complete canonical request/result bytes.
+Receipts are inspection/replay evidence rather than executable caches: no
+generic output parser or unsafe deserialization is invented. In-memory result
+reuse succeeds only after the stored whole result revalidates against the
+current request, operation/engine/algorithm identities, payloads, exact
+quality, and freshly repeated adapter interpretation.
+
+The positive Zariski fixture now exercises this concise workflow directly and
+still performs trusted adoption as a second call. Four focused workflow tests
+cover run-without-adoption, deterministic receipts, exact reuse, changed-limit
+invalidation, separate trusted adoption, the ordinary checked route, and the
+no-parser/no-combined-operation profile. The focused delegation suite passes
+21/21, and the Zariski consumer remains green. Root typecheck and affected
+lint pass. The one-time shared TypeScript gate and its baseline-differential
+classification are recorded in `PCD-CONFORMANCE-7A`.
 
 ## `PCD-IDEAL-5B` Result
 

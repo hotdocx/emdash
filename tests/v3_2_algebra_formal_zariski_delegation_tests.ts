@@ -47,11 +47,13 @@ import {
     kernelFree,
     kernelUniverse,
     provenance,
+    runAlgebraFormalWorkflow,
     serializeAlgebraFormalComputationResult,
     serializeAlgebraUnimodularCombination,
     serializeCoreExpression,
     serializeCoreLfKernelProbe,
-    sourceSpan
+    sourceSpan,
+    trustAlgebraFormalWorkflow
 } from '../src/v3_2';
 
 const because = (detail: string) => provenance('surface', detail);
@@ -273,15 +275,16 @@ describe('PCD-ZARISKI-5A exact proof–CAS vertical slice', () => {
 
     it('delegates the binary cover law and adopts it explicitly', async () => {
         const fixture = positiveFixture();
-        const request = createAlgebraFormalComputationRequest({
+        const run = await runAlgebraFormalWorkflow({
+            document: fixture.document,
+            goalId: fixture.goal.goalId,
             adapter: fixture.bundle.adapter,
-            goal: fixture.goal,
             realization: fixture.realization,
             engine: fixture.engine
         });
-        const result = await executeAlgebraFormalComputationRequest(request);
-        const adopted = adoptAlgebraFormalTrustedComputation({
-            result,
+        const result = run.result;
+        const adopted = trustAlgebraFormalWorkflow({
+            run,
             assumptionName: 'trusted_binary_cover_law',
             decision: {
                 kind: 'trust-exact-algebra-computation',

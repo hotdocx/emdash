@@ -6,6 +6,7 @@ import {
     ALGEBRA_FORMAL_DELEGATION_PROFILE,
     ALGEBRA_FORMAL_DELEGATION_EXECUTION_PROFILE,
     ALGEBRA_FORMAL_ADOPTION_PROFILE,
+    ALGEBRA_FORMAL_WORKFLOW_PROFILE,
     AlgebraComputed,
     AlgebraFormalComputationGoal,
     AlgebraFormalComputationInterpretationInput,
@@ -20,9 +21,11 @@ import {
     coreProofPlanHole,
     coreProofPlanExact,
     createAlgebraFormalComputationRequest,
+    createAlgebraFormalWorkflowReceipt,
     createAlgebraTypeScriptReferenceEngine,
     createCoreProofArtifactFingerprint,
     checkAlgebraFormalComputationData,
+    checkAlgebraFormalWorkflow,
     defineAlgebraFormalComputationAdapter,
     defineAlgebraFormalComputationGoal,
     defineAlgebraOperation,
@@ -36,7 +39,11 @@ import {
     provenance,
     serializeAlgebraFormalComputationRequest,
     serializeAlgebraFormalComputationResult,
-    serializeAlgebraFormalTrustedAdoptionArtifact
+    serializeAlgebraFormalTrustedAdoptionArtifact,
+    reuseAlgebraFormalWorkflowResult,
+    runAlgebraFormalWorkflow,
+    serializeAlgebraFormalWorkflowReceipt,
+    trustAlgebraFormalWorkflow
 } from '../src/v3_2';
 
 const because = (detail: string) => provenance('surface', detail);
@@ -821,5 +828,111 @@ describe('PCD-ADOPT-4A explicit checked and trusted adoption', () => {
         assert.equal(ALGEBRA_FORMAL_ADOPTION_PROFILE.addsCoreOwner, false);
         assert.equal(ALGEBRA_FORMAL_ADOPTION_PROFILE.addsProofPlanTag, false);
         assert.equal(Object.isFrozen(ALGEBRA_FORMAL_ADOPTION_PROFILE), true);
+    });
+});
+
+describe('PCD-REPLAY-6A direct workflow and exact reuse', () => {
+    it('runs without adoption, emits a receipt, then trusts separately',
+        async () => {
+            const fixture = proofGoal();
+            const { adapter, engine } = adapterFixture();
+            const run = await runAlgebraFormalWorkflow({
+                document: fixture.document,
+                goalId: fixture.goal.goalId,
+                adapter,
+                realization: realization(),
+                engine,
+                limits: { fuel: 4 }
+            });
+            const receipt = createAlgebraFormalWorkflowReceipt(run);
+            const serialized = serializeAlgebraFormalWorkflowReceipt(receipt);
+
+            assert.equal(run.result.interpretation.kind, 'claim');
+            assert.equal(fixture.document.plan.tag, 'hole');
+            assert.equal(receipt.outcome, 'claim');
+            assert.match(serialized, /delegated-goal/u);
+            assert.equal(
+                serialized,
+                serializeAlgebraFormalWorkflowReceipt(receipt)
+            );
+
+            const adopted = trustAlgebraFormalWorkflow({
+                run,
+                assumptionName: 'workflow_trusted_claim',
+                decision: {
+                    kind: 'trust-exact-algebra-computation',
+                    evidence: 'separate explicit workflow adoption'
+                }
+            });
+            assert.equal(adopted.execution.state.status, 'complete');
+            assert.equal(fixture.document.plan.tag, 'hole');
+        }
+    );
+
+    it('reuses only an exact current in-memory result', async () => {
+        const fixture = proofGoal();
+        const { adapter, engine } = adapterFixture();
+        const run = await runAlgebraFormalWorkflow({
+            document: fixture.document,
+            goalId: fixture.goal.goalId,
+            adapter,
+            realization: realization(),
+            engine
+        });
+        assert.equal(
+            reuseAlgebraFormalWorkflowResult({
+                stored: run.result,
+                currentRequest: run.request
+            }),
+            run.result
+        );
+
+        const changed = createAlgebraFormalComputationRequest({
+            adapter,
+            goal: fixture.goal,
+            realization: realization(),
+            engine,
+            limits: { fuel: 9 }
+        });
+        assert.throws(
+            () => reuseAlgebraFormalWorkflowResult({
+                stored: run.result,
+                currentRequest: changed
+            }),
+            delegationError('STALE_RESULT')
+        );
+    });
+
+    it('retains the ordinary checked-plan route in the concise surface',
+        async () => {
+            const fixture = proofGoal(true);
+            const { adapter, engine } = adapterFixture();
+            const run = await runAlgebraFormalWorkflow({
+                document: fixture.document,
+                goalId: fixture.goal.goalId,
+                adapter,
+                realization: realization(),
+                engine
+            });
+            const checked = checkAlgebraFormalWorkflow({
+                run,
+                replacement: coreProofPlanExact(kernelFree(
+                    'checked_computation_witness',
+                    because('workflow checked witness')
+                ))
+            });
+            assert.equal(checked.authority, 'checked-proof-plan');
+            assert.equal(checked.execution.state.status, 'complete');
+        }
+    );
+
+    it('publishes no combined run-and-trust operation', () => {
+        assert.equal(ALGEBRA_FORMAL_WORKFLOW_PROFILE.runAndTrustSeparated, true);
+        assert.equal(
+            ALGEBRA_FORMAL_WORKFLOW_PROFILE.reusePolicy,
+            'exact-current-in-memory-result-only'
+        );
+        assert.equal(ALGEBRA_FORMAL_WORKFLOW_PROFILE.parsesStrings, false);
+        assert.equal(Object.isFrozen(ALGEBRA_FORMAL_WORKFLOW_PROFILE), true);
     });
 });
