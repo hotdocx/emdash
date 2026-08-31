@@ -6,7 +6,8 @@ Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
-is complete and `PAM-MODULE-2A` is the next dependency-ready row.
+and `PAM-MODULE-2A1` are complete; `PAM-MODULE-2A2` is the next
+dependency-ready row.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
 
@@ -279,8 +280,9 @@ Conformance examples are:
 | --- | --- | --- | --- |
 | `PAM-PLAN-0` | complete | completed focused CAS, affine geometry, affine formal bridge, and reviewed continuation | this living plan, dedicated branch/worktree, exact baseline, architecture, staged rows, proportional validation, and Git limits |
 | `PAM-AUDIT-1A` | complete; prototype and 27-test baseline green | current polynomial-module and affine owners | exact owner map in `TYPESCRIPT_EMDASH_PRESENTED_ALGEBRA_MODULES_OWNER_AUDIT.md`; `R^r/(IR^r+N)` accepted; reduced module-basis prerequisite, parent/equality decision, and localization prototype recorded |
-| `PAM-MODULE-2A` | pending; next selected row | `PAM-AUDIT-1A` | transformation-preserving reduced module Gröbner basis followed by parent-aware free/presented modules over presented algebras, canonical elements and whole normal forms, arithmetic, schemas, serialization, zero detection, and negative diagnostics |
-| `PAM-SEMILINEAR-3A` | pending | `PAM-MODULE-2A`, presented-algebra maps | relation-checked semilinear maps, ordinary linear specialization, identity/composition/application/equality, and retained relation checks |
+| `PAM-MODULE-2A1` | complete; proportional-green at `23b606e` | `PAM-AUDIT-1A` | minimal interreduced monic module Gröbner postpass with original-generator transformations, canonical ordering, duplicate/scaled removal, limits, and focused regressions |
+| `PAM-MODULE-2A2` | pending; next selected row | `PAM-MODULE-2A1` | parent-aware free/presented modules over presented algebras, canonical elements and whole normal forms, arithmetic, schemas, serialization, zero detection, and negative diagnostics |
+| `PAM-SEMILINEAR-3A` | pending | `PAM-MODULE-2A2`, presented-algebra maps | relation-checked semilinear maps, ordinary linear specialization, identity/composition/application/equality, and retained relation checks |
 | `PAM-BASECHANGE-4A` | pending | `PAM-SEMILINEAR-3A` | whole module base change on objects and maps, canonical semilinear unit, identity/composition comparisons, schemas, and diagnostics |
 | `PAM-LOCALIZATION-5A` | pending | `PAM-BASECHANGE-4A`, principal localizations | module localization as base change, whole chart data, zero/nonzero examples, and localization edge cases |
 | `PAM-QCOH-6A` | pending | `PAM-LOCALIZATION-5A`, affine schemes | affine quasi-coherent presentation with derived basic-open and product-overlap module values; no general sheaf claim |
@@ -312,6 +314,31 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-013` | accepted | The existing module Buchberger result is complete but not reduced; a transformation-preserving reduced postpass is required before it may own stable presented-module identity or canonical representatives. |
 | `D-PAM-014` | accepted | The module order is explicit identity data with existing `term-over-position` as default; POT and TOP module parents remain distinct. |
 | `D-PAM-015` | accepted | A presented module is computationally zero exactly when all ordered free basis vectors reduce to zero under the selected reduced relation owner. |
+| `D-PAM-016` | accepted | The reduced owner is a strict refinement of the existing module Gröbner result with the same semantic kind and an explicit `reduced: true` marker; existing complete-basis consumers remain unchanged. |
+| `D-PAM-017` | accepted | Reduction removes same-position leading divisibility, interreduces each retained vector by the others, updates rows in the original submodule generators, normalizes monically, and sorts by the selected module order. |
+
+## `PAM-MODULE-2A1` Result
+
+Transformation-preserving reduced polynomial-module Gröbner bases are
+implemented in `src/v3_2/algebra_polynomial_module.ts`. The new owner refines
+an already-complete module basis rather than changing the reference
+Buchberger algorithm or its existing consumers.
+
+The postpass removes redundant same-position leading generators, divides each
+minimal vector by all the others, propagates every quotient through the
+retained transformation rows, normalizes the result to monic form, and sorts
+by the ambient POT/TOP/Schreyer comparison. It handles the zero submodule and
+rejects invalid reduction limits.
+
+Five focused tests establish identical reduced vectors for `(x,y)`,
+`(x,x+y)`, and `(x+y,x)`, exact reconstruction from each original generator
+family, duplicate/scaled removal, complete interreduction, zero-submodule
+behavior, and limit rejection. Together with the existing module-Buchberger
+and presented-polynomial-module suites, 13 tests pass, followed by workspace
+check, root typecheck, affected lint, and diff hygiene. No repository-wide
+aggregate or Lambdapi check was run.
+
+Semantic checkpoint: `23b606e` (`modules: add reduced polynomial module bases`).
 
 ## `PAM-AUDIT-1A` Result
 
