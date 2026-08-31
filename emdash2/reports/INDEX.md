@@ -2,6 +2,16 @@
 
 Date: 2026-08-31
 
+`../../docs/TYPESCRIPT_EMDASH_FORMAL_PRESENTATION_MORPHISMS_PLAN.md` is the
+active cross-layer continuation from finite presentations to fixed-ring
+relation-preserving maps, representative congruence, and a chain-square
+capstone. Its rule-free formal owner retains `F`, computed `W`, and
+`R_Q o W = F o R_P`, or computed `H` with `R_Q o H = F-G`. Whole polynomial
+membership computations, exact Core reification, classified batch adoption,
+and the existing presented-module categorical compiler share those matrices.
+The plan does not claim quotient equality, a formal presentation category,
+exactness, or homology.
+
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_PRESENTED_MODULES_CAS_PLAN.md` is the
 completed cross-layer plan for the formal finite-vector/column-matrix
 presentation spine and its proof--CAS consumers. It adds the rule-free

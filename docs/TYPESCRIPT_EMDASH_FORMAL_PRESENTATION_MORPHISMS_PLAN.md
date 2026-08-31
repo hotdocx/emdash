@@ -4,8 +4,8 @@ Date: 2026-08-31
 
 Plan-ID: `TS-EMDASH-FORMAL-PRESENTATION-MORPHISMS`
 
-Status: active living plan on a dedicated branch/worktree; reviewed design,
-exact owner audit and implementation pending.
+Status: implementation complete on a dedicated branch/worktree; final
+conformance/documentation checkpoint pending.
 
 Baseline: `2c56d41b6b152fd912feeb517a2bae68c9ced64b`
 
@@ -349,11 +349,11 @@ overclaim.
 | `FPMAP-FORMAL-3A` | complete; checkpoint `d5bae5d` | matrix | formal presentation, relation-preserving morphism, representative agreement, and chain-square classifiers without quotient overclaim |
 | `FPMAP-WITNESS-4A` | complete; checkpoint `f90bb4d` | formal | whole polynomial relation-witness computation with coefficients/remainders and positive/negative cases |
 | `FPMAP-CONGRUENCE-5A` | complete; checkpoint `f90bb4d` | witness | whole `F-G` target-relation membership and assembled `H`, including negative remainder |
-| `FPMAP-REIFY-6A` | complete; bridge checkpoint pending | formal/computational owners | exact signatures, presentation/map/witness reification, dimension/parent/order diagnostics |
-| `FPMAP-DELEGATE-7A` | complete; bridge checkpoint pending | reifier | exact-target adapters, positive/negative workflows, classified batch source, deterministic artifact |
-| `FPMAP-CATEGORY-8A` | complete; bridge checkpoint pending | witness/congruence | identity/composition and representative categorical lowering/direct agreement; no forced formal `Cat` |
-| `FPMAP-CHAIN-9A` | complete; bridge checkpoint pending | map equations | computed chain-map-square capstone using components rather than manually supplied coherence |
-| `FPMAP-CONFORMANCE-10A` | pending | all active rows | registration, standing docs, affected checks/lint, live emitted-Core Lambdapi acceptance, proportional final audit |
+| `FPMAP-REIFY-6A` | complete; checkpoint `9299126` | formal/computational owners | exact signatures, presentation/map/witness reification, dimension/parent/order diagnostics |
+| `FPMAP-DELEGATE-7A` | complete; checkpoint `9299126` | reifier | exact-target adapters, positive/negative workflows, classified batch source, deterministic artifact |
+| `FPMAP-CATEGORY-8A` | complete; checkpoint `9299126` | witness/congruence | identity/composition and representative categorical lowering/direct agreement; no forced formal `Cat` |
+| `FPMAP-CHAIN-9A` | complete; checkpoint `9299126` | map equations | computed chain-map-square capstone using components rather than manually supplied coherence |
+| `FPMAP-CONFORMANCE-10A` | complete; final checkpoint pending | all active rows | registration, standing docs, affected checks/lint, live emitted-Core Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
 synchronized plan. Each completed row requires focused positive/negative
@@ -388,6 +388,8 @@ tests, proportional validation, and a local checkpoint.
 | `D-FPMAP-023` | accepted during delegation | All three adapters require current profiles, exact reconstructed Core targets, exact selected whole-output bytes, and a successful result projection; failed maps and squares remain unadoptable observations. |
 | `D-FPMAP-024` | accepted during batch usability | One batch adopts morphisms, agreements, then chain squares, with one independently classified assumption per equation and deterministic portable serialization. |
 | `D-FPMAP-025` | accepted during category compatibility | A fixed-ring public presented-module map is lifted to its polynomial generator matrix, recomputes `W`, reifies the same law, and retains direct/compiled map-action agreement; no formal `Cat` is asserted. |
+| `D-FPMAP-026` | accepted during conformance | Live emission imports the active presentation owner and maps only the new matrix-subtraction signature in addition to inherited formal bindings; all three exact equation targets check in Lambdapi. |
+| `D-FPMAP-027` | accepted during conformance | The owner and reviewer are registered; health is synchronized as an honest no-check 332-target snapshot under the established scoped-validation policy. |
 
 ## Initial Formal Result
 
@@ -468,6 +470,26 @@ endomorphism then executes through the existing categorical compiler and
 agrees with direct map action. Fourteen focused bridge/category tests, root
 typecheck, and affected lint pass. A formal category of presentations remains
 deliberately unclaimed.
+
+## Conformance Result
+
+The new formal owner and reviewer are registered in the maintained target
+inventories. Quiet and warning-enabled focused checks pass, no diagnostic is
+located in the new owner, and strict LHS audit reports zero clauses because
+the module has no rewrite or unification rule.
+
+Exact emitted Core for relation preservation, representative agreement, and
+the chain-map square passes both the TypeScript Core checker and a live bounded
+Lambdapi probe against
+`emdash3_2_commutative_algebra_presentations`. Positive workflows yield three
+separate computed-equation assumptions; the negative relation map remains an
+unadoptable observation with a retained nonzero remainder.
+
+Standing current-status, Foundations, canonical-syntax, and report-index
+documentation now records the selected orientations and nonclaims. The strict
+catalog remains synchronized. Health records the new owner and reviewer in an
+honest no-check 332-target source snapshot; no repository-wide formal timing
+claim is introduced.
 
 ## Validation Policy
 

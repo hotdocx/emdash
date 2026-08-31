@@ -811,6 +811,26 @@ in a quotient module, an exact complex, or a formal Abelian category. There
 are no matrix rewrite or unification rules beyond the inherited transparent
 Nat/finite-family computation.
 
+For fixed-ring presentation morphisms, comments and examples may write
+
+```text
+P = [R_P : R^r_P -> R^g_P]
+F,W : P -> Q              : R_Q o W = F o R_P
+F ~=_Q G via H            : R_Q o H = F-G
+ChainSq(d,e;F0,F1)        : e o F1 = F0 o d.
+```
+
+The literal owners are `CommRingPresentation`,
+`CommRingPresentationMorphism`,
+`CommRingPresentationMorphismAgreement`, and `CommRingChainMapSquare`, with
+the named presentation and morphism projections. The equation orientation is
+deliberate: it matches the existing membership normal form `A*c = v`, so
+assembling columnwise memberships needs no systematic equality symmetry.
+`~=_Q` denotes retained coefficient data and a law, not kernel equality or a
+path in a quotient module. `ChainSq` is computed from its four matrices; do
+not describe it as a separately hand-written coherence field. This layer does
+not introduce a formal category of presentations or a general complex.
+
 For the separately promoted direct big-affine topology, comments and examples
 may write
 

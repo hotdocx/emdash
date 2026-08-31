@@ -252,6 +252,14 @@ belongs to the owning implementation plan rather than to standing guidance.
   Presentation agreement retains coefficients and an equation; the module
   declares no quotient module, module category, exactness, homology, rewrite,
   or unification rule.
+- `emdash3_2_commutative_algebra_presentations.lp`: downstream one-way,
+  rule-free fixed-ring presentation-morphism layer. It adds transparent matrix
+  addition/negation/subtraction, packages generator rank, relation rank, and
+  relation matrix, and retains relation-preserving maps as `F`, `W`, and
+  `R_Q o W = F o R_P`. Representative agreement retains `H` and
+  `R_Q o H = F-G`; one exact classifier exposes a chain-map component square.
+  These are explicit matrix equations, not quotient-module equality, a formal
+  presentation category, exactness, or homology.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5209,8 +5217,8 @@ confluence.
 After integration of the completed TypeScript-elaborator, PSSS,
 internal-laxity, profiled-Gray, WalkingEnd--Circle, groupoidification,
 monad/Cartesian, cubical/property-profile, pullback, and
-slice-dependent-product histories, plus the rule-free finite-presentation
-extension, the active kernel warning boundary remains
+slice-dependent-product histories, plus the rule-free finite-presentation and
+presentation-morphism extensions, the active kernel warning boundary remains
 1,274 diagnostics: 1,117 unjoinable critical pairs and 157
 replaceable-pattern advisories. Downstream module-specific additions and
 projection-order classifications remain in their dated implementation plans;
@@ -5221,20 +5229,25 @@ has zero strict findings. The generated catalog contains 2,359 classified
 checks across 116 areas with zero legacy or unclassified entries.
 
 The current registered health report is deliberately an honest no-check
-source snapshot over 330 maintained owner/reviewer files. It records no exit
+source snapshot over 332 maintained owner/reviewer files. It records no exit
 or timing claim, because the integration follows the user's scoped-validation
 boundary rather than launching a repository-wide health sweep. The relevant
 changed kernel/module/diagnostic/reviewer targets passed their proportional
 90-second-per-target gates in their owning tranches. The source-metrics
 snapshot is
-`sha256:61ca912acc65c456484a7d7f9b2028adfefb367da9a10a875ee8aa696ea94214`
+`sha256:3aee00b8af3dbd1363cddfef9995c5f79ca5a57c05370f4fd8751ec7dfce9fe2`
 and the check-content snapshot is
-`sha256:9696d8b4a8d3f1cd642fdefe81d76a8cbc8a7b92247232d0db006ea3374785e4`.
+`sha256:cc86b4f3e7d8a50cb076e980c940690fba441f435878e2c6da8dcbf22a36ef85`.
 The newly registered finite-module owner and reviewer pass their focused
 bounded checks, its strict LHS audit is empty, and emitted membership,
 syzygy, and adjacent-zero Core targets pass a live Lambdapi probe. The
 warning-enabled owner check adds no local diagnostic because the extension
 declares no rule or unifier.
+The downstream presentation-morphism owner and reviewer likewise pass their
+focused checks with zero local warning diagnostics and an empty strict LHS
+audit. Live emitted-Core checking accepts its relation-preservation,
+representative-agreement, and chain-square equations. These are proportional
+target results, not a repository-wide timing claim.
 No repository-wide post-integration `make check`, `make examples`,
 `make health`, `make ci`, or root aggregate is claimed.
 

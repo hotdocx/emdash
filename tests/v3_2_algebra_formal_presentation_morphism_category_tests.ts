@@ -17,6 +17,8 @@ import {
     algebraPresentedAlgebraModuleLinearMap,
     algebraPresentedAlgebraModuleSemilinearMapApply,
     algebraPresentedAlgebraModuleSemilinearMapCompose,
+    algebraPresentedAlgebraModuleSemilinearMapEquals,
+    algebraPresentedAlgebraModuleSemilinearMapIdentity,
     algebraPresentedAlgebraModuleVector,
     algebraPresentedModuleCategoricalModel,
     algebraQuotientElement,
@@ -84,7 +86,18 @@ describe('FPMAP categorical and formal representation agreement', () => {
                     reifier,
                     map: composite
                 });
+            const identity =
+                algebraPresentedAlgebraModuleSemilinearMapIdentity(module);
+            const identityCompatibility =
+                defineAlgebraFormalPresentationMorphismCategoryCompatibility({
+                    reifier,
+                    map: identity
+                });
             assert.equal(compatibility.computation.preservesRelations, true);
+            assert.equal(
+                identityCompatibility.computation.preservesRelations,
+                true
+            );
             assert.match(
                 serializeCoreExpression(compatibility.formal.claimType),
                 /bridge_comm_ring_matrix_comp/u
@@ -95,6 +108,13 @@ describe('FPMAP categorical and formal representation agreement', () => {
                 typeof RATIONAL_DOMAIN.zero,
                 string | bigint
             >();
+            assert.equal(
+                algebraPresentedAlgebraModuleSemilinearMapEquals(
+                    model.category.identityMorphism(module),
+                    identity
+                ),
+                true
+            );
             const basis = algebraPresentedAlgebraModuleElement(
                 module,
                 algebraPresentedAlgebraModuleBasisVector(free, 0)

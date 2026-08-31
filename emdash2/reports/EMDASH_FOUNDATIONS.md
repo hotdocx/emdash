@@ -3033,6 +3033,63 @@ direct computational representation, so categorical programs can lower to
 that representation without making raw matrices the interface of every
 generic categorical algorithm.
 
+### Presentation Morphisms And Representative Agreement
+
+For two fixed-ring presentations
+
+```text
+P = (g_P,r_P,R_P)       Q = (g_Q,r_Q,R_Q),
+```
+
+a map retains more than its generator matrix. The selected data are
+
+```text
+F : Matrix_R(g_Q,g_P)
+W : Matrix_R(r_Q,r_P)
+R_Q o W = F o R_P.
+```
+
+Columnwise, the equation says that the image under `F` of every original
+source relation is the combination of original target relations selected by
+the corresponding column of `W`. The TypeScript computation may reduce by a
+target Gröbner basis, but its retained basis transformations return the
+coefficients to the original target-relation order before the matrix is
+reified. Thus reduction order is an internal algorithm choice, while the
+formal matrix boundary remains the presentation supplied by the user.
+
+Two generator matrices represent the same map modulo target relations when
+the computation supplies
+
+```text
+H : Matrix_R(r_Q,g_P)
+R_Q o H = F-G.
+```
+
+This is explicit representative agreement rather than equality in a quotient
+carrier. Different `H` witnesses are not identified, and a failed comparison
+retains a nonzero remainder. Likewise, a failed candidate map retains every
+attempted relation coefficient and remainder and does not yield a formal law.
+
+The exact chain-map component condition is presented by four selected
+matrices:
+
+```text
+e_i o F_i = F_(i-1) o d_i.
+```
+
+It is computed from those matrices rather than accepted as an independent
+hand-written square. The current layer stops at individual exact squares; it
+does not package an arbitrary-length formal complex, a presentation category,
+kernels, cokernels, exactness, or homology.
+
+At the proof--CAS boundary, the selected `F`, `W`, and `H` remain explicit
+Core terms and only their equality law is adopted. A whole existential
+assumption would instead hide the selected computational witnesses. The
+fixed-ring public presented-module category, polynomial relation-witness
+operation, formal equation, and categorical compiler therefore share one
+representation without making matrix internals the interface of every generic
+categorical algorithm.
+
 ### Presented Affine Basic Opens And Elementwise Base Change
 
 The downstream Zariski module supplies geometric presentation data without
@@ -6892,6 +6949,12 @@ kernel and one-way library vocabulary.
 | column-matrix action, zero, and composition | `comm_ring_matrix_apply` / `comm_ring_matrix_zero` / `comm_ring_matrix_comp` |
 | explicit agreement modulo selected relation columns | `CommRingPresentationAgreement` / `comm_ring_presentation_agreement_intro` |
 | selected syzygy and adjacent-zero equations | `CommRingMatrixSyzygy` / `CommRingMatrixCompositeZero` |
+| finite fixed-ring presentation package | `CommRingPresentation R` / `comm_ring_presentation_intro` |
+| presentation generator/relation ranks and relation matrix | `comm_ring_presentation_generators` / `comm_ring_presentation_relations` / `comm_ring_presentation_matrix` |
+| relation-preserving presentation map | `CommRingPresentationMorphism P Q` / `comm_ring_presentation_morphism_intro` |
+| retained generator map, relation witness, and law | `comm_ring_presentation_morphism_map` / `comm_ring_presentation_morphism_witness` / `comm_ring_presentation_morphism_law` |
+| representative agreement modulo target relations | `CommRingPresentationMorphismAgreement P Q F G` |
+| exact chain-map component square | `CommRingChainMapSquare` |
 | selected finite ring sum and dot product | `comm_ring_finite_sum` / `comm_ring_finite_dot` |
 | retained unit-ideal coefficient data | `CommRingUnimodularPresentation` / `comm_ring_unimodular_intro` |
 | finite affine Zariski-cover presentation | `CommRingZariskiCoverPresentation` / `comm_ring_zariski_cover_map` |
