@@ -8,7 +8,7 @@ Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed presented-module affine-descent baseline;
 `QCC-AUDIT-1A` and `QCC-COCHAIN-2A` are complete;
 `QCC-DIFFERENTIAL-3A` and `QCC-SQUARE-4A` are complete; `QCC-GRAPH-5A` is the
-next dependency-ready row.
+complete and `QCC-CONFORMANCE-6A` is the next dependency-ready row.
 
 Baseline: `a3e71ae7c4bf6035c1a716a3c102a55a417e40ca`
 
@@ -243,8 +243,8 @@ Direct construction and native graph execution must serialize identically.
 | `QCC-COCHAIN-2A` | complete; proportional-green at `f023d7b` | `QCC-AUDIT-1A` | stable heterogeneous degree parents, aligned cochain elements, global-element construction, zero/addition/negation/subtraction/equality, positional/index lookup, schemas/serialization, and complete diagnostics |
 | `QCC-DIFFERENTIAL-3A` | complete; proportional-green at `6b0889e` | `QCC-COCHAIN-2A` | whole alternating differential with exact endpoint lookup, retained ordered target/contribution data, binary orientation, global-section cancellation, additive/zero/negation comparisons, serialization, and truncation failure |
 | `QCC-SQUARE-4A` | complete; proportional-green at `fb800f2` | `QCC-DIFFERENTIAL-3A`, repeated-face comparisons | complete structural cancellation records, stored-route sign products, equal composite images, zero signed pairs, coverage accounting, evaluated `d² = 0`, serialization, and truncation/corruption failures |
-| `QCC-GRAPH-5A` | pending; next selected row | `QCC-SQUARE-4A` | exact native differential/square operations, fixed-degree schemas, reference-engine and graph execution |
-| `QCC-CONFORMANCE-6A` | pending | all preceding rows | three concrete examples, deterministic direct/graph artifacts, final proportional validation, completion audit, and clean checkpoint |
+| `QCC-GRAPH-5A` | complete; proportional-green at `28b025c` | `QCC-SQUARE-4A` | fixed-degree input schemas, exact whole differential and optional square operations, native reference implementations/engine, direct-graph agreement, and foreign/top-degree failures |
+| `QCC-CONFORMANCE-6A` | pending; next selected row | all preceding rows | three concrete examples, deterministic direct/graph artifacts, final proportional validation, completion audit, and clean checkpoint |
 
 Rows may be split into lettered subtranches. A row completes only after
 implementation, focused positive and negative tests, proportional validation,
@@ -276,6 +276,32 @@ synchronized decisions/results, and a local checkpoint.
 | `D-QCC-020` | accepted | A cancellation record locates all four stored face maps around one repeated face, multiplies their stored signs, applies both already-equal composite maps to the supplied lower component, and requires canonical signed cancellation. |
 | `D-QCC-021` | accepted | Structural coverage is complete only when cancellation count equals the sum of `choose(vertexCount,2)` over target simplices in degree `n+2`. Missing comparison data fails closed. |
 | `D-QCC-022` | accepted | Differential-square success requires both structural pair cancellation and an actually computed canonical-zero second differential; it is computational evidence with no proof claim. |
+| `D-QCC-023` | accepted | Native operation bundles are fixed to one exact cochain-degree parent, so graph input schemas reject every foreign diagram or degree. |
+| `D-QCC-024` | accepted | A differential operation exists exactly when degree `n+1` is retained; the square operation is included only when degree `n+2` is retained. |
+| `D-QCC-025` | accepted | Direct and graph execution use the same whole constructors and must serialize identically; no graph-specific differential semantics is introduced. |
+
+## `QCC-GRAPH-5A` Result
+
+Fixed-degree native operations are implemented in
+`src/v3_2/algebra_quasicoherent_cochain_reference_operations.ts`. One bundle
+owns the exact cochain input schema and whole differential operation for a
+retained degree with a successor. It additionally owns a differential-square
+operation only when a second successor degree exists.
+
+Both operations use the ordinary reference-engine contract and delegate
+directly to the established whole constructors. The bundle creates a native
+engine from its exact implementations; it introduces no new management,
+category, or graph semantics.
+
+Four focused tests execute the binary asymmetric differential and ternary
+differential square as graph nodes with byte-identical direct serialization,
+reject a foreign-degree cochain at schema normalization, and reject an
+operation bundle at the retained top degree. Together with differential,
+square, cochain, graph, and reference-engine suites, 40 tests pass, followed
+by workspace check, root typecheck, affected lint, and diff hygiene. No
+repository-wide aggregate or Lambdapi check was run.
+
+Semantic checkpoint: `28b025c` (`cochains: expose differential graph operations`).
 
 ## `QCC-SQUARE-4A` Result
 
