@@ -786,6 +786,31 @@ elementwise step rather than inventing a rigid membership head.
 basis; it does not denote the least generated topology. The maintained
 chaotic instance is a feasibility model, not canonical `Zar` syntax.
 
+For the downstream finite-presentation calculus, comments and examples may
+write
+
+```text
+R^n                       : finite free vectors Vector_R(n)
+Mat_R(r,c)                : column-oriented r-by-c matrices
+A * v                     : matrix action R^c -> R^r
+0_(r,c)                   : zero matrix
+A o B                     : matrix composition
+Agree_A(v,w;c,p)          : c with p : A*c = v-w
+Syz_A(s)                  : equation A*s = 0
+Chain0(A,B)               : equation A o B = 0.
+```
+
+The literal owners are `CommRingVector`, `CommRingMatrix`,
+`comm_ring_matrix_apply`, `comm_ring_matrix_zero`,
+`comm_ring_matrix_comp`, `CommRingPresentationAgreement`,
+`CommRingMatrixSyzygy`, and `CommRingMatrixCompositeZero`. The first two are
+transparent `FiniteFamily` aliases, and a matrix is a family of columns: the
+shape `r,c` therefore means an action `R^c -> R^r`. `Agree`, `Syz`, and
+`Chain0` retain explicit equality data; none is canonical syntax for equality
+in a quotient module, an exact complex, or a formal Abelian category. There
+are no matrix rewrite or unification rules beyond the inherited transparent
+Nat/finite-family computation.
+
 For the separately promoted direct big-affine topology, comments and examples
 may write
 

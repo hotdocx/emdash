@@ -4,10 +4,8 @@ Date: 2026-08-31
 
 Plan-ID: `TS-EMDASH-FORMAL-PRESENTED-MODULES-CAS`
 
-Status: active living plan on a dedicated branch/worktree; the formal spine,
-exact signature/reification layer, membership, syzygy, resolution, and first
-categorical compatibility consumer are implemented; live formal-source
-registration and conformance remain.
+Status: implementation complete on a dedicated branch/worktree; final
+conformance/documentation checkpoint and ledger hash synchronization pending.
 
 Baseline: `e665301bf40a68f136833ba2b7e9416ace55c79e`
 
@@ -286,7 +284,7 @@ claim remains later work.
 | `FPM-SYZYGY-7A` | complete; checkpoint `a8a114b` | membership | Schreyer syzygy equations and classified finite adoption source |
 | `FPM-RESOLUTION-8A` | complete; checkpoint `a8a114b` | syzygy | bounded resolution matrix terms and all adjacent-zero equations |
 | `FPM-CATEGORY-9A` | complete; checkpoint `a8a114b` | matrix/presentation | representative concrete-category/reinterpretation/compiler lowering with direct structural agreement |
-| `FPM-CONFORMANCE-10A` | pending | all active rows | portable artifacts, focused formal checks, live Lambdapi acceptance, proportional final audit |
+| `FPM-CONFORMANCE-10A` | complete; final checkpoint pending | all active rows | portable artifacts, focused formal checks, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and an
 updated plan. Every completed row requires focused positive/negative tests,
@@ -318,6 +316,8 @@ checkpoint.
 | `D-FPM-019` | accepted during delegation | Syzygy and resolution adapters require the current realization profile, exact selected whole output, exact Core goal target, valid selected index, and compatible dimensions before a computation may become a claim. |
 | `D-FPM-020` | accepted during delegation | The batch owner adopts every selected syzygy before every adjacent resolution composite, appending each equation separately as `computed-equation` evidence. |
 | `D-FPM-021` | accepted during categorical compatibility | The formal column matrix reifies the same ordered `combinedRelations` retained by the direct presented-module category; categorical reinterpretation is representation-preserving and does not assert a formal category or quotient equality. |
+| `D-FPM-022` | accepted during conformance | The batch result has deterministic portable serialization containing the exact classified assumption source, selected whole outputs, indices, and Core claims. |
+| `D-FPM-023` | accepted during conformance | The new rule-free owner and reviewer are registered in the formal inventories; under the repository's scoped-validation policy, health is refreshed as an honest no-check 330-target snapshot rather than by a repository-wide traversal. |
 
 ## Initial Reifier Result
 
@@ -350,6 +350,28 @@ the existing tower reinterpretation. A schema-preserving categorical map
 action compiles to the direct algebra graph and agrees with direct execution.
 This is a representation-compatibility result, not a formal category or
 quotient-module claim.
+
+## Conformance Result
+
+The registered Lambdapi owner and reviewer pass their focused bounded checks.
+The owner contains fourteen transparent symbols and no rewrite or unification
+rule; its strict LHS audit is therefore empty. A warning-enabled owner check
+reports only the imported kernel warning families and no diagnostic located in
+the finite-module source.
+
+The exact TypeScript environment and binding map emit membership, syzygy, and
+adjacent composite-zero targets against the active
+`emdash3_2_commutative_algebra_finite_modules` module. All three targets pass
+the Core checker and a live bounded Lambdapi probe. The membership adapter now
+uses the same current-profile, parent-aware, exact-target, and exact-whole-
+output validation as the syzygy and resolution adapters.
+
+The batch result serializes deterministically with its classified assumption
+source, selected computation bytes, equation indices, and explicit Core
+targets. Workspace validation, root typecheck, affected lint, focused module/
+presentation/category tests, report registries, source TOC, strict catalog,
+and the no-check health snapshot are green. No repository-wide TypeScript,
+formal, book, print, package, or release aggregate is claimed.
 
 ## Formal Spine Result
 

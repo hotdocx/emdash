@@ -2,7 +2,8 @@
 
 import {
     AlgebraFormalAssumptionSource,
-    appendAlgebraFormalAssumption
+    appendAlgebraFormalAssumption,
+    serializeAlgebraFormalAssumptionSource
 } from './algebra_formal_assumption_source';
 import {
     AlgebraFormalModuleResolutionRealization,
@@ -32,6 +33,12 @@ import {
     KernelExpression,
     provenance
 } from './kernel';
+import {
+    serializeCoreExpression
+} from './core_serialization';
+import {
+    serializeCoreLfWorkspaceCanonicalJson
+} from './lf_workspace';
 import {
     CoreProofArtifactFingerprint
 } from './proof_document';
@@ -65,6 +72,26 @@ export interface AlgebraFormalFiniteModuleDelegationResult<
     readonly composites:
         readonly AlgebraFormalModuleResolutionRealization<P, C, I>[];
 }
+
+export const serializeAlgebraFormalFiniteModuleDelegationResult = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(value: AlgebraFormalFiniteModuleDelegationResult<P, C, I>): string =>
+    serializeCoreLfWorkspaceCanonicalJson({
+        profileRevision: value.profileRevision,
+        source: serializeAlgebraFormalAssumptionSource(value.source),
+        syzygies: value.syzygies.map(realization => Object.freeze({
+            index: realization.index,
+            selectedOutputData: realization.selectedOutputData,
+            claim: serializeCoreExpression(realization.claimType)
+        })),
+        composites: value.composites.map(realization => Object.freeze({
+            adjacentIndex: realization.adjacentIndex,
+            selectedOutputData: realization.selectedOutputData,
+            claim: serializeCoreExpression(realization.claimType)
+        }))
+    }, 'formalFiniteModuleDelegationResult');
 
 const assumptionStem = (value: string): string => {
     const normalized = value.replace(/[^A-Za-z0-9_]/gu, '_');

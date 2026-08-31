@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-30
+Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -243,6 +243,15 @@ belongs to the owning implementation plan rather than to standing guidance.
   base-change-stable algebraic Zariski-cover presentations. It declares no
   `Spec`, localization family, coverage/topology, powers/radicals, fraction,
   polynomial, quotient, or propositional-truncation interface.
+- `emdash3_2_commutative_algebra_finite_modules.lp`: downstream one-way,
+  rule-free finite-presentation layer. It reuses `FiniteFamily` for finite free
+  vectors and for column-oriented matrices, defines transparent vector
+  arithmetic, matrix action, zero, and composition, and classifies explicit
+  presentation agreement, matrix syzygies, and adjacent composite-zero
+  equations. A rows-by-columns matrix acts from `R^columns` to `R^rows`.
+  Presentation agreement retains coefficients and an equation; the module
+  declares no quotient module, module category, exactness, homology, rewrite,
+  or unification rule.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5200,7 +5209,8 @@ confluence.
 After integration of the completed TypeScript-elaborator, PSSS,
 internal-laxity, profiled-Gray, WalkingEnd--Circle, groupoidification,
 monad/Cartesian, cubical/property-profile, pullback, and
-slice-dependent-product histories, the active kernel warning boundary remains
+slice-dependent-product histories, plus the rule-free finite-presentation
+extension, the active kernel warning boundary remains
 1,274 diagnostics: 1,117 unjoinable critical pairs and 157
 replaceable-pattern advisories. Downstream module-specific additions and
 projection-order classifications remain in their dated implementation plans;
@@ -5211,15 +5221,20 @@ has zero strict findings. The generated catalog contains 2,359 classified
 checks across 116 areas with zero legacy or unclassified entries.
 
 The current registered health report is deliberately an honest no-check
-source snapshot over 328 maintained owner/reviewer files. It records no exit
+source snapshot over 330 maintained owner/reviewer files. It records no exit
 or timing claim, because the integration follows the user's scoped-validation
 boundary rather than launching a repository-wide health sweep. The relevant
 changed kernel/module/diagnostic/reviewer targets passed their proportional
 90-second-per-target gates in their owning tranches. The source-metrics
 snapshot is
-`sha256:612715e4cbae9d012908bf1a6c344df3ea2e878f4a471bf69341f3ff3b4a7253`
+`sha256:61ca912acc65c456484a7d7f9b2028adfefb367da9a10a875ee8aa696ea94214`
 and the check-content snapshot is
-`sha256:62cfae850b43e11f7303f4882c1c0fbe8caffaa7dbef65516013f164074a7100`.
+`sha256:9696d8b4a8d3f1cd642fdefe81d76a8cbc8a7b92247232d0db006ea3374785e4`.
+The newly registered finite-module owner and reviewer pass their focused
+bounded checks, its strict LHS audit is empty, and emitted membership,
+syzygy, and adjacent-zero Core targets pass a live Lambdapi probe. The
+warning-enabled owner check adds no local diagnostic because the extension
+declares no rule or unifier.
 No repository-wide post-integration `make check`, `make examples`,
 `make health`, `make ci`, or root aggregate is claimed.
 

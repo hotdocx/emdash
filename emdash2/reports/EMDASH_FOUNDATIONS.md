@@ -2983,6 +2983,56 @@ coverage, or a Grothendieck topology. A cover of a relative basic open
 `s^N = sum_i a_i*f_i`; powers and that relative interface remain downstream
 consumer gates.
 
+### Finite Free Vectors, Column Matrices, And Presentation Agreements
+
+The downstream finite-presentation module reuses the same finite-family
+classifier rather than introducing arrays, lists, or a second finite index:
+
+```text
+Vector_R(n)       = FiniteFamily(|R|,n)
+Matrix_R(r,c)     = FiniteFamily(Vector_R(r),c).
+```
+
+Thus a matrix is literally an ordered family of columns. A matrix of shape
+`r × c` acts as `R^c -> R^r`: its input vector supplies one coefficient for
+each column, and `A*v` is the right-associated finite sum of the resulting
+scaled columns. The zero matrix is the family of zero columns, while
+composition maps the left matrix action over every column of the right
+matrix. Visible nil/cons computations are inherited from Nat elimination and
+the finite-family projections. No matrix-specific rewrite or unification rule
+is added; algebraic reassociation and distributivity remain theorem-level ring
+reasoning rather than new definitional equality.
+
+For a relation matrix
+
+```text
+A : Matrix_R(generators,relations),
+```
+
+the selected computational notion of agreement is explicit data:
+
+```text
+PresentationAgreement(A,v,w)
+  = Sigma(c : Vector_R(relations)), A*c = v-w.
+```
+
+Likewise, a selected syzygy is the equation `A*s = 0`, and consecutive
+presentation maps satisfy the classifier `A o B = 0`. These classifiers are
+the exact equations consumed by the TypeScript proof--CAS bridge: polynomial
+module membership supplies `c`, Schreyer computation supplies `s`, and a
+bounded resolution supplies adjacent matrices. Each successful equation can
+be adopted separately with its whole computation retained; a negative
+membership keeps its nonzero remainder and does not close a goal.
+
+This is a finite presentation calculus, not a quotient construction. In
+particular, the development does not identify vectors modulo the image of
+`A`, construct a semantic module carrier, assert exactness of a resolution,
+or provide a formal Abelian category. The existing TypeScript
+presented-module category retains the same ordered relation columns as its
+direct computational representation, so categorical programs can lower to
+that representation without making raw matrices the interface of every
+generic categorical algorithm.
+
 ### Presented Affine Basic Opens And Elementwise Base Change
 
 The downstream Zariski module supplies geometric presentation data without
@@ -6837,6 +6887,11 @@ kernel and one-way library vocabulary.
 | Nat-indexed finite families | `FiniteFamily A n` / `finite_family_nil` / `finite_family_cons` |
 | finite-family pointwise map and sethood | `finite_family_map` / `finite_family_is_set` |
 | dependent evidence over a finite family | `FiniteFamilyAll P n xs` / `finite_family_all_cons` |
+| finite free ring vectors and column matrices | `CommRingVector R n` / `CommRingMatrix R rows columns` |
+| vector zero/addition/negation/subtraction/scaling | `comm_ring_vector_zero` / `comm_ring_vector_add` / `comm_ring_vector_neg` / `comm_ring_vector_sub` / `comm_ring_vector_scale` |
+| column-matrix action, zero, and composition | `comm_ring_matrix_apply` / `comm_ring_matrix_zero` / `comm_ring_matrix_comp` |
+| explicit agreement modulo selected relation columns | `CommRingPresentationAgreement` / `comm_ring_presentation_agreement_intro` |
+| selected syzygy and adjacent-zero equations | `CommRingMatrixSyzygy` / `CommRingMatrixCompositeZero` |
 | selected finite ring sum and dot product | `comm_ring_finite_sum` / `comm_ring_finite_dot` |
 | retained unit-ideal coefficient data | `CommRingUnimodularPresentation` / `comm_ring_unimodular_intro` |
 | finite affine Zariski-cover presentation | `CommRingZariskiCoverPresentation` / `comm_ring_zariski_cover_map` |

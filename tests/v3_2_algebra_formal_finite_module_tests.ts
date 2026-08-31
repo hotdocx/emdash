@@ -36,6 +36,7 @@ import {
     kernelFree,
     provenance,
     runAlgebraFormalWorkflow,
+    serializeAlgebraFormalFiniteModuleDelegationResult,
     serializeCoreExpression,
     trustAlgebraFormalWorkflow
 } from '../src/v3_2';
@@ -306,6 +307,14 @@ describe('FPM-REIFY membership representation', () => {
                     'formal_resolution_composite_0'
                 ]
             );
+            const portable =
+                serializeAlgebraFormalFiniteModuleDelegationResult(delegated);
+            assert.equal(
+                portable,
+                serializeAlgebraFormalFiniteModuleDelegationResult(delegated)
+            );
+            assert.match(portable, /formal_resolution_syzygy_0/u);
+            assert.match(portable, /bridge_CommRingMatrixCompositeZero/u);
         }
     );
 });

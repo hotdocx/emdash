@@ -136,6 +136,7 @@ export interface AlgebraFormalModuleMembershipRealization<
     readonly reifier: AffineFormalPolynomialReifier<P, C, I>;
     readonly input: AlgebraFormalModuleMembershipInput<P, C, I>;
     readonly selected: AlgebraPolynomialModuleMembership<P, C, I>;
+    readonly selectedOutputData: string;
     readonly formalGenerators: KernelExpression;
     readonly formalCoefficients: KernelExpression;
     readonly formalVector: KernelExpression;
@@ -284,8 +285,26 @@ export function defineAlgebraFormalModuleMembershipRealization<
     readonly basis: AlgebraPolynomialModuleGroebnerBasis<P, C, I>;
     readonly selected: AlgebraPolynomialModuleMembership<P, C, I>;
 }): AlgebraFormalModuleMembershipRealization<P, C, I> {
+    if (!sameAlgebraParent(input.vector.parent, input.basis.submodule.module)) {
+        return invalidRealization(
+            'formalMembership.vector',
+            'Membership vector and basis belong to different free modules'
+        );
+    }
     const rank = input.vector.parent.rank;
     const columns = input.basis.submodule.generators.length;
+    if (
+        input.selected.kind !== 'algebra-polynomial-module-membership' ||
+        !sameAlgebraParent(input.selected.vector.parent, input.vector.parent) ||
+        input.selected.coefficients.length !== columns ||
+        input.selected.vector.components.map(algebraPolynomialText).join('\n') !==
+            input.vector.components.map(algebraPolynomialText).join('\n')
+    ) {
+        return invalidRealization(
+            'formalMembership.selected',
+            'Selected membership result does not match the vector and presentation'
+        );
+    }
     const vectorClassifier = call('bridge_FiniteFamily', [
         { plicity: 'explicit', value: call('bridge_comm_ring_carrier', [{
             plicity: 'explicit', value: input.reifier.formalRing
@@ -321,6 +340,7 @@ export function defineAlgebraFormalModuleMembershipRealization<
         reifier: input.reifier,
         input: Object.freeze({ vector: input.vector, basis: input.basis }),
         selected: input.selected,
+        selectedOutputData: serializeMembership(input.selected),
         formalGenerators,
         formalCoefficients,
         formalVector,
@@ -353,6 +373,16 @@ export function algebraFormalModuleMembershipBundle<
                     throw new Error(`module membership input expected at ${path}`);
                 }
                 const input = value as AlgebraFormalModuleMembershipInput<P, C, I>;
+                if (
+                    !record(input.basis) ||
+                    input.basis.kind !== 'algebra-polynomial-module-groebner-basis' ||
+                    !sameAlgebraParent(
+                        input.basis.submodule.module,
+                        sample.parent
+                    )
+                ) {
+                    throw new Error(`module membership basis expected at ${path}.basis`);
+                }
                 return Object.freeze({
                     vector: vectorSchema.normalize(input.vector, `${path}.vector`),
                     basis: input.basis
@@ -364,8 +394,19 @@ export function algebraFormalModuleMembershipBundle<
     >({
         id: `algebra.formal-module-membership/${sample.parent.identity.id}`,
         revision: sample.parent.identity.revision,
-        normalize(value) {
-            return value as AlgebraPolynomialModuleMembership<P, C, I>;
+        normalize(value, path) {
+            if (
+                !record(value) ||
+                value.kind !== 'algebra-polynomial-module-membership'
+            ) {
+                throw new Error(`module membership result expected at ${path}`);
+            }
+            const membership = value as unknown as
+                AlgebraPolynomialModuleMembership<P, C, I>;
+            if (!sameAlgebraParent(membership.vector.parent, sample.parent)) {
+                throw new Error(`foreign membership result at ${path}`);
+            }
+            return membership;
         }
     });
     const operation: AlgebraOperation<
@@ -395,14 +436,56 @@ export function algebraFormalModuleMembershipBundle<
         id: `proof-cas.module-membership/${sample.parent.identity.id}`,
         revision: sample.parent.identity.revision,
         operation,
-        normalizeRealization(value) {
-            return value as AlgebraFormalModuleMembershipRealization<P, C, I>;
+        normalizeRealization(value, path) {
+            if (
+                !record(value) ||
+                value.profileRevision !==
+                    ALGEBRA_FORMAL_FINITE_MODULE_PROFILE.revision
+            ) {
+                return invalidRealization(
+                    path,
+                    'Expected one current formal module-membership realization'
+                );
+            }
+            const realization = value as unknown as
+                AlgebraFormalModuleMembershipRealization<P, C, I>;
+            if (!sameAlgebraParent(realization.input.vector.parent, sample.parent)) {
+                return invalidRealization(
+                    path,
+                    'Formal membership realization belongs to a foreign module'
+                );
+            }
+            const expected = defineAlgebraFormalModuleMembershipRealization({
+                reifier: realization.reifier,
+                vector: realization.input.vector,
+                basis: realization.input.basis,
+                selected: realization.selected
+            });
+            if (
+                realization.selectedOutputData !== expected.selectedOutputData ||
+                !kernelExpressionEquals(realization.claimType, expected.claimType)
+            ) {
+                return invalidRealization(
+                    path,
+                    'Formal membership realization differs from its selected equation'
+                );
+            }
+            return realization;
         },
         serializeRealization: value => serializeCoreLfWorkspaceCanonicalJson({
-            selected: serializeMembership(value.selected),
+            selected: value.selectedOutputData,
             claim: serializeCoreExpression(value.claimType)
         }, 'formalModuleMembershipRealization'),
-        acquire: (_goal, value) => value.input,
+        acquire: (goal, value) => {
+            if (!kernelExpressionEquals(goal.target, value.claimType)) {
+                throw new AlgebraFormalDelegationError(
+                    'CLAIM_TARGET_MISMATCH',
+                    'formalMembership.goal',
+                    'Goal differs from the selected module-membership equation'
+                );
+            }
+            return value.input;
+        },
         serializeInput: value => serializeCoreLfWorkspaceCanonicalJson({
             vector: value.vector.components.map(algebraPolynomialText)
         }, 'formalModuleMembershipInput'),
@@ -410,7 +493,7 @@ export function algebraFormalModuleMembershipBundle<
         interpret: ({ goal, realization, computed }):
             AlgebraFormalComputationInterpretationInput =>
             serializeMembership(computed.value) ===
-                serializeMembership(realization.selected) && computed.value.member
+                realization.selectedOutputData && computed.value.member
                 ? {
                     kind: 'claim',
                     summary: 'selected module linear combination equals vector',
