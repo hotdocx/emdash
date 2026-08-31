@@ -370,8 +370,8 @@ rechecking the repository for reassurance.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `ALC-PLAN-0` | complete; checkpoint `ce66fa8` | completed proof–CAS delegation at `ae85a4b` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, evidence classes, staged rows, validation, and Git limits |
-| `ALC-AUDIT-1A` | complete; audit checkpoint pending | `ALC-PLAN-0` | exact computational/formal owner map, inverse circularity, universal-property classification, binary/ternary face-unit feasibility, selected formal delta |
-| `ALC-SOURCE-2A` | pending | `ALC-AUDIT-1A` | exact-Core computed-assumption source/workspace, sequential adoption, per-claim classification, source spans, replay and emission |
+| `ALC-AUDIT-1A` | complete; checkpoint `6110491` | `ALC-PLAN-0` | exact computational/formal owner map, inverse circularity, universal-property classification, binary/ternary face-unit feasibility, selected formal delta |
+| `ALC-SOURCE-2A` | complete; source checkpoint pending | `ALC-AUDIT-1A` | exact-Core computed-assumption source/workspace, sequential adoption, per-claim classification, source spans, replay and emission |
 | `ALC-INVERSE-3A` | pending | `ALC-SOURCE-2A` | noncircular inverse target, selected localization adapter, computed-equation adoption, formal unit, direct/graph agreement and negatives |
 | `ALC-UNIVERSAL-3B` | pending | `ALC-INVERSE-3A` | explicitly trusted presentation-semantics adoption, whole property projection, reconstructed formal localization and chart |
 | `ALC-FINITE-PRODUCT-4A` | audit-rejected; no implementation | `ALC-AUDIT-1A` | existing binary unit transport/projection plus one computed face decomposition handles every arity uniformly; no new formal owner required |
@@ -406,6 +406,35 @@ synchronized decisions/results, and a local checkpoint.
 | `D-ALC-017` | accepted after `ALC-AUDIT-1A` | The binary factor-unit route treats the whole lower simplex product as one factor and therefore scales uniformly to ternary/higher simplices without a finite-product/deletion formal theory. |
 | `D-ALC-018` | accepted after `ALC-AUDIT-1A` | Canonical polynomial reification remains unchanged; the nondefinitional product decomposition is exposed as a computed equality rather than hidden by a second product representation. |
 | `D-ALC-019` | accepted after `ALC-AUDIT-1A` | No Lambdapi mathematical declaration or rule is selected by the audit. The formal delta is existing-owner Core construction plus an exact TypeScript signature-mirror extension. |
+| `D-ALC-020` | accepted after `ALC-SOURCE-2A` | A computed-assumption source appends only adoptions whose named goal began in its exact current environment, thereby making dependency order explicit. |
+| `D-ALC-021` | accepted after `ALC-SOURCE-2A` | Every entry retains one existing trusted-adoption artifact plus its independent classification; the source adds no second approval mechanism or blanket trust switch. |
+| `D-ALC-022` | accepted after `ALC-SOURCE-2A` | Source replay rechecks every retained computation result and rebuilds the immutable LF environment in entry order; canonical bytes and source-spanned probe emission are separate projections. |
+
+## `ALC-SOURCE-2A` Result
+
+Durable computed assumptions are implemented in
+`src/v3_2/algebra_formal_assumption_source.ts`. One source retains its module
+and virtual source identity, exact base LF environment, ordered entries,
+current rebuilt environment, exact trusted-adoption artifacts, and one of the
+two allowed evidence classifications per entry.
+
+Appending requires the adoption's goal to have started in the source's exact
+current environment. The source rebuilds the body-free declaration with a
+deterministic source span, checks it in the ordinary immutable LF environment,
+and exposes a source-spanned reference. Duplicate/out-of-order environments,
+invalid classifications, stale results, changed entry order, or replay drift
+fail closed.
+
+Canonical serialization retains each declaration name/type, classification,
+and complete adoption artifact. The existing `serializeCoreLfKernelProbe`
+owner emits the rebuilt source; no Core-to-transfer-AST reifier or new
+declaration semantics is introduced.
+
+Four focused tests cover two sequential independently classified assumptions,
+canonical replay/serialization, source-spanned emission, foreign order,
+invalid classification, and entry drift. The ordinary suite passes 4/4, and
+the opt-in live Lambdapi source probe also passes 4/4. Root typecheck and
+affected lint pass. No aggregate was run.
 
 ## `ALC-AUDIT-1A` Result
 
