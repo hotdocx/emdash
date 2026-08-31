@@ -6,8 +6,8 @@ Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
-through `PAM-CECH-7A` and `PAM-GRAPH-8A1` are complete; `PAM-GRAPH-8A2` is
-complete; `PAM-ORACLE-9A` is now consumer-ready and selected next.
+through `PAM-GRAPH-8A2` and `PAM-ORACLE-9A` are complete;
+`PAM-CONFORMANCE-10A` is the next dependency-ready row.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
 
@@ -289,8 +289,8 @@ Conformance examples are:
 | `PAM-CECH-7A` | complete; proportional-green at `f29e2c7` | `PAM-QCOH-6A`, finite affine covers | ordered varying-ring module Čech data, direct product-localization values, relation-checked semilinear faces/signs, computed repeated-face comparisons, schemas/serialization, empty-cover behavior, and explicit cohomology nonclaim |
 | `PAM-GRAPH-8A1` | complete; proportional-green at `b25e7a6` | representative consumers from preceding rows | context-aware native operations and graph execution for semilinear application, object base change, module localization, and quasi-coherent Čech construction |
 | `PAM-GRAPH-8A2` | complete; proportional-green at `4a1f237` | `PAM-GRAPH-8A1`, computable-category/compiler owners | strict semilinear total-category instance, four primitive whole methods, four-stage Category-only tower, direct reinterpretation, exact native lowerings, and executable categorical compilation |
-| `PAM-ORACLE-9A` | pending; next selected row | stable native module-normalization consumer and installed Singular | optional deterministic module normal-form/zero differential comparison with retained agreement/mismatch; never a native prerequisite |
-| `PAM-CONFORMANCE-10A` | pending | all nondeferred rows | both concrete covers, focused TypeScript evidence, deterministic artifacts, final boundary audit, and proportional completion checkpoint |
+| `PAM-ORACLE-9A` | complete; proportional-green at `69bd4be`, installed-Singular gate green | stable native module-normalization consumer and installed Singular | shared native/oracle zero-decision operation, deterministic position-aware module script, bounded shell-free transport, retained agreement/mismatch, failure handling, and real zero/nonzero comparisons |
+| `PAM-CONFORMANCE-10A` | pending; next selected row | all nondeferred rows | both concrete covers, focused TypeScript evidence, deterministic artifacts, final boundary audit, and proportional completion checkpoint |
 
 Rows may be split into lettered subtranches. A row completes only after
 implementation, focused positive and negative tests, proportional validation,
@@ -342,6 +342,34 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-040` | accepted | Presented modules with semilinear maps form one strict computational total category over varying rings. This category is intentionally qualified only at the `Category` doctrine. |
 | `D-PAM-041` | accepted | Semilinear application, base change, localization, and Čech construction are primitive whole category methods with exact schema-preserving bindings to the native operations. |
 | `D-PAM-042` | accepted | The modeling tower records presented modules, base change, affine quasi-coherent values, and module Čech diagrams; direct presented-module data is the runtime reinterpretation and introduces no wrapper boxes. |
+| `D-PAM-043` | accepted | The module oracle shares one exact zero-decision operation/schema with native TypeScript and compares reduction of the same lifted vector by the same combined relation submodule. |
+| `D-PAM-044` | accepted | Singular scripts encode module generators and vectors positionally, use `std` plus `reduce`, and handle rank zero by emitting the unique zero decision without an invalid empty vector. |
+| `D-PAM-045` | accepted | Oracle disagreement never overwrites the native result. The Node transport remains opt-in, shell-free, and independently bounded by timeout and output size. |
+
+## `PAM-ORACLE-9A` Result
+
+The non-authoritative Singular module comparison is implemented in
+`src/v3_2/algebra_presented_module_singular.ts`. One operation bundle is fixed
+to a presented module and accepts its quotient-valued free vectors. Native
+TypeScript decides zero through the retained canonical module normalization;
+the Singular engine generates the same polynomial lift and combined relation
+module, then tests `reduce(vector,std(module))`.
+
+The adapter uses the existing injected `AlgebraOracleTransport`, exact engine
+contract matching, `Singular -q`, a 30-second timeout, and a one-megabyte
+output bound. Results label their provider; comparisons retain both decisions
+and an agreement Boolean. Nonzero exits and missing markers fail closed.
+
+Seven focused tests cover native/oracle zero and nonzero agreement, retained
+disagreement, deterministic position-aware scripts, exact bounded process
+requests, malformed/failed results, rank-zero encoding, and the real installed
+Singular executable. The ordinary affected oracle/module/reduced-basis gate
+has 24 passes and one opt-in skip; the separately enabled real gate passes all
+seven tests, including both actual Singular decisions. Workspace check, root
+typecheck, affected lint, and diff hygiene pass. No repository-wide aggregate
+or Lambdapi check was run.
+
+Semantic checkpoint: `69bd4be` (`modules: add Singular module comparison`).
 
 ## `PAM-GRAPH-8A2` Result
 
