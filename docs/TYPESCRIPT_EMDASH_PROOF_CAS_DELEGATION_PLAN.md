@@ -475,8 +475,8 @@ syntax.
 
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
-| `PCD-PLAN-0` | complete; plan checkpoint pending | reviewed continuation and completed computational/formal/proof endpoints | this living plan, isolated branch/worktree, exact baseline, architecture, staged rows, trust boundary, validation, and Git limits |
-| `PCD-AUDIT-1A` | pending | `PCD-PLAN-0` | exact proof-goal/declaration/adoption, algebra-operation, realization, Zariski-target, and serialization owner map; first positive/negative fixtures; no behavior change |
+| `PCD-PLAN-0` | complete; checkpoint `f5c31d3` | reviewed continuation and completed computational/formal/proof endpoints | this living plan, isolated branch/worktree, exact baseline, architecture, staged rows, trust boundary, validation, and Git limits |
+| `PCD-AUDIT-1A` | complete; audit checkpoint pending | `PCD-PLAN-0` | exact proof-goal/declaration/adoption, algebra-operation, realization, Zariski-target, and serialization owner map; first positive/negative fixtures; no behavior change |
 | `PCD-CONTRACT-2A` | pending | `PCD-AUDIT-1A` | immutable adapter/request/interpretation/result/artifact contracts, canonical payload encoding, exact identity and quality validation, focused negatives |
 | `PCD-DELEGATE-3A` | pending | `PCD-CONTRACT-2A` | native/graph exact execution bound to one named goal and realization, observation result, limits/cancellation/diagnostics, no proof or workspace mutation |
 | `PCD-ADOPT-4A` | pending | `PCD-DELEGATE-3A` | explicit Core-data checking, optional checked-plan route, explicit trusted opaque-declaration adoption, ordinary exact patch, stale/implicit/foreign rejection |
@@ -510,6 +510,44 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PCD-015` | accepted | No new Core owner, checker rule, Lambdapi symbol, rewrite, unification rule, or formal quotient theory is a prerequisite. |
 | `D-PCD-016` | accepted | Local validated checkpoint commits are permitted on this dedicated branch; push, merge, publication, release, history rewriting, and cleanup are not. |
 | `D-PCD-017` | accepted | `main` was fast-forwarded only to the completed `79f3bb7` Čech-cochains baseline before this branch was created; orthogonal path-cubical/strictness work remains excluded. |
+| `D-PCD-018` | accepted after `PCD-AUDIT-1A` | The first exact named-goal boundary is one closed depth-zero root hole; general nested/local goals require a later exact named-goal projection or telescope abstraction. |
+| `D-PCD-019` | accepted after `PCD-AUDIT-1A` | Trusted runtime adoption extends `CoreLfDeclarationEnvironment` immutably with one checked body-free declaration, then uses an ordinary exact hole patch; arbitrary Core-to-transfer-AST reification is not required. |
+| `D-PCD-020` | accepted after `PCD-AUDIT-1A` | The Zariski consumer requires a minimal exact opaque TypeScript signature mirror for its portable finite-family/commutative-ring references; a fake all-`TYPE` environment is rejected. |
+| `D-PCD-021` | accepted after `PCD-AUDIT-1A` | `affineFormalCoverLawType` must construct its families without first building a law-bearing cover term, while `buildAffineFormalCoverTerms` keeps its existing strict law requirement. |
+| `D-PCD-022` | accepted after `PCD-AUDIT-1A` | The positive fixture is the ideal `(x,1-x)` and the negative fixture is `(x)`; a negative unimodular result exposes no adoptable positive claim and leaves the goal open. |
+
+## `PCD-AUDIT-1A` Result
+
+The exact owner and gap map is recorded in
+`docs/TYPESCRIPT_EMDASH_PROOF_CAS_DELEGATION_OWNER_AUDIT.md`.
+
+The audit selects a complete initial boundary rather than broad goal mining:
+one `CoreProofDocumentInput` whose plan is a closed root `hole`, exact native
+operation execution, and a separate immutable assumption-adoption action.
+The document type is the exact Core goal; the portable proof artifact verifies
+the stable ID and depth-zero open state. General inner goals remain later.
+
+`CoreLfDeclarationEnvironment.extend` is the correct first runtime adoption
+owner. It checks the exact assumption type, defaults the body-free declaration
+to opaque, preserves immutability, and permits an ordinary exact proof-plan
+patch in the extended environment. The source-oriented declaration-fragment
+facade remains available for later publication but need not receive a broad
+Core-to-transfer-expression reifier.
+
+The first formal consumer also exposes two bounded prerequisites. The current
+law-type helper is circular because it calls the law-requiring cover builder;
+it must instead use the existing public family builder directly. And the
+affine bridge currently checks formal algebra only through emitted Lambdapi
+probes, so TypeScript needs the smallest exact opaque signature mirror for the
+portable equality, finite-family, commutative-ring, unimodular, and cover
+surface. This is declaration data only: no Core owner, definition, runtime
+rule, proof rule, or Lambdapi source change is selected.
+
+At baseline, workspace check, root typecheck, and 61 focused proof/workspace/
+Zariski/formal-bridge tests pass. The registered kernel aggregate passed the
+directly relevant formal owners before it continued into unrelated modules
+and was terminated under the proportional-test boundary; the dedicated
+finite-unimodular owner is the first slice's bounded formal target.
 
 ## Validation Policy
 
