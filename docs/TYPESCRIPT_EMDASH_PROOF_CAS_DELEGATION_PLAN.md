@@ -484,8 +484,8 @@ syntax.
 | `PCD-ADOPT-4A` | complete; checkpoint `a6356a3` | `PCD-DELEGATE-3A` | explicit Core-data checking, checked-plan route, explicit trusted opaque-declaration adoption, ordinary exact patch, stale/implicit/foreign rejection |
 | `PCD-ZARISKI-5A` | complete; checkpoint `82a6c98` | `PCD-ADOPT-4A` | end-to-end unimodular-cover delegation, coefficient reification, exact formal law target, observed and trusted paths, existing cover construction, negative open-goal behavior |
 | `PCD-IDEAL-5B` | complete; checkpoint `a51f22a` | `PCD-ADOPT-4A`, audit-approved interpretation | second ring-level ideal-membership/quotient-equality consumer with explicit trusted-relation policy, positive/negative and graph agreement |
-| `PCD-REPLAY-6A` | complete; final implementation checkpoint pending | both concrete consumers | canonical request/result/adoption serialization, exact freshness/invalidation, deterministic direct-TypeScript usability surface |
-| `PCD-CONFORMANCE-7A` | complete; final implementation checkpoint pending | all preceding active rows | portable request/result/receipt/adoption artifacts, both direct/native-graph agreements, exact checked LF behavior, focused live Lambdapi conformance, and baseline-differential aggregate audit |
+| `PCD-REPLAY-6A` | complete; checkpoint `8f04fdf` | both concrete consumers | canonical request/result/adoption serialization, exact freshness/invalidation, deterministic direct-TypeScript usability surface |
+| `PCD-CONFORMANCE-7A` | complete; implementation checkpoint `8f04fdf` | all preceding active rows | portable request/result/receipt/adoption artifacts, both direct/native-graph agreements, exact checked LF behavior, focused live Lambdapi conformance, and baseline-differential aggregate audit |
 
 Rows may be split into lettered subtranches. A row completes only after
 implementation, focused positive and negative tests, proportional validation,
@@ -583,6 +583,53 @@ inside the complete aggregate is green.
 
 No repository-wide `check:all`, print, book, package, release, or additional
 kernel aggregate was run.
+
+## Final Boundary Audit
+
+The completed goal now provides one coherent proof-assistant/CAS path:
+
+```text
+checked named root goal
+  -> explicit formal/computational realization
+  -> typed AlgebraOperation request
+  -> native exact computation
+  -> whole result plus canonical interpretation
+  -> observation, checked proof plan, or explicit trusted assumption
+  -> ordinary checked proof-plan replay
+  -> existing formal constructors and backend emission.
+```
+
+The generic layer retains operation/schema/engine/algorithm identities,
+canonical realization/input/output bytes, limits, assumptions, diagnostics,
+reusable metadata, exact Core target, checked data, and proof/adoption
+artifacts. It detects nondeterministic callbacks, target drift, result drift,
+changed requests, heuristic/partial output, negative observations,
+unacknowledged assumptions, ill-typed reification, and implicit trust.
+
+The two concrete consumers establish that the architecture is not merely
+abstract plumbing:
+
+- unimodular Zariski data builds an existing formal cover after explicit law
+  adoption; and
+- ideal membership drives a selected quotient equality while explicitly
+  recording the trusted ideal-relation boundary and adding no formal quotient
+  owner.
+
+This is more tightly integrated than a standalone CAP/homalg-style runtime
+because goal identity, computational parent, operation graph, whole result,
+formal interpretation, and adoption policy remain connected in typed data.
+It is not a claim of comparable algorithmic breadth or maturity.
+
+No effectful Core/proof-plan node, kernel reduction, Lambdapi symbol/rule,
+global mutable registry, proof certificate requirement, arbitrary AST
+decompilation, formal module/Čech/homology theory, parser, hosted service,
+package publication, push, merge, or release was introduced.
+
+The next mathematically meaningful bridge extension is consumer-gated: select
+an active formal module/complex owner before exposing the recent presented-
+module, Čech-cochain, or homological computations as formal claims. The current
+ring-level delegation/adoption infrastructure does not require redesign for
+that continuation.
 
 ## `PCD-REPLAY-6A` Result
 
