@@ -72,10 +72,10 @@ It respects the source relations when there is a retained relation matrix
 W : Matrix(R,r_Q,r_P)
 ```
 
-with the exact equation
+with the exact equation, oriented to match the existing membership owner,
 
 ```text
-F o R_P = R_Q o W.
+R_Q o W = F o R_P.
 ```
 
 This is the computational `relationWitness` architecture already used by the
@@ -92,7 +92,7 @@ H : Matrix(R,r_Q,g_P)
 with
 
 ```text
-F - G = R_Q o H.
+R_Q o H = F - G.
 ```
 
 This supplies useful quotient-style reasoning without constructing a quotient
@@ -199,7 +199,7 @@ For `P,Q : CommRingPresentation(R)`, define retained data equivalent to
 CommRingPresentationMorphism(P,Q)
   := Sigma F : Matrix(R,g_Q,g_P),
        Sigma W : Matrix(R,r_Q,r_P),
-         F o R_P = R_Q o W.
+         R_Q o W = F o R_P.
 ```
 
 `W` is constructive relation data, not a manually authored coherence square.
@@ -214,7 +214,7 @@ For two candidate generator maps `F,G`, define
 ```text
 CommRingPresentationMorphismAgreement(P,Q,F,G)
   := Sigma H : Matrix(R,r_Q,g_P),
-       F - G = R_Q o H.
+       R_Q o H = F - G.
 ```
 
 This is explicit agreement data, not judgmental equality, a quotient path, or
@@ -273,13 +273,13 @@ assumption-source, receipt, and live-probe owners are reused unchanged.
 Positive relation preservation targets the exact equation
 
 ```text
-F o R_P = R_Q o W.
+R_Q o W = F o R_P.
 ```
 
 Positive representative agreement targets
 
 ```text
-F - G = R_Q o H.
+R_Q o H = F - G.
 ```
 
 Each adapter must require:
@@ -344,7 +344,7 @@ overclaim.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `FPMAP-PLAN-0` | in progress | completed finite-presentation bridge at `2c56d41` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, mathematics, validation, Git limits |
-| `FPMAP-AUDIT-1A` | pending | plan | exact formal/CAS orientation, missing owners, matrix-law burden, selected fixed-ring model, category boundary |
+| `FPMAP-AUDIT-1A` | complete; audit checkpoint pending | plan | exact formal/CAS orientation, missing owners, matrix-law burden, selected fixed-ring model, category boundary |
 | `FPMAP-MATRIX-2A` | pending | audit | transparent matrix add/neg/sub and narrowly required identity/law support, positive/noncollapse consumers |
 | `FPMAP-FORMAL-3A` | pending | matrix | formal presentation, relation-preserving morphism, representative agreement, and chain-square classifiers without quotient overclaim |
 | `FPMAP-WITNESS-4A` | pending | formal | whole polynomial relation-witness computation with coefficients/remainders and positive/negative cases |
@@ -375,6 +375,9 @@ tests, proportional validation, and a local checkpoint.
 | `D-FPMAP-010` | accepted | Direct matrices remain the backend beneath category/doctrine/tower/compiler abstraction. |
 | `D-FPMAP-011` | accepted | Local validated checkpoints are authorized; push, merge, publication, release, history rewriting, and cleanup are not. |
 | `D-FPMAP-012` | accepted | Orthogonal path-cubical/strictness histories remain excluded from the baseline. |
+| `D-FPMAP-013` | accepted after audit | Relation preservation is oriented `R_Q o W = F o R_P`, and representative agreement is oriented `R_Q o H = F-G`, matching columnwise module-membership output without an equality-symmetry adapter. |
+| `D-FPMAP-014` | accepted after audit | `AlgebraPresentedPolynomialModule.relationBasis` retains transformations back to `relations.generators`, so membership coefficients assemble witnesses against the original ordered relation matrix rather than the reduced basis order. |
+| `D-FPMAP-015` | accepted after audit | Matrix add/neg/sub and transparent Sigma presentation packages suffice for the first formal equations; matrix identity and theorem-level category laws remain consumer-gated. |
 
 ## Validation Policy
 
