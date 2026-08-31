@@ -275,11 +275,11 @@ claim remains later work.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `FPM-PLAN-0` | complete; checkpoint `67bb128` | completed affine formal bridge at `e665301` and reviewed CAP/homalg continuation | living plan, isolated branch/worktree, exact baseline, layering, representation, validation, Git limits |
-| `FPM-AUDIT-1A` | complete; formal checkpoint pending | `FPM-PLAN-0` | exact formal owner gap, matrix orientation, CAS consumer map, smallest Lambdapi module, categorical acceptance target |
-| `FPM-VECTOR-2A` | complete; formal checkpoint pending | audit | formal vectors and transparent zero/add/neg/subtract/scale computation |
-| `FPM-MATRIX-3A` | complete; formal checkpoint pending | vector | formal column matrices, action, zero, composition, typed positive/noncollapse consumers |
-| `FPM-PRESENTATION-4A` | complete; formal checkpoint pending | matrix | presentation/agreement and syzygy/composite-zero classifiers without quotient overclaim |
-| `FPM-REIFY-5A` | pending | formal owners | exact signature mirrors, vector/matrix/presentation reification, dimension/parent/order diagnostics |
+| `FPM-AUDIT-1A` | complete; checkpoint `877823b` | `FPM-PLAN-0` | exact formal owner gap, matrix orientation, CAS consumer map, smallest Lambdapi module, categorical acceptance target |
+| `FPM-VECTOR-2A` | complete; checkpoint `877823b` | audit | formal vectors and transparent zero/add/neg/subtract/scale computation |
+| `FPM-MATRIX-3A` | complete; checkpoint `877823b` | vector | formal column matrices, action, zero, composition, typed positive/noncollapse consumers |
+| `FPM-PRESENTATION-4A` | complete; checkpoint `877823b` | matrix | presentation/agreement and syzygy/composite-zero classifiers without quotient overclaim |
+| `FPM-REIFY-5A` | in progress; Core reifier checkpoint pending | formal owners | exact signature mirrors, vector/matrix/presentation reification, dimension/parent/order diagnostics |
 | `FPM-MEMBERSHIP-6A` | pending | reifier | whole positive/negative module-membership delegation and formal selected equation |
 | `FPM-SYZYGY-7A` | pending | membership | Schreyer syzygy equations and classified finite adoption source |
 | `FPM-RESOLUTION-8A` | pending | syzygy | bounded resolution matrix terms and all adjacent-zero equations |
@@ -311,6 +311,21 @@ checkpoint.
 | `D-FPM-014` | accepted after audit | Formal matrices are columns; CAS row-major storage is an implementation detail handled by reification. |
 | `D-FPM-015` | accepted after audit | Transparent Nat/finite-family definitions suffice for vector arithmetic, matrix action/composition, presentation agreement, syzygy, and adjacent-zero classifiers; no rewrite/unification rule is added. |
 | `D-FPM-016` | accepted after audit | The initial formal module is a presentation calculus, not an abstract semantic module or quotient construction. |
+| `D-FPM-017` | accepted during reification | Whole polynomial-module membership reifies original generator vectors as formal matrix columns and selected coefficients as the formal input vector; the target is the exact matrix-action equation. |
+
+## Initial Reifier Result
+
+`src/v3_2/algebra_formal_finite_module.ts` now constructs explicit Core for
+polynomial-module vectors, column matrices, selected membership coefficients,
+and the matrix-action equality target. It preserves the CAS component order
+and transposes only the conceptual row-major/column-family boundary.
+
+The first native membership operation retains the whole coefficient and
+remainder result rather than projecting a Boolean. A focused one-generator
+positive case reifies and recomputes successfully, while the corresponding
+constant vector has a nonzero remainder. Root typecheck and the focused test
+pass. Exact LF signature mirrors, proof-goal adoption, broader dimension
+negatives, syzygies, and resolution artifacts remain in the active row.
 
 ## Formal Spine Result
 

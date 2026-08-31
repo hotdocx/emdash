@@ -322,6 +322,7 @@ import './v3_2_algebra_formal_ideal_delegation_tests';
 import './v3_2_algebra_formal_assumption_source_tests';
 import './v3_2_algebra_formal_localization_delegation_tests';
 import './v3_2_algebra_formal_cech_delegation_tests';
+import './v3_2_algebra_formal_finite_module_tests';
 import './v3_2_lf_module_theorem_development_tests';
 import './v3_2_lf_module_theorem_authoring_tests';
 import './v3_2_lf_declaration_fragment_authoring_tests';

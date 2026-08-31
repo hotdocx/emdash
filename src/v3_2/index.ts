@@ -94,6 +94,7 @@ export * from './algebra_formal_localization_delegation';
 export * from './algebra_formal_cech_face_delegation';
 export * from './algebra_formal_cech_face_bindings';
 export * from './algebra_formal_cech_delegation';
+export * from './algebra_formal_finite_module';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';
