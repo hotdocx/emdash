@@ -288,6 +288,7 @@ import './v3_2_algebra_quasicoherent_cech_tests';
 import './v3_2_algebra_quasicoherent_cochain_tests';
 import './v3_2_algebra_quasicoherent_differential_tests';
 import './v3_2_algebra_quasicoherent_differential_square_tests';
+import './v3_2_algebra_quasicoherent_cochain_reference_operations_tests';
 import './v3_2_algebra_presented_module_reference_operations_tests';
 import './v3_2_algebra_presented_module_tower_tests';
 import './v3_2_algebra_presented_module_singular_tests';
