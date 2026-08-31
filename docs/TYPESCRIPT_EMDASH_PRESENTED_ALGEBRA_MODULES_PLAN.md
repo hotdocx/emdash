@@ -6,8 +6,8 @@ Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
-through `PAM-CECH-7A` are complete; `PAM-GRAPH-8A` is the next dependency-ready
-row.
+through `PAM-CECH-7A` and `PAM-GRAPH-8A1` are complete; `PAM-GRAPH-8A2` is
+the next dependency-ready row.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
 
@@ -287,7 +287,8 @@ Conformance examples are:
 | `PAM-LOCALIZATION-5A` | complete; proportional-green at `019e720` | `PAM-BASECHANGE-4A`, principal localizations | object and linear-map localization as base change along the existing whole principal localization, zero/nonzero support examples, schemas/serialization, canonical denominator and edge-case coverage |
 | `PAM-QCOH-6A` | complete; proportional-green at `b93e1a1` | `PAM-LOCALIZATION-5A`, affine schemes | affine scheme/module presentation and exact supplied basic-open/product-overlap chart realization by retained localization maps; schemas/serialization and explicit sheaf/descent nonclaims |
 | `PAM-CECH-7A` | complete; proportional-green at `f29e2c7` | `PAM-QCOH-6A`, finite affine covers | ordered varying-ring module Čech data, direct product-localization values, relation-checked semilinear faces/signs, computed repeated-face comparisons, schemas/serialization, empty-cover behavior, and explicit cohomology nonclaim |
-| `PAM-GRAPH-8A` | pending; next selected row | representative consumers from preceding rows | exact native operations, computation graphs, selected CAP-style whole methods, and schema-preserving categorical lowering |
+| `PAM-GRAPH-8A1` | complete; proportional-green at `b25e7a6` | representative consumers from preceding rows | context-aware native operations and graph execution for semilinear application, object base change, module localization, and quasi-coherent Čech construction |
+| `PAM-GRAPH-8A2` | pending; next selected row | `PAM-GRAPH-8A1`, computable-category/compiler owners | strict semilinear total-category instance, selected whole category methods, constructor tower/reinterpretation metadata, exact native bindings, and categorical compilation |
 | `PAM-ORACLE-9A` | pending; consumer-gated | stable native module consumer and installed Singular | optional deterministic module differential comparison with retained agreement/mismatch; never a native prerequisite |
 | `PAM-CONFORMANCE-10A` | pending | all nondeferred rows | both concrete covers, focused TypeScript evidence, deterministic artifacts, final boundary audit, and proportional completion checkpoint |
 
@@ -336,6 +337,31 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-035` | accepted | A face map sends ordered basis generators to ordered basis generators over the existing face algebra map and is accepted only after both source relation families reduce to zero in the containing simplex module. |
 | `D-PAM-036` | accepted | For every codimension-two face, both semilinear composites are constructed from stored face maps and compared by scalar-map and generator-image equality. The comparison is output data, not an input coherence square. |
 | `D-PAM-037` | accepted | Degree records retain varying scalar rings and signed incoming faces. The layer claims neither a common-scalar chain complex nor cohomology. |
+| `D-PAM-038` | accepted | Native whole operations use generic structural input schemas and retain exact result kinds; implementations call the existing constructors and pass computation context into every nested module/localization Gröbner computation. |
+| `D-PAM-039` | accepted | Semilinear application, base change, localization, and module-valued Čech construction are separate exact operation identities and graph nodes; no semantic fusion or implicit coercion is introduced. |
+
+## `PAM-GRAPH-8A1` Result
+
+Native whole operations are implemented in
+`src/v3_2/algebra_presented_module_reference_operations.ts`. The bundle
+defines exact input/output schemas and reference implementations for
+semilinear map application, object base change, module localization, and
+quasi-coherent Čech construction.
+
+Base-change, localization, and Čech implementations propagate the ordinary
+`AlgebraComputationContext` into all nested scalar and module Gröbner work.
+Each operation executes directly or as an `AlgebraComputationGraph` node
+through the unchanged native reference engine.
+
+Four focused tests execute identity-map application and base change,
+`A/(x)` localization at `x`, and the ternary seven-simplex/nine-face/three-
+comparison Čech two-skeleton as retained graphs, plus malformed schema
+failures. Together with graph, engine, module-localization, and module-valued
+Čech suites, 37 tests pass, followed by workspace check, root typecheck,
+affected lint, and diff hygiene. No repository-wide aggregate or Lambdapi
+check was run.
+
+Semantic checkpoint: `b25e7a6` (`modules: expose affine module graph operations`).
 
 ## `PAM-CECH-7A` Result
 
