@@ -44,12 +44,15 @@ export const ALGEBRA_FORMAL_ARTIFACT_PROFILE = Object.freeze({
 });
 
 export const AFFINE_FORMAL_ARTIFACT_BINDINGS = Object.freeze({
+    bridge_tau: 'τ',
     bridge_CommRingZariskiCoverPresentation:
         'CommRingZariskiCoverPresentation',
     bridge_CommRingZariskiCoverFamily: 'CommRingZariskiCoverFamily',
     bridge_CommRingLocalizationAt: 'CommRingLocalizationAt',
     bridge_CommRingHom: 'CommRingHom',
-    bridge_CommRingLocalizationAgreement: 'CommRingLocalizationAgreement'
+    bridge_CommRingLocalizationAgreement: 'CommRingLocalizationAgreement',
+    bridge_comm_ring_hom_id: 'comm_ring_hom_id',
+    bridge_sigma_Snd: 'sigma_Snd'
 });
 
 const ALL_BINDINGS = Object.freeze({
@@ -104,6 +107,13 @@ const call = (
     arguments_,
     nodeProvenance
 );
+
+const decodedType = (classifier: KernelExpression): KernelExpression =>
+    kernelCall(
+        kernelFree('bridge_tau', nodeProvenance),
+        [{ plicity: 'explicit', value: classifier }],
+        nodeProvenance
+    );
 
 const collectReferences = (
     expressions: readonly KernelExpression[]
@@ -206,19 +216,19 @@ export function buildAffineFormalBridgeArtifact<
         output(
             `${artifactId}_cover`,
             'formal algebraic Zariski cover',
-            call('bridge_CommRingZariskiCoverPresentation', [{
+            decodedType(call('bridge_CommRingZariskiCoverPresentation', [{
                 plicity: 'explicit',
                 value: sourceRing
-            }]),
+            }])),
             cover.cover
         ),
         output(
             `${artifactId}_cover_family`,
             'formal Zariski cover with chosen localizations',
-            call('bridge_CommRingZariskiCoverFamily', [{
+            decodedType(call('bridge_CommRingZariskiCoverFamily', [{
                 plicity: 'explicit',
                 value: sourceRing
-            }]),
+            }])),
             coverFamily.coverFamily
         )
     ];
@@ -228,23 +238,23 @@ export function buildAffineFormalBridgeArtifact<
             output(
                 `${artifactId}_simplex_${suffix}_localization`,
                 `formal localization at simplex ${simplex.simplex.indices.join(',')}`,
-                call('bridge_CommRingLocalizationAt', [
+                decodedType(call('bridge_CommRingLocalizationAt', [
                     { plicity: 'explicit', value: sourceRing },
                     { plicity: 'explicit', value: simplex.productTerm }
-                ]),
+                ])),
                 simplex.terms.localization
             ),
             output(
                 `${artifactId}_simplex_${suffix}_chart`,
                 `formal affine chart at simplex ${simplex.simplex.indices.join(',')}`,
-                presentation.degrees[0]?.chartCarrier ??
+                decodedType(presentation.degrees[0]?.chartCarrier ??
                     call('bridge_Obj', [{
                         plicity: 'explicit',
                         value: call('bridge_AffineSpecBigSlice_cat', [{
                             plicity: 'explicit',
                             value: sourceRing
                         }])
-                    }]),
+                    }])),
                 simplex.terms.chart
             )
         );
@@ -258,29 +268,29 @@ export function buildAffineFormalBridgeArtifact<
             output(
                 `${artifactId}_face_${suffix}_factor`,
                 `formal localization factor for face ${suffix}`,
-                face.factorType,
+                decodedType(face.factorType),
                 face.factor
             ),
             output(
                 `${artifactId}_face_${suffix}_map`,
                 `formal coordinate restriction for face ${suffix}`,
-                call('bridge_CommRingHom', [
+                decodedType(call('bridge_CommRingHom', [
                     { plicity: 'explicit', value: domainRing },
                     { plicity: 'explicit', value: codomainRing }
-                ]),
+                ])),
                 face.map
             ),
             output(
                 `${artifactId}_face_${suffix}_agreement`,
                 `formal ambient-map agreement for face ${suffix}`,
-                call('bridge_CommRingLocalizationAgreement', [
+                decodedType(call('bridge_CommRingLocalizationAgreement', [
                     { plicity: 'implicit', value: sourceRing },
                     { plicity: 'implicit', value: domainRing },
                     { plicity: 'implicit', value: codomainRing },
                     { plicity: 'explicit', value: face.domain.localization.formalMap },
                     { plicity: 'explicit', value: face.map },
                     { plicity: 'explicit', value: face.codomain.localization.formalMap }
-                ]),
+                ])),
                 face.agreement
             )
         );
@@ -288,19 +298,19 @@ export function buildAffineFormalBridgeArtifact<
     presentation.degrees.forEach(degree => outputs.push(output(
         `${artifactId}_degree_${degree.degree}`,
         `packed formal Cech degree ${degree.degree}`,
-        degree.presentationType,
+        decodedType(degree.presentationType),
         degree.presentation
     )));
     outputs.push(output(
         `${artifactId}_degrees`,
         'packed degreewise formal Cech presentation',
-        call('bridge_FiniteFamily', [
+        decodedType(call('bridge_FiniteFamily', [
             { plicity: 'explicit', value: presentation.packedCarrier },
             {
                 plicity: 'explicit',
                 value: presentation.degreePresentations.length
             }
-        ]),
+        ])),
         presentation.degreePresentations.family
     ));
     const names = new Set<string>();

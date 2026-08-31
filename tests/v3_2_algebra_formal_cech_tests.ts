@@ -174,6 +174,7 @@ describe('v3.2 packed degreewise formal Cech presentation', () => {
             externalFreeReferences: bindings
         });
         assert.match(portable, /bridge_Sigma_grpd/u);
+        assert.match(portable, /bridge_tau/u);
         assert.match(portable, /bridge_Product_pair_grpd/u);
         assert.match(portable, /bridge_finite_family_cons/u);
         assert.match(first, /@Struct_sigma/u);

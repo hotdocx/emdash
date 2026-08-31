@@ -35,6 +35,7 @@ export const ALGEBRA_FORMAL_CECH_PROFILE = Object.freeze({
 });
 
 export const AFFINE_FORMAL_CECH_BINDINGS = Object.freeze({
+    bridge_tau: 'τ',
     bridge_Grpd_grpd: 'Grpd_grpd',
     bridge_Sigma_grpd: 'Σ_',
     bridge_Struct_sigma: 'Struct_sigma',
@@ -110,7 +111,10 @@ const lambda = (
 
 const packedElementMotive = (): KernelExpression => lambda(
     'A',
-    reference('bridge_Grpd_grpd'),
+    call('bridge_tau', [{
+        plicity: 'explicit',
+        value: reference('bridge_Grpd_grpd')
+    }]),
     kernelBound(0, nodeProvenance)
 );
 

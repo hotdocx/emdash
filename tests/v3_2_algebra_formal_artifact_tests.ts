@@ -179,6 +179,9 @@ describe('v3.2 deterministic affine formal bridge artifact', () => {
             'a1_cover_degrees'
         ]);
         assert.equal(new Set(artifact.outputs.map(output => output.name)).size, 17);
+        assert.equal(artifact.outputs.every(output =>
+            serializeCoreExpression(output.type).includes('bridge_tau')
+        ), true);
         assert.equal(ALGEBRA_FORMAL_ARTIFACT_PROFILE.semanticStringTemplates,
             false);
     });
