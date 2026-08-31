@@ -6,8 +6,8 @@ Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
-through `PAM-LOCALIZATION-5A` are complete; `PAM-QCOH-6A` is the next
-dependency-ready row.
+through `PAM-QCOH-6A` are complete; `PAM-CECH-7A` is the next dependency-ready
+row.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
 
@@ -285,8 +285,8 @@ Conformance examples are:
 | `PAM-SEMILINEAR-3A` | complete; proportional-green at `dd51f40` | `PAM-MODULE-2A2`, presented-algebra maps | relation-checked semilinear maps over explicit algebra maps, ordinary linear specialization, identity/composition/application/equality/zero testing, schemas, serialization, and retained relation-family checks |
 | `PAM-BASECHANGE-4A` | complete; proportional-green at `61b6528` | `PAM-SEMILINEAR-3A` | whole object and linear-map base change, transported user relations, rebuilt target action, canonical semilinear unit, identity/composition/naturality comparisons, schemas, serialization, and diagnostics |
 | `PAM-LOCALIZATION-5A` | complete; proportional-green at `019e720` | `PAM-BASECHANGE-4A`, principal localizations | object and linear-map localization as base change along the existing whole principal localization, zero/nonzero support examples, schemas/serialization, canonical denominator and edge-case coverage |
-| `PAM-QCOH-6A` | pending; next selected row | `PAM-LOCALIZATION-5A`, affine schemes | affine quasi-coherent presentation with derived basic-open and product-overlap module values; no general sheaf claim |
-| `PAM-CECH-7A` | pending | `PAM-QCOH-6A`, finite affine covers | ordered varying-ring module Čech data, semilinear face restrictions, signs, repeated-face comparisons, and no cohomology overclaim |
+| `PAM-QCOH-6A` | complete; proportional-green at `b93e1a1` | `PAM-LOCALIZATION-5A`, affine schemes | affine scheme/module presentation and exact supplied basic-open/product-overlap chart realization by retained localization maps; schemas/serialization and explicit sheaf/descent nonclaims |
+| `PAM-CECH-7A` | pending; next selected row | `PAM-QCOH-6A`, finite affine covers | ordered varying-ring module Čech data, semilinear face restrictions, signs, repeated-face comparisons, and no cohomology overclaim |
 | `PAM-GRAPH-8A` | pending | representative consumers from preceding rows | exact native operations, computation graphs, selected CAP-style whole methods, and schema-preserving categorical lowering |
 | `PAM-ORACLE-9A` | pending; consumer-gated | stable native module consumer and installed Singular | optional deterministic module differential comparison with retained agreement/mismatch; never a native prerequisite |
 | `PAM-CONFORMANCE-10A` | pending | all nondeferred rows | both concrete covers, focused TypeScript evidence, deterministic artifacts, final boundary audit, and proportional completion checkpoint |
@@ -329,6 +329,32 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-028` | accepted | Module localization is exactly base change along `AlgebraPrincipalLocalization.canonicalMap`; it retains the whole scalar localization and adds no module fraction syntax. |
 | `D-PAM-029` | accepted | Zero behavior, units, nilpotents, canonical-equal denominators, and inverse-name collisions flow through ordinary quotient, localization, reduced module basis, and basis-vector zero testing without special semantic branches. |
 | `D-PAM-030` | accepted | Linear-map localization reuses functorial morphism base change and retains its computed naturality comparison. |
+| `D-PAM-031` | accepted | An affine quasi-coherent presentation is exactly `Spec(A)` plus a presented `A`-module; coordinate-algebra agreement is checked and no module/sheaf equivalence is claimed. |
+| `D-PAM-032` | accepted | A chart realization consumes the exact supplied `AlgebraBasicOpenAffineSubscheme` and base-changes along its retained canonical localization map, preserving cover/simplex chart identity. |
+| `D-PAM-033` | accepted | Convenience construction of a new basic open delegates to the existing affine basic-open owner; product-overlap values use the same supplied-chart realization without a separate overlap-module notion. |
+
+## `PAM-QCOH-6A` Result
+
+Affine quasi-coherent module presentations and chart values are implemented
+in `src/v3_2/algebra_quasicoherent.ts`. A presentation checks that its module
+is defined over the affine coordinate algebra and otherwise retains only the
+scheme and module.
+
+A chart value consumes one exact supplied basic-open affine subscheme and
+base-changes the module along that chart's retained localization map. The
+whole result preserves the quasi-coherent presentation, chart object, module
+base change, and localized module. A convenience function constructs a basic
+open through the existing affine owner before taking the same route.
+
+Four focused tests cover the `A/(x)` values on `D(x)` and `D(1−x)`, exact
+cover-chart identity, a direct product-overlap simplex value,
+schemas/serialization, explicit sheaf/descent nonclaims, and foreign
+module/chart rejection. Together with module localization/base change/maps,
+presented modules, affine schemes, and affine Čech suites, 43 tests pass,
+followed by workspace check, root typecheck, affected lint, and diff hygiene.
+No repository-wide aggregate or Lambdapi check was run.
+
+Semantic checkpoint: `b93e1a1` (`modules: add affine quasicoherent presentations`).
 
 ## `PAM-LOCALIZATION-5A` Result
 
