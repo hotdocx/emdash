@@ -4,12 +4,9 @@ Date: 2026-08-30
 
 Plan-ID: `TS-EMDASH-AFFINE-FORMAL-BRIDGE`
 
-Status: living architecture and implementation ledger; dedicated branch and
-worktree created; `BRIDGE-AUDIT-1A`, `BRIDGE-CONTRACT-1B`, and
-`BRIDGE-REIFY-2A`, `BRIDGE-COVER-3A`, and `BRIDGE-LOCALIZATION-4A` are
-complete; `BRIDGE-OVERLAP-4B` and `BRIDGE-CECH-5A` are complete;
-`BRIDGE-EMISSION-6A` is complete and `BRIDGE-CONFORMANCE-7A` is the next
-dependency-ready row.
+Status: implementation complete on the dedicated branch/worktree; every
+ledger row is proportional-green and checkpointed, including both bounded
+live Lambdapi conformance examples.
 
 Baseline: `5df79d356d003d3c1831ff1b93a2c593f299f75b`
 
@@ -251,7 +248,7 @@ Lambdapi text, and focused Lambdapi checking.
 | `BRIDGE-OVERLAP-4B` | complete; proportional-green at `0505b2a` | `BRIDGE-LOCALIZATION-4A`, current product-localization owners | ordered product-localization simplices and face restriction maps derived as universal localization factors from supplied target-unit evidence |
 | `BRIDGE-CECH-5A` | complete; proportional-green at `fa30438` | `BRIDGE-OVERLAP-4B`, current generic Sigma/Product/finite-family owners | one packed degreewise internal presentation retaining finite chart families and signed whole localization factors without unsupported cosimplicial claims |
 | `BRIDGE-EMISSION-6A` | complete; proportional-green at `6920f18` | representative bridge consumer | deterministic named typed-output artifact, used-binding closure, canonical workspace JSON, and checked-environment-gated LF probe emission |
-| `BRIDGE-CONFORMANCE-7A` | pending; next selected row | all preceding active rows | two concrete cover examples, focused TypeScript tests, deterministic snapshots, bounded Lambdapi checks, warning comparison, and final boundary audit |
+| `BRIDGE-CONFORMANCE-7A` | complete; proportional-green at `9c8ed2e` | all preceding active rows | deterministic binary/ternary cover fixtures, exact typed-input probe emission, bounded live Lambdapi acceptance, regression fixes, and final boundary audit |
 
 Rows may be split into lettered subtranches. A row completes only after
 implementation, focused positive and negative tests, proportional validation,
@@ -293,6 +290,75 @@ synchronized decisions/results, and a local checkpoint.
 | `D-BRIDGE-030` | accepted | Artifact emission includes only the used subset of reviewed active-owner bindings. Every remaining free reference is exposed as an input dependency; unresolved inputs, missing signature mirrors, duplicate outputs, and duplicate backend owners fail closed. |
 | `D-BRIDGE-031` | accepted | Canonical artifact JSON reuses the declaration-workspace canonical serializer. LF probe text reuses `CoreLfDeclarationEnvironment` and `serializeCoreLfKernelProbe`; semantic terms and types always come from explicit Core, not handwritten Lambdapi expression templates. |
 | `D-BRIDGE-032` | accepted | The emission row establishes deterministic artifact construction, not live formal acceptance. A real probe must provide exact checked signatures and correctly typed formal inputs; bounded Lambdapi execution is owned by `BRIDGE-CONFORMANCE-7A`. |
+| `D-BRIDGE-033` | accepted | Every artifact assertion type is an ambient decoded type `τ A`, never the groupoid classifier `A` itself. Live checking exposed and the implementation corrected this boundary uniformly. |
+| `D-BRIDGE-034` | accepted | Binder annotations in universe-packed terms are ambient types. In particular, the heterogeneous packing motive binds `A : τ Grpd_grpd`, not `A : Grpd_grpd`; ordinary regression tests retain this live-found correction. |
+| `D-BRIDGE-035` | accepted | Concrete conformance selects one supplied formal ring and uses its identity map for the assumption-explicit localization fixtures. Cover laws, inverse laws, universal localization properties, and face-unit evidence remain typed formal inputs and are not reconstructed from CAS Booleans. |
+| `D-BRIDGE-036` | accepted | The binary affine-line and ternary affine-plane artifacts pass bounded live Lambdapi checking through the active affine-spec dependency chain. No Lambdapi source changed, so a source-warning baseline comparison is not applicable. |
+
+## `BRIDGE-CONFORMANCE-7A` Result
+
+Exact typed-input conformance serialization is implemented in
+`src/v3_2/algebra_formal_conformance.ts`. It constructs reusable Core types for
+formal rings, ring elements, unimodular cover laws, localization inverse laws,
+whole localization properties, and face-denominator units. The conformance
+serializer requires an exact declaration for every artifact input, checks
+declaration dependency order and binding uniqueness, and emits all source
+through the existing Core serializer.
+
+Two complete deterministic fixtures are retained:
+
+- `D(x), D(1−x)` over the computational affine line, with two degree-zero
+  charts and one overlap; and
+- `D(x), D(y), D(1−x−y)` over the computational affine plane, with degree
+  counts `3, 3, 1` through the two-skeleton.
+
+Both use one explicitly supplied formal commutative ring for conformance and
+identity formal structure maps. Their formal cover law, inverse laws,
+localization properties, and face-unit evidence are typed assumptions. This
+tests the bridge's exact dependent term structure while preserving the trust
+boundary: the CAS never manufactures those formal inhabitants.
+
+The first live probe exposed artifact classifiers used where ambient decoded
+types were required; the second exposed an undecoded groupoid-universe binder
+in the packed Čech presentation. Both defects were corrected across the
+owners and retained by non-live regression assertions. The final opt-in run
+checks both probes successfully under separate 60-second ceilings and
+finishes in about 16 seconds total.
+
+The final proportional TypeScript gate runs 55 affected tests: 53 pass and two
+unrelated/affine live probes remain opt-in in the ordinary run. Workspace
+check, affected lint, root typecheck, and diff hygiene pass. The explicit
+affine live run passes all three conformance tests. `check:ts`, repository-wide
+aggregates, and unrelated package/book/kernel gates were not run. No Lambdapi
+source changed.
+
+Semantic checkpoint: `9c8ed2e` (`bridge: check concrete affine formal artifacts`).
+
+## Final Boundary Audit
+
+The completion boundary is satisfied:
+
+- the native CAS remains an independent computation-first layer;
+- one parent-aware realization contract connects selected computational
+  algebras to supplied formal rings;
+- canonical quotient representatives reify deterministically;
+- exact existing formal cover, localization, chart, and universal-factor
+  owners are reused;
+- whole product-localization factors, maps, agreements, signs, simplex
+  indices, and degree order remain available;
+- the packed degreewise presentation uses existing internal constructors and
+  makes no unsupported cohomological claim;
+- artifacts are deterministic, dependency-explicit, and backend-neutral;
+- two concrete cover shapes pass bounded active-backend checking; and
+- no parallel formal commutative-algebra API, new Core owner, opaque equality
+  workaround, or Lambdapi kernel/source edit was introduced.
+
+Still outside this goal are a concrete formal polynomial quotient
+implementation, automatic proofs of localization universal properties,
+structure sheaves and affine-scheme locality, a genuine cosimplicial/Čech
+functor with identities, differentials and `d² = 0`, sheaf cohomology,
+exactness, and integration into `main` or a release. Those are later
+consumer-backed goals rather than missing pieces of this bridge boundary.
 
 ## `BRIDGE-EMISSION-6A` Result
 
