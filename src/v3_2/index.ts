@@ -42,6 +42,7 @@ export * from './algebra_polynomial_presentation';
 export * from './algebra_presented_module';
 export * from './algebra_presented_module_map';
 export * from './algebra_presented_module_base_change';
+export * from './algebra_presented_module_localization';
 export * from './algebra_polynomial_module_reference_operations';
 export * from './algebra_ideal_geometry';
 export * from './algebra_constructible';
