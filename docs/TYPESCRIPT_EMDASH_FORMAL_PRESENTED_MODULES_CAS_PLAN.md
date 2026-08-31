@@ -274,11 +274,11 @@ claim remains later work.
 
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
-| `FPM-PLAN-0` | complete; plan checkpoint pending | completed affine formal bridge at `e665301` and reviewed CAP/homalg continuation | living plan, isolated branch/worktree, exact baseline, layering, representation, validation, Git limits |
-| `FPM-AUDIT-1A` | pending | `FPM-PLAN-0` | exact formal owner gap, matrix orientation, CAS consumer map, smallest Lambdapi module, categorical acceptance target |
-| `FPM-VECTOR-2A` | pending | audit | formal vectors and transparent zero/add/neg/subtract/scale/linear-combination computation |
-| `FPM-MATRIX-3A` | pending | vector | formal column matrices, action, zero, composition, typed positive/noncollapse consumers |
-| `FPM-PRESENTATION-4A` | pending | matrix | presentation/agreement and selected morphism/syzygy classifiers without quotient overclaim |
+| `FPM-PLAN-0` | complete; checkpoint `67bb128` | completed affine formal bridge at `e665301` and reviewed CAP/homalg continuation | living plan, isolated branch/worktree, exact baseline, layering, representation, validation, Git limits |
+| `FPM-AUDIT-1A` | complete; formal checkpoint pending | `FPM-PLAN-0` | exact formal owner gap, matrix orientation, CAS consumer map, smallest Lambdapi module, categorical acceptance target |
+| `FPM-VECTOR-2A` | complete; formal checkpoint pending | audit | formal vectors and transparent zero/add/neg/subtract/scale computation |
+| `FPM-MATRIX-3A` | complete; formal checkpoint pending | vector | formal column matrices, action, zero, composition, typed positive/noncollapse consumers |
+| `FPM-PRESENTATION-4A` | complete; formal checkpoint pending | matrix | presentation/agreement and syzygy/composite-zero classifiers without quotient overclaim |
 | `FPM-REIFY-5A` | pending | formal owners | exact signature mirrors, vector/matrix/presentation reification, dimension/parent/order diagnostics |
 | `FPM-MEMBERSHIP-6A` | pending | reifier | whole positive/negative module-membership delegation and formal selected equation |
 | `FPM-SYZYGY-7A` | pending | membership | Schreyer syzygy equations and classified finite adoption source |
@@ -308,6 +308,24 @@ checkpoint.
 | `D-FPM-011` | accepted | New Lambdapi mathematics follows the complete nested SOP; no rule is assumed necessary. |
 | `D-FPM-012` | accepted | Local validated checkpoint commits are authorized on this branch; push, merge, publication, release, history rewriting, and cleanup are not. |
 | `D-FPM-013` | accepted | `main` was fast-forwarded only through `e665301`; orthogonal path-cubical/strictness work remains excluded. |
+| `D-FPM-014` | accepted after audit | Formal matrices are columns; CAS row-major storage is an implementation detail handled by reification. |
+| `D-FPM-015` | accepted after audit | Transparent Nat/finite-family definitions suffice for vector arithmetic, matrix action/composition, presentation agreement, syzygy, and adjacent-zero classifiers; no rewrite/unification rule is added. |
+| `D-FPM-016` | accepted after audit | The initial formal module is a presentation calculus, not an abstract semantic module or quotient construction. |
+
+## Formal Spine Result
+
+The audited rule-free one-way module
+`emdash2/emdash3_2_commutative_algebra_finite_modules.lp` now defines finite
+vectors, componentwise operations, column matrices, matrix application, zero
+matrices, composition, explicit presentation agreement, syzygy equations, and
+adjacent composite-zero equations over an arbitrary formal commutative ring.
+
+The reviewer example checks visible two-column action and explicit agreement
+construction, and rejects collapse of a visible column to the zero matrix.
+Both owner and example pass bounded Lambdapi checking. No new rule, warning
+family, Core owner, quotient module, or categorical overclaim is introduced.
+The exact audit is recorded in
+`docs/TYPESCRIPT_EMDASH_FORMAL_PRESENTED_MODULES_CAS_OWNER_AUDIT.md`.
 
 ## Validation
 
