@@ -6,7 +6,7 @@ Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
-through `PAM-MODULE-2A2` are complete; `PAM-SEMILINEAR-3A` is the next
+through `PAM-SEMILINEAR-3A` are complete; `PAM-BASECHANGE-4A` is the next
 dependency-ready row.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
@@ -282,8 +282,8 @@ Conformance examples are:
 | `PAM-AUDIT-1A` | complete; prototype and 27-test baseline green | current polynomial-module and affine owners | exact owner map in `TYPESCRIPT_EMDASH_PRESENTED_ALGEBRA_MODULES_OWNER_AUDIT.md`; `R^r/(IR^r+N)` accepted; reduced module-basis prerequisite, parent/equality decision, and localization prototype recorded |
 | `PAM-MODULE-2A1` | complete; proportional-green at `23b606e` | `PAM-AUDIT-1A` | minimal interreduced monic module Gröbner postpass with original-generator transformations, canonical ordering, duplicate/scaled removal, limits, and focused regressions |
 | `PAM-MODULE-2A2` | complete; proportional-green at `20c21f2` | `PAM-MODULE-2A1` | parent-aware free/presented modules over presented algebras, quotient-valued vectors, whole canonical normalization, elements/arithmetic/scalar action/equality, zero detection, schemas, serialization, and diagnostics |
-| `PAM-SEMILINEAR-3A` | pending; next selected row | `PAM-MODULE-2A2`, presented-algebra maps | relation-checked semilinear maps, ordinary linear specialization, identity/composition/application/equality, and retained relation checks |
-| `PAM-BASECHANGE-4A` | pending | `PAM-SEMILINEAR-3A` | whole module base change on objects and maps, canonical semilinear unit, identity/composition comparisons, schemas, and diagnostics |
+| `PAM-SEMILINEAR-3A` | complete; proportional-green at `dd51f40` | `PAM-MODULE-2A2`, presented-algebra maps | relation-checked semilinear maps over explicit algebra maps, ordinary linear specialization, identity/composition/application/equality/zero testing, schemas, serialization, and retained relation-family checks |
+| `PAM-BASECHANGE-4A` | pending; next selected row | `PAM-SEMILINEAR-3A` | whole module base change on objects and maps, canonical semilinear unit, identity/composition comparisons, schemas, and diagnostics |
 | `PAM-LOCALIZATION-5A` | pending | `PAM-BASECHANGE-4A`, principal localizations | module localization as base change, whole chart data, zero/nonzero examples, and localization edge cases |
 | `PAM-QCOH-6A` | pending | `PAM-LOCALIZATION-5A`, affine schemes | affine quasi-coherent presentation with derived basic-open and product-overlap module values; no general sheaf claim |
 | `PAM-CECH-7A` | pending | `PAM-QCOH-6A`, finite affine covers | ordered varying-ring module Čech data, semilinear face restrictions, signs, repeated-face comparisons, and no cohomology overclaim |
@@ -320,6 +320,35 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-019` | accepted | Combined relations are ordered as canonical algebra-action relations followed by lifted user relations; whole normalization partitions reconstruction coefficients back across those two retained families. |
 | `D-PAM-020` | accepted | Presented-module identity is the quotient-algebra identity, rank, explicit term order, and fingerprint of the reduced combined relation basis; original relation lists remain inspectable but do not define semantic identity. |
 | `D-PAM-021` | accepted | A canonical element stores only the quotient-valued form of the reduced polynomial-module remainder. Addition, negation, and scalar action renormalize through the same presented-module owner. |
+| `D-PAM-022` | accepted | A semilinear map is determined by an explicit presented-algebra map and one canonical target-module image per ordered source generator. |
+| `D-PAM-023` | accepted | Construction evaluates both source algebra-action relations and lifted user relations in the target and requires canonical zero; no separate relation square or naturality field is accepted. |
+| `D-PAM-024` | accepted | Same-algebra linear maps specialize semilinear maps at the identity algebra map; identity and composition are rebuilt through the same relation-checking constructor. |
+
+## `PAM-SEMILINEAR-3A` Result
+
+Relation-checked semilinear maps are implemented in
+`src/v3_2/algebra_presented_module_map.ts`. A map retains its source and target
+presented modules, explicit scalar algebra map, ordered generator images, and
+the computed zero images of both source relation families.
+
+Application computes the defining semilinear formula through canonical scalar
+map application, target scalar action, and target element normalization.
+Identity, ordinary linear specialization, composition, equality, and zero
+testing use generator images and validated scalar maps. Runtime schemas
+reconstruct maps through the same relation validator, and deterministic
+serialization retains endpoints, scalar generator images, module generator
+images, and relation counts.
+
+Seven focused tests cover `A/(x) -> B/(y)`, quotient-action relations under
+`Q[x]/(x²) -> Q[y]/(y²)`, rejection of a surviving relation, linear identity
+and zero maps, three-algebra composition, schemas/serialization, and complete
+endpoint/arity/image/application/composition failures. Together with
+presented-module, presented-algebra-map, reduced/ordinary module, and quotient
+suites, 40 tests pass, followed by workspace check, root typecheck, affected
+lint, and diff hygiene. No repository-wide aggregate or Lambdapi check was
+run.
+
+Semantic checkpoint: `dd51f40` (`modules: add relation-checked semilinear maps`).
 
 ## `PAM-MODULE-2A2` Result
 
