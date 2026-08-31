@@ -81,6 +81,7 @@ export * from './algebra_formal_overlap';
 export * from './algebra_formal_cech';
 export * from './algebra_formal_artifact';
 export * from './algebra_formal_conformance';
+export * from './algebra_formal_delegation';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';

@@ -476,8 +476,8 @@ syntax.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `PCD-PLAN-0` | complete; checkpoint `f5c31d3` | reviewed continuation and completed computational/formal/proof endpoints | this living plan, isolated branch/worktree, exact baseline, architecture, staged rows, trust boundary, validation, and Git limits |
-| `PCD-AUDIT-1A` | complete; audit checkpoint pending | `PCD-PLAN-0` | exact proof-goal/declaration/adoption, algebra-operation, realization, Zariski-target, and serialization owner map; first positive/negative fixtures; no behavior change |
-| `PCD-CONTRACT-2A` | pending | `PCD-AUDIT-1A` | immutable adapter/request/interpretation/result/artifact contracts, canonical payload encoding, exact identity and quality validation, focused negatives |
+| `PCD-AUDIT-1A` | complete; checkpoint `e5e0aea` | `PCD-PLAN-0` | exact proof-goal/declaration/adoption, algebra-operation, realization, Zariski-target, and serialization owner map; first positive/negative fixtures; no behavior change |
+| `PCD-CONTRACT-2A` | complete; contract checkpoint pending | `PCD-AUDIT-1A` | immutable adapter/request/interpretation/result/artifact contracts, canonical payload encoding, exact identity and quality validation, focused negatives |
 | `PCD-DELEGATE-3A` | pending | `PCD-CONTRACT-2A` | native/graph exact execution bound to one named goal and realization, observation result, limits/cancellation/diagnostics, no proof or workspace mutation |
 | `PCD-ADOPT-4A` | pending | `PCD-DELEGATE-3A` | explicit Core-data checking, optional checked-plan route, explicit trusted opaque-declaration adoption, ordinary exact patch, stale/implicit/foreign rejection |
 | `PCD-ZARISKI-5A` | pending | `PCD-ADOPT-4A` | end-to-end unimodular-cover delegation, coefficient reification, exact formal law target, observed and trusted paths, existing cover construction, negative open-goal behavior |
@@ -515,6 +515,44 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PCD-020` | accepted after `PCD-AUDIT-1A` | The Zariski consumer requires a minimal exact opaque TypeScript signature mirror for its portable finite-family/commutative-ring references; a fake all-`TYPE` environment is rejected. |
 | `D-PCD-021` | accepted after `PCD-AUDIT-1A` | `affineFormalCoverLawType` must construct its families without first building a law-bearing cover term, while `buildAffineFormalCoverTerms` keeps its existing strict law requirement. |
 | `D-PCD-022` | accepted after `PCD-AUDIT-1A` | The positive fixture is the ideal `(x,1-x)` and the negative fixture is `(x)`; a negative unimodular result exposes no adoptable positive claim and leaves the goal open. |
+| `D-PCD-023` | accepted after `PCD-CONTRACT-2A` | A formal computation goal is freshly compiled from one exact proof document root hole and retains its checked source artifact plus canonical exact Core target. |
+| `D-PCD-024` | accepted after `PCD-CONTRACT-2A` | Adapter realization normalization, acquisition, and canonical serializers are each repeated; byte drift fails before computation. |
+| `D-PCD-025` | accepted after `PCD-CONTRACT-2A` | Request serialization includes canonical realization and operation-input payload bytes, exact goal fingerprint/target, schemas, engine, selected/default algorithm, and static limits. |
+| `D-PCD-026` | accepted after `PCD-CONTRACT-2A` | A claim interpretation must be the exact selected Core goal target; observations expose no claim, and all optional reified data is closed, meta-free, uniquely named explicit Core. |
+
+## `PCD-CONTRACT-2A` Result
+
+The browser-safe inert contract is implemented in
+`src/v3_2/algebra_formal_delegation.ts`. It adds no computation, Core owner,
+proof-plan tag, I/O, or Lambdapi dependency.
+
+`defineAlgebraFormalComputationGoal` freshly compiles one proof document and
+accepts only its exact annotated depth-zero root hole. The resulting goal
+retains the checked open artifact and canonical explicit-Core target.
+`defineAlgebraFormalComputationAdapter` binds one current typed
+`AlgebraOperation` to explicit realization normalization, acquisition,
+canonical payload serializers, and formal interpretation callbacks.
+
+`createAlgebraFormalComputationRequest` repeats realization normalization and
+input acquisition, normalizes both acquired values through the operation's
+schema, calls each serializer repeatedly, and rejects every canonical-byte
+drift before execution. Its stable serialization includes payload bytes in
+addition to the topology-style identities, exact goal/fingerprint, operation
+and schema identities, engine, requested/default algorithm, and normalized
+static limits.
+
+Interpretations are either observations or exact claims. A claim must be
+syntactically the selected goal target. Optional named formal data requires
+closed, well-scoped, meta-free explicit Core; duplicate IDs and target drift
+fail closed.
+
+Six focused contract tests cover positive request construction, deterministic
+serialization, root-goal restrictions, realization/acquisition/serializer
+drift, observation/claim separation, exact target matching, Core-data hygiene,
+and the nonsemantic profile. Together with directly affected algebra-engine,
+proof-plan, and proof-checker suites, 41 tests pass. Workspace check, root
+typecheck, affected-file lint, and diff hygiene pass. No aggregate or
+additional Lambdapi run was performed.
 
 ## `PCD-AUDIT-1A` Result
 
