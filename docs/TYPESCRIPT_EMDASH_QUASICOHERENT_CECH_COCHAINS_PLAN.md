@@ -6,8 +6,8 @@ Plan-ID: `TS-EMDASH-QUASICOHERENT-CECH-COCHAINS`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed presented-module affine-descent baseline;
-`QCC-AUDIT-1A` is complete and `QCC-COCHAIN-2A` is the next dependency-ready
-row.
+`QCC-AUDIT-1A` and `QCC-COCHAIN-2A` are complete;
+`QCC-DIFFERENTIAL-3A` is the next dependency-ready row.
 
 Baseline: `a3e71ae7c4bf6035c1a716a3c102a55a417e40ca`
 
@@ -239,8 +239,8 @@ Direct construction and native graph execution must serialize identically.
 | --- | --- | --- | --- |
 | `QCC-PLAN-0` | complete | completed presented-module affine descent and reviewed continuation | this living plan, isolated branch/worktree, baseline, representation, staged rows, validation, and Git limits |
 | `QCC-AUDIT-1A` | complete; orientation probe and 29-test baseline green | existing module-valued Čech diagram | exact owner map in `TYPESCRIPT_EMDASH_QUASICOHERENT_CECH_COCHAINS_OWNER_AUDIT.md`, binary differential convention, ternary sign pairs, degree-parent decision, and truncation boundary |
-| `QCC-COCHAIN-2A` | pending; next selected row | `QCC-AUDIT-1A` | parent-aware heterogeneous degree/cochain values, additive operations, observation, schemas, serialization, and diagnostics |
-| `QCC-DIFFERENTIAL-3A` | pending | `QCC-COCHAIN-2A` | whole alternating differential with retained target computations/contributions, correct binary orientation, and additivity consumers |
+| `QCC-COCHAIN-2A` | complete; proportional-green at `f023d7b` | `QCC-AUDIT-1A` | stable heterogeneous degree parents, aligned cochain elements, global-element construction, zero/addition/negation/subtraction/equality, positional/index lookup, schemas/serialization, and complete diagnostics |
+| `QCC-DIFFERENTIAL-3A` | pending; next selected row | `QCC-COCHAIN-2A` | whole alternating differential with retained target computations/contributions, correct binary orientation, and additivity consumers |
 | `QCC-SQUARE-4A` | pending | `QCC-DIFFERENTIAL-3A`, repeated-face comparisons | structural sign/map cancellation records and evaluated `d² = 0` for every available degree |
 | `QCC-GRAPH-5A` | pending | `QCC-SQUARE-4A` | exact native differential/square operations, fixed-degree schemas, reference-engine and graph execution |
 | `QCC-CONFORMANCE-6A` | pending | all preceding rows | three concrete examples, deterministic direct/graph artifacts, final proportional validation, completion audit, and clean checkpoint |
@@ -266,6 +266,33 @@ synchronized decisions/results, and a local checkpoint.
 | `D-QCC-011` | accepted | The binary stored orientation is `d(a₀,a₁)=res(a₁)−res(a₀)`; face-array position is not reused as the source cochain position. |
 | `D-QCC-012` | accepted | For `i<j`, the first stored repeated-face route has sign `(-1)^(i+j−1)` and the second `(-1)^(i+j)`, exactly matching all three ternary comparisons. |
 | `D-QCC-013` | accepted | A cochain-degree identity is the diagram presentation/cover shape, degree, ordered simplex indices, and localized module parent identities; it carries no common scalar parent. |
+| `D-QCC-014` | accepted | A cochain contains one canonical presented-module element per exact ordered simplex; component schemas are selected positionally from the degree owner. |
+| `D-QCC-015` | accepted | Global-element cochains are derived by applying every simplex's retained ambient base-change unit to one element of the presentation module. |
+| `D-QCC-016` | accepted | Heterogeneous cochains expose only additive operations and equality; no cross-component scalar action or common module parent is introduced. |
+
+## `QCC-COCHAIN-2A` Result
+
+Heterogeneous Čech degree parents and cochain elements are implemented in
+`src/v3_2/algebra_quasicoherent_cochain.ts`. A degree identity retains the
+diagram presentation, cover shape, degree, ordered simplex indices, and each
+localized module identity. It deliberately has no common scalar algebra.
+
+A cochain constructor checks exact arity and every component against the
+module at the same ordered simplex. Componentwise zero, addition, negation,
+subtraction, equality, and zero testing reuse canonical presented-module
+element operations. Components are observable by bounded position or exact
+simplex indices. A global ambient module element maps into any retained degree
+through the simplex base-change units.
+
+Five focused tests cover binary/ternary degree ordering and identity, global
+element transport, all additive operations, positional/index observation,
+schemas/serialization, and degree/arity/order/module/lookup/global-parent
+failures. Together with varying-ring Čech, presented-module, and semilinear-
+map suites, 25 tests pass, followed by workspace check, root typecheck,
+affected lint, and diff hygiene. No repository-wide aggregate or Lambdapi
+check was run.
+
+Semantic checkpoint: `f023d7b` (`cochains: add heterogeneous Cech degrees`).
 
 ## `QCC-AUDIT-1A` Result
 
