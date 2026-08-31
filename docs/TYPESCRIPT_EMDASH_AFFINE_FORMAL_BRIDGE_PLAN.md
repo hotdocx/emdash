@@ -8,7 +8,8 @@ Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `BRIDGE-AUDIT-1A`, `BRIDGE-CONTRACT-1B`, and
 `BRIDGE-REIFY-2A`, `BRIDGE-COVER-3A`, and `BRIDGE-LOCALIZATION-4A` are
 complete; `BRIDGE-OVERLAP-4B` and `BRIDGE-CECH-5A` are complete;
-`BRIDGE-EMISSION-6A` is the next dependency-ready row.
+`BRIDGE-EMISSION-6A` is complete and `BRIDGE-CONFORMANCE-7A` is the next
+dependency-ready row.
 
 Baseline: `5df79d356d003d3c1831ff1b93a2c593f299f75b`
 
@@ -249,8 +250,8 @@ Lambdapi text, and focused Lambdapi checking.
 | `BRIDGE-LOCALIZATION-4A` | complete; proportional-green at `8f2e502` | `BRIDGE-COVER-3A`, current formal localization owner | assumption-explicit unit, universal localization, basic-open chart, and ordered dependent cover-localization family construction |
 | `BRIDGE-OVERLAP-4B` | complete; proportional-green at `0505b2a` | `BRIDGE-LOCALIZATION-4A`, current product-localization owners | ordered product-localization simplices and face restriction maps derived as universal localization factors from supplied target-unit evidence |
 | `BRIDGE-CECH-5A` | complete; proportional-green at `fa30438` | `BRIDGE-OVERLAP-4B`, current generic Sigma/Product/finite-family owners | one packed degreewise internal presentation retaining finite chart families and signed whole localization factors without unsupported cosimplicial claims |
-| `BRIDGE-EMISSION-6A` | pending; next selected row | representative bridge consumer | deterministic explicit-Core declarations/workspaces and Lambdapi emission without handwritten semantic templates |
-| `BRIDGE-CONFORMANCE-7A` | pending | all preceding active rows | two concrete cover examples, focused TypeScript tests, deterministic snapshots, bounded Lambdapi checks, warning comparison, and final boundary audit |
+| `BRIDGE-EMISSION-6A` | complete; proportional-green at `6920f18` | representative bridge consumer | deterministic named typed-output artifact, used-binding closure, canonical workspace JSON, and checked-environment-gated LF probe emission |
+| `BRIDGE-CONFORMANCE-7A` | pending; next selected row | all preceding active rows | two concrete cover examples, focused TypeScript tests, deterministic snapshots, bounded Lambdapi checks, warning comparison, and final boundary audit |
 
 Rows may be split into lettered subtranches. A row completes only after
 implementation, focused positive and negative tests, proportional validation,
@@ -288,6 +289,37 @@ synchronized decisions/results, and a local checkpoint.
 | `D-BRIDGE-026` | accepted | The active library has no exact finite Čech functor or cochain owner. Coherent-nerve and simplex owners are not used because the computational cover does not yet supply their functorial/coherence data. |
 | `D-BRIDGE-027` | accepted | The first formal Čech presentation uses only existing internal Sigma, Product, Bool, finite-family, affine-chart, and localization-factor owners. Varying factor and degree types are packed as `Σ A : Grpd, A`; no new formal or Core owner is added. |
 | `D-BRIDGE-028` | accepted | Each degree stores its ordered finite chart family and signed finite family of whole localization factors. `true` encodes positive and `false` negative. The bridge explicitly claims no cosimplicial identities, differential-square law, sheaf condition, exactness, or cohomology. |
+| `D-BRIDGE-029` | accepted | One artifact names and types the cover, selected cover family, every simplex localization/chart, every face factor/map/agreement, every degree presentation, and the packed whole in deterministic dependency order. |
+| `D-BRIDGE-030` | accepted | Artifact emission includes only the used subset of reviewed active-owner bindings. Every remaining free reference is exposed as an input dependency; unresolved inputs, missing signature mirrors, duplicate outputs, and duplicate backend owners fail closed. |
+| `D-BRIDGE-031` | accepted | Canonical artifact JSON reuses the declaration-workspace canonical serializer. LF probe text reuses `CoreLfDeclarationEnvironment` and `serializeCoreLfKernelProbe`; semantic terms and types always come from explicit Core, not handwritten Lambdapi expression templates. |
+| `D-BRIDGE-032` | accepted | The emission row establishes deterministic artifact construction, not live formal acceptance. A real probe must provide exact checked signatures and correctly typed formal inputs; bounded Lambdapi execution is owned by `BRIDGE-CONFORMANCE-7A`. |
+
+## `BRIDGE-EMISSION-6A` Result
+
+Deterministic named artifact and LF-probe construction is implemented in
+`src/v3_2/algebra_formal_artifact.ts`. For the binary affine-line cover the
+artifact contains seventeen typed outputs: the formal cover and selected
+localization family, three simplex localizations and charts, two face
+factors/maps/agreements, two packed degree presentations, and the packed
+whole.
+
+The artifact computes its exact free-reference closure, retains only active
+owner bindings actually used by its Core, and exposes all remaining formal
+inputs. Canonical portable output uses the existing declaration-workspace JSON
+serializer. Lambdapi probe output uses the checked declaration environment and
+Core LF probe serializer; it refuses missing input declarations or active
+signature mirrors before source generation. The fixed probe wrapper is the
+only textual layer: every mathematical term and type is serialized from Core.
+
+Five focused tests cover output order and uniqueness, used-binding closure,
+canonical JSON determinism, deterministic named probe generation, source-map
+assertions, missing signatures/inputs, and invalid artifact IDs. Together with
+affected formal bridge, computational Čech, and LF-conversion suites, 51 tests
+pass with one opt-in conformance test skipped, followed by workspace check,
+affected lint, root typecheck, and diff hygiene. `check:ts` was not run and no
+Lambdapi source changed.
+
+Semantic checkpoint: `6920f18` (`bridge: emit deterministic affine formal artifacts`).
 
 ## `BRIDGE-CECH-5A` Result
 
