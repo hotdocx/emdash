@@ -17,6 +17,7 @@ import {
     algebraAffineSchemeEquals
 } from './algebra_affine_scheme';
 import {
+    AlgebraPresentedAlgebraModuleOptions,
     algebraPresentedAlgebraModuleBasisVector,
     algebraPresentedAlgebraModuleElement
 } from './algebra_presented_module';
@@ -155,7 +156,8 @@ export function algebraAffineQuasiCoherentCechDiagram<
     I
 >(
     presentation: AlgebraAffineQuasiCoherentPresentation<P, C, I>,
-    cover: AlgebraAffineCover<P, C, I>
+    cover: AlgebraAffineCover<P, C, I>,
+    moduleOptions: AlgebraPresentedAlgebraModuleOptions = {}
 ): AlgebraAffineQuasiCoherentCechDiagram<P, C, I> {
     if (!algebraAffineSchemeEquals(presentation.scheme, cover.ambient)) {
         return fail(
@@ -169,7 +171,8 @@ export function algebraAffineQuasiCoherentCechDiagram<
             simplex,
             value: algebraAffineQuasiCoherentOnBasicOpen(
                 presentation,
-                simplex.chart
+                simplex.chart,
+                moduleOptions
             )
         })
     ));
