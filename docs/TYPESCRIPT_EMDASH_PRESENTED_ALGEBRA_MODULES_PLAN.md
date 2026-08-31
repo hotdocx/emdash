@@ -6,7 +6,7 @@ Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
-through `PAM-QCOH-6A` are complete; `PAM-CECH-7A` is the next dependency-ready
+through `PAM-CECH-7A` are complete; `PAM-GRAPH-8A` is the next dependency-ready
 row.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
@@ -286,8 +286,8 @@ Conformance examples are:
 | `PAM-BASECHANGE-4A` | complete; proportional-green at `61b6528` | `PAM-SEMILINEAR-3A` | whole object and linear-map base change, transported user relations, rebuilt target action, canonical semilinear unit, identity/composition/naturality comparisons, schemas, serialization, and diagnostics |
 | `PAM-LOCALIZATION-5A` | complete; proportional-green at `019e720` | `PAM-BASECHANGE-4A`, principal localizations | object and linear-map localization as base change along the existing whole principal localization, zero/nonzero support examples, schemas/serialization, canonical denominator and edge-case coverage |
 | `PAM-QCOH-6A` | complete; proportional-green at `b93e1a1` | `PAM-LOCALIZATION-5A`, affine schemes | affine scheme/module presentation and exact supplied basic-open/product-overlap chart realization by retained localization maps; schemas/serialization and explicit sheaf/descent nonclaims |
-| `PAM-CECH-7A` | pending; next selected row | `PAM-QCOH-6A`, finite affine covers | ordered varying-ring module Čech data, semilinear face restrictions, signs, repeated-face comparisons, and no cohomology overclaim |
-| `PAM-GRAPH-8A` | pending | representative consumers from preceding rows | exact native operations, computation graphs, selected CAP-style whole methods, and schema-preserving categorical lowering |
+| `PAM-CECH-7A` | complete; proportional-green at `f29e2c7` | `PAM-QCOH-6A`, finite affine covers | ordered varying-ring module Čech data, direct product-localization values, relation-checked semilinear faces/signs, computed repeated-face comparisons, schemas/serialization, empty-cover behavior, and explicit cohomology nonclaim |
+| `PAM-GRAPH-8A` | pending; next selected row | representative consumers from preceding rows | exact native operations, computation graphs, selected CAP-style whole methods, and schema-preserving categorical lowering |
 | `PAM-ORACLE-9A` | pending; consumer-gated | stable native module consumer and installed Singular | optional deterministic module differential comparison with retained agreement/mismatch; never a native prerequisite |
 | `PAM-CONFORMANCE-10A` | pending | all nondeferred rows | both concrete covers, focused TypeScript evidence, deterministic artifacts, final boundary audit, and proportional completion checkpoint |
 
@@ -332,6 +332,36 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-031` | accepted | An affine quasi-coherent presentation is exactly `Spec(A)` plus a presented `A`-module; coordinate-algebra agreement is checked and no module/sheaf equivalence is claimed. |
 | `D-PAM-032` | accepted | A chart realization consumes the exact supplied `AlgebraBasicOpenAffineSubscheme` and base-changes along its retained canonical localization map, preserving cover/simplex chart identity. |
 | `D-PAM-033` | accepted | Convenience construction of a new basic open delegates to the existing affine basic-open owner; product-overlap values use the same supplied-chart realization without a separate overlap-module notion. |
+| `D-PAM-034` | accepted | Each Čech simplex receives the direct ambient module base change along its retained product-localization map; no iterated-localization module presentation is selected as canonical. |
+| `D-PAM-035` | accepted | A face map sends ordered basis generators to ordered basis generators over the existing face algebra map and is accepted only after both source relation families reduce to zero in the containing simplex module. |
+| `D-PAM-036` | accepted | For every codimension-two face, both semilinear composites are constructed from stored face maps and compared by scalar-map and generator-image equality. The comparison is output data, not an input coherence square. |
+| `D-PAM-037` | accepted | Degree records retain varying scalar rings and signed incoming faces. The layer claims neither a common-scalar chain complex nor cohomology. |
+
+## `PAM-CECH-7A` Result
+
+Ordered module-valued affine Čech data is implemented in
+`src/v3_2/algebra_quasicoherent_cech.ts`. Every existing affine simplex is
+realized by direct module base change along its retained product-localization
+chart. Every face is a relation-checked semilinear map over the existing
+coordinate restriction, with removed position, chart, target indices, and
+sign retained by the source affine data.
+
+For every simplex with at least three indices, the implementation enumerates
+each pair of removed positions, locates both intermediate simplices, composes
+the corresponding semilinear restrictions along both paths, and requires
+canonical equality. The whole comparison retains the lower/intermediate/top
+values, both composites, positions, and checked `holds` projection.
+
+Five focused tests cover the binary chart/overlap modules and signs, the
+ternary `3,3,1` two-skeleton with nine faces and three repeated-face
+comparisons, the empty cover of the zero affine scheme, schemas/serialization,
+chain/cohomology nonclaims, and foreign-cover rejection. Together with affine
+Čech, quasi-coherent charts, localization/base change/maps, and presented
+modules, 42 tests pass, followed by workspace check, root typecheck, affected
+lint, and diff hygiene. No repository-wide aggregate or Lambdapi check was
+run.
+
+Semantic checkpoint: `f29e2c7` (`modules: add quasicoherent Cech diagrams`).
 
 ## `PAM-QCOH-6A` Result
 
