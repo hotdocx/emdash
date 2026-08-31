@@ -2,6 +2,7 @@
 
 import {
     AlgebraFormalComputationInterpretationInput,
+    AlgebraFormalDelegationError,
     defineAlgebraFormalComputationAdapter
 } from './algebra_formal_delegation';
 import {
@@ -24,21 +25,32 @@ import {
 } from './algebra_reference_engine';
 import {
     AlgebraElement,
-    AlgebraParent
+    AlgebraParent,
+    sameAlgebraParent
 } from './algebra_parent';
 import {
     AlgebraPolynomialModuleGroebnerBasis,
     AlgebraPolynomialModuleMembership,
+    AlgebraPolynomialModuleSchreyerSyzygies,
     AlgebraPolynomialModuleVector,
     algebraPolynomialModuleMembership,
     algebraPolynomialModuleVectorSchema
 } from './algebra_polynomial_module';
+import {
+    AlgebraPolynomialModuleMap,
+    AlgebraPolynomialSchreyerResolution
+} from './algebra_polynomial_presentation';
+import {
+    AlgebraPolynomialModuleReferenceOperations,
+    algebraPolynomialModuleReferenceOperations
+} from './algebra_polynomial_module_reference_operations';
 import {
     algebraPolynomialText
 } from './algebra_polynomial';
 import {
     KernelExpression,
     kernelCall,
+    kernelExpressionEquals,
     kernelFree,
     provenance
 } from './kernel';
@@ -53,6 +65,8 @@ export const ALGEBRA_FORMAL_FINITE_MODULE_PROFILE = Object.freeze({
     revision: 'emdash-algebra-formal-finite-module-v1' as const,
     orientation: 'formal-columns-cas-component-arrays' as const,
     membershipRevision: 'emdash-formal-module-membership-v1' as const,
+    syzygyRevision: 'emdash-formal-module-syzygy-v1' as const,
+    resolutionRevision: 'emdash-formal-module-resolution-v1' as const,
     addsCoreOwner: false as const,
     performsIo: false as const
 });
@@ -62,6 +76,8 @@ export const AFFINE_FORMAL_FINITE_MODULE_BINDINGS = Object.freeze({
     bridge_CommRingMatrix: 'CommRingMatrix',
     bridge_comm_ring_matrix_apply: 'comm_ring_matrix_apply',
     bridge_comm_ring_vector_zero: 'comm_ring_vector_zero',
+    bridge_comm_ring_matrix_zero: 'comm_ring_matrix_zero',
+    bridge_comm_ring_matrix_comp: 'comm_ring_matrix_comp',
     bridge_CommRingPresentationAgreement: 'CommRingPresentationAgreement',
     bridge_CommRingMatrixSyzygy: 'CommRingMatrixSyzygy',
     bridge_CommRingMatrixCompositeZero: 'CommRingMatrixCompositeZero'
@@ -90,6 +106,17 @@ const tau = (value: KernelExpression): KernelExpression => call(
     'bridge_tau',
     [{ plicity: 'explicit', value }]
 );
+
+const record = (value: unknown): value is Record<string, unknown> =>
+    typeof value === 'object' && value !== null && !Array.isArray(value);
+
+const invalidRealization = (path: string, message: string): never => {
+    throw new AlgebraFormalDelegationError(
+        'INVALID_REALIZATION',
+        path,
+        message
+    );
+};
 
 export interface AlgebraFormalModuleMembershipInput<
     P extends AlgebraParent,
@@ -125,6 +152,128 @@ const vectorTerm = <P extends AlgebraParent, C extends AlgebraElement<P>, I>(
     vector.components.map(reifier.reifyPolynomial)
 ).family;
 
+export const algebraFormalMatrixTerm = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    reifier: AffineFormalPolynomialReifier<P, C, I>,
+    columns: readonly AlgebraPolynomialModuleVector<P, C, I>[],
+    rows: number
+): KernelExpression => {
+    if (!Number.isSafeInteger(rows) || rows < 0) {
+        return invalidRealization(
+            'formalMatrix.rows',
+            'Formal matrix row count must be a nonnegative safe integer'
+        );
+    }
+    columns.forEach((column, index) => {
+        if (column.parent.rank !== rows) {
+            return invalidRealization(
+                `formalMatrix.columns[${index}]`,
+                `Expected a column of rank ${rows}`
+            );
+        }
+    });
+    return buildAffineFormalFamily(
+        call('bridge_FiniteFamily', [
+            {
+                plicity: 'explicit',
+                value: call('bridge_comm_ring_carrier', [{
+                    plicity: 'explicit', value: reifier.formalRing
+                }])
+            },
+            { plicity: 'explicit', value: nat(rows) }
+        ]),
+        columns.map(column => vectorTerm(reifier, column))
+    ).family;
+};
+
+export const algebraFormalSyzygyClaimType = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(input: {
+    readonly reifier: AffineFormalPolynomialReifier<P, C, I>;
+    readonly generators: readonly AlgebraPolynomialModuleVector<P, C, I>[];
+    readonly syzygy: AlgebraPolynomialModuleVector<P, C, I>;
+}): KernelExpression => {
+    const first = input.generators[0];
+    if (first === undefined) {
+        return invalidRealization(
+            'formalSyzygy.generators',
+            'A selected Schreyer syzygy requires a nonempty basis'
+        );
+    }
+    input.generators.forEach((generator, index) => {
+        if (!sameAlgebraParent(generator.parent, first.parent)) {
+            return invalidRealization(
+                `formalSyzygy.generators[${index}]`,
+                'Syzygy matrix columns belong to different free modules'
+            );
+        }
+    });
+    if (input.syzygy.parent.rank !== input.generators.length) {
+        return invalidRealization(
+            'formalSyzygy.syzygy',
+            `Expected a coefficient vector of rank ${input.generators.length}`
+        );
+    }
+    return tau(call('bridge_CommRingMatrixSyzygy', [
+        { plicity: 'explicit', value: input.reifier.formalRing },
+        { plicity: 'explicit', value: nat(first.parent.rank) },
+        { plicity: 'explicit', value: nat(input.generators.length) },
+        {
+            plicity: 'explicit',
+            value: algebraFormalMatrixTerm(
+                input.reifier,
+                input.generators,
+                first.parent.rank
+            )
+        },
+        { plicity: 'explicit', value: vectorTerm(input.reifier, input.syzygy) }
+    ]));
+};
+
+export const algebraFormalCompositeZeroClaimType = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(input: {
+    readonly reifier: AffineFormalPolynomialReifier<P, C, I>;
+    readonly left: AlgebraPolynomialModuleMap<P, C, I>;
+    readonly right: AlgebraPolynomialModuleMap<P, C, I>;
+}): KernelExpression => {
+    if (!sameAlgebraParent(input.left.source, input.right.target)) {
+        return invalidRealization(
+            'formalCompositeZero.maps',
+            'Adjacent formal matrices are not composable'
+        );
+    }
+    return tau(call('bridge_CommRingMatrixCompositeZero', [
+        { plicity: 'explicit', value: input.reifier.formalRing },
+        { plicity: 'explicit', value: nat(input.left.target.rank) },
+        { plicity: 'explicit', value: nat(input.left.source.rank) },
+        { plicity: 'explicit', value: nat(input.right.source.rank) },
+        {
+            plicity: 'explicit',
+            value: algebraFormalMatrixTerm(
+                input.reifier,
+                input.left.columns,
+                input.left.target.rank
+            )
+        },
+        {
+            plicity: 'explicit',
+            value: algebraFormalMatrixTerm(
+                input.reifier,
+                input.right.columns,
+                input.right.target.rank
+            )
+        }
+    ]));
+};
+
 export function defineAlgebraFormalModuleMembershipRealization<
     P extends AlgebraParent,
     C extends AlgebraElement<P>,
@@ -137,17 +286,17 @@ export function defineAlgebraFormalModuleMembershipRealization<
 }): AlgebraFormalModuleMembershipRealization<P, C, I> {
     const rank = input.vector.parent.rank;
     const columns = input.basis.submodule.generators.length;
-    const vectorClassifier = call('bridge_CommRingVector', [
-        { plicity: 'explicit', value: input.reifier.formalRing },
+    const vectorClassifier = call('bridge_FiniteFamily', [
+        { plicity: 'explicit', value: call('bridge_comm_ring_carrier', [{
+            plicity: 'explicit', value: input.reifier.formalRing
+        }]) },
         { plicity: 'explicit', value: nat(rank) }
     ]);
-    const formalColumns = input.basis.submodule.generators.map(generator =>
-        vectorTerm(input.reifier, generator)
+    const formalGenerators = algebraFormalMatrixTerm(
+        input.reifier,
+        input.basis.submodule.generators,
+        rank
     );
-    const formalGenerators = buildAffineFormalFamily(
-        vectorClassifier,
-        formalColumns
-    ).family;
     const formalCoefficients = buildAffineFormalFamily(
         call('bridge_comm_ring_carrier', [{
             plicity: 'explicit', value: input.reifier.formalRing
@@ -273,4 +422,265 @@ export function algebraFormalModuleMembershipBundle<
                 }
     });
     return Object.freeze({ inputSchema, outputSchema, operation, implementations, adapter });
+}
+
+const serializeSyzygies = <P extends AlgebraParent, C extends AlgebraElement<P>, I>(
+    value: AlgebraPolynomialModuleSchreyerSyzygies<P, C, I>
+): string => serializeCoreLfWorkspaceCanonicalJson({
+    basis: value.basis.basis.map(vector =>
+        vector.components.map(algebraPolynomialText)
+    ),
+    generators: value.generators.map(vector =>
+        vector.components.map(algebraPolynomialText)
+    ),
+    pairs: value.sourcePairs
+}, 'formalModuleSyzygies');
+
+export interface AlgebraFormalModuleSyzygyRealization<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly profileRevision:
+        typeof ALGEBRA_FORMAL_FINITE_MODULE_PROFILE.syzygyRevision;
+    readonly reifier: AffineFormalPolynomialReifier<P, C, I>;
+    readonly basis: AlgebraPolynomialModuleGroebnerBasis<P, C, I>;
+    readonly selected: AlgebraPolynomialModuleSchreyerSyzygies<P, C, I>;
+    readonly selectedOutputData: string;
+    readonly index: number;
+    readonly claimType: KernelExpression;
+}
+
+export function algebraFormalSyzygyDelegationBundle<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(input: {
+    readonly reifier: AffineFormalPolynomialReifier<P, C, I>;
+    readonly basis: AlgebraPolynomialModuleGroebnerBasis<P, C, I>;
+    readonly selected: AlgebraPolynomialModuleSchreyerSyzygies<P, C, I>;
+    readonly index: number;
+}) {
+    if (
+        !Number.isSafeInteger(input.index) ||
+        input.index < 0 ||
+        input.index >= input.selected.generators.length
+    ) {
+        return invalidRealization(
+            'formalSyzygy.index',
+            'Selected syzygy index is outside the computed generator family'
+        );
+    }
+    const operations: AlgebraPolynomialModuleReferenceOperations<P, C, I> =
+        algebraPolynomialModuleReferenceOperations(input.basis.submodule.module);
+    const claimType = algebraFormalSyzygyClaimType({
+        reifier: input.reifier,
+        generators: input.basis.basis,
+        syzygy: input.selected.generators[input.index]
+    });
+    const selectedOutputData = serializeSyzygies(input.selected);
+    const realization: AlgebraFormalModuleSyzygyRealization<P, C, I> =
+        Object.freeze({
+            profileRevision: ALGEBRA_FORMAL_FINITE_MODULE_PROFILE.syzygyRevision,
+            ...input,
+            selectedOutputData,
+            claimType
+        });
+    const adapter = defineAlgebraFormalComputationAdapter({
+        id: `proof-cas.module-syzygy/${input.basis.submodule.module.identity.id}`,
+        revision: input.basis.submodule.module.identity.revision,
+        operation: operations.syzygies,
+        normalizeRealization(value, path) {
+            if (
+                !record(value) ||
+                value.profileRevision !==
+                    ALGEBRA_FORMAL_FINITE_MODULE_PROFILE.syzygyRevision
+            ) {
+                return invalidRealization(
+                    path,
+                    'Expected one current formal syzygy realization'
+                );
+            }
+            const candidate = value as unknown as typeof realization;
+            if (
+                candidate.index !== input.index ||
+                candidate.selectedOutputData !== selectedOutputData ||
+                !kernelExpressionEquals(candidate.claimType, claimType)
+            ) {
+                return invalidRealization(
+                    path,
+                    'Formal syzygy realization differs from the selected equation'
+                );
+            }
+            return candidate;
+        },
+        serializeRealization: value => serializeCoreLfWorkspaceCanonicalJson({
+            selected: serializeSyzygies(value.selected),
+            index: value.index,
+            claim: serializeCoreExpression(value.claimType)
+        }, 'formalSyzygyRealization'),
+        acquire: (goal, value) => {
+            if (!kernelExpressionEquals(goal.target, value.claimType)) {
+                throw new AlgebraFormalDelegationError(
+                    'CLAIM_TARGET_MISMATCH',
+                    'formalSyzygy.goal',
+                    'Goal differs from the selected formal syzygy equation'
+                );
+            }
+            return value.basis;
+        },
+        serializeInput: basis => serializeCoreLfWorkspaceCanonicalJson({
+            basis: basis.basis.map(vector =>
+                vector.components.map(algebraPolynomialText)
+            )
+        }, 'formalSyzygyInput'),
+        serializeOutput: serializeSyzygies,
+        interpret: ({ goal, computed }): AlgebraFormalComputationInterpretationInput =>
+            serializeSyzygies(computed.value) === realization.selectedOutputData
+                ? {
+                    kind: 'claim',
+                    summary: 'selected Schreyer generator is a syzygy',
+                    claimType: goal.target
+                }
+                : {
+                    kind: 'observation',
+                    summary: 'Schreyer output differs from selected syzygy'
+                }
+    });
+    return Object.freeze({ operations, realization, adapter });
+}
+
+const serializeResolution = <P extends AlgebraParent, C extends AlgebraElement<P>, I>(
+    value: AlgebraPolynomialSchreyerResolution<P, C, I>
+): string => serializeCoreLfWorkspaceCanonicalJson({
+    ranks: value.freeModules.map(module => module.rank),
+    differentials: value.differentials.map(map => map.columns.map(column =>
+        column.components.map(algebraPolynomialText)
+    )),
+    length: value.length,
+    complete: value.complete
+}, 'formalModuleResolution');
+
+export interface AlgebraFormalModuleResolutionRealization<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly profileRevision:
+        typeof ALGEBRA_FORMAL_FINITE_MODULE_PROFILE.resolutionRevision;
+    readonly reifier: AffineFormalPolynomialReifier<P, C, I>;
+    readonly relations:
+        import('./algebra_polynomial_module').AlgebraPolynomialSubmodule<P, C, I>;
+    readonly maximumLength: number;
+    readonly selected: AlgebraPolynomialSchreyerResolution<P, C, I>;
+    readonly selectedOutputData: string;
+    readonly adjacentIndex: number;
+    readonly claimType: KernelExpression;
+}
+
+export function algebraFormalResolutionDelegationBundle<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(input: {
+    readonly reifier: AffineFormalPolynomialReifier<P, C, I>;
+    readonly relations:
+        import('./algebra_polynomial_module').AlgebraPolynomialSubmodule<P, C, I>;
+    readonly maximumLength: number;
+    readonly selected: AlgebraPolynomialSchreyerResolution<P, C, I>;
+    readonly adjacentIndex: number;
+}) {
+    if (
+        !Number.isSafeInteger(input.adjacentIndex) ||
+        input.adjacentIndex < 0 ||
+        input.adjacentIndex + 1 >= input.selected.differentials.length
+    ) {
+        return invalidRealization(
+            'formalResolution.adjacentIndex',
+            'Selected adjacent differential pair is outside the resolution'
+        );
+    }
+    const operations = algebraPolynomialModuleReferenceOperations(
+        input.relations.module
+    );
+    const claimType = algebraFormalCompositeZeroClaimType({
+        reifier: input.reifier,
+        left: input.selected.differentials[input.adjacentIndex],
+        right: input.selected.differentials[input.adjacentIndex + 1]
+    });
+    const selectedOutputData = serializeResolution(input.selected);
+    const realization: AlgebraFormalModuleResolutionRealization<P, C, I> =
+        Object.freeze({
+            profileRevision:
+                ALGEBRA_FORMAL_FINITE_MODULE_PROFILE.resolutionRevision,
+            ...input,
+            selectedOutputData,
+            claimType
+        });
+    const adapter = defineAlgebraFormalComputationAdapter({
+        id: `proof-cas.module-resolution/${input.relations.module.identity.id}`,
+        revision: input.relations.module.identity.revision,
+        operation: operations.resolution,
+        normalizeRealization(value, path) {
+            if (
+                !record(value) ||
+                value.profileRevision !==
+                    ALGEBRA_FORMAL_FINITE_MODULE_PROFILE.resolutionRevision
+            ) {
+                return invalidRealization(
+                    path,
+                    'Expected one current formal resolution realization'
+                );
+            }
+            const candidate = value as unknown as typeof realization;
+            if (
+                candidate.adjacentIndex !== input.adjacentIndex ||
+                candidate.selectedOutputData !== selectedOutputData ||
+                !kernelExpressionEquals(candidate.claimType, claimType)
+            ) {
+                return invalidRealization(
+                    path,
+                    'Formal resolution realization differs from the selected equation'
+                );
+            }
+            return candidate;
+        },
+        serializeRealization: value => serializeCoreLfWorkspaceCanonicalJson({
+            selected: serializeResolution(value.selected),
+            adjacentIndex: value.adjacentIndex,
+            claim: serializeCoreExpression(value.claimType)
+        }, 'formalResolutionRealization'),
+        acquire: (goal, value) => {
+            if (!kernelExpressionEquals(goal.target, value.claimType)) {
+                throw new AlgebraFormalDelegationError(
+                    'CLAIM_TARGET_MISMATCH',
+                    'formalResolution.goal',
+                    'Goal differs from the selected adjacent-zero equation'
+                );
+            }
+            return Object.freeze({
+                relations: value.relations,
+                maximumLength: value.maximumLength
+            });
+        },
+        serializeInput: value => serializeCoreLfWorkspaceCanonicalJson({
+            generators: value.relations.generators.map(vector =>
+                vector.components.map(algebraPolynomialText)
+            ),
+            maximumLength: value.maximumLength
+        }, 'formalResolutionInput'),
+        serializeOutput: serializeResolution,
+        interpret: ({ goal, computed }): AlgebraFormalComputationInterpretationInput =>
+            serializeResolution(computed.value) === realization.selectedOutputData
+                ? {
+                    kind: 'claim',
+                    summary: 'selected adjacent resolution maps compose to zero',
+                    claimType: goal.target
+                }
+                : {
+                    kind: 'observation',
+                    summary: 'resolution output differs from selected complex'
+                }
+    });
+    return Object.freeze({ operations, realization, adapter });
 }

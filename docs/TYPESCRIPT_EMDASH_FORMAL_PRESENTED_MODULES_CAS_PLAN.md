@@ -4,8 +4,10 @@ Date: 2026-08-31
 
 Plan-ID: `TS-EMDASH-FORMAL-PRESENTED-MODULES-CAS`
 
-Status: active living plan on a dedicated branch/worktree; architecture
-reviewed, exact formal owner audit and implementation pending.
+Status: active living plan on a dedicated branch/worktree; the formal spine,
+exact signature/reification layer, membership, syzygy, resolution, and first
+categorical compatibility consumer are implemented; live formal-source
+registration and conformance remain.
 
 Baseline: `e665301bf40a68f136833ba2b7e9416ace55c79e`
 
@@ -279,11 +281,11 @@ claim remains later work.
 | `FPM-VECTOR-2A` | complete; checkpoint `877823b` | audit | formal vectors and transparent zero/add/neg/subtract/scale computation |
 | `FPM-MATRIX-3A` | complete; checkpoint `877823b` | vector | formal column matrices, action, zero, composition, typed positive/noncollapse consumers |
 | `FPM-PRESENTATION-4A` | complete; checkpoint `877823b` | matrix | presentation/agreement and syzygy/composite-zero classifiers without quotient overclaim |
-| `FPM-REIFY-5A` | in progress; Core reifier checkpoint pending | formal owners | exact signature mirrors, vector/matrix/presentation reification, dimension/parent/order diagnostics |
-| `FPM-MEMBERSHIP-6A` | pending | reifier | whole positive/negative module-membership delegation and formal selected equation |
-| `FPM-SYZYGY-7A` | pending | membership | Schreyer syzygy equations and classified finite adoption source |
-| `FPM-RESOLUTION-8A` | pending | syzygy | bounded resolution matrix terms and all adjacent-zero equations |
-| `FPM-CATEGORY-9A` | pending | matrix/presentation | representative concrete-category/reinterpretation/compiler lowering with direct structural agreement |
+| `FPM-REIFY-5A` | complete; bridge tranche checkpoint pending | formal owners | exact signature mirrors, vector/matrix/presentation reification, dimension/parent/order diagnostics |
+| `FPM-MEMBERSHIP-6A` | complete; bridge tranche checkpoint pending | reifier | whole positive/negative module-membership delegation and formal selected equation |
+| `FPM-SYZYGY-7A` | complete; bridge tranche checkpoint pending | membership | Schreyer syzygy equations and classified finite adoption source |
+| `FPM-RESOLUTION-8A` | complete; bridge tranche checkpoint pending | syzygy | bounded resolution matrix terms and all adjacent-zero equations |
+| `FPM-CATEGORY-9A` | complete; bridge tranche checkpoint pending | matrix/presentation | representative concrete-category/reinterpretation/compiler lowering with direct structural agreement |
 | `FPM-CONFORMANCE-10A` | pending | all active rows | portable artifacts, focused formal checks, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and an
@@ -312,6 +314,10 @@ checkpoint.
 | `D-FPM-015` | accepted after audit | Transparent Nat/finite-family definitions suffice for vector arithmetic, matrix action/composition, presentation agreement, syzygy, and adjacent-zero classifiers; no rewrite/unification rule is added. |
 | `D-FPM-016` | accepted after audit | The initial formal module is a presentation calculus, not an abstract semantic module or quotient construction. |
 | `D-FPM-017` | accepted during reification | Whole polynomial-module membership reifies original generator vectors as formal matrix columns and selected coefficients as the formal input vector; the target is the exact matrix-action equation. |
+| `D-FPM-018` | accepted during signature mirroring | Transparent `CommRingVector` and `CommRingMatrix` aliases are represented by their unfolded `FiniteFamily` classifiers inside exact TypeScript signatures; named aliases remain mapped for deterministic source emission. |
+| `D-FPM-019` | accepted during delegation | Syzygy and resolution adapters require the current realization profile, exact selected whole output, exact Core goal target, valid selected index, and compatible dimensions before a computation may become a claim. |
+| `D-FPM-020` | accepted during delegation | The batch owner adopts every selected syzygy before every adjacent resolution composite, appending each equation separately as `computed-equation` evidence. |
+| `D-FPM-021` | accepted during categorical compatibility | The formal column matrix reifies the same ordered `combinedRelations` retained by the direct presented-module category; categorical reinterpretation is representation-preserving and does not assert a formal category or quotient equality. |
 
 ## Initial Reifier Result
 
@@ -322,10 +328,28 @@ and transposes only the conceptual row-major/column-family boundary.
 
 The first native membership operation retains the whole coefficient and
 remainder result rather than projecting a Boolean. A focused one-generator
-positive case reifies and recomputes successfully, while the corresponding
-constant vector has a nonzero remainder. Root typecheck and the focused test
-pass. Exact LF signature mirrors, proof-goal adoption, broader dimension
-negatives, syzygies, and resolution artifacts remain in the active row.
+positive case reifies, recomputes, and becomes an explicitly trusted formal
+equation. The corresponding constant vector has a retained nonzero remainder,
+is interpreted as an observation, and does not close the goal.
+
+Exact LF signature mirrors now typecheck the explicit Core targets. They
+unfold the transparent vector/matrix aliases to `FiniteFamily` classifiers,
+while the source binding map retains the named Lambdapi declarations. Matrix,
+syzygy, and adjacent-composite constructors reject invalid dimensions or
+indices before delegation.
+
+The batch finite-module delegation owner recomputes the whole Schreyer and
+bounded-resolution outputs, checks exact selected-output and goal identity,
+and appends every syzygy followed by every adjacent-zero equation to the
+existing classified assumption source. The focused two-generator case adopts
+one equation of each kind in deterministic order.
+
+The first categorical consumer reifies `combinedRelations` as the formal
+column matrix while retaining the same direct presented-module object through
+the existing tower reinterpretation. A schema-preserving categorical map
+action compiles to the direct algebra graph and agrees with direct execution.
+This is a representation-compatibility result, not a formal category or
+quotient-module claim.
 
 ## Formal Spine Result
 
