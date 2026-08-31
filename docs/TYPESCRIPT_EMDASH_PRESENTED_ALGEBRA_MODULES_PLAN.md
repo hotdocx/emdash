@@ -6,7 +6,7 @@ Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
-through `PAM-SEMILINEAR-3A` are complete; `PAM-BASECHANGE-4A` is the next
+through `PAM-BASECHANGE-4A` are complete; `PAM-LOCALIZATION-5A` is the next
 dependency-ready row.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
@@ -283,8 +283,8 @@ Conformance examples are:
 | `PAM-MODULE-2A1` | complete; proportional-green at `23b606e` | `PAM-AUDIT-1A` | minimal interreduced monic module Gröbner postpass with original-generator transformations, canonical ordering, duplicate/scaled removal, limits, and focused regressions |
 | `PAM-MODULE-2A2` | complete; proportional-green at `20c21f2` | `PAM-MODULE-2A1` | parent-aware free/presented modules over presented algebras, quotient-valued vectors, whole canonical normalization, elements/arithmetic/scalar action/equality, zero detection, schemas, serialization, and diagnostics |
 | `PAM-SEMILINEAR-3A` | complete; proportional-green at `dd51f40` | `PAM-MODULE-2A2`, presented-algebra maps | relation-checked semilinear maps over explicit algebra maps, ordinary linear specialization, identity/composition/application/equality/zero testing, schemas, serialization, and retained relation-family checks |
-| `PAM-BASECHANGE-4A` | pending; next selected row | `PAM-SEMILINEAR-3A` | whole module base change on objects and maps, canonical semilinear unit, identity/composition comparisons, schemas, and diagnostics |
-| `PAM-LOCALIZATION-5A` | pending | `PAM-BASECHANGE-4A`, principal localizations | module localization as base change, whole chart data, zero/nonzero examples, and localization edge cases |
+| `PAM-BASECHANGE-4A` | complete; proportional-green at `61b6528` | `PAM-SEMILINEAR-3A` | whole object and linear-map base change, transported user relations, rebuilt target action, canonical semilinear unit, identity/composition/naturality comparisons, schemas, serialization, and diagnostics |
+| `PAM-LOCALIZATION-5A` | pending; next selected row | `PAM-BASECHANGE-4A`, principal localizations | module localization as base change, whole chart data, zero/nonzero examples, and localization edge cases |
 | `PAM-QCOH-6A` | pending | `PAM-LOCALIZATION-5A`, affine schemes | affine quasi-coherent presentation with derived basic-open and product-overlap module values; no general sheaf claim |
 | `PAM-CECH-7A` | pending | `PAM-QCOH-6A`, finite affine covers | ordered varying-ring module Čech data, semilinear face restrictions, signs, repeated-face comparisons, and no cohomology overclaim |
 | `PAM-GRAPH-8A` | pending | representative consumers from preceding rows | exact native operations, computation graphs, selected CAP-style whole methods, and schema-preserving categorical lowering |
@@ -323,6 +323,38 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-022` | accepted | A semilinear map is determined by an explicit presented-algebra map and one canonical target-module image per ordered source generator. |
 | `D-PAM-023` | accepted | Construction evaluates both source algebra-action relations and lifted user relations in the target and requires canonical zero; no separate relation square or naturality field is accepted. |
 | `D-PAM-024` | accepted | Same-algebra linear maps specialize semilinear maps at the identity algebra map; identity and composition are rebuilt through the same relation-checking constructor. |
+| `D-PAM-025` | accepted | Object base change transports only retained user relations; the target module constructor separately and canonically installs the target algebra-action relations. |
+| `D-PAM-026` | accepted | The canonical base-change unit sends each ordered source basis generator to the corresponding target basis generator and is validated as a semilinear map. |
+| `D-PAM-027` | accepted | Initial morphism base change is defined for ordinary linear maps over the source algebra. The two naturality composites are constructed and compared canonically; no caller-supplied square is accepted. |
+
+## `PAM-BASECHANGE-4A` Result
+
+Functorial base change is implemented in
+`src/v3_2/algebra_presented_module_base_change.ts`. For `φ : A -> B`, object
+base change preserves free rank and module order, transports the retained user
+relations componentwise through `φ`, rebuilds the target `B`-action
+relations, and constructs the canonical `φ`-semilinear basis-to-basis unit.
+
+Identity base change compares equal to the original module and its identity
+map. Iterated base change along `A -> B -> C` has the same canonical target
+parent and unit map as direct base change along the composite.
+
+The first morphism surface base-changes ordinary `A`-linear maps. It retains
+the source and target object base changes, transported linear map, both
+semilinear composites around the canonical naturality square, and the checked
+`naturalityHolds` projection. Runtime schemas reconstruct the whole object
+base change, and deterministic serialization retains scalar endpoints,
+transported relations, target identity, and unit generator images.
+
+Six focused tests cover `A/(x) -> B/(y)`, identity, iterated/composite base
+change, scalar-doubling morphism transport and its complete naturality square,
+schemas/serialization, and foreign/nonlinear failures. Together with
+semilinear maps, presented modules/algebra maps, reduced/ordinary module
+Gröbner, and quotient suites, 46 tests pass, followed by workspace check,
+root typecheck, affected lint, and diff hygiene. No repository-wide aggregate
+or Lambdapi check was run.
+
+Semantic checkpoint: `61b6528` (`modules: add functorial presented base change`).
 
 ## `PAM-SEMILINEAR-3A` Result
 
