@@ -4,11 +4,9 @@ Date: 2026-08-31
 
 Plan-ID: `TS-EMDASH-QUASICOHERENT-CECH-COCHAINS`
 
-Status: living architecture and implementation ledger; dedicated branch and
-worktree created from the completed presented-module affine-descent baseline;
-`QCC-AUDIT-1A` and `QCC-COCHAIN-2A` are complete;
-`QCC-DIFFERENTIAL-3A` and `QCC-SQUARE-4A` are complete; `QCC-GRAPH-5A` is the
-complete and `QCC-CONFORMANCE-6A` is the next dependency-ready row.
+Status: implementation complete on the dedicated branch/worktree; every
+ledger row is proportional-green and checkpointed, including all three
+portable examples and direct/native-graph agreement.
 
 Baseline: `a3e71ae7c4bf6035c1a716a3c102a55a417e40ca`
 
@@ -244,7 +242,7 @@ Direct construction and native graph execution must serialize identically.
 | `QCC-DIFFERENTIAL-3A` | complete; proportional-green at `6b0889e` | `QCC-COCHAIN-2A` | whole alternating differential with exact endpoint lookup, retained ordered target/contribution data, binary orientation, global-section cancellation, additive/zero/negation comparisons, serialization, and truncation failure |
 | `QCC-SQUARE-4A` | complete; proportional-green at `fb800f2` | `QCC-DIFFERENTIAL-3A`, repeated-face comparisons | complete structural cancellation records, stored-route sign products, equal composite images, zero signed pairs, coverage accounting, evaluated `d² = 0`, serialization, and truncation/corruption failures |
 | `QCC-GRAPH-5A` | complete; proportional-green at `28b025c` | `QCC-SQUARE-4A` | fixed-degree input schemas, exact whole differential and optional square operations, native reference implementations/engine, direct-graph agreement, and foreign/top-degree failures |
-| `QCC-CONFORMANCE-6A` | pending; next selected row | all preceding rows | three concrete examples, deterministic direct/graph artifacts, final proportional validation, completion audit, and clean checkpoint |
+| `QCC-CONFORMANCE-6A` | complete; proportional-green at `a11994d` | all preceding rows | binary diagonal/asymmetric, support, and ternary square artifacts; direct/native-graph agreement; invalid-ID diagnostics; 75-test affected boundary; and final audit |
 
 Rows may be split into lettered subtranches. A row completes only after
 implementation, focused positive and negative tests, proportional validation,
@@ -279,6 +277,75 @@ synchronized decisions/results, and a local checkpoint.
 | `D-QCC-023` | accepted | Native operation bundles are fixed to one exact cochain-degree parent, so graph input schemas reject every foreign diagram or degree. |
 | `D-QCC-024` | accepted | A differential operation exists exactly when degree `n+1` is retained; the square operation is included only when degree `n+2` is retained. |
 | `D-QCC-025` | accepted | Direct and graph execution use the same whole constructors and must serialize identically; no graph-specific differential semantics is introduced. |
+| `D-QCC-026` | accepted | A portable artifact retains one exact input cochain, whole differential, optional square, support/zero status, contribution and cancellation counts, and deterministic nested serialization; it makes no proof claim. |
+| `D-QCC-027` | accepted | Final acceptance requires a nonzero binary differential as well as a zero diagonal differential, so orientation is tested by computation rather than only by structural metadata. |
+| `D-QCC-028` | accepted | The completed goal stops before cohomology. Kernel/cokernel computation for heterogeneous degrees requires a separately selected common additive representation or another concrete algorithmic consumer. |
+
+## `QCC-CONFORMANCE-6A` Result
+
+Portable evaluated cochain artifacts are implemented in
+`src/v3_2/algebra_quasicoherent_cochain_artifact.ts`. An artifact retains its
+exact input cochain, whole first differential, optional differential-square
+result when degree two is available, support count across all simplex
+modules, zero/nonzero outcomes, contribution count, cancellation count, and a
+deterministic nested JSON representation. It explicitly carries no proof
+claim.
+
+The final examples establish:
+
+- the free rank-one binary diagonal cochain has zero differential;
+- an asymmetric free binary cochain has a nonzero differential with the same
+  audited orientation;
+- the `A/(x)` support cochain has two zero simplex modules and zero global
+  differential; and
+- an asymmetric free ternary cochain has three source and target components,
+  six first-differential contributions, a nonzero first differential, three
+  cancellation records, and a zero differential square.
+
+Six focused tests cover these outcomes, deterministic serialization of all
+profiles, byte-identical direct/native-graph binary differential and ternary
+square results, explicit no-proof status, and invalid artifact IDs.
+
+The final proportional boundary is split into two bounded shards after the
+initial combined command exceeded its output-yield window. The five new
+cochain/differential/square/graph/artifact suites pass 25/25; seven directly
+affected quasi-coherent Čech/chart, module, descent-artifact, graph, and engine
+suites pass 50/50. Workspace check, root typecheck, all changed-file lint, and
+diff hygiene pass. `check:ts`, repository-wide aggregates, Lambdapi/kernel,
+browser, print, book, package, and release gates were not run.
+
+Semantic checkpoint: `a11994d` (`cochains: add evaluated Cech artifacts`).
+
+## Final Boundary Audit
+
+The completion boundary is satisfied:
+
+- cochain degrees are stable heterogeneous additive products with exact
+  simplex/module alignment and no false common scalar parent;
+- cochain elements support canonical zero/addition/negation/subtraction/
+  equality, lookup, schemas, global-element transport, and serialization;
+- the whole alternating differential uses only stored face endpoints/order/
+  signs and retains every unsigned/signed contribution and target sum;
+- the binary differential orientation is permanently exercised by both zero
+  diagonal and nonzero asymmetric cochains;
+- zero, negation, and additivity computations are green;
+- every repeated face locates both stored routes, obtains opposite total
+  signs, produces equal composite images, and cancels canonically;
+- cancellation coverage is counted exactly and missing data fails closed;
+- the actually evaluated second differential is zero on the selected ternary
+  cochains;
+- fixed-degree native operations and graphs share exact schemas and whole
+  constructors, with no top-degree or graph-specific semantic fiction; and
+- all three portable examples are deterministic and direct/graph coherent.
+
+No restriction-of-scalars finite-presentation claim, common module parent,
+manual coherence square, top-degree zero extension, kernel/cokernel,
+cohomology, sheaf/descent theorem, formal adapter, Lambdapi/Core owner,
+browser/package publication, or cubical/strictness history was introduced.
+
+The strongest next computational continuation is module tensor products and
+quasi-coherent tensor compatibility, followed later by a separately justified
+representation for kernels/cohomology of heterogeneous Čech degrees.
 
 ## `QCC-GRAPH-5A` Result
 
