@@ -7,7 +7,7 @@ Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
 through `PAM-CECH-7A` and `PAM-GRAPH-8A1` are complete; `PAM-GRAPH-8A2` is
-the next dependency-ready row.
+complete; `PAM-ORACLE-9A` is now consumer-ready and selected next.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
 
@@ -288,8 +288,8 @@ Conformance examples are:
 | `PAM-QCOH-6A` | complete; proportional-green at `b93e1a1` | `PAM-LOCALIZATION-5A`, affine schemes | affine scheme/module presentation and exact supplied basic-open/product-overlap chart realization by retained localization maps; schemas/serialization and explicit sheaf/descent nonclaims |
 | `PAM-CECH-7A` | complete; proportional-green at `f29e2c7` | `PAM-QCOH-6A`, finite affine covers | ordered varying-ring module Čech data, direct product-localization values, relation-checked semilinear faces/signs, computed repeated-face comparisons, schemas/serialization, empty-cover behavior, and explicit cohomology nonclaim |
 | `PAM-GRAPH-8A1` | complete; proportional-green at `b25e7a6` | representative consumers from preceding rows | context-aware native operations and graph execution for semilinear application, object base change, module localization, and quasi-coherent Čech construction |
-| `PAM-GRAPH-8A2` | pending; next selected row | `PAM-GRAPH-8A1`, computable-category/compiler owners | strict semilinear total-category instance, selected whole category methods, constructor tower/reinterpretation metadata, exact native bindings, and categorical compilation |
-| `PAM-ORACLE-9A` | pending; consumer-gated | stable native module consumer and installed Singular | optional deterministic module differential comparison with retained agreement/mismatch; never a native prerequisite |
+| `PAM-GRAPH-8A2` | complete; proportional-green at `4a1f237` | `PAM-GRAPH-8A1`, computable-category/compiler owners | strict semilinear total-category instance, four primitive whole methods, four-stage Category-only tower, direct reinterpretation, exact native lowerings, and executable categorical compilation |
+| `PAM-ORACLE-9A` | pending; next selected row | stable native module-normalization consumer and installed Singular | optional deterministic module normal-form/zero differential comparison with retained agreement/mismatch; never a native prerequisite |
 | `PAM-CONFORMANCE-10A` | pending | all nondeferred rows | both concrete covers, focused TypeScript evidence, deterministic artifacts, final boundary audit, and proportional completion checkpoint |
 
 Rows may be split into lettered subtranches. A row completes only after
@@ -339,6 +339,35 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-037` | accepted | Degree records retain varying scalar rings and signed incoming faces. The layer claims neither a common-scalar chain complex nor cohomology. |
 | `D-PAM-038` | accepted | Native whole operations use generic structural input schemas and retain exact result kinds; implementations call the existing constructors and pass computation context into every nested module/localization Gröbner computation. |
 | `D-PAM-039` | accepted | Semilinear application, base change, localization, and module-valued Čech construction are separate exact operation identities and graph nodes; no semantic fusion or implicit coercion is introduced. |
+| `D-PAM-040` | accepted | Presented modules with semilinear maps form one strict computational total category over varying rings. This category is intentionally qualified only at the `Category` doctrine. |
+| `D-PAM-041` | accepted | Semilinear application, base change, localization, and Čech construction are primitive whole category methods with exact schema-preserving bindings to the native operations. |
+| `D-PAM-042` | accepted | The modeling tower records presented modules, base change, affine quasi-coherent values, and module Čech diagrams; direct presented-module data is the runtime reinterpretation and introduces no wrapper boxes. |
+
+## `PAM-GRAPH-8A2` Result
+
+The strict semilinear total category, constructor tower, and categorical
+lowering are implemented in `src/v3_2/algebra_presented_module_tower.ts`.
+Objects are presented modules over varying presented algebras; morphisms are
+relation-checked semilinear maps. Identity, composition, endpoints, and
+equality reuse the existing semilinear owner.
+
+The category registers primitive whole methods for semilinear application,
+base change, localization, and module-valued Čech construction. A four-stage
+Category-only tower records presented modules, module base change, affine
+quasi-coherent values, and module Čech diagrams. One direct reinterpretation
+keeps presented-module values as the public/runtime representation. Four
+exact native lowerings compile categorical programs into ordinary algebra
+graphs.
+
+Five focused tests cover strict category identity/composition across three
+scalar algebras, whole category localization/Čech execution, all four tower
+rules and direct reinterpretation, compiled localization graph execution, and
+canonical morphism equality. Together with native module operations,
+category/compiler/tower, and module-valued Čech suites, 26 tests pass,
+followed by workspace check, root typecheck, affected lint, and diff hygiene.
+No repository-wide aggregate or Lambdapi check was run.
+
+Semantic checkpoint: `4a1f237` (`modules: compile semilinear category operations`).
 
 ## `PAM-GRAPH-8A1` Result
 
