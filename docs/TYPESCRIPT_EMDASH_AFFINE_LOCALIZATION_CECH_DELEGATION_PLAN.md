@@ -375,9 +375,9 @@ rechecking the repository for reassurance.
 | `ALC-INVERSE-3A` | complete; checkpoint `b8a4f51` | `ALC-SOURCE-2A` | noncircular inverse target, selected localization adapter, computed-equation adoption, formal unit, direct/graph agreement and negatives |
 | `ALC-UNIVERSAL-3B` | complete; checkpoint `b8a4f51` | `ALC-INVERSE-3A` | explicitly trusted presentation-semantics adoption, whole property projection, reconstructed formal localization and chart |
 | `ALC-FINITE-PRODUCT-4A` | audit-rejected; no implementation | `ALC-AUDIT-1A` | existing binary unit transport/projection plus one computed face decomposition handles every arity uniformly; no new formal owner required |
-| `ALC-COVER-5A` | complete; whole-cover checkpoint pending | preceding localization and face-unit rows | complete binary formal cover/localizations/overlap/Čech artifact with no manual face evidence |
-| `ALC-CECH-6A` | complete; whole-cover checkpoint pending | `ALC-COVER-5A` | ternary two-skeleton through the same uniform architecture |
-| `ALC-CONFORMANCE-7A` | complete; whole-cover checkpoint pending | all active rows | final portable artifacts, exact replay, graph agreement, source emission, focused live Lambdapi acceptance, proportional boundary audit |
+| `ALC-COVER-5A` | complete; checkpoint `6d3cff4` | preceding localization and face-unit rows | complete binary formal cover/localizations/overlap/Čech artifact with no manual face evidence |
+| `ALC-CECH-6A` | complete; checkpoint `6d3cff4` | `ALC-COVER-5A` | ternary two-skeleton through the same uniform architecture |
+| `ALC-CONFORMANCE-7A` | complete; implementation checkpoint `6d3cff4` | all active rows | final portable artifacts, exact replay, graph agreement, source emission, focused live Lambdapi acceptance, proportional boundary audit |
 
 Rows may be split into bounded lettered subtranches. A row completes only
 after implementation, positive and negative consumers, proportional checks,
