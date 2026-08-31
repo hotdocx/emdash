@@ -7,8 +7,8 @@ Plan-ID: `TS-EMDASH-QUASICOHERENT-CECH-COCHAINS`
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed presented-module affine-descent baseline;
 `QCC-AUDIT-1A` and `QCC-COCHAIN-2A` are complete;
-`QCC-DIFFERENTIAL-3A` is complete and `QCC-SQUARE-4A` is the next
-dependency-ready row.
+`QCC-DIFFERENTIAL-3A` and `QCC-SQUARE-4A` are complete; `QCC-GRAPH-5A` is the
+next dependency-ready row.
 
 Baseline: `a3e71ae7c4bf6035c1a716a3c102a55a417e40ca`
 
@@ -242,8 +242,8 @@ Direct construction and native graph execution must serialize identically.
 | `QCC-AUDIT-1A` | complete; orientation probe and 29-test baseline green | existing module-valued Čech diagram | exact owner map in `TYPESCRIPT_EMDASH_QUASICOHERENT_CECH_COCHAINS_OWNER_AUDIT.md`, binary differential convention, ternary sign pairs, degree-parent decision, and truncation boundary |
 | `QCC-COCHAIN-2A` | complete; proportional-green at `f023d7b` | `QCC-AUDIT-1A` | stable heterogeneous degree parents, aligned cochain elements, global-element construction, zero/addition/negation/subtraction/equality, positional/index lookup, schemas/serialization, and complete diagnostics |
 | `QCC-DIFFERENTIAL-3A` | complete; proportional-green at `6b0889e` | `QCC-COCHAIN-2A` | whole alternating differential with exact endpoint lookup, retained ordered target/contribution data, binary orientation, global-section cancellation, additive/zero/negation comparisons, serialization, and truncation failure |
-| `QCC-SQUARE-4A` | pending; next selected row | `QCC-DIFFERENTIAL-3A`, repeated-face comparisons | structural sign/map cancellation records and evaluated `d² = 0` for every available degree |
-| `QCC-GRAPH-5A` | pending | `QCC-SQUARE-4A` | exact native differential/square operations, fixed-degree schemas, reference-engine and graph execution |
+| `QCC-SQUARE-4A` | complete; proportional-green at `fb800f2` | `QCC-DIFFERENTIAL-3A`, repeated-face comparisons | complete structural cancellation records, stored-route sign products, equal composite images, zero signed pairs, coverage accounting, evaluated `d² = 0`, serialization, and truncation/corruption failures |
+| `QCC-GRAPH-5A` | pending; next selected row | `QCC-SQUARE-4A` | exact native differential/square operations, fixed-degree schemas, reference-engine and graph execution |
 | `QCC-CONFORMANCE-6A` | pending | all preceding rows | three concrete examples, deterministic direct/graph artifacts, final proportional validation, completion audit, and clean checkpoint |
 
 Rows may be split into lettered subtranches. A row completes only after
@@ -273,6 +273,33 @@ synchronized decisions/results, and a local checkpoint.
 | `D-QCC-017` | accepted | Differential target faces are filtered by exact codomain simplex identity and required to remain in removed-position order; source components are located separately by domain indices. |
 | `D-QCC-018` | accepted | Odd face images are negated in their target module before the ordered sum. The whole result retains unsigned and signed images rather than only the output tuple. |
 | `D-QCC-019` | accepted | Zero, negation, and binary additivity are computed comparisons over canonical cochains. The bounded top degree raises `NO_SUCCESSOR_DEGREE` rather than receiving a fabricated zero differential. |
+| `D-QCC-020` | accepted | A cancellation record locates all four stored face maps around one repeated face, multiplies their stored signs, applies both already-equal composite maps to the supplied lower component, and requires canonical signed cancellation. |
+| `D-QCC-021` | accepted | Structural coverage is complete only when cancellation count equals the sum of `choose(vertexCount,2)` over target simplices in degree `n+2`. Missing comparison data fails closed. |
+| `D-QCC-022` | accepted | Differential-square success requires both structural pair cancellation and an actually computed canonical-zero second differential; it is computational evidence with no proof claim. |
+
+## `QCC-SQUARE-4A` Result
+
+Structural and evaluated differential-square cancellation is implemented in
+`src/v3_2/algebra_quasicoherent_differential_square.ts`. Starting from a
+degree-`n` cochain, it computes both whole differentials and selects the
+existing repeated-face comparisons whose lower simplex has degree `n`.
+
+For each comparison it locates both inner and outer stored faces, multiplies
+their signs, requires opposite totals, applies both stored composite maps to
+the same lower component, requires equal canonical images, signs them, and
+requires their sum to be zero. It also checks complete cancellation-pair
+coverage against all degree-`n+2` target simplices and requires the actual
+second differential output to be a zero cochain.
+
+Five focused tests cover all three ternary sign pairs and cancellation data,
+evaluated `d¹(d⁰(s)) = 0`, deterministic path/sign/image serialization,
+binary absence of a second successor, and rejection of missing structural
+comparison coverage. Together with differential, cochain, varying-ring Čech,
+and semilinear-map suites, 27 tests pass, followed by workspace check, root
+typecheck, affected lint, and diff hygiene. No repository-wide aggregate or
+Lambdapi check was run.
+
+Semantic checkpoint: `fb800f2` (`cochains: verify Cech differential squares`).
 
 ## `QCC-DIFFERENTIAL-3A` Result
 
