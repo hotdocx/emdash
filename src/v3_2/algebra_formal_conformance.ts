@@ -112,7 +112,8 @@ const reference = (name: ConformanceBinding): KernelExpression =>
 const call = (
     name: ConformanceBinding | keyof typeof AFFINE_FORMAL_RING_BINDINGS |
         keyof typeof AFFINE_FORMAL_LOCALIZATION_BINDINGS |
-        keyof typeof AFFINE_FORMAL_OVERLAP_BINDINGS,
+        keyof typeof AFFINE_FORMAL_OVERLAP_BINDINGS |
+        keyof typeof AFFINE_FORMAL_ARTIFACT_BINDINGS,
     arguments_: readonly CallArgument[]
 ): KernelExpression => kernelCall(
     kernelFree(name, nodeProvenance),
@@ -155,6 +156,14 @@ export const affineFormalRingEqualityType = (
     left,
     right
 );
+
+export const affineFormalCommRingHomType = (
+    source: KernelExpression,
+    target: KernelExpression
+): KernelExpression => tau(call('bridge_CommRingHom', [
+    { plicity: 'explicit', value: source },
+    { plicity: 'explicit', value: target }
+]));
 
 export const affineFormalIdentityMap = (
     formalRing: KernelExpression
@@ -226,15 +235,21 @@ export function affineFormalInverseLawType<
 >(
     realization: AffineFormalLocalizationRealization<P, C, I>
 ): KernelExpression {
-    const unit = buildAffineFormalLocalizationUnitTerms(realization);
+    const sourceRing = realization.source.formalRing;
     const ring = realization.target.formalRing;
     const carrier = call('bridge_comm_ring_carrier', [{
         plicity: 'explicit',
         value: ring
     }]);
+    const mappedElement = call('bridge_comm_ring_hom_apply', [
+        { plicity: 'implicit', value: sourceRing },
+        { plicity: 'implicit', value: ring },
+        { plicity: 'explicit', value: realization.formalMap },
+        { plicity: 'explicit', value: realization.elementTerm }
+    ]);
     const product = call('bridge_comm_ring_mul', [
         { plicity: 'explicit', value: ring },
-        { plicity: 'explicit', value: unit.mappedElement },
+        { plicity: 'explicit', value: mappedElement },
         { plicity: 'explicit', value: realization.inverseTerm }
     ]);
     const one = call('bridge_comm_ring_one', [{

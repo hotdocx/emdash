@@ -371,9 +371,9 @@ rechecking the repository for reassurance.
 | --- | --- | --- | --- |
 | `ALC-PLAN-0` | complete; checkpoint `ce66fa8` | completed proof–CAS delegation at `ae85a4b` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, evidence classes, staged rows, validation, and Git limits |
 | `ALC-AUDIT-1A` | complete; checkpoint `6110491` | `ALC-PLAN-0` | exact computational/formal owner map, inverse circularity, universal-property classification, binary/ternary face-unit feasibility, selected formal delta |
-| `ALC-SOURCE-2A` | complete; source checkpoint pending | `ALC-AUDIT-1A` | exact-Core computed-assumption source/workspace, sequential adoption, per-claim classification, source spans, replay and emission |
-| `ALC-INVERSE-3A` | pending | `ALC-SOURCE-2A` | noncircular inverse target, selected localization adapter, computed-equation adoption, formal unit, direct/graph agreement and negatives |
-| `ALC-UNIVERSAL-3B` | pending | `ALC-INVERSE-3A` | explicitly trusted presentation-semantics adoption, whole property projection, reconstructed formal localization and chart |
+| `ALC-SOURCE-2A` | complete; checkpoint `616f28e` | `ALC-AUDIT-1A` | exact-Core computed-assumption source/workspace, sequential adoption, per-claim classification, source spans, replay and emission |
+| `ALC-INVERSE-3A` | complete; localization checkpoint pending | `ALC-SOURCE-2A` | noncircular inverse target, selected localization adapter, computed-equation adoption, formal unit, direct/graph agreement and negatives |
+| `ALC-UNIVERSAL-3B` | complete; localization checkpoint pending | `ALC-INVERSE-3A` | explicitly trusted presentation-semantics adoption, whole property projection, reconstructed formal localization and chart |
 | `ALC-FINITE-PRODUCT-4A` | audit-rejected; no implementation | `ALC-AUDIT-1A` | existing binary unit transport/projection plus one computed face decomposition handles every arity uniformly; no new formal owner required |
 | `ALC-COVER-5A` | pending | preceding localization and face-unit rows | complete binary formal cover/localizations/overlap/Čech artifact with no manual face evidence |
 | `ALC-CECH-6A` | pending | `ALC-COVER-5A` | ternary two-skeleton through the same uniform architecture |
@@ -409,6 +409,46 @@ synchronized decisions/results, and a local checkpoint.
 | `D-ALC-020` | accepted after `ALC-SOURCE-2A` | A computed-assumption source appends only adoptions whose named goal began in its exact current environment, thereby making dependency order explicit. |
 | `D-ALC-021` | accepted after `ALC-SOURCE-2A` | Every entry retains one existing trusted-adoption artifact plus its independent classification; the source adds no second approval mechanism or blanket trust switch. |
 | `D-ALC-022` | accepted after `ALC-SOURCE-2A` | Source replay rechecks every retained computation result and rebuilds the immutable LF environment in entry order; canonical bytes and source-spanned probe emission are separate projections. |
+| `D-ALC-023` | accepted after `ALC-INVERSE-3A` | The inverse-law target is constructed directly from map application, selected inverse, multiplication, and one; trusted/no-law realizations can now name the goal while strict builders remain unchanged. |
+| `D-ALC-024` | accepted after `ALC-INVERSE-3A` | The localization adapter claims only when recomputation serializes to the exact selected whole localization and its inverse equation is true; output drift remains an observation. |
+| `D-ALC-025` | accepted after `ALC-UNIVERSAL-3B` | The inverse and whole-property adapters share the same exact operation/result but expose distinct targets and classifications. |
+| `D-ALC-026` | accepted after `ALC-UNIVERSAL-3B` | An adopted whole localization property supplies its existing `sigma_Snd` universal field; together with the separately adopted inverse equation it reconstructs the unchanged explicit-data formal localization/chart. |
+| `D-ALC-027` | accepted after `ALC-UNIVERSAL-3B` | TypeScript mirrors only `CommRingHom`, map application, and the whole localization-property classifier for goal checking; final explicit-Core packages remain validated by their existing builders and focused backend conformance. |
+
+## `ALC-INVERSE-3A` And `ALC-UNIVERSAL-3B` Result
+
+Localization delegation is implemented in
+`src/v3_2/algebra_formal_localization_delegation.ts`, with the exact
+goal-signature extension in `algebra_formal_localization_signatures.ts`.
+
+`affineFormalInverseLawType` no longer calls a law-requiring unit builder. It
+forms the exact target directly from the formal map application, selected
+inverse, multiplication, and one. The existing unit/localization builders
+retain their strict evidence requirements.
+
+One parent-aware delegation realization retains the selected trusted
+localization, exact inverse/property targets, and canonical whole-output
+serialization. Two adapters reuse the same native localization operation:
+
+- the inverse adapter exposes a `computed-equation` claim and reified inverse;
+- the property adapter exposes the whole
+  `trusted-presentation-semantics` claim.
+
+Both claim only when native recomputation agrees byte-for-byte with the
+selected localization and its inverse equation is true. A changed selected
+output produces an observation.
+
+After independent adoption and source classification, the whole property
+reference supplies its existing universal-field projection. Together with the
+inverse-law reference, `realizeAdoptedAffineFormalLocalization` reconstructs
+the ordinary explicit-data realization, and the unchanged builder constructs
+the formal unit, localization property/package, and basic-open chart. The
+original trusted realization remains evidence-free.
+
+Three focused localization-delegation tests plus source, formal-localization,
+native-localization, and graph suites pass 30/30. Workspace check, root
+typecheck, affected lint, and diff hygiene pass. No aggregate or Lambdapi
+source check was run.
 
 ## `ALC-SOURCE-2A` Result
 
