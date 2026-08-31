@@ -345,10 +345,10 @@ overclaim.
 | --- | --- | --- | --- |
 | `FPMAP-PLAN-0` | in progress | completed finite-presentation bridge at `2c56d41` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, mathematics, validation, Git limits |
 | `FPMAP-AUDIT-1A` | complete; checkpoint `6c4ea6b` | plan | exact formal/CAS orientation, missing owners, matrix-law burden, selected fixed-ring model, category boundary |
-| `FPMAP-MATRIX-2A` | complete; formal checkpoint pending | audit | transparent matrix add/neg/sub and narrowly required identity/law support, positive/noncollapse consumers |
-| `FPMAP-FORMAL-3A` | complete; formal checkpoint pending | matrix | formal presentation, relation-preserving morphism, representative agreement, and chain-square classifiers without quotient overclaim |
-| `FPMAP-WITNESS-4A` | pending | formal | whole polynomial relation-witness computation with coefficients/remainders and positive/negative cases |
-| `FPMAP-CONGRUENCE-5A` | pending | witness | whole `F-G` target-relation membership and assembled `H`, including negative remainder |
+| `FPMAP-MATRIX-2A` | complete; checkpoint `d5bae5d` | audit | transparent matrix add/neg/sub and narrowly required identity/law support, positive/noncollapse consumers |
+| `FPMAP-FORMAL-3A` | complete; checkpoint `d5bae5d` | matrix | formal presentation, relation-preserving morphism, representative agreement, and chain-square classifiers without quotient overclaim |
+| `FPMAP-WITNESS-4A` | complete; computational checkpoint pending | formal | whole polynomial relation-witness computation with coefficients/remainders and positive/negative cases |
+| `FPMAP-CONGRUENCE-5A` | complete; computational checkpoint pending | witness | whole `F-G` target-relation membership and assembled `H`, including negative remainder |
 | `FPMAP-REIFY-6A` | pending | formal/computational owners | exact signatures, presentation/map/witness reification, dimension/parent/order diagnostics |
 | `FPMAP-DELEGATE-7A` | pending | reifier | exact-target adapters, positive/negative workflows, classified batch source, deterministic artifact |
 | `FPMAP-CATEGORY-8A` | pending | witness/congruence | identity/composition and representative categorical lowering/direct agreement; no forced formal `Cat` |
@@ -378,6 +378,10 @@ tests, proportional validation, and a local checkpoint.
 | `D-FPMAP-013` | accepted after audit | Relation preservation is oriented `R_Q o W = F o R_P`, and representative agreement is oriented `R_Q o H = F-G`, matching columnwise module-membership output without an equality-symmetry adapter. |
 | `D-FPMAP-014` | accepted after audit | `AlgebraPresentedPolynomialModule.relationBasis` retains transformations back to `relations.generators`, so membership coefficients assemble witnesses against the original ordered relation matrix rather than the reduced basis order. |
 | `D-FPMAP-015` | accepted after audit | Matrix add/neg/sub and transparent Sigma presentation packages suffice for the first formal equations; matrix identity and theorem-level category laws remain consumer-gated. |
+| `D-FPMAP-016` | accepted during computation | Relation-coefficient free modules use deterministic term-over-position parents; this auxiliary order does not replace the original ordered relation columns or the ambient module's term order. |
+| `D-FPMAP-017` | accepted during computation | A negative map still retains the candidate coefficient matrix assembled from division, but only all-zero remainders plus the independently rechecked whole matrix equation set `preservesRelations`. |
+| `D-FPMAP-018` | accepted during computation | Representative agreement subtracts maps columnwise, computes every target membership, assembles `H`, and independently checks `R_Q o H = F-G`; no quotient equality is produced. |
+| `D-FPMAP-019` | accepted during computation | The first chain-square computation is exact polynomial-map equality after both composites; it retains both sides and does not accept a square witness as input. |
 
 ## Initial Formal Result
 
@@ -401,6 +405,28 @@ and a chain square. A visible subtraction remains distinct from the zero
 matrix. Owner and reviewer pass bounded Lambdapi checking; warning-enabled
 checking finds no diagnostic located in the new module, and its strict LHS
 audit is empty because it declares no rule or unifier.
+
+## Initial Computational Result
+
+`src/v3_2/algebra_polynomial_presentation_morphism.ts` now owns the whole
+fixed-ring computations. For a candidate `F`, it applies `F` to every original
+source relation, reduces each image by the target Gröbner basis, retains every
+membership, and assembles the original-target-order coefficients as the
+columns of `W`. It then reconstructs and compares the whole maps
+`R_Q o W` and `F o R_P`; the Boolean preservation projection is secondary.
+
+Representative agreement subtracts `F-G` columnwise, retains every target
+membership and remainder, assembles `H`, and compares `R_Q o H` with the whole
+difference map. Both positive and negative results preserve coefficients,
+remainders, basis quotients through their memberships, and total reduction
+steps.
+
+The same file provides exact polynomial-map equality/subtraction and the
+chain-square capstone computation. Focused tests cover a nontrivial valid
+relation witness, failed relation preservation with nonzero remainder, valid
+and invalid representative agreement, a commuting and noncommuting chain
+square, and foreign map endpoints. The thirteen directly affected polynomial
+module/presentation tests, root typecheck, and affected lint pass.
 
 ## Validation Policy
 
