@@ -478,8 +478,8 @@ syntax.
 | `PCD-PLAN-0` | complete; checkpoint `f5c31d3` | reviewed continuation and completed computational/formal/proof endpoints | this living plan, isolated branch/worktree, exact baseline, architecture, staged rows, trust boundary, validation, and Git limits |
 | `PCD-AUDIT-1A` | complete; checkpoint `e5e0aea` | `PCD-PLAN-0` | exact proof-goal/declaration/adoption, algebra-operation, realization, Zariski-target, and serialization owner map; first positive/negative fixtures; no behavior change |
 | `PCD-CONTRACT-2A` | complete; checkpoint `2e21834` | `PCD-AUDIT-1A` | immutable adapter/request/interpretation/result/artifact contracts, canonical payload encoding, exact identity and quality validation, focused negatives |
-| `PCD-DELEGATE-3A` | complete; execution checkpoint pending | `PCD-CONTRACT-2A` | native exact execution bound to one named goal and realization, observation result, limits/cancellation/progress/diagnostics, no proof or workspace mutation; graph agreement remains consumer-level |
-| `PCD-ADOPT-4A` | pending | `PCD-DELEGATE-3A` | explicit Core-data checking, optional checked-plan route, explicit trusted opaque-declaration adoption, ordinary exact patch, stale/implicit/foreign rejection |
+| `PCD-DELEGATE-3A` | complete; checkpoint `dc0aff6` | `PCD-CONTRACT-2A` | native exact execution bound to one named goal and realization, observation result, limits/cancellation/progress/diagnostics, no proof or workspace mutation; graph agreement remains consumer-level |
+| `PCD-ADOPT-4A` | complete; adoption checkpoint pending | `PCD-DELEGATE-3A` | explicit Core-data checking, checked-plan route, explicit trusted opaque-declaration adoption, ordinary exact patch, stale/implicit/foreign rejection |
 | `PCD-ZARISKI-5A` | pending | `PCD-ADOPT-4A` | end-to-end unimodular-cover delegation, coefficient reification, exact formal law target, observed and trusted paths, existing cover construction, negative open-goal behavior |
 | `PCD-IDEAL-5B` | pending | `PCD-ADOPT-4A`, audit-approved interpretation | second ring-level ideal-membership/quotient-equality consumer or documented obstruction plus smallest sound replacement consumer |
 | `PCD-REPLAY-6A` | pending | both concrete consumers | canonical request/result/adoption serialization, exact freshness/invalidation, deterministic direct-TypeScript usability surface |
@@ -523,6 +523,46 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PCD-028` | accepted after `PCD-DELEGATE-3A` | Cancellation and progress callbacks are runtime-only hooks; the canonical request retains normalized static limits, while the whole result retains engine diagnostics and assumptions. |
 | `D-PCD-029` | accepted after `PCD-DELEGATE-3A` | V1 rejects every nonexact result before formal interpretation. Output and interpretation callbacks are repeated and request bytes are rechecked after execution. |
 | `D-PCD-030` | accepted after `PCD-DELEGATE-3A` | Generic execution is direct through the operation/engine owner; direct-versus-graph agreement belongs to each concrete operation consumer rather than a second generic execution semantics. |
+| `D-PCD-031` | accepted after `PCD-ADOPT-4A` | Reified interpretation data is independently typechecked in the original goal environment before either checked or trusted adoption. |
+| `D-PCD-032` | accepted after `PCD-ADOPT-4A` | Checked adoption applies an ordinary source hole patch and freshly replays it in the original environment; no computation result itself serves as proof. |
+| `D-PCD-033` | accepted after `PCD-ADOPT-4A` | Trusted adoption requires the literal explicit decision kind, nonempty evidence, exact quality, zero unacknowledged computation assumptions, and one exact claim interpretation. |
+| `D-PCD-034` | accepted after `PCD-ADOPT-4A` | The trusted declaration is body-free and opaque in a new immutable LF environment; completion status is `checked-relative-to-explicit-assumption`, never checked theorem. |
+| `D-PCD-035` | accepted after `PCD-ADOPT-4A` | Adoption revalidates request/result identities, canonical input/output bytes, and a freshly repeated adapter interpretation before changing proof source or declarations. |
+
+## `PCD-ADOPT-4A` Result
+
+Explicit adoption is implemented in
+`src/v3_2/algebra_formal_adoption.ts`. It performs no algebra computation and
+adds no Core owner, proof-plan tag, runtime rule, I/O, or Lambdapi dependency.
+
+`checkAlgebraFormalComputationData` independently checks every named reified
+term and its type under the original proof-goal declaration environment.
+`adoptAlgebraFormalCheckedPlan` requires an exact claim, applies an ordinary
+`CoreProofPlanPatch`, and freshly replays the supplied replacement in the
+unchanged environment. Its authority is an ordinary checked proof plan.
+
+`adoptAlgebraFormalTrustedComputation` is deliberately separate. It requires
+the literal `trust-exact-algebra-computation` decision plus explicit evidence,
+an exact assumption-free result, and an exact claim. It adds one checked-type,
+body-free opaque declaration to a new immutable LF environment, replaces the
+source hole with an ordinary exact reference, and freshly checks the completed
+plan relative to that assumption. The source environment and plan remain
+unchanged.
+
+The trusted artifact records the exact source goal, assumption name/type,
+request/result bytes, decision evidence, checked resulting term, and authority
+`checked-relative-to-explicit-assumption`. Adoption revalidates result/profile,
+operation/engine/algorithm identity, payload bytes, and a freshly repeated
+adapter interpretation before proceeding. Observation-only, stale,
+nonexact, implicit-decision, assumption-laden, duplicate-name, ill-typed-data,
+and failing-plan paths fail closed.
+
+Six focused adoption tests cover checked data, a genuine checked replacement,
+trusted assumption completion, source immutability, canonical artifact output,
+and every central negative boundary. Together with contract/execution,
+algebra-engine/reference-engine, LF-definition, proof-plan, and proof-checker
+suites, 71 tests pass. Workspace check, root typecheck, affected-file lint,
+and diff hygiene pass. No aggregate or Lambdapi check was run.
 
 ## `PCD-DELEGATE-3A` Result
 

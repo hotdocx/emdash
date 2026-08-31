@@ -72,7 +72,13 @@ export type AlgebraFormalDelegationErrorCode =
     | 'EXECUTION_FAILED'
     | 'UNSUPPORTED_RESULT_QUALITY'
     | 'STALE_REQUEST'
-    | 'NONDETERMINISTIC_INTERPRETATION';
+    | 'NONDETERMINISTIC_INTERPRETATION'
+    | 'STALE_RESULT'
+    | 'NO_ADOPTABLE_CLAIM'
+    | 'UNACKNOWLEDGED_ASSUMPTIONS'
+    | 'INVALID_APPROVAL'
+    | 'ADOPTION_FAILED'
+    | 'CHECKED_PLAN_FAILED';
 
 export class AlgebraFormalDelegationError extends Error {
     constructor(

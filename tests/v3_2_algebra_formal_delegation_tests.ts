@@ -5,18 +5,24 @@ import { describe, it } from 'node:test';
 import {
     ALGEBRA_FORMAL_DELEGATION_PROFILE,
     ALGEBRA_FORMAL_DELEGATION_EXECUTION_PROFILE,
+    ALGEBRA_FORMAL_ADOPTION_PROFILE,
     AlgebraComputed,
     AlgebraFormalComputationGoal,
     AlgebraFormalComputationInterpretationInput,
     AlgebraFormalDelegationError,
+    AlgebraFormalTrustedAdoptionDecision,
     CoreLfDeclarationEnvironment,
     algebraAlgorithmIdentity,
     algebraReferenceExecutionResult,
+    adoptAlgebraFormalCheckedPlan,
+    adoptAlgebraFormalTrustedComputation,
     binderMode,
     coreProofPlanHole,
+    coreProofPlanExact,
     createAlgebraFormalComputationRequest,
     createAlgebraTypeScriptReferenceEngine,
     createCoreProofArtifactFingerprint,
+    checkAlgebraFormalComputationData,
     defineAlgebraFormalComputationAdapter,
     defineAlgebraFormalComputationGoal,
     defineAlgebraOperation,
@@ -29,7 +35,8 @@ import {
     normalizeAlgebraFormalComputationInterpretation,
     provenance,
     serializeAlgebraFormalComputationRequest,
-    serializeAlgebraFormalComputationResult
+    serializeAlgebraFormalComputationResult,
+    serializeAlgebraFormalTrustedAdoptionArtifact
 } from '../src/v3_2';
 
 const because = (detail: string) => provenance('surface', detail);
@@ -44,7 +51,7 @@ const delegationError = (
     return true;
 };
 
-const proofGoal = () => {
+const proofGoal = (withCheckedWitness = false) => {
     const declaration = because('formal computation proposition');
     const environment = CoreLfDeclarationEnvironment.empty().extend({
         name: 'ComputationClaim',
@@ -53,6 +60,14 @@ const proofGoal = () => {
         provenance: declaration
     });
     const target = kernelFree('ComputationClaim', because('goal target'));
+    const checkedEnvironment = withCheckedWitness
+        ? environment.extend({
+            name: 'checked_computation_witness',
+            type: target,
+            mode,
+            provenance: because('checked computation witness')
+        })
+        : environment;
     const fingerprint = createCoreProofArtifactFingerprint({
         source: {
             id: 'tests/fixtures/formal-computation.surface.ts',
@@ -63,7 +78,7 @@ const proofGoal = () => {
     const document = Object.freeze({
         moduleId: 'proof.cas.fixture',
         declarationId: 'delegated_claim',
-        environment,
+        environment: checkedEnvironment,
         type: target,
         plan: coreProofPlanHole('delegated-goal', {
             provenance: because('delegated root hole'),
@@ -76,7 +91,7 @@ const proofGoal = () => {
         fingerprint
     });
     return {
-        environment,
+        environment: checkedEnvironment,
         target,
         document,
         goal: defineAlgebraFormalComputationGoal({
@@ -87,7 +102,8 @@ const proofGoal = () => {
 };
 
 const operationFixture = (
-    quality: 'exact' | 'heuristic' = 'exact'
+    quality: 'exact' | 'heuristic' = 'exact',
+    withAssumption = false
 ) => {
     const numberSchema = defineAlgebraRuntimeSchema<number>({
         id: 'proof-cas.number',
@@ -125,7 +141,15 @@ const operationFixture = (
             });
             return algebraReferenceExecutionResult({
                 value: value + 1,
-                quality
+                quality,
+                ...(withAssumption
+                    ? {
+                        assumptions: [{
+                            id: 'fixture.assumption',
+                            detail: 'focused assumption-bearing result'
+                        }]
+                    }
+                    : {})
             });
         }
     });
@@ -156,9 +180,13 @@ const adapterFixture = (
             readonly computed: AlgebraComputed<number>;
         }) => AlgebraFormalComputationInterpretationInput;
     }> = {},
-    quality: 'exact' | 'heuristic' = 'exact'
+    quality: 'exact' | 'heuristic' = 'exact',
+    withAssumption = false
 ) => {
-    const { operation, algorithm, engine } = operationFixture(quality);
+    const { operation, algorithm, engine } = operationFixture(
+        quality,
+        withAssumption
+    );
     const normalizeRealization = changed.normalizeRealization ??
         ((value: unknown, path: string): NumberRealization => {
             if (
@@ -203,6 +231,25 @@ const realization = (): NumberRealization => Object.freeze({
     id: 'fixture-realization',
     value: 4
 });
+
+const exactResult = async (
+    fixture = proofGoal(),
+    changed: Parameters<typeof adapterFixture>[0] = {},
+    withAssumption = false
+) => {
+    const { adapter, engine } = adapterFixture(
+        changed,
+        'exact',
+        withAssumption
+    );
+    const request = createAlgebraFormalComputationRequest({
+        adapter,
+        goal: fixture.goal,
+        realization: realization(),
+        engine
+    });
+    return executeAlgebraFormalComputationRequest(request);
+};
 
 describe('PCD-CONTRACT-2A proof–CAS delegation contracts', () => {
     it('selects one exact closed root goal and serializes payload-bound input',
@@ -584,5 +631,195 @@ describe('PCD-DELEGATE-3A exact execution and observation', () => {
             Object.isFrozen(ALGEBRA_FORMAL_DELEGATION_EXECUTION_PROFILE),
             true
         );
+    });
+});
+
+describe('PCD-ADOPT-4A explicit checked and trusted adoption', () => {
+    it('checks reified data in the original declaration environment',
+        async () => {
+            const fixture = proofGoal(true);
+            const result = await exactResult(fixture, {
+                interpret: ({ goal }) => ({
+                    kind: 'claim',
+                    summary: 'claim with checked explicit data',
+                    claimType: goal.target,
+                    data: [{
+                        id: 'claim-classifier',
+                        type: goal.target,
+                        term: kernelFree(
+                            'checked_computation_witness',
+                            because('checked datum')
+                        )
+                    }]
+                })
+            });
+            const checked = checkAlgebraFormalComputationData(result);
+
+            assert.equal(checked.data.length, 1);
+            assert.equal(checked.data[0].id, 'claim-classifier');
+            assert.equal(Object.isFrozen(checked.data), true);
+        }
+    );
+
+    it('replays a genuine checked replacement in the original environment',
+        async () => {
+            const fixture = proofGoal(true);
+            const result = await exactResult(fixture);
+            const adopted = adoptAlgebraFormalCheckedPlan({
+                result,
+                replacement: coreProofPlanExact(kernelFree(
+                    'checked_computation_witness',
+                    because('checked replacement')
+                ))
+            });
+
+            assert.equal(adopted.kind, 'checked-plan');
+            assert.equal(adopted.authority, 'checked-proof-plan');
+            assert.equal(adopted.environment, fixture.environment);
+            assert.equal(adopted.execution.state.status, 'complete');
+            assert.equal(adopted.checkedTerm.tag, 'reference');
+            assert.equal(fixture.document.plan.tag, 'hole');
+        }
+    );
+
+    it('adopts one explicit trusted assumption and records its authority',
+        async () => {
+            const fixture = proofGoal();
+            const result = await exactResult(fixture);
+            const adopted = adoptAlgebraFormalTrustedComputation({
+                result,
+                assumptionName: 'trusted_computed_claim',
+                decision: {
+                    kind: 'trust-exact-algebra-computation',
+                    evidence: 'author selected the exact native computation'
+                }
+            });
+            const serialized =
+                serializeAlgebraFormalTrustedAdoptionArtifact(adopted.artifact);
+
+            assert.equal(adopted.kind, 'trusted-assumption');
+            assert.equal(
+                adopted.authority,
+                'checked-relative-to-explicit-assumption'
+            );
+            assert.equal(fixture.environment.lookup('trusted_computed_claim'),
+                undefined);
+            assert.equal(adopted.assumption.name, 'trusted_computed_claim');
+            assert.equal(adopted.assumption.body, undefined);
+            assert.equal(adopted.assumption.transparency, 'opaque');
+            assert.equal(adopted.execution.state.status, 'complete');
+            assert.equal(adopted.checkedTerm.tag, 'reference');
+            assert.match(serialized, /trusted-assumption/u);
+            assert.match(serialized,
+                /checked-relative-to-explicit-assumption/u);
+            assert.match(serialized, /trusted_computed_claim/u);
+            assert.equal(
+                serialized,
+                serializeAlgebraFormalTrustedAdoptionArtifact(adopted.artifact)
+            );
+            assert.equal(fixture.document.plan.tag, 'hole');
+        }
+    );
+
+    it('rejects observations, stale results, implicit trust, and assumptions',
+        async () => {
+            const fixture = proofGoal();
+            const negativeAdapter = adapterFixture();
+            const negativeRequest = createAlgebraFormalComputationRequest({
+                adapter: negativeAdapter.adapter,
+                goal: fixture.goal,
+                realization: Object.freeze({
+                    id: 'fixture-realization',
+                    value: -3
+                }),
+                engine: negativeAdapter.engine
+            });
+            const negative = await executeAlgebraFormalComputationRequest(
+                negativeRequest
+            );
+            assert.throws(
+                () => adoptAlgebraFormalTrustedComputation({
+                    result: negative,
+                    assumptionName: 'negative_claim',
+                    decision: {
+                        kind: 'trust-exact-algebra-computation',
+                        evidence: 'must remain unavailable'
+                    }
+                }),
+                delegationError('NO_ADOPTABLE_CLAIM')
+            );
+
+            const exact = await exactResult(fixture);
+            assert.throws(
+                () => adoptAlgebraFormalTrustedComputation({
+                    result: { ...exact, outputData: 'tampered\n' },
+                    assumptionName: 'stale_claim',
+                    decision: {
+                        kind: 'trust-exact-algebra-computation',
+                        evidence: 'must reject stale output'
+                    }
+                }),
+                delegationError('STALE_RESULT')
+            );
+            assert.throws(
+                () => adoptAlgebraFormalTrustedComputation({
+                    result: exact,
+                    assumptionName: 'implicit_claim',
+                    decision: {
+                        kind: 'wrong-kind'
+                    } as unknown as AlgebraFormalTrustedAdoptionDecision
+                }),
+                delegationError('INVALID_APPROVAL')
+            );
+
+            const assumed = await exactResult(fixture, {}, true);
+            assert.throws(
+                () => adoptAlgebraFormalTrustedComputation({
+                    result: assumed,
+                    assumptionName: 'assumption_laden_claim',
+                    decision: {
+                        kind: 'trust-exact-algebra-computation',
+                        evidence: 'must acknowledge assumptions later'
+                    }
+                }),
+                delegationError('UNACKNOWLEDGED_ASSUMPTIONS')
+            );
+        }
+    );
+
+    it('rejects ill-typed reified data before either adoption route',
+        async () => {
+            const fixture = proofGoal();
+            const result = await exactResult(fixture, {
+                interpret: ({ goal }) => ({
+                    kind: 'claim',
+                    summary: 'claim with invalid data',
+                    claimType: goal.target,
+                    data: [{
+                        id: 'bad-datum',
+                        type: goal.target,
+                        term: kernelUniverse(because('ill-typed datum'))
+                    }]
+                })
+            });
+            assert.throws(
+                () => checkAlgebraFormalComputationData(result),
+                delegationError('ADOPTION_FAILED')
+            );
+        }
+    );
+
+    it('keeps trusted completion explicitly assumption-relative', () => {
+        assert.equal(
+            ALGEBRA_FORMAL_ADOPTION_PROFILE.completionAuthority.trusted,
+            'checked-relative-to-explicit-assumption'
+        );
+        assert.equal(
+            ALGEBRA_FORMAL_ADOPTION_PROFILE.trustedDeclaration,
+            'checked-type-body-free-opaque'
+        );
+        assert.equal(ALGEBRA_FORMAL_ADOPTION_PROFILE.addsCoreOwner, false);
+        assert.equal(ALGEBRA_FORMAL_ADOPTION_PROFILE.addsProofPlanTag, false);
+        assert.equal(Object.isFrozen(ALGEBRA_FORMAL_ADOPTION_PROFILE), true);
     });
 });
