@@ -369,12 +369,12 @@ rechecking the repository for reassurance.
 
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
-| `ALC-PLAN-0` | complete; plan checkpoint pending | completed proof–CAS delegation at `ae85a4b` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, evidence classes, staged rows, validation, and Git limits |
-| `ALC-AUDIT-1A` | pending | `ALC-PLAN-0` | exact computational/formal owner map, inverse circularity, universal-property classification, binary/ternary face-unit feasibility, selected formal delta |
+| `ALC-PLAN-0` | complete; checkpoint `ce66fa8` | completed proof–CAS delegation at `ae85a4b` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, evidence classes, staged rows, validation, and Git limits |
+| `ALC-AUDIT-1A` | complete; audit checkpoint pending | `ALC-PLAN-0` | exact computational/formal owner map, inverse circularity, universal-property classification, binary/ternary face-unit feasibility, selected formal delta |
 | `ALC-SOURCE-2A` | pending | `ALC-AUDIT-1A` | exact-Core computed-assumption source/workspace, sequential adoption, per-claim classification, source spans, replay and emission |
 | `ALC-INVERSE-3A` | pending | `ALC-SOURCE-2A` | noncircular inverse target, selected localization adapter, computed-equation adoption, formal unit, direct/graph agreement and negatives |
 | `ALC-UNIVERSAL-3B` | pending | `ALC-INVERSE-3A` | explicitly trusted presentation-semantics adoption, whole property projection, reconstructed formal localization and chart |
-| `ALC-FINITE-PRODUCT-4A` | pending or audit-rejected | `ALC-AUDIT-1A` | smallest necessary finite product/deletion/unit formal mathematics, or durable proof that existing owners suffice |
+| `ALC-FINITE-PRODUCT-4A` | audit-rejected; no implementation | `ALC-AUDIT-1A` | existing binary unit transport/projection plus one computed face decomposition handles every arity uniformly; no new formal owner required |
 | `ALC-COVER-5A` | pending | preceding localization and face-unit rows | complete binary formal cover/localizations/overlap/Čech artifact with no manual face evidence |
 | `ALC-CECH-6A` | pending | `ALC-COVER-5A` | ternary two-skeleton through the same uniform architecture |
 | `ALC-CONFORMANCE-7A` | pending | all active rows | final portable artifacts, exact replay, graph agreement, source emission, focused live Lambdapi acceptance, proportional boundary audit |
@@ -401,6 +401,42 @@ synchronized decisions/results, and a local checkpoint.
 | `D-ALC-012` | accepted | Formal finite free modules/matrices/presentations are the recommended following goal, not silently included here. |
 | `D-ALC-013` | accepted | Local validated checkpoint commits are permitted on this dedicated branch; push, merge, publication, release, history rewriting, and cleanup are not. |
 | `D-ALC-014` | accepted | `main` was fast-forwarded only through the completed proof–CAS baseline; orthogonal path-cubical/strictness work remains excluded. |
+| `D-ALC-015` | accepted after `ALC-AUDIT-1A` | `affineFormalInverseLawType` is the only immediate target circularity; the whole localization-property target and universal-field projection are already noncircular. |
+| `D-ALC-016` | accepted after `ALC-AUDIT-1A` | For every face, adopt only the exact computed equation `map(d)·map(r)=map(c)`; transport the codomain product unit backward and apply `comm_ring_unit_mul_left` to derive the domain-product unit. |
+| `D-ALC-017` | accepted after `ALC-AUDIT-1A` | The binary factor-unit route treats the whole lower simplex product as one factor and therefore scales uniformly to ternary/higher simplices without a finite-product/deletion formal theory. |
+| `D-ALC-018` | accepted after `ALC-AUDIT-1A` | Canonical polynomial reification remains unchanged; the nondefinitional product decomposition is exposed as a computed equality rather than hidden by a second product representation. |
+| `D-ALC-019` | accepted after `ALC-AUDIT-1A` | No Lambdapi mathematical declaration or rule is selected by the audit. The formal delta is existing-owner Core construction plus an exact TypeScript signature-mirror extension. |
+
+## `ALC-AUDIT-1A` Result
+
+The exact owner and feasibility map is recorded in
+`docs/TYPESCRIPT_EMDASH_AFFINE_LOCALIZATION_CECH_DELEGATION_OWNER_AUDIT.md`.
+
+The audit confirms that the inverse-law target can be built directly from
+trusted realization fields, while the whole localization-property target is
+already noncircular. The native localization presentation establishes the
+inverse equation but not dependent contractibility of every factorization;
+the latter remains explicitly classified as trusted presentation semantics.
+
+Most importantly, the proposed finite-product Lambdapi layer is unnecessary.
+For a face with lower product `d`, removed generator `r`, and containing
+product `c`, quotient computation supplies one exact equation
+`map(d)·map(r)=map(c)`. The containing localization property gives
+`unit(map(c))`; existing backward unit transport and
+`comm_ring_unit_mul_left` derive `unit(map(d))`. The lower product is one
+binary factor regardless of simplex arity, so the same route handles binary
+and ternary covers without new finite-family mathematics.
+
+The only generic usability prerequisite is a source-spanned exact-Core
+computed-assumption workspace. The localization/overlap signature environment
+must extend the current Zariski mirrors with the exact existing ring-map,
+unit, localization, factor, chart, and packing owners used by the consumer.
+No Core owner, Lambdapi declaration, rewrite, or unification rule is selected.
+
+At baseline, workspace check and root typecheck pass. The 56-test affected
+localization/cover/Čech/formal-bridge/proof–CAS boundary passes 55 with the one
+ordinary live conformance probe intentionally skipped. No aggregate or
+Lambdapi source check was needed for the zero-formal-delta audit.
 
 ## Validation Policy
 
