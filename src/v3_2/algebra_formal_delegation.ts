@@ -68,7 +68,11 @@ export type AlgebraFormalDelegationErrorCode =
     | 'INVALID_ALGORITHM'
     | 'INVALID_INTERPRETATION'
     | 'CLAIM_TARGET_MISMATCH'
-    | 'INVALID_CORE_DATA';
+    | 'INVALID_CORE_DATA'
+    | 'EXECUTION_FAILED'
+    | 'UNSUPPORTED_RESULT_QUALITY'
+    | 'STALE_REQUEST'
+    | 'NONDETERMINISTIC_INTERPRETATION';
 
 export class AlgebraFormalDelegationError extends Error {
     constructor(
@@ -199,8 +203,20 @@ const deterministicEncoding = (
     path: string,
     label: string
 ): string => {
-    const first = encoding(encode(), path, label);
-    const second = encoding(encode(), path, label);
+    let first: string;
+    let second: string;
+    try {
+        first = encoding(encode(), path, label);
+        second = encoding(encode(), path, label);
+    } catch (error: unknown) {
+        if (error instanceof AlgebraFormalDelegationError) throw error;
+        return fail(
+            'INVALID_ENCODING',
+            path,
+            `${label} failed to produce canonical text`,
+            error
+        );
+    }
     if (first !== second) {
         return fail(
             'NONDETERMINISTIC_ENCODING',
@@ -518,6 +534,23 @@ export function normalizeAlgebraFormalComputationInterpretation(
     });
 }
 
+export const serializeAlgebraFormalComputationInterpretation = (
+    interpretation: AlgebraFormalComputationInterpretation
+): string => serializeCoreLfWorkspaceCanonicalJson({
+    serializationRevision:
+        ALGEBRA_FORMAL_DELEGATION_PROFILE.interpretationRevision,
+    kind: interpretation.kind,
+    summary: interpretation.summary,
+    claimTypeCore: interpretation.kind === 'claim'
+        ? interpretation.claimTypeCore
+        : null,
+    data: interpretation.data.map(datum => ({
+        id: datum.id,
+        typeCore: datum.typeCore,
+        termCore: datum.termCore
+    }))
+}, 'algebraFormalComputationInterpretation');
+
 export interface AlgebraFormalComputationAdapterInput<R, I, O> {
     readonly id: string;
     readonly revision: string;
@@ -612,6 +645,16 @@ export function defineAlgebraFormalComputationAdapter<R, I, O>(
         interpret: input.interpret
     });
 }
+
+/** Validate that one adapter produces stable canonical bytes for an output. */
+export const serializeAlgebraFormalComputationOutput = <R, I, O>(
+    adapter: AlgebraFormalComputationAdapter<R, I, O>,
+    output: O
+): string => deterministicEncoding(
+    () => adapter.serializeOutput(output),
+    'result.outputData',
+    'Operation-output serializer'
+);
 
 export interface AlgebraFormalComputationRequestInput<R, I, O> {
     readonly adapter: AlgebraFormalComputationAdapter<R, I, O>;

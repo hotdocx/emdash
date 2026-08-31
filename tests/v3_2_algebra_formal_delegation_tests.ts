@@ -1,12 +1,17 @@
-/** Focused PCD-CONTRACT-2A proof–CAS delegation contract tests. */
+/** Focused proof–CAS delegation contract and execution tests. */
 
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
     ALGEBRA_FORMAL_DELEGATION_PROFILE,
+    ALGEBRA_FORMAL_DELEGATION_EXECUTION_PROFILE,
+    AlgebraComputed,
+    AlgebraFormalComputationGoal,
+    AlgebraFormalComputationInterpretationInput,
     AlgebraFormalDelegationError,
     CoreLfDeclarationEnvironment,
     algebraAlgorithmIdentity,
+    algebraReferenceExecutionResult,
     binderMode,
     coreProofPlanHole,
     createAlgebraFormalComputationRequest,
@@ -17,12 +22,14 @@ import {
     defineAlgebraOperation,
     defineAlgebraReferenceImplementation,
     defineAlgebraRuntimeSchema,
+    executeAlgebraFormalComputationRequest,
     kernelBound,
     kernelFree,
     kernelUniverse,
     normalizeAlgebraFormalComputationInterpretation,
     provenance,
-    serializeAlgebraFormalComputationRequest
+    serializeAlgebraFormalComputationRequest,
+    serializeAlgebraFormalComputationResult
 } from '../src/v3_2';
 
 const because = (detail: string) => provenance('surface', detail);
@@ -79,7 +86,9 @@ const proofGoal = () => {
     };
 };
 
-const operationFixture = () => {
+const operationFixture = (
+    quality: 'exact' | 'heuristic' = 'exact'
+) => {
     const numberSchema = defineAlgebraRuntimeSchema<number>({
         id: 'proof-cas.number',
         revision: 'v1',
@@ -103,7 +112,22 @@ const operationFixture = () => {
     const implementation = defineAlgebraReferenceImplementation({
         operation,
         algorithm,
-        execute: value => value + 1
+        execute: (value, context) => {
+            if (context.cancellation?.requested()) {
+                throw new Error(
+                    context.cancellation.reason?.() ?? 'cancelled'
+                );
+            }
+            context.onProgress?.({
+                phase: 'successor',
+                completed: 1,
+                total: 1
+            });
+            return algebraReferenceExecutionResult({
+                value: value + 1,
+                quality
+            });
+        }
     });
     const engine = createAlgebraTypeScriptReferenceEngine({
         id: 'proof-cas.reference',
@@ -125,9 +149,16 @@ const adapterFixture = (
         acquire: (goal: ReturnType<typeof proofGoal>['goal'], value: NumberRealization) => unknown;
         serializeInput: (value: number) => string;
         serializeOutput: (value: number) => string;
-    }> = {}
+        interpret: (input: {
+            readonly goal: AlgebraFormalComputationGoal;
+            readonly realization: NumberRealization;
+            readonly operationInput: number;
+            readonly computed: AlgebraComputed<number>;
+        }) => AlgebraFormalComputationInterpretationInput;
+    }> = {},
+    quality: 'exact' | 'heuristic' = 'exact'
 ) => {
-    const { operation, algorithm, engine } = operationFixture();
+    const { operation, algorithm, engine } = operationFixture(quality);
     const normalizeRealization = changed.normalizeRealization ??
         ((value: unknown, path: string): NumberRealization => {
             if (
@@ -153,7 +184,8 @@ const adapterFixture = (
         acquire: changed.acquire ?? ((_goal, value) => value.value),
         serializeInput: changed.serializeInput ?? (value => `${value}\n`),
         serializeOutput: changed.serializeOutput ?? (value => `${value}\n`),
-        interpret: ({ goal, computed }) => computed.value > 0
+        interpret: changed.interpret ?? (({ goal, computed }) =>
+            computed.value > 0
             ? {
                 kind: 'claim',
                 summary: 'successor computation is positive',
@@ -162,7 +194,7 @@ const adapterFixture = (
             : {
                 kind: 'observation',
                 summary: 'successor computation is not positive'
-            }
+            })
     });
     return { adapter, algorithm, engine };
 };
@@ -392,5 +424,165 @@ describe('PCD-CONTRACT-2A proof–CAS delegation contracts', () => {
             'closed-depth-zero-root-hole'
         );
         assert.equal(Object.isFrozen(ALGEBRA_FORMAL_DELEGATION_PROFILE), true);
+    });
+});
+
+describe('PCD-DELEGATE-3A exact execution and observation', () => {
+    it('executes once, retains progress and whole exact interpretation',
+        async () => {
+            const { goal } = proofGoal();
+            const { adapter, algorithm, engine } = adapterFixture();
+            const request = createAlgebraFormalComputationRequest({
+                adapter,
+                goal,
+                realization: realization(),
+                engine,
+                algorithm,
+                limits: { fuel: 4 }
+            });
+            const progress: string[] = [];
+            const result = await executeAlgebraFormalComputationRequest(
+                request,
+                {
+                    onProgress: event => progress.push(event.phase)
+                }
+            );
+            const serialized = serializeAlgebraFormalComputationResult(result);
+
+            assert.equal(result.computed.value, 5);
+            assert.equal(result.computed.quality, 'exact');
+            assert.equal(result.outputData, '5\n');
+            assert.equal(result.interpretation.kind, 'claim');
+            assert.deepEqual(progress, [
+                'proof-cas.successor',
+                'successor',
+                'proof-cas.successor'
+            ]);
+            assert.match(serialized, /successor computation is positive/u);
+            assert.match(serialized, /operationInputData/u);
+            assert.equal(
+                serialized,
+                serializeAlgebraFormalComputationResult(result)
+            );
+            assert.equal(Object.isFrozen(result), true);
+        }
+    );
+
+    it('retains an exact negative observation without an adoptable claim',
+        async () => {
+            const { goal } = proofGoal();
+            const { adapter, engine } = adapterFixture();
+            const request = createAlgebraFormalComputationRequest({
+                adapter,
+                goal,
+                realization: Object.freeze({
+                    id: 'fixture-realization',
+                    value: -3
+                }),
+                engine
+            });
+            const result = await executeAlgebraFormalComputationRequest(request);
+
+            assert.equal(result.computed.value, -2);
+            assert.equal(result.interpretation.kind, 'observation');
+            assert.equal('claimType' in result.interpretation, false);
+        }
+    );
+
+    it('propagates runtime cancellation without changing proof source',
+        async () => {
+            const fixture = proofGoal();
+            const { adapter, engine } = adapterFixture();
+            const request = createAlgebraFormalComputationRequest({
+                adapter,
+                goal: fixture.goal,
+                realization: realization(),
+                engine
+            });
+
+            await assert.rejects(
+                executeAlgebraFormalComputationRequest(request, {
+                    cancellation: {
+                        requested: () => true,
+                        reason: () => 'focused cancellation'
+                    }
+                }),
+                delegationError('EXECUTION_FAILED')
+            );
+            assert.equal(fixture.document.plan.tag, 'hole');
+        }
+    );
+
+    it('rejects heuristic output and nondeterministic result surfaces',
+        async () => {
+            const { goal } = proofGoal();
+            const heuristic = adapterFixture({}, 'heuristic');
+            await assert.rejects(
+                executeAlgebraFormalComputationRequest(
+                    createAlgebraFormalComputationRequest({
+                        adapter: heuristic.adapter,
+                        goal,
+                        realization: realization(),
+                        engine: heuristic.engine
+                    })
+                ),
+                delegationError('UNSUPPORTED_RESULT_QUALITY')
+            );
+
+            let outputSerial = 0;
+            const output = adapterFixture({
+                serializeOutput: value => `${value}:${++outputSerial}\n`
+            });
+            await assert.rejects(
+                executeAlgebraFormalComputationRequest(
+                    createAlgebraFormalComputationRequest({
+                        adapter: output.adapter,
+                        goal,
+                        realization: realization(),
+                        engine: output.engine
+                    })
+                ),
+                delegationError('NONDETERMINISTIC_ENCODING')
+            );
+
+            let interpreted = 0;
+            const interpretation = adapterFixture({
+                interpret: ({ goal: selectedGoal }) => ({
+                    kind: 'claim',
+                    summary: `interpretation ${++interpreted}`,
+                    claimType: selectedGoal.target
+                })
+            });
+            await assert.rejects(
+                executeAlgebraFormalComputationRequest(
+                    createAlgebraFormalComputationRequest({
+                        adapter: interpretation.adapter,
+                        goal,
+                        realization: realization(),
+                        engine: interpretation.engine
+                    })
+                ),
+                delegationError('NONDETERMINISTIC_INTERPRETATION')
+            );
+        }
+    );
+
+    it('keeps execution outside proof plans, workspaces, and Core', () => {
+        assert.equal(
+            ALGEBRA_FORMAL_DELEGATION_EXECUTION_PROFILE.mutatesProofPlan,
+            false
+        );
+        assert.equal(
+            ALGEBRA_FORMAL_DELEGATION_EXECUTION_PROFILE.mutatesWorkspace,
+            false
+        );
+        assert.equal(
+            ALGEBRA_FORMAL_DELEGATION_EXECUTION_PROFILE.acceptedQuality,
+            'exact'
+        );
+        assert.equal(
+            Object.isFrozen(ALGEBRA_FORMAL_DELEGATION_EXECUTION_PROFILE),
+            true
+        );
     });
 });

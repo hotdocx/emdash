@@ -477,8 +477,8 @@ syntax.
 | --- | --- | --- | --- |
 | `PCD-PLAN-0` | complete; checkpoint `f5c31d3` | reviewed continuation and completed computational/formal/proof endpoints | this living plan, isolated branch/worktree, exact baseline, architecture, staged rows, trust boundary, validation, and Git limits |
 | `PCD-AUDIT-1A` | complete; checkpoint `e5e0aea` | `PCD-PLAN-0` | exact proof-goal/declaration/adoption, algebra-operation, realization, Zariski-target, and serialization owner map; first positive/negative fixtures; no behavior change |
-| `PCD-CONTRACT-2A` | complete; contract checkpoint pending | `PCD-AUDIT-1A` | immutable adapter/request/interpretation/result/artifact contracts, canonical payload encoding, exact identity and quality validation, focused negatives |
-| `PCD-DELEGATE-3A` | pending | `PCD-CONTRACT-2A` | native/graph exact execution bound to one named goal and realization, observation result, limits/cancellation/diagnostics, no proof or workspace mutation |
+| `PCD-CONTRACT-2A` | complete; checkpoint `2e21834` | `PCD-AUDIT-1A` | immutable adapter/request/interpretation/result/artifact contracts, canonical payload encoding, exact identity and quality validation, focused negatives |
+| `PCD-DELEGATE-3A` | complete; execution checkpoint pending | `PCD-CONTRACT-2A` | native exact execution bound to one named goal and realization, observation result, limits/cancellation/progress/diagnostics, no proof or workspace mutation; graph agreement remains consumer-level |
 | `PCD-ADOPT-4A` | pending | `PCD-DELEGATE-3A` | explicit Core-data checking, optional checked-plan route, explicit trusted opaque-declaration adoption, ordinary exact patch, stale/implicit/foreign rejection |
 | `PCD-ZARISKI-5A` | pending | `PCD-ADOPT-4A` | end-to-end unimodular-cover delegation, coefficient reification, exact formal law target, observed and trusted paths, existing cover construction, negative open-goal behavior |
 | `PCD-IDEAL-5B` | pending | `PCD-ADOPT-4A`, audit-approved interpretation | second ring-level ideal-membership/quotient-equality consumer or documented obstruction plus smallest sound replacement consumer |
@@ -519,6 +519,40 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PCD-024` | accepted after `PCD-CONTRACT-2A` | Adapter realization normalization, acquisition, and canonical serializers are each repeated; byte drift fails before computation. |
 | `D-PCD-025` | accepted after `PCD-CONTRACT-2A` | Request serialization includes canonical realization and operation-input payload bytes, exact goal fingerprint/target, schemas, engine, selected/default algorithm, and static limits. |
 | `D-PCD-026` | accepted after `PCD-CONTRACT-2A` | A claim interpretation must be the exact selected Core goal target; observations expose no claim, and all optional reified data is closed, meta-free, uniquely named explicit Core. |
+| `D-PCD-027` | accepted after `PCD-DELEGATE-3A` | Exact execution calls the existing `computeAlgebraOperation`; it neither adds graph-specific semantics nor mutates proof source or declarations. |
+| `D-PCD-028` | accepted after `PCD-DELEGATE-3A` | Cancellation and progress callbacks are runtime-only hooks; the canonical request retains normalized static limits, while the whole result retains engine diagnostics and assumptions. |
+| `D-PCD-029` | accepted after `PCD-DELEGATE-3A` | V1 rejects every nonexact result before formal interpretation. Output and interpretation callbacks are repeated and request bytes are rechecked after execution. |
+| `D-PCD-030` | accepted after `PCD-DELEGATE-3A` | Generic execution is direct through the operation/engine owner; direct-versus-graph agreement belongs to each concrete operation consumer rather than a second generic execution semantics. |
+
+## `PCD-DELEGATE-3A` Result
+
+Exact execution and observation are implemented in
+`src/v3_2/algebra_formal_delegation_execution.ts`. The executor accepts one
+already validated request, delegates unchanged to `computeAlgebraOperation`,
+passes its normalized static limits plus runtime-only cancellation/progress
+hooks, and retains the complete `AlgebraComputed` result.
+
+V1 admits only `quality = exact`. It calls the adapter's output serializer and
+formal interpreter repeatedly, rejects byte or interpretation drift, and
+re-serializes the complete request after execution to detect mutation. A
+positive exact result may expose an exact claim interpretation; a negative
+exact result remains an observation without an adoptable claim. Neither case
+changes a proof plan or declaration environment.
+
+The portable result serialization retains the complete request bytes,
+operation/engine/algorithm identities, quality, assumptions, diagnostics,
+reusable-artifact metadata, canonical output bytes, and canonical formal
+interpretation. Generic execution uses the direct operation/engine owner;
+concrete consumers may additionally prove byte-identical graph execution
+without creating graph-specific proof semantics.
+
+Five focused execution tests cover positive exact claims, negative
+observations, progress, cancellation, heuristic rejection, output/interpreter
+nondeterminism, stable serialization, and the no-mutation boundary. Together
+with the contract, algebra-engine/reference-engine, proof-plan, and
+proof-checker suites, 56 tests pass. Workspace check, root typecheck,
+affected-file lint, and diff hygiene pass. No aggregate or Lambdapi check was
+run.
 
 ## `PCD-CONTRACT-2A` Result
 
