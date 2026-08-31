@@ -7,7 +7,8 @@ Plan-ID: `TS-EMDASH-QUASICOHERENT-CECH-COCHAINS`
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed presented-module affine-descent baseline;
 `QCC-AUDIT-1A` and `QCC-COCHAIN-2A` are complete;
-`QCC-DIFFERENTIAL-3A` is the next dependency-ready row.
+`QCC-DIFFERENTIAL-3A` is complete and `QCC-SQUARE-4A` is the next
+dependency-ready row.
 
 Baseline: `a3e71ae7c4bf6035c1a716a3c102a55a417e40ca`
 
@@ -240,8 +241,8 @@ Direct construction and native graph execution must serialize identically.
 | `QCC-PLAN-0` | complete | completed presented-module affine descent and reviewed continuation | this living plan, isolated branch/worktree, baseline, representation, staged rows, validation, and Git limits |
 | `QCC-AUDIT-1A` | complete; orientation probe and 29-test baseline green | existing module-valued Čech diagram | exact owner map in `TYPESCRIPT_EMDASH_QUASICOHERENT_CECH_COCHAINS_OWNER_AUDIT.md`, binary differential convention, ternary sign pairs, degree-parent decision, and truncation boundary |
 | `QCC-COCHAIN-2A` | complete; proportional-green at `f023d7b` | `QCC-AUDIT-1A` | stable heterogeneous degree parents, aligned cochain elements, global-element construction, zero/addition/negation/subtraction/equality, positional/index lookup, schemas/serialization, and complete diagnostics |
-| `QCC-DIFFERENTIAL-3A` | pending; next selected row | `QCC-COCHAIN-2A` | whole alternating differential with retained target computations/contributions, correct binary orientation, and additivity consumers |
-| `QCC-SQUARE-4A` | pending | `QCC-DIFFERENTIAL-3A`, repeated-face comparisons | structural sign/map cancellation records and evaluated `d² = 0` for every available degree |
+| `QCC-DIFFERENTIAL-3A` | complete; proportional-green at `6b0889e` | `QCC-COCHAIN-2A` | whole alternating differential with exact endpoint lookup, retained ordered target/contribution data, binary orientation, global-section cancellation, additive/zero/negation comparisons, serialization, and truncation failure |
+| `QCC-SQUARE-4A` | pending; next selected row | `QCC-DIFFERENTIAL-3A`, repeated-face comparisons | structural sign/map cancellation records and evaluated `d² = 0` for every available degree |
 | `QCC-GRAPH-5A` | pending | `QCC-SQUARE-4A` | exact native differential/square operations, fixed-degree schemas, reference-engine and graph execution |
 | `QCC-CONFORMANCE-6A` | pending | all preceding rows | three concrete examples, deterministic direct/graph artifacts, final proportional validation, completion audit, and clean checkpoint |
 
@@ -269,6 +270,34 @@ synchronized decisions/results, and a local checkpoint.
 | `D-QCC-014` | accepted | A cochain contains one canonical presented-module element per exact ordered simplex; component schemas are selected positionally from the degree owner. |
 | `D-QCC-015` | accepted | Global-element cochains are derived by applying every simplex's retained ambient base-change unit to one element of the presentation module. |
 | `D-QCC-016` | accepted | Heterogeneous cochains expose only additive operations and equality; no cross-component scalar action or common module parent is introduced. |
+| `D-QCC-017` | accepted | Differential target faces are filtered by exact codomain simplex identity and required to remain in removed-position order; source components are located separately by domain indices. |
+| `D-QCC-018` | accepted | Odd face images are negated in their target module before the ordered sum. The whole result retains unsigned and signed images rather than only the output tuple. |
+| `D-QCC-019` | accepted | Zero, negation, and binary additivity are computed comparisons over canonical cochains. The bounded top degree raises `NO_SUCCESSOR_DEGREE` rather than receiving a fabricated zero differential. |
+
+## `QCC-DIFFERENTIAL-3A` Result
+
+Whole alternating Čech differentials are implemented in
+`src/v3_2/algebra_quasicoherent_differential.ts`. For every retained target
+simplex, the implementation selects its exact stored incoming faces, verifies
+removed-position ordering, finds source cochain components by the face-domain
+indices, applies each semilinear restriction, negates odd contributions, and
+sums inside the target localized module.
+
+The whole value retains source/target degree parents, input/output cochains,
+one computation per target simplex, and every face, source position/element,
+unsigned image, sign, signed image, and target sum. Separate computations
+check additivity, zero preservation, and compatibility with negation.
+
+Five focused tests freeze the binary `res(a₁)−res(a₀)` orientation and source
+positions, show that a diagonal/global cochain has zero differential while an
+asymmetric cochain does not, check ternary additivity/zero/negation and all
+target contribution signs, verify deterministic serialization, and reject a
+differential past the retained top degree. Together with cochain, varying-ring
+Čech, and semilinear-map suites, 22 tests pass, followed by workspace check,
+root typecheck, affected lint, and diff hygiene. No repository-wide aggregate
+or Lambdapi check was run.
+
+Semantic checkpoint: `6b0889e` (`cochains: add alternating Cech differential`).
 
 ## `QCC-COCHAIN-2A` Result
 
