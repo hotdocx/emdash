@@ -347,12 +347,12 @@ overclaim.
 | `FPMAP-AUDIT-1A` | complete; checkpoint `6c4ea6b` | plan | exact formal/CAS orientation, missing owners, matrix-law burden, selected fixed-ring model, category boundary |
 | `FPMAP-MATRIX-2A` | complete; checkpoint `d5bae5d` | audit | transparent matrix add/neg/sub and narrowly required identity/law support, positive/noncollapse consumers |
 | `FPMAP-FORMAL-3A` | complete; checkpoint `d5bae5d` | matrix | formal presentation, relation-preserving morphism, representative agreement, and chain-square classifiers without quotient overclaim |
-| `FPMAP-WITNESS-4A` | complete; computational checkpoint pending | formal | whole polynomial relation-witness computation with coefficients/remainders and positive/negative cases |
-| `FPMAP-CONGRUENCE-5A` | complete; computational checkpoint pending | witness | whole `F-G` target-relation membership and assembled `H`, including negative remainder |
-| `FPMAP-REIFY-6A` | pending | formal/computational owners | exact signatures, presentation/map/witness reification, dimension/parent/order diagnostics |
-| `FPMAP-DELEGATE-7A` | pending | reifier | exact-target adapters, positive/negative workflows, classified batch source, deterministic artifact |
-| `FPMAP-CATEGORY-8A` | pending | witness/congruence | identity/composition and representative categorical lowering/direct agreement; no forced formal `Cat` |
-| `FPMAP-CHAIN-9A` | pending | map equations | computed chain-map-square capstone using components rather than manually supplied coherence |
+| `FPMAP-WITNESS-4A` | complete; checkpoint `f90bb4d` | formal | whole polynomial relation-witness computation with coefficients/remainders and positive/negative cases |
+| `FPMAP-CONGRUENCE-5A` | complete; checkpoint `f90bb4d` | witness | whole `F-G` target-relation membership and assembled `H`, including negative remainder |
+| `FPMAP-REIFY-6A` | complete; bridge checkpoint pending | formal/computational owners | exact signatures, presentation/map/witness reification, dimension/parent/order diagnostics |
+| `FPMAP-DELEGATE-7A` | complete; bridge checkpoint pending | reifier | exact-target adapters, positive/negative workflows, classified batch source, deterministic artifact |
+| `FPMAP-CATEGORY-8A` | complete; bridge checkpoint pending | witness/congruence | identity/composition and representative categorical lowering/direct agreement; no forced formal `Cat` |
+| `FPMAP-CHAIN-9A` | complete; bridge checkpoint pending | map equations | computed chain-map-square capstone using components rather than manually supplied coherence |
 | `FPMAP-CONFORMANCE-10A` | pending | all active rows | registration, standing docs, affected checks/lint, live emitted-Core Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
@@ -383,6 +383,11 @@ tests, proportional validation, and a local checkpoint.
 | `D-FPMAP-018` | accepted during computation | Representative agreement subtracts maps columnwise, computes every target membership, assembles `H`, and independently checks `R_Q o H = F-G`; no quotient equality is produced. |
 | `D-FPMAP-019` | accepted during computation | The first chain-square computation is exact polynomial-map equality after both composites; it retains both sides and does not accept a square witness as input. |
 | `D-FPMAP-020` | accepted during operation exposure | Relation witnesses, representative agreement, and chain squares are three typed whole operations sharing one reference-engine bundle; their canonical serializers retain maps, memberships, witnesses, both equation sides, status, and reduction counts. |
+| `D-FPMAP-021` | accepted during reification | Explicit Core targets fix the CAS-selected matrices and ask only for their equality law; adopting a whole existential package would hide `F`, `W`, or `H` behind an opaque assumption. |
+| `D-FPMAP-022` | accepted during reification | The exact LF mirror unfolds matrix classifiers to nested `FiniteFamily` and adds only the new matrix-subtraction signature; composition and equality reuse the completed finite-module signature surface. |
+| `D-FPMAP-023` | accepted during delegation | All three adapters require current profiles, exact reconstructed Core targets, exact selected whole-output bytes, and a successful result projection; failed maps and squares remain unadoptable observations. |
+| `D-FPMAP-024` | accepted during batch usability | One batch adopts morphisms, agreements, then chain squares, with one independently classified assumption per equation and deterministic portable serialization. |
+| `D-FPMAP-025` | accepted during category compatibility | A fixed-ring public presented-module map is lifted to its polynomial generator matrix, recomputes `W`, reifies the same law, and retains direct/compiled map-action agreement; no formal `Cat` is asserted. |
 
 ## Initial Formal Result
 
@@ -435,6 +440,34 @@ focused graph lowers the relation-witness operation without projection or
 fusion, and its retained whole output serializes byte-for-byte identically to
 direct operation execution. The directly affected graph and presentation
 suites pass.
+
+## Reification, Delegation, And Category Result
+
+The formal reifier now emits the selected target relation matrix, candidate
+map, computed `W` or `H`, both equation sides, and exact equality classifier.
+Matrix classifiers use the transparent nested-`FiniteFamily` body; the exact
+signature extension adds only `comm_ring_matrix_sub`, while composition,
+equality, ring operations, Nat, and finite-family constructors reuse the
+completed finite-module bridge.
+
+Morphism, agreement, and chain-square adapters recompute their whole outputs
+through the native operations and compare canonical bytes with the selected
+realization. They also reconstruct the Core target and reject goal drift.
+Positive outputs become explicit `computed-equation` assumptions; a failed
+relation map retains its nonzero remainder and cannot be adopted.
+
+The batch usability owner accepts ordered collections of all three equations,
+adopts them in morphism/agreement/chain order, and returns a deterministic
+artifact containing the complete classified source, selected computation
+bytes, and Core claims.
+
+The category compatibility consumer starts from a validated fixed-ring public
+presented-module map, extracts its polynomial generator matrix, recomputes the
+ordered relation witness, and reifies the same equation. A nontrivial composed
+endomorphism then executes through the existing categorical compiler and
+agrees with direct map action. Fourteen focused bridge/category tests, root
+typecheck, and affected lint pass. A formal category of presentations remains
+deliberately unclaimed.
 
 ## Validation Policy
 
