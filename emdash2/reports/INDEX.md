@@ -1,9 +1,9 @@
 # EMDASH Reports Index
 
-Date: 2026-08-30
+Date: 2026-08-31
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_PRESENTED_MODULES_CAS_PLAN.md` is the
-active cross-layer plan for the formal finite-vector/column-matrix
+completed cross-layer plan for the formal finite-vector/column-matrix
 presentation spine and its proof--CAS consumers. It adds the rule-free
 `emdash3_2_commutative_algebra_finite_modules.lp` owner, exact TypeScript LF
 signature mirrors and reifiers, positive/negative module-membership

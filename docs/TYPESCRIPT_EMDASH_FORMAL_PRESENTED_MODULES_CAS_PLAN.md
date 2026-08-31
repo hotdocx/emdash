@@ -4,8 +4,8 @@ Date: 2026-08-31
 
 Plan-ID: `TS-EMDASH-FORMAL-PRESENTED-MODULES-CAS`
 
-Status: implementation complete on a dedicated branch/worktree; final
-conformance/documentation checkpoint and ledger hash synchronization pending.
+Status: completed on a dedicated branch/worktree; implementation and
+conformance checkpoint `7bb24b9`.
 
 Baseline: `e665301bf40a68f136833ba2b7e9416ace55c79e`
 
@@ -284,7 +284,7 @@ claim remains later work.
 | `FPM-SYZYGY-7A` | complete; checkpoint `a8a114b` | membership | Schreyer syzygy equations and classified finite adoption source |
 | `FPM-RESOLUTION-8A` | complete; checkpoint `a8a114b` | syzygy | bounded resolution matrix terms and all adjacent-zero equations |
 | `FPM-CATEGORY-9A` | complete; checkpoint `a8a114b` | matrix/presentation | representative concrete-category/reinterpretation/compiler lowering with direct structural agreement |
-| `FPM-CONFORMANCE-10A` | complete; final checkpoint pending | all active rows | portable artifacts, focused formal checks, live Lambdapi acceptance, proportional final audit |
+| `FPM-CONFORMANCE-10A` | complete; checkpoint `7bb24b9` | all active rows | portable artifacts, focused formal checks, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and an
 updated plan. Every completed row requires focused positive/negative tests,
