@@ -5,8 +5,8 @@ Date: 2026-08-31
 Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 
 Status: living architecture and implementation ledger; dedicated branch and
-worktree created from the completed affine-formal baseline;
-`PAM-AUDIT-1A` is the next dependency-ready row.
+worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
+is complete and `PAM-MODULE-2A` is the next dependency-ready row.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
 
@@ -278,8 +278,8 @@ Conformance examples are:
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `PAM-PLAN-0` | complete | completed focused CAS, affine geometry, affine formal bridge, and reviewed continuation | this living plan, dedicated branch/worktree, exact baseline, architecture, staged rows, proportional validation, and Git limits |
-| `PAM-AUDIT-1A` | pending; next selected row | current polynomial-module and affine owners | exact owner/consumer map, accepted or revised quotient-module representation, parent/equality decision, first localization prototype, and focused baseline evidence |
-| `PAM-MODULE-2A` | pending | `PAM-AUDIT-1A` | parent-aware free/presented modules over presented algebras, canonical elements and whole normal forms, arithmetic, schemas, serialization, zero detection, and negative diagnostics |
+| `PAM-AUDIT-1A` | complete; prototype and 27-test baseline green | current polynomial-module and affine owners | exact owner map in `TYPESCRIPT_EMDASH_PRESENTED_ALGEBRA_MODULES_OWNER_AUDIT.md`; `R^r/(IR^r+N)` accepted; reduced module-basis prerequisite, parent/equality decision, and localization prototype recorded |
+| `PAM-MODULE-2A` | pending; next selected row | `PAM-AUDIT-1A` | transformation-preserving reduced module Gröbner basis followed by parent-aware free/presented modules over presented algebras, canonical elements and whole normal forms, arithmetic, schemas, serialization, zero detection, and negative diagnostics |
 | `PAM-SEMILINEAR-3A` | pending | `PAM-MODULE-2A`, presented-algebra maps | relation-checked semilinear maps, ordinary linear specialization, identity/composition/application/equality, and retained relation checks |
 | `PAM-BASECHANGE-4A` | pending | `PAM-SEMILINEAR-3A` | whole module base change on objects and maps, canonical semilinear unit, identity/composition comparisons, schemas, and diagnostics |
 | `PAM-LOCALIZATION-5A` | pending | `PAM-BASECHANGE-4A`, principal localizations | module localization as base change, whole chart data, zero/nonzero examples, and localization edge cases |
@@ -307,6 +307,28 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-008` | accepted | No formal module bridge, Lambdapi source change, or new Core owner is selected before a concrete module-valued formal consumer exists. |
 | `D-PAM-009` | accepted | Local validated checkpoint commits are permitted on this dedicated goal branch; push, merge, publication, release, history rewriting, and cleanup are not. |
 | `D-PAM-010` | accepted | The orthogonal path-cubical/strictness migration history remains excluded from this branch and from the current `main` fast-forward. |
+| `D-PAM-011` | accepted | `I R^r` is generated from the quotient owner's canonical reduced scalar basis, not the original ideal generator order. |
+| `D-PAM-012` | accepted | User module relations are acquired as `A`-valued component arrays and lifted from canonical quotient representatives. Algebra-action and user relations remain separately inspectable before combination. |
+| `D-PAM-013` | accepted | The existing module Buchberger result is complete but not reduced; a transformation-preserving reduced postpass is required before it may own stable presented-module identity or canonical representatives. |
+| `D-PAM-014` | accepted | The module order is explicit identity data with existing `term-over-position` as default; POT and TOP module parents remain distinct. |
+| `D-PAM-015` | accepted | A presented module is computationally zero exactly when all ordered free basis vectors reduce to zero under the selected reduced relation owner. |
+
+## `PAM-AUDIT-1A` Result
+
+The complete owner/representation audit is recorded in
+`docs/TYPESCRIPT_EMDASH_PRESENTED_ALGEBRA_MODULES_OWNER_AUDIT.md`. It accepts
+the candidate `R^r/(IR^r+N_lift)` representation and verifies both the
+nilpotent quotient and localization behavior using existing owners.
+
+The audit also rejects direct parent fingerprinting by the current module
+Gröbner result. Equivalent relation generators retain different redundant
+bases, so the first implementation subtranche must add a reduced module basis
+with reconstructed transformation rows. The resulting canonical basis will
+own parent identity and element normal forms.
+
+The unchanged polynomial-module, polynomial-presentation, presented-algebra,
+localization, and affine-Čech suites pass 27/27 after fresh worktree bootstrap.
+No source file or Lambdapi authority changed in the audit.
 
 ## Validation Policy
 
