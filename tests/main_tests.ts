@@ -318,6 +318,7 @@ import './v3_2_algebra_formal_artifact_tests';
 import './v3_2_algebra_formal_conformance_tests';
 import './v3_2_algebra_formal_delegation_tests';
 import './v3_2_algebra_formal_zariski_delegation_tests';
+import './v3_2_algebra_formal_ideal_delegation_tests';
 import './v3_2_lf_module_theorem_development_tests';
 import './v3_2_lf_module_theorem_authoring_tests';
 import './v3_2_lf_declaration_fragment_authoring_tests';

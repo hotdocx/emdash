@@ -143,6 +143,19 @@ export const affineFormalRingElementType = (
     value: formalRing
 }]));
 
+export const affineFormalRingEqualityType = (
+    formalRing: KernelExpression,
+    left: KernelExpression,
+    right: KernelExpression
+): KernelExpression => equalityType(
+    call('bridge_comm_ring_carrier', [{
+        plicity: 'explicit',
+        value: formalRing
+    }]),
+    left,
+    right
+);
+
 export const affineFormalIdentityMap = (
     formalRing: KernelExpression
 ): KernelExpression => call('bridge_comm_ring_hom_id', [{

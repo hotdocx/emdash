@@ -480,8 +480,8 @@ syntax.
 | `PCD-CONTRACT-2A` | complete; checkpoint `2e21834` | `PCD-AUDIT-1A` | immutable adapter/request/interpretation/result/artifact contracts, canonical payload encoding, exact identity and quality validation, focused negatives |
 | `PCD-DELEGATE-3A` | complete; checkpoint `dc0aff6` | `PCD-CONTRACT-2A` | native exact execution bound to one named goal and realization, observation result, limits/cancellation/progress/diagnostics, no proof or workspace mutation; graph agreement remains consumer-level |
 | `PCD-ADOPT-4A` | complete; checkpoint `a6356a3` | `PCD-DELEGATE-3A` | explicit Core-data checking, checked-plan route, explicit trusted opaque-declaration adoption, ordinary exact patch, stale/implicit/foreign rejection |
-| `PCD-ZARISKI-5A` | complete; Zariski checkpoint pending | `PCD-ADOPT-4A` | end-to-end unimodular-cover delegation, coefficient reification, exact formal law target, observed and trusted paths, existing cover construction, negative open-goal behavior |
-| `PCD-IDEAL-5B` | pending | `PCD-ADOPT-4A`, audit-approved interpretation | second ring-level ideal-membership/quotient-equality consumer or documented obstruction plus smallest sound replacement consumer |
+| `PCD-ZARISKI-5A` | complete; checkpoint `82a6c98` | `PCD-ADOPT-4A` | end-to-end unimodular-cover delegation, coefficient reification, exact formal law target, observed and trusted paths, existing cover construction, negative open-goal behavior |
+| `PCD-IDEAL-5B` | complete; ideal checkpoint pending | `PCD-ADOPT-4A`, audit-approved interpretation | second ring-level ideal-membership/quotient-equality consumer with explicit trusted-relation policy, positive/negative and graph agreement |
 | `PCD-REPLAY-6A` | pending | both concrete consumers | canonical request/result/adoption serialization, exact freshness/invalidation, deterministic direct-TypeScript usability surface |
 | `PCD-CONFORMANCE-7A` | pending | all preceding active rows | representative portable artifacts, direct/native-graph agreement where applicable, exact checked workspace behavior, focused live Lambdapi conformance only if emitted terms or owner bindings change |
 
@@ -533,6 +533,51 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PCD-038` | accepted after `PCD-ZARISKI-5A` | The adapter claims only the already-selected coefficient law. A negative remainder or a different valid coefficient vector remains an observation and cannot close that named goal. |
 | `D-PCD-039` | accepted after `PCD-ZARISKI-5A` | The first existing-cover reconstruction is restricted to zero relation generators. A relationful quotient needs explicit formal relation interpretation rather than silently dropping its Gröbner coefficients. |
 | `D-PCD-040` | accepted after `PCD-ZARISKI-5A` | The positive `x,1-x` computation agrees byte-for-byte with ordinary graph execution; the graph remains an execution facade over the same operation, not separate proof semantics. |
+| `D-PCD-041` | accepted after `PCD-IDEAL-5B` | The second consumer interprets `p-q ∈ I` as one exact selected formal equality between reified `p` and `q`; it does not construct a formal quotient ring. |
+| `D-PCD-042` | accepted after `PCD-IDEAL-5B` | Because the supplied formal ring is not automatically a model of the computational ideal, the realization records `trusted-selected-ideal-relations` in the canonical request. |
+| `D-PCD-043` | accepted after `PCD-IDEAL-5B` | Positive membership retains and checks the combination coefficient terms before explicit trusted equality adoption; nonmembership retains its canonical remainder and exposes no claim. |
+| `D-PCD-044` | accepted after `PCD-IDEAL-5B` | The membership adapter owns canonical input/output encodings because the generic ideal operation did not previously expose a whole membership serializer. |
+
+## `PCD-IDEAL-5B` Result
+
+The genericity consumer is implemented in
+`src/v3_2/algebra_formal_ideal_delegation.ts`. It uses the existing typed
+ideal-membership operation with a selected Gröbner basis and interprets
+
+```text
+p - q belongs to I
+```
+
+as the exact formal equality between the selected reifications of `p` and
+`q`. `affineFormalRingEqualityType` exposes that already-existing equality
+shape without adding a formal quotient owner.
+
+One realization retains the basis, left/right/difference polynomials, formal
+reifier, reified sides, reified ideal generators, exact equality target, and
+the explicit policy `trusted-selected-ideal-relations`. That policy is
+essential: the active formal polynomial algebra is universal-property-only,
+so an arbitrary supplied formal ring is not silently treated as a model of
+the computational ideal.
+
+The adapter owns canonical membership input/output encodings retaining the
+basis, target polynomial, membership Boolean, generator coefficients,
+remainder, basis quotients, and reduction count. Positive membership exposes
+the exact selected equality and checks all reified combination coefficients;
+negative membership retains its nonzero remainder and exposes only an
+observation.
+
+The positive fixture computes and explicitly adopts
+`x+1 = 1 mod (x)`. The trusted artifact's request bytes retain the ideal-
+relation policy. The negative fixture computes that `1 != 0 mod (x)`, retains
+remainder `1`, rejects adoption, and leaves its named proof source open.
+Direct and graph execution serialize the same whole positive membership
+result.
+
+Four focused consumer tests pass. Together with delegation/adoption, Zariski,
+ideal/Buchberger, formal reifier, and graph suites, the 55-test affected
+boundary passes 54 with the one unrelated live Zariski probe intentionally
+skipped. Workspace check, root typecheck, affected-file lint, and diff hygiene
+pass. No aggregate or additional Lambdapi check was run.
 
 ## `PCD-ZARISKI-5A` Result
 
