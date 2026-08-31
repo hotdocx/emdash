@@ -49,6 +49,7 @@ export * from './algebra_quasicoherent_cochain';
 export * from './algebra_quasicoherent_differential';
 export * from './algebra_quasicoherent_differential_square';
 export * from './algebra_quasicoherent_cochain_reference_operations';
+export * from './algebra_quasicoherent_cochain_artifact';
 export * from './algebra_presented_module_reference_operations';
 export * from './algebra_presented_module_tower';
 export * from './algebra_presented_module_singular';
