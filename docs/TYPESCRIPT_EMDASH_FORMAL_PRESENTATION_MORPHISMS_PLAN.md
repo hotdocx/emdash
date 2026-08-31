@@ -382,6 +382,7 @@ tests, proportional validation, and a local checkpoint.
 | `D-FPMAP-017` | accepted during computation | A negative map still retains the candidate coefficient matrix assembled from division, but only all-zero remainders plus the independently rechecked whole matrix equation set `preservesRelations`. |
 | `D-FPMAP-018` | accepted during computation | Representative agreement subtracts maps columnwise, computes every target membership, assembles `H`, and independently checks `R_Q o H = F-G`; no quotient equality is produced. |
 | `D-FPMAP-019` | accepted during computation | The first chain-square computation is exact polynomial-map equality after both composites; it retains both sides and does not accept a square witness as input. |
+| `D-FPMAP-020` | accepted during operation exposure | Relation witnesses, representative agreement, and chain squares are three typed whole operations sharing one reference-engine bundle; their canonical serializers retain maps, memberships, witnesses, both equation sides, status, and reduction counts. |
 
 ## Initial Formal Result
 
@@ -427,6 +428,13 @@ relation witness, failed relation preservation with nonzero remainder, valid
 and invalid representative agreement, a commuting and noncommuting chain
 square, and foreign map endpoints. The thirteen directly affected polynomial
 module/presentation tests, root typecheck, and affected lint pass.
+
+The native reference bundle exposes morphism, agreement, and chain-square
+operations with separate structural input/output schemas and algorithms. A
+focused graph lowers the relation-witness operation without projection or
+fusion, and its retained whole output serializes byte-for-byte identically to
+direct operation execution. The directly affected graph and presentation
+suites pass.
 
 ## Validation Policy
 
