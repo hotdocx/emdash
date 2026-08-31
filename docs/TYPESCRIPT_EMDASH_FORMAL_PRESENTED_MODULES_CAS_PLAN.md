@@ -281,11 +281,11 @@ claim remains later work.
 | `FPM-VECTOR-2A` | complete; checkpoint `877823b` | audit | formal vectors and transparent zero/add/neg/subtract/scale computation |
 | `FPM-MATRIX-3A` | complete; checkpoint `877823b` | vector | formal column matrices, action, zero, composition, typed positive/noncollapse consumers |
 | `FPM-PRESENTATION-4A` | complete; checkpoint `877823b` | matrix | presentation/agreement and syzygy/composite-zero classifiers without quotient overclaim |
-| `FPM-REIFY-5A` | complete; bridge tranche checkpoint pending | formal owners | exact signature mirrors, vector/matrix/presentation reification, dimension/parent/order diagnostics |
-| `FPM-MEMBERSHIP-6A` | complete; bridge tranche checkpoint pending | reifier | whole positive/negative module-membership delegation and formal selected equation |
-| `FPM-SYZYGY-7A` | complete; bridge tranche checkpoint pending | membership | Schreyer syzygy equations and classified finite adoption source |
-| `FPM-RESOLUTION-8A` | complete; bridge tranche checkpoint pending | syzygy | bounded resolution matrix terms and all adjacent-zero equations |
-| `FPM-CATEGORY-9A` | complete; bridge tranche checkpoint pending | matrix/presentation | representative concrete-category/reinterpretation/compiler lowering with direct structural agreement |
+| `FPM-REIFY-5A` | complete; checkpoint `a8a114b` | formal owners | exact signature mirrors, vector/matrix/presentation reification, dimension/parent/order diagnostics |
+| `FPM-MEMBERSHIP-6A` | complete; checkpoint `a8a114b` | reifier | whole positive/negative module-membership delegation and formal selected equation |
+| `FPM-SYZYGY-7A` | complete; checkpoint `a8a114b` | membership | Schreyer syzygy equations and classified finite adoption source |
+| `FPM-RESOLUTION-8A` | complete; checkpoint `a8a114b` | syzygy | bounded resolution matrix terms and all adjacent-zero equations |
+| `FPM-CATEGORY-9A` | complete; checkpoint `a8a114b` | matrix/presentation | representative concrete-category/reinterpretation/compiler lowering with direct structural agreement |
 | `FPM-CONFORMANCE-10A` | pending | all active rows | portable artifacts, focused formal checks, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and an
