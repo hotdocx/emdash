@@ -46,6 +46,7 @@ export * from './algebra_presented_module_localization';
 export * from './algebra_quasicoherent';
 export * from './algebra_quasicoherent_cech';
 export * from './algebra_presented_module_reference_operations';
+export * from './algebra_presented_module_tower';
 export * from './algebra_polynomial_module_reference_operations';
 export * from './algebra_ideal_geometry';
 export * from './algebra_constructible';

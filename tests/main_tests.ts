@@ -286,6 +286,7 @@ import './v3_2_algebra_presented_module_localization_tests';
 import './v3_2_algebra_quasicoherent_tests';
 import './v3_2_algebra_quasicoherent_cech_tests';
 import './v3_2_algebra_presented_module_reference_operations_tests';
+import './v3_2_algebra_presented_module_tower_tests';
 import './v3_2_algebra_polynomial_module_reference_operations_tests';
 import './v3_2_algebra_ideal_geometry_tests';
 import './v3_2_algebra_constructible_tests';
