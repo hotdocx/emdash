@@ -344,9 +344,9 @@ overclaim.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `FPMAP-PLAN-0` | in progress | completed finite-presentation bridge at `2c56d41` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, mathematics, validation, Git limits |
-| `FPMAP-AUDIT-1A` | complete; audit checkpoint pending | plan | exact formal/CAS orientation, missing owners, matrix-law burden, selected fixed-ring model, category boundary |
-| `FPMAP-MATRIX-2A` | pending | audit | transparent matrix add/neg/sub and narrowly required identity/law support, positive/noncollapse consumers |
-| `FPMAP-FORMAL-3A` | pending | matrix | formal presentation, relation-preserving morphism, representative agreement, and chain-square classifiers without quotient overclaim |
+| `FPMAP-AUDIT-1A` | complete; checkpoint `6c4ea6b` | plan | exact formal/CAS orientation, missing owners, matrix-law burden, selected fixed-ring model, category boundary |
+| `FPMAP-MATRIX-2A` | complete; formal checkpoint pending | audit | transparent matrix add/neg/sub and narrowly required identity/law support, positive/noncollapse consumers |
+| `FPMAP-FORMAL-3A` | complete; formal checkpoint pending | matrix | formal presentation, relation-preserving morphism, representative agreement, and chain-square classifiers without quotient overclaim |
 | `FPMAP-WITNESS-4A` | pending | formal | whole polynomial relation-witness computation with coefficients/remainders and positive/negative cases |
 | `FPMAP-CONGRUENCE-5A` | pending | witness | whole `F-G` target-relation membership and assembled `H`, including negative remainder |
 | `FPMAP-REIFY-6A` | pending | formal/computational owners | exact signatures, presentation/map/witness reification, dimension/parent/order diagnostics |
@@ -378,6 +378,29 @@ tests, proportional validation, and a local checkpoint.
 | `D-FPMAP-013` | accepted after audit | Relation preservation is oriented `R_Q o W = F o R_P`, and representative agreement is oriented `R_Q o H = F-G`, matching columnwise module-membership output without an equality-symmetry adapter. |
 | `D-FPMAP-014` | accepted after audit | `AlgebraPresentedPolynomialModule.relationBasis` retains transformations back to `relations.generators`, so membership coefficients assemble witnesses against the original ordered relation matrix rather than the reduced basis order. |
 | `D-FPMAP-015` | accepted after audit | Matrix add/neg/sub and transparent Sigma presentation packages suffice for the first formal equations; matrix identity and theorem-level category laws remain consumer-gated. |
+
+## Initial Formal Result
+
+The rule-free one-way module
+`emdash2/emdash3_2_commutative_algebra_presentations.lp` now implements the
+selected formal layer. Matrix addition recurses over the ordered columns,
+matrix negation maps vector negation over those columns, and subtraction is
+their transparent composite. No matrix identity was added because neither
+selected membership-oriented equation consumes it.
+
+`CommRingPresentation(R)` is the transparent nested Sigma of generator rank,
+relation rank, and relation matrix. Named projections expose those three
+fields. `CommRingPresentationMorphism(P,Q)` retains `F`, `W`, and the equation
+`R_Q o W = F o R_P`; `CommRingPresentationMorphismAgreement(P,Q,F,G)` retains
+`H` and `R_Q o H = F-G`. `CommRingChainMapSquare` records only the exact square
+computed from four selected matrices.
+
+The reviewer exposes visible one-column matrix addition/subtraction, all three
+presentation projections, and explicit constructors for morphisms, agreement,
+and a chain square. A visible subtraction remains distinct from the zero
+matrix. Owner and reviewer pass bounded Lambdapi checking; warning-enabled
+checking finds no diagnostic located in the new module, and its strict LHS
+audit is empty because it declares no rule or unifier.
 
 ## Validation Policy
 
