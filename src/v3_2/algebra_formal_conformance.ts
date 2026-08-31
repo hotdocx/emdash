@@ -19,7 +19,7 @@ import {
 } from './algebra_formal_reifier';
 import {
     AFFINE_FORMAL_COVER_BINDINGS,
-    buildAffineFormalCoverTerms
+    buildAffineFormalFamily
 } from './algebra_formal_cover';
 import {
     AFFINE_FORMAL_LOCALIZATION_BINDINGS,
@@ -70,6 +70,7 @@ const ALL_BINDINGS = Object.freeze({
 });
 
 export type AlgebraFormalConformanceErrorCode =
+    | 'COVER_ARITY_MISMATCH'
     | 'DUPLICATE_INPUT_DECLARATION'
     | 'MISSING_INPUT_DECLARATION'
     | 'EXTRA_INPUT_DECLARATION'
@@ -149,6 +150,48 @@ export const affineFormalIdentityMap = (
     value: formalRing
 }]);
 
+export interface AffineFormalUnimodularLawInput {
+    readonly formalRing: KernelExpression;
+    readonly generatorTerms: readonly KernelExpression[];
+    readonly coefficientTerms: readonly KernelExpression[];
+}
+
+/** Exact law target before any law witness or unimodular package exists. */
+export function affineFormalUnimodularLawType(
+    input: AffineFormalUnimodularLawInput
+): KernelExpression {
+    if (input.generatorTerms.length !== input.coefficientTerms.length) {
+        throw new AlgebraFormalConformanceError(
+            'COVER_ARITY_MISMATCH',
+            'unimodularLaw.coefficientTerms',
+            'Generator and coefficient family arities differ'
+        );
+    }
+    const carrier = call('bridge_comm_ring_carrier', [{
+        plicity: 'explicit',
+        value: input.formalRing
+    }]);
+    const generators = buildAffineFormalFamily(
+        carrier,
+        input.generatorTerms
+    );
+    const coefficients = buildAffineFormalFamily(
+        carrier,
+        input.coefficientTerms
+    );
+    const dot = call('bridge_comm_ring_finite_dot', [
+        { plicity: 'explicit', value: input.formalRing },
+        { plicity: 'explicit', value: generators.length },
+        { plicity: 'explicit', value: coefficients.family },
+        { plicity: 'explicit', value: generators.family }
+    ]);
+    const one = call('bridge_comm_ring_one', [{
+        plicity: 'explicit',
+        value: input.formalRing
+    }]);
+    return equalityType(carrier, dot, one);
+}
+
 export function affineFormalCoverLawType<
     P extends AlgebraParent,
     C extends AlgebraElement<P>,
@@ -156,20 +199,11 @@ export function affineFormalCoverLawType<
 >(
     realization: AffineFormalCoverRealization<P, C, I>
 ): KernelExpression {
-    const terms = buildAffineFormalCoverTerms(realization);
-    const ring = realization.algebra.formalRing;
-    const carrier = terms.carrier;
-    const dot = call('bridge_comm_ring_finite_dot', [
-        { plicity: 'explicit', value: ring },
-        { plicity: 'explicit', value: terms.length },
-        { plicity: 'explicit', value: terms.coefficients },
-        { plicity: 'explicit', value: terms.generators }
-    ]);
-    const one = call('bridge_comm_ring_one', [{
-        plicity: 'explicit',
-        value: ring
-    }]);
-    return equalityType(carrier, dot, one);
+    return affineFormalUnimodularLawType({
+        formalRing: realization.algebra.formalRing,
+        generatorTerms: realization.generatorTerms,
+        coefficientTerms: realization.coefficientTerms
+    });
 }
 
 export function affineFormalInverseLawType<

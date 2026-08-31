@@ -84,6 +84,8 @@ export * from './algebra_formal_conformance';
 export * from './algebra_formal_delegation';
 export * from './algebra_formal_delegation_execution';
 export * from './algebra_formal_adoption';
+export * from './algebra_formal_zariski_signatures';
+export * from './algebra_formal_zariski_delegation';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';

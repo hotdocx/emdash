@@ -479,8 +479,8 @@ syntax.
 | `PCD-AUDIT-1A` | complete; checkpoint `e5e0aea` | `PCD-PLAN-0` | exact proof-goal/declaration/adoption, algebra-operation, realization, Zariski-target, and serialization owner map; first positive/negative fixtures; no behavior change |
 | `PCD-CONTRACT-2A` | complete; checkpoint `2e21834` | `PCD-AUDIT-1A` | immutable adapter/request/interpretation/result/artifact contracts, canonical payload encoding, exact identity and quality validation, focused negatives |
 | `PCD-DELEGATE-3A` | complete; checkpoint `dc0aff6` | `PCD-CONTRACT-2A` | native exact execution bound to one named goal and realization, observation result, limits/cancellation/progress/diagnostics, no proof or workspace mutation; graph agreement remains consumer-level |
-| `PCD-ADOPT-4A` | complete; adoption checkpoint pending | `PCD-DELEGATE-3A` | explicit Core-data checking, checked-plan route, explicit trusted opaque-declaration adoption, ordinary exact patch, stale/implicit/foreign rejection |
-| `PCD-ZARISKI-5A` | pending | `PCD-ADOPT-4A` | end-to-end unimodular-cover delegation, coefficient reification, exact formal law target, observed and trusted paths, existing cover construction, negative open-goal behavior |
+| `PCD-ADOPT-4A` | complete; checkpoint `a6356a3` | `PCD-DELEGATE-3A` | explicit Core-data checking, checked-plan route, explicit trusted opaque-declaration adoption, ordinary exact patch, stale/implicit/foreign rejection |
+| `PCD-ZARISKI-5A` | complete; Zariski checkpoint pending | `PCD-ADOPT-4A` | end-to-end unimodular-cover delegation, coefficient reification, exact formal law target, observed and trusted paths, existing cover construction, negative open-goal behavior |
 | `PCD-IDEAL-5B` | pending | `PCD-ADOPT-4A`, audit-approved interpretation | second ring-level ideal-membership/quotient-equality consumer or documented obstruction plus smallest sound replacement consumer |
 | `PCD-REPLAY-6A` | pending | both concrete consumers | canonical request/result/adoption serialization, exact freshness/invalidation, deterministic direct-TypeScript usability surface |
 | `PCD-CONFORMANCE-7A` | pending | all preceding active rows | representative portable artifacts, direct/native-graph agreement where applicable, exact checked workspace behavior, focused live Lambdapi conformance only if emitted terms or owner bindings change |
@@ -528,6 +528,67 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PCD-033` | accepted after `PCD-ADOPT-4A` | Trusted adoption requires the literal explicit decision kind, nonempty evidence, exact quality, zero unacknowledged computation assumptions, and one exact claim interpretation. |
 | `D-PCD-034` | accepted after `PCD-ADOPT-4A` | The trusted declaration is body-free and opaque in a new immutable LF environment; completion status is `checked-relative-to-explicit-assumption`, never checked theorem. |
 | `D-PCD-035` | accepted after `PCD-ADOPT-4A` | Adoption revalidates request/result identities, canonical input/output bytes, and a freshly repeated adapter interpretation before changing proof source or declarations. |
+| `D-PCD-036` | accepted after `PCD-ZARISKI-5A` | The reusable law-type builder consumes only formal ring, generator, and coefficient terms; `affineFormalCoverLawType` no longer requires a law-bearing cover, while the cover-term builder remains strict. |
+| `D-PCD-037` | accepted after `PCD-ZARISKI-5A` | TypeScript checks the exact portable Zariski surface through twenty dependency-ordered opaque signature mirrors; the adopted cover term also passes the active Lambdapi owner in one focused live probe. |
+| `D-PCD-038` | accepted after `PCD-ZARISKI-5A` | The adapter claims only the already-selected coefficient law. A negative remainder or a different valid coefficient vector remains an observation and cannot close that named goal. |
+| `D-PCD-039` | accepted after `PCD-ZARISKI-5A` | The first existing-cover reconstruction is restricted to zero relation generators. A relationful quotient needs explicit formal relation interpretation rather than silently dropping its Gröbner coefficients. |
+| `D-PCD-040` | accepted after `PCD-ZARISKI-5A` | The positive `x,1-x` computation agrees byte-for-byte with ordinary graph execution; the graph remains an execution facade over the same operation, not separate proof semantics. |
+
+## `PCD-ZARISKI-5A` Result
+
+The first concrete proof–CAS consumer is implemented in
+`src/v3_2/algebra_formal_zariski_delegation.ts`, with its exact TypeScript LF
+signature surface in `algebra_formal_zariski_signatures.ts`.
+
+The law-target circularity is removed in
+`algebra_formal_conformance.ts`: `affineFormalUnimodularLawType` constructs the
+right-associated finite generator/coefficient families and exact dot-product
+equality without a law witness. `affineFormalCoverLawType` delegates to it.
+`buildAffineFormalCoverTerms` still refuses every no-law realization.
+
+The signature environment mirrors exactly twenty existing portable owners:
+decode/equality, commutative-ring carrier and operations, Nat and finite-family
+formation/constructors, finite dot product, and the unimodular/Zariski
+classifiers and intros. Every mirror is opaque declaration data; there is no
+new Core owner, definition, runtime rule, proof rule, or Lambdapi source
+change.
+
+One Zariski realization binds the polynomial ideal, formal polynomial
+reifier, selected coefficient vector, reified generator/coefficient terms,
+exact law target, and optional matching trusted formal cover. The adapter runs
+the existing whole unimodular operation. It exposes an exact claim only when
+the result is unimodular over the exact input ideal and returns the selected
+coefficient vector. A nonzero remainder or different coefficient vector is an
+observation without a claim.
+
+The binary `(x,1-x)` fixture now follows the complete route:
+
+```text
+named exact formal law goal
+  -> typed native unimodular request
+  -> exact selected coefficient result
+  -> checked reified coefficients
+  -> explicit trusted body-free law declaration
+  -> ordinary exact proof-plan completion
+  -> law-bearing existing formal cover realization
+  -> existing unimodular and Zariski-cover constructors.
+```
+
+The source goal and no-law realization remain unchanged. The singleton `(x)`
+fixture retains its nonzero remainder, exposes an observation, rejects trusted
+adoption, and leaves its named goal open. Direct and ordinary graph execution
+serialize the same whole positive result.
+
+Six ordinary focused tests cover the exact signature environment,
+noncircular law target, positive delegation/adoption/cover construction,
+graph agreement, negative no-close behavior, coefficient-target drift, and
+nonsemantic profiles. One opt-in live test emits the adopted cover from Core
+and passes bounded Lambdapi checking against
+`emdash3_2_commutative_algebra_finite.lp`; the live slice passes 7/7 in about
+three seconds of backend work. The 62-test affected TypeScript boundary passes
+60 with the two ordinary live probes intentionally skipped. Workspace check,
+root typecheck, affected-file lint, and diff hygiene pass. No repository
+aggregate was run.
 
 ## `PCD-ADOPT-4A` Result
 
