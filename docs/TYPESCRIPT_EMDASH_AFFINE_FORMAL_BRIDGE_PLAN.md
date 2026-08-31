@@ -7,7 +7,8 @@ Plan-ID: `TS-EMDASH-AFFINE-FORMAL-BRIDGE`
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `BRIDGE-AUDIT-1A`, `BRIDGE-CONTRACT-1B`, and
 `BRIDGE-REIFY-2A`, `BRIDGE-COVER-3A`, and `BRIDGE-LOCALIZATION-4A` are
-complete; `BRIDGE-OVERLAP-4B` is the next dependency-ready row.
+complete; `BRIDGE-OVERLAP-4B` is complete and `BRIDGE-CECH-5A` is the next
+dependency-ready row.
 
 Baseline: `5df79d356d003d3c1831ff1b93a2c593f299f75b`
 
@@ -246,8 +247,8 @@ Lambdapi text, and focused Lambdapi checking.
 | `BRIDGE-REIFY-2A` | complete; proportional-green at `56a880c` | `BRIDGE-CONTRACT-1B` | reviewed formal ring bindings, bounded deterministic polynomial evaluation, canonical quotient representative invariance, realization construction, cover integration, and negative diagnostics complete |
 | `BRIDGE-COVER-3A` | complete; proportional-green at `792f3c4` | `BRIDGE-REIFY-2A`, current formal unimodular owner | exact right-associated finite families and existing unimodular/Zariski-cover constructors, with deterministic portable Core and active-backend emission |
 | `BRIDGE-LOCALIZATION-4A` | complete; proportional-green at `8f2e502` | `BRIDGE-COVER-3A`, current formal localization owner | assumption-explicit unit, universal localization, basic-open chart, and ordered dependent cover-localization family construction |
-| `BRIDGE-OVERLAP-4B` | pending; next selected row | `BRIDGE-LOCALIZATION-4A`, current product-localization owners | retain product-localization simplices and realize supplied formal overlap localizations without deriving universal data from CAS equations |
-| `BRIDGE-CECH-5A` | pending | `BRIDGE-OVERLAP-4B`, current diagram/Cech owner | ordered simplex and signed restriction realization into existing formal diagram/cochain structures |
+| `BRIDGE-OVERLAP-4B` | complete; proportional-green at `0505b2a` | `BRIDGE-LOCALIZATION-4A`, current product-localization owners | ordered product-localization simplices and face restriction maps derived as universal localization factors from supplied target-unit evidence |
+| `BRIDGE-CECH-5A` | pending; next selected row | `BRIDGE-OVERLAP-4B`, current diagram/Cech owner | ordered simplex and signed restriction realization into existing formal diagram/cochain structures |
 | `BRIDGE-EMISSION-6A` | pending | representative bridge consumer | deterministic explicit-Core declarations/workspaces and Lambdapi emission without handwritten semantic templates |
 | `BRIDGE-CONFORMANCE-7A` | pending | all preceding active rows | two concrete cover examples, focused TypeScript tests, deterministic snapshots, bounded Lambdapi checks, warning comparison, and final boundary audit |
 
@@ -281,6 +282,37 @@ synchronized decisions/results, and a local checkpoint.
 | `D-BRIDGE-020` | accepted | The whole `CommRingLocalizationAt` term is built from the realized unit and a separately supplied universal-factorization term via the existing property and localization constructors. Unit-only realizations remain explicitly available. |
 | `D-BRIDGE-021` | accepted | A formal localization realization retains source ring, target ring, localized element, canonical map, inverse, image, law, and universal data. Formal cover packaging additionally requires exact retained chart identity, formal source identity, element realization, and order. |
 | `D-BRIDGE-022` | accepted | Trusted localization computation carries neither an inverse-law term nor universal data and cannot build formal unit, localization, or chart terms. No opaque property or equality bridge is introduced. |
+| `D-BRIDGE-023` | accepted | Every formal simplex reuses the generic localization contract and must own the exact retained computational product chart, source ring, and canonical reification of its product denominator. |
+| `D-BRIDGE-024` | accepted | A face supplies only formal evidence that the containing overlap target inverts the lower-dimensional denominator. The lower localization universal property selects the contractible factor; its whole map and agreement are projections, not handwritten inputs. |
+| `D-BRIDGE-025` | accepted | The overlap layer retains simplex indices, removed positions, face signs, computational restriction maps, formal localizations, factor spaces, selected factors, whole formal maps, and agreements, but introduces no formal Čech owner before a suitable diagram consumer is selected. |
+
+## `BRIDGE-OVERLAP-4B` Result
+
+Ordered product-localization simplex and face realization is implemented in
+`src/v3_2/algebra_formal_overlap.ts`. Every retained computational simplex is
+aligned with a whole formal localization at its canonically reified product.
+The collection preserves the computational simplex order and exact chart
+identity.
+
+For a face, the only additional supplied formal datum is unit evidence showing
+that the containing product-localization target inverts the lower-dimensional
+face denominator. The lower localization property then produces a
+contractible `CommRingLocalizationFactor`; `is_contr_center` selects its
+factor, and the existing factor projections expose the whole structured ring
+map and its pointwise agreement. Consequently neither a restriction map nor a
+commuting triangle is entered by hand. The computational restriction map,
+removed position, target indices, and sign remain attached to the derived
+formal factor.
+
+Five focused tests cover ordered simplex/product alignment, whole factor-map
+derivation, retained signs and computational maps, deterministic active-owner
+emission, exact face-evidence arity, foreign order/package failures, and
+trusted-localization rejection. Together with affected cover, localization,
+reifier, realization, and computational Čech suites, 37 tests pass, followed
+by workspace check, affected lint, root typecheck, and diff hygiene.
+`check:ts` was not run and no Lambdapi source changed.
+
+Semantic checkpoint: `0505b2a` (`bridge: realize formal overlap face factors`).
 
 ## `BRIDGE-LOCALIZATION-4A` Result
 
