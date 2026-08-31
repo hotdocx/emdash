@@ -41,6 +41,7 @@ export const ALGEBRA_POLYNOMIAL_MODULE_PROFILE = Object.freeze({
     termOrders: ['position-over-term', 'term-over-position'] as const,
     positionTieBreak: 'lower-index-first' as const,
     algorithm: 'deterministic-module-buchberger-reference' as const,
+    reducedBasis: 'minimal-interreduced-monic' as const,
     maximumRank: 100_000,
     maximumGenerators: 10_000,
     maximumBasisSize: 10_000,
@@ -697,6 +698,14 @@ export interface AlgebraPolynomialModuleGroebnerBasis<
     readonly reductionSteps: number;
 }
 
+export interface AlgebraReducedPolynomialModuleGroebnerBasis<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> extends AlgebraPolynomialModuleGroebnerBasis<P, C, I> {
+    readonly reduced: true;
+}
+
 export interface AlgebraPolynomialModuleGroebnerOptions {
     readonly maximumBasisSize?: number;
     readonly maximumPairs?: number;
@@ -1033,6 +1042,89 @@ export function algebraPolynomialModuleGroebnerBasis<
         )),
         pairsProcessed,
         reductionSteps
+    });
+}
+
+/**
+ * Remove redundant leading generators and interreduce a complete module
+ * Groebner basis while preserving rows in the original submodule generators.
+ */
+export function algebraReducedPolynomialModuleGroebnerBasis<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    source: AlgebraPolynomialModuleGroebnerBasis<P, C, I>,
+    maximumReductionSteps: number =
+        ALGEBRA_POLYNOMIAL_MODULE_PROFILE.maximumReductionStepsPerPair
+): AlgebraReducedPolynomialModuleGroebnerBasis<P, C, I> {
+    if (!Number.isSafeInteger(maximumReductionSteps) || maximumReductionSteps <= 0) {
+        return fail(
+            'MODULE_LIMIT_EXCEEDED',
+            'reducedModuleGroebner.maximumReductionSteps',
+            'Reduced module-basis step limit must be a positive safe integer'
+        );
+    }
+    const field = fieldDomain(source.submodule.module.ring);
+    const keep = source.basis.map((basis, index) => {
+        const leading = algebraPolynomialModuleLeadingTerm(basis)!;
+        return !source.basis.some((other, otherIndex) => {
+            if (index === otherIndex) return false;
+            const otherLeading = algebraPolynomialModuleLeadingTerm(other)!;
+            if (
+                otherLeading.position !== leading.position ||
+                !monomialDivides(otherLeading.monomial, leading.monomial)
+            ) return false;
+            const same = otherLeading.monomial.exponents.every(
+                (value, position) => value === leading.monomial.exponents[position]
+            );
+            return !same || otherIndex < index;
+        });
+    });
+    const minimalBasis = source.basis.filter((_, index) => keep[index]);
+    const minimalRows = source.transformations.filter((_, index) => keep[index]);
+    const reducedBasis: AlgebraPolynomialModuleVector<P, C, I>[] = [];
+    const reducedRows: AlgebraPolynomial<P, C, I>[][] = [];
+    let reductionSteps = source.reductionSteps;
+
+    minimalBasis.forEach((basis, index) => {
+        const otherBasis = minimalBasis.filter((_, other) => other !== index);
+        const otherRows = minimalRows.filter((_, other) => other !== index);
+        const division = algebraPolynomialModuleDivide(
+            basis,
+            otherBasis,
+            maximumReductionSteps
+        );
+        reductionSteps += division.steps;
+        if (algebraPolynomialModuleLeadingTerm(division.remainder) === undefined) {
+            return;
+        }
+        let row = [...minimalRows[index]];
+        division.quotients.forEach((quotient, otherIndex) => {
+            row = rowSubtract(row, rowScale(quotient, otherRows[otherIndex]));
+        });
+        const normalized = monicVectorAndRow(division.remainder, row, field);
+        reducedBasis.push(normalized.vector);
+        reducedRows.push(normalized.row);
+    });
+
+    const order = reducedBasis.map((_, index) => index).sort((left, right) =>
+        -compareAlgebraPolynomialModuleTerms(
+            source.submodule.module,
+            algebraPolynomialModuleLeadingTerm(reducedBasis[left])!,
+            algebraPolynomialModuleLeadingTerm(reducedBasis[right])!
+        )
+    );
+    return Object.freeze({
+        kind: 'algebra-polynomial-module-groebner-basis',
+        submodule: source.submodule,
+        basis: Object.freeze(order.map(index => reducedBasis[index])),
+        transformations: Object.freeze(order.map(index =>
+            Object.freeze(reducedRows[index])
+        )),
+        pairsProcessed: source.pairsProcessed,
+        reductionSteps,
+        reduced: true
     });
 }
 

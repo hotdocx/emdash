@@ -277,6 +277,7 @@ import './v3_2_algebra_generalized_tests';
 import './v3_2_algebra_resolution_tests';
 import './v3_2_algebra_homological_reference_operations_tests';
 import './v3_2_algebra_polynomial_module_tests';
+import './v3_2_algebra_reduced_polynomial_module_tests';
 import './v3_2_algebra_polynomial_presentation_tests';
 import './v3_2_algebra_polynomial_module_reference_operations_tests';
 import './v3_2_algebra_ideal_geometry_tests';
