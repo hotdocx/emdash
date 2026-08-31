@@ -6,7 +6,7 @@ Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
-through `PAM-BASECHANGE-4A` are complete; `PAM-LOCALIZATION-5A` is the next
+through `PAM-LOCALIZATION-5A` are complete; `PAM-QCOH-6A` is the next
 dependency-ready row.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
@@ -284,8 +284,8 @@ Conformance examples are:
 | `PAM-MODULE-2A2` | complete; proportional-green at `20c21f2` | `PAM-MODULE-2A1` | parent-aware free/presented modules over presented algebras, quotient-valued vectors, whole canonical normalization, elements/arithmetic/scalar action/equality, zero detection, schemas, serialization, and diagnostics |
 | `PAM-SEMILINEAR-3A` | complete; proportional-green at `dd51f40` | `PAM-MODULE-2A2`, presented-algebra maps | relation-checked semilinear maps over explicit algebra maps, ordinary linear specialization, identity/composition/application/equality/zero testing, schemas, serialization, and retained relation-family checks |
 | `PAM-BASECHANGE-4A` | complete; proportional-green at `61b6528` | `PAM-SEMILINEAR-3A` | whole object and linear-map base change, transported user relations, rebuilt target action, canonical semilinear unit, identity/composition/naturality comparisons, schemas, serialization, and diagnostics |
-| `PAM-LOCALIZATION-5A` | pending; next selected row | `PAM-BASECHANGE-4A`, principal localizations | module localization as base change, whole chart data, zero/nonzero examples, and localization edge cases |
-| `PAM-QCOH-6A` | pending | `PAM-LOCALIZATION-5A`, affine schemes | affine quasi-coherent presentation with derived basic-open and product-overlap module values; no general sheaf claim |
+| `PAM-LOCALIZATION-5A` | complete; proportional-green at `019e720` | `PAM-BASECHANGE-4A`, principal localizations | object and linear-map localization as base change along the existing whole principal localization, zero/nonzero support examples, schemas/serialization, canonical denominator and edge-case coverage |
+| `PAM-QCOH-6A` | pending; next selected row | `PAM-LOCALIZATION-5A`, affine schemes | affine quasi-coherent presentation with derived basic-open and product-overlap module values; no general sheaf claim |
 | `PAM-CECH-7A` | pending | `PAM-QCOH-6A`, finite affine covers | ordered varying-ring module Čech data, semilinear face restrictions, signs, repeated-face comparisons, and no cohomology overclaim |
 | `PAM-GRAPH-8A` | pending | representative consumers from preceding rows | exact native operations, computation graphs, selected CAP-style whole methods, and schema-preserving categorical lowering |
 | `PAM-ORACLE-9A` | pending; consumer-gated | stable native module consumer and installed Singular | optional deterministic module differential comparison with retained agreement/mismatch; never a native prerequisite |
@@ -326,6 +326,36 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-025` | accepted | Object base change transports only retained user relations; the target module constructor separately and canonically installs the target algebra-action relations. |
 | `D-PAM-026` | accepted | The canonical base-change unit sends each ordered source basis generator to the corresponding target basis generator and is validated as a semilinear map. |
 | `D-PAM-027` | accepted | Initial morphism base change is defined for ordinary linear maps over the source algebra. The two naturality composites are constructed and compared canonically; no caller-supplied square is accepted. |
+| `D-PAM-028` | accepted | Module localization is exactly base change along `AlgebraPrincipalLocalization.canonicalMap`; it retains the whole scalar localization and adds no module fraction syntax. |
+| `D-PAM-029` | accepted | Zero behavior, units, nilpotents, canonical-equal denominators, and inverse-name collisions flow through ordinary quotient, localization, reduced module basis, and basis-vector zero testing without special semantic branches. |
+| `D-PAM-030` | accepted | Linear-map localization reuses functorial morphism base change and retains its computed naturality comparison. |
+
+## `PAM-LOCALIZATION-5A` Result
+
+Principal localization of presented modules is implemented in
+`src/v3_2/algebra_presented_module_localization.ts`. The whole value retains
+the source module, canonical denominator, existing adjoined-inverse scalar
+localization, complete module base change, localized module, semilinear unit,
+and computed zero-module projection.
+
+Linear-map localization uses the same scalar localization and the existing
+functorial map-base-change owner, including both naturality composites. The
+layer adds no fraction representation and no special zero-ring/module branch.
+Runtime schemas reconstruct the whole localization, and deterministic
+serialization retains the scalar target/inverse equation, localized module
+identity, and zero status.
+
+Seven focused tests establish `A/(x)[1/x] = 0` and
+`A/(x)[1/(1−x)] != 0`, nilpotent localization through the ordinary zero
+algebra, canonical-equal denominator/module identities, inherited fresh
+inverse naming, linear-map localization/naturality, schemas/serialization,
+and foreign-denominator rejection. Together with scalar localization,
+base-change, semilinear-map, presented-module, reduced-basis, and quotient
+suites, 48 tests pass, followed by workspace check, root typecheck, affected
+lint, and diff hygiene. No repository-wide aggregate or Lambdapi check was
+run.
+
+Semantic checkpoint: `019e720` (`modules: localize presented modules`).
 
 ## `PAM-BASECHANGE-4A` Result
 
