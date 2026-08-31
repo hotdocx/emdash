@@ -30,6 +30,9 @@ import {
     AFFINE_FORMAL_CECH_BINDINGS,
     AffineFormalCechPresentation
 } from './algebra_formal_cech';
+import {
+    AFFINE_FORMAL_CECH_FACE_DERIVATION_BINDINGS
+} from './algebra_formal_cech_face_bindings';
 import { AlgebraElement, AlgebraParent } from './algebra_parent';
 
 export const ALGEBRA_FORMAL_ARTIFACT_PROFILE = Object.freeze({
@@ -61,6 +64,7 @@ const ALL_BINDINGS = Object.freeze({
     ...AFFINE_FORMAL_LOCALIZATION_BINDINGS,
     ...AFFINE_FORMAL_OVERLAP_BINDINGS,
     ...AFFINE_FORMAL_CECH_BINDINGS,
+    ...AFFINE_FORMAL_CECH_FACE_DERIVATION_BINDINGS,
     ...AFFINE_FORMAL_ARTIFACT_BINDINGS
 });
 

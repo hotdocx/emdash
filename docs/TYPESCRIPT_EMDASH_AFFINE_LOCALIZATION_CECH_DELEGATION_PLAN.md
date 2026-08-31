@@ -4,8 +4,8 @@ Date: 2026-08-31
 
 Plan-ID: `TS-EMDASH-AFFINE-LOCALIZATION-CECH-DELEGATION`
 
-Status: active living plan on a dedicated branch/worktree; architecture
-reviewed, exact owner audit and implementation pending.
+Status: implementation complete on the dedicated branch/worktree; every
+active row is proportional-green or audit-rejected with durable evidence.
 
 Baseline: `ae85a4bf02c0cea9fc68eda8f0b984172fd072e0`
 
@@ -372,12 +372,12 @@ rechecking the repository for reassurance.
 | `ALC-PLAN-0` | complete; checkpoint `ce66fa8` | completed proof–CAS delegation at `ae85a4b` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, evidence classes, staged rows, validation, and Git limits |
 | `ALC-AUDIT-1A` | complete; checkpoint `6110491` | `ALC-PLAN-0` | exact computational/formal owner map, inverse circularity, universal-property classification, binary/ternary face-unit feasibility, selected formal delta |
 | `ALC-SOURCE-2A` | complete; checkpoint `616f28e` | `ALC-AUDIT-1A` | exact-Core computed-assumption source/workspace, sequential adoption, per-claim classification, source spans, replay and emission |
-| `ALC-INVERSE-3A` | complete; localization checkpoint pending | `ALC-SOURCE-2A` | noncircular inverse target, selected localization adapter, computed-equation adoption, formal unit, direct/graph agreement and negatives |
-| `ALC-UNIVERSAL-3B` | complete; localization checkpoint pending | `ALC-INVERSE-3A` | explicitly trusted presentation-semantics adoption, whole property projection, reconstructed formal localization and chart |
+| `ALC-INVERSE-3A` | complete; checkpoint `b8a4f51` | `ALC-SOURCE-2A` | noncircular inverse target, selected localization adapter, computed-equation adoption, formal unit, direct/graph agreement and negatives |
+| `ALC-UNIVERSAL-3B` | complete; checkpoint `b8a4f51` | `ALC-INVERSE-3A` | explicitly trusted presentation-semantics adoption, whole property projection, reconstructed formal localization and chart |
 | `ALC-FINITE-PRODUCT-4A` | audit-rejected; no implementation | `ALC-AUDIT-1A` | existing binary unit transport/projection plus one computed face decomposition handles every arity uniformly; no new formal owner required |
-| `ALC-COVER-5A` | pending | preceding localization and face-unit rows | complete binary formal cover/localizations/overlap/Čech artifact with no manual face evidence |
-| `ALC-CECH-6A` | pending | `ALC-COVER-5A` | ternary two-skeleton through the same uniform architecture |
-| `ALC-CONFORMANCE-7A` | pending | all active rows | final portable artifacts, exact replay, graph agreement, source emission, focused live Lambdapi acceptance, proportional boundary audit |
+| `ALC-COVER-5A` | complete; whole-cover checkpoint pending | preceding localization and face-unit rows | complete binary formal cover/localizations/overlap/Čech artifact with no manual face evidence |
+| `ALC-CECH-6A` | complete; whole-cover checkpoint pending | `ALC-COVER-5A` | ternary two-skeleton through the same uniform architecture |
+| `ALC-CONFORMANCE-7A` | complete; whole-cover checkpoint pending | all active rows | final portable artifacts, exact replay, graph agreement, source emission, focused live Lambdapi acceptance, proportional boundary audit |
 
 Rows may be split into bounded lettered subtranches. A row completes only
 after implementation, positive and negative consumers, proportional checks,
@@ -414,6 +414,49 @@ synchronized decisions/results, and a local checkpoint.
 | `D-ALC-025` | accepted after `ALC-UNIVERSAL-3B` | The inverse and whole-property adapters share the same exact operation/result but expose distinct targets and classifications. |
 | `D-ALC-026` | accepted after `ALC-UNIVERSAL-3B` | An adopted whole localization property supplies its existing `sigma_Snd` universal field; together with the separately adopted inverse equation it reconstructs the unchanged explicit-data formal localization/chart. |
 | `D-ALC-027` | accepted after `ALC-UNIVERSAL-3B` | TypeScript mirrors only `CommRingHom`, map application, and the whole localization-property classifier for goal checking; final explicit-Core packages remain validated by their existing builders and focused backend conformance. |
+| `D-ALC-028` | accepted after `ALC-COVER-5A` | Each face delegates one quotient product equation and derives its unit through existing localization-unit, transport, and left-factor owners; no face-unit term is an input. |
+| `D-ALC-029` | accepted after `ALC-COVER-5A` | The binary consumer has 3 selected localizations, 2 derived faces, 9 classified assumptions, and the existing 17-output formal artifact. |
+| `D-ALC-030` | accepted after `ALC-CECH-6A` | The same pipeline scales to 7 ternary localizations and 9 faces, retaining 24 classified assumptions and the existing 47-output two-skeleton artifact. |
+| `D-ALC-031` | accepted after `ALC-CECH-6A` | Face-product direct and graph execution agree on the retained quotient result; no graph-specific formal interpretation exists. |
+| `D-ALC-032` | accepted after `ALC-CONFORMANCE-7A` | Complete binary and ternary artifacts pass focused live Lambdapi checking with derived unit/factor owners mapped to their active modules. |
+
+## `ALC-COVER-5A`, `ALC-CECH-6A`, And `ALC-CONFORMANCE-7A` Result
+
+Uniform face computation and formal unit derivation are implemented in
+`src/v3_2/algebra_formal_cech_face_delegation.ts`. The exact quotient
+operation retains domain product, removed element, containing product,
+computed multiplication, and equality Boolean. Its formal adapter targets
+the corresponding mapped ring equality. After adoption, existing
+`comm_ring_localization_inverted_unit`, backward unit transport, and
+`comm_ring_unit_mul_left` construct the face unit; the caller supplies no
+unit term.
+
+`src/v3_2/algebra_formal_cech_delegation.ts` owns the uniform whole-cover
+pipeline. In exact simplex order it adopts inverse equations and separately
+trusted localization properties, reconstructs all formal localizations and
+charts, delegates every face-product equation, derives every face unit, and
+then calls the unchanged overlap, packed Čech, and artifact owners.
+
+The binary `D(x),D(1-x)` result retains three localizations, two computed face
+equations, two formally derived face units/factors/maps/agreements, nine
+classified assumptions including its cover law, and the established
+17-output formal artifact. The ternary `D(x),D(y),D(1-x-y)` two-skeleton uses
+the same code path for seven localizations and nine faces, retains 24
+classified assumptions, and produces the established 47-output artifact.
+Exactly one property assumption per localization is classified as trusted
+presentation semantics; all cover/inverse/face equations are computed-
+equation assumptions.
+
+The new face derivation bindings are included in the existing artifact and
+conformance maps, without a Core or Lambdapi owner change. Direct and graph
+execution agree for a retained face equation.
+
+The final affected ordinary boundary passes 31/32 with only the opt-in live
+whole-artifact test skipped; workspace check, root typecheck, affected lint,
+and diff hygiene pass. The opt-in binary-plus-ternary Lambdapi run passes 5/5,
+with both complete artifacts accepted in about 22 seconds of backend work.
+The source-workspace live probe separately passes 4/4. No repository
+aggregate, broad kernel CI, book, print, package, or release gate was run.
 
 ## `ALC-INVERSE-3A` And `ALC-UNIVERSAL-3B` Result
 
@@ -570,6 +613,30 @@ are synchronized and checkpointed.
 Completion does not require formal module/complex/cohomology theory, CAS
 verification, a proof certificate, a parser, public package changes, a
 repository aggregate, integration into `main`, or publication.
+
+## Final Boundary Audit
+
+The goal now realizes complete binary and ternary computational affine covers
+as existing formal cover/localization/overlap/Čech structures. Callers provide
+formal ring/generator/map realizations and explicit per-claim trust decisions;
+they do not provide cover equations, inverse equations, localization
+universal fields, face units, face maps, or commuting triangles.
+
+The remaining opaque assumptions are fully classified and source-persistent:
+
+- cover, inverse, and face-product equalities are computed equations; and
+- one whole property per selected localization is trusted presentation
+  semantics.
+
+Face units and all overlap factors/maps/agreements are formal consequences.
+No new Lambdapi mathematical declaration or rule was needed; the proposed
+finite-product layer was rejected because the existing binary factor-unit
+theorem works uniformly after one computed decomposition equality.
+
+This completes the affine localization/Čech bridge without claiming formal
+Čech differentials, `d²`, descent, exactness, or cohomology. The next major
+formal-bridge goal is the consumer-driven finite free vector/matrix and
+presented-module spine described in the plan's initial recommendation.
 
 ## Persistent `/goal` Launch Prompt
 

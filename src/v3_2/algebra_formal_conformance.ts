@@ -32,6 +32,9 @@ import {
 } from './algebra_formal_overlap';
 import { AFFINE_FORMAL_CECH_BINDINGS } from './algebra_formal_cech';
 import {
+    AFFINE_FORMAL_CECH_FACE_DERIVATION_BINDINGS
+} from './algebra_formal_cech_face_bindings';
+import {
     AFFINE_FORMAL_ARTIFACT_BINDINGS,
     AffineFormalBridgeArtifact
 } from './algebra_formal_artifact';
@@ -65,6 +68,7 @@ const ALL_BINDINGS = Object.freeze({
     ...AFFINE_FORMAL_LOCALIZATION_BINDINGS,
     ...AFFINE_FORMAL_OVERLAP_BINDINGS,
     ...AFFINE_FORMAL_CECH_BINDINGS,
+    ...AFFINE_FORMAL_CECH_FACE_DERIVATION_BINDINGS,
     ...AFFINE_FORMAL_ARTIFACT_BINDINGS,
     ...AFFINE_FORMAL_CONFORMANCE_BINDINGS
 });
