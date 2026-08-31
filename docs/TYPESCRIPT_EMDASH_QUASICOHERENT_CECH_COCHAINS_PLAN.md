@@ -6,7 +6,8 @@ Plan-ID: `TS-EMDASH-QUASICOHERENT-CECH-COCHAINS`
 
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created from the completed presented-module affine-descent baseline;
-`QCC-AUDIT-1A` is the next dependency-ready row.
+`QCC-AUDIT-1A` is complete and `QCC-COCHAIN-2A` is the next dependency-ready
+row.
 
 Baseline: `a3e71ae7c4bf6035c1a716a3c102a55a417e40ca`
 
@@ -237,8 +238,8 @@ Direct construction and native graph execution must serialize identically.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `QCC-PLAN-0` | complete | completed presented-module affine descent and reviewed continuation | this living plan, isolated branch/worktree, baseline, representation, staged rows, validation, and Git limits |
-| `QCC-AUDIT-1A` | pending; next selected row | existing module-valued Čech diagram | exact face/sign/degree orientation, binary differential convention, ternary repeated-face sign pairing, owner map, and focused baseline evidence |
-| `QCC-COCHAIN-2A` | pending | `QCC-AUDIT-1A` | parent-aware heterogeneous degree/cochain values, additive operations, observation, schemas, serialization, and diagnostics |
+| `QCC-AUDIT-1A` | complete; orientation probe and 29-test baseline green | existing module-valued Čech diagram | exact owner map in `TYPESCRIPT_EMDASH_QUASICOHERENT_CECH_COCHAINS_OWNER_AUDIT.md`, binary differential convention, ternary sign pairs, degree-parent decision, and truncation boundary |
+| `QCC-COCHAIN-2A` | pending; next selected row | `QCC-AUDIT-1A` | parent-aware heterogeneous degree/cochain values, additive operations, observation, schemas, serialization, and diagnostics |
 | `QCC-DIFFERENTIAL-3A` | pending | `QCC-COCHAIN-2A` | whole alternating differential with retained target computations/contributions, correct binary orientation, and additivity consumers |
 | `QCC-SQUARE-4A` | pending | `QCC-DIFFERENTIAL-3A`, repeated-face comparisons | structural sign/map cancellation records and evaluated `d² = 0` for every available degree |
 | `QCC-GRAPH-5A` | pending | `QCC-SQUARE-4A` | exact native differential/square operations, fixed-degree schemas, reference-engine and graph execution |
@@ -262,6 +263,25 @@ synchronized decisions/results, and a local checkpoint.
 | `D-QCC-008` | accepted | Native TypeScript and ordinary computation graphs remain the implementation boundary; no formal bridge or external CAS is selected. |
 | `D-QCC-009` | accepted | Local validated checkpoint commits are permitted on this dedicated branch; push, merge, publication, release, history rewriting, and cleanup are not. |
 | `D-QCC-010` | accepted | The orthogonal path-cubical/strictness histories remain excluded from this branch and from the pre-goal `main` fast-forward. |
+| `D-QCC-011` | accepted | The binary stored orientation is `d(a₀,a₁)=res(a₁)−res(a₀)`; face-array position is not reused as the source cochain position. |
+| `D-QCC-012` | accepted | For `i<j`, the first stored repeated-face route has sign `(-1)^(i+j−1)` and the second `(-1)^(i+j)`, exactly matching all three ternary comparisons. |
+| `D-QCC-013` | accepted | A cochain-degree identity is the diagram presentation/cover shape, degree, ordered simplex indices, and localized module parent identities; it carries no common scalar parent. |
+
+## `QCC-AUDIT-1A` Result
+
+The complete owner/orientation audit is recorded in
+`docs/TYPESCRIPT_EMDASH_QUASICOHERENT_CECH_COCHAINS_OWNER_AUDIT.md`. It accepts
+the active degree and face ordering without an adapter and freezes the binary
+differential as `res(a₁)−res(a₀)`.
+
+The ternary audit locates both paths for every removed-position pair and
+measures total signs `(+,-)`, `(-,+)`, and `(+,-)`. These are the general
+`(-1)^(i+j−1)` and `(-1)^(i+j)` pair. The existing repeated-face owner already
+supplies canonical equality of the corresponding unsigned semilinear maps.
+
+The unchanged quasi-coherent Čech/chart, semilinear-map, presented-module, and
+descent-artifact suites pass 29/29 after worktree bootstrap. No source file or
+Lambdapi authority changed in the audit.
 
 ## Validation Policy
 
