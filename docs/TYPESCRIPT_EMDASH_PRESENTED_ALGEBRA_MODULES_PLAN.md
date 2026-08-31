@@ -4,10 +4,9 @@ Date: 2026-08-31
 
 Plan-ID: `TS-EMDASH-PRESENTED-ALGEBRA-MODULES`
 
-Status: living architecture and implementation ledger; dedicated branch and
-worktree created from the completed affine-formal baseline; `PAM-AUDIT-1A`
-through `PAM-GRAPH-8A2` and `PAM-ORACLE-9A` are complete;
-`PAM-CONFORMANCE-10A` is the next dependency-ready row.
+Status: implementation complete on the dedicated branch/worktree; every
+ledger row is proportional-green and checkpointed, including the installed
+Singular comparison and both end-to-end affine module artifacts.
 
 Baseline: `c5f134b50ff8c169ba5d2f6abd12d82c04c97740`
 
@@ -290,7 +289,7 @@ Conformance examples are:
 | `PAM-GRAPH-8A1` | complete; proportional-green at `b25e7a6` | representative consumers from preceding rows | context-aware native operations and graph execution for semilinear application, object base change, module localization, and quasi-coherent Čech construction |
 | `PAM-GRAPH-8A2` | complete; proportional-green at `4a1f237` | `PAM-GRAPH-8A1`, computable-category/compiler owners | strict semilinear total-category instance, four primitive whole methods, four-stage Category-only tower, direct reinterpretation, exact native lowerings, and executable categorical compilation |
 | `PAM-ORACLE-9A` | complete; proportional-green at `69bd4be`, installed-Singular gate green | stable native module-normalization consumer and installed Singular | shared native/oracle zero-decision operation, deterministic position-aware module script, bounded shell-free transport, retained agreement/mismatch, failure handling, and real zero/nonzero comparisons |
-| `PAM-CONFORMANCE-10A` | pending; next selected row | all nondeferred rows | both concrete covers, focused TypeScript evidence, deterministic artifacts, final boundary audit, and proportional completion checkpoint |
+| `PAM-CONFORMANCE-10A` | complete; proportional-green at `7dcaaba` | all nondeferred rows | deterministic binary/ternary descent artifacts, direct/native-graph agreement, invalid-artifact diagnostics, 142-test affected boundary, and final completion audit |
 
 Rows may be split into lettered subtranches. A row completes only after
 implementation, focused positive and negative tests, proportional validation,
@@ -345,6 +344,78 @@ synchronized decisions/results, and a local checkpoint.
 | `D-PAM-043` | accepted | The module oracle shares one exact zero-decision operation/schema with native TypeScript and compares reduction of the same lifted vector by the same combined relation submodule. |
 | `D-PAM-044` | accepted | Singular scripts encode module generators and vectors positionally, use `std` plus `reduce`, and handle rank zero by emitting the unique zero decision without an invalid empty vector. |
 | `D-PAM-045` | accepted | Oracle disagreement never overwrites the native result. The Node transport remains opt-in, shell-free, and independently bounded by timeout and output size. |
+| `D-PAM-046` | accepted | A descent artifact retains the whole quasi-coherent presentation, affine cover, varying-ring Čech diagram, support status of every simplex value, signed faces, and repeated-face comparisons; it is computational data with no proof claim. |
+| `D-PAM-047` | accepted | Direct construction and native graph execution must serialize to the same deterministic Čech artifact for both selected examples. |
+| `D-PAM-048` | accepted | The completed goal ends at varying-ring affine descent. A common-scalar Čech differential, `d² = 0`, cohomology, Tor/Ext, and a formal module bridge remain later consumer-backed goals. |
+
+## `PAM-CONFORMANCE-10A` Result
+
+Portable affine module-descent artifacts are implemented in
+`src/v3_2/algebra_presented_module_artifact.ts`. One artifact retains the
+quasi-coherent presentation, exact affine cover, complete varying-ring Čech
+diagram, degree counts, simplex support status, signed face maps, and
+repeated-face comparisons. Serialization is deterministic and explicitly
+labels no proof claim.
+
+The binary `A = Q[x]`, `M = A/(x)` artifact records three simplices, two
+faces, no repeated-face comparison, and two zero simplex modules over the
+cover `D(x),D(1−x)`. The ternary `A = Q[x,y]`, `M = A/(x,y)` artifact records
+degree counts `3,3,1`, nine faces, three repeated-face comparisons, and six
+zero simplex modules over `D(x),D(y),D(1−x−y)`.
+
+Five focused tests check both exact summaries, signs/comparisons,
+deterministic portable JSON, direct versus native-graph byte agreement for
+both covers, explicit no-proof status, and invalid artifact IDs.
+
+The final proportional boundary runs 142 tests across the eleven new module
+and descent suites plus their directly affected polynomial-module, quotient,
+algebra-map, localization, affine, graph/engine, category/compiler/tower, and
+oracle owners. It reports 141 passes, one intentional real-Singular skip, and
+zero failures. The separately enabled real Singular module gate passes all
+seven tests. Workspace check, root typecheck, all changed-file lint, and diff
+hygiene pass. `check:ts`, repository-wide aggregates, Lambdapi/kernel,
+browser, print, book, package, and release gates were not run.
+
+Semantic checkpoint: `7dcaaba` (`modules: add affine descent artifacts`).
+
+## Final Boundary Audit
+
+The completion boundary is satisfied:
+
+- modules over `A = R/I` use the existing position-aware polynomial-module
+  engine with canonical `I R^r` action relations;
+- a new reduced module-basis owner provides stable parent identity and
+  canonical element normal forms while retaining original transformations;
+- quotient-valued vectors, whole normalizations, elements, arithmetic,
+  schemas, and zero-module decisions are parent-aware and deterministic;
+- semilinear maps validate both source relation families and derive ordinary
+  linear maps, identities, composition, and equality without manual squares;
+- object and morphism base change retain canonical units and computed
+  naturality comparisons;
+- module localization is exactly base change along the existing scalar
+  localization and computes the required support examples without special
+  branches;
+- affine quasi-coherent presentations and supplied chart values retain exact
+  cover/simplex identity without claiming a general sheaf equivalence;
+- the varying-ring Čech diagram retains direct product-localization values,
+  relation-checked signed faces, and computed repeated-face comparisons;
+- native operations, graphs, the strict Category-only semilinear total
+  category, constructor tower, reinterpretation, and categorical compiler
+  all reuse exact schemas and whole values;
+- the optional Singular comparison shares the native zero-decision contract
+  and remains non-authoritative; and
+- both required artifacts execute deterministically through direct and graph
+  routes.
+
+No second module Gröbner engine, arbitrary-parent coercion, manual gluing
+square, formal module adapter, new Core/Lambdapi owner, ordinary-chain-complex
+overclaim, sheaf/cohomology claim, browser/package publication, or cubical/
+strictness history was introduced.
+
+Later consumer-backed goals may select restriction of scalars and an actual
+Čech complex, derived tensor/Tor/Ext through the existing resolutions, graded
+or DG modules, sheaf/descent effectiveness, or a formal module realization.
+Those are not missing pieces of this completed computational boundary.
 
 ## `PAM-ORACLE-9A` Result
 
