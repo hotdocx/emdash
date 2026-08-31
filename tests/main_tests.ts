@@ -280,6 +280,7 @@ import './v3_2_algebra_polynomial_module_tests';
 import './v3_2_algebra_reduced_polynomial_module_tests';
 import './v3_2_algebra_polynomial_presentation_tests';
 import './v3_2_algebra_presented_module_tests';
+import './v3_2_algebra_presented_module_map_tests';
 import './v3_2_algebra_polynomial_module_reference_operations_tests';
 import './v3_2_algebra_ideal_geometry_tests';
 import './v3_2_algebra_constructible_tests';
