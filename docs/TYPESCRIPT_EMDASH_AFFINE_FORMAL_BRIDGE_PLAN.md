@@ -7,8 +7,8 @@ Plan-ID: `TS-EMDASH-AFFINE-FORMAL-BRIDGE`
 Status: living architecture and implementation ledger; dedicated branch and
 worktree created; `BRIDGE-AUDIT-1A`, `BRIDGE-CONTRACT-1B`, and
 `BRIDGE-REIFY-2A`, `BRIDGE-COVER-3A`, and `BRIDGE-LOCALIZATION-4A` are
-complete; `BRIDGE-OVERLAP-4B` is complete and `BRIDGE-CECH-5A` is the next
-dependency-ready row.
+complete; `BRIDGE-OVERLAP-4B` and `BRIDGE-CECH-5A` are complete;
+`BRIDGE-EMISSION-6A` is the next dependency-ready row.
 
 Baseline: `5df79d356d003d3c1831ff1b93a2c593f299f75b`
 
@@ -248,8 +248,8 @@ Lambdapi text, and focused Lambdapi checking.
 | `BRIDGE-COVER-3A` | complete; proportional-green at `792f3c4` | `BRIDGE-REIFY-2A`, current formal unimodular owner | exact right-associated finite families and existing unimodular/Zariski-cover constructors, with deterministic portable Core and active-backend emission |
 | `BRIDGE-LOCALIZATION-4A` | complete; proportional-green at `8f2e502` | `BRIDGE-COVER-3A`, current formal localization owner | assumption-explicit unit, universal localization, basic-open chart, and ordered dependent cover-localization family construction |
 | `BRIDGE-OVERLAP-4B` | complete; proportional-green at `0505b2a` | `BRIDGE-LOCALIZATION-4A`, current product-localization owners | ordered product-localization simplices and face restriction maps derived as universal localization factors from supplied target-unit evidence |
-| `BRIDGE-CECH-5A` | pending; next selected row | `BRIDGE-OVERLAP-4B`, current diagram/Cech owner | ordered simplex and signed restriction realization into existing formal diagram/cochain structures |
-| `BRIDGE-EMISSION-6A` | pending | representative bridge consumer | deterministic explicit-Core declarations/workspaces and Lambdapi emission without handwritten semantic templates |
+| `BRIDGE-CECH-5A` | complete; proportional-green at `fa30438` | `BRIDGE-OVERLAP-4B`, current generic Sigma/Product/finite-family owners | one packed degreewise internal presentation retaining finite chart families and signed whole localization factors without unsupported cosimplicial claims |
+| `BRIDGE-EMISSION-6A` | pending; next selected row | representative bridge consumer | deterministic explicit-Core declarations/workspaces and Lambdapi emission without handwritten semantic templates |
 | `BRIDGE-CONFORMANCE-7A` | pending | all preceding active rows | two concrete cover examples, focused TypeScript tests, deterministic snapshots, bounded Lambdapi checks, warning comparison, and final boundary audit |
 
 Rows may be split into lettered subtranches. A row completes only after
@@ -285,6 +285,37 @@ synchronized decisions/results, and a local checkpoint.
 | `D-BRIDGE-023` | accepted | Every formal simplex reuses the generic localization contract and must own the exact retained computational product chart, source ring, and canonical reification of its product denominator. |
 | `D-BRIDGE-024` | accepted | A face supplies only formal evidence that the containing overlap target inverts the lower-dimensional denominator. The lower localization universal property selects the contractible factor; its whole map and agreement are projections, not handwritten inputs. |
 | `D-BRIDGE-025` | accepted | The overlap layer retains simplex indices, removed positions, face signs, computational restriction maps, formal localizations, factor spaces, selected factors, whole formal maps, and agreements, but introduces no formal Čech owner before a suitable diagram consumer is selected. |
+| `D-BRIDGE-026` | accepted | The active library has no exact finite Čech functor or cochain owner. Coherent-nerve and simplex owners are not used because the computational cover does not yet supply their functorial/coherence data. |
+| `D-BRIDGE-027` | accepted | The first formal Čech presentation uses only existing internal Sigma, Product, Bool, finite-family, affine-chart, and localization-factor owners. Varying factor and degree types are packed as `Σ A : Grpd, A`; no new formal or Core owner is added. |
+| `D-BRIDGE-028` | accepted | Each degree stores its ordered finite chart family and signed finite family of whole localization factors. `true` encodes positive and `false` negative. The bridge explicitly claims no cosimplicial identities, differential-square law, sheaf condition, exactness, or cohomology. |
+
+## `BRIDGE-CECH-5A` Result
+
+A packed degreewise internal presentation of the realized affine Čech data is
+implemented in `src/v3_2/algebra_formal_cech.ts`. At every retained degree it
+constructs an existing `FiniteFamily` of affine basic-open chart objects and
+an ordered signed `FiniteFamily` of complete localization factors. Because
+factor types vary with their source and target localizations, each factor is
+packed through the existing groupoid-universe Sigma `Σ A : Grpd, A`; degree
+presentations are packed in the same way and assembled into one formal finite
+family.
+
+This representation preserves the whole factor, hence both its structured
+ring map and agreement, rather than retaining a detached restriction map.
+Boolean `true` records sign `+1` and `false` records sign `-1`. The profile and
+API deliberately stop before claiming a cosimplicial functor, simplicial
+identities, a differential, sheaf cohomology, or exactness. Those require a
+later mathematical consumer and additional laws not present in the CAS
+record.
+
+Five focused tests cover degreewise chart/face counts, signs, whole-factor
+packing, deterministic heterogeneous Core/Lambdapi emission, and rejection of
+simplex or face order drift. Together with affected cover, localization,
+overlap, reifier, realization, and computational Čech suites, 42 tests pass,
+followed by workspace check, affected lint, root typecheck, and diff hygiene.
+`check:ts` was not run and no Lambdapi source changed.
+
+Semantic checkpoint: `fa30438` (`bridge: pack degreewise formal Cech data`).
 
 ## `BRIDGE-OVERLAP-4B` Result
 
