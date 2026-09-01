@@ -19,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CORE_CHECK_FILES = [
     Path("emdash3_2.lp"),
+    Path("emdash3_2_preadditive_categories.lp"),
     Path("emdash3_2_presheaves.lp"),
     Path("emdash3_2_fibrewise_sigma.lp"),
     Path("emdash3_2_nat_arithmetic.lp"),
@@ -45,6 +46,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_operations.lp"),
     Path("emdash3_2_commutative_algebra_freyd_usability.lp"),
     Path("emdash3_2_commutative_algebra_freyd_preadditive_class_laws.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_preadditive_laws.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_preadditive.lp"),
     Path("emdash3_2_commutative_algebra_polynomial.lp"),
     Path("emdash3_2_commutative_algebra_localization.lp"),
     Path("emdash3_2_commutative_algebra_laurent.lp"),
@@ -91,6 +94,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_gray_cube_decoder.lp"),
     Path("emdash3_2_gray_cube_dimension2.lp"),
     Path("emdash3_2_truncation_reflector.lp"),
+    Path("emdash3_2_truncation_set_path_induction.lp"),
     Path("emdash3_2_semisimplicial_face_codes.lp"),
     Path("emdash3_2_semisimplicial_index.lp"),
     Path("emdash3_2_simplex_shapes.lp"),

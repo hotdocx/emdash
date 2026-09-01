@@ -151,3 +151,128 @@ symbol groupoidify_set_map_ext
       k
       (@groupoidify_set_extend_path C S S_set h k p)
       (@groupoidify_extend_restrict_eta_at_path C S k));
+
+// Point observation of set-target map extensionality at an arbitrary point.
+symbol groupoidify_set_map_ext_at
+  [C : Cat]
+  [S : Grpd]
+  (S_set : τ (IsSetGrpd S))
+  [h k : τ (@Function_grpd (@Groupoidify C) S)]
+  (p : τ (@GroupoidifySetUnitPaths C S h k))
+  (u : τ (@Groupoidify C))
+  : τ (@= S (h u) (k u))
+≔ @PiHapply
+    (@Groupoidify C)
+    (λ _ : τ (@Groupoidify C), S)
+    h k
+    (@groupoidify_set_map_ext C S S_set h k p)
+    u;
+
+// Unit-point agreement for curried binary maps into a set.
+symbol GroupoidifySetBinaryUnitPaths
+  [C D : Cat]
+  [S : Grpd]
+  (h k : τ (@Function_grpd
+      (@Groupoidify C)
+      (@Function_grpd (@Groupoidify D) S)))
+  : Grpd
+≔ @Pi_grpd (Obj C)
+    (λ x : τ (Obj C),
+      @Pi_grpd (Obj D)
+        (λ y : τ (Obj D),
+          @= S
+            (h (@fapp0 C (Path_cat (@Groupoidify C))
+                (@groupoidify_unit_func C) x)
+              (@fapp0 D (Path_cat (@Groupoidify D))
+                (@groupoidify_unit_func D) y))
+            (k (@fapp0 C (Path_cat (@Groupoidify C))
+                (@groupoidify_unit_func C) x)
+              (@fapp0 D (Path_cat (@Groupoidify D))
+                (@groupoidify_unit_func D) y))));
+
+// Curried binary extensionality, derived by two unary whole extensions.
+symbol groupoidify_set_binary_map_ext_at
+  [C D : Cat]
+  [S : Grpd]
+  (S_set : τ (IsSetGrpd S))
+  [h k : τ (@Function_grpd
+      (@Groupoidify C)
+      (@Function_grpd (@Groupoidify D) S))]
+  (p : τ (@GroupoidifySetBinaryUnitPaths C D S h k))
+  (u : τ (@Groupoidify C))
+  (v : τ (@Groupoidify D))
+  : τ (@= S (h u v) (k u v))
+≔ @groupoidify_set_map_ext_at
+    C S S_set
+    (λ u : τ (@Groupoidify C), h u v)
+    (λ u : τ (@Groupoidify C), k u v)
+    (λ x : τ (Obj C),
+      @groupoidify_set_map_ext_at
+        D S S_set
+        (h (@fapp0 C (Path_cat (@Groupoidify C))
+          (@groupoidify_unit_func C) x))
+        (k (@fapp0 C (Path_cat (@Groupoidify C))
+          (@groupoidify_unit_func C) x))
+        (p x)
+        v)
+    u;
+
+// Unit-point agreement for curried ternary maps into a set.
+symbol GroupoidifySetTernaryUnitPaths
+  [C D E : Cat]
+  [S : Grpd]
+  (h k : τ (@Function_grpd
+      (@Groupoidify C)
+      (@Function_grpd
+        (@Groupoidify D)
+        (@Function_grpd (@Groupoidify E) S))))
+  : Grpd
+≔ @Pi_grpd (Obj C)
+    (λ x : τ (Obj C),
+      @Pi_grpd (Obj D)
+        (λ y : τ (Obj D),
+          @Pi_grpd (Obj E)
+            (λ z : τ (Obj E),
+              @= S
+                (h (@fapp0 C (Path_cat (@Groupoidify C))
+                    (@groupoidify_unit_func C) x)
+                  (@fapp0 D (Path_cat (@Groupoidify D))
+                    (@groupoidify_unit_func D) y)
+                  (@fapp0 E (Path_cat (@Groupoidify E))
+                    (@groupoidify_unit_func E) z))
+                (k (@fapp0 C (Path_cat (@Groupoidify C))
+                    (@groupoidify_unit_func C) x)
+                  (@fapp0 D (Path_cat (@Groupoidify D))
+                    (@groupoidify_unit_func D) y)
+                  (@fapp0 E (Path_cat (@Groupoidify E))
+                    (@groupoidify_unit_func E) z)))));
+
+// Curried ternary extensionality, derived from unary and binary extensions.
+symbol groupoidify_set_ternary_map_ext_at
+  [C D E : Cat]
+  [S : Grpd]
+  (S_set : τ (IsSetGrpd S))
+  [h k : τ (@Function_grpd
+      (@Groupoidify C)
+      (@Function_grpd
+        (@Groupoidify D)
+        (@Function_grpd (@Groupoidify E) S)))]
+  (p : τ (@GroupoidifySetTernaryUnitPaths C D E S h k))
+  (u : τ (@Groupoidify C))
+  (v : τ (@Groupoidify D))
+  (w : τ (@Groupoidify E))
+  : τ (@= S (h u v w) (k u v w))
+≔ @groupoidify_set_map_ext_at
+    C S S_set
+    (λ u : τ (@Groupoidify C), h u v w)
+    (λ u : τ (@Groupoidify C), k u v w)
+    (λ x : τ (Obj C),
+      @groupoidify_set_binary_map_ext_at
+        D E S S_set
+        (h (@fapp0 C (Path_cat (@Groupoidify C))
+          (@groupoidify_unit_func C) x))
+        (k (@fapp0 C (Path_cat (@Groupoidify C))
+          (@groupoidify_unit_func C) x))
+        (p x)
+        v w)
+    u;

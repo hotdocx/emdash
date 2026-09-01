@@ -277,6 +277,28 @@ The target motives are equality types in sets and hence propositions. Their
 truncation evidence should be constructed using existing sethood/path
 lowering and `is_prop_pi`/`is_trunc_pi`, not declared opaquely.
 
+### Implemented descent and law result
+
+`emdash3_2_truncation_set_path_induction.lp` now packages exactly the unary,
+curried-binary, and curried-ternary set-valued path induction used here. Each
+operation is transparently derived from `trunc_ind_ambient`; no new eliminator
+or runtime rule was added. Matching unary/binary/ternary groupoidification
+helpers remain derived from repeated applications of the whole
+`groupoidify_set_map_ext` theorem.
+
+`emdash3_2_commutative_algebra_freyd_preadditive_laws.lp` uses those helpers in
+two explicit stages and establishes on arbitrary quotient-Hom points:
+
+- both additive zero orientations;
+- associativity and commutativity;
+- right inverse and the left inverse derived from commutativity;
+- right distributivity; and
+- left distributivity.
+
+The sources for the ternary distributivity helpers may be different agreement
+categories; the focused mixed-source probe checked this rather than relying
+only on the equal-source associativity case.
+
 ## Generic Preadditive Category Package
 
 After the arbitrary-point laws check, introduce the first honest generic
@@ -301,6 +323,27 @@ comm_ring_freyd_preadditive
 
 The resulting claim is preadditive, not additive. Zero objects and finite
 biproducts are separate structure and remain the immediate successor goal.
+
+### Implemented package result
+
+`emdash3_2_preadditive_categories.lp` introduces reusable set-valued
+`AbelianGroupStructure` and `PreadditiveCategory` packages with readable Hom
+operation and bilinearity projections. The law basis is associativity,
+commutativity, right zero, and right inverse, together with both composition
+distributivity orientations. It is evidence over the existing category and
+generic composition grammar.
+
+`emdash3_2_commutative_algebra_freyd_preadditive.lp` constructs the Freyd
+instance. A direct attempt to use semantic `comm_ring_freyd_comp` paths as
+generic `comp_fapp0` laws correctly failed at the existing usability boundary.
+The promoted construction instead composes the already checked
+`comm_ring_freyd_comp_usability_path` at the outer composite and at both RHS
+summands. No generic composition rewrite or new unifier was added.
+
+The prior class-law target reports 1,300 warning instances and the completed
+preadditive target also reports 1,300. The new descent, law, and packaging
+modules contain no runtime or unification rules and add no diagnostics. Their
+strict LHS audits are vacuously clean.
 
 ## TypeScript And Cross-Layer Boundary
 
@@ -377,13 +420,13 @@ Freyd/Abelian structure packages its consequences rather than replacing it.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `GSE-PLAN-0` | complete; initial plan checkpoint recorded in branch history | completed Freyd checkpoint `0e8b390` | living plan, isolated branch/worktree, clean baseline, focused checks, Git limits, persistent goal |
-| `GSE-AUDIT-1A` | complete; first semantic checkpoint pending | plan | exact restriction component and pointwise-whole owner audit with an explicit accept/reject observation |
-| `GSE-SET-TRANSF-2A` | complete; first semantic checkpoint pending | owner audit | whole set-valued pointwise transformation, component beta, retained action, noncollapse, warnings and LHS audit |
-| `GSE-MAP-EXT-3A` | complete; first semantic checkpoint pending | set transformation | generic set-target map extensionality constructed from extension/restriction and eta |
-| `GSE-TRUNC-LIFT-4A` | ready | generic extensionality | only the curried/truncation helpers required to pass from generators to arbitrary quotient points |
-| `GSE-FREYD-LAWS-5A` | blocked by lift | class laws | arbitrary-point additive-group and both bilinearity laws for every Freyd Hom |
-| `GSE-PREADDITIVE-6A` | blocked by full laws | Freyd laws | generic formal preadditive package and checked Freyd instance; no additive claim |
-| `GSE-CONFORMANCE-7A` | blocked by active formal rows | formal package | focused reviewers and only necessary TS/Core/Lambdapi conformance |
+| `GSE-AUDIT-1A` | complete; checkpoint `de9fcb9` | plan | exact restriction component and pointwise-whole owner audit with an explicit accept/reject observation |
+| `GSE-SET-TRANSF-2A` | complete; checkpoint `de9fcb9` | owner audit | whole set-valued pointwise transformation, component beta, retained action, noncollapse, warnings and LHS audit |
+| `GSE-MAP-EXT-3A` | complete; checkpoint `de9fcb9` | set transformation | generic set-target map extensionality constructed from extension/restriction and eta |
+| `GSE-TRUNC-LIFT-4A` | complete; formal-preadditive checkpoint pending | generic extensionality | unary/binary/ternary derived helpers actually required to pass from generators to arbitrary quotient points |
+| `GSE-FREYD-LAWS-5A` | complete; formal-preadditive checkpoint pending | class laws | arbitrary-point additive-group and both bilinearity laws for every Freyd Hom |
+| `GSE-PREADDITIVE-6A` | complete; formal-preadditive checkpoint pending | Freyd laws | generic formal preadditive package and checked Freyd instance; no additive claim |
+| `GSE-CONFORMANCE-7A` | ready | formal package | focused reviewers and only necessary TS/Core/Lambdapi conformance |
 | `GSE-CLOSE-8A` | blocked by accepted/deferred rows | all rows | standing docs, catalog, health, proportional CI, final ledger and checkpoints |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
@@ -405,6 +448,11 @@ synchronized ledger. Difficulty alone is not evidence for an opaque axiom.
 | `D-GSE-010` | accepted | No repository-wide TypeScript or repository aggregate is required during the focused implementation loop. |
 | `D-GSE-011` | accepted after projection probe | Restriction points are derived by applying `eq_ap` to the existing whole restriction path; no generic precomposition runtime rule is added. |
 | `D-GSE-012` | accepted after warning comparison | The component beta adds no diagnostics: the focused baseline and candidate each report 1,274 warning instances, and strict LHS audits are clean. |
+| `D-GSE-013` | accepted after arity probes | Only unary, binary, and ternary derived groupoidification/truncation helpers are promoted; no speculative n-ary or general dependent eliminator is introduced. |
+| `D-GSE-014` | accepted after mixed-source probe | Ternary descent supports distinct source agreement categories and therefore covers both bilinearity orientations, not only Homwise associativity. |
+| `D-GSE-015` | accepted after packaging probe | `PreadditiveCategory(C)` retains set-valued abelian-group structures on existing Homs and both laws for existing generic composition. |
+| `D-GSE-016` | accepted after failed direct generic-composition probe | Semantic Freyd bilinearity does not definitionally inhabit generic `comp_fapp0` bilinearity; explicit existing usability paths reframe all three composite occurrences. |
+| `D-GSE-017` | accepted after warning comparison | The class-law and completed preadditive targets both report 1,300 diagnostics; rule-free descent and packaging add no warning family. |
 
 ## Validation Matrix
 
