@@ -362,6 +362,39 @@ the new subtraction compatibility. The module is rule-free, passes its
 focused reviewer and strict LHS audit, and leaves the warning inventory at
 1,274.
 
+### Implemented quotient-descent result
+
+`emdash3_2_commutative_algebra_freyd_direct_sums.lp` now descends raw pairing
+through the existing agreement groupoidification and set truncation. It
+provides quotient projection classes, arbitrary quotient-Hom pairing, the
+derived arrow operation
+
+```text
+f ⊕ g := <f o pi_1,g o pi_2>,
+```
+
+and one whole direct-sum functor on the formal Freyd category. Its object
+action computes to presentation direct sum, its first-arrow action computes to
+the quotient operation above, and its first Hom action remains available as a
+whole functor.
+
+The two nested groupoidification extensions retain the functorial action used
+to prove representative independence. The inner action meets its constructed
+paired agreement through a rigid point head and a narrow proof-time unifier.
+A direct runtime rule from the outer generic `fapp1_fapp0` observation to its
+large transparent function-path body repeatedly exceeded the 90-second bound.
+The selected outer design therefore also uses a rigid action head and
+proof-time comparison, followed by a runtime fold from that rigid head to the
+fully constructed semantic path. This is an owner-placement correction, not
+an opaque witness or a loss of action. The public whole direct-sum functor's
+ordinary arrow action remains a direct runtime rule and checks comfortably
+inside the bound.
+
+The focused source/reviewer checks pass; the strict LHS audit reports zero
+unreviewed slots; and predecessor and candidate warning-enabled checks both
+report `1,300 = 1,143 + 157` diagnostics, with no warning owned by the new
+module.
+
 The selected whole functor is approximately:
 
 ```text
@@ -539,13 +572,13 @@ consequences rather than replacing it.
 | --- | --- | --- | --- |
 | `FAB-PLAN-0` | complete; initial plan checkpoint recorded in branch history | completed preadditive checkpoint `c3bb869` | living plan, isolated branch/worktree, clean focused baseline, Git and scope limits, persistent goal |
 | `FAB-AUDIT-1A` | complete; first semantic checkpoint pending | plan | generic additive theorem and concrete primitive-instance owner audit with explicit rejection signals |
-| `FAB-FAMILY-2A` | complete; first semantic checkpoint pending | finite-family owner | append/take/drop, constructor betas, reconstruction/extensionality and boundary reviewers |
-| `FAB-BLOCK-3A` | complete; block checkpoint pending | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
-| `FAB-FREE-4A` | complete; finite-free checkpoint pending | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
-| `FAB-PRESENTATION-5A` | complete; raw-presentation checkpoint pending | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, and computed relation squares |
-| `FAB-AGREEMENT-5B` | complete; agreement checkpoint pending | raw presentation sums | direct-sum and pairing compatibility on fixed-endpoint agreement categories; fixed projections require no varying input action |
-| `FAB-DESCENT-6A` | ready | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
-| `FAB-CARTESIAN-7A` | blocked by descent | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
+| `FAB-FAMILY-2A` | complete; checkpoint `76eef67` | finite-family owner | append/take/drop, constructor betas, reconstruction/extensionality and boundary reviewers |
+| `FAB-BLOCK-3A` | complete; checkpoint `8fdf7ca` | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
+| `FAB-FREE-4A` | complete; checkpoint `38e54d1` | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
+| `FAB-PRESENTATION-5A` | complete; checkpoint `794f163` | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, and computed relation squares |
+| `FAB-AGREEMENT-5B` | complete; checkpoint `5d7ce09` | raw presentation sums | direct-sum and pairing compatibility on fixed-endpoint agreement categories; fixed projections require no varying input action |
+| `FAB-DESCENT-6A` | complete; checkpoint pending | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
+| `FAB-CARTESIAN-7A` | ready | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
 | `FAB-ADDITIVE-8A` | blocked by Cartesian structure | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
 | `FAB-TYPESCRIPT-9A` | blocked by formal/direct operations | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
 | `FAB-CLOSE-10A` | blocked by accepted/deferred rows | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
@@ -579,6 +612,7 @@ evidence for an opaque axiom.
 | `D-FAB-019` | accepted after whole-functor probe | Finite-free direct-sum object/arrow computation can reduce directly to `nat_add`/block diagonal without a rigid intermediary or new warning family. |
 | `D-FAB-020` | accepted after presentation probes | Zero/sum objects and raw sum/projection/pairing morphisms are flattened matrix data whose retained relation squares are all constructed from block laws. |
 | `D-FAB-021` | accepted after agreement probes | Direct-sum and pairing agreement witnesses are block-diagonal/vertical combinations; subtraction compatibility closes their laws without quotient axioms. |
+| `D-FAB-022` | accepted after quotient-descent probes | Nested agreement-groupoidification and set-truncation descent construct quotient pairing without representative choice. The outer generic action uses a rigid proof-time bridge because its direct transparent runtime fold exceeded the bounded check; the rigid head then reduces to the constructed semantic path, while the public direct-sum functor keeps direct object/arrow computation and retained Hom action. |
 
 ## Validation Matrix
 
