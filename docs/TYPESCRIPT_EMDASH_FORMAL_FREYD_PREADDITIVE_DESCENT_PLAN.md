@@ -322,8 +322,8 @@ to emit proof certificates for all internal algorithms.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `FPD-PLAN-0` | complete; checkpoint `bcf807c` | completed Freyd checkpoint `c7d1eb7` | living plan, isolated branch/worktree, corrected owner model, baseline and Git limits |
-| `FPD-OWNER-1A` | complete; checkpoint pending | plan | durable correction of the transparent-composition timeout diagnosis and focused warning classification |
-| `FPD-MATRIX-2A` | active | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
+| `FPD-OWNER-1A` | complete; checkpoint `8a053ae` | plan | durable correction of the transparent-composition timeout diagnosis and focused warning classification |
+| `FPD-MATRIX-2A` | active; rigid/transparent composition path complete, algebra laws remain | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
 | `FPD-RAW-3A` | blocked on matrix laws | matrix theorem layer | formal raw presentation identity/composition/zero/addition with checked stored laws |
 | `FPD-AGREE-4A` | blocked on raw operations | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
 | `FPD-DESCENT-5A` | blocked on agreement algebra | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
@@ -352,6 +352,20 @@ opaque axiom should replace it.
 | `D-FPD-010` | accepted | Weak kernels and the weak-kernel-to-Abelian theorem are the next goal after this descent, not part of it. |
 | `D-FPD-011` | accepted | Existing TypeScript matrix/Freyd algorithms are reused as computations and conformance oracles. |
 | `D-FPD-012` | accepted | Orthogonal path-cubical/global-strictness work is excluded. |
+| `D-FPD-013` | accepted after owner proof | The rigid/transparent composition comparison is constructed by Nat recursion: zero columns are reflexive; successor heads agree definitionally and tails use the induction hypothesis through constant-family pathover. |
+| `D-FPD-014` | accepted after owner proof | Generic finite-free composition reaches transparent evaluation propositionally by transitivity of the existing generic-to-rigid `eq_refl` usability path and the constructed rigid-to-transparent path. |
+
+## Current Matrix-Layer Result
+
+`comm_ring_finite_free_comp_transparent_path` now constructs the previously
+missing whole comparison without a rewrite, unifier, or opaque constant. Its
+successor case reflects the actual nested-Sigma representation of a finite
+column family. `comm_ring_finite_free_comp_fapp0_transparent_path` composes it
+with the existing proof-time generic/rigid theorem. The owner passes quiet and
+warning-enabled bounded checks, the focused reviewer consumes both paths, and
+strict LHS audit remains empty. Identity, associativity, zero, and bilinearity
+remain the active part of `FPD-MATRIX-2A`; catalog/health synchronization is
+reserved for the stabilized formal tranche.
 
 ## Validation Policy
 

@@ -41,6 +41,35 @@ assert
   ≡ @comm_ring_matrix_apply R target middle g
       (@finite_family_head (@CommRingVector R middle) source f);
 
+// The rigid categorical representation agrees with the transparent evaluator
+// by a constructed recursive path, not by a runtime fold or opaque bridge.
+symbol finite_free_rigid_transparent_reviewer_path
+  (R : τ CommRing)
+  (source middle target : τ Nat_grpd)
+  (g : τ (@CommRingMatrix R target middle))
+  (f : τ (@CommRingMatrix R middle source))
+  : τ (@= (@CommRingMatrix R target source)
+      (@comm_ring_finite_free_comp_matrix
+        R source middle target g f)
+      (@comm_ring_matrix_comp R target middle source g f))
+≔ @comm_ring_finite_free_comp_transparent_path
+    R source middle target g f;
+
+// The generic category operation reaches the same evaluator propositionally
+// through its proof-time rigid-head usability comparison.
+symbol finite_free_generic_transparent_reviewer_path
+  (R : τ CommRing)
+  (source middle target : τ Nat_grpd)
+  (g : τ (@CommRingMatrix R target middle))
+  (f : τ (@CommRingMatrix R middle source))
+  : τ (@= (@CommRingMatrix R target source)
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        source middle target g f)
+      (@comm_ring_matrix_comp R target middle source g f))
+≔ @comm_ring_finite_free_comp_fapp0_transparent_path
+    R source middle target g f;
+
 assertnot
   (R : τ CommRing)
   (n : τ Nat_grpd)

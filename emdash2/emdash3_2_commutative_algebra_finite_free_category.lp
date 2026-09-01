@@ -117,3 +117,135 @@ symbol comm_ring_finite_free_comp_matrix_path
     (@comp_fapp0
       (@CommRingFiniteFree_cat R)
       source middle target g f);
+
+/*
+  Constructed comparison with the transparent direct matrix evaluator.
+
+  At zero columns both implementations are empty. At a successor they expose
+  the same first matrix-action column; the induction hypothesis compares the
+  tails through the constant tail family of the encoded Sigma. This is an
+  ordinary path, not a unifier or an opaque equality bridge.
+*/
+symbol comm_ring_finite_free_comp_transparent_path
+  (R : τ CommRing)
+  (source middle target : τ Nat_grpd)
+  (g : τ (@CommRingMatrix R target middle))
+  (f : τ (@CommRingMatrix R middle source))
+  : τ (@= (@CommRingMatrix R target source)
+      (@comm_ring_finite_free_comp_matrix
+        R source middle target g f)
+      (@comm_ring_matrix_comp R target middle source g f))
+≔ (@nat_elim
+    (λ source0 : τ Nat_grpd,
+      @Pi_grpd
+        (@CommRingMatrix R middle source0)
+        (λ f0 : τ (@CommRingMatrix R middle source0),
+          @= (@CommRingMatrix R target source0)
+            (@comm_ring_finite_free_comp_matrix
+              R source0 middle target g f0)
+            (@comm_ring_matrix_comp
+              R target middle source0 g f0)))
+    (λ _ : τ (@CommRingMatrix R middle zero),
+      @eq_refl
+        (@CommRingMatrix R target zero)
+        (@finite_family_nil (@CommRingVector R target)))
+    (λ source0 : τ Nat_grpd,
+      λ ih : τ (@Pi_grpd
+        (@CommRingMatrix R middle source0)
+        (λ f0 : τ (@CommRingMatrix R middle source0),
+          @= (@CommRingMatrix R target source0)
+            (@comm_ring_finite_free_comp_matrix
+              R source0 middle target g f0)
+            (@comm_ring_matrix_comp
+              R target middle source0 g f0))),
+      λ f0 : τ (@CommRingMatrix R middle (succ source0)),
+        @Struct_sigma
+          (@= (@CommRingVector R target)
+            (@comm_ring_matrix_apply R target middle g
+              (@finite_family_head
+                (@CommRingVector R middle) source0 f0))
+            (@comm_ring_matrix_apply R target middle g
+              (@finite_family_head
+                (@CommRingVector R middle) source0 f0)))
+          (λ p : τ (@= (@CommRingVector R target)
+              (@comm_ring_matrix_apply R target middle g
+                (@finite_family_head
+                  (@CommRingVector R middle) source0 f0))
+              (@comm_ring_matrix_apply R target middle g
+                (@finite_family_head
+                  (@CommRingVector R middle) source0 f0))),
+            @PathOver
+              (@CommRingVector R target)
+              (λ _ : τ (@CommRingVector R target),
+                @CommRingMatrix R target source0)
+              (@comm_ring_matrix_apply R target middle g
+                (@finite_family_head
+                  (@CommRingVector R middle) source0 f0))
+              (@comm_ring_matrix_apply R target middle g
+                (@finite_family_head
+                  (@CommRingVector R middle) source0 f0))
+              p
+              (@comm_ring_finite_free_comp_matrix
+                R source0 middle target g
+                (@finite_family_tail
+                  (@CommRingVector R middle) source0 f0))
+              (@comm_ring_matrix_comp
+                R target middle source0 g
+                (@finite_family_tail
+                  (@CommRingVector R middle) source0 f0)))
+          (@eq_refl
+            (@CommRingVector R target)
+            (@comm_ring_matrix_apply R target middle g
+              (@finite_family_head
+                (@CommRingVector R middle) source0 f0)))
+          (@const_pathover
+            (@CommRingVector R target)
+            (@CommRingMatrix R target source0)
+            (@comm_ring_matrix_apply R target middle g
+              (@finite_family_head
+                (@CommRingVector R middle) source0 f0))
+            (@comm_ring_matrix_apply R target middle g
+              (@finite_family_head
+                (@CommRingVector R middle) source0 f0))
+            (@comm_ring_finite_free_comp_matrix
+              R source0 middle target g
+              (@finite_family_tail
+                (@CommRingVector R middle) source0 f0))
+            (@comm_ring_matrix_comp
+              R target middle source0 g
+              (@finite_family_tail
+                (@CommRingVector R middle) source0 f0))
+            (@eq_refl
+              (@CommRingVector R target)
+              (@comm_ring_matrix_apply R target middle g
+                (@finite_family_head
+                  (@CommRingVector R middle) source0 f0)))
+            (ih
+              (@finite_family_tail
+                (@CommRingVector R middle) source0 f0))))
+    source) f;
+
+// Generic finite-free composition agrees propositionally with direct matrix
+// evaluation by composing the proof-time usability view with the path above.
+symbol comm_ring_finite_free_comp_fapp0_transparent_path
+  (R : τ CommRing)
+  (source middle target : τ Nat_grpd)
+  (g : τ (@CommRingMatrix R target middle))
+  (f : τ (@CommRingMatrix R middle source))
+  : τ (@= (@CommRingMatrix R target source)
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        source middle target g f)
+      (@comm_ring_matrix_comp R target middle source g f))
+≔ @eq_trans
+    (@CommRingMatrix R target source)
+    (@comp_fapp0
+      (@CommRingFiniteFree_cat R)
+      source middle target g f)
+    (@comm_ring_finite_free_comp_matrix
+      R source middle target g f)
+    (@comm_ring_matrix_comp R target middle source g f)
+    (@comm_ring_finite_free_comp_matrix_path
+      R source middle target g f)
+    (@comm_ring_finite_free_comp_transparent_path
+      R source middle target g f);
