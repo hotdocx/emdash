@@ -4,7 +4,7 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FREYD-PREABELIAN-COMPUTATION`
 
-Status: active on a dedicated branch/worktree
+Status: complete on a dedicated branch/worktree; closeout checkpoint pending
 
 Baseline: `c781a42972a3e91f60a79bfd95989ca4dca4aaac`
 
@@ -582,8 +582,8 @@ Refine or reject a candidate when it:
 | `FPA-KERNEL-FORMAL-6B` | complete at witness-enriched boundary; checkpoint `18d96719`; closed quotient package subject to effective path/witness decoding | formal witnessed weak pullbacks + explicit zero agreement | formal kernel presentation/embedding/two-stage lift, annihilation, reconstruction and monic uniqueness |
 | `FPA-CATEGORY-7` | complete; checkpoint `e9bc341a` | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
 | `FPA-FORMAL-8` | complete at witnessed boundary; checkpoint `ddbcf9e8`; closed quotient package gated by effectiveness | explicit weak-kernel capability + witnessed constructions | capability-parameterized witnessed formal Freyd pre-Abelian surface and selected proof-CAS consumers without fabricated quotient decoder |
-| `FPA-DIFFERENTIAL-9` | optional after native construction | stable external adapter | non-authoritative field-module and/or Singular comparison without replacing native data |
-| `FPA-CLOSE-10` | blocked on all required rows | all required rows | standing docs, warning/LHS/catalog/health evidence, focused/static/integration gates, exact checkpoints and successor boundary |
+| `FPA-DIFFERENTIAL-9` | complete by audited carried evidence; no new cross-representation adapter | native constructions + existing field-module/Singular evidence | field-module whole kernel/cokernel and installed Singular weak-kernel differential pass `18/18` without replacing native data |
+| `FPA-CLOSE-10` | complete; checkpoint pending | all required rows | standing docs, warning/LHS/catalog/health evidence, focused/static/integration gates, exact checkpoints and successor boundary |
 
 Rows may be split or reordered when dependencies permit. A row may be rejected
 or deferred only with durable evidence and a concrete replacement or
@@ -623,6 +623,7 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-028` | accepted after formal capability probe | `CommRingFreydWitnessedPreAbelian(R,W)` packages the exact existing Freyd additive structure and canonical kernel/cokernel law families for all raw presentation morphisms. Tests retain explicit zero/reconstruction agreements, so the package is constructive but intentionally distinct from closed quotient-level `PreAbelianCategory`. |
 | `D-FPA-029` | accepted after selected-equation consumer | The proof-CAS bridge reuses the existing formal presentation-morphism and presentation-agreement realizations. It replays the actual kernel, kernel-lift, cokernel, and cokernel-colift operations and adopts eight exact structural, annihilation, and reconstruction equations; no parallel matrix-claim grammar or finite-observation-to-ring-capability promotion is added. |
 | `D-FPA-030` | accepted after zero-relation regression | The finite-module Core signature for matrix composition previously returned a `rows x middle` classifier instead of `rows x columns`. Selected Freyd agreements with zero relation rank exposed the latent de Bruijn-index error. The shared signature owner now uses the actual columns binder and carries revision `v2`; the focused lower bridge matrix and emitted Lambdapi consumer pass. |
+| `D-FPA-031` | accepted after differential audit | Reuse the two existing independent comparisons instead of adding a speculative whole Freyd adapter: the field-module model computes whole kernels/cokernels over a field, and Singular compares polynomial weak-kernel submodules. A direct whole-output comparison would require a new noncanonical specialization between different carriers. Both carried suites, including the installed Singular process, pass `18/18`. |
 
 ## Implemented Generic Universal Layer
 
@@ -873,6 +874,21 @@ passes all `4/4` bridge tests and checks all eight equations in one bounded
 Lambdapi process. The earlier completed `check:ts` result is carried forward
 and is not rerun.
 
+## Differential Boundary
+
+No new whole Freyd differential adapter is added. The existing field-module
+model independently computes and compiles whole kernels and cokernels over a
+field, and the existing Singular adapter independently compares the native
+polynomial weak-kernel submodule by bidirectional reduction. Their focused
+suites, including the installed `Singular` executable, pass `18/18`.
+
+Those are the useful independent checks at this boundary. Comparing a whole
+field-module result directly with a polynomial Freyd result would first need a
+new specialization between distinct presentation carriers and quotient
+representations. There is no canonical such translation in the current goal,
+so inventing one merely for a differential test would add architecture rather
+than test the selected architecture.
+
 ## Validation Matrix
 
 Use proportional, bounded checks. Do not run print, book, release, or unrelated
@@ -917,6 +933,27 @@ repository aggregates.
 - real external-process tests remain explicitly environment-gated;
 - disagreement remains observable and non-authoritative;
 - no external CAS is required for ordinary native execution.
+
+## Completion Summary
+
+Every required ledger row is complete at the selected constructive boundary.
+The branch now contains generic internal genuine kernels/cokernels, a formal
+finite-free additive base, derived weak pullbacks, native and witnessed formal
+Freyd kernels/cokernels, a genuinely qualified operational pre-Abelian
+provider, the capability-parameterized witnessed formal package, and selected
+proof–CAS consumers that replay all four universal operations.
+
+The closed formal `PreAbelianCategory` instance is not missing implementation
+work concealed by this completion claim: it is explicitly deferred behind an
+effective decoder from arbitrary set-truncated Freyd-Hom paths to raw
+agreement witnesses. The next goal may either supply such effectiveness for a
+selected quotient or continue with Posur's normal-mono/normal-epi
+constructions. The recommended mathematical successor remains Constructions
+3.13 and 3.14, followed by images, coimages, their comparison, and the
+constructive Freyd-to-Abelian theorem.
+
+No push, merge, publication, release, PR, history rewrite, branch deletion,
+or worktree removal is part of this closeout.
 
 ## Sources And Design References
 

@@ -3,7 +3,7 @@
 Date: 2026-09-01
 
 `../../docs/TYPESCRIPT_EMDASH_FREYD_PREABELIAN_COMPUTATION_PLAN.md` is the
-active constructive continuation from computational weak kernels. It derives
+completed constructive continuation from computational weak kernels. It derives
 weak pullbacks in the additive finite-free base, constructs unconditional
 Freyd cokernels and weak-kernel-dependent Freyd kernels with complete
 object/structural-arrow/factor operations, and targets a genuinely qualified
